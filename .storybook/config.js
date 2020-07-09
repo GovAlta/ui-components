@@ -1,0 +1,1 @@
+// Potential common config for all storybooks or config for root workspace storybook.
