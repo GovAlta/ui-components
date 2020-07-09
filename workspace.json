@@ -1,6 +1,44 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "core-css": {
+      "root": "libs/core-css",
+      "sourceRoot": "libs/core-css/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/core-css/tsconfig.lib.json",
+              "libs/core-css/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/core-css/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/core-css/jest.config.js",
+            "tsConfig": "libs/core-css/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/core-css",
+            "tsConfig": "libs/core-css/tsconfig.lib.json",
+            "packageJson": "libs/core-css/package.json",
+            "main": "libs/core-css/src/index.ts",
+            "assets": ["libs/core-css/*.md"]
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "defaultCollection": "@nrwl/workspace"
   },

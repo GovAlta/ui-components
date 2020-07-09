@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@goa-dio/core-css": ["libs/core-css/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
