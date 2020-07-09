@@ -24,6 +24,9 @@
   "projects": {
     "core-css": {
       "tags": []
+    },
+    "angular-components": {
+      "tags": []
     }
   }
 }

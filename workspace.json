@@ -37,6 +37,50 @@
           }
         }
       }
+    },
+    "angular-components": {
+      "projectType": "library",
+      "root": "libs/angular-components",
+      "sourceRoot": "libs/angular-components/src",
+      "prefix": "goa-dio",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/angular-components/tsconfig.lib.json",
+            "project": "libs/angular-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/angular-components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/angular-components/tsconfig.lib.json",
+              "libs/angular-components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/angular-components/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular-components/jest.config.js",
+            "tsConfig": "libs/angular-components/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/angular-components/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@goa-dio/core-css": ["libs/core-css/src/index.ts"]
+      "@goa-dio/core-css": ["libs/core-css/src/index.ts"],
+      "@goa-dio/angular-components": ["libs/angular-components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
