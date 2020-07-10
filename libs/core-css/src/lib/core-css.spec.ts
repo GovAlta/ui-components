@@ -1,7 +1,13 @@
-import { coreCss } from './core-css';
+import { coreCss, componentCss } from './core-css';
 
 describe('coreCss', () => {
-  it('should work', () => {
-    expect(coreCss()).toEqual('core-css');
+  it('coreCss exports', () => {
+    expect(coreCss)
+  });
+});
+
+describe('componentCss', () => {
+  it('componentCss exports', () => {
+    expect(componentCss)
   });
 });

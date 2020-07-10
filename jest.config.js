@@ -5,5 +5,8 @@ module.exports = {
   },
   resolver: '@nrwl/jest/plugins/resolver',
   moduleFileExtensions: ['ts', 'js', 'html'],
+  moduleNameMapper: {
+    "\\.(scss|sass|css)$": "identity-obj-proxy"
+  },
   coverageReporters: ['html'],
 };
