@@ -1,7 +1,18 @@
 // Common main for all storybooks in workspace
 module.exports = {
-    refs: ['http://localhost:4400'],
-    addons: [
-      '@storybook/addon-knobs',
+    stories: [
+      '../libs/core-css/src/lib/**/*.stories.mdx',
+      '../libs/angular-components/src/lib/**/*.stories.mdx'
     ],
+    addons: [
+      {
+        name: '@storybook/addon-docs',
+        options: {
+        }
+      },
+      '@storybook/addon-backgrounds',
+      '@storybook/addon-a11y/register',
+      '@storybook/addon-viewport',
+      'storybook-addon-xd-designs'
+    ]
 };
