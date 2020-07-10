@@ -31,6 +31,15 @@
   "dependencies": {
     "@angular/common": "^10.0.3",
     "@angular/core": "^10.0.3",
+    "@storybook/addon-a11y": "^5.3.19",
+    "@storybook/addon-backgrounds": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-knobs": "5.3.9",
+    "@storybook/addon-viewport": "^5.3.19",
+    "@storybook/angular": "5.3.9",
+    "@storybook/html": "^5.3.19",
+    "@storybook/react": "5.3.9",
+    "storybook-addon-xd-designs": "^5.5.0",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
@@ -49,10 +58,6 @@
     "@nrwl/node": "^9.5.1",
     "@nrwl/storybook": "^9.5.1",
     "@nrwl/workspace": "9.5.1",
-    "@storybook/addon-knobs": "5.3.9",
-    "@storybook/angular": "5.3.9",
-    "@storybook/html": "^5.3.19",
-    "@storybook/react": "5.3.9",
     "@types/jest": "25.1.4",
     "@types/node": "~8.9.4",
     "@typescript-eslint/eslint-plugin": "2.19.2",
