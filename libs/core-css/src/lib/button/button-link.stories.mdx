@@ -18,9 +18,9 @@ A hierarchy of actions provided by buttons.
     }
   }>
     <div>
-        <button class="goa-button" name="buttonSubmit" type="submit" value="3921">Next step</button>
-        <button class="goa-button goa--secondary" name="buttonCancel" type="reset" value="3920">Secondary</button>
-        <button class="goa-button goa--tertiary" name="buttonReset" type="reset" value="3920">Tertiary</button>
+        <button class="goa-button" data-cy="button-primary" type="submit" value="3921">Next step</button>
+        <button class="goa-button goa--secondary" data-cy="button-secondary" type="reset" value="3920">Secondary</button>
+        <button class="goa-button goa--tertiary" data-cy="button-tertiary" type="reset" value="3920">Tertiary</button>
     </div>
   </Story>
 </Preview>
@@ -28,7 +28,7 @@ A hierarchy of actions provided by buttons.
 <Preview>
   <Story name="Links as Buttons" height={100}>
     <div>
-        <a href="#" class="goa-link-button">Call To Action</a>
+        <a href="#" data-cy="button-link" class="goa-link-button">Call To Action</a>
     </div>
   </Story>
 </Preview>

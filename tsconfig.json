@@ -20,5 +20,5 @@
       "@goa-dio/angular-components": ["libs/angular-components/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],  
 }
