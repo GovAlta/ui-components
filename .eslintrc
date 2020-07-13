@@ -15,6 +15,11 @@
     "prettier",
     "prettier/@typescript-eslint"
   ],
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true
+  },
   "rules": {
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
