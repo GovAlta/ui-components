@@ -24,6 +24,12 @@ build/Release
 # Dependency directories
 node_modules/
 
+# Dist folder
+dist
+
+# Storybook build output
+storybook_static
+
 # TypeScript cache
 *.tsbuildinfo
 
