@@ -24,6 +24,9 @@ build/Release
 # Dependency directories
 node_modules/
 
+# Dist folder
+dist
+
 # TypeScript cache
 *.tsbuildinfo
 
