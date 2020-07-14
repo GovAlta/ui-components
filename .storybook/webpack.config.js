@@ -28,6 +28,11 @@ module.exports = async ({ config, mode }) => {
     include: path.resolve(__dirname, '../'),
   });
 
+  //add aliases
+  config.resolve.alias = {
+      '@goa-dio/storybook-common': path.resolve(__dirname, 'libs/storybook-common/src/index.tss'),
+  }
+
   // Return the altered config
   return config;
 };

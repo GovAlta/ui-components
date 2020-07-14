@@ -1,4 +1,5 @@
 import '../core-css';
+import { DoDont } from '../../../../storybook-common/src/index.ts';
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 
 
@@ -43,16 +44,26 @@ links.
 When buttons appear side-by-side, a decision must be made about which is the primary and secondary 
 action.
 
-
+<DoDont
+  dos={'Use only one button whenever possible. It will always be a primary button.'}
+  donts={'Use two primary buttons. Strategically determine which button should be used as secondary.'}
+/>
 
 ### As a call to action
 A button is a functional element that is designed to submit user data using the `<button>` markup. As a call to action `<a>` link, add a navigation arrow to distinguish it from a regular button. Navigation arrows are text-based, and is created with the html code &rarr; (right arrow) or &uarr; (up arrow). They are normally positioned to the right of the text label.
 
+<DoDont
+  dos={'Use buttons for form submissions and search queries.'}
+  donts={'Use buttons as a link without a navigation arrow.'}
+/>
 
 ### Text usage
 All button text are in title case, and is ideally limited to one word. If one word does not adequately explain the function clearly, then limit the label to two brief words.
 
-
+<DoDont
+  dos={'Use one word to explain the function whenever possible, such as "Send," "Search," or "Reset."'}
+  donts={'Use all uppercase or all lowercase to label buttons.'}
+/>
 
 ## HTML
 
