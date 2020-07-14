@@ -1,5 +1,5 @@
 import { create } from '@storybook/theming/create';
-//import logo from './assets/logo-ds.svg';
+import logo from '../libs/storybook-common/assets/logo-ds.svg';
 
 export default create({
   base: 'dark',
@@ -33,6 +33,6 @@ export default create({
   // inputBorderRadius: 0,
 
   brandTitle: 'Alberta Design System',
-  brandUrl: 'https://alberta.ca'
-  //brandImage: logo,
+  brandUrl: 'https://alberta.ca',
+  brandImage: logo
 });
