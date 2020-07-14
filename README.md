@@ -10,5 +10,5 @@ The project contains the GoA sample UI components for various frontend framework
 
 ### S2I Deployment
 Application S2I Deployment
-<pre>oc new-app https://gitlab.gov.ab.ca/dio/core/ui-components.git#Dev -source-secret='gitlab-core-ui-components'
+<pre>oc new-app git@gitlab.gov.ab.ca:dio/core/ui-components.git#dev --source-secret=ui-components-ssh --dry-run=false --name=ui-components --strategy=Source
 </pre>
