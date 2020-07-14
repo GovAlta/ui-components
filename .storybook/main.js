@@ -2,7 +2,8 @@
 module.exports = {
     stories: [
       '../libs/core-css/src/lib/**/*.stories.mdx',
-      '../libs/angular-components/src/lib/**/*.stories.mdx'
+      '../libs/angular-components/src/lib/**/*.stories.mdx',
+      '../libs/storybook-common/src/lib/**/*.stories.mdx'
     ],
     addons: [
       {

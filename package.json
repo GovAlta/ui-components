@@ -60,6 +60,7 @@
     "@nrwl/eslint-plugin-nx": "9.5.1",
     "@nrwl/jest": "9.5.1",
     "@nrwl/node": "^9.5.1",
+    "@nrwl/react": "^9.5.1",
     "@nrwl/storybook": "^9.5.1",
     "@nrwl/workspace": "9.5.1",
     "@types/jest": "25.1.4",
@@ -82,6 +83,9 @@
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
     "typescript": "~3.8.3",
-    "zone.js": "^0.10.3"
+    "zone.js": "^0.10.3",
+    "@babel/preset-env": "7.9.6",
+    "@babel/preset-react": "7.9.4",
+    "babel-jest": "25.1.0"
   }
 }

@@ -1,0 +1,63 @@
+import { Meta, Preview } from '@storybook/addon-docs/blocks';
+import { DoDont } from '../do-dont/DoDont';
+import templatesLandingPage from '../../../assets/landing-page-template.png';
+import templatesNarrow from '../../../assets/narrow-template.png';
+
+<Meta title="Design System/Templates" />
+
+# Templates
+
+Templates available for download.
+
+## Landing page
+[Download landing page template]()
+
+### Overview
+A landing page template is designed to be the starting navigation point for users. 
+The page promotes important or relevant content and links.
+
+<Preview withSource="none">
+  <img src={templatesLandingPage} />
+</Preview>
+
+### Guidelines
+*Page contents*
+The landing page uses a wide layout format. The title banner may use a hero banner 
+while the page contents may employ up to three columns. The structure provides an 
+opportunity for wayfinding and promotion of content. A hero banner, callout banners, 
+call to action links, cards, icons, and imagery may be used. The arrangement and use 
+of content should be driven by findings through usability testing and user analytics.
+
+<DoDont
+  dos={
+    'Use a hero banner in an appropriate and relevant setting. ' +
+    'Ensure that the use follows accessibility standards.'
+  }
+  donts={'Promote links that are not frequently accessed or relevant to users.'}
+/>
+
+## Narrow
+[Download narrow column template]()
+
+### Overview
+A narrow column template prioritizes content. The narrow format aids readability by 
+maximizing distraction-free white space.
+
+<Preview withSource="none">
+  <img src={templatesNarrow} />
+</Preview>
+
+### Guidelines
+*Contents*
+In a narrow column template, the title banner, lede, and table of contents precedes 
+the narrow format content. The narrow column contains text headers and paragraphs. 
+If images are included into the narrow layout, they may be floated with the text, or 
+set to the width of the container. Two-column cards may also be used. The narrow format 
+makes use of white space, in order to make reading more comfortable, which is set to 
+the recommended maximum of 90 characters per line.
+
+<DoDont
+  dos={'Incorporate the table of contents if there are at least two headings.'}
+  donts={'Use excessive promotional material in a narrow column template.'}
+/>
+

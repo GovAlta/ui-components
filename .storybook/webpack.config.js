@@ -1,3 +1,5 @@
+const path = require('path');
+
 // Export a function. Accept the base config as the only param.
 module.exports = async ({ config, mode }) => {
   // `mode` has a value of 'DEVELOPMENT' or 'PRODUCTION'
@@ -18,6 +20,18 @@ module.exports = async ({ config, mode }) => {
       ]
     }
   });
+
+  // Add sass loader
+  config.module.rules.push({
+    test: /\.scss$/,
+    use: ['style-loader', 'css-loader', 'sass-loader'],
+    include: path.resolve(__dirname, '../'),
+  });
+
+  //add aliases
+  config.resolve.alias = {
+      '@goa-dio/storybook-common': path.resolve(__dirname, '../libs/storybook-common/src/index.ts'),
+  }
 
   // Return the altered config
   return config;
