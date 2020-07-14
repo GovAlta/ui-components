@@ -2,7 +2,7 @@
 
 IMAGE_NAME = storybook-image
 REPO = git@gitlab.gov.ab.ca:dio/core/ui-components.git
-BRANCH = angelo-s21
+BRANCH = dev
 SOURCE_SECRET = ui-components-ssh-key
 PATH_TO_OC = ~/Source/Minishift/
 
