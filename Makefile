@@ -1,9 +1,9 @@
 #!/bin/bash 
 
 IMAGE_NAME = storybook-image
-REPO = git@gitlab.gov.ab.ca:dio/core/ui-components.git
-BRANCH = dev
-SOURCE_SECRET = ui-components-ssh-key
+REPO = https://gitlab.gov.ab.ca:dio/core/ui-components.git
+BRANCH = angelo-s2i
+SOURCE_SECRET = gitlab
 PATH_TO_OC = ~/Source/Minishift/
 
 .PHONY: build
@@ -17,4 +17,4 @@ test:
 
 .PHONY: deploy-app
 deploy-app:
-	$(PATH_TO_OC)oc new-app $(REPO)#$(BRANCH) --source-secret='$(SOURCE_SECRET)' --name=ui-components
+	echo $(PATH_TO_OC)oc new-app $(REPO)#$(BRANCH) --source-secret='$(SOURCE_SECRET)' --name=ui-components
