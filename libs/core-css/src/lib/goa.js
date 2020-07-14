@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
 
 Government of Alberta Design System
