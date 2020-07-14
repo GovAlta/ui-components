@@ -26,7 +26,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "storybook": "start-storybook -p 8080"
+    "storybook": "start-storybook -p 8080",
+    "build-storybook": "build-storybook"
   },
   "private": true,
   "dependencies": {
