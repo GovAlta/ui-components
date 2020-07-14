@@ -2,7 +2,7 @@
 
 IMAGE_NAME = storybook-image
 REPO = https://gitlab.gov.ab.ca:dio/core/ui-components.git
-BRANCH = dev
+BRANCH = Dev
 SOURCE_SECRET = ui-components-ssh
 PATH_TO_OC = ~/Source/Minishift/
 
