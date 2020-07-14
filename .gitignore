@@ -28,7 +28,7 @@ node_modules/
 dist
 
 # Storybook build output
-storybook_static
+storybook_static/
 
 # TypeScript cache
 *.tsbuildinfo
