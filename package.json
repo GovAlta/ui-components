@@ -83,6 +83,9 @@
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
     "typescript": "~3.8.3",
-    "zone.js": "^0.10.3"
+    "zone.js": "^0.10.3",
+    "@babel/preset-env": "7.9.6",
+    "@babel/preset-react": "7.9.4",
+    "babel-jest": "25.1.0"
   }
 }

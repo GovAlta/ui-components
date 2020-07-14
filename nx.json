@@ -36,15 +36,14 @@
     },
     "core-css-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "core-css"
-      ]
+      "implicitDependencies": ["core-css"]
     },
     "angular-components-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "angular-components"
-      ]
+      "implicitDependencies": ["angular-components"]
+    },
+    "storybook-common": {
+      "tags": []
     }
   }
 }

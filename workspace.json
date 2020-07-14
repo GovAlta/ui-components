@@ -15,10 +15,7 @@
               "libs/core-css/tsconfig.lib.json",
               "libs/core-css/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/core-css/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/core-css/**/*"]
           }
         },
         "test": {
@@ -36,9 +33,7 @@
             "tsConfig": "libs/core-css/tsconfig.lib.json",
             "packageJson": "libs/core-css/package.json",
             "main": "libs/core-css/src/index.ts",
-            "assets": [
-              "libs/core-css/*.md"
-            ]
+            "assets": ["libs/core-css/*.md"]
           }
         },
         "storybook": {
@@ -98,10 +93,7 @@
               "libs/angular-components/tsconfig.lib.json",
               "libs/angular-components/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/angular-components/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/angular-components/**/*"]
           }
         },
         "test": {
@@ -171,13 +163,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/core-css-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/core-css-e2e/**/*"
-            ]
+            "tsConfig": ["apps/core-css-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/core-css-e2e/**/*"]
           }
         }
       }
@@ -203,13 +190,38 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/angular-components-e2e/tsconfig.e2e.json"
-            ],
+            "tsConfig": ["apps/angular-components-e2e/tsconfig.e2e.json"],
             "exclude": [
               "**/node_modules/**",
               "!apps/angular-components-e2e/**/*"
             ]
+          }
+        }
+      }
+    },
+    "storybook-common": {
+      "root": "libs/storybook-common",
+      "sourceRoot": "libs/storybook-common/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/storybook-common/tsconfig.lib.json",
+              "libs/storybook-common/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/storybook-common/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/storybook-common/jest.config.js",
+            "tsConfig": "libs/storybook-common/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }
