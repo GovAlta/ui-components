@@ -1,0 +1,5 @@
+#ignore output directories as they will be built in the docker image
+
+node_modules/
+storybook-static/
+dist/

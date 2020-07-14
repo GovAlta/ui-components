@@ -78,3 +78,6 @@ out
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# s2i output folder for image creation testing
+.s2i/output/
