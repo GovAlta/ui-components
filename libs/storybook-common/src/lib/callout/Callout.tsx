@@ -4,7 +4,7 @@ import './Callout.scss';
 /**
  * Callout used by Do/Don't component.
  * @property {bool} positive Indicates if the callout should be styled positively or negatively.
- * @property {component} content Content to render
+ * @property {string} content text for content.
  */
 export const Callout = ({positive, content}) => {
   return (
