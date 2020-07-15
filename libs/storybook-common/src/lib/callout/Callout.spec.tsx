@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import Callout from './Callout';
+import { Callout } from './Callout';
 
 describe(' Callout', () => {
   it('should render successfully', () => {
