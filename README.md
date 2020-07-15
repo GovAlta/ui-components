@@ -1,14 +1,19 @@
 ## About the Project
-The project contains the GoA sample UI components for various frontend frameworks. Those injectable UI components could be uased as either templates or guidelines in development.
+The project contains the Government of Alberta UI components. The output packages support multiple model frontend frameworks, such as ReactJS, AngularJS, etc.
 
 ## Deployment
-### OpenShift Deployment Key
 
+### NodeJS version
+For local developer, please use the NodeJS 12.
+
+### OpenShift Deployment Key
 |OpenShift Project|Key Name|
 |---|---|
 |DIO Sandbox|gitlab-core-ui-components|
 
-### S2I Deployment
-Application S2I Deployment
-<pre>oc new-app git@gitlab.gov.ab.ca:dio/core/ui-components.git#Dev --source-secret=ui-components-ssh --dry-run=false --name=ui-components --strategy=Source
-</pre>
+
+## Environments
+
+|Branch Name| Website URL |
+|---|---|
+|dev|[Click](https://ui-components-dio-dev.os99.gov.ab.ca/)|
