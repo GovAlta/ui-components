@@ -1,6 +1,16 @@
 {
   "name": "@abgov/angular-components",
   "version": "0.0.1",
+  "description": "Government of Alberta - DIO - angular shared ui components",
+  "bugs": {
+    "url": "https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues"
+  },
+  "keywoards": ["GoA", "Angular"],
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git",
+    "directory": "libs/angular-components"
+  },
   "peerDependencies": {
     "@angular/common": "^9.1.11",
     "@angular/core": "^9.1.11"
