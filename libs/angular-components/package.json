@@ -1,5 +1,5 @@
 {
-  "name": "@goa-dio/angular-components",
+  "name": "@abgov/angular-components",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^9.1.11",
