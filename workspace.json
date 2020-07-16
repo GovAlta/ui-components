@@ -72,7 +72,7 @@
       "projectType": "library",
       "root": "libs/angular-components",
       "sourceRoot": "libs/angular-components/src",
-      "prefix": "goa-dio",
+      "prefix": "abgov",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",

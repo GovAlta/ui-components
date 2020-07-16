@@ -2,7 +2,7 @@
   "extends": "../../tslint.json",
   "rules": {
     "directive-selector": [true, "attribute", "goaDio", "camelCase"],
-    "component-selector": [true, "element", "goa-dio", "kebab-case"]
+    "component-selector": [true, "element", "abgov", "kebab-case"]
   },
   "linterOptions": {
     "exclude": ["!**/*"]
