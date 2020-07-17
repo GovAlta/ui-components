@@ -25,6 +25,9 @@ cp -Rf /tmp/src/. ./
 echo "---> Installing dependencies..."
 npm install -s
 
+echo "---> Executing unit tests..."
+npm run test-all
+
 echo "---> Building application from source..."
 npm run build-storybook
 
