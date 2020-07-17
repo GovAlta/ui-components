@@ -5,7 +5,7 @@
   "bugs": {
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues"
   },
-  "keywoards": ["GoA", "template"],
+  "keywoards": ["GoA", "template", "Angular"],
   "repository": {
     "type": "git",
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git",
