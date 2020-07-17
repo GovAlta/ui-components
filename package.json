@@ -25,6 +25,7 @@
     "format:check": "nx format:check",
     "update": "nx migrate latest",
     "publish:angular-components": "npm run build:angular-components && cd dist/libs/angular-components && npm publish --new-version",
+    "publish:core-css": "npm run build:core-css && cd dist/libs/core-css && npm publish --new-version",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
