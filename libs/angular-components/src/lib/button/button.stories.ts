@@ -11,16 +11,16 @@ const template = `
 <div>
   <h1>Button</h1>
   <div style="display: flex; justify-content: center;">
-    <goa-button [title]=title [style]=style></goa-button>
-    <goa-button [title]=title style=secondary></goa-button>
-    <goa-button [title]=title style=tertiary></goa-button>
+    <goa-button [title]=title [buttonType]=buttonType></goa-button>
+    <goa-button [title]=title buttonType=secondary></goa-button>
+    <goa-button [title]=title buttonType=tertiary></goa-button>
   </div>
 </div>
 `;
 
 const params = `
 @Input() title: string;
-@Input() style: string;
+@Input() buttonType: string;
 `;
 
 storiesOf('Design System Angular.Basic Elements', module)
@@ -30,6 +30,6 @@ storiesOf('Design System Angular.Basic Elements', module)
     template: template,
     props: {
       'title': text('title', 'Button'),
-      'style': text('style', '')
+      'buttonType': text('buttonType', '')
     }
   }));

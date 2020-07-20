@@ -12,7 +12,7 @@ import ButtonStyle from './goa.button.component.css'
 
 export class GoAButtonComponent implements OnInit {
   @Input() title: string;
-  @Input() style: string = 'primary';
+  @Input() buttonType: string = 'primary';
 
   constructor() { }
 

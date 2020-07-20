@@ -1,7 +1,7 @@
 <div>
     <button [ngClass]="{
         'goa-button':true,
-        'goa--secondary':style === 'secondary',
-        'goa--tertiary':style === 'tertiary'
+        'goa--secondary':buttonType === 'secondary',
+        'goa--tertiary':buttonType === 'tertiary'
       }" type="submit">{{title}}</button>
 </div>
