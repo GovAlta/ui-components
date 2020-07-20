@@ -8,6 +8,7 @@
     "build": "nx build",
     "build-all": "nx run-many --target=build --all",
     "build:angular-components": "npm run build angular-components -- --prod",
+    "build:core-css": "npm run build core-css -- --prod",
     "test": "nx test",
     "test-all": "nx run-many --target=test --all",
     "lint": "nx workspace-lint && nx lint",
