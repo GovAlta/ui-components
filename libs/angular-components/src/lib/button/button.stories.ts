@@ -18,11 +18,6 @@ const template = `
 </div>
 `;
 
-const params = `
-@Input() title: string;
-@Input() buttonType: string;
-`;
-
 storiesOf('Design System Angular.Basic Elements', module)
   .addDecorator(withKnobs)
   .addDecorator(moduleMetadata(modules))
