@@ -1,11 +1,10 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { GoAButtonComponent } from './goa.button.component';
-import { withKnobs, text, files } from '@storybook/addon-knobs/angular';
-import { AngularComponentsModule } from '../angular-components.module';
+import { GoAButtonComponent } from './goa.button.component'
+import { withKnobs, text, files } from '@storybook/addon-knobs';
 
 const modules = {
-  imports: [AngularComponentsModule],
-  declarations: [GoAButtonComponent],
+  imports: [],
+  declarations: [GoAButtonComponent]
 };
 
 const template = `
@@ -23,9 +22,9 @@ storiesOf('Design System Angular.Basic Elements', module)
   .addDecorator(withKnobs)
   .addDecorator(moduleMetadata(modules))
   .add('Button', () => ({
-    component: GoAButtonComponent,
+    template: template,
     props: {
-      title: text('title', 'Button'),
-      buttonType: text('buttonType', ''),
-    },
+      'title': text('title', 'Button'),
+      'buttonType': text('buttonType', '')
+    }
   }));

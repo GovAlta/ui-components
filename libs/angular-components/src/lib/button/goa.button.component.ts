@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Button } from './button';
+import ButtonHtml from './goa.button.component.html'
+import ButtonStyle from './goa.button.component.css'
 
 /***
 Paul.Li July-20-2020
@@ -16,15 +19,17 @@ Using 'template' and 'styles' to include templates is a temporarily workaround.
 ***/
 
 @Component({
+  moduleId: module.id,
   selector: 'goa-button',
-  templateUrl: './goa.button.component.html',
-  styleUrls: ['./goa.button.component.scss'],
+  template: ButtonHtml,
+  styles: [ButtonStyle.toString()]
 })
+
 export class GoAButtonComponent implements OnInit {
   @Input() title: string;
-  @Input() buttonType = 'primary';
+  @Input() buttonType: string = 'primary';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
