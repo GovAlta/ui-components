@@ -1,0 +1,51 @@
+/* goa-button ****************************************************************/
+
+button.goa-button.goa--secondary,
+input[type="button"].goa-button.goa--secondary {
+    border: 2px solid #0070c4;
+    background: #fff;
+    color: #0070c4;
+}
+
+button.goa-button.goa--secondary:hover,
+input[type="button"].goa-button.goa--secondary:hover {
+    border-color: #004f84;
+    background: #f1f1f1;
+    color: #004f84;
+}
+
+button.goa-button.goa--secondary:focus,
+input[type="button"].goa-button.goa--secondary:focus {
+    border-color: #004f84;
+    background: #f1f1f1;
+    color: #004f84;
+}
+
+button.goa-button.goa--secondary:active,
+input[type="button"].goa-button.goa--secondary:active,
+input[type="submit"].goa-button.goa--secondary:active {
+    background: #DCDCDC;
+    color: #333;
+    border: 2px solid #333;
+    outline: none;
+}
+
+button.goa-button.goa--tertiary,
+input[type="button"].goa-button.goa--tertiary {
+    border-color: #f1f1f1;
+    background: #fff;
+    color: #0070c4;
+}
+
+button.goa-button.goa--tertiary:hover,
+input[type="button"].goa-button.goa--tertiary:hover {
+    background: #f1f1f1;
+    color: #004f84;
+}
+
+button.goa-button.goa--tertiary:focus,
+input[type="button"].goa-button.goa--tertiary:focus {
+    border-color: #004f84;
+    background: #f1f1f1;
+    color: #004f84;
+}

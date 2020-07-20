@@ -24,7 +24,14 @@ module.exports = async ({ config, mode }) => {
   // Add sass loader
   config.module.rules.push({
     test: /\.scss$/,
-    use: ['style-loader', 'css-loader', 'sass-loader'],
+    use: ['to-string-loader', 'style-loader', 'css-loader', 'sass-loader'],
+    include: path.resolve(__dirname, '../'),
+  });
+
+  // Add html loader
+  config.module.rules.push({
+    test: /\.html$/,
+    use: ['html-loader'],
     include: path.resolve(__dirname, '../'),
   });
 
