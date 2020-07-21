@@ -21,20 +21,6 @@ module.exports = async ({ config, mode }) => {
     }
   });
 
-  // Add sass loader
-  config.module.rules.push({
-    test: /\.scss$/,
-    use: ['to-string-loader', 'style-loader', 'css-loader', 'sass-loader'],
-    include: path.resolve(__dirname, '../'),
-  });
-
-  // Add html loader
-  config.module.rules.push({
-    test: /\.html$/,
-    use: ['html-loader'],
-    include: path.resolve(__dirname, '../'),
-  });
-
   //add aliases
   config.resolve.alias = {
       '@goa-dio/storybook-common': path.resolve(__dirname, '../libs/storybook-common/src/index.ts'),
