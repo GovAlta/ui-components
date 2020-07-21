@@ -17,12 +17,12 @@ Using 'template' and 'styles' to include templates is a temporarily workaround.
 
 @Component({
   selector: 'goa-button',
-  templateUrl: './goa.button.component.html',
-  styleUrls: ['./goa.button.component.scss'],
+  templateUrl: './goa-button.component.html',
+  styleUrls: ['./goa-button.component.scss'],
 })
 export class GoAButtonComponent implements OnInit {
   @Input() title: string;
-  @Input() buttonType = 'primary';
+  @Input() buttonType: string = 'primary';
 
   constructor() {}
 
