@@ -1,5 +1,5 @@
 import { DoDont } from '@goa-dio/storybook-common';
-import { GoAButtonComponent } from './goa.button.component';
+import { GoAButtonComponent } from './goa-button.component';
 
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
@@ -27,7 +27,6 @@ Set buttonStyle='primary', buttonStyle='secondary', buttonStyle='tertiary' to ch
   }>
     {{
         template: `<goa-button [title]='title' (onClick)='onClick($event)' [buttonType]=buttonType></goa-button>`,
-        //template: `<goa-button title='test' buttonType='Secondary'></goa-button>`,
         props: {
             title: text('title', 'Secondary'),
             onClick: () => {},
