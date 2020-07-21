@@ -2,15 +2,11 @@
 module.exports = {
   stories: [
     '../libs/core-css/src/lib/**/*.stories.mdx',
-    '../libs/angular-components/src/lib/**/*.stories.mdx',
-    '../libs/storybook-common/src/lib/**/*.stories.mdx',
-    '../libs/angular-components/src/lib/**/*.stories.ts'
   ],
   addons: [
+    '@storybook/addon-docs/preset',
     {
-      name: '@storybook/addon-docs',
-      options: {
-      }
+      name: '@storybook/preset-scss'
     },
     '@storybook/addon-backgrounds',
     '@storybook/addon-a11y/register',
