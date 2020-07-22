@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GoAButtonComponent } from './button/goa-button.component';
+import { GoAButtonComponent } from './button/button.component';
 
 @NgModule({
   imports: [CommonModule],
