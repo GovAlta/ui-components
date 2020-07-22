@@ -6,6 +6,9 @@ module.exports = {
         options: {
         }
       },
+      {
+        name: '@storybook/preset-scss'
+      },
       '@storybook/addon-backgrounds',
       '@storybook/addon-a11y/register',
       '@storybook/addon-viewport',
