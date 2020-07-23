@@ -1,0 +1,48 @@
+kind: List
+apiVersion: v1
+items:
+  # ImageStream for jenkins agent with Node.js v12
+  # Might be redundant
+  - kind: ImageStream
+    apiVersion: v1
+    metadata:
+      annotations:
+        slave-label: node12
+      labels:
+        role: jenkins-slave
+      name: jenkins-agent-node12
+  # BuildConfig for jenkins agent with Node.js v12
+  - kind: BuildConfig
+    apiVersion: v1
+    metadata:
+      name: jenkins-agent-node12
+    spec:
+      strategy:
+        dockerStrategy: {}
+        type: Docker
+      source:
+        contextDir: agent-nodejs-12
+        git:
+          uri: "https://github.com/openshift/jenkins.git"
+        type: Git
+      output:
+        to:
+          kind: ImageStreamTag
+          name: "jenkins-agent-node12:latest"
+  # BuildConfig for the Jenkins pipeline which Source Control Management (SCM) for Jenkinsfile
+  - kind: BuildConfig
+    apiVersion: v1
+    metadata:
+      name: ui-components-pipeline
+    spec:
+      runPolicy: Serial
+      source:
+        git:
+          ref: dev
+          uri: https://gitlab.gov.ab.ca/dio/core/ui-components.git
+        sourceSecret:
+          name: gitlab
+      strategy:
+        type: JenkinsPipeline
+        jenkinsPipelineStrategy:
+          jenkinsfilePath: Jenkinsfile
