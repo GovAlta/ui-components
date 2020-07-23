@@ -17,8 +17,8 @@ describe('Goa Button', () => {
     
     const button = screen.getByText('Test Title');
     expect(button.className).toContain('goa-button');
-    expect(button.className).not.toContain('goa-button--secondary');
-    expect(button.className).not.toContain('goa-button--tertiary');
+    expect(button.className).not.toContain('goa--secondary');
+    expect(button.className).not.toContain('goa--tertiary');
   });
 
   test('buttonType=secondary should render secondary styling', async () => {
