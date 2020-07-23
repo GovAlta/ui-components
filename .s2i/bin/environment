@@ -1,6 +1,0 @@
-OUTPUT_DIR=storybook-static
-NPM_BUILD=npm run build-storybook
-NODE_ENV=production
-NPM_RUN=npm run storybook
-DEPLOY_PORT=8080
-IMAGE_NAME=storybook-image
