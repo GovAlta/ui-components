@@ -5,7 +5,9 @@ import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
-<Meta title="Design System/Basic Elements/Buttons/Angular" decorators={[
+<Meta title="Design System/Basic Elements/Buttons/Angular"
+  component={GoAButtonComponent}
+  decorators={[
         withKnobs,
         moduleMetadata({ declarations: [GoAButtonComponent] })
     ]
@@ -14,7 +16,6 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 # Buttons
 
 A hierarchy of actions provided by buttons.
-Set buttonStyle='primary', buttonStyle='secondary', buttonStyle='tertiary' to change the style.
 
 <Preview>
   <Story name="Variants" height={100} parameters={
@@ -26,10 +27,9 @@ Set buttonStyle='primary', buttonStyle='secondary', buttonStyle='tertiary' to ch
     }
   }>
     {{
-        template: `<goa-button [title]='title' (onClick)='onClick($event)' [buttonType]=buttonType></goa-button>`,
+        component: GoAButtonComponent,
         props: {
             title: text('title', 'Secondary'),
-            onClick: () => {},
             buttonType: text('buttonType', 'secondary')
         }
     }}
@@ -66,3 +66,5 @@ All button text are in title case, and is ideally limited to one word. If one wo
   dos={'Use one word to explain the function whenever possible, such as "Send," "Search," or "Reset."'}
   donts={'Use all uppercase or all lowercase to label buttons.'}
 />
+
+
