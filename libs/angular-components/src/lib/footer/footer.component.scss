@@ -1,0 +1,109 @@
+/* Footer style */
+$desktop-width: 1200px;
+$tablet-width: 768px;
+$mobile-width: 500px;
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+
+footer.goa-footer {
+  div.top-bar {
+    font-size: 12px;
+    background-color: #f1f1f1;
+    img.image {
+      padding-left: 72px;
+      padding-right: 4px;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal;
+
+      @include tablet {
+        padding-left: 24px;
+      }
+
+      @include mobile {
+        padding-left: 24px;
+        padding-right: 24px;
+        display: none;
+      }
+      height: 16px;
+      width: 16px;
+    }
+
+    span.site-text {
+      @include mobile {
+        padding-left: 24px;
+      }
+    }
+  }
+
+  div.logo {
+    height: 66px;
+    margin-top: 8px;
+
+    img.image-desktop-tablet {
+      width: 150px;
+      height: 43px;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal;
+      margin-left: 72px;
+
+      @include tablet {
+        margin-left: 24px;
+      }
+      @include mobile {
+        display: none;
+      }
+    }
+
+    img.image-mobile {
+      @include tablet {
+        display: none;
+      }
+
+      @include desktop {
+        display: none;
+      }
+
+      @include mobile {
+        width: 34px;
+        height: 34px;
+        margin-left: 24px;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+      }
+    }
+
+    span.name {
+      margin-left: 24px;
+      font-size: 18px;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal;
+    }
+  }
+
+  a.web-link {
+    font: Regular 12px / var(--unnamed-line-spacing-24) var(--unnamed-font-family-acumin-pro-semicondensed);
+    color: #0070c4;
+    text-align: left;
+    font: Regular 12px/24px Acumin Pro SemiCondensed;
+  }
+}

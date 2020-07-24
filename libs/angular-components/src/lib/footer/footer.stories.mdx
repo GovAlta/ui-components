@@ -1,0 +1,29 @@
+import { DoDont } from '@abgov/storybook-common';
+import { GoAFooterComponent } from './footer.component';
+
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import { moduleMetadata } from '@storybook/angular';
+import { text, withKnobs } from '@storybook/addon-knobs';
+
+<Meta title="Design System/Basic Elements/Footer/Angular/Micro Site" decorators={[
+        withKnobs,
+        moduleMetadata({ declarations: [GoAFooterComponent] })
+    ]
+} />
+
+# Footer
+
+<Preview>
+  <Story name="Desktop" height={100} parameters={
+    {
+      design: {
+        specUrl: 'https://xd.adobe.com/view/18ccfd61-7e54-450e-a05d-cabfff452d6e-4d9f/screen/bbcbebfa-96a4-4625-931e-54b7b7e60b4e/specs',
+        reviewUrl: 'https://xd.adobe.com/view/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/'
+      }
+    }
+  }>
+    {{
+        template: `<goa-footer></goa-footer>`
+    }}
+  </Story>
+</Preview>
