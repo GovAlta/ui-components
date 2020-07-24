@@ -42,7 +42,9 @@ pipeline {
         message 'Deploy?'
       }
       steps {
-        dir('/${context.WORKSPACE}/storybook-static') {
+        //dir('/tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/storybook-static') {
+        dir ('${env.WORKSPACE}/storybook-static')
+          sh 'echo "workspace directory is ${workspace}"'
           sh 'oc start-build ui-components --from-dir . --follow'
         }
       }
