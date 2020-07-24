@@ -27,15 +27,15 @@ items:
           kind: ImageStreamTag
           name: 'ui-components:latest'
       source:
+        contextDir: '1.16'
         git:
           uri: 'https://github.com/sclorg/nginx-ex.git'
         type: Git
       strategy:
-        # sourceStrategy:
-        #   from:
-        #     kind: ImageStreamTag
-        #     name: 'nginx:1.16'
-        #     namespace: openshift
+        sourceStrategy:
+          from:
+            kind: ImageStreamTag
+            name: 'nginx:1.16:latest'
         type: Source
       triggers:
         - imageChange:
