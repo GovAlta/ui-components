@@ -15,6 +15,7 @@ pipeline {
     stage('Prepare') {
       steps {
         checkout scm
+        sh 'printenv'
         sh 'npm install -g @nrwl/cli'
         sh 'npm install'
 
