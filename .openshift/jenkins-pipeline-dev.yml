@@ -11,6 +11,28 @@ items:
       labels:
         role: jenkins-slave
       name: jenkins-agent-node12
+  # Imagestream for nginx container
+  - kind: ImageStream
+    apiVersion: v1
+    metadata:
+      name: ui-components
+  # Build config for nginx container
+  - kind: BuildConfig
+    apiVersion: v1
+    metadata:
+      name: ui-components
+    spec:
+      strategy:
+        type: Docker
+      source:
+        contextDir: '1.18'
+        git:
+          uri: 'https://github.com/sclorg/nginx-container.git'
+        type: Git
+      output:
+        to:
+          kind: ImageStreamTag
+          name: 'ui-components-nginx:latest'
   # BuildConfig for jenkins agent with Node.js v12
   - kind: BuildConfig
     apiVersion: v1
@@ -18,17 +40,16 @@ items:
       name: jenkins-agent-node12
     spec:
       strategy:
-        dockerStrategy: {}
         type: Docker
       source:
         contextDir: agent-nodejs-12
         git:
-          uri: "https://github.com/openshift/jenkins.git"
+          uri: 'https://github.com/openshift/jenkins.git'
         type: Git
       output:
         to:
           kind: ImageStreamTag
-          name: "jenkins-agent-node12:latest"
+          name: 'jenkins-agent-node12:latest'
   # BuildConfig for the Jenkins pipeline which Source Control Management (SCM) for Jenkinsfile
   - kind: BuildConfig
     apiVersion: v1
@@ -46,3 +67,63 @@ items:
         type: JenkinsPipeline
         jenkinsPipelineStrategy:
           jenkinsfilePath: Jenkinsfile
+  # Service config for ui-components
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      name: ui-components
+    spec:
+      selector:
+        app: ui-components
+        deploymentConfig: ui-components
+      ports:
+        - name: 8080-tcp
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+      sessionAffinity: None
+      type: ClusterIP
+  # Route config for ui-components
+  - kind: Route
+    apiVersion: v1
+    metadata:
+      name: ui-components
+    spec:
+      port:
+        targetPort: 8080-tcp
+      tls:
+        termination: edge
+      to:
+        kind: Service
+        name: ui-components
+        weight: 100
+  # Deployment config for ui-components
+  - kind: DeploymentConfig
+    apiVersion: v1
+    metadata:
+      name: ui-components
+    spec:
+      template:
+        metadata:
+          labels:
+            name: ui-components
+        spec:
+          containers:
+            - name: ui-components
+              image: openshift/ui-components
+      replicas: 1
+      # revisionHistoryLimit: 10
+      selector:
+        name: ui-components
+      triggers:
+        - type: ConfigChange
+        - type: ImageChange
+          imageChangeParams:
+            automatic: true
+            containerNames:
+              - ui-components
+            from:
+              kind: ImageStreamTag
+              name: ui-components:latest
+      strategy:
+        type: Rolling
