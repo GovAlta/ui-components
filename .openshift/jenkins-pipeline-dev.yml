@@ -59,7 +59,7 @@ items:
       runPolicy: Serial
       source:
         git:
-          ref: dev
+          ref: cs66-angelo
           uri: https://gitlab.gov.ab.ca/dio/core/ui-components.git
         sourceSecret:
           name: gitlab
