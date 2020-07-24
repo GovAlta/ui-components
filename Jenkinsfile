@@ -44,10 +44,7 @@ pipeline {
       }
       steps {
         //dir('/tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/storybook-static') {
-        dir('${env.WORKSPACE}/${PROJECT}/storybook-static') {
-          sh 'echo "workspace directory is ${workspace}"'
-          sh 'oc start-build ui-components --from-dir . --follow'
-        }
+        sh 'oc start-build ui-components --from-dir . --follow'
       }
     }
   }
