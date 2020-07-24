@@ -42,7 +42,7 @@ pipeline {
         message 'Deploy?'
       }
       steps {
-        dir('/tmp/workspace/dio-sandbox/dio-sandbox-ui-components-pipeline/storybook-static') {
+        dir('/tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/storybook-static') {
           sh 'oc start-build ui-components --from-dir . --follow'
         }
       }
