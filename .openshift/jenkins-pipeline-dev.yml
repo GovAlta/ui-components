@@ -31,11 +31,11 @@ items:
           uri: 'https://github.com/sclorg/nginx-ex.git'
         type: Git
       strategy:
-        sourceStrategy:
-          from:
-            kind: ImageStreamTag
-            name: 'nginx:1.16'
-            namespace: openshift
+        # sourceStrategy:
+        #   from:
+        #     kind: ImageStreamTag
+        #     name: 'nginx:1.16'
+        #     namespace: openshift
         type: Source
       triggers:
         - imageChange:
