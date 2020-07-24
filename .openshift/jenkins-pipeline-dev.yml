@@ -32,10 +32,10 @@ items:
           uri: 'https://github.com/sclorg/nginx-ex.git'
         type: Git
       strategy:
-        # sourceStrategy:
-        #   from:
-        #     kind: ImageStreamTag
-        #     name: 'nginx:1.16:latest'
+        sourceStrategy:
+          from:
+            kind: ImageStreamTag
+            name: 'nginx:1.16:latest'
         type: Source
       triggers:
         - imageChange:
