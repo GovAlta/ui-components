@@ -22,17 +22,25 @@ items:
     metadata:
       name: ui-components
     spec:
-      strategy:
-        type: Docker
-      source:
-        contextDir: "1.18"
-        git:
-          uri: "https://github.com/sclorg/nginx-container.git"
-        type: Git
       output:
         to:
           kind: ImageStreamTag
-          name: "ui-components:latest"
+          name: 'ui-components:latest'
+      source:
+        git:
+          uri: 'https://github.com/sclorg/nginx-ex.git'
+        type: Git
+      strategy:
+        sourceStrategy:
+          from:
+            kind: ImageStreamTag
+            name: 'nginx:1.12'
+            namespace: openshift
+        type: Source
+      triggers:
+        - imageChange:
+          type: ImageChange
+        - type: ConfigChange
   # BuildConfig for jenkins agent with Node.js v12
   - kind: BuildConfig
     apiVersion: v1
@@ -44,12 +52,12 @@ items:
       source:
         contextDir: agent-nodejs-12
         git:
-          uri: "https://github.com/openshift/jenkins.git"
+          uri: 'https://github.com/openshift/jenkins.git'
         type: Git
       output:
         to:
           kind: ImageStreamTag
-          name: "jenkins-agent-node12:latest"
+          name: 'jenkins-agent-node12:latest'
   # BuildConfig for the Jenkins pipeline which Source Control Management (SCM) for Jenkinsfile
   - kind: BuildConfig
     apiVersion: v1
