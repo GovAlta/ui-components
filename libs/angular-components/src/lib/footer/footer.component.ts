@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FooterImages } from './inlineImages'
+import { Url } from 'url';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class GoAFooterComponent implements OnInit {
      * The serviceName might need to be hard coded in the HTML.
     */
     @Input() serviceName = "Digital Service Name (microsite)"
-    @Input() rootServiceLink = "https://www.alberta.ca/index.aspx"
+    @Input() microServiceHomeLink: String = "https://www.alberta.ca/index.aspx"
 
     constructor() { }
 

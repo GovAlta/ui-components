@@ -22,25 +22,26 @@ $mobile-width: 500px;
 }
 
 footer.goa-footer {
+  padding-left: 72px;
+  padding-right: 72px;
+
+  @include tablet {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @include mobile {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   .top-bar {
     font-size: 12px;
     background-color: #f1f1f1;
     img.image {
-      padding-left: 72px;
-      padding-right: 4px;
       display: inline-block;
       vertical-align: middle;
       line-height: normal;
-
-      @include tablet {
-        padding-left: 24px;
-      }
-
-      @include mobile {
-        padding-left: 24px;
-        padding-right: 24px;
-        display: none;
-      }
       height: 16px;
       width: 16px;
     }
@@ -50,6 +51,10 @@ footer.goa-footer {
         padding-left: 24px;
       }
     }
+  }
+
+  .microsite-link {
+    color: inherit;
   }
 
   .logo {
@@ -62,11 +67,7 @@ footer.goa-footer {
       display: inline-block;
       vertical-align: middle;
       line-height: normal;
-      margin-left: 72px;
 
-      @include tablet {
-        margin-left: 24px;
-      }
       @include mobile {
         display: none;
       }
@@ -84,7 +85,6 @@ footer.goa-footer {
       @include mobile {
         width: 34px;
         height: 34px;
-        margin-left: 24px;
         display: inline-block;
         vertical-align: middle;
         line-height: normal;
@@ -92,6 +92,7 @@ footer.goa-footer {
     }
 
     span.name {
+      text-decoration: none;
       margin-left: 24px;
       font-size: 18px;
       display: inline-block;
@@ -101,9 +102,7 @@ footer.goa-footer {
   }
 
   a.web-link {
-    font: Regular 12px / var(--unnamed-line-spacing-24) var(--unnamed-font-family-acumin-pro-semicondensed);
     color: #0070c4;
     text-align: left;
-    font: Regular 12px/24px Acumin Pro SemiCondensed;
   }
 }
