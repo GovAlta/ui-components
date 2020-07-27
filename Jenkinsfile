@@ -34,7 +34,8 @@ pipeline {
     } 
     stage('Build') {
       steps {
-        sh 'npm run build-storybook'
+        sh 'npm run build-angular-storybook' //builds to /dist/storybook/angular-components
+        sh 'npm run build-core-storybook' //builds to /dist/storybook/core-css
       }
     }
     stage('Deploy') {
@@ -42,7 +43,9 @@ pipeline {
         message 'Deploy?'
       }
       steps {
-        dir('/tmp/workspace/dio-sandbox/dio-sandbox-ui-components-pipeline/storybook-static') {
+        //copy the nginx config to binary buld location
+        sh 'cp /tmp/workspace/dio-sandbox/dio-sandbox-ui-components-pipeline/nginx.conf /tmp/workspace/dio-sandbox/dio-sandbox-ui-components-pipeline/dist/storybook'   
+        dir('/tmp/workspace/dio-sandbox/dio-sandbox-ui-components-pipeline/dist/storybook') {
           sh 'oc start-build ui-components --from-dir . --follow'
         }
       }

@@ -30,8 +30,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "storybook": "start-storybook -p 8080",
-    "build-storybook": "build-storybook"
+    "build-angular-storybook": "nx run angular-components:build-storybook",
+    "build-core-storybook": "nx run core-css:build-storybook --outpud-dir"
   },
   "private": true,
   "dependencies": {
