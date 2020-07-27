@@ -11,14 +11,14 @@ This library contains angular components from the Government of Alberta.
 Documentation is being worked on and will be provided soon.
 
 ## Usage
-
-> import { AngularComponentsModule } from '@abgov/angular-components'
-> ...
-> @NgModule({
->   ...
->   imports: [
->     AngularComponentsModule
->   ],
->   ...
-> })
- 
+```
+import { AngularComponentsModule } from '@abgov/angular-components'
+...
+@NgModule({
+  ...
+  imports: [
+    AngularComponentsModule
+  ],
+  ...
+})
+``` 

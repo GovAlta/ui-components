@@ -13,9 +13,12 @@ Documentation is being worked on and will be provided soon.
 ## Usage
 
 CSS
-> import '@abgov/core-css/goa-core.css';
-> import '@abgov/core-css/goa-components.css';
+```
+import '@abgov/core-css/goa-core.css';
+import '@abgov/core-css/goa-components.css';
+```
 
 JavaScript
-> import { goa } from '@abgov/core-css';
-
+```
+import { goa } from '@abgov/core-css';
+```
