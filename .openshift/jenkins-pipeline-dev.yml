@@ -35,6 +35,7 @@ items:
           from:
             kind: ImageStreamTag
             name: "nginx:1.12"
+            namespace: openshift
         type: Source
       triggers:
         - imageChange:
