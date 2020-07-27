@@ -110,12 +110,13 @@ items:
     apiVersion: v1
     metadata:
       name: ui-components
+      labels:
+        app: ui-components
     spec:
       template:
         metadata:
           labels:
             name: ui-components
-            app: ui-components
         spec:
           containers:
             - name: ui-components
