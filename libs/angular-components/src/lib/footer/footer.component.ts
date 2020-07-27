@@ -9,10 +9,12 @@ import { FooterImages } from './inlineImages'
 })
 
 export class GoAFooterComponent implements OnInit {
-    /**
-     * Text to display in the button
-     */
+
     @Input() base64Images: object = FooterImages
+
+    /**
+     * The serviceName might need to be hard coded in the HTML.
+    */
     @Input() serviceName = "Digital Service Name (microsite)"
 
     constructor() { }
