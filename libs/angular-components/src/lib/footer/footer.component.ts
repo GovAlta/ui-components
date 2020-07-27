@@ -16,6 +16,7 @@ export class GoAFooterComponent implements OnInit {
      * The serviceName might need to be hard coded in the HTML.
     */
     @Input() serviceName = "Digital Service Name (microsite)"
+    @Input() rootServiceLink = "https://www.alberta.ca/index.aspx"
 
     constructor() { }
 
