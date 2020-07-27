@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FooterImages } from './inlineImages'
-import { Url } from 'url';
 
 
 @Component({
@@ -11,15 +10,13 @@ import { Url } from 'url';
 
 export class GoAFooterComponent implements OnInit {
 
-    @Input() base64Images: object = FooterImages
+    base64Images = FooterImages
 
     /**
      * The serviceName might need to be hard coded in the HTML.
     */
     @Input() serviceName = "Digital Service Name (microsite)"
     @Input() microServiceHomeLink: String = "https://www.alberta.ca/index.aspx"
-
-    constructor() { }
-
-    ngOnInit() { }
+    constructor() {}
+    ngOnInit() {}
 }
