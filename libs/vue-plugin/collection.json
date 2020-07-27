@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "name": "vue-plugin",
+  "version": "0.0.1",
+  "schematics": {
+    "vue-plugin": {
+      "factory": "./src/schematics/vue-plugin/schematic",
+      "schema": "./src/schematics/vue-plugin/schema.json",
+      "description": "vue-plugin schematic"
+    }
+  }
+}
