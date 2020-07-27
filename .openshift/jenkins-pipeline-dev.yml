@@ -115,6 +115,7 @@ items:
         metadata:
           labels:
             name: ui-components
+            app: ui-components
         spec:
           containers:
             - name: ui-components
