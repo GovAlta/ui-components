@@ -25,17 +25,16 @@ items:
       output:
         to:
           kind: ImageStreamTag
-          name: 'ui-components:latest'
+          name: "ui-components:latest"
       source:
-        contextDir: '1.16'
         git:
-          uri: 'https://github.com/sclorg/nginx-ex.git'
+          uri: "https://github.com/sclorg/nginx-ex.git"
         type: Git
       strategy:
         sourceStrategy:
           from:
             kind: ImageStreamTag
-            name: 'nginx:1.16:latest'
+            name: "nginx:1.12"
         type: Source
       triggers:
         - imageChange:
@@ -52,12 +51,12 @@ items:
       source:
         contextDir: agent-nodejs-12
         git:
-          uri: 'https://github.com/openshift/jenkins.git'
+          uri: "https://github.com/openshift/jenkins.git"
         type: Git
       output:
         to:
           kind: ImageStreamTag
-          name: 'jenkins-agent-node12:latest'
+          name: "jenkins-agent-node12:latest"
   # BuildConfig for the Jenkins pipeline which Source Control Management (SCM) for Jenkinsfile
   - kind: BuildConfig
     apiVersion: v1
