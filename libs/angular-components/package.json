@@ -1,7 +1,8 @@
 {
   "name": "@abgov/angular-components",
-  "version": "0.1.6",
-  "description": "Government of Alberta - DIO - angular shared ui components",
+  "version": "0.1.7",
+  "license": "MIT",
+  "description": "Government of Alberta - shared UI components for Angular",
   "bugs": {
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues"
   },

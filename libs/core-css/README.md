@@ -1,7 +1,21 @@
 # core-css
 
-This library was generated with [Nx](https://nx.dev).
+This library contains core CSS, SVG, and JavaScript for HTML UI work from the Government of Alberta.
 
-## Running unit tests
+## Installation
 
-Run `ng test core-css` to execute the unit tests via [Jest](https://jestjs.io).
+> npm install @abgov/core-css
+
+## Documentation
+
+Documentation is being worked on and will be provided soon.
+
+## Usage
+
+CSS
+> import '@abgov/core-css/goa-core.css';
+> import '@abgov/core-css/goa-components.css';
+
+JavaScript
+> import { goa } from '@abgov/core-css';
+
