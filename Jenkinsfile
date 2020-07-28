@@ -44,8 +44,8 @@ pipeline {
       }
       steps {
         //copy the nginx config to binary buld location
-        sh 'cp /tmp/workspace/dio-sandbox/dio-sandbox-ui-components-pipeline/nginx.conf /tmp/workspace/dio-sandbox/dio-sandbox-ui-components-pipeline/dist/storybook'   
-        dir('/tmp/workspace/dio-sandbox/dio-sandbox-ui-components-pipeline/dist/storybook') {
+        sh 'cp /tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/nginx.conf /tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/dist/storybook'   
+        dir('/tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/dist/storybook') {
           sh 'oc start-build ui-components --from-dir . --follow'
         }
       }
