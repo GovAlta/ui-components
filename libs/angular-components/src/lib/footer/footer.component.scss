@@ -1,0 +1,46 @@
+@use '../responsive-breakpoints.scss' as *;
+
+footer.goa-footer {
+  padding-left: 72px;
+  padding-right: 72px;
+
+  @include tablet {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @include mobile {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .top-bar {
+    font-size: 12px;
+    background-color: #f1f1f1;
+
+    .image {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal;
+      height: 16px;
+      width: 16px;
+    }
+
+    .site-text {
+      padding-left: 4px;
+
+      @include tablet {
+        padding-left: 4px;
+      }
+
+      @include mobile {
+        padding-left: 24px;
+      }
+    }
+  }
+
+  .web-link {
+    color: #0070c4;
+    text-align: left;
+  }
+}
