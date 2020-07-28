@@ -1,19 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FooterImages } from '../microsite-logo/inlineImages'
-
+import { FooterImages } from './inlineImages'
 
 @Component({
-    selector: 'goa-footer',
-    templateUrl: './footer.component.html',
-    styleUrls: ['./footer.component.scss'],
+    selector: 'goa-microsite-logo',
+    templateUrl: './microsite-logo.component.html',
+    styleUrls: ['./microsite-logo.component.scss'],
 })
 
-export class GoAFooterComponent implements OnInit {
+export class GoAMicrositeLogoComponent implements OnInit {
 
     base64Images = FooterImages
 
     /**
-     * The name to show on the footer as the microsite.
+     * The name to show on the header/footer as the microsite.
     */
     @Input() serviceName = 'Digital Service Name (microsite)'
 
@@ -21,7 +20,7 @@ export class GoAFooterComponent implements OnInit {
      * The home page URL of the microsite.
      */
     @Input() microServiceHomeLink: String = 'https://www.alberta.ca/index.aspx'
-
+    
     constructor() {}
     ngOnInit() {}
 }

@@ -3,17 +3,17 @@ import { FooterImages } from '../microsite-logo/inlineImages'
 
 
 @Component({
-    selector: 'goa-footer',
-    templateUrl: './footer.component.html',
-    styleUrls: ['./footer.component.scss'],
+    selector: 'goa-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
 })
 
-export class GoAFooterComponent implements OnInit {
+export class GoAHeaderComponent implements OnInit {
 
     base64Images = FooterImages
 
     /**
-     * The name to show on the footer as the microsite.
+     * The name to show on the header as the microsite.
     */
     @Input() serviceName = 'Digital Service Name (microsite)'
 
