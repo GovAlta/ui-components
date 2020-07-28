@@ -11,7 +11,6 @@ import { getProjectRoot, modifyChalkOutput } from '../../utils';
 import {
   modifyCachePaths,
   modifyEntryPoint,
-  modifyIndexHtmlPath,
   modifyTsConfigPaths,
   modifyTypescriptAliases,
 } from '../../webpack';
@@ -33,7 +32,6 @@ export function runBuilder(
 
     const inlineOptions = {
       chainWebpack: (config) => {
-        modifyIndexHtmlPath(config, options, context);
         modifyEntryPoint(config, options, context);
         modifyTsConfigPaths(config, options, context);
         modifyCachePaths(config, context);

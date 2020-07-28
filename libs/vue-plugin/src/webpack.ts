@@ -2,12 +2,6 @@ import { BuilderContext } from '@angular-devkit/architect';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { LibBuilderSchema } from './builders/lib/schema';
 
-export function modifyIndexHtmlPath(
-  config,
-  options: LibBuilderSchema,
-  context: BuilderContext
-): void {}
-
 export function modifyEntryPoint(
   config,
   options: LibBuilderSchema,

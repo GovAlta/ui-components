@@ -300,6 +300,32 @@
           }
         }
       }
+    },
+    "vue-components": {
+      "projectType": "library",
+      "root": "libs/vue-components",
+      "sourceRoot": "libs/vue-components/src",
+      "architect": {
+        "build": {
+          "builder": "./dist/libs/vue-plugin:lib",
+          "options": {
+            "dest": "dist/libs/vue-components",
+            "main": "libs/vue-components/src/index.ts",
+            "tsConfig": "libs/vue-components/tsconfig.app.json"
+          },
+          "configurations": {
+            "production": {
+              "mode": "production",
+              "filenameHashing": true,
+              "productionSourceMap": true,
+              "css": {
+                "extract": true,
+                "sourceMap": false
+              }
+            }
+          }
+        }
+      }
     }
   },
   "cli": {
