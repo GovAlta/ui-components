@@ -38,7 +38,7 @@ footer.goa-footer {
   .top-bar {
     font-size: 12px;
     background-color: #f1f1f1;
-    img.image {
+    .image {
       display: inline-block;
       vertical-align: middle;
       line-height: normal;
@@ -46,7 +46,13 @@ footer.goa-footer {
       width: 16px;
     }
 
-    span.site-text {
+    .site-text {
+      padding-left: 4px;
+
+      @include tablet {
+        padding-left: 4px;
+      }
+
       @include mobile {
         padding-left: 24px;
       }
@@ -61,7 +67,7 @@ footer.goa-footer {
     height: 66px;
     margin-top: 8px;
 
-    img.image-desktop-tablet {
+    .image-desktop-tablet {
       width: 150px;
       height: 43px;
       display: inline-block;
@@ -73,7 +79,7 @@ footer.goa-footer {
       }
     }
 
-    img.image-mobile {
+    .image-mobile {
       @include tablet {
         display: none;
       }
@@ -91,7 +97,7 @@ footer.goa-footer {
       }
     }
 
-    span.name {
+    .name {
       text-decoration: none;
       margin-left: 24px;
       font-size: 18px;
@@ -101,7 +107,7 @@ footer.goa-footer {
     }
   }
 
-  a.web-link {
+  .web-link {
     color: #0070c4;
     text-align: left;
   }

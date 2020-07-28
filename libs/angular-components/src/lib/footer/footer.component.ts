@@ -13,10 +13,15 @@ export class GoAFooterComponent implements OnInit {
     base64Images = FooterImages
 
     /**
-     * The serviceName might need to be hard coded in the HTML.
+     * The name to show on the header/footer as the microsite.
     */
-    @Input() serviceName = "Digital Service Name (microsite)"
-    @Input() microServiceHomeLink: String = "https://www.alberta.ca/index.aspx"
+    @Input() serviceName = 'Digital Service Name (microsite)'
+
+    /**
+     * The home page URL of the microsite.
+     */
+    @Input() microServiceHomeLink: String = 'https://www.alberta.ca/index.aspx'
+    
     constructor() {}
     ngOnInit() {}
 }

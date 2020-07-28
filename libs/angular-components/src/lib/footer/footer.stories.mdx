@@ -5,7 +5,7 @@ import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
-<Meta title="Design System/Basic Elements/Footer/Angular/Micro Site" decorators={[
+<Meta title="Design System/Basic Elements/Footer/Angular" decorators={[
         withKnobs,
         moduleMetadata({ declarations: [GoAFooterComponent] })
     ]
@@ -14,7 +14,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 # Footer
 
 <Preview>
-  <Story name="Desktop" height={100} parameters={
+  <Story name="Micro Site Header" height={100} parameters={
     {
       design: {
         specUrl: 'https://xd.adobe.com/view/18ccfd61-7e54-450e-a05d-cabfff452d6e-4d9f/screen/bbcbebfa-96a4-4625-931e-54b7b7e60b4e/specs',
@@ -23,7 +23,22 @@ import { text, withKnobs } from '@storybook/addon-knobs';
     }
   }>
     {{
-        template: `<goa-footer></goa-footer>`
+        component: GoAFooterComponent,
+        props: {
+          serviceName: text('serviceName', 'Digital Service Name (microsite)')
+        }
     }}
   </Story>
 </Preview>
+
+## Overview
+
+A header or footer to use for a Government of Alberta microsite.  Contains a customizable service name and home link for the microsite.
+
+## Properties
+
+| Name     | Type | Description | Default |
+|----------|:----:|:-----------:|--------:|
+| serviceName    | string | The name of the site.  Will appear next to the Government of Alberta logo. | 'Digital Service Name (microsite)' |
+| microServiceHomeLink | string | URL to use as the link for the click on the footer | 'https://www.alberta.ca/index.aspx' |
+
