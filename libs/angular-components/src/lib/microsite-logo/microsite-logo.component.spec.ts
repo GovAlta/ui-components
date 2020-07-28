@@ -10,7 +10,7 @@ describe('GoA Microsite Logo', () => {
       componentProperties: { serviceName: serviceName, microServiceHomeLink: microSiteLink }
     });
 
-    expect((<HTMLAnchorElement>screen.getByTestId('goa-microsite-anchor')).href).toEqual(microSiteLink);
+    expect((<HTMLAnchorElement>screen.getByRole('link', { name: microSiteLink })).href).toEqual(microSiteLink);
     expect(screen.getByText(serviceName))
   });
 

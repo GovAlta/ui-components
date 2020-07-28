@@ -1,4 +1,4 @@
-@import '../responsive-breakpoints.scss';
+@use '../responsive-breakpoints.scss' as *;
 
 .goa-microsite-logo {
    display: inline-block;
