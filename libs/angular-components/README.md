@@ -1,7 +1,24 @@
 # angular-components
 
-This library was generated with [Nx](https://nx.dev).
+This library contains angular components from the Government of Alberta.
 
-## Running unit tests
+## Installation
 
-Run `nx test angular-components` to execute the unit tests.
+> npm install @abgov/angular-components
+
+## Documentation
+
+Documentation is being worked on and will be provided soon.
+
+## Usage
+```
+import { AngularComponentsModule } from '@abgov/angular-components'
+...
+@NgModule({
+  ...
+  imports: [
+    AngularComponentsModule
+  ],
+  ...
+})
+``` 

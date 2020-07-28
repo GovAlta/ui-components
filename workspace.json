@@ -33,7 +33,7 @@
             "tsConfig": "libs/core-css/tsconfig.lib.json",
             "packageJson": "libs/core-css/package.json",
             "main": "libs/core-css/src/index.ts",
-            "assets": ["libs/core-css/*.md"]
+            "assets": ["libs/core-css/*.md", "libs/core-css/src/lib/*.css", "libs/core-css/src/lib/assets/*"]
           }
         },
         "storybook": {
