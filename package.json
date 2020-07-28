@@ -31,14 +31,16 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "build-angular-storybook": "nx run angular-components:build-storybook",
-    "build-core-storybook": "nx run core-css:build-storybook --outpud-dir"
+    "build-core-storybook": "nx run core-css:build-storybook --outpud-dir",
+    "postinstall": "node libs/vue-plugin/patch-nx-dep-graph.js"
   },
   "private": true,
   "dependencies": {
     "@angular/common": "^10.0.3",
     "@angular/core": "^10.0.3",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.10",
@@ -104,6 +106,11 @@
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
     "typescript": "~3.8.3",
-    "zone.js": "^0.10.3"
+    "zone.js": "^0.10.3",
+    "@vue/cli-plugin-typescript": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "@vue/eslint-config-typescript": "^5.0.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
   }
 }
