@@ -17,6 +17,10 @@ header.goa-header {
       line-height: normal;
       height: 16px;
       width: 16px;
+
+      @include mobile {
+        display: none;
+      }
     }
 
     .site-text {
@@ -27,7 +31,7 @@ header.goa-header {
       }
 
       @include mobile {
-        padding-left: 24px;
+        padding-left: 0px;
       }
     }
   }
