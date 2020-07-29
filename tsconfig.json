@@ -18,7 +18,8 @@
     "paths": {
       "@abgov/core-css": ["libs/core-css/src/index.ts"],
       "@abgov/angular-components": ["libs/angular-components/src/index.ts"],
-      "@abgov/storybook-common": ["libs/storybook-common/src/index.ts"]
+      "@abgov/storybook-common": ["libs/storybook-common/src/index.ts"],
+      "@abgov/vue-plugin": ["libs/vue-plugin/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
