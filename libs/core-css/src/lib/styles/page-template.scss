@@ -1,0 +1,16 @@
+@use 'responsive-breakpoints.scss' as *;
+
+@mixin page-margins {
+    margin-left: 72px;
+    margin-right: 72px;
+  
+    @include tablet {
+      margin-left: 24px;
+      margin-right: 24px;
+    }
+  
+    @include mobile {
+      margin-left: 24px;
+      margin-right: 24px;
+    }
+}

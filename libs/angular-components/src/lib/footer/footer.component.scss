@@ -1,18 +1,8 @@
-@use '../responsive-breakpoints.scss' as *;
+@use '../../../../core-css/src/lib/styles/responsive-breakpoints.scss' as *;
+@use '../../../../core-css/src/lib/styles/page-template.scss';
 
 footer.goa-footer {
-  padding-left: 72px;
-  padding-right: 72px;
-
-  @include tablet {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  @include mobile {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
+  @include page-template.page-margins;
 
   .top-bar {
     font-size: 12px;
