@@ -324,6 +324,25 @@
               }
             }
           }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/vue-components/tsconfig.app.json",
+              "libs/vue-components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/vue-components/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/vue-components/jest.config.js",
+            "tsConfig": "libs/vue-components/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
         }
       }
     }

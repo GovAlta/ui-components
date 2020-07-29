@@ -281,11 +281,11 @@ export default function (options: VuePluginSchematicSchema): Rule {
       tags: normalizedOptions.parsedTags,
     }),
     addFiles(normalizedOptions),
-    // addEsLint(normalizedOptions),
-    // options.unitTestRunner === 'jest' ? addJest(normalizedOptions) : noop(),
-    // options.e2eTestRunner === 'cypress'
-    //   ? addCypress(normalizedOptions)
-    //   : noop(),
+    addEsLint(normalizedOptions),
+    options.unitTestRunner === 'jest' ? addJest(normalizedOptions) : noop(),
+    options.e2eTestRunner === 'cypress'
+      ? addCypress(normalizedOptions)
+      : noop(),
     addPostInstall(),
     addDepsToPackageJson(
       {

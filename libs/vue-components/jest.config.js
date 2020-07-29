@@ -1,9 +1,13 @@
 module.exports = {
-  name: 'vue',
+  name: 'vue-components',
   preset: '../../jest.config.js',
   transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest',
+    '^.+\\.vue$': 'vue-jest',
+    '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
+      'jest-transform-stub',
+    '^.+\\.tsx?$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
-  coverageDirectory: '../../coverage/libs/vue',
+  moduleFileExtensions: ['ts', 'tsx', 'vue', 'js', 'json'],
+  coverageDirectory: '../../coverage/libs/vue-components',
+  snapshotSerializers: ['jest-serializer-vue'],
 };

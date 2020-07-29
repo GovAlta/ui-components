@@ -32,7 +32,8 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "build-angular-storybook": "nx run angular-components:build-storybook",
-    "build-core-storybook": "nx run core-css:build-storybook --outpud-dir"
+    "build-core-storybook": "nx run core-css:build-storybook --outpud-dir",
+    "postinstall": "node node_modules/@nx-plus/vue/patch-nx-dep-graph.js"
   },
   "private": true,
   "dependencies": {
@@ -113,6 +114,10 @@
     "tslint": "~6.0.0",
     "typescript": "~3.8.3",
     "vue-template-compiler": "^2.6.11",
-    "zone.js": "^0.10.3"
+    "zone.js": "^0.10.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "jest-serializer-vue": "^2.0.2",
+    "jest-transform-stub": "^2.0.0",
+    "vue-jest": "^3.0.5"
   }
 }

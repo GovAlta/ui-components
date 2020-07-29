@@ -4,7 +4,7 @@
     "jsx": "preserve",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["webpack-env", "node"]
+    "types": ["webpack-env", "node", "jest"]
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.vue"]
 }
