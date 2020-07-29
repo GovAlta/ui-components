@@ -1,4 +1,4 @@
-@use 'responsive-breakpoints.scss' as *;
+@import 'responsive-breakpoints.scss';
 
 @mixin page-margins {
     padding-left: 72px;

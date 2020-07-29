@@ -1,8 +1,8 @@
-@use '../../../../core-css/src/lib/styles/responsive-breakpoints.scss' as *;
-@use '../../../../core-css/src/lib/styles/page-template.scss';
+@import '../../../../core-css/src/lib/styles/responsive-breakpoints.scss';
+@import '../../../../core-css/src/lib/styles/page-template.scss';
 
 header.goa-header {
-  @include page-template.page-margins;
+  @include page-margins;
   
   .top-bar {
     font-size: 12px;
