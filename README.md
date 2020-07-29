@@ -21,20 +21,20 @@ core-css-e2e
 
 ### Building
 
-To build all libraries and applications run `npm build:all`.
-To build only changed libraries and applications run `npm run affected:build --base=branchtocompareagainst`.
-To build the storybooks run `npm run build:angular-storybook` or `npm run build:core-storybook`.
+To build all libraries and applications run `npm build:all`.  
+To build only changed libraries and applications run `npm run affected:build --base=branchtocompareagainst`.  
+To build the storybooks run `npm run build:angular-storybook` or `npm run build:core-storybook`.  
 
 ### Running Locally
 
-There are currently no applications.
+There are currently no applications.  
 To run a storybook run `npm run nx run angular-components:storybook` or `npm run nx run core-css:storybook`.
 
 ### Running Tests
 
-To run all of the available unit tests run `npm run test:all`.
-To run only the current affected tests run `npm run affected:test --base=branchtocompareagainst`.
-To run e2e tests run `npm run affected:e2e --base=branchtocompareagainst`.
+To run all of the available unit tests run `npm run test:all`.  
+To run only the current affected tests run `npm run affected:test --base=branchtocompareagainst`.  
+To run e2e tests run `npm run affected:e2e --base=branchtocompareagainst`.  
 
 ### NodeJS version
 
