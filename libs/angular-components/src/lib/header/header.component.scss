@@ -25,6 +25,7 @@ header.goa-header {
 
     .site-text {
       padding-left: 4px;
+      white-space: nowrap;
 
       @include tablet {
         padding-left: 4px;
