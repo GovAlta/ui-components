@@ -1,16 +1,34 @@
 @import 'responsive-breakpoints.scss';
 
+$desktop-margin: 72px;
+$tablet-margin: 24px;
+
 @mixin page-margins {
-    margin-left: 72px;
-    margin-right: 72px;
+    margin-left: $desktop-margin;
+    margin-right: $desktop-margin;
   
     @include tablet {
-      margin-left: 24px;
-      margin-right: 24px;
+      margin-left: $tablet-margin;
+      margin-right: $tablet-margin;
     }
   
     @include mobile {
-      margin-left: 24px;
-      margin-right: 24px;
+      margin-left: $tablet-margin;
+      margin-right: $tablet-margin;
     }
+}
+
+@mixin page-padding {
+  padding-left: $desktop-margin;
+  padding-right: $desktop-margin;
+
+  @include tablet {
+    padding-left: $tablet-margin;
+    padding-right: $tablet-margin;
+  }
+
+  @include mobile {
+    padding-left: $tablet-margin;
+    padding-right: $tablet-margin;
+  }
 }

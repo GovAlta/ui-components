@@ -2,9 +2,12 @@
 @import '../../../../core-css/src/lib/styles/page-template.scss';
 
 footer.goa-footer {
-  @include page-margins;
+  .microsite-logo {
+    @include page-margins;
+  }
 
   .top-bar {
+    @include page-padding;   
     font-size: 12px;
     background-color: #f1f1f1;
 
