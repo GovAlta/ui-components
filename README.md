@@ -2,6 +2,32 @@
 
 The project contains the Government of Alberta UI components. The output packages support multiple model frontend frameworks, such as ReactJS, AngularJS, etc.
 
+### Contribution Guidelines
+
+1. Create a branch for your work.
+2. Create your component.  
+Required elements:  
+- Unit Tests.  
+Use your judgement, but aim to test each configurable input/output of the component.  We have been using testing-library to provide a consistent test authoring experience across all library types, but if it is not sufficient feel free to use a different one.
+- Storybook documentation. 
+Add a stories.mdx file to add the new component to the storybook.  Make sure to include documentation for the inputs/outputs of the component; documentation might vary depending on library type (Angular, Vue, React...).
+  
+Coding guidelines:  
+Follow the best practices of the library type of the component (Angular, Vue, React...).
+- Use SCSS
+- Use mixins where there will be common SCSS.  If it is common to all libraries put in core-css library under src/lib/styles.
+- JsDoc?  
+
+3. Create a merge request to develop.  
+Reviewer will:  
+- Determine if component is suitable for common library  
+- Perform design review
+- Perform code review and merge.
+
+4. Complete pipeline process.
+- Test
+- Promote to production and publish npm packages.
+
 ### Library and Applications
 
 core-css
