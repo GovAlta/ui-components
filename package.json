@@ -6,11 +6,11 @@
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
-    "build-all": "nx run-many --target=build --all",
+    "build:all": "nx run-many --target=build --all",
     "build:angular-components": "npm run build angular-components -- --prod",
     "build:core-css": "npm run build core-css -- --prod",
     "test": "nx test",
-    "test-all": "nx run-many --target=test --all",
+    "test:all": "nx run-many --target=test --all",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
     "affected:apps": "nx affected:apps",
@@ -30,8 +30,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "build-angular-storybook": "nx run angular-components:build-storybook",
-    "build-core-storybook": "nx run core-css:build-storybook --outpud-dir"
+    "build:angular-storybook": "nx run angular-components:build-storybook",
+    "build:core-storybook": "nx run core-css:build-storybook --outpud-dir"
   },
   "private": true,
   "dependencies": {

@@ -34,8 +34,8 @@ pipeline {
     } 
     stage('Build') {
       steps {
-        sh 'npm run build-angular-storybook' //builds to /dist/storybook/angular-components
-        sh 'npm run build-core-storybook' //builds to /dist/storybook/core-css
+        sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
+        sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
       }
     }
     stage('Deploy') {
