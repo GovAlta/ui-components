@@ -1,5 +1,5 @@
-@import '../../../../core-css/src/lib/styles/responsive-breakpoints.scss';
-@import '../../../../core-css/src/lib/styles/page-template.scss';
+@import "../../../../core-css/src/lib/styles/responsive-breakpoints.scss";
+@import "../../../../core-css/src/lib/styles/page-template.scss";
 
 footer.goa-footer {
   @include page-margins;
@@ -14,10 +14,15 @@ footer.goa-footer {
       line-height: normal;
       height: 16px;
       width: 16px;
+
+      @include mobile {
+        display: none;
+      }
     }
 
     .site-text {
       padding-left: 4px;
+      white-space: nowrap;
 
       @include tablet {
         padding-left: 4px;
