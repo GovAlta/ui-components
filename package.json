@@ -35,8 +35,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "build-angular-storybook": "nx run angular-components:build-storybook",
-    "build-core-storybook": "nx run core-css:build-storybook --outpud-dir",
-    "postinstall": "node node_modules/@nx-plus/vue/patch-nx-dep-graph.js"
+    "build-core-storybook": "nx run core-css:build-storybook --outpud-dir"
   },
   "private": true,
   "dependencies": {
