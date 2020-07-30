@@ -5,8 +5,8 @@ We encourage contributions to the UI Component Library, but, in order to maintai
 
 ### Bug-fixes
 
-[Contributing bug fixes](.gitlab/contributing/contributing_bugfix.md)
+[Contributing bug fixes](.gitlab/contribution_guidelines/contributing_bugfix.md)
 
 ### Features
 
-[Contributing features](.gitlab/contributing/contributing_feature.md)
+[Contributing features](.gitlab/contribution_guidelines/contributing_feature.md)
