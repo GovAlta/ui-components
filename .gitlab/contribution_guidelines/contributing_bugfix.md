@@ -18,4 +18,4 @@ The ui-components team will pull the bug into a future sprint and review and int
 
 5. Review the feature.  
 
-Once the story has been pulled and implemented, the bug request will be closed.  Review the changes and reopen the issue if needed.  
+Once the story has been pulled and implemented, the bug request will be closed.  Bug fixes will be available in the @latest label in the NPM package.  Review the changes and reopen the issue if needed.  
