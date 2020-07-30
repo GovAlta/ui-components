@@ -25,4 +25,4 @@ Endeavour to follow the [coding standards](coding_standards.md).
 
 4. Review the feature.  
 
-Once the story has been pulled and implemented, the feature request will be closed.  Review the changes and reopen the issue if needed.  
+Once the story has been pulled and implemented, the feature request will be closed.  The feature will be available in the @next label in the NPM package.  Review the changes and reopen the issue if needed.  
