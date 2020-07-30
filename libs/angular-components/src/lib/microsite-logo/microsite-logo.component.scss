@@ -9,8 +9,7 @@
 
   .logo {
     height: 66px;
-    margin-top: 8px;
-
+    white-space: nowrap;
     .image-desktop-tablet {
       width: 150px;
       height: 43px;
@@ -43,7 +42,7 @@
 
     .name {
       text-decoration: none;
-      margin-left: 4px;
+      margin-left: 24px;
       font-size: 18px;
       display: inline-block;
       vertical-align: middle;
