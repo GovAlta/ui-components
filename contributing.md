@@ -1,7 +1,7 @@
 ## Bug-fixes
 
-[Contributing bugfixes](.gitlab/contributing/contributing_bugfix.md)
+[Contributing bugfixes](./.gitlab/contribution_guidelines/contributing_bugfix.md)
 
 ## Features
 
-[Contributing features](.gitlab/contributing/contributing_feature.md)
+[Contributing features](./.gitlab/contribution_guidelines/contributing_feature.md)
