@@ -15,11 +15,9 @@ header.goa-header {
 
     .image {
       display: inline-block;
-      vertical-align: middle;
-      line-height: normal;
       height: 16px;
       width: 16px;
-      padding-bottom: 2px;
+      margin-top: 3px;
 
       @include mobile {
         display: none;
@@ -29,6 +27,7 @@ header.goa-header {
     .site-text {
       padding-left: 4px;
       white-space: nowrap;
+      vertical-align: 4px;
 
       @include tablet {
         padding-left: 4px;
@@ -41,6 +40,7 @@ header.goa-header {
   }
 
   .web-link {
+    vertical-align: 4px;
     color: #0070c4;
     text-align: left;
   }
