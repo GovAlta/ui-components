@@ -10,6 +10,8 @@ header.goa-header {
     @include page-padding;   
     font-size: 12px;
     background-color: #f1f1f1;
+    height: 22px;
+    line-height: 22px;
 
     .image {
       display: inline-block;
@@ -17,6 +19,7 @@ header.goa-header {
       line-height: normal;
       height: 16px;
       width: 16px;
+      padding-bottom: 2px;
 
       @include mobile {
         display: none;
