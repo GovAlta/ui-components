@@ -12,7 +12,7 @@
 ```
 /src  
 --/libs  
-  --/user
+  --/interfaces
     --/user.ts
 ```
 
@@ -34,6 +34,11 @@ Use mixins to encourage re-use and make style updates less error prone.  The eve
     Create a mixin in core-css project under the component of the same name.
     - _Is my style common for many components across many libraries (for example a colour pallete)?_  
     Create a mixin in core-css project under the styles folder.
+
+
+## Unit Testing
+
+Try to achieve unit test coverage for the configuration interface for a component.  We encourage the use of [testing-library](https://testing-library.com/) to test components to provide a uniform test authoring experience across all library types.  However, if testing-library does not meet the needs for a test being written feel free to use a library of your choice.
 
 ## Documentation
 

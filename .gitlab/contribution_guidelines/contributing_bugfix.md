@@ -14,9 +14,9 @@
 
     Before starting take the time to review the [coding guidelines](coding_standards.md).
 
-4. ___Mark the bug as fixed.___  
+4. ___Notify that the bug has been fixed.___  
 
-    The components team will pull the bug into a future sprint and review and integrate the changes.    
+    Use a comment to notify the components team that the bug is ready to be pulled.  The components team will pull the bug into a future sprint and review and integrate the changes.    
 
 5. ___Review the feature.___  
 
