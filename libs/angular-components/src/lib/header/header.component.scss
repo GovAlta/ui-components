@@ -17,17 +17,22 @@ header.goa-header {
       line-height: normal;
       height: 16px;
       width: 16px;
+
+      @include mobile {
+        display: none;
+      }
     }
 
     .site-text {
       padding-left: 4px;
+      white-space: nowrap;
 
       @include tablet {
         padding-left: 4px;
       }
 
       @include mobile {
-        padding-left: 24px;
+        padding-left: 0px;
       }
     }
   }
