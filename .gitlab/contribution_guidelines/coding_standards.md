@@ -8,7 +8,7 @@
     --/my-component.scss  
     --/my-component.html  
 ```
-- If the elements are common across components in a particular library but not common across multiple libraries.  For example, an interface defining a user could go in.
+- If the elements are common across components in a particular library but not common across multiple libraries find a common spot within the library.  For example, an interface defining a user could go in.
 ```
 /src  
 --/libs  
