@@ -5,7 +5,7 @@ We encourage contributions to the UI Component Library, but, in order to maintai
 
 ### The Process
 
-Here is an overview of our contribution process.  Written instructions for bugs and features can be found linked below.
+Here is an overview of our contribution process.  Specific instructions for bugs and features can be found linked below.
 ```mermaid
 graph TD
 subgraph Content Author
