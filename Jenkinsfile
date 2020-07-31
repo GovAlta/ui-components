@@ -22,7 +22,7 @@ pipeline {
         
       }
     }
-    stage('Test and Lint') {
+    stage('Build') {
       parallel {
         stage('Test'){
           steps {
@@ -51,8 +51,8 @@ pipeline {
         dir('dist/storybook') {
           sh 'oc start-build ui-components --from-dir . --follow'
         }
-        sh 'npm run publish:angular-components'
-        sh 'npm run publish:core-css'
+        sh 'npm run publish:angular-components -- --dry-run'
+        sh 'npm run publish:core-css -- --dry-run'
       }
     }
   }
