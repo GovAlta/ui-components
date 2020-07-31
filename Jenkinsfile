@@ -54,6 +54,7 @@ pipeline {
   }
 }
 
+
 // Leaving this in to refer to it should we want to use OpenShift specific
 // commands as this allows to use OpenShift name refernces and use of variables
 // for subsequent steps.
