@@ -35,7 +35,7 @@ Use mixins to encourage re-use and make style updates less error prone.  When cr
 
 ## Documentation
 
-- Document your component using JsDocs.
+- Document your component interface using JsDocs.
 
 - If a new library is added, please update the readme.  
 
