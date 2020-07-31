@@ -11,7 +11,7 @@ graph TD
 subgraph Content Author
 	1[Create issue request] --> 2[Implement in branch]
 	2 --> 3[Comment on issue that branch is ready to notify Platform team]
-  4[Review Issue]
+  4[Review Issue, re-open if necessary]
 end
 subgraph Platform Team
 3 --> |*Content Author may be brought onto Platform team for sprint*| A
