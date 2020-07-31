@@ -20,7 +20,7 @@ If there are elements which will be common across multiple libraries please cons
 
 ## CSS Guidelines
   
-We are using [SCSS](https://sass-lang.com/] to do CSS compilation.  
+We are using [SCSS](https://sass-lang.com/) to do CSS compilation.  
 
 - __Use Mixins__  
 Use mixins to encourage re-use and make style updates less error prone.  When creating a style consider the following: 
