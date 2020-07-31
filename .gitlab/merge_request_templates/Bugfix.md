@@ -17,6 +17,6 @@
 
 ## Reviewer Checklist ##
 
-- [ ] TBD
+- [ ] [Coding Standards](../contribution_guidelines/coding_standards.md) followed.
 
 When review is satisfactory reviewer will merge the changes.
