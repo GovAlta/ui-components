@@ -39,7 +39,7 @@ pipeline {
             sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
             sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
             sh 'npm run build:angular-components'
-            sh 'npm run build:core-components'
+            sh 'npm run build:core-css'
           }
         }
       }
@@ -52,7 +52,7 @@ pipeline {
           sh 'oc start-build ui-components --from-dir . --follow'
         }
         sh 'npm run publish:angular-components'
-        sh 'npm run publish:core-components'
+        sh 'npm run publish:core-css'
       }
     }
   }
