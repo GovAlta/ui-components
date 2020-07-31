@@ -47,8 +47,9 @@ pipeline {
         //copy the nginx config to binary buld location
         sh 'cp nginx.conf dist/storybook'   
         dir('dist/storybook') {
-          sh 'npm run publish:angular-components'
+          sh 'oc start-build ui-components --from-dir . --follow'
         }
+        sh 'npm run publish:angular-components'
       }
     }
   }
