@@ -4,8 +4,7 @@
 
     https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues  
       
-    Take a second to search the existing components and feature requests to see if this feature is already implemented or requested, use the label _Feature_ to search.  Add a feature request, use the label _Feature_.   
-    Once the feature request is created someone on the component team will create a backlog item.  
+    Take a second to search the existing components and feature requests to see if this feature is already implemented or requested, use the label _feature_ to search.  Add a feature request, use the label _Feature_.  Once the feature request is created someone on the component team will create a backlog item.  
 
 2. ___Create a branch for your work.___  
 
