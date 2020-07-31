@@ -42,15 +42,12 @@ pipeline {
         }
       }
     }
-    stage('Deploy') {
-      input {
-        message 'Deploy?'
-      }
+    stage('Deploy Test') {
       steps {
         //copy the nginx config to binary buld location
         sh 'cp /tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/nginx.conf /tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/dist/storybook'   
         dir('/tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/dist/storybook') {
-          sh 'oc start-build ui-components --from-dir . --follow'
+          sh 'npm run publish:angular-components'
         }
       }
     }
