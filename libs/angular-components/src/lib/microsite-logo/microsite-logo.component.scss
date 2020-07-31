@@ -9,14 +9,11 @@
 
   .logo {
     height: 66px;
-    margin-top: 8px;
-
+    white-space: nowrap;
     .image-desktop-tablet {
       width: 150px;
-      height: 43px;
-      display: inline-block;
-      vertical-align: middle;
-      line-height: normal;
+      height: 42px;
+      margin-top: 12px;
 
       @include mobile {
         display: none;
@@ -36,17 +33,18 @@
         width: 34px;
         height: 34px;
         display: inline-block;
-        vertical-align: middle;
-        line-height: normal;
+        padding-top: 16px;
+
       }
     }
 
     .name {
       text-decoration: none;
-      margin-left: 4px;
-      font-size: 18px;
+      margin-left: 24px;
+      height: 23px;
+      font-size: 16px;
       display: inline-block;
-      vertical-align: middle;
+      vertical-align: 14.5px;
       line-height: normal;
     }
   }

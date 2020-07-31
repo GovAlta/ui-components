@@ -1,22 +1,25 @@
-@import '../../../../core-css/src/lib/styles/responsive-breakpoints.scss';
-@import '../../../../core-css/src/lib/styles/page-template.scss';
+@import "../../../../core-css/src/lib/styles/responsive-breakpoints.scss";
+@import "../../../../core-css/src/lib/styles/page-template.scss";
 
 header.goa-header {
+  border-bottom: 1px solid #dcdcdc;
+
   .microsite-logo {
-    @include page-margins;   
+    @include page-margins;
   }
 
-  .top-bar {     
-    @include page-padding;   
+  .top-bar {
+    @include page-padding;
     font-size: 12px;
     background-color: #f1f1f1;
+    height: 22px;
+    line-height: 22px;
 
     .image {
       display: inline-block;
-      vertical-align: middle;
-      line-height: normal;
       height: 16px;
       width: 16px;
+      margin-top: 3px;
 
       @include mobile {
         display: none;
@@ -26,6 +29,7 @@ header.goa-header {
     .site-text {
       padding-left: 4px;
       white-space: nowrap;
+      vertical-align: 4px;
 
       @include tablet {
         padding-left: 4px;
@@ -38,6 +42,7 @@ header.goa-header {
   }
 
   .web-link {
+    vertical-align: 4px;
     color: #0070c4;
     text-align: left;
   }

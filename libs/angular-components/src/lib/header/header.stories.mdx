@@ -6,13 +6,13 @@ import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
-<Meta title="Design System/Basic Elements/Header and Footer" decorators={[
+<Meta title="Design System/Basic Elements/Header" decorators={[
         withKnobs,
         moduleMetadata({ declarations: [GoAHeaderComponent, GoAMicrositeLogoComponent] })
     ]
 } />
 
-# Footer
+# Header
 
 <Preview>
   <Story name="Micro Site Header" height={100} parameters={
@@ -26,7 +26,8 @@ import { text, withKnobs } from '@storybook/addon-knobs';
     {{
         component: GoAHeaderComponent,
         props: {
-          serviceName: text('serviceName', 'Digital Service Name (microsite)')
+          serviceName: text('serviceName', 'Digital Service Name (microsite)'),
+          microServiceHomeLink: text('microServiceHomeLink', 'https://www.alberta.ca/index.aspx')
         }
     }}
   </Story>
