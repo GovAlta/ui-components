@@ -22,9 +22,9 @@ pipeline {
         
       }
     }
-    stage('Build and test') {
+    stage('Test and Lint') {
       parallel {
-        stage('Build'){
+        stage('Test'){
           steps {
             sh 'nx affected --target=test --base=origin/dev --parallel'
           }
@@ -34,12 +34,12 @@ pipeline {
             sh 'nx affected --target=lint --base=origin/dev --parallel'
           }
         }
-        stage('Build'){
-          steps {
-            sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
-            sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
-          }
-        }
+      }
+    }
+    stage('Build'){
+      steps {
+        sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
+        sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
       }
     }
     stage('Deploy Test') {
