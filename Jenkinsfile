@@ -22,9 +22,9 @@ pipeline {
         
       }
     }
-    stage('Build and test') {
+    stage('Build') {
       parallel {
-        stage('Build'){
+        stage('Test'){
           steps {
             sh 'nx affected --target=test --base=origin/dev --parallel'
           }
@@ -38,20 +38,21 @@ pipeline {
           steps {
             sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
             sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
+            sh 'npm run build:angular-components'
+            sh 'npm run build:core-css'
           }
         }
       }
     }
-    stage('Deploy') {
-      input {
-        message 'Deploy?'
-      }
+    stage('Deploy Test') {
       steps {
         //copy the nginx config to binary buld location
-        sh 'cp /tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/nginx.conf /tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/dist/storybook'   
-        dir('/tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/dist/storybook') {
+        sh 'cp nginx.conf dist/storybook'   
+        dir('dist/storybook') {
           sh 'oc start-build ui-components --from-dir . --follow'
         }
+        sh 'npm run publish:angular-components -- --dry-run'
+        sh 'npm run publish:core-css -- --dry-run'
       }
     }
   }
