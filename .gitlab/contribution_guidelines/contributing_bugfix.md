@@ -16,7 +16,7 @@
 
 4. ___Mark the bug as fixed.___  
 
-    The ui-components team will pull the bug into a future sprint and review and integrate the changes.    
+    The components team will pull the bug into a future sprint and review and integrate the changes.    
 
 5. ___Review the feature.___  
 
