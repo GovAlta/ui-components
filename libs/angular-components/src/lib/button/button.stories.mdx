@@ -3,7 +3,7 @@ import { GoAButtonComponent } from './button.component';
 
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { text, select, withKnobs } from '@storybook/addon-knobs';
 
 <Meta title="Design System/Basic Elements/Buttons"
   component={GoAButtonComponent}
@@ -30,7 +30,7 @@ A hierarchy of actions provided by buttons.
         component: GoAButtonComponent,
         props: {
             title: text('title', 'Secondary'),
-            buttonType: text('buttonType', 'secondary')
+            buttonType: select('buttonType', { primary: 'primary', secondary: 'secondary', tertiary: 'tertiary' }, 'secondary')
         }
     }}
   </Story>
