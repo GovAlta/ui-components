@@ -12,7 +12,7 @@
 ```
 /src  
 --/libs  
-  --/user
+  --/interfaces
     --/user.ts
 ```
 
