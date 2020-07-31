@@ -5,11 +5,18 @@
 
 **2. Make sure that you've checked the boxes below before you submit MR:**
 
-- [ ] I have read and followed [contribution guidelines](../../contributing.md)
+- [ ] I have read and followed the [contribution guidelines](../../contributing.md)
 - [ ] I have run a build locally.
 - [ ] I have ran unit tests locally.
-- [ ] no conflicts.
+- [ ] I have tested the functionality.
 
-**3. Which issue this PR fixes (optional)**
+**3. Which issue and JIRA item does this PR fix (optional)**
 
 
+  
+
+## Reviewer Checklist ##
+
+- [ ] Appropriate unit test coverage
+
+When review is satisfactory reviewer will merge the changes.
