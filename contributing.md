@@ -16,7 +16,7 @@ end
 subgraph Platform Team
 3 --> |*Content Author may be brought onto Platform team for sprint*| A
 A[Create JIRA item and prioritize] --> B[Pull into sprint]
-B --> C[Make changes and complete item]
+B --> C[Make changes, complete item, merge branch]
 C --> |is feature?| D[Publish to NPM next label]
 C --> |is bug?| E[Publish to NPM latest label]
 E --> F[Close issue]
