@@ -1,6 +1,6 @@
 ## Project/Component organization
   
-Follow the pattern set by existing components.  Each library should have a folder for each component which contains all unique elements required by the component.  
+- Follow the pattern set by existing components.  Each library should have a folder for each component which contains all unique elements required by the component.  
 ```
 /src  
 --/libs  
@@ -9,14 +9,14 @@ Follow the pattern set by existing components.  Each library should have a folde
       --/my-component.scss  
       --/my-component.html  
 ```
-If the elements are common across components in a particular library but not common across multiple libraries...
+- If the elements are common across components in a particular library but not common across multiple libraries...
 ```
 /src  
 --/libs  
   --/ 
 ```
 
-If there are elements which will be common across multiple libraries please consider pulling those out into a library of their own or adding to an appropriate existing common library.  
+- If there are elements which will be common across multiple libraries please consider pulling those out into a library of their own or adding to an appropriate existing common library.  
 
 ## CSS Guidelines
   
@@ -35,8 +35,8 @@ Use mixins to encourage re-use and make style updates less error prone.  When cr
 
 ## Documentation
 
-Document your component using JsDocs.
+- Document your component using JsDocs.
 
-If a new library is added, please update the readme.  
+- If a new library is added, please update the readme.  
 
 
