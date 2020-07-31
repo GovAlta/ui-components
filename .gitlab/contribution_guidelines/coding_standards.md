@@ -1,4 +1,4 @@
-## Component organization
+## Component Organization
   
 - Follow the pattern set by existing components.  Each library should have a folder for each component which contains all unique elements required by the component.  
 ```
