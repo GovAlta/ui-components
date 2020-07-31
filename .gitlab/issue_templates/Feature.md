@@ -21,3 +21,5 @@ If at all possible [contribute yourself](../../contributing.md)!
 -->
 
 (link to feature branch)
+
+/label ~feature
