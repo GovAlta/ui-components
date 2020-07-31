@@ -17,6 +17,7 @@
 
 ## Reviewer Checklist ##
 
-- [ ] Appropriate unit test coverage
+- [ ] Appropriate unit test coverage.
+- [ ] [Coding Standards](../contribution_guidelines/coding_standards.md) followed.
 
 When review is satisfactory reviewer will merge the changes.
