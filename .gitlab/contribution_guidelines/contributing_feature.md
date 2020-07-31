@@ -22,7 +22,7 @@ The component should have be generic enough to have value to other teams with an
     - Unit Tests.  
 Use your judgement, but aim to test each configurable input/output of the component.  We have been using testing-library to provide a consistent test authoring experience across all library types, but if it is not sufficient feel free to use a different one.  
 
-    - Storybook documentation. 
+    - Storybook documentation.  
 Add a stories.mdx file to add the new component to the storybook.  Make sure to include documentation for the inputs/outputs of the component; documentation might vary depending on library type (Angular, Vue, React...).  
         
   
