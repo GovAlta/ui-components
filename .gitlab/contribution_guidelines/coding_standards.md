@@ -4,16 +4,16 @@
 ```
 /src  
 --/libs  
-  --/components  
-    --/my-component  
-      --/my-component.scss  
-      --/my-component.html  
+  --/my-component  
+    --/my-component.scss  
+    --/my-component.html  
 ```
-- If the elements are common across components in a particular library but not common across multiple libraries...
+- If the elements are common across components in a particular library but not common across multiple libraries.  For example, an interface defining a user could go in.
 ```
 /src  
 --/libs  
-  --/ 
+  --/user
+    --/user.ts
 ```
 
 - If there are elements which will be common across multiple libraries please consider pulling those out into a library of their own or adding to an appropriate existing common library.  
@@ -35,8 +35,8 @@ Use mixins to encourage re-use and make style updates less error prone.  When cr
 
 ## Documentation
 
-- Document your component interface using JsDocs.
+- Document your component interface using JsDocs, most IDEs support JsDocs and JsDocs can be used by the storybook documentation to automatically produce property tables.
 
-- If a new library is added, please update the readme.  
+- If a new library is added, please update the readme to add a description.  
 
 
