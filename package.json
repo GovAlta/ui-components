@@ -11,6 +11,8 @@
     "build:vue-components": "npm run build:plugin:vue && npm run build vue-components",
     "build:core-css": "npm run build core-css -- --prod",
     "build:plugin:vue": "nx run vue-plugin:build",
+    "build:angular-storybook": "nx run angular-components:build-storybook",
+    "build:core-storybook": "nx run core-css:build-storybook --outpud-dir",
     "test": "nx test",
     "test:all": "nx run-many --target=test --all",
     "test:vue-components": "npm run test vue-components",
@@ -33,9 +35,7 @@
     "publish:core-css": "npm run build:core-css && cd dist/libs/core-css && npm publish --new-version",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help",
-    "build:angular-storybook": "nx run angular-components:build-storybook",
-    "build:core-storybook": "nx run core-css:build-storybook --outpud-dir"
+    "help": "nx help"
   },
   "private": true,
   "dependencies": {
