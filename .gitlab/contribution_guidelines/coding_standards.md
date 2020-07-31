@@ -36,7 +36,6 @@ Use mixins to encourage re-use and make style updates less error prone.  When cr
 ## Documentation
 
 - Document your component interface using JsDocs, most IDEs support JsDocs and JsDocs can be used by the storybook documentation to automatically produce property tables.
-
 - If a new library is added, please update the readme to add a description.  
 
 
