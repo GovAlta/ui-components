@@ -9,8 +9,8 @@ Here is an overview of our contribution process.  Specific instructions for bugs
 ```mermaid
 graph TD
 subgraph Content Author
-	1(Create issue request) --> 2(Implement in branch)
-	2 --> 3(Comment that branch is ready to notify Platform team)
+	1[Create issue request] --> 2[Implement in branch]
+	2 --> 3[Comment on issue that branch is ready to notify Platform team]
   4[Review Issue]
 end
 subgraph Platform Team
