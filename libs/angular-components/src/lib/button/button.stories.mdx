@@ -30,6 +30,7 @@ A hierarchy of actions provided by buttons.
         component: GoAButtonComponent,
         props: {
             title: text('title', 'Secondary'),
+            description: text('description', 'This is a secondary button!'),
             buttonType: select('buttonType', { primary: 'primary', secondary: 'secondary', tertiary: 'tertiary' }, 'secondary')
         }
     }}
@@ -46,6 +47,7 @@ links.
 | Name     | Type | Description | Default |
 |----------|:----:|:-----------:|--------:|
 | title    | string | Text to appear on button. | '' |
+| description | string | Description used in tooltip and describedby. | null |
 | buttonType | 'primary' \| 'secondary' \| 'tertiary' | The style of the button. | 'primary' |
 
 ## Usage guidelines

@@ -3,6 +3,7 @@ import { GoAButtonComponent } from './button.component';
 
 describe('Goa Button', () => {
   const buttonTitle = 'Test Title';
+  const buttonDescription = 'Test description';
   const buttonClassName = 'goa-button';
   const buttonSecondaryClassName = 'goa--secondary';
   const buttonTertiaryClassName = 'goa--tertiary';
@@ -13,6 +14,26 @@ describe('Goa Button', () => {
     });
 
     expect(screen.getByText(buttonTitle))
+  });
+
+  test('should set describedby and title', async () => {
+    await render(GoAButtonComponent, {
+      componentProperties: { title: buttonTitle, description: buttonDescription },
+    });
+
+    const button = screen.getByText(buttonTitle);
+    expect(button.getAttribute('aria-describedby')).toEqual(buttonDescription);
+    expect(button.getAttribute('title')).toEqual(buttonDescription);
+  });
+
+  test('blank should not set title or describedby', async () => {
+    await render(GoAButtonComponent, {
+      componentProperties: { title: buttonTitle, description: '' },
+    });
+
+    const button = screen.getByText(buttonTitle);
+    expect(button.getAttribute('aria-describedby')).toBeFalsy();
+    expect(button.getAttribute('title')).toBeFalsy();
   });
 
   test('buttonType=primary should render primary styling', async () => {

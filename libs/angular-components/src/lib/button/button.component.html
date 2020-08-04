@@ -3,5 +3,8 @@
         'goa-button':true,
         'goa--secondary':buttonType === 'secondary',
         'goa--tertiary':buttonType === 'tertiary'
-      }" type="submit">{{title}}</button>
+      }" 
+      type="submit"
+      [attr.aria-describedby]="description ? description : null"
+      [attr.title]="description ? description : null">{{title}}</button>
 </div>
