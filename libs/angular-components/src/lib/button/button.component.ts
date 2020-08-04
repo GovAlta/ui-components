@@ -12,6 +12,11 @@ export class GoAButtonComponent implements OnInit {
   @Input() title: string;
 
   /**
+   * The tooltip and describedby description of the button.
+   */
+  @Input() description: string = null;
+
+  /**
    * The appearance style of the button.
    */
   @Input() buttonType: 'primary' | 'secondary' | 'tertiary' = 'primary';
