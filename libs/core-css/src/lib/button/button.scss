@@ -16,6 +16,19 @@
         line-height: 1em;
     }
 
+    button:disabled.goa-button,
+    button:disabled.goa-button.goa--secondary,
+    button:disabled.goa-button.goa--tertiary,
+    input[type="button"]:disabled.goa-button,
+    input[type="button"]:disabled.goa-button.goa--secondary,
+    input[type="button"]:disabled.goa-button.goa--tertiary,
+    input[type="submit"]:disabled.goa-button,
+    input[type="submit"]:disabled.goa--secondary
+    input[type="submit"]:disabled.goa--tertiary {
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
     button.goa-button:hover,
     input[type="button"].goa-button:hover,
     input[type="submit"].goa-button:hover {
