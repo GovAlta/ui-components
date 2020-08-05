@@ -79,6 +79,10 @@ items:
   - kind: Service
     apiVersion: v1
     metadata:
+      annotations: 
+        service.alpha.openshift.io/infrastructure: 'true'
+      labels:
+        app: ui-components
       name: ui-components
     spec:
       selector:
