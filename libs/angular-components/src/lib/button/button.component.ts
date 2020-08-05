@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+const i = 0;
 @Component({
   selector: 'goa-button',
   templateUrl: './button.component.html',
@@ -21,7 +22,7 @@ export class GoAButtonComponent implements OnInit {
    */
   @Input() buttonType: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }
