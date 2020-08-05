@@ -27,13 +27,14 @@ pipeline {
             returnStdout: true
           ).trim();
           def isStoryBookOnly = affected == 'storybook-common';
+          def runBuild = affected.length() > 0;
           echo "affected: '${affected}'"
-          if (isStoryBookOnly == false){
-            publishNpm = true;
-          }
 
-          if (affected.length() > 0){
+          if (runBuild == true){
             deployStorybook = true;
+            if (isStoryBookOnly == false){
+              publishNpm = true;
+            }
           }
         }
         // TODO: cache dependencies
