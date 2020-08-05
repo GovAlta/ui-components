@@ -24,9 +24,9 @@ pipeline {
           def affected = sh (
             script: 'nx affected:libs --base=origin/dev --plain',
             returnStdout: true
-          )
+          ).trim();
           def isStoryBookOnly = affected == 'storybook-common';
-              
+          echo "affected: '${affected}'"
           if (isStoryBookOnly == false){
             publishNpm = true;
           }
