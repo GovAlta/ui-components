@@ -25,13 +25,13 @@ pipeline {
             script: 'nx affected:apps --base=origin/dev --plain',
             returnStdout: true
           )
-          if (affected.contains('storybook-common')){
+          // if (affected.contains('storybook-common')){
             publishNpm = true;
-          }
+          // }
 
-          if (deployStorybook.length() > 0 && !deployStorybook.contains('storybook-common')){
+          // if (deployStorybook.length() > 0 && !deployStorybook.contains('storybook-common')){
             deployStorybook = true;
-          }
+          // }
         }
         // TODO: cache dependencies
         
