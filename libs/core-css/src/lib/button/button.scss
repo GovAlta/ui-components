@@ -27,6 +27,7 @@ $secondary-hover-color: $button-hover-color;
 $secondary-hover-background-color: $secondary-background-color;
 $secondary-hover-border-color: $secondary-hover-color;
 $secondary-focus-color: $secondary-hover-color;
+$secondary-focus-background-color: $secondary-background-color;
 $secondary-focus-border-color: $secondary-focus-color;
 $secondary-focus-outline-color: $active-outline-color;
 
@@ -38,6 +39,7 @@ $tertiary-hover-color: $button-hover-color;
 $tertiary-hover-background-color: $tertiary-background-color;
 $tertiary-hover-border-color: $tertiary-hover-color;
 $tertiary-focus-color: $tertiary-hover-color;
+$tertiary-focus-background-color: $tertiary-background-color;
 $tertiary-focus-border-color: $tertiary-focus-color;
 $tertiary-focus-outline-color: $active-outline-color;
 
@@ -95,6 +97,7 @@ $tertiary-focus-outline-color: $active-outline-color;
             &:focus,
             &:active {
                 color: $secondary-focus-color;
+                background-color: $secondary-focus-background-color;
                 border: 2px solid $secondary-focus-border-color;
                 box-shadow: 0 0 0 3px $secondary-focus-outline-color;
             }
@@ -114,6 +117,7 @@ $tertiary-focus-outline-color: $active-outline-color;
             &:active {
                 border: 1px solid $tertiary-focus-border-color;
                 color: $tertiary-focus-color;
+                background-color: $tertiary-focus-background-color;
                 box-shadow: 0 0 0 3px $tertiary-focus-outline-color;
             }
         }
