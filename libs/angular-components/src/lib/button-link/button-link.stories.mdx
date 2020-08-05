@@ -1,15 +1,15 @@
 import { DoDont } from '@abgov/storybook-common';
-import { GoAButtonComponent } from './button.component';
+import { GoAButtonLinkComponent } from './button-link.component';
 
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
-import { text, select, boolean, withKnobs } from '@storybook/addon-knobs';
+import { text, select, withKnobs } from '@storybook/addon-knobs';
 
 <Meta title="Design System/Basic Elements/Buttons"
-  component={GoAButtonComponent}
+  component={GoAButtonLinkComponent}
   decorators={[
         withKnobs,
-        moduleMetadata({ declarations: [GoAButtonComponent] })
+        moduleMetadata({ declarations: [ GoAButtonLinkComponent] })
     ]
 } />
 
@@ -18,7 +18,7 @@ import { text, select, boolean, withKnobs } from '@storybook/addon-knobs';
 A hierarchy of actions provided by buttons.
 
 <Preview>
-  <Story name="Variants" height={100} parameters={
+  <Story name="Link" height={100} parameters={
     {
       design: {
         specUrl: 'https://xd.adobe.com/spec/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/screen/ea24fb1f-4b15-495f-8fe6-603d1ac538a4/Buttons',
@@ -27,10 +27,10 @@ A hierarchy of actions provided by buttons.
     }
   }>
     {{
-        template: `<button goa-button [buttonType]="buttonType">{{content}}</button>`,
+        template: `<a goa-button href="http://alberta.gov.ca" [linkType]='linkType'>{{content}}</a>`,
         props: {
-            content: text('content', 'Secondary'),
-            buttonType: select('buttonType', { primary: 'primary', secondary: 'secondary', tertiary: 'tertiary' }, 'secondary')
+            content: text('content', 'Link'),
+            linkType: select('linkType', { right: 'right', up: 'up' }, 'right')
         }
     }}
   </Story>
@@ -43,7 +43,7 @@ links.
 
 ## Examples
 ```
-<button goa-button buttonType="primary" title="Go to the next page.">Next</button>
+<a goa-button linkType='up'>Next</a>
 ```
 
 
@@ -51,17 +51,16 @@ links.
 
 | Name     | Type | Description | Default |
 |----------|:----:|:-----------:|--------:|
-| buttonType | 'primary' \| 'secondary' \| 'tertiary' | The style of the button. | 'primary' |
-| (content) | markup | Content within button. |
+| linkType | 'right' \| 'up' | Show a up or right arrow. | 'right' |
+| (content) | markup | Content within anchor. |
 
 ## Usage guidelines
-### Primary vs. secondary
-When buttons appear side-by-side, a decision must be made about which is the primary and secondary 
-action.
+### As a call to action
+A button is a functional element that is designed to submit user data using the `<button>` markup. As a call to action `<a>` link, add a navigation arrow to distinguish it from a regular button. Navigation arrows are text-based, and is created with the html code &rarr; (right arrow) or &uarr; (up arrow). They are normally positioned to the right of the text label.
 
 <DoDont
-  dos={'Use only one button whenever possible. It will always be a primary button.'}
-  donts={'Use two primary buttons. Strategically determine which button should be used as secondary.'}
+  dos={'Use buttons for form submissions and search queries.'}
+  donts={'Use buttons as a link without a navigation arrow.'}
 />
 
 ### Text usage

@@ -1,0 +1,40 @@
+@mixin goa-button-link {
+    a.goa-link-button {
+        display: inline-block;
+        box-sizing: border-box;
+        min-width: 70px;
+        margin: 28px 12px 0 0;
+        padding: 9px 12px;
+        border: 2px solid #0070c4;
+        border-radius: 4px;
+        background: #0070c4;
+        cursor: pointer;
+        color: #fff !important;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1em;
+    }
+    
+    a.goa-link-button.left-arrow::after {
+        margin-left: 8px;
+        content: '\2192';
+    }
+
+    a.goa-link-button.up-arrow::after {
+        margin-left: 8px;
+        content: '\2191';
+    }
+    
+    a.goa-link-button:hover {
+        border-color: #004f84;
+        background: #004f84;
+    }
+    
+    a.goa-link-button:focus, a.goa-link-button:active {
+        border-color: #004f84;
+        outline: 3px solid #feba35;
+        outline-offset: 0;
+        background: #004f84;
+    }
+}
