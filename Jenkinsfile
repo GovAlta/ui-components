@@ -22,16 +22,18 @@ pipeline {
         sh 'npm install'
         script {
           def affected = sh (
-            script: 'nx affected:apps --base=origin/dev --plain',
+            script: 'nx affected:libs --base=origin/dev --plain',
             returnStdout: true
           )
-          // if (affected.contains('storybook-common')){
+          def isStoryBookOnly = affected == 'storybook-common';
+              
+          if (isStoryBookOnly == false){
             publishNpm = true;
-          // }
+          }
 
-          // if (deployStorybook.length() > 0 && !deployStorybook.contains('storybook-common')){
+          if (affected.length() > 0){
             deployStorybook = true;
-          // }
+          }
         }
         // TODO: cache dependencies
         
