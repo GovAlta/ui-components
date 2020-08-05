@@ -7,7 +7,7 @@
  
         @include goa-button-styles();
 
-        &.left-arrow::after {
+        &.right-arrow::after {
             margin-left: 8px;
             content: '\2192';
         }

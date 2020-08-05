@@ -80,6 +80,7 @@ $tertiary-focus-outline-color: $active-outline-color;
             border-color: $primary-focus-border-color;
             box-shadow: 0 0 0 3px $primary-focus-outline-color;
             background: $primary-focus-background-color;
+            outline: none;
         }
 
         &.goa--secondary {
@@ -100,6 +101,7 @@ $tertiary-focus-outline-color: $active-outline-color;
                 background-color: $secondary-focus-background-color;
                 border: 2px solid $secondary-focus-border-color;
                 box-shadow: 0 0 0 3px $secondary-focus-outline-color;
+                outline: none;
             }
         }
 
@@ -119,6 +121,7 @@ $tertiary-focus-outline-color: $active-outline-color;
                 color: $tertiary-focus-color;
                 background-color: $tertiary-focus-background-color;
                 box-shadow: 0 0 0 3px $tertiary-focus-outline-color;
+                outline: none;
             }
         }
     }
