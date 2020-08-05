@@ -22,7 +22,7 @@ pipeline {
         sh 'npm install'
         script {
           def affected = sh (
-            script: 'nx affected:libs --base=origin/dev --plain',
+            script: 'nx affected:libs --base=features/CS-66 --plain',
             returnStdout: true
           ).trim();
           def isStoryBookOnly = affected == 'storybook-common';
