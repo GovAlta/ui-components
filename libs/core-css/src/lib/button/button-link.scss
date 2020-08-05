@@ -1,0 +1,26 @@
+@import 'button.scss';
+
+@mixin goa-button-link-styles {
+    &.goa-link-button {
+        display: inline-block;
+        text-decoration: none;
+ 
+        @include goa-button-styles();
+
+        &.right-arrow::after {
+            margin-left: 8px;
+            content: '\2192';
+        }
+
+        &.up-arrow::after {
+            margin-left: 8px;
+            content: '\2191';
+        }
+    }
+}
+
+@mixin goa-button-link {
+    a {
+        @include goa-button-link-styles();
+    }
+}
