@@ -22,7 +22,7 @@ pipeline {
         sh 'npm install'
         script {
           def affected = sh (
-            script: 'nx affected:apps --base=master --plain',
+            script: 'nx affected:apps --base=origin/dev --plain',
             returnStdout: true
           )
           if (affected.contains('storybook-common')){
