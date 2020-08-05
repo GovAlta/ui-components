@@ -20,18 +20,19 @@ pipeline {
         checkout scm
         sh 'npm install -g @nrwl/cli'
         sh 'npm install'
-        def affected = sh (
-          script: 'nx affected:apps --base=master --plain',
-          returnStdout: true
-        )
-        if (affected.contains('storybook-common')){
-          publishNpm = true;
-        }
+        script {
+          def affected = sh (
+            script: 'nx affected:apps --base=master --plain',
+            returnStdout: true
+          )
+          if (affected.contains('storybook-common')){
+            publishNpm = true;
+          }
 
-        if (deployStorybook.length() > 0 && !deployStorybook.contains('storybook-common')){
-          deployStorybook = true;
+          if (deployStorybook.length() > 0 && !deployStorybook.contains('storybook-common')){
+            deployStorybook = true;
+          }
         }
-
         // TODO: cache dependencies
         
       }
