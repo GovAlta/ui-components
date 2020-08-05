@@ -1,3 +1,6 @@
+def publishNpm = false
+def deployStorybook = false;
+
 pipeline {
   agent {
     node {
@@ -17,6 +20,17 @@ pipeline {
         checkout scm
         sh 'npm install -g @nrwl/cli'
         sh 'npm install'
+        def affected = sh (
+          script: 'nx affected:apps --base=master --plain',
+          returnStdout: true
+        )
+        if (affected.contains('storybook-common')){
+          publishNpm = true;
+        }
+
+        if (deployStorybook.length() > 0 && !deployStorybook.contains('storybook-common')){
+          deployStorybook = true;
+        }
 
         // TODO: cache dependencies
         
@@ -34,10 +48,20 @@ pipeline {
             sh 'nx affected --target=lint --base=origin/dev --parallel'
           }
         }
-        stage('Build'){
+        stage('Build storybook'){
+           when {
+            expression { deployStorybook == true }
+          }
           steps {
             sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
             sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
+          }
+        }
+        stage('Build npm package'){
+          when {
+            expression { publishNpm == true }
+          }
+          steps {
             sh 'npm run build:angular-components'
             sh 'npm run build:core-css'
           }
@@ -45,14 +69,28 @@ pipeline {
       }
     }
     stage('Deploy Test') {
-      steps {
-        //copy the nginx config to binary buld location
-        sh 'cp nginx.conf dist/storybook'   
-        dir('dist/storybook') {
-          sh 'oc start-build ui-components --from-dir . --follow'
+      parallel {
+        stage('Storybook'){
+          when {
+            expression { deployStorybook == true }
+          }
+          steps {
+            //copy the nginx config to binary buld location
+            sh 'cp nginx.conf dist/storybook'   
+            dir('dist/storybook') {
+              sh 'oc start-build ui-components --from-dir . --follow'
+            }
+          }
         }
-        sh 'npm run publish:angular-components -- --dry-run'
-        sh 'npm run publish:core-css -- --dry-run'
+        stage('Publish to npm'){
+          when {
+            expression { publishNpm == true }
+          }
+          steps {
+            sh 'npm run publish:angular-components -- --dry-run'
+            sh 'npm run publish:core-css -- --dry-run'
+          }
+        }
       }
     }
   }
