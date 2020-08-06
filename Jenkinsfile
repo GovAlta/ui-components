@@ -21,6 +21,9 @@ pipeline {
         sh 'npm install -g @nrwl/cli'
         sh 'npm install'
         script {
+          echo "previous successful: ${GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+          echo "current commit: ${GIT_COMMIT}"
+          
           def affected = sh (
             script: 'nx affected:libs --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --plain',
             returnStdout: true
@@ -43,12 +46,12 @@ pipeline {
       parallel {
         stage('Test'){
           steps {
-            sh 'nx affected --target=test --base=origin/dev~1 --head=origin/dev --parallel'
+            sh 'nx affected --target=test --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --head=origin/dev --parallel'
           }
         }
         stage('Lint'){
           steps {
-            sh 'nx affected --target=lint --base=origin/dev~1 --head=origin/dev --parallel'
+            sh 'nx affected --target=lint --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --head=origin/dev --parallel'
           }
         }
         stage('Build storybook'){
