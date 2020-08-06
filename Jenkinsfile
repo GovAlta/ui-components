@@ -23,7 +23,7 @@ pipeline {
         sh 'npm install'
         script {
           def affected = sh (
-            script: 'nx affected:libs --base=origin/dev --plain',
+            script: 'nx affected:libs --base=${GIT_COMMIT} --plain',
             returnStdout: true
           ).trim();
           def isStoryBookOnly = affected == 'storybook-common';
@@ -45,12 +45,12 @@ pipeline {
       parallel {
         stage('Test'){
           steps {
-            sh 'nx affected --target=test --base=origin/dev --parallel'
+            sh 'nx affected --target=test --base=${GIT_COMMIT} --parallel'
           }
         }
         stage('Lint'){
           steps {
-            sh 'nx affected --target=lint --base=origin/dev --parallel'
+            sh 'nx affected --target=lint --base=${GIT_COMMIT} --parallel'
           }
         }
         stage('Build storybook'){
