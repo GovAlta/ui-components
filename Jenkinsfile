@@ -17,10 +17,6 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
-        checkout scm
-        sh 'printenv'
-        sh 'npm install -g @nrwl/cli'
-        sh 'npm install'
         script {
           def post = new URL("https://jenkins-dio-sandbox.os99.gov.ab.ca/job/dio-sandbox/job/dio-sandbox-ui-components-pipeline/lastSuccessfulBuild/api/json?tree=actions[lastBuiltRevision[SHA1]]&depth=3").openConnection() 
           String user = "last-build-api" 
@@ -39,7 +35,12 @@ pipeline {
             def lastCommitID = result.substring(shaBegin, shaEnd);
             echo "lastCommitID: '${lastCommitID}'"
           }
-          
+        }
+        checkout scm
+        sh 'printenv'
+        sh 'npm install -g @nrwl/cli'
+        sh 'npm install'
+        script {
           def affected = sh (
             script: 'nx affected:libs --base=origin/dev~1 --head=origin/dev --plain',
             returnStdout: true
