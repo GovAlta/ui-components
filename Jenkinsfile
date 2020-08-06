@@ -22,8 +22,24 @@ pipeline {
         sh 'npm install -g @nrwl/cli'
         sh 'npm install'
         script {
-          def post = new URL("https://jenkins-dio-sandbox.os99.gov.ab.ca/job/dio-sandbox/job/dio-sandbox-ui-components-pipeline/lastSuccessfulBuild/api/json?tree=actions[lastBuiltRevision[SHA1]]&depth=3").openConnection() String user = "<user>" String pass = "<API token>" String authStr = user +":"+ pass String encoding = authStr.getBytes("utf-8").encodeBase64().toString() post.setRequestMethod("POST") post.setDoOutput(true) post.setRequestProperty("Authorization", "Basic " + encoding) def postRC = post.getResponseCode() if(postRC.equals(200)) { def result = post.getInputStream().getText() def shaBegin = result.indexOf('SHA1":"') + 7 def shaEnd = result.indexOf('"', shaBegin) println(result.substring(shaBegin, shaEnd)) return ["COMMIT_ID": result.substring(shaBegin, shaEnd)] }
-          echo "post: '${post}'"
+          def post = new URL("https://jenkins-dio-sandbox.os99.gov.ab.ca/job/dio-sandbox/job/dio-sandbox-ui-components-pipeline/lastSuccessfulBuild/api/json?tree=actions[lastBuiltRevision[SHA1]]&depth=3").openConnection() 
+          String user = "last-build-api" 
+          String pass = "119e932c2b071d1282695de25b8f065a24" 
+          String authStr = user +":"+ pass 
+          String encoding = authStr.getBytes("utf-8").encodeBase64().toString() 
+          post.setRequestMethod("POST") 
+          post.setDoOutput(true) 
+          post.setRequestProperty("Authorization", "Basic " + encoding) 
+          def postRC = post.getResponseCode() 
+          if(postRC.equals(200)) { 
+            def result = post.getInputStream().getText() 
+            def shaBegin = result.indexOf('SHA1":"') + 7 
+            def shaEnd = result.indexOf('"', shaBegin) 
+            println(result.substring(shaBegin, shaEnd))
+            def lastCommitID = result.substring(shaBegin, shaEnd);
+            echo "lastCommitID: '${lastCommitID}'"
+          }
+          
           def affected = sh (
             script: 'nx affected:libs --base=origin/dev~1 --head=origin/dev --plain',
             returnStdout: true
