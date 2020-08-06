@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'vue-components',
+  name: 'vue-component',
   preset: '../../jest.config.js',
   transform: {
     '^.+\\.vue$': 'vue-jest',
@@ -8,6 +8,6 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'vue', 'js', 'json'],
-  coverageDirectory: '../../coverage/libs/vue-components',
+  coverageDirectory: '../../coverage/libs/vue-component',
   snapshotSerializers: ['jest-serializer-vue'],
 };

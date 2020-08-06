@@ -1,7 +1,7 @@
 {
   "name": "@abgov/vue-components",
   "version": "0.0.2",
-  "description": "Government of Alberta - DIO - angular shared ui components",
+  "description": "Government of Alberta - DIO - vuejs shared ui components",
   "bugs": {
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues"
   },
@@ -13,7 +13,7 @@
   "repository": {
     "type": "git",
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git",
-    "directory": "libs/angular-components"
+    "directory": "libs/vue-components"
   },
   "peerDependencies": {
     "core-js": "^3.6.5",
