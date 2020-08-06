@@ -7,6 +7,8 @@
     "start": "nx serve",
     "build": "nx build",
     "build:all": "nx run-many --target=build --all",
+    "build:npm": "nx run-many --target=build --projects=angular-components,core-css --parallel --prod",
+    "build:storybook": "run-p build:core-storybook build:angular-storybook",
     "build:angular-components": "npm run build angular-components -- --prod",
     "build:vue-components": "npm run build:plugin:vue && npm run build vue-components",
     "build:core-css": "npm run build core-css -- --prod",
@@ -30,9 +32,11 @@
     "format:write": "nx format:write",
     "format:check": "nx format:check",
     "update": "nx migrate latest",
-    "publish:angular-components": "cd dist/libs/angular-components && npm publish --new-version",
-    "publish:vue-components": "cd dist/libs/vue-components && npm publish --new-version",
-    "publish:core-css": "npm run build:core-css && cd dist/libs/core-css && npm publish --new-version",
+    "publish:npm-test": "run-p \"publish:npm:* -- --dry-run\"",
+    "publish:npm": "run-p publish:npm:*",
+    "publish:npm:angular-components": "cd dist/libs/angular-components && npm publish --new-version",
+    "publish:npm:vue-components": "cd dist/libs/vue-components && npm publish --new-version",
+    "publish:npm:core-css": "npm run build:core-css && cd dist/libs/core-css && npm publish --new-version",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help"
@@ -41,6 +45,7 @@
   "dependencies": {
     "@angular/common": "^10.0.3",
     "@angular/core": "^10.0.3",
+    "npm-run-all": "^4.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "vue": "^2.6.11"

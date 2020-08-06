@@ -59,8 +59,7 @@ pipeline {
             expression { deployStorybook == true }
           }
           steps {
-            sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
-            sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
+            sh 'npm run build:storybook'
           }
         }
         stage('Build npm package'){
@@ -68,8 +67,7 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh 'npm run build:angular-components'
-            sh 'npm run build:core-css'
+            sh 'npm run build:npm'
           }
         }
       }
@@ -93,8 +91,28 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh 'npm run publish:angular-components -- --dry-run'
-            sh 'npm run publish:core-css -- --dry-run'
+            sh 'npm run publish:npm-test'
+          }
+        }
+      }
+    }
+
+    stage('Deploy PROD') {
+      parallel {
+        stage('Storybook'){
+          when {
+            expression { deployStorybook == true }
+          }
+          steps {
+            //placeholder
+          }
+        }
+        stage('Publish to npm'){
+          when {
+            expression { publishNpm == true }
+          }
+          steps {
+            sh 'npm run publish:npm'
           }
         }
       }
