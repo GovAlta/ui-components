@@ -14,7 +14,7 @@
 </template>
 <script>
     export default {
-        name: 'GoAMicrositeLogo',
+        name: 'goa-microsite-logo',
         props: {
             'microServiceHomeLink': {
                 type: String,
@@ -30,6 +30,6 @@
         }
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     @import '../../../../core-css/src/lib/microsite-logo/microsite-logo.scss';
 </style>

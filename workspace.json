@@ -58,7 +58,7 @@
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
           "options": {
-            "uiFramework": "@storybook/react",
+            "uiFramework": "@storybook/html",
             "outputPath": "dist/storybook/core-css",
             "config": {
               "configFolder": "libs/core-css/.storybook"

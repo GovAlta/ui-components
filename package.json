@@ -123,6 +123,7 @@
     "tslint": "~6.0.0",
     "typescript": "~3.8.3",
     "vue-jest": "^3.0.5",
+    "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.11",
     "zone.js": "^0.10.3"
   }

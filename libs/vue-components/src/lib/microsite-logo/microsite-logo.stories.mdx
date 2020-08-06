@@ -1,12 +1,11 @@
 import { DoDont } from '@abgov/storybook-common';
-import { GoAMicrositeLogoComponent } from './microsite-logo';
+import GoAMicrositeLogoComponent from './microsite-logo.vue';
 
-import { Meta, Preview, Story , props} from '@storybook/addon-docs/blocks';
-import { moduleMetadata } from '@storybook/angular';
+import { Meta, Preview, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
 <Meta title="Design System/Basic Elements/Header" decorators={[
-        withKnobs,
+        withKnobs
     ]}
     component={GoAMicrositeLogoComponent}
  />
@@ -23,11 +22,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
     }
   }>
     {{
-        template: `<GoAMicrositeLogo serviceName="Digital Service Name" microServiceHomeLink="http://www.alberta.ca" />`,
-        props: {
-          serviceName: text('serviceName', 'Digital Service Name (microsite)'),
-          microServiceHomeLink: text('microServiceHomeLink', 'https://www.alberta.ca')
-        }
+        template: `<div>test</div><goa-microsite-logo :serviceName="Digital Service Name" :microServiceHomeLink="http://www.alberta.ca"></goa-microsite-logo>`
     }}
   </Story>
 </Preview>
@@ -37,5 +32,3 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 A logo to use for a Government of Alberta microsite.  Contains a customizable service name and home link for the microsite.
 
 ## Properties
-
-<props component={GoAMicrositeLogoComponent} />
