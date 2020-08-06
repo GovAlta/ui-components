@@ -16,27 +16,28 @@ pipeline {
   }
   stages {
     stage('Prepare') {
+      steps {
         checkout scm
-        sh 'printenv'
         sh 'npm install -g @nrwl/cli'
         sh 'npm install'
         script {
           def affected = sh (
-            script: 'nx affected:libs --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --head=origin/dev --plain',
+            script: 'nx affected:libs --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --plain',
             returnStdout: true
           ).trim();
           def isStoryBookOnly = affected == 'storybook-common';
-          def runBuild = affected.length() > 0;
           echo "affected: '${affected}'"
+          if (isStoryBookOnly == false){
+            publishNpm = true;
+          }
 
-          if (runBuild == true){
+          if (affected.length() > 0){
             deployStorybook = true;
-            if (isStoryBookOnly == false){
-              publishNpm = true;
-            }
           }
         }
         // TODO: cache dependencies
+        
+      }
     }
     stage('Build Processes') {
       parallel {
