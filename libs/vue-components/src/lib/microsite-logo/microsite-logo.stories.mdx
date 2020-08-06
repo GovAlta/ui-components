@@ -1,15 +1,15 @@
 import { DoDont } from '@abgov/storybook-common';
-import { GoAMicrositeLogoComponent } from './microsite-logo.component';
+import { GoAMicrositeLogoComponent } from './microsite-logo';
 
-import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import { Meta, Preview, Story , props} from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
 <Meta title="Design System/Basic Elements/Header" decorators={[
         withKnobs,
-        moduleMetadata({ declarations: [GoAMicrositeLogoComponent] })
-    ]
-} />
+    ]}
+    component={GoAMicrositeLogoComponent}
+ />
 
 # Header
 
@@ -23,10 +23,10 @@ import { text, withKnobs } from '@storybook/addon-knobs';
     }
   }>
     {{
-        component: GoAMicrositeLogoComponent,
+        template: `<GoAMicrositeLogo serviceName="Digital Service Name" microServiceHomeLink="http://www.alberta.ca" />`,
         props: {
           serviceName: text('serviceName', 'Digital Service Name (microsite)'),
-          microServiceHomeLink: text('microServiceHomeLink', 'https://www.alberta.ca/index.aspx')
+          microServiceHomeLink: text('microServiceHomeLink', 'https://www.alberta.ca')
         }
     }}
   </Story>
@@ -38,8 +38,4 @@ A logo to use for a Government of Alberta microsite.  Contains a customizable se
 
 ## Properties
 
-| Name     | Type | Description | Default |
-|----------|:----:|:-----------:|--------:|
-| serviceName    | string | The name of the site.  Will appear next to the Government of Alberta logo. | 'Digital Service Name (microsite)' |
-| microServiceHomeLink | string | URL to use as the link for the click on the footer | 'https://www.alberta.ca/index.aspx' |
-
+<props component={GoAMicrositeLogoComponent} />
