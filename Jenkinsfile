@@ -27,6 +27,7 @@ pipeline {
           post.setDoOutput(true) 
           post.setRequestProperty("Authorization", "Basic " + encoding) 
           def postRC = post.getResponseCode() 
+          echo "responseCode: '${postRC}'"
           if(postRC.equals(200)) { 
             def result = post.getInputStream().getText() 
             def shaBegin = result.indexOf('SHA1":"') + 7 
