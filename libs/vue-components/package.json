@@ -19,8 +19,8 @@
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
-  "main": "abgov.umd.js",
-  "unpkg": "abgov.umd.min.js",
-  "module": "abgov.common.js",
+  "main": "vue-components.umd.js",
+  "unpkg": "vue-components.umd.min.js",
+  "module": "vue-components.common.js",
   "sideEffects": false
 }

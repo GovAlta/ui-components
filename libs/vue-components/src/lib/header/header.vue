@@ -15,7 +15,9 @@
     import { GoAMicrositeLogo } from '../../index';
 
     export default {
-        components: { GoAMicrositeLogo },
+        components: { 
+            'goa-microsite-logo': GoAMicrositeLogo 
+        },
         name: 'goa-header',
         props: {
             'microServiceHomeLink': {
