@@ -21,6 +21,5 @@
   },
   "main": "vue-components.umd.js",
   "unpkg": "vue-components.umd.min.js",
-  "module": "vue-components.common.js",
-  "sideEffects": false
+  "module": "vue-components.common.js"
 }

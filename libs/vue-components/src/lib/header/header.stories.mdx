@@ -1,8 +1,6 @@
 
 import { DoDont } from '@abgov/storybook-common';
-//import { GoAHeader, GoAMicrositeLogo } from '../../index';
-import GoAHeader from './header.vue';
-import GoAMicrositeLogoComponent from '../microsite-logo/microsite-logo.vue';
+import { GoAHeader, GoAMicrositeLogo } from '../../index';
 import { Meta, Preview, Story, ArgsTable } from '@storybook/addon-docs/blocks'; 
 import { text, withKnobs } from '@storybook/addon-knobs';
 
@@ -24,7 +22,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
       render: function (createElement) {
         return createElement(
           GoAHeader, {
-            components: { GoAMicrositeLogoComponent },
+            components: { GoAMicrositeLogo },
             props: {
               'serviceName': text('serviceName', 'Digital Service Name (microsite)'),
               'microServiceHomeLink': text('microServiceHomeLink', 'http://alberta.ca')              

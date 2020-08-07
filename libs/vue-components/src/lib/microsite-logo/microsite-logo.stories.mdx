@@ -1,7 +1,6 @@
 
 import { DoDont } from '@abgov/storybook-common';
-//import { GoAMicrositeLogoComponent } from '../../index';
-import GoAMicrositeLogoComponent from './microsite-logo.vue';
+import { GoAMicrositeLogo } from '../../index';
 import { Meta, Preview, Story, ArgsTable } from '@storybook/addon-docs/blocks'; 
 import { text, withKnobs } from '@storybook/addon-knobs';
 
@@ -9,9 +8,9 @@ import { text, withKnobs } from '@storybook/addon-knobs';
   decorators={[
     withKnobs
   ]}
-  component={GoAMicrositeLogoComponent} />
+  component={GoAMicrositeLogo} />
 
-# Microsite Logo
+# Header
 
 <!-- 
   This syntax isn't the greatest... It supposedly works with template and props properties, but I could not get it to work.
@@ -19,10 +18,10 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 <Preview>
   <Story name="Micro Site Logo" height={100}>
     {{
-      components: [GoAMicrositeLogoComponent],
+      components: { GoAMicrositeLogo },
       render: function (createElement) {
         return createElement(
-          GoAMicrositeLogoComponent, {
+          GoAMicrositeLogo, {
             props: {
               'serviceName': text('serviceName', 'Digital Service Name (microsite)'),
               'microServiceHomeLink': text('microServiceHomeLink', 'http://alberta.ca')              
