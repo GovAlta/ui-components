@@ -104,7 +104,7 @@ pipeline {
             expression { deployStorybook == true }
           }
           steps {
-            //placeholder
+            echo 'placeholder'
           }
         }
         stage('Publish to npm'){
@@ -112,7 +112,7 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            // sh 'npm run publish:npm'
+            echo 'placeholder'
           }
         }
       }
