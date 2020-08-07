@@ -1,28 +1,28 @@
 
 import { DoDont } from '@abgov/storybook-common';
 import GoAMicrositeLogoComponent from './microsite-logo.vue';
-import { Meta, Preview, Story } from '@storybook/addon-docs/blocks'; 
+import { Meta, Preview, Story, ArgsTable } from '@storybook/addon-docs/blocks'; 
+import { text, withKnobs } from '@storybook/addon-knobs';
 
-<Meta title="Design System/Basic Elements/Header" component={GoAMicrositeLogoComponent} />
+<Meta title="Design System/Basic Elements/Header" 
+  decorators={[
+    withKnobs
+  ]}
+  component={GoAMicrositeLogoComponent} />
 
 # Header
 
+<!-- 
+  This syntax isn't the greatest... It supposedly works with template and props properties, but I could not get it to work.
+-->
 <Preview>
   <Story name="Micro Site Logo" height={100}>
     {{
-      components: [GoAMicrositeLogoComponent],
-      render: function (createElement) {
-        return createElement(
-          GoAMicrositeLogoComponent, {
-            props: {
-              'serviceName': 'Microsite Service Name',
-              'microSiteHomeLink': 'http://alberta.ca'
-            },
-            data() {
-              return {};
-            }
-          }
-        )
+      components: [GoAMicrositeLogoComponent],      
+      template: `<goa-microsite-logo :serviceName="serviceName" :microServiceHomeLink="microServiceHomeLink" />`,
+      props: {
+        'serviceName': text('serviceName', 'Digital Service Name (microsite)'),
+        'microServiceHomeLink': text('microServiceHomeLink', 'http://alberta.ca')           
       }
     }}
   </Story>
@@ -33,3 +33,4 @@ import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 A logo to use for a Government of Alberta microsite.  Contains a customizable service name and home link for the microsite.
 
 ## Properties
+
