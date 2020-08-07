@@ -6,7 +6,7 @@
 
 <script>
 import { GoAHeader } from '@abgov/vue-components';
-console.log(GoAHeader)
+
 export default {
   name: "App",
   components: {

@@ -40,5 +40,29 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 
 A logo to use for a Government of Alberta microsite.  Contains a customizable service name and home link for the microsite.
 
+## Examples
+```
+<template>
+  <div id="app">
+    <goa-microsite-logo serviceName="Sample usage example" microServiceHomeLink="/" />
+  </div>
+</template>
+
+<script>
+import { GoAMicrositeLogo } from '@abgov/vue-components';
+
+export default {
+  name: "App",
+  components: {
+    'goa-microsite-logo': GoAMicrositeLogo
+  }
+};
+</script>
+```
+
 ## Properties
 
+| Name     | Type | Description | Default |
+|----------|:----:|:-----------:|--------:|
+| serviceName    | string | The name of the site.  Will appear next to the Government of Alberta logo. | 'Digital Service Name (microsite)' |
+| microServiceHomeLink | string | URL to use as the link for the click on the footer | 'https://www.alberta.ca/index.aspx' |

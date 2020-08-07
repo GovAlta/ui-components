@@ -16,7 +16,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
   This syntax isn't the greatest... It supposedly works with template and props properties, but I could not get it to work.
 -->
 <Preview>
-  <Story name="Header" height={100}>
+  <Story name="Header" height={150}>
     {{
       components: [GoAHeader],
       render: function (createElement) {
@@ -39,7 +39,32 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 
 ## Overview
 
-A logo to use for a Government of Alberta microsite.  Contains a customizable service name and home link for the microsite.
+A header to use for a Government of Alberta microsite.  Contains a customizable service name and home link for the microsite.
+
+## Examples
+```
+<template>
+  <div id="app">
+    <goa-header serviceName="Sample usage example" microServiceHomeLink="/" />
+  </div>
+</template>
+
+<script>
+import { GoAHeader } from '@abgov/vue-components';
+
+export default {
+  name: "App",
+  components: {
+    'goa-header': GoAHeader
+  }
+};
+</script>
+```
 
 ## Properties
+
+| Name     | Type | Description | Default |
+|----------|:----:|:-----------:|--------:|
+| serviceName    | string | The name of the site.  Will appear next to the Government of Alberta logo. | 'Digital Service Name (microsite)' |
+| microServiceHomeLink | string | URL to use as the link for the click on the footer | 'https://www.alberta.ca/index.aspx' |
 
