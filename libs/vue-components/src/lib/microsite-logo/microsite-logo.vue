@@ -13,7 +13,7 @@
     </div>
 </template>
 <script>
-    import { FooterImages } from '../../../../angular-components/src/lib/microsite-logo/inlineImages';
+    import { FooterImages } from '../../../../core-css/src/lib/microsite-logo/inlineImages';
 
     export default {
         name: 'goa-microsite-logo',

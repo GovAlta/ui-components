@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FooterImages } from './inlineImages'
+import { FooterImages } from '../../../../core-css/src/lib/microsite-logo/inlineImages';
 
 @Component({
     selector: 'goa-microsite-logo',

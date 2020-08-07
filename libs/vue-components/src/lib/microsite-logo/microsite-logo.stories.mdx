@@ -18,11 +18,19 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 <Preview>
   <Story name="Micro Site Logo" height={100}>
     {{
-      components: [GoAMicrositeLogoComponent],      
-      template: `<goa-microsite-logo :serviceName="serviceName" :microServiceHomeLink="microServiceHomeLink" />`,
-      props: {
-        'serviceName': text('serviceName', 'Digital Service Name (microsite)'),
-        'microServiceHomeLink': text('microServiceHomeLink', 'http://alberta.ca')           
+      components: [GoAMicrositeLogoComponent],
+      render: function (createElement) {
+        return createElement(
+          GoAMicrositeLogoComponent, {
+            props: {
+              'serviceName': text('serviceName', 'Digital Service Name (microsite)'),
+              'microServiceHomeLink': text('microServiceHomeLink', 'http://alberta.ca')              
+            },
+            data() {
+              return {};
+            }
+          }
+        )
       }
     }}
   </Story>
