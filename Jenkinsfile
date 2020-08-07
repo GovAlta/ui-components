@@ -18,23 +18,24 @@ pipeline {
     stage('Prepare') {
       steps {
         checkout scm
-        sh 'printenv'
         sh 'npm install -g @nrwl/cli'
         sh 'npm install'
         script {
+          echo "previous successful: ${GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+          echo "current commit: ${GIT_COMMIT}"
+          
           def affected = sh (
-            script: 'nx affected:libs --base=origin/dev --plain',
+            script: 'nx affected:libs --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --plain',
             returnStdout: true
           ).trim();
           def isStoryBookOnly = affected == 'storybook-common';
-          def runBuild = affected.length() > 0;
           echo "affected: '${affected}'"
+          if (isStoryBookOnly == false){
+            publishNpm = true;
+          }
 
-          if (runBuild == true){
+          if (affected.length() > 0){
             deployStorybook = true;
-            if (isStoryBookOnly == false){
-              publishNpm = true;
-            }
           }
         }
         // TODO: cache dependencies
@@ -45,12 +46,12 @@ pipeline {
       parallel {
         stage('Test'){
           steps {
-            sh 'nx affected --target=test --base=origin/dev --parallel'
+            sh 'nx affected --target=test --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --head=origin/dev --parallel'
           }
         }
         stage('Lint'){
           steps {
-            sh 'nx affected --target=lint --base=origin/dev --parallel'
+            sh 'nx affected --target=lint --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --head=origin/dev --parallel'
           }
         }
         stage('Build storybook'){
@@ -58,9 +59,7 @@ pipeline {
             expression { deployStorybook == true }
           }
           steps {
-            sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
-            sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
-            sh 'npm run build:vue-storybook' //builds to /dist/storybook/vue-components
+            sh 'npm run build:storybook'
           }
         }
         stage('Build npm package'){
@@ -68,9 +67,7 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh 'npm run build:angular-components'
-            sh 'npm run build:core-css'
-            sh 'npm run build:vue-components'
+            sh 'npm run build:npm'
           }
         }
       }
@@ -94,8 +91,28 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh 'npm run publish:angular-components -- --dry-run'
-            sh 'npm run publish:core-css -- --dry-run'
+            sh 'npm run publish:npm-test'
+          }
+        }
+      }
+    }
+
+    stage('Deploy PROD') {
+      parallel {
+        stage('Storybook'){
+          when {
+            expression { deployStorybook == true }
+          }
+          steps {
+            echo 'placeholder'
+          }
+        }
+        stage('Publish to npm'){
+          when {
+            expression { publishNpm == true }
+          }
+          steps {
+            echo 'placeholder'
           }
         }
       }
