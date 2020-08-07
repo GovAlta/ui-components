@@ -1,10 +1,10 @@
 <template>
     <div class="goa-microsite-logo">
         <div class="logo">
-            <a v-bind:href="microServiceHomeLink" v-bind:aria-label="microServiceHomeLink" class='microsite-link'>
-                <img class="image-desktop-tablet" v-bind:alt="base64Images.logo.fullSize.alt"
-                   v-bind:src="base64Images.logo.fullSize.data" />
-                <img class="image-mobile" v-bind:alt="base64Images.logo.small.alt" v-bind:src="base64Images.logo.small.data" />
+            <a :href="microServiceHomeLink" :aria-label="microServiceHomeLink" class='microsite-link'>
+                <img class="image-desktop-tablet" :alt="base64Images.logo.fullSize.alt"
+                   :src="base64Images.logo.fullSize.data" />
+                <img class="image-mobile" :alt="base64Images.logo.small.alt" :src="base64Images.logo.small.data" />
                 <span class="name">
                     {{serviceName}}
                 </span>
