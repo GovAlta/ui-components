@@ -13,6 +13,8 @@
     </div>
 </template>
 <script>
+    import { FooterImages } from '../../../../angular-components/src/lib/microsite-logo/inlineImages';
+
     export default {
         name: 'goa-microsite-logo',
         props: {
@@ -26,7 +28,9 @@
             }
         },
         data () {
-
+            return {
+                base64Images: FooterImages
+            }
         }
     }
 </script>

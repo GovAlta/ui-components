@@ -1,28 +1,29 @@
+
 import { DoDont } from '@abgov/storybook-common';
 import GoAMicrositeLogoComponent from './microsite-logo.vue';
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks'; 
 
-import { Meta, Preview, Story, ArgsTable } from '@storybook/addon-docs/blocks';
-import { text, withKnobs } from '@storybook/addon-knobs';
-
-<Meta title="Design System/Basic Elements/Header" decorators={[
-        withKnobs
-    ]}
-    component={GoAMicrositeLogoComponent}
- />
+<Meta title="Design System/Basic Elements/Header" component={GoAMicrositeLogoComponent} />
 
 # Header
 
 <Preview>
-  <Story name="Micro Site Logo" height={100} parameters={
-    {
-      design: {
-        specUrl: 'https://xd.adobe.com/view/18ccfd61-7e54-450e-a05d-cabfff452d6e-4d9f/screen/bbcbebfa-96a4-4625-931e-54b7b7e60b4e/specs',
-        reviewUrl: 'https://xd.adobe.com/view/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/'
-      }
-    }
-  }>
+  <Story name="Micro Site Logo" height={100}>
     {{
-        template: `<div>test</div><goa-microsite-logo :serviceName="Digital Service Name" :microServiceHomeLink="http://www.alberta.ca"></goa-microsite-logo>`
+      components: [GoAMicrositeLogoComponent],
+      render: function (createElement) {
+        return createElement(
+          GoAMicrositeLogoComponent, {
+            props: {
+              'serviceName': 'Microsite Service Name',
+              'microSiteHomeLink': 'http://alberta.ca'
+            },
+            data() {
+              return {};
+            }
+          }
+        )
+      }
     }}
   </Story>
 </Preview>

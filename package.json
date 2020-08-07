@@ -87,6 +87,7 @@
     "@types/node": "~8.9.4",
     "@typescript-eslint/eslint-plugin": "2.19.2",
     "@typescript-eslint/parser": "2.19.2",
+    "@vue/cli-plugin-babel": "^4.4.6",
     "@vue/cli-plugin-typescript": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
     "@vue/cli-shared-utils": "^4.4.6",
