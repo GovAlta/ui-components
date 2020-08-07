@@ -146,63 +146,6 @@
         }
       }
     },
-    "core-css-e2e": {
-      "root": "apps/core-css-e2e",
-      "sourceRoot": "apps/core-css-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/core-css-e2e/cypress.json",
-            "tsConfig": "apps/core-css-e2e/tsconfig.e2e.json",
-            "devServerTarget": "core-css:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "core-css:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/core-css-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/core-css-e2e/**/*"]
-          }
-        }
-      }
-    },
-    "angular-components-e2e": {
-      "root": "apps/angular-components-e2e",
-      "sourceRoot": "apps/angular-components-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/angular-components-e2e/cypress.json",
-            "tsConfig": "apps/angular-components-e2e/tsconfig.e2e.json",
-            "devServerTarget": "angular-components:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "angular-components:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/angular-components-e2e/tsconfig.e2e.json"],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/angular-components-e2e/**/*"
-            ]
-          }
-        }
-      }
-    },
     "storybook-common": {
       "root": "libs/storybook-common",
       "sourceRoot": "libs/storybook-common/src",

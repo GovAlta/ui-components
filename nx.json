@@ -34,14 +34,6 @@
     "angular-components": {
       "tags": []
     },
-    "core-css-e2e": {
-      "tags": [],
-      "implicitDependencies": ["core-css"]
-    },
-    "angular-components-e2e": {
-      "tags": [],
-      "implicitDependencies": ["angular-components"]
-    },
     "storybook-common": {
       "tags": []
     },
