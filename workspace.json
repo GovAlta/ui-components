@@ -257,17 +257,6 @@
             "exclude": ["**/node_modules/**", "!libs/common/**/*"]
           }
         },
-        "build": {
-          "builder": "@nrwl/node:package",
-          "options": {
-            "outputPath": "dist/libs/common",
-            "tsConfig": "libs/common/tsconfig.lib.json",
-            "packageJson": "libs/common/package.json",
-            "main": "libs/common/src/index.ts",
-            "assets": [
-            ]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
