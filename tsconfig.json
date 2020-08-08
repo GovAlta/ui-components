@@ -20,7 +20,8 @@
       "@abgov/angular-components": ["libs/angular-components/src/index.ts"],
       "@abgov/storybook-common": ["libs/storybook-common/src/index.ts"],
       "@abgov/vue-plugin": ["libs/vue-plugin/src/index.ts"],
-      "@abgov/vue-components": ["libs/vue-components/src/index.ts"]
+      "@abgov/vue-components": ["libs/vue-components/src/index.ts"],
+      "@abgov/common": ["libs/common/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
