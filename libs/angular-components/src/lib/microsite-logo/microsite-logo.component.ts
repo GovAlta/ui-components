@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MobileLogo, DesktopLogo } from '@abgov/common';
+import { FooterImages } from '../../../../core-css/src/lib/microsite-logo/inlineImages';
 
 @Component({
     selector: 'goa-microsite-logo',
@@ -9,18 +9,17 @@ import { MobileLogo, DesktopLogo } from '@abgov/common';
 
 export class GoAMicrositeLogoComponent implements OnInit {
 
-    desktopLogo = DesktopLogo;
-    mobileLogo = MobileLogo;
+    base64Images = FooterImages
 
     /**
      * The name to show on the header/footer as the microsite.
     */
-    @Input() serviceName = 'Digital Service Name (microsite)';
+    @Input() serviceName = 'Digital Service Name (microsite)'
 
     /**
      * The home page URL of the microsite.
      */
-    @Input() microServiceHomeLink: String = 'https://www.alberta.ca/index.aspx';
+    @Input() microServiceHomeLink: String = 'https://www.alberta.ca/index.aspx'
     
     constructor() {}
     ngOnInit() {}
