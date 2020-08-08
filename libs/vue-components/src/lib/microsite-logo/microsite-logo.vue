@@ -2,9 +2,9 @@
     <div class="goa-microsite-logo">
         <div class="logo">
             <a :href="microServiceHomeLink" :aria-label="microServiceHomeLink" class='microsite-link'>
-                <img class="image-desktop-tablet" alt="Government of Alberta"
-                   :src="DesktopLogo" />
-                <img class="image-mobile" alt="Government of Alberta" :src="MobileLogo" />
+                <img class="image-desktop-tablet" :alt="base64Images.logo.fullSize.alt"
+                   :src="base64Images.logo.fullSize.data" />
+                <img class="image-mobile" :alt="base64Images.logo.small.alt" :src="base64Images.logo.small.data" />
                 <span class="name">
                     {{serviceName}}
                 </span>
@@ -13,7 +13,7 @@
     </div>
 </template>
 <script>
-    import { MobileLogo, DesktopLogo } from '@abgov/common';
+    import { FooterImages } from '../../../../core-css/src/lib/microsite-logo/inlineImages';
 
     export default {
         name: 'goa-microsite-logo',
@@ -29,8 +29,7 @@
         },
         data () {
             return {
-                DesktopLogo: DesktopLogo,
-                MobileLogo: MobileLogo
+                base64Images: FooterImages
             }
         }
     }
