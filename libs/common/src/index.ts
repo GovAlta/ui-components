@@ -1,1 +1,1 @@
-export { DesktopLogo, MobileLogo } from './lib/inlineAssets';
+export * from './lib/inlineAssets';
