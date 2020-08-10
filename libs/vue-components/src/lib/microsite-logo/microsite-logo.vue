@@ -13,7 +13,7 @@
     </div>
 </template>
 <script>
-    import { MobileLogo, DesktopLogo } from '@abgov/common';
+    import { DesktopLogo, MobileLogo } from '../../../../common/src/index';
 
     export default {
         name: 'goa-microsite-logo',
