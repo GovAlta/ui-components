@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MobileLogo } from '@abgov/common';
+import { MobileLogo } from '../microsite-logo/inlineAssets';
 
 
 @Component({
