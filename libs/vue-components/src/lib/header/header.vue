@@ -10,7 +10,7 @@
         <goa-microsite-logo class="microsite-logo" :serviceName="serviceName" :microServiceHomeLink="microServiceHomeLink"></goa-microsite-logo>    
     </header>
 </template>
-<script>
+<script lang="typescript">
     import { MobileLogo } from '../../../../common/src/index';
     import { GoAMicrositeLogo } from '../../index';
 

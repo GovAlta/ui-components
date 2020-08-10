@@ -12,7 +12,7 @@
         </div>
     </div>
 </template>
-<script>
+<script lang="typescript">
     import { DesktopLogo, MobileLogo } from '../../../../common/src/index';
 
     export default {

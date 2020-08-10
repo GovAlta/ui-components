@@ -15,9 +15,8 @@
     "build:angular-storybook": "nx run angular-components:build-storybook",
     "build:core-storybook": "nx run core-css:build-storybook",
     "build:vue-storybook": "nx run vue-components:build-storybook",
-    "test": "nx test",
+    "test": "nx test --clearCache",
     "test:all": "nx run-many --target=test --all",
-    "test:vue-components": "npm run test vue-components",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
     "affected:apps": "nx affected:apps",
@@ -46,7 +45,6 @@
   "dependencies": {
     "@angular/common": "10.0.0",
     "@angular/core": "10.0.0",
-    "npm-run-all": "^4.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "vue": "^2.6.11"
