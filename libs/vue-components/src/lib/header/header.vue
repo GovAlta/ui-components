@@ -11,7 +11,7 @@
     </header>
 </template>
 <script lang="typescript">
-    import { MobileLogo } from '../../../../common/src/index';
+    import { MobileLogo } from '@abgov/common';
     import { GoAMicrositeLogo } from '../../index';
 
     export default {
