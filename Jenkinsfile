@@ -1,14 +1,19 @@
 def publishNpm = false
 def deployStorybook = false;
+def base = '';
+def baseCommand = ''
+def generateNpmrc(){
+	sh "echo \"@abgov:registry=https://registry.npmjs.org/\" >> ~/.npmrc"
+	
+	sh "echo \"//registry.npmjs.org/:_authToken=21d6856c-6376-4f64-a27e-6533bd4bc8c7\" > ~/.npmrc"
+}
+
 
 pipeline {
   agent {
     node {
       label 'node12' 
     }
-  }
-  environment {
-    AFFECTED_APPS = ''
   }
   options {
     // set a timeout of 20 minutes for this pipeline
@@ -21,11 +26,15 @@ pipeline {
         sh 'npm install -g @nrwl/cli'
         sh 'npm install'
         script {
-          echo "previous successful: ${GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
-          echo "current commit: ${GIT_COMMIT}"
+          if (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT){
+            baseCommand = "--base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+          }
+          else {
+            baseCommand = "--all"
+          }
           
           def affected = sh (
-            script: 'nx affected:libs --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --plain',
+            script: "nx affected:libs ${baseCommand} --plain",
             returnStdout: true
           ).trim();
           def isStoryBookOnly = affected == 'storybook-common';
@@ -46,12 +55,12 @@ pipeline {
       parallel {
         stage('Test'){
           steps {
-            sh 'nx affected --target=test --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --head=origin/dev --parallel'
+            sh "nx affected --target=test ${baseCommand} --parallel"
           }
         }
         stage('Lint'){
           steps {
-            sh 'nx affected --target=lint --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --head=origin/dev --parallel'
+            sh "nx affected --target=lint ${baseCommand} --parallel"
           }
         }
         stage('Build storybook'){
@@ -59,7 +68,8 @@ pipeline {
             expression { deployStorybook == true }
           }
           steps {
-            sh 'npm run build:storybook'
+            sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
+            sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
           }
         }
         stage('Build npm package'){
@@ -67,7 +77,7 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh 'npm run build:npm'
+            sh "nx affected --target=build ${baseCommand} --parallel --prod"
           }
         }
       }
@@ -80,9 +90,9 @@ pipeline {
           }
           steps {
             //copy the nginx config to binary buld location
-            sh 'cp nginx.conf dist/storybook'   
+            sh "cp nginx.conf dist/storybook"   
             dir('dist/storybook') {
-              sh 'oc start-build ui-components --from-dir . --follow'
+              sh "oc start-build ui-components --from-dir . --follow"
             }
           }
         }
@@ -91,13 +101,13 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh 'npm run publish:npm-test'
+            sh "npm run publish:npm-test"
           }
         }
       }
     }
 
-    stage('Deploy PROD') {
+    stage('Deploy Prod') {
       parallel {
         stage('Storybook'){
           when {
@@ -112,7 +122,8 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            echo 'placeholder'
+            generateNpmrc()
+            sh 'npm run publish:npm'
           }
         }
       }
