@@ -101,7 +101,7 @@
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "^1.0.3",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "25.1.0",
+    "babel-jest": "^25.1.0",
     "babel-loader": "8.1.0",
     "babel-preset-vue": "^2.0.2",
     "css-loader": "^3.6.0",
@@ -128,7 +128,7 @@
     "tslib": "^1.10.0",
     "tslint": "~6.0.0",
     "typescript": "3.9.7",
-    "vue-jest": "^3.0.5",
+    "vue-jest": "^3.0.6",
     "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.11",
     "zone.js": "^0.10.3"

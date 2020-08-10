@@ -8,7 +8,7 @@ module.exports = {
     "^.+\\.ts$": "ts-jest",
     '^.+\\.tsx?$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'vue', 'js', 'json'],
+  moduleFileExtensions: ['ts', 'tsx', 'vue', 'js', 'jsx', 'json'],
   coverageDirectory: '../../coverage/libs/vue-component',
   snapshotSerializers: ['jest-serializer-vue']
 };
