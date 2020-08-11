@@ -264,16 +264,6 @@
             "tsConfig": "libs/shared/common/tsconfig.spec.json",
             "passWithNoTests": true
           }
-        },
-        "build": {
-          "builder": "@nrwl/node:package",
-          "options": {
-            "outputPath": "dist/libs/shared/common",
-            "tsConfig": "libs/shared/common/tsconfig.lib.json",
-            "packageJson": "libs/shared/common/package.json",
-            "main": "libs/shared/common/src/index.ts",
-            "assets": ["libs/shared/common/*.md"]
-          }
         }
       }
     }

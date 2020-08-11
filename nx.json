@@ -32,13 +32,15 @@
       "tags": []
     },
     "angular-components": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["shared-common"]
     },
     "shared-storybook-common": {
       "tags": []
     },
     "vue-components": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["shared-common"]
     },
     "shared-common": {
       "tags": []

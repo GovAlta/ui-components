@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MobileLogo, DesktopLogo } from '@abgov/shared/common';
+import { MobileLogo, DesktopLogo } from './inlineAssets';  //for now this file is copied from shared/common because I cannot get ng-packagr to inline it
 
 @Component({
     selector: 'goa-microsite-logo',
