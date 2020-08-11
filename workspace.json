@@ -58,7 +58,7 @@
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
           "options": {
-            "uiFramework": "@storybook/html",
+            "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/core-css",
             "config": {
               "configFolder": "libs/core-css/.storybook"
@@ -176,6 +176,17 @@
     "vue-components": {
       "projectType": "library",
       "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/vue-components/tsconfig.lib.json",
+              "libs/vue-components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/vue-components**/*"]
+          }
+        },
         "build": {
           "builder": "@nx-plus/vue:library",
           "options": {
