@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MobileLogo, DesktopLogo } from './inlineAssets';
+import { MobileLogo, DesktopLogo } from '@abgov/shared/common';
 
 @Component({
     selector: 'goa-microsite-logo',

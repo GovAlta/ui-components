@@ -1,10 +1,9 @@
 module.exports = {
-  name: 'common',
-  preset: '../../jest.config.js',
-  testEnvironment: 'node',
+  name: 'shared-common',
+  preset: '../../../jest.config.js',
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
-  coverageDirectory: '../../coverage/libs/common',
+  coverageDirectory: '../../../coverage/libs/shared/common',
 };

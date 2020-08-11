@@ -146,9 +146,9 @@
         }
       }
     },
-    "storybook-common": {
-      "root": "libs/storybook-common",
-      "sourceRoot": "libs/storybook-common/src",
+    "shared-storybook-common": {
+      "root": "libs/shared/storybook-common",
+      "sourceRoot": "libs/shared/storybook-common/src",
       "projectType": "library",
       "schematics": {},
       "architect": {
@@ -157,17 +157,17 @@
           "options": {
             "linter": "eslint",
             "tsConfig": [
-              "libs/storybook-common/tsconfig.lib.json",
-              "libs/storybook-common/tsconfig.spec.json"
+              "libs/shared/storybook-common/tsconfig.lib.json",
+              "libs/shared/storybook-common/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/storybook-common/**/*"]
+            "exclude": ["**/node_modules/**", "!libs/shared/storybook-common/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/storybook-common/jest.config.js",
-            "tsConfig": "libs/storybook-common/tsconfig.spec.json",
+            "jestConfig": "libs/shared/storybook-common/jest.config.js",
+            "tsConfig": "libs/shared/storybook-common/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }
@@ -240,9 +240,9 @@
       "root": "libs/vue-components",
       "sourceRoot": "libs/vue-components/src"
     },
-    "common": {
-      "root": "libs/common",
-      "sourceRoot": "libs/common/src",
+    "shared-common": {
+      "root": "libs/shared/common",
+      "sourceRoot": "libs/shared/common/src",
       "projectType": "library",
       "schematics": {},
       "architect": {
@@ -251,18 +251,28 @@
           "options": {
             "linter": "eslint",
             "tsConfig": [
-              "libs/common/tsconfig.lib.json",
-              "libs/common/tsconfig.spec.json"
+              "libs/shared/common/tsconfig.lib.json",
+              "libs/shared/common/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/common/**/*"]
+            "exclude": ["**/node_modules/**", "!libs/shared/common/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/common/jest.config.js",
-            "tsConfig": "libs/common/tsconfig.spec.json",
+            "jestConfig": "libs/shared/common/jest.config.js",
+            "tsConfig": "libs/shared/common/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/shared/common",
+            "tsConfig": "libs/shared/common/tsconfig.lib.json",
+            "packageJson": "libs/shared/common/package.json",
+            "main": "libs/shared/common/src/index.ts",
+            "assets": ["libs/shared/common/*.md"]
           }
         }
       }

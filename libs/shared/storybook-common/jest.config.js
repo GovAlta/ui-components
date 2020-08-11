@@ -8,5 +8,5 @@ module.exports = {
     ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
-  coverageDirectory: '../../coverage/libs/storybook-common',
+  coverageDirectory: '../../coverage/libs/shared/storybook-common',
 };
