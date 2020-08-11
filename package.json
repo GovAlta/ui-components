@@ -37,6 +37,7 @@
     "publish:script": "node publish.js --path $npm_config_path --test=$npm_config_test",
     "publish:npm:angular-components": "npm run publish:script --path=dist/libs/angular-components",
     "publish:npm:core-css": "npm run publish:script --path=dist/libs/core-css",
+    "publish:npm:vue-components": "npm run publish:script --path=dist/libs/vue-components",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
