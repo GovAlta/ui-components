@@ -1,11 +1,8 @@
 module.exports = {
-  rules: {},
   extends: [
     '../../.eslintrc',
-    'plugin:vue/essential',
-    '@vue/typescript/recommended',
-    'prettier',
-    'prettier/@typescript-eslint',
+    'plugin:vue/vue3-recommended',
+    '@vue/typescript/recommended'
   ],
   env: {
     node: true,
@@ -18,5 +15,5 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['!**/*'],
+  ignorePatterns: ['!**/*']
 };
