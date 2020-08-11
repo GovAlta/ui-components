@@ -37,7 +37,7 @@ pipeline {
             script: "nx affected:libs ${baseCommand} --plain",
             returnStdout: true
           ).trim();
-          def isStoryBookOnly = affected == 'storybook-common';
+          def isStoryBookOnly = affected == 'shared-storybook-common';
           echo "affected: '${affected}'"
           if (isStoryBookOnly == false){
             publishNpm = true;
