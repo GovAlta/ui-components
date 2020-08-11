@@ -23,7 +23,8 @@ module.exports = async ({ config, mode }) => {
 
   //add aliases
   config.resolve.alias = {
-      '@abgov/storybook-common': path.resolve(__dirname, '../libs/storybook-common/src/index.ts'),
+      '@abgov/shared/storybook-common': path.resolve(__dirname, '../libs/shared/storybook-common/src/index.ts'),
+      '@abgov/shared/common': path.resolve(__dirname, '../libs/shared/common/src/index.ts')    
   }
 
   // Return the altered config

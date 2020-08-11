@@ -37,7 +37,7 @@ pipeline {
             script: "nx affected:libs ${baseCommand} --plain",
             returnStdout: true
           ).trim();
-          def isStoryBookOnly = affected == 'storybook-common';
+          def isStoryBookOnly = affected == 'shared-storybook-common';
           echo "affected: '${affected}'"
           if (isStoryBookOnly == false){
             publishNpm = true;
@@ -70,6 +70,7 @@ pipeline {
           steps {
             sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
             sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
+            sh 'npm run build:vue-storybook' //builds to /dist/storybook/vue-components
           }
         }
         stage('Build npm package'){

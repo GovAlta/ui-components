@@ -18,9 +18,10 @@
   },
   "peerDependencies": {
     "@angular/common": "^9.1.11",
-    "@angular/core": "^9.1.11"
+    "@angular/core": "^9.1.11",
+    "@abgov/shared-common": "^0.0.1"
   },
-  "dependencies": {
-    "tslib": "^1.10.0"
-  }
+  "bundledDependencies": [
+    "@abgov/shared-common"
+  ]
 }
