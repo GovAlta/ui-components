@@ -1,6 +1,6 @@
 module.exports = {
   name: 'storybook-common',
-  preset: '../../jest.config.js',
+  preset: '../../../jest.config.js',
   transform: {
     '^.+\\.[tj]sx?$': [
       'babel-jest',
@@ -8,5 +8,5 @@ module.exports = {
     ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
-  coverageDirectory: '../../coverage/libs/shared/storybook-common',
+  coverageDirectory: '../../../coverage/libs/shared/storybook-common',
 };
