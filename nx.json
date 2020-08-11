@@ -44,9 +44,6 @@
     },
     "storybook-common": {
       "tags": []
-    },
-    "vue-components": {
-      "tags": []
     }
   }
 }
