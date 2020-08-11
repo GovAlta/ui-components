@@ -1,7 +1,7 @@
 module.exports = {
   extends: [
     '../../.eslintrc',
-    'plugin:vue/vue3-recommended',
+    'plugin:vue/recommended',
     '@vue/typescript/recommended'
   ],
   env: {
