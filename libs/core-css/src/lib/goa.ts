@@ -1,6 +1,7 @@
+/* eslint-disable */
 var grecaptcha: any;
 var google: any;
-/* eslint-disable */
+
 /*
 
 Government of Alberta Design System

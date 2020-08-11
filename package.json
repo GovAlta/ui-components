@@ -12,6 +12,7 @@
     "build:angular-components": "npm run build angular-components --withDeps --prod",
     "build:vue-components": "npm run build vue-components --withDeps --prod",
     "build:core-css": "npm run build core-css --withDeps --prod",
+    "build:plugin:vue": "nx run vue-plugin:build",
     "build:angular-storybook": "nx run angular-components:build-storybook",
     "build:core-storybook": "nx run core-css:build-storybook",
     "build:vue-storybook": "nx run vue-components:build-storybook",
@@ -31,11 +32,11 @@
     "format:write": "nx format:write",
     "format:check": "nx format:check",
     "update": "nx migrate latest",
-    "publish:npm-test": "run-p \"publish:npm:* -- --dry-run\"",
+    "publish:npm-test": "run-p \"publish:npm:* --test\"",
     "publish:npm": "run-p publish:npm:*",
-    "publish:npm:angular-components": "cd dist/libs/angular-components && npm publish --new-version",
-    "publish:npm:vue-components": "cd dist/libs/vue-components && npm publish --new-version",
-    "publish:npm:core-css": "npm run build:core-css && cd dist/libs/core-css && npm publish --new-version",
+    "publish:script": "node publish.js --path $npm_config_path --test=$npm_config_test",
+    "publish:npm:angular-components": "npm run publish:script --path=dist/libs/angular-components",
+    "publish:npm:core-css": "npm run publish:script --path=dist/libs/core-css",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
@@ -130,6 +131,7 @@
     "vue-jest": "^3.0.5",
     "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.11",
+    "yargs": "^15.4.1",
     "zone.js": "^0.10.3"
   }
 }
