@@ -18,10 +18,6 @@
   },
   "peerDependencies": {
     "@angular/common": "^9.1.11",
-    "@angular/core": "^9.1.11",
-    "@abgov/shared-common": "^0.0.1"
-  },
-  "bundledDependencies": [
-    "@abgov/shared-common"
-  ]
+    "@angular/core": "^9.1.11"
+  }
 }
