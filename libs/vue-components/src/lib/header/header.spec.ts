@@ -7,15 +7,15 @@ describe('GoA Microsite Logo', () => {
 
   test('should render the sevice name', async () => {
     await render(GoAHeader, {
-      props: { serviceName: serviceName, microServiceHomeLink: microSiteLink }
+      props: { serviceName: serviceName, serviceHome: microSiteLink }
     });
 
     expect(screen.getByText(serviceName))
   });
 
-  test('should link to the microServiceHomeLink', async () => {
+  test('should link to the serviceHome', async () => {
     await render(GoAHeader, {
-      props: { serviceName: serviceName, microServiceHomeLink: microSiteLink }
+      props: { serviceName: serviceName, serviceHome: microSiteLink }
     });
     
     expect((screen.getByRole('link', { name: microSiteLink }) as HTMLAnchorElement).href).toEqual(microSiteLink);

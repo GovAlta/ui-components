@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <goa-header serviceName="Sample usage example" microServiceHomeLink="http://alberta.ca" />
+    <goa-header serviceName="Sample usage example" serviceHome="http://alberta.ca" />
   </div>
 </template>
 

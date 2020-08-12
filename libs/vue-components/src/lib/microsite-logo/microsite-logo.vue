@@ -1,7 +1,7 @@
 <template>
     <div class="goa-microsite-logo">
         <div class="logo">
-            <a :href="microServiceHomeLink" :aria-label="microServiceHomeLink" class='microsite-link'>
+            <a :href="serviceHome" :aria-label="serviceHome" class='microsite-link'>
                 <span class="image-desktop-tablet"></span>
                 <span class="image-mobile"></span>
                 <span class="name">
@@ -15,7 +15,7 @@
     export default {
         name: 'goa-microsite-logo',
         props: {
-            'microServiceHomeLink': {
+            'serviceHome': {
                 type: String,
                 required: true
             },
