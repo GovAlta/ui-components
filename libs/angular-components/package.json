@@ -1,6 +1,6 @@
 {
   "name": "@abgov/angular-components",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "license": "MIT",
   "description": "Government of Alberta - shared UI components for Angular",
   "bugs": {
