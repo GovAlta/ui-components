@@ -1,7 +1,7 @@
 <template>
     <header class="goa-header">
         <div class="top-bar">
-            <img class="image" alt="Government of Alberta" :src="MobileLogo" />
+            <span class="image"></span>
             <span class="site-text">An official site of the </span> <a href='https://www.alberta.ca/index.aspx'
                 class="web-link">Alberta
                 Government</a>
@@ -11,7 +11,6 @@
     </header>
 </template>
 <script lang="typescript">
-    import { MobileLogo } from '@abgov/shared/common';
     import { GoAMicrositeLogo } from '../../index';
 
     export default {
@@ -31,7 +30,6 @@
         },
         data () {
             return {
-                MobileLogo: MobileLogo
             }
         }
     }

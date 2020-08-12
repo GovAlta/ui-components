@@ -2,9 +2,8 @@
     <div class="goa-microsite-logo">
         <div class="logo">
             <a :href="microServiceHomeLink" :aria-label="microServiceHomeLink" class='microsite-link'>
-                <img class="image-desktop-tablet" alt="Government of Alberta"
-                   :src="DesktopLogo" />
-                <img class="image-mobile" alt="Government of Alberta" :src="MobileLogo" />
+                <span class="image-desktop-tablet"></span>
+                <span class="image-mobile"></span>
                 <span class="name">
                     {{serviceName}}
                 </span>
@@ -13,8 +12,6 @@
     </div>
 </template>
 <script lang="typescript">
-    import { DesktopLogo, MobileLogo } from '@abgov/shared/common';
-
     export default {
         name: 'goa-microsite-logo',
         props: {
@@ -29,8 +26,6 @@
         },
         data () {
             return {
-                DesktopLogo: DesktopLogo,
-                MobileLogo: MobileLogo
             }
         }
     }

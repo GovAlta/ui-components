@@ -9,8 +9,8 @@ module.exports = {
       '@storybook/preset-scss',
       //'@storybook/addon-knobs',
       //'@storybook/addon-backgrounds',
-      //'@storybook/addon-a11y/register',
-      //'@storybook/addon-viewport',
+      '@storybook/addon-a11y/register',
+      '@storybook/addon-viewport',
       //'storybook-addon-xd-designs'
     ]
 };
