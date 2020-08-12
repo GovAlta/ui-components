@@ -16,7 +16,7 @@ export class GoAMicrositeLogoComponent implements OnInit {
     /**
      * The home page URL of the microsite.
      */
-    @Input() microServiceHomeLink: String = 'https://www.alberta.ca/index.aspx';
+    @Input() serviceHome: String = 'https://www.alberta.ca/index.aspx';
     
     constructor() {}
     ngOnInit() {}

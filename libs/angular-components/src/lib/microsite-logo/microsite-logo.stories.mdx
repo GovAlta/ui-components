@@ -26,7 +26,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
         component: GoAMicrositeLogoComponent,
         props: {
           serviceName: text('serviceName', 'Digital Service Name (microsite)'),
-          microServiceHomeLink: text('microServiceHomeLink', 'https://www.alberta.ca/index.aspx')
+          serviceHome: text('serviceHome', 'https://www.alberta.ca/index.aspx')
         }
     }}
   </Story>
@@ -38,7 +38,7 @@ A logo to use for a Government of Alberta microsite.  Contains a customizable se
 
 ## Examples
 ```
-<goa-microsite-logo serviceName="Sample service" microServiceHomeLink="/"></goa-header>
+<goa-microsite-logo serviceName="Sample service" serviceHome="/"></goa-header>
 ```
 
 ## Properties
@@ -46,5 +46,5 @@ A logo to use for a Government of Alberta microsite.  Contains a customizable se
 | Name     | Type | Description | Default |
 |----------|:----:|:-----------:|--------:|
 | serviceName    | string | The name of the site.  Will appear next to the Government of Alberta logo. | 'Digital Service Name (microsite)' |
-| microServiceHomeLink | string | URL to use as the link for the click on the footer | 'https://www.alberta.ca/index.aspx' |
+| serviceHome | string | URL to use as the link for the click on the footer | 'https://www.alberta.ca/index.aspx' |
 

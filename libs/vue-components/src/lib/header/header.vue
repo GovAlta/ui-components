@@ -7,11 +7,11 @@
                 Government</a>
         </div>
 
-        <goa-microsite-logo class="microsite-logo" :serviceName="serviceName" :microServiceHomeLink="microServiceHomeLink"></goa-microsite-logo>    
+        <goa-microsite-logo class="microsite-logo" :serviceName="serviceName" :serviceHome="serviceHome"></goa-microsite-logo>    
     </header>
-</template>
+</template> 
 <script lang="typescript">
-    import { GoAMicrositeLogo } from '../../index';
+    import { GoAMicrositeLogo } from '../../index'; 
 
     export default {
         components: { 
@@ -19,10 +19,16 @@
         },
         name: 'goa-header',
         props: {
-            'microServiceHomeLink': {
+             /**
+             * The home link url for when the user clicks.
+             */
+            'serviceHome': {
                 type: String,
                 required: true
             },
+              /**
+             * The service name to display.
+             */
             'serviceName': {
                 type: String,
                 required: true

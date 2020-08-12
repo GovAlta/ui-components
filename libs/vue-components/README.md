@@ -14,7 +14,7 @@ Documentation is being worked on and will be provided soon.
 ```
 <template>
   <div id="app">
-    <goa-header serviceName="Sample usage example" microServiceHomeLink="/" />
+    <goa-header serviceName="Sample usage example" serviceHome="/" />
   </div>
 </template>
 
