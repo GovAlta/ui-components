@@ -13,6 +13,24 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 
 <!-- 
   This syntax isn't the greatest... It supposedly works with template and props properties, but I could not get it to work.
+<Preview>
+  <Story name="Micro Site Logo" height={100}>
+    {{
+      components: { GoAHeader },
+      template: `<goa-header :serviceName="serviceName" :serviceHome="serviceHome" />`,
+      props: {
+        serviceName: {
+          type: String,
+          default: text('serviceName', 'Microsite name')
+        },
+        serviceHome: {
+          type: String,
+          default: text('serviceHome', '/')
+        }
+      }  
+    }}
+  </Story>
+</Preview>
 -->
 <Preview>
   <Story name="Header" height={150}>

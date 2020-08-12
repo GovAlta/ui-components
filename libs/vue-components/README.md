@@ -1,4 +1,4 @@
-# angular-components
+# vue-components
 
 This library contains vue components from the Government of Alberta.
 
