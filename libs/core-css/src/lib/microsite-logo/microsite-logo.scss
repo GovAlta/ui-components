@@ -1,4 +1,6 @@
 @import '../../../../core-css/src/lib/styles/responsive-breakpoints.scss';
+@import '../../../../core-css/src/lib/styles/goa-logo-desktop.scss';
+@import '../../../../core-css/src/lib/styles/goa-logo-mobile.scss';
 
 .goa-microsite-logo {
    display: inline-block;
@@ -14,6 +16,9 @@
       width: 150px;
       height: 42px;
       margin-top: 12px;
+      display: inline-block;
+
+      @include goa-logo-desktop;
 
       @include mobile {
         display: none;
@@ -21,6 +26,7 @@
     }
 
     .image-mobile {
+      
       @include tablet {
         display: none;
       }
@@ -32,9 +38,10 @@
       @include mobile {
         width: 34px;
         height: 34px;
+        margin-top: 16px;
         display: inline-block;
-        padding-top: 16px;
 
+        @include goa-logo-mobile;
       }
     }
 

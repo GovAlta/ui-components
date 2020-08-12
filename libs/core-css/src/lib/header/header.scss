@@ -1,5 +1,6 @@
 @import "../../../../core-css/src/lib/styles/responsive-breakpoints.scss";
 @import "../../../../core-css/src/lib/styles/page-template.scss";
+@import "../../../../core-css/src/lib/styles/goa-logo-mobile.scss";
 
 header.goa-header {
   border-bottom: 1px solid #dcdcdc;
@@ -20,6 +21,8 @@ header.goa-header {
       height: 16px;
       width: 16px;
       margin-top: 3px;
+
+      @include goa-logo-mobile;
 
       @include mobile {
         display: none;
