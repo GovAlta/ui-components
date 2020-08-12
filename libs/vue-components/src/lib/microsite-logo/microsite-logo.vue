@@ -15,10 +15,16 @@
     export default {
         name: 'goa-microsite-logo',
         props: {
+             /**
+             * The home link url for when the user clicks.
+             */
             'serviceHome': {
                 type: String,
                 required: true
             },
+             /**
+             * The service name to display.
+             */
             'serviceName': {
                 type: String,
                 required: true
