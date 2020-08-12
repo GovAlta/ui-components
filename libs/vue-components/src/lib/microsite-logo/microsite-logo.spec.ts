@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/vue';
+import { render, screen } from '@testing-library/vue';
 import GoAMicrositeLogo from './microsite-logo.vue';
 
 describe('GoA Microsite Logo', () => {
@@ -18,6 +18,6 @@ describe('GoA Microsite Logo', () => {
       props: { serviceName: serviceName, microServiceHomeLink: microSiteLink }
     });
     
-    expect((<HTMLAnchorElement>screen.getByRole('link', { name: microSiteLink })).href).toEqual(microSiteLink);
+    expect((screen.getByRole('link', { name: microSiteLink }) as HTMLAnchorElement).href).toEqual(microSiteLink);
   });
 });
