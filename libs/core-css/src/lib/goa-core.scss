@@ -1,3 +1,7 @@
+/* This file is meant to build the goa-core.css file.  The bulit file should be the same as the given one from the design team */
+@import './button/button.scss';
+@import './button/button-link.scss';
+
 
 /*
 
@@ -198,137 +202,12 @@ a[href $= '.docx']:after {
 
 /* goa-button ****************************************************************/
 
-button.goa-button,
-input[type="button"].goa-button,
-input[type="submit"].goa-button {
-    box-sizing: border-box;
-    min-width: 70px;
-    margin: 28px 12px 0 0;
-    padding: 12px;
-    border: 2px solid #0070c4;
-    border-radius: 4px;
-    background: #0070c4;
-    cursor: pointer;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1em;
-}
-
-button.goa-button:hover,
-input[type="button"].goa-button:hover,
-input[type="submit"].goa-button:hover {
-    border-color: #004f84;
-    background: #004f84;
-}
-
-button.goa-button:focus,
-input[type="button"].goa-button:focus,
-input[type="submit"].goa-button:focus {
-    border-color: #004f84;
-    outline: 3px solid #feba35;
-    outline-offset: 0;
-    background: #004f84;
-}
-
-button.goa-button:active,
-input[type="button"].goa-button:active,
-input[type="submit"].goa-button:active {
-    background: #666;
-    color: #fff;
-    border: 2px solid #666;
-    outline: none;
-}
-
-/* variants ***/
-button.goa-button.goa--secondary,
-input[type="button"].goa-button.goa--secondary {
-    border: 2px solid #0070c4;
-    background: #fff;
-    color: #0070c4;
-}
-
-button.goa-button.goa--secondary:hover,
-input[type="button"].goa-button.goa--secondary:hover {
-    border-color: #004f84;
-    background: #f1f1f1;
-    color: #004f84;
-}
-
-button.goa-button.goa--secondary:focus,
-input[type="button"].goa-button.goa--secondary:focus {
-    border-color: #004f84;
-    background: #f1f1f1;
-    color: #004f84;
-}
-
-button.goa-button.goa--secondary:active,
-input[type="button"].goa-button.goa--secondary:active,
-input[type="submit"].goa-button.goa--secondary:active {
-    background: #DCDCDC;
-    color: #333;
-    border: 2px solid #333;
-    outline: none;
-}
-
-button.goa-button.goa--tertiary,
-input[type="button"].goa-button.goa--tertiary {
-    border-color: #f1f1f1;
-    background: #fff;
-    color: #0070c4;
-}
-
-button.goa-button.goa--tertiary:hover,
-input[type="button"].goa-button.goa--tertiary:hover {
-    background: #f1f1f1;
-    color: #004f84;
-}
-
-button.goa-button.goa--tertiary:focus,
-input[type="button"].goa-button.goa--tertiary:focus {
-    border-color: #004f84;
-    background: #f1f1f1;
-    color: #004f84;
-}
+@include goa-button;
 
 
 /* goa-link-button ***********************************************************/
 
-a.goa-link-button {
-    display: inline-block;
-    box-sizing: border-box;
-    min-width: 70px;
-    margin: 28px 12px 0 0;
-    padding: 9px 12px;
-    border: 2px solid #0070c4;
-    border-radius: 4px;
-    background: #0070c4;
-    cursor: pointer;
-    color: #fff !important;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1em;
-}
-
-a.goa-link-button::after {
-    margin-left: 8px;
-    content: '\2192';
-    /*content: '\2191';*/ /* up arrow*/
-}
-
-a.goa-link-button:hover {
-    border-color: #004f84;
-    background: #004f84;
-}
-
-a.goa-link-button:focus, a.goa-link-button:active {
-    border-color: #004f84;
-    outline: 3px solid #feba35;
-    outline-offset: 0;
-    background: #004f84;
-}
-
+@include goa-button-link;
 
 /* goa-form ******************************************************************/
 
@@ -853,7 +732,7 @@ div.goa-tableouter > div.goa-table {
 * 
 ***/
 
-@media screen and (max-width: 500px) {
+@include mobile {
 
   /* elements ****************************************************************/
 
@@ -897,7 +776,7 @@ div.goa-tableouter > div.goa-table {
 * 
 ***/
 
-@media screen and (min-width: 500px) and (max-width: 768px) {
+@include tablet {
 
 
   /* goa-table *************************************************************/
@@ -916,6 +795,6 @@ div.goa-tableouter > div.goa-table {
 * 
 ***/
 
-@media screen and (min-width: 1200px) {
+@@include desktop {
 
 }
