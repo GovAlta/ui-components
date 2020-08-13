@@ -13,7 +13,8 @@ The project contains the Government of Alberta UI components. The output package
 | core-css | Library of core CSS, SCSS, SVGs, and JavaScript.  Published to NPM [@abgov/core-css](https://www.npmjs.com/package/@abgov/core-css). |
 | angular-components | Library of components for Angular.  Published to NPM [@abgov/angular-components](https://www.npmjs.com/package/@abgov/angular-components). | 
 | vue-components | Library of components for Vue.  Not currently published. |
-| storybook-common | Library containing stories and elements common to all library storybook documentation. |
+| shared/storybook-common | Library containing stories and elements common to all library storybook documentation. |
+| shared/common | Library containing common javascript which will be used by all ui frameworks. |
 | samples | Sample applications showing how to integrate the NPM packages into each library type. |
 
 ### Building
@@ -25,7 +26,7 @@ To build the storybooks run `npm run build:angular-storybook` or `npm run build:
 ### Running Locally
 
 There are currently no applications.  
-To run a storybook run `npm run nx run angular-components:storybook` or `npm run nx run core-css:storybook`.
+To run a storybook run `npm run nx run angular-components:storybook` or `npm run nx run core-css:storybook` or `npm run nx run vue-components:storybook`.
 
 ### Running Tests
 
