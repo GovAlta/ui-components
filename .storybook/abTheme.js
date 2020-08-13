@@ -1,4 +1,4 @@
-import '../libs/core-css/src/lib/goa-core.css';
+import '../libs/core-css/src/lib/goa-core.scss';
 
 import { create } from '@storybook/theming/create';
 import logo from '../libs/shared/storybook-common/assets/logo-ds.svg';

@@ -29,14 +29,21 @@
         "build": {
           "builder": "@nrwl/node:package",
           "options": {
+            "packageJson": "libs/core-css/package.json",
+            "webpackConfig": "@nrwl/react/plugins/webpack",
             "outputPath": "dist/libs/core-css",
             "tsConfig": "libs/core-css/tsconfig.lib.json",
-            "packageJson": "libs/core-css/package.json",
             "main": "libs/core-css/src/index.ts",
-            "assets": [
-              "libs/core-css/*.md",
-              "libs/core-css/src/lib/*.css",
-              "libs/core-css/src/lib/assets/*"
+            "extractCss": true,
+            "styles": [
+              "libs/core-css/src/lib/goa-core.scss"
+            ],
+            "assets": [        
+              {
+                "input": "libs/core-css/src/lib/assets",
+                "glob": "**/*",
+                "output": "assets"
+              }
             ]
           }
         },

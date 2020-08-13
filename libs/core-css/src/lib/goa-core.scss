@@ -1,7 +1,7 @@
 /* This file is meant to build the goa-core.css file.  The bulit file should be the same as the given one from the design team */
 @import './button/button.scss';
 @import './button/button-link.scss';
-
+@import './styles/responsive-breakpoints.scss';
 
 /*
 
@@ -795,6 +795,6 @@ div.goa-tableouter > div.goa-table {
 * 
 ***/
 
-@@include desktop {
+@include desktop {
 
 }
