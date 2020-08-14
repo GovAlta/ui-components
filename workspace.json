@@ -30,7 +30,6 @@
           "builder": "@nrwl/node:package",
           "options": {
             "packageJson": "libs/core-css/package.json",
-            "webpackConfig": "@nrwl/react/plugins/webpack",
             "outputPath": "dist/libs/core-css",
             "tsConfig": "libs/core-css/tsconfig.lib.json",
             "main": "libs/core-css/src/index.ts",
