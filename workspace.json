@@ -22,21 +22,27 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/core-css/jest.config.js",
-            "tsConfig": "libs/core-css/tsconfig.spec.json",
             "passWithNoTests": true
           }
         },
         "build": {
           "builder": "@nrwl/node:package",
           "options": {
+            "packageJson": "libs/core-css/package.json",
             "outputPath": "dist/libs/core-css",
             "tsConfig": "libs/core-css/tsconfig.lib.json",
-            "packageJson": "libs/core-css/package.json",
             "main": "libs/core-css/src/index.ts",
             "assets": [
-              "libs/core-css/*.md",
-              "libs/core-css/src/lib/*.css",
-              "libs/core-css/src/lib/assets/*"
+              {
+                "input": "libs/core-css/src/lib/assets",
+                "glob": "**/*",
+                "output": "assets"
+              },
+              {
+                "input": "dist/libs/shared/styles",
+                "glob": "**/*.css",
+                "output": "./"
+              }
             ]
           }
         },
@@ -104,9 +110,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/angular-components/jest.config.js",
-            "tsConfig": "libs/angular-components/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/angular-components/src/test-setup.ts"
+            "passWithNoTests": true
           }
         },
         "storybook": {
@@ -160,14 +164,16 @@
               "libs/shared/storybook-common/tsconfig.lib.json",
               "libs/shared/storybook-common/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/storybook-common/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/storybook-common/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/shared/storybook-common/jest.config.js",
-            "tsConfig": "libs/shared/storybook-common/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }
@@ -184,7 +190,7 @@
               "libs/vue-components/tsconfig.lib.json",
               "libs/vue-components/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/vue-components/**/*"]    
+            "exclude": ["**/node_modules/**", "!libs/vue-components/**/*"]
           }
         },
         "build": {
@@ -202,7 +208,6 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/vue-components/jest.config.js",
-            "tsConfig": "libs/vue-components/tsconfig.spec.json",
             "passWithNoTests": true
           }
         },
@@ -261,8 +266,27 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/shared/common/jest.config.js",
-            "tsConfig": "libs/shared/common/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-styles": {
+      "root": "libs/shared/styles",
+      "sourceRoot": "libs/shared/styles/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "outputPath": "dist/libs/shared/styles",
+            "commands": [
+              "npm run build:styles",
+              "cp libs/shared/styles/package.json dist/libs/shared/styles"
+            ],
+            "cwd": "./",
+            "parallel": false
           }
         }
       }

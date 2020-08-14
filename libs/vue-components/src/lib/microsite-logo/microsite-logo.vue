@@ -37,5 +37,5 @@
     }
 </script>
 <style lang="scss" scoped>
-    @import '../../../../core-css/src/lib/microsite-logo/microsite-logo.scss';
+    @import '../../../../shared/styles/src/lib/microsite-logo/microsite-logo.scss';
 </style>

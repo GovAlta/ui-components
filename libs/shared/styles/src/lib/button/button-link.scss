@@ -16,6 +16,10 @@
             margin-left: 8px;
             content: '\2191';
         }
+
+        &:visited, &:link {
+            color: $primary-color;
+        }
     }
 }
 

@@ -10,6 +10,8 @@ Full system available at https://www.alberta.ca/goa/design-system/
 */
 
 
+@import './lib/mixin/responsive-breakpoints.scss';
+
 
 /******************************************************************************
 * classes
@@ -827,7 +829,7 @@ blockquote {
   * 
   ***/
   
-  @media screen and (max-width: 500px) {
+  @include mobile {
   
     /* goa-hero *************************************************************/
   
@@ -899,7 +901,7 @@ blockquote {
   * 
   ***/
   
-  @media screen and (min-width: 500px) and (max-width: 768px) {
+  @include tablet {
   
   
     /* goa-cards *************************************************************/
@@ -959,7 +961,7 @@ blockquote {
   * 
   ***/
   
-  @media screen and (min-width: 1200px) {
+  @include desktop {
     div.goa-notifications a {
       display: block;
       width: 1056px;
