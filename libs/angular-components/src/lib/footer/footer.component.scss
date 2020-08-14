@@ -1,5 +1,5 @@
-@import "../../../../core-css/src/lib/styles/responsive-breakpoints.scss";
-@import "../../../../core-css/src/lib/styles/page-template.scss";
+@import "../../../../shared/styles/src/lib/mixin/responsive-breakpoints.scss";
+@import "../../../../shared/styles/src/lib/mixin/page-template.scss";
 
 footer.goa-footer {
   .microsite-logo {

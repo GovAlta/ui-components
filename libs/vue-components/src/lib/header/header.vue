@@ -41,5 +41,5 @@
     }
 </script>
 <style lang="scss" scoped>
-    @import '../../../../core-css/src/lib/header/header.scss';
+    @import '../../../../shared/styles/src/lib/header/header.scss';
 </style>

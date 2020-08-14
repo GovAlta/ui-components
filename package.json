@@ -16,6 +16,7 @@
     "build:angular-storybook": "nx run angular-components:build-storybook",
     "build:core-storybook": "nx run core-css:build-storybook",
     "build:vue-storybook": "nx run vue-components:build-storybook",
+    "build:styles": "sass libs/shared/styles/src/goa-core.scss dist/libs/shared/styles/goa-core.css && sass libs/shared/styles/src/goa-components.scss dist/libs/shared/styles/goa-components.css",
     "test": "nx test --clearCache",
     "test:all": "nx run-many --target=test --all",
     "lint": "nx workspace-lint && nx lint",

@@ -34,15 +34,16 @@
             "outputPath": "dist/libs/core-css",
             "tsConfig": "libs/core-css/tsconfig.lib.json",
             "main": "libs/core-css/src/index.ts",
-            "extractCss": true,
-            "styles": [
-              "libs/core-css/src/lib/goa-core.scss"
-            ],
             "assets": [        
               {
                 "input": "libs/core-css/src/lib/assets",
                 "glob": "**/*",
                 "output": "assets"
+              },
+              {
+                "input": "dist/libs/shared/styles",
+                "glob": "**/*.css",
+                "output": "./"
               }
             ]
           }
@@ -270,6 +271,26 @@
             "jestConfig": "libs/shared/common/jest.config.js",
             "tsConfig": "libs/shared/common/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-styles": {
+      "root": "libs/shared/styles",
+      "sourceRoot": "libs/shared/styles/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {        
+        "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+              "outputPath": "dist/libs/shared/styles",
+              "commands": [
+                "npm run build:styles",
+                "cp libs/shared/styles/package.json dist/libs/shared/styles"
+              ],
+              "cwd": "./",
+              "parallel": false
           }
         }
       }
