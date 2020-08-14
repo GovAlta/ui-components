@@ -19,35 +19,9 @@ if [ -z "$NAME" ]; then
 fi
 
 #-------------------------------------------------------------------------------
-# default to ${PROJECT_NAMESPACE}-dev if no dev name supplied
-#-------------------------------------------------------------------------------
-# if [ -z "$DEV_PROJECT_NAME" ]; then
-# 	DEV_PROJECT_NAME="dev"
-# 	echo "Defaulting 'DEV_PROJECT_NAME' to ${DEV_PROJECT_NAME} ..."
-# 	echo
-# fi
-
-#-------------------------------------------------------------------------------
-# default to ${PROJECT_NAMESPACE}-test if no test name supplied
-#-------------------------------------------------------------------------------
-# if [ -z "$TEST_PROJECT_NAME" ]; then
-# 	TEST_PROJECT_NAME="test"
-# 	echo "Defaulting 'TEST_PROJECT_NAME' to ${TEST_PROJECT_NAME} ..."
-# 	echo
-# fi
-
-#-------------------------------------------------------------------------------
-# default to ${PROJECT_NAMESPACE}-prod if no prod name supplied
-#-------------------------------------------------------------------------------
-# if [ -z "$PROD_PROJECT_NAME" ]; then
-# 	PROD_PROJECT_NAME="prod"
-# 	echo "Defaulting 'PROD_PROJECT_NAME' to ${PROD_PROJECT_NAME} ..."
-# 	echo
-# fi
-
-#-------------------------------------------------------------------------------
 # set local project name vars
 #-------------------------------------------------------------------------------
+# TODO: add overrides for changing names of projects
 DEV_PROJECT="${NAME}-dev"
 TEST_PROJECT="${NAME}-test"
 PROD_PROJECT="${NAME}-prod"
@@ -69,6 +43,7 @@ if [ "${CREATE_TEST}" == 1 ]; then
 	echo "Creating project ${TEST_PROJECT} ..."
 	oc new-project ${TEST_PROJECT} 
 
+	# TODO: move this to another script
 	# grant image-puller access from test to dev. will only commit if DRY_RUN =1
 	# echo "Granting image-puller access from ${TEST_PROJECT} to ${DEV_PROJECT} ..."	
 	# oc policy add-role-to-user \
@@ -84,6 +59,7 @@ if [ "${CREATE_PROD}" == 1 ]; then
 	echo "Creating project ${PROD_PROJECT} ..."
 	oc new-project ${PROD_PROJECT} 
 
+	# TODO: move this to another script
 	# # grant image-puller access from prod to dev. will only commit if DRY_RUN =1
 	# echo "Granting image-puller access from ${PROD_PROJECT} to ${TEST_PROJECT} ..."	
 	# oc policy add-role-to-user \
@@ -93,3 +69,5 @@ if [ "${CREATE_PROD}" == 1 ]; then
 fi
 
 echo "Done creating projects ..."
+
+# TODO: add execution of create-resources.sh
