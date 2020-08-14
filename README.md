@@ -15,6 +15,7 @@ The project contains the Government of Alberta UI components. The output package
 | vue-components | Library of components for Vue.  Not currently published. |
 | shared/storybook-common | Library containing stories and elements common to all library storybook documentation. |
 | shared/common | Library containing common javascript which will be used by all ui frameworks. |
+| shared/styles | Library containing common scss which will be used by all ui frameworks. |
 | samples | Sample applications showing how to integrate the NPM packages into each library type. |
 
 ### Building
