@@ -1,6 +1,6 @@
-@import '../../../../core-css/src/lib/styles/responsive-breakpoints.scss';
-@import '../../../../core-css/src/lib/styles/goa-logo-desktop.scss';
-@import '../../../../core-css/src/lib/styles/goa-logo-mobile.scss';
+@import "../mixin/responsive-breakpoints.scss";
+@import "../mixin/svg/goa-logo-desktop.scss";
+@import "../mixin/svg/goa-logo-mobile.scss";
 
 .goa-microsite-logo {
    display: inline-block;

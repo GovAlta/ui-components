@@ -31,9 +31,9 @@ Use mixins to encourage re-use and make style updates less error prone.  The eve
     - _Is my style unique to my library but not to other libraries?_  
     Create a mixin in a common area in your library.
     - _Is my style common for all components of the same type across libraries (for example angular button and vue button)?_  
-    Create a mixin in core-css project under the component of the same name.
+    Create a mixin in shared/styles project under the component of the same name.
     - _Is my style common for many components across many libraries (for example a colour pallete)?_  
-    Create a mixin in core-css project under the styles folder.
+    Create a mixin in shared/styles project under the mixin folder.
 
 
 ## Unit Testing

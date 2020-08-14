@@ -6,7 +6,7 @@ A full listing of available components and further documentation can be found at
 ## To build
 
 1. Install all required packages if they have not been installed yet `npm install`.
-2. Run `ng build`.
+2. Run `npm run build`.
 
 ## To run
 
