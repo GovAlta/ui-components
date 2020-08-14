@@ -67,7 +67,8 @@
       "name": "SOURCE_SECRET",
       "displayName": "Git Secret",
       "description": "Set this to the name of the source secret in OpenShift you created to pull code from the Git Repository.",
-      "required": true
+      "required": true,
+      "value": ""
     }
   ]
 }

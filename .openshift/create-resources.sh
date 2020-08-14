@@ -7,7 +7,7 @@ DEBUG=0
 NAME="${1}"
 SOURCE_REPOSITORY_URL="${2}"
 SOURCE_REPOSITORY_REF="${3}"
-SOURCE_SECRET="${4}"
+#SOURCE_SECRET="${4}"
 
 if [ -z "$NAME" ]; then
 	echo "You must supply NAME."
@@ -33,24 +33,25 @@ if [ -z "$SOURCE_REPOSITORY_REF" ]; then
 	echo
 fi
 
-if [ -z "$SOURCE_SECRET" ]; then
-	echo "You must supply SOURCE_SECRET."
-	echo -n "Please enter the source secret created in OpenShift"
-	read SOURCE_SECRET
-	SOURCE_SECRET="$(echo "${SOURCE_SECRET}")"
-	echo
-fi
+# if [ -z "$SOURCE_SECRET" ]; then
+# 	echo "You must supply SOURCE_SECRET."
+# 	echo -n "Please enter the source secret created in OpenShift"
+# 	read SOURCE_SECRET
+# 	SOURCE_SECRET="$(echo "${SOURCE_SECRET}")"
+# 	echo
+# fi
 
-# ===================================================================================
+#===============================================================================
 # Creating project resources
-# ===================================================================================
+#-------------------------------------------------------------------------------
 
 if [ ${DEBUG} == 1 ]; then
   echo "DEBUG is on"
 
-  echo ${NAME} ${SOURCE_REPOSITORY_URL} ${SOURCE_REPOSITORY_REF} ${SOURCE_SECRET}
+  echo ${NAME} ${SOURCE_REPOSITORY_URL} ${SOURCE_REPOSITORY_REF} #${SOURCE_SECRET}
 fi
 
+# DEV Resources
 if [ ${DEBUG} == 0 ]; then
   echo "Creating Jenkins persistent resources ..."
   oc process -f ${TEMPLATE_DIR}/jenkins-persistent-template.json | oc create -f -
@@ -65,8 +66,10 @@ if [ ${DEBUG} == 0 ]; then
   echo ""
 
   echo "Creating '${NAME}' build pipeline resource ..."
-  oc process -f ${TEMPLATE_DIR}/jenkins-build-pipeline-template.json -p NAME=${NAME} -p SOURCE_REPOSITORY_URL=${SOURCE_REPOSITORY_URL} -p SOURCE_REPOSITORY_REF=${SOURCE_REPOSITORY_REF} -p SOURCE_SECRET=${SOURCE_SECRET} | oc create -f -
+  oc process -f ${TEMPLATE_DIR}/jenkins-build-pipeline-template.json -p NAME=${NAME} -p SOURCE_REPOSITORY_URL=${SOURCE_REPOSITORY_URL} -p SOURCE_REPOSITORY_REF=${SOURCE_REPOSITORY_REF} #-p SOURCE_SECRET=${SOURCE_SECRET} | oc create -f -
 fi
+
+# TEST Resources
 
 echo ""
 echo "Done creating project resources"
