@@ -22,7 +22,7 @@ The project contains the Government of Alberta UI components. The output package
 
 To build all libraries and applications run `npm build:all`.  
 To build only changed libraries and applications run `npm run affected:build --base=branchtocompareagainst`.  
-To build the storybooks run `npm run build:angular-storybook` or `npm run build:core-storybook`.  
+To build the storybooks run `npm run build:storybook` or choose and individual storybook `npm run build:UIPROJECTNAME`.  
 
 ### Running Locally
 
