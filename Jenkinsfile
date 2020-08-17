@@ -72,7 +72,7 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh "nx affected --target=build ${baseCommand} --parallel --prod"
+            sh "nx affected --target=build ${baseCommand} --parallel --prod --with-deps"
           }
         }
       }
