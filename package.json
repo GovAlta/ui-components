@@ -33,7 +33,6 @@
     "format:write": "nx format:write",
     "format:check": "nx format:check",
     "update": "nx migrate latest",
-    "publish:npm-test": "run-p \"publish:npm:* --test\"",
     "publish:npm": "run-p publish:npm:*",
     "publish:script": "node publish.js --path $npm_config_path --test=$npm_config_test",
     "publish:npm:angular-components": "npm run publish:script --path=dist/libs/angular-components",

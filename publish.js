@@ -2,7 +2,6 @@ const fs = require('fs'); // Or `import fs from "fs";` with ESM
 const { argv } = require('yargs');
 const path = argv.path;
 const { exec } = require('child_process');
-process.env.NPM_TOKEN = 'ee2b1f82-66d0-49fb-91ea-7a72aa13e0f6';
 
 if (fs.existsSync(path)) {
   const { exec } = require('child_process');
