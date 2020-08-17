@@ -1,3 +1,8 @@
+def publishNpm = false
+def deployStorybook = false;
+def base = '';
+def baseCommand = ''
+
 pipeline {
   agent {
     node {
