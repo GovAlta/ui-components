@@ -9,11 +9,11 @@ CREATE_PROD="${3}"     # will create prod environment if 1
 
 #-------------------------------------------------------------------------------
 # request input if no project namespace supplied
-# -------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 if [ -z "$NAME" ]; then
 	echo "You must supply PROJECT_NAMESPACE."
 	echo -n "Please enter the root namespace of the project: "
-	read NAME="$(echo "${NAME}" \n 
+	read NAME="$(echo "${NAME}" \n
 	| tr '[:upper:]' '[:lower:]')"
 	echo
 fi
@@ -41,11 +41,11 @@ if [ "${CREATE_TEST}" == 1 ]; then
 
 	# create test project. will only commit if DRY_RUN =1
 	echo "Creating project ${TEST_PROJECT} ..."
-	oc new-project ${TEST_PROJECT} 
+	oc new-project ${TEST_PROJECT}
 
 	# TODO: move this to another script
 	# grant image-puller access from test to dev. will only commit if DRY_RUN =1
-	# echo "Granting image-puller access from ${TEST_PROJECT} to ${DEV_PROJECT} ..."	
+	# echo "Granting image-puller access from ${TEST_PROJECT} to ${DEV_PROJECT} ..."
 	# oc policy add-role-to-user \
 	# system:image-puller \
 	# system:serviceaccount:${TEST_PROJECT}:default \
@@ -57,11 +57,11 @@ if [ "${CREATE_PROD}" == 1 ]; then
 
 	# create test project. will only commit if DRY_RUN =1
 	echo "Creating project ${PROD_PROJECT} ..."
-	oc new-project ${PROD_PROJECT} 
+	oc new-project ${PROD_PROJECT}
 
 	# TODO: move this to another script
 	# # grant image-puller access from prod to dev. will only commit if DRY_RUN =1
-	# echo "Granting image-puller access from ${PROD_PROJECT} to ${TEST_PROJECT} ..."	
+	# echo "Granting image-puller access from ${PROD_PROJECT} to ${TEST_PROJECT} ..."
 	# oc policy add-role-to-user \
 	# system:image-puller \
 	# system:serviceaccount:${PROD_PROJECT}:default \
