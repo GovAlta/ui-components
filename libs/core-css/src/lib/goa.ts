@@ -2,7 +2,6 @@
 var grecaptcha: any;
 var google: any;
 
-const i = 0;
 /*
 
 Government of Alberta Design System
