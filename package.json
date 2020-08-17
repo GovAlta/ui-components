@@ -70,6 +70,8 @@
     "@babel/preset-env": "7.9.6",
     "@babel/preset-react": "7.9.4",
     "@babel/preset-typescript": "7.9.0",
+    "@hutson/npm-deploy-git-tag": "^6.0.0",
+    "@hutson/semantic-delivery-gitlab": "^9.1.0",
     "@nrwl/angular": "10.0.11",
     "@nrwl/eslint-plugin-nx": "10.0.11",
     "@nrwl/jest": "10.0.11",
@@ -122,6 +124,7 @@
     "jest-transform-stub": "^2.0.0",
     "ng-packagr": "^9.0.0",
     "node-sass": "^4.14.1",
+    "npm-publish-git-tag": "^3.0.4",
     "npm-run-all": "^4.1.5",
     "prettier": "2.0.4",
     "rxjs": "6.5.5",
@@ -142,5 +145,7 @@
   "repository": {
     "type": "git",
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "abgov@1.1.0"
 }

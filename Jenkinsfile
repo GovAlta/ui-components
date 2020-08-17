@@ -1,14 +1,3 @@
-def publishNpm = false
-def deployStorybook = false;
-def base = '';
-def baseCommand = ''
-def generateNpmrc(){
-	sh "echo \"@abgov:registry=https://registry.npmjs.org/\" >> ~/.npmrc"
-	
-	sh "echo \"//registry.npmjs.org/:_authToken=21d6856c-6376-4f64-a27e-6533bd4bc8c7\" > ~/.npmrc"
-}
-
-
 pipeline {
   agent {
     node {
@@ -102,6 +91,7 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
+            sh "npm run semantic-delivery -- --dry-run"
             sh "npm run publish:npm-test"
           }
         }
@@ -123,7 +113,7 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            generateNpmrc()
+            sh "npm run semantic-delivery -- --token vxwNhqew48mzkeszuxfu"
             sh 'npm run publish:npm'
           }
         }
