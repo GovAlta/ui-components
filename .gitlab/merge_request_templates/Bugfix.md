@@ -1,7 +1,8 @@
 **1. What this code change do:**
 
 -
-- 
+
+-
 
 **2. Make sure that you've checked the boxes below before you submit MR:**
 
@@ -12,10 +13,9 @@
 
 **3. Which issue and JIRA item does this PR fix (optional)**
 
+**4. Additional notes for the reviewer**
 
-  
-
-## Reviewer Checklist ##
+## Reviewer Checklist
 
 - [ ] [Coding Standards](../contribution_guidelines/coding_standards.md) followed.
 

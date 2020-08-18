@@ -1,15 +1,13 @@
+def publishNpm = false;
+def deployStorybook = false;
+def base = '';
+def baseCommand = '';
+
 pipeline {
   agent {
     node {
-      label 'node12' 
+      label 'node12'
     }
-  }
-  environment {
-    AFFECTED_APPS = ''
-  }
-  options {
-    // set a timeout of 20 minutes for this pipeline
-    timeout(time: 20, unit: 'MINUTES')
   }
   stages {
     stage('Prepare') {
@@ -17,36 +15,120 @@ pipeline {
         checkout scm
         sh 'npm install -g @nrwl/cli'
         sh 'npm install'
+        script {
+          if (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT){
+            baseCommand = "--base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+          }
+          else {
+            baseCommand = "--all"
+          }
+          
+          def affected = sh (
+            script: "nx affected:libs ${baseCommand} --plain",
+            returnStdout: true
+          ).trim();
+          def isStoryBookOnly = affected == 'shared-storybook-common';
+          echo "affected: '${affected}'"
+          if (isStoryBookOnly == false){
+            publishNpm = true;
+          }
 
-        // TODO: cache dependencies
-        
+          if (affected.length() > 0){
+            deployStorybook = true;
+          }
+        }
       }
     }
-    stage('Test') {
-      steps {
-        sh 'nx affected --target=test --base=origin/dev --parallel'
+    stage('Build Processes') {
+      parallel {
+        stage('Test'){
+          steps {
+            sh "nx affected --target=test ${baseCommand} --parallel"
+          }
+        }
+        stage('Lint'){
+          steps {
+            sh "nx affected --target=lint ${baseCommand} --parallel"
+          }
+        }
+        stage('Build storybook'){
+           when {
+            expression { deployStorybook == true }
+          }
+          steps {
+            sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
+            sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
+            sh 'npm run build:vue-storybook' //builds to /dist/storybook/vue-components
+          }
+        }
+        stage('Build npm package'){
+          when {
+            expression { publishNpm == true }
+          }
+          steps {
+            sh "nx affected --target=build ${baseCommand} --parallel --prod --with-deps"
+          }
+        }
       }
-    } 
+    }
     stage('Lint') {
       steps {
-        sh 'nx affected --target=lint --base=origin/dev --parallel'
-      }
-    } 
-    stage('Build') {
-      steps {
-        sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
-        sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
+        // sh 'nx affected --target=lint --base=origin/dev~1 --head=origin/dev --parallel'
+        sh 'nx run-many --target=lint --projects=angular-components'
       }
     }
-    stage('Deploy') {
-      input {
-        message 'Deploy?'
+    stage('Deploy Test') {
+      parallel {
+        stage('Storybook'){
+          when {
+            expression { deployStorybook == true }
+          }
+          stages {
+            stage('Build image'){
+              steps {
+                //copy the nginx config to binary buld location
+                sh "cp nginx.conf dist/storybook"   
+                dir('dist/storybook') {
+                  sh "oc start-build ui-components --from-dir . --follow"
+                }
+              }
+            }
+            stage('Push Image to Test'){
+              steps {
+                // TODO: make this dynamic
+                sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
+              }
+            }
+          }
+        }
+        stage('Publish to npm'){
+          when {
+            expression { publishNpm == true }
+          }
+          steps {
+            sh "npm run semantic-delivery -- --dry-run"
+          }
+        }
       }
-      steps {
-        //copy the nginx config to binary buld location
-        sh 'cp /tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/nginx.conf /tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/dist/storybook'   
-        dir('/tmp/workspace/dio-dev/dio-dev-ui-components-pipeline/dist/storybook') {
-          sh 'oc start-build ui-components --from-dir . --follow'
+    }
+    stage('Deploy Prod') {
+      parallel {
+        stage('Storybook'){
+          when {
+            expression { deployStorybook == true }
+          }
+          steps {
+            echo 'placeholder'
+          }
+        }
+        stage('Publish to npm'){
+          when {
+            expression { publishNpm == true }
+          }
+          steps {
+            sh "npm run semantic-delivery -- --token vxwNhqew48mzkeszuxfu"
+            sh "env NPM_TOKEN=ee2b1f82-66d0-49fb-91ea-7a72aa13e0f6 npm run publish:npm"
+          }
         }
       }
     }
@@ -84,7 +166,7 @@ pipeline {
 //           openshift.withCluster() {
 //             openshift.withProject() {
 //               def builds = openshift.selector("bc", templateName).related('builds')
-//               timeout(5) { 
+//               timeout(5) {
 //                 build.untilEach(1) {
 //                   return (it.object().status.phase == "Complete")
 //                 }
@@ -137,7 +219,7 @@ pipeline {
     //             if ( !bc.exists() ) {
     //               bc = openshift.selector("bc", affected)
     //             }
-                
+
     //             if ( bc.exists() ) {
     //               bc.startBuild()
     //             }

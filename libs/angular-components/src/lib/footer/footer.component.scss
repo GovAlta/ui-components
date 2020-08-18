@@ -1,5 +1,5 @@
-@import "../../../../core-css/src/lib/styles/responsive-breakpoints.scss";
-@import "../../../../core-css/src/lib/styles/page-template.scss";
+@import "../../../../shared/styles/src/lib/mixin/responsive-breakpoints.scss";
+@import "../../../../shared/styles/src/lib/mixin/page-template.scss";
 
 footer.goa-footer {
   .microsite-logo {
@@ -10,6 +10,8 @@ footer.goa-footer {
     @include page-padding;   
     font-size: 12px;
     background-color: #f1f1f1;
+    height: 22px;
+    line-height: 22px;
 
     .image {
       display: inline-block;
@@ -17,6 +19,7 @@ footer.goa-footer {
       line-height: normal;
       height: 16px;
       width: 16px;
+      padding-bottom: 2px;
 
       @include mobile {
         display: none;

@@ -1,4 +1,4 @@
-import { DoDont } from '@abgov/storybook-common';
+import { DoDont } from '@abgov/shared/storybook-common';
 import { GoAHeaderComponent } from './header.component';
 import { GoAMicrositeLogoComponent } from '../microsite-logo/microsite-logo.component';
 
@@ -6,13 +6,13 @@ import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
-<Meta title="Design System/Basic Elements/Header and Footer" decorators={[
+<Meta title="Design System/Basic Elements/Header" decorators={[
         withKnobs,
         moduleMetadata({ declarations: [GoAHeaderComponent, GoAMicrositeLogoComponent] })
     ]
 } />
 
-# Footer
+# Header
 
 <Preview>
   <Story name="Micro Site Header" height={100} parameters={
@@ -27,7 +27,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
         component: GoAHeaderComponent,
         props: {
           serviceName: text('serviceName', 'Digital Service Name (microsite)'),
-          microServiceHomeLink: text('microServiceHomeLink', 'https://www.alberta.ca/index.aspx')
+          serviceHome: text('serviceHome', 'https://www.alberta.ca/index.aspx')
         }
     }}
   </Story>
@@ -37,10 +37,15 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 
 A header to use for a Government of Alberta microsite.  Contains a customizable service name and home link for the microsite.
 
+## Examples
+```
+<goa-header serviceName="Sample service" serviceHome="/"></goa-header>
+```
+
 ## Properties
 
 | Name     | Type | Description | Default |
 |----------|:----:|:-----------:|--------:|
 | serviceName    | string | The name of the site.  Will appear next to the Government of Alberta logo. | 'Digital Service Name (microsite)' |
-| microServiceHomeLink | string | URL to use as the link for the click on the footer | 'https://www.alberta.ca/index.aspx' |
+| serviceHome | string | URL to use as the link for the click on the footer | 'https://www.alberta.ca/index.aspx' |
 

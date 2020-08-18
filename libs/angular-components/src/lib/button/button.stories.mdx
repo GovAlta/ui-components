@@ -1,9 +1,9 @@
-import { DoDont } from '@abgov/storybook-common';
+import { DoDont } from '@abgov/shared/storybook-common';
 import { GoAButtonComponent } from './button.component';
 
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
-import { text, select, withKnobs } from '@storybook/addon-knobs';
+import { text, select, boolean, withKnobs } from '@storybook/addon-knobs';
 
 <Meta title="Design System/Basic Elements/Buttons"
   component={GoAButtonComponent}
@@ -27,9 +27,9 @@ A hierarchy of actions provided by buttons.
     }
   }>
     {{
-        component: GoAButtonComponent,
+        template: `<button goa-button [buttonType]="buttonType">{{content}}</button>`,
         props: {
-            title: text('title', 'Secondary'),
+            content: text('content', 'Secondary'),
             buttonType: select('buttonType', { primary: 'primary', secondary: 'secondary', tertiary: 'tertiary' }, 'secondary')
         }
     }}
@@ -41,12 +41,18 @@ Buttons submit data from a user input. Buttons are commonly found at the bottom 
 field box groups such as a search function. They may also be used as call to action or navigation 
 links.
 
+## Examples
+```
+<button goa-button buttonType="primary" title="Go to the next page.">Next</button>
+```
+
+
 ## Properties
 
 | Name     | Type | Description | Default |
 |----------|:----:|:-----------:|--------:|
-| title    | string | Text to appear on button. | '' |
 | buttonType | 'primary' \| 'secondary' \| 'tertiary' | The style of the button. | 'primary' |
+| (content) | markup | Content within button. |
 
 ## Usage guidelines
 ### Primary vs. secondary
@@ -56,14 +62,6 @@ action.
 <DoDont
   dos={'Use only one button whenever possible. It will always be a primary button.'}
   donts={'Use two primary buttons. Strategically determine which button should be used as secondary.'}
-/>
-
-### As a call to action
-A button is a functional element that is designed to submit user data using the `<button>` markup. As a call to action `<a>` link, add a navigation arrow to distinguish it from a regular button. Navigation arrows are text-based, and is created with the html code &rarr; (right arrow) or &uarr; (up arrow). They are normally positioned to the right of the text label.
-
-<DoDont
-  dos={'Use buttons for form submissions and search queries.'}
-  donts={'Use buttons as a link without a navigation arrow.'}
 />
 
 ### Text usage

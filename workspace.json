@@ -22,21 +22,27 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/core-css/jest.config.js",
-            "tsConfig": "libs/core-css/tsconfig.spec.json",
             "passWithNoTests": true
           }
         },
         "build": {
           "builder": "@nrwl/node:package",
           "options": {
+            "packageJson": "libs/core-css/package.json",
             "outputPath": "dist/libs/core-css",
             "tsConfig": "libs/core-css/tsconfig.lib.json",
-            "packageJson": "libs/core-css/package.json",
             "main": "libs/core-css/src/index.ts",
             "assets": [
-              "libs/core-css/*.md",
-              "libs/core-css/src/lib/*.css",
-              "libs/core-css/src/lib/assets/*"
+              {
+                "input": "libs/core-css/src/lib/assets",
+                "glob": "**/*",
+                "output": "assets"
+              },
+              {
+                "input": "dist/libs/shared/styles",
+                "glob": "**/*.css",
+                "output": "./"
+              }
             ]
           }
         },
@@ -104,9 +110,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/angular-components/jest.config.js",
-            "tsConfig": "libs/angular-components/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/angular-components/src/test-setup.ts"
+            "passWithNoTests": true
           }
         },
         "storybook": {
@@ -146,202 +150,143 @@
         }
       }
     },
-    "core-css-e2e": {
-      "root": "apps/core-css-e2e",
-      "sourceRoot": "apps/core-css-e2e/src",
-      "projectType": "application",
+    "shared-storybook-common": {
+      "root": "libs/shared/storybook-common",
+      "sourceRoot": "libs/shared/storybook-common/src",
+      "projectType": "library",
+      "schematics": {},
       "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/core-css-e2e/cypress.json",
-            "tsConfig": "apps/core-css-e2e/tsconfig.e2e.json",
-            "devServerTarget": "core-css:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "core-css:storybook:ci"
-            }
-          }
-        },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
-            "tsConfig": ["apps/core-css-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/core-css-e2e/**/*"]
-          }
-        }
-      }
-    },
-    "angular-components-e2e": {
-      "root": "apps/angular-components-e2e",
-      "sourceRoot": "apps/angular-components-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/angular-components-e2e/cypress.json",
-            "tsConfig": "apps/angular-components-e2e/tsconfig.e2e.json",
-            "devServerTarget": "angular-components:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "angular-components:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/angular-components-e2e/tsconfig.e2e.json"],
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/shared/storybook-common/tsconfig.lib.json",
+              "libs/shared/storybook-common/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**",
-              "!apps/angular-components-e2e/**/*"
+              "!libs/shared/storybook-common/**/*"
             ]
-          }
-        }
-      }
-    },
-    "storybook-common": {
-      "root": "libs/storybook-common",
-      "sourceRoot": "libs/storybook-common/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/storybook-common/tsconfig.lib.json",
-              "libs/storybook-common/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/storybook-common/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/storybook-common/jest.config.js",
-            "tsConfig": "libs/storybook-common/tsconfig.spec.json",
+            "jestConfig": "libs/shared/storybook-common/jest.config.js",
             "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "vue-plugin": {
-      "root": "libs/vue-plugin",
-      "sourceRoot": "libs/vue-plugin/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/vue-plugin/tsconfig.lib.json",
-              "libs/vue-plugin/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/vue-plugin/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/vue-plugin/jest.config.js",
-            "tsConfig": "libs/vue-plugin/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "builder": "@nrwl/node:package",
-          "options": {
-            "outputPath": "dist/libs/vue-plugin",
-            "tsConfig": "libs/vue-plugin/tsconfig.lib.json",
-            "packageJson": "libs/vue-plugin/package.json",
-            "main": "libs/vue-plugin/src/index.ts",
-            "assets": [
-              "libs/vue-plugin/*.md",
-              {
-                "input": "./libs/vue-plugin/src",
-                "glob": "**/*.!(ts)",
-                "output": "./src"
-              },
-              {
-                "input": "./libs/vue-plugin",
-                "glob": "collection.json",
-                "output": "."
-              },
-              {
-                "input": "./libs/vue-plugin",
-                "glob": "builders.json",
-                "output": "."
-              }
-            ]
-          }
-        }
-      }
-    },
-    "vue-plugin-e2e": {
-      "projectType": "application",
-      "root": "apps/vue-plugin-e2e",
-      "sourceRoot": "apps/vue-plugin-e2e/src",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/nx-plugin:e2e",
-          "options": {
-            "target": "vue-plugin:build",
-            "npmPackageName": "@abgov/vue-plugin",
-            "pluginOutputPath": "dist/libs/vue-plugin",
-            "jestConfig": "apps/vue-plugin-e2e/jest.config.js",
-            "tsSpecConfig": "apps/vue-plugin-e2e/tsconfig.spec.json"
           }
         }
       }
     },
     "vue-components": {
       "projectType": "library",
-      "root": "libs/vue-components",
-      "sourceRoot": "libs/vue-components/src",
       "architect": {
-        "build": {
-          "builder": "./dist/libs/vue-plugin:lib",
-          "options": {
-            "dest": "dist/libs/vue-components",
-            "main": "libs/vue-components/src/index.ts",
-            "tsConfig": "libs/vue-components/tsconfig.app.json"
-          },
-          "configurations": {
-            "production": {
-              "mode": "production",
-              "filenameHashing": true,
-              "productionSourceMap": true,
-              "css": {
-                "extract": true,
-                "sourceMap": false
-              }
-            }
-          }
-        },
         "lint": {
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
             "tsConfig": [
-              "libs/vue-components/tsconfig.app.json",
+              "libs/vue-components/tsconfig.lib.json",
               "libs/vue-components/tsconfig.spec.json"
             ],
             "exclude": ["**/node_modules/**", "!libs/vue-components/**/*"]
+          }
+        },
+        "build": {
+          "builder": "@nx-plus/vue:library",
+          "options": {
+            "dest": "dist/libs/vue-components",
+            "entry": "libs/vue-components/src/index.ts",
+            "tsConfig": "libs/vue-components/tsconfig.lib.json",
+            "css": {
+              "extract": false
+            }
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/vue-components/jest.config.js",
-            "tsConfig": "libs/vue-components/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/vue",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/vue-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/vue",
+            "outputPath": "dist/storybook/vue-components",
+            "config": {
+              "configFolder": "libs/vue-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "root": "libs/vue-components",
+      "sourceRoot": "libs/vue-components/src"
+    },
+    "shared-common": {
+      "root": "libs/shared/common",
+      "sourceRoot": "libs/shared/common/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/shared/common/tsconfig.lib.json",
+              "libs/shared/common/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/common/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/common/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-styles": {
+      "root": "libs/shared/styles",
+      "sourceRoot": "libs/shared/styles/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "outputPath": "dist/libs/shared/styles",
+            "commands": [
+              "npm run build:styles",
+              "cp libs/shared/styles/package.json dist/libs/shared/styles"
+            ],
+            "cwd": "./",
+            "parallel": false
           }
         }
       }

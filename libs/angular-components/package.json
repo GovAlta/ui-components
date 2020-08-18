@@ -1,12 +1,16 @@
 {
   "name": "@abgov/angular-components",
-  "version": "0.1.9",
+  "version": "0.1.14",
   "license": "MIT",
   "description": "Government of Alberta - shared UI components for Angular",
   "bugs": {
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues"
   },
-  "keywoards": ["GoA", "template", "Angular"],
+  "keywoards": [
+    "GoA",
+    "template",
+    "Angular"
+  ],
   "repository": {
     "type": "git",
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git",
@@ -15,8 +19,5 @@
   "peerDependencies": {
     "@angular/common": "^9.1.11",
     "@angular/core": "^9.1.11"
-  },
-  "dependencies": {
-    "tslib": "^1.10.0"
   }
 }

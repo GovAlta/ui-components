@@ -1,0 +1,58 @@
+@import "../mixin/responsive-breakpoints.scss";
+@import "../mixin/svg/goa-logo-desktop.scss";
+@import "../mixin/svg/goa-logo-mobile.scss";
+
+.goa-microsite-logo {
+   display: inline-block;
+
+  .microsite-link {
+    color: inherit;
+  }
+
+  .logo {
+    height: 66px;
+    white-space: nowrap;
+    .image-desktop-tablet {
+      width: 150px;
+      height: 42px;
+      margin-top: 12px;
+      display: inline-block;
+
+      @include goa-logo-desktop;
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    .image-mobile {
+      
+      @include tablet {
+        display: none;
+      }
+
+      @include desktop {
+        display: none;
+      }
+
+      @include mobile {
+        width: 34px;
+        height: 34px;
+        margin-top: 16px;
+        display: inline-block;
+
+        @include goa-logo-mobile;
+      }
+    }
+
+    .name {
+      text-decoration: none;
+      margin-left: 24px;
+      height: 23px;
+      font-size: 16px;
+      display: inline-block;
+      vertical-align: 14.5px;
+      line-height: normal;
+    }
+  }
+}

@@ -9,9 +9,9 @@
       "dependencies": "*",
       "devDependencies": "*"
     },
-    "tsconfig.json": "*",
     "tslint.json": "*",
-    "nx.json": "*"
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
   },
   "tasksRunnerOptions": {
     "default": {
@@ -29,30 +29,24 @@
   },
   "projects": {
     "core-css": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["shared-styles"]
     },
     "angular-components": {
-      "tags": []
-    },
-    "core-css-e2e": {
       "tags": [],
-      "implicitDependencies": ["core-css"]
+      "implicitDependencies": ["shared-styles"]
     },
-    "angular-components-e2e": {
-      "tags": [],
-      "implicitDependencies": ["angular-components"]
-    },
-    "storybook-common": {
+    "shared-storybook-common": {
       "tags": []
-    },
-    "vue-plugin": {
-      "tags": []
-    },
-    "vue-plugin-e2e": {
-      "tags": [],
-      "implicitDependencies": ["vue-plugin"]
     },
     "vue-components": {
+      "tags": [],
+      "implicitDependencies": ["shared-styles"]
+    },
+    "shared-common": {
+      "tags": []
+    },
+    "shared-styles": {
       "tags": []
     }
   }

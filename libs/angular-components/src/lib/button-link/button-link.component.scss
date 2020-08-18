@@ -1,0 +1,5 @@
+@import '../../../../shared/styles/src/lib/button/button-link.scss';
+
+:host {
+    @include goa-button-link-styles;
+}

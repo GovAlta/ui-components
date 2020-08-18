@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FooterImages } from '../microsite-logo/inlineImages'
-
 
 @Component({
     selector: 'goa-header',
@@ -10,17 +8,15 @@ import { FooterImages } from '../microsite-logo/inlineImages'
 
 export class GoAHeaderComponent implements OnInit {
 
-    base64Images = FooterImages
-
     /**
      * The name to show on the header as the microsite.
     */
-    @Input() serviceName = 'Digital Service Name (microsite)'
+    @Input() serviceName = 'Digital Service Name (microsite)';
 
     /**
      * The home page URL of the microsite.
      */
-    @Input() microServiceHomeLink: String = 'https://www.alberta.ca/index.aspx'
+    @Input() serviceHome: String = 'https://www.alberta.ca/index.aspx';
 
     constructor() {}
     ngOnInit() {}
