@@ -1,17 +1,13 @@
-def publishNpm = false
+def publishNpm = false;
 def deployStorybook = false;
 def base = '';
-def baseCommand = ''
+def baseCommand = '';
 
 pipeline {
   agent {
     node {
-      label 'node12' 
+      label 'node12'
     }
-  }
-  options {
-    // set a timeout of 20 minutes for this pipeline
-    timeout(time: 20, unit: 'MINUTES')
   }
   stages {
     stage('Prepare') {
@@ -37,12 +33,11 @@ pipeline {
             publishNpm = true;
           }
 
-          if (affected.length() > 0){
-            deployStorybook = true;
-          }
-        }
-        // TODO: cache dependencies
-        
+        //   if (affected.length() > 0) {
+        //     deployStorybook = true
+        //   }
+        //}
+      // TODO: cache dependencies
       }
     }
     stage('Build Processes') {
@@ -72,9 +67,14 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh "nx affected --target=build ${baseCommand} --parallel --prod --with-deps"
+            sh "nx affected --target=build ${baseCommand} --parallel --prod"
           }
         }
+    }
+    stage('Lint') {
+      steps {
+        // sh 'nx affected --target=lint --base=origin/dev~1 --head=origin/dev --parallel'
+        sh 'nx run-many --target=lint --projects=angular-components'
       }
     }
     stage('Deploy Test') {
@@ -83,11 +83,21 @@ pipeline {
           when {
             expression { deployStorybook == true }
           }
-          steps {
-            //copy the nginx config to binary buld location
-            sh "cp nginx.conf dist/storybook"   
-            dir('dist/storybook') {
-              sh "oc start-build ui-components --from-dir . --follow"
+          stages {
+            stage('Build image'){
+              steps {
+                //copy the nginx config to binary buld location
+                sh "cp nginx.conf dist/storybook"   
+                dir('dist/storybook') {
+                  sh "oc start-build ui-components --from-dir . --follow"
+                }
+              }
+            }
+            stage('Push Image to Test'){
+              steps {
+                // TODO: make this dynamic
+                sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
+              }
             }
           }
         }
@@ -96,12 +106,11 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh "npm run semantic-delivery -- --dry-run"
+            sh "npm run publish:npm-test"
           }
         }
       }
     }
-
     stage('Deploy Prod') {
       parallel {
         stage('Storybook'){
@@ -117,8 +126,8 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh "npm run semantic-delivery -- --token vxwNhqew48mzkeszuxfu"
-            sh "env NPM_TOKEN=ee2b1f82-66d0-49fb-91ea-7a72aa13e0f6 npm run publish:npm"
+            generateNpmrc()
+            sh 'npm run publish:npm'
           }
         }
       }
@@ -157,7 +166,7 @@ pipeline {
 //           openshift.withCluster() {
 //             openshift.withProject() {
 //               def builds = openshift.selector("bc", templateName).related('builds')
-//               timeout(5) { 
+//               timeout(5) {
 //                 build.untilEach(1) {
 //                   return (it.object().status.phase == "Complete")
 //                 }
@@ -210,7 +219,7 @@ pipeline {
     //             if ( !bc.exists() ) {
     //               bc = openshift.selector("bc", affected)
     //             }
-                
+
     //             if ( bc.exists() ) {
     //               bc.startBuild()
     //             }
