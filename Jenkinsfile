@@ -15,6 +15,15 @@ pipeline {
   //   // set a timeout of 20 minutes for this pipeline
   //   timeout(time: 20, unit: 'MINUTES')
   // }
+  //test image pull
+  stages {
+    stage("Pull Image") {
+      steps {
+        sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
+      }
+    }
+  }
+  /*
   stages {
     stage('Prepare') {
       steps {
@@ -101,6 +110,7 @@ pipeline {
       }
     }
   }
+  */
 }
 
 // Leaving this in to refer to it should we want to use OpenShift specific
