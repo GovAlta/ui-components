@@ -29,9 +29,6 @@ echo -e "\e[33mCreating '${DEV_NAMESPACE}' build pipeline resource...\e[0m"
 oc process -f ${TEMPLATE_DIR}/jenkins-build-pipeline-template-dev.json -p NAME=${WEB_APP_NAME} -p SOURCE_REPOSITORY_URI=${SOURCE_REPOSITORY_URI} -p SOURCE_REPOSITORY_REF=${SOURCE_REPOSITORY_REF} | oc create -f -
 echo -e "\n"
 
-echo -e "\e[33mGranting Image-Puller permissions to jenkins on ${DEV_NAMESPACE}...\e[0m"
- oc policy add-role-to-user system:image-puller system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${DEV_NAMESPACE}
-
 # create test resources if CREATE_TEST = 1
 if [[ $CREATE_TEST == 1 ]]; then
   echo -e "\e[32mCreating resources in ${TEST_NAMESPACE}...\e[0m"
@@ -41,8 +38,8 @@ if [[ $CREATE_TEST == 1 ]]; then
   echo -e "\n"
 
   # grant image-puller access from prod to dev
-  echo "Granting image-puller access from ${TEST_NAMESPACE} to ${DEV_NAMESPACE} ..."
-  oc policy add-role-to-user system:image-puller system:serviceaccount:${TEST_NAMESPACE}:default -n ${DEV_NAMESPACE}
+  echo "Granting edit access from ${DEV_NAMESPACE} to ${TEST_NAMESPACE} ..."
+  oc policy add-role-to-user system:edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${TEST_NAMESPACE}
 
   echo -e "\n"
 
@@ -62,8 +59,8 @@ if [[ $CREATE_PROD == 1 ]]; then
   echo -e "\n"
 
   # grant image-puller access from prod to dev
-  echo "Granting image-puller access from ${PROD_NAMESPACE} to ${DEV_NAMESPACE} ..."
-  oc policy add-role-to-user system:image-puller system:serviceaccount:${PROD_NAMESPACE}:default -n ${DEV_NAMESPACE}
+  echo "Granting edit access from ${DEV_NAMESPACE} to ${PROD_NAMESPACE} ..."
+  oc policy add-role-to-user system:edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${PROD_NAMESPACE}
 
   echo -e "\n"
 
