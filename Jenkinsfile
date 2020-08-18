@@ -20,32 +20,34 @@ pipeline {
         checkout scm
         sh 'npm install -g @nrwl/cli'
         sh 'npm install'
-        script {
-          def affected = sh (
-            script: 'nx affected:libs --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --plain',
-            returnStdout: true
-          ).trim()
-          def isStoryBookOnly = affected == 'storybook-common'
-          echo "affected: '${affected}'"
-          if (isStoryBookOnly == false) {
-            publishNpm = true
-          }
+        // script {
+        //   def affected = sh (
+        //     script: 'nx affected:libs --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --plain',
+        //     returnStdout: true
+        //   ).trim()
+        //   def isStoryBookOnly = affected == 'storybook-common'
+        //   echo "affected: '${affected}'"
+        //   if (isStoryBookOnly == false) {
+        //     publishNpm = true
+        //   }
 
-          if (affected.length() > 0) {
-            deployStorybook = true
-          }
-        }
+        //   if (affected.length() > 0) {
+        //     deployStorybook = true
+        //   }
+        //}
       // TODO: cache dependencies
       }
     }
     stage('Test') {
         steps {
-          sh 'nx affected --target=test --base=origin/dev~1 --head=origin/dev --parallel'
+          // sh 'nx affected --target=test --base=origin/dev~1 --head=origin/dev --parallel'
+          sh 'nx run-many --target=test --projects=angular-components'
         }
     }
     stage('Lint') {
       steps {
-        sh 'nx affected --target=lint --base=origin/dev~1 --head=origin/dev --parallel'
+        // sh 'nx affected --target=lint --base=origin/dev~1 --head=origin/dev --parallel'
+        sh 'nx run-many --target=lint --projects=angular-components'
       }
     }
     stage('Build storybook') {
