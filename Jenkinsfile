@@ -1,5 +1,6 @@
 def publishNpm = false
 def deployStorybook = true
+def templateName = 'ui-components'
 
 pipeline {
   agent {
@@ -80,6 +81,12 @@ pipeline {
             dir('dist/storybook') {
               sh 'oc start-build ui-components --from-dir . --follow'
             }
+          }
+        }
+        stage('Push Image to Test'){
+          steps {
+            // TODO: make this dynamic
+            sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
           }
         }
         stage('Publish to npm') {
