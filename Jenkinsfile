@@ -36,7 +36,7 @@ pipeline {
         //   if (affected.length() > 0) {
         //     deployStorybook = true
         //   }
-        //}
+        }
       // TODO: cache dependencies
       }
     }
