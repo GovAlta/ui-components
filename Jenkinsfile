@@ -40,34 +40,32 @@ pipeline {
       }
     }
     stage('Build Processes') {
-      parallel {
-        stage('Test'){
-          steps {
-            sh 'nx affected --target=test --base=origin/dev~1 --head=origin/dev --parallel'
-          }
+      stage('Test'){
+        steps {
+          sh 'nx affected --target=test --base=origin/dev~1 --head=origin/dev --parallel'
         }
-        stage('Lint'){
-          steps {
-            sh 'nx affected --target=lint --base=origin/dev~1 --head=origin/dev --parallel'
-          }
+      }
+      stage('Lint'){
+        steps {
+          sh 'nx affected --target=lint --base=origin/dev~1 --head=origin/dev --parallel'
         }
-        stage('Build storybook'){
-           when {
-            expression { deployStorybook == true }
-          }
-          steps {
-            sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
-            sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
-          }
-        }
-        stage('Build npm package'){
+      }
+      stage('Build storybook'){
           when {
-            expression { publishNpm == true }
-          }
-          steps {
-            sh 'npm run build:angular-components'
-            sh 'npm run build:core-css'
-          }
+          expression { deployStorybook == true }
+        }
+        steps {
+          sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
+          sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
+        }
+      }
+      stage('Build npm package'){
+        when {
+          expression { publishNpm == true }
+        }
+        steps {
+          sh 'npm run build:angular-components'
+          sh 'npm run build:core-css'
         }
       }
     }
