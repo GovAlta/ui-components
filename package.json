@@ -33,7 +33,6 @@
     "format:write": "nx format:write",
     "format:check": "nx format:check",
     "update": "nx migrate latest",
-    "publish:npm-test": "run-p \"publish:npm:* --test\"",
     "publish:npm": "run-p publish:npm:*",
     "publish:script": "node publish.js --path $npm_config_path --test=$npm_config_test",
     "publish:npm:angular-components": "npm run publish:script --path=dist/libs/angular-components",
@@ -42,7 +41,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "postinstall": "node node_modules/@nx-plus/vue/patch-nx-dep-graph.js"
+    "postinstall": "node node_modules/@nx-plus/vue/patch-nx-dep-graph.js",
+    "semantic-delivery": "semantic-delivery-gitlab"
   },
   "private": true,
   "dependencies": {
@@ -69,6 +69,8 @@
     "@babel/preset-env": "7.9.6",
     "@babel/preset-react": "7.9.4",
     "@babel/preset-typescript": "7.9.0",
+    "@hutson/npm-deploy-git-tag": "^6.0.0",
+    "@hutson/semantic-delivery-gitlab": "^9.1.0",
     "@nrwl/angular": "10.0.11",
     "@nrwl/eslint-plugin-nx": "10.0.11",
     "@nrwl/jest": "10.0.11",
@@ -121,6 +123,7 @@
     "jest-transform-stub": "^2.0.0",
     "ng-packagr": "^9.0.0",
     "node-sass": "^4.14.1",
+    "npm-publish-git-tag": "^3.0.4",
     "npm-run-all": "^4.1.5",
     "prettier": "2.0.4",
     "rxjs": "6.5.5",
@@ -137,5 +140,11 @@
     "vue-template-compiler": "^2.6.11",
     "yargs": "^15.4.1",
     "zone.js": "^0.10.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git"
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "abgov@1.1.0"
 }
