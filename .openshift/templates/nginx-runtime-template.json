@@ -160,18 +160,19 @@
         },
         "triggers": [
           {
+            "type": "ConfigChange"
+          },
+          {
             "type": "ImageChange",
             "imageChangeParams": {
               "automatic": true,
               "containerNames": ["${NAME}"],
               "from": {
                 "kind": "ImageStreamTag",
+                "namespace": "${IMAGE_NAMESPACE}",
                 "name": "${NAME}:latest"
               }
             }
-          },
-          {
-            "type": "ConfigChange"
           }
         ],
         "replicas": 1,
