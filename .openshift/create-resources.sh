@@ -39,8 +39,8 @@ if [[ $CREATE_TEST == 1 ]]; then
   echo -e "\n"
 
   # grant image-puller access from prod to dev
-  # echo "Granting edit access from ${DEV_NAMESPACE} to ${TEST_NAMESPACE} ..."
-  # oc policy add-role-to-user system:edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${TEST_NAMESPACE}
+  echo "Granting edit access from ${DEV_NAMESPACE} to ${TEST_NAMESPACE} ..."
+  oc policy add-role-to-user edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${TEST_NAMESPACE}
 
   echo -e "\n"
 
@@ -60,8 +60,8 @@ if [[ $CREATE_PROD == 1 ]]; then
   echo -e "\n"
 
   # grant image-puller access from prod to dev
-  # echo "Granting edit access from ${DEV_NAMESPACE} to ${PROD_NAMESPACE} ..."
-  # oc policy add-role-to-user system:edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${PROD_NAMESPACE}
+  echo "Granting edit access from ${DEV_NAMESPACE} to ${PROD_NAMESPACE} ..."
+  oc policy add-role-to-user edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${PROD_NAMESPACE}
 
   echo -e "\n"
 
