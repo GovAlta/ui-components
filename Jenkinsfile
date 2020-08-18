@@ -1,5 +1,5 @@
 def publishNpm = false
-def deployStorybook = false;
+def deployStorybook = true;
 
 pipeline {
   agent {
