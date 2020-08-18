@@ -70,6 +70,7 @@ pipeline {
             sh "nx affected --target=build ${baseCommand} --parallel --prod"
           }
         }
+      }
     }
     stage('Lint') {
       steps {
