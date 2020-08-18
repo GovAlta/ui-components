@@ -3,12 +3,11 @@ def deployStorybook = true
 def templateName = 'ui-components'
 
 pipeline {
-  // agent {
-  //   node {
-  //     label 'node12'
-  //   }
-  // }
-  agent any
+  agent {
+    node {
+      label 'node12'
+    }
+  }
   environment {
     AFFECTED_APPS = ''
   }
@@ -16,7 +15,9 @@ pipeline {
   //   // set a timeout of 20 minutes for this pipeline
   //   timeout(time: 20, unit: 'MINUTES')
   // }
+  /*
   //test image pull
+  agent any
   stages {
     stage("Pull Image") {
       steps {
@@ -24,7 +25,7 @@ pipeline {
       }
     }
   }
-  /*
+  */
   stages {
     stage('Prepare') {
       steps {
@@ -94,6 +95,9 @@ pipeline {
           }
         }
         stage('Push Image to Test'){
+          // input {
+          //   message 'Push Image to Test?'
+          // }
           steps {
             // TODO: make this dynamic
             sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
@@ -110,7 +114,7 @@ pipeline {
         }
       }
     }
-  }*/
+  }
 }
 
 // Leaving this in to refer to it should we want to use OpenShift specific
