@@ -169,7 +169,6 @@
               "containerNames": ["${NAME}"],
               "from": {
                 "kind": "ImageStreamTag",
-                "namespace": "${IMAGE_NAMESPACE}",
                 "name": "${NAME}:latest"
               }
             }

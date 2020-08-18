@@ -7,6 +7,7 @@ SCRIPT_DIR=$(dirname $0)
 TEMPLATE_DIR="${SCRIPT_DIR}/templates"
 
 # create dev project resources
+echo -e "\n"
 echo -e "\e[32mCreating resources in ${DEV_NAMESPACE}...\e[0m"
 
 # change to test project
@@ -38,8 +39,8 @@ if [[ $CREATE_TEST == 1 ]]; then
   echo -e "\n"
 
   # grant image-puller access from prod to dev
-  echo "Granting edit access from ${DEV_NAMESPACE} to ${TEST_NAMESPACE} ..."
-  oc policy add-role-to-user system:edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${TEST_NAMESPACE}
+  # echo "Granting edit access from ${DEV_NAMESPACE} to ${TEST_NAMESPACE} ..."
+  # oc policy add-role-to-user system:edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${TEST_NAMESPACE}
 
   echo -e "\n"
 
@@ -59,8 +60,8 @@ if [[ $CREATE_PROD == 1 ]]; then
   echo -e "\n"
 
   # grant image-puller access from prod to dev
-  echo "Granting edit access from ${DEV_NAMESPACE} to ${PROD_NAMESPACE} ..."
-  oc policy add-role-to-user system:edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${PROD_NAMESPACE}
+  # echo "Granting edit access from ${DEV_NAMESPACE} to ${PROD_NAMESPACE} ..."
+  # oc policy add-role-to-user system:edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${PROD_NAMESPACE}
 
   echo -e "\n"
 
