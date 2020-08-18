@@ -19,7 +19,8 @@ pipeline {
   stages {
     stage("Pull Image") {
       steps {
-        sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
+        //sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
+        sh 'docker push docker-registry.default.svc:5000/web-test/ui-components:latest'
       }
     }
   }
