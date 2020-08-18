@@ -39,7 +39,7 @@ pipeline {
 
       }
     }
-    stage('Build Processes') {
+    stages {
       stage('Test'){
         steps {
           sh 'nx affected --target=test --base=origin/dev~1 --head=origin/dev --parallel'
