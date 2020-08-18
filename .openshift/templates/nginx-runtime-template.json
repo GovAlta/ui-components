@@ -2,7 +2,7 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "{$NAME}-application",
+    "name": "{$NAME}",
     "annotations": {
       "openshift.io/display-name": "Nginx HTTP server and a reverse proxy",
       "description": "An example Nginx HTTP server and a reverse proxy (nginx) application that serves static content. For more information about using this template, including OpenShift considerations, see https://github.com/sclorg/nginx-ex/blob/master/README.md.",
@@ -16,7 +16,7 @@
   },
   "message": "The following service(s) have been created in your project: ${NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/sclorg/nginx-ex/blob/master/README.md.",
   "labels": {
-    "template": "${NAME}-application",
+    "template": "${NAME}",
     "app": "${NAME}"
   },
   "objects": [
@@ -62,6 +62,9 @@
         "to": {
           "kind": "Service",
           "name": "${NAME}"
+        },
+        "tls": {
+          "termination": "edge"
         }
       }
     },

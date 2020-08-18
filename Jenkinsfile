@@ -4,16 +4,16 @@ def deployStorybook = false;
 pipeline {
   agent {
     node {
-      label 'node12' 
+      label 'node12'
     }
   }
   environment {
     AFFECTED_APPS = ''
   }
-  options {
-    // set a timeout of 20 minutes for this pipeline
-    timeout(time: 20, unit: 'MINUTES')
-  }
+  // options {
+  //   // set a timeout of 20 minutes for this pipeline
+  //   timeout(time: 20, unit: 'MINUTES')
+  // }
   stages {
     stage('Prepare') {
       steps {
@@ -36,7 +36,7 @@ pipeline {
           }
         }
         // TODO: cache dependencies
-        
+
       }
     }
     stage('Build Processes') {
@@ -79,7 +79,7 @@ pipeline {
           }
           steps {
             //copy the nginx config to binary buld location
-            sh 'cp nginx.conf dist/storybook'   
+            sh 'cp nginx.conf dist/storybook'
             dir('dist/storybook') {
               sh 'oc start-build ui-components --from-dir . --follow'
             }
@@ -130,7 +130,7 @@ pipeline {
 //           openshift.withCluster() {
 //             openshift.withProject() {
 //               def builds = openshift.selector("bc", templateName).related('builds')
-//               timeout(5) { 
+//               timeout(5) {
 //                 build.untilEach(1) {
 //                   return (it.object().status.phase == "Complete")
 //                 }
@@ -183,7 +183,7 @@ pipeline {
     //             if ( !bc.exists() ) {
     //               bc = openshift.selector("bc", affected)
     //             }
-                
+
     //             if ( bc.exists() ) {
     //               bc.startBuild()
     //             }

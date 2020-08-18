@@ -1,75 +1,73 @@
 #!/bin/bash
+
+# import all environment variables from CONFIG file
+. CONFIG # equivalent to source ./CONFIG
+
 SCRIPT_DIR=$(dirname $0)
 TEMPLATE_DIR="${SCRIPT_DIR}/templates"
-DEBUG=0
 
-# Input parameters
-NAME="${1}"
-SOURCE_REPOSITORY_URL="${2}"
-SOURCE_REPOSITORY_REF="${3}"
-#SOURCE_SECRET="${4}"
+# create dev project resources
+echo -e "\e[32mCreating resources in ${DEV_NAMESPACE}...\e[0m"
 
-if [ -z "$NAME" ]; then
-	echo "You must supply NAME."
-	echo -n "Please enter the application name; for example 'ui-components': "
-	read NAME
-	NAME="$(echo "${NAME}" | tr '[:upper:]' '[:lower:]')"
-	echo
+# change to test project
+oc project ${DEV_NAMESPACE}
+echo -e "\n"
+
+echo -e "\e[33mCreating Jenkins persistent resources...\e[0m"
+oc process -f ${TEMPLATE_DIR}/jenkins-persistent-template-dev.json | oc create -f -
+echo -e "\n"
+
+echo -e "\e[33mCreating Jenkins Node12 agent resources...\e[0m"
+oc process -f ${TEMPLATE_DIR}/jenkins-agent-node12-template-dev.json | oc create -f -
+echo -e "\n"
+
+echo -e "\e[33mCreating '${DEV_NAMESPACE}' application resources...\e[0m"
+oc process -f ${TEMPLATE_DIR}/nginx-runtime-template.json -p NAME=${WEB_APP_NAME} | oc create -f -
+echo -e "\n"
+
+echo -e "\e[33mCreating '${DEV_NAMESPACE}' build pipeline resource...\e[0m"
+oc process -f ${TEMPLATE_DIR}/jenkins-build-pipeline-template-dev.json -p NAME=${WEB_APP_NAME} -p SOURCE_REPOSITORY_URI=${SOURCE_REPOSITORY_URI} -p SOURCE_REPOSITORY_REF=${SOURCE_REPOSITORY_REF} | oc create -f -
+echo -e "\n"
+
+# create test resources if CREATE_TEST = 1
+if [[ $CREATE_TEST == 1 ]]; then
+  echo -e "\e[32mCreating resources in ${TEST_NAMESPACE}...\e[0m"
+
+  # change to test project
+  oc project ${TEST_NAMESPACE}
+  echo -e "\n"
+
+  # grant image-puller access from prod to dev
+  echo "Granting image-puller access from ${TEST_NAMESPACE} to ${DEV_NAMESPACE} ..."
+  oc policy add-role-to-user system:image-puller system:serviceaccount:${TEST_NAMESPACE}:default -n ${DEV_NAMESPACE}
+
+  echo -e "\n"
+
+  echo -e "\e[33mCreating '${TEST_NAMESPACE}' application resources...\e[0m"
+
+  # process template file
+  oc process -f ${TEMPLATE_DIR}/nginx-runtime-template.json -p NAME=${WEB_APP_NAME} | oc create -f -
+  echo -e "\n"
 fi
 
-if [ -z "$SOURCE_REPOSITORY_URL" ]; then
-	echo "You must supply SOURCE_REPOSITORY_URL."
-	echo -n "Please enter the git repository uri; for example 'git@gitlab.gov.ab.ca:dio/core/ui-components.git' (This will depend on the kind of secret you are using.): "
-	read SOURCE_REPOSITORY_URL
-	SOURCE_REPOSITORY_URL="$(echo "${SOURCE_REPOSITORY_URL}")"
-	echo
+# create prod resources if CREATE_PROD = 1
+if [[ $CREATE_PROD == 1 ]]; then
+  echo -e "\e[32mCreating resources in ${PROD_NAMESPACE}...\e[0m"
+
+  # change to test project
+  oc project ${PROD_NAMESPACE}
+  echo -e "\n"
+
+  # grant image-puller access from prod to dev
+  echo "Granting image-puller access from ${PROD_NAMESPACE} to ${DEV_NAMESPACE} ..."
+  oc policy add-role-to-user system:image-puller system:serviceaccount:${PROD_NAMESPACE}:default -n ${DEV_NAMESPACE}
+
+  echo -e "\n"
+
+  echo -e "\e[33mCreating '${PROD_NAMESPACE}' application resources...\e[0m"
+
+  # process template file
+  oc process -f ${TEMPLATE_DIR}/nginx-runtime-template.json -p NAME=${WEB_APP_NAME} | oc create -f -
+
+  echo -e "\n"
 fi
-
-if [ -z "$SOURCE_REPOSITORY_REF" ]; then
-	echo "You must supply SOURCE_REPOSITORY_REF."
-	echo -n "Please enter the git repository ref (branch); for example 'master': "
-	read SOURCE_REPOSITORY_REF
-	SOURCE_REPOSITORY_REF="$(echo "${SOURCE_REPOSITORY_REF}")"
-	echo
-fi
-
-# if [ -z "$SOURCE_SECRET" ]; then
-# 	echo "You must supply SOURCE_SECRET."
-# 	echo -n "Please enter the source secret created in OpenShift"
-# 	read SOURCE_SECRET
-# 	SOURCE_SECRET="$(echo "${SOURCE_SECRET}")"
-# 	echo
-# fi
-
-#===============================================================================
-# Creating project resources
-#-------------------------------------------------------------------------------
-
-if [ ${DEBUG} == 1 ]; then
-  echo "DEBUG is on"
-
-  echo ${NAME} ${SOURCE_REPOSITORY_URL} ${SOURCE_REPOSITORY_REF} #${SOURCE_SECRET}
-fi
-
-# DEV Resources
-if [ ${DEBUG} == 0 ]; then
-  echo "Creating Jenkins persistent resources ..."
-  oc process -f ${TEMPLATE_DIR}/jenkins-persistent-template.json | oc create -f -
-  echo ""
-
-  echo "Creating Jenkins Node12 agent resources ..."
-  oc process -f ${TEMPLATE_DIR}/jenkins-agent-node12-template.json | oc create -f -
-  echo ""
-
-  echo "Creating '${NAME}' application resources ..."
-  oc process -f ${TEMPLATE_DIR}/nginx-runtime-template.json -p NAME=${NAME} | oc create -f -
-  echo ""
-
-  echo "Creating '${NAME}' build pipeline resource ..."
-  oc process -f ${TEMPLATE_DIR}/jenkins-build-pipeline-template.json -p NAME=${NAME} -p SOURCE_REPOSITORY_URL=${SOURCE_REPOSITORY_URL} -p SOURCE_REPOSITORY_REF=${SOURCE_REPOSITORY_REF} #-p SOURCE_SECRET=${SOURCE_SECRET} | oc create -f -
-fi
-
-# TEST Resources
-
-echo ""
-echo "Done creating project resources"

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#TODO: add dry run to permissions script and to resource creation script
+# DRY_RUN=1
+
+# default cluster uri
+DEFAULT_CLUSTER_URI="https://console.os99.gov.ab.ca:8443"
+
+#this is the base namespace for all generated projects
+BASE_NAMESPACE="web"
+
+# this is the computed dev namespace
+DEV_NAMESPACE="$BASE_NAMESPACE-dev"
+
+# this is the computed test namespace
+TEST_NAMESPACE="$BASE_NAMESPACE-test"
+
+# this is the computed prod namespace
+PROD_NAMESPACE="$BASE_NAMESPACE-prod"
+
+# will create test namespace (Yes = 1/No = 0)
+CREATE_TEST=1
+
+# will create prod namespace (Yes = 1/No = 0)
+CREATE_PROD=1
+
+# source repository uri (SSH/HTML)
+# the type will influence the type of secret you will need to create in openshift
+SOURCE_REPOSITORY_URI="git@gitlab.gov.ab.ca:dio/core/ui-components.git"
+
+# this is the branch/tag of the project you want to build
+SOURCE_REPOSITORY_REF="features/CS-66-angelo"
+
+# this is the base name of the project resources created
+WEB_APP_NAME="ui-components"
