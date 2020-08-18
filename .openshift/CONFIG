@@ -26,7 +26,7 @@ CREATE_PROD=1
 
 # source repository uri (SSH/HTML)
 # the type will influence the type of secret you will need to create in openshift
-SOURCE_REPOSITORY_URI="git@gitlab.gov.ab.ca:dio/core/ui-components.git"
+SOURCE_REPOSITORY_URI="https://gitlab.gov.ab.ca/dio/core/ui-components.git"
 
 # this is the branch/tag of the project you want to build
 SOURCE_REPOSITORY_REF="features/CS-66-angelo"
