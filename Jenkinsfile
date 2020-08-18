@@ -1,5 +1,5 @@
 def publishNpm = false
-def deployStorybook = true;
+def deployStorybook = true
 
 pipeline {
   agent {
@@ -24,54 +24,51 @@ pipeline {
           def affected = sh (
             script: 'nx affected:libs --base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT} --plain',
             returnStdout: true
-          ).trim();
-          def isStoryBookOnly = affected == 'storybook-common';
+          ).trim()
+          def isStoryBookOnly = affected == 'storybook-common'
           echo "affected: '${affected}'"
-          if (isStoryBookOnly == false){
-            publishNpm = true;
+          if (isStoryBookOnly == false) {
+            publishNpm = true
           }
 
-          if (affected.length() > 0){
-            deployStorybook = true;
+          if (affected.length() > 0) {
+            deployStorybook = true
           }
         }
-        // TODO: cache dependencies
-
+      // TODO: cache dependencies
       }
     }
-    stages {
-      stage('Test'){
+    stage('Test') {
         steps {
           sh 'nx affected --target=test --base=origin/dev~1 --head=origin/dev --parallel'
         }
+    }
+    stage('Lint') {
+      steps {
+        sh 'nx affected --target=lint --base=origin/dev~1 --head=origin/dev --parallel'
       }
-      stage('Lint'){
-        steps {
-          sh 'nx affected --target=lint --base=origin/dev~1 --head=origin/dev --parallel'
-        }
-      }
-      stage('Build storybook'){
-          when {
-          expression { deployStorybook == true }
-        }
-        steps {
-          sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
-          sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
-        }
-      }
-      stage('Build npm package'){
+    }
+    stage('Build storybook') {
         when {
-          expression { publishNpm == true }
+        expression { deployStorybook == true }
         }
-        steps {
-          sh 'npm run build:angular-components'
-          sh 'npm run build:core-css'
-        }
+      steps {
+        sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
+        sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
+      }
+    }
+    stage('Build npm package') {
+      when {
+        expression { publishNpm == true }
+      }
+      steps {
+        sh 'npm run build:angular-components'
+        sh 'npm run build:core-css'
       }
     }
     stage('Deploy Test') {
       parallel {
-        stage('Storybook'){
+        stage('Storybook') {
           when {
             expression { deployStorybook == true }
           }
@@ -83,7 +80,7 @@ pipeline {
             }
           }
         }
-        stage('Publish to npm'){
+        stage('Publish to npm') {
           when {
             expression { publishNpm == true }
           }
