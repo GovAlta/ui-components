@@ -3,11 +3,12 @@ def deployStorybook = true
 def templateName = 'ui-components'
 
 pipeline {
-  agent {
-    node {
-      label 'node12'
-    }
-  }
+  // agent {
+  //   node {
+  //     label 'node12'
+  //   }
+  // }
+  agent any
   environment {
     AFFECTED_APPS = ''
   }
