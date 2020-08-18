@@ -80,38 +80,34 @@ pipeline {
         sh 'npm run build:core-css'
       }
     }
-    stage('Deploy Test') {
-      parallel {
-        stage('Storybook') {
-          when {
-            expression { deployStorybook == true }
-          }
-          steps {
-            //copy the nginx config to binary buld location
-            sh 'cp nginx.conf dist/storybook'
-            dir('dist/storybook') {
-              sh 'oc start-build ui-components --from-dir . --follow'
-            }
-          }
+    stage('Storybook') {
+      when {
+        expression { deployStorybook == true }
+      }
+      steps {
+        //copy the nginx config to binary buld location
+        sh 'cp nginx.conf dist/storybook'
+        dir('dist/storybook') {
+          sh 'oc start-build ui-components --from-dir . --follow'
         }
-        stage('Push Image to Test'){
-          // input {
-          //   message 'Push Image to Test?'
-          // }
-          steps {
-            // TODO: make this dynamic
-            sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
-          }
-        }
-        stage('Publish to npm') {
-          when {
-            expression { publishNpm == true }
-          }
-          steps {
-            sh 'npm run publish:angular-components -- --dry-run'
-            sh 'npm run publish:core-css -- --dry-run'
-          }
-        }
+      }
+    }
+    stage('Push Image to Test'){
+      // input {
+      //   message 'Push Image to Test?'
+      // }
+      steps {
+        // TODO: make this dynamic
+        sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
+      }
+    }
+    stage('Publish to npm') {
+      when {
+        expression { publishNpm == true }
+      }
+      steps {
+        sh 'npm run publish:angular-components -- --dry-run'
+        sh 'npm run publish:core-css -- --dry-run'
       }
     }
   }
