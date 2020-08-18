@@ -33,11 +33,10 @@ pipeline {
             publishNpm = true;
           }
 
-        //   if (affected.length() > 0) {
-        //     deployStorybook = true
-        //   }
+          if (affected.length() > 0){
+            deployStorybook = true;
+          }
         }
-      // TODO: cache dependencies
       }
     }
     stage('Build Processes') {
@@ -67,7 +66,7 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh "nx affected --target=build ${baseCommand} --parallel --prod"
+            sh "nx affected --target=build ${baseCommand} --parallel --prod --with-deps"
           }
         }
       }
@@ -107,7 +106,7 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh "npm run publish:npm-test"
+            sh "npm run semantic-delivery -- --dry-run"
           }
         }
       }
@@ -127,8 +126,8 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            generateNpmrc()
-            sh 'npm run publish:npm'
+            sh "npm run semantic-delivery -- --token vxwNhqew48mzkeszuxfu"
+            sh "env NPM_TOKEN=ee2b1f82-66d0-49fb-91ea-7a72aa13e0f6 npm run publish:npm"
           }
         }
       }
