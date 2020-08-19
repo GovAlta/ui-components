@@ -120,7 +120,7 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh "npm run semantic-delivery -- --token vxwNhqew48mzkeszuxfu"
+            sh "npm run semantic-delivery -- --token xzSxuwhJHgywouSpUAF6"
             sh "env NPM_TOKEN=ee2b1f82-66d0-49fb-91ea-7a72aa13e0f6 npm run publish:npm"
           }
         }
