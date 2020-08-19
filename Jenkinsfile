@@ -89,8 +89,9 @@ pipeline {
             }
             stage('Push Image to Test'){
               steps {
+                echo 'placeholder'
                 // TODO: make this dynamic
-                sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
+                // sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
               }
             }
           }
