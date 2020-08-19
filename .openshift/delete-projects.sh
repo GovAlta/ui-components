@@ -5,7 +5,11 @@
 
 # delete projects
 while true; do
+<<<<<<< HEAD
+  read -p $'\e[1;31m\nDelete project(s) created for this application?\e[0m [Y/n] ' answer
+=======
   read -p $'\e[1;31m\nDelete project(s) created by this script?\e[0m [Y/n] ' answer
+>>>>>>> 018fdc65a13882ac034ad877ecedc143c7af6a0d
 
   case $answer in
     [Yy]* )
