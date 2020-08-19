@@ -71,12 +71,6 @@ pipeline {
         }
       }
     }
-    stage('Lint') {
-      steps {
-        // sh 'nx affected --target=lint --base=origin/dev~1 --head=origin/dev --parallel'
-        sh 'nx run-many --target=lint --projects=angular-components'
-      }
-    }
     stage('Deploy Test') {
       parallel {
         stage('Storybook'){
@@ -91,6 +85,12 @@ pipeline {
                 dir('dist/storybook') {
                   sh "oc start-build ui-components --from-dir . --follow"
                 }
+              }
+            }
+            stage('Push Image to Test'){
+              steps {
+                // TODO: make this dynamic
+                sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
               }
             }
           }
@@ -124,21 +124,6 @@ pipeline {
             sh "env NPM_TOKEN=ee2b1f82-66d0-49fb-91ea-7a72aa13e0f6 npm run publish:npm"
           }
         }
-      }
-    }
-    stage('Push Image to Test'){
-      steps {
-        // TODO: make this dynamic
-        sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
-      }
-    }
-    stage('Publish to npm') {
-      when {
-        expression { publishNpm == true }
-      }
-      steps {
-        sh 'npm run publish:angular-components -- --dry-run'
-        sh 'npm run publish:core-css -- --dry-run'
       }
     }
   }
