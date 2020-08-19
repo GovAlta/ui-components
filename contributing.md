@@ -1,11 +1,12 @@
-## Contributing  
+## Contributing
 
 Have a new component that you think will be useful or encountered a bug and would like to fix it yourself?  
 We encourage contributions to the UI Component Library, but, in order to maintain organization and ensure quality components we have some processes and guidelines to be followed.
 
 ### The Process
 
-Here is an overview of our contribution process.  Specific instructions for bugs and features can be found linked below.
+Here is an overview of our contribution process. Specific instructions for bugs and features can be found linked below.
+
 ```mermaid
 graph TD
 subgraph Content Author

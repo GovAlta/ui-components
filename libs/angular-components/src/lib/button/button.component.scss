@@ -1,7 +1,7 @@
 @import '../../../../shared/styles/src/lib/button/button.scss';
 
 :host {
-    &.goa-button {
-        @include goa-button-styles;
-    }
+  &.goa-button {
+    @include goa-button-styles;
+  }
 }

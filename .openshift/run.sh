@@ -3,6 +3,11 @@
 # import all environment variables from CONFIG file
 . CONFIG # equivalent to source ./CONFIG
 
+unset SOURCE_SECRET_NAME
+unset SOURCE_SECRET_PASSWORD
+
+CLUSTER_URL={$DEFAULT_CLUSTER_URI}
+
 # display script name and purpose
 echo -e "\n"
 echo -e "\e[1;34mOpenShift NodeJS Project Creation Script\e[0m"
@@ -20,34 +25,6 @@ if [[ "$#" -eq 1 ]]; then
   fi
 fi
 
-# loop over all arguments, test and process them
-while [[ "$#" -gt 0 ]]; do
-
-  # start case
-  case "$1" in
-    # catches --test [arg]
-    --test)
-      CREATE_TEST=1
-      ;;
-
-    # catches --prod [arg]
-    --prod)
-      CREATE_PROD=1
-      ;;
-
-    # throws error when an unknown argument is passed in
-    --*|*)
-      echo "\e[1;31m\nError: The command line argument $1 is invalid.\e[0m" >&2;
-      exit 1
-      ;;
-
-    # end case
-    esac
-
-    #shift to next argument
-    shift
-done
-
 # echo variables
 echo -e "\n"
 echo -e "\e[1;32mUsing Following Environment Variables...\e[0m"
@@ -59,16 +36,16 @@ echo -e "Dev Namespace: $DEV_NAMESPACE"
 
 if [[ $CREATE_TEST == 0 ]]; then
   echo -e "Create Test Namespace: No"
-  else
+else
   echo -e "Create Test Namespace: Yes"
-  echo -e "Test Namespace: $TEST_NAMESPACE";
+  echo -e "Test Namespace: $TEST_NAMESPACE"
 fi
 
 if [[ $CREATE_PROD == 0 ]]; then
   echo -e "Create Prod Namespace: No"
-  else
+else
   echo -e "Create Prod Namespace: Yes"
-  echo -e "Prod Namespace: $PROD_NAMESPACE";
+  echo -e "Prod Namespace: $PROD_NAMESPACE"
 fi
 
 echo -e "Source Repository URI: $SOURCE_REPOSITORY_URI"
@@ -80,28 +57,40 @@ echo -e "\n"
 
 # log into to openshift
 # get cluster address
-read -p "Enter the OpenShift cluster url [$DEFAULT_CLUSTER_URI]: " CLUSTER_URL
+read -p "$(echo -e "\e[1;33mEnter the OpenShift cluster url (Press Enter for Default Cluster URI): \e[0m")" CLUSTER_URL
 CLUSTER_URL=${CLUSTER_URL:-$DEFAULT_CLUSTER_URI}
 
-echo -e "Using $CLUSTER_URL as cluster url...\n"
+echo -e "Using $CLUSTER_URL as cluster url..."
+echo -e "\n"
 
 # get username
-read -p "Username: " USERNAME
+read -p $'\e[1;33mOpenShift Username: \e[0m' USERNAME
 
 # get password
-read -sp "Password: " PASSWORD
+read -sp $'\e[1;33mOpenShift Password: \e[0m' PASSWORD
+
+# # get source secret username
+# read -p $'\e[1;33mEnter the source secret name: \e[0m' SOURCE_SECRET_NAME
+
+# # source secret password
+# read -p $'\e[1;33mEnter the source secret password: \e[0m' SOURCE_SECRET_PASSWORD
 
 # log into OpenShift
-echo -e "\n\nLogging into OpenShift @ ${CLUSTER_URL}"
+echo -e "\n\n\e[1;32mLogging into OpenShift @ ${CLUSTER_URL}\e[0m"
 oc login $CLUSTER_URL --username ${USERNAME} --password ${PASSWORD}
 
 # run the initialize-projects script
 # initialize-projects.sh
-echo -e "\n"
-echo -e "\e[1;32mAll required arguments supplied. Initializing projects...\e[0m\n"
 ./create-projects.sh
 
 # create project resources
-./create-resources.sh
+# will create: deployment config, route, service, build config (pipeline), source secret (WIP)
+./create-resources.sh ${SOURCE_SECRET_NAME} ${SOURCE_SECRET_PASSWORD}
+
+echo -e "\n\n\e[1;33mNOTE:\e[0m \e[33mYou will need to manually create a \"Source Secret\" in the OpenShift web console for the ${DEV_NAMESPACE} project." \
+  "\n\nWhen the secret is created you will need to manually set it as the \"Source Secret\" for the \"${WEB_APP_NAME}-build-pipline\" resource." \
+  "\n\nYou will need to manually start the pipeline build process.\e[0m" | fold -w 80 -s
+
+echo -e "\n"
 
 exit 0

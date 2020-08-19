@@ -22,7 +22,7 @@ pipeline {
           else {
             baseCommand = "--all"
           }
-          
+
           def affected = sh (
             script: "nx affected:libs ${baseCommand} --plain",
             returnStdout: true
@@ -87,7 +87,7 @@ pipeline {
             stage('Build image'){
               steps {
                 //copy the nginx config to binary buld location
-                sh "cp nginx.conf dist/storybook"   
+                sh "cp nginx.conf dist/storybook"
                 dir('dist/storybook') {
                   sh "oc start-build ui-components --from-dir . --follow"
                 }
@@ -130,6 +130,21 @@ pipeline {
             sh "env NPM_TOKEN=ee2b1f82-66d0-49fb-91ea-7a72aa13e0f6 npm run publish:npm"
           }
         }
+      }
+    }
+    stage('Push Image to Test'){
+      steps {
+        // TODO: make this dynamic
+        sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
+      }
+    }
+    stage('Publish to npm') {
+      when {
+        expression { publishNpm == true }
+      }
+      steps {
+        sh 'npm run publish:angular-components -- --dry-run'
+        sh 'npm run publish:core-css -- --dry-run'
       }
     }
   }
