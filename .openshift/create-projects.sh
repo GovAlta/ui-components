@@ -3,7 +3,7 @@
 # import environment variables from CONFIG file
 . CONFIG # equivalent to source ./CONFIG
 
-echo -e "\e[1;32mCreating projects...\e[0m"
+echo -e "\n\e[1;32mCreating projects...\e[0m"
 
 # create dev project. will not commit if DRY_RUN = 1
 echo "Creating project ${DEV_NAMESPACE} ..."

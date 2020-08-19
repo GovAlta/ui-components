@@ -24,7 +24,7 @@
             "ref": "${SOURCE_REPOSITORY_REF}"
           },
           "sourceSecret": {
-            "name": "${SOURCE_SECRET}"
+            "name": "${SOURCE_SECRET_NAME}"
           }
         },
         "strategy": {
@@ -64,11 +64,11 @@
       "required": true
     },
     {
-      "name": "SOURCE_SECRET",
+      "name": "SOURCE_SECRET_NAME",
       "displayName": "Git Secret",
       "description": "Set this to the name of the source secret in OpenShift you created to pull code from the Git Repository.",
       "required": false,
-      "value": "choose-your-secret-here"
+      "value": "enter source secret here"
     }
   ]
 }
