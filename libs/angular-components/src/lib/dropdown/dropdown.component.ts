@@ -25,17 +25,17 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   /**
    * Is the select disabled.
    */
-  @Input() disabled: boolean = false;
+  @Input() disabled = false;
 
   /**
    * Is multiple selection?
    */
-  @Input() multiple: boolean = false;
+  @Input() multiple = false;
 
   /**
    * Is a selection required?
    */
-  @Input() required: boolean = false;
+  @Input() required = false;
 
   /**
    * The select element.
@@ -76,13 +76,13 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * Is there a error because no element is selected and required is true?
    */
   get requiredError(): boolean {
-    let values = this.selectedItems;
+    const values = this.selectedItems;
     return this.required === true && values.length === 0;
   }
 
   onChanged(valueChanged: any) {   
-    let options = this.selectedItems;
-    let values = options.map((option) => {
+    const options = this.selectedItems;
+    const values = options.map((option) => {
       return option.value;
     });
     
@@ -94,7 +94,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
       return [];
     }
 
-    let selectedOptionValues = Array.from(this.selector.nativeElement.selectedOptions).map((option) => {      
+    const selectedOptionValues = Array.from(this.selector.nativeElement.selectedOptions).map((option) => {      
       return option.value;
     });
 

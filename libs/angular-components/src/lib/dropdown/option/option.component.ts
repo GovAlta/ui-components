@@ -13,7 +13,7 @@ export class GoAOptionComponent implements OnInit {
   /**
    * The unique id of the option;
    */
-  @Input() id: string = '';
+  @Input() id = '';
 
   /**
    * The value for the option

@@ -51,7 +51,7 @@ describe('GoA Dropdown', () => {
       declarations: [GoAOptionComponent, GoAOptionGroupComponent]
     });
     
-    let selector = screen.getByLabelText(label, { selector: 'select', exact: false });
+    const selector = screen.getByLabelText(label, { selector: 'select', exact: false });
 
     expect(screen.getByText(item2.label)).not.toBeNull();
     expect(screen.getByText(item1.label)).not.toBeNull();
@@ -68,7 +68,7 @@ describe('GoA Dropdown', () => {
       declarations: [GoAOptionComponent, GoAOptionGroupComponent]
     });
     
-    let selector = screen.getByLabelText(label, { selector: 'select', exact: false });
+    const selector = screen.getByLabelText(label, { selector: 'select', exact: false });
     expect(screen.getByText(item2.label)).not.toBeNull();
     expect(screen.getByText(item1.label)).not.toBeNull();
   });
@@ -82,7 +82,7 @@ describe('GoA Dropdown', () => {
       declarations: [GoAOptionComponent, GoAOptionGroupComponent]
     });
     
-    let selector = screen.getByLabelText(label, { selector: 'select', exact: false });
+    const selector = screen.getByLabelText(label, { selector: 'select', exact: false });
 
     expect(screen.getByDisplayValue(item2.label)).not.toBeNull();
   });
@@ -121,7 +121,7 @@ describe('GoA Dropdown', () => {
       declarations: [GoAOptionComponent, GoADropdownComponent]
     });
     
-    let selector = screen.getByLabelText(label, { selector: 'select', exact: false });
+    const selector = screen.getByLabelText(label, { selector: 'select', exact: false });
 
     fireEvent.change(selector);
     expect(theSelection).toEqual([item1.value]); //item 1 is the only item selected
