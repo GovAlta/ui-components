@@ -1,0 +1,97 @@
+@import '../mixin/svg/chevron.scss';
+
+@mixin goa-select-styles {    
+    & {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 8px 0 0;
+        padding: 12px;
+        padding-right: 8px;
+        border-radius: 4px;
+        border: 1px solid #666;
+        font-size: 18px;
+        font-weight: 400;
+        color: #0070C4;
+        /* removes default arrow */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    &:disabled {
+        opacity: 0.3;
+    }
+
+    /* remove default arrow IE */
+    &::-ms-expand {
+        display: none;
+    }
+
+    &:hover {
+        border: 1px solid #004f84;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 3px  #feba35;
+        outline: none;
+    }        
+}
+
+@mixin goa-dropdown-chevron {
+    /* add chevron */
+    i.goa-select-icon {
+        @include chevron;
+        left: auto;
+        right: 8px;
+        width: 24px;
+        height: 24px;
+        pointer-events: none;
+        position: absolute;
+        margin-top: 20px;
+    }
+}
+
+@mixin goa-dropdown-class {
+    .goa-dropdown {
+        @include goa-dropdown-select();
+        &.single-selection {
+            @include goa-dropdown-chevron();
+        }
+
+        &.has-error {
+            select {
+                border: solid 2px #FC1921;
+            }
+        }
+
+        position: relative;
+
+        .dropdown-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .required-label {
+            margin-left: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .helper-text {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .error-text {
+            color: #FC1921;
+            font-size: 14px;
+        }
+    }
+}
+
+@mixin goa-dropdown-select {
+    select {
+        @include goa-select-styles();
+    }
+}

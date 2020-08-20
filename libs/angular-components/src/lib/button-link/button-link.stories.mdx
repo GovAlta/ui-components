@@ -4,6 +4,7 @@ import { GoAButtonLinkComponent } from './button-link.component';
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 import { text, select, withKnobs } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 
 <Meta title="Design System/Basic Elements/Buttons"
   component={GoAButtonLinkComponent}
@@ -27,10 +28,14 @@ A hierarchy of actions provided by buttons.
     }
   }>
     {{
-        template: `<a goa-button href="http://alberta.ca" [linkType]='linkType'>{{content}}</a>`,
+        template: `<a goa-button href="http://alberta.ca" [linkType]='linkType' (click)="click($event)">{{content}}</a>`,
         props: {
             content: text('content', 'Link'),
-            linkType: select('linkType', { right: 'right', up: 'up' }, 'right')
+            linkType: select('linkType', { right: 'right', up: 'up' }, 'right'),
+            click: (e) => {
+              e.preventDefault();
+              action('button was clicked')(e);
+            },
         }
     }}
   </Story>

@@ -1,6 +1,7 @@
 module.exports = {
   name: 'angular-components',
-  preset: '../../jest.config.js',
+  preset: '../../jest.config.js',  
+  testEnvironment: "jest-environment-jsdom-sixteen",
   coverageDirectory: '../../coverage/libs/angular-components',
   snapshotSerializers: [
     'jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js',
