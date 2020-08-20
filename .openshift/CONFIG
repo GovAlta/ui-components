@@ -7,7 +7,7 @@
 DEFAULT_CLUSTER_URI="https://console.os99.gov.ab.ca:8443"
 
 #this is the base namespace for all generated projects
-BASE_NAMESPACE="web"
+BASE_NAMESPACE="ui-components"
 
 # this is the computed dev namespace
 DEV_NAMESPACE="$BASE_NAMESPACE-dev"
@@ -29,7 +29,7 @@ CREATE_PROD=1
 SOURCE_REPOSITORY_URI="https://gitlab.gov.ab.ca/dio/core/ui-components.git"
 
 # this is the branch/tag of the project you want to build
-SOURCE_REPOSITORY_REF="features/CS-66-angelo"
+SOURCE_REPOSITORY_REF="features/CS-66"
 
 # this is the base name of the project resources created
 WEB_APP_NAME="ui-components"

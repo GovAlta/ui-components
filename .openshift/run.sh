@@ -36,16 +36,16 @@ echo -e "Dev Namespace: $DEV_NAMESPACE"
 
 if [[ $CREATE_TEST == 0 ]]; then
   echo -e "Create Test Namespace: No"
-  else
+else
   echo -e "Create Test Namespace: Yes"
-  echo -e "Test Namespace: $TEST_NAMESPACE";
+  echo -e "Test Namespace: $TEST_NAMESPACE"
 fi
 
 if [[ $CREATE_PROD == 0 ]]; then
   echo -e "Create Prod Namespace: No"
-  else
+else
   echo -e "Create Prod Namespace: Yes"
-  echo -e "Prod Namespace: $PROD_NAMESPACE";
+  echo -e "Prod Namespace: $PROD_NAMESPACE"
 fi
 
 echo -e "Source Repository URI: $SOURCE_REPOSITORY_URI"
@@ -88,8 +88,8 @@ oc login $CLUSTER_URL --username ${USERNAME} --password ${PASSWORD}
 ./create-resources.sh ${SOURCE_SECRET_NAME} ${SOURCE_SECRET_PASSWORD}
 
 echo -e "\n\n\e[1;33mNOTE:\e[0m \e[33mYou will need to manually create a \"Source Secret\" in the OpenShift web console for the ${DEV_NAMESPACE} project." \
-"\n\nWhen the secret is created you will need to manually set it as the \"Source Secret\" for the \"${WEB_APP_NAME}-build-pipline\" resource." \
-"\n\nYou will need to manually start the pipeline build process.\e[0m" | fold -w 80 -s
+  "\n\nWhen the secret is created you will need to manually set it as the \"Source Secret\" for the \"${WEB_APP_NAME}-build-pipline\" resource." \
+  "\n\nYou will need to manually start the pipeline build process.\e[0m" | fold -w 80 -s
 
 echo -e "\n"
 
