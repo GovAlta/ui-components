@@ -1,0 +1,30 @@
+<div class="goa-dropdown" [ngClass]="{
+    'single-selection': multiple === false,
+    'has-error': requiredError === true
+    }">    
+    <label class="dropdown-label">{{label}}
+        <span *ngIf="required" class="required-label" i18n="Required label for dropdown">(Required)</span>
+        <div>
+            <i class="goa-select-icon"></i>
+            <select #selector   
+                (change)="onChanged($event)"          
+                [attr.multiple]="multiple === true ? true : null" 
+                [attr.disabled]="disabled === true ? true : null"
+                [attr.required]="required === true ? true : null"
+                >
+                <!--Grab the <optgroup> template from the GoAOptionGroup -->
+                <ng-container class="goa-option"> 
+                    <ng-template *ngFor="let optionGroup of optionGroups" [ngTemplateOutlet]="optionGroup.optionGroupTemplate"></ng-template>
+                </ng-container>
+                <!--Grab the <option> template from the GoAOption -->
+                <ng-container class="goa-option"> 
+                    <ng-template *ngFor="let option of options" [ngTemplateOutlet]="option.optionTemplate"></ng-template>
+                </ng-container>
+            </select>
+            <span *ngIf="!requiredError" class="helper-text">{{description}}</span>
+            <span *ngIf="requiredError" class="error-text" i18n="Required warning for dropdown">At least one item must be selected.</span>
+        </div>
+    </label>
+</div>
+
+

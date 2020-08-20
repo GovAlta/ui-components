@@ -13,5 +13,6 @@ module.exports = {
     '@storybook/addon-viewport',
     'storybook-addon-xd-designs',
     '@storybook/addon-knobs/register',
+    '@storybook/addon-actions'
   ]
 };

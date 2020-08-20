@@ -4,12 +4,13 @@ import { GoAButtonComponent } from './button.component';
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 import { text, select, boolean, withKnobs } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 
 <Meta title="Design System/Basic Elements/Buttons"
   component={GoAButtonComponent}
   decorators={[
         withKnobs,
-        moduleMetadata({ declarations: [GoAButtonComponent] })
+        moduleMetadata({ declarations: [GoAButtonComponent] }),
     ]
 } />
 
@@ -27,10 +28,14 @@ A hierarchy of actions provided by buttons.
     }
   }>
     {{
-        template: `<button goa-button [buttonType]="buttonType">{{content}}</button>`,
+        template: `<button goa-button [buttonType]="buttonType" (click)="click($event)">{{content}}</button>`,
         props: {
             content: text('content', 'Secondary'),
-            buttonType: select('buttonType', { primary: 'primary', secondary: 'secondary', tertiary: 'tertiary' }, 'secondary')
+            buttonType: select('buttonType', { primary: 'primary', secondary: 'secondary', tertiary: 'tertiary' }, 'secondary'),
+            click: (e) => {
+              e.preventDefault();
+              action('button was clicked')(e);
+            },
         }
     }}
   </Story>

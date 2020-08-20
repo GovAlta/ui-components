@@ -5,11 +5,32 @@ import { GoAMicrositeLogoComponent } from './microsite-logo/microsite-logo.compo
 import { GoAFooterComponent } from './footer/footer.component';
 import { GoAHeaderComponent } from './header/header.component';
 import { GoAButtonLinkComponent } from './button-link/button-link.component';
+import { GoAOptionComponent } from './dropdown/option/option.component';
+import { GoAOptionGroupComponent } from './dropdown/option-group/option-group.component';
+import { GoADropdownComponent } from './dropdown/dropdown.component';
 
 @NgModule({
   imports: [CommonModule],
-  exports: [GoAButtonComponent],
-  declarations: [GoAButtonComponent, GoAMicrositeLogoComponent, GoAFooterComponent, GoAHeaderComponent, GoAButtonLinkComponent],
+  exports: [
+    GoAButtonComponent, 
+    GoAMicrositeLogoComponent, 
+    GoAFooterComponent, 
+    GoAHeaderComponent, 
+    GoAButtonLinkComponent,
+    GoAOptionComponent,
+    GoADropdownComponent,
+    GoAOptionGroupComponent
+  ],
+  declarations: [
+    GoAButtonComponent, 
+    GoAMicrositeLogoComponent, 
+    GoAFooterComponent, 
+    GoAHeaderComponent, 
+    GoAButtonLinkComponent,
+    GoAOptionComponent,
+    GoADropdownComponent,
+    GoAOptionGroupComponent
+  ],
   bootstrap: [CommonModule]
 })
 export class AngularComponentsModule {}

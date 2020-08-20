@@ -1,0 +1,8 @@
+<!--Grab the <option> template from the GoAOption -->
+<ng-template #optionGroupTemplate>
+    <optgroup [label]="label">
+        <ng-container class="goa-option"> 
+            <ng-template *ngFor="let option of options" [ngTemplateOutlet]="option.optionTemplate"></ng-template>
+        </ng-container>
+    </optgroup>
+</ng-template>
