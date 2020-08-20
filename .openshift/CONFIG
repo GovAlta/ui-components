@@ -29,7 +29,7 @@ CREATE_PROD=1
 SOURCE_REPOSITORY_URI="https://gitlab.gov.ab.ca/dio/core/ui-components.git"
 
 # this is the branch/tag of the project you want to build
-SOURCE_REPOSITORY_REF="features/CS-66-angelo"
+SOURCE_REPOSITORY_REF="features/CS-66"
 
 # this is the base name of the project resources created
 WEB_APP_NAME="ui-components"

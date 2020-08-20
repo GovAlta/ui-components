@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
+console.log('button');
+
 @Component({
   selector:
     'button[goa-button], input[type="button"][goa-button], input[type="submit"][goa-button]',
