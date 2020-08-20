@@ -11,7 +11,7 @@
     </header>
 </template> 
 <script lang="typescript">
-    import { GoAMicrositeLogo } from '../microsite-logo/microsite-logo'; 
+    import GoAMicrositeLogo from '../microsite-logo/microsite-logo.vue'; 
 
     export default {
         components: { 
