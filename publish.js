@@ -5,7 +5,7 @@ const { exec } = require('child_process');
 
 if (fs.existsSync(path)) {
   const { exec } = require('child_process');
-  const script = `npm-deploy-git-tag --token ${process.env.NPM_TOKEN} --access public`;
+  const script = `npm-deploy-git-tag --token ${process.env.NPM_TOKEN} --access public --tag next`;
   console.log(`Executing: ${script}`);
   exec(script, { cwd: path }, (error, stdout, stderr) => {
     if (error) {
