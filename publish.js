@@ -10,12 +10,11 @@ if (fs.existsSync(path)) {
   exec(script, { cwd: path }, (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
-      return;
+      throw new Error(error.message);
     }
     if (stderr) {
       console.log(`stderr: ${stderr}`);
       throw new Error(stderr);
-      return;
     }
     console.log(`stdout: ${stdout}`);
   });
