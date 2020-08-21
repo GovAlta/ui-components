@@ -1,6 +1,7 @@
-/* This file is meant to build the goa-core.css file.  The bulit file should be the same as the given one from the design team */
 @import './lib/button/button.scss';
 @import './lib/button/button-link.scss';
+@import './lib/dropdown/dropdown.scss';
+
 @import './lib/mixin/responsive-breakpoints.scss';
 
 /*
@@ -212,7 +213,6 @@ a[href $= '.docx']:after {
 /* goa-form ******************************************************************/
 
 /* label ***/
-
 div.goa-form label {
   display: block;
   margin: 24px 0 0;
@@ -281,40 +281,10 @@ div.goa-form textarea {
   }
 
 /* select ***/
-
-div.goa-form select {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 8px 0 0;
-  padding: 12px;
-  line-height: 1em;
-  border-radius: 4px;
-  border: 1px solid #666;
-  font-size: 18px;
-  font-weight: 400;
-  /* removes default arrow */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-/* remove default arrow IE */
-div.goa-form select::-ms-expand {
-  display: none;
-}
-
-  div.goa-form select:hover {
-    border: 1px solid #004f84;
-  }
-
-  div.goa-form select:focus {
-    outline: 3px solid #feba35;
-    outline-offset: 0;
-  }
-
 /* add chevron */
 i.goa-select-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath class='cls-1' d='M11.29,15.7a1,1,0,0,0,1.41,0l6-6A1,1,0,1,0,17.29,8.3L12,13.58,6.71,8.3a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41Z'/%3E%3C/svg%3E%0A"); left: auto;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath class='cls-1' d='M11.29,15.7a1,1,0,0,0,1.41,0l6-6A1,1,0,1,0,17.29,8.3L12,13.58,6.71,8.3a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41Z'/%3E%3C/svg%3E%0A"); 
+  left: auto;
   right: 8px;
   width: 24px;
   height: 24px;
@@ -323,31 +293,35 @@ i.goa-select-icon {
   margin-top: 20px;
 }
 
-div.goa-form div.goa-option {
-  box-sizing: border-box;
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  min-height: 28px;
-  margin: 24px 0 0;
-  vertical-align: middle;
-}
+div.goa-form {
+  @include goa-dropdown-select;
 
-div.goa-form .goa-field-select,
-div.goa-form .goa--required {
-  position: relative;
-}
+  div.goa-option {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    min-height: 28px;
+    margin: 24px 0 0;
+    vertical-align: middle;
+  }
 
-div.goa-form [type='checkbox']:not(:checked),
-div.goa-form [type='radio']:not(:checked),
-div.goa-form [type='checkbox']:checked,
-div.goa-form [type='radio']:checked {
-  z-Index: 1;
-  box-sizing: border-box;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  margin: 0;
+  .goa-field-select,
+  .goa--required {
+    position: relative;
+  }
+
+  [type='checkbox']:not(:checked),
+  [type='radio']:not(:checked),
+  [type='checkbox']:checked,
+  [type='radio']:checked {
+    z-Index: 1;
+    box-sizing: border-box;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    margin: 0;
+  }
 }
 
   div.goa-form [type='checkbox']:not(:checked) + label,

@@ -5,16 +5,16 @@ const { exec } = require('child_process');
 
 if (fs.existsSync(path)) {
   const { exec } = require('child_process');
-  const script = `npm-deploy-git-tag --token ${process.env.NPM_TOKEN} --access public`;
+  const script = `npm-deploy-git-tag --token ${process.env.NPM_TOKEN} --access public --tag next`;
   console.log(`Executing: ${script}`);
   exec(script, { cwd: path }, (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
-      return;
+      throw new Error(error.message);
     }
     if (stderr) {
       console.log(`stderr: ${stderr}`);
-      return;
+      throw new Error(stderr);
     }
     console.log(`stdout: ${stdout}`);
   });

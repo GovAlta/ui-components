@@ -1,0 +1,98 @@
+@import '../mixin/svg/chevron.scss';
+@import '../mixin/colors.scss';
+
+@mixin goa-select-styles {    
+    & {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 8px 0 0;
+        padding: 12px;
+        padding-right: 8px;
+        border-radius: 4px;
+        border: 1px solid $weak-black;
+        font-size: 18px;
+        font-weight: 400;
+        color: $primary-color;
+        /* removes default arrow */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    &:disabled {
+        opacity: 0.3;
+    }
+
+    /* remove default arrow IE */
+    &::-ms-expand {
+        display: none;
+    }
+
+    &:hover {
+        border: 1px solid $primary-color;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 3px  $focus-color;
+        outline: none;
+    }        
+}
+
+@mixin goa-dropdown-chevron {
+    /* add chevron */
+    i.goa-select-icon {
+        @include chevron;
+        left: auto;
+        right: 8px;
+        width: 24px;
+        height: 24px;
+        pointer-events: none;
+        position: absolute;
+        margin-top: 20px;
+    }
+}
+
+@mixin goa-dropdown-class {
+    .goa-dropdown {
+        @include goa-dropdown-select();
+        &.single-selection {
+            @include goa-dropdown-chevron();
+        }
+
+        &.has-error {
+            select {
+                border: solid 2px $error-color;
+            }
+        }
+
+        position: relative;
+
+        .dropdown-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: $strong-black;
+        }
+
+        .required-label {
+            margin-left: 8px;
+            font-size: 14px;
+            color: $weak-black;
+        }
+
+        .helper-text {
+            font-size: 14px;
+            color: $strong-black;
+        }
+
+        .error-text {
+            color: $error-color;
+            font-size: 14px;
+        }
+    }
+}
+
+@mixin goa-dropdown-select {
+    select {
+        @include goa-select-styles();
+    }
+}

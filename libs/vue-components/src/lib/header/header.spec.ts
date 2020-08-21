@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/vue';
-import GoAHeader from './header.vue';
+import GoAHeader from './header.vue'; 
 
 describe('GoA Microsite Logo', () => {
   const serviceName = 'DIO service';

@@ -27,15 +27,18 @@ pipeline {
             script: "nx affected:libs ${baseCommand} --plain",
             returnStdout: true
           ).trim();
-          def isStoryBookOnly = affected == 'shared-storybook-common';
           echo "affected: '${affected}'"
-          if (isStoryBookOnly == false){
-            publishNpm = true;
-          }
 
           if (affected.length() > 0){
+            def isStoryBookOnly = affected == 'shared-storybook-common';
             deployStorybook = true;
+            if (isStoryBookOnly == false){
+              publishNpm = true;
+            }
           }
+
+          echo "deployStorybook: '${deployStorybook}'"
+          echo "publishNpm: '${publishNpm}'"
         }
       }
     }
@@ -122,7 +125,7 @@ pipeline {
           }
           steps {
             sh "npm run semantic-delivery -- --token xzSxuwhJHgywouSpUAF6"
-            sh "env NPM_TOKEN=ee2b1f82-66d0-49fb-91ea-7a72aa13e0f6 npm run publish:npm"
+            sh "env NPM_TOKEN=b6add088-e4c0-47fd-8c91-3d1c39dc78e1 npm run publish:npm"
           }
         }
       }

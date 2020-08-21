@@ -8,9 +8,8 @@ module.exports = async ({ config, mode }) => {
 
   // Make whatever fine-grained changes you need
   config.resolve.extensions.push('.tsx');
-  config.resolve.extensions.push('.ts');
   config.module.rules.push({
-    test: /\.(ts|tsx)$/,
+    test: /\.(tsx)$/,
     loader: require.resolve('babel-loader'),
     options: {
       presets: [

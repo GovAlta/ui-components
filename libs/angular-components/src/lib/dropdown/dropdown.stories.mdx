@@ -1,0 +1,167 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import { moduleMetadata } from '@storybook/angular';
+import { text, boolean, withKnobs } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
+
+import { DoDont } from '@abgov/shared/storybook-common';
+
+import { GoADropdownComponent } from './dropdown.component';
+import { GoAOptionComponent } from './option/option.component';
+import { GoAOptionGroupComponent } from './option-group/option-group.component';
+
+<Meta title="Design System/Basic Elements/Drop Down Lists" decorators={[
+        withKnobs,
+        moduleMetadata({ 
+          declarations: [GoADropdownComponent, GoAOptionComponent, GoAOptionGroupComponent]
+        })
+    ]
+} />
+
+# Drop Down List
+A user input field that allows the user one selected option from a large list of options.
+
+## Overview
+
+#### Basic
+<Preview>
+  <Story name="Basic" height={200}>
+    {{
+        template: `<span style="width:300px;display:inline-block;">
+                    <goa-dropdown (selectionChange)="selectionChanged($event)" [required]="required" [disabled]="disabled" [multiple]="multiple" [label]="label" [description]="description">
+                      <goa-option id='apples' [value]='{fruit: "apples"}'>Apples</goa-option>
+                      <goa-option id='oranges' [defaultSelected]="true" [value]='{fruit: "oranges"}'><span>Oranges 🍊</span></goa-option>
+                      <goa-option id='pears' [value]='{fruit: "pears"}'>Pears</goa-option>
+                      <goa-option id='plums' [value]='{fruit: "plums"}'>Plums</goa-option>
+                      <goa-option id='peaches' [value]='{fruit: "peaches"}'>Peaches</goa-option>
+                      <goa-option id='watermelons' [value]='{fruit: "watermelons"}'>Watermelon</goa-option>
+                      <goa-option id='tomatoes' [value]='{fruit: "tomatoes"}'>Tomatoes</goa-option>
+                      <goa-option id='papayas' [value]='{fruit: "papayas"}'>Papayas</goa-option>
+                      <goa-option id='bananas' [value]='{fruit: "bananas"}'>Bananas</goa-option>
+                      <goa-option id='pineapples' [value]='{fruit: "pineapples"}'>Pineapples</goa-option>
+                    </goa-dropdown>
+                  </span>`,
+        props: {
+          label: text('label', 'Fruits'),
+          description: text('description', 'Choose your favourite fruit'),
+          multiple: boolean('multiple', false),
+          required: boolean('required', false),
+          disabled: boolean('disabled', false),
+          selectionChanged(value) {
+            action('selection was changed')(value);
+          }
+        }
+    }}
+  </Story>
+</Preview>
+
+#### With Grouping
+<Preview>
+  <Story name="With Grouping" height={200}>
+    {{
+        template: `<span style="width:300px;display:inline-block;">
+                    <goa-dropdown (selectionChange)="selectionChanged($event)" [required]="required" [disabled]="disabled" [multiple]="multiple" [label]="label" [description]="description">
+                      <goa-option-group label="Group 1">
+                        <goa-option id='apples' [value]='{fruit: "apples"}'>Apples</goa-option>
+                        <goa-option id='oranges' [defaultSelected]="true" [value]='{fruit: "oranges"}'><span>Oranges 🍊</span></goa-option>
+                        <goa-option id='pears' [value]='{fruit: "pears"}'>Pears</goa-option>
+                      </goa-option-group>
+                      <goa-option-group label="Group 2">
+                        <goa-option id='plums' [value]='{fruit: "plums"}'>Plums</goa-option>
+                        <goa-option id='peaches' [value]='{fruit: "peaches"}'>Peaches</goa-option>
+                        <goa-option id='watermelons' [value]='{fruit: "watermelons"}'>Watermelon</goa-option>
+                        <goa-option id='tomatoes' [value]='{fruit: "tomatoes"}'>Tomatoes</goa-option>
+                        <goa-option id='papayas' [value]='{fruit: "papayas"}'>Papayas</goa-option>
+                      </goa-option-group>
+                      <goa-option id='bananas' [value]='{fruit: "bananas"}'>Bananas</goa-option>
+                      <goa-option id='pineapples' [value]='{fruit: "pineapples"}'>Pineapples</goa-option>
+                    </goa-dropdown>
+                  </span>`,
+        props: {
+          label: text('label', 'Fruits'),
+          description: text('description', 'Choose your favourite fruit'),
+          multiple: boolean('multiple', false),
+          required: boolean('required', false),
+          disabled: boolean('disabled', false),
+          selectionChanged(value) {
+            action('selection was changed')(value);
+          }
+        }
+    }}
+  </Story>
+</Preview>
+
+## Examples
+Basic  
+```
+<goa-dropdown (selectionChange)="selectionChanged($event)" label="Fruits" description="Select your favourite fruit.">
+  <goa-option id='apples' [value]='{fruit: "apples"}'>Apples</goa-option>
+  <goa-option id='oranges' [value]='{fruit: "oranges"}'><span>We can put icons or other markup</span></goa-option>
+  <goa-option id='pears' [value]='{fruit: "pears"}'>Pears</goa-option>
+</goa-dropdown>
+```
+  
+With Grouping  
+```
+<goa-dropdown (selectionChange)="selectionChanged($event)" label="Fruits" description="Select your favourite fruit.">
+  <goa-option-group label="Group 1">
+    <goa-option id='apples' [value]='{fruit: "apples"}'>Apples</goa-option>
+    <goa-option id='oranges' [value]='{fruit: "oranges"}'><span>We can put icons or other markup</span></goa-option>
+  </goa-option-group>
+  <goa-option id='pears' [value]='{fruit: "pears"}'>Pears</goa-option>
+</goa-dropdown>
+```
+
+## Properties
+
+#### GoADropdownComponent  
+
+| Name     | Type | Description | Default |
+|----------|:----:|:-----------:|--------:|
+| selectionChange | event&lt;Array&lt;GoAOptionComponent&gt;&gt; | When selection changes returns an array of GoAOption which are selected | empty array |
+| label | string | The text to use as the label. | '' |
+| description | string | The text to use as the helper. | '' |
+| required | boolean | Is a non-empty selection required? | false |
+| disabled | boolean | Is the control disabled? | false |
+| multiple | boolean | Does the control allow multiple selections? | false |
+  
+  
+#### GoAOptionComponent  
+
+| Name     | Type | Description | Default |
+|----------|:----:|:-----------:|--------:|
+| id | string | The unique id of the option.  Will be used to compare equality when an item is selected. | '' |
+| value | any | The value to be returned when selected | undefined |
+| defaultSelected | boolean | Is the option selected by default.  If more than one option is set and multiple is not set, then which one is selected as default is indeterminate. | false |
+| (content) | markup | Content within option. | |
+
+## Usage guidelines
+### Widths and character count
+Drop down lists are responsive and range in width from 272 pixels on mobile up to 384 pixels 
+on desktop. Each option should be a brief word, description, or name.
+
+<DoDont 
+  dos={'Limit character width to 20 characters per option.'}
+  donts={'Use drop down lists for sentences.'}
+/>
+
+### Select a single option
+Use drop down lists when the user can only select one option and when there are more than 
+seven available options to select from. Use radio buttons instead when there are seven or 
+less available options to choose from. Since all the options but one are hidden, the visibility 
+is low, so try to use radio buttons whenever possible.
+
+<DoDont 
+  dos={'Make the drop down list optional, otherwise specify with a "Required" caption.'}
+  donts={'Use drop down lists when there are less than eight available options.'}
+/>
+
+### Description of options
+Drop down lists are always accompanied with a label and precede a button. Do not use the first 
+drop down option as a descriptor or label of the list. Instead, it should be the most common or 
+default option and is part of a set.
+
+<DoDont 
+  dos={'List the first option as part of a set of related options.'}
+  donts={'Use the first option as a descriptor or label for the set of options.'}
+/>
+
