@@ -125,7 +125,7 @@ pipeline {
           }
           steps {
             sh "npm run semantic-delivery -- --token xzSxuwhJHgywouSpUAF6"
-            sh "env NPM_TOKEN=ee2b1f82-66d0-49fb-91ea-7a72aa13e0f6 npm run publish:npm"
+            sh "env NPM_TOKEN=b6add088-e4c0-47fd-8c91-3d1c39dc78e1 npm run publish:npm"
           }
         }
       }
