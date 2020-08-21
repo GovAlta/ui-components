@@ -1,4 +1,5 @@
 @import '../mixin/svg/chevron.scss';
+@import '../mixin/colors.scss';
 
 @mixin goa-select-styles {    
     & {
@@ -8,10 +9,10 @@
         padding: 12px;
         padding-right: 8px;
         border-radius: 4px;
-        border: 1px solid #666;
+        border: 1px solid $weak-black;
         font-size: 18px;
         font-weight: 400;
-        color: #0070C4;
+        color: $primary-color;
         /* removes default arrow */
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -28,11 +29,11 @@
     }
 
     &:hover {
-        border: 1px solid #004f84;
+        border: 1px solid $primary-color;
     }
 
     &:focus {
-        box-shadow: 0 0 0 3px  #feba35;
+        box-shadow: 0 0 0 3px  $focus-color;
         outline: none;
     }        
 }
@@ -60,7 +61,7 @@
 
         &.has-error {
             select {
-                border: solid 2px #FC1921;
+                border: solid 2px $error-color;
             }
         }
 
@@ -69,22 +70,22 @@
         .dropdown-label {
             font-size: 18px;
             font-weight: bold;
-            color: #333;
+            color: $strong-black;
         }
 
         .required-label {
             margin-left: 8px;
             font-size: 14px;
-            color: #666;
+            color: $weak-black;
         }
 
         .helper-text {
             font-size: 14px;
-            color: #333;
+            color: $strong-black;
         }
 
         .error-text {
-            color: #FC1921;
+            color: $error-color;
             font-size: 14px;
         }
     }

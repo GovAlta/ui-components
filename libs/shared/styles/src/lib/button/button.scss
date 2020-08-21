@@ -1,9 +1,11 @@
-/* Common button colors */
-$active-outline-color: #FEBA35;
-$button-color: #0070C4;
-$button-hover-color: #333;
+@import '../mixin/colors.scss';
 
-$disabled-color: #666;
+/* Common button colors */
+$active-outline-color: $focus-color;
+$button-color: $primary-color;
+$button-hover-color: $strong-black;
+
+$disabled-color: $weak-black;
 $disabled-background-color: #F1F1F1;
 
 
