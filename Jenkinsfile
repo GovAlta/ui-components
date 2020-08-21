@@ -94,7 +94,7 @@ pipeline {
               steps {
                 echo 'placeholder'
                 // TODO: make this dynamic
-                // sh 'oc tag web-dev/ui-components:latest web-test/ui-components:latest'
+                sh 'oc tag ui-components-dev/ui-components:latest ui-components-test/ui-components:latest'
               }
             }
           }
