@@ -14,6 +14,7 @@ if (fs.existsSync(path)) {
     }
     if (stderr) {
       console.log(`stderr: ${stderr}`);
+      throw new Error(stderr);
       return;
     }
     console.log(`stdout: ${stdout}`);
