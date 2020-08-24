@@ -10,6 +10,12 @@ import { GoAOptionComponent } from '../option/option.component';
  * Option component with to use with GoADropdown
  */
 export class GoAOptionGroupComponent implements OnInit {
+  
+  /**
+   * Filtered options to show in the view.
+   */
+  _filteredOptions: Array<GoAOptionComponent>;
+
   /**
    * The label of the option group
    */
@@ -34,6 +40,7 @@ export class GoAOptionGroupComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    this._filteredOptions = [...this.options];
     // The template output cache is populated by child components during render, so tell angular that there have been changes during the render here.
     this.cdr.detectChanges();
   }

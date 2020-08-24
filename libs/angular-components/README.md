@@ -4,7 +4,8 @@ This library contains angular components from the Government of Alberta.
 
 ## Installation
 
-> npm install @abgov/angular-components
+> npm install @abgov/angular-components  
+Add "preserveSymlinks": true, to angular.json.  
 
 ## Documentation
 

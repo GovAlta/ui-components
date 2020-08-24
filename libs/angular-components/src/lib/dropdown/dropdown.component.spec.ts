@@ -4,6 +4,8 @@ import { GoADropdownComponent } from './dropdown.component';
 import { GoAOptionComponent  } from './option/option.component';
 import { GoAOptionGroupComponent  } from './option-group/option-group.component';
 
+import { OverlayModule } from '@angular/cdk/overlay';
+
 describe('GoA Dropdown', () => {
   const label = 'label test';
   const description = 'description test';
@@ -24,10 +26,11 @@ describe('GoA Dropdown', () => {
                   <goa-option label="${item1.label}" id="${item1.id}" value="${item1.value}"></goa-option>
                   <goa-option label="${item2.label}" id="${item2.id}" value="${item2.value}"></goa-option>
                 </goa-dropdown>`,
-      declarations: [GoAOptionComponent, GoAOptionGroupComponent]
+      declarations: [GoAOptionComponent, GoAOptionGroupComponent],
+      imports: [OverlayModule]
     });
 
-    expect(screen.getByLabelText(label, { selector: 'select', exact: false })).not.toBeNull();
+    expect(screen.getByLabelText(label, { exact: false })).not.toBeNull();
   });
 
   test('should render description', async () => {
@@ -36,7 +39,8 @@ describe('GoA Dropdown', () => {
                   <goa-option label="${item1.label}" id="${item1.id}" value="${item1.value}"></goa-option>
                   <goa-option label="${item2.label}" id="${item2.id}" value="${item2.value}"></goa-option>
                 </goa-dropdown>`,
-      declarations: [GoAOptionComponent, GoAOptionGroupComponent]
+      declarations: [GoAOptionComponent, GoAOptionGroupComponent],
+      imports: [OverlayModule]
     });
     
     expect(screen.getByText(description)).not.toBeNull();
@@ -48,10 +52,12 @@ describe('GoA Dropdown', () => {
                   <goa-option label="${item1.label}" value="${item1.value}" id="${item1.id}">${item1.label}</goa-option>
                   <goa-option label="${item2.label}" value="${item2.value}" id="${item2.id}">${item2.label}</goa-option>
                 </goa-dropdown>`,
-      declarations: [GoAOptionComponent, GoAOptionGroupComponent]
+      declarations: [GoAOptionComponent, GoAOptionGroupComponent],
+      imports: [OverlayModule]
     });
     
-    const selector = screen.getByLabelText(label, { selector: 'select', exact: false });
+    const input = screen.getByLabelText(label, {exact: false});
+    fireEvent.click(input);
 
     expect(screen.getByText(item2.label)).not.toBeNull();
     expect(screen.getByText(item1.label)).not.toBeNull();
@@ -65,10 +71,13 @@ describe('GoA Dropdown', () => {
                   </goa-option-group>
                   <goa-option label="${item2.label}" value="${item2.value}" id="${item2.id}">${item2.label}</goa-option>
                 </goa-dropdown>`,
-      declarations: [GoAOptionComponent, GoAOptionGroupComponent]
+      declarations: [GoAOptionComponent, GoAOptionGroupComponent],
+      imports: [OverlayModule]
     });
     
-    const selector = screen.getByLabelText(label, { selector: 'select', exact: false });
+    const input = screen.getByLabelText(label, {exact: false});
+    fireEvent.click(input);
+
     expect(screen.getByText(item2.label)).not.toBeNull();
     expect(screen.getByText(item1.label)).not.toBeNull();
   });
@@ -79,11 +88,10 @@ describe('GoA Dropdown', () => {
                   <goa-option label="${item1.label}" value="${item1.value}" id="${item1.id}">${item1.label}</goa-option>
                   <goa-option [defaultSelected]="true" label="${item2.label}" value="${item2.value}" id="${item2.id}">${item2.label}</goa-option>
                 </goa-dropdown>`,
-      declarations: [GoAOptionComponent, GoAOptionGroupComponent]
+      declarations: [GoAOptionComponent, GoAOptionGroupComponent],
+      imports: [OverlayModule]
     });
     
-    const selector = screen.getByLabelText(label, { selector: 'select', exact: false });
-
     expect(screen.getByDisplayValue(item2.label)).not.toBeNull();
   });
 
@@ -93,7 +101,8 @@ describe('GoA Dropdown', () => {
                   <goa-option label="${item1.label}" value="${item1.value}" id="${item1.id}">${item1.label}</goa-option>
                   <goa-option label="${item2.label}" value="${item2.value}" id="${item2.id}">${item2.label}</goa-option>
                 </goa-dropdown>`,
-      declarations: [GoAOptionComponent, GoAOptionGroupComponent]
+      declarations: [GoAOptionComponent, GoAOptionGroupComponent],
+      imports: [OverlayModule]
     }); 
     
     expect(screen.getByText("At least one item must be selected.")).not.toBeNull();
@@ -118,13 +127,73 @@ describe('GoA Dropdown', () => {
     }
     
     await render(TestComponentWrapper, {
-      declarations: [GoAOptionComponent, GoADropdownComponent]
+      declarations: [GoAOptionComponent, GoADropdownComponent],
+      imports: [OverlayModule]
     });
     
-    const selector = screen.getByLabelText(label, { selector: 'select', exact: false });
+    const input = screen.getByLabelText(label, {exact: false});
+    fireEvent.click(input);
 
-    fireEvent.change(selector);
+    fireEvent.click(screen.getByText(item1.label));
     expect(theSelection).toEqual([item1.value]); //item 1 is the only item selected
+  });
+
+  test('typeahead mode contains should filter', async () => {
+    await render(GoADropdownComponent, {
+      template: `<goa-dropdown label="${label}" typeaheadMode="contains" description="${description}">
+                  <goa-option label="${item1.label}" value="${item1.value}" id="${item1.id}">${item1.label}</goa-option>
+                  <goa-option-group label="Test group">
+                    <goa-option label="${item2.label}" value="${item2.value}" id="${item2.id}">${item2.label}</goa-option>
+                  </goa-option-group>
+                </goa-dropdown>`,
+      declarations: [GoAOptionComponent, GoAOptionGroupComponent],
+      imports: [OverlayModule]
+    }); 
+    
+
+
+    const input = screen.getByLabelText(label, {exact: false}) as HTMLInputElement;    
+    fireEvent.click(input);
+    input.value = 'em'
+    fireEvent.input(input);
+
+    expect(screen.queryByText(item2.label)).not.toBeNull();
+    expect(screen.queryByText(item1.label)).not.toBeNull();
+
+    input.value = '1'
+    fireEvent.input(input);
+
+    expect(screen.queryByText(item2.label)).toBeNull();
+    expect(screen.queryByText(item1.label)).not.toBeNull();
+  });
+
+  test('typeahead mode startsWith should filter', async () => {
+    await render(GoADropdownComponent, {
+      template: `<goa-dropdown label="${label}" typeaheadMode="startsWith" description="${description}">
+                  <goa-option label="${item1.label}" value="${item1.value}" id="${item1.id}">${item1.label}</goa-option>
+                  <goa-option-group label="Test group">
+                    <goa-option label="${item2.label}" value="${item2.value}" id="${item2.id}">${item2.label}</goa-option>
+                  </goa-option-group>
+                </goa-dropdown>`,
+      declarations: [GoAOptionComponent, GoAOptionGroupComponent],
+      imports: [OverlayModule]
+    }); 
+    
+
+
+    const input = screen.getByLabelText(label, {exact: false}) as HTMLInputElement;    
+    fireEvent.click(input);
+    input.value = 'em'
+    fireEvent.input(input);
+
+    expect(screen.queryByText(item2.label)).toBeNull();
+    expect(screen.queryByText(item1.label)).toBeNull();
+
+    input.value = 'item'
+    fireEvent.input(input);
+
+    expect(screen.queryByText(item2.label)).not.toBeNull();
+    expect(screen.queryByText(item1.label)).not.toBeNull();
   });
 });
 
