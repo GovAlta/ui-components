@@ -22,7 +22,7 @@ describe('GoA Button', () => {
 
     const button = screen.getByTestId('testid');
     expect(button.className).toContain(buttonClassName);
-    expect(button.className).toContain(buttonSecondaryClassName);
+    expect(button.className).not.toContain(buttonSecondaryClassName);
     expect(button.className).not.toContain(buttonTertiaryClassName);
   });
 
