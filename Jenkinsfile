@@ -92,7 +92,6 @@ pipeline {
             }
             stage('Push Image to Test'){
               steps {
-                echo 'placeholder'
                 // TODO: make this dynamic
                 sh 'oc tag ui-components-dev/ui-components:latest ui-components-test/ui-components:latest'
               }
@@ -111,12 +110,13 @@ pipeline {
     }
     stage('Deploy Prod') {
       parallel {
-        stage('Storybook'){
+        stage('Push Storybook Image to Prod'){
           when {
             expression { deployStorybook == true }
           }
           steps {
-            echo 'placeholder'
+            // TODO: make this dynamic
+            sh 'oc tag ui-components-dev/ui-components:latest ui-components-prod/ui-components:latest'          
           }
         }
         stage('Publish to npm'){
