@@ -1,6 +1,6 @@
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
-import { text, boolean, withKnobs } from '@storybook/addon-knobs';
+import { text, boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import { DoDont } from '@abgov/shared/storybook-common';
@@ -9,9 +9,12 @@ import { GoADropdownComponent } from './dropdown.component';
 import { GoAOptionComponent } from './option/option.component';
 import { GoAOptionGroupComponent } from './option-group/option-group.component';
 
+import { OverlayModule } from '@angular/cdk/overlay';
+
 <Meta title="Design System/Basic Elements/Drop Down Lists" decorators={[
         withKnobs,
         moduleMetadata({ 
+          imports: [OverlayModule],
           declarations: [GoADropdownComponent, GoAOptionComponent, GoAOptionGroupComponent]
         })
     ]
@@ -27,17 +30,24 @@ A user input field that allows the user one selected option from a large list of
   <Story name="Basic" height={200}>
     {{
         template: `<span style="width:300px;display:inline-block;">
-                    <goa-dropdown (selectionChange)="selectionChanged($event)" [required]="required" [disabled]="disabled" [multiple]="multiple" [label]="label" [description]="description">
-                      <goa-option id='apples' [value]='{fruit: "apples"}'>Apples</goa-option>
-                      <goa-option id='oranges' [defaultSelected]="true" [value]='{fruit: "oranges"}'><span>Oranges 🍊</span></goa-option>
-                      <goa-option id='pears' [value]='{fruit: "pears"}'>Pears</goa-option>
-                      <goa-option id='plums' [value]='{fruit: "plums"}'>Plums</goa-option>
-                      <goa-option id='peaches' [value]='{fruit: "peaches"}'>Peaches</goa-option>
-                      <goa-option id='watermelons' [value]='{fruit: "watermelons"}'>Watermelon</goa-option>
-                      <goa-option id='tomatoes' [value]='{fruit: "tomatoes"}'>Tomatoes</goa-option>
-                      <goa-option id='papayas' [value]='{fruit: "papayas"}'>Papayas</goa-option>
-                      <goa-option id='bananas' [value]='{fruit: "bananas"}'>Bananas</goa-option>
-                      <goa-option id='pineapples' [value]='{fruit: "pineapples"}'>Pineapples</goa-option>
+                    <goa-dropdown 
+                        (selectionChange)="selectionChanged($event)" 
+                        [typeaheadMode]="typeaheadMode"
+                        [required]="required" 
+                        [disabled]="disabled" 
+                        [multiple]="multiple" 
+                        [label]="label" 
+                        [description]="description">
+                      <goa-option id='apples' [value]='{fruit: "apples"}' label="Apples">Apples</goa-option>
+                      <goa-option id='oranges' [defaultSelected]="true" [value]='{fruit: "oranges"}' label="Oranges"><span>Oranges 🍊</span></goa-option>
+                      <goa-option id='pears' [value]='{fruit: "pears"}' label="Pears">Pears</goa-option>
+                      <goa-option id='plums' [value]='{fruit: "plums"}' label="Plums">Plums</goa-option>
+                      <goa-option id='peaches' [value]='{fruit: "peaches"}' label="Peaches">Peaches</goa-option>
+                      <goa-option id='watermelons' [value]='{fruit: "watermelons"}' label="Watermelon">Watermelon</goa-option>
+                      <goa-option id='tomatoes' [value]='{fruit: "tomatoes"}' label="Tomatoes">Tomatoes</goa-option>
+                      <goa-option id='papayas' [value]='{fruit: "papayas"}' label="Papayas">Papayas</goa-option>
+                      <goa-option id='bananas' [value]='{fruit: "bananas"}' label="Bananas">Bananas</goa-option>
+                      <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
                     </goa-dropdown>
                   </span>`,
         props: {
@@ -46,6 +56,7 @@ A user input field that allows the user one selected option from a large list of
           multiple: boolean('multiple', false),
           required: boolean('required', false),
           disabled: boolean('disabled', false),
+          typeaheadMode: select('typeaheadMode', {none:'none', contains:'contains', startsWith:'startsWith'}, 'none'),          
           selectionChanged(value) {
             action('selection was changed')(value);
           }
@@ -59,21 +70,27 @@ A user input field that allows the user one selected option from a large list of
   <Story name="With Grouping" height={200}>
     {{
         template: `<span style="width:300px;display:inline-block;">
-                    <goa-dropdown (selectionChange)="selectionChanged($event)" [required]="required" [disabled]="disabled" [multiple]="multiple" [label]="label" [description]="description">
+                    <goa-dropdown (selectionChange)="selectionChanged($event)"  
+                        [required]="required" 
+                        [typeaheadMode]="typeaheadMode"
+                        [disabled]="disabled" 
+                        [multiple]="multiple" 
+                        [label]="label" 
+                        [description]="description">
                       <goa-option-group label="Group 1">
-                        <goa-option id='apples' [value]='{fruit: "apples"}'>Apples</goa-option>
-                        <goa-option id='oranges' [defaultSelected]="true" [value]='{fruit: "oranges"}'><span>Oranges 🍊</span></goa-option>
-                        <goa-option id='pears' [value]='{fruit: "pears"}'>Pears</goa-option>
+                        <goa-option id='apples' [value]='{fruit: "apples"}' label="Apples">Apples</goa-option>
+                        <goa-option id='oranges' [defaultSelected]="true" [value]='{fruit: "oranges"}' label="Oranges"><span>Oranges 🍊</span></goa-option>
+                        <goa-option id='pears' [value]='{fruit: "pears"}' label="Pears">Pears</goa-option>
                       </goa-option-group>
                       <goa-option-group label="Group 2">
-                        <goa-option id='plums' [value]='{fruit: "plums"}'>Plums</goa-option>
-                        <goa-option id='peaches' [value]='{fruit: "peaches"}'>Peaches</goa-option>
-                        <goa-option id='watermelons' [value]='{fruit: "watermelons"}'>Watermelon</goa-option>
-                        <goa-option id='tomatoes' [value]='{fruit: "tomatoes"}'>Tomatoes</goa-option>
-                        <goa-option id='papayas' [value]='{fruit: "papayas"}'>Papayas</goa-option>
+                        <goa-option id='plums' [value]='{fruit: "plums"}' label="Plums">Plums</goa-option>
+                        <goa-option id='peaches' [value]='{fruit: "peaches"}' label="Peaches">Peaches</goa-option>
+                        <goa-option id='watermelons' [value]='{fruit: "watermelons"}' label="Watermelons">Watermelon</goa-option>
+                        <goa-option id='tomatoes' [value]='{fruit: "tomatoes"}' label="Tomatoes">Tomatoes</goa-option>
+                        <goa-option id='papayas' [value]='{fruit: "papayas"}' label="Papayas">Papayas</goa-option>
                       </goa-option-group>
-                      <goa-option id='bananas' [value]='{fruit: "bananas"}'>Bananas</goa-option>
-                      <goa-option id='pineapples' [value]='{fruit: "pineapples"}'>Pineapples</goa-option>
+                      <goa-option id='bananas' [value]='{fruit: "bananas"}' label="Bananas">Bananas</goa-option>
+                      <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
                     </goa-dropdown>
                   </span>`,
         props: {
@@ -82,6 +99,7 @@ A user input field that allows the user one selected option from a large list of
           multiple: boolean('multiple', false),
           required: boolean('required', false),
           disabled: boolean('disabled', false),
+          typeaheadMode: select('typeaheadMode', {none:'none', contains:'contains', startsWith:'startsWith'}, 'none'),
           selectionChanged(value) {
             action('selection was changed')(value);
           }
@@ -94,9 +112,9 @@ A user input field that allows the user one selected option from a large list of
 Basic  
 ```
 <goa-dropdown (selectionChange)="selectionChanged($event)" label="Fruits" description="Select your favourite fruit.">
-  <goa-option id='apples' [value]='{fruit: "apples"}'>Apples</goa-option>
-  <goa-option id='oranges' [value]='{fruit: "oranges"}'><span>We can put icons or other markup</span></goa-option>
-  <goa-option id='pears' [value]='{fruit: "pears"}'>Pears</goa-option>
+  <goa-option id='apples' [value]='{fruit: "apples"}' label='Apples'>Apples</goa-option>
+  <goa-option id='oranges' [value]='{fruit: "oranges"}' label='Oranges'><span>We can put icons or other markup</span></goa-option>
+  <goa-option id='pears' [value]='{fruit: "pears"}' label='Pears'>Pears</goa-option>
 </goa-dropdown>
 ```
   
@@ -104,8 +122,8 @@ With Grouping
 ```
 <goa-dropdown (selectionChange)="selectionChanged($event)" label="Fruits" description="Select your favourite fruit.">
   <goa-option-group label="Group 1">
-    <goa-option id='apples' [value]='{fruit: "apples"}'>Apples</goa-option>
-    <goa-option id='oranges' [value]='{fruit: "oranges"}'><span>We can put icons or other markup</span></goa-option>
+    <goa-option id='apples' [value]='{fruit: "apples"}' label='Apples'>Apples</goa-option>
+    <goa-option id='oranges' [value]='{fruit: "oranges"}' label='Pears'><span>We can put icons or other markup</span></goa-option>
   </goa-option-group>
   <goa-option id='pears' [value]='{fruit: "pears"}'>Pears</goa-option>
 </goa-dropdown>
@@ -123,6 +141,7 @@ With Grouping
 | required | boolean | Is a non-empty selection required? | false |
 | disabled | boolean | Is the control disabled? | false |
 | multiple | boolean | Does the control allow multiple selections? | false |
+| selectedIds | Array&lt;string&gt; | Update the selection by selecting options with the passed in ids.  For initial selection use defaultSelected property of GoAOption. | undefined | 
   
   
 #### GoAOptionComponent  
@@ -130,6 +149,7 @@ With Grouping
 | Name     | Type | Description | Default |
 |----------|:----:|:-----------:|--------:|
 | id | string | The unique id of the option.  Will be used to compare equality when an item is selected. | '' |
+| label | string | The label for the item where text only is needed. | undefined |
 | value | any | The value to be returned when selected | undefined |
 | defaultSelected | boolean | Is the option selected by default.  If more than one option is set and multiple is not set, then which one is selected as default is indeterminate. | false |
 | (content) | markup | Content within option. | |

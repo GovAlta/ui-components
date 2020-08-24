@@ -294,7 +294,7 @@ i.goa-select-icon {
 }
 
 div.goa-form {
-  @include goa-dropdown-select;
+  @include goa-select;
 
   div.goa-option {
     box-sizing: border-box;

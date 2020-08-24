@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
+
 import { GoAButtonComponent } from './button/button.component';
 import { GoAMicrositeLogoComponent } from './microsite-logo/microsite-logo.component';
 import { GoAFooterComponent } from './footer/footer.component';
@@ -10,7 +12,10 @@ import { GoAOptionGroupComponent } from './dropdown/option-group/option-group.co
 import { GoADropdownComponent } from './dropdown/dropdown.component';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    OverlayModule
+  ],
   exports: [
     GoAButtonComponent, 
     GoAMicrositeLogoComponent, 

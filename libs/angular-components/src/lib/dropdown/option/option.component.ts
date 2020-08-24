@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ViewChild, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'goa-option',
@@ -9,7 +9,13 @@ import { Component, OnInit, Input, TemplateRef, ViewChild, ChangeDetectionStrate
 /**
  * Option component with to use with GoADropdown
  */
-export class GoAOptionComponent implements OnInit {
+export class GoAOptionComponent implements OnInit {    
+  
+  /**
+   * Is the option currently selected
+   */
+  selected = false;
+  
   /**
    * The unique id of the option;
    */
@@ -21,9 +27,14 @@ export class GoAOptionComponent implements OnInit {
   @Input() value: any; 
 
   /**
+   * Label to be used for option.
+   */
+  @Input() label: string;
+
+  /**
    * Is the option selected by default?
    */
-  @Input() defaultSelected: boolean;
+  @Input() defaultSelected = false;
 
   /**
    * The option template
@@ -32,5 +43,11 @@ export class GoAOptionComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.label === undefined || this.label === null) {
+      throw new TypeError(`Input 'label' is requred.`);
+    }
+
+    this.selected = this.defaultSelected;
+  }
 }
