@@ -10,10 +10,10 @@ $disabled-background-color: #F1F1F1;
 
 
 /* Primary colors */
-$primary-color: #FFF;
+$button-primary-color: #FFF;
 $primary-background-color: $button-color;
 $primary-border-color: $primary-background-color;
-$primary-hover-color: $primary-color;
+$primary-hover-color: $button-primary-color;
 $primary-hover-background-color: $button-hover-color;
 $primary-hover-border-color: $primary-hover-background-color;
 $primary-focus-color: $primary-hover-color;
@@ -57,7 +57,7 @@ $tertiary-focus-outline-color: $active-outline-color;
         
         background: $primary-background-color;
         cursor: pointer;
-        color: $primary-color;
+        color: $button-primary-color;
         font-size: 18px;
         font-weight: 700;
         line-height: 1em;
