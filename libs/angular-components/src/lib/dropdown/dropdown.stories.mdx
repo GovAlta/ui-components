@@ -129,6 +129,13 @@ With Grouping
 </goa-dropdown>
 ```
 
+Dynamic list 
+```
+<goa-dropdown (selectionChange)="selectionChanged($event)" label="Fruits" description="Select your favourite fruit.">
+  <goa-option *ngFor="let fruit of fruits" [id]='fruit.id' [value]='fruit' [label]='fruit.label'>{{fruit.label}}</goa-option>
+</goa-dropdown>
+```
+
 ## Properties
 
 #### GoADropdownComponent  
@@ -141,6 +148,7 @@ With Grouping
 | required | boolean | Is a non-empty selection required? | false |
 | disabled | boolean | Is the control disabled? | false |
 | multiple | boolean | Does the control allow multiple selections? | false |
+| typeaheadMode | 'none' \| 'contains' \| 'startsWith' | The typeahead behaviour.  None disables typeahead, contains searches for the text anywhere in the label, and startsWith searches for text at the beginning of the label. | 'none' |
 | selectedIds | Array&lt;string&gt; | Update the selection by selecting options with the passed in ids.  For initial selection use defaultSelected property of GoAOption. | undefined | 
   
   
