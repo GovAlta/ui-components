@@ -79,7 +79,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   /**
    * The height for the dropdown.  If none is set the dropdown grows until it reaches the viewport edge.   
    */
-  @Input() height: number;
+  @Input() menuHeight: number;
 
   /**
    * The label for the dropdown.

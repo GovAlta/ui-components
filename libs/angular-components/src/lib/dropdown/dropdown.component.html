@@ -1,7 +1,8 @@
 <div class="goa-dropdown" [ngClass]="{
     'single-selection': multiple === false,
     'has-error': _requiredError === true,
-    'opened': _isOpen
+    'opened': _isOpen,
+    'disabled': disabled === true
     }">    
     <label class="dropdown-label">{{label}}
         <span *ngIf="required" class="required-label" i18n="Required label for dropdown">(Required)</span>
@@ -27,7 +28,7 @@
                 [cdkConnectedOverlayOpen]="_isOpen"
                 [cdkConnectedOverlayPositions]="_positions"
                 [cdkConnectedOverlayMinWidth]="_triggerRect?.width"
-                [cdkConnectedOverlayHeight]="height"
+                [cdkConnectedOverlayHeight]="menuHeight"
                 [cdkConnectedOverlayFlexibleDimensions]="true"
             >
                 <div class="dropdown-menu">

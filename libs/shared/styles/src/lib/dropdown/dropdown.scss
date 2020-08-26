@@ -65,7 +65,7 @@
 
     /* add chevron */
     i.goa-select-icon {
-        @include chevron;
+        @include chevron();
         left: auto;
         right: 8px;
         width: 24px;
@@ -73,6 +73,12 @@
         pointer-events: none;
         position: absolute;
         margin-top: 16px;
+    }
+
+    &.disabled {
+        i.goa-select-icon {
+            @include chevron(0.3);
+        }
     }
 
     &.opened {
