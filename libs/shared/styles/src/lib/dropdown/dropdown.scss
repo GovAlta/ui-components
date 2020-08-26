@@ -8,6 +8,7 @@
 
 @mixin dropdown-menu-styles {
     border: solid 1px #DCDCDC;
+    border-radius: 4px;
     background: #fff;
     padding: 0;
     width: 100%;
@@ -17,20 +18,19 @@
     .option-group {
         .option-group-label {
             font-weight: bold;
-            padding: 0 10px;
+            padding: 4px 12px;
         }
 
         .option {
             font-weight: normal;
-            padding: 0 20px;
+            padding: 4px 24px;
         }
     }
 
     .option {
-        padding: 0 10px;
+        padding: 4px 12px;
         color: $primary-color;
         border: 1px solid #f1f1f1;
-        border-radius: 4px;
 
         &.selected {
             background-color: $primary-color;

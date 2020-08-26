@@ -5,7 +5,6 @@ import { GoAOptionGroupComponent } from './option-group/option-group.component';
 
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import '@angular/cdk/overlay-prebuilt.css';
-import { throwError } from 'rxjs';
 
 @Component({
   selector: 'goa-dropdown',
@@ -76,6 +75,11 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * Whats the mode for typeahead.  
    */
   @Input() typeaheadMode: 'none' | 'contains' | 'startsWith' = 'none'; 
+
+  /**
+   * The height for the dropdown.  If none is set the dropdown grows until it reaches the viewport edge.   
+   */
+  @Input() height: number;
 
   /**
    * The label for the dropdown.

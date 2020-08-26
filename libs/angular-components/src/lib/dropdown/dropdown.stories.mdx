@@ -1,6 +1,6 @@
 import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
-import { text, boolean, select, withKnobs } from '@storybook/addon-knobs';
+import { text, boolean, number, select, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import { DoDont } from '@abgov/shared/storybook-common';
@@ -33,6 +33,7 @@ A user input field that allows the user one selected option from a large list of
                     <goa-dropdown 
                         (selectionChange)="selectionChanged($event)" 
                         [typeaheadMode]="typeaheadMode"
+                        [height]="height"
                         [required]="required" 
                         [disabled]="disabled" 
                         [multiple]="multiple" 
@@ -56,6 +57,7 @@ A user input field that allows the user one selected option from a large list of
           multiple: boolean('multiple', false),
           required: boolean('required', false),
           disabled: boolean('disabled', false),
+          height: number('height', undefined),
           typeaheadMode: select('typeaheadMode', {none:'none', contains:'contains', startsWith:'startsWith'}, 'none'),          
           selectionChanged(value) {
             action('selection was changed')(value);
@@ -72,6 +74,7 @@ A user input field that allows the user one selected option from a large list of
         template: `<span style="width:300px;display:inline-block;">
                     <goa-dropdown (selectionChange)="selectionChanged($event)"  
                         [required]="required" 
+                        [height]="height"
                         [typeaheadMode]="typeaheadMode"
                         [disabled]="disabled" 
                         [multiple]="multiple" 
@@ -99,6 +102,7 @@ A user input field that allows the user one selected option from a large list of
           multiple: boolean('multiple', false),
           required: boolean('required', false),
           disabled: boolean('disabled', false),
+          height: number('height', undefined),
           typeaheadMode: select('typeaheadMode', {none:'none', contains:'contains', startsWith:'startsWith'}, 'none'),
           selectionChanged(value) {
             action('selection was changed')(value);
