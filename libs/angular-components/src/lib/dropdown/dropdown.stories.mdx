@@ -33,7 +33,7 @@ A user input field that allows the user one selected option from a large list of
                     <goa-dropdown 
                         (selectionChange)="selectionChanged($event)" 
                         [typeaheadMode]="typeaheadMode"
-                        [height]="height"
+                        [menuHeight]="menuHeight"
                         [required]="required" 
                         [disabled]="disabled" 
                         [multiple]="multiple" 
@@ -57,7 +57,7 @@ A user input field that allows the user one selected option from a large list of
           multiple: boolean('multiple', false),
           required: boolean('required', false),
           disabled: boolean('disabled', false),
-          height: number('height', undefined),
+          menuHeight: number('menuHeight', undefined),
           typeaheadMode: select('typeaheadMode', {none:'none', contains:'contains', startsWith:'startsWith'}, 'none'),          
           selectionChanged(value) {
             action('selection was changed')(value);
@@ -74,7 +74,7 @@ A user input field that allows the user one selected option from a large list of
         template: `<span style="width:300px;display:inline-block;">
                     <goa-dropdown (selectionChange)="selectionChanged($event)"  
                         [required]="required" 
-                        [height]="height"
+                        [menuHeight]="menuHeight"
                         [typeaheadMode]="typeaheadMode"
                         [disabled]="disabled" 
                         [multiple]="multiple" 
@@ -102,7 +102,7 @@ A user input field that allows the user one selected option from a large list of
           multiple: boolean('multiple', false),
           required: boolean('required', false),
           disabled: boolean('disabled', false),
-          height: number('height', undefined),
+          height: number('menuHeight', undefined),
           typeaheadMode: select('typeaheadMode', {none:'none', contains:'contains', startsWith:'startsWith'}, 'none'),
           selectionChanged(value) {
             action('selection was changed')(value);
