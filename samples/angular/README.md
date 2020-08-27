@@ -1,7 +1,26 @@
 # Angular Sample Usage
 
 This project was created to show simple consumption of the @abgov/angular-components library.  
-A full listing of available components and further documentation can be found at: https://ui-components-dio-dev.os99.gov.ab.ca/angular/.
+A full listing of available components and further documentation can be found at: https://ui-components.alpha.alberta.ca/angular/.
+
+## Integrating the @abgov/angular-components Library
+
+The steps taken to integrate the library are as follows:  
+
+1. Add @abgov/angular-components  
+````npm add --save @abgov/angular-components````
+2. OPTIONAL: in package.json specify the allowed versions for installation
+3. Add peer dependencies  
+````npm add --save @angular/core````  
+````npm add --save @angular/common````  
+````npm add --save @angular/cdk````  
+````npm add --save @angular/forms````  
+````npm add --save @angular/localize````
+4. Add styles to global styles  
+````@import '~@angular/cdk/overlay-prebuilt.css';````
+5. Add localize to polyfill.js   
+````import '@angular/localize/init';````
+6. Add ````"preserveSymlinks": true```` to configurations in angular.json.
 
 ## To build
 

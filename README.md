@@ -12,7 +12,7 @@ The project contains the Government of Alberta UI components. The output package
 | ------ | ------ |
 | core-css | Library of core CSS, SCSS, SVGs, and JavaScript.  Published to NPM [@abgov/core-css](https://www.npmjs.com/package/@abgov/core-css). |
 | angular-components | Library of components for Angular.  Published to NPM [@abgov/angular-components](https://www.npmjs.com/package/@abgov/angular-components). | 
-| vue-components | Library of components for Vue.  Not currently published. |
+| vue-components | Library of components for Vue.  Published to NPM [@abgov/vue-components](https://www.npmjs.com/package/@abgov/vue-components). |
 | shared/storybook-common | Library containing stories and elements common to all library storybook documentation. |
 | shared/common | Library containing common javascript which will be used by all ui frameworks. |
 | shared/styles | Library containing common scss which will be used by all ui frameworks. |
@@ -35,23 +35,23 @@ To run all of the available unit tests run `npm run test:all`.
 To run only the current affected tests run `npm run affected:test --base=branchtocompareagainst`.  
 To run e2e tests run `npm run affected:e2e --base=branchtocompareagainst`.  
 
-### NodeJS version
-
-For local developer, please use the NodeJS 12.
-
-### OpenShift Deployment Key
-
-| OpenShift Project | Key Name                  |
-| ----------------- | ------------------------- |
-| DIO Sandbox       | gitlab-core-ui-components |
-
 ## Environments
 
-| Branch Name | Website URL                                            | Comments |
+| Name | Website URL                                            | Openshift Home |
 | ----------- | ------------------------------------------------------ | -------- |
-| dev         | [Click](https://ui-components-dio-dev.os99.gov.ab.ca/) | Contains NPM packages under active development under the @next label. |
-| master      |                                                        | Contains NPM packages under stable @latest label. |
+| test        | [Click](https://ui-components-ui-components-test.os99.gov.ab.ca/) | [Click](https://console.os99.gov.ab.ca:8443/console/project/ui-components-test/overview) |
+| dev         | [Click](https://ui-components-ui-components-dev.os99.gov.ab.ca/) | [Click](https://console.os99.gov.ab.ca:8443/console/project/ui-components-dev/overview)   |
+| prod      |   [Click](https://ui-components.alpha.alberta.ca/)       |    [Click](https://console.os99.gov.ab.ca:8443/console/project/ui-components-prod/overview)      |
 
-## Setting up OpenShift for Pipeline Builds
+## NPM
+Current stable release can be found tagged with @latest.  
+Beta functionality can be found tagged with @next.  
 
-### Install Jenkins NodeJS 12 slave agent
+
+| Package | URL | Documentation | Comments |
+|---------|-----|---------------|----------|
+| @abgov/angular-components | [@abgov/angular-components](https://www.npmjs.com/package/@abgov/angular-components) | [Click](https://ui-components.alpha.alberta.ca/angular/) | Angular based components. |
+| @abgov/vue-components | [@abgov/vue-components](https://www.npmjs.com/package/@abgov/vue-components) | [Click](https://ui-components.alpha.alberta.ca/vue/) | Vue based components. |
+| @abgov/core-css | [@abgov/core-css](https://www.npmjs.com/package/@abgov/core-css) | [Click](https://ui-components.alpha.alberta.ca/core/) | CSS and SVGs for HTML based components. |
+
+

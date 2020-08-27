@@ -3,6 +3,10 @@
 Have a new component that you think will be useful or encountered a bug and would like to fix it yourself?  
 We encourage contributions to the UI Component Library, but, in order to maintain organization and ensure quality components we have some processes and guidelines to be followed.
 
+### Coding Guidelines
+
+[Coding Guidelines](.gitlab/contribution_guidelines/coding_standards.md)
+
 ### The Process
 
 Here is an overview of our contribution process. Specific instructions for bugs and features can be found linked below.
@@ -18,11 +22,10 @@ subgraph Platform Team
 3 --> |*Content Author may be brought onto Platform team for sprint*| A
 A[Create JIRA item and prioritize] --> B[Pull into sprint]
 B --> C[Make changes, complete item, merge branch]
-C --> |is feature?| D[Publish to NPM next label]
-C --> |is bug?| E[Publish to NPM latest label]
-E --> F[Close issue]
-D --> F
-F --> 4
+C --> D[Publish to NPM next label]
+D --> F[Close issue]
+F --> G[Promote to NPM latest label]
+D --> 4
 end
 
 
