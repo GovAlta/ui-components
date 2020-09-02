@@ -1,0 +1,136 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import { moduleMetadata } from '@storybook/angular';
+import { text, boolean, select, withKnobs } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
+
+import { DoDont } from '@abgov/shared/storybook-common';
+
+import { GoACheckboxComponent } from './checkbox.component';
+
+<Meta title="Design System/Basic Elements/Checkboxes" decorators={[
+        withKnobs,
+        moduleMetadata({
+          declarations: [GoACheckboxComponent]
+        })
+    ]
+} />
+
+# Checkbox
+A user input field that allows the user to make a binary choice, i.e. a choice between one of two possible mutually exclusive options. For example, the user may have to answer 'yes' (checked) or 'no' (not checked) on a simple yes/no question.
+
+## Overview
+
+#### Basic
+<Preview>
+  <Story name="Basic" height={200}>
+    {{
+        template: `<goa-checkbox
+                      [checked]="checked"
+                      [required]="required"
+                      [disabled]="disabled"
+                      [indeterminate]="indeterminate"
+                      [labelPosition]="labelPosition"
+                      (selectionChange)="selectionChanged($event)"
+                  >
+                      Basic Checkbox
+                  </goa-checkbox>`,
+        props: {
+          checked: boolean('checked', true),
+          required: boolean('required', false),
+          disabled: boolean('disabled', false),
+          indeterminate: boolean('indeterminate', false),
+          labelPosition: select('labelPosition', {before:'before', after:'after'}, 'after'),
+          selectionChanged(value) {
+            action('selection was changed')(value);
+          }
+        }
+    }}
+  </Story>
+</Preview>
+
+#### ngModel bound
+<Preview>
+  <Story name="NgModel" height={200}>
+    {{
+        template: `<goa-checkbox
+                      [(ngModel)]="modelValue"
+                      [required]="required"
+                      [disabled]="disabled"
+                      [indeterminate]="indeterminate"
+                      [labelPosition]="labelPosition"
+                      (selectionChange)="selectionChanged($event)"
+                  >
+                      NgModel Checkbox
+                  </goa-checkbox>
+                  <div *ngIf="showBoundModelValue">
+                    modelValue = {{modelValue}}
+                  </div>`,
+        props: {
+          modelValue: boolean('modelValue', true),
+          required: boolean('required', false),
+          disabled: boolean('disabled', false),
+          indeterminate: boolean('indeterminate', false),
+          labelPosition: select('labelPosition', {before:'before', after:'after'}, 'after'),
+          selectionChanged(value) {
+            action('selection was changed')(value);
+          },
+          showBoundModelValue: boolean('showBoundModelValue', false),
+        }
+    }}
+  </Story>
+</Preview>
+
+
+## Examples
+Basic
+```
+<goa-checkbox [checked]="item.checked">
+  Label goes here
+</goa-checkbox>
+
+or
+
+<goa-checkbox [(ngModel)]="item.checked">
+  Label goes here
+</goa-checkbox>
+
+```
+
+All Properties
+```
+<goa-checkbox
+  [checked]="item.checked"
+  [required]="item.required"
+  [disabled]="item.disabled"
+  [indeterminate]="isIndeterminateFn()"
+  [labelPosition]="after"
+  (selectionChange)="selectionChanged($event)"
+>
+  Label goes here
+</goa-checkbox>
+
+```
+
+## Properties
+
+#### GoACheckboxComponent
+
+| Name     | Type | Description | Default |
+|----------|:----:|:-----------:|--------:|
+| checked | boolean | Is the control checked/selected or not? | false |
+| required | boolean | Is a non-empty selection required? | false |
+| disabled | boolean | Is the control disabled? | false |
+| indeterminate | boolean | Does the associated 'child' checkbox list have some but not all items selected? | false |
+| labelPosition | 'before' \| 'after' | boolean | The position the label for the checkbox is displayed in, either before or after the checkbox | 'after' |
+| selectionChange | event&lt;GoACheckboxChange&gt; | When selection changes returns a GoACheckboxChange that indicates which checkbox triggered the event, and the current checked status of the checkbox | |
+
+## Usage guidelines
+### Binding
+The 'checked' and 'ngModel' properties are two ways of binding the selected state of the checkbox.
+
+<DoDont
+  dos={'Use one of either the checked OR ngModel property bindings with a checkbox'}
+  donts={'Use both the checked and ngModel property bindings with a checkbox'}
+/>
+
+

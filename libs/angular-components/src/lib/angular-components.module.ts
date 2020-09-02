@@ -10,6 +10,8 @@ import { GoAButtonLinkComponent } from './button-link/button-link.component';
 import { GoAOptionComponent } from './dropdown/option/option.component';
 import { GoAOptionGroupComponent } from './dropdown/option-group/option-group.component';
 import { GoADropdownComponent } from './dropdown/dropdown.component';
+import { GoACheckboxComponent } from './checkbox/checkbox.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -17,24 +19,27 @@ import { GoADropdownComponent } from './dropdown/dropdown.component';
     OverlayModule
   ],
   exports: [
-    GoAButtonComponent, 
-    GoAMicrositeLogoComponent, 
-    GoAFooterComponent, 
-    GoAHeaderComponent, 
+    FormsModule,
+    GoAButtonComponent,
+    GoAMicrositeLogoComponent,
+    GoAFooterComponent,
+    GoAHeaderComponent,
     GoAButtonLinkComponent,
     GoAOptionComponent,
     GoADropdownComponent,
-    GoAOptionGroupComponent
+    GoAOptionGroupComponent,
+    GoACheckboxComponent
   ],
   declarations: [
-    GoAButtonComponent, 
-    GoAMicrositeLogoComponent, 
-    GoAFooterComponent, 
-    GoAHeaderComponent, 
+    GoAButtonComponent,
+    GoAMicrositeLogoComponent,
+    GoAFooterComponent,
+    GoAHeaderComponent,
     GoAButtonLinkComponent,
     GoAOptionComponent,
     GoADropdownComponent,
-    GoAOptionGroupComponent
+    GoAOptionGroupComponent,
+    GoACheckboxComponent
   ],
   bootstrap: [CommonModule]
 })

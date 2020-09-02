@@ -4,4 +4,63 @@
         <goa-option id='oranges' [value]='{fruit: "oranges"}' label='Oranges'><span>We can put icons or other markup</span></goa-option>
         <goa-option id='pears' [value]='{fruit: "pears"}' label='Pears'>Pears</goa-option>
     </goa-dropdown>
+
+    <fieldset style="width: 600px">
+        <legend>Checkbox Samples</legend>
+
+        <goa-checkbox
+            [checked]="true"
+            (selectionChange)="onCheckBoxSelectionChange($event)"
+        >
+            Basic Checkbox
+        </goa-checkbox>
+        <br />
+        <goa-checkbox
+            [(ngModel)]="ngModelValue.checked"
+            (selectionChange)="onCheckBoxSelectionChange($event)"
+        >
+            NgModel Checkbox
+        </goa-checkbox>
+        <br />
+        <goa-checkbox
+            [checked]="false"
+            [required]="true"
+            (selectionChange)="onCheckBoxSelectionChange($event)"
+        >
+            Required Checkbox
+        </goa-checkbox>
+        <br />
+        <goa-checkbox
+            [checked]="true"
+            [disabled]="true"
+            (selectionChange)="onCheckBoxSelectionChange($event)"
+        >
+            Disabled Checkbox
+        </goa-checkbox>
+        <br />
+        <goa-checkbox
+            [checked]="true"
+            labelPosition='before'
+        >
+            Label Before Checkbox
+        </goa-checkbox>
+        <br />
+        <goa-checkbox
+            [checked]="indeterminateCheckboxItem.checked"
+            [indeterminate]="isIndeterminate"
+            (click)="onIndeterminateClick($event)" style="margin-bottom: 10px;"
+        >
+            Indeterminate Checkbox
+        </goa-checkbox>
+        <div style="margin: 25px;" *ngFor="let ic of indeterminateChildren">
+          <goa-checkbox
+              [(ngModel)]="ic.checked"
+              (selectionChange)="checkIndeterminate()"
+              (ngModelChange)="childModelChange()"
+          >
+              {{ic.label}}
+          </goa-checkbox>
+      </div>
+
+    </fieldset>
 </div>

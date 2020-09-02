@@ -7,3 +7,5 @@ export * from './lib/microsite-logo/microsite-logo.component';
 export * from './lib/dropdown/dropdown.component';
 export * from './lib/dropdown/option/option.component';
 export * from './lib/dropdown/option-group/option-group.component';
+export * from './lib/checkbox/checkbox.component';
+export * from './lib/checkbox/checkbox-change';
