@@ -12,20 +12,17 @@
 
 3.  **_Create your component or alter existing component._**
 
-        Before starting review the [coding standards](coding_standards.md).
+    Before starting review the [coding standards](coding_standards.md).
 
-        Required elements:
-        - Component.
-
+    Required elements:
+    - Component.  
     The component should have be generic enough to have value to other teams with an appropriate level of customization offered.
 
-        - Unit Tests.
-
+    - Unit Tests.  
     Use your judgement, but aim to test each configurable input/output of the component. We have been using testing-library to provide a consistent test authoring experience across all library types, but if it is not sufficient feel free to use a different one.
 
-        - Storybook documentation.
-
-    Add a stories.mdx file to add the new component to the storybook. Make sure to include documentation for the inputs/outputs of the component; documentation might vary depending on library type (Angular, Vue, React...).  
+    - Storybook documentation.  
+    If it helps test feel free to add a stories.mdx file to add the new component to the storybook. Otherwise leave that to the platform team member who finalizes implementation.  
 
 
 4) **_Mark the feature request as ready._**
@@ -34,4 +31,4 @@
 
 5) **_Review the feature._**
 
-   The component team will review, test, and make any necessary changes to the feature and merge it into the _@next_ branch. The feature will be available in the _@next_ label in the NPM package. Review the changes and reopen the issue if needed. After a sufficient incubation period all features in the _@next_ package will be promoted to _@latest_ and available in the default NPM package.
+   The component team will review, test, and make any necessary changes to the feature and merge it. The feature will be available in the _@next_ label in the NPM package. Review the changes and reopen the issue if needed. After a sufficient incubation period all features in the _@next_ package will be promoted to _@latest_ and available in the default NPM package.

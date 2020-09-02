@@ -1,15 +1,24 @@
 import { DoDont } from '@abgov/shared/storybook-common';
 import { GoAButtonComponent } from './button.component';
 
-import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
-import { text, select, boolean, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-<Meta title="Design System/Basic Elements/Buttons"
+<Meta title="Component Library/Basic Elements/Button"
   component={GoAButtonComponent}
+  argTypes={{ 
+      buttonType: { 
+        control: 'select', 
+        options: ['primary', 'secodary', 'tertiary'],
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+           defaultValue: { summary: 'primary' },
+        }  
+      },
+      content: { control: 'text' } 
+    }
+  }
   decorators={[
-        withKnobs,
         moduleMetadata({ declarations: [GoAButtonComponent] }),
     ]
 } />
@@ -18,8 +27,13 @@ import { action } from '@storybook/addon-actions';
 
 A hierarchy of actions provided by buttons.
 
-<Preview>
-  <Story name="Variants" height={100} parameters={
+<Canvas>
+  <Story name="Variants" height={100} 
+    args={{ 
+      buttonType: 'primary', 
+      content: 'Click Me!'
+    }} 
+    parameters={
     {
       design: {
         specUrl: 'https://xd.adobe.com/spec/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/screen/ea24fb1f-4b15-495f-8fe6-603d1ac538a4/Buttons',
@@ -27,19 +41,15 @@ A hierarchy of actions provided by buttons.
       }
     }
   }>
-    {{
+    {(args) => {
+      args.click = function(event) { action('click')(event) } 
+      return {
         template: `<button goa-button [buttonType]="buttonType" (click)="click($event)">{{content}}</button>`,
-        props: {
-            content: text('content', 'Secondary'),
-            buttonType: select('buttonType', { primary: 'primary', secondary: 'secondary', tertiary: 'tertiary' }, 'secondary'),
-            click: (e) => {
-              e.preventDefault();
-              action('button was clicked')(e);
-            },
-        }
+        props: args
+      }
     }}
   </Story>
-</Preview>
+</Canvas>
 
 ## Overview
 Buttons submit data from a user input. Buttons are commonly found at the bottom of forms or simple 
@@ -53,11 +63,8 @@ links.
 
 
 ## Properties
-
-| Name     | Type | Description | Default |
-|----------|:----:|:-----------:|--------:|
-| buttonType | 'primary' \| 'secondary' \| 'tertiary' | The style of the button. | 'primary' |
-| (content) | markup | Content within button. |
+<Description of={GoAButtonComponent} />
+<ArgsTable of={GoAButtonComponent} />
 
 ## Usage guidelines
 ### Primary vs. secondary

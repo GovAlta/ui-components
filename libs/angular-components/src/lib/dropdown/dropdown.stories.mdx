@@ -1,6 +1,5 @@
-import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Story, Description, ArgsTable } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
-import { text, boolean, number, select, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import { DoDont } from '@abgov/shared/storybook-common';
@@ -11,14 +10,59 @@ import { GoAOptionGroupComponent } from './option-group/option-group.component';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 
-<Meta title="Design System/Basic Elements/Drop Down Lists" decorators={[
-        withKnobs,
+<Meta title="Component Library/Basic Elements/Drop Down Lists" 
+    decorators={[       
         moduleMetadata({ 
           imports: [OverlayModule],
           declarations: [GoADropdownComponent, GoAOptionComponent, GoAOptionGroupComponent]
         })
-    ]
-} />
+    ]}
+    component={GoADropdownComponent}
+    argTypes={{ 
+      label: { control: 'text' },
+      description: { control: 'text' },
+      typeaheadMode: { 
+        control: 'select', 
+        options: ['none', 'contains', 'startsWith'], 
+        defaultValue: 'none',
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display           
+           defaultValue: { summary: 'none' },           
+        }
+      },
+      required: { 
+        control: 'boolean' ,
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display           
+           defaultValue: { summary: false },
+        }
+      },
+      disabled: { 
+        control: 'boolean',
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display           
+           defaultValue: { summary: false },
+           type: { summary: 'boolean' }
+        }
+      },
+      multiple: { 
+        control: 'boolean',
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display           
+           defaultValue: { summary: false },
+        }
+      },
+      menuHeight: { control: 'number' },
+      selectedIds: { 
+        type: { name: 'Array<string>', required: false }, 
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+           type: { summary: 'Array<string>' },
+           defaultValue: { summary: undefined },
+        }
+      },
+      selectionChange: {
+        table: {
+          type: { summary: 'EventEmitter<Array<any>>'}
+        }
+      }
+    }}
+ />
 
 # Drop Down List
 A user input field that allows the user one selected option from a large list of options.
@@ -26,18 +70,33 @@ A user input field that allows the user one selected option from a large list of
 ## Overview
 
 #### Basic
-<Preview>
-  <Story name="Basic" height={200}>
-    {{
+<Canvas>
+  <Story name="Basic" 
+    height={400} 
+    args={{ 
+      label: 'Fruits', 
+      description: 'Choose your favourite fruit!', 
+      typeaheadMode: 'none', 
+      required: false, 
+      disabled: false, 
+      multiple: false
+    }}
+    >
+    {(args) => {
+      args.onSelectionChanged = function(value) {
+        action('selection was changed')(value);
+      }
+      return {
         template: `<span style="width:300px;display:inline-block;">
                     <goa-dropdown 
-                        (selectionChange)="selectionChanged($event)" 
+                        (selectionChange)="onSelectionChanged($event)"
                         [typeaheadMode]="typeaheadMode"
                         [menuHeight]="menuHeight"
                         [required]="required" 
                         [disabled]="disabled" 
                         [multiple]="multiple" 
                         [label]="label" 
+                        [selectedIds]="selectedIds"
                         [description]="description">
                       <goa-option id='apples' [value]='{fruit: "apples"}' label="Apples">Apples</goa-option>
                       <goa-option id='oranges' [defaultSelected]="true" [value]='{fruit: "oranges"}' label="Oranges"><span>Oranges 🍊</span></goa-option>
@@ -51,26 +110,29 @@ A user input field that allows the user one selected option from a large list of
                       <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
                     </goa-dropdown>
                   </span>`,
-        props: {
-          label: text('label', 'Fruits'),
-          description: text('description', 'Choose your favourite fruit'),
-          multiple: boolean('multiple', false),
-          required: boolean('required', false),
-          disabled: boolean('disabled', false),
-          menuHeight: number('menuHeight', undefined),
-          typeaheadMode: select('typeaheadMode', {none:'none', contains:'contains', startsWith:'startsWith'}, 'none'),          
-          selectionChanged(value) {
-            action('selection was changed')(value);
-          }
+          props: args
         }
     }}
   </Story>
-</Preview>
+</Canvas>
 
 #### With Grouping
-<Preview>
-  <Story name="With Grouping" height={200}>
-    {{
+<Canvas>
+  <Story name="With Grouping" height={400} 
+      args={{ 
+      label: 'Fruits', 
+      description: 'Choose your favourite fruit!', 
+      typeaheadMode: 'none', 
+      required: false, 
+      disabled: false, 
+      multiple: false
+    }}
+  >
+    {(args) => {
+      args.onSelectionChanged = function(value) {
+        action('selection was changed')(value);
+      }
+      return {
         template: `<span style="width:300px;display:inline-block;">
                     <goa-dropdown (selectionChange)="selectionChanged($event)"  
                         [required]="required" 
@@ -96,21 +158,11 @@ A user input field that allows the user one selected option from a large list of
                       <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
                     </goa-dropdown>
                   </span>`,
-        props: {
-          label: text('label', 'Fruits'),
-          description: text('description', 'Choose your favourite fruit'),
-          multiple: boolean('multiple', false),
-          required: boolean('required', false),
-          disabled: boolean('disabled', false),
-          height: number('menuHeight', undefined),
-          typeaheadMode: select('typeaheadMode', {none:'none', contains:'contains', startsWith:'startsWith'}, 'none'),
-          selectionChanged(value) {
-            action('selection was changed')(value);
-          }
-        }
+        props: args
+      }
     }}
   </Story>
-</Preview>
+</Canvas>
 
 ## Examples
 Basic  
@@ -127,9 +179,9 @@ With Grouping
 <goa-dropdown (selectionChange)="selectionChanged($event)" label="Fruits" description="Select your favourite fruit.">
   <goa-option-group label="Group 1">
     <goa-option id='apples' [value]='{fruit: "apples"}' label='Apples'>Apples</goa-option>
-    <goa-option id='oranges' [value]='{fruit: "oranges"}' label='Pears'><span>We can put icons or other markup</span></goa-option>
+    <goa-option id='oranges' [value]='{fruit: "oranges"}' label='Oranges'><span>We can put icons or other markup</span></goa-option>
   </goa-option-group>
-  <goa-option id='pears' [value]='{fruit: "pears"}'>Pears</goa-option>
+  <goa-option id='pears' [value]='{fruit: "pears"}' label='Pears'>Pears</goa-option>
 </goa-dropdown>
 ```
 
@@ -143,28 +195,16 @@ Dynamic list
 ## Properties
 
 #### GoADropdownComponent  
+<Description of={GoADropdownComponent} />
+<ArgsTable of={GoADropdownComponent} />
 
-| Name     | Type | Description | Default |
-|----------|:----:|:-----------:|--------:|
-| selectionChange | event&lt;Array&lt;GoAOptionComponent&gt;&gt; | When selection changes returns an array of GoAOption which are selected | empty array |
-| label | string | The text to use as the label. | '' |
-| description | string | The text to use as the helper. | '' |
-| required | boolean | Is a non-empty selection required? | false |
-| disabled | boolean | Is the control disabled? | false |
-| multiple | boolean | Does the control allow multiple selections? | false |
-| typeaheadMode | 'none' \| 'contains' \| 'startsWith' | The typeahead behaviour.  None disables typeahead, contains searches for the text anywhere in the label, and startsWith searches for text at the beginning of the label. | 'none' |
-| selectedIds | Array&lt;string&gt; | Update the selection by selecting options with the passed in ids.  For initial selection use defaultSelected property of GoAOption. | undefined | 
-  
-  
-#### GoAOptionComponent  
+#### GoAOptionComponent    
+<Description of={GoAOptionComponent} />
+<ArgsTable of={GoAOptionComponent} />
 
-| Name     | Type | Description | Default |
-|----------|:----:|:-----------:|--------:|
-| id | string | The unique id of the option.  Will be used to compare equality when an item is selected. | '' |
-| label | string | The label for the item where text only is needed. | undefined |
-| value | any | The value to be returned when selected | undefined |
-| defaultSelected | boolean | Is the option selected by default.  If more than one option is set and multiple is not set, then which one is selected as default is indeterminate. | false |
-| (content) | markup | Content within option. | |
+#### GoAOptionGroupComponent  
+<Description of={GoAOptionGroupComponent} />
+<ArgsTable of={GoAOptionGroupComponent} />
 
 ## Usage guidelines
 ### Widths and character count

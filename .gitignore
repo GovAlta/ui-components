@@ -81,3 +81,4 @@ out
 
 # s2i output folder for image creation testing
 .s2i/output/
+libs/angular-components/documentation.json

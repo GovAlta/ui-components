@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+/**
+ * A logo for a Government of Alberta hosted microsite.
+ */
 @Component({
     selector: 'goa-microsite-logo',
     templateUrl: './microsite-logo.component.html',
@@ -11,13 +14,20 @@ export class GoAMicrositeLogoComponent implements OnInit {
     /**
      * The name to show on the header/footer as the microsite.
     */
-    @Input() serviceName = 'Digital Service Name (microsite)';
+    @Input() serviceName: string;
 
     /**
      * The home page URL of the microsite.
      */
-    @Input() serviceHome: String = 'https://www.alberta.ca/index.aspx';
+    @Input() serviceHome = 'https://www.alberta.ca/index.aspx';
     
     constructor() {}
-    ngOnInit() {}
+    /**
+     * @ignore
+     */
+    ngOnInit() {
+        if(this.serviceName === undefined || this.serviceName === null) {
+            throw new TypeError(`Input 'serviceName' is required.`);
+        }
+    }
 }

@@ -7,9 +7,9 @@ module.exports = {
         name: '@storybook/addon-docs',
       },
       '@storybook/preset-scss',
-      //'@storybook/addon-knobs', doesn't seem to work
+      '@storybook/addon-controls',
       '@storybook/addon-backgrounds',
-      '@storybook/addon-a11y/register',
+      '@storybook/addon-a11y',
       '@storybook/addon-viewport',
       'storybook-addon-xd-designs'
     ]

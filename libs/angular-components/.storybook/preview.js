@@ -1,11 +1,16 @@
 import { addParameters } from '@storybook/angular';
 import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
-import { withA11y } from '@storybook/addon-a11y';
+
+import { setCompodocJson } from '@storybook/addon-docs/angular';
+import docJson from '../documentation.json';
+setCompodocJson(docJson);
+
+require('!style-loader!css-loader!@angular/cdk/overlay-prebuilt.css');
 
 addParameters({
   docs: {
     container: DocsContainer,
     page: DocsPage
   },
-  decorators: [withA11y]
+  controls: { expanded: true }
 });
