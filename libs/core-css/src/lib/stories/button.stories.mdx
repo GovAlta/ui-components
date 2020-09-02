@@ -1,16 +1,16 @@
 import '../goa-core.scss';
 
 import { DoDont } from '@abgov/shared/storybook-common';
-import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
 
 
-<Meta title="Design System/Basic Elements/Buttons" />
+<Meta title="Component Library/Basic Elements/Buttons" />
 
 # Buttons
 
 A hierarchy of actions provided by buttons.
 
-<Preview>
+<Canvas>
   <Story name="Variants" height={100} parameters={
     {
       design: {
@@ -25,15 +25,15 @@ A hierarchy of actions provided by buttons.
         <button class="goa-button goa--tertiary" data-cy="button-tertiary" type="reset" value="3920">Tertiary</button>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
   <Story name="Links as Buttons" height={100}>
     <div>
         <a href="#" data-cy="button-link" class="goa-link-button right-arrow">Call To Action</a>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
 ## Properties
 Buttons submit data from a user input. Buttons are commonly found at the bottom of forms or simple 

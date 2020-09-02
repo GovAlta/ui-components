@@ -10,7 +10,7 @@ module.exports = {
         name: '@storybook/preset-scss'
       },
       '@storybook/addon-backgrounds',
-      '@storybook/addon-a11y/register',
+      '@storybook/addon-a11y',
       '@storybook/addon-viewport',
       'storybook-addon-xd-designs'
     ]

@@ -20,4 +20,4 @@
 
 5. **_Review the feature._**
 
-   Once the story has been pulled and implemented, the bug request will be closed. Bug fixes will be available in the _@latest_ label in the NPM package. Review the changes and reopen the issue if needed.
+   Once the story has been pulled and implemented, the bug request will be closed. Bug fixes will be available in the _@next_ label in the NPM package. Review the changes and reopen the issue if needed.

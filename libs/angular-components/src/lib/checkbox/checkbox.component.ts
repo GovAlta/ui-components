@@ -8,6 +8,9 @@ export const GOA_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
   multi: true
 }
 
+/**
+ * Checkbox component with Government of Alberta styling.
+ */
 @Component({
   selector: 'goa-checkbox',
   templateUrl: './checkbox.component.html',
@@ -16,18 +19,16 @@ export const GOA_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
   providers: [GOA_CHECKBOX_CONTROL_VALUE_ACCESSOR],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-/**
- * Checkbox component with Government of Alberta styling.
- */
 export class GoACheckboxComponent implements ControlValueAccessor {
 
-  static idNum = 0;
-  uniqueId: string;
-
   /**
-   * The label text to display beside the checkbox.
+   * @ignore
    */
-  @Input() label: string;
+  static idNum = 0;
+  /**
+   * @ignore
+   */
+  uniqueId: string;
 
   /**
    * Value/unique identifier for the object the checkbox represents.
@@ -50,9 +51,12 @@ export class GoACheckboxComponent implements ControlValueAccessor {
   @Input() required: boolean;
 
   /**
-   * Boolean indicating whether or not the checkbox should display as indeterminate (i.e. it has associated 'child' checkboxes, some of which are selected).
+   * @ignore
    */
   private _indeterminate = false;
+  /**
+   * Boolean indicating whether or not the checkbox should display as indeterminate (i.e. it has associated 'child' checkboxes, some of which are selected).
+   */
   @Input()
   get indeterminate(): boolean { return this._indeterminate; }
   set indeterminate(value: boolean) {
@@ -77,7 +81,14 @@ export class GoACheckboxComponent implements ControlValueAccessor {
    */
   @Output() selectionChange: EventEmitter<GoACheckboxChange> = new EventEmitter<GoACheckboxChange>();
 
+  /**
+   * @ignore
+   */
   _onTouchedCallback: () => {};
+
+  /**
+   * @ignore
+   */
   _propagateChange = (_: any) => { };
 
   constructor(private _changeDetectorRef: ChangeDetectorRef,) {
@@ -86,6 +97,7 @@ export class GoACheckboxComponent implements ControlValueAccessor {
 
   /**
    * Boolean indicating if the checkbox is required and not checked
+   * @ignore
    */
   hasError(): boolean {
     return this.required && !this.checked;
@@ -94,6 +106,7 @@ export class GoACheckboxComponent implements ControlValueAccessor {
   /**
    * Implemented as part of ControlValueAccessor.
    * @param value The model bound property, i.e. the value of checked
+   * @ignore
    */
   writeValue(value: any) {
     if ((value !== undefined) && (value !== null)) {
@@ -105,6 +118,7 @@ export class GoACheckboxComponent implements ControlValueAccessor {
   /**
    * Implemented as part of ControlValueAccessor.
    * @param fn The function to call on change.  Provided by ControlValueAccessor
+   * @ignore
    */
   registerOnChange(fn: any) {
     this._propagateChange = fn;
@@ -113,6 +127,7 @@ export class GoACheckboxComponent implements ControlValueAccessor {
   /**
    * Implemented as part of ControlValueAccessor.
    * @param fn The function to call on touch.  Provided by ControlValueAccessor
+   * @ignore
    */
   registerOnTouched(fn: any) {
     this._onTouchedCallback = fn;
@@ -120,6 +135,7 @@ export class GoACheckboxComponent implements ControlValueAccessor {
 
   /**
    * Toggles the checked value of the checkbox
+   * @ignore
    */
   toggle(): void {
     this.checked = !this.checked;
@@ -128,6 +144,7 @@ export class GoACheckboxComponent implements ControlValueAccessor {
   /**
    * User interaction event on click of the checkbox or its label to indicate toggling of the current checked status.
    * Emits selectionChange to parent components.
+   * @ignore
    */
   onClick() {
     this.toggle();

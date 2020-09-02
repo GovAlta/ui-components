@@ -1,25 +1,39 @@
 import { DoDont } from '@abgov/shared/storybook-common';
 import { GoAButtonLinkComponent } from './button-link.component';
 
-import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
-import { text, select, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-<Meta title="Design System/Basic Elements/Buttons"
+<Meta title="Component Library/Basic Elements/Button Link"
   component={GoAButtonLinkComponent}
+  argTypes={{ 
+      linkType: { 
+        control: 'linkType', 
+        options: ['right', 'up'],
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+           defaultValue: { summary: 'right' },
+        } 
+      },
+      content: { control: 'text' } 
+    }
+  }
   decorators={[
-        withKnobs,
         moduleMetadata({ declarations: [ GoAButtonLinkComponent] })
-    ]
-} />
+    ]}
+ />
 
 # Buttons
 
 A hierarchy of actions provided by buttons.
 
-<Preview>
-  <Story name="Link" height={100} parameters={
+<Canvas>
+  <Story name="Link" height={100} 
+  args={{ 
+      linkType: 'right', 
+      content: 'Click Me!' 
+    }} 
+  parameters={
     {
       design: {
         specUrl: 'https://xd.adobe.com/spec/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/screen/ea24fb1f-4b15-495f-8fe6-603d1ac538a4/Buttons',
@@ -27,19 +41,14 @@ A hierarchy of actions provided by buttons.
       }
     }
   }>
-    {{
+    {(args) => {
+      return {
         template: `<a goa-button href="http://alberta.ca" [linkType]='linkType' (click)="click($event)">{{content}}</a>`,
-        props: {
-            content: text('content', 'Link'),
-            linkType: select('linkType', { right: 'right', up: 'up' }, 'right'),
-            click: (e) => {
-              e.preventDefault();
-              action('button was clicked')(e);
-            },
-        }
+        props: args
+      }
     }}
   </Story>
-</Preview>
+</Canvas>
 
 ## Overview
 Buttons submit data from a user input. Buttons are commonly found at the bottom of forms or simple 
@@ -53,11 +62,8 @@ links.
 
 
 ## Properties
-
-| Name     | Type | Description | Default |
-|----------|:----:|:-----------:|--------:|
-| linkType | 'right' \| 'up' | Show a up or right arrow. | 'right' |
-| (content) | markup | Content within anchor. |
+<Description of={GoAButtonLinkComponent} />
+<ArgsTable of={GoAButtonLinkComponent} />
 
 ## Usage guidelines
 ### As a call to action

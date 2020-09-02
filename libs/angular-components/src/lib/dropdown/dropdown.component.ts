@@ -6,27 +6,30 @@ import { GoAOptionGroupComponent } from './option-group/option-group.component';
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import '@angular/cdk/overlay-prebuilt.css';
 
+/**
+ * A dropdown component with Government of Alberta styling.
+ */
 @Component({
   selector: 'goa-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
-/**
- * Dropdown component with Government of Alberta styling.
- */
 export class GoADropdownComponent implements OnInit, AfterViewInit {
   /**
    * boolean for if the dropdown is open.
+   * @ignore
    */
   _isOpen = false;
 
   /**
    * Is the required error tripped?
+   * @ignore
    */
   _requiredError = false;
   
   /**
    * Bounding box of textInput.
+   * @ignore
    */
   _triggerRect;
   
@@ -35,6 +38,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * is aligned with with the bottom "start" of the origin by default (overlapping
    * the trigger completely). If the panel cannot fit below the trigger, it
    * will fall back to a position above the trigger.
+   * @ignore
    */
   _positions: ConnectedPosition[] = [
     {
@@ -53,21 +57,25 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
 
   /**
    * The current active option
+   * @ignore
    */
   _activeOption: GoAOptionComponent;
 
   /**
    * The current active index
+   * @ignore
    */
   _activeIndex;
 
   /**
    * All options currently matching filter including groups.
+   * @ignore
    */
   _allFilteredOptions: Array<GoAOptionComponent> = [];
   
   /**
    * The list of filtered options to show in the view.
+   * @ignore
    */
   _filteredOptions: Array<GoAOptionComponent>;
 
@@ -144,6 +152,9 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   get multiple(): boolean {
     return this._multiple;
   }
+  /**
+   * @ignore
+   */
   private _multiple = false;
 
   /**
@@ -157,25 +168,32 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   get required(): boolean {
     return this._required;
   }
+  /**
+   * @ignore
+   */
   private _required = false;
 
   /**
    * The select element.
+   * @ignore
    */
   @ViewChild('textInput') textInput: ElementRef<HTMLInputElement>;
 
   /** 
    * All options.  
+   * @ignore
    */
   @ContentChildren(GoAOptionComponent, {descendants: true}) allOptions: QueryList<GoAOptionComponent>;
 
   /** 
    * The top level options for rendering options.  
+   * @ignore
    */
   @ContentChildren(GoAOptionComponent, {descendants: false}) options: QueryList<GoAOptionComponent>;
 
   /** 
    * The option groups for rendering.  
+   * @ignore
    */
   @ContentChildren(GoAOptionGroupComponent, {descendants: false}) optionGroups: QueryList<GoAOptionGroupComponent>;
 
@@ -186,10 +204,18 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  /**
+   * Lifecycle hook OnInit
+   * @ignore
+   */
   ngOnInit() {
 
   }
 
+  /**
+   * Lifecycle hook AfterViewInit
+   * @ignore
+   */
   ngAfterViewInit() {    
     this._triggerRect = this.textInput.nativeElement.getBoundingClientRect();
 
@@ -210,9 +236,10 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
   }
 
-    /**
+  /**
    * Called when user updates the text in the searchbox.
    * @param text The text of the input
+   * @ignore
    */
   onFilterChange(text: string) {  
     // open the dropdown if it is not already  
@@ -226,6 +253,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   /**
    * Handler for keyboard events when menu is open.
    * @param event keyboard event
+   * @ignore
    */
   overlayKeydown(event: KeyboardEvent) {
     if(event.code === 'Enter' || event.code === 'NumpadEnter') {
@@ -246,6 +274,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   /**
    * Sets the active option.  Active option is the option that when enter is pressed is selected.
    * @param option The option to make the active option
+   * @ignore
    */
   setActiveOption(option) {
     this._activeOption = option;
@@ -256,6 +285,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
 
   /**
    * Handler for when the input is clicked.
+   * @ignore
    */
   inputClicked() {
     if(this.disabled === false) {
@@ -271,6 +301,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
 
   /**
    * Handler for when descendant an option is clicked.
+   * @ignore
    */
   optionClicked(option: GoAOptionComponent) {
     let selectedOptions = [];
@@ -302,6 +333,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   /**
    * Update view when selection changes
    * @param options 
+   * @ignore
    */
   private selectionChanged(options: Array<GoAOptionComponent>, emitEvent: boolean) {
     if(options.length > 0) {
@@ -320,6 +352,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
 
   /**
    * Emit selection change
+   * @ignore
    */
   private emitChange(options: Array<GoAOptionComponent>) {   
     const values = options.map((option) => {
@@ -331,6 +364,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
 
   /**
    * Gets all the currently selected options
+   * @ignore
    */
   private get selectedItems(): Array<GoAOptionComponent> { 
     if(this.allOptions === undefined) {
@@ -345,6 +379,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   /**
    * Set the text of the input.
    * @param value The value to set
+   * @ignore
    */
   private setTextInput(value: string) {
     if(this.textInput) {
@@ -357,6 +392,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   /**
    * Update the filtered options with the passed in filter text.
    * @param filterText The text to filter by
+   * @ignore
    */
   private filterOptions(filterText: string) {
     this.optionGroups.forEach(group => {
@@ -373,6 +409,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   /**
    * Filter for typeahead with logic for what mode we are in.
    * @param option 
+   * @ignore
    */
   private typeaheadFilter(filterText: string, typeaheadMode: 'none'|'startsWith'|'contains', option: GoAOptionComponent) {
     if(typeaheadMode === 'none' || this.typeaheadMode === undefined) {

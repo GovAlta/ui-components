@@ -1,20 +1,20 @@
 
 import { DoDont } from '@abgov/shared/storybook-common';
 import GoAMicrositeLogo from './microsite-logo';
-import { Meta, Preview, Story, Props } from '@storybook/addon-docs/blocks'; 
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks'; 
 
-<Meta title="Design System/Basic Elements/Header" 
-  decorators={[
-    
-  ]}
+<Meta title="Component Library/Page Layout/Microsite Logo" 
+  argTypes={{
+    serviceName: { control: { type: 'text' } },
+    serviceHome: { control: { type: 'text' } },
+  }}
   component={GoAMicrositeLogo} />
 
 # Header
 
 <!-- 
   This syntax isn't the greatest... It supposedly works with template and props properties, but I could not get it to work.
-<Preview>
+<Canvas>
   <Story name="Micro Site Logo" height={100}>
     {{
       components: { GoAMicrositeLogo },
@@ -31,25 +31,28 @@ import { text, withKnobs } from '@storybook/addon-knobs';
       }  
     }}
   </Story>
-</Preview>
+</Canvas>
 -->
-<Preview>
-  <Story name="Micro Site Logo" height={100}>
-    {{
+<Canvas>
+  <Story name="Micro Site Logo" height={100}
+  args={{
+    serviceName: 'Microsite name',
+    serviceHome: '/'
+  }}>
+  {(args, argTypes) => {
+    return {
       components: { GoAMicrositeLogo },
       render: function (createElement) {
         return createElement(
           GoAMicrositeLogo, {
-            props: {
-              'serviceName': text('serviceName', 'Digital Service Name (microsite)'),
-              'serviceHome': text('serviceHome', 'http://alberta.ca')            
-            }
+            props: args
           }
         )
-      },
-    }}
+      }
+    }
+  }}
   </Story>
-</Preview>
+</Canvas>
 
 ## Overview
 
@@ -76,5 +79,4 @@ export default {
 ```
 
 ## Properties
-
-<Props of={GoAMicrositeLogo} />
+<ArgsTable of={GoAMicrositeLogo} />
