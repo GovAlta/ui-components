@@ -6,7 +6,7 @@
     "nx": "nx",
     "start": "nx serve",
     "checkin-validate": "npm run build:all && npm run lint:all && npm run test:all",
-    "docs:json": "compodoc -p ./libs/angular-components/tsconfig.lib.json -e json -d ./libs/angular-components",
+    "docs:json": "compodoc -p ./libs/angular-components/tsconfig.lib.prod.json -e json -d ./libs/angular-components",
     "build": "nx build",
     "build:all": "nx run-many --target=build --all",
     "build:npm": "nx run-many --target=build --projects=angular-components,core-css,vue-components --parallel --prod",
