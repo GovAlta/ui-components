@@ -2,7 +2,7 @@ import { Component, OnInit, Input, QueryList, ContentChildren, ViewChild, Templa
 import { GoAOptionComponent } from '../option/option.component';
 
 /**
- * Option component with to use with GoADropdown
+ * Option grouping component with to use with GoADropdown.
  */
 @Component({
   selector: 'goa-option-group',

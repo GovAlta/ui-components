@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, TemplateRef, ViewChild, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 /**
- * Option component with to use with GoADropdown
+ * Option component with to use with GoADropdown.
  */
 @Component({
   selector: 'goa-option',
