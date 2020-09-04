@@ -42,6 +42,11 @@
                 "input": "dist/libs/shared/styles",
                 "glob": "**/*.css",
                 "output": "./"
+              },
+              {
+                "input": "libs/shared/styles",
+                "glob": "**/*.scss",
+                "output": "scss/"
               }
             ]
           }

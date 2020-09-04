@@ -1,9 +1,11 @@
+@import '../mixin/colors.scss';
+
 @import "../mixin/responsive-breakpoints.scss";
 @import "../mixin/page-template.scss";
 @import "../mixin/svg/goa-logo-mobile.scss";
 
 header.goa-header {
-  border-bottom: 1px solid #dcdcdc;
+  border-bottom: 1px solid $goa-white-three;
 
   .microsite-logo {
     @include page-margins;
@@ -12,7 +14,7 @@ header.goa-header {
   .top-bar {
     @include page-padding;
     font-size: 12px;
-    background-color: #f1f1f1;
+    background-color: $goa-white-two;
     height: 22px;
     line-height: 22px;
 
@@ -46,7 +48,7 @@ header.goa-header {
 
   .web-link {
     vertical-align: 4px;
-    color: #0070c4;
+    color: $goa-primary-color;
     text-align: left;
   }
 }
