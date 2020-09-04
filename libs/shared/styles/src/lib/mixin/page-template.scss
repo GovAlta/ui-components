@@ -1,9 +1,7 @@
 @import 'responsive-breakpoints.scss';
 
-$desktop-margin: 72px;
-$tablet-margin: 24px;
 
-@mixin page-margins {
+@mixin page-margins($desktop-margin: 72px, $tablet-margin: 24px, $mobile-margin: 24px) {
     margin-left: $desktop-margin;
     margin-right: $desktop-margin;
   
@@ -18,7 +16,7 @@ $tablet-margin: 24px;
     }
 }
 
-@mixin page-padding {
+@mixin page-padding($desktop-margin: 72px, $tablet-margin: 24px, $mobile-margin: 24px) {
   padding-left: $desktop-margin;
   padding-right: $desktop-margin;
 

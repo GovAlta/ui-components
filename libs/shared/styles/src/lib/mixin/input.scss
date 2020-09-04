@@ -8,10 +8,10 @@
         padding: 12px;
         padding-right: 8px;
         border-radius: 4px;
-        border: 1px solid $weak-black;
+        border: 1px solid $goa-black-two;
         font-size: 18px;
         font-weight: 400;
-        color: $primary-color;
+        color: $goa-primary-color;
         /* removes default arrow */
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -29,11 +29,11 @@
     }
 
     &:hover {
-        border: 1px solid $primary-color;
+        border: 1px solid $goa-primary-color;
     }
 
     &:focus {
-        box-shadow: 0 0 0 3px  $focus-color;
+        box-shadow: 0 0 0 3px  $goa-focus-color;
         outline: none;
     }        
 }

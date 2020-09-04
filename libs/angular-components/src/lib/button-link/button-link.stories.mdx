@@ -9,7 +9,7 @@ import { action } from '@storybook/addon-actions';
   component={GoAButtonLinkComponent}
   argTypes={{ 
       linkType: { 
-        control: 'linkType', 
+        control: 'select', 
         options: ['right', 'up'],
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
            defaultValue: { summary: 'right' },
