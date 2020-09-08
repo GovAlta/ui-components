@@ -8,7 +8,10 @@ header.goa-header {
   border-bottom: 1px solid $goa-white-three;
 
   .microsite-logo {
-    @include page-margins;
+    @include page-padding;
+
+    width: 100%;
+    background-color: $goa-white;
   }
 
   .top-bar {

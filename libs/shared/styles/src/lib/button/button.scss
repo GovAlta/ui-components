@@ -5,12 +5,12 @@ $active-outline-color: $goa-focus-color;
 $button-color: $goa-primary-color;
 $button-hover-color: $goa-black;
 
-$disabled-color: $goa-black-two;
-$disabled-background-color: #F1F1F1;
+$disabled-color: $goa-black-two; 
+$disabled-background-color: $goa-white-two;
 
 
 /* Primary colors */
-$button-primary-color: #FFF;
+$button-primary-color: $goa-white;
 $primary-background-color: $button-color;
 $primary-border-color: $primary-background-color;
 $primary-hover-color: $button-primary-color;
@@ -23,7 +23,7 @@ $primary-focus-outline-color: $active-outline-color;
 
 /* Secondary colors */
 $secondary-color: $button-color;
-$secondary-background-color: #FFF;
+$secondary-background-color: $goa-white;
 $secondary-border-color: $secondary-color;
 $secondary-hover-color: $button-hover-color;
 $secondary-hover-background-color: $secondary-background-color;
@@ -35,8 +35,8 @@ $secondary-focus-outline-color: $active-outline-color;
 
 /* Tertiary colors */
 $tertiary-color: $button-color;
-$tertiary-background-color: #FFF;
-$tertiary-border-color: #DCDCDC;
+$tertiary-background-color: $goa-white;
+$tertiary-border-color: $goa-white-three;
 $tertiary-hover-color: $button-hover-color;
 $tertiary-hover-background-color: $tertiary-background-color;
 $tertiary-hover-border-color: $tertiary-hover-color;

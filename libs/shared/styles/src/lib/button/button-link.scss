@@ -1,4 +1,8 @@
+@import '../mixin/colors.scss';
+
 @import 'button.scss';
+@import '../mixin/svg/box-arrow.scss';
+@import '../mixin/svg/right-arrow.scss';
 
 @mixin goa-button-link-styles {
     &.goa-link-button {
@@ -10,6 +14,7 @@
         &.right-arrow::after {
             margin-left: 8px;
             content: '\2192';
+
         }
 
         &.up-arrow::after {
@@ -18,7 +23,7 @@
         }
 
         &:visited, &:link {
-            color: #FFF;
+            color: $goa-white;
         }
     }
 }
