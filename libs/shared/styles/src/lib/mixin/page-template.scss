@@ -11,8 +11,8 @@
     }
   
     @include mobile {
-      margin-left: $tablet-margin;
-      margin-right: $tablet-margin;
+      margin-left: $mobile-margin;
+      margin-right: $mobile-margin;
     }
 }
 
@@ -26,7 +26,7 @@
   }
 
   @include mobile {
-    padding-left: $tablet-margin;
-    padding-right: $tablet-margin;
+    padding-left: $mobile-margin;
+    padding-right: $mobile-margin;
   }
 }
