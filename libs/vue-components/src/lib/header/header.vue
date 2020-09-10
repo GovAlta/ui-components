@@ -6,9 +6,9 @@
                 class="web-link">Alberta
                 Government</a>
         </div>
-    </header>
-    <header class="goa-header goa-microsite-header">
-        <goa-microsite-logo class="microsite-logo" [serviceName]="serviceName" [serviceHome]="serviceHome"></goa-microsite-logo>
+        <header class="goa-header goa-microsite-header">
+            <goa-microsite-logo class="microsite-logo" :serviceName="serviceName" :serviceHome="serviceHome"></goa-microsite-logo>
+        </header>
     </header>
 </template> 
 <script lang="typescript">
