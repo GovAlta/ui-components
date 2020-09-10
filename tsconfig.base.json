@@ -20,8 +20,13 @@
       "@abgov/angular-components": ["libs/angular-components/src/index.ts"],
       "@abgov/vue-plugin": ["libs/vue-plugin/src/index.ts"],
       "@abgov/vue-components": ["libs/vue-components/src/index.ts"],
-      "@abgov/shared/storybook-common": ["libs/shared/storybook-common/src/index.ts"],
-      "@abgov/shared/common": ["libs/shared/common/src/index.ts"]
+      "@abgov/shared/storybook-common": [
+        "libs/shared/storybook-common/src/index.ts"
+      ],
+      "@abgov/shared/common": ["libs/shared/common/src/index.ts"],
+      "@abgov/angular-material-components": [
+        "libs/angular-material-components/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

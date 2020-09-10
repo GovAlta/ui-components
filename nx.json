@@ -48,6 +48,9 @@
     },
     "shared-styles": {
       "tags": []
+    },
+    "angular-material-components": {
+      "tags": []
     }
   }
 }

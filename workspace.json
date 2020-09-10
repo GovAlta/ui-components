@@ -295,6 +295,71 @@
           }
         }
       }
+    },
+    "angular-material-components": {
+      "projectType": "library",
+      "root": "libs/angular-material-components",
+      "sourceRoot": "libs/angular-material-components/src",
+      "prefix": "abgov",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/angular-material-components/tsconfig.lib.json",
+              "libs/angular-material-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/angular-material-components/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular-material-components/jest.config.js",
+            "tsConfig": "libs/angular-material-components/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/angular-material-components/src/test-setup.ts"
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/core-css/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/angular-material-components",
+            "config": {
+              "configFolder": "libs/angular-material-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
