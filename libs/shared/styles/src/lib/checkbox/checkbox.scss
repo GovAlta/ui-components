@@ -61,7 +61,7 @@ $goa-checkbox-size: 24px;
     .goa-checkbox-container {
         z-Index: 2;
         box-sizing: border-box;
-        margin: 0;        
+        margin: 0;
         border: 1px solid $goa-black-two;
         border-radius: 2px;
         height: $goa-checkbox-size;
@@ -102,13 +102,13 @@ $goa-checkbox-size: 24px;
 
         // for some reason a comma-separated list inside :not() is causing issues with storybook
         &:hover:not(.goa-checkbox-selected):not(.goa-checkbox-indeterminate) {
-            background-color: $goa-focus-color;
+            background-color: $goa-white-two;
         }
-    
+
         &:focus-within {
             box-shadow: 0 0 0 3px $goa-focus-color;
             outline: none;
-    
+
             &:before {
                 content: "";
                 display: block;
@@ -134,7 +134,7 @@ $goa-checkbox-size: 24px;
                 order: 1;
                 margin-left: 8px;
                 margin-right: auto;
-            }            
+            }
         }
     }
 
