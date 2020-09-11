@@ -6,7 +6,8 @@
     "nx": "nx",
     "start": "nx serve",
     "checkin-validate": "npm run build:all && npm run lint:all && npm run test:all",
-    "docs:json": "compodoc -p ./libs/angular-components/tsconfig.lib.prod.json -e json -d ./libs/angular-components",
+    "docs:json:angular-components": "compodoc -p ./libs/angular-components/tsconfig.lib.prod.json -e json -d ./libs/angular-components",
+    "docs:json:angular-material-components": "compodoc -p ./libs/angular-material-components/tsconfig.lib.prod.json -e json -d ./libs/angular-material-components",
     "build": "nx build",
     "build:all": "nx run-many --target=build --all",
     "build:npm": "nx run-many --target=build --projects=angular-components,core-css,vue-components --parallel --prod",
@@ -18,8 +19,8 @@
     "build:core-storybook": "nx run core-css:build-storybook",
     "build:vue-storybook": "nx run vue-components:build-storybook",
     "build:styles": "sass libs/shared/styles/src/goa-core.scss dist/libs/shared/styles/goa-core.css && sass libs/shared/styles/src/goa-components.scss dist/libs/shared/styles/goa-components.css",
-    "run:angular-storybook": "npm run docs:json && nx run angular-components:storybook",
-    "run:angular-material-storybook": "npm run docs:json && nx run angular-material-components:storybook",
+    "run:angular-storybook": "npm run docs:json:angular-components && nx run angular-components:storybook",
+    "run:angular-material-storybook": "npm run docs:json:angular-material-components && nx run angular-material-components:storybook",
     "run:core-storybook": "nx run core-css:storybook",
     "run:vue-storybook": "nx run vue-components:storybook",
     "test": "nx test --clearCache",
@@ -59,6 +60,7 @@
     "@angular/material": "^10.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "tslib": "^2.0.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {

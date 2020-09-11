@@ -5,12 +5,14 @@ import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
 setCompodocJson(docJson);
 
+require('!style-loader!css-loader!sass-loader!../src/lib/styles/styles.scss');
+
 require('!style-loader!css-loader!@angular/cdk/overlay-prebuilt.css');
 
 addParameters({
   docs: {
     container: DocsContainer,
-    page: DocsPage
+    page: DocsPage,
   },
-  controls: { expanded: true }
+  controls: { expanded: true },
 });
