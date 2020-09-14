@@ -1,5 +1,6 @@
 @use "./ads-typography";
-@import "~@angular/material/theming";
+@import './ads-colors';
+@import '~@angular/material/theming';
 
 $ads-primary-palette: (
   50: #e0eef8,
@@ -81,7 +82,7 @@ $ads-mat-theme: mat-light-theme(
 );
 
 $ads-mat-typography-config: mat-typography-config(
-  $font-family: "acumin-pro-semi-condensed, sans-serif",
+  $font-family: 'acumin-pro-semi-condensed, sans-serif',
   $body-1:
     mat-typography-level(
       ads-typography.$p-li-size,

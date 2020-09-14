@@ -1,8 +1,9 @@
 @use 'ads-colors';
 @use 'ads-common';
+@use 'ads-core';
 @use "ads-material";
 
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
 @mixin ads-material-theme() {
@@ -63,5 +64,18 @@
   .mat-tab-label-active {
     color: black;
     font-weight: bold;
+  }
+
+  .mat-button,
+  .mat-raised-button,
+  .mat-flat-button,
+  .mat-fab,
+  .mat-stroked-button {
+    &.mat-primary {
+      @extend .ads-primary;
+    }
+    &.mat-secondary {
+      @extend .ads-secondary;
+    }
   }
 }
