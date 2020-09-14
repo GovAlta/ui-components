@@ -1,7 +1,7 @@
-@use 'ads-colors';
 @use 'ads-common';
 @use 'ads-core';
 @use "ads-material";
+@use '../../../../shared/styles/src/lib/mixin/colors.scss';
 
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
@@ -56,7 +56,7 @@
 
     &.error .mat-radio-button {
       .mat-radio-outer-circle {
-        border-color: ads-colors.$status-error;
+        border-color: colors.$status-error;
       }
     }
   }

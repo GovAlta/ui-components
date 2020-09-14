@@ -1,71 +1,13 @@
 @use "ads-common";
-@use "ads-colors";
+@use '../../../../shared/styles/src/lib/mixin/colors.scss';
+@use '../../../../shared/styles/src/lib/mixin/fonts.scss';
 
 @import url('https://p.typekit.net/p.css?s=1&k=nur5yta&ht=tk&f=26036.26037.26044.26046.26047&a=14638192&app=typekit&e=css');
 
 // intended to be used only once per application
 
 @mixin ads-core() {
-  @font-face {
-    font-family: 'acumin-pro-semi-condensed';
-    src: url('https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/l?subset_id=1&fvd=n4&v=3')
-        format('woff2'),
-      url('https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/d?subset_id=1&fvd=n4&v=3')
-        format('woff'),
-      url('https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/a?subset_id=1&fvd=n4&v=3')
-        format('opentype');
-    font-style: normal;
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: 'acumin-pro-semi-condensed';
-    src: url('https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/l?subset_id=1&fvd=i4&v=3')
-        format('woff2'),
-      url('https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/d?subset_id=1&fvd=i4&v=3')
-        format('woff'),
-      url('https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/a?subset_id=1&fvd=i4&v=3')
-        format('opentype');
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: 'acumin-pro-semi-condensed';
-    src: url('https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/l?subset_id=1&fvd=n7&v=3')
-        format('woff2'),
-      url('https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/d?subset_id=1&fvd=n7&v=3')
-        format('woff'),
-      url('https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/a?subset_id=1&fvd=n7&v=3')
-        format('opentype');
-    font-style: normal;
-    font-weight: 700;
-  }
-
-  @font-face {
-    font-family: 'acumin-pro-semi-condensed';
-    src: url('https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/l?subset_id=1&fvd=i7&v=3')
-        format('woff2'),
-      url('https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/d?subset_id=1&fvd=i7&v=3')
-        format('woff'),
-      url('https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/a?subset_id=1&fvd=i7&v=3')
-        format('opentype');
-    font-style: italic;
-    font-weight: 700;
-  }
-
-  @font-face {
-    font-family: 'acumin-pro-semi-condensed';
-    src: url('https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/l?subset_id=1&fvd=n6&v=3')
-        format('woff2'),
-      url('https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/d?subset_id=1&fvd=n6&v=3')
-        format('woff'),
-      url('https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/a?subset_id=1&fvd=n6&v=3')
-        format('opentype');
-    font-style: normal;
-    font-weight: 600;
-  }
-
+  //TODO: condense with goa-core.scss
   body {
     margin: 0;
   }
@@ -88,25 +30,31 @@
   }
 
   a {
-    color: ads-colors.$interactive;
+    color: colors.$goa-primary-color;
   }
 
   button {
     box-shadow: none !important;
   }
 
+  .outline {
+    outline: 3px solid colors.$primary-focused;
+  }
+
+  ////
+
   .ads-disabled {
     border: none;
-    background-color: ads-colors.$layout-primary-light;
-    color: ads-colors.$layout-primary-primary !important;
+    background-color: colors.$goa-white-two;
+    color: colors.$goa-black-two !important;
     &:hover,
     &:focus,
     &:active {
-      color: ads-colors.$layout-primary-primary;
+      color: colors.$goa-black-two;
     }
     &:focus,
     &:active {
-      color: ads-colors.$layout-primary-primary;
+      color: colors.$goa-black-two;
       outline: none;
     }
   }
@@ -115,11 +63,11 @@
     &:hover,
     &:focus,
     &:active {
-      background-color: ads-colors.$layout-primary-dark;
+      background-color: colors.$goa-black;
     }
     &:focus,
     &:active {
-      outline: 3px solid ads-colors.$status-warn;
+      @extend .outline;
     }
     &[disabled] {
       @extend .ads-disabled;
@@ -127,17 +75,17 @@
   }
 
   .ads-secondary {
-    color: ads-colors.$interactive;
-    border: 2px solid ads-colors.$interactive;
+    color: colors.$goa-primary-color;
+    border: 2px solid colors.$goa-primary-color;
     &:hover,
     &:focus,
     &:active {
-      color: ads-colors.$layout-primary-dark;
-      border-color: ads-colors.$layout-primary-dark;
+      color: colors.$goa-black;
+      border-color: colors.$goa-black;
     }
     &:focus,
     &:active {
-      outline: 3px solid ads-colors.$status-warn;
+      @extend .outline;
     }
     &[disabled] {
       @extend .ads-disabled;
