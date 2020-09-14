@@ -30,7 +30,7 @@
   }
 
   a {
-    color: colors.$goa-primary-color;
+    color: colors.$primary;
   }
 
   button {
@@ -75,8 +75,8 @@
   }
 
   .ads-secondary {
-    color: colors.$goa-primary-color;
-    border: 2px solid colors.$goa-primary-color;
+    color: colors.$primary;
+    border: 2px solid colors.$primary;
     &:hover,
     &:focus,
     &:active {

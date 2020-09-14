@@ -1,3 +1,4 @@
+/* Palette */
 $goa-black: #333;
 $goa-black-two: #666;
 
@@ -7,12 +8,23 @@ $goa-white-three: #dcdcdc;
 
 $goa-blue-alberta: #0081a2;
 
+/* Semantic usages */
 $goa-error-color: #fc1921;
-$goa-focus-color: #feba35;
-$goa-primary-color: #0070c4;
 
-$goa-text-default: $goa-black-two;
-$goa-text-inverse: $goa-white;
+$goa-text-color: $goa-black;
+$goa-text-color-secondary: $goa-black-two;
+$goa-text-color-inverse: $goa-white;
+
+$goa-focus-outline-color: #feba35;
+$goa-border-color: $goa-black-two;
+$goa-border-color-secondary: $goa-white-three;
+$goa-border-color-tertiary: $goa-white-two;
+
+$goa-background-color: $goa-white;
+$goa-background-color-banner: $goa-blue-alberta;
+$goa-background-color-secondary: $goa-white-two;
+$goa-background-color-focus: $goa-white-two;
+$goa-background-color-primary-focus: $goa-black;
 
 $primary: #0070c4;
 $primary-hover: 004f84;

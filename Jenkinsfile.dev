@@ -1,0 +1,68 @@
+def publishNpm = true;
+def deployStorybook = true;
+def base = '';
+def baseCommand = '--all';
+
+pipeline {
+  agent {
+    node {
+      label 'node12'
+    }
+  }
+  stages {
+    stage('Prepare') {
+      steps {
+        checkout scm
+        sh 'npm install -g @nrwl/cli'
+        sh 'npm install'
+      }
+    }
+    stage('Build Processes') {
+      parallel {
+        stage('Test'){
+          steps {
+            sh "nx affected --target=test ${baseCommand} --parallel"
+          }
+        }
+        stage('Lint'){
+          steps {
+            sh "nx affected --target=lint ${baseCommand} --parallel"
+          }
+        }
+        stage('Build storybook'){
+          steps {
+            sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
+            sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
+            sh 'npm run build:vue-storybook' //builds to /dist/storybook/vue-components
+            sh 'npm run build:composite-storybook' //builds to /dist/storybook/composite
+          }
+        }
+        stage('Build npm package'){
+          steps {
+            sh "nx affected --target=build ${baseCommand} --parallel --prod --with-deps"
+          }
+        }        
+      }
+    }
+    stage('Deploy Test Image') {
+      parallel {
+        stage('Storybook'){
+          when {
+            expression { deployStorybook == true }
+          }
+          stages {
+            stage('Build image'){
+              steps {
+                //copy the nginx config to binary buld location
+                sh "cp nginx.conf dist/storybook"
+                dir('dist/storybook') {
+                  sh "oc start-build ui-components-dev-testing --from-dir . --follow"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,20 +1,26 @@
 @import '../mixin/colors.scss';
 
-@import "../mixin/responsive-breakpoints.scss";
-@import "../mixin/page-template.scss";
-@import "../mixin/svg/goa-logo-mobile.scss";
+@import '../mixin/responsive-breakpoints.scss';
+@import '../mixin/page-margins.scss';
+@import '../mixin/svg/goa-logo-mobile.scss';
 
-header.goa-header {
-  border-bottom: 1px solid $goa-white-three;
+.goa-header {
+  border-bottom: 1px solid $goa-border-color-tertiary;
+  @include page-padding;
 
-  .microsite-logo {
-    @include page-margins;
+  &.goa-microsite-header,
+  & > .goa-microsite-header {
+    background-color: $goa-background-color;
+
+    /* The white bar with microsite logo is sticky top */
+    position: sticky;
+    top: 0;
   }
 
-  .top-bar {
-    @include page-padding;
+  &.goa-official-site-header,
+  & > .goa-official-site-header {
     font-size: 12px;
-    background-color: $goa-white-two;
+    background-color: $goa-background-color-secondary;
     height: 22px;
     line-height: 22px;
 
@@ -48,7 +54,7 @@ header.goa-header {
 
   .web-link {
     vertical-align: 4px;
-    color: $goa-primary-color;
+    color: $primary;
     text-align: left;
   }
 }

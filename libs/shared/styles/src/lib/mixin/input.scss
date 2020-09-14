@@ -1,39 +1,39 @@
 @import '../mixin/colors.scss';
 
-@mixin goa-input-styles {    
-    & {
-        box-sizing: border-box;
-        width: 100%;
-        margin: 8px 0 0;
-        padding: 12px;
-        padding-right: 8px;
-        border-radius: 4px;
-        border: 1px solid $goa-black-two;
-        font-size: 18px;
-        font-weight: 400;
-        color: $goa-primary-color;
-        /* removes default arrow */
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-    }
+@mixin goa-input-styles {
+  & {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 8px 0 0;
+    padding: 12px;
+    padding-right: 8px;
+    border-radius: 4px;
+    border: 1px solid $goa-border-color;
+    font-size: 18px;
+    font-weight: 400;
+    color: $primary;
+    /* removes default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
 
-    &:disabled {
-        opacity: 0.3;
-        pointer-events: none;
-    }
+  &:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
 
-    /* remove default arrow IE */
-    &::-ms-expand {
-        display: none;
-    }
+  /* remove default arrow IE */
+  &::-ms-expand {
+    display: none;
+  }
 
-    &:hover {
-        border: 1px solid $goa-primary-color;
-    }
+  &:hover {
+    border: 1px solid $primary;
+  }
 
-    &:focus {
-        box-shadow: 0 0 0 3px  $goa-focus-color;
-        outline: none;
-    }        
+  &:focus {
+    box-shadow: 0 0 0 3px $goa-focus-outline-color;
+    outline: none;
+  }
 }
