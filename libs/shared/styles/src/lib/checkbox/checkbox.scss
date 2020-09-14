@@ -58,11 +58,11 @@ $goa-checkbox-size: 24px;
 
 @mixin goa-checkbox-container {
     // this provides our 'square' for the checkbox so we can style it (input checkboxes cant be styled nicely)
-    .goa-checkbox-container {
+    .goa-checkbox-container { 
         z-Index: 2;
         box-sizing: border-box;
-        margin: 0;
-        border: 1px solid $goa-black-two;
+        margin: 0;        
+        border: 1px solid $goa-border-color;
         border-radius: 2px;
         height: $goa-checkbox-size;
         width: $goa-checkbox-size;
@@ -73,7 +73,7 @@ $goa-checkbox-size: 24px;
 
         svg {
             display: none;
-            fill: $goa-text-inverse;
+            fill: $goa-text-color-inverse;
         }
 
         &.goa-checkbox-selected {
@@ -102,11 +102,11 @@ $goa-checkbox-size: 24px;
 
         // for some reason a comma-separated list inside :not() is causing issues with storybook
         &:hover:not(.goa-checkbox-selected):not(.goa-checkbox-indeterminate) {
-            background-color: $goa-white-two;
+            background-color: $goa-background-color-focus;
         }
 
         &:focus-within {
-            box-shadow: 0 0 0 3px $goa-focus-color;
+            box-shadow: 0 0 0 3px $goa-focus-outline-color;
             outline: none;
 
             &:before {
@@ -118,7 +118,7 @@ $goa-checkbox-size: 24px;
                 left: 0;
                 right: 0;
                 bottom: 0;
-                border: 1px solid $goa-black-two;
+                border: 1px solid $goa-border-color;
             }
         }
     }

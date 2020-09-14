@@ -8,9 +8,9 @@
 }
 
 @mixin dropdown-menu-styles {
-    border: solid 1px $goa-white-three;
+    border: solid 1px $goa-border-color-secondary;
     border-radius: 4px;
-    background: $goa-white;
+    background: $goa-background-color;
     padding: 0;
     width: 100%;
 
@@ -31,21 +31,21 @@
     .option {
         padding: 4px 12px;
         color: $goa-primary-color;
-        border: 1px solid $goa-white-two;
+        border: 1px solid $goa-border-color-tertiary;
 
         &.selected {
             background-color: $goa-primary-color;
-            color: $goa-white;
+            color: $goa-text-color-inverse;
         }
 
          &.selected.active {
-            background-color: $goa-black;
-            color: $goa-white;
+            background-color: $goa-background-color-primary-focus;
+            color: $goa-text-color-inverse;
         }
 
         &.active {
-            background-color: $goa-white-two;
-            color: $goa-black;
+            background-color: $goa-background-color-focus;
+            color: $goa-text-color;
         }
     }
 }
@@ -99,19 +99,19 @@
     .dropdown-label {
         font-size: 18px;
         font-weight: bold;
-        color: $goa-black;
+        color: $goa-text-color;
     }
 
     .required-label {
         margin-left: 8px;
         font-size: 14px;
-        color: $goa-black-two;
+        color: $goa-text-color-secondary;
     }
 
     .helper-text {
         font-size: 14px;
         font-weight: normal;
-        color: $goa-black;
+        color: $goa-text-color;
     }
 
     .error-text {

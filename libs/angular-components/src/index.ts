@@ -2,7 +2,6 @@ export * from './lib/angular-components.module';
 export * from './lib/button/button.component';
 export * from './lib/button-link/button-link.component';
 export * from './lib/header/header.component';
-export * from './lib/footer/footer.component';
 export * from './lib/microsite-logo/microsite-logo.component';
 export * from './lib/dropdown/dropdown.component';
 export * from './lib/dropdown/option/option.component';

@@ -1,0 +1,82 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
+import './colors.scss';
+
+<Meta title="Component Library/Common/Colors" />
+
+# Colors
+
+Commonly used colors.  Variable names are volatile and may change between versions.
+
+<Canvas>
+  <Story name="Colors" height={800} parameters={
+    {
+    }
+  }>
+    <div class="colors">
+        <div>
+            <div class="name">$goa-primary-color</div>
+            <div class="color goa-primary"></div>
+        </div>
+        <div>
+            <div class="name">$goa-error-color</div>
+            <div class="goa-error color"></div>
+        </div>
+        <div>
+            <div class="name">$goa-text-color</div>
+            <div class="goa-text">Sample text</div>
+        </div>   
+        <div>
+            <div class="name">$goa-text-color-secondary</div>
+            <div class="goa-text-secondary">Secondary text</div>
+        </div>   
+        <div>
+            <div class="name">$goa-text-color-inverse</div>
+            <div class="goa-text-inverse">Inverse text</div>
+        </div>    
+        <div>
+            <div class="name">$goa-focus-color-outline</div>
+            <div class="color goa-focus-outline"></div>
+        </div>    
+        <div>
+            <div class="name">$goa-border-color</div>
+            <div class="color goa-border"></div>
+        </div> 
+        <div>
+            <div class="name">$goa-border-color-secondary</div>
+            <div class="color goa-border-secondary"></div>
+        </div> 
+        <div>
+            <div class="name">$goa-border-color-tertiary</div>
+            <div class="color goa-border-tertiary"></div>
+        </div>    
+        <div>
+            <div class="name">$goa-background-color</div>
+            <div class="color goa-background"></div>
+        </div> 
+        <div>
+            <div class="name">$goa-background-color-secondary</div>
+            <div class="color goa-background-secondary"></div>
+        </div>   
+        <div>
+            <div class="name">$goa-background-color-focus</div>
+            <div class="color goa-background-focus"></div>
+        </div>   
+        <div>
+            <div class="name">$goa-background-color-primary-focus</div>
+            <div class="color goa-background-primary-focus"></div>
+        </div>
+        <div>
+            <div class="name">$goa-background-color-banner</div>
+            <div class="color goa-background-banner"></div>
+        </div>                                                
+    </div>
+  </Story>
+</Canvas>
+
+
+## CSS
+
+```css
+@import '~@abgov/core-css/scss/src/lib/mixin/colors.scss';
+
+```

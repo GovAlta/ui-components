@@ -1,14 +1,12 @@
 <template>
-    <header class="goa-header">
-        <div class="top-bar">
-            <span class="image"></span>
-            <span class="site-text">An official site of the </span> <a href='https://www.alberta.ca/index.aspx'
-                class="web-link">Alberta
-                Government</a>
+    <header class="goa-header goa-official-site-header">
+        <span class="image"></span>
+        <span class="site-text">An official site of the </span> <a href='https://www.alberta.ca/index.aspx'
+            class="web-link">Alberta
+            Government</a>
+        <div class="goa-microsite-header">
+            <goa-microsite-logo :serviceName="serviceName" :serviceHome="serviceHome"></goa-microsite-logo>
         </div>
-        <header class="goa-header goa-microsite-header">
-            <goa-microsite-logo class="microsite-logo" :serviceName="serviceName" :serviceHome="serviceHome"></goa-microsite-logo>
-        </header>
     </header>
 </template> 
 <script lang="typescript">
