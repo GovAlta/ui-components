@@ -1,6 +1,5 @@
 @import 'responsive-breakpoints.scss';
 
-
 @mixin page-margins($desktop-margin: 72px, $tablet-margin: 24px, $mobile-margin: 24px) {
     margin-left: $desktop-margin;
     margin-right: $desktop-margin;

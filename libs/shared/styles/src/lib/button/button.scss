@@ -1,16 +1,16 @@
 @import '../mixin/colors.scss';
 
 /* Common button colors */
-$active-outline-color: $goa-focus-color;
+$active-outline-color: $goa-focus-outline-color;
 $button-color: $goa-primary-color;
-$button-hover-color: $goa-black;
+$button-hover-color: $goa-background-color-primary-focus;
 
 $disabled-color: $goa-black-two; 
 $disabled-background-color: $goa-white-two;
 
 
 /* Primary colors */
-$button-primary-color: $goa-white;
+$button-primary-color: $goa-text-color-inverse;
 $primary-background-color: $button-color;
 $primary-border-color: $primary-background-color;
 $primary-hover-color: $button-primary-color;
@@ -23,7 +23,7 @@ $primary-focus-outline-color: $active-outline-color;
 
 /* Secondary colors */
 $secondary-color: $button-color;
-$secondary-background-color: $goa-white;
+$secondary-background-color: $goa-background-color;
 $secondary-border-color: $secondary-color;
 $secondary-hover-color: $button-hover-color;
 $secondary-hover-background-color: $secondary-background-color;
@@ -35,8 +35,8 @@ $secondary-focus-outline-color: $active-outline-color;
 
 /* Tertiary colors */
 $tertiary-color: $button-color;
-$tertiary-background-color: $goa-white;
-$tertiary-border-color: $goa-white-three;
+$tertiary-background-color: $goa-background-color;
+$tertiary-border-color: $goa-border-color-secondary;
 $tertiary-hover-color: $button-hover-color;
 $tertiary-hover-background-color: $tertiary-background-color;
 $tertiary-hover-border-color: $tertiary-hover-color;

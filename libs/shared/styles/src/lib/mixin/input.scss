@@ -8,7 +8,7 @@
         padding: 12px;
         padding-right: 8px;
         border-radius: 4px;
-        border: 1px solid $goa-black-two;
+        border: 1px solid $goa-border-color;
         font-size: 18px;
         font-weight: 400;
         color: $goa-primary-color;
@@ -33,7 +33,7 @@
     }
 
     &:focus {
-        box-shadow: 0 0 0 3px  $goa-focus-color;
+        box-shadow: 0 0 0 3px  $goa-focus-outline-color;
         outline: none;
     }        
 }

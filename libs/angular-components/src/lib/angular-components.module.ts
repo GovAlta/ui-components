@@ -4,7 +4,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 import { GoAButtonComponent } from './button/button.component';
 import { GoAMicrositeLogoComponent } from './microsite-logo/microsite-logo.component';
-import { GoAFooterComponent } from './footer/footer.component';
 import { GoAHeaderComponent } from './header/header.component';
 import { GoAButtonLinkComponent } from './button-link/button-link.component';
 import { GoAOptionComponent } from './dropdown/option/option.component';
@@ -22,7 +21,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     GoAButtonComponent,
     GoAMicrositeLogoComponent,
-    GoAFooterComponent,
     GoAHeaderComponent,
     GoAButtonLinkComponent,
     GoAOptionComponent,
@@ -33,7 +31,6 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     GoAButtonComponent,
     GoAMicrositeLogoComponent,
-    GoAFooterComponent,
     GoAHeaderComponent,
     GoAButtonLinkComponent,
     GoAOptionComponent,
