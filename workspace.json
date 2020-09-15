@@ -296,38 +296,6 @@
         }
       }
     },
-    "angular-material": {
-      "projectType": "library",
-      "root": "libs/angular-material",
-      "sourceRoot": "libs/angular-material/src",
-      "prefix": "abgov",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/angular-material/tsconfig.lib.json",
-              "libs/angular-material/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/angular-material/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/angular-material/jest.config.js",
-            "tsConfig": "libs/angular-material/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/angular-material/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "angular-material-components": {
       "projectType": "library",
       "root": "libs/angular-material-components",

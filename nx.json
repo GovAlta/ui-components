@@ -30,32 +30,23 @@
   "projects": {
     "core-css": {
       "tags": [],
-      "implicitDependencies": [
-        "shared-styles"
-      ]
+      "implicitDependencies": ["shared-styles"]
     },
     "angular-components": {
       "tags": [],
-      "implicitDependencies": [
-        "shared-styles"
-      ]
+      "implicitDependencies": ["shared-styles"]
     },
     "shared-storybook-common": {
       "tags": []
     },
     "vue-components": {
       "tags": [],
-      "implicitDependencies": [
-        "shared-styles"
-      ]
+      "implicitDependencies": ["shared-styles"]
     },
     "shared-common": {
       "tags": []
     },
     "shared-styles": {
-      "tags": []
-    },
-    "angular-material": {
       "tags": []
     },
     "angular-material-components": {

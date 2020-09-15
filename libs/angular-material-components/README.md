@@ -1,7 +1,19 @@
-# angular-material-components
+# core-css
 
-This library was generated with [Nx](https://nx.dev).
+This library contains core angular material components from the Government of Alberta.
 
-## Running unit tests
+## Installation
 
-Run `nx test angular-material-components` to execute the unit tests.
+> npm install @abgov/angular-material-components
+
+## Documentation
+
+Documentation is being worked on and will be provided soon.
+
+## Usage
+
+SCSS
+
+```
+import '@abgov/angular-material/goa-core.css';
+```
