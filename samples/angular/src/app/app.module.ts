@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { CalloutSampleComponent } from './callout/callout.component';
 import { CheckboxSampleComponent } from './checkbox/checkbox.component';
 import { DropdownSampleComponent } from './dropdown/dropdown.component';
 import { MicrositeLogoSampleComponent } from './microsite-logo/microsite-logo.component';
@@ -13,6 +14,7 @@ import { AngularComponentsModule} from '@abgov/angular-components'
 @NgModule({
   declarations: [
     AppComponent,
+    CalloutSampleComponent,
     CheckboxSampleComponent,
     DropdownSampleComponent,
     MicrositeLogoSampleComponent,
