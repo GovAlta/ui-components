@@ -15,5 +15,9 @@ Documentation is being worked on and will be provided soon.
 SCSS
 
 ```
-import '@abgov/angular-material/goa-core.css';
+Import the following file into your global sass file (default is style.scss)
+
+@import '~@abgov/angular-material-components/sass/theme.scss';
+
+Additional sass files can be found under ~@abgov/angular-material-components/sass/styles
 ```
