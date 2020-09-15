@@ -16,6 +16,7 @@
     "build:vue-components": "npm run build vue-components --withDeps --prod",
     "build:core-css": "npm run build core-css --withDeps --prod",
     "build:angular-storybook": "npm run docs:json && nx run angular-components:build-storybook",
+    "build:angular-material-storybook": "npm run docs:json:angular-material-components && nx run angular-material-components:build-storybook",
     "build:core-storybook": "nx run core-css:build-storybook",
     "build:vue-storybook": "nx run vue-components:build-storybook",
     "build:styles": "sass libs/shared/styles/src/goa-core.scss dist/libs/shared/styles/goa-core.css && sass libs/shared/styles/src/goa-components.scss dist/libs/shared/styles/goa-components.css",
