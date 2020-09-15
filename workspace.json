@@ -314,6 +314,18 @@
             }
           }
         },
+        "copy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "mkdir dist/libs/angular-material-components/sass",
+              "cp -r libs/angular-material-components/src/lib/styles dist/libs/angular-material-components/sass",
+              "cp libs/angular-material-components/src/lib/theme.scss dist/libs/angular-material-components/sass"
+            ],
+            "cwd": "./",
+            "parallel": false
+          }
+        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {

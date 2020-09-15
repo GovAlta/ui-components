@@ -72,6 +72,7 @@ pipeline {
           }
           steps {
             sh "nx affected --target=build ${baseCommand} --parallel --prod --with-deps"
+            sh "nx affected --target=copy ${baseCommand}"
           }
         }
       }
