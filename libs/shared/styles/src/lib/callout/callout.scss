@@ -1,0 +1,63 @@
+@import '../mixin/colors.scss';
+@import '../mixin/svg/calendar.scss';
+@import '../mixin/svg/warning.scss';
+@import '../mixin/svg/error.scss';
+@import '../mixin/svg/information.scss';
+
+.goa-callout {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin: 24px 0 0;
+    padding: 23px 24px 23px 24px;
+    border-width: 0;
+    border-left-width: 48px;
+    border-style: solid;
+    border-color: $goa-primary-color;
+    background: $goa-background-color-secondary;
+
+    & *:first-child {
+        margin-top: 0;
+    }
+
+    & *:last-child {
+        margin-bottom: 0;
+    }
+
+    /* variants ***/
+    &.goa--event {
+        border-color: #00853f;
+    }
+
+    &.goa--important {
+        border-color: #feba35;
+    }
+
+    &.goa--emergency {
+        border-color: $goa-error-color;
+    }
+
+    &:before {
+        position: absolute;
+        top: 28px;
+        left: -36px;
+        width: 24px;
+        height: 24px;
+        content: '';
+
+        @include information;
+    }
+
+    &.goa--emergency:before {
+        @include error;
+    }
+
+    &.goa--important:before {
+        @include warning;
+    }
+
+    &.goa--event:before {
+        @include calendar;
+    }
+}

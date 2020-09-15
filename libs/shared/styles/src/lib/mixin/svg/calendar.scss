@@ -1,0 +1,6 @@
+@mixin calendar {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M3.27,22.85H20.73a2.14,2.14,0,0,0,2.14-2.14V5A2.14,2.14,0,0,0,20.73,2.9h-2.1v2h2.1a.14.14,0,0,1,.14.14V8.31H3.13V5a.14.14,0,0,1,.14-.14H5.48V6.28a1,1,0,1,0,2,0V1.85a1,1,0,1,0-2,0v1H3.27A2.14,2.14,0,0,0,1.13,5V20.71A2.14,2.14,0,0,0,3.27,22.85Zm17.6-12.54v10.4a.14.14,0,0,1-.14.14H3.27a.14.14,0,0,1-.14-.14V10.31Z'/%3E%3Cpath fill='%23fff' d='M16.45,7.28a1,1,0,0,0,1-1V1.85a1,1,0,0,0-2,0v1h-1.8v2h1.8V6.28A1,1,0,0,0,16.45,7.28Z'/%3E%3Cpath fill='%23fff' d='M11.47,7.28a1,1,0,0,0,1-1V1.85a1,1,0,1,0-2,0v1H8.66v2h1.81V6.28A1,1,0,0,0,11.47,7.28Z'/%3E%3Crect fill='%23fff' x='6.67' y='11.52' width='2.33' height='2.33'/%3E%3Crect fill='%23fff' x='11.22' y='11.52' width='2.33' height='2.33'/%3E%3Crect fill='%23fff' x='15.77' y='11.52' width='2.33' height='2.33'/%3E%3Crect fill='%23fff' x='3.64' y='15.83' width='2.33' height='2.33'/%3E%3Crect fill='%23fff' x='8.19' y='15.83' width='2.33' height='2.33'/%3E%3Crect fill='%23fff' x='12.74' y='15.83' width='2.33' height='2.33'/%3E%3C/svg%3E");
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+}

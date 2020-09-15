@@ -1,0 +1,6 @@
+@mixin warning {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9,9,0,0,1,12,21Z'/%3E%3Cpath fill='%23000' d='M12,14.46a1,1,0,0,0,1-1V6.57a1,1,0,0,0-2,0v6.89A1,1,0,0,0,12,14.46Z'/%3E%3Cpath fill='%23000' d='M12,15.68A1.29,1.29,0,1,0,13.29,17,1.29,1.29,0,0,0,12,15.68Z'/%3E%3C/svg%3E");
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+}

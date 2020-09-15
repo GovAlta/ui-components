@@ -11,6 +11,7 @@ import { GoAOptionGroupComponent } from './dropdown/option-group/option-group.co
 import { GoADropdownComponent } from './dropdown/dropdown.component';
 import { GoACheckboxComponent } from './checkbox/checkbox.component';
 import { FormsModule } from '@angular/forms';
+import { GoACalloutComponent } from './callout/callout.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     GoAOptionComponent,
     GoADropdownComponent,
     GoAOptionGroupComponent,
-    GoACheckboxComponent
+    GoACheckboxComponent,
+    GoACalloutComponent
   ],
   declarations: [
     GoAButtonComponent,
@@ -36,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     GoAOptionComponent,
     GoADropdownComponent,
     GoAOptionGroupComponent,
-    GoACheckboxComponent
+    GoACheckboxComponent,
+    GoACalloutComponent
   ],
   bootstrap: [CommonModule]
 })
