@@ -5,7 +5,7 @@
 @import '../header/header.scss';
 @import '../microsite-logo/microsite-logo.scss';
 
-@mixin page-template($page-margin: 360px, $tablet-page-margin: 72px, $mobile-page-margin: 24px, $content-margin: auto, $tablet-content-margin: 72px, $mobile-content-margin: 24px) {
+@mixin page-template($page-margin: 150px, $tablet-page-margin: 72px, $mobile-page-margin: 24px, $content-margin: auto, $tablet-content-margin: 72px, $mobile-content-margin: 24px) {
 
     body {
       margin: 0;
@@ -104,6 +104,8 @@
       flex-direction: row; 
       flex-wrap: wrap;
     
+      border-bottom: 16px solid $goa-background-color-banner;
+
       .link {
         flex: 1 0 auto;
       }
