@@ -33,6 +33,7 @@
             "tsConfig": "libs/core-css/tsconfig.lib.json",
             "main": "libs/core-css/src/index.ts",
             "assets": [
+              "libs/core-css/*.md",
               {
                 "input": "libs/core-css/src/lib/assets",
                 "glob": "**/*",
