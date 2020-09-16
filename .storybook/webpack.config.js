@@ -15,16 +15,22 @@ module.exports = async ({ config, mode }) => {
       presets: [
         '@babel/preset-env',
         '@babel/preset-react',
-        '@babel/preset-typescript'
-      ]
-    }
+        '@babel/preset-typescript',
+      ],
+    },
   });
 
   //add aliases
   config.resolve.alias = {
-      '@abgov/shared/storybook-common': path.resolve(__dirname, '../libs/shared/storybook-common/src/index.ts'),
-      '@abgov/shared/common': path.resolve(__dirname, '../libs/shared/common/src/index.ts')
-  }
+    '@abgov/shared/storybook-common': path.resolve(
+      __dirname,
+      '../libs/shared/storybook-common/src/index.ts'
+    ),
+    '@abgov/shared/common': path.resolve(
+      __dirname,
+      '../libs/shared/common/src/index.ts'
+    ),
+  };
 
   // Return the altered config
   return config;

@@ -4,143 +4,142 @@
 $goa-checkbox-size: 24px;
 
 @mixin goa-checkbox-styles {
-    //basically we are hiding the native checkbox here
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-    outline: 0;
-    -webkit-appearance: none;
+  //basically we are hiding the native checkbox here
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  outline: 0;
+  -webkit-appearance: none;
 }
 
 @mixin goa-checkbox-label-styles {
-    z-Index: 2;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0 0 0 8px;
-    cursor: pointer;
-    user-select: none;
+  z-index: 2;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 0 0 8px;
+  cursor: pointer;
+  user-select: none;
 }
 
 @mixin goa-checkbox {
-    input[type="checkbox"]
-    {
-        @include goa-checkbox-styles();
-    }
+  input[type='checkbox'] {
+    @include goa-checkbox-styles();
+  }
+
+  .goa-checkbox-label {
+    @include goa-checkbox-label-styles();
+  }
+
+  &.goa-checkbox-disabled {
+    opacity: 30%;
 
     .goa-checkbox-label {
-        @include goa-checkbox-label-styles();
+      cursor: default;
     }
+  }
 
-    &.goa-checkbox-disabled {
-        opacity: 30%;
+  &.has-error {
+    .goa-checkbox-container {
+      border: solid 2px $goa-error-color;
+      color: $goa-error-color;
 
-        .goa-checkbox-label {
-            cursor: default;
-        }
+      svg {
+        fill: $goa-error-color;
+      }
     }
-
-    &.has-error {
-        .goa-checkbox-container {
-            border: solid 2px $goa-error-color;
-            color: $goa-error-color;
-
-            svg {
-                fill: $goa-error-color;
-            }
-        }
-    }
+  }
 }
 
 @mixin goa-checkbox-container {
-    // this provides our 'square' for the checkbox so we can style it (input checkboxes cant be styled nicely)
-    .goa-checkbox-container { 
-        z-Index: 2;
-        box-sizing: border-box;
-        margin: 0;        
-        border: 1px solid $goa-border-color;
-        border-radius: 2px;
-        height: $goa-checkbox-size;
-        width: $goa-checkbox-size;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 3px;
+  // this provides our 'square' for the checkbox so we can style it (input checkboxes cant be styled nicely)
+  .goa-checkbox-container {
+    z-index: 2;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid $goa-border-color;
+    border-radius: 2px;
+    height: $goa-checkbox-size;
+    width: $goa-checkbox-size;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3px;
 
-        svg {
-            display: none;
-            fill: $goa-text-color-inverse;
-        }
-
-        &.goa-checkbox-selected {
-            background-color: $goa-primary-color;
-
-            // use !important to ensure 'checked' overrides 'indetminant'
-            .goa-checkmark {
-                display: block !important;
-            }
-            .goa-indeterminate {
-                display: none !important;
-            }
-        }
-
-        &.goa-checkbox-indeterminate {
-            background-color: $goa-primary-color;
-
-            // note, these will get overridden by a selected checkbox
-            .goa-checkmark {
-                display: none;
-            }
-            .goa-indeterminate {
-                display: block;
-            }
-        }
-
-        // for some reason a comma-separated list inside :not() is causing issues with storybook
-        &:hover:not(.goa-checkbox-selected):not(.goa-checkbox-indeterminate) {
-            background-color: $goa-background-color-focus;
-        }
-
-        &:focus-within {
-            box-shadow: 0 0 0 3px $goa-focus-outline-color;
-            outline: none;
-
-            &:before {
-                content: "";
-                display: block;
-                position: absolute;
-                z-index: -1;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                border: 1px solid $goa-border-color;
-            }
-        }
+    svg {
+      display: none;
+      fill: $goa-text-color-inverse;
     }
+
+    &.goa-checkbox-selected {
+      background-color: $primary;
+
+      // use !important to ensure 'checked' overrides 'indetminant'
+      .goa-checkmark {
+        display: block !important;
+      }
+      .goa-indeterminate {
+        display: none !important;
+      }
+    }
+
+    &.goa-checkbox-indeterminate {
+      background-color: $primary;
+
+      // note, these will get overridden by a selected checkbox
+      .goa-checkmark {
+        display: none;
+      }
+      .goa-indeterminate {
+        display: block;
+      }
+    }
+
+    // for some reason a comma-separated list inside :not() is causing issues with storybook
+    &:hover:not(.goa-checkbox-selected):not(.goa-checkbox-indeterminate) {
+      background-color: $goa-background-color-focus;
+    }
+
+    &:focus-within {
+      box-shadow: 0 0 0 3px $goa-focus-outline-color;
+      outline: none;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid $goa-border-color;
+      }
+    }
+  }
 }
 
 @mixin goa-checkbox-class {
-    .goa-checkbox {
-        @include goa-checkbox();
-        @include goa-checkbox-container();
+  .goa-checkbox {
+    @include goa-checkbox();
+    @include goa-checkbox-container();
 
-        &.goa-checkbox-label-before {
-            .goa-checkbox-container {
-                order: 1;
-                margin-left: 8px;
-                margin-right: auto;
-            }
-        }
+    &.goa-checkbox-label-before {
+      .goa-checkbox-container {
+        order: 1;
+        margin-left: 8px;
+        margin-right: auto;
+      }
     }
+  }
 
-    .goa-checkbox-layout {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+  .goa-checkbox-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }
