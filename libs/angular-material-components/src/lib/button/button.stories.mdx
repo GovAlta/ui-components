@@ -25,11 +25,8 @@ A hierarchy of actions provided by buttons.
 
 <Canvas>
   <Story
-    name="Variants"
+    name="Pimrary"
     height={100}
-    args={{
-      content: 'Click Me!',
-    }}
     parameters={{
       design: {
         specUrl:
@@ -41,8 +38,49 @@ A hierarchy of actions provided by buttons.
   >
     {(args) => {
       return {
-        template: `<button mat-raised-button color="primary">{{content}}</button>`,
-        props: args,
+        template: `<button mat-raised-button color="primary">Primary</button>`,
+      };
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Secondary"
+    height={100}
+    parameters={{
+      design: {
+        specUrl:
+          'https://xd.adobe.com/spec/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/screen/ea24fb1f-4b15-495f-8fe6-603d1ac538a4/Buttons',
+        reviewUrl:
+          'https://xd.adobe.com/view/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/',
+      },
+    }}
+  >
+    {(args) => {
+      return {
+        template: `<button mat-raised-button color="secondary">Secondary</button>`,
+      };
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Default"
+    height={100}
+    parameters={{
+      design: {
+        specUrl:
+          'https://xd.adobe.com/spec/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/screen/ea24fb1f-4b15-495f-8fe6-603d1ac538a4/Buttons',
+        reviewUrl:
+          'https://xd.adobe.com/view/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/',
+      },
+    }}
+  >
+    {(args) => {
+      return {
+        template: `<button mat-raised-button>Default</button>`,
       };
     }}
   </Story>
@@ -57,7 +95,9 @@ links.
 ## Examples
 
 ```
-<button mat-raised-button color="primary" title="Go to the next page.">Next</button>
+<button mat-raised-button color="primary" title="Primary styling.">Primary</button>
+<button mat-raised-button color="secondary" title="Secondary styling.">Secondary</button>
+<button mat-raised-button title="Default styling">Default</button>
 ```
 
 ## Usage guidelines

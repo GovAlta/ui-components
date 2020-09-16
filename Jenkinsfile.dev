@@ -33,13 +33,15 @@ pipeline {
           steps {
             sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
             sh 'npm run build:core-storybook' //builds to /dist/storybook/core-css
+            sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
+            sh 'npm run build:angular-material-storybook' //builds to /dist/storybook/angular-components
             sh 'npm run build:vue-storybook' //builds to /dist/storybook/vue-components
-            sh 'npm run build:composite-storybook' //builds to /dist/storybook/composite
           }
         }
         stage('Build npm package'){
           steps {
             sh "nx affected --target=build ${baseCommand} --parallel --prod --with-deps"
+            sh "nx affected --target=copy ${baseCommand}"
           }
         }        
       }
