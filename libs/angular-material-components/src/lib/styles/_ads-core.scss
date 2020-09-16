@@ -92,4 +92,11 @@
       @extend .ads-disabled;
     }
   }
+
+  .ads-tertiary {
+    &.mat-button-base {
+      border: 1px solid colors.$goa-white-three;
+      @extend .ads-secondary;
+    }
+  }
 }

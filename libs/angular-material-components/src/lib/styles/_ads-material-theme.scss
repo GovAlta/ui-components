@@ -65,6 +65,7 @@
   .mat-flat-button,
   .mat-fab,
   .mat-stroked-button {
+    @extend .ads-tertiary;
     &.mat-primary {
       @extend .ads-primary;
     }
