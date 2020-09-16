@@ -2,12 +2,11 @@
 
 /* Common button colors */
 $active-outline-color: $goa-focus-outline-color;
-$button-color: $goa-primary-color;
+$button-color: $primary;
 $button-hover-color: $goa-background-color-primary-focus;
 
-$disabled-color: $goa-black-two; 
+$disabled-color: $goa-black-two;
 $disabled-background-color: $goa-white-two;
-
 
 /* Primary colors */
 $button-primary-color: $goa-text-color-inverse;
@@ -45,94 +44,91 @@ $tertiary-focus-background-color: $tertiary-background-color;
 $tertiary-focus-border-color: $tertiary-focus-color;
 $tertiary-focus-outline-color: $active-outline-color;
 
-
 @mixin goa-button-styles {
-    & {
-        box-sizing: border-box;
-        min-width: 70px;
-        margin: 28px 12px 0 0;
-        padding: 12px;
-        border: 2px solid $primary-border-color;
-        border-radius: 4px;
-        
-        background: $primary-background-color;
-        cursor: pointer;
-        color: $button-primary-color;
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 1em;
+  & {
+    box-sizing: border-box;
+    min-width: 70px;
+    margin: 28px 12px 0 0;
+    padding: 12px;
+    border: 2px solid $primary-border-color;
+    border-radius: 4px;
 
+    background: $primary-background-color;
+    cursor: pointer;
+    color: $button-primary-color;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1em;
 
-        &:disabled,
-        &:disabled.goa--secondary,
-        &:disabled.goa--tertiary {
-            pointer-events: none;
-            color: $disabled-color;
-            background-color: $disabled-background-color;
-            border: none;
-        }
-
-        &:hover {
-            border-color: $primary-hover-border-color;
-            background: $primary-hover-background-color;
-        }
-
-        &:focus,
-        &:active {
-            border-color: $primary-focus-border-color;
-            box-shadow: 0 0 0 3px $primary-focus-outline-color;
-            background: $primary-focus-background-color;
-            outline: none;
-        }
-
-        &.goa--secondary {
-            border: 2px solid $secondary-border-color;
-            background: $secondary-background-color;
-            color: $secondary-color;
-
-
-            &:hover {
-                border-color: $secondary-hover-border-color;
-                background: $secondary-hover-background-color;
-                color: $secondary-hover-color;
-            }
-
-            &:focus,
-            &:active {
-                color: $secondary-focus-color;
-                background-color: $secondary-focus-background-color;
-                border: 2px solid $secondary-focus-border-color;
-                box-shadow: 0 0 0 3px $secondary-focus-outline-color;
-                outline: none;
-            }
-        }
-
-        &.goa--tertiary {
-            border-color: $tertiary-border-color;
-            background: $tertiary-background-color;
-            color: $tertiary-color;
-
-            &:hover {
-                background: $tertiary-hover-background-color;
-                color: $tertiary-hover-color;
-            }
-
-            &:focus,
-            &:active {
-                border: 1px solid $tertiary-focus-border-color;
-                color: $tertiary-focus-color;
-                background-color: $tertiary-focus-background-color;
-                box-shadow: 0 0 0 3px $tertiary-focus-outline-color;
-                outline: none;
-            }
-        }
+    &:disabled,
+    &:disabled.goa--secondary,
+    &:disabled.goa--tertiary {
+      pointer-events: none;
+      color: $disabled-color;
+      background-color: $disabled-background-color;
+      border: none;
     }
+
+    &:hover {
+      border-color: $primary-hover-border-color;
+      background: $primary-hover-background-color;
+    }
+
+    &:focus,
+    &:active {
+      border-color: $primary-focus-border-color;
+      box-shadow: 0 0 0 3px $primary-focus-outline-color;
+      background: $primary-focus-background-color;
+      outline: none;
+    }
+
+    &.goa--secondary {
+      border: 2px solid $secondary-border-color;
+      background: $secondary-background-color;
+      color: $secondary-color;
+
+      &:hover {
+        border-color: $secondary-hover-border-color;
+        background: $secondary-hover-background-color;
+        color: $secondary-hover-color;
+      }
+
+      &:focus,
+      &:active {
+        color: $secondary-focus-color;
+        background-color: $secondary-focus-background-color;
+        border: 2px solid $secondary-focus-border-color;
+        box-shadow: 0 0 0 3px $secondary-focus-outline-color;
+        outline: none;
+      }
+    }
+
+    &.goa--tertiary {
+      border-color: $tertiary-border-color;
+      background: $tertiary-background-color;
+      color: $tertiary-color;
+
+      &:hover {
+        background: $tertiary-hover-background-color;
+        color: $tertiary-hover-color;
+      }
+
+      &:focus,
+      &:active {
+        border: 1px solid $tertiary-focus-border-color;
+        color: $tertiary-focus-color;
+        background-color: $tertiary-focus-background-color;
+        box-shadow: 0 0 0 3px $tertiary-focus-outline-color;
+        outline: none;
+      }
+    }
+  }
 }
 
 @mixin goa-button {
-    button.goa-button,
-    input[type="button"].goa-button,
-    input[type="submit"].goa-button {
-        @include goa-button-styles();
-    }
+  button.goa-button,
+  input[type='button'].goa-button,
+  input[type='submit'].goa-button {
+    @include goa-button-styles();
+  }
 }

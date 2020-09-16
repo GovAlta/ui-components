@@ -1,0 +1,134 @@
+@use "./ads-typography";
+@use '../../../../shared/styles/src/lib/mixin/colors.scss';
+@import '~@angular/material/theming';
+
+$ads-primary-palette: (
+  50: #e0eef8,
+  100: #b3d4ed,
+  200: #80b8e2,
+  300: #4d9bd6,
+  400: #2685cd,
+  500: colors.$primary,
+  600: #0068be,
+  700: #005db6,
+  800: #0053af,
+  900: #0041a2,
+  A100: #ccddff,
+  A200: #99baff,
+  A400: #6698ff,
+  A700: #4d87ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: colors.$goa-white,
+    500: colors.$goa-white,
+    600: colors.$goa-white,
+    700: colors.$goa-white,
+    800: colors.$goa-white,
+    900: colors.$goa-white,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$ads-accent-palette: (
+  50: #e0efe7,
+  100: #b3d6c3,
+  200: #80bb9c,
+  300: #4da074,
+  400: #268b56,
+  500: #007738,
+  600: #006f32,
+  700: #00642b,
+  800: #005a24,
+  900: #004717,
+  A100: #7bff98,
+  A200: #48ff70,
+  A400: #15ff48,
+  A700: #00fb37,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: colors.$goa-white,
+    500: colors.$goa-white,
+    600: colors.$goa-white,
+    700: colors.$goa-white,
+    800: colors.$goa-white,
+    900: colors.$goa-white,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$ads-warn-palette: $mat-red;
+
+$ads-primary-mat-palette: mat-palette($ads-primary-palette);
+$ads-accent-mat-palette: mat-palette($ads-accent-palette);
+$ads-warn-mat-palette: mat-palette($ads-warn-palette);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$ads-mat-theme: mat-light-theme(
+  $ads-primary-mat-palette,
+  $ads-accent-mat-palette,
+  $ads-warn-mat-palette
+);
+
+$ads-mat-typography-config: mat-typography-config(
+  $font-family: 'acumin-pro-semi-condensed, sans-serif',
+  $body-1:
+    mat-typography-level(
+      ads-typography.$p-li-size,
+      ads-typography.$p-li-line-height,
+      ads-typography.$p-li-font-weight
+    ),
+  $body-2:
+    mat-typography-level(
+      ads-typography.$p-li-size,
+      ads-typography.$p-li-line-height,
+      700
+    ),
+  $headline:
+    mat-typography-level(
+      ads-typography.$h1-size,
+      ads-typography.$h1-line-height,
+      ads-typography.$h1-font-weight
+    ),
+  $title:
+    mat-typography-level(
+      ads-typography.$h2-size,
+      ads-typography.$h2-line-height,
+      ads-typography.$h2-font-weight
+    ),
+  $subheading-2:
+    mat-typography-level(
+      ads-typography.$h3-size,
+      ads-typography.$h3-line-height,
+      ads-typography.$h3-font-weight
+    ),
+  $subheading-1:
+    mat-typography-level(
+      ads-typography.$h4-size,
+      ads-typography.$h4-line-height,
+      ads-typography.$h4-font-weight
+    ),
+  $caption:
+    mat-typography-level(
+      ads-typography.$caption-size,
+      ads-typography.$caption-line-height,
+      ads-typography.$caption-font-weight
+    ),
+  $button:
+    mat-typography-level(
+      ads-typography.$button-size,
+      ads-typography.$button-line-height,
+      ads-typography.$button-font-weight
+    ),
+);

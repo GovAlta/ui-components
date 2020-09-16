@@ -2,120 +2,120 @@
 @import '../mixin/colors.scss';
 
 @mixin goa-select {
-    select {
-        @include goa-input-styles();
-    }
+  select {
+    @include goa-input-styles();
+  }
 }
 
 @mixin dropdown-menu-styles {
-    border: solid 1px $goa-border-color-secondary;
-    border-radius: 4px;
-    background: $goa-background-color;
-    padding: 0;
-    width: 100%;
+  border: solid 1px $goa-border-color-secondary;
+  border-radius: 4px;
+  background: $goa-background-color;
+  padding: 0;
+  width: 100%;
 
-    overflow-y: auto;
+  overflow-y: auto;
 
-    .option-group {
-        .option-group-label {
-            font-weight: bold;
-            padding: 4px 12px;
-        }
-
-        .option {
-            font-weight: normal;
-            padding: 4px 24px;
-        }
+  .option-group {
+    .option-group-label {
+      font-weight: bold;
+      padding: 4px 12px;
     }
 
     .option {
-        padding: 4px 12px;
-        color: $goa-primary-color;
-        border: 1px solid $goa-border-color-tertiary;
-
-        &.selected {
-            background-color: $goa-primary-color;
-            color: $goa-text-color-inverse;
-        }
-
-         &.selected.active {
-            background-color: $goa-background-color-primary-focus;
-            color: $goa-text-color-inverse;
-        }
-
-        &.active {
-            background-color: $goa-background-color-focus;
-            color: $goa-text-color;
-        }
+      font-weight: normal;
+      padding: 4px 24px;
     }
+  }
+
+  .option {
+    padding: 4px 12px;
+    color: $primary;
+    border: 1px solid $goa-border-color-tertiary;
+
+    &.selected {
+      background-color: $primary;
+      color: $goa-text-color-inverse;
+    }
+
+    &.selected.active {
+      background-color: $goa-background-color-primary-focus;
+      color: $goa-text-color-inverse;
+    }
+
+    &.active {
+      background-color: $goa-background-color-focus;
+      color: $goa-text-color;
+    }
+  }
 }
 
 @mixin dropdown-styles {
-    position: relative;
-    
-    .dropdown-grouping {
-        margin-top: 8px;
-        .dropdown-textbox {
-            @include goa-input-styles();
-        }
+  position: relative;
 
-        .dropdown-textbox.margin-override {
-            margin: 0;
-        }
+  .dropdown-grouping {
+    margin-top: 8px;
+    .dropdown-textbox {
+      @include goa-input-styles();
     }
 
-    /* add chevron */
+    .dropdown-textbox.margin-override {
+      margin: 0;
+    }
+  }
+
+  /* add chevron */
+  i.goa-select-icon {
+    @include chevron();
+    left: auto;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    position: absolute;
+    margin-top: 16px;
+  }
+
+  &.disabled {
     i.goa-select-icon {
-        @include chevron();
-        left: auto;
-        right: 8px;
-        width: 24px;
-        height: 24px;
-        pointer-events: none;
-        position: absolute;
-        margin-top: 16px;
+      @include chevron(0.3);
     }
+  }
 
-    &.disabled {
-        i.goa-select-icon {
-            @include chevron(0.3);
-        }
+  &.opened {
+    i.goa-select-icon {
+      transform: rotate(180deg);
     }
+  }
 
-    &.opened {
-        i.goa-select-icon {
-            transform: rotate(180deg);
-        }
+  &.has-error {
+    .dropdown-grouping {
+      .dropdown-textbox {
+        border: solid 2px $goa-error-color;
+      }
     }
+  }
 
-    &.has-error {
-        .dropdown-grouping {
-            .dropdown-textbox {
-                border: solid 2px $goa-error-color;
-            }
-        }
-    }
+  .dropdown-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: $goa-text-color;
+  }
 
-    .dropdown-label {
-        font-size: 18px;
-        font-weight: bold;
-        color: $goa-text-color;
-    }
+  .required-label {
+    margin-left: 8px;
+    font-size: 14px;
+    color: $goa-text-color-secondary;
+  }
 
-    .required-label {
-        margin-left: 8px;
-        font-size: 14px;
-        color: $goa-text-color-secondary;
-    }
+  .helper-text {
+    font-size: 14px;
+    font-weight: normal;
+    color: $goa-text-color;
+  }
 
-    .helper-text {
-        font-size: 14px;
-        font-weight: normal;
-        color: $goa-text-color;
-    }
-
-    .error-text {
-        color: $goa-error-color;
-        font-size: 14px;
-    }    
+  .error-text {
+    color: $goa-error-color;
+    font-size: 14px;
+  }
 }

@@ -1,0 +1,81 @@
+@use 'ads-common';
+@use 'ads-core';
+@use "ads-material";
+@use '../../../../shared/styles/src/lib/mixin/colors.scss';
+
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+@mixin ads-material-theme() {
+  // Include theme styles for core and each component used in your app.
+  // Alternatively, you can import and @include the theme mixins for each component
+  // that you are using.
+  @include angular-material-theme(ads-material.$ads-mat-theme);
+
+  // Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
+  @include mat-base-typography(ads-material.$ads-mat-typography-config);
+
+  // Override typography for all Angular Material, including mat-base-typography and all components.
+  @include angular-material-typography(ads-material.$ads-mat-typography-config);
+
+  // Override the typography in the core CSS.
+  @include mat-core(ads-material.$ads-mat-typography-config);
+
+  //cludge the margin on form fields that don't have hints
+  .mat-form-field {
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+
+    &.no-hint-fix .mat-form-field-subscript-wrapper {
+      display: none;
+    }
+  }
+
+  .mat-form-field-subscript-wrapper {
+    position: relative !important;
+  }
+
+  .mat-stroked-button {
+    font-weight: 600;
+    border-width: 2px !important;
+    border-color: currentColor !important;
+  }
+
+  .mat-radio-group {
+    margin: (ads-common.$half-unit) 0;
+
+    &.verticle-radio-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    & .mat-radio-button {
+      margin: 0 0 (ads-common.$quarter-unit) 0;
+    }
+
+    &.error .mat-radio-button {
+      .mat-radio-outer-circle {
+        border-color: colors.$status-error;
+      }
+    }
+  }
+
+  .mat-tab-label-active {
+    color: black;
+    font-weight: bold;
+  }
+
+  .mat-button,
+  .mat-raised-button,
+  .mat-flat-button,
+  .mat-fab,
+  .mat-stroked-button {
+    &.mat-primary {
+      @extend .ads-primary;
+    }
+    &.mat-secondary {
+      @extend .ads-secondary;
+    }
+  }
+}

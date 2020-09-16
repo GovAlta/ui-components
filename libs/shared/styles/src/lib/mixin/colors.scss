@@ -6,12 +6,10 @@ $goa-white: #fff;
 $goa-white-two: #f1f1f1;
 $goa-white-three: #dcdcdc;
 
-$goa-blue-alberta: #0081A2;
-$goa-blue-primary: #0070C4;
+$goa-blue-alberta: #0081a2;
 
 /* Semantic usages */
-$goa-error-color: #FC1921;
-$goa-primary-color: $goa-blue-primary;
+$goa-error-color: #fc1921;
 
 $goa-text-color: $goa-black;
 $goa-text-color-secondary: $goa-black-two;
@@ -28,7 +26,9 @@ $goa-background-color-secondary: $goa-white-two;
 $goa-background-color-focus: $goa-white-two;
 $goa-background-color-primary-focus: $goa-black;
 
-
-
-
-
+$primary: #0070c4;
+$primary-hover: 004f84;
+$primary-active: $goa-black-two;
+$primary-disabled: #f1f1f1;
+$primary-focused: #feba35;
+$status-error: $primary-focused;
