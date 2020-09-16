@@ -58,10 +58,13 @@
   }
 
   .ads-primary {
+    border: 2px solid;
+    border-color: colors.$primary;
     &:hover,
     &:focus,
     &:active {
       background-color: colors.$goa-black;
+      border-color: colors.$goa-black;
     }
     &:focus,
     &:active {
