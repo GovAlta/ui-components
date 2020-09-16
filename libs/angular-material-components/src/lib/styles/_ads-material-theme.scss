@@ -36,12 +36,6 @@
     position: relative !important;
   }
 
-  .mat-stroked-button {
-    font-weight: 600;
-    border-width: 2px !important;
-    border-color: currentColor !important;
-  }
-
   .mat-radio-group {
     margin: (ads-common.$half-unit) 0;
 
@@ -71,6 +65,7 @@
   .mat-flat-button,
   .mat-fab,
   .mat-stroked-button {
+    @extend .ads-tertiary;
     &.mat-primary {
       @extend .ads-primary;
     }
