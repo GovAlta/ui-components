@@ -1,4 +1,4 @@
-# core-css
+# angular-material-components
 
 This library contains core angular material components from the Government of Alberta.
 
