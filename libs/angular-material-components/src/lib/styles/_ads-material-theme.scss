@@ -1,7 +1,7 @@
 @use 'ads-common';
 @use 'ads-core';
 @use "ads-material";
-@use '../../../../shared/styles/src/lib/mixin/colors.scss';
+@use '../../../../core-css/src/lib/styles/mixin/colors.scss';
 
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.

@@ -19,7 +19,7 @@
     "build:angular-material-storybook": "npm run docs:json:angular-material-components && nx run angular-material-components:build-storybook",
     "build:core-storybook": "nx run core-css:build-storybook",
     "build:vue-storybook": "nx run vue-components:build-storybook",
-    "build:styles": "sass libs/shared/styles/src/goa-core.scss dist/libs/shared/styles/goa-core.css && sass libs/shared/styles/src/goa-components.scss dist/libs/shared/styles/goa-components.css",
+    "build:styles": "node-sass dist/libs/core-css/src/lib -o dist/libs/core-css --no-recursive",
     "run:angular-storybook": "npm run docs:json:angular-components && nx run angular-components:storybook",
     "run:angular-material-storybook": "npm run docs:json:angular-material-components && nx run angular-material-components:storybook",
     "run:core-storybook": "nx run core-css:storybook",
