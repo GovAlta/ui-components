@@ -40,16 +40,19 @@
                 "output": "assets"
               },
               {
-                "input": "dist/libs/shared/styles",
-                "glob": "**/*.css",
+                "input": "libs/core-css",
+                "glob": "**/*.{scss,css}",
                 "output": "./"
-              },
-              {
-                "input": "libs/shared/styles",
-                "glob": "**/*.scss",
-                "output": "scss/"
               }
             ]
+          }
+        },
+        "post": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npm run build:styles"],
+            "cwd": "./",
+            "parallel": false
           }
         },
         "storybook": {
@@ -277,26 +280,6 @@
         }
       }
     },
-    "shared-styles": {
-      "root": "libs/shared/styles",
-      "sourceRoot": "libs/shared/styles/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "outputPath": "dist/libs/shared/styles",
-            "commands": [
-              "npm run build:styles",
-              "cp libs/shared/styles/package.json dist/libs/shared/styles"
-            ],
-            "cwd": "./",
-            "parallel": false
-          }
-        }
-      }
-    },
     "angular-material-components": {
       "projectType": "library",
       "root": "libs/angular-material-components",
@@ -313,18 +296,6 @@
             "production": {
               "tsConfig": "libs/angular-material-components/tsconfig.lib.prod.json"
             }
-          }
-        },
-        "copy": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "mkdir dist/libs/angular-material-components/sass",
-              "cp -r libs/angular-material-components/src/lib/styles dist/libs/angular-material-components/sass",
-              "cp libs/angular-material-components/src/lib/theme.scss dist/libs/angular-material-components/sass"
-            ],
-            "cwd": "./",
-            "parallel": false
           }
         },
         "lint": {

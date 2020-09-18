@@ -1,29 +1,27 @@
 import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
-import './page-template.scss';
+import './page-template.story.scss';
 
 <Meta title="Component Library/Page Layout/Template" />
 
 # Page Template
 
-A page template for displaying content on a micro service site.  Contains the micro-service header, banner, content section, and footer.
+A page template for displaying content on a micro service site. Contains the micro-service header, banner, content section, and footer.
 
 <Canvas>
-  <Story name="Microservice content" height={800} parameters={
-    {
-    }
-  }>
+  <Story name="Microservice content" height={800} parameters={{}}>
     <div class="goa-header goa-official-site-header">
       <span class="image"></span>
-      <span class="site-text">An official site of the </span> <a href='https://www.alberta.ca/index.aspx'
-          class="web-link">Alberta
-          Government</a>
+      <span class="site-text">An official site of the </span>{' '}
+      <a href="https://www.alberta.ca/index.aspx" class="web-link">
+        Alberta Government
+      </a>
     </div>
     <header class="goa-header goa-microsite-header">
       <div class="goa-microsite-logo">
         <div class="logo">
-          <a href="/" aria-label="My microsite label" class='microsite-link'>
-              <span class="image-desktop-tablet"></span>
-              <span class="image-mobile"></span>
+          <a href="/" aria-label="My microsite label" class="microsite-link">
+            <span class="image-desktop-tablet"></span>
+            <span class="image-mobile"></span>
           </a>
         </div>
       </div>
@@ -33,10 +31,13 @@ A page template for displaying content on a micro service site.  Contains the mi
       <div class="descriptor">My page descriptor</div>
     </div>
     <main class="goa-content-section">
-      <section >       
+      <section>
         <h2>Overview</h2>
-        <p>Basic content template for a microservice page.  Contains headers, banner, content, content sections, and footer.</p>
-        <p>Responsive breakpoints change margins and layout.</p>  
+        <p>
+          Basic content template for a microservice page. Contains headers,
+          banner, content, content sections, and footer.
+        </p>
+        <p>Responsive breakpoints change margins and layout.</p>
       </section>
       <section>
         <h2>Some content</h2>
@@ -44,58 +45,63 @@ A page template for displaying content on a micro service site.  Contains the mi
       </section>
     </main>
     <footer class="goa-footer">
-      <a class="link" href="https://alberta.ca">Go to Alberta.ca</a>
+      <a class="link" href="https://alberta.ca">
+        Go to Alberta.ca
+      </a>
       <span class="copyright">© 2020 Government of Alberta</span>
     </footer>
   </Story>
 </Canvas>
 
-
 ## HTML
 
 ```html
-    <div class="goa-header goa-official-site-header">
-        <span class="image"></span>
-        <span class="site-text">An official site of the </span> <a href='https://www.alberta.ca/index.aspx'
-            class="web-link">Alberta
-            Government</a>
+<div class="goa-header goa-official-site-header">
+  <span class="image"></span>
+  <span class="site-text">An official site of the </span>
+  <a href="https://www.alberta.ca/index.aspx" class="web-link"
+    >Alberta Government</a
+  >
+</div>
+<header class="goa-header goa-microsite-header">
+  <div class="goa-microsite-logo">
+    <div class="logo">
+      <a href="/" aria-label="My microsite label" class="microsite-link">
+        <span class="image-desktop-tablet"></span>
+        <span class="image-mobile"></span>
+      </a>
     </div>
-    <header class="goa-header goa-microsite-header">
-      <div class="goa-microsite-logo">
-        <div class="logo">
-          <a href="/" aria-label="My microsite label" class='microsite-link'>
-              <span class="image-desktop-tablet"></span>
-              <span class="image-mobile"></span>
-          </a>
-        </div>
-      </div>
-    </header>
-    <div class="goa-banner">
-      <h1>My page title</h1>
-      <div class="descriptor">My page descriptor</div>
-    </div>
-    <main class="goa-content-section">
-      <section >       
-        <h2>Overview</h2>
-        <p>Basic content template for a microservice page.  Contains headers, banner, content, content sections, and footer.</p>
-        <p>Responsive breakpoints change margins and layout.</p>  
-      </section>
-      <section>
-        <h2>Some content</h2>
-        Put some additional content in this section.
-      </section>
-    </main>
-    <footer class="goa-footer">
-      <a class="link" href="https://alberta.ca">Go to Alberta.ca</a>
-      <span class="copyright">© 2020 Government of Alberta</span>
-    </footer>
+  </div>
+</header>
+<div class="goa-banner">
+  <h1>My page title</h1>
+  <div class="descriptor">My page descriptor</div>
+</div>
+<main class="goa-content-section">
+  <section>
+    <h2>Overview</h2>
+    <p>
+      Basic content template for a microservice page. Contains headers, banner,
+      content, content sections, and footer.
+    </p>
+    <p>Responsive breakpoints change margins and layout.</p>
+  </section>
+  <section>
+    <h2>Some content</h2>
+    Put some additional content in this section.
+  </section>
+</main>
+<footer class="goa-footer">
+  <a class="link" href="https://alberta.ca">Go to Alberta.ca</a>
+  <span class="copyright">© 2020 Government of Alberta</span>
+</footer>
 ```
 
 ## CSS
 
 ```css
 @import '~@abgov/goa-core.css';
-@import '~@abgov/core-css/scss/src/lib/page-template/page-template.scss';
+@import '~@abgov/core-css/src/lib/styles/mixin/page-template.scss';
 
 @include page-template;
 ```

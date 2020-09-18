@@ -1,11 +1,11 @@
-@import '../../../../shared/styles/src/lib/mixin/svg/chevron.scss';
-@import '../../../../shared/styles/src/lib/dropdown/dropdown.scss';
+@import '../../../../core-css/src/lib/styles/mixin/svg/chevron.scss';
+@import '../../../../core-css/src/lib/styles/dropdown/dropdown.scss';
 
 //dropdown is positioned on body, so selector must be global
 .dropdown-menu {
-    @include dropdown-menu-styles();
+  @include dropdown-menu-styles();
 }
 
 .goa-dropdown {
-    @include dropdown-styles();
+  @include dropdown-styles();
 }

@@ -29,24 +29,18 @@
   },
   "projects": {
     "core-css": {
-      "tags": [],
-      "implicitDependencies": ["shared-styles"]
+      "tags": []
     },
     "angular-components": {
-      "tags": [],
-      "implicitDependencies": ["shared-styles"]
+      "tags": []
     },
     "shared-storybook-common": {
       "tags": []
     },
     "vue-components": {
-      "tags": [],
-      "implicitDependencies": ["shared-styles"]
-    },
-    "shared-common": {
       "tags": []
     },
-    "shared-styles": {
+    "shared-common": {
       "tags": []
     },
     "angular-material-components": {

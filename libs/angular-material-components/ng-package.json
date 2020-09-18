@@ -3,5 +3,6 @@
   "dest": "../../dist/libs/angular-material-components",
   "lib": {
     "entryFile": "src/index.ts"
-  }
+  },
+  "assets": ["src/lib/**/*.scss"]
 }
