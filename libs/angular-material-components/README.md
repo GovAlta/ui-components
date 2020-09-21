@@ -19,5 +19,5 @@ Import the following file into your global sass file (default is style.scss)
 
 @import '~@abgov/angular-material-components/src/lib/theme.scss';
 
-Additional sass files can be found under ~@abgov/angular-material-components/src/lib/styles
+Additional sass files can be found under node_modules/@abgov/angular-material-components/src/lib/styles
 ```
