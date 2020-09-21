@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 /**
  * Callout component to describe important changes or facts.
  */
@@ -9,8 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./callout.component.scss']
 })
 export class GoACalloutComponent implements OnInit {
-   /**
-   * The type of callout 
+  /**
+   * The type of the callout, changes stylings and icons.
    */
   @Input() type: 'important' | 'information' | 'event' | 'emergency' = 'information';
 

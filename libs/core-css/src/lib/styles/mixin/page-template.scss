@@ -100,6 +100,8 @@
       padding-bottom: 56px;
       @include page-padding($page-margin, $tablet-page-margin, $mobile-page-margin);
     
+      border-bottom: 16px solid $primary;
+
       display: flex;
       flex-direction: row; 
       flex-wrap: wrap;
