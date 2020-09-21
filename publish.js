@@ -6,7 +6,7 @@ const { exec } = require('child_process');
 if (fs.existsSync(path)) {
   console.log(`Dependency: ${dependency}`);
   const depScript = dependency
-    ? `npm config set package-lock false && npm i ${dependency} && `
+    ? `npm i ${dependency} && rm -f package-lock.json &&`
     : '';
   const script = `${depScript} npm-deploy-git-tag --token ${process.env.NPM_TOKEN} --access public --tag next`;
   console.log(`Executing: ${script}`);
