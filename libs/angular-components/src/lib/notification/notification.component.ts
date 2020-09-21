@@ -37,7 +37,7 @@ export class GoANotificationComponent implements OnInit {
   @Input() isDismissable = true;
 
    /**
-   * Event emitted containing the source checkbox, and whether or not it is checked.
+   * Event emitted when the notification has been dismissed by the user.
    */
   @Output() onDismiss: EventEmitter<any> = new EventEmitter<any>();
 
