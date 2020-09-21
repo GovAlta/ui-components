@@ -1,12 +1,12 @@
 const fs = require('fs'); // Or `import fs from "fs";` with ESM
 const { argv } = require('yargs');
-const path = argv.path;
-const dep = argv.dep; //support for single dependency for now
+const { path, dependency } = argv; //support for single dependency for now
 const { exec } = require('child_process');
 
 if (fs.existsSync(path)) {
-  const { exec } = require('child_process');
-  const depScript = dep ? 'npm i @abgov/core-css && ' : '';
+  console.log(`args: ${JSON.stringify(argv)}`);
+  console.log(`Dependency: ${dependency}`);
+  const depScript = dependency ? `npm i ${dependency} && ` : '';
   const script = `${depScript} npm-deploy-git-tag --token ${process.env.NPM_TOKEN} --access public --tag next`;
   console.log(`Executing: ${script}`);
   exec(script, { cwd: path }, (error, stdout, stderr) => {
