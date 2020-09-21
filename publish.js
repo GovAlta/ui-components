@@ -4,9 +4,10 @@ const { path, dependency } = argv; //support for single dependency for now
 const { exec } = require('child_process');
 
 if (fs.existsSync(path)) {
-  console.log(`args: ${JSON.stringify(argv)}`);
   console.log(`Dependency: ${dependency}`);
-  const depScript = dependency ? `npm i ${dependency} && ` : '';
+  const depScript = dependency
+    ? `npm config set package-lock false && npm i ${dependency} && `
+    : '';
   const script = `${depScript} npm-deploy-git-tag --token ${process.env.NPM_TOKEN} --access public --tag next`;
   console.log(`Executing: ${script}`);
   exec(script, { cwd: path }, (error, stdout, stderr) => {
