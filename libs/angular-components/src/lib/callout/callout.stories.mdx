@@ -9,7 +9,6 @@ import { moduleMetadata } from '@storybook/angular';
   argTypes={{ 
       type: { 
         control: 'select', 
-        options: ['information', 'event', 'important', 'emergency'],
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
            defaultValue: { summary: 'information' },
         }  

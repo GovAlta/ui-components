@@ -12,6 +12,8 @@ import { GoADropdownComponent } from './dropdown/dropdown.component';
 import { GoACheckboxComponent } from './checkbox/checkbox.component';
 import { FormsModule } from '@angular/forms';
 import { GoACalloutComponent } from './callout/callout.component';
+import { GoANotificationComponent } from './notification/notification.component';
+import { GoANotificationBannerComponent } from './notification-banner/notification-banner.component';
 
 @NgModule({
   imports: [
@@ -28,7 +30,9 @@ import { GoACalloutComponent } from './callout/callout.component';
     GoADropdownComponent,
     GoAOptionGroupComponent,
     GoACheckboxComponent,
-    GoACalloutComponent
+    GoACalloutComponent,
+    GoANotificationComponent,
+    GoANotificationBannerComponent
   ],
   declarations: [
     GoAButtonComponent,
@@ -39,7 +43,9 @@ import { GoACalloutComponent } from './callout/callout.component';
     GoADropdownComponent,
     GoAOptionGroupComponent,
     GoACheckboxComponent,
-    GoACalloutComponent
+    GoACalloutComponent,
+    GoANotificationComponent,
+    GoANotificationBannerComponent
   ],
   bootstrap: [CommonModule]
 })

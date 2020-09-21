@@ -9,3 +9,5 @@ export * from './lib/dropdown/option-group/option-group.component';
 export * from './lib/checkbox/checkbox.component';
 export * from './lib/checkbox/checkbox-change';
 export * from './lib/callout/callout.component';
+export * from './lib/notification/notification.component';
+export * from './lib/notification-banner/notification-banner.component';

@@ -6,6 +6,7 @@ import { CalloutSampleComponent } from './callout/callout.component';
 import { CheckboxSampleComponent } from './checkbox/checkbox.component';
 import { DropdownSampleComponent } from './dropdown/dropdown.component';
 import { MicrositeLogoSampleComponent } from './microsite-logo/microsite-logo.component';
+import { NotificationBannerSampleComponent } from './notification/notification.component';
 import { HeaderSampleComponent } from './header/header.component';
 
 // Import the module from the package.
@@ -18,6 +19,7 @@ import { AngularComponentsModule} from '@abgov/angular-components'
     CheckboxSampleComponent,
     DropdownSampleComponent,
     MicrositeLogoSampleComponent,
+    NotificationBannerSampleComponent,
     HeaderSampleComponent
   ],
   imports: [

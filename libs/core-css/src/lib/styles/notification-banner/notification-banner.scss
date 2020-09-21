@@ -1,0 +1,29 @@
+.goa-notifications {
+    
+   .title {
+        position: absolute;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px);
+        left: -10px;
+        width: 1px;
+        height: 1px;
+        white-space: nowrap;
+   }
+
+   ul {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        li {
+            box-sizing: border-box;
+            display: block;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    }
+}
