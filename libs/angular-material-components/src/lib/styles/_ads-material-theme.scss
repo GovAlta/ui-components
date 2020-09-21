@@ -2,8 +2,8 @@
 @use 'ads-core';
 @use "ads-material";
 @use '../../../../core-css/src/lib/styles/mixin/colors.scss';
-
 @import '~@angular/material/theming';
+
 // Plus imports for other components in your app.
 
 @mixin ads-material-theme() {
@@ -20,6 +20,65 @@
 
   // Override the typography in the core CSS.
   @include mat-core(ads-material.$ads-mat-typography-config);
+
+  //As angular material already pre-defines styles, we only need to override targeted attributes.
+  //Using goa base classes would risk overriding angular material styles.
+  .ads-disabled {
+    border: none;
+    background-color: colors.$goa-white-two;
+    color: colors.$goa-black-two !important;
+    &:hover,
+    &:focus,
+    &:active {
+      color: colors.$goa-black-two;
+    }
+    &:focus,
+    &:active {
+      color: colors.$goa-black-two;
+      outline: none;
+    }
+  }
+
+  .ads-primary {
+    border: 2px solid;
+    border-color: colors.$primary;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: colors.$goa-black;
+      border-color: colors.$goa-black;
+    }
+    &:focus,
+    &:active {
+      @extend .outline;
+    }
+    &[disabled] {
+      @extend .ads-disabled;
+    }
+  }
+
+  .ads-secondary {
+    color: colors.$primary;
+    border: 2px solid colors.$primary;
+    &:hover,
+    &:focus,
+    &:active {
+      color: colors.$goa-black;
+      border-color: colors.$goa-black;
+    }
+    &:focus,
+    &:active {
+      @extend .outline;
+    }
+    &[disabled] {
+      @extend .ads-disabled;
+    }
+  }
+
+  .ads-tertiary {
+    border: 1px solid colors.$goa-white-three;
+    @extend .ads-secondary;
+  }
 
   //cludge the margin on form fields that don't have hints
   .mat-form-field {
@@ -65,9 +124,14 @@
   .mat-flat-button,
   .mat-fab,
   .mat-stroked-button {
-    @extend .ads-tertiary;
+    &.mat-button-base {
+      @extend .ads-tertiary;
+    }
     &.mat-primary {
       @extend .ads-primary;
+      &.mat-button-base {
+        color: colors.$goa-white;
+      }
     }
     &.mat-secondary {
       @extend .ads-secondary;
