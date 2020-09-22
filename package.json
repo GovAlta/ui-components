@@ -64,8 +64,10 @@
     "@angular/material": "^10.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "read-pkg": "^5.2.0",
     "tslib": "^2.0.0",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "write-pkg": "^4.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1000.6",
