@@ -32,19 +32,22 @@
       "tags": []
     },
     "angular-components": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["core-css"]
     },
     "shared-storybook-common": {
       "tags": []
     },
     "vue-components": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["core-css"]
     },
     "shared-common": {
       "tags": []
     },
     "angular-material-components": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["core-css"]
     }
   }
 }
