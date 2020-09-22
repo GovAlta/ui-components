@@ -8,7 +8,7 @@ const { execSync } = require('child_process');
 
 if (fs.existsSync(path)) {
   if (dependency) {
-    const version = execSync(`npm view ${dependency} version`);
+    const version = execSync(`npm view ${dependency}@next version`);
     console.log(
       `Adding dependency: ${dependency}, Version ${version} to ${path}`
     );
