@@ -4,6 +4,7 @@ This library contains core angular material components from the Government of Al
 
 ## Installation
 
+> npm install @abgov/core-css
 > npm install @abgov/angular-material-components
 
 ## Documentation
