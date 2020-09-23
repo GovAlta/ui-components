@@ -1,4 +1,4 @@
-@import '../mixin/colors.scss';
+@import '../variables/colors.scss';
 @import '../mixin/page-margins.scss';
 
 @import '../mixin/svg/calendar.scss';
@@ -7,107 +7,107 @@
 @import '../mixin/svg/information.scss';
 
 .goa-notification {
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+
+  &.dismissed {
+    display: none;
+  }
+
+  @include page-padding;
+
+  color: $goa-text-color-inverse;
+  background: $primary;
+
+  .content {
     box-sizing: border-box;
-    display: inline-block;
-    position: relative;
+    display: flex;
     width: 100%;
+    margin: 0;
+    position: relative;
 
-    &.dismissed {
-        display: none;
+    padding: 0 36px;
+
+    .message {
+      flex: 1 0 0;
+
+      box-sizing: border-box;
+      min-height: 56px;
+      padding: 28px 0;
     }
 
-    @include page-padding;
+    .close {
+      flex: 0 1 auto;
+    }
+  }
 
+  a {
     color: $goa-text-color-inverse;
-    background: $primary;
 
-    .content {
-        box-sizing: border-box;
-        display: flex;
-        width: 100%;
-        margin: 0;
-        position: relative;
-
-        padding: 0 36px;    
-        
-        .message {
-            flex: 1 0 0;
-
-            box-sizing: border-box;
-            min-height: 56px;
-            padding: 28px 0;
-        }
-
-        .close {
-            flex: 0 1 auto;
-        }
+    &:hover,
+    &:focus {
+      color: $goa-text-color-inverse;
+      text-decoration: none;
     }
+  }
+
+  /* variants ***/
+  &.goa--event {
+    background-color: #00853f;
+  }
+
+  &.goa--important {
+    background-color: #feba35;
 
     a {
-        color: $goa-text-color-inverse;
+      color: $goa-text-color;
 
-        &:hover,
-        &:focus {
-            color: $goa-text-color-inverse;
-            text-decoration: none;
-        }
+      &:hover,
+      &:focus {
+        color: $goa-text-color;
+      }
     }
+  }
 
-    /* variants ***/
-    &.goa--event {
-        background-color: #00853f;
+  &.goa--emergency {
+    background-color: $goa-error-color;
+  }
+
+  & .close {
+    align-self: center;
+    position: absolute;
+    right: 12px;
+
+    cursor: pointer;
+
+    svg {
+      fill: currentColor;
     }
+  }
 
-    &.goa--important {
-        background-color: #feba35;
+  & .content:before {
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    width: 24px;
+    height: 24px;
+    margin-top: -12px;
+    content: '';
 
-        a {
-            color: $goa-text-color;
+    @include information;
+  }
 
-            &:hover,
-            &:focus {
-                color: $goa-text-color;
-            }
-        }
-    }
+  &.goa--emergency .content:before {
+    @include error;
+  }
 
-    &.goa--emergency {
-        background-color: $goa-error-color;
-    }
+  &.goa--important .content:before {
+    @include warning;
+  }
 
-    & .close {
-        align-self: center;
-        position: absolute;
-        right: 12px;
-
-        cursor: pointer;
-        
-        svg {
-            fill: currentColor;
-        }
-    }
-
-    & .content:before {
-        position: absolute;
-        top: 50%;
-        left: 6px;
-        width: 24px;
-        height: 24px;
-        margin-top: -12px;
-        content: '';
-
-        @include information;
-    }
-
-    &.goa--emergency .content:before {
-        @include error;
-    }
-
-    &.goa--important .content:before {
-        @include warning;
-    }
-
-    &.goa--event .content:before {
-        @include calendar;
-    }
+  &.goa--event .content:before {
+    @include calendar;
+  }
 }

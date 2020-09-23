@@ -1,35 +1,35 @@
-@import '../mixin/colors.scss';
+@import '../variables/colors.scss';
 
 @import 'button.scss';
 @import '../mixin/svg/box-arrow.scss';
 @import '../mixin/svg/right-arrow.scss';
 
 @mixin goa-button-link-styles {
-    &.goa-link-button {
-        display: inline-block;
-        text-decoration: none;
- 
-        @include goa-button-styles();
+  &.goa-link-button {
+    display: inline-block;
+    text-decoration: none;
 
-        &.right-arrow::after {
-            margin-left: 8px;
-            content: '\2192';
+    @include goa-button-styles();
 
-        }
-
-        &.up-arrow::after {
-            margin-left: 8px;
-            content: '\2191';
-        }
-
-        &:visited, &:link {
-            color: $goa-text-color-inverse;
-        }
+    &.right-arrow::after {
+      margin-left: 8px;
+      content: '\2192';
     }
+
+    &.up-arrow::after {
+      margin-left: 8px;
+      content: '\2191';
+    }
+
+    &:visited,
+    &:link {
+      color: $goa-text-color-inverse;
+    }
+  }
 }
 
 @mixin goa-button-link {
-    a {
-        @include goa-button-link-styles();
-    }
+  a {
+    @include goa-button-link-styles();
+  }
 }
