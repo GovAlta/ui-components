@@ -81,6 +81,14 @@ $ads-mat-theme: mat-light-theme(
   $ads-warn-mat-palette
 );
 
+button {
+  box-shadow: none !important;
+}
+
+.outline {
+  outline: 3px solid colors.$primary-focused;
+}
+
 //As angular material already pre-defines styles, we only need to override targeted attributes.
 //Using goa base classes would risk overriding angular material styles.
 .ads-disabled {
@@ -187,13 +195,11 @@ $ads-mat-theme: mat-light-theme(
   &.mat-button-base {
     @extend .ads-tertiary;
   }
-  &.mat-primary {
+  &.mat-primary.mat-button-base {
     @extend .ads-primary;
-    &.mat-button-base {
-      color: colors.$goa-white;
-    }
+    color: colors.$goa-white;
   }
-  &.mat-secondary {
+  &.mat-secondary.mat-button-base {
     @extend .ads-secondary;
   }
 }
