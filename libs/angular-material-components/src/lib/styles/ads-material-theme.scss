@@ -1,0 +1,199 @@
+@use '../../../../core-css/src/lib/styles/variables/colors.scss';
+@use 'ads-core';
+@import '~@angular/material/theming';
+
+$ads-primary-palette: (
+  50: #e0eef8,
+  100: #b3d4ed,
+  200: #80b8e2,
+  300: #4d9bd6,
+  400: #2685cd,
+  500: colors.$primary,
+  600: #0068be,
+  700: #005db6,
+  800: #0053af,
+  900: #0041a2,
+  A100: #ccddff,
+  A200: #99baff,
+  A400: #6698ff,
+  A700: #4d87ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: colors.$goa-white,
+    500: colors.$goa-white,
+    600: colors.$goa-white,
+    700: colors.$goa-white,
+    800: colors.$goa-white,
+    900: colors.$goa-white,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$ads-accent-palette: (
+  50: #e0efe7,
+  100: #b3d6c3,
+  200: #80bb9c,
+  300: #4da074,
+  400: #268b56,
+  500: #007738,
+  600: #006f32,
+  700: #00642b,
+  800: #005a24,
+  900: #004717,
+  A100: #7bff98,
+  A200: #48ff70,
+  A400: #15ff48,
+  A700: #00fb37,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: colors.$goa-white,
+    500: colors.$goa-white,
+    600: colors.$goa-white,
+    700: colors.$goa-white,
+    800: colors.$goa-white,
+    900: colors.$goa-white,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$ads-warn-palette: $mat-red;
+
+$ads-primary-mat-palette: mat-palette($ads-primary-palette);
+$ads-accent-mat-palette: mat-palette($ads-accent-palette);
+$ads-warn-mat-palette: mat-palette($ads-warn-palette);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$ads-mat-theme: mat-light-theme(
+  $ads-primary-mat-palette,
+  $ads-accent-mat-palette,
+  $ads-warn-mat-palette
+);
+
+//As angular material already pre-defines styles, we only need to override targeted attributes.
+//Using goa base classes would risk overriding angular material styles.
+.ads-disabled {
+  border: none;
+  background-color: colors.$goa-white-two;
+  color: colors.$goa-black-two !important;
+  &:hover,
+  &:focus,
+  &:active {
+    color: colors.$goa-black-two;
+  }
+  &:focus,
+  &:active {
+    color: colors.$goa-black-two;
+    outline: none;
+  }
+}
+
+.ads-primary {
+  border: 2px solid;
+  border-color: colors.$primary;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: colors.$goa-black;
+    border-color: colors.$goa-black;
+  }
+  &:focus,
+  &:active {
+    @extend .outline;
+  }
+  &[disabled] {
+    @extend .ads-disabled;
+  }
+}
+
+.ads-secondary {
+  color: colors.$primary;
+  border: 2px solid colors.$primary;
+  &:hover,
+  &:focus,
+  &:active {
+    color: colors.$goa-black;
+    border-color: colors.$goa-black;
+  }
+  &:focus,
+  &:active {
+    @extend .outline;
+  }
+  &[disabled] {
+    @extend .ads-disabled;
+  }
+}
+
+.ads-tertiary {
+  border: 1px solid colors.$goa-white-three;
+  @extend .ads-secondary;
+}
+
+//cludge the margin on form fields that don't have hints
+.mat-form-field {
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  &.no-hint-fix .mat-form-field-subscript-wrapper {
+    display: none;
+  }
+}
+
+.mat-form-field-subscript-wrapper {
+  position: relative !important;
+}
+
+.mat-radio-group {
+  margin: (ads-core.$half-unit) 0;
+
+  &.verticle-radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .mat-radio-button {
+    margin: 0 0 (ads-core.$quarter-unit) 0;
+  }
+
+  &.error .mat-radio-button {
+    .mat-radio-outer-circle {
+      border-color: colors.$status-error;
+    }
+  }
+}
+
+.mat-tab-label-active {
+  color: black;
+  font-weight: bold;
+}
+
+.mat-button,
+.mat-raised-button,
+.mat-flat-button,
+.mat-fab,
+.mat-stroked-button {
+  &.mat-button-base {
+    @extend .ads-tertiary;
+  }
+  &.mat-primary {
+    @extend .ads-primary;
+    &.mat-button-base {
+      color: colors.$goa-white;
+    }
+  }
+  &.mat-secondary {
+    @extend .ads-secondary;
+  }
+}

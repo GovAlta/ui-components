@@ -1,0 +1,42 @@
+@use '../../../../core-css/src/lib/styles/variables/colors.scss';
+@use '../../../../core-css/src/lib/styles/fonts/fonts.scss';
+
+//TODO: condense with goa-core.scss
+
+$unit: 24px;
+$half-unit: 0.5 * $unit;
+$quarter-unit: 0.25 * $unit;
+$double-unit: 2 * $unit;
+
+body {
+  margin: 0;
+}
+
+h2 {
+  margin-bottom: $unit !important;
+}
+
+h3 {
+  margin-top: $unit !important;
+}
+
+ul,
+ol {
+  padding-left: $unit;
+}
+
+li {
+  margin: (0.5 * $unit) 0;
+}
+
+a {
+  color: colors.$primary;
+}
+
+button {
+  box-shadow: none !important;
+}
+
+.outline {
+  outline: 3px solid colors.$primary-focused;
+}
