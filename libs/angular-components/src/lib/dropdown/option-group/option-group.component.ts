@@ -3,6 +3,7 @@ import { GoAOptionComponent } from '../option/option.component';
 
 /**
  * Option grouping component with to use with GoADropdown.
+ * selector: goa-option-group
  */
 @Component({
   selector: 'goa-option-group',

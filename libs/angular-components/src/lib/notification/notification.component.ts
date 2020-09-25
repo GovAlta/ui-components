@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } fro
 /**
  * Government of Alberta styled notification, comes in 4 variants: emergency, event, information, important.
  * Can set the message and optionally a link url.
+ * selector: goa-notification
  */
 @Component({
   selector: 'goa-notification',

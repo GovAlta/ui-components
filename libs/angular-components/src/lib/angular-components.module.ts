@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { GoACalloutComponent } from './callout/callout.component';
 import { GoANotificationComponent } from './notification/notification.component';
 import { GoANotificationBannerComponent } from './notification-banner/notification-banner.component';
+import { GoACardComponent, GoACardHeaderComponent, GoACardFooterComponent, GoACardContentComponent, GoACardThumbImageComponent } from './card/card.component';
+
 
 @NgModule({
   imports: [
@@ -32,7 +34,12 @@ import { GoANotificationBannerComponent } from './notification-banner/notificati
     GoACheckboxComponent,
     GoACalloutComponent,
     GoANotificationComponent,
-    GoANotificationBannerComponent
+    GoANotificationBannerComponent,
+    GoACardComponent,
+    GoACardHeaderComponent,
+    GoACardFooterComponent,
+    GoACardContentComponent,
+    GoACardThumbImageComponent
   ],
   declarations: [
     GoAButtonComponent,
@@ -45,7 +52,12 @@ import { GoANotificationBannerComponent } from './notification-banner/notificati
     GoACheckboxComponent,
     GoACalloutComponent,
     GoANotificationComponent,
-    GoANotificationBannerComponent
+    GoANotificationBannerComponent,
+    GoACardComponent,
+    GoACardHeaderComponent,
+    GoACardFooterComponent,
+    GoACardContentComponent,
+    GoACardThumbImageComponent
   ],
   bootstrap: [CommonModule]
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 /**
  * Callout component to describe important changes or facts.
+ * selector: goa-callout
  */
 @Component({
   selector: 'goa-callout',

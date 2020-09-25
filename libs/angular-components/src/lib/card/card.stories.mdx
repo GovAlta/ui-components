@@ -1,0 +1,151 @@
+import { DoDont } from '@abgov/shared/storybook-common';
+import { GoACardComponent, GoACardFooterComponent, GoACardHeaderComponent, GoACardThumbImageComponent, GoACardContentComponent } from './card.component';
+
+import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
+import { moduleMetadata } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
+
+<Meta title="Component Library/Components/Card/Templatable"
+  component={GoACardComponent}
+   argTypes={{ 
+      content: {
+          description: 'Content inside of the goa-card-content component.',
+          control: 'text'
+      }, 
+      headerContent: {
+          description: 'Content inside of the goa-card-header component.',
+          control: 'text'
+      }, 
+      cardSize: { 
+        control: 'select',
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+           defaultValue: { summary: 'full' },
+        }  
+      }
+   }}
+  decorators={[
+        moduleMetadata({ declarations: [GoACardComponent, GoACardFooterComponent, GoACardHeaderComponent, GoACardThumbImageComponent, GoACardContentComponent] }),
+    ]
+} />
+
+# Cards
+### Without Thumb
+<Canvas>
+  <Story name="Without Thumb" height={400}
+    args={{
+        cardSize: 'full',
+        headerContent: 'My card header.',
+        content: 'My card content.',
+    }}>
+    {(args) => {
+      return {
+        template: `<goa-card [cardSize]="cardSize">
+                        <goa-card-header>{{headerContent}}</goa-card-header>
+                        <goa-card-content>{{content}}</goa-card-content>
+                    </goa-card>`,
+        props: args
+      }
+    }}
+  </Story>
+</Canvas>
+
+### With Thumb
+<Canvas>
+  <Story name="With Thumb" height={400}
+    args={{
+        cardSize: 'full',
+        headerContent: 'My card header.',
+        content: 'My card content.',
+    }}>
+    {(args) => {
+      return {
+        template: `<goa-card [cardSize]="cardSize">
+                        <goa-card-thumb-image url="/working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
+                        <goa-card-header>{{headerContent}}</goa-card-header>
+                        <goa-card-content>{{content}}</goa-card-content>
+                    </goa-card>`,
+        props: args
+      }
+    }}
+  </Story>
+</Canvas>
+
+## Overview
+A featured, card-shaped link that consists of an image or video, title and lead.
+
+Cards are similar to callouts, where they present information at a higher level of 
+importance. Cards are often used to facilitate navigation, highlight a feature, or 
+promote a call to action.
+
+## Examples
+### With Image Thumb
+```
+<goa-card>
+    <goa-card-thumb-image url="test" alt="Alt"></goa-card-thumb-image>
+    <goa-card-header>Header</goa-card-header>
+    <goa-card-content>Content</goa-card-content>
+</goa-card>>
+```
+### Without Thumb
+```
+<goa-card>
+    <goa-card-header>Header</goa-card-header>
+    <goa-card-content>Content</goa-card-content>
+</goa-card>>
+```
+
+### Sized half-width
+```
+<goa-card cardSize="half">
+    <goa-card-thumb-image url="test" alt="Alt"></goa-card-thumb-image>
+    <goa-card-header>Header</goa-card-header>
+    <goa-card-content>Content</goa-card-content>
+</goa-card>>
+```
+
+## Properties
+### GoACardComponent 
+
+<Description of={GoACardComponent} />
+
+### GoACardThumbImageComponent
+
+<Description of={GoACardThumbImageComponent} />
+<ArgsTable of={GoACardThumbImageComponent} />
+
+### GoACardHeaderComponent
+
+<Description of={GoACardHeaderComponent} />
+
+### GoACardContentComponent
+
+<Description of={GoACardContentComponent} />
+
+
+## Usage guidelines
+### Card elements
+A card may contain at the very minimum a header and a lede enclosed within a container. 
+A card may also have an image and an icon.
+
+<DoDont
+  dos={'Use cards when highlighting a small piece of content.'}
+  donts={'Use other elements in a card, such as buttons or callouts.'}
+/>
+
+### Card arrangement
+When using all the possible elements in a card, the order is as follows: image, header, text, and icon. The icon is usually a navigation element such as a download icon or external link icon. The card layout may be from top to bottom or from left to right. In addition, in a container row, there can be up to three cards.
+
+<DoDont
+  dos={'Use icons if it is helpful to the user.'}
+  donts={'Repeat any card element within the same card.'}
+/>
+
+### Image ratio
+Images used must conform to a 16:9 image aspect ratio.
+
+<DoDont
+  dos={'Optimize photographs for mobile, tablet, and desktop.'}
+  donts={'Use any other image aspect ratio other than 16:9.'}
+/>
+
+

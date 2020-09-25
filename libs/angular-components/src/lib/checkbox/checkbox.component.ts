@@ -10,6 +10,7 @@ export const GOA_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
 
 /**
  * Checkbox component with Government of Alberta styling.
+ * selector: goa-checkbox
  */
 @Component({
   selector: 'goa-checkbox',

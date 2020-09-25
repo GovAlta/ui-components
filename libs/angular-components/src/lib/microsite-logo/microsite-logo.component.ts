@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 /**
  * A logo for a Government of Alberta hosted microsite.
+ * selector: goa-microsite-logo
  */
 @Component({
     selector: 'goa-microsite-logo',

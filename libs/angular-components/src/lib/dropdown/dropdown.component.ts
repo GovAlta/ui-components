@@ -8,6 +8,7 @@ import '@angular/cdk/overlay-prebuilt.css';
 
 /**
  * A dropdown component with Government of Alberta styling.
+ * selector: goa-dropdown
  */
 @Component({
   selector: 'goa-dropdown',

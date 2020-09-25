@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 /**
  * A header component for a Government of Alberta hosted microsite.
+ * selector: goa-header
  */
 @Component({
     selector: 'goa-header',

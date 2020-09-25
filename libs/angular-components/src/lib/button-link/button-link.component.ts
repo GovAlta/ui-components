@@ -2,6 +2,7 @@ import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 /**
  * Styles an anchor Design system compliant.
+ * selector: a[goa-button]
  * @example <a goa-button linkType='right' href='...'>Text</a>
  */
 @Component({
