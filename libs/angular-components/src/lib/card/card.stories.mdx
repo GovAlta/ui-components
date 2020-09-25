@@ -5,7 +5,7 @@ import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-do
 import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 
-<Meta title="Component Library/Components/Card/Templatable"
+<Meta title="Component Library/Components/Card"
   component={GoACardComponent}
    argTypes={{ 
       content: {
@@ -60,7 +60,7 @@ import { action } from '@storybook/addon-actions';
     {(args) => {
       return {
         template: `<goa-card [cardSize]="cardSize">
-                        <goa-card-thumb-image url="/working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
+                        <goa-card-thumb-image url="working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
                         <goa-card-header>{{headerContent}}</goa-card-header>
                         <goa-card-content>{{content}}</goa-card-content>
                     </goa-card>`,
