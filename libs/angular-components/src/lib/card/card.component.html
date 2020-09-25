@@ -1,0 +1,23 @@
+<div class="goa-card"
+    [ngClass]="{
+        'goa--secondary': cardSize === 'half',
+        'goa--tertiary': cardSize === 'third',
+        'card-auto': cardSize === 'auto'
+    }">
+    <ul>
+      <li>
+            <div class="goa-thumb">
+                <ng-content select="goa-card-thumb-image"></ng-content>
+            </div>
+            <div class="goa-title">
+                <ng-content select="goa-card-header"></ng-content>
+            </div>
+            <div class="goa-text">
+                <ng-content select="goa-card-content"></ng-content>
+            </div>
+            <!--div class="goa-footer">
+                <ng-content select="goa-card-footer"></ng-content>
+            </div-->
+        </li>
+    </ul>
+</div>

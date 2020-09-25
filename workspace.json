@@ -127,6 +127,7 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "port": 4400,
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/angular-components/.storybook"
             }
@@ -142,6 +143,7 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/angular-components",
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/angular-components/.storybook"
             }

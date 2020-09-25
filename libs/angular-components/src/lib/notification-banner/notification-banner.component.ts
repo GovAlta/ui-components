@@ -3,6 +3,7 @@ import { GoANotificationComponent } from '../notification/notification.component
 
 /**
  * Government of Alberta styled notification banner.  Contains one or more notifications.
+ * selector: goa-notification-banner
  */
 @Component({
   selector: 'goa-notification-banner',

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 /**
  * A Government of Alberta styled button.
+ * selector: button[goa-button], input[type="button"][goa-button], input[type="submit"][goa-button]
  */
 @Component({
   selector:

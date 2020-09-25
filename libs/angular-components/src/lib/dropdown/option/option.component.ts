@@ -2,6 +2,7 @@ import { Component, OnInit, Input, TemplateRef, ViewChild, ChangeDetectionStrate
 
 /**
  * Option component with to use with GoADropdown.
+ * selector: goa-option
  */
 @Component({
   selector: 'goa-option',

@@ -11,3 +11,4 @@ export * from './lib/checkbox/checkbox-change';
 export * from './lib/callout/callout.component';
 export * from './lib/notification/notification.component';
 export * from './lib/notification-banner/notification-banner.component';
+export * from './lib/card/card.component';
