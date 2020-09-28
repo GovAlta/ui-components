@@ -125,7 +125,7 @@
         "post": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["node-sass libs/angular-components/src/theme.scss dist/libs/angular-components/theme.css"],
+            "commands": ["npm run build:styles:angular-components"],
             "cwd": "./",
             "parallel": false
           }
