@@ -17,7 +17,7 @@ The steps taken to integrate the library are as follows:
 ````npm add --save @angular/forms````  
 ````npm add --save @angular/localize````
 4. Add styles to global styles  
-````@import '~@angular/cdk/overlay-prebuilt.css';````
+````@import '~@abgov/angular-components/theme.css';````
 5. Add localize to polyfill.js   
 ````import '@angular/localize/init';````
 6. Add ````"preserveSymlinks": true```` to configurations in angular.json.

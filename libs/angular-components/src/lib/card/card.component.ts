@@ -20,7 +20,7 @@ export class GoACardComponent implements OnInit {
   /**
    * What percentage of container width to take.
    */
-  @Input() cardSize: 'third' | 'half' | 'full' | 'auto' = 'full';
+  @Input() cardSize: 'full' | 'auto' = 'full';
 
   constructor() { }
 

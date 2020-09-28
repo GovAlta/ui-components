@@ -5,8 +5,7 @@ import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
 setCompodocJson(docJson);
 
-require('!style-loader!css-loader!sass-loader!../../core-css/src/lib/goa-core.scss');
-require('!style-loader!css-loader!@angular/cdk/overlay-prebuilt.css');
+require('!style-loader!css-loader!sass-loader!../src/theme.scss');
 
 addParameters({
   docs: {

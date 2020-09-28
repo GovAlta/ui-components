@@ -6,5 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  showCheckbox = false;
+  showDropdown = false;
+  showHeader = false;
+  showMicrositeLogo = false;
+  showCallout = false;
+  showNotificationBanner = false;
+  showCard = false;
 }

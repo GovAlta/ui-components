@@ -83,40 +83,6 @@ describe('GoACard', () => {
     expect(card.classList).not.toContain(halfClassName);
     expect(card.classList).not.toContain(autoClassName);
   });
-
-  test('cardSize half should size half', async () => {
-    await render(GoACardComponent, {
-      template: `<goa-card cardSize="half">
-                  <goa-card-thumb-image url="${thumbUrl}" alt="${thumbAlt}"></goa-card-thumb-image>
-                  <goa-card-header>${headerContent}</goa-card-header>
-                  <goa-card-content>${content}</goa-card-content>
-                </goa-card>`,
-      declarations: [GoACardComponent, GoACardHeaderComponent, GoACardContentComponent, GoACardThumbImageComponent]
-    });
-
-    const card = document.getElementsByClassName('goa-card')[0];
-    //cant test actual widths in jsdom
-    expect(card.classList).not.toContain(thirdClassName);
-    expect(card.classList).toContain(halfClassName);
-    expect(card.classList).not.toContain(autoClassName);
-  });
-
-  test('cardSize third should size third', async () => {
-    await render(GoACardComponent, {
-      template: `<goa-card cardSize="third">
-                  <goa-card-thumb-image url="${thumbUrl}" alt="${thumbAlt}"></goa-card-thumb-image>
-                  <goa-card-header>${headerContent}</goa-card-header>
-                  <goa-card-content>${content}</goa-card-content>
-                </goa-card>`,
-      declarations: [GoACardComponent, GoACardHeaderComponent, GoACardContentComponent, GoACardThumbImageComponent]
-    });
-
-    const card = document.getElementsByClassName('goa-card')[0];
-    //cant test actual widths in jsdom
-    expect(card.classList).toContain(thirdClassName);
-    expect(card.classList).not.toContain(halfClassName);
-    expect(card.classList).not.toContain(autoClassName);
-  });
   
   test('cardSize auto should size auto', async () => {
     await render(GoACardComponent, {

@@ -122,6 +122,14 @@
             "passWithNoTests": true
           }
         },
+        "post": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["node-sass libs/angular-components/src/theme.scss dist/libs/angular-components/theme.css"],
+            "cwd": "./",
+            "parallel": false
+          }
+        },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
           "options": {
