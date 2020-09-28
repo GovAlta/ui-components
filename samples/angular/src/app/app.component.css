@@ -1,3 +1,7 @@
-.dropdown {
-    width: 300px;
+.buttons {
+    display: flex;
+}
+
+.components > div {
+    margin-top: 20px;
 }

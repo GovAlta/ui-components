@@ -8,6 +8,7 @@ import { DropdownSampleComponent } from './dropdown/dropdown.component';
 import { MicrositeLogoSampleComponent } from './microsite-logo/microsite-logo.component';
 import { NotificationBannerSampleComponent } from './notification/notification.component';
 import { HeaderSampleComponent } from './header/header.component';
+import { CardSampleComponent } from './card/card.component';
 
 // Import the module from the package.
 import { AngularComponentsModule} from '@abgov/angular-components'
@@ -20,7 +21,8 @@ import { AngularComponentsModule} from '@abgov/angular-components'
     DropdownSampleComponent,
     MicrositeLogoSampleComponent,
     NotificationBannerSampleComponent,
-    HeaderSampleComponent
+    HeaderSampleComponent,
+    CardSampleComponent
   ],
   imports: [
     // Add the module to our imports and we are ready to go!
