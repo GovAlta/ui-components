@@ -43,12 +43,11 @@ $tertiary-focus-color: $tertiary-hover-color;
 $tertiary-focus-background-color: $tertiary-background-color;
 $tertiary-focus-border-color: $tertiary-focus-color;
 $tertiary-focus-outline-color: $active-outline-color;
-
+/* This style is from the alberta design system */
 @mixin goa-button-styles {
   & {
     box-sizing: border-box;
     min-width: 70px;
-    margin: 28px 12px 0 0;
     padding: 12px;
     border: 2px solid $primary-border-color;
     border-radius: 4px;
@@ -59,6 +58,11 @@ $tertiary-focus-outline-color: $active-outline-color;
     font-size: 18px;
     font-weight: 700;
     line-height: 1em;
+
+    &.btn-small {
+      font-size: 16px;
+      padding: 8px;
+    }
 
     &:disabled,
     &:disabled.goa--secondary,
@@ -115,7 +119,7 @@ $tertiary-focus-outline-color: $active-outline-color;
 
       &:focus,
       &:active {
-        border: 1px solid $tertiary-focus-border-color;
+        border: 2px solid $tertiary-focus-border-color;
         color: $tertiary-focus-color;
         background-color: $tertiary-focus-background-color;
         box-shadow: 0 0 0 3px $tertiary-focus-outline-color;
@@ -130,5 +134,11 @@ $tertiary-focus-outline-color: $active-outline-color;
   input[type='button'].goa-button,
   input[type='submit'].goa-button {
     @include goa-button-styles();
+
+    margin: 28px 12px 0 0;
+
+    &.btn-small {
+      margin: 12px 12px 0 0;
+    }
   }
 }

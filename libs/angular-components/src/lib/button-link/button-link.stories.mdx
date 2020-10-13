@@ -15,6 +15,13 @@ import { action } from '@storybook/addon-actions';
            defaultValue: { summary: 'right' },
         } 
       },
+      buttonSize: { 
+        control: 'select', 
+        options: ['small', 'normal'],
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+           defaultValue: { summary: 'normal' },
+        }  
+      },
       content: { control: 'text' } 
     }
   }
@@ -31,6 +38,7 @@ A hierarchy of actions provided by buttons.
   <Story name="Link" height={100} 
   args={{ 
       linkType: 'right', 
+      buttonSize: 'normal',
       content: 'Click Me!' 
     }} 
   parameters={
@@ -43,7 +51,7 @@ A hierarchy of actions provided by buttons.
   }>
     {(args) => {
       return {
-        template: `<a goa-button href="http://alberta.ca" [linkType]='linkType' (click)="click($event)">{{content}}</a>`,
+        template: `<a goa-button href="http://alberta.ca" [buttonSize]='buttonSize' [linkType]='linkType' (click)="click($event)">{{content}}</a>`,
         props: args
       }
     }}
@@ -56,10 +64,14 @@ field box groups such as a search function. They may also be used as call to act
 links.
 
 ## Examples
-```
+### Basic
+```html
 <a goa-button linkType='up'>Next</a>
 ```
-
+### Small
+```html
+<a goa-button buttonSize='small' linkType='up'>Next</a>
+```
 
 ## Properties
 <Description of={GoAButtonLinkComponent} />

@@ -3,7 +3,7 @@
 @import 'button.scss';
 @import '../mixin/svg/box-arrow.scss';
 @import '../mixin/svg/right-arrow.scss';
-
+/* This style is from the alberta design system */
 @mixin goa-button-link-styles {
   &.goa-link-button {
     display: inline-block;

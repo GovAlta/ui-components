@@ -36,9 +36,22 @@ export class GoAButtonLinkComponent implements OnInit {
   }
 
   /**
+   * Adds class btn-small to the host if the buttonSize = small.
+   * @ignore
+   */
+  @HostBinding('class.btn-small') get smallBinding() {
+    return this.buttonSize === 'small';
+  }
+
+  /**
    * The type of arrow to use.
    */
   @Input() linkType: 'up' | 'right' = 'right';
+
+  /**
+   * The size of the button, controls font size and padding.
+   */
+  @Input() buttonSize: 'small' | 'normal' = 'normal';
 
   constructor() { }
   /**
