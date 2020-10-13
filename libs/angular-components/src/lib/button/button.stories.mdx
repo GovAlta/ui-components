@@ -15,6 +15,13 @@ import { action } from '@storybook/addon-actions';
            defaultValue: { summary: 'primary' },
         }  
       },
+      buttonSize: { 
+        control: 'select', 
+        options: ['small', 'normal'],
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+           defaultValue: { summary: 'normal' },
+        }  
+      },
       content: { control: 'text' } 
     }
   }
@@ -31,6 +38,7 @@ A hierarchy of actions provided by buttons.
   <Story name="Variants" height={100} 
     args={{ 
       buttonType: 'primary', 
+      buttonSize: 'normal',
       content: 'Click Me!'
     }} 
     parameters={
@@ -44,7 +52,7 @@ A hierarchy of actions provided by buttons.
     {(args) => {
       args.click = function(event) { action('click')(event) } 
       return {
-        template: `<button goa-button [buttonType]="buttonType" (click)="click($event)">{{content}}</button>`,
+        template: `<button goa-button [buttonSize]="buttonSize" [buttonType]="buttonType" (click)="click($event)">{{content}}</button>`,
         props: args
       }
     }}
@@ -57,8 +65,13 @@ field box groups such as a search function. They may also be used as call to act
 links.
 
 ## Examples
-```
+### Normal
+```html
 <button goa-button buttonType="primary" title="Go to the next page.">Next</button>
+```
+### Small Button
+```html
+<button goa-button buttonSize="small" buttonType="primary" title="Go to the next page.">Next</button>
 ```
 
 

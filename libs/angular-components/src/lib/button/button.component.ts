@@ -36,9 +36,22 @@ export class GoAButtonComponent implements OnInit {
   }
 
   /**
+   * Adds class btn-small to the host if the buttonSize = small.
+   * @ignore
+   */
+  @HostBinding('class.btn-small') get smallBinding() {
+    return this.buttonSize === 'small';
+  }
+
+  /**
    * The appearance style of the button.
    */
   @Input() buttonType: 'primary' | 'secondary' | 'tertiary' = 'primary';
+
+  /**
+   * The size of the button, controls font size and padding.
+   */
+  @Input() buttonSize: 'small' | 'normal' = 'normal';
 
   constructor() {}
 

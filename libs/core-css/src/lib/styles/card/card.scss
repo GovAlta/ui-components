@@ -2,53 +2,57 @@
 
 .goa-card {
     box-sizing: border-box;
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+
+    height: 100%;
     width: 100%;
-    margin: 0;
     vertical-align: top;
 
-    ul {
+    background: $goa-background-color;
+    border: 1px solid $goa-border-color-secondary;
+
+    .card-content {
         box-sizing: border-box;
+        padding: 24px 28px;
+
+        flex: 1 0 0;
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
+        flex-direction: column;
 
-        li {
+        border-top: 8px solid $goa-blue-alberta;
+
+        .goa-text, .goa-footer, .goa-content {
+            margin-top: 28px;
+        }
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        .goa-text {
             box-sizing: border-box;
-            width: 100%;
-            margin: 24px 0 0;
-            background: $goa-background-color;
-            border: 1px solid $goa-border-color-secondary;
+            align-self: stretch;
+            color: $goa-text-color;
+            font-size: 18px;
+            line-height: 28px;
+            
+            flex: 1 0 0;
         }
-    }
     
-    /* size variants ***/
-    &.card-auto {
-        width: auto;
-
-        li {
-            flex-basis: auto;
-            width: auto;
+        .goa-footer {
+            box-sizing: border-box;
+            font-size: 16px;
+            line-height: 28px;    
         }
-    }
-    &.goa--secondary li {
-        flex-basis: 49%;
-    }
-    &.goa--tertiary li {
-        flex-basis: 32%;
-    }
 
-    .goa-title {
-        box-sizing: border-box;
-        padding: 24px 28px 0;
-        font-size: 24px;
-        font-weight: 400;
-        line-height: 32px;
-        /*text-decoration: underline;*/
+        .goa-title {
+            box-sizing: border-box;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 32px;
+            /*text-decoration: underline;*/
+        }
     }
 
     .goa-thumb {
@@ -56,7 +60,6 @@
         display: block;
         padding: 56.25% 0 0;
         overflow: hidden;
-        border-bottom: 8px solid $goa-blue-alberta;
         background: #e5e5e5;
 
         &:empty {
@@ -74,13 +77,14 @@
         }
     }
 
-    .goa-text {
-        box-sizing: border-box;
-        align-self: stretch;
-        padding: 23px 28px;
-        color: $goa-text-color;
-        font-size: 18px;
-        line-height: 28px;
+    /* size variants ***/
+    &.card-auto {
+        width: auto;
+
+        .card {
+            flex-basis: auto;
+            width: auto;
+        }
     }
 
     a {
