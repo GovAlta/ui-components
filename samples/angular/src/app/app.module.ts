@@ -9,6 +9,7 @@ import { MicrositeLogoSampleComponent } from './microsite-logo/microsite-logo.co
 import { NotificationBannerSampleComponent } from './notification/notification.component';
 import { HeaderSampleComponent } from './header/header.component';
 import { CardSampleComponent } from './card/card.component';
+import { RadiosSampleComponent } from './radios/radios.component';
 
 // Import the module from the package.
 import { AngularComponentsModule} from '@abgov/angular-components'
@@ -22,7 +23,8 @@ import { AngularComponentsModule} from '@abgov/angular-components'
     MicrositeLogoSampleComponent,
     NotificationBannerSampleComponent,
     HeaderSampleComponent,
-    CardSampleComponent
+    CardSampleComponent,
+    RadiosSampleComponent,
   ],
   imports: [
     // Add the module to our imports and we are ready to go!
@@ -33,4 +35,3 @@ import { AngularComponentsModule} from '@abgov/angular-components'
   bootstrap: [AppComponent]
 })
 export class AppModule { }
- 

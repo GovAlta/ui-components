@@ -1,0 +1,30 @@
+<div>
+    <h4>Radio</h4>
+    <fieldset style="width: 600px">
+        <legend>Radios grouped with same 'name'</legend>
+
+        <goa-radio name="fruits" [value]="'apple'" (selectionChange)="onRadioSelectionChange($event)">apple</goa-radio>
+        <goa-radio name="fruits" [value]="'orange'" (selectionChange)="onRadioSelectionChange($event)">orange</goa-radio>
+        <goa-radio name="fruits" [value]="'banana'" (selectionChange)="onRadioSelectionChange($event)">banana</goa-radio>
+
+        <div>You selected: {{selectedRadioValue}}</div>
+
+    </fieldset>
+    <fieldset style="width: 600px">
+        <legend>Using a RadioGroup</legend>
+
+        <goa-radio-group
+            name="grouped fruits"
+            title="Which of the following is your favorite fruit?"
+            helperText="It doesnt have to be your absolute favorite, just the one you like best of what is listed"
+            (selectionChange)="onRadioGroupSelectionChange($event)"
+        >
+          <goa-radio [value]="'apple'">apple</goa-radio>
+          <goa-radio [value]="'orange'">orange</goa-radio>
+          <goa-radio [value]="'banana'">banana</goa-radio>
+        </goa-radio-group>
+
+        <div>You selected: {{selectedGroupRadioValue}}</div>
+
+      </fieldset>
+</div>

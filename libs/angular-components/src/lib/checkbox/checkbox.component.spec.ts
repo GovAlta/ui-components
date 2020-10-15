@@ -75,22 +75,11 @@ describe('GoACheckboxComponent', () => {
     expect(container.classList).not.toContain('has-error');
   });
 
-  test('required should NOT display red border on checkbox when checked is true', async () => {
-    await render(GoACheckboxComponent, {
-      template: `<goa-checkbox [checked]="true" [required]="true">${label}</goa-checkbox>`,
-    });
-
-    const container = document.querySelector('.goa-checkbox');
-
-    expect(container).not.toBeNull();
-    expect(container.classList).not.toContain('has-error');
-  });
-
-  // NOTE: THIS IS THE WAY TESTING LIBRARY SAYS TO DO THIS, BUT IT ISNT WORKING FOR SOME REASON
   test('should emit selectionChange when clicked', async () => {
     const selectionChange = jest.fn(x => x);
 
-    const component = await render(GoACheckboxComponent, {
+    await render(GoACheckboxComponent, {
+      // NOTE: I dont know why this only works when template is not specified
       //template: `<goa-checkbox [checked]="false">${label}</goa-checkbox>`,
       componentProperties: {
         selectionChange: { emit: selectionChange } as any
@@ -98,7 +87,7 @@ describe('GoACheckboxComponent', () => {
     });
 
     const checkbox = screen.getByRole('checkbox', {});
-    console.log(checkbox.outerHTML);
+    //console.log(checkbox.outerHTML);
 
     fireEvent.click(checkbox);
 
