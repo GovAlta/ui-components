@@ -36,6 +36,7 @@ pipeline {
             sh 'npm run build:angular-storybook' //builds to /dist/storybook/angular-components
             sh 'npm run build:angular-material-storybook' //builds to /dist/storybook/angular-components
             sh 'npm run build:vue-storybook' //builds to /dist/storybook/vue-components
+            sh 'npm run build:react-storybook' //builds to /dist/storybook/react-components
           }
         }
         stage('Build npm package'){

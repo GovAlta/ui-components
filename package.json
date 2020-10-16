@@ -21,6 +21,7 @@
     "build:angular-material-storybook": "npm run docs:json:angular-material-components && nx run angular-material-components:build-storybook",
     "build:core-storybook": "nx run core-css:build-storybook",
     "build:vue-storybook": "nx run vue-components:build-storybook",
+    "build:react-storybook": "nx run react-components:build-storybook",
     "build:styles": "node-sass dist/libs/core-css/src/lib -o dist/libs/core-css --no-recursive",
     "build:styles:angular-components": "node-sass libs/angular-components/src/theme.scss dist/libs/angular-components/theme.css",
     "run:angular-storybook": "npm run docs:json:angular-components && nx run angular-components:storybook",
