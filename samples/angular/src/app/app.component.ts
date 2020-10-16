@@ -13,4 +13,5 @@ export class AppComponent {
   showCallout = false;
   showNotificationBanner = false;
   showCard = false;
+  showRadio = false;
 }

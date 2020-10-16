@@ -4,14 +4,14 @@ import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 
-import { GoACheckboxComponent } from './checkbox.component';
+import { GoARadioComponent } from './radio.component';
 
-<Meta title="Component Library/Basic Elements/Checkboxes" decorators={[
+<Meta title="Component Library/Basic Elements/Radios" decorators={[
         moduleMetadata({
-          declarations: [GoACheckboxComponent]
+          declarations: [GoARadioComponent]
         })
     ]}
-    component={GoACheckboxComponent}
+    component={GoARadioComponent}
     argTypes={{
       checked: {
         control: 'boolean',
@@ -34,13 +34,6 @@ import { GoACheckboxComponent } from './checkbox.component';
            type: { summary: 'boolean' }
         }
       },
-      indeterminate: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
-      },
       labelPosition: {
         control: 'select',
         options: ['before', 'after'],
@@ -52,43 +45,61 @@ import { GoACheckboxComponent } from './checkbox.component';
     }}
  />
 
-# Checkbox
-A user input field that allows the user to make a binary choice, i.e. a choice between one of two possible mutually exclusive options. For example, the user may have to answer 'yes' (checked) or 'no' (not checked) on a simple yes/no question.
+# Radio
+A user input field that allows the user to make a choice from a set of mutually exclusive, related options.  Only one item in the list may be selected.
 
 ## Overview
 
 #### Basic
 <Canvas>
   <Story name="Basic" height={200}
-    args={{
-      checked: false,
-      required: false,
-      disabled: false,
-      indeterminate: false,
-      labelPosition: 'after',
-      content: 'Checkbox 1'
-    }}
+    args={
+      {
+        checked: false,
+        required: false,
+        disabled: false,
+        labelPosition: 'after',
+        name: 'fruits',
+      }}
   >
     {(args) => {
       args.selectionChange = function(value) {
         action('selection was changed')(value);
       }
       return {
-        template: `<goa-checkbox
+        template: `<goa-radio
                       (selectionChange)="selectionChange($event)"
                       [checked]="checked"
+                      [value]="'apple'"
                       [required]="required"
                       [disabled]="disabled"
-                      [indeterminate]="indeterminate"
                       [labelPosition]="labelPosition"
+                      [name]="name"
                   >
-                      {{content}}
-                  </goa-checkbox>
-                  <goa-checkbox
+                      apple
+                  </goa-radio>
+                  <goa-radio
                       (selectionChange)="selectionChange($event)"
+                      [checked]="checked"
+                      [value]="'orange'"
+                      [required]="required"
+                      [disabled]="disabled"
+                      [labelPosition]="labelPosition"
+                      [name]="name"
                   >
-                      Checkbox 2
-                  </goa-checkbox>`,
+                      orange
+                  </goa-radio>
+                  <goa-radio
+                      (selectionChange)="selectionChange($event)"
+                      [checked]="checked"
+                      [value]="'lemon'"
+                      [required]="required"
+                      [disabled]="disabled"
+                      [labelPosition]="labelPosition"
+                      [name]="name"
+                  >
+                      lemon
+                  </goa-radio>`,
         props: args
       }
     }}
@@ -104,23 +115,22 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
       disabled: false,
       indeterminate: false,
       labelPosition: 'after',
-      content: 'NgModel Checkbox'
+      content: 'NgModel Radio'
     }}>
     {(args) => {
       args.selectionChange = function(value) {
         action('selection was changed')(value);
       }
       return {
-        template: `<goa-checkbox
+        template: `<goa-radio
                       [(ngModel)]="checked"
                       (ngModelChange)="selectionChange($event)"
                       [required]="required"
                       [disabled]="disabled"
-                      [indeterminate]="indeterminate"
                       [labelPosition]="labelPosition"
                   >
                       {{content}}
-                  </goa-checkbox>
+                  </goa-radio>
                    <div>
                     modelValue = {{checked}}
                   </div>`,
@@ -133,56 +143,55 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
 
 ## Examples
 Basic
-```html
-<goa-checkbox [checked]="item.checked">
+```
+<goa-radio [checked]="item.checked">
   Label goes here
-</goa-checkbox>
+</goa-radio>
 
 or
 
-<goa-checkbox [(ngModel)]="item.checked">
+<goa-radio [(ngModel)]="item.checked">
   Label goes here
-</goa-checkbox>
+</goa-radio>
 
 ```
 
 All Properties
-```html
-<goa-checkbox
+```
+<goa-radio
   [checked]="item.checked"
   [required]="item.required"
   [disabled]="item.disabled"
-  [indeterminate]="isIndeterminateFn()"
   [labelPosition]="after"
   (selectionChange)="selectionChanged($event)"
 >
   Label goes here
-</goa-checkbox>
+</goa-radio>
 
 ```
 
 ## Properties
 
-#### GoACheckboxComponent
-<Description of={GoACheckboxComponent} />
-<ArgsTable of={GoACheckboxComponent} />
+#### GoARadioComponent
+<Description of={GoARadioComponent} />
+<ArgsTable of={GoARadioComponent} />
 
 
 # Usage guidelines
 
 ### Select multiple options
-Use checkboxes when the user can select any number of options. Use radio buttons or a drop down list when the user can only select one option.
+Use radio buttons or a drop down list when the user can only select one option.  Use checkboxes when the user can select any number of options.
 
 <DoDont
-  dos={'Use checkboxes when the user is allowed to select more than one option.'}
-  donts={'Require the user to make a selection. Checkboxes should be optional input.'}
+  dos={'Use radios when the user is allowed to select only one option.'}
+  donts={'Use radios when the user is allowed to select more than one option'}
 />
 
 ### Binding
-The 'checked' and 'ngModel' properties are two ways of binding the selected state of the checkbox.
+The 'checked' and 'ngModel' properties are two ways of binding the selected state of the radio.
 
 <DoDont
-  dos={'Use one of either the checked OR ngModel property bindings with a checkbox'}
-  donts={'Use both the checked and ngModel property bindings with a checkbox'}
+  dos={'Use one of either the checked OR ngModel property bindings with a radio'}
+  donts={'Use both the checked and ngModel property bindings with a radio'}
 />
 

@@ -3,6 +3,8 @@
 @import './styles/dropdown/dropdown.scss';
 @import './styles/fonts/fonts.scss';
 @import './styles/mixin/responsive-breakpoints.scss';
+@import './styles/radio/radio.scss';
+@import './styles/radio-group/radio-group.scss';
 
 /*
 
@@ -19,14 +21,14 @@ Full system available at https://www.alberta.ca/goa/design-system/
 
 /******************************************************************************
 * elements
-* 
+*
 ***/
 
 @import './styles/elements/elements.scss';
 
 /******************************************************************************
 * classes
-* 
+*
 ***/
 
 /* goa-button ****************************************************************/
@@ -526,7 +528,7 @@ div.goa-tableouter > div.goa-table {
 
 /******************************************************************************
 * breakpoint: mobile
-* 
+*
 ***/
 
 @include mobile {
@@ -565,7 +567,7 @@ div.goa-tableouter > div.goa-table {
 
 /******************************************************************************
 * breakpoint: tablet
-* 
+*
 ***/
 
 @include tablet {
@@ -579,7 +581,7 @@ div.goa-tableouter > div.goa-table {
 
 /******************************************************************************
 * breakpoint: desktop
-* 
+*
 ***/
 
 @include desktop {

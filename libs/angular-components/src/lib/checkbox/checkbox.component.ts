@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ChangeDetectorRef, ChangeDetectionStrategy, ElementRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { GoACheckboxChange } from './checkbox-change';
 
@@ -147,7 +147,9 @@ export class GoACheckboxComponent implements ControlValueAccessor {
    * Emits selectionChange to parent components.
    * @ignore
    */
-  onClick() {
+  onChange(event) {
+    event.stopPropagation();
+
     this.toggle();
 
     // user manually clicking overrides indeterminate and sets it to false
@@ -163,5 +165,4 @@ export class GoACheckboxComponent implements ControlValueAccessor {
     this._propagateChange(this.checked);
     this.selectionChange.emit(checkBoxChange);
   }
-
 }

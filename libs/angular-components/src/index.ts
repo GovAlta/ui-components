@@ -12,3 +12,7 @@ export * from './lib/callout/callout.component';
 export * from './lib/notification/notification.component';
 export * from './lib/notification-banner/notification-banner.component';
 export * from './lib/card/card.component';
+export * from './lib/radio/radio.component';
+export * from './lib/radio/radio-change';
+export * from './lib/radio/radio.service';
+export * from './lib/radio-group/radio-group.component';

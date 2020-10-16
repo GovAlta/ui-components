@@ -9,7 +9,7 @@
                 [disabled]="disabled"
                 [required]="required"
                 [attr.value]="value"
-                (click)="onClick()"
+                (change)="onChange($event)"
             />
             <svg *ngIf="checked" id='checkmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18" class="goa-checkmark">
                 <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z"/>
