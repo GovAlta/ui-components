@@ -46,6 +46,13 @@
     "angular-material-components": {
       "tags": [],
       "implicitDependencies": ["core-css"]
+    },
+    "react-components": {
+      "tags": []
+    },
+    "react-components-e2e": {
+      "tags": [],
+      "implicitDependencies": ["react-components"]
     }
   }
 }

@@ -26,7 +26,8 @@
       "@abgov/shared/common": ["libs/shared/common/src/index.ts"],
       "@abgov/angular-material-components": [
         "libs/angular-material-components/src/index.ts"
-      ]
+      ],
+      "@abgov/react-components": ["libs/react-components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
