@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import '../../theme.scss';
 import '../../../../core-css/src/lib/styles/callout/callout.scss'
 
-export const Callout = ({ title, type, content, ...props }) => {
+export const Callout = ({ title, type, content, children = null, ...props }) => {
   return (
     <div>
       <div className={`goa-callout goa--${type}`}>
         <div>        
             <h3>{title}</h3>
             <div className="messages">
-              {content}
+              {content || children}
             </div>
         </div>
       </div>
@@ -19,13 +19,7 @@ export const Callout = ({ title, type, content, ...props }) => {
 };
 
 Callout.propTypes = {
-  /**
-   * The title of callout 
-   */
   title: PropTypes.string,
-  /**
-   * The type of the callout, changes stylings and icons.
-   */
   type: PropTypes.string.isRequired,
   content: PropTypes.string,
 };
