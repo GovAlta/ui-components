@@ -5,6 +5,10 @@ module.exports = {
       title: "Angular", 
       url: "https://localhost/angular/"
     },
+    react: { 
+      title: "React", 
+      url: "https://localhost/react/"
+    },
     vue: { 
       title: "Vue", 
       url: "https://localhost/vue/"
