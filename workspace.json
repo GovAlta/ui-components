@@ -409,19 +409,22 @@
           }
         },
         "build": {
-          "builder": "@nrwl/storybook:build",
+          "builder": "@nrwl/web:package",
           "options": {
-            "uiFramework": "@storybook/react",
-            "outputPath": "dist/storybook/react-components",
-            "staticDir": ["libs/shared/storybook-common/assets"],
-            "config": {
-              "configFolder": "libs/react-components/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
+            "outputPath": "dist/libs/react-components",
+            "tsConfig": "libs/react-components/tsconfig.lib.json",
+            "project": "libs/react-components/package.json",
+            "entryFile": "libs/react-components/src/index.ts",
+            "external": ["react", "react-dom"],
+            "babelConfig": "@nrwl/react/plugins/bundle-babel",
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
           }
         },
         "build-storybook": {

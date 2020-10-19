@@ -53,6 +53,7 @@
     "publish:npm:angular-components": "npm run publish:script --path=dist/libs/angular-components",
     "publish:npm:angular-material-components": "npm run publish:script --path=dist/libs/angular-material-components",
     "publish:npm:vue-components": "npm run publish:script --path=dist/libs/vue-components",
+    "publish:npm:react-components": "npm run publish:script --path=dist/libs/react-components",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
