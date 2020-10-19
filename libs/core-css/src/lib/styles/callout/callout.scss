@@ -4,11 +4,6 @@
 @import '../mixin/svg/error.scss';
 @import '../mixin/svg/information.scss';
 
-.messages {
-  margin-bottom: 0;
-  margin-top: 1em;
-}
-
 .goa-callout {
   box-sizing: border-box;
   display: inline-block;
@@ -64,5 +59,10 @@
 
   &.goa--event:before {
     @include calendar;
+  }
+
+  .messages {
+    margin-bottom: 0;
+    margin-top: 1em;
   }
 }
