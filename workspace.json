@@ -420,7 +420,7 @@
             "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
             "assets": [
               {
-                "glob": "README.md",
+                "glob": "libs/react-components/README.md",
                 "input": ".",
                 "output": "."
               }
