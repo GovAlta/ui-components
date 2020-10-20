@@ -9,10 +9,7 @@ This library contains react components from the Government of Alberta.
 2. OPTIONAL: in package.json specify the allowed versions for installation
 3. Add peer dependencies  
 4. OPTIONAL: Add to styles to import Alberta fonts and global element styles. 
-````@import '~@abgov/react-components/theme.css';````
-5. Add localize to polyfill.js   
-````import '@react/localize/init';````
-6. Add ````"preserveSymlinks": true```` to configurations in react.json.
+````import '@abgov/react-components/react-components.esm.css';````
 
 ## Documentation
 
@@ -21,10 +18,13 @@ Documentation is being worked on and will be provided soon.
 ## Usage
 
 ```
-import ReactComponentsModule from '@abgov/react-components'
+import '@abgov/react-components/react-components.esm.css';
+import { Callout } from '@abgov/react-components';
 
-or
-
-import { Callout } from '@abgov/react-components'
+function App() {
+    return (
+        <Callout type="emergency" title="Covid 19 Emergency" content="please be advised that in-center services are closed" />
+    )
+}
 
 ```
