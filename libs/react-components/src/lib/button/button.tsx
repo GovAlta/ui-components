@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './button.scss';
 
+type ButtonType = "primary" | "secondary" | "tertiary";
+type ButtonSize = "small" | "normal";
+
 type AppProps = {
   content: string;
-  buttonType?: string;
-  buttonSize?: string;
+  buttonType?: ButtonType;
+  buttonSize?: ButtonSize;
   tooltip?: string;
   children?: React.ReactNode;
   [key: string]: any;
