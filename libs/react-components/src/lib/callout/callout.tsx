@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../../theme.scss';
 import '../../../../core-css/src/lib/styles/callout/callout.scss'
 
-export const Callout = ({ title, type, content, children = null, ...props }) => {
+export const GoACallout = ({ title, type, content, children = null, ...props }) => {
   return (
     <div>
       <div className={`goa-callout goa--${type}`}>
@@ -18,10 +18,10 @@ export const Callout = ({ title, type, content, children = null, ...props }) => 
   );
 };
 
-Callout.propTypes = {
+GoACallout.propTypes = {
   title: PropTypes.string,
   type: PropTypes.string.isRequired,
   content: PropTypes.string,
 };
 
-export default Callout;
+export default GoACallout;

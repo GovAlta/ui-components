@@ -19,11 +19,29 @@ Documentation is being worked on and will be provided soon.
 
 ```
 import '@abgov/react-components/react-components.esm.css';
-import { Callout } from '@abgov/react-components';
+import { GoACallout } from '@abgov/react-components';
+import { GoAButton } from '@abgov/react-components';
 
 function App() {
     return (
-        <Callout type="emergency" title="Covid 19 Emergency" content="please be advised that in-center services are closed" />
+        <div>
+          <GoACallout type="emergency" title="Covid 19 Emergency" content="please be advised that in-center services are closed" />
+          <GoAButton
+            buttonType="primary"
+            buttonSize="normal"
+            content="Click Me!"
+            toolTip="Hovering"
+            onClick={()=> alert("You have clicked the button")}
+          />
+          <GoAButton
+            buttonType="primary"
+            buttonSize="normal"
+            toolTip="Hovering"
+            onClick={()=> alert("You have clicked the button")}
+          >
+            <div>Or click me instead</div>
+          </GoAButton>
+        </div>
     )
 }
 

@@ -9,6 +9,7 @@ module.exports = {
       '@storybook/preset-scss',
       '@storybook/addon-controls',
       '@storybook/addon-backgrounds',
+      '@storybook/addon-actions',
       '@storybook/addon-a11y',
       '@storybook/addon-viewport',
       'storybook-addon-xd-designs'
