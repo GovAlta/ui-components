@@ -19,13 +19,13 @@ Documentation is being worked on and will be provided soon.
 
 ```
 import '@abgov/react-components/react-components.esm.css';
-import { Callout } from '@abgov/react-components';
+import { GoaCallout } from '@abgov/react-components';
 import { GoAButton } from '@abgov/react-components';
 
 function App() {
     return (
         <div>
-          <Callout type="emergency" title="Covid 19 Emergency" content="please be advised that in-center services are closed" />
+          <GoaCallout type="emergency" title="Covid 19 Emergency" content="please be advised that in-center services are closed" />
           <GoAButton
             buttonType="primary"
             buttonSize="normal"

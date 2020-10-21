@@ -1,8 +1,8 @@
 import React from 'react';
-import { Callout } from './callout';
+import { GoaCallout } from './callout';
 
 export default {
-  component: Callout,
+  component: GoaCallout,
   title: 'Component Library/Components/Callout',
   controls: { expanded: true },
   argTypes: {
@@ -30,7 +30,7 @@ export default {
 
 const content = <div>Information to the user goes in the content. Information can include <b>markup</b> as desired.</div>
 
-const Template = (args) => <Callout {...args}>{content}</Callout>;
+const Template = (args) => <GoaCallout {...args}>{content}</GoaCallout>;
 
 export const Variants = Template.bind({});
 
