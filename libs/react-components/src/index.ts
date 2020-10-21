@@ -1,4 +1,4 @@
 import Callout from './lib/callout/callout';
-import GoAButtonComponent from './lib/button/button';
+import GoAButton from './lib/button/button';
 
-export { Callout, GoAButtonComponent };
+export { Callout, GoAButton };

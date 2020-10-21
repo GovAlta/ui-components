@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event';
-import GoAButtonComponent from './button';
+import GoAButton from './button';
 
 describe('GoA Button', () => {
   const buttonTitle = 'Test Title';
@@ -13,7 +13,7 @@ describe('GoA Button', () => {
   const buttonTooltip = 'hovering';
 
   it('should render content', () => {
-    const { baseElement } = render(<GoAButtonComponent
+    const { baseElement } = render(<GoAButton
       buttonType='primary'
       buttonSize='normal'
       content={buttonTitle}
@@ -25,7 +25,7 @@ describe('GoA Button', () => {
   });
 
   test('buttonType=primary should render primary styling', () => {
-    const { baseElement } = render(<GoAButtonComponent
+    render(<GoAButton
       buttonType='primary'
       buttonSize='normal'
       content={buttonTitle}
@@ -39,7 +39,7 @@ describe('GoA Button', () => {
   });
 
   test('buttonType=secondary should render secondary styling', () => {
-    const { baseElement } = render(<GoAButtonComponent
+    render(<GoAButton
       buttonType='secondary'
       content={buttonTitle}
     />);
@@ -51,7 +51,7 @@ describe('GoA Button', () => {
   });
 
   test('buttonType=tertiary should render tertiary styling', () => {
-    const { baseElement } = render(<GoAButtonComponent
+    render(<GoAButton
       buttonType='tertiary'
       content={buttonTitle}
     />);
@@ -63,7 +63,7 @@ describe('GoA Button', () => {
   });
 
   test('buttonSize=small should render small styling', () => {
-    const { baseElement } = render(<GoAButtonComponent
+    render(<GoAButton
       buttonType='tertiary'
       buttonSize='small'
       content={buttonTitle}
@@ -75,7 +75,7 @@ describe('GoA Button', () => {
   });
 
   test('buttonSize unset should render no small styling', () => {
-    const { baseElement } = render(<GoAButtonComponent
+    render(<GoAButton
       buttonType='tertiary'
       content={buttonTitle}
     />);
@@ -85,7 +85,7 @@ describe('GoA Button', () => {
   });
 
   test('tooltip is set to button title', () => {
-    const { baseElement } = render(<GoAButtonComponent
+    render(<GoAButton
       buttonType='tertiary'
       content={buttonTitle}
       tooltip={buttonTooltip}
@@ -97,7 +97,7 @@ describe('GoA Button', () => {
   
   test('responds to events', () => {
     const onClickStub = jest.fn()
-    const { baseElement } = render(<GoAButtonComponent
+    render(<GoAButton
       data-testid="goaButton"
       buttonType='tertiary'
       content={buttonTitle}

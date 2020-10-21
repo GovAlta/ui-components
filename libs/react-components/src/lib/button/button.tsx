@@ -2,7 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './button.scss';
 
-export const GoAButtonComponent = ({ content, buttonType = "primary", buttonSize = 'normal', tooltip = null, children = null,  ...props }) => {
+type AppProps = {
+  content: string;
+  buttonType?: string;
+  buttonSize?: string;
+  tooltip?: string;
+  children?: React.ReactNode;
+  [key: string]: any;
+}
+
+const GoAButton = ({ content, buttonType = "primary", buttonSize = 'normal', tooltip = null, children = null,  ...props }:AppProps) => {
   let buttonTypeClass = buttonType==='primary' ? '' : `goa--${buttonType}`;
   return (
     <div>
@@ -17,10 +26,12 @@ export const GoAButtonComponent = ({ content, buttonType = "primary", buttonSize
   );
 };
 
-GoAButtonComponent.propTypes = {
+GoAButton.propTypes = {
   buttonSize: PropTypes.string,
   buttonType: PropTypes.string,
   content: PropTypes.string,
+  tooltip: PropTypes.string,
+  children: PropTypes.node,
 };
 
-export default GoAButtonComponent;
+export default GoAButton;

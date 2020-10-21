@@ -1,8 +1,9 @@
 import React from 'react';
-import GoAButtonComponent from './button';
+import GoAButton from './button';
+import { action } from '@storybook/addon-actions';
 
 export default {
-  component: GoAButtonComponent,
+  component: GoAButton,
   title: 'Component Library/Components/Button',
   controls: { expanded: true },
   argTypes: {
@@ -22,12 +23,15 @@ export default {
       description: 'mouseover popup description',
       control: 'text',
     },
-
-    content: { control: 'text' } 
+    content: { control: 'text' },
+    onClick: { action: 'You have clicked the button' },
+    onMouseDown: { action: 'mouseDown' },
   },
 }
 
-const Template = (args) => <GoAButtonComponent onClick={()=> alert("You have clicked the button")} {...args} />;
+function Template(args) {
+  return <GoAButton {...args} />;
+}
 
 export const Variants = Template.bind({});
 
