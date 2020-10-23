@@ -1,0 +1,48 @@
+import { GoAHeader } from './header';
+
+import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
+
+<Meta title="Component Library/Components/Header"
+  component={GoAHeader}
+  argTypes={{
+      serviceName: { control: 'text', description: 'Name of the service to be displayed' },
+      serviceHome: { control: 'text', description: 'URL of the service' },
+      serviceLevel: { control: 'text', description: 'Level of the service [Alpha | Beta | Live]' },
+    }}
+ />
+
+# Header
+
+export const Template = (args) => <GoAHeader {...args} />
+
+<Canvas>
+  <Story name="Micro Site Header" height={100}
+  args={{
+      serviceName: 'Digital Service Name (microsite)',
+      serviceHome: 'https://www.alberta.ca/index.aspx',
+      serviceLevel: 'Alpha'
+    }}
+  parameters={
+    {
+      design: {
+        specUrl: 'https://xd.adobe.com/view/18ccfd61-7e54-450e-a05d-cabfff452d6e-4d9f/screen/bbcbebfa-96a4-4625-931e-54b7b7e60b4e/specs',
+        reviewUrl: 'https://xd.adobe.com/view/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/'
+      }
+    }
+  }>
+      {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Overview
+
+A header to use for a Government of Alberta microsite.  Contains a customizable service name and home link for the microsite.
+
+## Examples
+```html
+<GoAHeader serviceName="Sample service" serviceHome="/" serviceLevel="Live" />
+```
+
+## Properties
+<Description of={GoAHeader} />
+<ArgsTable of={GoAHeader} />

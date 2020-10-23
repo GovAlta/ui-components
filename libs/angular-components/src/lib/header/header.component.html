@@ -1,9 +1,22 @@
 <header class="goa-header goa-official-site-header">
-    <span class="image"></span>
-    <span class="site-text" i18n="Alberta.ca official site text on header">An official site of the </span> <a href="https://www.alberta.ca/index.aspx"
-        class="web-link" i18n>Alberta
-        Government</a>
+  <div>
+    <span class="service-level"
+          [ngClass]="{
+            'service-level--alpha': this.serviceLevel === ServiceLevel.Alpha,
+            'service-level--beta': this.serviceLevel === ServiceLevel.Beta,
+            'service-level--live': this.serviceLevel === ServiceLevel.Live
+          }"
+    >{{serviceLevel}}</span>
+  </div>
+  <div *ngIf="serviceLevel == 'Live'; else elseNotLive" class="site-text" i18n="Alberta.ca official site text on header">
+    An official site of the <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a>
+  </div>
+  <ng-template #elseNotLive>
+    <div class="site-text" i18n="Alberta.ca site text on header">
+      This is a new <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a> service
+    </div>
+  </ng-template>
 </header>
 <header class="goa-header goa-microsite-header">
-    <goa-microsite-logo [serviceName]="serviceName" [serviceHome]="serviceHome"></goa-microsite-logo>
+  <goa-microsite-logo [serviceName]="serviceName" [serviceHome]="serviceHome"></goa-microsite-logo>
 </header>
