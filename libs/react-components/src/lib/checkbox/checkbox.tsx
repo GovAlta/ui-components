@@ -21,36 +21,29 @@ const GoACheckbox = ({ content, children = null, checked = false, required = fal
   const [indeterminateCheck, setIndeterminateCheck] = useState(indeterminate);
   const [indeterminateCheckOld, setIndeterminateCheckOld] = useState(indeterminate);
   const [lastChecked, setLastChecked] = useState(indeterminate ? 'indeterminate' : 'checked');
-  const hasError = () => required && !checked;
 
-  const checkedHandler = () => {
+  const hasError = () => required && !checked;
+  const indeterminateControlTrigger = () => indeterminate !== indeterminateCheckOld;
+  const checkboxControlTrigger = () => checked !== checkedBoxOld;
+
+  const checkboxHandler = () => {
     setIndeterminateCheck(false);
     setCheckedBox(!checkedBox)
     selectionChange(!checkedBox);
-    if (!checkedBox === true) {
-      setLastChecked('checked');
-    } else {
-      setLastChecked('indeterminate');
-    }
+    setLastChecked(checked === false ? 'checked' : 'indeterminate')
   }
-  if (checked !== checkedBoxOld) {
+
+  if (checkboxControlTrigger()) {
     setCheckedBox(checked);
     setCheckedBoxOld(checked);
     selectionChange(checked);
-    if (checked === true) {
-      setLastChecked('checked');
-    } else {
-      setLastChecked('indeterminate');
-    }
+    setLastChecked(checked === true ? 'checked' : 'indeterminate')
   }
-  if (indeterminate !== indeterminateCheckOld) {
+
+  if (indeterminateControlTrigger()) {
     setIndeterminateCheck(indeterminate);
     setIndeterminateCheckOld(indeterminate);
-    if (indeterminate === true) {
-      setLastChecked('indeterminate');
-    } else {
-      setLastChecked('checked');
-    }
+    setLastChecked(indeterminate === true ? 'indeterminate' : 'checked')
   }
   
   return (
@@ -63,7 +56,7 @@ const GoACheckbox = ({ content, children = null, checked = false, required = fal
                 disabled={disabled}
                 required={required}
                 value={content}
-                onChange={() => checkedHandler()}
+                onChange={() => checkboxHandler()}
               />
               { indeterminateCheck && lastChecked === 'indeterminate' && (
                 <svg id='dashmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2" className="goa-indeterminate">
