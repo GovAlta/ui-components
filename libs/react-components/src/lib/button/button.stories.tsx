@@ -1,6 +1,5 @@
 import React from 'react';
 import GoAButton from './button';
-import { action } from '@storybook/addon-actions';
 
 export default {
   component: GoAButton,

@@ -14,7 +14,7 @@ describe('GoA Checkbox', () => {
   });
 
   test('should render checkmark svg when checked', async () => {
-    render(<GoACheckbox checked={false}>{label}</GoACheckbox>);
+    render(<GoACheckbox checked={true}>{label}</GoACheckbox>);
 
     userEvent.click(screen.getByText(label));
 
@@ -25,71 +25,70 @@ describe('GoA Checkbox', () => {
     expect(dashmark).toBeNull();
   });
 
-describe('Indeterminate', () => {
-  test('should render dash svg when checked is true', () => {
-    render(<GoACheckbox checked={true} indeterminate={true} />);
+  describe('Indeterminate', () => {
+    test('should render dash svg when checked is true', () => {
+      render(<GoACheckbox checked={true} indeterminate={true} >{label}</GoACheckbox>);
 
-    const checkmark = document.getElementById('checkmark');
-    const dashmark = document.getElementById('dashmark');
+      const checkmark = document.getElementById('checkmark');
+      const dashmark = document.getElementById('dashmark');
 
-    expect(dashmark).not.toBeNull();
-    expect(checkmark).toBeNull();
+      expect(dashmark).not.toBeNull();
+      expect(checkmark).toBeNull();
+    });
+
+    test('should render dash svg when checked is false', () => {
+      render(<GoACheckbox checked={false} indeterminate={true} >{label}</GoACheckbox>);
+
+      const checkmark = document.getElementById('checkmark');
+      const dashmark = document.getElementById('dashmark');
+
+      expect(dashmark).not.toBeNull();
+      expect(checkmark).toBeNull();
+    });
   });
 
-  test('should render dash svg when checked is false', () => {
-    render(<GoACheckbox checked={false} indeterminate={true} />);
+  test('required should display red border on checkbox when checked is false', () => {
+    render(<GoACheckbox checked={false} required={true} >{label}</GoACheckbox>);
 
-    const checkmark = document.getElementById('checkmark');
-    const dashmark = document.getElementById('dashmark');
+    const container = document.querySelector('.goa-checkbox');
 
-    expect(dashmark).not.toBeNull();
-    expect(checkmark).toBeNull();
+    expect(container).not.toBeNull();
+    expect(container.classList).toContain('has-error');
   });
 
-  test('buttonSize=small should render small styling', () => {
-    render(<GoACheckbox
-      buttonType='tertiary'
-      buttonSize='small'
-      content={buttonTitle}
-    />);
+  test('required should NOT display red border on checkbox when checked is true', () => {
+    render(<GoACheckbox checked={true} required={true} >{label}</GoACheckbox>);
 
+    const container = document.querySelector('.goa-checkbox');
 
-    const button = screen.getByRole('button');
-    expect(button.className).toContain(buttonSmallClassName);
+    expect(container).not.toBeNull();
+    expect(container.classList).not.toContain('has-error');
   });
 
-  test('buttonSize unset should render no small styling', () => {
-    render(<GoACheckbox
-      buttonType='tertiary'
-      content={buttonTitle}
-    />);
+  test('should emit selectionChange when clicked', async () => {
+    const selectionChangeStub = jest.fn()
 
-    const button = screen.getByRole('button');
-    expect(button.className).not.toContain(buttonSmallClassName);
+    render(<GoACheckbox selectionChange={selectionChangeStub} checked={true} required={true} >{label}</GoACheckbox>);
+
+    const checkbox = screen.getByRole('checkbox', {});
+
+    userEvent.click(checkbox);
+
+    const selectionChangeResults = selectionChangeStub.mock.results;
+
+    expect(selectionChangeStub).toHaveBeenCalledTimes(1);
+    expect(selectionChangeResults).toBeTruthy();
   });
 
-  test('tooltip is set to button title', () => {
-    render(<GoACheckbox
-      buttonType='tertiary'
-      content={buttonTitle}
-      tooltip={buttonTooltip}
-    />);
+  test('change event should work', async () => {
+    const isChecked = jest.fn()
 
-    const button = screen.getByRole('button');
-    expect(button.title).toContain(buttonTooltip);
-  });
-  
-  test('responds to events', () => {
-    const onClickStub = jest.fn()
-    render(<GoACheckbox
-      data-testid="goaButton"
-      buttonType='tertiary'
-      content={buttonTitle}
-      onClick={onClickStub}
-    />);
-    const button = screen.getByTestId('goaButton');
-    userEvent.click(button)
-    expect(onClickStub).toHaveBeenCalled
-  });
+    render(<GoACheckbox selectionChange={isChecked} checked={false} required={true} >${label}</GoACheckbox>);
+   
+    const checkbox = screen.getByRole('checkbox', {});
+    userEvent.click(checkbox);
 
+    const selectionChangeResults = isChecked.mock.results;
+    expect(selectionChangeResults).toBeTruthy();
+  });
 });

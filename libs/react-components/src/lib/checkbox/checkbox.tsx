@@ -12,32 +12,67 @@ type AppProps = {
   labelPosition?: LabelPosition;
   content?: string;
   children?: React.ReactNode;
+  selectionChange?: any;
 }
 
-const GoACheckbox = ({ content, children = null, checked = false, required = false, disabled = false, indeterminate = false, labelPosition, ...props }:AppProps) => {
-  const [checkedBox, setCheckedBox] = useState(checked);  
+const GoACheckbox = ({ content, children = null, checked = false, required = false, disabled = false, indeterminate = false, labelPosition, selectionChange, ...props }:AppProps) => {
+  const [checkedBox, setCheckedBox] = useState(checked);
+  const [checkedBoxOld, setCheckedBoxOld] = useState(checked);
+  const [indeterminateCheck, setIndeterminateCheck] = useState(indeterminate);
+  const [indeterminateCheckOld, setIndeterminateCheckOld] = useState(indeterminate);
+  const [lastChecked, setLastChecked] = useState(indeterminate ? 'indeterminate' : 'checked');
   const hasError = () => required && !checked;
-  //const uniqueId = `goa-checkbox-${GoACheckboxComponent.idNum++}`
+
+  const checkedHandler = () => {
+    setIndeterminateCheck(false);
+    setCheckedBox(!checkedBox)
+    selectionChange(!checkedBox);
+    if (!checkedBox === true) {
+      setLastChecked('checked');
+    } else {
+      setLastChecked('indeterminate');
+    }
+  }
+  if (checked !== checkedBoxOld) {
+    setCheckedBox(checked);
+    setCheckedBoxOld(checked);
+    selectionChange(checked);
+    if (checked === true) {
+      setLastChecked('checked');
+    } else {
+      setLastChecked('indeterminate');
+    }
+  }
+  if (indeterminate !== indeterminateCheckOld) {
+    setIndeterminateCheck(indeterminate);
+    setIndeterminateCheckOld(indeterminate);
+    if (indeterminate === true) {
+      setLastChecked('indeterminate');
+    } else {
+      setLastChecked('checked');
+    }
+  }
   
   return (
     <div className={`goa-checkbox ${disabled && 'goa-checkbox-disabled'} ${hasError() && 'has-error'} ${labelPosition === 'before' && 'goa-checkbox-label-before'}`}>
       <label className="goa-checkbox-layout">
-          <div className="goa-checkbox-container">
-              <input type="checkbox"
+          <div className={`goa-checkbox-container ${checkedBox && lastChecked === 'checked' && 'goa-checkbox-selected'} ${indeterminateCheck && lastChecked === 'indeterminate' && 'goa-checkbox-indeterminate'}` }>
+              <input 
+                type="checkbox"
                 checked={checkedBox}
                 disabled={disabled}
                 required={required}
                 value={content}
-                onChange={() => setCheckedBox(!checkedBox)}
+                onChange={() => checkedHandler()}
               />
-              { checkedBox && (
-                <svg id='checkmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18" className="goa-checkmark">
-                    <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z"/>
-                </svg>
-              )}
-              { indeterminate && (
+              { indeterminateCheck && lastChecked === 'indeterminate' && (
                 <svg id='dashmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2" className="goa-indeterminate">
                     <rect width="15" height="2"/>
+                </svg>
+              )}
+              { checkedBox && lastChecked === 'checked' && (
+                <svg id='checkmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18" className="goa-checkmark">
+                    <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z"/>
                 </svg>
               )}
           </div>
