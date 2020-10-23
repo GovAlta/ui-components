@@ -1,19 +1,20 @@
-
-import { DoDont } from '@abgov/shared/storybook-common';
 import GoAHeader from './header';
 import GoAMicrositeLogo from '../microsite-logo/microsite-logo';
-import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks'; 
+import { ServiceLevel } from "../../../../shared/common/src";
 
-<Meta title="Component Library/Page Layout/Header" 
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+
+<Meta title="Component Library/Page Layout/Header"
   argTypes={{
     serviceName: { control: { type: 'text' } },
     serviceHome: { control: { type: 'text' } },
+    serviceLevel: { control: 'text', description: 'Level of the service [Alpha | Beta | Live]' },
   }}
   component={GoAHeader} />
 
 # Header
 
-<!-- 
+<!--
   This syntax isn't the greatest... It supposedly works with template and props properties, but I could not get it to work.
 <Canvas>
   <Story name="Micro Site Logo" height={100}>
@@ -23,13 +24,16 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
       props: {
         serviceName: {
           type: String,
-          default: text('serviceName', 'Microsite name')
+          default: text('serviceName', 'Digital Service Name (microsite)')
         },
         serviceHome: {
           type: String,
           default: text('serviceHome', '/')
+        },
+        serviceLevel: {
+            type: ServiceLevel
         }
-      }  
+      }
     }}
   </Story>
 </Canvas>
@@ -37,8 +41,9 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 <Canvas>
   <Story name="Header" height={150}
     args={{
-      serviceName: 'Microsite name',
-      serviceHome: '/'
+      serviceName: 'Digital Service Name (microsite)',
+      serviceHome: '/',
+      serviceLevel: ServiceLevel.Beta
     }}>
     {(args, argTypes) => {
       return {
@@ -63,7 +68,7 @@ A header to use for a Government of Alberta microsite.  Contains a customizable 
 ```
 <template>
   <div id="app">
-    <goa-header serviceName="Sample usage example" serviceHome="/" />
+    <goa-header serviceName="Sample usage example" serviceHome="/" serviceLevel="Alpha" />
   </div>
 </template>
 
