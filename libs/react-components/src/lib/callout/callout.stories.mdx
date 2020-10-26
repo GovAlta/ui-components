@@ -1,0 +1,77 @@
+import GoACallout from './callout';
+import { Meta, Preview, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
+
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+const content = <div>Information to the user goes in the content. Information can include <b>markup</b> as desired.</div>
+
+
+<Meta title="Component Library/Components/Callout"
+    component={GoACallout}
+    argTypes={{
+      type: {
+        description: 'The type of the callout, changes stylings and icons.',
+        control: {
+          type: 'select',
+          options: ['important', 'information', 'event', 'emergency'],
+        },
+      },
+      title: {
+        description: 'The title of callout',
+        control: {
+          type: 'text',
+        },
+      },
+      content: {
+        description: 'description',
+        control: {
+          type: 'text',
+        },
+      },
+    }}
+ />
+
+# Checkbox
+A user input field that allows the user to make a binary choice, i.e. a choice between one of two possible mutually exclusive options. For example, the user may have to answer 'yes' (checked) or 'no' (not checked) on a simple yes/no question.
+
+## Overview
+export const Template = (args) => <GoACallout {...args} >{content}</GoACallout>
+
+<Canvas>
+  <Story name="Variants" height={200}
+    args={{
+      type: 'information',
+      title: 'Callout Title',
+      content: ""
+    }}
+  >
+     {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Examples
+
+```html
+<GoACallout
+  type="'important || 'information' || 'event' || 'emergency'",
+  title='Callout Title',
+  content="Information to the user goes in the content"
+</>
+```
+
+or
+
+```html
+<GoACallout
+  type='information',
+  title='Callout Title',
+  content=""
+>
+  Information to the user goes in the <i>content</i>
+</GoACallout>
+
+```
+
+## Properties
+<Description of={GoACallout} />
+<ArgsTable of={GoACallout} />

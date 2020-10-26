@@ -4,18 +4,41 @@ import './checkbox.scss';
 
 type LabelPosition = "before" | "after";
 
-type AppProps = {
-  checked?: boolean;
-  required?: boolean;
-  disabled?: boolean;
-  indeterminate?: boolean;
-  labelPosition?: LabelPosition;
-  content?: string;
-  children?: React.ReactNode;
-  selectionChange?: any;
+
+/* eslint-disable-next-line */
+export interface CheckboxProps {
+  /**
+   * Boolean indicating whether or not the checkbox is checked/selected.
+  */
+  checked?: boolean,
+  /**
+   * Boolean indicating whether or not the checkbox is required.
+  */
+  required?: boolean,
+  /**
+   * Boolean indicating whether or not the checkbox is disabled.
+  */
+  disabled?: boolean,
+  /**
+   * Boolean indicating whether or not the checkbox should display as indeterminate (i.e. it has associated 'child' checkboxes, some of which are selected)
+  */
+  indeterminate?: boolean,
+  /**
+   * The position to display the label/text for the checbox. Valid values are before and after.
+  */
+  labelPosition?: LabelPosition,
+  /**
+   * The content of the checkbox label.
+  */
+  content?: string,
+  children?: React.ReactNode,
+  /**
+   * Callback which returns whether button is checked.
+  */
+  selectionChange?: any,
 }
 
-const GoACheckbox = ({ content, children = null, checked = false, required = false, disabled = false, indeterminate = false, labelPosition, selectionChange, ...props }:AppProps) => {
+export const GoACheckbox = ({checked = false, required = false, disabled = false, indeterminate = false, labelPosition = "before", content, children,selectionChange }: CheckboxProps) => {
   const [checkedBox, setCheckedBox] = useState(checked);
   const [checkedBoxOld, setCheckedBoxOld] = useState(checked);
   const [indeterminateCheck, setIndeterminateCheck] = useState(indeterminate);
@@ -79,6 +102,10 @@ const GoACheckbox = ({ content, children = null, checked = false, required = fal
 
 GoACheckbox.propTypes = {
   content: PropTypes.string,
+  checked: PropTypes.bool,
+  required: PropTypes.bool,
+  indeterminate: PropTypes.bool,
+  labelPosition: PropTypes.string,
   children: PropTypes.node,
 };
 
