@@ -8,7 +8,7 @@ import {ServiceLevel} from "@abgov/shared/common";
 export interface HeaderProps {
   serviceName: string,
   serviceHome: string,
-  serviceLevel: ServiceLevel
+  serviceLevel: ServiceLevel,
 }
 
 export const GoAHeader = (props: HeaderProps) => {

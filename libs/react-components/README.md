@@ -21,6 +21,7 @@ Documentation is being worked on and will be provided soon.
 import '@abgov/react-components/react-components.esm.css';
 import { GoACallout } from '@abgov/react-components';
 import { GoAButton } from '@abgov/react-components';
+import { GoACheckbox } from '@abgov/react-components';
 
 function App() {
     return (
@@ -41,6 +42,7 @@ function App() {
           >
             <div>Or click me instead</div>
           </GoAButton>
+          <GoACheckbox checked={true}>Checkbox 1</GoACheckbox>
         </div>
     )
 }
