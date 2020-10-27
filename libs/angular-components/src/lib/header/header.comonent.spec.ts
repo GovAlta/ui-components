@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/angular';
 import {GoAHeaderComponent} from './header.component';
 import {GoAMicrositeLogoComponent} from '../microsite-logo/microsite-logo.component';
-import {ServiceLevel} from "@abgov/shared/common";
+import {ServiceLevel} from "./service-level.enum";
 
 describe('GoA Header', () => {
   const serviceName = 'DIO service';

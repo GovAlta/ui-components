@@ -2,7 +2,7 @@ import React from 'react';
 
 import './header.scss';
 import GoAMicroSiteLogo from '../microsite-logo/microsite-logo';
-import {ServiceLevel} from "@abgov/shared/common";
+import {ServiceLevel} from "./service-level.enum";
 
 /* eslint-disable-next-line */
 export interface HeaderProps {
