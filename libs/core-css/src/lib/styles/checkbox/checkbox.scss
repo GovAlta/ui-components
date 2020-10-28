@@ -107,18 +107,6 @@ $goa-checkbox-size: 24px;
     &:focus-within {
       box-shadow: 0 0 0 3px $goa-focus-outline-color;
       outline: none;
-
-      &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border: 1px solid $goa-border-color;
-      }
     }
   }
 }
