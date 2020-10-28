@@ -2,7 +2,7 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 
 import GoAHeader from './header';
-import {ServiceLevel} from "@abgov/shared/common";
+import {ServiceLevel} from "./service-level.enum";
 
 describe('Header', () => {
   const serviceName = 'DIO service';

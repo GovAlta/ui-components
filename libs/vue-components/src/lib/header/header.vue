@@ -27,7 +27,8 @@
 
 <script lang="typescript">
 import GoAMicrositeLogo from '../microsite-logo/microsite-logo.vue';
-import {ServiceLevel} from "@abgov/shared/common";
+import {ServiceLevel} from "./service-level.enum";
+
 export default {
   components: {
     'goa-microsite-logo': GoAMicrositeLogo

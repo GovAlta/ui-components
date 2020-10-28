@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ServiceLevel } from "@abgov/shared/common";
+import { ServiceLevel } from "./service-level.enum";
 
 /**
  * A header component for a Government of Alberta hosted microsite.

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/vue';
 import GoAHeader from './header.vue';
-import {ServiceLevel} from "@abgov/shared/common";
+import {ServiceLevel} from "./service-level.enum";
 
 describe('GoA Microsite Logo', () => {
   const serviceName = 'DIO service';
