@@ -1,0 +1,5 @@
+@import '../../button/button-link.scss';
+
+.goa-link-button {
+  @include goa-button-link-styles;
+}

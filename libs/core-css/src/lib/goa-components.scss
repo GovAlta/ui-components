@@ -12,7 +12,7 @@ Full system available at https://www.alberta.ca/goa/design-system/
 
 /******************************************************************************
 * classes
-* 
+*
 ***/
 
 /* goa-blockquote ************************************************************/
@@ -205,79 +205,6 @@ h2.goa-froufrou > span {
   vertical-align: top;
 }
 
-/* goa-hero ******************************************************************/
-
-div.goa-hero div.goa-wrapper {
-  box-sizing: border-box;
-  z-index: 1;
-  width: 100%;
-  margin: 0 auto;
-  padding: 56px 72px;
-  vertical-align: top;
-}
-
-div.goa-hero div.goa-wrapper > :first-child {
-  margin-top: 0;
-}
-
-div.goa-hero {
-  box-sizing: border-box;
-  display: flex;
-  align-items: flex-end;
-  width: 100%;
-  height: 600px;
-  padding: 0 0 8px;
-  border-bottom: 8px solid #0081ab;
-  background: #f1f1f1;
-  color: #fff;
-  vertical-align: top;
-}
-
-div.goa-hero h1 {
-  margin: 0;
-  padding: 0;
-  width: 66%;
-  font-size: 3rem;
-  line-height: 3.375rem;
-}
-
-div.goa-hero p {
-  width: 66%;
-  margin: 28px 0 0;
-  padding: 0;
-  font-size: 1.5rem;
-  line-height: 32px;
-}
-
-div.goa-hero a {
-  box-sizing: border-box;
-  margin: 28px 0 0;
-  padding: 12px;
-  border-radius: 4px;
-  border: 0;
-  background: #0070c4;
-  cursor: pointer;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1em;
-  text-decoration: none;
-}
-
-div.goa-hero a:hover {
-  color: #fff;
-  background: #004f84;
-}
-
-div.goa-hero a:focus {
-  background: #004f84;
-}
-
-div.goa-hero a:active {
-  color: #fff;
-  background: #666;
-  outline: none;
-}
 
 /* goa-notification ****************************************************************/
 
@@ -770,7 +697,7 @@ div.goa-socialshare li.email a:before {
 
 /******************************************************************************
   * breakpoint: mobile
-  * 
+  *
   ***/
 
 @include mobile {
@@ -835,7 +762,7 @@ div.goa-socialshare li.email a:before {
 
 /******************************************************************************
   * breakpoint: tablet
-  * 
+  *
   ***/
 
 @include tablet {
@@ -887,7 +814,7 @@ div.goa-socialshare li.email a:before {
 
 /******************************************************************************
   * breakpoint: desktop
-  * 
+  *
   ***/
 
 @include desktop {

@@ -18,7 +18,7 @@ import { GoACalloutComponent } from './callout/callout.component';
 import { GoANotificationComponent } from './notification/notification.component';
 import { GoANotificationBannerComponent } from './notification-banner/notification-banner.component';
 import { GoACardComponent, GoACardHeaderComponent, GoACardFooterComponent, GoACardContentComponent, GoACardThumbImageComponent } from './card/card.component';
-
+import { GoAHeroBannerComponent, GoAHeroBannerContentComponent, GoAHeroBannerLinkComponent } from './hero-banner/hero-banner.component';
 
 @NgModule({
   imports: [
@@ -44,7 +44,10 @@ import { GoACardComponent, GoACardHeaderComponent, GoACardFooterComponent, GoACa
     GoACardContentComponent,
     GoACardThumbImageComponent,
     GoARadioComponent,
-    GoARadioGroupComponent
+    GoARadioGroupComponent,
+    GoAHeroBannerComponent,
+    GoAHeroBannerContentComponent,
+    GoAHeroBannerLinkComponent
   ],
   declarations: [
     GoAButtonComponent,
@@ -64,7 +67,10 @@ import { GoACardComponent, GoACardHeaderComponent, GoACardFooterComponent, GoACa
     GoACardContentComponent,
     GoACardThumbImageComponent,
     GoARadioComponent,
-    GoARadioGroupComponent
+    GoARadioGroupComponent,
+    GoAHeroBannerComponent,
+    GoAHeroBannerContentComponent,
+    GoAHeroBannerLinkComponent
   ],
   providers: [
     GoARadioService
