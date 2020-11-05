@@ -14,41 +14,34 @@ describe('GoAHeroBannerComponent', () => {
       declarations: [GoAHeroBannerComponent]
     });
 
-    expect(screen.getByText(title, { selector: '.goa-hero-content h1' })).toBeTruthy();
+    expect(screen.getByRole('heading').textContent).toEqual(title);
   });
 
   it('should show a title and additional content', async () => {
     await render(GoAHeroBannerComponent, {
       template: `
       <goa-hero-banner title="${title}">
-        <goa-hero-banner-content>
-          ${content}
-        </goa-hero-banner-content>
+        <goa-hero-banner-content>${content}</goa-hero-banner-content>
       </goa-hero-banner>`,
       declarations: [GoAHeroBannerComponent, GoAHeroBannerContentComponent]
     });
 
-    expect(screen.getByText(title, { selector: '.goa-hero-content h1' })).toBeTruthy();
-    expect(screen.getByText(content, { selector: '.goa-hero-content p' })).toBeTruthy();
+    expect(screen.getByRole('heading').textContent).toEqual(title);
+    expect(screen.getByRole('note').textContent).toEqual(content);
   });
 
   it('should show a title, additional content and a link button', async () => {
     await render(GoAHeroBannerComponent, {
       template: `
       <goa-hero-banner title="${title}">
-        <goa-hero-banner-content>
-          ${content}
-        </goa-hero-banner-content>
+        <goa-hero-banner-content>${content}</goa-hero-banner-content>
         <goa-hero-banner-link url="${linkUrl}">${linkText}</goa-hero-banner-link>
       </goa-hero-banner>`,
       declarations: [GoAHeroBannerComponent, GoAHeroBannerContentComponent, GoAHeroBannerLinkComponent]
     });
 
-    expect(screen.getByText(title, { selector: '.goa-hero-content h1' })).toBeTruthy();
-    expect(screen.getByText(content, { selector: '.goa-hero-content p' })).toBeTruthy();
-
-    const link = screen.getByText(linkText, { selector: '.goa-link-button.right-arrow' });
-    expect(link).toBeTruthy();
-    expect(link).toHaveProperty('href', linkUrl);
+    expect(screen.getByRole('heading').textContent).toEqual(title);
+    expect(screen.getByRole('note').textContent).toEqual(content);
+    expect(screen.getByRole('link')).toHaveProperty('href', linkUrl);
   });
 });

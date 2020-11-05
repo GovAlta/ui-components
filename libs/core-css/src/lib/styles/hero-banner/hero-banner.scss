@@ -4,24 +4,21 @@
 .goa-hero {
   box-sizing: border-box;
   display: flex;
-  align-items: flex-end;
+  justify-content: flex-end;
+  align-items: stretch;
+  flex-direction: column;
   height: 600px;
   border-bottom: 8px solid $goa-blue-two;
   color: $goa-white;
   background-position: center center;
+  width: 100%;
+  padding: 56px 28px;
 
   h1 {
     margin: 0;
     padding: 0;
-    width: 66%;
     font-size: $h1-size;
     line-height: $h1-line-height;
     font-weight: $h1-font-weight;
-  }
-
-  .goa-hero-content {
-    width: 100%;
-    margin: 0 auto;
-    padding: 48px 24px;
   }
 }
