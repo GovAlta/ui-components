@@ -4,7 +4,6 @@ import { GoAOptionComponent } from './option/option.component';
 import { GoAOptionGroupComponent } from './option-group/option-group.component';
 
 import { ConnectedPosition } from '@angular/cdk/overlay';
-import '@angular/cdk/overlay-prebuilt.css';
 
 /**
  * A dropdown component with Government of Alberta styling.
