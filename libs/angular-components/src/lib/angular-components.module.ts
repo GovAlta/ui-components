@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { FormsModule } from '@angular/forms';
 
 import { GoAButtonComponent } from './button/button.component';
@@ -17,16 +17,25 @@ import { GoARadioGroupComponent } from './radio-group/radio-group.component';
 import { GoACalloutComponent } from './callout/callout.component';
 import { GoANotificationComponent } from './notification/notification.component';
 import { GoANotificationBannerComponent } from './notification-banner/notification-banner.component';
-import { GoACardComponent, GoACardHeaderComponent, GoACardFooterComponent, GoACardContentComponent, GoACardThumbImageComponent } from './card/card.component';
-import { GoAHeroBannerComponent, GoAHeroBannerContentComponent, GoAHeroBannerLinkComponent } from './hero-banner/hero-banner.component';
+import {
+  GoACardComponent,
+  GoACardHeaderComponent,
+  GoACardFooterComponent,
+  GoACardContentComponent,
+  GoACardThumbImageComponent,
+} from './card/card.component';
+import {
+  GoAHeroBannerComponent,
+  GoAHeroBannerContentComponent,
+  GoAHeroBannerLinkComponent,
+} from './hero-banner/hero-banner.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    OverlayModule
-  ],
+  imports: [CommonModule, OverlayModule],
   exports: [
     FormsModule,
+    OverlayModule,
+    CommonModule,
     GoAButtonComponent,
     GoAMicrositeLogoComponent,
     GoAHeaderComponent,
@@ -47,7 +56,7 @@ import { GoAHeroBannerComponent, GoAHeroBannerContentComponent, GoAHeroBannerLin
     GoARadioGroupComponent,
     GoAHeroBannerComponent,
     GoAHeroBannerContentComponent,
-    GoAHeroBannerLinkComponent
+    GoAHeroBannerLinkComponent,
   ],
   declarations: [
     GoAButtonComponent,
@@ -70,11 +79,8 @@ import { GoAHeroBannerComponent, GoAHeroBannerContentComponent, GoAHeroBannerLin
     GoARadioGroupComponent,
     GoAHeroBannerComponent,
     GoAHeroBannerContentComponent,
-    GoAHeroBannerLinkComponent
+    GoAHeroBannerLinkComponent,
   ],
-  providers: [
-    GoARadioService
-  ],
-  bootstrap: [CommonModule]
+  providers: [GoARadioService],
 })
 export class AngularComponentsModule {}
