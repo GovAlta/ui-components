@@ -4,6 +4,7 @@ import { GoAHeroBannerComponent, GoAHeroBannerContentComponent, GoAHeroBannerLin
 import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
+import heroBackground from '../../../../shared/storybook-common/assets/working-in-cold-hero-3_rdax_75.jpg'
 
 <Meta title="Component Library/Components/HeroBanner"
   decorators={[
@@ -20,7 +21,7 @@ import { action } from '@storybook/addon-actions';
 <Canvas>
   <Story name="With content and link" height={100}
     args={{
-      backgroundUrl: "https://www.alberta.ca/goa/design-system/images/working-in-cold-hero-3_rdax_75.jpg",
+      backgroundUrl: heroBackground,
       title: "Upgrading our bitumen",
       content: "Resources are available to help Alberta entrepreneurs and small businesses start, grow and succeed.",
       linkText: "Learn More",
