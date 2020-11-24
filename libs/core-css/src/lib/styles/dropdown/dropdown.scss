@@ -1,5 +1,6 @@
 @import '../mixin/input.scss';
 @import '../variables/colors.scss';
+@import '../mixin/svg/chevron.scss';
 
 @mixin goa-select {
   select {
@@ -55,6 +56,11 @@
 
   .dropdown-grouping {
     margin-top: 8px;
+
+    &.disabled {
+      opacity: 30%;
+    }
+
     .dropdown-textbox {
       @include goa-input-styles();
     }
@@ -62,6 +68,17 @@
     .dropdown-textbox.margin-override {
       margin: 0;
     }
+
+    .dropdown-textbox-filter{
+      @include goa-input-styles();
+      font-size: 14px !important;
+      border: none !important;
+      margin: 0 !important;
+      &:focus {
+        box-shadow: none !important;
+        outline: none;
+      }
+      }
   }
 
   /* add chevron */
@@ -74,6 +91,7 @@
     pointer-events: none;
     position: absolute;
     margin-top: 16px;
+    color: $goa-blue;
   }
 
   &.disabled {
@@ -118,4 +136,13 @@
     color: $goa-error-color;
     font-size: 14px;
   }
+}
+
+//dropdown is positioned on body, so selector must be global
+.dropdown-menu {
+  @include dropdown-menu-styles();
+}
+
+.goa-dropdown {
+  @include dropdown-styles();
 }
