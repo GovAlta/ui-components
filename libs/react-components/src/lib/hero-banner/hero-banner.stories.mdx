@@ -1,0 +1,141 @@
+import {
+  Meta,
+  Canvas,
+  Story,
+  Description,
+  ArgsTable,
+} from '@storybook/addon-docs/blocks';
+import { DoDont } from '@abgov/shared/storybook-common';
+import { GoAHeroBanner } from './hero-banner.component';
+import { GoAHeroBannerContent } from './content/hero-banner-content.component';
+import { GoAHeroBannerLink } from './link/hero-banner-link.component';
+
+export const Template = (args) => {
+  return <GoAHeroBanner {...args} />;
+};
+
+<Meta
+  title="Component Library/Components/Hero Banner"
+  component={GoAHeroBanner}
+  argTypes={{
+      title: {
+        description: 'The title of the banner',
+      },
+      backgroundUrl: {
+        description:
+          "The Url for the banner's background image.",
+      },
+      content: {
+        description: 'The content displayed under the title.',
+      },
+      linkText: {
+        description: 'The text displaye for the link/button.',
+      },
+      linkUrl: {
+        description: 'The Url for the link/button.',
+      }
+  }}
+/>
+
+<!-- {Template.bind({})} -->
+
+<Canvas>
+  <Story
+    name="With content and link"
+    height={100}
+    args={{
+      title: 'Upgrading our bitumen',
+      backgroundUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+      content:
+        'Resources are available to help Alberta entrepreneurs and small businesses start, grow and succeed.',
+      linkText: 'Learn more',
+      linkUrl: 'http://www.google.com',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="With content only"
+    height={100}
+    args={{
+      title: 'Upgrading our bitumen',
+      backgroundUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+      content:
+        'Resources are available to help Alberta entrepreneurs and small businesses start, grow and succeed.',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="With link only"
+    height={100}
+    args={{
+      title: 'Upgrading our bitumen',
+      backgroundUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+      linkText: 'Learn more',
+      linkUrl: 'http://www.google.com',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Overview
+
+A large image area used to give visual reinforcement of a particular section of content.
+
+## Examples
+
+### Passing properties
+```html
+<GoAHeroBanner title="Upgrading our bitumen" backgroundUrl='...'
+  content='Resources are available to help ...'
+  linkText='Learn more' linkUrl='...'>
+</GoAHeroBanner>
+```
+
+### Passing child elements
+```html
+<GoAHeroBanner title="Upgrading our bitumen" backgroundUrl='...'}>
+  <GoAHeroBannerContent content='Resources are available to help ...'/>
+  <GoAHeroBannerLink linkText='Learn more' linkUrl='...'/>
+</GoAHeroBanner>
+```
+
+## Properties
+
+### GoAHeroBanner
+
+<Description of={GoAHeroBanner} />
+<ArgsTable of={GoAHeroBanner} />
+
+### GoAHeroBannerContent
+
+<Description of={GoAHeroBannerContent} />
+<ArgsTable of={GoAHeroBannerContent} />
+
+### GoAHeroBannerLink
+
+<Description of={GoAHeroBannerLink} />
+<ArgsTable of={GoAHeroBannerLink} />
+
+## Usage guidelines
+
+### HeroBanner elements
+
+A hero banner must contain a title
+
+<DoDont dos={'Set a title'} donts={'Leave title blank'} />
+
+A hero banner may contain text content
+
+<DoDont
+  dos={'Add some optional text description content'}
+  donts={'Include too much content'}
+/>
