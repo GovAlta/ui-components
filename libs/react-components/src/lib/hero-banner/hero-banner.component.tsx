@@ -45,3 +45,5 @@ GoAHeroBanner.defaultProps = {
   linkText: '',
   linkUrl: '',
 };
+
+export default GoAHeroBanner;
