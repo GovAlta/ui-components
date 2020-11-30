@@ -120,6 +120,7 @@
     "@storybook/vue": "^6.0.17",
     "@svgr/webpack": "^5.4.0",
     "@testing-library/angular": "^10.0.0",
+    "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^10.4.7",
     "@testing-library/vue": "^5.0.4",
     "@types/jest": "26.0.8",

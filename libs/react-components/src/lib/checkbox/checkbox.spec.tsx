@@ -84,7 +84,7 @@ describe('GoA Checkbox', () => {
     const isChecked = jest.fn()
 
     render(<GoACheckbox selectionChange={isChecked} checked={false} required={true} >${label}</GoACheckbox>);
-   
+
     const checkbox = screen.getByRole('checkbox', {});
     userEvent.click(checkbox);
 
