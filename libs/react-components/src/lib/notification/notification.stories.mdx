@@ -1,0 +1,109 @@
+import GoANotification from './notification';
+import { Meta, Preview, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
+
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+//const message = <div>Information to the user goes in the content</div>
+
+<Meta title="Component Library/Components/Notification"
+    component={GoANotification}
+    argTypes={{
+      type: {
+        control: {
+          type: 'select',
+          options: ['important', 'information', 'event', 'emergency'],
+        },
+      },
+      message: {
+        control: {
+          type: 'text',
+        },
+      },
+      title: {
+        control: {
+          type: 'text',
+        },
+      },
+      isDismissable: {
+        control: {
+          type: 'boolean',
+        },
+      },
+      onDismiss: { action: 'Banner has been dismissed' },
+      notificationUrl: {
+        control: {
+          type: 'text',
+        },
+      },
+    }}
+ />
+
+# Notification Banner
+Notifications banners are used for global alerts and critical messaging required to be viewed at any page of a website.
+
+## Overview
+export const Template = (args) => <GoANotification {...args} />
+
+<Canvas>
+  <Story name="Variants" height={200}
+    args={{
+      type: 'information',
+      message: "Information to the user goes in the content",
+      isDismissable: true,
+      notificationUrl: '#',
+      title: 'Hidden Title',
+    }}
+  >
+     {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Examples
+
+```html
+<GoANotification
+  type="'important || 'information' || 'event' || 'emergency'",
+  title='Notification Title',
+  message="Information to the user goes in the message"
+  isDismissable: true,
+  notificationUrl: 'www.google.com',
+  title: 'Hidden Title',
+</>
+```
+
+or
+
+```html
+<GoANotification
+  type='information',
+  title='Notification Title',
+  isDismissable: true,
+  notificationUrl: 'www.google.com',
+  title: 'Hidden Title',
+>
+  Information to the user goes in the <i>message</i>
+</GoANotification>
+
+```
+
+## Properties
+<Description of={GoANotification} />
+<ArgsTable of={GoANotification} />
+
+## Usage guidelines
+### As a global banner
+When a significant event takes place or will take place, a global banner may appear at the top of the layout that warrants the attention of the user. The information presented must be of high priority. Don’t use more than one banner, unless absolutely necessary.
+
+<DoDont
+  dos={'Use notification banners only for high priority information.'}
+  donts={
+    'Overuse notification banners or use when information is not high priority.'
+  }
+/>
+
+### Light on content
+Global banners should communicate one piece of crucial information pertaining to the topic. The topic message should be a link that directs the user to the relevant page.
+<DoDont
+  dos={'Clearly and concisely write the topic as a link.'}
+  donts={'Go heavy on content. The linked page will provide more information.'}
+/>

@@ -22,6 +22,7 @@ import '@abgov/react-components/react-components.esm.css';
 import { GoACallout } from '@abgov/react-components';
 import { GoAButton } from '@abgov/react-components';
 import { GoACheckbox } from '@abgov/react-components';
+import { GoANotification } from '@abgov/react-components';
 
 function App() {
     return (
@@ -43,6 +44,14 @@ function App() {
             <div>Or click me instead</div>
           </GoAButton>
           <GoACheckbox checked={true}>Checkbox 1</GoACheckbox>
+          <GoANotification
+            type="'important || 'information' || 'event' || 'emergency'",
+            title='Notification Title',
+            message="Information to the user goes in the message"
+            isDismissable: true,
+            notificationUrl: 'www.google.com',
+            title: 'Hidden Title',
+          </>
         </div>
     )
 }
