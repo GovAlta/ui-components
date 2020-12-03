@@ -5,11 +5,11 @@ This library contains react components from the Government of Alberta.
 ## Installation
 
 1. Add @abgov/react-components  
-````npm add --save @abgov/react-components````
+   `npm add --save @abgov/react-components`
 2. OPTIONAL: in package.json specify the allowed versions for installation
-3. Add peer dependencies  
-4. OPTIONAL: Add to styles to import Alberta fonts and global element styles. 
-````import '@abgov/react-components/react-components.esm.css';````
+3. Add peer dependencies
+4. OPTIONAL: Add to styles to import Alberta fonts and global element styles.
+   `import '@abgov/react-components/react-components.esm.css';`
 
 ## Documentation
 
@@ -44,6 +44,13 @@ function App() {
             <div>Or click me instead</div>
           </GoAButton>
           <GoACheckbox checked={true}>Checkbox 1</GoACheckbox>
+          <GoACard
+            title = 'Energy Diversification Act',
+            description = 'We're encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans.',
+            cardImageUrl = 'working-in-cold-hero-3_rdax_75.jpg',
+            cardSize = 'auto',
+            titleUrl = 'http://www.google.ca'
+          />
           <GoANotification
             type="'important || 'information' || 'event' || 'emergency'",
             title='Notification Title',

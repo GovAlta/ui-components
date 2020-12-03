@@ -95,7 +95,7 @@ div.goa-card a:focus {
   outline-offset: 0;
 }
 
-div.goa-card li div.goa-thumb {
+div.goa-card li div.goa-poster {
   position: relative;
   display: block;
   padding: 56.25% 0 0;
@@ -104,7 +104,7 @@ div.goa-card li div.goa-thumb {
   background: #e5e5e5;
 }
 
-div.goa-card li div.goa-thumb img {
+div.goa-card li div.goa-poster img {
   position: absolute;
   top: 0;
   left: 0;
@@ -113,7 +113,7 @@ div.goa-card li div.goa-thumb img {
   border: none;
 }
 
-div.goa-card div.goa-thumb iframe {
+div.goa-card div.goa-poster iframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -149,8 +149,6 @@ div.goa-card.goa--secondary li {
 div.goa-card.goa--tertiary li {
   flex-basis: 32%;
 }
-
-
 
 /* goa-disclaimer ****************************************************************/
 
@@ -204,7 +202,6 @@ h2.goa-froufrou > span {
   color: #fff;
   vertical-align: top;
 }
-
 
 /* goa-notification ****************************************************************/
 
