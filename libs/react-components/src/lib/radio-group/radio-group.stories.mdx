@@ -1,0 +1,153 @@
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import { moduleMetadata } from '@storybook/react';
+
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+
+import { GoARadioGroup, GoARadio } from './radio-group';
+
+<Meta
+  title="Component Library/Components/RadioGroup"
+  component={GoARadioGroup}
+/>
+
+# RadioGroup
+
+A wrapper/group for a set of user input fields that allow the user to make a choice from a set of mutually exclusive, related options. Only one item in the list may be selected.
+
+## Overview
+
+export const TemplateBasic = (args) => (
+  <GoARadioGroup {...args}>
+    <GoARadio value="apple">apple</GoARadio>
+    <GoARadio value="orange">orange</GoARadio>
+    <GoARadio value="banana">banana</GoARadio>
+  </GoARadioGroup>
+);
+
+export const TemplateMinimal = () => (
+  <GoARadioGroup name="minimal-fruits">
+    <GoARadio value="apple">apple</GoARadio>
+    <GoARadio value="orange">orange</GoARadio>
+    <GoARadio value="banana">banana</GoARadio>
+  </GoARadioGroup>
+);
+
+export const TemplateDynamic = (args) => (
+  <GoARadioGroup {...args}></GoARadioGroup>
+);
+
+#### Basic
+
+<Canvas>
+  <Story
+    name="Dynamic"
+    height={200}
+    args={{
+      name: 'dynamic-fruits',
+      title: 'Which of the following is your favorite fruit?',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      requiredErrorMessage: 'Please select a fruit',
+      required: false,
+      disabled: false,
+      labelPosition: 'after',
+      items: [
+        {text: 'Grapes', value: 'grapes'},
+        {text: 'Pears', value: 'pears'},
+        {text: 'Kiwi', value: 'kiwi'},
+      ],
+      onChange: (value) => {
+        action('selection changed')(value);
+      },
+    }}
+  >
+    {TemplateDynamic.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Basic"
+    height={200}
+    args={{
+      name: 'fruits',
+      title: 'Which of the following is your favorite fruit?',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      requiredErrorMessage: 'Please select a fruit',
+      required: false,
+      disabled: false,
+      labelPosition: 'after',
+      onChange: (value) => {
+        action('selection changed')(value);
+      },
+    }}
+  >
+    {TemplateBasic.bind({})}
+  </Story>
+</Canvas>
+
+#### Minimal
+
+<Canvas>
+  <Story
+    name="Minimal"
+    height={200}
+    args={{
+      onChange: (value) => {
+        action('selection changed')(value);
+      },
+    }}
+  >
+    {TemplateMinimal.bind({})}
+  </Story>
+</Canvas>
+
+#### Preset value
+
+<Canvas>
+  <Story
+    name="Preset"
+    height={200}
+    args={{
+      name: 'fruits',
+      value: 'orange',
+      title: 'Which of the following is your favorite fruit?',
+      helperText: 'This one has an initial value of orange set',
+      requiredErrorMessage: 'Please select a fruit',
+      required: false,
+      disabled: false,
+      labelPosition: 'after',
+      onChange: (value) => {
+        action('selection changed')(value);
+      },
+    }}
+  >
+    {TemplateBasic.bind({})}
+  </Story>
+</Canvas>
+
+## Properties
+
+#### GoARadioGroup
+
+<Description of={GoARadioGroup} />
+<ArgsTable of={GoARadioGroup} />
+
+# Usage guidelines
+
+### Select multiple options
+
+Use radio buttons or a drop down list when the user can only select one option. Use checkboxes when the user can select any number of options.
+
+<DoDont
+  dos={'Use radios when the user is allowed to select only one option.'}
+  donts={'Use radios when the user is allowed to select more than one option'}
+/>
