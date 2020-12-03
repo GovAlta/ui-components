@@ -1,43 +1,71 @@
 import { DoDont } from '@abgov/shared/storybook-common';
-import { GoACardComponent, GoACardFooterComponent, GoACardHeaderComponent, GoACardThumbImageComponent, GoACardContentComponent } from './card.component';
+import {
+  GoACardComponent,
+  GoACardFooterComponent,
+  GoACardHeaderComponent,
+  GoACardThumbImageComponent,
+  GoACardContentComponent,
+} from './card.component';
 import { GoAButtonComponent } from '../button/button.component';
 
-import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
+import {
+  Meta,
+  Canvas,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 
-<Meta title="Component Library/Components/Card"
+<Meta
+  title="Component Library/Components/Card"
   component={GoACardComponent}
-   argTypes={{ 
-      content: {
-          description: 'Content inside of the goa-card-content component.',
-          control: 'text'
-      }, 
-      headerContent: {
-          description: 'Content inside of the goa-card-header component.',
-          control: 'text'
-      }, 
-      cardSize: { 
-        control: 'select',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: 'full' },
-        }  
-      }
-   }}
+  argTypes={{
+    content: {
+      description: 'Content inside of the goa-card-content component.',
+      control: 'text',
+    },
+    headerContent: {
+      description: 'Content inside of the goa-card-header component.',
+      control: 'text',
+    },
+    cardSize: {
+      control: 'select',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: 'full' },
+      },
+    },
+  }}
   decorators={[
-        moduleMetadata({ declarations: [GoACardComponent, GoACardFooterComponent, GoACardHeaderComponent, GoACardThumbImageComponent, GoACardContentComponent, GoAButtonComponent] }),
-    ]
-} />
+    moduleMetadata({
+      declarations: [
+        GoACardComponent,
+        GoACardFooterComponent,
+        GoACardHeaderComponent,
+        GoACardThumbImageComponent,
+        GoACardContentComponent,
+        GoAButtonComponent,
+      ],
+    }),
+  ]}
+/>
 
 # Cards
+
 ### Without Thumb
+
 <Canvas>
-  <Story name="Without Thumb" height={400}
+  <Story
+    name="Without Thumb"
+    height={400}
     args={{
-        cardSize: 'full',
-        headerContent: 'My card header.',
-        content: 'My card content.'
-    }}>
+      cardSize: 'full',
+      headerContent: 'My card header.',
+      content: 'My card content.',
+    }}
+  >
     {(args) => {
       return {
         template: `<goa-card [cardSize]="cardSize">
@@ -48,20 +76,24 @@ import { action } from '@storybook/addon-actions';
                           <button style="margin: 12px 12px 0 0;" goa-button buttonSize="small" buttonType="tertiary">Action 2</button>
                         </goa-card-footer>
                     </goa-card>`,
-        props: args
-      }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
 ### With Thumb
+
 <Canvas>
-  <Story name="With Thumb" height={400}
+  <Story
+    name="With Thumb"
+    height={400}
     args={{
-        cardSize: 'full',
-        headerContent: 'My card header.',
-        content: 'My card content.'
-    }}>
+      cardSize: 'full',
+      headerContent: 'My card header.',
+      content: 'My card content.',
+    }}
+  >
     {(args) => {
       return {
         template: `<goa-card [cardSize]="cardSize">
@@ -73,17 +105,16 @@ import { action } from '@storybook/addon-actions';
                           <button style="margin: 12px 12px 0 0;" goa-button buttonSize="small" buttonType="tertiary">Action 2</button>
                         </goa-card-footer>
                     </goa-card>`,
-        props: args
-      }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
 ### In a Grid
+
 <Canvas>
-  <Story name="In a flex-layout" height={400}
-    args={{
-    }}>
+  <Story name="In a flex-layout" height={400} args={{}}>
     {(args) => {
       return {
         template: `<div style="display:flex;">
@@ -108,71 +139,110 @@ import { action } from '@storybook/addon-actions';
                       <goa-card style="flex: 1 0 0; margin: 28px;">
                           <goa-card-thumb-image url="working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
                           <goa-card-header>Card 3</goa-card-header>
-                          <goa-card-content>Flex grow.  Note, when card uses thumbnail the image height will scale to maintain aspect ratio.</goa-card-content>
+                          <goa-card-content>Flex grow.  Note, when card uses cardImage the image height will scale to maintain aspect ratio.</goa-card-content>
                         <goa-card-footer>
                           <button style="margin: 12px 12px 0 0;" goa-button buttonSize="small" buttonType="tertiary">Action 1</button>
                           <button style="margin: 12px 12px 0 0;" goa-button buttonSize="small" buttonType="tertiary">Action 2</button>
                         </goa-card-footer>
                       </goa-card>
                     </div>`,
-        props: args
-      }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
 ## Overview
+
 A featured, card-shaped link that consists of an image or video, title and lead.
 
-Cards are similar to callouts, where they present information at a higher level of 
-importance. Cards are often used to facilitate navigation, highlight a feature, or 
+Cards are similar to callouts, where they present information at a higher level of
+importance. Cards are often used to facilitate navigation, highlight a feature, or
 promote a call to action.
 
 ## Examples
+
 ### With Image Thumb
+
 ```html
 <goa-card>
-    <goa-card-thumb-image url="test" alt="Alt"></goa-card-thumb-image>
-    <goa-card-header>Header</goa-card-header>
-    <goa-card-content>Content</goa-card-content>
-    <goa-card-footer><button goa-button buttonSize="small" buttonType="tertiary">Action 1</button></goa-card-footer>
-</goa-card>>
+  <goa-card-thumb-image url="test" alt="Alt"></goa-card-thumb-image>
+  <goa-card-header>Header</goa-card-header>
+  <goa-card-content>Content</goa-card-content>
+  <goa-card-footer
+    ><button goa-button buttonSize="small" buttonType="tertiary">
+      Action 1
+    </button></goa-card-footer
+  > </goa-card
+>>
 ```
+
 ### Without Thumb
+
 ```html
 <goa-card>
-    <goa-card-header>Header</goa-card-header>
-    <goa-card-content>Content</goa-card-content>
-    <goa-card-footer><button goa-button buttonSize="small" buttonType="tertiary">Action 1</button></goa-card-footer>
-</goa-card>>
+  <goa-card-header>Header</goa-card-header>
+  <goa-card-content>Content</goa-card-content>
+  <goa-card-footer
+    ><button goa-button buttonSize="small" buttonType="tertiary">
+      Action 1
+    </button></goa-card-footer
+  > </goa-card
+>>
 ```
 
 ### In flexbox
+
 ```html
 <div style="display:flex;">
-    <goa-card style="margin: 28px; width:200px;">
-        <goa-card-thumb-image url="working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
-        <goa-card-header>Card 1</goa-card-header>
-        <goa-card-content>Fixed width. Note, when card uses thumbnail the image height will scale to maintain aspect ratio.</goa-card-content>
-        <goa-card-footer><button goa-button buttonSize="small" buttonType="tertiary">Action 1</button></goa-card-footer>
-    </goa-card>
-    <goa-card style="margin: 28px;">
-        <goa-card-thumb-image url="working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
-        <goa-card-header>Card 2</goa-card-header>
-        <goa-card-content>Auto width.</goa-card-content>
-        <goa-card-footer><button goa-button buttonSize="small" buttonType="tertiary">Action 1</button></goa-card-footer>
-    </goa-card>
-    <goa-card style="flex: 1 0 0; margin: 28px;">
-        <goa-card-thumb-image url="working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
-        <goa-card-header>Card 3</goa-card-header>
-        <goa-card-content>Flex grow.</goa-card-content>
-        <goa-card-footer><button goa-button buttonSize="small" buttonType="tertiary">Action 1</button></goa-card-footer>
-    </goa-card>
-  </div>
+  <goa-card style="margin: 28px; width:200px;">
+    <goa-card-thumb-image
+      url="working-in-cold-hero-3_rdax_75.jpg"
+      alt="hero pic"
+    ></goa-card-thumb-image>
+    <goa-card-header>Card 1</goa-card-header>
+    <goa-card-content
+      >Fixed width. Note, when card uses cardImage the image height will scale
+      to maintain aspect ratio.</goa-card-content
+    >
+    <goa-card-footer
+      ><button goa-button buttonSize="small" buttonType="tertiary">
+        Action 1
+      </button></goa-card-footer
+    >
+  </goa-card>
+  <goa-card style="margin: 28px;">
+    <goa-card-thumb-image
+      url="working-in-cold-hero-3_rdax_75.jpg"
+      alt="hero pic"
+    ></goa-card-thumb-image>
+    <goa-card-header>Card 2</goa-card-header>
+    <goa-card-content>Auto width.</goa-card-content>
+    <goa-card-footer
+      ><button goa-button buttonSize="small" buttonType="tertiary">
+        Action 1
+      </button></goa-card-footer
+    >
+  </goa-card>
+  <goa-card style="flex: 1 0 0; margin: 28px;">
+    <goa-card-thumb-image
+      url="working-in-cold-hero-3_rdax_75.jpg"
+      alt="hero pic"
+    ></goa-card-thumb-image>
+    <goa-card-header>Card 3</goa-card-header>
+    <goa-card-content>Flex grow.</goa-card-content>
+    <goa-card-footer
+      ><button goa-button buttonSize="small" buttonType="tertiary">
+        Action 1
+      </button></goa-card-footer
+    >
+  </goa-card>
+</div>
 ```
 
 ## Properties
-### GoACardComponent 
+
+### GoACardComponent
 
 <Description of={GoACardComponent} />
 
@@ -194,8 +264,10 @@ promote a call to action.
 <Description of={GoACardFooterComponent} />
 
 ## Usage guidelines
+
 ### Card elements
-A card may contain at the very minimum a header and one other component. 
+
+A card may contain at the very minimum a header and one other component.
 
 <DoDont
   dos={'Use at least a header and one other component'}
@@ -203,6 +275,7 @@ A card may contain at the very minimum a header and one other component.
 />
 
 ### Card layout
+
 When using cards in a flex or inline layout, ensure that one card is set to grow and fill the width of the screen.
 
 <DoDont
@@ -211,11 +284,10 @@ When using cards in a flex or inline layout, ensure that one card is set to grow
 />
 
 ### Image ratio
-Thumbnail images used must conform to a 16:9 image aspect ratio.
+
+cardImage images used must conform to a 16:9 image aspect ratio.
 
 <DoDont
   dos={'Optimize photographs for mobile, tablet, and desktop.'}
   donts={'Use any other image aspect ratio other than 16:9.'}
 />
-
-
