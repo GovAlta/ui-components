@@ -9,7 +9,7 @@ type AppProps = {
   /**
    * Information to the user goes in the content. Information can include markup
   */
-  content: string;
+  content?: string;
   /**
   * Type of button
   */
@@ -30,8 +30,8 @@ export const GoAButton = ({ content, buttonType = "primary", buttonSize = 'norma
   let buttonTypeClass = buttonType==='primary' ? '' : `goa--${buttonType}`;
   return (
     <div>
-      <button 
-        className={`goa-button ${buttonSize==='small' ? 'btn-small' : ''} ${buttonTypeClass}`} 
+      <button
+        className={`goa-button ${buttonSize==='small' ? 'btn-small' : ''} ${buttonTypeClass}`}
         title={tooltip}
         {...props}
       >
