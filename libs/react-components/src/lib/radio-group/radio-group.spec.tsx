@@ -33,7 +33,7 @@ describe('RadioGroup', () => {
         onChange={() => { }}
       >
         {data.radios.map((radio) => (
-          <GoARadio value={radio.value}>{radio.text}</GoARadio>
+          <GoARadio key={radio.value} value={radio.value}>{radio.text}</GoARadio>
         ))}
       </GoARadioGroup>
     );
