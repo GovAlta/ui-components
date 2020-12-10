@@ -5,10 +5,8 @@
   display: inline-flex;
   flex-direction: column;
 
-  height: 100%;
   width: 100%;
   vertical-align: top;
-
   background: $goa-background-color;
   border: 1px solid $goa-border-color-secondary;
 
@@ -19,7 +17,6 @@
     flex: 1 0 0;
     display: flex;
     flex-direction: column;
-
     border-top: 8px solid $goa-blue-alberta;
 
     .goa-text,
@@ -38,19 +35,19 @@
       color: $goa-text-color;
       font-size: 18px;
       line-height: 28px;
-
+      height: 100%;
       flex: 1 0 0;
     }
 
     .goa-footer {
-      box-sizing: border-box;
       font-size: 16px;
       line-height: 28px;
-      display: flex;
-      flex-direction: row;
+      display: inline-flex;
       flex-wrap: wrap;
     }
-
+    .goa-footer > div {
+      margin: 0 10px;
+    }
     .goa-title {
       box-sizing: border-box;
       font-size: 24px;

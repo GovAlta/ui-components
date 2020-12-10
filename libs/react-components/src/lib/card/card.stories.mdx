@@ -41,7 +41,7 @@ const content = (
         type: 'text',
       },
     },
-    cardSize: {
+    cardWidth: {
       control: {
         type: 'select',
         options: ['full', 'auto'],
@@ -69,7 +69,6 @@ export const footerTemplate = (args) => {
         content="Action1"
         tooltip="Hovering over"
         onClick={() => alert('Card button function is working')}
-        style={{ marginRight: 20, marginBottom: 20 }}
       />
       <GoAButton
         buttonType="tertiary"
@@ -85,7 +84,7 @@ export const layoutTemplate = (args) => {
   return (
     <div style={{ display: 'flex' }}>
       <div style={{ marginRight: 20 }}>
-        <GoACard {...args} cardSize={200}>
+        <GoACard {...args} cardWidth={200}>
           <GoAButton
             buttonType="tertiary"
             buttonSize="small"
@@ -103,7 +102,7 @@ export const layoutTemplate = (args) => {
         </GoACard>
       </div>
       <div style={{ marginRight: 20 }}>
-        <GoACard {...args} cardSize={500} />
+        <GoACard {...args} cardWidth={500} />
       </div>
       <GoACard {...args} />
     </div>
@@ -121,7 +120,7 @@ export const layoutTemplate = (args) => {
       description:
         'We are encouraging companies to turn out oil ad gas resources into more valuable.',
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
-      cardSize: 'auto',
+      cardWidth: 'auto',
       titleUrl: 'http://www.google.ca',
     }}
   >
@@ -139,7 +138,7 @@ export const layoutTemplate = (args) => {
       title: 'Energy Diversification Act',
       description:
         'We are encouraging companies to turn out oil ad gas resources into more valuable.',
-      cardSize: 'auto',
+      cardWidth: 'auto',
       titleUrl: 'http://www.google.ca',
     }}
   >
@@ -158,7 +157,7 @@ export const layoutTemplate = (args) => {
       description:
         'We are encouraging companies to turn out oil ad gas resources into more valuable.',
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
-      cardSize: 'auto',
+      cardWidth: 'auto',
       titleUrl: 'http://www.google.ca',
     }}
   >
@@ -177,7 +176,7 @@ export const layoutTemplate = (args) => {
       description:
         'We are encouraging companies to turn out oil ad gas resources into more valuable.',
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
-      cardSize: 'auto',
+      cardWidth: 'auto',
       titleUrl: 'http://www.google.ca',
     }}
   >
@@ -196,7 +195,7 @@ export const layoutTemplate = (args) => {
       description:
         'We are encouraging companies to turn out oil ad gas resources into more valuable products.',
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
-      cardSize: '200',
+      cardWidth: '200',
       titleUrl: 'http://www.google.ca',
     }}
   >
@@ -216,7 +215,7 @@ export const layoutTemplate = (args) => {
   ,
   titleUrl="http://www.google.ca"
   ,
-  cardSize="auto"
+  cardWidth="auto"
   ,
   cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
   ,
@@ -231,7 +230,7 @@ export const layoutTemplate = (args) => {
   ,
   description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
   ,
-  cardSize="auto"
+  cardWidth="auto"
   ,
   titleUrl="http://www.google.ca"
 />
@@ -247,7 +246,7 @@ export const layoutTemplate = (args) => {
   ,
   cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
   ,
-  cardSize="auto"
+  cardWidth="auto"
   ,
   titleUrl="http://www.google.ca"
 />
@@ -263,7 +262,7 @@ export const layoutTemplate = (args) => {
   ,
   cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
   ,
-  cardSize="full"
+  cardWidth="full"
   ,
   titleUrl="http://www.google.ca"
 />
@@ -279,7 +278,7 @@ export const layoutTemplate = (args) => {
   ,
   cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
   ,
-  cardSize="full"
+  cardWidth="full"
   ,
   titleUrl="http://www.google.ca"
 >

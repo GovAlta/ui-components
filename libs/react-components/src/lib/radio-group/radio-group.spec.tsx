@@ -30,10 +30,12 @@ describe('RadioGroup', () => {
         required={data.required}
         value={data.value}
         requiredErrorMessage={data.requiredErrorMessage}
-        onChange={() => { }}
+        onChange={() => {}}
       >
         {data.radios.map((radio) => (
-          <GoARadio key={radio.value} value={radio.value}>{radio.text}</GoARadio>
+          <GoARadio key={radio.value} value={radio.value}>
+            {radio.text}
+          </GoARadio>
         ))}
       </GoARadioGroup>
     );
@@ -51,7 +53,7 @@ describe('RadioGroup', () => {
         value={data.value}
         requiredErrorMessage={data.requiredErrorMessage}
         items={data.radios}
-        onChange={() => { }}
+        onChange={() => {}}
       />
     );
   }
