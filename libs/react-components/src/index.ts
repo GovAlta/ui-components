@@ -7,6 +7,7 @@ import GoaMicrositeLogo from './lib/microsite-logo/microsite-logo';
 import GoaHeroBanner from './lib/hero-banner/hero-banner.component';
 import GoACard from './lib/card/card.component';
 import GoARadioGroup from './lib/radio-group/radio-group';
+import GoACardGroup from './lib/card-group/card.group.component';
 
 export {
   GoANotification,
@@ -17,4 +18,5 @@ export {
   GoaMicrositeLogo,
   GoaHeroBanner,
   GoACard,
+  GoACardGroup
 };
