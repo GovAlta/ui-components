@@ -39,7 +39,7 @@ describe('GoA Card', () => {
 
   it('if use auto layout, should render as auto selected', () => {
     render(
-      <GoACard title={title} cardImageUrl={cardImageUrl} cardSize="auto" />
+      <GoACard title={title} cardImageUrl={cardImageUrl} cardWidth="auto" />
     );
     const container = document.querySelector('.goa-card ');
     expect(container).not.toBeNull();
@@ -51,7 +51,7 @@ describe('GoA Card', () => {
 
   it('if use full layout, should render as full width', () => {
     render(
-      <GoACard title={title} cardImageUrl={cardImageUrl} cardSize="full" />
+      <GoACard title={title} cardImageUrl={cardImageUrl} cardWidth="full" />
     );
     const container = document.querySelector('.goa-card ');
     expect(container).not.toBeNull();
@@ -64,7 +64,7 @@ describe('GoA Card', () => {
 
   it('if use customer input layout, should render as fixed width', () => {
     render(
-      <GoACard title={title} cardImageUrl={cardImageUrl} cardSize={200} />
+      <GoACard title={title} cardImageUrl={cardImageUrl} cardWidth={200} />
     );
     const container = document.querySelector('.goa-card ');
     expect(container).not.toBeNull();

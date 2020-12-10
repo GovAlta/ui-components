@@ -1,0 +1,140 @@
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+
+import { GoACard } from '../card/card.component';
+import { GoACardGroup } from './card.group.component';
+import GoAButton from '../button/button';
+
+<Meta
+  title="Component Library/Components/Card.group"
+  component={GoACardGroup}
+  argTypes={{
+    title: {
+      control: {
+        type: 'text',
+      },
+      layout: {
+        control: {
+          type: 'select',
+          layouts: ['basic', 'column'],
+        },
+      },
+    },
+  }}
+/>
+
+# CardGroup
+
+A wrapper/group for a set of card display
+
+## Overview
+
+export const Template = (args) => <GoACardGroup {...args} />;
+
+export const groupTemplate = (args) => {
+  return (
+    <GoACardGroup {...args}>
+      <GoACard
+        title="Energy Diversification Act 1"
+        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        titleUrl="http://www.google.ca"
+        cardWidth={400}
+        cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+      >
+        <GoAButton
+          buttonType="tertiary"
+          buttonSize="small"
+          content="Action1"
+          tooltip="Hovering over"
+          onClick={() => alert('Card button function is working')}
+        />
+        <GoAButton
+          buttonType="tertiary"
+          buttonSize="small"
+          content="Action2"
+          tooltip="Hovering over"
+        />
+      </GoACard>
+      <GoACard
+        title="Energy Diversification Act 2"
+        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        titleUrl="http://www.google.ca"
+        cardWidth={400}
+        cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+      />
+      <GoACard
+        title="Energy Diversification Act 3"
+        titleUrl="http://www.google.ca"
+        cardWidth={400}
+        cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+      />
+      <GoACard
+        title="Energy Diversification Act 4"
+        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        titleUrl="http://www.google.ca"
+        cardWidth={400}
+        cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+      />
+      <GoACard
+        title="Energy Diversification Act 5"
+        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        titleUrl="http://www.google.ca"
+        cardWidth={400}
+        cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+      />
+      <GoACard
+        title="Energy Diversification Act 6"
+        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        titleUrl="http://www.google.ca"
+        cardWidth={400}
+        cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+      />
+    </GoACardGroup>
+  );
+};
+
+<Canvas>
+  <Story
+    name="Variants"
+    args={{
+      title: 'Dashboard',
+    }}
+  >
+    {groupTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Examples
+
+```html
+<GoACardGroup title={'Dashboard'} layout='basic' >
+     <GoACard  title="Energy Diversification Act 1"
+                   description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+                    titleUrl="http://www.google.ca"
+                cardWidth={400}
+                cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+       />
+
+</GoACardGroup>
+```
+
+## Json Example cardItems is json object.
+
+```html
+<GoACardGroup title={'Dashboard'} layout='basic' cardItems={cardItem}/>
+```
+
+## Properties
+
+### GoACardGroup
+
+<Description of={GoACardGroup} />
+<ArgsTable of={GoACardGroup} />

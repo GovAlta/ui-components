@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import '../../theme.scss';
 import './card.scss';
-type CardSize = 'full' | 'auto' | number;
+type CardWidth = 'full' | 'auto' | number;
 interface Props {
   /** Card title, required */
   title: string;
@@ -10,7 +10,7 @@ interface Props {
   /** Card image , display on top of title */
   cardImageUrl?: string;
   /** Display card size to allow card responsively show in different device*/
-  cardSize?: CardSize;
+  cardWidth?: CardWidth;
   /** Navigation to relate webside from Card title */
   titleUrl?: string;
   /** customize footer by passing react component code */
@@ -20,12 +20,12 @@ export const GoACard: FC<Props> = ({
   title,
   description = null,
   cardImageUrl = null,
-  cardSize = 'auto',
+  cardWidth = 'auto',
   titleUrl = null,
   children = null,
 }) => {
   return (
-    <div className="goa-card" style={{ width: cardSize }}>
+    <div className="goa-card" style={{ width: cardWidth }}>
       {cardImageUrl && (
         <div className="goa-poster">
           <img src={cardImageUrl} alt="Card cardImageUrl" />
