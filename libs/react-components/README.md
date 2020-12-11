@@ -59,6 +59,14 @@ function App() {
             notificationUrl: 'www.google.com',
             title: 'Hidden Title',
           </>
+          <GoACardGroup title={'Dashboard'} layout='basic' >
+            <GoACard  title="Energy Diversification Act 1"
+                          description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+                            titleUrl="http://www.google.ca"
+                        cardWidth={400}
+                        cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+              />
+          </GoACardGroup>
         </div>
     )
 }
