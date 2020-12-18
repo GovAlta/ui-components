@@ -171,7 +171,7 @@ describe('Notification', () => {
 
     const closex = screen.getByRole('closeBox');
     userEvent.click(closex)
-    expect(onClickStub).toHaveBeenCalled
+    expect(onClickStub).toHaveBeenCalled()
   });
 
 });

@@ -12,8 +12,8 @@ describe('GoA Microsite Logo', () => {
   const buttonNormalClassName = 'normal';
   const buttonTooltip = 'hovering';
 
-  test('should render the button title', async () => {
-    const { baseElement } = await render(GoAButton, {
+  test('should render the button title', () => {
+    const { baseElement } = render(GoAButton, {
       props: { buttonType: buttonType, buttonSize: buttonSize, content: buttonTitle }
     });
 
@@ -21,8 +21,8 @@ describe('GoA Microsite Logo', () => {
     expect(screen.getByText(buttonTitle))
   });
 
-  test('buttonType=primary should render primary styling', async () => {
-    await render(GoAButton, {
+  test('buttonType=primary should render primary styling', () => {
+    render(GoAButton, {
       props: { buttonType: buttonType, buttonSize: buttonSize, content: buttonTitle }
     });
 
@@ -32,8 +32,8 @@ describe('GoA Microsite Logo', () => {
     expect(button.className).not.toContain(buttonTertiaryClassName);
   });
 
-  test('buttonType=secondary should render secondary styling', async () => {
-    await render(GoAButton, {
+  test('buttonType=secondary should render secondary styling', () => {
+    render(GoAButton, {
       props: { buttonType: 'secondary', buttonSize: buttonSize, content: buttonTitle }
     });
 
@@ -43,8 +43,8 @@ describe('GoA Microsite Logo', () => {
     expect(button.className).not.toContain(buttonTertiaryClassName);
   });
 
-  test('buttonType=tertiary should render tertiary styling', async () => {
-    await render(GoAButton, {
+  test('buttonType=tertiary should render tertiary styling', () => {
+    render(GoAButton, {
       props: { buttonType: 'tertiary', buttonSize: buttonSize, content: buttonTitle }
     });
 
@@ -54,8 +54,8 @@ describe('GoA Microsite Logo', () => {
     expect(button.className).toContain(buttonTertiaryClassName);
   });
 
-  test('buttonSize unset should render normal styling', async () => {
-    await render(GoAButton, {
+  test('buttonSize unset should render normal styling', () => {
+    render(GoAButton, {
       props: { buttonType: buttonType, buttonSize: 'small', content: buttonTitle }
     });
 
@@ -63,8 +63,8 @@ describe('GoA Microsite Logo', () => {
     expect(button.className).not.toContain(buttonNormalClassName);
   });
 
-  test('tooltip is set to button title', async () => {
-    await render(GoAButton, {
+  test('tooltip is set to button title', () => {
+    render(GoAButton, {
       props: { buttonType: 'tertiary', content: buttonTitle, tooltip: buttonTooltip }
     });
 
@@ -72,13 +72,13 @@ describe('GoA Microsite Logo', () => {
     expect(button.title).toContain(buttonTooltip);
   });
 
-  test('responds to events', async () => {
+  test('responds to events', () => {
     const onClickStub = jest.fn()
-    await render(GoAButton, {
+    render(GoAButton, {
       props: { buttonType: 'tertiary', content: buttonTitle, tooltip: buttonTooltip, onClick: onClickStub, datatestid: "goaButton" }
     });
     const button = screen.getByRole('button');
     userEvent.click(button)
-    expect(onClickStub).toHaveBeenCalled
+    expect(onClickStub).toHaveBeenCalled()
   });
 });

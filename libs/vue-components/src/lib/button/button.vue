@@ -5,13 +5,8 @@
 </template>
 
 <script lang="typescript">
-import GoAMicrositeLogo from '../microsite-logo/microsite-logo.vue';
 
 export default {
-
-  components: {
-    'goa-microsite-logo': GoAMicrositeLogo
-  },
   name: 'goa-header',
   props: {
     /**
