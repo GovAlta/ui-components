@@ -21,5 +21,9 @@
   },
   "main": "vue-components.umd.js",
   "unpkg": "vue-components.umd.min.js",
-  "module": "vue-components.common.js"
+  "module": "vue-components.common.js",
+  "devDependencies": {
+    "core-js": "^3.8.1",
+    "vue": "^2.6.12"
+  }
 }
