@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/vue';
 import GoAButton from './button.vue';
 import userEvent from '@testing-library/user-event';
 
-describe('GoA Microsite Logo', () => {
+describe('Goa Vue Button', () => {
   const buttonType = 'primary';
   const buttonClassName = 'goa-button';
   const buttonSecondaryClassName = 'goa--secondary';
@@ -75,7 +75,7 @@ describe('GoA Microsite Logo', () => {
   test('responds to events', () => {
     const onClickStub = jest.fn()
     render(GoAButton, {
-      props: { buttonType: 'tertiary', content: buttonTitle, tooltip: buttonTooltip, onClick: onClickStub, datatestid: "goaButton" }
+      props: { buttonType: 'tertiary', content: buttonTitle, tooltip: buttonTooltip, click: onClickStub, datatestid: "goaButton" }
     });
     const button = screen.getByRole('button');
     userEvent.click(button)
