@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/vue';
 import GoAButton from './button.vue';
 import userEvent from '@testing-library/user-event';
-import {ServiceLevel} from "./service-level.enum";
 
 describe('GoA Microsite Logo', () => {
   const buttonType = 'primary';
