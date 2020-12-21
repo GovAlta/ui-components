@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/vue';
 import GoAHeader from './header.vue';
-import {ServiceLevel} from "./service-level.enum";
 
 describe('GoA Microsite Logo', () => {
   const serviceName = 'DIO service';
@@ -8,7 +7,7 @@ describe('GoA Microsite Logo', () => {
 
   test('should render the service name', async () => {
     await render(GoAHeader, {
-      props: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: ServiceLevel.Alpha }
+      props: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: 'alpha' }
     });
 
     expect(screen.getByText(serviceName))
@@ -16,7 +15,7 @@ describe('GoA Microsite Logo', () => {
 
   test('should link to the serviceHome', async () => {
     await render(GoAHeader, {
-      props: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: ServiceLevel.Alpha}
+      props: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: 'alpha' }
     });
 
     expect((screen.getByRole('link', { name: microSiteLink }) as HTMLAnchorElement).href).toEqual(microSiteLink);
@@ -24,25 +23,25 @@ describe('GoA Microsite Logo', () => {
 
   test('should see the alpha flair when in alpha mode', async () => {
     await render(GoAHeader, {
-      props: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: ServiceLevel.Alpha }
+      props: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: 'alpha' }
     });
 
-    expect(screen.getByText(ServiceLevel.Alpha, { selector: '.service-level--alpha'}));
+    expect(screen.getByText('alpha', { selector: '.service-level--alpha'}));
   });
 
   test('should see the alpha flair when in beta mode', async () => {
     await render(GoAHeader, {
-      props: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: ServiceLevel.Beta}
+      props: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: 'beta'}
     });
 
-    expect(screen.getByText(ServiceLevel.Beta, { selector: '.service-level--beta'}));
+    expect(screen.getByText('beta', { selector: '.service-level--beta'}));
   });
 
   test('should see the alpha flair when in live mode', async () => {
     await render(GoAHeader, {
-      props: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: ServiceLevel.Live}
+      props: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: 'live'}
     });
 
-    expect(screen.getByText(ServiceLevel.Live, { selector: '.service-level--live'}));
+    expect(screen.getByText('live', { selector: '.service-level--live'}));
   });
 });
