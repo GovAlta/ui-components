@@ -1,0 +1,227 @@
+import { DoDont } from '@abgov/shared/storybook-common';
+import GoACard from './card';
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+
+<Meta
+  title="Component Library/Page Layout/card"
+  argTypes={{
+    title: { control: { type: 'text' } },
+    description: { control: { type: 'text' } },
+    cardImageUrl: {
+      control: {
+        type: 'text',
+      },
+    },
+    titleUrl: {
+      control: {
+        type: 'text',
+      },
+    },
+    cardWidth: {
+      control: {
+        type: 'select',
+        options: ['full', 'auto'],
+      },
+    },
+  }}
+  component={GoACard}
+/>
+
+export const FooterTemplate = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { GoACard },
+  template:
+    '<GoACard {...args}>	<button slot="footer" class="btn btn-primary">Click me</button></GoACard>',
+});
+
+# Card
+
+Cards are often used to facilitate navigation, highlight a feature, or promote a call to action.
+Cards should be easy to scan for relevant and actionable information. Elements, like text and images,
+should be placed on them in a way that clearly indicates hierarchy.
+
+### Basic
+
+<Canvas>
+  <Story
+    name="Basic"
+    height={200}
+    args={{
+      title: 'Energy Diversification Act',
+      description:
+        'Information to the user goes in the content.  Information can include markup as desired.',
+      cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+      titleUrl: 'http://www.google.ca',
+      cardWidth: 'auto',
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoACard },
+        render: function (createElement) {
+          return createElement(GoACard, {
+            props: args,
+          });
+        },
+      };
+    }}
+  </Story>
+</Canvas>
+
+### NoThumb
+
+<Canvas>
+  <Story
+    name="NoThumb"
+    height={200}
+    args={{
+      title: 'Energy Diversification Act',
+      description:
+        'Information to the user goes in the content.  Information can include markup as desired.',
+
+      titleUrl: 'http://www.google.ca',
+      cardWidth: 'auto',
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoACard },
+        render: function (createElement) {
+          return createElement(GoACard, {
+            props: args,
+          });
+        },
+      };
+    }}
+  </Story>
+</Canvas>
+
+### FixWidth
+
+<Canvas>
+  <Story
+    name="FixWidth"
+    height={200}
+    args={{
+      title: 'Energy Diversification Act',
+      description:
+        'Information to the user goes in the content.  Information can include markup as desired.',
+
+      titleUrl: 'http://www.google.ca',
+      cardWidth: 200,
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoACard },
+        render: function (createElement) {
+          return createElement(GoACard, {
+            props: args,
+          });
+        },
+      };
+    }}
+  </Story>
+</Canvas>
+
+### WithFooter
+
+<Canvas>
+  <Story
+    name="WithFooter"
+    height="400px"
+    args={{
+      title: 'Energy Diversification Act',
+      description:
+        'We are encouraging companies to turn out oil ad gas resources into more valuable.',
+      cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+      cardWidth: 'auto',
+      titleUrl: 'http://www.google.ca',
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoACard },
+        render: function (createElement) {
+          return createElement(GoACard, {
+            props: args,
+            scopedSlots: {
+              default: (props) =>
+                createElement('div', [
+                  createElement('button', 'Action1'),
+                  createElement('button', 'Action2'),
+                ]),
+            },
+          });
+        },
+      };
+    }}
+  </Story>
+</Canvas>
+
+## Examples
+
+```html
+<template>
+  <div id="app">
+    <goa-card
+      title="Energy Diversification Act"
+      description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+      ,
+      titleUrl="http://www.google.ca"
+      ,
+      cardWidth="auto"
+      ,
+      cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+    />
+    <button type="button">Action1</button>
+    <button type="button">Action2</button>
+  </div>
+</template>
+
+<script>
+  import { GoACard } from '@abgov/vue-components';
+
+  export default {
+    name: 'App',
+    components: {
+      'goa-callout': GoACard,
+    },
+  };
+</script>
+```
+
+## Properties
+
+<ArgsTable of={GoACard} />
+<Description of={GoACard} />
+
+## Usage guidelines
+
+### Card elements
+
+A card may contain at the very minimum a header and one other component.
+
+<DoDont
+  dos={'Use at least a header and one other component'}
+  donts={'Use only a header'}
+/>
+
+### Card layout
+
+When using cards in a flex or inline layout, ensure that one card is set to grow and fill the width of the screen.
+
+<DoDont
+  dos={'Have card(s) fill the width of a whole area.'}
+  donts={'Wrap cards without filling the whole area.'}
+/>
+
+### Image ratio
+
+cardImage images used must conform to a 16:9 image aspect ratio.
+
+<DoDont
+  dos={'Optimize photographs for mobile, tablet, and desktop.'}
+  donts={'Use any other image aspect ratio other than 16:9.'}
+/>
