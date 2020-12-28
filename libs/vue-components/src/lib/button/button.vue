@@ -1,5 +1,5 @@
 <template>
-  <button v-on:click="onClickFunction" :class="[buttonClasses, buttonTypeClass]" :title="tooltip" v-once >
+  <button role="button" v-on:click="onClickFunction" :class="[buttonClasses, buttonTypeClass]" :title="tooltip" v-once >
     {{ content }}
   </button>
 </template>
@@ -14,14 +14,14 @@ export default {
      */
     'buttonType': {
       type: String,
-      required: true
+      required: false
     },
     /**
      * The size of the button - "large","small".
      */
     'buttonSize': {
       type: String,
-      required: true
+      required: false
     },
     /**
      * Text to display when hovering.

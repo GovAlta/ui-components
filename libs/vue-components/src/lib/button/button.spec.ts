@@ -71,14 +71,4 @@ describe('Goa Vue Button', () => {
     const button = screen.getByRole('button');
     expect(button.title).toContain(buttonTooltip);
   });
-
-  test('responds to events', () => {
-    const onClickStub = jest.fn()
-    render(GoAButton, {
-      props: { buttonType: 'tertiary', content: buttonTitle, tooltip: buttonTooltip, click: onClickStub, datatestid: "goaButton" }
-    });
-    const button = screen.getByRole('button');
-    userEvent.click(button)
-    expect(onClickStub).toHaveBeenCalled()
-  });
 });

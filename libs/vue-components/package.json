@@ -17,13 +17,9 @@
   },
   "peerDependencies": {
     "core-js": "^3.6.5",
-    "vue": "^3.0.4"
+    "vue": "^2.6.11"
   },
   "main": "vue-components.umd.js",
   "unpkg": "vue-components.umd.min.js",
-  "module": "vue-components.common.js",
-  "devDependencies": {
-    "core-js": "^3.8.1",
-    "vue": "^2.6.12"
-  }
+  "module": "vue-components.common.js"
 }
