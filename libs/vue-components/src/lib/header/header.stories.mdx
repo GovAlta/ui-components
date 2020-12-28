@@ -1,6 +1,5 @@
 import GoAHeader from './header';
 import GoAMicrositeLogo from '../microsite-logo/microsite-logo';
-import { ServiceLevel } from "./service-level.enum";
 
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 
@@ -8,42 +7,18 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
   argTypes={{
     serviceName: { control: { type: 'text' } },
     serviceHome: { control: { type: 'text' } },
-    serviceLevel: { control: 'text', description: 'Level of the service [Alpha | Beta | Live]' },
+    serviceLevel: { control: 'text', description: 'Level of the service [alpha | beta | live]' },
   }}
   component={GoAHeader} />
 
 # Header
 
-<!--
-  This syntax isn't the greatest... It supposedly works with template and props properties, but I could not get it to work.
-<Canvas>
-  <Story name="Micro Site Logo" height={100}>
-    {{
-      components: { GoAHeader },
-      template: `<goa-header :serviceName="serviceName" :serviceHome="serviceHome" />`,
-      props: {
-        serviceName: {
-          type: String,
-          default: text('serviceName', 'Digital Service Name (microsite)')
-        },
-        serviceHome: {
-          type: String,
-          default: text('serviceHome', '/')
-        },
-        serviceLevel: {
-            type: ServiceLevel
-        }
-      }
-    }}
-  </Story>
-</Canvas>
--->
 <Canvas>
   <Story name="Header" height={150}
     args={{
       serviceName: 'Digital Service Name (microsite)',
       serviceHome: '/',
-      serviceLevel: ServiceLevel.Beta
+      serviceLevel: 'beta'
     }}>
     {(args, argTypes) => {
       return {
@@ -68,7 +43,7 @@ A header to use for a Government of Alberta microsite.  Contains a customizable 
 ```
 <template>
   <div id="app">
-    <goa-header serviceName="Sample usage example" serviceHome="/" serviceLevel="Alpha" />
+    <goa-header serviceName="Sample usage example" serviceHome="/" serviceLevel="alpha" />
   </div>
 </template>
 
