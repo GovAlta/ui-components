@@ -8,32 +8,39 @@
 
 export default {
   name: 'goa-header',
+  emits: ['click'],
   props: {
     /**
      * The type of button - "primary", "secondary", "tertiary".
      */
-    'buttonType': {
+    buttonType: {
       type: String,
-      required: false
+      required: false,
+      validator: (value) => {
+        return ["primary", "secondary", "tertiary"].includes(value);
+      },
     },
     /**
      * The size of the button - "large","small".
      */
-    'buttonSize': {
+    buttonSize: {
       type: String,
-      required: false
+      required: false,
+      validator: (value) => {
+        return ["small", "large"].includes(value);
+      },
     },
     /**
      * Text to display when hovering.
      */
-    'tooltip': {
+    tooltip: {
       type: String,
       required: false,
     },
     /**
      * The text to display in the button,
      */
-    'content': {
+    content: {
       type: String,
       required: true,
     },
@@ -41,13 +48,13 @@ export default {
       type: Function,
       required: false,
     },
-    'onMouseDown': {
+    onMouseDown: {
       type: Function,
       required: false,
     },
   },
   data() {
-    let buttonTypeClass = this.buttonType === 'primary' ? '' : `goa--${this.buttonType}`;
+    const buttonTypeClass = this.buttonType === 'primary' ? '' : `goa--${this.buttonType}`;
     return {
       buttonClasses: `goa-button ${this.buttonSize === 'small' ? 'btn-small' : ''}`,
       buttonTypeClass: buttonTypeClass,
@@ -56,7 +63,6 @@ export default {
   },
   methods: {
     onClickFunction: function (event) {
-      console.log('Action: clicked')
       this.$emit('click')
     }
   }
