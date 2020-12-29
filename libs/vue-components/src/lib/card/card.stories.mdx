@@ -26,7 +26,7 @@ import { action } from '@storybook/addon-actions';
     },
   }}
   component={GoACard}
-/>
+/>{' '}
 
 export const FooterTemplate = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
@@ -79,37 +79,8 @@ should be placed on them in a way that clearly indicates hierarchy.
       title: 'Energy Diversification Act',
       description:
         'Information to the user goes in the content.  Information can include markup as desired.',
-
       titleUrl: 'http://www.google.ca',
       cardWidth: 'auto',
-    }}
-  >
-    {(args, argTypes) => {
-      return {
-        components: { GoACard },
-        render: function (createElement) {
-          return createElement(GoACard, {
-            props: args,
-          });
-        },
-      };
-    }}
-  </Story>
-</Canvas>
-
-### FixWidth
-
-<Canvas>
-  <Story
-    name="FixWidth"
-    height={200}
-    args={{
-      title: 'Energy Diversification Act',
-      description:
-        'Information to the user goes in the content.  Information can include markup as desired.',
-
-      titleUrl: 'http://www.google.ca',
-      cardWidth: 200,
     }}
   >
     {(args, argTypes) => {
@@ -153,6 +124,33 @@ should be placed on them in a way that clearly indicates hierarchy.
                   createElement('button', 'Action2'),
                 ]),
             },
+          });
+        },
+      };
+    }}
+  </Story>
+</Canvas>
+
+### FixWidth
+
+<Canvas>
+  <Story
+    name="FixWidth"
+    height={200}
+    args={{
+      title: 'Energy Diversification Act',
+      description:
+        'Information to the user goes in the content.  Information can include markup as desired.',
+      titleUrl: 'http://www.google.ca',
+      cardWidth: 200,
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoACard },
+        render: function (createElement) {
+          return createElement(GoACard, {
+            props: args,
           });
         },
       };

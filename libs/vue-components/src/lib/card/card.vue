@@ -12,8 +12,8 @@
       <div class="goa-text">
         {{ description }}
       </div>
-       <div v-if="this.hasChildren" slot-scope class="goa-footer">
-         
+       <div  slot-scope class="goa-footer">
+         <slot/>
        </div>
     </div>
   </div>
@@ -51,9 +51,10 @@ export default {
     },
     /** Display card size to allow card responsively show in different device*/
     cardWidth: {
-       type: [ String, Number ],
+       type: [ String, Number],
        required: false,
-     
+       default:'auto',
+
     },
   },
   data() {
@@ -68,14 +69,12 @@ export default {
     isTitleUrl() {
       return Boolean(this.titleUrl);
     },
-    hasChildren(){
-      return Boolean(this.$children);
-    },
+
     getCardWidth(){
       if((typeof this.cardWidth) === "number"){
         return this.cardWidth+"px";
       }
-      return this.cardWidth;
+     return (this.cardWidth==='full'? this.cardWidth:'auto');
     }
   },
 };
