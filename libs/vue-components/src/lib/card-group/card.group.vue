@@ -1,29 +1,15 @@
 <template>
-  <div class="goa-card" :style="{ width: this.getCardWidth }">
-    <div class="goa-poster">
-      <img v-if="this.isImage" :src="this.cardImageUrl" alt="Card cardImageUrl" />
+    <div class="goa-card-group">
+      <div class="card-group-title">{{title}}</div>
+      <!-- <div :class=[cardGroupClass]>{getCards()}</div> -->
     </div>
-
-    <div class="card-content">
-      
-       <a class="goa-title" v-if="this.isTitleUrl" :href="this.titleUrl"> {{ title }} </a>
-      <div class="goa-title" v-if="!this.isTitleUrl">{{ title }} </div>
-      
-      <div class="goa-text">
-        {{ description }}
-      </div>
-       <div  slot-scope class="goa-footer">
-         <slot/>
-       </div>
-    </div>
-  </div>
 </template>
 <script lang="typescript">
 export default {
-  name: 'goa-card',
+  name: 'goa-card-group',
   props: {
     /**
-     * Card title.
+     * Card group title.
      */
     title: {
       type: String,
@@ -32,50 +18,30 @@ export default {
         /**
      * Card title url .
      */
-    titleUrl: {
-      type: String,
-      required: false,
-    },
+    // layout: {
+    //   type: String,
+    //   required: false,
+    //   default:'basic'
+    // },
 
     /**
-     * Card description
+     * Cards json Object
      */
-    description: {
-      type: String,
-      required: false,
-    },
-    /** Card image , display on top of title */
-    cardImageUrl: {
-      type: String,
-      required: false,
-    },
-    /** Display card size to allow card responsively show in different device*/
-    cardWidth: {
-       type: [ String, Number],
-       required: false,
-       default:'auto',
-
-    },
+    // cardItem: {
+    //   type: Object,
+    //   required: false,
+    // },
   },
   data() {
     return {
-      
+      //cardGroupClass:`card-group-${this.layout}`
     };
   },
   computed: {
-    isImage() {
-      return Boolean(this.cardImageUrl);
+    getCards() {
+    
     },
-    isTitleUrl() {
-      return Boolean(this.titleUrl);
-    },
-
-    getCardWidth(){
-      if((typeof this.cardWidth) === "number"){
-        return this.cardWidth+"px";
-      }
-     return (this.cardWidth==='full'? this.cardWidth:'auto');
-    }
+   
   },
 };
 </script>

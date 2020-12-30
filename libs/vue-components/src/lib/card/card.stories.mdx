@@ -2,9 +2,10 @@ import { DoDont } from '@abgov/shared/storybook-common';
 import GoACard from './card';
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 import { action } from '@storybook/addon-actions';
+import GoAButton from '../button/button';
 
 <Meta
-  title="Component Library/Page Layout/card"
+  title="Component Library/Page Layout/Card"
   argTypes={{
     title: { control: { type: 'text' } },
     description: { control: { type: 'text' } },
@@ -25,15 +26,7 @@ import { action } from '@storybook/addon-actions';
       },
     },
   }}
-  component={GoACard}
-/>{' '}
-
-export const FooterTemplate = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { GoACard },
-  template:
-    '<GoACard {...args}>	<button slot="footer" class="btn btn-primary">Click me</button></GoACard>',
-});
+/>
 
 # Card
 
@@ -120,8 +113,25 @@ should be placed on them in a way that clearly indicates hierarchy.
             scopedSlots: {
               default: (props) =>
                 createElement('div', [
-                  createElement('button', 'Action1'),
-                  createElement('button', 'Action2'),
+                  createElement(GoAButton, {
+                    props: {
+                      buttonType: 'tertiary',
+                      buttonSize: 'small',
+                      content: 'Action1',
+                      tooltip: 'hovering',
+                    },
+                    style: {
+                      marginRight: '20px',
+                    },
+                  }),
+                  createElement(GoAButton, {
+                    props: {
+                      buttonType: 'tertiary',
+                      buttonSize: 'small',
+                      content: 'Action2',
+                      tooltip: 'hovering',
+                    },
+                  }),
                 ]),
             },
           });
@@ -173,8 +183,20 @@ should be placed on them in a way that clearly indicates hierarchy.
       ,
       cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
     />
-    <button type="button">Action1</button>
-    <button type="button">Action2</button>
+       <goa-button
+      buttonType= 'tertiary'
+      buttonSize='small'
+      content="Action1"
+      tooltip="Hovering over"
+      v-on:click="() => function()"
+    />
+          <goa-button
+      buttonType= 'tertiary'
+      buttonSize='small'
+      content="Action2"
+      tooltip="Hovering over"
+      v-on:click="() => function()"
+    />
   </div>
 </template>
 
@@ -184,11 +206,12 @@ should be placed on them in a way that clearly indicates hierarchy.
   export default {
     name: 'App',
     components: {
-      'goa-callout': GoACard,
+      'goa-card': GoACard,
     },
   };
 </script>
 ```
+
 
 ## Properties
 

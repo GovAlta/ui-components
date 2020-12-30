@@ -1,0 +1,53 @@
+import { DoDont } from '@abgov/shared/storybook-common';
+import GoACardGroup from './card.group.vue';
+import  GoACard  from '../card/card';
+import GoAButton from '../button/button';
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Component Library/Page Layout/Card.group"
+  component={GoACardGroup}
+  argTypes={{
+    title: {
+      control: {
+        type: 'text',
+      },
+    },
+  }}
+/>
+
+# CardGroup
+
+Important changes or facts given a strong visual emphasis so that users take
+notice and read the information.
+
+<Canvas>
+  <Story
+    name="Variants"
+    height={200}
+    args={{
+      title: 'Card gourp Title',
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoACardGroup },
+        render: function (createElement) {
+          return createElement(GoACardGroup, {
+            props: args,
+          });
+        },
+      };
+    }}
+  </Story>
+</Canvas>
+
+## Overview
+
+A wrapper/group for a set of cards display
+
+## Properties
+
+<ArgsTable of={GoACallout} />
+<Description of={GoACallout} />
+
