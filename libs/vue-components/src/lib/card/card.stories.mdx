@@ -182,21 +182,22 @@ should be placed on them in a way that clearly indicates hierarchy.
       cardWidth="auto"
       ,
       cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
-    />
-       <goa-button
-      buttonType= 'tertiary'
-      buttonSize='small'
-      content="Action1"
-      tooltip="Hovering over"
-      v-on:click="() => function()"
-    />
-          <goa-button
-      buttonType= 'tertiary'
-      buttonSize='small'
-      content="Action2"
-      tooltip="Hovering over"
-      v-on:click="() => function()"
-    />
+    >
+      <goa-button
+        buttonType="tertiary"
+        buttonSize="small"
+        content="Action1"
+        tooltip="Hovering over"
+        v-on:click="() => function()"
+      />
+      <goa-button
+        buttonType="tertiary"
+        buttonSize="small"
+        content="Action2"
+        tooltip="Hovering over"
+        v-on:click="() => function()"
+      />
+    </goa-card>
   </div>
 </template>
 
@@ -211,7 +212,6 @@ should be placed on them in a way that clearly indicates hierarchy.
   };
 </script>
 ```
-
 
 ## Properties
 

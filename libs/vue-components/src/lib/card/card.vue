@@ -1,13 +1,13 @@
 <template>
   <div class="goa-card" :style="{ width: this.getCardWidth }">
     <div class="goa-poster">
-      <img v-if="this.isImage" :src="this.cardImageUrl" alt="Card cardImageUrl" />
+      <img v-if="this.hasImage" :src="this.cardImageUrl" alt="Card cardImageUrl" />
     </div>
 
     <div class="card-content">
       
-       <a class="goa-title" v-if="this.isTitleUrl" :href="this.titleUrl"> {{ title }} </a>
-      <div class="goa-title" v-if="!this.isTitleUrl">{{ title }} </div>
+       <a class="goa-title" v-if="this.hasTitleUrl" :href="this.titleUrl"> {{ title }} </a>
+      <div class="goa-title" v-if="!this.hasTitleUrl">{{ title }} </div>
       
       <div class="goa-text">
         {{ description }}
@@ -63,10 +63,10 @@ export default {
     };
   },
   computed: {
-    isImage() {
+    hasImage() {
       return Boolean(this.cardImageUrl);
     },
-    isTitleUrl() {
+    hasTitleUrl() {
       return Boolean(this.titleUrl);
     },
 
