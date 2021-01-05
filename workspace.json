@@ -235,6 +235,7 @@
           "options": {
             "uiFramework": "@storybook/vue",
             "port": 4400,
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/vue-components/.storybook"
             }
@@ -250,6 +251,7 @@
           "options": {
             "uiFramework": "@storybook/vue",
             "outputPath": "dist/storybook/vue-components",
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/vue-components/.storybook"
             }
@@ -335,6 +337,7 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "port": 4400,
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/angular-material-components/.storybook"
             }
@@ -350,6 +353,7 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/angular-material-components",
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/angular-material-components/.storybook"
             }

@@ -2,7 +2,7 @@
 
 @mixin goa-card-group-class {
   .goa-card-group {
-    margin-top: 28px;
+    margin-top: 14px;
     vertical-align: top;
 
     .card-group-title {
@@ -20,6 +20,16 @@
       margin: 14px 10px;
     }
 
+    .card-group-basic-vue > div {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+    .card-group-basic-vue > div > div {
+      margin: 14px 10px;
+    }
+
     .card-group-column {
       display: inline-block;
       flex-direction: column;
@@ -28,6 +38,16 @@
       align-items: stretch;
     }
     .card-group-column > div {
+      margin: 14px;
+    }
+    .card-group-column-vue > div {
+      display: inline-block;
+      flex-direction: column;
+      column-count: 3;
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+    .card-group-column > div > div {
       margin: 14px;
     }
   }
