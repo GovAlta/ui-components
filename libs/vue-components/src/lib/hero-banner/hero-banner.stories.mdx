@@ -1,0 +1,49 @@
+import { DoDont } from '@abgov/shared/storybook-common';
+import GoAHeroBanner from './hero-banner';
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Component Library/Components/Hero Banner"
+  argTypes={{
+    title: { control: { type: 'text' } },
+  
+  }}
+  component={GoAHeroBanner}
+/>
+
+# Variants
+
+Important changes or facts given a strong visual emphasis so that users take
+notice and read the information.
+
+<Canvas>
+  <Story
+    name="Variants"
+    height={200}
+    args={{
+     title: 'Upgrading our bitumen',
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoAHeroBanner },
+        render: function (createElement) {
+          return createElement(GoAHeroBanner, {
+            props: args,
+          });
+        },
+      };
+    }}
+  </Story>
+</Canvas>
+
+## Overview
+
+A large image area used to give visual reinforcement of a particular section of content.
+
+## Properties
+
+<ArgsTable of={GoAHeroBanner} />
+<Description of={GoAHeroBanner} />
+
+
