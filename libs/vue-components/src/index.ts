@@ -5,6 +5,7 @@ import GoACallout from './lib/callout/callout.vue';
 import GoACheckbox from './lib/checkbox/checkbox.vue';
 import GoACard from './lib/card/card.vue';
 import GoACardGroup from './lib/card-group/card.group.vue';
+import GoAHeroBanner from './lib/hero-banner/hero-banner.vue';
 
 export {
   GoAMicrositeLogo,
@@ -14,4 +15,5 @@ export {
   GoACard,
   GoACardGroup,
   GoACheckbox,
+  GoAHeroBanner,
 };
