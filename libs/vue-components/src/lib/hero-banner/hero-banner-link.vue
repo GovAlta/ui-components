@@ -1,6 +1,6 @@
 <template>
     <div>
-      <a class="goa-link-button right-arrow" :href={linkUrl} >
+      <a class="goa-link-button right-arrow" :href={linkUrl} role="link">
         {{linkText}}
       </a>
     </div>
@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {   
-        linkUrl:this.linkUrl
+       
     };
   },
 };

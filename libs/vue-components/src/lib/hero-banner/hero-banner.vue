@@ -1,13 +1,11 @@
 <template>
-  <div class="goa-hero" :style="{ backgroundImage: backgroudImageStyle}">
-        <h1>{{title}}</h1>
-        <goa-hero-banner-content
-        :content='this.content' />
-        <div v-if='hasLink' >
-        <goa-hero-banner-link 
-               :linkText='this.linkText'
-        :linkUrl='this.linkUrl' />
-        </div>
+  <div class="goa-hero" :style="{ backgroundImage: backgroudImageStyle }">
+    <h1 role="heading" aria-level="{1}">{{ title }}</h1>
+    <goa-hero-banner-content :content="content" />
+
+    <div v-if="hasLink">
+      <goa-hero-banner-link :linkText="linkText" :linkUrl="linkUrl" />
+    </div>
   </div>
 </template>
 <script lang="typescript">
@@ -15,10 +13,10 @@ import GoAHeroBannerContent from './hero-banner-content.vue';
 import GoAHeroBannerLink from './hero-banner-link.vue';
 
 export default {
-  name: 'goa-hero-banner',
-    components:{
-    'goa-hero-banner-content':GoAHeroBannerContent,
-    'goa-hero-banner-link':GoAHeroBannerLink
+  name: 'GoAHeroBanner',
+  components: {
+    'goa-hero-banner-content': GoAHeroBannerContent,
+    'goa-hero-banner-link': GoAHeroBannerLink,
   },
   props: {
     /**
@@ -59,16 +57,18 @@ export default {
     },
   },
   data() {
-    return {   
-        backgroudImageStyle: `linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.40) 40%, rgba(0, 0, 0, 0.6) 100%), url('${this.backgroundUrl}')`,
-    
+    return {
+      backgroudImageStyle: `linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.40) 40%, rgba(0, 0, 0, 0.6) 100%), url('${this.backgroundUrl}')`,
     };
   },
-   computed:{
-    hasLink(){
+  computed: {
+    hasLink() {
       return Boolean(this.linkText);
-    }
-  }
+    },
+    hasContent() {
+      return Boolean(this.content);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

@@ -1,6 +1,6 @@
 <template>
-    <p class="goa-hero-banner-content">
-        {{content}}
+    <p class="goa-hero-banner-content" role="note">
+        {{ content }}
       </p>
 </template>
 <script lang="typescript">
@@ -18,8 +18,7 @@ export default {
     },
   },
   data() {
-    return {   
-        content:this.content
+    return {        
     };
   },
 };

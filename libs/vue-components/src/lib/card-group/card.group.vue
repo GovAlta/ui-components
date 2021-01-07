@@ -25,7 +25,7 @@ import GoACard from '../card/card.vue';
 export default {
   name: 'goa-card-group',
   components:{
-    'goa-card':GoACard,
+    'goa-card': GoACard,
   },
   props: {
     /**
@@ -48,14 +48,13 @@ export default {
     },
     /** card group json data pass in*/
     cardItems:{
-      type:Object,
+      type:Array,
       required: false
     }
   },
   data() {
     return {
       cardGroupClass:`card-group-${this.layout}-vue`,
-      cardItems: this.cardItems
     };
   },
   computed:{
