@@ -1,23 +1,25 @@
 import { render, screen } from '@testing-library/vue';
-import  GoAHeroBanner  from './hero-banner.vue';
+import GoAHeroBanner from './hero-banner.vue';
 
 describe('GoAHeroBanner', () => {
-  const title="Upgrading our bitumen"
-  const backgroundUrl=""
-  const content='Main content'
-  const linkText='Learn more'
-  const linkUrl="http://google.com"
+  const title = 'Upgrading our bitumen';
+  const backgroundUrl = '';
+  const content = 'Main content';
+  const linkText = 'Learn more';
+  const linkUrl = 'http://google.com';
   test('Renders all with properties', async () => {
-
-   
     await render(GoAHeroBanner, {
-      props: { title: title, backgroundUrl: "",content: content, linkText:linkText,linkUrl:linkUrl  },
-    
-    }
-    );
-    
-    expect(screen.getByText(title))
-    
+      props: {
+        title: title,
+        backgroundUrl: '',
+        content: content,
+        linkText: linkText,
+        linkUrl: linkUrl,
+      },
+    });
+
+    expect(screen.getByText(title));
+
     expect(screen.getByRole('heading').textContent).toEqual(
       'Upgrading our bitumen'
     );
@@ -27,9 +29,9 @@ describe('GoAHeroBanner', () => {
 
   test('Only title with properties', async () => {
     await render(GoAHeroBanner, {
-      props: { title: title, backgroundUrl:"",   },
+      props: { title: title, backgroundUrl: '' },
     });
-  
+
     expect(screen.getByRole('heading').textContent).toEqual(
       'Upgrading our bitumen'
     );
@@ -38,9 +40,9 @@ describe('GoAHeroBanner', () => {
 
   test('Title and content with properties', async () => {
     await render(GoAHeroBanner, {
-      props: { title: title, backgroundUrl:"",  content:content},
+      props: { title: title, backgroundUrl: '', content: content },
     });
-  
+
     expect(screen.getByRole('heading').textContent).toEqual(
       'Upgrading our bitumen'
     );
@@ -50,9 +52,14 @@ describe('GoAHeroBanner', () => {
 
   test('Title and link with properties', async () => {
     await render(GoAHeroBanner, {
-      props: { title: title, backgroundUrl:"", content: content, linkText:linkText,linkUrl:linkUrl },
+      props: {
+        title: title,
+        backgroundUrl: '',
+        content: content,
+        linkText: linkText,
+        linkUrl: linkUrl,
+      },
     });
-  
 
     expect(screen.getByRole('heading').textContent).toEqual(
       'Upgrading our bitumen'
@@ -60,5 +67,4 @@ describe('GoAHeroBanner', () => {
 
     expect(screen.getByRole('link').textContent.trim()).toEqual('Learn more');
   });
-
- });
+});

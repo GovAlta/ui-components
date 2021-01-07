@@ -15,5 +15,5 @@ export {
   GoACard,
   GoACardGroup,
   GoACheckbox,
-  GoAHeroBanner
+  GoAHeroBanner,
 };

@@ -6,10 +6,10 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
   title="Component Library/Components/Hero Banner"
   argTypes={{
     title: { control: { type: 'text' } },
-  	    content: { control: { type: 'text' } },
-  backgroundUrl: { control: { type: 'text' } },
-  linkText: { control: { type: 'text' } },
-  linkUrl: { control: { type: 'text' } },
+    content: { control: { type: 'text' } },
+    backgroundUrl: { control: { type: 'text' } },
+    linkText: { control: { type: 'text' } },
+    linkUrl: { control: { type: 'text' } },
   }}
   component={GoAHeroBanner}
 />
@@ -21,7 +21,7 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     name="With content and link"
     height={200}
     args={{
-     title: 'Upgrading our bitumen',
+      title: 'Upgrading our bitumen',
       backgroundUrl: 'working-in-cold-hero-3_rdax_75.jpg',
       content:
         'Resources are available to help Alberta entrepreneurs and small businesses start, grow and succeed.',
@@ -49,11 +49,10 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     name="With content only"
     height={200}
     args={{
-     title: 'Upgrading our bitumen',
+      title: 'Upgrading our bitumen',
       backgroundUrl: 'working-in-cold-hero-3_rdax_75.jpg',
       content:
         'Resources are available to help Alberta entrepreneurs and small businesses start, grow and succeed.',
-     
     }}
   >
     {(args, argTypes) => {
@@ -76,9 +75,9 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     name="With link only"
     height={200}
     args={{
-     title: 'Upgrading our bitumen',
+      title: 'Upgrading our bitumen',
       backgroundUrl: 'working-in-cold-hero-3_rdax_75.jpg',
-       linkText: 'Learn more',
+      linkText: 'Learn more',
       linkUrl: 'http://www.google.com',
     }}
   >
@@ -95,7 +94,6 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
   </Story>
 </Canvas>
 
-
 ## Overview
 
 A large image area used to give visual reinforcement of a particular section of content.
@@ -104,7 +102,6 @@ A large image area used to give visual reinforcement of a particular section of 
 
 <ArgsTable of={GoAHeroBanner} />
 <Description of={GoAHeroBanner} />
-
 
 ## Overview
 
@@ -115,8 +112,8 @@ A large image area used to give visual reinforcement of a particular section of 
 ```
 <template>
   <div id="app">
-    <goa-hero-banner 
-    title="Upgrading our bitumen" content="Information to the user goes in the content" 
+    <goa-hero-banner
+    title="Upgrading our bitumen" content="Information to the user goes in the content"
     backgroundUrl="working-in-cold-hero-3_rdax_75.jpg"
     linkText= 'Learn more',
       linkUrl= 'http://www.google.com',
@@ -136,7 +133,6 @@ export default {
 };
 </script>
 ```
-
 
 ## Properties
 
@@ -169,4 +165,3 @@ A hero banner may contain text content
   dos={'Add some optional text description content'}
   donts={'Include too much content'}
 />
-
