@@ -15,6 +15,13 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
   component={GoARadioGroup}
 />
 
+export const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { GoARadioGroup },
+  template: '<GoARadioGroup></GoARadioGroup>',
+});
+
+
 # Radios
 
 Important changes or facts given a strong visual emphasis so that users take
@@ -41,15 +48,26 @@ notice and read the information.
     {(args, argTypes) => {
       return {
         components: { GoARadioGroup },
-        render: function (createElement) {
-          return createElement(GoARadioGroup, {
-            props: args,
-          });
+        data() {
+          console.log('data', args);
+          return args;
         },
+        template: '<GoARadioGroup></GoARadioGroup>',
       };
     }}
   </Story>
 </Canvas>
+
+    // {(args, argTypes) => {
+    //   return {
+    //     components: { GoARadioGroup },
+    //     render: function (createElement) {
+    //       return createElement(GoARadioGroup, {
+    //         props: args,
+    //       });
+    //     },
+    //   };
+    // }}
 
 ## Overview
 
