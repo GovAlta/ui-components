@@ -65,9 +65,6 @@ export default {
     hasLink() {
       return Boolean(this.linkText);
     },
-    hasContent() {
-      return Boolean(this.content);
-    },
   },
 };
 </script>

@@ -104,3 +104,27 @@ export default {
 };
 </script>
 ```
+```
+<template>
+  <div id="app">
+    <goa-hero-banner 
+    title="Upgrading our bitumen" content="Information to the user goes in the content" 
+    backgroundUrl="working-in-cold-hero-3_rdax_75.jpg"
+    linkText= 'Learn more',
+      linkUrl= 'http://www.google.com',
+
+    />
+  </div>
+</template>
+
+<script>
+import { GoAHeroBanner } from '@abgov/vue-components';
+
+export default {
+  name: "App",
+  components: {
+    'goa-hero-banner': GoAHeroBanner
+  }
+};
+</script>
+```
