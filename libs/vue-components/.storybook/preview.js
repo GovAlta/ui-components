@@ -1,4 +1,5 @@
-import { addParameters } from '@storybook/vue';
+import { addDecorator, addParameters } from '@storybook/vue';
+import { withKnobs } from '@storybook/addon-knobs';
 import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
 
 addParameters({
@@ -8,3 +9,5 @@ addParameters({
   },
   controls: { expanded: true }
 });
+
+addDecorator(withKnobs);

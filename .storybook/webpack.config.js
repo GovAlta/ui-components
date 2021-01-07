@@ -32,6 +32,10 @@ module.exports = async ({ config, mode }) => {
     ),
   };
 
+  config.node = {
+    fs: 'empty'
+  }
+
   // Return the altered config
   return config;
 };

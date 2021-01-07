@@ -1,0 +1,116 @@
+import { DoDont } from '@abgov/shared/storybook-common';
+import GoARadioGroup from './radioGroup';
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Component Library/Page Layout/Radio"
+  argTypes={{
+    title: { control: { type: 'text' } },
+    helperText: { control: { type: 'text' } },
+    requiredErrorMessage: { control: { type: 'text' } },
+    required: { control: {type: 'boolean'}},
+    disabled: { control: {type: 'boolean'}},
+    labelPosition: { control: {type: 'string'}}
+  }}
+  component={GoARadioGroup}
+/>
+
+# Radios
+
+Important changes or facts given a strong visual emphasis so that users take
+notice and read the information.
+
+<Canvas>
+  <Story
+    name="Radio Buttons"
+    height={200}
+    args={{
+      title: 'Which of the following is your favorite fruit?',
+      helperText: 'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      requiredErrorMessage: 'Please select a fruit',
+      required: false,
+      disabled: false,
+      labelPosition: 'after',
+      items: [
+        {text: 'Grapes', value: 'grapes'},
+        {text: 'Pears', value: 'pears'},
+        {text: 'Kiwi', value: 'kiwi'},
+      ],
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoARadioGroup },
+        render: function (createElement) {
+          return createElement(GoARadioGroup, {
+            props: args,
+          });
+        },
+      };
+    }}
+  </Story>
+</Canvas>
+
+## Overview
+
+Radios are text boxes that indicate one of the following: important information,
+special dates, warning messages, or emergency messages. They occupy the body
+layout as a container.
+
+## Examples
+
+```
+<template>
+  <div id="app">
+    <goa-radio-group>
+      <goa-radio value="apple" />
+      <goa-radio value="orange" />
+      <goa-radio value="banana" />
+    </goa-radio-group>
+  </div>
+</template>
+
+<script>
+import { GoARadioGroup } from '@abgov/vue-components';
+
+export default {
+  name: "App",
+  components: {
+    'goa-radio': GoARadio
+    'goa-radio-group': GoARadioGroup
+  }
+};
+</script>
+```
+
+## Properties
+
+<ArgsTable of={GoARadioGroup} />
+<Description of={GoARadioGroup} />
+
+## Usage guidelines
+
+### Within the body
+
+Radio banners grab the attention of the user scanning for important information on
+a page, which may be otherwise missed. Radio banners must be relevant to the header
+or section it corresponds to.
+
+<DoDont
+  dos={
+    'Use a radio banner when the content merits special attention to the topic.'
+  }
+  donts={
+    'Use too many radio banners. Many competing banners will diminish the effectiveness ' +
+    'of individual ones.'
+  }
+/>
+
+### Light on content
+
+Radio banners should communicate one piece of crucial information pertaining to the topic. In terms of importance within the section, it takes priority over any other paragraph under the header. If there is additional information that is not in the corresponding section, or is on another page, do use a link.
+
+<DoDont
+  dos={'Use in-line links when additional information exists.'}
+  donts={'Go heavy on content. It is not body copy.'}
+/>

@@ -69,6 +69,7 @@
     "@angular/material": "^10.2.0",
     "@nrwl/cli": "^10.3.0",
     "@testing-library/user-event": "^12.1.9",
+    "fs": "0.0.1-security",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "read-pkg": "^5.2.0",
@@ -110,6 +111,7 @@
     "@storybook/addon-backgrounds": "^6.0.17",
     "@storybook/addon-controls": "^6.0.18",
     "@storybook/addon-docs": "^6.0.17",
+    "@storybook/addon-essentials": "^6.1.11",
     "@storybook/addon-knobs": "^6.0.17",
     "@storybook/addon-viewport": "^6.0.17",
     "@storybook/angular": "^6.0.17",
@@ -117,7 +119,7 @@
     "@storybook/preset-scss": "^1.0.2",
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^6.0.17",
-    "@storybook/vue": "^6.0.17",
+    "@storybook/vue": "^6.1.11",
     "@svgr/webpack": "^5.4.0",
     "@testing-library/angular": "^10.0.0",
     "@testing-library/jest-dom": "^5.11.6",
@@ -180,5 +182,10 @@
     "type": "git",
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git"
   },
-  "readme": "ERROR: No README data found!"
+  "readme": "ERROR: No README data found!",
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  }
 }
