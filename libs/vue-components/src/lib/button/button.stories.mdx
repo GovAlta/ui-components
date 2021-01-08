@@ -6,7 +6,7 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 <Meta title="Component Library/Page Layout/Button"
   argTypes={{
     buttonType: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary'] } },
-    buttonSize: { control: { type: 'select', options: ['small', 'large'] } },
+    buttonSize: { control: { type: 'select', options: ['small', 'normal'] } },
     tooltip: { control: { type: 'text' } },
     content: { control: { type: 'text', description: 'Click Me!' } },
     onClick: { action: 'You have clicked the button' },
@@ -20,7 +20,7 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
   <Story name="Variants" height={150}
     args={{
       buttonType: 'primary',
-      buttonSize: 'large',
+      buttonSize: 'normal',
       content: "Click Me!",
       tooltip: 'hovering',
     }}>
@@ -48,7 +48,7 @@ A button to use for a Government of Alberta microsite.  Contains a customizable 
   <div id="app">
     <goa-button
       buttonType="'primary || 'secondary' || 'tertiary'"
-      buttonSize="'small' || 'large'"
+      buttonSize="'small' || 'normal'"
       content="Click Me!"
       tooltip="Hovering over"
       v-on:click="() => function()"
