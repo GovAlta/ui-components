@@ -7,9 +7,9 @@ describe('Goa Vue Button', () => {
   const buttonClassName = 'goa-button';
   const buttonSecondaryClassName = 'goa--secondary';
   const buttonTertiaryClassName = 'goa--tertiary';
-  const buttonSize = 'normal';
+  const buttonSize = 'large';
   const buttonTitle = 'Test Title';
-  const buttonNormalClassName = 'normal';
+  const buttonLargeClassName = 'large';
   const buttonTooltip = 'hovering';
 
   test('should render the button title', () => {
@@ -54,13 +54,13 @@ describe('Goa Vue Button', () => {
     expect(button.className).toContain(buttonTertiaryClassName);
   });
 
-  test('buttonSize unset should render normal styling', () => {
+  test('buttonSize unset should render large styling', () => {
     render(GoAButton, {
       props: { buttonType: buttonType, buttonSize: 'small', content: buttonTitle }
     });
 
     const button = screen.getByRole('button');
-    expect(button.className).not.toContain(buttonNormalClassName);
+    expect(button.className).not.toContain(buttonLargeClassName);
   });
 
   test('tooltip is set to button title', () => {
