@@ -3,17 +3,17 @@
       <div class='card-group-title'>{{title}}</div>
       <div  v-if='!hasCardItems' slot-scope :class=[cardGroupClass]>
        <slot/>
-    </div> 
-    <div  v-if='hasCardItems' :class=[cardGroupClass] >
-       <goa-card  
-      v-for="(card,index) in cardItems" :key="index"
-       :title="card.title"
-       :titleUrl="card.titleUrl"
-       :description="card.description"
-       :cardImageUrl="card.cardImageUrl"
-       :cardWidth="cardcardWidth"
-       />
-    </div> 
+      </div> 
+      <div  v-if='hasCardItems' :class=[cardGroupClass] >
+        <goa-card  
+        v-for="(card,index) in cardItems" :key="index"
+        :title="card.title"
+        :titleUrl="card.titleUrl"
+        :description="card.description"
+        :cardImageUrl="card.cardImageUrl"
+        :cardWidth="cardcardWidth"
+        />
+      </div> 
 
     </div>
    
@@ -36,17 +36,17 @@ export default {
       required: true,
     },
     /**
-     * Card layout, basic and column .
+     * Card layout: basic and column .
      */
     layout: {
       type: String,
       required: false,
       default:'basic',
-        validator: (prop) => [
+      validator: (prop) => [
       'basic', 'column'
       ].includes(prop)
     },
-    /** card group json data pass in*/
+    /** Card group json data pass in*/
     cardItems:{
       type:Array,
       required: false

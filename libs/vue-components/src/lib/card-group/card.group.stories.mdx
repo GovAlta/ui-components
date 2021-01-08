@@ -1,12 +1,11 @@
 import { DoDont } from '@abgov/shared/storybook-common';
-import GoACardGroup from './card.group.vue';
+import GoACardGroup from './card.group';
 import GoACard from '../card/card';
 import GoAButton from '../button/button';
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta
   title="Component Library/Page Layout/Card.group"
-  component={GoACardGroup}
   argTypes={{
     title: {
       control: {
@@ -17,6 +16,11 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
       control: {
         type: 'select',
         options: ['basic', 'column'],
+      },
+    },
+    cardItems: {
+      control: {
+        type: 'text',
       },
     },
   }}
@@ -37,7 +41,7 @@ notice and read the information.
     height={200}
     args={{
       title: 'Card gourp Title',
-      Layout: 'basic',
+      layout: 'basic',
     }}
   >
     {(args, argTypes) => {
@@ -53,7 +57,7 @@ notice and read the information.
                     props: {
                       title: 'Energy Diversification Act',
                       description:
-                        'We are encouraging companies to turn out oil ad gas resources into more valuable.',
+                        'We are encouraging companies to turn out oil and gas resources into more valuable.',
                       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
                       cardWidth: 400,
                       titleUrl: 'http://www.google.ca',
@@ -87,7 +91,7 @@ notice and read the information.
                     props: {
                       title: 'Energy Diversification Act',
                       description:
-                        'We are encouraging companies to turn out oil ad gas resources into more valuable.',
+                        'We are encouraging companies to turn out oil and gas resources into more valuable.',
                       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
                       cardWidth: 400,
                       titleUrl: 'http://www.google.ca',
@@ -97,7 +101,7 @@ notice and read the information.
                     props: {
                       title: 'Energy Diversification Act',
                       description:
-                        'We are encouraging companies to turn out oil ad gas resources into more valuable.',
+                        'We are encouraging companies to turn out oil and gas resources into more valuable.',
                       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
                       cardWidth: 400,
                       titleUrl: 'http://www.google.ca',
@@ -117,10 +121,10 @@ notice and read the information.
 ```html
 <template>
   <div id="app">
-    <goa-card-group title="Card gourp Title" Layout="basic">
+    <goa-card-group title="Card gourp Title" layout="basic">
       <goa-card
         title="Energy Diversification Act"
-        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        description="We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans."
         ,
         titleUrl="http://www.google.ca"
         ,
