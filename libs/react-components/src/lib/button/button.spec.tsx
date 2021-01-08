@@ -94,7 +94,7 @@ describe('GoA Button', () => {
     const button = screen.getByRole('button');
     expect(button.title).toContain(buttonTooltip);
   });
-  
+
   test('responds to events', () => {
     const onClickStub = jest.fn()
     render(<GoAButton
@@ -105,7 +105,7 @@ describe('GoA Button', () => {
     />);
     const button = screen.getByTestId('goaButton');
     userEvent.click(button)
-    expect(onClickStub).toHaveBeenCalled
+    expect(onClickStub).toHaveBeenCalled()
   });
 
 });
