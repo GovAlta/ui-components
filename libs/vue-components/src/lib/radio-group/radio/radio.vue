@@ -3,9 +3,6 @@
 <template>
   <div :class="getRootCssClasses">
     <label class="goa-radio-layout">
-
-        <div>valuex: {{value}}</div>
-        <div>item. {{item.value}}</div>
       <div class="goa-radio-container" :class="item.value === value ? 'goa-radio-selected' : null">
 
         <input
@@ -100,27 +97,13 @@ export default {
       type: Boolean,
       required: false,
     },
-    change: {
-        type: Function,
-        required: false,
-    },
     item: {
       type: [Array],
       required: true,
     },
   },
    methods: {
-    say: function (message) {
-      alert(message);
-      alert(this.picked);
-      this.picked = message;
-    },
     onChangeFunction: function(message) {
-      alert(message);
-      console.log(JSON.stringify(this.checked) + "<checkedy")
-      //this.checked = true;
-      console.log(JSON.stringify(this.checked) + "<checkedy")
-
       this.$emit('change', message);
     },
   },

@@ -6,17 +6,9 @@
       <div v-if="helperText" class="helper-text">{{helperText}}</div>
       <label class="goa-radio-layout">
         <div :class="getSelectedCss">
-          {{items}}
-          <li v-for="item in items" :key="item.text">
-            {{item}}--{{item.text}}
+          <div v-for="item in items" :key="item.text">
             <goa-radio :labelPosition="labelPosition" :item="item" :title="item.text"  :change="saySomething()" :passValue="item.value" />
-          </li>
-
-          <input type="radio" id="one" value="One" v-model="picked">
-          <label for="one">One</label>
-          <br>
-          <input type="radio" id="two" value="Two" v-model="picked">
-          <label for="two">Two</label>
+          </div>
           <br>
         </div>
       </label>
