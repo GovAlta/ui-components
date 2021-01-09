@@ -1,9 +1,9 @@
 import { DoDont } from '@abgov/shared/storybook-common';
-import GoARadioGroup from './radioGroup';
+import ParentComponent from "./ParentComponent";
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta
-  title="Component Library/Page Layout/Radio"
+  title="Component Library/Page Layout/radrad"
   argTypes={{
     title: { control: { type: 'text' } },
     helperText: { control: { type: 'text' } },
@@ -12,13 +12,13 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     disabled: { control: {type: 'boolean'}},
     labelPosition: { control: {type: 'string'}}
   }}
-  component={GoARadioGroup}
+  component={ParentComponent}
 />
 
 export const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { GoARadioGroup },
-  template: '<GoARadioGroup></GoARadioGroup>',
+  components: { ParentComponent },
+  template: '<ParentComponent></ParentComponent>',
 });
 
 
@@ -47,9 +47,9 @@ notice and read the information.
   >
     {(args, argTypes) => {
       return {
-        components: { GoARadioGroup },
+        components: { ParentComponent },
         render: function (createElement) {
-          return createElement(GoARadioGroup, {
+          return createElement(ParentComponent, {
             props: args,
           });
         },

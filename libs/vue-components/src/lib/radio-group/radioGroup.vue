@@ -7,9 +7,9 @@
       <label class="goa-radio-layout">
         <div :class="getSelectedCss">
           {{items}}
-          <li v-for="item in items" :key="item.message">
+          <li v-for="item in items" :key="item.text">
             {{item}}--{{item.text}}
-            <goa-radio :labelPosition="labelPosition" :title="item.text" :value="item.value" />
+            <goa-radio :labelPosition="labelPosition" :item="item" :title="item.text"  :change="saySomething()" :passValue="item.value" />
           </li>
 
           <input type="radio" id="one" value="One" v-model="picked">
@@ -79,7 +79,12 @@ export default {
     items: {
       type: Array,
       required: true,
-    }
+    },
+  },
+  methods: {
+    saySomething: () => function () {
+      console.log("something");
+    },
   },
   components: {
     'goa-radio': GoARadio

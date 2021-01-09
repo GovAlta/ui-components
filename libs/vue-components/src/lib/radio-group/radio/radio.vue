@@ -3,25 +3,28 @@
 <template>
   <div :class="getRootCssClasses">
     <label class="goa-radio-layout">
-      <div>pickedx: {{picked}}</div>
+
         <div>valuex: {{value}}</div>
-      <div class="goa-radio-container" :class="picked === value ? 'goa-radio-selected' : null">
+        <div>item. {{item.value}}</div>
+      <div class="goa-radio-container" :class="item.value === value ? 'goa-radio-selected' : null">
 
         <input
+          :id="id + index"
+          :name="id"
           type="radio"
+          :value="item.value"
+          :checked="item.value === value"
 
-          :value="value"
-          v-model="picked"
-
-        >
-        <svg
+          @change="onChangeFunction(item.value)"
+        />
+        <!-- <svg
           xmlns="http://www.w3.org/2000/svg"
           width="12"
           height="12"
           viewBox="0 0 12 12"
         >
           <circle cx="6" cy="6" r="6" fill="#eee" />
-        </svg>
+        </svg> -->
       </div>
       <label class="goa-radio-label" for="one">{{title}}</label>
     </label>
@@ -36,7 +39,11 @@
 import classnames from 'classnames';
 export default {
   name: 'goa-radio',
+  model: {
+    event: "change",
+  },
   props: {
+    checked: Boolean,
     /**
      * Title of the radio item
      */
@@ -47,13 +54,17 @@ export default {
     /**
      * value of the radio item
      */
-    value: {
+    passValue: {
       type: String,
       required: true,
     },
     /**
      * Help text of the radio item
      */
+    value: {
+      type: [String, Number, Boolean, Object],
+      default: null,
+    },
     helperText: {
       type: String,
       required: true,
@@ -89,13 +100,29 @@ export default {
       type: Boolean,
       required: false,
     },
+    change: {
+        type: Function,
+        required: false,
+    },
+    item: {
+      type: [Array],
+      required: true,
+    },
   },
    methods: {
     say: function (message) {
       alert(message);
       alert(this.picked);
       this.picked = message;
-    }
+    },
+    onChangeFunction: function(message) {
+      alert(message);
+      console.log(JSON.stringify(this.checked) + "<checkedy")
+      //this.checked = true;
+      console.log(JSON.stringify(this.checked) + "<checkedy")
+
+      this.$emit('change', message);
+    },
   },
   data() {
     return {
