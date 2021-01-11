@@ -10,7 +10,7 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     requiredErrorMessage: { control: { type: 'text' } },
     required: { control: {type: 'boolean'}},
     disabled: { control: {type: 'boolean'}},
-    labelPosition: { control: {type: 'string'}}
+    labelPosition: { control: {type: 'select', options: ['before', 'after'] }}
   }}
   component={ParentComponent}
 />

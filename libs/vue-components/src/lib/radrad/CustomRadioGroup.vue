@@ -1,37 +1,36 @@
 <template>
   <div :id="id">
-    <div v-for="(option, index) in options" :key="option.text">
     <div :class="getRootCssClasses">
-    <label class="goa-radio-layout">
-      <div class="goa-radio-container" :class="option.value === value ? 'goa-radio-selected' : null">
-        <!-- <div>option.value: {{ option.value }}</div>
-        <div>value: {{ value }}</div> -->
-        <input
-          type="radio"
-          :value="option.value"
-          :checked="option.value === value"
-          @change="updateValue(option.value)"
-        />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="12"
-          height="12"
-          viewBox="0 0 12 12"
-        >
-          <circle cx="6" cy="6" r="6" fill="#fff" />
-        </svg>
-        <slot v-if="option.value === value" :name="option.value" />
+      <label class="goa-radio-layout">
+        <div class="goa-radio-container" :class="options.value === value ? 'goa-radio-selected' : null">
 
-      </div>
-      <label class="goa-radio-label" for="one">{{option.text}}</label>
-    </label>
+          <input
+            type="radio"
+            :value="options.value"
+            :checked="options.value === value"
+            :disabled="disabled"
+            @change="updateValue(options.value)"
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+          >
+            <circle cx="6" cy="6" r="6" fill="#fff" />
+          </svg>
+          <slot v-if="options.value === value" :name="options.value" />
+        </div>
+        <label class="goa-radio-label" for="one">{{options.text}}</label>
+      </label>
     </div>
-  </div>
   </div>
 </template>
 
 <script>
+
 import classnames from 'classnames';
+
 export default {
   model: {
     event: "change",
@@ -50,7 +49,7 @@ export default {
       default: null,
     },
     options: {
-      type: [Array],
+      type: Object,
       required: true,
     },
     required: {

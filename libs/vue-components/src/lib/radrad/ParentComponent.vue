@@ -6,14 +6,19 @@
     <span v-if="required" class="required-label">{{required}}</span>
 
     <label class="goa-radio-layout">
-      <CustomRadioGroup
-        id="yesNoQuestion"
-        v-model="fields.yes_no_question"
-        :options="yes_no_question_options"
-        label="Example question one"
-      />
+      <div v-for="(option, index) in yes_no_question_options" :key="option.text">
+        <CustomRadioGroup
+          id="yesNoQuestion"
+          v-model="fields.yes_no_question"
+          :options="items[index]"
+          :disabled="disabled"
+          :required="required"
+          :labelPosition="labelPosition"
+          label="Example question one"
+        />
+      </div>
     </label>
-
+    <div v-if="requiredErrorMessage" class="error-text">{{requiredErrorMessage}}</div>
   </div>
 </template>
 
@@ -39,6 +44,33 @@ export default {
     helperText: {
       type: String,
       required: true,
+    },
+    /**
+     * Error messages
+     */
+    requiredErrorMessage: {
+      type: String,
+      required: true,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    required: {
+      type: Boolean,
+      default: false,
+    },
+    items: {
+      type: JSON,
+      required: true,
+    },
+    labelPosition: {
+      type: String,
+      default: false,
+      validator: (prop) => [
+      'before', 'after'
+      ].includes(prop)
+
     },
   },
 
