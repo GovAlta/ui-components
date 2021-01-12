@@ -63,7 +63,7 @@ export default {
   },
   computed: {
     hasLink() {
-      return Boolean(this.linkText);
+      return Boolean(this.linkText)&& Boolean(this.linkUrl);
     },
   },
 };

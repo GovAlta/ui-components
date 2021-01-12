@@ -32,9 +32,6 @@ A wrapper/group for a set of cards display
 
 # CardGroup
 
-Important changes or facts given a strong visual emphasis so that users take
-notice and read the information.
-
 <Canvas>
   <Story
     name="Variants"
@@ -116,7 +113,47 @@ notice and read the information.
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story
+    name="CardItems"
+    height={200}
+    args={{
+      title: 'Card gourp Title',
+      layout: 'basic',
+      cardItems: [
+        {
+          title: 'Energy Diversification Act 1',
+          description: 'We are encouraging  vor Albertans.',
+          titleUrl: 'http://www.google.ca',
+          cardWidth: 400,
+          cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+        },
+        {
+          title: 'Energy Diversification Act 2',
+          description: 'We are encouraging  vor Albertans.',
+          titleUrl: 'http://www.google.ca',
+          cardWidth: 400,
+          cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+        },
+      ],
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoACardGroup },
+        render: function (createElement) {
+          return createElement(GoACardGroup, {
+            props: args,
+          });
+        },
+      };
+    }}
+  </Story>
+</Canvas>
+
 ## Examples
+
+### Pass goa-card components as slots. Slots are a mechanism for Vue components that allows you to compose your components in a way other than the strict parent-child relationship.
 
 ```html
 <template>
@@ -132,6 +169,53 @@ notice and read the information.
         ,
         cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
       />
+      <goa-card
+        title="Energy Diversification Act"
+        description="We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans."
+        ,
+        titleUrl="http://www.google.ca"
+        ,
+        cardWidth="auto"
+        ,
+        cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+      />
+    </goa-card-group>
+  </div>
+</template>
+
+<script>
+  import { GoACardGroup } from '@abgov/vue-components';
+
+  export default {
+    name: 'App',
+    components: {
+      'goa-card-group': GoACardGroup,
+    },
+  };
+</script>
+```
+
+### Pass goa-card components as Json array to cardItems.
+
+```html
+<template>
+  <div id="app">
+    <goa-card-group title="Card gourp Title" layout="basic" cardItems=[
+        {
+          title: 'Energy Diversification Act 1',
+          description: 'We are encouraging  vor Albertans.',
+          titleUrl: 'http://www.google.ca',
+          cardWidth: 400,
+          cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+        },
+        {
+          title: 'Energy Diversification Act 2',
+          description: 'We are encouraging  vor Albertans.',
+          titleUrl: 'http://www.google.ca',
+          cardWidth: 400,
+          cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+        }]>
+
     </goa-card-group>
   </div>
 </template>
