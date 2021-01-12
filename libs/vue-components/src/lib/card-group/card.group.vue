@@ -5,14 +5,16 @@
        <slot/>
       </div> 
       <div  v-if='hasCardItems' :class=[cardGroupClass] >
+        <div>
         <goa-card  
         v-for="(card,index) in cardItems" :key="index"
         :title="card.title"
         :titleUrl="card.titleUrl"
         :description="card.description"
         :cardImageUrl="card.cardImageUrl"
-        :cardWidth="cardcardWidth"
+        :cardWidth="card.cardWidth"
         />
+        </div>
       </div> 
 
     </div>
