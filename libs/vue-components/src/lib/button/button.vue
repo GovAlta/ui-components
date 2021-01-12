@@ -58,7 +58,6 @@ export default {
     return {
       buttonClasses: `goa-button ${this.buttonSize === 'small' ? 'btn-small' : ''}`,
       buttonTypeClass: buttonTypeClass,
-      tooltip: this.tooltip,
     }
   },
   methods: {
