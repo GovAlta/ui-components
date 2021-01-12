@@ -122,7 +122,7 @@ describe('RadioGroup', () => {
       const orangesRadioControl = screen.getByText('Oranges');
       fireEvent.click(orangesRadioControl);
 
-      expect(screen.queryByText(mockData.requiredErrorMessage)).not.toBeNull();
+      expect(screen.queryByText(mockData.requiredErrorMessage)).toBeNull();
     });
 
     test('should render red radios when not selected', async () => {
@@ -195,7 +195,7 @@ describe('RadioGroup', () => {
       const radios = screen.getAllByRole('radio', {});
       fireEvent.click(radios[0]);
 
-      const checked = screen.getByRole('radio', { checked: true });
+      const checked = screen.getByRole('radio', { checked: true }) as HTMLInputElement;
       expect(checked.value).toBe('apples');
     });
   });
