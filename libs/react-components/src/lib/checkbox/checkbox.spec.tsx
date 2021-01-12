@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { screen } from '@testing-library/dom'
+import { fireEvent, screen } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event';
 import GoACheckbox from './checkbox';
 
@@ -14,7 +14,7 @@ describe('GoA Checkbox', () => {
   });
 
   test('should render checkmark svg when checked', async () => {
-    render(<GoACheckbox checked={true}>{label}</GoACheckbox>);
+    render(<GoACheckbox checked={false}>{label}</GoACheckbox>);
 
     userEvent.click(screen.getByText(label));
 
