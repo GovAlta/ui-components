@@ -1,5 +1,5 @@
 import { DoDont } from '@abgov/shared/storybook-common';
-import GoARadioGroup from './radioGroup';
+import RadioGroup from "./RadioGroup";
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta
@@ -10,17 +10,16 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     requiredErrorMessage: { control: { type: 'text' } },
     required: { control: {type: 'boolean'}},
     disabled: { control: {type: 'boolean'}},
-    labelPosition: { control: {type: 'string'}}
+    labelPosition: { control: {type: 'select', options: ['before', 'after'] }}
   }}
-  component={GoARadioGroup}
+  component={RadioGroup}
 />
 
 export const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { GoARadioGroup },
-  template: '<GoARadioGroup></GoARadioGroup>',
+  components: { RadioGroup },
+  template: '<RadioGroup></RadioGroup>',
 });
-
 
 # Radios
 
@@ -47,9 +46,9 @@ notice and read the information.
   >
     {(args, argTypes) => {
       return {
-        components: { GoARadioGroup },
+        components: { RadioGroup },
         render: function (createElement) {
-          return createElement(GoARadioGroup, {
+          return createElement(RadioGroup, {
             props: args,
           });
         },
@@ -57,17 +56,6 @@ notice and read the information.
     }}
   </Story>
 </Canvas>
-
-    // {(args, argTypes) => {
-    //   return {
-    //     components: { GoARadioGroup },
-    //     render: function (createElement) {
-    //       return createElement(GoARadioGroup, {
-    //         props: args,
-    //       });
-    //     },
-    //   };
-    // }}
 
 ## Overview
 

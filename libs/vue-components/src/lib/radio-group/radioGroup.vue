@@ -1,27 +1,35 @@
 <template>
-  <div>
-    <div class="goa-radio-group">
-      <span v-if="title" class="radio-group-title">{{title}}</span>
-      <span v-if="required" class="required-label">{{required}}</span>
-      <div v-if="helperText" class="helper-text">{{helperText}}</div>
-      <label class="goa-radio-layout">
-        <div :class="getSelectedCss">
-          <div v-for="item in items" :key="item.text">
-            <goa-radio :labelPosition="labelPosition" :item="item" :title="item.text"  :change="saySomething()" :passValue="item.value" />
-          </div>
-          <br>
-        </div>
-      </label>
-      <div v-if="requiredErrorMessage" class="error-text">{{requiredErrorMessage}}</div>
-    </div>
+  <div class="goa-radio-group">
+    <span class="radio-group-title">{{title}}</span>
+    <span v-if="required" class="required-label">{{required}}</span>
+    <div v-if="helperText" class="helper-text">{{helperText}}</div>
+    <span v-if="required" class="required-label">{{required}}</span>
+
+    <label class="goa-radio-layout">
+      <div v-for="(option, index) in items" :key="option.text">
+        <Radio
+          id="yesNoQuestion"
+          v-model="fields.default"
+          :options="items[index]"
+          :disabled="disabled"
+          :required="required"
+          :labelPosition="labelPosition"
+          label="Example question one"
+        />
+      </div>
+    </label>
+    <div v-if="requiredErrorMessage" class="error-text">{{requiredErrorMessage}}</div>
   </div>
 </template>
 
-<script lang="typescript">
-import GoARadio from './radio/radio.vue';
+
+<script>
+import Radio from "./Radio";
 
 export default {
-  name: 'goa-radio-group',
+  components: {
+    Radio,
+  },
   props: {
     /**
      * Title of the radio item
@@ -30,7 +38,7 @@ export default {
       type: String,
       required: true,
     },
-    /**
+     /**
      * Help text of the radio item
      */
     helperText: {
@@ -45,45 +53,43 @@ export default {
       required: true,
     },
     /**
-     * Radio item disabled
-     */
+     * Disable radio buttons
+    */
     disabled: {
       type: Boolean,
-      required: false,
+      default: false,
+    },
+    /**
+     * Is the radio button selection required.
+    */
+    required: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * List of radio buttons to select
+     */
+    items: {
+      type: [Array],
+      required: true,
     },
     /**
      * where is the label Positioned
      */
     labelPosition: {
       type: String,
-      required: false,
+      default: false,
       validator: (prop) => [
       'before', 'after'
       ].includes(prop)
     },
-    /**
-     * Is the radio button selection required.
-    */
-    required:{
-      type: Boolean,
-      required: false,
-    },
-    items: {
-      type: Array,
-      required: true,
-    },
   },
-  methods: {
-    saySomething: () => function () {
-      console.log("something");
-    },
-  },
-  components: {
-    'goa-radio': GoARadio
-  },
+
   data() {
     return {
-      hasError: this.required,
+      fields: {
+        default: null,
+      },
     };
   },
 };

@@ -60,9 +60,9 @@ export default {
       type: Boolean,
       default: false,
     },
-        /**
+    /**
      * where is the label Positioned
-     */
+    */
     labelPosition: {
       type: String,
       required: false,
