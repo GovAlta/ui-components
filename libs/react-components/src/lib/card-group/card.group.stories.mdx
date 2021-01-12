@@ -118,7 +118,7 @@ export const groupTemplate = (args) => {
     args={{
       title: 'Card gourp Title',
       layout: 'basic',
-      cardItems:[
+      cardItems: [
         {
           title: 'Energy Diversification Act 1',
           description: 'We are encouraging  vor Albertans.',
@@ -132,17 +132,17 @@ export const groupTemplate = (args) => {
           titleUrl: 'http://www.google.ca',
           cardWidth: 400,
           cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
-        }],
+        },
+      ],
     }}
   >
-     {Template.bind({})}
+    {Template.bind({})}
   </Story>
 </Canvas>
 
-
 ## Examples
 
-###  Pass card group data as children components.
+### Pass card group data as children components.
 
 ```html
 <GoACardGroup title={'Dashboard'} layout='basic' >
@@ -161,7 +161,7 @@ export const groupTemplate = (args) => {
 </GoACardGroup>
 ```
 
-###  Pass card group data to cardItems as json array.
+### Pass card group data to cardItems as json array.
 
 ```html
 <GoACardGroup title={'Dashboard'} layout='basic' cardItems={cardItem}/>

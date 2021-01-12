@@ -32,7 +32,6 @@ A wrapper/group for a set of cards display
 
 # CardGroup
 
-
 <Canvas>
   <Story
     name="Variants"
@@ -114,7 +113,6 @@ A wrapper/group for a set of cards display
   </Story>
 </Canvas>
 
-
 <Canvas>
   <Story
     name="CardItems"
@@ -122,7 +120,7 @@ A wrapper/group for a set of cards display
     args={{
       title: 'Card gourp Title',
       layout: 'basic',
-      cardItems:[
+      cardItems: [
         {
           title: 'Energy Diversification Act 1',
           description: 'We are encouraging  vor Albertans.',
@@ -136,10 +134,11 @@ A wrapper/group for a set of cards display
           titleUrl: 'http://www.google.ca',
           cardWidth: 400,
           cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
-        }],
+        },
+      ],
     }}
   >
-      {(args, argTypes) => {
+    {(args, argTypes) => {
       return {
         components: { GoACardGroup },
         render: function (createElement) {
@@ -155,7 +154,6 @@ A wrapper/group for a set of cards display
 ## Examples
 
 ### Pass goa-card components as slots. Slots are a mechanism for Vue components that allows you to compose your components in a way other than the strict parent-child relationship.
-
 
 ```html
 <template>
@@ -196,6 +194,7 @@ A wrapper/group for a set of cards display
   };
 </script>
 ```
+
 ### Pass goa-card components as Json array to cardItems.
 
 ```html
@@ -216,7 +215,7 @@ A wrapper/group for a set of cards display
           cardWidth: 400,
           cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
         }]>
-     
+
     </goa-card-group>
   </div>
 </template>
