@@ -57,7 +57,6 @@ export default {
       required: Boolean,
       disabled: Boolean,
       indeterminate: Boolean,
-      value: String,
       content: String,
       labelPosition: {
           type: String,
