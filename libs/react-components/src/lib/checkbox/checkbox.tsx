@@ -38,7 +38,7 @@ export interface CheckboxProps {
   selectionChange?: any,
 }
 
-export const GoACheckbox = ({checked = false, required = false, disabled = false, indeterminate = false, labelPosition = "before", content, children,selectionChange }: CheckboxProps) => {
+export const GoACheckbox = ({checked = false, required = false, disabled = false, indeterminate = false, labelPosition = "before", content, children, selectionChange }: CheckboxProps) => {
   const [checkedBox, setCheckedBox] = useState(checked);
   const [checkedBoxOld, setCheckedBoxOld] = useState(checked);
   const [indeterminateCheck, setIndeterminateCheck] = useState(indeterminate);
@@ -52,14 +52,14 @@ export const GoACheckbox = ({checked = false, required = false, disabled = false
   const checkboxHandler = () => {
     setIndeterminateCheck(false);
     setCheckedBox(!checkedBox)
-    selectionChange(!checkedBox);
+    selectionChange && selectionChange(!checkedBox);
     setLastChecked(checked === false ? 'checked' : 'indeterminate')
   }
 
   if (checkboxControlTrigger()) {
     setCheckedBox(checked);
     setCheckedBoxOld(checked);
-    selectionChange(checked);
+    selectionChange && selectionChange(checked);
     setLastChecked(checked === true ? 'checked' : 'indeterminate')
   }
 
@@ -68,12 +68,12 @@ export const GoACheckbox = ({checked = false, required = false, disabled = false
     setIndeterminateCheckOld(indeterminate);
     setLastChecked(indeterminate === true ? 'indeterminate' : 'checked')
   }
-  
+
   return (
     <div className={`goa-checkbox ${disabled && 'goa-checkbox-disabled'} ${hasError() && 'has-error'} ${labelPosition === 'before' && 'goa-checkbox-label-before'}`}>
       <label className="goa-checkbox-layout">
           <div className={`goa-checkbox-container ${checkedBox && lastChecked === 'checked' && 'goa-checkbox-selected'} ${indeterminateCheck && lastChecked === 'indeterminate' && 'goa-checkbox-indeterminate'}` }>
-              <input 
+              <input
                 type="checkbox"
                 checked={checkedBox}
                 disabled={disabled}

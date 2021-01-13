@@ -1,0 +1,339 @@
+import GoADropdown from './dropdown';
+import GoADropdownOption from './option/option'
+
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+
+<Meta title="Component Library/Components/Dropdown"
+  argTypes={{
+    label: { control: { type: 'text' } },
+    description: { control: { type: 'text' } },
+    disabled: { control: { type: 'boolean' } },
+    multiple: { control: { type: 'boolean' } },
+    required: { control: { type: 'boolean' } },
+    options: { control: { type: 'text' } },
+    value: { control: { type: 'text' } },
+    values: { control: { type: 'text' } },
+  }}
+  component={GoADropdown} />
+
+# Drop Down List
+
+A user input field that allows the user to select from a list of options.
+
+## Overview
+
+### Basic
+
+<Canvas>
+  <Story name="Basic" height="400px">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+              },
+              on: {
+                select: (val) => {
+                  alert(`${val} selected`);
+                }
+              }
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+### Required
+
+<Canvas>
+  <Story name="Required" height="400px">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                required: true,
+              }
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+### Single value preselected
+
+<Canvas>
+  <Story name="Single value preselected" height="400px">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                value: 'pear'
+              }
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+### Disabled
+
+<Canvas>
+  <Story name="Disabled" height="400px">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                disabled: true
+              }
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+### Multiselect
+
+<Canvas>
+  <Story name="Multiselect" height="400px">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return  createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                multiple: true,
+              },
+              on: {
+                select: (values) => {
+                  alert(`${values.join(', ')} were selected`)
+                }
+              }
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+### Multiselect with preselected values
+
+<Canvas>
+  <Story name="Multiselect with preselected values" height="400px">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return  createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                multiple: true,
+                values: ['banana', 'pear']
+              },
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+### Multiselect with preselected values
+
+<Canvas>
+  <Story name="Filter with contains match" height="400px">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return  createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                typeAheadMode: 'contains'
+              },
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+### Filter with starts with match
+
+<Canvas>
+  <Story name="Filter with starts with match" height="400px">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return  createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                typeAheadMode: 'startsWith'
+              },
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+## Examples
+
+Basic
+
+```html
+<GoaDropdown
+    label="Fruits"
+    description="Choose your favourite fruit!"
+    :options='[{"name":"Apple","value":"apple"},{"name":"Banana","value":"banana"},{"name":"Pear","value":"pear"}]'
+  />
+```
+
+Preselected Value
+
+```html
+<GoaDropdown
+    description="Pick something from the list"
+    label="Fruits"
+    :options='[{"name":"Apple","value":"apple"},{"name":"Banana","value":"banana"},{"name":"Pear","value":"pear","selected":true}]'
+    value="pear"
+  />
+```
+
+Preselected Values
+
+```html
+<GoaDropdown
+    description="Pick something from the list"
+    label="Fruits"
+    multiple
+    :options='[{"name":"Apple","value":"apple"},{"name":"Banana","value":"banana","selected":true},{"name":"Pear","value":"pear","selected":true}]'
+    :values='["banana","pear"]'
+  />
+```
+
+## Properties
+
+### GoADropdown
+
+<Description of={GoADropdown} />
+<ArgsTable of={GoADropdown} />
+
+## Usage guidelines
+
+### Character count
+
+Each option should be a brief word, description, or name.
+
+<DoDont
+  dos={'Limit character width to 20 characters per option.'}
+  donts={'Use drop down lists for sentences.'}
+/>
+
+### Select a single option
+
+Use drop down lists when the user can only select one option and when there are more than
+seven available options to select from. Use radio buttons instead when there are seven or
+less available options to choose from. Since all the options but one are hidden, the visibility
+is low, so try to use radio buttons whenever possible.
+
+<DoDont
+  dos={
+    'Make the drop down list optional, otherwise specify with a "Required" caption.'
+  }
+  donts={
+    'Use drop down lists when there are less than eight available options.'
+  }
+/>
+
+### Description of options
+
+Drop down lists are always accompanied with a label and precede a button. Do not use the first
+drop down option as a descriptor or label of the list. Instead, it should be the most common or
+default option and is part of a set.
+
+<DoDont
+  dos={'List the first option as part of a set of related options.'}
+  donts={
+    'Use the first option as a descriptor or label for the set of options.'
+  }
+/>
