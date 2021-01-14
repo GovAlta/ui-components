@@ -3,12 +3,12 @@
     <div class="goa-notifications">
       <h2 class="title">{{title}}</h2>
     </div>
-    <div role="notification" :class="'goa-notification goa--' + type">
+    <div role="notification" :class="`goa-notification goa--${type}`">
       <div class='content'>   
         <a v-if="notificationUrl" class="message" role="url" :href="notificationUrl">{{message}}</a>
         <span v-else class="message">{{message}}</span>
         
-        <a v-if="isDismissable" role="closeBox" class="close" title="Dismiss" @click="dismissClick()">
+        <a v-if="isDismissable" role="closeBox" class="close" title="Dismiss" @click="dismissBanner()">
           <svg width="16px" height="16px" viewBox="0 0 16 16">
             <path d="M 15.99 14.54C 15.99 14.54 14.54 15.99 14.54 15.99 14.54 15.99 8 9.45 8 9.45 8 9.45 1.46 15.99 1.46 15.99 1.46 15.99 0.01 14.54 0.01 14.54 0.01 14.54 6.55 8 6.55 8 6.55 8 0.01 1.46 0.01 1.46 0.01 1.46 1.46 0.01 1.46 0.01 1.46 0.01 8 6.55 8 6.55 8 6.55 14.54 0.01 14.54 0.01 14.54 0.01 15.99 1.46 15.99 1.46 15.99 1.46 9.45 8 9.45 8 9.45 8 15.99 14.54 15.99 14.54Z"/>
           </svg>
@@ -39,27 +39,21 @@ export default {
     },
     message: String,
     
-    notificationUrl: {
-      type:String,
-      required:false,
-    },
+    notificationUrl: String,
     
-    isDismissable: {
-      type:Boolean,
-      required: false,
-    },
+    isDismissable:Boolean,
     
-    onDismiss: {
+    dismiss: {
       type: Function,
       required: false,
     },
     
     },
     methods: {
-      dismissClick: function() {        
+      dismissBanner: function() {        
         this.dismissed = true;
 
-        this.$emit('onDismiss');
+        this.$emit('click');
       }
     },
   };

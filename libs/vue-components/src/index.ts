@@ -6,6 +6,7 @@ import GoACheckbox from './lib/checkbox/checkbox.vue';
 import GoACard from './lib/card/card.vue';
 import GoACardGroup from './lib/card-group/card.group.vue';
 import GoAHeroBanner from './lib/hero-banner/hero-banner.vue';
+import GoANotificationBanner from './lib/notification-banner/notification-banner.vue';
 
 export {
   GoAMicrositeLogo,
@@ -16,4 +17,5 @@ export {
   GoACardGroup,
   GoACheckbox,
   GoAHeroBanner,
+  GoANotificationBanner,
 };

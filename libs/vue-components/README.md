@@ -129,3 +129,30 @@ export default {
 };
 </script>
 ```
+
+```
+<template>
+  <div id="app">
+    <goa-notification-banner
+      type="'important' || 'information' || 'event' || 'emergency'"
+      title="Notification Title"
+      message="Information to the user goes in the message"
+      isDismissable="true"
+      notificationUrl="www.google.com"
+      title="Hidden Title"
+    />
+  </div>
+</template>
+
+<script>
+import { GoANotification } from '@abgov/vue-components';
+
+export default {
+  name: "App",
+  components: {
+    'goa-notification-banner': GoANotification
+  }
+};
+</script>
+
+```
