@@ -1,5 +1,5 @@
 import { DoDont } from '@abgov/shared/storybook-common';
-import RadioGroup from "./RadioGroup";
+import GoARadioGroup from "./RadioGroup";
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta
@@ -12,13 +12,13 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     disabled: { control: {type: 'boolean'}},
     labelPosition: { control: {type: 'select', options: ['before', 'after'] }}
   }}
-  component={RadioGroup}
+  component={GoARadioGroup}
 />
 
 export const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { RadioGroup },
-  template: '<RadioGroup></RadioGroup>',
+  components: { GoARadioGroup },
+  template: '<GoARadioGroup></GoARadioGroup>',
 });
 
 # Radios
@@ -37,18 +37,22 @@ notice and read the information.
       required: false,
       disabled: false,
       labelPosition: 'after',
+      value: null,
       items: [
         {text: 'Grapes', value: 'grapes'},
         {text: 'Pears', value: 'pears'},
         {text: 'Kiwi', value: 'kiwi'},
       ],
+      onChange: (value) => {
+        action('selection changed')(value);
+      },
     }}
   >
     {(args, argTypes) => {
       return {
-        components: { RadioGroup },
+        components: { GoARadioGroup },
         render: function (createElement) {
-          return createElement(RadioGroup, {
+          return createElement(GoARadioGroup, {
             props: args,
           });
         },

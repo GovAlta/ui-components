@@ -1,9 +1,8 @@
 <template>
   <div class="goa-radio-group">
     <span class="radio-group-title">{{title}}</span>
-    <span v-if="required" class="required-label">{{required}}</span>
+    <span v-if="required" class="required-label">(Required)</span>
     <div v-if="helperText" class="helper-text">{{helperText}}</div>
-    <span v-if="required" class="required-label">{{required}}</span>
 
     <label class="goa-radio-layout">
       <div v-for="(option, index) in items" :key="option.text">
@@ -12,19 +11,23 @@
           v-model="fields.default"
           :options="items[index]"
           :disabled="disabled"
-          :required="required"
+          :required="hasError()"
           :labelPosition="labelPosition"
+          :value="value"
           label="Example question one"
+          @change="onChangeResponse"
         />
       </div>
     </label>
-    <div v-if="requiredErrorMessage" class="error-text">{{requiredErrorMessage}}</div>
+    <div v-if="hasError()" class="error-text">
+      {{ requiredErrorMessage }}
+    </div>
   </div>
 </template>
 
 
-<script>
-import Radio from "./Radio";
+<script lang="ts">
+import Radio from "./Radio.vue";
 
 export default {
   components: {
@@ -50,7 +53,8 @@ export default {
      */
     requiredErrorMessage: {
       type: String,
-      required: true,
+      required: false,
+      default: null,
     },
     /**
      * Disable radio buttons
@@ -78,17 +82,35 @@ export default {
      */
     labelPosition: {
       type: String,
-      default: false,
+      required: false,
+      default: 'before',
       validator: (prop) => [
       'before', 'after'
       ].includes(prop)
     },
+    onChange: {
+      type: Function,
+      required: false,
+    },
+    value: {
+      type: String,
+      required: false,
+      default: "",
+    },
   },
-
+  methods: {
+    hasError() {
+      return this.requiredErrorMessage && this.required && !this.selectedValue;
+    },
+    onChangeResponse(event) {
+      this.selectedValue = event
+    }
+  },
   data() {
     return {
       fields: {
         default: null,
+        selectedValue: null,
       },
     };
   },

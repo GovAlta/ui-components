@@ -1,9 +1,8 @@
 <template>
   <div :id="id">
-    <div :class="getRootCssClasses">
+    <div :class="getRootCssClasses()">
       <label class="goa-radio-layout">
         <div class="goa-radio-container" :class="options.value === value ? 'goa-radio-selected' : null">
-
           <input
             type="radio"
             :value="options.value"
@@ -27,75 +26,75 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import classnames from 'classnames';
 
-import classnames from 'classnames';
-
-export default {
-  model: {
-    event: "change",
-  },
-  props: {
-    id: {
-      type: String,
-      required: true,
+  export default {
+    model: {
+      event: "change",
     },
-    label: {
-      type: String,
-      required: true,
+    props: {
+      id: {
+        type: String,
+        required: true,
+      },
+      label: {
+        type: String,
+        required: true,
+      },
+      value: {
+        type: [String, Number, Boolean, Object],
+        default: null,
+      },
+      options: {
+        type: Object,
+        required: true,
+      },
+      required: {
+        type: Boolean,
+        default: false,
+      },
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * where is the label Positioned
+      */
+      labelPosition: {
+        type: String,
+        required: false,
+        default: 'before',
+        validator: (prop) => [
+        'before', 'after'
+        ].includes(prop)
+      },
+      inputClass: {
+        type: [String, Object],
+        default: "",
+      },
     },
-    value: {
-      type: [String, Number, Boolean, Object],
-      default: null,
+    data() {
+      return {
+        hasError: this.required && !this.value,
+      };
     },
-    options: {
-      type: Object,
-      required: true,
+    methods: {
+      updateValue(value) {
+        this.$emit("change", value);
+      },
+      getRootCssClasses() {
+         return classnames({
+          'goa-radio': true,
+          'goa-radio-disabled': this.disabled,
+          'has-error': !this.value && this.required,
+          'goa-radio-label-before': this.labelPosition === 'before',
+        })
+      }
     },
-    required: {
-      type: Boolean,
-      default: false,
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * where is the label Positioned
-    */
-    labelPosition: {
-      type: String,
-      required: false,
-      validator: (prop) => [
-      'before', 'after'
-      ].includes(prop)
-    },
-    inputClass: {
-      type: [String, Object],
-      default: "",
-    },
-  },
-  methods: {
-    updateValue(value) {
-      this.$emit("change", value);
-    },
-  },
-  data() {
-    return {
-      hasError: this.required,
-      stuff: 'hello',
-      getRootCssClasses: classnames({
-        'goa-radio': true,
-        'goa-radio-disabled': this.disabled,
-        'has-error': this.required,
-        'goa-radio-label-before': this.labelPosition === 'before',
-      }),
-    };
-  },
-};
+  };
 </script>
 
-
 <style lang="scss" scoped>
-@import './radio.scss';
+  @import './radio.scss';
 </style>
