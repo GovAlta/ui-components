@@ -1,0 +1,219 @@
+<template>
+  <div>
+    <div v-if="isOpen" class="backdrop" @click="toggleOpen"></div>
+    <div
+      class="goa-dropdown"
+      :class="{ 'single-selection': multiple, 'has-error': requiredError }"
+    >
+      <label class="dropdown-label" :for="`input-for-${label}`">
+        {{ label }}
+      </label>
+
+      <span v-if="required && !disabled" class="required-label">(Required)</span>
+
+      <div
+        class="dropdown-grouping"
+        :class="{ disabled: disabled }"
+        role="menu"
+        @click="!disabled && toggleOpen()"
+      >
+        <i class="goa-select-icon" />
+        <input
+          v-if="!isOpen"
+          :value="selectedStatus"
+          :placeholder="description"
+          :readOnly="true"
+          role="search"
+          class="dropdown-textbox margin-override"
+          type="text"
+        >
+
+        <input
+          v-if="isOpen"
+          :id="`input-for-${label}`"
+          :placeholder="description"
+          :readOnly="typeAheadMode === 'none'"
+          role="search"
+          class="dropdown-textbox margin-override"
+          type="text"
+          autocomplete="off"
+          @input="setFilter"
+        >
+        <div v-if="isOpen" class="dropdown-menu" role="list">
+          <goa-option
+            v-for="option in matchingOptions"
+            :key="option.value"
+            role="listitem"
+            :value="option.value"
+            :name="option.name"
+            :class="{ selected: option.selected }"
+            :selected="option.selected"
+            @select="(e) => selectOption(e, option)"
+          />
+        </div>
+      </div>
+      <span v-if="showRequiredMessage" role="alert" class="dropdown-label error-text">
+        At least one item must be selected.
+      </span>
+      <span v-if="!showRequiredMessage && !disabled" class="helper-text">
+        {{ description }}
+      </span>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import GoADropdownOption from './option/option.vue';
+export * from './option/option.vue';
+
+interface Option {
+  name: string;
+  value: string;
+  selected: boolean;
+}
+
+export default {
+  name: 'GoaDropdown',
+
+  components: {
+    GoaOption: GoADropdownOption,
+  },
+
+  props: {
+    description: { type: String, default: '' },
+    disabled: Boolean,
+    label: { type: String, default: '' },
+    multiple: Boolean,
+    options: {
+      type: Array,
+      required: true,
+    },
+    required: Boolean,
+    typeAheadMode: {
+      type: String,
+      default: 'none',
+      validator: (val: string): boolean => {
+        return ['none', 'startsWith', 'contains'].includes(val);
+      },
+    },
+    value: { type: String, default: '' },
+    values: { type: Array, default: null },
+  },
+
+  data: (): unknown => {
+    return {
+      opts: [],
+      isOpen: false,
+      filter: null,
+      showRequiredMessage: false,
+    };
+  },
+
+  computed: {
+    matchingOptions(): Option[] {
+      if (!this.filter || this.typeAheadMode === 'none') {
+        return this.opts;
+      }
+      return this.opts.filter((option: Option) => {
+        if (this.typeAheadMode === 'contains') {
+          return option.name.toLowerCase().includes(this.filter);
+        }
+        return option.name.toLowerCase().indexOf(this.filter) === 0;
+      });
+    },
+
+    selectedStatus(): string {
+      if (this.selectedOptions.length === 0) {
+        return '';
+      }
+      return this.selectedOptions.map((option: Option) => option.name).join(', ');
+    },
+
+    selectedOptions(): Option[] {
+      return this.opts.filter((option: Option) => option.selected);
+    },
+
+    selectedValues(): string[] {
+      return this.selectedOptions.map((option: Option) => option.value);
+    },
+  },
+
+  created(): void {
+    const values = this.values || [this.value];
+    this.opts = this.options;
+    if (values) {
+      this.opts.forEach((option: Option) => {
+        if (values.includes(option.value)) {
+          option.selected = true;
+        }
+      });
+    }
+  },
+
+  methods: {
+    selectOption(e: MouseEvent, option: Option): void {
+      if (this.multiple) {
+        e.stopPropagation();
+      }
+
+      // set selected state on the option within the list
+      this.opts = this.opts.map((o: Option) => {
+        if (o.name === option.name) {
+          o.selected = !option.selected;
+        } else if (!this.multiple) {
+          // deselect the previous value for single selections
+          o.selected = false;
+        }
+        return o;
+      });
+
+      this.filter = null;
+    },
+
+    setFilter(e: KeyboardEvent): void {
+      const target = e.target as HTMLInputElement;
+      this.filter = target.value.toLowerCase();
+    },
+
+    toggleOpen(): void {
+      this.isOpen = !this.isOpen;
+
+      if (!this.isOpen) {
+        this.filter = null
+        this.showRequiredMessage =
+          this.required &&
+          !this.opts.find((option: Option) => option.selected);
+
+        if (this.selectedValues.length > 0) {
+          this.$emit('select', this.selectedValues);
+        }
+      }
+
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import '../../../../core-css/src/lib/styles/dropdown/dropdown.scss';
+* {
+  box-sizing: border-box;
+}
+.dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+  max-height: 300px;
+  overflow: auto;
+  cursor: pointer;
+}
+.disabled input[type='text'] {
+  cursor: default;
+}
+input[type='text'] {
+  cursor: pointer;
+}
+.backdrop {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+</style>

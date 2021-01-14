@@ -21,13 +21,13 @@ export default {
       },
     },
     /**
-     * The size of the button - "large","small".
+     * The size of the button - "normal","small".
      */
     buttonSize: {
       type: String,
       required: false,
       validator: (value) => {
-        return ["small", "large"].includes(value);
+        return ["small", "normal"].includes(value);
       },
     },
     /**
@@ -58,7 +58,6 @@ export default {
     return {
       buttonClasses: `goa-button ${this.buttonSize === 'small' ? 'btn-small' : ''}`,
       buttonTypeClass: buttonTypeClass,
-      tooltip: this.tooltip,
     }
   },
   methods: {
