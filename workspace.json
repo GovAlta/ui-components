@@ -60,6 +60,7 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/core-css/.storybook"
             }
