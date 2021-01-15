@@ -76,6 +76,7 @@
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/core-css",
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/core-css/.storybook"
             }
