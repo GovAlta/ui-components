@@ -22,13 +22,14 @@ import { action } from '@storybook/addon-actions';
            defaultValue: { summary: 'normal' },
         }
       },
-      content: { control: 'text' }
+      content: { control: 'text' },
+      title: { control: 'text', defaultValue: 'Click Me' },
     }
   }
   decorators={[
-        moduleMetadata({ declarations: [GoAButtonComponent] }),
-    ]
-} />
+      moduleMetadata({ declarations: [GoAButtonComponent] }),
+  ]}
+/>
 
 # Buttons
 
@@ -39,7 +40,8 @@ A hierarchy of actions provided by buttons.
     args={{
       buttonType: 'primary',
       buttonSize: 'normal',
-      content: 'Click Me!'
+      content: 'Click Me!',
+      title: 'The button title'
     }}
     parameters={
     {
@@ -52,7 +54,7 @@ A hierarchy of actions provided by buttons.
     {(args) => {
       args.click = function(event) { action('click')(event) }
       return {
-        template: `<button goa-button [buttonSize]="buttonSize" [buttonType]="buttonType" (click)="click($event)">{{content}}</button>`,
+        template: `<button goa-button [buttonSize]="buttonSize" [buttonType]="buttonType" [title]="title" (click)="click($event)">{{content}}</button>`,
         props: args
       }
     }}

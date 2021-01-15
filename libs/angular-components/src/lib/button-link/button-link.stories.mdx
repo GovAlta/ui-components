@@ -22,7 +22,8 @@ import { action } from '@storybook/addon-actions';
            defaultValue: { summary: 'normal' },
         }
       },
-      content: { control: 'text' }
+      content: { control: 'text' },
+      title: { control: 'text', defaultValue: 'Click Me' }
     }
   }
   decorators={[
@@ -51,7 +52,7 @@ A hierarchy of actions provided by buttons.
   }>
     {(args) => {
       return {
-        template: `<a goa-button href="http://alberta.ca" [buttonSize]='buttonSize' [linkType]='linkType' (click)="click($event)">{{content}}</a>`,
+        template: `<a goa-button href="http://alberta.ca" [buttonSize]='buttonSize' [linkType]='linkType' [title]='title' (click)="click($event)">{{content}}</a>`,
         props: args
       }
     }}
