@@ -14,7 +14,6 @@ import { moduleMetadata } from '@storybook/angular';
         }
       },
       title: { control: 'text' },
-      content: { control: 'text' }
     }
   }
   decorators={[
@@ -30,13 +29,15 @@ notice and read the information.
   <Story name="Variants" height={300}
     args={{
       type: 'information',
-      content: 'Information to the user goes in the content.  Information can include markup as desired.',
-      title: 'Callout Title'
+      title: 'Callout Title',
     }}
    >
     {(args) => {
       return {
-        template: `<goa-callout [type]="type" [title]="title">{{content}}</goa-callout>`,
+        template: `
+          <goa-callout [type]="type" [title]="title">
+            Information to the user goes in the content. <a href="some.server">Information</a> can include <i>markup</i> as desired.
+          </goa-callout>`,
         props: args
       }
     }}

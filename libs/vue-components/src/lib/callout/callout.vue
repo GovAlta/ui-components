@@ -3,9 +3,7 @@
     <div :class=[calloutTypeClass]>
       <div>
         <h3>{{ title }}</h3>
-        <div class="messages">
-          {{ content }}
-        </div>
+        <div class="messages" v-html="content"></div>
       </div>
     </div>
   </div>
@@ -40,7 +38,7 @@ export default {
     },
   },
   data() {
-    return {   
+    return {
         calloutTypeClass: `goa-callout goa--${this.calloutType}`
     };
   },
