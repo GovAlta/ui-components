@@ -4,11 +4,11 @@ import { GoAMicrositeLogoComponent } from './microsite-logo.component';
 import { Meta, Preview, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 
-<Meta title="Component Library/Page Layout/Microsite Logo" decorators={[
+<Meta title="Angular/Page Layout/Microsite Logo" decorators={[
         moduleMetadata({ declarations: [GoAMicrositeLogoComponent] })
     ]}
     component={GoAMicrositeLogoComponent}
-    argTypes={{ 
+    argTypes={{
       serviceName: { control: 'text' },
       serviceHome: { control: 'text' }
     }}
@@ -17,11 +17,11 @@ import { moduleMetadata } from '@storybook/angular';
 # Header
 
 <Canvas>
-  <Story name="Micro Site Logo" height={100} 
-  args={{ 
-      serviceName: 'Digital Service Name (microsite)', 
-      serviceHome: 'https://www.alberta.ca/index.aspx' 
-    }} 
+  <Story name="Micro Site Logo" height={100}
+  args={{
+      serviceName: 'Digital Service Name (microsite)',
+      serviceHome: 'https://www.alberta.ca/index.aspx'
+    }}
   parameters={
     {
       design: {

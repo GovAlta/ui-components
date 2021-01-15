@@ -5,24 +5,24 @@ import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-do
 import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 
-<Meta title="Component Library/Basic Elements/Button Link"
+<Meta title="Angular/Basic Elements/Button Link"
   component={GoAButtonLinkComponent}
-  argTypes={{ 
-      linkType: { 
-        control: 'select', 
+  argTypes={{
+      linkType: {
+        control: 'select',
         options: ['right', 'up'],
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
            defaultValue: { summary: 'right' },
-        } 
+        }
       },
-      buttonSize: { 
-        control: 'select', 
+      buttonSize: {
+        control: 'select',
         options: ['small', 'normal'],
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
            defaultValue: { summary: 'normal' },
-        }  
+        }
       },
-      content: { control: 'text' } 
+      content: { control: 'text' }
     }
   }
   decorators={[
@@ -35,12 +35,12 @@ import { action } from '@storybook/addon-actions';
 A hierarchy of actions provided by buttons.
 
 <Canvas>
-  <Story name="Link" height={100} 
-  args={{ 
-      linkType: 'right', 
+  <Story name="Link" height={100}
+  args={{
+      linkType: 'right',
       buttonSize: 'normal',
-      content: 'Click Me!' 
-    }} 
+      content: 'Click Me!'
+    }}
   parameters={
     {
       design: {
@@ -59,8 +59,8 @@ A hierarchy of actions provided by buttons.
 </Canvas>
 
 ## Overview
-Buttons submit data from a user input. Buttons are commonly found at the bottom of forms or simple 
-field box groups such as a search function. They may also be used as call to action or navigation 
+Buttons submit data from a user input. Buttons are commonly found at the bottom of forms or simple
+field box groups such as a search function. They may also be used as call to action or navigation
 links.
 
 ## Examples
