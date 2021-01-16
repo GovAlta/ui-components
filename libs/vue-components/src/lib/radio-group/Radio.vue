@@ -18,7 +18,7 @@
           >
             <circle cx="6" cy="6" r="6" fill="#fff" />
           </svg>
-          <slot v-if="options.value === value" :name="options.value" />
+          <!-- {{options}} -->
         </div>
         <label class="goa-radio-label" for="one">{{options.text}}</label>
       </label>
@@ -43,7 +43,11 @@
         required: true,
       },
       value: {
-        type: [String, Number, Boolean, Object],
+        type: String,
+        default: null,
+      },
+      defvalue: {
+        type: String,
         default: null,
       },
       options: {
@@ -81,9 +85,17 @@
     },
     methods: {
       updateValue(value) {
+         console.log(value + "<value")
         this.$emit("change", value);
+        console.log(this.value + "<this.valuehh")
       },
       getRootCssClasses() {
+         console.log(this.value + "<this.value")
+         console.log(this.options.value + "<options.value")
+         if (this.value === null) {
+           this.value = this.defvalue;
+         }
+        this.$emit("change", this.value);
          return classnames({
           'goa-radio': true,
           'goa-radio-disabled': this.disabled,

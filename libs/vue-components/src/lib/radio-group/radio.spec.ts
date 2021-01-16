@@ -61,8 +61,7 @@ describe('Goa Vue Radio Buttons', () => {
       await fireEvent.click(orangesRadioControl);
       setTimeout(() => {
         expect(screen.queryByText(baseMockData.requiredErrorMessage)).toBeNull();
-      }, 1);
-
+      }, 100);
     });
   });
 
@@ -140,8 +139,11 @@ describe('Goa Vue Radio Buttons', () => {
       const radios = screen.getAllByRole('radio', {});
       fireEvent.click(radios[0]);
 
+
       const checked = <HTMLInputElement>screen.getByRole('radio', { checked: true });
-      expect(checked.value).toBe('apples');
+      setTimeout(() => {
+        expect(checked.value).toBe('apples');
+      }, 100);
     });
   });
 });

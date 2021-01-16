@@ -14,6 +14,7 @@
           :required="hasError()"
           :labelPosition="labelPosition"
           :value="value"
+          :defvalue="value"
           label="Example question one"
           @change="onChangeResponse"
         />
