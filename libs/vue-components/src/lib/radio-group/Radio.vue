@@ -2,7 +2,7 @@
   <div :id="id">
     <div :class="getRootCssClasses()">
       <label class="goa-radio-layout">
-        <div class="goa-radio-container" :class="options.value === value ? 'goa-radio-selected' : null">
+        <div class="goa-radio-container" :class="options.value === fields.newvalue ? 'goa-radio-selected' : null">
           <input
             type="radio"
             :value="options.value"
@@ -43,7 +43,7 @@
         required: true,
       },
       value: {
-        type: String,
+        type: [String, Number, Boolean, Object],
         default: null,
       },
       defvalue: {
@@ -80,7 +80,9 @@
     },
     data() {
       return {
-        hasError: this.required && !this.value,
+        fields: {
+          newvalue: null,
+        },
       };
     },
     methods: {
@@ -92,14 +94,15 @@
       getRootCssClasses() {
          console.log(this.value + "<this.value")
          console.log(this.options.value + "<options.value")
-         if (this.value === null) {
-           this.value = this.defvalue;
+         this.fields.newvalue = this.value;
+         if (this.fields.newvalue === null) {
+           this.fields.newvalue = this.defvalue;
          }
-        this.$emit("change", this.value);
+        this.$emit("change", this.fields.newvalue);
          return classnames({
           'goa-radio': true,
           'goa-radio-disabled': this.disabled,
-          'has-error': !this.value && this.required,
+          'has-error': !this.fields.newvalue && this.required,
           'goa-radio-label-before': this.labelPosition === 'before',
         })
       }

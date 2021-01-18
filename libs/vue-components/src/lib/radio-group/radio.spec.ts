@@ -2,7 +2,7 @@
 import MutationObserver from '@sheerun/mutationobserver-shim'
 window.MutationObserver = MutationObserver
 import { render, screen, fireEvent } from '@testing-library/vue';
-import GoARadioButton from './RadioGroup.vue';
+import GoARadioButton from './radioGroup.vue';
 
 //import { GoARadioGroup, GoARadio } from './radio-group';
 
@@ -137,8 +137,10 @@ describe('Goa Vue Radio Buttons', () => {
 
     test('change event should work',  () => {
       const radios = screen.getAllByRole('radio', {});
-      fireEvent.click(radios[0]);
 
+      setTimeout(() => {
+        fireEvent.click(radios[0])
+      }, 100);
 
       const checked = <HTMLInputElement>screen.getByRole('radio', { checked: true });
       setTimeout(() => {
