@@ -104,3 +104,55 @@ export default {
 };
 </script>
 ```
+
+```
+<template>
+  <div id="app">
+    <goa-hero-banner
+    title="Upgrading our bitumen" content="Information to the user goes in the content"
+    backgroundUrl="working-in-cold-hero-3_rdax_75.jpg"
+    linkText= 'Learn more',
+      linkUrl= 'http://www.google.com',
+
+    />
+  </div>
+</template>
+
+<script>
+import { GoAHeroBanner } from '@abgov/vue-components';
+
+export default {
+  name: "App",
+  components: {
+    'goa-hero-banner': GoAHeroBanner
+  }
+};
+</script>
+```
+
+```
+<template>
+  <div id="app">
+    <goa-notification-banner
+      type="'important' || 'information' || 'event' || 'emergency'"
+      title="Notification Title"
+      message="Information to the user goes in the message"
+      isDismissable="true"
+      notificationUrl="www.google.com"
+      title="Hidden Title"
+    />
+  </div>
+</template>
+
+<script>
+import { GoANotification } from '@abgov/vue-components';
+
+export default {
+  name: "App",
+  components: {
+    'goa-notification-banner': GoANotification
+  }
+};
+</script>
+
+```

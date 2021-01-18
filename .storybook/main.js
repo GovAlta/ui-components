@@ -17,5 +17,5 @@ module.exports = {
       title: "Core", 
       url: "https://localhost/core/"
     }
-   }
+  }
 };

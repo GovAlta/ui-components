@@ -44,7 +44,7 @@ export const groupTemplate = (args) => {
     <GoACardGroup {...args}>
       <GoACard
         title="Energy Diversification Act 1"
-        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        description="We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans."
         titleUrl="http://www.google.ca"
         cardWidth={400}
         cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
@@ -65,7 +65,7 @@ export const groupTemplate = (args) => {
       </GoACard>
       <GoACard
         title="Energy Diversification Act 2"
-        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        description="We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans."
         titleUrl="http://www.google.ca"
         cardWidth={400}
         cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
@@ -78,21 +78,21 @@ export const groupTemplate = (args) => {
       />
       <GoACard
         title="Energy Diversification Act 4"
-        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        description="We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans."
         titleUrl="http://www.google.ca"
         cardWidth={400}
         cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
       />
       <GoACard
         title="Energy Diversification Act 5"
-        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        description="We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans."
         titleUrl="http://www.google.ca"
         cardWidth={400}
         cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
       />
       <GoACard
         title="Energy Diversification Act 6"
-        description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+        description="We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans."
         titleUrl="http://www.google.ca"
         cardWidth={400}
         cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
@@ -112,21 +112,56 @@ export const groupTemplate = (args) => {
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story
+    name="CardItems"
+    args={{
+      title: 'Card gourp Title',
+      layout: 'basic',
+      cardItems: [
+        {
+          title: 'Energy Diversification Act 1',
+          description: 'We are encouraging  vor Albertans.',
+          titleUrl: 'http://www.google.ca',
+          cardWidth: 400,
+          cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+        },
+        {
+          title: 'Energy Diversification Act 2',
+          description: 'We are encouraging  vor Albertans.',
+          titleUrl: 'http://www.google.ca',
+          cardWidth: 400,
+          cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
+        },
+      ],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
 ## Examples
+
+### Pass card group data as children components.
 
 ```html
 <GoACardGroup title={'Dashboard'} layout='basic' >
      <GoACard  title="Energy Diversification Act 1"
-                   description="We are encouraging companies to turn out oil ad gas resources into more valuable products-creating good jobs for Albertans."
+                   description="We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans."
                     titleUrl="http://www.google.ca"
                 cardWidth={400}
                 cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
        />
-
+   <GoACard  title="Energy Diversification Act 1"
+                   description="We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans."
+                    titleUrl="http://www.google.ca"
+                cardWidth={400}
+                cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
+       />
 </GoACardGroup>
 ```
 
-## Json Example cardItems is json object.
+### Pass card group data to cardItems as json array.
 
 ```html
 <GoACardGroup title={'Dashboard'} layout='basic' cardItems={cardItem}/>

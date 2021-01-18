@@ -1,13 +1,12 @@
 import { render, screen } from '@testing-library/vue';
 import GoAButton from './button.vue';
-import userEvent from '@testing-library/user-event';
 
 describe('Goa Vue Button', () => {
   const buttonType = 'primary';
   const buttonClassName = 'goa-button';
   const buttonSecondaryClassName = 'goa--secondary';
   const buttonTertiaryClassName = 'goa--tertiary';
-  const buttonSize = 'normal';
+  const buttonSize = 'small';
   const buttonTitle = 'Test Title';
   const buttonNormalClassName = 'normal';
   const buttonTooltip = 'hovering';

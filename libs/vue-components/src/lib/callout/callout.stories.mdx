@@ -3,7 +3,7 @@ import GoACallout from './callout';
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta
-  title="Component Library/Page Layout/Callout"
+  title="Component Library/Components/Callout"
   argTypes={{
     title: { control: { type: 'text' } },
     content: { control: { type: 'text' } },
@@ -17,14 +17,14 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
   component={GoACallout}
 />
 
-# Callouts
+# Variants
 
 Important changes or facts given a strong visual emphasis so that users take
 notice and read the information.
 
 <Canvas>
   <Story
-    name="Call out"
+    name="Variants"
     height={200}
     args={{
       title: 'Callout Title',
@@ -57,7 +57,28 @@ layout as a container.
 ```
 <template>
   <div id="app">
-    <goa-callout title="CalloutTitle" content="CalloutContent" calloutType="information"/>
+    <goa-callout title="CalloutTitle" content="Information to the user goes in the content" calloutType="'important || 'information' || 'event' || 'emergency'"/>
+  </div>
+</template>
+
+<script>
+import { GoACallout } from '@abgov/vue-components';
+
+export default {
+  name: "App",
+  components: {
+    'goa-callout': GoACallout
+  }
+};
+</script>
+```
+
+or
+
+```
+<template>
+  <div id="app">
+    <goa-callout title="CalloutTitle" content="" calloutType="information"/>
   </div>
 </template>
 

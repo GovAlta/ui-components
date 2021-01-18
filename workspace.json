@@ -60,6 +60,7 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/core-css/.storybook"
             }
@@ -75,6 +76,7 @@
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/core-css",
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/core-css/.storybook"
             }
