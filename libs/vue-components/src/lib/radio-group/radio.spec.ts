@@ -114,9 +114,6 @@ describe('Goa Vue Radio Buttons', () => {
         'input[type=radiox]'
       );
       radios.forEach((radio) => {
-        console.log(radio.value + "<radio.value")
-        console.log(selectedValue + "<selectedValue")
-        console.log(radio.checked + "<radio.checked")
         expect(radio.checked).toBe(radio.value === selectedValue);
       });
     });

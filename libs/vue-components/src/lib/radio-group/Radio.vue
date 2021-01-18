@@ -2,7 +2,7 @@
   <div :id="id">
     <div :class="getRootCssClasses()">
       <label class="goa-radio-layout">
-        <div class="goa-radio-container" :class="options.value === fields.newvalue ? 'goa-radio-selected' : null">
+        <div class="goa-radio-container" :class="options.value === fields.activeValue ? 'goa-radio-selected' : null">
           <input
             type="radio"
             :value="options.value"
@@ -34,10 +34,6 @@
       event: "change",
     },
     props: {
-      id: {
-        type: String,
-        required: true,
-      },
       label: {
         type: String,
         required: true,
@@ -46,7 +42,7 @@
         type: [String, Number, Boolean, Object],
         default: null,
       },
-      defvalue: {
+      defaultValue: {
         type: String,
         default: null,
       },
@@ -62,9 +58,6 @@
         type: Boolean,
         default: false,
       },
-      /**
-       * where is the label Positioned
-      */
       labelPosition: {
         type: String,
         required: false,
@@ -81,28 +74,24 @@
     data() {
       return {
         fields: {
-          newvalue: null,
+          activeValue: null,
         },
       };
     },
     methods: {
       updateValue(value) {
-         console.log(value + "<value")
         this.$emit("change", value);
-        console.log(this.value + "<this.valuehh")
       },
       getRootCssClasses() {
-         console.log(this.value + "<this.value")
-         console.log(this.options.value + "<options.value")
-         this.fields.newvalue = this.value;
-         if (this.fields.newvalue === null) {
-           this.fields.newvalue = this.defvalue;
+         this.fields.activeValue = this.value;
+         if (this.fields.activeValue === null) {
+           this.fields.activeValue = this.defaultValue;
          }
-        this.$emit("change", this.fields.newvalue);
+        this.$emit("change", this.fields.activeValue);
          return classnames({
           'goa-radio': true,
           'goa-radio-disabled': this.disabled,
-          'has-error': !this.fields.newvalue && this.required,
+          'has-error': !this.fields.activeValue && this.required,
           'goa-radio-label-before': this.labelPosition === 'before',
         })
       }

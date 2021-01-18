@@ -154,6 +154,7 @@ layout as a container.
         {text: 'Pears', value: 'pears'},
         {text: 'Kiwi', value: 'kiwi'},
       ]
+      v-on:change="() => selectionChanged($event)"
     />
   </div>
 </template>
@@ -164,7 +165,6 @@ import { GoARadioGroup } from '@abgov/vue-components';
 export default {
   name: "App",
   components: {
-    'goa-radio': GoARadio
     'goa-radio-group': GoARadioGroup
   }
 };
@@ -173,32 +173,18 @@ export default {
 
 ## Properties
 
-<ArgsTable of={GoARadioGroup} />
+#### GoARadioGroup
+
 <Description of={GoARadioGroup} />
+<ArgsTable of={GoARadioGroup} />
 
-## Usage guidelines
+# Usage guidelines
 
-### Within the body
+### Select multiple options
 
-Radio banners grab the attention of the user scanning for important information on
-a page, which may be otherwise missed. Radio banners must be relevant to the header
-or section it corresponds to.
-
-<DoDont
-  dos={
-    'Use a radio banner when the content merits special attention to the topic.'
-  }
-  donts={
-    'Use too many radio banners. Many competing banners will diminish the effectiveness ' +
-    'of individual ones.'
-  }
-/>
-
-### Light on content
-
-Radio banners should communicate one piece of crucial information pertaining to the topic. In terms of importance within the section, it takes priority over any other paragraph under the header. If there is additional information that is not in the corresponding section, or is on another page, do use a link.
+Use radio buttons or a drop down list when the user can only select one option. Use checkboxes when the user can select any number of options.
 
 <DoDont
-  dos={'Use in-line links when additional information exists.'}
-  donts={'Go heavy on content. It is not body copy.'}
+  dos={'Use radios when the user is allowed to select only one option.'}
+  donts={'Use radios when the user is allowed to select more than one option'}
 />
