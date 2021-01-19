@@ -1,3 +1,5 @@
+import classnames from 'classnames'
+
 import React, {
   FC,
   useState,
@@ -17,6 +19,7 @@ interface Props {
   label: string;
   description?: string;
   required?: boolean;
+  menuHeight?: number;
   multiple?: boolean;
   disabled?: boolean;
   typeAheadMode?: 'none' | 'startsWith' | 'contains';
@@ -26,6 +29,7 @@ interface Props {
 export const GoADropdown: FC<Props> = ({
   label,
   required,
+  menuHeight,
   multiple,
   disabled,
   description,
@@ -39,8 +43,6 @@ export const GoADropdown: FC<Props> = ({
   const [selectionDescription, setSelectionDescription] = useState<string>('');
   const [requiredError, setRequiredError] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>('');
-
-  //#region Helper functions
 
   // Indicates if there is any option selected
   const hasOptionSelected = () => {
@@ -91,10 +93,6 @@ export const GoADropdown: FC<Props> = ({
     return match;
   };
 
-  //#endregion
-
-  //#region Evend handlers and callbacks
-
   const updateOptionHandler = (value: string, option: DropdownOption) => {
     if (!multiple) {
       if (option.selected) {
@@ -119,7 +117,20 @@ export const GoADropdown: FC<Props> = ({
     typeAheadMode !== 'none' && isOpen && e.stopPropagation();
   };
 
-  //#endregion
+  const rootDropDownCss = (): string => {
+    return classnames({
+      'goa-dropdown': true,
+      'single-selection': !multiple,
+      'has-error': requiredError,
+    })
+  }
+
+  const dropDownGroupCss = (): string => {
+    return classnames({
+      'dropdown-grouping': true,
+      'disabled': disabled,
+    })
+  }
 
   // Updates the description and invokes the selectionChanged callback function when the selection changes
   useEffect(() => {
@@ -175,28 +186,18 @@ export const GoADropdown: FC<Props> = ({
   }, []);
 
   return (
-    <DropdownContext.Provider
-      value={{
-        options: options,
-        updateOption: updateOptionHandler,
-        filter: filter,
-        matchesFilter: filterMatchFunction,
-      }}
-    >
-      <div
-        className={`goa-dropdown ${!multiple ? 'single-selection' : ''} ${
-          requiredError ? 'has-error' : ''
-        }`}
-        {...rest}
-      >
+    <DropdownContext.Provider value={{
+      options: options,
+      updateOption: updateOptionHandler,
+      filter: filter,
+      matchesFilter: filterMatchFunction,
+    }}>
+      <div className={rootDropDownCss()} {...rest}>
         <label className="dropdown-label" htmlFor={`input-for-${label}`}>
           {label}
         </label>
         {required && <span className="required-label">(Required)</span>}
-        <div
-          className={`dropdown-grouping  ${disabled ? 'disabled' : ''}`}
-          onClick={toggleOpen}
-        >
+        <div className={dropDownGroupCss()} onClick={toggleOpen}>
           <i className="goa-select-icon"></i>
           <input
             className="dropdown-textbox margin-override"
@@ -207,22 +208,20 @@ export const GoADropdown: FC<Props> = ({
             placeholder={description}
             onChange={inputChangeHandler}
             readOnly={!isOpen || typeAheadMode === 'none'}
-          ></input>
-          {isOpen && (
-            <div
-              className="dropdown-menu"
-              style={{
-                position: 'absolute',
-                zIndex: 1000,
-                maxHeight: '300px',
-                overflow: 'auto',
-              }}
-            >
+          />
+          {isOpen &&
+            <div className="dropdown-menu" style={{
+              position: 'absolute',
+              zIndex: 1000,
+              maxHeight: '300px',
+              overflow: 'auto',
+            }}>
               {children}
             </div>
-          )}
+          }
         </div>
-        {!requiredError && <span className="helper-text">{description}</span>}
+        {!requiredError &&
+          <span className="helper-text">{description}</span>}
         {requiredError && (
           <span className="dropdown-label error-text">
             At least one item must be selected.
