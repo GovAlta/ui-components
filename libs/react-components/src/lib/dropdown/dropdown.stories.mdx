@@ -20,6 +20,30 @@ export const Template = (args) => {
       <GoAOption id="orange" label="Orange">
         <span>Orange 🍊</span>
       </GoAOption>
+    </GoADropdown>
+  );
+};
+
+export const LongTemplate = (args) => {
+  return (
+    <GoADropdown {...args}>
+      <GoAOption id="apple" label="Apple"></GoAOption>
+      <GoAOption id="banana" label="Banana"></GoAOption>
+      <GoAOption id="orange" label="Orange">
+        <span>Orange 🍊</span>
+      </GoAOption>
+      <GoAOption id="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption id="lemon" label="Lemon"></GoAOption>
+      <GoAOption id="lime" label="Lime"></GoAOption>
+      <GoAOption id="mango" label="Mango"></GoAOption>
+      <GoAOption id="pineapple" label="Pineapple"></GoAOption>
+      <GoAOption id="plantain" label="Plantain"></GoAOption>
+      <GoAOption id="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption id="lemon" label="Lemon"></GoAOption>
+      <GoAOption id="lime" label="Lime"></GoAOption>
+      <GoAOption id="mango" label="Mango"></GoAOption>
+      <GoAOption id="pineapple" label="Pineapple"></GoAOption>
+      <GoAOption id="plantain" label="Plantain"></GoAOption>
       <GoAOption id="kiwi" label="Kiwi"></GoAOption>
       <GoAOption id="lemon" label="Lemon"></GoAOption>
       <GoAOption id="lime" label="Lime"></GoAOption>
@@ -29,6 +53,7 @@ export const Template = (args) => {
     </GoADropdown>
   );
 };
+
 export const GroupTemplate = (args) => {
   return (
     <GoADropdown {...args}>
@@ -136,6 +161,38 @@ A user input field that allows the user to select from a list of options.
     }}
   >
     {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Menu Height
+
+<Canvas>
+  <Story
+    name="Menu Height"
+    args={{
+      label: 'Fruits',
+      description: 'Choose your favourite fruit!',
+      style: { width: '300px' },
+    }}
+  >
+    {LongTemplate.bind({})}
+  </Story>
+</Canvas>
+
+
+### Max Menu Height
+
+<Canvas>
+  <Story
+    name="Max Menu Height"
+    args={{
+      label: 'Fruits',
+      description: 'Choose your favourite fruit!',
+      menuHeight: 200,
+      style: { width: '300px' },
+    }}
+  >
+    {LongTemplate.bind({})}
   </Story>
 </Canvas>
 

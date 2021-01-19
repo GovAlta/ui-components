@@ -8,6 +8,11 @@
   }
 }
 
+.dropdown-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
 @mixin dropdown-menu-styles {
   border: solid 1px $goa-border-color-secondary;
   border-radius: 4px;

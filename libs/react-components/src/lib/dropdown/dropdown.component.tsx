@@ -7,6 +7,7 @@ import React, {
   Children,
   ChangeEvent,
   MouseEvent,
+  useRef,
 } from 'react';
 import {
   KeyOptionPair,
@@ -43,6 +44,10 @@ export const GoADropdown: FC<Props> = ({
   const [selectionDescription, setSelectionDescription] = useState<string>('');
   const [requiredError, setRequiredError] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>('');
+  const [maxMenuHeight, setMaxMenuHeight] = useState<number>(0);
+
+  const menuRef = useRef<HTMLDivElement>();
+  const overlayRef = useRef<HTMLDivElement>();
 
   // Indicates if there is any option selected
   const hasOptionSelected = () => {
@@ -185,6 +190,14 @@ export const GoADropdown: FC<Props> = ({
     setRequiredError(false);
   }, []);
 
+  useEffect(() => {
+    const height = menuHeight > 0
+      ? menuHeight
+      : overlayRef.current?.clientHeight - menuRef.current?.offsetTop - 20 || 0;
+
+    setMaxMenuHeight(height);
+  });
+
   return (
     <DropdownContext.Provider value={{
       options: options,
@@ -192,6 +205,7 @@ export const GoADropdown: FC<Props> = ({
       filter: filter,
       matchesFilter: filterMatchFunction,
     }}>
+      {isOpen && <div className="dropdown-overlay" ref={overlayRef} onClick={toggleOpen}></div>}
       <div className={rootDropDownCss()} {...rest}>
         <label className="dropdown-label" htmlFor={`input-for-${label}`}>
           {label}
@@ -210,10 +224,10 @@ export const GoADropdown: FC<Props> = ({
             readOnly={!isOpen || typeAheadMode === 'none'}
           />
           {isOpen &&
-            <div className="dropdown-menu" style={{
+            <div className="dropdown-menu" ref={menuRef} style={{
               position: 'absolute',
               zIndex: 1000,
-              maxHeight: '300px',
+              maxHeight: `${maxMenuHeight}px`,
               overflow: 'auto',
             }}>
               {children}

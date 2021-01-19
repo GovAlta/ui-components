@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isOpen" ref="overlay" class="overlay" @click="toggleOpen"></div>
+    <div v-if="isOpen" ref="overlay" class="dropdown-overlay" @click="toggleOpen"></div>
     <div
       class="goa-dropdown"
       :class="{ 'single-selection': multiple, 'has-error': requiredError }"
@@ -230,9 +230,5 @@ export default {
 }
 input[type='text'] {
   cursor: pointer;
-}
-.overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
 }
 </style>

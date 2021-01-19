@@ -85,7 +85,7 @@ describe('Vue Dropdown component', () => {
 
     expect(queryByRole('alert')).toBeFalsy();
     await fireEvent.click(getByRole('search'));
-    await fireEvent.click(document.querySelector('.overlay'));
+    await fireEvent.click(document.querySelector('.dropdown-overlay'));
     expect(queryByRole('alert')).toBeTruthy();
   })
 
@@ -144,7 +144,7 @@ describe('Vue Dropdown component', () => {
     await fireEvent.click(getByText('Apple'));
     await fireEvent.click(getByText('Pear'));
     // close list
-    await fireEvent.click(document.querySelector('.overlay'));
+    await fireEvent.click(document.querySelector('.dropdown-overlay'));
     // items are selected
     expect(getByRole('search')).toHaveProperty('value', 'Apple, Pear');
   })
