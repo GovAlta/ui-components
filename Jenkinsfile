@@ -1,7 +1,7 @@
 def publishNpm = false;
 def deployStorybook = false;
-def base = '';
-def baseCommand = '';
+def baseCommand = '--al;';
+def ocProject = 'ui-components-dev';
 
 pipeline {
   agent {
@@ -9,22 +9,21 @@ pipeline {
       label 'node12'
     }
   }
+  options {
+    timeout(time: 3, unit: 'HOURS')
+  }
   stages {
     stage('Prepare') {
       steps {
         checkout scm
-        sh 'npm install -g @nrwl/cli'
         sh 'npm install'
         script {
           if (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT){
             baseCommand = "--base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
           }
-          else {
-            baseCommand = "--all"
-          }
 
           def affected = sh (
-            script: "nx affected:libs ${baseCommand} --plain",
+            script: "npx nx affected:libs ${baseCommand} --plain",
             returnStdout: true
           ).trim();
           echo "affected: '${affected}'"
@@ -42,16 +41,16 @@ pipeline {
         }
       }
     }
-    stage('Build Processes') {
-      parallel {
+    stage('Build') {
+      stages {
         stage('Test'){
           steps {
-            sh "nx affected --target=test ${baseCommand} --parallel"
+            sh "npx nx affected --target=test ${baseCommand} --parallel"
           }
         }
         stage('Lint'){
           steps {
-            sh "nx affected --target=lint ${baseCommand} --parallel"
+            sh "npx nx affected --target=lint ${baseCommand} --parallel"
           }
         }
         stage('Build storybook'){
@@ -65,6 +64,16 @@ pipeline {
             sh 'npm run build:angular-material-storybook' //builds to /dist/storybook/angular-components
             sh 'npm run build:vue-storybook' //builds to /dist/storybook/vue-components
             sh 'npm run build:react-storybook' //builds to /dist/storybook/react-components
+            //copy the nginx config to binary buld location
+            sh 'cp nginx.conf dist/storybook'
+            script {
+              openshift.withCluster() {
+                openshift.withProject(ocProject) {
+                  def bc = openshift.selector('bc', 'ui-components')
+                  bc.startBuild('--from-dir=dist/storybook', '--wait', '--follow')
+                }
+              }
+            }
           }
         }
         stage('Build npm package'){
@@ -72,32 +81,74 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh "nx affected --target=build ${baseCommand} --parallel --prod --with-deps"
-            sh "nx affected --target=post ${baseCommand} --parallel"
+            sh "npx nx affected --target=build ${baseCommand} --parallel --prod --with-deps"
+            sh "npx nx affected --target=post ${baseCommand} --parallel"
           }
         }
       }
     }
+    stage('Deploy Dev') {
+      stages {
+        stage('Storybook'){
+          when {
+            expression { deployStorybook == true }
+          }
+          steps {
+            script {
+              openshift.withCluster() {
+                openshift.withProject(ocProject) {
+                  openshift.tag('ui-components:latest', 'ui-components:dev') 
+                }
+              }
+            }
+            script {
+              openshift.withCluster() {
+                openshift.withProject(ocProject) {
+                  def dc = openshift.selector('dc', 'ui-components')
+                  def rm = dc.rollout()
+                  rm.latest()
+                  rm.status()
+                }
+              }
+            }
+          }
+        }
+      }
+      post {
+        success {
+          slackSend (
+            color: 'good', 
+            message: "UI Components pipeline build ${env.BUILD_NUMBER} ready for promotion to Test: ${env.BUILD_URL}"
+          )
+        }
+      }
+    }
     stage('Deploy Test') {
+      input{
+        message 'Promote to Test?'
+        ok 'Yes'
+      }
       parallel {
         stage('Storybook'){
           when {
             expression { deployStorybook == true }
           }
-          stages {
-            stage('Build image'){
-              steps {
-                //copy the nginx config to binary buld location
-                sh "cp nginx.conf dist/storybook"
-                dir('dist/storybook') {
-                  sh "oc start-build ui-components --from-dir . --follow"
+          steps {
+            script {
+              openshift.withCluster() {
+                openshift.withProject(ocProject) {
+                  openshift.tag('ui-components:dev', 'ui-components:test') 
                 }
               }
             }
-            stage('Push Image to Test'){
-              steps {
-                // TODO: make this dynamic
-                sh 'oc tag ui-components-dev/ui-components:latest ui-components-test/ui-components:latest'
+            script {
+              openshift.withCluster() {
+                openshift.withProject('ui-components-test') {
+                  def dc = openshift.selector('dc', 'ui-components')
+                  def rm = dc.rollout()
+                  rm.latest()
+                  rm.status()
+                }
               }
             }
           }
@@ -107,134 +158,71 @@ pipeline {
             expression { publishNpm == true }
           }
           steps {
-            sh "npm run semantic-delivery -- --dry-run"
+            sh 'npm run semantic-delivery -- --dry-run'
           }
+        }
+      }
+      post {
+        success {
+          slackSend (
+            color: 'good', 
+            message: "UI Components pipeline build ${env.BUILD_NUMBER} ready for promotion to Production: ${env.BUILD_URL}"
+          )
         }
       }
     }
     stage('Deploy Prod') {
+      input{
+        message 'Promote to Production and Publish Libraries?'
+        ok 'Yes'
+      }
       parallel {
-        stage('Push Storybook Image to Prod'){
+        stage('Storybook'){
           when {
             expression { deployStorybook == true }
           }
           steps {
-            // TODO: make this dynamic
-            sh 'oc tag ui-components-dev/ui-components:latest ui-components-prod/ui-components:latest'          
+            script {
+              openshift.withCluster() {
+                openshift.withProject(ocProject) {
+                  openshift.tag('ui-components:test', 'ui-components:prod') 
+                }
+              }
+            }
+            script {
+              openshift.withCluster() {
+                openshift.withProject('ui-components-prod') {
+                  def dc = openshift.selector('dc', 'ui-components')
+                  def rm = dc.rollout()
+                  rm.latest()
+                  rm.status()
+                }
+              }
+            }
           }
         }
         stage('Publish to npm'){
           when {
             expression { publishNpm == true }
           }
+          environment { 
+            PUBLISH_GITLAB_TOKEN = credentials('ui-components-dev-lib-publish-gitlab-token')
+            PUBLISH_NPM_TOKEN = credentials('ui-components-dev-lib-publish-npm-token')
+          }
           steps {
-            sh "npm run semantic-delivery -- --token xzSxuwhJHgywouSpUAF6"
-            sh "env NPM_TOKEN=cb289e67-98db-4935-a7bd-4b2b87244e30 npm run publish:npm"
+            sh "npm run semantic-delivery -- --token ${PUBLISH_GITLAB_TOKEN}"
+            sh "env NPM_TOKEN=${PUBLISH_NPM_TOKEN} npm run publish:npm"
           }
         }
       }
     }
   }
   post {
-    failure {
-      slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+    success {
+      slackSend color: 'good', message: 'UI Components pipeline build ${env.BUILD_NUMBER} Completed.'
+    }
+    failure { 
+      slackSend color: 'bad', message: 'UI Components pipeline build ${env.BUILD_NUMBER} Failed: ${env.BUILD_URL}'
     }
   }
 }
-
-// Leaving this in to refer to it should we want to use OpenShift specific
-// commands as this allows to use OpenShift name refernces and use of variables
-// for subsequent steps.
-// def templateName = "ui-components-pipeline"
-// pipeline {
-//   agent {
-//     node {
-//       label "node12"
-//     }
-//   }
-//   options {
-//     timeout(time: 20, unit: 'MINUTES')
-//   }
-//   stages {
-//     stage('preamble') {
-//       steps {
-//         script {
-//           openshift.withCluster() {
-//             openshiftwithProject() {
-//               echo "Using project: ${openshift.project()}"
-//             }
-//           }
-//         }
-//       }
-//     }
-//     stage('build') {
-//       steps {
-//         script {
-//           openshift.withCluster() {
-//             openshift.withProject() {
-//               def builds = openshift.selector("bc", templateName).related('builds')
-//               timeout(5) {
-//                 build.untilEach(1) {
-//                   return (it.object().status.phase == "Complete")
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//     stage('deploy') {
-//       steps {
-//         script {
-//           openshift.withCluster() {
-//             openshift.withProject() {
-//               def rm = openshift.selector("dc", templateName).rollout().latest()
-//               timeout(5) {
-//                 openshift.selector("dc", templateName).related('pods').untilEach(1) {
-//                   return (it.object().status.phase == "Running")
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//     stage('tag') {
-//       steps {
-//         script {
-//           openshift.withCluster() {
-//             openshiftwithProject() {
-//               openshift.tag("${templateName}:latest", "${templateName-staging}:latest")
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-
-    // stage("Build Application") {
-    //   when {
-    //     expression { return AFFECTED_APPS }
-    //   }
-    //   steps {
-    //     script {
-    //       openshift.withCluster() {
-    //         openshift.withProject() {
-    //           AFFECTED_APPS.each { affected ->
-    //             def bc = openshift.selector("bc", "${affected}-builder")
-    //             if ( !bc.exists() ) {
-    //               bc = openshift.selector("bc", affected)
-    //             }
-
-    //             if ( bc.exists() ) {
-    //               bc.startBuild()
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    //}
-  //}
-//}
