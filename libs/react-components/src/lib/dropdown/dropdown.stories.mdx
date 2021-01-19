@@ -15,13 +15,13 @@ import { DoDont } from '@abgov/shared/storybook-common';
 export const Template = (args) => {
   return (
     <GoADropdown {...args}>
-      <GoAOption id="apple" label="Apple"></GoAOption>
-      <GoAOption id="banana" label="Banana"></GoAOption>
-      <GoAOption id="orange" label="Orange">
+      <GoAOption value="apple" label="Apple"></GoAOption>
+      <GoAOption value="banana" label="Banana"></GoAOption>
+      <GoAOption value="orange" label="Orange">
         <span>Orange 🍊</span>
       </GoAOption>
-      <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-      <GoAOption id="lemon" label="Lemon"></GoAOption>
+      <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption value="lemon" label="Lemon"></GoAOption>
     </GoADropdown>
   );
 };
@@ -29,29 +29,29 @@ export const Template = (args) => {
 export const LongTemplate = (args) => {
   return (
     <GoADropdown {...args}>
-      <GoAOption id="apple" label="Apple"></GoAOption>
-      <GoAOption id="banana" label="Banana"></GoAOption>
-      <GoAOption id="orange" label="Orange">
+      <GoAOption value="apple" label="Apple"></GoAOption>
+      <GoAOption value="banana" label="Banana"></GoAOption>
+      <GoAOption value="orange" label="Orange">
         <span>Orange 🍊</span>
       </GoAOption>
-      <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-      <GoAOption id="lemon" label="Lemon"></GoAOption>
-      <GoAOption id="lime" label="Lime"></GoAOption>
-      <GoAOption id="mango" label="Mango"></GoAOption>
-      <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-      <GoAOption id="plantain" label="Plantain"></GoAOption>
-      <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-      <GoAOption id="lemon" label="Lemon"></GoAOption>
-      <GoAOption id="lime" label="Lime"></GoAOption>
-      <GoAOption id="mango" label="Mango"></GoAOption>
-      <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-      <GoAOption id="plantain" label="Plantain"></GoAOption>
-      <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-      <GoAOption id="lemon" label="Lemon"></GoAOption>
-      <GoAOption id="lime" label="Lime"></GoAOption>
-      <GoAOption id="mango" label="Mango"></GoAOption>
-      <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-      <GoAOption id="plantain" label="Plantain"></GoAOption>
+      <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption value="lemon" label="Lemon"></GoAOption>
+      <GoAOption value="lime" label="Lime"></GoAOption>
+      <GoAOption value="mango" label="Mango"></GoAOption>
+      <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+      <GoAOption value="plantain" label="Plantain"></GoAOption>
+      <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption value="lemon" label="Lemon"></GoAOption>
+      <GoAOption value="lime" label="Lime"></GoAOption>
+      <GoAOption value="mango" label="Mango"></GoAOption>
+      <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+      <GoAOption value="plantain" label="Plantain"></GoAOption>
+      <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption value="lemon" label="Lemon"></GoAOption>
+      <GoAOption value="lime" label="Lime"></GoAOption>
+      <GoAOption value="mango" label="Mango"></GoAOption>
+      <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+      <GoAOption value="plantain" label="Plantain"></GoAOption>
     </GoADropdown>
   );
 };
@@ -60,19 +60,19 @@ export const GroupTemplate = (args) => {
   return (
     <GoADropdown {...args}>
       <GoAOptionGroup label="Group 1">
-        <GoAOption id="apple" label="Apple" defaultSelected></GoAOption>
-        <GoAOption id="banana" label="Banana"></GoAOption>
-        <GoAOption id="orange" label="Orange">
+        <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
+        <GoAOption value="orange" label="Orange">
           <span>Orange 🍊</span>
         </GoAOption>
       </GoAOptionGroup>
-      <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-      <GoAOption id="lemon" label="Lemon"></GoAOption>
-      <GoAOption id="lime" label="Lime"></GoAOption>
+      <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption value="lemon" label="Lemon"></GoAOption>
+      <GoAOption value="lime" label="Lime"></GoAOption>
       <GoAOptionGroup label="Group 2">
-        <GoAOption id="mango" label="Mango"></GoAOption>
-        <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-        <GoAOption id="plantain" label="Plantain"></GoAOption>
+        <GoAOption value="mango" label="Mango"></GoAOption>
+        <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+        <GoAOption value="plantain" label="Plantain"></GoAOption>
       </GoAOptionGroup>
     </GoADropdown>
   );
@@ -286,15 +286,15 @@ Basic
 
 ```html
 <GoADropdown label="Fruits" description="Choose your favourite fruit!">
-  <GoAOption id="apple" label="Apple"></GoAOption>
-  <GoAOption id="banana" label="Banana"></GoAOption>
-  <GoAOption id="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
-  <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-  <GoAOption id="lemon" label="Lemon"></GoAOption>
-  <GoAOption id="lime" label="Lime" defaultSelected></GoAOption>
-  <GoAOption id="mango" label="Mango"></GoAOption>
-  <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-  <GoAOption id="plantain" label="Plantain"></GoAOption>
+  <GoAOption value="apple" label="Apple"></GoAOption>
+  <GoAOption value="banana" label="Banana"></GoAOption>
+  <GoAOption value="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
+  <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+  <GoAOption value="lemon" label="Lemon"></GoAOption>
+  <GoAOption value="lime" label="Lime" defaultSelected></GoAOption>
+  <GoAOption value="mango" label="Mango"></GoAOption>
+  <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+  <GoAOption value="plantain" label="Plantain"></GoAOption>
 </GoADropdown>
 ```
 
@@ -303,17 +303,17 @@ With Groups
 ```html
 <GoADropdown label="Fruits" description="Choose your favourite fruit!" multiple="true">
   <GoAOptionGroup label="Group 1">
-    <GoAOption id="apple" label="Apple" defaultSelected></GoAOption>
-    <GoAOption id="banana" label="Banana"></GoAOption>
-    <GoAOption id="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
+    <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
+    <GoAOption value="banana" label="Banana"></GoAOption>
+    <GoAOption value="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
   </GoAOptionGroup>
-  <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-  <GoAOption id="lemon" label="Lemon"></GoAOption>
-  <GoAOption id="lime" label="Lime" defaultSelected></GoAOption>
+  <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+  <GoAOption value="lemon" label="Lemon"></GoAOption>
+  <GoAOption value="lime" label="Lime" defaultSelected></GoAOption>
   <GoAOptionGroup label="Group 2">
-    <GoAOption id="mango" label="Mango"></GoAOption>
-    <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-    <GoAOption id="plantain" label="Plantain" defaultSelected></GoAOption>
+    <GoAOption value="mango" label="Mango"></GoAOption>
+    <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+    <GoAOption value="plantain" label="Plantain" defaultSelected></GoAOption>
   </GoAOptionGroup>
 </GoADropdown>
 ```
@@ -323,7 +323,7 @@ Dynamic loading
 ```html
 <GoADropdown  label="Fruits"  description="Choose your favourite fruit!"  multiple="false"  typeAheadMode="none">
   {
-    items.map((i) => <GoAOption key={i.id} id={i.id} label={i.label} />)
+    items.map((i) => <GoAOption key={i.id} value={i.id} label={i.label} />)
   }
 </GoADropdown>
 ```

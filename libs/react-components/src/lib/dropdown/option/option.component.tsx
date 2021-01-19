@@ -3,27 +3,24 @@ import { DropdownContext, DropdownOption } from '../dropdown.context';
 import classnames from 'classnames'
 
 interface Props {
-  /** value The unique identifier of the element */
-  id: string;
-  /** The description of the option */
+  value: string;
   label: string;
-  /** Indicates if the element is selected by default */
   defaultSelected?: boolean;
 }
 
-export const GoAOption: FC<Props> = ({ id, label, children }) => {
+export const GoAOption: FC<Props> = ({ value, label, children }) => {
   const [isActive, setActive] = useState<string>('');
   const { filter, matchesFilter, options, updateOption } = useContext(DropdownContext);
 
   function toggleSelected(e: { stopPropagation: () => void; }) {
     e.stopPropagation();
-    updateOption(id, new DropdownOption(id, label, options[id] ? !options[id].selected : true));
+    updateOption(value, new DropdownOption(value, label, options[value] ? !options[value].selected : true));
   }
 
   function rootCss() {
     return classnames({
       option: true,
-      selected: options[id] && options[id].selected,
+      selected: options[value] && options[value].selected,
       isActive
     })
   }
