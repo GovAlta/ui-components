@@ -8,6 +8,7 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     label: { control: { type: 'text' } },
     description: { control: { type: 'text' } },
     disabled: { control: { type: 'boolean' } },
+    menuHeight: { control: { type: 'number' } },
     multiple: { control: { type: 'boolean' } },
     required: { control: { type: 'boolean' } },
     options: { control: { type: 'text' } },
@@ -129,6 +130,114 @@ A user input field that allows the user to select from a list of options.
                 ],
                 description: 'Pick something from the list',
                 disabled: true
+              }
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Menu Height" height="400px">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+              }
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+
+### Max Menu Height
+
+<Canvas>
+  <Story name="Max Menu Height" height="400px">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                menuHeight: 300
               }
             }
           )

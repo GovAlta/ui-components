@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isOpen" class="backdrop" @click="toggleOpen"></div>
+    <div v-if="isOpen" ref="overlay" class="overlay" @click="toggleOpen"></div>
     <div
       class="goa-dropdown"
       :class="{ 'single-selection': multiple, 'has-error': requiredError }"
@@ -39,7 +39,7 @@
           autocomplete="off"
           @input="setFilter"
         >
-        <div v-if="isOpen" class="dropdown-menu" role="list">
+        <div v-if="isOpen" ref="menu" class="dropdown-menu" role="list" :style="{ 'max-height': `${this.maxMenuHeight}px` }">
           <goa-option
             v-for="option in matchingOptions"
             :key="option.value"
@@ -83,6 +83,7 @@ export default {
     description: { type: String, default: '' },
     disabled: Boolean,
     label: { type: String, default: '' },
+    menuHeight: Number,
     multiple: Boolean,
     options: {
       type: Array,
@@ -106,6 +107,7 @@ export default {
       isOpen: false,
       filter: null,
       showRequiredMessage: false,
+      maxMenuHeight: 0,
     };
   },
 
@@ -151,6 +153,17 @@ export default {
   },
 
   methods: {
+
+    getMenuHeight(): void {
+      const menu = this.$refs['menu'] as HTMLElement
+      const overlay = this.$refs['overlay'] as HTMLElement
+
+      if (this.menuHeight) {
+        this.maxMenuHeight = this.menuHeight
+      } else {
+        this.maxMenuHeight = overlay?.clientHeight - menu?.offsetTop - 20 || 0
+      }
+    },
     selectOption(e: MouseEvent, option: Option): void {
       if (this.multiple) {
         e.stopPropagation();
@@ -178,6 +191,13 @@ export default {
     toggleOpen(): void {
       this.isOpen = !this.isOpen;
 
+      // calculate max height
+      if (this.isOpen) {
+        // timeout required since the DOM update was out of sync with the menu state
+        setTimeout(this.getMenuHeight, 0)
+      }
+
+      // relay selected value to parent
       if (!this.isOpen) {
         this.filter = null
         this.showRequiredMessage =
@@ -188,7 +208,6 @@ export default {
           this.$emit('select', this.selectedValues);
         }
       }
-
     },
   },
 };
@@ -212,7 +231,7 @@ export default {
 input[type='text'] {
   cursor: pointer;
 }
-.backdrop {
+.overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
 }
