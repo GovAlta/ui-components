@@ -219,10 +219,10 @@ pipeline {
   }
   post {
     success {
-      slackSend color: 'good', message: 'UI Components pipeline build ${env.BUILD_NUMBER} Completed.'
+      slackSend color: 'good', message: "UI Components pipeline build ${env.BUILD_NUMBER} Completed."
     }
     failure { 
-      slackSend color: 'bad', message: 'UI Components pipeline build ${env.BUILD_NUMBER} Failed: ${env.BUILD_URL}'
+      slackSend color: 'bad', message: "UI Components pipeline build ${env.BUILD_NUMBER} Failed: ${env.BUILD_URL}"
     }
   }
 }
