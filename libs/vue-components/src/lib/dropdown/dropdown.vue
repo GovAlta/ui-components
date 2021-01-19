@@ -154,7 +154,7 @@ export default {
 
   methods: {
 
-    getMenuHeight(): void {
+    setMenuHeight(): void {
       const menu = this.$refs['menu'] as HTMLElement
       const overlay = this.$refs['overlay'] as HTMLElement
 
@@ -194,7 +194,7 @@ export default {
       // calculate max height
       if (this.isOpen) {
         // timeout required since the DOM update was out of sync with the menu state
-        setTimeout(this.getMenuHeight, 0)
+        setTimeout(this.setMenuHeight, 0)
       }
 
       // relay selected value to parent
