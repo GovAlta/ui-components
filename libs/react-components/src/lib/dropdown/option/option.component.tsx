@@ -1,5 +1,6 @@
 import React, { FC, useState, useContext } from 'react';
 import { DropdownContext, DropdownOption } from '../dropdown.context';
+import classnames from 'classnames'
 
 interface Props {
   /** value The unique identifier of the element */
@@ -12,31 +13,32 @@ interface Props {
 
 export const GoAOption: FC<Props> = ({ id, label, children }) => {
   const [isActive, setActive] = useState<string>('');
+  const { filter, matchesFilter, options, updateOption } = useContext(DropdownContext);
 
-  const context = useContext(DropdownContext);
-
-  const toggleSelected = (e: { stopPropagation: () => void; }) => {
+  function toggleSelected(e: { stopPropagation: () => void; }) {
     e.stopPropagation();
-    context.updateOption(id, new DropdownOption(id, label, context.options[id] ? !context.options[id].selected : true));
-  };
+    updateOption(id, new DropdownOption(id, label, options[id] ? !options[id].selected : true));
+  }
+
+  function rootCss() {
+    return classnames({
+      option: true,
+      selected: options[id] && options[id].selected,
+      isActive
+    })
+  }
 
   return (
-    <DropdownContext.Consumer>
-      {
-        ({ options, filter, matchesFilter }) => ((!filter || matchesFilter(label)) &&
-          (
-            <div className={`option ${options[id] && options[id].selected ? 'selected' : ''} ${isActive}`} onClick={toggleSelected}
-              onMouseEnter={() => { setActive('active'); }}
-              onMouseLeave={() => { setActive(''); }}
-            >
-              <div className="goa-option">
-                {children || label}
-              </div>
-            </div>
-          )
-        )
-      }
-    </DropdownContext.Consumer>
+    (!filter || matchesFilter(label)) &&
+    <div className={rootCss()}
+      onClick={toggleSelected}
+      onMouseEnter={() => { setActive('active'); }}
+      onMouseLeave={() => { setActive(''); }}
+    >
+      <div className="goa-option">
+        {children || label}
+      </div>
+    </div>
   );
 };
 

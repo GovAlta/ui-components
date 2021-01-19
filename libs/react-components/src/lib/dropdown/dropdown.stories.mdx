@@ -20,6 +20,8 @@ export const Template = (args) => {
       <GoAOption id="orange" label="Orange">
         <span>Orange 🍊</span>
       </GoAOption>
+      <GoAOption id="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption id="lemon" label="Lemon"></GoAOption>
     </GoADropdown>
   );
 };
@@ -140,6 +142,22 @@ A user input field that allows the user to select from a list of options.
       description: 'Choose your favourite fruit!',
       style: { width: '300px' },
       required: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Initial Value
+
+<Canvas>
+  <Story
+    name="Initial Value"
+    args={{
+      label: 'Fruits',
+      description: 'Kiwi should be pre-selected',
+      style: { width: '300px' },
+      value: 'kiwi'
     }}
   >
     {Template.bind({})}
