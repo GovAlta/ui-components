@@ -1,6 +1,6 @@
 def publishNpm = false;
 def deployStorybook = false;
-def baseCommand = '--al;';
+def baseCommand = '--all';
 def ocProject = 'ui-components-dev';
 
 pipeline {
