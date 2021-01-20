@@ -36,7 +36,7 @@ describe('GoAHeroBanner', () => {
     expect(screen.getByRole('heading').textContent).toEqual(
       'Upgrading our bitumen'
     );
-    expect(screen.getByRole('note').textContent).toBeFalsy();
+    expect(screen.queryByRole('note')).toBeFalsy();
     expect(screen.queryAllByRole('link').length).toEqual(0);
   });
 
@@ -69,7 +69,7 @@ describe('GoAHeroBanner', () => {
     expect(screen.getByRole('heading').textContent).toEqual(
       'Upgrading our bitumen'
     );
-    expect(screen.getByRole('note').textContent).toBeFalsy();
+    expect(screen.queryByRole('note')).toBeFalsy();
     expect(screen.getByRole('link').textContent).toEqual('Learn more');
   });
 
@@ -97,7 +97,7 @@ describe('GoAHeroBanner', () => {
     expect(screen.getByRole('heading').textContent).toEqual(
       'Upgrading our bitumen'
     );
-    expect(screen.getByRole('note').textContent).toBeFalsy();
+    expect(screen.queryByRole('note')).toBeFalsy();
     expect(screen.queryAllByRole('link').length).toEqual(0);
   });
 

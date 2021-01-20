@@ -8,7 +8,7 @@
           }"
     >{{serviceLevel}}</span>
   </div>
-  <div *ngIf="serviceLevel == 'Live'; else elseNotLive" class="site-text" i18n="Alberta.ca official site text on header">
+  <div *ngIf="serviceLevel === 'live'; else elseNotLive" class="site-text" i18n="Alberta.ca official site text on header">
     An official site of the <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a>
   </div>
   <ng-template #elseNotLive>

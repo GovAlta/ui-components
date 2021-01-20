@@ -1,11 +1,8 @@
 <template>
   <div class="goa-hero" :style="{ backgroundImage: backgroudImageStyle }">
     <h1 role="heading" aria-level="{1}">{{ title }}</h1>
-    <goa-hero-banner-content :content="content" />
-
-    <div v-if="hasLink">
-      <goa-hero-banner-link :linkText="linkText" :linkUrl="linkUrl" />
-    </div>
+    <goa-hero-banner-content v-if="content" :content="content" />
+    <goa-hero-banner-link v-if="hasLink" :linkText="linkText" :linkUrl="linkUrl" />
   </div>
 </template>
 <script lang="typescript">
