@@ -331,8 +331,9 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    */
   private selectionChanged(options: Array<GoAOptionComponent>, emitEvent: boolean) {
     if(options.length > 0) {
+      const selectedOptions = options.map(o => o.label).join(', ')
       this._requiredError = false;
-      this.setTextInput(options[0].label);
+      this.setTextInput(selectedOptions);
     }
     else {
       this._requiredError = this.required;

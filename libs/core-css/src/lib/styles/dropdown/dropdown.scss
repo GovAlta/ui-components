@@ -63,6 +63,13 @@
   .dropdown-grouping {
     margin-top: 8px;
 
+    input[type=text] {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding-right: 30px !important;
+    }
+
     &.disabled {
       opacity: 30%;
     }
