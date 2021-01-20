@@ -155,7 +155,6 @@
     "jest-preset-angular": "8.3.1",
     "jest-serializer-vue": "^2.0.2",
     "jest-transform-stub": "^2.0.0",
-    "mutationobserver-shim": "^0.3.7",
     "ng-packagr": "^9.0.0",
     "node-sass": "^4.14.1",
     "npm-publish-git-tag": "^3.0.4",

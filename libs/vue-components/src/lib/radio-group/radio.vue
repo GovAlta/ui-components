@@ -18,7 +18,7 @@
           <circle cx="6" cy="6" r="6" fill="#fff" />
         </svg>
       </div>
-      <label class="goa-radio-label" for="one">{{options.text}}</label>
+      <span class="goa-radio-label" for="one">{{options.text}}</span>
     </label>
   </div>
 </template>

@@ -62,7 +62,6 @@ export default {
   },
   methods: {
     onClickFunction: function (event) {
-      alert('clicked')
       this.$emit('click')
     }
   }

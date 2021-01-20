@@ -3,22 +3,19 @@
     <span class="radio-group-title">{{title}}</span>
     <span v-if="required" class="required-label">(Required)</span>
     <div v-if="helperText" class="helper-text">{{helperText}}</div>
-
-    <label>
-      <div v-for="(option, index) in items" :key="option.text">
-        <Radio
-          v-model="selectedValue"
-          :options="items[index]"
-          :disabled="disabled"
-          :required="hasError()"
-          :labelPosition="labelPosition"
-          :value="value"
-          :defaultValue="value"
-          label="Example question one"
-          @change="onChangeResponse"
-        />
-      </div>
-    </label>
+    <div v-for="(option, index) in items" :key="option.text">
+      <Radio
+        v-model="selectedValue"
+        :options="items[index]"
+        :disabled="disabled"
+        :required="hasError()"
+        :labelPosition="labelPosition"
+        :value="value"
+        :defaultValue="value"
+        label="Example question one"
+        @change="onChangeResponse"
+      />
+    </div>
     <div v-if="hasError()" class="error-text">
       {{ requiredErrorMessage }}
     </div>
