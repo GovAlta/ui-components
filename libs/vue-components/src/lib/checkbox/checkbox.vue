@@ -72,15 +72,14 @@ export default {
       },
     },
     methods: {
-        onChangeFunction: function() {
-            this.checked = !this.checked;
+      onChangeFunction: function() {
+        this.checked = !this.checked;
+        if(this.checked && this.indeterminate){
+            this.indeterminate = false;
+        };
 
-            if(this.checked && this.indeterminate){
-                this.indeterminate = false;
-            };
-
-            this.$emit('change');
-        },
+        this.$emit('change');
+      },
     },
     computed: {
         hasError: function(){

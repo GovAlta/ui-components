@@ -17,7 +17,8 @@
   },
   "peerDependencies": {
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "fs": "0.0.1-security"
   },
   "main": "vue-components.umd.js",
   "unpkg": "vue-components.umd.min.js",
