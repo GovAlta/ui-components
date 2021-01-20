@@ -6,8 +6,8 @@ import React, {
   useEffect,
   Children,
   ChangeEvent,
-  MouseEvent,
   useRef,
+  ReactElement,
 } from 'react';
 import {
   KeyOptionPair,
@@ -24,7 +24,9 @@ interface Props {
   multiple?: boolean;
   disabled?: boolean;
   typeAheadMode?: 'none' | 'startsWith' | 'contains';
-  selectionChanged?: (selectedOptions: DropdownOption[]) => void;
+  value?: string;
+  values?: string[],
+  selectionChanged: (selectedOptions: DropdownOption[]) => void;
 }
 
 export const GoADropdown: FC<Props> = ({
@@ -36,6 +38,8 @@ export const GoADropdown: FC<Props> = ({
   description,
   typeAheadMode,
   children,
+  value,
+  values,
   selectionChanged,
   ...rest
 }) => {
@@ -66,60 +70,59 @@ export const GoADropdown: FC<Props> = ({
   };
 
   // Helper function that updates the description based on the selected options
-  const refreshDescription = (allOptions) => {
-    let selected: DropdownOption[] = [];
-    Object.keys(allOptions).map(
-      (key) =>
-        allOptions[key] &&
-        allOptions[key].selected &&
-        selected.push(allOptions[key])
-    );
+  const refreshDescription = (allOptions: KeyOptionPair) => {
+    const selectedOptions =
+      Object.values(allOptions).filter(option => {
+        return option?.selected;
+      });
 
-    if (selected.length === 0) {
-      setSelectionDescription('');
-    } else if (selected.length === 1) {
-      setSelectionDescription(selected[0].description);
-    } else {
-      setSelectionDescription('(' + selected.length + ' options selected)');
-    }
+    const description = selectedOptions.length > 0
+      ? selectedOptions.map(item => item.description).join(', ')
+      : ''
+    setSelectionDescription(description);
   };
 
-  const filterMatchFunction = (value: string) => {
-    let match: boolean = true;
-    let safeFilter = (filter || '').toLowerCase();
-    let safeValue = (value || '').toLowerCase();
-    if (typeAheadMode !== 'none') {
-      if (typeAheadMode === 'contains') {
-        match = safeValue.indexOf(safeFilter) >= 0;
-      } else {
-        match = safeValue.startsWith(safeFilter);
-      }
+  const filterMatchFunction = (filter: string = '', value: string = ''): boolean => {
+    const safeFilter = filter.toLowerCase();
+    const safeValue = value.toLowerCase();
+
+    if (filter === '') {
+      return true;
     }
-    return match;
+
+    switch (typeAheadMode) {
+      case 'contains':
+        return safeValue.indexOf(safeFilter) >= 0;
+      case 'startsWith':
+        return safeValue.startsWith(safeFilter);
+      case 'none':
+        return true;
+    }
   };
 
   const updateOptionHandler = (value: string, option: DropdownOption) => {
-    if (!multiple) {
+    if (isMultiple()) {
+      setOptions({ ...options, [value]: option });
+    } else {
       if (option.selected) {
         // Unselect all other options
-        Object.keys(options).map((key) => {
-          key !== option.value && (options[key].selected = false);
+        Object.entries(options).forEach(([key, item]) => {
+          if (key !== option.value) {
+            item.selected = false;
+          }
         });
         option.selected && setOptions({ ...options, [value]: option });
       }
-      isOpen && toggleOpen();
-    } else {
-      setOptions({ ...options, [value]: option });
+
+      if (isOpen) {
+        toggleOpen()
+      }
     }
   };
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFilter(e.currentTarget.value);
     setSelectionDescription(e.currentTarget.value);
-  };
-
-  const inputClickhandler = (e: MouseEvent<HTMLInputElement>) => {
-    typeAheadMode !== 'none' && isOpen && e.stopPropagation();
   };
 
   const rootDropDownCss = (): string => {
@@ -137,17 +140,17 @@ export const GoADropdown: FC<Props> = ({
     })
   }
 
+  // Ensures that when the values property is used that the component overrides a default false value
+  function isMultiple(): boolean {
+    return multiple || (typeof values === 'object');
+  }
+
   // Updates the description and invokes the selectionChanged callback function when the selection changes
   useEffect(() => {
     refreshDescription(options);
 
-    if (selectionChanged) {
-      const selectedOptions: DropdownOption[] = [];
-      Object.keys(options).map(
-        (k) => options[k].selected && selectedOptions.push(options[k])
-      );
-      selectionChanged(selectedOptions);
-    }
+    const selectedOptions = Object.values(options).filter(option => option.selected);
+    selectionChanged(selectedOptions);
   }, [options]);
 
   // Updates the required-error status when the drop-down is closed
@@ -166,25 +169,35 @@ export const GoADropdown: FC<Props> = ({
     // Initialize the children
     const selectedOptions: KeyOptionPair = {};
 
-    const registerChild = (child: any) => {
-      console.log(child);
-      if (child.props && child.props.id && child.props.label) {
+    const registerChild = (child: ReactElement) => {
+      const props = child.props;
+      if (!props) {
+        return;
+      }
+      if (props.value && props.label) {
+        const isSelected =
+          value === props.value
+          || values?.includes(props.value)
+          || props.defaultSelected;
+
         const option = new DropdownOption(
-          child.props.id,
-          child.props.label,
-          child.props.defaultSelected
+          props.value,
+          props.label,
+          isSelected
         );
-        selectedOptions[child.props.id] = option;
+        selectedOptions[props.value] = option;
       }
-      if (child.props && child.props.children && child.props.children.length) {
-        child.props.children.forEach(registerChild);
+      if (Array.isArray(props.children)) {
+        props.children.forEach(registerChild);
       }
+      // if (props.children?.length) {
+      //   props.children.forEach(registerChild);
+      // }
     };
 
-    Children.map(children, (child: any) => {
-      if (child.type && child.type.displayName) {
-        registerChild(child);
-      }
+
+    Children.map(children, (child: ReactElement) => {
+      registerChild(child);
     });
     setOptions(selectedOptions);
     setRequiredError(false);
@@ -205,15 +218,21 @@ export const GoADropdown: FC<Props> = ({
       filter: filter,
       matchesFilter: filterMatchFunction,
     }}>
-      {isOpen && <div className="dropdown-overlay" ref={overlayRef} onClick={toggleOpen}></div>}
+      {isOpen &&
+        <div className="dropdown-overlay" ref={overlayRef} onClick={toggleOpen}></div>
+      }
+
       <div className={rootDropDownCss()} {...rest}>
         <label className="dropdown-label" htmlFor={`input-for-${label}`}>
           {label}
         </label>
-        {required && <span className="required-label">(Required)</span>}
+        {required &&
+          <span className="required-label">(Required)</span>
+        }
         <div className={dropDownGroupCss()} onClick={toggleOpen}>
           <i className="goa-select-icon"></i>
           <input
+            role="searchbox"
             className="dropdown-textbox margin-override"
             type="text"
             style={{ cursor: 'default' }}
@@ -221,7 +240,7 @@ export const GoADropdown: FC<Props> = ({
             id={`input-for-${label}`}
             placeholder={description}
             onChange={inputChangeHandler}
-            readOnly={!isOpen || typeAheadMode === 'none'}
+            readOnly={!isOpen || typeAheadMode === 'none' || isMultiple() }
           />
           {isOpen &&
             <div className="dropdown-menu" ref={menuRef} style={{
@@ -235,12 +254,13 @@ export const GoADropdown: FC<Props> = ({
           }
         </div>
         {!requiredError &&
-          <span className="helper-text">{description}</span>}
-        {requiredError && (
+          <span className="helper-text">{description}</span>
+        }
+        {requiredError &&
           <span className="dropdown-label error-text">
             At least one item must be selected.
           </span>
-        )}
+        }
       </div>
     </DropdownContext.Provider>
   );

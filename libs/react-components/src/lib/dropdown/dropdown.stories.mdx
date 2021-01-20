@@ -11,6 +11,7 @@ import { GoADropdown, DropdownOptions } from './dropdown.component';
 import { GoAOption } from './option/option.component';
 import { GoAOptionGroup } from './option-group/option-group.component';
 
+import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 export const Template = (args) => {
   return (
@@ -60,7 +61,7 @@ export const GroupTemplate = (args) => {
   return (
     <GoADropdown {...args}>
       <GoAOptionGroup label="Group 1">
-        <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
+        <GoAOption value="apple" label="Apple"></GoAOption>
         <GoAOption value="banana" label="Banana"></GoAOption>
         <GoAOption value="orange" label="Orange">
           <span>Orange 🍊</span>
@@ -125,6 +126,9 @@ A user input field that allows the user to select from a list of options.
       label: 'Fruits',
       description: 'Choose your favourite fruit!',
       style: { width: '300px' },
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {Template.bind({})}
@@ -142,6 +146,9 @@ A user input field that allows the user to select from a list of options.
       description: 'Choose your favourite fruit!',
       style: { width: '300px' },
       required: true,
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {Template.bind({})}
@@ -157,7 +164,29 @@ A user input field that allows the user to select from a list of options.
       label: 'Fruits',
       description: 'Kiwi should be pre-selected',
       style: { width: '300px' },
-      value: 'kiwi'
+      value: 'kiwi',
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Initial Values
+
+<Canvas>
+  <Story
+    name="Initial Values"
+    args={{
+      label: 'Fruits',
+      description: 'Kiwi and apple should be pre-selected',
+      style: { width: '300px' },
+      values: ['kiwi', 'apple'],
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {Template.bind({})}
@@ -176,6 +205,9 @@ A user input field that allows the user to select from a list of options.
       style: { width: '300px' },
       required: true,
       disabled: true,
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {Template.bind({})}
@@ -191,6 +223,9 @@ A user input field that allows the user to select from a list of options.
       label: 'Fruits',
       description: 'Choose your favourite fruit!',
       style: { width: '300px' },
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {LongTemplate.bind({})}
@@ -208,6 +243,9 @@ A user input field that allows the user to select from a list of options.
       description: 'Choose your favourite fruit!',
       menuHeight: 200,
       style: { width: '300px' },
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {LongTemplate.bind({})}
@@ -224,7 +262,10 @@ A user input field that allows the user to select from a list of options.
       label: 'Fruits',
       description: 'Choose your favourite fruits!',
       style: { width: '300px' },
-      multiple: true
+      multiple: true,
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {Template.bind({})}
@@ -241,7 +282,9 @@ A user input field that allows the user to select from a list of options.
       label: 'Fruits',
       description: 'Choose your favourite fruits!',
       style: { width: '300px' },
-      multiple: false
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {GroupTemplate.bind({})}
@@ -256,8 +299,10 @@ A user input field that allows the user to select from a list of options.
       label: 'Fruits',
       description: 'Choose your favourite fruits!',
       style: { width: '300px' },
-      multiple: false,
-      typeAheadMode: 'startsWith'
+      typeAheadMode: 'startsWith',
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {GroupTemplate.bind({})}
@@ -273,7 +318,10 @@ A user input field that allows the user to select from a list of options.
       description: 'Choose your favourite fruits!',
       style: { width: '300px' },
       multiple: false,
-      typeAheadMode: 'contains'
+      typeAheadMode: 'contains',
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {GroupTemplate.bind({})}
