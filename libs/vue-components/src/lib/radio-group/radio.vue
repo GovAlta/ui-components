@@ -1,5 +1,5 @@
 <template>
-  <div :class="getRootCssClasses">
+  <div :class="rootCssClasses">
     <label class="goa-radio-layout">
       <div class="goa-radio-container" :class="options.value === fields.activeValue ? 'goa-radio-selected' : null">
         <input
@@ -76,7 +76,7 @@
       };
     },
     computed: {
-      getRootCssClasses() {
+      rootCssClasses() {
         this.fields.activeValue = this.value;
         return classnames({
           'goa-radio': true,

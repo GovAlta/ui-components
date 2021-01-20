@@ -1,6 +1,5 @@
-window.MutationObserver = MutationObserver
 import { render, screen, fireEvent } from '@testing-library/vue';
-import RadioGroup from './radioGroup.vue';
+import RadioGroup from './radio-group.vue';
 
 describe('Goa Vue Radio Buttons', () => {
   const baseMockData = {
