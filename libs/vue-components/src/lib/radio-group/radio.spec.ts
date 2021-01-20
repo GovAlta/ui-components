@@ -1,11 +1,6 @@
-
-import MutationObserver from '@sheerun/mutationobserver-shim'
 window.MutationObserver = MutationObserver
 import { render, screen, fireEvent } from '@testing-library/vue';
-import GoARadioButton from './radioGroup.vue';
-
-//import { GoARadioGroup, GoARadio } from './radio-group';
-
+import RadioGroup from './radioGroup.vue';
 
 describe('Goa Vue Radio Buttons', () => {
   const baseMockData = {
@@ -25,7 +20,7 @@ describe('Goa Vue Radio Buttons', () => {
 
 
   test('should render the Vue Radio Buttons Title and HelperText', () => {
-    const { baseElement } = render(GoARadioButton, {
+    const { baseElement } = render(RadioGroup, {
       props: { title: baseMockData.title,
                helperText: baseMockData.helperText,
                items: baseMockData.radios,
@@ -39,7 +34,7 @@ describe('Goa Vue Radio Buttons', () => {
 
   describe('Is Required', () => {
     beforeEach(() => {
-      render(GoARadioButton, {
+      render(RadioGroup, {
         props: { title: baseMockData.title,
                  helperText: baseMockData.helperText,
                  items: baseMockData.radios,
@@ -57,17 +52,15 @@ describe('Goa Vue Radio Buttons', () => {
     });
 
     test('should not render required error message when is selected', async () => {
-      const orangesRadioControl = screen.getByText('Oranges');
-      await fireEvent.click(orangesRadioControl);
-      setTimeout(() => {
-        expect(screen.queryByText(baseMockData.requiredErrorMessage)).toBeNull();
-      }, 100);
+      const radios = screen.getAllByRole('radio', {});
+      await fireEvent.click(radios[0]);
+      expect(screen.queryByText(baseMockData.requiredErrorMessage)).toBeNull();
     });
   });
 
   describe('Is Not Required Tests', () => {
     beforeEach(() => {
-      render(GoARadioButton, {
+      render(RadioGroup, {
         props: { title: baseMockData.title,
                 helperText: baseMockData.helperText,
                 items: baseMockData.radios,
@@ -100,7 +93,7 @@ describe('Goa Vue Radio Buttons', () => {
     const selectedValue = 'oranges';
 
     beforeEach(() => {
-      render(GoARadioButton, {
+      render(RadioGroup, {
         props: { title: baseMockData.title,
                 helperText: baseMockData.helperText,
                 items: baseMockData.radios,
@@ -123,7 +116,7 @@ describe('Goa Vue Radio Buttons', () => {
     const selectedValue = 'oranges';
 
     beforeEach(() => {
-      render(GoARadioButton, {
+      render(RadioGroup, {
         props: { title: baseMockData.title,
                 helperText: baseMockData.helperText,
                 items: baseMockData.radios,
@@ -132,17 +125,11 @@ describe('Goa Vue Radio Buttons', () => {
       });
     });
 
-    test('change event should work',  () => {
+    test('change event should work', async () => {
       const radios = screen.getAllByRole('radio', {});
-
-      setTimeout(() => {
-        fireEvent.click(radios[0])
-      }, 100);
-
+      await fireEvent.click(radios[0]);
       const checked = <HTMLInputElement>screen.getByRole('radio', { checked: true });
-      setTimeout(() => {
-        expect(checked.value).toBe('apples');
-      }, 100);
+      expect(checked.value).toBe('apples');
     });
   });
 });

@@ -4,10 +4,10 @@
     <span v-if="required" class="required-label">(Required)</span>
     <div v-if="helperText" class="helper-text">{{helperText}}</div>
 
-    <label class="goa-radio-layout">
+    <label>
       <div v-for="(option, index) in items" :key="option.text">
         <Radio
-          v-model="fields.default"
+          v-model="selectedValue"
           :options="items[index]"
           :disabled="disabled"
           :required="hasError()"
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-  import Radio from "./Radio.vue";
+  import Radio from "./radio.vue";
 
   export default {
     components: {
@@ -107,10 +107,7 @@
     },
     data() {
       return {
-        fields: {
-          default: null,
-          selectedValue: null,
-        },
+        selectedValue: null,
       };
     },
   };

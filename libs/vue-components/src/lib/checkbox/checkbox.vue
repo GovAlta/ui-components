@@ -74,7 +74,6 @@ export default {
     methods: {
       onChangeFunction: function() {
         this.checked = !this.checked;
-        alert('asdfsdf');
         if(this.checked && this.indeterminate){
             this.indeterminate = false;
         };

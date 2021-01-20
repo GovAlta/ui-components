@@ -1,28 +1,25 @@
 <template>
-  <div :id="id">
-    <div :class="getRootCssClasses()">
-      <label class="goa-radio-layout">
-        <div class="goa-radio-container" :class="options.value === fields.activeValue ? 'goa-radio-selected' : null">
-          <input
-            type="radio"
-            :value="options.value"
-            :checked="options.value === value"
-            :disabled="disabled"
-            @change="updateValue(options.value)"
-          />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-          >
-            <circle cx="6" cy="6" r="6" fill="#fff" />
-          </svg>
-          <!-- {{options}} -->
-        </div>
-        <label class="goa-radio-label" for="one">{{options.text}}</label>
-      </label>
-    </div>
+  <div :class="getRootCssClasses">
+    <label class="goa-radio-layout">
+      <div class="goa-radio-container" :class="options.value === fields.activeValue ? 'goa-radio-selected' : null">
+        <input
+          type="radio"
+          :value="options.value"
+          :checked="options.value === value"
+          :disabled="disabled"
+          @change="updateValue(options.value)"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+        >
+          <circle cx="6" cy="6" r="6" fill="#fff" />
+        </svg>
+      </div>
+      <label class="goa-radio-label" for="one">{{options.text}}</label>
+    </label>
   </div>
 </template>
 
@@ -78,17 +75,10 @@
         },
       };
     },
-    methods: {
-      updateValue(value) {
-        this.$emit("change", value);
-      },
+    computed: {
       getRootCssClasses() {
-         this.fields.activeValue = this.value;
-         if (this.fields.activeValue === null) {
-           this.fields.activeValue = this.defaultValue;
-         }
-        this.$emit("change", this.fields.activeValue);
-         return classnames({
+        this.fields.activeValue = this.value;
+        return classnames({
           'goa-radio': true,
           'goa-radio-disabled': this.disabled,
           'has-error': !this.fields.activeValue && this.required,
@@ -96,6 +86,18 @@
         })
       }
     },
+    created() {
+      if (this.fields.activeValue === null) {
+        this.fields.activeValue = this.defaultValue;
+        this.$emit("change", this.fields.activeValue);
+      }
+    },
+    methods: {
+      updateValue(value) {
+        this.$emit("change", value);
+      },
+    },
+
   };
 </script>
 
