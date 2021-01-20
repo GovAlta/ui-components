@@ -2,7 +2,7 @@
   <div>
     <header class="goa-header goa-official-site-header">
       <div>
-        <span v-once :class="serviceLevelCss">{{ serviceLevel }}</span>
+        <span v-once :class="serviceLevelCss">{{ serviceLevelFormatted }}</span>
       </div>
 
       <div v-if="isLive" class="site-text">
@@ -57,16 +57,21 @@ export default {
       type: String,
       required: true,
       validator: (value) => {
-        return ['alpha', 'beta', 'live'].includes(value);
+        return ['alpha', 'beta', 'live'].includes(value.toLowerCase());
       }
     },
   },
   data() {
     return {
-      serviceLevelCss: `service-level service-level--${this.serviceLevel}`,
+      serviceLevelCss: `service-level service-level--${this.serviceLevel.toLowerCase()}`,
       isLive: this.serviceLevel === 'live',
     };
   },
+  computed: {
+    serviceLevelFormatted(): string {
+      return this.serviceLevel.toLowerCase();
+    },
+  }
 };
 </script>
 

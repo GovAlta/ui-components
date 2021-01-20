@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ServiceLevel } from "./service-level.enum";
+
+type ServiceLevel = 'alpha' | 'beta' | 'live'
 
 /**
  * A header component for a Government of Alberta hosted microsite.
@@ -28,7 +29,7 @@ export class GoAHeaderComponent implements OnInit {
    */
   @Input() serviceLevel: ServiceLevel;
 
-  ServiceLevel = ServiceLevel;
+  // ServiceLevel = this.ServiceLevel;
 
   constructor() { }
 
@@ -37,6 +38,14 @@ export class GoAHeaderComponent implements OnInit {
    */
   ngOnInit() {
     this.checkRequiredProps('serviceLevel', 'serviceName', 'serviceHome');
+  }
+
+  serviceLevelCssClass(): string {
+    return `service-level--${this.serviceLevel.toLowerCase()}`;
+  }
+
+  serviceLevelFormatted(): string {
+    return this.serviceLevel.toLowerCase();
   }
 
   checkRequiredProps(...props: string[]) {
