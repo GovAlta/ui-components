@@ -3,11 +3,9 @@ import GoACard from './card.vue';
 
 describe('GoA Card', () => {
   const title = 'My Card title';
-  const description =
-    'My card text desciption available here, this field can be empty';
+  const description = 'My card text desciption available here, this field can be empty';
   const cardImageUrl = 'working-in-cold-hero-3_rdax_75.jpg';
   const titleUrl = 'http://www.google.ca/';
-  const cardWidth = 200;
 
   it('should render title and description', async () => {
     await render(GoACard, {

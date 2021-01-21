@@ -53,45 +53,46 @@
 export default {
   name: 'goa-checkbox',
   props: {
-      checked: Boolean,
-      required: Boolean,
-      disabled: Boolean,
-      indeterminate: Boolean,
-      content: String,
-      labelPosition: {
-          type: String,
-          required: false,
-          default: 'after',
-          validator: (value) => {
-              return ["before", "after"].includes(value);
-          },
-      },
-      change: {
-          type: Function,
-          required: false,
+    checked: Boolean,
+    required: Boolean,
+    disabled: Boolean,
+    indeterminate: Boolean,
+    content: String,
+    labelPosition: {
+      type: String,
+      required: false,
+      default: 'after',
+      validator: (value) => {
+          return ["before", "after"].includes(value);
       },
     },
-    methods: {
-      onChangeFunction: function() {
+    change: {
+      type: Function,
+      required: false,
+    },
+  },
+  methods: {
+    onChangeFunction: function() {
         this.checked = !this.checked;
+
         if(this.checked && this.indeterminate){
-            this.indeterminate = false;
+          this.indeterminate = false;
         };
 
         this.$emit('change');
-      },
     },
-    computed: {
-        hasError: function(){
-            return this.required && !this.checked;
-        }
-    },
-    created () {
-        if(this.checked){
-            this.indeterminate = false;
-        }
-    },
-  }
+  },
+  computed: {
+    hasError: function(){
+      return this.required && !this.checked;
+    }
+  },
+  created () {
+    if(this.checked){
+      this.indeterminate = false;
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>

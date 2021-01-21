@@ -1,24 +1,23 @@
 <template>
-    <div class='goa-card-group'>
-      <div class='card-group-title'>{{title}}</div>
-      <div  v-if='!hasCardItems' slot-scope :class=[cardGroupClass]>
-       <slot/>
-      </div> 
-      <div  v-if='hasCardItems' :class=[cardGroupClass] >
-        <div>
-        <goa-card  
-        v-for="(card,index) in cardItems" :key="index"
-        :title="card.title"
-        :titleUrl="card.titleUrl"
-        :description="card.description"
-        :cardImageUrl="card.cardImageUrl"
-        :cardWidth="card.cardWidth"
-        />
-        </div>
-      </div> 
-
+  <div class="goa-card-group">
+    <div class="card-group-title">{{ title }}</div>
+    <div v-if="!hasCardItems" slot-scope :class="[cardGroupClass]">
+      <slot />
     </div>
-   
+    <div v-if="hasCardItems" :class="[cardGroupClass]">
+      <div>
+        <goa-card
+          v-for="(card, index) in cardItems"
+          :key="index"
+          :title="card.title"
+          :titleUrl="card.titleUrl"
+          :description="card.description"
+          :cardImageUrl="card.cardImageUrl"
+          :cardWidth="card.cardWidth"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="typescript">
