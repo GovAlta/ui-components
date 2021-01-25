@@ -48,7 +48,7 @@
   </div>
 </template>
 
-<script lang="typescript">
+<script lang="ts">
 
 export default {
   name: 'goa-checkbox',
