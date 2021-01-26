@@ -58,7 +58,7 @@
       labelPosition: {
         type: String,
         required: false,
-        default: 'before',
+        default: 'after',
         validator: (prop) => [
         'before', 'after'
         ].includes(prop)

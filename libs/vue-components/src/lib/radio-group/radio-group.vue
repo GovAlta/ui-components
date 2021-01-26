@@ -79,11 +79,8 @@
       labelPosition: {
         type: String,
         required: false,
-        default: 'before',
-        validator: (prop) => [
-        'before', 'after'
-        ].includes(prop)
-      },
+        default: 'after',
+        validator: (prop) => [ 'before', 'after' ].includes(prop) },
       value: {
         type: String,
         required: false,
