@@ -1,6 +1,6 @@
 import { DoDont } from '@abgov/shared/storybook-common';
-import GoARadioGroup from "./radio-group";
-import GoARadio from "./radio";
+import GoARadioGroup from './radio-group';
+import GoARadio from './radio';
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 import { action } from '@storybook/addon-actions';
 
@@ -10,9 +10,11 @@ import { action } from '@storybook/addon-actions';
     title: { control: { type: 'text' } },
     helperText: { control: { type: 'text' } },
     requiredErrorMessage: { control: { type: 'text' } },
-    required: { control: {type: 'boolean'}},
-    disabled: { control: {type: 'boolean'}},
-    labelPosition: { control: {type: 'select', options: ['before', 'after'] }}
+    required: { control: { type: 'boolean' } },
+    disabled: { control: { type: 'boolean' } },
+    labelPosition: {
+      control: { type: 'select', options: ['before', 'after'] },
+    },
   }}
   component={GoARadioGroup}
 />
@@ -34,16 +36,16 @@ notice and read the information.
     height={200}
     args={{
       title: 'Which of the following is your favorite fruit?',
-      helperText: 'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
       requiredErrorMessage: 'Please select a fruit',
       required: false,
       disabled: false,
-      labelPosition: 'after',
-      value: "",
+      value: '',
       items: [
-        {text: 'Grapes', value: 'grapes'},
-        {text: 'Pears', value: 'pears'},
-        {text: 'Kiwi', value: 'kiwi'},
+        { text: 'Grapes', value: 'grapes' },
+        { text: 'Pears', value: 'pears' },
+        { text: 'Kiwi', value: 'kiwi' },
       ],
     }}
   >
@@ -71,18 +73,12 @@ notice and read the information.
     height={200}
     args={{
       requiredErrorMessage: 'Please select a fruit',
-      required: false,
-      disabled: false,
-      labelPosition: 'after',
-      value: "",
+      value: '',
       items: [
-        {text: 'Grapes', value: 'grapes'},
-        {text: 'Pears', value: 'pears'},
-        {text: 'Kiwi', value: 'kiwi'},
+        { text: 'Grapes', value: 'grapes' },
+        { text: 'Pears', value: 'pears' },
+        { text: 'Kiwi', value: 'kiwi' },
       ],
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
     }}
   >
     {(args, argTypes) => {
@@ -109,16 +105,14 @@ notice and read the information.
     height={200}
     args={{
       title: 'Which of the following is your favorite fruit?',
-      helperText: 'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
       requiredErrorMessage: 'Please select a fruit',
-      required: false,
-      disabled: false,
-      labelPosition: 'after',
       value: 'pears',
       items: [
-        {text: 'Grapes', value: 'grapes'},
-        {text: 'Pears', value: 'pears'},
-        {text: 'Kiwi', value: 'kiwi'},
+        { text: 'Grapes', value: 'grapes' },
+        { text: 'Pears', value: 'pears' },
+        { text: 'Kiwi', value: 'kiwi' },
       ],
     }}
   >
@@ -134,7 +128,7 @@ notice and read the information.
               }
             }
           });
-        },
+        }
       };
     }}
   </Story>
@@ -155,9 +149,6 @@ layout as a container.
       title='Which of the following is your favorite fruit?'
       helperText='It doesnt have to be your absolute favorite, just the one you like best of what is listed'
       requiredErrorMessage='Please select a fruit'
-      required=false
-      disabled=false
-      labelPosition='after'
       value="pears"
       items=[
         {text: 'Grapes', value: 'grapes'},

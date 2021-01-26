@@ -59,10 +59,7 @@
         type: String,
         required: false,
         default: 'after',
-        validator: (prop) => [
-        'before', 'after'
-        ].includes(prop)
-      },
+        validator: (prop) => [ 'before', 'after' ].includes(prop) },
       inputClass: {
         type: [String, Object],
         default: "",
