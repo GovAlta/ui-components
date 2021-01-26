@@ -2,6 +2,7 @@ import { DoDont } from '@abgov/shared/storybook-common';
 import GoARadioGroup from "./radio-group";
 import GoARadio from "./radio";
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
 
 <Meta
   title="Component Library/Page Layout/Radio"
@@ -44,9 +45,6 @@ notice and read the information.
         {text: 'Pears', value: 'pears'},
         {text: 'Kiwi', value: 'kiwi'},
       ],
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
     }}
   >
     {(args, argTypes) => {
@@ -55,6 +53,11 @@ notice and read the information.
         render: function (createElement) {
           return createElement(GoARadioGroup, {
             props: args,
+            on: {
+              change: (value) => {
+                action('selection changed')(value);
+              },
+            },
           });
         },
       };
@@ -88,6 +91,11 @@ notice and read the information.
         render: function (createElement) {
           return createElement(GoARadioGroup, {
             props: args,
+            on: {
+              change: (value) => {
+                action('selection changed')(value);
+              },
+            },
           });
         },
       };
@@ -112,9 +120,6 @@ notice and read the information.
         {text: 'Pears', value: 'pears'},
         {text: 'Kiwi', value: 'kiwi'},
       ],
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
     }}
   >
     {(args, argTypes) => {
@@ -123,6 +128,11 @@ notice and read the information.
         render: function (createElement) {
           return createElement(GoARadioGroup, {
             props: args,
+            on: {
+              change: (value) => {
+                action('selection changed')(value);
+              }
+            }
           });
         },
       };
@@ -154,7 +164,7 @@ layout as a container.
         {text: 'Pears', value: 'pears'},
         {text: 'Kiwi', value: 'kiwi'},
       ]
-      v-on:change="() => selectionChanged($event)"
+      @change="() => selectionChanged($event)"
     />
   </div>
 </template>

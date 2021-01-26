@@ -84,10 +84,6 @@
         'before', 'after'
         ].includes(prop)
       },
-      onChange: {
-        type: Function,
-        required: false,
-      },
       value: {
         type: String,
         required: false,
@@ -99,7 +95,8 @@
         return this.requiredErrorMessage && this.required && !this.selectedValue;
       },
       onChangeResponse(event) {
-        this.selectedValue = event
+        this.selectedValue = event;
+        this.$emit('change', this.selectedValue);
       }
     },
     data() {

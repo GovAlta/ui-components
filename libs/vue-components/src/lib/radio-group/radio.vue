@@ -87,10 +87,7 @@
       }
     },
     created() {
-      if (this.fields.activeValue === null) {
-        this.fields.activeValue = this.defaultValue;
-        this.$emit("change", this.fields.activeValue);
-      }
+      this.fields.activeValue||= this.defaultValue;
     },
     methods: {
       updateValue(value) {
