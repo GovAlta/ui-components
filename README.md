@@ -22,19 +22,19 @@ The project contains the Government of Alberta UI components. The output package
 
 ### Building
 
-To build all libraries and applications run `npm build:all`.  
-To build only changed libraries and applications run `npm run affected:build --base=branchtocompareagainst`.  
+To build all libraries and applications run `npm build:all`.
+To build only changed libraries and applications run `npm run affected:build --base=branchtocompareagainst`.
 To build the storybooks run `npm run build:storybook` or choose and individual storybook `npm run build:UIPROJECTNAME`.
 
 ### Running Locally
 
-There are currently no applications.  
+There are currently no applications.
 To run a storybook run `npm run run:angular-storybook` or `npm run run:vue-storybook` or `npm run run:core-storybook` or `npm run run:angular-material-storybook` or `npm run run:react-storybook`.
 
 ### Running Tests
 
-To run all of the available unit tests run `npm run test:all`.  
-To run only the current affected tests run `npm run affected:test --base=branchtocompareagainst`.  
+To run all of the available unit tests run `npm run test:all`.
+To run only the current affected tests run `npm run affected:test --base=branchtocompareagainst`.
 To run e2e tests run `npm run affected:e2e --base=branchtocompareagainst`.
 
 ## Environments
@@ -47,7 +47,7 @@ To run e2e tests run `npm run affected:e2e --base=branchtocompareagainst`.
 
 ## NPM
 
-Current stable release can be found tagged with @latest.  
+Current stable release can be found tagged with @latest.
 Beta functionality can be found tagged with @next.
 
 | Package                            | URL                                                                                                    | Documentation                                                     | Comments                                |
@@ -57,3 +57,12 @@ Beta functionality can be found tagged with @next.
 | @abgov/vue-components              | [@abgov/vue-components](https://www.npmjs.com/package/@abgov/vue-components)                           | [Click](https://ui-components.alpha.alberta.ca/vue/)              | Vue based components.                   |
 | @abgov/react-components              | [@abgov/react-components](https://www.npmjs.com/package/@abgov/react-components)                           | [Click](https://ui-components.alpha.alberta.ca/react/)              | React based components.                   |
 | @abgov/core-css                    | [@abgov/core-css](https://www.npmjs.com/package/@abgov/core-css)                                       | [Click](https://ui-components.alpha.alberta.ca/core/)             | CSS and SVGs for HTML based components. |
+
+## VS Code Extensions
+
+### Formatting
+
+To allow for project specific formatting the follow extensions are required
+
+- octref.vetur
+- esbenp.prettier-vscode
