@@ -60,29 +60,31 @@ export const GoARadio: FC<Props> = ({
 
   return (
     <div className={getRootCssClasses()}>
-      <label className="goa-radio-layout">
-        <div className={getSelectedCss()}>
-          <input
-            type="radio"
-            name={name}
-            value={value}
-            checked={isChecked()}
-            disabled={disabled}
-            onChange={onRadioChange}
-          />
-          {isChecked() && (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="12"
-              viewBox="0 0 12 12"
-            >
-              <circle cx="6" cy="6" r="6" fill="#fff" />
-            </svg>
-          )}
-        </div>
-        <span className="goa-radio-label">{children}</span>
-      </label>
+      <div className="goa-radio-inline-block">
+        <label className="goa-radio-layout">
+          <div className={getSelectedCss()}>
+            <input
+              type="radio"
+              name={name}
+              value={value}
+              checked={isChecked()}
+              disabled={disabled}
+              onChange={onRadioChange}
+            />
+            {isChecked() && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+              >
+                <circle cx="6" cy="6" r="6" fill="#fff" />
+              </svg>
+            )}
+          </div>
+          <span className="goa-radio-label">{children}</span>
+        </label>
+      </div>
     </div>
   );
 };

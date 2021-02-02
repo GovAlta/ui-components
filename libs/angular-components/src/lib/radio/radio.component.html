@@ -1,23 +1,48 @@
-
-<div class="goa-radio" [ngClass]="{'goa-radio-disabled': disabled, 'has-error': hasError(), 'goa-radio-label-before': labelPosition === 'before'}">
-  <label class="goa-radio-layout" [attr.for]="uniqueId">
-      <div class="goa-radio-container"
-          [ngClass]="{'goa-radio-selected': checked}">
-          <input type="radio"
-              [id]="uniqueId"
-              [(checked)]="checked"
-              [disabled]="disabled"
-              [required]="required"
-              [attr.value]="value"
-              [name]="name"
-              (change)="onClick()"
+<div
+  class="goa-radio"
+  [ngClass]="{
+    'goa-radio-disabled': disabled,
+    'has-error': hasError(),
+    'goa-radio-label-before': labelPosition === 'before'
+  }"
+>
+  <div class="goa-radio-inline-block">
+    <label class="goa-radio-layout" [attr.for]="uniqueId">
+      <div
+        class="goa-radio-container"
+        [ngClass]="{ 'goa-radio-selected': checked }"
+      >
+        <input
+          type="radio"
+          [id]="uniqueId"
+          [(checked)]="checked"
+          [disabled]="disabled"
+          [required]="required"
+          [attr.value]="value"
+          [name]="name"
+          (change)="onClick()"
+        />
+        <svg
+          *ngIf="checked"
+          id="radiomark"
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+        >
+          <circle
+            id="Ellipse_128"
+            data-name="Ellipse 128"
+            cx="6"
+            cy="6"
+            r="6"
+            fill="#fff"
           />
-          <svg *ngIf="checked" id='radiomark' xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
-            <circle id="Ellipse_128" data-name="Ellipse 128" cx="6" cy="6" r="6" fill="#fff"/>
-          </svg>
-     </div>
+        </svg>
+      </div>
       <span class="goa-radio-label">
-          <ng-content></ng-content>
+        <ng-content></ng-content>
       </span>
-  </label>
+    </label>
+  </div>
 </div>
