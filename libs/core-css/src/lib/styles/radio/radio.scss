@@ -3,117 +3,122 @@
 $goa-radio-size: 24px;
 
 @mixin goa-radio-styles {
-    //basically we are hiding the native radio here
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-    outline: 0;
-    -webkit-appearance: none;
+  //basically we are hiding the native radio here
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  outline: 0;
+  -webkit-appearance: none;
 }
 
 @mixin goa-radio-label-styles {
-    z-Index: 2;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0 0 0 8px;
-    cursor: pointer;
-    user-select: none;
+  z-index: 2;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 0 0 8px;
+  cursor: pointer;
+  user-select: none;
 }
 
 @mixin goa-radio {
-    input[type="radio"]
-    {
-        @include goa-radio-styles();
-    }
+  input[type='radio'] {
+    @include goa-radio-styles();
+  }
+
+  .goa-radio-label {
+    @include goa-radio-label-styles();
+  }
+
+  &.goa-radio-disabled {
+    opacity: 30%;
 
     .goa-radio-label {
-        @include goa-radio-label-styles();
+      cursor: default;
     }
+  }
 
-    &.goa-radio-disabled {
-        opacity: 30%;
+  &.has-error {
+    .goa-radio-container {
+      border: solid 2px $goa-error-color;
+      color: $goa-error-color;
 
-        .goa-radio-label {
-            cursor: default;
-        }
+      svg {
+        fill: $goa-error-color;
+      }
     }
-
-    &.has-error {
-        .goa-radio-container {
-            border: solid 2px $goa-error-color;
-            color: $goa-error-color;
-
-            svg {
-                fill: $goa-error-color;
-            }
-        }
-    }
+  }
 }
 
 @mixin goa-radio-container {
-    // this provides our 'square' for the checradiokbox so we can style it (input radios cant be styled nicely)
-    .goa-radio-container {
-        z-Index: 2;
-        box-sizing: border-box;
-        margin: 0;
-        border: 1px solid $goa-black-two;
-        border-radius: $goa-radio-size/2;
-        height: $goa-radio-size;
-        width: $goa-radio-size;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 3px;
+  // this provides our 'square' for the checradiokbox so we can style it (input radios cant be styled nicely)
+  .goa-radio-container {
+    z-index: 2;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid $goa-black-two;
+    border-radius: $goa-radio-size/2;
+    height: $goa-radio-size;
+    width: $goa-radio-size;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
 
-        svg {
-            fill: $goa-text-color-inverse;
-        }
-
-        &.goa-radio-selected {
-            background-color: $primary;
-
-            .goa-radiomark {
-                display: block !important;
-            }
-        }
-
-        // for some reason a comma-separated list inside :not() is causing issues with storybook
-        &:hover:not(.goa-radio-selected) {
-            background-color: $goa-white-two;
-        }
-
-        &:focus-within {
-            box-shadow: 0 0 0 3px $primary-focused;
-            outline: none;
-        }
+    svg {
+      fill: $goa-text-color-inverse;
     }
+
+    &.goa-radio-selected {
+      background-color: $primary;
+
+      .goa-radiomark {
+        display: block !important;
+      }
+    }
+
+    // for some reason a comma-separated list inside :not() is causing issues with storybook
+    &:hover:not(.goa-radio-selected) {
+      background-color: $goa-white-two;
+    }
+
+    &:focus-within {
+      box-shadow: 0 0 0 3px $primary-focused;
+      outline: none;
+    }
+  }
 }
 
 @mixin goa-radio-class {
-    .goa-radio {
-        margin-bottom: 20px;
+  .goa-radio {
+    margin-bottom: 10px;
 
-        @include goa-radio();
-        @include goa-radio-container();
+    @include goa-radio();
+    @include goa-radio-container();
 
-        &.goa-radio-label-before {
-            .goa-radio-container {
-                order: 1;
-                margin-left: 8px;
-                margin-right: auto;
-            }
-        }
+    &.goa-radio-label-before {
+      .goa-radio-container {
+        order: 1;
+        margin-left: 8px;
+        margin-right: auto;
+      }
     }
+  }
 
-    .goa-radio-layout {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+  .goa-radio-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .goa-radio-inline-block {
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
 }
