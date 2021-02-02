@@ -2,7 +2,6 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 
 import GoAHeader from './header';
-import {ServiceLevel} from "./service-level.enum";
 
 describe('Header', () => {
   const serviceName = 'DIO service';
@@ -12,7 +11,7 @@ describe('Header', () => {
     render(<GoAHeader
       serviceHome={microSiteLink}
       serviceName={serviceName}
-      serviceLevel={ServiceLevel.Alpha} />);
+      serviceLevel="alpha" />);
 
     const link = screen.getByRole('link', { name: microSiteLink }) as HTMLAnchorElement;
 
@@ -24,27 +23,27 @@ describe('Header', () => {
     render(<GoAHeader
       serviceHome={microSiteLink}
       serviceName={serviceName}
-      serviceLevel={ServiceLevel.Alpha} />);
+      serviceLevel="alpha" />);
 
-    expect(screen.getByText(ServiceLevel.Alpha, { selector: ".service-level--alpha" }));
+    expect(screen.getByText('alpha', { selector: ".service-level--alpha" }));
   });
 
   it('should show beta flair', function () {
     render(<GoAHeader
       serviceHome={microSiteLink}
       serviceName={serviceName}
-      serviceLevel={ServiceLevel.Beta} />);
+      serviceLevel="beta" />);
 
-    expect(screen.getByText(ServiceLevel.Beta, { selector: ".service-level--beta" }));
+    expect(screen.getByText('beta', { selector: ".service-level--beta" }));
   });
 
   it('should show live flair', function () {
     render(<GoAHeader
       serviceHome={microSiteLink}
       serviceName={serviceName}
-      serviceLevel={ServiceLevel.Live} />);
+      serviceLevel="live" />);
 
     // This text is actually there, just hidden
-    expect(screen.getByText(ServiceLevel.Live, { selector: ".service-level--live" }));
+    expect(screen.getByText('live', { selector: ".service-level--live" }));
   });
 });

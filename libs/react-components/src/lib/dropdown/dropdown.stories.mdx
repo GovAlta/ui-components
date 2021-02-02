@@ -11,48 +11,76 @@ import { GoADropdown, DropdownOptions } from './dropdown.component';
 import { GoAOption } from './option/option.component';
 import { GoAOptionGroup } from './option-group/option-group.component';
 
+import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 export const Template = (args) => {
   return (
     <GoADropdown {...args}>
-      <GoAOption id="apple" label="Apple"></GoAOption>
-      <GoAOption id="banana" label="Banana"></GoAOption>
-      <GoAOption id="orange" label="Orange">
+      <GoAOption value="apple" label="Apple"></GoAOption>
+      <GoAOption value="banana" label="Banana"></GoAOption>
+      <GoAOption value="orange" label="Orange">
         <span>Orange 🍊</span>
       </GoAOption>
-      <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-      <GoAOption id="lemon" label="Lemon"></GoAOption>
-      <GoAOption id="lime" label="Lime"></GoAOption>
-      <GoAOption id="mango" label="Mango"></GoAOption>
-      <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-      <GoAOption id="plantain" label="Plantain"></GoAOption>
+      <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption value="lemon" label="Lemon"></GoAOption>
     </GoADropdown>
   );
 };
+
+export const LongTemplate = (args) => {
+  return (
+    <GoADropdown {...args}>
+      <GoAOption value="apple" label="Apple"></GoAOption>
+      <GoAOption value="banana" label="Banana"></GoAOption>
+      <GoAOption value="orange" label="Orange">
+        <span>Orange 🍊</span>
+      </GoAOption>
+      <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption value="lemon" label="Lemon"></GoAOption>
+      <GoAOption value="lime" label="Lime"></GoAOption>
+      <GoAOption value="mango" label="Mango"></GoAOption>
+      <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+      <GoAOption value="plantain" label="Plantain"></GoAOption>
+      <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption value="lemon" label="Lemon"></GoAOption>
+      <GoAOption value="lime" label="Lime"></GoAOption>
+      <GoAOption value="mango" label="Mango"></GoAOption>
+      <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+      <GoAOption value="plantain" label="Plantain"></GoAOption>
+      <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption value="lemon" label="Lemon"></GoAOption>
+      <GoAOption value="lime" label="Lime"></GoAOption>
+      <GoAOption value="mango" label="Mango"></GoAOption>
+      <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+      <GoAOption value="plantain" label="Plantain"></GoAOption>
+    </GoADropdown>
+  );
+};
+
 export const GroupTemplate = (args) => {
   return (
     <GoADropdown {...args}>
       <GoAOptionGroup label="Group 1">
-        <GoAOption id="apple" label="Apple" defaultSelected></GoAOption>
-        <GoAOption id="banana" label="Banana"></GoAOption>
-        <GoAOption id="orange" label="Orange">
+        <GoAOption value="apple" label="Apple"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
+        <GoAOption value="orange" label="Orange">
           <span>Orange 🍊</span>
         </GoAOption>
       </GoAOptionGroup>
-      <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-      <GoAOption id="lemon" label="Lemon"></GoAOption>
-      <GoAOption id="lime" label="Lime"></GoAOption>
+      <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+      <GoAOption value="lemon" label="Lemon"></GoAOption>
+      <GoAOption value="lime" label="Lime"></GoAOption>
       <GoAOptionGroup label="Group 2">
-        <GoAOption id="mango" label="Mango"></GoAOption>
-        <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-        <GoAOption id="plantain" label="Plantain"></GoAOption>
+        <GoAOption value="mango" label="Mango"></GoAOption>
+        <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+        <GoAOption value="plantain" label="Plantain"></GoAOption>
       </GoAOptionGroup>
     </GoADropdown>
   );
 };
 
 <Meta
-  title="Component Library/Components/Drop Down List"
+  title="React/Basic Elements/Dropdown"
   component={GoADropdown}
   argTypes={{
     label: {
@@ -98,6 +126,9 @@ A user input field that allows the user to select from a list of options.
       label: 'Fruits',
       description: 'Choose your favourite fruit!',
       style: { width: '300px' },
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {Template.bind({})}
@@ -115,6 +146,47 @@ A user input field that allows the user to select from a list of options.
       description: 'Choose your favourite fruit!',
       style: { width: '300px' },
       required: true,
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Initial Value
+
+<Canvas>
+  <Story
+    name="Initial Value"
+    args={{
+      label: 'Fruits',
+      description: 'Kiwi should be pre-selected',
+      style: { width: '300px' },
+      value: 'kiwi',
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Initial Values
+
+<Canvas>
+  <Story
+    name="Initial Values"
+    args={{
+      label: 'Fruits',
+      description: 'Kiwi and apple should be pre-selected',
+      style: { width: '300px' },
+      values: ['kiwi', 'apple'],
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {Template.bind({})}
@@ -133,9 +205,50 @@ A user input field that allows the user to select from a list of options.
       style: { width: '300px' },
       required: true,
       disabled: true,
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Menu Height
+
+<Canvas>
+  <Story
+    name="Menu Height"
+    args={{
+      label: 'Fruits',
+      description: 'Choose your favourite fruit!',
+      style: { width: '300px' },
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
+    }}
+  >
+    {LongTemplate.bind({})}
+  </Story>
+</Canvas>
+
+
+### Max Menu Height
+
+<Canvas>
+  <Story
+    name="Max Menu Height"
+    args={{
+      label: 'Fruits',
+      description: 'Choose your favourite fruit!',
+      menuHeight: 200,
+      style: { width: '300px' },
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
+    }}
+  >
+    {LongTemplate.bind({})}
   </Story>
 </Canvas>
 
@@ -149,7 +262,10 @@ A user input field that allows the user to select from a list of options.
       label: 'Fruits',
       description: 'Choose your favourite fruits!',
       style: { width: '300px' },
-      multiple: true
+      multiple: true,
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {Template.bind({})}
@@ -166,7 +282,9 @@ A user input field that allows the user to select from a list of options.
       label: 'Fruits',
       description: 'Choose your favourite fruits!',
       style: { width: '300px' },
-      multiple: false
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {GroupTemplate.bind({})}
@@ -181,8 +299,10 @@ A user input field that allows the user to select from a list of options.
       label: 'Fruits',
       description: 'Choose your favourite fruits!',
       style: { width: '300px' },
-      multiple: false,
-      typeAheadMode: 'startsWith'
+      typeAheadMode: 'startsWith',
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {GroupTemplate.bind({})}
@@ -198,7 +318,10 @@ A user input field that allows the user to select from a list of options.
       description: 'Choose your favourite fruits!',
       style: { width: '300px' },
       multiple: false,
-      typeAheadMode: 'contains'
+      typeAheadMode: 'contains',
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
     }}
   >
     {GroupTemplate.bind({})}
@@ -211,15 +334,15 @@ Basic
 
 ```html
 <GoADropdown label="Fruits" description="Choose your favourite fruit!">
-  <GoAOption id="apple" label="Apple"></GoAOption>
-  <GoAOption id="banana" label="Banana"></GoAOption>
-  <GoAOption id="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
-  <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-  <GoAOption id="lemon" label="Lemon"></GoAOption>
-  <GoAOption id="lime" label="Lime" defaultSelected></GoAOption>
-  <GoAOption id="mango" label="Mango"></GoAOption>
-  <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-  <GoAOption id="plantain" label="Plantain"></GoAOption>
+  <GoAOption value="apple" label="Apple"></GoAOption>
+  <GoAOption value="banana" label="Banana"></GoAOption>
+  <GoAOption value="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
+  <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+  <GoAOption value="lemon" label="Lemon"></GoAOption>
+  <GoAOption value="lime" label="Lime" defaultSelected></GoAOption>
+  <GoAOption value="mango" label="Mango"></GoAOption>
+  <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+  <GoAOption value="plantain" label="Plantain"></GoAOption>
 </GoADropdown>
 ```
 
@@ -228,17 +351,17 @@ With Groups
 ```html
 <GoADropdown label="Fruits" description="Choose your favourite fruit!" multiple="true">
   <GoAOptionGroup label="Group 1">
-    <GoAOption id="apple" label="Apple" defaultSelected></GoAOption>
-    <GoAOption id="banana" label="Banana"></GoAOption>
-    <GoAOption id="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
+    <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
+    <GoAOption value="banana" label="Banana"></GoAOption>
+    <GoAOption value="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
   </GoAOptionGroup>
-  <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-  <GoAOption id="lemon" label="Lemon"></GoAOption>
-  <GoAOption id="lime" label="Lime" defaultSelected></GoAOption>
+  <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+  <GoAOption value="lemon" label="Lemon"></GoAOption>
+  <GoAOption value="lime" label="Lime" defaultSelected></GoAOption>
   <GoAOptionGroup label="Group 2">
-    <GoAOption id="mango" label="Mango"></GoAOption>
-    <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-    <GoAOption id="plantain" label="Plantain" defaultSelected></GoAOption>
+    <GoAOption value="mango" label="Mango"></GoAOption>
+    <GoAOption value="pineapple" label="Pineapple"></GoAOption>
+    <GoAOption value="plantain" label="Plantain" defaultSelected></GoAOption>
   </GoAOptionGroup>
 </GoADropdown>
 ```
@@ -248,7 +371,7 @@ Dynamic loading
 ```html
 <GoADropdown  label="Fruits"  description="Choose your favourite fruit!"  multiple="false"  typeAheadMode="none">
   {
-    items.map((i) => <GoAOption key={i.id} id={i.id} label={i.label} />)
+    items.map((i) => <GoAOption key={i.id} value={i.id} label={i.label} />)
   }
 </GoADropdown>
 ```

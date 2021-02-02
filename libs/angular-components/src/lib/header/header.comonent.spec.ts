@@ -1,7 +1,6 @@
 import {render, screen} from '@testing-library/angular';
 import {GoAHeaderComponent} from './header.component';
 import {GoAMicrositeLogoComponent} from '../microsite-logo/microsite-logo.component';
-import {ServiceLevel} from "./service-level.enum";
 
 describe('GoA Header', () => {
   const serviceName = 'DIO service';
@@ -9,7 +8,7 @@ describe('GoA Header', () => {
 
   test('should render header', async () => {
     await render(GoAHeaderComponent, {
-      componentProperties: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: ServiceLevel.Alpha },
+      componentProperties: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: 'alpha' },
       declarations: [GoAMicrositeLogoComponent]
     });
 
@@ -18,28 +17,28 @@ describe('GoA Header', () => {
 
   test('should render the alpha flair', async () => {
     await render(GoAHeaderComponent, {
-      componentProperties: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: ServiceLevel.Alpha },
+      componentProperties: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: 'alpha' },
       declarations: [GoAMicrositeLogoComponent]
     });
 
-    expect(screen.getByText(ServiceLevel.Alpha, { selector: `.service-level--alpha` }));
+    expect(screen.getByText('alpha', { selector: `.service-level--alpha` }));
   });
 
   test('should render the beta flair', async () => {
     await render(GoAHeaderComponent, {
-      componentProperties: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: ServiceLevel.Beta},
+      componentProperties: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: 'beta'},
       declarations: [GoAMicrositeLogoComponent]
     });
 
-    expect(screen.getByText(ServiceLevel.Beta, { selector: `.service-level--beta` }));
+    expect(screen.getByText('beta', { selector: `.service-level--beta` }));
   });
 
   test('should render the live flair', async () => {
     await render(GoAHeaderComponent, {
-      componentProperties: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: ServiceLevel.Live},
+      componentProperties: { serviceName: serviceName, serviceHome: microSiteLink, serviceLevel: 'live'},
       declarations: [GoAMicrositeLogoComponent]
     });
 
-    expect(screen.getByText(ServiceLevel.Live, { selector: `.service-level--live` }));
+    expect(screen.getByText('live', { selector: `.service-level--live` }));
   });
 });

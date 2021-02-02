@@ -4,6 +4,7 @@
 .goa-hero-banner-content {
   font-size: $p-li-size;
   line-height: 32px;
+  margin: 0;
 
   @include tablet {
     width: 80%;

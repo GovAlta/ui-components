@@ -1,17 +1,20 @@
 import { DoDont } from '@abgov/shared/storybook-common';
-import GoARadioGroup from "./radio-group";
-import GoARadio from "./radio";
+import GoARadioGroup from './radio-group';
+import GoARadio from './radio';
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
 
 <Meta
-  title="Component Library/Page Layout/Radio"
+  title="Vue/Basic Elements/RadioGroup"
   argTypes={{
     title: { control: { type: 'text' } },
     helperText: { control: { type: 'text' } },
     requiredErrorMessage: { control: { type: 'text' } },
-    required: { control: {type: 'boolean'}},
-    disabled: { control: {type: 'boolean'}},
-    labelPosition: { control: {type: 'select', options: ['before', 'after'] }}
+    required: { control: { type: 'boolean' } },
+    disabled: { control: { type: 'boolean' } },
+    labelPosition: {
+      control: { type: 'select', options: ['before', 'after'] },
+    },
   }}
   component={GoARadioGroup}
 />
@@ -33,20 +36,17 @@ notice and read the information.
     height={200}
     args={{
       title: 'Which of the following is your favorite fruit?',
-      helperText: 'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
       requiredErrorMessage: 'Please select a fruit',
       required: false,
       disabled: false,
-      labelPosition: 'after',
-      value: "",
+      value: '',
       items: [
-        {text: 'Grapes', value: 'grapes'},
-        {text: 'Pears', value: 'pears'},
-        {text: 'Kiwi', value: 'kiwi'},
+        { text: 'Grapes', value: 'grapes' },
+        { text: 'Pears', value: 'pears' },
+        { text: 'Kiwi', value: 'kiwi' },
       ],
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
     }}
   >
     {(args, argTypes) => {
@@ -55,6 +55,11 @@ notice and read the information.
         render: function (createElement) {
           return createElement(GoARadioGroup, {
             props: args,
+            on: {
+              change: (value) => {
+                action('selection changed')(value);
+              },
+            },
           });
         },
       };
@@ -68,18 +73,12 @@ notice and read the information.
     height={200}
     args={{
       requiredErrorMessage: 'Please select a fruit',
-      required: false,
-      disabled: false,
-      labelPosition: 'after',
-      value: "",
+      value: '',
       items: [
-        {text: 'Grapes', value: 'grapes'},
-        {text: 'Pears', value: 'pears'},
-        {text: 'Kiwi', value: 'kiwi'},
+        { text: 'Grapes', value: 'grapes' },
+        { text: 'Pears', value: 'pears' },
+        { text: 'Kiwi', value: 'kiwi' },
       ],
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
     }}
   >
     {(args, argTypes) => {
@@ -88,6 +87,11 @@ notice and read the information.
         render: function (createElement) {
           return createElement(GoARadioGroup, {
             props: args,
+            on: {
+              change: (value) => {
+                action('selection changed')(value);
+              },
+            },
           });
         },
       };
@@ -101,20 +105,15 @@ notice and read the information.
     height={200}
     args={{
       title: 'Which of the following is your favorite fruit?',
-      helperText: 'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
       requiredErrorMessage: 'Please select a fruit',
-      required: false,
-      disabled: false,
-      labelPosition: 'after',
       value: 'pears',
       items: [
-        {text: 'Grapes', value: 'grapes'},
-        {text: 'Pears', value: 'pears'},
-        {text: 'Kiwi', value: 'kiwi'},
+        { text: 'Grapes', value: 'grapes' },
+        { text: 'Pears', value: 'pears' },
+        { text: 'Kiwi', value: 'kiwi' },
       ],
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
     }}
   >
     {(args, argTypes) => {
@@ -123,8 +122,87 @@ notice and read the information.
         render: function (createElement) {
           return createElement(GoARadioGroup, {
             props: args,
+            on: {
+              change: (value) => {
+                action('selection changed')(value);
+              }
+            }
           });
-        },
+        }
+      };
+    }}
+  </Story>
+</Canvas>
+
+
+<Canvas>
+  <Story
+    name="Disabled"
+    height={200}
+    args={{
+      title: 'Which of the following is your favorite fruit?',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      requiredErrorMessage: 'Please select a fruit',
+      disabled: true,
+      value: 'pears',
+      items: [
+        { text: 'Grapes', value: 'grapes' },
+        { text: 'Pears', value: 'pears' },
+        { text: 'Kiwi', value: 'kiwi' },
+      ],
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoARadioGroup },
+        render: function (createElement) {
+          return createElement(GoARadioGroup, {
+            props: args,
+            on: {
+              change: (value) => {
+                action('selection changed')(value);
+              }
+            }
+          });
+        }
+      };
+    }}
+  </Story>
+</Canvas>
+
+
+<Canvas>
+  <Story
+    name="Required"
+    height={200}
+    args={{
+      title: 'Which of the following is your favorite fruit?',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      requiredErrorMessage: 'Please select a fruit',
+      required: true,
+      value: 'pears',
+      items: [
+        { text: 'Grapes', value: 'grapes' },
+        { text: 'Pears', value: 'pears' },
+        { text: 'Kiwi', value: 'kiwi' },
+      ],
+    }}
+  >
+    {(args, argTypes) => {
+      return {
+        components: { GoARadioGroup },
+        render: function (createElement) {
+          return createElement(GoARadioGroup, {
+            props: args,
+            on: {
+              change: (value) => {
+                action('selection changed')(value);
+              }
+            }
+          });
+        }
       };
     }}
   </Story>
@@ -145,16 +223,13 @@ layout as a container.
       title='Which of the following is your favorite fruit?'
       helperText='It doesnt have to be your absolute favorite, just the one you like best of what is listed'
       requiredErrorMessage='Please select a fruit'
-      required=false
-      disabled=false
-      labelPosition='after'
       value="pears"
       items=[
         {text: 'Grapes', value: 'grapes'},
         {text: 'Pears', value: 'pears'},
         {text: 'Kiwi', value: 'kiwi'},
       ]
-      v-on:change="() => selectionChanged($event)"
+      @change="() => selectionChanged($event)"
     />
   </div>
 </template>

@@ -11,19 +11,19 @@
       <div
         class="goa-checkbox-container"
         :class="{
-          'goa-checkbox-selected': checked,
-          'goa-checkbox-indeterminate': indeterminate,
+          'goa-checkbox-selected': isChecked,
+          'goa-checkbox-indeterminate': isIndeterminate,
         }"
       >
         <input
           type="checkbox"
-          :checked="checked"
+          :checked="isChecked"
           :disabled="disabled"
           :required="required"
           @change="onChangeFunction()"
-        />
+        >
         <svg
-          v-if="checked"
+          v-if="isChecked"
           id="checkmark"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 12.18"
@@ -32,7 +32,7 @@
           <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
         </svg>
         <svg
-          v-if="indeterminate"
+          v-if="isIndeterminate"
           id="dashmark"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 15 2"
@@ -48,50 +48,56 @@
   </div>
 </template>
 
-<script lang="typescript">
+<script lang="ts">
 
 export default {
   name: 'goa-checkbox',
   props: {
-      checked: Boolean,
-      required: Boolean,
-      disabled: Boolean,
-      indeterminate: Boolean,
-      content: String,
-      labelPosition: {
-          type: String,
-          required: false,
-          default: 'after',
-          validator: (value) => {
-              return ["before", "after"].includes(value);
-          },
-      },
-      change: {
-          type: Function,
-          required: false,
+    checked: Boolean,
+    required: Boolean,
+    disabled: Boolean,
+    indeterminate: Boolean,
+    content: { type: String, default: ''},
+    labelPosition: {
+      type: String,
+      default: 'after',
+      validator: (value: string): boolean => {
+          return ["before", "after"].includes(value);
       },
     },
-    methods: {
-      onChangeFunction: function() {
-        this.checked = !this.checked;
-        if(this.checked && this.indeterminate){
-            this.indeterminate = false;
-        };
+    change: {
+      type: Function,
+      default: null,
+      required: false,
+    },
+  },
+  data: (): unknown => {
+    return {
+      isIndeterminate: false,
+      isChecked: false,
+    }
+  },
+  computed: {
+    hasError: function(): boolean {
+      return this.required && !this.isChecked;
+    }
+  },
+  created(): void {
+    this.isIndeterminate = this.checked ? false : this.indeterminate;
+    this.isChecked = this.checked;
+  },
+  methods: {
+    onChangeFunction: function(): void {
+        this.isChecked = !this.isChecked;
+
+        if(this.isChecked && this.isIndeterminate){
+          this.isIndeterminate = false;
+        }
 
         this.$emit('change');
-      },
     },
-    computed: {
-        hasError: function(){
-            return this.required && !this.checked;
-        }
-    },
-    created () {
-        if(this.checked){
-            this.indeterminate = false;
-        }
-    },
-  }
+  },
+}
 </script>
 
 <style lang="scss" scoped>

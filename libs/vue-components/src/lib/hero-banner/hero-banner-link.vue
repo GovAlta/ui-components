@@ -1,9 +1,9 @@
 <template>
-    <div>
-      <a class="goa-link-button right-arrow" :href='linkUrl' role="link">
-        {{linkText}}
-      </a>
-    </div>
+  <div>
+    <a class="goa-link-button right-arrow" :href='linkUrl' role="link">
+      {{linkText}}
+    </a>
+  </div>
 </template>
 <script lang="typescript">
 
@@ -26,8 +26,8 @@ export default {
     },
   },
   data() {
-    return {   
-      
+    return {
+
     };
   },
 };

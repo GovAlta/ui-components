@@ -259,15 +259,12 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    * Updates the 'name' property of the child radio buttons to match that of the group so they all function together
    */
   private _updateRadioButtonNames(): void {
-    // need to wrap in setTimeout because _radios hasnt resolved yet when Input setter fires, need to get to next cycle in page lifecycle
-    //setTimeout(() =>{
-      if (this._radios) {
-        this._radios.forEach(radio => {
-          radio.name = this.name;
-          radio.markForCheck();
-        });
-      }
-    //});
+    if (this._radios) {
+      this._radios.forEach(radio => {
+        radio.name = this.name;
+        radio.markForCheck();
+      });
+    }
   }
 
   /**
@@ -304,18 +301,6 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
         radio.markForCheck();
       });
     }
-  }
-
-  /**
-   * Marks all of the child radios for check
-   */
-  private _markRadiosForCheck(): void {
-    // need to wrap in setTimeout because _radios hasnt resolved yet when Input setter fires, need to get to next cycle in page lifecycle
-    setTimeout(() =>{
-      if (this._radios) {
-        this._radios.forEach(radio => radio.markForCheck());
-      }
-    });
   }
 
   /**

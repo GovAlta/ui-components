@@ -4,17 +4,16 @@ import { GoACalloutComponent } from './callout.component';
 import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
 import { moduleMetadata } from '@storybook/angular';
 
-<Meta title="Component Library/Components/Callout"
+<Meta title="Angular/Components/Callout"
   component={GoACalloutComponent}
-  argTypes={{ 
-      type: { 
-        control: 'select', 
+  argTypes={{
+      type: {
+        control: 'select',
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
            defaultValue: { summary: 'information' },
-        }  
+        }
       },
       title: { control: 'text' },
-      content: { control: 'text' } 
     }
   }
   decorators={[
@@ -23,20 +22,22 @@ import { moduleMetadata } from '@storybook/angular';
 } />
 
 # Callouts
-Important changes or facts given a strong visual emphasis so that users take 
+Important changes or facts given a strong visual emphasis so that users take
 notice and read the information.
 
 <Canvas>
-  <Story name="Variants" height={300} 
-    args={{ 
-      type: 'information', 
-      content: 'Information to the user goes in the content.  Information can include markup as desired.',
-      title: 'Callout Title'
-    }} 
+  <Story name="Variants" height={300}
+    args={{
+      type: 'information',
+      title: 'Callout Title',
+    }}
    >
-    {(args) => {     
+    {(args) => {
       return {
-        template: `<goa-callout [type]="type" [title]="title">{{content}}</goa-callout>`,
+        template: `
+          <goa-callout [type]="type" [title]="title">
+            Information to the user goes in the content. <a href="some.server">Information</a> can include <i>markup</i> as desired.
+          </goa-callout>`,
         props: args
       }
     }}
@@ -46,8 +47,8 @@ notice and read the information.
 
 
 ## Overview
-Callouts are text boxes that indicate one of the following: important information, 
-special dates, warning messages, or emergency messages. They occupy the body 
+Callouts are text boxes that indicate one of the following: important information,
+special dates, warning messages, or emergency messages. They occupy the body
 layout as a container.
 
 ## Examples
@@ -61,14 +62,14 @@ layout as a container.
 
 ## Usage guidelines
 ### Within the body
-Callout banners grab the attention of the user scanning for important information on 
-a page, which may be otherwise missed. Callout banners must be relevant to the header 
+Callout banners grab the attention of the user scanning for important information on
+a page, which may be otherwise missed. Callout banners must be relevant to the header
 or section it corresponds to.
 
 <DoDont
   dos={'Use a callout banner when the content merits special attention to the topic.'}
   donts={
-    'Use too many callout banners. Many competing banners will diminish the effectiveness ' + 
+    'Use too many callout banners. Many competing banners will diminish the effectiveness ' +
     'of individual ones.'
   }
 />

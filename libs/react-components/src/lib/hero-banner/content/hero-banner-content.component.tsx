@@ -7,10 +7,8 @@ interface Props {
 
 export const GoAHeroBannerContent: FC<Props> = ({ content, children }) => {
   return (
-    <Fragment>
-      <p className="goa-hero-banner-content" role="note">
-        {children || content}
-      </p>
-    </Fragment>
+    <p className="goa-hero-banner-content" role="note">
+      {children || content}
+    </p>
   );
 };

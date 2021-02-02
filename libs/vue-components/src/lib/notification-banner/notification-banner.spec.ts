@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/vue';
-import userEvent from '@testing-library/user-event';
 import GoANotification from './notification-banner.vue';
 
 describe('Notification', () => {
