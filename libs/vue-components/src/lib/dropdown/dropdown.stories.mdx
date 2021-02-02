@@ -1,13 +1,15 @@
 import GoADropdown from './dropdown';
 import GoADropdownOption from './option/option'
-
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 
-<Meta title="Component Library/Components/Dropdown"
+<Meta title="Vue/Basic Elements/Dropdown"
   argTypes={{
     label: { control: { type: 'text' } },
     description: { control: { type: 'text' } },
     disabled: { control: { type: 'boolean' } },
+    menuHeight: { control: { type: 'number' } },
     multiple: { control: { type: 'boolean' } },
     required: { control: { type: 'boolean' } },
     options: { control: { type: 'text' } },
@@ -25,7 +27,7 @@ A user input field that allows the user to select from a list of options.
 ### Basic
 
 <Canvas>
-  <Story name="Basic" height="400px">
+  <Story name="Basic">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
@@ -41,9 +43,10 @@ A user input field that allows the user to select from a list of options.
                 ],
                 description: 'Pick something from the list',
               },
+              style: { width: '300px' },
               on: {
-                select: (val) => {
-                  alert(`${val} selected`);
+                select: (value) => {
+                  alert('selection changed: ' + value);
                 }
               }
             }
@@ -57,7 +60,7 @@ A user input field that allows the user to select from a list of options.
 ### Required
 
 <Canvas>
-  <Story name="Required" height="400px">
+  <Story name="Required">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
@@ -73,7 +76,8 @@ A user input field that allows the user to select from a list of options.
                 ],
                 description: 'Pick something from the list',
                 required: true,
-              }
+              },
+              style: { width: '300px' },
             }
           )
         }
@@ -85,7 +89,7 @@ A user input field that allows the user to select from a list of options.
 ### Single value preselected
 
 <Canvas>
-  <Story name="Single value preselected" height="400px">
+  <Story name="Single value preselected">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
@@ -101,7 +105,8 @@ A user input field that allows the user to select from a list of options.
                 ],
                 description: 'Pick something from the list',
                 value: 'pear'
-              }
+              },
+              style: { width: '300px' },
             }
           )
         }
@@ -113,7 +118,7 @@ A user input field that allows the user to select from a list of options.
 ### Disabled
 
 <Canvas>
-  <Story name="Disabled" height="400px">
+  <Story name="Disabled">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
@@ -129,7 +134,118 @@ A user input field that allows the user to select from a list of options.
                 ],
                 description: 'Pick something from the list',
                 disabled: true
-              }
+              },
+              style: { width: '300px' },
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Menu Height">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+              },
+              style: { width: '300px' },
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+
+### Max Menu Height
+
+<Canvas>
+  <Story name="Max Menu Height">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                menuHeight: 300
+              },
+              style: { width: '300px' },
             }
           )
         }
@@ -141,7 +257,7 @@ A user input field that allows the user to select from a list of options.
 ### Multiselect
 
 <Canvas>
-  <Story name="Multiselect" height="400px">
+  <Story name="Multiselect">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
@@ -158,9 +274,10 @@ A user input field that allows the user to select from a list of options.
                 description: 'Pick something from the list',
                 multiple: true,
               },
+              style: { width: '300px' },
               on: {
                 select: (values) => {
-                  alert(`${values.join(', ')} were selected`)
+                  alert('selection changed: ' + value);
                 }
               }
             }
@@ -174,7 +291,7 @@ A user input field that allows the user to select from a list of options.
 ### Multiselect with preselected values
 
 <Canvas>
-  <Story name="Multiselect with preselected values" height="400px">
+  <Story name="Multiselect with preselected values">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
@@ -192,6 +309,7 @@ A user input field that allows the user to select from a list of options.
                 multiple: true,
                 values: ['banana', 'pear']
               },
+              style: { width: '300px' },
             }
           )
         }
@@ -203,7 +321,7 @@ A user input field that allows the user to select from a list of options.
 ### Multiselect with preselected values
 
 <Canvas>
-  <Story name="Filter with contains match" height="400px">
+  <Story name="Filter with contains match">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
@@ -220,6 +338,7 @@ A user input field that allows the user to select from a list of options.
                 description: 'Pick something from the list',
                 typeAheadMode: 'contains'
               },
+              style: { width: '300px' },
             }
           )
         }
@@ -231,7 +350,7 @@ A user input field that allows the user to select from a list of options.
 ### Filter with starts with match
 
 <Canvas>
-  <Story name="Filter with starts with match" height="400px">
+  <Story name="Filter with starts with match">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
@@ -248,6 +367,7 @@ A user input field that allows the user to select from a list of options.
                 description: 'Pick something from the list',
                 typeAheadMode: 'startsWith'
               },
+              style: { width: '300px' },
             }
           )
         }

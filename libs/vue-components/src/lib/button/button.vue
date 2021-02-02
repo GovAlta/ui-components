@@ -8,7 +8,6 @@
 
 export default {
   name: 'goa-header',
-  emits: ['click'],
   props: {
     /**
      * The type of button - "primary", "secondary", "tertiary".
@@ -47,11 +46,7 @@ export default {
     onClick: {
       type: Function,
       required: false,
-    },
-    onMouseDown: {
-      type: Function,
-      required: false,
-    },
+    }
   },
   data() {
     const buttonTypeClass = this.buttonType === 'primary' ? '' : `goa--${this.buttonType}`;

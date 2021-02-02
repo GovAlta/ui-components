@@ -5,42 +5,44 @@ import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-do
 import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 
-<Meta title="Component Library/Basic Elements/Button"
+<Meta title="Angular/Basic Elements/Button"
   component={GoAButtonComponent}
-  argTypes={{ 
-      buttonType: { 
-        control: 'select', 
+  argTypes={{
+      buttonType: {
+        control: 'select',
         options: ['primary', 'secodary', 'tertiary'],
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
            defaultValue: { summary: 'primary' },
-        }  
+        }
       },
-      buttonSize: { 
-        control: 'select', 
+      buttonSize: {
+        control: 'select',
         options: ['small', 'normal'],
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
            defaultValue: { summary: 'normal' },
-        }  
+        }
       },
-      content: { control: 'text' } 
+      content: { control: 'text' },
+      title: { control: 'text', defaultValue: 'Click Me' },
     }
   }
   decorators={[
-        moduleMetadata({ declarations: [GoAButtonComponent] }),
-    ]
-} />
+      moduleMetadata({ declarations: [GoAButtonComponent] }),
+  ]}
+/>
 
 # Buttons
 
 A hierarchy of actions provided by buttons.
 
 <Canvas>
-  <Story name="Variants" height={100} 
-    args={{ 
-      buttonType: 'primary', 
+  <Story name="Variants" height={100}
+    args={{
+      buttonType: 'primary',
       buttonSize: 'normal',
-      content: 'Click Me!'
-    }} 
+      content: 'Click Me!',
+      title: 'The button title'
+    }}
     parameters={
     {
       design: {
@@ -50,9 +52,9 @@ A hierarchy of actions provided by buttons.
     }
   }>
     {(args) => {
-      args.click = function(event) { action('click')(event) } 
+      args.click = function(event) { action('click')(event) }
       return {
-        template: `<button goa-button [buttonSize]="buttonSize" [buttonType]="buttonType" (click)="click($event)">{{content}}</button>`,
+        template: `<button goa-button [buttonSize]="buttonSize" [buttonType]="buttonType" [title]="title" (click)="click($event)">{{content}}</button>`,
         props: args
       }
     }}
@@ -60,8 +62,8 @@ A hierarchy of actions provided by buttons.
 </Canvas>
 
 ## Overview
-Buttons submit data from a user input. Buttons are commonly found at the bottom of forms or simple 
-field box groups such as a search function. They may also be used as call to action or navigation 
+Buttons submit data from a user input. Buttons are commonly found at the bottom of forms or simple
+field box groups such as a search function. They may also be used as call to action or navigation
 links.
 
 ## Examples
@@ -81,7 +83,7 @@ links.
 
 ## Usage guidelines
 ### Primary vs. secondary
-When buttons appear side-by-side, a decision must be made about which is the primary and secondary 
+When buttons appear side-by-side, a decision must be made about which is the primary and secondary
 action.
 
 <DoDont

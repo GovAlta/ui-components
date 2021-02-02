@@ -31,8 +31,10 @@ export const GoAHeroBanner: FC<Props> = ({
         <h1 role="heading" aria-level={1}>{title}</h1>
         {children || (
           <Fragment>
-            <GoAHeroBannerContent content={content}></GoAHeroBannerContent>
-            <GoAHeroBannerLink linkText={linkText} linkUrl={linkUrl} />
+            { content &&
+              <GoAHeroBannerContent content={content}></GoAHeroBannerContent> }
+            { linkText && linkUrl &&
+              <GoAHeroBannerLink linkText={linkText} linkUrl={linkUrl} /> }
           </Fragment>
         )}
       </div>

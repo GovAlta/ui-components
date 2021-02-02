@@ -21,7 +21,7 @@ export interface KeyOptionPair {
 interface DropdownContextProps {
   options: KeyOptionPair;
   filter: string;
-  matchesFilter?: (value:string) => boolean;
+  matchesFilter?: (filter: string, value:string) => boolean;
   updateOption?: (value: string, option: DropdownOption) => void;
 }
 

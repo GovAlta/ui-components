@@ -1,32 +1,31 @@
 <template>
-    <div class='goa-card-group'>
-      <div class='card-group-title'>{{title}}</div>
-      <div  v-if='!hasCardItems' slot-scope :class=[cardGroupClass]>
-       <slot/>
-      </div> 
-      <div  v-if='hasCardItems' :class=[cardGroupClass] >
-        <div>
-        <goa-card  
-        v-for="(card,index) in cardItems" :key="index"
-        :title="card.title"
-        :titleUrl="card.titleUrl"
-        :description="card.description"
-        :cardImageUrl="card.cardImageUrl"
-        :cardWidth="card.cardWidth"
-        />
-        </div>
-      </div> 
-
+  <div class="goa-card-group">
+    <div class="card-group-title">{{ title }}</div>
+    <div v-if="!hasCardItems" slot-scope :class="[cardGroupClass]">
+      <slot />
     </div>
-   
+    <div v-if="hasCardItems" :class="[cardGroupClass]">
+      <div>
+        <goa-card
+          v-for="(card, index) in cardItems"
+          :key="index"
+          :title="card.title"
+          :title-url="card.titleUrl"
+          :description="card.description"
+          :card-image-url="card.cardImageUrl"
+          :card-width="card.cardWidth"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
-<script lang="typescript">
+<script lang="ts">
 import GoACard from '../card/card.vue';
 
 export default {
-  name: 'goa-card-group',
-  components:{
+  name: 'GoaCardGroup',
+  components: {
     'goa-card': GoACard,
   },
   props: {
@@ -43,27 +42,25 @@ export default {
     layout: {
       type: String,
       required: false,
-      default:'basic',
-      validator: (prop) => [
-      'basic', 'column'
-      ].includes(prop)
+      default: 'basic',
+      validator: (prop: string): boolean => ['basic', 'column'].includes(prop),
     },
     /** Card group json data pass in*/
-    cardItems:{
-      type:Array,
-      required: false
-    }
+    cardItems: {
+      type: Array,
+      default: null,
+    },
   },
-  data() {
+  data(): unknown {
     return {
-      cardGroupClass:`card-group-${this.layout}-vue`,
+      cardGroupClass: `card-group-${this.layout}-vue`,
     };
   },
-  computed:{
-    hasCardItems(){
+  computed: {
+    hasCardItems(): boolean {
       return Boolean(this.cardItems);
-    }
-  }
+    },
+  },
 };
 </script>
 

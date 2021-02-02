@@ -10,7 +10,6 @@ afterEach(cleanup);
 
 describe('GoA Dropdown', () => {
 
-  //#region Helper functions
   const expandCollapseDropDown = (container: HTMLElement) => {
     const label = container.querySelector('.dropdown-label');
 
@@ -20,14 +19,17 @@ describe('GoA Dropdown', () => {
     // Click the label to expand the dropdown
     fireEvent.click(label);
   }
-  //#endregion
 
   test('Expands and collapses', () => {
     const { container } = render(
-      <GoADropdown label='Fruits' description='Choose your favourite friut.'>
-        <GoAOption id="apple" label="Apple" defaultSelected></GoAOption>
-        <GoAOption id="pear" label="Pear"></GoAOption>
-        <GoAOption id="banana" label="Banana"></GoAOption>
+      <GoADropdown
+        label='Fruits'
+        description='Choose your favourite friut.'
+        selectionChanged={() => {}}
+      >
+        <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
+        <GoAOption value="pear" label="Pear"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
     // Check that the options are NOT displayed
@@ -49,10 +51,15 @@ describe('GoA Dropdown', () => {
 
   test('Nothing happens when disabled', () => {
     const { container } = render(
-      <GoADropdown label='Fruits' description='Choose your favourite friut.' disabled={true}>
-        <GoAOption id="apple" label="Apple" defaultSelected></GoAOption>
-        <GoAOption id="pear" label="Pear"></GoAOption>
-        <GoAOption id="banana" label="Banana"></GoAOption>
+      <GoADropdown
+        label='Fruits'
+        description='Choose your favourite friut.'
+        disabled={true}
+        selectionChanged={() => {}}
+      >
+        <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
+        <GoAOption value="pear" label="Pear"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
     expandCollapseDropDown(container);
@@ -63,10 +70,14 @@ describe('GoA Dropdown', () => {
 
   test('Contains all options', () => {
     const { container } = render(
-      <GoADropdown label='Fruits' description='Choose your favourite friut.'>
-        <GoAOption id="apple" label="Apple" defaultSelected></GoAOption>
-        <GoAOption id="pear" label="Pear"></GoAOption>
-        <GoAOption id="banana" label="Banana"></GoAOption>
+      <GoADropdown
+        label='Fruits'
+        description='Choose your favourite friut.'
+        selectionChanged={() => {}}
+      >
+        <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
+        <GoAOption value="pear" label="Pear"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
     expandCollapseDropDown(container);
@@ -76,17 +87,66 @@ describe('GoA Dropdown', () => {
     allLabels.forEach((l) => {
       expect(screen.getByText(l)).toBeTruthy();
     })
+  });
 
+  test('Has initial selected value', () => {
+    const { getByRole } = render(
+      <GoADropdown
+        label='Fruits'
+        description='Choose your favourite friut.'
+        value='pear'
+        selectionChanged={() => {}}
+      >
+        <GoAOption value="apple" label="Apple"></GoAOption>
+        <GoAOption value="pear" label="Pear"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
+      </GoADropdown>);
+
+    const searchInput = getByRole('searchbox') as HTMLInputElement;
+    expect(searchInput.value).toEqual('Pear')
+
+    fireEvent.click(searchInput)
+    const selected = document.querySelectorAll('.option.selected');
+    expect(selected.length).toEqual(1);
+    expect(selected[0].textContent).toEqual('Pear');
+  });
+
+  test('Has initial selected values', () => {
+    const { getByRole } = render(
+      <GoADropdown
+        label='Fruits'
+        description='Choose your favourite friut.'
+        values={['pear', 'banana']}
+        selectionChanged={() => {}}
+      >
+        <GoAOption value="apple" label="Apple"></GoAOption>
+        <GoAOption value="pear" label="Pear"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
+      </GoADropdown>);
+
+    const searchInput = getByRole('searchbox') as HTMLInputElement;
+    expect(searchInput.value).toEqual('Pear, Banana')
+
+    fireEvent.click(searchInput)
+    const selected = document.querySelectorAll('.option.selected');
+    expect(selected.length).toEqual(2);
+    expect(selected[0].textContent).toEqual('Pear');
+    expect(selected[1].textContent).toEqual('Banana');
   });
 
   test('Renders options and groups', () => {
     const { container } = render(
-      <GoADropdown label='Fruits' description='Choose your favourite friut.' multiple={false}>
+      <GoADropdown
+        label='Fruits'
+        description='Choose your favourite friut.'
+        multiple={false}
+        selectionChanged={() => {}}
+      >
         <GoAOptionGroup label="Group 1">
-          <GoAOption id="apple" label="Apple" defaultSelected></GoAOption>
-          <GoAOption id="pear" label="Pear"></GoAOption>
+          <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
+          <GoAOption value="pear" label="Pear"></GoAOption>
         </GoAOptionGroup>
-        <GoAOption id="banana" label="Banana"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
     expandCollapseDropDown(container);
@@ -102,12 +162,17 @@ describe('GoA Dropdown', () => {
 
   test('Multiselect options being selected', () => {
     const { container } = render(
-      <GoADropdown label='Fruits' description='Choose your favourite friut.' multiple={true}>
+      <GoADropdown
+        label='Fruits'
+        description='Choose your favourite friut.'
+        multiple={true}
+        selectionChanged={() => {}}
+      >
         <GoAOptionGroup label="Group 1">
-          <GoAOption id="apple" label="Apple"></GoAOption>
-          <GoAOption id="pear" label="Pear"></GoAOption>
+          <GoAOption value="apple" label="Apple"></GoAOption>
+          <GoAOption value="pear" label="Pear"></GoAOption>
         </GoAOptionGroup>
-        <GoAOption id="banana" label="Banana"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
     // Get the descripion and check that it is blank since nothing is selected
@@ -126,17 +191,22 @@ describe('GoA Dropdown', () => {
     }
 
     inputText = inputElement.getAttribute('value');
-    expect(inputText == '(3 options selected)').toBeTruthy();
+    expect(inputText == 'Apple, Pear, Banana').toBeTruthy();
   })
 
   test('Displays warning when is required and no items are selected', () => {
     const { container } = render(
-      <GoADropdown label='Fruits' description='Choose your favourite friut.' required={true}>
+      <GoADropdown
+        label='Fruits'
+        description='Choose your favourite friut.'
+        required={true}
+        selectionChanged={() => {}}
+      >
         <GoAOptionGroup label="Group 1">
-          <GoAOption id="apple" label="Apple"></GoAOption>
-          <GoAOption id="pear" label="Pear"></GoAOption>
+          <GoAOption value="apple" label="Apple"></GoAOption>
+          <GoAOption value="pear" label="Pear"></GoAOption>
         </GoAOptionGroup>
-        <GoAOption id="banana" label="Banana"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
     // Expand...
@@ -154,18 +224,25 @@ describe('GoA Dropdown', () => {
 
   });
 
+  // TODO: add tests for initial values to dropdown
+
   test('[selectionChanges] callback is invoked', () => {
     let count: number = 0;
     const selectHandler = (options: DropdownOption[]) => {
       count += 1;
     }
     const { container } = render(
-      <GoADropdown label='Fruits' description='Choose your favourite friut.' multiple={true} selectionChanged={selectHandler}>
+      <GoADropdown
+        label='Fruits'
+        description='Choose your favourite friut.'
+        multiple={true}
+        selectionChanged={selectHandler}
+      >
         <GoAOptionGroup label="Group 1">
-          <GoAOption id="apple" label="Apple"></GoAOption>
-          <GoAOption id="pear" label="Pear"></GoAOption>
+          <GoAOption value="apple" label="Apple"></GoAOption>
+          <GoAOption value="pear" label="Pear"></GoAOption>
         </GoAOptionGroup>
-        <GoAOption id="banana" label="Banana"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
     expandCollapseDropDown(container);
@@ -183,106 +260,108 @@ describe('GoA Dropdown', () => {
   });
 
   test('TypeAhead - startsWith', () => {
-    const { container } = render(
+    const { getByRole, queryAllByRole } = render(
       <GoADropdown
         label="Fruits"
         description="Choose your favourite fruit!"
-        multiple={true}
         typeAheadMode="startsWith"
+        selectionChanged={() => {}}
       >
-        <GoAOptionGroup label="Group 1">
-          <GoAOption id="apple" label="Apple" defaultSelected></GoAOption>
-          <GoAOption id="banana" label="Banana"></GoAOption>
-          <GoAOption id="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
-        </GoAOptionGroup>
-        <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-        <GoAOption id="lemon" label="Lemon"></GoAOption>
-        <GoAOption id="lime" label="Lime" defaultSelected></GoAOption>
         <GoAOptionGroup label="Group 2">
-          <GoAOption id="mango" label="Mango"></GoAOption>
-          <GoAOption id="pineapple" label="Pineapple"></GoAOption>
-          <GoAOption id="plantain" label="Plantain" defaultSelected></GoAOption>
+          <GoAOption value="mango" label="Mango"></GoAOption>
+          <GoAOption value="lime" label="Lime"></GoAOption>
+          <GoAOption value="pineapple" label="Pineapple"></GoAOption>
         </GoAOptionGroup>
+        <GoAOption value="apple" label="Apple"></GoAOption>
+        <GoAOption value="banana" label="Banana"></GoAOption>
+        <GoAOption value="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
+        <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+        <GoAOption value="lemon" label="Lemon"></GoAOption>
       </GoADropdown>
     )
 
     // Find the filter input
-    const filterInputElement = container.querySelector('.dropdown-textbox');
-    expect(filterInputElement).toBeTruthy();
+    const filter = 'l';
+    const searchBox = getByRole('searchbox') as HTMLInputElement;
 
-    const filter = 'bAn'
+    // Open menu
+    userEvent.click(searchBox);
+    expect(searchBox).toBeTruthy();
+    expect(queryAllByRole('listitem').length).toEqual(8);
 
-    // Type the filter condition
-    userEvent.type(filterInputElement, filter);
+    // Enter search text
+    fireEvent.change(searchBox, { target: { value: filter } })
 
     // Get all options currently visible
-    const filteredOptions = container.querySelectorAll('.goa-option');
-    expect(filteredOptions.length === 1).toBeTruthy();
+    const filteredOptions = queryAllByRole('listitem')
+    expect(filteredOptions.length).toEqual(2);
 
     // Check that all options match the filter (startsWith)
-    for (let i = 0; i < filteredOptions.length; i += 1) {
-      const op = filteredOptions.item(i);
-      const text = op.textContent;
-      expect(text.toLocaleLowerCase().startsWith(filter.toLowerCase())).toBeTruthy();
-    }
+    filteredOptions.forEach(option => {
+      const text = option.textContent.toLocaleLowerCase();
+      expect(text.startsWith(filter.toLowerCase())).toBeTruthy();
+    });
   });
 
   test('TypeAhead - contains', () => {
-    const { container } = render(
+    const { getByRole, queryAllByRole } = render(
       <GoADropdown
         label="Fruits"
         description="Choose your favourite fruit!"
-        multiple={true}
         typeAheadMode="contains"
+        selectionChanged={() => {}}
       >
         <GoAOptionGroup label="Group 1">
-          <GoAOption id="apple" label="Apple" defaultSelected></GoAOption>
-          <GoAOption id="banana" label="Banana"></GoAOption>
-          <GoAOption id="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
+          <GoAOption value="apple" label="Apple"></GoAOption>
+          <GoAOption value="banana" label="Banana"></GoAOption>
+          <GoAOption value="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
         </GoAOptionGroup>
-        <GoAOption id="kiwi" label="Kiwi"></GoAOption>
-        <GoAOption id="lemon" label="Lemon"></GoAOption>
-        <GoAOption id="pineapple" label="Pineapple"></GoAOption>
+        <GoAOption value="kiwi" label="Kiwi"></GoAOption>
+        <GoAOption value="lemon" label="Lemon"></GoAOption>
+        <GoAOption value="pineapple" label="Pineapple"></GoAOption>
         <GoAOptionGroup label="Group 2">
-          <GoAOption id="mango" label="Mango"></GoAOption>
-          <GoAOption id="lime" label="Lime" defaultSelected></GoAOption>
-          <GoAOption id="plantain" label="Plantain" defaultSelected></GoAOption>
+          <GoAOption value="mango" label="Mango"></GoAOption>
+          <GoAOption value="lime" label="Lime"></GoAOption>
+          <GoAOption value="plantain" label="Plantain"></GoAOption>
         </GoAOptionGroup>
       </GoADropdown>
     )
 
     // Find the filter input
-    const filterInputElement = container.querySelector('.dropdown-textbox');
-    expect(filterInputElement).toBeTruthy();
+    const filter = 'pp';
+    const searchBox = getByRole('searchbox') as HTMLInputElement;
 
-    const filter = 'pp'
+    // Open menu
+    userEvent.click(searchBox);
+    expect(searchBox).toBeTruthy();
+    expect(queryAllByRole('listitem').length).toEqual(9);
 
-    // Type the filter condition
-    userEvent.type(filterInputElement, filter);
+    // Enter search text
+    fireEvent.change(searchBox, { target: { value: filter } })
 
     // Get all options currently visible
-    const filteredOptions = container.querySelectorAll('.goa-option');
-    expect(filteredOptions.length === 2).toBeTruthy();
+    const filteredOptions = queryAllByRole('listitem')
+    expect(filteredOptions.length).toEqual(2);
 
-    // Check that all options match the filter (contains)
-    for (let i = 0; i < filteredOptions.length; i += 1) {
-      const op = filteredOptions.item(i);
-      const text = op.textContent;
-      expect(text.toLocaleLowerCase().indexOf(filter) >= 0).toBeTruthy();
-    }
+    // Check that all options match the filter (startsWith)
+    filteredOptions.forEach(option => {
+      const text = option.textContent.toLocaleLowerCase();
+      expect(text.includes(filter.toLowerCase())).toBeTruthy();
+    });
   });
 
   test('Dynamic loading', () => {
-    const items = [{ id: 'apple', label: 'Apple' }, { id: 'banana', label: 'Banana' }]
+    const items = [{ value: 'apple', label: 'Apple' }, { value: 'banana', label: 'Banana' }]
     const { container } = render(
       <GoADropdown
         label="Fruits"
         description="Choose your favourite fruit!"
         multiple={false}
         typeAheadMode="none"
+        selectionChanged={() => {}}
       >
         {
-          items.map((i) => <GoAOption key={i.id} id={i.id} label={i.label} />)
+          items.map((i) => <GoAOption key={i.value} value={i.value} label={i.label} />)
         }
       </GoADropdown>
     )
@@ -295,7 +374,6 @@ describe('GoA Dropdown', () => {
     for (let i = 0; i < items.length; i += 1) {
       const op = items[i];
       const label = op.label;
-      console.log('Looking for ' + label);
 
       let foundItem = false;
       for (let j = 0; j < displayedOtions.length; j += 1) {

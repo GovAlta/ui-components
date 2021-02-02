@@ -65,7 +65,7 @@ export default {
     labelPosition: {
       type: String,
       required: false,
-      default: 'before',
+      default: 'after',
       validator: (prop) => ['before', 'after'].includes(prop),
     },
     inputClass: {
@@ -92,10 +92,7 @@ export default {
     },
   },
   created() {
-    if (this.fields.activeValue === null) {
-      this.fields.activeValue = this.defaultValue;
-      this.$emit('change', this.fields.activeValue);
-    }
+    this.fields.activeValue ||= this.defaultValue;
   },
   methods: {
     updateValue(value) {

@@ -1,42 +1,43 @@
 import React, { FC, useState, useContext } from 'react';
 import { DropdownContext, DropdownOption } from '../dropdown.context';
+import classnames from 'classnames'
 
 interface Props {
-  /** value The unique identifier of the element */
-  id: string;
-  /** The description of the option */
+  value: string;
   label: string;
-  /** Indicates if the element is selected by default */
   defaultSelected?: boolean;
 }
 
-export const GoAOption: FC<Props> = ({ id, label, children }) => {
+export const GoAOption: FC<Props> = ({ value, label, children }) => {
   const [isActive, setActive] = useState<string>('');
+  const { filter, matchesFilter, options, updateOption } = useContext(DropdownContext);
 
-  const context = useContext(DropdownContext);
-
-  const toggleSelected = (e: { stopPropagation: () => void; }) => {
+  function selectValue(e: { stopPropagation: () => void; }) {
     e.stopPropagation();
-    context.updateOption(id, new DropdownOption(id, label, context.options[id] ? !context.options[id].selected : true));
-  };
+    updateOption(value, new DropdownOption(value, label, options[value] ? !options[value].selected : true));
+  }
+
+  function rootCss() {
+    return classnames({
+      option: true,
+      selected: options[value] && options[value].selected,
+      isActive
+    })
+  }
 
   return (
-    <DropdownContext.Consumer>
-      {
-        ({ options, filter, matchesFilter }) => ((!filter || matchesFilter(label)) &&
-          (
-            <div className={`option ${options[id] && options[id].selected ? 'selected' : ''} ${isActive}`} onClick={toggleSelected}
-              onMouseEnter={() => { setActive('active'); }}
-              onMouseLeave={() => { setActive(''); }}
-            >
-              <div className="goa-option">
-                {children || label}
-              </div>
-            </div>
-          )
-        )
-      }
-    </DropdownContext.Consumer>
+    matchesFilter(filter, label) &&
+      <div
+        role="listitem"
+        className={rootCss()}
+        onClick={selectValue}
+        onMouseEnter={() => { setActive('active'); }}
+        onMouseLeave={() => { setActive(''); }}
+      >
+        <div className="goa-option">
+          {children || label}
+        </div>
+      </div>
   );
 };
 
