@@ -1,6 +1,6 @@
 import React, { FC, Fragment } from 'react';
-import { GoAHeroBannerContent } from './content/hero-banner-content.component';
-import { GoAHeroBannerLink } from './link/hero-banner-link.component';
+import GoAHeroBannerContent from './content/hero-banner-content.component';
+import GoAHeroBannerLink from './link/hero-banner-link.component';
 import './hero-banner.component.scss';
 
 interface Props {
