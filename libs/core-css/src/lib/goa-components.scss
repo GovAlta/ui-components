@@ -9,6 +9,16 @@ Full system available at https://www.alberta.ca/goa/design-system/
 */
 
 @import './styles/mixin/responsive-breakpoints.scss';
+@import './styles/callout/callout.scss';
+@import './styles/card/card.scss';
+@import './styles/card-group/card-group.scss';
+@import './styles/header/header.scss';
+@import './styles/hero-banner/hero-banner.scss';
+@import './styles/hero-banner/content/hero-banner-content.scss';
+@import './styles/hero-banner/link/hero-banner-link.scss';
+@import './styles/microsite-logo/microsite-logo.scss';
+@import './styles/notification-banner/notification-banner.scss';
+@import './styles/notification/notification.scss';
 
 /******************************************************************************
 * classes
