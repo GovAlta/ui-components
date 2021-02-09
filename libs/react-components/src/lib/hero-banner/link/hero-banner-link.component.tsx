@@ -6,7 +6,7 @@ interface Props {
   linkUrl: string;
 }
 
-export const GoAHeroBannerLink: FC<Props> = ({ linkText, linkUrl }) => {
+const GoAHeroBannerLink: FC<Props> = ({ linkText, linkUrl }) => {
   return linkText && linkUrl ? (
     <div>
       <a className="goa-link-button right-arrow" href={linkUrl} role="link">
@@ -16,3 +16,5 @@ export const GoAHeroBannerLink: FC<Props> = ({ linkText, linkUrl }) => {
     ) : <Fragment></Fragment>
   ;
 };
+
+export default GoAHeroBannerLink;

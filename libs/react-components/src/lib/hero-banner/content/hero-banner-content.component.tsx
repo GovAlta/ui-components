@@ -12,3 +12,5 @@ export const GoAHeroBannerContent: FC<Props> = ({ content, children }) => {
     </p>
   );
 };
+
+export default GoAHeroBannerContent;
