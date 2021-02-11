@@ -52,6 +52,7 @@ $tertiary-focus-outline-color: $active-outline-color;
     border: 2px solid $primary-border-color;
     border-radius: 4px;
 
+    margin: 28px 12px 0 0;
     background: $primary-background-color;
     cursor: pointer;
     color: $button-primary-color;
@@ -62,6 +63,7 @@ $tertiary-focus-outline-color: $active-outline-color;
     &.btn-small {
       font-size: 16px;
       padding: 8px;
+      margin: 12px 12px 0 0;
     }
 
     &:disabled,
@@ -134,11 +136,5 @@ $tertiary-focus-outline-color: $active-outline-color;
   input[type='button'].goa-button,
   input[type='submit'].goa-button {
     @include goa-button-styles();
-
-    margin: 28px 12px 0 0;
-
-    &.btn-small {
-      margin: 12px 12px 0 0;
-    }
   }
 }

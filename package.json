@@ -62,7 +62,7 @@
   },
   "private": true,
   "dependencies": {
-    "@abgov/core-css": "^0.7.5",
+    "@abgov/core-css": "^0.7.51",
     "@angular/cdk": "^10.2.0",
     "@angular/common": "10.1.3",
     "@angular/core": "10.1.3",

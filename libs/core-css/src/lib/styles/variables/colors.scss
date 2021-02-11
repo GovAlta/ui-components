@@ -7,6 +7,7 @@ $goa-white-two: #f1f1f1;
 $goa-white-three: #dcdcdc;
 
 $goa-blue: #0070c4;
+$goa-blue-1dr: #004f84;
 $goa-blue-two: #0081a2;
 $goa-orange: #feba35;
 
@@ -27,7 +28,7 @@ $goa-background-color: $goa-white;
 $goa-background-color-banner: $goa-blue-alberta;
 $goa-background-color-secondary: $goa-white-two;
 $goa-background-color-focus: $goa-white-two;
-$goa-background-color-primary-focus: $goa-black;
+$goa-background-color-primary-focus: $goa-blue-1dr;
 
 $primary: $goa-blue;
 $primary-hover: #004f84;
@@ -36,4 +37,3 @@ $primary-disabled: $goa-white-two;
 $primary-focused: $goa-orange;
 
 $status-error: $primary-focused;
-
