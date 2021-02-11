@@ -54,7 +54,10 @@ A hierarchy of actions provided by buttons.
     {(args) => {
       args.click = function(event) { action('click')(event) }
       return {
-        template: `<button goa-button [buttonSize]="buttonSize" [buttonType]="buttonType" [title]="title" (click)="click($event)">{{content}}</button>`,
+        template: `
+          <button goa-button [buttonSize]="buttonSize" [buttonType]="buttonType" [title]="title" (click)="click($event)">{{content}}</button>
+          <button goa-button [buttonSize]="buttonSize" [buttonType]="buttonType" [title]="title" (click)="click($event)">{{content}}</button>
+        `,
         props: args
       }
     }}
@@ -98,5 +101,3 @@ All button text are in title case, and is ideally limited to one word. If one wo
   dos={'Use one word to explain the function whenever possible, such as "Send," "Search," or "Reset."'}
   donts={'Use all uppercase or all lowercase to label buttons.'}
 />
-
-

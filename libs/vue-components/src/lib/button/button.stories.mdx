@@ -26,10 +26,18 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     {(args, argTypes) => {
       return {
         render: function (createElement) {
-          return createElement(
-            GoAButton, {
-              props: args
-            }
+          return createElement('div', null, [
+            createElement(
+              GoAButton, {
+                props: args
+              }
+            ),
+            createElement(
+              GoAButton, {
+                props: args
+              }
+            )
+            ]
           )
         }
       }

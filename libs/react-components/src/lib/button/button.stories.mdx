@@ -37,15 +37,9 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
 export const Template = (args) => <GoAButton {...args} >{content}</GoAButton>
 
 <Canvas>
-  <Story name="Variants" height={200}
-    args={{
-      buttonType: 'primary',
-      buttonSize: 'normal',
-      content: "Click Me!",
-      tooltip: 'hovering',
-    }}
-  >
-     {Template.bind({})}
+  <Story name="Variants">
+     <GoAButton buttonType="primary">Admin</GoAButton>
+     <GoAButton buttonType="secondary">Application</GoAButton>
   </Story>
 </Canvas>
 
