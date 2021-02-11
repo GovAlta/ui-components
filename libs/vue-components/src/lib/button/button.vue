@@ -1,6 +1,12 @@
 <template>
-  <button role="button" v-on:click="onClickFunction" :class="[buttonClasses, buttonTypeClass]" :title="tooltip" v-once >
-    {{ content }}
+  <button
+    v-once
+    role="button"
+    :class="[buttonClasses, buttonTypeClass]"
+    :title="title"
+    @click="onClickFunction"
+  >
+    <slot />
   </button>
 </template>
 
@@ -14,6 +20,7 @@ export default {
      */
     buttonType: {
       type: String,
+      default: 'primary',
       required: false,
       validator: (value) => {
         return ["primary", "secondary", "tertiary"].includes(value);
@@ -24,6 +31,7 @@ export default {
      */
     buttonSize: {
       type: String,
+      default: 'normal',
       required: false,
       validator: (value) => {
         return ["small", "normal"].includes(value);
@@ -32,20 +40,14 @@ export default {
     /**
      * Text to display when hovering.
      */
-    tooltip: {
+    title: {
       type: String,
+      default: null,
       required: false,
-    },
-    /**
-     * The text to display in the button,
-     */
-    content: {
-      type: String,
-      required: true,
     },
     onClick: {
       type: Function,
-      required: false,
+      required: true,
     }
   },
   data() {
@@ -56,7 +58,7 @@ export default {
     }
   },
   methods: {
-    onClickFunction: function (event) {
+    onClickFunction() {
       this.$emit('click')
     }
   }

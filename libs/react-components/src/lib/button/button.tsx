@@ -7,10 +7,6 @@ type ButtonSize = 'small' | 'normal';
 
 type AppProps = {
   /**
-   * Information to the user goes in the content. Information can include markup
-   */
-  content?: string;
-  /**
    * Type of button
    */
   buttonType?: ButtonType;
@@ -21,28 +17,27 @@ type AppProps = {
   /**
    * Mouseover popup description
    */
-  tooltip?: string;
+  title?: string;
   children?: React.ReactNode;
   [key: string]: any;
 };
 
 export const GoAButton = ({
-  content,
   buttonType = 'primary',
   buttonSize = 'normal',
-  tooltip = null,
+  title = null,
   children = null,
   ...props
 }: AppProps) => {
-  let buttonTypeClass = buttonType === 'primary' ? '' : `goa--${buttonType}`;
+  let btnTypeClass = buttonType === 'primary' ? '' : `goa--${buttonType}`;
+  let btnSize = buttonSize === 'small' ? 'btn-small' : '';
   return (
     <button
-      className={`goa-button ${buttonSize === 'small' ? 'btn-small' : ''
-        } ${buttonTypeClass}`}
-      title={tooltip}
+      className={`goa-button ${btnSize} ${btnTypeClass}`}
+      title={title}
       {...props}
     >
-      {content || children}
+      {children}
     </button>
   );
 };
@@ -50,8 +45,7 @@ export const GoAButton = ({
 GoAButton.propTypes = {
   buttonSize: PropTypes.string,
   buttonType: PropTypes.string,
-  content: PropTypes.string,
-  tooltip: PropTypes.string,
+  title: PropTypes.string,
   children: PropTypes.node,
 };
 

@@ -11,9 +11,14 @@ describe('Goa Vue Button', () => {
   const buttonNormalClassName = 'normal';
   const buttonTooltip = 'hovering';
 
+  const noop = () => {/* noop */};
+
   test('should render the button title', () => {
     const { baseElement } = render(GoAButton, {
-      props: { buttonType: buttonType, buttonSize: buttonSize, content: buttonTitle }
+      props: { buttonType: buttonType, buttonSize: buttonSize, onClick: noop },
+      slots: {
+        default: buttonTitle
+      },
     });
 
     expect(baseElement).toBeTruthy();
@@ -22,7 +27,10 @@ describe('Goa Vue Button', () => {
 
   test('buttonType=primary should render primary styling', () => {
     render(GoAButton, {
-      props: { buttonType: buttonType, buttonSize: buttonSize, content: buttonTitle }
+      props: { buttonType: buttonType, buttonSize: buttonSize, onClick: noop  },
+      slots: {
+        default: buttonTitle
+      },
     });
 
     const button = screen.getByRole('button');
@@ -33,7 +41,10 @@ describe('Goa Vue Button', () => {
 
   test('buttonType=secondary should render secondary styling', () => {
     render(GoAButton, {
-      props: { buttonType: 'secondary', buttonSize: buttonSize, content: buttonTitle }
+      props: { buttonType: 'secondary', buttonSize: buttonSize, onClick: noop  },
+      slots: {
+        default: buttonTitle
+      },
     });
 
     const button = screen.getByRole('button');
@@ -44,7 +55,10 @@ describe('Goa Vue Button', () => {
 
   test('buttonType=tertiary should render tertiary styling', () => {
     render(GoAButton, {
-      props: { buttonType: 'tertiary', buttonSize: buttonSize, content: buttonTitle }
+      props: { buttonType: 'tertiary', buttonSize: buttonSize, onClick: noop  },
+      slots: {
+        default: buttonTitle
+      },
     });
 
     const button = screen.getByRole('button');
@@ -55,7 +69,10 @@ describe('Goa Vue Button', () => {
 
   test('buttonSize unset should render normal styling', () => {
     render(GoAButton, {
-      props: { buttonType: buttonType, buttonSize: 'small', content: buttonTitle }
+      props: { buttonType: buttonType, buttonSize: 'small', onClick: noop  },
+      slots: {
+        default: buttonTitle
+      },
     });
 
     const button = screen.getByRole('button');
@@ -64,7 +81,10 @@ describe('Goa Vue Button', () => {
 
   test('tooltip is set to button title', () => {
     render(GoAButton, {
-      props: { buttonType: 'tertiary', content: buttonTitle, tooltip: buttonTooltip }
+      props: { buttonType: 'tertiary', title: buttonTooltip, onClick: noop  },
+      slots: {
+        default: buttonTitle
+      },
     });
 
     const button = screen.getByRole('button');
