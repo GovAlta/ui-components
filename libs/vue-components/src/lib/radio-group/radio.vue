@@ -4,9 +4,7 @@
       <label class="goa-radio-layout">
         <div
           class="goa-radio-container"
-          :class="
-            options.value === fields.activeValue ? 'goa-radio-selected' : null
-          "
+          :class="options.value === activeValue ? 'goa-radio-selected' : null"
         >
           <input
             type="radio"
@@ -73,26 +71,18 @@ export default {
       default: '',
     },
   },
-  data() {
-    return {
-      fields: {
-        activeValue: null,
-      },
-    };
-  },
   computed: {
+    activeValue() {
+      return this.value || this.defaultValue;
+    },
     rootCssClasses() {
-      this.fields.activeValue = this.value;
       return classnames({
         'goa-radio': true,
         'goa-radio-disabled': this.disabled,
-        'has-error': !this.fields.activeValue && this.required,
+        'has-error': !this.activeValue && this.required,
         'goa-radio-label-before': this.labelPosition === 'before',
       });
     },
-  },
-  created() {
-    this.fields.activeValue ||= this.defaultValue;
   },
   methods: {
     updateValue(value) {
