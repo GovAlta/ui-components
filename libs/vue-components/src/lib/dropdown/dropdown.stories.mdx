@@ -46,7 +46,7 @@ A user input field that allows the user to select from a list of options.
               style: { width: '300px' },
               on: {
                 select: (value) => {
-                  alert('selection changed: ' + value);
+                  action('selection changed')(value);
                 }
               }
             }
@@ -277,7 +277,7 @@ A user input field that allows the user to select from a list of options.
               style: { width: '300px' },
               on: {
                 select: (values) => {
-                  alert('selection changed: ' + value);
+                  action('selection changed')(values);
                 }
               }
             }
