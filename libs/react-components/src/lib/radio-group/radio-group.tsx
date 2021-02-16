@@ -1,29 +1,61 @@
 import React, { Children, useState, ReactNode, FC } from 'react';
 import { Data as RadioItem, LabelPosition } from './radio/radio';
-import GoARadio from './radio/radio';
+import GoARadio, { Props as GoaRadioProps } from './radio/radio';
 import './radio-group.scss';
 
 export * from './radio/radio';
 
 interface Props {
-  // required
+  children?: ReactNode;
+
+  /**
+   * Name of the form value
+   */
   name: string;
 
-  // optional
-  children?: ReactNode;
+  /**
+   * Help text of the radio item
+   */
   helperText?: string;
+
+  /**
+   * List of radio buttons to select
+   */
   items?: RadioItem[];
+
+  /**
+   * Is the radio button selection required.
+   */
   required?: boolean;
+
+  /**
+   * Error messages
+   */
   requiredErrorMessage?: string;
+
+  /**
+   * Title of the radio item
+   */
   title?: string;
 
-  // initial data value
+  /**
+   * Initial data value
+   */
   value?: string;
 
-  // child only attributes
+  /**
+   * Where is the label positioned
+   */
   labelPosition?: LabelPosition;
+
+  /**
+   * Disable radio buttons
+   */
   disabled?: boolean;
 
+  /**
+   * Callback function containing the newly selected value
+   */
   onChange: (value: string) => void;
 }
 
@@ -57,9 +89,10 @@ export const GoARadioGroup: FC<Props> = ({
   function getChildren() {
     if (children) {
       return Children.map(children, (child: any) => {
+        const key = `${childAttrs.name}-${child.props.value}`;
         return React.cloneElement(child, {
           ...childAttrs,
-          key: `${childAttrs.name}-${value}`,
+          key,
           required,
         });
       });

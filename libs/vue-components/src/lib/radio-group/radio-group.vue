@@ -74,7 +74,7 @@ export default {
       required: true,
     },
     /**
-     * where is the label Positioned
+     * Where is the label positioned
      */
     labelPosition: {
       type: String,
@@ -82,6 +82,9 @@ export default {
       default: 'after',
       validator: (prop) => ['before', 'after'].includes(prop),
     },
+    /**
+     * Value of the component
+     */
     value: {
       type: String,
       required: false,
