@@ -3,7 +3,7 @@
     <div v-if="isOpen" ref="overlay" class="dropdown-overlay" @click="toggleOpen"></div>
     <div
       class="goa-dropdown"
-      :class="{ 'single-selection': multiple, 'has-error': requiredError }"
+      :class="{ 'single-selection': multiple, 'has-error': hasError }"
     >
       <label class="dropdown-label" :for="`input-for-${label}`">
         {{ label }}
@@ -52,10 +52,10 @@
           />
         </div>
       </div>
-      <span v-if="showRequiredMessage" role="alert" class="dropdown-label error-text">
+      <span v-if="hasError" role="alert" class="dropdown-label error-text">
         At least one item must be selected.
       </span>
-      <span v-if="!showRequiredMessage && !disabled" class="helper-text">
+      <span v-if="!hasError && !disabled" class="helper-text">
         {{ description }}
       </span>
     </div>
@@ -106,7 +106,7 @@ export default {
       opts: [],
       isOpen: false,
       filter: null,
-      showRequiredMessage: false,
+      hasError: false,
       maxMenuHeight: 0,
     };
   },
@@ -200,7 +200,7 @@ export default {
       // relay selected value to parent
       if (!this.isOpen) {
         this.filter = null
-        this.showRequiredMessage =
+        this.hasError =
           this.required &&
           !this.opts.find((option: Option) => option.selected);
 

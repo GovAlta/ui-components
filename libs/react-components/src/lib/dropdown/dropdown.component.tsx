@@ -104,15 +104,13 @@ export const GoADropdown: FC<Props> = ({
     if (isMultiple()) {
       setOptions({ ...options, [value]: option });
     } else {
-      if (option.selected) {
-        // Unselect all other options
-        Object.entries(options).forEach(([key, item]) => {
-          if (key !== option.value) {
-            item.selected = false;
-          }
-        });
-        option.selected && setOptions({ ...options, [value]: option });
-      }
+      // Unselect all other options
+      Object.entries(options).forEach(([key, item]) => {
+        if (key !== option.value) {
+          item.selected = false;
+        }
+      });
+      setOptions({ ...options, [value]: option });
 
       if (isOpen) {
         toggleOpen()
