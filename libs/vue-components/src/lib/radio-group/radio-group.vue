@@ -17,7 +17,7 @@
       />
     </div>
     <div v-if="hasError()" class="error-text">
-      {{ requiredErrorMessage }}
+      {{ requiredErrorMessage || 'Required' }}
     </div>
   </div>
 </template>
@@ -74,7 +74,7 @@ export default {
       required: true,
     },
     /**
-     * where is the label Positioned
+     * Where is the label positioned
      */
     labelPosition: {
       type: String,
@@ -82,6 +82,9 @@ export default {
       default: 'after',
       validator: (prop) => ['before', 'after'].includes(prop),
     },
+    /**
+     * Value of the component
+     */
     value: {
       type: String,
       required: false,
@@ -90,7 +93,7 @@ export default {
   },
   methods: {
     hasError() {
-      return this.requiredErrorMessage && this.required && !this.selectedValue;
+      return this.required && !this.selectedValue;
     },
     onChangeResponse(event) {
       this.selectedValue = event;

@@ -68,9 +68,14 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
       return {
         components: { GoACheckbox },
         render: function (createElement) {
-          return createElement(GoACheckbox, {
-            props: args,
-          });
+          return createElement('div', null, [
+            createElement(GoACheckbox, {
+              props: args,
+            }),
+            createElement(GoACheckbox, {
+              props: args,
+            }),
+          ])
         },
       };
     }}

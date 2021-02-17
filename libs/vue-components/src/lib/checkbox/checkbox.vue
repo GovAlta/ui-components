@@ -41,9 +41,9 @@
           <rect width="15" height="2" />
         </svg>
       </div>
-      <span class="goa-checkbox-label">
+      <div class="goa-checkbox-label">
         {{ content }}
-      </span>
+      </div>
     </label>
   </div>
 </template>

@@ -10,12 +10,6 @@ import {
 
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
-const content = (
-  <div>
-    Information to the user goes in the content. Information can include{' '}
-    <b>markup</b> as desired.
-  </div>
-);
 
 <Meta
   title="React/Components/Card"
@@ -66,16 +60,14 @@ export const footerTemplate = (args) => {
       <GoAButton
         buttonType="tertiary"
         buttonSize="small"
-        content="Action1"
         tooltip="Hovering over"
-        onClick={() => alert('Card button function is working')}
-      />
+        onClick={() => action('Card button function is working')()}
+      >Action 1</GoAButton>
       <GoAButton
         buttonType="tertiary"
         buttonSize="small"
-        content="Action2"
         tooltip="Hovering over"
-      />
+      >Action 2</GoAButton>
     </GoACard>
   );
 };
@@ -88,17 +80,15 @@ export const layoutTemplate = (args) => {
           <GoAButton
             buttonType="tertiary"
             buttonSize="small"
-            content="Action1"
             tooltip="Hovering over"
-            onClick={() => alert('Card button function is working')}
+            onClick={() => action('Card button function is working')()}
             style={{ marginRight: 20, marginBottom: 20 }}
-          />
+          >Action 1</GoAButton>
           <GoAButton
             buttonType="tertiary"
             buttonSize="small"
-            content="Action2"
             tooltip="Hovering over"
-          />
+          >Action 2</GoAButton>
         </GoACard>
       </div>
       <div style={{ marginRight: 20 }}>
@@ -282,15 +272,18 @@ export const layoutTemplate = (args) => {
   ,
   titleUrl="http://www.google.ca"
 >
-  <GoAButton buttonType="tertiary" buttonSize="small" content="Action1"
-  tooltip="Hovering over" onClick={() => alert('Card button function is
-  working')} style={{ marginRight: 20, marginBottom: 20 }} />
   <GoAButton
     buttonType="tertiary"
     buttonSize="small"
-    content="Action2"
     tooltip="Hovering over"
-  />
+    onClick={() => alert('Card button function is working')}
+    style={{ marginRight: 20, marginBottom: 20 }}
+    >Action 1</GoAButton>
+  <GoAButton
+    buttonType="tertiary"
+    buttonSize="small"
+    tooltip="Hovering over"
+  >Action 1</GoAButton>
 </GoACard>
 ```
 

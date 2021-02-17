@@ -14,7 +14,9 @@ export const GoAOption: FC<Props> = ({ value, label, children }) => {
 
   function selectValue(e: { stopPropagation: () => void; }) {
     e.stopPropagation();
-    updateOption(value, new DropdownOption(value, label, options[value] ? !options[value].selected : true));
+    const selected = !options[value].selected;
+    const dropdown = new DropdownOption(value, label, selected);
+    updateOption(value, dropdown);
   }
 
   function rootCss() {

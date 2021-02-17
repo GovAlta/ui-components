@@ -31,14 +31,6 @@ export const TemplateBasic = (args) => (
   </GoARadioGroup>
 );
 
-export const TemplateMinimal = () => (
-  <GoARadioGroup name="minimal-fruits">
-    <GoARadio value="apple">apple</GoARadio>
-    <GoARadio value="orange">orange</GoARadio>
-    <GoARadio value="banana">banana</GoARadio>
-  </GoARadioGroup>
-);
-
 export const TemplateDynamic = (args) => (
   <GoARadioGroup {...args}></GoARadioGroup>
 );
@@ -101,12 +93,13 @@ export const TemplateDynamic = (args) => (
     name="Minimal"
     height={200}
     args={{
+      name: 'Minimal',
       onChange: (value) => {
         action('selection changed')(value);
       },
     }}
   >
-    {TemplateMinimal.bind({})}
+    {TemplateBasic.bind({})}
   </Story>
 </Canvas>
 

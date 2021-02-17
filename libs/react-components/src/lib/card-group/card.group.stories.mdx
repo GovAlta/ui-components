@@ -50,18 +50,16 @@ export const groupTemplate = (args) => {
         cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
       >
         <GoAButton
-          buttonType="tertiary"
+          buttonType="primary"
           buttonSize="small"
-          content="Action1"
           tooltip="Hovering over"
-          onClick={() => alert('Card button function is working')}
-        />
+          onClick={() => action('Card button function is working')()}
+        >Action 1</GoAButton>
         <GoAButton
           buttonType="tertiary"
           buttonSize="small"
-          content="Action2"
           tooltip="Hovering over"
-        />
+        >Action 2</GoAButton>
       </GoACard>
       <GoACard
         title="Energy Diversification Act 2"
@@ -116,7 +114,7 @@ export const groupTemplate = (args) => {
   <Story
     name="CardItems"
     args={{
-      title: 'Card gourp Title',
+      title: 'Card group Title',
       layout: 'basic',
       cardItems: [
         {

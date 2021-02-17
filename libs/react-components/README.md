@@ -4,7 +4,7 @@ This library contains react components from the Government of Alberta.
 
 ## Installation
 
-1. Add @abgov/react-components  
+1. Add @abgov/react-components
    `npm add --save @abgov/react-components`
 2. OPTIONAL: in package.json specify the allowed versions for installation
 3. Add peer dependencies
@@ -31,10 +31,9 @@ function App() {
           <GoAButton
             buttonType="primary"
             buttonSize="normal"
-            content="Click Me!"
             toolTip="Hovering"
             onClick={()=> alert("You have clicked the button")}
-          />
+          >Click Me!</GoAButton>
           <GoAButton
             buttonType="primary"
             buttonSize="normal"

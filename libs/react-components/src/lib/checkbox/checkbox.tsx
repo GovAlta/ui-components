@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './checkbox.scss';
+import classNames from 'classnames';
 
 type LabelPosition = "before" | "after";
 
@@ -69,32 +70,49 @@ export const GoACheckbox = ({checked = false, required = false, disabled = false
     setLastChecked(indeterminate === true ? 'indeterminate' : 'checked')
   }
 
+  const rootCss = (): string => {
+    return classNames({
+      'goa-checkbox': true,
+      'goa-checkbox-disabled': disabled,
+      'has-error': hasError(),
+      'goa-checkbox-label-before': labelPosition === 'before'
+    })
+  };
+
+  const checkboxCss = (): string => {
+    return classNames({
+      'goa-checkbox-container': true,
+      'goa-checkbox-selected': checkedBox && lastChecked === 'checked',
+      'goa-checkbox-indeterminate': indeterminateCheck && lastChecked === 'indeterminate'
+    })
+  };
+
   return (
-    <div className={`goa-checkbox ${disabled && 'goa-checkbox-disabled'} ${hasError() && 'has-error'} ${labelPosition === 'before' && 'goa-checkbox-label-before'}`}>
+    <div className={rootCss()}>
       <label className="goa-checkbox-layout">
-          <div className={`goa-checkbox-container ${checkedBox && lastChecked === 'checked' && 'goa-checkbox-selected'} ${indeterminateCheck && lastChecked === 'indeterminate' && 'goa-checkbox-indeterminate'}` }>
-              <input
-                type="checkbox"
-                checked={checkedBox}
-                disabled={disabled}
-                required={required}
-                value={content}
-                onChange={() => checkboxHandler()}
-              />
-              { indeterminateCheck && lastChecked === 'indeterminate' && (
-                <svg id='dashmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2" className="goa-indeterminate">
-                    <rect width="15" height="2"/>
-                </svg>
-              )}
-              { checkedBox && lastChecked === 'checked' && (
-                <svg id='checkmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18" className="goa-checkmark">
-                    <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z"/>
-                </svg>
-              )}
-          </div>
-          <span className="goa-checkbox-label">
-              {content || children}
-          </span>
+        <div className={checkboxCss()}>
+          <input
+            type="checkbox"
+            checked={checkedBox}
+            disabled={disabled}
+            required={required}
+            value={content}
+            onChange={() => checkboxHandler()}
+          />
+          { indeterminateCheck && lastChecked === 'indeterminate' && (
+            <svg id='dashmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2" className="goa-indeterminate">
+                <rect width="15" height="2"/>
+            </svg>
+          )}
+          { checkedBox && lastChecked === 'checked' && (
+            <svg id='checkmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18" className="goa-checkmark">
+                <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z"/>
+            </svg>
+          )}
+        </div>
+        <span className="goa-checkbox-label">
+            {content || children}
+        </span>
       </label>
     </div>
   );

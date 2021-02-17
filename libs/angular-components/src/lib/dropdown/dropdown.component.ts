@@ -305,7 +305,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
       selectedOptions = this.selectedItems;
     }
     else {
-      option.selected = true;
+      option.selected = !option.selected;
       this.selectedItems.forEach((o) => {
         if(option.id !== o.id) {
           // change all options that weren't selected to false without notifying change

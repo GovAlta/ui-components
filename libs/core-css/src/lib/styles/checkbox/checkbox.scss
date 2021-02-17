@@ -2,6 +2,7 @@
 @import '../mixin/svg/checkmark.scss';
 
 $goa-checkbox-size: 24px;
+$goa-checkbox-target-size: 46px;
 
 @mixin goa-checkbox-styles {
   //basically we are hiding the native checkbox here
@@ -24,6 +25,9 @@ $goa-checkbox-size: 24px;
   padding: 0 0 0 8px;
   cursor: pointer;
   user-select: none;
+  height: $goa-checkbox-target-size;
+  display: flex;
+  align-items: center;
 }
 
 @mixin goa-checkbox {
@@ -58,12 +62,13 @@ $goa-checkbox-size: 24px;
 @mixin goa-checkbox-container {
   // this provides our 'square' for the checkbox so we can style it (input checkboxes cant be styled nicely)
   .goa-checkbox-container {
-    z-index: 2;
+    // z-index: 2;
     box-sizing: border-box;
-    margin: 0;
+    // margin: 0;
     border: 1px solid $goa-border-color;
     border-radius: 2px;
     height: $goa-checkbox-size;
+    line-height: $goa-checkbox-size;
     width: $goa-checkbox-size;
     display: flex;
     flex-direction: column;
@@ -72,12 +77,12 @@ $goa-checkbox-size: 24px;
 
     svg {
       display: none;
+      flex: 1 1 auto;
       fill: $goa-text-color-inverse;
     }
 
     &.goa-checkbox-selected {
       background-color: $primary;
-
       // use !important to ensure 'checked' overrides 'indetminant'
       .goa-checkmark {
         display: block !important;
@@ -126,8 +131,7 @@ $goa-checkbox-size: 24px;
   }
 
   .goa-checkbox-layout {
-    display: flex;
-    flex-direction: row;
+    display: inline-flex;
     align-items: center;
   }
 }
