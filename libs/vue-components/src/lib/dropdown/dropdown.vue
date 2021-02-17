@@ -31,7 +31,7 @@
         <input
           v-if="isOpen"
           :id="`input-for-${label}`"
-          :placeholder="description"
+          :placeholder="selectedStatus || description"
           :readOnly="typeAheadMode === 'none'"
           role="search"
           class="dropdown-textbox margin-override"
