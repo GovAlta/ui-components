@@ -10,6 +10,8 @@ import GoaHeroBannerLink from './lib/hero-banner/link/hero-banner-link.component
 import GoACard from './lib/card/card.component';
 import GoARadioGroup from './lib/radio-group/radio-group';
 import GoACardGroup from './lib/card-group/card.group.component';
+import GoADropdown from './lib/dropdown/dropdown.component';
+import GoACheckbox from './lib/checkbox/checkbox';
 
 export {
   GoANotification,
@@ -22,5 +24,7 @@ export {
   GoaHeroBannerContent,
   GoaHeroBannerLink,
   GoACard,
-  GoACardGroup
+  GoACardGroup,
+  GoADropdown,
+  GoACheckbox
 };
