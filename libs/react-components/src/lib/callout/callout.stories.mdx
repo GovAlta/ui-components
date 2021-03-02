@@ -12,7 +12,7 @@ const content = <div>Information to the user goes in the content. Information ca
     type: {
       control: {
         type: 'select',
-        options: ['important', 'information', 'event', 'emergency'],
+        options: ['important', 'information', 'event', 'emergency', 'success', 'error'],
       },
     },
     title: {
@@ -51,14 +51,14 @@ export const Template = (args) => <GoACallout {...args} >{content}</GoACallout>
 
 ```html
 <GoACallout
-  type="'important || 'information' || 'event' || 'emergency'",
+  type="'important || 'information' || 'event' || 'emergency' || 'success' || 'error'",
   title='Callout Title',
   content="Information to the user goes in the content"
 </>
 ```
 
 or
- 
+
 ```html
 <GoACallout
   type='information',
