@@ -10,7 +10,14 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     calloutType: {
       control: {
         type: 'select',
-        options: ['important', 'information', 'event', 'emergency'],
+        options: [
+          'important',
+          'information',
+          'event',
+          'emergency',
+          'success',
+          'error',
+        ],
       },
     },
   }}
@@ -57,7 +64,10 @@ layout as a container.
 ```
 <template>
   <div id="app">
-    <goa-callout title="CalloutTitle" content="Information to the user goes in the content" calloutType="'important || 'information' || 'event' || 'emergency'"/>
+    <goa-callout
+        title="CalloutTitle"
+        content="Information to the user goes in the content"
+        calloutType="'important || 'information' || 'event' || 'emergency' || 'success' || 'error'"/>
   </div>
 </template>
 

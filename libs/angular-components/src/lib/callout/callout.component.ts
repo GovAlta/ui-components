@@ -12,19 +12,19 @@ export class GoACalloutComponent implements OnInit {
   /**
    * The type of the callout, changes stylings and icons.
    */
-  @Input() type: 'important' | 'information' | 'event' | 'emergency' = 'information';
+  @Input() type: 'important' | 'information' | 'event' | 'success' | 'error' | 'emergency' = 'information';
 
   /**
-   * The title of callout 
+   * The title of callout
    */
-  @Input() title: string; 
+  @Input() title: string;
   constructor() { }
 
   /**
    * @ignore
    */
   ngOnInit(): void {
-    if(this.title === undefined || this.title === null) {
+    if (this.title === undefined || this.title === null) {
       throw new TypeError(`Input 'title' is required.`);
     }
   }

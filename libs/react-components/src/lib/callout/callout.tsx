@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../../theme.scss';
 import '../../../../core-css/src/lib/styles/callout/callout.scss'
 
-type calloutType = "important" | 'information' | 'event' | 'emergency';
+type calloutType = "important" | 'information' | 'event' | 'success' | 'error' | 'emergency';
 
 export interface CalloutProps {
   /**
@@ -21,15 +21,15 @@ export interface CalloutProps {
   children?: React.ReactNode,
 }
 
-export const GoACallout = ({ title, type = "information", content, children = null, ...props }:CalloutProps) => {
+export const GoACallout = ({ title, type = "information", content, children = null, ...props }: CalloutProps) => {
   return (
     <div>
       <div className={`goa-callout goa--${type}`}>
-        <div>        
-            <h3>{title}</h3>
-            <div className="messages">
-              {content || children}
-            </div>
+        <div>
+          <h3>{title}</h3>
+          <div className="messages">
+            {content || children}
+          </div>
         </div>
       </div>
     </div>

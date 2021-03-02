@@ -3,6 +3,8 @@
 @import '../mixin/svg/warning.scss';
 @import '../mixin/svg/error.scss';
 @import '../mixin/svg/information.scss';
+@import '../mixin/svg/success.scss';
+@import '../mixin/svg/error-x.scss';
 
 .goa-callout {
   box-sizing: border-box;
@@ -38,6 +40,14 @@
     border-color: #EC040B;
   }
 
+  &.goa--error {
+    border-color: #EC040B;
+  }
+
+  &.goa--success{
+    border-color: #00853f;
+  }
+
   &:before {
     position: absolute;
     top: 28px;
@@ -53,12 +63,24 @@
     @include error;
   }
 
+  &.goa--error:before {
+    @include error-x;
+  }
+
   &.goa--important:before {
     @include warning;
   }
 
   &.goa--event:before {
     @include calendar;
+  }
+
+  &.goa--event:before {
+    @include calendar;
+  }
+
+  &.goa--success:before {
+    @include success;
   }
 
   .messages {
