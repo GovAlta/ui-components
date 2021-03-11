@@ -12,7 +12,7 @@ export class GoACalloutComponent implements OnInit {
   /**
    * The type of the callout, changes stylings and icons.
    */
-  @Input() type: 'important' | 'information' | 'event' | 'success' | 'error' | 'emergency' = 'information';
+  @Input() type: 'important' | 'information' | 'event' | 'success' | 'emergency' = 'information';
 
   /**
    * The title of callout

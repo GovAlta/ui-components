@@ -1,15 +1,16 @@
-<div class="goa-callout"
-    [ngClass]="{
-        'goa--event': type === 'event',
-        'goa--important': type === 'important',
-        'goa--emergency': type === 'emergency',
-        'goa--success': type === 'success',
-        'goa--error': type === 'error'
-        }">
-    <div>
-        <h3>{{title}}</h3>
-        <div class="messages">
-            <ng-content></ng-content>
-        </div>
+<div
+  class="goa-callout"
+  [ngClass]="{
+    'goa--event': type === 'event',
+    'goa--important': type === 'important',
+    'goa--emergency': type === 'emergency',
+    'goa--success': type === 'success'
+  }"
+>
+  <div>
+    <h3>{{ title }}</h3>
+    <div class="messages">
+      <ng-content></ng-content>
     </div>
   </div>
+</div>
