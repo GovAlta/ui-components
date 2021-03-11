@@ -26,7 +26,7 @@ export default {
     calloutType:{
       type: String,
       validator: (prop) => [
-      'important', 'information' , 'event' , 'emergency', 'success', 'error'
+      'important', 'information' , 'event' , 'emergency', 'success'
       ].includes(prop)
     },
     /**
