@@ -1,5 +1,9 @@
 module.exports = {
-    stories: ['../src/lib/**/*.stories.mdx', '../../shared/storybook-common/src/lib/**/*.stories.mdx'],
+    stories: [
+      '../src/lib/**/*.stories.mdx', 
+      '../src/experimental/**/*.stories.mdx', 
+      '../../shared/storybook-common/src/lib/**/*.stories.mdx'
+    ],
     addons: [
       '@storybook/addon-docs/preset',
       '@storybook/addon-backgrounds',

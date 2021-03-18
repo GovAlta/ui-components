@@ -17,3 +17,5 @@ export * from './lib/radio/radio.component';
 export * from './lib/radio/radio-change';
 export * from './lib/radio/radio.service';
 export * from './lib/radio-group/radio-group.component';
+
+export * from './experimental';

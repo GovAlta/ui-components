@@ -22,5 +22,6 @@ export {
   GoARadioGroup,
   GoAHeroBanner,
   GoANotificationBanner,
-  GoADropdown, GoADropdownOption,
+  GoADropdown, 
+  GoADropdownOption,
 };
