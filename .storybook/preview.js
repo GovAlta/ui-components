@@ -5,5 +5,6 @@ addParameters({
   docs: {
     container: DocsContainer,
     page: DocsPage
-  }
+  },
+  viewMode: 'docs'
 });
