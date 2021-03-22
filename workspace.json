@@ -415,6 +415,16 @@
           }
         },
         "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "parallel": false,
+            "commands": [
+              "nx run react-components:build-lib",
+              "nx run react-components:build-experimental"
+            ]
+          }
+        },
+        "build-lib": {
           "builder": "@nrwl/web:package",
           "options": {
             "outputPath": "dist/libs/react-components",
@@ -431,6 +441,19 @@
                 "output": "."
               }
             ]
+          }
+        },
+        "build-experimental": {
+          "builder": "@nrwl/web:package",
+          "options": {
+            "outputPath": "dist/libs/react-components/experimental",
+            "tsConfig": "libs/react-components/tsconfig.lib-exp.json",
+            "project": "libs/react-components/package.exp.json",
+            "entryFile": "libs/react-components/src/experimental/index.ts",
+            "external": ["react", "react-dom"],
+            "babelConfig": "@nrwl/react/plugins/bundle-babel",
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": []
           }
         },
         "build-storybook": {
