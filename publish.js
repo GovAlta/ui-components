@@ -1,6 +1,5 @@
 const fs = require('fs');
-const readPkg = require('read-pkg');
-const writePkg = require('write-pkg');
+
 const {
   argv: { path },
 } = require('yargs'); //support for single dependency for now
