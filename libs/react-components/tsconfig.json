@@ -6,17 +6,20 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
-  "files": [],
+  "files": [
+    "../../node_modules/@nrwl/react/typings/cssmodule.d.ts",
+    "../../node_modules/@nrwl/react/typings/image.d.ts"
+  ],
   "include": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"
     },
     {
-      "path": "./tsconfig.spec.json"
+      "path": "./tsconfig.lib-exp.json"
     },
     {
-      "path": "./.storybook/tsconfig.json"
+      "path": "./tsconfig.spec.json"
     },
     {
       "path": "./.storybook/tsconfig.json"

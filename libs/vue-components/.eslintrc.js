@@ -1,6 +1,6 @@
 module.exports = {
   extends: [
-    '../../.eslintrc',
+    '../../.eslintrc.json',
     'plugin:vue/recommended',
     '@vue/typescript/recommended'
   ],
