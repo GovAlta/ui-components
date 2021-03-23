@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { render, screen, fireEvent } from '@testing-library/angular';
 import { GoARadioComponent, GOA_RADIO_CONTROL_VALUE_ACCESSOR } from '../radio/radio.component';
 import { GoARadioService } from '../radio/radio.service';
