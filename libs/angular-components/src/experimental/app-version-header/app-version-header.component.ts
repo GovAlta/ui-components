@@ -7,9 +7,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GoAAppVersionHeaderComponent implements OnInit {
-  @Input() isProdEnvironment: boolean = false;
-  @Input() environment: string = '';
-  @Input() version: string = '';
+  @Input() isProdEnvironment = false;
+  @Input() environment = '';
+  @Input() version = '';
 
   @Output() closed = new EventEmitter<boolean>();
 
