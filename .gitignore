@@ -89,3 +89,5 @@ libs/angular-material-components/documentation.json
 /samples/core/package-lock.json
 /samples/vue/package-lock.json
 /.vs
+
+tmp

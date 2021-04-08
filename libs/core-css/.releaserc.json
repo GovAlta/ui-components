@@ -1,0 +1,24 @@
+{
+  "extends": "../../.releaserc.json",
+  "tagFormat": "core-css-v${version}",
+  "plugins": [
+    [
+      "@abgov/nx-release",
+      {
+        "project": "core-css"
+      }
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "dist/libs/core-css"
+      }
+    ],
+    [
+      "@semantic-release/gitlab",
+      {
+        "gitlabUrl": "https://gitlab.gov.ab.ca"
+      }
+    ]
+  ]
+}
