@@ -86,6 +86,12 @@
               "quiet": true
             }
           }
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "npx semantic-release -e ./libs/core-css/.releaserc.json"
+          }
         }
       }
     },
@@ -162,6 +168,12 @@
             "ci": {
               "quiet": true
             }
+          }
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "npx semantic-release -e ./libs/angular-components/.releaserc.json"
           }
         }
       },
@@ -262,6 +274,12 @@
             "ci": {
               "quiet": true
             }
+          }
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "npx semantic-release -e ./libs/vue-components/.releaserc.json"
           }
         }
       },
@@ -364,6 +382,12 @@
             "ci": {
               "quiet": true
             }
+          }
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "npx semantic-release -e ./libs/angular-material-components/.releaserc.json"
           }
         }
       },
@@ -470,6 +494,12 @@
             "ci": {
               "quiet": true
             }
+          }
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "npx semantic-release -e ./libs/react-components/.releaserc.json"
           }
         }
       }

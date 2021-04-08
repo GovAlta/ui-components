@@ -1,8 +1,7 @@
 {
   "name": "@abgov/core-css",
-  "version": "0.7.52",
-  "license": "MIT",
-  "description": "Government of Alberta - CSS, SVG, and JavaScript for HTML",
+  "version": "0.0.0",
+  "description": "Government of Alberta - DIO - Shared CSS, SVG, and JavaScript for HTML",
   "bugs": {
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues"
   },

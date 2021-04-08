@@ -1,7 +1,7 @@
 {
   "name": "@abgov/vue-components",
-  "version": "0.7.53",
-  "description": "Government of Alberta - DIO - vuejs shared ui components",
+  "version": "0.0.0",
+  "description": "Government of Alberta - DIO - Shared UI components for Vue.js",
   "bugs": {
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues"
   },

@@ -2,6 +2,7 @@
 // The pipeline does not use SCM and this file maintained here for reference only.
 def baseCommand = "--base=origin/master --head=HEAD"
 def push_sha
+def deployStorybook = false
 
 pipeline {
   options {
@@ -14,13 +15,13 @@ pipeline {
   }
   parameters {
     string(
-      name: 'source_repo', 
-      defaultValue: 'https://gitlab.gov.ab.ca/dio/core/ui-components.git', 
+      name: 'source_repo',
+      defaultValue: 'https://gitlab.gov.ab.ca/dio/core/ui-components.git',
       description: 'Repo url.'
     )
     string(
-      name: 'source_ref', 
-      defaultValue: 'refs/heads/master', 
+      name: 'source_ref',
+      defaultValue: 'refs/heads/master',
       description: 'Ref to build.'
     )
   }
@@ -46,15 +47,15 @@ pipeline {
       steps {
         checkout(
           [
-            $class: 'GitSCM', 
+            $class: 'GitSCM',
             branches: [[
               name: push_sha ?: source_ref
-            ]], 
-            doGenerateSubmoduleConfigurations: false, 
-            extensions: [], 
-            submoduleCfg: [], 
+            ]],
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [],
+            submoduleCfg: [],
             userRemoteConfigs: [[
-              credentialsId: 'ui-components-dev-git-pull-secret', 
+              credentialsId: 'ui-components-dev-git-pull-secret',
               url: "${source_repo}"
             ]]
           ]
@@ -123,7 +124,7 @@ pipeline {
     }
   }
   post {
-    failure { 
+    failure {
       slackSend color: "bad", message: "UI Components branch ${source_ref} build ${env.BUILD_NUMBER} Failed: ${env.BUILD_URL}"
     }
   }

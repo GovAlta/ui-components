@@ -97,7 +97,7 @@ pipeline {
             script {
               openshift.withCluster() {
                 openshift.withProject(ocProject) {
-                  openshift.tag('ui-components:latest', 'ui-components:dev') 
+                  openshift.tag('ui-components:latest', 'ui-components:dev')
                 }
               }
             }
@@ -117,7 +117,7 @@ pipeline {
       post {
         success {
           slackSend (
-            color: 'good', 
+            color: 'good',
             message: "UI Components pipeline build ${env.BUILD_NUMBER} ready for promotion to Test: ${env.BUILD_URL}"
           )
         }
@@ -137,7 +137,7 @@ pipeline {
             script {
               openshift.withCluster() {
                 openshift.withProject(ocProject) {
-                  openshift.tag('ui-components:dev', 'ui-components:test') 
+                  openshift.tag('ui-components:dev', 'ui-components:test')
                 }
               }
             }
@@ -153,19 +153,11 @@ pipeline {
             }
           }
         }
-        stage('Publish to npm'){
-          when {
-            expression { publishNpm == true }
-          }
-          steps {
-            sh 'npm run semantic-delivery -- --dry-run'
-          }
-        }
       }
       post {
         success {
           slackSend (
-            color: 'good', 
+            color: 'good',
             message: "UI Components pipeline build ${env.BUILD_NUMBER} ready for promotion to Production: ${env.BUILD_URL}"
           )
         }
@@ -185,7 +177,7 @@ pipeline {
             script {
               openshift.withCluster() {
                 openshift.withProject(ocProject) {
-                  openshift.tag('ui-components:test', 'ui-components:prod') 
+                  openshift.tag('ui-components:test', 'ui-components:prod')
                 }
               }
             }
@@ -205,13 +197,12 @@ pipeline {
           when {
             expression { publishNpm == true }
           }
-          environment { 
-            PUBLISH_GITLAB_TOKEN = credentials('ui-components-dev-lib-publish-gitlab-token')
-            PUBLISH_NPM_TOKEN = credentials('ui-components-dev-lib-publish-npm-token')
+          environment {
+            GITLAB_TOKEN = credentials('ui-components-dev-lib-publish-gitlab-token')
+            NPM_TOKEN = credentials('ui-components-dev-lib-publish-npm-token')
           }
           steps {
-            sh "npm run semantic-delivery -- --token ${PUBLISH_GITLAB_TOKEN}"
-            sh "env NPM_TOKEN=${PUBLISH_NPM_TOKEN} npm run publish:npm"
+            sh "npx nx affected --target=release ${baseCommand}"
           }
         }
       }
@@ -221,7 +212,7 @@ pipeline {
     success {
       slackSend color: 'good', message: "UI Components pipeline build ${env.BUILD_NUMBER} Completed."
     }
-    failure { 
+    failure {
       slackSend color: 'bad', message: "UI Components pipeline build ${env.BUILD_NUMBER} Failed: ${env.BUILD_URL}"
     }
   }
