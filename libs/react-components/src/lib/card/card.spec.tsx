@@ -37,34 +37,9 @@ describe('GoA Card', () => {
     expect(cardImageImg).not.toBeNull();
   });
 
-  it('if use auto layout, should render as auto selected', () => {
-    render(
-      <GoACard title={title} cardImageUrl={cardImageUrl} cardWidth="auto" />
-    );
-    const container = document.querySelector('.goa-card ');
-    expect(container).not.toBeNull();
-
-    expect(container.classList).toHaveLength(1);
-    const style = window.getComputedStyle(container);
-    expect(style.width).toBe('auto');
-  });
-
-  it('if use full layout, should render as full width', () => {
-    render(
-      <GoACard title={title} cardImageUrl={cardImageUrl} cardWidth="full" />
-    );
-    const container = document.querySelector('.goa-card ');
-    expect(container).not.toBeNull();
-
-    expect(container.classList).toHaveLength(1);
-    const style = window.getComputedStyle(container);
-
-    expect(style.width).toBe('');
-  });
-
   it('if use customer input layout, should render as fixed width', () => {
     render(
-      <GoACard title={title} cardImageUrl={cardImageUrl} cardWidth={200} />
+      <GoACard title={title} cardImageUrl={cardImageUrl} maxWidth={200} />
     );
     const container = document.querySelector('.goa-card ');
     expect(container).not.toBeNull();
@@ -72,6 +47,6 @@ describe('GoA Card', () => {
     expect(container.classList).toHaveLength(1);
     const style = window.getComputedStyle(container);
 
-    expect(style.width).toBe('200px');
+    expect(style['max-width']).toBe('200px');
   });
 });
