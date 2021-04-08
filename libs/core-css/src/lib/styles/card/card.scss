@@ -12,7 +12,7 @@
 
   .card-content {
     box-sizing: border-box;
-    padding: 24px 28px;
+    padding: 24px 16px;
 
     flex: 1 0 0;
     display: flex;
@@ -44,9 +44,11 @@
       line-height: 28px;
       display: inline-flex;
       flex-wrap: wrap;
-    }
-    .goa-footer > div {
-      margin: 0 10px;
+      justify-content: flex-end;
+
+      > *:last-of-type {
+        margin-right: 0;
+      }
     }
     .goa-title {
       box-sizing: border-box;

@@ -20,6 +20,11 @@ import { DoDont } from '@abgov/shared/storybook-common';
         type: 'text',
       },
     },
+    content: {
+      control: {
+        type: 'text',
+      },
+    },
     description: {
       control: {
         type: 'text',
@@ -62,38 +67,43 @@ export const footerTemplate = (args) => {
         buttonSize="small"
         tooltip="Hovering over"
         onClick={() => action('Card button function is working')()}
-      >Action 1</GoAButton>
+      >
+        Action 1
+      </GoAButton>
       <GoAButton
         buttonType="tertiary"
         buttonSize="small"
         tooltip="Hovering over"
-      >Action 2</GoAButton>
+      >
+        Action 2
+      </GoAButton>
     </GoACard>
   );
 };
 
 export const layoutTemplate = (args) => {
   return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ marginRight: 20 }}>
-        <GoACard {...args} cardWidth={200}>
-          <GoAButton
-            buttonType="tertiary"
-            buttonSize="small"
-            tooltip="Hovering over"
-            onClick={() => action('Card button function is working')()}
-            style={{ marginRight: 20, marginBottom: 20 }}
-          >Action 1</GoAButton>
-          <GoAButton
-            buttonType="tertiary"
-            buttonSize="small"
-            tooltip="Hovering over"
-          >Action 2</GoAButton>
-        </GoACard>
-      </div>
-      <div style={{ marginRight: 20 }}>
-        <GoACard {...args} cardWidth={500} />
-      </div>
+    <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', columnGap: '8px' }}>
+      <GoACard {...args}>
+        <GoAButton
+          buttonType="tertiary"
+          buttonSize="small"
+          tooltip="Hovering over"
+          onClick={() => action('Card button function is working')()}
+        >
+          Action 1
+        </GoAButton>
+        <GoAButton
+          buttonType="tertiary"
+          buttonSize="small"
+          tooltip="Hovering over"
+        >
+          Action 2
+        </GoAButton>
+      </GoACard>
+      <GoACard {...args}>
+        <a href="#">Learn More</a>
+      </GoACard>
       <GoACard {...args} />
     </div>
   );
@@ -107,10 +117,18 @@ export const layoutTemplate = (args) => {
     height="400px"
     args={{
       title: 'Energy Diversification Act',
-      description:
-        'We are encouraging companies to turn out oil and gas resources into more valuable.',
+      content:
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+          </ul>
+        </div>
+      ,
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
-      cardWidth: 'auto',
+      maxWidth: 600,
       titleUrl: 'http://www.google.ca',
     }}
   >
@@ -144,8 +162,7 @@ export const layoutTemplate = (args) => {
     height="400px"
     args={{
       title: 'Energy Diversification Act',
-      description:
-        'We are encouraging companies to turn out oil and gas resources into more valuable.',
+      description: 'We are encouraging companies to turn out oil and gas resources into more valuable.',
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
       cardWidth: 'auto',
       titleUrl: 'http://www.google.ca',
@@ -183,9 +200,9 @@ export const layoutTemplate = (args) => {
     args={{
       title: 'Energy Diversification Act',
       description:
-        'We are encouraging companies to turn out oil and gas resources into more valuable products.',
+        'Foo We are encouraging companies to turn out oil and gas resources into more valuable products.',
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
-      cardWidth: '200',
+      cardWidth: 300,
       titleUrl: 'http://www.google.ca',
     }}
   >
@@ -264,7 +281,7 @@ export const layoutTemplate = (args) => {
 <GoACard
   title="Energy Diversification Act"
   ,
-  description="We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans."
+  description=""
   ,
   cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
   ,
@@ -272,6 +289,10 @@ export const layoutTemplate = (args) => {
   ,
   titleUrl="http://www.google.ca"
 >
+  <p>
+    We are encouraging companies to turn out oil and gas resources into more valuable products-creating good jobs for Albertans.
+  <p>
+
   <GoAButton
     buttonType="tertiary"
     buttonSize="small"

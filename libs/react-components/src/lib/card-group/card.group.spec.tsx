@@ -11,14 +11,14 @@ describe('GoA Cards', () => {
       title: 'Energy Diversification Act 1',
       description: 'We are encouraging  vor Albertans.',
       titleUrl: 'http://www.google.ca',
-      cardWidth: 400,
+      maxWidth: 400,
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
     },
     {
       title: 'Energy Diversification Act 2',
       description: 'We are encouraging  vor Albertans.',
       titleUrl: 'http://www.google.ca',
-      cardWidth: 400,
+      maxWidth: 400,
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
     },
   ];
@@ -42,6 +42,6 @@ describe('GoA Cards', () => {
     const container = document.querySelectorAll('.goa-card');
     expect(container).toHaveLength(2);
     const style = window.getComputedStyle(container[0]);
-    expect(style.width).toBe(`${cardItem[0].cardWidth}px`);
+    expect(style['max-width']).toBe(`${cardItem[0].maxWidth}px`);
   });
 });
