@@ -15,7 +15,13 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
-        checkout scm
+        checkout([
+          $class: 'GitSCM',
+          branches: scm.branches,
+          doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+          extensions: [[$class: 'LocalBranch', localBranch: '**']],
+          userRemoteConfigs: scm.userRemoteConfigs
+        ])
         sh 'npm install'
         script {
           if (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT){
