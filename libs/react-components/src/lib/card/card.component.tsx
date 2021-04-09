@@ -6,7 +6,7 @@ interface Props {
   /** Card title, required */
   title: string;
   /** Card description */
-  description?: string;
+  description?: JSX.Element | string;
   /** Card image , display on top of title */
   cardImageUrl?: string;
   /** Display card size to allow card responsively show in different device*/
