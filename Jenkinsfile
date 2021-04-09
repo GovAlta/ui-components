@@ -16,13 +16,15 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
-        checkout([
-          $class: 'GitSCM',
-          branches: scm.branches,
-          doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
-          extensions: [[$class: 'LocalBranch', localBranch: '**']],
-          userRemoteConfigs: scm.userRemoteConfigs
-        ])
+        script {
+          def checkoutResult = checkout([
+            $class: 'GitSCM',
+            branches: scm.branches,
+            doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+            extensions: [[$class: 'LocalBranch', localBranch: '**']],
+            userRemoteConfigs: scm.userRemoteConfigs
+          ])
+        }
         sh 'npm install'
         script {
           if (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT){
@@ -207,6 +209,7 @@ pipeline {
           environment {
             GITLAB_TOKEN = credentials('ui-components-dev-lib-publish-gitlab-token')
             NPM_TOKEN = credentials('ui-components-dev-lib-publish-npm-token')
+            GIT_LOCAL_BRANCH = "${checkoutResult.GIT_LOCAL_BRANCH}"
           }
           steps {
             sh "npx nx affected --target=release ${baseCommand}"
