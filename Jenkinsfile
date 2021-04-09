@@ -17,7 +17,7 @@ pipeline {
     stage('Prepare') {
       steps {
         script {
-          def checkoutResult = checkout([
+          checkoutResult = checkout([
             $class: 'GitSCM',
             branches: scm.branches,
             doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
