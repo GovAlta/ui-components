@@ -40,7 +40,7 @@ export class GoANotificationComponent implements OnInit {
    /**
    * Event emitted when the notification has been dismissed by the user.
    */
-  @Output() onDismiss: EventEmitter<any> = new EventEmitter<any>();
+  @Output() dismiss: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _changeDetectorRef: ChangeDetectorRef) { }
 
@@ -53,10 +53,10 @@ export class GoANotificationComponent implements OnInit {
   /**
    * @ignore
    */
-  dismissClick() {    
+  dismissClick() {
     this._isDismissed = true;
     this._changeDetectorRef.detectChanges();
 
-    this.onDismiss.emit();
+    this.dismiss.emit();
   }
 }

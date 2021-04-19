@@ -25,7 +25,7 @@ pipeline {
             userRemoteConfigs: scm.userRemoteConfigs
           ])
         }
-        sh 'npm install'
+        sh 'npm ci'
         script {
           if (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT){
             baseCommand = "--base=${GIT_PREVIOUS_SUCCESSFUL_COMMIT}"

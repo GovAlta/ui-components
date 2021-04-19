@@ -6,6 +6,7 @@ import { Component, OnInit, Input, HostBinding } from '@angular/core';
  * @example <a goa-button linkType='right' href='...'>Text</a>
  */
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'a[goa-button]',
   templateUrl: './button-link.component.html',
   styleUrls: ['./button-link.component.scss'],

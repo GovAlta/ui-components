@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Overlay, OverlayModule } from '@angular/cdk/overlay';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { FormsModule } from '@angular/forms';
 
 import { GoAButtonComponent } from './button/button.component';
@@ -79,8 +79,8 @@ import {
     GoARadioGroupComponent,
     GoAHeroBannerComponent,
     GoAHeroBannerContentComponent,
-    GoAHeroBannerLinkComponent, 
+    GoAHeroBannerLinkComponent,
   ],
   providers: [GoARadioService],
 })
-export class AngularComponentsModule {} 
+export class AngularComponentsModule {}

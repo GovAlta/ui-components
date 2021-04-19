@@ -1,4 +1,16 @@
-import { Component, OnInit, AfterViewInit, Input, Output, ContentChildren, EventEmitter, ViewChild, ElementRef, QueryList, ChangeDetectorRef, Query } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  Input,
+  Output,
+  ContentChildren,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+  QueryList,
+  ChangeDetectorRef
+} from '@angular/core';
 
 import { GoAOptionComponent } from './option/option.component';
 import { GoAOptionGroupComponent } from './option-group/option-group.component';
@@ -114,7 +126,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
     }
 
     if(ids.length > 1 && this.multiple === false) {
-      throw new Error("Cannot select multiple options when the dropdown has multiple set to false.");
+      throw new Error('Cannot select multiple options when the dropdown has multiple set to false.');
     }
 
     const selectedOptions = [];
@@ -226,7 +238,8 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
       this.setTextInput(this.selectedItems[0].label);
     }
 
-    // The template output cache is populated by child components during render, so tell angular that there have been changes during the render here.
+    // The template output cache is populated by child components during render,
+    // so tell angular that there have been changes during the render here.
     this.cdr.detectChanges();
   }
 
@@ -272,9 +285,9 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    */
   setActiveOption(option) {
     this._activeOption = option;
-    this._activeIndex = this._allFilteredOptions.findIndex((filteredOption) => {
-      return filteredOption.id === option.id;
-    });
+    this._activeIndex = this._allFilteredOptions.findIndex(
+      (filteredOption) => filteredOption.id === option.id
+    );
   }
 
   /**
@@ -350,9 +363,9 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * @ignore
    */
   private emitChange(options: Array<GoAOptionComponent>) {
-    const values = options.map((option) => {
-      return option.value;
-    });
+    const values = options.map(
+      (option) => option.value
+    );
 
     this.selectionChange.emit(values);
   }
@@ -366,9 +379,9 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
       return [];
     }
 
-    return [...this.allOptions.filter((option) => {
-      return option.selected === true;
-    })];
+    return [...this.allOptions.filter(
+      (option) => option.selected === true
+    )];
   }
 
   /**

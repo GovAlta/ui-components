@@ -1,15 +1,19 @@
 {
-  "npmScope": "abgov",
-  "affected": { "defaultBase": "master" },
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
-    "tslint.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "nx.json": "*",
     "tsconfig.base.json": "*",
     "nginx.conf": "*",
     "Jenkinsfile": "*"
   },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "abgov",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",

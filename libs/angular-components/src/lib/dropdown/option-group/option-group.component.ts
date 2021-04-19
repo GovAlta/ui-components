@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, QueryList, ContentChildren, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  QueryList,
+  ContentChildren,
+  ViewChild,
+  TemplateRef,
+  ChangeDetectorRef
+} from '@angular/core';
 import { GoAOptionComponent } from '../option/option.component';
 
 /**
@@ -11,7 +20,7 @@ import { GoAOptionComponent } from '../option/option.component';
   styleUrls: ['./option-group.component.scss']
 })
 export class GoAOptionGroupComponent implements OnInit {
-  
+
   /**
    * Filtered options to show in the view.
    */
@@ -22,8 +31,8 @@ export class GoAOptionGroupComponent implements OnInit {
    */
   @Input() label: string;
 
-  /** 
-   * The defined options.  
+  /**
+   * The defined options.
    * @ignore
    */
   @ContentChildren(GoAOptionComponent, {descendants: true}) options: QueryList<GoAOptionComponent>;
@@ -52,7 +61,8 @@ export class GoAOptionGroupComponent implements OnInit {
    */
   ngAfterViewInit() {
     this._filteredOptions = [...this.options];
-    // The template output cache is populated by child components during render, so tell angular that there have been changes during the render here.
+    // The template output cache is populated by child components during render, so tell angular that
+    // there have been changes during the render here.
     this.cdr.detectChanges();
   }
 }

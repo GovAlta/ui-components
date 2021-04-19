@@ -4,7 +4,7 @@ import { GoARadioComponent } from './radio.component';
 
 describe('GoARadioComponent', () => {
   const baseMockData = {
-    name: "fruits",
+    name: 'fruits',
     disabled: false,
     labelPosition: 'after',
     required: true,

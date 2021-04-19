@@ -1,4 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy, forwardRef, Input, Output, EventEmitter, ChangeDetectorRef, QueryList, ContentChildren, InjectionToken, AfterContentInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  forwardRef,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectorRef,
+  QueryList,
+  ContentChildren,
+  InjectionToken,
+  AfterContentInit,
+  OnDestroy
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { GoARadioComponent } from '../radio/radio.component';
 import { GoARadioChange } from '../radio/radio-change';
@@ -180,7 +194,7 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
   /**
    * @ignore
    */
-  _onTouchedCallback: () => {};
+  _onTouchedCallback: () => void;
 
   /**
    * @ignore
