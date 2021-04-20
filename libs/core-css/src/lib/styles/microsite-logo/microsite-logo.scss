@@ -10,6 +10,12 @@ a.microsite-link {
   align-items: center;
   height: 66px;
 
+  &:focus,
+  &:hover,
+  &:active {
+    outline: none;
+  }
+
   .image-desktop-tablet {
     width: 150px;
     height: 42px;
