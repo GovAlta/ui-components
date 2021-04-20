@@ -13,7 +13,11 @@ import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-do
 
 # Header
 
-export const Template = (args) => <GoAHeader {...args} />
+export const Template = (args) => (
+  <GoAHeader {...args}>
+    <a href="#">Sign in</a>
+  </GoAHeader>
+);
 
 <Canvas>
   <Story name="Micro Site Header" height={100}
