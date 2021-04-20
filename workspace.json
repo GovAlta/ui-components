@@ -82,7 +82,10 @@
               "libs/core-css/tsconfig.lib.json",
               "libs/core-css/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/core-css/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/core-css/**/*"
+            ]
           }
         },
         "test": {
@@ -117,7 +120,9 @@
         "post": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["npm run build:styles"],
+            "commands": [
+              "npm run build:styles"
+            ],
             "cwd": "./",
             "parallel": false
           }
@@ -127,7 +132,9 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/core-css/.storybook"
             }
@@ -143,7 +150,9 @@
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/core-css",
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/core-css/.storybook"
             }
@@ -199,7 +208,9 @@
         "post": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["npm run build:styles:angular-components"],
+            "commands": [
+              "npm run build:styles:angular-components"
+            ],
             "cwd": "./",
             "parallel": false
           }
@@ -209,7 +220,9 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "port": 4400,
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/angular-components/.storybook"
             }
@@ -225,7 +238,9 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/angular-components",
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/angular-components/.storybook"
             }
@@ -289,15 +304,39 @@
               "libs/vue-components/tsconfig.lib.json",
               "libs/vue-components/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/vue-components/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/vue-components/**/*"
+            ]
           }
         },
         "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "parallel": false,
+            "commands": [
+              "nx run vue-components:build-lib",
+              "nx run vue-components:build-experimental"
+            ]
+          }
+        },
+        "build-lib": {
           "builder": "@nx-plus/vue:library",
           "options": {
             "dest": "dist/libs/vue-components",
             "entry": "libs/vue-components/src/index.ts",
             "tsConfig": "libs/vue-components/tsconfig.lib.json",
+            "css": {
+              "extract": false
+            }
+          }
+        },
+        "build-experimental": {
+          "builder": "@nx-plus/vue:library",
+          "options": {
+            "dest": "dist/libs/vue-components/experimental",
+            "entry": "libs/vue-components/src/experimental/index.ts",
+            "tsConfig": "libs/vue-components/tsconfig.lib-exp.json",
             "css": {
               "extract": false
             }
@@ -315,7 +354,9 @@
           "options": {
             "uiFramework": "@storybook/vue",
             "port": 4400,
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/vue-components/.storybook"
             }
@@ -331,7 +372,9 @@
           "options": {
             "uiFramework": "@storybook/vue",
             "outputPath": "dist/storybook/vue-components",
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/vue-components/.storybook"
             }
@@ -366,7 +409,10 @@
               "libs/shared/common/tsconfig.lib.json",
               "libs/shared/common/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/common/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/common/**/*"
+            ]
           }
         },
         "test": {
@@ -418,7 +464,9 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "port": 4400,
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/angular-material-components/.storybook"
             }
@@ -434,7 +482,9 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/angular-material-components",
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/angular-material-components/.storybook"
             }
@@ -472,7 +522,10 @@
               "libs/react-components/tsconfig.lib.json",
               "libs/react-components/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/react-components/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/react-components/**/*"
+            ]
           }
         },
         "test": {
@@ -487,7 +540,9 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/react-components/.storybook"
             }
@@ -515,7 +570,10 @@
             "tsConfig": "libs/react-components/tsconfig.lib.json",
             "project": "libs/react-components/package.json",
             "entryFile": "libs/react-components/src/index.ts",
-            "external": ["react", "react-dom"],
+            "external": [
+              "react",
+              "react-dom"
+            ],
             "babelConfig": "@nrwl/react/plugins/bundle-babel",
             "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
             "extractCss": false,
@@ -535,7 +593,10 @@
             "tsConfig": "libs/react-components/tsconfig.lib-exp.json",
             "project": "libs/react-components/package.exp.json",
             "entryFile": "libs/react-components/src/experimental/index.ts",
-            "external": ["react", "react-dom"],
+            "external": [
+              "react",
+              "react-dom"
+            ],
             "babelConfig": "@nrwl/react/plugins/bundle-babel",
             "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
             "assets": []
@@ -546,7 +607,9 @@
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/react-components",
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/react-components/.storybook"
             }
