@@ -1,6 +1,6 @@
-@import "../mixin/responsive-breakpoints.scss";
-@import "../mixin/svg/goa-logo-desktop.scss";
-@import "../mixin/svg/goa-logo-mobile.scss";
+@import '../mixin/responsive-breakpoints.scss';
+@import '../mixin/svg/goa-logo-desktop.scss';
+@import '../mixin/svg/goa-logo-mobile.scss';
 
 a.microsite-link {
   color: inherit;
@@ -9,6 +9,12 @@ a.microsite-link {
   display: flex;
   align-items: center;
   height: 66px;
+
+  &:focus,
+  &:hover,
+  &:active {
+    outline: none;
+  }
 
   .image-desktop-tablet {
     width: 150px;
@@ -48,17 +54,11 @@ a.microsite-link {
     text-overflow: ellipsis;
 
     @include desktop {
-      width: calc(100vw - 240px);
       margin-left: 28px;
     }
 
     @include tablet {
-      width: calc(100vw - 240px);
       margin-left: 28px;
-    }
-
-    @include mobile {
-      width: calc(100vw - 120px);
     }
   }
 }

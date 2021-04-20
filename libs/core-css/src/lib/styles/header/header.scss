@@ -16,6 +16,8 @@ $service-level-beta: $goa-blue-two;
   & > .goa-microsite-header {
     background-color: $goa-background-color;
     top: 0;
+    display: flex;
+    justify-content: space-between;
   }
 
   &.goa-official-site-header,
