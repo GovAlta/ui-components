@@ -48,17 +48,11 @@ a.microsite-link {
     text-overflow: ellipsis;
 
     @include desktop {
-      width: calc(100vw - 240px);
       margin-left: 28px;
     }
 
     @include tablet {
-      width: calc(100vw - 240px);
       margin-left: 28px;
-    }
-
-    @include mobile {
-      width: calc(100vw - 120px);
     }
   }
 }
