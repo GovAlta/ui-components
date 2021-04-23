@@ -29,8 +29,8 @@ export const GoAButton = ({
   children = null,
   ...props
 }: AppProps) => {
-  let btnTypeClass = buttonType === 'primary' ? '' : `goa--${buttonType}`;
-  let btnSize = buttonSize === 'small' ? 'btn-small' : '';
+  const btnTypeClass = buttonType === 'primary' ? '' : `goa--${buttonType}`;
+  const btnSize = buttonSize === 'small' ? 'btn-small' : '';
   return (
     <button
       className={`goa-button ${btnSize} ${btnTypeClass}`}

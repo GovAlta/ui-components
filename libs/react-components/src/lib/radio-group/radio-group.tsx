@@ -60,6 +60,7 @@ interface Props {
 
 export const RadioContext = React.createContext<string>('');
 export const RadioUpdateContext = React.createContext<(value: string) => void>(
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   () => { }
 );
 

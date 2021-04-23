@@ -297,16 +297,11 @@
       "projectType": "library",
       "architect": {
         "lint": {
-          "builder": "@nrwl/linter:lint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/vue-components/tsconfig.lib.json",
-              "libs/vue-components/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/vue-components/**/*"
+            "lintFilePatterns": [
+              "libs/vue-components/src/**/*.ts",
+              "libs/vue-components/src/**/*.vue"
             ]
           }
         },
@@ -520,6 +515,7 @@
             "linter": "eslint",
             "tsConfig": [
               "libs/react-components/tsconfig.lib.json",
+              "libs/react-components/tsconfig.lib-exp.json",
               "libs/react-components/tsconfig.spec.json"
             ],
             "exclude": [

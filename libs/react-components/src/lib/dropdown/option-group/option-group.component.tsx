@@ -10,7 +10,7 @@ export const GoAOptionGroup: FC<Props> = ({ label, children }) => {
 
   // Load the itemLabes state variable
   useEffect(() => {
-    let allLabels = [];
+    const allLabels = [];
     Children.forEach(children, (child: any) => {
       if (child.props?.value && child.props?.label) {
         allLabels.push(child.props.label);
