@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { FunctionComponent } from 'react';
 
 import './header.scss';
 import GoAMicroSiteLogo from '../microsite-logo/microsite-logo';
@@ -12,7 +12,7 @@ export interface HeaderProps {
   serviceLevel: ServiceLevel,
 }
 
-export const GoAHeader = (props: HeaderProps & { children: ReactNode }) => {
+export const GoAHeader: FunctionComponent<HeaderProps> = (props) => {
   const serviceLevelCss = `service-level service-level--${props.serviceLevel.toString().toLowerCase()}`;
 
   function serviceLevelFormatted(): string {
