@@ -1,6 +1,5 @@
 import React, { Children, useState, ReactNode, FC } from 'react';
-import { Data as RadioItem, LabelPosition } from './radio/radio';
-import GoARadio, { Props as GoaRadioProps } from './radio/radio';
+import GoARadio, { Data as RadioItem, LabelPosition } from './radio/radio';
 import './radio-group.scss';
 
 export * from './radio/radio';

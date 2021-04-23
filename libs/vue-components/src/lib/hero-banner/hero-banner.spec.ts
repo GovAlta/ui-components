@@ -3,7 +3,6 @@ import GoAHeroBanner from './hero-banner.vue';
 
 describe('GoAHeroBanner', () => {
   const title = 'Upgrading our bitumen';
-  const backgroundUrl = '';
   const content = 'Main content';
   const linkText = 'Learn more';
   const linkUrl = 'http://google.com';

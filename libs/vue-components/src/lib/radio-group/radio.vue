@@ -32,6 +32,7 @@
 import classnames from 'classnames';
 
 export default {
+  name: 'goa-radio',
   model: {
     event: 'change',
   },

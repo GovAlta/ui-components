@@ -40,7 +40,7 @@
           @input="setFilter"
         >
         <div v-if="isOpen" ref="menu" class="dropdown-menu" role="list" :style="{ 'max-height': `${this.maxMenuHeight}px` }">
-          <goa-option
+          <goa-dropdown-option
             v-for="option in matchingOptions"
             :key="option.value"
             role="listitem"
@@ -73,10 +73,10 @@ interface Option {
 }
 
 export default {
-  name: 'GoaDropdown',
+  name: 'goa-dropdown',
 
   components: {
-    GoaOption: GoADropdownOption,
+    'goa-dropdown-option': GoADropdownOption,
   },
 
   props: {

@@ -35,7 +35,7 @@ export const GOA_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
  * retention of the class and its component metadata.
  * @ignore
  */
-export const GOA_RADIO_GROUP = new InjectionToken<GoARadioGroupComponent>('GoaRadioGroup');
+export const GOA_RADIO_GROUP = new InjectionToken<GoARadioGroupComponent>('GoARadioGroup');
 
 /**
  * Radiobutton group component with Government of Alberta styling.  Used to group a set of related radio buttons.
