@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
-import '../../theme.scss';
-import './badge.scss';
+import classnames from 'classnames';
+import styles from './badge.module.scss';
 
 interface GoABadgeProps {
   type: 'information' | 'success' | 'warning' | 'emergency' |
@@ -13,9 +13,9 @@ interface GoABadgeProps {
 export const GoABadge: FC<GoABadgeProps> = ({ type, content, icon }: GoABadgeProps) => {
 
   return (
-    <div className={`goa-badge badge-${type}`}>
+    <div className={classnames(styles['goa-badge'], styles[`badge-${type}`])}>
       {icon}
-      <span className="goa-badge-content">{content}</span>
+      <span className={classnames(styles['goa-badge-content'])}>{content}</span>
     </div>
   )
 }
