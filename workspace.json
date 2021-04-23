@@ -599,6 +599,7 @@
             ],
             "babelConfig": "@nrwl/react/plugins/bundle-babel",
             "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "extractCss": false,
             "assets": []
           }
         },

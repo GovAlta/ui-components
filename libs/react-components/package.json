@@ -15,6 +15,9 @@
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git",
     "directory": "libs/react-components"
   },
+  "dependencies": {
+    "classnames": "^2.3.1"
+  },
   "peerDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
