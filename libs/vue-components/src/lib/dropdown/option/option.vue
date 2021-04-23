@@ -6,7 +6,7 @@
 
 <script lang="ts">
   export default {
-    name: 'GoaDropdownOption',
+    name: 'goa-dropdown-option',
     props: {
       value: { type: String, required: true },
       name: { type: String, required: true },

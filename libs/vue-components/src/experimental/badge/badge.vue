@@ -9,7 +9,7 @@
 
 <script lang="ts">
 export default {
-  name: 'GoABadge',
+  name: 'goa-badge',
   props: {
     /**
      * Type of the badge.
