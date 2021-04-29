@@ -67,11 +67,11 @@
     "@angular/common": "11.2.6",
     "@angular/core": "11.2.6",
     "@angular/material": "^10.2.0",
+    "@ngrx/component-store": "11.0.0",
     "@nrwl/cli": "11.5.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "vue": "^2.6.11",
-    "@ngrx/component-store": "11.0.0"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1102.5",
