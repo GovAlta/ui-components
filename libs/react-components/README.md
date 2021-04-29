@@ -8,8 +8,6 @@ This library contains react components from the Government of Alberta.
    `npm add --save @abgov/react-components`
 2. OPTIONAL: in package.json specify the allowed versions for installation
 3. Add peer dependencies
-4. OPTIONAL: Add to styles to import Alberta fonts and global element styles.
-   `import '@abgov/react-components/react-components.esm.css';`
 
 ## Documentation
 
@@ -18,7 +16,6 @@ Documentation is being worked on and will be provided soon.
 ## Usage
 
 ```
-import '@abgov/react-components/react-components.esm.css';
 import { GoACallout } from '@abgov/react-components';
 import { GoAButton } from '@abgov/react-components';
 import { GoACheckbox } from '@abgov/react-components';

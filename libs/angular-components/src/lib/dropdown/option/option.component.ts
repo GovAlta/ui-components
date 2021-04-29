@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef, ViewChild, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ViewChild, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
 
 /**
  * Option component with to use with GoADropdown.
@@ -10,14 +10,14 @@ import { Component, OnInit, Input, TemplateRef, ViewChild, ChangeDetectionStrate
   styleUrls: ['./option.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GoAOptionComponent implements OnInit {    
-  
+export class GoAOptionComponent implements OnInit {
+
   /**
    * Is the option currently selected
    * @ignore
    */
   selected = false;
-  
+
   /**
    * The unique id of the option.
    */
@@ -26,7 +26,7 @@ export class GoAOptionComponent implements OnInit {
   /**
    * The value for the option
    */
-  @Input() value: any; 
+  @Input() value: any;
 
   /**
    * Label to be used for option.

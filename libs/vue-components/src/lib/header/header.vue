@@ -31,7 +31,7 @@ import { PropType } from 'vue';
 import GoAMicrositeLogo from '../microsite-logo/microsite-logo.vue';
 
 export default {
-  name: 'GoaHeader',
+  name: 'goa-header',
   components: {
     'goa-microsite-logo': GoAMicrositeLogo,
   },

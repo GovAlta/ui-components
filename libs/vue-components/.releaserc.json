@@ -1,0 +1,24 @@
+{
+  "extends": "../../.releaserc.json",
+  "tagFormat": "vue-v${version}",
+  "plugins": [
+    [
+      "@abgov/nx-release",
+      {
+        "project": "vue-components"
+      }
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "dist/libs/vue-components"
+      }
+    ],
+    [
+      "@semantic-release/gitlab",
+      {
+        "gitlabUrl": "https://gitlab.gov.ab.ca"
+      }
+    ]
+  ]
+}

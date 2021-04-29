@@ -10,7 +10,7 @@ import GoAHeroBannerContent from './hero-banner-content.vue';
 import GoAHeroBannerLink from './hero-banner-link.vue';
 
 export default {
-  name: 'GoAHeroBanner',
+  name: 'goa-hero-banner',
   components: {
     'goa-hero-banner-content': GoAHeroBannerContent,
     'goa-hero-banner-link': GoAHeroBannerLink,

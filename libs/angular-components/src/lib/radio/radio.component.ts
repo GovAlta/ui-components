@@ -1,4 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, forwardRef, Input, Output, EventEmitter, ChangeDetectorRef, Optional, Inject, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  forwardRef,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectorRef,
+  OnDestroy
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { GoARadioChange } from './radio-change';
@@ -82,7 +92,7 @@ export class GoARadioComponent implements ControlValueAccessor, OnInit, OnDestro
   /**
    * @ignore
    */
-  _onTouchedCallback: () => {};
+  _onTouchedCallback: () => void;
 
   /**
    * @ignore

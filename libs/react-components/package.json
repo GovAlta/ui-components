@@ -1,7 +1,7 @@
 {
   "name": "@abgov/react-components",
-  "version": "0.7.53",
-  "description": "Government of Alberta - DIO - React JS shared ui components",
+  "version": "0.0.0",
+  "description": "Government of Alberta - DIO - Shared UI components for React JS",
   "bugs": {
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues"
   },
@@ -15,14 +15,11 @@
     "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git",
     "directory": "libs/react-components"
   },
+  "dependencies": {
+    "classnames": "^2.3.1"
+  },
   "peerDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
-  },
-  "dependencies": {
-    "classnames": "^2.2.6"
-  },
-  "devDependencies": {
-    "@types/classnames": "^2.2.11"
   }
 }

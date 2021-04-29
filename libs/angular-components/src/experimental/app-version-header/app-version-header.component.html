@@ -1,5 +1,5 @@
 <div
-  *ngIf="!isProdEnvironment && !(closed | async)"
+  *ngIf="!isProdEnvironment && (closed | async) === null"
   class="goa-app-version-header"
 >
   <span class="content-wrapper">

@@ -25,6 +25,7 @@ interface DropdownContextProps {
   updateOption?: (value: string, option: DropdownOption) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const DropdownContext = createContext<DropdownContextProps>({
   options: {},
   filter: '',

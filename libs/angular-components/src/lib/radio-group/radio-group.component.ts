@@ -1,4 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy, forwardRef, Input, Output, EventEmitter, ChangeDetectorRef, QueryList, ContentChildren, InjectionToken, AfterContentInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  forwardRef,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectorRef,
+  QueryList,
+  ContentChildren,
+  InjectionToken,
+  AfterContentInit,
+  OnDestroy
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { GoARadioComponent } from '../radio/radio.component';
 import { GoARadioChange } from '../radio/radio-change';
@@ -21,7 +35,7 @@ export const GOA_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
  * retention of the class and its component metadata.
  * @ignore
  */
-export const GOA_RADIO_GROUP = new InjectionToken<GoARadioGroupComponent>('GoaRadioGroup');
+export const GOA_RADIO_GROUP = new InjectionToken<GoARadioGroupComponent>('GoARadioGroup');
 
 /**
  * Radiobutton group component with Government of Alberta styling.  Used to group a set of related radio buttons.
@@ -180,7 +194,7 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
   /**
    * @ignore
    */
-  _onTouchedCallback: () => {};
+  _onTouchedCallback: () => void;
 
   /**
    * @ignore

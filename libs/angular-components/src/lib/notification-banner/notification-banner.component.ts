@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ContentChildren, QueryList, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ContentChildren, QueryList } from '@angular/core';
 import { GoANotificationComponent } from '../notification/notification.component';
 
 /**
@@ -13,12 +13,12 @@ import { GoANotificationComponent } from '../notification/notification.component
 export class GoANotificationBannerComponent implements OnInit {
 
   /**
-   * The accessibility title for the notification banner.  Is not displayed. 
+   * The accessibility title for the notification banner.  Is not displayed.
    */
   @Input() title = 'Notifications';
 
-  /** 
-   * The notifications in this banner.  
+  /**
+   * The notifications in this banner.
    * @ignore
    */
   @ContentChildren(GoANotificationComponent, {descendants: false}) _notifications: QueryList<GoANotificationComponent>;

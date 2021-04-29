@@ -1,7 +1,7 @@
 @import '../../../../core-css/src/lib/styles/variables/colors.scss';
 @import '../../../../core-css/src/lib/styles/variables/typography.scss';
 
-.goa-badge {
+* {
   line-height: $caption-line-height;
   font-size: $caption-size;
   font-weight: $caption-font-weight !important;
@@ -25,6 +25,9 @@
     height: 14px;
     display: inline;
   }
+}
+
+.goa-badge {
   .goa-badge-icon {
     margin-left: 4px;
     margin-right: 0px;
@@ -43,45 +46,44 @@
     width: 14px;
     font-size: 14px !important;
   }
-
 }
 
-.goa-badge.badge-information {
+.badge-information {
   background-color: $primary;
   color: $goa-text-color-inverse;
 }
 
-.goa-badge.badge-success {
+.badge-success {
   background-color: #00853f;
   color: $goa-text-color-inverse;
 }
 
-.goa-badge.badge-warning {
+.badge-warning {
   background-color: #feba35;
   color: $goa-text-color;
 }
 
-.goa-badge.badge-emergency {
+.badge-emergency {
   background-color: #ec040b;
   color: $goa-text-color-inverse;
 }
 
-.goa-badge.badge-dark {
+.badge-dark {
   background-color: $primary;
   color: $goa-text-color-inverse;
 }
 
-.goa-badge.badge-midtone {
+.badge-midtone {
   background-color: #767676;
   color: $goa-text-color-inverse;
 }
 
-.goa-badge.badge-light {
+.badge-light {
   background-color: $goa-white;
   color: $goa-text-color;
 }
 
-.goa-badge.badge-inactive {
+.badge-inactive {
   background-color: $goa-white;
   color: $goa-text-color;
 }

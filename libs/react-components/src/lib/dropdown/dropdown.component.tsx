@@ -82,7 +82,7 @@ export const GoADropdown: FC<Props> = ({
     setSelectionDescription(description);
   };
 
-  const filterMatchFunction = (filter: string = '', value: string = ''): boolean => {
+  const filterMatchFunction = (filter = '', value = ''): boolean => {
     const safeFilter = filter.toLowerCase();
     const safeValue = value.toLowerCase();
 

@@ -24,7 +24,7 @@
 import GoACard from '../card/card.vue';
 
 export default {
-  name: 'GoaCardGroup',
+  name: 'goa-card-group',
   components: {
     'goa-card': GoACard,
   },

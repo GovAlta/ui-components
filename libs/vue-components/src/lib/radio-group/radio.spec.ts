@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/vue';
 import RadioGroup from './radio-group.vue';
 
-describe('Goa Vue Radio Buttons', () => {
+describe('GoA Vue Radio Buttons', () => {
   const baseMockData = {
     title: 'mock title',
     helperText: 'mock helper text',

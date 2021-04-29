@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ChangeDetectorRef, ChangeDetectionStrategy, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  forwardRef,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { GoACheckboxChange } from './checkbox-change';
 
@@ -56,7 +64,8 @@ export class GoACheckboxComponent implements ControlValueAccessor {
    */
   private _indeterminate = false;
   /**
-   * Boolean indicating whether or not the checkbox should display as indeterminate (i.e. it has associated 'child' checkboxes, some of which are selected).
+   * Boolean indicating whether or not the checkbox should display as indeterminate
+   * (i.e. it has associated 'child' checkboxes, some of which are selected).
    */
   @Input()
   get indeterminate(): boolean { return this._indeterminate; }
@@ -85,7 +94,7 @@ export class GoACheckboxComponent implements ControlValueAccessor {
   /**
    * @ignore
    */
-  _onTouchedCallback: () => {};
+  _onTouchedCallback: () => void;
 
   /**
    * @ignore
@@ -153,8 +162,8 @@ export class GoACheckboxComponent implements ControlValueAccessor {
     this.toggle();
 
     // user manually clicking overrides indeterminate and sets it to false
-    // this is because if they click and set to checked/unchecked, all 'child' checkboxes should get set to checked/unchecked (by user routine, not here),
-    // so this checkbox is no longer indeterminate
+    // this is because if they click and set to checked/unchecked, all 'child' checkboxes should get set to
+    // checked/unchecked (by user routine, not here), so this checkbox is no longer indeterminate
     this.indeterminate = false;
 
     const checkBoxChange = {

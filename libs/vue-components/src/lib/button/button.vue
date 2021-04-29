@@ -13,7 +13,7 @@
 <script lang="typescript">
 
 export default {
-  name: 'goa-header',
+  name: 'goa-button',
   props: {
     /**
      * The type of button - "primary", "secondary", "tertiary".

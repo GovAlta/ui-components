@@ -1,6 +1,5 @@
 import React, { Children, useState, ReactNode, FC } from 'react';
-import { Data as RadioItem, LabelPosition } from './radio/radio';
-import GoARadio, { Props as GoaRadioProps } from './radio/radio';
+import GoARadio, { Data as RadioItem, LabelPosition } from './radio/radio';
 import './radio-group.scss';
 
 export * from './radio/radio';
@@ -61,6 +60,7 @@ interface Props {
 
 export const RadioContext = React.createContext<string>('');
 export const RadioUpdateContext = React.createContext<(value: string) => void>(
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   () => { }
 );
 

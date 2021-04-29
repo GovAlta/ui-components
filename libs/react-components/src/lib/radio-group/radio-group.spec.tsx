@@ -59,7 +59,7 @@ describe('RadioGroup', () => {
   }
 
   describe('Basic rendering', () => {
-    let mockData = { ...baseMockData };
+    const mockData = { ...baseMockData };
 
     it('should render successfully', async () => {
       const { baseElement } = render(getTemplate(baseMockData));

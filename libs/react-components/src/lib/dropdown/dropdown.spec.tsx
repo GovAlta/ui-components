@@ -179,19 +179,19 @@ describe('GoA Dropdown', () => {
     const inputElement = container.querySelector('input.dropdown-textbox');
     expect(inputElement).toBeTruthy();
     let inputText = inputElement.getAttribute('value');
-    expect(inputText == '').toBeTruthy();
+    expect(inputText === '').toBeTruthy();
 
     // Expand the dropdown and selected an item
     expandCollapseDropDown(container);
 
     for (let i = 0; i < 3; i++) {
-      let notSelectedOption = container.querySelector('.option:not(.selected)');
+      const notSelectedOption = container.querySelector('.option:not(.selected)');
       expect(notSelectedOption).toBeTruthy();
       fireEvent.click(notSelectedOption);
     }
 
     inputText = inputElement.getAttribute('value');
-    expect(inputText == 'Apple, Pear, Banana').toBeTruthy();
+    expect(inputText === 'Apple, Pear, Banana').toBeTruthy();
   })
 
   test('Displays warning when is required and no items are selected', () => {
@@ -227,7 +227,7 @@ describe('GoA Dropdown', () => {
   // TODO: add tests for initial values to dropdown
 
   test('[selectionChanges] callback is invoked', () => {
-    let count: number = 0;
+    let count = 0;
     const selectHandler = (options: DropdownOption[]) => {
       count += 1;
     }
@@ -247,11 +247,11 @@ describe('GoA Dropdown', () => {
 
     expandCollapseDropDown(container);
 
-    let labels = ['Apple', 'Pear', 'Banana'];
+    const labels = ['Apple', 'Pear', 'Banana'];
 
     // Select all three options
     for (let i = 0; i < 3; i++) {
-      let option = screen.queryByText(labels[i]);
+      const option = screen.queryByText(labels[i]);
       expect(option).toBeTruthy();
       fireEvent.click(option);
     }

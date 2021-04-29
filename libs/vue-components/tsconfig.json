@@ -14,10 +14,13 @@
       "path": "./tsconfig.lib.json"
     },
     {
+      "path": "./tsconfig.lib-exp.json"
+    },
+    {
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "./.storybook\\tsconfig.json"
+      "path": "./.storybook/tsconfig.json"
     }
   ]
 }

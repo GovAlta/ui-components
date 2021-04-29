@@ -66,6 +66,10 @@ $tertiary-focus-outline-color: $active-outline-color;
       margin: 12px 12px 0 0;
     }
 
+    &:last-of-type {
+      margin-right: 0;
+    }
+
     &:disabled,
     &:disabled.goa--secondary,
     &:disabled.goa--tertiary {

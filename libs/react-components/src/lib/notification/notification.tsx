@@ -29,7 +29,7 @@ export interface NotificationProps {
   */
   isDismissable?: boolean,
   children?: React.ReactNode,
-  onDismiss?: Function,
+  onDismiss?: () => void,
 }
 
 export const GoANotification = ({title, type = "information", message, notificationUrl, isDismissable = true, children = null, onDismiss, ...props }: NotificationProps) => {

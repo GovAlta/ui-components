@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/vue';
 import GoAButton from './button.vue';
 
-describe('Goa Vue Button', () => {
+describe('GoA Vue Button', () => {
   const buttonType = 'primary';
   const buttonClassName = 'goa-button';
   const buttonSecondaryClassName = 'goa--secondary';

@@ -7,13 +7,24 @@ import { Meta, Canvas, Story, ArgsTable, Description } from '@storybook/addon-do
   argTypes={{
       serviceName: { control: 'text', description: 'Name of the service to be displayed' },
       serviceHome: { control: 'text', description: 'URL of the service' },
-      serviceLevel: { control: 'text', description: 'Level of the service [Alpha | Beta | Live]' },
+      serviceLevel: {
+        control: 'select',
+        options: ['Alpha', 'Beta', 'Live'],
+        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+           defaultValue: { summary: 'alpha' },
+        },
+        description: 'Level of the service [Alpha | Beta | Live]'
+      },
     }}
  />
 
 # Header
 
-export const Template = (args) => <GoAHeader {...args} />
+export const Template = (args) => (
+  <GoAHeader {...args}>
+    <a href="#">Sign in</a>
+  </GoAHeader>
+);
 
 <Canvas>
   <Story name="Micro Site Header" height={100}

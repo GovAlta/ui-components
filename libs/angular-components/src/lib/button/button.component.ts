@@ -6,6 +6,7 @@ import { Component, OnInit, Input, HostBinding } from '@angular/core';
  */
 @Component({
   selector:
+    // eslint-disable-next-line @angular-eslint/component-selector
     'button[goa-button], input[type="button"][goa-button], input[type="submit"][goa-button]',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
