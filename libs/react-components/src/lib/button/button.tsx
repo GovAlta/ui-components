@@ -5,7 +5,7 @@ import './button.scss';
 type ButtonType = 'primary' | 'secondary' | 'tertiary';
 type ButtonSize = 'small' | 'normal';
 
-type AppProps = {
+type ButtonProps = {
   /**
    * Type of button
    */
@@ -18,6 +18,13 @@ type AppProps = {
    * Mouseover popup description
    */
   title?: string;
+  /**
+   * Action to take on button click
+   */
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  /**
+   * Button content (between button tags)
+   */
   children?: React.ReactNode;
   [key: string]: any;
 };
@@ -27,14 +34,16 @@ export const GoAButton = ({
   buttonSize = 'normal',
   title = null,
   children = null,
+  onClick = null,
   ...props
-}: AppProps) => {
+}: ButtonProps) => {
   const btnTypeClass = buttonType === 'primary' ? '' : `goa--${buttonType}`;
   const btnSize = buttonSize === 'small' ? 'btn-small' : '';
   return (
     <button
       className={`goa-button ${btnSize} ${btnTypeClass}`}
       title={title}
+      onClick={onClick}
       {...props}
     >
       {children}
@@ -47,6 +56,7 @@ GoAButton.propTypes = {
   buttonType: PropTypes.string,
   title: PropTypes.string,
   children: PropTypes.node,
+  onClick: PropTypes.func
 };
 
 export default GoAButton;

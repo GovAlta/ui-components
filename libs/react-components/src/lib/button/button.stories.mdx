@@ -29,23 +29,43 @@ import { DoDont } from '@abgov/shared/storybook-common';
     title: {
       control: 'text',
     },
-    onClick: { action: 'You have clicked the button' },
-    onMouseDown: { action: 'mouseDown' },
+    onClick: { action: 'You have clicked the button', control: null },
+    children: {
+      control: 'text',
+    },
   }}
 />
 
 # Button
 
-A user input field that allows the user to make a binary choice, i.e. a choice between one of two possible mutually exclusive options. For example, the user may have to answer 'yes' (checked) or 'no' (not checked) on a simple yes/no question.
+A user input control that performs an action, typically on click
 
 ## Overview
 
-export const Template = (args) => <GoAButton {...args}>Text content</GoAButton>;
+export const Template = (args) => (
+  <div>
+    <GoAButton buttonType="primary" {...args}>
+      {args.children}
+    </GoAButton>
+    <GoAButton buttonType="tertiary" {...args}>
+      Application
+    </GoAButton>
+  </div>
+);
 
 <Canvas>
-  <Story name="Variants">
-    <GoAButton buttonType="primary">Admin</GoAButton>
-    <GoAButton buttonType="secondary">Application</GoAButton>
+  <Story
+    name="Variants"
+    args={{
+      buttonSize: 'normal',
+      title: 'text',
+      children: 'Admin',
+      onClick: (value) => {
+        action('button clicked')(value);
+      },
+    }}
+  >
+    {Template.bind({})}
   </Story>
 </Canvas>
 
