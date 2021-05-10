@@ -1,0 +1,51 @@
+import {GoAPageLoader} from './page-loader'
+import { action } from '@storybook/addon-actions';
+
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="React/Components/Experimental/PageLoader"
+  component={GoAPageLoader}
+/>
+
+# GoAPageLoader
+
+A page loading indicator which will prevent user input.
+
+## Overview
+export const Template = (args) =>
+  <div>
+    <GoAPageLoader {...args} />
+  </div>
+
+#### Basic
+
+<Canvas>
+  <Story name="Variants" height={200}
+    args={{
+      loading: true,
+      message: 'Loading...'
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Examples
+
+```html
+<GoAPageLoader loading="true">
+  Loading...
+</GoAPageLoader>
+```
+
+## Properties
+
+<Description of={GoAPageLoader} />
+<ArgsTable of={GoAPageLoader} />
