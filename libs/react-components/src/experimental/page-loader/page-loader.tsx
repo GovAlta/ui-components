@@ -31,8 +31,6 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  top: 0px;
-  left: 0px;
   background: rgba(255,255,255,90);
 `;
 
@@ -58,10 +56,6 @@ const Loader = styled.div`
   padding-right: 56px;
   padding-top: 56px;
 `;
-
-GoAPageLoader.defaultProps = {
-  loading: true,
-};
 
 GoAPageLoader.propTypes = {
   loading: PropTypes.bool,
