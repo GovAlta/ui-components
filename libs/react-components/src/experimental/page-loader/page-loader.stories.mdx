@@ -1,5 +1,6 @@
 import {GoAPageLoader} from './page-loader'
 import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
 
 import {
   Meta,
@@ -10,7 +11,7 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 <Meta
-  title="React/Components/Experimental/PageLoader"
+  title="Experimental/Components/PageLoader"
   component={GoAPageLoader}
 />
 
@@ -30,7 +31,7 @@ export const Template = (args) =>
   <Story name="Variants" height={200}
     args={{
       loading: true,
-      message: 'Loading...'
+      label: 'Loading...'
     }}
   >
     {Template.bind({})}
@@ -49,3 +50,11 @@ export const Template = (args) =>
 
 <Description of={GoAPageLoader} />
 <ArgsTable of={GoAPageLoader} />
+
+## Usage guidelines
+
+### PageLoader content
+
+A page loader must contain a label
+
+<DoDont dos={'Keep content short and concise'} donts={"Place a full sentence in the indicator's label"} />
