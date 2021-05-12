@@ -16,11 +16,11 @@ const spinner = keyframes`
     }
 `;
 
-export const GoAPageLoader = ({ loading=false, message }) => {
+export const GoAPageLoader = ({ loading=false, label }) => {
   return loading &&
     <Container onKeyDown={(event) => {event.preventDefault()}}>
       <Loader></Loader>
-      <Message>{message}</Message>
+      <Message>{label}</Message>
     </Container>;
 };
 
@@ -59,5 +59,5 @@ const Loader = styled.div`
 
 GoAPageLoader.propTypes = {
   loading: PropTypes.bool,
-  message: PropTypes.string
+  label: PropTypes.string
 };
