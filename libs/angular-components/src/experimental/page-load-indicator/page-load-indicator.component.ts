@@ -1,4 +1,6 @@
 import { HostListener, OnDestroy } from '@angular/core';
+import { SpinnerComponentWithSecondaryColor } from './spinner-utils/utils'
+
 import {
   Component,
   Input,
@@ -16,7 +18,11 @@ import {
   templateUrl: './page-load-indicator.component.html',
   styleUrls: ['./page-load-indicator.component.scss'],
 })
-export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestroy {
+export class GoAPageLoadIndicatorComponent extends SpinnerComponentWithSecondaryColor implements OnInit, OnChanges, OnDestroy {
+
+  constructor() {
+    super();
+  }
 
   /**
    * Boolean indicating whether or not the Page Load Indicator is visible.
@@ -27,8 +33,6 @@ export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestr
    * What message to display under the loading spinner.
    */
   @Input() message: string = '';
-
-  constructor() { }
 
   ngOnInit(): void {
   }
@@ -68,5 +72,20 @@ export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestr
 
   ngOnDestroy(): void {
     this.blockScrollingToggle(false);
+  }
+
+  get strokeWidth() {
+    return 4 * (this.thickness / 100);
+  }
+
+  get dashStyle() {
+    return {
+      color: this.color,
+      ...(
+        !this.still
+          ? { animation: `spinners-angular-circular-fixed ${140 / this.speed}s linear infinite` }
+          : {}
+      ),
+    };
   }
 }

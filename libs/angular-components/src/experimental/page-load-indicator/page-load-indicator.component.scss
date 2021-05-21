@@ -1,55 +1,6 @@
 @import '../../../../core-css/src/lib/styles/variables/colors.scss';
-.spinner {
-  position: relative;
-  width: 100%;
-  top: 50%;
-  z-index: 1;
-}
 
-.spinner .loader {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-  border: 9px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 9px solid;
-  border-top-color: $goa-blue;
-  -webkit-animation: spin 1s linear infinite;
-  animation: spin 1s linear infinite;
-}
-.spinner .content {
-  text-align: center;
-}
-
-#backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.9);
-}
-
-.stop-scrolling {
-  height: 100%;
-  overflow: hidden;
-}
-
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+@keyframes spinners-angular-circular-fixed {
+  0% { stroke-dashoffset: 325; }
+  100% { stroke-dashoffset: 151; }
 }
