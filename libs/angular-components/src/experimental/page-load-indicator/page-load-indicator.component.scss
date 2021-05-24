@@ -1,6 +1,3 @@
-@import '../../../../core-css/src/lib/styles/variables/colors.scss';
+@import '../../../../core-css//src/lib/styles/loading-indicator/page-load-indicator.scss';
 
-@keyframes spinners-angular-circular-fixed {
-  0% { stroke-dashoffset: 325; }
-  100% { stroke-dashoffset: 151; }
-}
+

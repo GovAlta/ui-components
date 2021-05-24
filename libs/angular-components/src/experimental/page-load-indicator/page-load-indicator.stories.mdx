@@ -23,24 +23,27 @@ import { action } from '@storybook/addon-actions';
       },
     },
     message: { control: 'text' },
+    type: 'progress | infinite',
+    progress: 10
   }}
   decorators={[
     moduleMetadata({ declarations: [GoAPageLoadIndicatorComponent] }),
   ]}
 />
 
-# Page Load Indicator - Indeterministic
+# Page Load Indicator
 
 The Page Load Indicator component aims to implement the 'PageLoadIndicator' specifications on the Alberta Design System.
 The Page Load Indicator was designed to show users that something is happening.
 
 <Canvas>
   <Story
-    name="Indeterministic Load Indicator"
+    name="Load Indicator"
     height={300}
     args={{
-      isloading: true,
+      visible: true,
       message: 'Loading message...',
+      type: 'infinite'
     }}
     parameters={{
       design: {},
@@ -48,7 +51,7 @@ The Page Load Indicator was designed to show users that something is happening.
   >
     {(args) => {
       return {
-        template: `<goa-page-load-indicator [visible]="isloading" [message]="message">
+        template: `<goa-page-load-indicator [visible]="visible" [type]="type" [message]="message" [progress]="progress">
                     </goa-page-load-indicator>`,
         props: args,
       };

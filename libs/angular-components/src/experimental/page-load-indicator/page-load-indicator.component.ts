@@ -1,5 +1,4 @@
 import { HostListener, OnDestroy } from '@angular/core';
-import { SpinnerComponentWithSecondaryColor } from './spinner-utils/utils'
 
 import {
   Component,
@@ -8,6 +7,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { __values } from 'tslib';
 
 /**
  * A page load indicator component with Government of Alberta styling.
@@ -18,10 +18,9 @@ import {
   templateUrl: './page-load-indicator.component.html',
   styleUrls: ['./page-load-indicator.component.scss'],
 })
-export class GoAPageLoadIndicatorComponent extends SpinnerComponentWithSecondaryColor implements OnInit, OnChanges, OnDestroy {
+export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor() {
-    super();
   }
 
   /**
@@ -30,16 +29,38 @@ export class GoAPageLoadIndicatorComponent extends SpinnerComponentWithSecondary
   @Input() visible: boolean = false;
 
   /**
+   * The type of the progress.
+   */
+  @Input() type: 'progress' | 'infinite' = 'infinite';
+
+  /**
    * What message to display under the loading spinner.
    */
   @Input() message: string = '';
+  @Input() progress: number = 0;
+
+  /**
+   * Set defaults
+   */
+  animation: boolean = false;
+  strokeDashoffsetDefault: number = 280;
+  progressMaxValue: number = 283;
+  strokeDashoffset: number = 0;
 
   ngOnInit(): void {
+    if (this.type !== 'progress') {
+      this.strokeDashoffset = this.strokeDashoffsetDefault;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.visible) {
       this.blockScrollingToggle(changes.visible.currentValue);
+    }
+    if (changes.progress) {
+      if (this.type === 'progress') {
+        this.setProgress(changes.progress.currentValue);
+      }
     }
   }
 
@@ -74,18 +95,21 @@ export class GoAPageLoadIndicatorComponent extends SpinnerComponentWithSecondary
     this.blockScrollingToggle(false);
   }
 
-  get strokeWidth() {
-    return 4 * (this.thickness / 100);
-  }
-
-  get dashStyle() {
-    return {
-      color: this.color,
-      ...(
-        !this.still
-          ? { animation: `spinners-angular-circular-fixed ${140 / this.speed}s linear infinite` }
-          : {}
-      ),
+  setProgress(progress: number): void {
+    if (this.type !== 'progress') {
+      return;
     };
+
+    if (progress === 0) {
+      this.strokeDashoffset = this.progressMaxValue;
+      return;
+    }
+
+    if (progress >= 100) {
+      return;
+    }
+
+    var value = this.progressMaxValue - Math.round(this.progressMaxValue * progress / 100);
+    this.strokeDashoffset = value;
   }
 }

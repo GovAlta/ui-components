@@ -1,22 +1,18 @@
-<svg *ngIf="enabled" fill="none" [ngStyle]="svgStyle" viewBox="0 0 66 66">
-  <circle
-    cx="33"
-    cy="33"
-    fill="none"
-    r="28"
-    [attr.stroke]="secondaryColor"
-    [attr.stroke-width]="strokeWidth"
-  />
-  <circle
-    cx="33"
-    cy="33"
-    fill="none"
-    r="28"
-    stroke="currentColor"
-    stroke-dasharray="40, 134"
-    stroke-dashoffset="325"
-    stroke-linecap="round"
-    [attr.stroke-width]="strokeWidth"
-    [ngStyle]="dashStyle"
-  />
-</svg>
+<div *ngIf="visible" class="progress-container">
+  <svg fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle class="base-circle" cx="50" cy="50" r="45"/>
+    <circle
+      [ngClass]="{
+        'progress-circle--infinite': type === 'infinite',
+        'progress-circle': type === 'progress'
+      }"
+      cx="50"
+      cy="50"
+      r="45"
+      [style.stroke-dashoffset]="strokeDashoffset"/>
+  </svg>
+
+  <span class="progress-message">
+    {{ message }}
+  </span>
+</div>
