@@ -21,7 +21,6 @@ export const GoAPageLoader = ({
    * Set defaults
    */
   let animation = false;
-  const strokeDashoffsetDefault = 280;
   const progressMaxValue = 283;
   let strokeDashoffset = 0;
 
