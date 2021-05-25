@@ -45,7 +45,7 @@ export const Template = (args) =>
     args={{
       visible: true,
       message: 'Loading...',
-      type: 'progress'
+      type: 'infinite'
     }}
   >
     {Template.bind({})}
@@ -55,7 +55,9 @@ export const Template = (args) =>
 ## Examples
 
 ```html
-<GoAPageLoader visible="true">
+<GoAPageLoader
+  visible="true"
+  type="'infinite' || 'progress'">
   Loading...
 </GoAPageLoader>
 ```

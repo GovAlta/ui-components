@@ -2,12 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './page-loader.scss';
 
-type type = 'infinite' | 'progress';
+type indicatorType = 'infinite' | 'progress';
 
 export interface PageLoaderProps {
-  type?: type;
+  /**
+   * The type of page loader, deterministic and indeterministic.
+   */
+  type?: indicatorType;
+
+  /**
+   * The message to display while loading.
+   */
   message?: string;
+
+  /**
+   * Sets the page loader visibility state.
+   */
   visible?: boolean;
+
+  /**
+   * Sets the percentage value of the page loader while set to progress type, 0 - 100 percent.
+   */
   value?: number;
 }
 
