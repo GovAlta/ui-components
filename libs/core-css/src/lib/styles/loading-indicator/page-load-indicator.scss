@@ -1,0 +1,63 @@
+@import '../variables/colors.scss';
+
+// SVG styles.
+svg {
+  animation: 2s linear infinite svg-animation;
+  max-width: 100px;
+}
+
+// Circle animation.
+@keyframes circle-animation {
+  0%{
+    stroke-dashoffset: 75;
+    transform: rotate(0);
+  }
+
+  100% {
+    stroke-dashoffset: 75;
+    transform: rotate(360deg);
+  }
+
+
+}
+
+.base-circle {
+  display: block;
+  fill: transparent;
+  stroke: #c8eef9;
+  stroke-width: 7px;
+}
+
+.progress-circle {
+  &--infinite{
+    @extend .progress-circle;
+    animation: 1.4s infinite both circle-animation;
+  }
+
+  display: block;
+  fill: transparent;
+  stroke: $goa-blue;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 280;
+  stroke-width: 7px;
+  transform-origin: 50% 50%;
+}
+
+.progress-message {
+  margin-top: 24px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  color: #000;
+}
+
+.progress-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,90);
+}
