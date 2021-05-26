@@ -1,0 +1,94 @@
+import {GoAElementLoader} from './element-loader';
+import {GoAButton} from '../../lib/button/button';
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Experimental/Components/ElementLoader"
+  component={GoAElementLoader}
+  argTypes={{
+      size: 50
+      }
+    }
+ />
+
+# GoAElementLoader
+
+A element loading indicator which will not prevent user input.
+
+## Overview
+export const Template = (args) =>
+  <div>
+    <GoAElementLoader {...args} />
+  </div>
+
+
+export const TemplateElement = (args) =>
+  <div>
+  <GoAButton buttonType="primary" buttonSize="normal">
+    Loading please wait...
+    <GoAElementLoader {...args} />
+  </GoAButton>
+  </div>
+
+#### Basic
+
+<Canvas>
+  <Story name="Basic" height={200}
+    args={{
+      visible: true,
+      size: 50,
+      baseColour: '#c8eef9',
+      spinnerColour: '#0070c4'
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story name="ElementLoader" height={200}
+    args={{
+      visible: true,
+      size: 15,
+      baseColour: '#0070c4',
+      spinnerColour: '#c8eef9'
+    }}
+  >
+    {TemplateElement.bind({})}
+  </Story>
+</Canvas>
+
+
+
+## Examples
+
+```html
+<GoAElementLoader
+  visible='true'
+  size='25'
+  baseColour='#c8eef9',
+  spinnerColour='#0070c4'
+</GoAElementLoader>
+
+<GoAButton buttonType="primary" buttonSize="normal">
+  Loading...!
+
+  <GoAElementLoader
+    visible='true'
+    size='25'
+    baseColour='#c8eef9',
+    spinnerColour='#0070c4'
+  </GoAElementLoader>
+</GoAButton>
+```
+
+## Properties
+
+<Description of={GoAElementLoader} />
+<ArgsTable of={GoAElementLoader} />

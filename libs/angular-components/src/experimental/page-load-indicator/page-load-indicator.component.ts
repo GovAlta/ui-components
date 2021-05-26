@@ -26,7 +26,7 @@ export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestr
   /**
    * Boolean indicating whether or not the Page Load Indicator is visible.
    */
-  @Input() visible: boolean = false;
+  @Input() visible = false;
 
   /**
    * The type of the progress.
@@ -36,16 +36,16 @@ export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestr
   /**
    * What message to display under the loading spinner.
    */
-  @Input() message: string = '';
-  @Input() progress: number = 0;
+  @Input() message = '';
+  @Input() progress = 0;
 
   /**
    * Set defaults
    */
-  animation: boolean = false;
-  strokeDashoffsetDefault: number = 280;
-  progressMaxValue: number = 283;
-  strokeDashoffset: number = 0;
+  animation = false;
+  strokeDashoffsetDefault = 280;
+  progressMaxValue = 283;
+  strokeDashoffset = 0;
 
   ngOnInit(): void {
     if (this.type !== 'progress') {
@@ -109,7 +109,7 @@ export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestr
       return;
     }
 
-    var value = this.progressMaxValue - Math.round(this.progressMaxValue * progress / 100);
+    const value = this.progressMaxValue - Math.round(this.progressMaxValue * progress / 100);
     this.strokeDashoffset = value;
   }
 }
