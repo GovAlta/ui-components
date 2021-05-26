@@ -6,7 +6,7 @@ import {GoAPageLoader} from './page-loader'
 describe('PageLoader', () => {
   it('should render successfully', () => {
     const { baseElement } = render(<GoAPageLoader
-      loading={true}
+      visible={true}
       message='Loading...'
     />);
     expect(baseElement).toBeTruthy();

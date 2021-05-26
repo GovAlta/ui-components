@@ -35,37 +35,36 @@ export const GoAPageLoader = ({
   /**
    * Set defaults
    */
-  let animation = false;
   const progressMaxValue = 283;
   let strokeDashoffset = 0;
 
-  if (visible) {
-    if(type === 'progress'){
-      setProgress(value);
+  /**
+   * Sets the progress if in progress mode.
+   * @param progress
+   * @returns
+   */
+  function setProgress(progress: number) {
+    if (type !== 'progress') {
+      return;
     }
 
-    /**
-     * Sets the progress if in progress mode.
-     * @param progress
-     * @returns
-     */
-    function setProgress(progress: number) {
-      if (type !== 'progress') {
-        return;
-      }
+    if (progress === 0) {
+      strokeDashoffset = progressMaxValue;
+      return;
+    }
 
-      if (progress === 0) {
-        strokeDashoffset = progressMaxValue;
-        return;
-      }
+    if (progress >= 100) {
+      return;
+    }
 
-      if (progress >= 100) {
-        return;
-      }
+    const value =
+      progressMaxValue - Math.round((progressMaxValue * progress) / 100);
+    strokeDashoffset = value;
+  }
 
-      var value =
-        progressMaxValue - Math.round((progressMaxValue * progress) / 100);
-        strokeDashoffset = value;
+  if (visible) {
+    if (type === 'progress') {
+      setProgress(value);
     }
 
     return (
@@ -90,8 +89,7 @@ export const GoAPageLoader = ({
             cx="50"
             cy="50"
             r="45"
-            style={{strokeDashoffset: strokeDashoffset}}
-
+            style={{ strokeDashoffset: strokeDashoffset }}
           />
         </svg>
         <span className="progress-message">{message}</span>
