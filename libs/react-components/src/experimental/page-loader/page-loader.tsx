@@ -1,63 +1,111 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { keyframes } from "styled-components";
+import './page-loader.scss';
+
+type indicatorType = 'infinite' | 'progress';
 
 export interface PageLoaderProps {
+  /**
+   * The type of page loader, deterministic and indeterministic.
+   */
+  type?: indicatorType;
+
+  /**
+   * The message to display while loading.
+   */
   message?: string;
+
+  /**
+   * Sets the page loader visibility state.
+   */
   visible?: boolean;
-};
 
-const spinner = keyframes`
-    0% {
-        transform: rotate(0);
+  /**
+   * Sets the percentage value of the page loader while set to progress type, 0 - 100 percent.
+   */
+  value?: number;
+}
+
+export const GoAPageLoader = ({
+  type = 'infinite',
+  visible = false,
+  message = 'Loading...',
+  value = 0,
+}: PageLoaderProps) => {
+  /**
+   * Set defaults
+   */
+  let animation = false;
+  const progressMaxValue = 283;
+  let strokeDashoffset = 0;
+
+  if (visible) {
+    if(type === 'progress'){
+      setProgress(value);
     }
-    100% {
-        transform: rotate(360deg);
+
+    /**
+     * Sets the progress if in progress mode.
+     * @param progress
+     * @returns
+     */
+    function setProgress(progress: number) {
+      if (type !== 'progress') {
+        return;
+      }
+
+      if (progress === 0) {
+        strokeDashoffset = progressMaxValue;
+        return;
+      }
+
+      if (progress >= 100) {
+        return;
+      }
+
+      var value =
+        progressMaxValue - Math.round((progressMaxValue * progress) / 100);
+        strokeDashoffset = value;
     }
-`;
 
-export const GoAPageLoader = ({ loading=false, label }) => {
-  return loading &&
-    <Container onKeyDown={(event) => {event.preventDefault()}}>
-      <Loader></Loader>
-      <Message>{label}</Message>
-    </Container>;
+    return (
+      <div
+        className="progress-container"
+        onKeyDown={(event) => {
+          event.preventDefault();
+        }}
+      >
+        <svg
+          fill="none"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle className="base-circle" cx="50" cy="50" r="45" />
+          <circle
+            className={`${
+              type === 'infinite'
+                ? 'progress-circle--infinite'
+                : 'progress-circle'
+            }`}
+            cx="50"
+            cy="50"
+            r="45"
+            style={{strokeDashoffset: strokeDashoffset}}
+
+          />
+        </svg>
+        <span className="progress-message">{message}</span>
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background: rgba(255,255,255,90);
-`;
-
-const Message = styled.span`
-  margin-top: 24px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  color: #000;
-`;
-
-const Loader = styled.div`
-  margin-top: 16px;
-  border-top: 7px solid #0070c4;
-  border-right: 7px solid #0070c4;
-  border-bottom: 7px solid #0070c4;
-  border-left: 7px solid rgba(10,129,162, 0.2);
-  border-radius: 50%;
-  animation: ${spinner} 0.9s linear infinite;
-  width: 65px;
-  height: 65px;
-  padding-right: 56px;
-  padding-right: 56px;
-  padding-top: 56px;
-`;
 
 GoAPageLoader.propTypes = {
-  loading: PropTypes.bool,
-  label: PropTypes.string
+  visible: PropTypes.bool,
+  message: PropTypes.string,
+  value: PropTypes.number,
 };
+
+export default GoAPageLoader;

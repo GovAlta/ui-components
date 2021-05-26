@@ -13,7 +13,20 @@ import {
 <Meta
   title="Experimental/Components/PageLoader"
   component={GoAPageLoader}
-/>
+  argTypes={{
+      type: {
+        control: {
+          type: 'select',
+          options: ['progress', 'infinite'],
+        },
+      },
+      message: {
+        control: {
+          type: 'text',
+        },
+      },
+    }}
+ />
 
 # GoAPageLoader
 
@@ -30,8 +43,9 @@ export const Template = (args) =>
 <Canvas>
   <Story name="Variants" height={200}
     args={{
-      loading: true,
-      label: 'Loading...'
+      visible: true,
+      message: 'Loading...',
+      type: 'infinite'
     }}
   >
     {Template.bind({})}
@@ -41,7 +55,9 @@ export const Template = (args) =>
 ## Examples
 
 ```html
-<GoAPageLoader loading="true">
+<GoAPageLoader
+  visible="true"
+  type="'infinite' || 'progress'">
   Loading...
 </GoAPageLoader>
 ```
