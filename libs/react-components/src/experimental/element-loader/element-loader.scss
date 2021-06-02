@@ -1,1 +1,13 @@
 @import '../../../../core-css//src/lib/styles//variables/colors.scss';
+@import '../../../../core-css//src/lib/styles/loading-indicator/page-load-indicator.scss';
+
+// SVG styles.
+@keyframes rotate {
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+.circular-loader {
+  animation: rotate 1s linear infinite;
+}

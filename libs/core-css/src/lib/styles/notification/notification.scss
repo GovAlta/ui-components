@@ -61,6 +61,10 @@
   &.goa--important {
     background-color: #feba35;
 
+    .message{
+      color: $goa-text-color;
+    }
+
     a {
       color: $goa-text-color;
 
