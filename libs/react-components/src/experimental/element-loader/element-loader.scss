@@ -11,22 +11,3 @@
 .circular-loader {
   animation: rotate 1s linear infinite;
 }
-
-:host {
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-:host(.responsive) {
-  width: 100%;
-  padding-bottom: 100%;
-}
-
-:host(.responsive) > svg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
