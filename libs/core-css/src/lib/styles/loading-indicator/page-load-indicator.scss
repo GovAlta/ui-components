@@ -2,7 +2,7 @@
 
 // SVG styles.
 svg {
-  animation: 2s linear infinite svg-animation;
+  //animation: 2s linear infinite svg-animation;
   max-width: 100px;
 }
 
@@ -17,8 +17,6 @@ svg {
     stroke-dashoffset: 75;
     transform: rotate(360deg);
   }
-
-
 }
 
 .base-circle {
@@ -31,7 +29,7 @@ svg {
 .progress-circle {
   &--infinite{
     @extend .progress-circle;
-    animation: 1.4s infinite both circle-animation;
+    animation: circle-animation 1.2s linear infinite;
   }
 
   display: block;
