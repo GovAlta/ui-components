@@ -24,6 +24,11 @@ export interface PageLoaderProps {
    * Sets the percentage value of the page loader while set to progress type, 0 - 100 percent.
    */
   value?: number;
+
+  /**
+   * Sets the page to locked and does not accept user input.
+   */
+  pagelock?: boolean;
 }
 
 export const GoAPageLoader = ({
@@ -31,6 +36,7 @@ export const GoAPageLoader = ({
   visible = false,
   message = 'Loading...',
   value = 0,
+  pagelock = true,
 }: PageLoaderProps) => {
   /**
    * Set defaults
@@ -63,6 +69,15 @@ export const GoAPageLoader = ({
   }
 
   if (visible) {
+    if(pagelock){
+      document.body.style.height = '100%';
+      document.body.style.overflow = 'hidden';
+    }
+    else{
+      document.body.style.removeProperty('height');
+      document.body.style.removeProperty('overflow');
+    }
+
     if (type === 'progress') {
       setProgress(value);
     }
@@ -81,11 +96,10 @@ export const GoAPageLoader = ({
         >
           <circle className="base-circle" cx="50" cy="50" r="45" />
           <circle
-            className={`${
-              type === 'infinite'
+            className={`${type === 'infinite'
                 ? 'progress-circle--infinite'
                 : 'progress-circle'
-            }`}
+              }`}
             cx="50"
             cy="50"
             r="45"
@@ -96,6 +110,9 @@ export const GoAPageLoader = ({
       </div>
     );
   } else {
+    document.body.style.removeProperty('height');
+    document.body.style.removeProperty('overflow');
+
     return null;
   }
 };
@@ -104,6 +121,8 @@ GoAPageLoader.propTypes = {
   visible: PropTypes.bool,
   message: PropTypes.string,
   value: PropTypes.number,
+  type: PropTypes.string,
+  pagelock: PropTypes.bool
 };
 
 export default GoAPageLoader;

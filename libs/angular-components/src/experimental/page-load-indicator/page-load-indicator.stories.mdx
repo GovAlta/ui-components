@@ -1,4 +1,5 @@
 import { GoAPageLoadIndicatorComponent } from './page-load-indicator.component';
+import { DoDont } from '@abgov/shared/storybook-common';
 
 import {
   Meta,
@@ -24,7 +25,7 @@ import { action } from '@storybook/addon-actions';
     },
     message: { control: 'text' },
     type: 'progress | infinite',
-    progress: 10
+    value: 10,
   }}
   decorators={[
     moduleMetadata({ declarations: [GoAPageLoadIndicatorComponent] }),
@@ -51,10 +52,33 @@ The Page Load Indicator was designed to show users that something is happening.
   >
     {(args) => {
       return {
-        template: `<goa-page-load-indicator [visible]="visible" [type]="type" [message]="message" [progress]="progress">
+        template: `
+        <goa-page-load-indicator [pagelock]="false" [visible]="visible" [type]="type" [message]="message">
                     </goa-page-load-indicator>`,
         props: args,
       };
     }}
   </Story>
 </Canvas>
+
+```html
+<goa-page-load-indicator visible="true" type="'infinite' || 'progress'">
+  Loading...
+</goa-page-load-indicator>
+```
+
+## Properties
+
+<Description of={GoAPageLoadIndicatorComponent} />
+<ArgsTable of={GoAPageLoadIndicatorComponent} />
+
+## Usage guidelines
+
+### PageLoader content
+
+A page loader must contain a label
+
+<DoDont
+  dos={'Keep content short and concise'}
+  donts={"Place a full sentence in the indicator's label"}
+/>
