@@ -24,25 +24,34 @@ export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestr
   }
 
   /**
-   * Boolean indicating whether or not the Page Load Indicator is visible.
+   * Sets the page loader visibility state.
    */
   @Input() visible = false;
 
   /**
-   * The type of the progress.
+   * The type of page loader, deterministic and indeterministic.
    */
   @Input() type: 'progress' | 'infinite' = 'infinite';
 
   /**
-   * What message to display under the loading spinner.
-   */
+  * The message to display while loading.
+  */
   @Input() message = '';
-  @Input() progress = 0;
+
+  /**
+   * Sets the percentage value of the page loader while set to progress type, 0 - 100 percent.
+   */
+  @Input() value = 0;
+
+  /**
+   * Sets the page to locked and does not accept user input.
+   */
+  @Input()
+  pagelock = true;
 
   /**
    * Set defaults
    */
-  animation = false;
   strokeDashoffsetDefault = 280;
   progressMaxValue = 283;
   strokeDashoffset = 0;
@@ -57,9 +66,9 @@ export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestr
     if (changes.visible) {
       this.blockScrollingToggle(changes.visible.currentValue);
     }
-    if (changes.progress) {
+    if (changes.value) {
       if (this.type === 'progress') {
-        this.setProgress(changes.progress.currentValue);
+        this.setProgress(changes.value.currentValue);
       }
     }
   }
@@ -70,12 +79,12 @@ export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestr
    * @ignore
    */
   private blockScrollingToggle(isBlock: boolean): void {
-    if (isBlock) {
-      document.body.style.height = '100%';
-      document.body.style.overflow = 'hidden';
-    } else {
+    if (!isBlock || !this.pagelock) {
       document.body.style.removeProperty('height');
       document.body.style.removeProperty('overflow');
+    } else {
+      document.body.style.height = '100%';
+      document.body.style.overflow = 'hidden';
     }
   }
 
