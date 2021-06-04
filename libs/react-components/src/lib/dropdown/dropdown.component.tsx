@@ -190,9 +190,6 @@ export const GoADropdown: FC<Props> = ({
       if (Array.isArray(props.children)) {
         props.children.forEach(registerChild);
       }
-      // if (props.children?.length) {
-      //   props.children.forEach(registerChild);
-      // }
     };
 
 
