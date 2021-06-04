@@ -16,6 +16,8 @@ import {
 } from './dropdown.context';
 import './dropdown.component.scss';
 
+import GoAOption from './option/option.component';
+
 interface Props {
   label: string;
   description?: string;
@@ -238,7 +240,7 @@ export const GoADropdown: FC<Props> = ({
             id={`input-for-${label}`}
             placeholder={description}
             onChange={inputChangeHandler}
-            readOnly={!isOpen || typeAheadMode === 'none' || isMultiple() }
+            readOnly={!isOpen || typeAheadMode === 'none' || isMultiple()}
           />
           {isOpen &&
             <div className="dropdown-menu" ref={menuRef} style={{
@@ -273,3 +275,4 @@ GoADropdown.defaultProps = {
 };
 
 export default GoADropdown;
+export { GoAOption }
