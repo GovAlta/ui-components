@@ -17,6 +17,7 @@ import {
 import './dropdown.component.scss';
 
 import GoAOption from './option/option.component';
+import GoAOptionGroup from './option-group/option-group.component';
 
 interface Props {
   label: string;
@@ -272,4 +273,4 @@ GoADropdown.defaultProps = {
 };
 
 export default GoADropdown;
-export { GoAOption }
+export { GoAOption, GoAOptionGroup }
