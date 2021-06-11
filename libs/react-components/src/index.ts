@@ -13,6 +13,8 @@ import GoACardGroup from './lib/card-group/card.group.component';
 import { GoADropdown, GoAOption, GoAOptionGroup } from './lib/dropdown/dropdown.component';
 import GoACheckbox from './lib/checkbox/checkbox';
 
+export * from './experimental';
+
 export {
   GoANotification,
   GoARadioGroup,
