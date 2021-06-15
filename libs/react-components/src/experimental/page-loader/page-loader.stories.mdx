@@ -1,4 +1,4 @@
-import {GoAPageLoader} from './page-loader'
+import { GoAPageLoader } from './page-loader';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 
@@ -14,39 +14,43 @@ import {
   title="Experimental/Components/PageLoader"
   component={GoAPageLoader}
   argTypes={{
-      type: {
-        control: {
-          type: 'select',
-          options: ['progress', 'infinite'],
-        },
+    type: {
+      control: {
+        type: 'select',
+        options: ['progress', 'infinite'],
       },
-      message: {
-        control: {
-          type: 'text',
-        },
+    },
+    message: {
+      control: {
+        type: 'text',
       },
-    }}
- />
+    },
+  }}
+/>
 
 # GoAPageLoader
 
 A page loading indicator which will prevent user input.
 
 ## Overview
-export const Template = (args) =>
+
+export const Template = (args) => (
   <div>
     <GoAPageLoader {...args} />
   </div>
+);
 
 #### Basic
 
 <Canvas>
-  <Story name="Variants" height={200}
+  <Story
+    name="Variants"
+    height={200}
     args={{
       visible: true,
       message: 'Loading...',
       type: 'infinite',
-      pagelock: false
+      pagelock: false,
     }}
   >
     {Template.bind({})}
@@ -56,9 +60,7 @@ export const Template = (args) =>
 ## Examples
 
 ```html
-<GoAPageLoader
-  visible="true"
-  type="'infinite' || 'progress'">
+<GoAPageLoader visible="{true}" type="'infinite' || 'progress'">
   Loading...
 </GoAPageLoader>
 ```
@@ -74,4 +76,7 @@ export const Template = (args) =>
 
 A page loader must contain a label
 
-<DoDont dos={'Keep content short and concise'} donts={"Place a full sentence in the indicator's label"} />
+<DoDont
+  dos={'Keep content short and concise'}
+  donts={"Place a full sentence in the indicator's label"}
+/>
