@@ -2,7 +2,6 @@
 
 This library contains react components from the Government of Alberta.
 
-
 ## Installation
 
 1. Add @abgov/react-components
@@ -21,6 +20,15 @@ import { GoACallout } from '@abgov/react-components';
 import { GoAButton } from '@abgov/react-components';
 import { GoACheckbox } from '@abgov/react-components';
 import { GoANotification } from '@abgov/react-components';
+import { GoACard } from '@abgov/react-components';
+import { GoACardGroup } from '@abgov/react-components';
+import { GoABadge } from '@abgov/react-components';
+import { GoAElementLoader } from '@abgov/react-components';
+import { GoAPageLoader } from '@abgov/react-components';
+import { GoADropdown, GoAOption } from '@abgov/react-components';
+import { GoAHeader } from '@abgov/react-components';
+import { GoAHeroBanner, GoAHeroBannerContent, GoAHeroBannerLink} from '@abgov/react-components';
+import { GoARadioGroup } from '@abgov/react-components';
 
 function App() {
     return (
@@ -64,7 +72,40 @@ function App() {
                         cardImageUrl="working-in-cold-hero-3_rdax_75.jpg"
               />
           </GoACardGroup>
+          <GoABadge
+                type='information'
+                content='text content'
+                icon={ icon variable}
+              />
+          <GoAElementLoader
+                visible={true}
+                size={25}
+                baseColour='#c8eef9',
+                spinnerColour='#0070c4'
+            />
+          <GoAPageLoader visible={true} type='infinite'>
+              Loading...
+          </GoAPageLoader>
+          <GoADropdown  label="Fruits"  description="Choose you favorite fruit!"  multiple="false"  typeAheadMode="none">
+            {
+              items.map((i) => <GoAOption key={i.id} value={i.id} label={i.label} />)
+            }
+          </GoADropdown>
+          <GoAHeader serviceName="Sample service" serviceHome="/" serviceLevel="Live" />
+          <GoAHeroBanner title="Upgrading our bitumen" backgroundUrl='...'}>
+            <GoAHeroBannerContent content='Resources are available to help ...'/>
+            <GoAHeroBannerLink linkText='Learn more' linkUrl='...'/>
+          </GoAHeroBanner>
+          <GoARadioGroup
+            name="fileSecurityOptions"
+            items={getFileTypesValues()}
+            onChange={(e) => {
+              setUploadFileType(e);
+            }}
+        />
         </div>
+
+
     )
 }
 
