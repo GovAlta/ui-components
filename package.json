@@ -13,6 +13,7 @@
     "build:npm": "nx run-many --target=build --projects=angular-components,core-css,vue-components --parallel --prod",
     "build:storybook": "run-p build:core-storybook build:angular-storybook build:vue-storybook build:react-storybook",
     "build:angular-components": "npm run build angular-components --withDeps --prod && npm run post angular-components --withDeps",
+    "build:angular-material-components": "npm run build angular-material-components --withDeps --prod && npm run post angular-material-components --withDeps",
     "build:react-components": "npm run build react-components --withDeps --prod",
     "build:vue-components": "npm run build vue-components --withDeps --prod",
     "build:core-css": "npm run build core-css --withDeps --prod && npm run post core-css --withDeps",
