@@ -1,0 +1,26 @@
+<div *ngIf="visible">
+  <svg
+    fill="none"
+    [attr.viewBox]="viewBox"
+    [attr.width]="size"
+    [attr.height]="size"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      class="base-circle"
+      [attr.cx]="size"
+      [attr.cy]="size"
+      [attr.r]="innerRadius"
+      [style.stroke]="baseColour"
+    />
+    <circle
+      class="rotating-circle"
+      [attr.cx]="size"
+      [style.stroke-dasharray]="dashArray"
+      [style.stroke-dashoffset]="dashOffset"
+      [attr.cy]="size"
+      [attr.r]="innerRadius"
+      [style.stroke]="spinnerColour"
+    />
+  </svg>
+</div>

@@ -1,0 +1,20 @@
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.base-circle {
+  display: block;
+  fill: transparent;
+  stroke-width: 7px;
+}
+
+.rotating-circle {
+  animation: rotate 1s linear infinite;
+  display: block;
+  fill: transparent;
+  stroke-linecap: round;
+  stroke-width: 7px;
+  transform-origin: 50% 50%;
+}
