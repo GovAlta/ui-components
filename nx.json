@@ -11,7 +11,7 @@
     "Jenkinsfile": "*"
   },
   "affected": {
-    "defaultBase": "main"
+    "defaultBase": "beta"
   },
   "npmScope": "abgov",
   "tasksRunnerOptions": {
