@@ -14,11 +14,6 @@
         "pkgRoot": "dist/libs/core-css"
       }
     ],
-    [
-      "@semantic-release/gitlab",
-      {
-        "gitlabUrl": "https://gitlab.gov.ab.ca"
-      }
-    ]
+    "@semantic-release/github"
   ]
 }

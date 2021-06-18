@@ -11,7 +11,7 @@
     "Jenkinsfile": "*"
   },
   "affected": {
-    "defaultBase": "beta"
+    "defaultBase": "main"
   },
   "npmScope": "abgov",
   "tasksRunnerOptions": {
@@ -46,7 +46,9 @@
     },
     "angular-material-components": {
       "tags": [],
-      "implicitDependencies": ["core-css"]
+      "implicitDependencies": [
+        "core-css"
+      ]
     },
     "react-components": {
       "tags": []
