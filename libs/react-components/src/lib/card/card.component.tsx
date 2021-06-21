@@ -4,7 +4,7 @@ import './card.scss';
 type CardWidth = 'full' | 'auto' | number;
 interface Props {
   /** Card title, required */
-  title: string | Element;
+  title: string | ReactNode;
   /** Card content*/
   content?: string | ReactNode;
   /** Deprecated: Use content*/
