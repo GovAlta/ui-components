@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../../theme.scss';
-import '../../../../core-css/src/lib/styles/notification/notification.scss'
-import '../../../../core-css/src/lib/styles/notification-banner/notification-banner.scss';
+import '@core-css/notification/notification.scss'
+import '@core-css/notification-banner/notification-banner.scss';
 
 
 type notificationType = "important" | 'information' | 'event' | 'emergency';
@@ -32,7 +32,7 @@ export interface NotificationProps {
   onDismiss?: () => void,
 }
 
-export const GoANotification = ({title, type = "information", message, notificationUrl, isDismissable = true, children = null, onDismiss, ...props }: NotificationProps) => {
+export const GoANotification = ({ title, type = "information", message, notificationUrl, isDismissable = true, children = null, onDismiss, ...props }: NotificationProps) => {
   const [dismissed, setDismissed] = useState(false);
 
   const dismissTrigger = (dismissAction) => {
@@ -48,15 +48,15 @@ export const GoANotification = ({title, type = "information", message, notificat
         </div>
         <div role="notification" className={`goa-notification goa--${type}`}>
           <div className='content'>
-            { notificationUrl ? (
+            {notificationUrl ? (
               <a className="message" role="url" href={notificationUrl}>{message || children}</a>
             ) : (
               <span className="message">{message || children}</span>
             )}
-            { isDismissable &&
+            {isDismissable &&
               <a role="closeBox" className="close" title="Dismiss" onClick={() => dismissTrigger(!dismissed)}>
                 <svg width="16px" height="16px" viewBox="0 0 16 16">
-                  <path d="M 15.99 14.54C 15.99 14.54 14.54 15.99 14.54 15.99 14.54 15.99 8 9.45 8 9.45 8 9.45 1.46 15.99 1.46 15.99 1.46 15.99 0.01 14.54 0.01 14.54 0.01 14.54 6.55 8 6.55 8 6.55 8 0.01 1.46 0.01 1.46 0.01 1.46 1.46 0.01 1.46 0.01 1.46 0.01 8 6.55 8 6.55 8 6.55 14.54 0.01 14.54 0.01 14.54 0.01 15.99 1.46 15.99 1.46 15.99 1.46 9.45 8 9.45 8 9.45 8 15.99 14.54 15.99 14.54Z"/>
+                  <path d="M 15.99 14.54C 15.99 14.54 14.54 15.99 14.54 15.99 14.54 15.99 8 9.45 8 9.45 8 9.45 1.46 15.99 1.46 15.99 1.46 15.99 0.01 14.54 0.01 14.54 0.01 14.54 6.55 8 6.55 8 6.55 8 0.01 1.46 0.01 1.46 0.01 1.46 1.46 0.01 1.46 0.01 1.46 0.01 8 6.55 8 6.55 8 6.55 14.54 0.01 14.54 0.01 14.54 0.01 15.99 1.46 15.99 1.46 15.99 1.46 9.45 8 9.45 8 9.45 8 15.99 14.54 15.99 14.54Z" />
                 </svg>
               </a>
             }
