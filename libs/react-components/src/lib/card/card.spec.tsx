@@ -16,37 +16,29 @@ describe('GoA Card', () => {
     );
 
     expect(baseElement).toBeTruthy();
-
-    expect(screen.getByText(title));
-    expect(screen.getByText(description));
   });
 
-  it('title has href, should render title and href', () => {
+  it('title has href, should render title and href', async () => {
     render(
       <GoACard title={title} titleUrl={titleUrl} description={description} />
     );
-    expect(screen.getByText(title));
-    const url = screen.getByRole('link', { name: title }) as HTMLAnchorElement;
-
-    expect(url.href).toEqual(titleUrl);
+    const titleEl = await screen.findByTestId('card-title')
+    expect(titleEl.textContent).toBe(title)
+    const titleLinkEl = await screen.findByTestId('card-title-link')
+    expect(titleLinkEl.href).toBe(titleUrl)
   });
 
-  it('if cardImageUrl exist, should render cardImage', () => {
+  it('if cardImageUrl exist, should render cardImage', async () => {
     render(<GoACard title={title} cardImageUrl={cardImageUrl} />);
-    const cardImageImg = document.getElementsByClassName('goa-poster');
+    const cardImageImg = await screen.findByTestId('card-img');
     expect(cardImageImg).not.toBeNull();
   });
 
-  it('if use customer input layout, should render as fixed width', () => {
+  it('if use customer input layout, should render as fixed width', async () => {
     render(
       <GoACard title={title} cardImageUrl={cardImageUrl} maxWidth={200} />
     );
-    const container = document.querySelector('.goa-card ');
-    expect(container).not.toBeNull();
-
-    expect(container.classList).toHaveLength(1);
-    const style = window.getComputedStyle(container);
-
-    expect(style['max-width']).toBe('200px');
+    const contentEl = await screen.findByTestId('card-container')
+    expect(contentEl.style['max-width']).toBe('200px');
   });
 });
