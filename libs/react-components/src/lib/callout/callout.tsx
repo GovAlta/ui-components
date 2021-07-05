@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../../theme.scss';
-import '@core-css/callout/callout.scss'
+import '../../../../core-css/src/lib/styles/callout/callout.scss'
 
 type calloutType = "important" | 'information' | 'event' | 'success' | 'emergency';
 
