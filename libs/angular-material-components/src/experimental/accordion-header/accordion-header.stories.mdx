@@ -1,0 +1,138 @@
+import {
+  Meta,
+  Canvas,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import { moduleMetadata } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { GoaAccordionHeaderComponent } from './accordion-header.component';
+
+<Meta
+  title="Experimental/Components/Accordion Header"
+  component={GoaAccordionHeaderComponent}
+  argTypes={{
+    header: {
+      control: 'text',
+      defaultValue: 'Some Header',
+      description: 'HTML content projected as the header of the component',
+    },
+  }}
+  decorators={[
+    moduleMetadata({
+      imports: [
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatTooltipModule,
+      ],
+      declarations: [GoaAccordionHeaderComponent],
+    }),
+  ]}
+/>
+
+# Accordion Header
+
+Extends the mat-accordion with a panel that contains a header (optional), Expand All and Collapse All buttons.
+
+**Contributors:** ACO Team
+
+**Peer Dependencies:**
+
+- None
+
+**TODOs:**
+
+- [ ] Design in design system XD and referenced by Story.
+- [ ] Fix bug with angular-material-components library so that @use and @import work in .scss files. Then correct styles in accordion-header.component.scss
+- [ ] Fix accordion-header.stories.mdx so that the canvas displays at full height in the Docs tab.
+- [ ] Component available in Angular, React, and Vue libraries.
+
+<Canvas>
+  <Story name="Basic" height={100}>
+    {(args) => {
+      return {
+        template: `<mat-accordion multi>
+            <goa-accordion-header [collapseTooltip]="collapseTooltip" [expandTooltip]="expandTooltip"><h3>{{ header }}</h3></goa-accordion-header>
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <b>Panel 1</b>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>Content for Panel 1</p>
+            </mat-expansion-panel>
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <b>Panel 2</b>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>Content for Panel 2</p>
+            </mat-expansion-panel>
+          </mat-accordion>`,
+        props: args,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## Examples
+
+### Normal
+
+```html
+<mat-accordion multi>
+  <goa-accordion-header>
+    <h3>Sample Header</h3>
+  </goa-accordion-header>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Panel 1</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>Content for Panel 1</p>
+  </mat-expansion-panel>
+</mat-accordion>
+```
+
+### With custom tooltips
+
+```html
+<mat-accordion multi>
+  <goa-accordion-header
+    [collapseTooltip]="'Collapso'"
+    [expandTooltip]="'Expando'"
+  >
+    <h3>Sample Header</h3>
+  </goa-accordion-header>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Panel 1</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>Content for Panel 1</p>
+  </mat-expansion-panel>
+</mat-accordion>
+```
+
+## Properties
+
+desc
+
+<Description of={GoaAccordionHeaderComponent} />
+
+args
+
+<ArgsTable of={GoaAccordionHeaderComponent} />
