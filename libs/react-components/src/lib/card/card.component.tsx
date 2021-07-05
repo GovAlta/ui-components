@@ -31,19 +31,19 @@ export const GoACard: FC<Props> = ({
   children = null,
 }) => {
   return (
-    <div className="goa-card" style={{ maxWidth: maxWidth ?? cardWidth ?? 'auto' }}>
+    <div className="goa-card" data-testid='card-container' style={{ maxWidth: maxWidth ?? cardWidth ?? 'auto' }}>
       {cardImageUrl && (
-        <div className="goa-poster">
+        <div className="goa-poster" data-testid='card-img'>
           <img src={cardImageUrl} alt="Card cardImageUrl" />
         </div>
       )}
       <div className="card-content">
-        <div className="goa-title">
-          {titleUrl ? <a href={titleUrl}>{title}</a> : title}
+        <div className="goa-title" data-testid='card-title'>
+          {titleUrl ? <a href={titleUrl} data-testid='card-title-link'>{title}</a> : title}
         </div>
-        <div className="goa-text">{content ?? description}</div>
+        <div className="goa-text" data-testid='card-content'>{content ?? description}</div>
         {children
-          && <div className="goa-footer">{children}</div>
+          && <div className="goa-footer" data-testid='card-footer'>{children}</div>
         }
       </div>
     </div>
