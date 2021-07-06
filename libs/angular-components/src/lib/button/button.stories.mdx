@@ -40,7 +40,7 @@ A hierarchy of actions provided by buttons.
     args={{
       buttonType: 'primary',
       buttonSize: 'normal',
-      content: 'Click Me!',
+      content: 'Demo',
       title: 'The button title'
     }}
     parameters={
@@ -55,7 +55,9 @@ A hierarchy of actions provided by buttons.
       args.click = function(event) { action('click')(event) }
       return {
         template: `
-          <button goa-button [buttonSize]="buttonSize" [buttonType]="buttonType" [title]="title" (click)="click($event)">{{content}}</button>
+          <button goa-button buttonSize="normal" buttonType="primary" title="title" (click)="click($event)">Primary</button>
+          <button goa-button buttonSize="normal" buttonType="secondary" title="title" (click)="click($event)">Secondary</button>
+          <button goa-button buttonSize="normal" buttonType="tertiary" title="title" (click)="click($event)">Tertiary</button><br><br>
           <button goa-button [buttonSize]="buttonSize" [buttonType]="buttonType" [title]="title" (click)="click($event)">{{content}}</button>
         `,
         props: args

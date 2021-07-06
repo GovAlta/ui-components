@@ -154,25 +154,6 @@ A user input field that allows the user to select from a list of options.
   </Story>
 </Canvas>
 
-### Initial Value
-
-<Canvas>
-  <Story
-    name="Initial Value"
-    args={{
-      label: 'Fruits',
-      description: 'Kiwi should be pre-selected',
-      style: { width: '300px' },
-      value: 'kiwi',
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      }
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
 ### Initial Values
 
 <Canvas>
@@ -193,7 +174,6 @@ A user input field that allows the user to select from a list of options.
 </Canvas>
 
 ### Disabled
-
 <Canvas>
   <Story
     name="Disabled"
@@ -213,8 +193,44 @@ A user input field that allows the user to select from a list of options.
   </Story>
 </Canvas>
 
-### Menu Height
+### Multi Selection
+<Canvas>
+  <Story
+    name="Multi Selection"
+    height="400px"
+    args={{
+      label: 'Fruits',
+      description: 'Choose your favourite fruits!',
+      style: { width: '300px' },
+      multiple: true,
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
 
+### Groups
+<Canvas>
+  <Story
+    name="Groups"
+    height="400px"
+    args={{
+      label: 'Fruits',
+      description: 'Choose your favourite fruits!',
+      style: { width: '300px' },
+      selectionChanged: (value) => {
+        action('selection changed')(value);
+      }
+    }}
+  >
+    {GroupTemplate.bind({})}
+  </Story>
+</Canvas>
+
+### Menu Height
 <Canvas>
   <Story
     name="Menu Height"
@@ -233,7 +249,6 @@ A user input field that allows the user to select from a list of options.
 
 
 ### Max Menu Height
-
 <Canvas>
   <Story
     name="Max Menu Height"
@@ -248,45 +263,6 @@ A user input field that allows the user to select from a list of options.
     }}
   >
     {LongTemplate.bind({})}
-  </Story>
-</Canvas>
-
-### Multiselect
-
-<Canvas>
-  <Story
-    name="Multiselect"
-    height="400px"
-    args={{
-      label: 'Fruits',
-      description: 'Choose your favourite fruits!',
-      style: { width: '300px' },
-      multiple: true,
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      }
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
-### Groups
-
-<Canvas>
-  <Story
-    name="Groups"
-    height="400px"
-    args={{
-      label: 'Fruits',
-      description: 'Choose your favourite fruits!',
-      style: { width: '300px' },
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      }
-    }}
-  >
-    {GroupTemplate.bind({})}
   </Story>
 </Canvas>
 

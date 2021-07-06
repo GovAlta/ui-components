@@ -16,10 +16,9 @@ import heroBackground from '../../../../shared/storybook-common/assets/working-i
   }}
 />
 
-# Header
-
+# With content and link
 <Canvas>
-  <Story name="With content and link" height={100}
+  <Story name="With content and link" height={650}
     args={{
       backgroundUrl: heroBackground,
       title: "Upgrading our bitumen",
@@ -41,10 +40,32 @@ import heroBackground from '../../../../shared/storybook-common/assets/working-i
   </Story>
 </Canvas>
 
+# With content only
 <Canvas>
-  <Story name="With link only" height={100}
+  <Story name="With content only" height={650}
     args={{
-      backgroundUrl: "https://www.alberta.ca/goa/design-system/images/working-in-cold-hero-3_rdax_75.jpg",
+      backgroundUrl: heroBackground,
+      title: "Upgrading our bitumen"
+    }}>
+      {(args) => {
+        return {
+          template: `
+            <goa-hero-banner [title]="title" [backgroundUrl]="backgroundUrl">
+              {{title}}
+              <goa-hero-banner-content>{{content}}</goa-hero-banner-content>
+            </goa-hero-banner>`,
+          props: args
+        }
+      }}
+  </Story>
+</Canvas>
+
+
+# With link only
+<Canvas>
+  <Story name="With link only" height={650}
+    args={{
+      backgroundUrl: heroBackground,
       title: "Upgrading our bitumen",
       linkText: "Learn More",
       linkUrl: "http://google.com"
@@ -62,32 +83,13 @@ import heroBackground from '../../../../shared/storybook-common/assets/working-i
   </Story>
 </Canvas>
 
-<Canvas>
-  <Story name="With header only" height={100}
-    args={{
-      backgroundUrl: "https://www.alberta.ca/goa/design-system/images/working-in-cold-hero-3_rdax_75.jpg",
-      title: "Upgrading our bitumen"
-    }}>
-      {(args) => {
-        return {
-          template: `
-            <goa-hero-banner [title]="title" [backgroundUrl]="backgroundUrl">
-              {{title}}
-            </goa-hero-banner>`,
-          props: args
-        }
-      }}
-  </Story>
-</Canvas>
-
 ## Overview
-
 A large image area used to give visual reinforcement of a particular section of content.
 
 ## Examples
 ```html
 <goa-hero-banner
-    backgroundUrl="https://www.alberta.ca/goa/design-system/images/working-in-cold-hero-3_rdax_75.jpg"
+    backgroundUrl="backgroundUrl"
     title="Upgrading our bitumen">
   <goa-hero-banner-content>
     As part of our Made-in-Alberta energy strategy, a partial upgrader will be built in the Industrial Heartland –
@@ -99,17 +101,17 @@ A large image area used to give visual reinforcement of a particular section of 
 
 ## Properties
 
-### GoAHeroBannerComponent
+#### GoAHeroBannerComponent
 <Description of={GoAHeroBannerComponent} />
 <ArgsTable of={GoAHeroBannerComponent} />
 
-
-### GoAHeroBannerContentComponent
-<Description of={GoACardFooterComponent} />
+#### GoAHeroBannerContentComponent
+<Description of={GoAHeroBannerContentComponent} />
+<ArgsTable of={GoAHeroBannerContentComponent} />
 
 ## Usage guidelines
 
-### HeroBanner elements
+#### HeroBanner elements
 A hero banner must contain a title
 
 <DoDont
