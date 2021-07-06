@@ -7,9 +7,10 @@ interface Props {
   errorMsg?: string;
   required?: boolean;
   helpText?: string;
+  multiLine?: boolean
 }
 
-export const GoAInput: FC<Props> = ({ validate = null, name = '', type = '', errorMsg = '', required = false, helpText = '' }) => {
+export const GoAInput: FC<Props> = ({ validate = null, name = '', type = '', errorMsg = '', required = false, helpText = '', multiLine = false }) => {
   const [valid, setValid] = useState(true);
   const [value, setValue] = useState('');
 
@@ -18,16 +19,19 @@ export const GoAInput: FC<Props> = ({ validate = null, name = '', type = '', err
     setValue(value);
     setValid(validate(value))
   }
+
   return (
     <div >
-      <input type={type} required={required} name={name}
+      {multiLine ?
+        <textarea value={value} />
+        : <input type={type} required={required} name={name}
+          value={value}
+          onChange={handleInput} />}
+      { !valid ? <p className="goa-form-error-message" style={{ display: `${valid ? 'none' : 'block'}` }} >
+        {errorMsg}</p> : ''}
 
-        value={value}
-        onChange={handleInput} />
-      <p className="goa-form-error-message" style={{ display: `${valid ? 'none' : 'block'}` }} >
-        {errorMsg}</p>
-      <p className="goa-form-help-text" style={{ display: `${helpText ? 'block' : 'none'}` }} >
-        {errorMsg}</p>
+      <p className="goa-form-help-text-message" style={{ display: `${helpText ? 'block' : 'none'}` }} >
+        {helpText}</p>
     </div>
   );
 }

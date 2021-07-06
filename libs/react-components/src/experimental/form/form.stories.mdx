@@ -71,7 +71,11 @@ export const Template = (args) => (
       </GoAFormItem>
       <GoAFormItem>
         <label>Label</label>
-        <input type="text" name="Label2" />
+        <GoAInput
+          name="label2"
+          multiLine={true}
+          helpText="Overflowing Input Field"
+        />
       </GoAFormItem>
       <GoAFormButton>
         <GoAButton buttonType="tertiary" type="button">
