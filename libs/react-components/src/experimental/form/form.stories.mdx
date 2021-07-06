@@ -3,6 +3,7 @@ import { GoAForm, GoAFormItem, GoAFormButton } from './form.component';
 import GoAButton from '../../lib/button/button';
 import GoAInputEmail from './input/emailInput.component';
 import GoAInput from './input/input.component';
+import GoACallout from '../../lib/callout/callout';
 import {
   Meta,
   Preview,
@@ -39,7 +40,7 @@ export const Template = (args) => (
       ligulaexcrel kmlobortis lacina mon sed nibh
     </p>
     <GoAForm {...args}>
-      <div>
+      <span>
         <GoAFormItem>
           <label>FirstName</label>
           <input type="text" name="FirstName" />
@@ -52,7 +53,12 @@ export const Template = (args) => (
           <label>LastName</label>
           <input type="text" name="LastName" />
         </GoAFormItem>
-      </div>
+      </span>
+      <GoACallout
+        type="information"
+        title=""
+        content="Provincial Family Resource Networks (PRNS) deliver high quality."
+      />
       <GoAFormItem>
         <label>Label</label>
         <GoAInput type="text" helpText="Non-standard Input" />
