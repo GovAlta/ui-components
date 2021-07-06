@@ -10,6 +10,7 @@ import GoAHeroBanner from './lib/hero-banner/hero-banner.vue';
 import GoANotificationBanner from './lib/notification-banner/notification-banner.vue';
 import GoADropdown from './lib/dropdown/dropdown.vue'
 import GoADropdownOption from './lib/dropdown/option/option.vue'
+import { GoABadge } from './experimental'
 
 export {
   GoAMicrositeLogo,
@@ -22,6 +23,7 @@ export {
   GoARadioGroup,
   GoAHeroBanner,
   GoANotificationBanner,
-  GoADropdown, 
+  GoADropdown,
   GoADropdownOption,
+  GoABadge
 };
