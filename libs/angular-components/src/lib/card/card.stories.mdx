@@ -54,16 +54,55 @@ import { action } from '@storybook/addon-actions';
 
 # Cards
 
-### Without Thumb
-
+### Basic
 <Canvas>
   <Story
-    name="Without Thumb"
+    name="Basic"
     height={400}
     args={{
       cardSize: 'full',
-      headerContent: 'My card header.',
-      content: 'My card content.',
+      headerContent: 'Energy Diversification Act'
+    }}
+  >
+    {(args) => {
+      return {
+        template: `<goa-card [cardSize]="cardSize">
+                        <goa-card-header>{{headerContent}}</goa-card-header>
+                        <goa-card-thumb-image url="working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
+                        <goa-card-content>
+                          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                          <ul>
+                            <li>
+                              Item 1
+                            </li>
+                            <li>
+                              Item 2
+                            </li>
+                            <li>
+                              Item 3
+                            </li>
+                          </ul>
+                        </goa-card-content>
+                        <goa-card-footer>
+                          <button style="margin: 12px 12px 0 0;" goa-button buttonSize="small" buttonType="tertiary">Action 1</button>
+                          <button style="margin: 12px 12px 0 0;" goa-button buttonSize="small" buttonType="tertiary">Action 2</button>
+                        </goa-card-footer>
+                    </goa-card>`,
+        props: args,
+      };
+    }}
+  </Story>
+</Canvas>
+
+### NoThumb
+<Canvas>
+  <Story
+    name="NoThumb"
+    height={400}
+    args={{
+      cardSize: 'full',
+      headerContent: 'Energy Diversification Act',
+      content: 'We are encouraging companies to turn out oil and gas resources into more valuable.',
     }}
   >
     {(args) => {
@@ -83,15 +122,40 @@ import { action } from '@storybook/addon-actions';
 </Canvas>
 
 ### With Thumb
-
 <Canvas>
   <Story
     name="With Thumb"
     height={400}
     args={{
       cardSize: 'full',
-      headerContent: 'My card header.',
-      content: 'My card content.',
+      headerContent: 'Energy Diversification Act',
+      content: 'We are encouraging companies to turn out oil and gas resources into more valuable.',
+      titleUrl: 'https://'
+    }}
+  >
+    {(args) => {
+      return {
+        template: `<goa-card [cardSize]="cardSize">
+                        <goa-card-thumb-image url="working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
+                        <goa-card-header>{{headerContent}}</goa-card-header>
+                        <goa-card-content>{{content}}</goa-card-content>
+                    </goa-card>`,
+        props: args,
+      };
+    }}
+  </Story>
+</Canvas>
+
+### With Footer
+
+<Canvas>
+  <Story
+    name="With Footer"
+    height={400}
+    args={{
+      cardSize: 'full',
+      headerContent: 'Energy Diversification Act',
+      content: 'We are encouraging companies to turn out oil and gas resources into more valuable.',
     }}
   >
     {(args) => {
@@ -111,16 +175,15 @@ import { action } from '@storybook/addon-actions';
   </Story>
 </Canvas>
 
-### In a Grid
-
+### Layouts
 <Canvas>
-  <Story name="In a flex-layout" height={400} args={{}}>
+  <Story name="Layouts" height={400} args={{}}>
     {(args) => {
       return {
         template: `<div style="display:flex;">
                       <goa-card style="margin: 28px; width:200px;">
                           <goa-card-thumb-image url="working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
-                          <goa-card-header>Card 1</goa-card-header>
+                          <goa-card-header>Energy Diversification Act</goa-card-header>
                           <goa-card-content>Fixed width.  Height scales to parent container.</goa-card-content>
                         <goa-card-footer>
                           <button style="margin: 12px 12px 0 0;" goa-button buttonSize="small" buttonType="tertiary">Action 1</button>
@@ -129,7 +192,7 @@ import { action } from '@storybook/addon-actions';
                       </goa-card>
                       <goa-card style="margin: 28px;">
                           <goa-card-thumb-image url="working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
-                          <goa-card-header>Card 2</goa-card-header>
+                          <goa-card-header>Energy Diversification Act</goa-card-header>
                           <goa-card-content>Auto width.</goa-card-content>
                         <goa-card-footer>
                           <button style="margin: 12px 12px 0 0;" goa-button buttonSize="small" buttonType="tertiary">Action 1</button>
@@ -138,7 +201,7 @@ import { action } from '@storybook/addon-actions';
                       </goa-card>
                       <goa-card style="flex: 1 0 0; margin: 28px;">
                           <goa-card-thumb-image url="working-in-cold-hero-3_rdax_75.jpg" alt="hero pic"></goa-card-thumb-image>
-                          <goa-card-header>Card 3</goa-card-header>
+                          <goa-card-header>Energy Diversification Act</goa-card-header>
                           <goa-card-content>Flex grow.  Note, when card uses cardImage the image height will scale to maintain aspect ratio.</goa-card-content>
                         <goa-card-footer>
                           <button style="margin: 12px 12px 0 0;" goa-button buttonSize="small" buttonType="tertiary">Action 1</button>
@@ -167,7 +230,7 @@ promote a call to action.
 ```html
 <goa-card>
   <goa-card-thumb-image url="test" alt="Alt"></goa-card-thumb-image>
-  <goa-card-header>Header</goa-card-header>
+  <goa-card-header>Energy Diversification Act</goa-card-header>
   <goa-card-content>Content</goa-card-content>
   <goa-card-footer
     ><button goa-button buttonSize="small" buttonType="tertiary">
@@ -177,11 +240,11 @@ promote a call to action.
 >>
 ```
 
-### Without Thumb
+###No Thumb
 
 ```html
 <goa-card>
-  <goa-card-header>Header</goa-card-header>
+  <goa-card-header>Energy Diversification Act</goa-card-header>
   <goa-card-content>Content</goa-card-content>
   <goa-card-footer
     ><button goa-button buttonSize="small" buttonType="tertiary">
@@ -200,7 +263,7 @@ promote a call to action.
       url="working-in-cold-hero-3_rdax_75.jpg"
       alt="hero pic"
     ></goa-card-thumb-image>
-    <goa-card-header>Card 1</goa-card-header>
+    <goa-card-header>Energy Diversification Act</goa-card-header>
     <goa-card-content
       >Fixed width. Note, when card uses cardImage the image height will scale
       to maintain aspect ratio.</goa-card-content
@@ -216,7 +279,7 @@ promote a call to action.
       url="working-in-cold-hero-3_rdax_75.jpg"
       alt="hero pic"
     ></goa-card-thumb-image>
-    <goa-card-header>Card 2</goa-card-header>
+    <goa-card-header>Energy Diversification Act</goa-card-header>
     <goa-card-content>Auto width.</goa-card-content>
     <goa-card-footer
       ><button goa-button buttonSize="small" buttonType="tertiary">
@@ -229,7 +292,7 @@ promote a call to action.
       url="working-in-cold-hero-3_rdax_75.jpg"
       alt="hero pic"
     ></goa-card-thumb-image>
-    <goa-card-header>Card 3</goa-card-header>
+    <goa-card-header>Energy Diversification Act</goa-card-header>
     <goa-card-content>Flex grow.</goa-card-content>
     <goa-card-footer
       ><button goa-button buttonSize="small" buttonType="tertiary">

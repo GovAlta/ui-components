@@ -116,6 +116,148 @@ A user input field that allows the user one selected option from a large list of
   </Story>
 </Canvas>
 
+#### Required
+
+<Canvas>
+  <Story name="Required"
+    height={400}
+    args={{
+      label: 'Fruits',
+      description: 'Choose your favourite fruit!',
+      typeaheadMode: 'none',
+      required: true,
+      disabled: false,
+      multiple: false
+    }}
+    >
+    {(args) => {
+      args.onSelectionChanged = function(value) {
+        action('selection was changed')(value);
+      }
+      return {
+        template: `<span style="width:300px;display:inline-block;">
+                    <goa-dropdown
+                        (selectionChange)="onSelectionChanged($event)"
+                        [typeaheadMode]="typeaheadMode"
+                        [menuHeight]="menuHeight"
+                        [required]="required"
+                        [disabled]="disabled"
+                        [multiple]="multiple"
+                        [label]="label"
+                        [selectedIds]="selectedIds"
+                        [description]="description">
+                      <goa-option id='apples' [value]='{fruit: "apples"}' label="Apples">Apples</goa-option>
+                      <goa-option id='oranges' [value]='{fruit: "oranges"}' label="Oranges"><span>Oranges 🍊</span></goa-option>
+                      <goa-option id='pears' [value]='{fruit: "pears"}' label="Pears">Pears</goa-option>
+                      <goa-option id='plums' [value]='{fruit: "plums"}' label="Plums">Plums</goa-option>
+                      <goa-option id='peaches' [value]='{fruit: "peaches"}' label="Peaches">Peaches</goa-option>
+                      <goa-option id='watermelons' [value]='{fruit: "watermelons"}' label="Watermelon">Watermelon</goa-option>
+                      <goa-option id='tomatoes' [value]='{fruit: "tomatoes"}' label="Tomatoes">Tomatoes</goa-option>
+                      <goa-option id='papayas' [value]='{fruit: "papayas"}' label="Papayas">Papayas</goa-option>
+                      <goa-option id='bananas' [value]='{fruit: "bananas"}' label="Bananas">Bananas</goa-option>
+                      <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
+                    </goa-dropdown>
+                  </span>`,
+          props: args
+        }
+    }}
+  </Story>
+</Canvas>
+
+#### Initial Values
+<Canvas>
+  <Story name="Initial Values"
+    height={400}
+    args={{
+      label: 'Fruits',
+      description: 'Choose your favourite fruit!',
+      typeaheadMode: 'none',
+      required: false,
+      disabled: false,
+      multiple: false
+    }}
+    >
+    {(args) => {
+      args.onSelectionChanged = function(value) {
+        action('selection was changed')(value);
+      }
+      return {
+        template: `<span style="width:300px;display:inline-block;">
+                    <goa-dropdown
+                        (selectionChange)="onSelectionChanged($event)"
+                        [typeaheadMode]="typeaheadMode"
+                        [menuHeight]="menuHeight"
+                        [required]="required"
+                        [disabled]="disabled"
+                        [multiple]="multiple"
+                        [label]="label"
+                        [selectedIds]="selectedIds"
+                        [description]="description">
+                      <goa-option id='apples' [value]='{fruit: "apples"}' label="Apples">Apples</goa-option>
+                      <goa-option id='oranges' [defaultSelected]="true" [value]='{fruit: "oranges"}' label="Oranges"><span>Oranges 🍊</span></goa-option>
+                      <goa-option id='pears' [value]='{fruit: "pears"}' label="Pears">Pears</goa-option>
+                      <goa-option id='plums' [value]='{fruit: "plums"}' label="Plums">Plums</goa-option>
+                      <goa-option id='peaches' [value]='{fruit: "peaches"}' label="Peaches">Peaches</goa-option>
+                      <goa-option id='watermelons' [value]='{fruit: "watermelons"}' label="Watermelon">Watermelon</goa-option>
+                      <goa-option id='tomatoes' [value]='{fruit: "tomatoes"}' label="Tomatoes">Tomatoes</goa-option>
+                      <goa-option id='papayas' [value]='{fruit: "papayas"}' label="Papayas">Papayas</goa-option>
+                      <goa-option id='bananas' [value]='{fruit: "bananas"}' label="Bananas">Bananas</goa-option>
+                      <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
+                    </goa-dropdown>
+                  </span>`,
+          props: args
+        }
+    }}
+  </Story>
+</Canvas>
+
+#### Disabled
+<Canvas>
+  <Story name="Disabled"
+    height={400}
+    args={{
+      label: 'Fruits',
+      description: 'Choose your favourite fruit!',
+      typeaheadMode: 'none',
+      required: false,
+      disabled: true,
+      multiple: false
+    }}
+    >
+    {(args) => {
+      args.onSelectionChanged = function(value) {
+        action('selection was changed')(value);
+      }
+      return {
+        template: `<span style="width:300px;display:inline-block;">
+                    <goa-dropdown
+                        (selectionChange)="onSelectionChanged($event)"
+                        [typeaheadMode]="typeaheadMode"
+                        [menuHeight]="menuHeight"
+                        [required]="required"
+                        [disabled]="disabled"
+                        [multiple]="multiple"
+                        [label]="label"
+                        [selectedIds]="selectedIds"
+                        [description]="description">
+                      <goa-option id='apples' [value]='{fruit: "apples"}' label="Apples">Apples</goa-option>
+                      <goa-option id='oranges' [value]='{fruit: "oranges"}' label="Oranges"><span>Oranges 🍊</span></goa-option>
+                      <goa-option id='pears' [value]='{fruit: "pears"}' label="Pears">Pears</goa-option>
+                      <goa-option id='plums' [value]='{fruit: "plums"}' label="Plums">Plums</goa-option>
+                      <goa-option id='peaches' [value]='{fruit: "peaches"}' label="Peaches">Peaches</goa-option>
+                      <goa-option id='watermelons' [value]='{fruit: "watermelons"}' label="Watermelon">Watermelon</goa-option>
+                      <goa-option id='tomatoes' [value]='{fruit: "tomatoes"}' label="Tomatoes">Tomatoes</goa-option>
+                      <goa-option id='papayas' [value]='{fruit: "papayas"}' label="Papayas">Papayas</goa-option>
+                      <goa-option id='bananas' [value]='{fruit: "bananas"}' label="Bananas">Bananas</goa-option>
+                      <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
+                    </goa-dropdown>
+                  </span>`,
+          props: args
+        }
+    }}
+  </Story>
+</Canvas>
+
 #### Multi Selection
 <Canvas>
   <Story name="Multi Selection"
@@ -163,57 +305,9 @@ A user input field that allows the user one selected option from a large list of
   </Story>
 </Canvas>
 
-
-#### Default Value
+#### Groups
 <Canvas>
-  <Story name="Default Value"
-    height={400}
-    args={{
-      label: 'Fruits',
-      description: 'Choose your favourite fruit!',
-      typeaheadMode: 'none',
-      required: false,
-      disabled: false,
-      multiple: false
-    }}
-    >
-    {(args) => {
-      args.onSelectionChanged = function(value) {
-        action('selection was changed')(value);
-      }
-      return {
-        template: `<span style="width:300px;display:inline-block;">
-                    <goa-dropdown
-                        (selectionChange)="onSelectionChanged($event)"
-                        [typeaheadMode]="typeaheadMode"
-                        [menuHeight]="menuHeight"
-                        [required]="required"
-                        [disabled]="disabled"
-                        [multiple]="multiple"
-                        [label]="label"
-                        [selectedIds]="selectedIds"
-                        [description]="description">
-                      <goa-option id='apples' [value]='{fruit: "apples"}' label="Apples">Apples</goa-option>
-                      <goa-option id='oranges' [defaultSelected]="true" [value]='{fruit: "oranges"}' label="Oranges"><span>Oranges 🍊</span></goa-option>
-                      <goa-option id='pears' [value]='{fruit: "pears"}' label="Pears">Pears</goa-option>
-                      <goa-option id='plums' [value]='{fruit: "plums"}' label="Plums">Plums</goa-option>
-                      <goa-option id='peaches' [value]='{fruit: "peaches"}' label="Peaches">Peaches</goa-option>
-                      <goa-option id='watermelons' [value]='{fruit: "watermelons"}' label="Watermelon">Watermelon</goa-option>
-                      <goa-option id='tomatoes' [value]='{fruit: "tomatoes"}' label="Tomatoes">Tomatoes</goa-option>
-                      <goa-option id='papayas' [value]='{fruit: "papayas"}' label="Papayas">Papayas</goa-option>
-                      <goa-option id='bananas' [value]='{fruit: "bananas"}' label="Bananas">Bananas</goa-option>
-                      <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
-                    </goa-dropdown>
-                  </span>`,
-          props: args
-        }
-    }}
-  </Story>
-</Canvas>
-
-#### With Grouping
-<Canvas>
-  <Story name="With Grouping" height={400}
+  <Story name="Groups" height={400}
       args={{
       label: 'Fruits',
       description: 'Choose your favourite fruit!',

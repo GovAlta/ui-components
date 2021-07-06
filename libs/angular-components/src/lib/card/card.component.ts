@@ -21,6 +21,7 @@ export class GoACardComponent implements OnInit {
    * What percentage of container width to take.
    */
   @Input() cardSize: 'full' | 'auto' = 'full';
+  @Input() titleUrl: string;
 
   constructor() { }
 

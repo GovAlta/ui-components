@@ -86,15 +86,14 @@ A user input field that allows the user to select from a list of options.
   </Story>
 </Canvas>
 
-### Single value preselected
-
+### Initial Values
 <Canvas>
-  <Story name="Single value preselected">
+  <Story name="Initial Values">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
         render: function (createElement) {
-          return createElement(
+          return  createElement(
             GoADropdown, {
               props: {
                 label: 'Fruits',
@@ -104,7 +103,8 @@ A user input field that allows the user to select from a list of options.
                   { name: 'Pear', value: 'pear' },
                 ],
                 description: 'Pick something from the list',
-                value: 'pear'
+                multiple: true,
+                values: ['banana', 'pear']
               },
               style: { width: '300px' },
             }
@@ -116,7 +116,6 @@ A user input field that allows the user to select from a list of options.
 </Canvas>
 
 ### Disabled
-
 <Canvas>
   <Story name="Disabled">
     {(args, argTypes) => {
@@ -136,6 +135,39 @@ A user input field that allows the user to select from a list of options.
                 disabled: true
               },
               style: { width: '300px' },
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+### Multi Selection
+<Canvas>
+  <Story name="Multi Selection">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return  createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                multiple: true,
+              },
+              style: { width: '300px' },
+              on: {
+                select: (values) => {
+                  action('selection changed')(values);
+                }
+              }
             }
           )
         }
@@ -254,103 +286,9 @@ A user input field that allows the user to select from a list of options.
   </Story>
 </Canvas>
 
-### Multiselect
-
+### With Filtering (startsWith)
 <Canvas>
-  <Story name="Multiselect">
-    {(args, argTypes) => {
-      return {
-        components: [GoADropdown],
-        render: function (createElement) {
-          return  createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-                multiple: true,
-              },
-              style: { width: '300px' },
-              on: {
-                select: (values) => {
-                  action('selection changed')(values);
-                }
-              }
-            }
-          )
-        }
-      }
-    }}
-  </Story>
-</Canvas>
-
-### Multiselect with preselected values
-
-<Canvas>
-  <Story name="Multiselect with preselected values">
-    {(args, argTypes) => {
-      return {
-        components: [GoADropdown],
-        render: function (createElement) {
-          return  createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-                multiple: true,
-                values: ['banana', 'pear']
-              },
-              style: { width: '300px' },
-            }
-          )
-        }
-      }
-    }}
-  </Story>
-</Canvas>
-
-### Multiselect with preselected values
-
-<Canvas>
-  <Story name="Filter with contains match">
-    {(args, argTypes) => {
-      return {
-        components: [GoADropdown],
-        render: function (createElement) {
-          return  createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-                typeAheadMode: 'contains'
-              },
-              style: { width: '300px' },
-            }
-          )
-        }
-      }
-    }}
-  </Story>
-</Canvas>
-
-### Filter with starts with match
-
-<Canvas>
-  <Story name="Filter with starts with match">
+  <Story name="With Filtering (startsWith)">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
@@ -366,6 +304,34 @@ A user input field that allows the user to select from a list of options.
                 ],
                 description: 'Pick something from the list',
                 typeAheadMode: 'startsWith'
+              },
+              style: { width: '300px' },
+            }
+          )
+        }
+      }
+    }}
+  </Story>
+</Canvas>
+
+### With Filtering (contains)
+<Canvas>
+  <Story name="With Filtering (contains)">
+    {(args, argTypes) => {
+      return {
+        components: [GoADropdown],
+        render: function (createElement) {
+          return  createElement(
+            GoADropdown, {
+              props: {
+                label: 'Fruits',
+                options: [
+                  { name: 'Apple', value: 'apple' },
+                  { name: 'Banana', value: 'banana' },
+                  { name: 'Pear', value: 'pear' },
+                ],
+                description: 'Pick something from the list',
+                typeAheadMode: 'contains'
               },
               style: { width: '300px' },
             }
