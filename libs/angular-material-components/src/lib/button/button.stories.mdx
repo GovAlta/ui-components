@@ -25,7 +25,7 @@ A hierarchy of actions provided by buttons.
 
 <Canvas>
   <Story
-    name="Primary"
+    name="Variants"
     height={100}
     parameters={{
       design: {
@@ -38,49 +38,9 @@ A hierarchy of actions provided by buttons.
   >
     {(args) => {
       return {
-        template: `<button mat-raised-button color="primary">Primary</button>`,
-      };
-    }}
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story
-    name="Secondary"
-    height={100}
-    parameters={{
-      design: {
-        specUrl:
-          'https://xd.adobe.com/spec/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/screen/ea24fb1f-4b15-495f-8fe6-603d1ac538a4/Buttons',
-        reviewUrl:
-          'https://xd.adobe.com/view/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/',
-      },
-    }}
-  >
-    {(args) => {
-      return {
-        template: `<button mat-raised-button color="secondary">Secondary</button>`,
-      };
-    }}
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story
-    name="Default"
-    height={100}
-    parameters={{
-      design: {
-        specUrl:
-          'https://xd.adobe.com/spec/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/screen/ea24fb1f-4b15-495f-8fe6-603d1ac538a4/Buttons',
-        reviewUrl:
-          'https://xd.adobe.com/view/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/',
-      },
-    }}
-  >
-    {(args) => {
-      return {
-        template: `<button mat-raised-button>Default</button>`,
+        template: `<button mat-raised-button color="primary">Primary</button><span style="margin-left:12px"></span>
+        <button mat-raised-button color="secondary">Secondary</button><span style="margin-left:12px"></span>
+        <button mat-raised-button color="teritary">Teritary</button>`,
       };
     }}
   </Story>
