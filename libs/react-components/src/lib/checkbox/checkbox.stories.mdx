@@ -9,6 +9,7 @@ import { DoDont } from '@abgov/shared/storybook-common';
     component={GoACheckbox}
     argTypes={{
       content: { control: 'text' },
+      value: { control: 'text' },
       checked: {
         control: {
           type: 'boolean',
@@ -61,7 +62,8 @@ export const Template = (args) =>
       disabled: false,
       indeterminate: false,
       labelPosition: 'after',
-      content: 'Checkbox 1'
+      content: 'Checkbox 1',
+      value: 'checkbox'
     }}
   >
     {Template.bind({})}
@@ -86,6 +88,7 @@ All Properties
   indeterminate="isIndeterminateFn()"
   labelPosition="'after' || 'before'"
   (selectionChange)="selectionChanged($event)"
+  value="item.value"
 >
   Label goes here
 </GoACheckbox>
