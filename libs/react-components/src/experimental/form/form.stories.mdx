@@ -40,10 +40,23 @@ export const Template = (args) => (
       ligulaexcrel kmlobortis lacina mon sed nibh
     </p>
     <GoAForm {...args}>
-      <span>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'stretch',
+        }}
+      >
         <GoAFormItem>
           <label>FirstName</label>
-          <input type="text" name="FirstName" />
+          <GoAInput
+            name="FirstName"
+            type="text"
+            validate={(value) => !(value.length === 0)}
+            errorMsg="Enter your first name"
+            required={true}
+          />
         </GoAFormItem>
         <GoAFormItem>
           <label>MiddleName</label>
@@ -51,9 +64,14 @@ export const Template = (args) => (
         </GoAFormItem>
         <GoAFormItem>
           <label>LastName</label>
-          <input type="text" name="LastName" />
+          <GoAInput
+            name="LastName"
+            type="text"
+            errorMsg="Enter your last name"
+            required={true}
+          />
         </GoAFormItem>
-      </span>
+      </div>
       <GoACallout
         type="information"
         title=""
