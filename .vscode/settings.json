@@ -20,5 +20,9 @@
   },
   "[vue]": {
     "editor.defaultFormatter": "octref.vetur"
-  }
+  },
+  "cSpell.words": [
+    "checkmark",
+    "dashmark"
+  ]
 }
