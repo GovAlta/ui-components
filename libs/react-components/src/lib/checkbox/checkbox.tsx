@@ -32,6 +32,10 @@ export interface CheckboxProps {
    * The content of the checkbox label.
   */
   content?: string,
+  /**
+   * The value of the checkbox.
+  */
+  value?: string,
   children?: React.ReactNode,
   /**
    * Callback which returns whether button is checked.
@@ -39,7 +43,7 @@ export interface CheckboxProps {
   selectionChange?: any,
 }
 
-export const GoACheckbox = ({checked = false, required = false, disabled = false, indeterminate = false, labelPosition = "before", content, children, selectionChange }: CheckboxProps) => {
+export const GoACheckbox = ({ checked = false, required = false, disabled = false, indeterminate = false, labelPosition = "before", value = '', content, children, selectionChange, }: CheckboxProps) => {
   const [checkedBox, setCheckedBox] = useState(checked);
   const [checkedBoxOld, setCheckedBoxOld] = useState(checked);
   const [indeterminateCheck, setIndeterminateCheck] = useState(indeterminate);
@@ -96,22 +100,22 @@ export const GoACheckbox = ({checked = false, required = false, disabled = false
             checked={checkedBox}
             disabled={disabled}
             required={required}
-            value={content}
+            value={value}
             onChange={() => checkboxHandler()}
           />
-          { indeterminateCheck && lastChecked === 'indeterminate' && (
+          {indeterminateCheck && lastChecked === 'indeterminate' && (
             <svg id='dashmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2" className="goa-indeterminate">
-                <rect width="15" height="2"/>
+              <rect width="15" height="2" />
             </svg>
           )}
-          { checkedBox && lastChecked === 'checked' && (
+          {checkedBox && lastChecked === 'checked' && (
             <svg id='checkmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18" className="goa-checkmark">
-                <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z"/>
+              <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
             </svg>
           )}
         </div>
         <span className="goa-checkbox-label">
-            {content || children}
+          {content || children}
         </span>
       </label>
     </div>
@@ -125,6 +129,7 @@ GoACheckbox.propTypes = {
   indeterminate: PropTypes.bool,
   labelPosition: PropTypes.string,
   children: PropTypes.node,
+  value: PropTypes.string
 };
 
 export default GoACheckbox;
