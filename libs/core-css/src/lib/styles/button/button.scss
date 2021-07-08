@@ -76,7 +76,7 @@ $tertiary-focus-outline-color: $active-outline-color;
       pointer-events: none;
       color: $disabled-color;
       background-color: $disabled-background-color;
-      border: none;
+      border-color: $disabled-background-color;
     }
 
     &:hover {
