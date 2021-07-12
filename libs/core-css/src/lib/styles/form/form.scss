@@ -2,10 +2,32 @@
 
 .goa-form {
   position: relative;
+  margin: 20px;
+}
+.goa-form-title {
+  top: 425px;
+  left: 96px;
+  width: 239px;
+  height: 35px;
+  text-align: left;
+  font-size: 35px;
+  letter-spacing: 0px;
+  color: #333333;
+  opacity: 1;
+}
+
+.goa-form-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  position: 'relative';
 }
 
 .goa-form-items {
   margin-bottom: 1rem;
+  position: 'relative';
 
   label {
     display: block;
@@ -18,20 +40,9 @@
     display: block;
     width: 100%;
     border-radius: 4px;
-    border: 1px solid; // var(--color-gray-600);
+    border: 1px solid;
     padding: 0.5rem;
   }
-}
-.goa-form-error-message {
-  font-weight: 300;
-  color: red;
-  margin: 0;
-}
-
-.goa-form-help-text-message {
-  font-weight: 200;
-  color: #333;
-  margin: 0;
 }
 
 .goa-form-button {

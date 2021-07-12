@@ -1,60 +1,45 @@
-import React, { FormEvent, FC, ReactNode, useState } from 'react';
-import { GoAFormItem } from './form.item/form.item.component';
-import { GoAFormButton } from './form.item/form.button.component';
-import GoACallout from '../../lib/callout/callout';
+import React, { FormEvent, ReactNode } from 'react';
+import { GoAFormItem } from './container/form.item.component';
+import { GoAFormButton } from './container/form.button.component';
+import { GoAFormContainer } from './container/form.container.component';
 import './form.scss';
-import { GoAButton } from '../../lib/button/button';
 
-interface Props {
+import PropTypes from "prop-types";
+
+type FormProps = {
+  formTitle: string,
+  formDescription: string,
+  /**
+   * Action to take on submit button click
+   */
   onSubmit?: (e: FormEvent<Element>) => void;
+  /**
+   * Provide children to be rendered inside of the element
+   */
   children?: ReactNode
 }
 
-export const GoAForm: FC<Props> = ({ onSubmit = null, children = null }) => {
-  const [errorMsg, setErrorMsg] = useState('');
-  function handleOnSubmit(evt: FormEvent) {
-    evt.preventDefault();
-    if (validationSubmit()) { onSubmit(evt) }
-  }
+export const GoAForm = ({ formTitle = '', formDescription = '', onSubmit = null, children = null, ...props }: FormProps) => {
 
-  function validationSubmit(): boolean {
-
-    return true;
-  }
   return (
-
-    <div className="goa-form" style={{ position: 'relative' }}>
+    <div>
+      <span className="goa-form-title">{formTitle}</span>
+      <div className="goa-text">{formDescription}</div>
       {onSubmit ? (
-        <form onSubmit={handleOnSubmit} >
+        <form onSubmit={onSubmit} className="goa-form">
           {children}
-          <GoACallout
-            type='emergency'
-            title='Please fix the following errors'>
-            <ul>
-              <li>Coffee</li>
-              <li>Tea</li>
-              <li>Milk</li>
-            </ul>
-          </GoACallout>
-          <GoAFormButton>
-            <GoAButton buttonType="tertiary" type="button">
-              Cancel
-        </GoAButton>
-            <GoAButton
-              buttonType="primary"
-              type="submit"
-            >
-              Submit
-        </GoAButton>
-          </GoAFormButton>
         </form>
       ) : (
           children
         )}
-
     </div>
   );
 }
-
+GoAForm.propTypes = {
+  formTitle: PropTypes.string,
+  formDescription: PropTypes.string,
+  onSubmit: PropTypes.func,
+  children: PropTypes.node,
+}
 export default GoAForm;
-export { GoAFormItem, GoAFormButton }
+export { GoAFormItem, GoAFormButton, GoAFormContainer }

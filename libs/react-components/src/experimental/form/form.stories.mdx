@@ -1,8 +1,12 @@
-import { GoAForm, GoAFormItem, GoAFormButton } from './form.component';
+import {
+  GoAForm,
+  GoAFormItem,
+  GoAFormButton,
+  GoAFormContainer,
+} from './form.component';
 
 import GoAButton from '../../lib/button/button';
-import GoAInputEmail from './input/emailInput.component';
-import GoAInput from './input/input.component';
+import GoAInput from '../input/input.component';
 import GoACallout from '../../lib/callout/callout';
 import {
   Meta,
@@ -19,6 +23,12 @@ import { DoDont } from '@abgov/shared/storybook-common';
   title="Experimental/Components/Form"
   component={GoAForm}
   argTypes={{
+    formTitle: {
+      control: 'text',
+    },
+    formDescription: {
+      control: 'text',
+    },
     onSubmit: { action: 'Submit function', control: null },
     children: {
       control: 'text',
@@ -28,98 +38,102 @@ import { DoDont } from '@abgov/shared/storybook-common';
 
 # GoAForm
 
-React form container so I can quickly layout a form.
+React form container is a group of related input controls that allows users to provide data or configure options, so I can quickly layout a form.
 
 ## Overview
 
 export const Template = (args) => (
-  <div>
-    <h2>Your information</h2>
-    <p>
-      Lorem ipsum dolor sit amet,consectetur adipiscing elit, Nam a ligula a
-      ligulaexcrel kmlobortis lacina mon sed nibh
-    </p>
-    <GoAForm {...args}>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'stretch',
-        }}
-      >
-        <GoAFormItem>
-          <label>FirstName</label>
-          <GoAInput
-            name="FirstName"
-            type="text"
-            validate={(value) => !(value.length === 0)}
-            errorMsg="Enter your first name"
-            required={true}
-          />
-        </GoAFormItem>
-        <GoAFormItem>
-          <label>MiddleName</label>
-          <input type="text" name="MiddleName" />
-        </GoAFormItem>
-        <GoAFormItem>
-          <label>LastName</label>
-          <GoAInput
-            name="LastName"
-            type="text"
-            errorMsg="Enter your last name"
-            required={true}
-          />
-        </GoAFormItem>
-      </div>
-      <GoACallout
-        type="information"
-        title=""
-        content="Provincial Family Resource Networks (PRNS) deliver high quality."
+  <GoAForm {...args}>
+    <GoAFormContainer>
+      <GoAFormItem
+        labelText="FirstName"
+        type="input"
+        name="FirstName"
+        validate={(value) => !(value.length === 0)}
+        errorMsg="Enter your first name"
+        required={true}
       />
-      <GoAFormItem>
-        <label>Label</label>
-        <GoAInput type="text" helpText="Non-standard Input" />
-      </GoAFormItem>
-      <GoAFormItem>
-        <label>Email</label>
-        <GoAInput
-          name="Email"
-          type="email"
-          validate={(value) =>
-            value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
-          }
-          errorMsg="Enter a valid e-mail address"
-          required={true}
-        />
-      </GoAFormItem>
-      <GoAFormItem>
-        <label>Label</label>
-        <GoAInput
-          name="label2"
-          multiLine={true}
-          helpText="Overflowing Input Field"
-        />
-      </GoAFormItem>
-    </GoAForm>
-  </div>
+      <GoAFormItem labelText="MiddleName" type="input" name="MiddleName" />
+      <GoAFormItem
+        labelText="LastName"
+        type="input"
+        name="LastName"
+        validate={(value) => !(value.length === 0)}
+        errorMsg="Enter your first name"
+        required={true}
+      />
+    </GoAFormContainer>
+    <GoACallout
+      type="information"
+      title="Provincial Family Resource Networks (PRNS) deliver high quality."
+      content=""
+    />
+    <GoAFormItem
+      labelText="Label"
+      type="input"
+      name="Label"
+      helpText="Non-standard Input"
+    />
+    <GoAFormItem
+      labelText="Email"
+      type="input"
+      inputType="email"
+      name="Email"
+      validate={(value) => value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)}
+      errorMsg="Enter a valid e-mail address"
+      required={true}
+    />
+    <GoAFormItem
+      labelText="Label"
+      type="input"
+      name="Label2"
+      multiLine={true}
+      helpText="Overflowing Input Field"
+    />
+    <GoAFormButton>
+      <GoAButton buttonType="tertiary" type="button">
+        Cancel
+      </GoAButton>
+      <GoAButton buttonType="primary" type="submit">
+        Submit
+      </GoAButton>
+    </GoAFormButton>
+  </GoAForm>
 );
 
-### Basic
+### Default
 
 <Canvas>
-  <Story name="Basic" height="400px" args={{}}>
-    {Template.bind({})}
+  <Story
+    name="Default"
+    height="400px"
+    args={{
+      formTitle: 'Your information',
+      formDescription:
+        'Lorem ipsum dolor sit amet,consectetur adipiscing elit, Nam a ligula a ligulaexcrel kmlobortis lacina mon sed nibh',
+    }}
+  >
+    {Template.bind()}
   </Story>
 </Canvas>
 
 ## Examples
 
-## Properties
+```html
+<GoAForm {...args}>
+  <GoAFormItem>
+    <label>FirstName</label>
+    <input
+      name="FirstName"
+      type="text"
+      errorMsg="Enter your first name"
+      required="{true}"
+    />
+  </GoAFormItem>
+</GoAForm>
+```
 
-### GoAForm
+## Properties
 
 <Description of={GoAForm} />
 <ArgsTable of={GoAForm} />
-
-## Usage guidelines
