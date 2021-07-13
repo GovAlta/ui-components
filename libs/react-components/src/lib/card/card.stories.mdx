@@ -1,4 +1,7 @@
-import GoACard from './card.component';
+import GoACard, {
+  GoALoadingCardWithImage,
+  GoALoadingCardNoImage,
+} from './card.component';
 import GoAButton from '../button/button';
 import {
   Meta,
@@ -83,7 +86,13 @@ export const footerTemplate = (args) => {
 
 export const layoutTemplate = (args) => {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', columnGap: '8px' }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'auto auto auto',
+        columnGap: '8px',
+      }}
+    >
       <GoACard {...args}>
         <GoAButton
           buttonType="tertiary"
@@ -109,6 +118,16 @@ export const layoutTemplate = (args) => {
   );
 };
 
+export const skeletonTemplate = (args) => {
+  return (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <GoALoadingCardWithImage {...args} />
+      <GoALoadingCardWithImage {...args} />
+      <GoALoadingCardWithImage {...args} />
+    </div>
+  );
+};
+
 ### Basic
 
 <Canvas>
@@ -117,16 +136,17 @@ export const layoutTemplate = (args) => {
     height="400px"
     args={{
       title: 'Energy Diversification Act',
-      content:
+      content: (
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
           <ul>
             <li>Item 1</li>
             <li>Item 2</li>
             <li>Item 3</li>
           </ul>
         </div>
-      ,
+      ),
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
       maxWidth: 600,
       titleUrl: 'http://www.google.ca',
@@ -162,7 +182,8 @@ export const layoutTemplate = (args) => {
     height="400px"
     args={{
       title: 'Energy Diversification Act',
-      description: 'We are encouraging companies to turn out oil and gas resources into more valuable.',
+      description:
+        'We are encouraging companies to turn out oil and gas resources into more valuable.',
       cardImageUrl: 'working-in-cold-hero-3_rdax_75.jpg',
       cardWidth: 'auto',
       titleUrl: 'http://www.google.ca',
@@ -207,6 +228,23 @@ export const layoutTemplate = (args) => {
     }}
   >
     {layoutTemplate.bind({})}
+  </Story>
+</Canvas>
+
+### Skeletons
+
+<Canvas>
+  <Story
+    name="Skeleton"
+    height="400px"
+    args={{
+      title: 'Energy Diversification Act',
+      description:
+        'Foo We are encouraging companies to turn out oil and gas resources into more valuable products.',
+      cardWidth: 300,
+    }}
+  >
+    {skeletonTemplate.bind({})}
   </Story>
 </Canvas>
 

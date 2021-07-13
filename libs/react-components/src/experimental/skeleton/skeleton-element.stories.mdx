@@ -1,10 +1,14 @@
 import { GoASkeletonImageContent } from './skeleton-image-content';
-import { GoASkeletonCard } from './skeleton-card';
 import { GoASkeletonContent } from './skeleton-titled-content';
 import { GoASkeletonElement } from './skeleton-element';
 import { GoASkeletonGridColumnContent } from './skeleton-grid-column';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
+
+import GoACard, {
+  GoALoadingCardWithImage,
+  GoALoadingCardNoImage,
+} from '../../lib/card/card.component';
 
 import {
   Meta,
@@ -28,28 +32,40 @@ A skeleton load element provides visual feedback to users while a content heavy 
 
 export const ImageContent = (args) => (
   <div>
-    <span><b>Content with image</b></span>
+    <span>
+      <b>Content with image</b>
+    </span>
     <GoASkeletonImageContent {...args} />
   </div>
 );
 
 export const Content = (args) => (
   <div>
-    <span><b>Content with a title</b></span>
+    <span>
+      <b>Content with a title</b>
+    </span>
     <GoASkeletonContent {...args} />
   </div>
 );
 
 export const Card = (args) => (
   <div>
-    <span><b>Card content</b></span>
-    <GoASkeletonCard {...args} />
+    <span>
+      <b>Card content</b>
+    </span>
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <GoALoadingCardWithImage {...args} />
+      <GoALoadingCardWithImage {...args} />
+      <GoALoadingCardWithImage {...args} />
+    </div>
   </div>
 );
 
 export const ColumnContent = (args) => (
   <div>
-    <span><b>Content without a title</b></span>
+    <span>
+      <b>Content without a title</b>
+    </span>
     <GoASkeletonGridColumnContent {...args} />
   </div>
 );
@@ -57,22 +73,34 @@ export const ColumnContent = (args) => (
 ####
 
 <Canvas>
-  <Story name="Skeleton Image Content" height={200} args={{
+  <Story
+    name="Skeleton Image Content"
+    height={200}
+    args={{
       rows: 5,
-    }}>
+    }}
+  >
     {ImageContent.bind({})}
   </Story>
-  <Story name="Skeleton Card" height={200}>
+  <Story name="Skeleton Card" height={200} args={{ maxWidth: '340px' }}>
     {Card.bind({})}
   </Story>
-  <Story name="Skeleton Titled Content" height={200} args={{
+  <Story
+    name="Skeleton Titled Content"
+    height={200}
+    args={{
       rows: 5,
-    }}>
+    }}
+  >
     {Content.bind({})}
   </Story>
-  <Story name="Skeleton Content" height={200} args={{
+  <Story
+    name="Skeleton Content"
+    height={200}
+    args={{
       rows: 5,
-    }}>
+    }}
+  >
     {ColumnContent.bind({})}
   </Story>
 </Canvas>
@@ -82,7 +110,9 @@ export const ColumnContent = (args) => (
 
 <GoASkeletonContent rows="5"></GoASkeletonContent>
 
-<GoASkeletonCard></GoASkeletonCard>
+<GoALoadingCardNoImage />
+
+<GoALoadingCardWithImage />
 
 <GoASkeletonGridColumnContent rows="5"></GoASkeletonGridColumnContent>
 ```
@@ -90,16 +120,24 @@ export const ColumnContent = (args) => (
 ## Usage guidelines
 
 <DoDont
-  dos={'Show multiple elements within a larger component as individual information containers'}
-  donts={"Compile several elements that may have different loading durations into one container"}
+  dos={
+    'Show multiple elements within a larger component as individual information containers'
+  }
+  donts={
+    'Compile several elements that may have different loading durations into one container'
+  }
 />
 
 <DoDont
-  dos={'Include only the most important information containers that make the component recognizable'}
-  donts={"Show every single element as information containers in your skeleton load"}
+  dos={
+    'Include only the most important information containers that make the component recognizable'
+  }
+  donts={
+    'Show every single element as information containers in your skeleton load'
+  }
 />
 
 <DoDont
   dos={'Format bones so that they are conducive to a gradual content loading'}
-  donts={"Oversimplify the component so that it is not recognizable"}
+  donts={'Oversimplify the component so that it is not recognizable'}
 />

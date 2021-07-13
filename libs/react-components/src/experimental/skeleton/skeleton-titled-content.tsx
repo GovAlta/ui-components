@@ -1,6 +1,5 @@
 import React from 'react';
 import { GoASkeletonElement } from './skeleton-element';
-import { GoAShimmer } from './skeleton-shimmer';
 import './skeleton-element.scss';
 
 export interface DisplayProps {
@@ -18,15 +17,12 @@ export const GoASkeletonContent = ({ rows = 1 }: DisplayProps) => {
   }
 
   return (
-    <div className="skeleton-wrapper">
-      <div className="skeleton-content">
-        <div>
-          <GoASkeletonElement type="title" />
+    <div className="skeleton-content">
+      <div>
+        <GoASkeletonElement type="title" />
 
-          {elements}
-        </div>
+        {elements}
       </div>
-      <GoAShimmer />
     </div>
   );
 };
