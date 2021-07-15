@@ -9,31 +9,35 @@ type Props = {
   required?: boolean;
   helpText?: string;
   multiLine?: boolean;
-  onChange?: React.MouseEventHandler<HTMLButtonElement>;
+  onChange?: (value: string) => void;
 }
 
-export const GoAInput: FC<Props> = ({ validate = null, name = '', type = '', errorMsg = '', required = false, helpText = '', multiLine = false }) => {
+export const GoAInput: FC<Props> = ({ validate = null, name = '', type = '', errorMsg = '', required = false, helpText = '', multiLine = false, onChange }) => {
   const [valid, setValid] = useState(true);
   const [value, setValue] = useState('');
 
   const handleInput = (e) => {
     const value = e.target.value;
     setValue(value);
-    setValid(validate(value))
+    if (validate) {
+      setValid(validate(value))
+    }
+    onChange(value);
   }
 
+  const inputFieldClass = !errorMsg ? 'goa-input-field' : 'goa-input-field-error';
   return (
     <div >
       {multiLine ?
-        <textarea value={value} />
+        <textarea placeholder={name} onChange={handleInput} className={inputFieldClass}>{value}</textarea>
         : <input type={type} required={required} name={name}
           value={value}
-          onChange={handleInput} className='goa-input-field' placeholder={name} />}
-      { !valid ? <p className="goa-input-error-message" style={{ display: `${valid ? 'none' : 'block'}` }} >
-        {errorMsg}</p> : ''}
+          onChange={handleInput} className={inputFieldClass} placeholder={name} />}
+      { errorMsg && <p className="goa-input-error-message"  >
+        {errorMsg}</p>}
 
-      <p className="goa-input-help-text-message" style={{ display: `${helpText ? 'block' : 'none'}` }} >
-        {helpText}</p>
+      { helpText && <p className="goa-input-help-text-message" >
+        {helpText}</p>}
     </div>
   );
 }

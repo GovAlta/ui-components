@@ -4,7 +4,7 @@ import {
   GoAFormButton,
   GoAFormContainer,
 } from './form.component';
-
+import { emailValidator, requiredValidator } from './formFieldValidator';
 import GoAButton from '../../lib/button/button';
 import GoAInput from '../input/input.component';
 import GoACallout from '../../lib/callout/callout';
@@ -46,21 +46,17 @@ export const Template = (args) => (
   <GoAForm {...args}>
     <GoAFormContainer>
       <GoAFormItem
-        labelText="FirstName"
+        labelText="First Name"
         type="input"
         name="FirstName"
-        validate={(value) => !(value.length === 0)}
-        errorMsg="Enter your first name"
-        required={true}
+        validators={[requiredValidator]}
       />
-      <GoAFormItem labelText="MiddleName" type="input" name="MiddleName" />
+      <GoAFormItem labelText="Middle Name" type="input" name="MiddleName" />
       <GoAFormItem
-        labelText="LastName"
+        labelText="Last Name"
         type="input"
         name="LastName"
-        validate={(value) => !(value.length === 0)}
-        errorMsg="Enter your first name"
-        required={true}
+        validators={[requiredValidator]}
       />
     </GoAFormContainer>
     <GoACallout
@@ -75,13 +71,11 @@ export const Template = (args) => (
       helpText="Non-standard Input"
     />
     <GoAFormItem
-      labelText="Email"
+      labelText="Email ID"
       type="input"
       inputType="email"
       name="Email"
-      validate={(value) => value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)}
-      errorMsg="Enter a valid e-mail address"
-      required={true}
+      validators={[requiredValidator, emailValidator]}
     />
     <GoAFormItem
       labelText="Label"
@@ -89,15 +83,8 @@ export const Template = (args) => (
       name="Label2"
       multiLine={true}
       helpText="Overflowing Input Field"
+      validators={[requiredValidator]}
     />
-    <GoAFormButton>
-      <GoAButton buttonType="tertiary" type="button">
-        Cancel
-      </GoAButton>
-      <GoAButton buttonType="primary" type="submit">
-        Submit
-      </GoAButton>
-    </GoAFormButton>
   </GoAForm>
 );
 
@@ -110,7 +97,24 @@ export const Template = (args) => (
     args={{
       formTitle: 'Your information',
       formDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ligula a ligulaxcrei kmlobortis lacinia non sed nibh.',
+    }}
+  >
+    {Template.bind()}
+  </Story>
+</Canvas>
+
+### WithSubmition
+
+<Canvas>
+  <Story
+    name="WithSubmition"
+    height="400px"
+    args={{
+      formTitle: 'Your information',
+      formDescription:
         'Lorem ipsum dolor sit amet,consectetur adipiscing elit, Nam a ligula a ligulaexcrel kmlobortis lacina mon sed nibh',
+      onFormSubmit: (data) => console.log(data),
     }}
   >
     {Template.bind()}
@@ -121,15 +125,14 @@ export const Template = (args) => (
 
 ```html
 <GoAForm {...args}>
-  <GoAFormItem>
-    <label>FirstName</label>
-    <input
-      name="FirstName"
-      type="text"
-      errorMsg="Enter your first name"
-      required="{true}"
-    />
-  </GoAFormItem>
+  <GoAFormItem
+    labelText="Label"
+    type="input"
+    name="Label2"
+    multiLine="{true}"
+    helpText="Overflowing Input Field"
+    validators="{[requiredValidator]}"
+  />
 </GoAForm>
 ```
 

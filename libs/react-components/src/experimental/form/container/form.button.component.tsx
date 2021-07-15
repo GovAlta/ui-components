@@ -9,11 +9,12 @@ export interface GoAFormButtonProps {
 
 export const GoAFormButton: FC<GoAFormButtonProps> = ({ children = null }) => {
 
-  return (<div className="goa-form-button">
+  return (
+    <div className="goa-form-button">
 
-    {children}
+      {children}
 
-  </div>
+    </div>
   );
 }
 
