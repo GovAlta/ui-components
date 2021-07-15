@@ -4,7 +4,7 @@ import {
   GoAFormButton,
   GoAFormContainer,
 } from './form.component';
-
+import { emailValidator, requiredValidator } from './formFieldValidator';
 import GoAButton from '../../lib/button/button';
 import GoAInput from '../input/input.component';
 import GoACallout from '../../lib/callout/callout';
@@ -49,18 +49,14 @@ export const Template = (args) => (
         labelText="FirstName"
         type="input"
         name="FirstName"
-        validate={(value) => !(value.length === 0)}
-        errorMsg="Enter your first name"
-        required={true}
+        validators={[requiredValidator]}
       />
       <GoAFormItem labelText="MiddleName" type="input" name="MiddleName" />
       <GoAFormItem
         labelText="LastName"
         type="input"
         name="LastName"
-        validate={(value) => !(value.length === 0)}
-        errorMsg="Enter your first name"
-        required={true}
+        validators={[requiredValidator]}
       />
     </GoAFormContainer>
     <GoACallout
@@ -79,9 +75,7 @@ export const Template = (args) => (
       type="input"
       inputType="email"
       name="Email"
-      validate={(value) => value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)}
-      errorMsg="Enter a valid e-mail address"
-      required={true}
+      validators={[requiredValidator, emailValidator]}
     />
     <GoAFormItem
       labelText="Label"
@@ -89,15 +83,8 @@ export const Template = (args) => (
       name="Label2"
       multiLine={true}
       helpText="Overflowing Input Field"
+      validators={[requiredValidator]}
     />
-    <GoAFormButton>
-      <GoAButton buttonType="tertiary" type="button">
-        Cancel
-      </GoAButton>
-      <GoAButton buttonType="primary" type="submit">
-        Submit
-      </GoAButton>
-    </GoAFormButton>
   </GoAForm>
 );
 
@@ -117,19 +104,35 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
+### WithSubmition
+
+<Canvas>
+  <Story
+    name="WithSubmition"
+    height="400px"
+    args={{
+      formTitle: 'Your information',
+      formDescription:
+        'Lorem ipsum dolor sit amet,consectetur adipiscing elit, Nam a ligula a ligulaexcrel kmlobortis lacina mon sed nibh',
+      onFormSubmit: (data) => console.log(data),
+    }}
+  >
+    {Template.bind()}
+  </Story>
+</Canvas>
+
 ## Examples
 
 ```html
 <GoAForm {...args}>
-  <GoAFormItem>
-    <label>FirstName</label>
-    <input
-      name="FirstName"
-      type="text"
-      errorMsg="Enter your first name"
-      required="{true}"
-    />
-  </GoAFormItem>
+  <GoAFormItem
+    labelText="Label"
+    type="input"
+    name="Label2"
+    multiLine="{true}"
+    helpText="Overflowing Input Field"
+    validators="{[requiredValidator]}"
+  />
 </GoAForm>
 ```
 

@@ -1,35 +1,53 @@
-import React, { FC } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import '../form.scss';
 import PropTypes from 'prop-types';
 import { GoAInput } from '../../input/input.component';
+import { FormContext } from '../form.component';
 type GoAFormItemProps = {
   type: string;
   inputType: string;
   name?: string;
   labelText: string;
-  errorMsg?: string;
   helpText?: string;
   required?: boolean;
   multiLine?: boolean;
-  validate?: (value: string) => boolean;
-  onChange?: React.MouseEventHandler<HTMLButtonElement>;
+  validators?: [];
+  onChange?: (value: string) => void;
   children?: React.ReactNode;
 }
 
-export const GoAFormItem: FC<GoAFormItemProps> = ({ type, inputType = 'text', name, labelText = '', errorMsg = '', required = false, helpText = '', multiLine = false, validate = null, onChange = null, children = null }) => {
-  function renderInput(type: string, name: string, errorMsg: string, helpText: string, required: boolean, multiLine: boolean, validate, onChange, children) {
+export const GoAFormItem = ({ type, inputType = 'text', name, labelText = '', helpText = '', multiLine = false, validators = [], onChange = null, children = null }: GoAFormItemProps) => {
+  const { errors, data, setFieldValue, registerInput } = useContext(
+    FormContext
+  );
+  const [valid, setValid] = useState(true);
+  useEffect(
+    () =>
+      registerInput({
+        name: name,
+        validators: validators
+      }),
+    []
+  );
+  const handleChange = val => {
+    setFieldValue(name, val);
+    if (onChange) {
+      onChange(val);
+    }
+  };
+  const errorMsg = errors[name] || [];
+
+  function renderInput(type: string, name: string, helpText: string, multiLine: boolean) {
     switch (type) {
       case 'input':
         return (
           <GoAInput
             name={name}
             type={inputType}
-            errorMsg={errorMsg}
+            errorMsg={errorMsg.toString()}
             helpText={helpText}
             multiLine={multiLine}
-            validate={validate}
-            required={required}
-            onChange={onChange}
+            onChange={handleChange}
           />
         );
       default:
@@ -40,9 +58,9 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({ type, inputType = 'text', na
   }
 
   return (
-    <div style={{ position: 'relative' }} className="goa-form-items">
+    <div id={name} style={{ position: 'relative' }} className="goa-form-items">
       <label>{labelText}</label>
-      {renderInput(type, name, errorMsg, helpText, required, multiLine, validate, onChange, children)}
+      {renderInput(type, name, helpText, multiLine)}
     </div>
   );
 }
@@ -51,11 +69,10 @@ GoAFormItem.propTypes = {
   name: PropTypes.string,
   type: PropTypes.string,
   inputType: PropTypes.string,
-  errorMsg: PropTypes.string,
   required: PropTypes.bool,
   helpText: PropTypes.string,
   onChange: PropTypes.func,
-  validate: PropTypes.func,
+  validators: PropTypes.array,
 }
 
 export default GoAFormItem;
