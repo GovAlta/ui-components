@@ -149,8 +149,7 @@ export const GoADropdown: FC<Props> = ({
   // Updates the description and invokes the selectionChanged callback function when the selection changes
   useEffect(() => {
     refreshDescription(options);
-
-    const selectedOptions = Object.values(options).filter(option => option.selected);
+    const selectedOptions = Object.values(options);
     selectionChanged(selectedOptions);
   }, [options]);
 
