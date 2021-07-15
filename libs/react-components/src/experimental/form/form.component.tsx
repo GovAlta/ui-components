@@ -3,7 +3,6 @@ import { GoAFormItem } from './container/form.item.component';
 import { GoAFormButton } from './container/form.button.component';
 import { GoAFormContainer } from './container/form.container.component';
 import './form.scss';
-import { emailValidator, requiredValidator } from './formFieldValidator';
 import PropTypes from "prop-types";
 import GoAButton from '../../lib/button/button';
 import GoACallout from '../../lib/callout/callout';
@@ -14,7 +13,7 @@ type FormProps = {
   /**
    * Action to take on submit button click
    */
-  onFormSubmit?: (data: object) => void;
+  onFormSubmit?: (data) => void;
   /**
    * Provide children to be rendered inside of the element
    */
@@ -36,7 +35,7 @@ const initState: formStateProps = {
 
 };
 let FormContext;
-export const { Provider } = (FormContext = React.createContext<object>({}));
+export const { Provider } = (FormContext = React.createContext<any>({}));
 
 export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, children = null, ...props }: FormProps) => {
   const [formState, setFormState] = useState(initState);
@@ -45,13 +44,6 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
     e.preventDefault();
 
     if (validate()) {
-      const { errors } = formState;
-      // const errorNames = [];
-      // for (const key in errors) {
-      //   if (errors[key].length > 0) {
-      //     errorNames.push(key);
-      //   }
-      // }
       onFormSubmit(formState.data);
     }
   };
