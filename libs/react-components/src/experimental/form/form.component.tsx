@@ -44,28 +44,20 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
   const onSubmit = e => {
     e.preventDefault();
 
-    //check error array
-
     if (validate()) {
       const { errors } = formState;
-      const errorNames = [];
-      for (const key in errors) {
-
-        if (errors[key].length > 0) {
-          errorNames.push(key);
-        }
-
-      }
-
+      // const errorNames = [];
+      // for (const key in errors) {
+      //   if (errors[key].length > 0) {
+      //     errorNames.push(key);
+      //   }
+      // }
       onFormSubmit(formState.data);
     }
-
   };
+
   const validate = () => {
     const { validators } = formState;
-    console.log("at beginner validators", validators);
-    // always reset form errors
-    // in case there was form errors from backend
     setFormState(state => ({
       ...state,
       errors: {}
@@ -82,7 +74,7 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
           }, []);
 
           if (messages.length > 0) {
-            errors[name] = `${messages} ${name}`;
+            errors[name] = `${messages} ${name.toLocaleLowerCase()}`;
           }
 
           const errorNames = [];
@@ -136,7 +128,6 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
           ...state.validators,
           [name]: validators || []
         },
-        // clear any errors
         errors: {
           ...state.errors,
           [name]: []
@@ -144,13 +135,9 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
       };
     });
 
-    // returning unregister method
     return () => {
       setFormState(state => {
-        // copy state to avoid mutating it
         const { data, errors, validators: currentValidators } = { ...state };
-
-        // clear field data, validations and errors
         delete data[name];
         delete errors[name];
         delete currentValidators[name];
@@ -164,7 +151,7 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
     };
   };
 
-  const providerValue = {
+  const formProviderValue = {
     errors: formState.errors,
     data: formState.data,
     setFieldValue,
@@ -189,14 +176,13 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
   }
 
   return (
-    <Provider value={providerValue}>
-      <div>
+    <Provider value={formProviderValue}>
+      <div className="goa-form">
         <span className="goa-form-title">{formTitle}</span>
         <div className="goa-text">{formDescription}</div>
         {onFormSubmit ? (
-          <form onSubmit={onSubmit} className="goa-form">
+          <form onSubmit={onSubmit} >
             {children}
-
             {formErrors.length > 0 && renderErrorList()}
             <GoAFormButton>
               <GoAButton buttonType="tertiary" type="button">

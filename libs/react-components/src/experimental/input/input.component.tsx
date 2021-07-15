@@ -25,7 +25,7 @@ export const GoAInput: FC<Props> = ({ validate = null, name = '', type = '', err
     onChange(value);
   }
 
-  const inputFieldClass = valid ? 'goa-input-field' : 'goa-input-field-error';
+  const inputFieldClass = !errorMsg ? 'goa-input-field' : 'goa-input-field-error';
   return (
     <div >
       {multiLine ?

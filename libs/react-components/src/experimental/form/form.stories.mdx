@@ -46,14 +46,14 @@ export const Template = (args) => (
   <GoAForm {...args}>
     <GoAFormContainer>
       <GoAFormItem
-        labelText="FirstName"
+        labelText="First Name"
         type="input"
         name="FirstName"
         validators={[requiredValidator]}
       />
-      <GoAFormItem labelText="MiddleName" type="input" name="MiddleName" />
+      <GoAFormItem labelText="Middle Name" type="input" name="MiddleName" />
       <GoAFormItem
-        labelText="LastName"
+        labelText="Last Name"
         type="input"
         name="LastName"
         validators={[requiredValidator]}
@@ -71,7 +71,7 @@ export const Template = (args) => (
       helpText="Non-standard Input"
     />
     <GoAFormItem
-      labelText="Email"
+      labelText="Email ID"
       type="input"
       inputType="email"
       name="Email"
@@ -97,7 +97,7 @@ export const Template = (args) => (
     args={{
       formTitle: 'Your information',
       formDescription:
-        'Lorem ipsum dolor sit amet,consectetur adipiscing elit, Nam a ligula a ligulaexcrel kmlobortis lacina mon sed nibh',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ligula a ligulaxcrei kmlobortis lacinia non sed nibh.',
     }}
   >
     {Template.bind()}

@@ -17,10 +17,9 @@ type GoAFormItemProps = {
 }
 
 export const GoAFormItem = ({ type, inputType = 'text', name, labelText = '', helpText = '', multiLine = false, validators = [], onChange = null, children = null }: GoAFormItemProps) => {
-  const { errors, data, setFieldValue, registerInput } = useContext(
+  const { errors, setFieldValue, registerInput } = useContext(
     FormContext
   );
-  const [valid, setValid] = useState(true);
   useEffect(
     () =>
       registerInput({
@@ -58,7 +57,7 @@ export const GoAFormItem = ({ type, inputType = 'text', name, labelText = '', he
   }
 
   return (
-    <div id={name} style={{ position: 'relative' }} className="goa-form-items">
+    <div id={name} className="goa-form-items">
       <label>{labelText}</label>
       {renderInput(type, name, helpText, multiLine)}
     </div>
