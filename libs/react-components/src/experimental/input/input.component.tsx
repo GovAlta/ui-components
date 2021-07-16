@@ -29,7 +29,7 @@ export const GoAInput: FC<Props> = ({ validate = null, name = '', type = '', err
   return (
     <div >
       {multiLine ?
-        <textarea placeholder={name} onChange={handleInput}>{value}</textarea>
+        <textarea placeholder={name} onChange={handleInput} className={inputFieldClass}>{value}</textarea>
         : <input type={type} required={required} name={name}
           value={value}
           onChange={handleInput} className={inputFieldClass} placeholder={name} />}
