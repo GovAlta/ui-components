@@ -25,7 +25,7 @@ describe('GoA Dropdown', () => {
       <GoADropdown
         label='Fruits'
         description='Choose your favourite friut.'
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
         <GoAOption value="pear" label="Pear"></GoAOption>
@@ -55,7 +55,7 @@ describe('GoA Dropdown', () => {
         label='Fruits'
         description='Choose your favourite friut.'
         disabled={true}
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
         <GoAOption value="pear" label="Pear"></GoAOption>
@@ -73,7 +73,7 @@ describe('GoA Dropdown', () => {
       <GoADropdown
         label='Fruits'
         description='Choose your favourite friut.'
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
         <GoAOption value="pear" label="Pear"></GoAOption>
@@ -95,7 +95,7 @@ describe('GoA Dropdown', () => {
         label='Fruits'
         description='Choose your favourite friut.'
         value='pear'
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         <GoAOption value="apple" label="Apple"></GoAOption>
         <GoAOption value="pear" label="Pear"></GoAOption>
@@ -117,7 +117,7 @@ describe('GoA Dropdown', () => {
         label='Fruits'
         description='Choose your favourite friut.'
         values={['pear', 'banana']}
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         <GoAOption value="apple" label="Apple"></GoAOption>
         <GoAOption value="pear" label="Pear"></GoAOption>
@@ -140,7 +140,7 @@ describe('GoA Dropdown', () => {
         label='Fruits'
         description='Choose your favourite friut.'
         multiple={false}
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         <GoAOptionGroup label="Group 1">
           <GoAOption value="apple" label="Apple" defaultSelected></GoAOption>
@@ -166,7 +166,7 @@ describe('GoA Dropdown', () => {
         label='Fruits'
         description='Choose your favourite friut.'
         multiple={true}
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         <GoAOptionGroup label="Group 1">
           <GoAOption value="apple" label="Apple"></GoAOption>
@@ -200,7 +200,7 @@ describe('GoA Dropdown', () => {
         label='Fruits'
         description='Choose your favourite friut.'
         required={true}
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         <GoAOptionGroup label="Group 1">
           <GoAOption value="apple" label="Apple"></GoAOption>
@@ -228,7 +228,7 @@ describe('GoA Dropdown', () => {
 
   test('[selectionChanges] callback is invoked', () => {
     let count = 0;
-    const selectHandler = (options: DropdownOption[]) => {
+    const selectHandler = (option: DropdownOption) => {
       count += 1;
     }
     const { container } = render(
@@ -265,7 +265,7 @@ describe('GoA Dropdown', () => {
         label="Fruits"
         description="Choose your favourite fruit!"
         typeAheadMode="startsWith"
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         <GoAOptionGroup label="Group 2">
           <GoAOption value="mango" label="Mango"></GoAOption>
@@ -309,7 +309,7 @@ describe('GoA Dropdown', () => {
         label="Fruits"
         description="Choose your favourite fruit!"
         typeAheadMode="contains"
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         <GoAOptionGroup label="Group 1">
           <GoAOption value="apple" label="Apple"></GoAOption>
@@ -358,7 +358,7 @@ describe('GoA Dropdown', () => {
         description="Choose your favourite fruit!"
         multiple={false}
         typeAheadMode="none"
-        selectionChanged={() => {}}
+        selectionChanged={() => { }}
       >
         {
           items.map((i) => <GoAOption key={i.value} value={i.value} label={i.label} />)

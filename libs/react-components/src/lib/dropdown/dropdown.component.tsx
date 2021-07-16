@@ -29,7 +29,7 @@ interface Props {
   typeAheadMode?: 'none' | 'startsWith' | 'contains';
   value?: string;
   values?: string[],
-  selectionChanged: (selectedOptions: DropdownOption[]) => void;
+  selectionChanged: (option: DropdownOption) => void;
 }
 
 export const GoADropdown: FC<Props> = ({
@@ -149,8 +149,6 @@ export const GoADropdown: FC<Props> = ({
   // Updates the description and invokes the selectionChanged callback function when the selection changes
   useEffect(() => {
     refreshDescription(options);
-    const selectedOptions = Object.values(options);
-    selectionChanged(selectedOptions);
   }, [options]);
 
   // Updates the required-error status when the drop-down is closed
@@ -214,6 +212,7 @@ export const GoADropdown: FC<Props> = ({
       updateOption: updateOptionHandler,
       filter: filter,
       matchesFilter: filterMatchFunction,
+      selectionChanged: selectionChanged
     }}>
       {isOpen &&
         <div className="dropdown-overlay" ref={overlayRef} onClick={toggleOpen}></div>

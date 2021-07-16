@@ -10,13 +10,14 @@ interface Props {
 
 export const GoAOption: FC<Props> = ({ value, label, children }) => {
   const [isActive, setActive] = useState<string>('');
-  const { filter, matchesFilter, options, updateOption } = useContext(DropdownContext);
+  const { filter, matchesFilter, options, updateOption, selectionChanged } = useContext(DropdownContext);
 
   function selectValue(e: { stopPropagation: () => void; }) {
     e.stopPropagation();
     const selected = !options[value].selected;
     const dropdown = new DropdownOption(value, label, selected);
     updateOption(value, dropdown);
+    selectionChanged(dropdown)
   }
 
   function rootCss() {

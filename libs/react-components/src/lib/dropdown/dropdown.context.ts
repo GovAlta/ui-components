@@ -21,8 +21,9 @@ export interface KeyOptionPair {
 interface DropdownContextProps {
   options: KeyOptionPair;
   filter: string;
-  matchesFilter?: (filter: string, value:string) => boolean;
+  matchesFilter?: (filter: string, value: string) => boolean;
   updateOption?: (value: string, option: DropdownOption) => void;
+  selectionChanged?: (option: DropdownOption) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
