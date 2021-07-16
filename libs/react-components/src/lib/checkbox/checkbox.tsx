@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import './checkbox.scss';
 import classNames from 'classnames';
 
@@ -25,50 +24,26 @@ export interface CheckboxProps {
   */
   indeterminate?: boolean,
   /**
-   * The position to display the label/text for the checbox. Valid values are before and after.
+   * The position to display the label/text for the checkbox. Valid values are before and after.
   */
   labelPosition?: LabelPosition,
   /**
    * The content of the checkbox label.
   */
   content?: string,
+  /**
+   * The value of the checkbox.
+  */
+  value?: string,
   children?: React.ReactNode,
   /**
    * Callback which returns whether button is checked.
   */
-  selectionChange?: any,
+  selectionChange?: (value: boolean) => void,
 }
 
-export const GoACheckbox = ({checked = false, required = false, disabled = false, indeterminate = false, labelPosition = "before", content, children, selectionChange }: CheckboxProps) => {
-  const [checkedBox, setCheckedBox] = useState(checked);
-  const [checkedBoxOld, setCheckedBoxOld] = useState(checked);
-  const [indeterminateCheck, setIndeterminateCheck] = useState(indeterminate);
-  const [indeterminateCheckOld, setIndeterminateCheckOld] = useState(indeterminate);
-  const [lastChecked, setLastChecked] = useState(indeterminate ? 'indeterminate' : 'checked');
-
+export const GoACheckbox = ({ checked = false, required = false, disabled = false, indeterminate = false, labelPosition = 'before', value = '',  content, children, selectionChange }: CheckboxProps) => {
   const hasError = () => required && !checked;
-  const indeterminateControlTrigger = () => indeterminate !== indeterminateCheckOld;
-  const checkboxControlTrigger = () => checked !== checkedBoxOld;
-
-  const checkboxHandler = () => {
-    setIndeterminateCheck(false);
-    setCheckedBox(!checkedBox)
-    selectionChange && selectionChange(!checkedBox);
-    setLastChecked(checked === false ? 'checked' : 'indeterminate')
-  }
-
-  if (checkboxControlTrigger()) {
-    setCheckedBox(checked);
-    setCheckedBoxOld(checked);
-    selectionChange && selectionChange(checked);
-    setLastChecked(checked === true ? 'checked' : 'indeterminate')
-  }
-
-  if (indeterminateControlTrigger()) {
-    setIndeterminateCheck(indeterminate);
-    setIndeterminateCheckOld(indeterminate);
-    setLastChecked(indeterminate === true ? 'indeterminate' : 'checked')
-  }
 
   const rootCss = (): string => {
     return classNames({
@@ -82,8 +57,8 @@ export const GoACheckbox = ({checked = false, required = false, disabled = false
   const checkboxCss = (): string => {
     return classNames({
       'goa-checkbox-container': true,
-      'goa-checkbox-selected': checkedBox && lastChecked === 'checked',
-      'goa-checkbox-indeterminate': indeterminateCheck && lastChecked === 'indeterminate'
+      'goa-checkbox-selected': !indeterminate && checked,
+      'goa-checkbox-indeterminate': indeterminate && checked,
     })
   };
 
@@ -93,38 +68,29 @@ export const GoACheckbox = ({checked = false, required = false, disabled = false
         <div className={checkboxCss()}>
           <input
             type="checkbox"
-            checked={checkedBox}
+            checked={checked}
             disabled={disabled}
             required={required}
-            value={content}
-            onChange={() => checkboxHandler()}
+            value={value}
+            onChange={(e) => selectionChange(e.target.checked)}
           />
-          { indeterminateCheck && lastChecked === 'indeterminate' && (
+          {indeterminate && checked && (
             <svg id='dashmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2" className="goa-indeterminate">
-                <rect width="15" height="2"/>
+              <rect width="15" height="2" />
             </svg>
           )}
-          { checkedBox && lastChecked === 'checked' && (
+          {!indeterminate && checked && (
             <svg id='checkmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18" className="goa-checkmark">
-                <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z"/>
+              <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
             </svg>
           )}
         </div>
         <span className="goa-checkbox-label">
-            {content || children}
+          {content || children}
         </span>
       </label>
     </div>
   );
-};
-
-GoACheckbox.propTypes = {
-  content: PropTypes.string,
-  checked: PropTypes.bool,
-  required: PropTypes.bool,
-  indeterminate: PropTypes.bool,
-  labelPosition: PropTypes.string,
-  children: PropTypes.node,
 };
 
 export default GoACheckbox;

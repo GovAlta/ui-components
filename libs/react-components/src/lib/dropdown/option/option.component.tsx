@@ -23,23 +23,23 @@ export const GoAOption: FC<Props> = ({ value, label, children }) => {
     return classnames({
       option: true,
       selected: options[value] && options[value].selected,
-      isActive
+      active: isActive
     })
   }
 
   return (
     matchesFilter(filter, label) &&
-      <div
-        role="listitem"
-        className={rootCss()}
-        onClick={selectValue}
-        onMouseEnter={() => { setActive('active'); }}
-        onMouseLeave={() => { setActive(''); }}
-      >
-        <div className="goa-option">
-          {children || label}
-        </div>
+    <div
+      role="listitem"
+      className={rootCss()}
+      onClick={selectValue}
+      onMouseEnter={() => { setActive('active'); }}
+      onMouseLeave={() => { setActive(''); }}
+    >
+      <div className="goa-option">
+        {children || label}
       </div>
+    </div>
   );
 };
 

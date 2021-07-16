@@ -62,12 +62,12 @@ export const Template = (args) => <GoANotification {...args} />
 
 ```html
 <GoANotification
-  type="'important || 'information' || 'event' || 'emergency'",
-  title='Notification Title',
+  type="'important || 'information' || 'event' || 'emergency'"
+  title='Notification Title'
   message="Information to the user goes in the message"
-  isDismissable: true,
-  notificationUrl: 'www.google.com',
-  title: 'Hidden Title',
+  isDismissable={true}
+  notificationUrl='www.google.com'
+  title=Hidden Title'
 </>
 ```
 
@@ -76,10 +76,10 @@ or
 ```html
 <GoANotification
   type='information',
-  title='Notification Title',
-  isDismissable: true,
-  notificationUrl: 'www.google.com',
-  title: 'Hidden Title',
+  title='Notification Title'
+  isDismissable={true}
+  notificationUrl='www.google.com'
+  title='Hidden Title'
 >
   Information to the user goes in the <i>message</i>
 </GoANotification>

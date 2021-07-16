@@ -26,8 +26,8 @@ export const GoACallout = ({ title, type = "information", content, children = nu
     <div>
       <div className={`goa-callout goa--${type}`}>
         <div>
-          <h3>{title}</h3>
-          <div className="messages">
+          <h3 data-testid='callout-title'>{title}</h3>
+          <div className="messages" data-testid='callout-content'>
             {content || children}
           </div>
         </div>

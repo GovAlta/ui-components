@@ -13,11 +13,11 @@ import { DoDont } from '@abgov/shared/storybook-common';
 import { GoARadioGroup, GoARadio } from './radio-group';
 
 <Meta
-  title="React/Basic Elements/RadioGroup"
+  title="React/Basic Elements/RadioGroups"
   component={GoARadioGroup}
 />
 
-# RadioGroup
+# Radios
 
 A wrapper/group for a set of user input fields that allow the user to make a choice from a set of mutually exclusive, related options. Only one item in the list may be selected.
 
@@ -36,7 +36,29 @@ export const TemplateDynamic = (args) => (
 );
 
 #### Basic
+<Canvas>
+  <Story
+    name="Basic"
+    height={200}
+    args={{
+      name: 'fruits',
+      title: 'Which of the following is your favorite fruit?',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      requiredErrorMessage: 'Please select a fruit',
+      required: false,
+      disabled: false,
+      labelPosition: 'after',
+      onChange: (value) => {
+        action('selection changed')(value);
+      },
+    }}
+  >
+    {TemplateBasic.bind({})}
+  </Story>
+</Canvas>
 
+#### Dynamic
 <Canvas>
   <Story
     name="Dynamic"
@@ -64,30 +86,7 @@ export const TemplateDynamic = (args) => (
   </Story>
 </Canvas>
 
-<Canvas>
-  <Story
-    name="Basic"
-    height={200}
-    args={{
-      name: 'fruits',
-      title: 'Which of the following is your favorite fruit?',
-      helperText:
-        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
-      requiredErrorMessage: 'Please select a fruit',
-      required: false,
-      disabled: false,
-      labelPosition: 'after',
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
-    }}
-  >
-    {TemplateBasic.bind({})}
-  </Story>
-</Canvas>
-
 #### Minimal
-
 <Canvas>
   <Story
     name="Minimal"
@@ -116,6 +115,52 @@ export const TemplateDynamic = (args) => (
       helperText: 'This one has an initial value of orange set',
       requiredErrorMessage: 'Please select a fruit',
       required: false,
+      disabled: false,
+      labelPosition: 'after',
+      onChange: (value) => {
+        action('selection changed')(value);
+      },
+    }}
+  >
+    {TemplateBasic.bind({})}
+  </Story>
+</Canvas>
+
+#### Disabled
+<Canvas>
+  <Story
+    name="Disabled"
+    height={200}
+    args={{
+      name: 'fruits',
+      title: 'Which of the following is your favorite fruit?',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      requiredErrorMessage: 'Please select a fruit',
+      required: false,
+      disabled: true,
+      labelPosition: 'after',
+      onChange: (value) => {
+        action('selection changed')(value);
+      },
+    }}
+  >
+    {TemplateBasic.bind({})}
+  </Story>
+</Canvas>
+
+#### Required
+<Canvas>
+  <Story
+    name="Required"
+    height={200}
+    args={{
+      name: 'fruits',
+      title: 'Which of the following is your favorite fruit?',
+      helperText:
+        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
+      requiredErrorMessage: 'Please select a fruit',
+      required: true,
       disabled: false,
       labelPosition: 'after',
       onChange: (value) => {

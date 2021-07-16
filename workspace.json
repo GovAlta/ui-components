@@ -454,6 +454,14 @@
             "setupFile": "libs/angular-material-components/src/test-setup.ts"
           }
         },
+        "post": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [],
+            "cwd": "./",
+            "parallel": false
+          }
+        },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
           "options": {

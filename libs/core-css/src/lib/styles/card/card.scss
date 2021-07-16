@@ -1,63 +1,40 @@
 @import '../variables/colors.scss';
+@import '../skeleton-element/skeleton.scss';
 
 .goa-card {
   box-sizing: border-box;
-  display: inline-flex;
-  flex-direction: column;
-
-  width: 100%;
-  vertical-align: top;
   background: $goa-background-color;
   border: 1px solid $goa-border-color-secondary;
+  transition: opacity 300ms ease-in-out;
 
   .card-content {
-    box-sizing: border-box;
     padding: 24px 16px;
-
-    flex: 1 0 0;
-    display: flex;
-    flex-direction: column;
     border-top: 8px solid $goa-blue-alberta;
 
+    .goa-title,
     .goa-text,
-    .goa-footer,
     .goa-content {
-      margin-top: 28px;
-    }
-
-    &:first-child {
-      margin-top: 0;
+      margin-bottom: 28px;
     }
 
     .goa-text {
-      box-sizing: border-box;
-      align-self: stretch;
       color: $goa-text-color;
       font-size: 18px;
       line-height: 28px;
-      height: 100%;
-      flex: 1 0 0;
     }
 
     .goa-footer {
       font-size: 16px;
-      line-height: 28px;
-      display: inline-flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-
-      > *:last-of-type {
-        margin-right: 0;
-      }
     }
     .goa-title {
-      box-sizing: border-box;
       font-size: 24px;
       font-weight: 400;
       line-height: 32px;
     }
   }
 
+  // Deprecated: use .goa-poster-image
+  // TODO: needs to be updated in Vue and Angular components
   .goa-poster {
     position: relative;
     display: block;
@@ -80,6 +57,14 @@
     }
   }
 
+  .goa-poster-image {
+    img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
   /* size variants ***/
   &.card-auto {
     width: auto;
@@ -99,5 +84,26 @@
       outline: 3px solid $primary-focused;
       outline-offset: 0;
     }
+  }
+}
+
+// Skeleton styling
+
+.goa-card[data-skeleton] {
+  .goa-poster-image {
+    @include goa-skeleton-bg;
+    padding-bottom: 56.25%;
+    img {
+      display: none;
+    }
+  }
+
+  .goa-title {
+    margin-bottom: 1rem;
+  }
+
+  .goa-footer {
+    @include goa-skeleton-bg;
+    max-height: 1rem;
   }
 }

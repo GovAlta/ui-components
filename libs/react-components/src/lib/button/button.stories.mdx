@@ -44,11 +44,17 @@ A user input control that performs an action, typically on click
 
 export const Template = (args) => (
   <div>
-    <GoAButton buttonType="primary" {...args}>
-      {args.children}
+    <GoAButton buttonType="primary">
+      Primary
     </GoAButton>
-    <GoAButton buttonType="tertiary" {...args}>
-      Application
+    <GoAButton buttonType="secondary">
+      Secondary
+    </GoAButton>
+    <GoAButton buttonType="tertiary">
+      Tertiary
+    </GoAButton><br /><br />
+    <GoAButton {...args}>
+      Demo
     </GoAButton>
   </div>
 );

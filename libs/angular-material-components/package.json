@@ -4,6 +4,6 @@
   "peerDependencies": {
     "@angular/common": "^10.0.9",
     "@angular/core": "^10.0.9",
-    "@abgov/core-css": "0.0.0-PLACEHOLDER"
+    "@abgov/core-css": "^1.0.0"
   }
 }
