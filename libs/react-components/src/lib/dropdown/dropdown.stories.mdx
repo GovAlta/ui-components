@@ -101,7 +101,7 @@ export const RequiredTemplate = (args) => {
       updatedList[selected].selected = e.selected;
       setOptionList(updatedList);
       if (e.selected) {
-        setDescription(e.description);
+        setDescription(e.label);
         setErrorMessage('');
       } else {
         setDescription(defaultDescription);
