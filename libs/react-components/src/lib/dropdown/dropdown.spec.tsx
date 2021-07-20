@@ -141,10 +141,10 @@ describe('GoA Dropdown', () => {
 
   });
 
-  test('[selectionChanges] callback is invoked', () => {
-    let count = 0;
+  test('[selectionChanges] callback is invoked', async () => {
+    let optionInCallback = {};
     const selectHandler = (option: DropdownOption) => {
-      count += 1;
+      optionInCallback = option;
     }
     const { container } = render(
       <GoADropdown
@@ -162,16 +162,11 @@ describe('GoA Dropdown', () => {
 
     expandCollapseDropDown(container);
 
-    const labels = ['Apple', 'Pear', 'Banana'];
-
     // Select all three options
-    for (let i = 0; i < 3; i++) {
-      const option = screen.queryByText(labels[i]);
-      expect(option).toBeTruthy();
-      fireEvent.click(option);
-    }
-
-    expect(count > 0).toBeTruthy();
+    const option = screen.queryByText('Apple');
+    expect(option).toBeTruthy();
+    await fireEvent.click(option);
+    expect(optionInCallback.value).toBe('apple');
   });
 
   test('Dynamic loading', () => {
@@ -181,7 +176,6 @@ describe('GoA Dropdown', () => {
         label="Fruits"
         description="Choose your favourite fruit!"
         multiple={false}
-        typeAheadMode="none"
         selectionChanged={() => { }}
       >
         {
