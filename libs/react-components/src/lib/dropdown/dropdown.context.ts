@@ -1,13 +1,14 @@
 import { createContext } from 'react';
+import { GoAOptionProps } from './option/option.component'
 
 export class DropdownOption {
   value: string;
-  description: string;
+  label: string;
   selected: boolean;
 
-  constructor(val: string, desc: string, sel: boolean) {
+  constructor(val: string, label: string, sel: boolean) {
     this.value = val;
-    this.description = desc;
+    this.label = label;
     this.selected = sel;
   }
 }
@@ -18,17 +19,10 @@ export interface KeyOptionPair {
 }
 
 /** Interface for the context for the dropdown and its children */
-interface DropdownContextProps {
-  options: KeyOptionPair;
-  filter: string;
-  matchesFilter?: (filter: string, value: string) => boolean;
-  updateOption?: (value: string, option: DropdownOption) => void;
-  selectionChanged?: (option: DropdownOption) => void;
+export interface DropdownContextProps {
+  selectionChanged?: (option: GoAOptionProps) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const DropdownContext = createContext<DropdownContextProps>({
-  options: {},
-  filter: '',
-  matchesFilter: () => true
 });

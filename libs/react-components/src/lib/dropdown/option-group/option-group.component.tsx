@@ -1,12 +1,10 @@
-import React, { FC, useState, useEffect, Children, useContext } from 'react';
-import { DropdownContext } from '../dropdown.context';
+import React, { FC, useState, useEffect, Children } from 'react';
 interface Props {
   label: string;
 }
 
 export const GoAOptionGroup: FC<Props> = ({ label, children }) => {
   const [itemLabels, setItemLabels] = useState<string[]>([]);
-  const { filter, matchesFilter } = useContext(DropdownContext)
 
   // Load the itemLabes state variable
   useEffect(() => {
@@ -20,11 +18,10 @@ export const GoAOptionGroup: FC<Props> = ({ label, children }) => {
   }, []);
 
   return (
-    itemLabels.some((label) => matchesFilter(filter, label) ) &&
-      <div className='option-group'>
-        <div className='option-group-label'>{label}</div>
-        {children}
-      </div>
+    <div className='option-group'>
+      <div className='option-group-label'>{label}</div>
+      {children}
+    </div>
   );
 }
 

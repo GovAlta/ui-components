@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { GoADropdown } from './dropdown.component';
 import { GoAOptionGroup } from './option-group/option-group.component';
 import { GoAOption } from './option/option.component';
@@ -9,10 +8,8 @@ import { DropdownOption } from './dropdown.context';
 afterEach(cleanup);
 
 describe('GoA Dropdown', () => {
-
   const expandCollapseDropDown = (container: HTMLElement) => {
     const label = container.querySelector('.dropdown-label');
-
     // Check that the label is available
     expect(label).toBeTruthy();
 
@@ -88,52 +85,6 @@ describe('GoA Dropdown', () => {
       expect(screen.getByText(l)).toBeTruthy();
     })
   });
-
-  test('Has initial selected value', () => {
-    const { getByRole } = render(
-      <GoADropdown
-        label='Fruits'
-        description='Choose your favourite friut.'
-        value='pear'
-        selectionChanged={() => { }}
-      >
-        <GoAOption value="apple" label="Apple"></GoAOption>
-        <GoAOption value="pear" label="Pear"></GoAOption>
-        <GoAOption value="banana" label="Banana"></GoAOption>
-      </GoADropdown>);
-
-    const searchInput = getByRole('searchbox') as HTMLInputElement;
-    expect(searchInput.value).toEqual('Pear')
-
-    fireEvent.click(searchInput)
-    const selected = document.querySelectorAll('.option.selected');
-    expect(selected.length).toEqual(1);
-    expect(selected[0].textContent).toEqual('Pear');
-  });
-
-  test('Has initial selected values', () => {
-    const { getByRole } = render(
-      <GoADropdown
-        label='Fruits'
-        description='Choose your favourite friut.'
-        values={['pear', 'banana']}
-        selectionChanged={() => { }}
-      >
-        <GoAOption value="apple" label="Apple"></GoAOption>
-        <GoAOption value="pear" label="Pear"></GoAOption>
-        <GoAOption value="banana" label="Banana"></GoAOption>
-      </GoADropdown>);
-
-    const searchInput = getByRole('searchbox') as HTMLInputElement;
-    expect(searchInput.value).toEqual('Pear, Banana')
-
-    fireEvent.click(searchInput)
-    const selected = document.querySelectorAll('.option.selected');
-    expect(selected.length).toEqual(2);
-    expect(selected[0].textContent).toEqual('Pear');
-    expect(selected[1].textContent).toEqual('Banana');
-  });
-
   test('Renders options and groups', () => {
     const { container } = render(
       <GoADropdown
@@ -157,42 +108,7 @@ describe('GoA Dropdown', () => {
     allLabels.forEach((l) => {
       expect(screen.getByText(l)).toBeTruthy();
     })
-
   });
-
-  test('Multiselect options being selected', () => {
-    const { container } = render(
-      <GoADropdown
-        label='Fruits'
-        description='Choose your favourite friut.'
-        multiple={true}
-        selectionChanged={() => { }}
-      >
-        <GoAOptionGroup label="Group 1">
-          <GoAOption value="apple" label="Apple"></GoAOption>
-          <GoAOption value="pear" label="Pear"></GoAOption>
-        </GoAOptionGroup>
-        <GoAOption value="banana" label="Banana"></GoAOption>
-      </GoADropdown>);
-
-    // Get the descripion and check that it is blank since nothing is selected
-    const inputElement = container.querySelector('input.dropdown-textbox');
-    expect(inputElement).toBeTruthy();
-    let inputText = inputElement.getAttribute('value');
-    expect(inputText === '').toBeTruthy();
-
-    // Expand the dropdown and selected an item
-    expandCollapseDropDown(container);
-
-    for (let i = 0; i < 3; i++) {
-      const notSelectedOption = container.querySelector('.option:not(.selected)');
-      expect(notSelectedOption).toBeTruthy();
-      fireEvent.click(notSelectedOption);
-    }
-
-    inputText = inputElement.getAttribute('value');
-    expect(inputText === 'Apple, Pear, Banana').toBeTruthy();
-  })
 
   test('Displays warning when is required and no items are selected', () => {
     const { container } = render(
@@ -201,6 +117,7 @@ describe('GoA Dropdown', () => {
         description='Choose your favourite friut.'
         required={true}
         selectionChanged={() => { }}
+        errorMessage="Error of the component"
       >
         <GoAOptionGroup label="Group 1">
           <GoAOption value="apple" label="Apple"></GoAOption>
@@ -223,8 +140,6 @@ describe('GoA Dropdown', () => {
     expect(errorSpanElement).toBeTruthy();
 
   });
-
-  // TODO: add tests for initial values to dropdown
 
   test('[selectionChanges] callback is invoked', () => {
     let count = 0;
@@ -257,97 +172,6 @@ describe('GoA Dropdown', () => {
     }
 
     expect(count > 0).toBeTruthy();
-  });
-
-  test('TypeAhead - startsWith', () => {
-    const { getByRole, queryAllByRole } = render(
-      <GoADropdown
-        label="Fruits"
-        description="Choose your favourite fruit!"
-        typeAheadMode="startsWith"
-        selectionChanged={() => { }}
-      >
-        <GoAOptionGroup label="Group 2">
-          <GoAOption value="mango" label="Mango"></GoAOption>
-          <GoAOption value="lime" label="Lime"></GoAOption>
-          <GoAOption value="pineapple" label="Pineapple"></GoAOption>
-        </GoAOptionGroup>
-        <GoAOption value="apple" label="Apple"></GoAOption>
-        <GoAOption value="banana" label="Banana"></GoAOption>
-        <GoAOption value="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
-        <GoAOption value="kiwi" label="Kiwi"></GoAOption>
-        <GoAOption value="lemon" label="Lemon"></GoAOption>
-      </GoADropdown>
-    )
-
-    // Find the filter input
-    const filter = 'l';
-    const searchBox = getByRole('searchbox') as HTMLInputElement;
-
-    // Open menu
-    userEvent.click(searchBox);
-    expect(searchBox).toBeTruthy();
-    expect(queryAllByRole('listitem').length).toEqual(8);
-
-    // Enter search text
-    fireEvent.change(searchBox, { target: { value: filter } })
-
-    // Get all options currently visible
-    const filteredOptions = queryAllByRole('listitem')
-    expect(filteredOptions.length).toEqual(2);
-
-    // Check that all options match the filter (startsWith)
-    filteredOptions.forEach(option => {
-      const text = option.textContent.toLocaleLowerCase();
-      expect(text.startsWith(filter.toLowerCase())).toBeTruthy();
-    });
-  });
-
-  test('TypeAhead - contains', () => {
-    const { getByRole, queryAllByRole } = render(
-      <GoADropdown
-        label="Fruits"
-        description="Choose your favourite fruit!"
-        typeAheadMode="contains"
-        selectionChanged={() => { }}
-      >
-        <GoAOptionGroup label="Group 1">
-          <GoAOption value="apple" label="Apple"></GoAOption>
-          <GoAOption value="banana" label="Banana"></GoAOption>
-          <GoAOption value="orange" label="Orange"><span>Orange 🍊</span></GoAOption>
-        </GoAOptionGroup>
-        <GoAOption value="kiwi" label="Kiwi"></GoAOption>
-        <GoAOption value="lemon" label="Lemon"></GoAOption>
-        <GoAOption value="pineapple" label="Pineapple"></GoAOption>
-        <GoAOptionGroup label="Group 2">
-          <GoAOption value="mango" label="Mango"></GoAOption>
-          <GoAOption value="lime" label="Lime"></GoAOption>
-          <GoAOption value="plantain" label="Plantain"></GoAOption>
-        </GoAOptionGroup>
-      </GoADropdown>
-    )
-
-    // Find the filter input
-    const filter = 'pp';
-    const searchBox = getByRole('searchbox') as HTMLInputElement;
-
-    // Open menu
-    userEvent.click(searchBox);
-    expect(searchBox).toBeTruthy();
-    expect(queryAllByRole('listitem').length).toEqual(9);
-
-    // Enter search text
-    fireEvent.change(searchBox, { target: { value: filter } })
-
-    // Get all options currently visible
-    const filteredOptions = queryAllByRole('listitem')
-    expect(filteredOptions.length).toEqual(2);
-
-    // Check that all options match the filter (startsWith)
-    filteredOptions.forEach(option => {
-      const text = option.textContent.toLocaleLowerCase();
-      expect(text.includes(filter.toLowerCase())).toBeTruthy();
-    });
   });
 
   test('Dynamic loading', () => {

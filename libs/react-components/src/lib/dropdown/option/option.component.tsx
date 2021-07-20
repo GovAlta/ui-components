@@ -1,39 +1,43 @@
 import React, { FC, useState, useContext } from 'react';
-import { DropdownContext, DropdownOption } from '../dropdown.context';
 import classnames from 'classnames'
+import { DropdownContext } from '../dropdown.context';
 
-interface Props {
-  value: string;
+export interface GoAOptionProps {
   label: string;
+  value: string;
+  selected?: boolean;
   defaultSelected?: boolean;
+  children?
 }
 
-export const GoAOption: FC<Props> = ({ value, label, children }) => {
+export const GoAOption: FC<GoAOptionProps> = (props: GoAOptionProps) => {
+  const { label, children, selected } = props;
   const [isActive, setActive] = useState<string>('');
-  const { filter, matchesFilter, options, updateOption, selectionChanged } = useContext(DropdownContext);
+  const { selectionChanged } = useContext(DropdownContext);
 
-  function selectValue(e: { stopPropagation: () => void; }) {
+  function onClick(e: { stopPropagation: () => void; }) {
     e.stopPropagation();
-    const selected = !options[value].selected;
-    const dropdown = new DropdownOption(value, label, selected);
-    updateOption(value, dropdown);
-    selectionChanged(dropdown)
+    // Flip the props, since user click it
+    const selected = !props.selected
+
+    if (selectionChanged) {
+      selectionChanged({ ...props, selected })
+    }
   }
 
   function rootCss() {
     return classnames({
       option: true,
-      selected: options[value] && options[value].selected,
+      selected: selected,
       active: isActive
     })
   }
 
   return (
-    matchesFilter(filter, label) &&
     <div
       role="listitem"
       className={rootCss()}
-      onClick={selectValue}
+      onClick={onClick}
       onMouseEnter={() => { setActive('active'); }}
       onMouseLeave={() => { setActive(''); }}
     >
