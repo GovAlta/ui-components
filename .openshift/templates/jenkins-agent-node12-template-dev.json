@@ -32,6 +32,16 @@
             "imageChange": {}
           }
         ],
+        "resources": {
+          "limits": {
+            "cpu": "500m",
+            "memory": "1Gi"
+          },
+          "requests": {
+            "cpu": "50m",
+            "memory": "16Mi"
+          }
+        },
         "source": {
           "contextDir": "agent-nodejs-12",
           "git": {
