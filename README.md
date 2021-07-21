@@ -23,7 +23,7 @@ The project contains the Government of Alberta UI components. The output package
 ### Building
 
 To build all libraries and applications run `npm build:all`.
-To build only changed libraries and applications run `npm run affected:build --base=branchtocompareagainst`.
+To build only changed libraries and applications run `npm run affected:build -- --base=branchtocompareagainst`.
 To build the storybooks run `npm run build:storybook` or choose and individual storybook `npm run build:UIPROJECTNAME`.
 
 ### Running Locally
@@ -34,8 +34,8 @@ To run a storybook run `npm run run:angular-storybook` or `npm run run:vue-story
 ### Running Tests
 
 To run all of the available unit tests run `npm run test:all`.
-To run only the current affected tests run `npm run affected:test --base=branchtocompareagainst`.
-To run e2e tests run `npm run affected:e2e --base=branchtocompareagainst`.
+To run only the current affected tests run `npm run affected:test -- --base=branchtocompareagainst`.
+To run e2e tests run `npm run affected:e2e -- --base=branchtocompareagainst`.
 
 ## Environments
 
