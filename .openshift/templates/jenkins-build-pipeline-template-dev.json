@@ -18,6 +18,16 @@
       },
       "spec": {
         "runPolicy": "Serial",
+        "resources": {
+          "limits": {
+            "cpu": "500m",
+            "memory": "1Gi"
+          },
+          "requests": {
+            "cpu": "50m",
+            "memory": "16Mi"
+          }
+        },
         "source": {
           "git": {
             "uri": "${SOURCE_REPOSITORY_URI}",
