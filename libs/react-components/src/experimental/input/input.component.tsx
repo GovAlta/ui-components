@@ -9,10 +9,11 @@ type Props = {
   required?: boolean;
   helpText?: string;
   multiLine?: boolean;
+  highLightError?: boolean;
   onChange?: (value: string) => void;
 }
 
-export const GoAInput: FC<Props> = ({ validate = null, name = '', type = '', errorMsg = '', required = false, helpText = '', multiLine = false, onChange }) => {
+export const GoAInput: FC<Props> = ({ validate = null, name = '', type = '', errorMsg = '', required = false, helpText = '', multiLine = false, highLightError = false, onChange }) => {
   const [valid, setValid] = useState(true);
   const [value, setValue] = useState('');
 
@@ -25,7 +26,7 @@ export const GoAInput: FC<Props> = ({ validate = null, name = '', type = '', err
     onChange(value);
   }
 
-  const inputFieldClass = !errorMsg ? 'goa-input-field' : 'goa-input-field-error';
+  const inputFieldClass = !errorMsg ? 'goa-input-field' : !highLightError ? 'goa-input-field-error' : 'goa-input-highlight-error';
   return (
     <div >
       {multiLine ?
@@ -49,6 +50,7 @@ GoAInput.propTypes = {
   required: PropTypes.bool,
   helpText: PropTypes.string,
   multiLine: PropTypes.bool,
+  highLightError: PropTypes.bool,
   onChange: PropTypes.func
 }
 export default GoAInput;

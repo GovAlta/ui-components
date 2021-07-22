@@ -45,46 +45,40 @@ React form container is a group of related input controls that allows users to p
 export const Template = (args) => (
   <GoAForm {...args}>
     <GoAFormContainer>
-      <GoAFormItem
-        labelText="First Name"
-        type="input"
-        name="FirstName"
-        validators={[requiredValidator]}
-      />
-      <GoAFormItem labelText="Middle Name" type="input" name="MiddleName" />
-      <GoAFormItem
-        labelText="Last Name"
-        type="input"
-        name="LastName"
-        validators={[requiredValidator]}
-      />
+      <GoAFormItem name="FirstName" validators={[requiredValidator]}>
+        <label>First Name</label>
+        <GoAInput type="input" />
+      </GoAFormItem>
+      <GoAFormItem name="MiddleName">
+        <label>Middle Name</label>
+        <GoAInput type="input" />
+      </GoAFormItem>
+      <GoAFormItem name="LastName" validators={[requiredValidator]}>
+        <label>Last Name</label>
+        <GoAInput type="input" />
+      </GoAFormItem>
     </GoAFormContainer>
     <GoACallout
       type="information"
       title="Provincial Family Resource Networks (PRNS) deliver high quality."
       content=""
     />
-    <GoAFormItem
-      labelText="Label"
-      type="input"
-      name="Label"
-      helpText="Non-standard Input"
-    />
-    <GoAFormItem
-      labelText="Email ID"
-      type="input"
-      inputType="email"
-      name="Email"
-      validators={[requiredValidator, emailValidator]}
-    />
-    <GoAFormItem
-      labelText="Label"
-      type="input"
-      name="Label2"
-      multiLine={true}
-      helpText="Overflowing Input Field"
-      validators={[requiredValidator]}
-    />
+    <GoAFormItem name="Label">
+      <label>Label</label>
+      <GoAInput type="input" helpText="Non-standard Input" />
+    </GoAFormItem>
+    <GoAFormItem name="Email" validators={[requiredValidator, emailValidator]}>
+      <label>Email ID</label>
+      <GoAInput type="email" />
+    </GoAFormItem>
+    <GoAFormItem name="Label2" validators={[requiredValidator]}>
+      <label>Label</label>
+      <GoAInput
+        type="input"
+        multiLine={true}
+        helpText="Overflowing Input Field"
+      />
+    </GoAFormItem>
   </GoAForm>
 );
 
@@ -125,14 +119,9 @@ export const Template = (args) => (
 
 ```html
 <GoAForm {...args}>
-  <GoAFormItem
-    labelText="Label"
-    type="input"
-    name="Label2"
-    multiLine="{true}"
-    helpText="Overflowing Input Field"
-    validators="{[requiredValidator]}"
-  />
+   <GoAFormItem name="FirstName" validators={[requiredValidator]}>
+        <label>First Name</label>
+        <GoAInput type="input" />
 </GoAForm>
 ```
 

@@ -1,39 +1,38 @@
 @import '../variables/colors.scss';
 
 .goa-form {
-  position: relative;
   margin: auto;
-  width: 644px;
+  width: 40.25rem;
+}
+.goa-form-container {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-}
-.goa-form-title {
-  top: 425px;
-  left: 96px;
-  width: 239px;
-  height: 35px;
-  text-align: left;
-  font-size: 35px;
-  letter-spacing: 0px;
-  color: #333333;
-  opacity: 1;
-}
-
-.goa-form-container {
-  display: inline-flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  margin: -14px -14px;
+  align-items: stretch;
+  column-gap: 1rem;
 }
 .goa-form-container > div {
-  flex: 0 0 28%;
-  margin: 14px;
+  margin: 0;
+  flex: 1;
+  width: 100%;
+}
+
+.goa-form-container > div + div {
+  margin-left: 1rem;
+}
+
+@media (max-width: 640px) {
+  .goa-form-container > div {
+    min-width: 100%;
+  }
+  .goa-form-container > div + div {
+    margin-left: 0rem;
+  }
 }
 .goa-form-items {
-  flex: 0 0 auto;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
+
   label {
     display: block;
     font-weight: bold;
