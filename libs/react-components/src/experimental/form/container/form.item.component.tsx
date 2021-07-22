@@ -1,23 +1,16 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, Children } from 'react';
 import '../form.scss';
 import PropTypes from 'prop-types';
-import { GoAInput } from '../../input/input.component';
 import { FormContext } from '../form.component';
 type GoAFormItemProps = {
-  type: string;
-  inputType: string;
   name?: string;
-  labelText: string;
-  helpText?: string;
-  required?: boolean;
-  multiLine?: boolean;
   validators?: [];
   onChange?: (value: string) => void;
   children?: React.ReactNode;
 }
 
-export const GoAFormItem = ({ type, inputType = 'text', name, labelText = '', helpText = '', multiLine = false, validators = [], onChange = null, children = null }: GoAFormItemProps) => {
-  const { errors, setFieldValue, registerInput } = useContext(
+export const GoAFormItem = ({ name, validators = [], onChange = null, children = null }: GoAFormItemProps) => {
+  const { errors, highLightError, setFieldValue, registerInput } = useContext(
     FormContext
   );
   useEffect(
@@ -35,41 +28,32 @@ export const GoAFormItem = ({ type, inputType = 'text', name, labelText = '', he
     }
   };
   const errorMsg = errors[name] || [];
+  const highLight = highLightError.name === name;
 
-  function renderInput(type: string, name: string, helpText: string, multiLine: boolean) {
-    switch (type) {
-      case 'input':
-        return (
-          <GoAInput
-            name={name}
-            type={inputType}
-            errorMsg={errorMsg.toString()}
-            helpText={helpText}
-            multiLine={multiLine}
-            onChange={handleChange}
-          />
-        );
-      default:
+  function renderChildren() {
+    return Children.map(children, (child: any) => {
+      if (child.props.originalType !== 'label') {
+        return React.cloneElement(child, {
+          onChange: handleChange,
+          errorMsg: errorMsg.toString(),
+          id: name,
+          highLightError: highLight
+        });
+      } else {
+        return child;
+      }
 
-        return children;
-    }
-
+    });
   }
 
   return (
     <div id={name} className="goa-form-items">
-      <label>{labelText}</label>
-      {renderInput(type, name, helpText, multiLine)}
+      {renderChildren()}
     </div>
   );
 }
 GoAFormItem.propTypes = {
-  labelText: PropTypes.string,
   name: PropTypes.string,
-  type: PropTypes.string,
-  inputType: PropTypes.string,
-  required: PropTypes.bool,
-  helpText: PropTypes.string,
   onChange: PropTypes.func,
   validators: PropTypes.array,
 }

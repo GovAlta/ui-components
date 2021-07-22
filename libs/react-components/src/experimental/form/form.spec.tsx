@@ -1,8 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { GoAForm, GoAFormButton, GoAFormItem } from './form.component';
+import { GoAForm, GoAFormItem } from './form.component';
 import { screen } from '@testing-library/dom'
-import { GoAButton } from '../../lib/button/button';
 describe('GoA Form', () => {
   const formClassName = 'goa-form';
   const formItemClassName = 'goa-form-items';
@@ -25,7 +24,7 @@ describe('GoA Form', () => {
     render(<GoAForm formTitle={formTitle}
       formDescription={formDescription} >
 
-      <GoAFormItem labelText="Middle Name" type="input" name="MiddleName" />
+      <GoAFormItem name="MiddleName" />
     </GoAForm >);
     const container = document.querySelector('.goa-form-items');
 
@@ -36,7 +35,7 @@ describe('GoA Form', () => {
     render(<GoAForm formTitle={formTitle}
       formDescription={formDescription} onFormSubmit={(data) => console.log(data)}  >
 
-      <GoAFormItem labelText="Middle Name" type="input" name="MiddleName" />
+      <GoAFormItem name="MiddleName" />
     </GoAForm >);
     const container = document.querySelector('.goa-form-button');
 

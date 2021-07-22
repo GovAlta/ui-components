@@ -24,15 +24,16 @@ interface formStateProps {
     name?: string, value?: string
   },
   validators: { name?: string, validators?: [] },
-  errors: { name?: string, errors?: [] }
+  errors: { name?: string, errors?: [] },
+  highLightError: { name?: string, errors?: [] },
 
 }
 const initState: formStateProps = {
   data: {
   },
   validators: {},
-  errors: {}
-
+  errors: {},
+  highLightError: {},
 };
 let FormContext;
 export const { Provider } = (FormContext = React.createContext<any>({}));
@@ -129,15 +130,16 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
 
     return () => {
       setFormState(state => {
-        const { data, errors, validators: currentValidators } = { ...state };
+        const { data, errors, validators: currentValidators, highLightError } = { ...state };
         delete data[name];
         delete errors[name];
         delete currentValidators[name];
-
+        delete highLightError[name];
         return {
           data,
           errors,
-          validators: currentValidators
+          validators: currentValidators,
+          highLightError
         };
       });
     };
@@ -146,10 +148,19 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
   const formProviderValue = {
     errors: formState.errors,
     data: formState.data,
+    highLightError: formState.highLightError,
     setFieldValue,
     registerInput
   };
 
+  function addHighlightError(error) {
+    setFormState(state => {
+      return {
+        ...state,
+        highLightError: { name: error }
+      };
+    });
+  }
   const renderErrorList = () => {
     return (
       <GoACallout
@@ -158,7 +169,7 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
       ><ul>
           {formErrors.map((error) => {
             return (
-              <li><a href={`#${error}`} target="self">{error}</a></li>
+              <li><a href={`#${error}`} onClick={() => addHighlightError(error)}>{error}</a></li>
             );
           })}
 
@@ -170,8 +181,8 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
   return (
     <Provider value={formProviderValue}>
       <div className="goa-form">
-        <span className="goa-form-title">{formTitle}</span>
-        <div className="goa-text">{formDescription}</div>
+        <h2>{formTitle}</h2>
+        <p>{formDescription}</p>
         {onFormSubmit ? (
           <form onSubmit={onSubmit} >
             {children}

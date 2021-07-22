@@ -4,14 +4,14 @@
 }
 
 .goa-input-error-message {
-  font-size: 14px;
+  font-size: var(--fs-sm);
   font-weight: 300;
   color: red;
   margin: 0;
 }
 
 .goa-input-help-text-message {
-  font-size: 14px;
+  font-size: var(--fs-sm);
   font-weight: 200;
   color: #333;
   margin: 0;
@@ -23,5 +23,10 @@
 
 .goa-input-field-error {
   border: 1px solid #ec040b;
+  border-radius: 4px;
+}
+
+.goa-input-highlight-error {
+  border: 4px solid #ec040b;
   border-radius: 4px;
 }
