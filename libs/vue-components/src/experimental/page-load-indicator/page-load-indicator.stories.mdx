@@ -25,6 +25,12 @@ import { DoDont } from '@abgov/shared/storybook-common';
         type: 'text',
       },
     },
+    displayType: {
+      control: {
+        type: 'select',
+        options: ['large', 'small'],
+      },
+    }
   }}
 />
 
@@ -36,7 +42,8 @@ import { DoDont } from '@abgov/shared/storybook-common';
       message: 'Loading...',
       type: 'infinite',
       visible: true,
-      pagelock: false
+      pagelock: false,
+      displayType: 'large'
     }}
   >
     {(args, argTypes) => {
@@ -52,7 +59,7 @@ import { DoDont } from '@abgov/shared/storybook-common';
 ## Examples
 
 ```html
-<GoAPageLoadIndicatorComponent visible="true" type="'infinite' || 'progress'">
+<GoAPageLoadIndicatorComponent visible="true" type="'infinite' || 'progress'" loaderType="'large || 'small'">
   Loading...
 </GoAPageLoadIndicatorComponent>
 ```

@@ -1,6 +1,6 @@
 <template>
-  <div v-if="visible" class="progress-container">
-    <svg fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <div v-if="visible" :class="`progress-container--${sizeType}`">
+    <svg :class="[svgClass]" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <circle className="base-circle" cx="50" cy="50" r="45" />
       <circle
         :class="[circleType]"
@@ -10,7 +10,7 @@
         :style="`strokeDashoffset:${strokeDashoffset}`"
       />
     </svg>
-    <span className="progress-message">{{ message }}</span>
+    <span :class="`progress-message--${sizeType}`">{{ message }}</span>
   </div>
 </template>
 
@@ -56,6 +56,17 @@ export default {
       type: Boolean,
       default: true,
     },
+    /**
+    * Sets the progress indicator display type size.
+    */
+    displayType: {
+      type: String,
+      default: 'large',
+      required: false,
+      validator: (value) => {
+        return ['large', 'small'].includes(value);
+      },
+    },
   },
   data() {
     const circleType =
@@ -66,13 +77,15 @@ export default {
      * Set defaults
      */
     const progressMaxValue = 283;
+    const svgClass = this.displayType === 'large' ? 'svg' : 'svg--small';
+    const sizeType = this.displayType;
+
     let strokeDashoffset = 0;
 
-    if(this.pagelock){
+    if (this.pagelock) {
       document.body.style.height = '100%';
       document.body.style.overflow = 'hidden';
-    }
-    else{
+    } else {
       document.body.style.removeProperty('height');
       document.body.style.removeProperty('overflow');
     }
@@ -97,6 +110,8 @@ export default {
       progressMaxValue,
       strokeDashoffset,
       circleType,
+      svgClass,
+      sizeType
     };
   },
 };

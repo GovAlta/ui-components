@@ -26,6 +26,12 @@ import { action } from '@storybook/addon-actions';
     message: { control: 'text' },
     type: 'progress | infinite',
     value: 10,
+    displayType: {
+      control: {
+        type: 'select',
+        options: ['large', 'small'],
+      },
+    },
   }}
   decorators={[
     moduleMetadata({ declarations: [GoAPageLoadIndicatorComponent] }),
@@ -44,7 +50,8 @@ The Page Load Indicator was designed to show users that something is happening.
     args={{
       visible: true,
       message: 'Loading message...',
-      type: 'infinite'
+      type: 'infinite',
+      displayType: 'large'
     }}
     parameters={{
       design: {},
@@ -53,7 +60,7 @@ The Page Load Indicator was designed to show users that something is happening.
     {(args) => {
       return {
         template: `
-        <goa-page-load-indicator [pagelock]="false" [visible]="visible" [type]="type" [message]="message">
+        <goa-page-load-indicator [pagelock]="false" [visible]="visible" [type]="type" [message]="message" [displayType]="displayType">
                     </goa-page-load-indicator>`,
         props: args,
       };
@@ -62,7 +69,7 @@ The Page Load Indicator was designed to show users that something is happening.
 </Canvas>
 
 ```html
-<goa-page-load-indicator visible="true" type="'infinite' || 'progress'">
+<goa-page-load-indicator visible="true" type="'infinite' || 'progress'" displayType="'large' || 'small'">
   Loading...
 </goa-page-load-indicator>
 ```

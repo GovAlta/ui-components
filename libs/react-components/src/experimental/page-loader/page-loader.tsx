@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './page-loader.scss';
 
 type indicatorType = 'infinite' | 'progress';
+type displayTypeIndicator = 'large' | 'small';
 
 export interface PageLoaderProps {
   /**
@@ -29,6 +30,11 @@ export interface PageLoaderProps {
    * Sets the page to locked and does not accept user input.
    */
   pagelock?: boolean;
+
+  /**
+   * Sets the progress indicator display type size.
+   */
+  displayType?: displayTypeIndicator;
 }
 
 export const GoAPageLoader = ({
@@ -37,6 +43,7 @@ export const GoAPageLoader = ({
   message = 'Loading...',
   value = 0,
   pagelock = true,
+  displayType = 'large'
 }: PageLoaderProps) => {
   /**
    * Set defaults
@@ -69,7 +76,7 @@ export const GoAPageLoader = ({
   }
 
   if (visible) {
-    if(pagelock){
+    if(pagelock && displayType !== 'small'){
       document.body.style.height = '100%';
       document.body.style.overflow = 'hidden';
     }
@@ -84,12 +91,13 @@ export const GoAPageLoader = ({
 
     return (
       <div
-        className="progress-container"
+        className={`progress-container--${displayType}`}
         onKeyDown={(event) => {
           event.preventDefault();
         }}
       >
         <svg
+          className={`${displayType==='large' ? 'svg' : "svg--small"}`}
           fill="none"
           viewBox="0 0 100 100"
           xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +114,7 @@ export const GoAPageLoader = ({
             style={{ strokeDashoffset: strokeDashoffset }}
           />
         </svg>
-        <span className="progress-message">{message}</span>
+        <span className={`progress-message--${displayType}`}>{message}</span>
       </div>
     );
   } else {
@@ -122,7 +130,8 @@ GoAPageLoader.propTypes = {
   message: PropTypes.string,
   value: PropTypes.number,
   type: PropTypes.string,
-  pagelock: PropTypes.bool
+  pagelock: PropTypes.bool,
+  displayType: PropTypes.string
 };
 
 export default GoAPageLoader;
