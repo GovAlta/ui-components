@@ -20,7 +20,7 @@ interface Props {
   /** customize footer by passing react component code */
   children?: React.ReactNode;
 
-  other: unknown;
+  other?: unknown;
 }
 
 export const GoACard: FC<Props> = ({

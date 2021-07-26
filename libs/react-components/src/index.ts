@@ -17,9 +17,30 @@ import {
 } from './lib/dropdown/dropdown.component';
 import GoACheckbox from './lib/checkbox/checkbox';
 
-export * from './experimental';
+import {
+  GoABadge,
+  GoAPageLoader,
+  GoAElementLoader,
+  GoASkeletonContent,
+  GoASkeletonGridColumnContent,
+  GoASkeletonImageContent,
+  GoAFormItem,
+  GoAFormButton,
+  GoAFormContainer,
+  GoAForm
+} from './experimental'
 
 export {
+  GoABadge,
+  GoAPageLoader,
+  GoAElementLoader,
+  GoASkeletonContent,
+  GoASkeletonGridColumnContent,
+  GoASkeletonImageContent,
+  GoAFormItem,
+  GoAFormButton,
+  GoAForm,
+  GoAFormContainer,
   GoANotification,
   GoARadioGroup,
   GoARadio,
