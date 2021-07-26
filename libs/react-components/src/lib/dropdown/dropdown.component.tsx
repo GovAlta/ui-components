@@ -24,6 +24,7 @@ interface Props {
   disabled?: boolean;
   display?: string;
   errorMessage?: string;
+  key?: string;
   selectionChanged: (option: DropdownOption) => void;
 }
 
@@ -38,6 +39,7 @@ export const GoADropdown: FC<Props> = ({
   errorMessage,
   display,
   selectionChanged,
+  key,
   ...rest
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -95,7 +97,7 @@ export const GoADropdown: FC<Props> = ({
             className="dropdown-textbox margin-override"
             type="text"
             style={{ cursor: 'default' }}
-            id={`input-for-${title}`}
+            id={`input-for-${key}`}
             placeholder={display ? display : description}
             readOnly={!isOpen}
           />
