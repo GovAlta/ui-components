@@ -16,10 +16,24 @@ import {
   GoAOptionGroup,
 } from './lib/dropdown/dropdown.component';
 import GoACheckbox from './lib/checkbox/checkbox';
-
-export * from './experimental';
-
+import { GoABadge } from './experimental/badge/badge.component';
+import { GoAPageLoader } from './experimental/page-loader/page-loader';
+import { GoAElementLoader } from './experimental/element-loader/element-loader';
+import { GoAFormItem, GoAFormButton, GoAFormContainer, GoAForm } from './experimental/form/form.component';
+import { GoASkeletonContent } from './experimental/skeleton/skeleton-titled-content';
+import { GoASkeletonGridColumnContent } from './experimental/skeleton/skeleton-grid-column';
+import { GoASkeletonImageContent } from './experimental/skeleton/skeleton-image-content';
 export {
+  GoABadge,
+  GoAPageLoader,
+  GoAElementLoader,
+  GoASkeletonContent,
+  GoASkeletonGridColumnContent,
+  GoASkeletonImageContent,
+  GoAFormItem,
+  GoAFormButton,
+  GoAForm,
+  GoAFormContainer,
   GoANotification,
   GoARadioGroup,
   GoARadio,
