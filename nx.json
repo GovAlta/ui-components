@@ -8,7 +8,8 @@
     "nx.json": "*",
     "tsconfig.base.json": "*",
     "nginx.conf": "*",
-    "Jenkinsfile": "*"
+    "Jenkinsfile": "*",
+    ".github/**/*.yml": "*"
   },
   "affected": {
     "defaultBase": "origin/main"
