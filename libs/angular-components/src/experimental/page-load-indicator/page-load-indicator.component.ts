@@ -50,6 +50,11 @@ export class GoAPageLoadIndicatorComponent implements OnInit, OnChanges, OnDestr
   pagelock = true;
 
   /**
+   * Sets the progress indicator display type size.
+   */
+  @Input() displayType: 'large' | 'small' = 'large';
+
+  /**
    * Set defaults
    */
   strokeDashoffsetDefault = 280;

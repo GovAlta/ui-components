@@ -1,0 +1,131 @@
+import {
+  GoAForm,
+  GoAFormItem,
+  GoAFormButton,
+  GoAFormContainer,
+} from './form.component';
+import { emailValidator, requiredValidator } from './formFieldValidator';
+import GoAButton from '../../lib/button/button';
+import GoAInput from '../input/input.component';
+import GoACallout from '../../lib/callout/callout';
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+
+<Meta
+  title="Experimental/Components/Form"
+  component={GoAForm}
+  argTypes={{
+    formTitle: {
+      control: 'text',
+    },
+    formDescription: {
+      control: 'text',
+    },
+    onSubmit: { action: 'Submit function', control: null },
+    children: {
+      control: 'text',
+    },
+  }}
+/>
+
+# GoAForm
+
+React form container is a group of related input controls that allows users to provide data or configure options, so I can quickly layout a form.
+
+## Overview
+
+export const Template = (args) => (
+  <GoAForm {...args}>
+    <GoAFormContainer>
+      <GoAFormItem name="FirstName" validators={[requiredValidator]}>
+        <label>First Name</label>
+        <GoAInput type="input" />
+      </GoAFormItem>
+      <GoAFormItem name="MiddleName">
+        <label>Middle Name</label>
+        <GoAInput type="input" />
+      </GoAFormItem>
+      <GoAFormItem name="LastName" validators={[requiredValidator]}>
+        <label>Last Name</label>
+        <GoAInput type="input" />
+      </GoAFormItem>
+    </GoAFormContainer>
+    <GoACallout
+      type="information"
+      title="Provincial Family Resource Networks (PRNS) deliver high quality."
+      content=""
+    />
+    <GoAFormItem name="Label">
+      <label>Label</label>
+      <GoAInput type="input" helpText="Non-standard Input" />
+    </GoAFormItem>
+    <GoAFormItem name="Email" validators={[requiredValidator, emailValidator]}>
+      <label>Email ID</label>
+      <GoAInput type="email" />
+    </GoAFormItem>
+    <GoAFormItem name="Label2" validators={[requiredValidator]}>
+      <label>Label</label>
+      <GoAInput
+        type="input"
+        multiLine={true}
+        helpText="Overflowing Input Field"
+      />
+    </GoAFormItem>
+  </GoAForm>
+);
+
+### Default
+
+<Canvas>
+  <Story
+    name="Default"
+    height="400px"
+    args={{
+      formTitle: 'Your information',
+      formDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ligula a ligulaxcrei kmlobortis lacinia non sed nibh.',
+    }}
+  >
+    {Template.bind()}
+  </Story>
+</Canvas>
+
+### WithSubmition
+
+<Canvas>
+  <Story
+    name="WithSubmition"
+    height="400px"
+    args={{
+      formTitle: 'Your information',
+      formDescription:
+        'Lorem ipsum dolor sit amet,consectetur adipiscing elit, Nam a ligula a ligulaexcrel kmlobortis lacina mon sed nibh',
+      onFormSubmit: (data) => console.log(data),
+    }}
+  >
+    {Template.bind()}
+  </Story>
+</Canvas>
+
+## Examples
+
+```html
+<GoAForm {...args}>
+   <GoAFormItem name="FirstName" validators={[requiredValidator]}>
+        <label>First Name</label>
+        <GoAInput type="input" />
+</GoAForm>
+```
+
+## Properties
+
+<Description of={GoAForm} />
+<ArgsTable of={GoAForm} />

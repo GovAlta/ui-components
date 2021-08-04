@@ -5,7 +5,7 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 import { action } from '@storybook/addon-actions';
 
 <Meta
-  title="Vue/Basic Elements/RadioGroup"
+  title="Vue/Basic Elements/RadioGroups"
   argTypes={{
     title: { control: { type: 'text' } },
     helperText: { control: { type: 'text' } },
@@ -26,13 +26,12 @@ export const Template = (args, { argTypes }) => ({
 });
 
 # Radios
-
 Important changes or facts given a strong visual emphasis so that users take
 notice and read the information.
 
 <Canvas>
   <Story
-    name="Dynamic"
+    name="Basic"
     height={200}
     args={{
       title: 'Which of the following is your favorite fruit?',

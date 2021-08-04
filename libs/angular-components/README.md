@@ -31,3 +31,17 @@ import { AngularComponentsModule } from '@abgov/angular-components'
   ...
 })
 ```
+
+For experimental components, import ExperimentalComponentsModule.
+```
+import { AngularComponentsModule, ExperimentalComponentsModule } from '@abgov/angular-components'
+...
+@NgModule({
+  ...
+  imports: [
+    AngularComponentsModule,
+    ExperimentalComponentsModule
+  ],
+  ...
+})
+```

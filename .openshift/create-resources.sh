@@ -30,16 +30,16 @@ echo -e "\n\e[1;32mSwtiching to ${DEV_NAMESPACE} project...\e[0m"
 oc project ${DEV_NAMESPACE}
 
 echo -e "\n\e[1;32mCreating Jenkins persistent resources...\e[0m"
-oc process -f ${TEMPLATE_DIR}/jenkins-persistent-template-dev.json | oc create -f -
+oc process -f ${TEMPLATE_DIR}/jenkins-persistent-template-dev.json | oc apply -f -
 
 echo -e "\n\e[1;32mCreating Jenkins Node12 agent resources...\e[0m"
-oc process -f ${TEMPLATE_DIR}/jenkins-agent-node12-template-dev.json | oc create -f -
+oc process -f ${TEMPLATE_DIR}/jenkins-agent-node12-template-dev.json | oc apply -f -
 
 echo -e "\n\e[1;32mCreating '${DEV_NAMESPACE}' application resources...\e[0m"
-oc process -f ${TEMPLATE_DIR}/nginx-runtime-template.json -p NAME=${WEB_APP_NAME} | oc create -f -
+oc process -f ${TEMPLATE_DIR}/nginx-runtime-template.json -p NAME=${WEB_APP_NAME} | oc apply -f -
 
 echo -e "\n\e[1;32mCreating '${DEV_NAMESPACE}' build pipeline resource...\e[0m"
-oc process -f ${TEMPLATE_DIR}/jenkins-build-pipeline-template-dev.json -p NAME=${WEB_APP_NAME} -p SOURCE_REPOSITORY_URI=${SOURCE_REPOSITORY_URI} -p SOURCE_REPOSITORY_REF=${SOURCE_REPOSITORY_REF} | oc create -f -
+oc process -f ${TEMPLATE_DIR}/jenkins-build-pipeline-template-dev.json -p NAME=${WEB_APP_NAME} -p SOURCE_REPOSITORY_URI=${SOURCE_REPOSITORY_URI} -p SOURCE_REPOSITORY_REF=${SOURCE_REPOSITORY_REF} | oc apply -f -
 
 # create test resources if CREATE_TEST = 1
 if [[ $CREATE_TEST == 1 ]]; then
@@ -53,7 +53,7 @@ if [[ $CREATE_TEST == 1 ]]; then
   oc policy add-role-to-user edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${TEST_NAMESPACE}
 
   # process template file
-  oc process -f ${TEMPLATE_DIR}/nginx-runtime-template.json -p NAME=${WEB_APP_NAME} | oc create -f -
+  oc process -f ${TEMPLATE_DIR}/nginx-runtime-template.json -p NAME=${WEB_APP_NAME} | oc apply -f -
 fi
 
 # create prod resources if CREATE_PROD = 1
@@ -68,7 +68,7 @@ if [[ $CREATE_PROD == 1 ]]; then
   oc policy add-role-to-user edit system:serviceaccount:${DEV_NAMESPACE}:jenkins -n ${PROD_NAMESPACE}
 
   # process template file
-  oc process -f ${TEMPLATE_DIR}/nginx-runtime-template.json -p NAME=${WEB_APP_NAME} | oc create -f -
+  oc process -f ${TEMPLATE_DIR}/nginx-runtime-template.json -p NAME=${WEB_APP_NAME} | oc apply -f -
 
   echo -e "\n"
 fi

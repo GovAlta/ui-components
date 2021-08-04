@@ -25,6 +25,12 @@ import {
         type: 'text',
       },
     },
+    displayType: {
+      control: {
+        type: 'select',
+        options: ['large', 'small'],
+      },
+    },
   }}
 />
 
@@ -51,6 +57,7 @@ export const Template = (args) => (
       message: 'Loading...',
       type: 'infinite',
       pagelock: false,
+      displayType: 'large'
     }}
   >
     {Template.bind({})}
@@ -60,7 +67,7 @@ export const Template = (args) => (
 ## Examples
 
 ```html
-<GoAPageLoader visible="{true}" type="'infinite' || 'progress'">
+<GoAPageLoader visible="{true}" type="'infinite' || 'progress'" displayType="'large' || 'small'">
   Loading...
 </GoAPageLoader>
 ```

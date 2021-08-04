@@ -1,9 +1,13 @@
 @import '../variables/colors.scss';
 
 // SVG styles.
-svg {
-  //animation: 2s linear infinite svg-animation;
+.svg {
   max-width: 100px;
+}
+
+// SVG styles.
+.svg--small {
+  max-width: 65px;
 }
 
 // Circle animation.
@@ -43,19 +47,37 @@ svg {
 }
 
 .progress-message {
-  margin-top: 24px;
+  &--large{
+    @extend .progress-message;
+    margin-top: 32px;
+    font-size: 24px;
+    color: #000;
+  }
+
+  &--small{
+    @extend .progress-message;
+    margin-top: 18px;
+    font-size: 18px;
+    color: #000;
+  }
+
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
-  color: #000;
 }
 
 .progress-container{
+  &--small{
+    @extend .progress-container;
+  }
+  &--large{
+    @extend .progress-container;
+    width: 100%;
+    height: 100%;
+  }
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
   background: rgba(255,255,255,90);
 }

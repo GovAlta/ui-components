@@ -178,7 +178,12 @@
                   }
                 ],
                 "resources": {
+                  "requests": {
+                    "cpu": "$CPU_REQUEST}",
+                    "memory": "${MEMORY_REQUEST}"
+                  },
                   "limits": {
+                    "cpu": "$CPU_LIMIT}",
                     "memory": "${MEMORY_LIMIT}"
                   }
                 },
@@ -320,9 +325,31 @@
       "value": "true"
     },
     {
+      "name": "CPU_REQUEST",
+      "displayName": "CPU Request",
+      "description": "The CPU request for the container.",
+      "required": true,
+      "value": "100m"
+    },
+    {
+      "name": "CPU_LIMIT",
+      "displayName": "CPU Limit",
+      "description": "CPU limit for the container.",
+      "required": true,
+      "value": "500m"
+    },
+    {
+      "name": "MEMORY_REUEST",
+      "displayName": "Memory Request",
+      "description": "The memory request for the container.",
+      "required": true,
+      "value": "256Mi"
+    },
+    {
       "name": "MEMORY_LIMIT",
       "displayName": "Memory Limit",
       "description": "Maximum amount of memory the container can use.",
+      "required": true,
       "value": "1Gi"
     },
     {

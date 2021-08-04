@@ -1,5 +1,12 @@
-<div *ngIf="visible" class="progress-container">
-  <svg fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<div *ngIf="visible" class="progress-container--{{ displayType }}">
+  <svg
+    [ngClass]="{
+            'svg': displayType === 'large',
+            'svg--small': displayType === 'small'
+          }"
+    fill="none"
+    viewBox="0 0 100 100"
+    xmlns="http://www.w3.org/2000/svg">
     <circle class="base-circle" cx="50" cy="50" r="45"/>
     <circle
       [ngClass]="{
@@ -12,7 +19,7 @@
       [style.stroke-dashoffset]="strokeDashoffset"/>
   </svg>
 
-  <span class="progress-message">
+  <span class="progress-message--{{ displayType }}">
     {{ message }}
   </span>
 </div>
