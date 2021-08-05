@@ -8,7 +8,6 @@
     "nx.json": "*",
     "tsconfig.base.json": "*",
     "nginx.conf": "*",
-    "Jenkinsfile": "*",
     ".github/**/*.yml": "*"
   },
   "affected": {

@@ -30,40 +30,13 @@ jobs:
           workflow_id: release-ci.yml
           github_token: ${{ secrets.RELEASE_TOKEN }}
       - name: Lint
-        run: npm run affected:lint -- --base=${{ steps.last_successful_commit.outputs.commit_hash }}
+        run: npx nx affected --target=lint --base=${{ steps.last_successful_commit.outputs.commit_hash }}
       - name: Test
-        run: npm run affected:test -- --base=${{ steps.last_successful_commit.outputs.commit_hash }}
+        run: npx nx affected --target=test --base=${{ steps.last_successful_commit.outputs.commit_hash }}
       - name: Build
-        run: npm run affected:build -- --base=${{ steps.last_successful_commit.outputs.commit_hash }}
-      - name: Build Storybooks
         run: |
-          npm run build:angular-storybook
-          npm run build:core-storybook
-          npm run build:angular-storybook
-          npm run build:angular-material-storybook
-          npm run build:vue-storybook
-          npm run build:react-storybook
-          cp nginx.conf dist/storybook
-      - name: Oc login
-        uses: redhat-actions/oc-login@v1
-        with:
-          # URL to your OpenShift cluster.
-          # Refer to Step 2.
-          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER }}
-          # Credentials, if desired instead of token.
-          # Username and password override token if they are set.
-          openshift_username: ${{ secrets.OPENSHIFT_USER }}
-          openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
-
-          # Disables SSL cert checking. Use this if you don't have the certificate authority data.
-          insecure_skip_tls_verify: true
-          # This method is more secure, if the certificate from Step 4 is available.
-          # certificate_authority_data: ${{ secrets.CA_DATA }}
-
-          # Optional - this sets your Kubernetes context's current namespace after logging in.
-          namespace: ui-components-dev
-      - name: Start Build
-        run: oc start-build ui-components --from-dir dist/storybook --follow
+          npx nx affected --target=build --base=${{ steps.last_successful_commit.outputs.commit_hash }} --prod --with-deps
+          npx nx affected --target=post --base=${{ steps.last_successful_commit.outputs.commit_hash }}
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
