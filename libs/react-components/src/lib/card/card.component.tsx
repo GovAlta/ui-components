@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import '../../theme.scss';
 import './card.scss';
 
@@ -48,7 +48,7 @@ export const GoACard: FC<Props> = ({
         <div className="goa-title" data-testid='card-title'>
           {titleUrl
             ? <a href={titleUrl} data-testid='card-title-link'>{title}</a>
-            : <h1>{title}</h1>
+            : <h3>{title}</h3>
           }
         </div>
         <p className="goa-text" data-testid='card-content'>{content ?? description}</p>

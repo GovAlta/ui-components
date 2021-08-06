@@ -91,9 +91,9 @@ export const GoAElementLoader = ({
         />
         <path
           d={getArc(75, 100, radius - 7 / 2, radius, false)}
-          stroke-width="7"
+          strokeWidth="7"
           stroke={`${spinnerColour}`}
-          stroke-linecap="round"
+          strokeLinecap="round"
         />
       </svg>
     )
