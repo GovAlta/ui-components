@@ -3,13 +3,13 @@ import { GoAFormItem } from './container/form.item.component';
 import { GoAFormButton } from './container/form.button.component';
 import { GoAFormContainer } from './container/form.container.component';
 import './form.scss';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import GoAButton from '../../lib/button/button';
 import GoACallout from '../../lib/callout/callout';
 
 type FormProps = {
-  formTitle: string,
-  formDescription: string,
+  formTitle: string;
+  formDescription: string;
   /**
    * Action to take on submit button click
    */
@@ -17,33 +17,37 @@ type FormProps = {
   /**
    * Provide children to be rendered inside of the element
    */
-  children?: ReactNode
-}
+  children?: ReactNode;
+};
 interface formStateProps {
   data: {
-    name?: string, value?: string
-  },
-  validators: { name?: string, validators?: [] },
-  errors: { name?: string, errors?: [] },
-  highLightError: { name?: string, errors?: [] },
-
+    name?: string;
+    value?: string;
+  };
+  validators: { name?: string; validators?: [] };
+  errors: { name?: string; errors?: [] };
+  navigator: { name?: string; errors?: [] };
 }
 const initState: formStateProps = {
-  data: {
-  },
+  data: {},
   validators: {},
   errors: {},
-  highLightError: {},
+  navigator: {},
 };
 let FormContext;
 export const { Provider } = (FormContext = React.createContext<any>({}));
 
-export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, children = null, ...props }: FormProps) => {
+export const GoAForm = ({
+  formTitle = '',
+  formDescription = '',
+  onFormSubmit,
+  children = null,
+  ...props
+}: FormProps) => {
   const [formState, setFormState] = useState(initState);
   const [formErrors, setFormErrors] = useState([]);
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-
     if (validate()) {
       onFormSubmit(formState.data);
     }
@@ -51,9 +55,9 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
 
   const validate = () => {
     const { validators } = formState;
-    setFormState(state => ({
+    setFormState((state) => ({
       ...state,
-      errors: {}
+      errors: {},
     }));
 
     const formErrors = Object.entries(validators).reduce(
@@ -72,11 +76,9 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
 
           const errorNames = [];
           for (const key in errors) {
-
             if (errors[key].length > 0) {
               errorNames.push(key);
             }
-
           }
           setFormErrors(errorNames);
         }
@@ -89,57 +91,62 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
       return true;
     }
 
-    setFormState(state => ({
+    setFormState((state) => ({
       ...state,
-      errors: formErrors
+      errors: formErrors,
     }));
 
     return false;
   };
 
-
   const setFieldValue = (name, value) => {
-    setFormState(state => {
+    setFormState((state) => {
       return {
         ...state,
         data: {
           ...state.data,
-          [name]: value
+          [name]: value,
         },
         errors: {
           ...state.errors,
-          [name]: []
-        }
+          [name]: [],
+        },
       };
     });
   };
+
   const registerInput = ({ name, validators }) => {
-    setFormState(state => {
+    setFormState((state) => {
       return {
         ...state,
         validators: {
           ...state.validators,
-          [name]: validators || []
+          [name]: validators || [],
         },
         errors: {
           ...state.errors,
-          [name]: []
-        }
+          [name]: [],
+        },
       };
     });
 
     return () => {
-      setFormState(state => {
-        const { data, errors, validators: currentValidators, highLightError } = { ...state };
+      setFormState((state) => {
+        const {
+          data,
+          errors,
+          validators: currentValidators,
+          navigator,
+        } = { ...state };
         delete data[name];
         delete errors[name];
         delete currentValidators[name];
-        delete highLightError[name];
+        delete navigator[name];
         return {
           data,
           errors,
           validators: currentValidators,
-          highLightError
+          navigator,
         };
       });
     };
@@ -148,35 +155,37 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
   const formProviderValue = {
     errors: formState.errors,
     data: formState.data,
-    highLightError: formState.highLightError,
+    navigator: formState.navigator,
     setFieldValue,
-    registerInput
+    registerInput,
   };
 
-  function addHighlightError(error) {
-    setFormState(state => {
+  function addNavigator(error) {
+    setFormState((state) => {
       return {
         ...state,
-        highLightError: { name: error }
+        navigator: { name: error },
       };
     });
   }
+
   const renderErrorList = () => {
     return (
-      <GoACallout
-        type="emergency"
-        title="Please fix following errors:"
-      ><ul>
+      <GoACallout type="emergency" title="Please fix following errors:">
+        <ul>
           {formErrors.map((error) => {
             return (
-              <li><a href={`#${error}`} onClick={() => addHighlightError(error)}>{error}</a></li>
+              <li>
+                <a href={`#${error}`} onClick={() => addNavigator(error)}>
+                  {error}
+                </a>
+              </li>
             );
           })}
-
         </ul>
       </GoACallout>
     );
-  }
+  };
 
   return (
     <Provider value={formProviderValue}>
@@ -184,16 +193,16 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
         <h2>{formTitle}</h2>
         <p>{formDescription}</p>
         {onFormSubmit ? (
-          <form onSubmit={onSubmit} >
+          <form onSubmit={onSubmit}>
             {children}
             {formErrors.length > 0 && renderErrorList()}
             <GoAFormButton>
               <GoAButton buttonType="tertiary" type="button">
                 Cancel
-            </GoAButton>
+              </GoAButton>
               <GoAButton buttonType="primary" type="submit">
                 Submit
-            </GoAButton>
+              </GoAButton>
             </GoAFormButton>
           </form>
         ) : (
@@ -202,13 +211,13 @@ export const GoAForm = ({ formTitle = '', formDescription = '', onFormSubmit, ch
       </div>
     </Provider>
   );
-}
+};
 GoAForm.propTypes = {
   formTitle: PropTypes.string,
   formDescription: PropTypes.string,
   onSubmit: PropTypes.func,
   children: PropTypes.node,
-}
+};
 export default GoAForm;
 export { GoAFormItem, GoAFormButton, GoAFormContainer };
 export { FormContext };

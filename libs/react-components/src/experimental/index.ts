@@ -5,7 +5,7 @@ import { GoAFormItem, GoAFormButton, GoAFormContainer, GoAForm } from './form/fo
 import { GoASkeletonContent } from './skeleton/skeleton-titled-content';
 import { GoASkeletonGridColumnContent } from './skeleton/skeleton-grid-column';
 import { GoASkeletonImageContent } from './skeleton/skeleton-image-content';
-
+import { GoAInput } from './input/input.component'
 export {
   GoABadge,
   GoAPageLoader,
@@ -16,5 +16,6 @@ export {
   GoAFormItem,
   GoAFormButton,
   GoAFormContainer,
-  GoAForm
+  GoAForm,
+  GoAInput
 };

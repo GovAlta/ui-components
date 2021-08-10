@@ -82,6 +82,31 @@ export const Template = (args) => (
   </GoAForm>
 );
 
+export const inputTemplate = (args) => (
+  <GoAForm {...args}>
+    <GoAFormContainer>
+      <GoAFormItem name="timeStampMin">
+        <label>Timestamp Min</label>
+        <input type="date" />
+      </GoAFormItem>
+      <GoAFormItem name="timeStampMax">
+        <label>Timestamp Max</label>
+        <input type="date" />
+      </GoAFormItem>
+    </GoAFormContainer>
+    <GoAFormContainer>
+      <GoAFormItem name="nameSpace">
+        <label>NameSpace</label>
+        <input type="input" />
+      </GoAFormItem>
+      <GoAFormItem name="name">
+        <label>Name</label>
+        <input type="input" />
+      </GoAFormItem>
+    </GoAFormContainer>
+  </GoAForm>
+);
+
 ### Default
 
 <Canvas>
@@ -112,6 +137,23 @@ export const Template = (args) => (
     }}
   >
     {Template.bind()}
+  </Story>
+</Canvas>
+
+### PlainInput
+
+<Canvas>
+  <Story
+    name="PlainInput"
+    height="400px"
+    args={{
+      formTitle: 'Your information',
+      formDescription:
+        'Lorem ipsum dolor sit amet,consectetur adipiscing elit, Nam a ligula a ligulaexcrel kmlobortis lacina mon sed nibh',
+      onFormSubmit: (data) => console.log(data),
+    }}
+  >
+    {inputTemplate.bind()}
   </Story>
 </Canvas>
 
