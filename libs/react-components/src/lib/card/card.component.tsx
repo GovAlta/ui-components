@@ -48,7 +48,7 @@ export const GoACard: FC<Props> = ({
         <div className="goa-title" data-testid='card-title'>
           {titleUrl
             ? <a href={titleUrl} data-testid='card-title-link'>{title}</a>
-            : <h3>{title}</h3>
+            : <div>{title}</div>
           }
         </div>
         <p className="goa-text" data-testid='card-content'>{content ?? description}</p>

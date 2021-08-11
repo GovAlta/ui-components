@@ -7,42 +7,52 @@ type GoAFormItemProps = {
   validators?: [];
   onChange?: (value: string) => void;
   children?: React.ReactNode;
-}
+};
 
-export const GoAFormItem = ({ name, validators = [], onChange = null, children = null }: GoAFormItemProps) => {
-  const { errors, highLightError, setFieldValue, registerInput } = useContext(
+export const GoAFormItem = ({
+  name,
+  validators = [],
+  onChange = null,
+  children = null,
+}: GoAFormItemProps) => {
+  const { errors, navigator, setFieldValue, registerInput } = useContext(
     FormContext
   );
   useEffect(
     () =>
       registerInput({
         name: name,
-        validators: validators
+        validators: validators,
       }),
     []
   );
-  const handleChange = val => {
-    setFieldValue(name, val);
+  const handleChange = (val) => {
+    if (typeof val === 'string') {
+      setFieldValue(name, val);
+    } else {
+      setFieldValue(name, val.target.value);
+    }
+
     if (onChange) {
       onChange(val);
     }
   };
-  const errorMsg = errors[name] || [];
-  const highLight = highLightError.name === name;
+  const message = errors[name] || [];
+  const navigateTo =
+    navigator && navigator.name && navigator.name === name;
 
   function renderChildren() {
     return Children.map(children, (child: any) => {
       if (child.props.originalType !== 'label') {
         return React.cloneElement(child, {
           onChange: handleChange,
-          errorMsg: errorMsg.toString(),
+          message: message.toString(),
           id: name,
-          highLightError: highLight
+          navigator: navigateTo,
         });
       } else {
         return child;
       }
-
     });
   }
 
@@ -51,11 +61,11 @@ export const GoAFormItem = ({ name, validators = [], onChange = null, children =
       {renderChildren()}
     </div>
   );
-}
+};
 GoAFormItem.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func,
   validators: PropTypes.array,
-}
+};
 
 export default GoAFormItem;

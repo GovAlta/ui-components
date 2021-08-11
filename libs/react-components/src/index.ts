@@ -27,7 +27,8 @@ import {
   GoAFormItem,
   GoAFormButton,
   GoAFormContainer,
-  GoAForm
+  GoAForm,
+  GoAInput
 } from './experimental'
 
 export {
@@ -40,6 +41,7 @@ export {
   GoAFormItem,
   GoAFormButton,
   GoAForm,
+  GoAInput,
   GoAFormContainer,
   GoANotification,
   GoARadioGroup,
