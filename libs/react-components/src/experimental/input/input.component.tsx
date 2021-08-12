@@ -68,6 +68,7 @@ export const GoAInput: FC<Props> = ({
     </div>
   );
 };
+
 GoAInput.propTypes = {
   validate: PropTypes.func,
   name: PropTypes.string,
@@ -79,4 +80,5 @@ GoAInput.propTypes = {
   navigator: PropTypes.bool,
   onChange: PropTypes.func,
 };
+
 export default GoAInput;
