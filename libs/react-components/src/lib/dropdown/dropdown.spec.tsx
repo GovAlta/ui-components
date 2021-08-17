@@ -1,26 +1,27 @@
 import React from 'react';
-import { render, cleanup, screen, fireEvent } from '@testing-library/react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import { GoADropdown } from './dropdown.component';
 import { GoAOptionGroup } from './option-group/option-group.component';
 import { GoAOption } from './option/option.component';
 import { DropdownOption } from './dropdown.context';
+import { screen } from '@testing-library/dom';
 
 afterEach(cleanup);
 
 describe('GoA Dropdown', () => {
-  const expandCollapseDropDown = (container: HTMLElement) => {
-    const label = container.querySelector('.dropdown-label');
-    // Check that the label is available
-    expect(label).toBeTruthy();
+  const expandCollapseDropDown = async () => {
 
+    const container = await screen.findByTestId('dropdown-container');
+    // Check that the label is available
+    expect(container).toBeTruthy();
     // Click the label to expand the dropdown
-    fireEvent.click(label);
+    fireEvent.click(container);
   }
 
-  test('Expands and collapses', () => {
+  test('Expands and collapses', async () => {
     const { container } = render(
       <GoADropdown
-        label='Fruits'
+        title='Fruits'
         description='Choose your favourite friut.'
         selectionChanged={() => { }}
       >
@@ -33,23 +34,23 @@ describe('GoA Dropdown', () => {
     expect(container.querySelector('.option')).toBeFalsy();
 
     //Expand the dropdown
-    expandCollapseDropDown(container);
+    await expandCollapseDropDown();
 
     // Check that the options are displayed
     expect(container.querySelector('.option')).toBeTruthy();
 
     //Collapse the dropdown
-    expandCollapseDropDown(container);
+    await expandCollapseDropDown();
 
     // Check that the options are NOT displayed
     expect(container.querySelector('.option')).toBeFalsy();
 
   });
 
-  test('Nothing happens when disabled', () => {
+  test('Nothing happens when disabled', async () => {
     const { container } = render(
       <GoADropdown
-        label='Fruits'
+        title='Fruits'
         description='Choose your favourite friut.'
         disabled={true}
         selectionChanged={() => { }}
@@ -59,16 +60,16 @@ describe('GoA Dropdown', () => {
         <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
-    expandCollapseDropDown(container);
+    await expandCollapseDropDown();
 
     // Check that the options are NOT displayed
     expect(container.querySelector('.option')).toBeFalsy();
   });
 
-  test('Contains all options', () => {
+  test('Contains all options', async () => {
     const { container } = render(
       <GoADropdown
-        label='Fruits'
+        title='Fruits'
         description='Choose your favourite friut.'
         selectionChanged={() => { }}
       >
@@ -77,7 +78,7 @@ describe('GoA Dropdown', () => {
         <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
-    expandCollapseDropDown(container);
+    await expandCollapseDropDown();
 
     const allLabels = ['Apple', 'Pear', 'Banana']
     // Find each of the options
@@ -85,10 +86,10 @@ describe('GoA Dropdown', () => {
       expect(screen.getByText(l)).toBeTruthy();
     })
   });
-  test('Renders options and groups', () => {
+  test('Renders options and groups', async () => {
     const { container } = render(
       <GoADropdown
-        label='Fruits'
+        title='Fruits'
         description='Choose your favourite friut.'
         multiple={false}
         selectionChanged={() => { }}
@@ -100,7 +101,7 @@ describe('GoA Dropdown', () => {
         <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
-    expandCollapseDropDown(container);
+    await expandCollapseDropDown();
 
     // Find each of the options
     const allLabels = ['Apple', 'Pear', 'Banana']
@@ -110,12 +111,11 @@ describe('GoA Dropdown', () => {
     })
   });
 
-  test('Displays warning when is required and no items are selected', () => {
+  test('Displays warning when is required and no items are selected', async () => {
     const { container } = render(
       <GoADropdown
-        label='Fruits'
+        title='Fruits'
         description='Choose your favourite friut.'
-        required={true}
         selectionChanged={() => { }}
         errorMessage="Error of the component"
       >
@@ -127,9 +127,9 @@ describe('GoA Dropdown', () => {
       </GoADropdown>);
 
     // Expand...
-    expandCollapseDropDown(container);
+    await expandCollapseDropDown();
     // Collapse...
-    expandCollapseDropDown(container);
+    await expandCollapseDropDown();
 
     // Check that the dropdown has the 'has-error' class
     const dropdownElement = container.querySelector('.goa-dropdown.has-error');
@@ -142,13 +142,13 @@ describe('GoA Dropdown', () => {
   });
 
   test('[selectionChanges] callback is invoked', async () => {
-    let optionInCallback = {};
+    let optionInCallback: DropdownOption;
     const selectHandler = (option: DropdownOption) => {
       optionInCallback = option;
     }
-    const { container } = render(
+    render(
       <GoADropdown
-        label='Fruits'
+        title='Fruits'
         description='Choose your favourite friut.'
         multiple={true}
         selectionChanged={selectHandler}
@@ -160,7 +160,7 @@ describe('GoA Dropdown', () => {
         <GoAOption value="banana" label="Banana"></GoAOption>
       </GoADropdown>);
 
-    expandCollapseDropDown(container);
+    await expandCollapseDropDown();
 
     // Select all three options
     const option = screen.queryByText('Apple');
@@ -169,11 +169,63 @@ describe('GoA Dropdown', () => {
     expect(optionInCallback.value).toBe('apple');
   });
 
-  test('Dynamic loading', () => {
+  test('Test open property', async () => {
+    let optionInCallback: DropdownOption;
+    const selectHandler = (option: DropdownOption) => {
+      optionInCallback = option;
+    }
+    const dropdown = render(
+      <GoADropdown
+        title='Fruits'
+        description='Choose your favourite friut.'
+        multiple={false}
+        open={true}
+        selectionChanged={selectHandler}
+      >
+        <GoAOptionGroup label="Group 1">
+          <GoAOption value="apple" label="Apple"></GoAOption>
+          <GoAOption value="pear" label="Pear"></GoAOption>
+        </GoAOptionGroup>
+        <GoAOption value="banana" label="Banana"></GoAOption>
+      </GoADropdown>);
+    // No further expect is required. Will throw exception, if dropdown-menu is missing
+    await dropdown.findByTestId('dropdown-menu');
+  });
+
+  test('Test menuEditable and menuInputFn properties', async () => {
+    let inputText: string;
+
+    const menuInputhandler = (text: string) => {
+      inputText = text;
+    }
+    const inputValue = 'mock-test'
+    render(
+      <GoADropdown
+        title='Fruits'
+        description='Choose your favourite friut.'
+        multiple={false}
+        open={true}
+        menuEditable={true}
+        menuInputChanged={menuInputhandler}
+        selectionChanged={null}
+      >
+        <GoAOptionGroup label="Group 1">
+          <GoAOption value="apple" label="Apple"></GoAOption>
+          <GoAOption value="pear" label="Pear"></GoAOption>
+        </GoAOptionGroup>
+        <GoAOption value="banana" label="Banana"></GoAOption>
+      </GoADropdown>);
+
+    const input = await screen.findByTestId('menu-input')
+    await fireEvent.change(input, { target: { value: inputValue } })
+    expect(inputText).toBe(inputValue)
+  });
+
+  test('Dynamic loading', async () => {
     const items = [{ value: 'apple', label: 'Apple' }, { value: 'banana', label: 'Banana' }]
     const { container } = render(
       <GoADropdown
-        label="Fruits"
+        title="Fruits"
         description="Choose your favourite fruit!"
         multiple={false}
         selectionChanged={() => { }}
@@ -184,7 +236,7 @@ describe('GoA Dropdown', () => {
       </GoADropdown>
     )
 
-    expandCollapseDropDown(container);
+    await expandCollapseDropDown();
 
     const displayedOtions = container.querySelectorAll('.goa-option');
 
