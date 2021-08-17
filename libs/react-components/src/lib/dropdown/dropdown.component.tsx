@@ -117,7 +117,7 @@ export const GoADropdown: FC<DropDownrops> = ({
     setMaxMenuHeight(height);
   });
 
-  const willOpen = (isOpenState: boolean, isOpenProp?: boolean,) => {
+  const canOpen = (isOpenState: boolean, isOpenProp?: boolean,) => {
     // If open property is not provide, default menu toggle will be applied
     if (isOpenProp !== undefined) {
       return isOpenProp
@@ -126,7 +126,7 @@ export const GoADropdown: FC<DropDownrops> = ({
     return isOpenState
   }
 
-  const willMenuEditable = (editableProp?: boolean) => {
+  const canMenuEditable = (editableProp?: boolean) => {
     if (editableProp !== undefined) {
       return editableProp
     }
@@ -158,9 +158,9 @@ export const GoADropdown: FC<DropDownrops> = ({
             id={`input-for-${key}`}
             placeholder={display ? display : description}
             onChange={(e) => { menuInputChanged && menuInputChanged(e.target.value) }}
-            readOnly={!willMenuEditable(menuEditable)}
+            readOnly={!canMenuEditable(menuEditable)}
           />
-          {willOpen(isOpen, open) &&
+          {canOpen(isOpen, open) &&
             <div className="dropdown-menu" data-testid='dropdown-menu'
               ref={menuRef} style={{
                 position: 'absolute',
