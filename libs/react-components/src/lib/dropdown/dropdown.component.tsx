@@ -15,20 +15,59 @@ import './dropdown.component.scss';
 import GoAOption from './option/option.component';
 import GoAOptionGroup from './option-group/option-group.component';
 
-interface Props {
+type DropDownrops = {
+  /**
+  * Title of dropdown
+  */
   title: string;
-  subTitle: string;
+  /**
+  * SubTitle of dropdown. The subtitle is normally used to indicate the state of dropdown.
+  */
+  subTitle?: string;
+  /**
+  * description of dropdown. Description is the message shown on the menu.
+  */
   description?: string;
+  /**
+  * Maximum height of the dropdown.
+  */
   menuHeight?: number;
+  /**
+  * If true, allowe multiple selection. Otherwise, single selection is used as default.
+  */
   multiple?: boolean;
+  /**
+  * If true, disable the dropdown.
+  */
   disabled?: boolean;
+  /**
+  * Overwrite the discription when the dropdown is disabled.
+  */
   display?: string;
+  /**
+  * Error messgae
+  */
   errorMessage?: string;
   key?: string;
+  /**
+  * If true, the menu of the dropdown changes to input model. This is useful, if we need to add custom filter for the dropdown list.
+  */
+  menuEditable?: boolean;
+  /**
+  * Callback function if dropdown menu is in input model.
+  */
+  menuInputChanged?: (text: string) => void;
+  /**
+  * The property will overwrite the default toggle behavior.
+  */
+  open?: boolean
+  /**
+   * Callback function for option change event.
+   */
   selectionChanged: (option: DropdownOption) => void;
 }
 
-export const GoADropdown: FC<Props> = ({
+export const GoADropdown: FC<DropDownrops> = ({
   title,
   subTitle,
   menuHeight,
@@ -40,6 +79,9 @@ export const GoADropdown: FC<Props> = ({
   display,
   selectionChanged,
   key,
+  open,
+  menuEditable,
+  menuInputChanged,
   ...rest
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -75,13 +117,28 @@ export const GoADropdown: FC<Props> = ({
     setMaxMenuHeight(height);
   });
 
+  const willOpen = (isOpenState: boolean, isOpenProp?: boolean,) => {
+    // If open property is not provide, default menu toggle will be applied
+    if (isOpenProp !== undefined) {
+      return isOpenProp
+    }
+
+    return isOpenState
+  }
+
+  const willMenuEditable = (editableProp?: boolean) => {
+    if (editableProp !== undefined) {
+      return editableProp
+    }
+    return true
+  }
+
   return (
     <DropdownContext.Provider value={{
       selectionChanged: selectionChanged
     }}>
-      {isOpen &&
-        <div className="dropdown-overlay" ref={overlayRef} onClick={toggleOpen}></div>
-      }
+
+      <div className="dropdown-overlay" data-testid='dropdown-container' ref={overlayRef} onClick={toggleOpen}></div>
 
       <div className={rootDropDownCss()} {...rest}>
         <label className="dropdown-label" htmlFor={`input-for-${title}`}>
@@ -96,18 +153,21 @@ export const GoADropdown: FC<Props> = ({
             role="searchbox"
             className="dropdown-textbox margin-override"
             type="text"
+            data-testid="menu-input"
             style={{ cursor: 'default' }}
             id={`input-for-${key}`}
             placeholder={display ? display : description}
-            readOnly={!isOpen}
+            onChange={(e) => { menuInputChanged && menuInputChanged(e.target.value) }}
+            readOnly={!willMenuEditable(menuEditable)}
           />
-          {isOpen &&
-            <div className="dropdown-menu" ref={menuRef} style={{
-              position: 'absolute',
-              zIndex: 1000,
-              maxHeight: `${maxMenuHeight}px`,
-              overflow: 'auto',
-            }}>
+          {willOpen(isOpen, open) &&
+            <div className="dropdown-menu" data-testid='dropdown-menu'
+              ref={menuRef} style={{
+                position: 'absolute',
+                zIndex: 1000,
+                maxHeight: `${maxMenuHeight}px`,
+                overflow: 'auto',
+              }}>
               {children}
             </div>
           }
