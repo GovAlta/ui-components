@@ -5,6 +5,7 @@ import React, {
   useState,
   useEffect,
   useRef,
+  ReactNode,
 } from 'react';
 import {
   DropdownOption,
@@ -29,8 +30,9 @@ type DropDownrops = {
   */
   description?: string;
   /**
-  * Maximum height of the dropdown.
+  * Custom description component
   */
+  descriptionComponent?: ReactNode
   menuHeight?: number;
   /**
   * If true, allowe multiple selection. Otherwise, single selection is used as default.
@@ -74,6 +76,7 @@ export const GoADropdown: FC<DropDownrops> = ({
   multiple,
   disabled,
   description,
+  descriptionComponent,
   children,
   errorMessage,
   display,
@@ -149,7 +152,8 @@ export const GoADropdown: FC<DropDownrops> = ({
         }
         <div className={dropDownGroupCss()} onClick={toggleOpen}>
           <i className="goa-select-icon"></i>
-          <input
+          {descriptionComponent ? <div className="dropdown-textbox"
+          >{descriptionComponent}</div> : <input
             role="searchbox"
             className="dropdown-textbox margin-override"
             type="text"
@@ -159,7 +163,7 @@ export const GoADropdown: FC<DropDownrops> = ({
             placeholder={display ? display : description}
             onChange={(e) => { menuInputChanged && menuInputChanged(e.target.value) }}
             readOnly={!canMenuEditable(menuEditable)}
-          />
+          />}
           {canOpen(isOpen, open) &&
             <div className="dropdown-menu" data-testid='dropdown-menu'
               ref={menuRef} style={{

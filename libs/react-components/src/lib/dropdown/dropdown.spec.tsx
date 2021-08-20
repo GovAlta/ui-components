@@ -221,6 +221,28 @@ describe('GoA Dropdown', () => {
     expect(inputText).toBe(inputValue)
   });
 
+  test('Test descriptionComponent property', async () => {
+
+    render(
+      <GoADropdown
+        title='Fruits'
+        descriptionComponent={<div data-testid='custom-description'></div>}
+        multiple={false}
+        open={true}
+        menuEditable={true}
+        selectionChanged={null}
+      >
+        <GoAOptionGroup label="Group 1">
+          <GoAOption value="apple" label="Apple"></GoAOption>
+          <GoAOption value="pear" label="Pear"></GoAOption>
+        </GoAOptionGroup>
+        <GoAOption value="banana" label="Banana"></GoAOption>
+      </GoADropdown>);
+
+    const customComponent = await screen.findByTestId('custom-description')
+    expect(customComponent).toBeTruthy()
+  });
+
   test('Dynamic loading', async () => {
     const items = [{ value: 'apple', label: 'Apple' }, { value: 'banana', label: 'Banana' }]
     const { container } = render(
