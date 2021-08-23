@@ -22,6 +22,7 @@
     "editor.defaultFormatter": "octref.vetur"
   },
   "cSpell.words": [
+    "Scrollable",
     "checkmark",
     "dashmark",
     "testid"
