@@ -6,11 +6,9 @@ import { GoAPageLoadIndicatorComponent } from './page-load-indicator/page-load-i
 import { GoAElementLoadIndicatorComponent } from './element-load-indicator/element-load-indicator.component';
 import { GoASkeletonImageContentComponent } from './skeleton/skeleton-image-content.component';
 import { GoASkeletonElementComponent } from './skeleton/skeleton-element.component';
-import { GoALoadingCardComponent } from './skeleton/skeleton-card.component';
-import { GoACardComponent } from '../lib/card/card.component';
 
 @NgModule({
-  imports: [CommonModule, GoACardComponent],
+  imports: [CommonModule],
   exports: [
     GoABadgeComponent,
     GoAAppVersionHeaderComponent,
@@ -18,7 +16,6 @@ import { GoACardComponent } from '../lib/card/card.component';
     GoAElementLoadIndicatorComponent,
     GoASkeletonImageContentComponent,
     GoASkeletonElementComponent,
-    GoALoadingCardComponent,
   ],
   declarations: [
     GoABadgeComponent,
@@ -27,7 +24,6 @@ import { GoACardComponent } from '../lib/card/card.component';
     GoAElementLoadIndicatorComponent,
     GoASkeletonImageContentComponent,
     GoASkeletonElementComponent,
-    GoALoadingCardComponent,
   ],
   providers: [
   ],
