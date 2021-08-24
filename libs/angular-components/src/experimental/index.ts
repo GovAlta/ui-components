@@ -5,4 +5,3 @@ export * from './element-load-indicator/element-load-indicator.component';
 export * from './skeleton/skeleton-image-content.component';
 export * from './skeleton/skeleton-element.component';
 export * from './components.module';
-export * from '../lib/card/card.component';
