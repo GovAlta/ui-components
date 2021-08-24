@@ -22,6 +22,7 @@ export class GoACardComponent implements OnInit {
    */
   @Input() cardSize: 'full' | 'auto' = 'full';
   @Input() titleUrl: string;
+  @Input() isSkeleton: false;
 
   constructor() { }
 
