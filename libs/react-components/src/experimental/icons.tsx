@@ -1,5 +1,4 @@
-import React, { FC, ReactNode } from 'react'
-import { ProgressPlugin } from 'webpack'
+import React from 'react'
 
 interface Props {
   onClick: () => void;
