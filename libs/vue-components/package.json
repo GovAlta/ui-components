@@ -3,16 +3,16 @@
   "version": "0.0.0",
   "description": "Government of Alberta - DIO - Shared UI components for Vue.js",
   "bugs": {
-    "url": "https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues"
+    "url": "https://github.com/GovAlta/ui-components/issues"
   },
-  "keywoards": [
+  "keywords": [
     "GoA",
     "template",
     "vue"
   ],
   "repository": {
     "type": "git",
-    "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git",
+    "url": "https://github.com/GovAlta/ui-components.git",
     "directory": "libs/vue-components"
   },
   "peerDependencies": {
