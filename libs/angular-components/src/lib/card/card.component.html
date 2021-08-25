@@ -2,7 +2,7 @@
   class="goa-card"
   [ngClass]="{
     'card-auto': cardSize === 'auto'
-  }"
+  }" [attr.data-skeleton]="isSkeleton ? '' : null"
 >
   <div class="goa-poster">
     <ng-content select="goa-card-thumb-image"></ng-content>
