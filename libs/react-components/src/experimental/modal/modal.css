@@ -10,6 +10,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
 
 /* Modal ============================================================================== */
@@ -18,7 +19,7 @@
   position: relative;
   background: #fff;
   transition: opacity 150ms ease-in;
-  z-index: 1001;
+  z-index: 1002;
 }
 
 @media (max-width: 639px) {
@@ -92,7 +93,7 @@
   inset: 0;
   opacity: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  z-index: 1001;
   transition: opacity 100ms ease-in;
 }
 
