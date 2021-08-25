@@ -158,6 +158,12 @@ const Background: FC<BackgroundProps> = ({ visible, onClick }: BackgroundProps) 
  * Based on the an invisible container and the window width it calculates the scrollbar width
  */
 function calculateScrollbarWidth() {
+
+  // no scrollbars present
+  if (document.body.clientHeight <= document.documentElement.clientHeight) {
+    return 0;
+  }
+
   const outer = document.createElement('div');
   outer.style.visibility = 'hidden';
   outer.style.overflow = 'scroll';
