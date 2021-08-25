@@ -5,7 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './skeleton-element.component.html',
   styleUrls: ['./skeleton-element.component.scss'],
 })
-export class GoASkeletonElementComponent implements OnInit {
+export class GoASkeletonElementComponent {
   @Input() type:
     | 'text'
     | 'avatar'
@@ -20,8 +20,4 @@ export class GoASkeletonElementComponent implements OnInit {
     return `skeleton ${this.type}`;
   }
 
-  /**
-   * @ignore
-   */
-  ngOnInit() {}
 }

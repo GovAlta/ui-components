@@ -5,15 +5,11 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './skeleton-grid-column.component.html',
   styleUrls: ['./skeleton-element.component.scss'],
 })
-export class GoASkeletonGridColumnComponent implements OnInit {
+export class GoASkeletonGridColumnComponent {
   @Input() rows = 1;
 
   arr = Array;
 
   constructor() {}
 
-  /**
-   * @ignore
-   */
-  ngOnInit() {}
 }

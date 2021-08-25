@@ -5,14 +5,11 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './skeleton-image-content.component.html',
   styleUrls: ['./skeleton-element.component.scss'],
 })
-export class GoASkeletonImageContentComponent implements OnInit {
+export class GoASkeletonImageContentComponent {
   @Input() rows = 1;
 
   arr = Array;
   constructor() {}
 
-  /**
-   * @ignore
-   */
-  ngOnInit() {}
+
 }

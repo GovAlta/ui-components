@@ -5,13 +5,9 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './skeleton-card.component.html',
   styleUrls: [],
 })
-export class GoALoadingCardComponent implements OnInit {
+export class GoALoadingCardComponent {
   constructor() {}
 
   @Input() showImage: true;
 
-  /**
-   * @ignore
-   */
-  ngOnInit() {}
 }
