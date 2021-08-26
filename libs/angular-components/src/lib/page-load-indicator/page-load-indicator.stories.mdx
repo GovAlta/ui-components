@@ -12,7 +12,7 @@ import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 
 <Meta
-  title="Experimental/Components/PageLoader"
+  title="Angular/Components/PageLoader"
   component={GoAPageLoadIndicatorComponent}
   argTypes={{
     visible: {
@@ -51,7 +51,7 @@ The Page Load Indicator was designed to show users that something is happening.
       visible: true,
       message: 'Loading message...',
       type: 'infinite',
-      displayType: 'large'
+      displayType: 'large',
     }}
     parameters={{
       design: {},
@@ -69,7 +69,11 @@ The Page Load Indicator was designed to show users that something is happening.
 </Canvas>
 
 ```html
-<goa-page-load-indicator visible="true" type="'infinite' || 'progress'" displayType="'large' || 'small'">
+<goa-page-load-indicator
+  visible="true"
+  type="'infinite' || 'progress'"
+  displayType="'large' || 'small'"
+>
   Loading...
 </goa-page-load-indicator>
 ```

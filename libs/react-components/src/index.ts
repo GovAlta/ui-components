@@ -16,10 +16,9 @@ import {
   GoAOptionGroup,
 } from './lib/dropdown/dropdown.component';
 import GoACheckbox from './lib/checkbox/checkbox';
-
+import GoAPageLoader from './lib/page-loader/page-loader'
 import {
   GoABadge,
-  GoAPageLoader,
   GoAElementLoader,
   GoASkeletonContent,
   GoASkeletonGridColumnContent,

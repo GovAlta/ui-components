@@ -11,7 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 
 <Meta
-  title="Experimental/Components/PageLoader"
+  title="Vue/Components/PageLoader"
   component={GoAPageLoadIndicatorComponent}
   argTypes={{
     type: {
@@ -30,28 +30,34 @@ import { DoDont } from '@abgov/shared/storybook-common';
         type: 'select',
         options: ['large', 'small'],
       },
-    }
+    },
   }}
 />
 
 #### Page Load Indicator
 
 <Canvas>
-  <Story name="PageLoader" height={500}
+  <Story
+    name="PageLoader"
+    height={500}
     args={{
       message: 'Loading...',
       type: 'infinite',
       visible: true,
       pagelock: false,
-      displayType: 'large'
+      displayType: 'large',
     }}
   >
     {(args, argTypes) => {
       return {
         render: function (createElement) {
-          return createElement(GoAPageLoadIndicatorComponent, {props: { ...args}}, null)
-        }
-      }
+          return createElement(
+            GoAPageLoadIndicatorComponent,
+            { props: { ...args } },
+            null
+          );
+        },
+      };
     }}
   </Story>
 </Canvas>
@@ -59,7 +65,11 @@ import { DoDont } from '@abgov/shared/storybook-common';
 ## Examples
 
 ```html
-<GoAPageLoadIndicatorComponent visible="true" type="'infinite' || 'progress'" loaderType="'large || 'small'">
+<GoAPageLoadIndicatorComponent
+  visible="true"
+  type="'infinite' || 'progress'"
+  loaderType="'large || 'small'"
+>
   Loading...
 </GoAPageLoadIndicatorComponent>
 ```

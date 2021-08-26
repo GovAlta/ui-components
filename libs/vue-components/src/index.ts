@@ -11,6 +11,7 @@ import GoANotificationBanner from './lib/notification-banner/notification-banner
 import GoADropdown from './lib/dropdown/dropdown.vue'
 import GoADropdownOption from './lib/dropdown/option/option.vue'
 import { GoABadge } from './experimental'
+import GoAPageLoadIndicatorComponent from './lib/page-load-indicator/page-load-indicator.vue';
 
 export {
   GoAMicrositeLogo,
@@ -25,5 +26,6 @@ export {
   GoANotificationBanner,
   GoADropdown,
   GoADropdownOption,
-  GoABadge
+  GoABadge,
+  GoAPageLoadIndicatorComponent,
 };
