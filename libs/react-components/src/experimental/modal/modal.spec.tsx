@@ -17,9 +17,11 @@ describe('Modal Tests', () => {
         <GoAModal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
+          testId="modal"
+          backgroundTestId="modal-background"
         >
-          <GoAModalTitle>The Title</GoAModalTitle>
-          <GoAModalContent>The content</GoAModalContent>
+          <GoAModalTitle testId="modal-title">The Title</GoAModalTitle>
+          <GoAModalContent testId="modal-content">The content</GoAModalContent>
           <GoAModalActions>
             <GoAButton buttonType="tertiary" type="button" onClick={() => setIsOpen(false)}>
               Cancel
@@ -74,9 +76,11 @@ describe('Modal Tests', () => {
         <GoAModal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
+          testId="modal"
+          backgroundTestId="modal-background"
         >
-          <GoAModalTitle>The Title</GoAModalTitle>
-          <GoAModalContent>The content</GoAModalContent>
+          <GoAModalTitle testId="modal-title">The Title</GoAModalTitle>
+          <GoAModalContent testId="modal-content">The content</GoAModalContent>
           <GoAModalActions>
             <GoAButton buttonType="tertiary" type="button" onClick={() => setIsOpen(false)}>
               Cancel

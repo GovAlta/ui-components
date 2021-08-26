@@ -29,6 +29,7 @@ import React, { FC, useEffect, useState } from 'react';
 import GoAScrollable from '../scrollable/scrollable.component';
 import './modal.css';
 import { GoACloseIcon } from '../icons';
+import { TestProps } from '../common';
 
 type ModalState = 'init' | 'visible' | 'hidden';
 
@@ -40,7 +41,11 @@ interface ModalProps {
   onClose?: () => void;
 }
 
-export const GoAModal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
+interface ModalTestProps extends TestProps {
+  backgroundTestId?: string;
+}
+
+export const GoAModal: FC<ModalProps & ModalTestProps> = ({ children, isOpen, onClose, testId, backgroundTestId }) => {
   const [state, setState] = useState<ModalState>('init');
   const [visible, setVisible] = useState(false);
 
@@ -71,18 +76,17 @@ export const GoAModal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
     // need to perform on the next render cycle to allow the css transitions to take place
     setTimeout(() => {
       setVisible(false);
-      setState('hidden');
-      document.body.style.overflow = 'inherit';
+      document.body.style.overflow = '';
       document.body.style.paddingRight = '0';
     }, 300); // 300ms allows for any close animations to complete
   }
 
   return visible &&
-    <div className="modal-root">
+    <div className="modal-root" data-testid={testId}>
       <Content onClick={onClose} visible={state === 'visible'}>
         {children}
       </Content>
-      <Background onClick={() => onClose?.()} visible={state === 'visible'} />
+      <Background onClick={() => onClose?.()} visible={state === 'visible'} testId={backgroundTestId} />
     </div>;
 }
 
@@ -93,21 +97,32 @@ export default GoAModal;
 // Public Child Components
 // ******************************************************************************
 
+// ***************
+// GoAModalActions
+// ***************
 
 export const GoAModalActions: FC = ({ children }) => {
-  return <div data-testid="modal-actions" className="modal-actions">{children}</div>;
+  return <div className="modal-actions">{children}</div>;
 };
 
-export const GoAModalContent: FC = ({ children }) => {
+// ***************
+// GoAModalContent
+// ***************
+
+export const GoAModalContent: FC<TestProps> = ({ children, testId }) => {
   return (
-    <GoAScrollable vertical={true} hPadding={1}>
+    <GoAScrollable testId={testId} vertical={true} hPadding={1}>
       {children}
     </GoAScrollable>
   );
 };
 
-export const GoAModalTitle: FC = ({ children }) => {
-  return <div data-testid="modal-title" className="modal-title">{children}</div>;
+// *************
+// GoAModalTitle
+// *************
+
+export const GoAModalTitle: FC<TestProps> = ({ children, testId }) => {
+  return <div data-testid={testId} className="modal-title">{children}</div>;
 };
 
 
@@ -129,9 +144,9 @@ const Content: FC<ContentProps> = ({ children, onClick, visible }) => {
   const opacity = visible ? 1 : 0;
 
   return (
-    <div data-testid="modal" className="modal" onClick={(e) => e.stopPropagation()} style={{ opacity }}>
+    <div className="modal" onClick={(e) => e.stopPropagation()} style={{ opacity }}>
       {onClick && <GoACloseIcon className="modal-close" onClick={onClick} />}
-      <div data-testid='modal-content' className="modal-content">{children}</div>
+      <div className="modal-content">{children}</div>
     </div>
   );
 }
@@ -145,9 +160,9 @@ interface BackgroundProps {
   onClick: () => void;
 }
 
-const Background: FC<BackgroundProps> = ({ visible, onClick }: BackgroundProps) => {
+const Background: FC<BackgroundProps & TestProps> = ({ visible, onClick, testId }) => {
   const opacity = visible ? 1 : 0;
-  return <div data-testid='modal-background' className="modal-background" onClick={onClick} style={{ opacity }}></div>;
+  return <div className="modal-background" onClick={onClick} style={{ opacity }} data-testid={testId}></div>;
 }
 
 // *******
