@@ -29,6 +29,7 @@ import {
   GoAHeroBannerContentComponent,
   GoAHeroBannerLinkComponent,
 } from './hero-banner/hero-banner.component';
+import { GoAPageLoadIndicatorComponent } from './page-load-indicator/page-load-indicator.component';
 
 @NgModule({
   imports: [CommonModule, OverlayModule],
@@ -57,6 +58,7 @@ import {
     GoAHeroBannerComponent,
     GoAHeroBannerContentComponent,
     GoAHeroBannerLinkComponent,
+    GoAPageLoadIndicatorComponent,
   ],
   declarations: [
     GoAButtonComponent,
@@ -80,7 +82,8 @@ import {
     GoAHeroBannerComponent,
     GoAHeroBannerContentComponent,
     GoAHeroBannerLinkComponent,
+    GoAPageLoadIndicatorComponent,
   ],
   providers: [GoARadioService],
 })
-export class AngularComponentsModule {}
+export class AngularComponentsModule { }
