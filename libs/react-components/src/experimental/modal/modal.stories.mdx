@@ -44,11 +44,11 @@ export const Template = (args) => {
   const [isOpen, setOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   return (
-    <>
+    <div style={{ height: '9999px' }}>
       <button onClick={() => setOpen(true)}>Open Modal</button>
-      <GoAModal isOpen={isOpen} onClose={() => setOpen(false)}>
-        <GoAModalTitle>{args.title}</GoAModalTitle>
-        <GoAModalContent>{args.content}</GoAModalContent>
+      <GoAModal testId="modal" isOpen={isOpen} onClose={() => setOpen(false)}>
+        <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
+        <GoAModalContent testId="content">{args.content}</GoAModalContent>
         <GoAModalActions>
           <GoAButton
             buttonType="tertiary"
@@ -69,7 +69,7 @@ export const Template = (args) => {
           </GoAButton>
         </GoAModalActions>
       </GoAModal>
-    </>
+    </div>
   );
 };
 
@@ -79,9 +79,9 @@ export const NoCloseTemplate = (args) => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
-      <GoAModal isOpen={isOpen}>
-        <GoAModalTitle>{args.title}</GoAModalTitle>
-        <GoAModalContent>{args.content}</GoAModalContent>
+      <GoAModal testId="modal" isOpen={isOpen}>
+        <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
+        <GoAModalContent testId="content">{args.content}</GoAModalContent>
         <GoAModalActions>
           <GoAButton
             buttonType="tertiary"

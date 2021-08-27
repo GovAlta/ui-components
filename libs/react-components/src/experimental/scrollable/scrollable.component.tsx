@@ -1,4 +1,5 @@
-import React, { CSSProperties, ReactElement, ReactNode } from 'react';
+import React, { CSSProperties, FC } from 'react';
+import { TestProps } from '../common';
 import './scrollable.css';
 
 interface Props {
@@ -9,14 +10,15 @@ interface Props {
   height?: number;
 }
 
-export function GoAScrollable({
+export const GoAScrollable: FC<Props & TestProps> = ({
   vertical,
   horizontal,
   hPadding,
   vPadding,
   height,
   children,
-}: Props & { children: ReactNode }): ReactElement {
+  testId,
+}) => {
   const style: CSSProperties = {
     overflowY: vertical ? 'auto' : 'hidden',
     overflowX: horizontal ? 'auto' : 'hidden',
@@ -25,7 +27,7 @@ export function GoAScrollable({
   };
   return (
     <div className='goa-scrollable'>
-      <div style={style}>{children}</div>
+      <div style={style} data-testid={testId}>{children}</div>
     </div>
   );
 }
