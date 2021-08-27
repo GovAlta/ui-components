@@ -1,48 +1,47 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { GoAForm, GoAFormItem } from './form.component';
-import { screen } from '@testing-library/dom';
+import { GoAForm, GoAFormActions, GoAFormItem } from './form.component';
+import GoAButton from '../../lib/button/button';
 describe('GoA Form', () => {
-  const formClassName = 'goa-form';
-  const formItemClassName = 'goa-form-items';
-  const formTitle = 'Your Information';
-  const formDescription =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ligula a ligulaxcrei kmlobortis lacinia non sed nibh.';
   it('should render', () => {
     const { baseElement } = render(
-      <GoAForm formTitle={formTitle} formDescription={formDescription} />
+      <GoAForm />
     );
-
     expect(baseElement).toBeTruthy();
-    expect(screen.getByText(formTitle));
-    expect(screen.getByText(formDescription));
     const container = document.querySelector('.goa-form');
-
     expect(container).not.toBeNull();
   });
 
   it('should render form item class', () => {
     render(
-      <GoAForm formTitle={formTitle} formDescription={formDescription}>
-        <GoAFormItem name="MiddleName" />
+      <GoAForm>
+        <GoAFormItem helpText="Non-standard Input">
+          <label>Middle Name</label>
+          <input type="input" name="middleName" />
+        </GoAFormItem>
       </GoAForm>
     );
-    const container = document.querySelector('.goa-form-items');
-
+    let container = document.querySelector('.goa-form-item');
+    expect(container).not.toBeNull();
+    container = document.querySelector('.help-msg ');
     expect(container).not.toBeNull();
   });
 
   it('should render goa form button class', () => {
     render(
-      <GoAForm
-        formTitle={formTitle}
-        formDescription={formDescription}
-        onFormSubmit={(data) => console.log(data)}
-      >
-        <GoAFormItem name="MiddleName" />
+      <GoAForm>
+        <GoAFormItem />
+        <GoAFormActions>
+          <GoAButton buttonType="tertiary" type="reset">
+            Cancel
+        </GoAButton>
+          <GoAButton buttonType="primary" type="submit">
+            Submit
+              </GoAButton>
+        </GoAFormActions>
       </GoAForm>
     );
-    const container = document.querySelector('.goa-form-button');
+    const container = document.querySelector('.goa-form-actions');
 
     expect(container).not.toBeNull();
   });
