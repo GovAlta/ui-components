@@ -107,7 +107,7 @@ A skeleton load element provides visual feedback to users while a content heavy 
 <Canvas>
   <Story
     name="Skeleton Card"
-    height={100}
+    height="400px"
     args={{
       showImage: true,
     }}
@@ -115,7 +115,7 @@ A skeleton load element provides visual feedback to users while a content heavy 
     {(args) => {
       return {
         template: `<div style="display:'flex'; gap:'8px'">
-            <goa-skeleton-card [showImage]="showImage"></goa-skeleton-card>
+            <goa-skeleton-card [showImage]="showImage" style="margin: 28px; width:200px;"></goa-skeleton-card>
             </div>
          `,
         props: args,
