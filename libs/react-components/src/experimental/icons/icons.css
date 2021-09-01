@@ -1,0 +1,15 @@
+.icon-circular {
+  padding: 0.5rem;
+  top: 0.5rem;
+  right: 0.5rem;
+  position: absolute;
+  cursor: pointer;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 999px;
+  transition: background 200ms ease-in;
+}
+
+.icon-circular:hover {
+  background: rgba(0, 0, 0, 0.1);
+}

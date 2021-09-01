@@ -96,21 +96,3 @@
   z-index: 1001;
   transition: opacity 100ms ease-in;
 }
-
-/* Modal Close ============================================================================ */
-
-.modal-close {
-  padding: 0.5rem;
-  top: 0.5rem;
-  right: 0.5rem;
-  position: absolute;
-  cursor: pointer;
-  height: 20px;
-  width: 20px;
-  border-radius: 999px;
-  transition: background 200ms ease-in;
-}
-
-.modal-close:hover {
-  background: rgba(0, 0, 0, 0.1);
-}
