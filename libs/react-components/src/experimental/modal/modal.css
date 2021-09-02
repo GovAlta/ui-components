@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,21 +20,21 @@
   background: #fff;
   transition: opacity 150ms ease-in;
   z-index: 1002;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
 @media (max-width: 639px) {
   .modal {
-    width: 100vw;
-    height: 100vh;
+    width: 90%;
+    max-height: 90%;
   }
 }
 
 @media (min-width: 640px) {
   .modal {
-    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
     margin: 1rem;
-    max-height: 80vh;
+    max-height: 80%;
     width: 600px;
   }
 }
