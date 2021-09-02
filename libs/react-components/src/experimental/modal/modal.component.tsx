@@ -28,7 +28,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import GoAScrollable from '../scrollable/scrollable.component';
 import './modal.css';
-import {  GoAIcon } from '../icons/icons';
+import { GoAIcon } from '../icons/icons';
 import { TestProps } from '../common';
 
 type ModalState = 'init' | 'visible' | 'hidden';
@@ -144,9 +144,10 @@ const Content: FC<ContentProps> = ({ children, onClick, visible }) => {
   const opacity = visible ? 1 : 0;
 
   return (
-    <div className="modal" onClick={(e) => e.stopPropagation()} style={{ opacity }}>
+    <div className="modal" style={{ opacity }}>
       {onClick && <GoAIcon type='close' variant="circular" onClick={onClick} />}
       <div className="modal-content">{children}</div>
+      {onClick && <div style={{minHeight: '1rem'}}></div>}
     </div>
   );
 }
