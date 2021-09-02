@@ -24,8 +24,7 @@ import {
   GoASkeletonGridColumnContent,
   GoASkeletonImageContent,
   GoAFormItem,
-  GoAFormButton,
-  GoAFormContainer,
+  GoAFormActions,
   GoAForm,
   GoAInput
 } from './experimental'
@@ -38,10 +37,9 @@ export {
   GoASkeletonGridColumnContent,
   GoASkeletonImageContent,
   GoAFormItem,
-  GoAFormButton,
+  GoAFormActions,
   GoAForm,
   GoAInput,
-  GoAFormContainer,
   GoANotification,
   GoARadioGroup,
   GoARadio,
