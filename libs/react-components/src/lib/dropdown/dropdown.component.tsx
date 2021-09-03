@@ -138,7 +138,12 @@ export const GoADropdown: FC<DropDownrops> = ({
       selectionChanged: selectionChanged
     }}>
 
-      <div className="dropdown-overlay" data-testid='dropdown-container' ref={overlayRef} onClick={toggleOpen}></div>
+      {canOpen(isOpen, open) && <div
+        className='dropdown-overlay'
+        data-testid='dropdown-container'
+        ref={overlayRef}
+        onClick={toggleOpen}></div>
+      }
 
       <div className={rootDropDownCss()} {...rest}>
         <label className="dropdown-label" htmlFor={`input-for-${title}`}>
@@ -147,7 +152,8 @@ export const GoADropdown: FC<DropDownrops> = ({
         {subTitle &&
           <span className="required-label">{subTitle}</span>
         }
-        <div className={dropDownGroupCss()} onClick={toggleOpen}>
+        <div className={dropDownGroupCss()}
+          onClick={toggleOpen}>
           <i className="goa-select-icon"></i>
           <input
             role="searchbox"

@@ -11,7 +11,7 @@ afterEach(cleanup);
 describe('GoA Dropdown', () => {
   const expandCollapseDropDown = async () => {
 
-    const container = await screen.findByTestId('dropdown-container');
+    const container = await screen.findByTestId('menu-input');
     // Check that the label is available
     expect(container).toBeTruthy();
     // Click the label to expand the dropdown
