@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Meta,
   Preview,
@@ -12,10 +13,7 @@ import { DoDont } from '@abgov/shared/storybook-common';
 
 import { GoARadioGroup, GoARadio } from './radio-group';
 
-<Meta
-  title="React/Basic Elements/RadioGroups"
-  component={GoARadioGroup}
-/>
+<Meta title="React/Basic Elements/RadioGroups" component={GoARadioGroup} />
 
 # Radios
 
@@ -23,76 +21,30 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
 
 ## Overview
 
-export const TemplateBasic = (args) => (
-  <GoARadioGroup {...args}>
-    <GoARadio value="apple">apple</GoARadio>
-    <GoARadio value="orange">orange</GoARadio>
-    <GoARadio value="banana">banana</GoARadio>
-  </GoARadioGroup>
-);
-
-export const TemplateDynamic = (args) => (
-  <GoARadioGroup {...args}></GoARadioGroup>
-);
+export const TemplateBasic = (args) => {
+  const [value, setValue] = useState(args.value);
+  return (
+    <div style={{padding: "5px"}}>
+      Current Value: {value}
+      <GoARadioGroup {...args} value={value} onChange={setValue}>
+        <GoARadio value="apple">apple</GoARadio>
+        <GoARadio value="orange">orange</GoARadio>
+        <GoARadio value="banana">banana</GoARadio>
+      </GoARadioGroup>
+    </div>
+  );
+};
 
 #### Basic
+
 <Canvas>
   <Story
     name="Basic"
     height={200}
     args={{
       name: 'fruits',
-      title: 'Which of the following is your favorite fruit?',
-      helperText:
-        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
-      requiredErrorMessage: 'Please select a fruit',
-      required: false,
       disabled: false,
-      labelPosition: 'after',
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
-    }}
-  >
-    {TemplateBasic.bind({})}
-  </Story>
-</Canvas>
-
-#### Dynamic
-<Canvas>
-  <Story
-    name="Dynamic"
-    height={200}
-    args={{
-      name: 'dynamic-fruits',
-      title: 'Which of the following is your favorite fruit?',
-      helperText:
-        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
-      requiredErrorMessage: 'Please select a fruit',
-      required: false,
-      disabled: false,
-      labelPosition: 'after',
-      items: [
-        {text: 'Grapes', value: 'grapes'},
-        {text: 'Pears', value: 'pears'},
-        {text: 'Kiwi', value: 'kiwi'},
-      ],
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
-    }}
-  >
-    {TemplateDynamic.bind({})}
-  </Story>
-</Canvas>
-
-#### Minimal
-<Canvas>
-  <Story
-    name="Minimal"
-    height={200}
-    args={{
-      name: 'Minimal',
+      orientation: 'horizontal',
       onChange: (value) => {
         action('selection changed')(value);
       },
@@ -109,14 +61,29 @@ export const TemplateDynamic = (args) => (
     name="Preset"
     height={200}
     args={{
-      name: 'fruits',
+      name: 'preset',
       value: 'orange',
-      title: 'Which of the following is your favorite fruit?',
-      helperText: 'This one has an initial value of orange set',
-      requiredErrorMessage: 'Please select a fruit',
-      required: false,
       disabled: false,
-      labelPosition: 'after',
+      orientation: 'vertical',
+      onChange: (value) => {
+        action('selection changed')(value);
+      },
+    }}
+  >
+    {TemplateBasic.bind({})}
+  </Story>
+</Canvas>
+
+#### Error
+
+<Canvas>
+  <Story
+    name="Error"
+    height={200}
+    args={{
+      name: 'error',
+      value: 'orange',
+      state: 'error',
       onChange: (value) => {
         action('selection changed')(value);
       },
@@ -127,42 +94,16 @@ export const TemplateDynamic = (args) => (
 </Canvas>
 
 #### Disabled
+
 <Canvas>
   <Story
     name="Disabled"
     height={200}
     args={{
-      name: 'fruits',
-      title: 'Which of the following is your favorite fruit?',
-      helperText:
-        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
-      requiredErrorMessage: 'Please select a fruit',
-      required: false,
+      name: 'disabled',
       disabled: true,
-      labelPosition: 'after',
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
-    }}
-  >
-    {TemplateBasic.bind({})}
-  </Story>
-</Canvas>
-
-#### Required
-<Canvas>
-  <Story
-    name="Required"
-    height={200}
-    args={{
-      name: 'fruits',
-      title: 'Which of the following is your favorite fruit?',
-      helperText:
-        'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
-      requiredErrorMessage: 'Please select a fruit',
-      required: true,
-      disabled: false,
-      labelPosition: 'after',
+      value: 'orange',
+      orientation: 'vertical',
       onChange: (value) => {
         action('selection changed')(value);
       },
