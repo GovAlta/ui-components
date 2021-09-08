@@ -8,12 +8,13 @@ interface GoABadgeProps {
   'inactive'
   icon?: ReactNode
   content?: string
+  testId?: string
 }
 
-export const GoABadge: FC<GoABadgeProps> = ({ type, content, icon }: GoABadgeProps) => {
+export const GoABadge: FC<GoABadgeProps> = ({ type, content, icon, testId }: GoABadgeProps) => {
 
   return (
-    <div className={classnames(styles['goa-badge'], styles[`badge-${type}`])}>
+    <div data-testid={testId} className={classnames(styles['goa-badge'], styles[`badge-${type}`])}>
       {icon}
       <span className={classnames(styles['goa-badge-content'])}>{content}</span>
     </div>
