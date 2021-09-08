@@ -7,8 +7,6 @@
   margin-left: 4px;
   margin-right: 0px;
   position: relative;
-  top: -5px;
-  height: 14px;
   width: 14px;
   font-size: 14px !important;
 }
@@ -22,17 +20,14 @@
 .goa-badge {
   display: inline-block;
   border-radius: 4px;
-  padding-top: 4px;
   padding-left: 4px;
   padding-right: 4px;
-  height: 20px;
   * {
     margin-left: 4px;
     margin-right: 4px;
   }
   .goa-badge-content {
     position: relative;
-    top: -5px;
     height: 14px;
     display: inline;
   }
@@ -40,12 +35,10 @@
     margin-left: 4px;
     margin-right: 4px;
     position: relative;
-    top: -3px;
     height: 14px;
     width: 14px;
     font-size: 14px !important;
   }
-
 }
 
 .goa-badge.badge-information {
