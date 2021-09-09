@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import './radio.scss';
 import { ErrorProps } from '../_common/errorState';
 import { TestProps } from '../../experimental/common';
+import styles from './radio.scss';
 
 interface Props {
   value: string;
@@ -14,7 +15,7 @@ interface Props {
 
 export const GoARadio: FC<Props & ErrorProps & TestProps> = ({ state = 'valid', ...props }) => {
   function getCss(): string {
-    return classnames({
+    return classnames.bind(styles)({
       'goa-radio': true,
       'goa-radio--disabled': props.disabled,
       'goa-error': state === 'error',
