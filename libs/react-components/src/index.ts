@@ -20,14 +20,14 @@ import GoAPageLoader from './lib/page-loader/page-loader'
 import {
   GoABadge,
   GoAElementLoader,
-  GoASkeletonContent,
-  GoASkeletonGridColumnContent,
-  GoASkeletonImageContent,
   GoAFormItem,
   GoAFormActions,
   GoAForm,
   GoAInput
 } from './experimental'
+import { GoASkeletonContent } from './lib/skeleton/skeleton-titled-content';
+import { GoASkeletonGridColumnContent } from './lib/skeleton/skeleton-grid-column';
+import { GoASkeletonImageContent } from './lib/skeleton/skeleton-image-content';
 
 export {
   GoABadge,
