@@ -1,0 +1,141 @@
+
+/* Fade in */
+.fade-in-init {
+  display: none;
+}
+.fade-in-start {
+  display: block;
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+}
+.fade-in-active {
+  opacity: 1;
+}
+
+/* Fade out */
+.fade-out-init {
+  display: block;
+}
+.fade-out-start {
+  display: block;
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+.fade-out-active {
+  opacity: 0;
+}
+
+/* ======= Slide in/out Up */
+
+/* Slide in up */
+.slide-in-up-init {
+  transition: translateY(0);
+  display: none;
+}
+.slide-in-up-start {
+  display: block;
+  transform: translateY(100vh);
+  transition: transform 400ms ease-in-out
+}
+.slide-in-up-active {
+  transform: translateY(0);
+}
+
+/* Slide out up */
+.slide-out-up-init {
+  transform: translateY(0);
+  display: block;
+}
+.slide-out-up-start {
+  transform: translateY(0);
+  transition: transform 400ms ease-in-out
+}
+.slide-out-up-active {
+  transform: translateY(-100vh);
+}
+
+/* ======= Slide in/out Down */
+
+/* Slide in down */
+.slide-in-down-init {
+  transition: translateY(0);
+  display: none;
+}
+.slide-in-down-start {
+  display: block;
+  transform: translateY(-100vh);
+  transition: transform 400ms ease-in-out
+}
+.slide-in-down-active {
+  transform: translateY(0);
+}
+
+/* Slide out down */
+.slide-out-down-init {
+  transform: translateY(0);
+  display: block;
+}
+.slide-out-down-start {
+  transform: translateY(0);
+  transition: transform 400ms ease-in-out
+}
+.slide-out-down-active {
+  transform: translateY(100vh);
+}
+/* ======= Slide in/out Left */
+
+/* Slide in left */
+.slide-in-left-init {
+  transition: translateX(0);
+  display: none;
+}
+.slide-in-left-start {
+  display: block;
+  transform: translateX(-100vw);
+  transition: transform 400ms ease-in-out
+}
+.slide-in-left-active {
+  transform: translateX(0);
+}
+
+/* Slide out left */
+.slide-out-left-init {
+  transform: translateX(0);
+  display: block;
+}
+.slide-out-left-start {
+  transform: translateX(0);
+  transition: transform 400ms ease-in-out
+}
+.slide-out-left-active {
+  transform: translateX(-100vh);
+}
+
+/* ======= Slide in/out Right */
+
+/* Slide in left */
+.slide-in-right-init {
+  transition: translateX(0);
+  display: none;
+}
+.slide-in-right-start {
+  display: block;
+  transform: translateX(100vw);
+  transition: transform 400ms ease-in-out
+}
+.slide-in-right-active {
+  transform: translateX(0);
+}
+
+/* Slide out right */
+.slide-out-right-init {
+  transform: translateX(0);
+  display: block;
+}
+.slide-out-right-start {
+  transform: translateX(0);
+  transition: transform 400ms ease-in-out
+}
+.slide-out-right-active {
+  transform: translateX(100vh);
+}

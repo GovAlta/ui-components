@@ -1,4 +1,4 @@
-
+import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React, { useState } from 'react';
 import GoAButton from '../../lib/button/button';
@@ -39,9 +39,9 @@ describe('Modal Tests', () => {
 
     // open modal
     expect(queryByTestId('open-modal')).toBeTruthy();
-    expect(queryByTestId('modal')).toBeFalsy();
+    expect(queryByTestId('modal').getAttribute('data-state')).toBe('init');
     fireEvent.click(queryByTestId('open-modal'))
-    expect(queryByTestId('modal')).toBeTruthy();
+    expect(queryByTestId('modal').getAttribute('data-state')).toBe('visible');
 
     // validate content
     expect(queryByTestId('modal-title').textContent).toBe('The Title');
@@ -52,15 +52,15 @@ describe('Modal Tests', () => {
 
     // validate close
     await waitFor(() => {
-      expect(queryByTestId('modal')).toBeFalsy();
+      expect(queryByTestId('modal').getAttribute('data-state')).toBe('init');
     })
 
     // validate close via background click
     fireEvent.click(queryByTestId('open-modal'))
-    expect(queryByTestId('modal')).toBeTruthy();
+    expect(queryByTestId('modal')).toBeVisible();
     fireEvent.click(queryByTestId('modal-background'));
     await waitFor(() => {
-      expect(queryByTestId('modal')).toBeFalsy();
+      expect(queryByTestId('modal').getAttribute('data-state')).toBe('init');
     })
   });
 
@@ -98,9 +98,9 @@ describe('Modal Tests', () => {
 
     // open modal
     expect(queryByTestId('open-modal')).toBeTruthy();
-    expect(queryByTestId('modal')).toBeFalsy();
+    expect(queryByTestId('modal').getAttribute('data-state')).toBe('init');
     fireEvent.click(queryByTestId('open-modal'))
-    expect(queryByTestId('modal')).toBeTruthy();
+    expect(queryByTestId('modal').getAttribute('data-state')).toBe('visible');
 
     // validate content
     expect(queryByTestId('modal-title').textContent).toBe('The Title');
@@ -111,7 +111,7 @@ describe('Modal Tests', () => {
 
     // validate close
     await waitFor(() => {
-      expect(queryByTestId('modal')).toBeFalsy();
+      expect(queryByTestId('modal').getAttribute('data-state')).toBe('init');
     })
 
     // validate close via background click
@@ -119,7 +119,7 @@ describe('Modal Tests', () => {
     expect(queryByTestId('modal')).toBeTruthy();
     fireEvent.click(queryByTestId('modal-background'));
     await waitFor(() => {
-      expect(queryByTestId('modal')).toBeFalsy();
+      expect(queryByTestId('modal').getAttribute('data-state')).toBe('init');
     })
   });
 })

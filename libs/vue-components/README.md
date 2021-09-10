@@ -156,3 +156,34 @@ export default {
 </script>
 
 ```
+
+```
+<template>
+  <div id="app">
+    <goa-button
+      buttonType="'primary || 'secondary' || 'tertiary'"
+      buttonSize="'small' || 'normal'"
+      title="Hovering over"
+      v-on:click="() => function()"
+    >
+    <goa-element-loader
+      visible= true|false
+      loaderSize= 'default'|'small'
+      baseColour= '#0070c4'
+      spinnerColour= '#c8eef9'
+    />
+    </goa-button>
+  </div>
+</template>
+
+<script>
+import { GoAButton } from '@abgov/vue-components';
+
+export default {
+  name: "App",
+  components: {
+    'goa-element-loader': GoAElementLoader
+  }
+};
+</script>
+```

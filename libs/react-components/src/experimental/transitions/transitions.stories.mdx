@@ -1,0 +1,239 @@
+import { GoATransition, GoATransitionSequence } from '../index.ts';
+import { GoAButton } from '../../index';
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+import { useState } from 'react';
+
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Experimental/Components/Transitions"
+  component={GoATransition}
+  argTypes={{
+    enter: {
+      control: {
+        type: 'string',
+      },
+    },
+    leave: {
+      control: {
+        type: 'string',
+      },
+    },
+  }}
+/>
+
+# GoATransition
+
+## Overview
+
+export const FadeinTemplate = (args) => {
+  const [show, setShow] = useState(false);
+  const outerCss = {
+    minHeight: '300px',
+    minWidth: '300px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.1)',
+  };
+  const styles = {
+    background: 'white',
+    padding: '1rem',
+    borderRadius: '4px',
+    margin: '5rem',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+  };
+  return (
+    <div>
+      <button onClick={() => setShow(true)}>Fade in</button>
+      <div style={outerCss}>
+        <GoATransition name="fade-in" active={show}>
+          <div style={styles}>Fade in message</div>
+        </GoATransition>
+      </div>
+    </div>
+  );
+};
+
+export const DynamicTemplate = (args) => {
+  const [transitionIndex, setTransitionIndex] = useState(0);
+  const outerCss = {
+    minHeight: '300px',
+    minWidth: '300px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.1)',
+    overflow: 'hidden',
+  };
+  const innerCss = {
+    background: 'white',
+    padding: '1rem',
+    borderRadius: '4px',
+    margin: '5rem',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+  };
+  function nextTransition() {
+    setTransitionIndex(transitionIndex + 1)
+  }
+  return (
+    <div>
+      <button onClick={() => nextTransition()}>Translate</button>
+      <div style={outerCss}>
+        <GoATransitionSequence transitions={args.transitions} transitionIndex={transitionIndex} onComplete={(index, done) => {
+          if (done) {
+            nextTransition();
+          }
+        }}>
+            <div style={innerCss}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        </GoATransitionSequence>
+      </div>
+    </div>
+  );
+};
+
+#### Basic
+
+<Canvas>
+  <Story name="Fade in" height="400px">
+    {FadeinTemplate.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Fade in / Fade out" height="400px" args={{
+    transitions: ['fade-in', 'fade-out']
+  }}>
+    {DynamicTemplate.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Slide in up / Slide out up" height="400px" args={{
+    transitions: ['slide-in-up', 'slide-out-up']
+  }}>
+    {DynamicTemplate.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Slide in left / Slide out left" height="400px" args={{
+    transitions: ['slide-in-left', 'slide-out-left']
+  }}>
+    {DynamicTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Examples
+
+### Transitions
+
+Transitions can either be from the pre-define list or custom. The predefined transitions are:
+```ts
+type TransitionType
+  = 'fade-in'
+  | 'fade-out'
+  | 'slide-in-up'
+  | 'slide-out-up'
+  | 'slide-in-down'
+  | 'slide-out-down'
+  | 'slide-in-left'
+  | 'slide-out-left'
+  | 'slide-in-right'
+  | 'slide-out-right';
+```
+
+#### Custom Transitions
+
+Custom transitions can also be defined. To do so you must define three css classes that follow the required naming convention.
+
+```css
+.[name]-init {
+  /*
+    The resting state. Often the component will be hidden in this state to prevent it from being
+    seen when resetting the state upon completion of the animation.
+    ex.
+      display: none;
+  */
+}
+.[name]-start {
+  /*
+    The start state. Initialize the css state to be transitioned from as well and the property to be animated.
+    ex.
+      display: block;
+      transform: translateY(-100vh);
+      transition: transform 400ms ease-in-out
+  */
+}
+.[name]-active {
+  /*
+    The active state. The css state to be transitioned to.
+    ex.
+      transform: translateY(0);
+  */
+}
+```
+
+### Actions pinned to the bottom of the modal
+```tsx
+function example() {
+  const [transitionIndex, setTransitionIndex] = useState(0);
+  const outerCss = {
+    minHeight: '300px',
+    minWidth: '300px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.1)',
+  };
+
+  const innerCss = {
+    background: 'white',
+    display: 'inline-block',
+    padding: '1rem',
+    borderRadius: '4px',
+    margin: '5rem',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+  };
+
+  // the transition index uses the modulus operation you can just continually increment the index if you like
+  function nextTransition() {
+    setTransitionIndex(transitionIndex + 1)
+  }
+
+  return (
+    <div>
+      <button onClick={() => nextTransition()}>Slide in</button>
+      <button onClick={() => nextTransition()}>Slide out</button>
+      <div style={outerCss}>
+        <GoATransitionSequence transitions={['slide-in-up', 'slide-out-up']} transitionIndex={transitionIndex} onComplete={(index, done) => {
+          if (done) {
+            nextTransition();
+          }
+        }}>
+            <div style={innerCss}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        </GoATransitionSequence>
+      </div>
+    </div>
+  );
+
+}
+```
+
+
+## GoATransition Properties
+
+<Description of={GoATransition} />
+<ArgsTable of={GoATransition} />
+
+## GoATransitionSequence Properties
+
+<Description of={GoATransitionSequence} />
+<ArgsTable of={GoATransitionSequence} />
