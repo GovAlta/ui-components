@@ -1,3 +1,6 @@
+/**
+ * IMPORTANT: Do NOT export experimental components in this file.
+ */
 import GoAMicrositeLogo from './lib/microsite-logo/microsite-logo.vue';
 import GoAHeader from './lib/header/header.vue';
 import GoAButton from './lib/button/button.vue';
@@ -10,9 +13,8 @@ import GoAHeroBanner from './lib/hero-banner/hero-banner.vue';
 import GoANotificationBanner from './lib/notification-banner/notification-banner.vue';
 import GoADropdown from './lib/dropdown/dropdown.vue'
 import GoADropdownOption from './lib/dropdown/option/option.vue'
-import { GoABadge } from './experimental'
 import GoAPageLoadIndicatorComponent from './lib/page-load-indicator/page-load-indicator.vue';
-import GoAElementLoader from './experimental/element-loader/element-loader.vue';
+
 export {
   GoAMicrositeLogo,
   GoAHeader,
@@ -26,7 +28,5 @@ export {
   GoANotificationBanner,
   GoADropdown,
   GoADropdownOption,
-  GoABadge,
   GoAPageLoadIndicatorComponent,
-  GoAElementLoader
 };

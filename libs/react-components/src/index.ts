@@ -1,3 +1,6 @@
+/**
+ * IMPORTANT: Do NOT export experimental components in this file.
+ */
 import GoACallout from './lib/callout/callout';
 import GoANotification from './lib/notification/notification';
 import GoAButton from './lib/button/button';
@@ -16,8 +19,6 @@ import GoACheckbox from './lib/checkbox/checkbox';
 import GoAHeroBannerContent from './lib/hero-banner/content/hero-banner-content.component';
 import GoAHeroBannerLink from './lib/hero-banner/link/hero-banner-link.component';
 import GoAPageLoader from './lib/page-loader/page-loader'
-
-export * from './experimental'
 
 export {
   GoAPageLoader,
