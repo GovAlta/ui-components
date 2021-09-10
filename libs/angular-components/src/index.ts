@@ -18,5 +18,6 @@ export * from './lib/radio/radio-change';
 export * from './lib/radio/radio.service';
 export * from './lib/radio-group/radio-group.component';
 export * from './lib/page-load-indicator/page-load-indicator.component';
-
+export * from './lib/skeleton/skeleton-image-content.component';
+export * from './lib/skeleton/skeleton-element.component';
 export * from './experimental';

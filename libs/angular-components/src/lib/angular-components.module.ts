@@ -17,12 +17,15 @@ import { GoARadioGroupComponent } from './radio-group/radio-group.component';
 import { GoACalloutComponent } from './callout/callout.component';
 import { GoANotificationComponent } from './notification/notification.component';
 import { GoANotificationBannerComponent } from './notification-banner/notification-banner.component';
+import { GoASkeletonImageContentComponent } from './skeleton/skeleton-image-content.component';
+import { GoASkeletonElementComponent } from './skeleton/skeleton-element.component';
 import {
   GoACardComponent,
   GoACardHeaderComponent,
   GoACardFooterComponent,
   GoACardContentComponent,
-  GoACardThumbImageComponent,
+  GoACardThumbImageComponent
+
 } from './card/card.component';
 import {
   GoAHeroBannerComponent,
@@ -59,6 +62,8 @@ import { GoAPageLoadIndicatorComponent } from './page-load-indicator/page-load-i
     GoAHeroBannerContentComponent,
     GoAHeroBannerLinkComponent,
     GoAPageLoadIndicatorComponent,
+    GoASkeletonImageContentComponent,
+    GoASkeletonElementComponent
   ],
   declarations: [
     GoAButtonComponent,
@@ -83,6 +88,8 @@ import { GoAPageLoadIndicatorComponent } from './page-load-indicator/page-load-i
     GoAHeroBannerContentComponent,
     GoAHeroBannerLinkComponent,
     GoAPageLoadIndicatorComponent,
+    GoASkeletonImageContentComponent,
+    GoASkeletonElementComponent
   ],
   providers: [GoARadioService],
 })

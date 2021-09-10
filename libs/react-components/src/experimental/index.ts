@@ -5,9 +5,6 @@ import { GoAModal, GoAModalActions, GoAModalContent, GoAModalTitle } from './mod
 import { GoAScrollable } from './scrollable/scrollable.component';
 import { GoAFormItem, GoAFormActions, GoAForm } from './form/form.component';
 import { GoATransition, GoATransitionSequence } from './transitions';
-import { GoASkeletonContent } from './skeleton/skeleton-titled-content';
-import { GoASkeletonGridColumnContent } from './skeleton/skeleton-grid-column';
-import { GoASkeletonImageContent } from './skeleton/skeleton-image-content';
 
 export {
   GoABadge,
@@ -21,9 +18,6 @@ export {
   GoAModalContent,
   GoAModalTitle,
   GoAScrollable,
-  GoASkeletonContent,
-  GoASkeletonGridColumnContent,
-  GoASkeletonImageContent,
   GoATransition,
   GoATransitionSequence
 };
