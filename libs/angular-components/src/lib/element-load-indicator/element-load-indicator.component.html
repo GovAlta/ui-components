@@ -2,23 +2,23 @@
   <svg
     fill="none"
     [attr.viewBox]="viewBox"
-    [attr.width]="size"
-    [attr.height]="size"
+    [attr.width]="radius"
+    [attr.height]="radius"
     xmlns="http://www.w3.org/2000/svg"
   >
     <circle
       class="base-circle"
-      [attr.cx]="size"
-      [attr.cy]="size"
+      [attr.cx]="radius"
+      [attr.cy]="radius"
       [attr.r]="innerRadius"
       [style.stroke]="baseColour"
     />
     <circle
       class="rotating-circle"
-      [attr.cx]="size"
+      [attr.cx]="radius"
       [style.stroke-dasharray]="dashArray"
       [style.stroke-dashoffset]="dashOffset"
-      [attr.cy]="size"
+      [attr.cy]="radius"
       [attr.r]="innerRadius"
       [style.stroke]="spinnerColour"
     />

@@ -1,5 +1,5 @@
 import GoAElementLoader from './element-loader';
-import GoAButton from '../../lib/button/button';
+import GoAButton from '../button/button';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 
@@ -12,10 +12,10 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 <Meta
-  title="Experimental/Components/ElementLoader"
+  title="Vue/Components/ElementLoader"
   component={GoAElementLoader}
   argTypes={{
-    loaderSize: {
+    size: {
       control: {
         type: 'select',
         options: ['small', 'default'],
@@ -36,7 +36,7 @@ A element loading indicator which will not prevent user input.
     height={200}
     args={{
       visible: true,
-      loaderSize: 'default',
+      size: 'default',
       baseColour: '#c8eef9',
       spinnerColour: '#0070c4',
     }}
@@ -59,7 +59,7 @@ A element loading indicator which will not prevent user input.
     height={200}
     args={{
       visible: true,
-      loaderSize: 'default',
+      size: 'default',
       baseColour: '#0070c4',
       spinnerColour: '#c8eef9',
     }}
@@ -97,7 +97,7 @@ A element loading indicator which will not prevent user input.
     height={200}
     args={{
       visible: true,
-      loaderSize: 'small',
+      size: 'small',
       baseColour: '#0070c4',
       spinnerColour: '#c8eef9',
     }}
@@ -140,7 +140,7 @@ A element loading indicator which will not prevent user input.
     >
     <goa-element-loader
       visible= true|false
-      loaderSize= 'default'|'small'
+      size= 'default'|'small'
       baseColour= '#0070c4'
       spinnerColour= '#c8eef9'
     />

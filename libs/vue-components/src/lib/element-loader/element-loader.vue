@@ -55,7 +55,7 @@ export default {
      * Sets the size of element loader.
      */
 
-    loaderSize: {
+    size: {
       default: 'default',
       required: false,
       validator: (value) => {
@@ -64,17 +64,15 @@ export default {
     },
   },
   data() {
-    const radius = this.loaderSize === 'small' ? 16 : 18;
+    const radius = this.size === 'small' ? 16 : 18;
     const diameter = radius * 2;
-    const pathRadius = radius - 3;
+    const pathRadius = radius - 4;
     const boxView = `0 0 ${diameter} ${diameter}`;
-    const pathTransform = `scale(-1, 1) translate(-${diameter} 0)`;
-    const circleRadius = radius - 3;
+    const circleRadius = radius - 4;
     return {
       boxView,
       radius,
       circleRadius,
-      pathTransform,
     };
   },
   methods: {

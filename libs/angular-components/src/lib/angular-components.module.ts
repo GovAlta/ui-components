@@ -33,6 +33,7 @@ import {
   GoAHeroBannerLinkComponent,
 } from './hero-banner/hero-banner.component';
 import { GoAPageLoadIndicatorComponent } from './page-load-indicator/page-load-indicator.component';
+import { GoAElementLoadIndicatorComponent } from './element-load-indicator/element-load-indicator.component';
 
 @NgModule({
   imports: [CommonModule, OverlayModule],
@@ -63,7 +64,8 @@ import { GoAPageLoadIndicatorComponent } from './page-load-indicator/page-load-i
     GoAHeroBannerLinkComponent,
     GoAPageLoadIndicatorComponent,
     GoASkeletonImageContentComponent,
-    GoASkeletonElementComponent
+    GoASkeletonElementComponent,
+    GoAElementLoadIndicatorComponent,
   ],
   declarations: [
     GoAButtonComponent,
@@ -89,7 +91,8 @@ import { GoAPageLoadIndicatorComponent } from './page-load-indicator/page-load-i
     GoAHeroBannerLinkComponent,
     GoAPageLoadIndicatorComponent,
     GoASkeletonImageContentComponent,
-    GoASkeletonElementComponent
+    GoASkeletonElementComponent,
+    GoAElementLoadIndicatorComponent
   ],
   providers: [GoARadioService],
 })

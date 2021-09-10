@@ -1,5 +1,3 @@
-import { HostListener, OnDestroy } from '@angular/core';
-
 import {
   Component,
   Input,
@@ -31,7 +29,7 @@ export class GoAElementLoadIndicatorComponent implements OnInit, OnChanges {
   /**
   * The diameter of the loader in pixels.
   */
-  @Input() size = 50;
+  @Input() size: 'small' | 'default' = 'default';
 
   /**
    * The base color of the spinner.
@@ -43,27 +41,25 @@ export class GoAElementLoadIndicatorComponent implements OnInit, OnChanges {
    */
   @Input() spinnerColour = '#0070c4';
 
-  radius = this.size;
-  innerRadius = this.radius - 7 / 2;
+  radius = this.size === 'small' ? 16 : 18;
+
+  innerRadius = this.radius - 4;
   diameter = this.radius * 2;
-  dashArray = this.innerRadius * 3.14 * 2;
-  dashOffset = this.innerRadius * 3.14 * 0.5;
+  dashArray = this.innerRadius * Math.PI * 2;
+  dashOffset = this.innerRadius * Math.PI * 0.5;
   viewBox = `0 0 ${this.diameter} ${this.diameter}`;
-
-
-  //boxView = (): string => `0 0 ${this.diameter} ${this.diameter}`;
 
   /**
   * @ignore
   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.size) {
-      this.radius = changes.size.currentValue;
-      this.innerRadius = this.radius - 7 / 2;
+      this.radius = changes.size.currentValue === 'small' ? 16 : 18;
+      this.innerRadius = this.radius - 4;
       this.diameter = this.radius * 2;
       this.viewBox = `0 0 ${this.diameter} ${this.diameter}`;
-      this.dashArray = this.innerRadius * 3.14 * 2;
-      this.dashOffset = this.innerRadius * 3.14 * 0.5;
+      this.dashArray = this.innerRadius * Math.PI * 2;
+      this.dashOffset = this.innerRadius * Math.PI * 0.5;
     }
   }
 

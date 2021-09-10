@@ -6,26 +6,18 @@ export interface ElementLoaderProps {
   visible?: boolean;
   baseColour: string;
   spinnerColour: string;
-  size: number;
+  size?: string;
 }
 
 export const GoAElementLoader = ({
   visible = false,
   baseColour = '#c8eef9',
   spinnerColour = '#0070c4',
-  size = 25,
+  size = 'default',
 }: ElementLoaderProps) => {
-  const radius = size;
+  const radius = size === 'small' ? 16 : 18;
   const diameter = radius * 2;
-  const pathRadius = diameter / 2 - 7 / 2;
-
-  const boxView = (): string => {
-    return `0 0 ${diameter} ${diameter}`;
-  };
-
-  const pathTransform = (): string => {
-    return `scale(-1, 1) translate(-${diameter} 0)`;
-  };
+  const boxView = `0 0 ${diameter} ${diameter}`;
 
   /**
    * Generates the value for an SVG arc.
@@ -77,22 +69,22 @@ export const GoAElementLoader = ({
       <svg
         className="circular-loader"
         fill="none"
-        viewBox={boxView()}
-        width={`${size}`}
-        height={`${size}`}
+        viewBox={boxView}
+        width={radius}
+        height={radius}
         xmlns="http://www.w3.org/2000/svg"
       >
         <circle
-          cx={`${radius}`}
-          cy={`${radius}`}
-          stroke={`${baseColour}`}
+          cx={radius}
+          cy={radius}
+          stroke={baseColour}
           strokeWidth="7"
-          r={`${radius - 7 / 2}`}
+          r={radius - 4}
         />
         <path
-          d={getArc(75, 100, radius - 7 / 2, radius, false)}
+          d={getArc(75, 100, radius - 4, radius, false)}
           strokeWidth="7"
-          stroke={`${spinnerColour}`}
+          stroke={spinnerColour}
           strokeLinecap="round"
         />
       </svg>
