@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import GoAScrollable from '../scrollable/scrollable.component';
-import './modal.css';
-import { GoAIcon } from '../icons/icons';
+import { GoAIconButton } from '../icons';
 import { TestProps } from '../common';
 import { GoATransitionSequence } from '../transitions/transitionSequence';
+
+import './modal.css';
 
 /**
  * Modal - Main Component
@@ -118,7 +119,11 @@ interface ContentProps {
 const Content: FC<ContentProps> = ({ children, onClick }) => {
   return (
     <div className="modal">
-      {onClick && <GoAIcon type='close' variant="circular" onClick={onClick} />}
+      {onClick &&
+        <div className="modal-close">
+          <GoAIconButton type='close' variant="simple" onClick={onClick} />
+        </div>
+      }
       <div className="modal-content">{children}</div>
       {onClick && <div style={{ minHeight: '1rem' }}></div>}
     </div>

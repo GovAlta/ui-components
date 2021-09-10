@@ -1,15 +1,30 @@
-.icon-circular {
-  padding: 0.5rem;
-  top: 0.5rem;
-  right: 0.5rem;
-  position: absolute;
+.goa-icon {
+  display: inline-block;
+}
+
+.goa-icon-button {
   cursor: pointer;
-  height: 1.5rem;
-  width: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* GoA */
+.goa-icon-button-goa {
+  padding: 0.3rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 0.5rem;
+  color: var(--color-primary);
+  fill: var(--color-primary);
+}
+
+/* Simple */
+.goa-icon-button-simple {
+  padding: 0.4rem;
   border-radius: 999px;
   transition: background 200ms ease-in;
 }
 
-.icon-circular:hover {
+.goa-icon-button-simple:hover {
   background: rgba(0, 0, 0, 0.1);
 }

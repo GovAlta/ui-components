@@ -1,0 +1,83 @@
+import { GoAIcon } from '../index.ts';
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+import { useState } from 'react';
+
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Experimental/Components/Icons"
+  component={GoAIcon}
+  argTypes={{
+    type: {
+      control: {
+        type: 'string',
+      },
+    },
+  }}
+/>
+
+# GoAIcon
+
+## Overview
+
+export const Template = (args) => {
+  const iconTypes =
+  [ 'close'
+  , 'barChart'
+  , 'build'
+  , 'checkmarkCircle'
+  , 'closeCircle'
+  , 'create'
+  , 'download'
+  , 'eyeOff'
+  , 'eye'
+  , 'file'
+  , 'fitness'
+  , 'helpCircle'
+  , 'home'
+  , 'hourGlass'
+  , 'logout'
+  , 'megaphone'
+  , 'menu'
+  , 'options'
+  , 'pauseCircle'
+  , 'personCircle'
+  , 'playCircle'
+  , 'pulse'
+  , 'receipt'
+  , 'trash'
+  , 'settings'
+  ];
+  return (
+    <div>
+      { iconTypes.map(iconType => {
+        return (
+          <div style={{padding: '4px', display: 'flex', 'align-items': 'center', gap: '8px'}}>
+            <GoAIcon {...args} type={iconType} />
+            <span>{iconType}</span>
+          </div>
+        )
+      }) }
+    </div>
+  );
+};
+
+#### Basic
+
+<Canvas>
+  <Story name="List" height="400px">
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## GoAIcon Properties
+
+<Description of={GoAIcon} />
+<ArgsTable of={GoAIcon} />

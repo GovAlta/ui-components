@@ -93,3 +93,11 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 1001;
 }
+
+/* Modal Close Icon ======================================================================= */
+
+.modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
