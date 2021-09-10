@@ -1,15 +1,27 @@
 import React, { FC } from 'react'
 import { GoATransition, GoATransitionProps } from './transition';
 
+type TransitionType
+  = 'fade-in'
+  | 'fade-out'
+  | 'slide-in-up'
+  | 'slide-out-up'
+  | 'slide-in-down'
+  | 'slide-out-down'
+  | 'slide-in-left'
+  | 'slide-out-left'
+  | 'slide-in-right'
+  | 'slide-out-right';
+
 interface Props {
-  transitions: string[];
+  transitions: string[] | TransitionType[];
   transitionIndex: number;
   onComplete?: (index: number, done: boolean) => void;
 }
 
 export const GoATransitionSequence: FC<Props> = (props) => {
   function createTransition(props: GoATransitionProps, children?: JSX.Element): JSX.Element {
-    return <GoATransition {...props}>{ children }</GoATransition>
+    return <GoATransition {...props}>{children}</GoATransition>
   }
 
   return props.transitions

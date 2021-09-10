@@ -55,7 +55,7 @@ export const GoAModal: FC<ModalProps & ModalTestProps> = ({ children, isOpen, on
   }
 
   return (
-    <GoATransitionSequence transitions={['fadein', 'fadeout']} transitionIndex={transitionIndex} onComplete={(_index, done) => done && setTransitionIndex(0)}>
+    <GoATransitionSequence transitions={['fade-in', 'fade-out']} transitionIndex={transitionIndex} onComplete={(_index, done) => done && setTransitionIndex(0)}>
       <div className="modal-root" data-testid={testId} data-state={getState()}>
         <Content onClick={onClose}>
           {children}

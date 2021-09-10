@@ -19,7 +19,7 @@ export const GoATransition: FC<GoATransitionProps> = ({ name, active, onComplete
 
       setTimeout(() => {
         onComplete?.();
-      }, 300)
+      }, 500)
     } else {
       setState('init');
     }
