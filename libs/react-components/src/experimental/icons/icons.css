@@ -11,11 +11,15 @@
 
 /* GoA */
 .goa-icon-button-goa {
-  padding: 0.3rem;
-  border: 2px solid var(--color-primary);
+  padding: 0.25rem;
+  border: 2px solid var(--color-button-tertiary);
   border-radius: 0.5rem;
   color: var(--color-primary);
   fill: var(--color-primary);
+}
+
+.goa-icon-button-goa:hover {
+  background-color: var(--color-button-tertiary);
 }
 
 /* Simple */
