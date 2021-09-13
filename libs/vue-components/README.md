@@ -168,7 +168,7 @@ export default {
     >
     <goa-element-loader
       visible= true|false
-      loaderSize= 'default'|'small'
+      size= 'default'|'small'
       baseColour= '#0070c4'
       spinnerColour= '#c8eef9'
     />

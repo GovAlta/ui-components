@@ -12,10 +12,10 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 <Meta
-  title="Experimental/Components/ElementLoader"
+  title="React/Components/ElementLoader"
   component={GoAElementLoader}
   argTypes={{
-    size: 50,
+    size: { control: { type: 'select', options: ['small', 'default'] } },
   }}
 />
 
@@ -48,7 +48,7 @@ export const TemplateElement = (args) => (
     height={200}
     args={{
       visible: true,
-      size: 50,
+      size: 'default',
       baseColour: '#c8eef9',
       spinnerColour: '#0070c4',
     }}
@@ -60,7 +60,7 @@ export const TemplateElement = (args) => (
     height={200}
     args={{
       visible: true,
-      size: 15,
+      size: 'small',
       baseColour: '#0070c4',
       spinnerColour: '#c8eef9',
     }}
@@ -73,8 +73,8 @@ export const TemplateElement = (args) => (
 
 ```html
 <GoAElementLoader
-  visible={true}
-  size={25}
+  visible="true"
+  size="small"
   baseColour="#c8eef9"
   spinnerColour="#0070c4"
 />
@@ -82,8 +82,8 @@ export const TemplateElement = (args) => (
 <GoAButton buttonType="primary" buttonSize="normal">
   Loading...!
   <GoAElementLoader
-    visible={true}
-    size={25}
+    visible="true"
+    size="small"
     baseColour="#c8eef9"
     spinnerColour="#0070c4"
   />

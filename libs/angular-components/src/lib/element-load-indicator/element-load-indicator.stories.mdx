@@ -1,8 +1,6 @@
 import { GoAElementLoadIndicatorComponent } from './element-load-indicator.component';
 import { GoAButtonComponent } from '../../lib/button/button.component';
 import { DoDont } from '@abgov/shared/storybook-common';
-//libs\angular-components\src\experimental\element-load-indicator\element-load-indicator.stories.mdx
-//libs\angular-components\src\lib\button\button.component.ts
 import {
   Meta,
   Canvas,
@@ -14,7 +12,7 @@ import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 
 <Meta
-  title="Experimental/Components/ElementLoader"
+  title="Angular/Components/ElementLoader"
   component={GoAElementLoadIndicatorComponent}
   argTypes={{
     visible: {
@@ -25,7 +23,7 @@ import { action } from '@storybook/addon-actions';
         type: { summary: 'boolean' },
       },
     },
-    size: { control: 'number' },
+    size: { control: 'text' },
     baseColour: { control: 'color' },
     spinnerColour: { control: 'color' },
     radius: { table: { disable: true } },
@@ -54,7 +52,7 @@ The Element Load Indicator was designed to show users that something is happenin
     height={300}
     args={{
       visible: true,
-      size: '50',
+      size: 'default',
       baseColour: '#c8eef9',
       spinnerColour: '#0070c4',
     }}
@@ -79,7 +77,7 @@ The Element Load Indicator was designed to show users that something is happenin
     height={300}
     args={{
       visible: true,
-      size: '15',
+      size: 'small',
       baseColour: '#0070c4',
       spinnerColour: '#c8eef9',
     }}
