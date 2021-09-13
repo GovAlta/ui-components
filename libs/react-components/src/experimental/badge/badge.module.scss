@@ -4,46 +4,25 @@
 // This is a global class so that the class name isn't converted to a
 // generated value for encapsulation.
 :global .goa-badge-icon {
-  margin-left: 4px;
-  margin-right: 0px;
-  position: relative;
-  width: 14px;
-  font-size: 14px !important;
+  font-size: 14px;
 }
 
 .goa-badge {
-  line-height: $caption-line-height;
-  font-size: $caption-size;
-  font-weight: $caption-font-weight !important;
-}
-
-.goa-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   border-radius: 4px;
-  padding-left: 4px;
-  padding-right: 4px;
-  * {
-    margin-left: 4px;
-    margin-right: 4px;
-  }
-  .goa-badge-content {
-    position: relative;
-    height: 14px;
-    display: inline;
-  }
-  mat-icon {
-    margin-left: 4px;
-    margin-right: 4px;
-    position: relative;
-    height: 14px;
-    width: 14px;
-    font-size: 14px !important;
-  }
+  padding: 0 0.5rem;
+  gap: 2px;
+}
+
+.goa-badge-content {
+  font-size: $caption-size;
+  font-weight: $caption-font-weight;
 }
 
 .goa-badge.badge-information {
-  background-color: $primary;
-  color: $goa-text-color-inverse;
+  background-color: #f1f1f1;
+  color: #005DAA;
 }
 
 .goa-badge.badge-success {
@@ -62,7 +41,7 @@
 }
 
 .goa-badge.badge-dark {
-  background-color: $primary;
+  background-color: #333;
   color: $goa-text-color-inverse;
 }
 
