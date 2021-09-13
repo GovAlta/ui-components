@@ -13,9 +13,9 @@ import GoAHeroBanner from './lib/hero-banner/hero-banner.vue';
 import GoANotificationBanner from './lib/notification-banner/notification-banner.vue';
 import GoADropdown from './lib/dropdown/dropdown.vue'
 import GoADropdownOption from './lib/dropdown/option/option.vue'
-import GoAPageLoadIndicatorComponent from './lib/page-load-indicator/page-load-indicator.vue';
-
+import GoAPageLoadIndicator from './lib/page-load-indicator/page-load-indicator.vue';
 import GoAElementLoader from './lib/element-loader/element-loader.vue';
+
 export {
   GoAMicrositeLogo,
   GoAHeader,
@@ -29,6 +29,6 @@ export {
   GoANotificationBanner,
   GoADropdown,
   GoADropdownOption,
-  GoAPageLoadIndicatorComponent,
+  GoAPageLoadIndicator,
   GoAElementLoader
 };
