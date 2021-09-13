@@ -26,15 +26,22 @@
 
   --color-primary-l2: hsla(206, 100%, 58%, 1);
   --color-primary-l1: hsla(206, 100%, 48%, 1);
-  --color-primary: hsla(206, 100%, 38%, 1);
-  --color-primary-d1: hsla(206, 100%, 26%, 1);
+  --color-primary: hsla(206, 100%, 38%, 1);     // ~#0070C4
+  --color-primary-d1: hsla(206, 100%, 26%, 1);  // ~#004F84
   --color-primary-d2: hsla(206, 100%, 16%, 1);
 
   /* named colors */
   --color-primary--hover: var(--color-primary-d1);
-  --color-input-border: var(--color-gray-d1);
-  --color-input--focused: var(--color-orange);
   --color-text: var(--color-gray-d3);
   --color-error: var(--color-red);
   --color-disabled: var(--color-gray-l5);
+
+  --color-input-border: var(--color-gray-d1);
+  --color-input--focused: var(--color-orange);
+
+  --color-button-primary: var(--color-primary);
+  --color-button-primary--hover: var(--color-primary-d1);
+
+  --color-button-tertiary: var(--color-gray-l4);
+  --color-button-tertiary--hover: var(--color-gray-l5);
 }
