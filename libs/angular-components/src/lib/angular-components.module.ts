@@ -27,6 +27,7 @@ import {
   GoACardThumbImageComponent
 
 } from './card/card.component';
+import { GoACardGroupComponent } from './card-group/card.group.component'
 import {
   GoAHeroBannerComponent,
   GoAHeroBannerContentComponent,
@@ -50,6 +51,7 @@ import { GoAElementLoadIndicatorComponent } from './element-load-indicator/eleme
     GoAOptionGroupComponent,
     GoACheckboxComponent,
     GoACalloutComponent,
+    GoACardGroupComponent,
     GoANotificationComponent,
     GoANotificationBannerComponent,
     GoACardComponent,
@@ -77,6 +79,7 @@ import { GoAElementLoadIndicatorComponent } from './element-load-indicator/eleme
     GoAOptionGroupComponent,
     GoACheckboxComponent,
     GoACalloutComponent,
+    GoACardGroupComponent,
     GoANotificationComponent,
     GoANotificationBannerComponent,
     GoACardComponent,

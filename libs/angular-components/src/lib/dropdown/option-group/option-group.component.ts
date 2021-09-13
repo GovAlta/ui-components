@@ -35,7 +35,7 @@ export class GoAOptionGroupComponent implements OnInit {
    * The defined options.
    * @ignore
    */
-  @ContentChildren(GoAOptionComponent, {descendants: true}) options: QueryList<GoAOptionComponent>;
+  @ContentChildren(GoAOptionComponent, { descendants: true }) options: QueryList<GoAOptionComponent>;
 
   /**
    * The option template
@@ -43,14 +43,14 @@ export class GoAOptionGroupComponent implements OnInit {
    */
   @ViewChild('optionGroupTemplate') optionGroupTemplate: TemplateRef<any>;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) { }
 
   /**
    * Lifecycle hook OnInit
    * @ignore
    */
   ngOnInit() {
-    if(this.label === undefined || this.label === null || this.label === '') {
+    if (this.label === undefined || this.label === null || this.label === '') {
       throw new TypeError(`The input 'label' is required.`);
     }
   }

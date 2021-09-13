@@ -55,8 +55,7 @@ export class GoAButtonLinkComponent implements OnInit {
   @Input() buttonSize: 'small' | 'normal' = 'normal';
 
   constructor() { }
-  /**
-   * @ignore
-   */
+
+  /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
   ngOnInit() { }
 }
