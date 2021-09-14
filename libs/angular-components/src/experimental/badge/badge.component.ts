@@ -22,14 +22,12 @@ export class GoABadgeComponent implements OnInit {
     | 'light'
     | 'inactive' = 'light';
 
-  constructor() {}
+  constructor() { }
 
   get badgeClass(): string {
     return `badge-${this.type}`;
   }
 
-  /**
-   * @ignore
-   */
-   ngOnInit() {}
+  /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
+  ngOnInit() { }
 }

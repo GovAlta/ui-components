@@ -45,13 +45,13 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    */
   _triggerRect;
 
-    /**
-   * This position config ensures that the top "start" corner of the overlay
-   * is aligned with with the bottom "start" of the origin by default (overlapping
-   * the trigger completely). If the panel cannot fit below the trigger, it
-   * will fall back to a position above the trigger.
-   * @ignore
-   */
+  /**
+ * This position config ensures that the top "start" corner of the overlay
+ * is aligned with with the bottom "start" of the origin by default (overlapping
+ * the trigger completely). If the panel cannot fit below the trigger, it
+ * will fall back to a position above the trigger.
+ * @ignore
+ */
   _positions: ConnectedPosition[] = [
     {
       originX: 'start',
@@ -116,22 +116,22 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    */
   @Input()
   set selectedIds(ids: Array<string>) {
-    if(this.allOptions === undefined) {
+    if (this.allOptions === undefined) {
       // aren't initialized yet, return
       return;
     }
 
-    if(ids === null || ids === undefined) {
+    if (ids === null || ids === undefined) {
       ids = [];
     }
 
-    if(ids.length > 1 && this.multiple === false) {
+    if (ids.length > 1 && this.multiple === false) {
       throw new Error('Cannot select multiple options when the dropdown has multiple set to false.');
     }
 
     const selectedOptions = [];
     this.allOptions.forEach(option => {
-      if(ids.includes(option.id)) {
+      if (ids.includes(option.id)) {
         option.selected = true;
         selectedOptions.push(option);
       }
@@ -154,7 +154,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   @Input()
   set multiple(value: boolean) {
     this._multiple = value;
-    if(this._multiple === false) {
+    if (this._multiple === false) {
       // If we have changed from multiple to no multiple then deselect everything.
       this.selectedItems.forEach(option => {
         option.selected = false;
@@ -195,34 +195,33 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * All options.
    * @ignore
    */
-  @ContentChildren(GoAOptionComponent, {descendants: true}) allOptions: QueryList<GoAOptionComponent>;
+  @ContentChildren(GoAOptionComponent, { descendants: true }) allOptions: QueryList<GoAOptionComponent>;
 
   /**
    * The top level options for rendering options.
    * @ignore
    */
-  @ContentChildren(GoAOptionComponent, {descendants: false}) options: QueryList<GoAOptionComponent>;
+  @ContentChildren(GoAOptionComponent, { descendants: false }) options: QueryList<GoAOptionComponent>;
 
   /**
    * The option groups for rendering.
    * @ignore
    */
-  @ContentChildren(GoAOptionGroupComponent, {descendants: false}) optionGroups: QueryList<GoAOptionGroupComponent>;
+  @ContentChildren(GoAOptionGroupComponent, { descendants: false }) optionGroups: QueryList<GoAOptionGroupComponent>;
 
-   /**
-   * Event emitted containing the value field of all selected options when the selection changes.
-   */
+  /**
+  * Event emitted containing the value field of all selected options when the selection changes.
+  */
   @Output() selectionChange = new EventEmitter<Array<any>>();
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) { }
 
   /**
    * Lifecycle hook OnInit
    * @ignore
    */
-  ngOnInit() {
-
-  }
+  /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
+  ngOnInit() { }
 
   /**
    * Lifecycle hook AfterViewInit
@@ -234,7 +233,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
     this._filteredOptions = [...this.options];
     this._allFilteredOptions = [...this.allOptions];
 
-    if(this.selectedItems.length > 0) {
+    if (this.selectedItems.length > 0) {
       this.setTextInput(this.selectedItems[0].label);
     }
 
@@ -250,7 +249,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    */
   onFilterChange(text: string) {
     // open the dropdown if it is not already
-    if(!this._isOpen === true) {
+    if (!this._isOpen === true) {
       this._isOpen = true;
     }
 
@@ -263,15 +262,15 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * @ignore
    */
   overlayKeydown(event: KeyboardEvent) {
-    if(event.code === 'Enter' || event.code === 'NumpadEnter') {
+    if (event.code === 'Enter' || event.code === 'NumpadEnter') {
       this.optionClicked(this._activeOption);
     }
-    else if(event.code === 'ArrowDown') {
+    else if (event.code === 'ArrowDown') {
       this._activeIndex = (this._activeIndex + 1) % this._allFilteredOptions.length;
       this._activeOption = this._allFilteredOptions[this._activeIndex];
     }
-    else if(event.code === 'ArrowUp') {
-      if(this._activeIndex > 0) {
+    else if (event.code === 'ArrowUp') {
+      if (this._activeIndex > 0) {
         this._activeIndex = this._activeIndex - 1;
         this._activeOption = this._allFilteredOptions[this._activeIndex];
       }
@@ -295,11 +294,11 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * @ignore
    */
   inputClicked() {
-    if(this.disabled === false) {
+    if (this.disabled === false) {
       this._isOpen = !this._isOpen;
 
       // set the active option to the first in the list
-      if(this._allFilteredOptions.length > 0) {
+      if (this._allFilteredOptions.length > 0) {
         this._activeOption = this._allFilteredOptions[0];
         this._activeIndex = 0;
       }
@@ -313,14 +312,14 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
   optionClicked(option: GoAOptionComponent) {
     let selectedOptions = [];
 
-    if(this.multiple === true) {
+    if (this.multiple === true) {
       option.selected = !option.selected;
       selectedOptions = this.selectedItems;
     }
     else {
       option.selected = !option.selected;
       this.selectedItems.forEach((o) => {
-        if(option.id !== o.id) {
+        if (option.id !== o.id) {
           // change all options that weren't selected to false without notifying change
           o.selected = false;
         }
@@ -331,7 +330,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
 
     this.selectionChanged(selectedOptions, true);
 
-    if(this.multiple === false) {
+    if (this.multiple === false) {
       // close the dropdown if we are in single selection mode
       this._isOpen = false;
     }
@@ -343,7 +342,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * @ignore
    */
   private selectionChanged(options: Array<GoAOptionComponent>, emitEvent: boolean) {
-    if(options.length > 0) {
+    if (options.length > 0) {
       const selectedOptions = options.map(o => o.label).join(', ')
       this._requiredError = false;
       this.setTextInput(selectedOptions);
@@ -353,7 +352,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
       this.setTextInput('');
     }
 
-    if(emitEvent === true) {
+    if (emitEvent === true) {
       this.emitChange(options);
     }
   }
@@ -375,7 +374,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * @ignore
    */
   private get selectedItems(): Array<GoAOptionComponent> {
-    if(this.allOptions === undefined) {
+    if (this.allOptions === undefined) {
       return [];
     }
 
@@ -390,7 +389,7 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * @ignore
    */
   private setTextInput(value: string) {
-    if(this.textInput) {
+    if (this.textInput) {
       this.textInput.nativeElement.value = value;
       // Exact matches show whole list?
       this.filterOptions('');
@@ -419,16 +418,16 @@ export class GoADropdownComponent implements OnInit, AfterViewInit {
    * @param option
    * @ignore
    */
-  private typeaheadFilter(filterText: string, typeaheadMode: 'none'|'startsWith'|'contains', option: GoAOptionComponent) {
-    if(typeaheadMode === 'none' || this.typeaheadMode === undefined) {
+  private typeaheadFilter(filterText: string, typeaheadMode: 'none' | 'startsWith' | 'contains', option: GoAOptionComponent) {
+    if (typeaheadMode === 'none' || this.typeaheadMode === undefined) {
       return true;
     }
 
-    if(typeaheadMode === 'startsWith') {
+    if (typeaheadMode === 'startsWith') {
       return option.label.toLocaleLowerCase().startsWith(filterText.toLocaleLowerCase());
     }
 
-    if(typeaheadMode === 'contains') {
+    if (typeaheadMode === 'contains') {
       return option.label.toLocaleLowerCase().includes(filterText.toLocaleLowerCase());
     }
   }
