@@ -18,10 +18,12 @@ import GoACardGroup from './lib/card-group/card.group.component';
 import GoACheckbox from './lib/checkbox/checkbox';
 import GoAHeroBannerContent from './lib/hero-banner/content/hero-banner-content.component';
 import GoAHeroBannerLink from './lib/hero-banner/link/hero-banner-link.component';
-import GoAPageLoader from './lib/page-loader/page-loader'
+import GoAPageLoader from './lib/page-loader/page-loader';
+import { GoAElementLoader } from './lib/element-loader/element-loader';
 
 export {
   GoAPageLoader,
+  GoAElementLoader,
   GoASkeletonContent,
   GoASkeletonGridColumnContent,
   GoASkeletonImageContent,
