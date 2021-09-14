@@ -1,6 +1,11 @@
 <template>
   <div v-if="visible" :class="`progress-container--${sizeType}`">
-    <svg :class="[svgClass]" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      :class="[svgClass]"
+      fill="none"
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <circle className="base-circle" cx="50" cy="50" r="45" />
       <circle
         :class="[circleType]"
@@ -43,7 +48,7 @@ export default {
       type: Number,
     },
     /**
-     * Sets the page to locked and does not accept user input.
+     * Sets the page to locked and does not accept user input. When not set the component can be used as a child element without blocking user input.
      */
     pagelock: {
       type: Boolean,
