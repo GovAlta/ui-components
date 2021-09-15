@@ -9,7 +9,8 @@ import GoAMicrositeLogo from './lib/microsite-logo/microsite-logo';
 
 import GoAHeroBanner from './lib/hero-banner/hero-banner.component';
 import { GoADropdown, GoAOption, GoAOptionGroup } from './lib/dropdown/dropdown.component';
-import { GoARadioGroup, GoARadio } from './lib/radio-group/radio-group';
+import { GoARadioGroup } from './lib/radio-group/radio-group';
+import { GoARadio } from './lib/radio/radio'
 import { GoASkeletonContent } from './lib/skeleton/skeleton-titled-content';
 import { GoASkeletonGridColumnContent } from './lib/skeleton/skeleton-grid-column';
 import { GoASkeletonImageContent } from './lib/skeleton/skeleton-image-content';

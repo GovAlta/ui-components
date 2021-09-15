@@ -5,10 +5,35 @@ import { ErrorProps } from '../_common/errorState';
 import { TestProps } from '../../experimental/common';
 
 interface Props {
+
+  /**
+   * The name of the value of the current
+  */
   value: string;
+
+  /**
+   * The name of the html input tag. Has to match other radio buttons to form a group
+  */
   name?: string;
+
+  /**
+   * Determines whether the radio button is currently disabled
+  */
   disabled?: boolean;
+
+  /**
+   * Determines whether the radio button is currently selected
+  */
   checked: boolean;
+
+  /**
+   * Determines if the radio button is in a valid or error state
+  */
+  state?: 'valid' | 'error';
+
+  /**
+   * Callback function containing the newly selected value
+  */
   onChange?: (value: string) => void;
 }
 

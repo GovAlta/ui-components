@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { render, screen, fireEvent, waitFor, logDOM } from '@testing-library/react';
 
-import { GoARadioGroup } from './radio-group';
-import { GoARadio } from '../radio/radio';
+import { GoARadio } from './radio';
 
 describe('RadioGroup', () => {
   const baseMockData = {
@@ -26,19 +25,21 @@ describe('RadioGroup', () => {
       value = newValue;
     }
     return (
-      <GoARadioGroup
-        name="fruits"
-        disabled={data.disabled}
-        orientation="vertical"
-        value={value}
-        onChange={(newValue) => onChange && onChange(newValue)}
-      >
+      <div>
         {data.radios.map((radio) => (
-          <GoARadio key={radio.value} checked={data.value === radio.value} value={radio.value}>
+          <GoARadio
+            key={radio.value}
+            value={radio.value}
+            name="fruits"
+            disabled={data.disabled}
+            checked={data.value === radio.value}
+            state='valid'
+            onChange={(newValue) => onChange && onChange(newValue)}
+          >
             {radio.text}
           </GoARadio>
         ))}
-      </GoARadioGroup>
+      </div >
     )
   }
 

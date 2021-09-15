@@ -1,7 +1,5 @@
 import React, { Children, FC, ReactElement } from 'react';
 
-export * from './radio';
-
 interface Props {
   /**
    * Name of the form value

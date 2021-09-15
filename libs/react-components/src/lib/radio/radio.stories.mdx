@@ -11,10 +11,9 @@ import { moduleMetadata } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 
-import { GoARadioGroup } from './radio-group';
-import { GoARadio } from '../radio/radio';
+import { GoARadio } from './radio';
 
-<Meta title="React/Basic Elements/RadioGroups" component={GoARadioGroup} />
+<Meta title="React/Basic Elements/Radio" component={GoARadio} />
 
 # Radios
 
@@ -23,15 +22,42 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
 ## Overview
 
 export const TemplateBasic = (args) => {
-  const [value, setValue] = useState(args.value);
+  const [value, setValue] = useState(args.checked ? args.value : "");
+  const [checked, setChecked] = useState(args.checked);
+  
   return (
     <div style={{ padding: '5px' }}>
       Current Value: {value}
-      <GoARadioGroup {...args} value={value} onChange={setValue}>
-        <GoARadio value="apple">apple</GoARadio>
-        <GoARadio value="orange">orange</GoARadio>
-        <GoARadio value="banana">banana</GoARadio>
-      </GoARadioGroup>
+      <GoARadio
+        value={args.value}
+        name={args.name}
+        onChange={setValue}
+        disabled={args.disabled}
+        checked={value === args.value }
+        state={args.state}
+      >
+        {args.value}
+      </GoARadio>
+      <GoARadio
+        value="orange"
+        name={args.name}
+        onChange={setValue}
+        disabled={args.disabled}
+        checked={value === "orange"}
+        state={args.state}
+      >
+        orange
+      </GoARadio>
+      <GoARadio
+        value="banana"
+        name={args.name}
+        onChange={setValue}
+        disabled={args.disabled}
+        checked={value === "banana"}
+        state={args.state}
+      >
+        banana
+      </GoARadio>
     </div>
   );
 };
@@ -43,9 +69,10 @@ export const TemplateBasic = (args) => {
     name="Basic"
     height={200}
     args={{
+      value: 'apple',
       name: 'fruits',
       disabled: false,
-      orientation: 'horizontal',
+      checked: false,
       onChange: (value) => {
         action('selection changed')(value);
       },
@@ -62,10 +89,10 @@ export const TemplateBasic = (args) => {
     name="Preset"
     height={200}
     args={{
-      name: 'preset',
-      value: 'orange',
+      value: 'apple',
+      name: 'fruits',
       disabled: false,
-      orientation: 'vertical',
+      checked: true,
       onChange: (value) => {
         action('selection changed')(value);
       },
@@ -83,7 +110,7 @@ export const TemplateBasic = (args) => {
     height={200}
     args={{
       name: 'error',
-      value: 'orange',
+      value: 'apple',
       state: 'error',
       onChange: (value) => {
         action('selection changed')(value);
@@ -103,8 +130,8 @@ export const TemplateBasic = (args) => {
     args={{
       name: 'disabled',
       disabled: true,
-      value: 'orange',
-      orientation: 'vertical',
+      value: 'apple',
+      checked: true,
       onChange: (value) => {
         action('selection changed')(value);
       },
@@ -116,10 +143,10 @@ export const TemplateBasic = (args) => {
 
 ## Properties
 
-#### GoARadioGroup
+#### GoARadio
 
-<Description of={GoARadioGroup} />
-<ArgsTable of={GoARadioGroup} />
+<Description of={GoARadio} />
+<ArgsTable of={GoARadio} />
 
 # Usage guidelines
 
