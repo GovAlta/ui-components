@@ -6,6 +6,9 @@ import { GoAScrollable } from './scrollable/scrollable.component';
 import { GoAFormItem, GoAFormActions, GoAForm } from './form/form.component';
 import { GoATransition, GoATransitionSequence } from './transitions';
 
+import type { GoABadgeType } from './badge/badge.component';
+export type { GoABadgeType };
+
 export {
   GoABadge,
   GoAForm,
