@@ -22,7 +22,7 @@ export const GoAScrollable: FC<Props & TestProps> = ({
   const style: CSSProperties = {
     overflowY: vertical ? 'auto' : 'hidden',
     overflowX: horizontal ? 'auto' : 'hidden',
-    height: height ?? '100%',
+    maxHeight: height ?? '100%',
     padding: `${vPadding ?? 0}rem ${hPadding ?? 0}rem`,
   };
   return (
