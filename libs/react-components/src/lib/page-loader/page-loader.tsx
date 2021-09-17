@@ -27,7 +27,7 @@ export interface PageLoaderProps {
   value?: number;
 
   /**
-   * Sets the page to locked and does not accept user input.
+   * Sets the page to locked and does not accept user input. When not set the component can be used as a child element without blocking user input.
    */
   pagelock?: boolean;
 
