@@ -1,0 +1,9 @@
+@mixin goa-input-base {
+  outline: none;
+  transition: box-shadow 0.1s ease-in;
+  border-radius: 3px;
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 0 3px var(--color-input--focused);
+  }
+}

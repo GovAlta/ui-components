@@ -1,0 +1,124 @@
+@import './reset.scss';
+@import './colors.scss';
+@import './values.scss';
+@import './mixins.scss';
+
+.goa-dropdown-box {
+  --color-selected: var(--color-gray-l5);
+
+  position: relative;
+}
+
+.goa-dropdown-background {
+  position: fixed;
+  inset: 0;
+  opacity: 1;
+}
+
+.goa-dropdown-box:not(.goa-dropdown-input--disabled) {
+  @include goa-input-base;
+}
+
+.goa-dropdown-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  cursor: pointer;
+  height: var(--input-line-height);
+  padding: var(--input-padding);
+
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--input-border-radius);
+}
+
+.goa-dropdown-input--disabled {
+  opacity: 0.5;
+  cursor: default;
+
+  &:hover {
+    cursor: default;
+  }
+}
+
+.goa-dropdown-input input {
+  flex: 1 1 auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  ::placeholder {
+    text-overflow: ellipsis;
+  }
+}
+
+// additional padding when icon is present
+.goa-icon ~ input {
+  padding-left: 0.5rem;
+}
+
+.goa-dropdown-input--disabled input {
+  cursor: default;
+}
+
+.goa-dropdown-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  margin-top: 3px; // prevent hiding of input highlight
+  padding: 0;
+  list-style-type: none;
+  background: var(--color-input-background);
+  border-bottom-left-radius: var(--input-border-radius);
+  border-bottom-right-radius: var(--input-border-radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.goa-dropdown-list hr {
+  border: none;
+  border-top: 1px solid var(--color-gray-l5);
+  margin: 0;
+}
+
+.goa-dropdown-list label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  padding-left: 0.5rem;
+}
+
+.goa-dropdown-option {
+  margin: 0;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--color-input);
+
+  &:hover {
+    background: var(--color-selection--hover);
+    color: var(--color-primary-l1);
+  }
+}
+
+.goa-dropdown-option--disabled {
+  opacity: 0.5;
+  cursor: default;
+
+  &:hover {
+    cursor: default;
+    color: initial;
+  }
+}
+
+.goa-dropdown-option--selected {
+  background: var(--color-primary);
+  color: var(--color-white);
+
+  &:hover {
+    background: var(--color-primary-d1);
+    color: var(--color-white);
+  }
+}
+
+.dropdown-group-content .goa-dropdown-option {
+  padding-left: 1.5rem;
+}

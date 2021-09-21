@@ -1,10 +1,10 @@
 import React from 'react'
 import { TestProps } from '../common'
-import { GoAIcon, IconSize, IconType, IconVariant } from './icon.component';
+import { GoAIcon, IconSize, GoAIconType, IconVariant } from './icon.component';
 import './icons.css'
 
 interface Props extends TestProps {
-  type: IconType,
+  type: GoAIconType,
   size?: IconSize;
   variant?: IconVariant;
   title?: string;

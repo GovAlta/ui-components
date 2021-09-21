@@ -1,5 +1,13 @@
 :root {
-  /* base colors */
+
+  // ===========================================================================
+  // Base Colors
+  // ===========================================================================
+
+  --color-white: #fff;
+  --color-black: #333;
+
+  --color-gray-l6: hsla(0, 0%, 98%, 1); /* #f1f1f1 */
   --color-gray-l5: hsla(0, 0%, 95%, 1); /* #f1f1f1 */
   --color-gray-l4: hsla(0, 0%, 90%, 1);
   --color-gray-l3: hsla(0, 0%, 80%, 1); /* #ccc */
@@ -18,11 +26,11 @@
   --color-red-d1: hsla(0, 100%, 40%, 1);
   --color-red-d2: hsla(0, 100%, 30%, 1);
 
-  --color-orange-l2: hsla(40, 100%, 70%, 1);
-  --color-orange-l1: hsla(40, 100%, 60%, 1);
-  --color-orange: hsla(40, 100%, 50%, 1);
-  --color-orange-d1: hsla(40, 100%, 40%, 1);
-  --color-orange-d2: hsla(40, 100%, 30%, 1);
+  --color-orange-l2: hsla(40, 100%, 80%, 1);
+  --color-orange-l1: hsla(40, 100%, 70%, 1);
+  --color-orange: hsla(40, 100%, 60%, 1);     // #FEBA35
+  --color-orange-d1: hsla(40, 100%, 50%, 1);
+  --color-orange-d2: hsla(40, 100%, 40%, 1);
 
   --color-green: hsl(148,100%,26%);
 
@@ -32,14 +40,20 @@
   --color-primary-d1: hsla(206, 100%, 26%, 1);  // ~#004F84
   --color-primary-d2: hsla(206, 100%, 16%, 1);
 
-  /* named colors */
+  // ===========================================================================
+  // Named Colors
+  // ===========================================================================
+
   --color-primary--hover: var(--color-primary-d1);
   --color-text: var(--color-gray-d3);
   --color-error: var(--color-red);
   --color-disabled: var(--color-gray-l5);
 
-  --color-input-border: var(--color-gray-d1);
+  --color-input-background: var(--color-white);
+  --color-input-border: var(--color-gray-l1);
+  --color-input: var(--color-gray-d2);
   --color-input--focused: var(--color-orange);
+  --color-selection--hover: var(--color-gray-l5);
 
   --color-button-primary: var(--color-primary);
   --color-button-primary--hover: var(--color-primary-d1);

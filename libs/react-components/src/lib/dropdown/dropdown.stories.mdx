@@ -1,5 +1,3 @@
-<!--- This is your Story template function, shown here in React-->
-
 import {
   Meta,
   Canvas,
@@ -7,848 +5,157 @@ import {
   Description,
   ArgsTable,
 } from '@storybook/addon-docs/blocks';
-import { GoADropdown, GoAOption } from './dropdown.component';
-import { GoAOptionGroup } from './option-group/option-group.component';
+import { GoAIcon, GoAFormItem } from '../../experimental';
+import { GoADropdown, GoADropdownOption, GoADropdownGroup } from './dropdown';
+import { GoAButton } from '../..';
 import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { DoDont } from '@abgov/shared/storybook-common';
-export const Template = (args) => {
-  const GoADropdownWrapper = () => {
-    const initList = args.data;
-    const defaultDescription = 'Choose your favourite food';
-    let initDescription = defaultDescription;
-    for (const entry of Object.entries(initList)) {
-      if (entry[1].selected) {
-        initDescription = entry[1].label;
-      }
-    }
-    const [optionList, setOptionList] = useState(initList);
-    const [description, setDescription] = useState(initDescription);
-    const selectionChangeFn = (e) => {
-      const selected = e.value;
-      let updatedList = { ...initList };
-      let selectedLabels = [];
-      if (!args.multiple) {
-        for (const key in updatedList) {
-          updatedList[key].selected = false;
-        }
-      }
-      updatedList[selected].selected = e.selected;
-      setOptionList(updatedList);
-      for (const key in updatedList) {
-        if (updatedList[key].selected) {
-          selectedLabels.push(updatedList[key].label);
-        }
-      }
-      setDescription(
-        selectedLabels.length > 0
-          ? selectedLabels.join(', ')
-          : defaultDescription
-      );
-    };
-    return (
-      <GoADropdown
-        {...args}
-        description={description}
-        selectionChanged={selectionChangeFn}
-      >
-        {Object.entries(optionList).map((option) => {
-          return (
-            <GoAOption
-              value={option[0]}
-              label={option[1].label}
-              selected={option[1].selected}
-            />
-          );
-        })}
-      </GoADropdown>
-    );
-  };
-  return <GoADropdownWrapper />;
-};
-
-export const RequiredTemplate = (args) => {
-  const GoADropdownWrapper = () => {
-    const initList = {
-      apple: {
-        label: 'Apple',
-        selected: false,
-      },
-      banana: {
-        label: 'Banana',
-        selected: false,
-      },
-      orange: {
-        label: 'Orange',
-        selected: false,
-      },
-      kiwi: {
-        label: 'Kiwi',
-        selected: false,
-      },
-      lemon: {
-        label: 'Lemon',
-        selected: false,
-      },
-    };
-    const defaultDescription = 'Choose your favourite food';
-    const [optionList, setOptionList] = useState(initList);
-    const [description, setDescription] = useState(defaultDescription);
-    const [errorMessage, setErrorMessage] = useState('');
-    const selectionChangeFn = (e) => {
-      const selected = e.value;
-      let updatedList = { ...initList };
-      updatedList[selected].selected = e.selected;
-      setOptionList(updatedList);
-      if (e.selected) {
-        setDescription(e.label);
-        setErrorMessage('');
-      } else {
-        setDescription(defaultDescription);
-        setErrorMessage('At least one option is required.');
-      }
-    };
-    return (
-      <GoADropdown
-        {...args}
-        description={description}
-        selectionChanged={selectionChangeFn}
-        errorMessage={errorMessage}
-      >
-        {Object.entries(optionList).map((option) => {
-          return (
-            <GoAOption
-              value={option[0]}
-              label={option[1].label}
-              selected={option[1].selected}
-            />
-          );
-        })}
-      </GoADropdown>
-    );
-  };
-  return <GoADropdownWrapper />;
-};
-
-export const GroupTemplate = (args) => {
-  const GoADropdownWrapper = () => {
-    const GroupA = {
-      apple: {
-        label: 'Apple',
-        selected: false,
-      },
-      banana: {
-        label: 'Banana',
-        selected: false,
-      },
-      orange: {
-        label: 'Orange',
-        selected: false,
-      },
-    };
-    const GroupB = {
-      kiwi: {
-        label: 'Kiwi',
-        selected: false,
-      },
-      lemon: {
-        label: 'Lemon',
-        selected: false,
-      },
-    };
-    const defaultDescription = 'Choose your favourite food';
-    let initDescription = defaultDescription;
-    const [groupA, setGroupA] = useState(GroupA);
-    const [groupB, setGroupB] = useState(GroupB);
-    const [description, setDescription] = useState(initDescription);
-    const selectionChangeFn = (e) => {
-      setDescription(e.label);
-      if (Object.keys(GroupA).includes(e.value)) {
-        GroupA[e.value].selected = true;
-      }
-      setGroupA({ ...GroupA });
-      if (Object.keys(GroupB).includes(e.value)) {
-        GroupB[e.value].selected = true;
-      }
-      setGroupB({ ...GroupB });
-    };
-    return (
-      <GoADropdown
-        {...args}
-        description={description}
-        selectionChanged={selectionChangeFn}
-      >
-        <GoAOptionGroup label="Group 1">
-          {Object.entries(groupA).map((option) => {
-            return (
-              <GoAOption
-                value={option[0]}
-                label={option[1].label}
-                selected={option[1].selected}
-              />
-            );
-          })}
-        </GoAOptionGroup>
-        <GoAOptionGroup label="Group 2">
-          {Object.entries(groupB).map((option) => {
-            return (
-              <GoAOption
-                value={option[0]}
-                label={option[1].label}
-                selected={option[1].selected}
-              />
-            );
-          })}
-        </GoAOptionGroup>
-      </GoADropdown>
-    );
-  };
-  return <GoADropdownWrapper />;
-};
+import { BestPractices, BestPracticeItem } from '@abgov/shared/storybook-common';
 
 <Meta
   title="React/Basic Elements/Dropdown"
   component={GoADropdown}
   argTypes={{
-    label: {
-      description: 'The content of the label associated to the dropdown',
+    name: {
+      description: 'Name of the bound field',
     },
-    description: {
-      description:
-        'Text that is displayed as a placeholder when the dropdown does not have a selected option and below the dropdown.',
+    selectedValues: {
+      description: 'Array of the values bound to the component',
     },
-    required: {
-      description: 'Indicates if the dropdown is required.',
-    },
-    display: {
-      description: 'Message used to indicate the state of the dropdown',
-    },
-    multiple: {
-      description: 'Indicates if multiple components can be selected.',
+    onChange: {
+      description: 'Callback function invoked when an item is selected or unselected.',
     },
     disabled: {
       description: 'Indicates if the dropdown is disabled.',
     },
-    selectionChanged: {
-      description:
-        'Callback function invoked when an item is selected or unselected.',
+    leadingIcon: {
+      description: 'Icon that sits to the left of the component field name',
+    },
+    multiSelect: {
+      description: 'BETA feature: Allow for selection of more than one item',
     },
   }}
 />
 
-# Dropdown List
-
-A user input field that allows the user to select from a list of options.
-
-## Overview
-
-### Basic
+export const Template = (args) => {
+  const [selectedValues, setValues] = useState(args.selectedValues);
+  function onChange(name, values) {
+    setValues(values);
+  }
+  return (
+    <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
+      <div>Selected Values: {`[${selectedValues.join(', ')}]`}</div>
+      <GoADropdown {...args} onChange={onChange} selectedValues={selectedValues}>
+        <label>Some Label</label>
+        <GoADropdownOption label="Option 1" value="option1" />
+        <GoADropdownOption label="Worst Actor Ever" value="option2">
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              height="40"
+              width="40"
+              style={{ borderRadius: '50%' }}
+              src="https://www.placecage.com/40/40"
+            />
+            <span style={{ paddingLeft: '8px' }}>Nicholas Cage</span>
+          </div>
+        </GoADropdownOption>
+        <GoADropdownOption label="Option 3" value="option3" />
+        <hr />
+        <GoADropdownOption label="Option 4" value="option4" />
+        <GoADropdownOption label="Option 5" value="option5" />
+        <GoADropdownOption label="Option 6" value="option6" />
+      </GoADropdown>
+    </div>
+  );
+};
 
 <Canvas>
   <Story
     name="Basic"
-    height="400px"
+    height="500px"
     args={{
-      title: 'Fruits',
-      description: 'Choose your favourite fruit!',
-      style: { width: '300px' },
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      },
-      data: {
-        apple: {
-          label: 'Apple',
-          selected: false,
-        },
-        banana: {
-          label: 'Banana',
-          selected: false,
-        },
-        orange: {
-          label: 'Orange',
-          selected: false,
-        },
-        kiwi: {
-          label: 'Kiwi',
-          selected: false,
-        },
-        lemon: {
-          label: 'Lemon',
-          selected: false,
-        },
-      },
+      selectedValues: ['option1'],
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-### Required
+export const FormTemplate = (args) => {
+  // define the form state
+  const [formValues, setFormValues] = useState({
+    favColour: ''
+  });
+  // single callback function to set the state
+  function onChange(name, values) {
+    setFormValues({ ...formValues, [name]: values });
+  }
+  return (
+    <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
+      <GoAForm>
+        <GoAFormItem>
+          <label>Favourite Colour</label>
+          <GoADropdown
+            {...args}
+            name="favColour"
+            onChange={onChange}
+            selectedValues={formValues['favColour']}
+          >
+            <GoADropdownOption label="Red" value="red" />
+            <GoADropdownOption label="Blue" value="blue" />
+            <GoADropdownOption label="Yellow" value="yellow" />
+            <GoADropdownOption disabled={true} label="Purple (disabled)" value="purple" />
+          </GoADropdown>
+        </GoAFormItem>
+        <GoAFormActions>
+          <GoAButton onClick={() => action('onClick')(formValues)}>
+            Submit
+          </GoAButton>
+        </GoAFormActions>
+      </GoAForm>
+    </div>
+  );
+};
 
 <Canvas>
-  <Story
-    name="Required"
-    height="400px"
-    args={{
-      title: 'Fruits',
-      subTitle: '(required)',
-      description: 'Choose your favourite fruit!',
-      style: { width: '300px' },
-      required: true,
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      },
-    }}
-  >
-    {RequiredTemplate.bind({})}
-  </Story>
-</Canvas>
-
-### Initial Values
-
-<Canvas>
-  <Story
-    name="Initial Values"
-    args={{
-      label: 'Fruits',
-      description: 'Kiwi and apple should be pre-selected',
-      style: { width: '300px' },
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      },
-      data: {
-        apple: {
-          label: 'Apple',
-          selected: false,
-        },
-        banana: {
-          label: 'Banana',
-          selected: true,
-        },
-        orange: {
-          label: 'Orange',
-          selected: false,
-        },
-        kiwi: {
-          label: 'Kiwi',
-          selected: false,
-        },
-        lemon: {
-          label: 'Lemon',
-          selected: false,
-        },
-      },
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
-### Disabled
-
-<Canvas>
-  <Story
-    name="Disabled"
-    height="400px"
-    args={{
-      label: 'Fruits',
-      description: 'Choose your favourite fruit!',
-      style: { width: '300px' },
-      required: true,
-      disabled: true,
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      },
-      data: {
-        apple: {
-          label: 'Apple',
-          selected: false,
-        },
-        banana: {
-          label: 'Banana',
-          selected: false,
-        },
-        orange: {
-          label: 'Orange',
-          selected: false,
-        },
-        kiwi: {
-          label: 'Kiwi',
-          selected: false,
-        },
-        lemon: {
-          label: 'Lemon',
-          selected: false,
-        },
-      },
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
-### Multi Selection
-
-<Canvas>
-  <Story
-    name="Multi Selection"
-    height="400px"
-    args={{
-      label: 'Fruits',
-      description: 'Choose your favourite fruits!',
-      style: { width: '300px' },
-      multiple: true,
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      },
-      data: {
-        apple: {
-          label: 'Apple',
-          selected: false,
-        },
-        banana: {
-          label: 'Banana',
-          selected: false,
-        },
-        orange: {
-          label: 'Orange',
-          selected: false,
-        },
-        kiwi: {
-          label: 'Kiwi',
-          selected: false,
-        },
-        lemon: {
-          label: 'Lemon',
-          selected: false,
-        },
-      },
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
-### Groups
-
-<Canvas>
-  <Story
-    name="Groups"
-    height="400px"
-    args={{
-      label: 'Fruits',
-      description: 'Choose your favourite fruits!',
-      style: { width: '300px' },
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      },
-    }}
-  >
-    {GroupTemplate.bind({})}
-  </Story>
-</Canvas>
-
-### Menu Height
-
-<Canvas>
-  <Story
-    name="Menu Height"
-    args={{
-      label: 'Fruits',
-      description: 'Choose your favourite fruit!',
-      style: { width: '300px', Height: '400px' },
-      data: {
-        apple: {
-          label: 'Apple',
-          selected: false,
-        },
-        banana: {
-          label: 'Banana',
-          selected: false,
-        },
-        orange: {
-          label: 'Orange',
-          selected: false,
-        },
-        kiwi: {
-          label: 'Kiwi',
-          selected: false,
-        },
-        lemon: {
-          label: 'Lemon',
-          selected: false,
-        },
-        apple2: {
-          label: 'Apple2',
-          selected: false,
-        },
-        banana2: {
-          label: 'Banana2',
-          selected: false,
-        },
-        orange2: {
-          label: 'Orange2',
-          selected: false,
-        },
-        kiwi2: {
-          label: 'Kiwi2',
-          selected: false,
-        },
-        lemon2: {
-          label: 'Lemon2',
-          selected: false,
-        },
-      },
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      },
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
-### Max Menu Height
-
-<Canvas>
-  <Story
-    name="Max Menu Height"
-    args={{
-      label: 'Fruits',
-      description: 'Choose your favourite fruit!',
-      menuHeight: 200,
-      style: { width: '300px' },
-      data: {
-        apple: {
-          label: 'Apple',
-          selected: false,
-        },
-        banana: {
-          label: 'Banana',
-          selected: false,
-        },
-        orange: {
-          label: 'Orange',
-          selected: false,
-        },
-        kiwi: {
-          label: 'Kiwi',
-          selected: false,
-        },
-        lemon: {
-          label: 'Lemon',
-          selected: false,
-        },
-        apple2: {
-          label: 'Apple2',
-          selected: false,
-        },
-        banana2: {
-          label: 'Banana2',
-          selected: false,
-        },
-        orange2: {
-          label: 'Orange2',
-          selected: false,
-        },
-        kiwi2: {
-          label: 'Kiwi2',
-          selected: false,
-        },
-        lemon2: {
-          label: 'Lemon2',
-          selected: false,
-        },
-      },
-      selectionChanged: (value) => {
-        action('selection changed')(value);
-      },
-    }}
-  >
-    {Template.bind({})}
+  <Story name="Form" height="300px">
+    {FormTemplate.bind({})}
   </Story>
 </Canvas>
 
 ## Examples
 
-Basic
-
-```html
-export const Template = () => {
-  const args = {
-    title: 'Fruits',
-    description: 'Choose your favourite fruit!',
-    style: { width: '300px' },
-    selectionChanged: (value) => {
-      action('selection changed')(value);
-    },
-    data: {
-      apple: {
-        label: 'Apple',
-        selected: false,
-      },
-      banana: {
-        label: 'Banana',
-        selected: false,
-      },
-      orange: {
-        label: 'Orange',
-        selected: false,
-      },
-      kiwi: {
-        label: 'Kiwi',
-        selected: false,
-      },
-      lemon: {
-        label: 'Lemon',
-        selected: false,
-      },
-    },
+```tsx
+export const Template = (args) => {
+  const [selectedValues, setValues] = useState(args.selectedValues);
+  function onChange(name, values) {
+    setValues(values);
   }
-  const GoADropdownWrapper = () => {
-    const initList = args.data;
-    const defaultDescription = 'Choose your favourite food';
-    let initDescription = defaultDescription;
-    for (const entry of Object.entries(initList)) {
-      if (entry[1].selected) {
-        initDescription = entry[1].label;
-      }
-    }
-    const [optionList, setOptionList] = useState(initList);
-    const [description, setDescription] = useState(initDescription);
-    const selectionChangeFn = (e) => {
-      const selected = e.value;
-      let updatedList = { ...initList };
-      let selectedLabels = [];
-      if (!args.multiple) {
-        for (const key in updatedList) {
-          updatedList[key].selected = false;
-        }
-      }
-      updatedList[selected].selected = e.selected;
-      setOptionList(updatedList);
-      for (const key in updatedList) {
-        if (updatedList[key].selected) {
-          selectedLabels.push(updatedList[key].label);
-        }
-      }
-      setDescription(
-        selectedLabels.length > 0
-          ? selectedLabels.join(', ')
-          : defaultDescription
-      );
-    };
-    return (
-      <GoADropdown
-        {...args}
-        displayComponent={<div>{description}</div>}
-        selectionChanged={selectionChangeFn}
-      >
-        {Object.entries(optionList).map((option) => {
-          return (
-            <GoAOption
-              value={option[0]}
-              label={option[1].label}
-              selected={option[1].selected}
-            />
-          );
-        })}
+  return (
+    <>
+      <GoADropdown {...args} onChange={onChange} selectedValues={selectedValues}>
+        <label>Some Label</label>
+        <GoADropdownOption label="Option 1" value="option1" />
+        <GoADropdownOption label="Option 2" value="option2" />
+        <GoADropdownOption label="Option 3" value="option3" />
+        <hr />
+        <GoADropdownOption label="Option 4" value="option4" />
+        <GoADropdownOption label="Option 5" value="option5" />
+        <GoADropdownOption label="Option 6" value="option6" />
       </GoADropdown>
-    );
-  };
-  return <GoADropdownWrapper />;
+    </>
+  );
 };
-```
-
-With Groups
-
-```html
-export const GroupTemplate = () => {
-
-  const args={
-    label: 'Fruits',
-    description: 'Choose your favourite fruit!',
-    style: { width: '300px', Height: '400px' },
-    data: {
-      apple: {
-        label: 'Apple',
-        selected: false,
-      },
-      banana: {
-        label: 'Banana',
-        selected: false,
-      },
-      orange: {
-        label: 'Orange',
-        selected: false,
-      },
-      kiwi: {
-        label: 'Kiwi',
-        selected: false,
-      },
-      lemon: {
-        label: 'Lemon',
-        selected: false,
-      },
-      apple2: {
-        label: 'Apple2',
-        selected: false,
-      },
-      banana2: {
-        label: 'Banana2',
-        selected: false,
-      },
-      orange2: {
-        label: 'Orange2',
-        selected: false,
-      },
-      kiwi2: {
-        label: 'Kiwi2',
-        selected: false,
-      },
-      lemon2: {
-        label: 'Lemon2',
-        selected: false,
-      },
-    },
-    selectionChanged: (value) => {
-      action('selection changed')(value);
-    },
-  }}
-
-  const GoADropdownWrapper = () => {
-    const GroupA = {
-      apple: {
-        label: 'Apple',
-        selected: false,
-      },
-      banana: {
-        label: 'Banana',
-        selected: false,
-      },
-      orange: {
-        label: 'Orange',
-        selected: false,
-      },
-    };
-    const GroupB = {
-      kiwi: {
-        label: 'Kiwi',
-        selected: false,
-      },
-      lemon: {
-        label: 'Lemon',
-        selected: false,
-      },
-    };
-    const defaultDescription = 'Choose your favourite food';
-    let initDescription = defaultDescription;
-    const [groupA, setGroupA] = useState(GroupA);
-    const [groupB, setGroupB] = useState(GroupB);
-    const [description, setDescription] = useState(initDescription);
-    const selectionChangeFn = (e) => {
-      setDescription(e.label);
-      if (Object.keys(GroupA).includes(e.value)) {
-        GroupA[e.value].selected = true;
-      }
-      setGroupA({ ...GroupA });
-      if (Object.keys(GroupB).includes(e.value)) {
-        GroupB[e.value].selected = true;
-      }
-      setGroupB({ ...GroupB });
-    };
-    return (
-      <GoADropdown
-        {...args}
-        description={description}
-        selectionChanged={selectionChangeFn}
-      >
-        <GoAOptionGroup label="Group 1">
-          {Object.entries(groupA).map((option) => {
-            return (
-              <GoAOption
-                value={option[0]}
-                label={option[1].label}
-                selected={option[1].selected}
-              />
-            );
-          })}
-        </GoAOptionGroup>
-        <GoAOptionGroup label="Group 2">
-          {Object.entries(groupB).map((option) => {
-            return (
-              <GoAOption
-                value={option[0]}
-                label={option[1].label}
-                selected={option[1].selected}
-              />
-            );
-          })}
-        </GoAOptionGroup>
-      </GoADropdown>
-    );
-  };
-  return <GoADropdownWrapper />;
-};
-```
-
-Dynamic loading
-
-```html
-<GoADropdown
-  label="Fruits"
-  description="Choose your favourite fruit!"
-  multiple="false"
-  typeAheadMode="none"
->
-  { items.map((i) =>
-  <GoAOption key="{i.id}" value="{i.id}" label="{i.label}" />) }
-</GoADropdown>
 ```
 
 ## Properties
 
-### GoADropdown
-
 <Description of={GoADropdown} />
 <ArgsTable of={GoADropdown} />
 
-## Usage guidelines
+<Description of={GoADropdownOption} />
+<ArgsTable of={GoADropdownOption} />
 
-### Character count
-
-Each option should be a brief word, description, or name.
-
-<DoDont
-  dos={'Limit character width to 20 characters per option.'}
-  donts={'Use drop down lists for sentences.'}
-/>
-
-### Select a single option
-
-Use drop down lists when the user can only select one option and when there are more than
-seven available options to select from.Use radio buttons instead when there are seven or
-less available options to choose from.Since all the options but one are hidden, the visibility
-is low, so try to use radio buttons whenever possible.
-
-<DoDont
-  dos={
-    'Make the drop down list optional, otherwise specify with a "Required" caption.'
-  }
-  donts={
-    'Use drop down lists when there are less than eight available options.'
-  }
-/>
-
-### Description of options
-
-Drop down lists are always accompanied with a label and precede a button.Do not use the first
-drop down option as a descriptor or label of the list.Instead, it should be the most common or
-default option and is part of a set.
-
-<DoDont
-  dos={'List the first option as part of a set of related options.'}
-  donts={
-    'Use the first option as a descriptor or label for the set of options.'
-  }
-/>
+<BestPractices>
+  <BestPracticeItem description="When dealing with 5 or less options, consider using radio buttons instead of a dropdown list" />
+</BestPractices>

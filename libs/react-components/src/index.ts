@@ -8,7 +8,7 @@ import GoAHeader from './lib/header/header';
 import GoAMicrositeLogo from './lib/microsite-logo/microsite-logo';
 
 import GoAHeroBanner from './lib/hero-banner/hero-banner.component';
-import { GoADropdown, GoAOption, GoAOptionGroup } from './lib/dropdown/dropdown.component';
+import { GoADropdown, GoADropdownOption } from './lib/dropdown/dropdown';
 import { GoARadioGroup, GoARadio } from './lib/radio-group/radio-group';
 import { GoASkeletonContent } from './lib/skeleton/skeleton-titled-content';
 import { GoASkeletonGridColumnContent } from './lib/skeleton/skeleton-grid-column';
@@ -40,7 +40,6 @@ export {
   GoACard,
   GoACardGroup,
   GoADropdown,
-  GoAOption,
-  GoAOptionGroup,
+  GoADropdownOption,
   GoACheckbox,
 };
