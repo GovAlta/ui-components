@@ -44,7 +44,6 @@
   margin-top: 2rem;
   @media (min-width: 640px) {
     display: flex;
-    justify-content: flex-end;
     align-items: flex-end;
 
     button {
@@ -62,4 +61,12 @@
   button {
     margin: 0;
   }
+}
+
+.goa-form-actions--left {
+  justify-content: flex-start;
+}
+
+.goa-form-actions--right{
+  justify-content: flex-end;
 }

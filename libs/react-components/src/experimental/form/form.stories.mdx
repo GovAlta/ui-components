@@ -102,7 +102,7 @@ export const defaultTemplete = (args) => {
             <label>Label</label>
             <textarea name="label2" onChange={onChange} />
           </GoAFormItem>
-          <GoAFormActions>
+          <GoAFormActions alignment="left">
             <GoAButton buttonType="tertiary" type="reset">
               Cancel
             </GoAButton>
@@ -236,7 +236,7 @@ export const validationTemplete = (args) => {
             <label>Label</label>
             <textarea name="label2" id="label2" onChange={onChange} />
           </GoAFormItem>
-          <GoAFormActions>
+          <GoAFormActions alignment="left">
             <GoAButton buttonType="tertiary" type="reset">
               Cancel
             </GoAButton>
@@ -392,7 +392,7 @@ export const errorHandlingTemplete = (args) => {
             <textarea name="label2" id="label2" onChange={onChange} />
           </GoAFormItem>
           {formErrors.length > 0 && renderErrorList()}
-          <GoAFormActions>
+          <GoAFormActions alignment="left">
             <GoAButton buttonType="tertiary" type="reset">
               Cancel
             </GoAButton>
@@ -442,7 +442,7 @@ Basic
     <label>First Name</label>
     <GoAInput type="text" name="FirstName" />
   </GoAFormItem>
-  <GoAFormActions>
+  <GoAFormActions alignment="left">
     <GoAButton buttonType="tertiary" type="reset"> Cancel </GoAButton>
     <GoAButton buttonType="primary" type="submit" onClick="{onSubmit}">
       Submit
@@ -573,7 +573,7 @@ export const validationTemplete = (args) => {
             <label>Label</label>
             <textarea name="label2" id="label2" onChange={onChange} />
           </GoAFormItem>
-          <GoAFormActions>
+          <GoAFormActions alignment="left">
             <GoAButton buttonType="tertiary" type="reset">
               Cancel
             </GoAButton>
@@ -734,7 +734,7 @@ export const errorHandlingTemplete = (args) => {
             <textarea name="label2" id="label2" onChange={onChange} />
           </GoAFormItem>
           {formErrors.length > 0 && renderErrorList()}
-          <GoAFormActions>
+          <GoAFormActions alignment="left">
             <GoAButton buttonType="tertiary" type="reset">
               Cancel
             </GoAButton>
