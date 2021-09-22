@@ -16,6 +16,7 @@ import { GoASkeletonImageContent } from './lib/skeleton/skeleton-image-content';
 import GoACard from './lib/card/card.component';
 import GoACardGroup from './lib/card-group/card.group.component';
 import GoACheckbox from './lib/checkbox/checkbox';
+import { GoAFormActions, GoAFormItem, GoAForm } from './experimental/form/form.component';
 import GoAHeroBannerContent from './lib/hero-banner/content/hero-banner-content.component';
 import GoAHeroBannerLink from './lib/hero-banner/link/hero-banner-link.component';
 import GoAPageLoader from './lib/page-loader/page-loader';
@@ -42,4 +43,7 @@ export {
   GoADropdown,
   GoADropdownOption,
   GoACheckbox,
+  GoAForm,
+  GoAFormActions,
+  GoAFormItem,
 };
