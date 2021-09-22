@@ -31,13 +31,13 @@ describe('GoA Form', () => {
     render(
       <GoAForm>
         <GoAFormItem />
-        <GoAFormActions>
+        <GoAFormActions alignment="left">
           <GoAButton buttonType="tertiary" type="reset">
             Cancel
         </GoAButton>
           <GoAButton buttonType="primary" type="submit">
             Submit
-              </GoAButton>
+          </GoAButton>
         </GoAFormActions>
       </GoAForm>
     );
