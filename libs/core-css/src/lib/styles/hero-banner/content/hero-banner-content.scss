@@ -2,9 +2,10 @@
 @import '../../variables/typography.scss';
 
 .goa-hero-banner-content {
-  font-size: $p-li-size;
+  font-size: 24px;
   line-height: 32px;
   margin: 0;
+  color: #fff;
 
   @include tablet {
     width: 80%;

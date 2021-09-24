@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import '../../theme.scss';
 import '../../../../core-css/src/lib/styles/notification/notification.scss'
 import '../../../../core-css/src/lib/styles/notification-banner/notification-banner.scss';
 

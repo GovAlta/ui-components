@@ -12,11 +12,13 @@
     @include goa-button-styles();
 
     &.right-arrow::after {
+      color: #fff;
       margin-left: 8px;
       content: '\2192';
     }
 
     &.up-arrow::after {
+      color: #fff;
       margin-left: 8px;
       content: '\2191';
     }
