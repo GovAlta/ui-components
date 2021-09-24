@@ -3,7 +3,6 @@ import logo from '../libs/shared/storybook-common/assets/logo-ds.svg';
 
 export default create({
   base: 'dark',
-  
   // colorPrimary: '#0081ab',
   // colorSecondary: '#005072',
 
@@ -14,7 +13,7 @@ export default create({
   // appBorderRadius: 0,
 
   // // Typography
-  // fontBase: 'acumin-pro-semi-condensed, sans-serif',
+  fontBase: 'acumin-pro-semi-condensed, sans-serif',
   // fontCode: 'monospace',
 
   // // Text colors
