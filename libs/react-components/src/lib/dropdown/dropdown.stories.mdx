@@ -6,11 +6,14 @@ import {
   ArgsTable,
 } from '@storybook/addon-docs/blocks';
 import { GoAIcon, GoAFormItem } from '../../experimental';
-import { GoADropdown, GoADropdownOption, GoADropdownGroup } from './dropdown';
+import { GoADropdown, GoADropdownOption, GoADropdownGroup } from '../..';
 import { GoAButton } from '../..';
 import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { BestPractices, BestPracticeItem } from '@abgov/shared/storybook-common';
+import {
+  BestPractices,
+  BestPracticeItem,
+} from '@abgov/shared/storybook-common';
 
 <Meta
   title="React/Basic Elements/Dropdown"
@@ -23,7 +26,8 @@ import { BestPractices, BestPracticeItem } from '@abgov/shared/storybook-common'
       description: 'Array of the values bound to the component',
     },
     onChange: {
-      description: 'Callback function invoked when an item is selected or unselected.',
+      description:
+        'Callback function invoked when an item is selected or unselected.',
     },
     disabled: {
       description: 'Indicates if the dropdown is disabled.',
@@ -37,6 +41,8 @@ import { BestPractices, BestPracticeItem } from '@abgov/shared/storybook-common'
   }}
 />
 
+// Basic Template
+
 export const Template = (args) => {
   const [selectedValues, setValues] = useState(args.selectedValues);
   function onChange(name, values) {
@@ -45,7 +51,12 @@ export const Template = (args) => {
   return (
     <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
       <div>Selected Values: {`[${selectedValues.join(', ')}]`}</div>
-      <GoADropdown {...args} onChange={onChange} selectedValues={selectedValues}>
+      <GoADropdown
+        {...args}
+        name="basic"
+        onChange={onChange}
+        selectedValues={selectedValues}
+      >
         <label>Some Label</label>
         <GoADropdownOption label="Option 1" value="option1" />
         <GoADropdownOption label="Worst Actor Ever" value="option2">
@@ -72,7 +83,7 @@ export const Template = (args) => {
 <Canvas>
   <Story
     name="Basic"
-    height="500px"
+    height="400px"
     args={{
       selectedValues: ['option1'],
     }}
@@ -81,10 +92,104 @@ export const Template = (args) => {
   </Story>
 </Canvas>
 
+```tsx
+export const Template = (args) => {
+  const [selectedValues, setValues] = useState(args.selectedValues);
+  function onChange(name, values) {
+    setValues(values);
+  }
+  return (
+    <>
+      <GoADropdown
+        {...args}
+        name="basic"
+        onChange={onChange}
+        selectedValues={selectedValues}
+      >
+        <label>Some Label</label>
+        <GoADropdownOption label="Option 1" value="option1" />
+        <GoADropdownOption label="Option 2" value="option2" />
+        <GoADropdownOption label="Option 3" value="option3" />
+        <hr />
+        <GoADropdownOption label="Option 4" value="option4" />
+        <GoADropdownOption label="Option 5" value="option5" />
+        <GoADropdownOption label="Option 6" value="option6" />
+      </GoADropdown>
+    </>
+  );
+};
+```
+
+// Dynamic Template
+
+export const DynamicTemplate = (args) => {
+  const [selectedValues, setValues] = useState([]);
+  function onChange(name, values) {
+    setValues(values);
+  }
+  const data = [
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' },
+    { label: 'Option 4', value: 'option4' },
+  ];
+  return (
+    <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
+      <div>Selected Values: {`[${selectedValues.join(', ')}]`}</div>
+      <GoADropdown
+        {...args}
+        name="favColour"
+        onChange={onChange}
+        selectedValues={selectedValues}
+      >
+        {data.map((item) => (
+          <GoADropdownOption label={item.label} value={item.value} />
+        ))}
+      </GoADropdown>
+    </div>
+  );
+};
+
+<Canvas>
+  <Story name="Dynamic" height="300px">
+    {DynamicTemplate.bind({})}
+  </Story>
+</Canvas>
+
+```tsx
+export const DynamicTemplate = (args) => {
+  const [selectedValues, setValues] = useState([]);
+  function onChange(name, values) {
+    setValues(values);
+  }
+  const data = [
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' },
+    { label: 'Option 4', value: 'option4' },
+  ];
+  return (
+    <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
+      <div>Selected Values: {`[${selectedValues.join(', ')}]`}</div>
+      <GoADropdown
+        {...args}
+        name="favColour"
+        onChange={onChange}
+        selectedValues={selectedValues}
+      >
+        {data.map((item) => (
+          <GoADropdownOption label={item.label} value={item.value} />
+        ))}
+      </GoADropdown>
+    </div>
+  );
+};
+```
+
 export const FormTemplate = (args) => {
   // define the form state
   const [formValues, setFormValues] = useState({
-    favColour: ''
+    favColour: '',
   });
   // single callback function to set the state
   function onChange(name, values) {
@@ -104,7 +209,11 @@ export const FormTemplate = (args) => {
             <GoADropdownOption label="Red" value="red" />
             <GoADropdownOption label="Blue" value="blue" />
             <GoADropdownOption label="Yellow" value="yellow" />
-            <GoADropdownOption disabled={true} label="Purple (disabled)" value="purple" />
+            <GoADropdownOption
+              disabled={true}
+              label="Purple (disabled)"
+              value="purple"
+            />
           </GoADropdown>
         </GoAFormItem>
         <GoAFormActions alignment="left">
@@ -123,27 +232,44 @@ export const FormTemplate = (args) => {
   </Story>
 </Canvas>
 
-## Examples
-
 ```tsx
-export const Template = (args) => {
-  const [selectedValues, setValues] = useState(args.selectedValues);
+export const FormTemplate = (args) => {
+  // define the form state
+  const [formValues, setFormValues] = useState({
+    favColour: '',
+  });
+  // single callback function to set the state
   function onChange(name, values) {
-    setValues(values);
+    setFormValues({ ...formValues, [name]: values });
   }
   return (
-    <>
-      <GoADropdown {...args} onChange={onChange} selectedValues={selectedValues}>
-        <label>Some Label</label>
-        <GoADropdownOption label="Option 1" value="option1" />
-        <GoADropdownOption label="Option 2" value="option2" />
-        <GoADropdownOption label="Option 3" value="option3" />
-        <hr />
-        <GoADropdownOption label="Option 4" value="option4" />
-        <GoADropdownOption label="Option 5" value="option5" />
-        <GoADropdownOption label="Option 6" value="option6" />
-      </GoADropdown>
-    </>
+    <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
+      <GoAForm>
+        <GoAFormItem>
+          <label>Favourite Colour</label>
+          <GoADropdown
+            {...args}
+            name="favColour"
+            onChange={onChange}
+            selectedValues={formValues['favColour']}
+          >
+            <GoADropdownOption label="Red" value="red" />
+            <GoADropdownOption label="Blue" value="blue" />
+            <GoADropdownOption label="Yellow" value="yellow" />
+            <GoADropdownOption
+              disabled={true}
+              label="Purple (disabled)"
+              value="purple"
+            />
+          </GoADropdown>
+        </GoAFormItem>
+        <GoAFormActions alignment="left">
+          <GoAButton onClick={() => action('onClick')(formValues)}>
+            Submit
+          </GoAButton>
+        </GoAFormActions>
+      </GoAForm>
+    </div>
   );
 };
 ```
@@ -155,6 +281,61 @@ export const Template = (args) => {
 
 <Description of={GoADropdownOption} />
 <ArgsTable of={GoADropdownOption} />
+
+## Testing
+
+To perform frontend tests you can use the self-defined `data-testid` attributes to obtain DOM references to attach events onto.
+The `data-testid` attributes of the parent and children are based of the name attribute defined in the `<GoADropdown>` parent component.
+The `data-testid` values are shown below:
+
+**Dropdown (root)**:
+`[name]-dropdown`
+
+**Background**:
+`[name]-dropdown-background`
+
+**DropdownOption**:
+`[name]-dropdown-option--[value]`
+
+
+### Example:
+```tsx
+<GoADropdown name="favColor">
+  <GoADropdownOption label="Red" value="red" />
+  <GoADropdownOption label="Green" value="green" />
+  <GoADropdownOption label="Blue" value="blue" />
+</GoADropdown>
+```
+
+```html
+<div class="goa-dropdown-box">
+  <div
+    data-testid="favColor-dropdown-background"
+    class="goa-dropdown-background"
+  ></div>
+  <div data-testid="favColor-dropdown" class="goa-dropdown-input " tabindex="0">
+    <input readonly="" placeholder="Select..." />
+    <div class="goa-icon" data-testid="icon-chevronDown" style="width: 20px;">
+      <!-- chevron svg...-->
+    </div>
+  </div>
+  <ul class="goa-dropdown-list">
+    <div class="goa-scrollable">
+      <div>
+        <li data-testid="favColor-dropdown-option--red" class="goa-dropdown-option goa-dropdown-option--selected">
+          Red
+        </li>
+        <li data-testid="favColor-dropdown-option--green" class="goa-dropdown-option">
+          Green
+        </li>
+        <li data-testid="favColor-dropdown-option--blue" class="goa-dropdown-option">
+          Blue
+        </li>
+      </div>
+    </div>
+  </ul>
+</div>
+```
 
 <BestPractices>
   <BestPracticeItem description="When dealing with 5 or less options, consider using radio buttons instead of a dropdown list" />

@@ -29,6 +29,7 @@ describe('GoADropdown', () => {
 
     fireEvent.click(queryByTestId('favColor-dropdown'));
 
+    expect(queryByTestId('favColor-dropdown-background')).toBeInTheDocument();
     expect(queryByTestId('favColor-dropdown-option--red')).toBeInTheDocument();
     expect(queryByTestId('favColor-dropdown-option--blue')).toBeInTheDocument();
     expect(queryByTestId('favColor-dropdown-option--yellow')).toBeInTheDocument();
