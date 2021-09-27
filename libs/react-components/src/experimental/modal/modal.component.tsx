@@ -88,7 +88,7 @@ export const GoAModalActions: FC = ({ children }) => {
 
 export const GoAModalContent: FC<TestProps> = ({ children, testId }) => {
   return (
-    <GoAScrollable testId={testId} vertical={true} hPadding={1}>
+    <GoAScrollable testId={testId} vertical={true} hPadding={1.5}>
       {children}
     </GoAScrollable>
   );

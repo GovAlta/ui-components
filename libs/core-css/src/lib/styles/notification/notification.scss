@@ -40,6 +40,7 @@
 
     .close {
       flex: 0 1 auto;
+      color: #fff;
     }
   }
 
@@ -87,7 +88,8 @@
     cursor: pointer;
 
     svg {
-      fill: currentColor;
+      fill: #fff;
+      color: #fff;
     }
   }
 

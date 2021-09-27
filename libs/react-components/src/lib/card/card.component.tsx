@@ -1,5 +1,4 @@
 import React, { FC, ReactNode, useState } from 'react';
-import '../../theme.scss';
 import './card.scss';
 
 interface Props {

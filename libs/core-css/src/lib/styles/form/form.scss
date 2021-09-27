@@ -8,13 +8,17 @@
 .goa-form *:after {
   box-sizing: inherit;
 }
+
 .goa-form-item {
-  margin-bottom: 0.5rem;
+  flex: 1 1 auto; // TODO: determine if this is ok or not
+  margin-bottom: 1rem;
 
   label {
     display: block;
     font-weight: bold;
     color: #333;
+    font-size: 1rem;
+    line-height: calc(var(--fs-base) + 1rem);
   }
 
   input,
@@ -26,27 +30,49 @@
   &.error {
     input,
     textarea {
-      border-color: var(--color-red-600);
+      border-color: var(--color-error);
     }
     .error-msg {
-      color: var(--color-red-600);
+      font-size: var(--fs-sm);
+      line-height: calc(var(--fs-sm) + 1rem);
+      color: var(--color-error);
     }
-  }
-
-  .help-msg {
-    font-size: var(--fs-sm);
-    font-weight: 200;
-    color: var(--color-gray-600);
   }
 }
 
-.goa-form-actions {
-  margin-top: 2rem;
-  @media (min-width: 640px) {
-    display: flex;
-    align-items: flex-end;
+.help-msg {
+  font-size: var(--fs-sm);
+  color: var(--color-gray);
+  line-height: calc(var(--fs-sm) + 1rem);
+}
 
-    button {
+.goa-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+
+  button,
+  .goa-link-button {
+    margin: 0;
+  }
+
+  @media (max-width: 639px) {
+    button,
+    .goa-link-button {
+      width: 100%;
+    }
+
+    button + button,
+    button + .goa-link-button,
+    .goa-link-button + button,
+    .goa-link-button + .goa-link-button {
+      margin-top: 0.5rem;
+    }
+  }
+
+  @media (min-width: 640px) {
+    button,
+    .goa-link-button {
       min-width: 6rem;
     }
 
@@ -57,16 +83,12 @@
       margin-left: 0.5rem;
     }
   }
-
-  button {
-    margin: 0;
-  }
 }
 
 .goa-form-actions--left {
   justify-content: flex-start;
 }
 
-.goa-form-actions--right{
+.goa-form-actions--right {
   justify-content: flex-end;
 }

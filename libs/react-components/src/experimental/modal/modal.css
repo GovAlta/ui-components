@@ -55,7 +55,7 @@
 
 .modal-actions {
   text-align: right;
-  margin: 1rem;
+  margin: 1.5rem;
 }
 
 @media (max-width: 639px) {
@@ -81,7 +81,7 @@
 
 .modal-title {
   font-size: var(--fs-xl);
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   margin-right: 40px; /*  close icon spacing */
 }
 

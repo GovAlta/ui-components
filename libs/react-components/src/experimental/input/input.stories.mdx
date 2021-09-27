@@ -1,0 +1,69 @@
+import { GoAInput, GoAForm, GoAFormItem } from '../index.ts';
+import { useState } from 'react';
+
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Experimental/Components/Input"
+  component={GoAInput}
+/>
+
+# GoAInput
+
+## Overview
+
+export const Template = (args) => {
+  const [value, setValue] = useState('');
+  return (
+    <div style={{ padding: '4px', backgroundColor: '#eee' }}>
+      Entered: {value}
+      <br />
+      <GoAInput {...args} onChange={(name, val) => setValue(val)} />
+    </div>
+  );
+};
+
+export const FormTemplate = (args) => {
+  const [value, setValue] = useState('');
+  return (
+    <div style={{ padding: '4px'}}>
+      { value &&
+        <div>Hello {value}</div>
+      }
+      <GoAForm>
+        <h2>Your information</h2>
+        <GoAFormItem helpText="What's your name?">
+          <label>First Name</label>
+          <GoAInput
+            type="text"
+            placeholder="First Name"
+            name="firstName"
+            value={value}
+            onChange={(name, val) => setValue(val)}
+          />
+        </GoAFormItem>
+      </GoAForm>
+    </div>
+  );
+};
+
+#### Basic
+
+<Canvas>
+  <Story name="Basic">{Template.bind({})}</Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Form">{FormTemplate.bind({})}</Story>
+</Canvas>
+
+## GoAInput Properties
+
+<Description of={GoAInput} />
+<ArgsTable of={GoAInput} />

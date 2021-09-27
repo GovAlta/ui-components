@@ -42,7 +42,7 @@ export const GoADropdown: FC<Props> = (props) => {
           ...child.props,
           onClick: handleSelection,
           selected: props.selectedValues.includes(child.props.value),
-          testId: `${props.name}-dropdown-option--${child.props.value}`
+          _testId: `${props.name}-dropdown-option--${child.props.value}`
         })
       }
       return child;
@@ -64,13 +64,13 @@ export const GoADropdown: FC<Props> = (props) => {
       values = [value];
     }
     props.onChange(props.name, values);
+    toggleMenuVisibility();
   }
 
   /**
    * Controls whether the menu is hidden or not when clicked
-   * @param _e - Mouse event params
    */
-  function handleClick(_e: React.MouseEvent<HTMLDivElement>) {
+  function toggleMenuVisibility() {
     // always show if hidden
     if (!isMenuVisible) {
       setMenuVisibility(true)
@@ -103,12 +103,19 @@ export const GoADropdown: FC<Props> = (props) => {
   }
 
   return (
-    <div tabIndex={0} data-testid={`${props.name}-dropdown`} className={`goa-dropdown-box ${props.disabled && 'goa-dropdown-input--disabled' || ''}`} onClick={handleClick}>
+    <div className="goa-dropdown-box">
       {isMenuVisible &&
         <div data-testid={`${props.name}-dropdown-background`} className="goa-dropdown-background" onClick={() => setMenuVisibility(false)}></div>
       }
-      <div className="goa-dropdown-input">
-        {props.leadingIcon && <GoAIcon size="small" type={props.leadingIcon} />}
+      <div
+        onClick={toggleMenuVisibility}
+        data-testid={`${props.name}-dropdown`}
+        className={`goa-dropdown-input ${props.disabled && 'goa-dropdown-input--disabled' || ''}`} tabIndex={0} >
+        {props.leadingIcon &&
+          <div className="goa-dropdown-leading-icon">
+            <GoAIcon size="small" type={props.leadingIcon} />
+          </div>
+        }
         <input readOnly placeholder="Select..." value={getSelectedLabel()} />
         <GoAIcon type="chevronDown" />
       </div>

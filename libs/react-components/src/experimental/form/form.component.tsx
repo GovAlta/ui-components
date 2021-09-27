@@ -3,10 +3,7 @@ import { GoAFormItem } from './form.item.component';
 import { GoAFormActions } from './form.actions.component';
 import './form.scss';
 
-export const GoAForm: FC = ({
-  children
-}) => {
-
+export const GoAForm: FC = ({ children }) => {
   return (
     <div className="goa-form" >
       {children}

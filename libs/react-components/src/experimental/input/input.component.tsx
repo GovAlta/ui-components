@@ -1,84 +1,38 @@
-import React, { FC, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { GoAIcon, GoAIconType } from '..';
+import { OnChange } from '../../lib/_common/input';
 import './input.scss';
+
+type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
+
 type Props = {
-  validate?: (value: string) => boolean;
-  name?: string;
-  type: string;
-  message?: string;
-  required?: boolean;
-  helpText?: string;
-  multiLine?: boolean;
-  navigator?: boolean;
-  onChange?: (value: string) => void;
+  name: string;
+  value: string;
+  type: InputType;
+  disabled?: boolean;
+  placeholder?: string;
+  leadingIcon?: GoAIconType;
+  onChange: OnChange
 };
 
-export const GoAInput: FC<Props> = ({
-  validate = null,
-  name = '',
-  type = '',
-  message = '',
-  required = false,
-  helpText = '',
-  multiLine = false,
-  navigator = false,
-  onChange,
-}) => {
-  const [valid, setValid] = useState(true);
-  const [value, setValue] = useState('');
-
-  const handleInput = (e) => {
-    const value = e.target.value;
-    setValue(value);
-    if (validate) {
-      setValid(validate(value));
-    }
-    onChange(value);
-  };
-
-  const inputFieldClass = !message
-    ? 'goa-input-field'
-    : !navigator
-      ? 'goa-input-field-error'
-      : 'goa-input-highlight-error';
+export const GoAInput: FC<Props> = ({ name, value, type, disabled, placeholder, leadingIcon, onChange }) => {
   return (
-    <div>
-      {multiLine ? (
-        <textarea
-          placeholder={name}
-          onChange={handleInput}
-          className={inputFieldClass}
-        >
-          {value}
-        </textarea>
-      ) : (
-          <input
-            type={type}
-            required={required}
-            name={name}
-            value={value}
-            onChange={handleInput}
-            className={inputFieldClass}
-            placeholder={name}
-          />
-        )}
-      {message && <p className="goa-input-error-message">{message}</p>}
-
-      {helpText && <p className="goa-input-help-text-message">{helpText}</p>}
+    <div className="goa-input">
+      {leadingIcon &&
+        <div className="goa-input-leading-icon">
+          <GoAIcon type={leadingIcon} />
+        </div>
+      }
+      <input
+        className={leadingIcon ? 'input--leading-icon' : ''}
+        type={type}
+        name={name}
+        value={value}
+        disabled={disabled}
+        placeholder={placeholder}
+        onChange={(e) => onChange(name, e.target.value)}
+      />
     </div>
   );
 };
-
-GoAInput.propTypes = {
-  validate: PropTypes.func,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  message: PropTypes.string,
-  required: PropTypes.bool,
-  helpText: PropTypes.string,
-  multiLine: PropTypes.bool,
-  navigator: PropTypes.bool,
-  onChange: PropTypes.func,
-};
-
 export default GoAInput;

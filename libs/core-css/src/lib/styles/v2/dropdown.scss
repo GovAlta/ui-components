@@ -1,10 +1,10 @@
-@import './reset.scss';
 @import './colors.scss';
 @import './values.scss';
 @import './mixins.scss';
 
 .goa-dropdown-box {
-  --color-selected: var(--color-gray-l5);
+  --color-selected-bg--hover: var(--color-gray-l5);
+  --color-selected-text--hover: var(--color-gray-d1);
 
   position: relative;
 }
@@ -15,30 +15,35 @@
   opacity: 1;
 }
 
-.goa-dropdown-box:not(.goa-dropdown-input--disabled) {
-  @include goa-input-base;
-}
-
 .goa-dropdown-input {
+  @include goa-input-base;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: white;
   cursor: pointer;
-  height: var(--input-line-height);
-  padding: var(--input-padding);
 
-  border: 1px solid var(--color-input-border);
-  border-radius: var(--input-border-radius);
+  input {
+    user-select: none;
+  }
+
+  input, input:hover, input:focus {
+    box-shadow: none;
+  }
 }
 
 .goa-dropdown-input--disabled {
   opacity: 0.5;
   cursor: default;
 
-  &:hover {
+  &:hover,
+  &:focus {
     cursor: default;
+    box-shadow: none;
   }
+}
+
+.goa-dropdown-leading-icon svg {
+  width: 80%;
 }
 
 .goa-dropdown-input input {
@@ -66,7 +71,6 @@
   left: 0;
   right: 0;
   margin: 0;
-  margin-top: 3px; // prevent hiding of input highlight
   padding: 0;
   list-style-type: none;
   background: var(--color-input-background);
@@ -94,8 +98,8 @@
   color: var(--color-input);
 
   &:hover {
-    background: var(--color-selection--hover);
-    color: var(--color-primary-l1);
+    background: var(--color-selected-bg--hover);
+    color: var(--color-primary-d1);
   }
 }
 
@@ -105,7 +109,7 @@
 
   &:hover {
     cursor: default;
-    color: initial;
+    color: var(--color-selected-text--hover);
   }
 }
 
