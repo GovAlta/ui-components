@@ -1,0 +1,77 @@
+import { GoATextArea } from '../index.ts';
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+import { useState } from 'react';
+
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Experimental/Components/TextArea"
+  component={GoATextArea}
+  argTypes={{
+    type: {
+      control: {
+        type: "string",
+      },
+    },
+  }}
+/>
+
+# GoATextArea
+
+## Overview
+
+export const Template = (args) => {
+  return (
+    <div style={{padding: '4px'}}>
+      <GoATextArea {...args} />
+    </div>
+  );
+};
+
+export const FormTemplate = (args) => {
+  const [value, setValue] = useState('');
+  return (
+    <div style={{ padding: '4px'}}>
+      <GoAForm>
+        <h2>Tell me about yourself...</h2>
+        <GoAFormItem helpText="What's your name?">
+          <GoATextArea
+            placeholder="First Name"
+            name="firstName"
+            value={value}
+            onChange={(name, val) => setValue(val)}
+          />
+        </GoAFormItem>
+      </GoAForm>
+      <pre>
+        { value }
+      </pre>
+    </div>
+  );
+};
+
+#### Basic
+
+<Canvas>
+  <Story name="Basic">
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Form">
+    {FormTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## GoATextArea Properties
+
+<Description of={GoATextArea} />
+<ArgsTable of={GoATextArea} />

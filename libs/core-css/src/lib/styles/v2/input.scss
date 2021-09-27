@@ -1,0 +1,34 @@
+@import './values.scss';
+@import './colors.scss';
+@import './mixins.scss';
+
+.goa-input {
+  position: relative;
+}
+
+.goa-input-leading-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0.5rem;
+}
+
+.goa-input input {
+  @include goa-input-base;
+  display: block;
+  width: 100%;
+}
+
+.goa-input input:disabled {
+  @include goa-input-base--disabled;
+}
+
+.goa-input svg {
+  width: 80%;
+}
+
+.goa-input .input--leading-icon {
+  padding-left: 2rem;
+}

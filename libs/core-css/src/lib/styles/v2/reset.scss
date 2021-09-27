@@ -1,7 +1,68 @@
 @import './colors.scss';
 
+body,
+input,
+button,
+textarea {
+  background: #fff;
+  font-family: acumin-pro-semi-condensed, sans-serif;
+  font-weight: 400;
+  font-size: calc((18/16) * 1rem);
+}
+
+body {
+  margin: 0;
+}
+
 *, *:before, *:after {
   box-sizing: border-box;
+  color: #333;
+}
+
+p {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+hr {
+  border-width: 0;
+  border-top: 1px solid #ccc;
+  padding: 0;
+  margin: 0;
+}
+
+em {
+  font-size: var(--fs-xs);
+  color: var(--color-gray-l1);
+}
+
+ul,
+ol {
+  padding-left: 0;
+}
+
+li > ul,
+li > ol,
+li > ul,
+li > ol {
+  padding-left: 0;
+  margin-top: 0;
+}
+
+a {
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+a:hover {
+  color: var(--color-primary--hover);
+}
+
+a:focus {
+  outline-width: thin;
+  outline-style: solid;
+  outline-color: var(--color-primary-d1);
+  outline-offset: 0px;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -15,8 +76,4 @@
 
 ::-ms-input-placeholder { /* Microsoft Edge */
   color: #999;
-}
-
-input {
-  color: var(--color-input);
 }
