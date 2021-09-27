@@ -8,6 +8,7 @@ textarea {
   font-family: acumin-pro-semi-condensed, sans-serif;
   font-weight: 400;
   font-size: calc((18/16) * 1rem);
+  color: #333;
 }
 
 body {
@@ -16,7 +17,6 @@ body {
 
 *, *:before, *:after {
   box-sizing: border-box;
-  color: #333;
 }
 
 p {
