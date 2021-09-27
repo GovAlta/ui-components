@@ -1,6 +1,9 @@
 /**
  * IMPORTANT: Do NOT export experimental components in this file.
  */
+
+import './theme.scss';
+
 import GoACallout from './lib/callout/callout';
 import GoANotification from './lib/notification/notification';
 import GoAButton from './lib/button/button';
@@ -20,8 +23,6 @@ import GoAHeroBannerContent from './lib/hero-banner/content/hero-banner-content.
 import GoAHeroBannerLink from './lib/hero-banner/link/hero-banner-link.component';
 import GoAPageLoader from './lib/page-loader/page-loader';
 import { GoAElementLoader } from './lib/element-loader/element-loader';
-
-import './theme.scss';
 
 export {
   GoAPageLoader,
