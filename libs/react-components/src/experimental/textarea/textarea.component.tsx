@@ -7,8 +7,9 @@ type Props = {
   name: string;
   value: string;
   placeholder?: string;
-  onChange: OnChange
+  onChange: OnChange;
 };
+
 
 export const GoATextArea: FC<Props> = ({ name, value, placeholder, onChange }) => {
   return (
@@ -17,8 +18,8 @@ export const GoATextArea: FC<Props> = ({ name, value, placeholder, onChange }) =
       className="goa-textarea"
       placeholder={placeholder}
       onChange={(e) => onChange(name, e.target.value)}
+      value={value}
     >
-      {value}
     </textarea>
   );
 };

@@ -26,23 +26,31 @@ interface Props {
   /**
    * Callback function containing the newly selected value
    */
-  onChange: (value: string) => void;
+  onChange: (name: string, value: string) => void;
 }
 
 export const GoARadioGroup: FC<Props> = ({
-  onChange,
+  name,
   value,
   children,
   orientation,
+  onChange,
   ...childAttrs
 }) => {
+
+  function onChangeHandler(value: string) {
+    onChange(name, value);
+  }
+
   function getChildren() {
     return Children.map(children, (child: ReactElement) => {
-      const key = `${childAttrs.name}-${child.props.value}`;
+      const key = `${name}-${child.props.value}`;
+      const _name = `${name}-${Date.now()}`;
       return React.cloneElement(child, {
         ...childAttrs,
+        name: _name,
         checked: child.props.value === value,
-        onChange,
+        onChange: onChangeHandler,
         key,
       });
     });

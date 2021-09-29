@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { GoAIcon, GoAIconType } from '..';
+import { GoAIcon, GoAIconType } from '../icons';
 import { OnChange } from '../../lib/_common/input';
 import './input.scss';
 
