@@ -5,6 +5,7 @@
 // generated value for encapsulation.
 :global .goa-badge-icon {
   font-size: 14px;
+  padding: 4px 4px 4px 8px;
 }
 
 .goa-badge {
@@ -18,6 +19,7 @@
 .goa-badge-content {
   font-size: $caption-size;
   font-weight: $caption-font-weight;
+  padding: 4px 8px 4px 4px;
 }
 
 .goa-badge.badge-information {
