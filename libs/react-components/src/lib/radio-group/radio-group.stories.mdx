@@ -24,9 +24,13 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
 export const TemplateBasic = (args) => {
   const [value, setValue] = useState(args.value);
   return (
-    <div style={{padding: "5px"}}>
+    <div style={{ padding: '5px' }}>
       Current Value: {value}
-      <GoARadioGroup {...args} value={value} onChange={setValue}>
+      <GoARadioGroup
+        {...args}
+        value={value}
+        onChange={(name, value) => setValue(value)}
+      >
         <GoARadio value="apple">apple</GoARadio>
         <GoARadio value="orange">orange</GoARadio>
         <GoARadio value="banana">banana</GoARadio>
@@ -45,9 +49,6 @@ export const TemplateBasic = (args) => {
       name: 'fruits',
       disabled: false,
       orientation: 'horizontal',
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
     }}
   >
     {TemplateBasic.bind({})}
@@ -65,9 +66,6 @@ export const TemplateBasic = (args) => {
       value: 'orange',
       disabled: false,
       orientation: 'vertical',
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
     }}
   >
     {TemplateBasic.bind({})}
@@ -84,9 +82,6 @@ export const TemplateBasic = (args) => {
       name: 'error',
       value: 'orange',
       state: 'error',
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
     }}
   >
     {TemplateBasic.bind({})}
@@ -104,9 +99,6 @@ export const TemplateBasic = (args) => {
       disabled: true,
       value: 'orange',
       orientation: 'vertical',
-      onChange: (value) => {
-        action('selection changed')(value);
-      },
     }}
   >
     {TemplateBasic.bind({})}
