@@ -14,7 +14,7 @@
   --color-gray-d3: #333;
 
   --color-orange: #feba35;
-  --color-red: red; // TODO: FIXME
+  --color-red: #ec040b;
   --color-green: hsl(148, 100%, 26%);
 
   --color-primary: #0070c4;
@@ -32,7 +32,7 @@
 
   // inputs
   --color-input-background: var(--color-white);
-  --color-input-border: var(--color-gray-l1);
+  --color-input-border: var(--color-gray-d1);
   --color-input-border--hover: var(--color-primary-d1);
   --color-input: var(--color-gray-d3);
   --color-input--focused: var(--color-orange);
