@@ -20,7 +20,7 @@ interface Props {
   maxHeight?: number;
 }
 
-export const GoADropdown: FC<Props> = (props) => {
+export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
   const [isMenuVisible, _setMenuVisibility] = useState<boolean>(false)
 
   /**
@@ -41,7 +41,7 @@ export const GoADropdown: FC<Props> = (props) => {
         return React.cloneElement(child, {
           ...child.props,
           onClick: handleSelection,
-          selected: props.selectedValues.includes(child.props.value),
+          selected: selectedValues.includes(child.props.value),
           _testId: `${props.name}-dropdown-option--${child.props.value}`
         })
       }
@@ -55,10 +55,10 @@ export const GoADropdown: FC<Props> = (props) => {
   function handleSelection(value: string) {
     let values: string[];
     if (props.multiSelect) {
-      if (props.selectedValues.includes(value)) {
-        values = props.selectedValues.filter(v => v !== value);
+      if (selectedValues.includes(value)) {
+        values = selectedValues.filter(v => v !== value);
       } else {
-        values = [...props.selectedValues, value];
+        values = [...selectedValues, value];
       }
     } else {
       values = [value];
@@ -88,7 +88,7 @@ export const GoADropdown: FC<Props> = (props) => {
     const selectedLabels =
       React.Children
         .map(props.children, (child: ReactElement) => child)
-        .filter(child => props.selectedValues.includes(child.props.value))
+        .filter(child => selectedValues.includes(child.props.value))
         .map(child => child.props.label)
 
     if (props.multiSelect && selectedLabels.length > 1) {
