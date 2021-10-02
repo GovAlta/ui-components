@@ -30,7 +30,7 @@ export class FormValidator {
   }
 }
 
-export const requiredFieldValidator: FormValidatorFn = (value: string): [boolean, string] => [!!value, 'Required'];
+export const requiredFieldValidator: FormValidatorFn = (value: string | string[]): [boolean, string] => [!!value?.length ?? false, 'Required'];
 
 export const emailFormatValidator: FormValidatorFn = (val: string): [boolean, string] => {
   if (!val?.match(emailRegex)) {
