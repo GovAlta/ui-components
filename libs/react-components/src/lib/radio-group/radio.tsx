@@ -5,6 +5,7 @@ import { TestProps } from '../../experimental/common';
 
 interface Props {
   value: string;
+  label?: string;
   name?: string;
   disabled?: boolean;
   checked?: boolean;
@@ -34,7 +35,7 @@ export const GoARadio: FC<Props & TestProps> = (props) => {
         onChange={onRadioChange}
       />
       <div className='goa-radio-icon'></div>
-      <span className="goa-radio-label">{props.children}</span>
+      <span className="goa-radio-label">{props.children || props.label}</span>
     </label>
   );
 };
