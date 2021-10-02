@@ -12,10 +12,15 @@ import {
   emailFormatValidator,
   phoneNumberFormatValidator,
 } from './validators';
-import GoAButton from '../../lib/button/button';
-import GoAInput from '../input/input.component';
-import GoATextArea from '../textarea/textarea.component';
-import GoACallout from '../../lib/callout/callout';
+import {
+  GoADropdown,
+  GoADropdownOption,
+  GoAButton,
+  GoACallout,
+  GoARadioGroup,
+  GoARadio,
+} from '../..';
+import { GoAInput, GoATextArea } from '../';
 import {
   Meta,
   Preview,
@@ -47,6 +52,15 @@ export const defaultTemplete = (args) => {
     validator.add('email', [requiredFieldValidator, emailFormatValidator]);
     validator.add('firstName', [requiredFieldValidator]);
     validator.add('lastName', [requiredFieldValidator]);
+    validator.add('favColors', [requiredFieldValidator]);
+    validator.add('textarea', [requiredFieldValidator]);
+    validator.add('music', [
+      requiredFieldValidator,
+      (value) => [
+        value !== 'country',
+        'Country "music" is not allowed to be your favorite',
+      ],
+    ]);
     const onChange = (name, value) => {
       setFormState({
         ...formState,
@@ -56,7 +70,6 @@ export const defaultTemplete = (args) => {
     const onSubmit = (e) => {
       const errors = validator.validate(formState);
       setErrorState(errors);
-      console.log(errors);
     };
     return (
       <div style={{ padding: '4px' }}>
@@ -98,15 +111,29 @@ export const defaultTemplete = (args) => {
               />
             </GoAFormItem>
           </GoAFormRow>
-          <GoAFormItem helpText="Non-standard Input">
-            <label>Label</label>
-            <GoAInput
-              placeholder="Enter something..."
-              type="text"
-              name="label"
-              value={formState.label}
+          <GoAFormItem error={errorState.favColors}>
+            <label>Favourite Color</label>
+            <GoADropdown
+              name="favColors"
               onChange={onChange}
-            />
+              selectedValues={formState.favColors}
+            >
+              <GoADropdownOption label="Red" value="red" />
+              <GoADropdownOption label="Green" value="green" />
+              <GoADropdownOption label="Blue" value="blue" />
+            </GoADropdown>
+          </GoAFormItem>
+          <GoAFormItem error={errorState.music}>
+            <label>Favourite Music</label>
+            <GoARadioGroup
+              name="music"
+              onChange={onChange}
+              value={formState.music}
+            >
+              <GoARadio label="Blues" value="blues" />
+              <GoARadio label="Rock" value="rock" />
+              <GoARadio label="Country" value="country" />
+            </GoARadioGroup>
           </GoAFormItem>
           <GoAFormItem error={errorState.email} helpText="We won't spam you...">
             <label>Email</label>
@@ -119,14 +146,12 @@ export const defaultTemplete = (args) => {
           </GoAFormItem>
           <GoAFormItem
             helpText="Enter lots of text here"
-            error={errorState.label2}
+            error={errorState.textarea}
           >
-            <label>
-              Label <em>(Optional)</em>
-            </label>
+            <label>Label</label>
             <GoATextArea
-              name="label2"
-              value={formState.label2}
+              name="textarea"
+              value={formState.textarea}
               onChange={onChange}
             />
           </GoAFormItem>
