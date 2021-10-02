@@ -20,7 +20,7 @@ export class FormValidator {
       const err = validators
         .map(validatorFn => {
           const [valid, errMsg] = validatorFn(data[name]);
-          return valid ? null : errMsg;
+          return !valid && errMsg;
         })
         .find(msg => !!msg)
       errors[name] = err;

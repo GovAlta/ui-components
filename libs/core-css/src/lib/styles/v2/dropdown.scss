@@ -28,7 +28,9 @@
     user-select: none;
   }
 
-  input, input:hover, input:focus {
+  input,
+  input:hover,
+  input:focus {
     box-shadow: none;
   }
 }
@@ -128,4 +130,9 @@
 
 .dropdown-group-content .goa-dropdown-option {
   padding-left: 1.5rem;
+}
+
+// Error State
+.goa-state--error .goa-dropdown-input {
+  border: 2px solid var(--color-error);
 }
