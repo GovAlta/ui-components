@@ -1,7 +1,6 @@
 import React, { ChangeEvent, FC } from 'react';
 import classnames from 'classnames';
 import './radio.scss';
-import { ErrorProps } from '../_common/errorState';
 import { TestProps } from '../../experimental/common';
 
 interface Props {
@@ -12,12 +11,11 @@ interface Props {
   onChange?: (value: string) => void;
 }
 
-export const GoARadio: FC<Props & ErrorProps & TestProps> = ({ state = 'valid', ...props }) => {
+export const GoARadio: FC<Props & TestProps> = (props) => {
   function getCss(): string {
     return classnames({
       'goa-radio': true,
       'goa-radio--disabled': props.disabled,
-      'goa-error': state === 'error',
     });
   }
 

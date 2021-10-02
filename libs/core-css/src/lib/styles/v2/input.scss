@@ -34,3 +34,7 @@
 .goa-input .input--leading-icon {
   padding-left: 2rem;
 }
+
+.goa-state--error .goa-input input {
+  border: 2px solid var(--color-error);
+}

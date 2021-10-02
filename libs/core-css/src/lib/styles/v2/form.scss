@@ -49,12 +49,7 @@
     font-size: var(--fs-base);
   }
 
-  &.error {
-    input,
-    textarea {
-      border-color: var(--color-red);
-      border-width: 2px;
-    }
+  &.goa-state--error {
     .error-msg {
       font-size: var(--fs-sm);
       line-height: calc(var(--fs-sm) + 0.5rem);
