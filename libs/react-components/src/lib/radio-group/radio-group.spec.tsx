@@ -28,7 +28,6 @@ describe('RadioGroup', () => {
       <GoARadioGroup
         name="fruits"
         disabled={data.disabled}
-        orientation="vertical"
         value={value}
         onChange={(name, newValue) => onChange && onChange(name, newValue)}
       >

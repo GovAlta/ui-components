@@ -3,13 +3,24 @@ import {
   GoAFormItem,
   GoAFormActions,
   GoAFormContainer,
-} from './form.component';
+  GoAFormRow,
+} from './';
 import { useState, useEffect } from 'react';
-import { isValidEmail } from './validators';
-import GoAButton from '../../lib/button/button';
-import GoAInput from '../input/input.component';
-import GoATextArea from '../textarea/textarea.component';
-import GoACallout from '../../lib/callout/callout';
+import {
+  FormValidator,
+  requiredFieldValidator,
+  emailFormatValidator,
+  phoneNumberFormatValidator,
+} from './validators';
+import {
+  GoADropdown,
+  GoADropdownOption,
+  GoAButton,
+  GoACallout,
+  GoARadioGroup,
+  GoARadio,
+} from '../..';
+import { GoAInput, GoATextArea } from '../';
 import {
   Meta,
   Preview,
@@ -21,10 +32,7 @@ import {
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 
-<Meta
-  title="Experimental/Components/Form"
-  component={GoAForm}
-/>
+<Meta title="Experimental/Components/Form" component={GoAForm} />
 
 # GoAForm
 
@@ -40,42 +48,28 @@ export const defaultTemplete = (args) => {
   const GoAFormWrapper = () => {
     const [formState, setFormState] = useState({});
     const [errorState, setErrorState] = useState({});
-    const isValid = (name, value) => {
-      switch (name) {
-        case 'email':
-          setErrorState({
-            ...errorState,
-            email: !isValidEmail(value) && 'Invalid email',
-          });
-          return false;
-        case 'firstName':
-          setErrorState({
-            ...errorState,
-            firstName: !value && 'First name is required',
-          });
-          return false;
-        case 'label2':
-          setErrorState({
-            ...errorState,
-            label2: !value && 'This is required',
-          });
-          return false;
-        default:
-          return true;
-      }
-    };
+    const validator = new FormValidator();
+    validator.add('email', [requiredFieldValidator, emailFormatValidator]);
+    validator.add('firstName', [requiredFieldValidator]);
+    validator.add('lastName', [requiredFieldValidator]);
+    validator.add('favColors', [requiredFieldValidator]);
+    validator.add('textarea', [requiredFieldValidator]);
+    validator.add('music', [
+      requiredFieldValidator,
+      (value) => [
+        value !== 'country',
+        'Country "music" is not allowed to be your favorite',
+      ],
+    ]);
     const onChange = (name, value) => {
-      // don't set the state if the value is invalid
-      if (!isValid(name, value)) {
-        return;
-      }
       setFormState({
         ...formState,
         [name]: value,
       });
     };
     const onSubmit = (e) => {
-      console.log(formState);
+      const errors = validator.validate(formState);
+      setErrorState(errors);
     };
     return (
       <div style={{ padding: '4px' }}>
@@ -85,14 +79,7 @@ export const defaultTemplete = (args) => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
             ligula a ligulaxcrei kmlobortis lacinia non sed nibh.
           </p>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              columnGap: '1rem',
-              justifContent: 'space-between',
-            }}
-          >
+          <GoAFormRow>
             <GoAFormItem error={errorState.firstName}>
               <label>First Name</label>
               <GoAInput
@@ -113,7 +100,7 @@ export const defaultTemplete = (args) => {
                 onChange={onChange}
               />
             </GoAFormItem>
-            <GoAFormItem>
+            <GoAFormItem error={errorState.lastName}>
               <label>Last Name</label>
               <GoAInput
                 type="text"
@@ -123,19 +110,32 @@ export const defaultTemplete = (args) => {
                 onChange={onChange}
               />
             </GoAFormItem>
-          </div>
-          <GoAFormItem helpText="Non-standard Input">
-            <label>Label</label>
-            <GoAInput
-              placeholder="Enter something..."
-              type="text"
-              name="label"
-              value={formState.label}
+          </GoAFormRow>
+          <GoAFormItem error={errorState.favColors}>
+            <label>Favourite Color</label>
+            <GoADropdown
+              name="favColors"
               onChange={onChange}
-            />
+              selectedValues={formState.favColors}
+            >
+              <GoADropdownOption label="Red" value="red" />
+              <GoADropdownOption label="Green" value="green" />
+              <GoADropdownOption label="Blue" value="blue" />
+            </GoADropdown>
           </GoAFormItem>
-          {errorState.email}
-          <GoAFormItem error={errorState.email}>
+          <GoAFormItem error={errorState.music}>
+            <label>Favourite Music</label>
+            <GoARadioGroup
+              name="music"
+              onChange={onChange}
+              value={formState.music}
+            >
+              <GoARadio label="Blues" value="blues" />
+              <GoARadio label="Rock" value="rock" />
+              <GoARadio label="Country" value="country" />
+            </GoARadioGroup>
+          </GoAFormItem>
+          <GoAFormItem error={errorState.email} helpText="We won't spam you...">
             <label>Email</label>
             <GoAInput
               type="text"
@@ -146,12 +146,12 @@ export const defaultTemplete = (args) => {
           </GoAFormItem>
           <GoAFormItem
             helpText="Enter lots of text here"
-            error={errorState.label2}
+            error={errorState.textarea}
           >
             <label>Label</label>
             <GoATextArea
-              name="label2"
-              value={formState.label2}
+              name="textarea"
+              value={formState.textarea}
               onChange={onChange}
             />
           </GoAFormItem>
@@ -182,318 +182,103 @@ export const defaultTemplete = (args) => {
 
 Basic
 
-```html
-<GoAForm>
-  <label>Form information</label>
-  <GoAFormItem>
-    <label>First Name</label>
-    <GoAInput type="text" name="FirstName" />
-  </GoAFormItem>
-  <GoAFormActions alignment="left">
-    <GoAButton buttonType="tertiary" type="reset"> Cancel </GoAButton>
-    <GoAButton buttonType="primary" type="submit" onClick="{onSubmit}">
-      Submit
-    </GoAButton>
-  </GoAFormActions>
-</GoAForm>
-```
+```tsx
+const [formState, setFormState] = useState({});
+const [errorState, setErrorState] = useState({});
 
-With Validation
+const validator = new FormValidator();
+validator.add('email', [requiredFieldValidator, emailFormatValidator]);
+validator.add('firstName', [requiredFieldValidator]);
+validator.add('lastName', [requiredFieldValidator]);
 
-```html
-export const validationTemplete = (args) => {
-  const initState = {};
-  const GoAFormWrapper = () => {
-    const [formState, setFormState] = useState({});
-    const [formErrors, setFormErrors] = useState([]);
-    const [errors, setErrors] = useState({});
-    const onChange = (e) => {
-      const name = e.target.name;
-      const value = e.target.value;
-      setFormState((state) => {
-        return {
-          ...state,
-          [name]: value,
-        };
-      });
-      setErrors((state) => {
-        return { ...state, [name]: '' };
-      });
-    };
-    const onSubmit = (e) => {
-      e.preventDefault();
-      if (validate()) {
-        console.log(formState);
-      }
-    };
-    const validate = () => {
-      if (!formState['firstName']) {
-        errors['firstName'] = 'Enter your FirstName';
-      }
-      if (!formState['lastName']) {
-        errors['lastName'] = 'Enter your LastName';
-      }
-      if (!formState['label']) {
-        errors['label'] = 'Enter label';
-      }
-      if (!formState['label2']) {
-        errors['label2'] = 'Enter label2';
-      }
-      if (!formState['email']) {
-        errors['email'] = 'Enter email';
-      } else {
-        const valid = emailValidator(formState['email']);
-        if (valid.length > 0) {
-          errors['email'] = 'Enter a valid email';
-        }
-      }
-      const errorNames = [];
-      for (const key in errors) {
-        if (errors[key].length > 0) {
-          errorNames.push(key);
-        }
-      }
-      setFormErrors(errorNames);
-      if (errorNames.length === 0) {
-        return true;
-      }
-      return false;
-    };
-    const mediaMatch = window.matchMedia('(min-width: 640px)');
-    const [matches, setMatches] = useState(mediaMatch.matches);
-    useEffect(() => {
-      const handler = (e) => setMatches(e.matches);
-      mediaMatch.addListener(handler);
-      return () => mediaMatch.removeListener(handler);
-    });
-    return (
-      <div style={{ width: matches ? '40.25rem' : '100%' }}>
-        <GoAForm>
-          <h2>Your information</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
-            ligula a ligulaxcrei kmlobortis lacinia non sed nibh.
-          </p>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: matches ? 'row' : 'column',
-              columnGap: '2rem',
-              justifContent: 'space-between',
-            }}
-          >
-            <GoAFormItem error={errors['firstName']}>
-              <label>First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                onChange={onChange}
-              />
-            </GoAFormItem>
-            <GoAFormItem>
-              <label>Middle Name</label>
-              <input type="text" name="middleName" onChange={onChange} />
-            </GoAFormItem>
-            <GoAFormItem error={errors['lastName']}>
-              <label>Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                onChange={onChange}
-              />
-            </GoAFormItem>
-          </div>
-          <GoAFormItem helpText="Non-standard Input" error={errors['label']}>
-            <label>Label</label>
-            <input type="text" id="label" name="label" onChange={onChange} />
-          </GoAFormItem>
-          <GoAFormItem error={errors['email']}>
-            <label>Email ID</label>
-            <input type="text" name="email" id="email" onChange={onChange} />
-          </GoAFormItem>
-          <GoAFormItem
-            helpText="Overflowing Input Field"
-            error={errors['label2']}
-          >
-            <label>Label</label>
-            <textarea name="label2" id="label2" onChange={onChange} />
-          </GoAFormItem>
-          <GoAFormActions alignment="left">
-            <GoAButton buttonType="tertiary" type="reset">
-              Cancel
-            </GoAButton>
-            <GoAButton buttonType="primary" type="submit" onClick={onSubmit}>
-              Submit
-            </GoAButton>
-          </GoAFormActions>
-        </GoAForm>
-      </div>
-    );
-  };
-  return <GoAFormWrapper />;
+const onChange = (name, value) => {
+  setFormState({
+    ...formState,
+    [name]: value,
+  });
 };
 
-```
-
-# With error Handling
-
-```html
-export const errorHandlingTemplete = (args) => {
-  const initState = {};
-  const GoAFormWrapper = () => {
-    const [formState, setFormState] = useState({});
-    const [formErrors, setFormErrors] = useState([]);
-    const [navigator, setNavigator] = useState('');
-    const [errors, setErrors] = useState({});
-    const onChange = (e) => {
-      const name = e.target.name;
-      const value = e.target.value;
-      setFormState((state) => {
-        return {
-          ...state,
-          [name]: value,
-        };
-      });
-      setErrors((state) => {
-        return { ...state, [name]: '' };
-      });
-    };
-    const onSubmit = (e) => {
-      e.preventDefault();
-      if (validate()) {
-        console.log(formState);
-      }
-    };
-    const validate = () => {
-      if (!formState['firstName']) {
-        errors['firstName'] = 'Enter your FirstName';
-      }
-      if (!formState['lastName']) {
-        errors['lastName'] = 'Enter your LastName';
-      }
-      if (!formState['label']) {
-        errors['label'] = 'Enter label';
-      }
-      if (!formState['label2']) {
-        errors['label2'] = 'Enter label2';
-      }
-      if (!formState['email']) {
-        errors['email'] = 'Enter email';
-      } else {
-        const valid = emailValidator(formState['email']);
-        if (valid.length > 0) {
-          errors['email'] = 'Enter a valid email';
-        }
-      }
-      const errorNames = [];
-      for (const key in errors) {
-        if (errors[key].length > 0) {
-          errorNames.push(key);
-        }
-      }
-      setFormErrors(errorNames);
-      if (errorNames.length === 0) {
-        return true;
-      }
-      return false;
-    };
-    const addNavigator = (error) => {
-      setNavigator(error);
-    };
-    const renderErrorList = () => {
-      return (
-        <GoACallout type="emergency" title="Please fix following errors:">
-          <ul>
-            {formErrors.map((error) => {
-              return (
-                <li>
-                  <a href={`#${error}`} onClick={() => addNavigator(error)}>
-                    {error}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </GoACallout>
-      );
-    };
-    const mediaMatch = window.matchMedia('(min-width: 640px)');
-    const [matches, setMatches] = useState(mediaMatch.matches);
-    useEffect(() => {
-      const handler = (e) => setMatches(e.matches);
-      mediaMatch.addListener(handler);
-      return () => mediaMatch.removeListener(handler);
-    });
-    return (
-      <div style={{ width: matches ? '40.25rem' : '100%' }}>
-        <GoAForm>
-          <h2>Your information</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
-            ligula a ligulaxcrei kmlobortis lacinia non sed nibh.
-          </p>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: matches ? 'row' : 'column',
-              columnGap: '2rem',
-              justifContent: 'space-between',
-            }}
-          >
-            <GoAFormItem error={errors['firstName']}>
-              <label>First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                onChange={onChange}
-              />
-            </GoAFormItem>
-            <GoAFormItem>
-              <label>Middle Name</label>
-              <input type="text" name="middleName" onChange={onChange} />
-            </GoAFormItem>
-            <GoAFormItem error={errors['lastName']}>
-              <label>Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                onChange={onChange}
-              />
-            </GoAFormItem>
-          </div>
-          <GoAFormItem helpText="Non-standard Input" error={errors['label']}>
-            <label>Label</label>
-            <input type="text" id="label" name="label" onChange={onChange} />
-          </GoAFormItem>
-          <GoAFormItem error={errors['email']}>
-            <label>Email ID</label>
-            <input type="text" name="email" id="email" onChange={onChange} />
-          </GoAFormItem>
-          <GoAFormItem
-            helpText="Overflowing Input Field"
-            error={errors['label2']}
-          >
-            <label>Label</label>
-            <textarea name="label2" id="label2" onChange={onChange} />
-          </GoAFormItem>
-          {formErrors.length > 0 && renderErrorList()}
-          <GoAFormActions alignment="left">
-            <GoAButton buttonType="tertiary" type="reset">
-              Cancel
-            </GoAButton>
-            <GoAButton buttonType="primary" type="submit" onClick={onSubmit}>
-              Submit
-            </GoAButton>
-          </GoAFormActions>
-        </GoAForm>
-      </div>
-    );
-  };
-  return <GoAFormWrapper />;
+const onSubmit = (e) => {
+  const errors = validator.validate(formState);
+  setErrorState(errors);
 };
 
+return (
+  <div style={{ padding: '4px' }}>
+    <GoAForm>
+      <h2>Your information</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ligula a
+        ligulaxcrei kmlobortis lacinia non sed nibh.
+      </p>
+      <GoAFormRow>
+        <GoAFormItem error={errorState.firstName}>
+          <label>First Name</label>
+          <GoAInput
+            type="text"
+            placeholder="First Name"
+            name="firstName"
+            value={formState.firstName}
+            onChange={onChange}
+          />
+        </GoAFormItem>
+        <GoAFormItem>
+          <label>Middle Name</label>
+          <GoAInput
+            type="text"
+            placeholder="Middle Name"
+            name="middleName"
+            value={formState.middleName}
+            onChange={onChange}
+          />
+        </GoAFormItem>
+        <GoAFormItem error={errorState.lastName}>
+          <label>Last Name</label>
+          <GoAInput
+            type="text"
+            placeholder="Last Name"
+            name="lastName"
+            value={formState.lastName}
+            onChange={onChange}
+          />
+        </GoAFormItem>
+      </GoAFormRow>
+      <GoAFormItem helpText="Non-standard Input">
+        <label>Label</label>
+        <GoAInput
+          placeholder="Enter something..."
+          type="text"
+          name="label"
+          value={formState.label}
+          onChange={onChange}
+        />
+      </GoAFormItem>
+      <GoAFormItem error={errorState.email}>
+        <label>Email</label>
+        <GoAInput
+          type="text"
+          name="email"
+          value={formState.email}
+          onChange={onChange}
+        />
+      </GoAFormItem>
+      <GoAFormItem helpText="Enter lots of text here" error={errorState.label2}>
+        <label>Label</label>
+        <GoATextArea
+          name="label2"
+          value={formState.label2}
+          onChange={onChange}
+        />
+      </GoAFormItem>
+      <GoAFormActions alignment="left">
+        <GoAButton buttonType="tertiary" type="reset">
+          Cancel
+        </GoAButton>
+        <GoAButton buttonType="primary" type="submit" onClick={onSubmit}>
+          Submit
+        </GoAButton>
+      </GoAFormActions>
+    </GoAForm>
+  </div>
+);
 ```

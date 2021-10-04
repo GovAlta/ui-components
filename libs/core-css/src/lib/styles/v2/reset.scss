@@ -1,4 +1,5 @@
 @import './colors.scss';
+@import './values.scss';
 
 body,
 input,
@@ -7,7 +8,7 @@ textarea {
   background: #fff;
   font-family: acumin-pro-semi-condensed, sans-serif;
   font-weight: 400;
-  font-size: calc((18/16) * 1rem);
+  font-size: var(--fs-base);
   color: #333;
 }
 
@@ -15,7 +16,9 @@ body {
   margin: 0;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
@@ -65,15 +68,18 @@ a:focus {
   outline-offset: 0px;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #999;
   opacity: 1; /* Firefox */
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
   color: #999;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
+::-ms-input-placeholder {
+  /* Microsoft Edge */
   color: #999;
 }

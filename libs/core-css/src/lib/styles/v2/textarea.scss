@@ -11,3 +11,9 @@
 .goa-textarea:disabled {
   @include goa-input-base--disabled;
 }
+
+// Error State
+.goa-state--error textarea,
+.goa-state--error textarea:hover {
+  border: 2px solid var(--color-red);
+}

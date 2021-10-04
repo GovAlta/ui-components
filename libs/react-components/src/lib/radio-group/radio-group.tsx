@@ -21,7 +21,7 @@ interface Props {
   /**
    * Orientation of the radio buttons
    */
-  orientation: 'horizontal' | 'vertical';
+  orientation?: 'horizontal' | 'vertical';
 
   /**
    * Callback function containing the newly selected value
@@ -33,7 +33,7 @@ export const GoARadioGroup: FC<Props> = ({
   name,
   value,
   children,
-  orientation,
+  orientation = 'vertical',
   onChange,
   ...childAttrs
 }) => {
