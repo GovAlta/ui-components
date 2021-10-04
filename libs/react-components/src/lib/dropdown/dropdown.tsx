@@ -14,10 +14,11 @@ interface Props {
   onChange: (name: string, values: string[]) => void;
 
   // optional
-  leadingIcon?: GoAIconType,
-  multiSelect?: boolean;
   disabled?: boolean;
+  leadingIcon?: GoAIconType,
   maxHeight?: number;
+  multiSelect?: boolean;
+  placeholder?: string;
 }
 
 export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
@@ -116,7 +117,7 @@ export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
             <GoAIcon size="small" type={props.leadingIcon} />
           </div>
         }
-        <input readOnly placeholder="Select..." value={getSelectedLabel()} />
+        <input readOnly placeholder={props.placeholder} value={getSelectedLabel()} />
         <GoAIcon type="chevronDown" />
       </div>
       {isMenuVisible &&

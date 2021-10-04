@@ -1,7 +1,6 @@
-import { GoATextArea } from '../index.ts';
-import { action } from '@storybook/addon-actions';
-import { DoDont } from '@abgov/shared/storybook-common';
+import { GoATextArea, GoAForm, GoAFormItem } from '../index.ts';
 import { useState } from 'react';
+import { Do, Dont } from '@abgov/shared/storybook-common';
 
 import {
   Meta,
@@ -17,7 +16,7 @@ import {
   argTypes={{
     type: {
       control: {
-        type: "string",
+        type: 'string',
       },
     },
   }}
@@ -27,9 +26,13 @@ import {
 
 ## Overview
 
+Provides the html textarea element with the GoA theme and custom bindings.
+
+## Examples
+
 export const Template = (args) => {
   return (
-    <div style={{padding: '4px'}}>
+    <div style={{ padding: '4px' }}>
       <GoATextArea {...args} />
     </div>
   );
@@ -38,40 +41,77 @@ export const Template = (args) => {
 export const FormTemplate = (args) => {
   const [value, setValue] = useState('');
   return (
-    <div style={{ padding: '4px'}}>
+    <div style={{ padding: '4px' }}>
       <GoAForm>
-        <h2>Tell me about yourself...</h2>
-        <GoAFormItem helpText="What's your name?">
+        <GoAFormItem helpText="Tell me about yourself...">
+          <label htmlFor="aboutme">About me</label>
           <GoATextArea
-            placeholder="First Name"
-            name="firstName"
+            id="aboutme"
+            name="aboutme"
             value={value}
             onChange={(name, val) => setValue(val)}
           />
         </GoAFormItem>
       </GoAForm>
-      <pre>
-        { value }
-      </pre>
     </div>
   );
 };
 
 #### Basic
 
-<Canvas>
-  <Story name="Basic">
-    {Template.bind({})}
-  </Story>
-</Canvas>
+```ts
+interface Props {
+  // required
+  name: string;
+  value: string;
+  onChange: OnChange;
+
+  // optional
+  id?: string;
+  placeholder?: string;
+}
+```
 
 <Canvas>
-  <Story name="Form">
-    {FormTemplate.bind({})}
-  </Story>
+  <Story name="Basic">{Template.bind({})}</Story>
 </Canvas>
+
+```tsx
+<GoATextArea {...args} />
+```
+
+<Canvas>
+  <Story name="Form">{FormTemplate.bind({})}</Story>
+</Canvas>
+
+```tsx
+export const ApplicationForm: FC = () => {
+  const [value, setValue] = useState('');
+  return (
+    <>
+      <GoAForm>
+        <GoAFormItem helpText="Tell me about yourself...">
+          <label htmlFor="aboutme">About me</label>
+          <GoATextArea
+            id="aboutme"
+            name="aboutme"
+            value={value}
+            onChange={(name, val) => setValue(val)}
+          />
+        </GoAFormItem>
+      </GoAForm>
+    </>
+  );
+};
+```
 
 ## GoATextArea Properties
 
 <Description of={GoATextArea} />
 <ArgsTable of={GoATextArea} />
+
+<Dont description="Use placeholder text in text fields" />
+<Dont description="Extend Text Fields longer than 45-75 characters." />
+<Dont description="Use a Text Area which is only one line high." />
+<Do description="Use labels and helper text to communicate how a field should be filled out." />
+<Do description="Make empty Text Areas as tall as the content they are expected to contain." />
