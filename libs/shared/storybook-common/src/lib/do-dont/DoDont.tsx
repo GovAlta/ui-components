@@ -14,3 +14,15 @@ export const DoDont = ({ dos, donts }) => {
     </div>
   );
 };
+
+export const Do = ({ description }) => {
+  return (
+    <Callout positive={true} content={description} />
+  );
+};
+
+export const Dont = ({ description }) => {
+  return (
+    <Callout positive={false} content={description} />
+  );
+};
