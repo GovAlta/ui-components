@@ -23,10 +23,10 @@ describe('Modal Tests', () => {
           <GoAModalTitle testId="modal-title">The Title</GoAModalTitle>
           <GoAModalContent testId="modal-content">The content</GoAModalContent>
           <GoAModalActions>
-            <GoAButton buttonType="tertiary" type="button" onClick={() => setIsOpen(false)}>
+            <GoAButton buttonType="tertiary" onClick={() => setIsOpen(false)}>
               Cancel
             </GoAButton>
-            <GoAButton buttonType="primary" type="submit">
+            <GoAButton buttonType="primary">
               Save
             </GoAButton>
           </GoAModalActions>
