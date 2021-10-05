@@ -63,7 +63,7 @@ const Icons: Record<GoAIconType, JSX.Element> = {
 }
 
 export type IconSize = 'small' | 'medium' | 'large'
-export type IconVariant = 'simple' | 'goa';
+export type IconVariant = 'round' | 'goa';
 
 
 interface Props extends TestProps {
