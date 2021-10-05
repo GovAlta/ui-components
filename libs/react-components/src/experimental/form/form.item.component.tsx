@@ -6,12 +6,12 @@ interface GoAFormItemProps {
 };
 
 export const GoAFormItem: FC<GoAFormItemProps> = ({ children, helpText, error }) => {
-  const className = error ? "goa-form-item error" : "goa-form-item";
+  const className = error ? "goa-form-item goa-state--error" : "goa-form-item";
   return (
     <div className={className}>
       {children}
-      {<div className="error-msg">{error}</div>}
-      {(helpText && !error) && <div id="helpText" className="help-msg">{helpText}</div>}
+      {error && <div className="error-msg">{error}</div>}
+      {helpText && <div id="helpText" className="help-msg">{helpText}</div>}
     </div>
   );
 };

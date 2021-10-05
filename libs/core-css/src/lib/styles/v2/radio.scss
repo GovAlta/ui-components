@@ -14,7 +14,7 @@
 
 /* Radio */
 
-.goa-radio {
+label.goa-radio {
   --goa-border-color: var(--color-input-border);
   --goa-border-color--checked: var(--color-primary);
   --goa-radio-color--error: var(--color-error);
@@ -25,7 +25,7 @@
   --goa-radio-border-width--checked: 7px;
 
   box-sizing: border-box;
-  display: flex;
+  display: flex !important;
   align-items: center;
   min-height: 3rem;
 }
@@ -46,6 +46,7 @@
 
 .goa-radio-label {
   padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+  font-weight: var(--fw-regular);
 }
 
 .goa-radio-icon {
@@ -88,10 +89,9 @@ input[type='radio']:disabled:checked ~ .goa-radio-icon {
   opacity: 0.3;
 }
 /* Error */
-.goa-error input[type='radio']:checked ~ .goa-radio-icon {
-  border: var(--goa-radio-border-width--checked) solid
-    var(--goa-radio-color--error);
+.goa-state--error input[type='radio']:checked ~ .goa-radio-icon {
+  border: 7px solid var(--goa-radio-color--error);
 }
-.goa-error input[type='radio']:not(:checked) ~ .goa-radio-icon {
-  border: var(--goa-radio-border-width) solid var(--goa-radio-color--error);
+.goa-state--error input[type='radio']:not(:checked) ~ .goa-radio-icon {
+  border: 2px solid var(--goa-radio-color--error);
 }

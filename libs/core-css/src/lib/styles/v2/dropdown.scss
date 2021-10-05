@@ -23,10 +23,14 @@
   cursor: pointer;
 
   input {
+    line-height: 1.5rem;
+    padding: 0;
     user-select: none;
   }
 
-  input, input:hover, input:focus {
+  input,
+  input:hover,
+  input:focus {
     box-shadow: none;
   }
 }
@@ -77,6 +81,7 @@
   border-bottom-left-radius: var(--input-border-radius);
   border-bottom-right-radius: var(--input-border-radius);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 99;
 }
 
 .goa-dropdown-list hr {
@@ -125,4 +130,9 @@
 
 .dropdown-group-content .goa-dropdown-option {
   padding-left: 1.5rem;
+}
+
+// Error State
+.goa-state--error .goa-dropdown-input {
+  border: 2px solid var(--color-error);
 }

@@ -28,9 +28,8 @@ describe('RadioGroup', () => {
       <GoARadioGroup
         name="fruits"
         disabled={data.disabled}
-        orientation="vertical"
         value={value}
-        onChange={(newValue) => onChange && onChange(newValue)}
+        onChange={(name, newValue) => onChange && onChange(name, newValue)}
       >
         {data.radios.map((radio) => (
           <GoARadio key={radio.value} checked={data.value === radio.value} value={radio.value}>
@@ -73,7 +72,7 @@ describe('RadioGroup', () => {
   describe('Selection Change Tests', () => {
     it('change event should work', async () => {
       let newValue
-      render(Template({ ...baseMockData, value: 'oranges' }, (_newValue) => {
+      render(Template({ ...baseMockData, value: 'oranges' }, (name, _newValue) => {
         newValue = _newValue;
       }));
 

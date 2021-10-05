@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 import './microsite-logo.scss';
 
@@ -8,7 +8,7 @@ export interface MicrositeLogoProps {
   serviceHome: string
 }
 
-export const MicrositeLogo = (props: MicrositeLogoProps) => {
+export const GoaMicrositeLogo: FunctionComponent<MicrositeLogoProps> = (props) => {
   return (
     <a href={props.serviceHome} aria-label={props.serviceHome} className="microsite-link">
       <span className="image-desktop-tablet"></span>
@@ -20,4 +20,4 @@ export const MicrositeLogo = (props: MicrositeLogoProps) => {
   );
 };
 
-export default MicrositeLogo;
+export default GoaMicrositeLogo;

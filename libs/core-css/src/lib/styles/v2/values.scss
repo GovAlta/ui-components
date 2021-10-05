@@ -1,12 +1,12 @@
 :root {
   /* font-size */
   --fs-xs: 0.75rem;
-  --fs-sm: 0.875rem;
-  --fs-base: 1.125rem; /* base */
-  --fs-lg: 1.25rem; /* h4 */
-  --fs-xl: 1.5rem; /* h3 */
-  --fs-2xl: 2.25rem; /* h2 */
-  --fs-3xl: 3rem; /* h1 */
+  --fs-sm: 0.875rem; // 14px
+  --fs-base: 1.125rem; // 18px
+  --fs-lg: 1.25rem; // 20px
+  --fs-xl: 1.5rem; // 24px
+  --fs-2xl: 2.25rem; // 36px
+  --fs-3xl: 3rem; // 48px
 
   /* font-weight */
   --fw-thin: 100;
@@ -18,5 +18,5 @@
 
   --input-padding: 0.5rem;
   --input-border-radius: 0.25rem;
-  --input-font-size: calc(18px / 16)rem;
+  --input-font-size: var(--fs-base);
 }
