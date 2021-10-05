@@ -121,7 +121,7 @@ const Container: FC<ContainerProps> = ({ children, onClick }) => {
     <div className="modal">
       {onClick &&
         <div className="modal-close">
-          <GoAIconButton type='close' variant="simple" onClick={onClick} />
+          <GoAIconButton type='close' onClick={onClick} />
         </div>
       }
       <div className="modal-container">{children}</div>
