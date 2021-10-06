@@ -1,0 +1,119 @@
+import { GoANumberInputComponent } from './number-input.component';
+import { GoAButtonComponent } from '../button/button.component';
+import {
+  Meta,
+  Canvas,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import { moduleMetadata } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
+
+<Meta
+  title="Angular/Basic Elements/Number Input"
+  component={GoANumberInputComponent}
+  decorators={[
+    moduleMetadata({
+      declarations: [GoANumberInputComponent, GoAButtonComponent],
+    }),
+  ]}
+  argTypes={{
+    value: {
+      control: 'number',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: 0 },
+        type: { summary: 'number' },
+      },
+    },
+    name: {
+      control: 'text',
+    },
+    disabled: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
+    min: {
+      control: 'number',
+    },
+    max: {
+      control: 'number',
+    },
+    step: {
+      control: 'number',
+    },
+  }}
+/>
+
+export const Template = (args) => {
+  args.valueChanged = (value) => {
+    action('value was changed')(value);
+  };
+  return {
+    template: `<goa-number-input [name]="name" [disabled]="disabled" [min]="min" [value]="value" [max]="max" [step]="step" (valueChanged)="valueChanged($event)" ></goa-number-input>`,
+    props: args,
+  };
+};
+
+# Number input
+
+The Number Input component aims to implement the 'Number Input' specifications on the Alberta Design System.
+
+**Contributors:** Colter McQuay
+
+**TODOs:**
+
+- [ ] Fix accessibility issues
+- [ ] Write component tests
+- [ ] Design in design system XD and referenced by Story.
+- [ ] Component available in all frameworks:
+  - [ ] Angular
+  - [ ] React
+  - [ ] Vue
+
+## Examples
+
+#### Basic
+
+<Story name="Basic">{Template.bind({})}</Story>
+
+#### Min and Max
+
+<Story
+  name="With min and max"
+  args={{
+    value: 0,
+    min: 0,
+    max: 5,
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+#### Custom Step
+
+<Story
+  name="Custom Step"
+  args={{
+    value: 0,
+    step: 3,
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+#### Disabled
+
+<Story
+  name="Disabled"
+  args={{
+    disabled: true,
+  }}
+>
+  {Template.bind({})}
+</Story>
