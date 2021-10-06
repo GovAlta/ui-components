@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'goa-number-input',
@@ -6,42 +6,35 @@ import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef }
   styleUrls: ['./number-input.component.scss'],
 })
 export class GoANumberInputComponent {
-  private _value: number = 0;
+  private _value = 0;
   private _min?: number;
   private _max?: number;
 
   @ViewChild('input')
   private inputElement: ElementRef<HTMLInputElement>;
 
-  private get input() {
-    return this.inputElement.nativeElement;
-  }
-
-  private clampValue(val: number) {
-    if (this.max !== undefined) {
-      val = Math.min(this.max, val)
-    }
-    if (this.min !== undefined) {
-      val = Math.max(val, this.min);
-    }
-    return val;
-  }
-
-  updateFromInput() {
-    const inputVal = this.input.valueAsNumber;
-    this.value = inputVal;
-
-    // if the value has been clamped then update the input
-    if (inputVal !== this.value) {
-      this.input.valueAsNumber = this.value;
-    }
-  }
-
   @Input()
   name?: string;
 
   @Input()
   disabled?: boolean;
+
+  /**
+   * Sets the step value that is used when incrementing / decrementing
+   *
+   * @memberof GoANumberInputComponent
+  */
+  @Input()
+  step = 1;
+
+  /**
+   * An event that fires whenever the value is changed
+   *
+   * @type {EventEmitter<number>}
+   * @memberof GoANumberInputComponent
+  */
+  @Output()
+  valueChanged: EventEmitter<number> = new EventEmitter();
 
   /**
    * The value of the NumberInput
@@ -61,11 +54,6 @@ export class GoANumberInputComponent {
     return this._value;
   }
 
-  get min() {
-    return this._min
-  };
-
-
   /**
    * Sets the minimum value that the number input can take
    *
@@ -74,12 +62,13 @@ export class GoANumberInputComponent {
   @Input()
   set min(min: number) {
     this._min = min;
-    this.value = this.value;
+    this.value = this._value;
   }
 
-  get max() {
-    return this._max
-  };
+  get min() {
+    return this._min
+  }
+
 
   /**
    * Sets the maximum value that the number input can take
@@ -89,25 +78,13 @@ export class GoANumberInputComponent {
   @Input()
   set max(max: number) {
     this._max = max;
-    this.value = this.value;
+    this.value = this._value;
   }
 
-  /**
-   * Sets the step value that is used when incrementing / decrementing
-   *
-   * @memberof GoANumberInputComponent
-   */
-  @Input()
-  step: number = 1;
+  get max() {
+    return this._max
+  }
 
-  /**
-   * An event that fires whenever the value is changed
-   *
-   * @type {EventEmitter<number>}
-   * @memberof GoANumberInputComponent
-   */
-  @Output()
-  valueChanged: EventEmitter<number> = new EventEmitter();
 
   /**
    * Increment the number input
@@ -128,4 +105,29 @@ export class GoANumberInputComponent {
     this.input.stepDown();
     this.updateFromInput();
   }
+
+  updateFromInput() {
+    const inputVal = this.input.valueAsNumber;
+    this.value = inputVal;
+
+    // if the value has been clamped then update the input
+    if (inputVal !== this.value) {
+      this.input.valueAsNumber = this.value;
+    }
+  }
+
+  private get input() {
+    return this.inputElement.nativeElement;
+  }
+
+  private clampValue(val: number) {
+    if (this.max !== undefined) {
+      val = Math.min(this.max, val)
+    }
+    if (this.min !== undefined) {
+      val = Math.max(val, this.min);
+    }
+    return val;
+  }
+
 }
