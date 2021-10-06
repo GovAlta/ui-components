@@ -4,7 +4,7 @@ import { GoAIconButton } from '../icons';
 import { TestProps } from '../common';
 import { GoATransitionSequence } from '../transitions/transitionSequence';
 
-import './modal.css';
+import './modal.scss';
 
 /**
  * Modal - Main Component

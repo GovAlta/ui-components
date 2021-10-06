@@ -1,7 +1,7 @@
 import React from 'react'
 import { TestProps } from '../common'
 import { GoAIcon, IconSize, GoAIconType, IconVariant } from './icon.component';
-import './icons.css'
+import './icons.scss'
 
 interface Props extends TestProps {
   type: GoAIconType,

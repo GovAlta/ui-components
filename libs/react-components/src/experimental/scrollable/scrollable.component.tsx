@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC } from 'react';
 import { TestProps } from '../common';
-import './scrollable.css';
+import './scrollable.scss';
 
 interface Props {
   vertical?: boolean;

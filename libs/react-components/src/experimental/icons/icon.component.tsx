@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react'
 import { TestProps } from '../common'
-import './icons.css'
+import './icons.scss'
 
 export type GoAIconType
   = 'close'
