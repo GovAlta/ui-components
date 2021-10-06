@@ -12,7 +12,12 @@
       display: flex;
       flex: 1 1 auto;
 
-      margin: 0 72px;
+      @media (min-width: 768px) {
+        margin: 0 72px;
+      }
+
+      margin: 0 24px;
+
       max-width: 1200px;
 
       $close-width: 28px;
@@ -28,7 +33,7 @@
       .close {
         margin-left: auto;
         width: $close-width;
-
+        text-align: right;
         color: $goa-blue;
         font-weight: bold;
 
