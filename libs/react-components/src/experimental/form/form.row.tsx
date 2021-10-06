@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react'
+import React, { FC } from 'react'
 
 export const GoAFormRow: FC = ({ children }) => {
   return (
