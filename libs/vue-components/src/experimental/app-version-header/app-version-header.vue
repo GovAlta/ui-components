@@ -2,13 +2,17 @@
   <div v-if="!isProdEnvironment && !isClosed" class="goa-app-version-header">
     <span class="content-wrapper" data-testid="content-wrapper">
       <span class="environment-and-version">
-        {{ environment }} {{ version }}</span
-      >
+        {{ environment }} {{ version }}
+      </span>
       <span class="close" @click="onCloseClick">X</span>
     </span>
   </div>
 </template>
-<script lang="typescript">
+<script lang="ts">
+interface Data {
+  isClosed: boolean;
+}
+
 export default {
   name: 'app-version-header',
   props: {
@@ -34,13 +38,13 @@ export default {
       required: true,
     },
   },
-  data() {
+  data(): Data {
     return {
       isClosed: false,
     };
   },
   methods: {
-    onCloseClick() {
+    onCloseClick(): void {
       this.isClosed = true;
     },
   },
