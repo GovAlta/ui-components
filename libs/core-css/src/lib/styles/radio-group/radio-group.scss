@@ -3,13 +3,23 @@
 @mixin goa-radio-group-class {
     .goa-radio-group {
       margin-top: 28px;
-
       &.goa-radio-group-disabled {
 
         &.goa-radios {
           opacity: 30%;
           cursor: default;
+
         }
+      }
+
+      &--horizontal {
+        display: flex;
+        flex-direction: row;
+      }
+
+      &--vertical {
+        display: inline-flex;
+        flex-direction: column;
       }
 
       .radio-group-title {
@@ -38,5 +48,4 @@
         margin-bottom: 20px;
       }
     }
-
 }

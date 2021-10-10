@@ -58,6 +58,7 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
         disabled: false,
         labelPosition: 'after',
         required: false,
+        orientation: 'horizontal',
         requiredErrorMessage: 'Please select a fruit',
       }}
   >
@@ -78,6 +79,7 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
                     [required]="required"
                     [requiredErrorMessage]="requiredErrorMessage"
                     (selectionChange)="selectionChange($event)"
+                    [orientation]="orientation"
                   >
                     <goa-radio [value]="'apple'">apple</goa-radio>
                     <goa-radio [value]="'orange'">orange</goa-radio>
@@ -131,6 +133,7 @@ All Properties
     [value]="selectedRadio.id"
     [(ngModel)]="selectedRadio"
     (selectionChange)="selectionChange($event)"
+    [orientation]="orientation"
 >
     <goa-radio *ngFor="let fruit of fruits" [value]="fruit.id">{{fruit.name}}</goa-radio>
 </goa-radio-group>

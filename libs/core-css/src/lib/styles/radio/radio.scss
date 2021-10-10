@@ -84,7 +84,7 @@ $goa-radio-size: 24px;
 
     // for some reason a comma-separated list inside :not() is causing issues with storybook
     &:hover:not(.goa-radio-selected) {
-      background-color: $goa-white-two;
+      box-shadow: 0 0 0 3px $primary-focused;
     }
 
     &:focus-within {

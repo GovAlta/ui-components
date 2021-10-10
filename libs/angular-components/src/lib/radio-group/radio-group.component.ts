@@ -186,6 +186,11 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
     this._updateRadioButtonLabelPosition();
   }
 
+  /**
+   * Orientation of the radio buttons.
+   */
+  @Input() orientation: 'horizontal' | 'vertical' = 'vertical';
+
    /**
    * Event emitted containing the source radiobutton, and whether or not it is checked.
    */
@@ -287,7 +292,7 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
   private _updateRadioButtonDisabled(): void {
     if (this._radios) {
       this._radios.forEach(radio => {
-        radio.required = this._required;
+        radio.disabled = this._disabled;
         radio.markForCheck();
       });
     }

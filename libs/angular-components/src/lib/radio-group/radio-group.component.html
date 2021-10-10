@@ -2,7 +2,7 @@
   <span *ngIf="title" class="radio-group-title">{{title}}</span>
   <span *ngIf="required" class="required-label" i18n="Required label for dropdown">(Required)</span>
   <div *ngIf="helperText" class="helper-text">{{helperText}}</div>
-  <div class="goa-radios">
+  <div [ngClass]="'goa-radios goa-radio-group--' + orientation">
     <ng-content></ng-content>
   </div>
   <div *ngIf="hasError()" class="error-text">{{requiredErrorMessage}}</div>
