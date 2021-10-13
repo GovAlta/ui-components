@@ -106,6 +106,10 @@
     background: var(--color-selected-bg--hover);
     color: var(--color-primary-d1);
   }
+  &:last-child:hover {
+    border-bottom-left-radius: var(--input-border-radius);
+    border-bottom-right-radius: var(--input-border-radius);
+  }
 }
 
 .goa-dropdown-option--disabled {
