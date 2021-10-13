@@ -4,7 +4,7 @@
       <span class="environment-and-version">
         {{ environment }} {{ version }}
       </span>
-      <span class="close" @click="onCloseClick">X</span>
+      <span class="close" @click="onCloseClick">&#10006;</span>
     </span>
   </div>
 </template>
@@ -14,7 +14,7 @@ interface Data {
 }
 
 export default {
-  name: 'app-version-header',
+  name: 'goa-app-version-header',
   props: {
     /**
      * If this is true, the .
