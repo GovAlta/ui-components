@@ -4,7 +4,7 @@
       <span class="environment-and-version">
         {{ environment }} {{ version }}
       </span>
-      <span class="close" @click="onCloseClick">&#10006;</span>
+      <span class="close" data-testid="close" @click="onCloseClick">&#10006;</span>
     </span>
   </div>
 </template>

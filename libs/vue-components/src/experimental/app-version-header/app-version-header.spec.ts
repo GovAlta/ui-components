@@ -26,7 +26,7 @@ describe('GoAAppVersionHeaderComponent', () => {
 
     expect(screen.queryByTestId('content-wrapper')).toBeInTheDocument();
 
-    const closeButton = screen.getByText('X');
+    const closeButton = screen.queryByTestId('close');
 
     userEvent.click(closeButton);
 
