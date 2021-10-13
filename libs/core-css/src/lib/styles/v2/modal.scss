@@ -11,6 +11,9 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+
+  --modal-spacing: 1.75rem;
+  --button-min-width: 5rem;
 }
 
 /* Modal ============================================================================== */
@@ -43,9 +46,8 @@
   }
 }
 
-/* Modal Content ============================================================================== */
-
-.modal-content {
+/* Modal Container =========================================================================== */
+.modal-container {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -55,7 +57,12 @@
 
 .modal-actions {
   text-align: right;
-  margin: 1.5rem;
+  margin: var(--modal-spacing);
+  flex: 0 0 auto;
+}
+
+.modal-actions button {
+  min-width: var(--button-min-width);
 }
 
 @media (max-width: 639px) {
@@ -81,8 +88,9 @@
 
 .modal-title {
   font-size: var(--fs-xl);
-  padding: 1rem 1.5rem;
+  padding: 1rem var(--modal-spacing);
   margin-right: 40px; /*  close icon spacing */
+  flex: 0 0 auto;
 }
 
 /* Modal Background ======================================================================= */
@@ -98,6 +106,6 @@
 
 .modal-close {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 1rem;
+  right: 1rem;
 }

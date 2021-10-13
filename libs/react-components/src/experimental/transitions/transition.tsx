@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import './transitions.css';
+import './transitions.scss';
 
 export interface GoATransitionProps {
   name: string;

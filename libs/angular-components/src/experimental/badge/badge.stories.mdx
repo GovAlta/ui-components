@@ -6,14 +6,14 @@ import { action } from '@storybook/addon-actions';
 
 <Meta title="Experimental/Components/Badge"
   component={GoABadgeComponent}
-  argTypes={{ 
-      type: { 
-        control: 'select', 
+  argTypes={{
+      type: {
+        control: 'select',
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
            defaultValue: { summary: 'information' },
-        } 
+        }
       },
-      content: { control: 'text' } 
+      content: { control: 'text' }
     }
   }
   decorators={[
@@ -25,7 +25,7 @@ import { action } from '@storybook/addon-actions';
 The Badge component aims to implement the 'Badge' specifications on the Alberta Design System.
 The badge was designed to contain a text and/or an icon.
 
-**Contributors:** ACO Team 
+**Contributors:** ACO Team
 
 **Peer Dependencies:**
 - Material UI `<mat-icon />` is used for icon content; alternatively 'icon' element
@@ -37,11 +37,11 @@ must have the `goa-badge-icon` class.
 - [ ] Reconcile icon content with GoA font icons (once available).
 
 <Canvas>
-  <Story name="Badge" height={100} 
-    args={{ 
+  <Story name="Badge" height={100}
+    args={{
       type: 'information',
       content: 'Text content'
-    }} 
+    }}
     parameters={
     {
       design: {
@@ -52,7 +52,7 @@ must have the `goa-badge-icon` class.
       return {
         template: `<goa-badge [type]="type">
                       <i class="goa-badge-icon">
-                        <svg width="12px" height="12px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+                        <svg width="14px" height="14px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
                           <defs>
                             <style>.cls-1{fill:currentColor;}</style>
                           </defs>

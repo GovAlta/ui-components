@@ -4,7 +4,7 @@ import { GoAIconButton } from '../icons';
 import { TestProps } from '../common';
 import { GoATransitionSequence } from '../transitions/transitionSequence';
 
-import './modal.css';
+import './modal.scss';
 
 /**
  * Modal - Main Component
@@ -58,9 +58,9 @@ export const GoAModal: FC<ModalProps & ModalTestProps> = ({ children, isOpen, on
   return (
     <GoATransitionSequence transitions={['fade-in', 'fade-out']} transitionIndex={transitionIndex} onComplete={(_index, done) => done && setTransitionIndex(0)}>
       <div className="modal-root" data-testid={testId} data-state={getState()}>
-        <Content onClick={onClose}>
+        <Container onClick={onClose}>
           {children}
-        </Content>
+        </Container>
         <Background onClick={() => onClose?.()} testId={backgroundTestId} />
       </div>
     </GoATransitionSequence>
@@ -88,7 +88,7 @@ export const GoAModalActions: FC = ({ children }) => {
 
 export const GoAModalContent: FC<TestProps> = ({ children, testId }) => {
   return (
-    <GoAScrollable testId={testId} vertical={true} hPadding={1.5}>
+    <GoAScrollable testId={testId} vertical={true} hPadding={1.75}>
       {children}
     </GoAScrollable>
   );
@@ -108,24 +108,24 @@ export const GoAModalTitle: FC<TestProps> = ({ children, testId }) => {
 // ******************************************************************************
 
 
-// *************
-// Content
-// *************
+// ******************************************
+// Container - Contains all the content items
+// ******************************************
 
-interface ContentProps {
+interface ContainerProps {
   onClick: () => void;
 }
 
-const Content: FC<ContentProps> = ({ children, onClick }) => {
+const Container: FC<ContainerProps> = ({ children, onClick }) => {
   return (
     <div className="modal">
       {onClick &&
         <div className="modal-close">
-          <GoAIconButton type='close' variant="simple" onClick={onClick} />
+          <GoAIconButton type='close' onClick={onClick} />
         </div>
       }
-      <div className="modal-content">{children}</div>
-      {onClick && <div style={{ minHeight: '1rem' }}></div>}
+      <div className="modal-container">{children}</div>
+      {onClick && <div style={{ minHeight: '1.75rem' }}></div>}
     </div>
   );
 }

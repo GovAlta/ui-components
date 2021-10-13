@@ -95,8 +95,9 @@ import { GoAElementLoadIndicatorComponent } from './element-load-indicator/eleme
     GoAPageLoadIndicatorComponent,
     GoASkeletonImageContentComponent,
     GoASkeletonElementComponent,
-    GoAElementLoadIndicatorComponent
+    GoAElementLoadIndicatorComponent,
   ],
   providers: [GoARadioService],
 })
 export class AngularComponentsModule { }
+
