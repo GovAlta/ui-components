@@ -57,10 +57,8 @@ export const GoARadioGroup: FC<Props> = ({
   }
 
   return (
-    <div>
-      <div className={`goa-radio-group--${orientation}`}>
-        {getChildren()}
-      </div>
+    <div className={`goa-radio-group--${orientation}`}>
+      {getChildren()}
     </div>
   );
 };
