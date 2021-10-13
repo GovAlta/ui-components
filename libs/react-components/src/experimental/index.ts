@@ -1,4 +1,5 @@
 import { GoABadge } from './badge/badge.component';
+import { GoAAppVersionHeader } from './app-version-header/app-version-header.component';
 import { GoAIcon, GoAIconButton } from './icons';
 import { GoAInput } from './input/input.component';
 import { GoATextArea } from './textarea/textarea.component';
@@ -14,6 +15,7 @@ export type { GoAIconType, GoABadgeType };
 
 export {
   GoABadge,
+  GoAAppVersionHeader,
   GoAForm,
   GoAFormActions,
   GoAFormItem,
