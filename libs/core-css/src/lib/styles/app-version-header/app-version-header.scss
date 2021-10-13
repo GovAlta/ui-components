@@ -20,7 +20,7 @@
 
       max-width: 1200px;
 
-      $close-width: 28px;
+      $close-width: 20px;
 
       .environment-and-version {
         display: flex;
@@ -34,11 +34,16 @@
         margin-left: auto;
         width: $close-width;
         text-align: right;
-        color: $goa-blue;
+
         font-weight: bold;
         font-size: small;
         align-self: center;
         cursor: pointer;
+        display: flex;
+
+        svg {
+          color: $goa-blue;
+        }
       }
     }
   }
