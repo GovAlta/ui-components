@@ -8,10 +8,6 @@
   width: 100%;
 }
 
-.goa-textarea:disabled {
-  @include goa-input-base--disabled;
-}
-
 // Error State
 .goa-state--error textarea,
 .goa-state--error textarea:hover {
