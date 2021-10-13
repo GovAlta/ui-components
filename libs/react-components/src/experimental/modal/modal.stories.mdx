@@ -3,8 +3,10 @@ import {
   GoAModalActions,
   GoAModalContent,
   GoAModalTitle,
+  GoAForm,
+  GoAFormItem,
 } from '../index.ts';
-import { GoAButton } from '../../index';
+import { GoADropdown, GoADropdownOption, GoAButton } from '../../index';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 import { useState } from 'react';
@@ -73,6 +75,39 @@ export const Template = (args) => {
   );
 };
 
+export const ScrollingTemplate = (args) => {
+  const [isOpen, setOpen] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open Modal</button>
+      <GoAModal testId="modal" isOpen={isOpen}>
+        <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
+        <GoAModalContent scrollable={true} testId="content">{args.content}</GoAModalContent>
+        <GoAModalActions>
+          <GoAButton
+            buttonType="tertiary"
+            type="button"
+            onClick={() => setOpen(false)}
+          >
+            Cancel
+          </GoAButton>
+          <GoAButton
+            buttonType="primary"
+            type="submit"
+            onClick={() => {
+              setClickCount(clickCount + 1);
+              action('clicked save')(clickCount);
+            }}
+          >
+            Save
+          </GoAButton>
+        </GoAModalActions>
+      </GoAModal>
+    </>
+  );
+}
+
 export const CloseTemplate = (args) => {
   const [isOpen, setOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
@@ -121,6 +156,62 @@ export const NoCloseTemplate = (args) => {
   );
 };
 
+export const ModalFormTemplate = (args) => {
+  const [isOpen, setOpen] = useState(false);
+  const [selectedValues, setValues] = useState([]);
+  function onChange(name, values) {
+    setValues(values);
+  }
+  const data = [
+    { label: 'option 1', value: 'option1' },
+    { label: 'option 2', value: 'option2' },
+    { label: 'option 3', value: 'option3' },
+    { label: 'option 4', value: 'option4' },
+  ];
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open Modal</button>
+      <GoAModal testId="modal" isOpen={isOpen}>
+        <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
+        <GoAModalContent testId="content">
+          <GoAForm>
+            <GoAFormItem>
+              <label>Colors</label>
+              <GoADropdown
+                name="favColour"
+                onChange={onChange}
+                selectedValues={selectedValues}
+              >
+                {data.map((item) => (
+                  <GoADropdownOption label={item.label} value={item.value} />
+                ))}
+              </GoADropdown>
+            </GoAFormItem>
+          </GoAForm>
+        </GoAModalContent>
+        <GoAModalActions>
+          <GoAButton
+            buttonType="tertiary"
+            type="button"
+            onClick={() => setOpen(false)}
+          >
+            Cancel
+          </GoAButton>
+          <GoAButton
+            buttonType="primary"
+            type="submit"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Save
+          </GoAButton>
+        </GoAModalActions>
+      </GoAModal>
+    </>
+  );
+};
+
 #### Basic
 
 <Canvas>
@@ -134,6 +225,16 @@ export const NoCloseTemplate = (args) => {
     }}
   >
     {NoCloseTemplate.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Form"
+    height="400px"
+    args={{ title: 'Select your favourite color' }}
+  >
+    {ModalFormTemplate.bind({})}
   </Story>
 </Canvas>
 
@@ -191,7 +292,7 @@ export const NoCloseTemplate = (args) => {
         `,
     }}
   >
-    {Template.bind({})}
+    {ScrollingTemplate.bind({})}
   </Story>
 </Canvas>
 
@@ -240,8 +341,14 @@ function MyComponent() {
 
 ## Properties
 
+### GoAModal
+
 <Description of={GoAModal} />
 <ArgsTable of={GoAModal} />
+
+### GoAModalContent
+<Description of={GoAModalContent} />
+<ArgsTable of={GoAModalContent} />
 
 ## Usage guidelines
 
@@ -252,8 +359,12 @@ before they can be seen.
 ### Modal content
 
 <DoDont
-  dos={'Add any action buttons into a GoAModalActions component at the bottom of the modal'}
-  donts={'Provide both action buttons and on `onClose` event handler, as this will result in a `x` icon in the top corner'}
+  dos={
+    'Add any action buttons into a GoAModalActions component at the bottom of the modal'
+  }
+  donts={
+    'Provide both action buttons and on `onClose` event handler, as this will result in a `x` icon in the top corner'
+  }
 />
 
 <DoDont

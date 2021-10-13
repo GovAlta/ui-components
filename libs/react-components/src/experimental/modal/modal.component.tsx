@@ -86,12 +86,23 @@ export const GoAModalActions: FC = ({ children }) => {
 // GoAModalContent
 // ***************
 
-export const GoAModalContent: FC<TestProps> = ({ children, testId }) => {
+export interface GoAModalContentProps {
+  scrollable?: boolean;
+}
+
+export const GoAModalContent: FC<GoAModalContentProps & TestProps> = ({ scrollable, children, testId }) => {
+  if (scrollable) {
+    return (
+      <GoAScrollable testId={testId} vertical={true} hPadding={1.75}>
+        {children}
+      </GoAScrollable>
+    );
+  }
   return (
-    <GoAScrollable testId={testId} vertical={true} hPadding={1.75}>
+    <div data-testid={testId} style={{ padding: "0 1.75rem" }}>
       {children}
-    </GoAScrollable>
-  );
+    </div>
+  )
 };
 
 // *************
