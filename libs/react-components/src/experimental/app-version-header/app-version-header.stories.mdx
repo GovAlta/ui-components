@@ -31,19 +31,6 @@ import { action } from '@storybook/addon-actions';
 The AppVersionHeader component aims to implement the 'AppVersionHeader' specifications on the Alberta Design System.
 The App Version Header is displayed in UAT / Test / Syst etc. environments to display an application’s version number and environment label. This header is dismissible to allow it to be hidden during a demo or usability test.
 
-**Contributors:** ACO Team
-
-**Peer Dependencies:**
-
-- None
-
-**TODOs:**
-
-- [ ] Design in design system XD and referenced by Story.
-- [ ] Component available in Angular, React, and Vue libraries.
-- [ ] Add component style to goa-core.scss and remove include in app-version-header.component.scss
-- [ ] Make the close button a link button
-
 <Canvas>
   <Story
     name="AppVersionHeader"
@@ -63,3 +50,12 @@ The App Version Header is displayed in UAT / Test / Syst etc. environments to di
     )}
   </Story>
 </Canvas>
+
+```tsx
+<GoAAppVersionHeader isProdEnvironment={false} environment="dev" version="1" />
+```
+
+## GoAAppVersionHeader Properties
+
+<Description of={GoAAppVersionHeader} />
+<ArgsTable of={GoAAppVersionHeader} />
