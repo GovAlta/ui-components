@@ -1,0 +1,38 @@
+<div class="number-input-container">
+  <button
+    [disabled]="disabled"
+    goa-button
+    buttonType="primary"
+    buttonSize="small"
+    (click)="decrement()"
+  >
+    <svg width="1em" height="100%" viewBox="0 0 100 100">
+      <line x1="25%" y1="50%" x2="75%" y2="50%" stroke-width="15%" />
+    </svg>
+  </button>
+
+  <input
+    #input
+    [disabled]="disabled"
+    type="number"
+    [name]="name"
+    [min]="min"
+    [max]="max"
+    [value]="value"
+    [step]="step"
+    (blur)="updateFromInput()"
+  />
+
+  <button
+    goa-button
+    [disabled]="disabled"
+    buttonType="primary"
+    buttonSize="small"
+    (click)="increment()"
+  >
+    <svg width="1em" height="100%" viewBox="0 0 100 100">
+      <line x1="25%" y1="50%" x2="75%" y2="50%" stroke-width="15%" />
+      <line x1="50%" y1="25%" x2="50%" y2="75%" stroke-width="15%" />
+    </svg>
+  </button>
+</div>

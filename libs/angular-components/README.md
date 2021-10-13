@@ -2,6 +2,8 @@
 
 This library contains angular components from the Government of Alberta. This plugin uses angular 11, which is required to make it compatible with the latest nx angular generator.
 
+[UI Components Storybook - Angular](https://ui-components.alpha.alberta.ca/angular/index.html)
+
 ## Installation
 
 1. Add @abgov/angular-components

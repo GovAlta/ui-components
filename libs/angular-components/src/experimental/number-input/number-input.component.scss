@@ -1,0 +1,62 @@
+@import '../../../../core-css/src/lib/styles/variables/colors.scss';
+@import '../../../../core-css/src/lib/styles/button/button.scss';
+
+.number-input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 30px;
+  padding: 0px;
+  outline: 0px;
+
+  & > input {
+    border: solid 1px $goa-border-color-secondary;
+    min-width: 75px;
+    width: 0;
+    flex: 1;
+    border-radius: 0;
+    padding-left: 4px;
+    &:focus-visible {
+      outline: unset;
+      border-color: $primary-focused;
+      border-width: 2px;
+    }
+
+    // Hide Number Input Arrows
+    /* Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    -moz-appearance: textfield;
+  }
+
+  & > :first-child {
+    border-radius: 4px 0px 0px 4px;
+  }
+
+  & > :last-child {
+    border-radius: 0px 4px 4px 0px;
+  }
+
+  & > button {
+    min-width: 30px;
+    margin: 0px;
+    padding: 0px;
+    z-index: 1;
+    font-size: 20px;
+    & > svg {
+      stroke: $goa-white;
+    }
+
+    &:disabled > svg {
+      stroke: $disabled-color;
+    }
+    &:hover > svg {
+      stroke: $button-primary-color;
+    }
+  }
+}
