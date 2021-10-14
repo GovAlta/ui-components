@@ -4,7 +4,23 @@
       <span class="environment-and-version">
         {{ environment }} {{ version }}
       </span>
-      <span class="close" data-testid="close" @click="onCloseClick">&#10006;</span>
+      <div class="close" data-testid="close" @click="onCloseClick">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="ionicon"
+          viewBox="0 0 512 512"
+        >
+          <title>Close</title>
+          <path
+            fill="currentColor"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32"
+            d="M368 368L144 144M368 144L144 368"
+          />
+        </svg>
+      </div>
     </span>
   </div>
 </template>
