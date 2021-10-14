@@ -30,7 +30,7 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 import { action } from '@storybook/addon-actions';
-import { DoDont } from '@abgov/shared/storybook-common';
+import { DoDont, State } from '@abgov/shared/storybook-common';
 
 <Meta title="Experimental/Components/Form" component={GoAForm} />
 
@@ -72,7 +72,10 @@ export const defaultTemplete = (args) => {
       setErrorState(errors);
     };
     return (
-      <div style={{ padding: '4px' }}>
+      <State
+        title=""
+        description=""
+        state={formState}>
         <GoAForm>
           <h2>Your information</h2>
           <p>
@@ -161,7 +164,7 @@ export const defaultTemplete = (args) => {
             </GoAButton>
           </GoAFormActions>
         </GoAForm>
-      </div>
+      </State>
     );
   };
   return <GoAFormWrapper />;
@@ -201,77 +204,75 @@ const onSubmit = (e) => {
 };
 
 return (
-  <div style={{ padding: '4px' }}>
-    <GoAForm>
-      <h2>Your information</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ligula a
-        ligulaxcrei kmlobortis lacinia non sed nibh.
-      </p>
-      <GoAFormRow>
-        <GoAFormItem error={errorState.firstName}>
-          <label>First Name</label>
-          <GoAInput
-            type="text"
-            name="firstName"
-            value={formState.firstName}
-            onChange={onChange}
-          />
-        </GoAFormItem>
-        <GoAFormItem>
-          <label>Middle Name</label>
-          <GoAInput
-            type="text"
-            name="middleName"
-            value={formState.middleName}
-            onChange={onChange}
-          />
-        </GoAFormItem>
-        <GoAFormItem error={errorState.lastName}>
-          <label>Last Name</label>
-          <GoAInput
-            type="text"
-            name="lastName"
-            value={formState.lastName}
-            onChange={onChange}
-          />
-        </GoAFormItem>
-      </GoAFormRow>
-      <GoAFormItem helpText="Non-standard Input">
-        <label>Label</label>
+  <GoAForm>
+    <h2>Your information</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ligula a
+      ligulaxcrei kmlobortis lacinia non sed nibh.
+    </p>
+    <GoAFormRow>
+      <GoAFormItem error={errorState.firstName}>
+        <label>First Name</label>
         <GoAInput
           type="text"
-          name="label"
-          value={formState.label}
+          name="firstName"
+          value={formState.firstName}
           onChange={onChange}
         />
       </GoAFormItem>
-      <GoAFormItem error={errorState.email}>
-        <label>Email</label>
+      <GoAFormItem>
+        <label>Middle Name</label>
         <GoAInput
           type="text"
-          name="email"
-          value={formState.email}
+          name="middleName"
+          value={formState.middleName}
           onChange={onChange}
         />
       </GoAFormItem>
-      <GoAFormItem helpText="Enter lots of text here" error={errorState.label2}>
-        <label>Label</label>
-        <GoATextArea
-          name="label2"
-          value={formState.label2}
+      <GoAFormItem error={errorState.lastName}>
+        <label>Last Name</label>
+        <GoAInput
+          type="text"
+          name="lastName"
+          value={formState.lastName}
           onChange={onChange}
         />
       </GoAFormItem>
-      <GoAFormActions alignment="left">
-        <GoAButton buttonType="tertiary" type="reset">
-          Cancel
-        </GoAButton>
-        <GoAButton buttonType="primary" type="submit" onClick={onSubmit}>
-          Submit
-        </GoAButton>
-      </GoAFormActions>
-    </GoAForm>
-  </div>
+    </GoAFormRow>
+    <GoAFormItem helpText="Non-standard Input">
+      <label>Label</label>
+      <GoAInput
+        type="text"
+        name="label"
+        value={formState.label}
+        onChange={onChange}
+      />
+    </GoAFormItem>
+    <GoAFormItem error={errorState.email}>
+      <label>Email</label>
+      <GoAInput
+        type="text"
+        name="email"
+        value={formState.email}
+        onChange={onChange}
+      />
+    </GoAFormItem>
+    <GoAFormItem helpText="Enter lots of text here" error={errorState.label2}>
+      <label>Label</label>
+      <GoATextArea
+        name="label2"
+        value={formState.label2}
+        onChange={onChange}
+      />
+    </GoAFormItem>
+    <GoAFormActions alignment="left">
+      <GoAButton buttonType="tertiary" type="reset">
+        Cancel
+      </GoAButton>
+      <GoAButton buttonType="primary" type="submit" onClick={onSubmit}>
+        Submit
+      </GoAButton>
+    </GoAFormActions>
+  </GoAForm>
 );
 ```

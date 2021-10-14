@@ -1,6 +1,6 @@
 import { GoAInput, GoAForm, GoAFormItem } from '../index.ts';
 import { useState } from 'react';
-import { Do, Dont } from '@abgov/shared/storybook-common';
+import { Do, Dont, State } from '@abgov/shared/storybook-common';
 import {
   Meta,
   Preview,
@@ -16,33 +16,24 @@ import {
 ## Overview
 
 export const Template = (args) => {
-  const [value, setValue] = useState('');
+  const [state, setState] = useState({});
+  const onChange = (name, value) => {
+    setState({ ...state, [name]: value });
+  };
   return (
-    <div style={{ padding: '4px', backgroundColor: '#eee' }}>
-      <GoAInput {...args} onChange={(name, val) => setValue(val)} />
-    </div>
-  );
-};
-
-export const FormTemplate = (args) => {
-  const [value, setValue] = useState('');
-  return (
-    <div style={{ padding: '4px' }}>
-      <GoAForm>
-        <h2>Your information</h2>
-        <GoAFormItem {...args}>
-          <label htmlFor="firstName">First Name</label>
-          <GoAInput
-            {...args}
-            id="firstName"
-            type="text"
-            name="firstName"
-            value={value}
-            onChange={(name, val) => setValue(val)}
-          />
-        </GoAFormItem>
-      </GoAForm>
-    </div>
+    <>
+      <State
+        title="Input Types"
+        description="The GoAInput component handles all html input types styled to the GoA UI guidelines"
+        state={state}
+      >
+        <GoAInput {...args} onChange={onChange} name="basic" leadingIcon="personCircle" />
+        <GoAInput {...args} onChange={onChange} type="password" name="password" />
+        <GoAInput {...args} onChange={onChange} type="date" name="date" />
+        <GoAInput {...args} onChange={onChange} type="time" name="time" />
+        <GoAInput {...args} onChange={onChange} type="datetime-local" name="datetime" />
+      </State>
+    </>
   );
 };
 
@@ -69,35 +60,6 @@ interface Props {
 
 ```tsx
 <GoAInput {...props} />
-```
-
-<Canvas>
-  <Story name="Form" args={{ helpText: "What's your name?" }}>
-    {FormTemplate.bind({})}
-  </Story>
-</Canvas>
-
-```tsx
-export const MyForm: FC = () => {
-  const [value, setValue] = useState('');
-  return (
-    <>
-      <GoAForm>
-        <h2>Your information</h2>
-        <GoAFormItem>
-          <label htmlFor="firstName">First Name</label>
-          <GoAInput
-            id="firstName"
-            type="text"
-            name="firstName"
-            value={value}
-            onChange={(name, val) => setValue(val)}
-          />
-        </GoAFormItem>
-      </GoAForm>
-    </>
-  );
-};
 ```
 
 ## GoAInput Properties

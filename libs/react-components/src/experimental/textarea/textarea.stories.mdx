@@ -1,6 +1,6 @@
 import { GoATextArea, GoAForm, GoAFormItem } from '../index.ts';
 import { useState } from 'react';
-import { Do, Dont } from '@abgov/shared/storybook-common';
+import { Do, Dont, State } from '@abgov/shared/storybook-common';
 
 import {
   Meta,
@@ -30,30 +30,20 @@ Provides the html textarea element with the GoA theme and custom bindings.
 
 ## Examples
 
-export const Template = (args) => {
-  return (
-    <div style={{ padding: '4px' }}>
-      <GoATextArea {...args} />
-    </div>
-  );
-};
-
 export const FormTemplate = (args) => {
-  const [value, setValue] = useState('');
+  const [state, setState] = useState({});
+  const onChange = (name, value) => {
+    setState({ ...state, [name]: value });
+  };
   return (
-    <div style={{ padding: '4px' }}>
-      <GoAForm>
-        <GoAFormItem helpText="Tell me about yourself...">
-          <label htmlFor="aboutme">About me</label>
-          <GoATextArea
-            id="aboutme"
-            name="aboutme"
-            value={value}
-            onChange={(name, val) => setValue(val)}
-          />
-        </GoAFormItem>
-      </GoAForm>
-    </div>
+    <State title="GoATextArea" state={state}>
+      <GoATextArea
+        id="aboutme"
+        name="aboutme"
+        value={state.aboutme}
+        onChange={onChange}
+      />
+    </State>
   );
 };
 
@@ -73,34 +63,22 @@ interface Props {
 ```
 
 <Canvas>
-  <Story name="Basic">{Template.bind({})}</Story>
-</Canvas>
-
-```tsx
-<GoATextArea {...args} />
-```
-
-<Canvas>
   <Story name="Form">{FormTemplate.bind({})}</Story>
 </Canvas>
 
 ```tsx
 export const ApplicationForm: FC = () => {
-  const [value, setValue] = useState('');
+  const [state, setState] = useState({});
+  const onChange = (name, value) => {
+    setState(...state, [name]: value);
+  };
   return (
-    <>
-      <GoAForm>
-        <GoAFormItem helpText="Tell me about yourself...">
-          <label htmlFor="aboutme">About me</label>
-          <GoATextArea
-            id="aboutme"
-            name="aboutme"
-            value={value}
-            onChange={(name, val) => setValue(val)}
-          />
-        </GoAFormItem>
-      </GoAForm>
-    </>
+    <GoATextArea
+      id="aboutme"
+      name="aboutme"
+      value={state.aboutme}
+      onChange={onChange}
+    />
   );
 };
 ```
