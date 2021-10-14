@@ -16,6 +16,23 @@
   --fw-bold: 700;
   --fw-black: 900;
 
+  /* line-height */
+  --lh-xs: 0.875rem; // 14px
+  --lh-sm: 1rem; // 16px
+  --lh-base: 1.5rem; // 24px
+  --lh-lg: 2rem; // 32px
+  --lh-xl: 2.75rem; // 44px
+  --lh-2xl: 3.5rem; // 56px
+
+  --border-radius-sm: 0.15rem;
+  --border-radius: 0.25rem;
+  --border-radius-base: 0.25rem;
+  --border-radius-lg: 0.5rem;
+
+  --spacing-1: 0.5rem; // 8px
+  --spacing-2: 0.875rem; // 14px
+  --spacing-3: 1.75rem; // 28px
+
   --input-padding: 0.5rem;
   --input-border-radius: 0.25rem;
   --input-font-size: var(--fs-base);

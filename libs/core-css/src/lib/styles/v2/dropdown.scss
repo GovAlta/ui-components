@@ -80,7 +80,7 @@
   background: var(--color-input-background);
   border-bottom-left-radius: var(--input-border-radius);
   border-bottom-right-radius: var(--input-border-radius);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 99;
 }
 
