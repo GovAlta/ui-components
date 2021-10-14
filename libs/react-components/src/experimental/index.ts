@@ -6,6 +6,7 @@ import { GoATextArea } from './textarea/textarea.component';
 import { GoAModal, GoAModalActions, GoAModalContent, GoAModalTitle } from './modal/modal.component';
 import { GoAScrollable } from './scrollable/scrollable.component';
 import { GoAFormItem, GoAFormActions, GoAForm } from './form/form.component';
+import { GoAFormRow } from './form/form.row';
 import { GoATransition, GoATransitionSequence } from './transitions';
 
 import type { GoAIconType } from './icons';
@@ -19,6 +20,7 @@ export {
   GoAForm,
   GoAFormActions,
   GoAFormItem,
+  GoAFormRow,
   GoAIcon,
   GoAIconButton,
   GoAInput,
