@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './element-loader.scss';
 
 export interface ElementLoaderProps {
@@ -90,11 +89,4 @@ export const GoAElementLoader = ({
       </svg>
     )
   );
-};
-
-GoAElementLoader.propTypes = {
-  visible: PropTypes.bool,
-  baseColour: PropTypes.string,
-  spinnerColour: PropTypes.string,
-  size: PropTypes.number,
 };
