@@ -3,7 +3,7 @@ import { GoAIcon, GoAIconType } from '../icons';
 import { OnChange } from '../../lib/_common/input';
 import './input.scss';
 
-type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
+type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'date' | 'time' | 'datetime-local';
 
 interface Props {
   name: string;
@@ -17,7 +17,7 @@ interface Props {
   onChange: OnChange;
 };
 
-export const GoAInput: FC<Props> = ({ id, name, value, type, disabled, placeholder, leadingIcon, onChange }) => {
+export const GoAInput: FC<Props> = ({ onChange, leadingIcon, ...props  }) => {
   return (
     <div className="goa-input">
       {leadingIcon &&
@@ -26,14 +26,9 @@ export const GoAInput: FC<Props> = ({ id, name, value, type, disabled, placehold
         </div>
       }
       <input
-        id={id}
         className={leadingIcon ? 'input--leading-icon' : ''}
-        type={type}
-        name={name}
-        value={value}
-        disabled={disabled}
-        placeholder={placeholder}
-        onChange={(e) => onChange(name, e.target.value)}
+        {...props}
+        onChange={(e) => onChange(props.name, e.target.value)}
       />
     </div>
   );
