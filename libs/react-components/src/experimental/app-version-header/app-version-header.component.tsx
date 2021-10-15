@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useState } from 'react';
 import classnames from 'classnames';
 import styles from './app-version-header.module.scss';
+import { GoAIcon } from '../icons/icon.component'
 
 
 interface GoAAppVersionHeaderProps {
@@ -20,7 +21,9 @@ export const GoAAppVersionHeader: FC<GoAAppVersionHeaderProps> = ({ isProdEnviro
     >
       <span className={classnames(styles['content-wrapper'])} data-testid='content-wrapper'>
         <span className={classnames(styles['environment-and-version'])}>{environment} {version}</span>
-        <span className={classnames(styles['close'])} data-testid='close' onClick={() => setClosed(true)}>&#10006;</span>
+        <span className={classnames(styles['close'])} data-testid='close' onClick={() => setClosed(true)}>
+          <GoAIcon type="close" />
+        </span>
       </span>
     </div>
   )

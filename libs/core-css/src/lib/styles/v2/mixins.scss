@@ -1,12 +1,4 @@
-@mixin goa-input-base--disabled {
-  border-color: var(--color-disabled);
-  &:hover {
-    border-color: var(--color-disabled);
-  }
-  &:focus {
-    box-shadow: none;
-  }
-}
+/* Forms */
 
 @mixin goa-input-base {
   outline: none;
@@ -26,6 +18,12 @@
   }
 
   &:disabled {
-    @include goa-input-base--disabled;
+    border-color: var(--color-disabled);
+    &:hover {
+      border-color: var(--color-disabled);
+    }
+    &:focus {
+      box-shadow: none;
+    }
   }
 }

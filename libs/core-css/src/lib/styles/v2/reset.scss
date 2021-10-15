@@ -34,14 +34,10 @@ hr {
   margin: 0;
 }
 
-em {
-  font-size: var(--fs-xs);
-  color: var(--color-gray-l1);
-}
-
 ul,
 ol {
   padding-left: 0;
+  padding-left: 1rem;
 }
 
 li > ul,
@@ -50,6 +46,13 @@ li > ul,
 li > ol {
   padding-left: 0;
   margin-top: 0;
+}
+
+dl {
+  margin-top: 0;
+}
+dd {
+  margin-left: 0.5rem;
 }
 
 a {

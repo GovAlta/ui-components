@@ -1,0 +1,100 @@
+import { GoAFlexRow } from '..';
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+import { action } from '@storybook/addon-actions';
+import { Dont } from '@abgov/shared/storybook-common';
+
+<Meta
+  title="Experimental/Components/FlexRow"
+  component={GoAFlexRow}
+  argTypes={{}}
+/>
+
+# Flex Row
+
+Provides a quick way to implement a flex row, while allowing the component to enforce consistency.
+
+The component allows you to pass in the maximum number of children that you want to exist within the row and if a `minValue`
+parameter is specified, the `flex-wrap` style param will position the children in a manner to allow this constraint to be upheld.
+
+## Overview
+
+export const RowTemplate = (args) => {
+  return (
+    <GoAFlexRow {...args}>
+      <div>
+        <h3>Column 1</h3>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua.
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Column 2</h3>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua.
+      </div>
+      <div>
+        <h3>Column 3</h3>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+        sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </div>
+      <div>
+        <h3>Column 4</h3>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+        sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </div>
+      <div>
+        <h3>Column 5</h3>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua.
+      </div>
+    </GoAFlexRow>
+  );
+};
+
+## Examples
+
+### Basic
+
+<Canvas>
+  <Story
+    name="Basic"
+    args={{
+      gap: 'small',
+      minWidth: '30ch',
+    }}
+  >
+    {RowTemplate.bind({})}
+  </Story>
+</Canvas>
+
+### GoAFlexRow
+
+<Description of={GoAFlexRow} />
+<ArgsTable of={GoAFlexRow} />
+
+## Usage guidelines
+
+### FlexRow elements
+
+A card may contain at the very minimum a header and one other component.
+
+<Dont description={'Use a single child item'} />
