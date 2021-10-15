@@ -108,21 +108,18 @@ export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
       {isMenuVisible &&
         <div data-testid={`${props.name}-dropdown-background`} className="goa-dropdown-background" onClick={() => setMenuVisibility(false)}></div>
       }
-      <div id={props.name}></div>
-      <a href={`#${props.name}`}>
-        <div
-          onClick={ toggleMenuVisibility}
-          data-testid={`${props.name}-dropdown`}
-          className={`goa-dropdown-input ${props.disabled && 'goa-dropdown-input--disabled' || ''}`} tabIndex={0} >
-          {props.leadingIcon &&
-            <div className="goa-dropdown-leading-icon">
-              <GoAIcon size="small" type={props.leadingIcon} />
-            </div>
-          }
-          <input readOnly placeholder={props.placeholder} value={getSelectedLabel()} />
-          <GoAIcon type="chevronDown" />
-        </div>
-      </a>
+      <div
+        onClick={toggleMenuVisibility}
+        data-testid={`${props.name}-dropdown`}
+        className={`goa-dropdown-input ${props.disabled && 'goa-dropdown-input--disabled' || ''}`} tabIndex={0} >
+        {props.leadingIcon &&
+          <div className="goa-dropdown-leading-icon">
+            <GoAIcon size="small" type={props.leadingIcon} />
+          </div>
+        }
+        <input readOnly placeholder={props.placeholder} value={getSelectedLabel()} />
+        <GoAIcon type="chevronDown" />
+      </div>
       {isMenuVisible &&
         <ul className="goa-dropdown-list">
           <GoAScrollable vertical={true} height={props.maxHeight || MAX_HEIGHT}>
