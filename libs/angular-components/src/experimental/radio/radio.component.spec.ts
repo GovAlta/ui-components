@@ -51,20 +51,6 @@ describe('GoARadioComponent', () => {
       mockData = {...baseMockData, required: true};
     });
 
-    test('should display red border on radio when checked is false', async () => {
-      //reset checked for this test
-      mockData.checked = false;
-
-      await render(GoARadioComponent, {
-        template: getTemplate(mockData),
-      });
-
-      const container = document.querySelector('.goa-radio');
-
-      expect(container).not.toBeNull();
-      expect(container.classList).toContain('has-error');
-    });
-
     test('required should NOT display red border on radio when checked is true', async () => {
       //reset checked for this test
       mockData.checked = true;

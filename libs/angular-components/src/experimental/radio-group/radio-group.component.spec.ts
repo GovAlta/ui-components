@@ -104,22 +104,6 @@ describe('RadioGroupComponent', () => {
 
       expect(screen.queryByText(mockData.requiredErrorMessage)).not.toBeNull();
     });
-
-    test('should render red radios when not selected', async () => {
-      await render(GoARadioGroupComponent, {
-        template: getTemplate(mockData),
-        declarations: [GoARadioGroupComponent, GoARadioComponent],
-        providers: [GOA_RADIO_CONTROL_VALUE_ACCESSOR],
-        imports: [OverlayModule]
-      });
-
-      const group = document.querySelector('.goa-radio-group');
-      const onScreenRadios = document.querySelectorAll('.goa-radio');
-
-      onScreenRadios.forEach(r => {
-        expect(r.classList).toContain('has-error');
-      });
-    });
   });
 
   describe('Is Not Required Tests', () => {
