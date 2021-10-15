@@ -42,18 +42,6 @@ describe('GoARadioComponent', () => {
 
       expect(screen.getByText(label)).not.toBeNull();
     });
-
-    test('should render selected/circle svg when checked', async () => {
-      await render(GoARadioComponent, {
-        template: getTemplate(mockData),
-      });
-
-      fireEvent.click(screen.getByText(label));
-
-      const radiomark = document.getElementById('radiomark');
-
-      expect(radiomark).not.toBeNull();
-    });
   });
 
   describe('Is Required Tests', () => {
