@@ -1,11 +1,24 @@
-@import '../../../../core-css/src/lib/styles/variables/colors.scss';
-@import '../../../../core-css/src/lib/styles/button/button.scss';
+@import '~@abgov/core-css/src/lib/styles/variables/colors.scss';
+@import '~@abgov/core-css/src/lib/styles/button/button.scss';
+
+$radius: 4px;
+
+::ng-deep .ng-touched.ng-invalid {
+  & > .number-input-container {
+    border: 2px solid $goa-error-color;
+    border-radius: $radius + 2px; // accounts for other border radius to avoid gap
+  }
+}
+
+:host {
+  display: block;
+}
 
 .number-input-container {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  height: 30px;
+  height: 40px;
   padding: 0px;
   outline: 0px;
 
@@ -15,7 +28,7 @@
     width: 0;
     flex: 1;
     border-radius: 0;
-    padding-left: 4px;
+    padding: 6px;
     &:focus-visible {
       outline: unset;
       border-color: $primary-focused;
@@ -35,11 +48,11 @@
   }
 
   & > :first-child {
-    border-radius: 4px 0px 0px 4px;
+    border-radius: $radius 0px 0px $radius;
   }
 
   & > :last-child {
-    border-radius: 0px 4px 4px 0px;
+    border-radius: 0px $radius $radius 0px;
   }
 
   & > button {
