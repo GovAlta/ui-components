@@ -5,10 +5,8 @@ import {
   GoAModalTitle,
   GoAForm,
   GoAFormItem,
-  GoAInput,
-  GoATextArea,
 } from '../index.ts';
-import { GoARadio, GoADropdown, GoADropdownOption, GoAButton } from '../../index';
+import { GoADropdown, GoADropdownOption, GoAButton } from '../../index';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 import { useState } from 'react';
@@ -161,14 +159,11 @@ export const NoCloseTemplate = (args) => {
 };
 
 export const ModalFormTemplate = (args) => {
-  const [formState, setFormState] = useState({});
   const [isOpen, setOpen] = useState(false);
-  const onChange = (name, value) => {
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
+  const [selectedValues, setValues] = useState([]);
+  function onChange(name, values) {
+    setValues(values);
+  }
   const data = [
     { label: 'option 1', value: 'option1' },
     { label: 'option 2', value: 'option2' },
@@ -183,72 +178,16 @@ export const ModalFormTemplate = (args) => {
         <GoAModalContent testId="content">
           <GoAForm>
             <GoAFormItem>
-              <label>First Name</label>
-              <GoAInput
-                type="text"
-                name="firstName"
-                value={formState.firstName}
-                onChange={onChange}
-              />
-            </GoAFormItem>
-            <GoAFormItem>
-              <label>Middle Name</label>
-              <GoAInput
-                type="text"
-                name="middleName"
-                value={formState.middleName}
-                onChange={onChange}
-              />
-            </GoAFormItem>
-            <GoAFormItem>
               <label>Colors</label>
               <GoADropdown
-                name="favColours"
+                name="favColour"
                 onChange={onChange}
-                selectedValues={formState.favColours}
+                selectedValues={selectedValues}
               >
                 {data.map((item) => (
                   <GoADropdownOption label={item.label} value={item.value} />
                 ))}
               </GoADropdown>
-            </GoAFormItem>
-            <GoAFormItem>
-              <label>Last Name</label>
-              <GoAInput
-                type="text"
-                name="lastName"
-                value={formState.lastName}
-                onChange={onChange}
-              />
-            </GoAFormItem>
-            <GoAFormItem>
-              <label>Favourite Music</label>
-              <GoARadioGroup
-                name="music"
-                onChange={onChange}
-                value={formState.music}
-              >
-                <GoARadio label="Blues" value="blues" />
-                <GoARadio label="Rock" value="rock" />
-                <GoARadio label="Country" value="country" />
-              </GoARadioGroup>
-            </GoAFormItem>
-            <GoAFormItem helpText="We won't spam you...">
-              <label>Email</label>
-              <GoAInput
-                type="text"
-                name="email"
-                value={formState.email}
-                onChange={onChange}
-              />
-            </GoAFormItem>
-            <GoAFormItem helpText="Enter lots of text here">
-              <label>Label</label>
-              <GoATextArea
-                name="textarea"
-                value={formState.textarea}
-                onChange={onChange}
-              />
             </GoAFormItem>
           </GoAForm>
         </GoAModalContent>
@@ -410,7 +349,6 @@ function MyComponent() {
 <ArgsTable of={GoAModal} />
 
 ### GoAModalContent
-
 <Description of={GoAModalContent} />
 <ArgsTable of={GoAModalContent} />
 
