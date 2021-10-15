@@ -87,22 +87,22 @@ export const GoAModalActions: FC = ({ children }) => {
 // ***************
 
 export interface GoAModalContentProps {
-  scrollable?: boolean;
+  disableScroll?: boolean;
 }
 
-export const GoAModalContent: FC<GoAModalContentProps & TestProps> = ({ scrollable, children, testId }) => {
-  if (scrollable) {
+export const GoAModalContent: FC<GoAModalContentProps & TestProps> = ({ disableScroll, children, testId }) => {
+  if (disableScroll) {
     return (
-      <GoAScrollable testId={testId} vertical={true} hPadding={1.75}>
+      <div data-testid={testId} style={{ padding: "0 1.75rem" }}>
         {children}
-      </GoAScrollable>
-    );
+      </div>
+    )
   }
   return (
-    <div data-testid={testId} style={{ padding: "0 1.75rem" }}>
+    <GoAScrollable testId={testId} vertical={true} hPadding={1.75}>
       {children}
-    </div>
-  )
+    </GoAScrollable>
+  );
 };
 
 // *************

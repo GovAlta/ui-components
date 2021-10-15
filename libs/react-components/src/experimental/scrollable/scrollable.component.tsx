@@ -26,9 +26,7 @@ export const GoAScrollable: FC<Props & TestProps> = ({
     padding: `${vPadding ?? 0}rem ${hPadding ?? 0}rem`,
   };
   return (
-    <div className='goa-scrollable'>
-      <div style={style} data-testid={testId}>{children}</div>
-    </div>
+      <div className='goa-scrollable' style={style} data-testid={testId}>{children}</div>
   );
 }
 
