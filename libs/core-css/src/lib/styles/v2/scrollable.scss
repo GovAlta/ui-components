@@ -1,20 +1,19 @@
 .goa-scrollable {
-  overflow: hidden;
-  height: 100%;
+  scroll-behavior: smooth;
 }
 
-.goa-scrollable > div::-webkit-scrollbar {
+.goa-scrollable::-webkit-scrollbar {
   width: 6px;
 }
 
-.goa-scrollable > div::-webkit-scrollbar-track {
+.goa-scrollable::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
-.goa-scrollable > div::-webkit-scrollbar-thumb {
+.goa-scrollable::-webkit-scrollbar-thumb {
   background: #888;
 }
 
-.goa-scrollable > div::-webkit-scrollbar-thumb:hover {
+.goa-scrollable::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
