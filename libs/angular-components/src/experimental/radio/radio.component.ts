@@ -74,16 +74,6 @@ export class GoARadioComponent implements ControlValueAccessor, OnInit, OnDestro
    */
   @Input() disabled: boolean;
 
-  /**
-   * Boolean indicating whether or not the radiobutton is required.
-   */
-  @Input() required: boolean;
-
-  /**
-   * The position to display the label/text for the radiobutton.  Valid values are before and after.
-   */
-  @Input() labelPosition: 'before' | 'after' = 'after';
-
    /**
    * Event emitted containing the source radiobutton, and whether or not it is checked.
    */
@@ -124,14 +114,6 @@ export class GoARadioComponent implements ControlValueAccessor, OnInit, OnDestro
    */
   ngOnDestroy(): void {
     this.radioServiceSubscription.unsubscribe();
-  }
-
-  /**
-   * Boolean indicating if the radiobutton is required and not checked
-   * @ignore
-   */
-  hasError(): boolean {
-    return this.required && !this.checked;
   }
 
   /**

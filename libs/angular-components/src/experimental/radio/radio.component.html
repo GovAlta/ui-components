@@ -1,5 +1,5 @@
 
-    <label class="goa-radio" [attr.for]="uniqueId">
+    <label class="goa-radio" [ngClass]="{'goa-radio--disabled': disabled === true}" [attr.for]="uniqueId">
         <input
           type="radio"
           [id]="uniqueId"

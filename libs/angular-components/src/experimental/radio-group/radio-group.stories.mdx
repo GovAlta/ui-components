@@ -16,15 +16,6 @@ import { GoARadioComponent } from '../radio/radio.component';
     component={GoARadioGroupComponent}
     argTypes={{
       title: { control: 'text' },
-      helperText: { control: 'text' },
-      requiredErrorMessage: { control: 'text' },
-      required: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
-      },
       disabled: {
         control: 'boolean',
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
@@ -54,10 +45,7 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
       {
         name: 'fruits',
         title: 'Which of the following is your favorite fruit?',
-        helperText: 'It doesnt have to be your absolute favorite, just the one you like best of what is listed',
         disabled: false,
-        required: false,
-        requiredErrorMessage: 'Please select a fruit',
         orientation: 'vertical'
       }}
   >
@@ -72,10 +60,7 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
         template: `<goa-radio-group
                     [name]="name"
                     [title]="title"
-                    [helperText]="helperText"
                     [disabled]="disabled"
-                    [required]="required"
-                    [requiredErrorMessage]="requiredErrorMessage"
                     (selectionChange)="selectionChange($event)"
                     [orientation]="orientation"
                   >
@@ -122,10 +107,7 @@ All Properties
 <goa-radio-group
     [name]="fruits"
     [title]="Which of the following is your favorite fruit?"
-    [helperText]="It doesnt have to be your absolute favorite, just the one you like best of what is listed"
     [disabled]="false"
-    [required]="true"
-    [requiredErrorMessage]="Please select a fruit"
     [selected]="selectedRadio"
     [value]="selectedRadio.id"
     [(ngModel)]="selectedRadio"

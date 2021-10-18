@@ -11,7 +11,7 @@ import {
   ContentChildren,
   InjectionToken,
   AfterContentInit,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { GoARadioComponent } from '../radio/radio.component';
@@ -26,8 +26,8 @@ import { Subscription } from 'rxjs';
 export const GOA_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => GoARadioGroupComponent),
-  multi: true
-}
+  multi: true,
+};
 
 /**
  * Injection token that can be used to inject instances of `GoARadioGroupComponent`. It serves as
@@ -35,7 +35,9 @@ export const GOA_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
  * retention of the class and its component metadata.
  * @ignore
  */
-export const GOA_RADIO_GROUP = new InjectionToken<GoARadioGroupComponent>('GoARadioGroup');
+export const GOA_RADIO_GROUP = new InjectionToken<GoARadioGroupComponent>(
+  'GoARadioGroup'
+);
 
 /**
  * Radiobutton group component with Government of Alberta styling.  Used to group a set of related radio buttons.
@@ -46,11 +48,12 @@ export const GOA_RADIO_GROUP = new InjectionToken<GoARadioGroupComponent>('GoARa
   styleUrls: ['./radio-group.component.scss'],
   providers: [
     GOA_RADIO_GROUP_CONTROL_VALUE_ACCESSOR,
-    {provide: GOA_RADIO_GROUP, useExisting: GoARadioGroupComponent}
+    { provide: GOA_RADIO_GROUP, useExisting: GoARadioGroupComponent },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, AfterContentInit, OnDestroy {
+export class GoARadioGroupComponent
+  implements ControlValueAccessor, OnInit, AfterContentInit, OnDestroy {
   /**
    * Used to generate unique Id for this component
    * @ignore
@@ -72,7 +75,8 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
   /**
    * The child radio buttons inside the radio group
    */
-  @ContentChildren(forwardRef(() => GoARadioComponent), {descendants: true}) _radios: QueryList<GoARadioComponent>;
+  @ContentChildren(forwardRef(() => GoARadioComponent), { descendants: true })
+  _radios: QueryList<GoARadioComponent>;
 
   /**
    * @ignore
@@ -123,7 +127,9 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    * Indicates the "group" or set of radios this radio belongs to.
    */
   @Input()
-  get name(): string { return this._name; }
+  get name(): string {
+    return this._name;
+  }
   set name(value: string) {
     this._name = value;
     this._updateRadioButtonNames();
@@ -133,7 +139,9 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    * Value/unique identifier for the object the radiobutton represents.
    */
   @Input()
-  get value(): any { return this._value; }
+  get value(): any {
+    return this._value;
+  }
   set value(newValue: any) {
     if (this._value !== newValue) {
       // Set this before proceeding to ensure no circular loop occurs with selection.
@@ -148,7 +156,9 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    * The currently selected radio.
    */
   @Input()
-  get selected() { return this._selected; }
+  get selected() {
+    return this._selected;
+  }
   set selected(selected: GoARadioComponent | null) {
     this._selected = selected;
     this.value = selected ? selected.value : null;
@@ -159,7 +169,9 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    * Boolean indicating whether or not the radiobutton is disabled.
    */
   @Input()
-  get disabled(): boolean { return this._disabled; }
+  get disabled(): boolean {
+    return this._disabled;
+  }
   set disabled(value) {
     this._disabled = value;
     this._updateRadioButtonDisabled();
@@ -169,16 +181,18 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    * Boolean indicating whether or not the radiobutton is required.
    */
   @Input()
-  get required(): boolean { return this._required; }
+  get required(): boolean {
+    return this._required;
+  }
   set required(value) {
     this._required = value;
-    this._updateRadioButtonRequired();
   }
 
-   /**
+  /**
    * Event emitted containing the source radiobutton, and whether or not it is checked.
    */
-  @Output() selectionChange: EventEmitter<GoARadioChange> = new EventEmitter<GoARadioChange>();
+  @Output()
+  selectionChange: EventEmitter<GoARadioChange> = new EventEmitter<GoARadioChange>();
 
   /**
    * @ignore
@@ -188,9 +202,12 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
   /**
    * @ignore
    */
-  _propagateChange = (_: any) => { };
+  _propagateChange = (_: any) => {};
 
-  constructor(private _changeDetector: ChangeDetectorRef, private _radioService: GoARadioService) {
+  constructor(
+    private _changeDetector: ChangeDetectorRef,
+    private _radioService: GoARadioService
+  ) {
     this.uniqueId = `goa-radiobutton-group-${GoARadioGroupComponent.idNum++}`;
   }
 
@@ -200,9 +217,8 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    */
   ngAfterContentInit(): void {
     this._updateRadioButtonNames();
-    this._updateRadioButtonDisabled();
-    this._updateRadioButtonRequired();
     this._updateSelectedRadioFromValue();
+    this._updateRadioButtonDisabled();
   }
 
   /**
@@ -211,12 +227,16 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    * @ignore
    */
   ngOnInit(): void {
-    this.radioServiceSubscription = this._radioService.radioChangeMessage.subscribe(rcm => {
-      if(rcm && rcm.source && rcm.source.name === this.name && rcm.checked) {
-        this.selected = this._radios.find(r => r.uniqueId === rcm.source.uniqueId);
-        this.selectionChange.emit(rcm);
+    this.radioServiceSubscription = this._radioService.radioChangeMessage.subscribe(
+      (rcm) => {
+        if (rcm && rcm.source && rcm.source.name === this.name && rcm.checked) {
+          this.selected = this._radios.find(
+            (r) => r.uniqueId === rcm.source.uniqueId
+          );
+          this.selectionChange.emit(rcm);
+        }
       }
-    });
+    );
   }
 
   /**
@@ -228,17 +248,32 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
   }
 
   /**
+   * Updates the 'disabled' property of the child radio buttons to match the disabled state of the radio group
+   */
+  private _updateRadioButtonDisabled(): void {
+    if (this._radios) {
+      this._radios.forEach((radio) => {
+        radio.disabled = this._disabled;
+        radio.markForCheck();
+      });
+    }
+  }
+
+  /**
    * Updates the `selected` radio button from the internal _value state.
    */
   private _updateSelectedRadioFromValue(): void {
     // If the value already matches the selected radio, do nothing.
-    const isAlreadySelected = this._selected !== undefined && this._selected !== null && this._selected.value === this._value;
+    const isAlreadySelected =
+      this._selected !== undefined &&
+      this._selected !== null &&
+      this._selected.value === this._value;
 
     // need to wrap in setTimeout because _radios hasnt resolved yet when Input setter fires, need to get to next cycle in page lifecycle
     setTimeout(() => {
       if (this._radios && !isAlreadySelected) {
         this._selected = null;
-        this._radios.forEach(radio => {
+        this._radios.forEach((radio) => {
           radio.checked = this.value === radio.value;
           if (radio.checked) {
             this._selected = radio;
@@ -262,44 +297,11 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    */
   private _updateRadioButtonNames(): void {
     if (this._radios) {
-      this._radios.forEach(radio => {
+      this._radios.forEach((radio) => {
         radio.name = this.name;
         radio.markForCheck();
       });
     }
-  }
-
-  /**
-   * Updates the 'disabled' property of the child radio buttons to match the disabled state of the radio group
-   */
-  private _updateRadioButtonDisabled(): void {
-    if (this._radios) {
-      this._radios.forEach(radio => {
-        radio.required = this._required;
-        radio.markForCheck();
-      });
-    }
-  }
-
-  /**
-   * Updates the 'required' property of the child radio buttons to match the required state of the radio group
-   */
-  private _updateRadioButtonRequired(): void {
-    if (this._radios) {
-      this._radios.forEach(radio => {
-        radio.required = this._required;
-        radio.markForCheck();
-      });
-    }
-  }
-
-  /**
-   * Boolean indicating if the radiobutton is required and not checked
-   * @ignore
-   */
-  hasError(): boolean {
-    const hasSelectedRadio = this._radios.some(r => r.checked);
-    return this.required && !hasSelectedRadio;
   }
 
   /**
@@ -308,7 +310,7 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    * @ignore
    */
   writeValue(value: any) {
-    if ((value !== undefined) && (value !== null)) {
+    if (value !== undefined && value !== null) {
       this.selected = value;
       this._changeDetector.detectChanges();
     }
@@ -330,6 +332,5 @@ export class GoARadioGroupComponent implements ControlValueAccessor, OnInit, Aft
    */
   registerOnTouched(fn: any) {
     this._onTouchedCallback = fn;
-  };
-
+  }
 }

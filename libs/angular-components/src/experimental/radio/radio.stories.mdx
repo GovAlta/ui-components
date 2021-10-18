@@ -20,25 +20,11 @@ import { GoARadioComponent } from './radio.component';
            type: { summary: 'boolean' }
         }
       },
-      required: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
-      },
       disabled: {
         control: 'boolean',
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
            defaultValue: { summary: false },
            type: { summary: 'boolean' }
-        }
-      },
-      labelPosition: {
-        control: 'select',
-        options: ['before', 'after'],
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: 'after' },
         }
       },
       content: { control: 'text' }
@@ -56,9 +42,7 @@ A user input field that allows the user to make a choice from a set of mutually 
     args={
       {
         checked: false,
-        required: false,
         disabled: false,
-        labelPosition: 'after',
         name: 'fruits',
       }}
   >
@@ -71,9 +55,7 @@ A user input field that allows the user to make a choice from a set of mutually 
                       (selectionChange)="selectionChange($event)"
                       [checked]="checked"
                       [value]="'apple'"
-                      [required]="required"
                       [disabled]="disabled"
-                      [labelPosition]="labelPosition"
                       [name]="name"
                   >
                       apple
@@ -82,9 +64,7 @@ A user input field that allows the user to make a choice from a set of mutually 
                       (selectionChange)="selectionChange($event)"
                       [checked]="checked"
                       [value]="'orange'"
-                      [required]="required"
                       [disabled]="disabled"
-                      [labelPosition]="labelPosition"
                       [name]="name"
                   >
                       orange
@@ -93,9 +73,7 @@ A user input field that allows the user to make a choice from a set of mutually 
                       (selectionChange)="selectionChange($event)"
                       [checked]="checked"
                       [value]="'lemon'"
-                      [required]="required"
                       [disabled]="disabled"
-                      [labelPosition]="labelPosition"
                       [name]="name"
                   >
                       lemon
@@ -111,10 +89,8 @@ A user input field that allows the user to make a choice from a set of mutually 
   <Story name="NgModel" height={200}
     args={{
       checked: false,
-      required: false,
       disabled: false,
       indeterminate: false,
-      labelPosition: 'after',
       content: 'NgModel Radio'
     }}>
     {(args) => {
@@ -125,9 +101,7 @@ A user input field that allows the user to make a choice from a set of mutually 
         template: `<goa-radio
                       [(ngModel)]="checked"
                       (ngModelChange)="selectionChange($event)"
-                      [required]="required"
                       [disabled]="disabled"
-                      [labelPosition]="labelPosition"
                   >
                       {{content}}
                   </goa-radio>
