@@ -51,18 +51,6 @@ describe('RadioGroupComponent', () => {
       // reset mockData to ensure no other tests have influenced this test
       mockData = {...baseMockData};
     });
-
-    test('should render bound labels', async () => {
-      await render(GoARadioGroupComponent, {
-        template: getTemplate(mockData),
-        declarations: [GoARadioGroupComponent, GoARadioComponent],
-        imports: [OverlayModule]
-      });
-
-      expect(screen.queryByText(mockData.title, { exact: false })).not.toBeNull();
-      expect(screen.queryByText(mockData.helperText, { exact: false })).not.toBeNull();
-      expect(screen.queryByText(mockData.requiredErrorMessage, { exact: false })).not.toBeNull();
-    });
   });
 
   describe('Is Required Tests', () => {
@@ -70,39 +58,6 @@ describe('RadioGroupComponent', () => {
       // reset mockData to ensure no other tests have influenced this test
       // set required to true for this set of tests
       mockData = {...baseMockData, required: true};
-    });
-
-    test('should render required indicator', async () => {
-      await render(GoARadioGroupComponent, {
-        template: getTemplate(mockData),
-        declarations: [GoARadioGroupComponent, GoARadioComponent],
-        imports: [OverlayModule]
-      });
-
-      expect(screen.queryByText('(Required)')).not.toBeNull();
-    });
-
-    test('should render required error message when not selected', async () => {
-      await render(GoARadioGroupComponent, {
-        template: getTemplate(mockData),
-        declarations: [GoARadioGroupComponent, GoARadioComponent],
-        imports: [OverlayModule]
-      });
-
-      expect(screen.queryByText(mockData.requiredErrorMessage)).not.toBeNull();
-    });
-
-    test('should not render required error message when is selected', async () => {
-      await render(GoARadioGroupComponent, {
-        template: getTemplate(mockData),
-        declarations: [GoARadioGroupComponent, GoARadioComponent],
-        imports: [OverlayModule]
-      });
-
-      const orangesRadioControl = screen.getByText('oranges');
-      fireEvent.click(orangesRadioControl);
-
-      expect(screen.queryByText(mockData.requiredErrorMessage)).not.toBeNull();
     });
   });
 

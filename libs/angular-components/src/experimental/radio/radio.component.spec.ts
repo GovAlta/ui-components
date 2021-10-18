@@ -7,7 +7,6 @@ describe('GoARadioComponent', () => {
     name: 'fruits',
     disabled: false,
     labelPosition: 'after',
-    required: true,
     checked: false,
   }
 
@@ -22,7 +21,6 @@ describe('GoARadioComponent', () => {
               name="fruits"
               [disabled]="${data.disabled}"
               labelPosition="${data.labelPosition}"
-              [required]="${data.required}"
               [checked]="${data.checked}"
             >
               ${label}
@@ -48,21 +46,7 @@ describe('GoARadioComponent', () => {
     beforeEach(() => {
       // reset mockData to ensure no other tests have influenced this test
       // set required to true for this set of tests
-      mockData = {...baseMockData, required: true};
-    });
-
-    test('required should NOT display red border on radio when checked is true', async () => {
-      //reset checked for this test
-      mockData.checked = true;
-
-      await render(GoARadioComponent, {
-        template: getTemplate(mockData),
-      });
-
-      const container = document.querySelector('.goa-radio');
-
-      expect(container).not.toBeNull();
-      expect(container.classList).not.toContain('has-error');
+      mockData = {...baseMockData};
     });
   });
 
