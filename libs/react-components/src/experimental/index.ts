@@ -4,7 +4,10 @@ import { GoACard } from './card/card.component';
 import { GoAFlexRow } from './flex';
 import { GoAFormItem, GoAFormActions, GoAForm } from './form/form.component';
 import { GoAIcon, GoAIconButton } from './icons';
-import { GoAInput } from './input/input.component';
+import {
+  GoAInput,
+  GoAInputText, GoAInputPassword, GoAInputDate, GoAInputTime, GoAInputDateTime, GoAInputEmail, GoAInputSearch, GoAInputUrl, GoAInputTel, GoAInputFile, GoAInputMonth, GoAInputNumber, GoAInputRange
+} from './input/input.component';
 import { GoAModal, GoAModalActions, GoAModalContent, GoAModalTitle } from './modal/modal.component';
 import { GoAScrollable } from './scrollable/scrollable.component';
 import { GoATextArea } from './textarea/textarea.component';
@@ -26,6 +29,19 @@ export {
   GoAIcon,
   GoAIconButton,
   GoAInput,
+  GoAInputText,
+  GoAInputPassword,
+  GoAInputDate,
+  GoAInputTime,
+  GoAInputDateTime,
+  GoAInputEmail,
+  GoAInputSearch,
+  GoAInputUrl,
+  GoAInputTel,
+  GoAInputFile,
+  GoAInputMonth,
+  GoAInputNumber,
+  GoAInputRange,
   GoAModal,
   GoAModalActions,
   GoAModalContent,
