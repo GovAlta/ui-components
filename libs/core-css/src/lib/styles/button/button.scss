@@ -43,6 +43,13 @@ $tertiary-focus-color: $tertiary-hover-color;
 $tertiary-focus-background-color: $tertiary-background-color;
 $tertiary-focus-border-color: $tertiary-focus-color;
 $tertiary-focus-outline-color: $active-outline-color;
+
+@media (min-width: 640px) {
+  .goa-button + .goa-button {
+    margin-left: 0.5rem;
+  }
+}
+
 /* This style is from the alberta design system */
 @mixin goa-button-styles {
   & {
