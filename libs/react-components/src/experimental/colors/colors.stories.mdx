@@ -1,0 +1,34 @@
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+import { action } from '@storybook/addon-actions';
+import { Dont } from '@abgov/shared/storybook-common';
+
+<Meta
+  title="Design/Colors"
+  argTypes={{}}
+/>
+
+export const Template = () => {
+  return (
+    <div>FOo</div>
+  )
+}
+
+# Colors
+
+## Overview
+
+
+### Basic
+
+<Canvas>
+  <Story name="Colors">
+    {Template.bind({})}
+  </Story>
+</Canvas>

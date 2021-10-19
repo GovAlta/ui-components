@@ -35,7 +35,7 @@
     line-height: calc(var(--fs-base) + 1rem);
 
     em {
-      color: var(--color-gray-d1);
+      color: var(--color-gray-700);
       font-style: normal;
       font-weight: var(--fw-regular);
       font-size: var(--fs-sm);
@@ -60,7 +60,7 @@
 
 .help-msg {
   font-size: var(--fs-sm);
-  color: var(--color-gray-d3);
+  color: var(--color-gray-900);
   line-height: calc(var(--fs-sm) + 0.5rem);
 }
 

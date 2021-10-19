@@ -17,8 +17,8 @@ ion-icon {
 .goa-icon-button-goa {
   padding: 0.25rem;
   border-radius: 0.5rem;
-  color: var(--color-primary);
-  fill: var(--color-primary);
+  color: var(--color-blue-500);
+  fill: var(--color-blue-500);
   cursor: pointer;
   transition: background-color 100ms ease-in, transform 100ms ease-in;
 }
@@ -28,7 +28,7 @@ ion-icon {
 }
 
 .goa-icon-button-goa:hover {
-  background-color: var(--color-primary-l1);
+  background-color: var(--color-blue-100);
 }
 
 /* Round */
