@@ -421,7 +421,7 @@ export type GoAIconType
   ;
 
 export type IconSize = 'small' | 'medium' | 'large'
-export type IconVariant = 'round' | 'goa';
+export type IconVariant = 'round' | 'goa' | 'blah';
 export type IconStyle = 'outline' | 'filled' | 'sharp';
 
 
