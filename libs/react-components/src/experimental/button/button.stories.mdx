@@ -1,0 +1,150 @@
+import GoAButton from './button';
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs/blocks';
+
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+
+<Meta
+  title="Experimental/Basic Elements/Button"
+  component={GoAButton}
+  argTypes={{
+    size: {
+      control: {
+        type: 'select',
+        options: ['small', 'medium', 'large'],
+      },
+    },
+    onClick: { action: 'You have clicked the button', control: null },
+  }}
+/>
+
+# Button
+
+A user input control that performs an action, typically on click
+
+## Overview
+
+export const Template = (args) => (
+  <div>
+    <GoAButton onClick={() => {}} {...args} type="primary">Primary</GoAButton>
+    <GoAButton onClick={() => {}} {...args} type="secondary">Secondary</GoAButton>
+    <GoAButton onClick={() => {}} {...args} type="tertiary">Tertiary</GoAButton>
+    <GoAButton onClick={() => {}} {...args} type="borderless">Borderless</GoAButton>
+  </div>
+);
+
+<Canvas>
+  <Story
+    name="Default - large"
+    args={{
+      size: 'large',
+      title: 'Save something',
+      onClick: (value) => {
+        action('button clicked')(value);
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Default - medium"
+    args={{
+      size: 'medium',
+      title: 'Save something',
+      onClick: (value) => {
+        action('button clicked')(value);
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Default - small"
+    args={{
+      size: 'small',
+      title: 'Save something',
+      onClick: (value) => {
+        action('button clicked')(value);
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Danger - large"
+    args={{
+      size: 'large',
+      variant: 'danger',
+      title: 'Delete',
+      onClick: (value) => {
+        action('button clicked')(value);
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Danger - medium"
+    args={{
+      size: 'medium',
+      variant: 'danger',
+      title: 'Delete',
+      onClick: (value) => {
+        action('button clicked')(value);
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Danger - small"
+    args={{
+      size: 'small',
+      variant: 'danger',
+      title: 'Delete',
+      onClick: (value) => {
+        action('button clicked')(value);
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Examples
+
+```html
+<GoAButton type="primary" title="Save">
+  Save
+</GoAButton>
+
+<GoAButton variant="danger" type="primary" title="Delete">
+  Delete
+</GoAButton>
+```
+
+## Properties
+
+<Description of={GoAButton} />
+<ArgsTable of={GoAButton} />
