@@ -15,10 +15,10 @@ ion-icon {
 
 /* GoA */
 .goa-icon-button-goa {
-  padding: 0.25rem;
+  padding: 0.5rem;
   border-radius: 0.5rem;
-  color: var(--color-primary);
-  fill: var(--color-primary);
+  color: var(--color-blue-500);
+  fill: var(--color-blue-500);
   cursor: pointer;
   transition: background-color 100ms ease-in, transform 100ms ease-in;
 }
@@ -28,7 +28,7 @@ ion-icon {
 }
 
 .goa-icon-button-goa:hover {
-  background-color: var(--color-primary-l1);
+  background-color: var(--color-blue-100);
 }
 
 /* Round */
@@ -45,4 +45,22 @@ ion-icon {
 
 .goa-icon-button-round:hover {
   background: rgba(0, 0, 0, 0.1);
+}
+
+
+/* Blah */
+.goa-icon-button-blah {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-blue-500);
+  color: var(--color-blue-500);
+  fill: var(--color-blue-500);
+  cursor: pointer;
+}
+
+.goa-icon-button-blah:active {
+}
+
+.goa-icon-button-blah:hover {
+  box-shadow: 0 0 0 2px var(--color-orange-500);
 }

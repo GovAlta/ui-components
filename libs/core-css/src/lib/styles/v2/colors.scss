@@ -1,17 +1,6 @@
 :root {
-  // ===========================================================================
-  // Base Colors
-  // ===========================================================================
-
   --color-white: #fff;
   --color-black: #333;
-
-  // TODO: these names of these colors need to be fixed (see below)
-  --color-gray-l5: #f1f1f1;
-  --color-gray-l2: #adadad;
-  --color-gray-l1: #dcdcdc;
-  --color-gray-d1: #666;
-  --color-gray-d3: #333;
 
   --color-gray-100: #f1f1f1;
   --color-gray-200: #dcdcdc;
@@ -24,33 +13,21 @@
   --color-tealblue-900: #005072;
 
   --color-orange: #feba35;
+  --color-orange-100: hsl(39.7, 99.01%, 98%);
+  --color-orange-500: hsl(39.7, 99.01%, 60.2%);
+  --color-orange-900: hsl(39.7, 99.01%, 30%);
+
   --color-red: #ec040b;
-  --color-green: hsl(148, 100%, 26%);
+  --color-red-100: hsl(358.19, 96.67%, 98%);
+  --color-red-500: hsl(358.19, 96.67%, 47.06%);
+  --color-red-900: hsl(358.19, 96.67%, 20%);
 
-  --color-primary-l1: #e3f2ff;
-  --color-primary: #0070c4;
-  --color-primary-d1: #004f84;
-  --color-primary--hover: var(--color-primary-d1);
+  --color-green: #00853F;
+  --color-green-100: hsl(148, 100%, 95%);
+  --color-green-500: hsl(148.42, 100%, 26.08%);
+  --color-green-900: hsl(148, 100%, 10%);
 
-  // ===========================================================================
-  // Named Colors
-  // ===========================================================================
-
-  // TODO: get rid of the named colors..many names are going to result which is too confusing
-  --color-text: var(--color-gray-d3);
-  --color-error: var(--color-red);
-  --color-disabled: var(--color-gray-l2);
-
-  // inputs
-  --color-input-background: var(--color-white);
-  --color-input-border: var(--color-gray-d1);
-  --color-input-border--hover: var(--color-primary-d1);
-  --color-input: var(--color-gray-d3);
-  --color-input--focused: var(--color-orange);
-
-  // buttons
-  --color-button-primary: var(--color-primary);
-  --color-button-primary--hover: var(--color-primary-d1);
-  --color-button-tertiary: var(--color-gray-l2);
-  --color-button-tertiary--hover: var(--color-gray-l5);
+  --color-blue-100: #e3f2ff;
+  --color-blue-500: #0070c4; // primary
+  --color-blue-600: #004f84;
 }

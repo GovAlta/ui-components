@@ -30,12 +30,12 @@
   &.error {
     input,
     textarea {
-      border-color: var(--color-error);
+      border-color: var(--color-red);
     }
     .error-msg {
       font-size: var(--fs-sm);
       line-height: calc(var(--fs-sm) + 1rem);
-      color: var(--color-error);
+      color: var(--color-red);
     }
   }
 }

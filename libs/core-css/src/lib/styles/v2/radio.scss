@@ -15,10 +15,10 @@
 /* Radio */
 
 label.goa-radio {
-  --goa-border-color: var(--color-input-border);
-  --goa-border-color--checked: var(--color-primary);
-  --goa-radio-color--error: var(--color-error);
-  --goa-radio-outline-color: var(--color-input--focused);
+  --goa-border-color: var(--color-gray-700);
+  --goa-border-color--checked: var(--color-blue-500);
+  --goa-radio-color--error: var(--color-red);
+  --goa-radio-outline-color: var(--color-orange);
   --goa-radio-outline-width: 3px;
   --goa-radio-diameter: 1.5rem;
   --goa-radio-border-width: 1px;
