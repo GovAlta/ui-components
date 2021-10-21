@@ -1,0 +1,215 @@
+.goa-button {
+  border-radius: 0.25rem;
+  border: 2px solid var(--color-blue-500);
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1em;
+  padding: 0.75rem;
+
+  &:disabled {
+    pointer-events: none;
+    color: var(--color-gray-700);
+    background-color: var(--color-gray-100);
+    border-color: var(--color-gray-100);
+  }
+}
+
+// Types
+
+.goa-button--primary {
+  border: 2px solid var(--color-blue-500);
+  background: var(--color-blue-500);
+  color: var(--color-white);
+
+  &:hover {
+    border-color: var(--color-blue-600);
+    background: var(--color-blue-600);
+  }
+
+  &:focus,
+  &:active {
+    border-color: var(--color-blue-600);
+    box-shadow: 0 0 0 3px var(--color-orange-500);
+    background: var(--color-blue-600);
+    outline: none;
+  }
+}
+
+.goa-button--secondary {
+  border: 2px solid var(--color-blue-500);
+  background: var(--color-white);
+  color: var(--color-blue-500);
+
+  &:hover {
+    border-color: var(--color-blue-600);
+    color: var(--color-blue-600);
+  }
+
+  &:focus,
+  &:active {
+    border-color: var(--color-blue-600);
+    color: var(--color-blue-600);
+    box-shadow: 0 0 0 3px var(--color-orange-500);
+    outline: none;
+  }
+}
+
+.goa-button--tertiary {
+  border-color: var(--color-gray-200);
+  background: var(--color-white);
+  color: var(--color-blue-500);
+
+  &:hover {
+    color: var(--color-blue-600);
+  }
+
+  &:focus,
+  &:active {
+    border-color: var(--color-blue-600);
+    color: var(--color-blue-600);
+    box-shadow: 0 0 0 3px var(--color-orange-500);
+    outline: none;
+  }
+}
+
+.goa-button--borderless {
+  background: none;
+  color: var(--color-blue-500);
+  border: none;
+  transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out;
+  transform: scale(1);
+
+  &:hover {
+    background-color: var(--color-blue-100);
+    color: var(--color-blue-500);
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+    box-shadow: none;
+    background-color: var(--color-blue-100);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Variants
+
+.goa-button--default { }
+
+.goa-button--primary.goa-button--danger {
+  color: var(--color-white);
+  background: var(--color-red-500);
+  border-color: var(--color-red-500);
+
+  &:hover {
+    background: var(--color-red-600);
+    border-color: var(--color-red-600);
+  }
+
+  &:focus,
+  &:active {
+    background: var(--color-red-600);
+    border-color: var(--color-red-600);
+  }
+}
+
+.goa-button--secondary.goa-button--danger {
+  color: var(--color-red-500);
+  border-color: var(--color-red-500);
+
+  &:hover {
+    border-color: var(--color-red-600);
+    color: var(--color-red-600);
+  }
+
+  &:focus,
+  &:active {
+    color: var(--color-red-600);
+    border-color: var(--color-red-600);
+  }
+}
+
+.goa-button--tertiary.goa-button--danger {
+  color: var(--color-red-500);
+  border-color: var(--color-gray-200);
+
+  &:hover {
+    border-color: var(--color-red-600);
+    color: var(--color-red-600);
+  }
+
+  &:focus,
+  &:active {
+    color: var(--color-red-600);
+    border-color: var(--color-red-600);
+  }
+}
+
+.goa-button--borderless.goa-button--danger {
+  color: var(--color-red-500);
+
+  &:hover {
+    background: var(--color-red-100);
+    color: var(--color-red-500);
+  }
+
+  &:focus,
+  &:active {
+    background: var(--color-red-100);
+    color: var(--color-red-500);
+  }
+}
+
+// Sizes
+
+.goa-button--large {
+  font-size: var(--fs-lg);
+  padding: 0.75rem;
+}
+
+.goa-button--large.goa-button--borderless {
+  padding: calc(0.75rem + 2px);
+}
+
+.goa-button--medium {
+  font-size: var(--fs-base);
+  padding: 0.5rem;
+}
+
+.goa-button--medium.goa-button--borderless {
+  padding: calc(0.5rem + 2px);
+}
+
+.goa-button--small {
+  font-size: var(--fs-sm);
+  padding: 0.25rem;
+}
+
+.goa-button--small.goa-button--borderless {
+  padding: calc(0.25rem + 2px);
+}
+
+// Screen sizes
+
+.goa-button {
+  min-width: 100%;
+}
+
+.goa-button + .goa-button {
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 480px) {
+  .goa-button {
+    min-width: 4rem;
+  }
+
+  .goa-button + .goa-button {
+    margin-left: 0.5rem;
+  }
+}
