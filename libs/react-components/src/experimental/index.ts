@@ -1,4 +1,5 @@
 import { GoABadge } from './badge/badge.component';
+import { GoAButton } from './button/button';
 import { GoAAppVersionHeader } from './app-version-header/app-version-header.component';
 import { GoACard } from './card/card.component';
 import { GoAFlexRow } from './flex';
@@ -20,6 +21,7 @@ export type { GoAIconType, GoABadgeType };
 
 export {
   GoABadge,
+  GoAButton,
   GoAAppVersionHeader,
   GoACard,
   GoAFlexRow,
