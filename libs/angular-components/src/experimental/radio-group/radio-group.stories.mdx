@@ -15,7 +15,6 @@ import { GoARadioComponent } from '../radio/radio.component';
     ]}
     component={GoARadioGroupComponent}
     argTypes={{
-      title: { control: 'text' },
       disabled: {
         control: 'boolean',
         table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
@@ -59,7 +58,6 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
                   </div>
                   <goa-radio-group
                     [name]="name"
-                    [title]="title"
                     [disabled]="disabled"
                     (selectionChange)="selectionChange($event)"
                     [orientation]="orientation"

@@ -96,32 +96,12 @@ export class GoARadioGroupComponent
   /**
    * @ignore
    */
-  private _required: boolean;
-
-  /**
-   * @ignore
-   */
   private _disabled: boolean;
-
-  /**
-   * The title for the radio group.  Put the question being asked here
-   */
-  @Input() title: string;
 
   /**
    * Orientation of the radio buttons.
    */
   @Input() orientation: 'horizontal' | 'vertical' = 'vertical';
-
-  /**
-   * Helper text to provide further context as to what the radio group is for/asking
-   */
-  @Input() helperText: string;
-
-  /**
-   * The error message to display when the radio group selection is required and nothing has been selected
-   */
-  @Input() requiredErrorMessage = 'Please select one of the provided options.';
 
   /**
    * Indicates the "group" or set of radios this radio belongs to.
