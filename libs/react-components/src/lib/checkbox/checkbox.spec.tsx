@@ -9,14 +9,14 @@ describe('GoA Checkbox', () => {
 
   function renderParent({ checked, ...props }: CheckboxProps = {}) {
     const StatefulParent = (): JSX.Element => {
-      const [value, setValue] = useState<boolean>(checked);
+      const [value, setValue] = useState<string>(checked);
 
-      const onChange = (newValue: boolean) => {
+      const onChange = (name: string, newValue: string) => {
         setValue(newValue)
       }
 
       return (
-        <GoACheckbox {...props} checked={value} selectionChange={onChange}>{label}</GoACheckbox>
+        <GoACheckbox {...props} checked={value} onChange={onChange}>{label}</GoACheckbox>
       )
     }
 
@@ -70,19 +70,19 @@ describe('GoA Checkbox', () => {
     expect(container.classList).not.toContain('has-error');
   });
 
-  test('should emit selectionChange when clicked', async () => {
-    const selectionChangeStub = jest.fn()
+  test('should emit onChange when clicked', async () => {
+    const onChangeStub = jest.fn()
 
     const StatefulParent = ({ checked, ...props }: CheckboxProps): JSX.Element => {
       const [value, setValue] = useState<boolean>(checked);
 
       const onChange = (newValue: boolean) => {
         setValue(newValue)
-        selectionChangeStub();
+        onChangeStub();
       }
 
       return (
-        <GoACheckbox {...props} checked={value} selectionChange={onChange}>{label}</GoACheckbox>
+        <GoACheckbox {...props} checked={value} onChange={onChange}>{label}</GoACheckbox>
       )
     }
 
@@ -90,9 +90,9 @@ describe('GoA Checkbox', () => {
 
     const checkbox = screen.getByRole('checkbox', {});
     userEvent.click(checkbox);
-    const selectionChangeResults = selectionChangeStub.mock.results;
+    const onChangeResults = onChangeStub.mock.results;
 
-    expect(selectionChangeStub).toHaveBeenCalledTimes(1);
-    expect(selectionChangeResults).toBeTruthy();
+    expect(onChangeStub).toHaveBeenCalledTimes(1);
+    expect(onChangeResults).toBeTruthy();
   });
 });

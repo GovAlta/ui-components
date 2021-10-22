@@ -13,6 +13,7 @@ import {
   phoneNumberFormatValidator,
 } from './validators';
 import {
+  GoACheckbox,
   GoADropdown,
   GoADropdownOption,
   GoAButton,
@@ -54,6 +55,7 @@ export const defaultTemplete = (args) => {
     validator.add('lastName', [requiredFieldValidator]);
     validator.add('favColors', [requiredFieldValidator]);
     validator.add('textarea', [requiredFieldValidator]);
+    validator.add('isAdult', [requiredFieldValidator]);
     validator.add('music', [
       requiredFieldValidator,
       (value) => [
@@ -93,7 +95,7 @@ export const defaultTemplete = (args) => {
               />
             </GoAFormItem>
             <GoAFormItem>
-              <label>Middle Name</label>
+              <label>Middle Name <em>optional</em></label>
               <GoAInput
                 type="text"
                 name="middleName"
@@ -111,6 +113,14 @@ export const defaultTemplete = (args) => {
               />
             </GoAFormItem>
           </GoAFlexRow>
+          <GoAFormItem error={errorState.isAdult}>
+            <GoACheckbox
+              name="isAdult"
+              onChange={onChange}
+              checked={formState.isAdult}
+              content="Are you over 18?"
+            />
+          </GoAFormItem>
           <GoAFormItem error={errorState.favColors}>
             <label>Favourite Color</label>
             <GoADropdown
@@ -201,6 +211,9 @@ const onChange = (name, value) => {
 const onSubmit = (e) => {
   const errors = validator.validate(formState);
   setErrorState(errors);
+  if (errors.length > 0) {
+    window.scrollTo(0, 0);
+  }
 };
 
 return (
@@ -221,7 +234,7 @@ return (
         />
       </GoAFormItem>
       <GoAFormItem>
-        <label>Middle Name</label>
+        <label>Middle Name <em>optional</em></label>
         <GoAInput
           type="text"
           name="middleName"
