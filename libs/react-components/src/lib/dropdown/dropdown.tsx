@@ -118,7 +118,7 @@ export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
           </div>
         }
         <input readOnly placeholder={props.placeholder} value={getSelectedLabel()} />
-        <GoAIcon type="chevronDown" />
+        <GoAIcon type="chevron-down" />
       </div>
       {isMenuVisible &&
         <ul className="goa-dropdown-list">
