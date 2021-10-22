@@ -17,7 +17,7 @@ import {
   GoAFormItem,
 } from '../index.ts';
 import { useState } from 'react';
-import { Do, Dont, State } from '@abgov/shared/storybook-common';
+import { Do, Dont, StateDisplay } from '@abgov/shared/storybook-common';
 import {
   Meta,
   Preview,
@@ -39,7 +39,7 @@ export const Template = (args) => {
   };
   return (
     <>
-      <State
+      <StateDisplay
         title="Input Types"
         description="The GoAInput component handles all html input types styled to the GoA UI guidelines"
         state={state}
@@ -62,7 +62,7 @@ export const Template = (args) => {
         <GoAInputMonth {...args} onChange={onChange} name="month" />
         <GoAInputNumber {...args} onChange={onChange} name="number" />
         <GoAInputRange {...args} onChange={onChange} name="range" />
-      </State>
+      </StateDisplay>
     </>
   );
 };

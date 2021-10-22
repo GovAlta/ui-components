@@ -31,7 +31,7 @@ const exampleChild: CSSProperties = {
   marginBottom: '1rem',
 }
 
-export const State: FC<Props> = ({ children, title, description, state }) => {
+export const StateDisplay: FC<Props> = ({ children, title, description, state }) => {
   return (
     <>
       <h4>{title}</h4>
@@ -54,4 +54,4 @@ export const State: FC<Props> = ({ children, title, description, state }) => {
   );
 }
 
-export default State;
+export default StateDisplay;

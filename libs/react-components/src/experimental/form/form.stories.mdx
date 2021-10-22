@@ -31,7 +31,7 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 import { action } from '@storybook/addon-actions';
-import { DoDont, State } from '@abgov/shared/storybook-common';
+import { DoDont, StateDisplay } from '@abgov/shared/storybook-common';
 
 <Meta title="Experimental/Components/Form" component={GoAForm} />
 
@@ -74,10 +74,7 @@ export const defaultTemplete = (args) => {
       setErrorState(errors);
     };
     return (
-      <State
-        title=""
-        description=""
-        state={formState}>
+      <StateDisplay title="" description="" state={formState}>
         <GoAForm>
           <h2>Your information</h2>
           <p>
@@ -174,7 +171,7 @@ export const defaultTemplete = (args) => {
             </GoAButton>
           </GoAFormActions>
         </GoAForm>
-      </State>
+      </StateDisplay>
     );
   };
   return <GoAFormWrapper />;

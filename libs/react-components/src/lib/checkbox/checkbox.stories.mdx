@@ -9,9 +9,10 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 import { action } from '@storybook/addon-actions';
-import { State, DoDont } from '@abgov/shared/storybook-common';
+import { StateDisplay, DoDont } from '@abgov/shared/storybook-common';
 
-<Meta title="React/Basic Elements/Checkbox"
+<Meta
+  title="React/Basic Elements/Checkbox"
   component={GoACheckbox}
   argTypes={{
     content: { control: 'text' },
@@ -47,12 +48,12 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
 export const Template = (args) => {
   const [state, setState] = useState({});
   const onChange = (name, value) => {
-    setState({...state, [name]: value});
+    setState({ ...state, [name]: value });
     action('state changed')(name, value);
   };
   return (
     <>
-      <State title="Checkbox" state={state}>
+      <StateDisplay title="Checkbox" state={state}>
         <GoACheckbox
           {...args}
           name="mycheck"
@@ -61,7 +62,7 @@ export const Template = (args) => {
           value="99"
           content="check me"
         />
-      </State>
+      </StateDisplay>
     </>
   );
 };
