@@ -1,0 +1,66 @@
+@import './colors.scss';
+
+.goa-checkbox {
+  box-sizing: border-box;
+  display: flex !important;
+  align-items: center;
+  min-height: calc(3rem - 4px);
+
+  input[type='checkbox'] {
+    // hide the input, but still make it tab-able
+    height: 0px;
+    width: 0px;
+    position: absolute;
+  }
+}
+
+// disabled state
+.goa-checkbox--disabled {
+  opacity: 30%;
+
+  .goa-checkbox-label {
+    cursor: default;
+  }
+}
+
+.goa-checkbox-container {
+  cursor: pointer;
+  border: 1px solid var(--color-gray-700);
+  border-radius: 2px;
+  background-color: var(--color-white);
+  height: 1.5rem;
+  line-height: 1.5rem;
+  width: 1.5rem;
+  display: flex;
+  justify-content: center;
+  padding: 3px;
+
+  svg {
+    fill: var(--color-white);
+  }
+
+  &.goa-checkbox--selected {
+    background-color: var(--color-blue-500);
+  }
+
+  &:hover:not(.goa-checkbox--selected) {
+    background-color: var(--color-gray-100);
+  }
+
+  &:focus-within {
+    box-shadow: 0 0 0 3px var(--color-orange-500);
+    outline: none;
+  }
+}
+
+.goa-checkbox-text {
+  padding-left: 0.5rem;
+  user-select: none;
+  cursor: pointer;
+  font-weight: var(--fw-regular);
+}
+
+// Error state
+.goa-state--error .goa-checkbox-container {
+  border: 2px solid var(--color-red-500);
+}

@@ -9,28 +9,13 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 import { action } from '@storybook/addon-actions';
-import { DoDont } from '@abgov/shared/storybook-common';
+import { State, DoDont } from '@abgov/shared/storybook-common';
 
 <Meta title="React/Basic Elements/Checkbox"
   component={GoACheckbox}
   argTypes={{
     content: { control: 'text' },
     value: { control: 'text' },
-    checked: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    required: {
-      control: {
-        type: 'boolean',
-      }
-    },
-    required: {
-      control: {
-        type: 'boolean',
-      },
-    },
     disabled: {
       control: {
         type: 'boolean',
@@ -47,7 +32,7 @@ import { DoDont } from '@abgov/shared/storybook-common';
         options: ['before', 'after'],
       },
     },
-    selectionChange: {
+    onChange: {
       action: 'selection was changed',
     },
   }}
@@ -59,26 +44,26 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
 
 ## Overview
 
-export const StatefulParent = () => {
-  const [value, setValue] = useState(false);
-  const onChange = (newValue) => {
-    setValue(newValue);
+export const Template = (args) => {
+  const [state, setState] = useState({});
+  const onChange = (name, value) => {
+    setState({...state, [name]: value});
+    action('state changed')(name, value);
   };
   return (
     <>
-      <GoACheckbox
-        selectionChange={onChange}
-        checked={value}
-        value={99}
-        content="check me"
-      />
-      <div>Current value: {value ? 'true' : 'false'} </div>
+      <State title="Checkbox" state={state}>
+        <GoACheckbox
+          {...args}
+          name="mycheck"
+          onChange={onChange}
+          checked={state['mycheck']}
+          value="99"
+          content="check me"
+        />
+      </State>
     </>
   );
-};
-
-export const StatefulParentTemplate = (args) => {
-  return <StatefulParent />;
 };
 
 #### Basic
@@ -88,15 +73,13 @@ export const StatefulParentTemplate = (args) => {
     name="Basic"
     height={200}
     args={{
-      checked: false,
-      required: false,
       disabled: false,
       indeterminate: false,
       labelPosition: 'after',
       content: 'Checkbox 1',
     }}
   >
-    {StatefulParentTemplate.bind({})}
+    {Template.bind({})}
   </Story>
 </Canvas>
 

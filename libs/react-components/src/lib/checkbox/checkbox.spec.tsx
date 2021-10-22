@@ -7,16 +7,16 @@ import GoACheckbox, { CheckboxProps } from './checkbox';
 describe('GoA Checkbox', () => {
   const label = 'label test';
 
-  function renderParent({ checked, ...props }: CheckboxProps = {}) {
+  function renderParent(props: CheckboxProps) {
     const StatefulParent = (): JSX.Element => {
-      const [value, setValue] = useState<boolean>(checked);
+      const [value, setValue] = useState<string>(`${props.value}`);
 
-      const onChange = (newValue: boolean) => {
+      const onChange = (_name: string, newValue: string) => {
         setValue(newValue)
       }
 
       return (
-        <GoACheckbox {...props} checked={value} selectionChange={onChange}>{label}</GoACheckbox>
+        <GoACheckbox name={props.name} {...props} onChange={onChange}>{label}</GoACheckbox>
       )
     }
 
@@ -24,16 +24,13 @@ describe('GoA Checkbox', () => {
   }
 
   it('should render label', () => {
-    renderParent();
+    renderParent({ name: 'someCheckBox'});
 
     expect(screen.getByText(label)).not.toBeNull();
   });
 
   test('should render checkmark svg when checked', async () => {
-    renderParent();
-
-    const cb = screen.getByRole('checkbox') as HTMLInputElement;
-    userEvent.click(cb);
+    renderParent({ name: 'someCheckBox', checked: true});
 
     const checkmark = document.getElementById('checkmark');
     const dashmark = document.getElementById('dashmark');
@@ -43,7 +40,7 @@ describe('GoA Checkbox', () => {
   });
 
   test('should render dash svg when checked is true', () => {
-    renderParent({ checked: true, indeterminate: true});
+    renderParent({ name: 'someCheckBox', checked: true, indeterminate: true });
 
     const checkmark = document.getElementById('checkmark');
     const dashmark = document.getElementById('dashmark');
@@ -52,47 +49,29 @@ describe('GoA Checkbox', () => {
     expect(checkmark).toBeNull();
   });
 
-  test('required should display red border on checkbox when checked is false', () => {
-    renderParent({ checked: false, required: true});
+  test('should emit onChange when clicked', async () => {
+    const onChangeStub = jest.fn()
 
-    const container = document.querySelector('.goa-checkbox');
+    const StatefulParent = (props: CheckboxProps): JSX.Element => {
+      const [value, setValue] = useState<string>(`${props.value}`);
 
-    expect(container).not.toBeNull();
-    expect(container.classList).toContain('has-error');
-  });
-
-  test('required should NOT display red border on checkbox when checked is true', () => {
-    renderParent({ checked: true, required: true});
-
-    const container = document.querySelector('.goa-checkbox');
-
-    expect(container).not.toBeNull();
-    expect(container.classList).not.toContain('has-error');
-  });
-
-  test('should emit selectionChange when clicked', async () => {
-    const selectionChangeStub = jest.fn()
-
-    const StatefulParent = ({ checked, ...props }: CheckboxProps): JSX.Element => {
-      const [value, setValue] = useState<boolean>(checked);
-
-      const onChange = (newValue: boolean) => {
+      const onChange = (newValue: string) => {
         setValue(newValue)
-        selectionChangeStub();
+        onChangeStub();
       }
 
       return (
-        <GoACheckbox {...props} checked={value} selectionChange={onChange}>{label}</GoACheckbox>
+        <GoACheckbox {...props} value={props.value} checked={props.checked} onChange={onChange}>{label}</GoACheckbox>
       )
     }
 
-    render(<StatefulParent />);
+    render(<StatefulParent name="someCheckbox" />);
 
     const checkbox = screen.getByRole('checkbox', {});
     userEvent.click(checkbox);
-    const selectionChangeResults = selectionChangeStub.mock.results;
+    const onChangeResults = onChangeStub.mock.results;
 
-    expect(selectionChangeStub).toHaveBeenCalledTimes(1);
-    expect(selectionChangeResults).toBeTruthy();
+    expect(onChangeStub).toHaveBeenCalledTimes(1);
+    expect(onChangeResults).toBeTruthy();
   });
 });
