@@ -44,7 +44,6 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
     args={
       {
         name: 'fruits',
-        title: 'Which of the following is your favorite fruit?',
         disabled: false,
         orientation: 'vertical'
       }}
@@ -53,11 +52,12 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
       args.selectionChange = function(value) {
         action('radio group selection was changed')(value);
       }
-      args.selectionChangeTemp = function(value) {
-        action('"other" selection was changed')(value);
-      }
       return {
-        template: `<goa-radio-group
+        template: `
+                  <div>
+                    <span>Select a radio button</span>
+                  </div>
+                  <goa-radio-group
                     [name]="name"
                     [title]="title"
                     [disabled]="disabled"
@@ -68,11 +68,6 @@ A wrapper/group for a set of user input fields that allow the user to make a cho
                     <goa-radio [value]="'orange'">orange</goa-radio>
                     <goa-radio [value]="'banana'">banana</goa-radio>
                   </goa-radio-group>
-                  <br />
-                  Other radios:
-                    <goa-radio name="temp" [value]="'apple'" (selectionChange)="selectionChangeTemp($event)">apple</goa-radio>
-                    <goa-radio name="temp" [value]="'orange'" (selectionChange)="selectionChangeTemp($event)">orange</goa-radio>
-                    <goa-radio name="temp" [value]="'banana'" (selectionChange)="selectionChangeTemp($event)">banana</goa-radio>
                   `,
         props: args
       }

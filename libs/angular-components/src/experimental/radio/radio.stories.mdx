@@ -84,47 +84,10 @@ A user input field that allows the user to make a choice from a set of mutually 
   </Story>
 </Canvas>
 
-#### ngModel bound
-<Canvas>
-  <Story name="NgModel" height={200}
-    args={{
-      checked: false,
-      disabled: false,
-      indeterminate: false,
-      content: 'NgModel Radio'
-    }}>
-    {(args) => {
-      args.selectionChange = function(value) {
-        action('selection was changed')(value);
-      }
-      return {
-        template: `<goa-radio
-                      [(ngModel)]="checked"
-                      (ngModelChange)="selectionChange($event)"
-                      [disabled]="disabled"
-                  >
-                      {{content}}
-                  </goa-radio>
-                   <div>
-                    modelValue = {{checked}}
-                  </div>`,
-        props: args
-      }
-    }}
-  </Story>
-</Canvas>
-
-
 ## Examples
 Basic
 ```
 <goa-radio [checked]="item.checked">
-  Label goes here
-</goa-radio>
-
-or
-
-<goa-radio [(ngModel)]="item.checked">
   Label goes here
 </goa-radio>
 

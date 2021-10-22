@@ -6,7 +6,6 @@ describe('GoARadioComponent', () => {
   const baseMockData = {
     name: 'fruits',
     disabled: false,
-    labelPosition: 'after',
     checked: false,
   }
 
@@ -20,7 +19,6 @@ describe('GoARadioComponent', () => {
     return `<goa-radio
               name="fruits"
               [disabled]="${data.disabled}"
-              labelPosition="${data.labelPosition}"
               [checked]="${data.checked}"
             >
               ${label}

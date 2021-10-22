@@ -178,17 +178,6 @@ export class GoARadioGroupComponent
   }
 
   /**
-   * Boolean indicating whether or not the radiobutton is required.
-   */
-  @Input()
-  get required(): boolean {
-    return this._required;
-  }
-  set required(value) {
-    this._required = value;
-  }
-
-  /**
    * Event emitted containing the source radiobutton, and whether or not it is checked.
    */
   @Output()
