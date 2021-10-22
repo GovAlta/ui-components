@@ -39,7 +39,7 @@ export const GoAInputPassword: FC<Props> = (props) => {
   return <GoAInput {...props} type="password" />;
 }
 
-export const GoAInputDate: FC<Props & { min: string, max: string }> = (props) => {
+export const GoAInputDate: FC<Props & { min?: string, max?: string }> = (props) => {
   return <GoAInput {...props} type="date" />;
 }
 
@@ -47,7 +47,7 @@ export const GoAInputTime: FC<Props> = (props) => {
   return <GoAInput {...props} type="time" />;
 }
 
-export const GoAInputDateTime: FC<Props & { min: string, max: string }> = (props) => {
+export const GoAInputDateTime: FC<Props & { min?: string, max?: string }> = (props) => {
   return <GoAInput {...props} type="datetime-local" />;
 }
 
@@ -75,11 +75,11 @@ export const GoAInputMonth: FC<Props> = (props) => {
   return <GoAInput {...props} type="month" />;
 }
 
-export const GoAInputNumber: FC<Props & { min: number, max: number, step: number }> = (props) => {
+export const GoAInputNumber: FC<Props & { min?: number, max?: number, step?: number }> = (props) => {
   return <GoAInput {...props} type="number" />;
 }
 
-export const GoAInputRange: FC<Props & { min: number, max: number, step: number }> = (props) => {
+export const GoAInputRange: FC<Props & { min?: number, max?: number, step?: number }> = (props) => {
   return <GoAInput {...props} type="range" />;
 }
 
