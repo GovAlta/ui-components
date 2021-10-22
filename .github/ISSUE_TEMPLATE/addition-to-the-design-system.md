@@ -1,6 +1,6 @@
 ---
-name: Addition to design system
-about: Suggest an idea for this project
+name: Addition to the design system
+about: propose an addition or update to the design system
 title: ''
 labels: ''
 assignees: ''
