@@ -83,7 +83,9 @@ export const ScrollingTemplate = (args) => {
       <button onClick={() => setOpen(true)}>Open Modal</button>
       <GoAModal testId="modal" isOpen={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
-        <GoAModalContent scrollable={true} testId="content">{args.content}</GoAModalContent>
+        <GoAModalContent testId="content">
+          {args.content}
+        </GoAModalContent>
         <GoAModalActions>
           <GoAButton
             buttonType="tertiary"
@@ -106,7 +108,7 @@ export const ScrollingTemplate = (args) => {
       </GoAModal>
     </>
   );
-}
+};
 
 export const CloseTemplate = (args) => {
   const [isOpen, setOpen] = useState(false);

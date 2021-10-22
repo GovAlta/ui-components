@@ -1,9 +1,10 @@
-<div class="number-input-container">
+<div (focusout)="markTouched()" class="number-input-container">
   <button
-    [disabled]="disabled"
+    [disabled]="disabled || (min !== undefined && value <= min)"
     goa-button
     buttonType="primary"
     buttonSize="small"
+    type="button"
     (click)="decrement()"
   >
     <svg width="1em" height="100%" viewBox="0 0 100 100">
@@ -12,22 +13,22 @@
   </button>
 
   <input
-    #input
-    [disabled]="disabled"
+    #numberInput
     type="number"
-    [name]="name"
     [min]="min"
     [max]="max"
     [value]="value"
     [step]="step"
-    (blur)="updateFromInput()"
+    [disabled]="disabled"
+    (input)="handleInput($event)"
   />
 
   <button
     goa-button
-    [disabled]="disabled"
+    [disabled]="disabled || (max !== undefined && value >= max)"
     buttonType="primary"
     buttonSize="small"
+    type="button"
     (click)="increment()"
   >
     <svg width="1em" height="100%" viewBox="0 0 100 100">

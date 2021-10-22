@@ -3,8 +3,8 @@ import {
   GoAFormItem,
   GoAFormActions,
   GoAFormContainer,
-  GoAFormRow,
-} from './';
+  GoAFlexRow,
+} from '..';
 import { useState, useEffect } from 'react';
 import {
   FormValidator,
@@ -82,7 +82,7 @@ export const defaultTemplete = (args) => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
             ligula a ligulaxcrei kmlobortis lacinia non sed nibh.
           </p>
-          <GoAFormRow>
+          <GoAFlexRow gap="small">
             <GoAFormItem error={errorState.firstName}>
               <label>First Name</label>
               <GoAInput
@@ -110,7 +110,7 @@ export const defaultTemplete = (args) => {
                 onChange={onChange}
               />
             </GoAFormItem>
-          </GoAFormRow>
+          </GoAFlexRow>
           <GoAFormItem error={errorState.favColors}>
             <label>Favourite Color</label>
             <GoADropdown
@@ -210,7 +210,7 @@ return (
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ligula a
       ligulaxcrei kmlobortis lacinia non sed nibh.
     </p>
-    <GoAFormRow>
+    <GoAFlexRow gap="small">
       <GoAFormItem error={errorState.firstName}>
         <label>First Name</label>
         <GoAInput
@@ -238,7 +238,7 @@ return (
           onChange={onChange}
         />
       </GoAFormItem>
-    </GoAFormRow>
+    </GoAFlexRow>
     <GoAFormItem helpText="Non-standard Input">
       <label>Label</label>
       <GoAInput

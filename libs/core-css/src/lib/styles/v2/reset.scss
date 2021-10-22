@@ -56,18 +56,18 @@ dd {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--color-blue-500);
   cursor: pointer;
 }
 
 a:hover {
-  color: var(--color-primary--hover);
+  color: var(--color-blue-600);
 }
 
 a:focus {
   outline-width: thin;
   outline-style: solid;
-  outline-color: var(--color-primary-d1);
+  outline-color: var(--color-blue-600);
   outline-offset: 0px;
 }
 

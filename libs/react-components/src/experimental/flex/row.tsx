@@ -15,8 +15,8 @@ export const GoAFlexRow: FC<Props> = ({ gap, minWidth, children }) => {
     return React.Children.map(children, (child: ReactElement) => {
       return React.cloneElement(child, {
         style: {
+          flexBasis: minWidth,
           ...child.props.style,
-          'flex-basis': minWidth
         }
       });
     });
