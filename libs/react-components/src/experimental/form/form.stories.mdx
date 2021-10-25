@@ -31,7 +31,7 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 import { action } from '@storybook/addon-actions';
-import { DoDont, State } from '@abgov/shared/storybook-common';
+import { DoDont, StateDisplay } from '@abgov/shared/storybook-common';
 
 <Meta title="Experimental/Components/Form" component={GoAForm} />
 
@@ -64,6 +64,13 @@ export const defaultTemplete = (args) => {
       ],
     ]);
     const onChange = (name, value) => {
+      if (value === null) {
+        // filter out any null values
+        const stateCopy = { ...formState };
+        delete stateCopy[name];
+        setFormState(stateCopy);
+        return;
+      }
       setFormState({
         ...formState,
         [name]: value,
@@ -74,10 +81,7 @@ export const defaultTemplete = (args) => {
       setErrorState(errors);
     };
     return (
-      <State
-        title=""
-        description=""
-        state={formState}>
+      <StateDisplay title="" description="" state={formState}>
         <GoAForm>
           <h2>Your information</h2>
           <p>
@@ -95,7 +99,9 @@ export const defaultTemplete = (args) => {
               />
             </GoAFormItem>
             <GoAFormItem>
-              <label>Middle Name <em>optional</em></label>
+              <label>
+                Middle Name <em>optional</em>
+              </label>
               <GoAInput
                 type="text"
                 name="middleName"
@@ -174,7 +180,7 @@ export const defaultTemplete = (args) => {
             </GoAButton>
           </GoAFormActions>
         </GoAForm>
-      </State>
+      </StateDisplay>
     );
   };
   return <GoAFormWrapper />;
@@ -234,7 +240,9 @@ return (
         />
       </GoAFormItem>
       <GoAFormItem>
-        <label>Middle Name <em>optional</em></label>
+        <label>
+          Middle Name <em>optional</em>
+        </label>
         <GoAInput
           type="text"
           name="middleName"
@@ -272,11 +280,7 @@ return (
     </GoAFormItem>
     <GoAFormItem helpText="Enter lots of text here" error={errorState.label2}>
       <label>Label</label>
-      <GoATextArea
-        name="label2"
-        value={formState.label2}
-        onChange={onChange}
-      />
+      <GoATextArea name="label2" value={formState.label2} onChange={onChange} />
     </GoAFormItem>
     <GoAFormActions alignment="left">
       <GoAButton buttonType="tertiary" type="reset">

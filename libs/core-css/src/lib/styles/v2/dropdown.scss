@@ -3,9 +3,6 @@
 @import './mixins.scss';
 
 .goa-dropdown-box {
-  --color-selected-bg--hover: var(--color-gray-100);
-  --color-selected-text--hover: var(--color-gray-700);
-
   position: relative;
 }
 
@@ -74,7 +71,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  margin: 0;
+  margin-top: 3px;
   padding: 0;
   list-style-type: none;
   background: var(--color-white);
@@ -103,7 +100,7 @@
   color: var(--color-gray-900);
 
   &:hover {
-    background: var(--color-selected-bg--hover);
+    background: var(--color-gray-100);
     color: var(--color-blue-600);
   }
   &:last-child:hover {
@@ -118,7 +115,7 @@
 
   &:hover {
     cursor: default;
-    color: var(--color-selected-text--hover);
+    color: var(--color-gray-700);
   }
 }
 

@@ -1,6 +1,6 @@
 import { GoATextArea, GoAForm, GoAFormItem } from '../index.ts';
 import { useState } from 'react';
-import { Do, Dont, State } from '@abgov/shared/storybook-common';
+import { Do, Dont, StateDisplay } from '@abgov/shared/storybook-common';
 
 import {
   Meta,
@@ -36,14 +36,14 @@ export const FormTemplate = (args) => {
     setState({ ...state, [name]: value });
   };
   return (
-    <State title="GoATextArea" state={state}>
+    <StateDisplay title="GoATextArea" state={state}>
       <GoATextArea
         id="aboutme"
         name="aboutme"
         value={state.aboutme}
         onChange={onChange}
       />
-    </State>
+    </StateDisplay>
   );
 };
 
