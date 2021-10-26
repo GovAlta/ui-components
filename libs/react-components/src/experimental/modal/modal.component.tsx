@@ -30,24 +30,35 @@ export const GoAModal: FC<ModalProps & ModalTestProps> = ({ children, isOpen, on
       show();
     } else if (transitionIndex !== 0) {  // don't hide() on the when in the init state
       hide();
+      return;
+    }
+    if (isOpen) {
+      return hide;
     }
   }, [isOpen]);
 
-  function show() {
-    setTransitionIndex(TRANSITION_VISIBLE);
+  function hideScrollbars() {
     const scrollbarWidth = calculateScrollbarWidth();
     document.body.style.overflow = 'hidden';
     document.body.style.paddingRight = scrollbarWidth + 'px';
   }
 
-  function hide() {
-    setTransitionIndex(TRANSITION_HIDDEN);
+  function resetScrollbars() {
     // need to perform on the next render cycle to allow the css transitions to take place
     setTimeout(() => {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '0';
     }, 300); // 300ms allows for any close animations to complete
+  }
 
+  function show() {
+    setTransitionIndex(TRANSITION_VISIBLE);
+    hideScrollbars();
+  }
+
+  function hide() {
+    setTransitionIndex(TRANSITION_HIDDEN);
+    resetScrollbars();
   }
 
   // allows the current state to be easily determined within tests
