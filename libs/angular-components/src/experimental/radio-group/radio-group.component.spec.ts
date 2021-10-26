@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { render, screen, fireEvent } from '@testing-library/angular';
 import { GoARadioComponent } from '../radio/radio.component';
-
 import { GoARadioGroupComponent } from './radio-group.component';
 
 describe('RadioGroupComponent', () => {
@@ -21,14 +20,16 @@ describe('RadioGroupComponent', () => {
   let mockData = { ...baseMockData };
 
   function getTemplate(data) {
-    return `<goa-radio-group
-              name="fruits"
-              [disabled]="${data.disabled}"
-            >
-              <goa-radio value="${data.radios[0].id}">${data.radios[0].name}</goa-radio>
-              <goa-radio value="${data.radios[1].id}">${data.radios[1].name}</goa-radio>
-              <goa-radio value="${data.radios[2].id}">${data.radios[2].name}</goa-radio>
-            </goa-radio-group>`;
+    return `
+      <goa-radio-group
+      name="fruits"
+      [disabled]="${data.disabled}"
+      >
+        <goa-radio value="${data.radios[0].id}">${data.radios[0].name}</goa-radio>
+        <goa-radio value="${data.radios[1].id}">${data.radios[1].name}</goa-radio>
+        <goa-radio value="${data.radios[2].id}">${data.radios[2].name}</goa-radio>
+      </goa-radio-group>
+    `
   }
 
   describe('Basic rendering', () => {
@@ -43,15 +44,16 @@ describe('RadioGroupComponent', () => {
     beforeEach(() => {
       // reset mockData to ensure no other tests have influenced this test
       mockData = { ...baseMockData };
-      selectionChangeTemplate = `<goa-radio-group
-                                    name="fruits"
-                                    [disabled]="${mockData.disabled}"
-                                    (selectionChange)="selectionChanged($event)"
-                                  >
-                                    <goa-radio value="${mockData.radios[0].id}">${mockData.radios[0].name}</goa-radio>
-                                    <goa-radio value="${mockData.radios[1].id}">${mockData.radios[1].name}</goa-radio>
-                                    <goa-radio value="${mockData.radios[2].id}">${mockData.radios[2].name}</goa-radio>
-                                  </goa-radio-group>`;
+      selectionChangeTemplate = `
+        <goa-radio-group
+          name="fruits"
+          [disabled]="${mockData.disabled}"
+          (selectionChange)="selectionChanged($event)"
+        >
+          <goa-radio value="${mockData.radios[0].id}">${mockData.radios[0].name}</goa-radio>
+          <goa-radio value="${mockData.radios[1].id}">${mockData.radios[1].name}</goa-radio>
+          <goa-radio value="${mockData.radios[2].id}">${mockData.radios[2].name}</goa-radio>
+        </goa-radio-group>`;
     });
 
     test('change event should work', async () => {

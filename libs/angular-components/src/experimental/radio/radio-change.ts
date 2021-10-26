@@ -1,8 +1,5 @@
-import { GoARadioComponent } from './radio.component';
-
-export class GoARadioChange {
-    /** The source radiobutton of the event. */
-    source: GoARadioComponent;
-    /** The new `checked` value of the radiobutton. */
-    checked: boolean;
-  }
+export interface GoARadioChange {
+  name: string;
+  value: any;
+  checked: boolean;
+}
