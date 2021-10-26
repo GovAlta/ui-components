@@ -81,11 +81,10 @@ export const ScrollingTemplate = (args) => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
+      <div style={{minHeight: "150vw"}}></div>
       <GoAModal testId="modal" isOpen={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
-        <GoAModalContent testId="content">
-          {args.content}
-        </GoAModalContent>
+        <GoAModalContent testId="content">{args.content}</GoAModalContent>
         <GoAModalActions>
           <GoAButton
             buttonType="tertiary"
@@ -116,6 +115,7 @@ export const CloseTemplate = (args) => {
   return (
     <div>
       <button onClick={() => setOpen(true)}>Open Modal</button>
+      <div style={{minHeight: "150vw"}}></div>
       <GoAModal testId="modal" isOpen={isOpen} onClose={() => setOpen(false)}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content">{args.content}</GoAModalContent>
@@ -130,6 +130,7 @@ export const NoCloseTemplate = (args) => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
+      <div style={{minHeight: "150vw"}}></div>
       <GoAModal testId="modal" isOpen={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content">{args.content}</GoAModalContent>
@@ -173,9 +174,10 @@ export const ModalFormTemplate = (args) => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
+      <div style={{minHeight: "150vw"}}></div>
       <GoAModal testId="modal" isOpen={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
-        <GoAModalContent testId="content">
+        <GoAModalContent testId="content" disableScroll={true}>
           <GoAForm>
             <GoAFormItem>
               <label>Colors</label>
@@ -210,6 +212,42 @@ export const ModalFormTemplate = (args) => {
           </GoAButton>
         </GoAModalActions>
       </GoAModal>
+    </>
+  );
+};
+
+export const HardCloseTemplate = (args) => {
+  const [isOpen, setOpen] = useState(false);
+  document.body.style.overflow = 'scrolly';
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open Modal</button>
+      <div style={{minHeight: "150vw"}}></div>
+      {isOpen && (
+        <GoAModal testId="modal" isOpen={true}>
+          <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
+          <GoAModalContent testId="content">{args.content}</GoAModalContent>
+          <GoAModalActions>
+            <GoAButton
+              buttonType="tertiary"
+              type="button"
+              onClick={() => setOpen(false)}
+            >
+              Cancel
+            </GoAButton>
+            <GoAButton
+              buttonType="primary"
+              type="submit"
+              onClick={() => {
+                setClickCount(clickCount + 1);
+                action('clicked save')(clickCount);
+              }}
+            >
+              Save
+            </GoAButton>
+          </GoAModalActions>
+        </GoAModal>
+      )}
     </>
   );
 };
@@ -298,6 +336,20 @@ export const ModalFormTemplate = (args) => {
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story
+    name="HardClose Modal"
+    height="400px"
+    args={{
+      title: 'Show a little bit of text',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    }}
+  >
+    {HardCloseTemplate.bind({})}
+  </Story>
+</Canvas>
+
 ## Examples
 
 ### Actions pinned to the bottom of the modal
@@ -349,6 +401,7 @@ function MyComponent() {
 <ArgsTable of={GoAModal} />
 
 ### GoAModalContent
+
 <Description of={GoAModalContent} />
 <ArgsTable of={GoAModalContent} />
 
