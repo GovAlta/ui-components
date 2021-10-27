@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import css from './card.module.scss';
 
 interface Props {
-  title: string;
+  title?: string;
   type: 'primary' | 'secondary' | 'tertiary';
   minWidth?: string;
   maxWidth?: string;
