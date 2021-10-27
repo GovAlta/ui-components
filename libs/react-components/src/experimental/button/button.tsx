@@ -24,15 +24,8 @@ export const GoAButton: FC<ButtonProps> = ({ type = 'primary', size = 'medium', 
   ].join(' ');
   const buttonRef = useRef();
 
-  const _onClick = () => {
-    onClick();
-    setTimeout(() => {
-      buttonRef?.current.blur();
-    }, 200)
-  }
-
   return (
-    <button className={css} ref={buttonRef} title={title} onClick={_onClick} {...props}>
+    <button className={css} ref={buttonRef} title={title} onClick={onClick} {...props}>
       {children}
     </button>
   );
