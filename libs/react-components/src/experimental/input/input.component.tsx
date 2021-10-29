@@ -60,7 +60,7 @@ export const GoAInput: FC<Props & { type: string }> = ({
       {trailingIcon &&
         <div onClick={() => onTrailingIconClick?.()} className="goa-input-trailing-icon">
           {!onTrailingIconClick && <GoAIcon size="medium" type={trailingIcon} />}
-          {onTrailingIconClick && <GoAIconButton variant="secondary" onClick={() => onTrailingIconClick?.()} size="medium" type={trailingIcon} />}
+        {onTrailingIconClick && <GoAIconButton variant="tertiary" onClick={() => onTrailingIconClick?.()} size="medium" type={trailingIcon} testId={`${name}-input-trailing-button`} />}
         </div>
       }
     </div>

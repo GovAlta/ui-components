@@ -10,6 +10,7 @@ interface Props {
   selected?: boolean;
   disabled?: boolean;
   onClick?: (value: string) => void;
+  visible?: boolean;
 
   // Set by the parent
   _testId?: string;
@@ -24,6 +25,8 @@ export const GoADropdownOption: FC<Props> = (props) => {
 
   return (
     <li
+      key={props.value}
+      style={{ display: props.visible ? 'block' : 'none' }}
       className={`
         goa-dropdown-option
         ${props.disabled ? 'goa-dropdown-option--disabled' : ''}
