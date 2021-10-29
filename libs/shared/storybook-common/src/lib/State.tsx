@@ -16,7 +16,7 @@ const style: CSSProperties = {
 }
 
 const elStyle: CSSProperties = {
-  flex: '1 1 auto',
+  flex: '1 1 50%',
 }
 
 const preStyle: CSSProperties = {
