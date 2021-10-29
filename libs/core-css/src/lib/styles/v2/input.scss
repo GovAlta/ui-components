@@ -3,28 +3,53 @@
 @import './mixins.scss';
 
 .goa-input {
-  position: relative;
+  @include goa-input-base;
+  display: flex;
+  align-content: center;
+  margin: 3px;
 }
 
 .goa-input-leading-icon {
-  position: absolute;
   display: flex;
   align-items: center;
-  top: 0;
-  bottom: 0;
-  left: 0.5rem;
 }
 
+.goa-input-leading-icon ~ input {
+  padding-left: 0.25rem;
+}
+
+.goa-input-trailing-icon {
+  display: flex;
+  align-items: center;
+}
+
+.goa-input-trailing-icon ~ input {
+  padding-right: 0.25rem;
+}
+
+input.input--goa {
+  display: block;
+  border: none;
+  flex: 1 1 auto;
+}
+
+input.input--goa::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.goa-input input,
+.goa-input input:focus,
+.goa-input input:hover,
+.goa-input input:active,
 .goa-input input {
-  @include goa-input-base;
   display: block;
   width: 100%;
-  line-height: 1.5rem;
-  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  outline: none;
+  border: none;
 }
 
-.goa-input .input--leading-icon {
-  padding-left: 2rem;
+.goa-input .input--bare {
+  border: none;
 }
 
 .goa-state--error .goa-input input {
