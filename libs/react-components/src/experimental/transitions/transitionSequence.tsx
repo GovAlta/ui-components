@@ -16,7 +16,7 @@ type TransitionType
 interface Props {
   transitions: string[] | TransitionType[];
   transitionIndex: number;
-  onComplete?: (index: number, done: boolean) => void;
+  onTransitionComplete?: (index: number, done: boolean) => void;
 }
 
 export const GoATransitionSequence: FC<Props> = (props) => {
@@ -30,7 +30,7 @@ export const GoATransitionSequence: FC<Props> = (props) => {
       return createTransition({
         active: (props.transitionIndex % (props.transitions.length + 1)) > index,
         name: state,
-        onComplete: () => props?.onComplete(index, index === props.transitions.length - 1)
+        onComplete: () => props?.onTransitionComplete(index, index === props.transitions.length - 1)
       })
     })
     // on `reduce` we need to start with the innermost child
