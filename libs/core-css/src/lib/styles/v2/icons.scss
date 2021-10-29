@@ -13,8 +13,8 @@ ion-icon {
   justify-content: center;
 }
 
-/* GoA */
-.goa-icon-button-goa {
+/* Primary */
+.goa-icon-button-primary {
   padding: 0.5rem;
   border-radius: 0.5rem;
   color: var(--color-blue-500);
@@ -23,44 +23,46 @@ ion-icon {
   transition: background-color 100ms ease-in, transform 100ms ease-in;
 }
 
-.goa-icon-button-goa:active {
+.goa-icon-button-primary:active {
   transform: scale(0.9);
 }
 
-.goa-icon-button-goa:hover {
+.goa-icon-button-primary:hover {
   background-color: var(--color-blue-100);
 }
 
-/* Round */
-.goa-icon-button-round {
+/* Secondary */
+.goa-icon-button-secondary {
   padding: 0.4rem;
-  border-radius: 999px;
+  border-radius: 0.5rem;
   transition: background-color 100ms ease-in, transform 100ms ease-in;
   cursor: pointer;
 }
 
-.goa-icon-button-round:active {
+.goa-icon-button-secondary:active {
   transform: scale(0.9);
 }
 
-.goa-icon-button-round:hover {
+.goa-icon-button-secondary:hover {
   background: rgba(0, 0, 0, 0.1);
+  color: #000;
+  fill: #000;
 }
 
 
-/* Blah */
-.goa-icon-button-blah {
-  padding: 0.5rem;
+/* tertiary */
+.goa-icon-button-tertiary {
+  padding: 0.4rem;
   border-radius: 0.5rem;
-  border: 1px solid var(--color-blue-500);
-  color: var(--color-blue-500);
-  fill: var(--color-blue-500);
+  transition: background-color 100ms ease-in, transform 100ms ease-in;
   cursor: pointer;
 }
 
-.goa-icon-button-blah:active {
+.goa-icon-button-tertiary:active {
+  transform: scale(0.9);
 }
 
-.goa-icon-button-blah:hover {
-  box-shadow: 0 0 0 2px var(--color-orange-500);
+.goa-icon-button-tertiary:hover {
+  color: #000;
+  fill: #000;
 }
