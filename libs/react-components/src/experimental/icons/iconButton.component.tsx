@@ -8,13 +8,14 @@ interface Props extends TestProps {
   size?: IconSize;
   variant?: IconVariant;
   title?: string;
+  disabled?: boolean;
   onClick: () => void;
 }
 
-export function GoAIconButton({ type, variant = 'primary', onClick, size = 'medium', title, testId }: Props & TestProps): JSX.Element {
+export function GoAIconButton({ type, disabled, variant = 'primary', onClick, size = 'medium', title, testId }: Props & TestProps): JSX.Element {
   return (
-    <div title={title} className={`goa-icon-button goa-icon-button-${variant}`} data-testid={testId} onClick={onClick}>
+    <button title={title} disabled={disabled} className={`goa-icon-button goa-icon-button-${variant}`} data-testid={testId} onClick={onClick}>
       <GoAIcon type={type} size={size}></GoAIcon>
-    </div>
+    </button>
   )
 }
