@@ -1,4 +1,4 @@
-import React, { FC, MutableRefObject, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { GoAIcon, GoAIconButton, GoAIconType } from '../icons';
 import { OnChange } from '../../lib/_common/input';
 import './input.scss';
@@ -58,10 +58,16 @@ export const GoAInput: FC<Props & { type: string }> = ({
         onChange={(e) => onChange(name, e.target.value)}
         {...other}
       />
-      {trailingIcon &&
-        <div onClick={() => onTrailingIconClick?.()} className="goa-input-trailing-icon">
-          {!onTrailingIconClick && <GoAIcon size="medium" type={trailingIcon} />}
-          {onTrailingIconClick && <GoAIconButton variant="tertiary" onClick={() => onTrailingIconClick?.()} size="medium" type={trailingIcon} testId={`${name}-input-trailing-button`} />}
+
+      {trailingIcon && !onTrailingIconClick &&
+        <div className="goa-input-trailing-icon">
+          <GoAIcon size="medium" type={trailingIcon} />
+        </div>
+      }
+
+      {trailingIcon && onTrailingIconClick &&
+        <div onClick={onTrailingIconClick} className="goa-input-trailing-icon">
+          <GoAIconButton variant="tertiary" onClick={onTrailingIconClick} size="medium" type={trailingIcon} testId={`${name}-input-trailing-button`} />
         </div>
       }
     </div>
@@ -117,7 +123,7 @@ export const GoAInputNumber: FC<Props & { min?: number, max?: number, step?: num
 }
 
 export const GoAInputRange: FC<Props & { min?: number, max?: number, step?: number }> = ({ step = 1, ...props }) => {
-  return <input id={props.id} min={props.min} max={props.max} step={step} name={props.name} type="range" onChange={(e) => props.onChange(e.target.name, e.target.value)} />;
+  return <input {...props} type="range" onChange={(e) => props.onChange(e.target.name, e.target.value)} />;
 }
 
 export default GoAInput;
