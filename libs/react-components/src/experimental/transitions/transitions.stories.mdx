@@ -87,9 +87,9 @@ export const DynamicTemplate = (args) => {
     <div>
       <button onClick={() => nextTransition()}>Translate</button>
       <div style={outerCss}>
-        <GoATransitionSequence transitions={args.transitions} transitionIndex={transitionIndex} onComplete={(index, done) => {
+        <GoATransitionSequence transitions={args.transitions} transitionIndex={transitionIndex} onTransitionComplete={(index, done) => {
           if (done) {
-            nextTransition();
+            setTransitionIndex(0);
           }
         }}>
             <div style={innerCss}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
@@ -215,7 +215,7 @@ function example() {
       <div style={outerCss}>
         <GoATransitionSequence transitions={['slide-in-up', 'slide-out-up']} transitionIndex={transitionIndex} onComplete={(index, done) => {
           if (done) {
-            nextTransition();
+            setTransitionIndex(0);
           }
         }}>
             <div style={innerCss}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
