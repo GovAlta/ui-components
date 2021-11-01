@@ -6,62 +6,19 @@
   position: relative;
 }
 
+.goa-dropdown-box input[readonly] {
+  cursor: pointer;
+}
+
 .goa-dropdown-background {
   position: fixed;
   inset: 0;
   opacity: 1;
 }
 
-.goa-dropdown-input {
-  @include goa-input-base;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  gap: 0.5rem;
-
-  input {
-    line-height: 1.5rem;
-    padding: 0;
-    user-select: none;
-  }
-
-  input,
-  input:hover,
-  input:focus {
-    box-shadow: none;
-  }
-}
-
-.goa-dropdown-input--disabled {
-  opacity: 0.5;
-  cursor: default;
-
-  &:hover,
-  &:focus {
-    cursor: default;
-    box-shadow: none;
-  }
-}
-
-.goa-dropdown-input input {
-  flex: 1 1 auto;
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  ::placeholder {
-    text-overflow: ellipsis;
-  }
-}
-
 // additional padding when icon is present
 .goa-icon ~ input {
   padding-left: 0.5rem;
-}
-
-.goa-dropdown-input--disabled input {
-  cursor: default;
 }
 
 .goa-dropdown-list {

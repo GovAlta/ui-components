@@ -39,12 +39,17 @@ export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
    * Binds the children with additional properties and events
    */
   function getChildren() {
+    const _filter = filter.toLowerCase();
     return React.Children
       .map(props.children, (child: ReactElement) => {
         if (child.props.value) {
+          const visible = !_filter
+            || child.props.value.toLowerCase().includes(_filter)
+            || child.props.label.toLowerCase().includes(_filter);
+
           return React.cloneElement(child, {
             ...child.props,
-            visible: child.props.value.includes(filter),
+            visible: visible,
             onClick: handleSelection,
             selected: selectedValues.includes(child.props.value),
             _testId: `${props.name}-dropdown-option--${child.props.value}`
