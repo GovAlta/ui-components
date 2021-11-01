@@ -105,7 +105,7 @@ describe('GoADropdown', () => {
         selectedColors = colors;
       }
       return (
-        <GoADropdown name="favColor" filterable={true} selectedValues={colors} onChange={(_name, value) => selectColor(value)}>
+        <GoADropdown name="favColor" autoComplete={true} selectedValues={colors} onChange={(_name, value) => selectColor(value)}>
           <GoADropdownOption label="Red" value="red" />
           <GoADropdownOption label="Blue" value="blue" />
           <GoADropdownOption label="Yellow" value="yellow" />
@@ -146,7 +146,7 @@ describe('GoADropdown', () => {
         selectedColors = colors;
       }
       return (
-        <GoADropdown name="favColor" filterable={true} selectedValues={colors} onChange={(_name, value) => selectColor(value)}>
+        <GoADropdown name="favColor" autoComplete={true} selectedValues={colors} onChange={(_name, value) => selectColor(value)}>
           <GoADropdownOption label="Red" value="red" />
           <GoADropdownOption label="Blue" value="blue" />
           <GoADropdownOption label="Yellow" value="yellow" />

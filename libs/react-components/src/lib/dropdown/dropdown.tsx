@@ -1,5 +1,5 @@
-import React, { FC, ReactElement, useRef, useState } from 'react'
-import { GoAIcon, GoAInput, GoAScrollable } from '../../experimental'
+import React, { FC, ReactElement, useState } from 'react'
+import { GoAInput, GoAScrollable } from '../../experimental'
 import type { GoAIconType } from '../../experimental';
 import './dropdown.scss'
 
@@ -15,7 +15,7 @@ interface Props {
 
   // optional
   disabled?: boolean;
-  filterable?: boolean;
+  autoComplete?: boolean;
   leadingIcon?: GoAIconType,
   maxHeight?: number;
   multiSelect?: boolean;
@@ -118,23 +118,25 @@ export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
         <div data-testid={`${props.name}-dropdown-background`} className="goa-dropdown-background" onClick={() => setMenuVisibility(false)}></div>
       }
       <div>
-        {(!isMenuVisible || !props.filterable) &&
+        {(!isMenuVisible || !props.autoComplete) &&
           <div
             onClick={toggleMenuVisibility}
-            data-testid={`${props.name}-dropdown`}
-            className={`goa-dropdown-input ${props.disabled && 'goa-dropdown-input--disabled' || ''}`} tabIndex={0} >
-            {props.leadingIcon &&
-              <div className="goa-dropdown-leading-icon">
-                <GoAIcon size="small" type={props.leadingIcon} />
-              </div>
-            }
-            <input readOnly placeholder={props.placeholder} value={getSelectedLabel()} />
-            <GoAIcon type="chevron-down" />
+            data-testid={`${props.name}-dropdown`}>
+            <GoAInput
+              type="text"
+              disabled={props.disabled}
+              trailingIcon="chevron-down"
+              leadingIcon={props.leadingIcon}
+              name="search"
+              readonly={true}
+              onChange={null}
+              placeholder={props.placeholder}
+              value={getSelectedLabel()} />
           </div>
         }
         {isMenuVisible &&
           <>
-            {props.filterable &&
+            {props.autoComplete &&
               <GoAInput
                 type="text"
                 placeholder="Filter"
