@@ -60,7 +60,7 @@ export const Template = (args) => {
       >
         <label>Label</label>
         <GoADropdownOption label="Option 1" value="option1" />
-        <GoADropdownOption label="Worst Actor Ever" value="option2">
+        <GoADropdownOption label="Worst Actor Ever" value="nicholas cage">
           {/* <!-- Custom content can be added --> */}
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img
@@ -84,9 +84,22 @@ export const Template = (args) => {
 
 <Canvas>
   <Story
-    name="Basic"
+    name="Dropdown"
     height="500px"
     args={{
+      selectedValues: ['option1'],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Filterable"
+    height="500px"
+    args={{
+      filterable: true,
       selectedValues: ['option1'],
     }}
   >

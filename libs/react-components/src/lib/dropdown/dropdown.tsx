@@ -1,5 +1,5 @@
-import React, { FC, ReactElement, useState } from 'react'
-import { GoAIcon, GoAScrollable } from '../../experimental'
+import React, { FC, ReactElement, useRef, useState } from 'react'
+import { GoAIcon, GoAInput, GoAScrollable } from '../../experimental'
 import type { GoAIconType } from '../../experimental';
 import './dropdown.scss'
 
@@ -15,6 +15,7 @@ interface Props {
 
   // optional
   disabled?: boolean;
+  filterable?: boolean;
   leadingIcon?: GoAIconType,
   maxHeight?: number;
   multiSelect?: boolean;
@@ -23,6 +24,7 @@ interface Props {
 
 export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
   const [isMenuVisible, _setMenuVisibility] = useState<boolean>(false)
+  const [filter, setFilter] = useState<string>('');
 
   /**
    * Override the useState method to set the menu visibility to allow for conditional rendering
@@ -36,18 +38,24 @@ export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
   /**
    * Binds the children with additional properties and events
    */
-  function bindChildren() {
-    return React.Children.map(props.children, (child: ReactElement) => {
-      if (child.props.value) {
-        return React.cloneElement(child, {
-          ...child.props,
-          onClick: handleSelection,
-          selected: selectedValues.includes(child.props.value),
-          _testId: `${props.name}-dropdown-option--${child.props.value}`
-        })
-      }
-      return child;
-    })
+  function getChildren() {
+    return React.Children
+      .map(props.children, (child: ReactElement) => {
+        if (child.props.value) {
+          return React.cloneElement(child, {
+            ...child.props,
+            visible: child.props.value.includes(filter),
+            onClick: handleSelection,
+            selected: selectedValues.includes(child.props.value),
+            _testId: `${props.name}-dropdown-option--${child.props.value}`
+          })
+        }
+
+        if (filter) {
+          return
+        }
+        return child;
+      })
   }
 
   /**
@@ -62,7 +70,7 @@ export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
         values = [...selectedValues, value];
       }
     } else {
-      values = [value];
+      values = selectedValues.includes(value) ? [] : [value];
     }
     props.onChange(props.name, values);
     toggleMenuVisibility();
@@ -79,6 +87,7 @@ export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
     // only hide if not multi select
     if (isMenuVisible && !props.multiSelect) {
       setMenuVisibility(false)
+      setFilter('');
     }
   }
 
@@ -108,25 +117,43 @@ export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
       {isMenuVisible &&
         <div data-testid={`${props.name}-dropdown-background`} className="goa-dropdown-background" onClick={() => setMenuVisibility(false)}></div>
       }
-      <div
-        onClick={toggleMenuVisibility}
-        data-testid={`${props.name}-dropdown`}
-        className={`goa-dropdown-input ${props.disabled && 'goa-dropdown-input--disabled' || ''}`} tabIndex={0} >
-        {props.leadingIcon &&
-          <div className="goa-dropdown-leading-icon">
-            <GoAIcon size="small" type={props.leadingIcon} />
+      <div>
+        {(!isMenuVisible || !props.filterable) &&
+          <div
+            onClick={toggleMenuVisibility}
+            data-testid={`${props.name}-dropdown`}
+            className={`goa-dropdown-input ${props.disabled && 'goa-dropdown-input--disabled' || ''}`} tabIndex={0} >
+            {props.leadingIcon &&
+              <div className="goa-dropdown-leading-icon">
+                <GoAIcon size="small" type={props.leadingIcon} />
+              </div>
+            }
+            <input readOnly placeholder={props.placeholder} value={getSelectedLabel()} />
+            <GoAIcon type="chevron-down" />
           </div>
         }
-        <input readOnly placeholder={props.placeholder} value={getSelectedLabel()} />
-        <GoAIcon type="chevron-down" />
+        {isMenuVisible &&
+          <>
+            {props.filterable &&
+              <GoAInput
+                type="text"
+                placeholder="Filter"
+                focused={isMenuVisible}
+                variant="goa"
+                name="filter"
+                value={filter}
+                trailingIcon={filter.length > 0 ? 'close-circle' : 'search'}
+                onTrailingIconClick={() => filter.length > 0 && setFilter('')}
+                onChange={(_name, value) => setFilter(value)} />
+            }
+            <ul className="goa-dropdown-list">
+              <GoAScrollable vertical={true} height={props.maxHeight || MAX_HEIGHT}>
+                {getChildren()}
+              </GoAScrollable>
+            </ul>
+          </>
+        }
       </div>
-      {isMenuVisible &&
-        <ul className="goa-dropdown-list">
-          <GoAScrollable vertical={true} height={props.maxHeight || MAX_HEIGHT}>
-            {bindChildren()}
-          </GoAScrollable>
-        </ul>
-      }
     </div>
   )
 }

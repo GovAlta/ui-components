@@ -74,12 +74,38 @@ describe('GoADropdown', () => {
       expect(selectedColors).toContain('blue');
       expect(selectedColors).toContain('red');
     });
+
+    // close
+    fireEvent.click(queryByTestId('favColor-dropdown-background'));
+    expect(queryByTestId('favColor-dropdown-option--red')).not.toBeInTheDocument();
   })
 
-  it('should show a leading icon', () => {
+  it('should show a leading icon', async () => {
     const TestComponent = () => {
       return (
-        <GoADropdown leadingIcon="file" name="favColor" multiSelect={true} selectedValues={[]} onChange={() => { }}>
+        <GoADropdown leadingIcon="color-wand" name="favColor" multiSelect={true} selectedValues={[]} onChange={() => { }}>
+          <GoADropdownOption label="Red" value="red" />
+          <GoADropdownOption label="Blue" value="blue" />
+          <GoADropdownOption label="Yellow" value="yellow" />
+        </GoADropdown>
+      )
+    };
+
+    const { queryByTestId } = render(<TestComponent />);
+    expect(queryByTestId('favColor-dropdown')).toBeInTheDocument();
+  })
+
+  it('should allow for autocomplete', async () => {
+    let selectedColors: string[];
+
+    const TestComponent = () => {
+      const [colors, setColors] = useState([]);
+      const selectColor = (colors: string[]) => {
+        setColors(colors);
+        selectedColors = colors;
+      }
+      return (
+        <GoADropdown name="favColor" filterable={true} selectedValues={colors} onChange={(_name, value) => selectColor(value)}>
           <GoADropdownOption label="Red" value="red" />
           <GoADropdownOption label="Blue" value="blue" />
           <GoADropdownOption label="Yellow" value="yellow" />
@@ -89,7 +115,62 @@ describe('GoADropdown', () => {
 
     const { queryByTestId } = render(<TestComponent />);
 
-    expect(queryByTestId('icon-file')).toBeInTheDocument();
+    fireEvent.click(queryByTestId('favColor-dropdown'));
+
+    const filter = queryByTestId('favColor-dropdown-filter');
+
+    waitFor(() => {
+      expect(filter).toBeInTheDocument();
+      expect(queryByTestId('favColor-dropdown-option--red')).toBeInTheDocument();
+      expect(queryByTestId('favColor-dropdown-option--blue')).toBeInTheDocument();
+      expect(queryByTestId('favColor-dropdown-option--yellow')).toBeInTheDocument();
+
+      fireEvent.change(filter, { target: { value: 'r' } });
+      expect(queryByTestId('favColor-dropdown-option--red')).toBeVisible();
+      expect(queryByTestId('favColor-dropdown-option--blue')).not.toBeVisible();
+
+      // close
+      fireEvent.click(queryByTestId('favColor-dropdown-background'));
+      expect(queryByTestId('favColor-dropdown-option--red')).not.toBeInTheDocument();
+    });
+
+  })
+
+  it('should clear the autocomplete filter', async () => {
+    let selectedColors: string[];
+
+    const TestComponent = () => {
+      const [colors, setColors] = useState([]);
+      const selectColor = (colors: string[]) => {
+        setColors(colors);
+        selectedColors = colors;
+      }
+      return (
+        <GoADropdown name="favColor" filterable={true} selectedValues={colors} onChange={(_name, value) => selectColor(value)}>
+          <GoADropdownOption label="Red" value="red" />
+          <GoADropdownOption label="Blue" value="blue" />
+          <GoADropdownOption label="Yellow" value="yellow" />
+        </GoADropdown>
+      )
+    };
+
+    const { queryByTestId } = render(<TestComponent />);
+
+    fireEvent.click(queryByTestId('favColor-dropdown'));
+
+    waitFor(() => {
+      const filter = queryByTestId('favColor-dropdown-filter');
+      fireEvent.change(filter, { target: { value: 'red' } });
+      expect(filter).toHaveValue('red');
+      expect(queryByTestId('favColor-dropdown-option--red')).toBeVisible();
+      expect(queryByTestId('favColor-dropdown-option--blue')).not.toBeVisible();
+
+      // reset filter
+      fireEvent.click(queryByTestId('filter-input-trailing-button'));
+      expect(filter).toHaveValue('');
+      expect(queryByTestId('favColor-dropdown-option--red')).toBeVisible();
+      expect(queryByTestId('favColor-dropdown-option--blue')).toBeVisible();
+    });
   })
 
   it('should not be able to interact with when disabled', async () => {
