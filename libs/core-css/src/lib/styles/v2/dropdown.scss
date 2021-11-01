@@ -18,6 +18,7 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  gap: 0.5rem;
 
   input {
     line-height: 1.5rem;
@@ -41,10 +42,6 @@
     cursor: default;
     box-shadow: none;
   }
-}
-
-.goa-dropdown-leading-icon svg {
-  width: 80%;
 }
 
 .goa-dropdown-input input {
