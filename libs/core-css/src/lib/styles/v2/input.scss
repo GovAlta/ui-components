@@ -6,7 +6,6 @@
   @include goa-input-base;
   display: flex;
   align-content: center;
-  margin: 3px;
 }
 
 .goa-input-leading-icon {
@@ -23,8 +22,8 @@
   align-items: center;
 }
 
-.goa-input-trailing-icon ~ input {
-  padding-right: 0.25rem;
+.goa-input-trailing-icon > .goa-icon-button {
+  margin-right: -0.5rem;
 }
 
 input.input--goa {

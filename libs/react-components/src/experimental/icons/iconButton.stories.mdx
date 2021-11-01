@@ -457,7 +457,7 @@ export const Template = (args) => {
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {iconTypes
           .filter(t => t.includes(filter))
-          .slice(1, 20)
+          .slice(1, filter ? iconTypes.length : 20)
           .map((iconType) => {
           return (
             <div

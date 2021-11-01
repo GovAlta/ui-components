@@ -19,6 +19,7 @@ interface Props {
   onTrailingIconClick?: () => void;
   variant?: 'goa' | 'bare';
   focused?: boolean;
+  readonly?: boolean;
 };
 
 export const GoAInput: FC<Props & { type: string }> = ({
@@ -54,13 +55,13 @@ export const GoAInput: FC<Props & { type: string }> = ({
           [`input--${variant}`]: true,
           'input--leading-icon': leadingIcon,
         })}
-        {...other}
         onChange={(e) => onChange(name, e.target.value)}
+        {...other}
       />
       {trailingIcon &&
         <div onClick={() => onTrailingIconClick?.()} className="goa-input-trailing-icon">
           {!onTrailingIconClick && <GoAIcon size="medium" type={trailingIcon} />}
-        {onTrailingIconClick && <GoAIconButton variant="tertiary" onClick={() => onTrailingIconClick?.()} size="medium" type={trailingIcon} testId={`${name}-input-trailing-button`} />}
+          {onTrailingIconClick && <GoAIconButton variant="tertiary" onClick={() => onTrailingIconClick?.()} size="medium" type={trailingIcon} testId={`${name}-input-trailing-button`} />}
         </div>
       }
     </div>
