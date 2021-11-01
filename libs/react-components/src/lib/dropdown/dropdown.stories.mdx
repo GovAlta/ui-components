@@ -13,6 +13,7 @@ import { action } from '@storybook/addon-actions';
 import {
   BestPractices,
   BestPracticeItem,
+  StateDisplay,
 } from '@abgov/shared/storybook-common';
 
 <Meta
@@ -41,25 +42,26 @@ import {
   }}
 />
 
-// Basic Template
-
 export const Template = (args) => {
   const [selectedValues, setValues] = useState(args.selectedValues);
   function onChange(name, values) {
     setValues(values);
   }
   return (
-    <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
-      <div>Selected Values: {`[${selectedValues.join(', ')}]`}</div>
+    <StateDisplay
+      title="Dropdown Example"
+      description="A dropdown component that allows for selection of one or more items."
+      state={selectedValues}>
       <GoADropdown
         {...args}
         name="basic"
         onChange={onChange}
         selectedValues={selectedValues}
       >
-        <label>Some Label</label>
+        <label>Label</label>
         <GoADropdownOption label="Option 1" value="option1" />
         <GoADropdownOption label="Worst Actor Ever" value="option2">
+          {/* <!-- Custom content can be added --> */}
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img
               height="40"
@@ -76,14 +78,14 @@ export const Template = (args) => {
         <GoADropdownOption label="Option 5" value="option5" />
         <GoADropdownOption label="Option 6" value="option6" />
       </GoADropdown>
-    </div>
+    </StateDisplay>
   );
 };
 
 <Canvas>
   <Story
     name="Basic"
-    height="400px"
+    height="500px"
     args={{
       selectedValues: ['option1'],
     }}
@@ -120,159 +122,6 @@ export const Template = (args) => {
 };
 ```
 
-// Dynamic Template
-
-export const DynamicTemplate = (args) => {
-  const [selectedValues, setValues] = useState([]);
-  function onChange(name, values) {
-    setValues(values);
-  }
-  const data = [
-    { label: 'Option 1', value: 'option1' },
-    { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' },
-    { label: 'Option 4', value: 'option4' },
-  ];
-  return (
-    <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
-      <div>Selected Values: {`[${selectedValues.join(', ')}]`}</div>
-      <GoADropdown
-        {...args}
-        name="favColour"
-        onChange={onChange}
-        selectedValues={selectedValues}
-      >
-        {data.map((item) => (
-          <GoADropdownOption label={item.label} value={item.value} />
-        ))}
-      </GoADropdown>
-    </div>
-  );
-};
-
-<Canvas>
-  <Story name="Dynamic" height="300px">
-    {DynamicTemplate.bind({})}
-  </Story>
-</Canvas>
-
-```tsx
-export const DynamicTemplate = (args) => {
-  const [selectedValues, setValues] = useState([]);
-  function onChange(name, values) {
-    setValues(values);
-  }
-  const data = [
-    { label: 'Option 1', value: 'option1' },
-    { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' },
-    { label: 'Option 4', value: 'option4' },
-  ];
-  return (
-    <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
-      <div>Selected Values: {`[${selectedValues.join(', ')}]`}</div>
-      <GoADropdown
-        {...args}
-        name="favColour"
-        onChange={onChange}
-        selectedValues={selectedValues}
-      >
-        {data.map((item) => (
-          <GoADropdownOption label={item.label} value={item.value} />
-        ))}
-      </GoADropdown>
-    </div>
-  );
-};
-```
-
-export const FormTemplate = (args) => {
-  // define the form state
-  const [formValues, setFormValues] = useState({
-    favColour: '',
-  });
-  // single callback function to set the state
-  function onChange(name, values) {
-    setFormValues({ ...formValues, [name]: values });
-  }
-  return (
-    <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
-      <GoAForm>
-        <GoAFormItem>
-          <label>Favourite Colour</label>
-          <GoADropdown
-            {...args}
-            name="favColour"
-            onChange={onChange}
-            selectedValues={formValues['favColour']}
-          >
-            <GoADropdownOption label="Red" value="red" />
-            <GoADropdownOption label="Blue" value="blue" />
-            <GoADropdownOption label="Yellow" value="yellow" />
-            <GoADropdownOption
-              disabled={true}
-              label="Purple (disabled)"
-              value="purple"
-            />
-          </GoADropdown>
-        </GoAFormItem>
-        <GoAFormActions alignment="left">
-          <GoAButton onClick={() => action('onClick')(formValues)}>
-            Submit
-          </GoAButton>
-        </GoAFormActions>
-      </GoAForm>
-    </div>
-  );
-};
-
-<Canvas>
-  <Story name="Form" height="300px">
-    {FormTemplate.bind({})}
-  </Story>
-</Canvas>
-
-```tsx
-export const FormTemplate = (args) => {
-  // define the form state
-  const [formValues, setFormValues] = useState({
-    favColour: '',
-  });
-  // single callback function to set the state
-  function onChange(name, values) {
-    setFormValues({ ...formValues, [name]: values });
-  }
-  return (
-    <div style={{ backgroundColor: '#eee', padding: '2rem', width: '400px' }}>
-      <GoAForm>
-        <GoAFormItem>
-          <label>Favourite Colour</label>
-          <GoADropdown
-            {...args}
-            name="favColour"
-            onChange={onChange}
-            selectedValues={formValues['favColour']}
-          >
-            <GoADropdownOption label="Red" value="red" />
-            <GoADropdownOption label="Blue" value="blue" />
-            <GoADropdownOption label="Yellow" value="yellow" />
-            <GoADropdownOption
-              disabled={true}
-              label="Purple (disabled)"
-              value="purple"
-            />
-          </GoADropdown>
-        </GoAFormItem>
-        <GoAFormActions alignment="left">
-          <GoAButton onClick={() => action('onClick')(formValues)}>
-            Submit
-          </GoAButton>
-        </GoAFormActions>
-      </GoAForm>
-    </div>
-  );
-};
-```
 
 ## Properties
 
