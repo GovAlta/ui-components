@@ -420,8 +420,8 @@ export type GoAIconType
   | 'woman'
   ;
 
-export type IconSize = 'small' | 'medium' | 'large'
-export type IconVariant = 'round' | 'goa' | 'blah';
+export type IconSize = 'small' | 'medium' | 'large' | 'xlarge';
+export type IconVariant = 'primary' | 'secondary' | 'tertiary';
 export type IconStyle = 'outline' | 'filled' | 'sharp';
 
 
@@ -431,7 +431,7 @@ interface Props {
   style?: IconStyle;
 }
 
-export function GoAIcon({ type, style = 'outline', size = 'small' }: Props): JSX.Element {
+export function GoAIcon({ type, style = 'outline', size = 'medium' }: Props): JSX.Element {
   const _size = getSize(size);
   return (
     <div style={{ width: _size }} className="goa-icon" data-testid={`icon-${type}`}>
@@ -443,10 +443,12 @@ export function GoAIcon({ type, style = 'outline', size = 'small' }: Props): JSX
 function getSize(size: IconSize): string {
   switch (size) {
     case 'small':
-      return "16px"
+      return "14px"
     case 'medium':
-      return "24px"
+      return "18px"
     case 'large':
+      return "24px"
+    case 'xlarge':
       return "32px"
   }
 }
