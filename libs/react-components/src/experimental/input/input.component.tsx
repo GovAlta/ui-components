@@ -30,6 +30,8 @@ export const GoAInput: FC<Props & { type: string }> = ({
   trailingIcon,
   variant = 'goa',
   focused,
+  disabled,
+  readonly,
   ...other
 }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
@@ -42,8 +44,13 @@ export const GoAInput: FC<Props & { type: string }> = ({
     }
   }, [focused, inputRef]);
 
+  const rootCss = classNames({
+    'goa-input': true,
+    'goa-input--disabled': disabled,
+  });
+
   return (
-    <div className="goa-input">
+    <div className={rootCss}>
       {leadingIcon &&
         <div className="goa-input-leading-icon">
           <GoAIcon type={leadingIcon} />
@@ -55,6 +62,8 @@ export const GoAInput: FC<Props & { type: string }> = ({
           [`input--${variant}`]: true,
           'input--leading-icon': leadingIcon,
         })}
+        readOnly={readonly}
+        disabled={disabled}
         onChange={(e) => onChange(name, e.target.value)}
         {...other}
       />
@@ -67,7 +76,7 @@ export const GoAInput: FC<Props & { type: string }> = ({
 
       {trailingIcon && onTrailingIconClick &&
         <div onClick={onTrailingIconClick} className="goa-input-trailing-icon">
-          <GoAIconButton variant="tertiary" onClick={onTrailingIconClick} size="medium" type={trailingIcon} testId={`${name}-input-trailing-button`} />
+          <GoAIconButton variant="tertiary" onClick={onTrailingIconClick} disabled={disabled} size="medium" type={trailingIcon} testId={`${name}-input-trailing-button`} />
         </div>
       }
     </div>

@@ -47,6 +47,24 @@ input.input--goa::-webkit-calendar-picker-indicator {
   border: none;
 }
 
+.goa-input--disabled {
+  opacity: 0.5;
+  cursor: default;
+  border-color: var(--color-black);
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: var(--color-black);
+    cursor: default;
+    box-shadow: none;
+  }
+
+  input:hover {
+    cursor: default !important;
+  }
+}
+
 .goa-input .input--bare {
   border: none;
 }
