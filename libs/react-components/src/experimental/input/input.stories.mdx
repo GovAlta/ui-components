@@ -44,20 +44,16 @@ export const Template = (args) => {
         description="The GoAInput component handles all html input types styled to the GoA UI guidelines"
         state={state}
       >
-        <GoAInputText
-          {...args}
-          onChange={onChange}
-          name="basic"
-          leadingIcon="person-circle"
-        />
-        <GoAInputPassword {...args} onChange={onChange} name="password" />
+        <GoAInputText {...args} onChange={onChange} name="basic" leadingIcon="person-circle" />
+        <GoAInput placeholder="with trailing button" {...args} trailingIcon="finger-print" onChange={onChange} onTrailingIconClick={() => console.log('click')} name="trailing-button" />
+        <GoAInputPassword placeholder="password" {...args} onChange={onChange} name="password" />
         <GoAInputDate {...args} onChange={onChange} name="date" />
         <GoAInputTime {...args} onChange={onChange} name="time" />
         <GoAInputDateTime {...args} onChange={onChange} name="datetime" />
-        <GoAInputEmail {...args} onChange={onChange} name="email" />
-        <GoAInputSearch {...args} onChange={onChange} name="search" />
-        <GoAInputUrl {...args} onChange={onChange} name="url" />
-        <GoAInputTel {...args} onChange={onChange} name="tel" />
+        <GoAInputEmail placeholder="email" {...args} onChange={onChange} name="email" />
+        <GoAInputSearch placeholder="search" {...args} onChange={onChange} name="search" />
+        <GoAInputUrl placeholder="url" {...args} onChange={onChange} name="url" />
+        <GoAInputTel placeholder="phone number" {...args} onChange={onChange} name="tel" />
         <GoAInputFile {...args} onChange={onChange} name="file" />
         <GoAInputMonth {...args} onChange={onChange} name="month" />
         <GoAInputNumber {...args} onChange={onChange} name="number" />
