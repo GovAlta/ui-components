@@ -1,4 +1,4 @@
-import { GoAIconButton } from '../index.ts';
+import { GoAIconButton, GoAInputSearch } from '../index.ts';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 import { useState } from 'react';
@@ -12,7 +12,7 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 <Meta
-  title="Experimental/Components/Icons"
+  title="Experimental/Components/IconButtons"
   component={GoAIconButton}
   argTypes={{
     type: {
@@ -450,25 +450,32 @@ export const Template = (args) => {
     'wine',
     'woman',
   ];
+  const [filter, setFilter] = useState('');
   return (
-    <div style={{display: 'flex', flexWrap: 'wrap'}}>
-      {iconTypes.map((iconType) => {
-        return (
-          <div
-            style={{
-              flex: '0 0 240px',
-              padding: '4px',
-              display: 'flex',
-              'align-items': 'center',
-              gap: '8px',
-            }}
-          >
-            <GoAIconButton {...args} type={iconType} />
-            <span style={{userSelect: 'none'}}>{iconType}</span>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <GoAInputSearch placeholder={`Search ${iconTypes.length} icons`} variant="goa" value={filter} onChange={(name, value) => setFilter(value) } />
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {iconTypes
+          .filter(t => t.includes(filter))
+          .slice(1, 20)
+          .map((iconType) => {
+          return (
+            <div
+              style={{
+                flex: '0 0 240px',
+                padding: '4px',
+                display: 'flex',
+                'align-items': 'center',
+                gap: '8px',
+              }}
+            >
+              <GoAIconButton {...args} type={iconType} />
+              <span style={{userSelect: 'none'}}>{iconType}</span>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
