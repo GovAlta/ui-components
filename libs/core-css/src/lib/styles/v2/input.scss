@@ -6,6 +6,8 @@
   @include goa-input-base;
   display: flex;
   align-content: center;
+  line-height: var(--input-height);
+  height: var(--input-height);
 }
 
 .goa-input-leading-icon {
@@ -69,6 +71,6 @@ input.input--goa::-webkit-calendar-picker-indicator {
   border: none;
 }
 
-.goa-state--error .goa-input input {
+.goa-state--error .goa-input {
   border: 2px solid var(--color-red);
 }
