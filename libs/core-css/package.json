@@ -1,10 +1,11 @@
 {
   "name": "@abgov/core-css",
   "version": "0.0.0",
-  "description": "Government of Alberta - DIO - Shared CSS, SVG, and JavaScript for HTML",
+  "description": "Government of Alberta - Shared CSS, SVG, and JavaScript for HTML",
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
+  "license": "Apache-2.0",
   "keywords": [
     "GoA",
     "template"

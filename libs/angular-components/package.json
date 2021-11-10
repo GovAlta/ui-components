@@ -1,10 +1,11 @@
 {
   "name": "@abgov/angular-components",
   "version": "0.0.0",
-  "description": "Government of Alberta - DIO - Shared UI components for Angular",
+  "description": "Government of Alberta - UI components for Angular",
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
+  "license": "Apache-2.0",
   "keywords": [
     "GoA",
     "template",

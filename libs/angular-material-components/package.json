@@ -1,6 +1,21 @@
 {
   "name": "@abgov/angular-material-components",
   "version": "0.0.0",
+  "description": "Government of Alberta - Theme for Angular Material",
+  "bugs": {
+    "url": "https://github.com/GovAlta/ui-components/issues"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "GoA",
+    "template",
+    "Angular"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GovAlta/ui-components.git",
+    "directory": "libs/angular-material-components"
+  },
   "peerDependencies": {
     "@angular/common": "^10.0.9",
     "@angular/core": "^10.0.9",

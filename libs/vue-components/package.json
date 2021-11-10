@@ -1,14 +1,15 @@
 {
   "name": "@abgov/vue-components",
   "version": "0.0.0",
-  "description": "Government of Alberta - DIO - Shared UI components for Vue.js",
+  "description": "Government of Alberta - UI components for Vue.js",
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
+  "license": "Apache-2.0",
   "keywords": [
     "GoA",
     "template",
-    "vue"
+    "Vue.js"
   ],
   "repository": {
     "type": "git",
