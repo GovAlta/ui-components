@@ -2,7 +2,7 @@
 
 1. **_Find a bug to fix._**
 
-   https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues
+   [https://github.com/GovAlta/ui-components/issues](https://github.com/GovAlta/ui-components/issues)
 
    Search for a bug, use the label _bug_. If you can't find the bug you want to fix create a new one, use the template _Bug_.
 
