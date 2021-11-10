@@ -58,11 +58,6 @@ label.goa-radio {
   transition: box-shadow 100ms ease-in-out;
 }
 
-.goa-radio:hover > input:not(:disabled) ~ .goa-radio-icon {
-  box-shadow: 0 0 0 var(--goa-radio-outline-width)
-    var(--goa-radio-outline-color);
-}
-
 .goa-radio--disabled:hover {
   cursor: default;
 }
@@ -73,6 +68,8 @@ label.goa-radio {
 input[type='radio']:checked ~ .goa-radio-icon {
   border: var(--goa-radio-border-width--checked) solid
     var(--goa-border-color--checked);
+  box-shadow: 0 0 0 var(--goa-radio-outline-width)
+    var(--goa-radio-outline-color);
 }
 /* Not checked */
 input[type='radio']:not(:checked) ~ .goa-radio-icon {
