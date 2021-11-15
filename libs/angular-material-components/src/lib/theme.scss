@@ -1,21 +1,21 @@
+@use '~@angular/material' as mat;
 @use "styles/ads-material-typography";
 @use "styles/ads-material-theme";
 
 /* You can add global styles to this file, and also import other style files */
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme(ads-material-theme.$ads-mat-theme);
+@include mat.all-component-themes(ads-material-theme.$ads-mat-theme);
 
 // Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
-@include mat-base-typography(ads-material-typography.$config);
+@include mat.typography-hierarchy(ads-material-typography.$config);
 
 // Override typography for all Angular Material, including mat-base-typography and all components.
-@include angular-material-typography(ads-material-typography.$config);
+@include mat.all-component-typographies(ads-material-typography.$config);
 
 // Override the typography in the core CSS.
-@include mat-core(ads-material-typography.$config);
+@include mat.core(ads-material-typography.$config);

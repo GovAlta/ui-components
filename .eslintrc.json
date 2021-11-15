@@ -1,19 +1,10 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "**/*"
-  ],
-  "plugins": [
-    "@nrwl/nx"
-  ],
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nrwl/nx"],
   "overrides": [
     {
-      "files": [
-        "*.ts",
-        "*.tsx",
-        "*.js",
-        "*.jsx"
-      ],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
@@ -23,9 +14,7 @@
             "depConstraints": [
               {
                 "sourceTag": "*",
-                "onlyDependOnLibsWithTags": [
-                  "*"
-                ]
+                "onlyDependOnLibsWithTags": ["*"]
               }
             ]
           }
@@ -33,29 +22,17 @@
       }
     },
     {
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ],
-      "extends": [
-        "plugin:@nrwl/nx/typescript"
-      ],
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nrwl/nx/typescript"],
       "rules": {}
     },
     {
-      "files": [
-        "*.js",
-        "*.jsx"
-      ],
-      "extends": [
-        "plugin:@nrwl/nx/javascript"
-      ],
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nrwl/nx/javascript"],
       "rules": {}
     },
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "rules": {
         "@typescript-eslint/consistent-type-definitions": "error",
         "@typescript-eslint/dot-notation": "off",
@@ -88,10 +65,7 @@
         "@typescript-eslint/unified-signatures": "error",
         "arrow-body-style": "error",
         "constructor-super": "error",
-        "eqeqeq": [
-          "error",
-          "smart"
-        ],
+        "eqeqeq": ["error", "smart"],
         "guard-for-in": "error",
         "id-blacklist": "off",
         "id-match": "off",
@@ -129,10 +103,7 @@
         "no-eval": "error",
         "no-fallthrough": "error",
         "no-new-wrappers": "error",
-        "no-restricted-imports": [
-          "error",
-          "rxjs/Rx"
-        ],
+        "no-restricted-imports": ["error", "rxjs/Rx"],
         "no-throw-literal": "error",
         "no-undef-init": "error",
         "no-underscore-dangle": "off",
@@ -140,15 +111,10 @@
         "prefer-const": "error",
         "radix": "error"
       },
-      "plugins": [
-        "eslint-plugin-import",
-        "@typescript-eslint"
-      ]
+      "plugins": ["eslint-plugin-import", "@typescript-eslint"]
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "rules": {}
     }
   ]

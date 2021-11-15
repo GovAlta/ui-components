@@ -1,5 +1,9 @@
 module.exports = {
-  stories: ['../src/lib/**/*.stories.mdx', '../src/experimental/**/*.stories.mdx', '../../shared/storybook-common/src/lib/**/*.stories.mdx'],
+  stories: [
+    '../src/lib/**/*.stories.mdx',
+    '../src/experimental/**/*.stories.mdx',
+    '../../shared/storybook-common/src/lib/**/*.stories.mdx',
+  ],
   addons: [
     '@storybook/addon-docs/preset',
     '@storybook/addon-backgrounds',
@@ -7,6 +11,7 @@ module.exports = {
     '@storybook/addon-actions',
     '@storybook/addon-a11y',
     '@storybook/addon-viewport',
-    'storybook-addon-xd-designs'
-  ]
+    'storybook-addon-xd-designs',
+  ],
 };
+module.exports.core = { ...module.exports.core, builder: 'webpack5' };

@@ -28,30 +28,79 @@
       }
     }
   },
-  "projects": {
-    "core-css": {
-      "tags": []
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  },
+  "generators": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
     },
-    "angular-components": {
-      "tags": []
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
     },
-    "shared-storybook-common": {
-      "tags": []
+    "@nrwl/react": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
     },
-    "vue-components": {
-      "tags": []
+    "@nrwl/next": {
+      "application": {
+        "linter": "eslint"
+      }
     },
-    "shared-common": {
-      "tags": []
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
     },
-    "angular-material-components": {
-      "tags": [],
-      "implicitDependencies": [
-        "core-css"
-      ]
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
     },
-    "react-components": {
-      "tags": []
+    "@nrwl/nx-plugin": {
+      "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular": {
+      "convert-tslint-to-eslint": {
+        "removeTSLintIfNoMoreTSLintTargets": true
+      }
     }
   }
 }

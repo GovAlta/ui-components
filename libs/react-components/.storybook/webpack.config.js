@@ -27,7 +27,7 @@ module.exports = async ({ config, mode }) => {
   const cssModuleRule = {
     test: /\.module\.s[ca]ss$/,
     use: config.module.rules[scssRuleIndex].use.map(
-      use => ({...use})
+      use => ({ ...use })
     ),
   }
   cssModuleRule.use[1].options = { modules: true };
@@ -62,7 +62,7 @@ module.exports = async ({ config, mode }) => {
         // If coming from JS/TS file, then transform into React component using SVGR.
         {
           issuer: {
-            test: /\.[jt]sx?$/,
+            and: [/\.[jt]sx?$/],
           },
           use: [
             '@svgr/webpack?-svgo,+titleProp,+ref![path]',
