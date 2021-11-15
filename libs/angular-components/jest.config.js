@@ -1,6 +1,6 @@
 module.exports = {
   name: 'angular-components',
-  preset: '../../jest.config.js',
+  preset: '../../jest.preset.js',
   testEnvironment: 'jest-environment-jsdom-sixteen',
   coverageDirectory: '../../coverage/libs/angular-components',
 
