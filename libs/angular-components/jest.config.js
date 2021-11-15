@@ -1,7 +1,7 @@
 module.exports = {
   name: 'angular-components',
-  preset: '../../jest.preset.js',
-  testEnvironment: 'jest-environment-jsdom-sixteen',
+  preset: './jest.preset.js',
+  testEnvironment: 'jsdom',
   coverageDirectory: '../../coverage/libs/angular-components',
 
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
