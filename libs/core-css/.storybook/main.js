@@ -1,6 +1,7 @@
 const rootMain = require('../../../.storybook/main');
 
 module.exports = {
+  ...rootMain,
   managerWebpack: async (config, options) => {
     // NOTE: This is massive kludge to get Storybook Composition working on core-css
     //

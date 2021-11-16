@@ -9,7 +9,7 @@ import {
   Story,
   ArgsTable,
   Description,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 
 <Meta
   title="Experimental/Components/Icons"
@@ -448,27 +448,32 @@ export const Template = (args) => {
   const [filter, setFilter] = useState('');
   return (
     <>
-      <GoAInputSearch placeholder={`Search ${iconTypes.length} icons`} variant="goa" value={filter} onChange={(name, value) => setFilter(value) } />
+      <GoAInputSearch
+        placeholder={`Search ${iconTypes.length} icons`}
+        variant="goa"
+        value={filter}
+        onChange={(name, value) => setFilter(value)}
+      />
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {iconTypes
-          .filter(t => t.includes(filter))
+          .filter((t) => t.includes(filter))
           .slice(1, filter ? iconTypes.length : 20)
           .map((iconType) => {
-          return (
-            <div
-              style={{
-                flex: '0 0 240px',
-                padding: '4px',
-                display: 'flex',
-                'align-items': 'center',
-                gap: '8px',
-              }}
-            >
-              <GoAIcon {...args} type={iconType} />
-              <span style={{userSelect: 'none'}}>{iconType}</span>
-            </div>
-          );
-        })}
+            return (
+              <div
+                style={{
+                  flex: '0 0 240px',
+                  padding: '4px',
+                  display: 'flex',
+                  'align-items': 'center',
+                  gap: '8px',
+                }}
+              >
+                <GoAIcon {...args} type={iconType} />
+                <span style={{ userSelect: 'none' }}>{iconType}</span>
+              </div>
+            );
+          })}
       </div>
     </>
   );

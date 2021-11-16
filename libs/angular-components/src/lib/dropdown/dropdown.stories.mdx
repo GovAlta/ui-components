@@ -1,4 +1,10 @@
-import { Meta, Canvas, Story, Description, ArgsTable } from '@storybook/addon-docs/blocks';
+import {
+  Meta,
+  Canvas,
+  Story,
+  Description,
+  ArgsTable,
+} from '@storybook/addon-docs';
 import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 
@@ -10,68 +16,81 @@ import { GoAOptionGroupComponent } from './option-group/option-group.component';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 
-<Meta title="Angular/Basic Elements/Dropdown"
-    decorators={[
-        moduleMetadata({
-          imports: [OverlayModule],
-          declarations: [GoADropdownComponent, GoAOptionComponent, GoAOptionGroupComponent]
-        })
-    ]}
-    component={GoADropdownComponent}
-    argTypes={{
-      label: { control: 'text' },
-      description: { control: 'text' },
-      typeaheadMode: {
-        control: 'select',
-        options: ['none', 'contains', 'startsWith'],
-        defaultValue: 'none',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: 'none' },
-        }
+<Meta
+  title="Angular/Basic Elements/Dropdown"
+  decorators={[
+    moduleMetadata({
+      imports: [OverlayModule],
+      declarations: [
+        GoADropdownComponent,
+        GoAOptionComponent,
+        GoAOptionGroupComponent,
+      ],
+    }),
+  ]}
+  component={GoADropdownComponent}
+  argTypes={{
+    label: { control: 'text' },
+    description: { control: 'text' },
+    typeaheadMode: {
+      control: 'select',
+      options: ['none', 'contains', 'startsWith'],
+      defaultValue: 'none',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: 'none' },
       },
-      required: {
-        control: 'boolean' ,
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-        }
+    },
+    required: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
       },
-      disabled: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
+    },
+    disabled: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
-      multiple: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-        }
+    },
+    multiple: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
       },
-      menuHeight: { control: 'number' },
-      selectedIds: {
-        type: { name: 'Array<string>', required: false },
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           type: { summary: 'Array<string>' },
-           defaultValue: { summary: undefined },
-        }
+    },
+    menuHeight: { control: 'number' },
+    selectedIds: {
+      type: { name: 'Array<string>', required: false },
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        type: { summary: 'Array<string>' },
+        defaultValue: { summary: undefined },
       },
-      selectionChange: {
-        table: {
-          type: { summary: 'EventEmitter<Array<any>>'}
-        }
-      }
-    }}
- />
+    },
+    selectionChange: {
+      table: {
+        type: { summary: 'EventEmitter<Array<any>>' },
+      },
+    },
+  }}
+/>
 
 # Drop Down List
+
 A user input field that allows the user one selected option from a large list of options.
 
 ## Overview
 
 #### Basic
+
 <Canvas>
-  <Story name="Basic"
+  <Story
+    name="Basic"
     height={400}
     args={{
       label: 'Fruits',
@@ -79,13 +98,13 @@ A user input field that allows the user one selected option from a large list of
       typeaheadMode: 'none',
       required: false,
       disabled: false,
-      multiple: false
+      multiple: false,
     }}
-    >
+  >
     {(args) => {
-      args.onSelectionChanged = function(value) {
+      args.onSelectionChanged = function (value) {
         action('selection was changed')(value);
-      }
+      };
       return {
         template: `<span style="width:300px;display:inline-block;">
                     <goa-dropdown
@@ -110,8 +129,8 @@ A user input field that allows the user one selected option from a large list of
                       <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
                     </goa-dropdown>
                   </span>`,
-          props: args
-        }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
@@ -119,7 +138,8 @@ A user input field that allows the user one selected option from a large list of
 #### Required
 
 <Canvas>
-  <Story name="Required"
+  <Story
+    name="Required"
     height={400}
     args={{
       label: 'Fruits',
@@ -127,13 +147,13 @@ A user input field that allows the user one selected option from a large list of
       typeaheadMode: 'none',
       required: true,
       disabled: false,
-      multiple: false
+      multiple: false,
     }}
-    >
+  >
     {(args) => {
-      args.onSelectionChanged = function(value) {
+      args.onSelectionChanged = function (value) {
         action('selection was changed')(value);
-      }
+      };
       return {
         template: `<span style="width:300px;display:inline-block;">
                     <goa-dropdown
@@ -158,15 +178,17 @@ A user input field that allows the user one selected option from a large list of
                       <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
                     </goa-dropdown>
                   </span>`,
-          props: args
-        }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
 #### Initial Values
+
 <Canvas>
-  <Story name="Initial Values"
+  <Story
+    name="Initial Values"
     height={400}
     args={{
       label: 'Fruits',
@@ -174,13 +196,13 @@ A user input field that allows the user one selected option from a large list of
       typeaheadMode: 'none',
       required: false,
       disabled: false,
-      multiple: false
+      multiple: false,
     }}
-    >
+  >
     {(args) => {
-      args.onSelectionChanged = function(value) {
+      args.onSelectionChanged = function (value) {
         action('selection was changed')(value);
-      }
+      };
       return {
         template: `<span style="width:300px;display:inline-block;">
                     <goa-dropdown
@@ -205,15 +227,17 @@ A user input field that allows the user one selected option from a large list of
                       <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
                     </goa-dropdown>
                   </span>`,
-          props: args
-        }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
 #### Disabled
+
 <Canvas>
-  <Story name="Disabled"
+  <Story
+    name="Disabled"
     height={400}
     args={{
       label: 'Fruits',
@@ -221,13 +245,13 @@ A user input field that allows the user one selected option from a large list of
       typeaheadMode: 'none',
       required: false,
       disabled: true,
-      multiple: false
+      multiple: false,
     }}
-    >
+  >
     {(args) => {
-      args.onSelectionChanged = function(value) {
+      args.onSelectionChanged = function (value) {
         action('selection was changed')(value);
-      }
+      };
       return {
         template: `<span style="width:300px;display:inline-block;">
                     <goa-dropdown
@@ -252,15 +276,17 @@ A user input field that allows the user one selected option from a large list of
                       <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
                     </goa-dropdown>
                   </span>`,
-          props: args
-        }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
 #### Multi Selection
+
 <Canvas>
-  <Story name="Multi Selection"
+  <Story
+    name="Multi Selection"
     height={400}
     args={{
       label: 'Fruits',
@@ -268,13 +294,13 @@ A user input field that allows the user one selected option from a large list of
       typeaheadMode: 'none',
       required: false,
       disabled: false,
-      multiple: true
+      multiple: true,
     }}
-    >
+  >
     {(args) => {
-      args.onSelectionChanged = function(value) {
+      args.onSelectionChanged = function (value) {
         action('selection was changed')(value);
-      }
+      };
       return {
         template: `<span style="width:300px;display:inline-block;">
                     <goa-dropdown
@@ -299,28 +325,31 @@ A user input field that allows the user one selected option from a large list of
                       <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
                     </goa-dropdown>
                   </span>`,
-          props: args
-        }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
 #### Groups
+
 <Canvas>
-  <Story name="Groups" height={400}
-      args={{
+  <Story
+    name="Groups"
+    height={400}
+    args={{
       label: 'Fruits',
       description: 'Choose your favourite fruit!',
       typeaheadMode: 'none',
       required: false,
       disabled: false,
-      multiple: false
+      multiple: false,
     }}
   >
     {(args) => {
-      args.onSelectionChanged = function(value) {
+      args.onSelectionChanged = function (value) {
         action('selection was changed')(value);
-      }
+      };
       return {
         template: `<span style="width:300px;display:inline-block;">
                     <goa-dropdown (selectionChange)="selectionChanged($event)"
@@ -347,56 +376,95 @@ A user input field that allows the user one selected option from a large list of
                       <goa-option id='pineapples' [value]='{fruit: "pineapples"}' label="Pineapples">Pineapples</goa-option>
                     </goa-dropdown>
                   </span>`,
-        props: args
-      }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
 ## Examples
+
 Basic
+
 ```html
-<goa-dropdown (selectionChange)="selectionChanged($event)" label="Fruits" description="Select your favourite fruit.">
-  <goa-option id='apples' [value]='{fruit: "apples"}' label='Apples'>Apples</goa-option>
-  <goa-option id='oranges' [value]='{fruit: "oranges"}' label='Oranges'><span>We can put icons or other markup</span></goa-option>
-  <goa-option id='pears' [value]='{fruit: "pears"}' label='Pears'>Pears</goa-option>
+<goa-dropdown
+  (selectionChange)="selectionChanged($event)"
+  label="Fruits"
+  description="Select your favourite fruit."
+>
+  <goa-option id="apples" [value]='{fruit: "apples"}' label="Apples"
+    >Apples</goa-option
+  >
+  <goa-option id="oranges" [value]='{fruit: "oranges"}' label="Oranges"
+    ><span>We can put icons or other markup</span></goa-option
+  >
+  <goa-option id="pears" [value]='{fruit: "pears"}' label="Pears"
+    >Pears</goa-option
+  >
 </goa-dropdown>
 ```
 
 With Grouping
+
 ```html
-<goa-dropdown (selectionChange)="selectionChanged($event)" label="Fruits" description="Select your favourite fruit.">
+<goa-dropdown
+  (selectionChange)="selectionChanged($event)"
+  label="Fruits"
+  description="Select your favourite fruit."
+>
   <goa-option-group label="Group 1">
-    <goa-option id='apples' [value]='{fruit: "apples"}' label='Apples'>Apples</goa-option>
-    <goa-option id='oranges' [value]='{fruit: "oranges"}' label='Oranges'><span>We can put icons or other markup</span></goa-option>
+    <goa-option id="apples" [value]='{fruit: "apples"}' label="Apples"
+      >Apples</goa-option
+    >
+    <goa-option id="oranges" [value]='{fruit: "oranges"}' label="Oranges"
+      ><span>We can put icons or other markup</span></goa-option
+    >
   </goa-option-group>
-  <goa-option id='pears' [value]='{fruit: "pears"}' label='Pears'>Pears</goa-option>
+  <goa-option id="pears" [value]='{fruit: "pears"}' label="Pears"
+    >Pears</goa-option
+  >
 </goa-dropdown>
 ```
 
 Dynamic list
+
 ```html
-<goa-dropdown (selectionChange)="selectionChanged($event)" label="Fruits" description="Select your favourite fruit.">
-  <goa-option *ngFor="let fruit of fruits" [id]='fruit.id' [value]='fruit' [label]='fruit.label'>{{fruit.label}}</goa-option>
+<goa-dropdown
+  (selectionChange)="selectionChanged($event)"
+  label="Fruits"
+  description="Select your favourite fruit."
+>
+  <goa-option
+    *ngFor="let fruit of fruits"
+    [id]="fruit.id"
+    [value]="fruit"
+    [label]="fruit.label"
+    >{{fruit.label}}</goa-option
+  >
 </goa-dropdown>
 ```
 
 ## Properties
 
 #### GoADropdownComponent
+
 <Description of={GoADropdownComponent} />
 <ArgsTable of={GoADropdownComponent} />
 
 #### GoAOptionComponent
+
 <Description of={GoAOptionComponent} />
 <ArgsTable of={GoAOptionComponent} />
 
 #### GoAOptionGroupComponent
+
 <Description of={GoAOptionGroupComponent} />
 <ArgsTable of={GoAOptionGroupComponent} />
 
 ## Usage guidelines
+
 ### Widths and character count
+
 Drop down lists are responsive and range in width from 272 pixels on mobile up to 384 pixels
 on desktop. Each option should be a brief word, description, or name.
 
@@ -406,23 +474,30 @@ on desktop. Each option should be a brief word, description, or name.
 />
 
 ### Select a single option
+
 Use drop down lists when the user can only select one option and when there are more than
 seven available options to select from. Use radio buttons instead when there are seven or
 less available options to choose from. Since all the options but one are hidden, the visibility
 is low, so try to use radio buttons whenever possible.
 
 <DoDont
-  dos={'Make the drop down list optional, otherwise specify with a "Required" caption.'}
-  donts={'Use drop down lists when there are less than eight available options.'}
+  dos={
+    'Make the drop down list optional, otherwise specify with a "Required" caption.'
+  }
+  donts={
+    'Use drop down lists when there are less than eight available options.'
+  }
 />
 
 ### Description of options
+
 Drop down lists are always accompanied with a label and precede a button. Do not use the first
 drop down option as a descriptor or label of the list. Instead, it should be the most common or
 default option and is part of a set.
 
 <DoDont
   dos={'List the first option as part of a set of related options.'}
-  donts={'Use the first option as a descriptor or label for the set of options.'}
+  donts={
+    'Use the first option as a descriptor or label for the set of options.'
+  }
 />
-

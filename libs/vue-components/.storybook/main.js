@@ -1,7 +1,8 @@
 const rootMain = require('../../../.storybook/main');
 
 module.exports = {
-  core: { ...rootMain.core },
+  ...rootMain,
+  core: { ...rootMain.core, builder: 'webpack4' },
   stories: [
     '../src/lib/**/*.stories.mdx',
     '../src/lib/**/*.stories.js',
@@ -20,5 +21,16 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     'storybook-addon-xd-designs'
-  ]
+  ],
+  webpackFinal: async (config, { configType }) => {
+    config = await rootMain.webpackFinal(config, { configType });
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      vue: 'vue/dist/vue.js'
+    }
+
+    // Return the altered config
+    return config;
+  },
 };

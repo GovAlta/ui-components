@@ -5,7 +5,7 @@ import {
   Story,
   ArgsTable,
   Description,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
@@ -91,17 +91,17 @@ Notifications banners are used for global alerts and critical messaging required
 </template>
 
 <script>
-import { GoANotification } from '@abgov/vue-components';
+  import { GoANotification } from '@abgov/vue-components';
 
-export default {
-  name: "App",
-  components: {
-    'goa-notification-banner': GoANotification
-  }
-};
+  export default {
+    name: 'App',
+    components: {
+      'goa-notification-banner': GoANotification,
+    },
+  };
 </script>
-
 ```
+
 ## Properties
 
 <Description of={GoANotification} />

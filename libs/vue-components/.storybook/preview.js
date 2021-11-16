@@ -1,5 +1,5 @@
 import { addParameters } from '@storybook/vue';
-import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
+import { DocsPage, DocsContainer } from '@storybook/addon-docs';
 
 addParameters({
   docs: {

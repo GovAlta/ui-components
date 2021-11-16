@@ -5,7 +5,7 @@ import {
   Story,
   ArgsTable,
   Description,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
@@ -44,18 +44,12 @@ A user input control that performs an action, typically on click
 
 export const Template = (args) => (
   <div>
-    <GoAButton buttonType="primary">
-      Primary
-    </GoAButton>
-    <GoAButton buttonType="secondary">
-      Secondary
-    </GoAButton>
-    <GoAButton buttonType="tertiary">
-      Tertiary
-    </GoAButton><br /><br />
-    <GoAButton {...args}>
-      Demo
-    </GoAButton>
+    <GoAButton buttonType="primary">Primary</GoAButton>
+    <GoAButton buttonType="secondary">Secondary</GoAButton>
+    <GoAButton buttonType="tertiary">Tertiary</GoAButton>
+    <br />
+    <br />
+    <GoAButton {...args}>Demo</GoAButton>
   </div>
 );
 
