@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <goa-header serviceName="Sample usage example" serviceHome="http://alberta.ca" />
+    <goa-header serviceName="Sample usage example" serviceHome="http://alberta.ca" serviceLevel="live"/>
   </div>
 </template>
 
