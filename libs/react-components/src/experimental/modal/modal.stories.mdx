@@ -17,7 +17,7 @@ import {
   Story,
   ArgsTable,
   Description,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 
 <Meta
   title="Experimental/Components/Modal"
@@ -81,7 +81,7 @@ export const ScrollingTemplate = (args) => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
-      <div style={{minHeight: "150vw"}}></div>
+      <div style={{ minHeight: '150vw' }}></div>
       <GoAModal testId="modal" isOpen={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content">{args.content}</GoAModalContent>
@@ -115,7 +115,7 @@ export const CloseTemplate = (args) => {
   return (
     <div>
       <button onClick={() => setOpen(true)}>Open Modal</button>
-      <div style={{minHeight: "150vw"}}></div>
+      <div style={{ minHeight: '150vw' }}></div>
       <GoAModal testId="modal" isOpen={isOpen} onClose={() => setOpen(false)}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content">{args.content}</GoAModalContent>
@@ -130,7 +130,7 @@ export const NoCloseTemplate = (args) => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
-      <div style={{minHeight: "150vw"}}></div>
+      <div style={{ minHeight: '150vw' }}></div>
       <GoAModal testId="modal" isOpen={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content">{args.content}</GoAModalContent>
@@ -174,7 +174,7 @@ export const ModalFormTemplate = (args) => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
-      <div style={{minHeight: "150vw"}}></div>
+      <div style={{ minHeight: '150vw' }}></div>
       <GoAModal testId="modal" isOpen={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content" disableScroll={true}>
@@ -222,7 +222,7 @@ export const HardCloseTemplate = (args) => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
-      <div style={{minHeight: "150vw"}}></div>
+      <div style={{ minHeight: '150vw' }}></div>
       {isOpen && (
         <GoAModal testId="modal" isOpen={true}>
           <GoAModalTitle testId="title">{args.title}</GoAModalTitle>

@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { GoAIcon, GoAIconButton, GoAIconType } from '../icons';
-import { OnChange } from '../../lib/_common/input';
+import { OnChange } from '../common';
 import './input.scss';
 import classNames from 'classnames';
 

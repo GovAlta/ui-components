@@ -1,6 +1,6 @@
+@use '~@angular/material' as mat;
 @use '../../../../core-css/src/lib/styles/variables/colors.scss';
 @use 'ads-core';
-@import '~@angular/material/theming';
 
 $ads-primary-palette: (
   50: #e0eef8,
@@ -68,14 +68,14 @@ $ads-accent-palette: (
   ),
 );
 
-$ads-warn-palette: $mat-red;
+$ads-warn-palette: mat.$red-palette;
 
-$ads-primary-mat-palette: mat-palette($ads-primary-palette);
-$ads-accent-mat-palette: mat-palette($ads-accent-palette);
-$ads-warn-mat-palette: mat-palette($ads-warn-palette);
+$ads-primary-mat-palette: mat.define-palette($ads-primary-palette);
+$ads-accent-mat-palette: mat.define-palette($ads-accent-palette);
+$ads-warn-mat-palette: mat.define-palette($ads-warn-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$ads-mat-theme: mat-light-theme(
+$ads-mat-theme: mat.define-light-theme(
   $ads-primary-mat-palette,
   $ads-accent-mat-palette,
   $ads-warn-mat-palette

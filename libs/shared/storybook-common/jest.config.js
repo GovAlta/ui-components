@@ -1,6 +1,6 @@
 module.exports = {
   name: 'storybook-common',
-  preset: '../../../jest.config.js',
+  preset: '../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': [
       'babel-jest',

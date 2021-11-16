@@ -1,4 +1,10 @@
-import { Meta, Preview, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs';
 import { moduleMetadata } from '@storybook/angular';
 
 import { action } from '@storybook/addon-actions';
@@ -6,73 +12,84 @@ import { DoDont } from '@abgov/shared/storybook-common';
 
 import { GoACheckboxComponent } from './checkbox.component';
 
-<Meta title="Angular/Basic Elements/Checkboxes" decorators={[
-        moduleMetadata({
-          declarations: [GoACheckboxComponent]
-        })
-    ]}
-    component={GoACheckboxComponent}
-    argTypes={{
-      checked: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
+<Meta
+  title="Angular/Basic Elements/Checkboxes"
+  decorators={[
+    moduleMetadata({
+      declarations: [GoACheckboxComponent],
+    }),
+  ]}
+  component={GoACheckboxComponent}
+  argTypes={{
+    checked: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
-      required: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
+    },
+    required: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
-      disabled: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
+    },
+    disabled: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
-      indeterminate: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
+    },
+    indeterminate: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
-      labelPosition: {
-        control: 'select',
-        options: ['before', 'after'],
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: 'after' },
-        }
+    },
+    labelPosition: {
+      control: 'select',
+      options: ['before', 'after'],
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: 'after' },
       },
-      content: { control: 'text' }
-    }}
- />
+    },
+    content: { control: 'text' },
+  }}
+/>
 
 # Checkbox
+
 A user input field that allows the user to make a binary choice, i.e. a choice between one of two possible mutually exclusive options. For example, the user may have to answer 'yes' (checked) or 'no' (not checked) on a simple yes/no question.
 
 ## Overview
 
 #### Basic
+
 <Canvas>
-  <Story name="Basic" height={200}
+  <Story
+    name="Basic"
+    height={200}
     args={{
       checked: false,
       required: false,
       disabled: false,
       indeterminate: false,
       labelPosition: 'after',
-      content: 'Checkbox 1'
+      content: 'Checkbox 1',
     }}
   >
     {(args) => {
-      args.selectionChange = function(value) {
+      args.selectionChange = function (value) {
         action('selection was changed')(value);
-      }
+      };
       return {
         template: `<goa-checkbox
                       (selectionChange)="selectionChange($event)"
@@ -89,27 +106,31 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
                   >
                       Checkbox 2
                   </goa-checkbox>`,
-        props: args
-      }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
 #### ngModel bound
+
 <Canvas>
-  <Story name="NgModel" height={200}
+  <Story
+    name="NgModel"
+    height={200}
     args={{
       checked: false,
       required: false,
       disabled: false,
       indeterminate: false,
       labelPosition: 'after',
-      content: 'NgModel Checkbox'
-    }}>
+      content: 'NgModel Checkbox',
+    }}
+  >
     {(args) => {
-      args.selectionChange = function(value) {
+      args.selectionChange = function (value) {
         action('selection was changed')(value);
-      }
+      };
       return {
         template: `<goa-checkbox
                       [(ngModel)]="checked"
@@ -124,29 +145,26 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
                    <div>
                     modelValue = {{checked}}
                   </div>`,
-        props: args
-      }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
-
 ## Examples
+
 Basic
+
 ```html
-<goa-checkbox [checked]="item.checked">
-  Label goes here
-</goa-checkbox>
+<goa-checkbox [checked]="item.checked"> Label goes here </goa-checkbox>
 
 or
 
-<goa-checkbox [(ngModel)]="item.checked">
-  Label goes here
-</goa-checkbox>
-
+<goa-checkbox [(ngModel)]="item.checked"> Label goes here </goa-checkbox>
 ```
 
 All Properties
+
 ```html
 <goa-checkbox
   [checked]="item.checked"
@@ -158,31 +176,37 @@ All Properties
 >
   Label goes here
 </goa-checkbox>
-
 ```
 
 ## Properties
 
 #### GoACheckboxComponent
+
 <Description of={GoACheckboxComponent} />
 <ArgsTable of={GoACheckboxComponent} />
-
 
 # Usage guidelines
 
 ### Select multiple options
+
 Use checkboxes when the user can select any number of options. Use radio buttons or a drop down list when the user can only select one option.
 
 <DoDont
-  dos={'Use checkboxes when the user is allowed to select more than one option.'}
-  donts={'Require the user to make a selection. Checkboxes should be optional input.'}
+  dos={
+    'Use checkboxes when the user is allowed to select more than one option.'
+  }
+  donts={
+    'Require the user to make a selection. Checkboxes should be optional input.'
+  }
 />
 
 ### Binding
+
 The 'checked' and 'ngModel' properties are two ways of binding the selected state of the checkbox.
 
 <DoDont
-  dos={'Use one of either the checked OR ngModel property bindings with a checkbox'}
+  dos={
+    'Use one of either the checked OR ngModel property bindings with a checkbox'
+  }
   donts={'Use both the checked and ngModel property bindings with a checkbox'}
 />
-

@@ -1,4 +1,10 @@
-import { GoABadge, GoAInfoBadge, GoAEmergencyBadge, GoASuccessBadge, GoAWarningBadge } from './badge.component';
+import {
+  GoABadge,
+  GoAInfoBadge,
+  GoAEmergencyBadge,
+  GoASuccessBadge,
+  GoAWarningBadge,
+} from './badge.component';
 
 import {
   Meta,
@@ -6,16 +12,16 @@ import {
   Story,
   ArgsTable,
   Description,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 import { action } from '@storybook/addon-actions';
 
 <Meta
   title="Experimental/Components/Badge"
   component={GoABadge}
   argTypes={{
-    type: { control: {disable: true} },
-    content: { control: {disable: true} },
-    testId: { control: {disable: true} },
+    type: { control: { disable: true } },
+    content: { control: { disable: true } },
+    testId: { control: { disable: true } },
   }}
 />
 
@@ -45,10 +51,10 @@ The badge was designed to contain a text and/or an icon.
         <GoASuccessBadge content="success" />
         <GoAWarningBadge content="warning" />
         <GoAEmergencyBadge content="emergency" />
-        <GoABadge type="dark" content="dark" icon='toggle' />
-        <GoABadge type="midtone" content="midtone" icon='information' />
-        <GoABadge type="light" content="light" icon='information' />
-        <GoABadge type="inactive" content="inactive" icon='lock-closed' />
+        <GoABadge type="dark" content="dark" icon="toggle" />
+        <GoABadge type="midtone" content="midtone" icon="information" />
+        <GoABadge type="light" content="light" icon="information" />
+        <GoABadge type="inactive" content="inactive" icon="lock-closed" />
         <br />
         <br />
         <GoABadge type="information" content="information" />

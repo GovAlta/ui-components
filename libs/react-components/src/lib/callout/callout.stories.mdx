@@ -1,12 +1,23 @@
 import GoACallout from './callout';
-import { Meta, Preview, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs';
 
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
-const content = <div>Information to the user goes in the content. Information can include <b>markup</b> as desired.</div>
+const content = (
+  <div>
+    Information to the user goes in the content. Information can include{' '}
+    <b>markup</b> as desired.
+  </div>
+);
 
-
-<Meta title="React/Components/Callout"
+<Meta
+  title="React/Components/Callout"
   component={GoACallout}
   argTypes={{
     type: {
@@ -29,21 +40,25 @@ const content = <div>Information to the user goes in the content. Information ca
 />
 
 # Callouts
+
 Important changes or facts given a strong visual emphasis so that users take
 notice and read the information.
 
 ## Overview
-export const Template = (args) => <GoACallout {...args} >{content}</GoACallout>
+
+export const Template = (args) => <GoACallout {...args}>{content}</GoACallout>;
 
 <Canvas>
-  <Story name="Variants" height={200}
+  <Story
+    name="Variants"
+    height={200}
     args={{
       type: 'information',
       title: 'Callout Title',
-      content: ""
+      content: '',
     }}
   >
-     {Template.bind({})}
+    {Template.bind({})}
   </Story>
 </Canvas>
 
@@ -52,23 +67,21 @@ export const Template = (args) => <GoACallout {...args} >{content}</GoACallout>
 ```html
 <GoACallout
   type="'important || 'information' || 'event' || 'emergency' || 'success'"
-  title='Callout Title'
+  title="Callout Title"
   content="Information to the user goes in the content"
-</>
+  <
+/>
 ```
 
 or
 
 ```html
-<GoACallout
-  type='information',
-  title='Callout Title'
-  >
+<GoACallout type="information" , title="Callout Title">
   Information to the user goes in the <i>content</i>
 </GoACallout>
-
 ```
 
 ## Properties
+
 <Description of={GoACallout} />
 <ArgsTable of={GoACallout} />

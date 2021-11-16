@@ -1,5 +1,4 @@
-@import '../../../node_modules/@angular/cdk/overlay/overlay';
-@include cdk-overlay();
+@import '../../../node_modules/@angular/cdk/overlay-prebuilt.css';
 
 @import '../../core-css/src/lib/styles/fonts/fonts.scss';
 @import '../../core-css/src/lib/styles/elements/elements.scss';

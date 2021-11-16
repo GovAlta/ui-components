@@ -1,6 +1,6 @@
 import { DoDont } from '@abgov/shared/storybook-common';
 import GoACard from './card';
-import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
 import { action } from '@storybook/addon-actions';
 import GoAButton from '../button/button';
 
@@ -35,6 +35,7 @@ Cards should be easy to scan for relevant and actionable information. Elements, 
 should be placed on them in a way that clearly indicates hierarchy.
 
 ### Without Thumb
+
 <Canvas>
   <Story
     name="Without Thumb"
@@ -59,7 +60,6 @@ should be placed on them in a way that clearly indicates hierarchy.
     }}
   </Story>
 </Canvas>
-
 
 ### Basic
 
@@ -140,23 +140,31 @@ should be placed on them in a way that clearly indicates hierarchy.
             scopedSlots: {
               default: (props) =>
                 createElement('div', [
-                  createElement(GoAButton, {
-                    props: {
-                      buttonType: 'tertiary',
-                      buttonSize: 'small',
-                      tooltip: 'hovering',
+                  createElement(
+                    GoAButton,
+                    {
+                      props: {
+                        buttonType: 'tertiary',
+                        buttonSize: 'small',
+                        tooltip: 'hovering',
+                      },
+                      style: {
+                        marginRight: '20px',
+                      },
                     },
-                    style: {
-                      marginRight: '20px',
+                    'Action 1'
+                  ),
+                  createElement(
+                    GoAButton,
+                    {
+                      props: {
+                        buttonType: 'tertiary',
+                        buttonSize: 'small',
+                        tooltip: 'hovering',
+                      },
                     },
-                  }, 'Action 1'),
-                  createElement(GoAButton, {
-                    props: {
-                      buttonType: 'tertiary',
-                      buttonSize: 'small',
-                      tooltip: 'hovering',
-                    },
-                  }, 'Action 2'),
+                    'Action 2'
+                  ),
                 ]),
             },
           });

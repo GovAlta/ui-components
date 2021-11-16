@@ -40,14 +40,6 @@ describe('GoARadioComponent', () => {
     });
   });
 
-  describe('Is Required Tests', () => {
-    beforeEach(() => {
-      // reset mockData to ensure no other tests have influenced this test
-      // set required to true for this set of tests
-      mockData = {...baseMockData};
-    });
-  });
-
   describe('Selection Change Tests', () => {
     test('should emit selectionChange when clicked', async () => {
       const selectionChange = jest.fn(x => x);

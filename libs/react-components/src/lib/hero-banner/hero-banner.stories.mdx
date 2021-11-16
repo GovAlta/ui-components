@@ -4,7 +4,7 @@ import {
   Story,
   Description,
   ArgsTable,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 import { DoDont } from '@abgov/shared/storybook-common';
 import GoAHeroBanner from './hero-banner.component';
 import GoAHeroBannerContent from './content/hero-banner-content.component';
@@ -18,22 +18,21 @@ export const Template = (args) => {
   title="React/Components/Hero Banner"
   component={GoAHeroBanner}
   argTypes={{
-      title: {
-        description: 'The title of the banner',
-      },
-      backgroundUrl: {
-        description:
-          "The Url for the banner's background image.",
-      },
-      content: {
-        description: 'The content displayed under the title.',
-      },
-      linkText: {
-        description: 'The text displaye for the link/button.',
-      },
-      linkUrl: {
-        description: 'The Url for the link/button.',
-      }
+    title: {
+      description: 'The title of the banner',
+    },
+    backgroundUrl: {
+      description: "The Url for the banner's background image.",
+    },
+    content: {
+      description: 'The content displayed under the title.',
+    },
+    linkText: {
+      description: 'The text displaye for the link/button.',
+    },
+    linkUrl: {
+      description: 'The Url for the link/button.',
+    },
   }}
 />
 
@@ -93,18 +92,24 @@ A large image area used to give visual reinforcement of a particular section of 
 ## Examples
 
 ### Passing properties
+
 ```html
-<GoAHeroBanner title="Upgrading our bitumen" backgroundUrl='...'
-  content='Resources are available to help ...'
-  linkText='Learn more' linkUrl='...'>
+<GoAHeroBanner
+  title="Upgrading our bitumen"
+  backgroundUrl="..."
+  content="Resources are available to help ..."
+  linkText="Learn more"
+  linkUrl="..."
+>
 </GoAHeroBanner>
 ```
 
 ### Passing child elements
+
 ```html
-<GoAHeroBanner title="Upgrading our bitumen" backgroundUrl='...'}>
-  <GoAHeroBannerContent content='Resources are available to help ...'/>
-  <GoAHeroBannerLink linkText='Learn more' linkUrl='...'/>
+<GoAHeroBanner title="Upgrading our bitumen" backgroundUrl="..." }>
+  <GoAHeroBannerContent content="Resources are available to help ..." />
+  <GoAHeroBannerLink linkText="Learn more" linkUrl="..." />
 </GoAHeroBanner>
 ```
 

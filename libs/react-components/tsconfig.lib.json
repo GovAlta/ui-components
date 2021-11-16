@@ -1,16 +1,11 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
-    "types": ["node"]
-  },
+  "compilerOptions": { "outDir": "../../dist/out-tsc", "types": ["node"] },
   "exclude": [
     "**/*.spec.ts",
+    "**/*.test.ts",
     "**/*.spec.tsx",
-    "**/*.stories.ts",
-    "**/*.stories.js",
-    "**/*.stories.jsx",
-    "**/*.stories.tsx",
+    "**/*.test.tsx",
     "**/*.stories.ts",
     "**/*.stories.js",
     "**/*.stories.jsx",

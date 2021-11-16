@@ -32,13 +32,6 @@ describe('RadioGroupComponent', () => {
     `
   }
 
-  describe('Basic rendering', () => {
-    beforeEach(() => {
-      // reset mockData to ensure no other tests have influenced this test
-      mockData = { ...baseMockData };
-    });
-  });
-
   describe('Selection Change Tests', () => {
     let selectionChangeTemplate;
     beforeEach(() => {

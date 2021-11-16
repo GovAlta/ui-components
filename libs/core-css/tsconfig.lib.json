@@ -7,6 +7,11 @@
     "rootDir": "./src",
     "types": ["node"]
   },
-  "exclude": ["**/*.spec.ts", "**/*.stories.ts", "**/*.stories.js"],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/*.stories.ts",
+    "**/*.stories.js"
+  ],
   "include": ["**/*.ts"]
 }

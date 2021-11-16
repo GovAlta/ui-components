@@ -1,21 +1,34 @@
+const path = require('path');
+
 // Common main for all storybooks in workspace
 module.exports = {
-  refs: {
-    angular: { 
-      title: "Angular", 
-      url: "https://localhost/angular/"
-    },
-    react: { 
-      title: "React", 
-      url: "https://localhost/react/"
-    },
-    vue: { 
-      title: "Vue", 
-      url: "https://localhost/vue/"
-    },
-    core: { 
-      title: "Core", 
-      url: "https://localhost/core/"
-    }
-  }
+  addons: ['@storybook/addon-essentials', '@storybook/preset-scss'],
+  webpackFinal: async (config, { configType }) => {
+    config.module.rules.push({
+      test: /\.(tsx)$/,
+      loader: require.resolve('babel-loader'),
+      options: {
+        presets: [
+          '@babel/preset-env',
+          '@babel/preset-react',
+          '@babel/preset-typescript',
+        ],
+      },
+    });
+
+    //add aliases
+    config.resolve.alias = {
+      '@abgov/shared/storybook-common': path.resolve(
+        __dirname,
+        '../libs/shared/storybook-common/src/index.ts'
+      ),
+      '@abgov/shared/common': path.resolve(
+        __dirname,
+        '../libs/shared/common/src/index.ts'
+      ),
+    };
+
+    // Return the altered config
+    return config;
+  },
 };
