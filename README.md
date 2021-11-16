@@ -1,6 +1,6 @@
 ## About the Project
 
-The project contains the Government of Alberta UI components. The output packages support multiple model frontend frameworks, such as React, Angular, etc.
+The project contains the Government of Alberta UI components. The output packages support multiple model frontend frameworks, such as React, Angular and Vue.
 
 ### Contribution Guidelines
 
