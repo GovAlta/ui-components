@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@abgov/vue-components": "0.0.2",
+    "@abgov/vue-components": "file:../../dist/libs/vue-components",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
