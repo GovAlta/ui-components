@@ -58,7 +58,7 @@ label.goa-radio {
   transition: box-shadow 100ms ease-in-out;
 }
 
-.goa-radio:hover > input:not(:disabled) ~ .goa-radio-icon {
+.goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
   box-shadow: 0 0 0 var(--goa-radio-outline-width)
     var(--goa-radio-outline-color);
 }
