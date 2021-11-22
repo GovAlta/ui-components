@@ -10,7 +10,7 @@ The design system team is using “Discussions” in the UI-components GitHub re
 
 Before creating a new discussion topic, check the discussion board for any existing ideas that may match yours. If there is a good match, please add your examples and comments to the existing discussion instead of creating a new one.
 
-Add a new discussion topic 
+Add a new discussion topic
 
 If a related discussion topic already exists please join in the discussion!
 
@@ -22,9 +22,9 @@ Socialize your discussion topic with your colleges to help refine and drive out 
 
 #### What happens to these "discussions?"
 
-Discussion topics that have the most votes and/or input from a number of different team members will be evaluated every two-week cycle by the Design System team. Those items that  
+Discussion topics that have the most votes and/or input from a number of different team members will be evaluated every two-week cycle by the Design System team. Those items that
 
-Discussion topics that have the most number of votes and/or input will be evaluated 
+Discussion topics that have the most number of votes and/or input will be evaluated
 
 Opportunities are assessed against WIP limits.
 
@@ -45,6 +45,14 @@ After an assessment, selected “discussions” will be transitioned to “issue
 | shared/common               | Library containing common javascript which will be used by all ui frameworks.                                                                                               |
 | core-css                    | Library containing common scss which will be used by all ui frameworks.                                                                                                     |
 | samples                     | Sample applications showing how to integrate the NPM packages into each library type.                                                                                       |
+
+### Setup
+```bash
+cd lib/web-components
+npm link
+cd ../..
+npm link goa-web-components
+```
 
 ### Building
 
