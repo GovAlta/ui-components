@@ -1,6 +1,23 @@
-import React from 'react'
-import { TestProps } from '../common'
+import React, { CSSProperties } from 'react'
 import './icons.scss'
+
+interface IonIconProps {
+  name: unknown;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface IonIconElement extends HTMLElement {
+};
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      'ion-icon': IonIconProps & React.HTMLAttributes<IonIconElement>
+    }
+  }
+}
 
 export type GoAIconType
   = 'accessibility'
@@ -422,20 +439,23 @@ export type GoAIconType
 
 export type IconSize = 'small' | 'medium' | 'large' | 'xlarge';
 export type IconVariant = 'primary' | 'secondary' | 'tertiary';
-export type IconStyle = 'outline' | 'filled' | 'sharp';
+export type IconTheme = 'outline' | 'filled' | 'sharp';
 
 
 interface Props {
   type: GoAIconType,
   size?: IconSize;
-  style?: IconStyle;
+  theme?: IconTheme;
 }
 
-export function GoAIcon({ type, style = 'outline', size = 'medium' }: Props): JSX.Element {
+export function GoAIcon({ type, theme = 'outline', size = 'medium' }: Props): JSX.Element {
   const _size = getSize(size);
+  const _style: CSSProperties = {
+    fontSize: _size
+  }
   return (
     <div style={{ width: _size }} className="goa-icon" data-testid={`icon-${type}`}>
-      <ion-icon style={{ fontSize: _size }} name={style === 'filled' ? type : `${type}-${style}`}></ion-icon>
+      <ion-icon style={_style} name={theme === 'filled' ? type : `${type}-${theme}`}></ion-icon>
     </div>
   )
 }
