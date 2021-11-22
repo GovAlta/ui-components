@@ -1,0 +1,262 @@
+<svelte:options tag="goa-dropdown" />
+
+<script lang="ts">
+  import { messageChannel } from "./common/stores";
+  import type { Message } from "./common/stores";
+  import type { GoAIconType } from "./Icon.wc.svelte";
+  import { onDestroy, onMount, tick } from "svelte";
+
+  const MAX_HEIGHT = 300;
+
+  // Props
+
+  export let name: string;
+  export let values: string;
+  export let disabled: boolean;
+  export let autocomplete: boolean;
+  export let leadingicon: GoAIconType;
+  export let maxheight: number;
+  export let multiselect: boolean;
+  export let placeholder: string;
+
+  // Private
+
+  let el: HTMLElement;
+  let selectedLabels: string[] = [];
+  let selectedValues: string[] = [];
+  let isMenuVisible = false;
+
+  let filterEl: HTMLElement;
+  let filter = "";
+
+  // Init
+
+  const unsubscribe = messageChannel.subscribe((channel) => {
+    if (channel[name]?.tag !== name) {
+      return;
+    }
+
+    const msg = channel[name] as Message;
+    switch (msg?.payload?.type) {
+      case "DropDownAction": {
+        if (msg.payload.action === "select") {
+          if (multiselect) {
+            selectedLabels = [...selectedLabels, msg.payload.label];
+            selectedValues = [...selectedValues, msg.payload.value];
+          } else {
+            selectedLabels = [msg.payload.label];
+            selectedValues = [msg.payload.value];
+          }
+        }
+        if (msg.payload.action === "deselect") {
+          const _label = msg.payload.label;
+          const _value = msg.payload.value;
+          selectedLabels = selectedLabels.filter((label) => label !== _label);
+          selectedValues = selectedValues.filter((value) => value !== _value);
+        }
+
+        if (!multiselect) {
+          isMenuVisible = false;
+        }
+
+        messageChannel.update((old) => ({ ...old, [name]: null }));
+        el.dispatchEvent(
+          new CustomEvent("on:change", { composed: true, detail: { event: null, data: {name, value: selectedValues} }})
+        )
+        break;
+      }
+    }
+  });
+
+  function doFilter(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    filter = e.target.value;
+    messageChannel.update((old) => ({
+      ...old,
+      [name]: {
+        tag: name,
+        payload: {
+          type: "FilterChange",
+          filter,
+        },
+      },
+    }));
+    return false;
+  }
+
+  // Hooks
+
+  onMount(async () => {
+    await tick();
+    // set initial values state
+    messageChannel.update((old) => ({
+      ...old,
+      [name]: {
+        tag: name,
+        payload: {
+          type: "DropDownInit",
+          values: values ? JSON.parse(values) : [],
+          multiSelect: multiselect,
+        },
+      },
+    }));
+  });
+
+  onDestroy(() => {
+    messageChannel.update((old) => {
+      delete old[name];
+      return old;
+    });
+
+    unsubscribe();
+  });
+
+  // Reactive
+
+  $: {
+    // To prevent the event from bubbling up to the parent, we need to listen to the event on the element itself
+    // then we can stop propagation and prevent default
+    filterEl?.addEventListener("on:change", (e) => {
+      e.stopPropagation();
+      filter = e.detail.data.value;
+      messageChannel.update((old) => ({
+        ...old,
+        [name]: {
+          tag: name,
+          payload: {
+            type: "FilterChange",
+            filter,
+          },
+        },
+      }));
+    })
+  }
+
+  // Functions
+
+  function close() {
+    isMenuVisible = false;
+  }
+</script>
+
+<div class="goa-dropdown-box" bind:this={el}>
+  <!-- background -->
+  {#if isMenuVisible}
+    <div data-testid={`${name}-dropdown-background`} class="goa-dropdown-background" on:click={close} />
+  {/if}
+
+  <div>
+    <!-- readonly input  -->
+    {#if !isMenuVisible || !autocomplete}
+      <div on:click={() => (isMenuVisible = !isMenuVisible)} data-testid={`${name}-dropdown`}>
+        <goa-input
+          {disabled}
+          {leadingicon}
+          {placeholder}
+          id={`${name}-dropdown-input`}
+          name="search"
+          readonly={true}
+          trailingicon="chevron-down"
+          type="text"
+          value={selectedLabels.join(", ")}
+        ></goa-input>
+      </div>
+    {/if}
+
+    <!-- list and filter -->
+    {#if isMenuVisible}
+      <div>
+        <!-- filter -->
+        {#if autocomplete}
+          <goa-input
+            bind:this={filterEl}
+            focused={isMenuVisible}
+            name="filter"
+            placeholder="Filter"
+            trailingIcon={filter.length > 0 ? "close-circle" : "search"}
+            type="text"
+            variant="goa"
+          />
+        {/if}
+
+        <!-- list -->
+        <ul class="goa-dropdown-list" style={`overflow-y: auto; max-height: ${maxheight || MAX_HEIGHT}px`}>
+          <slot />
+        </ul>
+      </div>
+    {/if}
+  </div>
+</div>
+
+<style>
+  .goa-dropdown-box {
+    position: relative;
+  }
+
+  .goa-dropdown-box ~ .goa-dropdown-box {
+    margin-top: 1rem;
+  }
+
+  .goa-dropdown-background {
+    position: fixed;
+    inset: 0;
+    opacity: 1;
+  }
+
+  .goa-icon ~ input {
+    padding-left: 0.5rem;
+  }
+
+  .goa-dropdown-list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    margin-top: 3px;
+    list-style-type: none;
+    background: var(--color-white);
+    border-radius: var(--input-border-radius);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2), 0 4px 4px rgba(0, 0, 0, 0.1);
+    z-index: 99;
+  }
+
+  .goa-dropdown-list {
+    scroll-behavior: smooth;
+    scrollbar-width: thin; /* Firefox */
+  }
+
+  /* Chrome based browsers and Safari */
+  .goa-dropdown-list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .goa-dropdown-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .goa-dropdown-list::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  .goa-dropdown-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .goa-dropdown-list hr {
+    border: none;
+    border-top: 1px solid var(--color-gray-100);
+    margin: 0;
+  }
+
+  .goa-dropdown-list label {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-bold);
+    padding-left: 0.5rem;
+  }
+
+  .goa-state--error .goa-dropdown-input {
+    border: 2px solid var(--color-red);
+  }
+</style>
