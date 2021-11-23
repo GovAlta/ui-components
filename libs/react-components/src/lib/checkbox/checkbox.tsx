@@ -1,60 +1,51 @@
-import React, { FC } from 'react';
-import './checkbox.scss';
-import classNames from 'classnames';
+import React, { FC, useEffect, useRef } from 'react';
+import 'goa-web-components'
+
+interface CheckboxProps {
+  ref: React.MutableRefObject<HTMLElement>;
+  name: string;
+  ischecked?: string;
+  isdisabled?: string;
+  isindeterminate?: string;
+  iserror?: string;
+  content?: string;
+  value?: string | number | boolean;
+}
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      'goa-checkbox': CheckboxProps & React.HTMLAttributes<HTMLElement>
+    }
+  }
+}
 
 /* eslint-disable-next-line */
-export interface CheckboxProps {
+export interface Props {
   name: string;
   checked?: boolean;
   disabled?: boolean;
   indeterminate?: boolean;
+  error?: boolean;
   content?: string;
   value?: string | number | boolean;
+  testId?: string;
   onChange?: (name: string, value: string) => void;
 }
 
-export const GoACheckbox: FC<CheckboxProps> = ({ name, checked, disabled, indeterminate, value = true, content, children, onChange }) => {
-  const rootCss = (): string => {
-    return classNames({
-      'goa-checkbox': true,
-      'goa-checkbox--disabled': disabled,
-    })
-  };
-
-  const checkboxCss = (): string => {
-    return classNames({
-      'goa-checkbox-container': true,
-      'goa-checkbox--selected': checked,
-    })
-  };
+export const GoACheckbox: FC<Props> = ({ name, testId, error, checked, disabled, indeterminate, value = true, content, children, onChange }) => {
+  const el = useRef<HTMLElement>();
+  useEffect(() => {
+    el.current.addEventListener('on:change', (e: CustomEvent) => {
+      onChange(name, e.detail.value)
+    });
+  }, [])
 
   return (
-    <label className={rootCss()}>
-      <div className={checkboxCss()}>
-        <input
-          name={name}
-          type="checkbox"
-          checked={checked}
-          disabled={disabled}
-          value={`${value}`}
-          onChange={(e) => onChange(name, e.target.checked ? `${value}` : null)}
-        />
-        {indeterminate && checked && (
-          <svg id='dashmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2">
-            <rect width="15" height="2" />
-          </svg>
-        )}
-        {!indeterminate && checked && (
-          <svg id='checkmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18">
-            <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
-          </svg>
-        )}
-      </div>
-      <div className="goa-checkbox-text">
-        {content || children}
-      </div>
-    </label>
-  );
+    <goa-checkbox ref={el} name={name} iserror={error && 'error'} ischecked={checked && 'checked'} isdisabled={disabled && 'disabled'} isindeterminate={indeterminate && 'indeterminate'} content={content} value={value}>{children}</goa-checkbox>
+  )
 };
 
 export default GoACheckbox;

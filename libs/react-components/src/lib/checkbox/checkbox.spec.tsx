@@ -1,8 +1,8 @@
 import React, { Component, ReactNode, useState } from 'react';
 import { render } from '@testing-library/react';
-import { screen } from '@testing-library/dom'
+import { screen, waitFor } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event';
-import GoACheckbox, { CheckboxProps } from './checkbox';
+import GoACheckbox, { Props as CheckboxProps } from './checkbox';
 
 describe('GoA Checkbox', () => {
   const label = 'label test';
@@ -24,29 +24,8 @@ describe('GoA Checkbox', () => {
   }
 
   it('should render label', () => {
-    renderParent({ name: 'someCheckBox'});
-
+    renderParent({ name: 'someCheckBox' });
     expect(screen.getByText(label)).not.toBeNull();
-  });
-
-  test('should render checkmark svg when checked', async () => {
-    renderParent({ name: 'someCheckBox', checked: true});
-
-    const checkmark = document.getElementById('checkmark');
-    const dashmark = document.getElementById('dashmark');
-
-    expect(checkmark).not.toBeNull();
-    expect(dashmark).toBeNull();
-  });
-
-  test('should render dash svg when checked is true', () => {
-    renderParent({ name: 'someCheckBox', checked: true, indeterminate: true });
-
-    const checkmark = document.getElementById('checkmark');
-    const dashmark = document.getElementById('dashmark');
-
-    expect(dashmark).not.toBeNull();
-    expect(checkmark).toBeNull();
   });
 
   test('should emit onChange when clicked', async () => {
@@ -61,17 +40,19 @@ describe('GoA Checkbox', () => {
       }
 
       return (
-        <GoACheckbox {...props} value={props.value} checked={props.checked} onChange={onChange}>{label}</GoACheckbox>
+        <GoACheckbox {...props} testId="checkbox" value={props.value} checked={props.checked} onChange={onChange}>{label}</GoACheckbox>
       )
     }
 
     render(<StatefulParent name="someCheckbox" />);
 
-    const checkbox = screen.getByRole('checkbox', {});
+    const checkbox = screen.getByText(label, {});
     userEvent.click(checkbox);
     const onChangeResults = onChangeStub.mock.results;
 
-    expect(onChangeStub).toHaveBeenCalledTimes(1);
-    expect(onChangeResults).toBeTruthy();
+    waitFor(() => {
+      expect(onChangeStub).toHaveBeenCalledTimes(1);
+      expect(onChangeResults).toBeTruthy();
+    })
   });
 });
