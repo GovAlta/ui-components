@@ -46,7 +46,7 @@ describe('GoA Checkbox', () => {
 
     render(<StatefulParent name="someCheckbox" />);
 
-    const checkbox = screen.getByText(label, {});
+    const checkbox = screen.getByTestId("checkbox", {});
     userEvent.click(checkbox);
     const onChangeResults = onChangeStub.mock.results;
 
