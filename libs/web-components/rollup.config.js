@@ -20,19 +20,19 @@ export default {
   input: "src/index.js",
   output: bundleComponents
     ? [
-        { file: pkg.module, format: "es" },
-        { file: pkg.main, format: "umd", name },
-      ]
+      { file: pkg.module, format: "es" },
+      { file: pkg.main, format: "umd", name },
+    ]
     : [
-        {
-          dir: "dist/",
-          format: "es",
-          chunkFileNames: "[name].js",
-          manualChunks: { svelte: ["svelte"] },
-        },
-      ],
+      {
+        dir: "dist/",
+        format: "es",
+        chunkFileNames: "[name].js",
+        manualChunks: { svelte: ["svelte"] },
+      },
+    ],
   plugins: [
-    production && del({ targets: "dist" }),
+    // production && del({ targets: "dist" }),
     commonjs(),
     typescript({ sourceMap: !production }),
     svelte({
