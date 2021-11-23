@@ -1,73 +1,178 @@
 {
   "version": 1,
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  },
-  "schematics": {
-    "@nrwl/workspace": {
-      "library": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/cypress": {
-      "cypress-project": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/react": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/next": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/web": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/node": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/nx-plugin": {
-      "plugin": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/nest": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/express": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/angular": {
-      "convert-tslint-to-eslint": {
-        "removeTSLintIfNoMoreTSLintTargets": true
-      }
-    }
-  },
   "projects": {
+    "angular-components": {
+      "projectType": "library",
+      "root": "libs/angular-components",
+      "sourceRoot": "libs/angular-components/src",
+      "prefix": "abgov",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/angular-components/tsconfig.lib.json",
+            "project": "libs/angular-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/angular-components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular-components/src/**/*.ts",
+              "libs/angular-components/src/**/*.html"
+            ]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular-components/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "post": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npm run build:styles:angular-components"],
+            "cwd": "./",
+            "parallel": false
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "staticDir": ["libs/shared/storybook-common/assets"],
+            "config": {
+              "configFolder": "libs/angular-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/angular-components",
+            "staticDir": ["libs/shared/storybook-common/assets"],
+            "config": {
+              "configFolder": "libs/angular-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "npx semantic-release -e ./libs/angular-components/.releaserc.json"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "tags": []
+    },
+    "angular-material-components": {
+      "projectType": "library",
+      "root": "libs/angular-material-components",
+      "sourceRoot": "libs/angular-material-components/src",
+      "prefix": "abgov",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/angular-material-components/tsconfig.lib.json",
+            "project": "libs/angular-material-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/angular-material-components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular-material-components/src/**/*.ts",
+              "libs/angular-material-components/src/**/*.html"
+            ]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular-material-components/jest.config.js",
+            "passWithNoTests": true,
+            "setupFile": "libs/angular-material-components/src/test-setup.ts"
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "staticDir": ["libs/shared/storybook-common/assets"],
+            "config": {
+              "configFolder": "libs/angular-material-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/angular-material-components",
+            "staticDir": ["libs/shared/storybook-common/assets"],
+            "config": {
+              "configFolder": "libs/angular-material-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "npx semantic-release -e ./libs/angular-material-components/.releaserc.json"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["core-css"]
+    },
     "core-css": {
       "root": "libs/core-css",
       "sourceRoot": "libs/core-css/src",
@@ -82,10 +187,7 @@
               "libs/core-css/tsconfig.lib.json",
               "libs/core-css/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/core-css/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/core-css/**/*"]
           }
         },
         "test": {
@@ -120,9 +222,7 @@
         "post": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "npm run build:styles"
-            ],
+            "commands": ["npm run build:styles"],
             "cwd": "./",
             "parallel": false
           }
@@ -132,9 +232,7 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
-            "staticDir": [
-              "libs/shared/storybook-common/assets"
-            ],
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/core-css/.storybook"
             }
@@ -150,9 +248,7 @@
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/core-css",
-            "staticDir": [
-              "libs/shared/storybook-common/assets"
-            ],
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/core-css/.storybook"
             }
@@ -169,62 +265,42 @@
             "command": "npx semantic-release -e ./libs/core-css/.releaserc.json"
           }
         }
-      }
+      },
+      "tags": []
     },
-    "angular-components": {
+    "react-components": {
+      "root": "libs/react-components",
+      "sourceRoot": "libs/react-components/src",
       "projectType": "library",
-      "root": "libs/angular-components",
-      "sourceRoot": "libs/angular-components/src",
-      "prefix": "abgov",
+      "schematics": {},
       "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/angular-components/tsconfig.lib.json",
-            "project": "libs/angular-components/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/angular-components/tsconfig.lib.prod.json"
-            }
-          }
-        },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
-            "lintFilePatterns": [
-              "libs/angular-components/src/**/*.ts",
-              "libs/angular-components/src/**/*.html"
-            ]
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/react-components/tsconfig.lib.json",
+              "libs/react-components/tsconfig.lib-exp.json",
+              "libs/react-components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/react-components/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/angular-components/jest.config.js",
+            "jestConfig": "libs/react-components/jest.config.js",
             "passWithNoTests": true
-          }
-        },
-        "post": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "npm run build:styles:angular-components"
-            ],
-            "cwd": "./",
-            "parallel": false
           }
         },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
           "options": {
-            "uiFramework": "@storybook/angular",
+            "uiFramework": "@storybook/react",
             "port": 4400,
-            "staticDir": [
-              "libs/shared/storybook-common/assets"
-            ],
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
-              "configFolder": "libs/angular-components/.storybook"
+              "configFolder": "libs/react-components/.storybook"
             }
           },
           "configurations": {
@@ -233,16 +309,59 @@
             }
           }
         },
+        "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "parallel": false,
+            "commands": [
+              "nx run react-components:build-lib",
+              "nx run react-components:build-experimental"
+            ]
+          }
+        },
+        "build-lib": {
+          "builder": "@nrwl/web:package",
+          "options": {
+            "outputPath": "dist/libs/react-components",
+            "tsConfig": "libs/react-components/tsconfig.lib.json",
+            "project": "libs/react-components/package.json",
+            "entryFile": "libs/react-components/src/index.ts",
+            "external": ["react", "react-dom"],
+            "babelConfig": "@nrwl/react/plugins/bundle-babel",
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "extractCss": false,
+            "assets": [
+              {
+                "glob": "libs/react-components/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "build-experimental": {
+          "builder": "@nrwl/web:package",
+          "options": {
+            "outputPath": "dist/libs/react-components/experimental",
+            "tsConfig": "libs/react-components/tsconfig.lib-exp.json",
+            "project": "libs/react-components/package.exp.json",
+            "entryFile": "libs/react-components/src/experimental/index.ts",
+            "entryRoot": "libs/react-components/src/",
+            "external": ["react", "react-dom"],
+            "babelConfig": "@nrwl/react/plugins/bundle-babel",
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "extractCss": false,
+            "assets": []
+          }
+        },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
           "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/angular-components",
-            "staticDir": [
-              "libs/shared/storybook-common/assets"
-            ],
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/react-components",
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
-              "configFolder": "libs/angular-components/.storybook"
+              "configFolder": "libs/react-components/.storybook"
             }
           },
           "configurations": {
@@ -254,15 +373,38 @@
         "release": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "npx semantic-release -e ./libs/angular-components/.releaserc.json"
+            "command": "npx semantic-release -e ./libs/react-components/.releaserc.json"
           }
         }
       },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
+      "tags": []
+    },
+    "shared-common": {
+      "root": "libs/shared/common",
+      "sourceRoot": "libs/shared/common/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/shared/common/tsconfig.lib.json",
+              "libs/shared/common/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/common/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/common/jest.config.js",
+            "passWithNoTests": true
+          }
         }
-      }
+      },
+      "tags": []
     },
     "shared-storybook-common": {
       "root": "libs/shared/storybook-common",
@@ -291,7 +433,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "vue-components": {
       "projectType": "library",
@@ -303,7 +446,8 @@
               "libs/vue-components/src/**/*.ts",
               "libs/vue-components/src/**/*.vue"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "build": {
           "builder": "@nrwl/workspace:run-commands",
@@ -349,9 +493,7 @@
           "options": {
             "uiFramework": "@storybook/vue",
             "port": 4400,
-            "staticDir": [
-              "libs/shared/storybook-common/assets"
-            ],
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/vue-components/.storybook"
             }
@@ -367,9 +509,7 @@
           "options": {
             "uiFramework": "@storybook/vue",
             "outputPath": "dist/storybook/vue-components",
-            "staticDir": [
-              "libs/shared/storybook-common/assets"
-            ],
+            "staticDir": ["libs/shared/storybook-common/assets"],
             "config": {
               "configFolder": "libs/vue-components/.storybook"
             }
@@ -388,250 +528,8 @@
         }
       },
       "root": "libs/vue-components",
-      "sourceRoot": "libs/vue-components/src"
-    },
-    "shared-common": {
-      "root": "libs/shared/common",
-      "sourceRoot": "libs/shared/common/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/shared/common/tsconfig.lib.json",
-              "libs/shared/common/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/common/**/*"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/shared/common/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "angular-material-components": {
-      "projectType": "library",
-      "root": "libs/angular-material-components",
-      "sourceRoot": "libs/angular-material-components/src",
-      "prefix": "abgov",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/angular-material-components/tsconfig.lib.json",
-            "project": "libs/angular-material-components/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/angular-material-components/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/angular-material-components/src/**/*.ts",
-              "libs/angular-material-components/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/angular-material-components/jest.config.js",
-            "passWithNoTests": true,
-            "setupFile": "libs/angular-material-components/src/test-setup.ts"
-          }
-        },
-        "post": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [],
-            "cwd": "./",
-            "parallel": false
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "staticDir": [
-              "libs/shared/storybook-common/assets"
-            ],
-            "config": {
-              "configFolder": "libs/angular-material-components/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/angular-material-components",
-            "staticDir": [
-              "libs/shared/storybook-common/assets"
-            ],
-            "config": {
-              "configFolder": "libs/angular-material-components/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "release": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "npx semantic-release -e ./libs/angular-material-components/.releaserc.json"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "react-components": {
-      "root": "libs/react-components",
-      "sourceRoot": "libs/react-components/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/react-components/tsconfig.lib.json",
-              "libs/react-components/tsconfig.lib-exp.json",
-              "libs/react-components/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/react-components/**/*"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/react-components/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/react",
-            "port": 4400,
-            "staticDir": [
-              "libs/shared/storybook-common/assets"
-            ],
-            "config": {
-              "configFolder": "libs/react-components/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "parallel": false,
-            "commands": [
-              "nx run react-components:build-lib",
-              "nx run react-components:build-experimental"
-            ]
-          }
-        },
-        "build-lib": {
-          "builder": "@nrwl/web:package",
-          "options": {
-            "outputPath": "dist/libs/react-components",
-            "tsConfig": "libs/react-components/tsconfig.lib.json",
-            "project": "libs/react-components/package.json",
-            "entryFile": "libs/react-components/src/index.ts",
-            "external": [
-              "react",
-              "react-dom"
-            ],
-            "babelConfig": "@nrwl/react/plugins/bundle-babel",
-            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-            "extractCss": false,
-            "assets": [
-              {
-                "glob": "libs/react-components/README.md",
-                "input": ".",
-                "output": "."
-              }
-            ]
-          }
-        },
-        "build-experimental": {
-          "builder": "@nrwl/web:package",
-          "options": {
-            "outputPath": "dist/libs/react-components/experimental",
-            "tsConfig": "libs/react-components/tsconfig.lib-exp.json",
-            "project": "libs/react-components/package.exp.json",
-            "entryFile": "libs/react-components/src/experimental/index.ts",
-            "external": [
-              "react",
-              "react-dom"
-            ],
-            "babelConfig": "@nrwl/react/plugins/bundle-babel",
-            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-            "extractCss": false,
-            "assets": []
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/react",
-            "outputPath": "dist/storybook/react-components",
-            "staticDir": [
-              "libs/shared/storybook-common/assets"
-            ],
-            "config": {
-              "configFolder": "libs/react-components/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "release": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "npx semantic-release -e ./libs/react-components/.releaserc.json"
-          }
-        }
-      }
+      "sourceRoot": "libs/vue-components/src",
+      "tags": []
     }
   }
 }

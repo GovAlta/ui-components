@@ -4,11 +4,7 @@
     "jsx": "preserve",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "types": [
-      "webpack-env",
-      "node",
-      "jest"
-    ],
+    "types": ["webpack-env", "node", "jest"],
     "strictFunctionTypes": false
   },
   "include": [],

@@ -5,7 +5,7 @@ import {
   Story,
   ArgsTable,
   Description,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
@@ -75,7 +75,7 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
             createElement(GoACheckbox, {
               props: args,
             }),
-          ])
+          ]);
         },
       };
     }}
@@ -87,9 +87,7 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
 Basic
 
 ```html
-<goa-checkbox checked="{true}">
-  Label goes here
-</goa-checkbox>
+<goa-checkbox checked="{true}"> Label goes here </goa-checkbox>
 ```
 
 All Properties

@@ -1,10 +1,11 @@
 import GoADropdown from './dropdown';
-import GoADropdownOption from './option/option'
+import GoADropdownOption from './option/option';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
-import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
 
-<Meta title="Vue/Basic Elements/Dropdown"
+<Meta
+  title="Vue/Basic Elements/Dropdown"
   argTypes={{
     label: { control: { type: 'text' } },
     description: { control: { type: 'text' } },
@@ -16,7 +17,8 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
     value: { control: { type: 'text' } },
     values: { control: { type: 'text' } },
   }}
-  component={GoADropdown} />
+  component={GoADropdown}
+/>
 
 # Drop Down List
 
@@ -32,27 +34,25 @@ A user input field that allows the user to select from a list of options.
       return {
         components: [GoADropdown],
         render: function (createElement) {
-          return createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
+          return createElement(GoADropdown, {
+            props: {
+              label: 'Fruits',
+              options: [
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+              ],
+              description: 'Pick something from the list',
+            },
+            style: { width: '300px' },
+            on: {
+              select: (value) => {
+                action('selection changed')(value);
               },
-              style: { width: '300px' },
-              on: {
-                select: (value) => {
-                  action('selection changed')(value);
-                }
-              }
-            }
-          )
-        }
-      }
+            },
+          });
+        },
+      };
     }}
   </Story>
 </Canvas>
@@ -65,113 +65,108 @@ A user input field that allows the user to select from a list of options.
       return {
         components: [GoADropdown],
         render: function (createElement) {
-          return createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-                required: true,
-              },
-              style: { width: '300px' },
-            }
-          )
-        }
-      }
+          return createElement(GoADropdown, {
+            props: {
+              label: 'Fruits',
+              options: [
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+              ],
+              description: 'Pick something from the list',
+              required: true,
+            },
+            style: { width: '300px' },
+          });
+        },
+      };
     }}
   </Story>
 </Canvas>
 
 ### Initial Values
+
 <Canvas>
   <Story name="Initial Values">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
         render: function (createElement) {
-          return  createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-                multiple: true,
-                values: ['banana', 'pear']
-              },
-              style: { width: '300px' },
-            }
-          )
-        }
-      }
+          return createElement(GoADropdown, {
+            props: {
+              label: 'Fruits',
+              options: [
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+              ],
+              description: 'Pick something from the list',
+              multiple: true,
+              values: ['banana', 'pear'],
+            },
+            style: { width: '300px' },
+          });
+        },
+      };
     }}
   </Story>
 </Canvas>
 
 ### Disabled
+
 <Canvas>
   <Story name="Disabled">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
         render: function (createElement) {
-          return createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-                disabled: true
-              },
-              style: { width: '300px' },
-            }
-          )
-        }
-      }
+          return createElement(GoADropdown, {
+            props: {
+              label: 'Fruits',
+              options: [
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+              ],
+              description: 'Pick something from the list',
+              disabled: true,
+            },
+            style: { width: '300px' },
+          });
+        },
+      };
     }}
   </Story>
 </Canvas>
 
 ### Multi Selection
+
 <Canvas>
   <Story name="Multi Selection">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
         render: function (createElement) {
-          return  createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-                multiple: true,
+          return createElement(GoADropdown, {
+            props: {
+              label: 'Fruits',
+              options: [
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+              ],
+              description: 'Pick something from the list',
+              multiple: true,
+            },
+            style: { width: '300px' },
+            on: {
+              select: (values) => {
+                action('selection changed')(values);
               },
-              style: { width: '300px' },
-              on: {
-                select: (values) => {
-                  action('selection changed')(values);
-                }
-              }
-            }
-          )
-        }
-      }
+            },
+          });
+        },
+      };
     }}
   </Story>
 </Canvas>
@@ -182,53 +177,50 @@ A user input field that allows the user to select from a list of options.
       return {
         components: [GoADropdown],
         render: function (createElement) {
-          return createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-              },
-              style: { width: '300px' },
-            }
-          )
-        }
-      }
+          return createElement(GoADropdown, {
+            props: {
+              label: 'Fruits',
+              options: [
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+              ],
+              description: 'Pick something from the list',
+            },
+            style: { width: '300px' },
+          });
+        },
+      };
     }}
   </Story>
 </Canvas>
-
 
 ### Max Menu Height
 
@@ -238,106 +230,102 @@ A user input field that allows the user to select from a list of options.
       return {
         components: [GoADropdown],
         render: function (createElement) {
-          return createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-                menuHeight: 300
-              },
-              style: { width: '300px' },
-            }
-          )
-        }
-      }
+          return createElement(GoADropdown, {
+            props: {
+              label: 'Fruits',
+              options: [
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+              ],
+              description: 'Pick something from the list',
+              menuHeight: 300,
+            },
+            style: { width: '300px' },
+          });
+        },
+      };
     }}
   </Story>
 </Canvas>
 
 ### With Filtering (startsWith)
+
 <Canvas>
   <Story name="With Filtering (startsWith)">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
         render: function (createElement) {
-          return  createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-                typeAheadMode: 'startsWith'
-              },
-              style: { width: '300px' },
-            }
-          )
-        }
-      }
+          return createElement(GoADropdown, {
+            props: {
+              label: 'Fruits',
+              options: [
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+              ],
+              description: 'Pick something from the list',
+              typeAheadMode: 'startsWith',
+            },
+            style: { width: '300px' },
+          });
+        },
+      };
     }}
   </Story>
 </Canvas>
 
 ### With Filtering (contains)
+
 <Canvas>
   <Story name="With Filtering (contains)">
     {(args, argTypes) => {
       return {
         components: [GoADropdown],
         render: function (createElement) {
-          return  createElement(
-            GoADropdown, {
-              props: {
-                label: 'Fruits',
-                options: [
-                  { name: 'Apple', value: 'apple' },
-                  { name: 'Banana', value: 'banana' },
-                  { name: 'Pear', value: 'pear' },
-                ],
-                description: 'Pick something from the list',
-                typeAheadMode: 'contains'
-              },
-              style: { width: '300px' },
-            }
-          )
-        }
-      }
+          return createElement(GoADropdown, {
+            props: {
+              label: 'Fruits',
+              options: [
+                { name: 'Apple', value: 'apple' },
+                { name: 'Banana', value: 'banana' },
+                { name: 'Pear', value: 'pear' },
+              ],
+              description: 'Pick something from the list',
+              typeAheadMode: 'contains',
+            },
+            style: { width: '300px' },
+          });
+        },
+      };
     }}
   </Story>
 </Canvas>
@@ -348,33 +336,33 @@ Basic
 
 ```html
 <goa-dropdown
-    label="Fruits"
-    description="Choose your favourite fruit!"
-    :options='[{"name":"Apple","value":"apple"},{"name":"Banana","value":"banana"},{"name":"Pear","value":"pear"}]'
-  />
+  label="Fruits"
+  description="Choose your favourite fruit!"
+  :options='[{"name":"Apple","value":"apple"},{"name":"Banana","value":"banana"},{"name":"Pear","value":"pear"}]'
+/>
 ```
 
 Preselected Value
 
 ```html
 <goa-dropdown
-    description="Pick something from the list"
-    label="Fruits"
-    :options='[{"name":"Apple","value":"apple"},{"name":"Banana","value":"banana"},{"name":"Pear","value":"pear","selected":true}]'
-    value="pear"
-  />
+  description="Pick something from the list"
+  label="Fruits"
+  :options='[{"name":"Apple","value":"apple"},{"name":"Banana","value":"banana"},{"name":"Pear","value":"pear","selected":true}]'
+  value="pear"
+/>
 ```
 
 Preselected Values
 
 ```html
 <goa-dropdown
-    description="Pick something from the list"
-    label="Fruits"
-    multiple
-    :options='[{"name":"Apple","value":"apple"},{"name":"Banana","value":"banana","selected":true},{"name":"Pear","value":"pear","selected":true}]'
-    :values='["banana","pear"]'
-  />
+  description="Pick something from the list"
+  label="Fruits"
+  multiple
+  :options='[{"name":"Apple","value":"apple"},{"name":"Banana","value":"banana","selected":true},{"name":"Pear","value":"pear","selected":true}]'
+  :values='["banana","pear"]'
+/>
 ```
 
 ## Properties

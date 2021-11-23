@@ -4,7 +4,7 @@ import {
   Story,
   Description,
   ArgsTable,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 import { GoAIcon, GoAFormItem } from '../../experimental';
 import { GoADropdown, GoADropdownOption, GoADropdownGroup } from '../..';
 import { GoAButton } from '../..';
@@ -51,7 +51,8 @@ export const Template = (args) => {
     <StateDisplay
       title="Dropdown Example"
       description="A dropdown component that allows for selection of one or more items."
-      state={selectedValues}>
+      state={selectedValues}
+    >
       <GoADropdown
         {...args}
         name="basic"
@@ -135,7 +136,6 @@ export const Template = (args) => {
 };
 ```
 
-
 ## Properties
 
 <Description of={GoADropdown} />
@@ -159,8 +159,8 @@ The `data-testid` values are shown below:
 **DropdownOption**:
 `[name]-dropdown-option--[value]`
 
-
 ### Example:
+
 ```tsx
 <GoADropdown name="favColor">
   <GoADropdownOption label="Red" value="red" />
@@ -184,13 +184,22 @@ The `data-testid` values are shown below:
   <ul class="goa-dropdown-list">
     <div class="goa-scrollable">
       <div>
-        <li data-testid="favColor-dropdown-option--red" class="goa-dropdown-option goa-dropdown-option--selected">
+        <li
+          data-testid="favColor-dropdown-option--red"
+          class="goa-dropdown-option goa-dropdown-option--selected"
+        >
           Red
         </li>
-        <li data-testid="favColor-dropdown-option--green" class="goa-dropdown-option">
+        <li
+          data-testid="favColor-dropdown-option--green"
+          class="goa-dropdown-option"
+        >
           Green
         </li>
-        <li data-testid="favColor-dropdown-option--blue" class="goa-dropdown-option">
+        <li
+          data-testid="favColor-dropdown-option--blue"
+          class="goa-dropdown-option"
+        >
           Blue
         </li>
       </div>

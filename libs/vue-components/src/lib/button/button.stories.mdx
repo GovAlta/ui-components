@@ -1,46 +1,70 @@
 import GoAButton from './button';
 import { action } from '@storybook/addon-actions';
 
-import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
 
-<Meta title="Vue/Basic Elements/Button"
+<Meta
+  title="Vue/Basic Elements/Button"
   argTypes={{
-    buttonType: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary'] } },
+    buttonType: {
+      control: {
+        type: 'select',
+        options: ['primary', 'secondary', 'tertiary'],
+      },
+    },
     buttonSize: { control: { type: 'select', options: ['small', 'normal'] } },
     title: { control: { type: 'text' } },
     onClick: { action: 'You have clicked the button' },
   }}
-  component={GoAButton} />
+  component={GoAButton}
+/>
 
 # Button
 
 <Canvas>
-  <Story name="Variants" height={150}
+  <Story
+    name="Variants"
+    height={150}
     args={{
       buttonType: 'primary',
       buttonSize: 'normal',
       title: 'hovering',
-    }}>
+    }}
+  >
     {(args, argTypes) => {
       return {
         render: function (createElement) {
           return createElement('div', null, [
-            createElement(GoAButton, { props: { ...args, buttonType: 'primary' }}, 'Primary'),
-            createElement(GoAButton, { props: { ...args, buttonType: 'secondary' }}, 'Secondary'),
-            createElement(GoAButton, { props: { ...args, buttonType: 'tertiary' }}, 'tertiary'), createElement('br'),
+            createElement(
+              GoAButton,
+              { props: { ...args, buttonType: 'primary' } },
+              'Primary'
+            ),
+            createElement(
+              GoAButton,
+              { props: { ...args, buttonType: 'secondary' } },
+              'Secondary'
+            ),
+            createElement(
+              GoAButton,
+              { props: { ...args, buttonType: 'tertiary' } },
+              'tertiary'
+            ),
+            createElement('br'),
             createElement(GoAButton, { props: args }, 'Demo'),
-          ]
-        )}
-      }
+          ]);
+        },
+      };
     }}
   </Story>
 </Canvas>
 
 ## Overview
 
-A button to use for a Government of Alberta microsite.  Contains a customizable service name and home link for the microsite.
+A button to use for a Government of Alberta microsite. Contains a customizable service name and home link for the microsite.
 
 ## Examples
+
 ```
 <template>
   <div id="app">

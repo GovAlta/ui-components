@@ -10,7 +10,7 @@ import {
   Story,
   ArgsTable,
   Description,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 
 <Meta
   title="Experimental/Components/Transitions"
@@ -81,18 +81,25 @@ export const DynamicTemplate = (args) => {
     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
   };
   function nextTransition() {
-    setTransitionIndex(transitionIndex + 1)
+    setTransitionIndex(transitionIndex + 1);
   }
   return (
     <div>
       <button onClick={() => nextTransition()}>Translate</button>
       <div style={outerCss}>
-        <GoATransitionSequence transitions={args.transitions} transitionIndex={transitionIndex} onTransitionComplete={(index, done) => {
-          if (done) {
-            setTransitionIndex(0);
-          }
-        }}>
-            <div style={innerCss}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        <GoATransitionSequence
+          transitions={args.transitions}
+          transitionIndex={transitionIndex}
+          onTransitionComplete={(index, done) => {
+            if (done) {
+              setTransitionIndex(0);
+            }
+          }}
+        >
+          <div style={innerCss}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
         </GoATransitionSequence>
       </div>
     </div>
@@ -108,25 +115,37 @@ export const DynamicTemplate = (args) => {
 </Canvas>
 
 <Canvas>
-  <Story name="Fade in / Fade out" height="400px" args={{
-    transitions: ['fade-in', 'fade-out']
-  }}>
+  <Story
+    name="Fade in / Fade out"
+    height="400px"
+    args={{
+      transitions: ['fade-in', 'fade-out'],
+    }}
+  >
     {DynamicTemplate.bind({})}
   </Story>
 </Canvas>
 
 <Canvas>
-  <Story name="Slide in up / Slide out up" height="400px" args={{
-    transitions: ['slide-in-up', 'slide-out-up']
-  }}>
+  <Story
+    name="Slide in up / Slide out up"
+    height="400px"
+    args={{
+      transitions: ['slide-in-up', 'slide-out-up'],
+    }}
+  >
     {DynamicTemplate.bind({})}
   </Story>
 </Canvas>
 
 <Canvas>
-  <Story name="Slide in left / Slide out left" height="400px" args={{
-    transitions: ['slide-in-left', 'slide-out-left']
-  }}>
+  <Story
+    name="Slide in left / Slide out left"
+    height="400px"
+    args={{
+      transitions: ['slide-in-left', 'slide-out-left'],
+    }}
+  >
     {DynamicTemplate.bind({})}
   </Story>
 </Canvas>
@@ -136,9 +155,10 @@ export const DynamicTemplate = (args) => {
 ### Transitions
 
 Transitions can either be from the pre-define list or custom. The predefined transitions are:
+
 ```ts
-type TransitionType
-  = 'fade-in'
+type TransitionType =
+  | 'fade-in'
   | 'fade-out'
   | 'slide-in-up'
   | 'slide-out-up'
@@ -182,6 +202,7 @@ Custom transitions can also be defined. To do so you must define three css class
 ```
 
 ### Actions pinned to the bottom of the modal
+
 ```tsx
 function example() {
   const [transitionIndex, setTransitionIndex] = useState(0);
@@ -205,7 +226,7 @@ function example() {
 
   // the transition index uses the modulus operation you can just continually increment the index if you like
   function nextTransition() {
-    setTransitionIndex(transitionIndex + 1)
+    setTransitionIndex(transitionIndex + 1);
   }
 
   return (
@@ -213,20 +234,25 @@ function example() {
       <button onClick={() => nextTransition()}>Slide in</button>
       <button onClick={() => nextTransition()}>Slide out</button>
       <div style={outerCss}>
-        <GoATransitionSequence transitions={['slide-in-up', 'slide-out-up']} transitionIndex={transitionIndex} onComplete={(index, done) => {
-          if (done) {
-            setTransitionIndex(0);
-          }
-        }}>
-            <div style={innerCss}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        <GoATransitionSequence
+          transitions={['slide-in-up', 'slide-out-up']}
+          transitionIndex={transitionIndex}
+          onComplete={(index, done) => {
+            if (done) {
+              setTransitionIndex(0);
+            }
+          }}
+        >
+          <div style={innerCss}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
         </GoATransitionSequence>
       </div>
     </div>
   );
-
 }
 ```
-
 
 ## GoATransition Properties
 

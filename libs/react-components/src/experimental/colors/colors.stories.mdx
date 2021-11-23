@@ -4,7 +4,7 @@ import {
   Story,
   ArgsTable,
   Description,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 
 import { GoAIconButton, GoABadge, GoAButton } from '..';
 
@@ -16,39 +16,41 @@ import { Dont } from '@abgov/shared/storybook-common';
 export const Template = (args) => {
   const times = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
-    <div style={{display: 'flex', alignContent: 'center', fontSize: '12px'}}>
-    {
-      times.map((_, i) => {
+    <div style={{ display: 'flex', alignContent: 'center', fontSize: '12px' }}>
+      {times.map((_, i) => {
         return (
           <div
             key={i}
             style={{
               padding: '1rem',
               flex: '1 1 100%',
-              backgroundColor: `var(--color-${args.color}-${i+1}00)`,
+              backgroundColor: `var(--color-${args.color}-${i + 1}00)`,
               textAlign: 'center',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
             }}
           >
-            {`${args.color}-${i+1}00`}
+            {`${args.color}-${i + 1}00`}
           </div>
         );
-      })
-    }
+      })}
     </div>
-  )
-}
+  );
+};
 
 export const ListWithTertiaryButtonTemplate = (args) => {
   return (
-    <table style={{width: '100%'}}>
+    <table style={{ width: '100%' }}>
       <tr>
         <td>Jim</td>
         <td>Smith</td>
         <td>Edmonton</td>
         <td>
-          <GoAButton onClick={() => {}} size="medium" type="secondary">Delete</GoAButton>
-          <GoAButton onClick={() => {}} size="medium" type="secondary">View Profile</GoAButton>
+          <GoAButton onClick={() => {}} size="medium" type="secondary">
+            Delete
+          </GoAButton>
+          <GoAButton onClick={() => {}} size="medium" type="secondary">
+            View Profile
+          </GoAButton>
         </td>
       </tr>
       <tr>
@@ -56,8 +58,12 @@ export const ListWithTertiaryButtonTemplate = (args) => {
         <td>Johnson</td>
         <td>Calgary</td>
         <td>
-          <GoAButton onClick={() => {}} size="medium" type="secondary">Delete</GoAButton>
-          <GoAButton onClick={() => {}} size="medium" type="secondary">View Profile</GoAButton>
+          <GoAButton onClick={() => {}} size="medium" type="secondary">
+            Delete
+          </GoAButton>
+          <GoAButton onClick={() => {}} size="medium" type="secondary">
+            View Profile
+          </GoAButton>
         </td>
       </tr>
       <tr>
@@ -65,24 +71,37 @@ export const ListWithTertiaryButtonTemplate = (args) => {
         <td>Green</td>
         <td>Vancouver</td>
         <td>
-          <GoAButton onClick={() => {}} size="medium" type="secondary">Delete</GoAButton>
-          <GoAButton onClick={() => {}} size="medium" type="secondary">View Profile</GoAButton>
+          <GoAButton onClick={() => {}} size="medium" type="secondary">
+            Delete
+          </GoAButton>
+          <GoAButton onClick={() => {}} size="medium" type="secondary">
+            View Profile
+          </GoAButton>
         </td>
       </tr>
     </table>
-  )
-}
+  );
+};
 
 export const ListWithBorderlessButtonTemplate = (args) => {
   return (
-    <table style={{width: '100%'}}>
+    <table style={{ width: '100%' }}>
       <tr>
         <td>Jim</td>
         <td>Smith</td>
         <td>Edmonton</td>
         <td>
-          <GoAButton onClick={() => {}} size="medium" variant="danger" type="borderless">Delete</GoAButton>
-          <GoAButton onClick={() => {}} size="medium" type="borderless">Show</GoAButton>
+          <GoAButton
+            onClick={() => {}}
+            size="medium"
+            variant="danger"
+            type="borderless"
+          >
+            Delete
+          </GoAButton>
+          <GoAButton onClick={() => {}} size="medium" type="borderless">
+            Show
+          </GoAButton>
         </td>
       </tr>
       <tr>
@@ -90,8 +109,17 @@ export const ListWithBorderlessButtonTemplate = (args) => {
         <td>Johnson</td>
         <td>Calgary</td>
         <td>
-          <GoAButton onClick={() => {}} size="medium" variant="danger" type="borderless">Delete</GoAButton>
-          <GoAButton onClick={() => {}} size="medium" type="borderless">Show</GoAButton>
+          <GoAButton
+            onClick={() => {}}
+            size="medium"
+            variant="danger"
+            type="borderless"
+          >
+            Delete
+          </GoAButton>
+          <GoAButton onClick={() => {}} size="medium" type="borderless">
+            Show
+          </GoAButton>
         </td>
       </tr>
       <tr>
@@ -99,33 +127,42 @@ export const ListWithBorderlessButtonTemplate = (args) => {
         <td>Green</td>
         <td>Vancouver</td>
         <td>
-          <GoAButton onClick={() => {}} size="medium" variant="danger" type="borderless">Delete</GoAButton>
-          <GoAButton onClick={() => {}} size="medium" type="borderless">Show</GoAButton>
+          <GoAButton
+            onClick={() => {}}
+            size="medium"
+            variant="danger"
+            type="borderless"
+          >
+            Delete
+          </GoAButton>
+          <GoAButton onClick={() => {}} size="medium" type="borderless">
+            Show
+          </GoAButton>
         </td>
       </tr>
     </table>
-  )
-}
+  );
+};
 
 export const IconButtonsTemplate = (args) => {
   return (
     <>
-      <div style={{display: 'flex', gap: '4px'}}>
+      <div style={{ display: 'flex', gap: '4px' }}>
         <GoAIconButton variant="blah" type="add" />
         <GoAIconButton variant="blah" type="archive" />
         <GoAIconButton variant="blah" type="attach" />
       </div>
-      <br/>
+      <br />
       <hr />
-      <br/>
-      <div style={{display: 'flex', gap: '4px'}}>
+      <br />
+      <div style={{ display: 'flex', gap: '4px' }}>
         <GoAIconButton type="add" />
         <GoAIconButton type="archive" />
         <GoAIconButton type="attach" />
       </div>
     </>
-  )
-}
+  );
+};
 
 ## Colors
 

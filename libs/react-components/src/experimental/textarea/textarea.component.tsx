@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { OnChange } from '../../lib/_common/input';
+import { OnChange } from '../common';
 import './textarea.scss';
 
 interface Props {

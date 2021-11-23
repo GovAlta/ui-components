@@ -2,6 +2,26 @@ import React from 'react'
 import { TestProps } from '../common'
 import './icons.scss'
 
+type GoAIconFilledType = `${GoAIconType}-${IconStyle}`;
+
+interface IonIconProps {
+  name: GoAIconType | GoAIconFilledType
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface IonIconElement extends HTMLElement {
+};
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      'ion-icon': IonIconProps & React.HTMLAttributes<IonIconElement>
+    }
+  }
+}
+
 export type GoAIconType
   = 'accessibility'
   | 'add-circle'

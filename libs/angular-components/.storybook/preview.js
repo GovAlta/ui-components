@@ -1,11 +1,12 @@
 import { addParameters } from '@storybook/angular';
-import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
+import { DocsPage, DocsContainer } from '@storybook/addon-docs';
 
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
 setCompodocJson(docJson);
 
-require('!style-loader!css-loader!sass-loader!../src/theme.scss');
+import '!style-loader!css-loader!sass-loader!./preview.scss';
+import '@angular/localize/init';
 
 addParameters({
   docs: {

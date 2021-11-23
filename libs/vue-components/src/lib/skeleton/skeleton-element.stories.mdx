@@ -1,6 +1,6 @@
-import GoASkeletonImageContent  from './skeleton-image-content';
-import GoASkeletonGridColumnContent  from './skeleton-grid-column-content';
-import GoASkeletonTitledContent  from './skeleton-titled-content';
+import GoASkeletonImageContent from './skeleton-image-content';
+import GoASkeletonGridColumnContent from './skeleton-grid-column-content';
+import GoASkeletonTitledContent from './skeleton-titled-content';
 import GoASkeletonElement from './skeleton-element';
 import GoALoadingCardWithImage from './skeleton-loading-card-with-image';
 import GoALoadingCardNoImage from './skeleton-loading-card-no-image';
@@ -13,7 +13,7 @@ import {
   Story,
   ArgsTable,
   Description,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 
 <Meta
   title="Vue/Components/SkeletonElement"
@@ -60,7 +60,7 @@ A skeleton load element provides visual feedback to users while a content heavy 
   >
     {(args, argTypes) => {
       return {
-        components: { GoASkeletonGridColumnContent},
+        components: { GoASkeletonGridColumnContent },
         render: function (createElement) {
           return createElement(GoASkeletonGridColumnContent, {
             props: args,
@@ -83,7 +83,7 @@ A skeleton load element provides visual feedback to users while a content heavy 
   >
     {(args, argTypes) => {
       return {
-        components: { GoASkeletonTitledContent},
+        components: { GoASkeletonTitledContent },
         render: function (createElement) {
           return createElement(GoASkeletonTitledContent, {
             props: args,
@@ -94,19 +94,13 @@ A skeleton load element provides visual feedback to users while a content heavy 
   </Story>
 </Canvas>
 
-
 ## Skeleton Card with Image Content
 
 <Canvas>
-  <Story
-    name="Skeleton Card with Image Content"
-    height={150}
-    args={{
-    }}
-  >
+  <Story name="Skeleton Card with Image Content" height={150} args={{}}>
     {(args, argTypes) => {
       return {
-        components: { GoALoadingCardWithImage},
+        components: { GoALoadingCardWithImage },
         render: function (createElement) {
           return createElement(GoALoadingCardWithImage, {
             props: args,
@@ -120,15 +114,10 @@ A skeleton load element provides visual feedback to users while a content heavy 
 ## Skeleton Card no Image Content
 
 <Canvas>
-  <Story
-    name="Skeleton Card no Image Content"
-    height={150}
-    args={{
-    }}
-  >
+  <Story name="Skeleton Card no Image Content" height={150} args={{}}>
     {(args, argTypes) => {
       return {
-        components: { GoALoadingCardNoImage},
+        components: { GoALoadingCardNoImage },
         render: function (createElement) {
           return createElement(GoALoadingCardNoImage, {
             props: args,

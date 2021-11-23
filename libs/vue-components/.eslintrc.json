@@ -10,7 +10,9 @@
       "files": ["**/*.vue"],
       "rules": {
         "vue/component-definition-name-casing": ["error", "kebab-case"],
-        "vue/max-attributes-per-line": ["warn", {
+        "vue/max-attributes-per-line": [
+          "warn",
+          {
             "singleline": 3,
             "multiline": {
               "max": 1,

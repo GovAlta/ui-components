@@ -45,7 +45,6 @@ jobs:
         run: |
           npm run build:angular-storybook
           npm run build:core-storybook
-          npm run build:angular-storybook
           npm run build:angular-material-storybook
           npm run build:vue-storybook
           npm run build:react-storybook

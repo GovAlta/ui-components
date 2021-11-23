@@ -1,4 +1,10 @@
-import { Meta, Preview, Story, ArgsTable, Description } from '@storybook/addon-docs/blocks';
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs';
 import { moduleMetadata } from '@storybook/angular';
 
 import { action } from '@storybook/addon-actions';
@@ -6,66 +12,75 @@ import { DoDont } from '@abgov/shared/storybook-common';
 
 import { GoARadioComponent } from './radio.component';
 
-<Meta title="Angular/Basic Elements/Radios" decorators={[
-        moduleMetadata({
-          declarations: [GoARadioComponent]
-        })
-    ]}
-    component={GoARadioComponent}
-    argTypes={{
-      checked: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
+<Meta
+  title="Angular/Basic Elements/Radios"
+  decorators={[
+    moduleMetadata({
+      declarations: [GoARadioComponent],
+    }),
+  ]}
+  component={GoARadioComponent}
+  argTypes={{
+    checked: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
-      required: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
+    },
+    required: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
-      disabled: {
-        control: 'boolean',
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: false },
-           type: { summary: 'boolean' }
-        }
+    },
+    disabled: {
+      control: 'boolean',
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
-      labelPosition: {
-        control: 'select',
-        options: ['before', 'after'],
-        table: { //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
-           defaultValue: { summary: 'after' },
-        }
+    },
+    labelPosition: {
+      control: 'select',
+      options: ['before', 'after'],
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: 'after' },
       },
-      content: { control: 'text' }
-    }}
- />
+    },
+    content: { control: 'text' },
+  }}
+/>
 
 # Radio
-A user input field that allows the user to make a choice from a set of mutually exclusive, related options.  Only one item in the list may be selected.
+
+A user input field that allows the user to make a choice from a set of mutually exclusive, related options. Only one item in the list may be selected.
 
 ## Overview
 
 #### Basic
+
 <Canvas>
-  <Story name="Basic" height={200}
-    args={
-      {
-        checked: false,
-        required: false,
-        disabled: false,
-        labelPosition: 'after',
-        name: 'fruits',
-      }}
+  <Story
+    name="Basic"
+    height={200}
+    args={{
+      checked: false,
+      required: false,
+      disabled: false,
+      labelPosition: 'after',
+      name: 'fruits',
+    }}
   >
     {(args) => {
-      args.selectionChange = function(value) {
+      args.selectionChange = function (value) {
         action('selection was changed')(value);
-      }
+      };
       return {
         template: `<goa-radio
                       (selectionChange)="selectionChange($event)"
@@ -100,27 +115,31 @@ A user input field that allows the user to make a choice from a set of mutually 
                   >
                       lemon
                   </goa-radio>`,
-        props: args
-      }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
 #### ngModel bound
+
 <Canvas>
-  <Story name="NgModel" height={200}
+  <Story
+    name="NgModel"
+    height={200}
     args={{
       checked: false,
       required: false,
       disabled: false,
       indeterminate: false,
       labelPosition: 'after',
-      content: 'NgModel Radio'
-    }}>
+      content: 'NgModel Radio',
+    }}
+  >
     {(args) => {
-      args.selectionChange = function(value) {
+      args.selectionChange = function (value) {
         action('selection was changed')(value);
-      }
+      };
       return {
         template: `<goa-radio
                       [(ngModel)]="checked"
@@ -134,15 +153,16 @@ A user input field that allows the user to make a choice from a set of mutually 
                    <div>
                     modelValue = {{checked}}
                   </div>`,
-        props: args
-      }
+        props: args,
+      };
     }}
   </Story>
 </Canvas>
 
-
 ## Examples
+
 Basic
+
 ```
 <goa-radio [checked]="item.checked">
   Label goes here
@@ -157,6 +177,7 @@ or
 ```
 
 All Properties
+
 ```
 <goa-radio
   [checked]="item.checked"
@@ -173,14 +194,15 @@ All Properties
 ## Properties
 
 #### GoARadioComponent
+
 <Description of={GoARadioComponent} />
 <ArgsTable of={GoARadioComponent} />
-
 
 # Usage guidelines
 
 ### Select multiple options
-Use radio buttons or a drop down list when the user can only select one option.  Use checkboxes when the user can select any number of options.
+
+Use radio buttons or a drop down list when the user can only select one option. Use checkboxes when the user can select any number of options.
 
 <DoDont
   dos={'Use radios when the user is allowed to select only one option.'}
@@ -188,10 +210,12 @@ Use radio buttons or a drop down list when the user can only select one option. 
 />
 
 ### Binding
+
 The 'checked' and 'ngModel' properties are two ways of binding the selected state of the radio.
 
 <DoDont
-  dos={'Use one of either the checked OR ngModel property bindings with a radio'}
+  dos={
+    'Use one of either the checked OR ngModel property bindings with a radio'
+  }
   donts={'Use both the checked and ngModel property bindings with a radio'}
 />
-

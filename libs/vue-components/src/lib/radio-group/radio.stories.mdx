@@ -1,7 +1,7 @@
 import { DoDont } from '@abgov/shared/storybook-common';
 import GoARadioGroup from './radio-group';
 import GoARadio from './radio';
-import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
 import { action } from '@storybook/addon-actions';
 
 <Meta
@@ -26,6 +26,7 @@ export const Template = (args, { argTypes }) => ({
 });
 
 # Radios
+
 Important changes or facts given a strong visual emphasis so that users take
 notice and read the information.
 
@@ -124,15 +125,14 @@ notice and read the information.
             on: {
               change: (value) => {
                 action('selection changed')(value);
-              }
-            }
+              },
+            },
           });
-        }
+        },
       };
     }}
   </Story>
 </Canvas>
-
 
 <Canvas>
   <Story
@@ -161,15 +161,14 @@ notice and read the information.
             on: {
               change: (value) => {
                 action('selection changed')(value);
-              }
-            }
+              },
+            },
           });
-        }
+        },
       };
     }}
   </Story>
 </Canvas>
-
 
 <Canvas>
   <Story
@@ -197,10 +196,10 @@ notice and read the information.
             on: {
               change: (value) => {
                 action('selection changed')(value);
-              }
-            }
+              },
+            },
           });
-        }
+        },
       };
     }}
   </Story>

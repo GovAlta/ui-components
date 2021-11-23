@@ -6,7 +6,7 @@ import {
   Story,
   ArgsTable,
   Description,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
@@ -30,7 +30,9 @@ export const NestedTemplate = (args) => {
         <div>This is the primary card</div>
         <GoACard type="primary">This is a nested primary card</GoACard>
         <GoACard type="secondary">This is a nested secondary card</GoACard>
-        <GoACard type="tertiary">This is tertiary nested secondary card</GoACard>
+        <GoACard type="tertiary">
+          This is tertiary nested secondary card
+        </GoACard>
       </GoACard>
     </>
   );
@@ -64,7 +66,7 @@ export const RealworldTemplate = (args) => {
       <GoAFlexRow gap="small">
         <div style={sideCss}>
           <GoACard type="secondary" title="Appearance Details">
-            <GoAFlexRow gap='small' minWidth={100}>
+            <GoAFlexRow gap="small" minWidth={100}>
               <div>
                 <h6>Accused name</h6>
                 <div>Doe, John Scott</div>
@@ -121,7 +123,9 @@ export const RealworldTemplate = (args) => {
         <div style={mainCss}>
           <GoACard type="primary">
             <header>
-              <h3>Docket Number <small>904822</small></h3>
+              <h3>
+                Docket Number <small>904822</small>
+              </h3>
             </header>
             <h4>First Appearance</h4>
             <GoACard type="primary" title="Appearance summary">
