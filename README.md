@@ -49,6 +49,7 @@ After an assessment, selected “discussions” will be transitioned to “issue
 ### Setup
 ```bash
 cd lib/web-components
+rollup -c
 npm link
 cd ../..
 npm link goa-web-components
