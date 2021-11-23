@@ -1,45 +1,30 @@
 <script>
   import '../../src';
-  export let name;
 </script>
 
 <main>
-  <h1>Hello {name}!</h1>
-  <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-
-  <div class="container">
-    <goa-button text="Hello"></goa-button>
-    <goa-button>
-      In the button
-    </goa-button>
-    <goa-input></goa-input>
+  <h1>Component Playground</h1>
+  <div class="goa-state--error">
+    <goa-checkbox
+      id="confirm"
+      iserror=""
+      isdisabled=""
+      ischecked=""
+      isindeterminate=""
+      name="confirm"
+      content="I accept the conditions"
+    />
   </div>
+
+  <script>
+    document.getElementById('confirm').addEventListener('on:change', () => {
+      console.log('changed');
+    });
+  </script>
 </main>
 
 <style>
-
   main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-
-    .container {
-      display: inline-block;
-      max-width: 640px;
-    }
+    margin: 4rem;
   }
 </style>
