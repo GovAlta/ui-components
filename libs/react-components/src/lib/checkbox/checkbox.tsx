@@ -44,7 +44,7 @@ export const GoACheckbox: FC<Props> = ({ name, testId, error, checked, disabled,
   }, [])
 
   return (
-    <goa-checkbox ref={el} name={name} iserror={error && 'error'} ischecked={checked && 'checked'} isdisabled={disabled && 'disabled'} isindeterminate={indeterminate && 'indeterminate'} content={content} value={value}>{children}</goa-checkbox>
+    <goa-checkbox data-testid={ testId} ref={el} name={name} iserror={error && 'error'} ischecked={checked && 'checked'} isdisabled={disabled && 'disabled'} isindeterminate={indeterminate && 'indeterminate'} content={content} value={value}>{children}</goa-checkbox>
   )
 };
 
