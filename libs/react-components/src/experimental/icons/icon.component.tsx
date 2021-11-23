@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react'
 import './icons.scss'
 
-type GoAIconFilledType = `${GoAIconType}-${IconStyle}`;
+type GoAIconFilledType = `${GoAIconType}-${IconTheme}`;
 
 interface IonIconProps {
   name: GoAIconType | GoAIconFilledType
