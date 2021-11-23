@@ -4,10 +4,8 @@ import {
   Story,
   Description,
   ArgsTable,
-} from '@storybook/addon-docs';
-import { GoAIcon, GoAFormItem } from '../../experimental';
-import { GoADropdown, GoADropdownOption, GoADropdownGroup } from '../..';
-import { GoAButton } from '../..';
+} from '@storybook/addon-docs/blocks';
+import { GoADropdown, GoADropdownOption } from './dropdown';
 import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
@@ -16,31 +14,7 @@ import {
   StateDisplay,
 } from '@abgov/shared/storybook-common';
 
-<Meta
-  title="React/Basic Elements/Dropdown"
-  component={GoADropdown}
-  argTypes={{
-    name: {
-      description: 'Name of the bound field',
-    },
-    selectedValues: {
-      description: 'Array of the values bound to the component',
-    },
-    onChange: {
-      description:
-        'Callback function invoked when an item is selected or unselected.',
-    },
-    disabled: {
-      description: 'Indicates if the dropdown is disabled.',
-    },
-    leadingIcon: {
-      description: 'Icon that sits to the left of the component field name',
-    },
-    multiSelect: {
-      description: 'BETA feature: Allow for selection of more than one item',
-    },
-  }}
-/>
+<Meta title="React/Web Components/Dropdown" component={GoADropdown} />
 
 export const Template = (args) => {
   const [selectedValues, setValues] = useState(args.selectedValues);
@@ -59,11 +33,14 @@ export const Template = (args) => {
         onChange={onChange}
         selectedValues={selectedValues}
       >
-        <label>Label</label>
-        <GoADropdownOption label="Option 1" value="option1" />
-        <GoADropdownOption label="Worst Actor Ever" value="nicholas cage">
+        <GoADropdownOption name="basic" label="Option 1" value="option1" />
+        <GoADropdownOption
+          name="basic"
+          label="Nicholas Cage"
+          value="Nicholas cage"
+        >
           {/* <!-- Custom content can be added --> */}
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div slot="foo" style={{ display: 'flex', alignItems: 'center' }}>
             <img
               height="40"
               width="40"
@@ -73,11 +50,11 @@ export const Template = (args) => {
             <span style={{ paddingLeft: '8px' }}>Nicholas Cage</span>
           </div>
         </GoADropdownOption>
-        <GoADropdownOption label="Option 3" value="option3" />
+        <GoADropdownOption name="basic" label="Option 3" value="option3" />
         <hr />
-        <GoADropdownOption label="Option 4" value="option4" />
-        <GoADropdownOption label="Option 5" value="option5" />
-        <GoADropdownOption label="Option 6" value="option6" />
+        <GoADropdownOption name="basic" label="Option 4" value="option4" />
+        <GoADropdownOption name="basic" label="Option 5" value="option5" />
+        <GoADropdownOption name="basic" label="Option 6" value="option6" />
       </GoADropdown>
     </StateDisplay>
   );
