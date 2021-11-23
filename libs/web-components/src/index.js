@@ -5,3 +5,4 @@ export { default as GoADropdownItem } from './DropdownItem.wc.svelte';
 export { default as GoAInput } from './Input.wc.svelte';
 export { default as GoAIconButton } from './IconButton.wc.svelte';
 export { default as GoAScrollable } from "./Scrollable.wc.svelte";
+export { default as GoACheckbox } from "./Checkbox.wc.svelte";
