@@ -1,6 +1,16 @@
 import React, { FC, useEffect, useRef } from 'react';
 import 'goa-web-components'
 
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      'goa-checkbox': CheckboxProps & React.HTMLAttributes<HTMLElement>
+    }
+  }
+}
+
 interface CheckboxProps {
   ref: React.MutableRefObject<HTMLElement>;
   name: string;
@@ -10,16 +20,6 @@ interface CheckboxProps {
   iserror?: string;
   content?: string;
   value?: string | number | boolean;
-}
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface IntrinsicElements {
-      'goa-checkbox': CheckboxProps & React.HTMLAttributes<HTMLElement>
-    }
-  }
 }
 
 /* eslint-disable-next-line */
