@@ -1,31 +1,30 @@
-import React, { Children, FC, ReactElement } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
+import 'goa-web-components';
 
 export * from './radio';
 
-interface Props {
-  /**
-   * Name of the form value
-   */
+interface RadioGroupProps {
+  ref: React.MutableRefObject<HTMLElement>;
   name: string;
+  value: string;
+  orientation: string;
+}
 
-  /**
-   * Initial data value
-   */
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      'goa-radio-group': RadioGroupProps & React.HTMLAttributes<HTMLElement>
+    }
+  }
+}
+
+interface Props {
+  name: string;
   value?: string;
-
-  /**
-   * Disable radio buttons
-   */
   disabled?: boolean;
-
-  /**
-   * Orientation of the radio buttons
-   */
   orientation?: 'horizontal' | 'vertical';
-
-  /**
-   * Callback function containing the newly selected value
-   */
+  testId?: string;
   onChange: (name: string, value: string) => void;
 }
 
@@ -34,32 +33,27 @@ export const GoARadioGroup: FC<Props> = ({
   value,
   children,
   orientation = 'vertical',
+  testId,
   onChange,
-  ...childAttrs
 }) => {
 
-  function onChangeHandler(value: string) {
-    onChange(name, value);
-  }
+  const el = useRef<HTMLElement>()
 
-  function getChildren() {
-    return Children.map(children, (child: ReactElement) => {
-      const key = `${name}-${child.props.value}`;
-      const _name = `${name}-${Date.now()}`;
-      return React.cloneElement(child, {
-        ...childAttrs,
-        name: _name,
-        checked: child.props.value === value,
-        onChange: onChangeHandler,
-        key,
-      });
-    });
-  }
+  useEffect(() => {
+    const listener = (e) => {
+      onChange(name, e.detail.value);
+    }
+    const currentEl = el.current;
+    currentEl.addEventListener("on:change", listener);
+    return () => {
+      currentEl.removeEventListener("on:change", listener);
+    }
+  }, [])
 
   return (
-    <div className={`goa-radio-group--${orientation}`}>
-      {getChildren()}
-    </div>
+    <goa-radio-group data-testid={testId} ref={el} name={name} value={value} orientation={orientation}>
+      {children}
+    </goa-radio-group>
   );
 };
 
