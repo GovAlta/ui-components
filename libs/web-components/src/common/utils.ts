@@ -1,3 +1,10 @@
 export function isTruthy(value: string): boolean {
-  return !['', 'false'].includes(value);
+  if (value === 'false') {
+    return false;
+  }
+  return !!value;
+}
+
+export function isFalsy(value: string): boolean {
+  return !isTruthy(value);
 }
