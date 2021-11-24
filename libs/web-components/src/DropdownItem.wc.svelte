@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
-  import { messageChannel } from "./common/stores";
+  import { messageChannel } from "./common/dropdown-store";
 
   // public
   export let name: string;

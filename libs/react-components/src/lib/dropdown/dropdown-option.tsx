@@ -21,11 +21,12 @@ interface Props {
   name: string;
   value: string;
   label?: string;
+  testId?: string;
 }
 
 export const GoADropdownOption: FC<Props> = (props) => {
   return (
-    <goa-dropdown-item name={props.name} value={props.value} label={props.label}>{props.children}</goa-dropdown-item>
+    <goa-dropdown-item data-testid={props.testId} name={props.name} value={props.value} label={props.label}>{props.children}</goa-dropdown-item>
   );
 }
 

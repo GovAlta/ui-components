@@ -1,11 +1,19 @@
 import React, { FC, useEffect, useRef } from "react";
 import 'goa-web-components'
+import { GoAIconType } from "../../experimental/icons";
 
 export * from './dropdown-option';
 
 interface DropdownProps {
   ref: React.MutableRefObject<HTMLElement>;
   name: string;
+  values: string;
+  leadingicon: string;
+  maxheight: number;
+  placeholder: string;
+  isautocomplete: string;
+  isdisabled: string;
+  ismultiselect: string;
 }
 
 declare global {
@@ -20,7 +28,17 @@ declare global {
 
 interface Props {
   name: string;
-  onChange: (name: string, value: string[]) => void;
+  selectedValues: string[]
+  onChange: (name: string, values: string[]) => void;
+
+  // optional
+  disabled?: boolean;
+  autoComplete?: boolean;
+  leadingIcon?: GoAIconType,
+  maxHeight?: number;
+  multiSelect?: boolean;
+  placeholder?: string;
+  testId?: string;
 }
 
 export const GoADropdown: FC<Props> = (props) => {
@@ -35,7 +53,20 @@ export const GoADropdown: FC<Props> = (props) => {
   }, [el, props])
 
   return (
-    <goa-dropdown ref={el} name={props.name}>{props.children}</goa-dropdown>
+    <goa-dropdown
+      ref={el}
+      name={props.name}
+      values={JSON.stringify(props.selectedValues)}
+      leadingicon={props.leadingIcon}
+      maxheight={props.maxHeight}
+      placeholder={props.placeholder}
+      isautocomplete={props.autoComplete && 'autocomplete'}
+      isdisabled={props.disabled && 'disabled'}
+      ismultiselect={props.multiSelect && 'multiselect'}
+      data-testid={props.testId}
+    >
+      {props.children}
+    </goa-dropdown>
   );
 }
 

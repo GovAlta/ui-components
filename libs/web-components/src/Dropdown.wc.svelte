@@ -1,8 +1,8 @@
 <svelte:options tag="goa-dropdown" />
 
 <script lang="ts">
-  import { messageChannel } from "./common/stores";
-  import type { Message } from "./common/stores";
+  import { messageChannel } from "./common/dropdown-store";
+  import type { Message } from "./common/dropdown-store";
   import type { GoAIconType } from "./Icon.wc.svelte";
   import { onDestroy, onMount, tick } from "svelte";
 
@@ -12,12 +12,13 @@
 
   export let name: string;
   export let values: string;
-  export let disabled: boolean;
-  export let autocomplete: boolean;
   export let leadingicon: GoAIconType;
   export let maxheight: number;
-  export let multiselect: boolean;
   export let placeholder: string;
+
+  export let ismultiselect: boolean;
+  export let isdisabled: boolean;
+  export let isautocomplete: boolean;
 
   // Private
 
@@ -40,7 +41,7 @@
     switch (msg?.payload?.type) {
       case "DropDownAction": {
         if (msg.payload.action === "select") {
-          if (multiselect) {
+          if (ismultiselect) {
             selectedLabels = [...selectedLabels, msg.payload.label];
             selectedValues = [...selectedValues, msg.payload.value];
           } else {
@@ -55,7 +56,7 @@
           selectedValues = selectedValues.filter((value) => value !== _value);
         }
 
-        if (!multiselect) {
+        if (!ismultiselect) {
           isMenuVisible = false;
         }
 
@@ -67,23 +68,6 @@
       }
     }
   });
-
-  function doFilter(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    filter = e.target.value;
-    messageChannel.update((old) => ({
-      ...old,
-      [name]: {
-        tag: name,
-        payload: {
-          type: "FilterChange",
-          filter,
-        },
-      },
-    }));
-    return false;
-  }
 
   // Hooks
 
@@ -97,7 +81,7 @@
         payload: {
           type: "DropDownInit",
           values: values ? JSON.parse(values) : [],
-          multiSelect: multiselect,
+          multiSelect: ismultiselect,
         },
       },
     }));
@@ -148,10 +132,10 @@
 
   <div>
     <!-- readonly input  -->
-    {#if !isMenuVisible || !autocomplete}
+    {#if !isMenuVisible || !isautocomplete}
       <div on:click={() => (isMenuVisible = !isMenuVisible)} data-testid={`${name}-dropdown`}>
         <goa-input
-          {disabled}
+          disabled={isdisabled}
           {leadingicon}
           {placeholder}
           id={`${name}-dropdown-input`}
@@ -168,7 +152,7 @@
     {#if isMenuVisible}
       <div>
         <!-- filter -->
-        {#if autocomplete}
+        {#if isautocomplete}
           <goa-input
             bind:this={filterEl}
             focused={isMenuVisible}
