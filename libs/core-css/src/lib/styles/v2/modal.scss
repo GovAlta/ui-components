@@ -37,12 +37,7 @@
   .modal {
     margin: 1rem;
     max-height: 80%;
-    width: 600px;
-  }
-}
-@media (min-width: 1024px) {
-  .modal {
-    width: 65ch;
+    min-width: 60ch;
   }
 }
 
