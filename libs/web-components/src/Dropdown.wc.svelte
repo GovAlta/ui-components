@@ -1,10 +1,10 @@
 <svelte:options tag="goa-dropdown" />
 
 <script lang="ts">
-  import { messageChannel } from "./common/dropdown-store";
-  import type { Message } from "./common/dropdown-store";
-  import type { GoAIconType } from "./Icon.wc.svelte";
-  import { onDestroy, onMount, tick } from "svelte";
+  import { messageChannel } from './common/dropdown-store';
+  import type { Message } from './common/dropdown-store';
+  import type { GoAIconType } from './Icon.wc.svelte';
+  import { onDestroy, onMount, tick } from 'svelte';
 
   const MAX_HEIGHT = 300;
 
@@ -28,7 +28,7 @@
   let isMenuVisible = false;
 
   let filterEl: HTMLElement;
-  let filter = "";
+  let filter = '';
 
   // Init
 
@@ -39,8 +39,8 @@
 
     const msg = channel[name] as Message;
     switch (msg?.payload?.type) {
-      case "DropDownAction": {
-        if (msg.payload.action === "select") {
+      case 'DropDownAction': {
+        if (msg.payload.action === 'select') {
           if (ismultiselect) {
             selectedLabels = [...selectedLabels, msg.payload.label];
             selectedValues = [...selectedValues, msg.payload.value];
@@ -49,7 +49,7 @@
             selectedValues = [msg.payload.value];
           }
         }
-        if (msg.payload.action === "deselect") {
+        if (msg.payload.action === 'deselect') {
           const _label = msg.payload.label;
           const _value = msg.payload.value;
           selectedLabels = selectedLabels.filter((label) => label !== _label);
@@ -62,8 +62,11 @@
 
         messageChannel.update((old) => ({ ...old, [name]: null }));
         el.dispatchEvent(
-          new CustomEvent("on:change", { composed: true, detail: { event: null, data: {name, value: selectedValues} }})
-        )
+          new CustomEvent('on:change', {
+            composed: true,
+            detail: { event: null, data: { name, value: selectedValues } },
+          })
+        );
         break;
       }
     }
@@ -73,13 +76,14 @@
 
   onMount(async () => {
     await tick();
+
     // set initial values state
     messageChannel.update((old) => ({
       ...old,
       [name]: {
         tag: name,
         payload: {
-          type: "DropDownInit",
+          type: 'DropDownInit',
           values: values ? JSON.parse(values) : [],
           multiSelect: ismultiselect,
         },
@@ -98,42 +102,75 @@
 
   // Reactive
 
-  $: {
-    // To prevent the event from bubbling up to the parent, we need to listen to the event on the element itself
-    // then we can stop propagation and prevent default
-    filterEl?.addEventListener("on:change", (e) => {
-      e.stopPropagation();
-      filter = e.detail.data.value;
-      messageChannel.update((old) => ({
-        ...old,
-        [name]: {
-          tag: name,
-          payload: {
-            type: "FilterChange",
-            filter,
-          },
+  let filterOnChangeListener = (e) => {
+    e.stopPropagation();
+    filter = e.detail.data.value;
+    messageChannel.update((old) => ({
+      ...old,
+      [name]: {
+        tag: name,
+        payload: {
+          type: 'FilterChange',
+          filter,
         },
-      }));
-    })
-  }
+      },
+    }));
+  };
+
+  let filterOnTrailingIconClickListener = (e) => {
+    e.stopPropagation();
+    filter = '';
+    messageChannel.update((old) => ({
+      ...old,
+      [name]: {
+        tag: name,
+        payload: {
+          type: 'FilterChange',
+          filter,
+        },
+      },
+    }));
+    filterEl.focus()
+  };
 
   // Functions
+  async function showMenu() {
+    isMenuVisible = true;
+    await tick();
+    // To prevent the event from bubbling up to the parent, we need to listen to the event on the element itself
+    // then we can stop propagation and prevent default
+    filterEl?.addEventListener('on:change', filterOnChangeListener);
+    filterEl?.addEventListener(
+      'on:trailingIconClick',
+      filterOnTrailingIconClickListener
+    );
+    filterEl.focus()
+  }
 
-  function close() {
+  function closeMenu() {
     isMenuVisible = false;
+    filterEl?.removeEventListener('on:change', filterOnChangeListener);
+    filterEl?.removeEventListener(
+      'on:trailingIconClick',
+      filterOnTrailingIconClickListener
+    );
   }
 </script>
 
 <div class="goa-dropdown-box" bind:this={el}>
   <!-- background -->
   {#if isMenuVisible}
-    <div data-testid={`${name}-dropdown-background`} class="goa-dropdown-background" on:click={close} />
+    <div
+      data-testid={`${name}-dropdown-background`}
+      class="goa-dropdown-background"
+      on:click={closeMenu}
+    />
   {/if}
 
   <div>
     <!-- readonly input  -->
     {#if !isMenuVisible || !isautocomplete}
-      <div on:click={() => (isMenuVisible = !isMenuVisible)} data-testid={`${name}-dropdown`}>
+      <div on:click={showMenu} data-testid={`${name}-dropdown`}>
         <goa-input
           disabled={isdisabled}
           {leadingicon}
@@ -143,14 +180,14 @@
           readonly={true}
           trailingicon="chevron-down"
           type="text"
-          value={selectedLabels.join(", ")}
-        ></goa-input>
+          value={selectedLabels.join(', ')}
+        />
       </div>
     {/if}
 
     <!-- list and filter -->
     {#if isMenuVisible}
-      <div>
+      <div class="menu">
         <!-- filter -->
         {#if isautocomplete}
           <goa-input
@@ -158,14 +195,19 @@
             focused={isMenuVisible}
             name="filter"
             placeholder="Filter"
-            trailingIcon={filter.length > 0 ? "close-circle" : "search"}
+            trailingIcon={filter.length > 0 ? 'close-circle' : 'search'}
+            handletrailingiconclick="true"
             type="text"
             variant="goa"
+            value={filter}
           />
         {/if}
 
         <!-- list -->
-        <ul class="goa-dropdown-list" style={`overflow-y: auto; max-height: ${maxheight || MAX_HEIGHT}px`}>
+        <ul
+          class="goa-dropdown-list"
+          style={`overflow-y: auto; max-height: ${maxheight || MAX_HEIGHT}px`}
+        >
           <slot />
         </ul>
       </div>
@@ -182,10 +224,13 @@
     margin-top: 1rem;
   }
 
+  .menu goa-input {
+    position: relative;
+  }
+
   .goa-dropdown-background {
     position: fixed;
     inset: 0;
-    opacity: 1;
   }
 
   .goa-icon ~ input {
