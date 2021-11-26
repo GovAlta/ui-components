@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
-  import { messageChannel } from "./common/stores";
+  import { messageChannel } from "./common/dropdown-store";
 
   // public
   export let name: string;
@@ -33,8 +33,12 @@
     switch (msg.payload.type) {
       case "FilterChange": {
         const filter = msg.payload.filter.toLowerCase();
-        const matches = value.toLowerCase().includes(filter) || label.toLowerCase().includes(filter);
-        hide = !matches;
+        if (!value && !label) {
+          hide = false;
+        } else {
+          const matches = value.toLowerCase().includes(filter) || label.toLowerCase().includes(filter);
+          hide = !matches;
+        }
         break;
       }
       case "DropDownAction": {
@@ -92,7 +96,7 @@
   data-testid={testId}
   on:click={onSelect}
 >
-  <slot name="foo">
+  <slot>
     {label}
   </slot>
 </li>
