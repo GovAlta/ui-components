@@ -24,8 +24,8 @@ export const GoAHeader: FunctionComponent<HeaderProps> = (props) => {
   }
 
   return (
-    <>
-      <header className="goa-header goa-official-site-header">
+    <header>
+      <div className="goa-header goa-official-site-header">
         <div>
           <span className={serviceLevelCss}>{serviceLevelFormatted()}</span>
         </div>
@@ -42,14 +42,14 @@ export const GoAHeader: FunctionComponent<HeaderProps> = (props) => {
         </div>
         }
 
-      </header>
+      </div>
       <div className="goa-header goa-microsite-header">
         <GoAMicroSiteLogo serviceName={props.serviceName} serviceHome={props.serviceHome} />
         <div>
           {props.children}
         </div>
       </div>
-    </>
+    </header>
   );
 };
 
