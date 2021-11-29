@@ -16,10 +16,31 @@
   export let testId: string = "";
 
   let multiSelect: boolean;
+  let filteredLabel: string;
 
   onMount(async () => {
     await tick();
   });
+
+  function getFilteredLabel(filter: string) {
+    if (filter.length === 0) {
+      return label;
+    }
+    if (!label.toLowerCase().includes(filter.toLowerCase())) {
+      return label;
+    }
+
+    // bold all the matches
+    filteredLabel = '';
+    let lastIndex = 0;
+    [...label.matchAll(new RegExp(filter, "gi"))].forEach((match) => {
+      filteredLabel += label.slice(lastIndex, match.index) + `<b>${match[0]}</b>`;
+      lastIndex = match.index + match[0].length;
+    });
+    filteredLabel += label.slice(lastIndex);
+
+    return filteredLabel;
+  }
 
   messageChannel.subscribe((channel) => {
     const msg = channel[name];
@@ -39,6 +60,7 @@
           const matches = value.toLowerCase().includes(filter) || label.toLowerCase().includes(filter);
           hide = !matches;
         }
+        filteredLabel = getFilteredLabel(filter)
         break;
       }
       case "DropDownAction": {
@@ -96,9 +118,7 @@
   data-testid={testId}
   on:click={onSelect}
 >
-  <slot>
-    {label}
-  </slot>
+  {@html filteredLabel || label}
 </li>
 
 <style>
