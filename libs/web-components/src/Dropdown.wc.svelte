@@ -130,7 +130,7 @@
         },
       },
     }));
-    filterEl.focus()
+    filterEl?.focus()
   };
 
   // Functions
@@ -144,7 +144,7 @@
       'on:trailingIconClick',
       filterOnTrailingIconClickListener
     );
-    filterEl.focus()
+    filterEl?.focus()
   }
 
   function closeMenu() {
