@@ -49,6 +49,7 @@
   --color-gray-700: #666;
   --color-gray-900: #333;
 
+  --color-tealblue: #0081a2;
   --color-tealblue-100: #c8eefa;
   --color-tealblue-500: #0081a2;
   --color-tealblue-900: #005072;
@@ -69,6 +70,7 @@
   --color-green-500: hsl(148.42, 100%, 26.08%);
   --color-green-900: hsl(148, 100%, 10%);
 
+  --color-blue: #005DAA;
   --color-blue-100: #e3f2ff;
   --color-blue-500: #0070c4;
   --color-blue-600: #004f84;
@@ -88,6 +90,7 @@ textarea {
 body {
   margin: 0;
   scroll-behavior: smooth;
+  line-height: var(--lh-base);
 }
 
 *,

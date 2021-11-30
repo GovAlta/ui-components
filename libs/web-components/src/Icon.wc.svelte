@@ -430,6 +430,7 @@
   export let type: GoAIconType;
   export let size: IconSize = 'medium';
   export let style: IconStyle = 'outline';
+  export let inverted: boolean = false;
 
   let _size = getSize(size);
 
@@ -451,7 +452,11 @@
   }
 </script>
 
-<div class="goa-icon" data-testid={`icon-${type}`} style={`width: ${_size}; height: ${_size}`}>
+<div
+  class="goa-icon"
+  class:inverted={inverted}
+  data-testid={`icon-${type}`}
+  style={`width: ${_size}; height: ${_size}`}>
   <ion-icon style={`width: ${_size}; height: ${_size}`} name={style === "filled" ? type : `${type}-${style}`} />
 </div>
 
@@ -462,5 +467,10 @@
   .goa-icon {
     display: inline-block;
     padding-top: 3px;  /* only way I could get this centered vertically :( */
-   }
+  }
+
+  .goa-icon.inverted {
+    color: #fff;
+    fill: #fff;
+  }
 </style>

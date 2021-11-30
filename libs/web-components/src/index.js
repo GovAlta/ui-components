@@ -8,3 +8,4 @@ export { default as GoAScrollable } from "./Scrollable.wc.svelte";
 export { default as GoACheckbox } from "./Checkbox.wc.svelte";
 export { default as GoARadioGroup } from "./RadioGroup.wc.svelte";
 export { default as GoARadioItem } from "./RadioItem.wc.svelte";
+export { default as GoAContainer } from "./Container.wc.svelte";
