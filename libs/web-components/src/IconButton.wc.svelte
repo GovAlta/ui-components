@@ -14,10 +14,11 @@
   export let title: string = "";
   export let disabled: string = "";
   export let testId: string = "";
+  export let inverted: boolean = false;
 
   // private
   let css: string;
-  $: css = `goa-icon-button goa-icon-button-${variant}`;
+  $: css = `goa-icon-button goa-icon-button-${variant} ${inverted ? 'goa-icon--inverted' : ''}`;
   $: _disabled = disabled !== "false" && disabled !== "";
 
   onMount(async () => {
@@ -30,7 +31,7 @@
 </script>
 
 <button {title} disabled={_disabled} class={css} data-testid={testId} on:click={clickHandler}>
-  <goa-icon {type} {size} {style} />
+  <goa-icon {type} {size} {style} {inverted} />
 </button>
 
 <style>
@@ -90,5 +91,9 @@
   .goa-icon-button-tertiary:hover {
     color: #000;
     fill: #000;
+  }
+
+  .goa-icon--inverted:hover {
+    background: rgba(0, 0, 0, 0.1);
   }
 </style>
