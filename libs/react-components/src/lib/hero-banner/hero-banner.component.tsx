@@ -4,7 +4,7 @@ import GoAHeroBannerLink from './link/hero-banner-link.component';
 import './hero-banner.component.scss';
 
 interface Props {
-  title: string;
+  title?: string;
   backgroundUrl: string;
   content?: string;
   linkText?: string;
@@ -26,11 +26,11 @@ export const GoAHeroBanner: FC<Props> = ({
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.40) 40%, rgba(0, 0, 0, 0.6) 100%), url('${backgroundUrl}')`,
       }}
     >
-      <h1 role="heading" aria-level={1}>{title}</h1>
+      {title && <h1 role="heading" aria-level={1}>{title}</h1>}
       {children ||
         <Fragment>
-          { content && <GoAHeroBannerContent content={content}></GoAHeroBannerContent> }
-          { linkText && linkUrl && <GoAHeroBannerLink linkText={linkText} linkUrl={linkUrl} /> }
+          {content && <GoAHeroBannerContent content={content}></GoAHeroBannerContent>}
+          {linkText && linkUrl && <GoAHeroBannerLink linkText={linkText} linkUrl={linkUrl} />}
         </Fragment>
       }
     </div>
