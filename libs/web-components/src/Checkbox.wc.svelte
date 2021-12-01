@@ -105,8 +105,7 @@
   }
   .goa-checkbox input[type='checkbox'] {
     /* hide the input, but still make it tab-able */
-    height: 0px;
-    width: 0px;
+    opacity: 0;
     position: absolute;
   }
 

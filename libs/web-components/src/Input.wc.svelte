@@ -20,6 +20,7 @@
   export let focused: boolean = false;
   export let readonly: boolean = false;
   export let handletrailingiconclick: boolean = false;
+  export let error: boolean = false;
 
   let inputEl: HTMLElement;
   $: if (focused) {
@@ -49,7 +50,10 @@
 
 <!-- HTML -->
 
-<div class={`goa-input ${disabled ? "goa-input--disabled" : ""}`}>
+<div
+  class={`goa-input ${disabled ? "goa-input--disabled" : ""}`}
+  class:error={error}
+  >
   {#if leadingicon}
     <div class="goa-input-leading-icon">
       <goa-icon type={leadingicon} />
@@ -198,5 +202,11 @@
 
   .goa-state--error .goa-input {
     border: 2px solid var(--color-red);
+  }
+
+  .error:hover,
+  .error:focus,
+  .error {
+    border: 2px solid var(--color-red-500);
   }
 </style>

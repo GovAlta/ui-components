@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 
 interface GoAFormItemProps {
   helpText?: string;
+  label?: string;
+  optional?: boolean;
   error?: string;
 };
 

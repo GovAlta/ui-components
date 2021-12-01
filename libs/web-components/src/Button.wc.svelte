@@ -1,11 +1,14 @@
 <svelte:options tag="goa-button" />
 
 <script lang="ts">
+import { normalize } from 'path/posix';
+
   import { onMount, tick } from 'svelte';
 
   export let text = '';
   export let type = 'primary'; // primary, secondary, tertiary, borderless
   export let size = 'medium'; // small, medium, large
+  export let variant = 'default'; // default, danger
 
   function clickHandler(e) {
     this.dispatchEvent(new CustomEvent('on:click', { composed: true }));
@@ -17,7 +20,7 @@
   });
 </script>
 
-<button class="{type} {size}" on:click={clickHandler}>
+<button class="{type} {size} {variant}" on:click={clickHandler}>
   {#if text}
     {text}
   {:else}
@@ -26,6 +29,16 @@
 </button>
 
 <style>
+  @media (max-width: 480px) {
+    /* expand the button and :host container on small screens  */
+    :host {
+      width: 100%;
+    }
+    button {
+      width: 100%;
+    }
+  }
+
   button {
     border-radius: 0.25rem;
     border: 2px solid var(--color-blue-500, 'blue');
@@ -130,4 +143,62 @@
     box-shadow: none;
     background-color: var(--color-blue-100);
   }
+
+  .primary.danger {
+    color: var(--color-white);
+    background: var(--color-red-500);
+    border-color: var(--color-red-500);
+  }
+  .primary.danger:hover {
+    background: var(--color-red-600);
+    border-color: var(--color-red-600);
+  }
+  .primary.danger:focus,
+  .primary.danger:active {
+    background: var(--color-red-600);
+    border-color: var(--color-red-600);
+  }
+
+  .secondary.danger {
+    color: var(--color-red-500);
+    border-color: var(--color-red-500);
+  }
+  .secondary.danger:hover {
+    border-color: var(--color-red-600);
+    color: var(--color-red-600);
+  }
+  .secondary.danger:focus,
+  .secondary.danger:active {
+    color: var(--color-red-600);
+    border-color: var(--color-red-600);
+  }
+
+  .tertiary.danger {
+    color: var(--color-red-500);
+    border-color: var(--color-gray-200);
+  }
+  .tertiary.danger:hover {
+    border-color: var(--color-red-600);
+    color: var(--color-red-600);
+  }
+  .tertiary.danger:focus,
+  .tertiary.danger:active {
+    color: var(--color-red-600);
+    border-color: var(--color-red-600);
+  }
+
+  .borderless.danger {
+    color: var(--color-red-500);
+  }
+  .borderless.danger:hover {
+    background: var(--color-red-100);
+    color: var(--color-red-500);
+  }
+  .borderless.danger:focus,
+  .borderless.danger:active {
+    background: var(--color-red-100);
+    color: var(--color-red-500);
+  }
+
+
 </style>
