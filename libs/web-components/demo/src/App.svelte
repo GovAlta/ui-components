@@ -28,15 +28,10 @@
       <goa-form-item label="Last name" optional helptext="This is helper text">
         <goa-input id="lastname" name="lastname" />
       </goa-form-item>
-
-      <goa-form-item label="Last name" optional helptext="This is helper text">
-        <goa-input id="lastname" name="lastname" />
-      </goa-form-item>
-
     </goa-flex-row>
 
-    <goa-form-item label="Autocomplete">
-      <goa-dropdown name="autocomplete" isautocomplete="true" placeholder="Favourite Actor">
+    <goa-form-item label="Favourite Actor">
+      <goa-dropdown name="autocomplete" isautocomplete="true">
         <goa-dropdown-item name="autocomplete" value="1" label="Tom Cruise" />
         <goa-dropdown-item name="autocomplete" value="2" label="Nicholas Cage">
           <div class="custom-dropdown-content">
@@ -79,7 +74,46 @@
         });
     </script>
 
+
+    <hr />
+
+    <!-- Container -->
+    <goa-container headingsize="large">
+      <h3>Header 3 (h3)</h3>
+      <p style="line-height: 1.6rem;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+        est laborum.
+      </p>
+
+      <div slot="title">The new container</div>
+      <goa-button type="primary" variant="danger" size="small" slot="actions">Delete</goa-button>
+
+
+      <goa-container variant="primary" headingsize="small">
+        <div>This is a sub container </div>
+      </goa-container>
+
+      <goa-button type="primary" size="large">Assign to me</goa-button>
+    </goa-container>
+
+    <goa-form-item label="Comments" optional>
+      <goa-textarea id="comments" name="comments" />
+    </goa-form-item>
+
+    <script>
+      document.getElementById('comments').addEventListener('on:change', (e) => {
+        console.log('comments changed', e.detail);
+      });
+    </script>
+
+
     <!-- Checkbox -->
+    <br />
 
     <goa-form-item label="Terms and conditions">
       <goa-checkbox
@@ -101,32 +135,10 @@
       });
     </script>
 
-    <goa-button-group>
-      <goa-button type="primary" size="large">Primary</goa-button>
-      <goa-button type="secondary" size="large">Secondary</goa-button>
-      <goa-button type="tertiary" size="large">Tertiary</goa-button>
+    <goa-button-group alignto="end">
+      <goa-button type="tertiary" size="large">Cancel</goa-button>
+      <goa-button type="primary" size="large">Save</goa-button>
     </goa-button-group>
-
-    <hr />
-
-    <!-- Container -->
-    <goa-container headingsize="large">
-      <h2>Interactive Container</h2>
-      <p style="line-height: 1.6rem;">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-        est laborum.
-      </p>
-
-      <div slot="title">Header</div>
-      <goa-button type="primary" variant="danger" size="small" slot="actions">Delete</goa-button>
-
-      <goa-button type="borderless" size="large">Assign to me</goa-button>
-    </goa-container>
 
   </goa-page-layout>
 </main>

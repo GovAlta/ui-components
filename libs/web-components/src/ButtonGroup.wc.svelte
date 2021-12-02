@@ -2,16 +2,20 @@
 
 <!-- Script -->
 <script lang="ts">
+  export let alignto: "start"; // "start", "end"
 </script>
 
 <!-- HTML -->
-<slot />
+<div style="--alignment: flex-{alignto};">
+  <slot />
+</div>
 
 <!-- Style -->
 <style>
-  :host {
+  div {
     display: flex;
     flex-direction: row;
+    justify-content: var(--alignment);
     flex-wrap: wrap;
     gap: 0.5rem;
   }

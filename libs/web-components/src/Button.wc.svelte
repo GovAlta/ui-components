@@ -199,6 +199,4 @@ import { normalize } from 'path/posix';
     background: var(--color-red-100);
     color: var(--color-red-500);
   }
-
-
 </style>

@@ -17,4 +17,5 @@ export { default as GoAFlexRow} from "./FlexRow.wc.svelte";
 export { default as GoANotification} from "./Notification.wc.svelte";
 export { default as GoACallout} from "./Callout.wc.svelte";
 export { default as GoAButtonGroup} from "./ButtonGroup.wc.svelte";
+export { default as GoATextArea} from "./TextArea.wc.svelte";
 export { default as GoAModal } from "./Modal.wc.svelte";

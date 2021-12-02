@@ -39,9 +39,9 @@
     align-items: center;
     justify-content: space-between;
     margin: 2rem auto;
-    padding: 0 2rem;
-
+    padding: 0 2rem 1rem 2rem;
     max-width: 1028px;
+    border-bottom: 1px solid var(--color-gray-100);
   }
 
   .app-link {

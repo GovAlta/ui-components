@@ -32,6 +32,8 @@
     display: flex;
     align-items: stretch;
     margin-bottom: 1rem;
+    border-radius: 3px;
+    overflow: hidden;
   }
 
   .emergency {

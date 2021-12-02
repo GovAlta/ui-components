@@ -19,7 +19,9 @@
       {/if}
     </label>
   {/if}
-  <slot />
+  <div class="form-item-input">
+    <slot />
+  </div>
   {#if error}
     <div class="error-msg">{error}</div>
   {/if}
@@ -54,15 +56,19 @@
     font-style: normal;
   }
 
+  .form-item-input {
+    margin-bottom: 0.25rem;
+  }
+
   .help-msg {
     font-size: var(--fs-sm);
     color: var(--color-gray-900);
-    line-height: calc(var(--fs-sm) + 0.5rem);
+    /* margin-top: 0.25rem; */
   }
 
   .error-msg {
     font-size: var(--fs-sm);
-    line-height: calc(var(--fs-sm) + 0.5rem);
     color: var(--color-red);
+    margin-bottom: 0.25rem;
   }
 </style>
