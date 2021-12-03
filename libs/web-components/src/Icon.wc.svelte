@@ -432,7 +432,7 @@
   export let style: IconStyle = 'outline';
   export let inverted: boolean = false;
 
-  let _size = getSize(size);
+  $: _size = getSize(size);
 
   onMount(async () => {
     await tick();

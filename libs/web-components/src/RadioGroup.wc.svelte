@@ -36,8 +36,10 @@
 </script>
 
 <!-- Html -->
-<div bind:this={el} class={`goa-radio-group--${orientation}`}>
-  <slot />
+<div>
+  <div bind:this={el} class={`goa-radio-group--${orientation}`}>
+    <slot />
+  </div>
 </div>
 
 <style>

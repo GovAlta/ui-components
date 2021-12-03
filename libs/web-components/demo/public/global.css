@@ -1,5 +1,7 @@
 :host,
 :root {
+  --font-family: acumin-pro-semi-condensed, sans-serif;
+
   /* font-size */
   --fs-xs: 0.75rem;
   --fs-sm: 0.875rem;
@@ -70,7 +72,7 @@
   --color-green-500: hsl(148.42, 100%, 26.08%);
   --color-green-900: hsl(148, 100%, 10%);
 
-  --color-blue: #005DAA;
+  --color-blue: #005daa;
   --color-blue-100: #e3f2ff;
   --color-blue-500: #0070c4;
   --color-blue-600: #004f84;
@@ -78,6 +80,7 @@
 
 body,
 input,
+textarea,
 button,
 textarea {
   background: #fff;
@@ -107,8 +110,9 @@ p {
 hr {
   border-width: 0;
   border-top: 1px solid #ccc;
+  height: 0;
   padding: 0;
-  margin: 0;
+  margin: 2rem 0;
 }
 
 ul,
@@ -162,4 +166,79 @@ a:focus {
 ::-ms-input-placeholder {
   /* Microsoft Edge */
   color: #999;
+}
+
+/* Typography */
+
+h1:first-child,
+h2:first-child,
+h3:first-child {
+  margin-top: 0 !important;
+}
+
+/* Base header margins */
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 1rem;
+}
+
+/* Font sizes */
+h1 {
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-2xl);
+  font-weight: var(--fw-bold);
+}
+h2 {
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-xl);
+  font-weight: var(--fw-regular);
+}
+h3 {
+  font-size: var(--fs-xl);
+  line-height: var(--lh-lg);
+  font-weight: var(--fw-regular);
+}
+
+h4,
+h5,
+h6 {
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  font-weight: var(--fw-bold);
+}
+
+/* Set top margin to subsequent headers */
+h1 + h2,
+h1 + h3,
+h1 + h4,
+h2 + h3,
+h2 + h4,
+h3 + h4 {
+  margin-top: 2rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  font-size: var(--fs-base);
+}
+
+/* prevent too much bottom space when a header immediately follows an <hr> */
+hr + h1,
+hr + h2,
+hr + h3 {
+  margin-top: 0;
+}
+
+em {
+  font-size: var(--fs-xs);
+  line-height: var(--lh-sm);
+  color: var(--color-gray);
+}
+
+small {
+  font-size: var(--fs-xs);
+  font-style: normal;
+  color: var(--color-gray);
 }

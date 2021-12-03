@@ -111,7 +111,7 @@
 </script>
 
 <li
-  class:goa-dropdown-option={true}
+  class="goa-dropdown-option"
   class:goa-dropdown-option--disabled={disabled}
   class:goa-dropdown-option--selected={selected}
   style={`display: ${hide ? "none" : "block"}`}
@@ -122,6 +122,9 @@
 </li>
 
 <style>
+  li {
+    font-family: var(--font-family)
+  }
   .goa-dropdown-option {
     margin: 0;
     padding: 0.5rem;
