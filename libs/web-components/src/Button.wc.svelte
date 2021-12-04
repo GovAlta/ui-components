@@ -48,6 +48,7 @@ import { normalize } from 'path/posix';
     font-weight: 700;
     line-height: 2.375rem;
     padding: 0 0.75rem;
+    min-width: 5rem;
 
     transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out;
     transform: scaleX(1);

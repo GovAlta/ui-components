@@ -457,7 +457,9 @@
   class:inverted={inverted}
   data-testid={`icon-${type}`}
   style={`width: ${_size}; height: ${_size}`}>
-  <ion-icon style={`width: ${_size}; height: ${_size}`} name={style === "filled" ? type : `${type}-${style}`} />
+  {#if type}
+    <ion-icon style={`width: ${_size}; height: ${_size}`} name={style === "filled" ? type : `${type}-${style}`} />
+  {/if}
 </div>
 
 <style>

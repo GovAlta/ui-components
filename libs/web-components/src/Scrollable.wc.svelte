@@ -1,7 +1,7 @@
 <svelte:options tag="goa-scrollable" />
 
 <script lang="ts">
-import { onMount, tick } from "svelte";
+  import { onMount, tick } from "svelte";
 
   export let vertical: boolean = false;
   export let horizontal: boolean = false;
@@ -16,17 +16,18 @@ import { onMount, tick } from "svelte";
 </script>
 
 <div class="goa-scrollable" style={`
+  --max-height: ${height};
   overflow-y: ${vertical ? 'auto' : 'hidden'};
   overflow-x: ${horizontal ? 'auto' : 'hidden'};
-  max-height: ${height ? height+'px' : '100%'};
   padding: ${vPadding}rem ${hPadding}rem;
 `}>
-  <slot></slot>
+  <slot />
 </div>
 
 <style>
   .goa-scrollable {
     scroll-behavior: smooth;
+    max-height: calc(100vh * var(--max-height, 100) / 100);
   }
 
   .goa-scrollable::-webkit-scrollbar {

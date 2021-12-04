@@ -242,3 +242,19 @@ small {
   font-style: normal;
   color: var(--color-gray);
 }
+
+/* Component Spacing */
+
+goa-button-group * ~ * {
+  margin: 0;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 480px) {
+  goa-button-group * ~ * {
+    margin: 0;
+    margin-left: 0.5rem;
+  }
+}
+
+/* FormItems */
