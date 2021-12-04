@@ -11,6 +11,56 @@
 
   <goa-page-layout>
 
+    <ul>
+      <li><a href="#section-modal">Modal</a></li>
+      <li><a href="#section-notification">Notification</a></li>
+      <li><a href="#section-input">Input</a></li>
+      <li><a href="#section-input">Input</a></li>
+      <li><a href="#section-callout">Callout</a></li>
+      <li><a href="#section-radio">Radio Buttons</a></li>
+      <li><a href="#section-container">Container</a></li>
+      <li><a href="#section-container">Container</a></li>
+      <li><a href="#section-checkbox">Checkbox</a></li>
+      <li><a href="#section-buttons">Buttons</a></li>
+      <li><a href="#section-icon-buttons">Icon Buttons</a></li>
+      <li><a href="#section-icons">Icons</a></li>
+    </ul>
+
+    <h3 id="section-modal">Modal</h3>
+    <button id="openModal" onclick="openModal()">Toggle</button>
+    <goa-modal id="modal" title="Modal Header....." isclosable="true">
+      <goa-scrollable vertical="true" height="50">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+      </goa-scrollable>
+      <goa-button slot="actions">Close</goa-button>
+    </goa-modal>
+
+    <script>
+      var modal = document.getElementById("modal")
+      function openModal() {
+        modal.setAttribute("open", true)
+      }
+      function closeModal() {
+        modal.removeAttribute("open")
+      }
+      document.getElementById("modal").addEventListener("on:close", () => {
+        closeModal();
+      });
+    </script>
+
+    <h3 id="section-notification">Notification</h3>
     <goa-notification type="information">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi saepe, maiores, praesentium minus quod reprehenderit consequuntur earum molestias aliquid amet, vitae eveniet harum incidunt sint. Numquam debitis molestias officia corporis.
     </goa-notification>
@@ -20,9 +70,14 @@
 
     <!-- Text Input -->
 
+    <h3 id="section-input">Input</h3>
     <goa-flex-row gap="small">
       <goa-form-item label="First name" helptext="This is helper text">
         <goa-input id="firstname" name="firstname" />
+      </goa-form-item>
+
+      <goa-form-item label="Middle name" optional helptext="This is helper text">
+        <goa-input id="middlename" name="middlename" />
       </goa-form-item>
 
       <goa-form-item label="Last name" optional helptext="This is helper text">
@@ -30,6 +85,7 @@
       </goa-form-item>
     </goa-flex-row>
 
+    <h3 id="section-dropdown">DropDown / Combobox</h3>
     <goa-form-item label="Favourite Actor">
       <goa-dropdown name="autocomplete" isautocomplete="true">
         <goa-dropdown-item name="autocomplete" value="1" label="Tom Cruise" />
@@ -49,8 +105,7 @@
       </goa-dropdown>
     </goa-form-item>
 
-    <br />
-
+    <h3 id="section-callout">Callout</h3>
     <goa-callout type="success">
       <h3>Callout title</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi.</p>
@@ -58,6 +113,7 @@
 
     <!-- Radio Groups -->
 
+    <h3 id="section-radio">Radio Buttons</h3>
     <goa-form-item label="Favourite Color">
       <goa-radio-group id="radioGroup1" name="color">
         <goa-radio-item name="color" value="red" label="Red" />
@@ -78,6 +134,19 @@
     <hr />
 
     <!-- Container -->
+    <h3 id="section-container">Container</h3>
+    <goa-modal id="modal2">
+      <h2>Delete All</h2>
+      <p>Delete the entire database and backups?</p>
+      <goa-button slot="actions">Delete</goa-button>
+    </goa-modal>
+    <script>
+      function confirmDelete() {
+        console.log('asdfasdfasdf')
+        document.getElementById("modal2").setAttribute("open", true);
+      }
+    </script>
+
     <goa-container headingsize="large">
       <h3>Header 3 (h3)</h3>
       <p style="line-height: 1.6rem;">
@@ -91,7 +160,7 @@
       </p>
 
       <div slot="title">The new container</div>
-      <goa-button type="primary" variant="danger" size="small" slot="actions">Delete</goa-button>
+      <button onclick="confirmDelete()" type="primary" variant="danger" size="small" slot="actions">Delete</button>
 
 
       <goa-container variant="primary" headingsize="small">
@@ -111,9 +180,8 @@
       });
     </script>
 
-
     <!-- Checkbox -->
-    <br />
+    <h3 id="section-checkbox">Checkbox</h3>
 
     <goa-form-item label="Terms and conditions">
       <goa-checkbox
@@ -127,18 +195,37 @@
       />
     </goa-form-item>
 
-    <br />
-
     <script>
       document.getElementById('confirm').addEventListener('on:change', () => {
         console.log('changed');
       });
     </script>
 
+    <h3 id="section-buttons">Button Groups</h3>
+
+    <h4>Align to Start</h4>
+    <goa-button-group alignto="start">
+      <goa-button type="tertiary" size="large">Cancel</goa-button>
+      <goa-button type="primary" size="large">Save</goa-button>
+    </goa-button-group>
+
+    <h4>Align to End</h4>
     <goa-button-group alignto="end">
       <goa-button type="tertiary" size="large">Cancel</goa-button>
       <goa-button type="primary" size="large">Save</goa-button>
     </goa-button-group>
+
+
+    <h3 id="section-icon-buttons">Icon Buttons</h3>
+    <goa-icon-button type="close" size="large" />
+
+    <h3 id="section-icon-buttons">Icon Buttons (Inverted)</h3>
+    <div style="display: inline-block; padding: 2rem; background-color: var(--color-blue)">
+      <goa-icon-button inverted type="close" size="large" />
+    </div>
+
+    <h3 id="section-icons">Icons</h3>
+    <goa-icon type="close" />
 
   </goa-page-layout>
 </main>
