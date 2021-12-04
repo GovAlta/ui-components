@@ -9,7 +9,6 @@
 
   // optional
   export let size: IconSize = "medium";
-  export let variant: IconVariant = "primary";
   export let style: IconStyle = "outline";
   export let title: string = "";
   export let disabled: string = "";
@@ -18,7 +17,7 @@
 
   // private
   let css: string;
-  $: css = `goa-icon-button goa-icon-button-${variant} ${inverted ? 'goa-icon--inverted' : ''}`;
+  $: css = `goa-icon-button goa-icon-button-primary ${inverted ? 'goa-icon-button--inverted' : ''}`;
   $: _disabled = disabled !== "false" && disabled !== "";
 
   onMount(async () => {
@@ -36,6 +35,7 @@
 
 <style>
   .goa-icon-button {
+    border-radius: 0.5rem;
     box-sizing: border-box;
     background: transparent;
     cursor: pointer;
@@ -59,41 +59,8 @@
     background-color: var(--color-blue-100);
   }
 
-  /* Secondary */
-  .goa-icon-button-secondary {
-    border-radius: 0.5rem;
-    transition: background-color 100ms ease-in, transform 100ms ease-in;
-    cursor: pointer;
-  }
-
-  .goa-icon-button-secondary:active {
-    transform: scale(0.9);
-  }
-
-  .goa-icon-button-secondary:hover {
-    background: rgba(0, 0, 0, 0.1);
-    color: #000;
-    fill: #000;
-  }
-
-  /* tertiary */
-  .goa-icon-button-tertiary {
-    transition: background-color 100ms ease-in, transform 100ms ease-in;
-    cursor: pointer;
-    color: var(--color-black);
-    fill: var(--color-black);
-  }
-
-  .goa-icon-button-tertiary:active {
-    transform: scale(0.9);
-  }
-
-  .goa-icon-button-tertiary:hover {
-    color: #000;
-    fill: #000;
-  }
-
-  .goa-icon--inverted:hover {
-    background: rgba(0, 0, 0, 0.1);
+  .goa-icon-button-primary.goa-icon-button--inverted:hover {
+    background-color: var(--color-blue);
+    filter: brightness(1.5);
   }
 </style>
