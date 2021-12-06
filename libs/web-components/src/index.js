@@ -19,3 +19,4 @@ export { default as GoACallout} from "./Callout.wc.svelte";
 export { default as GoAButtonGroup} from "./ButtonGroup.wc.svelte";
 export { default as GoATextArea} from "./TextArea.wc.svelte";
 export { default as GoAModal } from "./Modal.wc.svelte";
+export { default as GoABadge } from "./Badge.wc.svelte";

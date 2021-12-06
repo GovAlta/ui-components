@@ -24,7 +24,40 @@
       <li><a href="#section-buttons">Buttons</a></li>
       <li><a href="#section-icon-buttons">Icon Buttons</a></li>
       <li><a href="#section-icons">Icons</a></li>
+      <li><a href="#section-badges">Badges</a></li>
     </ul>
+
+    <h3 id="section-badges">Badges</h3>
+    <goa-badge content="Success" type="success">Success</goa-badge>
+    <goa-badge content="Warning" type="warning"></goa-badge>
+    <goa-badge content="Information" type="information"></goa-badge>
+    <goa-badge content="Emergency" type="emergency"></goa-badge>
+    <goa-badge content="Inactive" type="inactive"></goa-badge>
+    <goa-badge content="Dark" type="dark"></goa-badge>
+    <goa-badge content="Midtone" type="midtone"></goa-badge>
+    <goa-badge content="Light" type="light"></goa-badge>
+
+    <br>
+    <br>
+    <goa-badge icon content="Success" type="success"></goa-badge>
+    <goa-badge icon content="Warning" type="warning"></goa-badge>
+    <goa-badge icon content="Information" type="information"></goa-badge>
+    <goa-badge icon content="Emergency" type="emergency"></goa-badge>
+    <goa-badge icon content="Inactive" type="inactive"></goa-badge>
+    <goa-badge icon content="Dark" type="dark"></goa-badge>
+    <goa-badge icon content="Midtone" type="midtone"></goa-badge>
+    <goa-badge icon content="Light" type="light"></goa-badge>
+
+    <br>
+    <br>
+    <goa-badge icon type="success"></goa-badge>
+    <goa-badge icon type="warning"></goa-badge>
+    <goa-badge icon type="information"></goa-badge>
+    <goa-badge icon type="emergency"></goa-badge>
+    <goa-badge icon type="inactive"></goa-badge>
+    <goa-badge icon type="dark"></goa-badge>
+    <goa-badge icon type="midtone"></goa-badge>
+    <goa-badge icon type="light"></goa-badge>
 
     <h3 id="section-modal">Modal</h3>
     <button id="openModal" onclick="openModal()">Toggle</button>
@@ -217,11 +250,11 @@
 
 
     <h3 id="section-icon-buttons">Icon Buttons</h3>
-    <goa-icon-button type="close" size="large" />
+    <goa-icon-button type="close" />
 
     <h3 id="section-icon-buttons">Icon Buttons (Inverted)</h3>
     <div style="display: inline-block; padding: 2rem; background-color: var(--color-blue)">
-      <goa-icon-button inverted type="close" size="large" />
+      <goa-icon-button inverted type="close" />
     </div>
 
     <h3 id="section-icons">Icons</h3>

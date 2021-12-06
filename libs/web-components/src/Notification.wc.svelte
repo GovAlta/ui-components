@@ -25,13 +25,13 @@
 {#if show}
   <div transition:fade class="notification {type}">
     <div class="icon">
-      <goa-icon type={iconType} inverted size="large" />
+      <goa-icon type={iconType} inverted />
     </div>
     <div class="content">
       <slot />
     </div>
     <div class="close">
-      <goa-icon-button on:click={close} type="close" inverted size="large" />
+      <goa-icon-button on:click={close} type="close" inverted />
     </div>
   </div>
 {/if}

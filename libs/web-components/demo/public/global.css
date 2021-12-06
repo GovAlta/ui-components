@@ -245,16 +245,21 @@ small {
 
 /* Component Spacing */
 
-goa-button-group * ~ * {
+goa-button-group > goa-button ~ goa-button {
   margin: 0;
   margin-top: 0.5rem;
 }
 
 @media (min-width: 480px) {
-  goa-button-group * ~ * {
+  goa-button-group > goa-button ~ goa-button {
     margin: 0;
     margin-left: 0.5rem;
   }
+}
+
+goa-badge + goa-badge {
+  margin: 0;
+  margin-left: 0.25rem;
 }
 
 /* FormItems */
