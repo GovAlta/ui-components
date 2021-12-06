@@ -20,3 +20,5 @@ export { default as GoAButtonGroup} from "./ButtonGroup.wc.svelte";
 export { default as GoATextArea} from "./TextArea.wc.svelte";
 export { default as GoAModal } from "./Modal.wc.svelte";
 export { default as GoABadge } from "./Badge.wc.svelte";
+export { default as GoAHeroBanner } from "./HeroBanner.wc.svelte";
+export { default as GoAPageBlock } from "./PageBlock.wc.svelte";

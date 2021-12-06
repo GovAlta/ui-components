@@ -9,7 +9,16 @@
     <a href="http://signin.gov.au/">Sign in</a>
   </goa-app-header>
 
-  <goa-page-layout>
+  <goa-hero-banner title="Upgrading our bitumen" backgroundurl="https://picsum.photos/id/1076/600/400">
+    <div slot="content">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic! Commodi, asperiores officiis necessitatibus itaque similique magnam nisi voluptate.
+    </div>
+    <div slot="actions">
+      <goa-button>Button</goa-button>
+    </div>
+  </goa-hero-banner>
+
+  <goa-page-block>
 
     <ul>
       <li><a href="#section-modal">Modal</a></li>
@@ -260,7 +269,7 @@
     <h3 id="section-icons">Icons</h3>
     <goa-icon type="close" />
 
-  </goa-page-layout>
+  </goa-page-block>
 </main>
 
 <style>

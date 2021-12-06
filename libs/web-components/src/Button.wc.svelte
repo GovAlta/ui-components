@@ -50,7 +50,7 @@ import { normalize } from 'path/posix';
     padding: 0 0.75rem;
     min-width: 5rem;
 
-    transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out;
+    transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
     transform: scaleX(1);
   }
 
