@@ -19,7 +19,7 @@
 <!-- HTML -->
 <div class="notification">
   <span class="icon {type}">
-    <goa-icon type={iconType} size="large" inverted />
+    <goa-icon type={iconType} inverted />
   </span>
   <span class="content">
     <slot />

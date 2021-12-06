@@ -425,38 +425,25 @@
 </script>
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
-
   export let type: GoAIconType;
   export let size: IconSize = 'medium';
   export let style: IconStyle = 'outline';
   export let inverted: boolean = false;
 
-  $: _size = getSize(size);
+  $: _size = {
+    small: '1.1rem',
+    medium: '1.5rem',
+    large: '2rem',
+  }[size];
 
-  onMount(async () => {
-    await tick();
-  });
-
-  function getSize(size: IconSize): string {
-    switch (size) {
-      case "small":
-        return `0.875rem`;  // 14px
-      case "medium":
-        return `1.125rem`;  // 18px
-      case "large":
-        return `1.5rem`;    // 24px
-      case "xlarge":
-        return `2rem`;      // 32px
-    }
-  }
 </script>
 
 <div
   class="goa-icon"
   class:inverted={inverted}
   data-testid={`icon-${type}`}
-  style={`width: ${_size}; height: ${_size}`}>
+  style={`--size: ${_size}`}
+  >
   {#if type}
     <ion-icon style={`width: ${_size}; height: ${_size}`} name={style === "filled" ? type : `${type}-${style}`} />
   {/if}
@@ -466,12 +453,18 @@
   /* ion-icon {
     --ionicon-stroke-width: 32px;
   } */
-  .goa-icon {
-    display: inline-block;
-    padding-top: 3px;  /* only way I could get this centered vertically :( */
+
+  :host, .goa-icon {
+    display: inline-flex;
+    align-items: center;
   }
 
-  .goa-icon.inverted {
+  .goa-icon {
+    width: var(--size);
+    height: var(--size);
+  }
+
+  .inverted {
     color: #fff;
     fill: #fff;
   }

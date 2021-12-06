@@ -1,7 +1,6 @@
 <svelte:options tag="goa-icon-button" />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
   import type { IconSize, IconVariant, IconStyle, GoAIconType } from "./Icon.wc.svelte";
 
   // required
@@ -16,30 +15,34 @@
   export let inverted: boolean = false;
 
   // private
-  let css: string;
   $: css = `goa-icon-button goa-icon-button-primary ${inverted ? 'goa-icon-button--inverted' : ''}`;
   $: _disabled = disabled !== "false" && disabled !== "";
 
-  onMount(async () => {
-    await tick();
-  });
+  $: _size = {
+    small: '1rem',
+    medium: '1.5rem',
+    large: '2rem',
+  }[size];
 
   function clickHandler(e) {
     e.target.dispatchEvent(new CustomEvent("on:click", { composed: true, detail: { event: e } }));
   }
 </script>
 
-<button {title} disabled={_disabled} class={css} data-testid={testId} on:click={clickHandler}>
+<button style="--size: {_size}" {title} disabled={_disabled} class={css} data-testid={testId} on:click={clickHandler}>
   <goa-icon {type} {size} {style} {inverted} />
 </button>
 
 <style>
   .goa-icon-button {
+    display: inline-flex;
+    align-items: center;
     border-radius: 0.5rem;
     box-sizing: border-box;
     background: transparent;
     cursor: pointer;
     border: none;
+    padding: calc(var(--size) / 4)
   }
 
   /* Primary */
