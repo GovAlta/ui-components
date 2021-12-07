@@ -35,7 +35,7 @@ export const GoAElementLoader = ({
   ): string {
     const value = Math.max(0, Math.min(current || 0, total));
     const maxAngle = isSemicircle ? 180 : 359.9999;
-    const percentage = total === 0 ? maxAngle : (value / total) * maxAngle;
+    const percentage = (value / total) * maxAngle;
     const start = _polarToCartesian(elementRadius, pathRadius, percentage);
     const end = _polarToCartesian(elementRadius, pathRadius, 0);
     const arcSweep = percentage <= 180 ? 0 : 1;

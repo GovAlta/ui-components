@@ -36,6 +36,16 @@
       <li><a href="#section-badges">Badges</a></li>
     </ul>
 
+    <goa-spinner size="small" />
+    <goa-spinner size="medium" />
+    <goa-spinner size="large" />
+
+    <div class="dark-bg">
+      <goa-spinner invert size="small" />
+      <goa-spinner invert size="medium" />
+      <goa-spinner invert size="large" />
+    </div>
+
     <h3 id="section-badges">Badges</h3>
     <goa-badge content="Success" type="success">Success</goa-badge>
     <goa-badge content="Warning" type="warning"></goa-badge>
@@ -262,7 +272,7 @@
     <goa-icon-button type="close" />
 
     <h3 id="section-icon-buttons">Icon Buttons (Inverted)</h3>
-    <div style="display: inline-block; padding: 2rem; background-color: var(--color-blue)">
+    <div class="dark-bg">
       <goa-icon-button inverted type="close" />
     </div>
 
@@ -282,6 +292,12 @@
 
   .custom-dropdown-content img {
     border-radius: 50%;
+  }
+
+  .dark-bg {
+    display: inline-block;
+    padding: 2rem;
+    background-color: var(--color-blue)
   }
 
 </style>
