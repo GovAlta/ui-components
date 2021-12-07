@@ -6,6 +6,7 @@
 
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
+  import noscroll from "./common/no-scroll";
 
   export let open: boolean;
   export let isclosable: boolean;
@@ -14,10 +15,8 @@
   let scrollOffset = 0;
   $: {
     if (open) {
-      hideScrollbars()
       scrollOffset = window.pageYOffset;
     } else {
-      resetScrollbars();
     }
   }
 
@@ -25,45 +24,6 @@
     e.target.dispatchEvent(new CustomEvent("on:close", { composed: true }));
     e.stopPropagation();
   }
-
-  function hideScrollbars() {
-    const scrollbarWidth = calculateScrollbarWidth();
-    document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = scrollbarWidth + 'px';
-  }
-
-  function resetScrollbars() {
-    // need to perform on the next render cycle to allow the css transitions to take place
-    setTimeout(() => {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '0';
-    }, 500); // 500ms allows for any close animations to complete
-  }
-
-  function calculateScrollbarWidth() {
-    // no scrollbars present
-    if (document.body.clientHeight <= document.documentElement.clientHeight) {
-      return 0;
-    }
-
-    const outer = document.createElement('div');
-    outer.style.visibility = 'hidden';
-    outer.style.overflow = 'scroll';
-    document.body.appendChild(outer);
-
-    // Creating inner element and placing it in the container
-    const inner = document.createElement('div');
-    outer.appendChild(inner);
-
-    // Calculating difference between container's full width and the child width
-    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
-
-    // Removing temporary elements from the DOM
-    outer.parentNode.removeChild(outer);
-
-    return scrollbarWidth;
-  }
-
 </script>
 
 <!-- ======================================================================= -->
@@ -71,7 +31,7 @@
 <!-- ======================================================================= -->
 
 {#if open}
-<div transition:fade={{duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
+<div use:noscroll={{open}} transition:fade={{duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
   <div class="modal-overlay" on:click={close}></div>
   <div in:fly={{duration: 200, y: 200}} out:fly={{duration: 200, y: -100}} class="modal-pane">
     {#if title}
