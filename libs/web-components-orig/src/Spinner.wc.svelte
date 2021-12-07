@@ -6,7 +6,7 @@
   export let size = "medium"; // medium, small, large
   export let invert = false;
 
-  let spinner;
+  let spinner: SVGSVGElement;
 
   $: diameter = {
     small: 16,
@@ -39,10 +39,6 @@
   onMount(() => {
     const path = spinner.querySelector("path") as SVGPathElement;
     path.setAttribute("d", getArc());
-
-    if (invert) {
-      spinner.classList.add("invert");
-    }
   });
 </script>
 
