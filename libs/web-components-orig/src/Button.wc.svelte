@@ -44,7 +44,7 @@ import { normalize } from 'path/posix';
     border: 2px solid var(--color-blue-500, 'blue');
     box-sizing: border-box;
     cursor: pointer;
-    font-size: 18px;
+    font-size: var(--fs-base, 1rem);
     font-weight: 700;
     line-height: 2.375rem;
     padding: 0 0.75rem;

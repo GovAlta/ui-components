@@ -39,7 +39,7 @@
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    padding: 1rem 2rem 1rem 2rem;
+    padding: 1rem 0;
     max-width: 1028px;
     border-bottom: 1px solid var(--color-gray-100);
   }
@@ -52,8 +52,7 @@
   }
 
   .title {
-    margin-left: 8px;
-    font-size: 16px;
+    margin-left: 0.5rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -75,7 +74,7 @@
       display: none;
     }
     .title {
-      margin-left: 28px;
+      margin-left: 1.75rem;
     }
     .image-desktop {
       display: block;

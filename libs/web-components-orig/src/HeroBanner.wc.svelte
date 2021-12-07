@@ -42,7 +42,7 @@
 }
 
 h1 {
-  margin: 0 0 28px;
+  margin: 0 0 1.75rem;
   padding: 0;
   color: var(--color-white);
   font-size: var(--fs-3xl);
@@ -51,9 +51,9 @@ h1 {
 }
 
 .goa-hero-banner-content {
-  font-size: 24px;
-  line-height: 32px;
-  margin-bottom: 28px;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin-bottom: 1.75rem;
   color: #fff;
 }
 
