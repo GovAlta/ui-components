@@ -19,7 +19,6 @@
   </goa-hero-banner>
 
   <goa-page-block>
-
     <ul>
       <li><a href="#section-modal">Modal</a></li>
       <li><a href="#section-notification">Notification</a></li>
@@ -36,15 +35,46 @@
       <li><a href="#section-badges">Badges</a></li>
     </ul>
 
-    <goa-spinner size="small" />
-    <goa-spinner size="medium" />
-    <goa-spinner size="large" />
+    <button id="show-loader">Show page loader</button>
+    <goa-page-loader id="page-loader" class="progress" type="progress" fullscreen />
+    <goa-page-loader class="progress" type="progress" message="Inline loading..." show={true} />
+    <script>
+      const el = document.querySelector('#show-loader');
+      el.addEventListener('click', () => {
+        const loader = document.querySelector('#page-loader');
+        loader.setAttribute('show', "true")
+        loader.setAttribute('message', "loading...");
+      });
+    </script>
+
+    <goa-spinner type="infinite" size="small" />
+    <goa-spinner type="infinite" size="medium" />
+    <goa-spinner type="infinite" size="large" />
+    <goa-spinner type="infinite" size="xlarge" />
 
     <div class="dark-bg">
-      <goa-spinner invert size="small" />
-      <goa-spinner invert size="medium" />
-      <goa-spinner invert size="large" />
+      <goa-spinner type="infinite" invert size="small" />
+      <goa-spinner type="infinite" invert size="medium" />
+      <goa-spinner type="infinite" invert size="large" />
+      <goa-spinner type="infinite" invert size="xlarge" />
     </div>
+
+    <goa-spinner class="progress" type="progress" size="xlarge" />
+    <script>
+      window.progress = 0;
+      const ps = document.querySelectorAll('.progress');
+      setInterval(() => {
+        window.progress += 10
+        ps.forEach(p => {
+          p.setAttribute('progress', window.progress)
+          if (window.progress >= 100) {
+            window.progress = 0;
+            p.removeAttribute('show');
+          }
+        });
+
+      }, 1000);
+    </script>
 
     <h3 id="section-badges">Badges</h3>
     <goa-badge content="Success" type="success">Success</goa-badge>
@@ -96,7 +126,7 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
       </goa-scrollable>
-      <goa-button slot="actions">Close</goa-button>
+      <goa-button slot="actions" size="medium">Close</goa-button>
     </goa-modal>
 
     <script>
@@ -219,7 +249,7 @@
         <div>This is a sub container </div>
       </goa-container>
 
-      <goa-button type="primary" size="large">Assign to me</goa-button>
+      <goa-button type="primary">Assign to me</goa-button>
     </goa-container>
 
     <goa-form-item label="Comments" optional>
@@ -255,16 +285,17 @@
 
     <h3 id="section-buttons">Button Groups</h3>
 
+
     <h4>Align to Start</h4>
     <goa-button-group alignto="start">
-      <goa-button type="tertiary" size="large">Cancel</goa-button>
-      <goa-button type="primary" size="large">Save</goa-button>
+      <goa-button type="tertiary">Cancel</goa-button>
+      <goa-button type="primary">Save</goa-button>
     </goa-button-group>
 
     <h4>Align to End</h4>
     <goa-button-group alignto="end">
-      <goa-button type="tertiary" size="large">Cancel</goa-button>
-      <goa-button type="primary" size="large">Save</goa-button>
+      <goa-button type="tertiary">Cancel</goa-button>
+      <goa-button type="primary">Save</goa-button>
     </goa-button-group>
 
 

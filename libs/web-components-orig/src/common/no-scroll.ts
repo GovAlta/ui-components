@@ -1,4 +1,4 @@
-export default function(node: HTMLElement, opts: { open: boolean }) {
+export default function(node: HTMLElement, opts: { enable: boolean }) {
 
   function hideScrollbars() {
     const scrollbarWidth = calculateScrollbarWidth();
@@ -38,11 +38,13 @@ export default function(node: HTMLElement, opts: { open: boolean }) {
     return scrollbarWidth;
   }
 
-  hideScrollbars()
+  if (opts.enable) {
+    hideScrollbars()
+  }
 
   return {
     update() {
-      if (opts.open) {
+      if (opts.enable) {
         hideScrollbars();
       } else {
         resetScrollbars();

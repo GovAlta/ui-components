@@ -1,27 +1,29 @@
 <svelte:options tag="goa-spinner" />
 
 <script lang="ts" context="module">
-  export type SpinnerSize = "small" | "medium" | "large";
+  export type SpinnerSize = "small" | "medium" | "large" | "xlarge";
   export type SpinnerType = "infinite" | "progress";
 </script>
 
 <!-- Script -->
 <script lang="ts">
-  import { onMount } from "svelte";
-  // import { tweened } from 'svelte/motion';
-	// import { cubicOut } from 'svelte/easing';
+  import { tweened } from 'svelte/motion';
+	import { quartOut } from 'svelte/easing';
 
-  export let size: SpinnerSize = "medium";
+  export let size: SpinnerSize;
   export let invert = false;
   export let type: SpinnerType = "infinite";
   export let progress = "0";
 
-  let path: SVGPathElement;
-  let spinner: SVGSVGElement;
+	const _progress = tweened(0, {
+    duration: 500,
+    easing: quartOut,
+  });
+
+  // Reactive
 
   $: {
-    const p = parseFloat(progress) % 100 + 0.99;
-    path?.setAttribute("d", getArc(p));
+    _progress.set(parseFloat(progress));
   }
 
   $: diameter = {
@@ -41,15 +43,9 @@
   $: radius = diameter / 2;
   $: pathRadius = radius - strokewidth / 2;
 
-  onMount(() => {
-    path = spinner.querySelector("path") as SVGPathElement;
-    path.setAttribute("d", getArc(parseFloat(progress)));
-  });
+  $: ready = type === "infinite" ? pathRadius : pathRadius && progress;
 
-	// const _progress = tweened(1, {
-	// 	duration: 300,
-	// 	easing: cubicOut
-	// });
+  // Functions
 
   function getCoords(radians: number): string {
     const x = radius + pathRadius * Math.cos(radians);
@@ -58,45 +54,49 @@
   }
 
   function getArc(progress: number): string {
-    if (type === "progress") {
-      const start = getCoords(-Math.PI / 2);
-      const end = getCoords(-Math.PI / 2 + 2 * Math.PI * progress / 100);
-      if (progress < 50) {
-        return `M ${start} A ${pathRadius} ${pathRadius} 0 0 1 ${end}`;
-      }
-      return `M ${start} A ${pathRadius} ${pathRadius} 0 1 1 ${end}`;
-    } else {
-      const start = getCoords(Math.PI * 1.5);
-      const end = getCoords(0);
+    switch (type) {
+      case "progress": {
+        const start = getCoords(-Math.PI / 2);
+        const end = getCoords(-Math.PI / 2 + 2 * Math.PI * (progress / 100));
+        const largeArcFlag = (progress % 100) < 50 ? 0 : 1;
 
-      return `M ${start} A ${pathRadius} ${pathRadius} 0 1 0 ${end}`;
+        return `M ${start} A ${pathRadius} ${pathRadius} 0 ${largeArcFlag} 1 ${end}`;
+      }
+      case "infinite": {
+        const start = getCoords(Math.PI * 1.5);
+        const end = getCoords(0);
+
+        return `M ${start} A ${pathRadius} ${pathRadius} 0 1 0 ${end}`;
+      }
     }
   }
 </script>
 
 <!-- HTML -->
-<svg
-  bind:this={spinner}
-  class={`spinner-${type}`}
-  fill="none"
-  viewBox="0 0 {diameter} {diameter}"
-  width={diameter}
-  height={diameter}
-  xmlns="http://www.w3.org/2000/svg"
->
-  <circle
-    cx={radius}
-    cy={radius}
-    stroke={invert ? "var(--color-blue-600)" : "var(--color-tealblue-100)"}
-    stroke-width={strokewidth}
-    r={radius - strokewidth / 2}
-  />
-  <path
-    stroke-width={strokewidth}
-    stroke={invert ? "var(--color-tealblue-100)" : "var(--color-blue)"}
-    stroke-linecap="round"
-  />
-</svg>
+{#if ready}
+  <svg
+    class={`spinner-${type}`}
+    fill="none"
+    viewBox="0 0 {diameter} {diameter}"
+    width={diameter}
+    height={diameter}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx={radius}
+      cy={radius}
+      stroke={invert ? "var(--color-blue-600)" : "var(--color-tealblue-100)"}
+      stroke-width={strokewidth}
+      r={radius - strokewidth / 2}
+    />
+    <path
+      d={getArc($_progress)}
+      stroke-width={strokewidth}
+      stroke={invert ? "var(--color-tealblue-100)" : "var(--color-blue)"}
+      stroke-linecap="round"
+    />
+  </svg>
+{/if}
 
 <!-- Style -->
 <style>
@@ -106,9 +106,6 @@
     }
   }
   .spinner-infinite {
-    animation: rotate 1s linear infinite;
-  }
-  .spinner-progress {
-    transition: stroke-dashoffset 0.5s ease;
+    animation: rotate 2s linear infinite;
   }
 </style>

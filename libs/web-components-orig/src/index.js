@@ -23,3 +23,4 @@ export { default as GoABadge } from "./Badge.wc.svelte";
 export { default as GoAHeroBanner } from "./HeroBanner.wc.svelte";
 export { default as GoAPageBlock } from "./PageBlock.wc.svelte";
 export { default as GoASpinner } from "./Spinner.wc.svelte";
+export { default as GoAPageLoader } from "./PageLoader.wc.svelte";
