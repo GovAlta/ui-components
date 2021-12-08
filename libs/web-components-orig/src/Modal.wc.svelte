@@ -16,7 +16,6 @@
   $: {
     if (open) {
       scrollOffset = window.pageYOffset;
-    } else {
     }
   }
 
@@ -31,7 +30,7 @@
 <!-- ======================================================================= -->
 
 {#if open}
-<div use:noscroll={{open}} transition:fade={{duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
+<div use:noscroll={{enable: open}} transition:fade={{duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
   <div class="modal-overlay" on:click={close}></div>
   <div in:fly={{duration: 200, y: 200}} out:fly={{duration: 200, y: -100}} class="modal-pane">
     {#if title}
@@ -87,18 +86,12 @@
     background-color: #fff;
     z-index: 1001;
     max-width: 60ch;
-    padding: 1.75rem;
 
     margin: 1rem;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-  }
-
-  @media (max-width: 639px) {
-    .modal-pane {
-      width: 90%;
-      max-height: 90%;
-    }
+    width: 90%;
+    max-height: 90%;
   }
 
   @media (min-width: 640px) {
@@ -111,6 +104,7 @@
   @media (min-width: 1024px) {
     .modal-pane {
       width: 65ch;
+      max-height: 80%;
     }
   }
 
@@ -118,7 +112,7 @@
 
   .modal-actions {
     text-align: right;
-    padding-top: 1.75rem;;
+    padding: 1.75rem;
     flex: 0 0 auto;
   }
 
@@ -136,6 +130,7 @@
     font-size: var(--fs-xl);
     padding-bottom: 1rem;
     margin-right: 40px; /*  close icon spacing */
+    padding: 1.75rem;
     flex: 0 0 auto;
   }
 </style>
