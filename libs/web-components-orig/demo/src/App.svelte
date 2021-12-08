@@ -37,7 +37,7 @@
 
     <button id="show-loader">Show page loader</button>
     <goa-page-loader id="page-loader" class="progress" type="progress" fullscreen />
-    <goa-page-loader class="progress" type="progress" message="Inline loading..." show={true} />
+    <!-- <goa-page-loader class="progress" type="progress" message="Inline loading..." show={true} /> -->
     <script>
       const el = document.querySelector('#show-loader');
       el.addEventListener('click', () => {
@@ -112,6 +112,7 @@
     <button id="openModal" onclick="openModal()">Toggle</button>
     <goa-modal id="modal" title="Modal Header....." isclosable="true">
       <goa-scrollable vertical="true" height="50">
+        <div style="padding: 1.75rem" >
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
@@ -125,6 +126,7 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        </div>
       </goa-scrollable>
       <goa-button slot="actions" size="medium">Close</goa-button>
     </goa-modal>

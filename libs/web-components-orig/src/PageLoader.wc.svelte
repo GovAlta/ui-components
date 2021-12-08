@@ -18,7 +18,7 @@ import { fade } from "svelte/transition";
 
 <!-- HTML -->
 {#if ready}
-  <div use:noScroll={{enable: fullscreen}}
+  <div transition:fade={{duration: 300}} use:noScroll={{enable: fullscreen}}
     class:fullscreen
     class:inline={!fullscreen}
   >
