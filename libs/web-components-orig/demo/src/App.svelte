@@ -36,8 +36,8 @@
     </ul>
 
     <button id="show-loader">Show page loader</button>
-    <goa-page-loader id="page-loader" class="progress" type="progress" fullscreen />
-    <!-- <goa-page-loader class="progress" type="progress" message="Inline loading..." show={true} /> -->
+    <goa-page-loader id="page-loader" class="progress" type="progress" variant="fullscreen" />
+    <goa-page-loader class="progress" type="progress" message="Inline loading..." variant="inline" />
     <script>
       const el = document.querySelector('#show-loader');
       el.addEventListener('click', () => {

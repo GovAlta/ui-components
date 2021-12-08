@@ -11,20 +11,34 @@ import { fade } from "svelte/transition";
   export let show: boolean = false;
   export let message: string;
   export let progress: number = 0;
-  export let fullscreen: boolean = false;
+
+  export let variant: "fullscreen" | "inline";
+  $: fullscreen = variant === "fullscreen";
+  $: inline = variant === "inline";
+
+  $: {
+    // automatically show if it is an inline spinner
+    if (inline) {
+      show = true;
+    }
+  }
 
   $: ready = type && show;
 </script>
 
 <!-- HTML -->
 {#if ready}
-  <div transition:fade={{duration: 300}} use:noScroll={{enable: fullscreen}}
-    class:fullscreen
-    class:inline={!fullscreen}
-  >
-    <goa-spinner type={type} size="xlarge" progress={progress} />
-    <div class="message">{message}</div>
-  </div>
+  {#if fullscreen}
+    <div transition:fade={{duration: 300}} use:noScroll={{enable: true}} class:fullscreen>
+      <goa-spinner type={type} size="xlarge" progress={progress} />
+      <div class="message">{message}</div>
+    </div>
+  {:else}
+    <div class:inline>
+      <goa-spinner type={type} size="xlarge" progress={progress} />
+      <div class="message">{message}</div>
+    </div>
+  {/if}
 {/if}
 
 <!-- Style -->
