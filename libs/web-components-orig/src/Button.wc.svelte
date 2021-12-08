@@ -200,4 +200,33 @@ import { normalize } from 'path/posix';
     background: var(--color-red-100);
     color: var(--color-red-500);
   }
+
+  /* Sizes */
+
+  .large {
+    font-size: var(--fs-lg);
+    line-height: 3rem;
+  }
+
+  .large.borderless {
+    line-height: calc(3rem + 4px);
+  }
+
+  .medium {
+    font-size: var(--fs-base);
+    line-height: 2.375rem;
+  }
+
+  .medium.borderless {
+    line-height: calc(2.375rem + 4px);
+  }
+
+  .small {
+    font-size: var(--fs-sm);
+    line-height: 1.75rem;
+  }
+
+  .small.borderless {
+    line-height: calc(1.75rem + 4px);
+  }
 </style>
