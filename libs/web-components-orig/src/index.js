@@ -25,3 +25,8 @@ export { default as GoAPageBlock } from "./PageBlock.wc.svelte";
 export { default as GoASpinner } from "./Spinner.wc.svelte";
 export { default as GoAPageLoader } from "./PageLoader.wc.svelte";
 export { default as GoASkeleton } from "./Skeleton.wc.svelte";
+export { default as GoACardGroup } from "./CardGroup.wc.svelte";
+export { default as GoACard } from "./Card.wc.svelte";
+export { default as GoACardImage } from "./CardImage.wc.svelte";
+export { default as GoACardContent } from "./CardContent.wc.svelte";
+export { default as GoACardActions } from "./CardActions.wc.svelte";
