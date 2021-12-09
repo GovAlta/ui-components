@@ -29,7 +29,7 @@ import { normalize } from 'path/posix';
 </button>
 
 <style>
-  @media (max-width: 480px) {
+  @media (max-width: 320px) {
     /* expand the button and :host container on small screens  */
     :host {
       width: 100%;
@@ -163,29 +163,35 @@ import { normalize } from 'path/posix';
   .secondary.danger {
     color: var(--color-red-500);
     border-color: var(--color-red-500);
+    background: var(--color-white);
   }
   .secondary.danger:hover {
     border-color: var(--color-red-600);
     color: var(--color-red-600);
+    background: var(--color-white);
   }
   .secondary.danger:focus,
   .secondary.danger:active {
     color: var(--color-red-600);
     border-color: var(--color-red-600);
+    background: var(--color-white);
   }
 
   .tertiary.danger {
     color: var(--color-red-500);
     border-color: var(--color-gray-200);
+    background: var(--color-white);
   }
   .tertiary.danger:hover {
     border-color: var(--color-red-600);
     color: var(--color-red-600);
+    background: var(--color-white);
   }
   .tertiary.danger:focus,
   .tertiary.danger:active {
     color: var(--color-red-600);
     border-color: var(--color-red-600);
+    background: var(--color-white);
   }
 
   .borderless.danger {
