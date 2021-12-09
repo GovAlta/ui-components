@@ -2,8 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let type: "text" | "avatar" | "title" | "paragraph" | "thumbnail" | "card" | "profile";
-  export let style: string;
+  export let type: "text" | "text-small" | "avatar" | "title" | "paragraph" | "thumbnail" | "card" | "profile";
 </script>
 
 <!-- HTML -->
@@ -24,11 +23,11 @@
     </div>
     <div class="profile-name">
       <svelte:self type="text" />
-      <svelte:self type="text" style="height: 6px; width: 30%;" />
+      <svelte:self type="text-small" />
     </div>
   </div>
 {:else}
-  <div class="skeleton {type}" {style}></div>
+  <div class="skeleton {type}"></div>
 {/if}
 
 <!-- Style -->
@@ -56,6 +55,12 @@
     width: 100%;
     height: 12px;
     border-radius: 4px;
+  }
+
+  .text-small {
+    width: 30%;
+    height: 6px;
+    border-radius: 2px;
   }
 
   .paragraph {
@@ -86,10 +91,16 @@
   .card {
     display: flex;
     flex-direction: column;
-    width: 280px;
     border: 1px solid var(--color-gray-100);
     border-radius: 4px;
     height: 300px;
+    width: 100%;
+  }
+
+  @media (min-width: 480px) {
+    .card {
+      max-width: var(--card-max-width);
+    }
   }
 
   /* helpers */

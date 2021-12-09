@@ -3,8 +3,7 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
 
-  export let vertical: boolean = false;
-  export let horizontal: boolean = false;
+  export let direction: "vertical" | "horizontal" = "vertical";
   export let hPadding: number = 0;
   export let vPadding: number = 0;
   export let height: number = 0;
@@ -17,8 +16,8 @@
 
 <div class="goa-scrollable" style={`
   --max-height: ${height};
-  overflow-y: ${vertical ? 'auto' : 'hidden'};
-  overflow-x: ${horizontal ? 'auto' : 'hidden'};
+  overflow-y: ${direction === "vertical" ? 'auto' : 'hidden'};
+  overflow-x: ${direction === "horizontal" ? 'auto' : 'hidden'};
   padding: ${vPadding}rem ${hPadding}rem;
 `}>
   <slot />

@@ -2,11 +2,11 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let alignto: "start"; // "start", "end"
+  export let alignment: "start"; // "start", "end"
 </script>
 
 <!-- HTML -->
-<div style="--alignment: flex-{alignto};">
+<div style="--alignment: flex-{alignment};">
   <slot />
 </div>
 

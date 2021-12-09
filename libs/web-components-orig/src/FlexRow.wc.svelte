@@ -18,8 +18,14 @@
   .goa-flex-row {
     margin-bottom: 1rem;  /* Not sure this should be set to a non-zero value */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: stretch;
+  }
+
+  @media (min-width: 480px) {
+    .goa-flex-row {
+      flex-direction: row;
+    }
   }
 </style>
