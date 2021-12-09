@@ -20,6 +20,8 @@
 
   <goa-page-block>
     <ul>
+      <li><a href="#section-skeleton">Skeletons</a></li>
+      <li><a href="#section-loader">Loaders</a></li>
       <li><a href="#section-modal">Modal</a></li>
       <li><a href="#section-notification">Notification</a></li>
       <li><a href="#section-input">Input</a></li>
@@ -35,6 +37,23 @@
       <li><a href="#section-badges">Badges</a></li>
     </ul>
 
+    <h3 id="section-skeleton">Skeletons</h3>
+    <h4>Text</h4>
+    <goa-skeleton type="text" />
+    <h4>Avatar</h4>
+    <goa-skeleton type="avatar" />
+    <h4>Title</h4>
+    <goa-skeleton type="title" />
+    <h4>Paragraph</h4>
+    <goa-skeleton type="paragraph" />
+    <h4>Thumbnail</h4>
+    <goa-skeleton type="thumbnail" />
+    <h4>Card</h4>
+    <goa-skeleton type="card" />
+    <h4>Profile</h4>
+    <goa-skeleton type="profile" />
+
+    <h3 id="section-loader">Loader</h3>
     <button id="show-loader">Show page loader</button>
     <goa-page-loader id="page-loader" class="progress" type="progress" variant="fullscreen" />
     <goa-page-loader class="progress" type="progress" message="Inline loading..." variant="inline" />
@@ -111,7 +130,7 @@
     <h3 id="section-modal">Modal</h3>
     <button id="openModal" onclick="openModal()">Toggle</button>
     <goa-modal id="modal" title="Modal Header....." isclosable="true">
-      <goa-scrollable vertical="true" height="50">
+      <goa-scrollable direction="vertical" height="50">
         <div style="padding: 1.75rem" >
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
