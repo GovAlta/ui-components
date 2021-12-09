@@ -10,6 +10,7 @@
 
   export let open: boolean;
   export let isclosable: boolean;
+  export let isscrollable: boolean;
   export let title: string;
 
   let scrollOffset = 0;
@@ -42,6 +43,17 @@
       </div>
     {/if}
     <div class="modal-content">
+      {#if isscrollable}
+        <goa-scrollable direction="vertical" height="50">
+          <div style="padding: 1.75rem" >
+            <slot />
+          </div>
+        </goa-scrollable>
+      {:else}
+        <div style="padding: 1.75rem" >
+          <slot />
+        </div>
+      {/if}
       <slot />
     </div>
     <div class="modal-actions">
@@ -88,7 +100,7 @@
     max-width: 60ch;
 
     margin: 1rem;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-2);
     border-radius: 4px;
     width: 90%;
     max-height: 90%;
