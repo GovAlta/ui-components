@@ -247,7 +247,7 @@
     list-style-type: none;
     background: var(--color-white);
     border-radius: var(--input-border-radius);
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2), 0 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-1);
     z-index: 99;
   }
 

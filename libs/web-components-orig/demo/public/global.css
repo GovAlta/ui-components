@@ -76,6 +76,14 @@
   --color-blue-100: #e3f2ff;
   --color-blue-500: #0070c4;
   --color-blue-600: #004f84;
+
+  --shadow-1: 0 4px 4px rgba(0, 0, 0, 0.1);
+  --shadow-2: 0 8px 8px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.1);
+  --shadow-3: 0 16px 16px rgba(0, 0, 0, 0.1), 0 6px 8px rgba(0, 0, 0, 0.1);
+  --shadow-4: 0 24px 24px rgba(0, 0, 0, 0.1), 0 8px 12px rgba(0, 0, 0, 0.1);
+
+  --card-padding: 1rem;
+  --card-max-width: 400px;
 }
 
 body,
@@ -247,19 +255,30 @@ small {
 
 goa-button-group > goa-button ~ goa-button {
   margin: 0;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 320px) {
   goa-button-group > goa-button ~ goa-button {
     margin: 0;
-    margin-left: 0.5rem;
+    /* margin-left: 0.25rem; */
   }
 }
 
-goa-badge + goa-badge {
+goa-badge {
   margin: 0;
-  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+goa-card-group goa-card,
+goa-card-group goa-skeleton {
+  width: 100%;
+}
+@media (min-width: 480px) {
+  goa-card-group goa-card,
+  goa-card-group goa-skeleton {
+    width: var(--card-max-width);
+  }
 }
 
 /* FormItems */
