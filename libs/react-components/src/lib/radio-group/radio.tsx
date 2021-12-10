@@ -5,9 +5,9 @@ interface RadioItemProps {
   name: string;
   value: string;
   label: string;
-  isdisabled: string;
-  ischecked: string;
-  iserror: string;
+  disabled: boolean;
+  checked: boolean;
+  error: boolean;
 }
 
 declare global {
@@ -35,9 +35,9 @@ export const GoARadio: FC<Props> = ({ name, label, value, disabled, checked, err
       name={name}
       label={label}
       value={value}
-      iserror={error && 'error'}
-      isdisabled={disabled && 'disabled'}
-      ischecked={checked && 'checked'}
+      error={error}
+      disabled={disabled}
+      checked={checked}
       data-testid={testId}
     >
       {children}

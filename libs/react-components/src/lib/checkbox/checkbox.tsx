@@ -14,10 +14,10 @@ declare global {
 interface CheckboxProps {
   ref: React.MutableRefObject<HTMLElement>;
   name: string;
-  ischecked?: string;
-  isdisabled?: string;
-  isindeterminate?: string;
-  iserror?: string;
+  checked?: boolean;
+  disabled?: boolean;
+  indeterminate?: boolean;
+  error?: boolean;
   content?: string;
   value?: string | number | boolean;
 }
@@ -44,7 +44,19 @@ export const GoACheckbox: FC<Props> = ({ name, testId, error, checked, disabled,
   }, [])
 
   return (
-    <goa-checkbox data-testid={ testId} ref={el} name={name} iserror={error && 'error'} ischecked={checked && 'checked'} isdisabled={disabled && 'disabled'} isindeterminate={indeterminate && 'indeterminate'} content={content} value={value}>{children}</goa-checkbox>
+    <goa-checkbox
+      data-testid={testId}
+      ref={el}
+      name={name}
+      error={error}
+      checked={checked}
+      disabled={disabled}
+      indeterminate={indeterminate}
+      content={content}
+      value={value}
+    >
+      {children}
+    </goa-checkbox>
   )
 };
 

@@ -2,36 +2,21 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { isTruthy } from './common/utils';
-
   // Required
   export let name: string;
 
-  // Optional falsey values
-  export let ischecked: string = '';
-  export let isdisabled: string = '';
-  export let isindeterminate: string = '';
-  export let iserror: string = '';
-
   // Optional values
+  export let checked: boolean = false;
+  export let disabled: boolean = false;
+  export let indeterminate: boolean = false;
+  export let error: boolean = false;
   export let content: string = '';
   export let value: string = '';
-
-  // 'false' values make there way in, so these internal values prevent mixups
-  let _checked,
-    _disabled,
-    _indeterminate,
-    _error = false;
-
-  $: _checked = isTruthy(ischecked);
-  $: _disabled = isTruthy(isdisabled);
-  $: _indeterminate = isTruthy(isindeterminate);
-  $: _error = isTruthy(iserror);
 
   $: id = `id-${name}`;
 
   function onChange(e: Event) {
-    const newStatus = !_checked;
+    const newStatus = !checked;
 
     // An empty string is required as setting the second value to `null` caused the data to get
     // out of sync with the events.
@@ -40,7 +25,7 @@
     // Changing the internal state is ok, as it will be overridden with the propogated state.
     // This will allow the checkbox to behave like the native version in seeing the check state
     // change when the component is not bound to a data source.
-    _checked = newStatus;
+    checked = newStatus;
     e.target.dispatchEvent(
       new CustomEvent('on:change', {
         composed: true,
@@ -55,21 +40,21 @@
 <label
   for={id}
   class="goa-checkbox"
-  class:goa-checkbox--disabled={_disabled}
-  class:goa-checkbox--error={_error}
+  class:goa-checkbox--disabled={disabled}
+  class:goa-checkbox--error={error}
 >
-  <div class="goa-checkbox-container" class:goa-checkbox--selected={_checked}>
+  <div class="goa-checkbox-container" class:goa-checkbox--selected={checked}>
     <input
       {id}
       {name}
-      checked={_checked}
-      disabled={_disabled}
+      checked={checked}
+      disabled={disabled}
       type="checkbox"
       value={`${value}`}
       on:change={onChange}
     />
-    {#if _checked}
-      {#if _indeterminate}
+    {#if checked}
+      {#if indeterminate}
         <svg
           id="dashmark"
           xmlns="http://www.w3.org/2000/svg"

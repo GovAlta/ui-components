@@ -2,19 +2,14 @@
 
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { isTruthy } from './common/utils';
   import { messageChannel } from './common/radio-store';
 
   export let value: string;
   export let label: string;
   export let name: string;
-  export let isdisabled = '';
-  export let ischecked: '';
-  export let iserror: '';
-
-  $: _disabled = isTruthy(isdisabled);
-  $: _checked = isTruthy(ischecked);
-  $: _error = isTruthy(iserror);
+  export let disabled = false;
+  export let checked = false;
+  export let error = false;
 
   let unsubscribe;
 
@@ -26,7 +21,7 @@
       if (msg?.tag !== name) {
         return;
       }
-      _checked = msg.payload === value;
+      checked = msg.payload === value;
     });
   });
 
@@ -35,8 +30,8 @@
   // Events
 
   function onChange(e) {
-    _checked = !_checked;
-    if (_checked) {
+    checked = !checked;
+    if (checked) {
       messageChannel.update((prev) => {
         return {
           ...prev,
@@ -54,15 +49,15 @@
 
 <label
   class="goa-radio"
-  class:goa-radio--disabled={_disabled}
-  class:goa-radio--error={_error}
+  class:goa-radio--disabled={disabled}
+  class:goa-radio--error={error}
   >
   <input
     type="radio"
     {name}
     {value}
-    checked={_checked}
-    disabled={_disabled}
+    {checked}
+    {disabled}
     on:change={onChange}
   />
   <div class="goa-radio-icon" />
