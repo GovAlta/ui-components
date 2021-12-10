@@ -1,26 +1,22 @@
-<svelte:options tag="goa-site-header" />
+<svelte:options tag="goa-service-level-header" />
 
 <!-- Script -->
 <script lang="ts">
-  export let servicelevel: string;
-
+  export let level: "live" | "alpha" | "beta";
 </script>
 
 <!-- HTML -->
 <header class="goa-official-site-header">
-  <div>
-    <span class="service-level service-level--{servicelevel?.toLowerCase()}">
-      {servicelevel}
-    </span>
-  </div>
-
-  {#if servicelevel === 'live'}
-    <div class="site-text">
+  {#if level === 'live'}
+    <div class="site-text service-level--live">
       An official site of the <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a>
     </div>
   {/if}
 
-  {#if servicelevel !== 'live'}
+  {#if level !== 'live'}
+    <div class="service-level service-level--{level?.toLowerCase()}">
+      {level}
+    </div>
     <div class="site-text">
       This is a new <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a> service
     </div>
@@ -32,16 +28,13 @@
   .goa-official-site-header {
     display: flex;
     font-size: var(--fs-xs);
-    color: var(--color-black);
+    background-color: var(--color-gray-100);
     align-items: center;
-    gap: 0.25rem;
   }
 
   .service-level {
     font-weight: bold;
-    color: #fff;
-    background-color: #000;
-    padding: 0.25rem 0.5rem;
+    padding: 0 0.5rem;
   }
 
   .service-level--alpha {
@@ -54,16 +47,11 @@
     color: var(--color-white);
   }
 
-  .service-level--live {
-    height: 16px;
-    width: 16px;
-    padding: 0;
-    color: transparent;
-  }
-
   .site-text {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: var(--color-black);
+    padding-left: 0.5rem;
   }
 </style>

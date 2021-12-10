@@ -4,6 +4,8 @@
 
 <main>
 
+  <goa-service-level-header level="alpha" />
+
   <!-- App Header -->
   <goa-app-header url="http://google.com" title="Digital File Service">
     <a href="http://signin.gov.au/">Sign in</a>

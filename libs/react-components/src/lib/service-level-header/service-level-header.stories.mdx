@@ -1,4 +1,4 @@
-import { GoAHeader } from './header';
+import { GoAServiceLevelHeader } from './service-level-header';
 
 import {
   Meta,
@@ -9,22 +9,17 @@ import {
 } from '@storybook/addon-docs';
 
 <Meta
-  title="React/Page Layout/Header"
-  component={GoAHeader}
+  title="React/Page Layout/Service Level Header"
+  component={GoAServiceLevelHeader}
   argTypes={{
-    serviceName: {
-      control: 'text',
-      description: 'Name of the service to be displayed',
-    },
-    serviceHome: { control: 'text', description: 'URL of the service' },
-    serviceLevel: {
+    level: {
       control: 'select',
-      options: ['Alpha', 'Beta', 'Live'],
+      options: ['alpha', 'beta', 'live'],
       table: {
         //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
         defaultValue: { summary: 'alpha' },
       },
-      description: 'Level of the service [Alpha | Beta | Live]',
+      description: 'Level of the service [alpha | beta | live]',
     },
   }}
 />
@@ -32,19 +27,15 @@ import {
 # Header
 
 export const Template = (args) => (
-  <GoAHeader {...args}>
-    <a href="#">Sign in</a>
-  </GoAHeader>
+  <GoAServiceLevelHeader {...args} />
 );
 
 <Canvas>
   <Story
-    name="Micro Site Header"
+    name="Service Level Header"
     height={100}
     args={{
-      serviceName: 'Digital Service Name (microsite)',
-      serviceHome: 'https://www.alberta.ca/index.aspx',
-      serviceLevel: 'Alpha',
+      level: 'alpha',
     }}
     parameters={{
       design: {
@@ -66,10 +57,10 @@ A header to use for a Government of Alberta microsite. Contains a customizable s
 ## Examples
 
 ```html
-<GoAHeader serviceName="Sample service" serviceHome="/" serviceLevel="Live" />
+<GoAServiceLevelHeader level="Live" />
 ```
 
 ## Properties
 
-<Description of={GoAHeader} />
-<ArgsTable of={GoAHeader} />
+<Description of={GoAServiceLevelHeader} />
+<ArgsTable of={GoAServiceLevelHeader} />

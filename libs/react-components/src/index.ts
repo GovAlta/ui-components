@@ -8,7 +8,7 @@ import '../../core-css/src/lib/styles/fonts/fonts.scss';
 import GoACallout from './lib/callout/callout';
 import GoANotification from './lib/notification/notification';
 import GoAButton from './lib/button/button';
-import GoAHeader from './lib/header/header';
+import GoAServiceLevelHeader from './lib/service-level-header/service-level-header';
 import GoAMicrositeLogo from './lib/microsite-logo/microsite-logo';
 import GoAHeroBanner from './lib/hero-banner/hero-banner.component';
 import { GoADropdown, GoADropdownOption } from './lib/dropdown/dropdown';
@@ -35,7 +35,7 @@ export {
   GoARadio,
   GoACallout,
   GoAButton,
-  GoAHeader,
+  GoAServiceLevelHeader,
   GoAMicrositeLogo,
   GoAHeroBanner,
   GoAHeroBannerContent,

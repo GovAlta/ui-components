@@ -9,7 +9,7 @@ export { default as GoACheckbox } from "./Checkbox.wc.svelte";
 export { default as GoARadioGroup } from "./RadioGroup.wc.svelte";
 export { default as GoARadioItem } from "./RadioItem.wc.svelte";
 export { default as GoAContainer } from "./Container.wc.svelte";
-export { default as GoASiteHeader } from "./SiteHeader.wc.svelte";
+export { default as GoAServiceLevelHeader } from "./ServiceLevelHeader.wc.svelte";
 export { default as GoAAppHeader } from "./AppHeader.wc.svelte";
 export { default as GoAPageLayout } from "./layouts/PageLayout.wc.svelte";
 export { default as GoAFormItem} from "./FormItem.wc.svelte";
