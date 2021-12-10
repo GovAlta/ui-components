@@ -1,8 +1,6 @@
 <svelte:options tag="goa-button" />
 
 <script lang="ts">
-import { normalize } from 'path/posix';
-
   import { onMount, tick } from 'svelte';
 
   export let text = '';
