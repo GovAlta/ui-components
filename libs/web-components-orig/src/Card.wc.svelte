@@ -2,11 +2,11 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let elevation: number = 1;
+  export let elevation: number = 0;
 </script>
 
 <!-- HTML -->
-<div class="card" style="box-shadow: var(--shadow-{elevation});">
+<div class="card" style="{elevation === 0 ? `border: 1px solid var(--card-border-color)` : `box-shadow: var(--shadow-${elevation})`};">
   <slot />
 </div>
 

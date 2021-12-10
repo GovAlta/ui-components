@@ -40,7 +40,7 @@
 
     <h3 id="section-card">Cards</h3>
     <goa-card-group>
-      <goa-card elevation={1}>
+      <goa-card>
         <goa-card-content>
           This is card content
         </goa-card-content>
@@ -50,6 +50,42 @@
         </goa-card-actions>
       </goa-card>
       <goa-card elevation={1}>
+        <goa-card-content>
+          This is card content
+        </goa-card-content>
+        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-actions>
+          <goa-button size="small">Button</goa-button>
+        </goa-card-actions>
+      </goa-card>
+      <goa-card elevation={2}>
+        <goa-card-content>
+          This is card content
+        </goa-card-content>
+        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-actions>
+          <goa-button size="small">Button</goa-button>
+        </goa-card-actions>
+      </goa-card>
+      <goa-card elevation={3}>
+        <goa-card-content>
+          This is card content
+        </goa-card-content>
+        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-actions>
+          <goa-button size="small">Button</goa-button>
+        </goa-card-actions>
+      </goa-card>
+      <goa-card elevation={4}>
+        <goa-card-content>
+          This is card content
+        </goa-card-content>
+        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-actions>
+          <goa-button size="small">Button</goa-button>
+        </goa-card-actions>
+      </goa-card>
+      <goa-card elevation={5}>
         <goa-card-content>
           This is card content
         </goa-card-content>
@@ -63,21 +99,42 @@
     <h3 id="section-skeleton">Skeletons</h3>
     <h4>Text</h4>
     <goa-skeleton type="text" />
+    <goa-skeleton type="text" size={2} />
+    <goa-skeleton type="text" size={3} />
+    <goa-skeleton type="text" size={4} />
     <h4>Avatar</h4>
     <goa-skeleton type="avatar" />
-    <h4>Title</h4>
-    <goa-skeleton type="title" />
+    <goa-skeleton type="avatar" size={2} />
+    <goa-skeleton type="avatar" size={3} />
+    <goa-skeleton type="avatar" size={4} />
+    <h4>Headers</h4>
+    <goa-skeleton type="header" />
+    <goa-skeleton type="header" size={2} />
+    <goa-skeleton type="header" size={3} />
+    <goa-skeleton type="header" size={4} />
     <h4>Paragraph</h4>
     <goa-skeleton type="paragraph" />
     <h4>Thumbnail</h4>
     <goa-skeleton type="thumbnail" />
+    <goa-skeleton type="thumbnail" size={2} />
+    <goa-skeleton type="thumbnail" size={3} />
+    <goa-skeleton type="thumbnail" size={4} />
     <h4>Card</h4>
     <goa-card-group>
-      <goa-skeleton type="card" />
-      <goa-skeleton type="card" />
+      <goa-skeleton type="card" size={1} />
+      <goa-skeleton type="card" size={1} />
+      <goa-skeleton type="card" size={2} />
+      <goa-skeleton type="card" size={2} />
+      <goa-skeleton type="card" size={3} />
+      <goa-skeleton type="card" size={3} />
+      <goa-skeleton type="card" size={4} />
+      <goa-skeleton type="card" size={4} />
     </goa-card-group>
     <h4>Profile</h4>
     <goa-skeleton type="profile" />
+    <goa-skeleton type="profile" size={2} />
+    <goa-skeleton type="profile" size={3} />
+    <goa-skeleton type="profile" size={4} />
 
     <h3 id="section-loader">Loader</h3>
     <goa-button id="show-loader">Show page loader</goa-button>
@@ -217,7 +274,7 @@
 
     <h3 id="section-dropdown">DropDown / Combobox</h3>
     <goa-form-item label="Favourite Actor">
-      <goa-dropdown name="autocomplete" isautocomplete="true">
+      <goa-dropdown id="dropdown" name="autocomplete" isautocomplete="true" ismultiselect={true}>
         <goa-dropdown-item name="autocomplete" value="1" label="Tom Cruise" />
         <goa-dropdown-item name="autocomplete" value="2" label="Nicholas Cage">
           <div class="custom-dropdown-content">
@@ -230,10 +287,16 @@
             <span>Nicholas Cage</span>
           </div>
         </goa-dropdown-item>
-        <goa-dropdown-item name="autocomplete" value="2" label="Tom Hardy" />
-        <goa-dropdown-item name="autocomplete" value="2" label="Val Kilmer" />
+        <goa-dropdown-item name="autocomplete" value="3" label="Tom Hardy" />
+        <goa-dropdown-item name="autocomplete" value="4" label="Val Kilmer" />
       </goa-dropdown>
     </goa-form-item>
+    <script>
+      var dropdown = document.getElementById("dropdown");
+      dropdown.addEventListener("on:change", (e) => {
+        console.log(e.detail.data);
+      });
+    </script>
 
     <h3 id="section-callout">Callout</h3>
     <goa-callout type="success">
@@ -268,7 +331,7 @@
     <goa-modal id="modal2">
       <h2>Delete All</h2>
       <p>Delete the entire database and backups?</p>
-      <goa-button id="do-delete" slot="actions">Delete</goa-button>
+      <goa-button id="do-delete" variant="danger" slot="actions">Delete</goa-button>
       <script>
         var doDeleteBtn = document.getElementById('do-delete');
         doDeleteBtn.addEventListener('on:click', () => {
