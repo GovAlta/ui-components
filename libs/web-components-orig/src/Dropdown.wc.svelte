@@ -170,8 +170,9 @@
   <div>
     <!-- readonly input  -->
     {#if !isMenuVisible || !isautocomplete}
-      <div on:click={showMenu} data-testid={`${name}-dropdown`}>
+      <div  data-testid={`${name}-dropdown`}>
         <goa-input
+          on:focus={showMenu}
           disabled={isdisabled}
           {leadingicon}
           {placeholder}
