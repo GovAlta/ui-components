@@ -427,7 +427,7 @@
 <script lang="ts">
   export let type: GoAIconType;
   export let size: IconSize = 'medium';
-  export let style: IconStyle = 'outline';
+  export let styling: IconStyle = 'outline';
   export let inverted: boolean = false;
 
   $: _size = {
@@ -445,7 +445,7 @@
   style={`--size: ${_size}`}
   >
   {#if type}
-    <ion-icon style={`width: ${_size}; height: ${_size}`} name={style === "filled" ? type : `${type}-${style}`} />
+    <ion-icon style={`width: ${_size}; height: ${_size}`} name={styling === "filled" ? type : `${type}-${styling}`} />
   {/if}
 </div>
 
