@@ -7,15 +7,20 @@
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import noscroll from "./common/no-scroll";
+  import { toBoolean } from "./common/utils";
 
-  export let open: boolean;
-  export let isclosable: boolean;
-  export let isscrollable: boolean;
   export let title: string;
+  export let closable: string;
+  export let scrollable: string;
+  export let open: string;
+
+  $: isClosable = toBoolean(closable);
+  $: isScrollable = toBoolean(scrollable);
+  $: isOpen = toBoolean(open);
 
   let scrollOffset = 0;
   $: {
-    if (open) {
+    if (isOpen) {
       scrollOffset = window.pageYOffset;
     }
   }
@@ -30,20 +35,20 @@
 <!-- Html -->
 <!-- ======================================================================= -->
 
-{#if open}
-<div use:noscroll={{enable: open}} transition:fade={{duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
+{#if isOpen}
+<div use:noscroll={{enable: isOpen}} transition:fade={{duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
   <div class="modal-overlay" on:click={close}></div>
   <div in:fly={{duration: 200, y: 200}} out:fly={{duration: 200, y: -100}} class="modal-pane">
     {#if title}
       <div class="modal-title">{title}</div>
     {/if}
-    {#if isclosable}
+    {#if isClosable}
       <div class="modal-close">
         <goa-icon-button type='close' on:click={close} />
       </div>
     {/if}
     <div class="modal-content">
-      {#if isscrollable}
+      {#if isScrollable}
         <goa-scrollable direction="vertical" height="50">
           <div style="padding: 1.75rem" >
             <slot />

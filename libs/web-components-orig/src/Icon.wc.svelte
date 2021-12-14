@@ -425,10 +425,14 @@
 </script>
 
 <script lang="ts">
+  import { toBoolean } from "./common/utils";
+
   export let type: GoAIconType;
   export let size: IconSize = 'medium';
   export let styling: IconStyle = 'outline';
-  export let inverted: boolean = false;
+  export let inverted: string;
+
+  $: isInverted = toBoolean(inverted);
 
   $: _size = {
     small: '1.1rem',
@@ -440,7 +444,7 @@
 
 <div
   class="goa-icon"
-  class:inverted={inverted}
+  class:inverted={isInverted}
   data-testid={`icon-${type}`}
   style={`--size: ${_size}`}
   >

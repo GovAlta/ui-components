@@ -5,25 +5,28 @@
 import { fade } from "svelte/transition";
 
   import noScroll from "./common/no-scroll";
+import { fromBoolean, toBoolean } from "./common/utils";
   import type { SpinnerType } from "./Spinner.wc.svelte";
 
   export let type: SpinnerType;
-  export let show: boolean = false;
   export let message: string;
   export let progress: number = 0;
-
+  export let show: string;
   export let variant: "fullscreen" | "inline";
+
+  $: isVisible = toBoolean(show);
   $: fullscreen = variant === "fullscreen";
   $: inline = variant === "inline";
+
 
   $: {
     // automatically show if it is an inline spinner
     if (inline) {
-      show = true;
+      show = fromBoolean(true);
     }
   }
 
-  $: ready = type && show;
+  $: ready = type && isVisible;
 </script>
 
 <!-- HTML -->

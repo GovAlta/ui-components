@@ -2,11 +2,15 @@
 
 <!-- Script -->
 <script lang="ts">
+  import { toBoolean } from "./common/utils";
+
   export let helptext: string = "";
   export let name: string = "";
   export let error: string = "";
   export let label: string = "";
-  export let optional: boolean = false;
+  export let optional: string;
+
+  $: isOptional = toBoolean(optional);
 </script>
 
 <!-- HTML -->
@@ -14,7 +18,7 @@
   {#if label}
     <label for={name}>
       {label}
-      {#if optional}
+      {#if isOptional}
         <em>(optional)</em>
       {/if}
     </label>

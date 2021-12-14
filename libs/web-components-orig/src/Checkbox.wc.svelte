@@ -2,34 +2,34 @@
 
 <!-- Script -->
 <script lang="ts">
+  import { toBoolean } from './common/utils';
   // Required
   export let name: string;
 
   // Optional values
-  export let checked: boolean = false;
-  export let disabled: boolean = false;
-  export let indeterminate: boolean = false;
-  export let error: boolean = false;
-  export let content: string = '';
-  export let value: string = '';
+  export let text: string = "";
+  export let value: string = "";
+  export let checked: string;
+  export let disabled: string;
+  export let indeterminate: string;
+  export let error: string;
 
   $: id = `id-${name}`;
+  $: isDisabled = toBoolean(disabled);
+  $: isError = toBoolean(error);
+  $: isChecked = toBoolean(checked);
+  $: isIndeterminate = toBoolean(indeterminate);
 
   function onChange(e: Event) {
-    const newStatus = !checked;
-
     // An empty string is required as setting the second value to `null` caused the data to get
     // out of sync with the events.
-    const _value = newStatus ? `${value}` : '';
+    const newCheckStatus = !isChecked;
+    const _value = newCheckStatus ? `${value || "checked"}` : "";
 
-    // Changing the internal state is ok, as it will be overridden with the propogated state.
-    // This will allow the checkbox to behave like the native version in seeing the check state
-    // change when the component is not bound to a data source.
-    checked = newStatus;
     e.target.dispatchEvent(
       new CustomEvent('on:change', {
         composed: true,
-        detail: { name, value: _value },
+        detail: { name, checked: newCheckStatus, value: _value },
       })
     );
   }
@@ -40,21 +40,21 @@
 <label
   for={id}
   class="goa-checkbox"
-  class:goa-checkbox--disabled={disabled}
-  class:goa-checkbox--error={error}
+  class:goa-checkbox--disabled={isDisabled}
+  class:goa-checkbox--error={isError}
 >
-  <div class="goa-checkbox-container" class:goa-checkbox--selected={checked}>
+  <div class="goa-checkbox-container" class:goa-checkbox--selected={isChecked}>
     <input
       {id}
       {name}
-      checked={checked}
-      disabled={disabled}
+      checked={isChecked}
+      disabled={isDisabled}
       type="checkbox"
       value={`${value}`}
       on:change={onChange}
     />
-    {#if checked}
-      {#if indeterminate}
+    {#if isChecked}
+      {#if isIndeterminate}
         <svg
           id="dashmark"
           xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@
   </div>
   <div class="goa-checkbox-text">
     <slot name="main">
-      {content}
+      {text}
     </slot>
   </div>
 </label>

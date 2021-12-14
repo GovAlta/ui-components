@@ -214,7 +214,7 @@
 
     <h3 id="section-modal">Modal</h3>
     <goa-button id="openModal">Show Modal</goa-button>
-    <goa-modal id="modal" title="Modal Header....." isclosable={true} isscrollable={true}>
+    <goa-modal id="modal" title="Modal Header....." closable scrollable>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
@@ -262,11 +262,11 @@
     <h3 id="section-input">Input</h3>
     <goa-flex-row gap="small">
       <goa-form-item label="First name" helptext="This is helper text">
-        <goa-input id="firstname" name="firstname" />
+        <goa-input id="firstname" name="firstname" disabled="false" />
       </goa-form-item>
 
-      <goa-form-item label="Middle name" optional helptext="This is helper text">
-        <goa-input id="middlename" name="middlename" />
+      <goa-form-item label="Middle name" optional helptext="This should be disabled">
+        <goa-input id="middlename" name="middlename" disabled />
       </goa-form-item>
 
       <goa-form-item label="Last name" optional helptext="This is helper text">
@@ -276,7 +276,7 @@
 
     <h3 id="section-dropdown">DropDown / Combobox</h3>
     <goa-form-item label="Favourite Actor">
-      <goa-dropdown id="dropdown" name="autocomplete" isautocomplete="true" ismultiselect={true}>
+      <goa-dropdown id="dropdown" name="autocomplete" autocomplete="foo" multiselect="bar">
         <goa-dropdown-item name="autocomplete" value="1" label="Tom Cruise" />
         <goa-dropdown-item name="autocomplete" value="2" label="Nicholas Cage">
           <div class="custom-dropdown-content">
@@ -309,8 +309,10 @@
     <!-- Radio Groups -->
 
     <h3 id="section-radio">Radio Buttons</h3>
+
+    <goa-checkbox id="radio-error" name="radio-error" text="Set radio error state" />
     <goa-form-item label="Favourite Color">
-      <goa-radio-group id="radioGroup1" name="color">
+      <goa-radio-group id="radioGroup1" name="color" value="blue">
         <goa-radio-item name="color" value="red" label="Red" />
         <goa-radio-item name="color" value="blue" label="Blue" />
         <goa-radio-item name="color" value="green" label="Green" />
@@ -318,11 +320,20 @@
     </goa-form-item>
 
     <script>
-      document
-        .getElementById('radioGroup1')
-        .addEventListener('on:change', (e) => {
-          console.log('in the on change', e.detail);
-        });
+      var radioCheckbox = document.getElementById('radio-error');
+      var radioGroup = document.getElementById('radioGroup1');
+      radioGroup.addEventListener('on:change', (e) => {
+        console.log('in the on change', e.detail);
+      });
+      radioCheckbox.addEventListener('on:change', (e) => {
+        const checked = e.detail.value === 'checked'
+        radioCheckbox.checked = checked;
+        if (checked) {
+          radioGroup.setAttribute("error", "")
+        } else {
+          radioGroup.removeAttribute("error")
+        }
+      });
     </script>
 
 
@@ -372,7 +383,7 @@
     </script>
 
     <goa-form-item label="Comments" optional>
-      <goa-textarea id="comments" name="comments" />
+      <goa-textarea id="comments" name="comments" disabled />
     </goa-form-item>
 
     <script>
@@ -387,28 +398,24 @@
     <goa-form-item label="Terms and conditions">
       <goa-checkbox
         id="confirm"
-        iserror=""
-        isdisabled=""
-        ischecked=""
-        isindeterminate=""
         name="confirm"
-        content="I accept the conditions"
+        text="I accept the conditions"
       />
     </goa-form-item>
-
     <script>
-      document.getElementById('confirm').addEventListener('on:change', () => {
-        console.log('changed');
+      var checkbox = document.getElementById('confirm');
+      checkbox.addEventListener('on:change', (e) => {
+        console.log('changed', e.detail);
+        checkbox.checked = e.detail.checked;
       });
     </script>
 
     <h3 id="section-buttons">Button Groups</h3>
 
-
     <h4>Align to Start</h4>
     <goa-button-group alignment="start">
       <goa-button type="tertiary">Cancel</goa-button>
-      <goa-button type="primary">Save</goa-button>
+      <goa-button type="primary" disabled title="This one is disabled">Save</goa-button>
     </goa-button-group>
 
     <h4>Align to End</h4>

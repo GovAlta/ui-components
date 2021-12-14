@@ -3,11 +3,34 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
   import { messageChannel } from './common/radio-store';
+  import { toBoolean } from './common/utils';
 
   export let name: string;
   export let value: string;
   export let orientation = 'vertical';
-  export let isdisabled = 'false';
+  export let disabled: string;
+  export let error: string;
+
+  // private
+  let isError: boolean
+
+  $: isDisabled = toBoolean(disabled);
+  $: {
+    isError = toBoolean(error);
+    messageChannel.update((prev) => {
+      return {
+        ...prev,
+        [name]: {
+          tag: name,
+          payload: {
+            value,
+            disabled: isDisabled,
+            error: isError,
+          },
+        },
+      };
+    });
+  };
 
   let el: HTMLElement;
   let unsubscribe;
@@ -18,16 +41,23 @@
         ...prev,
         [name]: {
           tag: name,
-          payload: value,
+          payload: {
+            value,
+            disabled: isDisabled,
+            error: isError,
+          },
         },
       };
     });
 
     unsubscribe = messageChannel.subscribe((state) => {
-      const _value = state[name].payload;
-      if (_value !== value) {
-        value = _value;
-        el.dispatchEvent(new CustomEvent('on:change', { composed: true, detail: { name, value: _value } }))
+      const payload = state[name].payload;
+      if (payload.value !== value) {
+        value = payload.value;
+        el.dispatchEvent(new CustomEvent('on:change', {
+          composed: true,
+          detail: { name, value: payload.value}
+        }))
       }
     })
   });

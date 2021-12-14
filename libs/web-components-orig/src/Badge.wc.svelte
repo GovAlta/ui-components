@@ -2,11 +2,16 @@
 
 <!-- Script -->
 <script lang="ts">
+  import { toBoolean } from "./common/utils";
+
   export let type: string;  // "success" | "warning" | "information" | "emergency" | "inactive" | "dark" | "midtone" | "light";
   export let content: string;
 
-  export let icon: boolean = false;
+  // optional
   export let testId: string = "";
+  export let icon: string;
+
+  $: showIcon = toBoolean(icon)
 
   $: iconType = {
     success: "checkmark-circle",
@@ -24,9 +29,9 @@
 <!-- HTML -->
 <div data-testid={testId}
   class="goa-badge badge-{type}"
-  class:icon-only={icon && !content}
+  class:icon-only={showIcon && !content}
   >
-  {#if icon}
+  {#if showIcon}
     <goa-icon type={iconType} size="small" />
   {/if}
   {#if content}

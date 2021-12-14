@@ -7,9 +7,11 @@
   export let value: string;
   export let label: string;
   export let name: string;
-  export let disabled = false;
-  export let checked = false;
-  export let error = false;
+
+  // private
+  let disabled = false;
+  let checked = false;
+  let error = false;
 
   let unsubscribe;
 
@@ -21,7 +23,9 @@
       if (msg?.tag !== name) {
         return;
       }
-      checked = msg.payload === value;
+      checked = msg.payload.value === value;
+      disabled = msg.payload.disabled;
+      error = msg.payload.error;
     });
   });
 
@@ -37,7 +41,10 @@
           ...prev,
           [name]: {
             tag: name,
-            payload: value,
+            payload: {
+              disabled,
+              value
+            },
           },
         };
       });

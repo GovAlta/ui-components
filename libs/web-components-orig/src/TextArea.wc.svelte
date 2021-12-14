@@ -2,10 +2,16 @@
 
 <!-- Script -->
 <script lang="ts">
+  import { toBoolean } from "./common/utils";
+
   export let name: string;
   export let value: string;
   export let placeholder: string;
   export let rows: number;
+
+  export let disabled: string;
+
+  $: isDisabled = toBoolean(disabled);
 
   function onChange(e: Event) {
     const target = e.target as HTMLInputElement;
@@ -31,6 +37,7 @@
   placeholder={placeholder}
   value={value || ""}
   rows={rows || 3}
+  disabled={isDisabled}
   on:keyup={onChange}
 ></textarea>
 
@@ -65,12 +72,13 @@
     box-shadow: 0 0 0 3px var(--color-orange);
   }
   .goa-textarea:disabled {
-    border-color: var(--color-gray-500);
+    border-color: var(--color-gray-200);
   }
   .goa-textarea:disabled:hover {
-    border-color: var(--color-gray-500);
+    border-color: var(--color-gray-200);
   }
-  .goa-textarea:disabled:focus {
+  .goa-textarea:disabled:focus,
+  .goa-textarea:disabled:active {
     box-shadow: none;
   }
 </style>

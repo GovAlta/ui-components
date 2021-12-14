@@ -1,24 +1,23 @@
 <svelte:options tag="goa-button" />
 
 <script lang="ts">
-  import { onMount, tick } from 'svelte';
+  import { toBoolean } from './common/utils';
 
   export let text = '';
   export let type = 'primary'; // primary, secondary, tertiary, borderless
   export let size = 'medium'; // small, medium, large
   export let variant = 'default'; // default, danger
+  export let disabled: string;
+
+  $: isDisabled = toBoolean(disabled);
 
   function clickHandler(e) {
     this.dispatchEvent(new CustomEvent('on:click', { composed: true }));
     e.stopPropagation();
   }
-
-  onMount(async () => {
-    await tick();
-  });
 </script>
 
-<button class="{type} {size} {variant}" on:click={clickHandler}>
+<button class="{type} {size} {variant}" on:click={clickHandler} disabled={isDisabled}>
   {#if text}
     {text}
   {:else}
@@ -50,13 +49,6 @@
 
     transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
     transform: scaleX(1);
-  }
-
-  button:disabled {
-    pointer-events: none;
-    color: var(--color-gray-700);
-    background-color: var(--color-gray-100);
-    border-color: var(--color-gray-100);
   }
 
   button:active {
@@ -173,6 +165,13 @@
     color: var(--color-red-600);
     border-color: var(--color-red-600);
     background: var(--color-white);
+  }
+
+  button:disabled {
+    pointer-events: none;
+    color: var(--color-gray-700);
+    background-color: var(--color-gray-100);
+    border-color: var(--color-gray-100);
   }
 
   .tertiary.danger {

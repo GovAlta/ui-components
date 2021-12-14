@@ -11,9 +11,9 @@ interface DropdownProps {
   leadingicon: string;
   maxheight: number;
   placeholder: string;
-  isautocomplete: string;
-  isdisabled: string;
-  ismultiselect: string;
+  autocomplete: boolean;
+  disabled: boolean;
+  multiselect: boolean;
 }
 
 declare global {
@@ -60,9 +60,9 @@ export const GoADropdown: FC<Props> = (props) => {
       leadingicon={props.leadingIcon}
       maxheight={props.maxHeight}
       placeholder={props.placeholder}
-      isautocomplete={props.autoComplete && 'autocomplete'}
-      isdisabled={props.disabled && 'disabled'}
-      ismultiselect={props.multiSelect && 'multiselect'}
+      autocomplete={props.autoComplete}
+      disabled={props.disabled}
+      multiselect={props.multiSelect}
       data-testid={props.testId}
     >
       {props.children}

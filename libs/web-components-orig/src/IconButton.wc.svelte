@@ -1,7 +1,8 @@
 <svelte:options tag="goa-icon-button" />
 
 <script lang="ts">
-  import type { IconSize, IconVariant, IconStyle, GoAIconType } from "./Icon.wc.svelte";
+  import { toBoolean } from "./common/utils";
+  import type { IconSize, IconStyle, GoAIconType } from "./Icon.wc.svelte";
 
   // required
   export let type: GoAIconType;
@@ -10,13 +11,15 @@
   export let size: IconSize = "medium";
   export let style: IconStyle = "outline";
   export let title: string = "";
-  export let disabled: string = "";
   export let testId: string = "";
-  export let inverted: boolean = false;
+  export let disabled: string = "";
+  export let inverted: string;
+
+  $: isInverted = toBoolean(inverted);
 
   // private
-  $: css = `goa-icon-button goa-icon-button-primary ${inverted ? 'goa-icon-button--inverted' : ''}`;
-  $: _disabled = disabled !== "false" && disabled !== "";
+  $: css = `goa-icon-button goa-icon-button-primary ${isInverted ? 'goa-icon-button--inverted' : ''}`;
+  $: isDisabled = toBoolean(disabled);
 
   $: _size = {
     small: '1rem',
@@ -29,8 +32,8 @@
   }
 </script>
 
-<button style="--size: {_size}" {title} disabled={_disabled} class={css} data-testid={testId} on:click={clickHandler}>
-  <goa-icon {type} {size} {style} {inverted} />
+<button style="--size: {_size}" {title} disabled={isDisabled} class={css} data-testid={testId} on:click={clickHandler}>
+  <goa-icon {type} {size} {style} inverted={isInverted} />
 </button>
 
 <style>

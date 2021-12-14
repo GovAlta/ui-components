@@ -6,24 +6,32 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
+  import { toBoolean } from "./common/utils";
   import type { GoAIconType } from "./Icon.wc.svelte";
 
   export let type: string = "text";
   export let name: string = "";
   export let value: string = "";
   export let id: string = "";
-  export let disabled: boolean = false;
   export let placeholder: string = "";
   export let leadingicon: GoAIconType = null;
   export let trailingicon: GoAIconType = null;
   export let variant: GoAButtonVariant = "goa";
-  export let focused: boolean = false;
-  export let readonly: boolean = false;
-  export let handletrailingiconclick: boolean = false;
-  export let error: boolean = false;
+
+  export let disabled: string;
+  export let handletrailingiconclick: string;
+  export let focused: string;
+  export let readonly: string;
+  export let error: string;
+
+  $: handlesTrailingIconClicks = toBoolean(handletrailingiconclick);
+  $: isFocused = toBoolean(focused);
+  $: isReadonly = toBoolean(readonly);
+  $: isError = toBoolean(error);
+  $: isDisabled = toBoolean(disabled);
 
   let inputEl: HTMLElement;
-  $: if (focused) {
+  $: if (isFocused) {
     inputEl?.focus();
   }
 
@@ -51,8 +59,8 @@
 <!-- HTML -->
 
 <div
-  class={`goa-input ${disabled ? "goa-input--disabled" : ""}`}
-  class:error={error}
+  class={`goa-input ${isDisabled ? "goa-input--disabled" : ""}`}
+  class:error={isError}
   >
   {#if leadingicon}
     <div class="goa-input-leading-icon">
@@ -64,25 +72,25 @@
     {id}
     bind:this={inputEl}
     class={`input--${variant}`}
-    {readonly}
-    {disabled}
+    readonly={isReadonly}
+    disabled={isDisabled}
     {type}
     {value}
     {placeholder}
     on:keyup={onKeyUp}
   />
 
-  {#if trailingicon && !handletrailingiconclick}
+  {#if trailingicon && !handlesTrailingIconClicks}
     <div class="goa-input-trailing-icon">
       <goa-icon size="medium" type={trailingicon} />
     </div>
   {/if}
 
-  {#if trailingicon && handletrailingiconclick}
+  {#if trailingicon && handlesTrailingIconClicks}
     <div class="goa-input-trailing-icon">
       <goa-icon-button
         on:click={doClick}
-        {disabled}
+        disabled={isDisabled}
         variant="tertiary"
         size="medium"
         type={trailingicon}

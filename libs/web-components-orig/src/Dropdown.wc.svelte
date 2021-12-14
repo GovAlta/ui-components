@@ -5,6 +5,7 @@
   import type { Message } from './common/dropdown-store';
   import type { GoAIconType } from './Icon.wc.svelte';
   import { onDestroy, onMount, tick } from 'svelte';
+  import { toBoolean } from './common/utils';
 
   const MAX_HEIGHT = 300;
 
@@ -16,9 +17,13 @@
   export let maxheight: number;
   export let placeholder: string;
 
-  export let ismultiselect: boolean;
-  export let isdisabled: boolean;
-  export let isautocomplete: boolean;
+  export let multiselect: string;
+  export let disabled: string;
+  export let autocomplete: string;
+
+  $: isMultiSelect = toBoolean(multiselect);
+  $: isDisabled = toBoolean(disabled);
+  $: isAutoComplete = toBoolean(autocomplete);
 
   // Private
 
@@ -41,7 +46,7 @@
     switch (msg?.payload?.type) {
       case 'DropDownAction': {
         if (msg.payload.action === 'select') {
-          if (ismultiselect) {
+          if (isMultiSelect) {
             selectedLabels = [...selectedLabels, msg.payload.label];
             selectedValues = [...selectedValues, msg.payload.value];
           } else {
@@ -56,7 +61,7 @@
           selectedValues = selectedValues.filter((value) => value !== _value);
         }
 
-        if (!ismultiselect) {
+        if (!isMultiSelect) {
           isMenuVisible = false;
         }
 
@@ -85,7 +90,7 @@
         payload: {
           type: 'DropDownInit',
           values: values ? JSON.parse(values) : [],
-          multiSelect: ismultiselect,
+          multiSelect: isMultiSelect,
         },
       },
     }));
@@ -169,11 +174,11 @@
 
   <div>
     <!-- readonly input  -->
-    {#if !isMenuVisible || !isautocomplete}
+    {#if !isMenuVisible || !isAutoComplete}
       <div  data-testid={`${name}-dropdown`}>
         <goa-input
           on:focus={showMenu}
-          disabled={isdisabled}
+          disabled={isDisabled}
           {leadingicon}
           {placeholder}
           id={`${name}-dropdown-input`}
@@ -190,7 +195,7 @@
     {#if isMenuVisible}
       <div class="menu">
         <!-- filter -->
-        {#if isautocomplete}
+        {#if isAutoComplete}
           <goa-input
             bind:this={filterEl}
             focused={isMenuVisible}

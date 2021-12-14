@@ -1,8 +1,9 @@
 <svelte:options tag="goa-dropdown-item" />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
-  import { messageChannel } from "./common/dropdown-store";
+  import { onMount, tick } from 'svelte';
+  import { messageChannel } from './common/dropdown-store';
+  import { fromBoolean, toBoolean } from './common/utils';
 
   // public
   export let name: string;
@@ -10,11 +11,16 @@
   export let label: string;
 
   // optional
-  export let selected: boolean = false;
-  export let disabled: boolean = false;
-  export let hide: boolean = false;
-  export let testId: string = "";
+  export let testId: string = '';
+  export let selected: string;
+  export let disabled: string;
+  export let hide: string;
 
+  $: isSelected = toBoolean(selected);
+  $: isDisabled = toBoolean(disabled);
+  $: isHidden = toBoolean(hide);
+
+  // private
   let multiSelect: boolean;
   let filteredLabel: string;
 
@@ -33,8 +39,9 @@
     // bold all the matches
     filteredLabel = '';
     let lastIndex = 0;
-    [...label.matchAll(new RegExp(filter, "gi"))].forEach((match) => {
-      filteredLabel += label.slice(lastIndex, match.index) + `<b>${match[0]}</b>`;
+    [...label.matchAll(new RegExp(filter, 'gi'))].forEach((match) => {
+      filteredLabel +=
+        label.slice(lastIndex, match.index) + `<b>${match[0]}</b>`;
       lastIndex = match.index + match[0].length;
     });
     filteredLabel += label.slice(lastIndex);
@@ -52,34 +59,36 @@
     }
 
     switch (msg.payload.type) {
-      case "FilterChange": {
+      case 'FilterChange': {
         const filter = msg.payload.filter.toLowerCase();
         if (!value && !label) {
-          hide = false;
+          hide = 'false';
         } else {
-          const matches = value.toLowerCase().includes(filter) || label.toLowerCase().includes(filter);
-          hide = !matches;
+          const matches =
+            value.toLowerCase().includes(filter) ||
+            label.toLowerCase().includes(filter);
+          hide = fromBoolean(!matches);
         }
-        filteredLabel = getFilteredLabel(filter)
+        filteredLabel = getFilteredLabel(filter);
         break;
       }
-      case "DropDownAction": {
+      case 'DropDownAction': {
         if (msg.payload.label !== label && !multiSelect) {
-          selected = false;
+          isSelected = false;
         }
         break;
       }
-      case "DropDownInit": {
-        selected = msg.payload.values.includes(value);
+      case 'DropDownInit': {
+        isSelected = msg.payload.values.includes(value);
         multiSelect = msg.payload.multiSelect;
-        if (selected) {
+        if (isSelected) {
           messageChannel.update((old) => ({
             ...old,
             [name]: {
               tag: name,
               payload: {
-                type: "DropDownAction",
-                action: "select",
+                type: 'DropDownAction',
+                action: 'select',
                 label,
                 value,
               },
@@ -92,15 +101,15 @@
   });
 
   function onSelect() {
-    selected = !selected;
+    isSelected = !isSelected;
 
     messageChannel.update((old) => ({
       ...old,
       [name]: {
         tag: name,
         payload: {
-          type: "DropDownAction",
-          action: selected ? "select" : "deselect",
+          type: 'DropDownAction',
+          action: isSelected ? 'select' : 'deselect',
           label: label,
           value: value,
           multiSelect,
@@ -112,9 +121,9 @@
 
 <li
   class="goa-dropdown-option"
-  class:goa-dropdown-option--disabled={disabled}
-  class:goa-dropdown-option--selected={selected}
-  style={`display: ${hide ? "none" : "block"}`}
+  class:goa-dropdown-option--disabled={isDisabled}
+  class:goa-dropdown-option--selected={isSelected}
+  style={`display: ${isHidden ? 'none' : 'block'}`}
   data-testid={testId}
   on:click={onSelect}
 >
@@ -123,7 +132,7 @@
 
 <style>
   li {
-    font-family: var(--font-family)
+    font-family: var(--font-family);
   }
   .goa-dropdown-option {
     margin: 0;
