@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useRef } from 'react';
 import 'goa-web-components'
+import { string } from 'yargs';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       'goa-checkbox': CheckboxProps & React.HTMLAttributes<HTMLElement>
     }
@@ -18,7 +18,7 @@ interface CheckboxProps {
   disabled?: boolean;
   indeterminate?: boolean;
   error?: boolean;
-  content?: string;
+  text?: string;
   value?: string | number | boolean;
 }
 
@@ -29,18 +29,25 @@ export interface Props {
   disabled?: boolean;
   indeterminate?: boolean;
   error?: boolean;
-  content?: string;
+  text?: string;
   value?: string | number | boolean;
   testId?: string;
-  onChange?: (name: string, value: string) => void;
+  onChange?: (name: string, checked: boolean, value: string) => void;
 }
 
-export const GoACheckbox: FC<Props> = ({ name, testId, error, checked, disabled, indeterminate, value = true, content, children, onChange }) => {
+export const GoACheckbox: FC<Props> = ({ name, testId, error, disabled, checked, indeterminate, value = true, text, children, onChange }) => {
   const el = useRef<HTMLElement>();
   useEffect(() => {
-    el.current.addEventListener('on:change', (e: CustomEvent) => {
-      onChange(name, e.detail.value)
-    });
+    const current = el.current;
+    const listener = (e: CustomEvent) => {
+      onChange(name, e.detail.checked, e.detail.value);
+    };
+
+    current.addEventListener('on:change', listener)
+
+    return () => {
+      current.removeEventListener('on:change', listener);
+    }
   }, [])
 
   return (
@@ -52,7 +59,7 @@ export const GoACheckbox: FC<Props> = ({ name, testId, error, checked, disabled,
       checked={checked}
       disabled={disabled}
       indeterminate={indeterminate}
-      content={content}
+      text={text}
       value={value}
     >
       {children}
