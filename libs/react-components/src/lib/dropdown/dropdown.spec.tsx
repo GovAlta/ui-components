@@ -34,7 +34,6 @@ describe('GoADropdown', () => {
     expect(queryByTestId('favColor-dropdown-option--yellow')).toBeInTheDocument();
     fireEvent.click(queryByTestId('favColor-dropdown-option--blue'));
     await waitFor(() => {
-      console.log(selectedColors)
       expect(selectedColors).toContain('blue');
     });
   })

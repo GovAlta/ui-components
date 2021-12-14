@@ -14,7 +14,17 @@ import {
   StateDisplay,
 } from '@abgov/shared/storybook-common';
 
-<Meta title="React/Web Components/Dropdown" component={GoADropdown} />
+<Meta
+  title="React/Web Components/Dropdown"
+  component={GoADropdown}
+  argTypes={{
+    disabled: { control: { type: 'boolean' } },
+    leadingIcon: { control: 'text' },
+    maxHeight: { control: 'text' },
+    multiSelect: { control: { type: 'boolean' } },
+    placeholder: { control: 'text' },
+  }}
+/>
 
 export const Template = (args) => {
   const [selectedValues, setValues] = useState(args.selectedValues);
@@ -30,6 +40,7 @@ export const Template = (args) => {
       <GoADropdown
         {...args}
         name="basic"
+        multiSelect={true}
         onChange={onChange}
         selectedValues={selectedValues}
       >
