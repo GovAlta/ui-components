@@ -181,19 +181,19 @@ a:focus {
 
 /* Typography */
 
-h1:first-child,
+/* h1:first-child,
 h2:first-child,
 h3:first-child {
   margin-top: 0 !important;
-}
+} */
 
 /* Base header margins */
-h1,
+/* h1,
 h2,
 h3,
 h4 {
   margin-bottom: 1rem;
-}
+} */
 
 /* Font sizes */
 h1 {
@@ -221,14 +221,14 @@ h6 {
 }
 
 /* Set top margin to subsequent headers */
-h1 + h2,
+/* h1 + h2,
 h1 + h3,
 h1 + h4,
 h2 + h3,
 h2 + h4,
 h3 + h4 {
   margin-top: 2rem;
-}
+} */
 
 p {
   margin-bottom: 1rem;
@@ -236,11 +236,11 @@ p {
 }
 
 /* prevent too much bottom space when a header immediately follows an <hr> */
-hr + h1,
+/* hr + h1,
 hr + h2,
 hr + h3 {
   margin-top: 0;
-}
+} */
 
 em {
   font-size: var(--fs-xs);

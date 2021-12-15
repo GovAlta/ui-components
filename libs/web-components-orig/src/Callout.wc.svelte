@@ -3,6 +3,8 @@
 <!-- Script -->
 <script lang="ts">
   export let type: "emergency" | "caution" | "information" | "event" | "success";
+  export let title: string;
+
   $: iconType =
     type === "emergency"
       ? "warning"
@@ -22,6 +24,7 @@
     <goa-icon type={iconType} inverted />
   </span>
   <span class="content">
+    <h2>{title}</h2>
     <slot />
   </span>
 </div>
@@ -31,9 +34,15 @@
   .notification {
     display: flex;
     align-items: stretch;
-    margin-bottom: 1rem;
     border-radius: 3px;
     overflow: hidden;
+    margin-bottom: 1.75rem;
+  }
+
+  h2 {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-regular);
+    margin-top: 0;
   }
 
   .emergency {
@@ -59,11 +68,11 @@
   .icon {
     flex: 0 0 3rem;
     text-align: center;
-    padding-top: 1.5rem;
+    padding-top: 1.75rem;
   }
   .content {
     flex: 1 1 auto;
     background-color: var(--color-gray-100);
-    padding: 1.5rem;
+    padding: 1.75rem;
   }
 </style>

@@ -21,6 +21,9 @@
   </goa-hero-banner>
 
   <goa-page-block>
+
+    <h2>Components</h2>
+
     <ul>
       <li><a href="#section-cards">Cards</a></li>
       <li><a href="#section-skeleton">Skeletons</a></li>
@@ -40,7 +43,7 @@
       <li><a href="#section-badges">Badges</a></li>
     </ul>
 
-    <h3 id="section-card">Cards</h3>
+    <h2 id="section-card">Cards</h2>
     <goa-card-group>
       <goa-card>
         <goa-card-content>
@@ -98,30 +101,31 @@
       </goa-card>
     </goa-card-group>
 
-    <h3 id="section-skeleton">Skeletons</h3>
-    <h4>Text</h4>
+
+    <h2 id="section-skeleton">Skeletons</h2>
+    <h3>Text</h3>
     <goa-skeleton type="text" />
     <goa-skeleton type="text" size={2} />
     <goa-skeleton type="text" size={3} />
     <goa-skeleton type="text" size={4} />
-    <h4>Avatar</h4>
+    <h3>Avatars</h3>
     <goa-skeleton type="avatar" />
     <goa-skeleton type="avatar" size={2} />
     <goa-skeleton type="avatar" size={3} />
     <goa-skeleton type="avatar" size={4} />
-    <h4>Headers</h4>
+    <h3>Headers</h3>
     <goa-skeleton type="header" />
     <goa-skeleton type="header" size={2} />
     <goa-skeleton type="header" size={3} />
     <goa-skeleton type="header" size={4} />
-    <h4>Paragraph</h4>
+    <h3>Paragraph</h3>
     <goa-skeleton type="paragraph" />
-    <h4>Thumbnail</h4>
+    <h3>Thumbnail</h3>
     <goa-skeleton type="thumbnail" />
     <goa-skeleton type="thumbnail" size={2} />
     <goa-skeleton type="thumbnail" size={3} />
     <goa-skeleton type="thumbnail" size={4} />
-    <h4>Card</h4>
+    <h3>Cards</h3>
     <goa-card-group>
       <goa-skeleton type="card" size={1} />
       <goa-skeleton type="card" size={1} />
@@ -132,15 +136,18 @@
       <goa-skeleton type="card" size={4} />
       <goa-skeleton type="card" size={4} />
     </goa-card-group>
-    <h4>Profile</h4>
+    <h3>Profiles</h3>
     <goa-skeleton type="profile" />
     <goa-skeleton type="profile" size={2} />
     <goa-skeleton type="profile" size={3} />
     <goa-skeleton type="profile" size={4} />
 
-    <h3 id="section-loader">Loader</h3>
+    <h2 id="section-loader">Loaders</h2>
+    <h3>Full screen</h3>
     <goa-button id="show-loader">Show page loader</goa-button>
     <goa-page-loader id="page-loader" class="progress" type="progress" variant="fullscreen" />
+
+    <h3>Inline</h3>
     <goa-page-loader class="progress" type="progress" message="Inline loading..." variant="inline" />
     <script>
       const el = document.querySelector('#show-loader');
@@ -151,6 +158,7 @@
       });
     </script>
 
+    <h3>Variants</h3>
     <goa-spinner type="infinite" size="small" />
     <goa-spinner type="infinite" size="medium" />
     <goa-spinner type="infinite" size="large" />
@@ -163,7 +171,6 @@
       <goa-spinner type="infinite" invert size="xlarge" />
     </div>
 
-    <goa-spinner class="progress" type="progress" size="xlarge" />
     <script>
       window.progress = 0;
       const ps = document.querySelectorAll('.progress');
@@ -180,7 +187,7 @@
       }, 1000);
     </script>
 
-    <h3 id="section-badges">Badges</h3>
+    <h2 id="section-badges">Badges</h2>
     <goa-badge content="Success" type="success">Success</goa-badge>
     <goa-badge content="Warning" type="warning"></goa-badge>
     <goa-badge content="Information" type="information"></goa-badge>
@@ -212,7 +219,7 @@
     <goa-badge icon type="midtone"></goa-badge>
     <goa-badge icon type="light"></goa-badge>
 
-    <h3 id="section-modal">Modal</h3>
+    <h2 id="section-modal">Modal</h2>
     <goa-button id="openModal">Show Modal</goa-button>
     <goa-modal id="modal" title="Modal Header....." closable scrollable>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
@@ -249,17 +256,14 @@
       });
     </script>
 
-    <h3 id="section-notification">Notification</h3>
+    <h2 id="section-notification">Notification</h2>
     <goa-notification type="information">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi saepe, maiores, praesentium minus quod reprehenderit consequuntur earum molestias aliquid amet, vitae eveniet harum incidunt sint. Numquam debitis molestias officia corporis.
     </goa-notification>
 
-    <h2>Header 2 (h2)</h2>
-    <h3>Header 3 (h3)</h3>
-
     <!-- Text Input -->
 
-    <h3 id="section-input">Input</h3>
+    <h2 id="section-input">Input</h2>
     <goa-flex-row gap="small">
       <goa-form-item label="First name" helptext="This is helper text">
         <goa-input id="firstname" name="firstname" disabled="false" />
@@ -274,7 +278,7 @@
       </goa-form-item>
     </goa-flex-row>
 
-    <h3 id="section-dropdown">DropDown / Combobox</h3>
+    <h2 id="section-dropdown">DropDown / Combobox</h2>
     <goa-form-item label="Favourite Actor">
       <goa-dropdown id="dropdown" name="autocomplete" autocomplete="foo" multiselect="bar">
         <goa-dropdown-item name="autocomplete" value="1" label="Tom Cruise" />
@@ -300,15 +304,14 @@
       });
     </script>
 
-    <h3 id="section-callout">Callout</h3>
-    <goa-callout type="success">
-      <h3>Callout title</h3>
+    <h2 id="section-callout">Callout</h2>
+    <goa-callout type="success" title="Callout title">
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi.</p>
     </goa-callout>
 
     <!-- Radio Groups -->
 
-    <h3 id="section-radio">Radio Buttons</h3>
+    <h2 id="section-radio">Radio Buttons</h2>
 
     <goa-checkbox id="radio-error" name="radio-error" text="Set radio error state" />
     <goa-form-item label="Favourite Color">
@@ -340,7 +343,7 @@
     <hr />
 
     <!-- Container -->
-    <h3 id="section-container">Container</h3>
+    <h2 id="section-container">Container</h2>
     <goa-modal id="modal2">
       <h2>Delete All</h2>
       <p>Delete the entire database and backups?</p>
@@ -354,7 +357,7 @@
     </goa-modal>
 
     <goa-container headingsize="large">
-      <h3>Header 3 (h3)</h3>
+      <h2>Header 3 (h2)</h2>
       <p style="line-height: 1.6rem;">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -393,7 +396,7 @@
     </script>
 
     <!-- Checkbox -->
-    <h3 id="section-checkbox">Checkbox</h3>
+    <h2 id="section-checkbox">Checkbox</h2>
 
     <goa-form-item label="Terms and conditions">
       <goa-checkbox
@@ -410,30 +413,30 @@
       });
     </script>
 
-    <h3 id="section-buttons">Button Groups</h3>
+    <h2 id="section-buttons">Button Groups</h2>
 
-    <h4>Align to Start</h4>
+    <h3>Align to Start</h3>
     <goa-button-group alignment="start">
       <goa-button type="tertiary">Cancel</goa-button>
       <goa-button type="primary" disabled title="This one is disabled">Save</goa-button>
     </goa-button-group>
 
-    <h4>Align to End</h4>
+    <h3>Align to End</h3>
     <goa-button-group alignment="end">
       <goa-button type="tertiary">Cancel</goa-button>
       <goa-button type="primary">Save</goa-button>
     </goa-button-group>
 
 
-    <h3 id="section-icon-buttons">Icon Buttons</h3>
+    <h2 id="section-icon-buttons">Icon Buttons</h2>
     <goa-icon-button type="close" />
 
-    <h3 id="section-icon-buttons">Icon Buttons (Inverted)</h3>
+    <h2 id="section-icon-buttons">Icon Buttons (Inverted)</h2>
     <div class="dark-bg">
       <goa-icon-button inverted type="close" />
     </div>
 
-    <h3 id="section-icons">Icons</h3>
+    <h2 id="section-icons">Icons</h2>
     <goa-icon type="close" />
 
   </goa-page-block>
