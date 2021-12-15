@@ -47,7 +47,7 @@
     <goa-card-group>
       <goa-card>
         <goa-card-content>
-          This is card content
+          This is a card top title with image
         </goa-card-content>
         <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
         <goa-card-actions>
@@ -55,49 +55,49 @@
         </goa-card-actions>
       </goa-card>
       <goa-card elevation={1}>
-        <goa-card-content>
-          This is card content
-        </goa-card-content>
         <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-content>
+          This is card content below the image
+        </goa-card-content>
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
       <goa-card elevation={2}>
         <goa-card-content>
-          This is card content
+          This is card with a taller image
         </goa-card-content>
-        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-image height="240px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
       <goa-card elevation={3}>
         <goa-card-content>
-          This is card content
+          This is card content with no image
         </goa-card-content>
-        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
       <goa-card elevation={4}>
         <goa-card-content>
-          This is card content
+          This is card content with multiple buttons
         </goa-card-content>
         <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
         <goa-card-actions>
+          <goa-button size="small" variant="tertiary">Button</goa-button>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
       <goa-card elevation={5}>
-        <goa-card-content>
-          This is card content
-        </goa-card-content>
-        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
+        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-content>
+          This is card content with actions at the top
+        </goa-card-content>
       </goa-card>
     </goa-card-group>
 
@@ -128,12 +128,8 @@
     <h3>Cards</h3>
     <goa-card-group>
       <goa-skeleton type="card" size={1} />
-      <goa-skeleton type="card" size={1} />
-      <goa-skeleton type="card" size={2} />
       <goa-skeleton type="card" size={2} />
       <goa-skeleton type="card" size={3} />
-      <goa-skeleton type="card" size={3} />
-      <goa-skeleton type="card" size={4} />
       <goa-skeleton type="card" size={4} />
     </goa-card-group>
     <h3>Profiles</h3>
@@ -222,18 +218,6 @@
     <h2 id="section-modal">Modal</h2>
     <goa-button id="openModal">Show Modal</goa-button>
     <goa-modal id="modal" title="Modal Header....." closable scrollable>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
 
         <goa-button slot="actions" size="medium">I Agree</goa-button>

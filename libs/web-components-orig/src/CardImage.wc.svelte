@@ -8,8 +8,8 @@
 
 <!-- HTML -->
 <div class="card-image"
-  style="background-image: url({src}); height: {height}; background-size: cover; background-position: center;"
-></div>
+  style="background-image: url({src}); height: {height}; background-size: cover; background-position: center;">
+</div>
 
 <!-- Style -->
 <style>

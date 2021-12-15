@@ -1,4 +1,4 @@
-import { GoABadge, GoAInfoBadge, GoAEmergencyBadge, GoASuccessBadge, GoAWarningBadge } from './badge/badge.component';
+import { GoABadge, GoAInfoBadge, GoAEmergencyBadge, GoASuccessBadge, GoAWarningBadge } from '../lib/badge/badge.component';
 import { GoAButton } from './button/button';
 import { GoAAppVersionHeader } from './app-version-header/app-version-header.component';
 import { GoACard } from './card/card.component';
@@ -12,12 +12,9 @@ import { GoATextArea } from './textarea/textarea.component';
 import { GoATransition, GoATransitionSequence } from './transitions';
 
 import type { GoAIconType } from './icons';
-import type { GoABadgeType } from './badge/badge.component';
-
-export type { GoAIconType, GoABadgeType };
+export type { GoAIconType };
 
 export {
-  GoABadge,
   GoAInfoBadge,
   GoAEmergencyBadge,
   GoASuccessBadge,

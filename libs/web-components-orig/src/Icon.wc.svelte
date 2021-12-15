@@ -3,7 +3,7 @@
 <script lang="ts" context="module">
   export type IconSize = "small" | "medium" | "large" | "xlarge";
   export type IconVariant = "primary" | "secondary" | "tertiary";
-  export type IconStyle = "outline" | "filled" | "sharp";
+  export type IconTheme = "outline" | "filled" | "sharp";
 
   export type GoAIconType =
     | "accessibility"
@@ -429,7 +429,7 @@
 
   export let type: GoAIconType;
   export let size: IconSize = 'medium';
-  export let styling: IconStyle = 'outline';
+  export let theme: IconTheme = 'outline';
   export let inverted: string;
 
   $: isInverted = toBoolean(inverted);
@@ -449,7 +449,7 @@
   style={`--size: ${_size}`}
   >
   {#if type}
-    <ion-icon style={`width: ${_size}; height: ${_size}`} name={styling === "filled" ? type : `${type}-${styling}`} />
+    <ion-icon style={`width: ${_size}; height: ${_size}`} name={theme === "filled" ? type : `${type}-${theme}`} />
   {/if}
 </div>
 

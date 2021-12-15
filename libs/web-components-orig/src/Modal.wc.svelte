@@ -11,7 +11,7 @@
 
   export let title: string;
   export let closable: string;
-  export let scrollable: string;
+  export let scrollable: string;  // TODO: determine if this flag is needed or not, things seem to work well with it always 'on'
   export let open: string;
 
   $: isClosable = toBoolean(closable);
@@ -49,13 +49,11 @@
     {/if}
     <div class="modal-content">
       {#if isScrollable}
-        <goa-scrollable direction="vertical" height="50">
-          <div style="padding: 1.75rem" >
-            <slot />
-          </div>
+        <goa-scrollable direction="vertical" height="50" hpadding="1.75" >
+          <slot />
         </goa-scrollable>
       {:else}
-        <div style="padding: 1.75rem" >
+        <div style="margin: 1.75rem" >
           <slot />
         </div>
       {/if}
@@ -129,7 +127,8 @@
 
   .modal-actions {
     text-align: right;
-    padding: 1.75rem;
+    padding: 0 1.75rem;
+    margin: 1.75rem 0;
     flex: 0 0 auto;
   }
 
@@ -146,8 +145,9 @@
   .modal-title {
     font-size: var(--fs-xl);
     padding-bottom: 1rem;
+    padding: 0 1.75rem;
+    margin: 1.75rem 0;
     margin-right: 40px; /*  close icon spacing */
-    padding: 1.75rem;
     flex: 0 0 auto;
   }
 </style>

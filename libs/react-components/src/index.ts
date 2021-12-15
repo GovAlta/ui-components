@@ -24,6 +24,9 @@ import GoAHeroBannerLink from './lib/hero-banner/link/hero-banner-link.component
 import GoAPageLoader from './lib/page-loader/page-loader';
 import { GoAElementLoader } from './lib/element-loader/element-loader';
 
+import type { GoABadgeType } from './lib/badge/badge.component';
+export type { GoABadgeType };
+
 export {
   GoAPageLoader,
   GoAElementLoader,

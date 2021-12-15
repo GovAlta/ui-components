@@ -21,6 +21,23 @@ declare global {
   }
 }
 
+
+interface WCProps {
+  name: GoAIconType | GoAIconFilledType
+  variant: GoAIconType | GoAIconFilledType
+  styling:
+}
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      'goa-icon': IonIconProps & React.HTMLAttributes<IonIconElement>
+    }
+  }
+}
+
 export type GoAIconType
   = 'accessibility'
   | 'add-circle'
@@ -452,14 +469,17 @@ interface Props {
 
 export function GoAIcon({ type, theme = 'outline', size = 'medium' }: Props): JSX.Element {
   const _size = getSize(size);
-  const _style: CSSProperties = {
-    fontSize: _size
-  }
+  // const _style: CSSProperties = {
+  //   fontSize: _size
+  // }
   return (
-    <div style={{ width: _size }} className="goa-icon" data-testid={`icon-${type}`}>
-      <ion-icon style={_style} name={theme === 'filled' ? type : `${type}-${theme}`}></ion-icon>
-    </div>
-  )
+    <goa-icon type={type} theme={theme}  />
+  );
+  // return (
+  //   <div style={{ width: _size }} className="goa-icon" data-testid={`icon-${type}`}>
+  //     <ion-icon style={_style} name={theme === 'filled' ? type : `${type}-${theme}`}></ion-icon>
+  //   </div>
+  // )
 }
 
 function getSize(size: IconSize): string {

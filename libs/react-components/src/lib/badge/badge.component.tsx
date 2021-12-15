@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import classnames from 'classnames';
 import styles from './badge.module.scss';
-import { GoAIcon, GoAIconType } from '../icons';
+import { GoAIcon, GoAIconType } from '../../experimental/icons';
 
 export type GoABadgeType
   = 'information'
