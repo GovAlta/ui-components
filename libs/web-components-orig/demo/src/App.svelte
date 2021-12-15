@@ -4,7 +4,7 @@
 
 <main>
 
-  <goa-service-level-header level="alpha" />
+  <goa-service-level-header level="alpha" version="v1.2.3" />
 
   <!-- App Header -->
   <goa-app-header url="http://google.com" title="Digital File Service">
