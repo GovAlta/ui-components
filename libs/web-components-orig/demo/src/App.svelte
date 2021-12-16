@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>GoA Component Playground</title>
+</svelte:head>
+
 <script>
   import '../../src';
 </script>
@@ -309,7 +313,7 @@
 
     <h2 id="section-dropdown">DropDown / Combobox</h2>
     <goa-form-item label="Favourite Actor">
-      <goa-dropdown id="dropdown" name="autocomplete" multiselect>
+      <goa-dropdown id="dropdown" name="autocomplete" multiselect autocomplete>
         <goa-dropdown-item name="autocomplete" value="1" label="Tom Cruise" />
         <goa-dropdown-item name="autocomplete" value="2" label="Nicholas Cage">
           <div class="custom-dropdown-content">
@@ -332,11 +336,6 @@
         console.log(e.detail.data);
       });
     </script>
-
-    <h2 id="section-callout">Callout</h2>
-    <goa-callout type="success" title="Callout title">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi.
-    </goa-callout>
 
     <!-- Radio Groups -->
 
@@ -367,6 +366,12 @@
         }
       });
     </script>
+
+
+    <h2 id="section-callout">Callout</h2>
+    <goa-callout type="success" title="Callout title">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi.
+    </goa-callout>
 
 
     <hr />
