@@ -3,10 +3,10 @@
 <script lang="ts">
   import { toBoolean } from './common/utils';
 
-  export let text = '';
   export let type = 'primary'; // primary, secondary, tertiary, borderless
   export let size = 'medium'; // small, medium, large
   export let variant = 'default'; // default, danger
+  export let title: string;
   export let disabled: string;
 
   $: isDisabled = toBoolean(disabled);
@@ -17,12 +17,8 @@
   }
 </script>
 
-<button class="{type} {size} {variant}" on:click={clickHandler} disabled={isDisabled}>
-  {#if text}
-    {text}
-  {:else}
-    <slot />
-  {/if}
+<button class="{type} {size} {variant}" {title} on:click={clickHandler} disabled={isDisabled}>
+  <slot />
 </button>
 
 <style>

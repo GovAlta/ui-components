@@ -1,5 +1,4 @@
 import { GoAElementLoader } from './element-loader';
-import { GoAButton } from '../../lib/button/button';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 
@@ -33,10 +32,6 @@ export const Template = (args) => (
 
 export const TemplateElement = (args) => (
   <div>
-    <GoAButton buttonType="primary" buttonSize="normal">
-      Loading please wait...
-      <GoAElementLoader {...args} />
-    </GoAButton>
   </div>
 );
 

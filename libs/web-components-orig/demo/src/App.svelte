@@ -45,6 +45,7 @@
 
     <h2 id="section-card">Cards</h2>
     <goa-card-group>
+
       <goa-card>
         <goa-card-content>
           This is a card top title with image
@@ -54,6 +55,7 @@
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
+
       <goa-card elevation={1}>
         <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
         <goa-card-content>
@@ -63,23 +65,29 @@
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
+
       <goa-card elevation={2}>
         <goa-card-content>
           This is card with a taller image
         </goa-card-content>
-        <goa-card-image height="240px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-image height="300px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
+
       <goa-card elevation={3}>
         <goa-card-content>
-          This is card content with no image
+          This is card content with no image.
+          <br>
+          <br>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque laboriosam numquam, quidem nihil accusantium dolore harum. Consequuntur facilis, perspiciatis reiciendis possimus iusto, magni ut quisquam ex necessitatibus eum in modi?
         </goa-card-content>
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
+
       <goa-card elevation={4}>
         <goa-card-content>
           This is card content with multiple buttons
@@ -90,6 +98,7 @@
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
+
       <goa-card elevation={5}>
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
@@ -99,6 +108,7 @@
           This is card content with actions at the top
         </goa-card-content>
       </goa-card>
+
     </goa-card-group>
 
 
@@ -140,19 +150,19 @@
 
     <h2 id="section-loader">Loaders</h2>
     <h3>Full screen</h3>
-    <goa-button id="show-loader">Show page loader</goa-button>
-    <goa-page-loader id="page-loader" class="progress" type="progress" variant="fullscreen" />
 
-    <h3>Inline</h3>
-    <goa-page-loader class="progress" type="progress" message="Inline loading..." variant="inline" />
+    <goa-button id="show-loader">Show page loader</goa-button>
+    <goa-page-loader id="page-loader" class="progress" type="progress" variant="fullscreen" message="loading.." />
     <script>
       const el = document.querySelector('#show-loader');
       el.addEventListener('on:click', () => {
         const loader = document.querySelector('#page-loader');
         loader.setAttribute('show', "true")
-        loader.setAttribute('message', "loading...");
-      });
+      })
     </script>
+
+    <h3>Inline</h3>
+    <goa-page-loader class="progress" type="progress" message="Inline loading..." variant="inline" />
 
     <h3>Variants</h3>
     <goa-spinner type="infinite" size="small" />
@@ -174,6 +184,23 @@
         window.progress += 10
         ps.forEach(p => {
           p.setAttribute('progress', window.progress)
+          switch(true) {
+            case window.progress < 20:
+              p.setAttribute('message', 'loading..')
+              break;
+            case window.progress < 40:
+              p.setAttribute('message', 'taking longer than I thought..')
+              break;
+            case window.progress < 60:
+              p.setAttribute('message', 'let\'s grab a coffee..')
+              break;
+            case window.progress < 80:
+              p.setAttribute('message', 'I\'m bored..')
+              break;
+            case window.progress < 100:
+              p.setAttribute('message', 'almost there..')
+              break;
+          }
           if (window.progress >= 100) {
             window.progress = 0;
             p.removeAttribute('show');
@@ -184,40 +211,48 @@
     </script>
 
     <h2 id="section-badges">Badges</h2>
-    <goa-badge content="Success" type="success">Success</goa-badge>
-    <goa-badge content="Warning" type="warning"></goa-badge>
-    <goa-badge content="Information" type="information"></goa-badge>
-    <goa-badge content="Emergency" type="emergency"></goa-badge>
-    <goa-badge content="Inactive" type="inactive"></goa-badge>
-    <goa-badge content="Dark" type="dark"></goa-badge>
-    <goa-badge content="Midtone" type="midtone"></goa-badge>
-    <goa-badge content="Light" type="light"></goa-badge>
+    <goa-badge content="Success" type="success" />
+    <goa-badge content="Warning" type="warning" />
+    <goa-badge content="Information" type="information" />
+    <goa-badge content="Emergency" type="emergency" />
+    <goa-badge content="Inactive" type="inactive" />
+    <goa-badge content="Dark" type="dark" />
+    <goa-badge content="Midtone" type="midtone" />
+    <goa-badge content="Light" type="light" />
 
     <br>
     <br>
-    <goa-badge icon content="Success" type="success"></goa-badge>
-    <goa-badge icon content="Warning" type="warning"></goa-badge>
-    <goa-badge icon content="Information" type="information"></goa-badge>
-    <goa-badge icon content="Emergency" type="emergency"></goa-badge>
-    <goa-badge icon content="Inactive" type="inactive"></goa-badge>
-    <goa-badge icon content="Dark" type="dark"></goa-badge>
-    <goa-badge icon content="Midtone" type="midtone"></goa-badge>
-    <goa-badge icon content="Light" type="light"></goa-badge>
+    <goa-badge icon content="Success" type="success" />
+    <goa-badge icon content="Warning" type="warning" />
+    <goa-badge icon content="Information" type="information" />
+    <goa-badge icon content="Emergency" type="emergency" />
+    <goa-badge icon content="Inactive" type="inactive" />
+    <goa-badge icon content="Dark" type="dark" />
+    <goa-badge icon content="Midtone" type="midtone" />
+    <goa-badge icon content="Light" type="light" />
 
     <br>
     <br>
-    <goa-badge icon type="success"></goa-badge>
-    <goa-badge icon type="warning"></goa-badge>
-    <goa-badge icon type="information"></goa-badge>
-    <goa-badge icon type="emergency"></goa-badge>
-    <goa-badge icon type="inactive"></goa-badge>
-    <goa-badge icon type="dark"></goa-badge>
-    <goa-badge icon type="midtone"></goa-badge>
-    <goa-badge icon type="light"></goa-badge>
+    <goa-badge icon type="success" />
+    <goa-badge icon type="warning" />
+    <goa-badge icon type="information" />
+    <goa-badge icon type="emergency" />
+    <goa-badge icon type="inactive" />
+    <goa-badge icon type="dark" />
+    <goa-badge icon type="midtone" />
+    <goa-badge icon type="light" />
 
     <h2 id="section-modal">Modal</h2>
     <goa-button id="openModal">Show Modal</goa-button>
     <goa-modal id="modal" title="Modal Header....." closable scrollable>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
 
         <goa-button slot="actions" size="medium">I Agree</goa-button>
@@ -262,9 +297,19 @@
       </goa-form-item>
     </goa-flex-row>
 
+    <goa-form-item label="Comments" optional>
+      <goa-textarea id="comments" name="comments" />
+    </goa-form-item>
+
+    <script>
+      document.getElementById('comments').addEventListener('on:change', (e) => {
+        console.log('comments changed', e.detail);
+      });
+    </script>
+
     <h2 id="section-dropdown">DropDown / Combobox</h2>
     <goa-form-item label="Favourite Actor">
-      <goa-dropdown id="dropdown" name="autocomplete" autocomplete="foo" multiselect="bar">
+      <goa-dropdown id="dropdown" name="autocomplete" multiselect>
         <goa-dropdown-item name="autocomplete" value="1" label="Tom Cruise" />
         <goa-dropdown-item name="autocomplete" value="2" label="Nicholas Cage">
           <div class="custom-dropdown-content">
@@ -290,7 +335,7 @@
 
     <h2 id="section-callout">Callout</h2>
     <goa-callout type="success" title="Callout title">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi.</p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi.
     </goa-callout>
 
     <!-- Radio Groups -->
@@ -340,7 +385,7 @@
       </script>
     </goa-modal>
 
-    <goa-container headingsize="large">
+    <goa-container>
       <h2>Header 3 (h2)</h2>
       <p style="line-height: 1.6rem;">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -369,15 +414,6 @@
       });
     </script>
 
-    <goa-form-item label="Comments" optional>
-      <goa-textarea id="comments" name="comments" disabled />
-    </goa-form-item>
-
-    <script>
-      document.getElementById('comments').addEventListener('on:change', (e) => {
-        console.log('comments changed', e.detail);
-      });
-    </script>
 
     <!-- Checkbox -->
     <h2 id="section-checkbox">Checkbox</h2>

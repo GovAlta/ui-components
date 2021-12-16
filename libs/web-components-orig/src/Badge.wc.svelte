@@ -4,7 +4,7 @@
 <script lang="ts">
   import { toBoolean } from "./common/utils";
 
-  export let type: string;  // "success" | "warning" | "information" | "emergency" | "inactive" | "dark" | "midtone" | "light";
+  export let type: "success" | "warning" | "information" | "emergency" | "inactive" | "dark" | "midtone" | "light";
   export let content: string;
 
   // optional
@@ -27,7 +27,9 @@
 </script>
 
 <!-- HTML -->
-<div data-testid={testId}
+<div
+  data-testid={testId}
+  data-type="goa-badge"
   class="goa-badge badge-{type}"
   class:icon-only={showIcon && !content}
   >

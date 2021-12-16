@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
-import classnames from 'classnames';
-import styles from './badge.module.scss';
-import { GoAIcon, GoAIconType } from '../../experimental/icons';
+import { GoAIconType } from '../../experimental/icons';
+import './badge.scss';
 
+// TODO: move types like this into a shared file
 export type GoABadgeType
   = 'information'
   | 'success'
@@ -21,47 +21,49 @@ interface GoABadgeProps {
   testId?: string;
 }
 
+interface WCProps {
+  type: GoABadgeType;
+  icon?: GoAIconType;
+  content?: string;
+  testid?: string;
+}
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      'goa-badge': WCProps & React.HTMLAttributes<HTMLElement>
+    }
+  }
+}
+
 export const GoABadge: FC<GoABadgeProps> = ({ type, content, icon, testId }: GoABadgeProps) => {
   return (
-    <div data-testid={testId} className={classnames(styles['goa-badge'], styles[`badge-${type}`])}>
-      {icon && <GoAIcon type={icon} />}
-      <div className={classnames(styles['goa-badge-content'])}>{content}</div>
-    </div>
+    <goa-badge type={type} content={content} icon={icon} testid={testId} />
   )
 }
 
 export const GoAInfoBadge: FC<GoABadgeProps> = ({ content, testId }: GoABadgeProps) => {
   return (
-    <div data-testid={testId} className={classnames(styles['goa-badge'], styles[`badge-information`])}>
-      <GoAIcon type="information-circle" />
-      <div className={classnames(styles['goa-badge-content'])}>{content}</div>
-    </div>
+    <GoABadge type="information" icon="information-circle" content={content} testId={testId} />
   )
 }
 
 export const GoASuccessBadge: FC<GoABadgeProps> = ({ content, testId }: GoABadgeProps) => {
   return (
-    <div data-testid={testId} className={classnames(styles['goa-badge'], styles[`badge-success`])}>
-      <GoAIcon type="checkmark-circle" />
-      <div className={classnames(styles['goa-badge-content'])}>{content}</div>
-    </div>
+    <GoABadge type="success" icon="checkmark-circle" content={content} testId={testId} />
   )
 }
 
 export const GoAWarningBadge: FC<GoABadgeProps> = ({ content, testId }: GoABadgeProps) => {
   return (
-    <div data-testid={testId} className={classnames(styles['goa-badge'], styles[`badge-warning`])}>
-      <GoAIcon type="warning" />
-      <div className={classnames(styles['goa-badge-content'])}>{content}</div>
-    </div>
+    <GoABadge type="warning" icon="warning" content={content} testId={testId} />
   )
 }
 
 export const GoAEmergencyBadge: FC<GoABadgeProps> = ({ content, testId }: GoABadgeProps) => {
   return (
-    <div data-testid={testId} className={classnames(styles['goa-badge'], styles[`badge-emergency`])}>
-      <GoAIcon type="alert-circle" />
-      <div className={classnames(styles['goa-badge-content'])}>{content}</div>
-    </div>
+    <GoABadge type="emergency" icon="alert-circle" content={content} testId={testId} />
   )
 }

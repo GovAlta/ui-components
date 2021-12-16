@@ -1,0 +1,10 @@
+goa-button + goa-button {
+  margin-top: 1.5rem;
+}
+
+/* TODO: these margins need to match UI specs */
+@media (min-width: 480px) {
+  goa-button + goa-button {
+    margin-top: 1.5rem;
+  }
+}

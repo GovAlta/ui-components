@@ -7,7 +7,6 @@ import '../../core-css/src/lib/styles/fonts/fonts.scss';
 
 import GoACallout from './lib/callout/callout';
 import GoANotification from './lib/notification/notification';
-import GoAButton from './lib/button/button';
 import GoAServiceLevelHeader from './lib/service-level-header/service-level-header';
 import GoAMicrositeLogo from './lib/microsite-logo/microsite-logo';
 import GoAHeroBanner from './lib/hero-banner/hero-banner.component';
@@ -37,7 +36,6 @@ export {
   GoARadioGroup,
   GoARadio,
   GoACallout,
-  GoAButton,
   GoAServiceLevelHeader,
   GoAMicrositeLogo,
   GoAHeroBanner,

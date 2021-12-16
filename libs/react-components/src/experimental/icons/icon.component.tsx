@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
 import './icons.scss'
 
 type GoAIconFilledType = `${GoAIconType}-${IconTheme}`;
@@ -22,18 +22,12 @@ declare global {
 }
 
 
-interface WCProps {
-  name: GoAIconType | GoAIconFilledType
-  variant: GoAIconType | GoAIconFilledType
-  styling:
-}
-
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      'goa-icon': IonIconProps & React.HTMLAttributes<IonIconElement>
+      'goa-icon': WCProps & React.HTMLAttributes<IonIconElement>
     }
   }
 }
@@ -462,35 +456,19 @@ export type IconTheme = 'outline' | 'filled' | 'sharp';
 
 
 interface Props {
-  type: GoAIconType,
+  type: GoAIconType;
   size?: IconSize;
   theme?: IconTheme;
 }
 
-export function GoAIcon({ type, theme = 'outline', size = 'medium' }: Props): JSX.Element {
-  const _size = getSize(size);
-  // const _style: CSSProperties = {
-  //   fontSize: _size
-  // }
-  return (
-    <goa-icon type={type} theme={theme}  />
-  );
-  // return (
-  //   <div style={{ width: _size }} className="goa-icon" data-testid={`icon-${type}`}>
-  //     <ion-icon style={_style} name={theme === 'filled' ? type : `${type}-${theme}`}></ion-icon>
-  //   </div>
-  // )
+interface WCProps {
+  type: GoAIconType;
+  theme: IconTheme;
+  size: IconSize;
 }
 
-function getSize(size: IconSize): string {
-  switch (size) {
-    case 'small':
-      return "14px"
-    case 'medium':
-      return "18px"
-    case 'large':
-      return "24px"
-    case 'xlarge':
-      return "32px"
-  }
+export function GoAIcon({ type, theme = 'outline', size = 'medium' }: Props): JSX.Element {
+  return (
+    <goa-icon type={type} theme={theme} size={size}  />
+  );
 }

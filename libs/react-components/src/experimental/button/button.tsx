@@ -1,34 +1,61 @@
-import React, { FC, LegacyRef, MutableRefObject, useRef } from 'react';
-import styles from './button.module.scss';
+import { useEffect } from '@storybook/addons';
+import React, { FC, ReactNode, useRef } from 'react';
+import './button.css';
 
 type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'borderless';
 type ButtonSize = 'small' | 'medium' | 'large';
-
 type ButtonVariant = 'default' | 'danger'
+
+
+interface WCProps {
+  type?: ButtonType;
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  disabled?: boolean
+  title: string;
+  ref: React.MutableRefObject<HTMLElement>;
+}
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      'goa-button': WCProps & React.HTMLAttributes<HTMLElement>
+    }
+  }
+}
 
 type ButtonProps = {
   type?: ButtonType;
-  size?: ButtonSize;
   title?: string;
+  size?: ButtonSize;
   variant?: ButtonVariant;
+  disabled?: boolean;
   onClick: () => void;
   [key: string]: unknown;
+  children: ReactNode;
 };
 
-export const GoAButton: FC<ButtonProps> = ({ type = 'primary', size = 'medium', variant = 'default', title, children, onClick, ...props }) => {
-  const css = [
-    styles[`goa-button--${type}`],
-    styles[`goa-button--${size}`],
-    styles[`goa-button--${variant}`],
-    styles['goa-button'],
-  ].join(' ');
-  const buttonRef = useRef();
+export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'primary', size = 'medium', variant = 'default', children, onClick }) => {
+  const el = useRef<HTMLElement>();
+  useEffect(() => {
+    const current = el.current;
+    const listener = (e: CustomEvent) => {
+      onClick();
+    };
+
+    current.addEventListener('on:change', listener)
+    return () => {
+      current.removeEventListener('on:change', listener);
+    }
+  }, [el, onClick])
 
   return (
-    <button className={css} ref={buttonRef} title={title} onClick={onClick} {...props}>
+    <goa-button ref={el} type={type} size={size} variant={variant} disabled={disabled} title={title}>
       {children}
-    </button>
+    </goa-button>
   );
-}
-  ;
+};
+
 export default GoAButton;
