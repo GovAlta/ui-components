@@ -45,11 +45,15 @@ export const GoADropdown: FC<Props> = (props) => {
 
   const el = useRef<HTMLElement>();
   useEffect(() => {
-    el.current.addEventListener('on:change', (state: CustomEvent) => {
+    const current = el.current;
+    const handler = (state: CustomEvent) => {
       const { name, value } = state.detail.data;
-      props.onChange(name, value)
-    })
-
+      props.onChange(name, value);
+    };
+    current.addEventListener('on:change', handler);
+    return () => {
+      current.removeEventListener('on:change', handler);
+    }
   }, [el, props])
 
   return (
