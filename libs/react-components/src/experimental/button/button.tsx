@@ -1,5 +1,4 @@
-import { useEffect } from '@storybook/addons';
-import React, { FC, ReactNode, useRef } from 'react';
+import React, { FC, ReactNode, useEffect, useRef } from 'react';
 import './button.css';
 
 type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'borderless';
@@ -33,7 +32,6 @@ type ButtonProps = {
   variant?: ButtonVariant;
   disabled?: boolean;
   onClick: () => void;
-  [key: string]: unknown;
   children: ReactNode;
 };
 

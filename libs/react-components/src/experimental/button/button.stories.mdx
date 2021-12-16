@@ -42,22 +42,24 @@ A user input control that performs an action, typically on click
 
 ## Overview
 
-export const Template = (args) => (
-  <div>
-    <GoAButton onClick={() => {}} {...args} type="primary">
-      Primary
-    </GoAButton>
-    <GoAButton onClick={() => {}} {...args} type="secondary">
-      Secondary
-    </GoAButton>
-    <GoAButton onClick={() => {}} {...args} type="tertiary">
-      Tertiary
-    </GoAButton>
-    <GoAButton onClick={() => {}} {...args} type="borderless">
-      Borderless
-    </GoAButton>
-  </div>
-);
+export const Template = (args) => {
+  return (
+    <div>
+      <GoAButton onClick={() => {}} {...args} type="primary">
+        Primary
+      </GoAButton>
+      <GoAButton onClick={() => {}} {...args} type="secondary">
+        Secondary
+      </GoAButton>
+      <GoAButton onClick={() => {}} {...args} type="tertiary">
+        Tertiary
+      </GoAButton>
+      <GoAButton onClick={() => {}} {...args} type="borderless">
+        Borderless
+      </GoAButton>
+    </div>
+  )
+};
 
 <Canvas>
   <Story
