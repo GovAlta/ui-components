@@ -1,7 +1,6 @@
 import React from 'react';
 import './skeleton.scss';
 import 'goa-web-components';
-import './skeleton.scss';
 
 type SkeletonType = "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile";
 
