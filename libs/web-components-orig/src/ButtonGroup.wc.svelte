@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let alignment: "start"; // "start", "end"
+  export let alignment: "start" | "end";
 </script>
 
 <!-- HTML -->

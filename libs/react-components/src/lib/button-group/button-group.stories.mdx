@@ -1,0 +1,80 @@
+import GoAButtonGroup from './button-group';
+import GoAButton from '../../experimental/button/button';
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs';
+
+import { action } from '@storybook/addon-actions';
+import { DoDont } from '@abgov/shared/storybook-common';
+import 'goa-web-components';
+
+<Meta
+  title="React/Web Components/Button Groups"
+  component={GoAButtonGroup}
+  argTypes={{
+    alignment: {
+      control: {
+        type: 'select',
+        options: ['left', 'right'],
+      },
+    },
+  }}
+/>
+
+# Button Group
+
+<!-- TODO: add some details here -->
+
+## Overview
+
+export const Template = (args) => {
+  return (
+    <GoAButtonGroup alignment={args.alignment}>
+      <GoAButton onClick={() => {}} {...args} type="primary">
+        Primary
+      </GoAButton>
+      <GoAButton onClick={() => {}} {...args} type="secondary">
+        Secondary
+      </GoAButton>
+    </GoAButtonGroup>
+  );
+};
+
+<Canvas>
+  <Story
+    name="Left Alignment"
+    args={{
+      alignment: 'left',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Right Alignment"
+    args={{
+      alignment: 'right',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Examples
+
+```html
+<GoAButtonGroup alignment="right">
+  <GoAButton variant="danger" type="primary" title="Delete"> Delete </GoAButton>
+</GoAButtonGroup>
+```
+
+## Properties
+
+<Description of={GoAButtonGroup} />
+<ArgsTable of={GoAButtonGroup} />

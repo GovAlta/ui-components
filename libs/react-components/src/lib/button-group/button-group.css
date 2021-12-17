@@ -1,0 +1,12 @@
+/* TODO: move this into core-css */
+goa-button-group > goa-button ~ goa-button {
+  margin: 0;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 320px) {
+  goa-button-group > goa-button ~ goa-button {
+    margin: 0;
+    /* margin-left: 0.25rem; */
+  }
+}
