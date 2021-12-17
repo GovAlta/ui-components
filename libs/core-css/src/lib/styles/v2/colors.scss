@@ -1,4 +1,8 @@
-:host, :root {
+:host,
+:root {
+  --color-white: #fff;
+  --color-black: #333;
+
   --color-gray-100: #f1f1f1;
   --color-gray-200: #dcdcdc;
   --color-gray-500: #adadad;
@@ -35,7 +39,7 @@
   --shadow-0: 0 0 rgba(0, 0, 0, 0);
   --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.24);
   --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
-  --shadow-3: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
+  --shadow-3: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
   --shadow-4: 0 15px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05);
   --shadow-5: 0 20px 40px rgba(0, 0, 0, 0.2);
 

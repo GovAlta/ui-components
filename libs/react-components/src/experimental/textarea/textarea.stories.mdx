@@ -11,12 +11,32 @@ import {
 } from '@storybook/addon-docs';
 
 <Meta
-  title="Experimental/Components/TextArea"
+  title="Experimental/Web Components/TextArea"
   component={GoATextArea}
   argTypes={{
-    type: {
+    name: {
       control: {
         type: 'string',
+      },
+    },
+    value: {
+      control: {
+        type: 'string',
+      },
+    },
+    placeholder: {
+      control: {
+        type: 'string',
+      },
+    },
+    rows: {
+      control: {
+        type: 'number',
+      },
+    },
+    disabeld: {
+      control: {
+        type: 'boolean',
       },
     },
   }}
@@ -33,12 +53,12 @@ Provides the html textarea element with the GoA theme and custom bindings.
 export const FormTemplate = (args) => {
   const [state, setState] = useState({});
   const onChange = (name, value) => {
+    console.log('onChange', name, value);
     setState({ ...state, [name]: value });
   };
   return (
     <StateDisplay title="GoATextArea" state={state}>
       <GoATextArea
-        id="aboutme"
         name="aboutme"
         value={state.aboutme}
         onChange={onChange}
@@ -57,8 +77,8 @@ interface Props {
   onChange: OnChange;
 
   // optional
-  id?: string;
   placeholder?: string;
+  rows?: number;
 }
 ```
 
@@ -74,7 +94,6 @@ export const ApplicationForm: FC = () => {
   };
   return (
     <GoATextArea
-      id="aboutme"
       name="aboutme"
       value={state.aboutme}
       onChange={onChange}

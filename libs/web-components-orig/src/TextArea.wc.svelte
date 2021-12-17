@@ -57,6 +57,7 @@
     color: var(--color-gray-900, #ccc);
     padding: var(--input-padding, 0.5rem);
     font-size: var(--input-font-size);
+    font-family: var(--font-family);
   }
 
   .goa-textarea[readonly] {

@@ -43,9 +43,9 @@ export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'pr
       onClick();
     };
 
-    current.addEventListener('on:change', listener)
+    current.addEventListener('on:click', listener)
     return () => {
-      current.removeEventListener('on:change', listener);
+      current.removeEventListener('on:click', listener);
     }
   }, [el, onClick])
 
