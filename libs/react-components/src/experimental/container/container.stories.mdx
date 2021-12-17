@@ -1,4 +1,4 @@
-import { GoACard, GoAFlexRow } from '..';
+import { GoAContainer, GoAFlexRow } from '..';
 import { GoAButton } from '../..';
 import {
   Meta,
@@ -11,7 +11,7 @@ import {
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
 
-<Meta title="Experimental/Components/Card" component={GoACard} argTypes={{}} />
+<Meta title="Experimental/Web Components/Container" component={GoAContainer} argTypes={{}} />
 
 # Card
 
@@ -21,19 +21,19 @@ should be placed on them in a way that clearly indicates hierarchy.
 
 ## Overview
 
-export const Template = (args) => <GoACard {...args} />;
+export const Template = (args) => <GoAContainer {...args} />;
 
 export const NestedTemplate = (args) => {
   return (
     <>
-      <GoACard {...args}>
+      <GoAContainer {...args}>
         <div>This is the primary card</div>
-        <GoACard type="primary">This is a nested primary card</GoACard>
-        <GoACard type="secondary">This is a nested secondary card</GoACard>
-        <GoACard type="tertiary">
+        <GoAContainer type="primary">This is a nested primary card</GoAContainer>
+        <GoAContainer type="secondary">This is a nested secondary card</GoAContainer>
+        <GoAContainer type="tertiary">
           This is tertiary nested secondary card
-        </GoACard>
-      </GoACard>
+        </GoAContainer>
+      </GoAContainer>
     </>
   );
 };
@@ -41,14 +41,14 @@ export const NestedTemplate = (args) => {
 export const ButtonTemplate = (args) => {
   return (
     <>
-      <GoACard {...args}>
+      <GoAContainer {...args}>
         <GoAButton buttonType="tertiary">Action 1</GoAButton>
         <GoAButton buttonType="tertiary">Action 2</GoAButton>
-      </GoACard>
-      <GoACard {...args}>
+      </GoAContainer>
+      <GoAContainer {...args}>
         <a href="#">Learn More</a>
-      </GoACard>
-      <GoACard {...args} />
+      </GoAContainer>
+      <GoAContainer {...args} />
     </>
   );
 };
@@ -65,7 +65,7 @@ export const RealworldTemplate = (args) => {
       <h3>Request details ID 235435 - Doe, John Scott</h3>
       <GoAFlexRow gap="small">
         <div style={sideCss}>
-          <GoACard type="secondary" title="Appearance Details">
+          <GoAContainer type="secondary" title="Appearance Details">
             <GoAFlexRow gap="small" minWidth={100}>
               <div>
                 <h6>Accused name</h6>
@@ -118,17 +118,17 @@ export const RealworldTemplate = (args) => {
                 </dd>
               </dl>
             </div>
-          </GoACard>
+          </GoAContainer>
         </div>
         <div style={mainCss}>
-          <GoACard type="primary">
+          <GoAContainer type="primary">
             <header>
               <h3>
                 Docket Number <small>904822</small>
               </h3>
             </header>
             <h4>First Appearance</h4>
-            <GoACard type="primary" title="Appearance summary">
+            <GoAContainer type="primary" title="Appearance summary">
               <GoAFlexRow gap="small" minWidth="40ch">
                 <div>
                   <h6>Reason for adjournment</h6>
@@ -139,9 +139,9 @@ export const RealworldTemplate = (args) => {
                   <div>Duty counsel - this appearance only</div>
                 </div>
               </GoAFlexRow>
-            </GoACard>
+            </GoAContainer>
             <h4>Second Appearance</h4>
-            <GoACard type="secondary" title="Adjournment request summary">
+            <GoAContainer type="secondary" title="Adjournment request summary">
               <GoAFlexRow gap="small" minWidth="40ch">
                 <div>
                   <h6>Reason for adjournment</h6>
@@ -162,8 +162,8 @@ export const RealworldTemplate = (args) => {
                   <div>Legal Aid of Alberta</div>
                 </div>
               </GoAFlexRow>
-            </GoACard>
-          </GoACard>
+            </GoAContainer>
+          </GoAContainer>
         </div>
       </GoAFlexRow>
     </>
@@ -238,10 +238,10 @@ export const RealworldTemplate = (args) => {
 
 ## Properties
 
-### GoACard
+###GoAContainer
 
-<Description of={GoACard} />
-<ArgsTable of={GoACard} />
+<Description of={GoAContainer} />
+<ArgsTable of={GoAContainer} />
 
 ## Usage guidelines
 

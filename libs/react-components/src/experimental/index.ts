@@ -1,7 +1,7 @@
 import { GoABadge, GoAInfoBadge, GoAEmergencyBadge, GoASuccessBadge, GoAWarningBadge } from '../lib/badge/badge.component';
 import { GoAButton } from './button/button';
 import { GoAAppVersionHeader } from './app-version-header/app-version-header.component';
-import { GoACard } from './card/card.component';
+import { GoAContainer } from './container/container';
 import { GoAFlexRow } from './flex';
 import { GoAFormItem, GoAFormActions, GoAForm } from './form/form.component';
 import { GoAIcon, GoAIconButton } from './icons';
@@ -21,7 +21,7 @@ export {
   GoAWarningBadge,
   GoAButton,
   GoAAppVersionHeader,
-  GoACard,
+  GoAContainer,
   GoAFlexRow,
   GoAForm,
   GoAFormActions,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import GoACard from './card.component';
+import GoACard from './container';
 
 describe('GoA Card', () => {
   const title = 'My Card title';

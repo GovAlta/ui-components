@@ -2,8 +2,8 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let variant: string = 'default'; // 'primary' | 'info' | 'error' | 'success' | 'warning' | ''
-  export let headingsize: string = 'large';  //  'large' | 'small' | 'none'
+  export let variant: 'primary' | 'info' | 'error' | 'success' | 'warning' | 'default' = 'info'
+  export let headingsize: 'large' | 'small' | 'none' = 'large';
 </script>
 
 <!-- HTML -->
