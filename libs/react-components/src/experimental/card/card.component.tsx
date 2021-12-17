@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import React, { FC } from 'react';
-import css from './card.module.scss';
 
 interface Props {
   title?: string;
@@ -10,7 +9,7 @@ interface Props {
   other?: Record<string, unknown>;
 }
 
-export const GoACard: FC<Props> = ({
+export const GoAContainer : FC<Props> = ({
   title,
   children,
   type = 'primary',
@@ -36,4 +35,4 @@ export const GoACard: FC<Props> = ({
   );
 };
 
-export default GoACard;
+export default GoAContainer;

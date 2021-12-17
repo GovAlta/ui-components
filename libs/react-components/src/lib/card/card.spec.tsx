@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
-import GoACard from './card.component';
+import GoACard from './card';
 
 describe('GoA Card', () => {
   const title = 'My Card title';

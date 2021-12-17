@@ -1,1 +1,12 @@
-@import '../../../../core-css/src/lib/styles/card/card.scss';
+// TODO: this needs work
+goa-card-group goa-card,
+goa-card-group goa-skeleton {
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  goa-card-group goa-card,
+  goa-card-group goa-skeleton {
+    width: var(--card-max-width);
+  }
+}

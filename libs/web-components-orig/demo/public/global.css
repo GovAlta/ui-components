@@ -262,15 +262,4 @@ goa-badge {
   margin-right: 0.25rem;
 }
 
-goa-card-group goa-card,
-goa-card-group goa-skeleton {
-  width: 100%;
-}
-@media (min-width: 480px) {
-  goa-card-group goa-card,
-  goa-card-group goa-skeleton {
-    width: var(--card-max-width);
-  }
-}
-
 /* FormItems */

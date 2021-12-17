@@ -12,11 +12,6 @@ import GoAMicrositeLogo from './lib/microsite-logo/microsite-logo';
 import GoAHeroBanner from './lib/hero-banner/hero-banner.component';
 import { GoADropdown, GoADropdownOption } from './lib/dropdown/dropdown';
 import { GoARadioGroup, GoARadio } from './lib/radio-group/radio-group';
-import { GoASkeletonContent } from './lib/skeleton/skeleton-titled-content';
-import { GoASkeletonGridColumnContent } from './lib/skeleton/skeleton-grid-column';
-import { GoASkeletonImageContent } from './lib/skeleton/skeleton-image-content';
-import GoACard from './lib/card/card.component';
-import GoACardGroup from './lib/card-group/card.group.component';
 import GoACheckbox from './lib/checkbox/checkbox';
 import GoAHeroBannerContent from './lib/hero-banner/content/hero-banner-content.component';
 import GoAHeroBannerLink from './lib/hero-banner/link/hero-banner-link.component';
@@ -29,9 +24,6 @@ export type { GoABadgeType };
 export {
   GoAPageLoader,
   GoAElementLoader,
-  GoASkeletonContent,
-  GoASkeletonGridColumnContent,
-  GoASkeletonImageContent,
   GoANotification,
   GoARadioGroup,
   GoARadio,
@@ -41,8 +33,6 @@ export {
   GoAHeroBanner,
   GoAHeroBannerContent,
   GoAHeroBannerLink,
-  GoACard,
-  GoACardGroup,
   GoADropdown,
   GoADropdownOption,
   GoACheckbox,

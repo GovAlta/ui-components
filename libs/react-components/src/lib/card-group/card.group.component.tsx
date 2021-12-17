@@ -1,5 +1,5 @@
 import React, { Children, ReactNode, FC } from 'react';
-import { GoACard } from '../card/card.component';
+import { GoACard } from '../card/card';
 import './card.group.scss';
 
 type CardGroupLayout = 'basic' | 'column';
