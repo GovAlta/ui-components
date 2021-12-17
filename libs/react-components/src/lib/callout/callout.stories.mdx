@@ -7,17 +7,13 @@ import {
   Description,
 } from '@storybook/addon-docs';
 
+import 'goa-web-components';
+
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
-const content = (
-  <div>
-    Information to the user goes in the content. Information can include{' '}
-    <b>markup</b> as desired.
-  </div>
-);
 
 <Meta
-  title="React/Components/Callout"
+  title="React/Web Components/Callout"
   component={GoACallout}
   argTypes={{
     type: {
@@ -46,7 +42,11 @@ notice and read the information.
 
 ## Overview
 
-export const Template = (args) => <GoACallout {...args}>{content}</GoACallout>;
+export const Template = (args) => (
+  <GoACallout {...args}>
+    Information to the user goes in the content. Information can include <b>markup</b> as desired.
+  </GoACallout>
+);
 
 <Canvas>
   <Story
@@ -55,7 +55,6 @@ export const Template = (args) => <GoACallout {...args}>{content}</GoACallout>;
     args={{
       type: 'information',
       title: 'Callout Title',
-      content: '',
     }}
   >
     {Template.bind({})}
