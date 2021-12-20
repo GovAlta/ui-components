@@ -12,7 +12,7 @@ import {
 } from '@storybook/addon-docs';
 
 <Meta
-  title="Experimental/Components/IconButtons"
+  title="Experimental/Web Components/Icon Button"
   component={GoAIconButton}
   argTypes={{
     type: {
@@ -474,7 +474,12 @@ export const Template = (args) => {
                   gap: '8px',
                 }}
               >
-                <GoAIconButton {...args} type={iconType} />
+                <GoAIconButton
+                  {...args}
+                  type={iconType}
+                  title={iconType}
+                  onClick={() => action('clicked')(iconType)}
+                />
                 <span style={{ userSelect: 'none' }}>{iconType}</span>
               </div>
             );

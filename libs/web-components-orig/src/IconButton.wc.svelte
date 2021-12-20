@@ -2,24 +2,23 @@
 
 <script lang="ts">
   import { toBoolean } from "./common/utils";
-  import type { IconSize, IconStyle, GoAIconType } from "./Icon.wc.svelte";
+  import type { IconSize, IconTheme, GoAIconType } from "./Icon.wc.svelte";
 
   // required
   export let type: GoAIconType;
 
   // optional
   export let size: IconSize = "medium";
-  export let style: IconStyle = "outline";
+  export let style: IconTheme= "outline";
   export let title: string = "";
   export let testId: string = "";
-  export let disabled: string = "";
+  export let disabled: string;
   export let inverted: string;
-
-  $: isInverted = toBoolean(inverted);
 
   // private
   $: css = `goa-icon-button goa-icon-button-primary ${isInverted ? 'goa-icon-button--inverted' : ''}`;
   $: isDisabled = toBoolean(disabled);
+  $: isInverted = toBoolean(inverted);
 
   $: _size = {
     small: '1rem',
@@ -27,12 +26,12 @@
     large: '2rem',
   }[size];
 
-  function clickHandler(e) {
+  function handleClick(e) {
     e.target.dispatchEvent(new CustomEvent("on:click", { composed: true, detail: { event: e } }));
   }
 </script>
 
-<button style="--size: {_size}" {title} disabled={isDisabled} class={css} data-testid={testId} on:click={clickHandler}>
+<button style="--size: {_size}" {title} disabled={isDisabled} class={css} data-testid={testId} on:click={handleClick}>
   <goa-icon {type} {size} {style} inverted={isInverted} />
 </button>
 
@@ -68,5 +67,15 @@
   .goa-icon-button-primary.goa-icon-button--inverted:hover {
     background-color: var(--color-blue);
     filter: brightness(1.5);
+  }
+
+  .goa-icon-button:disabled {
+    color: var(--color-gray-200);
+    fill: var(--color-gray-200);
+    transform: none;
+    cursor: default;
+  }
+  .goa-icon-button:disabled:hover {
+    background-color: transparent;
   }
 </style>
