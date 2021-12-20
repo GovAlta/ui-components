@@ -161,7 +161,7 @@
       const el = document.querySelector('#show-loader');
       el.addEventListener('on:click', () => {
         const loader = document.querySelector('#page-loader');
-        loader.setAttribute('show', "true")
+        loader.setAttribute('visible', "true")
       })
     </script>
 
@@ -207,7 +207,7 @@
           }
           if (window.progress >= 100) {
             window.progress = 0;
-            p.removeAttribute('show');
+            p.removeAttribute('visible');
           }
         });
 
