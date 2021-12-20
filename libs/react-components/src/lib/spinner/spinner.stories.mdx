@@ -1,6 +1,7 @@
 import { GoASpinner } from './spinner';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
+import { useState, useEffect } from 'react';
 
 import {
   Meta,
@@ -35,9 +36,23 @@ A skeleton provides visual feedback to users while a content heavy page or eleme
 
 ## Variations
 
-export const Template = (args) => (
-  <GoASpinner {...args} />
-);
+export const Template = (args) => {
+  const [progress, setProgress] = useState(0);
+  const updateProgress = () => {
+    return setInterval(() => {
+      if (args.type === 'progress') {
+        setProgress(progress + 10);
+      }
+    }, 1000);
+  };
+  useEffect(() => {
+    const handle = updateProgress();
+    return () => {
+      clearInterval(handle);
+    }
+  }, [args.type, progress, setProgress]);
+  return <GoASpinner {...args} progress={progress} />
+}
 
 export const InvertedTemplate = (args) => (
   <div style={{backgroundColor: 'var(--color-blue)', padding: '1rem', display: 'inline-block'}}>
@@ -46,15 +61,6 @@ export const InvertedTemplate = (args) => (
 );
 
 <Canvas>
-  <Story
-    name="Infinite"
-    args={{
-      size: "large",
-      type: "infinite",
-    }}
-  >
-    {Template.bind({})}
-  </Story>
   <Story
     name="Progress"
     args={{
@@ -65,7 +71,7 @@ export const InvertedTemplate = (args) => (
     {Template.bind({})}
   </Story>
   <Story
-    name="Progress (inverted)"
+    name="Infinite (inverted)"
     args={{
       size: "large",
       invert: true,
