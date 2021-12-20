@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let variant: 'primary' | 'info' | 'error' | 'success' | 'warning' | 'default' = 'info'
+  export let variant: 'primary' | 'info' | 'error' | 'success' | 'warning' | 'default' = 'default'
   export let headingsize: 'large' | 'small' | 'none' = 'large';
 </script>
 
