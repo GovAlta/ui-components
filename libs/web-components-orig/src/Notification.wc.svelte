@@ -5,6 +5,7 @@
   import { fade } from "svelte/transition";
 
   export let type: "emergency" | "caution" | "information" | "event";
+
   let show = true;
   $: iconType =
     type === "emergency"
@@ -14,7 +15,6 @@
       : type === "information"
       ? "information-circle"
       : "calendar";
-
 
   function close() {
     show = false;

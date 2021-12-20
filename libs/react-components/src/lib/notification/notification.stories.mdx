@@ -9,10 +9,9 @@ import {
 
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
-//const message = <div>Information to the user goes in the content</div>
 
 <Meta
-  title="React/Components/Notification"
+  title="React/Web Components/Notification"
   component={GoANotification}
   argTypes={{
     type: {
@@ -25,23 +24,7 @@ import { DoDont } from '@abgov/shared/storybook-common';
       control: {
         type: 'text',
       },
-    },
-    title: {
-      control: {
-        type: 'text',
-      },
-    },
-    isDismissable: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    onDismiss: { action: 'Banner has been dismissed' },
-    notificationUrl: {
-      control: {
-        type: 'text',
-      },
-    },
+    }
   }}
 />
 
@@ -51,7 +34,11 @@ Notifications banners are used for global alerts and critical messaging required
 
 ## Overview
 
-export const Template = (args) => <GoANotification {...args} />;
+export const Template = (args) => (
+  <GoANotification type={args.type}>
+    {args.message}
+  </GoANotification>
+);
 
 <Canvas>
   <Story
@@ -60,9 +47,6 @@ export const Template = (args) => <GoANotification {...args} />;
     args={{
       type: 'information',
       message: 'Information to the user goes in the content',
-      isDismissable: true,
-      notificationUrl: '#',
-      title: 'Hidden Title',
     }}
   >
     {Template.bind({})}
@@ -72,27 +56,7 @@ export const Template = (args) => <GoANotification {...args} />;
 ## Examples
 
 ```html
-<GoANotification
-  type="'important || 'information' || 'event' || 'emergency'"
-  title='Notification Title'
-  message="Information to the user goes in the message"
-  isDismissable={true}
-  notificationUrl='www.google.com'
-  title=Hidden Title'
-</>
-```
-
-or
-
-```html
-<GoANotification
-  type="information"
-  ,
-  title="Notification Title"
-  isDismissable="{true}"
-  notificationUrl="www.google.com"
-  title="Hidden Title"
->
+<GoANotification type="information">
   Information to the user goes in the <i>message</i>
 </GoANotification>
 ```
