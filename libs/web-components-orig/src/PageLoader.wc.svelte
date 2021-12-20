@@ -12,20 +12,11 @@
   export let message: string;
   export let progress: number = 0;
   export let visible: string;
-  export let variant: "fullscreen" | "inline" = 'inline';
+  export let variant: "fullscreen" | "inline" = "inline";
 
-  $: isVisible = toBoolean(visible);
+  $: isVisible = toBoolean(visible) || variant === "inline";
   $: fullscreen = variant === "fullscreen";
   $: inline = variant === "inline";
-
-
-  $: {
-    // automatically show if it is an inline spinner
-    if (inline) {
-      visible = fromBoolean(true);
-    }
-  }
-
   $: ready = type && isVisible;
 </script>
 
