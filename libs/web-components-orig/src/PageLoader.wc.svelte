@@ -2,19 +2,19 @@
 
 <!-- Script -->
 <script lang="ts">
-import { fade } from "svelte/transition";
+  import { fade } from "svelte/transition";
 
   import noScroll from "./common/no-scroll";
-import { fromBoolean, toBoolean } from "./common/utils";
+  import { fromBoolean, toBoolean } from "./common/utils";
   import type { SpinnerType } from "./Spinner.wc.svelte";
 
-  export let type: SpinnerType;
+  export let type: SpinnerType = 'infinite';
   export let message: string;
   export let progress: number = 0;
-  export let show: string;
-  export let variant: "fullscreen" | "inline";
+  export let visible: string;
+  export let variant: "fullscreen" | "inline" = 'inline';
 
-  $: isVisible = toBoolean(show);
+  $: isVisible = toBoolean(visible);
   $: fullscreen = variant === "fullscreen";
   $: inline = variant === "inline";
 
@@ -22,7 +22,7 @@ import { fromBoolean, toBoolean } from "./common/utils";
   $: {
     // automatically show if it is an inline spinner
     if (inline) {
-      show = fromBoolean(true);
+      visible = fromBoolean(true);
     }
   }
 
@@ -33,13 +33,17 @@ import { fromBoolean, toBoolean } from "./common/utils";
 {#if ready}
   {#if fullscreen}
     <div transition:fade={{duration: 300}} use:noScroll={{enable: true}} class:fullscreen>
-      <goa-spinner type={type} size="xlarge" progress={progress} />
-      <div class="message">{message}</div>
+      <goa-spinner type={type} size="xlarge" progress={progress || 0} />
+      {#if message}
+        <div class="message">{message}</div>
+      {/if}
     </div>
   {:else}
     <div class:inline>
-      <goa-spinner type={type} size="xlarge" progress={progress} />
-      <div class="message">{message}</div>
+      <goa-spinner type={type} size="xlarge" progress={progress || 0} />
+      {#if message}
+        <div class="message">{message}</div>
+      {/if}
     </div>
   {/if}
 {/if}
