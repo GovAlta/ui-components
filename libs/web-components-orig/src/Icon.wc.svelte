@@ -463,6 +463,10 @@
     align-items: center;
   }
 
+  .goa-icon, .goa-icon * {
+    box-sizing: border-box;
+  }
+
   .goa-icon {
     width: var(--size);
     height: var(--size);

@@ -4,19 +4,23 @@
   import { toBoolean } from "./common/utils";
   import type { IconSize, IconTheme, GoAIconType } from "./Icon.wc.svelte";
 
+  type IconButtonVariant = "color" | "nocolor"
+
   // required
   export let type: GoAIconType;
 
   // optional
   export let size: IconSize = "medium";
-  export let style: IconTheme= "outline";
+  export let theme: IconTheme= "outline";
+  export let variant: IconButtonVariant = "color";
+
   export let title: string = "";
   export let testId: string = "";
   export let disabled: string;
   export let inverted: string;
 
   // private
-  $: css = `goa-icon-button goa-icon-button-primary ${isInverted ? 'goa-icon-button--inverted' : ''}`;
+  $: css = `goa-icon-button goa-icon-button--${variant} ${isInverted ? 'goa-icon-button--inverted' : ''}`;
   $: isDisabled = toBoolean(disabled);
   $: isInverted = toBoolean(inverted);
 
@@ -32,23 +36,34 @@
 </script>
 
 <button style="--size: {_size}" {title} disabled={isDisabled} class={css} data-testid={testId} on:click={handleClick}>
-  <goa-icon {type} {size} {style} inverted={isInverted} />
+  <goa-icon {type} {size} {theme} inverted={isInverted} />
 </button>
 
 <style>
+  :host {
+    display: flex;
+    align-items: center;
+  }
+  .goa-icon-button, .goa-icon-button * {
+    box-sizing: border-box;
+  }
+
   .goa-icon-button {
     display: inline-flex;
     align-items: center;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
     background: transparent;
     cursor: pointer;
+    padding: 0;
     border: none;
+  }
+
+  .goa-icon-button--color {
+    border-radius: 0.5rem;
     padding: calc(var(--size) / 4)
   }
 
   /* Primary */
-  .goa-icon-button-primary {
+  .goa-icon-button--color {
     border-radius: 0.5rem;
     color: var(--color-blue-500);
     fill: var(--color-blue-500);
@@ -56,17 +71,17 @@
     transition: background-color 100ms ease-in, transform 100ms ease-in;
   }
 
-  .goa-icon-button-primary:active {
+  .goa-icon-button--color:active,
+  .goa-icon-button--nocolor:active {
     transform: scale(0.9);
   }
 
-  .goa-icon-button-primary:hover {
+  .goa-icon-button--color:hover {
     background-color: var(--color-blue-100);
   }
 
-  .goa-icon-button-primary.goa-icon-button--inverted:hover {
-    background-color: var(--color-blue);
-    filter: brightness(1.5);
+  .goa-icon-button--color.goa-icon-button--inverted:hover {
+    background-color: var(--color-blue-600);
   }
 
   .goa-icon-button:disabled {

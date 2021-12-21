@@ -17,7 +17,6 @@
   export let leadingicon: GoAIconType = null;
   export let trailingicon: GoAIconType = null;
   export let variant: GoAButtonVariant = "goa";
-
   export let disabled: string;
   export let handletrailingiconclick: string;
   export let focused: string;
@@ -91,7 +90,7 @@
       <goa-icon-button
         on:click={doClick}
         disabled={isDisabled}
-        variant="tertiary"
+        variant="nocolor"
         size="medium"
         type={trailingicon}
         testId={`${name}-input-trailing-button`}
@@ -102,6 +101,11 @@
 
 <!-- Styles -->
 <style>
+
+  .goa-input, .goa-input * {
+    box-sizing: border-box;
+  }
+
   .goa-input {
     box-sizing: border-box;
     outline: none;
@@ -110,11 +114,10 @@
     border-radius: 3px;
     background: white;
     color: var(--color-gray-900, #ccc);
-    padding: var(--input-padding, 0.5rem) 0;
+    padding: var(--input-padding, 0.5rem) 0.5rem;
 
     display: flex;
     align-items: center;
-    max-height: var(--input-height);
   }
 
   .goa-input input[readonly] {
@@ -146,23 +149,23 @@
   }
 
   .goa-input-trailing-icon {
-    line-height: 18px;
-    padding: 0.5rem;
+    display: flex;
+    align-items: center;
   }
 
   .goa-input-trailing-icon > .goa-icon-button {
     margin-right: -0.5rem;
   }
 
-  input.input--goa::-webkit-calendar-picker-indicator {
+  /* input.input--goa::-webkit-calendar-picker-indicator {
     display: none;
-  }
+  } */
 
   input {
     display: block;
     width: 100%;
     font-size: var(--input-font-size);
-    padding: var(--input-padding);
+    /* padding: var(--input-padding); */
   }
 
   .goa-input-leading-icon ~ input {

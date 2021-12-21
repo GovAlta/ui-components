@@ -1,8 +1,33 @@
-import React, { FC, useEffect } from 'react';
-import { GoAIcon, GoAIconButton, GoAIconType } from '../icons';
+import React, { FC, useEffect, useRef } from 'react';
+import { GoAIconType } from '..';
 import { OnChange } from '../common';
-import './input.scss';
-import classNames from 'classnames';
+
+interface WCProps {
+  ref: React.MutableRefObject<HTMLElement>;
+  type: string;
+  name: string;
+  value: string;
+  id: string;
+  placeholder: string;
+  leadingicon: string;
+  trailingicon: string;
+  variant: string;
+  disabled: boolean;
+  error: string;
+  readonly: boolean;
+  handletrailingiconclick: boolean;
+}
+
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      'goa-input': WCProps & React.HTMLAttributes<HTMLInputElement>
+    }
+  }
+}
+
 
 interface Props {
   // required
@@ -20,66 +45,56 @@ interface Props {
   variant?: 'goa' | 'bare';
   focused?: boolean;
   readonly?: boolean;
+  error?: string;
 };
 
+
 export const GoAInput: FC<Props & { type: string }> = ({
+  id,
   name,
-  onTrailingIconClick,
-  onChange,
+  type,
   leadingIcon,
   trailingIcon,
   variant = 'goa',
   focused,
   disabled,
   readonly,
-  ...other
+  value,
+  placeholder,
+  error,
+  onTrailingIconClick,
+  onChange,
 }) => {
-  const inputRef = React.useRef<HTMLInputElement>(null);
-
+  const ref = useRef<HTMLInputElement>();
   useEffect(() => {
-    if (focused) {
-      inputRef.current?.focus();
-    } else {
-      inputRef.current?.blur();
-    }
-  }, [focused, inputRef]);
+    const current = ref.current;
+    const changeListener = (e: CustomEvent) => {
+      const { name, value } = e.detail.data;
+      onChange(name, value);
+    };
+    const clickListener = (e: CustomEvent) => {
+      onTrailingIconClick();
+    };
 
-  const rootCss = classNames({
-    'goa-input': true,
-    'goa-input--disabled': disabled,
-  });
+    current.addEventListener('on:change', changeListener)
+    current.addEventListener('on:ontrailingiconclick', clickListener)
+    return () => {
+      current.removeEventListener('on:change', changeListener);
+      current.removeEventListener('on:ontrailingiconclick', clickListener);
+    }
+  }, [ref, onChange, onTrailingIconClick])
+
+
+  // useEffect(() => {
+  //   if (focused) {
+  //     inputRef.current?.focus();
+  //   } else {
+  //     inputRef.current?.blur();
+  //   }
+  // }, [focused, inputRef]);
 
   return (
-    <div className={rootCss}>
-      {leadingIcon &&
-        <div className="goa-input-leading-icon">
-          <GoAIcon type={leadingIcon} />
-        </div>
-      }
-      <input
-        ref={inputRef}
-        className={classNames({
-          [`input--${variant}`]: true,
-          'input--leading-icon': leadingIcon,
-        })}
-        readOnly={readonly}
-        disabled={disabled}
-        onChange={(e) => onChange(name, e.target.value)}
-        {...other}
-      />
-
-      {trailingIcon && !onTrailingIconClick &&
-        <div className="goa-input-trailing-icon">
-          <GoAIcon size="medium" type={trailingIcon} />
-        </div>
-      }
-
-      {trailingIcon && onTrailingIconClick &&
-        <div onClick={onTrailingIconClick} className="goa-input-trailing-icon">
-          <GoAIconButton variant="tertiary" onClick={onTrailingIconClick} disabled={disabled} size="medium" type={trailingIcon} testId={`${name}-input-trailing-button`} />
-        </div>
-      }
-    </div>
+    <goa-input ref={ref} type={type} name={name} id={id} leadingicon={leadingIcon} trailingicon={trailingIcon} variant={variant} disabled={disabled} readonly={readonly} placeholder={placeholder} error={error} value={value} handletrailingiconclick={!!onTrailingIconClick} />
   );
 };
 
@@ -92,7 +107,7 @@ export const GoAInputPassword: FC<Props> = (props) => {
 }
 
 export const GoAInputDate: FC<Props & { min?: string, max?: string }> = (props) => {
-  return <GoAInput {...props} type="date" trailingIcon="calendar" />;
+  return <GoAInput {...props} type="date" />;
 }
 
 export const GoAInputTime: FC<Props> = (props) => {
@@ -100,7 +115,7 @@ export const GoAInputTime: FC<Props> = (props) => {
 }
 
 export const GoAInputDateTime: FC<Props & { min?: string, max?: string }> = (props) => {
-  return <GoAInput {...props} type="datetime-local" trailingIcon="calendar" />;
+  return <GoAInput {...props} type="datetime-local" />;
 }
 
 export const GoAInputEmail: FC<Props> = (props) => {
@@ -124,7 +139,7 @@ export const GoAInputFile: FC<Props> = (props) => {
 }
 
 export const GoAInputMonth: FC<Props> = (props) => {
-  return <GoAInput {...props} type="month" trailingIcon="calendar" />;
+  return <GoAInput {...props} type="month" />;
 }
 
 export const GoAInputNumber: FC<Props & { min?: number, max?: number, step?: number }> = (props) => {

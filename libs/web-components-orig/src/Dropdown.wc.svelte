@@ -27,11 +27,11 @@
 
   // Private
 
-  let el: HTMLElement;
   let selectedLabels: string[] = [];
   let selectedValues: string[] = [];
   let isMenuVisible = false;
 
+  let el: HTMLElement;
   let filterEl: HTMLElement;
   let filter = '';
 
@@ -183,8 +183,9 @@
           {placeholder}
           id={`${name}-dropdown-input`}
           name="search"
-          readonly={true}
+          readonly
           trailingicon="chevron-down"
+          handletrailingiconclick
           type="text"
           value={selectedLabels.join(', ')}
         />
@@ -201,10 +202,9 @@
             focused={isMenuVisible}
             name="filter"
             placeholder="Filter"
-            trailingIcon={filter.length > 0 ? 'close-circle' : 'search'}
-            handletrailingiconclick="true"
+            trailingicon={filter.length > 0 ? 'close-circle' : 'search'}
+            handletrailingiconclick
             type="text"
-            variant="goa"
             value={filter}
           />
         {/if}
@@ -226,10 +226,6 @@
     position: relative;
   }
 
-  .goa-dropdown-box ~ .goa-dropdown-box {
-    margin-top: 1rem;
-  }
-
   .menu goa-input {
     position: relative;
   }
@@ -237,10 +233,6 @@
   .goa-dropdown-background {
     position: fixed;
     inset: 0;
-  }
-
-  .goa-icon ~ input {
-    padding-left: 0.5rem;
   }
 
   .goa-dropdown-list {

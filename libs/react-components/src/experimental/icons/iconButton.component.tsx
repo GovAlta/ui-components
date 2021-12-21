@@ -36,7 +36,6 @@ export const GoAIconButton: FC<Props> = ({ type, disabled, variant = 'primary', 
   useEffect(() => {
     const current = ref.current;
     const listener = (e: CustomEvent) => {
-      console.log('in the on click')
       onClick();
     };
 

@@ -301,6 +301,12 @@
       </goa-form-item>
     </goa-flex-row>
 
+    <goa-flex-row gap="small">
+      <goa-form-item label="Password" helptext="No easily guessable passwords">
+        <goa-input id="password" name="password" type="password" trailingicon="finger-print" handletrailingiconclick  />
+      </goa-form-item>
+    </goa-flex-row>
+
     <goa-form-item label="Comments" optional>
       <goa-textarea id="comments" name="comments" />
     </goa-form-item>
@@ -455,6 +461,7 @@
 
     <h2 id="section-icon-buttons">Icon Buttons</h2>
     <goa-icon-button type="close" />
+    <goa-icon-button type="close" variant="nocolor" />
 
     <h2 id="section-icon-buttons">Icon Buttons (Inverted)</h2>
     <div class="dark-bg">
