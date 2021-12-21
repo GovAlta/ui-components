@@ -16,11 +16,13 @@ import GoACheckbox from './lib/checkbox/checkbox';
 import GoAHeroBannerContent from './lib/hero-banner/hero-banner-content';
 import GoAHeroBannerLink from './lib/hero-banner/hero-banner-actions';
 import GoAPageLoader from './lib/page-loader/page-loader';
+import GoAButtonGroup from './lib/button-group/button-group';
 
 import type { GoABadgeType } from './lib/badge/badge.component';
 export type { GoABadgeType };
 
 export {
+  GoAButtonGroup,
   GoAPageLoader,
   GoANotification,
   GoARadioGroup,

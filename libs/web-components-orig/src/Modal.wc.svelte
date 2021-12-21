@@ -36,34 +36,34 @@
 <!-- ======================================================================= -->
 
 {#if isOpen}
-<div use:noscroll={{enable: isOpen}} transition:fade={{duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
-  <div class="modal-overlay" on:click={close}></div>
-  <div in:fly={{duration: 200, y: 200}} out:fly={{duration: 200, y: -100}} class="modal-pane">
-    {#if title}
-      <div class="modal-title">{title}</div>
-    {/if}
-    {#if isClosable}
-      <div class="modal-close">
-        <goa-icon-button type='close' on:click={close} />
-      </div>
-    {/if}
-    <div class="modal-content">
-      {#if isScrollable}
-        <goa-scrollable direction="vertical" height="50" hpadding="1.75" >
-          <slot />
-        </goa-scrollable>
-      {:else}
-        <div style="margin: 1.75rem" >
-          <slot />
+  <div use:noscroll={{enable: isOpen}} transition:fade={{delay: 200, duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
+    <div class="modal-overlay" on:click={close}></div>
+    <div in:fly={{duration: 200, y: 200}} out:fly={{delay: 200, duration: 200, y: -100}} class="modal-pane">
+      {#if title}
+        <div class="modal-title">{title}</div>
+      {/if}
+      {#if isClosable}
+        <div class="modal-close">
+          <goa-icon-button type='close' on:click={close} />
         </div>
       {/if}
-      <slot />
-    </div>
-    <div class="modal-actions">
-      <slot name="actions" />
+      <div class="modal-content">
+        {#if isScrollable}
+          <goa-scrollable direction="vertical" height="50" hpadding="1.75" >
+            <slot />
+          </goa-scrollable>
+        {:else}
+          <div style="margin: 1.75rem" >
+            <slot />
+          </div>
+        {/if}
+        <slot />
+      </div>
+      <div class="modal-actions">
+        <slot name="actions" />
+      </div>
     </div>
   </div>
-</div>
 {/if}
 
 <!-- ======================================================================= -->
@@ -129,7 +129,7 @@
     text-align: right;
     padding: 0 1.75rem;
     margin: 1.75rem 0;
-    flex: 0 0 auto;
+    flex: 1 1  auto;
   }
 
   /* Modal Close Icon ======================================================================= */

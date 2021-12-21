@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
 interface WCProps {
+  ref: React.MutableRefObject<HTMLElement>;
   title: string;
   closable: boolean;
   scrollable: boolean;
@@ -24,8 +25,21 @@ interface Props {
 }
 
 export const GoAModal: FC<Props> = ({ title, children, open, closable, onClose }) => {
+  const el = useRef<HTMLElement>();
+  useEffect(() => {
+    const current = el.current;
+    const listener = (e: CustomEvent) => {
+      onClose();
+    };
+
+    current.addEventListener('on:close', listener)
+    return () => {
+      current.removeEventListener('on:close', listener);
+    }
+  }, [el, onClose])
+
   return (
-    <goa-modal title={title} open={open} closable={closable} scrollable>
+    <goa-modal ref={el} title={title} open={open} closable={closable} scrollable={true}>
       {children}
     </goa-modal>
   );
