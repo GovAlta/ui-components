@@ -1,27 +1,6 @@
-import {
-  GoAForm,
-  GoAFormItem,
-  GoAFormActions,
-  GoAFormContainer,
-  GoAFlexRow,
-} from '..';
+import { GoAFormItem, GoAFlexRow } from '..';
 import { useState, useEffect } from 'react';
-import {
-  FormValidator,
-  requiredFieldValidator,
-  emailFormatValidator,
-  phoneNumberFormatValidator,
-} from './validators';
-import {
-  GoACheckbox,
-  GoADropdown,
-  GoADropdownOption,
-  GoAButton,
-  GoACallout,
-  GoARadioGroup,
-  GoARadio,
-} from '../..';
-import { GoAInput, GoATextArea } from '../';
+import { GoAInput } from '../';
 import {
   Meta,
   Preview,
@@ -33,7 +12,7 @@ import {
 import { action } from '@storybook/addon-actions';
 import { DoDont, StateDisplay } from '@abgov/shared/storybook-common';
 
-<Meta title="Experimental/Components/Form" component={GoAForm} />
+<Meta title="Experimental/Web Components/Form" component={GoAFormItem} />
 
 # GoAForm
 
@@ -41,149 +20,20 @@ React form container is a group of related input controls that allows users to p
 
 ## Properties
 
-<ArgsTable of={GoAForm} />
+<ArgsTable of={GoAFormItem} />
 
 ## Overview
 
 export const defaultTemplete = (args) => {
-  const GoAFormWrapper = () => {
-    const [formState, setFormState] = useState({});
-    const [errorState, setErrorState] = useState({});
-    const validator = new FormValidator();
-    validator.add('email', [requiredFieldValidator, emailFormatValidator]);
-    validator.add('firstName', [requiredFieldValidator]);
-    validator.add('lastName', [requiredFieldValidator]);
-    validator.add('favColors', [requiredFieldValidator]);
-    validator.add('textarea', [requiredFieldValidator]);
-    validator.add('isAdult', [requiredFieldValidator]);
-    validator.add('music', [
-      requiredFieldValidator,
-      (value) => [
-        value !== 'country',
-        'Country "music" is not allowed to be your favorite',
-      ],
-    ]);
-    const onChange = (name, value) => {
-      if (value === null) {
-        // filter out any null values
-        const stateCopy = { ...formState };
-        delete stateCopy[name];
-        setFormState(stateCopy);
-        return;
-      }
-      setFormState({
-        ...formState,
-        [name]: value,
-      });
-    };
-    const onSubmit = (e) => {
-      const errors = validator.validate(formState);
-      setErrorState(errors);
-    };
-    return (
-      <StateDisplay title="" description="" state={formState}>
-        <GoAForm>
-          <h2>Your information</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
-            ligula a ligulaxcrei kmlobortis lacinia non sed nibh.
-          </p>
-          <GoAFlexRow gap="small">
-            <GoAFormItem error={errorState.firstName}>
-              <label>First Name</label>
-              <GoAInput
-                type="text"
-                name="firstName"
-                value={formState.firstName}
-                onChange={onChange}
-              />
-            </GoAFormItem>
-            <GoAFormItem>
-              <label>
-                Middle Name <em>optional</em>
-              </label>
-              <GoAInput
-                type="text"
-                name="middleName"
-                value={formState.middleName}
-                onChange={onChange}
-              />
-            </GoAFormItem>
-            <GoAFormItem error={errorState.lastName}>
-              <label>Last Name</label>
-              <GoAInput
-                type="text"
-                name="lastName"
-                value={formState.lastName}
-                onChange={onChange}
-              />
-            </GoAFormItem>
-          </GoAFlexRow>
-          <GoAFormItem error={errorState.isAdult}>
-            <GoACheckbox
-              name="isAdult"
-              onChange={onChange}
-              checked={formState.isAdult}
-              content="Are you over 18?"
-            />
-          </GoAFormItem>
-          <GoAFormItem error={errorState.favColors}>
-            <label>Favourite Color</label>
-            <GoADropdown
-              name="favColors"
-              onChange={onChange}
-              selectedValues={formState.favColors}
-            >
-              <GoADropdownOption label="Red" value="red" />
-              <GoADropdownOption label="Green" value="green" />
-              <GoADropdownOption label="Blue" value="blue" />
-            </GoADropdown>
-          </GoAFormItem>
-          <GoAFormItem error={errorState.music}>
-            <label>Favourite Music</label>
-            <GoARadioGroup
-              name="music"
-              onChange={onChange}
-              value={formState.music}
-            >
-              <GoARadio label="Blues" value="blues" />
-              <GoARadio label="Rock" value="rock" />
-              <GoARadio label="Country" value="country" />
-            </GoARadioGroup>
-          </GoAFormItem>
-          <GoAFormItem error={errorState.email} helpText="We won't spam you...">
-            <label>Email</label>
-            <GoAInput
-              type="text"
-              name="email"
-              value={formState.email}
-              onChange={onChange}
-            />
-          </GoAFormItem>
-          <GoAFormItem
-            helpText="Enter lots of text here"
-            error={errorState.textarea}
-          >
-            <label>Label</label>
-            <GoATextArea
-              name="textarea"
-              value={formState.textarea}
-              onChange={onChange}
-            />
-          </GoAFormItem>
-          <GoAFormActions alignment="left">
-            <GoAButton buttonType="tertiary" type="reset">
-              Cancel
-            </GoAButton>
-            <GoAButton buttonType="primary" type="submit" onClick={onSubmit}>
-              Submit
-            </GoAButton>
-          </GoAFormActions>
-        </GoAForm>
-      </StateDisplay>
-    );
-  };
-  return <GoAFormWrapper />;
+  return (
+    <GoAFormItem label="First Name" helpText="Do you need help" error="Uh no!">
+      <GoAInput
+        type="text"
+        name="firstName"
+        onChange={(name, value) => action('onChange')(name, value)}
+      />
+    </GoAFormItem>
+  );
 };
 
 ### Default
@@ -193,103 +43,3 @@ export const defaultTemplete = (args) => {
     {defaultTemplete.bind()}
   </Story>
 </Canvas>
-
-## Examples
-
-Basic
-
-```tsx
-const [formState, setFormState] = useState({});
-const [errorState, setErrorState] = useState({});
-
-const validator = new FormValidator();
-validator.add('email', [requiredFieldValidator, emailFormatValidator]);
-validator.add('firstName', [requiredFieldValidator]);
-validator.add('lastName', [requiredFieldValidator]);
-
-const onChange = (name, value) => {
-  setFormState({
-    ...formState,
-    [name]: value,
-  });
-};
-
-const onSubmit = (e) => {
-  const errors = validator.validate(formState);
-  setErrorState(errors);
-  if (errors.length > 0) {
-    window.scrollTo(0, 0);
-  }
-};
-
-return (
-  <GoAForm>
-    <h2>Your information</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ligula a
-      ligulaxcrei kmlobortis lacinia non sed nibh.
-    </p>
-    <GoAFlexRow gap="small">
-      <GoAFormItem error={errorState.firstName}>
-        <label>First Name</label>
-        <GoAInput
-          type="text"
-          name="firstName"
-          value={formState.firstName}
-          onChange={onChange}
-        />
-      </GoAFormItem>
-      <GoAFormItem>
-        <label>
-          Middle Name <em>optional</em>
-        </label>
-        <GoAInput
-          type="text"
-          name="middleName"
-          value={formState.middleName}
-          onChange={onChange}
-        />
-      </GoAFormItem>
-      <GoAFormItem error={errorState.lastName}>
-        <label>Last Name</label>
-        <GoAInput
-          type="text"
-          name="lastName"
-          value={formState.lastName}
-          onChange={onChange}
-        />
-      </GoAFormItem>
-    </GoAFlexRow>
-    <GoAFormItem helpText="Non-standard Input">
-      <label>Label</label>
-      <GoAInput
-        type="text"
-        name="label"
-        value={formState.label}
-        onChange={onChange}
-      />
-    </GoAFormItem>
-    <GoAFormItem error={errorState.email}>
-      <label>Email</label>
-      <GoAInput
-        type="text"
-        name="email"
-        value={formState.email}
-        onChange={onChange}
-      />
-    </GoAFormItem>
-    <GoAFormItem helpText="Enter lots of text here" error={errorState.label2}>
-      <label>Label</label>
-      <GoATextArea name="label2" value={formState.label2} onChange={onChange} />
-    </GoAFormItem>
-    <GoAFormActions alignment="left">
-      <GoAButton buttonType="tertiary" type="reset">
-        Cancel
-      </GoAButton>
-      <GoAButton buttonType="primary" type="submit" onClick={onSubmit}>
-        Submit
-      </GoAButton>
-    </GoAFormActions>
-  </GoAForm>
-);
-```
