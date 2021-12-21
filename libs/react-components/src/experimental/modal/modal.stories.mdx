@@ -23,7 +23,7 @@ import {
   title="Experimental/Components/Modal"
   component={GoAModal}
   argTypes={{
-    isOpen: {
+    open: {
       control: {
         type: 'function',
       },
@@ -48,7 +48,7 @@ export const Template = (args) => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
-      <GoAModal testId="modal" isOpen={isOpen}>
+      <GoAModal testId="modal" open={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content">{args.content}</GoAModalContent>
         <GoAModalActions>
@@ -82,7 +82,7 @@ export const ScrollingTemplate = (args) => {
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
       <div style={{ minHeight: '150vw' }}></div>
-      <GoAModal testId="modal" isOpen={isOpen}>
+      <GoAModal testId="modal" open={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content">{args.content}</GoAModalContent>
         <GoAModalActions>
@@ -116,7 +116,7 @@ export const CloseTemplate = (args) => {
     <div>
       <button onClick={() => setOpen(true)}>Open Modal</button>
       <div style={{ minHeight: '150vw' }}></div>
-      <GoAModal testId="modal" isOpen={isOpen} onClose={() => setOpen(false)}>
+      <GoAModal testId="modal" open={isOpen} onClose={() => setOpen(false)}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content">{args.content}</GoAModalContent>
       </GoAModal>
@@ -131,7 +131,7 @@ export const NoCloseTemplate = (args) => {
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
       <div style={{ minHeight: '150vw' }}></div>
-      <GoAModal testId="modal" isOpen={isOpen}>
+      <GoAModal testId="modal" open={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content">{args.content}</GoAModalContent>
         <GoAModalActions>
@@ -175,7 +175,7 @@ export const ModalFormTemplate = (args) => {
     <>
       <button onClick={() => setOpen(true)}>Open Modal</button>
       <div style={{ minHeight: '150vw' }}></div>
-      <GoAModal testId="modal" isOpen={isOpen}>
+      <GoAModal testId="modal" open={isOpen}>
         <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
         <GoAModalContent testId="content" disableScroll={true}>
           <GoAForm>
@@ -224,7 +224,7 @@ export const HardCloseTemplate = (args) => {
       <button onClick={() => setOpen(true)}>Open Modal</button>
       <div style={{ minHeight: '150vw' }}></div>
       {isOpen && (
-        <GoAModal testId="modal" isOpen={true}>
+        <GoAModal testId="modal" open={true}>
           <GoAModalTitle testId="title">{args.title}</GoAModalTitle>
           <GoAModalContent testId="content">{args.content}</GoAModalContent>
           <GoAModalActions>
@@ -361,7 +361,7 @@ function MyComponent() {
   return (
     <div>
       <button onClick={() => setOpen(true)}>Open Modal</button>
-      <GoAModal isOpen={isOpen}>
+      <GoAModal open={isOpen}>
         <GoAModalTitle>Form</GoAModalTitle>
         <GoAModalContent>
           <GoAForm>

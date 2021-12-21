@@ -15,7 +15,7 @@ describe('Modal Tests', () => {
         <button data-testid="open-modal" onClick={() => setIsOpen(true)}>Open Modal</button>
 
         <GoAModal
-          isOpen={isOpen}
+          open={isOpen}
           onClose={() => setIsOpen(false)}
           testId="modal"
           backgroundTestId="modal-background"
@@ -74,7 +74,7 @@ describe('Modal Tests', () => {
         <button data-testid="open-modal" onClick={() => setIsOpen(true)}>Open Modal</button>
 
         <GoAModal
-          isOpen={isOpen}
+          open={isOpen}
           onClose={() => setIsOpen(false)}
           testId="modal"
           backgroundTestId="modal-background"
