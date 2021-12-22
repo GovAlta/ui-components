@@ -27,6 +27,7 @@ $goa-checkbox-target-size: 46px;
   height: $goa-checkbox-target-size;
   display: flex;
   align-items: center;
+  flex:1;
 }
 
 @mixin goa-checkbox {
