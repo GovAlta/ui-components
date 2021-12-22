@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useRef } from 'react'
 import { TestProps } from '../common'
-import { GoAIcon, IconSize, GoAIconType, IconVariant } from './icon.component';
-import './icons.scss'
+import { IconSize, GoAIconType, IconVariant } from './icon.component';
 
 interface WCProps {
   ref: React.MutableRefObject<HTMLElement>;

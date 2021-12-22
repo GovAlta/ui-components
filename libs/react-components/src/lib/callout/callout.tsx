@@ -1,5 +1,4 @@
 import React from 'react';
-import 'goa-web-components';
 
 type CalloutType = "important" | 'information' | 'event' | 'success' | 'emergency';
 

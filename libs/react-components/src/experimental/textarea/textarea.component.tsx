@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { OnChange } from '../common';
-import 'goa-web-components';
 
 interface WCProps {
   ref: React.Ref<HTMLTextAreaElement>;

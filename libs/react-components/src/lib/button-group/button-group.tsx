@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import './button-group.css';
-import 'goa-web-components'
 
 type Alignment = "start" | "end";
 

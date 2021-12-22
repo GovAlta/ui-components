@@ -1,6 +1,4 @@
 import React, { FC, useEffect, useRef } from 'react';
-import 'goa-web-components'
-import { string } from 'yargs';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

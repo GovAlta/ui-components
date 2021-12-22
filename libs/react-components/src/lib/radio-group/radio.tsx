@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import 'goa-web-components';
 
 interface RadioItemProps {
   name: string;

@@ -7,9 +7,7 @@ import { GoAFormItem } from './form';
 import { GoAIcon, GoAIconButton } from './icons';
 import { GoAInput, GoAInputText, GoAInputPassword, GoAInputDate, GoAInputTime, GoAInputDateTime, GoAInputEmail, GoAInputSearch, GoAInputUrl, GoAInputTel, GoAInputFile, GoAInputMonth, GoAInputNumber, GoAInputRange } from './input/input.component';
 import { GoAModal } from './modal/modal.component';
-import { GoAScrollable } from './scrollable/scrollable.component';
 import { GoATextArea } from './textarea/textarea.component';
-import { GoATransition, GoATransitionSequence } from './transitions';
 
 import type { GoAIconType } from './icons';
 export type { GoAIconType };
@@ -42,8 +40,5 @@ export {
   GoAInputNumber,
   GoAInputRange,
   GoAModal,
-  GoAScrollable,
-  GoATextArea,
-  GoATransition,
-  GoATransitionSequence
+  GoATextArea
 };

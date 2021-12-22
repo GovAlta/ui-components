@@ -1,5 +1,4 @@
 import React from 'react'
-import './icons.scss'
 
 type GoAIconFilledType = `${GoAIconType}-${IconTheme}`;
 

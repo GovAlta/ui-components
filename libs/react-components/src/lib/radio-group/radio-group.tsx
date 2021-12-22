@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useRef } from 'react';
-import 'goa-web-components';
 
 export * from './radio';
 

@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import './card.scss'
 
 interface WCProps {
   elevation: number;

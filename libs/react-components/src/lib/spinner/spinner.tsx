@@ -1,5 +1,4 @@
 import React from 'react';
-import 'goa-web-components';
 
 type SpinnerType = "infinite" | "progress";
 type SpinnerSize = "small" | "medium" | "large" | "xlarge";

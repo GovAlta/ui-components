@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import 'goa-web-components'
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

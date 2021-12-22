@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 
-export * from './card.content';
-
 interface WCProps {
   src: string;
   height: string;
