@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useRef } from 'react';
-import { OnChange } from '../common';
 
 interface WCProps {
   ref: React.Ref<HTMLTextAreaElement>;
@@ -26,7 +25,7 @@ interface Props {
   placeholder?: string;
   rows: number;
   disabled: boolean;
-  onChange: OnChange;
+  onChange: (name: string, value: string) => void;
 };
 
 export const GoATextArea: FC<Props> = ({ name, value, placeholder, rows, disabled, onChange }) => {

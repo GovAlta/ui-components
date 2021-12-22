@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { GoAIconType } from '../..';
-import { OnChange } from '../common';
 
 interface WCProps {
   ref: React.MutableRefObject<HTMLElement>;
@@ -33,7 +32,7 @@ interface Props {
   // required
   name: string;
   value: string;
-  onChange: OnChange;
+  onChange: (name: string, value: string) => void;
 
   // optional
   id?: string;

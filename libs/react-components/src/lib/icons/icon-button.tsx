@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useRef } from 'react'
-import { TestProps } from '../common'
 import { IconSize, GoAIconType, IconVariant } from './icon';
 
 interface WCProps {
@@ -21,7 +20,7 @@ declare global {
   }
 }
 
-interface Props extends TestProps {
+interface Props {
   type: GoAIconType,
   size?: IconSize;
   variant?: IconVariant;
