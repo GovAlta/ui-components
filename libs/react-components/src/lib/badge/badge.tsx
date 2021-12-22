@@ -2,7 +2,10 @@ import React, { FC } from 'react';
 import { GoAIconType } from '../icons';
 import './badge.scss';
 
+// import type { BadgeType } from '@abgov/shared/common';
+
 // TODO: move types like this into a shared file
+// export type BadgeType;
 export type GoABadgeType
   = 'information'
   | 'success'

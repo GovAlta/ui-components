@@ -5,7 +5,6 @@ type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'borderless';
 type ButtonSize = 'small' | 'medium' | 'large';
 type ButtonVariant = 'default' | 'danger'
 
-
 interface WCProps {
   type?: ButtonType;
   size?: ButtonSize;
@@ -38,6 +37,7 @@ type ButtonProps = {
 export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'primary', size = 'medium', variant = 'default', children, onClick }) => {
   const el = useRef<HTMLElement>();
   useEffect(() => {
+    console.log('creating the button')
     const current = el.current;
     const listener = (e: CustomEvent) => {
       onClick();
@@ -51,6 +51,7 @@ export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'pr
 
   return (
     <goa-button ref={el} type={type} size={size} variant={variant} disabled={disabled} title={title}>
+      in the button
       {children}
     </goa-button>
   );

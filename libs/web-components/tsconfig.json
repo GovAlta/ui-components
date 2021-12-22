@@ -1,0 +1,37 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "include": [
+    "src/**/*",
+    "src/global.d.ts"
+  ],
+  "configurations": {
+    "svelte": {
+      "compilerOptions": {
+        "module": "esnext",
+        "jsx": "react",
+        "jsxFactory": "h",
+        "target": "esnext",
+        "lib": [
+          "dom",
+          "esnext.asynciterable",
+          "esnext.collection",
+          "esnext.intl",
+          "esnext.promise",
+          "esnext.string",
+          "esnext.symbol.wellknown",
+          "esnext.weakref"
+        ],
+        "types": [
+          "node",
+          "svelte"
+        ]
+      }
+    }
+  },
+  "exclude": [
+    "node_modules/*",
+    "__sapper__/*",
+    "public/*",
+    "demo/*"
+  ]
+}

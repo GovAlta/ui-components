@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
+// import '@abgov/web-components';
 
 interface WCProps {
   ref: React.MutableRefObject<HTMLElement>;

@@ -383,21 +383,27 @@
       "root": "libs/shared/common",
       "sourceRoot": "libs/shared/common/src",
       "projectType": "library",
-      "schematics": {},
       "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
+        "build": {
+          "builder": "@nrwl/node:package",
           "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/shared/common/tsconfig.lib.json",
-              "libs/shared/common/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/shared/common/**/*"]
+            "outputPath": "dist/libs/shared/common",
+            "main": "libs/shared/common/src/index.ts",
+            "tsConfig": "libs/shared/common/tsconfig.lib.json",
+            "packageJson": "libs/shared/common/package.json",
+            "assets": ["libs/shared/common/*.md"]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/common/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/common"],
           "options": {
             "jestConfig": "libs/shared/common/jest.config.js",
             "passWithNoTests": true
@@ -530,6 +536,57 @@
       "root": "libs/vue-components",
       "sourceRoot": "libs/vue-components/src",
       "tags": []
+    },
+    "web-components": {
+      "root": "libs/web-components",
+      "sourceRoot": "libs/web-components/src",
+      "projectType": "library",
+      "tags": [],
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web-components/**/*.{ts,svelte,spec.ts}"]
+          }
+        },
+        "check": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "svelte-check",
+            "cwd": "libs/web-components"
+          }
+        },
+        "build": {
+          "builder": "@nxext/vite:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "entryFile": "src/index.ts",
+            "frameworkConfigFile": "@nxext/svelte/plugins/vite",
+            "outputPath": "dist/libs/web-components",
+            "svelteConfig": "libs/web-components/svelte.config.js",
+            "assets": [
+              {
+                "glob": "/*",
+                "input": "./public/**",
+                "output": "./"
+              }
+            ],
+            "tsConfig": "libs/web-components/tsconfig.lib.json"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web-components"],
+          "options": {
+            "jestConfig": "libs/web-components/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

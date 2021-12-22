@@ -26,6 +26,10 @@ module.exports = {
         __dirname,
         '../libs/shared/common/src/index.ts'
       ),
+      '@abgov/web-components': path.resolve(
+        __dirname,
+        '../dist/libs/web-components/web-components.es.js'
+      ),
     };
 
     // Return the altered config
