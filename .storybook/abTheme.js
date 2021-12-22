@@ -3,33 +3,12 @@ import logo from '../libs/shared/storybook-common/assets/logo-ds.svg';
 
 export default create({
   base: 'dark',
-  // colorPrimary: '#0081ab',
-  // colorSecondary: '#005072',
+  colorPrimary: '#005daa',
+  colorSecondary: '#005daa',
 
-  // // UI
-  // appBg: '#333',
-  // appContentBg: '#666',
-  // appBorderColor: '#333',
-  // appBorderRadius: 0,
-
-  // // Typography
+  // Typography
   fontBase: 'acumin-pro-semi-condensed, sans-serif',
-  // fontCode: 'monospace',
-
-  // // Text colors
-  // textColor: '#fff',
-  // textInverseColor: '#333',
-
-  // // Toolbar default and active colors
-  // barTextColor: '#fff',
-  // barSelectedColor: '#fff',
-  // barBg: '#666',
-
-  // // Form colors
-  // inputBg: '#fff',
-  // inputBorder: '#666',
-  // inputTextColor: '#333',
-  // inputBorderRadius: 0,
+  fontCode: 'monospace',
 
   brandTitle: 'Alberta Design System',
   brandUrl: 'https://alberta.ca',
