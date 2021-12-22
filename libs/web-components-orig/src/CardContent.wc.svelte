@@ -12,6 +12,6 @@
 <!-- Style -->
 <style>
   .card-content{
-    padding: calc(var(--card-padding));
+    padding: 1rem;
   }
 </style>

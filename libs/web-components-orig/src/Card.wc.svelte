@@ -12,7 +12,7 @@
   style="
     --width: {width}px;
     { elevation === 0
-      ? `border: 1px solid var(--card-border-color);`
+      ? `border: 1px solid var(--color-gray-200);`
       : `box-shadow: var(--shadow-${elevation});`
     }
   ">
