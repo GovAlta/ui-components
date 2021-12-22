@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { GoABadge } from './badge.component';
+import { GoABadge } from './badge';
 import { screen } from '@testing-library/dom';
 
 describe('GoA Badge', () => {

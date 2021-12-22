@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React, { useState } from 'react';
 import GoAButton from '../../lib/button/button';
-import { GoAModal, GoAModalActions, GoAModalContent, GoAModalTitle } from './modal.component';
+import { GoAModal, GoAModalActions, GoAModalContent, GoAModalTitle } from './modal';
 
 describe('Modal Tests', () => {
 

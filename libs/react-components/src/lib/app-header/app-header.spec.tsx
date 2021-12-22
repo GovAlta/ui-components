@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render } from '@testing-library/react';
-import { GoAAppVersionHeader } from './app-version-header.component';
+import { GoAAppVersionHeader } from './app-version-header';
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 
@@ -38,4 +38,3 @@ describe('GoAAppVersionHeaderComponent', () => {
     expect(screen.queryByTestId('content-wrapper')).not.toBeInTheDocument();
   });
 });
-

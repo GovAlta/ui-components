@@ -1,6 +1,6 @@
 // import React from 'react';
 // import { render } from '@testing-library/react';
-// import { GoAForm, GoAFormActions, GoAFormItem } from './form.component';
+// import { GoAForm, GoAFormActions, GoAFormItem } from './form';
 // import GoAButton from '../../lib/button/button';
 // describe('GoA Form', () => {
 //   it('should render', () => {
