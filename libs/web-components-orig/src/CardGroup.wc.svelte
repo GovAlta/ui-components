@@ -15,6 +15,7 @@
   .card-group {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     gap: 1rem;
     width: 100%;
   }

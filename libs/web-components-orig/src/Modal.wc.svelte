@@ -36,7 +36,7 @@
 <!-- ======================================================================= -->
 
 {#if isOpen}
-  <div use:noscroll={{enable: isOpen}} transition:fade={{delay: 200, duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
+  <div use:noscroll={{enable: isOpen}} in:fade={{duration: 200}} out:fade={{delay: 200, duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
     <div class="modal-overlay" on:click={close}></div>
     <div in:fly={{duration: 200, y: 200}} out:fly={{delay: 200, duration: 200, y: -100}} class="modal-pane">
       {#if title}

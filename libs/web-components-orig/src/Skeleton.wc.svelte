@@ -2,13 +2,14 @@
 
 <!-- Script -->
 <script lang="ts">
+  export let width: number = 320;
   export let size: number = 1;
   export let type: "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile";
 </script>
 
 <!-- HTML -->
 {#if type === "card"}
-  <div class="card card-{size}">
+  <div class="card card-{size}" style="--width: {width}px;">
     <svelte:self type="image" {size} />
     <div class="card-content">
       <svelte:self type="header" {size} />
@@ -18,7 +19,7 @@
     </div>
   </div>
 {:else if type === "profile"}
-  <div class="profile {`profile-${size}`}">
+  <div class="profile profile-{size}">
     <div class="profile-avatar">
       <svelte:self type="avatar" {size} />
     </div>
@@ -199,9 +200,13 @@
     border-radius: 4px;
   }
 
-  @media (min-width: 480px) {
+  .card {
+    width: 100%;
+  }
+
+  @media (min-width: 320px) {
     .card {
-      max-width: var(--card-max-width);
+      width: var(--width);
     }
   }
 

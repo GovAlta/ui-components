@@ -48,8 +48,8 @@
     </ul>
 
     <h2 id="section-card">Cards</h2>
-    <goa-card-group>
 
+    <goa-card-group>
       <goa-card>
         <goa-card-content>
           This is a card top title with image
