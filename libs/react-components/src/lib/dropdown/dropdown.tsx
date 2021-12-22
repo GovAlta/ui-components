@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef } from "react";
-import { GoAIconType } from "../../experimental/icons";
+import { GoAIconType } from "../icons";
 
 export * from './dropdown-option';
 

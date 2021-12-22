@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { GoAIconType } from '../../experimental/icons';
+import { GoAIconType } from '../icons';
 import './badge.scss';
 
 // TODO: move types like this into a shared file

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
-import { GoAIconType } from '..';
+import { GoAIconType } from '../..';
 import { OnChange } from '../common';
 
 interface WCProps {

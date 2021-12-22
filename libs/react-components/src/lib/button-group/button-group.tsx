@@ -20,7 +20,7 @@ type ButtonGroupProps = {
   alignment: Alignment;
 };
 
-export const GoAButton: FC<ButtonGroupProps> = ({ alignment, children }) => {
+export const GoAButtonGroup: FC<ButtonGroupProps> = ({ alignment, children }) => {
   return (
     <goa-button-group alignment={alignment}>
       {children}
@@ -28,4 +28,4 @@ export const GoAButton: FC<ButtonGroupProps> = ({ alignment, children }) => {
   );
 };
 
-export default GoAButton;
+export default GoAButtonGroup;

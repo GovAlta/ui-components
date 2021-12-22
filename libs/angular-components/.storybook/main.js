@@ -5,7 +5,6 @@ module.exports = {
   ...rootMain,
   stories: [
     '../src/lib/**/*.stories.mdx',
-    '../src/experimental/**/*.stories.mdx',
     '../../shared/storybook-common/src/lib/**/*.stories.mdx',
   ],
   addons: [
