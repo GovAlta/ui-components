@@ -2,7 +2,7 @@
  * IMPORTANT: Do NOT export experimental components in this file.
  */
 
-import '../../core-css/src/lib/styles/v2/reset.scss';
+import '../../core-css/src/lib/styles/reset.scss';
 
 import GoACallout from './lib/callout/callout';
 import GoANotification from './lib/notification/notification';
