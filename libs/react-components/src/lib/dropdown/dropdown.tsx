@@ -136,7 +136,8 @@ export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
               readonly={true}
               onChange={null}
               placeholder={props.placeholder}
-              value={getSelectedLabel()} />
+              value={getSelectedLabel()}
+              aria-label={`${props.name}-dropdown`} />
           </div>
         }
         {isMenuVisible &&
