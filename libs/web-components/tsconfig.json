@@ -1,37 +1,22 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
-  "include": [
-    "src/**/*",
-    "src/global.d.ts"
-  ],
-  "configurations": {
-    "svelte": {
-      "compilerOptions": {
-        "module": "esnext",
-        "jsx": "react",
-        "jsxFactory": "h",
-        "target": "esnext",
-        "lib": [
-          "dom",
-          "esnext.asynciterable",
-          "esnext.collection",
-          "esnext.intl",
-          "esnext.promise",
-          "esnext.string",
-          "esnext.symbol.wellknown",
-          "esnext.weakref"
-        ],
-        "types": [
-          "node",
-          "svelte"
-        ]
-      }
-    }
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es2017",
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true,
+    "sourceMap": true,
+    "types": ["svelte"],
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "exclude": [
-    "node_modules/*",
-    "__sapper__/*",
-    "public/*",
-    "demo/*"
+  "files": [],
+  "include": [],
+  "references": [
+    { "path": "./tsconfig.lib.json" },
+    { "path": "./tsconfig.spec.json" },
+    { "path": "./.storybook/tsconfig.json" }
   ]
 }
