@@ -1,1 +1,1 @@
-export * from './form-item';
+export * as GoAFormItem from './form-item';

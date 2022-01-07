@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, forwardRef, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import 'goa-web-components'
+// import '@abgov/web-components'
 
 @Component({
   selector: 'goa-ng-dropdown',
@@ -14,7 +14,7 @@ import 'goa-web-components'
   ]
 })
 @NgModule({
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class WCDropdownComponent implements ControlValueAccessor {
 

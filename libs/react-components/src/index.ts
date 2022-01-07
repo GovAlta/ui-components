@@ -4,17 +4,19 @@
 
 import '../../core-css/src/lib/styles/reset.scss';
 
+import '@abgov/web-components'
+
 import { GoAAppHeader } from './lib/app-header/app-header';
 import { GoABadge, GoAInfoBadge, GoAEmergencyBadge, GoASuccessBadge, GoAWarningBadge } from './lib/badge/badge';
 import { GoAButton } from './lib/button/button';
 import { GoAButtonGroup } from './lib/button-group/button-group';
 import { GoACallout } from './lib/callout/callout';
-import { GoACheckbox}  from './lib/checkbox/checkbox';
+import { GoACheckbox } from './lib/checkbox/checkbox';
 import { GoAContainer } from './lib/container/container';
 import { GoADropdown, GoADropdownOption } from './lib/dropdown/dropdown';
 import { GoAFlexRow } from './lib/flex';
 import { GoAFormItem } from './lib/form';
-import { GoAHeroBanner}  from './lib/hero-banner/hero-banner';
+import { GoAHeroBanner } from './lib/hero-banner/hero-banner';
 import { GoAHeroBannerContent } from './lib/hero-banner/hero-banner-content';
 import { GoAHeroBannerActions } from './lib/hero-banner/hero-banner-actions';
 import { GoAIcon, GoAIconButton } from './lib/icons';
@@ -28,6 +30,7 @@ import { GoATextArea } from './lib/textarea/textarea';
 
 // Types
 import type { GoAIconType } from './lib/icons';
+// import type { BadgeType as GoABadgeType } from '@abgov/shared-common'
 import type { GoABadgeType } from './lib/badge/badge';
 export type { GoAIconType };
 export type { GoABadgeType };
