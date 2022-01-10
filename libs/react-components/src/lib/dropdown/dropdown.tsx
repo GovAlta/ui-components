@@ -52,9 +52,9 @@ export const GoADropdown: FC<Props> = (props) => {
       const { name, value } = state.detail.data;
       props.onChange(name, value);
     };
-    current.addEventListener('on:change', handler);
+    current.addEventListener('_change', handler);
     return () => {
-      current.removeEventListener('on:change', handler);
+      current.removeEventListener('_change', handler);
     }
   }, [el, props])
 

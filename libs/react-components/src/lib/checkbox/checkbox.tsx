@@ -41,10 +41,10 @@ export const GoACheckbox: FC<Props> = ({ name, testId, error, disabled, checked,
       onChange(name, e.detail.checked, e.detail.value);
     };
 
-    current.addEventListener('on:change', listener)
+    current.addEventListener('_change', listener)
 
     return () => {
-      current.removeEventListener('on:change', listener);
+      current.removeEventListener('_change', listener);
     }
   }, [])
 

@@ -159,7 +159,7 @@
     <goa-page-loader id="page-loader" class="progress" type="progress" variant="fullscreen" message="loading.." />
     <script>
       const el = document.querySelector('#show-loader');
-      el.addEventListener('on:click', () => {
+      el.addEventListener('_click', () => {
         const loader = document.querySelector('#page-loader');
         loader.setAttribute('visible', "true")
       })
@@ -265,7 +265,7 @@
     <script>
       var modal = document.getElementById("modal")
       var modalopen = document.querySelector('#openModal');
-      modalopen.addEventListener('on:click', () => {
+      modalopen.addEventListener('_click', () => {
         openModal();
       });
       function openModal() {
@@ -274,7 +274,7 @@
       function closeModal() {
         modal.removeAttribute("open")
       }
-      document.getElementById("modal").addEventListener("on:close", () => {
+      document.getElementById("modal").addEventListener("_close", () => {
         closeModal();
       });
     </script>
@@ -312,7 +312,7 @@
     </goa-form-item>
 
     <script>
-      document.getElementById('comments').addEventListener('on:change', (e) => {
+      document.getElementById('comments').addEventListener('_change', (e) => {
         console.log('comments changed', e.detail);
       });
     </script>
@@ -338,7 +338,7 @@
     </goa-form-item>
     <script>
       var dropdown = document.getElementById("dropdown");
-      dropdown.addEventListener("on:change", (e) => {
+      dropdown.addEventListener("_change", (e) => {
         console.log(e.detail.data);
       });
     </script>
@@ -359,10 +359,10 @@
     <script>
       var radioCheckbox = document.getElementById('radio-error');
       var radioGroup = document.getElementById('radioGroup1');
-      radioGroup.addEventListener('on:change', (e) => {
+      radioGroup.addEventListener('_change', (e) => {
         console.log('in the on change', e.detail);
       });
-      radioCheckbox.addEventListener('on:change', (e) => {
+      radioCheckbox.addEventListener('_change', (e) => {
         const checked = e.detail.value === 'checked'
         radioCheckbox.checked = checked;
         if (checked) {
@@ -390,7 +390,7 @@
       <goa-button id="do-delete" variant="danger" slot="actions">Delete</goa-button>
       <script>
         var doDeleteBtn = document.getElementById('do-delete');
-        doDeleteBtn.addEventListener('on:click', () => {
+        doDeleteBtn.addEventListener('_click', () => {
           document.getElementById("modal2").removeAttribute("open");
         });
       </script>
@@ -420,7 +420,7 @@
 
     <script>
       var deleteAllButton = document.getElementById('delete-all');
-      deleteAllButton.addEventListener('on:click', () => {
+      deleteAllButton.addEventListener('_click', () => {
         document.getElementById("modal2").setAttribute("open", true);
       });
     </script>
@@ -438,7 +438,7 @@
     </goa-form-item>
     <script>
       var checkbox = document.getElementById('confirm');
-      checkbox.addEventListener('on:change', (e) => {
+      checkbox.addEventListener('_change', (e) => {
         console.log('changed', e.detail);
         checkbox.checked = e.detail.checked;
       });

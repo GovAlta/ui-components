@@ -33,9 +33,9 @@ export const GoAModal: FC<Props> = ({ title, children, open, closable, onClose }
       onClose();
     };
 
-    current.addEventListener('on:close', listener)
+    current.addEventListener('_close', listener)
     return () => {
-      current.removeEventListener('on:close', listener);
+      current.removeEventListener('_close', listener);
     }
   }, [el, onClose])
 

@@ -1,6 +1,7 @@
 <h1>Angular Demo App</h1>
 
-<goa-input type="text" (change)="onEvent($event)"></goa-input>
+<goa-input type="text" (_change)="onEvent($event)"></goa-input>
+<goa-button type="primary" (_click)="handleClick()">Button</goa-button>
 
 <goa-badge content="Dark" type="dark"></goa-badge>
 

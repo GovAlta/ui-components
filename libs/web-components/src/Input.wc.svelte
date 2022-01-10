@@ -40,7 +40,7 @@
 
   function onKeyUp(e) {
     e.target.dispatchEvent(
-      new CustomEvent("change", {
+      new CustomEvent("_change", {
         composed: true,
         bubbles: false,
         cancelable: true,
@@ -51,7 +51,7 @@
   }
 
   function doClick() {
-    this.dispatchEvent(new CustomEvent("on:trailingIconClick", { composed: true }));
+    this.dispatchEvent(new CustomEvent("_trailingIconClick", { composed: true }));
   }
 </script>
 

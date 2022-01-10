@@ -31,7 +31,7 @@
   }[size];
 
   function handleClick(e) {
-    e.target.dispatchEvent(new CustomEvent("on:click", { composed: true, detail: { event: e } }));
+    e.target.dispatchEvent(new CustomEvent("_click", { composed: true, detail: { event: e } }));
   }
 </script>
 

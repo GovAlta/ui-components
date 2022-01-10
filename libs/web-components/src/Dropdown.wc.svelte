@@ -67,7 +67,7 @@
 
         messageChannel.update((old) => ({ ...old, [name]: null }));
         el.dispatchEvent(
-          new CustomEvent('on:change', {
+          new CustomEvent('_change', {
             composed: true,
             detail: { event: null, data: { name, value: selectedValues } },
           })
@@ -144,9 +144,9 @@
     await tick();
     // To prevent the event from bubbling up to the parent, we need to listen to the event on the element itself
     // then we can stop propagation and prevent default
-    filterEl?.addEventListener('on:change', filterOnChangeListener);
+    filterEl?.addEventListener('_change', filterOnChangeListener);
     filterEl?.addEventListener(
-      'on:trailingIconClick',
+      '_trailingIconClick',
       filterOnTrailingIconClickListener
     );
     filterEl?.focus()
@@ -154,9 +154,9 @@
 
   function closeMenu() {
     isMenuVisible = false;
-    filterEl?.removeEventListener('on:change', filterOnChangeListener);
+    filterEl?.removeEventListener('_change', filterOnChangeListener);
     filterEl?.removeEventListener(
-      'on:trailingIconClick',
+      '_trailingIconClick',
       filterOnTrailingIconClickListener
     );
   }

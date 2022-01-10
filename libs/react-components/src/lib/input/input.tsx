@@ -75,10 +75,10 @@ export const GoAInput: FC<Props & { type: string }> = ({
       onTrailingIconClick();
     };
 
-    current.addEventListener('on:change', changeListener)
+    current.addEventListener('change', changeListener)
     current.addEventListener('on:ontrailingiconclick', clickListener)
     return () => {
-      current.removeEventListener('on:change', changeListener);
+      current.removeEventListener('change', changeListener);
       current.removeEventListener('on:ontrailingiconclick', clickListener);
     }
   }, [ref, onChange, onTrailingIconClick])

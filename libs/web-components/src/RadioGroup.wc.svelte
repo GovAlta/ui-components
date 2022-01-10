@@ -54,7 +54,7 @@
       const payload = state[name].payload;
       if (payload.value !== value) {
         value = payload.value;
-        el.dispatchEvent(new CustomEvent('on:change', {
+        el.dispatchEvent(new CustomEvent('_change', {
           composed: true,
           detail: { name, value: payload.value}
         }))

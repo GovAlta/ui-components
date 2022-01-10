@@ -6,6 +6,15 @@
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
+  "scripts": {
+    "build": "export ROLLUP_WATCH=1 && rollup -c",
+    "build:prod": "rollup -c",
+    "build:demo": "rollup -c rollup.demo.config.js",
+    "dev": "rollup -c rollup.demo.config.js -w",
+    "start": "sirv demo/public",
+    "prepublishOnly": "npm run build",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
   "license": "Apache-2.0",
   "keywords": [
     "GoA",

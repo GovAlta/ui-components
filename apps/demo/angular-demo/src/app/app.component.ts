@@ -9,4 +9,7 @@ export class AppComponent {
   onEvent(event: any) {
     console.log('onEvent', event.detail.data);
   }
+  handleClick() {
+    console.log('handleClick');
+  }
 }
