@@ -46,15 +46,6 @@ After an assessment, selected “discussions” will be transitioned to “issue
 | core-css                    | Library containing common scss which will be used by all ui frameworks.                                                                                                     |
 | samples                     | Sample applications showing how to integrate the NPM packages into each library type.                                                                                       |
 
-### Setup
-```bash
-cd lib/web-components
-rollup -c
-npm link
-cd ../..
-npm link goa-web-components
-```
-
 ### Building
 
 To build all libraries and applications run `npm build:all`.
