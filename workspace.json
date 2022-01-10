@@ -268,6 +268,128 @@
       },
       "tags": []
     },
+    "demo-angular-demo": {
+      "projectType": "application",
+      "root": "apps/demo/angular-demo",
+      "sourceRoot": "apps/demo/angular-demo/src",
+      "prefix": "ngd",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/demo/angular-demo",
+            "index": "apps/demo/angular-demo/src/index.html",
+            "main": "apps/demo/angular-demo/src/main.ts",
+            "polyfills": "apps/demo/angular-demo/src/polyfills.ts",
+            "tsConfig": "apps/demo/angular-demo/tsconfig.app.json",
+            "assets": [
+              "apps/demo/angular-demo/src/favicon.ico",
+              "apps/demo/angular-demo/src/assets"
+            ],
+            "styles": ["apps/demo/angular-demo/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/demo/angular-demo/src/environments/environment.ts",
+                  "with": "apps/demo/angular-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "demo-angular-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "demo-angular-demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "demo-angular-demo:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/demo/angular-demo/src/**/*.ts",
+              "apps/demo/angular-demo/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/demo/angular-demo"],
+          "options": {
+            "jestConfig": "apps/demo/angular-demo/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "demo-angular-demo-e2e": {
+      "root": "apps/demo/angular-demo-e2e",
+      "sourceRoot": "apps/demo/angular-demo-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/demo/angular-demo-e2e/cypress.json",
+            "devServerTarget": "demo-angular-demo:serve:development",
+            "tsConfig": "apps/demo/angular-demo-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "demo-angular-demo:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/demo/angular-demo-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["demo-angular-demo"]
+    },
     "react-components": {
       "root": "libs/react-components",
       "sourceRoot": "libs/react-components/src",

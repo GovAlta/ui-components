@@ -40,12 +40,12 @@
 
   function onKeyUp(e) {
     e.target.dispatchEvent(
-      new CustomEvent("on:change", {
+      new CustomEvent("change", {
         composed: true,
         bubbles: false,
         cancelable: true,
         detail: { event: e, data: { name, value: e.target.value } },
-      })
+      }),
     );
     e.stopPropagation();
   }
@@ -57,10 +57,7 @@
 
 <!-- HTML -->
 
-<div
-  class={`goa-input ${isDisabled ? "goa-input--disabled" : ""}`}
-  class:error={isError}
-  >
+<div class={`goa-input ${isDisabled ? "goa-input--disabled" : ""}`} class:error={isError}>
   {#if leadingicon}
     <div class="goa-input-leading-icon">
       <goa-icon type={leadingicon} />
@@ -101,8 +98,8 @@
 
 <!-- Styles -->
 <style>
-
-  .goa-input, .goa-input * {
+  .goa-input,
+  .goa-input * {
     box-sizing: border-box;
   }
 
