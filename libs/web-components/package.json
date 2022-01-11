@@ -2,15 +2,13 @@
   "name": "@abgov/web-components",
   "version": "0.0.0",
   "description": "Government of Alberta - UI Web components",
-  "type": "module",
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
   "scripts": {
-    "build": "export ROLLUP_WATCH=1 && rollup -c",
-    "build:prod": "rollup -c",
-    "build:demo": "rollup -c rollup.demo.config.js",
-    "dev": "rollup -c rollup.demo.config.js -w",
+    "build": "rollup -c",
+    "demo": "rollup -c rollup.demo.config.js -w",
+    "dev": "rollup -c rollup.config.js -w",
     "start": "sirv demo/public",
     "prepublishOnly": "npm run build",
     "check": "svelte-check --tsconfig ./tsconfig.json"

@@ -27,7 +27,9 @@
               "libs/angular-components/src/**/*.html"
             ]
           },
-          "outputs": ["{options.outputFile}"]
+          "outputs": [
+            "{options.outputFile}"
+          ]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -39,7 +41,9 @@
         "post": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["npm run build:styles:angular-components"],
+            "commands": [
+              "npm run build:styles:angular-components"
+            ],
             "cwd": "./",
             "parallel": false
           }
@@ -49,7 +53,9 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "port": 4400,
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/angular-components/.storybook"
             }
@@ -65,7 +71,9 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/angular-components",
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/angular-components/.storybook"
             }
@@ -116,7 +124,9 @@
               "libs/angular-material-components/src/**/*.html"
             ]
           },
-          "outputs": ["{options.outputFile}"]
+          "outputs": [
+            "{options.outputFile}"
+          ]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -131,7 +141,9 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "port": 4400,
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/angular-material-components/.storybook"
             }
@@ -147,7 +159,9 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/angular-material-components",
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/angular-material-components/.storybook"
             }
@@ -171,7 +185,9 @@
         }
       },
       "tags": [],
-      "implicitDependencies": ["core-css"]
+      "implicitDependencies": [
+        "core-css"
+      ]
     },
     "core-css": {
       "root": "libs/core-css",
@@ -187,7 +203,10 @@
               "libs/core-css/tsconfig.lib.json",
               "libs/core-css/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/core-css/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/core-css/**/*"
+            ]
           }
         },
         "test": {
@@ -222,7 +241,9 @@
         "post": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["npm run build:styles"],
+            "commands": [
+              "npm run build:styles"
+            ],
             "cwd": "./",
             "parallel": false
           }
@@ -232,7 +253,9 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/core-css/.storybook"
             }
@@ -248,7 +271,9 @@
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/core-css",
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/core-css/.storybook"
             }
@@ -276,7 +301,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/demo/angular-demo",
             "index": "apps/demo/angular-demo/src/index.html",
@@ -287,7 +314,9 @@
               "apps/demo/angular-demo/src/favicon.ico",
               "apps/demo/angular-demo/src/assets"
             ],
-            "styles": ["apps/demo/angular-demo/src/styles.css"],
+            "styles": [
+              "apps/demo/angular-demo/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -352,7 +381,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/demo/angular-demo"],
+          "outputs": [
+            "coverage/apps/demo/angular-demo"
+          ],
           "options": {
             "jestConfig": "apps/demo/angular-demo/jest.config.js",
             "passWithNoTests": true
@@ -381,14 +412,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/demo/angular-demo-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/demo/angular-demo-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["demo-angular-demo"]
+      "implicitDependencies": [
+        "demo-angular-demo"
+      ]
     },
     "react-components": {
       "root": "libs/react-components",
@@ -405,7 +442,10 @@
               "libs/react-components/tsconfig.lib-exp.json",
               "libs/react-components/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/react-components/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/react-components/**/*"
+            ]
           }
         },
         "test": {
@@ -420,7 +460,9 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/react-components/.storybook"
             }
@@ -448,7 +490,10 @@
             "tsConfig": "libs/react-components/tsconfig.lib.json",
             "project": "libs/react-components/package.json",
             "entryFile": "libs/react-components/src/index.ts",
-            "external": ["react", "react-dom"],
+            "external": [
+              "react",
+              "react-dom"
+            ],
             "babelConfig": "@nrwl/react/plugins/bundle-babel",
             "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
             "extractCss": false,
@@ -469,7 +514,10 @@
             "project": "libs/react-components/package.exp.json",
             "entryFile": "libs/react-components/src/experimental/index.ts",
             "entryRoot": "libs/react-components/src/",
-            "external": ["react", "react-dom"],
+            "external": [
+              "react",
+              "react-dom"
+            ],
             "babelConfig": "@nrwl/react/plugins/bundle-babel",
             "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
             "extractCss": false,
@@ -481,7 +529,9 @@
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/react-components",
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/react-components/.storybook"
             }
@@ -513,19 +563,27 @@
             "main": "libs/shared/common/src/index.ts",
             "tsConfig": "libs/shared/common/tsconfig.lib.json",
             "packageJson": "libs/shared/common/package.json",
-            "assets": ["libs/shared/common/*.md"]
+            "assets": [
+              "libs/shared/common/*.md"
+            ]
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/shared/common/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/shared/common/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/common"],
+          "outputs": [
+            "coverage/libs/shared/common"
+          ],
           "options": {
             "jestConfig": "libs/shared/common/jest.config.js",
             "passWithNoTests": true
@@ -575,7 +633,9 @@
               "libs/vue-components/src/**/*.vue"
             ]
           },
-          "outputs": ["{options.outputFile}"]
+          "outputs": [
+            "{options.outputFile}"
+          ]
         },
         "build": {
           "builder": "@nrwl/workspace:run-commands",
@@ -621,7 +681,9 @@
           "options": {
             "uiFramework": "@storybook/vue",
             "port": 4400,
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/vue-components/.storybook"
             }
@@ -637,7 +699,9 @@
           "options": {
             "uiFramework": "@storybook/vue",
             "outputPath": "dist/storybook/vue-components",
-            "staticDir": ["libs/shared/storybook-common/assets"],
+            "staticDir": [
+              "libs/shared/storybook-common/assets"
+            ],
             "config": {
               "configFolder": "libs/vue-components/.storybook"
             }
@@ -667,9 +731,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/web-components/**/*.{ts,svelte,spec.ts}"]
+            "lintFilePatterns": [
+              "libs/web-components/**/*.{ts,svelte,spec.ts}"
+            ]
           }
         },
         "check": {
@@ -681,7 +749,9 @@
         },
         "build": {
           "builder": "@nxext/vite:package",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "entryFile": "src/index.ts",
             "frameworkConfigFile": "@nxext/svelte/plugins/vite",
@@ -717,7 +787,9 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/storybook/web-components",
             "config": {
@@ -733,7 +805,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/web-components"],
+          "outputs": [
+            "coverage/libs/web-components"
+          ],
           "options": {
             "jestConfig": "libs/web-components/jest.config.js",
             "passWithNoTests": true

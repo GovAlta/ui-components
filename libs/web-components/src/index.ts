@@ -1,5 +1,5 @@
 export { default as GoAPageBlock } from "./PageBlock.wc.svelte";
-export { default as GoAAppHeader } from "./AppHeader.wc.svelte";
+export { default as GoAAppHeader } from "./AppHeader/AppHeader.wc.svelte";
 export { default as GoABadge } from "./Badge.wc.svelte";
 export { default as GoAButton } from "./Button.wc.svelte";
 export { default as GoAButtonGroup } from "./ButtonGroup.wc.svelte";
