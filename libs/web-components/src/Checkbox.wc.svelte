@@ -27,7 +27,7 @@
     const _value = newCheckStatus ? `${value || "checked"}` : "";
 
     e.target.dispatchEvent(
-      new CustomEvent('on:change', {
+      new CustomEvent('_change', {
         composed: true,
         detail: { name, checked: newCheckStatus, value: _value },
       })

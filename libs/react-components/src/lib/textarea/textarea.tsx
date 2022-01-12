@@ -38,9 +38,9 @@ export const GoATextArea: FC<Props> = ({ name, value, placeholder, rows, disable
       onChange(name, value);
     };
 
-    current.addEventListener('on:change', listener)
+    current.addEventListener('_change', listener)
     return () => {
-      current.removeEventListener('on:change', listener);
+      current.removeEventListener('_change', listener);
     }
   }, [el, onChange])
 

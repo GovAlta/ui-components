@@ -12,7 +12,7 @@
   $: isDisabled = toBoolean(disabled);
 
   function clickHandler(e) {
-    this.dispatchEvent(new CustomEvent("on:click", { composed: true }));
+    this.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true}));
     e.stopPropagation();
   }
 </script>

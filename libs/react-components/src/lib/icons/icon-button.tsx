@@ -37,9 +37,9 @@ export const GoAIconButton: FC<Props> = ({ type, disabled, variant = 'primary', 
       onClick();
     };
 
-    current.addEventListener('on:click', listener)
+    current.addEventListener('_click', listener)
     return () => {
-      current.removeEventListener('on:click', listener);
+      current.removeEventListener('_click', listener);
     }
   }, [ref, onClick])
 

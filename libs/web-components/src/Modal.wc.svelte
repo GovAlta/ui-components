@@ -26,7 +26,7 @@
   }
 
   function close(e) {
-    e.target.dispatchEvent(new CustomEvent("on:close", { composed: true }));
+    e.target.dispatchEvent(new CustomEvent("_close", { composed: true }));
     e.stopPropagation();
   }
 </script>

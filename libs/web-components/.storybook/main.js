@@ -2,21 +2,20 @@ const rootMain = require('../../../.storybook/main');
 
 module.exports = {
   ...rootMain,
-
   core: { ...rootMain.core, builder: 'webpack5' },
   stories: [
     // ...rootMain.stories,
-    '../src/components/**/*.stories.mdx',
-    '../src/components/**/*.stories.@(js|jsx|ts|tsx)',
+    '../src/**/*.stories.@(mdx|js|jsx|ts|tsx)',
+    '../../shared/storybook-common/src/lib/**/*.stories.mdx',
   ],
 
   addons: [
     ...rootMain.addons,
-    '@storybook/addon-docs',
-    '@storybook/addon-controls',
-    '@storybook/addon-backgrounds',
-    '@storybook/addon-a11y',
-    '@storybook/addon-viewport',
-    'storybook-addon-xd-designs'
-  ],
+    // '@storybook/addon-docs',
+    // '@storybook/addon-controls',
+    // '@storybook/addon-backgrounds',
+    // '@storybook/addon-a11y',
+    // '@storybook/addon-viewport',
+    // 'storybook-addon-xd-designs'
+  ]
 };

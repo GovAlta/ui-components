@@ -37,15 +37,12 @@ type ButtonProps = {
 export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'primary', size = 'medium', variant = 'default', children, onClick }) => {
   const el = useRef<HTMLElement>();
   useEffect(() => {
-    console.log('creating the button')
     const current = el.current;
-    const listener = (e: CustomEvent) => {
-      onClick();
-    };
+    const listener = (e: CustomEvent) => { onClick(); };
 
-    current.addEventListener('on:click', listener)
+    current.addEventListener('_click', listener)
     return () => {
-      current.removeEventListener('on:click', listener);
+      current.removeEventListener('_click', listener);
     }
   }, [el, onClick])
 

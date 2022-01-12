@@ -2,9 +2,16 @@
   "name": "@abgov/web-components",
   "version": "0.0.0",
   "description": "Government of Alberta - UI Web components",
-  "type": "module",
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "demo": "rollup -c rollup.demo.config.js -w",
+    "dev": "rollup -c rollup.config.js -w",
+    "start": "sirv demo/public",
+    "prepublishOnly": "npm run build",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "license": "Apache-2.0",
   "keywords": [

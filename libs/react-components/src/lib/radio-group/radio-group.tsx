@@ -43,9 +43,9 @@ export const GoARadioGroup: FC<Props> = ({
       onChange(name, e.detail.value);
     }
     const currentEl = el.current;
-    currentEl.addEventListener("on:change", listener);
+    currentEl.addEventListener("_change", listener);
     return () => {
-      currentEl.removeEventListener("on:change", listener);
+      currentEl.removeEventListener("_change", listener);
     }
   }, [])
 

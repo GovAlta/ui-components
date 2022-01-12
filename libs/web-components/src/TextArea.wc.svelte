@@ -18,7 +18,7 @@
     const value = target.value;
 
     e.target.dispatchEvent(
-      new CustomEvent("on:change", {
+      new CustomEvent("_change", {
         composed: true,
         bubbles: false,
         cancelable: true,
