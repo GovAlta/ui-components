@@ -5,6 +5,7 @@
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
+  "type": "module",
   "scripts": {
     "build": "rollup -c",
     "demo": "rollup -c rollup.demo.config.js -w",
