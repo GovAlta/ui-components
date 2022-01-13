@@ -426,6 +426,7 @@
 
 <script lang="ts">
   import { toBoolean } from "./common/utils";
+  import { IonIcon } from "ionicons/components/ion-icon"
 
   export let type: GoAIconType;
   export let size: IconSize = 'medium';
@@ -448,7 +449,7 @@
   data-testid={`icon-${type}`}
   style={`--size: ${_size}`}
   >
-  {#if type}
+  {#if type }
     <ion-icon style={`width: ${_size}; height: ${_size}`} name={theme === "filled" ? type : `${type}-${theme}`} />
   {/if}
 </div>
