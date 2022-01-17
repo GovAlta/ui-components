@@ -423,9 +423,72 @@
         }
       },
       "tags": [],
-      "implicitDependencies": [
-        "demo-angular-demo"
-      ]
+      "implicitDependencies": ["demo-angular-demo"]
+    },
+    "docs": {
+      "root": "libs/docs",
+      "sourceRoot": "libs/docs/src",
+      "projectType": "library",
+      "tags": [],
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/docs",
+            "tsConfig": "libs/docs/tsconfig.lib.json",
+            "project": "libs/docs/package.json",
+            "entryFile": "libs/docs/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/docs/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/docs/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/docs/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/docs",
+            "config": {
+              "configFolder": "libs/docs/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
     },
     "react-components": {
       "root": "libs/react-components",
