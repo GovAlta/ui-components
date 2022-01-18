@@ -2,9 +2,8 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { toBoolean } from "../common/utils";
-  // import type { BadgeType } from "@abgov/share";
-
+  import { toBoolean } from "../../common/utils";
+ 
   export let type: "success" | "warning" | "information" | "emergency" | "inactive" | "dark" | "midtone" | "light";
   export let content: string;
 

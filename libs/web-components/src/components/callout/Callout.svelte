@@ -5,6 +5,9 @@
   export let type: "emergency" | "caution" | "information" | "event" | "success";
   export let title: string;
 
+  // optional
+  export let testId: string = "";
+  
   $: iconType =
     type === "emergency"
       ? "warning"
@@ -19,7 +22,7 @@
 </script>
 
 <!-- HTML -->
-<div class="notification">
+<div class="notification" data-testid={testId}>
   <span class="icon {type}">
     <goa-icon type={iconType} inverted />
   </span>

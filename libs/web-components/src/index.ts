@@ -2,11 +2,11 @@ import '../public/css/vars.css';
 import '../public/css/reset.css';
 
 export { default as GoAPageBlock } from "./PageBlock.wc.svelte";
-export { default as GoAAppHeader } from "./app-header/AppHeader.wc.svelte";
-export { default as GoABadge } from "./badge/Badge.wc.svelte";
+export { default as GoAAppHeader } from "./components/app-header/AppHeader.svelte";
+export { default as GoABadge } from "./components/badge/Badge.svelte";
 export { default as GoAButton } from "./Button.wc.svelte";
 export { default as GoAButtonGroup } from "./ButtonGroup.wc.svelte";
-export { default as GoACallout } from "./Callout.wc.svelte";
+export { default as GoACallout } from "./components/callout/Callout.svelte";
 export { default as GoACard } from "./Card.wc.svelte";
 export { default as GoACardActions } from "./CardActions.wc.svelte";
 export { default as GoACardContent } from "./CardContent.wc.svelte";
