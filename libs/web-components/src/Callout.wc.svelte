@@ -2,7 +2,10 @@
 
 <!-- Script -->
 <script lang="ts">
+  // import type { CalloutType } from "@abgov/shared/common";
   export let type: "emergency" | "caution" | "information" | "event" | "success";
+
+  // export let type: CalloutType = "";
   export let title: string;
 
   $: iconType =
@@ -14,8 +17,9 @@
       ? "information-circle"
       : type === "success"
       ? "checkmark-circle"
-      : "calendar";
-
+      : type === "event"
+      ? "calendar"
+      : "";
 </script>
 
 <!-- HTML -->

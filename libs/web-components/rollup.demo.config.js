@@ -2,12 +2,9 @@ import svelte from "rollup-plugin-svelte";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import livereload from "rollup-plugin-livereload";
-import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
 import preprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
-
-const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
   let server;
@@ -40,22 +37,21 @@ export default {
   },
   plugins: [
     commonjs(),
-    typescript({ sourceMap: !production }),
+    typescript({ sourceMap: true}),
     svelte({
       // compile only *.wc.svelte files as web components
       include: /\.wc\.svelte$/,
-      preprocess: preprocess({ sourceMap: !production }),
+      exclude: /App\.svelte/,
+      preprocess: preprocess({ sourceMap: true }),
       compilerOptions: {
-        // enable run-time checks when not in production
-        dev: !production,
+        dev: true,
         customElement: true,
       },
     }),
     svelte({
-      exclude: /\.wc\.svelte$/,
+      include: /App\.svelte$/,
       compilerOptions: {
-        // enable run-time checks when not in production
-        dev: !production,
+        dev: true,
       },
     }),
     // we'll extract any component CSS out into
@@ -72,17 +68,8 @@ export default {
       dedupe: ["svelte"],
     }),
 
-    // In dev mode, call `npm run start` once
-    // the bundle has been generated
-    !production && serve(),
-
-    // Watch the `public` directory and refresh the
-    // browser on changes when not in production
-    !production && livereload("demo/public"),
-
-    // If we're building for production (npm run build
-    // instead of npm run dev), minify
-    production && terser(),
+    serve(),
+    livereload("demo/public"),
   ],
   watch: {
     clearScreen: false,

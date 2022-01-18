@@ -6,9 +6,9 @@
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
   "scripts": {
-    "build": "rollup -c",
-    "demo": "rollup -c rollup.demo.config.js -w",
+    "build": "rollup -c rollup.config.js",
     "dev": "rollup -c rollup.config.js -w",
+    "demo": "rollup -c rollup.demo.config.js -w",
     "start": "sirv demo/public",
     "prepublishOnly": "npm run build",
     "check": "svelte-check --tsconfig ./tsconfig.json"
@@ -22,5 +22,25 @@
     "type": "git",
     "url": "https://github.com/GovAlta/ui-components.git",
     "directory": "libs/web-components"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "@tsconfig/svelte": "^2.0.0",
+    "rollup": "^2.0.0",
+    "rollup-plugin-clean": "^1.0.0",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-summary": "^1.3.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "sirv-cli": "^1.0.0",
+    "svelte": "^3.0.0",
+    "svelte-check": "^2.0.0",
+    "svelte-preprocess": "^4.0.0",
+    "tslib": "^2.0.0",
+    "typescript": "^4.0.0"
   }
 }

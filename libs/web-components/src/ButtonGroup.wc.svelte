@@ -2,7 +2,10 @@
 
 <!-- Script -->
 <script lang="ts">
+  // import type { ButtonGroupAlignment } from "@abgov/shared/common";
   export let alignment: "start" | "end";
+
+  // export let alignment: ButtonGroupAlignment = "start";
 </script>
 
 <!-- HTML -->

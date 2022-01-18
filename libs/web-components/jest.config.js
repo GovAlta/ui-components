@@ -7,12 +7,7 @@ module.exports = {
     },
   },
   transform: {
-    '^(.+\\.svelte$)': [
-      'svelte-jester',
-      {
-        preprocess: 'libs/web-components/svelte.config.cjs',
-      },
-    ],
+    '^(.+\\.svelte$)': ['svelte-jester', { preprocess: './libs/web-components/svelte.config.cjs' }],
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['svelte', 'ts', 'js', 'html'],

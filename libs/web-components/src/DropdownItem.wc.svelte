@@ -6,15 +6,15 @@
   import { fromBoolean, toBoolean } from './common/utils';
 
   // public
-  export let name: string;
-  export let value: string;
-  export let label: string;
+  export let name: string = '';
+  export let value: string = '';
+  export let label: string = '';
 
   // optional
   export let testId: string = '';
-  export let selected: string;
-  export let disabled: string;
-  export let hide: string;
+  export let selected: string = '';
+  export let disabled: string = '';
+  export let hide: string = '';
 
   $: isSelected = toBoolean(selected);
   $: isDisabled = toBoolean(disabled);

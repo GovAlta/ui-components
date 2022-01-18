@@ -1,13 +1,22 @@
 <svelte:options tag="goa-button" />
 
 <script lang="ts">
+  // import { ButtonSize, ButtonType, ButtonVariant, WCBoolean, WC_FALSE } from "@abgov/shared/common";
+
   import { toBoolean } from "./common/utils";
+
 
   export let type = "primary"; // primary, secondary, tertiary, borderless
   export let size = "medium"; // small, medium, large
   export let variant = "default"; // default, danger
   export let title: string;
   export let disabled: string;
+
+  // export let type: ButtonType = "primary";
+  // export let size: ButtonSize =  "medium";
+  // export let variant: ButtonVariant = "default";
+  // export let title: string = "";
+  // export let disabled: WCBoolean = WC_FALSE;
 
   $: isDisabled = toBoolean(disabled);
 

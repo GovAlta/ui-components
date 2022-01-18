@@ -10,7 +10,7 @@ export default {
   input: "src/index.ts",
   output: {
     sourcemap: true,
-    format: "es", // es, iife, umd
+    format: "iife", // es, iife, umd
     name: "app",
     file: "./build/bundle.js",
   },
@@ -37,4 +37,8 @@ export default {
     terser(),
     summary(),
   ],
+  watch: {
+    clearScreen: true,
+    include: ["src/**/*.ts", "src/**/*.svelte"],
+  },
 };

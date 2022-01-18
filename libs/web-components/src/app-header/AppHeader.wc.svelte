@@ -4,7 +4,6 @@
 <script lang="ts">
   export let url: string;
   export let title: string;
-  // import '@abgov/web-components';
 </script>
 
 <!-- HTML -->
@@ -33,6 +32,9 @@
 
 <!-- Style -->
 <style>
+  :host {
+    font-family: var(--font-family);
+  }
   .app-header {
     display: flex;
     align-items: center;

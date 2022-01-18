@@ -448,7 +448,7 @@
   data-testid={`icon-${type}`}
   style={`--size: ${_size}`}
   >
-  {#if type}
+  {#if type }
     <ion-icon style={`width: ${_size}; height: ${_size}`} name={theme === "filled" ? type : `${type}-${theme}`} />
   {/if}
 </div>
