@@ -1,0 +1,85 @@
+:host,
+:root {
+  --font-family: acumin-pro-semi-condensed, sans-serif;
+
+  /* font-size */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1.125rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+
+  /* font-weight */
+  --fw-thin: 100;
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-black: 900;
+
+  /* line-height */
+  --lh-xs: 0.875rem;
+  --lh-sm: 1rem;
+  --lh-base: 1.5rem;
+  --lh-lg: 2rem;
+  --lh-xl: 2.75rem;
+  --lh-2xl: 3.5rem;
+
+  --border-radius-sm: 0.15rem;
+  --border-radius: 0.25rem;
+  --border-radius-base: 0.25rem;
+  --border-radius-lg: 0.5rem;
+
+  --spacing-1: 0.5rem;
+  --spacing-2: 0.875rem;
+  --spacing-3: 1.75rem;
+
+  --input-padding: 0.5rem;
+  --input-border-radius: 0.25rem;
+  --input-font-size: var(--fs-base);
+
+  --color-white: #fff;
+  --color-black: #333;
+
+  --color-gray-100: #f1f1f1;
+  --color-gray-200: #dcdcdc;
+  --color-gray-500: #adadad;
+  --color-gray-600: #767676;
+  --color-gray-700: #666;
+  --color-gray-900: #333;
+
+  --color-tealblue: #0081a2;
+  --color-tealblue-100: #c8eefa;
+  --color-tealblue-500: #0081a2;
+  --color-tealblue-900: #005072;
+
+  --color-orange: #feba35;
+  --color-orange-100: hsl(39.7, 99.01%, 98%);
+  --color-orange-500: hsl(39.7, 99.01%, 60.2%);
+  --color-orange-900: hsl(39.7, 99.01%, 30%);
+
+  --color-red: #ec040b;
+  --color-red-100: hsl(358.19, 96.67%, 98%);
+  --color-red-500: hsl(358.19, 96.67%, 47.06%);
+  --color-red-600: hsl(358.19, 96.67%, 40%);
+  --color-red-900: hsl(358.19, 96.67%, 20%);
+
+  --color-green: #00853f;
+  --color-green-100: hsl(148, 100%, 95%);
+  --color-green-500: hsl(148.42, 100%, 26.08%);
+  --color-green-900: hsl(148, 100%, 10%);
+
+  --color-blue: #005daa;
+  --color-blue-100: #e3f2ff;
+  --color-blue-500: #0070c4;
+  --color-blue-600: #004f84;
+
+  --shadow-0: 0 0 rgba(0, 0, 0, 0);
+  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+  --shadow-3: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
+  --shadow-4: 0 15px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05);
+  --shadow-5: 0 20px 40px rgba(0, 0, 0, 0.2);
+}

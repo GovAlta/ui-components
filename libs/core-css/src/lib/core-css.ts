@@ -1,1 +1,0 @@
-export { goa } from './goa';

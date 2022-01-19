@@ -2,47 +2,79 @@
  * IMPORTANT: Do NOT export experimental components in this file.
  */
 
-import '../../core-css/src/lib/styles/v2/reset.scss';
-import '../../core-css/src/lib/styles/fonts/fonts.scss';
+import '../../core-css/src/lib/styles/reset.scss';
 
-import GoACallout from './lib/callout/callout';
-import GoANotification from './lib/notification/notification';
-import GoAButton from './lib/button/button';
-import GoAHeader from './lib/header/header';
-import GoAMicrositeLogo from './lib/microsite-logo/microsite-logo';
-import GoAHeroBanner from './lib/hero-banner/hero-banner.component';
+import '@abgov/web-components'
+
+import { GoAAppHeader } from './lib/app-header/app-header';
+import { GoABadge, GoAInfoBadge, GoAEmergencyBadge, GoASuccessBadge, GoAWarningBadge } from './lib/badge/badge';
+import { GoAButton } from './lib/button/button';
+import { GoAButtonGroup } from './lib/button-group/button-group';
+import { GoACallout } from './lib/callout/callout';
+import { GoACheckbox } from './lib/checkbox/checkbox';
+import { GoAContainer } from './lib/container/container';
 import { GoADropdown, GoADropdownOption } from './lib/dropdown/dropdown';
+import { GoAFlexRow } from './lib/flex';
+import { GoAFormItem } from './lib/form';
+import { GoAHeroBanner } from './lib/hero-banner/hero-banner';
+import { GoAHeroBannerContent } from './lib/hero-banner/hero-banner-content';
+import { GoAHeroBannerActions } from './lib/hero-banner/hero-banner-actions';
+import { GoAIcon, GoAIconButton } from './lib/icons';
+import { GoAInput, GoAInputText, GoAInputPassword, GoAInputDate, GoAInputTime, GoAInputDateTime, GoAInputEmail, GoAInputSearch, GoAInputUrl, GoAInputTel, GoAInputFile, GoAInputMonth, GoAInputNumber, GoAInputRange } from './lib/input/input';
+import { GoAModal } from './lib/modal/modal';
+import { GoANotification } from './lib/notification/notification';
+import { GoAPageLoader } from './lib/page-loader/page-loader';
 import { GoARadioGroup, GoARadio } from './lib/radio-group/radio-group';
-import { GoASkeletonContent } from './lib/skeleton/skeleton-titled-content';
-import { GoASkeletonGridColumnContent } from './lib/skeleton/skeleton-grid-column';
-import { GoASkeletonImageContent } from './lib/skeleton/skeleton-image-content';
-import GoACard from './lib/card/card.component';
-import GoACardGroup from './lib/card-group/card.group.component';
-import GoACheckbox from './lib/checkbox/checkbox';
-import GoAHeroBannerContent from './lib/hero-banner/content/hero-banner-content.component';
-import GoAHeroBannerLink from './lib/hero-banner/link/hero-banner-link.component';
-import GoAPageLoader from './lib/page-loader/page-loader';
-import { GoAElementLoader } from './lib/element-loader/element-loader';
+import { GoAServiceLevelHeader } from './lib/service-level-header/service-level-header';
+import { GoATextArea } from './lib/textarea/textarea';
+
+// Types
+import type { GoAIconType } from './lib/icons';
+// import type { BadgeType as GoABadgeType } from '@abgov/shared-common'
+import type { GoABadgeType } from './lib/badge/badge';
+export type { GoAIconType };
+export type { GoABadgeType };
 
 export {
-  GoAPageLoader,
-  GoAElementLoader,
-  GoASkeletonContent,
-  GoASkeletonGridColumnContent,
-  GoASkeletonImageContent,
-  GoANotification,
-  GoARadioGroup,
-  GoARadio,
-  GoACallout,
+  GoAAppHeader,
+  GoABadge,
   GoAButton,
-  GoAHeader,
-  GoAMicrositeLogo,
-  GoAHeroBanner,
-  GoAHeroBannerContent,
-  GoAHeroBannerLink,
-  GoACard,
-  GoACardGroup,
+  GoAButtonGroup,
+  GoACallout,
+  GoACheckbox,
+  GoAContainer,
   GoADropdown,
   GoADropdownOption,
-  GoACheckbox,
+  GoAEmergencyBadge,
+  GoAFlexRow,
+  GoAFormItem,
+  GoAHeroBanner,
+  GoAHeroBannerContent,
+  GoAHeroBannerActions,
+  GoAIcon,
+  GoAIconButton,
+  GoAInfoBadge,
+  GoAInput,
+  GoAInputDate,
+  GoAInputDateTime,
+  GoAInputEmail,
+  GoAInputFile,
+  GoAInputMonth,
+  GoAInputNumber,
+  GoAInputPassword,
+  GoAInputRange,
+  GoAInputSearch,
+  GoAInputTel,
+  GoAInputText,
+  GoAInputTime,
+  GoAInputUrl,
+  GoAModal,
+  GoANotification,
+  GoAPageLoader,
+  GoARadio,
+  GoARadioGroup,
+  GoAServiceLevelHeader,
+  GoASuccessBadge,
+  GoATextArea,
+  GoAWarningBadge,
 };

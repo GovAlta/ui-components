@@ -1,62 +1,57 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './button.scss';
+import React, { FC, ReactNode, useEffect, useRef } from 'react';
+import './button.css';
 
-type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'borderless' | 'red';
-type ButtonSize = 'small' | 'normal';
+type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'borderless';
+type ButtonSize = 'small' | 'medium' | 'large';
+type ButtonVariant = 'default' | 'danger'
+
+interface WCProps {
+  type?: ButtonType;
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  disabled?: boolean
+  title: string;
+  ref: React.MutableRefObject<HTMLElement>;
+}
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      'goa-button': WCProps & React.HTMLAttributes<HTMLElement>
+    }
+  }
+}
 
 type ButtonProps = {
-  /**
-   * Type of button
-   */
-  buttonType?: ButtonType;
-  /**
-   * Size of button
-   */
-  buttonSize?: ButtonSize;
-  /**
-   * Mouseover popup description
-   */
+  type?: ButtonType;
   title?: string;
-  /**
-   * Action to take on button click
-   */
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  /**
-   * Button content (between button tags)
-   */
-  children?: React.ReactNode;
-  [key: string]: any;
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  disabled?: boolean;
+  onClick: () => void;
+  children: ReactNode;
 };
 
-export const GoAButton = ({
-  buttonType = 'primary',
-  buttonSize = 'normal',
-  title = null,
-  children = null,
-  onClick = null,
-  ...props
-}: ButtonProps) => {
-  const btnTypeClass = buttonType === 'primary' ? '' : `goa--${buttonType}`;
-  const btnSize = buttonSize === 'small' ? 'btn-small' : '';
+export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'primary', size = 'medium', variant = 'default', children, onClick }) => {
+  const el = useRef<HTMLElement>();
+  useEffect(() => {
+    const current = el.current;
+    const listener = (e: CustomEvent) => { onClick(); };
+
+    current.addEventListener('_click', listener)
+    return () => {
+      current.removeEventListener('_click', listener);
+    }
+  }, [el, onClick])
+
   return (
-    <button
-      className={`goa-button ${btnSize} ${btnTypeClass}`}
-      title={title}
-      onClick={onClick}
-      {...props}
-    >
+    <goa-button ref={el} type={type} size={size} variant={variant} disabled={disabled} title={title}>
+      in the button
       {children}
-    </button>
+    </goa-button>
   );
-};
-
-GoAButton.propTypes = {
-  buttonSize: PropTypes.string,
-  buttonType: PropTypes.string,
-  title: PropTypes.string,
-  children: PropTypes.node,
-  onClick: PropTypes.func
 };
 
 export default GoAButton;
