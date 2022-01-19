@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { messageChannel } from './common/radio-store';
+  import { messageChannel } from '../../common/radio-store';
 
   export let value: string;
   export let label: string;

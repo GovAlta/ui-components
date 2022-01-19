@@ -4,9 +4,9 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
 
-  import noScroll from "./common/no-scroll";
-  import { fromBoolean, toBoolean } from "./common/utils";
-  import type { SpinnerType } from "./Spinner.wc.svelte";
+  import noScroll from "../../common/no-scroll";
+  import { fromBoolean, toBoolean } from "../../common/utils";
+  import type { SpinnerType } from "../spinner/Spinner.svelte";
 
   export let type: SpinnerType = 'infinite';
   export let message: string;

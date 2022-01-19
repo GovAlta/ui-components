@@ -40,7 +40,7 @@ export default {
     typescript({ sourceMap: true}),
     svelte({
       // compile only *.wc.svelte files as web components
-      include: /\.wc\.svelte$/,
+      include: /\.svelte$/,
       exclude: /App\.svelte/,
       preprocess: preprocess({ sourceMap: true }),
       compilerOptions: {

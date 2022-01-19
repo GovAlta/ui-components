@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/svelte';
+import { render } from '@testing-library/svelte';
 
-import GoABadge from './Badge.wc.svelte'
+import GoABadge from './Badge.svelte'
 
 describe('GoAAppVersionHeaderComponent', () => {
   it('should render', async () => {

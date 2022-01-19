@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { toBoolean } from "./common/utils";
+  import { toBoolean } from "../../common/utils";
 
   export let name: string;
   export let value: string;

@@ -2,8 +2,8 @@
 
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { messageChannel } from './common/radio-store';
-  import { toBoolean } from './common/utils';
+  import { messageChannel } from '../../common/radio-store';
+  import { toBoolean } from '../../common/utils';
 
   export let name: string;
   export let value: string;

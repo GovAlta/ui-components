@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { toBoolean } from "../common/utils";
+  import { toBoolean } from "../../common/utils";
   // import { BadgeType, WCBoolean, WC_FALSE } from "@abgov/shared/common";
 
 

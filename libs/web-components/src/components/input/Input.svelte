@@ -6,8 +6,8 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
-  import { toBoolean } from "./common/utils";
-  import type { GoAIconType } from "./Icon.wc.svelte";
+  import { toBoolean } from "../../common/utils";
+  import type { GoAIconType } from "../icon/Icon.svelte";
 
   export let type: string = "text";
   export let name: string = "";

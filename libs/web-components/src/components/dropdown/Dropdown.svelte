@@ -1,11 +1,11 @@
 <svelte:options tag="goa-dropdown" />
 
 <script lang="ts">
-  import { messageChannel } from './common/dropdown-store';
-  import type { Message } from './common/dropdown-store';
-  import type { GoAIconType } from './Icon.wc.svelte';
+  import { messageChannel } from '../../common/dropdown-store';
+  import type { Message } from '../../common/dropdown-store';
+  import type { GoAIconType } from '../icon/Icon.svelte';
   import { onDestroy, onMount, tick } from 'svelte';
-  import { toBoolean } from './common/utils';
+  import { toBoolean } from '../../common/utils';
 
   const MAX_HEIGHT = 300;
 

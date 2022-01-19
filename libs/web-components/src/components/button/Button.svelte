@@ -3,7 +3,7 @@
 <script lang="ts">
   // import { ButtonSize, ButtonType, ButtonVariant, WCBoolean, WC_FALSE } from "@abgov/shared/common";
 
-  import { toBoolean } from "./common/utils";
+  import { toBoolean } from "../../common/utils";
 
 
   export let type = "primary"; // primary, secondary, tertiary, borderless

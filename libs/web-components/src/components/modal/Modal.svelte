@@ -6,8 +6,8 @@
 
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
-  import noscroll from "./common/no-scroll";
-  import { toBoolean } from "./common/utils";
+  import noscroll from "../../common/no-scroll";
+  import { toBoolean } from "../../common/utils";
 
   export let title: string;
   export let closable: string;

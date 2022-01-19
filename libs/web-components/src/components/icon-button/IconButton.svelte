@@ -1,8 +1,8 @@
 <svelte:options tag="goa-icon-button" />
 
 <script lang="ts">
-  import { toBoolean } from "./common/utils";
-  import type { IconSize, IconTheme, GoAIconType } from "./Icon.wc.svelte";
+  import { toBoolean } from "../../common/utils";
+  import type { IconSize, IconTheme, GoAIconType } from "../icon/Icon.svelte";
 
   type IconButtonVariant = "color" | "nocolor"
 

@@ -425,7 +425,7 @@
 </script>
 
 <script lang="ts">
-  import { toBoolean } from "./common/utils";
+  import { toBoolean } from "../../common/utils";
 
   export let type: GoAIconType;
   export let size: IconSize = 'medium';

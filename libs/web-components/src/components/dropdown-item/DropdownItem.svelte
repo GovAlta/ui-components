@@ -2,8 +2,8 @@
 
 <script lang="ts">
   import { onMount, tick } from 'svelte';
-  import { messageChannel } from './common/dropdown-store';
-  import { fromBoolean, toBoolean } from './common/utils';
+  import { messageChannel } from '../../common/dropdown-store';
+  import { fromBoolean, toBoolean } from '../../common/utils';
 
   // public
   export let name: string = '';
