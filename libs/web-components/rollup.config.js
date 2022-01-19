@@ -16,18 +16,18 @@ export default {
   },
   plugins: [
     commonjs(),
-    typescript({ sourceMap: true}),
+    typescript({ sourceMap: true }),
     svelte({
-      // compile only *.wc.svelte files as web components
-      include: /\.wc\.svelte$/,
-      preprocess: preprocess({ sourceMap: true}),
+      include: /\.svelte$/,
+      exclude: /App\.svelte/,
+      preprocess: preprocess({ sourceMap: true }),
       compilerOptions: {
         dev: true,
         customElement: true,
       },
     }),
     svelte({
-      exclude: /\.wc\.svelte$/,
+      include: /App\.svelte/,
       compilerOptions: {
         // enable run-time checks when not in production
         dev: true,

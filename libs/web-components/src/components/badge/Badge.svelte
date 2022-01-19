@@ -5,7 +5,6 @@
   import { toBoolean } from "../../common/utils";
   // import { BadgeType, WCBoolean, WC_FALSE } from "@abgov/shared/common";
 
-
   export let type: "success" | "warning" | "information" | "emergency" | "inactive" | "dark" | "midtone" | "light";
 
   // optional
