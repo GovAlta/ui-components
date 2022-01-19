@@ -7,15 +7,15 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { tweened } from 'svelte/motion';
-	import { quartOut } from 'svelte/easing';
+  import { tweened } from "svelte/motion";
+  import { quartOut } from "svelte/easing";
 
   export let size: SpinnerSize;
   export let invert = false;
   export let type: SpinnerType = "infinite";
   export let progress = "0";
 
-	const _progress = tweened(0, {
+  const _progress = tweened(0, {
     duration: 500,
     easing: quartOut,
   });
@@ -50,7 +50,7 @@
   function getCoords(radians: number): string {
     const x = radius + pathRadius * Math.cos(radians);
     const y = radius + pathRadius * Math.sin(radians);
-    return x + ' ' + y;
+    return x + " " + y;
   }
 
   function getArc(progress: number): string {
@@ -58,7 +58,7 @@
       case "progress": {
         const start = getCoords(-Math.PI / 2);
         const end = getCoords(-Math.PI / 2 + 2 * Math.PI * (progress / 100));
-        const largeArcFlag = (progress % 100) < 50 ? 0 : 1;
+        const largeArcFlag = progress % 100 < 50 ? 0 : 1;
 
         return `M ${start} A ${pathRadius} ${pathRadius} 0 ${largeArcFlag} 1 ${end}`;
       }
@@ -85,14 +85,14 @@
     <circle
       cx={radius}
       cy={radius}
-      stroke={invert ? "var(--color-blue-600)" : "var(--color-tealblue-100)"}
+      stroke={invert ? "var(--goa-color-primary-dark)" : "var(--goa-color-brand-light)"}
       stroke-width={strokewidth}
       r={radius - strokewidth / 2}
     />
     <path
       d={getArc($_progress)}
       stroke-width={strokewidth}
-      stroke={invert ? "var(--color-tealblue-100)" : "var(--color-blue)"}
+      stroke={invert ? "var(--goa-color-brand-light)" : "var(--goa-color-primary)"}
       stroke-linecap="round"
     />
   </svg>

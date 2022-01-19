@@ -5,7 +5,15 @@
   import { toBoolean } from "../../common/utils";
   // import { BadgeType, WCBoolean, WC_FALSE } from "@abgov/shared/common";
 
-  export let type: "success" | "warning" | "information" | "emergency" | "inactive" | "dark" | "midtone" | "light";
+  export let type:
+    | "success"
+    | "warning"
+    | "information"
+    | "emergency"
+    | "inactive"
+    | "dark"
+    | "midtone"
+    | "light";
 
   // optional
   export let testId: string = "";
@@ -75,26 +83,27 @@
 
   .goa-badge.badge-information {
     background-color: var(--color-white);
+    /* TODO: need color name */
     color: var(--color-blue);
   }
 
   .goa-badge.badge-success {
-    background-color: var(--color-green);
+    background-color: var(--goa-color-status-success);
     color: var(--color-white);
   }
 
   .goa-badge.badge-warning {
-    background-color: var(--color-orange);
+    background-color: var(--goa-color-status-warning);
     color: var(--color-black);
   }
 
   .goa-badge.badge-emergency {
-    background-color: var(--color-red);
+    background-color: var(--goa-color-status-emergency);
     color: var(--color-white);
   }
 
   .goa-badge.badge-dark {
-    background-color: var(--color-gray-900);
+    background-color: var(--color-black);
     color: var(--color-white);
   }
 

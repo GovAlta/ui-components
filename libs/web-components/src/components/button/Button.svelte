@@ -5,7 +5,6 @@
 
   import { toBoolean } from "../../common/utils";
 
-
   export let type = "primary"; // primary, secondary, tertiary, borderless
   export let size = "medium"; // small, medium, large
   export let variant = "default"; // default, danger
@@ -21,7 +20,7 @@
   $: isDisabled = toBoolean(disabled);
 
   function clickHandler(e) {
-    this.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true}));
+    this.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
     e.stopPropagation();
   }
 </script>
@@ -48,7 +47,7 @@
 
   button {
     border-radius: 0.25rem;
-    border: 2px solid var(--color-blue-500, "blue");
+    border: 2px solid var(--goa-color-interactive);
     box-sizing: border-box;
     cursor: pointer;
     font-size: var(--fs-base, 1rem);
@@ -57,8 +56,7 @@
     padding: 0 0.75rem;
     min-width: 5rem;
 
-    transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out,
-      border-color 0.2s ease-in-out;
+    transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
     transform: scaleX(1);
   }
 
@@ -68,42 +66,42 @@
 
   /* Primary */
   button.primary {
-    border: 2px solid var(--color-blue-500, blue);
-    background: var(--color-blue-500, blue);
+    border: 2px solid var(--goa-color-interactive);
+    background: var(--goa-color-interactive);
     color: var(--color-white, white);
   }
 
   button.primary:hover {
-    border-color: var(--color-blue-600);
-    background: var(--color-blue-600);
+    border-color: var(--goa-color-interactive--hover);
+    background: var(--goa-color-interactive--hover);
   }
 
   button.primary:focus,
   button.primary:active {
-    border-color: var(--color-blue-600);
-    box-shadow: 0 0 0 3px var(--color-orange-500);
-    background: var(--color-blue-600);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
+    border-color: var(--goa-color-interactive--active);
+    background: var(--goa-color-interactive--active);
     outline: none;
   }
 
   /* Secondary */
 
   button.secondary {
-    border: 2px solid var(--color-blue-500, blue);
-    background: var(--color-blue-500, blue);
-    color: var(--color-white, white);
+    border: 2px solid var(--goa-color-interactive);
+    background: var(--color-white);
+    color: var(--goa-color-interactive);
   }
 
   button.secondary:hover {
-    border-color: var(--color-blue-600);
-    background: var(--color-blue-600);
+    border-color: var(--goa-color-interactive--hover);
+    color: var(--goa-color-interactive--hover);
   }
 
   button.secondary:focus,
   button.secondary:active {
-    border-color: var(--color-blue-600);
-    box-shadow: 0 0 0 3px var(--color-orange-500);
-    background: var(--color-blue-600);
+    border-color: var(--goa-color-interactive--active);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
+    background: var(--color-gray-100);
     outline: none;
   }
 
@@ -112,18 +110,18 @@
   button.tertiary {
     border-color: var(--color-gray-200);
     background: var(--color-white);
-    color: var(--color-blue-500);
+    color: var(--goa-color-interactive);
   }
 
   button.tertiary:hover {
-    color: var(--color-blue-600);
+    color: var(--goa-color-interactive--hover);
   }
 
   button.tertiary:focus,
   button.tertiary:active {
-    border-color: var(--color-blue-600);
-    color: var(--color-blue-600);
-    box-shadow: 0 0 0 3px var(--color-orange-500);
+    border-color: var(--goa-color-interactive--active);
+    color: var(--goa-color-interactive--active);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
     outline: none;
   }
 
@@ -131,88 +129,90 @@
 
   button.borderless {
     background: none;
-    color: var(--color-blue-500);
+    color: var(--goa-color-interactive);
     border: none;
   }
   button.borderless:hover {
-    background-color: var(--color-blue-100);
-    color: var(--color-blue-500);
+    background-color: var(--goa-color-primary-light);
+    color: var(--goa-color-interactive--hover);
   }
 
   button.borderless:focus,
   button.borderless:active {
     outline: none;
     box-shadow: none;
-    background-color: var(--color-blue-100);
+    /* TODO: determine what color name this is */
+    background-color: var(--goa-color-primary-light);
   }
 
   .primary.danger {
     color: var(--color-white);
-    background: var(--color-red-500);
-    border-color: var(--color-red-500);
+    background: var(--goa-color-status-emergency);
+    border-color: var(--goa-color-status-emergency);
   }
   .primary.danger:hover {
-    background: var(--color-red-600);
-    border-color: var(--color-red-600);
+    background: var(--goa-color-status-emergency-dark);
+    border-color: var(--goa-color-status-emergency-dark);
   }
   .primary.danger:focus,
   .primary.danger:active {
-    background: var(--color-red-600);
-    border-color: var(--color-red-600);
+    background: var(--goa-color-status-emergency-dark);
+    border-color: var(--goa-color-status-emergency-dark);
   }
 
   .secondary.danger {
-    color: var(--color-red-500);
-    border-color: var(--color-red-500);
+    color: var(--goa-color-status-emergency);
+    border-color: var(--goa-color-status-emergency);
     background: var(--color-white);
   }
   .secondary.danger:hover {
-    border-color: var(--color-red-600);
-    color: var(--color-red-600);
+    border-color: var(--goa-color-status-emergency-dark);
+    color: var(--goa-color-status-emergency-dark);
     background: var(--color-white);
   }
   .secondary.danger:focus,
   .secondary.danger:active {
-    color: var(--color-red-600);
-    border-color: var(--color-red-600);
+    color: var(--goa-color-status-emergency-dark);
+    border-color: var(--goa-color-status-emergency-dark);
     background: var(--color-white);
   }
 
   button:disabled {
     pointer-events: none;
-    color: var(--color-gray-700);
+    /* TODO: should have a disabled color */
+    color: var(--color-gray-600);
     background-color: var(--color-gray-100);
     border-color: var(--color-gray-100);
   }
 
   .tertiary.danger {
-    color: var(--color-red-500);
+    color: var(--goa-color-status-emergency);
     border-color: var(--color-gray-200);
     background: var(--color-white);
   }
   .tertiary.danger:hover {
-    border-color: var(--color-red-600);
-    color: var(--color-red-600);
+    border-color: var(--goa-color-status-emergency-dark);
+    color: var(--goa-color-status-emergency-dark);
     background: var(--color-white);
   }
   .tertiary.danger:focus,
   .tertiary.danger:active {
-    color: var(--color-red-600);
-    border-color: var(--color-red-600);
+    color: var(--goa-color-status-emergency-dark);
+    border-color: var(--goa-color-status-emergency-dark);
     background: var(--color-white);
   }
 
   .borderless.danger {
-    color: var(--color-red-500);
+    color: var(--goa-color-status-emergency);
   }
   .borderless.danger:hover {
-    background: var(--color-red-100);
-    color: var(--color-red-500);
+    background: var(--goa-color-emergecny-light);
+    color: var(--goa-color-status-emergency-dark);
   }
   .borderless.danger:focus,
   .borderless.danger:active {
-    background: var(--color-red-100);
-    color: var(--color-red-500);
+    background: var(--goa-color-emergecny-light);
+    color: var(--goa-color-status-emergency-dark);
   }
 
   /* Sizes */

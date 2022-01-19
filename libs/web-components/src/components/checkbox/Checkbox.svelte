@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { toBoolean } from '../../common/utils';
+  import { toBoolean } from "../../common/utils";
   // Required
   export let name: string;
 
@@ -27,10 +27,10 @@
     const _value = newCheckStatus ? `${value || "checked"}` : "";
 
     e.target.dispatchEvent(
-      new CustomEvent('_change', {
+      new CustomEvent("_change", {
         composed: true,
         detail: { name, checked: newCheckStatus, value: _value },
-      })
+      }),
     );
   }
 </script>
@@ -55,19 +55,11 @@
     />
     {#if isChecked}
       {#if isIndeterminate}
-        <svg
-          id="dashmark"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 15 2"
-        >
+        <svg id="dashmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2">
           <rect width="15" height="2" />
         </svg>
       {:else}
-        <svg
-          id="checkmark"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 16 12.18"
-        >
+        <svg id="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18">
           <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
         </svg>
       {/if}
@@ -88,7 +80,7 @@
     min-height: calc(3rem - 4px);
     cursor: pointer;
   }
-  .goa-checkbox input[type='checkbox'] {
+  .goa-checkbox input[type="checkbox"] {
     /* hide the input, but still make it tab-able */
     opacity: 0;
     position: absolute;
@@ -105,7 +97,7 @@
 
   .goa-checkbox-container {
     box-sizing: border-box;
-    border: 1px solid var(--color-gray-700);
+    border: 1px solid var(--color-gray-600);
     border-radius: 2px;
     background-color: var(--color-white);
     height: 1.5rem;
@@ -119,7 +111,7 @@
   }
 
   .goa-checkbox-container.goa-checkbox--selected {
-    background-color: var(--color-blue-500);
+    background-color: var(--goa-color-interactive);
   }
 
   .goa-checkbox-container:hover:not(.goa-checkbox--selected) {
@@ -127,7 +119,7 @@
   }
 
   .goa-checkbox-container:focus-within {
-    box-shadow: 0 0 0 3px var(--color-orange-500);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
     outline: none;
   }
 
@@ -139,6 +131,6 @@
 
   /* Error state */
   .goa-checkbox--error .goa-checkbox-container {
-    border: 2px solid var(--color-red-500);
+    border: 2px solid var(--goa-color-status-emergency);
   }
 </style>

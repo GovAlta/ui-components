@@ -1,8 +1,8 @@
 <svelte:options tag="goa-radio-item" />
 
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
-  import { messageChannel } from '../../common/radio-store';
+  import { onDestroy, onMount } from "svelte";
+  import { messageChannel } from "../../common/radio-store";
 
   export let value: string;
   export let label: string;
@@ -18,8 +18,8 @@
   // Hooks
 
   onMount(() => {
-    unsubscribe = messageChannel.subscribe((channel) => {
-      const msg = channel[name]
+    unsubscribe = messageChannel.subscribe(channel => {
+      const msg = channel[name];
       if (msg?.tag !== name) {
         return;
       }
@@ -36,14 +36,14 @@
   function onChange(e) {
     checked = !checked;
     if (checked) {
-      messageChannel.update((prev) => {
+      messageChannel.update(prev => {
         return {
           ...prev,
           [name]: {
             tag: name,
             payload: {
               disabled,
-              value
+              value,
             },
           },
         };
@@ -58,15 +58,8 @@
   class="goa-radio"
   class:goa-radio--disabled={disabled}
   class:goa-radio--error={error}
-  >
-  <input
-    type="radio"
-    {name}
-    {value}
-    {checked}
-    {disabled}
-    on:change={onChange}
-  />
+>
+  <input type="radio" {name} {value} {checked} {disabled} on:change={onChange} />
   <div class="goa-radio-icon" />
   <span class="goa-radio-label">
     <slot>
@@ -77,10 +70,10 @@
 
 <style>
   label.goa-radio {
-    --goa-border-color: var(--color-gray-700);
-    --goa-border-color--checked: var(--color-blue-500);
-    --goa-radio-color--error: var(--color-red);
-    --goa-radio-outline-color: var(--color-orange);
+    --goa-border-color: var(--color-gray-600);
+    --goa-border-color--checked: var(--goa-color-interactive--active);
+    --goa-radio-color--error: var(--goa-color-status-emergency);
+    --goa-radio-outline-color: var(--goa-color-interactive--highlight);
     --goa-radio-outline-width: 3px;
     --goa-radio-diameter: 1.5rem;
     --goa-radio-border-width: 1px;
@@ -102,7 +95,7 @@
     box-sizing: border-box;
   }
 
-  .goa-radio input[type='radio'] {
+  .goa-radio input[type="radio"] {
     display: none;
   }
 
@@ -121,8 +114,7 @@
   }
 
   .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width)
-      var(--goa-radio-outline-color);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-radio-outline-color);
   }
 
   .goa-radio--disabled:hover {
@@ -132,34 +124,32 @@
   /* States */
 
   /* Checked */
-  input[type='radio']:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid
-      var(--goa-border-color--checked);
+  input[type="radio"]:checked ~ .goa-radio-icon {
+    border: var(--goa-radio-border-width--checked) solid var(--goa-border-color--checked);
   }
 
   /* Not checked */
-  input[type='radio']:not(:checked) ~ .goa-radio-icon {
+  input[type="radio"]:not(:checked) ~ .goa-radio-icon {
     border: var(--goa-radio-border-width) solid var(--goa-border-color);
   }
 
   /* Disabled */
-  input[type='radio']:disabled ~ .goa-radio-icon {
+  input[type="radio"]:disabled ~ .goa-radio-icon {
     border: var(--goa-radio-border-width) solid var(--goa-border-color);
     opacity: 0.3;
   }
 
   /* Disabled and checked */
-  input[type='radio']:disabled:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid
-      var(--goa-border-color--checked);
+  input[type="radio"]:disabled:checked ~ .goa-radio-icon {
+    border: var(--goa-radio-border-width--checked) solid var(--goa-border-color--checked);
     opacity: 0.3;
   }
 
   /* Error */
-  .goa-radio--error input[type='radio']:checked ~ .goa-radio-icon {
+  .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon {
     border: 7px solid var(--goa-radio-color--error);
   }
-  .goa-radio--error input[type='radio']:not(:checked) ~ .goa-radio-icon {
+  .goa-radio--error input[type="radio"]:not(:checked) ~ .goa-radio-icon {
     border: 2px solid var(--goa-radio-color--error);
   }
 </style>

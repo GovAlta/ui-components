@@ -107,10 +107,10 @@
     box-sizing: border-box;
     outline: none;
     transition: box-shadow 0.1s ease-in;
-    border: 1px solid var(--color-gray-700);
+    border: 1px solid var(--color-gray-600);
     border-radius: 3px;
     background: white;
-    color: var(--color-gray-900, #ccc);
+    color: var(--color-black, #ccc);
     padding: var(--input-padding, 0.5rem) 0.5rem;
 
     display: flex;
@@ -122,12 +122,12 @@
   }
 
   .goa-input:hover {
-    border-color: var(--color-blue-600);
+    border-color: var(--goa-color-interactive--hover);
   }
   .goa-input:active,
   .goa-input:focus,
   .goa-input:focus-within {
-    box-shadow: 0 0 0 3px var(--color-orange);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
   }
 
   .goa-input:disabled {
@@ -209,12 +209,12 @@
   }
 
   .goa-state--error .goa-input {
-    border: 2px solid var(--color-red);
+    border: 2px solid var(--goa-color-status-emergency);
   }
 
   .error:hover,
   .error:focus,
   .error {
-    border: 2px solid var(--color-red-500);
+    border: 2px solid var(--goa-color-status-emergency-dark);
   }
 </style>

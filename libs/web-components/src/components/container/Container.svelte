@@ -67,32 +67,34 @@
   }
 
   .goa-container--primary header {
-    background-color: var(--color-tealblue);
-    border-color: var(--color-tealblue);
+    background-color: var(--goa-color-brand);
+    border-color: var(--goa-color-brand);
     color: var(--color-white);
   }
 
   .goa-container--info header {
-    background-color: var(--color-blue);
-    border-color: var(--color-blue);
+    background-color: var(--goa-color-status-info);
+    border-color: var(--goa-color-status-info);
     color: var(--color-white);
   }
 
   .goa-container--error header {
-    background-color: var(--color-red);
-    border-color: var(--color-red);
+    /* TODO: need a better color name here */
+    background-color: var(--goa-color-status-emergency);
+    border-color: var(--goa-color-status-emergency);
     color: var(--color-white);
   }
 
   .goa-container--success header {
-    background-color: var(--color-green);
-    border-color: var(--color-green);
+    /* TODO: need a better color name here */
+    background-color: var(--goa-color-status-success);
+    border-color: var(--goa-color-status-success);
     color: var(--color-white);
   }
 
   .goa-container--warning header {
-    background-color: var(--color-orange);
-    border-color: var(--color-orange);
+    background-color: var(--goa-color-status-warning);
+    border-color: var(--goa-color-status-warning);
     color: var(--color-white);
   }
 
