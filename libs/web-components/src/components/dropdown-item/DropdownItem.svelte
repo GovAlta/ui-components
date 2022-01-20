@@ -1,20 +1,20 @@
 <svelte:options tag="goa-dropdown-item" />
 
 <script lang="ts">
-  import { onMount, tick } from 'svelte';
-  import { messageChannel } from '../../common/dropdown-store';
-  import { fromBoolean, toBoolean } from '../../common/utils';
+  import { onMount, tick } from "svelte";
+  import { messageChannel } from "../../common/dropdown-store";
+  import { fromBoolean, toBoolean } from "../../common/utils";
 
   // public
-  export let name: string = '';
-  export let value: string = '';
-  export let label: string = '';
+  export let name: string = "";
+  export let value: string = "";
+  export let label: string = "";
 
   // optional
-  export let testId: string = '';
-  export let selected: string = '';
-  export let disabled: string = '';
-  export let hide: string = '';
+  export let testId: string = "";
+  export let selected: string = "";
+  export let disabled: string = "";
+  export let hide: string = "";
 
   $: isSelected = toBoolean(selected);
   $: isDisabled = toBoolean(disabled);
@@ -37,11 +37,10 @@
     }
 
     // bold all the matches
-    filteredLabel = '';
+    filteredLabel = "";
     let lastIndex = 0;
-    [...label.matchAll(new RegExp(filter, 'gi'))].forEach((match) => {
-      filteredLabel +=
-        label.slice(lastIndex, match.index) + `<b>${match[0]}</b>`;
+    [...label.matchAll(new RegExp(filter, "gi"))].forEach(match => {
+      filteredLabel += label.slice(lastIndex, match.index) + `<b>${match[0]}</b>`;
       lastIndex = match.index + match[0].length;
     });
     filteredLabel += label.slice(lastIndex);
@@ -49,7 +48,7 @@
     return filteredLabel;
   }
 
-  messageChannel.subscribe((channel) => {
+  messageChannel.subscribe(channel => {
     const msg = channel[name];
     if (!msg) {
       return;
@@ -59,36 +58,35 @@
     }
 
     switch (msg.payload.type) {
-      case 'FilterChange': {
+      case "FilterChange": {
         const filter = msg.payload.filter.toLowerCase();
         if (!value && !label) {
-          hide = 'false';
+          hide = "false";
         } else {
           const matches =
-            value.toLowerCase().includes(filter) ||
-            label.toLowerCase().includes(filter);
+            value.toLowerCase().includes(filter) || label.toLowerCase().includes(filter);
           hide = fromBoolean(!matches);
         }
         filteredLabel = getFilteredLabel(filter);
         break;
       }
-      case 'DropDownAction': {
+      case "DropDownAction": {
         if (msg.payload.label !== label && !multiSelect) {
           isSelected = false;
         }
         break;
       }
-      case 'DropDownInit': {
+      case "DropDownInit": {
         isSelected = msg.payload.values.includes(value);
         multiSelect = msg.payload.multiSelect;
         if (isSelected) {
-          messageChannel.update((old) => ({
+          messageChannel.update(old => ({
             ...old,
             [name]: {
               tag: name,
               payload: {
-                type: 'DropDownAction',
-                action: 'select',
+                type: "DropDownAction",
+                action: "select",
                 label,
                 value,
               },
@@ -103,13 +101,13 @@
   function onSelect() {
     isSelected = !isSelected;
 
-    messageChannel.update((old) => ({
+    messageChannel.update(old => ({
       ...old,
       [name]: {
         tag: name,
         payload: {
-          type: 'DropDownAction',
-          action: isSelected ? 'select' : 'deselect',
+          type: "DropDownAction",
+          action: isSelected ? "select" : "deselect",
           label: label,
           value: value,
           multiSelect,
@@ -123,7 +121,7 @@
   class="goa-dropdown-option"
   class:goa-dropdown-option--disabled={isDisabled}
   class:goa-dropdown-option--selected={isSelected}
-  style={`display: ${isHidden ? 'none' : 'block'}`}
+  style={`display: ${isHidden ? "none" : "block"}`}
   data-testid={testId}
   on:click={onSelect}
 >
@@ -138,12 +136,12 @@
     margin: 0;
     padding: 0.5rem;
     cursor: pointer;
-    color: var(--color-gray-900);
+    color: var(--color-black);
   }
 
   .goa-dropdown-option:hover {
     background: var(--color-gray-100);
-    color: var(--color-blue-600);
+    color: var(--goa-color-interactive--hover);
   }
 
   .goa-dropdown-option--disabled {
@@ -153,16 +151,16 @@
 
   .goa-dropdown-option--disabled:hover {
     cursor: default;
-    color: var(--color-gray-700);
+    color: var(--color-gray-600);
   }
 
   .goa-dropdown-option--selected {
-    background: var(--color-blue-500);
+    background: var(--goa-color-interactive--active);
     color: var(--color-white);
   }
 
   .goa-dropdown-option--selected:hover {
-    background: var(--color-blue-600);
+    background: var(--goa-color-interactive--hover);
     color: var(--color-white);
   }
 

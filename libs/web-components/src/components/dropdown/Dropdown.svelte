@@ -284,6 +284,6 @@
   }
 
   .goa-state--error .goa-dropdown-input {
-    border: 2px solid var(--color-red);
+    border: 2px solid var(--goa-color-status-emergency);
   }
 </style>

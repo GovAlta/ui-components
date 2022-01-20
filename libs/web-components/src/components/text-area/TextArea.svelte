@@ -22,24 +22,23 @@
         composed: true,
         bubbles: false,
         cancelable: true,
-        detail: { event: e, data: { name, value} },
-      })
+        detail: { event: e, data: { name, value } },
+      }),
     );
     e.stopPropagation();
   }
-
 </script>
 
 <!-- HTML -->
 <textarea
-  name={name}
+  {name}
   class="goa-textarea"
-  placeholder={placeholder}
+  {placeholder}
   value={value || ""}
   rows={rows || 3}
   disabled={isDisabled}
   on:keyup={onChange}
-></textarea>
+/>
 
 <!-- Style -->
 <style>
@@ -51,10 +50,10 @@
 
     outline: none;
     transition: box-shadow 0.1s ease-in;
-    border: 1px solid var(--color-gray-700);
+    border: 1px solid var(--color-gray-600);
     border-radius: 3px;
     background: var(--color-white);
-    color: var(--color-gray-900, #ccc);
+    color: var(--color-black, #ccc);
     padding: var(--input-padding, 0.5rem);
     font-size: var(--input-font-size);
     font-family: var(--font-family);
@@ -65,12 +64,12 @@
   }
 
   .goa-textarea:hover {
-    border-color: var(--color-blue-600);
+    border-color: var(--goa-color-interactive--hover);
   }
   .goa-textarea:active,
   .goa-textarea:focus,
   .goa-textarea:focus-within {
-    box-shadow: 0 0 0 3px var(--color-orange);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
   }
   .goa-textarea:disabled {
     border-color: var(--color-gray-200);

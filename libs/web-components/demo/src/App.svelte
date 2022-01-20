@@ -489,7 +489,7 @@
   .dark-bg {
     display: inline-block;
     padding: 2rem;
-    background-color: var(--color-blue)
+    background-color: var(--goa-color-primary)
   }
 
 </style>

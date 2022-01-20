@@ -1402,7 +1402,7 @@ var app = (function () {
     class Badge extends SvelteElement {
     	constructor(options) {
     		super();
-    		this.shadowRoot.innerHTML = `<style>:host{box-sizing:border-box}.goa-badge{display:inline-flex;align-items:center;border-radius:0.25rem;padding:3px 0.5rem;gap:0.25rem}.icon-only{padding:0.25rem}.goa-badge-content{text-transform:capitalize;font-size:var(--fs-sm);line-height:var(--lh-sm)}.goa-badge.badge-information{background-color:var(--color-white);color:var(--color-blue)}.goa-badge.badge-success{background-color:var(--color-green);color:var(--color-white)}.goa-badge.badge-warning{background-color:var(--color-orange);color:var(--color-black)}.goa-badge.badge-emergency{background-color:var(--color-red);color:var(--color-white)}.goa-badge.badge-dark{background-color:var(--color-gray-900);color:var(--color-white)}.goa-badge.badge-midtone{background-color:var(--color-gray-600);color:var(--color-white)}.goa-badge.badge-light{background-color:var(--color-white);color:var(--color-black)}.goa-badge.badge-inactive{background-color:var(--color-white);color:var(--color-black)}</style>`;
+    		this.shadowRoot.innerHTML = `<style>:host{box-sizing:border-box}.goa-badge{display:inline-flex;align-items:center;border-radius:0.25rem;padding:3px 0.5rem;gap:0.25rem}.icon-only{padding:0.25rem}.goa-badge-content{text-transform:capitalize;font-size:var(--fs-sm);line-height:var(--lh-sm)}.goa-badge.badge-information{background-color:var(--color-white);color:var(--color-blue)}.goa-badge.badge-success{background-color:var(--color-green);color:var(--color-white)}.goa-badge.badge-warning{background-color:var(--color-orange);color:var(--color-black)}.goa-badge.badge-emergency{background-color:var(--color-red);color:var(--color-white)}.goa-badge.badge-dark{background-color:var(--color-black);color:var(--color-white)}.goa-badge.badge-midtone{background-color:var(--color-gray-600);color:var(--color-white)}.goa-badge.badge-light{background-color:var(--color-white);color:var(--color-black)}.goa-badge.badge-inactive{background-color:var(--color-white);color:var(--color-black)}</style>`;
 
     		init(
     			this,
@@ -1619,9 +1619,7 @@ var app = (function () {
     class Button extends SvelteElement {
     	constructor(options) {
     		super();
-
-    		this.shadowRoot.innerHTML = `<style>@media(max-width: 320px){:host{width:100%}button{width:100%}}button{border-radius:0.25rem;border:2px solid var(--color-blue-500, "blue");box-sizing:border-box;cursor:pointer;font-size:var(--fs-base, 1rem);font-weight:700;line-height:2.375rem;padding:0 0.75rem;min-width:5rem;transition:transform 0.1s ease-in-out, background-color 0.2s ease-in-out,
-      border-color 0.2s ease-in-out;transform:scaleX(1)}button:active{transform:scale(0.95)}button.primary{border:2px solid var(--color-blue-500, blue);background:var(--color-blue-500, blue);color:var(--color-white, white)}button.primary:hover{border-color:var(--color-blue-600);background:var(--color-blue-600)}button.primary:focus,button.primary:active{border-color:var(--color-blue-600);box-shadow:0 0 0 3px var(--color-orange-500);background:var(--color-blue-600);outline:none}button.secondary{border:2px solid var(--color-blue-500, blue);background:var(--color-blue-500, blue);color:var(--color-white, white)}button.secondary:hover{border-color:var(--color-blue-600);background:var(--color-blue-600)}button.secondary:focus,button.secondary:active{border-color:var(--color-blue-600);box-shadow:0 0 0 3px var(--color-orange-500);background:var(--color-blue-600);outline:none}button.tertiary{border-color:var(--color-gray-200);background:var(--color-white);color:var(--color-blue-500)}button.tertiary:hover{color:var(--color-blue-600)}button.tertiary:focus,button.tertiary:active{border-color:var(--color-blue-600);color:var(--color-blue-600);box-shadow:0 0 0 3px var(--color-orange-500);outline:none}button.borderless{background:none;color:var(--color-blue-500);border:none}button.borderless:hover{background-color:var(--color-blue-100);color:var(--color-blue-500)}button.borderless:focus,button.borderless:active{outline:none;box-shadow:none;background-color:var(--color-blue-100)}.primary.danger{color:var(--color-white);background:var(--color-red-500);border-color:var(--color-red-500)}.primary.danger:hover{background:var(--color-red-600);border-color:var(--color-red-600)}.primary.danger:focus,.primary.danger:active{background:var(--color-red-600);border-color:var(--color-red-600)}.secondary.danger{color:var(--color-red-500);border-color:var(--color-red-500);background:var(--color-white)}.secondary.danger:hover{border-color:var(--color-red-600);color:var(--color-red-600);background:var(--color-white)}.secondary.danger:focus,.secondary.danger:active{color:var(--color-red-600);border-color:var(--color-red-600);background:var(--color-white)}button:disabled{pointer-events:none;color:var(--color-gray-700);background-color:var(--color-gray-100);border-color:var(--color-gray-100)}.tertiary.danger{color:var(--color-red-500);border-color:var(--color-gray-200);background:var(--color-white)}.tertiary.danger:hover{border-color:var(--color-red-600);color:var(--color-red-600);background:var(--color-white)}.tertiary.danger:focus,.tertiary.danger:active{color:var(--color-red-600);border-color:var(--color-red-600);background:var(--color-white)}.borderless.danger{color:var(--color-red-500)}.borderless.danger:hover{background:var(--color-red-100);color:var(--color-red-500)}.borderless.danger:focus,.borderless.danger:active{background:var(--color-red-100);color:var(--color-red-500)}.large{font-size:var(--fs-lg);line-height:3rem}.large.borderless{line-height:calc(3rem + 4px)}.medium{font-size:var(--fs-base);line-height:2.375rem}.medium.borderless{line-height:calc(2.375rem + 4px)}.small{font-size:var(--fs-sm);line-height:1.75rem}.small.borderless{line-height:calc(1.75rem + 4px)}</style>`;
+    		this.shadowRoot.innerHTML = `<style>@media(max-width: 320px){:host{width:100%}button{width:100%}}button{border-radius:0.25rem;border:2px solid var(--goa-color-interactive);box-sizing:border-box;cursor:pointer;font-size:var(--fs-base, 1rem);font-weight:700;line-height:2.375rem;padding:0 0.75rem;min-width:5rem;transition:transform 0.1s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;transform:scaleX(1)}button:active{transform:scale(0.95)}button.primary{border:2px solid var(--goa-color-interactive);background:var(--goa-color-interactive);color:var(--color-white, white)}button.primary:hover{border-color:var(--goa-color-interactive--hover);background:var(--goa-color-interactive--hover)}button.primary:focus,button.primary:active{box-shadow:0 0 0 3px var(--goa-color-interactive--highlight);border-color:var(--goa-color-interactive--hover);background:var(--goa-color-interactive--hover);outline:none}button.secondary{border:2px solid var(--goa-color-interactive);background:var(--color-white);color:var(--goa-color-interactive)}button.secondary:hover{border-color:var(--goa-color-interactive--hover);color:var(--goa-color-interactive--hover)}button.secondary:focus,button.secondary:active{border-color:var(--goa-color-interactive--hover);box-shadow:0 0 0 3px var(--goa-color-interactive--focus);background:var(--color-gray-100);outline:none}button.tertiary{border-color:var(--color-gray-200);background:var(--color-white);color:var(--goa-color-interactive)}button.tertiary:hover{color:var(--goa-color-interactive--hover)}button.tertiary:focus,button.tertiary:active{border-color:var(--goa-color-interactive--hover);color:var(--goa-color-interactive--hover);box-shadow:0 0 0 3px var(--goa-color-interactive--highlight);outline:none}button.borderless{background:none;color:var(--goa-color-interactive);border:none}button.borderless:hover{background-color:var(--color-blue-100);color:var(--goa-color-interactive--hover)}button.borderless:focus,button.borderless:active{outline:none;box-shadow:none;background-color:var(--color-blue-100)}.primary.danger{color:var(--color-white);background:var(--color-red-500);border-color:var(--color-red-500)}.primary.danger:hover{background:var(--color-red-600);border-color:var(--color-red-600)}.primary.danger:focus,.primary.danger:active{background:var(--color-red-600);border-color:var(--color-red-600)}.secondary.danger{color:var(--color-red-500);border-color:var(--color-red-500);background:var(--color-white)}.secondary.danger:hover{border-color:var(--color-red-600);color:var(--color-red-600);background:var(--color-white)}.secondary.danger:focus,.secondary.danger:active{color:var(--color-red-600);border-color:var(--color-red-600);background:var(--color-white)}button:disabled{pointer-events:none;color:var(--color-gray-600);background-color:var(--color-gray-100);border-color:var(--color-gray-100)}.tertiary.danger{color:var(--color-red-500);border-color:var(--color-gray-200);background:var(--color-white)}.tertiary.danger:hover{border-color:var(--color-red-600);color:var(--color-red-600);background:var(--color-white)}.tertiary.danger:focus,.tertiary.danger:active{color:var(--color-red-600);border-color:var(--color-red-600);background:var(--color-white)}.borderless.danger{color:var(--color-red-500)}.borderless.danger:hover{background:var(--color-red-100);color:var(--color-red-500)}.borderless.danger:focus,.borderless.danger:active{background:var(--color-red-100);color:var(--color-red-500)}.large{font-size:var(--fs-lg);line-height:3rem}.large.borderless{line-height:calc(3rem + 4px)}.medium{font-size:var(--fs-base);line-height:2.375rem}.medium.borderless{line-height:calc(2.375rem + 4px)}.small{font-size:var(--fs-sm);line-height:1.75rem}.small.borderless{line-height:calc(1.75rem + 4px)}</style>`;
 
     		init(
     			this,
@@ -2636,7 +2634,7 @@ var app = (function () {
     	return block;
     }
 
-    // (58:6) {:else}
+    // (54:6) {:else}
     function create_else_block$3(ctx) {
     	let svg;
     	let path;
@@ -2646,11 +2644,11 @@ var app = (function () {
     			svg = svg_element("svg");
     			path = svg_element("path");
     			attr_dev(path, "d", "M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z");
-    			add_location(path, file$l, 63, 10, 1664);
+    			add_location(path, file$l, 55, 10, 1586);
     			attr_dev(svg, "id", "checkmark");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "viewBox", "0 0 16 12.18");
-    			add_location(svg, file$l, 58, 8, 1536);
+    			add_location(svg, file$l, 54, 8, 1497);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, svg, anchor);
@@ -2665,7 +2663,7 @@ var app = (function () {
     		block,
     		id: create_else_block$3.name,
     		type: "else",
-    		source: "(58:6) {:else}",
+    		source: "(54:6) {:else}",
     		ctx
     	});
 
@@ -2683,7 +2681,7 @@ var app = (function () {
     			rect = svg_element("rect");
     			attr_dev(rect, "width", "15");
     			attr_dev(rect, "height", "2");
-    			add_location(rect, file$l, 55, 10, 1468);
+    			add_location(rect, file$l, 51, 10, 1429);
     			attr_dev(svg, "id", "dashmark");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "viewBox", "0 0 15 2");
@@ -2746,9 +2744,9 @@ var app = (function () {
     			toggle_class(div0, "goa-checkbox--selected", /*isChecked*/ ctx[3]);
     			add_location(div0, file$l, 38, 2, 1041);
     			attr_dev(slot, "name", "main");
-    			add_location(slot, file$l, 69, 4, 1816);
+    			add_location(slot, file$l, 61, 4, 1738);
     			attr_dev(div1, "class", "goa-checkbox-text");
-    			add_location(div1, file$l, 68, 2, 1780);
+    			add_location(div1, file$l, 60, 2, 1702);
     			attr_dev(label, "for", /*id*/ ctx[7]);
     			attr_dev(label, "class", "goa-checkbox");
     			toggle_class(label, "goa-checkbox--disabled", /*isDisabled*/ ctx[6]);
@@ -2870,7 +2868,7 @@ var app = (function () {
 
     		const _value = newCheckStatus ? `${value || "checked"}` : "";
 
-    		e.target.dispatchEvent(new CustomEvent('_change',
+    		e.target.dispatchEvent(new CustomEvent("_change",
     		{
     				composed: true,
     				detail: {
@@ -2975,7 +2973,7 @@ var app = (function () {
     class Checkbox extends SvelteElement {
     	constructor(options) {
     		super();
-    		this.shadowRoot.innerHTML = `<style>.goa-checkbox{display:inline-flex;align-items:center;min-height:calc(3rem - 4px);cursor:pointer}.goa-checkbox input[type='checkbox']{opacity:0;position:absolute}.goa-checkbox--disabled{opacity:30%}label.goa-checkbox--disabled{cursor:default}.goa-checkbox-container{box-sizing:border-box;border:1px solid var(--color-gray-700);border-radius:2px;background-color:var(--color-white);height:1.5rem;width:1.5rem;display:flex;justify-content:center;padding:3px}.goa-checkbox-container svg{fill:var(--color-white)}.goa-checkbox-container.goa-checkbox--selected{background-color:var(--color-blue-500)}.goa-checkbox-container:hover:not(.goa-checkbox--selected){background-color:var(--color-gray-100)}.goa-checkbox-container:focus-within{box-shadow:0 0 0 3px var(--color-orange-500);outline:none}.goa-checkbox-text{padding-left:0.5rem;user-select:none;font-weight:var(--fw-regular)}.goa-checkbox--error .goa-checkbox-container{border:2px solid var(--color-red-500)}</style>`;
+    		this.shadowRoot.innerHTML = `<style>.goa-checkbox{display:inline-flex;align-items:center;min-height:calc(3rem - 4px);cursor:pointer}.goa-checkbox input[type="checkbox"]{opacity:0;position:absolute}.goa-checkbox--disabled{opacity:30%}label.goa-checkbox--disabled{cursor:default}.goa-checkbox-container{box-sizing:border-box;border:1px solid var(--color-gray-600);border-radius:2px;background-color:var(--color-white);height:1.5rem;width:1.5rem;display:flex;justify-content:center;padding:3px}.goa-checkbox-container svg{fill:var(--color-white)}.goa-checkbox-container.goa-checkbox--selected{background-color:var(--goa-color-interactive)}.goa-checkbox-container:hover:not(.goa-checkbox--selected){background-color:var(--color-gray-100)}.goa-checkbox-container:focus-within{box-shadow:0 0 0 3px var(--goa-color-interactive--highlight);outline:none}.goa-checkbox-text{padding-left:0.5rem;user-select:none;font-weight:var(--fw-regular)}.goa-checkbox--error .goa-checkbox-container{border:2px solid var(--color-red-500)}</style>`;
 
     		init(
     			this,
@@ -4155,11 +4153,11 @@ var app = (function () {
     			li = element("li");
     			this.c = noop;
     			attr_dev(li, "class", "goa-dropdown-option");
-    			attr_dev(li, "style", li_style_value = `display: ${/*isHidden*/ ctx[4] ? 'none' : 'block'}`);
+    			attr_dev(li, "style", li_style_value = `display: ${/*isHidden*/ ctx[4] ? "none" : "block"}`);
     			attr_dev(li, "data-testid", /*testId*/ ctx[1]);
     			toggle_class(li, "goa-dropdown-option--disabled", /*isDisabled*/ ctx[5]);
     			toggle_class(li, "goa-dropdown-option--selected", /*isSelected*/ ctx[3]);
-    			add_location(li, file$i, 102, 0, 3036);
+    			add_location(li, file$i, 100, 0, 2996);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -4175,7 +4173,7 @@ var app = (function () {
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*filteredLabel, label*/ 5 && raw_value !== (raw_value = (/*filteredLabel*/ ctx[2] || /*label*/ ctx[0]) + "")) li.innerHTML = raw_value;
-    			if (dirty & /*isHidden*/ 16 && li_style_value !== (li_style_value = `display: ${/*isHidden*/ ctx[4] ? 'none' : 'block'}`)) {
+    			if (dirty & /*isHidden*/ 16 && li_style_value !== (li_style_value = `display: ${/*isHidden*/ ctx[4] ? "none" : "block"}`)) {
     				attr_dev(li, "style", li_style_value);
     			}
 
@@ -4217,13 +4215,13 @@ var app = (function () {
     	let isHidden;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('goa-dropdown-item', slots, []);
-    	let { name = '' } = $$props;
-    	let { value = '' } = $$props;
-    	let { label = '' } = $$props;
-    	let { testId = '' } = $$props;
-    	let { selected = '' } = $$props;
-    	let { disabled = '' } = $$props;
-    	let { hide = '' } = $$props;
+    	let { name = "" } = $$props;
+    	let { value = "" } = $$props;
+    	let { label = "" } = $$props;
+    	let { testId = "" } = $$props;
+    	let { selected = "" } = $$props;
+    	let { disabled = "" } = $$props;
+    	let { hide = "" } = $$props;
 
     	// private
     	let multiSelect;
@@ -4244,11 +4242,11 @@ var app = (function () {
     		}
 
     		// bold all the matches
-    		$$invalidate(2, filteredLabel = '');
+    		$$invalidate(2, filteredLabel = "");
 
     		let lastIndex = 0;
 
-    		[...label.matchAll(new RegExp(filter, 'gi'))].forEach(match => {
+    		[...label.matchAll(new RegExp(filter, "gi"))].forEach(match => {
     			$$invalidate(2, filteredLabel += label.slice(lastIndex, match.index) + `<b>${match[0]}</b>`);
     			lastIndex = match.index + match[0].length;
     		});
@@ -4269,12 +4267,12 @@ var app = (function () {
     		}
 
     		switch (msg.payload.type) {
-    			case 'FilterChange':
+    			case "FilterChange":
     				{
     					const filter = msg.payload.filter.toLowerCase();
 
     					if (!value && !label) {
-    						$$invalidate(7, hide = 'false');
+    						$$invalidate(7, hide = "false");
     					} else {
     						const matches = value.toLowerCase().includes(filter) || label.toLowerCase().includes(filter);
     						$$invalidate(7, hide = fromBoolean(!matches));
@@ -4283,7 +4281,7 @@ var app = (function () {
     					$$invalidate(2, filteredLabel = getFilteredLabel(filter));
     					break;
     				}
-    			case 'DropDownAction':
+    			case "DropDownAction":
     				{
     					if (msg.payload.label !== label && !multiSelect) {
     						$$invalidate(3, isSelected = false);
@@ -4291,7 +4289,7 @@ var app = (function () {
 
     					break;
     				}
-    			case 'DropDownInit':
+    			case "DropDownInit":
     				{
     					$$invalidate(3, isSelected = msg.payload.values.includes(value));
     					multiSelect = msg.payload.multiSelect;
@@ -4301,8 +4299,8 @@ var app = (function () {
     							[name]: {
     								tag: name,
     								payload: {
-    									type: 'DropDownAction',
-    									action: 'select',
+    									type: "DropDownAction",
+    									action: "select",
     									label,
     									value
     								}
@@ -4322,8 +4320,8 @@ var app = (function () {
     			[name]: {
     				tag: name,
     				payload: {
-    					type: 'DropDownAction',
-    					action: isSelected ? 'select' : 'deselect',
+    					type: "DropDownAction",
+    					action: isSelected ? "select" : "deselect",
     					label,
     					value,
     					multiSelect
@@ -4422,7 +4420,7 @@ var app = (function () {
     class DropdownItem extends SvelteElement {
     	constructor(options) {
     		super();
-    		this.shadowRoot.innerHTML = `<style>li{font-family:var(--font-family)}.goa-dropdown-option{margin:0;padding:0.5rem;cursor:pointer;color:var(--color-gray-900)}.goa-dropdown-option:hover{background:var(--color-gray-100);color:var(--color-blue-600)}.goa-dropdown-option--disabled{opacity:0.5;cursor:default}.goa-dropdown-option--disabled:hover{cursor:default;color:var(--color-gray-700)}.goa-dropdown-option--selected{background:var(--color-blue-500);color:var(--color-white)}.goa-dropdown-option--selected:hover{background:var(--color-blue-600);color:var(--color-white)}</style>`;
+    		this.shadowRoot.innerHTML = `<style>li{font-family:var(--font-family)}.goa-dropdown-option{margin:0;padding:0.5rem;cursor:pointer;color:var(--color-black)}.goa-dropdown-option:hover{background:var(--color-gray-100);color:var(--goa-color-interactive--hover)}.goa-dropdown-option--disabled{opacity:0.5;cursor:default}.goa-dropdown-option--disabled:hover{cursor:default;color:var(--color-gray-600)}.goa-dropdown-option--selected{background:var(--goa-color-interactive--active);color:var(--color-white)}.goa-dropdown-option--selected:hover{background:var(--goa-color-interactive--hover);color:var(--color-white)}</style>`;
 
     		init(
     			this,
@@ -4786,7 +4784,7 @@ var app = (function () {
     	return block;
     }
 
-    // (29:2) {#if helptext }
+    // (29:2) {#if helptext}
     function create_if_block$8(ctx) {
     	let div;
     	let t;
@@ -4796,7 +4794,7 @@ var app = (function () {
     			div = element("div");
     			t = text(/*helptext*/ ctx[0]);
     			attr_dev(div, "class", "help-msg");
-    			add_location(div, file$g, 29, 4, 601);
+    			add_location(div, file$g, 29, 4, 600);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -4814,7 +4812,7 @@ var app = (function () {
     		block,
     		id: create_if_block$8.name,
     		type: "if",
-    		source: "(29:2) {#if helptext }",
+    		source: "(29:2) {#if helptext}",
     		ctx
     	});
 
@@ -4983,7 +4981,7 @@ var app = (function () {
     class FormItem extends SvelteElement {
     	constructor(options) {
     		super();
-    		this.shadowRoot.innerHTML = `<style>:host{flex:1 1 auto}*{box-sizing:border-box}label{display:block;font-weight:bold;color:#333;font-size:var(--fs-base);padding:0.5rem 0;max-height:2.5rem}label em{color:var(--color-gray-700);font-weight:var(--fw-regular);font-size:var(--fs-sm);font-style:normal}.form-item-input{margin-bottom:0.25rem}.help-msg{font-size:var(--fs-sm);color:var(--color-gray-900)}.error-msg{font-size:var(--fs-sm);color:var(--color-red);margin-bottom:0.25rem}</style>`;
+    		this.shadowRoot.innerHTML = `<style>:host{flex:1 1 auto}*{box-sizing:border-box}label{display:block;font-weight:bold;color:#333;font-size:var(--fs-base);padding:0.5rem 0;max-height:2.5rem}label em{color:var(--color-gray-600);font-weight:var(--fw-regular);font-size:var(--fs-sm);font-style:normal}.form-item-input{margin-bottom:0.25rem}.help-msg{font-size:var(--fs-sm);color:var(--color-black)}.error-msg{font-size:var(--fs-sm);color:var(--color-red);margin-bottom:0.25rem}</style>`;
 
     		init(
     			this,
@@ -5540,7 +5538,7 @@ var app = (function () {
     			set_custom_element_data(goa_icon, "size", /*size*/ ctx[1]);
     			set_custom_element_data(goa_icon, "theme", /*theme*/ ctx[2]);
     			set_custom_element_data(goa_icon, "inverted", /*isInverted*/ ctx[5]);
-    			add_location(goa_icon, file$d, 28, 2, 855);
+    			add_location(goa_icon, file$d, 35, 2, 868);
     			set_style(button, "--size", /*_size*/ ctx[6]);
     			attr_dev(button, "title", /*title*/ ctx[3]);
     			button.disabled = /*isDisabled*/ ctx[7];
@@ -5696,7 +5694,7 @@ var app = (function () {
 
     		if ($$self.$$.dirty & /*variant, isInverted*/ 544) {
     			// private
-    			$$invalidate(8, css = `goa-icon-button goa-icon-button--${variant} ${isInverted ? 'goa-icon-button--inverted' : ''}`);
+    			$$invalidate(8, css = `goa-icon-button goa-icon-button--${variant} ${isInverted ? "goa-icon-button--inverted" : ""}`);
     		}
 
     		if ($$self.$$.dirty & /*disabled*/ 1024) {
@@ -5705,9 +5703,9 @@ var app = (function () {
 
     		if ($$self.$$.dirty & /*size*/ 2) {
     			$$invalidate(6, _size = ({
-    				small: '1rem',
-    				medium: '1.5rem',
-    				large: '2rem'
+    				small: "1rem",
+    				medium: "1.5rem",
+    				large: "2rem"
     			})[size]);
     		}
     	};
@@ -5731,9 +5729,7 @@ var app = (function () {
     class IconButton extends SvelteElement {
     	constructor(options) {
     		super();
-
-    		this.shadowRoot.innerHTML = `<style>:host{display:flex;align-items:center}.goa-icon-button,.goa-icon-button *{box-sizing:border-box}.goa-icon-button{display:inline-flex;align-items:center;background:transparent;cursor:pointer;padding:0;border:none}.goa-icon-button--color{border-radius:0.5rem;padding:calc(var(--size) / 4)
-  }.goa-icon-button--color{border-radius:0.5rem;color:var(--color-blue-500);fill:var(--color-blue-500);cursor:pointer;transition:background-color 100ms ease-in, transform 100ms ease-in}.goa-icon-button--color:active,.goa-icon-button--nocolor:active{transform:scale(0.9)}.goa-icon-button--color:hover{background-color:var(--color-blue-100)}.goa-icon-button--color.goa-icon-button--inverted:hover{background-color:var(--color-blue-600)}.goa-icon-button:disabled{color:var(--color-gray-200);fill:var(--color-gray-200);transform:none;cursor:default}.goa-icon-button:disabled:hover{background-color:transparent}</style>`;
+    		this.shadowRoot.innerHTML = `<style>:host{display:flex;align-items:center}.goa-icon-button,.goa-icon-button *{box-sizing:border-box}.goa-icon-button{display:inline-flex;align-items:center;background:transparent;cursor:pointer;padding:0;border:none}.goa-icon-button--color{border-radius:0.5rem;padding:calc(var(--size) / 4)}.goa-icon-button--color{border-radius:0.5rem;color:var(--goa-color-interactive);fill:var(--goa-color-interactive);cursor:pointer;transition:background-color 100ms ease-in, transform 100ms ease-in}.goa-icon-button--color:active,.goa-icon-button--nocolor:active{transform:scale(0.9)}.goa-icon-button--color:hover{background-color:var(--color-blue-100)}.goa-icon-button--color.goa-icon-button--inverted:hover{background-color:var(--color-blue-600)}.goa-icon-button:disabled{color:var(--color-gray-200);fill:var(--color-gray-200);transform:none;cursor:default}.goa-icon-button:disabled:hover{background-color:transparent}</style>`;
 
     		init(
     			this,
@@ -6372,7 +6368,7 @@ var app = (function () {
     class Input extends SvelteElement {
     	constructor(options) {
     		super();
-    		this.shadowRoot.innerHTML = `<style>.goa-input,.goa-input *{box-sizing:border-box}.goa-input{box-sizing:border-box;outline:none;transition:box-shadow 0.1s ease-in;border:1px solid var(--color-gray-700);border-radius:3px;background:white;color:var(--color-gray-900, #ccc);padding:var(--input-padding, 0.5rem) 0.5rem;display:flex;align-items:center}.goa-input input[readonly]{cursor:pointer}.goa-input:hover{border-color:var(--color-blue-600)}.goa-input:active,.goa-input:focus,.goa-input:focus-within{box-shadow:0 0 0 3px var(--color-orange)}.goa-input:disabled{border-color:var(--color-gray-500)}.goa-input:disabled:hover{border-color:var(--color-gray-500)}.goa-input:disabled:focus{box-shadow:none}.goa-input-leading-icon{line-height:18px;padding:0.5rem}.goa-input-trailing-icon{display:flex;align-items:center}.goa-input-trailing-icon>.goa-icon-button{margin-right:-0.5rem}input{display:block;width:100%;font-size:var(--input-font-size)}.goa-input-leading-icon~input{padding-left:0}input,input:focus,input:hover,input:active{outline:none;border:none}.goa-input--disabled{opacity:0.5;cursor:default;border-color:var(--color-black)}.goa-input--disabled:hover,.goa-input--disabled:active,.goa-input--disabled:focus{border-color:var(--color-black);cursor:default;box-shadow:none}.goa-input--disabled input:hover{cursor:default !important}input.input--goa{display:block;border:none;flex:1 1 auto}.goa-input .input--bare{border:none}.goa-state--error .goa-input{border:2px solid var(--color-red)}.error:hover,.error:focus,.error{border:2px solid var(--color-red-500)}</style>`;
+    		this.shadowRoot.innerHTML = `<style>.goa-input,.goa-input *{box-sizing:border-box}.goa-input{box-sizing:border-box;outline:none;transition:box-shadow 0.1s ease-in;border:1px solid var(--color-gray-600);border-radius:3px;background:white;color:var(--color-black, #ccc);padding:var(--input-padding, 0.5rem) 0.5rem;display:flex;align-items:center}.goa-input input[readonly]{cursor:pointer}.goa-input:hover{border-color:var(--goa-color-interactive--hover)}.goa-input:active,.goa-input:focus,.goa-input:focus-within{box-shadow:0 0 0 3px var(--goa-color-interactive--highlight)}.goa-input:disabled{border-color:var(--color-gray-500)}.goa-input:disabled:hover{border-color:var(--color-gray-500)}.goa-input:disabled:focus{box-shadow:none}.goa-input-leading-icon{line-height:18px;padding:0.5rem}.goa-input-trailing-icon{display:flex;align-items:center}.goa-input-trailing-icon>.goa-icon-button{margin-right:-0.5rem}input{display:block;width:100%;font-size:var(--input-font-size)}.goa-input-leading-icon~input{padding-left:0}input,input:focus,input:hover,input:active{outline:none;border:none}.goa-input--disabled{opacity:0.5;cursor:default;border-color:var(--color-black)}.goa-input--disabled:hover,.goa-input--disabled:active,.goa-input--disabled:focus{border-color:var(--color-black);cursor:default;box-shadow:none}.goa-input--disabled input:hover{cursor:default !important}input.input--goa{display:block;border:none;flex:1 1 auto}.goa-input .input--bare{border:none}.goa-state--error .goa-input{border:2px solid var(--color-red)}.error:hover,.error:focus,.error{border:2px solid var(--color-red-500)}</style>`;
 
     		init(
     			this,
@@ -8527,16 +8523,16 @@ var app = (function () {
     			input.value = /*value*/ ctx[0];
     			input.checked = /*checked*/ ctx[4];
     			input.disabled = /*disabled*/ ctx[3];
-    			add_location(input, file$6, 49, 2, 1199);
+    			add_location(input, file$6, 49, 2, 1194);
     			attr_dev(div, "class", "goa-radio-icon");
-    			add_location(div, file$6, 57, 2, 1307);
-    			add_location(slot, file$6, 59, 4, 1375);
+    			add_location(div, file$6, 50, 2, 1276);
+    			add_location(slot, file$6, 52, 4, 1344);
     			attr_dev(span, "class", "goa-radio-label");
-    			add_location(span, file$6, 58, 2, 1340);
+    			add_location(span, file$6, 51, 2, 1309);
     			attr_dev(label_1, "class", "goa-radio");
     			toggle_class(label_1, "goa-radio--disabled", /*disabled*/ ctx[3]);
     			toggle_class(label_1, "goa-radio--error", /*error*/ ctx[5]);
-    			add_location(label_1, file$6, 44, 0, 1094);
+    			add_location(label_1, file$6, 44, 0, 1091);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -8693,11 +8689,7 @@ var app = (function () {
     class RadioItem extends SvelteElement {
     	constructor(options) {
     		super();
-
-    		this.shadowRoot.innerHTML = `<style>label.goa-radio{--goa-border-color:var(--color-gray-700);--goa-border-color--checked:var(--color-blue-500);--goa-radio-color--error:var(--color-red);--goa-radio-outline-color:var(--color-orange);--goa-radio-outline-width:3px;--goa-radio-diameter:1.5rem;--goa-radio-border-width:1px;--goa-radio-border-width--checked:7px;box-sizing:border-box;display:inline-flex;align-items:center;min-height:3rem}.goa-radio:hover{cursor:pointer}.goa-radio *,.goa-radio *:before,.goa-radio *:after{box-sizing:border-box}.goa-radio input[type='radio']{display:none}.goa-radio-label{padding:0.5rem;font-weight:var(--fw-regular)}.goa-radio-icon{display:inline-block;height:var(--goa-radio-diameter);width:var(--goa-radio-diameter);border-radius:50%;background-color:#fff;transition:box-shadow 100ms ease-in-out}.goa-radio:focus>input:not(:disabled)~.goa-radio-icon{box-shadow:0 0 0 var(--goa-radio-outline-width)
-      var(--goa-radio-outline-color)}.goa-radio--disabled:hover{cursor:default}input[type='radio']:checked~.goa-radio-icon{border:var(--goa-radio-border-width--checked) solid
-      var(--goa-border-color--checked)}input[type='radio']:not(:checked)~.goa-radio-icon{border:var(--goa-radio-border-width) solid var(--goa-border-color)}input[type='radio']:disabled~.goa-radio-icon{border:var(--goa-radio-border-width) solid var(--goa-border-color);opacity:0.3}input[type='radio']:disabled:checked~.goa-radio-icon{border:var(--goa-radio-border-width--checked) solid
-      var(--goa-border-color--checked);opacity:0.3}.goa-radio--error input[type='radio']:checked~.goa-radio-icon{border:7px solid var(--goa-radio-color--error)}.goa-radio--error input[type='radio']:not(:checked)~.goa-radio-icon{border:2px solid var(--goa-radio-color--error)}</style>`;
+    		this.shadowRoot.innerHTML = `<style>label.goa-radio{--goa-border-color:var(--color-gray-600);--goa-border-color--checked:var(--goa-color-interactive--active);--goa-radio-color--error:var(--color-red);--goa-radio-outline-color:var(--goa-color-interactive--highlight);--goa-radio-outline-width:3px;--goa-radio-diameter:1.5rem;--goa-radio-border-width:1px;--goa-radio-border-width--checked:7px;box-sizing:border-box;display:inline-flex;align-items:center;min-height:3rem}.goa-radio:hover{cursor:pointer}.goa-radio *,.goa-radio *:before,.goa-radio *:after{box-sizing:border-box}.goa-radio input[type="radio"]{display:none}.goa-radio-label{padding:0.5rem;font-weight:var(--fw-regular)}.goa-radio-icon{display:inline-block;height:var(--goa-radio-diameter);width:var(--goa-radio-diameter);border-radius:50%;background-color:#fff;transition:box-shadow 100ms ease-in-out}.goa-radio:focus>input:not(:disabled)~.goa-radio-icon{box-shadow:0 0 0 var(--goa-radio-outline-width) var(--goa-radio-outline-color)}.goa-radio--disabled:hover{cursor:default}input[type="radio"]:checked~.goa-radio-icon{border:var(--goa-radio-border-width--checked) solid var(--goa-border-color--checked)}input[type="radio"]:not(:checked)~.goa-radio-icon{border:var(--goa-radio-border-width) solid var(--goa-border-color)}input[type="radio"]:disabled~.goa-radio-icon{border:var(--goa-radio-border-width) solid var(--goa-border-color);opacity:0.3}input[type="radio"]:disabled:checked~.goa-radio-icon{border:var(--goa-radio-border-width--checked) solid var(--goa-border-color--checked);opacity:0.3}.goa-radio--error input[type="radio"]:checked~.goa-radio-icon{border:7px solid var(--goa-radio-color--error)}.goa-radio--error input[type="radio"]:not(:checked)~.goa-radio-icon{border:2px solid var(--goa-radio-color--error)}</style>`;
 
     		init(
     			this,
@@ -8960,7 +8952,7 @@ var app = (function () {
 
     const file$4 = "src/components/service-level-header/ServiceLevelHeader.svelte";
 
-    // (10:2) {#if level === 'live'}
+    // (10:2) {#if level === "live"}
     function create_if_block_2(ctx) {
     	let div;
     	let t0;
@@ -8992,14 +8984,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(10:2) {#if level === 'live'}",
+    		source: "(10:2) {#if level === \\\"live\\\"}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (16:2) {#if level !== 'live'}
+    // (18:2) {#if level !== "live"}
     function create_if_block_1$1(ctx) {
     	let div0;
     	let t0;
@@ -9021,12 +9013,12 @@ var app = (function () {
     			a.textContent = "Alberta Government";
     			t4 = text(" service");
     			attr_dev(div0, "class", div0_class_value = "service-level service-level--" + /*level*/ ctx[0]?.toLowerCase());
-    			add_location(div0, file$4, 16, 4, 426);
+    			add_location(div0, file$4, 18, 4, 442);
     			attr_dev(a, "href", "https://www.alberta.ca/index.aspx");
     			attr_dev(a, "class", "web-link");
-    			add_location(a, file$4, 20, 20, 565);
+    			add_location(a, file$4, 22, 20, 581);
     			attr_dev(div1, "class", "site-text");
-    			add_location(div1, file$4, 19, 4, 521);
+    			add_location(div1, file$4, 21, 4, 537);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -9055,14 +9047,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(16:2) {#if level !== 'live'}",
+    		source: "(18:2) {#if level !== \\\"live\\\"}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (25:2) {#if version}
+    // (29:2) {#if version}
     function create_if_block$2(ctx) {
     	let div;
     	let t;
@@ -9072,7 +9064,7 @@ var app = (function () {
     			div = element("div");
     			t = text(/*version*/ ctx[1]);
     			attr_dev(div, "class", "version");
-    			add_location(div, file$4, 25, 4, 725);
+    			add_location(div, file$4, 29, 4, 753);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9090,7 +9082,7 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(25:2) {#if version}",
+    		source: "(29:2) {#if version}",
     		ctx
     	});
 
@@ -9103,8 +9095,8 @@ var app = (function () {
     	let t1;
     	let div;
     	let t2;
-    	let if_block0 = /*level*/ ctx[0] === 'live' && create_if_block_2(ctx);
-    	let if_block1 = /*level*/ ctx[0] !== 'live' && create_if_block_1$1(ctx);
+    	let if_block0 = /*level*/ ctx[0] === "live" && create_if_block_2(ctx);
+    	let if_block1 = /*level*/ ctx[0] !== "live" && create_if_block_1$1(ctx);
     	let if_block2 = /*version*/ ctx[1] && create_if_block$2(ctx);
 
     	const block = {
@@ -9119,7 +9111,7 @@ var app = (function () {
     			if (if_block2) if_block2.c();
     			this.c = noop;
     			attr_dev(div, "class", "spacer");
-    			add_location(div, file$4, 23, 2, 678);
+    			add_location(div, file$4, 27, 2, 710);
     			attr_dev(header, "class", "goa-official-site-header");
     			add_location(header, file$4, 8, 0, 148);
     		},
@@ -9137,7 +9129,7 @@ var app = (function () {
     			if (if_block2) if_block2.m(header, null);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (/*level*/ ctx[0] === 'live') {
+    			if (/*level*/ ctx[0] === "live") {
     				if (if_block0) ; else {
     					if_block0 = create_if_block_2(ctx);
     					if_block0.c();
@@ -9148,7 +9140,7 @@ var app = (function () {
     				if_block0 = null;
     			}
 
-    			if (/*level*/ ctx[0] !== 'live') {
+    			if (/*level*/ ctx[0] !== "live") {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
@@ -9893,7 +9885,7 @@ var app = (function () {
 
     			attr_dev(circle, "stroke-width", /*strokewidth*/ ctx[3]);
     			attr_dev(circle, "r", circle_r_value = /*radius*/ ctx[2] - /*strokewidth*/ ctx[3] / 2);
-    			add_location(circle, file$2, 67, 4, 1732);
+    			add_location(circle, file$2, 67, 4, 1730);
     			attr_dev(path, "d", path_d_value = /*getArc*/ ctx[8](/*$_progress*/ ctx[6]));
     			attr_dev(path, "stroke-width", /*strokewidth*/ ctx[3]);
 
@@ -9902,14 +9894,14 @@ var app = (function () {
     			: "var(--color-blue)");
 
     			attr_dev(path, "stroke-linecap", "round");
-    			add_location(path, file$2, 74, 4, 1933);
+    			add_location(path, file$2, 74, 4, 1931);
     			attr_dev(svg, "class", svg_class_value = `spinner-${/*type*/ ctx[1]}`);
     			attr_dev(svg, "fill", "none");
     			attr_dev(svg, "viewBox", svg_viewBox_value = "0 0 " + /*diameter*/ ctx[4] + " " + /*diameter*/ ctx[4]);
     			attr_dev(svg, "width", /*diameter*/ ctx[4]);
     			attr_dev(svg, "height", /*diameter*/ ctx[4]);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
-    			add_location(svg, file$2, 59, 2, 1551);
+    			add_location(svg, file$2, 59, 2, 1549);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, svg, anchor);
@@ -10056,7 +10048,7 @@ var app = (function () {
     	function getCoords(radians) {
     		const x = radius + pathRadius * Math.cos(radians);
     		const y = radius + pathRadius * Math.sin(radians);
-    		return x + ' ' + y;
+    		return x + " " + y;
     	}
 
     	function getArc(progress) {
@@ -10411,7 +10403,7 @@ var app = (function () {
     class TextArea extends SvelteElement {
     	constructor(options) {
     		super();
-    		this.shadowRoot.innerHTML = `<style>.goa-textarea{display:block;width:100%;box-sizing:border-box;outline:none;transition:box-shadow 0.1s ease-in;border:1px solid var(--color-gray-700);border-radius:3px;background:var(--color-white);color:var(--color-gray-900, #ccc);padding:var(--input-padding, 0.5rem);font-size:var(--input-font-size);font-family:var(--font-family)}.goa-textarea:hover{border-color:var(--color-blue-600)}.goa-textarea:active,.goa-textarea:focus,.goa-textarea:focus-within{box-shadow:0 0 0 3px var(--color-orange)}.goa-textarea:disabled{border-color:var(--color-gray-200)}.goa-textarea:disabled:hover{border-color:var(--color-gray-200)}.goa-textarea:disabled:focus,.goa-textarea:disabled:active{box-shadow:none}</style>`;
+    		this.shadowRoot.innerHTML = `<style>.goa-textarea{display:block;width:100%;box-sizing:border-box;outline:none;transition:box-shadow 0.1s ease-in;border:1px solid var(--color-gray-600);border-radius:3px;background:var(--color-white);color:var(--color-black, #ccc);padding:var(--input-padding, 0.5rem);font-size:var(--input-font-size);font-family:var(--font-family)}.goa-textarea:hover{border-color:var(--goa-color-interactive--hover)}.goa-textarea:active,.goa-textarea:focus,.goa-textarea:focus-within{box-shadow:0 0 0 3px var(--goa-color-interactive--highlight)}.goa-textarea:disabled{border-color:var(--color-gray-200)}.goa-textarea:disabled:hover{border-color:var(--color-gray-200)}.goa-textarea:disabled:focus,.goa-textarea:disabled:active{box-shadow:none}</style>`;
 
     		init(
     			this,

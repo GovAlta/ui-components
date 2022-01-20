@@ -57,18 +57,18 @@ dd {
 }
 
 a {
-  color: var(--color-blue-500);
+  color: var(--goa-color-interactive);
   cursor: pointer;
 }
 
 a:hover {
-  color: var(--color-blue-600);
+  color: var(--goa-color-interactive--hover);
 }
 
 a:focus {
   outline-width: thin;
   outline-style: solid;
-  outline-color: var(--color-blue-600);
+  outline-color: var(--goa-color-interactive--hover);
   outline-offset: 0px;
 }
 

@@ -50,22 +50,22 @@
   }
 
   .emergency {
-    background-color: var(--color-red);
+    background-color: var(--goa-color-status-emergency);
     color: var(--color-white);
   }
   .caution {
-    background-color: var(--color-orange);
+    background-color: var(--goa-color-status-warning);
   }
   .information {
-    background-color: var(--color-blue);
+    background-color: var(--goa-color-status-info);
     color: var(--color-white);
   }
   .event {
-    background-color: var(--color-blue);
+    background-color: var(--goa-color-status-info);
     color: var(--color-white);
   }
   .success {
-    background-color: var(--color-green);
+    background-color: var(--goa-color-status-success);
     color: var(--color-white);
   }
 

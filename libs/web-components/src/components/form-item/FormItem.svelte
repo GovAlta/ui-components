@@ -29,7 +29,7 @@
   {#if error}
     <div class="error-msg">{error}</div>
   {/if}
-  {#if helptext }
+  {#if helptext}
     <div class="help-msg">{helptext}</div>
   {/if}
 </div>
@@ -54,7 +54,7 @@
   }
 
   label em {
-    color: var(--color-gray-700);
+    color: var(--color-gray-600);
     font-weight: var(--fw-regular);
     font-size: var(--fs-sm);
     font-style: normal;
@@ -66,13 +66,13 @@
 
   .help-msg {
     font-size: var(--fs-sm);
-    color: var(--color-gray-900);
+    color: var(--color-black);
     /* margin-top: 0.25rem; */
   }
 
   .error-msg {
     font-size: var(--fs-sm);
-    color: var(--color-red);
+    color: var(--goa-color-status-emergency);
     margin-bottom: 0.25rem;
   }
 </style>
