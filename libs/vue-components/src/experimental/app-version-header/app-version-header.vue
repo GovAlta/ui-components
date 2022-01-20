@@ -66,6 +66,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-@import '../../../../core-css/src/lib/styles/app-version-header/app-version-header.scss';
-</style>

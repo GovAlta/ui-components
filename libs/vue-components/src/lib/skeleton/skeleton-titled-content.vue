@@ -29,7 +29,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import './skeleton-element.scss';
-</style>

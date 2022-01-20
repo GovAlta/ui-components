@@ -19,9 +19,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .option:hover {
-    background: #f1f1f1;
-  }
-</style>

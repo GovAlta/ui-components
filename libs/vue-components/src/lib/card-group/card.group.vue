@@ -64,6 +64,3 @@ export default {
 };
 </script>
 
-<style lang="scss" module>
-@import './card.group.scss';
-</style>

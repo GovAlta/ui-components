@@ -5,10 +5,10 @@
     </div>
 
     <div class="card-content">
-      
+
        <a class="goa-title" v-if="this.hasTitleUrl" :href="this.titleUrl"> {{ title }} </a>
       <div class="goa-title" v-if="!this.hasTitleUrl">{{ title }} </div>
-      
+
       <div class="goa-text">
         {{ description }}
       </div>
@@ -59,7 +59,7 @@ export default {
   },
   data() {
     return {
-      
+
     };
   },
   computed: {
@@ -79,6 +79,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-@import '../../../../core-css/src/lib/styles/card/card.scss';
-</style>
