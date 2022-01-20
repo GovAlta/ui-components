@@ -22,6 +22,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-@import '../../../../core-css/src/lib/styles/hero-banner/content/hero-banner-content.scss';
-</style>
