@@ -10,7 +10,7 @@ export default {
   input: "src/index.ts",
   output: {
     sourcemap: true,
-    format: "iife", // es, iife, umd
+    format: "es", // es, iife, umd
     name: "app",
     file: "./build/bundle.js",
   },
@@ -34,7 +34,7 @@ export default {
       },
     }),
     resolve(),
-    terser(),
+    // terser(),
     summary(),
   ],
   watch: {
