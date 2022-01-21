@@ -48,7 +48,7 @@
         "libs/vue-components/src/index.ts"
       ],
       "@abgov/web-components": [
-        "libs/web-components/dist/bundle.js"
+        "libs/web-components/build/bundle.js"
       ]
     }
   },

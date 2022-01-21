@@ -4,15 +4,15 @@ import { GoAIconType } from "../icons";
 export * from './dropdown-option';
 
 interface DropdownProps {
-  ref: React.MutableRefObject<HTMLElement>;
+  ref: React.MutableRefObject<HTMLElement | null>;
   name: string;
   values: string;
-  leadingicon: string;
-  maxheight: number;
-  placeholder: string;
-  autocomplete: boolean;
-  disabled: boolean;
-  multiselect: boolean;
+  leadingicon?: string;
+  maxheight?: number;
+  placeholder?: string;
+  autocomplete?: boolean;
+  disabled?: boolean;
+  multiselect?: boolean;
 }
 
 declare global {
@@ -42,13 +42,13 @@ interface Props {
 
 export const GoADropdown: FC<Props> = (props) => {
 
-  const el = useRef<HTMLElement>();
+  const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
-      return null;
+      return;
     }
     const current = el.current;
-    const handler = (state: CustomEvent) => {
+    const handler = (state: any) => {
       const { name, value } = state.detail.data;
       props.onChange(name, value);
     };

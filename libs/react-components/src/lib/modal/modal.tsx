@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef } from 'react';
 // import '@abgov/web-components';
 
 interface WCProps {
-  ref: React.MutableRefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement>;
   title: string;
   closable: boolean;
   scrollable: boolean;
@@ -26,11 +26,14 @@ interface Props {
 }
 
 export const GoAModal: FC<Props> = ({ title, children, open, closable, onClose }) => {
-  const el = useRef<HTMLElement>();
+  const el = useRef<HTMLElement>(null);
   useEffect(() => {
+    if (!el.current) {
+      return;
+    }
     const current = el.current;
-    const listener = (e: CustomEvent) => {
-      onClose();
+    const listener = (e: any) => {
+      onClose?.();
     };
 
     current.addEventListener('_close', listener)
