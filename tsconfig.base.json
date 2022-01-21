@@ -32,6 +32,9 @@
       "@abgov/core-css": [
         "libs/core-css/src/index.ts"
       ],
+      "@abgov/styles": [
+        "libs/styles/src/index.ts"
+      ],
       "@abgov/react-components": [
         "libs/react-components/src/index.ts"
       ],
