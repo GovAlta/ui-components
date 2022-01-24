@@ -51,7 +51,6 @@ export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'pr
 
   return (
     <goa-button ref={el} type={type} size={size} variant={variant} disabled={disabled} title={title}>
-      in the button
       {children}
     </goa-button>
   );

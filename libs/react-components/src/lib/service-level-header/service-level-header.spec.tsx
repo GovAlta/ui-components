@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import GoAServiceLevelHeader, { ServiceLevel } from './service-level-header';
-// import '@abgov/web-components';
 
 describe('Header', () => {
   it('should show the all the flairs', async function () {

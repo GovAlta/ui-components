@@ -6,7 +6,7 @@ import GoAHeroBannerLink from './hero-banner-actions';
 
 afterEach(cleanup);
 
-describe('GoAHeroBanner', () => {
+describe.skip('GoAHeroBanner', () => {
   test('Renders all with properties', () => {
     const { container } = render(
       <GoAHeroBanner
