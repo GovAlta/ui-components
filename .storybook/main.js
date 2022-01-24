@@ -1,31 +1,30 @@
-const path = require('path');
+const path = require('path'); // Common main for all storybooks in workspace
 
-// Common main for all storybooks in workspace
+
 module.exports = {
   addons: ['@storybook/addon-essentials', '@storybook/preset-scss'],
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config, {
+    configType
+  }) => {
     config.module.rules.push({
       test: /\.(tsx)$/,
       loader: require.resolve('babel-loader'),
       options: {
-        presets: [
-          '@babel/preset-env',
-          '@babel/preset-react',
-          '@babel/preset-typescript',
-        ],
-      },
-    });
+        presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
+      }
+    }); //add aliases
 
-    //add aliases
     config.resolve.alias = {
       '@abgov/shared/storybook-common': path.resolve(__dirname, '../libs/shared/storybook-common/src/index.ts'),
       '@abgov/shared/common': path.resolve(__dirname, '../libs/shared/common/src/index.ts'),
       '@abgov/styles': path.resolve(__dirname, '../libs/styles/src/index.ts'),
-      '@abgov/web-components': path.resolve(__dirname, '../libs/web-components/build/bundle.js'),
-      // '@abgov/web-components': path.resolve(__dirname, '../libs/web-components/src/index.ts'),
-    };
+      '@abgov/web-components': path.resolve(__dirname, '../libs/web-components/build/bundle.js') // '@abgov/web-components': path.resolve(__dirname, '../libs/web-components/src/index.ts'),
 
-    // Return the altered config
+    }; // Return the altered config
+
     return config;
   },
+  core: {
+    builder: "webpack5"
+  }
 };

@@ -44,7 +44,8 @@ jobs:
       - name: Build Storybooks
         run: |
           npm run build:angular-storybook
-          npm run build:core-storybook
+          npm run build:docs-storybook
+          npm run build:web-components-storybook
           npm run build:vue-storybook
           npm run build:react-storybook
           cp nginx.conf dist/storybook

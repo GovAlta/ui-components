@@ -29,6 +29,9 @@
       "@abgov/core-css": [
         "libs/core-css/src/index.ts"
       ],
+      "@abgov/docs": [
+        "libs/docs/src/index.ts"
+      ],
       "@abgov/styles": [
         "libs/styles/src/index.ts"
       ],
