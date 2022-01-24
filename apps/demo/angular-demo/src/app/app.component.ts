@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import "@abgov/styles"
 
 @Component({
   selector: 'ngd-root',
