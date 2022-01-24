@@ -26,9 +26,6 @@
       "@abgov/angular-components": [
         "libs/angular-components/src/index.ts"
       ],
-      "@abgov/angular-material-components": [
-        "libs/angular-material-components/src/index.ts"
-      ],
       "@abgov/core-css": [
         "libs/core-css/src/index.ts"
       ],
