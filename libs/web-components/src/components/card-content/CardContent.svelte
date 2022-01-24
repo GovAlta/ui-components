@@ -11,6 +11,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .card-content{
     padding: 1rem;
   }

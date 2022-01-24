@@ -34,6 +34,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   @keyframes pulse {
     0% {
       opacity: 0.5;

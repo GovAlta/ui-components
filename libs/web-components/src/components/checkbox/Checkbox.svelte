@@ -74,6 +74,10 @@
 
 <!-- Styles -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .goa-checkbox {
     display: inline-flex;
     align-items: center;

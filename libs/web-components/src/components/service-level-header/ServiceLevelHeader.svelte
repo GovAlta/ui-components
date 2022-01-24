@@ -36,6 +36,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .goa-official-site-header {
     display: flex;
     font-size: var(--fs-xs);

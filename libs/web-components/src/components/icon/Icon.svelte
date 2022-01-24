@@ -454,6 +454,10 @@
 </div>
 
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   /* ion-icon {
     --ionicon-stroke-width: 32px;
   } */

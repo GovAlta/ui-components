@@ -72,6 +72,10 @@
 <!-- ======================================================================= -->
 
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .modal {
     font-family: var(--font-family);
     position: absolute;

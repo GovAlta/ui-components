@@ -12,6 +12,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .card-group {
     display: flex;
     flex-wrap: wrap;

@@ -11,6 +11,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .page-content {
     max-width: 100%;
     margin: 0 auto;

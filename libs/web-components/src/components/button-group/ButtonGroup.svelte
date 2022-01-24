@@ -15,6 +15,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   div {
     display: flex;
     flex-direction: row;

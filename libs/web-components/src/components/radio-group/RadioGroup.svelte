@@ -73,6 +73,10 @@
 </div>
 
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .goa-radio-group--horizontal {
     display: flex;
     flex-direction: row;
