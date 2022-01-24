@@ -361,35 +361,6 @@
       },
       "tags": []
     },
-    "demo-angular-demo-e2e": {
-      "root": "apps/demo/angular-demo-e2e",
-      "sourceRoot": "apps/demo/angular-demo-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/demo/angular-demo-e2e/cypress.json",
-            "devServerTarget": "demo-angular-demo:serve:development",
-            "tsConfig": "apps/demo/angular-demo-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "demo-angular-demo:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/demo/angular-demo-e2e/**/*.{js,ts}"]
-          }
-        }
-      },
-      "tags": [],
-      "implicitDependencies": ["demo-angular-demo"]
-    },
     "demo-react": {
       "root": "apps/demo/react",
       "sourceRoot": "apps/demo/react/src",
