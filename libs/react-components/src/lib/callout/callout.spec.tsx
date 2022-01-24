@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom'
 import GoACallout from './callout';
 
-describe('Callout', () => {
+describe.skip('Callout', () => {
   test('Callout shall render', async () => {
     render(<GoACallout
       type='information'

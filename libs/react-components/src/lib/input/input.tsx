@@ -2,18 +2,18 @@ import React, { FC, useEffect, useRef } from 'react';
 import { GoAIconType } from '../..';
 
 interface WCProps {
-  ref: React.MutableRefObject<HTMLElement>;
+  ref?: React.MutableRefObject<HTMLInputElement | null>;
   type: string;
   name: string;
   value: string;
-  id: string;
-  placeholder: string;
-  leadingicon: string;
-  trailingicon: string;
+  id?: string;
+  placeholder?: string;
+  leadingicon?: string;
+  trailingicon?: string;
   variant: string;
-  disabled: boolean;
-  error: string;
-  readonly: boolean;
+  disabled?: boolean;
+  error?: string;
+  readonly?: boolean;
   handletrailingiconclick: boolean;
 }
 
@@ -64,22 +64,27 @@ export const GoAInput: FC<Props & { type: string }> = ({
   onTrailingIconClick,
   onChange,
 }) => {
-  const ref = useRef<HTMLInputElement>();
+  const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
+    if (!ref.current) {
+      return;
+    }
     const current = ref.current;
-    const changeListener = (e: CustomEvent) => {
+    const changeListener = (e: any) => {
       const { name, value } = e.detail.data;
       onChange(name, value);
     };
-    const clickListener = (e: CustomEvent) => {
-      onTrailingIconClick();
+    // TODO: determinw the propery type of the e (CustomEvent does not work)
+    const clickListener = (e: any) => {
+      onTrailingIconClick?.();
     };
 
-    current.addEventListener('change', changeListener)
-    current.addEventListener('on:ontrailingiconclick', clickListener)
+    current.addEventListener('_change', changeListener)
+    // TODO: remove all the `on:` prefixes
+    current.addEventListener('_ontrailingiconclick', clickListener)
     return () => {
-      current.removeEventListener('change', changeListener);
-      current.removeEventListener('on:ontrailingiconclick', clickListener);
+      current.removeEventListener('_change', changeListener);
+      current.removeEventListener('_ontrailingiconclick', clickListener);
     }
   }, [ref, onChange, onTrailingIconClick])
 

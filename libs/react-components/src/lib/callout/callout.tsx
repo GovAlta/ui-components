@@ -3,8 +3,8 @@ import React from 'react';
 type CalloutType = "important" | 'information' | 'event' | 'success' | 'emergency';
 
 interface WCProps {
-  title: string;
-  type: CalloutType;
+  title?: string;
+  type?: CalloutType;
 }
 
 declare global {

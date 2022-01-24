@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-// import '@abgov/web-components';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -14,7 +13,7 @@ declare global {
 interface DropdownOptionProps {
   name: string;
   value: string;
-  label: string;
+  label?: string;
 }
 
 interface Props {

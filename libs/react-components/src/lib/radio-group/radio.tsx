@@ -3,10 +3,10 @@ import React, { FC } from 'react';
 interface RadioItemProps {
   name: string;
   value: string;
-  label: string;
-  disabled: boolean;
-  checked: boolean;
-  error: boolean;
+  label?: string;
+  disabled?: boolean;
+  checked?: boolean;
+  error?: boolean;
 }
 
 declare global {
@@ -21,7 +21,7 @@ declare global {
 interface Props {
   value: string;
   label?: string;
-  name?: string;
+  name: string;
   disabled?: boolean;
   checked?: boolean;
   error?: boolean;
