@@ -10,7 +10,7 @@ declare global {
 }
 
 interface CheckboxProps {
-  ref: React.MutableRefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement>;
   name: string;
   checked?: boolean;
   disabled?: boolean;
@@ -34,11 +34,14 @@ export interface Props {
 }
 
 export const GoACheckbox: FC<Props> = ({ name, testId, error, disabled, checked, indeterminate, value = true, text, children, onChange }) => {
-  const el = useRef<HTMLElement>();
+  const el = useRef<HTMLElement>(null);
   useEffect(() => {
+    if (!el.current) {
+      return;
+    }
     const current = el.current;
-    const listener = (e: CustomEvent) => {
-      onChange(name, e.detail.checked, e.detail.value);
+    const listener = (e: any) => {
+      onChange?.(name, e.detail.checked, e.detail.value);
     };
 
     current.addEventListener('_change', listener)

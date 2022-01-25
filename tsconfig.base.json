@@ -26,11 +26,14 @@
       "@abgov/angular-components": [
         "libs/angular-components/src/index.ts"
       ],
-      "@abgov/angular-material-components": [
-        "libs/angular-material-components/src/index.ts"
-      ],
       "@abgov/core-css": [
         "libs/core-css/src/index.ts"
+      ],
+      "@abgov/docs": [
+        "libs/docs/src/index.ts"
+      ],
+      "@abgov/styles": [
+        "libs/styles/src/index.ts"
       ],
       "@abgov/react-components": [
         "libs/react-components/src/index.ts"
@@ -45,7 +48,7 @@
         "libs/vue-components/src/index.ts"
       ],
       "@abgov/web-components": [
-        "libs/web-components/dist/bundle.js"
+        "libs/web-components/build/bundle.js"
       ]
     }
   },

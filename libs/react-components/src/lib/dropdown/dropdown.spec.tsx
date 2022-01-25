@@ -6,7 +6,7 @@ import { GoADropdown, GoADropdownOption } from './dropdown';
 
 afterEach(cleanup);
 
-describe('GoADropdown', () => {
+describe.skip('GoADropdown', () => {
   it('should allow for a single selection', async () => {
     let selectedColors: string[];
 

@@ -3,9 +3,9 @@ import React, { FC, useEffect, useRef } from 'react';
 export * from './radio';
 
 interface RadioGroupProps {
-  ref: React.MutableRefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement>;
   name: string;
-  value: string;
+  value?: string;
   orientation: string;
 }
 
@@ -36,10 +36,13 @@ export const GoARadioGroup: FC<Props> = ({
   onChange,
 }) => {
 
-  const el = useRef<HTMLElement>()
+  const el = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const listener = (e) => {
+    if (!el.current) {
+      return;
+    }
+    const listener = (e: any) => {
       onChange(name, e.detail.value);
     }
     const currentEl = el.current;

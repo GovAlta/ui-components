@@ -19,7 +19,7 @@ describe('GoA Button', () => {
     expect(screen.getByText(buttonText));
   });
 
-  test('type=primary should render primary styling', () => {
+  test.skip('type=primary should render primary styling', () => {
     render(<GoAButton onClick={() => {}} type='primary' size='medium'>{buttonText}</GoAButton>);
 
     const button = screen.getByRole('button');
@@ -28,7 +28,7 @@ describe('GoA Button', () => {
     expect(button.className).not.toContain(buttonTertiaryClassName);
   });
 
-  test('type=secondary should render secondary styling', () => {
+  test.skip('type=secondary should render secondary styling', () => {
     render(<GoAButton onClick={() => {}} type='secondary'>{buttonText}</GoAButton>);
 
     const button = screen.getByRole('button');
@@ -37,7 +37,7 @@ describe('GoA Button', () => {
     expect(button.className).not.toContain(buttonTertiaryClassName);
   });
 
-  test('type=tertiary should render tertiary styling', () => {
+  test.skip('type=tertiary should render tertiary styling', () => {
     render(<GoAButton onClick={() => {}} type='tertiary'>{buttonText}</GoAButton>);
 
     const button = screen.getByRole('button');
@@ -46,28 +46,28 @@ describe('GoA Button', () => {
     expect(button.className).toContain(buttonTertiaryClassName);
   });
 
-  test('size=small should render small styling', () => {
+  test.skip('size=small should render small styling', () => {
     render(<GoAButton onClick={() => {}} type='tertiary' size='small'>{buttonText}</GoAButton>);
 
     const button = screen.getByRole('button');
     expect(button.className).toContain(buttonSmallClassName);
   });
 
-  test('size unset should render no small styling', () => {
+  test.skip('size unset should render no small styling', () => {
     render(<GoAButton onClick={() => {}} type='tertiary'>{buttonText}</GoAButton>);
 
     const button = screen.getByRole('button');
     expect(button.className).not.toContain(buttonSmallClassName);
   });
 
-  test('title is set to button title', () => {
+  test.skip('title is set to button title', () => {
     render(<GoAButton onClick={() => {}} type='tertiary' title={buttonTitle}>{buttonText}</GoAButton>);
 
     const button = screen.getByRole('button');
     expect(button.title).toContain(buttonTitle);
   });
 
-  test('responds to events', () => {
+  test.skip('responds to events', () => {
     const onClickStub = jest.fn()
     render(<GoAButton onClick={() => {}} data-testid="goaButton"  type='tertiary' onClick={onClickStub}>{buttonText}</GoAButton>);
     const button = screen.getByTestId('goaButton');

@@ -10,8 +10,8 @@ interface WCProps {
   size?: ButtonSize;
   variant?: ButtonVariant;
   disabled?: boolean
-  title: string;
-  ref: React.MutableRefObject<HTMLElement>;
+  title?: string;
+  ref: React.RefObject<HTMLElement>;
 }
 
 declare global {
@@ -35,10 +35,13 @@ type ButtonProps = {
 };
 
 export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'primary', size = 'medium', variant = 'default', children, onClick }) => {
-  const el = useRef<HTMLElement>();
+  const el = useRef<HTMLElement>(null);
   useEffect(() => {
+    if (!el.current) {
+      return;
+    }
     const current = el.current;
-    const listener = (e: CustomEvent) => { onClick(); };
+    const listener = (e: any) => { onClick(); };
 
     current.addEventListener('_click', listener)
     return () => {
@@ -48,7 +51,6 @@ export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'pr
 
   return (
     <goa-button ref={el} type={type} size={size} variant={variant} disabled={disabled} title={title}>
-      in the button
       {children}
     </goa-button>
   );

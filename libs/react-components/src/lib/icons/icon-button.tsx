@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef } from 'react'
 import { IconSize, GoAIconType, IconVariant } from './icon';
 
 interface WCProps {
-  ref: React.MutableRefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement>;
   type: GoAIconType,
   size?: IconSize;
   variant?: IconVariant;
@@ -30,10 +30,13 @@ interface Props {
 }
 
 export const GoAIconButton: FC<Props> = ({ type, disabled, variant = 'primary', onClick, size = 'medium', title, children }) =>  {
-  const ref = useRef<HTMLElement>();
+  const ref = useRef<HTMLElement>(null);
   useEffect(() => {
+    if (!ref.current) {
+      return;
+    }
     const current = ref.current;
-    const listener = (e: CustomEvent) => {
+    const listener = (e: any) => {
       onClick();
     };
 

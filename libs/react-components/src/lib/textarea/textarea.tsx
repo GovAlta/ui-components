@@ -29,11 +29,14 @@ interface Props {
 };
 
 export const GoATextArea: FC<Props> = ({ name, value, placeholder, rows, disabled, onChange }) => {
-  const el = useRef<HTMLTextAreaElement>();
+  const el = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
+    if (!el.current) {
+      return;
+    }
     const current = el.current;
-    const listener = (e: CustomEvent) => {
+    const listener: EventListener = (e: any) => {
       const { name, value } = e.detail.data;
       onChange(name, value);
     };
