@@ -7,7 +7,8 @@
 
   // export let type: CalloutType = "";
   export let title: string;
-
+  export let testId: string = "";
+  
   $: iconType =
     type === "emergency"
       ? "warning"
@@ -23,7 +24,7 @@
 </script>
 
 <!-- HTML -->
-<div class="notification">
+<div class="notification" data-testid="{testId}">
   <span class="icon {type}">
     <goa-icon type={iconType} inverted />
   </span>
