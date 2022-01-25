@@ -5,6 +5,7 @@
 <!-- ======================================================================= -->
 
 <script lang="ts">
+  console.log('here')
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";

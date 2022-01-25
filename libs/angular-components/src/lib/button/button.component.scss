@@ -1,7 +1,0 @@
-@import '~@abgov/core-css/src/lib/styles/button/button.scss';
-
-:host {
-  &.goa-button {
-    @include goa-button-styles;
-  }
-}
