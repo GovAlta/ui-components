@@ -69,6 +69,10 @@
 </label>
 
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   label.goa-radio {
     --goa-border-color: var(--color-gray-600);
     --goa-border-color--checked: var(--goa-color-interactive--active);

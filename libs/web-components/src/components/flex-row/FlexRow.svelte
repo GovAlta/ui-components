@@ -15,6 +15,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .goa-flex-row {
     margin-bottom: 1rem;  /* Not sure this should be set to a non-zero value */
     display: flex;

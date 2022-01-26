@@ -38,6 +38,8 @@
 <style>
   :host {
     flex: 1 1 auto;
+    box-sizing: border-box;
+    font-family: var(--font-family);
   }
 
   * {

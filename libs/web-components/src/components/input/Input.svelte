@@ -98,6 +98,10 @@
 
 <!-- Styles -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .goa-input,
   .goa-input * {
     box-sizing: border-box;

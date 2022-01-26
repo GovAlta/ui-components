@@ -222,6 +222,10 @@
 </div>
 
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .goa-dropdown-box {
     position: relative;
   }

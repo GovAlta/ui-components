@@ -129,6 +129,10 @@
 </li>
 
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   li {
     font-family: var(--font-family);
   }

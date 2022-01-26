@@ -100,6 +100,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   @keyframes rotate {
     100% {
       transform: rotate(360deg);

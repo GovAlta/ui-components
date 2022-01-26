@@ -41,6 +41,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .fullscreen {
     position: fixed;
     top: 0;

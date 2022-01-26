@@ -35,6 +35,10 @@
 </button>
 
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   @media (max-width: 320px) {
     /* expand the button and :host container on small screens  */
     :host {

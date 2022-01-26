@@ -24,6 +24,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .goa-container {
     margin-bottom: 1rem;
     box-sizing: border-box;

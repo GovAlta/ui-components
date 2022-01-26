@@ -38,6 +38,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .notification {
     padding: 1.5rem;
     display: flex;

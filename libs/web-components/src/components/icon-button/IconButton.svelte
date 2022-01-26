@@ -54,6 +54,8 @@
   :host {
     display: flex;
     align-items: center;
+    box-sizing: border-box;
+    font-family: var(--font-family);
   }
   .goa-icon-button,
   .goa-icon-button * {

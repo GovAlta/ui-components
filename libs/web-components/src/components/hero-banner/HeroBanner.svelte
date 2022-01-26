@@ -27,6 +27,10 @@
 
 <!-- Style -->
 <style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
   .goa-hero {
     box-sizing: border-box;
     display: flex;
