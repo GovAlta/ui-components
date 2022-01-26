@@ -9,11 +9,9 @@
   "unpkg": "web-components.es.js",
   "module": "web-components.umd.js",
   "scripts": {
-    "build": "rollup -c rollup.config.js",
     "dev": "rollup -c rollup.config.js -w",
     "demo": "rollup -c rollup.demo.config.js -w",
     "start": "sirv demo/public",
-    "prepublishOnly": "npm run build",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "license": "Apache-2.0",
