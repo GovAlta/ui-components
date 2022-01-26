@@ -3,7 +3,6 @@
  */
 
 import '@abgov/web-components'
-// import '@abgov/styles'
 
 import { GoAAppHeader } from './lib/app-header/app-header';
 import { GoABadge, GoAInfoBadge, GoAEmergencyBadge, GoASuccessBadge, GoAWarningBadge } from './lib/badge/badge';

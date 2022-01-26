@@ -5,6 +5,9 @@
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
+  "main": "web-components.es.js",
+  "unpkg": "web-components.es.js",
+  "module": "web-components.umd.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "dev": "rollup -c rollup.config.js -w",
