@@ -36,14 +36,6 @@
             "passWithNoTests": true
           }
         },
-        "post": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["npm run build:styles:angular-components"],
-            "cwd": "./",
-            "parallel": false
-          }
-        },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
           "options": {
