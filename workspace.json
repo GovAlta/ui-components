@@ -253,25 +253,6 @@
       "projectType": "library",
       "tags": [],
       "architect": {
-        "build": {
-          "builder": "@nrwl/web:package",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/libs/docs",
-            "tsConfig": "libs/docs/tsconfig.lib.json",
-            "project": "libs/docs/package.json",
-            "entryFile": "libs/docs/src/index.ts",
-            "external": ["react/jsx-runtime"],
-            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-            "assets": [
-              {
-                "glob": "libs/docs/README.md",
-                "input": ".",
-                "output": "."
-              }
-            ]
-          }
-        },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
