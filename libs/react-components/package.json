@@ -2,10 +2,6 @@
   "name": "@abgov/react-components",
   "version": "0.0.0",
   "description": "Government of Alberta - UI components for React",
-  "publishConfig": {
-    "access": "public"
-  },
-  "semantic-release": "semantic-release",
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },

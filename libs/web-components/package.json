@@ -5,6 +5,10 @@
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "semantic-release": "semantic-release",
   "main": "web-components.es.js",
   "unpkg": "web-components.es.js",
   "module": "web-components.umd.js",
