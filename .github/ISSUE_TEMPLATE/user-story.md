@@ -7,12 +7,15 @@ assignees: ''
 
 ---
 
-**As a:** *[user concerned by the story]*
-**I want:** *[goal of the story]*
-**so that:** *[reason for the story]*
+**As a:** *[User concerned by the story]*
+**I want:** *[Goal of the story]*
+**so that:** *[Reason for the story]*
 
 ### Acceptance criteria
 - [ ] *[These are items that can be verified to show that this user story is satisfied.]*
+
+### Presentable outcomes
+- [ ] *[How the work completed in this user story will be communicated during the sprint review]*
 
 ### Sprint Ready Checklist 
 1. - [ ] Acceptance criteria defined 
@@ -21,8 +24,8 @@ assignees: ''
 5. - [ ] External / 3rd Party dependencies identified
 
 ### Related issues:
-GitHub issue: *[A "# link" to the GitHub issue]*
+GitHub issue: *[If applicable a "# link" to the GitHub issue]*
 
 ### Resources:
-**Mockups:** *[Here goes a URL to or the name of the mockup(s) in inVision]*
-**Testing URL:** *[Here goes a URL to the testing branch or IP]*
+**Mockups:** *[URL to or the name of the mockup(s) in inVision]*
+**Testing URL:** *[URL to the testing branch or IP]*
