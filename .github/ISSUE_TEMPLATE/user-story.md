@@ -27,5 +27,5 @@ assignees: ''
 GitHub issue: *[If applicable a "# link" to the GitHub issue]*
 
 ### Resources:
-**Mockups:** *[URL to or the name of the mockup(s) in inVision]*
-**Testing URL:** *[URL to the testing branch or IP]*
+**Mockups:** *[If applicable a URL to or the name of the mockup(s)]*
+**Testing URL:** *[If applicable a URL to the testing branch]*
