@@ -81,7 +81,6 @@
     .image-desktop {
       display: block;
     }
-
     .image-mobile {
       display: none;
     }

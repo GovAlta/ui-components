@@ -10,9 +10,7 @@
 <header class="goa-official-site-header">
   {#if level === "live"}
     <div class="site-text service-level--live">
-      An official site of the <a href="https://www.alberta.ca/index.aspx" class="web-link"
-        >Alberta Government</a
-      >
+      An official site of the <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a>
     </div>
   {/if}
 
@@ -21,10 +19,7 @@
       {level}
     </div>
     <div class="site-text">
-      This is a new <a href="https://www.alberta.ca/index.aspx" class="web-link"
-        >Alberta Government</a
-      > service
-    </div>
+      This is a new <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a>service</div>
   {/if}
   <div class="spacer" />
   {#if version}
