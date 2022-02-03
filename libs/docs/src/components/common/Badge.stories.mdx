@@ -5,9 +5,62 @@ import {
 } from '@storybook/addon-docs';
 
 import { action } from '@storybook/addon-actions';
+import { Tabs, Tab } from '@abgov/shared/storybook-common';
 
 <Meta title="Components/Badge" />
 
 # Badge
 
+```ts
+export types =
+    | "success"
+    | "warning"
+    | "information"
+    | "emergency"
+    | "inactive"
+    | "dark"
+    | "midtone"
+    | "light";
+```
+
+<goa-badge type="success" content="Success" icon />
 <goa-badge type="warning" content="Warning" icon />
+<goa-badge type="information" content="Information" icon />
+<goa-badge type="emergency" content="Emergency" icon />
+<goa-badge type="inactive" content="Inactive" icon />
+<goa-badge type="dark" content="Dark" icon />
+<goa-badge type="midtone" content="Midtone" icon />
+<goa-badge type="light" content="Light" icon />
+
+<Tabs>
+  <Tab label="Web Component">
+    <goa-badge type="warning" content="Warning" icon />
+    <pre>
+      { `<goa-badge type="warning" content="Warning" icon />` }
+    </pre>
+    <goa-badge type="warning" content="Warning"/>
+    <pre>
+      { `<goa-badge type="warning" content="Warning" />` }
+    </pre>
+  </Tab>
+  <Tab label="Angular">
+    <goa-badge type="warning" content="Warning" icon />
+    <pre>
+      { `<goa-badge type="warning" content="Warning" icon />` }
+    </pre>
+    <goa-badge type="warning" content="Warning" />
+    <pre>
+      { `<goa-badge type="warning" content="Warning" />` }
+    </pre>
+  </Tab>
+  <Tab label="React">
+    <goa-badge type="warning" content="Warning" icon />
+    <pre>
+      { `<GoABadge type="warning" content="Warning" icon />` }
+    </pre>
+    <goa-badge type="warning" content="Warning" />
+    <pre>
+      { `<GoABadge type="warning" content="Warning" icon />` }
+    </pre>
+  </Tab>
+</Tabs>
