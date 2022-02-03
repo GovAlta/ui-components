@@ -1,3 +1,7 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Setup/React" />
+
 # React UI Components
 
 This library contains react components from the Government of Alberta.
@@ -9,8 +13,7 @@ npm init vite@latest
 
 Add Dependencies
 ```bash
-npm i
-npm i @abgov/react-components@3.4.0-alpha.7
+npm i @abgov/react-components@3.4.0-alpha.5
 npm i @abgov/styles
 ```
 
@@ -44,7 +47,7 @@ import { GoABadge } from '@abgov/react-components';
 
 function App() {
   return (
-    <GoABadge type="information" content="Some info" icon={true} />
+    <GoABadge type="information" content="Some info" />
   )
 }
 
