@@ -24,6 +24,7 @@
     "run:angular-storybook": "npm run docs:json:angular-components && nx run angular-components:storybook",
     "run:vue-storybook": "nx run vue-components:storybook",
     "run:react-storybook": "nx run react-components:storybook",
+    "run:docs-storybook": "nx run docs:storybook",
     "run:web-components-storybook": "nx run web-components:storybook",
     "run:web-components-dev": "npm run --prefix libs/web-components dev",
     "run:angular-demo": "nx run demo-angular-demo:serve",
