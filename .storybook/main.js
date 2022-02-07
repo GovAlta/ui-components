@@ -18,9 +18,8 @@ module.exports = {
       '@abgov/shared/storybook-common': path.resolve(__dirname, '../libs/shared/storybook-common/src/index.ts'),
       '@abgov/shared/common': path.resolve(__dirname, '../libs/shared/common/src/index.ts'),
 
-      // TODO: do these need to be here?
       '@abgov/styles': path.resolve(__dirname, '../libs/styles/src/index.ts'),
-      '@abgov/web-components': path.resolve(__dirname, '../libs/web-components/build/bundle.js')
+      '@abgov/web-components': path.resolve(__dirname, '../dist/libs/web-components/web-components.es.js')
     };
 
     return config;
