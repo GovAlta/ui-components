@@ -70,6 +70,8 @@
     border-radius: 0.25rem;
     padding: 3px 0.5rem; /* is calc(3 / 16 * 1rem) better for scaling? */
     gap: 0.25rem;
+    margin: 0;
+    margin-right: 0.25rem;
   }
 
   .icon-only {
