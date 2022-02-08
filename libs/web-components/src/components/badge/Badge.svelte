@@ -70,8 +70,7 @@
     border-radius: 0.25rem;
     padding: 3px 0.5rem; /* is calc(3 / 16 * 1rem) better for scaling? */
     gap: 0.25rem;
-    margin: 0;
-    margin-right: 0.25rem;
+    margin: 0 0.5rem 0.5rem 0;
   }
 
   .icon-only {
@@ -85,7 +84,7 @@
   }
 
   .goa-badge.badge-information {
-    background-color: var(--color-white);
+    background-color: var(--color-gray-100);
     /* TODO: need color name */
     color: var(--color-blue);
   }
