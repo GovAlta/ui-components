@@ -1,3 +1,183 @@
-<script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
-<link rel="stylesheet" href="" />
+<script
+  type="module"
+  src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule=""
+  src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"
+></script>
+
+<style>
+  html {
+    font-size: 16px;
+  }
+
+  * {
+    font-family: acumin-pro-semi-condensed, sans-serif;
+  }
+
+  body,
+  input,
+  textarea,
+  button,
+  textarea {
+    background: #fff;
+    font-weight: 400;
+    font-size: var(--fs-base);
+    color: #333;
+  }
+
+  body {
+    margin: 0;
+    scroll-behavior: smooth;
+    line-height: var(--lh-base);
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  p {
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  hr {
+    border-width: 0;
+    border-top: 1px solid #ccc;
+    height: 0;
+    padding: 0;
+    margin: 3rem 0;
+  }
+
+  ul,
+  ol {
+    padding-left: 0;
+    padding-left: 1rem;
+  }
+
+  li > ul,
+  li > ol,
+  li > ul,
+  li > ol {
+    padding-left: 0;
+    margin-top: 0;
+  }
+
+  dl {
+    margin-top: 0;
+  }
+  dd {
+    margin-left: 0.5rem;
+  }
+
+  a {
+    color: var(--goa-color-interactive);
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: var(--goa-color-interactive--hover);
+  }
+
+  a:focus {
+    outline-width: thin;
+    outline-style: solid;
+    outline-color: var(--goa-color-interactive--hover);
+    outline-offset: 0px;
+  }
+
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #999;
+    opacity: 1; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #999;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #999;
+  }
+
+  /* Typography */
+
+  /* h1:first-child,
+  h2:first-child,
+  h3:first-child {
+    margin-top: 0 !important;
+  } */
+
+  /* Base header margins */
+  /* h1,
+  h2,
+  h3,
+  h4 {
+    margin-bottom: 1rem;
+  } */
+
+  /* Font sizes */
+  h1 {
+    font-size: var(--fs-3xl);
+    line-height: var(--lh-2xl);
+    font-weight: var(--fw-bold);
+  }
+  h2 {
+    font-size: var(--fs-2xl);
+    line-height: var(--lh-xl);
+    font-weight: var(--fw-regular);
+    border-bottom: none;
+  }
+  h3 {
+    font-size: var(--fs-xl);
+    line-height: var(--lh-lg);
+    font-weight: var(--fw-regular);
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: var(--fs-base);
+    line-height: var(--lh-base);
+    font-weight: var(--fw-bold);
+  }
+
+  /* Set top margin to subsequent headers */
+  /* h1 + h2,
+  h1 + h3,
+  h1 + h4,
+  h2 + h3,
+  h2 + h4,
+  h3 + h4 {
+    margin-top: 2rem;
+  } */
+
+  p {
+    margin-bottom: 1rem;
+    font-size: var(--fs-base);
+  }
+
+  /* prevent too much bottom space when a header immediately follows an <hr> */
+  /* hr + h1,
+  hr + h2,
+  hr + h3 {
+    margin-top: 0;
+  } */
+
+  em {
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+    color: var(--color-gray);
+  }
+
+  small {
+    font-size: var(--fs-xs);
+    font-style: normal;
+    color: var(--color-gray);
+  }
+</style>
