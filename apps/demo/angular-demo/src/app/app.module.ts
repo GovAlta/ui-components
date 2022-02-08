@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
 import '@abgov/web-components';
-import "@abgov/styles";
 
 @NgModule({
   declarations: [AppComponent],
