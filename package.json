@@ -24,7 +24,9 @@
     "run:angular-storybook": "npm run docs:json:angular-components && nx run angular-components:storybook",
     "run:vue-storybook": "nx run vue-components:storybook",
     "run:react-storybook": "nx run react-components:storybook",
+    "run:docs-storybook": "nx run docs:storybook",
     "run:web-components-storybook": "nx run web-components:storybook",
+    "run:web-components-dev": "npm run --prefix libs/web-components dev",
     "run:angular-demo": "nx run demo-angular-demo:serve",
     "test": "nx test --clearCache",
     "test:all": "nx run-many --target=test --all",
@@ -46,7 +48,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "postinstall": "node node_modules/@nx-plus/vue/patch-nx-dep-graph.js && ngcc --properties es2015 browser module main"
+    "postinstall": "node node_modules/@nx-plus/vue/patch-nx-dep-graph.js && ngcc --properties es2015 browser module main",
+    "git:sync": "git stash --include-untracked && git fetch upstream && git rebase upstream/alpha && git stash pop"
   },
   "private": true,
   "dependencies": {

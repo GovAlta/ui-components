@@ -1,0 +1,9 @@
+{
+  "name": "angular-sample-app",
+  "version": "0.0.0",
+  "description": "Government of Alberta - UI components for Angular",
+  "dependencies": {
+    "@abgov/styles": "^1.0.0-alpha.1",
+    "@abgov/web-components": "^1.0.0-alpha.4"
+  }
+}

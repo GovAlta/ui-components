@@ -12,7 +12,7 @@ export default {
     sourcemap: true,
     format: "es", // es, iife, umd
     name: "app",
-    file: "./build/bundle.js",
+    file: "../../dist/libs/web-components/web-components.es.js",
   },
   plugins: [
     commonjs(),
