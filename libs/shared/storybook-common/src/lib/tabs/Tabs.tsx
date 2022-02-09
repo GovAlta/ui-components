@@ -89,6 +89,7 @@ const SCTabs = styled.div`
   display: flex;
   border-bottom: 1px solid #ccc;
   overflow-x: auto;
+  margin-top: 2rem;
 `;
 
 const SCTab = styled.div`

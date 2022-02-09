@@ -11,7 +11,7 @@ module.exports = {
     // ...rootMain.stories,
     '../src/**/*.stories.mdx'
   ],
-  staticDirs: ['../src'],
+  staticDirs: ['../src', '../src/components/common'],
   addons: [...rootMain.addons, '@nrwl/react/plugins/storybook'],
   webpackFinal: async (config, { configType }) => {
     // apply any global webpack configs that might have been specified in .storybook/main.js
