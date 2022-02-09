@@ -4,11 +4,12 @@
 <script lang="ts">
   // import type { ButtonGroupAlignment } from "@abgov/shared/common";
   // export let alignment: ButtonGroupAlignment = "start";
+  export let gap: "small" | "medium" | "large" = "medium";
   export let alignment: "start" | "end";
 </script>
 
 <!-- HTML -->
-<div style="--alignment: flex-{alignment};">
+<div style="--alignment: flex-{alignment}; --gap-size: {gap === "small" ? "0.5rem" : "1rem"}">
   <slot />
 </div>
 
@@ -23,6 +24,6 @@
     flex-direction: row;
     justify-content: var(--alignment);
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: var(--gap-size);
   }
 </style>
