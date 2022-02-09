@@ -8,7 +8,7 @@
   // export let type: CalloutType = "";
   export let title: string;
   export let testId: string = "";
-  
+
   $: iconType =
     type === "emergency"
       ? "warning"
@@ -29,7 +29,7 @@
     <goa-icon type={iconType} inverted />
   </span>
   <span class="content">
-    <h2>{title}</h2>
+    <h3>{title}</h3>
     <slot />
   </span>
 </div>
@@ -48,7 +48,7 @@
     margin-bottom: 1.75rem;
   }
 
-  h2 {
+  h3 {
     font-size: var(--fs-xl);
     font-weight: var(--fw-regular);
     margin-top: 0;

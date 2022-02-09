@@ -1,0 +1,10 @@
+.doc-block {
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.doc-block p:first-child {
+  margin-top: 0;
+}
