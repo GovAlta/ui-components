@@ -5,7 +5,7 @@ import {
 } from '@storybook/addon-docs';
 
 import { action } from '@storybook/addon-actions';
-import { Tabs, Tab, Note } from '@abgov/shared/storybook-common';
+import { Tabs, Tab, Note, Block } from '@abgov/shared/storybook-common';
 
 <Meta title="Components/Badge" />
 
@@ -20,40 +20,41 @@ which display minimal amounts of information, system feedback, or states.
 
 <hr />
 
-### Component Preview
+## Component Preview
 
-#### Badge with icon and text
+<Block>
 
-<goa-badge type="information" content="Information" icon />
-<goa-badge type="success" content="Success" icon />
-<goa-badge type="warning" content="Warning" icon />
-<goa-badge type="emergency" content="Emergency" icon />
-<goa-badge type="inactive" content="Inactive" icon />
-<goa-badge type="dark" content="Dark" icon />
-<goa-badge type="midtone" content="Midtone" icon />
-<goa-badge type="light" content="Light" icon />
+  Badge with icon and text
 
-#### Badge with text only
+  <goa-badge type="information" content="Information" icon />
+  <goa-badge type="success" content="Success" icon />
+  <goa-badge type="warning" content="Warning" icon />
+  <goa-badge type="emergency" content="Emergency" icon />
+  <goa-badge type="dark" content="Dark" icon />
+  <goa-badge type="midtone" content="Midtone" icon />
+  <goa-badge type="light" content="Light" icon />
 
-<goa-badge type="information" content="Information" />
-<goa-badge type="success" content="Success" />
-<goa-badge type="warning" content="Warning" />
-<goa-badge type="emergency" content="Emergency" />
-<goa-badge type="inactive" content="Inactive" />
-<goa-badge type="dark" content="Dark" />
-<goa-badge type="midtone" content="Midtone" />
-<goa-badge type="light" content="Light" />
+  Badge with text only
 
-#### Badge with icon only
+  <goa-badge type="information" content="Information" />
+  <goa-badge type="success" content="Success" />
+  <goa-badge type="warning" content="Warning" />
+  <goa-badge type="emergency" content="Emergency" />
+  <goa-badge type="dark" content="Dark" />
+  <goa-badge type="midtone" content="Midtone" />
+  <goa-badge type="light" content="Light" />
 
-<goa-badge type="information" icon />
-<goa-badge type="success" icon />
-<goa-badge type="warning" icon />
-<goa-badge type="emergency" icon />
-<goa-badge type="inactive" icon />
-<goa-badge type="dark" icon />
-<goa-badge type="midtone" icon />
-<goa-badge type="light" icon />
+  Badge with icon only
+
+  <goa-badge type="information" icon />
+  <goa-badge type="success" icon />
+  <goa-badge type="warning" icon />
+  <goa-badge type="emergency" icon />
+  <goa-badge type="inactive" icon />
+  <goa-badge type="dark" icon />
+  <goa-badge type="midtone" icon />
+  <goa-badge type="light" icon />
+</Block>
 
 <Tabs>
   <Tab label="Web Component">
@@ -90,6 +91,10 @@ which display minimal amounts of information, system feedback, or states.
     </pre>
   </Tab>
 </Tabs>
+
+[Angular Setup](?path=/story/setup-angular--page)
+|
+[React Setup](?path=/story/setup-react--page)
 
 
 ## Layouts and variants
@@ -161,7 +166,7 @@ Recognizing and understanding there may be instances or scenarios where a unique
   There should be a very unique use-case or specific reason for this, and the colours should align to the Government of Alberta and Alberta.ca branding guidelines as closely as possible.
 </Note>
 
-The following general rules apply:
+#### The following general rules apply:
 
 1. Dark-coloured backgrounds are accessible with white text.
 2. Midtone and light-coloured backgrounds are accessible with dark text.
@@ -178,10 +183,10 @@ The following general rules apply:
 ## Support
 
 <goa-callout type="information" title="Need help? Connect with us on Slack">
-  #design-system-support General information and discussion related to design system including questions, new component proposals, contribution, and other requests.
+  <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9">#design-system-support</a> General information and discussion related to design system including questions, new component proposals, contribution, and other requests.
 </goa-callout>
 
-#### Help improve this page
+### Help improve this page
 
 To help make sure that this page is useful, relevant, and up to date, you can:
 
