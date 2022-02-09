@@ -56,3 +56,21 @@
   height: 20px;
   display: inline-block;
 }
+
+
+.note-do {
+  border-left: 2px solid var(--goa-color-status-success);
+}
+
+.note-do h3 {
+  color: var(--goa-color-status-success);
+  font-weight: var(--fw-regular);
+}
+
+.note-do h3:before {
+  content: '';
+  background-image: url(./checkmark-circle-outline.svg);
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
