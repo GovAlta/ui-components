@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import './Note.css';
 
-type NoteType = 'caution' | 'dont' | 'best-practices';
+type NoteType = 'caution' | 'do' | 'dont' | 'best-practices';
 
 interface Props {
   type: NoteType;
@@ -11,6 +11,8 @@ function getTitle(type: NoteType) {
   switch (type) {
     case 'caution':
       return 'Caution';
+    case 'do':
+      return 'Do';
     case 'dont':
       return 'Don\'t';
     case 'best-practices':
