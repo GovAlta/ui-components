@@ -4,10 +4,14 @@
 <script lang="ts">
   export let elevation: number = 0;
   export let width: number = 320;
+
+  //optional
+  export let testId: string = "";
 </script>
 
 <!-- HTML -->
 <div
+  data-testid={testId}
   class="card"
   style="
     --width: {width}px;

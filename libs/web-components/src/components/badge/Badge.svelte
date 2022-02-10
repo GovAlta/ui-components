@@ -16,7 +16,7 @@
     | "light";
 
   // optional
-  export let testId: string = "";
+  export let testid: string = "";
   export let icon: string;
 
   // required
@@ -42,7 +42,7 @@
 
 <!-- HTML -->
 <div
-  data-testid={testId}
+  data-testid={testid}
   data-type="goa-badge"
   class="goa-badge badge-{type}"
   class:icon-only={showIcon && !content}
