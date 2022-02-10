@@ -11,6 +11,9 @@
   export let title: string;
   export let disabled: string;
 
+  //optional
+  export let testId: string = "";
+
   // export let type: ButtonType = "primary";
   // export let size: ButtonSize =  "medium";
   // export let variant: ButtonVariant = "default";
@@ -30,6 +33,7 @@
   {title}
   on:click={clickHandler}
   disabled={isDisabled}
+  data-testid={testId}
 >
   <slot />
 </button>

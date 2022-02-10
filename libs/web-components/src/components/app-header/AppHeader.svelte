@@ -4,11 +4,14 @@
 <script lang="ts">
   export let url: string;
   export let title: string;
+
+  //optional
+  export let testId: string = "";
 </script>
 
 <!-- HTML -->
 <goa-page-block>
-  <div class="app-header">
+  <div class="app-header" data-testid={testId}>
     <a href={url} class="app-link">
       <img
         alt="GoA Logo"
