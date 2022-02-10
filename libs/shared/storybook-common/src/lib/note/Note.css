@@ -3,7 +3,7 @@
   margin: 2rem 0;
 }
 
-.note h4 {
+.note h3 {
   margin: 0;
   margin-bottom: 0.5rem;
   display: flex;
@@ -11,7 +11,7 @@
   gap: 4px;
 }
 
-.note-content {
+.note-content, .note-caution p {
   font-size: var(--fs-base);
 }
 
@@ -19,12 +19,12 @@
   border-left: 2px solid var(--goa-color-status-warning);
 }
 
-.note-caution h4 {
+.note-caution h3 {
   color: var(--goa-color-status-warning);
   font-weight: var(--fw-regular);
 }
 
-.note-caution h4:before {
+.note-caution h3:before {
   content: '';
   background-image: url(./warning-outline.svg);
   width: 20px;
@@ -35,7 +35,7 @@
 .note-best-practices {
   border-left: 2px solid var(--goa-color-brand);
 }
-.note-best-practices h4 {
+.note-best-practices h3 {
   color: var(--goa-color-brand);
   font-weight: var(--fw-regular);
 }
@@ -44,14 +44,32 @@
   border-left: 2px solid var(--goa-color-status-emergency);
 }
 
-.note-dont h4 {
+.note-dont h3 {
   color: var(--goa-color-status-emergency);
   font-weight: var(--fw-regular);
 }
 
-.note-dont h4:before {
+.note-dont h3:before {
   content: '';
   background-image: url(./close-circle-outline.svg);
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+
+.note-do {
+  border-left: 2px solid var(--goa-color-status-success);
+}
+
+.note-do h3 {
+  color: var(--goa-color-status-success);
+  font-weight: var(--fw-regular);
+}
+
+.note-do h3:before {
+  content: '';
+  background-image: url(./checkmark-circle-outline.svg);
   width: 20px;
   height: 20px;
   display: inline-block;
