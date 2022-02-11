@@ -12,7 +12,7 @@
   export let disabled: string;
 
   //optional
-  export let testId: string = "";
+  export let testid: string = "";
 
   // export let type: ButtonType = "primary";
   // export let size: ButtonSize =  "medium";
@@ -33,7 +33,7 @@
   {title}
   on:click={clickHandler}
   disabled={isDisabled}
-  data-testid={testId}
+  data-testid={testid}
 >
   <slot />
 </button>

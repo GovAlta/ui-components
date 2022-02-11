@@ -21,7 +21,7 @@ describe('GoAButtonComponent', () => {
   test('events should work', () => {
     //const mockOnClick = jest.fn();
     const { getByTestId } = render(GoAButton, {
-      props: { testId: "button-test", title: 'button',  disabled:"false"}
+      props: { testid: "button-test", title: 'button',  disabled:"false"}
     });
 
     const button = getByTestId('button-test');

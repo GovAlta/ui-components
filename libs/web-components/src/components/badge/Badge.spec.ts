@@ -4,7 +4,7 @@ import GoABadge from './Badge.svelte'
 
 describe('GoABadgeComponent', () => {
   it('should render - success', async () => {
-    const baseElement = render(GoABadge, { testId: "badge-test", type: "success", icon: "true", content: 'Complete' });
+    const baseElement = render(GoABadge, { testid: "badge-test", type: "success", icon: "true", content: 'Complete' });
     const badge = await baseElement.findByTestId('badge-test');
     const icon = badge.firstElementChild;
 
@@ -16,7 +16,7 @@ describe('GoABadgeComponent', () => {
   });
 
   it('should render - warning', async () => {
-    const baseElement = render(GoABadge, { testId: "badge-test", type: "warning", icon: "true", content: 'Complete' });
+    const baseElement = render(GoABadge, { testid: "badge-test", type: "warning", icon: "true", content: 'Complete' });
     const badge = await baseElement.findByTestId('badge-test');
     const icon = badge.firstElementChild;
 
@@ -28,7 +28,7 @@ describe('GoABadgeComponent', () => {
   });
 
   it('should render - information', async () => {
-    const baseElement = render(GoABadge, { testId: "badge-test", type: "information", icon: "true", content: 'Complete' });
+    const baseElement = render(GoABadge, { testid: "badge-test", type: "information", icon: "true", content: 'Complete' });
     const badge = await baseElement.findByTestId('badge-test');
     const icon = badge.firstElementChild;
 
@@ -40,7 +40,7 @@ describe('GoABadgeComponent', () => {
   });
 
   it('should render - emergency', async () => {
-    const baseElement = render(GoABadge, { testId: "badge-test", type: "emergency", icon: "true", content: 'Complete' });
+    const baseElement = render(GoABadge, { testid: "badge-test", type: "emergency", icon: "true", content: 'Complete' });
     const badge = await baseElement.findByTestId('badge-test');
     const icon = badge.firstElementChild;
 
@@ -52,7 +52,7 @@ describe('GoABadgeComponent', () => {
   });
 
   it('should render - inactive', async () => {
-    const baseElement = render(GoABadge, { testId: "badge-test", type: "inactive", icon: "true", content: 'Complete' });
+    const baseElement = render(GoABadge, { testid: "badge-test", type: "inactive", icon: "true", content: 'Complete' });
     const badge = await baseElement.findByTestId('badge-test');
     const icon = badge.firstElementChild;
 
@@ -64,7 +64,7 @@ describe('GoABadgeComponent', () => {
   });
 
   it('should render - dark', async () => {
-    const baseElement = render(GoABadge, { testId: "badge-test", type: "dark", icon: "true", content: 'Complete' });
+    const baseElement = render(GoABadge, { testid: "badge-test", type: "dark", icon: "true", content: 'Complete' });
     const badge = await baseElement.findByTestId('badge-test');
     const icon = badge.firstElementChild;
 
@@ -76,7 +76,7 @@ describe('GoABadgeComponent', () => {
   });
 
   it('should render - midtone', async () => {
-    const baseElement = render(GoABadge, { testId: "badge-test", type: "midtone", icon: "true", content: 'Complete' });
+    const baseElement = render(GoABadge, { testid: "badge-test", type: "midtone", icon: "true", content: 'Complete' });
     const badge = await baseElement.findByTestId('badge-test');
     const icon = badge.firstElementChild;
 
@@ -88,7 +88,7 @@ describe('GoABadgeComponent', () => {
   });
 
   it('should render - light', async () => {
-    const baseElement = render(GoABadge, { testId: "badge-test", type: "light", icon: "true", content: 'Complete' });
+    const baseElement = render(GoABadge, { testid: "badge-test", type: "light", icon: "true", content: 'Complete' });
     const badge = await baseElement.findByTestId('badge-test');
     const icon = badge.firstElementChild;
 
@@ -100,7 +100,7 @@ describe('GoABadgeComponent', () => {
   });
 
   it('should not render icon', async () => {
-    const baseElement = render(GoABadge, { testId: "badge-test", type: "light", icon: "false", content: 'Complete' });
+    const baseElement = render(GoABadge, { testid: "badge-test", type: "light", icon: "false", content: 'Complete' });
     const badge = await baseElement.findByTestId('badge-test');
     const icon = badge.firstElementChild;
 
