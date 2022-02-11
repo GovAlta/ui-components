@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/addon-docs';
-import { Tabs, Tab } from '@abgov/shared/storybook-common';
+import { Tabs, Tab, Note, Block } from '@abgov/shared/storybook-common';
 
 <Meta title="[Folder Name]/[Document Title]" />
 
@@ -9,7 +9,7 @@ import { Tabs, Tab } from '@abgov/shared/storybook-common';
   <Tab label="Web Component">
     This line will render a component
     <goa-badge type="warning" content="Warning" icon />
-   
+
     This line will render the code, rather than show the web component
     <pre>
       { `<goa-badge type="warning" content="Warning" icon />` }
