@@ -18,19 +18,19 @@ describe('GoAButtonComponent', () => {
     expect(button).toContainHTML(buttonText)
   });
 
-  test('events should work', () => {
-    //const mockOnClick = jest.fn();
-    const { getByTestId } = render(GoAButton, {
-      props: { testid: "button-test", title: 'button',  disabled:"false"}
-    });
+  test('events should work', async () => {
+    const onClick = jest.fn();
+    const results = render(GoAButton);
 
-    const button = getByTestId('button-test');
+    results.component.$on('click', onClick);
 
-    expect(button).toBeTruthy();
+    const button = results.container.querySelector('button');
+    expect(button).not.toBeNull();
 
-    fireEvent.click(button);
-    //expect(mockOnClick).toHaveBeenCalled();
+    await fireEvent.click(button as HTMLElement);
 
+    expect(results.container).toBeInTheDocument();
+    expect(onClick.mock.calls).not.toBeNull();
   });
 
   it('type=should render primary styling', async () => {
