@@ -41,10 +41,6 @@ jobs:
         run: |
           npx nx affected --target=build --base=${{ steps.last_successful_commit.outputs.commit_hash }} --prod --with-deps
           npx nx affected --target=post --base=${{ steps.last_successful_commit.outputs.commit_hash }}
-      - name: Build Storybooks
-        run: |
-          npm run build:docs-storybook
-          cp nginx.conf dist/storybook
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
