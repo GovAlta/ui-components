@@ -1,9 +1,9 @@
-name: Beta Release CI
+name: Prod Release CI
 
 on:
   push:
     branches:
-      - beta
+      - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -47,12 +47,12 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx nx affected --target release --base=${{ steps.last_successful_commit.outputs.commit_hash }}
 
-  deployTest:
+  deployProd:
     # The type of runner that the job will run on
     runs-on: ubuntu-20.04
-    needs: deployDev
+    needs: deployTest
     environment:
-      name: Test
+      name: Prod
     steps:
       - name: Oc login
         uses: redhat-actions/oc-login@v1
@@ -69,9 +69,9 @@ jobs:
 
           # Optional - this sets your Kubernetes context's current namespace after logging in.
           namespace: ui-components-dev
-      - name: Tag Test
-        run: oc tag ui-components:dev ui-components:test
-      - name: Deploy Test
+      - name: Tag Prod
+        run: oc tag ui-components:test ui-components:prod
+      - name: Deploy Prod
         run: |
-          oc project ui-components-test
+          oc project ui-components-prod
           oc rollout latest dc/ui-components
