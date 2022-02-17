@@ -8,8 +8,8 @@
   export let type = "primary"; // primary, secondary, tertiary, borderless
   export let size = "medium"; // small, medium, large
   export let variant = "default"; // default, danger
-  export let title: string;
-  export let disabled: string;
+  export let title: string = "";
+  export let disabled: string = "false";
 
   //optional
   export let testid: string = "";
