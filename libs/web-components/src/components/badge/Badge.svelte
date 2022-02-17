@@ -66,7 +66,6 @@
 
   .goa-badge {
     display: inline-flex;
-    align-items: center;
     border-radius: 0.25rem;
     padding: 3px 0.5rem; /* is calc(3 / 16 * 1rem) better for scaling? */
     gap: 0.25rem;
