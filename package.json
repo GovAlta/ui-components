@@ -30,6 +30,7 @@
     "run:angular-demo": "nx run demo-angular-demo:serve",
     "test": "nx test --clearCache",
     "test:all": "nx run-many --target=test --all",
+    "test:watch": "jest libs/web-components --watch",
     "lint:all": "nx run-many --target=lint --all",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
