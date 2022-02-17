@@ -17,7 +17,7 @@
 
   // optional
   export let testid: string = "";
-  export let icon: string;
+  export let icon: string = "false";
 
   // required
   // export let type: BadgeType;
