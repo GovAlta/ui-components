@@ -84,42 +84,41 @@
 
   .goa-badge.badge-information {
     background-color: var(--color-gray-100);
-    /* TODO: need color name */
-    color: var(--color-blue);
+    color: var(--color-status-info);
   }
 
   .goa-badge.badge-success {
     background-color: var(--goa-color-status-success);
-    color: var(--color-white);
+    color: var(--goa-color-text-light);
   }
 
   .goa-badge.badge-warning {
     background-color: var(--goa-color-status-warning);
-    color: var(--color-black);
+    color: var(--goa-color-text);
   }
 
   .goa-badge.badge-emergency {
     background-color: var(--goa-color-status-emergency);
-    color: var(--color-white);
+    color: var(--goa-color-text-light);
   }
 
   .goa-badge.badge-dark {
     background-color: var(--color-black);
-    color: var(--color-white);
+    color: var(--goa-color-text-light);
   }
 
   .goa-badge.badge-midtone {
     background-color: var(--color-gray-600);
-    color: var(--color-white);
+    color: var(--goa-color-text-light);
   }
 
   .goa-badge.badge-light {
     background-color: var(--color-white);
-    color: var(--color-black);
+    color: var(--goa-color-text);
   }
 
   .goa-badge.badge-inactive {
     background-color: var(--color-white);
-    color: var(--color-black);
+    color: var(--goa-color-text);
   }
 </style>
