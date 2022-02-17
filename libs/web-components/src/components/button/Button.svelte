@@ -8,8 +8,11 @@
   export let type = "primary"; // primary, secondary, tertiary, borderless
   export let size = "medium"; // small, medium, large
   export let variant = "default"; // default, danger
-  export let title: string;
-  export let disabled: string;
+  export let title: string = "";
+  export let disabled: string = "false";
+
+  //optional
+  export let testid: string = "";
 
   // export let type: ButtonType = "primary";
   // export let size: ButtonSize =  "medium";
@@ -30,6 +33,7 @@
   {title}
   on:click={clickHandler}
   disabled={isDisabled}
+  data-testid={testid}
 >
   <slot />
 </button>
