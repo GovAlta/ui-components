@@ -210,12 +210,12 @@
     color: var(--goa-color-status-emergency);
   }
   .borderless.danger:hover {
-    background: var(--goa-color-emergecny-light);
+    background: var(--goa-color-emergency-light);
     color: var(--goa-color-status-emergency-dark);
   }
   .borderless.danger:focus,
   .borderless.danger:active {
-    background: var(--goa-color-emergecny-light);
+    background: var(--goa-color-emergency-light);
     color: var(--goa-color-status-emergency-dark);
   }
 
