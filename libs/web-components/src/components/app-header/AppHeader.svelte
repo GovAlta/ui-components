@@ -5,13 +5,13 @@
   export let url: string;
   export let title: string;
 
-  //optional
-  export let testId: string = "";
+  // optional
+  export let testid: string = "";
 </script>
 
 <!-- HTML -->
 <goa-page-block>
-  <div class="app-header" data-testid={testId}>
+  <div class="app-header" data-testid={testid}>
     <a href={url} class="app-link">
       <img
         alt="GoA Logo"
