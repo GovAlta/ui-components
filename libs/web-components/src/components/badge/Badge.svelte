@@ -49,6 +49,8 @@
 >
   {#if showIcon}
     <goa-icon type={iconType} size="small" />
+  {:else}
+    <div style="height: 1.2rem;"></div>
   {/if}
   {#if content}
     <div class="goa-badge-content">
@@ -69,7 +71,6 @@
     border-radius: 0.25rem;
     padding: 3px 0.5rem; /* is calc(3 / 16 * 1rem) better for scaling? */
     gap: 0.25rem;
-    margin: 0 0.5rem 0.5rem 0;
   }
 
   .icon-only {
