@@ -18,7 +18,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: "12"
+          node-version: "16"
       - uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -41,65 +41,11 @@ jobs:
         run: |
           npx nx affected --target=build --base=${{ steps.last_successful_commit.outputs.commit_hash }} --prod --with-deps
           npx nx affected --target=post --base=${{ steps.last_successful_commit.outputs.commit_hash }}
-      - name: Build Storybooks
-        run: |
-          npm run build:angular-storybook
-          npm run build:core-storybook
-          npm run build:angular-material-storybook
-          npm run build:vue-storybook
-          npm run build:react-storybook
-          cp nginx.conf dist/storybook
-      - name: Oc login
-        uses: redhat-actions/oc-login@v1
-        with:
-          # URL to your OpenShift cluster.
-          # Refer to Step 2.
-          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER }}
-          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
-
-          # Disables SSL cert checking. Use this if you don't have the certificate authority data.
-          insecure_skip_tls_verify: true
-          # This method is more secure, if the certificate from Step 4 is available.
-          # certificate_authority_data: ${{ secrets.CA_DATA }}
-
-          # Optional - this sets your Kubernetes context's current namespace after logging in.
-          namespace: ui-components-dev
-      - name: Start Build
-        run: oc start-build ui-components --from-dir dist/storybook --follow
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx nx affected --target release --base=${{ steps.last_successful_commit.outputs.commit_hash }}
-
-  deployDev:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-20.04
-    needs: build
-    environment:
-      name: Dev
-    steps:
-      - name: Oc login
-        uses: redhat-actions/oc-login@v1
-        with:
-          # URL to your OpenShift cluster.
-          # Refer to Step 2.
-          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER }}
-          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
-
-          # Disables SSL cert checking. Use this if you don't have the certificate authority data.
-          insecure_skip_tls_verify: true
-          # This method is more secure, if the certificate from Step 4 is available.
-          # certificate_authority_data: ${{ secrets.CA_DATA }}
-
-          # Optional - this sets your Kubernetes context's current namespace after logging in.
-          namespace: ui-components-dev
-      - name: Tag Dev
-        run: oc tag ui-components:latest ui-components:dev
-      - name: Deploy Dev
-        run: |
-          oc project ui-components-dev
-          oc rollout latest dc/ui-components
 
   deployTest:
     # The type of runner that the job will run on
@@ -128,33 +74,4 @@ jobs:
       - name: Deploy Test
         run: |
           oc project ui-components-test
-          oc rollout latest dc/ui-components
-
-  deployProd:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-20.04
-    needs: deployTest
-    environment:
-      name: Prod
-    steps:
-      - name: Oc login
-        uses: redhat-actions/oc-login@v1
-        with:
-          # URL to your OpenShift cluster.
-          # Refer to Step 2.
-          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER }}
-          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
-
-          # Disables SSL cert checking. Use this if you don't have the certificate authority data.
-          insecure_skip_tls_verify: true
-          # This method is more secure, if the certificate from Step 4 is available.
-          # certificate_authority_data: ${{ secrets.CA_DATA }}
-
-          # Optional - this sets your Kubernetes context's current namespace after logging in.
-          namespace: ui-components-dev
-      - name: Tag Prod
-        run: oc tag ui-components:test ui-components:prod
-      - name: Deploy Prod
-        run: |
-          oc project ui-components-prod
           oc rollout latest dc/ui-components

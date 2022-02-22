@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: "12"
+          node-version: "16"
       - uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -30,5 +30,5 @@ jobs:
         run: npx nx affected --target=test --base=origin/${{ github.base_ref }}
       - name: Build
         run: |
-          npx nx affected --target=build --base=origin/${{ github.base_ref }}
-          npx nx affected --target=post --base=origin/${{ github.base_ref }}
+          npx nx affected --target=build --base=origin/${{ github.base_ref }} --exclude=vue-components
+          npx nx affected --target=post --base=origin/${{ github.base_ref }} --exclude=vue-components

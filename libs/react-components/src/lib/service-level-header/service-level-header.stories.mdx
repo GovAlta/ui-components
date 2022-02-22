@@ -1,0 +1,66 @@
+import { GoAServiceLevelHeader } from './service-level-header';
+
+import {
+  Meta,
+  Canvas,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs';
+
+<Meta
+  title="React/Service Level Header"
+  component={GoAServiceLevelHeader}
+  argTypes={{
+    level: {
+      control: 'select',
+      options: ['alpha', 'beta', 'live'],
+      table: {
+        //tracked bug in storybook https://github.com/storybookjs/storybook/issues/11983, need table to override display
+        defaultValue: { summary: 'alpha' },
+      },
+      description: 'Level of the service [alpha | beta | live]',
+    },
+  }}
+/>
+
+# Header
+
+export const Template = (args) => (
+  <GoAServiceLevelHeader {...args} />
+);
+
+<Canvas>
+  <Story
+    name="Service Level Header"
+    height={100}
+    args={{
+      level: 'alpha',
+    }}
+    parameters={{
+      design: {
+        specUrl:
+          'https://xd.adobe.com/view/18ccfd61-7e54-450e-a05d-cabfff452d6e-4d9f/screen/bbcbebfa-96a4-4625-931e-54b7b7e60b4e/specs',
+        reviewUrl:
+          'https://xd.adobe.com/view/75ca41d4-040c-4b1d-6ff9-0430b7119cf0-03fb/',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Overview
+
+A header to use for a Government of Alberta microsite. Contains a customizable service name and home link for the microsite.
+
+## Examples
+
+```html
+<GoAServiceLevelHeader level="Live" />
+```
+
+## Properties
+
+<Description of={GoAServiceLevelHeader} />
+<ArgsTable of={GoAServiceLevelHeader} />

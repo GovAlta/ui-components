@@ -1,0 +1,170 @@
+@import url('https://p.typekit.net/p.css?s=1&k=nur5yta&ht=tk&f=26036.26037.26044.26046.26047&a=14638192&app=typekit&e=css');
+
+@font-face {
+  font-family: 'acumin-pro-semi-condensed';
+  src: url('https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/l?subset_id=1&fvd=n4&v=3')
+      format('woff2'),
+    url('https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/d?subset_id=1&fvd=n4&v=3')
+      format('woff'),
+    url('https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/a?subset_id=1&fvd=n4&v=3')
+      format('opentype');
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'acumin-pro-semi-condensed';
+  src: url('https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/l?subset_id=1&fvd=i4&v=3')
+      format('woff2'),
+    url('https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/d?subset_id=1&fvd=i4&v=3')
+      format('woff'),
+    url('https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/a?subset_id=1&fvd=i4&v=3')
+      format('opentype');
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'acumin-pro-semi-condensed';
+  src: url('https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/l?subset_id=1&fvd=n7&v=3')
+      format('woff2'),
+    url('https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/d?subset_id=1&fvd=n7&v=3')
+      format('woff'),
+    url('https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/a?subset_id=1&fvd=n7&v=3')
+      format('opentype');
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'acumin-pro-semi-condensed';
+  src: url('https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/l?subset_id=1&fvd=i7&v=3')
+      format('woff2'),
+    url('https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/d?subset_id=1&fvd=i7&v=3')
+      format('woff'),
+    url('https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/a?subset_id=1&fvd=i7&v=3')
+      format('opentype');
+  font-style: italic;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'acumin-pro-semi-condensed';
+  src: url('https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/l?subset_id=1&fvd=n6&v=3')
+      format('woff2'),
+    url('https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/d?subset_id=1&fvd=n6&v=3')
+      format('woff'),
+    url('https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/a?subset_id=1&fvd=n6&v=3')
+      format('opentype');
+  font-style: normal;
+  font-weight: 600;
+}
+
+:host,
+:root {
+  --font-family: acumin-pro-semi-condensed, sans-serif;
+
+  /* font-size */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1.125rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+
+  /* font-weight */
+  --fw-thin: 100;
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-black: 900;
+
+  /* line-height */
+  --lh-xs: 0.875rem;
+  --lh-sm: 1rem;
+  --lh-base: 1.5rem;
+  --lh-lg: 2rem;
+  --lh-xl: 2.75rem;
+  --lh-2xl: 3.5rem;
+
+  /* borders */
+  --border-radius-sm: 0.15rem;
+  --border-radius: 0.25rem;
+  --border-radius-base: 0.25rem;
+  --border-radius-lg: 0.5rem;
+
+  /* spacing */
+  --spacing-1: 0.5rem;
+  --spacing-2: 0.875rem;
+  --spacing-3: 1.75rem;
+
+  /* input TODO: ensure these are being used */
+  --input-padding: 0.5rem;
+  --input-border-radius: 0.25rem;
+  --input-font-size: var(--fs-base);
+  --input-border-color: #666666;
+
+  /* colors */
+  --color-white: #fff;
+  --color-black: #333;
+
+  --color-gray-100: #f1f1f1;
+  --color-gray-200: #dcdcdc;
+  --color-gray-500: #adadad;
+  --color-gray-600: #666666;
+
+  --color-orange: #feba35;
+  --color-orange-100: hsl(39.7, 99.01%, 98%);
+  --color-orange-500: hsl(39.7, 99.01%, 60.2%);
+  --color-orange-900: hsl(39.7, 99.01%, 30%);
+
+  --color-blue: #005daa;
+  --color-blue-100: #e3f2ff;
+  --color-blue-500: #0070c4;
+  --color-blue-600: #004f84;
+
+  /* new colors  */
+  --goa-color-text: #333333;
+  --goa-color-text-secondary: #666666;
+  --goa-color-text-light: #ffffff;
+
+  --goa-color-interactive: #0070c4;
+  --goa-color-interactive--hover: #004f84;
+  --goa-color-interactive--active: #004f84;
+  --goa-color-interactive--highlight: #feba35;
+  --goa-color-interactive--error: #ec040b;
+
+  --goa-color-brand: #0081a2;
+  --goa-color-brand-light: #c8eefa;
+  --goa-color-brand-dark: #005072;
+
+  --goa-color-primary: var(--color-blue);
+  --goa-color-primary-light: var(--color-blue-100);
+  --goa-color-primary-dark: var(--color-blue-600);
+
+  --goa-color-status-info: #005daa;
+  --goa-color-status-info-light: #b4daf8;
+  --goa-color-status-info-dark: #00347a;
+
+  --goa-color-status-warning: #feba35;
+  --goa-color-status-warning-light: #fcefd0;
+  --goa-color-status-warning-dark: #c68a00;
+
+  --goa-color-status-emergency: #ec040b;
+  --goa-color-status-emergency-light: #ffcecf;
+  --goa-color-status-emergency-dark: #b00000;
+
+  --goa-color-status-success: #00853f;
+  --goa-color-status-success-light: #c6e0d0;
+  --goa-color-status-success-dark: #005715;
+
+  /* shadows */
+  --shadow-0: 0 0 rgba(0, 0, 0, 0);
+  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+  --shadow-3: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
+  --shadow-4: 0 15px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05);
+  --shadow-5: 0 20px 40px rgba(0, 0, 0, 0.2);
+}

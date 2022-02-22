@@ -65,6 +65,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-@import '../../../../core-css/src/lib/styles/hero-banner/hero-banner.scss';
-</style>

@@ -1,0 +1,224 @@
+<svelte:options tag="goa-input" />
+
+<script lang="ts" context="module">
+  export type GoAButtonVariant = "goa" | "bare";
+</script>
+
+<script lang="ts">
+  import { onMount, tick } from "svelte";
+  import { toBoolean } from "../../common/utils";
+  import type { GoAIconType } from "../icon/Icon.svelte";
+
+  export let type: string = "text";
+  export let name: string = "";
+  export let value: string = "";
+  export let id: string = "";
+  export let placeholder: string = "";
+  export let leadingicon: GoAIconType = null;
+  export let trailingicon: GoAIconType = null;
+  export let variant: GoAButtonVariant = "goa";
+  export let disabled: string;
+  export let handletrailingiconclick: string;
+  export let focused: string;
+  export let readonly: string;
+  export let error: string;
+
+  $: handlesTrailingIconClicks = toBoolean(handletrailingiconclick);
+  $: isFocused = toBoolean(focused);
+  $: isReadonly = toBoolean(readonly);
+  $: isError = toBoolean(error);
+  $: isDisabled = toBoolean(disabled);
+
+  let inputEl: HTMLElement;
+  $: if (isFocused) {
+    inputEl?.focus();
+  }
+
+  onMount(async () => {
+    await tick();
+  });
+
+  function onKeyUp(e) {
+    e.target.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        bubbles: false,
+        cancelable: true,
+        detail: { event: e, data: { name, value: e.target.value } },
+      }),
+    );
+    e.stopPropagation();
+  }
+
+  function doClick() {
+    this.dispatchEvent(new CustomEvent("_trailingIconClick", { composed: true }));
+  }
+</script>
+
+<!-- HTML -->
+
+<div class={`goa-input ${isDisabled ? "goa-input--disabled" : ""}`} class:error={isError}>
+  {#if leadingicon}
+    <div class="goa-input-leading-icon">
+      <goa-icon type={leadingicon} />
+    </div>
+  {/if}
+
+  <input
+    {id}
+    bind:this={inputEl}
+    class={`input--${variant}`}
+    readonly={isReadonly}
+    disabled={isDisabled}
+    {type}
+    {value}
+    {placeholder}
+    on:keyup={onKeyUp}
+  />
+
+  {#if trailingicon && !handlesTrailingIconClicks}
+    <div class="goa-input-trailing-icon">
+      <goa-icon size="medium" type={trailingicon} />
+    </div>
+  {/if}
+
+  {#if trailingicon && handlesTrailingIconClicks}
+    <div class="goa-input-trailing-icon">
+      <goa-icon-button
+        on:click={doClick}
+        disabled={isDisabled}
+        variant="nocolor"
+        size="medium"
+        type={trailingicon}
+        testId={`${name}-input-trailing-button`}
+      />
+    </div>
+  {/if}
+</div>
+
+<!-- Styles -->
+<style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
+  .goa-input,
+  .goa-input * {
+    box-sizing: border-box;
+  }
+
+  .goa-input {
+    box-sizing: border-box;
+    outline: none;
+    transition: box-shadow 0.1s ease-in;
+    border: 1px solid var(--color-gray-600);
+    border-radius: 3px;
+    background: white;
+    color: var(--color-black, #ccc);
+    padding: var(--input-padding, 0.5rem) 0.5rem;
+
+    display: flex;
+    align-items: center;
+  }
+
+  .goa-input input[readonly] {
+    cursor: pointer;
+  }
+
+  .goa-input:hover {
+    border-color: var(--goa-color-interactive--hover);
+  }
+  .goa-input:active,
+  .goa-input:focus,
+  .goa-input:focus-within {
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
+  }
+
+  .goa-input:disabled {
+    border-color: var(--color-gray-500);
+  }
+  .goa-input:disabled:hover {
+    border-color: var(--color-gray-500);
+  }
+  .goa-input:disabled:focus {
+    box-shadow: none;
+  }
+
+  .goa-input-leading-icon {
+    line-height: 18px;
+    padding: 0.5rem;
+  }
+
+  .goa-input-trailing-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .goa-input-trailing-icon > .goa-icon-button {
+    margin-right: -0.5rem;
+  }
+
+  /* input.input--goa::-webkit-calendar-picker-indicator {
+    display: none;
+  } */
+
+  input {
+    display: block;
+    width: 100%;
+    font-size: var(--input-font-size);
+    /* padding: var(--input-padding); */
+  }
+
+  .goa-input-leading-icon ~ input {
+    padding-left: 0;
+  }
+  .goa-input-trailing-icon ~ input {
+    padding-right: 0;
+  }
+
+  input,
+  input:focus,
+  input:hover,
+  input:active {
+    outline: none;
+    border: none;
+  }
+
+  .goa-input--disabled {
+    opacity: 0.5;
+    cursor: default;
+    border-color: var(--color-black);
+  }
+
+  .goa-input--disabled:hover,
+  .goa-input--disabled:active,
+  .goa-input--disabled:focus {
+    border-color: var(--color-black);
+    cursor: default;
+    box-shadow: none;
+  }
+
+  .goa-input--disabled input:hover {
+    cursor: default !important;
+  }
+
+  input.input--goa {
+    display: block;
+    border: none;
+    flex: 1 1 auto;
+  }
+
+  .goa-input .input--bare {
+    border: none;
+  }
+
+  .goa-state--error .goa-input {
+    border: 2px solid var(--goa-color-status-emergency);
+  }
+
+  .error:hover,
+  .error:focus,
+  .error {
+    border: 2px solid var(--goa-color-status-emergency-dark);
+  }
+</style>

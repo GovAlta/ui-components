@@ -5,7 +5,7 @@ import { screen } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event';
 import GoANotification from './notification';
 
-describe('Notification', () => {
+describe.skip('Notification', () => {
   const notificationTitle = 'Test Title';
   const notificationClassName = 'goa-notification';
   const notificationCloseXClassName = 'close';

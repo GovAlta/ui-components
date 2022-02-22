@@ -37,7 +37,7 @@
     ]
   },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/react"
   },
   "generators": {
     "@nrwl/workspace": {
@@ -52,13 +52,19 @@
     },
     "@nrwl/react": {
       "application": {
-        "linter": "eslint"
+        "style": "css",
+        "linter": "eslint",
+        "babel": true
       },
       "library": {
+        "style": "css",
         "linter": "eslint"
       },
       "storybook-configuration": {
         "linter": "eslint"
+      },
+      "component": {
+        "style": "css"
       }
     },
     "@nrwl/next": {
@@ -101,6 +107,20 @@
       "convert-tslint-to-eslint": {
         "removeTSLintIfNoMoreTSLintTargets": true
       }
+    },
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
     }
   }
 }

@@ -84,7 +84,6 @@ out
 # s2i output folder for image creation testing
 .s2i/output/
 libs/angular-components/documentation.json
-libs/angular-material-components/documentation.json
 /samples/angular/package-lock.json
 /samples/core/package-lock.json
 /samples/vue/package-lock.json

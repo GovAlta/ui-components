@@ -212,23 +212,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import '../../../../core-css/src/lib/styles/dropdown/dropdown.scss';
-* {
-  box-sizing: border-box;
-}
-.dropdown-menu {
-  position: absolute;
-  z-index: 1000;
-  max-height: 300px;
-  overflow: auto;
-  cursor: pointer;
-}
-.disabled input[type='text'] {
-  cursor: default;
-}
-input[type='text'] {
-  cursor: pointer;
-}
-</style>

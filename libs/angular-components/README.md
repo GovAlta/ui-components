@@ -1,49 +1,70 @@
-# angular-components
+# Angular UI Components
 
-This library contains angular components from the Government of Alberta. This plugin uses angular 11, which is required to make it compatible with the latest nx angular generator.
+This library contains angular components from the Government of Alberta.
 
-[UI Components Storybook - Angular](https://ui-components.alpha.alberta.ca/angular/index.html)
-
-## Installation
-
-1. Add @abgov/angular-components
-   `npm add --save @abgov/angular-components`
-2. OPTIONAL: in package.json specify the allowed versions for installation
-3. Add peer dependencies
-4. OPTIONAL: Add to styles to import Alberta fonts and global element styles.
-   `@import '~@abgov/angular-components/theme.css';`
-5. Add localize to polyfill.js
-   `import '@angular/localize/init';`
-6. Add `"preserveSymlinks": true` to configurations in angular.json.
-
-## Documentation
-
-Documentation is being worked on and will be provided soon.
-
-## Usage
-
+Create angular app
+```bash
+ng new my-app
 ```
-import { AngularComponentsModule } from '@abgov/angular-components'
-...
+
+Add Dependencies
+```bash
+npm i
+npm i @abgov/web-components
+npm i @abgov/styles
+```
+
+Link ionicons in app/index.html
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>UiComponentAngularVerification</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- -->
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>
+```
+
+Update `app.module.ts` as per the three steps below
+```typescript
+
+// 1. Import the CUSTOM_ELEMENTS_SCHEMA
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+
+// 2. Import the web-components lib
+import '@abgov/web-components';
+
 @NgModule({
-  ...
-  imports: [
-    AngularComponentsModule
+  declarations: [
+    AppComponent
   ],
-  ...
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+
+  // 3. Add the CUSTOM_ELEMENTS_SCHEMA to the NgModule
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
+
+export class AppModule { }
 ```
 
-For experimental components, import ExperimentalComponentsModule.
-```
-import { AngularComponentsModule, ExperimentalComponentsModule } from '@abgov/angular-components'
-...
-@NgModule({
-  ...
-  imports: [
-    AngularComponentsModule,
-    ExperimentalComponentsModule
-  ],
-  ...
-})
+Add the styles link in the `src/styles.css` file
+```css
+@import '@abgov/styles/styles.esm.css';
 ```

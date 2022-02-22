@@ -32,7 +32,7 @@ describe('RadioGroup', () => {
         onChange={(name, newValue) => onChange && onChange(name, newValue)}
       >
         {data.radios.map((radio) => (
-          <GoARadio key={radio.value} checked={data.value === radio.value} value={radio.value}>
+          <GoARadio key={radio.value} label={radio.text} name="fruits" checked={data.value === radio.value} value={radio.value}>
             {radio.text}
           </GoARadio>
         ))}
@@ -76,12 +76,14 @@ describe('RadioGroup', () => {
         newValue = _newValue;
       }));
 
-      const radios = screen.getAllByRole('radio');
-      fireEvent.click(radios[0]);
-
-      await waitFor(() => {
+      // const radios = screen.getAllByRole('radio');
+      waitFor(() => {
+        const radios = document.querySelectorAll<HTMLInputElement>(
+          'input[type=radio]'
+        );
+        fireEvent.click(radios[0]);
         expect(newValue).toBe('apples');
-      });
+      })
     });
   });
 });

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoABadgeComponent } from './badge/badge.component';
 import { GoAAppVersionHeaderComponent } from './app-version-header/app-version-header.component';
@@ -22,5 +22,6 @@ import { AngularComponentsModule } from '../lib/angular-components.module';
   ],
   providers: [
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class ExperimentalComponentsModule { }

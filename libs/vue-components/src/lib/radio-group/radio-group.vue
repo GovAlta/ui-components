@@ -108,6 +108,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-@import './radio-group.scss';
-</style>
