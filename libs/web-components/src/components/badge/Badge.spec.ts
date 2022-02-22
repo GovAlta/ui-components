@@ -11,8 +11,6 @@ describe('GoABadgeComponent', () => {
       const baseElement = render(GoABadge, { testid: "badge-test", type, content: 'Content' });
       const badge = await baseElement.findByTestId('badge-test');
 
-      expect(badge).toBeTruthy();
-      expect(badge.childElementCount).toBe(1);
       expect(badge).toHaveClass(`badge-${type}`);
       expect(badge).toContainHTML("Content")
     });
