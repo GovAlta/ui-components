@@ -5,6 +5,33 @@ import { Tabs, Tab } from '@abgov/shared/storybook-common';
 
 # Development Setup
 
+### Required programs
+You will need the following programs to make changes to the docs:
+- [Git](https://git-scm.com/downloads)
+- [VSCode](https://code.visualstudio.com)
+
+### VSCode recommended extensions
+This project will recommend extensions to install the ones listed below.
+.images/2022-02-04-06-27-00.png
+- NX -> Performs builds and starts storybook
+- MDX -> Add highlighting to storybook files
+- Github -> Simplifies creating pull requests to merge changes
+- Paste Image -> Allows for easy pasting of copy buffered  into the .mdx files
+
+### Fork it
+
+Fork the ui-component library to your own repository, once that is setup on your local machine add the GoA repo as a remote.
+
+```bash
+git clone <your copied url>
+cd ui-components
+git remote add upstream https://github.com/GovAlta/ui-components.git
+git fetch upstream
+git checkout upstream/alpha
+```
+
+All PR branches will be created from your repo and and merged into the upstream repo via pull requests. To keep up to date perform fetch and merges from the upstream repo.
+
 ### Node Version
 
 Ensure you are running the following version of node.
