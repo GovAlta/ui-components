@@ -12,10 +12,10 @@ import { action } from '@storybook/addon-actions';
 import { StateDisplay, DoDont } from '@abgov/shared/storybook-common';
 
 <Meta
-  title="React/Basic Elements/Checkbox"
+  title="React/Checkbox"
   component={GoACheckbox}
   argTypes={{
-    content: { control: 'text' },
+    text: { control: 'text' },
     value: { control: 'text' },
     disabled: {
       control: {
@@ -25,12 +25,6 @@ import { StateDisplay, DoDont } from '@abgov/shared/storybook-common';
     indeterminate: {
       control: {
         type: 'boolean',
-      },
-    },
-    labelPosition: {
-      control: {
-        type: 'select',
-        options: ['before', 'after'],
       },
     },
     onChange: {
@@ -46,21 +40,19 @@ A user input field that allows the user to make a binary choice, i.e. a choice b
 ## Overview
 
 export const Template = (args) => {
-  const [state, setState] = useState({});
-  const onChange = (name, value) => {
-    setState({ ...state, [name]: value });
-    action('state changed')(name, value);
+  const [checked, setChecked] = useState(false);
+  const onChange = (name, _checked, value) => {
+    action('state changed')(name, !!value);
+    setChecked(_checked);
   };
   return (
     <>
-      <StateDisplay title="Checkbox" state={state}>
+      <StateDisplay title="Checkbox" state={{'checked': checked}}>
         <GoACheckbox
           {...args}
           name="mycheck"
           onChange={onChange}
-          checked={state['mycheck']}
-          value="99"
-          content="check me"
+          checked={checked}
         />
       </StateDisplay>
     </>
@@ -76,8 +68,7 @@ export const Template = (args) => {
     args={{
       disabled: false,
       indeterminate: false,
-      labelPosition: 'after',
-      content: 'Checkbox 1',
+      text: 'Checkbox 1',
     }}
   >
     {Template.bind({})}
@@ -100,7 +91,6 @@ All Properties
   required="item.required"
   disabled="item.disabled"
   indeterminate="item.indeterminate"
-  labelPosition="'after' || 'before'"
   (selectionChange)="selectionChanged($event)"
   value="item.value"
 >

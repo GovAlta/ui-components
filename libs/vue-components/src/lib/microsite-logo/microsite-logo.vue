@@ -35,6 +35,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-@import '../../../../core-css/src/lib/styles/microsite-logo/microsite-logo.scss';
-</style>

@@ -1,6 +1,7 @@
 import { GoAPageLoader } from './page-loader';
 import { action } from '@storybook/addon-actions';
 import { DoDont } from '@abgov/shared/storybook-common';
+import { useState, useEffect } from 'react';
 
 import {
   Meta,
@@ -11,7 +12,7 @@ import {
 } from '@storybook/addon-docs';
 
 <Meta
-  title="React/Components/PageLoader"
+  title="React/PageLoader"
   component={GoAPageLoader}
   argTypes={{
     type: {
@@ -25,10 +26,10 @@ import {
         type: 'text',
       },
     },
-    displayType: {
+    variant: {
       control: {
         type: 'select',
-        options: ['large', 'small'],
+        options: ['fullscreen', 'inline'],
       },
     },
   }}
@@ -40,28 +41,28 @@ A page loading indicator which will prevent user input.
 
 ## Overview
 
-export const Template = (args) => (
-  <div>
-    <GoAPageLoader {...args} />
-  </div>
-);
+export const Template = (args) => {
+  const [progress, setProgress] = useState(0);
+  const updateProgress = () => {
+    return setInterval(() => {
+      if (args.type === 'progress') {
+        setProgress(progress + 10);
+      }
+    }, 1000);
+  };
+  useEffect(() => {
+    const handle = updateProgress();
+    return () => {
+      clearInterval(handle);
+    }
+  }, [args.type, progress, setProgress]);
+  return <GoAPageLoader {...args} progress={progress} />
+}
 
 #### Basic
 
 <Canvas>
-  <Story
-    name="Variants"
-    height={200}
-    args={{
-      visible: true,
-      message: 'Loading...',
-      type: 'infinite',
-      pagelock: false,
-      displayType: 'large',
-    }}
-  >
-    {Template.bind({})}
-  </Story>
+  <Story name="Fullscreen Infinite">{Template.bind({})}</Story>
 </Canvas>
 
 ## Examples
@@ -69,22 +70,9 @@ export const Template = (args) => (
 ```html
 <GoAPageLoader
   visible="{true}"
-  type="'infinite' || 'progress'"
-  displayType="'large' || 'small'"
->
-  Loading...
-</GoAPageLoader>
-
-<div>
-  <GoAPageLoadIndicatorComponent
-    visible="true"
-    type="'infinite' || 'progress'"
-    loaderType="'large || 'small'"
-    pagelock="false"
-  >
-    Loading...
-  </GoAPageLoadIndicatorComponent>
-</div>
+  type="'infinite' | 'progress'"
+  message="Loading..."
+/>
 ```
 
 ## Properties

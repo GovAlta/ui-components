@@ -1,0 +1,114 @@
+import { GoATextArea, GoAFormItem } from '../..';
+import { useState } from 'react';
+import { Do, Dont, StateDisplay } from '@abgov/shared/storybook-common';
+
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs';
+
+<Meta
+  title="React/TextArea"
+  component={GoATextArea}
+  argTypes={{
+    name: {
+      control: {
+        type: 'string',
+      },
+    },
+    value: {
+      control: {
+        type: 'string',
+      },
+    },
+    placeholder: {
+      control: {
+        type: 'string',
+      },
+    },
+    rows: {
+      control: {
+        type: 'number',
+      },
+    },
+    disabeld: {
+      control: {
+        type: 'boolean',
+      },
+    },
+  }}
+/>
+
+# GoATextArea
+
+## Overview
+
+Provides the html textarea element with the GoA theme and custom bindings.
+
+## Examples
+
+export const FormTemplate = (args) => {
+  const [state, setState] = useState({});
+  const onChange = (name, value) => {
+    console.log('onChange', name, value);
+    setState({ ...state, [name]: value });
+  };
+  return (
+    <StateDisplay title="GoATextArea" state={state}>
+      <GoATextArea
+        name="aboutme"
+        value={state.aboutme}
+        onChange={onChange}
+      />
+    </StateDisplay>
+  );
+};
+
+#### Basic
+
+```ts
+interface Props {
+  // required
+  name: string;
+  value: string;
+  onChange: OnChange;
+
+  // optional
+  placeholder?: string;
+  rows?: number;
+}
+```
+
+<Canvas>
+  <Story name="Form">{FormTemplate.bind({})}</Story>
+</Canvas>
+
+```tsx
+export const ApplicationForm: FC = () => {
+  const [state, setState] = useState({});
+  const onChange = (name, value) => {
+    setState(...state, [name]: value);
+  };
+  return (
+    <GoATextArea
+      name="aboutme"
+      value={state.aboutme}
+      onChange={onChange}
+    />
+  );
+};
+```
+
+## GoATextArea Properties
+
+<Description of={GoATextArea} />
+<ArgsTable of={GoATextArea} />
+
+<Dont description="Use placeholder text in text fields" />
+<Dont description="Extend Text Fields longer than 45-75 characters." />
+<Dont description="Use a Text Area which is only one line high." />
+<Do description="Use labels and helper text to communicate how a field should be filled out." />
+<Do description="Make empty Text Areas as tall as the content they are expected to contain." />

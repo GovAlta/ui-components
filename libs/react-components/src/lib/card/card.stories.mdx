@@ -1,0 +1,89 @@
+import { GoACard, GoACardContent, GoACardImage, GoACardActions, GoACardGroup } from './';
+import { GoAButton } from '../button/button';
+import { Do, Dont, StateDisplay } from '@abgov/shared/storybook-common';
+
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs';
+
+<Meta
+  title="React/Card"
+  component={GoACard}
+  argTypes={{}}
+/>
+
+# GoACard
+
+## Overview
+
+Provides the html textarea element with the GoA theme and custom bindings.
+
+## Examples
+
+export const Template = (args) => {
+  return (
+    <GoACardGroup>
+      <GoACard elevation={2}>
+        <GoACardImage src="https://picsum.photos/800/1200" height="200px" />
+        <GoACardContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        </GoACardContent>
+        <GoACardActions>
+          <GoAButton type="primary" size="small">Save</GoAButton>
+        </GoACardActions>
+      </GoACard>
+      <GoACard elevation={2}>
+        <GoACardImage src="https://picsum.photos/800/1200" height="200px" />
+        <GoACardContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        </GoACardContent>
+        <GoACardActions>
+          <GoAButton type="primary" size="small">Save</GoAButton>
+        </GoACardActions>
+      </GoACard>
+    </GoACardGroup>
+  );
+};
+
+#### Basic
+
+```ts
+interface Props {}
+```
+
+<Canvas>
+  <Story name="Card">{Template.bind({})}</Story>
+</Canvas>
+
+```tsx
+export const ApplicationForm: FC = () => {
+  const [state, setState] = useState({});
+  const onChange = (name, value) => {
+    setState(...state, [name]: value);
+  };
+  return (
+    GoACard<
+      name="aboutme"
+      value={state.aboutme}
+      onChange={onChange}
+    />
+  );
+};
+```
+
+## GoACard Properties
+
+<Description of={GoACard} />
+<ArgsTable of={GoACard} />
+
+<Dont description="Use placeholder text in text fields" />
+<Dont description="Extend Text Fields longer than 45-75 characters." />
+<Dont description="Use a Text Area which is only one line high." />
+<Do description="Use labels and helper text to communicate how a field should be filled out." />
+<Do description="Make empty Text Areas as tall as the content they are expected to contain." />

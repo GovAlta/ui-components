@@ -1,5 +1,5 @@
 import React from 'react';
-import './BestPractice.scss'
+import './BestPractice.css'
 
 export const BestPractices = ({children}) => {
   return (

@@ -99,7 +99,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import './element-loader.scss';
-</style>

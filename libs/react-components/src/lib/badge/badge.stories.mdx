@@ -1,0 +1,71 @@
+import {
+  GoABadge,
+  GoAInfoBadge,
+  GoAEmergencyBadge,
+  GoASuccessBadge,
+  GoAWarningBadge,
+} from './badge';
+
+import {
+  Meta,
+  Canvas,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs';
+import { action } from '@storybook/addon-actions';
+
+<Meta
+  title="React/Badge"
+  component={GoABadge}
+  argTypes={{
+    type: { control: { disable: true } },
+    content: { control: { disable: true } },
+    testId: { control: { disable: true } },
+  }}
+/>
+
+# Badge
+
+The Badge component aims to implement the 'Badge' specifications on the Alberta Design System.
+The badge was designed to contain a text and/or an icon.
+
+**Contributors:** ACO Team
+
+**Peer Dependencies:**
+
+- Material UI `<mat-icon />` is used for icon content; alternatively 'icon' element
+  must have the `goa-badge-icon` class.
+
+**TODOs:**
+
+- [ ] Design in design system XD and referenced by Story.
+- [ ] Component available in Angular, React, and Vue libraries.
+- [x] Reconcile icon content with GoA font icons (once available).
+
+<Canvas>
+  <Story name="Badge">
+    {() => (
+      <div>
+        <GoAInfoBadge content="information" />
+        <GoASuccessBadge content="success" />
+        <GoAWarningBadge content="warning" />
+        <GoAEmergencyBadge content="emergency" />
+        <GoABadge type="dark" content="dark" icon="toggle" />
+        <GoABadge type="midtone" content="midtone" icon="information" />
+        <GoABadge type="light" content="light" icon="information" />
+        <GoABadge type="inactive" content="inactive" icon="lock-closed" />
+        <br />
+        <br />
+        <GoABadge type="information" content="information" />
+        <GoABadge type="success" content="success" />
+        <GoABadge type="warning" content="warning" />
+        <GoABadge type="emergency" content="emergency" />
+        <GoABadge type="dark" content="dark" />
+        <GoABadge type="midtone" content="midtone" />
+        <GoABadge type="light" content="light" />
+        <GoABadge type="inactive" content="inactive" />
+      </div>
+    )}
+  </Story>
+</Canvas>

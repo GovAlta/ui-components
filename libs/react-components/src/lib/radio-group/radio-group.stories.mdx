@@ -13,7 +13,7 @@ import { DoDont } from '@abgov/shared/storybook-common';
 
 import { GoARadioGroup, GoARadio } from './radio-group';
 
-<Meta title="React/Basic Elements/RadioGroups" component={GoARadioGroup} />
+<Meta title="React/RadioGroups" component={GoARadioGroup} />
 
 # Radios
 
@@ -25,15 +25,18 @@ export const TemplateBasic = (args) => {
   const [value, setValue] = useState(args.value);
   return (
     <div style={{ padding: '5px' }}>
-      Current Value: {value}
+      <div>
+        Current Value: {value}
+      </div>
       <GoARadioGroup
         {...args}
+        name={args.name}
         value={value}
         onChange={(name, value) => setValue(value)}
       >
-        <GoARadio value="apple">apple</GoARadio>
-        <GoARadio value="orange">orange</GoARadio>
-        <GoARadio value="banana">banana</GoARadio>
+        <GoARadio disabled={args.disabled} error={args.error} name={args.name} label="Apple" value="apple">Apple</GoARadio>
+        <GoARadio disabled={args.disabled} error={args.error} name={args.name} label="Orange" value="orange">Orange</GoARadio>
+        <GoARadio disabled={args.disabled} error={args.error} name={args.name} label="Banana" value="banana"><strong>Banana</strong></GoARadio>
       </GoARadioGroup>
     </div>
   );
@@ -47,58 +50,10 @@ export const TemplateBasic = (args) => {
     height={200}
     args={{
       name: 'fruits',
-      disabled: false,
-      orientation: 'horizontal',
-    }}
-  >
-    {TemplateBasic.bind({})}
-  </Story>
-</Canvas>
-
-#### Preset value
-
-<Canvas>
-  <Story
-    name="Preset"
-    height={200}
-    args={{
-      name: 'preset',
-      value: 'orange',
-      disabled: false,
+      value: 'apple',
       orientation: 'vertical',
-    }}
-  >
-    {TemplateBasic.bind({})}
-  </Story>
-</Canvas>
-
-#### Error
-
-<Canvas>
-  <Story
-    name="Error"
-    height={200}
-    args={{
-      name: 'error',
-      value: 'orange',
-      state: 'error',
-    }}
-  >
-    {TemplateBasic.bind({})}
-  </Story>
-</Canvas>
-
-#### Disabled
-
-<Canvas>
-  <Story
-    name="Disabled"
-    height={200}
-    args={{
-      name: 'disabled',
-      disabled: true,
-      value: 'orange',
-      orientation: 'vertical',
+      disabled: false,
+      error: false,
     }}
   >
     {TemplateBasic.bind({})}

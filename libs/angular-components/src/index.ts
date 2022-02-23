@@ -1,3 +1,5 @@
+import '@abgov/web-components';
+
 export * from './lib/angular-components.module';
 export * from './lib/button/button.component';
 export * from './lib/button-link/button-link.component';

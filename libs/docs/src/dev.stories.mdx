@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs';
+import { Tabs, Tab } from '@abgov/shared/storybook-common';
+
+<Meta title="Setup/Development" />
+
+# Development Setup
+
+### Node Version
+
+Ensure you are running the following version of node.
+
+```bash
+node --version  # 14.16.1
+```
+
+If you are not it is recommended to install [nvm](https://github.com/nvm-sh/nvm) to ensure that this is the version you are using. Once installed the `.nvmrc` will ensure that you are using the correct version.
+
+
+Install the dependencies:
+
+```bash
+npm ci
+```
+
+Start the web component file watcher to automatically build the web components when changes are made:
+
+
+### Playground
+
+Provides live reloading for quicker development.
+
+```bash
+# script: run:web-components-demo
+npm run --prefix libs/web-components demo
+```
+
+### Storybook
+
+Currently, the storybook does not provide propery live reloads :()
+
+```bash
+# script: run:web-components-dev
+npm run --prefix libs/web-components dev
+```
+
+#### Start Storybook
+
+```bash
+# script: run:web-components-storybook
+nx run web-components:storybook
+```
