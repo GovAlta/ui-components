@@ -50,7 +50,7 @@
   {#if showIcon}
     <goa-icon type={iconType} size="small" />
   {:else}
-    <div style="height: 1.2rem;"></div>
+    <div style="height: 1.2rem; margin-left:-0.25rem;"></div>
   {/if}
   {#if content}
     <div class="goa-badge-content">
