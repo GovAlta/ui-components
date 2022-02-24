@@ -1,5 +1,4 @@
 
-import { DocsPage, DocsContainer } from '@storybook/addon-docs';
 export const parameters = {
   viewMode: 'docs',
   previewTabs: {
@@ -10,9 +9,4 @@ export const parameters = {
       order: ['Overview', 'Setup', ['Docs', 'Development', 'Angular', 'React', 'Vue'], 'Components'],
     },
   },
-  // docs: {
-  //   container: DocsContainer,
-  //   page: DocsPage
-  // },
-  // controls: { expanded: true }
 };
