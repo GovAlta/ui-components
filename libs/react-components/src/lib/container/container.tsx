@@ -30,7 +30,7 @@ export const GoAContainer: FC<Props> = ({
   title,
   children,
   actions,
-  variant = 'primary',
+  variant = 'default',
 }) => {
   return (
     <goa-container variant={variant} headingsize={headingSize}>

@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { GoAIconType } from '../icons';
-import './badge.scss';
 
 // import type { BadgeType } from '@abgov/shared/common';
 

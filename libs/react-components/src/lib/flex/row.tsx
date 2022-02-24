@@ -1,5 +1,4 @@
 import React, { CSSProperties, FC, ReactElement } from "react";
-import './row.scss';
 
 interface Props {
   gap?: 'small' | 'medium' | 'large';
