@@ -30,3 +30,6 @@ export { default as GoAServiceLevelHeader } from "./components/service-level-hea
 export { default as GoASkeleton } from "./components/skeleton/Skeleton.svelte";
 export { default as GoASpinner } from "./components/spinner/Spinner.svelte";
 export { default as GoATextArea } from "./components/text-area/TextArea.svelte";
+
+// Wrappers
+export { default as ContainerWrapper } from './components/container/ContainerWrapper.test.svelte';

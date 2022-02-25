@@ -27,6 +27,7 @@
   :host {
     box-sizing: border-box;
     font-family: var(--font-family);
+    font-size: var(--fs-base);
   }
   .goa-container {
     margin-bottom: 1rem;
@@ -106,6 +107,7 @@
   .heading--large {
     padding: 0.5rem 1.5rem;
     max-height: 4rem;
+    min-height: 1rem;
   }
 
   .heading--large .title {
@@ -128,6 +130,11 @@
   .heading--small .title,
   .heading--small .actions {
     display: none;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
   }
 
 </style>

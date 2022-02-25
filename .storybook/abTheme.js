@@ -1,8 +1,8 @@
 import { create } from '@storybook/theming/create';
-import logo from '../libs/shared/storybook-common/assets/logo-ds.svg';
+import logo from '../libs/shared/storybook-common/assets/GOALogo.svg';
 
 export default create({
-  base: 'dark',
+  base: 'light',
   colorPrimary: '#005daa',
   colorSecondary: '#005daa',
 
