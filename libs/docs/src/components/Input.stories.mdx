@@ -1,0 +1,367 @@
+import {
+  GoAInput,
+  GoAInputText,
+  GoAInputPassword,
+  GoAInputDate,
+  GoAInputTime,
+  GoAInputDateTime,
+  GoAInputEmail,
+  GoAInputSearch,
+  GoAInputUrl,
+  GoAInputTel,
+  GoAInputFile,
+  GoAInputMonth,
+  GoAInputNumber,
+  GoAInputRange,
+  GoAFormItem,
+} from '@abgov/react-components';
+import { useState } from 'react';
+import { Tabs, Tab, Note, Block, Do, Dont, StateDisplay, CodeSnippet } from '@abgov/shared/storybook-common';
+import {
+  Meta,
+  Preview,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs';
+
+<Meta title="Components/Inputs" component={GoAInput} />
+
+### Component
+# GoAInput
+
+export const noop = () => {};
+
+### Basic
+
+export const InputTemplate = () => <GoAInputText name="firstname" onChange={noop} />
+
+<Story name="Basic">{ InputTemplate.bind({}) }</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet code={`<goa-input name="firstname" />`} lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-input name="firstname" />`} lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInputText name="firstname" />`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+### Events
+
+export const OnChangeInputTemplate = () => <>
+  <GoAInputText name="foo" onChange={(name, value) => console.log(name, value)} />
+</>
+
+<Story name="OnChange">{ OnChangeInputTemplate.bind({}) }</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet code={`<goa-input leadingicon="finger-print" />`} lang="html" />
+    <CodeSnippet code={`<goa-input trailingicon="finger-print" />`} lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-input leadingicon="finger-print" />`} lang="html" />
+    <CodeSnippet code={`<goa-input trailingicon="finger-print" />`} lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInput leadingIcon="finger-print" />`} lang="jsx" />
+    <CodeSnippet code={`<GoAInput trailingIcon="finger-print" />`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+### Icons
+
+export const IconInputTemplate = () => <>
+  <GoAInputText name="foo" leadingIcon="finger-print" onChange={noop} />
+  <br />
+  <GoAInputText name="foo" trailingIcon="finger-print" onChange={noop} />
+</>
+
+<Story name="Icons">{ IconInputTemplate.bind({}) }</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet code={`<goa-input leadingicon="finger-print" />`} lang="html" />
+    <CodeSnippet code={`<goa-input trailingicon="finger-print" />`} lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-input leadingicon="finger-print" />`} lang="html" />
+    <CodeSnippet code={`<goa-input trailingicon="finger-print" />`} lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInput leadingIcon="finger-print" />`} lang="jsx" />
+    <CodeSnippet code={`<GoAInput trailingIcon="finger-print" />`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+### Icon buttons
+
+export const IconButtonInputTemplate = () => <>
+  <GoAInputText name="foo" trailingIcon="finger-print" onTrailingIconClick={() => alert('clicked')} onChange={noop} />
+</>
+
+<Story name="Icon Buttons">{ IconButtonInputTemplate.bind({}) }</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet code={`<goa-input id="secret" trailingicon="finger-print" />`} lang="html" />
+    <CodeSnippet
+      lang="js"
+      code={`
+        var el = document.getElementById('secret')
+        el.addEventListener('_trailingIconClick', clickHandler);
+        // to later remove the event listener
+        el.removeEventListener('_trailingIconClick', clickHandler);
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-input
+          id="secret"
+          (_trailingIconClick)="handleClick()"
+          trailingicon="finger-print"
+        />
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        export class SomeComponent {
+          handleClick() {
+            console.log('handleClick');
+          }
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+        <GoAInputText
+          name="secret"
+          trailingIcon="finger-print"
+          onTrailingIconClick={() => alert('clicked')}
+        `}
+      />
+  </Tab>
+</Tabs>
+
+### Variant
+
+export const VariantInputTemplate = () => <>
+  <div style={{padding: "2rem 1rem", backgroundColor: "#eee" }}>
+    <GoAInputSearch name="foo" variant="bare" placeholder="Find by name" onChange={noop} />
+  </div>
+</>
+
+<Story name="Variant">{ VariantInputTemplate.bind({}) }</Story>
+
+Blurb on when to use this variant
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet code={`<goa-input type="search" variant="bare" placeholder="Find by name" />` } lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-input type="search" variant="bare" placeholder="Find by name" />` } lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInputSearch name="foo" variant="bare" placeholder="Find by name" />` } lang="jsx" />
+  </Tab>
+</Tabs>
+
+### Readonly / Disabled
+
+export const ReadonlyInputTemplate = () => <>
+  <GoAInput name="foo" readonly={true} value="Readonly" onChange={noop} />
+  <br />
+  <GoAInput name="foo" disabled={true} value="Disabled" onChange={noop} />
+</>
+
+<Story name="Readonly / Disabled">{ ReadonlyInputTemplate.bind({}) }</Story>
+
+Blurb on when to use this variant
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet code={`<goa-input type="search" placeholder="Find by name" />`} lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-input type="search" placeholder="Find by name" />`} lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInputSearch placeholder="Find by name" />`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+### Error state
+
+export const ErrorInputTemplate = () => <>
+  <GoAInput name="foo" error={true} value="Some value" onChange={noop} />
+</>
+
+<Story name="Error">{ ErrorInputTemplate.bind({}) }</Story>
+
+Blurb on when to use this variant
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet code={`<goa-input error  />`} lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-input error  />`} lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInput name="foo" error={true} />`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+### Focus
+
+export const FocusInputTemplate = () => <>
+  <GoAInput name="foo" focused={true} value="Some value" onChange={noop} />
+</>
+
+<Story name="Focus">{ FocusInputTemplate.bind({}) }</Story>
+
+Blurb on when to use this variant
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet code={`<goa-input error  />`} lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-input error  />`} lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInput name="foo" error={true} />` } lang="jsx" />
+  </Tab>
+</Tabs>
+
+### Types
+
+export const TypesInputTemplate = (args) => {
+  return (
+    <>
+      <GoAInputText name="basic" placeholder="leading icon"  leadingIcon="person-circle" onChange={noop} />
+      <br />
+      <GoAInput placeholder="trailing button" trailingIcon="finger-print" onTrailingIconClick={() => console.log('click')} name="trailing-button" onChange={noop} />
+      <br />
+      <GoAInputPassword placeholder="password" name="password" onChange={noop} />
+      <br />
+      <GoAInputDate name="date" onChange={noop} />
+      <br />
+      <GoAInputTime name="time" onChange={noop} />
+      <br />
+      <GoAInputDateTime name="datetime" onChange={noop} />
+      <br />
+      <GoAInputEmail placeholder="email" name="email" onChange={noop} />
+      <br />
+      <GoAInputSearch placeholder="search" name="search" onChange={noop} />
+      <br />
+      <GoAInputUrl placeholder="url" name="url" onChange={noop} />
+      <br />
+      <GoAInputTel placeholder="phone number" name="tel" onChange={noop} />
+      <br />
+      <GoAInputFile name="file" onChange={noop} />
+      <br />
+      <br />
+      <GoAInputMonth name="month" onChange={noop} />
+      <br />
+      <GoAInputNumber name="number" onChange={noop} />
+      <br />
+      <GoAInputRange name="range" onChange={noop} />
+    </>
+  );
+};
+
+Blurb on when to use this variant
+
+<Story name="Types">{ TypesInputTemplate.bind({}) }</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-input type="text" placeholder="leading icon" leadingicon="person-circle" />
+      <goa-input id="trailing-button" type="text" placeholder="trailing button" trailingicon="finger-print" />
+      <goa-input type="password" placeholder="password" />
+      <goa-input type="date" />
+      <goa-input type="time" />
+      <goa-input type="datetime-local" />
+      <goa-input type="email" placeholder="email" />
+      <goa-input type="search" placeholder="search" />
+      <goa-input type="url" placeholder="url" />
+      <goa-input type="tel" placeholder="phone number" />
+      <goa-input type="file" />
+      <goa-input type="month" />
+      <goa-input type="number" />
+      <goa-input type="range" />
+    `} />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-input type="text" placeholder="leading icon" leadingicon="person-circle" />
+      <goa-input type="text" placeholder="trailing button" trailingicon="finger-print" (onClick)="handleClick()" />
+      <goa-input type="password" placeholder="password" />
+      <goa-input type="date" />
+      <goa-input type="time" />
+      <goa-input type="datetime-local" />
+      <goa-input type="email" placeholder="email" />
+      <goa-input type="search" placeholder="search" />
+      <goa-input type="url" placeholder="url" />
+      <goa-input type="tel" placeholder="phone number" />
+      <goa-input type="file" />
+      <goa-input type="month" />
+      <goa-input type="number" />
+      <goa-input type="range" />
+    `} />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="html" code={`
+      <GoAInputTextleadingIcon="person-circle" placeholder="leading icon" />
+      <GoAInput placeholder="trailing button" trailingIcon="finger-print" onTrailingIconClick={() => console.log('click')} />
+      <GoAInputPassword placeholder="password" />
+      <GoAInputDate />
+      <GoAInputTime />
+      <GoAInputDateTime />
+      <GoAInputEmail placeholder="email" />
+      <GoAInputSearch placeholder="search" />
+      <GoAInputUrl placeholder="url" />
+      <GoAInputTel placeholder="phone number" />
+      <GoAInputFile />
+      <GoAInputMonth />
+      <GoAInputNumber />
+      <GoAInputRange />
+    `} />
+  </Tab>
+</Tabs>
+
+<Note type="best-practices">
+  <ul>
+    <li>Use Text Input if just one line is needed.</li>
+    <li>Use labels over placeholders to indicate the attribute name for the text fields.</li>
+    <li>Use meaningful labels over icons.</li>
+  </ul>
+</Note>
+
+---
+
+## Support
+
+<goa-callout type="information" title="Need help? Connect with us on Slack">
+  <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9">#design-system-support</a> General information and discussion related to design system including questions, new component proposals, contribution, and other requests.
+</goa-callout>
+
+### Help improve this page
+
+To help make sure that this page is useful, relevant, and up to date, you can:
+
+[Create an issue for a proposed update or contribution](https://github.com/GovAlta/ui-components/issues/new/choose)
