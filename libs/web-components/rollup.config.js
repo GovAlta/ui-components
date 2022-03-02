@@ -19,7 +19,7 @@ export default {
     typescript({ sourceMap: true }),
     svelte({
       include: /\.svelte$/,
-      exclude: /^(App|\.*test)\.svelte$/,
+      exclude: /^(App|\.test)\.svelte$/,
       preprocess: preprocess({ sourceMap: true }),
       compilerOptions: {
         dev: true,
