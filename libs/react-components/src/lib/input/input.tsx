@@ -14,7 +14,9 @@ interface WCProps {
   disabled?: boolean;
   error?: string;
   readonly?: boolean;
+  focused?: boolean;
   handletrailingiconclick: boolean;
+  testid?: string;
 }
 
 
@@ -28,7 +30,7 @@ declare global {
 }
 
 
-interface Props {
+export interface Props {
   // required
   name: string;
   value: string;
@@ -45,8 +47,8 @@ interface Props {
   focused?: boolean;
   readonly?: boolean;
   error?: string;
+  testId?: string;
 };
-
 
 export const GoAInput: FC<Props & { type: string }> = ({
   id,
@@ -61,6 +63,7 @@ export const GoAInput: FC<Props & { type: string }> = ({
   value,
   placeholder,
   error,
+  testId,
   onTrailingIconClick,
   onChange,
 }) => {
@@ -74,31 +77,21 @@ export const GoAInput: FC<Props & { type: string }> = ({
       const { name, value } = e.detail.data;
       onChange(name, value);
     };
-    // TODO: determinw the propery type of the e (CustomEvent does not work)
     const clickListener = (e: any) => {
       onTrailingIconClick?.();
     };
 
     current.addEventListener('_change', changeListener)
     // TODO: remove all the `on:` prefixes
-    current.addEventListener('_ontrailingiconclick', clickListener)
+    current.addEventListener('_trailingIconClick', clickListener)
     return () => {
       current.removeEventListener('_change', changeListener);
-      current.removeEventListener('_ontrailingiconclick', clickListener);
+      current.removeEventListener('_trailingIconClick', clickListener);
     }
   }, [ref, onChange, onTrailingIconClick])
 
-
-  // useEffect(() => {
-  //   if (focused) {
-  //     inputRef.current?.focus();
-  //   } else {
-  //     inputRef.current?.blur();
-  //   }
-  // }, [focused, inputRef]);
-
   return (
-    <goa-input ref={ref} type={type} name={name} id={id} leadingicon={leadingIcon} trailingicon={trailingIcon} variant={variant} disabled={disabled} readonly={readonly} placeholder={placeholder} error={error} value={value} handletrailingiconclick={!!onTrailingIconClick} />
+    <goa-input ref={ref} focused={focused} type={type} name={name} id={id} leadingicon={leadingIcon} trailingicon={trailingIcon} variant={variant} disabled={disabled} readonly={readonly} placeholder={placeholder} error={error} data-testid={testId} value={value} handletrailingiconclick={!!onTrailingIconClick} />
   );
 };
 
@@ -151,7 +144,7 @@ export const GoAInputNumber: FC<Props & { min?: number, max?: number, step?: num
 }
 
 export const GoAInputRange: FC<Props & { min?: number, max?: number, step?: number }> = ({ step = 1, ...props }) => {
-  return <input {...props} type="range" onChange={(e) => props.onChange(e.target.name, e.target.value)} />;
+  return <GoAInput {...props} type="range" />;
 }
 
 export default GoAInput;
