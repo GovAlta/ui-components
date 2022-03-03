@@ -14,7 +14,6 @@ interface CheckboxProps {
   name: string;
   checked?: boolean;
   disabled?: boolean;
-  indeterminate?: boolean;
   error?: boolean;
   text?: string;
   value?: string | number | boolean;
@@ -25,7 +24,6 @@ export interface Props {
   name: string;
   checked?: boolean;
   disabled?: boolean;
-  indeterminate?: boolean;
   error?: boolean;
   text?: string;
   value?: string | number | boolean;
@@ -33,7 +31,7 @@ export interface Props {
   onChange?: (name: string, checked: boolean, value: string) => void;
 }
 
-export const GoACheckbox: FC<Props> = ({ name, testId, error, disabled, checked, indeterminate, value = true, text, children, onChange }) => {
+export const GoACheckbox: FC<Props> = ({ name, testId, error, disabled, checked, value = true, text, children, onChange }) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -59,7 +57,6 @@ export const GoACheckbox: FC<Props> = ({ name, testId, error, disabled, checked,
       error={error}
       checked={checked}
       disabled={disabled}
-      indeterminate={indeterminate}
       text={text}
       value={value}
     >
