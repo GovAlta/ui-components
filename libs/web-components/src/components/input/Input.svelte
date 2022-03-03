@@ -1,42 +1,38 @@
 <svelte:options tag="goa-input" />
 
 <script lang="ts" context="module">
-  export type GoAButtonVariant = "goa" | "bare";
+  export type GoAInputVariant = "goa" | "bare";
 </script>
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
   import { toBoolean } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
-  export let type: string = "text";
+  export let type: "text" | "number" | "password" | "email" | "date" | "datetime-local" | "month" | "search" | "tel" | "time" | "url" | "week" = "text";
   export let name: string = "";
   export let value: string = "";
   export let id: string = "";
   export let placeholder: string = "";
   export let leadingicon: GoAIconType = null;
   export let trailingicon: GoAIconType = null;
-  export let variant: GoAButtonVariant = "goa";
-  export let disabled: string;
-  export let handletrailingiconclick: string;
-  export let focused: string;
-  export let readonly: string;
-  export let error: string;
+  export let variant: GoAInputVariant = "goa";
+  export let disabled: string = "false";
+  export let handletrailingiconclick: string = "false";
+  export let focused: string = "false";
+  export let readonly: string = "false";
+  export let error: string = "false";
+  export let testid: string = "";
 
-  $: handlesTrailingIconClicks = toBoolean(handletrailingiconclick);
+  $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
 
   let inputEl: HTMLElement;
-  $: if (isFocused) {
-    inputEl?.focus();
+  $: if (isFocused && inputEl) {
+    setTimeout(() => inputEl.focus(), 1)
   }
-
-  onMount(async () => {
-    await tick();
-  });
 
   function onKeyUp(e) {
     e.target.dispatchEvent(
@@ -57,10 +53,16 @@
 
 <!-- HTML -->
 
-<div class={`goa-input ${isDisabled ? "goa-input--disabled" : ""}`} class:error={isError}>
+<div
+  class={`
+    goa-input ${isDisabled ? "goa-input--disabled" : ""}
+    variant--${variant}
+    type--${type}
+  `}
+  class:error={isError}>
   {#if leadingicon}
     <div class="goa-input-leading-icon">
-      <goa-icon type={leadingicon} />
+      <goa-icon data-testid="leading-icon" type={leadingicon} />
     </div>
   {/if}
 
@@ -70,19 +72,21 @@
     class={`input--${variant}`}
     readonly={isReadonly}
     disabled={isDisabled}
+    data-testid={testid}
+    {name}
     {type}
     {value}
     {placeholder}
     on:keyup={onKeyUp}
   />
 
-  {#if trailingicon && !handlesTrailingIconClicks}
+  {#if trailingicon && !handlesTrailingIconClick}
     <div class="goa-input-trailing-icon">
-      <goa-icon size="medium" type={trailingicon} />
+      <goa-icon data-testid="trailing-icon" size="medium" type={trailingicon} />
     </div>
   {/if}
 
-  {#if trailingicon && handlesTrailingIconClicks}
+  {#if trailingicon && handlesTrailingIconClick}
     <div class="goa-input-trailing-icon">
       <goa-icon-button
         on:click={doClick}
@@ -90,7 +94,7 @@
         variant="nocolor"
         size="medium"
         type={trailingicon}
-        testId={`${name}-input-trailing-button`}
+        data-testid="trailing-icon-button"
       />
     </div>
   {/if}
@@ -121,10 +125,6 @@
     align-items: center;
   }
 
-  .goa-input input[readonly] {
-    cursor: pointer;
-  }
-
   .goa-input:hover {
     border-color: var(--goa-color-interactive--hover);
   }
@@ -144,9 +144,23 @@
     box-shadow: none;
   }
 
+  .goa-input input[readonly] {
+    cursor: pointer;
+  }
+
+  /* type=range does not have an outline/box-shsdow */
+  .goa-input.type--range {
+    border: none;
+  }
+
+  .goa-input.type--range:active,
+  .goa-input.type--range:focus,
+  .goa-input.type--range:focus-within {
+    box-shadow: none;
+  }
+
   .goa-input-leading-icon {
     line-height: 18px;
-    padding: 0.5rem;
   }
 
   .goa-input-trailing-icon {
@@ -158,22 +172,14 @@
     margin-right: -0.5rem;
   }
 
-  /* input.input--goa::-webkit-calendar-picker-indicator {
-    display: none;
-  } */
-
   input {
     display: block;
     width: 100%;
     font-size: var(--input-font-size);
-    /* padding: var(--input-padding); */
   }
 
-  .goa-input-leading-icon ~ input {
-    padding-left: 0;
-  }
-  .goa-input-trailing-icon ~ input {
-    padding-right: 0;
+  .goa-input-leading-icon + input {
+    padding-left: 0.5rem;
   }
 
   input,
@@ -208,8 +214,12 @@
     flex: 1 1 auto;
   }
 
-  .goa-input .input--bare {
+  .variant--bare {
     border: none;
+  }
+
+  .variant--bare:focus, .variant--bare:active, .variant--bare:focus-within {
+    box-shadow: none;
   }
 
   .goa-state--error .goa-input {
