@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, fireEvent, waitFor } from '@testing-library/svelte';
+import { render, fireEvent } from '@testing-library/svelte';
 import GoACheckbox from './Checkbox.svelte'
 
 const testid = "checkbox-test";
@@ -24,7 +24,7 @@ describe('GoACheckbox Component', () => {
 
   it("allows for setting of the text", async () => {
     const el = await createElement({ text: "foobar" });
-    const div = await el.findByTestId(testid + '-text');
+    const div = await el.findByTestId('text');
     expect(div).toHaveTextContent("foobar");
   });
 
@@ -32,6 +32,9 @@ describe('GoACheckbox Component', () => {
     const el = await createElement({ checked: "true" });
     const root = el.container.querySelector('.goa-checkbox--selected');
     expect(root).toBeTruthy();
+
+    const svg = await el.findByTestId('checkmark');
+    expect(svg).toBeTruthy();
 
     const checkbox = await el.findByTestId(testid);
     expect((checkbox as HTMLInputElement).checked).toBeTruthy();
@@ -43,12 +46,6 @@ describe('GoACheckbox Component', () => {
     expect(root).toBeTruthy();
     const checkbox = await el.findByTestId(testid);
     expect((checkbox as HTMLInputElement).disabled).toBeTruthy();
-  });
-
-  it("can be set to be indeterminate", async () => {
-    const el = await createElement({ indeterminate: "true" });
-    const svg = await el.findByTestId(testid + '-dashmark');
-    expect(svg).toBeTruthy();
   });
 
   it("allows the checkbox to be set to an error state", async () => {
