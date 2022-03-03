@@ -13,15 +13,17 @@ export type ServiceLevel = 'alpha' | 'beta' | 'live'
 
 interface WebComponentProps {
   level: ServiceLevel;
+  version?: string;
 }
 
 export interface HeaderProps {
-  level: ServiceLevel,
+  level: ServiceLevel;
+  version?: string;
 }
 
-export const GoAServiceLevelHeader: FC<HeaderProps> = ({ level}) => {
+export const GoAServiceLevelHeader: FC<HeaderProps> = ({ level, version}) => {
   return (
-    <goa-service-level-header level={level} />
+    <goa-service-level-header level={level} version={version} />
   )
 };
 

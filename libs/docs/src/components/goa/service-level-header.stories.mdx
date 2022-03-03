@@ -1,0 +1,56 @@
+import { GoAServiceLevelHeader } from '@abgov/react-components';
+import { Tabs, Tab, Note, Block, CodeSnippet } from '@abgov/shared/storybook-common';
+import {
+  Meta,
+  Canvas,
+  Story,
+  ArgsTable,
+  Description,
+} from '@storybook/addon-docs';
+
+<Meta
+  title="Components/Service Level Header"
+  component={GoAServiceLevelHeader}
+/>
+
+### Component
+# GoAServiceLevelHeader
+
+export const noop = () => {};
+
+### Usage
+
+export const Template = (args) => <GoAServiceLevelHeader {...args}  />
+
+<Story
+  name="Basic"
+  args={{
+    level: "alpha",
+    version: "v1.2.3"
+  }}
+>
+  { Template.bind({}) }
+</Story>
+
+```ts
+// level
+export type ServiceLevel = 'alpha' | 'beta' | 'live'
+```
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-service-level-header level="alpha" version="v1.2.3" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-service-level-header level="alpha" version="v1.2.3" />
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAServiceLevelHeader level="alpha" version="v1.2.3" />
+    `}/>
+  </Tab>
+</Tabs>
