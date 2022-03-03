@@ -13,6 +13,7 @@
   export let disabled: string;
   export let indeterminate: string;
   export let error: string;
+  export let testid: string = "";
 
   $: id = `id-${name}`;
   $: isDisabled = toBoolean(disabled);
@@ -46,6 +47,7 @@
   <div class="goa-checkbox-container" class:goa-checkbox--selected={isChecked}>
     <input
       {id}
+      data-testid={testid}
       {name}
       checked={isChecked}
       disabled={isDisabled}
@@ -55,17 +57,19 @@
     />
     {#if isChecked}
       {#if isIndeterminate}
-        <svg id="dashmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2">
+        <svg id="dashmark" data-testid={`${testid}-dashmark`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2">
           <rect width="15" height="2" />
         </svg>
       {:else}
-        <svg id="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18">
+        <svg id="checkmark" data-testid={`${testid}-checkmark`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18">
           <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
         </svg>
       {/if}
     {/if}
   </div>
-  <div class="goa-checkbox-text">
+  <div
+    class="goa-checkbox-text"
+    data-testid={`${testid}-text`}>
     <slot name="main">
       {text}
     </slot>
