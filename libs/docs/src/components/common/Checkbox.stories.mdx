@@ -5,7 +5,10 @@ import {
 } from '@storybook/addon-docs';
 
 import { action } from '@storybook/addon-actions';
-import { Tabs, Tab, Note } from '@abgov/shared/storybook-common';
+import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
+import { GoACheckbox } from '@abgov/react-components';
+
+export const noop = () => {};
 
 <Meta title="Components/Checkbox" />
 
@@ -36,46 +39,22 @@ It’s that in-between state that we might consider a “Mix” between “Selec
 
 <Tabs>
   <Tab label="Web Component">
-    <pre>
-      { `<goa-checkbox text="World Peace" value="life" checked></goa-checkbox>` }
-    </pre>
-    <pre>
-      { `<goa-checkbox text="War" value="hell" disabled></goa-checkbox>` }
-    </pre>
-    <pre>
-      { `<goa-checkbox text="Winter Picnic" value="fun" indeterminate></goa-checkbox>` }
-    </pre>
-    <pre>
-      { `<goa-checkbox text="Drink and Drive" value="irresponsible and dangerous" error></goa-checkbox>` }
-    </pre>
+    <CodeSnippet code={`<goa-checkbox text="World Peace" value="life" checked></goa-checkbox>`} lang="html" />
+    <CodeSnippet code={`<goa-checkbox text="War" value="hell" disabled></goa-checkbox>`} lang="html" />
+    <CodeSnippet code={`<goa-checkbox text="Winter Picnic" value="fun" indeterminate></goa-checkbox>`} lang="html" />
+    <CodeSnippet code={`<goa-checkbox text="Drink and Drive" value="irresponsible and dangerous" error></goa-checkbox>`} lang="html" />
   </Tab>
   <Tab label="Angular">
-    <pre>
-      { `<goa-checkbox text="World Peace" value="life" checked></goa-checkbox>` }
-    </pre>
-    <pre>
-      { `<goa-checkbox text="War" value="hell" disabled></goa-checkbox>` }
-    </pre>
-    <pre>
-      { `<goa-checkbox text="Winter Picnic" value="fun" indeterminate></goa-checkbox>` }
-    </pre>
-    <pre>
-      { `<goa-checkbox text="Drink and Drive" value="irresponsible and dangerous" error></goa-checkbox>` }
-    </pre>
+    <CodeSnippet code={`<goa-checkbox text="World Peace" value="life" checked></goa-checkbox>`} lang="html" />
+    <CodeSnippet code={`<goa-checkbox text="War" value="hell" disabled></goa-checkbox>`} lang="html" />
+    <CodeSnippet code={`<goa-checkbox text="Winter Picnic" value="fun" indeterminate></goa-checkbox>`} lang="html" />
+    <CodeSnippet code={`<goa-checkbox text="Drink and Drive" value="irresponsible and dangerous" error></goa-checkbox>`} lang="html" />
   </Tab>
   <Tab label="React">
-    <pre>
-      { `<GoACheckbox text="World Peace" value="life" checked></GoACheckbox>` }
-    </pre>
-    <pre>
-      { `<GoACheckbox text="War" value="hell" disabled></GoACheckbox>` }
-    </pre>
-    <pre>
-      { `<GoACheckbox text="Winter Picnic" value="fun" indeterminate></GoACheckbox>` }
-    </pre>
-    <pre>
-      { `<GoACheckbox text="Drink and Drive" value="irresponsible and dangerous" error></GoACheckbox>` }
-    </pre>
+    <CodeSnippet code={`<GoACheckbox text="World Peace" value="life" checked></GoACheckbox>`} lang="jsx" />
+    <CodeSnippet code={`<GoACheckbox text="War" value="hell" disabled></GoACheckbox>`} lang="jsx" />
+    <CodeSnippet code={`<GoACheckbox text="Winter Picnic" value="fun" indeterminate></GoACheckbox>`} lang="jsx" />
+    <CodeSnippet code={`<GoACheckbox text="Drink and Drive" value="irresponsible and dangerous" error></GoACheckbox>`} lang="jsx" />
   </Tab>
 </Tabs>
 

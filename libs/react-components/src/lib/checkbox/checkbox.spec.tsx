@@ -1,6 +1,6 @@
 import React, { Component, ReactNode, useState } from 'react';
 import { render } from '@testing-library/react';
-import { screen, waitFor } from '@testing-library/dom'
+import { screen, fireEvent, waitFor } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event';
 import GoACheckbox, { Props as CheckboxProps } from './checkbox';
 
@@ -31,7 +31,7 @@ describe('GoA Checkbox', () => {
       name: "foo",
       value: "bar",
       text: "to display",
-      disabled: true,
+      disabled: false,
       checked:true,
       error: false,
       onChange: noop,
@@ -42,15 +42,36 @@ describe('GoA Checkbox', () => {
 
     const checkbox = screen.getByTestId(testId);
     expect(checkbox).toBeTruthy();
-    expect(checkbox.getAttribute("id")).toBe("id-foo");
     expect(checkbox.getAttribute('name')).toBe('foo');
     expect(checkbox.getAttribute('value')).toBe('bar');
     expect(checkbox.getAttribute('text')).toBe('to display');
-    expect(checkbox.getAttribute("disabled")).toBeTruthy();
-    expect(checkbox.getAttribute("checked")).toBeTruthy();
-    expect(checkbox.getAttribute("error")).toBeFalsy();
-    expect(checkbox.getAttribute("onChange")).toBeTruthy();
+    expect(checkbox.getAttribute("disabled")).toBe("false");
+    expect(checkbox.getAttribute("checked")).toBe("true");
+    expect(checkbox.getAttribute("error")).toBe("false");
     expect(checkbox.getAttribute("data-testid")).toBe(testId);
+  });
+
+  it('should handle the onChange event', async function () {
+
+    const onChange = jest.fn();
+
+    const props: CheckboxProps = {
+      name: "foo",
+      value: "bar",
+      text: "to display",
+      disabled: true,
+      checked:true,
+      error: false,
+      onChange: onChange,
+      testId: testId,
+    }
+
+    const { getByTestId } = render(<GoACheckbox {...props} />);
+    const checkbox = getByTestId(testId);
+    expect(checkbox).toBeTruthy();
+
+    fireEvent(checkbox, new CustomEvent('_change', { detail: { data: { value: "bar" } } }));
+    expect(onChange).toBeCalled();
   });
 
   it('should render label', () => {
