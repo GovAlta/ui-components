@@ -11,10 +11,10 @@ declare global {
 
 interface CheckboxProps {
   ref: React.RefObject<HTMLElement>;
+  id?: string;
   name: string;
   checked?: boolean;
   disabled?: boolean;
-  indeterminate?: boolean;
   error?: boolean;
   text?: string;
   value?: string | number | boolean;
@@ -22,10 +22,10 @@ interface CheckboxProps {
 
 /* eslint-disable-next-line */
 export interface Props {
+  id?: string;
   name: string;
   checked?: boolean;
   disabled?: boolean;
-  indeterminate?: boolean;
   error?: boolean;
   text?: string;
   value?: string | number | boolean;
@@ -33,7 +33,7 @@ export interface Props {
   onChange?: (name: string, checked: boolean, value: string) => void;
 }
 
-export const GoACheckbox: FC<Props> = ({ name, testId, error, disabled, checked, indeterminate, value = true, text, children, onChange }) => {
+export const GoACheckbox: FC<Props> = ({ id, name, testId, error, disabled, checked, value, text, children, onChange }) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -55,11 +55,11 @@ export const GoACheckbox: FC<Props> = ({ name, testId, error, disabled, checked,
     <goa-checkbox
       data-testid={testId}
       ref={el}
+      id={id}
       name={name}
       error={error}
       checked={checked}
       disabled={disabled}
-      indeterminate={indeterminate}
       text={text}
       value={value}
     >
