@@ -9,21 +9,22 @@
 <!-- HTML -->
 <header class="goa-official-site-header">
   {#if level === "live"}
-    <div class="site-text service-level--live">
+    <div data-testid="level" class="site-text service-level--live">
       An official site of the <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a>
     </div>
   {/if}
 
   {#if level !== "live"}
-    <div class="service-level service-level--{level?.toLowerCase()}">
+    <div data-testid="level" class="service-level service-level--{level?.toLowerCase()}">
       {level}
     </div>
     <div class="site-text">
-      This is a new <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a>service</div>
+      This is a new <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a> service
+    </div>
   {/if}
   <div class="spacer" />
   {#if version}
-    <div class="version">
+    <div data-testid="version" class="version">
       {version}
     </div>
   {/if}
