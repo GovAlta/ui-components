@@ -2,23 +2,25 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { toBoolean } from "../../common/utils";
+
+import { toBoolean } from "../../common/utils";
   // Required
   export let name: string;
 
   // Optional values
+  export let id: string = "";
   export let text: string = "";
   export let value: string = "";
   export let checked: string;
   export let disabled: string;
-  export let indeterminate: string;
   export let error: string;
+  export let testid: string = "";
 
-  $: id = `id-${name}`;
+  $: id = id ? id : `id-${name}`;
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
-  $: isIndeterminate = toBoolean(indeterminate);
+  $: isIndeterminate = false; // Desighn review. To be built with TreeView Later
 
   function onChange(e: Event) {
     // An empty string is required as setting the second value to `null` caused the data to get
@@ -46,6 +48,7 @@
   <div class="goa-checkbox-container" class:goa-checkbox--selected={isChecked}>
     <input
       {id}
+      data-testid={testid}
       {name}
       checked={isChecked}
       disabled={isDisabled}
@@ -53,19 +56,19 @@
       value={`${value}`}
       on:change={onChange}
     />
-    {#if isChecked}
-      {#if isIndeterminate}
-        <svg id="dashmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2">
-          <rect width="15" height="2" />
-        </svg>
-      {:else}
-        <svg id="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18">
-          <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
-        </svg>
-      {/if}
+    {#if isIndeterminate}
+      <svg id="dashmark" data-testid='dashmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2">
+        <rect width="15" height="2" />
+      </svg>
+    {:else if isChecked}
+      <svg id="checkmark" data-testid='checkmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18">
+        <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
+      </svg>
     {/if}
   </div>
-  <div class="goa-checkbox-text">
+  <div
+    class="goa-checkbox-text"
+    data-testid='text'>
     <slot name="main">
       {text}
     </slot>
