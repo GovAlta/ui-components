@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  onEvent(event: any) {
-    console.log('onEvent', event.detail.data);
+  onInputChangeEvent(event: any) {
+    console.log('onEvent', event.detail);
   }
   handleClick() {
     console.log('handleClick');

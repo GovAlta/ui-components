@@ -40,7 +40,7 @@
         composed: true,
         bubbles: false,
         cancelable: true,
-        detail: { event: e, data: { name, value: e.target.value } },
+        detail: { name, value: e.target.value },
       }),
     );
     e.stopPropagation();
