@@ -42,6 +42,7 @@
     background-color: var(--color-gray-100);
     align-items: center;
     justify-content: space-between;
+    height: 1.5rem;
   }
   .spacer {
     flex: 1 1 auto;
@@ -55,16 +56,17 @@
   .service-level {
     font-weight: bold;
     padding: 0 0.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   .service-level--alpha {
-    /* TODO: this color name needs a new name */
-    background-color: var(--color-orange);
+    background-color: var(--goa-color-interactive--highlight);
     color: var(--color-black);
   }
 
   .service-level--beta {
-    /* TODO: this color name needs a new name */
     background-color: var(--goa-color-primary-dark);
     color: var(--color-white);
   }
