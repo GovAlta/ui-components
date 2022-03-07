@@ -10,10 +10,14 @@
   import { tweened } from "svelte/motion";
   import { quartOut } from "svelte/easing";
 
+  // required
   export let size: SpinnerSize;
+
+  // optional
   export let invert = false;
   export let type: SpinnerType = "infinite";
   export let progress = "0";
+  export let testid: string = "";
 
   const _progress = tweened(0, {
     duration: 500,
@@ -26,14 +30,14 @@
     _progress.set(parseFloat(progress));
   }
 
-  $: diameter = {
+  $: diameter = size && {
     small: 16,
     medium: 32,
     large: 64,
     xlarge: 100,
   }[size];
 
-  $: strokewidth = {
+  $: strokewidth = size && {
     small: 2,
     medium: 4,
     large: 7,
@@ -80,6 +84,7 @@
     viewBox="0 0 {diameter} {diameter}"
     width={diameter}
     height={diameter}
+    data-testid={testid}
     xmlns="http://www.w3.org/2000/svg"
   >
     <circle

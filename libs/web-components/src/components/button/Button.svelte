@@ -64,6 +64,10 @@
     padding: 0 0.75rem;
     min-width: 5rem;
 
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+
     transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
     transform: scaleX(1);
   }
