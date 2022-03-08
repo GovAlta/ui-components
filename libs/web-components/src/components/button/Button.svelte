@@ -62,7 +62,6 @@
     font-weight: 700;
     line-height: 2.375rem;
     padding: 0 0.75rem;
-    min-width: 5rem;
 
     display: flex;
     gap: 0.25rem;
@@ -153,7 +152,6 @@
   button.borderless:active {
     outline: none;
     box-shadow: none;
-    /* TODO: determine what color name this is */
     background-color: var(--goa-color-primary-light);
   }
 
