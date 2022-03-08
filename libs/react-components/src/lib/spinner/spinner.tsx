@@ -1,13 +1,14 @@
 import React from 'react';
 
-type SpinnerType = "infinite" | "progress";
-type SpinnerSize = "small" | "medium" | "large" | "xlarge";
+export type SpinnerType = "infinite" | "progress";
+export type SpinnerSize = "small" | "medium" | "large" | "xlarge";
 
 interface WCProps {
   size: SpinnerSize;
   type: SpinnerType;
-  invert: boolean;
-  progress: number;
+  invert?: boolean;
+  progress?: number;
+  testid?: string;
 }
 
 declare global {
@@ -21,13 +22,14 @@ declare global {
 
 export interface SpinnerProps {
   type: SpinnerType;
-  size?: SpinnerSize;
-  invert: boolean;
-  progress: number;
+  size: SpinnerSize;
+  invert?: boolean;
+  progress?: number;
+  testId? :string;
 }
 
-export const GoASpinner = ({ type, size, progress, invert }: SpinnerProps) => {
-  return <goa-spinner type={type} size={size} progress={progress} invert={invert} />;
+export const GoASpinner = ({ type, size, progress, invert, testId }: SpinnerProps) => {
+  return <goa-spinner type={type} size={size} progress={progress} invert={invert} testid={testId} />;
 };
 
 export default GoASpinner;

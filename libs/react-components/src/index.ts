@@ -25,6 +25,7 @@ import { GoAPageLoader } from './lib/page-loader/page-loader';
 import { GoARadioGroup, GoARadio } from './lib/radio-group/radio-group';
 import { GoAServiceLevelHeader } from './lib/service-level-header/service-level-header';
 import { GoATextArea } from './lib/textarea/textarea';
+import { GoASpinner } from './lib/spinner/spinner';
 
 // Types
 import type { GoAIconType } from './lib/icons';
@@ -73,6 +74,7 @@ export {
   GoARadioGroup,
   GoAServiceLevelHeader,
   GoASuccessBadge,
+  GoASpinner,
   GoATextArea,
   GoAWarningBadge,
 };
