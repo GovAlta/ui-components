@@ -9,6 +9,7 @@
 <!-- HTML -->
 <div
   class="goa-hero"
+  data-testid="background"
   style="
     background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.40) 40%, rgba(0, 0, 0, 0.6) 100%), url({backgroundurl});
     background-size: cover;
@@ -19,7 +20,7 @@
   <goa-page-block>
     <h1 role="heading">{title}</h1>
     <div class="goa-hero-banner-content" role="note">
-      <slot name="content" />
+      <slot />
     </div>
     <slot name="actions" />
   </goa-page-block>

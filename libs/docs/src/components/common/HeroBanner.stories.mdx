@@ -1,0 +1,141 @@
+import { Meta } from '@storybook/addon-docs';
+import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
+import { GoAHeroBanner, GoAHeroBannerActions, GoAButton, GoAButtonGroup } from '@abgov/react-components';
+
+<Meta title="Components/Hero Banner" />
+
+### Component
+# Hero Banner
+
+## Default
+
+<Story name="Default">
+  <GoAHeroBanner
+    title="Hero Banner"
+    backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
+  >
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+  </GoAHeroBanner>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-hero-banner
+        title="Hero Banner"
+        backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+      </goa-hero-banner>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-hero-banner
+        title="Hero Banner"
+        backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+      </goa-hero-banner>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAHeroBanner
+        title="Hero Banner"
+        backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+      </GoAHeroBanner>
+    `}/>
+  </Tab>
+</Tabs>
+
+## With Actions
+
+<Story name="Actions">
+  <GoAHeroBanner
+    title="Hero Banner"
+    backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
+  >
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+    <GoAHeroBannerActions>
+      <GoAButtonGroup>
+        <GoAButton onClick={() => {}}>Action</GoAButton>
+        <GoAButton onClick={() => {}} type="tertiary">Other Action</GoAButton>
+      </GoAButtonGroup>
+    </GoAHeroBannerActions>
+  </GoAHeroBanner>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-hero-banner
+        title="Hero Banner"
+        backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+        <div slot="actions">
+          <goa-button-group>
+            <goa-button>Action</goa-button>
+            <goa-button type="tertiary">Other Action</goa-button>
+          </goa-button-group>
+        </div>
+      </goa-hero-banner>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-hero-banner
+        title="Hero Banner"
+        backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+        <div slot="actions">
+          <goa-button-group>
+            <goa-button>Action</goa-button>
+            <goa-button type="tertiary">Other Action</goa-button>
+          </goa-button-group>
+        </div>
+      </goa-hero-banner>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAHeroBanner
+        title="Hero Banner"
+        backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+        <GoAHeroBannerActions>
+          <GoAButtonGroup>
+            <GoAButton onClick={() => {}}>Action</GoAButton>
+            <GoAButton onClick={() => {}} type="tertiary">Other Action</GoAButton>
+          </GoAButtonGroup>
+        </GoAHeroBannerActions>
+      </GoAHeroBanner>
+    `}/>
+  </Tab>
+</Tabs>
+
+<Note type="best-practices">
+  <ul>
+    <li>Leave title blank</li>
+    <li>Add some optional text description content</li>
+  </ul>
+</Note>
+
+---
+
+## Support
+
+<goa-callout type="information" title="Need help? Connect with us on Slack">
+  <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9">#design-system-support</a> General information and discussion related to design system including questions, new component proposals, contribution, and other requests.
+</goa-callout>
+
+### Help improve this page
+
+To help make sure that this page is useful, relevant, and up to date, you can:
+
+[Create an issue for a proposed update or contribution](https://github.com/GovAlta/ui-components/issues/new/choose)
