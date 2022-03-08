@@ -1,12 +1,6 @@
-import {
-  Meta,
-  Preview,
-  Story,
-  ArgsTable,
-  Description,
-} from '@storybook/addon-docs';
-import { Tabs, Tab, Note, Block } from '@abgov/shared/storybook-common';
-import { GoAContainer, GoAButton, GoABadge } from '../../../../react-components/src/index';
+import { Meta, Story } from '@storybook/addon-docs';
+import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
+import { GoAContainer, GoAButton, GoABadge } from '@abgov/react-components';
 
 <Meta
   title="Components/Container"
@@ -42,48 +36,48 @@ export const Template = (args) => {
 
 <Tabs>
   <Tab label="Web Component">
-    <pre>{`
-<goa-container>
-  <div slot="title">The container title</div>
-  <div slot="actions">
-    <goa-button type="primary" size="small">Assign to me</goa-button>
-  </div>
-  <h2>Custom H2</h2>
-  <goa-container variant="primary" headingsize="small">
-    <div>This is a sub container </div>
-  </goa-container>
-</goa-container> `}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <div slot="title">The container title</div>
+        <div slot="actions">
+          <goa-button type="primary" size="small">Assign to me</goa-button>
+        </div>
+        <h2>Custom H2</h2>
+        <goa-container variant="primary" headingsize="small">
+          <div>This is a sub container </div>
+        </goa-container>
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="Angular">
-    <pre>{`
-<goa-container>
-  <div slot="title">The container title</div>
-  <div slot="actions">
-    <goa-button type="primary" size="small">Assign to me</goa-button>
-  </div>
-  <h2>Custom H2</h2>
-  <goa-container variant="primary" headingsize="small">
-    <div>This is a sub container </div>
-  </goa-container>
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <div slot="title">The container title</div>
+        <div slot="actions">
+          <goa-button type="primary" size="small">Assign to me</goa-button>
+        </div>
+        <h2>Custom H2</h2>
+        <goa-container variant="primary" headingsize="small">
+          <div>This is a sub container </div>
+        </goa-container>
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="React">
-    <pre>{`
-<GoAContainer
-  title="The container title"
-  actions={<GoAButton type="primary" size="small">Assign to me</GoAButton>}
-  children={
-    <>
-      <h2>Custom H2</h2>
-      <GoAContainer variant="primary" headingSize="small">
-        <div>This is a sub container </div>
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer
+        title="The container title"
+        actions={<GoAButton type="primary" size="small">Assign to me</GoAButton>}
+        children={
+          <>
+            <h2>Custom H2</h2>
+            <GoAContainer variant="primary" headingSize="small">
+              <div>This is a sub container </div>
+            </GoAContainer>
+          </>
+        }
       </GoAContainer>
-    </>
-  }
-</GoAContainer>`}
-    </pre>
+    `}/>
   </Tab>
 </Tabs>
 
@@ -129,28 +123,28 @@ Non-interactive containers indicate that the content is only for the user to rev
 
 <Tabs>
   <Tab label="Web Component">
-    <pre>{`
-<goa-container>
-  <h2>Heading</h2>
-  Content
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Heading</h2>
+        Content
+      </goa-container>`}
+    />
   </Tab>
   <Tab label="Angular">
-    <pre>{`
-<goa-container>
-  <h2>Heading</h2>
-  Content
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="React">
-    <pre>{`
-<GoAContainer>
-  <h2>Heading</h2>
-  Content
-</GoAContainer>`}
-    </pre>
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer>
+        <h2>Heading</h2>
+        Content
+      </GoAContainer>
+    `}/>
   </Tab>
 </Tabs>
 
@@ -190,28 +184,28 @@ export const HeadingTemplate = (args) => {
 
 <Tabs>
   <Tab label="Web Component">
-    <pre>{`
-<goa-container headingsize="large">
-  <h2>Heading</h2>
-  Content
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container headingsize="large">
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="Angular">
-    <pre>{`
-<goa-container headingsize="large">
-  <h2>Heading</h2>
-  Content
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container headingsize="large">
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="React">
-    <pre>{`
-<GoAContainer headingSize="large">
-  <h2>Heading</h2>
-  Content
-</GoAContainer>`}
-    </pre>
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer headingSize="large">
+        <h2>Heading</h2>
+        Content
+      </GoAContainer>
+    `}/>
   </Tab>
 </Tabs>
 
@@ -225,28 +219,28 @@ Use the small accent bar container for "secondary" content.
 
 <Tabs>
   <Tab label="Web Component">
-    <pre>{`
-<goa-container headingsize="small">
-  <h2>Heading</h2>
-  Content
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container headingsize="small">
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="Angular">
-    <pre>{`
-<goa-container headingsize="small">
-  <h2>Heading</h2>
-  Content
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container headingsize="small">
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="React">
-    <pre>{`
-<GoAContainer headingSize="small">
-  <h2>Heading</h2>
-  Content
-</GoAContainer>`}
-    </pre>
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer headingSize="small">
+        <h2>Heading</h2>
+        Content
+      </GoAContainer>
+    `}/>
   </Tab>
 </Tabs>
 
@@ -283,34 +277,34 @@ export const HeadingTemplateWithActionBadge = (args) => {
 
 <Tabs>
   <Tab label="Web Component">
-    <pre>{`
-<goa-container>
-  <h2>Heading</h2>
-  Content
-  <div slot="actions">
-    <goa-button type="tertiary" size="small">Edit</goa-button>
-  </div>
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Heading</h2>
+        Content
+        <div slot="actions">
+          <goa-button type="tertiary" size="small">Edit</goa-button>
+        </div>
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="Angular">
-    <pre>{`
-<goa-container>
-  <h2>Heading</h2>
-  Content
-  <div slot="actions">
-    <goa-button type="tertiary" size="small">Edit</goa-button>
-  </div>
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Heading</h2>
+        Content
+        <div slot="actions">
+          <goa-button type="tertiary" size="small">Edit</goa-button>
+        </div>
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="React">
-    <pre>{`
-<GoAContainer actions={<GoAButton type="tertiart" size="small">Edit</GoAButton>}>
-  <h2>Heading</h2>
-  Content
-</GoAContainer>`}
-    </pre>
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer actions={<GoAButton type="tertiart" size="small">Edit</GoAButton>}>
+        <h2>Heading</h2>
+        Content
+      </GoAContainer>
+    `}/>
   </Tab>
 </Tabs>
 
@@ -325,33 +319,33 @@ export const HeadingTemplateWithActionBadge = (args) => {
 
 <Tabs>
   <Tab label="Web Component">
-    <pre>{`
-<goa-container>
-  <h2>Heading</h2>
-  Content
-  <div slot="actions">
-    <goa-badge type="success" icon content="Badge Text" />
-  </div>
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Heading</h2>
+        Content
+        <div slot="actions">
+          <goa-badge type="success" icon content="Badge Text" />
+        </div>
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="Angular">
-    <pre>{`
-<goa-container>
-  <h2>Heading</h2>
-  Content
-  <div slot="actions">
-    <goa-badge type="success" icon content="Badge Text" />
-  </div>
-</goa-container>`}
-    </pre>
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Heading</h2>
+        Content
+        <div slot="actions">
+          <goa-badge type="success" icon content="Badge Text" />
+        </div>
+      </goa-container>
+    `}/>
   </Tab>
   <Tab label="React">
-    <pre>{`
-<GoAContainer actions={<GoABadge type="success" icon content="Badge Text" />}>
-  <h2>Heading</h2>
-  Content
-</GoAContainer>`}
-    </pre>
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer actions={<GoABadge type="success" icon content="Badge Text" />}>
+        <h2>Heading</h2>
+        Content
+      </GoAContainer>
+    `}/>
   </Tab>
 </Tabs>
