@@ -74,7 +74,7 @@ export const GoAInput: FC<Props & { type: string }> = ({
     }
     const current = ref.current;
     const changeListener = (e: any) => {
-      const { name, value } = e.detail.data;
+      const { name, value } = e.detail;
       onChange(name, value);
     };
     const clickListener = (e: any) => {
@@ -82,7 +82,6 @@ export const GoAInput: FC<Props & { type: string }> = ({
     };
 
     current.addEventListener('_change', changeListener)
-    // TODO: remove all the `on:` prefixes
     current.addEventListener('_trailingIconClick', clickListener)
     return () => {
       current.removeEventListener('_change', changeListener);

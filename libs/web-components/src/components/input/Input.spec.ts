@@ -97,11 +97,15 @@ describe('GoAInput Component', () => {
   });
 
   it("handles change events", async () => {
-    const { findByTestId } = render(GoAInput, { testid: "input-test" });
+    const { findByTestId } = render(GoAInput, { name: 'test-name', testid: "input-test" });
     const input = await findByTestId('input-test');
     const change = jest.fn();
 
-    input.addEventListener('_change', change)
+    input.addEventListener('_change', (e: CustomEvent) => {
+      expect(e.detail.name).toBe("test-name");
+      expect(e.detail.value).toBe("foobar");
+      change();
+    });
 
     await fireEvent.keyUp(input, { target: { value: 'foobar' } });
     expect(change).toBeCalledTimes(1);

@@ -60,16 +60,31 @@ export const OnChangeInputTemplate = () => <>
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet code={`<goa-input leadingicon="finger-print" />`} lang="html" />
-    <CodeSnippet code={`<goa-input trailingicon="finger-print" />`} lang="html" />
+    <CodeSnippet lang="html" code={`
+      <goa-input id="foo" name="foo" />
+    `}/>
+    <CodeSnippet lang="js" code={`
+      document.querySelector('#foo').addEventListener('_change', (e) => {
+        console.log(e.detail.name, e.detail.value);
+      });
+    `}/>
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input leadingicon="finger-print" />`} lang="html" />
-    <CodeSnippet code={`<goa-input trailingicon="finger-print" />`} lang="html" />
+    <CodeSnippet lang="html" code={`
+      <goa-input name="foo" (_click)="onChange()" />
+    `}/>
+    <CodeSnippet lang="ts" code={`
+      export class SomeComponent {
+        onChange(e) {
+          console.log(e.detail.name, e.detail.value);
+        }
+      }
+    `}/>
   </Tab>
   <Tab label="React">
-    <CodeSnippet code={`<GoAInput leadingIcon="finger-print" />`} lang="jsx" />
-    <CodeSnippet code={`<GoAInput trailingIcon="finger-print" />`} lang="jsx" />
+    <CodeSnippet lang="jsx" code={`
+      <GoAInputText name="foo" onChange={(name, value) => console.log(name, value)} />`
+    }/>
   </Tab>
 </Tabs>
 

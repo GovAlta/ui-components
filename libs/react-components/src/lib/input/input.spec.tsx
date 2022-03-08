@@ -2,7 +2,6 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { render } from '@testing-library/react';
 import { fireEvent, screen } from '@testing-library/dom';
-import userEvent from '@testing-library/user-event';
 import { GoAInputText, Props as InputProps } from './input';
 import { GoAIconType } from '../icons';
 
@@ -51,14 +50,21 @@ describe('Input', () => {
   });
 
   it('should handle the onChange event', async function () {
-    const onChange = jest.fn();
+    const validateOnChange = jest.fn();
+    const newValue = "barfoo";
+
+    const onChange = (name: string, value: string) => {
+      expect(name).toBe("foo");
+      expect(value).toBe(newValue);
+      validateOnChange();
+    }
     const props = { ...defaultProps, onChange }
     const { getByTestId } = render(<GoAInputText {...props} />);
 
     const input = getByTestId(testId);
     expect(input).toBeTruthy();
 
-    fireEvent(input, new CustomEvent('_change', { detail: { data: { value: "foo" } } }));
-    expect(onChange).toBeCalled();
+    fireEvent(input, new CustomEvent('_change', { detail: { name: "foo", value: newValue } }));
+    expect(validateOnChange).toBeCalled();
   });
 });
