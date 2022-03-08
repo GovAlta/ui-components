@@ -3,12 +3,12 @@ import { render } from '@testing-library/react';
 import GoAServiceLevelHeader, { ServiceLevel } from './service-level-header';
 
 describe('Header', () => {
-  it('should show the all the flairs', async function () {
-    ['alpha', 'beta', 'live'].forEach(async (mode: ServiceLevel) => {
+  ['alpha', 'beta', 'live'].forEach((mode: ServiceLevel) => {
+    it('should show the all the flairs', async function () {
       render(<GoAServiceLevelHeader level={mode} />);
       const el = document.querySelector('goa-service-level-header');
       expect(el).not.toBeNull();
-      expect(el.getAttribute('level')).toEqual('alpha');
+      expect(el.getAttribute('level')).toEqual(mode);
     })
   });
 
