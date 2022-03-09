@@ -89,22 +89,15 @@ a:focus {
 }
 
 /* Typography */
+h1:first-of-type,
+h2:first-of-type,
+h3:first-of-type,
+h4:first-of-type,
+h5:first-of-type,
+h6:first-of-type {
+  margin-top: 0!important;
+}
 
-/* h1:first-child,
-h2:first-child,
-h3:first-child {
-  margin-top: 0 !important;
-} */
-
-/* Base header margins */
-/* h1,
-h2,
-h3,
-h4 {
-  margin-bottom: 1rem;
-} */
-
-/* Font sizes */
 h1 {
   font-size: var(--fs-3xl);
   line-height: var(--lh-2xl);
@@ -113,7 +106,8 @@ h1 {
 h2 {
   font-size: var(--fs-2xl);
   line-height: var(--lh-xl);
-  font-weight: var(--fw-regular);
+  font-weight: var(--fw-regular)!important;
+  border-bottom: none!important;
 }
 h3 {
   font-size: var(--fs-xl);
@@ -129,27 +123,14 @@ h6 {
   font-weight: var(--fw-bold);
 }
 
-/* Set top margin to subsequent headers */
-/* h1 + h2,
-h1 + h3,
-h1 + h4,
-h2 + h3,
-h2 + h4,
-h3 + h4 {
-  margin-top: 2rem;
-} */
+h3 + h1 {
+  margin-top: -1rem!important;
+}
 
 p {
   margin-bottom: 1rem;
   font-size: var(--fs-base);
 }
-
-/* prevent too much bottom space when a header immediately follows an <hr> */
-/* hr + h1,
-hr + h2,
-hr + h3 {
-  margin-top: 0;
-} */
 
 em {
   font-size: var(--fs-xs);
