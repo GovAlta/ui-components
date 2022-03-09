@@ -3,16 +3,16 @@
 <!-- Script -->
 <script lang="ts">
   // import type { CalloutType } from "@abgov/shared/common";
-  export let type: "emergency" | "caution" | "information" | "event" | "success";
+  export let type: "emergency" | "important" | "information" | "event" | "success";
 
   // export let type: CalloutType = "";
   export let title: string;
-  export let testId: string = "";
+  export let testid: string = "";
 
   $: iconType =
     type === "emergency"
       ? "warning"
-      : type === "caution"
+      : type === "important"
       ? "alert-circle"
       : type === "information"
       ? "information-circle"
@@ -24,7 +24,7 @@
 </script>
 
 <!-- HTML -->
-<div class="notification" data-testid="{testId}">
+<div class="notification" data-testid="{testid}">
   <span class="icon {type}">
     <goa-icon type={iconType} inverted />
   </span>
@@ -58,7 +58,7 @@
     background-color: var(--goa-color-status-emergency);
     color: var(--color-white);
   }
-  .caution {
+  .important {
     background-color: var(--goa-color-status-warning);
   }
   .information {
