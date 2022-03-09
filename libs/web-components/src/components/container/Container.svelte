@@ -106,7 +106,7 @@
   /* Sizes */
   .heading--large {
     padding: 0.5rem 1.5rem;
-    max-height: 4rem;
+    max-height: 3rem;
     min-height: 1rem;
   }
 
