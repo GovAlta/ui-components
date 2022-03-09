@@ -71,9 +71,9 @@
     transform: scaleX(1);
   }
 
-  button:active {
+  /* button:active {
     transform: scale(0.95);
-  }
+  } */
 
   /* Primary */
   button.primary {
@@ -106,6 +106,7 @@
   button.secondary:hover {
     border-color: var(--goa-color-interactive--hover);
     color: var(--goa-color-interactive--hover);
+    background: var(--color-gray-100);
   }
 
   button.secondary:focus,
@@ -119,13 +120,15 @@
   /* Tertiary */
 
   button.tertiary {
-    border-color: var(--color-gray-200);
+    border: 1px solid var(--color-gray-200);
     background: var(--color-white);
     color: var(--goa-color-interactive);
   }
 
   button.tertiary:hover {
+    border-color: var(--color-gray-100);
     color: var(--goa-color-interactive--hover);
+    background: var(--color-gray-100);
   }
 
   button.tertiary:focus,
