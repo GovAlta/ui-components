@@ -16,6 +16,8 @@ import {
 ### Component
 # GoAServiceLevelHeader
 
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/Components---DIO-DS?node-id=2%3A81)
+
 export const noop = () => {};
 
 ### Usage
@@ -23,7 +25,7 @@ export const noop = () => {};
 export const Template = (args) => <GoAServiceLevelHeader {...args}  />
 
 <Story
-  name="Basic"
+  name="Alpha"
   args={{
     level: "alpha",
     version: "v1.2.3"
@@ -32,10 +34,7 @@ export const Template = (args) => <GoAServiceLevelHeader {...args}  />
   { Template.bind({}) }
 </Story>
 
-```ts
-// level
-export type ServiceLevel = 'alpha' | 'beta' | 'live'
-```
+# Alpha
 
 <Tabs>
   <Tab label="Web Component">
@@ -51,6 +50,68 @@ export type ServiceLevel = 'alpha' | 'beta' | 'live'
   <Tab label="React">
     <CodeSnippet lang="jsx" code={`
       <GoAServiceLevelHeader level="alpha" version="v1.2.3" />
+    `}/>
+  </Tab>
+</Tabs>
+
+
+# Beta
+
+<Story
+  name="Beta"
+  args={{
+    level: "beta",
+    version: "v1.2.3"
+  }}
+>
+  { Template.bind({}) }
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-service-level-header level="beta" version="v1.2.3" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-service-level-header level="beta" version="v1.2.3" />
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAServiceLevelHeader level="beta" version="v1.2.3" />
+    `}/>
+  </Tab>
+</Tabs>
+
+
+# Live
+
+<Story
+  name="Live"
+  args={{
+    level: "live",
+    version: "v1.2.3"
+  }}
+>
+  { Template.bind({}) }
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-service-level-header level="live" version="v1.2.3" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-service-level-header level="live" version="v1.2.3" />
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAServiceLevelHeader level="live" version="v1.2.3" />
     `}/>
   </Tab>
 </Tabs>

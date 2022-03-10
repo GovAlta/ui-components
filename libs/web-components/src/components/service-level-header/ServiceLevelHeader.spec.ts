@@ -30,7 +30,7 @@ describe('GoAServiceLevelHeader', () => {
   });
 
   ['alpha', 'beta'].forEach(level => {
-    it(`should show the level number for ${level}`, async () => {
+    it(`should show the level for ${level}`, async () => {
       const { queryByTestId } = render(GoAServiceLevelHeader, { level: level });
       const version = queryByTestId('level');
 
@@ -38,10 +38,10 @@ describe('GoAServiceLevelHeader', () => {
     });
   });
 
-  it(`should not show the level number for live`, async () => {
+  it(`should not show the level for live`, async () => {
     const { queryByTestId } = render(GoAServiceLevelHeader, { level: 'live' });
     const version = queryByTestId('level');
 
-    expect(version).toContainHTML('live');
+    expect(version).not.toContainHTML('live');
   });
 });
