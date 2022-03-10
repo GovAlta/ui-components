@@ -120,7 +120,9 @@ export const CodeSnippet: FC<Props> = ({ lang, code, tabSize = 2 }) => {
   return (
     <div className="goa-code-snippet">
       <CopyBlock
+        codeBlock={true}
         text={cleanCode}
+        showLineNumbers={false}
         language={lang}
         theme={theme}
       />
