@@ -50,6 +50,7 @@
 
   h3 {
     font-size: var(--fs-xl);
+    line-height: var(--lh-base);
     font-weight: var(--fw-regular);
     margin-top: 0;
   }
@@ -73,11 +74,11 @@
   .icon {
     flex: 0 0 3rem;
     text-align: center;
-    padding-top: 1.75rem;
+    padding-top: 1.5rem;
   }
   .content {
     flex: 1 1 auto;
     background-color: var(--color-gray-100);
-    padding: 1.75rem;
+    padding: 1.5rem;
   }
 </style>
