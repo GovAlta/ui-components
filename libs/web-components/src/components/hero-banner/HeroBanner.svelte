@@ -38,7 +38,7 @@
     justify-content: flex-end;
     flex-direction: column;
     min-height: 600px;
-    border-bottom: 8px solid var(--goa-color-primary-dark);
+    border-bottom: 8px solid var(--goa-color-brand);
     color: var(--color-white);
     background-position: center center;
     width: 100%;
