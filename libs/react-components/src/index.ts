@@ -15,7 +15,6 @@ import { GoADropdown, GoADropdownOption } from './lib/dropdown/dropdown';
 import { GoAFlexRow } from './lib/flex';
 import { GoAFormItem } from './lib/form';
 import { GoAHeroBanner } from './lib/hero-banner/hero-banner';
-import { GoAHeroBannerContent } from './lib/hero-banner/hero-banner-content';
 import { GoAHeroBannerActions } from './lib/hero-banner/hero-banner-actions';
 import { GoAIcon, GoAIconButton } from './lib/icons';
 import { GoAInput, GoAInputText, GoAInputPassword, GoAInputDate, GoAInputTime, GoAInputDateTime, GoAInputEmail, GoAInputSearch, GoAInputUrl, GoAInputTel, GoAInputFile, GoAInputMonth, GoAInputNumber, GoAInputRange } from './lib/input/input';
@@ -48,7 +47,6 @@ export {
   GoAFlexRow,
   GoAFormItem,
   GoAHeroBanner,
-  GoAHeroBannerContent,
   GoAHeroBannerActions,
   GoAIcon,
   GoAIconButton,

@@ -1,132 +1,51 @@
 import React from 'react';
-import { render, cleanup, screen, fireEvent } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import GoAHeroBanner from './hero-banner';
-import GoAHeroBannerContent from './hero-banner-content';
-import GoAHeroBannerLink from './hero-banner-actions';
+import { GoAHeroBannerActions } from './hero-banner-actions';
+import GoAButton from '../button/button';
 
 afterEach(cleanup);
 
-describe.skip('GoAHeroBanner', () => {
-  test('Renders all with properties', () => {
-    const { container } = render(
+describe('GoAHeroBanner', () => {
+  it('renders all with properties', () => {
+    const { baseElement } = render(
       <GoAHeroBanner
         title="Upgrading our bitumen"
-        backgroundUrl=""
-        content="Main content"
-        linkText="Learn more"
-        linkUrl="http://google.com"
-      ></GoAHeroBanner>
+        backgroundUrl="some-bg.png"
+      />
     );
-
-    expect(screen.getByRole('heading').textContent).toEqual(
-      'Upgrading our bitumen'
-    );
-    expect(screen.getByRole('note').textContent).toEqual('Main content');
-    expect(screen.getByRole('link').textContent).toEqual('Learn more');
+    const el = baseElement.querySelector('goa-hero-banner');
+    expect(el.getAttribute("title")).toEqual("Upgrading our bitumen");
+    expect(el.getAttribute("backgroundurl")).toEqual("some-bg.png");
   });
 
-  test('Only title with properties', async () => {
-    const { container } = render(
+  it('renders content', async () => {
+    const { baseElement } = render(
       <GoAHeroBanner
         title="Upgrading our bitumen"
-        backgroundUrl=""
-      ></GoAHeroBanner>
+        backgroundUrl="some-bg.png"
+      >
+        This is the hero banner content
+      </GoAHeroBanner>
     );
-
-    expect(screen.getByRole('heading').textContent).toEqual(
-      'Upgrading our bitumen'
-    );
-    expect(screen.queryByRole('note')).toBeFalsy();
-    expect(screen.queryAllByRole('link').length).toEqual(0);
+    const el = baseElement.querySelector('goa-hero-banner');
+    expect(el.innerHTML).toContain("This is the hero banner content");
   });
 
-  test('Title and content with properties', async () => {
-    const { container } = render(
+  it('renders actions', async () => {
+    const { baseElement } = render(
       <GoAHeroBanner
         title="Upgrading our bitumen"
-        backgroundUrl=""
-        content="Main content"
-      ></GoAHeroBanner>
-    );
-
-    expect(screen.getByRole('heading').textContent).toEqual(
-      'Upgrading our bitumen'
-    );
-    expect(screen.getByRole('note').textContent).toEqual('Main content');
-    expect(screen.queryAllByRole('link').length).toEqual(0);
-  });
-
-  test('Title and link with properties', async () => {
-    const { container } = render(
-      <GoAHeroBanner
-        title="Upgrading our bitumen"
-        backgroundUrl=""
-        linkText="Learn more"
-        linkUrl="http://google.com"
-      ></GoAHeroBanner>
-    );
-
-    expect(screen.getByRole('heading').textContent).toEqual(
-      'Upgrading our bitumen'
-    );
-    expect(screen.queryByRole('note')).toBeFalsy();
-    expect(screen.getByRole('link').textContent).toEqual('Learn more');
-  });
-
-  test('Renders all with child components', () => {
-    const { container } = render(
-      <GoAHeroBanner title="Upgrading our bitumen" backgroundUrl="">
-        <GoAHeroBannerContent content="Main content" />
-        <GoAHeroBannerLink linkText="Learn more" linkUrl="http://google.com" />
+        backgroundUrl="some-bg.png"
+      >
+        This is the hero banner content
+        <GoAHeroBannerActions>
+          <GoAButton onClick={() => { }}>Submit</GoAButton>
+        </GoAHeroBannerActions>
       </GoAHeroBanner>
     );
-
-    expect(screen.getByRole('heading').textContent).toEqual(
-      'Upgrading our bitumen'
-    );
-    expect(screen.getByRole('note').textContent).toEqual('Main content');
-    expect(screen.getByRole('link').textContent).toEqual('Learn more');
-  });
-
-  test('Only title with child components', async () => {
-    const { container } = render(
-      <GoAHeroBanner title="Upgrading our bitumen" backgroundUrl="">
-      </GoAHeroBanner>
-    );
-
-    expect(screen.getByRole('heading').textContent).toEqual(
-      'Upgrading our bitumen'
-    );
-    expect(screen.queryByRole('note')).toBeFalsy();
-    expect(screen.queryAllByRole('link').length).toEqual(0);
-  });
-
-  test('Title and content with child components', async () => {
-    const { container } = render(
-      <GoAHeroBanner title="Upgrading our bitumen" backgroundUrl="">
-        <GoAHeroBannerContent content="Main content" />
-      </GoAHeroBanner>
-    );
-
-    expect(screen.getByRole('heading').textContent).toEqual(
-      'Upgrading our bitumen'
-    );
-    expect(screen.getByRole('note').textContent).toEqual('Main content');
-    expect(screen.queryAllByRole('link').length).toEqual(0);
-  });
-
-  test('Title and link with child components', async () => {
-    const { container } = render(
-      <GoAHeroBanner title="Upgrading our bitumen" backgroundUrl="">
-        <GoAHeroBannerLink linkText="Learn more" linkUrl="http://google.com" />
-      </GoAHeroBanner>
-    );
-
-    expect(screen.getByRole('heading').textContent).toEqual(
-      'Upgrading our bitumen'
-    );
-    expect(screen.queryAllByRole('note').length).toEqual(0);
-    expect(screen.getByRole('link').textContent).toEqual('Learn more');
+    const el = baseElement.querySelector('goa-hero-banner goa-button');
+    expect(el.textContent).toBe("Submit");
   });
 
 });
