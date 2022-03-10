@@ -26,7 +26,7 @@
 <!-- HTML -->
 <div class="notification" data-testid="{testid}">
   <span class="icon {type}">
-    <goa-icon type={iconType} inverted />
+    <goa-icon type={iconType} inverted={type === "important" ? "false" : "true"} />
   </span>
   <span class="content">
     <h3>{title}</h3>
@@ -56,22 +56,18 @@
 
   .emergency {
     background-color: var(--goa-color-status-emergency);
-    color: var(--color-white);
   }
   .important {
     background-color: var(--goa-color-status-warning);
   }
   .information {
     background-color: var(--goa-color-status-info);
-    color: var(--color-white);
   }
   .event {
     background-color: var(--goa-color-status-info);
-    color: var(--color-white);
   }
   .success {
     background-color: var(--goa-color-status-success);
-    color: var(--color-white);
   }
 
   .icon {
