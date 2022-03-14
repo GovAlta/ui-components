@@ -1,0 +1,189 @@
+import { Meta } from '@storybook/addon-docs';
+import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
+import { GoATextArea } from '@abgov/react-components'
+
+<Meta title="Components/TextArea" />
+
+### Component
+# TextArea
+
+[Figma design documentation](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/Components---DIO-DS?node-id=458%3A16042)
+
+export const noop = () => { /* noop */ }
+
+## Basic
+
+<Story name="Basic">
+  <GoATextArea name="comment" onChange={(name, value) => { console.log('changed', name, value) }} value="Initial value"  />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-textarea id="comment" name="comment" value="Initial value" />
+    `}/>
+    <CodeSnippet lang="js" code={`
+      var textarea = document.getElementById('comment');
+      textarea.addEventListener('_change', function(e) {
+        console.log('changed', e.detail.name, e.detail.value);
+      });
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-textarea name="comment" (_change)="onChange()" value="Initial value" />
+    `}/>
+    <CodeSnippet lang="ts" code={`
+      export class SomeComponent {
+        onChange(e) {
+          console.log('changed', e.detail.name, e.detail.value);
+        }
+      }
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      export function MyPage() {
+        const [value, setValue] = useState<string>('Initial value');
+        return (
+          <GoATextArea
+            value={value}
+            name="comment"
+            onChange={(name, value) => {
+              setValue(value);
+              console.log('changed', name, value);
+            }}
+          />
+        )
+      }
+    `}/>
+  </Tab>
+</Tabs>
+
+## Disabled
+
+<Story name="Disabled">"
+  <GoATextArea name="comment" disabled={true} onChange={noop}  />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-textarea name="comment" disabled />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-textarea name="comment" disabled />
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoATextArea name="comment" disabled={true} />
+    `}/>
+  </Tab>
+</Tabs>
+
+## Placeholder
+
+<Story name="Placeholder">
+  <GoATextArea name="comment" placeholder="Tell us what you think.." onChange={noop} />
+</Story>
+
+<Note type="caution">
+  Use labels and helper text to communicate how a field should be filled out.
+</Note>
+
+<Note type="best-practices">
+  Placeholders should only be used to show an example of the type of data that should be entered into a form; they don't replace a proper label.
+</Note>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-textarea placeholder="Tell us what you think.." name="comment" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-textarea placeholder="Tell us what you think.." name="comment" />
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoATextArea placeholder="Tell us what you think.." name="comment" onChange={noop}  />
+    `}/>
+  </Tab>
+</Tabs>
+
+## Rows
+
+<Story name="Rows">
+  <GoATextArea name="comment" rows={4} onChange={noop} />
+</Story>
+
+<Note type="best-practices">
+  <ul>
+    <li>
+      Make empty TextAreas as tall as the content they are expected to contain.
+    </li>
+    <li>
+      Don't use a TextArea which is only one line high.
+    </li>
+  </ul>
+</Note>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-textarea rows="4" name="comment" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-textarea rows="4" name="comment" />
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoATextArea rows={4} name="comment" onChange={noop}  />
+    `}/>
+  </Tab>
+</Tabs>
+
+
+## Error state
+
+<GoATextArea name="comment" error={true} onChange={noop}  />
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-textarea error name="comment" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-textarea error name="comment" />
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoATextArea error={true} name="comment" />
+    `}/>
+  </Tab>
+</Tabs>
+
+---
+
+## Support
+
+<goa-callout type="information" title="Need help? Connect with us on Slack">
+  <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9">#design-system-support</a> General information and discussion related to design system including questions, new component proposals, contribution, and other requests.
+</goa-callout>
+
+### Help improve this page
+
+To help make sure that this page is useful, relevant, and up to date, you can:
+
+[Create an issue for a proposed update or contribution](https://github.com/GovAlta/ui-components/issues/new/choose)
