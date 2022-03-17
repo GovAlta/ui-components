@@ -106,8 +106,7 @@ h1 {
 h2 {
   font-size: var(--fs-2xl);
   line-height: var(--lh-xl);
-  font-weight: var(--fw-regular)!important;
-  border-bottom: none!important;
+  font-weight: var(--fw-regular);
 }
 h3 {
   font-size: var(--fs-xl);
@@ -124,7 +123,7 @@ h6 {
 }
 
 h3 + h1 {
-  margin-top: -1rem!important;
+  margin-top: -1rem;
 }
 
 p {

@@ -36,29 +36,20 @@ export const noop = () => {};
 
 ### Basic
 
-export const InputTemplate = () => <GoAInputText name="firstname" onChange={noop} />
+export const InputTemplate = () => {
+  const [value, setValue] = useState('');
+  return (
+    <>
+      <GoAInputText
+        name="firstname"
+        value={value}
+        onChange={(name, value) => { setValue(value); console.log(name, value) }}
+      />
+    </>
+  );
+};
 
 <Story name="Basic">{ InputTemplate.bind({}) }</Story>
-
-<Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet code={`<goa-input name="firstname" />`} lang="html" />
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet code={`<goa-input name="firstname" />`} lang="html" />
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet code={`<GoAInputText name="firstname" />`} lang="jsx" />
-  </Tab>
-</Tabs>
-
-### Events
-
-export const OnChangeInputTemplate = () => <>
-  <GoAInputText name="foo" onChange={(name, value) => console.log(name, value)} />
-</>
-
-<Story name="OnChange">{ OnChangeInputTemplate.bind({}) }</Story>
 
 <Tabs>
   <Tab label="Web Component">
@@ -85,8 +76,20 @@ export const OnChangeInputTemplate = () => <>
   </Tab>
   <Tab label="React">
     <CodeSnippet lang="jsx" code={`
-      <GoAInputText name="foo" onChange={(name, value) => console.log(name, value)} />`
-    }/>
+      const [value, setValue] = useState('');
+      return (
+        <>
+          <GoAInputText
+            name="firstname"
+            value={value}
+            onChange={(name, value) => {
+              setValue(value);
+              console.log(name, value);
+            }}
+          />
+        </>
+      );
+    `}/>
   </Tab>
 </Tabs>
 

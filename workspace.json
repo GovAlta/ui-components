@@ -480,6 +480,11 @@
                 "glob": "libs/styles/README.md",
                 "input": ".",
                 "output": "."
+              },
+              {
+                "glob": "libs/styles/src/lib/*.css",
+                "input": ".",
+                "output": "./lib"
               }
             ]
           }

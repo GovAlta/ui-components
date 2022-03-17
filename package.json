@@ -15,7 +15,7 @@
     "build:angular-components": "npm run build angular-components --withDeps --configuration production && npm run post angular-components --withDeps",
     "build:react-components": "npm run build react-components --withDeps --configuration production",
     "build:vue-components": "npm run build vue-components --withDeps --configuration production",
-    "build:styles": "npm run build styles --withDeps --configuration production && npm run post styles --withDeps",
+    "build:styles": "npm run build styles --withDeps --configuration production",
     "build:angular-storybook": "npm run docs:json:angular-components && nx run angular-components:build-storybook",
     "build:docs-storybook": "nx run docs:build-storybook",
     "build:vue-storybook": "nx run vue-components:build-storybook",
