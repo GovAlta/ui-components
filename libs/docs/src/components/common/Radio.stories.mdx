@@ -1,0 +1,166 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { Tabs, Tab, Note, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import { GoARadioGroup, GoARadioItem } from '@abgov/react-components';
+
+<Meta title="Components/Radio Buttons" />
+
+# Radio Buttons
+
+### Radio buttons are contained in a fieldset for accessibility and categorization purposes. The option group (radio button and label) can be selected by the user with an input device. The option is meant to be submitted as data and is part of a form. The input data, while can be selected, will not be recorded until the user presses a submission button.
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/DIO-DS---Components?node-id=102%3A26)
+
+export const BasicTemplate = () => {
+  function onChange(name, value) {
+    console.log('onChange', name, value);
+  }
+  return (
+    <GoARadioGroup name="basic" value="orange" onChange={onChange}>
+      <GoARadioItem name="basic" label="Red" value="red" />
+      <GoARadioItem name="basic" label="Blue" value="blue" />
+      <GoARadioItem name="basic" label="Orange" value="orange"/>
+    </GoARadioGroup>
+  )
+}
+
+#### Basic
+
+<Story name="Basic">{BasicTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-radio-group id="my-color" name="color" value="orange">
+        <goa-radio-item value="red" />
+        <goa-radio-item value="blue" />
+        <goa-radio-item value="orange" />
+      </goa-radio-group>
+    `}/>
+    <CodeSnippet lang="js" code={`
+      const el = document.findById("my-color");
+      el.addEventListener("_change", (e) => {
+        console.log(e.detail.name, e.detail.value);
+      });
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-radio-group name="color" value="orange" _change="onChange()">
+        <goa-radio-item value="red" />
+        <goa-radio-item value="blue" />
+        <goa-radio-item value="orange" />
+      </goa-radio-group>
+    `}/>
+    <CodeSnippet lang="ts" code={`
+      export class MyComponent {
+        onChange(e) {
+          console.log('onChange', e.detail.name, e.detail.value);
+        }
+      }
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      export const MyComponent = () {
+        function onChange(name: string, value: string) {
+          console.log('onChange', name, value);
+        }
+        return (
+          <GoARadioGroup name="color" value="orange" onChange={onChange}>
+            <GoARadioItem name="color" label="Red" value="red" />
+            <GoARadioItem name="color" label="Blue" value="blue" />
+            <GoARadioItem name="color" label="Orange" value="orange"/>
+          </GoARadioGroup>
+        )
+      }
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Disabled
+
+<Story name="Disabled">
+  <GoARadioGroup name="disabled" value="orange" disabled={true}>
+    <GoARadioItem name="disabled" label="Red" value="red" />
+    <GoARadioItem name="disabled" label="Blue" value="blue" />
+    <GoARadioItem name="disabled" label="Orange" value="orange"/>
+  </GoARadioGroup>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-radio-group name="color" value="orange" disabled>
+        <goa-radio-item value="red" />
+        <goa-radio-item value="blue" />
+        <goa-radio-item value="orange" />
+      </goa-radio-group>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-radio-group name="color" value="orange" disabled">
+        <goa-radio-item value="red" />
+        <goa-radio-item value="blue" />
+        <goa-radio-item value="orange" />
+      </goa-radio-group>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoARadioGroup name="color" value="orange" onChange={noop} disabled={true}>
+        <GoARadioItem name="color" label="Red" value="red" />
+        <GoARadioItem name="color" label="Blue" value="blue" />
+        <GoARadioItem name="color" label="Orange" value="orange"/>
+      </GoARadioGroup>
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Orientation
+
+<Story name="Orientation">
+  <GoARadioGroup name="orientation" value="orange" orientation="horizontal">
+    <GoARadioItem name="orientation" label="Red" value="red" />
+    <GoARadioItem name="orientation" label="Blue" value="blue" />
+    <GoARadioItem name="orientation" label="Orange" value="orange"/>
+  </GoARadioGroup>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-radio-group name="color" value="orange" orientation="horizontal">
+        <goa-radio-item value="red" />
+        <goa-radio-item value="blue" />
+        <goa-radio-item value="orange" />
+      </goa-radio-group>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-radio-group name="color" value="orange" orientation="horizontal">
+        <goa-radio-item value="red" />
+        <goa-radio-item value="blue" />
+        <goa-radio-item value="orange" />
+      </goa-radio-group>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoARadioGroup name="color" value="orange" onChange={noop} orientation="horizontal">
+        <GoARadioItem name="color" label="Red" value="red" />
+        <GoARadioItem name="color" label="Blue" value="blue" />
+        <GoARadioItem name="color" label="Orange" value="orange"/>
+      </GoARadioGroup>
+    `}/>
+  </Tab>
+</Tabs>
+
+<Note type="best-practices">
+  Prefer the default orientation; only use <code>orientation="horizontal"</code> when absolutely necessary.
+</Note>
+
+---
+
+<SupportInfo />

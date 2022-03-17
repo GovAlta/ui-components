@@ -10,6 +10,7 @@
   export let orientation = 'vertical';
   export let disabled: string;
   export let error: string;
+  export let testid: string;
 
   // private
   let isError: boolean
@@ -67,7 +68,11 @@
 
 <!-- Html -->
 <div>
-  <div bind:this={el} class={`goa-radio-group--${orientation}`}>
+  <div
+    bind:this={el}
+    class={`goa-radio-group--${orientation}`}
+    data-testid={testid}
+  >
     <slot />
   </div>
 </div>

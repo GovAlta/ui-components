@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { render, screen, fireEvent, waitFor, logDOM } from '@testing-library/react';
 
-import { GoARadioGroup, GoARadio } from './radio-group';
+import { GoARadioGroup, GoARadioItem } from './radio-group';
 
 describe('RadioGroup', () => {
   const baseMockData = {
@@ -32,9 +32,9 @@ describe('RadioGroup', () => {
         onChange={(name, newValue) => onChange && onChange(name, newValue)}
       >
         {data.radios.map((radio) => (
-          <GoARadio key={radio.value} label={radio.text} name="fruits" checked={data.value === radio.value} value={radio.value}>
+          <GoARadioItem key={radio.value} label={radio.text} name="fruits" checked={data.value === radio.value} value={radio.value}>
             {radio.text}
-          </GoARadio>
+          </GoARadioItem>
         ))}
       </GoARadioGroup>
     )
@@ -70,20 +70,35 @@ describe('RadioGroup', () => {
   });
 
   describe('Selection Change Tests', () => {
-    it('change event should work', async () => {
-      let newValue
-      render(Template({ ...baseMockData, value: 'oranges' }, (name, _newValue) => {
-        newValue = _newValue;
-      }));
+    it('event should not fire when disabled', async () => {
+        const onChange = jest.fn();
+        render(Template({ ...baseMockData, value: 'oranges', disabled: true }, onChange));
 
-      // const radios = screen.getAllByRole('radio');
-      waitFor(() => {
-        const radios = document.querySelectorAll<HTMLInputElement>(
-          'input[type=radio]'
-        );
-        fireEvent.click(radios[0]);
-        expect(newValue).toBe('apples');
-      })
+        // const radios = screen.getAllByRole('radio');
+        waitFor(() => {
+          const radios = document.querySelectorAll<HTMLInputElement>(
+            'input[type=radio]'
+          );
+          fireEvent.click(radios[0]);
+          expect(onChange).not.toBeCalled();
+        })
+      });
     });
+
+  it('change event should work', async () => {
+    let newValue
+    render(Template({ ...baseMockData, value: 'oranges' }, (_name, _newValue) => {
+      newValue = _newValue;
+    }));
+
+    // const radios = screen.getAllByRole('radio');
+    waitFor(() => {
+      const radios = document.querySelectorAll<HTMLInputElement>(
+        'input[type=radio]'
+      );
+      fireEvent.click(radios[0]);
+      expect(newValue).toBe('apples');
+    })
   });
+
 });

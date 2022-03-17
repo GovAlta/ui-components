@@ -28,7 +28,7 @@ interface Props {
   testId?: string;
 }
 
-export const GoARadio: FC<Props> = ({ name, label, value, disabled, checked, error, testId, children }) => {
+export const GoARadioItem: FC<Props> = ({ name, label, value, disabled, checked, error, testId, children }) => {
   return (
     <goa-radio-item
       name={name}
@@ -44,4 +44,4 @@ export const GoARadio: FC<Props> = ({ name, label, value, disabled, checked, err
   );
 };
 
-export default GoARadio;
+export default GoARadioItem;
