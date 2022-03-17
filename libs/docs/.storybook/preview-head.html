@@ -109,21 +109,25 @@
   }
 
   hr {
-    border-width: 0;
-    border-top: 1px solid #ccc;
-    height: 0;
-    padding: 0;
-    margin: 3rem 0;
+    border-width: 0!important;
+    border-top: 1px solid #ccc!important;
+    height: 0!important;
+    padding: 0!important;
+    margin: 3rem 0!important;
   }
 
   /* Typography */
-  h1:first-of-type,
-  h2:first-of-type,
-  h3:first-of-type,
-  h4:first-of-type,
-  h5:first-of-type,
-  h6:first-of-type {
+  h1:first-child,
+  h2:first-child,
+  h3:first-child,
+  h4:first-child,
+  h5:first-child,
+  h6:first-child {
     margin-top: 0!important;
+  }
+
+  h2[class^="css-"]:first-of-type {
+    margin-top: 1rem!important;
   }
 
   h1 {
