@@ -1,7 +1,6 @@
 <svelte:options tag="goa-dropdown-item" />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
   import { messageChannel } from "../../common/dropdown-store";
   import { fromBoolean, toBoolean } from "../../common/utils";
 
@@ -12,9 +11,9 @@
 
   // optional
   export let testId: string = "";
-  export let selected: string = "";
-  export let disabled: string = "";
-  export let hide: string = "";
+  export let selected: string = "false";
+  export let disabled: string = "false";
+  export let hide: string = "false";
 
   $: isSelected = toBoolean(selected);
   $: isDisabled = toBoolean(disabled);
@@ -23,10 +22,6 @@
   // private
   let multiSelect: boolean;
   let filteredLabel: string;
-
-  onMount(async () => {
-    await tick();
-  });
 
   function getFilteredLabel(filter: string) {
     if (filter.length === 0) {
