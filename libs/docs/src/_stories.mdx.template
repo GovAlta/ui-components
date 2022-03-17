@@ -1,39 +1,37 @@
-import { Meta } from '@storybook/addon-docs';
-import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
+import { Meta, Story } from '@storybook/addon-docs';
+import { Tabs, Tab, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import { GoABadge } from '@abgov/react-components';
 
-<Meta title="[Folder Name]/[Document Title]" />
+<Meta title="Components/[Document Title]" />
 
-### Component
 # [Title]
+
+[Figma design component](https://www.figma.com/file/???)
+
+#### Basic
+
+<Story name="Basic">
+  <GoABadge type="warning" content="Warning" icon={true} />
+</Story>
 
 <Tabs>
   <Tab label="Web Component">
-    <goa-badge type="warning" content="Warning" icon />
-
     <CodeSnippet lang="html" code={`
       <goa-badge type="warning" content="Warning" icon />
     `}/>
   </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-badge type="warning" content="Warning" icon />
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoABadge type="warning" content="Warning" icon />
+    `}/>
+  </Tab>
 </Tabs>
-
-<Note type="best-practices">
-  [Best practice note]
-</Note>
-
-<Note type="caution">
-  [Important note]
-</Note>
 
 ---
 
-## Support
-
-<goa-callout type="information" title="Need help? Connect with us on Slack">
-  <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9">#design-system-support</a> General information and discussion related to design system including questions, new component proposals, contribution, and other requests.
-</goa-callout>
-
-### Help improve this page
-
-To help make sure that this page is useful, relevant, and up to date, you can:
-
-[Create an issue for a proposed update or contribution](https://github.com/GovAlta/ui-components/issues/new/choose)
+<SupportInfo />
