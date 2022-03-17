@@ -5,7 +5,8 @@ interface WCProps {
   name: string;
   value: string;
   placeholder?: string;
-  rows: number;
+  rows?: number;
+  error: boolean;
   disabled: boolean;
 }
 
@@ -23,12 +24,14 @@ interface Props {
   value: string;
   id?: string;
   placeholder?: string;
-  rows: number;
+  rows?: number;
+  error: boolean;
   disabled: boolean;
+  testId: string;
   onChange: (name: string, value: string) => void;
 };
 
-export const GoATextArea: FC<Props> = ({ name, value, placeholder, rows, disabled, onChange }) => {
+export const GoATextArea: FC<Props> = ({ name, value, placeholder, rows, disabled, testId, error, onChange }) => {
   const el = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -37,7 +40,7 @@ export const GoATextArea: FC<Props> = ({ name, value, placeholder, rows, disable
     }
     const current = el.current;
     const listener: EventListener = (e: any) => {
-      const { name, value } = e.detail.data;
+      const { name, value } = e.detail;
       onChange(name, value);
     };
 
@@ -55,6 +58,8 @@ export const GoATextArea: FC<Props> = ({ name, value, placeholder, rows, disable
       value={value}
       rows={rows}
       disabled={disabled}
+      error={error}
+      data-testid={testId}
     >
     </goa-textarea>
   );

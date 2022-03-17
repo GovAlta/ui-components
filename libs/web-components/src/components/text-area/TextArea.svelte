@@ -4,25 +4,33 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
 
+  export let id: string = "";
   export let name: string;
-  export let value: string;
-  export let placeholder: string;
-  export let rows: number;
+  export let value: string = "";
+  export let placeholder: string = "";
+  export let rows: number = 3;
+  export let testid: string = "";
 
-  export let disabled: string;
+  export let error: string = "false";
+  export let readonly: string = "false";
+  export let disabled: string = "false";
 
+  $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
+  $: isReadonly = toBoolean(readonly);
 
   function onChange(e: Event) {
-    const target = e.target as HTMLInputElement;
+    const target = e.target as HTMLTextAreaElement;
     const value = target.value;
+
+    if (isDisabled) return;
 
     e.target.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
         bubbles: false,
         cancelable: true,
-        detail: { event: e, data: { name, value } },
+        detail: { event: e, name, value },
       }),
     );
     e.stopPropagation();
@@ -31,12 +39,16 @@
 
 <!-- HTML -->
 <textarea
+  id={id || name}
   {name}
-  class="goa-textarea"
   {placeholder}
-  value={value || ""}
-  rows={rows || 3}
+  {value}
+  {rows}
+  class="goa-textarea"
+  class:error={isError}
   disabled={isDisabled}
+  readonly={isReadonly}
+  data-testid={testid}
   on:keyup={onChange}
 />
 
@@ -84,5 +96,11 @@
   .goa-textarea:disabled:focus,
   .goa-textarea:disabled:active {
     box-shadow: none;
+  }
+
+  .error:hover,
+  .error:focus,
+  .error {
+    border: 2px solid var(--goa-color-status-emergency-dark);
   }
 </style>
