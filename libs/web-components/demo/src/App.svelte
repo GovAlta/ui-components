@@ -337,7 +337,7 @@
     <script>
       var dropdown = document.getElementById("dropdown");
       dropdown.addEventListener("_change", (e) => {
-        console.log(e.detail.data);
+        console.log(e.detail);
       });
     </script>
 
