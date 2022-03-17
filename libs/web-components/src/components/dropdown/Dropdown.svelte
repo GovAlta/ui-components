@@ -69,7 +69,7 @@
         el.dispatchEvent(
           new CustomEvent('_change', {
             composed: true,
-            detail: { event: null, data: { name, value: selectedValues } },
+            detail: { event: null, name, value: selectedValues },
           })
         );
         break;
@@ -109,7 +109,7 @@
 
   let filterOnChangeListener = (e) => {
     e.stopPropagation();
-    filter = e.detail.data.value;
+    filter = e.detail.value;
     messageChannel.update((old) => ({
       ...old,
       [name]: {
@@ -175,7 +175,7 @@
   <div>
     <!-- readonly input  -->
     {#if !isMenuVisible || !isAutoComplete}
-      <div  data-testid={`${name}-dropdown`}>
+      <div data-testid={`${name}-dropdown`}>
         <goa-input
           on:focus={showMenu}
           disabled={isDisabled}
