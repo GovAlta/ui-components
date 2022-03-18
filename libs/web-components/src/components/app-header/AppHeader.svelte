@@ -45,7 +45,6 @@
     justify-content: space-between;
     margin: 0 auto;
     padding: 1rem 0;
-    max-width: 1028px;
     border-bottom: 1px solid var(--color-gray-100);
   }
 
