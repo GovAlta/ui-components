@@ -16,14 +16,8 @@
     font-family: var(--font-family);
   }
   .page-content {
-    max-width: 100%;
+    max-width: var(--page-width-max);
     margin: 0 auto;
     padding: 0 1.75rem;
-  }
-
-  @media (min-width: 1200px) {
-    .page-content {
-      max-width: 1440px;
-    }
   }
 </style>
