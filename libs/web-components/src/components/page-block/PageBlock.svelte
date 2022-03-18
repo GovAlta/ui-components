@@ -21,15 +21,9 @@
     padding: 0 1.75rem;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1200px) {
     .page-content {
-      max-width: 80vh;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .page-content {
-      max-width: 100ch;
+      max-width: 1440px;
     }
   }
 </style>
