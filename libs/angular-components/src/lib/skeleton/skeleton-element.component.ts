@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'goa-skeleton-element',
@@ -14,10 +14,9 @@ export class GoASkeletonElementComponent {
     | 'thumbnail'
     | 'card' = 'text';
 
-  constructor() {}
+  @Input()
+  style?: string;
 
-  get elementClass(): string {
-    return `skeleton ${this.type}`;
-  }
-
+  @Input()
+  class?: string;
 }

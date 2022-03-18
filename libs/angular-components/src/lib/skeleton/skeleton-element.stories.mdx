@@ -124,6 +124,32 @@ A skeleton load element provides visual feedback to users while a content heavy 
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story
+    name="Skeleton Element Customizations"
+    height={300}
+    args={{
+      type:'text',
+      style:'height:60px;border-radius:20px;',
+      class:'some-other-class'
+    }}
+    argTypes={{
+      type:{
+        name:"Type",
+        options:['text', 'avatar', 'title', 'paragraph', 'thumbnail', 'card'],
+        control:{type:"select"}
+      }
+    }}
+  >
+    {(args) => {
+      return {
+        template: `<goa-skeleton-element [type]="type" [style]="style" [class]="class"></goa-skeleton-element>`,
+        props: args,
+      };
+    }}
+  </Story>
+</Canvas>
+
 ```html
 <goa-skeleton-image-content [rows]="5"></goa-skeleton-image-content>
 
@@ -132,6 +158,8 @@ A skeleton load element provides visual feedback to users while a content heavy 
 <goa-skeleton-card [showImage]="true" />
 
 <goa-skeleton-grid-column [rows]="5"></goa-skeleton-grid-column>
+
+<goa-skeleton-element [type]="paragraph" style="height:50px" class="some-other-class"></goa-skeleton-grid-column>
 ```
 
 ## Usage guidelines
