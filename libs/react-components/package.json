@@ -17,7 +17,7 @@
     "directory": "libs/react-components"
   },
   "dependencies": {
-    "@abgov/web-components": "^1.0.0@alpha"
+    "@abgov/web-components": "^1.0.0-alpha.23"
   },
   "peerDependencies": {
     "react": "^17.0.2",
