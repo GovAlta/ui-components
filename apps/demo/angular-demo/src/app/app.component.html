@@ -1,11 +1,17 @@
-<h1>Angular Demo App</h1>
+<goa-service-level-header level="alpha" version="UAT"></goa-service-level-header>
 
-<goa-input name="some-field" type="text" (_change)="onInputChangeEvent($event)"></goa-input>
+<goa-app-header url="http://google.com" title="Digital File Service">
+  <a href="#">Sign in</a>
+</goa-app-header>
 
-<goa-button type="primary" (_click)="handleClick()">Button</goa-button>
+<goa-page-block>
+  <form>
+    <goa-form-item name="firstname" label="First Name">
+      <goa-input id="firstname" name="firstname" (_change)="onInputChangeEvent($event)" type="text"></goa-input>
+    </goa-form-item>
 
-<goa-badge content="Dark" type="dark"></goa-badge>
-
-<goa-notification type="information">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi saepe, maiores, praesentium minus quod reprehenderit consequuntur earum molestias aliquid amet, vitae eveniet harum incidunt sint. Numquam debitis molestias officia corporis.
-</goa-notification>
+    <goa-button-group alignment="start">
+      <goa-button type="primary" (_click)="submitForm()">Submit</goa-button>
+    </goa-button-group>
+  </form>
+</goa-page-block>

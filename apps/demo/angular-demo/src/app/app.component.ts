@@ -9,7 +9,7 @@ export class AppComponent {
   onInputChangeEvent(event: any) {
     console.log('onEvent', event.detail);
   }
-  handleClick() {
+  submitForm() {
     console.log('handleClick');
   }
 }
