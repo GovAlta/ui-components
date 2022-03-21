@@ -8,6 +8,12 @@ import { Meta } from '@storybook/addon-docs';
 
 This is the *web component* library and utilizes Angular's web component integration.
 
+
+Install Angular CLI
+```bash
+npm install -g @angular/cli
+```
+
 Create angular app
 ```bash
 ng new my-app
@@ -16,8 +22,8 @@ ng new my-app
 Add Dependencies
 ```bash
 npm i
-npm i @abgov/web-components
-npm i @abgov/styles
+npm i @abgov/web-components@alpha
+npm i @abgov/styles@alpha
 ```
 
 Link ionicons in app/index.html
@@ -42,13 +48,11 @@ Link ionicons in app/index.html
 </html>
 ```
 
-Update `app.module.ts` as per the three steps below
+Update `src/app/app.module.ts` as per the three steps below
 ```typescript
 
 // 1. Import the CUSTOM_ELEMENTS_SCHEMA
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 // 2. Import the web-components lib
 import '@abgov/web-components';
@@ -73,4 +77,10 @@ export class AppModule { }
 Add the styles link in the `src/styles.css` file
 ```css
 @import '@abgov/styles/styles.esm.css';
+```
+
+Build and serve my-app locally
+```bash
+cd my-app
+ng serve --open
 ```
