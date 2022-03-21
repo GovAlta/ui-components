@@ -1,1 +1,1 @@
-export * as GoAFlexRow from './row';
+export { GoAFlexRow } from './row';

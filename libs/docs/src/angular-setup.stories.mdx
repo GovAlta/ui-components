@@ -74,6 +74,47 @@ import '@abgov/web-components';
 export class AppModule { }
 ```
 
+Change the `src/app/app.component.html` to include the following:
+
+```html
+<goa-service-level-header level="alpha" version="UAT"></goa-service-level-header>
+
+<goa-app-header url="http://google.com" title="Digital File Service">
+  <a href="#">Sign in</a>
+</goa-app-header>
+
+<goa-page-block>
+  <form>
+    <goa-form-item name="firstname" label="First Name">
+      <goa-input id="firstname" name="firstname" (_change)="onInputChangeEvent($event)" type="text"></goa-input>
+    </goa-form-item>
+
+    <goa-button-group alignment="start">
+      <goa-button type="primary" (_click)="submitForm()">Submit</goa-button>
+    </goa-button-group>
+  </form>
+</goa-page-block>
+```
+
+Update the `src/app/app.component.ts` to include the following:
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'ngd-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  onInputChangeEvent(event: any) {
+    console.log('onEvent', event.detail);
+  }
+  submitForm() {
+    console.log('handleClick');
+  }
+}
+```
+
 Add the styles link in the `src/styles.css` file
 ```css
 @import '@abgov/styles/styles.esm.css';

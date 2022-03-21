@@ -20,6 +20,7 @@ import { GoAIcon, GoAIconButton } from './lib/icons';
 import { GoAInput, GoAInputText, GoAInputPassword, GoAInputDate, GoAInputTime, GoAInputDateTime, GoAInputEmail, GoAInputSearch, GoAInputUrl, GoAInputTel, GoAInputFile, GoAInputMonth, GoAInputNumber, GoAInputRange } from './lib/input/input';
 import { GoAModal } from './lib/modal/modal';
 import { GoANotification } from './lib/notification/notification';
+import { GoAPageBlock } from './lib/page-block/page-block';
 import { GoAPageLoader } from './lib/page-loader/page-loader';
 import { GoARadioGroup, GoARadio } from './lib/radio-group/radio-group';
 import { GoAServiceLevelHeader } from './lib/service-level-header/service-level-header';
@@ -67,6 +68,7 @@ export {
   GoAInputUrl,
   GoAModal,
   GoANotification,
+  GoAPageBlock,
   GoAPageLoader,
   GoARadio,
   GoARadioGroup,

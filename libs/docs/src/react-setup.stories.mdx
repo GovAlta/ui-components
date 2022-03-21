@@ -13,6 +13,11 @@ Create react app
 npm init vite@latest
 ```
 
+```bash
+cd [your project name]
+npm i
+```
+
 Add Dependencies
 ```bash
 npm i @abgov/react-components@alpha
@@ -43,19 +48,44 @@ Link ionicons in app/index.html
 
 ```typescript
 // App.tsx
-import './App.css'
+import { GoAAppHeader, GoAButton, GoAButtonGroup, GoAFormItem, GoAInput, GoAPageBlock, GoAServiceLevelHeader } from "@abgov/react-components";
+import { useState } from "react";
 
-import { GoABadge } from '@abgov/react-components';
+import styles from './App.css'
 
-function App() {
+export function App() {
+
+  const [firstName, setFirstName] = useState<string>('');
+
+  function submitForm(e: any) {
+    console.log('submitForm', firstName);
+    e.preventDefault();
+  }
+
   return (
-    <GoABadge type="information" content="Some info" />
-  )
+    <>
+      <GoAServiceLevelHeader level="alpha" version="UAT" />
+
+      <GoAAppHeader url="http://google.com" title="Digital File Service">
+        <a href="#">Sign in</a>
+      </GoAAppHeader>
+
+      <GoAPageBlock>
+        <form>
+          <GoAFormItem name="firstname" label="First Name">
+            <GoAInput id="firstname" name="firstname" type="text" value={firstName} onChange={(_name, value) => setFirstName(value) } />
+          </GoAFormItem>
+
+          <GoAButtonGroup alignment="start">
+            <GoAButton type="primary" onClick={submitForm}>Submit</GoAButton>
+          </GoAButtonGroup>
+        </form>
+      </GoAPageBlock>
+    </>
+  );
 }
 
-export default App
-
-
+export default App;
 ```
 
 Import the styles in the `src/index.css` file

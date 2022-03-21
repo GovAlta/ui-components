@@ -19,9 +19,9 @@ declare global {
 
 interface Props {
   headingSize: HeadingSize;
-  variant: ContainerVariant;
-  title: ReactNode;
-  actions: ReactNode;
+  variant?: ContainerVariant;
+  title?: ReactNode;
+  actions?: ReactNode;
   children: ReactNode;
 }
 
