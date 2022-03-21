@@ -1,17 +1,34 @@
-import { GoABadge, GoAButton, GoAInput, GoANotification } from "@abgov/react-components";
+import { GoAAppHeader, GoAButton, GoAButtonGroup, GoAFormItem, GoAInput, GoAPageBlock, GoAServiceLevelHeader } from "@abgov/react-components";
+import { useState } from "react";
 export function App() {
+
+  const [firstName, setFirstName] = useState<string>('');
+
+  function submitForm(e: any) {
+    console.log('submitForm', firstName);
+    e.preventDefault();
+  }
+
   return (
-    <main>
-      <h1>React Demo App</h1>
-      <GoAInput type="text" name="some-name" value="Hello" onChange={() => null}></GoAInput>
-      <GoAButton onClick={() => console.log('you clicked')} type="primary">Button</GoAButton>
+    <>
+      <GoAServiceLevelHeader level="alpha" version="UAT" />
 
-      <GoABadge content="Dark" type="dark"></GoABadge>
+      <GoAAppHeader url="http://google.com" title="Digital File Service">
+        <a href="#">Sign in</a>
+      </GoAAppHeader>
 
-      <GoANotification type="information">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi saepe, maiores, praesentium minus quod reprehenderit consequuntur earum molestias aliquid amet, vitae eveniet harum incidunt sint. Numquam debitis molestias officia corporis.
-      </GoANotification>
-    </main>
+      <GoAPageBlock>
+        <form>
+          <GoAFormItem name="firstname" label="First Name">
+            <GoAInput id="firstname" name="firstname" type="text" value={firstName} onChange={(_name, value) => setFirstName(value) } />
+          </GoAFormItem>
+
+          <GoAButtonGroup alignment="start">
+            <GoAButton type="primary" onClick={submitForm}>Submit</GoAButton>
+          </GoAButtonGroup>
+        </form>
+      </GoAPageBlock>
+    </>
   );
 }
 
