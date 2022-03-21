@@ -2,10 +2,11 @@ import { Meta } from '@storybook/addon-docs';
 import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
 import { GoATextArea } from '@abgov/react-components'
 
-<Meta title="Components/TextArea" />
+<Meta title="Components/Text area" />
 
-### Component
-# TextArea
+# Text area
+
+### Text inputs let users enter and input text. Text areas can be used when trying to collect more information than may fit in a traditional form field.
 
 [Figma design documentation](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/Components---DIO-DS?node-id=458%3A16042)
 
@@ -60,9 +61,9 @@ export const noop = () => { /* noop */ }
   </Tab>
 </Tabs>
 
-## Disabled
+#### Disabled
 
-<Story name="Disabled">"
+<Story name="Disabled">
   <GoATextArea name="comment" disabled={true} onChange={noop}  />
 </Story>
 
@@ -84,7 +85,7 @@ export const noop = () => { /* noop */ }
   </Tab>
 </Tabs>
 
-## Placeholder
+#### Placeholder
 
 <Story name="Placeholder">
   <GoATextArea name="comment" placeholder="Tell us what you think.." onChange={noop} />
@@ -116,7 +117,7 @@ export const noop = () => { /* noop */ }
   </Tab>
 </Tabs>
 
-## Rows
+#### Rows
 
 <Story name="Rows">
   <GoATextArea name="comment" rows={4} onChange={noop} />
@@ -125,10 +126,10 @@ export const noop = () => { /* noop */ }
 <Note type="best-practices">
   <ul>
     <li>
-      Make empty TextAreas as tall as the content they are expected to contain.
+      Make empty Text areas as tall as the content they are expected to contain.
     </li>
     <li>
-      Don't use a TextArea which is only one line high.
+      Don't use a Text area which is only one line high.
     </li>
   </ul>
 </Note>
@@ -152,7 +153,7 @@ export const noop = () => { /* noop */ }
 </Tabs>
 
 
-## Error state
+#### Error state
 
 <GoATextArea name="comment" error={true} onChange={noop}  />
 
