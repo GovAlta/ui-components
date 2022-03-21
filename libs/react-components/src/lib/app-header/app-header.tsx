@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 interface WCProps {
   title: string;
-  url: string;
+  url?: string;
 }
 
 declare global {
@@ -16,7 +16,7 @@ declare global {
 
 interface Props {
   title: string;
-  url: string;
+  url?: string;
 }
 
 export const GoAAppHeader: FC<Props> = ({ title, url, children }) => {
