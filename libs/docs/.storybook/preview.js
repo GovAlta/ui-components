@@ -6,7 +6,7 @@ export const parameters = {
   },
   options: {
     storySort: {
-      order: [/^Overview/, ['Docs', 'Development', 'Angular', 'React', 'Vue'], 'Components'],
+      order: [/^Overview/, ['Angular', 'React', 'Vue', 'Contributors'], 'Components'],
     },
   },
 };
