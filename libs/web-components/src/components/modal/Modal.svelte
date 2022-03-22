@@ -5,7 +5,6 @@
 <!-- ======================================================================= -->
 
 <script lang="ts">
-  console.log('here')
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";
@@ -14,6 +13,9 @@
   export let closable: string;
   export let scrollable: string;  // TODO: determine if this flag is needed or not, things seem to work well with it always 'on'
   export let open: string;
+
+  // Temp attribute while deciding on the best way to allow for width control
+  export let width: string;
 
   $: isClosable = toBoolean(closable);
   $: isScrollable = toBoolean(scrollable);
@@ -37,7 +39,13 @@
 <!-- ======================================================================= -->
 
 {#if isOpen}
-  <div use:noscroll={{enable: isOpen}} in:fade={{duration: 200}} out:fade={{delay: 200, duration: 200}} class="modal" style="--scroll-offset: {scrollOffset}px">
+  <div
+    use:noscroll={{enable: isOpen}}
+    in:fade={{duration: 200}}
+    out:fade={{delay: 200, duration: 200}}
+    class="modal"
+    style="--scroll-offset: {scrollOffset}px; {width && `--width: ${width};`};"
+  >
     <div class="modal-overlay" on:click={close}></div>
     <div in:fly={{duration: 200, y: 200}} out:fly={{delay: 200, duration: 200, y: -100}} class="modal-pane">
       {#if title}
@@ -105,25 +113,16 @@
     position: relative;
     background-color: #fff;
     z-index: 1001;
-    max-width: 60ch;
+    max-width: var(--width, 60ch);
 
     margin: 1rem;
     box-shadow: var(--shadow-2);
     border-radius: 4px;
-    width: 90%;
     max-height: 90%;
   }
 
   @media (min-width: 640px) {
     .modal-pane {
-      margin: 1rem;
-      max-height: 80%;
-      width: 600px;
-    }
-  }
-  @media (min-width: 1024px) {
-    .modal-pane {
-      width: 65ch;
       max-height: 80%;
     }
   }
