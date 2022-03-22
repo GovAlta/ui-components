@@ -1,5 +1,8 @@
 export { default as GoAPageBlock } from "./components/page-block/PageBlock.svelte";
 export { default as GoAAppHeader } from "./components/app-header/AppHeader.svelte";
+export { default as GoAAppFooter } from "./components/app-footer/AppFooter.svelte";
+export { default as GoAMetaLink } from "./components/app-footer/MetaLink.svelte";
+export { default as GoANavigationLink } from "./components/app-footer/NavigationLink.svelte";
 export { default as GoABadge } from "./components/badge/Badge.svelte";
 export { default as GoAButton } from "./components/button/Button.svelte";
 export { default as GoAButtonGroup } from "./components/button-group/ButtonGroup.svelte";

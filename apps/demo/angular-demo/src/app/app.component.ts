@@ -22,6 +22,13 @@ export class AppComponent {
   filterable = true;
   error = false;
 
+  metaLinks = '[ { url:"#", title: "meta abc xyz1" }, { url:"#", title: "meta abc xyz2" }, { url:"#", title: "meta  abc xyz3" }, { url:"#", title: "meta  abc xyz4" }]';
+  navigationSections = `[
+    { name: "Health Care", links: [{ url:"#", title: "navigation  abc xyz1" }, { url:"#", title: "navigation  abc xyz2" }]},
+    { name: "Young At Heart", links: [{url:"#", title: "navigation  abc xyz3" }, { url:"#", title: "navigation  abc xyz4" }, { url:"#", title: "navigation  abc xyz5" }, { url:"#", title: "navigation  abc xyz6" }, { url:"#", title: "navigation  abc xyz7" }]},
+    { name: "Transit tickets", links: [{ url:"#", title: "navigation  abc xyz8" }, { url:"#", title: "navigation  abc xyz9" }, { url:"#", title: "navigation  abc xyz10" }]}
+  ]`;
+
   onInputChangeEvent(event: any) {
     console.log('onEvent', event.detail);
   }
