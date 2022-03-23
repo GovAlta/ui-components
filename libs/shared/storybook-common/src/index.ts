@@ -5,3 +5,4 @@ export * from './lib/tabs/Tabs';
 export * from './lib/note/Note';
 export * from './lib/block/Block';
 export * from './lib/Code/Code';
+export * from './lib/support-info/SupportInfo';

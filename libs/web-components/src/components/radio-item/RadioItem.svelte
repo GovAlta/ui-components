@@ -59,7 +59,7 @@
   class:goa-radio--disabled={disabled}
   class:goa-radio--error={error}
 >
-  <input type="radio" {name} {value} {checked} {disabled} on:change={onChange} />
+  <input type="radio" data-testid="radio-input" {name} {value} {checked} {disabled} on:change={onChange} />
   <div class="goa-radio-icon" />
   <span class="goa-radio-label">
     <slot>

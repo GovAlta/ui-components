@@ -68,7 +68,6 @@ describe("GoATextArea", () => {
     });
 
     const textarea = result.queryByTestId("test-id");
-    console.log(textarea.outerHTML);
     expect(textarea).toHaveClass("error");
   })
 

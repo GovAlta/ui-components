@@ -1,4 +1,4 @@
-import { GoAAppHeader, GoAButton, GoAButtonGroup, GoACheckbox, GoAFormItem, GoAInput, GoAPageBlock, GoAServiceLevelHeader } from "@abgov/react-components";
+import { GoAAppHeader, GoAButton, GoAButtonGroup, GoACheckbox, GoAFormItem, GoAInput, GoAPageBlock, GoARadioGroup, GoARadioItem, GoAServiceLevelHeader } from "@abgov/react-components";
 import { useState } from "react";
 export function App() {
 
@@ -8,6 +8,10 @@ export function App() {
   function submitForm(e: any) {
     console.log('submitForm', firstName);
     e.preventDefault();
+  }
+
+  function onRadioChange(name: string, value: string) {
+    console.log('onRadioChange', name, value);
   }
 
   return (
@@ -40,6 +44,12 @@ export function App() {
           </GoAButtonGroup>
         </form>
       </GoAPageBlock>
+
+      <GoARadioGroup name="basic" value="orange" onChange={onRadioChange}>
+        <GoARadioItem name="basic" label="Red" value="red" />
+        <GoARadioItem name="basic" label="Blue" value="blue" />
+        <GoARadioItem name="basic" label="Orange" value="orange"/>
+      </GoARadioGroup>
     </>
   );
 }

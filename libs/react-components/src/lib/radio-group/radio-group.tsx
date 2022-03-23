@@ -7,6 +7,8 @@ interface RadioGroupProps {
   name: string;
   value?: string;
   orientation: string;
+  disabled: boolean;
+  error: boolean;
 }
 
 declare global {
@@ -24,6 +26,7 @@ interface Props {
   disabled?: boolean;
   orientation?: 'horizontal' | 'vertical';
   testId?: string;
+  error?: boolean;
   onChange: (name: string, value: string) => void;
 }
 
@@ -32,6 +35,8 @@ export const GoARadioGroup: FC<Props> = ({
   value,
   children,
   orientation = 'vertical',
+  disabled = false,
+  error = false,
   testId,
   onChange,
 }) => {
@@ -53,7 +58,15 @@ export const GoARadioGroup: FC<Props> = ({
   }, [])
 
   return (
-    <goa-radio-group data-testid={testId} ref={el} name={name} value={value} orientation={orientation}>
+    <goa-radio-group
+      data-testid={testId}
+      ref={el}
+      name={name}
+      value={value}
+      orientation={orientation}
+      disabled={disabled}
+      error={error}
+    >
       {children}
     </goa-radio-group>
   );
