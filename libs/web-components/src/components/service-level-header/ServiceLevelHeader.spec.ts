@@ -44,4 +44,18 @@ describe('GoAServiceLevelHeader', () => {
 
     expect(version).not.toContainHTML('live');
   });
+
+  it(`should show a feedback url if provided`, async () => {
+    const { queryByTestId }= render(GoAServiceLevelHeader, { level: 'alpha', feedbackurl: 'http://example.com' });
+    const feedback = queryByTestId('feedback');
+
+    expect(feedback).toContainHTML('http://example.com');
+  });
+
+  it(`should not show a feedback section if one isn't provided`, async () => {
+    const { queryByTestId }= render(GoAServiceLevelHeader, { level: 'alpha' });
+    const feedback = queryByTestId('feedback');
+
+    expect(feedback).toBeNull();
+  });
 });
