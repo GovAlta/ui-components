@@ -29,13 +29,6 @@ describe('GoACheckbox Component', () => {
     expect((checkbox as HTMLInputElement).id).toBe("id-checkbox-test-name");
   });
 
-  it("allows for setting of the id", async () => {
-    const el = await createElement({id: "abc"});
-    const checkbox = await el.findByTestId(testid);
-    expect((checkbox as HTMLInputElement).id).toBe("abc");
-    expect((checkbox as HTMLInputElement).name).toBe("checkbox-test-name");
-  });
-
   it("allows for setting of the text", async () => {
     const el = await createElement({ text: "foobar" });
     const div = await el.findByTestId('text');
