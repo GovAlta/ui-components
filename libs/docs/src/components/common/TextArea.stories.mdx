@@ -12,7 +12,7 @@ import { GoATextArea } from '@abgov/react-components'
 
 export const noop = () => { /* noop */ }
 
-## Basic
+#### Basic
 
 <Story name="Basic">
   <GoATextArea name="comment" onChange={(name, value) => { console.log('changed', name, value) }} value="Initial value"  />
@@ -90,14 +90,6 @@ export const noop = () => { /* noop */ }
 <Story name="Placeholder">
   <GoATextArea name="comment" placeholder="Tell us what you think.." onChange={noop} />
 </Story>
-
-<Note type="caution">
-  Use labels and helper text to communicate how a field should be filled out.
-</Note>
-
-<Note type="best-practices">
-  Placeholders should only be used to show an example of the type of data that should be entered into a form; they don't replace a proper label.
-</Note>
 
 <Tabs>
   <Tab label="Web Component">
