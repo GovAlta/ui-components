@@ -29,6 +29,9 @@
   }
 
   function close(e) {
+    if (!isClosable) {
+      return;
+    }
     e.target.dispatchEvent(new CustomEvent("_close", { composed: true }));
     e.stopPropagation();
   }
@@ -43,20 +46,21 @@
     use:noscroll={{enable: isOpen}}
     in:fade={{duration: 200}}
     out:fade={{delay: 200, duration: 200}}
+    data-testid="modal"
     class="modal"
     style="--scroll-offset: {scrollOffset}px; {width && `--width: ${width};`};"
   >
-    <div class="modal-overlay" on:click={close}></div>
+    <div data-testid="modal-overlay" class="modal-overlay" on:click={close}></div>
     <div in:fly={{duration: 200, y: 200}} out:fly={{delay: 200, duration: 200, y: -100}} class="modal-pane">
       {#if title}
-        <div class="modal-title">{title}</div>
+        <div data-testid="modal-title" class="modal-title">{title}</div>
       {/if}
       {#if isClosable}
         <div class="modal-close">
-          <goa-icon-button type='close' on:click={close} />
+          <goa-icon-button testid="modal-close-button" type='close' on:click={close} />
         </div>
       {/if}
-      <div class="modal-content">
+      <div data-testid="modal-content" class="modal-content">
         {#if isScrollable}
           <goa-scrollable direction="vertical" height="50" hpadding="1.75" >
             <slot />
@@ -68,7 +72,7 @@
         {/if}
         <slot />
       </div>
-      <div class="modal-actions">
+      <div data-testid="modal-actions" class="modal-actions">
         <slot name="actions" />
       </div>
     </div>
