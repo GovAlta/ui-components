@@ -2,11 +2,11 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React, { useState } from 'react';
 import GoAButton from '../../lib/button/button';
-import { GoAModal, GoAModalActions, GoAModalContent, GoAModalTitle } from './modal';
+import { GoAModal } from './modal';
 
-describe.skip('Modal Tests', () => {
+describe('Modal Tests', () => {
 
-  it('Modal - should render with close capability via icon and background', async () => {
+  it.skip('Modal - should render with close capability via icon and background', async () => {
 
     const TestComponent = () => {
       const [isOpen, setIsOpen] = useState(false)
@@ -16,56 +16,48 @@ describe.skip('Modal Tests', () => {
 
         <GoAModal
           open={isOpen}
+          title="The Title"
           onClose={() => setIsOpen(false)}
-          testId="modal"
-          backgroundTestId="modal-background"
-        >
-          <GoAModalTitle testId="modal-title">The Title</GoAModalTitle>
-          <GoAModalContent testId="modal-content">The content</GoAModalContent>
-          <GoAModalActions>
-            <GoAButton buttonType="tertiary" onClick={() => setIsOpen(false)}>
+          actions={<>
+            <GoAButton type="tertiary" onClick={() => setIsOpen(false)}>
               Cancel
             </GoAButton>
-            <GoAButton buttonType="primary">
+            <GoAButton type="primary" onClick={() => { }}>
               Save
             </GoAButton>
-          </GoAModalActions>
+          </>}
+        >
+          The content
         </GoAModal>
       </>
       );
     };
 
-    const { queryByTestId } = render(<TestComponent />);
+    const { baseElement, queryByTestId } = render(<TestComponent />);
 
     // open modal
-    expect(queryByTestId('open-modal')).toBeTruthy();
-    expect(queryByTestId('modal').getAttribute('data-state')).toBe('init');
-    fireEvent.click(queryByTestId('open-modal'))
-    expect(queryByTestId('modal').getAttribute('data-state')).toBe('visible');
+    const openButton = queryByTestId('open-modal')
+    expect(openButton).toBeTruthy();
+    fireEvent.click(openButton)
 
-    // validate content
-    expect(queryByTestId('modal-title').textContent).toBe('The Title');
-    expect(queryByTestId('modal-content').textContent).toContain('The content');
+    await waitFor(() => {
+      // validate content
+      expect(queryByTestId('modal-title').textContent).toBe('The Title');
+      expect(queryByTestId('modal-content').textContent).toContain('The content');
+    });
 
     // close modal via close icon
-    fireEvent.click(queryByTestId('icon-close'));
+    // fireEvent.click(queryByTestId('modal-close-button'));
+    // expect(queryByTestId('modal')).not.toBeVisible();
 
-    // validate close
-    await waitFor(() => {
-      expect(queryByTestId('modal').getAttribute('data-state')).toBe('init');
-    })
-
-    // validate close via background click
-    fireEvent.click(queryByTestId('open-modal'))
-    expect(queryByTestId('modal')).toBeVisible();
-    fireEvent.click(queryByTestId('modal-background'));
-    await waitFor(() => {
-      expect(queryByTestId('modal').getAttribute('data-state')).toBe('init');
-    })
+    // // validate close via background click
+    // fireEvent.click(queryByTestId('open-modal'))
+    // expect(queryByTestId('modal')).toBeVisible();
+    // fireEvent.click(queryByTestId('modal-background'));
   });
 
 
-  it('Modal - should render without close capability via icon and background', async () => {
+  it.skip('Modal - should render without close capability via icon and background', async () => {
 
     const TestComponent = () => {
       const [isOpen, setIsOpen] = useState(false)
@@ -76,19 +68,17 @@ describe.skip('Modal Tests', () => {
         <GoAModal
           open={isOpen}
           onClose={() => setIsOpen(false)}
-          testId="modal"
-          backgroundTestId="modal-background"
-        >
-          <GoAModalTitle testId="modal-title">The Title</GoAModalTitle>
-          <GoAModalContent testId="modal-content">The content</GoAModalContent>
-          <GoAModalActions>
-            <GoAButton buttonType="tertiary" onClick={() => setIsOpen(false)}>
+          title="The Title"
+          actions={<>
+            <GoAButton type="tertiary" onClick={() => setIsOpen(false)}>
               Cancel
             </GoAButton>
-            <GoAButton buttonType="primary">
+            <GoAButton type="primary" onClick={() => { }}>
               Save
             </GoAButton>
-          </GoAModalActions>
+          </>}
+        >
+          The content
         </GoAModal>
       </>
       );
