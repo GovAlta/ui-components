@@ -4,6 +4,7 @@
 <script lang="ts">
   export let level: "live" | "alpha" | "beta";
   export let version: string;
+  export let feedbackurl: string;
 
   function capitalize(val: string): string {
     if (!val || val?.length === 0) return "";
@@ -29,8 +30,11 @@
     <div data-testid="level" class="service-level service-level--{level?.toLowerCase()}">
       {capitalize(level)}
     </div>
-    <div class="site-text">
+    <div data-testid="site-text" class="site-text">
       This is a new <a href="https://www.alberta.ca/index.aspx" class="web-link">Alberta Government</a> service
+      {#if feedbackurl}
+        <span data-testid="feedback">— help us improve it by giving <a href="{feedbackurl}" class="web-link">feedback</a></span>
+      {/if}
     </div>
   {/if}
   <div class="spacer" />
