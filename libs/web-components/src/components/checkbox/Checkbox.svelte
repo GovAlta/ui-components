@@ -8,7 +8,6 @@ import { toBoolean } from "../../common/utils";
   export let name: string;
 
   // Optional values
-  export let id: string = "";
   export let text: string = "";
   export let value: string = "";
   export let checked: string;
@@ -16,7 +15,7 @@ import { toBoolean } from "../../common/utils";
   export let error: string;
   export let testid: string = "";
 
-  $: id = id ? id : `id-${name}`;
+  $: id = `id-${name}`;
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
