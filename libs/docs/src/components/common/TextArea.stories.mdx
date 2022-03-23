@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/addon-docs';
-import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
+import { Tabs, Tab, CodeSnippet } from '@abgov/shared/storybook-common';
 import { GoATextArea } from '@abgov/react-components'
 
 <Meta title="Components/Text area" />
@@ -114,17 +114,6 @@ export const noop = () => { /* noop */ }
 <Story name="Rows">
   <GoATextArea name="comment" rows={4} onChange={noop} />
 </Story>
-
-<Note type="best-practices">
-  <ul>
-    <li>
-      Make empty Text areas as tall as the content they are expected to contain.
-    </li>
-    <li>
-      Don't use a Text area which is only one line high.
-    </li>
-  </ul>
-</Note>
 
 <Tabs>
   <Tab label="Web Component">
