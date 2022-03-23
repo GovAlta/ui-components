@@ -83,6 +83,22 @@
     font-size: var(--fs-base)!important;
   }
 
+  a {
+    color: var(--goa-color-interactive)!important;
+    cursor: pointer!important;
+  }
+
+  a:hover {
+    color: var(--goa-color-interactive--hover)!important;
+  }
+
+  a:focus {
+    outline-width: thin!important;
+    outline-style: solid!important;
+    outline-color: var(--goa-color-interactive--hover)!important;
+    outline-offset: 0px!important;
+  }
+
   a[target=_blank] {
     text-decoration: underline!important;
   }
