@@ -1,0 +1,141 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { Tabs, Tab, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import { GoAFormItem, GoAInput } from '@abgov/react-components';
+
+<Meta title="Components/Form Item" />
+
+# Form item
+
+#### Basic
+
+<Story name="Basic">
+  <GoAFormItem label="First name">
+    <GoAInput name="firstName" onChange={() => {}} />
+  </GoAFormItem>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-form-item label="First name">
+        <goa-input type="text" />
+      </goa-form-item>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-form-item label="First name">
+        <goa-input type="text" />
+      </goa-form-item>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAFormItem label="First name">
+        <GoAInput name="firstName" onChange={() => {}} />
+      </GoAFormItem>
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Optional
+
+<Story name="Optional">
+  <GoAFormItem label="First name" optional>
+    <GoAInput name="firstName" onChange={() => {}} />
+  </GoAFormItem>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-form-item label="First name" optional>
+        <goa-input type="text" />
+      </goa-form-item>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-form-item label="First name" optional>
+        <goa-input type="text" />
+      </goa-form-item>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAFormItem label="First name" optional>
+        <GoAInput name="firstName" onChange={() => {}} />
+      </GoAFormItem>
+    `}/>
+  </Tab>
+</Tabs>
+
+
+#### Help text
+
+<Story name="Help text">
+  <GoAFormItem label="First name" helptext="Help text">
+    <GoAInput name="firstName" onChange={() => {}} />
+  </GoAFormItem>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-form-item label="First name" helptext="Help text">
+        <goa-input type="text" />
+      </goa-form-item>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-form-item label="First name" helptext="Help text">
+        <goa-input type="text" />
+      </goa-form-item>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAFormItem label="First name" helpText="Help text">
+        <GoAInput name="firstName" onChange={() => {}} />
+      </GoAFormItem>
+    `}/>
+  </Tab>
+</Tabs>
+
+
+#### Required
+
+<Story name="Required">
+  <GoAFormItem label="First name" error="First name is required">
+    <GoAInput name="firstName" onChange={() => {}} error />
+  </GoAFormItem>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-form-item label="First name" error="First name is required">
+        <goa-input type="text" error />
+      </goa-form-item>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-form-item label="First name" error="First name is required">
+        <goa-input type="text" error />
+      </goa-form-item>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAFormItem label="First name" error="First name is required">
+        <GoAInput name="firstName" onChange={() => {}} error />
+      </GoAFormItem>
+    `}/>
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />

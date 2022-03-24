@@ -10,12 +10,6 @@ describe('GoAInput Component', () => {
     expect(input).toBeTruthy();
   });
 
-  it("allows for setting of the id", async () => {
-    const el = render(GoAInput, { testid: "input-test", id: "test-id" });
-    const input = await el.findByTestId('input-test');
-    expect(input.getAttribute("id")).toBe("test-id");
-  });
-
   it("allows for setting of the value", async () => {
     const el = render(GoAInput, { testid: "input-test", value: "foobar" });
     const input = await el.findByTestId('input-test');

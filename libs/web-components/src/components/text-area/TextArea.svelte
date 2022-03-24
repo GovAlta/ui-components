@@ -4,7 +4,6 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
 
-  export let id: string = "";
   export let name: string;
   export let value: string = "";
   export let placeholder: string = "";
@@ -39,7 +38,6 @@
 
 <!-- HTML -->
 <textarea
-  id={id || name}
   {name}
   {placeholder}
   {value}
