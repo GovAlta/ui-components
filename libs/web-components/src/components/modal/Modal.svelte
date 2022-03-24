@@ -117,7 +117,7 @@
     position: relative;
     background-color: #fff;
     z-index: 1001;
-    max-width: var(--width, 60ch);
+    width: var(--width, 60ch);
 
     margin: 1rem;
     box-shadow: var(--shadow-2);
