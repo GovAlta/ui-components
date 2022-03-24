@@ -22,6 +22,7 @@
   export let readonly: string = "false";
   export let error: string = "false";
   export let testid: string = "";
+  export let width: string = "100%";
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
@@ -54,6 +55,7 @@
 <!-- HTML -->
 
 <div
+  style:width={width}
   class={`
     goa-input ${isDisabled ? "goa-input--disabled" : ""}
     variant--${variant}
@@ -121,7 +123,7 @@
     color: var(--color-black, #ccc);
     padding: var(--input-padding, 0.5rem) 0.5rem;
 
-    display: flex;
+    display: inline-flex;
     align-items: center;
   }
 

@@ -284,6 +284,8 @@
 
     <!-- Text Input -->
 
+    <goa-input id="firstname" name="firstname" disabled="false" width="400px" />
+
     <h2 id="section-input">Input</h2>
     <goa-flex-row gap="small">
       <goa-form-item label="First name" helptext="This is helper text">
