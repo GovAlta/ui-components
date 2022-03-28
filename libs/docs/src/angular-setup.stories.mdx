@@ -6,20 +6,22 @@ import { Meta } from '@storybook/addon-docs';
 
 ![npm (scoped)](https://img.shields.io/npm/v/@abgov/web-components/alpha?color=%230081a2&label=web-components&style=flat-square)
 
-This is the *web component* library and utilizes Angular's web component integration.
-
+This is the _web component_ library and utilizes Angular's web component integration.
 
 Install Angular CLI
+
 ```bash
 npm install -g @angular/cli
 ```
 
 Create angular app
+
 ```bash
 ng new my-app
 ```
 
 Add Dependencies
+
 ```bash
 npm i
 npm i @abgov/web-components@alpha
@@ -27,19 +29,26 @@ npm i @abgov/styles@alpha
 ```
 
 Link ionicons in app/index.html
+
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>UiComponentAngularVerification</title>
-    <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
     <!-- Ionicons -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
     <!-- -->
   </head>
   <body>
@@ -49,8 +58,8 @@ Link ionicons in app/index.html
 ```
 
 Update `src/app/app.module.ts` as per the three steps below
-```typescript
 
+```typescript
 // 1. Import the CUSTOM_ELEMENTS_SCHEMA
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -58,26 +67,21 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import '@abgov/web-components';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent],
 
   // 3. Add the CUSTOM_ELEMENTS_SCHEMA to the NgModule
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-
-export class AppModule { }
+export class AppModule {}
 ```
 
 Change the `src/app/app.component.html` to include the following:
 
 ```html
-<goa-service-level-header level="alpha" version="UAT"></goa-service-level-header>
+<goa-microsite-header level="alpha" version="UAT"></goa-microsite-header>
 
 <goa-app-header url="http://google.com" title="Digital File Service">
   <a href="#">Sign in</a>
@@ -97,6 +101,7 @@ Change the `src/app/app.component.html` to include the following:
 ```
 
 Update the `src/app/app.component.ts` to include the following:
+
 ```typescript
 import { Component } from '@angular/core';
 
@@ -116,11 +121,13 @@ export class AppComponent {
 ```
 
 Add the styles link in the `src/styles.css` file
+
 ```css
 @import '@abgov/styles/styles.esm.css';
 ```
 
 Build and serve my-app locally
+
 ```bash
 cd my-app
 ng serve --open

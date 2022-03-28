@@ -26,7 +26,7 @@ export { default as GoAPageLoader } from "./components/page-loader/PageLoader.sv
 export { default as GoARadioGroup } from "./components/radio-group/RadioGroup.svelte";
 export { default as GoARadioItem } from "./components/radio-item/RadioItem.svelte";
 export { default as GoAScrollable } from "./components/scrollable/Scrollable.svelte";
-export { default as GoAServiceLevelHeader } from "./components/service-level-header/ServiceLevelHeader.svelte";
+export { default as GoAMicrositeHeader } from "./components/microsite-header/MicrositeHeader.svelte";
 export { default as GoASkeleton } from "./components/skeleton/Skeleton.svelte";
 export { default as GoASpinner } from "./components/spinner/Spinner.svelte";
 export { default as GoATextArea } from "./components/text-area/TextArea.svelte";

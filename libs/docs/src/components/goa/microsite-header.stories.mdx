@@ -1,0 +1,184 @@
+import { GoAMicrositeHeader } from '@abgov/react-components';
+import { Tabs, Tab, CodeSnippet } from '@abgov/shared/storybook-common';
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Components/Microsite Header" />
+
+# Microsite header
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/Components---DIO-DS?node-id=2%3A81)
+
+---
+
+Use the microsite header to communicate to the user what stage the service is at, and to establish an official
+connection to Alberta.ca when the service is on a subdomain. You can also use the microsite header to gather
+feedback throughout your service, and to show an application version number for quick reference by the service team.
+
+#### Alpha
+
+<Story name="Alpha">
+  <GoAMicrositeHeader level="alpha" />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header level="alpha" version="v1.2.3" />
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header level="alpha" version="v1.2.3" />
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoAMicrositeHeader level="alpha" version="v1.2.3" />
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Beta
+
+<Story name="Beta">
+  <GoAMicrositeHeader level="beta" />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header level="beta"/>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header level="beta"/>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoAMicrositeHeader level="beta"/>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Live
+
+<Story name="Live">
+  <GoAMicrositeHeader level="live" />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header level="live"/>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header level="live"/>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoAMicrositeHeader level="live"/>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Version
+
+<Story name="Version">
+  <GoAMicrositeHeader level="alpha" version="v1.2.3" />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header level="alpha" version="v1.2.3" />
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header level="alpha" version="v1.2.3" />
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoAMicrositeHeader level="alpha" version="v1.2.3" />
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Feedback Url
+
+<Story name="Feedback Url">
+  <GoAMicrositeHeader
+    level="alpha"
+    version="v1.2.3"
+    feedbackUrl="https://example.com/feedback"
+  />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header level="alpha" version="v1.2.3" feedbackurl="https://example.com/feedback" />
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header level="alpha" version="v1.2.3" feedbackurl="https://example.com/feedback"/>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoAMicrositeHeader level="alpha" version="v1.2.3" feedbackUrl="https://example.com/feedback" />
+    `}
+    />
+  </Tab>
+</Tabs>

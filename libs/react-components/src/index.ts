@@ -23,7 +23,7 @@ import { GoANotification } from './lib/notification/notification';
 import { GoAPageBlock } from './lib/page-block/page-block';
 import { GoAPageLoader } from './lib/page-loader/page-loader';
 import { GoARadioGroup, GoARadioItem } from './lib/radio-group/radio-group';
-import { GoAServiceLevelHeader } from './lib/service-level-header/service-level-header';
+import { GoAMicrositeHeader } from './lib/microsite-header/microsite-header';
 import { GoATextArea } from './lib/textarea/textarea';
 import { GoASpinner } from './lib/spinner/spinner';
 
@@ -72,7 +72,7 @@ export {
   GoAPageLoader,
   GoARadioItem,
   GoARadioGroup,
-  GoAServiceLevelHeader,
+  GoAMicrositeHeader,
   GoASuccessBadge,
   GoASpinner,
   GoATextArea,
