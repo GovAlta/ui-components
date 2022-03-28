@@ -22,7 +22,7 @@ import { GoAModal } from './lib/modal/modal';
 import { GoANotification } from './lib/notification/notification';
 import { GoAPageBlock } from './lib/page-block/page-block';
 import { GoAPageLoader } from './lib/page-loader/page-loader';
-import { GoARadioGroup, GoARadio } from './lib/radio-group/radio-group';
+import { GoARadioGroup, GoARadioItem } from './lib/radio-group/radio-group';
 import { GoAMicrositeHeader } from './lib/microsite-header/microsite-header';
 import { GoATextArea } from './lib/textarea/textarea';
 import { GoASpinner } from './lib/spinner/spinner';

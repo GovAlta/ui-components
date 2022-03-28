@@ -34,9 +34,7 @@
       </svg>
     </div>
     <div data-testid="level" class="site-text">
-      An official site of the <a href="https://www.alberta.ca/index.aspx" class="web-link"
-        >Alberta Government</a
-      >
+      An official site of the <a href="https://www.alberta.ca/index.aspx">Alberta Government</a>
     </div>
   {/if}
 
@@ -45,16 +43,11 @@
       {capitalize(level)}
     </div>
     <div data-testid="site-text" class="site-text">
-      This is a new <a href="https://www.alberta.ca/index.aspx" class="web-link"
-        >Alberta Government</a
+      This is a new <a href="https://www.alberta.ca/index.aspx">Alberta Government</a
       >
       service
       {#if feedbackurl}
-        <span data-testid="feedback"
-          >— help us improve it by giving <a href={feedbackurl} class="web-link"
-            >feedback</a
-          ></span
-        >
+        <span data-testid="feedback">— help us improve it by giving <a href={feedbackurl}>feedback</a></span>
       {/if}
     </div>
   {/if}
@@ -72,6 +65,23 @@
     box-sizing: border-box;
     font-family: var(--font-family);
   }
+
+  a {
+    color: var(--goa-color-interactive);
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: var(--goa-color-interactive--hover);
+  }
+
+  a:focus {
+    outline-width: thin;
+    outline-style: solid;
+    outline-color: var(--goa-color-interactive--hover);
+    outline-offset: 0px;
+  }
+
   .goa-official-site-header {
     display: flex;
     font-size: var(--fs-xs);
@@ -87,7 +97,7 @@
   }
 
   .version {
-    opacity: 0.5;
+    color: var(--goa-color-600)
   }
 
   .service-level {
@@ -100,12 +110,12 @@
 
   .service-level--alpha {
     background-color: var(--goa-color-interactive--highlight);
-    color: var(--color-black);
+    color: var(--goa-color-text);
   }
 
   .service-level--beta {
     background-color: var(--goa-color-brand);
-    color: var(--color-white);
+    color: var(--goa-color-text-light);
   }
 
   .service-level--live {
@@ -116,6 +126,6 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: var(--color-black);
+    color: var(--goa-color-text);
   }
 </style>
