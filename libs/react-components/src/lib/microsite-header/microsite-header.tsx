@@ -4,7 +4,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-service-level-header': WebComponentProps & React.HTMLAttributes<HTMLElement>
+      'goa-microsite-header': WebComponentProps & React.HTMLAttributes<HTMLElement>
     }
   }
 }
@@ -23,10 +23,10 @@ export interface HeaderProps {
   feedbackUrl?: string;
 }
 
-export const GoAServiceLevelHeader: FC<HeaderProps> = ({ level, version, feedbackUrl}) => {
+export const GoAMicrositeHeader: FC<HeaderProps> = ({ level, version, feedbackUrl }) => {
   return (
-    <goa-service-level-header level={level} version={version} feedbackurl={feedbackUrl} />
+    <goa-microsite-header level={level} version={version} feedbackurl={feedbackUrl} />
   )
 };
 
-export default GoAServiceLevelHeader;
+export default GoAMicrositeHeader;

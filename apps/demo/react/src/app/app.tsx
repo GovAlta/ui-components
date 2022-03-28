@@ -1,4 +1,4 @@
-import { GoAAppHeader, GoAButton, GoAButtonGroup, GoACheckbox, GoAFormItem, GoAInput, GoAPageBlock, GoARadioGroup, GoARadioItem, GoAServiceLevelHeader } from "@abgov/react-components";
+import { GoAAppHeader, GoAButton, GoAButtonGroup, GoACheckbox, GoAFormItem, GoAInput, GoAPageBlock, GoARadioGroup, GoARadioItem, GoAMicrositeHeader } from "@abgov/react-components";
 import { useState } from "react";
 export function App() {
 
@@ -16,7 +16,7 @@ export function App() {
 
   return (
     <>
-      <GoAServiceLevelHeader level="alpha" version="UAT" />
+      <GoAMicrositeHeader level="alpha" version="UAT" />
 
       <GoAAppHeader url="http://google.com" title="Digital File Service">
         <a href="#">Sign in</a>

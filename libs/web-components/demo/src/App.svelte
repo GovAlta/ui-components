@@ -1,29 +1,32 @@
+<script>
+  import "../../src";
+</script>
+
 <svelte:head>
   <title>GoA Component Playground</title>
 </svelte:head>
 
-<script>
-  import '../../src';
-</script>
-
 <main>
-
-  <goa-service-level-header level="alpha" version="v1.2.3" />
+  <goa-microsite-header level="alpha" version="v1.2.3" />
 
   <!-- App Header -->
   <goa-app-header url="http://google.com" title="Digital File Service">
     <a href="http://signin.gov.au/">Sign in</a>
   </goa-app-header>
 
-  <goa-hero-banner title="Upgrading our bitumen" backgroundurl="https://picsum.photos/id/1076/600/400">
+  <goa-hero-banner
+    title="Upgrading our bitumen"
+    backgroundurl="https://picsum.photos/id/1076/600/400"
+  >
     <div slot="actions">
       <goa-button>Button</goa-button>
     </div>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic! Commodi, asperiores officiis necessitatibus itaque similique magnam nisi voluptate.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita,
+    quasi vero maxime, laudantium voluptates eaque illum officiis hic! Commodi, asperiores
+    officiis necessitatibus itaque similique magnam nisi voluptate.
   </goa-hero-banner>
 
   <goa-page-block>
-
     <h2>Components</h2>
 
     <ul>
@@ -49,30 +52,36 @@
 
     <goa-card-group>
       <goa-card>
-        <goa-card-content>
-          This is a card top title with image
-        </goa-card-content>
-        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-content> This is a card top title with image </goa-card-content>
+        <goa-card-image
+          height="160px"
+          src="https://picsum.photos/id/1076/600/400"
+          alt="Card image"
+        />
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
 
       <goa-card elevation={1}>
-        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
-        <goa-card-content>
-          This is card content below the image
-        </goa-card-content>
+        <goa-card-image
+          height="160px"
+          src="https://picsum.photos/id/1076/600/400"
+          alt="Card image"
+        />
+        <goa-card-content> This is card content below the image </goa-card-content>
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
       </goa-card>
 
       <goa-card elevation={2}>
-        <goa-card-content>
-          This is card with a taller image
-        </goa-card-content>
-        <goa-card-image height="300px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-content> This is card with a taller image </goa-card-content>
+        <goa-card-image
+          height="300px"
+          src="https://picsum.photos/id/1076/600/400"
+          alt="Card image"
+        />
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
@@ -81,9 +90,11 @@
       <goa-card elevation={3}>
         <goa-card-content>
           This is card content with no image.
-          <br>
-          <br>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque laboriosam numquam, quidem nihil accusantium dolore harum. Consequuntur facilis, perspiciatis reiciendis possimus iusto, magni ut quisquam ex necessitatibus eum in modi?
+          <br />
+          <br />
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque laboriosam numquam,
+          quidem nihil accusantium dolore harum. Consequuntur facilis, perspiciatis reiciendis
+          possimus iusto, magni ut quisquam ex necessitatibus eum in modi?
         </goa-card-content>
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
@@ -91,10 +102,12 @@
       </goa-card>
 
       <goa-card elevation={4}>
-        <goa-card-content>
-          This is card content with multiple buttons
-        </goa-card-content>
-        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-content> This is card content with multiple buttons </goa-card-content>
+        <goa-card-image
+          height="160px"
+          src="https://picsum.photos/id/1076/600/400"
+          alt="Card image"
+        />
         <goa-card-actions>
           <goa-button size="small" variant="tertiary">Button</goa-button>
           <goa-button size="small">Button</goa-button>
@@ -105,14 +118,16 @@
         <goa-card-actions>
           <goa-button size="small">Button</goa-button>
         </goa-card-actions>
-        <goa-card-image height="160px" src="https://picsum.photos/id/1076/600/400" alt="Card image" />
+        <goa-card-image
+          height="160px"
+          src="https://picsum.photos/id/1076/600/400"
+          alt="Card image"
+        />
         <goa-card-content>
           This is card content with actions at the top
         </goa-card-content>
       </goa-card>
-
     </goa-card-group>
-
 
     <h2 id="section-skeleton">Skeletons</h2>
     <h3>Text</h3>
@@ -154,17 +169,28 @@
     <h3>Full screen</h3>
 
     <goa-button id="show-loader">Show page loader</goa-button>
-    <goa-page-loader id="page-loader" class="progress" type="progress" variant="fullscreen" message="loading.." />
+    <goa-page-loader
+      id="page-loader"
+      class="progress"
+      type="progress"
+      variant="fullscreen"
+      message="loading.."
+    />
     <script>
-      const el = document.querySelector('#show-loader');
-      el.addEventListener('_click', () => {
-        const loader = document.querySelector('#page-loader');
-        loader.setAttribute('visible', "true")
-      })
+      const el = document.querySelector("#show-loader");
+      el.addEventListener("_click", () => {
+        const loader = document.querySelector("#page-loader");
+        loader.setAttribute("visible", "true");
+      });
     </script>
 
     <h3>Inline</h3>
-    <goa-page-loader class="progress" type="progress" message="Inline loading..." variant="inline" />
+    <goa-page-loader
+      class="progress"
+      type="progress"
+      message="Inline loading..."
+      variant="inline"
+    />
 
     <h3>Variants</h3>
     <goa-spinner type="infinite" size="small" />
@@ -181,34 +207,33 @@
 
     <script>
       window.progress = 0;
-      const ps = document.querySelectorAll('.progress');
+      const ps = document.querySelectorAll(".progress");
       setInterval(() => {
-        window.progress += 10
+        window.progress += 10;
         ps.forEach(p => {
-          p.setAttribute('progress', window.progress)
-          switch(true) {
+          p.setAttribute("progress", window.progress);
+          switch (true) {
             case window.progress < 20:
-              p.setAttribute('message', 'loading..')
+              p.setAttribute("message", "loading..");
               break;
             case window.progress < 40:
-              p.setAttribute('message', 'taking longer than I thought..')
+              p.setAttribute("message", "taking longer than I thought..");
               break;
             case window.progress < 60:
-              p.setAttribute('message', 'let\'s grab a coffee..')
+              p.setAttribute("message", "let's grab a coffee..");
               break;
             case window.progress < 80:
-              p.setAttribute('message', 'I\'m bored..')
+              p.setAttribute("message", "I'm bored..");
               break;
             case window.progress < 100:
-              p.setAttribute('message', 'almost there..')
+              p.setAttribute("message", "almost there..");
               break;
           }
           if (window.progress >= 100) {
             window.progress = 0;
-            p.removeAttribute('visible');
+            p.removeAttribute("visible");
           }
         });
-
       }, 1000);
     </script>
 
@@ -222,8 +247,8 @@
     <goa-badge content="Midtone" type="midtone" />
     <goa-badge content="Light" type="light" />
 
-    <br>
-    <br>
+    <br />
+    <br />
     <goa-badge icon content="Success" type="success" />
     <goa-badge icon content="Warning" type="warning" />
     <goa-badge icon content="Information" type="information" />
@@ -233,8 +258,8 @@
     <goa-badge icon content="Midtone" type="midtone" />
     <goa-badge icon content="Light" type="light" />
 
-    <br>
-    <br>
+    <br />
+    <br />
     <goa-badge icon type="success" />
     <goa-badge icon type="warning" />
     <goa-badge icon type="information" />
@@ -247,30 +272,66 @@
     <h2 id="section-modal">Modal</h2>
     <goa-button id="openModal">Show Modal</goa-button>
     <goa-modal id="modal" title="Modal Header....." closable scrollable width="80%">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
+        molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
+        laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
+        molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
+        laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
+        molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
+        laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
+        molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
+        laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
+        molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
+        laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
+        molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
+        laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
+        molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
+        laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
+        molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
+        laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
+        molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
+        laboriosam! Repellendus ducimus officia asperiores. Eos, eius numquam.
+      </p>
 
-        <goa-button slot="actions" size="medium">I Agree</goa-button>
+      <goa-button slot="actions" size="medium">I Agree</goa-button>
     </goa-modal>
 
     <script>
-      var modal = document.getElementById("modal")
-      var modalopen = document.querySelector('#openModal');
-      modalopen.addEventListener('_click', () => {
+      var modal = document.getElementById("modal");
+      var modalopen = document.querySelector("#openModal");
+      modalopen.addEventListener("_click", () => {
         openModal();
       });
       function openModal() {
-        modal.setAttribute("open", true)
+        modal.setAttribute("open", true);
       }
       function closeModal() {
-        modal.removeAttribute("open")
+        modal.removeAttribute("open");
       }
       document.getElementById("modal").addEventListener("_close", () => {
         closeModal();
@@ -279,7 +340,9 @@
 
     <h2 id="section-notification">Notification</h2>
     <goa-notification type="information">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi saepe, maiores, praesentium minus quod reprehenderit consequuntur earum molestias aliquid amet, vitae eveniet harum incidunt sint. Numquam debitis molestias officia corporis.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi saepe, maiores,
+      praesentium minus quod reprehenderit consequuntur earum molestias aliquid amet,
+      vitae eveniet harum incidunt sint. Numquam debitis molestias officia corporis.
     </goa-notification>
 
     <!-- Text Input -->
@@ -303,7 +366,13 @@
 
     <goa-flex-row gap="small">
       <goa-form-item label="Password" helptext="No easily guessable passwords">
-        <goa-input id="password" name="password" type="password" trailingicon="finger-print" handletrailingiconclick  />
+        <goa-input
+          id="password"
+          name="password"
+          type="password"
+          trailingicon="finger-print"
+          handletrailingiconclick
+        />
       </goa-form-item>
     </goa-flex-row>
 
@@ -312,8 +381,8 @@
     </goa-form-item>
 
     <script>
-      document.getElementById('comments').addEventListener('_change', (e) => {
-        console.log('comments changed', e.detail);
+      document.getElementById("comments").addEventListener("_change", e => {
+        console.log("comments changed", e.detail);
       });
     </script>
 
@@ -338,7 +407,7 @@
     </goa-form-item>
     <script>
       var dropdown = document.getElementById("dropdown");
-      dropdown.addEventListener("_change", (e) => {
+      dropdown.addEventListener("_change", e => {
         console.log(e.detail);
       });
     </script>
@@ -357,28 +426,29 @@
     </goa-form-item>
 
     <script>
-      var radioCheckbox = document.getElementById('radio-error');
-      var radioGroup = document.getElementById('radioGroup1');
-      radioGroup.addEventListener('_change', (e) => {
-        console.log('in the on change', e.detail);
+      var radioCheckbox = document.getElementById("radio-error");
+      var radioGroup = document.getElementById("radioGroup1");
+      radioGroup.addEventListener("_change", e => {
+        console.log("in the on change", e.detail);
       });
-      radioCheckbox.addEventListener('_change', (e) => {
-        const checked = e.detail.value === 'checked'
+      radioCheckbox.addEventListener("_change", e => {
+        const checked = e.detail.value === "checked";
         radioCheckbox.checked = checked;
         if (checked) {
-          radioGroup.setAttribute("error", "")
+          radioGroup.setAttribute("error", "");
         } else {
-          radioGroup.removeAttribute("error")
+          radioGroup.removeAttribute("error");
         }
       });
     </script>
 
-
     <h2 id="section-callout">Callout</h2>
     <goa-callout type="success" title="Callout title">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi. Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, ipsum eu
+      euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi nisl euismod nisi.
+      Sed euismod, ipsum eu euismod consectetur, nisl nisl iaculis nisl, eu tincidunt nisi
+      nisl euismod nisi.
     </goa-callout>
-
 
     <hr />
 
@@ -389,8 +459,8 @@
       <p>Delete the entire database and backups?</p>
       <goa-button id="do-delete" variant="danger" slot="actions">Delete</goa-button>
       <script>
-        var doDeleteBtn = document.getElementById('do-delete');
-        doDeleteBtn.addEventListener('_click', () => {
+        var doDeleteBtn = document.getElementById("do-delete");
+        doDeleteBtn.addEventListener("_click", () => {
           document.getElementById("modal2").removeAttribute("open");
         });
       </script>
@@ -399,47 +469,47 @@
     <goa-container>
       <h2>Header 3 (h2)</h2>
       <p style="line-height: 1.6rem;">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-        est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+        officia deserunt mollit anim id est laborum.
       </p>
 
       <div slot="title">The new container</div>
-      <goa-button id="delete-all" type="secondary" variant="danger" size="small" slot="actions">Delete</goa-button>
+      <goa-button
+        id="delete-all"
+        type="secondary"
+        variant="danger"
+        size="small"
+        slot="actions">Delete</goa-button
+      >
 
       <goa-container variant="primary" headingsize="small">
-        <div>This is a sub container </div>
+        <div>This is a sub container</div>
       </goa-container>
 
       <goa-button type="primary">Assign to me</goa-button>
     </goa-container>
 
     <script>
-      var deleteAllButton = document.getElementById('delete-all');
-      deleteAllButton.addEventListener('_click', () => {
+      var deleteAllButton = document.getElementById("delete-all");
+      deleteAllButton.addEventListener("_click", () => {
         document.getElementById("modal2").setAttribute("open", true);
       });
     </script>
-
 
     <!-- Checkbox -->
     <h2 id="section-checkbox">Checkbox</h2>
 
     <goa-form-item label="Terms and conditions">
-      <goa-checkbox
-        id="confirm"
-        name="confirm"
-        text="I accept the conditions"
-      />
+      <goa-checkbox id="confirm" name="confirm" text="I accept the conditions" />
     </goa-form-item>
     <script>
-      var checkbox = document.getElementById('confirm');
-      checkbox.addEventListener('_change', (e) => {
-        console.log('changed', e.detail);
+      var checkbox = document.getElementById("confirm");
+      checkbox.addEventListener("_change", e => {
+        console.log("changed", e.detail);
         checkbox.checked = e.detail.checked;
       });
     </script>
@@ -458,7 +528,6 @@
       <goa-button type="primary">Save</goa-button>
     </goa-button-group>
 
-
     <h2 id="section-icon-buttons">Icon Buttons</h2>
     <goa-icon-button type="close" />
     <goa-icon-button type="close" variant="nocolor" />
@@ -470,12 +539,10 @@
 
     <h2 id="section-icons">Icons</h2>
     <goa-icon type="close" />
-
   </goa-page-block>
 </main>
 
 <style>
-
   .custom-dropdown-content {
     display: flex;
     align-items: center;
@@ -489,7 +556,6 @@
   .dark-bg {
     display: inline-block;
     padding: 2rem;
-    background-color: var(--goa-color-primary)
+    background-color: var(--goa-color-primary);
   }
-
 </style>
