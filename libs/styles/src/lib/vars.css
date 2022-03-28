@@ -53,16 +53,6 @@
   --color-gray-500: #adadad;
   --color-gray-600: #666666;
 
-  --color-orange: #feba35;
-  --color-orange-100: hsl(39.7, 99.01%, 98%);
-  --color-orange-500: hsl(39.7, 99.01%, 60.2%);
-  --color-orange-900: hsl(39.7, 99.01%, 30%);
-
-  --color-blue: #005daa;
-  --color-blue-100: #e3f2ff;
-  --color-blue-500: #0070c4;
-  --color-blue-600: #004f84;
-
   /* new colors  */
   --goa-color-text: #333333;
   --goa-color-text-secondary: #666666;
@@ -78,9 +68,9 @@
   --goa-color-brand-light: #c8eefa;
   --goa-color-brand-dark: #005072;
 
-  --goa-color-primary: var(--color-blue);
-  --goa-color-primary-light: var(--color-blue-100);
-  --goa-color-primary-dark: var(--color-blue-600);
+  --goa-color-primary: var(#005daa);
+  --goa-color-primary-light: var(#e3f2ff);
+  --goa-color-primary-dark: var(#004f84);
 
   --goa-color-status-info: #005daa;
   --goa-color-status-info-light: #b4daf8;
