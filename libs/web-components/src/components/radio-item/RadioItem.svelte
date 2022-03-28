@@ -63,7 +63,7 @@
   <div class="goa-radio-icon" />
   <span class="goa-radio-label">
     <slot>
-      {label}
+      {label || value}
     </slot>
   </span>
 </label>
@@ -74,10 +74,6 @@
     font-family: var(--font-family);
   }
   label.goa-radio {
-    --goa-border-color: var(--color-gray-600);
-    --goa-border-color--checked: var(--goa-color-interactive--active);
-    --goa-radio-color--error: var(--goa-color-status-emergency);
-    --goa-radio-outline-color: var(--goa-color-interactive--highlight);
     --goa-radio-outline-width: 3px;
     --goa-radio-diameter: 1.5rem;
     --goa-radio-border-width: 1px;
@@ -100,7 +96,12 @@
   }
 
   .goa-radio input[type="radio"] {
-    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .goa-radio input[type="radio"]:focus ~ .goa-radio-icon  {
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--highlight);
   }
 
   .goa-radio-label {
@@ -118,7 +119,7 @@
   }
 
   .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-radio-outline-color);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--highlight);
   }
 
   .goa-radio--disabled:hover {
@@ -129,31 +130,31 @@
 
   /* Checked */
   input[type="radio"]:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid var(--goa-border-color--checked);
+    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive--active);
   }
 
   /* Not checked */
   input[type="radio"]:not(:checked) ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width) solid var(--goa-border-color);
+    border: var(--goa-radio-border-width) solid var(--color-gray-600);
   }
 
   /* Disabled */
   input[type="radio"]:disabled ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width) solid var(--goa-border-color);
-    opacity: 0.3;
+    border: var(--goa-radio-border-width) solid var(--color-gray-600);
+    opacity: 0.4;
   }
 
   /* Disabled and checked */
   input[type="radio"]:disabled:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid var(--goa-border-color--checked);
+    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive--active);
     opacity: 0.3;
   }
 
   /* Error */
   .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon {
-    border: 7px solid var(--goa-radio-color--error);
+    border: 7px solid var(--goa-color-status-emergency);
   }
   .goa-radio--error input[type="radio"]:not(:checked) ~ .goa-radio-icon {
-    border: 2px solid var(--goa-radio-color--error);
+    border: 2px solid var(--goa-color-status-emergency);
   }
 </style>

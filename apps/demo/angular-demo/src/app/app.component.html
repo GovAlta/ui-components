@@ -12,6 +12,12 @@
 
     <goa-checkbox name="desserts" text="Ice Cream" value="10" (_change)="onCheckboxChangeEvent($event)" ></goa-checkbox>
 
+    <goa-radio-group name="color" value="orange" (_change)="onRadioChange($event)">
+      <goa-radio-item name="color" label="Red" value="red"></goa-radio-item>
+      <goa-radio-item name="color" label="Blue" value="blue"></goa-radio-item>
+      <goa-radio-item name="color" label="Orange" value="orange"></goa-radio-item>
+    </goa-radio-group>
+
     <goa-button-group alignment="start">
       <goa-button type="primary" (_click)="submitForm()">Submit</goa-button>
     </goa-button-group>

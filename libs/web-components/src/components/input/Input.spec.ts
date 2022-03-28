@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom';
-import { render, fireEvent, waitFor } from '@testing-library/svelte';
+import { render, fireEvent, waitFor, cleanup } from '@testing-library/svelte';
 import GoAInput from './Input.svelte'
+
+afterEach(cleanup);
 
 describe('GoAInput Component', () => {
 
@@ -31,7 +33,7 @@ describe('GoAInput Component', () => {
   });
 
   it("allows for placeholder text", async () => {
-    const el = render(GoAInput, { testid: "input-test",  placeholder: "test-id" });
+    const el = render(GoAInput, { testid: "input-test", placeholder: "test-id" });
     const input = await el.findByTestId('input-test');
     expect(input.getAttribute("placeholder")).toBe("test-id");
   });

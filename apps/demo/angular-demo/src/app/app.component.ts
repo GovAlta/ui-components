@@ -15,6 +15,10 @@ export class AppComponent {
     console.log('onChange event of checkbox', event.detail);
   }
 
+  onRadioChange(e: any) {
+    console.log('onRadioChange', e.detail.name, e.detail.value);
+  }
+
   submitForm() {
     console.log('handleClick');
   }
