@@ -66,7 +66,7 @@ onChangeCheckboxTemplate.args = {
           name="desserts"
           text="Ice Cream"
           value="10"
-          (_click)="onChange()" >
+          (_change)="onChange()" >
         </goa-checkbox>
       `} lang="html" />
     <CodeSnippet lang="ts" code={`
@@ -144,6 +144,28 @@ export const disabledCheckboxTemplate = () => <GoACheckbox name="desserts" text=
   </Tab>
   <Tab label="React">
     <CodeSnippet code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" disabled></GoACheckbox>`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+
+### Error
+
+export const errorCheckboxTemplate = checkboxTemplate.bind({});
+errorCheckboxTemplate.args = {
+  error: true
+};
+
+<Story name="Error">{ errorCheckboxTemplate }</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error></goa-checkbox>`} lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error></goa-checkbox>`} lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" error></GoACheckbox>`} lang="jsx" />
   </Tab>
 </Tabs>
 

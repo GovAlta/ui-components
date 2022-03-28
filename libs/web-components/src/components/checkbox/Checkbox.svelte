@@ -90,15 +90,12 @@ import { toBoolean } from "../../common/utils";
     /* hide the input, but still make it tab-able */
     opacity: 0;
     position: absolute;
+    cursor: pointer;
   }
 
   /* disabled state */
   .goa-checkbox--disabled {
-    opacity: 30%;
-  }
-
-  label.goa-checkbox--disabled {
-    cursor: default;
+    opacity: 40%;
   }
 
   .goa-checkbox-container {
@@ -120,8 +117,12 @@ import { toBoolean } from "../../common/utils";
     background-color: var(--goa-color-interactive);
   }
 
-  .goa-checkbox-container:hover:not(.goa-checkbox--selected) {
-    background-color: var(--color-gray-100);
+  .goa-checkbox-container.goa-checkbox--selected:hover {
+    background-color: var(--goa-color-interactive--hover);
+  }
+
+  .goa-checkbox-container:hover {
+    border: 1px solid var(--goa-color-interactive);
   }
 
   .goa-checkbox-container:focus-within {
@@ -135,8 +136,18 @@ import { toBoolean } from "../../common/utils";
     font-weight: var(--fw-regular);
   }
 
-  /* Error state */
-  .goa-checkbox--error .goa-checkbox-container {
-    border: 2px solid var(--goa-color-status-emergency);
+  .goa-checkbox--disabled .goa-checkbox-container, .goa-checkbox--disabled .goa-checkbox-container:hover {
+    border: 1px solid var(--color-gray-500);
   }
+
+  /* Error state */
+  .goa-checkbox--error .goa-checkbox-container, .goa-checkbox--error .goa-checkbox-container:hover {
+    border: 1px solid var(--goa-color-status-emergency);
+    background-color: var(--color-white);
+  }
+
+  .goa-checkbox--error .goa-checkbox-container svg {
+    fill: var(--goa-color-status-emergency);
+  }
+
 </style>
