@@ -308,7 +308,7 @@
     </goa-flex-row>
 
     <goa-form-item label="Comments" optional>
-      <goa-textarea id="comments" name="comments" disabled />
+      <goa-textarea id="comments" name="comments" />
     </goa-form-item>
 
     <script>

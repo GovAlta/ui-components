@@ -24,7 +24,7 @@ export function App() {
 
       <GoAPageBlock>
         <form>
-          <GoAFormItem name="firstname" label="First Name">
+          <GoAFormItem label="First Name">
             <GoAInput id="firstname" name="firstname" type="text" value={firstName} onChange={(_name, value) => setFirstName(value) } />
           </GoAFormItem>
 

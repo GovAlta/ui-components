@@ -11,7 +11,6 @@
   export let type: "text" | "number" | "password" | "email" | "date" | "datetime-local" | "month" | "search" | "tel" | "time" | "url" | "week" = "text";
   export let name: string = "";
   export let value: string = "";
-  export let id: string = "";
   export let placeholder: string = "";
   export let leadingicon: GoAIconType = null;
   export let trailingicon: GoAIconType = null;
@@ -69,7 +68,6 @@
   {/if}
 
   <input
-    {id}
     bind:this={inputEl}
     class={`input--${variant}`}
     readonly={isReadonly}

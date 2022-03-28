@@ -4,10 +4,10 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
 
-  export let helptext: string = "";
-  export let name: string = "";
-  export let error: string = "";
+  // Optional
   export let label: string = "";
+  export let helptext: string = "";
+  export let error: string = "";
   export let optional: string;
 
   $: isOptional = toBoolean(optional);
@@ -16,7 +16,7 @@
 <!-- HTML -->
 <div class="goa-form-item">
   {#if label}
-    <label for={name}>
+    <label for="">
       {label}
       {#if isOptional}
         <em>(optional)</em>
