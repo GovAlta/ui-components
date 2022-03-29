@@ -74,7 +74,7 @@ import { GoAFormItem, GoAInput } from '@abgov/react-components';
 #### Help text
 
 <Story name="Help text">
-  <GoAFormItem label="First name" helptext="Help text">
+  <GoAFormItem label="First name" helpText="Help text">
     <GoAInput name="firstName" onChange={() => {}} />
   </GoAFormItem>
 </Story>
@@ -107,7 +107,7 @@ import { GoAFormItem, GoAInput } from '@abgov/react-components';
 #### Required
 
 <Story name="Required">
-  <GoAFormItem label="First name" error="First name is required">
+  <GoAFormItem label="First name" error="First name is required" helpText="Help text">
     <GoAInput name="firstName" onChange={() => {}} error />
   </GoAFormItem>
 </Story>
@@ -115,21 +115,21 @@ import { GoAFormItem, GoAInput } from '@abgov/react-components';
 <Tabs>
   <Tab label="Web Component">
     <CodeSnippet lang="html" code={`
-      <goa-form-item label="First name" error="First name is required">
+      <goa-form-item label="First name" error="First name is required" helptext="Help text">
         <goa-input type="text" error />
       </goa-form-item>
     `}/>
   </Tab>
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
-      <goa-form-item label="First name" error="First name is required">
+      <goa-form-item label="First name" error="First name is required" helptext="Help text">
         <goa-input type="text" error />
       </goa-form-item>
     `}/>
   </Tab>
   <Tab label="React">
     <CodeSnippet lang="tsx" code={`
-      <GoAFormItem label="First name" error="First name is required">
+      <GoAFormItem label="First name" error="First name is required" helpText="Help text">
         <GoAInput name="firstName" onChange={() => {}} error />
       </GoAFormItem>
     `}/>
