@@ -48,11 +48,10 @@
 
   label {
     display: block;
-    font-weight: bold;
-    color: #333;
+    font-weight: var(--fw-bold);
+    color: var(--goa-color-text);
     font-size: var(--fs-base);
     padding: 0.5rem 0;
-    max-height: 2.5rem;
   }
 
   label em {
@@ -69,7 +68,6 @@
   .help-msg {
     font-size: var(--fs-sm);
     color: var(--color-black);
-    /* margin-top: 0.25rem; */
   }
 
   .error-msg {
