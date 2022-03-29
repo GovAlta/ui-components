@@ -112,7 +112,7 @@ const SCTab = styled.div`
   }
 
   &.active {
-    border-bottom: 4px solid var(--goa-color-primary);
+    border-bottom: 4px solid var(--goa-color-brand);
     padding-bottom: 0;
   }
 

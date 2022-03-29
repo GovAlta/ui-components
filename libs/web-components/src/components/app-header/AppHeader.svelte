@@ -3,7 +3,7 @@
 <!-- Script -->
 <script lang="ts">
   export let url: string = "#";
-  export let title: string;
+  export let title: string = "";
 
   // optional
   export let testid: string = "";
