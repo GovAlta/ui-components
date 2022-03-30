@@ -145,7 +145,7 @@
   /* Disabled */
   input[type="radio"]:disabled ~ .goa-radio-icon {
     border: var(--goa-radio-border-width) solid var(--color-gray-600);
-    opacity: 0.4;
+    opacity: 0.3;
   }
 
   /* Disabled and checked */
