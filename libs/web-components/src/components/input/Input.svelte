@@ -54,7 +54,7 @@
 <!-- HTML -->
 
 <div
-  style:width={width}
+  style={`width: ${width};`}
   class={`
     goa-input ${isDisabled ? "goa-input--disabled" : ""}
     variant--${variant}
