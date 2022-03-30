@@ -100,6 +100,10 @@
     height: 0;
   }
 
+  .goa-radio input[type="radio"]:hover ~ .goa-radio-icon {
+    border-color: var(--goa-color-interactive--hover);
+  }
+
   .goa-radio input[type="radio"]:focus ~ .goa-radio-icon  {
     box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--highlight);
   }
