@@ -67,12 +67,12 @@
 
   .help-msg {
     font-size: var(--fs-sm);
-    color: var(--color-black);
+    color: var(--goa-color-text);
   }
 
   .error-msg {
     font-size: var(--fs-sm);
-    color: var(--goa-color-status-emergency);
+    color: var(--goa-color-interactive--error);
     margin-bottom: 0.25rem;
   }
 </style>
