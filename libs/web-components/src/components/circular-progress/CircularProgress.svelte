@@ -1,37 +1,45 @@
-<svelte:options tag="goa-page-loader" />
+<svelte:options tag="goa-circular-progress" />
 
 <!-- Script -->
 <script lang="ts">
   import { fade } from "svelte/transition";
 
   import noScroll from "../../common/no-scroll";
-  import { fromBoolean, toBoolean } from "../../common/utils";
+  import { toBoolean } from "../../common/utils";
   import type { SpinnerType } from "../spinner/Spinner.svelte";
 
-  export let type: SpinnerType = 'infinite';
-  export let message: string;
-  export let progress: number = 0;
-  export let visible: string;
-  export let variant: "fullscreen" | "inline" = "inline";
+  // Required
+  export let type: SpinnerType;
+  export let variant: "fullscreen" | "inline";
 
-  $: isVisible = toBoolean(visible) || variant === "inline";
+  // Optional
+  export let message: string = "";
+  export let progress: number = 0;
+  export let visible: string = "false";
+
+  $: isVisible = toBoolean(visible);
   $: fullscreen = variant === "fullscreen";
   $: inline = variant === "inline";
   $: ready = type && isVisible;
+
 </script>
 
 <!-- HTML -->
 {#if ready}
   {#if fullscreen}
-    <div transition:fade={{duration: 300}} use:noScroll={{enable: true}} class:fullscreen>
-      <goa-spinner type={type} size="xlarge" progress={progress || 0} />
+    <div
+      transition:fade={{ duration: 300 }}
+      use:noScroll={{ enable: true }}
+      class:fullscreen
+    >
+      <goa-spinner {type} size="xlarge" progress={progress || 0} />
       {#if message}
         <div class="message">{message}</div>
       {/if}
     </div>
-  {:else}
+  {:else if inline}
     <div class:inline>
-      <goa-spinner type={type} size="xlarge" progress={progress || 0} />
+      <goa-spinner {type} size="xlarge" progress={progress || 0} />
       {#if message}
         <div class="message">{message}</div>
       {/if}
@@ -47,10 +55,7 @@
   }
   .fullscreen {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     z-index: 9999;
     display: flex;
     align-items: center;

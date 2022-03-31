@@ -22,7 +22,7 @@ export { default as GoAInput } from './components/input/Input.svelte';
 export { default as GoAModal } from "./components/modal/Modal.svelte";
 export { default as GoANotification } from "./components/notification/Notification.svelte";
 export { default as GoAPageLayout } from "./layouts/PageLayout.svelte";
-export { default as GoAPageLoader } from "./components/page-loader/PageLoader.svelte";
+export { default as GoACircularProgress } from "./components/circular-progress/CircularProgress.svelte";
 export { default as GoARadioGroup } from "./components/radio-group/RadioGroup.svelte";
 export { default as GoARadioItem } from "./components/radio-item/RadioItem.svelte";
 export { default as GoAScrollable } from "./components/scrollable/Scrollable.svelte";

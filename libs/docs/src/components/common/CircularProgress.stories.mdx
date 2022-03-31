@@ -1,0 +1,291 @@
+import { Story } from '@storybook/addon-docs';
+import { useState, useEffect, useRef } from 'react';
+
+import { Tabs, Tab, CodeSnippet, SupportInfo, Markdown } from '@abgov/shared/storybook-common';
+import { GoAButton, GoACircularProgress } from '@abgov/react-components';
+
+<Meta title="Components/Circular Progress" />
+
+# Circular progress
+
+### A circular progress component provides visual feedback to users after they request an action from the system, e.g., submitting a form, calculating a fee, configuring tables. The progress indicator holds a user’s attention by indicating continued progress while the system loads the appropriate content.  The most common progress indicators are either circular or linear.
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DIO-DS?node-id=622%3A13612)
+
+---
+
+export const ProgressTemplate = (args) => {
+  const [progress, setProgress] = useState(0);
+  const updateProgress = () => {
+    return setInterval(() => {
+      setProgress(progress + 10);
+    }, 1000);
+  };
+  useEffect(() => {
+    const handle = updateProgress();
+    return () => {
+      clearInterval(handle);
+    };
+  }, [progress, setProgress]);
+  return <GoACircularProgress {...args} progress={progress} type="progress" />
+};
+
+export const FullscreenTemplate = (args) => {
+  const [visible, setVisibility] = useState(false);
+  function showProgress() {
+    setVisibility(true)
+    setTimeout(() => {
+      setVisibility(false);
+    }, 2000);
+  }
+  return (
+    <>
+      <GoAButton type="primary" onClick={showProgress}>
+        Show
+      </GoAButton>
+      <GoACircularProgress {...args} visible={visible} variant="fullscreen" />
+    </>
+  )
+};
+
+export const FullscreenProgressTemplate = () => {
+  const [progress, setProgress] = useState(0);
+  const [visible, setVisibility] = useState(false);
+  const handle = useRef(null);
+  function show() {
+    setVisibility(true)
+    startProgress();
+  }
+  function startProgress() {
+    handle.current = setInterval(() => {
+      setProgress((p) => {
+        return p + 20
+      });
+    }, 500);
+  };
+  useEffect(() => {
+    if (progress >= 100) {
+      clearInterval(handle.current);
+      setVisibility(false);
+    }
+  }, [progress, handle])
+  return (
+    <>
+      <GoAButton type="primary" onClick={show}>
+        Show
+      </GoAButton>
+      <GoACircularProgress visible={visible} variant="fullscreen" progress={progress} type="progress" />
+    </>
+  )
+};
+
+#### Properties
+
+<Tabs>
+  <Tab label="Web Component">
+    <Markdown content={`
+      | Property | Type                 | Required | Description                                                                                 |
+      | -------- | -------------------- | -------- | ------------------------------------------------------------------------------------------- |
+      | type     | infinite ++ progress | Yes      |                                                                                             |
+      | variant  | fullscreen ++ inline | Yes      |                                                                                             |
+      | visible  | string               | Yes      | Shows/hides the page loader, allowing for fade transition to be applied in each transition. |
+      | progress | string               | No       |                                                                                             |
+      | message  | string               | No       |                                                                                             |
+    `} />
+  </Tab>
+  <Tab label="Angular">
+    <Markdown content={`
+      | Property | Type                 | Required | Description                                                                                 |
+      | -------- | -------------------- | -------- | ------------------------------------------------------------------------------------------- |
+      | type     | infinite ++ progress | Yes      |                                                                                             |
+      | variant  | fullscreen ++ inline | Yes      |                                                                                             |
+      | visible  | string               | Yes      | Shows/hides the page loader, allowing for fade transition to be applied in each transition. |
+      | progress | string               | No       |                                                                                             |
+      | message  | string               | No       |                                                                                             |
+    `} />
+  </Tab>
+  <Tab label="React">
+    <Markdown content={`
+      | Property | Type                 | Required | Description                                                                                 |
+      | -------- | -------------------- | -------- | ------------------------------------------------------------------------------------------- |
+      | type     | infinite ++ progress | Yes      |                                                                                             |
+      | variant  | fullscreen ++ inline | Yes      |                                                                                             |
+      | visible  | boolean              | Yes      | Shows/hides the page loader, allowing for fade transition to be applied in each transition. |
+      | progress | number               | No       |                                                                                             |
+      | message  | string               | No       |                                                                                             |
+    `} />
+  </Tab>
+</Tabs>
+
+#### Message
+
+Message text is optional for all the variations listed.
+
+<Story name="Message">
+  <GoACircularProgress type="infinite" variant="inline" visible={true} message="Loading..." />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress
+        type="infinite"
+        variant="inline"
+        message="Loading..." visible />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress
+        type="infinite"
+        variant="inline"
+        message="Loading..."
+        (visible)="visible">
+      </goa-circular-progress>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoACircularProgress
+        type="infinite"
+        variant="inline"
+        message="Loading..."
+        visible={visible} />
+    `}/>
+  </Tab>
+</Tabs>
+
+
+#### Inline infinite
+
+<Story name="Inline infinite">
+  <GoACircularProgress type="infinite" variant="inline" visible={true} />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress type="infinite" variant="inline" visible />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress
+        type="infinite"
+        variant="inline"
+        (visible)="visible">
+      </goa-circular-progress>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoACircularProgress type="infinite" variant="inline" visible={visible} />
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Inline progress
+
+<Story name="Inline progress">
+  {ProgressTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress id="progress" variant="inline" type="infinite" visible />
+    `}/>
+    <CodeSnippet lang="js" code={`
+      const el = document.getElementById('progress');
+      setInterval(() => {
+        let p = parseInt(el.getAttribute('progress'));
+        p += 10;
+        el.setAttribute('progress', p);
+        if (p >= 100) {
+          el.removeAttribute("visible");
+        }
+      }, 1000);
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress
+        type="infinite"
+        variant="inline"
+        [progress]="progress"
+        [visible]="visible">
+      </goa-circular-progress>
+    `}/>
+    <CodeSnippet lang="ts" code={`
+      export class SomeComponent implements OnInit {
+        progress: number = 0;
+        visible: boolean = false;
+        ngOnInit() {
+          setInterval(() => {
+            this.progress += 10;
+            if (this.progress >= 100) {
+              this.visible = false;
+            }
+          }, 1000);
+        }
+      }
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoACircularProgress type="infinite" variant="inline" visible={visible} />
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Fullscreen infinite
+
+<Story name="Fullscreen infinite" args={{type: "infinite"}}>
+  {FullscreenTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress variant="fullscreen" type="infinite" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress variant="fullscreen" type="infinite"></goa-circular-progress>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoACircularProgress variant="fullscreen" type="infinite" visible={visible} />
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Fullscreen progress
+
+<Story name="Fullscreen progress">
+  {FullscreenProgressTemplate.bind({})} }
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress variant="fullscreen" type="progress" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress variant="fullscreen" type="progress"></goa-circular-progress>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoACircularProgress variant="fullscreen" type="progress" visible={visible} />
+    `}/>
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />
