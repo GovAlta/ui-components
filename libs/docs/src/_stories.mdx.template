@@ -1,12 +1,16 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Tabs, Tab, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import { Tabs, Tab, CodeSnippet, SupportInfo, Markdown } from '@abgov/shared/storybook-common';
 import { GoABadge } from '@abgov/react-components';
 
 <Meta title="Components/[Document Title]" />
 
 # [Title]
 
+### [description]
+
 [Figma design component](https://www.figma.com/file/???)
+
+---
 
 #### Basic
 
