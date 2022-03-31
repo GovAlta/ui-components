@@ -126,6 +126,9 @@
     box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--highlight);
   }
 
+  .goa-radio--disabled {
+    opacity: 0.4;
+  }
   .goa-radio--disabled:hover {
     cursor: default;
   }
@@ -145,13 +148,11 @@
   /* Disabled */
   input[type="radio"]:disabled ~ .goa-radio-icon {
     border: var(--goa-radio-border-width) solid var(--color-gray-600);
-    opacity: 0.3;
   }
 
   /* Disabled and checked */
   input[type="radio"]:disabled:checked ~ .goa-radio-icon {
     border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive--active);
-    opacity: 0.3;
   }
 
   /* Error */
