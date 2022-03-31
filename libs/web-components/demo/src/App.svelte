@@ -169,7 +169,7 @@
     <h3>Full screen</h3>
 
     <goa-button id="show-loader">Show page loader</goa-button>
-    <goa-page-loader
+    <goa-circular-progress
       id="page-loader"
       class="progress"
       type="progress"
@@ -185,7 +185,7 @@
     </script>
 
     <h3>Inline</h3>
-    <goa-page-loader
+    <goa-circular-progress
       class="progress"
       type="progress"
       message="Inline loading..."

@@ -68,9 +68,9 @@
   --goa-color-brand-light: #c8eefa;
   --goa-color-brand-dark: #005072;
 
-  --goa-color-primary: var(#005daa);
-  --goa-color-primary-light: var(#e3f2ff);
-  --goa-color-primary-dark: var(#004f84);
+  --goa-color-primary: #005daa;
+  --goa-color-primary-light: #e3f2ff;
+  --goa-color-primary-dark: #004f84;
 
   --goa-color-status-info: #005daa;
   --goa-color-status-info-light: #b4daf8;

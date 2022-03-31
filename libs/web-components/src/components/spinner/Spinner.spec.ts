@@ -8,7 +8,7 @@ describe('GoASpinner', () => {
     const result = render(GoASpinner, { testid: "my-spinner", size: "large" });
     const spinner = await result.findByTestId("my-spinner");
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(spinner).toBeTruthy();
     })
   });
