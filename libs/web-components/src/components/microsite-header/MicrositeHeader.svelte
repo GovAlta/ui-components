@@ -109,7 +109,7 @@
   }
 
   .service-level--alpha {
-    background-color: var(--goa-color-interactive--highlight);
+    background-color: var(--goa-color-status-warning);
     color: var(--goa-color-text);
   }
 
