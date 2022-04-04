@@ -1,6 +1,6 @@
 import React from 'react';
 
-type SkeletonType = "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile";
+export type SkeletonType = "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile";
 
 interface WCProps {
   size: number;
@@ -21,7 +21,7 @@ export interface SkeletonProps {
   size?: number;
 }
 
-export const GoASkeleton = ({ type, size = 0  }: SkeletonProps) => {
+export const GoASkeleton = ({ type, size = 1  }: SkeletonProps) => {
   return <goa-skeleton type={type} size={size} />;
 };
 

@@ -152,6 +152,10 @@
     border-radius: 0.3rem;
   }
 
+
+  .avatar {
+    display: inline-block;
+  }
   .avatar,
   .avatar-1 {
     width: 40px;
@@ -174,6 +178,10 @@
     border-radius: 50%;
   }
 
+
+  .thumbnail {
+    display: inline-block;
+  }
   .thumbnail,
   .thumbnail-1 {
     width: 40px;
@@ -194,6 +202,10 @@
     width: 120px;
     height: 120px;
     border-radius: 4px;
+  }
+
+  .card {
+    display: inline-block;
   }
   .card,
   .card-1,
