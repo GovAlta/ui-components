@@ -92,8 +92,7 @@ type Language =
 interface Props {
   lang: Language;
   code: string;
-
-  tabSize: number;
+  tabSize?: number;
 }
 
 const cleanTabs = (code = "", tabSize: number): string => {
