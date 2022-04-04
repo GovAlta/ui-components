@@ -2,8 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-
-import { toBoolean } from "../../common/utils";
+  import { toBoolean } from "../../common/utils";
   // Required
   export let name: string;
 
@@ -56,18 +55,26 @@ import { toBoolean } from "../../common/utils";
       on:change={onChange}
     />
     {#if isIndeterminate}
-      <svg id="dashmark" data-testid='dashmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 2">
+      <svg
+        id="dashmark"
+        data-testid="dashmark"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 15 2"
+      >
         <rect width="15" height="2" />
       </svg>
     {:else if isChecked}
-      <svg id="checkmark" data-testid='checkmark' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.18">
+      <svg
+        id="checkmark"
+        data-testid="checkmark"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 12.18"
+      >
         <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
       </svg>
     {/if}
   </div>
-  <div
-    class="goa-checkbox-text"
-    data-testid='text'>
+  <div class="goa-checkbox-text" data-testid="text">
     <slot name="main">
       {text}
     </slot>
@@ -126,7 +133,7 @@ import { toBoolean } from "../../common/utils";
   }
 
   .goa-checkbox-container:focus-within {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
     outline: none;
   }
 
@@ -136,12 +143,14 @@ import { toBoolean } from "../../common/utils";
     font-weight: var(--fw-regular);
   }
 
-  .goa-checkbox--disabled .goa-checkbox-container, .goa-checkbox--disabled .goa-checkbox-container:hover {
+  .goa-checkbox--disabled .goa-checkbox-container,
+  .goa-checkbox--disabled .goa-checkbox-container:hover {
     border: 1px solid var(--color-gray-500);
   }
 
   /* Error state */
-  .goa-checkbox--error .goa-checkbox-container, .goa-checkbox--error .goa-checkbox-container:hover {
+  .goa-checkbox--error .goa-checkbox-container,
+  .goa-checkbox--error .goa-checkbox-container:hover {
     border: 1px solid var(--goa-color-status-emergency);
     background-color: var(--color-white);
   }
@@ -149,5 +158,4 @@ import { toBoolean } from "../../common/utils";
   .goa-checkbox--error .goa-checkbox-container svg {
     fill: var(--goa-color-status-emergency);
   }
-
 </style>

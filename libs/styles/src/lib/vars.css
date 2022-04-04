@@ -61,7 +61,7 @@
   --goa-color-interactive: #0070c4;
   --goa-color-interactive--hover: #004f84;
   --goa-color-interactive--active: #004f84;
-  --goa-color-interactive--highlight: #feba35;
+  --goa-color-interactive--focus: #feba35;
   --goa-color-interactive--error: #ec040b;
 
   --goa-color-brand: #0081a2;

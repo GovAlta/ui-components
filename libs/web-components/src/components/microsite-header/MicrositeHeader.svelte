@@ -34,7 +34,9 @@
       </svg>
     </div>
     <div data-testid="level" class="site-text">
-      An official site of the <a href="https://www.alberta.ca/index.aspx">Alberta Government</a>
+      An official site of the <a href="https://www.alberta.ca/index.aspx"
+        >Alberta Government</a
+      >
     </div>
   {/if}
 
@@ -43,11 +45,12 @@
       {capitalize(level)}
     </div>
     <div data-testid="site-text" class="site-text">
-      This is a new <a href="https://www.alberta.ca/index.aspx">Alberta Government</a
-      >
+      This is a new <a href="https://www.alberta.ca/index.aspx">Alberta Government</a>
       service
       {#if feedbackurl}
-        <span data-testid="feedback">— help us improve it by giving <a href={feedbackurl}>feedback</a></span>
+        <span data-testid="feedback"
+          >— help us improve it by giving <a href={feedbackurl}>feedback</a></span
+        >
       {/if}
     </div>
   {/if}
@@ -97,7 +100,7 @@
   }
 
   .version {
-    color: var(--goa-color-600)
+    color: var(--goa-color-600);
   }
 
   .service-level {

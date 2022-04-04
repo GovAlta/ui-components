@@ -8,7 +8,19 @@
   import { toBoolean } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
-  export let type: "text" | "number" | "password" | "email" | "date" | "datetime-local" | "month" | "search" | "tel" | "time" | "url" | "week" = "text";
+  export let type:
+    | "text"
+    | "number"
+    | "password"
+    | "email"
+    | "date"
+    | "datetime-local"
+    | "month"
+    | "search"
+    | "tel"
+    | "time"
+    | "url"
+    | "week" = "text";
   export let name: string = "";
   export let value: string = "";
   export let placeholder: string = "";
@@ -31,7 +43,7 @@
 
   let inputEl: HTMLElement;
   $: if (isFocused && inputEl) {
-    setTimeout(() => inputEl.focus(), 1)
+    setTimeout(() => inputEl.focus(), 1);
   }
 
   function onKeyUp(e) {
@@ -60,7 +72,8 @@
     variant--${variant}
     type--${type}
   `}
-  class:error={isError}>
+  class:error={isError}
+>
   {#if leadingicon}
     <div class="goa-input-leading-icon">
       <goa-icon data-testid="leading-icon" type={leadingicon} />
@@ -131,7 +144,7 @@
   .goa-input:active,
   .goa-input:focus,
   .goa-input:focus-within {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
   }
 
   .goa-input:disabled {
@@ -218,7 +231,9 @@
     border: none;
   }
 
-  .variant--bare:focus, .variant--bare:active, .variant--bare:focus-within {
+  .variant--bare:focus,
+  .variant--bare:active,
+  .variant--bare:focus-within {
     box-shadow: none;
   }
 
