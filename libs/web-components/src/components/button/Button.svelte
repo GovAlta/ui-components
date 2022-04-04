@@ -67,7 +67,8 @@
     gap: 0.25rem;
     align-items: center;
 
-    transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
     transform: scaleX(1);
   }
 
@@ -89,7 +90,7 @@
 
   button.primary:focus,
   button.primary:active {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
     border-color: var(--goa-color-interactive--active);
     background: var(--goa-color-interactive--active);
     outline: none;
@@ -112,7 +113,7 @@
   button.secondary:focus,
   button.secondary:active {
     border-color: var(--goa-color-interactive--active);
-    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
     background: var(--color-gray-100);
     outline: none;
   }
@@ -135,7 +136,7 @@
   button.tertiary:active {
     border-color: var(--goa-color-interactive--active);
     color: var(--goa-color-interactive--active);
-    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
     outline: none;
   }
 

@@ -83,7 +83,7 @@
   .goa-textarea:active,
   .goa-textarea:focus,
   .goa-textarea:focus-within {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive--highlight);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
   }
   .goa-textarea:disabled {
     border-color: var(--color-gray-200);
