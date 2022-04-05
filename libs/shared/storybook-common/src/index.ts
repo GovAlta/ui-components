@@ -7,3 +7,5 @@ export * from './lib/block/Block';
 export * from './lib/Code/Code';
 export * from './lib/support-info/SupportInfo';
 export * from './lib/Markdown/Markdown';
+export * from './lib/Props/Props';
+export * from './lib/Props/Prop';
