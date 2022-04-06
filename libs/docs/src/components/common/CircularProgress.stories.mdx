@@ -67,6 +67,7 @@ export const FullscreenProgressTemplate = () => {
     if (progress >= 100) {
       clearInterval(handle.current);
       setVisibility(false);
+      setProgress(0);
     }
   }, [progress, handle])
   return (
