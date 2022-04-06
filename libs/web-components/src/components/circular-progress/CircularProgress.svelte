@@ -11,6 +11,7 @@
   // Required
   export let type: SpinnerType;
   export let variant: "fullscreen" | "inline";
+  export let size: "small" | "large";
 
   // Optional
   export let message: string = "";
@@ -20,7 +21,8 @@
   $: isVisible = toBoolean(visible);
   $: fullscreen = variant === "fullscreen";
   $: inline = variant === "inline";
-  $: ready = type && isVisible;
+  $: spinnerSize = size === "small" ? "large" : "xlarge"
+  $: ready = type && isVisible && size;
 
 </script>
 
@@ -32,14 +34,14 @@
       use:noScroll={{ enable: true }}
       class:fullscreen
     >
-      <goa-spinner {type} size="xlarge" progress={progress || 0} />
+      <goa-spinner {type} size={spinnerSize} progress={progress || 0} />
       {#if message}
         <div class="message">{message}</div>
       {/if}
     </div>
   {:else if inline}
-    <div class:inline>
-      <goa-spinner {type} size="xlarge" progress={progress || 0} />
+    <div class:inline class={"spinner-"+spinnerSize}>
+      <goa-spinner {type} size={spinnerSize} progress={progress || 0} />
       {#if message}
         <div class="message">{message}</div>
       {/if}
@@ -66,14 +68,18 @@
 
   .inline {
     margin: 3.5rem;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  .message {
-    margin-top: 1rem;
+  .spinner-large .message {
+    margin-top: 1.5rem;
     font-size: 1.2rem;
+  }
+  .spinner-xlarge .message {
+    margin-top: 2rem;
+    font-size: 1.5rem;
   }
 </style>
