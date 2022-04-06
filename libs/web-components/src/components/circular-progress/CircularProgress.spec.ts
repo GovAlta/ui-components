@@ -7,7 +7,7 @@ describe('GoACircularProgress', () => {
   ["fullscreen", "inline"].forEach((variant) => {
     ["infinite", "progress"].forEach((type: string) => {
       it(`renders the ${type} type of the ${variant} variant`, async () => {
-        const { container } = render(GoACircularProgress, { type, variant, message: "the message", visible: "true" });
+        const { container } = render(GoACircularProgress, { type, variant, message: "the message", visible: "true", size: "small" });
 
         await waitFor(() => {
           expect(container.querySelector(`.${variant}`)).toBeTruthy();
