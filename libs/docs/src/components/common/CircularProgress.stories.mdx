@@ -1,7 +1,7 @@
 import { Story } from '@storybook/addon-docs';
 import { useState, useEffect, useRef } from 'react';
 
-import { Tabs, Tab, CodeSnippet, SupportInfo, Markdown } from '@abgov/shared/storybook-common';
+import { Tabs, Tab, CodeSnippet, SupportInfo, Props, Prop } from '@abgov/shared/storybook-common';
 import { GoAButton, GoACircularProgress } from '@abgov/react-components';
 
 <Meta title="Components/Circular Progress" />
@@ -83,40 +83,34 @@ export const FullscreenProgressTemplate = () => {
 
 <Tabs>
   <Tab label="Web Component">
-    <Markdown content={`
-      | Property | Type                 | Required | Description                                                                                 |
-      | -------- | -------------------- | -------- | ------------------------------------------------------------------------------------------- |
-      | type     | infinite ++ progress | Yes      |                                                                                             |
-      | variant  | fullscreen ++ inline | Yes      |                                                                                             |
-      | visible  | string               | Yes      | Shows/hides the page loader, allowing for fade transition to be applied in each transition. |
-      | size     | small ++ large       | Yes      |                                                                                             |
-      | progress | string               | No       |                                                                                             |
-      | message  | string               | No       |                                                                                             |
-    `} />
+    <Props>
+      <Prop name="type" type="infinite | progress" required={true} description="The type of progress indicator" />
+      <Prop name="variant" type="fullscreen | inline" required={true} description="The variant of progress indicator" />
+      <Prop name="visible" type="boolean" required={true} description="Shows/hides the page loader, allowing for fade transition to be applied in each transition." />
+      <Prop name="size" type="small | large" required={true} description="The size of progress indicator" />
+      <Prop name="progress" type="number" defaultValue="0" description="The progress value" />
+      <Prop name="message" type="object" defaultValue="" description="Text displayed under the circular spinner" />
+    </Props>
   </Tab>
   <Tab label="Angular">
-    <Markdown content={`
-      | Property | Type                 | Required | Description                                                                                 |
-      | -------- | -------------------- | -------- | ------------------------------------------------------------------------------------------- |
-      | type     | infinite ++ progress | Yes      |                                                                                             |
-      | variant  | fullscreen ++ inline | Yes      |                                                                                             |
-      | visible  | string               | Yes      | Shows/hides the page loader, allowing for fade transition to be applied in each transition. |
-      | size     | small ++ large       | Yes      |                                                                                             |
-      | progress | string               | No       |                                                                                             |
-      | message  | string               | No       |                                                                                             |
-    `} />
+    <Props>
+      <Prop name="type" type="infinite | progress" required={true} description="The type of progress indicator" />
+      <Prop name="variant" type="fullscreen | inline" required={true} description="The variant of progress indicator" />
+      <Prop name="visible" type="boolean" required={true} description="Shows/hides the page loader, allowing for fade transition to be applied in each transition." />
+      <Prop name="size" type="small | large" required={true} description="The size of progress indicator" />
+      <Prop name="progress" type="number" defaultValue="0" description="The progress value" />
+      <Prop name="message" type="object" defaultValue="" description="Text displayed under the circular spinner" />
+    </Props>
   </Tab>
   <Tab label="React">
-    <Markdown content={`
-      | Property | Type                 | Required | Description                                                                                 |
-      | -------- | -------------------- | -------- | ------------------------------------------------------------------------------------------- |
-      | type     | infinite ++ progress | Yes      |                                                                                             |
-      | variant  | fullscreen ++ inline | Yes      |                                                                                             |
-      | visible  | boolean              | Yes      | Shows/hides the page loader, allowing for fade transition to be applied in each transition. |
-      | size     | small ++ large       | Yes      |                                                                                             |
-      | progress | number               | No       |                                                                                             |
-      | message  | string               | No       |                                                                                             |
-    `} />
+    <Props>
+      <Prop name="type" type="infinite | progress" required={true} description="The type of progress indicator" />
+      <Prop name="variant" type="fullscreen | inline" required={true} description="The variant of progress indicator" />
+      <Prop name="visible" type="boolean" required={true} description="Shows/hides the page loader, allowing for fade transition to be applied in each transition." />
+      <Prop name="size" type="small | large" required={true} description="The size of progress indicator" />
+      <Prop name="progress" type="number" defaultValue="0" description="The progress value" />
+      <Prop name="message" type="object" defaultValue="" description="Text displayed under the circular spinner" />
+    </Props>
   </Tab>
 </Tabs>
 
