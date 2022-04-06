@@ -6,7 +6,7 @@ import { GoACircularProgress, CircularProgressType, CircularProgressVariant } fr
 describe('CircularProgress', () => {
 
   it("does not render anything when not visible", async () => {
-    const { baseElement } = render(<GoACircularProgress type="infinite" variant="inline" message="the message" visible={false} />);
+    const { baseElement } = render(<GoACircularProgress type="infinite" variant="inline" message="the message" visible={false} size="small" />);
     const el = baseElement.querySelector('goa-circular-progress');
     expect(el.innerHTML).toBeFalsy();
   });
