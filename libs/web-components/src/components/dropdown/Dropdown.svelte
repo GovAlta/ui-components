@@ -243,6 +243,7 @@
 
   .goa-dropdown-background {
     position: fixed;
+    z-index: 98;
     inset: 0;
   }
 
