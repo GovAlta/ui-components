@@ -12,7 +12,7 @@ export { default as GoACardImage } from "./components/card-image/CardImage.svelt
 export { default as GoACheckbox } from "./components/checkbox/Checkbox.svelte";
 export { default as GoAContainer } from "./components/container/Container.svelte";
 export { default as GoADropdown } from './components/dropdown/Dropdown.svelte';
-export { default as GoADropdownItem } from './components/dropdown-item/DropdownItem.svelte';
+export { default as GoADropdownItem } from './components/dropdown/DropdownItem.svelte';
 export { default as GoAFlexRow } from "./components/flex-row/FlexRow.svelte";
 export { default as GoAFormItem } from "./components/form-item/FormItem.svelte";
 export { default as GoAHeroBanner } from "./components/hero-banner/HeroBanner.svelte";
@@ -24,7 +24,7 @@ export { default as GoANotification } from "./components/notification/Notificati
 export { default as GoAPageLayout } from "./layouts/PageLayout.svelte";
 export { default as GoACircularProgress } from "./components/circular-progress/CircularProgress.svelte";
 export { default as GoARadioGroup } from "./components/radio-group/RadioGroup.svelte";
-export { default as GoARadioItem } from "./components/radio-item/RadioItem.svelte";
+export { default as GoARadioItem } from "./components/radio-group/RadioItem.svelte";
 export { default as GoAScrollable } from "./components/scrollable/Scrollable.svelte";
 export { default as GoAMicrositeHeader } from "./components/microsite-header/MicrositeHeader.svelte";
 export { default as GoASkeleton } from "./components/skeleton/Skeleton.svelte";

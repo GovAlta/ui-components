@@ -3,15 +3,16 @@ import { GoAIconType } from "../icons";
 
 export * from './dropdown-option';
 
-interface DropdownProps {
+interface WCProps {
   ref: React.MutableRefObject<HTMLElement | null>;
   name: string;
   values: string;
   leadingicon?: string;
   maxheight?: number;
   placeholder?: string;
-  autocomplete?: boolean;
+  filterable?: boolean;
   disabled?: boolean;
+  error?: boolean;
   multiselect?: boolean;
 }
 
@@ -20,22 +21,23 @@ declare global {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      'goa-dropdown': DropdownProps & React.HTMLAttributes<HTMLElement>
+      'goa-dropdown': WCProps & React.HTMLAttributes<HTMLElement>
     }
   }
 }
 
 interface Props {
   name: string;
-  selectedValues: string[]
+  values: string[]
   onChange: (name: string, values: string[]) => void;
 
   // optional
   disabled?: boolean;
-  autoComplete?: boolean;
+  filterable?: boolean;
   leadingIcon?: GoAIconType,
   maxHeight?: number;
-  multiSelect?: boolean;
+  error?: boolean;
+  multiselect?: boolean;
   placeholder?: string;
   testId?: string;
 }
@@ -49,7 +51,7 @@ export const GoADropdown: FC<Props> = (props) => {
     }
     const current = el.current;
     const handler = (state: any) => {
-      const { name, value } = state.detail.data;
+      const { name, value } = state.detail;
       props.onChange(name, value);
     };
     current.addEventListener('_change', handler);
@@ -62,13 +64,14 @@ export const GoADropdown: FC<Props> = (props) => {
     <goa-dropdown
       ref={el}
       name={props.name}
-      values={JSON.stringify(props.selectedValues)}
+      values={JSON.stringify(props.values)}
       leadingicon={props.leadingIcon}
       maxheight={props.maxHeight}
       placeholder={props.placeholder}
-      autocomplete={props.autoComplete}
+      filterable={props.filterable}
       disabled={props.disabled}
-      multiselect={props.multiSelect}
+      multiselect={props.multiselect}
+      error={props.error}
       data-testid={props.testId}
     >
       {props.children}
