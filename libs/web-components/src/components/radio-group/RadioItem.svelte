@@ -1,8 +1,9 @@
 <svelte:options tag="goa-radio-item" />
 
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
-  import { messageChannel } from "../../common/radio-store";
+  import { onMount } from "svelte";
+  import { getContext, ContextStore } from '../../common/context-store';
+  import type { RadioMessage } from "./types";
 
   export let value: string;
   export let label: string;
@@ -12,41 +13,28 @@
   let disabled = false;
   let checked = false;
   let error = false;
-
-  let unsubscribe;
+  let ctx: ContextStore;
 
   // Hooks
 
   onMount(() => {
-    unsubscribe = messageChannel.subscribe(channel => {
-      const msg = channel[name];
-      if (msg?.tag !== name) {
-        return;
-      }
-      checked = msg.payload.value === value;
-      disabled = msg.payload.disabled;
-      error = msg.payload.error;
+    ctx = getContext(name);
+    ctx.subscribe<RadioMessage>("propChange", (state) => {
+      checked = state.value === value;
+      disabled = state.disabled;
+      error = state.error;
     });
   });
-
-  onDestroy(unsubscribe);
 
   // Events
 
   function onChange(e) {
     checked = !checked;
     if (checked) {
-      messageChannel.update(prev => {
-        return {
-          ...prev,
-          [name]: {
-            tag: name,
-            payload: {
-              disabled,
-              value,
-            },
-          },
-        };
+      ctx.notify("optionChange", {
+        checked,
+        disabled,
+        value,
       });
     }
   }
@@ -55,11 +43,12 @@
 <!-- HTML -->
 
 <label
+  data-testid="radio-item-{value}"
   class="goa-radio"
   class:goa-radio--disabled={disabled}
   class:goa-radio--error={error}
 >
-  <input type="radio" data-testid="radio-input" {name} {value} {checked} {disabled} on:change={onChange} />
+  <input type="radio" {name} {value} {checked} {disabled} on:change={onChange} />
   <div class="goa-radio-icon" />
   <span class="goa-radio-label">
     <slot>

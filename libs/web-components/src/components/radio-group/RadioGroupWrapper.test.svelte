@@ -1,5 +1,8 @@
 <!-- Script -->
 <script lang="ts">
+  import GoARadioGroup from "./RadioGroup.svelte";
+  import GoARadioItem from "./RadioItem.svelte";
+
   export let name: string = '';
   export let value: string = '';
   export let orientation = 'vertical';
@@ -11,16 +14,16 @@
 </script>
 
 <!-- HTML -->
-<goa-radio-group
+<GoARadioGroup
   name={name}
   value={value}
   orientation={orientation}
   disabled={disabled}
   error={error}
-  data-testid={testid}>
+  testid={testid}>
 
   {#each items as item (item) }
-    <goa-radio-item data-testid={`radio-item-${item}`} name={name} value={item} label={item} />
+    <GoARadioItem name={name} value={item} label={item} />
   {/each}
 
-</goa-radio-group>
+</GoARadioGroup>

@@ -1,8 +1,10 @@
 <svelte:options tag="goa-dropdown-item" />
 
 <script lang="ts">
-  import { messageChannel } from "../../common/dropdown-store";
   import { fromBoolean, toBoolean } from "../../common/utils";
+  import { getContext, ContextStore } from '../../common/context-store';
+  import { onMount, onDestroy } from "svelte";
+  import type { BindSelectedMessage, ChangeFilterMessage } from "./types";
 
   // public
   export let name: string = "";
@@ -10,18 +12,18 @@
   export let label: string = "";
 
   // optional
-  export let testId: string = "";
   export let selected: string = "false";
   export let disabled: string = "false";
   export let hide: string = "false";
+  export let testid: string;
 
   $: isSelected = toBoolean(selected);
   $: isDisabled = toBoolean(disabled);
   $: isHidden = toBoolean(hide);
 
   // private
-  let multiSelect: boolean;
   let filteredLabel: string;
+  let ctx: ContextStore;
 
   function getFilteredLabel(filter: string) {
     if (filter.length === 0) {
@@ -43,73 +45,61 @@
     return filteredLabel;
   }
 
-  messageChannel.subscribe(channel => {
-    const msg = channel[name];
-    if (!msg) {
-      return;
-    }
-    if (msg.tag !== name) {
-      return;
-    }
-
-    switch (msg.payload.type) {
-      case "FilterChange": {
-        const filter = msg.payload.filter.toLowerCase();
-        if (!value && !label) {
-          hide = "false";
-        } else {
-          const matches =
-            value.toLowerCase().includes(filter) || label.toLowerCase().includes(filter);
-          hide = fromBoolean(!matches);
-        }
-        filteredLabel = getFilteredLabel(filter);
-        break;
-      }
-      case "DropDownAction": {
-        if (msg.payload.label !== label && !multiSelect) {
-          isSelected = false;
-        }
-        break;
-      }
-      case "DropDownInit": {
-        isSelected = msg.payload.values.includes(value);
-        multiSelect = msg.payload.multiSelect;
-        if (isSelected) {
-          messageChannel.update(old => ({
-            ...old,
-            [name]: {
-              tag: name,
-              payload: {
-                type: "DropDownAction",
-                action: "select",
-                label,
-                value,
-              },
-            },
-          }));
-        }
-        break;
-      }
-    }
-  });
-
   function onSelect() {
     isSelected = !isSelected;
-
-    messageChannel.update(old => ({
-      ...old,
-      [name]: {
-        tag: name,
-        payload: {
-          type: "DropDownAction",
-          action: isSelected ? "select" : "deselect",
-          label: label,
-          value: value,
-          multiSelect,
-        },
-      },
-    }));
+    ctx.notify("selectionChange", {
+      label,
+      value,
+      selected: isSelected,
+    });
   }
+
+  // Hooks
+
+  let unsub: () => void;
+  onMount(() => {
+    ctx = getContext(name);
+    ctx.subscribe<BindSelectedMessage>("propChange", (data) => {
+      isSelected = data.values.includes(value)
+    });
+
+    unsub = ctx.subscribe<BindSelectedMessage>("propChange", (data) => {
+      const isSelected = data.values.includes(value);
+      if (isSelected) {
+        ctx.notify("init", {
+          label,
+          value,
+          selected: true,
+        });
+      }
+      unsub();
+    });
+
+    ctx.subscribe<ChangeFilterMessage>("filterChange", (data) => {
+      const filter = data.filter.toLowerCase();
+      if (!value && !label) {
+        hide = "false";
+      } else {
+        let matches;
+        switch (typeof value) {
+          case "string":
+            matches = value?.toLowerCase().includes(filter) || label?.toLowerCase().includes(filter);
+            break;
+          case "number":
+            matches = value === filter || label?.toLowerCase().includes(filter);
+            break;
+        }
+
+        hide = fromBoolean(!matches);
+      }
+      filteredLabel = getFilteredLabel(filter);
+    });
+  });
+
+  onDestroy(() => {
+    unsub();
+  });
+
 </script>
 
 <li
@@ -117,7 +107,7 @@
   class:goa-dropdown-option--disabled={isDisabled}
   class:goa-dropdown-option--selected={isSelected}
   style={`display: ${isHidden ? "none" : "block"}`}
-  data-testid={testId}
+  data-testid={testid}
   on:click={onSelect}
 >
   {@html filteredLabel || label}
