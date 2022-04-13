@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import { Tabs, Tab, Note, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
 import { GoARadioGroup, GoARadioItem } from '@abgov/react-components';
+import { useState } from 'react';
 
 <Meta title="Components/Radio Button" />
 
@@ -12,22 +13,24 @@ import { GoARadioGroup, GoARadioItem } from '@abgov/react-components';
 
 ---
 
-export const BasicTemplate = () => {
+export const BasicTemplate = (args) => {
+  const [value, setValue] = useState('');
   function onChange(name, value) {
     console.log('onChange', name, value);
+    setValue(value);
   }
   return (
-    <GoARadioGroup name="basic" value="orange" onChange={onChange}>
-      <GoARadioItem name="basic" label="Red" value="red" />
-      <GoARadioItem name="basic" label="Blue" value="blue" />
-      <GoARadioItem name="basic" label="Orange" value="orange"/>
+    <GoARadioGroup name={args.name} orientation={args.orientation || "vertical"} value={value} onChange={onChange}>
+      <GoARadioItem name={args.name} label="Red" value="red" />
+      <GoARadioItem name={args.name} label="Blue" value="blue" />
+      <GoARadioItem name={args.name} label="Orange" value="orange"/>
     </GoARadioGroup>
   )
 }
 
 #### Basic
 
-<Story name="Basic">{BasicTemplate.bind({})}</Story>
+<Story name="Basic" args={{name: "basic"}}>{BasicTemplate.bind({})}</Story>
 
 **Note:** The `name` prop is required and must be the same for the `GoARadioGroup` and `GoARadioItem` components.
 
@@ -84,12 +87,23 @@ export const BasicTemplate = () => {
 
 #### Error
 
+export const ErrorTemplate = () => {
+  const [value, setValue] = useState('blue');
+  function onChange(name, value) {
+    console.log('onChange', name, value);
+    setValue(value);
+  }
+  return (
+    <GoARadioGroup name="error" value={value} onChange={onChange} error={true}>
+      <GoARadioItem name="error" label="Red" value="red" />
+      <GoARadioItem name="error" label="Blue" value="blue" />
+      <GoARadioItem name="error" label="Orange" value="orange"/>
+    </GoARadioGroup>
+  )
+}
+
 <Story name="Error">
-  <GoARadioGroup name="error" value="orange" error={true}>
-    <GoARadioItem name="error" value="red" />
-    <GoARadioItem name="error" value="blue" />
-    <GoARadioItem name="error" value="orange"/>
-  </GoARadioGroup>
+  {ErrorTemplate.bind()}
 </Story>
 
 <Tabs>
@@ -126,12 +140,8 @@ export const BasicTemplate = () => {
 
 Display a custom label that is different that the `value` property.
 
-<Story name="Label">
-  <GoARadioGroup name="disabled" value="orange" disabled={true}>
-    <GoARadioItem name="disabled" label="Red" value="red" />
-    <GoARadioItem name="disabled" label="Blue" value="blue" />
-    <GoARadioItem name="disabled" label="Orange" value="orange"/>
-  </GoARadioGroup>
+<Story name="Label" args={{name: 'label'}}>
+  {BasicTemplate.bind({})}
 </Story>
 
 <Tabs>
@@ -206,12 +216,8 @@ Display a custom label that is different that the `value` property.
 
 #### Orientation
 
-<Story name="Orientation">
-  <GoARadioGroup name="orientation" value="orange" orientation="horizontal">
-    <GoARadioItem name="orientation" value="red" />
-    <GoARadioItem name="orientation" value="blue" />
-    <GoARadioItem name="orientation" value="orange"/>
-  </GoARadioGroup>
+<Story name="Orientation" args={{name: "orientation", orientation: "horizontal"}}>
+  {BasicTemplate.bind()}
 </Story>
 
 <Tabs>

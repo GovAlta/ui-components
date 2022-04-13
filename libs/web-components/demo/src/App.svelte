@@ -353,6 +353,7 @@
     <goa-flex-row gap="small">
       <goa-form-item label="First name" helptext="This is helper text">
         <goa-input id="firstname" name="firstname" disabled="false" />
+        <goa-input id="firstname" name="firstname" disabled="false" type="number" />
       </goa-form-item>
 
       <goa-form-item label="Middle name" optional helptext="This should be disabled">
@@ -388,27 +389,18 @@
 
     <h2 id="section-dropdown">DropDown / Combobox</h2>
     <goa-form-item label="Favourite Actor">
-      <goa-dropdown id="dropdown" name="autocomplete" multiselect autocomplete>
-        <goa-dropdown-item name="autocomplete" value="1" label="Tom Cruise" />
-        <goa-dropdown-item name="autocomplete" value="2" label="Nicholas Cage">
-          <div class="custom-dropdown-content">
-            <img
-              alt="nicholas cage"
-              height="40"
-              width="40"
-              src="https://www.placecage.com/40/40"
-            />
-            <span>Nicholas Cage</span>
-          </div>
-        </goa-dropdown-item>
-        <goa-dropdown-item name="autocomplete" value="3" label="Tom Hardy" />
-        <goa-dropdown-item name="autocomplete" value="4" label="Val Kilmer" />
+      <goa-dropdown id="dropdown" name="favactor" values='["3"]'>
+        <goa-dropdown-item value="1" name="favactor" label="Tom Cruise" />
+        <goa-dropdown-item value="3" name="favactor" label="Tom Hardy" />
+        <goa-dropdown-item value="4" name="favactor" label="Val Kilmer" />
       </goa-dropdown>
     </goa-form-item>
+
     <script>
       var dropdown = document.getElementById("dropdown");
       dropdown.addEventListener("_change", e => {
-        console.log(e.detail);
+        console.log("_change", e.detail);
+        dropdown.setAttribute("values", JSON.stringify(e.detail.value));
       });
     </script>
 
@@ -424,12 +416,20 @@
         <goa-radio-item name="color" value="green" label="Green" />
       </goa-radio-group>
     </goa-form-item>
+    <goa-form-item label="Second Favourite Color">
+      <goa-radio-group id="radioGroup2" name="color2" value="blue">
+        <goa-radio-item name="color2" value="red" label="Red" />
+        <goa-radio-item name="color2" value="blue" label="Blue" />
+        <goa-radio-item name="color2" value="green" label="Green" />
+      </goa-radio-group>
+    </goa-form-item>
 
     <script>
       var radioCheckbox = document.getElementById("radio-error");
       var radioGroup = document.getElementById("radioGroup1");
       radioGroup.addEventListener("_change", e => {
         console.log("in the on change", e.detail);
+        radioGroup.setAttribute("value", e.detail.value);
       });
       radioCheckbox.addEventListener("_change", e => {
         const checked = e.detail.value === "checked";
@@ -440,6 +440,12 @@
           radioGroup.removeAttribute("error");
         }
       });
+
+      // var radioGroup2 = document.getElementById("radioGroup2");
+      // radioGroup2.addEventListener("_change", e => {
+      //   console.log("in the on change", e.detail);
+      //   radioGroup2.setAttribute("value", e.detail.value);
+      // });
     </script>
 
     <h2 id="section-callout">Callout</h2>

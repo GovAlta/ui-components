@@ -7,7 +7,7 @@
 <goa-page-block>
   <form>
     <goa-form-item name="firstname" label="First Name">
-      <goa-input id="firstname" name="firstname" (_change)="onInputChangeEvent($event)" type="text" width="50%"></goa-input>
+      <goa-input error id="firstname" name="firstname" (_change)="onInputChangeEvent($event)" type="text" width="50%"></goa-input>
     </goa-form-item>
 
     <goa-checkbox name="desserts" text="Ice Cream" value="10" (_change)="onCheckboxChangeEvent($event)" ></goa-checkbox>
@@ -27,4 +27,32 @@
     <goa-skeleton type="text"></goa-skeleton>
     <goa-skeleton type="text"></goa-skeleton>
   </form>
+
+  <goa-dropdown name="SelectUserDropDown"
+      placeholder="Select a user"
+      [values]="selectedUsers"
+      multiselect="true"
+      [filterable]="filterable"
+      [error]="error"
+      (_change)="onAssignedUserSelected($event)">
+      <goa-dropdown-item
+        name="SelectUserDropDown"
+        *ngFor="let user of availableUsers"
+        [value]="user.id"
+        [label]="user.name"
+      >
+      </goa-dropdown-item>
+  </goa-dropdown>
+
+  <goa-dropdown name="colors" placeholder="Select a user" filterable="true">
+    <goa-dropdown-item value="red" name="colors" label="Red"></goa-dropdown-item>
+    <goa-dropdown-item value="green" name="colors" label="Green"></goa-dropdown-item>
+    <goa-dropdown-item value="blue" name="colors" label="Blue"></goa-dropdown-item>
+  </goa-dropdown>
+
+  <goa-dropdown name="colors" placeholder="Select a user" error="true">
+    <goa-dropdown-item value="red" name="colors" label="Red"></goa-dropdown-item>
+    <goa-dropdown-item value="green" name="colors" label="Green"></goa-dropdown-item>
+    <goa-dropdown-item value="blue" name="colors" label="Blue"></goa-dropdown-item>
+  </goa-dropdown>
 </goa-page-block>

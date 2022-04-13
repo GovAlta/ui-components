@@ -48,6 +48,10 @@ export const GoARadioGroup: FC<Props> = ({
       return;
     }
     const listener = (e: any) => {
+      if (!onChange) {
+        console.warn("Missing onChange function")
+        return;
+      }
       onChange(name, e.detail.value);
     }
     const currentEl = el.current;

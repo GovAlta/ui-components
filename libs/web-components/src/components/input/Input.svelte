@@ -237,10 +237,6 @@
     box-shadow: none;
   }
 
-  .goa-state--error .goa-input {
-    border: 2px solid var(--goa-color-status-emergency);
-  }
-
   .error:hover,
   .error:focus,
   .error {
