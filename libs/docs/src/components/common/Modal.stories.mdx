@@ -68,7 +68,7 @@ export const Template = () => {
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
       <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
-      <goa-modal id="modal" title="Do you agree?" [open]="isOpen" closable>
+      <goa-modal id="modal" title="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
@@ -81,8 +81,12 @@ export const Template = () => {
     `}/>
     <CodeSnippet lang="ts" code={`
       export class SomeComponent {
+        isOpen: boolean = false;
         openModal(e) {
-          // set isOpen attribute to true
+          isOpen = true;
+        }
+        closeModal(e) {
+          isOpen = false;
         }
       }
     `}/>
