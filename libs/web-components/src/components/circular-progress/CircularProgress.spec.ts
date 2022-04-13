@@ -6,13 +6,15 @@ describe('GoACircularProgress', () => {
 
   ["fullscreen", "inline"].forEach((variant) => {
     ["infinite", "progress"].forEach((type: string) => {
-      it(`renders the ${type} type of the ${variant} variant`, async () => {
-        const { container } = render(GoACircularProgress, { type, variant, message: "the message", visible: "true", size: "small" });
+      ["small", "large"].forEach((size: string) => {
+        it(`renders the ${type} type of the ${variant} variant`, async () => {
+          const { container } = render(GoACircularProgress, { type, variant, size, message: "the message", visible: "true" });
 
-        await waitFor(() => {
-          expect(container.querySelector(`.${variant}`)).toBeTruthy();
-          expect(container.querySelector(".message").innerHTML).toContain("the message");
-          expect(container.querySelector("goa-spinner").hasAttribute(type));
+          await waitFor(() => {
+            expect(container.querySelector(`.${variant}`)).toBeTruthy();
+            expect(container.querySelector(".message").innerHTML).toContain("the message");
+            expect(container.querySelector("goa-spinner").hasAttribute(type));
+          })
         })
       })
     });
