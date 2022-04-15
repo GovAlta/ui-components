@@ -3,7 +3,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { getContext, ContextStore } from '../../common/context-store';
-  import type { RadioMessage } from "./types";
+  import { PROP_CHANGE, OPTION_CHANGE, RadioMessage } from "./types";
 
   export let value: string;
   export let label: string;
@@ -19,10 +19,15 @@
 
   onMount(() => {
     ctx = getContext(name);
-    ctx.subscribe<RadioMessage>("propChange", (state) => {
-      checked = state.value === value;
-      disabled = state.disabled;
-      error = state.error;
+    ctx.subscribe((state) => {
+      switch (state?.type) {
+        case PROP_CHANGE: {
+          const _state = state as RadioMessage;
+          checked = _state.value === value;
+          disabled = _state.disabled;
+          error = _state.error;
+        }
+      }
     });
   });
 
@@ -31,7 +36,8 @@
   function onChange(e) {
     checked = !checked;
     if (checked) {
-      ctx.notify("optionChange", {
+      ctx.notify({
+        type: OPTION_CHANGE,
         checked,
         disabled,
         value,

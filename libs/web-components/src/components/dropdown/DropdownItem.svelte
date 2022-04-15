@@ -3,8 +3,8 @@
 <script lang="ts">
   import { fromBoolean, toBoolean } from "../../common/utils";
   import { getContext, ContextStore } from '../../common/context-store';
-  import { onMount, onDestroy } from "svelte";
-  import type { BindSelectedMessage, ChangeFilterMessage } from "./types";
+  import { onMount } from "svelte";
+  import { BindSelectedMessage, CHANGE, ChangeFilterMessage, FILTER, INIT_RESPONSE, SELECT } from "./types";
 
   // public
   export let name: string = "";
@@ -24,6 +24,8 @@
   // private
   let filteredLabel: string;
   let ctx: ContextStore;
+
+  let isInitialized = false;
 
   function getFilteredLabel(filter: string) {
     if (filter.length === 0) {
@@ -47,7 +49,8 @@
 
   function onSelect() {
     isSelected = !isSelected;
-    ctx.notify("selectionChange", {
+    ctx.notify({
+      type: SELECT,
       label,
       value,
       selected: isSelected,
@@ -55,49 +58,53 @@
   }
 
   // Hooks
-
-  let unsub: () => void;
   onMount(() => {
     ctx = getContext(name);
-    ctx.subscribe<BindSelectedMessage>("propChange", (data) => {
-      isSelected = data.values.includes(value)
-    });
+    ctx.subscribe((data) => {
+      switch (data?.type) {
 
-    unsub = ctx.subscribe<BindSelectedMessage>("propChange", (data) => {
-      const isSelected = data.values.includes(value);
-      if (isSelected) {
-        ctx.notify("init", {
-          label,
-          value,
-          selected: true,
-        });
-      }
-      unsub();
-    });
+        case CHANGE: {
+          const _data = data as BindSelectedMessage;
+          isSelected = _data.values?.includes(value)
 
-    ctx.subscribe<ChangeFilterMessage>("filterChange", (data) => {
-      const filter = data.filter.toLowerCase();
-      if (!value && !label) {
-        hide = "false";
-      } else {
-        let matches;
-        switch (typeof value) {
-          case "string":
-            matches = value?.toLowerCase().includes(filter) || label?.toLowerCase().includes(filter);
-            break;
-          case "number":
-            matches = value === filter || label?.toLowerCase().includes(filter);
-            break;
+          // This condition is only run when the parent component passes
+          // the values down on the **initial** value binding and if this
+          // dropdown item contains the value that is set within the parent.
+          if (!isInitialized && isSelected) {
+            ctx.notify({
+              type: INIT_RESPONSE,
+              label,
+              value,
+              selected: true,
+            });
+          }
+          // child has been initialized
+          isInitialized = true;
+          break;
         }
 
-        hide = fromBoolean(!matches);
-      }
-      filteredLabel = getFilteredLabel(filter);
-    });
-  });
+        case FILTER: {
+          const { filter } = data as ChangeFilterMessage;
+          if (!value && !label) {
+            hide = "false";
+          } else {
+            let matches: boolean;
+            switch (typeof value) {
+              case "string":
+                matches = value?.toLowerCase().includes(filter) || label?.toLowerCase().includes(filter);
+                break;
+              case "number":
+                matches = value === filter || label?.toLowerCase().includes(filter);
+                break;
+            }
 
-  onDestroy(() => {
-    unsub();
+            hide = fromBoolean(!matches);
+          }
+          filteredLabel = getFilteredLabel(filter);
+          break;
+        }
+      }
+    });
   });
 
 </script>

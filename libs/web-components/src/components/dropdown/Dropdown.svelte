@@ -3,8 +3,8 @@
 <script lang="ts">
   import { getContext, deleteContext, ContextStore } from "../../common/context-store";
   import type { GoAIconType } from "../icon/Icon.svelte";
-  import { onDestroy, onMount, tick } from "svelte";
-  import type { ChangeSelectedMessage } from "./types";
+  import { onMount, onDestroy, tick } from "svelte";
+  import { CHANGE, ChangeSelectedMessage, FILTER, INIT_RESPONSE, SELECT } from "./types";
 
   const MAX_HEIGHT = 300;
 
@@ -39,9 +39,6 @@
   let filter = "";
   let ctx: ContextStore;
 
-  let unsubChangeSelected: () => void;
-  let unsubInit: () => void;
-
   // notify children of value change
   $: {
     if (values !== undefined) {
@@ -53,7 +50,9 @@
       }
       selectedValues = vals;
 
-      ctx?.notify("propChange", {
+      // notify children of value change
+      ctx?.notify({
+        type: CHANGE,
         multiSelect: multiselect,
         values: vals,
       });
@@ -65,70 +64,67 @@
 
     ctx = getContext(name);
 
-
     // Listen for initial label selection updates on initial mount.
     // > This is required because the parent does not know the label values
     // > for each of the children, so on the initial load any preselected values
     // > have to communicated back to the parent of the label values that correspond
     // > to the preselected values.
     // > A separate event is required to prevent circular updates.
-    unsubInit = ctx.subscribe<ChangeSelectedMessage>("init", data => {
-      if (multiselect) {
-        selectedLabels = [...selectedLabels, data.label];
-      } else {
-        selectedLabels = [data.label];
-      }
-      // calling the unsub init
-      unsubInit();
-    })
+    ctx.subscribe(data => {
+      switch (data?.type) {
 
-    // listen for change messages from children
-    unsubChangeSelected = ctx.subscribe<ChangeSelectedMessage>("selectionChange", data => {
-      if (data.selected) {
-        if (multiselect) {
-          selectedLabels = [...selectedLabels, data.label];
-          selectedValues = [...selectedValues, data.value];
-        } else {
-          selectedLabels = [data.label];
-          selectedValues = [data.value];
+        case INIT_RESPONSE: {
+          const { label } = data as ChangeSelectedMessage
+          if (multiselect) {
+            selectedLabels = [...selectedLabels, label];
+          } else {
+            selectedLabels = [label];
+          }
+          break;
         }
-      } else {
-        selectedLabels = selectedLabels.filter(label => label !== data.label);
-        selectedValues = selectedValues.filter(value => value !== data.value);
+
+        case SELECT: {
+          const { label, value } = data as ChangeSelectedMessage
+          if (data.selected) {
+            if (multiselect) {
+              selectedLabels = [...selectedLabels, label];
+              selectedValues = [...selectedValues, value];
+            } else {
+              selectedLabels = [label];
+              selectedValues = [value];
+            }
+          } else {
+            selectedLabels = selectedLabels.filter(l => l !== label);
+            selectedValues = selectedValues.filter(v => v !== value);
+          }
+
+          if (!multiselect) {
+            isMenuVisible = false;
+          }
+
+          el.dispatchEvent(
+            new CustomEvent("_change", {
+              composed: true,
+              detail: { name, value: selectedValues }, // TODO: send single value if multiselect is false
+            }),
+          );
+          break;
+        }
       }
-
-      if (!multiselect) {
-        isMenuVisible = false;
-      }
-
-      // This isn't required when the component is properly bound, but this
-      // will make the component appear to work properly before the component
-      // is properly bound.
-      ctx.notify("propChange", {
-        multiSelect: multiselect,
-        values: selectedValues,
-      });
-
-      el.dispatchEvent(
-        new CustomEvent("_change", {
-          composed: true,
-          detail: { name, value: selectedValues }, // TODO: send single value if multiselect is false
-        }),
-      );
-    });
+    })
   });
 
   onDestroy(() => {
-    unsubChangeSelected();
     deleteContext(name);
-  });
+  })
 
   // Reactive
 
   let filterOnChangeListener = e => {
     e.stopPropagation();
     filter = e.detail.value;
-    ctx.notify("filterChange", {
+    ctx.notify({
+      type: FILTER,
       filter,
     });
   };
@@ -136,7 +132,8 @@
   let filterOnTrailingIconClickListener = e => {
     e.stopPropagation();
     filter = "";
-    ctx.notify("filterChange", {
+    ctx.notify({
+      type: FILTER,
       filter,
     });
     filterEl?.focus();

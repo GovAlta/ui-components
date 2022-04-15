@@ -3,8 +3,9 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
   import { getContext, deleteContext, ContextStore } from '../../common/context-store';
-  import type { RadioMessage } from "./types";
+  import { OPTION_CHANGE, RadioMessage } from "./types";
   import { toBoolean } from '../../common/utils';
+  import { PROP_CHANGE } from './types';
 
   export let name: string;
   export let value: string;
@@ -22,7 +23,8 @@
 
   // reactive updates to exposed properties
   $: {
-    ctx?.notify("propChange", {
+    ctx?.notify({
+      type: PROP_CHANGE,
       value,
       disabled: isDisabled,
       error: isError,
@@ -33,21 +35,26 @@
 
   onMount(() => {
     ctx = getContext(name);
-    ctx.subscribe<RadioMessage>("optionChange", (state) => {
+    ctx.subscribe((state) => {
+      switch (state?.type) {
+        case OPTION_CHANGE: {
+          const _state = state as RadioMessage;
+          // This isn't required when the component is properly bound, but this
+          // will make the component appear to work properly before the component
+          // is properly bound.
+          ctx.notify({
+            type: PROP_CHANGE,
+            value: _state.value,
+            disabled: _state.disabled,
+            error: _state.error,
+          });
 
-      // This isn't required when the component is properly bound, but this
-      // will make the component appear to work properly before the component
-      // is properly bound.
-      ctx.notify("propChange", {
-        value: state.value,
-        disabled: state.disabled,
-        error: state.error,
-      });
-
-      el.dispatchEvent(new CustomEvent('_change', {
-        composed: true,
-        detail: { name, value: state.value}
-      }))
+          el.dispatchEvent(new CustomEvent('_change', {
+            composed: true,
+            detail: { name, value: state.value}
+          }))
+        }
+      }
     });
 
   });
