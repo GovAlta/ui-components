@@ -11,23 +11,21 @@ import { Writable, writable } from 'svelte/store';
  * export let value: string;
  *
  * let store: ContextStore;
- * let unsubscribe: () => void;
  *
  * // listen to changes from outside the component
  * $: {
- *  ctx?.update("parentEvent", { value });
+ *  ctx.update("parentEvent", { value });
  * }
  *
  * // initialize store
  * onMount(() => {
  *  store = getContext("my-context");
- *  unsubscribe = store.subscribe<CustomType>("childEvent", (data) => {
+ *  store.subscribe<CustomType>("childEvent", (data) => {
  *    console.log(data.name, data.value)
  *  })
  * )}
  *
  * onDestroy(() => {
- *   unsubscribe();
  *   deleteContext("my-context");
  * })
  *
@@ -58,26 +56,26 @@ import { Writable, writable } from 'svelte/store';
 
 const stores: Record<string, ContextStore> = {};
 
+export interface Message {
+  [key: string]: unknown;
+  type: string;
+}
+
 export class ContextStore {
-  private store: Writable<{ [key: string]: unknown }>;
+  private store: Writable<Message>;
 
   constructor() {
-    this.store = writable<{ [messageName: string]: unknown }>({});
+    this.store = writable<Message>();
   }
 
-  subscribe<T extends { type: string}>(event: string, cb: (data: T) => void): () => void {
-    return this.store.subscribe((state: T) => {
-      if (state.type === event) {
-        cb(state as T)
-      }
+  subscribe(cb: (msg: Message) => void) {
+    this.store.subscribe(state => {
+      cb((state as unknown) as Message)
     })
   }
 
-  notify(event: string, data: Record<string, unknown>) {
-    this.store.update(() => ({
-      type: event,
-      ...data,
-    }))
+  notify(msg: Message) {
+    this.store.update(() => msg);
   }
 }
 
