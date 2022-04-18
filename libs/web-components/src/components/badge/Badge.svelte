@@ -86,7 +86,7 @@
 
   .goa-badge.badge-information {
     background-color: var(--color-gray-100);
-    color: var(--color-status-info);
+    color: var(--goa-color-status-info);
   }
 
   .goa-badge.badge-success {
