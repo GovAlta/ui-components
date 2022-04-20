@@ -42,7 +42,7 @@
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    padding: 1rem 0;
+    padding: 1rem 0.5rem;
     border-bottom: 1px solid var(--color-gray-100);
   }
 
