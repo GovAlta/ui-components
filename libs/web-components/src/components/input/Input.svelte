@@ -147,16 +147,6 @@
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
   }
 
-  .goa-input:disabled {
-    border-color: var(--color-gray-500);
-  }
-  .goa-input:disabled:hover {
-    border-color: var(--color-gray-500);
-  }
-  .goa-input:disabled:focus {
-    box-shadow: none;
-  }
-
   .goa-input input[readonly] {
     cursor: pointer;
   }
@@ -203,16 +193,13 @@
     border: none;
   }
 
-  .goa-input--disabled {
-    opacity: 0.5;
-    cursor: default;
-    border-color: var(--color-black);
-  }
-
+  .goa-input--disabled,
   .goa-input--disabled:hover,
   .goa-input--disabled:active,
   .goa-input--disabled:focus {
-    border-color: var(--color-black);
+    background-color: var(--color-gray-100);
+    border-color: var(--color-gray-200);
+    color: var(--goa-color-text-secondary);
     cursor: default;
     box-shadow: none;
   }

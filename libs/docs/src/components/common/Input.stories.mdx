@@ -63,7 +63,7 @@ export const InputTemplate = () => {
   </Tab>
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
-      <goa-input name="foo" (_click)="onChange()" />
+      <goa-input name="foo" (_click)="onChange()"></goa-input>
     `}/>
     <CodeSnippet lang="ts" code={`
       export class SomeComponent {
@@ -95,9 +95,10 @@ export const InputTemplate = () => {
 ### Icons
 
 export const IconInputTemplate = () => <>
-  <GoAInputText name="foo" leadingIcon="finger-print" onChange={noop} />
-  <br />
-  <GoAInputText name="foo" trailingIcon="finger-print" onChange={noop} />
+  <div style={{display: "flex", gap: "4px", flexDirection: "column"}}>
+    <GoAInputText name="foo" leadingIcon="finger-print" onChange={noop} />
+    <GoAInputText name="foo" trailingIcon="finger-print" onChange={noop} />
+  </div>
 </>
 
 <Story name="Icons">{ IconInputTemplate.bind({}) }</Story>
@@ -108,8 +109,8 @@ export const IconInputTemplate = () => <>
     <CodeSnippet code={`<goa-input trailingicon="finger-print" />`} lang="html" />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input leadingicon="finger-print" />`} lang="html" />
-    <CodeSnippet code={`<goa-input trailingicon="finger-print" />`} lang="html" />
+    <CodeSnippet code={`<goa-input leadingicon="finger-print"></goa-input>`} lang="html" />
+    <CodeSnippet code={`<goa-input trailingicon="finger-print"></goa-input>`} lang="html" />
   </Tab>
   <Tab label="React">
     <CodeSnippet code={`<GoAInput leadingIcon="finger-print" />`} lang="jsx" />
@@ -183,41 +184,55 @@ export const VariantInputTemplate = () => <>
 
 <Story name="Variant">{ VariantInputTemplate.bind({}) }</Story>
 
-Blurb on when to use this variant
-
 <Tabs>
   <Tab label="Web Component">
     <CodeSnippet code={`<goa-input type="search" variant="bare" placeholder="Find by name" />` } lang="html" />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input type="search" variant="bare" placeholder="Find by name" />` } lang="html" />
+    <CodeSnippet code={`<goa-input type="search" variant="bare" placeholder="Find by name"></goa-input>` } lang="html" />
   </Tab>
   <Tab label="React">
     <CodeSnippet code={`<GoAInputSearch name="foo" variant="bare" placeholder="Find by name" />` } lang="jsx" />
   </Tab>
 </Tabs>
 
-### Readonly / Disabled
+### Readonly
 
 export const ReadonlyInputTemplate = () => <>
   <GoAInput name="foo" readonly={true} value="Readonly" onChange={noop} />
-  <br />
-  <GoAInput name="foo" disabled={true} value="Disabled" onChange={noop} />
 </>
 
-<Story name="Readonly / Disabled">{ ReadonlyInputTemplate.bind({}) }</Story>
-
-Blurb on when to use this variant
+<Story name="Readonly">{ ReadonlyInputTemplate.bind({}) }</Story>
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet code={`<goa-input type="search" placeholder="Find by name" />`} lang="html" />
+    <CodeSnippet code={`<goa-input type="search" readonly="true" placeholder="Find by name" />`} lang="html" />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input type="search" placeholder="Find by name" />`} lang="html" />
+    <CodeSnippet code={`<goa-input type="search" readonly="true" placeholder="Find by name"></goa-input>`} lang="html" />
   </Tab>
   <Tab label="React">
-    <CodeSnippet code={`<GoAInputSearch placeholder="Find by name" />`} lang="jsx" />
+    <CodeSnippet code={`<GoAInputSearch readonly={true} placeholder="Find by name" />`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+### Disabled
+
+export const DisabledInputTemplate = () => <>
+  <GoAInput name="foo" disabled={true} value="Disabled" onChange={noop} />
+</>
+
+<Story name="Disabled">{ DisabledInputTemplate.bind({}) }</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet code={`<goa-input type="search" disabled="true" placeholder="Find by name" />`} lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-input type="search" disabled="true" placeholder="Find by name"></goa-input>`} lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInputSearch disabled={true} placeholder="Find by name" />`} lang="jsx" />
   </Tab>
 </Tabs>
 
@@ -229,14 +244,12 @@ export const ErrorInputTemplate = () => <>
 
 <Story name="Error">{ ErrorInputTemplate.bind({}) }</Story>
 
-Blurb on when to use this variant
-
 <Tabs>
   <Tab label="Web Component">
     <CodeSnippet code={`<goa-input error  />`} lang="html" />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input error  />`} lang="html" />
+    <CodeSnippet code={`<goa-input error></goa-input>`} lang="html" />
   </Tab>
   <Tab label="React">
     <CodeSnippet code={`<GoAInput name="foo" error={true} />`} lang="jsx" />
@@ -251,14 +264,12 @@ export const FocusInputTemplate = () => <>
 
 <Story name="Focus">{ FocusInputTemplate.bind({}) }</Story>
 
-Blurb on when to use this variant
-
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet code={`<goa-input error  />`} lang="html" />
+    <CodeSnippet code={`<goa-input error />`} lang="html" />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input error  />`} lang="html" />
+    <CodeSnippet code={`<goa-input error></goa-input>`} lang="html" />
   </Tab>
   <Tab label="React">
     <CodeSnippet code={`<GoAInput name="foo" error={true} />` } lang="jsx" />
@@ -269,40 +280,24 @@ Blurb on when to use this variant
 
 export const TypesInputTemplate = (args) => {
   return (
-    <>
+    <div style={{display: "flex", gap: "4px", flexDirection: "column"}}>
       <GoAInputText name="basic" placeholder="leading icon"  leadingIcon="person-circle" onChange={noop} />
-      <br />
       <GoAInput placeholder="trailing button" trailingIcon="finger-print" onTrailingIconClick={() => console.log('click')} name="trailing-button" onChange={noop} />
-      <br />
       <GoAInputPassword placeholder="password" name="password" onChange={noop} />
-      <br />
       <GoAInputDate name="date" onChange={noop} />
-      <br />
       <GoAInputTime name="time" onChange={noop} />
-      <br />
       <GoAInputDateTime name="datetime" onChange={noop} />
-      <br />
       <GoAInputEmail placeholder="email" name="email" onChange={noop} />
-      <br />
       <GoAInputSearch placeholder="search" name="search" onChange={noop} />
-      <br />
       <GoAInputUrl placeholder="url" name="url" onChange={noop} />
-      <br />
       <GoAInputTel placeholder="phone number" name="tel" onChange={noop} />
-      <br />
       <GoAInputFile name="file" onChange={noop} />
-      <br />
-      <br />
       <GoAInputMonth name="month" onChange={noop} />
-      <br />
       <GoAInputNumber name="number" onChange={noop} />
-      <br />
       <GoAInputRange name="range" onChange={noop} />
-    </>
+    </div>
   );
 };
-
-Blurb on when to use this variant
 
 <Story name="Types">{ TypesInputTemplate.bind({}) }</Story>
 
@@ -327,20 +322,20 @@ Blurb on when to use this variant
   </Tab>
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
-      <goa-input type="text" placeholder="leading icon" leadingicon="person-circle" />
-      <goa-input type="text" placeholder="trailing button" trailingicon="finger-print" (onClick)="handleClick()" />
-      <goa-input type="password" placeholder="password" />
-      <goa-input type="date" />
-      <goa-input type="time" />
-      <goa-input type="datetime-local" />
-      <goa-input type="email" placeholder="email" />
-      <goa-input type="search" placeholder="search" />
-      <goa-input type="url" placeholder="url" />
-      <goa-input type="tel" placeholder="phone number" />
-      <goa-input type="file" />
-      <goa-input type="month" />
-      <goa-input type="number" />
-      <goa-input type="range" />
+      <goa-input type="text" placeholder="leading icon" leadingicon="person-circle"></goa-input>
+      <goa-input type="text" placeholder="trailing button" trailingicon="finger-print" (onClick)="handleClick()"></goa-input>
+      <goa-input type="password" placeholder="password"></goa-input>
+      <goa-input type="date"></goa-input>
+      <goa-input type="time"></goa-input>
+      <goa-input type="datetime-local"></goa-input>
+      <goa-input type="email" placeholder="email"></goa-input>
+      <goa-input type="search" placeholder="search"></goa-input>
+      <goa-input type="url" placeholder="url"></goa-input>
+      <goa-input type="tel" placeholder="phone number"></goa-input>
+      <goa-input type="file"></goa-input>
+      <goa-input type="month"></goa-input>
+      <goa-input type="number"></goa-input>
+      <goa-input type="range"></goa-input>
     `} />
   </Tab>
   <Tab label="React">
