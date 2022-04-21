@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { getContext, deleteContext, ContextStore } from '../../common/context-store';
+  import { deleteContext, ContextStore, createContext } from '../../common/context-store';
   import { OPTION_CHANGE, RadioMessage } from "./types";
   import { toBoolean } from '../../common/utils';
   import { PROP_CHANGE } from './types';
@@ -34,7 +34,7 @@
   let el: HTMLElement;
 
   onMount(() => {
-    ctx = getContext(name);
+    ctx = createContext(name);
     ctx.subscribe((state) => {
       switch (state?.type) {
         case OPTION_CHANGE: {

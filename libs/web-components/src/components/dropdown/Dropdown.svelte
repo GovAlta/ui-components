@@ -1,7 +1,7 @@
 <svelte:options tag="goa-dropdown" />
 
 <script lang="ts">
-  import { getContext, deleteContext, ContextStore } from "../../common/context-store";
+  import { deleteContext, ContextStore, createContext } from "../../common/context-store";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { onMount, onDestroy, tick } from "svelte";
   import { CHANGE, ChangeSelectedMessage, FILTER, INIT_RESPONSE, SELECT } from "./types";
@@ -60,10 +60,8 @@
   }
 
   onMount(async () => {
-    await tick();
-
-    ctx = getContext(name);
-
+    console.log('Dropdown Parent mounting...')
+    ctx = createContext(name);
     // Listen for initial label selection updates on initial mount.
     // > This is required because the parent does not know the label values
     // > for each of the children, so on the initial load any preselected values

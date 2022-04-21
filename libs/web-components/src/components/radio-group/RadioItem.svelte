@@ -17,8 +17,8 @@
 
   // Hooks
 
-  onMount(() => {
-    ctx = getContext(name);
+  onMount(async () => {
+    ctx = await getContext(name);
     ctx.subscribe((state) => {
       switch (state?.type) {
         case PROP_CHANGE: {

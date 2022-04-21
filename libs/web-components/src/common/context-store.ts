@@ -1,3 +1,4 @@
+import { tick } from 'svelte';
 import { Writable, writable } from 'svelte/store';
 
 /**
@@ -79,12 +80,25 @@ export class ContextStore {
   }
 }
 
-export function getContext(name: string): ContextStore {
+export function createContext(name: string): ContextStore {
+  const ctx = new ContextStore();
+  stores[name] = ctx
+  return ctx
+}
+
+export async function getContext(name: string): Promise<ContextStore> {
+  return await _getContext(name, 0);
+}
+
+async function _getContext(name: string, attempts: number): Promise<ContextStore> {
+  if (attempts > 10) {
+    throw new Error(`Could not find context ${name}`)
+  }
   if (stores[name]) {
     return stores[name];
   }
-  stores[name] = new ContextStore();
-  return stores[name];
+  await tick();
+  return _getContext(name, attempts + 1);
 }
 
 export function deleteContext(name: string) {

@@ -49,7 +49,7 @@
 
   function onSelect() {
     isSelected = !isSelected;
-    ctx.notify({
+    ctx?.notify({
       type: SELECT,
       label,
       value,
@@ -58,13 +58,14 @@
   }
 
   // Hooks
-  onMount(() => {
-    ctx = getContext(name);
+  onMount(async () => {
+    ctx = await getContext(name);
     ctx.subscribe((data) => {
       switch (data?.type) {
 
         case CHANGE: {
           const _data = data as BindSelectedMessage;
+          console.log('DropdownItem change...', data)
           isSelected = _data.values?.includes(value)
 
           // This condition is only run when the parent component passes
