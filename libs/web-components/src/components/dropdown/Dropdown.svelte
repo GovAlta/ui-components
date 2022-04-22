@@ -94,9 +94,6 @@
     <div data-testid={`${name}-dropdown`}>
       <goa-input
         on:click={showMenu}
-        on:blur={async () => {
-          setTimeout(closeMenu, 100);
-        }}
         error={isError}
         disabled={disabled}
         {leadingicon}
