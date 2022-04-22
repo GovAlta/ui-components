@@ -168,6 +168,7 @@
   .goa-input-trailing-icon {
     display: flex;
     align-items: center;
+    margin-right: 0.5rem;
   }
 
   .goa-input-trailing-icon > .goa-icon-button {
@@ -229,6 +230,6 @@
   .error:hover,
   .error:focus,
   .error {
-    border: 2px solid var(--goa-color-status-emergency-dark);
+    border: 2px solid var(--goa-color-interactive--error);
   }
 </style>

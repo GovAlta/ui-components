@@ -105,7 +105,6 @@
         name="search"
         readonly
         trailingicon="chevron-down"
-        handletrailingiconclick
         type="text"
         value={selectedLabel}
       />
@@ -145,6 +144,7 @@
 
   .goa-dropdown-box {
     position: relative;
+    cursor: pointer;
   }
 
   .menu goa-input {
@@ -226,7 +226,7 @@
   }
 
   .goa-dropdown-option--selected {
-    background: var(--goa-color-interactive--active);
+    background: var(--goa-color-interactive);
     color: var(--color-white);
   }
 
