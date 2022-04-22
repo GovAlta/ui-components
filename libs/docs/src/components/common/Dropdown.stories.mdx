@@ -14,13 +14,13 @@ import { useState } from 'react';
 ---
 
 export const Template = (args) => {
-  const [value, setValue] = useState(['green']);
+  const [value, setValue] = useState('green');
   function onChange(name, value) {
     console.log(name, value)
     setValue(value);
   }
   return (
-    <GoADropdown {...args} name={args.name} values={value} onChange={onChange}>
+    <GoADropdown {...args} name={args.name} value={value} onChange={onChange}>
       <GoADropdownOption name={args.name} value="red" label="Red" />
       <GoADropdownOption name={args.name} value="green" label="Green" />
       <GoADropdownOption name={args.name} value="blue" label="Blue" />
@@ -28,7 +28,7 @@ export const Template = (args) => {
   )
 }
 
-#### Single selection
+#### Basic
 
 <Story name="Basic" args={{ name: "basic" }}>
   { Template.bind() }
@@ -47,7 +47,7 @@ export const Template = (args) => {
       var dropdown = document.getElementById("dropdown");
       dropdown.addEventListener("_change", e => {
         console.log("_change", e.detail);
-        dropdown.setAttribute("values", JSON.stringify(e.detail.value));
+        dropdown.setAttribute("value", e.detail.value);
       });
     `}/>
   </Tab>
@@ -55,7 +55,7 @@ export const Template = (args) => {
     <CodeSnippet lang="html" code={`
       <goa-dropdown name="colors"
           placeholder="Select a user"
-          [values]="selectedColors"
+          [value]="selectedColor"
           (_change)="selectColor($event)">
           <goa-dropdown-item
             name="colors"
@@ -78,77 +78,12 @@ export const Template = (args) => {
   </Tab>
   <Tab label="React">
     <CodeSnippet lang="tsx" code={`
-      const [values, setValues] = useState(['green']);
-      function onChange(name, values) {
-        setValues(values);
+      const [value, setValue] = useState('green');
+      function onChange(name, value) {
+        setValue(value);
       }
       return (
-        <GoADropdown name="colors" values={values} onChange={onChange}>
-          <GoADropdownOption name="colors" value="red" label="Red" />
-          <GoADropdownOption name="colors" value="green" label="Green" />
-          <GoADropdownOption name="colors" value="blue" label="Blue" />
-        </GoADropdown>
-      )
-    `}/>
-  </Tab>
-</Tabs>
-
-
-#### Multi selection
-<Story name="Multiselect" args={{ name: "multiselect", multiselect: true }}>
-  { Template.bind() }
-</Story>
-
-<Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-dropdown id="dropdown" name="colors" multiselect="true">
-        <goa-dropdown-item value="red" name="colors" label="Red" />
-        <goa-dropdown-item value="green" name="colors" label="Green" />
-        <goa-dropdown-item value="blue" name="colors" label="Blue" />
-      </goa-dropdown>
-    `}/>
-    <CodeSnippet lang="js" code={`
-      var dropdown = document.getElementById("dropdown");
-      dropdown.addEventListener("_change", e => {
-        console.log("_change", e.detail);
-        dropdown.setAttribute("values", JSON.stringify(e.detail.value));
-      });
-    `}/>
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-dropdown name="colors"
-          placeholder="Select a user"
-          multiselect="true"
-          [values]="selectedColors"
-          (_change)="selectColor($event)">
-          <goa-dropdown-item
-            name="colors"
-            *ngFor="let color of colors"
-            [value]="color"
-            [label]="color"
-          >
-          </goa-dropdown-item>
-      </goa-dropdown>
-    `}/>
-    <CodeSnippet lang="js" code={`
-      export class MyComponent {
-        colors: string[] = ['red', 'green', 'blue'];
-        selectColor(event: any) {
-          this.selectedColors = event.detail.value
-        }
-      }
-    `}/>
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
-      const [values, setValues] = useState(['green']);
-      function onChange(name, values) {
-        setValues(values);
-      }
-      return (
-        <GoADropdown name="colors" multiselect={true} values={values} onChange={onChange}>
+        <GoADropdown name="colors" value={value} onChange={onChange}>
           <GoADropdownOption name="colors" value="red" label="Red" />
           <GoADropdownOption name="colors" value="green" label="Green" />
           <GoADropdownOption name="colors" value="blue" label="Blue" />
@@ -185,7 +120,7 @@ export const Template = (args) => {
   </Tab>
   <Tab label="React">
     <CodeSnippet lang="tsx" code={`
-      <GoADropdown name="colors" error={true} values={values} onChange={() => {}}>
+      <GoADropdown name="colors" error={true} value={value} onChange={() => {}}>
         <GoADropdownOption name="colors" value="red" label="Red" />
         <GoADropdownOption name="colors" value="green" label="Green" />
         <GoADropdownOption name="colors" value="blue" label="Blue" />
@@ -193,42 +128,6 @@ export const Template = (args) => {
     `}/>
   </Tab>
 </Tabs>
-
-#### Filter
-<Story name="Filter" args={{ name: "filterable", filterable: true }}>
-  { Template.bind() }
-</Story>
-
-<Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-dropdown id="dropdown" name="colors" filterable="true">
-        <goa-dropdown-item value="red" name="colors" label="Red" />
-        <goa-dropdown-item value="green" name="colors" label="Green" />
-        <goa-dropdown-item value="blue" name="colors" label="Blue" />
-      </goa-dropdown>
-    `}/>
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-dropdown name="colors" placeholder="Select a user" filterable="true">
-        <goa-dropdown-item value="red" name="colors" label="Red"></goa-dropdown-item>
-        <goa-dropdown-item value="green" name="colors" label="Green"></goa-dropdown-item>
-        <goa-dropdown-item value="blue" name="colors" label="Blue"></goa-dropdown-item>
-      </goa-dropdown>
-    `}/>
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
-      <GoADropdown name="colors" filterable={true} values={values} onChange={() => {}}>
-        <GoADropdownOption name="colors" value="red" label="Red" />
-        <GoADropdownOption name="colors" value="green" label="Green" />
-        <GoADropdownOption name="colors" value="blue" label="Blue" />
-      </GoADropdown>
-    `}/>
-  </Tab>
-</Tabs>
-
 
 ---
 
