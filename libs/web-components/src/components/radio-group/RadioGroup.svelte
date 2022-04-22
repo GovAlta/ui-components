@@ -117,6 +117,8 @@
   .goa-radio input[type="radio"] {
     width: 0;
     height: 0;
+    margin: 0;
+    appearance: none;
   }
 
   .goa-radio input[type="radio"]:hover ~ .goa-radio-icon {
