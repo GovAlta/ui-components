@@ -129,10 +129,9 @@
     outline: none;
     transition: box-shadow 0.1s ease-in;
     border: 1px solid var(--color-gray-600);
-    border-radius: 3px;
+    border-radius: var(--input-border-radius);
     background: white;
-    color: var(--color-black, #ccc);
-    padding: var(--input-padding, 0.5rem) 0.5rem;
+    color: var(--color-black);
 
     display: inline-flex;
     align-items: center;
@@ -169,6 +168,7 @@
   .goa-input-trailing-icon {
     display: flex;
     align-items: center;
+    margin-right: 0.5rem;
   }
 
   .goa-input-trailing-icon > .goa-icon-button {
@@ -179,6 +179,9 @@
     display: block;
     width: 100%;
     font-size: var(--input-font-size);
+    padding: var(--input-padding);
+    line-height: calc(40px - calc(var(--input-padding) * 2));
+    background-color: transparent;
   }
 
   .goa-input-leading-icon + input {
@@ -227,6 +230,6 @@
   .error:hover,
   .error:focus,
   .error {
-    border: 2px solid var(--goa-color-status-emergency-dark);
+    border: 2px solid var(--goa-color-interactive--error);
   }
 </style>

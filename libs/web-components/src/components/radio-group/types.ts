@@ -1,11 +1,9 @@
 import type { Message } from "../../common/context-store";
 
-export const PROP_CHANGE = "prop-change";
-export const OPTION_CHANGE = "option-change";
+export const BIND = "bind";
 
 export interface RadioMessage extends Message {
-  type: "prop-change" | "option-change";
+  type: "bind";
   value: string;
-  disabled?: boolean;
-  error?: boolean;
+  label: string;
 }

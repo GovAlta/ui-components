@@ -2,10 +2,10 @@
 
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { getContext, deleteContext, ContextStore } from '../../common/context-store';
-  import { OPTION_CHANGE, RadioMessage } from "./types";
+  import { deleteContext, ContextStore, createContext } from '../../common/context-store';
+  import type { RadioMessage } from "./types";
   import { toBoolean } from '../../common/utils';
-  import { PROP_CHANGE } from './types';
+  import { BIND } from './types';
 
   export let name: string;
   export let value: string;
@@ -14,6 +14,8 @@
   export let error: string = "false";
   export let testid: string = "";
 
+  let options: RadioMessage[] = [];
+
   // private
   let isError: boolean
   let ctx: ContextStore;
@@ -21,43 +23,29 @@
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
 
-  // reactive updates to exposed properties
-  $: {
-    ctx?.notify({
-      type: PROP_CHANGE,
-      value,
-      disabled: isDisabled,
-      error: isError,
-    });
-  }
-
   let el: HTMLElement;
 
   onMount(() => {
-    ctx = getContext(name);
-    ctx.subscribe((state) => {
-      switch (state?.type) {
-        case OPTION_CHANGE: {
-          const _state = state as RadioMessage;
-          // This isn't required when the component is properly bound, but this
-          // will make the component appear to work properly before the component
-          // is properly bound.
-          ctx.notify({
-            type: PROP_CHANGE,
-            value: _state.value,
-            disabled: _state.disabled,
-            error: _state.error,
-          });
-
-          el.dispatchEvent(new CustomEvent('_change', {
-            composed: true,
-            detail: { name, value: state.value}
-          }))
+    ctx = createContext(name);
+    ctx.subscribe((msg) => {
+      switch (msg?.type) {
+        case BIND: {
+          options = [...options, msg as RadioMessage];
         }
       }
     });
 
   });
+
+  function onChange(newValue: string) {
+    if (newValue === value) return;
+
+    value = newValue;
+    el.dispatchEvent(new CustomEvent('_change', {
+      composed: true,
+      detail: { name, value: value}
+    }))
+  }
 
   onDestroy(() => {
     deleteContext(name);
@@ -72,6 +60,20 @@
   data-testid={testid}
 >
   <slot />
+  {#each options as option (option.value) }
+    <label
+      data-testid="radio-option-{option.value}"
+      class="goa-radio"
+      class:goa-radio--disabled={isDisabled}
+      class:goa-radio--error={isError}
+    >
+      <input type="radio" {name} value={option.value} disabled={isDisabled} checked={option.value === value} on:change={() => onChange(option.value)} />
+      <div class="goa-radio-icon" />
+      <span class="goa-radio-label">
+        {option.label || option.value}
+      </span>
+    </label>
+  {/each}
 </div>
 
 <style>
@@ -87,5 +89,98 @@
   .goa-radio-group--vertical {
     display: inline-flex;
     flex-direction: column;
+  }
+
+  /* Radio Items */
+  label.goa-radio {
+    --goa-radio-outline-width: 3px;
+    --goa-radio-diameter: 1.5rem;
+    --goa-radio-border-width: 1px;
+    --goa-radio-border-width--checked: 7px;
+
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
+  }
+
+  .goa-radio:hover {
+    cursor: pointer;
+  }
+
+  .goa-radio *,
+  .goa-radio *:before,
+  .goa-radio *:after {
+    box-sizing: border-box;
+  }
+
+  .goa-radio input[type="radio"] {
+    width: 0;
+    height: 0;
+    margin: 0;
+    appearance: none;
+  }
+
+  .goa-radio input[type="radio"]:hover ~ .goa-radio-icon {
+    border-color: var(--goa-color-interactive--hover);
+  }
+
+  .goa-radio input[type="radio"]:focus ~ .goa-radio-icon  {
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--highlight);
+  }
+
+  .goa-radio-label {
+    padding: 0.5rem;
+    font-weight: var(--fw-regular);
+  }
+
+  .goa-radio-icon {
+    display: inline-block;
+    height: var(--goa-radio-diameter);
+    width: var(--goa-radio-diameter);
+    border-radius: 50%;
+    background-color: #fff;
+    transition: box-shadow 100ms ease-in-out;
+  }
+
+  .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--highlight);
+  }
+
+  .goa-radio--disabled {
+    opacity: 0.4;
+  }
+  .goa-radio--disabled:hover {
+    cursor: default;
+  }
+
+  /* States */
+
+  /* Checked */
+  input[type="radio"]:checked ~ .goa-radio-icon {
+    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive--active);
+  }
+
+  /* Not checked */
+  input[type="radio"]:not(:checked) ~ .goa-radio-icon {
+    border: var(--goa-radio-border-width) solid var(--color-gray-600);
+  }
+
+  /* Disabled */
+  input[type="radio"]:disabled ~ .goa-radio-icon {
+    border: var(--goa-radio-border-width) solid var(--color-gray-600);
+  }
+
+  /* Disabled and checked */
+  input[type="radio"]:disabled:checked ~ .goa-radio-icon {
+    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive--active);
+  }
+
+  /* Error */
+  .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon {
+    border: 7px solid var(--goa-color-status-emergency);
+  }
+  .goa-radio--error input[type="radio"]:not(:checked) ~ .goa-radio-icon {
+    border: 2px solid var(--goa-color-status-emergency);
   }
 </style>

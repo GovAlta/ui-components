@@ -1,10 +1,10 @@
 <svelte:options tag="goa-dropdown" />
 
 <script lang="ts">
-  import { getContext, deleteContext, ContextStore } from "../../common/context-store";
+  import { deleteContext, ContextStore, createContext } from "../../common/context-store";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { onMount, onDestroy, tick } from "svelte";
-  import { CHANGE, ChangeSelectedMessage, FILTER, INIT_RESPONSE, SELECT } from "./types";
+  import { BIND, BindMessage, Option } from "./types";
 
   const MAX_HEIGHT = 300;
 
@@ -14,14 +14,11 @@
 
   // TODO: determine if this should be called `value` to allow it to work
   // in a standard form without javascript
-  export let values: string;
+  export let value: string;
   export let leadingicon: GoAIconType;
   export let maxheight: number = MAX_HEIGHT;
   export let placeholder: string = "";
-
-  export let multiselect: boolean;
   export let disabled: boolean;
-  export let filterable: boolean;
   export let error: boolean;
   export let testid: string;
 
@@ -29,85 +26,36 @@
   $: isError = error ? "true" : "false";
 
   // Private
-
-  let selectedLabels: string[] = [];
-  let selectedValues: string[];
+  let options: Option[] = [];
+  let selectedLabel: string = "";
   let isMenuVisible = false;
 
   let el: HTMLElement;
-  let filterEl: HTMLElement;
-  let filter = "";
   let ctx: ContextStore;
 
-  // notify children of value change
-  $: {
-    if (values !== undefined) {
-      let vals: string[];
-      if (typeof values === "string") {
-        vals = values ? JSON.parse(values) : [];
-      } else {
-        vals = values;
-      }
-      selectedValues = vals;
-
-      // notify children of value change
-      ctx?.notify({
-        type: CHANGE,
-        multiSelect: multiselect,
-        values: vals,
-      });
-    }
+  function onSelect(name: string, val: string, label: string) {
+    selectedLabel = label;
+    value = val;
+    isMenuVisible = false;
+    el.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        detail: { name, value },
+      }),
+    );
   }
 
   onMount(async () => {
-    await tick();
-
-    ctx = getContext(name);
-
-    // Listen for initial label selection updates on initial mount.
-    // > This is required because the parent does not know the label values
-    // > for each of the children, so on the initial load any preselected values
-    // > have to communicated back to the parent of the label values that correspond
-    // > to the preselected values.
-    // > A separate event is required to prevent circular updates.
+    ctx = createContext(name);
     ctx.subscribe(data => {
       switch (data?.type) {
-
-        case INIT_RESPONSE: {
-          const { label } = data as ChangeSelectedMessage
-          if (multiselect) {
-            selectedLabels = [...selectedLabels, label];
-          } else {
-            selectedLabels = [label];
+        case BIND: {
+          const _data = data as BindMessage
+          const selected = value === _data.value;
+          options = [...options, { ..._data, selected }];
+          if (selected) {
+            selectedLabel = _data.label
           }
-          break;
-        }
-
-        case SELECT: {
-          const { label, value } = data as ChangeSelectedMessage
-          if (data.selected) {
-            if (multiselect) {
-              selectedLabels = [...selectedLabels, label];
-              selectedValues = [...selectedValues, value];
-            } else {
-              selectedLabels = [label];
-              selectedValues = [value];
-            }
-          } else {
-            selectedLabels = selectedLabels.filter(l => l !== label);
-            selectedValues = selectedValues.filter(v => v !== value);
-          }
-
-          if (!multiselect) {
-            isMenuVisible = false;
-          }
-
-          el.dispatchEvent(
-            new CustomEvent("_change", {
-              composed: true,
-              detail: { name, value: selectedValues }, // TODO: send single value if multiselect is false
-            }),
-          );
           break;
         }
       }
@@ -118,48 +66,16 @@
     deleteContext(name);
   })
 
-  // Reactive
-
-  let filterOnChangeListener = e => {
-    e.stopPropagation();
-    filter = e.detail.value;
-    ctx.notify({
-      type: FILTER,
-      filter,
-    });
-  };
-
-  let filterOnTrailingIconClickListener = e => {
-    e.stopPropagation();
-    filter = "";
-    ctx.notify({
-      type: FILTER,
-      filter,
-    });
-    filterEl?.focus();
-  };
-
   // Functions
   async function showMenu() {
     if (disabled) {
       return;
     }
     isMenuVisible = true;
-    await tick();
-    // To prevent the event from bubbling up to the parent, we need to listen to the event on the element itself
-    // then we can stop propagation and prevent default
-    filterEl?.addEventListener("_change", filterOnChangeListener);
-    filterEl?.addEventListener("_trailingIconClick", filterOnTrailingIconClickListener);
-    filterEl?.focus();
   }
 
   function closeMenu() {
     isMenuVisible = false;
-    filterEl?.removeEventListener("_change", filterOnChangeListener);
-    filterEl?.removeEventListener(
-      "_trailingIconClick",
-      filterOnTrailingIconClickListener,
-    );
   }
 </script>
 
@@ -175,49 +91,45 @@
 
   <div>
     <!-- readonly input  -->
-    {#if !isMenuVisible || !filterable}
-      <div data-testid={`${name}-dropdown`}>
-        <goa-input
-          on:focus={showMenu}
-          error={isError}
-          disabled={disabled}
-          {leadingicon}
-          {placeholder}
-          id={`${name}-dropdown-input`}
-          name="search"
-          readonly
-          trailingicon="chevron-down"
-          handletrailingiconclick
-          type="text"
-          value={selectedLabels.join(", ")}
-        />
-      </div>
-    {/if}
+    <div data-testid={`${name}-dropdown`}>
+      <goa-input
+        on:click={showMenu}
+        on:blur={async () => {
+          setTimeout(closeMenu, 100);
+        }}
+        error={isError}
+        disabled={disabled}
+        {leadingicon}
+        {placeholder}
+        id={`${name}-dropdown-input`}
+        name="search"
+        readonly
+        trailingicon="chevron-down"
+        type="text"
+        value={selectedLabel}
+      />
+    </div>
 
     <!-- list and filter -->
     {#if isMenuVisible}
       <div class="menu">
-        <!-- filter -->
-        {#if filterable}
-          <goa-input
-            bind:this={filterEl}
-            id={`${name}-dropdown-filter`}
-            focused={isMenuVisible}
-            name="filter"
-            placeholder="Filter"
-            trailingicon={filter.length > 0 ? "close-circle" : "search"}
-            handletrailingiconclick
-            type="text"
-            value={filter}
-          />
-        {/if}
-
-        <!-- list -->
         <ul
           class="goa-dropdown-list"
           style={`overflow-y: auto; max-height: ${maxheight}px`}
         >
           <slot />
+          {#each options as option (option.value)}
+            <li
+              data-testid={`${option.value}-dropdown-item`}
+              class="goa-dropdown-option"
+              class:goa-dropdown-option--disabled={false}
+              class:goa-dropdown-option--selected={option.value === value }
+              style={`display: ${false ? "none" : "block"}`}
+              on:click={() => onSelect(option.name, option.value, option.label)}
+            >
+              {option.label}
+            </li>
+          {/each}
         </ul>
       </div>
     {/if}
@@ -232,6 +144,7 @@
 
   .goa-dropdown-box {
     position: relative;
+    cursor: pointer;
   }
 
   .menu goa-input {
@@ -284,5 +197,45 @@
     border-radius: 3px;
     border: 2px solid var(--goa-color-interactive--error);
     color: var(--goa-color-interactive--error);
+  }
+
+  /* dropdown items */
+  li {
+    font-family: var(--font-family);
+  }
+  .goa-dropdown-option {
+    margin: 0;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: var(--color-black);
+  }
+
+  .goa-dropdown-option:hover {
+    background: var(--color-gray-100);
+    color: var(--goa-color-interactive--hover);
+  }
+
+  .goa-dropdown-option--disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .goa-dropdown-option--disabled:hover {
+    cursor: default;
+    color: var(--color-gray-600);
+  }
+
+  .goa-dropdown-option--selected {
+    background: var(--goa-color-interactive);
+    color: var(--color-white);
+  }
+
+  .goa-dropdown-option--selected:hover {
+    background: var(--goa-color-interactive--hover);
+    color: var(--color-white);
+  }
+
+  .dropdown-group-content .goa-dropdown-option {
+    padding-left: 1.5rem;
   }
 </style>

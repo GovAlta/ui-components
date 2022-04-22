@@ -389,7 +389,7 @@
 
     <h2 id="section-dropdown">DropDown / Combobox</h2>
     <goa-form-item label="Favourite Actor">
-      <goa-dropdown id="dropdown" name="favactor" values='["3"]'>
+      <goa-dropdown id="dropdown" name="favactor" value="3">
         <goa-dropdown-item value="1" name="favactor" label="Tom Cruise" />
         <goa-dropdown-item value="3" name="favactor" label="Tom Hardy" />
         <goa-dropdown-item value="4" name="favactor" label="Val Kilmer" />
