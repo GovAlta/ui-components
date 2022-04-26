@@ -7,7 +7,7 @@ textarea {
   font-family: acumin-pro-semi-condensed, sans-serif;
   font-weight: 400;
   font-size: var(--fs-base);
-  color: #333;
+  color: var(--goa-color-text);
 }
 
 body {

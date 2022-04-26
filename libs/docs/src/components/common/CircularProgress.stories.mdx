@@ -10,7 +10,7 @@ import { GoAButton, GoACircularProgress } from '@abgov/react-components';
 
 ### A circular progress component provides visual feedback to users after they request an action from the system, e.g., submitting a form, calculating a fee, configuring tables. The progress indicator holds a user’s attention by indicating continued progress while the system loads the appropriate content.  The most common progress indicators are either circular or linear.
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DIO-DS?node-id=622%3A13612)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI-DS?node-id=3799%3A118526)
 
 ---
 
@@ -82,38 +82,14 @@ export const FullscreenProgressTemplate = () => {
 
 #### Properties
 
-<Tabs>
-  <Tab label="Web Component">
-    <Props>
-      <Prop name="type" type="infinite | progress" required={true} description="The type of progress indicator" />
-      <Prop name="variant" type="fullscreen | inline" required={true} description="The variant of progress indicator" />
-      <Prop name="visible" type="boolean" required={true} description="Shows/hides the page loader, allowing for fade transition to be applied in each transition." />
-      <Prop name="size" type="small | large" required={true} description="The size of progress indicator" />
-      <Prop name="progress" type="number" defaultValue="0" description="The progress value" />
-      <Prop name="message" type="object" defaultValue="" description="Text displayed under the circular spinner" />
-    </Props>
-  </Tab>
-  <Tab label="Angular">
-    <Props>
-      <Prop name="type" type="infinite | progress" required={true} description="The type of progress indicator" />
-      <Prop name="variant" type="fullscreen | inline" required={true} description="The variant of progress indicator" />
-      <Prop name="visible" type="boolean" required={true} description="Shows/hides the page loader, allowing for fade transition to be applied in each transition." />
-      <Prop name="size" type="small | large" required={true} description="The size of progress indicator" />
-      <Prop name="progress" type="number" defaultValue="0" description="The progress value" />
-      <Prop name="message" type="object" defaultValue="" description="Text displayed under the circular spinner" />
-    </Props>
-  </Tab>
-  <Tab label="React">
-    <Props>
-      <Prop name="type" type="infinite | progress" required={true} description="The type of progress indicator" />
-      <Prop name="variant" type="fullscreen | inline" required={true} description="The variant of progress indicator" />
-      <Prop name="visible" type="boolean" required={true} description="Shows/hides the page loader, allowing for fade transition to be applied in each transition." />
-      <Prop name="size" type="small | large" required={true} description="The size of progress indicator" />
-      <Prop name="progress" type="number" defaultValue="0" description="The progress value" />
-      <Prop name="message" type="object" defaultValue="" description="Text displayed under the circular spinner" />
-    </Props>
-  </Tab>
-</Tabs>
+<Props>
+  <Prop name="type" type="infinite | progress" required={true} description="The type of progress indicator" />
+  <Prop name="variant" type="fullscreen | inline" required={true} description="The variant of progress indicator" />
+  <Prop name="visible" type="boolean" required={true} description="Shows/hides the page loader, allowing for fade transition to be applied in each transition." />
+  <Prop name="size" type="small | large" required={true} description="The size of progress indicator" />
+  <Prop name="progress" type="number" defaultValue="0" description="The progress value" />
+  <Prop name="message" type="object" defaultValue="" description="Text displayed under the circular spinner" />
+</Props>
 
 #### Sizes
 
