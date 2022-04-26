@@ -131,7 +131,6 @@
     border: 1px solid var(--color-gray-600);
     border-radius: var(--input-border-radius);
     background: white;
-    color: var(--color-black);
 
     display: inline-flex;
     align-items: center;
@@ -146,7 +145,11 @@
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
   }
 
-  .goa-input input[readonly] {
+  input {
+    color: var(--goa-color-text);
+  }
+
+  input[readonly] {
     cursor: pointer;
   }
 
@@ -202,9 +205,15 @@
   .goa-input--disabled:focus {
     background-color: var(--color-gray-100);
     border-color: var(--color-gray-200);
-    color: var(--goa-color-text-secondary);
     cursor: default;
     box-shadow: none;
+  }
+
+  .goa-input--disabled input,
+  .goa-input--disabled input:hover,
+  .goa-input--disabled input:active,
+  .goa-input--disabled input:focus {
+    color: var(--goa-color-text-secondary);
   }
 
   .goa-input--disabled input:hover {
