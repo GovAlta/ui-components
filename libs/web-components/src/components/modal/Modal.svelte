@@ -57,7 +57,7 @@
       {/if}
       {#if isClosable}
         <div class="modal-close">
-          <goa-icon-button testid="modal-close-button" type='close' on:click={close} />
+          <goa-icon-button data-testid="modal-close-button" type='close' on:click={close} />
         </div>
       {/if}
       <div data-testid="modal-content" class="modal-content">

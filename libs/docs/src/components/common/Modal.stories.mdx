@@ -7,6 +7,12 @@ import { useState } from 'react';
 
 # Modal
 
+### A modal is a type of window that appears in front of the main page content and disables all other functionality while visible. Modals purposefully disrupt the user's workflow to capture their attention. The content in a modal should be succinct, direct, and contextually relevant to the user.
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DIO-DS?node-id=622%3A13874)
+
+---
+
 export const Template = () => {
   const [showModal, setShowModal] = useState(false);
   return (
@@ -34,7 +40,7 @@ export const Template = () => {
   )
 }
 
-## Basic
+## Example
 
 <Story name="Basic">
   {Template.bind({})}
@@ -124,14 +130,4 @@ export const Template = () => {
 
 ---
 
-## Support
-
-<goa-callout type="information" title="Need help? Connect with us on Slack">
-  <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9">#design-system-support</a> General information and discussion related to design system including questions, new component proposals, contribution, and other requests.
-</goa-callout>
-
-### Help improve this page
-
-To help make sure that this page is useful, relevant, and up to date, you can:
-
-[Create an issue for a proposed update or contribution](https://github.com/GovAlta/ui-components/issues/new/choose)
+<SupportInfo />
