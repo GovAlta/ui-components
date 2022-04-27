@@ -152,6 +152,7 @@
   .goa-checkbox--error .goa-checkbox-container,
   .goa-checkbox--error .goa-checkbox-container:hover {
     border: 1px solid var(--goa-color-status-emergency);
+    box-shadow: inset 0 0 0 1px var(--goa-color-status-emergency);
     background-color: var(--color-white);
   }
 
