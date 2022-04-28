@@ -118,15 +118,15 @@
     width: 0;
     height: 0;
     margin: 0;
-    appearance: none;
+    opacity: 0;
   }
 
-  .goa-radio input[type="radio"]:hover ~ .goa-radio-icon {
+  input[type="radio"]:hover ~ .goa-radio-icon {
     border-color: var(--goa-color-interactive--hover);
   }
 
-  .goa-radio input[type="radio"]:focus ~ .goa-radio-icon  {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--highlight);
+  input[type="radio"]:focus ~ .goa-radio-icon {
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--focus);
   }
 
   .goa-radio-label {
@@ -144,7 +144,7 @@
   }
 
   .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--highlight);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--focus);
   }
 
   .goa-radio--disabled {
