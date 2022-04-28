@@ -8,7 +8,7 @@ describe('Modal Tests', () => {
 
   it('Modal - should render with close capability via icon and background', async () => {
     const props = {
-      title: 'Modal Title',
+      heading: 'Modal Heading',
       open: true,
       width: '500px',
       actions: <GoAButton onClick={() => { }}>Close</GoAButton>,
@@ -19,7 +19,7 @@ describe('Modal Tests', () => {
     const modal = baseElement.querySelector('goa-modal');
     const actionContent = modal.querySelector("[slot='actions']");
 
-    expect(modal.getAttribute('title')).toBe('Modal Title');
+    expect(modal.getAttribute('heading')).toBe('Modal Heading');
     expect(modal.getAttribute('open')).toBe('true');
     expect(modal.getAttribute('width')).toBe('500px');
     expect(modal.getAttribute('closable')).toBe('true');

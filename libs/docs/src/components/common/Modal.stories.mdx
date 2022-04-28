@@ -21,7 +21,7 @@ export const Template = () => {
         Open Modal
       </GoAButton>
       <GoAModal
-        title="Do you agree?"
+        heading="Do you agree?"
         open={showModal}
         onClose={() => setShowModal(false)}
         actions={
@@ -50,7 +50,7 @@ export const Template = () => {
   <Tab label="Web Component">
     <CodeSnippet lang="html" code={`
       <goa-button id="button">Open Modal</goa-button>
-      <goa-modal id="modal" title="Do you agree?" closable>
+      <goa-modal id="modal" heading="Do you agree?" closable>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
@@ -74,7 +74,7 @@ export const Template = () => {
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
       <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
-      <goa-modal id="modal" title="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable>
+      <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
@@ -106,7 +106,7 @@ export const Template = () => {
             Open Modal
           </GoAButton>
           <GoAModal
-            title="Do you agree?"
+            heading="Do you agree?"
             open={showModal}
             onClose={() => setShowModal(false)}
             actions={

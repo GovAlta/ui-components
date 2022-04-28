@@ -1,17 +1,14 @@
 <svelte:options tag="goa-modal" />
 
 <!-- ======================================================================= -->
-<!-- Script -->
-<!-- ======================================================================= -->
-
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";
 
-  export let title: string;
+  export let heading: string;
   export let closable: string;
-  export let scrollable: string;  // TODO: determine if this flag is needed or not, things seem to work well with it always 'on'
+  export let scrollable: string; // TODO: determine if this flag is needed or not, things seem to work well with it always 'on'
   export let open: string;
 
   // Temp attribute while deciding on the best way to allow for width control
@@ -38,35 +35,47 @@
 </script>
 
 <!-- ======================================================================= -->
+<!-- Script -->
+
+
+<!-- ======================================================================= -->
 <!-- Html -->
 <!-- ======================================================================= -->
 
 {#if isOpen}
   <div
-    use:noscroll={{enable: isOpen}}
-    in:fade={{duration: 200}}
-    out:fade={{delay: 200, duration: 200}}
+    use:noscroll={{ enable: isOpen }}
+    in:fade={{ duration: 200 }}
+    out:fade={{ delay: 200, duration: 200 }}
     data-testid="modal"
     class="modal"
     style="--scroll-offset: {scrollOffset}px; {width && `--width: ${width};`};"
   >
-    <div data-testid="modal-overlay" class="modal-overlay" on:click={close}></div>
-    <div in:fly={{duration: 200, y: 200}} out:fly={{delay: 200, duration: 200, y: -100}} class="modal-pane">
-      {#if title}
-        <div data-testid="modal-title" class="modal-title">{title}</div>
+    <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
+    <div
+      in:fly={{ duration: 200, y: 200 }}
+      out:fly={{ delay: 200, duration: 200, y: -100 }}
+      class="modal-pane"
+    >
+      {#if heading}
+        <div data-testid="modal-title" class="modal-title">{heading}</div>
       {/if}
       {#if isClosable}
         <div class="modal-close">
-          <goa-icon-button data-testid="modal-close-button" type='close' on:click={close} />
+          <goa-icon-button
+            data-testid="modal-close-button"
+            type="close"
+            on:click={close}
+          />
         </div>
       {/if}
       <div data-testid="modal-content" class="modal-content">
         {#if isScrollable}
-          <goa-scrollable direction="vertical" height="50" hpadding="1.75" >
+          <goa-scrollable direction="vertical" height="50" hpadding="1.75">
             <slot />
           </goa-scrollable>
         {:else}
-          <div style="margin: 1.75rem" >
+          <div style="margin: 1.75rem">
             <slot />
           </div>
         {/if}
@@ -81,8 +90,8 @@
 
 <!-- ======================================================================= -->
 <!-- Css -->
-<!-- ======================================================================= -->
 
+<!-- ======================================================================= -->
 <style>
   :host {
     box-sizing: border-box;
@@ -137,7 +146,7 @@
     text-align: right;
     padding: 0 1.75rem;
     margin: 1.75rem 0;
-    flex: 1 1  auto;
+    flex: 1 1 auto;
   }
 
   /* Modal Close Icon ======================================================================= */

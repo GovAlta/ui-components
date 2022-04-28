@@ -17,9 +17,9 @@ describe('Modal Component', () => {
     expect(el.queryByTestId("modal")).toBeFalsy();
   })
 
-  it("should show the title", async () => {
-    const el = render(GoAModal, { open: "true", title: "Test title" });
-    expect(el.queryByTestId("modal-title").innerHTML).toContain("Test title");
+  it("should show the heading", async () => {
+    const el = render(GoAModal, { open: "true", heading: "Test heading" });
+    expect(el.queryByTestId("modal-title").innerHTML).toContain("Test heading");
   })
 
   it("should close on icon click when made to be closable", async () => {
