@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef } from 'react';
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
-  title?: string;
+  heading?: string;
   open?: boolean;
   width?: string;
   closable?: boolean;
@@ -19,14 +19,14 @@ declare global {
 }
 
 interface Props {
-  title?: string;
+  heading?: string;
   width?: string;
   actions?: React.ReactElement;
   onClose?: () => void;
   open?: boolean;
 }
 
-export const GoAModal: FC<Props> = ({ title, children, open, width, actions, onClose }) => {
+export const GoAModal: FC<Props> = ({ heading, children, open, width, actions, onClose }) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -44,7 +44,7 @@ export const GoAModal: FC<Props> = ({ title, children, open, width, actions, onC
   }, [el, onClose])
 
   return (
-    <goa-modal ref={el} title={title} open={open} closable={!!onClose} scrollable={true} width={width}>
+    <goa-modal ref={el} heading={heading} open={open} closable={!!onClose} scrollable={true} width={width}>
       {actions &&
         <div slot="actions">
           {actions}
