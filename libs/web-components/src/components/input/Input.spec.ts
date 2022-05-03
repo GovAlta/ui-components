@@ -7,7 +7,7 @@ afterEach(cleanup);
 describe('GoAInput Component', () => {
 
   it("should render", async () => {
-    const el = render(GoAInput, { testid: "input-test"});
+    const el = render(GoAInput, { testid: "input-test" });
     const input = await el.findByTestId('input-test');
     expect(input).toBeTruthy();
   });
@@ -57,25 +57,25 @@ describe('GoAInput Component', () => {
   });
 
   it("can be disabled", async () => {
-    const el = render(GoAInput, { testid: "input-test",  disabled: "true" });
+    const el = render(GoAInput, { testid: "input-test", disabled: "true" });
     const root = el.container.querySelector('.goa-input--disabled');
     expect(root).toBeTruthy();
   });
 
   it("allows the input to be marked as readonly", async () => {
-    const el = render(GoAInput, { testid: "input-test",  readonly: "true" });
+    const el = render(GoAInput, { testid: "input-test", readonly: "true" });
     const root = el.container.querySelector('input[readonly]');
     expect(root).toBeTruthy();
   });
 
   it("allows the input to be set to an error state", async () => {
-    const el = render(GoAInput, { testid: "input-test",  error: "true" });
+    const el = render(GoAInput, { testid: "input-test", error: "true" });
     const root = el.container.querySelector('.error');
     expect(root).toBeTruthy();
   });
 
   it("allows for the trailing icon click event handling", async () => {
-    const el = render(GoAInput, { testid: "input-test",  trailingicon: "finger-print", handletrailingiconclick: "true" });
+    const el = render(GoAInput, { testid: "input-test", trailingicon: "finger-print", handletrailingiconclick: "true" });
     const icon = await el.findByTestId('trailing-icon-button');
 
     const click = jest.fn();
@@ -92,7 +92,7 @@ describe('GoAInput Component', () => {
     })
   });
 
-  it("handles change events", async () => {
+  it("handles keyup event", async () => {
     const { findByTestId } = render(GoAInput, { name: 'test-name', testid: "input-test" });
     const input = await findByTestId('input-test');
     const change = jest.fn();
@@ -107,6 +107,21 @@ describe('GoAInput Component', () => {
     expect(change).toBeCalledTimes(1);
   });
 
+  // The change event is what is fired when selecting a date from the calender supplied
+  // by the `date` input type. Both the change and keyup event handling is required.
+  it("handles the change event", async () => {
+    const { findByTestId } = render(GoAInput, { name: 'test-name', testid: "input-test", type: "date" });
+    const input = await findByTestId('input-test');
+    const change = jest.fn();
+
+    input.addEventListener('_change', () => {
+      change();
+    });
+
+    await fireEvent.change(input)
+    expect(change).toBeCalledTimes(1);
+  })
+
   it("handles trailing icon click", async () => {
     const { findByTestId } = render(GoAInput, { testid: "input-test", handletrailingiconclick: "true", trailingicon: "finger-print" });
     const onClick = jest.fn();
@@ -117,4 +132,32 @@ describe('GoAInput Component', () => {
     await fireEvent.click(iconButton);
     expect(onClick).toBeCalledTimes(1);
   });
+
+  describe("Search type", () => {
+    it("clears the input when the search x icon is clicked", async () => {
+      const { findByTestId } = render(GoAInput, { name: 'test-name', testid: "input-test", type: "search" });
+      const input = await findByTestId('input-test');
+      const search = jest.fn();
+
+      input.addEventListener('_change', (e: CustomEvent) => {
+        search();
+      });
+
+      await fireEvent(input, new Event("search"))
+      expect(search).toBeCalledTimes(1);
+    })
+
+    it("does fire the search event if it is not a search input type", async () => {
+      const { findByTestId } = render(GoAInput, { name: 'test-name', testid: "input-test", type: "text" });
+      const input = await findByTestId('input-test');
+      const search = jest.fn();
+
+      input.addEventListener('_change', (e: CustomEvent) => {
+        search();
+      });
+
+      await fireEvent(input, new Event("search"))
+      expect(search).toBeCalledTimes(0);
+    })
+  })
 });
