@@ -60,7 +60,7 @@
     cursor: pointer;
     font-size: var(--fs-base, 1rem);
     font-weight: 700;
-    line-height: 2.375rem;
+    height: var(--button-height);
     padding: 0 0.75rem;
 
     display: flex;
