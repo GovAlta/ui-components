@@ -46,6 +46,12 @@
     setTimeout(() => inputEl.focus(), 1);
   }
 
+  $: if (inputEl && type === "search") {
+    inputEl.addEventListener("search", (e) => {
+      onKeyUp(e)
+    })
+  }
+
   function onKeyUp(e) {
     e.target.dispatchEvent(
       new CustomEvent("_change", {

@@ -117,4 +117,32 @@ describe('GoAInput Component', () => {
     await fireEvent.click(iconButton);
     expect(onClick).toBeCalledTimes(1);
   });
+
+  describe("Search type", () => {
+    it("clears the input when the search x icon is clicked", async () => {
+      const { findByTestId } = render(GoAInput, { name: 'test-name', testid: "input-test", type: "search" });
+      const input = await findByTestId('input-test');
+      const search = jest.fn();
+
+      input.addEventListener('_change', (e: CustomEvent) => {
+        search();
+      });
+
+      await fireEvent(input, new Event("search"))
+      expect(search).toBeCalledTimes(1);
+    })
+
+    it("does fire the search event if it is not a search input type", async () => {
+      const { findByTestId } = render(GoAInput, { name: 'test-name', testid: "input-test", type: "text" });
+      const input = await findByTestId('input-test');
+      const search = jest.fn();
+
+      input.addEventListener('_change', (e: CustomEvent) => {
+        search();
+      });
+
+      await fireEvent(input, new Event("search"))
+      expect(search).toBeCalledTimes(0);
+    })
+  })
 });
