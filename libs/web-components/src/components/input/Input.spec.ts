@@ -7,7 +7,7 @@ afterEach(cleanup);
 describe('GoAInput Component', () => {
 
   it("should render", async () => {
-    const el = render(GoAInput, { testid: "input-test"});
+    const el = render(GoAInput, { testid: "input-test" });
     const input = await el.findByTestId('input-test');
     expect(input).toBeTruthy();
   });
@@ -57,25 +57,25 @@ describe('GoAInput Component', () => {
   });
 
   it("can be disabled", async () => {
-    const el = render(GoAInput, { testid: "input-test",  disabled: "true" });
+    const el = render(GoAInput, { testid: "input-test", disabled: "true" });
     const root = el.container.querySelector('.goa-input--disabled');
     expect(root).toBeTruthy();
   });
 
   it("allows the input to be marked as readonly", async () => {
-    const el = render(GoAInput, { testid: "input-test",  readonly: "true" });
+    const el = render(GoAInput, { testid: "input-test", readonly: "true" });
     const root = el.container.querySelector('input[readonly]');
     expect(root).toBeTruthy();
   });
 
   it("allows the input to be set to an error state", async () => {
-    const el = render(GoAInput, { testid: "input-test",  error: "true" });
+    const el = render(GoAInput, { testid: "input-test", error: "true" });
     const root = el.container.querySelector('.error');
     expect(root).toBeTruthy();
   });
 
   it("allows for the trailing icon click event handling", async () => {
-    const el = render(GoAInput, { testid: "input-test",  trailingicon: "finger-print", handletrailingiconclick: "true" });
+    const el = render(GoAInput, { testid: "input-test", trailingicon: "finger-print", handletrailingiconclick: "true" });
     const icon = await el.findByTestId('trailing-icon-button');
 
     const click = jest.fn();
