@@ -165,7 +165,9 @@
   }
 
   .goa-input-leading-icon {
-    line-height: 18px;
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
   }
 
   .goa-input-trailing-icon {
