@@ -92,7 +92,7 @@ describe('GoAInput Component', () => {
     })
   });
 
-  it("handles change events", async () => {
+  it("handles keyup event", async () => {
     const { findByTestId } = render(GoAInput, { name: 'test-name', testid: "input-test" });
     const input = await findByTestId('input-test');
     const change = jest.fn();
@@ -106,6 +106,21 @@ describe('GoAInput Component', () => {
     await fireEvent.keyUp(input, { target: { value: 'foobar' } });
     expect(change).toBeCalledTimes(1);
   });
+
+  // The change event is what is fired when selecting a date from the calender supplied
+  // by the `date` input type. Both the change and keyup event handling is required.
+  it("handles the change event", async () => {
+    const { findByTestId } = render(GoAInput, { name: 'test-name', testid: "input-test", type: "date" });
+    const input = await findByTestId('input-test');
+    const change = jest.fn();
+
+    input.addEventListener('_change', () => {
+      change();
+    });
+
+    await fireEvent.change(input)
+    expect(change).toBeCalledTimes(1);
+  })
 
   it("handles trailing icon click", async () => {
     const { findByTestId } = render(GoAInput, { testid: "input-test", handletrailingiconclick: "true", trailingicon: "finger-print" });

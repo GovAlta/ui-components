@@ -97,6 +97,7 @@
     {value}
     {placeholder}
     on:keyup={onKeyUp}
+    on:change={onKeyUp}
   />
 
   {#if trailingicon && !handlesTrailingIconClick}
