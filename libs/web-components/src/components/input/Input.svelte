@@ -137,6 +137,9 @@
 
     display: inline-flex;
     align-items: center;
+
+    /* The vertical align fixes inputs with a leading icon to not be vertically offset */
+    vertical-align: middle;
   }
 
   .goa-input:hover {
