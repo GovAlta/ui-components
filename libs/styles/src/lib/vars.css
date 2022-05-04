@@ -43,6 +43,8 @@
   --input-border-radius: 0.25rem;
   --input-font-size: var(--fs-base);
 
+  --button-height: 2.625rem;  /* 42px */
+
   /* colors */
   --color-white: #fff;
   --color-black: #333;
