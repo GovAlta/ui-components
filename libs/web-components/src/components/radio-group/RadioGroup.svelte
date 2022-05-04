@@ -87,7 +87,7 @@
   }
 
   .goa-radio-group--vertical {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
   }
 
