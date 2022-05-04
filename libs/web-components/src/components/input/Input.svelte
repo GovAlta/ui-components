@@ -74,16 +74,15 @@
 <div
   style={`width: ${width};`}
   class={`
-    goa-input ${isDisabled ? "goa-input--disabled" : ""}
+    goa-input
+    ${isDisabled ? "goa-input--disabled" : ""}
     variant--${variant}
     type--${type}
   `}
   class:error={isError}
 >
   {#if leadingicon}
-    <div class="goa-input-leading-icon">
-      <goa-icon data-testid="leading-icon" type={leadingicon} />
-    </div>
+    <goa-icon class="goa-input-leading-icon" data-testid="leading-icon" type={leadingicon} />
   {/if}
 
   <input
@@ -101,22 +100,19 @@
   />
 
   {#if trailingicon && !handlesTrailingIconClick}
-    <div class="goa-input-trailing-icon">
-      <goa-icon data-testid="trailing-icon" size="medium" type={trailingicon} />
-    </div>
+    <goa-icon class="goa-input-trailing-icon" data-testid="trailing-icon" size="medium" type={trailingicon} />
   {/if}
 
   {#if trailingicon && handlesTrailingIconClick}
-    <div class="goa-input-trailing-icon">
-      <goa-icon-button
-        on:click={doClick}
-        disabled={isDisabled}
-        variant="nocolor"
-        size="medium"
-        type={trailingicon}
-        data-testid="trailing-icon-button"
-      />
-    </div>
+    <goa-icon-button
+      class="goa-input-trailing-icon"
+      on:click={doClick}
+      disabled={isDisabled}
+      variant="nocolor"
+      size="medium"
+      type={trailingicon}
+      data-testid="trailing-icon-button"
+    />
   {/if}
 </div>
 
@@ -141,6 +137,9 @@
 
     display: inline-flex;
     align-items: center;
+
+    /* The vertical align fixes inputs with a leading icon to not be vertically offset */
+    vertical-align: middle;
   }
 
   .goa-input:hover {
