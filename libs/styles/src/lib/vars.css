@@ -44,6 +44,8 @@
   --input-font-size: var(--fs-base);
 
   --button-height: 2.625rem;  /* 42px */
+  --button-height-compact: 2rem;  /* 32px */
+  --button-height-tall: 3.25rem;  /* 52px */
 
   /* colors */
   --color-white: #fff;

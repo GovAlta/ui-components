@@ -27,68 +27,27 @@ describe('GoAButtonComponent', () => {
     });
   })
 
-  describe("type", () => {
-    const buttonPrimaryClassName = 'primary';
-    const buttonSecondaryClassName = 'secondary';
-    const buttonTertiaryClassName = 'tertiary';
+  describe("size", () => {
+    ["compact", "normal"].forEach(size => {
+      it(`should render ${size} size`, async () => {
+        const baseElement = render(GoAButton, { size });
+        const button = await baseElement.findByRole("button");
 
-    it('should render primary styling', async () => {
-      const baseElement = render(GoAButton, { type: "primary" });
-      const button = await baseElement.findByRole("button");
-
-      expect(button).toBeTruthy();
-
-      expect(button.className).toContain(buttonPrimaryClassName);
-      expect(button.className).not.toContain(buttonSecondaryClassName);
-      expect(button.className).not.toContain(buttonTertiaryClassName);
-    });
-
-    it('should render secondary styling', async () => {
-      const baseElement = render(GoAButton, { type: "secondary" });
-      const button = await baseElement.findByRole("button");
-
-      expect(button).toBeTruthy();
-
-      expect(button.className).not.toContain(buttonPrimaryClassName);
-      expect(button.className).toContain(buttonSecondaryClassName);
-      expect(button.className).not.toContain(buttonTertiaryClassName);
-    });
-
-    it('should render tertiary styling', async () => {
-      const baseElement = render(GoAButton, { type: "tertiary" });
-      const button = await baseElement.findByRole("button");
-
-      expect(button).toBeTruthy();
-
-      expect(button.className).not.toContain(buttonPrimaryClassName);
-      expect(button.className).not.toContain(buttonSecondaryClassName);
-      expect(button.className).toContain(buttonTertiaryClassName);
+        expect(button).toBeTruthy();
+        expect(button.className).toContain(size);
+      });
     });
   });
 
-  describe("size", () => {
-    it('should render small size', async () => {
-      const baseElement = render(GoAButton, { size: 'small' });
-      const button = await baseElement.findByRole("button");
+  describe("type", () => {
+    ["primary", "secondary", "tertiary"].forEach(type => {
+      it(`should render ${type} type`, async () => {
+        const baseElement = render(GoAButton, { type });
+        const button = await baseElement.findByRole("button");
 
-      expect(button).toBeTruthy();
-      expect(button.className).toContain("small");
-    });
-
-    it('should render medium size', async () => {
-      const baseElement = render(GoAButton, { size: 'medium' });
-      const button = await baseElement.findByRole("button");
-
-      expect(button).toBeTruthy();
-      expect(button.className).toContain("medium");
-    });
-
-    it('should render large size', async () => {
-      const baseElement = render(GoAButton, { size: 'large' });
-      const button = await baseElement.findByRole("button");
-
-      expect(button).toBeTruthy();
-      expect(button.className).toContain("large");
+        expect(button).toBeTruthy();
+        expect(button.className).toContain(type);
+      });
     });
   });
 

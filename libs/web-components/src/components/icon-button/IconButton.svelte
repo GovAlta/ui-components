@@ -88,6 +88,7 @@
   .goa-icon-button--color:active,
   .goa-icon-button--nocolor:active {
     transform: scale(0.9);
+    border: none;
   }
 
   .goa-icon-button--color:hover {

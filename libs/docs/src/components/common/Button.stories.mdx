@@ -1,166 +1,183 @@
 import { Meta } from '@storybook/addon-docs';
-import { Tabs, Tab, Note } from '@abgov/shared/storybook-common';
+import {
+  Tabs,
+  Tab,
+  Note,
+  SupportInfo,
+  CodeSnippet,
+} from '@abgov/shared/storybook-common';
+import { GoAButton, GoAButtonGroup } from '@abgov/react-components';
 
 <Meta title="Components/Button" />
 
 # Button
 
-Buttons allow users to perform an action or to navigate to another page. They have multiple styles for various needs, and are ideal for calling attention to where a user needs to do something or so they can move forward in a flow.
+### Buttons allow users to perform an action or to navigate to another page. They have multiple styles for various needs, and are ideal for calling attention to where a user needs to do something or so they can move forward in a flow.
 
 [Figma design component](https://www.figma.com/file/qWGWDvULAAZuVaDpXCRzqP/DS-Website?node-id=916%3A11660)
 
 ---
 
-## Component preview
-
-Primary button
-
-<goa-button type="primary">Primary</goa-button>
-
-Secondary button
-
-<goa-button type="secondary">Secondary</goa-button>
-
-Tertiary button
-
-<goa-button type="tertiary">Tertiary</goa-button>
-
-<Tabs>
-  <Tab label="Web Component">
-    <pre>
-      { `<goa-button type="primary">Primary</goa-button>` }
-    </pre>
-    <pre>
-      { `<goa-button type="secondary">Secondary</goa-button>` }
-    </pre>
-    <pre>
-      { `<goa-button type="tertiary">Tertiary</goa-button>` }
-    </pre>
-  </Tab>
-  <Tab label="Angular">
-    <pre>
-      { `<goa-button type="primary">Primary</goa-button>` }
-    </pre>
-    <pre>
-      { `<goa-button type="secondary">Secondary</goa-button>` }
-    </pre>
-    <pre>
-      { `<goa-button type="tertiary">Tertiary</goa-button>` }
-    </pre>
-  </Tab>
-  <Tab label="React">
-    <pre>
-      { `<GoAButton type="primary">Primary</GoAButton>` }
-    </pre>
-    <pre>
-      { `<GoAButton type="secondary">Secondary</GoAButton>` }
-    </pre>
-    <pre>
-      { `<GoAButton type="tertiary">Tertiary</GoAButton>` }
-    </pre>
-  </Tab>
-</Tabs>
-
-## Types
+#### Types
 
 There are three main button types: Primary, Secondary, and Tertiary. If there is only one button on a page, it should be a primary button. There should only ever be one primary button on a page
 
-<goa-button-group>
-  <goa-button type="primary">Primary</goa-button>
-  <goa-button type="secondary">Secondary</goa-button>
-  <goa-button type="tertiary">Tertiary</goa-button>
-</goa-button-group>
+<Story name="Types">
+  <GoAButtonGroup alignment="start">
+    <GoAButton type="primary" onClick={() => console.log('clicked')}>
+      Primary
+    </GoAButton>
+    <GoAButton type="secondary" onClick={() => console.log('clicked')}>
+      Secondary
+    </GoAButton>
+    <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
+      Tertiary
+    </GoAButton>
+    <GoAButton type="get-started" onClick={() => console.log('clicked')}>
+      Get Started
+    </GoAButton>
+  </GoAButtonGroup>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      code={`
+        <goa-button type="primary">Primary</goa-button>
+        <goa-button type="secondary">Secondary</goa-button>
+        <goa-button type="tertiary">Tertiary</goa-button>
+        <goa-button type="get-started">Get Started</goa-button>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        document.querySelector('goa-button').addEventListener('click', () => {
+          console.log('clicked');
+        });
+      `}
+      lang="js"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-button (_click)="onClick" type="primary">Primary</goa-button>
+        <goa-button (_click)="onClick" type="secondary">Secondary</goa-button>
+        <goa-button (_click)="onClick" type="tertiary">Tertiary</goa-button>
+        <goa-button (_click)="onClick" type="get-started">Get Started</goa-button>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        export class SomeOtherComponent {
+          onClick() {
+            console.log('clicked');
+          }
+        }
+      `}
+      lang="ts"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAButton type="primary" onClick={() => console.log('clicked')}>
+          Primary
+        </GoAButton>
+        <GoAButton type="secondary" onClick={() => console.log('clicked')}>
+          Secondary
+        </GoAButton>
+        <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
+          Tertiary
+        </GoAButton>
+        <GoAButton type="get-started" onClick={() => console.log('clicked')}>
+          Get Started
+        </GoAButton>
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
 
 <Note type="do">
   <p>
-    Use the primary buttons for main actions and secondary buttons for less important action.
+    Use the primary buttons for main actions and secondary buttons for less
+    important action.
   </p>
-  <goa-button-group>
-    <goa-button type="primary">Save</goa-button>
-    <goa-button type="tertiary">Cancel</goa-button>
-  </goa-button-group>
+  <GoAButtonGroup alignment="start">
+    <GoAButton type="primary">Save</GoAButton>
+    <GoAButton type="tertiary">Cancel</GoAButton>
+  </GoAButtonGroup>
 </Note>
 
 <Note type="dont">
   <p>Use two primary buttons</p>
-  <goa-button-group>
-    <goa-button type="primary">Save</goa-button>
-    <goa-button type="primary">Cancel</goa-button>
-  </goa-button-group>
+  <GoAButtonGroup alignment="start">
+    <GoAButton type="primary">Save</GoAButton>
+    <GoAButton type="primary">Cancel</GoAButton>
+  </GoAButtonGroup>
 </Note>
 
 ---
 
-## States
+#### Sizes
 
-There are four interactive states for a button: default, hover, focus, and disabled.
+There are two button sizes: Normal (default) and Compact.
 
-![](.images/2022-02-09-14-55-56.png)
+#### Normal button (default)
 
----
+<Story name="Normal size">
+  <GoAButtonGroup alignment="start">
+    <GoAButton type="primary" onClick={() => console.log('clicked')}>
+      Primary
+    </GoAButton>
+    <GoAButton type="secondary" onClick={() => console.log('clicked')}>
+      Secondary
+    </GoAButton>
+    <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
+      Tertiary
+    </GoAButton>
+  </GoAButtonGroup>
+</Story>
 
-## Sizes
-
-There are three main button sizes: Medium, Small, and Large.
-
-#### Medium button (default)
-
-<goa-button-group>
-  <goa-button type="primary">Primary</goa-button>
-  <goa-button type="secondary">Secondary</goa-button>
-  <goa-button type="tertiary">Tertiary</goa-button>
-</goa-button-group>
-
-“Medium” buttons should be used unless specific use cases require additional sizing.
-
-#### Small button
-
-<goa-button-group gap="small">
-  <goa-button type="primary" size="small">Small primary</goa-button>
-  <goa-button type="secondary" size="small">Small secondary</goa-button>
-  <goa-button type="tertiary" size="small">Small tertiary</goa-button>
-</goa-button-group>
+#### Compact button
 
 “Small” buttons can be inside of a table where information is dense and space is at a premium.
 
-#### Large button
-
-<goa-button-group>
-  <goa-button type="primary" size="large">Large primary</goa-button>
-  <goa-button type="secondary" size="large">Large secondary</goa-button>
-  <goa-button type="tertiary" size="large">Large tertiary</goa-button>
-</goa-button-group>
-
-“Large” buttons should be used sparingly to create emphasis around a primary call to action.
+<Story name="Compact size">
+  <GoAButtonGroup alignment="start" gap="small">
+    <GoAButton type="primary" size="compact">
+      Small primary
+    </GoAButton>
+    <GoAButton type="secondary" size="compact">
+      Small secondary
+    </GoAButton>
+    <GoAButton type="tertiary" size="compact">
+      Small tertiary
+    </GoAButton>
+  </GoAButtonGroup>
+</Story>
 
 <Note type="do">
-  <p>
-    Use the small button size to save space in compact scenarios
-  </p>
+  <p>Use the compact button size to save space in compact scenarios</p>
   <img src=".images/2022-02-09-15-14-01.png" />
 </Note>
 
 <Note type="dont">
   <p>
-    Don't use different button sized in the same area as a way to emphasize hierarchy
+    Don't use different button sized in the same area as a way to emphasize
+    hierarchy
   </p>
-  <goa-button-group>
-    <goa-button type="tertiary" size="small">Back</goa-button>
-    <goa-button type="primary" size="large">Next</goa-button>
-  </goa-button-group>
+  <GoAButtonGroup alignment="start">
+    <GoAButton type="secondary" size="compact">
+      Back
+    </GoAButton>
+    <GoAButton type="primary">Next</GoAButton>
+  </GoAButtonGroup>
 </Note>
 
 ---
 
-## Support
-
-<goa-callout type="information" title="Need help? Connect with us on Slack">
-  <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9">#design-system-support</a> General information and discussion
-  related to design system including questions, new component proposals, contribution, and other requests.
-</goa-callout>
-
-### Help improve this page
-
-To help make sure that this page is useful, relevant, and up to date, you can:
-
-[Create an issue for a proposed update or contribution](https://github.com/GovAlta/ui-components/issues/new/choose)
+<SupportInfo />

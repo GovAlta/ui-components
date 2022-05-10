@@ -1,9 +1,9 @@
 import React, { FC, ReactNode, useEffect, useRef } from 'react';
 import './button.css';
 
-type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'borderless';
-type ButtonSize = 'small' | 'medium' | 'large';
-type ButtonVariant = 'default' | 'danger'
+export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'get-started';
+export type ButtonSize = 'compact' | 'normal';
+export type ButtonVariant = 'default' | 'danger'
 
 interface WCProps {
   type?: ButtonType;
@@ -34,7 +34,7 @@ type ButtonProps = {
   children: ReactNode;
 };
 
-export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'primary', size = 'medium', variant = 'default', children, onClick }) => {
+export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'primary', size = 'normal', variant = 'default', children, onClick }) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -50,7 +50,7 @@ export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'pr
   }, [el, onClick])
 
   return (
-    <goa-button ref={el} type={type} size={size} variant={variant} disabled={disabled} title={title}>
+    <goa-button ref={el} role="button" type={type} size={size} variant={variant} disabled={disabled} title={title}>
       {children}
     </goa-button>
   );
