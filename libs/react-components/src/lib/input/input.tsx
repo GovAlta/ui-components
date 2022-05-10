@@ -119,7 +119,7 @@ export const GoAInputEmail: FC<Props> = (props) => {
 }
 
 export const GoAInputSearch: FC<Props> = (props) => {
-  return <GoAInput {...props} type="text" trailingIcon="search" />;
+  return <GoAInput {...props} type="search" trailingIcon="search" />;
 }
 
 export const GoAInputUrl: FC<Props> = (props) => {
