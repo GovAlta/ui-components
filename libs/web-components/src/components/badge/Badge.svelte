@@ -72,6 +72,7 @@
     padding: 3px 0.5rem; /* is calc(3 / 16 * 1rem) better for scaling? */
     gap: 0.25rem;
     font-weight: var(--fw-regular);
+    margin: 0.25rem;
   }
 
   .icon-only {

@@ -1,5 +1,11 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
+import {
+  SupportInfo,
+  Tabs,
+  Tab,
+  Note,
+  CodeSnippet,
+} from '@abgov/shared/storybook-common';
 import { GoAButton, GoAButtonGroup, GoAModal } from '@abgov/react-components';
 import { useState } from 'react';
 
@@ -17,38 +23,39 @@ export const Template = () => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      <GoAButton onClick={() => setShowModal(true)}>
-        Open Modal
-      </GoAButton>
+      <GoAButton onClick={() => setShowModal(true)}>Open Modal</GoAButton>
       <GoAModal
         heading="Do you agree?"
         open={showModal}
         onClose={() => setShowModal(false)}
         actions={
           <GoAButtonGroup alignment="end">
-            <GoAButton onClick={() => setShowModal(false)} size="medium">I Agree</GoAButton>
+            <GoAButton onClick={() => setShowModal(false)} size="medium">
+              I Agree
+            </GoAButton>
           </GoAButtonGroup>
         }
       >
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
-          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
-          Repellendus ducimus officia asperiores. Eos, eius numquam.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
         </p>
       </GoAModal>
     </>
-  )
-}
+  );
+};
 
 ## Example
 
-<Story name="Basic">
-  {Template.bind({})}
-</Story>
+<Story name="Basic">{Template.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-button id="button">Open Modal</goa-button>
       <goa-modal id="modal" heading="Do you agree?" closable>
         <p>
@@ -59,8 +66,11 @@ export const Template = () => {
           <goa-button slot="actions" size="medium">I Agree</goa-button>
         </goa-button-group>
       </goa-modal>
-    `}/>
-    <CodeSnippet lang="js" code={`
+    `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
       const button = document.getElementById('button');
       const modal = document.getElementById('modal');
       button.addEventListener('_click', () => {
@@ -69,10 +79,13 @@ export const Template = () => {
       modal.addEventListener("_close", () => {
         modal.removeAttribute("open")
       });
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
       <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable>
         <p>
@@ -84,8 +97,11 @@ export const Template = () => {
           <goa-button slot="actions" size="medium">I Agree</goa-button>
         </goa-button-group>
       </goa-modal>
-    `}/>
-    <CodeSnippet lang="ts" code={`
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
       export class SomeComponent {
         isOpen: boolean = false;
         openModal(e) {
@@ -95,10 +111,13 @@ export const Template = () => {
           isOpen = false;
         }
       }
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       const [showModal, setShowModal] = useState(false);
       return (
         <>
@@ -123,10 +142,10 @@ export const Template = () => {
           </GoAModal>
         </>
       )
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
-
 
 ---
 
