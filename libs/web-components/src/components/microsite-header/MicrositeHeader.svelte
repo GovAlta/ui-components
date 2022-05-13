@@ -40,8 +40,11 @@
     </div>
   {/if}
 
-  {#if level !== "live"}
-    <div data-testid="level" class="service-level service-level--{level.toLowerCase()}">
+  {#if ["alpha", "beta"].includes(level)}
+    <div
+      data-testid="level"
+      class="service-level service-level--{level.toLowerCase()}"
+    >
       {capitalize(level)}
     </div>
     <div data-testid="site-text" class="site-text">
