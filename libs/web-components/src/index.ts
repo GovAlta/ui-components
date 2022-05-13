@@ -10,6 +10,7 @@ export { default as GoACardContent } from "./components/card-content/CardContent
 export { default as GoACardGroup } from "./components/card-group/CardGroup.svelte";
 export { default as GoACardImage } from "./components/card-image/CardImage.svelte";
 export { default as GoACheckbox } from "./components/checkbox/Checkbox.svelte";
+export { default as GoAChip } from "./components/chip/Chip.svelte";
 export { default as GoAContainer } from "./components/container/Container.svelte";
 export { default as GoADropdown } from './components/dropdown/Dropdown.svelte';
 export { default as GoADropdownItem } from './components/dropdown/DropdownItem.svelte';

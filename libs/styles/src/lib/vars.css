@@ -3,13 +3,13 @@
   --font-family: acumin-pro-semi-condensed, sans-serif;
 
   /* font-size */
-  --fs-xs: 0.75rem;
-  --fs-sm: 0.875rem;
-  --fs-base: 1.125rem;
-  --fs-lg: 1.25rem;
-  --fs-xl: 1.5rem;
-  --fs-2xl: 2.25rem;
-  --fs-3xl: 3rem;
+  --fs-xs: 0.75rem;     /* 12px */
+  --fs-sm: 0.875rem;    /* 14px */
+  --fs-base: 1.125rem;  /* 18px */
+  --fs-lg: 1.25rem;     /* 20px */
+  --fs-xl: 1.5rem;      /* 24px */
+  --fs-2xl: 2.25rem;    /* 36px */
+  --fs-3xl: 3rem;       /* 48px */
 
   /* font-weight */
   --fw-thin: 100;
