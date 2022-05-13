@@ -3,6 +3,7 @@
     "nrwl.angular-console",
     "silvenon.mdx",
     "github.vscode-pull-request-github",
-    "telesoho.vscode-markdown-paste-image"
+    "telesoho.vscode-markdown-paste-image",
+    "firsttris.vscode-jest-runner"
   ]
 }
