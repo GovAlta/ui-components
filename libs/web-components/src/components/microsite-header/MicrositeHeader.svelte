@@ -7,7 +7,7 @@
   export let feedbackurl: string;
 
   function capitalize(val: string): string {
-    if (!val || val?.length === 0) return "";
+    if (!val || (val && val.length === 0)) return "";
     return val[0].toUpperCase() + val.slice(1);
   }
 </script>
@@ -41,7 +41,7 @@
   {/if}
 
   {#if level !== "live"}
-    <div data-testid="level" class="service-level service-level--{level?.toLowerCase()}">
+    <div data-testid="level" class="service-level service-level--{level.toLowerCase()}">
       {capitalize(level)}
     </div>
     <div data-testid="site-text" class="site-text">
