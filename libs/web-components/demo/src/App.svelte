@@ -59,7 +59,7 @@
           alt="Card image"
         />
         <goa-card-actions>
-          <goa-button size="small">Button</goa-button>
+          <goa-button size="compact">Button</goa-button>
         </goa-card-actions>
       </goa-card>
 
@@ -71,7 +71,7 @@
         />
         <goa-card-content> This is card content below the image </goa-card-content>
         <goa-card-actions>
-          <goa-button size="small">Button</goa-button>
+          <goa-button size="compact">Button</goa-button>
         </goa-card-actions>
       </goa-card>
 
@@ -83,7 +83,7 @@
           alt="Card image"
         />
         <goa-card-actions>
-          <goa-button size="small">Button</goa-button>
+          <goa-button size="compact">Button</goa-button>
         </goa-card-actions>
       </goa-card>
 
@@ -97,7 +97,7 @@
           possimus iusto, magni ut quisquam ex necessitatibus eum in modi?
         </goa-card-content>
         <goa-card-actions>
-          <goa-button size="small">Button</goa-button>
+          <goa-button size="compact">Button</goa-button>
         </goa-card-actions>
       </goa-card>
 
@@ -109,14 +109,14 @@
           alt="Card image"
         />
         <goa-card-actions>
-          <goa-button size="small" variant="tertiary">Button</goa-button>
-          <goa-button size="small">Button</goa-button>
+          <goa-button size="compact" variant="tertiary">Button</goa-button>
+          <goa-button size="compact">Button</goa-button>
         </goa-card-actions>
       </goa-card>
 
       <goa-card elevation={5}>
         <goa-card-actions>
-          <goa-button size="small">Button</goa-button>
+          <goa-button size="compact">Button</goa-button>
         </goa-card-actions>
         <goa-card-image
           height="160px"
@@ -488,7 +488,7 @@
         id="delete-all"
         type="secondary"
         variant="danger"
-        size="small"
+        size="compact"
         slot="actions">Delete</goa-button
       >
 
@@ -522,11 +522,61 @@
 
     <h2 id="section-buttons">Button Groups</h2>
 
+    <h3>Buttons Types/Sizes</h3>
+    <h4>Primary</h4>
+    <goa-button-group>
+      <goa-button type="primary">Button</goa-button>
+      <goa-button type="primary" leadingicon="add">Button</goa-button>
+      <goa-button type="primary" trailingicon="add">Button</goa-button>
+      <goa-button type="primary" size="compact">Button</goa-button>
+      <goa-button type="primary" size="compact" leadingicon="add">Button</goa-button>
+      <goa-button type="primary" size="compact" trailingicon="add">Button</goa-button>
+    </goa-button-group>
+    <br>
+    <goa-button-group>
+      <goa-button disabled type="primary">Button</goa-button>
+      <goa-button disabled type="primary" leadingicon="add">Button</goa-button>
+      <goa-button disabled type="primary" trailingicon="add">Button</goa-button>
+      <goa-button disabled type="primary" size="compact">Button</goa-button>
+      (disabled)
+    </goa-button-group>
+
+    <h4>Secondary</h4>
+    <goa-button-group>
+      <goa-button type="secondary">Button</goa-button>
+      <goa-button type="secondary" size="compact">Button</goa-button>
+    </goa-button-group>
+    <br>
+    <goa-button-group>
+      <goa-button disabled type="secondary">Button</goa-button>
+      <goa-button disabled type="secondary" size="compact">Button</goa-button>
+      (disabled)
+    </goa-button-group>
+
+    <h4>Tertiary</h4>
+    <goa-button-group>
+      <goa-button type="tertiary">Button</goa-button>
+      <goa-button type="tertiary" size="compact">Button</goa-button>
+    </goa-button-group>
+    <br>
+    <goa-button-group>
+      <goa-button disabled type="tertiary">Button</goa-button>
+      <goa-button disabled type="tertiary" size="compact">Button</goa-button>
+      (disabled)
+    </goa-button-group>
+
+    <h4>Get Started</h4>
+    <goa-button-group>
+      <goa-button type="get-started">Get Started</goa-button>
+    </goa-button-group>
+
+
     <h3>Align to Start</h3>
     <goa-button-group alignment="start">
       <goa-button type="tertiary">Cancel</goa-button>
       <goa-button type="primary" disabled title="This one is disabled">Save</goa-button>
     </goa-button-group>
+
 
     <h3>Align to End</h3>
     <goa-button-group alignment="end">

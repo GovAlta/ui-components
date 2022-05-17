@@ -1,15 +1,18 @@
 <svelte:options tag="goa-button" />
 
 <script lang="ts">
+  import type { IconSize, IconTheme, GoAIconType } from "../icon/Icon.svelte";
   // import { ButtonSize, ButtonType, ButtonVariant, WCBoolean, WC_FALSE } from "@abgov/shared/common";
 
   import { toBoolean } from "../../common/utils";
 
-  export let type = "primary"; // primary, secondary, tertiary, borderless
-  export let size = "medium"; // small, medium, large
+  export let type = "primary"; // primary, secondary, tertiary, start
+  export let size = "normal"; // normal, compact
   export let variant = "default"; // default, danger
   export let title: string = "";
   export let disabled: string = "false";
+  export let leadingicon: GoAIconType = null;
+  export let trailingicon: GoAIconType = null;
 
   //optional
   export let testid: string = "";
@@ -35,7 +38,18 @@
   disabled={isDisabled}
   data-testid={testid}
 >
-  <slot />
+  {#if type === "get-started"}
+    <slot />
+    <goa-icon type="arrow-forward" inverted="true" />
+  {:else}
+    {#if leadingicon}
+      <goa-icon type={leadingicon} inverted="true" />
+    {/if}
+    <slot />
+    {#if trailingicon}
+      <goa-icon type={trailingicon} inverted="true" />
+    {/if}
+  {/if}
 </button>
 
 <style>
@@ -58,36 +72,54 @@
     border: 2px solid var(--goa-color-interactive);
     box-sizing: border-box;
     cursor: pointer;
-    font-size: var(--fs-base, 1rem);
-    font-weight: 700;
+    font-size: var(--fs-lg);
+    font-weight: 400;
     height: var(--button-height);
     padding: 0 0.75rem;
-
     display: flex;
     gap: 0.25rem;
     align-items: center;
-
+    justify-content: center;
     transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out,
       border-color 0.2s ease-in-out;
-    transform: scaleX(1);
+    /* transform: scale(1); */
   }
 
   /* button:active {
-    transform: scale(0.95);
+    transform: scale(0.99);
   } */
 
+  button:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  button.compact {
+    height: var(--button-height-compact);
+    font-size: var(--fs-base);
+  }
+
+  button.get-started {
+    height: var(--button-height-tall);
+    font-weight: var(--fw-bold);
+  }
+
   /* Primary */
+  button.get-started,
   button.primary {
     border: 2px solid var(--goa-color-interactive);
     background: var(--goa-color-interactive);
     color: var(--color-white, white);
   }
 
+  button.get-started:hover,
   button.primary:hover {
     border-color: var(--goa-color-interactive--hover);
     background: var(--goa-color-interactive--hover);
   }
 
+  button.get-started:focus,
+  button.get-started:active,
   button.primary:focus,
   button.primary:active {
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
@@ -121,9 +153,10 @@
   /* Tertiary */
 
   button.tertiary {
-    border: 1px solid var(--color-gray-200);
+    border: 1px solid transparent;
     background: var(--color-white);
     color: var(--goa-color-interactive);
+    text-decoration: underline;
   }
 
   button.tertiary:hover {
@@ -134,29 +167,11 @@
 
   button.tertiary:focus,
   button.tertiary:active {
-    border-color: var(--goa-color-interactive--active);
+    border-color: var(--color-gray-100);
+    background: var(--color-gray-100);
     color: var(--goa-color-interactive--active);
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
     outline: none;
-  }
-
-  /* Borderless */
-
-  button.borderless {
-    background: none;
-    color: var(--goa-color-interactive);
-    border: none;
-  }
-  button.borderless:hover {
-    background-color: var(--goa-color-primary-light);
-    color: var(--goa-color-interactive--hover);
-  }
-
-  button.borderless:focus,
-  button.borderless:active {
-    outline: none;
-    box-shadow: none;
-    background-color: var(--goa-color-primary-light);
   }
 
   .primary.danger {
@@ -191,14 +206,6 @@
     background: var(--color-white);
   }
 
-  button:disabled {
-    pointer-events: none;
-    /* TODO: should have a disabled color */
-    color: var(--color-gray-600);
-    background-color: var(--color-gray-100);
-    border-color: var(--color-gray-100);
-  }
-
   .tertiary.danger {
     color: var(--goa-color-status-emergency);
     border-color: var(--color-gray-200);
@@ -216,45 +223,4 @@
     background: var(--color-white);
   }
 
-  .borderless.danger {
-    color: var(--goa-color-status-emergency);
-  }
-  .borderless.danger:hover {
-    background: var(--goa-color-emergency-light);
-    color: var(--goa-color-status-emergency-dark);
-  }
-  .borderless.danger:focus,
-  .borderless.danger:active {
-    background: var(--goa-color-emergency-light);
-    color: var(--goa-color-status-emergency-dark);
-  }
-
-  /* Sizes */
-
-  .large {
-    font-size: var(--fs-lg);
-    line-height: 3rem;
-  }
-
-  .large.borderless {
-    line-height: calc(3rem + 4px);
-  }
-
-  .medium {
-    font-size: var(--fs-base);
-    line-height: 2.375rem;
-  }
-
-  .medium.borderless {
-    line-height: calc(2.375rem + 4px);
-  }
-
-  .small {
-    font-size: var(--fs-sm);
-    line-height: 1.75rem;
-  }
-
-  .small.borderless {
-    line-height: calc(1.75rem + 4px);
-  }
 </style>
