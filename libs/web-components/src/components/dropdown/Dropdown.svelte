@@ -18,6 +18,7 @@
   export let disabled: boolean;
   export let error: boolean;
   export let testid: string;
+  export let width: string;
 
   // TODO: remove this once goa-input has the toBoolean method removed
   $: isError = error ? "true" : "false";
@@ -27,6 +28,8 @@
   let selectedLabel: string = "";
   let isMenuVisible = false;
   let highlightedIndex: number = 0;
+  let maxLetterCount: number = 0;
+  let computedWidth: string;
 
   let el: HTMLElement;
   let menuEl: HTMLElement;
@@ -58,6 +61,10 @@
           options = [...options, { ..._data, selected }];
           if (selected) {
             selectedLabel = _data.label
+          }
+          if (!width && maxLetterCount < _data.label.length) {
+            maxLetterCount = _data.label.length;
+            computedWidth = `${Math.max(20, maxLetterCount + 12)}ch`;
           }
           setHighlightedIndexToSelected();
           break;
@@ -177,6 +184,7 @@
       disabled={disabled}
       {leadingicon}
       {placeholder}
+      width={width || computedWidth}
       id={`${name}-dropdown-input`}
       name="search"
       readonly
@@ -221,6 +229,14 @@
   .goa-dropdown-box {
     position: relative;
     cursor: pointer;
+    display: inline-block;
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .goa-dropdown-box {
+      width: unset;
+    }
   }
 
   .goa-dropdown-background {
@@ -275,6 +291,10 @@
     padding: 0.5rem;
     cursor: pointer;
     color: var(--color-black);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .goa-dropdown-option--tabbed {

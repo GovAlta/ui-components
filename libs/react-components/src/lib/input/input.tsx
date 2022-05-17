@@ -12,10 +12,11 @@ interface WCProps {
   trailingicon?: string;
   variant: string;
   disabled?: boolean;
-  error?: string;
+  error?: boolean;
   readonly?: boolean;
   focused?: boolean;
   handletrailingiconclick: boolean;
+  width?: string;
   testid?: string;
 }
 
@@ -46,7 +47,8 @@ export interface Props {
   variant?: 'goa' | 'bare';
   focused?: boolean;
   readonly?: boolean;
-  error?: string;
+  error?: boolean;
+  width?: string;
   testId?: string;
 };
 
@@ -63,6 +65,7 @@ export const GoAInput: FC<Props & { type: string }> = ({
   value,
   placeholder,
   error,
+  width,
   testId,
   onTrailingIconClick,
   onChange,
@@ -90,7 +93,7 @@ export const GoAInput: FC<Props & { type: string }> = ({
   }, [ref, onChange, onTrailingIconClick])
 
   return (
-    <goa-input ref={ref} focused={focused} type={type} name={name} id={id} leadingicon={leadingIcon} trailingicon={trailingIcon} variant={variant} disabled={disabled} readonly={readonly} placeholder={placeholder} error={error} data-testid={testId} value={value} handletrailingiconclick={!!onTrailingIconClick} />
+    <goa-input ref={ref} focused={focused} type={type} name={name} id={id} leadingicon={leadingIcon} trailingicon={trailingIcon} variant={variant} disabled={disabled} readonly={readonly} placeholder={placeholder} error={error} data-testid={testId} value={value} width={width} handletrailingiconclick={!!onTrailingIconClick} />
   );
 };
 

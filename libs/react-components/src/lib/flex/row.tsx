@@ -1,31 +1,28 @@
-import React, { CSSProperties, FC, ReactElement } from "react";
+import React, { FC } from "react";
 
-interface Props {
-  gap?: 'small' | 'medium' | 'large';
-  minWidth?: number | string;
+interface WCProps {
+  gap: 'small' | 'medium' | 'large';
 }
 
-export const GoAFlexRow: FC<Props> = ({ gap, minWidth, children }) => {
-  const style: CSSProperties = {
-    gap: gap === 'small' ? '1rem' : gap === 'medium' ? '2rem' : gap === 'large' ? '3rem' : '0'
-  };
 
-  const getChildren = () => {
-    if (!children) {
-      return null;
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      'goa-flex-row': WCProps & React.HTMLAttributes<HTMLElement>
     }
-    return React.Children.map(children as ReactElement, (child: ReactElement) => {
-      return React.cloneElement(child, {
-        style: {
-          flexBasis: minWidth,
-          ...child.props.style,
-        }
-      });
-    });
-  };
+  }
+}
 
+
+export interface Props {
+  gap: 'small' | 'medium' | 'large';
+};
+
+
+export const GoAFlexRow: FC<Props> = ({ gap, children }) => {
   return (
-    <div className="goa-flex-row" style={style}>{getChildren()}</div>
+    <goa-flex-row gap={gap}>{children}</goa-flex-row>
   );
 }
 

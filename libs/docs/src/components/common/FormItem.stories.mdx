@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import { Tabs, Tab, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
-import { GoAFormItem, GoAInput } from '@abgov/react-components';
+import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } from '@abgov/react-components';
 
 <Meta title="Components/Form Item" />
 
@@ -135,6 +135,18 @@ import { GoAFormItem, GoAInput } from '@abgov/react-components';
     `}/>
   </Tab>
 </Tabs>
+
+
+<Story name="Form Row">
+  <GoAFlexRow gap="small">
+    <GoAFormItem label="First name" error="First name is required" helpText="Help text">
+      <GoAInput name="firstName" onChange={() => {}} error width="100%" />
+    </GoAFormItem>
+    <GoAFormItem label="Last name" error="Last name is required" helpText="Help text">
+      <GoAInput name="lastName" onChange={() => {}} error width="100%" />
+    </GoAFormItem>
+  </GoAFlexRow>
+</Story>
 
 ---
 

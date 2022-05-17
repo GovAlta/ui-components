@@ -33,7 +33,7 @@
   export let readonly: string = "false";
   export let error: string = "false";
   export let testid: string = "";
-  export let width: string = "100%";
+  export let width: string = "30ch";
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
@@ -72,7 +72,9 @@
 <!-- HTML -->
 
 <div
-  style={`width: ${width};`}
+  style={`
+    --width: ${width};
+  `}
   class={`
     goa-input
     ${isDisabled ? "goa-input--disabled" : ""}
@@ -141,6 +143,8 @@
 
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
+
+    min-width: 100%;
   }
 
   .goa-input:hover {
@@ -152,15 +156,15 @@
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
   }
 
-  input {
-    color: var(--goa-color-text);
+
+  @media (min-width: 640px) {
+    .goa-input {
+      min-width: 0;
+      width: var(--width);
+    }
   }
 
-  input[readonly] {
-    cursor: pointer;
-  }
-
-  /* type=range does not have an outline/box-shsdow */
+  /* type=range does not have an outline/box-shadow */
   .goa-input.type--range {
     border: none;
   }
@@ -188,12 +192,19 @@
   }
 
   input {
-    display: block;
-    width: 100%;
+    display: inline-block;
+    color: var(--goa-color-text);
     font-size: var(--input-font-size);
     padding: var(--input-padding);
     line-height: calc(40px - calc(var(--input-padding) * 2));
     background-color: transparent;
+
+    width: 0;
+    flex: 1 1 auto;
+  }
+
+  input[readonly] {
+    cursor: pointer;
   }
 
   .goa-input-leading-icon + input {
@@ -225,10 +236,12 @@
     color: var(--goa-color-text-secondary);
   }
 
+
   .goa-input--disabled input:hover {
     cursor: default !important;
   }
 
+  /* Themes */
   input.input--goa {
     display: block;
     border: none;
