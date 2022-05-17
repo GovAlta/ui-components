@@ -10,6 +10,7 @@ import { GoAButton } from './lib/button/button';
 import { GoAButtonGroup } from './lib/button-group/button-group';
 import { GoACallout } from './lib/callout/callout';
 import { GoACheckbox } from './lib/checkbox/checkbox';
+import { GoAChip } from './lib/chip/chip';
 import { GoACircularProgress } from './lib/circular-progress/circular-progress';
 import { GoAContainer } from './lib/container/container';
 import { GoADropdown, GoADropdownOption } from './lib/dropdown/dropdown';
@@ -42,6 +43,7 @@ export {
   GoAButtonGroup,
   GoACallout,
   GoACheckbox,
+  GoAChip,
   GoACircularProgress,
   GoAContainer,
   GoADropdown,

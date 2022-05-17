@@ -421,59 +421,62 @@
     | "wifi"
     | "wine"
     | "woman";
-
 </script>
 
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
 
   export let type: GoAIconType;
-  export let size: IconSize = 'medium';
-  export let theme: IconTheme = 'outline';
+  export let size: IconSize = "medium";
+  export let theme: IconTheme = "outline";
   export let inverted: string;
+  export let fillcolor: string;
+  export let hovercolor: string;
 
   $: isInverted = toBoolean(inverted);
 
   $: _size = {
-    small: '1.1rem',
-    medium: '1.5rem',
-    large: '2rem',
+    small: "1.25rem",
+    medium: "1.5rem",
+    large: "2rem",
   }[size];
-
 </script>
 
 <div
   class="goa-icon"
   class:inverted={isInverted}
   data-testid={`icon-${type}`}
-  style={`--size: ${_size}`}
-  >
-  {#if type }
-    <ion-icon style={`width: ${_size}; height: ${_size}`} name={theme === "filled" ? type : `${type}-${theme}`} />
+  style={`
+    --size: ${_size};
+    --fill-color: ${fillcolor};
+    --hover-color: ${hovercolor};
+  `}
+>
+  {#if type}
+    <ion-icon style="width: 100%; height: 100%;" name={theme === "filled" ? type : `${type}-${theme}`}
+    />
   {/if}
 </div>
 
 <style>
   :host {
-    box-sizing: border-box;
-    font-family: var(--font-family);
-  }
-  /* ion-icon {
-    --ionicon-stroke-width: 32px;
-  } */
-
-  :host, .goa-icon {
     display: inline-flex;
     align-items: center;
-  }
-
-  .goa-icon, .goa-icon * {
-    box-sizing: border-box;
   }
 
   .goa-icon {
     width: var(--size);
     height: var(--size);
+    fill: var(--fill-color);
+    color: var(--fill-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .goa-icon:hover ion-icon {
+    fill: var(--hover-color);
+    color: var(--hover-color);
   }
 
   .inverted {

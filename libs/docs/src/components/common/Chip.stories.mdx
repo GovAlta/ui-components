@@ -1,0 +1,115 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { Tabs, Tab, CodeSnippet, SupportInfo, Markdown } from '@abgov/shared/storybook-common';
+import { GoAButton, GoAChip } from '@abgov/react-components';
+import { useState } from 'react';
+
+<Meta title="Components/Chip" />
+
+# Chip
+
+### Chips allow users to enter information, filter content, and make selections in a dynamic way. They are different from badges as badges are static and triggered by the system. Chips differentiate from buttons as buttons appear consistently within the design form each user and contain familiar calls to action. Depending on the context where the chip is applied, the design and interaction of the chip may vary.
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI-DS?node-id=5668%3A223675)
+
+---
+
+#### Basic
+
+<Story name="Basic">
+  <GoAChip content="Chip Text" />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-chip content="Chip Text" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-chip content="Chip Text"></goa-chip>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAChip content="Chip Text" />
+    `}/>
+  </Tab>
+</Tabs>
+
+
+#### Leading icon
+
+<Story name="Leading icon">
+  <GoAChip content="Chip Text" leadingIcon="close-circle" />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-chip content="Chip Text" leadingicon="close-circle" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-chip content="Chip Text" leadingicon="close-circle"></goa-chip>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAChip content="Chip Text" leadingIcon="close-circle" />
+    `}/>
+  </Tab>
+</Tabs>
+
+
+#### Delete event
+
+export const DeleteEventTemplate = () => {
+  const [chips, setChips] = useState([
+    "Doritos",
+    "Fritos",
+    "Lays",
+  ]);
+  const deleteChip = (chip) => {
+    setChips((chips) => chips.filter(c => c !== chip));
+  };
+  if (chips.length === 0) {
+    return <>
+      <GoAButton type="tertiary" onClick={() => setChips(["Doritos", "Fritos", "Lays"])}>Gimme more chips</GoAButton>
+    </>;
+  }
+  return <>
+    {
+      chips.map((chip) => {
+        return <GoAChip key={chip} content={chip} onDeleteIconClick={() => deleteChip(chip)} />
+      })
+    }
+  </>;
+}
+
+<Story name="Delete Event" args={{}}>
+  {DeleteEventTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-chip content="Chip Text" deletable="true" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-chip content="Chip Text" deletable="true" (_onDeleteIconClick)></goa-chip>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAChip content="Chip Text" onDeleteIconClick={() => deleteChip()} />
+    `}/>
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />
