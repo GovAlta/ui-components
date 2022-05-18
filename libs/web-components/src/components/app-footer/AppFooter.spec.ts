@@ -32,14 +32,6 @@ describe('GoAAppFooter Component', () => {
     expect(logoLink.title).toBe("abc");
   });
 
-  it("allows for setting copyright details", async () => {
-    const el = createElement({copyrighturl: "http://alberta.ca/design-systems", copyrighttext: "abc"});
-    const copyrightLink = el.container.querySelector('.goa-copyright');
-    expect(copyrightLink).toBeTruthy();
-    expect((copyrightLink as HTMLAnchorElement).href).toBe("http://alberta.ca/design-systems");
-    expect(copyrightLink.innerHTML).toBe("© abc");
-  });
-
   it("allows for setting of meta links", async () => {
 
     const metalinks = [
@@ -109,17 +101,28 @@ describe('GoAAppFooter Component', () => {
       { "name": "CCC", "links": [{ "url":"F", "title": "xyz6" }]}
     ];
 
-    const el = createElement({ navigationSections: navigationsections });
+    const el = createElement({ navigationSections: navigationsections, multicolumnsectionnames: "AAA, BBB" });
 
     await waitFor(() => {
 
       const sectionNames = el.container.querySelectorAll('.navigation-section-name');
+
       const names: string[] = [];
+      const multiCOlumnSectionNames: string[] = [];
+
       sectionNames.forEach(function(sectionName) {
+
         const element = (sectionName as HTMLElement);
-        names.push((element.firstChild as HTMLElement).textContent);
+        const sectionNameElement = (element.firstChild as HTMLElement);
+
+        names.push(sectionNameElement.textContent);
+
+        if (element.parentElement.className && (element.parentElement.className.includes("multi-section-column")))
+          multiCOlumnSectionNames.push(sectionNameElement.textContent);
       });
+
       expect(names.sort()).toEqual(["AAA", "BBB", "CCC"]);
+      expect(multiCOlumnSectionNames.sort()).toEqual(["AAA", "BBB"]);
 
       const navigationLinks = el.container.querySelectorAll('.navigation-link');
       const urls: string[] = [];
@@ -135,7 +138,6 @@ describe('GoAAppFooter Component', () => {
 
       const metaLink = el.container.querySelectorAll('.meta-link');
       expect(metaLink.length).toBe(0);
-
     });
 
   });
