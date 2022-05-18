@@ -280,7 +280,7 @@
 
     <h2 id="section-modal">Modal</h2>
     <goa-button id="openModal">Show Modal</goa-button>
-    <goa-modal id="modal" title="Modal Header....." closable scrollable width="80%">
+    <goa-modal id="modal" heading="Modal Header....." closable scrollable>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
         molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
@@ -361,8 +361,13 @@
     <h2 id="section-input">Input</h2>
     <goa-flex-row gap="small">
       <goa-form-item label="First name" helptext="This is helper text">
-        <goa-input id="firstname" name="firstname" disabled="false" />
-        <goa-input id="firstname" name="firstname" disabled="false" type="number" />
+        <goa-input id="firstname" name="firstname" disabled="false" showcounter maxcharcount="20" />
+        <script>
+          var firstNameEl = document.getElementById("firstname");
+          firstNameEl.addEventListener("_change", (e) => {
+            firstNameEl.value = e.detail.value;
+          });
+        </script>
       </goa-form-item>
 
       <goa-form-item label="Middle name" optional helptext="This should be disabled">
