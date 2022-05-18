@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-interface Props {
+export interface Props {
   id?: string;
   appUrl?: string;
   title?: string;

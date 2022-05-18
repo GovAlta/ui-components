@@ -6,6 +6,12 @@
   import type { Link } from './link';
   import type { NavigationSection } from './navigationSection';
 
+  export let id: string;
+  export let copyrighturl: string;
+  export let appurl: string;
+  export let title: string;
+  export let copyrighttext: string;
+
   export let metaLinks: Link[] = [];
   export let navigationLinks: Link[] = [];
   export let navigationSections: NavigationSection[] = [];
@@ -13,7 +19,7 @@
 </script>
 
 <!-- HTML -->
-<GoAAppFooter>
+<GoAAppFooter id={id} copyrighturl={copyrighturl} appurl={appurl} title={title} copyrighttext={copyrighttext}>
 
   {#each metaLinks as metalink (metalink.title) }
     <GoAMetaLink url={metalink.url} title={metalink.title}></GoAMetaLink>

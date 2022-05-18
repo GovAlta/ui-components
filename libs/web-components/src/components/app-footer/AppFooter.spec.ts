@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/svelte';
-import GoAAppFooter from './AppFooterWrapper.test.svelte'
+import GoAAppFooter from './AppFooterWrapper.test.svelte';
 
 function createElement(props = {}) {
   return render(GoAAppFooter, { ...props });
@@ -10,8 +10,34 @@ describe('GoAAppFooter Component', () => {
 
   it("should render", async () => {
     const el = createElement();
-    const appFooter = el.container.querySelector('.app-footer-container');
-    expect(appFooter).toBeTruthy();
+    const appFooterContainer = el.container.querySelector('.app-footer-container');
+    expect(appFooterContainer).toBeTruthy();
+  });
+
+  it("allows for setting copyright details", async () => {
+    const el = createElement({copyrighturl: "http://alberta.ca/design-systems", copyrighttext: "abc"});
+    const copyrightLink = el.container.querySelector('.goa-copyright');
+    expect(copyrightLink).toBeTruthy();
+    expect((copyrightLink as HTMLAnchorElement).href).toBe("http://alberta.ca/design-systems");
+    expect(copyrightLink.innerHTML).toBe("© abc");
+  });
+
+  it("allows for setting app url details", async () => {
+    const el = createElement({appurl: "http://alberta.ca/design-systems", title: "abc"});
+    const logo = el.container.querySelector('.logo');
+    expect(logo).toBeTruthy();
+    const logoLink = (logo.parentElement as HTMLAnchorElement);
+    expect(logoLink).toBeTruthy();
+    expect(logoLink.href).toBe("http://alberta.ca/design-systems");
+    expect(logoLink.title).toBe("abc");
+  });
+
+  it("allows for setting copyright details", async () => {
+    const el = createElement({copyrighturl: "http://alberta.ca/design-systems", copyrighttext: "abc"});
+    const copyrightLink = el.container.querySelector('.goa-copyright');
+    expect(copyrightLink).toBeTruthy();
+    expect((copyrightLink as HTMLAnchorElement).href).toBe("http://alberta.ca/design-systems");
+    expect(copyrightLink.innerHTML).toBe("© abc");
   });
 
   it("allows for setting of meta links", async () => {
