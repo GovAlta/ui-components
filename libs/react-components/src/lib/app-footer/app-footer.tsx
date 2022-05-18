@@ -7,6 +7,7 @@ interface WCProps {
   title?: string;
   copyrighturl?: string;
   copyrighttext?: string;
+  multicolumnsectionnames?:string;
 }
 
 declare global {
@@ -24,9 +25,10 @@ export interface Props {
   title?: string;
   copyrightUrl?: string;
   copyrightText?: string;
+  multiColumnSectionNames?:string;
 }
 
-export const GoAAppFooter: FC<Props> = ({ id, appUrl, title, copyrightUrl, copyrightText, children }) => {
+export const GoAAppFooter: FC<Props> = ({ id, appUrl, title, copyrightUrl, copyrightText, multiColumnSectionNames, children }) => {
   return (
     <goa-app-footer
       id={id}
@@ -34,6 +36,7 @@ export const GoAAppFooter: FC<Props> = ({ id, appUrl, title, copyrightUrl, copyr
       title={title}
       copyrighturl={copyrightUrl}
       copyrighttext={copyrightText}
+      multicolumnsectionnames={multiColumnSectionNames}
     >
       {children}
     </goa-app-footer>

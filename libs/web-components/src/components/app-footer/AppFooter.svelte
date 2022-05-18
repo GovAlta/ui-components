@@ -9,6 +9,7 @@
   import { META_LINK, NAVIGATION_LINK, MetaLinkRegisterMessage, NavigationLinkRegisterMessage } from "./types";
 
   export let id: string = "goa-app-footer-id";
+  export let multicolumnsectionnames: string = "";
   export let copyrighturl: string = "#";
   export let appurl: string = "#";
   export let title: string = "";
@@ -18,6 +19,7 @@
   let metaLinks: Link[] = [];
   let navigationLinks: Link[] = [];
   let navigationSections: NavigationSection[] = [];
+  let multiColumnSectionNamesArray: string[] = [];
 
   $: isDefaultFooter = (!metaLinks.length && !navigationLinks.length && !navigationSections.length);
   $: isMetaLinksOnlyFooter = (metaLinks.length && !navigationLinks.length && !navigationSections.length);
@@ -25,7 +27,7 @@
   $: isNavigationSectionsOnlyFooter = (!metaLinks.length && !navigationLinks.length && navigationSections.length);
   $: isMetaAndNavigationLinksFooter = (metaLinks.length && navigationLinks.length && !navigationSections.length);
   $: isMetaAndNavigationSectionsFooter = (metaLinks.length && !navigationLinks.length && navigationSections.length);
-
+  $: multiColumnSectionNamesArray = multicolumnsectionnames.split(",").map(name => name.trim());
 
   function AppendNavigationLinkWithSection(message: NavigationLinkRegisterMessage) {
 
@@ -81,6 +83,7 @@
 </script>
 
 <!-- HTML -->
+<hr class="top-grey-bar"/>
 <div class="app-footer-container">
   <center>
     <div class='footer'
@@ -95,19 +98,27 @@
       {#if (navigationSections.length || navigationLinks.length) }
         <div class="navigation-links">
           {#if navigationSections.length}
-            {#each navigationSections as navigationSection (navigationSection.name) }
-              <div class="navigation-section">
+            {#each navigationSections as navigationSection (navigationSection) }
+
+              <section class:multi-section-column={multiColumnSectionNamesArray.includes(navigationSection.name)}>
+
                 <span class="navigation-section-name">{navigationSection.name}</span>
                 <hr class="navigation-section-name-divider"/>
-                {#each navigationSection.links as navigationlink (navigationlink.title) }
-                  <a href={navigationlink.url} class="navigation-link">{navigationlink.title}</a>
-                {/each}
-              </div>
+                <div class="navigation-section-links">
+                  {#each navigationSection.links as navigationlink (navigationlink.title) }
+                    <a href={navigationlink.url} class="navigation-link">{navigationlink.title}</a>
+                  {/each}
+                </div>
+
+              </section>
+
             {/each}
           {:else if navigationLinks.length }
-            {#each navigationLinks as navigationlink (navigationlink.title) }
-              <a href={navigationlink.url} class="navigation-link">{navigationlink.title}</a>
-            {/each}
+            <div class="navigation-section-name-less">
+              {#each navigationLinks as navigationlink (navigationlink.title) }
+                <a href={navigationlink.url} class="navigation-link">{navigationlink.title}</a>
+              {/each}
+            </div>
           {/if}
         </div>
         <hr class="navigation-links-divider" />
@@ -145,6 +156,11 @@
   :host {
     box-sizing: border-box;
     font-family: var(--font-family);
+  }
+
+  .top-grey-bar {
+    border-top: 2px solid var(--color-gray-200);
+    margin: 0;
   }
 
   .footer {
@@ -189,16 +205,37 @@
     background-color: var(--color-gray-100);
   }
 
-  .navigation-links, .meta-links, .navigation-section {
+  .navigation-links {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: start;
+    column-gap: 1.75rem;
+    display: flex;
+    flex-direction: unset;
+  }
+
+  .navigation-links section {
+    flex-grow: 1;
+  }
+
+  .navigation-links section.multi-section-column {
+    flex-grow: 2;
+  }
+
+  .multi-section-column .navigation-section-links {
+    column-count: 2;
+  }
+
+  .meta-links {
     text-align: start;
     display: flex;
     flex-flow: wrap;
   }
 
-  .navigation-section {
-    flex-direction: column;
-    flex: 1 1 0;
-    min-width: 13.25rem;
+  .navigation-section-name-less {
+    column-gap: 1.75rem;
+    width: 100%;
+    column-count: 3;
   }
 
   .navigation-section-name {
@@ -210,16 +247,15 @@
   }
 
   .navigation-section-name-divider {
-    width: 75%;
-    margin: 0;
+    margin-top: 1.75rem;
+    margin-bottom: 0;
   }
 
   .navigation-link {
-    margin-top: 1.75rem;
-    margin-right: 1.75rem;
+    padding-top: 1.75rem;
     color: var(--goa-color-text);
-    width: 13.25rem;
     font-size: var(--fs-base);
+    display: block;
   }
 
   .default-footer .logo-and-copyright {
@@ -278,7 +314,7 @@
     margin-bottom: 1.75rem;
   }
 
- .goa-copyright {
+  .goa-copyright {
     margin-top: 0;
     margin-bottom: 0;
     font-size: var(--fs-base);
@@ -289,19 +325,21 @@
     margin-bottom: 0;
   }
 
-  @media (max-width: 64rem) {
+  @media (max-width: 1024px) {
     .logo {
       margin-top: 2.125rem;
       margin-bottom: 1.5rem;
     }
   }
-  @media (max-width: 59.9rem) {
+
+  @media (max-width: 992px) {
     .app-footer-container {
       padding-left: 1rem;
       padding-right: 1rem;
     }
   }
-  @media (max-width: 40rem) {
+
+  @media (max-width: 640px) {
 
     .logo-and-copyright {
       align-items: flex-start;
@@ -332,8 +370,7 @@
     }
 
     .navigation-link {
-      min-width: 40rem;
-      margin-top: 1.5rem;
+      padding-top: 1.5rem;
       font-size: var(--fs-sm);
     }
 
@@ -356,6 +393,11 @@
       padding-bottom: 2.25rem;
     }
 
+    .navigation-sections-only-footer,
+    .meta-and-navigation-sections-only-footer {
+      padding-top: 0;
+    }
+
     .navigation-links-divider {
       margin-top: 1.5rem;
       margin-bottom: 0;
@@ -370,5 +412,37 @@
       align-items: flex-start;
     }
 
+    .navigation-links {
+      flex-direction: column;
+    }
+
+    .navigation-links section {
+      margin-top: 2.25rem;
+    }
+
+    .navigation-section-name-divider {
+      margin-top: 1rem;
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .navigation-section-name-less {
+      column-count: 2;
+    }
+
+    .navigation-links section.multi-section-column {
+      flex-grow: 1;
+    }
+
+    .multi-section-column .navigation-section-links {
+      column-count: 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .navigation-section-name-less {
+      column-count: 1;
+    }
   }
 </style>

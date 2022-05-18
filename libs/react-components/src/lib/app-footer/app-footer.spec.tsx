@@ -1,7 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import GoAAppFooter, { Props as AppFooterProps }  from "./app-footer";
-import Props from "./app-footer";
 
 describe("GoA AppFooter", () => {
 
@@ -12,7 +11,8 @@ describe("GoA AppFooter", () => {
       appUrl: "http://alberta.ca/design-systems",
       title: "design systems",
       copyrightUrl: "http://alberta.ca/design-systems/copy-right",
-      copyrightText: "xyz"
+      copyrightText: "xyz",
+      multiColumnSectionNames: "AA, BB"
     }
 
     const { container } = render(<GoAAppFooter {...props} children="tags go here" />);
@@ -25,6 +25,7 @@ describe("GoA AppFooter", () => {
     expect(footer.getAttribute('title')).toBe("design systems");
     expect(footer.getAttribute('copyrightUrl')).toBe("http://alberta.ca/design-systems/copy-right");
     expect(footer.getAttribute('copyrightText')).toBe("xyz");
+    expect(footer.getAttribute('multiColumnSectionNames')).toBe("AA, BB");
     expect(footer.innerHTML).toBe("tags go here");
   });
 

@@ -224,6 +224,95 @@ The footer resides at the bottom of every page of your service, providing copyri
 </Tabs>
 
 
+#### Footer with secondary navigation with multi column section
+
+<Story name="Footer with secondary navigation with multi column section">
+  <GoAAppFooter id="2.2" multiColumnSectionNames="All Services">
+    <GoANavigationLink footerId="2.2" section="All Services" url="a.html" title="Arts and culture" />
+    <GoANavigationLink footerId="2.2" section="All Services" url="b.html" title="Education and training" />
+    <GoANavigationLink footerId="2.2" section="All Services" url="c.html" title="Family and social supports" />
+    <GoANavigationLink footerId="2.2" section="All Services" url="d.html" title="Housing and community" />
+    <GoANavigationLink footerId="2.2" section="All Services" url="e.html" title="Life events" />
+    <GoANavigationLink footerId="2.2" section="All Services" url="f.html" title="Business and economy" />
+    <GoANavigationLink footerId="2.2" section="All Services" url="g.html" title="Emergencies and public safety" />
+    <GoANavigationLink footerId="2.2" section="All Services" url="h.html" title="Government" />
+    <GoANavigationLink footerId="2.2" section="All Services" url="i.html" title="Jobs and employment" />
+    <GoANavigationLink footerId="2.2" section="All Services" url="j.html" title="Moving to Alberta" />
+    <GoANavigationLink footerId="2.2" section="Social Media" url="instagram.html" title="Instagram" />
+    <GoANavigationLink footerId="2.2" section="Social Media" url="youtube.html" title="YouTube" />
+    <GoANavigationLink footerId="2.2" section="Social Media" url="facebook.html" title="Facebook" />
+    <GoANavigationLink footerId="2.2" section="Social Media" url="snapchat.html" title="Snapchat" />
+    <GoANavigationLink footerId="2.2" section="Social Media" url="twitter.html" title="Twitter" />
+  </GoAAppFooter>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer multicolumnsectionnames="All Services">
+        <goa-navigation-link  section="All Services" url="a.html" title="Arts and culture" />
+        <goa-navigation-link  section="All Services" url="b.html" title="Education and training" />
+        <goa-navigation-link  section="All Services" url="c.html" title="Family and social supports" />
+        <goa-navigation-link  section="All Services" url="d.html" title="Housing and community" />
+        <goa-navigation-link  section="All Services" url="e.html" title="Life events" />
+        <goa-navigation-link  section="All Services" url="f.html" title="Business and economy" />
+        <goa-navigation-link  section="All Services" url="g.html" title="Emergencies and public safety" />
+        <goa-navigation-link  section="All Services" url="h.html" title="Government" />
+        <goa-navigation-link  section="All Services" url="i.html" title="Jobs and employment" />
+        <goa-navigation-link  section="All Services" url="j.html" title="Moving to Alberta" />
+        <goa-navigation-link  section="Social Media" url="instagram.html" title="Instagram" />
+        <goa-navigation-link  section="Social Media" url="youtube.html" title="YouTube" />
+        <goa-navigation-link  section="Social Media" url="facebook.html" title="Facebook" />
+        <goa-navigation-link  section="Social Media" url="snapchat.html" title="Snapchat" />
+        <goa-navigation-link  section="Social Media" url="twitter.html" title="Twitter" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer multicolumnsectionnames="All Services">
+        <goa-navigation-link  section="All Services" url="a.html" title="Arts and culture" />
+        <goa-navigation-link  section="All Services" url="b.html" title="Education and training" />
+        <goa-navigation-link  section="All Services" url="c.html" title="Family and social supports" />
+        <goa-navigation-link  section="All Services" url="d.html" title="Housing and community" />
+        <goa-navigation-link  section="All Services" url="e.html" title="Life events" />
+        <goa-navigation-link  section="All Services" url="f.html" title="Business and economy" />
+        <goa-navigation-link  section="All Services" url="g.html" title="Emergencies and public safety" />
+        <goa-navigation-link  section="All Services" url="h.html" title="Government" />
+        <goa-navigation-link  section="All Services" url="i.html" title="Jobs and employment" />
+        <goa-navigation-link  section="All Services" url="j.html" title="Moving to Alberta" />
+        <goa-navigation-link  section="Social Media" url="instagram.html" title="Instagram" />
+        <goa-navigation-link  section="Social Media" url="youtube.html" title="YouTube" />
+        <goa-navigation-link  section="Social Media" url="facebook.html" title="Facebook" />
+        <goa-navigation-link  section="Social Media" url="snapchat.html" title="Snapchat" />
+        <goa-navigation-link  section="Social Media" url="twitter.html" title="Twitter" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAAppFooter multiColumnSectionNames="All Services">
+        <GoANavigationLink section="All Services" url="a.html" title="Arts and culture" />
+        <GoANavigationLink section="All Services" url="b.html" title="Education and training" />
+        <GoANavigationLink section="All Services" url="c.html" title="Family and social supports" />
+        <GoANavigationLink section="All Services" url="d.html" title="Housing and community" />
+        <GoANavigationLink section="All Services" url="e.html" title="Life events" />
+        <GoANavigationLink section="All Services" url="f.html" title="Business and economy" />
+        <GoANavigationLink section="All Services" url="g.html" title="Emergencies and public safety" />
+        <GoANavigationLink section="All Services" url="h.html" title="Government" />
+        <GoANavigationLink section="All Services" url="i.html" title="Jobs and employment" />
+        <GoANavigationLink section="All Services" url="j.html" title="Moving to Alberta" />
+        <GoANavigationLink section="Social Media" url="instagram.html" title="Instagram" />
+        <GoANavigationLink section="Social Media" url="youtube.html" title="YouTube" />
+        <GoANavigationLink section="Social Media" url="facebook.html" title="Facebook" />
+        <GoANavigationLink section="Social Media" url="snapchat.html" title="Snapchat" />
+        <GoANavigationLink section="Social Media" url="twitter.html" title="Twitter" />
+      </GoAAppFooter>
+    `}/>
+  </Tab>
+</Tabs>
+
+
 #### Footer with secondary navigation and links to meta information
 
 <Story name="Footer with secondary navigation and links to meta information">

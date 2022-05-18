@@ -11,6 +11,7 @@
   export let appurl: string;
   export let title: string;
   export let copyrighttext: string;
+  export let multicolumnsectionnames: string;
 
   export let metaLinks: Link[] = [];
   export let navigationLinks: Link[] = [];
@@ -19,7 +20,7 @@
 </script>
 
 <!-- HTML -->
-<GoAAppFooter id={id} copyrighturl={copyrighturl} appurl={appurl} title={title} copyrighttext={copyrighttext}>
+<GoAAppFooter id={id} copyrighturl={copyrighturl} appurl={appurl} title={title} copyrighttext={copyrighttext} multicolumnsectionnames={multicolumnsectionnames}>
 
   {#each metaLinks as metalink (metalink.title) }
     <GoAMetaLink url={metalink.url} title={metalink.title}></GoAMetaLink>
