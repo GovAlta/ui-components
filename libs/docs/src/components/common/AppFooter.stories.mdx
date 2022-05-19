@@ -1,0 +1,408 @@
+import {
+  Meta,
+  Canvas,
+  Story,
+} from '@storybook/addon-docs';
+
+import { useArgs } from '@storybook/client-api';
+import { action } from '@storybook/addon-actions';
+import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
+import { GoAAppFooter, GoAMetaLink, GoANavigationLink } from '@abgov/react-components';
+
+<Meta title="Components/AppFooter" component={GoAAppFooter} />
+
+# Footer
+
+The footer resides at the bottom of every page of your service, providing copyright information and other information related to your service.
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI-DS?node-id=582%3A5939)
+
+---
+
+#### Default Footer
+
+<Story name="Default Footer">
+  <GoAAppFooter/>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer></goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer></goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAAppFooter />
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Footer with links to meta information
+
+<Story name="Footer with links to meta information">
+  <GoAAppFooter id="abc">
+    <GoAMetaLink footerId="abc" url="privacy.html" title="Privacy" />
+    <GoAMetaLink footerId="abc" url="disclaimer.html" title="Disclaimer" />
+    <GoAMetaLink footerId="abc" url="accessibility.html" title="Accessibility" />
+    <GoAMetaLink footerId="abc" url="using-alberta.html" title="Using Alberta.ca" />
+  </GoAAppFooter>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer>
+        <goa-meta-link url="privacy.html" title="Privacy" />
+        <goa-meta-link url="disclaimer.html" title="Disclaimer" />
+        <goa-meta-link url="accessibility.html" title="Accessibility" />
+        <goa-meta-link url="using-alberta.html" title="Using Alberta.ca" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer>
+        <goa-meta-link url="privacy.html" title="Privacy" />
+        <goa-meta-link url="disclaimer.html" title="Disclaimer" />
+        <goa-meta-link url="accessibility.html" title="Accessibility" />
+        <goa-meta-link url="using-alberta.html" title="Using Alberta.ca" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAAppFooter>
+        <GoAMetaLink url="privacy.html" title="Privacy" />
+        <GoAMetaLink url="disclaimer.html" title="Disclaimer" />
+        <GoAMetaLink url="accessibility.html" title="Accessibility" />
+        <GoAMetaLink url="using-alberta.html" title="Using Alberta.ca" />
+      </GoAAppFooter>
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Footer with secondary navigation
+
+<Story name="Footer with secondary navigation">
+  <GoAAppFooter id="1">
+    <GoANavigationLink footerId="1" url="a.html" title="Arts and culture" />
+    <GoANavigationLink footerId="1" url="b.html" title="Education and training" />
+    <GoANavigationLink footerId="1" url="c.html" title="Family and social supports" />
+    <GoANavigationLink footerId="1" url="d.html" title="Housing and community" />
+    <GoANavigationLink footerId="1" url="e.html" title="Life events" />
+    <GoANavigationLink footerId="1" url="instagram.html" title="Instagram" />
+    <GoANavigationLink footerId="1" url="youtube.html" title="YouTube" />
+    <GoANavigationLink footerId="1" url="facebook.html" title="Facebook" />
+    <GoANavigationLink footerId="1" url="snapchat.html" title="Snapchat" />
+    <GoANavigationLink footerId="1" url="twitter.html" title="Twitter" />
+  </GoAAppFooter>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer>
+        <goa-navigation-link  url="a.html" title="Arts and culture" />
+        <goa-navigation-link  url="b.html" title="Education and training" />
+        <goa-navigation-link  url="c.html" title="Family and social supports" />
+        <goa-navigation-link  url="d.html" title="Housing and community" />
+        <goa-navigation-link  url="e.html" title="Life events" />
+        <goa-navigation-link  url="instagram.html" title="Instagram" />
+        <goa-navigation-link  url="youtube.html" title="YouTube" />
+        <goa-navigation-link  url="facebook.html" title="Facebook" />
+        <goa-navigation-link  url="snapchat.html" title="Snapchat" />
+        <goa-navigation-link  url="twitter.html" title="Twitter" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer>
+        <goa-navigation-link  url="a.html" title="Arts and culture" />
+        <goa-navigation-link  url="b.html" title="Education and training" />
+        <goa-navigation-link  url="c.html" title="Family and social supports" />
+        <goa-navigation-link  url="d.html" title="Housing and community" />
+        <goa-navigation-link  url="e.html" title="Life events" />
+        <goa-navigation-link  url="instagram.html" title="Instagram" />
+        <goa-navigation-link  url="youtube.html" title="YouTube" />
+        <goa-navigation-link  url="facebook.html" title="Facebook" />
+        <goa-navigation-link  url="snapchat.html" title="Snapchat" />
+        <goa-navigation-link  url="twitter.html" title="Twitter" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAAppFooter>
+        <GoANavigationLink  url="a.html" title="Arts and culture" />
+        <GoANavigationLink  url="b.html" title="Education and training" />
+        <GoANavigationLink  url="c.html" title="Family and social supports" />
+        <GoANavigationLink  url="d.html" title="Housing and community" />
+        <GoANavigationLink  url="e.html" title="Life events" />
+        <GoANavigationLink  url="instagram.html" title="Instagram" />
+        <GoANavigationLink  url="youtube.html" title="YouTube" />
+        <GoANavigationLink  url="facebook.html" title="Facebook" />
+        <GoANavigationLink  url="snapchat.html" title="Snapchat" />
+        <GoANavigationLink  url="twitter.html" title="Twitter" />
+      </GoAAppFooter>
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Footer with secondary navigation with multiple sections
+
+<Story name="Footer with secondary navigation with multiple sections">
+  <GoAAppFooter id="2">
+    <GoANavigationLink footerId="2" section="All Services" url="a.html" title="Arts and culture" />
+    <GoANavigationLink footerId="2" section="All Services" url="b.html" title="Education and training" />
+    <GoANavigationLink footerId="2" section="All Services" url="c.html" title="Family and social supports" />
+    <GoANavigationLink footerId="2" section="All Services" url="d.html" title="Housing and community" />
+    <GoANavigationLink footerId="2" section="All Services" url="e.html" title="Life events" />
+    <GoANavigationLink footerId="2" section="Social Media" url="instagram.html" title="Instagram" />
+    <GoANavigationLink footerId="2" section="Social Media" url="youtube.html" title="YouTube" />
+    <GoANavigationLink footerId="2" section="Social Media" url="facebook.html" title="Facebook" />
+    <GoANavigationLink footerId="2" section="Social Media" url="snapchat.html" title="Snapchat" />
+    <GoANavigationLink footerId="2" section="Social Media" url="twitter.html" title="Twitter" />
+  </GoAAppFooter>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer>
+        <goa-navigation-link  section="All Services" url="a.html" title="Arts and culture" />
+        <goa-navigation-link  section="All Services" url="b.html" title="Education and training" />
+        <goa-navigation-link  section="All Services" url="c.html" title="Family and social supports" />
+        <goa-navigation-link  section="All Services" url="d.html" title="Housing and community" />
+        <goa-navigation-link  section="All Services" url="e.html" title="Life events" />
+        <goa-navigation-link  section="Social Media" url="instagram.html" title="Instagram" />
+        <goa-navigation-link  section="Social Media" url="youtube.html" title="YouTube" />
+        <goa-navigation-link  section="Social Media" url="facebook.html" title="Facebook" />
+        <goa-navigation-link  section="Social Media" url="snapchat.html" title="Snapchat" />
+        <goa-navigation-link  section="Social Media" url="twitter.html" title="Twitter" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer>
+        <goa-navigation-link  section="All Services" url="a.html" title="Arts and culture" />
+        <goa-navigation-link  section="All Services" url="b.html" title="Education and training" />
+        <goa-navigation-link  section="All Services" url="c.html" title="Family and social supports" />
+        <goa-navigation-link  section="All Services" url="d.html" title="Housing and community" />
+        <goa-navigation-link  section="All Services" url="e.html" title="Life events" />
+        <goa-navigation-link  section="Social Media" url="instagram.html" title="Instagram" />
+        <goa-navigation-link  section="Social Media" url="youtube.html" title="YouTube" />
+        <goa-navigation-link  section="Social Media" url="facebook.html" title="Facebook" />
+        <goa-navigation-link  section="Social Media" url="snapchat.html" title="Snapchat" />
+        <goa-navigation-link  section="Social Media" url="twitter.html" title="Twitter" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAAppFooter>
+        <GoANavigationLink section="All Services" url="a.html" title="Arts and culture" />
+        <GoANavigationLink section="All Services" url="b.html" title="Education and training" />
+        <GoANavigationLink section="All Services" url="c.html" title="Family and social supports" />
+        <GoANavigationLink section="All Services" url="d.html" title="Housing and community" />
+        <GoANavigationLink section="All Services" url="e.html" title="Life events" />
+        <GoANavigationLink section="Social Media" url="instagram.html" title="Instagram" />
+        <GoANavigationLink section="Social Media" url="youtube.html" title="YouTube" />
+        <GoANavigationLink section="Social Media" url="facebook.html" title="Facebook" />
+        <GoANavigationLink section="Social Media" url="snapchat.html" title="Snapchat" />
+        <GoANavigationLink section="Social Media" url="twitter.html" title="Twitter" />
+      </GoAAppFooter>
+    `}/>
+  </Tab>
+</Tabs>
+
+
+#### Footer with secondary navigation and links to meta information
+
+<Story name="Footer with secondary navigation and links to meta information">
+  <GoAAppFooter id="3">
+    <GoAMetaLink footerId="3" url="privacy.html" title="Privacy" />
+    <GoAMetaLink footerId="3" url="disclaimer.html" title="Disclaimer" />
+    <GoAMetaLink footerId="3" url="accessibility.html" title="Accessibility" />
+    <GoAMetaLink footerId="3" url="using-alberta.html" title="Using Alberta.ca" />
+    <GoANavigationLink footerId="3" url="a.html" title="Arts and culture" />
+    <GoANavigationLink footerId="3" url="b.html" title="Education and training" />
+    <GoANavigationLink footerId="3" url="c.html" title="Family and social supports" />
+    <GoANavigationLink footerId="3" url="d.html" title="Housing and community" />
+    <GoANavigationLink footerId="3" url="e.html" title="Life events" />
+    <GoANavigationLink footerId="3" url="instagram.html" title="Instagram" />
+    <GoANavigationLink footerId="3" url="youtube.html" title="YouTube" />
+    <GoANavigationLink footerId="3" url="facebook.html" title="Facebook" />
+    <GoANavigationLink footerId="3" url="snapchat.html" title="Snapchat" />
+    <GoANavigationLink footerId="3" url="twitter.html" title="Twitter" />
+  </GoAAppFooter>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer>
+        <goa-meta-link url="privacy.html" title="Privacy" />
+        <goa-meta-link url="disclaimer.html" title="Disclaimer" />
+        <goa-meta-link url="accessibility.html" title="Accessibility" />
+        <goa-meta-link url="using-alberta.html" title="Using Alberta.ca" />
+        <goa-navigation-link  url="a.html" title="Arts and culture" />
+        <goa-navigation-link  url="b.html" title="Education and training" />
+        <goa-navigation-link  url="c.html" title="Family and social supports" />
+        <goa-navigation-link  url="d.html" title="Housing and community" />
+        <goa-navigation-link  url="e.html" title="Life events" />
+        <goa-navigation-link  url="instagram.html" title="Instagram" />
+        <goa-navigation-link  url="youtube.html" title="YouTube" />
+        <goa-navigation-link  url="facebook.html" title="Facebook" />
+        <goa-navigation-link  url="snapchat.html" title="Snapchat" />
+        <goa-navigation-link  url="twitter.html" title="Twitter" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer>
+        <goa-meta-link url="privacy.html" title="Privacy" />
+        <goa-meta-link url="disclaimer.html" title="Disclaimer" />
+        <goa-meta-link url="accessibility.html" title="Accessibility" />
+        <goa-meta-link url="using-alberta.html" title="Using Alberta.ca" />
+        <goa-navigation-link  url="a.html" title="Arts and culture" />
+        <goa-navigation-link  url="b.html" title="Education and training" />
+        <goa-navigation-link  url="c.html" title="Family and social supports" />
+        <goa-navigation-link  url="d.html" title="Housing and community" />
+        <goa-navigation-link  url="e.html" title="Life events" />
+        <goa-navigation-link  url="instagram.html" title="Instagram" />
+        <goa-navigation-link  url="youtube.html" title="YouTube" />
+        <goa-navigation-link  url="facebook.html" title="Facebook" />
+        <goa-navigation-link  url="snapchat.html" title="Snapchat" />
+        <goa-navigation-link  url="twitter.html" title="Twitter" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAAppFooter>
+        <GoAMetaLink url="privacy.html" title="Privacy" />
+        <GoAMetaLink url="disclaimer.html" title="Disclaimer" />
+        <GoAMetaLink url="accessibility.html" title="Accessibility" />
+        <GoAMetaLink url="using-alberta.html" title="Using Alberta.ca" />
+        <GoANavigationLink  url="a.html" title="Arts and culture" />
+        <GoANavigationLink  url="b.html" title="Education and training" />
+        <GoANavigationLink  url="c.html" title="Family and social supports" />
+        <GoANavigationLink  url="d.html" title="Housing and community" />
+        <GoANavigationLink  url="e.html" title="Life events" />
+        <GoANavigationLink  url="instagram.html" title="Instagram" />
+        <GoANavigationLink  url="youtube.html" title="YouTube" />
+        <GoANavigationLink  url="facebook.html" title="Facebook" />
+        <GoANavigationLink  url="snapchat.html" title="Snapchat" />
+        <GoANavigationLink  url="twitter.html" title="Twitter" />
+      </GoAAppFooter>
+    `}/>
+  </Tab>
+</Tabs>
+
+
+#### Footer with secondary navigation with multiple sections and links to meta information
+
+<Story name="Footer with secondary navigation with multiple sections and links to meta information">
+  <GoAAppFooter id="4">
+    <GoAMetaLink footerId="4" url="privacy.html" title="Privacy" />
+    <GoAMetaLink footerId="4" url="disclaimer.html" title="Disclaimer" />
+    <GoAMetaLink footerId="4" url="accessibility.html" title="Accessibility" />
+    <GoAMetaLink footerId="4" url="using-alberta.html" title="Using Alberta.ca" />
+    <GoANavigationLink footerId="4" section="All Services" url="a.html" title="Arts and culture" />
+    <GoANavigationLink footerId="4" section="All Services" url="b.html" title="Education and training" />
+    <GoANavigationLink footerId="4" section="All Services" url="c.html" title="Family and social supports" />
+    <GoANavigationLink footerId="4" section="All Services" url="d.html" title="Housing and community" />
+    <GoANavigationLink footerId="4" section="All Services" url="e.html" title="Life events" />
+    <GoANavigationLink footerId="4" section="Social Media" url="instagram.html" title="Instagram" />
+    <GoANavigationLink footerId="4" section="Social Media" url="youtube.html" title="YouTube" />
+    <GoANavigationLink footerId="4" section="Social Media" url="facebook.html" title="Facebook" />
+    <GoANavigationLink footerId="4" section="Social Media" url="snapchat.html" title="Snapchat" />
+    <GoANavigationLink footerId="4" section="Social Media" url="twitter.html" title="Twitter" />
+  </GoAAppFooter>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer>
+        <goa-meta-link url="privacy.html" title="Privacy" />
+        <goa-meta-link url="disclaimer.html" title="Disclaimer" />
+        <goa-meta-link url="accessibility.html" title="Accessibility" />
+        <goa-meta-link url="using-alberta.html" title="Using Alberta.ca" />
+        <goa-navigation-link  section="All Services" url="a.html" title="Arts and culture" />
+        <goa-navigation-link  section="All Services" url="b.html" title="Education and training" />
+        <goa-navigation-link  section="All Services" url="c.html" title="Family and social supports" />
+        <goa-navigation-link  section="All Services" url="d.html" title="Housing and community" />
+        <goa-navigation-link  section="All Services" url="e.html" title="Life events" />
+        <goa-navigation-link  section="Social Media" url="instagram.html" title="Instagram" />
+        <goa-navigation-link  section="Social Media" url="youtube.html" title="YouTube" />
+        <goa-navigation-link  section="Social Media" url="facebook.html" title="Facebook" />
+        <goa-navigation-link  section="Social Media" url="snapchat.html" title="Snapchat" />
+        <goa-navigation-link  section="Social Media" url="twitter.html" title="Twitter" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-app-footer>
+        <goa-meta-link url="privacy.html" title="Privacy" />
+        <goa-meta-link url="disclaimer.html" title="Disclaimer" />
+        <goa-meta-link url="accessibility.html" title="Accessibility" />
+        <goa-meta-link url="using-alberta.html" title="Using Alberta.ca" />
+        <goa-navigation-link  section="All Services" url="a.html" title="Arts and culture" />
+        <goa-navigation-link  section="All Services" url="b.html" title="Education and training" />
+        <goa-navigation-link  section="All Services" url="c.html" title="Family and social supports" />
+        <goa-navigation-link  section="All Services" url="d.html" title="Housing and community" />
+        <goa-navigation-link  section="All Services" url="e.html" title="Life events" />
+        <goa-navigation-link  section="Social Media" url="instagram.html" title="Instagram" />
+        <goa-navigation-link  section="Social Media" url="youtube.html" title="YouTube" />
+        <goa-navigation-link  section="Social Media" url="facebook.html" title="Facebook" />
+        <goa-navigation-link  section="Social Media" url="snapchat.html" title="Snapchat" />
+        <goa-navigation-link  section="Social Media" url="twitter.html" title="Twitter" />
+      </goa-app-footer>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAAppFooter>
+        <GoAMetaLink url="privacy.html" title="Privacy" />
+        <GoAMetaLink url="disclaimer.html" title="Disclaimer" />
+        <GoAMetaLink url="accessibility.html" title="Accessibility" />
+        <GoAMetaLink url="using-alberta.html" title="Using Alberta.ca" />
+        <GoANavigationLink section="All Services" url="a.html" title="Arts and culture" />
+        <GoANavigationLink section="All Services" url="b.html" title="Education and training" />
+        <GoANavigationLink section="All Services" url="c.html" title="Family and social supports" />
+        <GoANavigationLink section="All Services" url="d.html" title="Housing and community" />
+        <GoANavigationLink section="All Services" url="e.html" title="Life events" />
+        <GoANavigationLink section="Social Media" url="instagram.html" title="Instagram" />
+        <GoANavigationLink section="Social Media" url="youtube.html" title="YouTube" />
+        <GoANavigationLink section="Social Media" url="facebook.html" title="Facebook" />
+        <GoANavigationLink section="Social Media" url="snapchat.html" title="Snapchat" />
+        <GoANavigationLink section="Social Media" url="twitter.html" title="Twitter" />
+      </GoAAppFooter>
+    `}/>
+  </Tab>
+</Tabs>
+
+---
+
+## Support
+
+<goa-callout type="information" title="Need help? Connect with us on Slack">
+  <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9">#design-system-support</a> General information and discussion related to design system including questions, new component proposals, contribution, and other requests.
+</goa-callout>
+
+### Help improve this page
+
+To help make sure that this page is useful, relevant, and up to date, you can:
+
+[Create an issue for a proposed update or contribution](https://github.com/GovAlta/ui-components/issues/new/choose)

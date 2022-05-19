@@ -5,6 +5,9 @@
 import '@abgov/web-components'
 
 import { GoAAppHeader } from './lib/app-header/app-header';
+import { GoAAppFooter } from './lib/app-footer/app-footer';
+import { GoAMetaLink } from './lib/app-footer/meta-link';
+import { GoANavigationLink } from './lib/app-footer/navigation-link';
 import { GoABadge, GoAInfoBadge, GoAEmergencyBadge, GoASuccessBadge, GoAWarningBadge } from './lib/badge/badge';
 import { GoAButton } from './lib/button/button';
 import { GoAButtonGroup } from './lib/button-group/button-group';
@@ -38,6 +41,9 @@ export type { GoABadgeType };
 
 export {
   GoAAppHeader,
+  GoAAppFooter,
+  GoAMetaLink,
+  GoANavigationLink,
   GoABadge,
   GoAButton,
   GoAButtonGroup,
