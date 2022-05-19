@@ -356,24 +356,43 @@
 
     <!-- Text Input -->
 
-    <goa-input id="firstname" name="firstname" disabled="false" width="400px" />
-
     <h2 id="section-input">Input</h2>
     <goa-flex-row gap="small">
       <goa-form-item label="First name" helptext="This is helper text">
-        <goa-input id="firstname" name="firstname" disabled="false" />
-        <goa-input id="firstname" name="firstname" disabled="false" type="number" />
+        <goa-input id="firstname" name="firstname" disabled="false" width="100%" />
       </goa-form-item>
 
-      <goa-form-item label="Middle name" optional helptext="This should be disabled">
-        <goa-input id="middlename" name="middlename" disabled />
+      <goa-form-item label="First name" helptext="This is helper text" optional>
+        <goa-input id="firstname" name="firstname" disabled="false" width="100%" />
       </goa-form-item>
 
       <goa-form-item label="Last name" optional helptext="This is helper text">
-        <goa-input id="lastname" name="lastname" />
+        <goa-input id="lastname" name="lastname" width="100%" />
       </goa-form-item>
     </goa-flex-row>
 
+    <goa-form-item label="Password" helptext="No easily guessable passwords">
+      <goa-input
+        id="password"
+        name="password"
+        type="password"
+        trailingicon="finger-print"
+        width="20ch"
+        handletrailingiconclick
+      />
+    </goa-form-item>
+
+    <goa-flex-row gap="small">
+      <goa-form-item label="Password" helptext="No easily guessable passwords">
+        <goa-input
+          id="password"
+          name="password"
+          type="password"
+          trailingicon="finger-print"
+          handletrailingiconclick
+        />
+      </goa-form-item>
+    </goa-flex-row>
     <goa-flex-row gap="small">
       <goa-form-item label="Password" helptext="No easily guessable passwords">
         <goa-input
@@ -398,10 +417,11 @@
 
     <h2 id="section-dropdown">DropDown / Combobox</h2>
     <goa-form-item label="Favourite Actor">
-      <goa-dropdown id="dropdown" name="favactor" value="3">
+      <goa-dropdown id="dropdown" name="favactor" value="3" width="400px">
         <goa-dropdown-item value="1" name="favactor" label="Tom Cruise" />
         <goa-dropdown-item value="3" name="favactor" label="Tom Hardy" />
         <goa-dropdown-item value="4" name="favactor" label="Val Kilmer" />
+        <goa-dropdown-item value="5" name="favactor" label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " />
       </goa-dropdown>
     </goa-form-item>
 

@@ -9,6 +9,7 @@
   export let placeholder: string = "";
   export let rows: number = 3;
   export let testid: string = "";
+  export let width: string = "60ch";
 
   export let error: string = "false";
   export let readonly: string = "false";
@@ -42,6 +43,9 @@
   {placeholder}
   {value}
   {rows}
+  style={`
+    --width: ${width};
+  `}
   class="goa-textarea"
   class:error={isError}
   disabled={isDisabled}
@@ -71,6 +75,15 @@
     padding: var(--input-padding, 0.5rem);
     font-size: var(--input-font-size);
     font-family: var(--font-family);
+
+    min-width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .goa-textarea {
+      min-width: 0;
+      width: var(--width);
+    }
   }
 
   .goa-textarea[readonly] {

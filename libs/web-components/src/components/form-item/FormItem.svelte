@@ -37,7 +37,6 @@
 <!-- Style -->
 <style>
   :host {
-    flex: 1 1 auto;
     box-sizing: border-box;
     font-family: var(--font-family);
   }
@@ -52,12 +51,16 @@
     color: var(--goa-color-text);
     font-size: var(--fs-base);
     padding: 0.5rem 0;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   label em {
     color: var(--color-gray-600);
     font-weight: var(--fw-regular);
     font-size: var(--fs-sm);
+    line-height: var(--lh-sm);
     font-style: normal;
   }
 

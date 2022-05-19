@@ -19,17 +19,20 @@
     box-sizing: border-box;
     font-family: var(--font-family);
   }
+
   .goa-flex-row {
-    margin-bottom: 1rem;  /* Not sure this should be set to a non-zero value */
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: stretch;
+    display: block;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 640px) {
     .goa-flex-row {
-      flex-direction: row;
+      display: grid;
+      /* grid-auto-flow: row;
+      grid-auto-columns: 1fr; */
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: var(--gap);
+
+      margin-bottom: 1rem;  /* Not sure this should be set to a non-zero value */
     }
   }
 </style>
