@@ -1,4 +1,5 @@
-import { Meta } from '@storybook/addon-docs';
+import { useState } from 'react';
+import { Meta, Story } from '@storybook/addon-docs';
 import {
   SupportInfo,
   Tabs,
@@ -7,7 +8,7 @@ import {
 } from '@abgov/shared/storybook-common';
 import { GoATextArea } from '@abgov/react-components';
 
-<Meta title="Components/Text area" />
+<Meta title="Components/Text area" component={GoATextArea} />
 
 # Text area
 
@@ -85,6 +86,104 @@ export const noop = () => {
         )
       }
     `}
+    />
+  </Tab>
+</Tabs>
+
+### Character count
+
+export const CharCountTemplate = () => {
+  const [value, setValue] = useState('');
+  return (
+    <GoATextArea
+      name="comment"
+      value={value}
+      showCounter={true}
+      onChange={(name, value) => setValue(value)}
+    />
+  );
+};
+
+<Story name="Character count">{CharCountTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      code={`<goa-textarea name="firstname" showcounter="true" />`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`<goa-textarea name="firstname" showcounter="true"></goa-textarea>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+      const [value, setValue] = useState('');
+      return (
+        <GoATextArea
+          name="firstname"
+          value={value}
+          showCounter={true}
+          onChange={(name, value) => setValue(value)}
+        />
+      )
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+### Character count with limit
+
+export const CharCountWithLimitTemplate = () => {
+  const [value, setValue] = useState('');
+  return (
+    <GoATextArea
+      name="comment"
+      value={value}
+      showCounter={true}
+      maxCharCount={20}
+      onChange={(name, value) => setValue(value)}
+    />
+  );
+};
+
+<Story name="Character count with limit">
+  {CharCountWithLimitTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      code={`<goa-textarea name="firstname" showcounter="true" maxcharcount="20" />`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`<goa-textarea name="firstname" showcounter="true" maxcharcount="20"></goa-textarea>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+      const [value, setValue] = useState('');
+      return (
+        <GoATextArea
+          name="firstname"
+          value={value}
+          showCounter={true}
+          maxCharCount={20}
+          onChange={(name, value) => setValue(value)}
+        />
+      )
+    `}
+      lang="tsx"
     />
   </Tab>
 </Tabs>

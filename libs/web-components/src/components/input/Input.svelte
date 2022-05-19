@@ -35,11 +35,16 @@
   export let testid: string = "";
   export let width: string = "30ch";
 
+  // character counter
+  export let showcounter: string = "false";
+  export let maxcharcount: number = 0;
+
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
+  $: showCounter = toBoolean(showcounter);
 
   let inputEl: HTMLElement;
   $: if (isFocused && inputEl) {
@@ -47,9 +52,9 @@
   }
 
   $: if (inputEl && type === "search") {
-    inputEl.addEventListener("search", (e) => {
-      onKeyUp(e)
-    })
+    inputEl.addEventListener("search", e => {
+      onKeyUp(e);
+    });
   }
 
   function onKeyUp(e) {
@@ -61,7 +66,7 @@
         detail: { name, value: e.target.value },
       }),
     );
-    e.stopPropagation();
+    value = e.target.value;
   }
 
   function doClick() {
@@ -72,50 +77,78 @@
 <!-- HTML -->
 
 <div
+  class="container"
   style={`
     --width: ${width};
   `}
-  class={`
-    goa-input
-    ${isDisabled ? "goa-input--disabled" : ""}
-    variant--${variant}
-    type--${type}
-  `}
-  class:error={isError}
->
-  {#if leadingicon}
-    <goa-icon class="goa-input-leading-icon" data-testid="leading-icon" type={leadingicon} />
-  {/if}
+  >
+  <div
+    class={`
+      goa-input
+      ${isDisabled ? "goa-input--disabled" : ""}
+      variant--${variant}
+      type--${type}
+    `}
+    class:error={isError}
+  >
+    {#if leadingicon}
+      <goa-icon
+        class="goa-input-leading-icon"
+        data-testid="leading-icon"
+        type={leadingicon}
+      />
+    {/if}
 
-  <input
-    bind:this={inputEl}
-    class={`input--${variant}`}
-    style={`--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`}
-    readonly={isReadonly}
-    disabled={isDisabled}
-    data-testid={testid}
-    {name}
-    {type}
-    {value}
-    {placeholder}
-    on:keyup={onKeyUp}
-    on:change={onKeyUp}
-  />
-
-  {#if trailingicon && !handlesTrailingIconClick}
-    <goa-icon class="goa-input-trailing-icon" data-testid="trailing-icon" size="medium" type={trailingicon} />
-  {/if}
-
-  {#if trailingicon && handlesTrailingIconClick}
-    <goa-icon-button
-      class="goa-input-trailing-icon"
-      on:click={doClick}
+    <input
+      bind:this={inputEl}
+      class={`input--${variant}`}
+      style={`--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`}
+      readonly={isReadonly}
       disabled={isDisabled}
-      variant="nocolor"
-      size="medium"
-      type={trailingicon}
-      data-testid="trailing-icon-button"
+      data-testid={testid}
+      {name}
+      {type}
+      {value}
+      {placeholder}
+      on:keyup={onKeyUp}
+      on:change={onKeyUp}
     />
+
+    <!-- Trailing Icon -->
+    {#if trailingicon && !handlesTrailingIconClick}
+      <goa-icon
+        class="goa-input-trailing-icon"
+        data-testid="trailing-icon"
+        size="medium"
+        type={trailingicon}
+      />
+    {/if}
+
+    <!-- Trailing Icon Button -->
+    {#if trailingicon && handlesTrailingIconClick}
+      <goa-icon-button
+        class="goa-input-trailing-icon"
+        on:click={doClick}
+        disabled={isDisabled}
+        variant="nocolor"
+        size="medium"
+        type={trailingicon}
+        data-testid="trailing-icon-button"
+      />
+    {/if}
+  </div>
+
+  <!-- Counter -->
+  {#if showCounter}
+    {#if maxcharcount > 0}
+      <div class="counter" class:counter-error={value.length > maxcharcount}>
+        {value.length}{`/${maxcharcount}`}
+      </div>
+    {:else if value.length > 0}
+      <div class="counter">
+        {value.length}
+      </div>
+    {/if}
   {/if}
 </div>
 
@@ -125,6 +158,18 @@
     box-sizing: border-box;
     font-family: var(--font-family);
   }
+
+  .container {
+    position: relative;
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: var(--width);
+    }
+  }
+
   .goa-input,
   .goa-input * {
     box-sizing: border-box;
@@ -258,6 +303,17 @@
     box-shadow: none;
   }
 
+  .counter {
+    position: absolute;
+    padding-top: 0.25rem;
+    right: 0;
+    font-size: var(--fs-sm);
+  }
+
+  .counter-error {
+    color: var(--goa-color-interactive--error);
+  }
+
   .error:hover,
   .error:focus,
   .error {
@@ -265,12 +321,13 @@
   }
 
   input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-search-cancel-button {
-    position:relative;
+    position: relative;
     right: var(--search-icon-offset);
     cursor: pointer;
     -webkit-appearance: none;
-    height:  1.2rem;
-    width:  1.2rem;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>') center center no-repeat;
+    height: 1.2rem;
+    width: 1.2rem;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>')
+      center center no-repeat;
   }
 </style>

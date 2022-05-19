@@ -359,7 +359,13 @@
     <h2 id="section-input">Input</h2>
     <goa-flex-row gap="small">
       <goa-form-item label="First name" helptext="This is helper text">
-        <goa-input id="firstname" name="firstname" disabled="false" width="100%" />
+        <goa-input id="firstname" name="firstname" disabled="false" showcounter maxcharcount="20" />
+        <script>
+          var firstNameEl = document.getElementById("firstname");
+          firstNameEl.addEventListener("_change", (e) => {
+            firstNameEl.value = e.detail.value;
+          });
+        </script>
       </goa-form-item>
 
       <goa-form-item label="First name" helptext="This is helper text" optional>
@@ -405,12 +411,23 @@
       </goa-form-item>
     </goa-flex-row>
 
-    <goa-form-item label="Comments" optional>
-      <goa-textarea id="comments" name="comments" />
+    <goa-form-item label="Comments" optional helptext="This shows a char count">
+      <goa-textarea id="comments" name="comments" showcounter maxcharcount="50" />
+    </goa-form-item>
+
+    <goa-form-item label="Comments" optional helptext="This shows a char count">
+      <goa-textarea id="comments2" name="comments" showcounter />
     </goa-form-item>
 
     <script>
-      document.getElementById("comments").addEventListener("_change", e => {
+      var commentEl = document.getElementById("comments");
+      commentEl.addEventListener("_change", e => {
+	commentEl.setAttribute("value", e.detail.value);
+        console.log("comments changed", e.detail);
+      });
+      var commentEl2 = document.getElementById("comments2");
+      commentEl2.addEventListener("_change", e => {
+	commentEl2.setAttribute("value", e.detail.value);
         console.log("comments changed", e.detail);
       });
     </script>

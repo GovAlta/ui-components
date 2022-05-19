@@ -136,11 +136,12 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
   </Tab>
 </Tabs>
 
+#### Form row
 
 <Story name="Form Row">
   <GoAFlexRow gap="small">
     <GoAFormItem label="First name" error="First name is required" helpText="Help text">
-      <GoAInput name="firstName" onChange={() => {}} error width="100%" />
+      <GoAInput name="firstName" onChange={() => {}} error width="100%" showCounter={true} maxCharCount={20} />
     </GoAFormItem>
     <GoAFormItem label="Last name" error="Last name is required" helpText="Help text">
       <GoAInput name="lastName" onChange={() => {}} error width="100%" />

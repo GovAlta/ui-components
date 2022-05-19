@@ -15,6 +15,8 @@ interface WCProps {
   error?: boolean;
   readonly?: boolean;
   focused?: boolean;
+  showcounter?: boolean;
+  maxcharcount?: number;
   handletrailingiconclick: boolean;
   width?: string;
   testid?: string;
@@ -49,6 +51,8 @@ export interface Props {
   readonly?: boolean;
   error?: boolean;
   width?: string;
+  showCounter?: boolean;
+  maxCharCount?: number;
   testId?: string;
 };
 
@@ -66,6 +70,8 @@ export const GoAInput: FC<Props & { type: string }> = ({
   placeholder,
   error,
   width,
+  showCounter,
+  maxCharCount,
   testId,
   onTrailingIconClick,
   onChange,
@@ -93,7 +99,26 @@ export const GoAInput: FC<Props & { type: string }> = ({
   }, [ref, onChange, onTrailingIconClick])
 
   return (
-    <goa-input ref={ref} focused={focused} type={type} name={name} id={id} leadingicon={leadingIcon} trailingicon={trailingIcon} variant={variant} disabled={disabled} readonly={readonly} placeholder={placeholder} error={error} data-testid={testId} value={value} width={width} handletrailingiconclick={!!onTrailingIconClick} />
+    <goa-input
+      ref={ref}
+      focused={focused}
+      type={type}
+      name={name}
+      id={id}
+      leadingicon={leadingIcon}
+      trailingicon={trailingIcon}
+      variant={variant}
+      disabled={disabled}
+      readonly={readonly}
+      placeholder={placeholder}
+      error={error}
+      data-testid={testId}
+      value={value}
+      width={width}
+      showcounter={showCounter}
+      maxcharcount={maxCharCount}
+      handletrailingiconclick={!!onTrailingIconClick}
+    />
   );
 };
 

@@ -15,9 +15,13 @@
   export let readonly: string = "false";
   export let disabled: string = "false";
 
+  export let showcounter: string = "false";
+  export let maxcharcount: number = 0;
+
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
+  $: showCounter = toBoolean(showcounter);
 
   function onChange(e: Event) {
     const target = e.target as HTMLTextAreaElement;
@@ -38,21 +42,38 @@
 </script>
 
 <!-- HTML -->
-<textarea
-  {name}
-  {placeholder}
-  {value}
-  {rows}
+<div
+  class="container"
   style={`
     --width: ${width};
   `}
-  class="goa-textarea"
-  class:error={isError}
-  disabled={isDisabled}
-  readonly={isReadonly}
-  data-testid={testid}
-  on:keyup={onChange}
-/>
+>
+  <textarea
+    {name}
+    {placeholder}
+    {value}
+    {rows}
+    class="goa-textarea"
+    class:error={isError}
+    disabled={isDisabled}
+    readonly={isReadonly}
+    data-testid={testid}
+    on:keyup={onChange}
+  />
+  {#if showCounter}
+    {#if maxcharcount > 0}
+      <div
+        class="counter"
+        class:counter-error={value.length > maxcharcount}>
+        {value.length}{`/${maxcharcount}`}
+      </div>
+    {:else if value.length > 0}
+      <div class="counter">
+        {value.length}
+      </div>
+    {/if}
+  {/if}
+</div>
 
 <!-- Style -->
 <style>
@@ -60,10 +81,20 @@
     box-sizing: border-box;
     font-family: var(--font-family);
   }
+
+  .container {
+    position: relative;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .container {
+      max-width: var(--width);
+    }
+  }
+
   .goa-textarea {
     display: block;
     width: 100%;
-
     box-sizing: border-box;
 
     outline: none;
@@ -107,6 +138,17 @@
   .goa-textarea:disabled:focus,
   .goa-textarea:disabled:active {
     box-shadow: none;
+  }
+
+  .counter {
+    position: absolute;
+    right: 0;
+    padding-top: 0.25rem;
+    font-size: var(--fs-sm);
+  }
+
+  .counter-error {
+    color: var(--goa-color-status-emergency-dark)
   }
 
   .error:hover,

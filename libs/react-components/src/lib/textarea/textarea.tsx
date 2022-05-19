@@ -6,8 +6,10 @@ interface WCProps {
   value: string;
   placeholder?: string;
   rows?: number;
-  error: boolean;
-  disabled: boolean;
+  error?: boolean;
+  disabled?: boolean;
+  showcounter?: boolean;
+  maxcharcount?: number;
 }
 
 declare global {
@@ -25,13 +27,26 @@ interface Props {
   id?: string;
   placeholder?: string;
   rows?: number;
-  error: boolean;
-  disabled: boolean;
-  testId: string;
+  error?: boolean;
+  disabled?: boolean;
+  showCounter?: boolean;
+  maxCharCount?: number;
+  testId?: string;
   onChange: (name: string, value: string) => void;
 };
 
-export const GoATextArea: FC<Props> = ({ name, value, placeholder, rows, disabled, testId, error, onChange }) => {
+export const GoATextArea: FC<Props> = ({
+  name,
+  value,
+  placeholder,
+  rows,
+  disabled,
+  showCounter,
+  maxCharCount,
+  testId,
+  error,
+  onChange
+}) => {
   const el = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -58,6 +73,8 @@ export const GoATextArea: FC<Props> = ({ name, value, placeholder, rows, disable
       value={value}
       rows={rows}
       disabled={disabled}
+      showcounter={showCounter}
+      maxcharcount={maxCharCount}
       error={error}
       data-testid={testId}
     >

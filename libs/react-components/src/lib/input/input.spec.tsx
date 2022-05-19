@@ -27,6 +27,8 @@ describe('Input', () => {
       disabled: true,
       readonly: true,
       placeholder: "placeholder",
+      showCounter: true,
+      maxCharCount: 50,
       testId: testId,
       onTrailingIconClick: noop,
     }
@@ -45,6 +47,8 @@ describe('Input', () => {
     expect(input.getAttribute("disabled")).toBeTruthy();
     expect(input.getAttribute("readonly")).toBeTruthy();
     expect(input.getAttribute("placeholder")).toBe("placeholder");
+    expect(input.getAttribute("showcounter")).toBe("true");
+    expect(input.getAttribute("maxcharcount")).toBe("50");
     expect(input.getAttribute("data-testid")).toBe(testId);
     expect(input.getAttribute("handletrailingiconclick")).toBeTruthy();
   });
