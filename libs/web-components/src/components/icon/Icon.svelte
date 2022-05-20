@@ -432,6 +432,7 @@
   export let inverted: string;
   export let fillcolor: string;
   export let hovercolor: string;
+  export let opacity: number = 1;
 
   $: isInverted = toBoolean(inverted);
 
@@ -450,6 +451,7 @@
     --size: ${_size};
     --fill-color: ${fillcolor};
     --hover-color: ${hovercolor};
+    --opacity: ${opacity};
   `}
 >
   {#if type}
@@ -469,6 +471,7 @@
     height: var(--size);
     fill: var(--fill-color);
     color: var(--fill-color);
+    opacity: var(--opacity);
     display: inline-flex;
     align-items: center;
     justify-content: center;

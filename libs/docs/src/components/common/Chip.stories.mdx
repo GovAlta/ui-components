@@ -82,7 +82,7 @@ export const DeleteEventTemplate = () => {
   return <>
     {
       chips.map((chip) => {
-        return <GoAChip key={chip} content={chip} onDeleteIconClick={() => deleteChip(chip)} />
+        return <GoAChip key={chip} deletable={true} content={chip} onClick={() => deleteChip(chip)} />
       })
     }
   </>;
@@ -95,17 +95,82 @@ export const DeleteEventTemplate = () => {
 <Tabs>
   <Tab label="Web Component">
     <CodeSnippet lang="html" code={`
-      <goa-chip content="Chip Text" deletable="true" />
+      <goa-chip id="Doritos" content="Doritos" deletable="true" />
+      <goa-chip id="Fritos" content="Fritos" deletable="true" />
+      <goa-chip id="Lays" content="Lays" deletable="true" />
+    `}/>
+    <CodeSnippet lang="js" code={`
+      document.querySelectorAll("goa-chip").forEach(chip => {
+        chip.addEventListener("_click", (e) => {
+          e.target.parentElement.removeChild(e.target);
+        });
+      });
     `}/>
   </Tab>
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
-      <goa-chip content="Chip Text" deletable="true" (_onDeleteIconClick)></goa-chip>
+      <goa-chip *ngFor="let chip of chips" [content]="chip" deletable="true" (_click)="deleteChip(chip)"></goa-chip>
+    `}/>
+    <CodeSnippet lang="ys" code={`
+      class MyComponent {
+        chips = ["Doritos", "Fritos", "Lays"];
+        deleteChip(chip) {
+          this.chips = this.chips.filter(c => c !== chip);
+        }
+      }
     `}/>
   </Tab>
   <Tab label="React">
     <CodeSnippet lang="tsx" code={`
-      <GoAChip content="Chip Text" onDeleteIconClick={() => deleteChip()} />
+      const [chips, setChips] = useState([
+        "Doritos",
+        "Fritos",
+        "Lays",
+      ]);
+      const deleteChip = (chip) => {
+        setChips((chips) => chips.filter(c => c !== chip));
+      };
+      if (chips.length === 0) {
+        return <>
+          <GoAButton type="tertiary" onClick={() => setChips(["Doritos", "Fritos", "Lays"])}>Gimme more chips</GoAButton>
+        </>;
+      }
+      return <>
+        {
+          chips.map((chip) => {
+            return <GoAChip key={chip} deletable={true} content={chip} onClick={() => deleteChip(chip)} />
+          })
+        }
+      </>;
+    `}/>
+  </Tab>
+</Tabs>
+
+
+#### Error state
+
+<Story name="Error state" args={{}}>
+  <GoAChip content="Chip Text" error={true} />
+  <GoAChip content="Chip Text" error={true} deletable={true} onClick={(e) => console.log("deleting...") } />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-chip content="Chip Text" error="true" />
+      <goa-chip content="Chip Text" error="true" deletable="true" />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-chip content="Chip Text" error="true"></goa-chip>
+      <goa-chip content="Chip Text" error="true" deletable="true" (_click)="console.log('deleting...')"></goa-chip>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAChip content="Chip Text" error={true} />
+      <GoAChip content="Chip Text" error={true} deletable={true} onClick={(e) => console.log("deleting") } />
     `}/>
   </Tab>
 </Tabs>

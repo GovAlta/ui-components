@@ -20,29 +20,30 @@ declare global {
 
 
 export interface Props {
-  onDeleteIconClick?: () => void;
+  onClick?: () => void;
+  deletable?: boolean;
   leadingIcon?: string;
   error?: boolean;
   content: string;
 }
 
-export const GoAChip = ({ leadingIcon = "", error = false, content, onDeleteIconClick }: Props) => {
+export const GoAChip = ({ leadingIcon = "", deletable = false, error = false, content, onClick }: Props) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) return;
-    if (!onDeleteIconClick) return;
+    if (!onClick) return;
 
     const current = el.current;
-    const listener = (e: any) => { onDeleteIconClick(); };
+    const listener = (e: any) => { onClick(); };
 
-    current.addEventListener('_onDeleteIconClick', listener)
+    current.addEventListener('_click', listener)
     return () => {
-      current.removeEventListener('_onDeleteIconClick', listener);
+      current.removeEventListener('_click', listener);
     }
-  }, [el, onDeleteIconClick])
+  }, [el, onClick])
 
   return (
-    <goa-chip ref={el} leadingicon={leadingIcon} error={error} deletable={!!onDeleteIconClick} content={content} />
+    <goa-chip ref={el} leadingicon={leadingIcon} error={error} deletable={deletable} content={content} />
   )
 };
 
