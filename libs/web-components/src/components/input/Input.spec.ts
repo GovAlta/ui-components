@@ -160,4 +160,30 @@ describe('GoAInput Component', () => {
       expect(search).toBeCalledTimes(0);
     })
   })
+
+  describe("Char count", () => {
+    it("does not show a char count if not enabled", async () => {
+      const { container } = render(GoAInput, { name: 'test-name', type: "text" });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl).toBeNull();
+    });
+
+    it("shows a char count", async () => {
+      const { container } = render(GoAInput, { name: 'test-name', type: "text", showcounter: "true", value: "Jim" });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl.innerHTML).toContain("3");
+    });
+
+    it("shows a char count with a max count", async () => {
+      const { component, container } = render(GoAInput, { name: 'test-name', type: "text", showcounter: "true", value: "Jim", maxcharcount: "50" });
+      const input = container.querySelector('input');
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl.innerHTML).toContain("3/50");
+    });
+
+    it("shows the count in an error state when the char count exceeds the max value allowed", async () => {
+      const { container } = render(GoAInput, { name: 'test-name', type: "text", showcounter: "true", value: "Jim Smith", maxcharcount: "5" });
+      expect(container.querySelector(".counter-error")).not.toBeNull();
+    });
+  });
 });

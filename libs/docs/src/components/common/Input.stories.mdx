@@ -16,7 +16,17 @@ import {
   GoAFormItem,
 } from '@abgov/react-components';
 import { useState } from 'react';
-import { SupportInfo, Tabs, Tab, Note, Block, Do, Dont, StateDisplay, CodeSnippet } from '@abgov/shared/storybook-common';
+import {
+  SupportInfo,
+  Tabs,
+  Tab,
+  Note,
+  Block,
+  Do,
+  Dont,
+  StateDisplay,
+  CodeSnippet,
+} from '@abgov/shared/storybook-common';
 import {
   Meta,
   Preview,
@@ -42,39 +52,56 @@ export const InputTemplate = () => {
       <GoAInputText
         name="firstname"
         value={value}
-        onChange={(name, value) => { setValue(value); console.log(name, value) }}
+        onChange={(name, value) => {
+          setValue(value);
+          console.log(name, value);
+        }}
       />
     </>
   );
 };
 
-<Story name="Basic">{ InputTemplate.bind({}) }</Story>
+<Story name="Basic">{InputTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-input id="foo" name="foo" />
-    `}/>
-    <CodeSnippet lang="js" code={`
+    `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
       document.querySelector('#foo').addEventListener('_change', (e) => {
         console.log(e.detail.name, e.detail.value);
       });
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-input name="foo" (_click)="onChange()"></goa-input>
-    `}/>
-    <CodeSnippet lang="ts" code={`
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
       export class SomeComponent {
         onChange(e) {
           console.log(e.detail.name, e.detail.value);
         }
       }
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
+    <CodeSnippet
+      lang="jsx"
+      code={`
       const [value, setValue] = useState('');
       return (
         <>
@@ -88,29 +115,44 @@ export const InputTemplate = () => {
           />
         </>
       );
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
 ### Icons
 
-export const IconInputTemplate = () => <>
-  <div style={{display: "flex", gap: "4px", flexDirection: "column"}}>
-    <GoAInputText name="foo" leadingIcon="finger-print" onChange={noop} />
-    <GoAInputText name="foo" trailingIcon="finger-print" onChange={noop} />
-  </div>
-</>
+export const IconInputTemplate = () => (
+  <>
+    <div style={{ display: 'flex', gap: '4px', flexDirection: 'column' }}>
+      <GoAInputText name="foo" leadingIcon="finger-print" onChange={noop} />
+      <GoAInputText name="foo" trailingIcon="finger-print" onChange={noop} />
+    </div>
+  </>
+);
 
-<Story name="Icons">{ IconInputTemplate.bind({}) }</Story>
+<Story name="Icons">{IconInputTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet code={`<goa-input leadingicon="finger-print" />`} lang="html" />
-    <CodeSnippet code={`<goa-input trailingicon="finger-print" />`} lang="html" />
+    <CodeSnippet
+      code={`<goa-input leadingicon="finger-print" />`}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`<goa-input trailingicon="finger-print" />`}
+      lang="html"
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input leadingicon="finger-print"></goa-input>`} lang="html" />
-    <CodeSnippet code={`<goa-input trailingicon="finger-print"></goa-input>`} lang="html" />
+    <CodeSnippet
+      code={`<goa-input leadingicon="finger-print"></goa-input>`}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`<goa-input trailingicon="finger-print"></goa-input>`}
+      lang="html"
+    />
   </Tab>
   <Tab label="React">
     <CodeSnippet code={`<GoAInput leadingIcon="finger-print" />`} lang="jsx" />
@@ -120,15 +162,25 @@ export const IconInputTemplate = () => <>
 
 ### Icon buttons
 
-export const IconButtonInputTemplate = () => <>
-  <GoAInputText name="foo" trailingIcon="finger-print" onTrailingIconClick={() => alert('clicked')} onChange={noop} />
-</>
+export const IconButtonInputTemplate = () => (
+  <>
+    <GoAInputText
+      name="foo"
+      trailingIcon="finger-print"
+      onTrailingIconClick={() => alert('clicked')}
+      onChange={noop}
+    />
+  </>
+);
 
-<Story name="Icon Buttons">{ IconButtonInputTemplate.bind({}) }</Story>
+<Story name="Icon Buttons">{IconButtonInputTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet code={`<goa-input id="secret" trailingicon="finger-print" />`} lang="html" />
+    <CodeSnippet
+      code={`<goa-input id="secret" trailingicon="finger-print" />`}
+      lang="html"
+    />
     <CodeSnippet
       lang="js"
       code={`
@@ -170,79 +222,119 @@ export const IconButtonInputTemplate = () => <>
           trailingIcon="finger-print"
           onTrailingIconClick={() => alert('clicked')}
         `}
-      />
+    />
   </Tab>
 </Tabs>
 
 ### Variant
 
-export const VariantInputTemplate = () => <>
-  <div style={{padding: "2rem 1rem", backgroundColor: "#eee" }}>
-    <GoAInputSearch name="foo" variant="bare" placeholder="Find by name" onChange={noop} />
-  </div>
-</>
+export const VariantInputTemplate = () => (
+  <>
+    <div style={{ padding: '2rem 1rem', backgroundColor: '#eee' }}>
+      <GoAInputSearch
+        name="foo"
+        variant="bare"
+        placeholder="Find by name"
+        onChange={noop}
+      />
+    </div>
+  </>
+);
 
-<Story name="Variant">{ VariantInputTemplate.bind({}) }</Story>
+<Story name="Variant">{VariantInputTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet code={`<goa-input type="search" variant="bare" placeholder="Find by name" />` } lang="html" />
+    <CodeSnippet
+      code={`<goa-input type="search" variant="bare" placeholder="Find by name" />`}
+      lang="html"
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input type="search" variant="bare" placeholder="Find by name"></goa-input>` } lang="html" />
+    <CodeSnippet
+      code={`<goa-input type="search" variant="bare" placeholder="Find by name"></goa-input>`}
+      lang="html"
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet code={`<GoAInputSearch name="foo" variant="bare" placeholder="Find by name" />` } lang="jsx" />
+    <CodeSnippet
+      code={`<GoAInputSearch name="foo" variant="bare" placeholder="Find by name" />`}
+      lang="jsx"
+    />
   </Tab>
 </Tabs>
 
 ### Readonly
 
-export const ReadonlyInputTemplate = () => <>
-  <GoAInput name="foo" readonly={true} value="Readonly" onChange={noop} />
-</>
+export const ReadonlyInputTemplate = () => (
+  <>
+    <GoAInput name="foo" readonly={true} value="Readonly" onChange={noop} />
+  </>
+);
 
-<Story name="Readonly">{ ReadonlyInputTemplate.bind({}) }</Story>
+<Story name="Readonly">{ReadonlyInputTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet code={`<goa-input type="search" readonly="true" placeholder="Find by name" />`} lang="html" />
+    <CodeSnippet
+      code={`<goa-input type="search" readonly="true" placeholder="Find by name" />`}
+      lang="html"
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input type="search" readonly="true" placeholder="Find by name"></goa-input>`} lang="html" />
+    <CodeSnippet
+      code={`<goa-input type="search" readonly="true" placeholder="Find by name"></goa-input>`}
+      lang="html"
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet code={`<GoAInputSearch readonly={true} placeholder="Find by name" />`} lang="jsx" />
+    <CodeSnippet
+      code={`<GoAInputSearch readonly={true} placeholder="Find by name" />`}
+      lang="jsx"
+    />
   </Tab>
 </Tabs>
 
 ### Disabled
 
-export const DisabledInputTemplate = () => <>
-  <GoAInput name="foo" disabled={true} value="Disabled" onChange={noop} />
-</>
+export const DisabledInputTemplate = () => (
+  <>
+    <GoAInput name="foo" disabled={true} value="Disabled" onChange={noop} />
+  </>
+);
 
-<Story name="Disabled">{ DisabledInputTemplate.bind({}) }</Story>
+<Story name="Disabled">{DisabledInputTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet code={`<goa-input type="search" disabled="true" placeholder="Find by name" />`} lang="html" />
+    <CodeSnippet
+      code={`<goa-input type="search" disabled="true" placeholder="Find by name" />`}
+      lang="html"
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input type="search" disabled="true" placeholder="Find by name"></goa-input>`} lang="html" />
+    <CodeSnippet
+      code={`<goa-input type="search" disabled="true" placeholder="Find by name"></goa-input>`}
+      lang="html"
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet code={`<GoAInputSearch disabled={true} placeholder="Find by name" />`} lang="jsx" />
+    <CodeSnippet
+      code={`<GoAInputSearch disabled={true} placeholder="Find by name" />`}
+      lang="jsx"
+    />
   </Tab>
 </Tabs>
 
 ### Error state
 
-export const ErrorInputTemplate = () => <>
-  <GoAInput name="foo" error={true} value="Some value" onChange={noop} />
-</>
+export const ErrorInputTemplate = () => (
+  <>
+    <GoAInput name="foo" error={true} value="Some value" onChange={noop} />
+  </>
+);
 
-<Story name="Error">{ ErrorInputTemplate.bind({}) }</Story>
+<Story name="Error">{ErrorInputTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component">
@@ -258,11 +350,13 @@ export const ErrorInputTemplate = () => <>
 
 ### Focus
 
-export const FocusInputTemplate = () => <>
-  <GoAInput name="foo" focused={true} value="Some value" onChange={noop} />
-</>
+export const FocusInputTemplate = () => (
+  <>
+    <GoAInput name="foo" focused={true} value="Some value" onChange={noop} />
+  </>
+);
 
-<Story name="Focus">{ FocusInputTemplate.bind({}) }</Story>
+<Story name="Focus">{FocusInputTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component">
@@ -272,7 +366,105 @@ export const FocusInputTemplate = () => <>
     <CodeSnippet code={`<goa-input error></goa-input>`} lang="html" />
   </Tab>
   <Tab label="React">
-    <CodeSnippet code={`<GoAInput name="foo" error={true} />` } lang="jsx" />
+    <CodeSnippet code={`<GoAInput name="foo" error={true} />`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+### Character count
+
+export const CharCountTemplate = () => {
+  const [value, setValue] = useState('');
+  return (
+    <GoAInput
+      name="firstname"
+      value={value}
+      showCounter={true}
+      onChange={(name, value) => setValue(value)}
+    />
+  );
+};
+
+<Story name="Character count">{CharCountTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      code={`<goa-input name="firstname" showcounter="true" />`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`<goa-input name="firstname" showcounter="true"></goa-input>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+      const [value, setValue] = useState('');
+      return (
+        <GoAInput
+          name="firstname"
+          value={value}
+          showCounter={true}
+          onChange={(name, value) => setValue(value)}
+        />
+      )
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+### Character count with limit
+
+export const CharCountWithLimitTemplate = () => {
+  const [value, setValue] = useState('');
+  return (
+    <GoAInput
+      name="firstname"
+      value={value}
+      showCounter={true}
+      maxCharCount={20}
+      onChange={(name, value) => setValue(value)}
+    />
+  );
+};
+
+<Story name="Character count with limit">
+  {CharCountWithLimitTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      code={`<goa-input name="firstname" showcounter="true" maxcharcount="20" />`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`<goa-input name="firstname" showcounter="true" maxcharcount="20"></goa-input>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+      const [value, setValue] = useState('');
+      return (
+        <GoAInput
+          name="firstname"
+          value={value}
+          showCounter={true}
+          maxCharCount={20}
+          onChange={(name, value) => setValue(value)}
+        />
+      )
+    `}
+      lang="tsx"
+    />
   </Tab>
 </Tabs>
 
@@ -280,10 +472,25 @@ export const FocusInputTemplate = () => <>
 
 export const TypesInputTemplate = (args) => {
   return (
-    <div style={{display: "flex", gap: "4px", flexDirection: "column"}}>
-      <GoAInputText name="basic" placeholder="leading icon"  leadingIcon="person-circle" onChange={noop} />
-      <GoAInput placeholder="trailing button" trailingIcon="finger-print" onTrailingIconClick={() => console.log('click')} name="trailing-button" onChange={noop} />
-      <GoAInputPassword placeholder="password" name="password" onChange={noop} />
+    <div style={{ display: 'flex', gap: '4px', flexDirection: 'column' }}>
+      <GoAInputText
+        name="basic"
+        placeholder="leading icon"
+        leadingIcon="person-circle"
+        onChange={noop}
+      />
+      <GoAInput
+        placeholder="trailing button"
+        trailingIcon="finger-print"
+        onTrailingIconClick={() => console.log('click')}
+        name="trailing-button"
+        onChange={noop}
+      />
+      <GoAInputPassword
+        placeholder="password"
+        name="password"
+        onChange={noop}
+      />
       <GoAInputDate name="date" onChange={noop} />
       <GoAInputTime name="time" onChange={noop} />
       <GoAInputDateTime name="datetime" onChange={noop} />
@@ -299,11 +506,13 @@ export const TypesInputTemplate = (args) => {
   );
 };
 
-<Story name="Types">{ TypesInputTemplate.bind({}) }</Story>
+<Story name="Types">{TypesInputTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-input type="text" placeholder="leading icon" leadingicon="person-circle" />
       <goa-input id="trailing-button" type="text" placeholder="trailing button" trailingicon="finger-print" />
       <goa-input type="password" placeholder="password" />
@@ -318,10 +527,13 @@ export const TypesInputTemplate = (args) => {
       <goa-input type="month" />
       <goa-input type="number" />
       <goa-input type="range" />
-    `} />
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-input type="text" placeholder="leading icon" leadingicon="person-circle"></goa-input>
       <goa-input type="text" placeholder="trailing button" trailingicon="finger-print" (onClick)="handleClick()"></goa-input>
       <goa-input type="password" placeholder="password"></goa-input>
@@ -336,10 +548,13 @@ export const TypesInputTemplate = (args) => {
       <goa-input type="month"></goa-input>
       <goa-input type="number"></goa-input>
       <goa-input type="range"></goa-input>
-    `} />
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <GoAInputTextleadingIcon="person-circle" placeholder="leading icon" />
       <GoAInput placeholder="trailing button" trailingIcon="finger-print" onTrailingIconClick={() => console.log('click')} />
       <GoAInputPassword placeholder="password" />
@@ -354,14 +569,18 @@ export const TypesInputTemplate = (args) => {
       <GoAInputMonth />
       <GoAInputNumber />
       <GoAInputRange />
-    `} />
+    `}
+    />
   </Tab>
 </Tabs>
 
 <Note type="best-practices">
   <ul>
     <li>Use Text Input if just one line is needed.</li>
-    <li>Use labels over placeholders to indicate the attribute name for the text fields.</li>
+    <li>
+      Use labels over placeholders to indicate the attribute name for the text
+      fields.
+    </li>
     <li>Use meaningful labels over icons.</li>
   </ul>
 </Note>

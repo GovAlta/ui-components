@@ -11,6 +11,8 @@ describe('TextArea', () => {
       rows={10}
       placeholder="textarea-placeholder"
       disabled={true}
+      showCounter={true}
+      maxCharCount={50}
       onChange={() => { }}
     />);
 
@@ -20,6 +22,8 @@ describe('TextArea', () => {
     expect(el.getAttribute("rows")).toBe("10");
     expect(el.getAttribute("placeholder")).toBe("textarea-placeholder");
     expect(el.getAttribute("disabled")).toBe("true");
+    expect(el.getAttribute("showcounter")).toBe("true");
+    expect(el.getAttribute("maxcharcount")).toBe("50");
   });
 
   it("handles the onChange event", async () => {
