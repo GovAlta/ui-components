@@ -280,7 +280,7 @@
 
     <h2 id="section-modal">Modal</h2>
     <goa-button id="openModal">Show Modal</goa-button>
-    <goa-modal id="modal" title="Modal Header....." closable scrollable width="80%">
+    <goa-modal id="modal" heading="Modal Header....." closable scrollable>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id
         molestiae, natus dicta, eaque qui iusto similique, libero explicabo eligendi eius
