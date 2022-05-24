@@ -19,7 +19,7 @@ import { useState } from 'react';
 
 ---
 
-export const Template = () => {
+export const Template = (args) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -142,6 +142,154 @@ export const Template = () => {
           </GoAModal>
         </>
       )
+    `}
+    />
+  </Tab>
+</Tabs>
+
+
+#### Transitions 
+
+export const TransitionsTemplate = (args) => {
+  const [showModal, setShowModal] = useState(false);
+  const [speed, setSpeed] = useState("none");
+  function show(speed) {
+    setSpeed(speed)
+    setShowModal(true)  
+  }
+  return (
+    <>
+      <GoAButton onClick={() => show("none")}>None</GoAButton>
+      <GoAButton onClick={() => show("slow")}>Slow</GoAButton>
+      <GoAButton onClick={() => show("fast")}>Fast (default)</GoAButton>
+      <GoAModal
+        heading="Do you agree?"
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        transition={speed}
+        actions={
+          <GoAButtonGroup alignment="end">
+            <GoAButton onClick={() => setShowModal(false)} size="medium">
+              I Agree
+            </GoAButton>
+          </GoAButtonGroup>
+        }
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+      </GoAModal>
+    </>
+  );
+};
+
+<Story name="Transitions">{TransitionsTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-button id="button">Open Modal</goa-button>
+      <goa-modal id="modal" heading="Do you agree?" closable>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+          Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <goa-button-group alignment="end" slot="actions">
+          <goa-button slot="actions" size="medium">I Agree</goa-button>
+        </goa-button-group>
+      </goa-modal>
+    `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+      const button = document.getElementById('button');
+      const modal = document.getElementById('modal');
+      button.addEventListener('_click', () => {
+        modal.setAttribute("transition", "none"); // "fast" | "slow" | "none"
+        modal.setAttribute("open", true)
+      });
+      modal.addEventListener("_close", () => {
+        modal.removeAttribute("open")
+      });
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
+      <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable [transition]="transition">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+          Repellendus ducimus officia asperiores. Eos, eius numquam.
+        </p>
+        <goa-button-group alignment="end" slot="actions">
+          <goa-button slot="actions" size="medium">I Agree</goa-button>
+        </goa-button-group>
+      </goa-modal>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      export class SomeComponent {
+        isOpen: boolean = false;
+        transition: "fast" | "slow" | "none" = "fast";
+        openModal(e) {
+          isOpen = true;
+        }
+        closeModal(e) {
+          isOpen = false;
+        }
+      }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [showModal, setShowModal] = useState(false);
+        const [speed, setSpeed] = useState("none");
+        function show(speed) {
+          setSpeed(speed)
+          setShowModal(true)  
+        }
+        return (
+          <>
+            <GoAButton onClick={() => show("none")}>None</GoAButton>
+            <GoAButton onClick={() => show("slow")}>Slow</GoAButton>
+            <GoAButton onClick={() => show("fast")}>Fast (default)</GoAButton>
+            <GoAModal
+              heading="Do you agree?"
+              open={showModal}
+              onClose={() => setShowModal(false)}
+              transition={speed}
+              actions={
+                <GoAButtonGroup alignment="end">
+                  <GoAButton onClick={() => setShowModal(false)} size="medium">
+                    I Agree
+                  </GoAButton>
+                </GoAButtonGroup>
+              }
+            >
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+                obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+                explicabo eligendi eius laboriosam! Repellendus ducimus officia
+                asperiores. Eos, eius numquam.
+              </p>
+            </GoAModal>
+          </>
+        );
     `}
     />
   </Tab>

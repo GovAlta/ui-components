@@ -7,6 +7,7 @@ interface WCProps {
   width?: string;
   closable?: boolean;
   scrollable?: boolean;
+  transition?: "fast" | "slow" | "none";
 }
 
 declare global {
@@ -23,10 +24,11 @@ interface Props {
   width?: string;
   actions?: React.ReactElement;
   onClose?: () => void;
+  transition?: "fast" | "slow" | "none";
   open?: boolean;
 }
 
-export const GoAModal: FC<Props> = ({ heading, children, open, width, actions, onClose }) => {
+export const GoAModal: FC<Props> = ({ heading, children, open, width, actions, transition, onClose }) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -44,7 +46,7 @@ export const GoAModal: FC<Props> = ({ heading, children, open, width, actions, o
   }, [el, onClose])
 
   return (
-    <goa-modal ref={el} heading={heading} open={open} closable={!!onClose} scrollable={true} width={width}>
+    <goa-modal ref={el} heading={heading} open={open} closable={!!onClose} scrollable={true} width={width} transition={transition}>
       {actions &&
         <div slot="actions">
           {actions}
