@@ -10,6 +10,7 @@
   export let closable: string;
   export let scrollable: string; // TODO: determine if this flag is needed or not, things seem to work well with it always 'on'
   export let open: string;
+  export let transition: "fast" | "slow" | "none";
 
   // Temp attribute while deciding on the best way to allow for width control
   export let width: string;
@@ -24,6 +25,13 @@
       scrollOffset = window.pageYOffset;
     }
   }
+
+  $: _transitionTime = 
+    transition === "none"
+      ? 0
+      : transition === "slow"
+        ? 400
+        : 200;
 
   function close(e) {
     if (!isClosable) {
@@ -44,16 +52,16 @@
 {#if isOpen}
   <div
     use:noscroll={{ enable: isOpen }}
-    in:fade={{ duration: 200 }}
-    out:fade={{ delay: 200, duration: 200 }}
+    in:fade={{ duration: _transitionTime }}
+    out:fade={{ delay: _transitionTime, duration: _transitionTime}}
     data-testid="modal"
     class="modal"
     style="--scroll-offset: {scrollOffset}px; {width && `--width: ${width};`};"
   >
     <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
     <div
-      in:fly={{ duration: 200, y: 200 }}
-      out:fly={{ delay: 200, duration: 200, y: -100 }}
+      in:fly={{ duration: _transitionTime, y: 200 }}
+      out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
       class="modal-pane"
     >
       {#if heading}

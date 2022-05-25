@@ -1,4 +1,4 @@
-export default function(node: HTMLElement, opts: { enable: boolean }) {
+export default function(_node: HTMLElement, opts: { enable: boolean }) {
 
   function hideScrollbars() {
     const scrollbarWidth = calculateScrollbarWidth();
@@ -11,7 +11,7 @@ export default function(node: HTMLElement, opts: { enable: boolean }) {
     setTimeout(() => {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '0';
-    }, 500); // 500ms allows for any close animations to complete
+    }, 200); // 500ms allows for any close animations to complete
   }
 
   function calculateScrollbarWidth() {
