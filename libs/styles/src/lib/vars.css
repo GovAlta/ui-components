@@ -100,4 +100,7 @@
   --shadow-5: 0 20px 40px rgba(0, 0, 0, 0.2);
 
   --page-width-max: 1440px;
+
+  /* components */
+  --chip-font-size: 1rem;
 }

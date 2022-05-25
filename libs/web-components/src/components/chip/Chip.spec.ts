@@ -1,30 +1,42 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, waitFor } from '@testing-library/svelte';
+import { fireEvent, render } from '@testing-library/svelte';
 import GoAChip from './Chip.svelte'
 
 describe('GoAChip', () => {
 
   it("should render", async () => {
-    const { container } = render(GoAChip, { content: "Some Badge"});
+    const { container } = render(GoAChip, { content: "Some Badge" });
+
     expect(container.innerHTML).toContain("Some Badge");
+    expect(container.querySelector(".leading-icon")).toBeNull();
+    expect(container.querySelector(".deletable")).toBeNull();
+    expect(container.querySelector(".error")).toBeNull();
+    expect(container.querySelector(".delete-icon")).toBeNull();
   })
 
   it("should show the leading icon", async () => {
-    const { container } = render(GoAChip, { content: "Some Badge", leadingicon: "arrow-right"});
-
+    const { container } = render(GoAChip, { content: "Some Badge", leadingicon: "arrow-right" });
     const leadingIcon = container.querySelector(".leading-icon");
+
     expect(leadingIcon).not.toBeNull();
   })
 
+  it("should show the chip in the error state", async () => {
+    const { container } = render(GoAChip, { content: "Some Badge", error: "true" });
+
+    expect(container.querySelector(".error")).not.toBeNull();
+  })
+
   it("should show the trailing button and handle the the click event", async () => {
-    const { container } = render(GoAChip, { content: "Some Badge", deletable: true});
-    const deleteIcon = container.querySelector(".delete-icon");
-    const deleteIconClick = jest.fn();
+    const result = render(GoAChip, { content: "Some Badge", deletable: true });
+    const deleteIcon = result.container.querySelector(".delete-icon");
+    const chip = await result.findByTestId("chip");
+    const onClick = jest.fn();
 
     expect(deleteIcon).not.toBeNull();
-    deleteIcon.addEventListener("_onDeleteIconClick", deleteIconClick);
-    await fireEvent.click(deleteIcon);
+    chip.addEventListener("_click", onClick);
+    await fireEvent.click(chip);
 
-    expect(deleteIconClick).toHaveBeenCalled();
+    expect(onClick).toHaveBeenCalled();
   })
 })

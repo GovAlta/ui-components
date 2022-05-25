@@ -29,15 +29,6 @@
   <goa-page-block>
     <h2>Components</h2>
 
-    <goa-chip content="Text" />
-    <goa-chip id="chip" deletable="true" content="Text" />
-    <script>
-      var chip = document.getElementById("chip")
-      chip.addEventListener("_onDeleteIconClick", () => {
-        console.log("in the delete")
-      })
-    </script>
-
     <ul>
       <li><a href="#section-cards">Cards</a></li>
       <li><a href="#section-skeleton">Skeletons</a></li>
@@ -55,6 +46,7 @@
       <li><a href="#section-icon-buttons">Icon Buttons</a></li>
       <li><a href="#section-icons">Icons</a></li>
       <li><a href="#section-badges">Badges</a></li>
+      <li><a href="#section-chips">Chips</a></li>
     </ul>
 
     <h2 id="section-card">Cards</h2>
@@ -647,6 +639,17 @@
     <goa-icon size="medium" type="close-circle" theme="filled" />
     <goa-icon size="large" type="close-circle" theme="filled" />
 
+    <h2 id="section-chips">Chips</h2>
+    <goa-chip id="Doritos" content="Doritos" deletable="true" />
+    <goa-chip id="Fritos" content="Fritos" deletable="true" />
+    <goa-chip id="Lays" content="Lays" deletable="true" />
+    <script>
+      document.querySelectorAll("goa-chip").forEach(chip => {
+        chip.addEventListener("_click", e => {
+          e.target.parentElement.removeChild(e.target);
+        });
+      });
+    </script>
   </goa-page-block>
 
 

@@ -16,18 +16,18 @@ describe("GoA Chip", () => {
   });
 
   it("should show the delete icon", async () => {
-    const { container } = render(<GoAChip content="some chip" onDeleteIconClick={() => { }} />);
+    const { container } = render(<GoAChip content="some chip" deletable={true} onClick={() => { }} />);
     const el = container.querySelector("goa-chip");
     expect(el.getAttribute("deletable")).toBe("true");
   });
 
   it("allows for the handling of the delete event", async () => {
-    const onDeleteIconClickStub = jest.fn();
-    const { container } = render(<GoAChip content="some chip" onDeleteIconClick={onDeleteIconClickStub} />);
+    const onClick = jest.fn();
+    const { container } = render(<GoAChip content="some chip" onClick={onClick} />);
 
     const el = container.querySelector("goa-chip");
-    fireEvent(el, new CustomEvent("_onDeleteIconClick"));
-    expect(onDeleteIconClickStub).toHaveBeenCalled();
+    fireEvent(el, new CustomEvent("_click"));
+    expect(onClick).toHaveBeenCalled();
   });
 
 });

@@ -6,10 +6,13 @@
 
   import type { GoAIconType } from "../icon/Icon.svelte";
 
-  export let leadingicon: GoAIconType;
-  export let error: string;
-  export let deletable: string;
+  export let leadingicon: GoAIconType = null;
+  export let error: string = "false";
+  export let deletable: string = "false";
   export let content: string;
+
+  let el: HTMLElement;
+  let _hovering: boolean = false;
 
   // booleans
   let _error: boolean;
@@ -19,15 +22,25 @@
   $: _deletable = toBoolean(deletable);
 
   function onDelete(e: Event) {
-    this.dispatchEvent(
-      new CustomEvent("_onDeleteIconClick", { composed: true, bubbles: true }),
-    );
+    el.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
     e.stopPropagation();
   }
 </script>
 
 <!-- HTML -->
-<div class="chip" tabindex="0">
+<div
+  bind:this={el}
+  data-testid="chip"
+  class="chip"
+  class:deletable={_deletable}
+  class:error={_error}
+  tabindex="0"
+  on:click={e => _deletable && onDelete(e)}
+  on:mouseover={() => _hovering = true}
+  on:mouseout={() => _hovering = false}
+  on:focus={() => _hovering = true}
+  on:blur={() => _hovering = false}
+>
   {#if leadingicon}
     <goa-icon class="leading-icon" size="medium" type={leadingicon} />
   {/if}
@@ -37,10 +50,19 @@
       class="delete-icon"
       size="medium"
       theme="filled"
-      fillcolor="var(--color-gray-600)"
-      hovercolor="var(--goa-color-interactive--hover)"
       type="close-circle"
-      on:click={onDelete}
+      fillcolor={_error
+        ? "var(--goa-color-status-emergency)"
+        : "var(--color-gray-600)"}
+      hovercolor={_error
+        ? "var(--goa-color-status-emergency-dark)"
+        : "var(--goa-color-interactive--hover)"}
+      opacity={_error
+        ? _hovering
+          ? 1
+          : 0.5
+        : 1
+      }
     />
   {/if}
 </div>
@@ -60,7 +82,7 @@
     color: var(--goa-color-text);
     display: inline-flex;
     flex-direction: row;
-    font-size: var(--fs-sm);
+    font-size: var(--chip-font-size);
     font-weight: var(--fw-regular);
     gap: 0.25rem;
     height: 2rem;
@@ -77,12 +99,16 @@
     outline: 2px solid var(--goa-color-interactive--focus);
   }
 
-  .delete-icon {
+  .deletable {
     cursor: pointer;
+  }
+
+  .delete-icon {
     margin-right: -0.25rem;
   }
 
-  .error {
+  .error,
+  .error:hover {
     background-color: var(--goa-color-status-emergency-light);
   }
 </style>
