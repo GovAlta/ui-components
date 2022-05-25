@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, fireEvent } from '@testing-library/svelte';
+import { render, fireEvent } from '@testing-library/svelte'; 
 import GoAButton from './Button.svelte'
 
 describe('GoAButtonComponent', () => {
@@ -28,10 +28,10 @@ describe('GoAButtonComponent', () => {
   })
 
   describe("size", () => {
-    ["compact", "normal"].forEach(size => {
+    ["compact", ""].forEach(size => {
       it(`should render ${size} size`, async () => {
-        const baseElement = render(GoAButton, { size });
-        const button = await baseElement.findByRole("button");
+        const { findByRole } = render(GoAButton, { size });
+        const button = await findByRole("button");
 
         expect(button).toBeTruthy();
         expect(button.className).toContain(size);
@@ -40,13 +40,25 @@ describe('GoAButtonComponent', () => {
   });
 
   describe("type", () => {
-    ["primary", "secondary", "tertiary"].forEach(type => {
+    ["primary", "secondary", "tertiary", "start"].forEach(type => {
       it(`should render ${type} type`, async () => {
         const baseElement = render(GoAButton, { type });
         const button = await baseElement.findByRole("button");
 
         expect(button).toBeTruthy();
         expect(button.className).toContain(type);
+      });
+    });
+  });
+
+  describe("variant", () => {
+    ["", "danger"].forEach(variant => {
+      it(`should render ${variant} variant`, async () => {
+        const baseElement = render(GoAButton, { variant });
+        const button = await baseElement.findByRole("button");
+
+        expect(button).toBeTruthy();
+        expect(button.className).toContain(variant);
       });
     });
   });

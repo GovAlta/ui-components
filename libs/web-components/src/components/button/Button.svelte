@@ -1,34 +1,61 @@
 <svelte:options tag="goa-button" />
 
 <script lang="ts">
-  import type { IconSize, IconTheme, GoAIconType } from "../icon/Icon.svelte";
-  // import { ButtonSize, ButtonType, ButtonVariant, WCBoolean, WC_FALSE } from "@abgov/shared/common";
-
+  import { onMount } from "svelte";
   import { toBoolean } from "../../common/utils";
+  import type { GoAIconType } from "../icon/Icon.svelte";
 
-  export let type = "primary"; // primary, secondary, tertiary, start
-  export let size = "normal"; // normal, compact
-  export let variant = "default"; // default, danger
+  const BUTTON_TYPES = ["primary", "secondary", "tertiary", "start"]; 
+  type ButtonType = (typeof BUTTON_TYPES)[number];
+
+  const SIZES = ["", "compact"]; 
+  type Size = (typeof SIZES)[number];
+
+  const VARIANTS = ["", "danger"];
+  type Variant = (typeof VARIANTS)[number];
+
+  // type check functions
+
+  function isButtonType(value: string): value is ButtonType {
+    return BUTTON_TYPES.includes(value);
+  }
+
+  function isSize(value: string): value is Size {
+    return SIZES.includes(value);
+  }
+
+  function isVariant(value: string): value is Variant {
+    return VARIANTS.includes(value);
+  }
+
+  // optional
+  export let type: ButtonType = "primary"; 
+  export let size: Size = ""; 
+  export let variant: Variant = ""; 
   export let title: string = "";
   export let disabled: string = "false";
   export let leadingicon: GoAIconType = null;
   export let trailingicon: GoAIconType = null;
-
-  //optional
   export let testid: string = "";
-
-  // export let type: ButtonType = "primary";
-  // export let size: ButtonSize =  "medium";
-  // export let variant: ButtonVariant = "default";
-  // export let title: string = "";
-  // export let disabled: WCBoolean = WC_FALSE;
 
   $: isDisabled = toBoolean(disabled);
 
-  function clickHandler(e) {
+  function clickHandler(e: Event) {
     this.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
     e.stopPropagation();
   }
+
+  onMount(() => {
+    if (!isButtonType(type)) {
+      throw "Invalid button type";
+    }
+    if (!isSize(size)) {
+      throw "Invalid button size";
+    }
+    if (!isVariant(variant)) {
+      throw "Invalid button variant";
+    }
+  })
 </script>
 
 <button
@@ -38,7 +65,7 @@
   disabled={isDisabled}
   data-testid={testid}
 >
-  {#if type === "get-started"}
+  {#if type === "start"}
     <slot />
     <goa-icon type="arrow-forward" inverted="true" />
   {:else}
@@ -57,7 +84,7 @@
     box-sizing: border-box;
     font-family: var(--font-family);
   }
-  @media (max-width: 320px) {
+  @media (max-width: 480px) {
     /* expand the button and :host container on small screens  */
     :host {
       width: 100%;
@@ -68,26 +95,27 @@
   }
 
   button {
+    box-sizing: border-box;
     border-radius: 0.25rem;
     border: 2px solid var(--goa-color-interactive);
     box-sizing: border-box;
     cursor: pointer;
+    font-family: var(--font-family);
     font-size: var(--fs-lg);
     font-weight: 400;
     height: var(--button-height);
+    letter-spacing: 0.5px;
+    line-height: 100%;
     padding: 0 0.75rem;
     display: flex;
-    gap: 0.25rem;
+
+    /* for leading and trailing icon vertical alignment */
+    gap: 0.5rem;
     align-items: center;
     justify-content: center;
     transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out,
       border-color 0.2s ease-in-out;
-    /* transform: scale(1); */
   }
-
-  /* button:active {
-    transform: scale(0.99);
-  } */
 
   button:disabled {
     pointer-events: none;
@@ -99,27 +127,27 @@
     font-size: var(--fs-base);
   }
 
-  button.get-started {
+  button.start {
     height: var(--button-height-tall);
     font-weight: var(--fw-bold);
   }
 
   /* Primary */
-  button.get-started,
+  button.start,
   button.primary {
     border: 2px solid var(--goa-color-interactive);
     background: var(--goa-color-interactive);
-    color: var(--color-white, white);
+    color: var(--goa-color-text-light);
   }
 
-  button.get-started:hover,
+  button.start:hover,
   button.primary:hover {
     border-color: var(--goa-color-interactive--hover);
     background: var(--goa-color-interactive--hover);
   }
 
-  button.get-started:focus,
-  button.get-started:active,
+  button.start:focus,
+  button.start:active,
   button.primary:focus,
   button.primary:active {
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
@@ -222,5 +250,4 @@
     border-color: var(--goa-color-status-emergency-dark);
     background: var(--color-white);
   }
-
 </style>
