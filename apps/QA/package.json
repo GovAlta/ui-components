@@ -1,0 +1,17 @@
+{
+  "name": "qa",
+  "version": "1.0.0",
+  "description": "samKothari-Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "samKothari",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^9.7.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "tsify": "^5.0.4",
+    "typescript": "^4.7.2"
+  }
+}
