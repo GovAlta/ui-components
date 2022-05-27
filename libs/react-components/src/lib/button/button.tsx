@@ -1,7 +1,8 @@
 import React, { FC, ReactNode, useEffect, useRef } from 'react';
 import './button.css';
+import { GoAIconType } from '../icons';
 
-export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'get-started';
+export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'start';
 export type ButtonSize = 'compact' | 'normal';
 export type ButtonVariant = 'default' | 'danger'
 
@@ -11,6 +12,8 @@ interface WCProps {
   variant?: ButtonVariant;
   disabled?: boolean
   title?: string;
+  leadingicon?: string;
+  trailingicon?: string;
   ref: React.RefObject<HTMLElement>;
 }
 
@@ -30,11 +33,23 @@ type ButtonProps = {
   size?: ButtonSize;
   variant?: ButtonVariant;
   disabled?: boolean;
+  leadingIcon?: GoAIconType;
+  trailingIcon?: GoAIconType;
   onClick: (e: any) => void;
   children: ReactNode;
 };
 
-export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'primary', size = 'normal', variant = 'default', children, onClick }) => {
+export const GoAButton: FC<ButtonProps> = ({
+  title,
+  disabled = false,
+  type = 'primary',
+  size = 'normal',
+  variant = 'default',
+  leadingIcon,
+  trailingIcon,
+  children,
+  onClick
+}) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -50,7 +65,17 @@ export const GoAButton: FC<ButtonProps> = ({ title, disabled = false, type = 'pr
   }, [el, onClick])
 
   return (
-    <goa-button ref={el} role="button" type={type} size={size} variant={variant} disabled={disabled} title={title}>
+    <goa-button
+      ref={el}
+      role="button"
+      type={type}
+      size={size}
+      variant={variant}
+      disabled={disabled}
+      title={title}
+      leadingicon={leadingIcon}
+      trailingicon={trailingIcon}
+    >
       {children}
     </goa-button>
   );

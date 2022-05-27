@@ -10,11 +10,13 @@ import { GoAButton, GoAButtonGroup } from '@abgov/react-components';
 
 <Meta title="Components/Button" />
 
+export const noop = () => {};
+
 # Button
 
 ### Buttons allow users to perform an action or to navigate to another page. They have multiple styles for various needs, and are ideal for calling attention to where a user needs to do something or so they can move forward in a flow.
 
-[Figma design component](https://www.figma.com/file/qWGWDvULAAZuVaDpXCRzqP/DS-Website?node-id=916%3A11660)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=420%3A6810)
 
 ---
 
@@ -33,7 +35,7 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
     <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
       Tertiary
     </GoAButton>
-    <GoAButton type="get-started" onClick={() => console.log('clicked')}>
+    <GoAButton type="start" onClick={() => console.log('clicked')}>
       Get Started
     </GoAButton>
   </GoAButtonGroup>
@@ -46,7 +48,7 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
         <goa-button type="primary">Primary</goa-button>
         <goa-button type="secondary">Secondary</goa-button>
         <goa-button type="tertiary">Tertiary</goa-button>
-        <goa-button type="get-started">Get Started</goa-button>
+        <goa-button type="start">Get Started</goa-button>
       `}
       lang="html"
     />
@@ -65,7 +67,7 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
         <goa-button (_click)="onClick" type="primary">Primary</goa-button>
         <goa-button (_click)="onClick" type="secondary">Secondary</goa-button>
         <goa-button (_click)="onClick" type="tertiary">Tertiary</goa-button>
-        <goa-button (_click)="onClick" type="get-started">Get Started</goa-button>
+        <goa-button (_click)="onClick" type="start">Get Started</goa-button>
       `}
       lang="html"
     />
@@ -92,8 +94,8 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
         <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
           Tertiary
         </GoAButton>
-        <GoAButton type="get-started" onClick={() => console.log('clicked')}>
-          Get Started
+        <GoAButton type="start" onClick={() => console.log('clicked')}>
+          Get Started 
         </GoAButton>
     `}
       lang="tsx"
@@ -103,12 +105,11 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
 
 <Note type="do">
   <p>
-    Use the primary buttons for main actions and secondary buttons for less
-    important action.
+    Use the primary buttons for main actions and secondary buttons for less important action.
   </p>
   <GoAButtonGroup alignment="start">
     <GoAButton type="primary">Save</GoAButton>
-    <GoAButton type="tertiary">Cancel</GoAButton>
+    <GoAButton type="secondary">Cancel</GoAButton>
   </GoAButtonGroup>
 </Note>
 
@@ -149,16 +150,75 @@ There are two button sizes: Normal (default) and Compact.
 <Story name="Compact size">
   <GoAButtonGroup alignment="start" gap="small">
     <GoAButton type="primary" size="compact">
-      Small primary
+      Compact primary
     </GoAButton>
     <GoAButton type="secondary" size="compact">
-      Small secondary
+      Compact secondary
     </GoAButton>
     <GoAButton type="tertiary" size="compact">
-      Small tertiary
+      Compact tertiary
     </GoAButton>
   </GoAButtonGroup>
 </Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      code={`
+        <goa-button size="compact" type="primary">Compact Primary</goa-button>
+        <goa-button size="compact" type="secondary">Compact Secondary</goa-button>
+        <goa-button size="compact" type="tertiary">Compact Tertiary</goa-button>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        document.querySelector('goa-button').addEventListener('click', () => {
+          console.log('clicked');
+        });
+      `}
+      lang="js"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-button size="compact" (_click)="onClick" type="primary">Compact Primary</goa-button>
+        <goa-button size="compact" (_click)="onClick" type="secondary">Compact Secondary</goa-button>
+        <goa-button size="compact" (_click)="onClick" type="tertiary">Compact Tertiary</goa-button>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        export class SomeOtherComponent {
+          onClick() {
+            console.log('clicked');
+          }
+        }
+      `}
+      lang="ts"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAButton size="compact" type="primary" onClick={() => console.log('clicked')}>
+          Compact Primary
+        </GoAButton>
+        <GoAButton size="compact" type="secondary" onClick={() => console.log('clicked')}>
+          Compact Secondary
+        </GoAButton>
+        <GoAButton size="compact" type="tertiary" onClick={() => console.log('clicked')}>
+          Compact Tertiary
+        </GoAButton>
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+
 
 <Note type="do">
   <p>Use the compact button size to save space in compact scenarios</p>
@@ -177,6 +237,50 @@ There are two button sizes: Normal (default) and Compact.
     <GoAButton type="primary">Next</GoAButton>
   </GoAButtonGroup>
 </Note>
+
+
+#### Icons
+
+<Story name="Icons">
+  <GoAButtonGroup alignment="start">
+    <GoAButton type="primary" leadingIcon="airplane" onClick={noop}>Leading</GoAButton>
+    <GoAButton type="primary" trailingIcon="airplane" onClick={noop}>Trailing</GoAButton>
+    <GoAButton type="primary" leadingIcon="archive" trailingIcon="airplane" onClick={noop}>Both</GoAButton>
+  </GoAButtonGroup>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      code={`
+        <goa-button leadingicon="airplane" type="primary">Leading</goa-button>
+        <goa-button trailingicon="airplane" type="secondary">Trailing</goa-button>
+        <goa-button leadingicon="archive" trailingicon="airplane" type="tertiary">Both</goa-button>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-button leadingicon="airplane" (_click)="onClick" type="primary">Leading</goa-button>
+        <goa-button leadingicon="airplane" (_click)="onClick" type="secondary">Trailing</goa-button>
+        <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick" type="tertiary">Both</goa-button>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAButton type="primary" leadingIcon="airplane" onClick={noop}>Leading</GoAButton>
+        <GoAButton type="primary" trailingIcon="airplane" onClick={noop}>Trailing</GoAButton>
+        <GoAButton type="primary" leadingIcon="archive" trailingIcon="airplane" onClick={noop}>Both</GoAButton>
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
 
 ---
 

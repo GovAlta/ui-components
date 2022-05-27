@@ -29,6 +29,15 @@
   <goa-page-block>
     <h2>Components</h2>
 
+    <goa-chip content="Text" />
+    <goa-chip id="chip" deletable="true" content="Text" />
+    <script>
+      var chip = document.getElementById("chip");
+      chip.addEventListener("_onDeleteIconClick", () => {
+        console.log("in the delete");
+      });
+    </script>
+
     <ul>
       <li><a href="#section-cards">Cards</a></li>
       <li><a href="#section-skeleton">Skeletons</a></li>
@@ -572,7 +581,7 @@
       <goa-button type="primary" size="compact" leadingicon="add">Button</goa-button>
       <goa-button type="primary" size="compact" trailingicon="add">Button</goa-button>
     </goa-button-group>
-    <br>
+    <br />
     <goa-button-group>
       <goa-button disabled type="primary">Button</goa-button>
       <goa-button disabled type="primary" leadingicon="add">Button</goa-button>
@@ -586,7 +595,7 @@
       <goa-button type="secondary">Button</goa-button>
       <goa-button type="secondary" size="compact">Button</goa-button>
     </goa-button-group>
-    <br>
+    <br />
     <goa-button-group>
       <goa-button disabled type="secondary">Button</goa-button>
       <goa-button disabled type="secondary" size="compact">Button</goa-button>
@@ -598,7 +607,7 @@
       <goa-button type="tertiary">Button</goa-button>
       <goa-button type="tertiary" size="compact">Button</goa-button>
     </goa-button-group>
-    <br>
+    <br />
     <goa-button-group>
       <goa-button disabled type="tertiary">Button</goa-button>
       <goa-button disabled type="tertiary" size="compact">Button</goa-button>
@@ -607,16 +616,14 @@
 
     <h4>Get Started</h4>
     <goa-button-group>
-      <goa-button type="get-started">Get Started</goa-button>
+      <goa-button type="start">Get Started</goa-button>
     </goa-button-group>
-
 
     <h3>Align to Start</h3>
     <goa-button-group alignment="start">
       <goa-button type="tertiary">Cancel</goa-button>
       <goa-button type="primary" disabled title="This one is disabled">Save</goa-button>
     </goa-button-group>
-
 
     <h3>Align to End</h3>
     <goa-button-group alignment="end">

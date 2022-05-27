@@ -9,7 +9,7 @@
 </script>
 
 <!-- HTML -->
-<div style="--alignment: flex-{alignment}; --gap-size: {gap === "small" ? "0.5rem" : "1rem"}">
+<div style="--alignment: flex-{alignment}; --gap-size: {gap === "small" ? "0.5rem" : "1.25rem"}">
   <slot />
 </div>
 
