@@ -1,4 +1,12 @@
 {
+  "cucumberautocomplete.steps": [
+    "/apps/QA/cypress/integration/*/*/*.ts",
+    "/apps/QA/cypress/integration/*/*/*.js"
+  ],
+  "cucumberautocomplete.syncfeatures": "/apps/QA/cypress/integration/*.feature",
+  "cucumberautocomplete.strictGherkinCompletion": false,
+  "cucumberautocomplete.smartSnippets": true,
+  "cucumberautocomplete.stepsInvariants": true,
   "editor.formatOnSave": true,
   "editor.trimAutoWhitespace": true,
   "editor.tabSize": 2,

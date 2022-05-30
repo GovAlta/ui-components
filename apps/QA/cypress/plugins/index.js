@@ -16,7 +16,41 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
+import { createHtmlReport } from "axe-html-reporter";
+import { axeHtmlReporterOptions } from "../support/axe-html-report-utils";
+const cucumber = require('cypress-cucumber-preprocessor').default
+const browserify = require("@cypress/browserify-preprocessor");
+const sqlServer = require('cypress-sql-server');
+const dbconfig = require('../../cypress.json')
+
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  const options = browserify.defaultOptions;
+  options.browserifyOptions.plugin.unshift(['tsify']);
+  on('file:preprocessor', cucumber(options))
+  let tasks
+  tasks = sqlServer.loadDBPlugin(dbconfig.db);
+  on('task', tasks, {
+
+    getClipboard() {
+      return clipboardy.readSync();
+    },
+
+    // logs message to console
+    log(message) {
+      console.log(message)
+      return null
+    },
+    // logs message as table to console
+    table(message) {
+      console.table(message)
+      return null
+    },
+    // must be created as a task since it required the fs lib which is not accessible via the browser
+    htmlReport(violations) {
+      // console.log(`***** axeHtmlReporterOptions.reportFileName: ${axeHtmlReporterOptions.reportFileName}`);
+      createHtmlReport({ results: { violations: violations }, options: axeHtmlReporterOptions });
+      return null;
+    }
+  })
+
 }
