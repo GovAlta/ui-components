@@ -3,15 +3,36 @@
   "version": "1.0.0",
   "description": "samKothari-Cypress",
   "main": "index.js",
+  "cucumberJson": {
+    "generate": true,
+    "outputFolder": "cypress/cucumber-json",
+    "filePrefix": "",
+    "fileSuffix": ".cucumber"
+  },
+  "cypress-cucumber-preprocessor": {
+    "commonPath": "common",
+    "nonGlobalStepDefinitions": true
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypressOpen": "cypress open",
+    "cypressRun": "cypress run"
   },
   "author": "samKothari",
   "license": "ISC",
   "devDependencies": {
+    "axe-core": "^4.4.2",
     "cypress": "^9.7.0",
+    "cypress-axe": "^0.14.0",
     "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-sql-server": "^1.0.0",
+    "ts-loader": "^9.3.0",
     "tsify": "^5.0.4",
     "typescript": "^4.7.2"
+  },
+  "dependencies": {
+    "@types/node": "^17.0.36",
+    "axe-html-reporter": "^2.2.3",
+    "cypress-file-upload": "^5.0.8"
   }
 }
