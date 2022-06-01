@@ -53,10 +53,10 @@
       type="close-circle"
       fillcolor={_error
         ? "var(--goa-color-status-emergency)"
-        : "var(--color-gray-600)"}
-      hovercolor={_error
-        ? "var(--goa-color-status-emergency-dark)"
-        : "var(--goa-color-interactive--hover)"}
+        : _hovering 
+          ? "var(--goa-color-interactive--hover)" 
+        : "var(--color-gray-600)"
+      }
       opacity={_error
         ? _hovering
           ? 1
