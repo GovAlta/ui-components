@@ -115,6 +115,9 @@
     display: flex;
     justify-content: center;
     padding: 3px;
+
+    /* prevent squishing of checkbox */
+    flex: 0 0 auto; 
   }
   .goa-checkbox-container svg {
     fill: var(--color-white);
