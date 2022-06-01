@@ -2,7 +2,6 @@ import { Meta } from '@storybook/addon-docs';
 import {
   Tabs,
   Tab,
-  Note,
   SupportInfo,
   CodeSnippet,
 } from '@abgov/shared/storybook-common';
@@ -14,7 +13,8 @@ export const noop = () => {};
 
 # Button
 
-### Buttons allow users to perform an action or to navigate to another page. They have multiple styles for various needs, and are ideal for calling attention to where a user needs to do something or so they can move forward in a flow.
+### Use a button to carry out an important action or to navigate to another page. See also: <a href="https://www.figma.com/file/UbIKwjbxuPUvoFNYvMBGpe/%E2%9D%96-Patterns-%7C-DDI-DS?node-id=1792%3A20682">button placement</a>
+
 
 [Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=420%3A6810)
 
@@ -102,24 +102,6 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
     />
   </Tab>
 </Tabs>
-
-<Note type="do">
-  <p>
-    Use the primary buttons for main actions and secondary buttons for less important action.
-  </p>
-  <GoAButtonGroup alignment="start">
-    <GoAButton type="primary">Save</GoAButton>
-    <GoAButton type="secondary">Cancel</GoAButton>
-  </GoAButtonGroup>
-</Note>
-
-<Note type="dont">
-  <p>Use two primary buttons</p>
-  <GoAButtonGroup alignment="start">
-    <GoAButton type="primary">Save</GoAButton>
-    <GoAButton type="primary">Cancel</GoAButton>
-  </GoAButtonGroup>
-</Note>
 
 ---
 
@@ -217,26 +199,6 @@ There are two button sizes: Normal (default) and Compact.
     />
   </Tab>
 </Tabs>
-
-
-
-<Note type="do">
-  <p>Use the compact button size to save space in compact scenarios</p>
-  <img src=".images/2022-02-09-15-14-01.png" />
-</Note>
-
-<Note type="dont">
-  <p>
-    Don't use different button sized in the same area as a way to emphasize
-    hierarchy
-  </p>
-  <GoAButtonGroup alignment="start">
-    <GoAButton type="secondary" size="compact">
-      Back
-    </GoAButton>
-    <GoAButton type="primary">Next</GoAButton>
-  </GoAButtonGroup>
-</Note>
 
 
 #### Icons
