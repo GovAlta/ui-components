@@ -141,6 +141,9 @@
     border-radius: 50%;
     background-color: #fff;
     transition: box-shadow 100ms ease-in-out;
+
+    /* prevent squishing of radio button */
+    flex: 0 0 auto; 
   }
 
   .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
