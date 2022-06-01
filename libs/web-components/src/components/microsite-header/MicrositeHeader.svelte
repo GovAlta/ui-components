@@ -34,9 +34,7 @@
       </svg>
     </div>
     <div data-testid="level" class="site-text">
-      An official site of the <a href="https://www.alberta.ca/index.aspx"
-        >Alberta Government</a
-      >
+      An official site of the <a href="https://www.alberta.ca/index.aspx">Alberta Government</a>
     </div>
   {/if}
 
@@ -51,9 +49,7 @@
       This is a new <a href="https://www.alberta.ca/index.aspx">Alberta Government</a>
       service
       {#if feedbackurl}
-        <span data-testid="feedback"
-          >— help us improve it by giving <a href={feedbackurl}>feedback</a></span
-        >
+        <span data-testid="feedback">— help us improve it by giving <a href={feedbackurl}>feedback</a></span>
       {/if}
     </div>
   {/if}
@@ -90,28 +86,28 @@
 
   .goa-official-site-header {
     display: flex;
-    font-size: var(--fs-xs);
-    background-color: var(--color-gray-100);
+    font-size: var(--fs-sm);
+    background-color: var(--color-gray-200);
     align-items: center;
     justify-content: space-between;
     height: 2.5rem;
-    padding: 0 0.5rem;
-    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
   }
   .spacer {
     flex: 1 1 auto;
   }
 
   .version {
-    color: var(--goa-color-600);
+    color: var(--goa-color-text-secondary);
+    padding-left: 1rem;
   }
 
   .service-level {
     font-weight: bold;
-    padding: 0 0.5rem;
-    height: 1.5rem;
+    height: 1.625rem;
+    padding: 0.125rem 0.1875rem 0 0.1875rem;
     display: flex;
-    align-items: center;
+    margin-right: 1rem;
   }
 
   .service-level--alpha {
@@ -129,9 +125,16 @@
   }
 
   .site-text {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     color: var(--goa-color-text);
+  }
+
+  @media (max-width: 640px) {
+
+    .goa-official-site-header {
+      padding: 0.5rem 1rem;
+      align-items: start;
+      height: auto;
+    }
+
   }
 </style>
