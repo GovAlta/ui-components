@@ -205,6 +205,11 @@
     background-color: var(--color-gray-100);
   }
 
+  .navigation-sections-only-footer .navigation-links,
+  .meta-and-navigation-sections-only-footer .navigation-links {
+    padding-top: 1.75rem;
+  }
+
   .navigation-links {
     flex-direction: row;
     justify-content: flex-start;
@@ -318,6 +323,7 @@
     margin-top: 0;
     margin-bottom: 0;
     font-size: var(--fs-base);
+    color: var(--goa-color-text-secondary);
   }
 
   .navigation-links-divider {
