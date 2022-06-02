@@ -7,7 +7,7 @@ import {
 import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';
 import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
-import { GoAAppFooter, GoAMetaLink, GoANavigationLink } from '@abgov/react-components';
+import { GoAAppFooter, GoACallout, GoAMetaLink, GoANavigationLink } from '@abgov/react-components';
 
 <Meta title="Components/AppFooter" component={GoAAppFooter} />
 
@@ -16,6 +16,10 @@ import { GoAAppFooter, GoAMetaLink, GoANavigationLink } from '@abgov/react-compo
 The footer resides at the bottom of every page of your service, providing copyright information and other information related to your service.
 
 [Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI-DS?node-id=582%3A5939)
+
+<GoACallout type="important" title="Refactoring may be needed for future releases">
+  As this component transitions from Alpha to Beta, there may be significant changes to improve its operation. 
+</GoACallout>
 
 ---
 
