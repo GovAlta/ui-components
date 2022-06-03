@@ -38,7 +38,7 @@
   on:click={e => _deletable && onDelete(e)}
   on:mouseover={() => _hovering = true}
   on:mouseout={() => _hovering = false}
-  on:focus={() => _hovering = true}
+  on:focus={() => _hovering = false}
   on:blur={() => _hovering = false}
 >
   {#if leadingicon}
@@ -76,8 +76,9 @@
   .chip {
     vertical-align: middle;
     align-items: center;
-    background-color: var(--color-gray-100);
+    background-color: var(--color-white);
     border-radius: 99px;
+    border: 1px solid #949494;  /* TODO: change this to a defined color value when one is defined in the design specs */
     box-sizing: border-box;
     color: var(--goa-color-text);
     display: inline-flex;
@@ -91,12 +92,13 @@
     padding: 0 0.75rem;
   }
 
-  .chip:hover {
-    background-color: var(--color-gray-200);
-  }
-
   .chip:focus {
     outline: 2px solid var(--goa-color-interactive--focus);
+    background-color: var(--color-white);
+  }
+
+  .chip:hover {
+    background-color: var(--color-gray-200);
   }
 
   .deletable {
