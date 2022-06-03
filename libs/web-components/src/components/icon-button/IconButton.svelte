@@ -41,13 +41,13 @@
 
 <button
   style="--size: {_size}"
-  {title}
+  title={title}
   disabled={isDisabled}
   class={css}
   data-testid={testId}
   on:click={handleClick}
 >
-  <goa-icon {type} {size} {theme} inverted={isInverted} />
+  <goa-icon title={title} {type} {size} {theme} inverted={isInverted} />
 </button>
 
 <style>
