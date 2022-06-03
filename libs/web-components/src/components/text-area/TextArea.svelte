@@ -148,12 +148,12 @@
   }
 
   .counter-error {
-    color: var(--goa-color-status-emergency-dark)
+    color: var(--goa-color-interactive--error)
   }
 
   .error:hover,
   .error:focus,
   .error {
-    border: 2px solid var(--goa-color-status-emergency-dark);
+    border: 2px solid var(--goa-color-interactive--error);
   }
 </style>
