@@ -148,7 +148,7 @@
 
   .goa-checkbox--disabled .goa-checkbox-container,
   .goa-checkbox--disabled .goa-checkbox-container:hover {
-    border: 1px solid var(--color-gray-500);
+    border: 1px solid var(--color-gray-400);
   }
 
   /* Error state */
