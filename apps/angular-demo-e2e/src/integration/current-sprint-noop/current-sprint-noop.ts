@@ -9,6 +9,7 @@ import {
 
 Given(/^cs we want a simple pass$/, function () {
   expect(1).to.eq(1);
+  cy.visit('https://www.google.ca')
 });
 
 When(/^cs we are testing cicd$/, function () {

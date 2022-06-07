@@ -3,6 +3,18 @@
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
+      "files": [
+        "src/plugins/index.js",
+        "src/support/multiple-cucumber-html-reporter.js",
+        "src/support/index.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/camelcase": "off",
+        "no-undef": "off"
+      }
+    },
+    {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {}
     },
