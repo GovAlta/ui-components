@@ -632,7 +632,7 @@
     </goa-button-group>
 
     <h2 id="section-icon-buttons">Icon Buttons</h2>
-    <goa-icon-button type="close" />
+    <goa-icon-button type="close" title="Close this thing" />
     <goa-icon-button type="close" variant="nocolor" />
 
     <h2 id="section-icon-buttons">Icon Buttons (Inverted)</h2>
@@ -641,7 +641,7 @@
     </div>
 
     <h2 id="section-icons">Icons</h2>
-    <goa-icon type="close" />
+    <goa-icon type="close" title="Closing Time" />
     <goa-icon size="small" type="close-circle" theme="filled" />
     <goa-icon size="medium" type="close-circle" theme="filled" />
     <goa-icon size="large" type="close-circle" theme="filled" />

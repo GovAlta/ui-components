@@ -426,13 +426,17 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
 
+  // required
   export let type: GoAIconType;
+
+  // optional
   export let size: IconSize = "medium";
   export let theme: IconTheme = "outline";
   export let inverted: string;
   export let fillcolor: string;
   export let hovercolor: string;
   export let opacity: number = 1;
+  export let title: string = "";
 
   $: isInverted = toBoolean(inverted);
 
@@ -447,6 +451,7 @@
   class="goa-icon"
   class:inverted={isInverted}
   data-testid={`icon-${type}`}
+  title={title}
   style={`
     --size: ${_size};
     --fill-color: ${fillcolor};
@@ -455,8 +460,7 @@
   `}
 >
   {#if type}
-    <ion-icon style="width: 100%; height: 100%;" name={theme === "filled" ? type : `${type}-${theme}`}
-    />
+    <ion-icon name={theme === "filled" ? type : `${type}-${theme}`} />
   {/if}
 </div>
 
@@ -464,6 +468,12 @@
   :host {
     display: inline-flex;
     align-items: center;
+  }
+
+  ion-icon {
+    pointer-events: none; 
+    width: 100%; 
+    height: 100%;
   }
 
   .goa-icon {
