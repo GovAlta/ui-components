@@ -1,19 +1,15 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "sourceMap": false,
-    "outDir": "../../dist/out-tsc",
+    "target": "es2015",
+    "module": "commonjs",
+    "lib": ["es2017", "dom"],
     "allowJs": true,
-    "types": ["cypress", "node"],
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noImplicitAny": false,
+    "types": ["cypress","node"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts", "src/**/*.js"],
-  "angularCompilerOptions": {
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
-  }
+  "include": ["**/*.ts"]
 }
