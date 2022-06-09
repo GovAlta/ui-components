@@ -1,5 +1,8 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "sourceMap": false,
+    "outDir": "../../dist/out-tsc",
     "target": "es2015",
     "module": "commonjs",
     "lib": ["es2017", "dom"],
@@ -11,5 +14,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.js"],
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }

@@ -22,7 +22,7 @@
             "name": "cs we want a simple pass",
             "result": {
               "status": "passed",
-              "duration": 1908000000
+              "duration": 1674000000
             }
           },
           {
@@ -32,7 +32,7 @@
             "name": "cs we are testing cicd",
             "result": {
               "status": "passed",
-              "duration": 17000000
+              "duration": 18000000
             }
           },
           {
