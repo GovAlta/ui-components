@@ -26,7 +26,7 @@
     }
   }
 
-  $: _transitionTime = 
+  $: _transitionTime =
     transition === "none"
       ? 0
       : transition === "slow"
@@ -40,6 +40,7 @@
     e.target.dispatchEvent(new CustomEvent("_close", { composed: true }));
     e.stopPropagation();
   }
+
 </script>
 
 <!-- ======================================================================= -->
@@ -48,51 +49,52 @@
 <!-- ======================================================================= -->
 <!-- Html -->
 <!-- ======================================================================= -->
-
 {#if isOpen}
-  <div
-    use:noscroll={{ enable: isOpen }}
-    in:fade={{ duration: _transitionTime }}
-    out:fade={{ delay: _transitionTime, duration: _transitionTime}}
-    data-testid="modal"
-    class="modal"
-    style="--scroll-offset: {scrollOffset}px; {width && `--width: ${width};`};"
-  >
-    <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
+  <goa-focus-trap {open}>
     <div
-      in:fly={{ duration: _transitionTime, y: 200 }}
-      out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
-      class="modal-pane"
+      use:noscroll={{ enable: isOpen }}
+      in:fade={{ duration: _transitionTime }}
+      out:fade={{ delay: _transitionTime, duration: _transitionTime}}
+      data-testid="modal"
+      class="modal"
+      style="--scroll-offset: {scrollOffset}px; {width && `--width: ${width};`};"
     >
-      {#if heading}
-        <div data-testid="modal-title" class="modal-title">{heading}</div>
-      {/if}
-      {#if isClosable}
-        <div class="modal-close">
-          <goa-icon-button
-            data-testid="modal-close-button"
-            type="close"
-            on:click={close}
-          />
-        </div>
-      {/if}
-      <div data-testid="modal-content" class="modal-content">
-        {#if isScrollable}
-          <goa-scrollable direction="vertical" height="50" hpadding="1.75">
-            <slot />
-          </goa-scrollable>
-        {:else}
-          <div style="margin: 1.75rem">
-            <slot />
+      <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
+      <div
+        in:fly={{ duration: _transitionTime, y: 200 }}
+        out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
+        class="modal-pane"
+      >
+        {#if heading}
+          <div data-testid="modal-title" class="modal-title">{heading}</div>
+        {/if}
+        {#if isClosable}
+          <div class="modal-close">
+            <goa-icon-button
+              data-testid="modal-close-button"
+              type="close"
+              on:click={close}
+            />
           </div>
         {/if}
-        <slot />
-      </div>
-      <div data-testid="modal-actions" class="modal-actions">
-        <slot name="actions" />
+        <div data-testid="modal-content" class="modal-content">
+          {#if isScrollable}
+            <goa-scrollable direction="vertical" height="50" hpadding="1.75">
+              <slot />
+            </goa-scrollable>
+          {:else}
+            <div style="margin: 1.75rem">
+              <slot />
+            </div>
+          {/if}
+          <slot />
+        </div>
+        <div data-testid="modal-actions" class="modal-actions">
+          <slot name="actions" />
+        </div>
       </div>
     </div>
-  </div>
+  </goa-focus-trap>
 {/if}
 
 <!-- ======================================================================= -->
