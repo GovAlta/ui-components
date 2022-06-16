@@ -10,6 +10,7 @@ interface WCProps {
   disabled?: boolean;
   showcounter?: boolean;
   maxcharcount?: number;
+  width?: string;
 }
 
 declare global {
@@ -31,6 +32,7 @@ interface Props {
   disabled?: boolean;
   showCounter?: boolean;
   maxCharCount?: number;
+  width?: string;
   testId?: string;
   onChange: (name: string, value: string) => void;
 };
@@ -43,6 +45,7 @@ export const GoATextArea: FC<Props> = ({
   disabled,
   showCounter,
   maxCharCount,
+  width,
   testId,
   error,
   onChange
@@ -75,6 +78,7 @@ export const GoATextArea: FC<Props> = ({
       disabled={disabled}
       showcounter={showCounter}
       maxcharcount={maxCharCount}
+      width={width}
       error={error}
       data-testid={testId}
     >
