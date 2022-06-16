@@ -39,6 +39,7 @@
   export let testid: string = "";
 
   $: isDisabled = toBoolean(disabled);
+  $: isButtonDark = type === "primary" || type === "start"
 
   function clickHandler(e: Event) {
     this.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
@@ -60,21 +61,27 @@
 
 <button
   class="{type} {size} {variant}"
+  class:leading={leadingicon}
+  class:trailing={trailingicon || type === "start"}
   {title}
   on:click={clickHandler}
   disabled={isDisabled}
   data-testid={testid}
 >
   {#if type === "start"}
-    <slot />
-    <goa-icon type="arrow-forward" inverted="true" />
+    <div class="text">
+      <slot />
+    </div>
+    <goa-icon id="trailing-icon" type="arrow-forward" inverted="true" />
   {:else}
     {#if leadingicon}
-      <goa-icon type={leadingicon} inverted="true" />
+      <goa-icon id="leading-icon" type={leadingicon} inverted={isButtonDark} />
     {/if}
-    <slot />
+    <div class="text">
+      <slot />
+    </div>
     {#if trailingicon}
-      <goa-icon type={trailingicon} inverted="true" />
+      <goa-icon id="trailing-icon" type={trailingicon} inverted={isButtonDark} />
     {/if}
   {/if}
 </button>

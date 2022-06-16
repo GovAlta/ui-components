@@ -30,6 +30,9 @@
     <h2>Components</h2>
 
     <goa-chip content="Text" />
+  
+    <goa-divider spacing="small" />
+
     <goa-chip id="chip" deletable="true" content="Text" />
     <script>
       var chip = document.getElementById("chip");
@@ -594,6 +597,8 @@
     <goa-button-group>
       <goa-button type="secondary">Button</goa-button>
       <goa-button type="secondary" size="compact">Button</goa-button>
+      <goa-button type="secondary" leadingicon="add">Button</goa-button>
+      <goa-button type="secondary" leadingicon="add" size="compact">Button</goa-button>
     </goa-button-group>
     <br />
     <goa-button-group>
