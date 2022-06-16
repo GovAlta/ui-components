@@ -38,3 +38,5 @@ export { default as GoAFocusTrap } from "./components/focus-trap/FocusTrap.svelt
 
 // Wrappers
 export { default as ContainerWrapper } from './components/container/ContainerWrapper.test.svelte';
+
+export { default as Divider } from './components/divider/Divider.svelte';
