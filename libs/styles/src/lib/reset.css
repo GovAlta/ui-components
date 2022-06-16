@@ -88,16 +88,6 @@ a:focus {
   color: #999;
 }
 
-/* Typography */
-h1:first-child,
-h2:first-child,
-h3:first-child,
-h4:first-child,
-h5:first-child,
-h6:first-child {
-  margin-top: 0;
-}
-
 h1 {
   font-size: var(--fs-3xl);
   line-height: var(--lh-2xl);
