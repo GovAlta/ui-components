@@ -6,7 +6,6 @@ import {
   GoAInputTime,
   GoAInputDateTime,
   GoAInputEmail,
-  GoAInputSearch,
   GoAInputUrl,
   GoAInputTel,
   GoAInputFile,
@@ -84,7 +83,7 @@ export const InputTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-input name="foo" (_click)="onChange()"></goa-input>
+      <goa-input name="foo" (_change)="onChange()"></goa-input>
     `}
     />
     <CodeSnippet
@@ -197,6 +196,7 @@ export const IconButtonInputTemplate = () => (
       code={`
         <goa-input
           id="secret"
+          handletrailingiconclick="true"
           (_trailingIconClick)="handleClick()"
           trailingicon="finger-print"
         />
@@ -226,75 +226,6 @@ export const IconButtonInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Variant
-
-export const VariantInputTemplate = () => (
-  <>
-    <div style={{ padding: '2rem 1rem', backgroundColor: '#eee' }}>
-      <GoAInputSearch
-        name="foo"
-        variant="bare"
-        placeholder="Find by name"
-        onChange={noop}
-      />
-    </div>
-  </>
-);
-
-<Story name="Variant">{VariantInputTemplate.bind({})}</Story>
-
-<Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet
-      code={`<goa-input type="search" variant="bare" placeholder="Find by name" />`}
-      lang="html"
-    />
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet
-      code={`<goa-input type="search" variant="bare" placeholder="Find by name"></goa-input>`}
-      lang="html"
-    />
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet
-      code={`<GoAInputSearch name="foo" variant="bare" placeholder="Find by name" />`}
-      lang="jsx"
-    />
-  </Tab>
-</Tabs>
-
-### Readonly
-
-export const ReadonlyInputTemplate = () => (
-  <>
-    <GoAInput name="foo" readonly={true} value="Readonly" onChange={noop} />
-  </>
-);
-
-<Story name="Readonly">{ReadonlyInputTemplate.bind({})}</Story>
-
-<Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet
-      code={`<goa-input type="search" readonly="true" placeholder="Find by name" />`}
-      lang="html"
-    />
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet
-      code={`<goa-input type="search" readonly="true" placeholder="Find by name"></goa-input>`}
-      lang="html"
-    />
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet
-      code={`<GoAInputSearch readonly={true} placeholder="Find by name" />`}
-      lang="jsx"
-    />
-  </Tab>
-</Tabs>
-
 ### Disabled
 
 export const DisabledInputTemplate = () => (
@@ -308,19 +239,19 @@ export const DisabledInputTemplate = () => (
 <Tabs>
   <Tab label="Web Component">
     <CodeSnippet
-      code={`<goa-input type="search" disabled="true" placeholder="Find by name" />`}
+      code={`<goa-input disabled="true" placeholder="Find by name" />`}
       lang="html"
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
-      code={`<goa-input type="search" disabled="true" placeholder="Find by name"></goa-input>`}
+      code={`<goa-input disabled="true" placeholder="Find by name"></goa-input>`}
       lang="html"
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
-      code={`<GoAInputSearch disabled={true} placeholder="Find by name" />`}
+      code={`<GoAInput disabled={true} placeholder="Find by name" />`}
       lang="jsx"
     />
   </Tab>
@@ -360,13 +291,13 @@ export const FocusInputTemplate = () => (
 
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet code={`<goa-input error />`} lang="html" />
+    <CodeSnippet code={`<goa-input />`} lang="html" />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-input error></goa-input>`} lang="html" />
+    <CodeSnippet code={`<goa-input ></goa-input>`} lang="html" />
   </Tab>
   <Tab label="React">
-    <CodeSnippet code={`<GoAInput name="foo" error={true} />`} lang="jsx" />
+    <CodeSnippet code={`<GoAInput name="foo" />`} lang="jsx" />
   </Tab>
 </Tabs>
 
@@ -467,123 +398,6 @@ export const CharCountWithLimitTemplate = () => {
     />
   </Tab>
 </Tabs>
-
-### Types
-
-export const TypesInputTemplate = (args) => {
-  return (
-    <div style={{ display: 'flex', gap: '4px', flexDirection: 'column' }}>
-      <GoAInputText
-        name="basic"
-        placeholder="leading icon"
-        leadingIcon="person-circle"
-        onChange={noop}
-      />
-      <GoAInput
-        placeholder="trailing button"
-        trailingIcon="finger-print"
-        onTrailingIconClick={() => console.log('click')}
-        name="trailing-button"
-        onChange={noop}
-      />
-      <GoAInputPassword
-        placeholder="password"
-        name="password"
-        onChange={noop}
-      />
-      <GoAInputDate name="date" onChange={noop} />
-      <GoAInputTime name="time" onChange={noop} />
-      <GoAInputDateTime name="datetime" onChange={noop} />
-      <GoAInputEmail placeholder="email" name="email" onChange={noop} />
-      <GoAInputSearch placeholder="search" name="search" onChange={noop} />
-      <GoAInputUrl placeholder="url" name="url" onChange={noop} />
-      <GoAInputTel placeholder="phone number" name="tel" onChange={noop} />
-      <GoAInputFile name="file" onChange={noop} />
-      <GoAInputMonth name="month" onChange={noop} />
-      <GoAInputNumber name="number" onChange={noop} />
-      <GoAInputRange name="range" onChange={noop} />
-    </div>
-  );
-};
-
-<Story name="Types">{TypesInputTemplate.bind({})}</Story>
-
-<Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet
-      lang="html"
-      code={`
-      <goa-input type="text" placeholder="leading icon" leadingicon="person-circle" />
-      <goa-input id="trailing-button" type="text" placeholder="trailing button" trailingicon="finger-print" />
-      <goa-input type="password" placeholder="password" />
-      <goa-input type="date" />
-      <goa-input type="time" />
-      <goa-input type="datetime-local" />
-      <goa-input type="email" placeholder="email" />
-      <goa-input type="search" placeholder="search" />
-      <goa-input type="url" placeholder="url" />
-      <goa-input type="tel" placeholder="phone number" />
-      <goa-input type="file" />
-      <goa-input type="month" />
-      <goa-input type="number" />
-      <goa-input type="range" />
-    `}
-    />
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet
-      lang="html"
-      code={`
-      <goa-input type="text" placeholder="leading icon" leadingicon="person-circle"></goa-input>
-      <goa-input type="text" placeholder="trailing button" trailingicon="finger-print" (onClick)="handleClick()"></goa-input>
-      <goa-input type="password" placeholder="password"></goa-input>
-      <goa-input type="date"></goa-input>
-      <goa-input type="time"></goa-input>
-      <goa-input type="datetime-local"></goa-input>
-      <goa-input type="email" placeholder="email"></goa-input>
-      <goa-input type="search" placeholder="search"></goa-input>
-      <goa-input type="url" placeholder="url"></goa-input>
-      <goa-input type="tel" placeholder="phone number"></goa-input>
-      <goa-input type="file"></goa-input>
-      <goa-input type="month"></goa-input>
-      <goa-input type="number"></goa-input>
-      <goa-input type="range"></goa-input>
-    `}
-    />
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet
-      lang="html"
-      code={`
-      <GoAInputTextleadingIcon="person-circle" placeholder="leading icon" />
-      <GoAInput placeholder="trailing button" trailingIcon="finger-print" onTrailingIconClick={() => console.log('click')} />
-      <GoAInputPassword placeholder="password" />
-      <GoAInputDate />
-      <GoAInputTime />
-      <GoAInputDateTime />
-      <GoAInputEmail placeholder="email" />
-      <GoAInputSearch placeholder="search" />
-      <GoAInputUrl placeholder="url" />
-      <GoAInputTel placeholder="phone number" />
-      <GoAInputFile />
-      <GoAInputMonth />
-      <GoAInputNumber />
-      <GoAInputRange />
-    `}
-    />
-  </Tab>
-</Tabs>
-
-<Note type="best-practices">
-  <ul>
-    <li>Use Text Input if just one line is needed.</li>
-    <li>
-      Use labels over placeholders to indicate the attribute name for the text
-      fields.
-    </li>
-    <li>Use meaningful labels over icons.</li>
-  </ul>
-</Note>
 
 ---
 
