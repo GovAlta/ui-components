@@ -17,14 +17,8 @@
   (_change)="onInputChangeEvent($event)"
 ></goa-input>
 
-<h3>Variant</h3>
-<goa-input type="search" variant="bare" placeholder="Find by name"></goa-input>
-
-<h3>Readonly</h3>
-<goa-input type="search" readonly="true" placeholder="Find by name"></goa-input>
-
 <h3>Disabled</h3>
-<goa-input type="search" disabled="true" placeholder="Find by name"></goa-input>
+<goa-input disabled="true" placeholder="Find by name"></goa-input>
 
 <h3>Error state</h3>
 <goa-input error></goa-input>
@@ -37,28 +31,3 @@
 
 <h3>Character count with limit</h3>
 <goa-input name="firstname" showcounter="true" maxcharcount="20"></goa-input>
-
-<h3>Types</h3>
-<goa-input
-  type="text"
-  placeholder="leading icon"
-  leadingicon="person-circle"
-></goa-input>
-<goa-input
-  type="text"
-  placeholder="trailing button"
-  trailingicon="finger-print"
-  (_change)="onInputChangeEvent($event)"
-></goa-input>
-<goa-input type="password" placeholder="password"></goa-input>
-<goa-input type="date"></goa-input>
-<goa-input type="time"></goa-input>
-<goa-input type="datetime-local"></goa-input>
-<goa-input type="email" placeholder="email"></goa-input>
-<goa-input type="search" placeholder="search"></goa-input>
-<goa-input type="url" placeholder="url"></goa-input>
-<goa-input type="tel" placeholder="phone number"></goa-input>
-<goa-input type="file"></goa-input>
-<goa-input type="month"></goa-input>
-<goa-input type="number"></goa-input>
-<goa-input type="range"></goa-input>
