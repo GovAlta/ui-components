@@ -132,3 +132,11 @@ small {
   font-style: normal;
   color: var(--color-gray);
 }
+
+/* Components */
+
+goa-container h1:first-of-type,
+goa-container h2:first-of-type,
+goa-container h3:first-of-type {
+  margin-top: 0;
+}
