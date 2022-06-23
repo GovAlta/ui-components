@@ -202,13 +202,6 @@
   }
 
 
-  @media (min-width: 640px) {
-    .goa-input {
-      min-width: 0;
-      width: var(--width);
-    }
-  }
-
   /* type=range does not have an outline/box-shadow */
   .goa-input.type--range {
     border: none;

@@ -401,18 +401,40 @@ export const CharCountWithLimitTemplate = () => {
 
 ### Width 
 
-export const WidthTemplate = () => {
+export const WidthTemplate = ({width}) => {
   return (
+    <>
     <GoAInput
       name="firstname"
-      width="100%" 
-      placeholder="Can units of %, ch, px, etc"
+      placeholder="width allows for %, ch, px, etc"
       onChange={() => {}}
     />
+    <br />
+    <GoAInput
+      name="firstname"
+      width="100%"
+      placeholder="100%"
+      onChange={() => {}}
+    />
+    <br />
+    <GoAInput
+      name="firstname"
+      width="50%"
+      placeholder="50%"
+      onChange={() => {}}
+    />
+    <br />
+    <GoAInput
+      name="firstname"
+      width="20ch"
+      placeholder="20ch"
+      onChange={() => {}}
+    />
+    </>
   );
 };
 
-<Story name="Width">
+<Story name="Width" args={{ width: "80%"}}>
   {WidthTemplate.bind({})}
 </Story>
 
