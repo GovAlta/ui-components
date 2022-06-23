@@ -68,6 +68,7 @@
 
   .goa-badge {
     display: inline-flex;
+    align-items: center;
     border-radius: 0.25rem;
     padding: 3px 0.5rem; /* is calc(3 / 16 * 1rem) better for scaling? */
     gap: 0.25rem;
@@ -83,6 +84,7 @@
     text-transform: capitalize;
     font-size: var(--fs-sm);
     line-height: var(--lh-sm);
+    padding-bottom: var(--font-valign-fix);  /* acumin font requires this to allow for vertical alignment  */
   }
 
   .goa-badge.badge-information {

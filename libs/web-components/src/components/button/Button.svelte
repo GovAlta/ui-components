@@ -102,6 +102,7 @@
   }
 
   button {
+    display: flex;
     box-sizing: border-box;
     border-radius: 0.25rem;
     border: 2px solid var(--goa-color-interactive);
@@ -114,7 +115,6 @@
     letter-spacing: 0.5px;
     line-height: 100%;
     padding: 0 0.75rem;
-    display: flex;
 
     /* for leading and trailing icon vertical alignment */
     gap: 0.5rem;
@@ -122,6 +122,10 @@
     justify-content: center;
     transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out,
       border-color 0.2s ease-in-out;
+  }
+
+  .text {
+    padding-bottom: var(--font-valign-fix);  /* acumin font requires this to allow for vertical alignment  */
   }
 
   button:disabled {
