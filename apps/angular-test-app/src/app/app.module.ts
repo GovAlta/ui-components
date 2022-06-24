@@ -9,9 +9,13 @@ import { InputComponentComponent } from './input-component/input-component.compo
 import { ButtonComponentComponent } from './button-component/button-component.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationLinkComponent } from './navigation-link/navigation-link.component';
+import { TextAreaComponent } from './text-area/text-area.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import { RadioComponent } from './radio/radio.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 @NgModule({
-  declarations: [AppComponent, InputComponentComponent, ButtonComponentComponent, NavigationLinkComponent],
+  declarations: [AppComponent, InputComponentComponent, ButtonComponentComponent, NavigationLinkComponent, TextAreaComponent, CheckboxComponent, RadioComponent, DropdownComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
