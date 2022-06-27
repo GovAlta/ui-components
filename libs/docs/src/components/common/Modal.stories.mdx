@@ -297,7 +297,11 @@ export const TransitionsTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-button id="button">Open Modal</goa-button>
+      <goa-button-group>
+        <goa-button data-transition="none" type="tertiary">None</goa-button>
+        <goa-button data-transition="slow" type="tertiary">Slow</goa-button>
+        <goa-button data-transition="fast" type="tertiary">Fast (default)</goa-button>
+      </goa-button-group>
       <goa-modal id="modal" heading="Do you agree?" closable>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
@@ -312,12 +316,14 @@ export const TransitionsTemplate = (args) => {
     <CodeSnippet
       lang="js"
       code={`
-      const button = document.getElementById('button');
+      const buttons = document.getElementsByTagName('goa-button');
       const modal = document.getElementById('modal');
-      button.addEventListener('_click', () => {
-        modal.setAttribute("transition", "none"); // "fast" | "slow" | "none"
-        modal.setAttribute("open", true)
-      });
+      for (const button of buttons) {
+        button.addEventListener('_click', () => {
+          modal.setAttribute("transition", button.dataset.transition); 
+          modal.setAttribute("open", true)
+        });
+      }
       modal.addEventListener("_close", () => {
         modal.removeAttribute("open")
       });
@@ -328,7 +334,11 @@ export const TransitionsTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
+      <goa-button-group>
+        <goa-button type="tertiary" (_click)="openModal('none')">None</goa-button>
+        <goa-button type="tertiary" (_click)="openModal('slow')">Slow</goa-button>
+        <goa-button type="tertiary" (_click)="openModal('fast')">Fast (default)</goa-button>
+      </goa-button-group>
       <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable [transition]="transition">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
@@ -347,7 +357,8 @@ export const TransitionsTemplate = (args) => {
       export class SomeComponent {
         isOpen = false;
         transition: "fast" | "slow" | "none" = "fast";
-        openModal() {
+        openModal(transition) {
+          this.transition = transition;
           this.isOpen = true;
         }
         closeModal() {
