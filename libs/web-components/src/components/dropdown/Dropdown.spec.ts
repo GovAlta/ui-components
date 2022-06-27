@@ -251,7 +251,7 @@ describe('GoADropdown', () => {
   })
 
   describe("width", () => {
-    it("uses calculated width when not supplied", async () => {
+    it("dropdown should have the default width", async () => {
       const items = ["red", "blue", "pink"];
       const result = render(GoADropdown, {
         testid: 'test-id',
@@ -263,16 +263,17 @@ describe('GoADropdown', () => {
       const input = dropdown.querySelector('goa-input');
 
       await waitFor(() => {
-        expect(input).toHaveAttribute("width", "20ch");  // 20ch is min width when being calculated
+        expect(dropdown).toHaveStyle("--width: 20ch");
+        expect(input).toHaveAttribute("width", "100%");  // 20ch is min width when being calculated
       }) 
     });
 
-    it("uses the width supplied", async () => {
+    it("uses the non-percent width supplied", async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
         testid: 'test-id',
         name: 'favcolor',
-        width: "50%",
+        width: "500px",
         items,
       });
 
@@ -280,7 +281,26 @@ describe('GoADropdown', () => {
       const input = dropdown.querySelector('goa-input');
 
       await waitFor(() => {
-        expect(input).toHaveAttribute("width", "50%");
+        expect(dropdown).toHaveStyle("--width: 500px");
+        expect(input).toHaveAttribute("width", "100%");
+      });
+    });
+
+    it("sets the input width to 100% when percent value used", async () => {
+      const items = ["red", "blue", "orange"];
+      const result = render(GoADropdown, {
+        testid: 'test-id',
+        name: 'favcolor',
+        width: "100%",
+        items,
+      });
+
+      const dropdown = result.queryByTestId("test-id");
+      const input = dropdown.querySelector('goa-input');
+
+      await waitFor(() => {
+        expect(dropdown).toHaveStyle("--width: 100%");
+        expect(input).toHaveAttribute("width", "100%");
       });
     });
   })
