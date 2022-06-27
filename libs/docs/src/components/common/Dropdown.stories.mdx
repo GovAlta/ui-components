@@ -54,7 +54,6 @@ export const Template = (args) => {
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
       <goa-dropdown name="colors"
-          placeholder="Select a user"
           [value]="selectedColor"
           (_change)="selectColor($event)">
           <goa-dropdown-item
@@ -111,7 +110,7 @@ export const Template = (args) => {
   </Tab>
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
-      <goa-dropdown name="colors" placeholder="Select a user" error="true">
+      <goa-dropdown name="colors" error="true">
         <goa-dropdown-item value="red" name="colors" label="Red"></goa-dropdown-item>
         <goa-dropdown-item value="green" name="colors" label="Green"></goa-dropdown-item>
         <goa-dropdown-item value="blue" name="colors" label="Blue"></goa-dropdown-item>
