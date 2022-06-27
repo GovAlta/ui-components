@@ -4,10 +4,17 @@
 <script lang="ts">
   export let variant: 'primary' | 'info' | 'error' | 'success' | 'warning' | 'default' = 'default'
   export let headingsize: 'large' | 'small' | 'none' = 'large';
+  export let padding: "relaxed" | "compact" = "relaxed"
 </script>
 
 <!-- HTML -->
-<div class="goa-container goa-container--{variant}">
+<div 
+  class={`
+    goa-container 
+    goa-container--${variant}
+    padding--${padding}
+  `}
+>
   <header class="heading--{headingsize}">
     <div class="title">
       <slot name="title" />
@@ -29,6 +36,7 @@
     font-family: var(--font-family);
     font-size: var(--fs-base);
   }
+
   .goa-container {
     margin-bottom: 1rem;
     box-sizing: border-box;
@@ -39,7 +47,6 @@
   }
 
   header {
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,17 +57,52 @@
     border-style: solid;
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
   }
 
   .content {
-    padding: 1.5rem;
     border-bottom: 1px solid var(--color-gray-200);
     border-left: 1px solid var(--color-gray-200);
     border-right: 1px solid var(--color-gray-200);
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
+  }
+
+  .title > *,
+  .actions > * {
+    line-height: 3rem;
+  }
+
+  /* Padding variants */
+
+  .padding--relaxed header {
+    padding: 0 1.5rem;
+  } 
+
+  .padding--relaxed .content {
+    padding: 1.5rem;
+  } 
+
+  .padding--compact header,
+  .padding--compact .content {
+    padding: 0 1rem;
+  }
+
+  .padding--compact header {
+    padding: 0 1rem;
+  }
+
+  .padding--compact .content {
+    padding: 1rem;
+  }
+
+  /* Override padding in small screens to the compact value */
+  @media screen and (max-width: 480px) {
+    .padding--relaxed header {
+      padding: 0 1rem;
+    } 
+    .padding--relaxed .content {
+      padding: 1rem;
+    } 
   }
 
   /* colors */

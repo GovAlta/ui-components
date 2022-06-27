@@ -399,6 +399,81 @@ export const CharCountWithLimitTemplate = () => {
   </Tab>
 </Tabs>
 
+### Width 
+
+export const WidthTemplate = ({width}) => {
+  return (
+    <>
+    <GoAInput
+      name="firstname"
+      placeholder="width allows for %, ch, px, etc"
+      onChange={() => {}}
+    />
+    <br />
+    <GoAInput
+      name="firstname"
+      width="100%"
+      placeholder="100%"
+      onChange={() => {}}
+    />
+    <br />
+    <GoAInput
+      name="firstname"
+      width="50%"
+      placeholder="50%"
+      onChange={() => {}}
+    />
+    <br />
+    <GoAInput
+      name="firstname"
+      width="20ch"
+      placeholder="20ch"
+      onChange={() => {}}
+    />
+    </>
+  );
+};
+
+<Story name="Width" args={{ width: "80%"}}>
+  {WidthTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      code={`
+        <goa-input name="firstname" />
+        <goa-input name="firstname" width="100%" />
+        <goa-input name="firstname" width="50%" />
+        <goa-input name="firstname" width="20ch" />
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-input name="firstname"></goa-input>
+        <goa-input name="firstname" width="100%"></goa-input>
+        <goa-input name="firstname" width="50%"></goa-input>
+        <goa-input name="firstname" width="20ch"></goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAInput name="firstname" onChange={() => {}} />
+        <GoAInput name="firstname" width="100%" onChange={() => {}} />
+        <GoAInput name="firstname" width="50%" onChange={() => {}} />
+        <GoAInput name="firstname" width="20ch" onChange={() => {}} />
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
 ---
 
 <SupportInfo />

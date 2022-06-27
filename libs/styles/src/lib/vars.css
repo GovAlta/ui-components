@@ -101,6 +101,9 @@
 
   --page-width-max: 1440px;
 
+  /* acumin font requires this to allow for vertical alignment  */
+  --font-valign-fix: 0.1rem;
+
   /* components */
   --chip-font-size: 1rem;
 }

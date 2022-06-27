@@ -293,7 +293,9 @@ export const CharCountWithLimitTemplate = () => {
 
 #### Error state
 
-<GoATextArea name="comment" error={true} onChange={noop} />
+<Story name="Error State">
+  <GoATextArea name="comment" error={true} onChange={noop} />
+</Story>
 
 <Tabs>
   <Tab label="Web Component">
@@ -318,6 +320,33 @@ export const CharCountWithLimitTemplate = () => {
       code={`
       <GoATextArea error={true} name="comment" />
     `}
+    />
+  </Tab>
+</Tabs>
+
+### Width 
+
+<Story name="Width">
+  <GoATextArea name="comment" width="100%" onChange={noop} placeholder="Can units of %, ch, px, etc" />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet
+      code={`<goa-textarea name="firstname" width="100%" />`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`<goa-textarea name="firstname" width="100%"></goa-input>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`return <GoATextArea name="comment" width="100%" onChange={noop} /> `}
+      lang="tsx"
     />
   </Tab>
 </Tabs>

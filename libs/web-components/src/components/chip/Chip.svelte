@@ -44,7 +44,9 @@
   {#if leadingicon}
     <goa-icon class="leading-icon" size="medium" type={leadingicon} />
   {/if}
-  {content}
+  <div class="text">
+    {content}
+  </div>
   {#if _deletable}
     <goa-icon
       class="delete-icon"
@@ -90,6 +92,10 @@
     justify-content: center;
     margin: 0.25rem;
     padding: 0 0.75rem;
+  }
+
+  .text {
+    padding-bottom: var(--font-valign-fix);  /* acumin font requires this to allow for vertical alignment  */
   }
 
   .chip:focus {
