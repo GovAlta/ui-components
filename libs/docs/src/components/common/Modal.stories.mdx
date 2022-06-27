@@ -86,12 +86,12 @@ export const NoActionsTemplate = (args) => {
       lang="ts"
       code={`
       export class SomeComponent {
-        isOpen: boolean = false;
-        openModal(e) {
-          isOpen = true;
+        isOpen = false;
+        openModal() {
+          this.isOpen = true;
         }
-        closeModal(e) {
-          isOpen = false;
+        closeModal() {
+          this.isOpen = false;
         }
       }
     `}
@@ -213,12 +213,12 @@ export const ActionsTemplate = (args) => {
       lang="ts"
       code={`
       export class SomeComponent {
-        isOpen: boolean = false;
-        openModal(e) {
-          isOpen = true;
+        isOpen = false;
+        openModal() {
+          this.isOpen = true;
         }
-        closeModal(e) {
-          isOpen = false;
+        closeModal() {
+          this.isOpen = false;
         }
       }
     `}
@@ -345,13 +345,13 @@ export const TransitionsTemplate = (args) => {
       lang="ts"
       code={`
       export class SomeComponent {
-        isOpen: boolean = false;
+        isOpen = false;
         transition: "fast" | "slow" | "none" = "fast";
-        openModal(e) {
-          isOpen = true;
+        openModal() {
+          this.isOpen = true;
         }
-        closeModal(e) {
-          isOpen = false;
+        closeModal() {
+          this.isOpen = false;
         }
       }
     `}
