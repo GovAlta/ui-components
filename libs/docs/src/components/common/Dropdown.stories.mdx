@@ -68,9 +68,9 @@ export const Template = (args) => {
     <CodeSnippet lang="js" code={`
       export class MyComponent {
         colors: string[] = ['red', 'green', 'blue'];
-        selectedColors: string[] = ['red'];
+        selectedColor: string = 'red';
         selectColor(event: any) {
-          this.selectedColors = event.detail.value;
+          this.selectedColor = event.detail.value;
         }
       }
     `}/>

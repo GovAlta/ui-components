@@ -6,14 +6,16 @@ export * from './dropdown-option';
 interface WCProps {
   ref: React.MutableRefObject<HTMLElement | null>;
   name: string;
-  values: string;
+  value: string;
   leadingicon?: string;
-  maxheight?: number;
+  maxheight?: string;
   placeholder?: string;
   filterable?: boolean;
   disabled?: boolean;
   error?: boolean;
   multiselect?: boolean;
+  width?: string;
+  testid?: string;
 }
 
 declare global {
@@ -28,18 +30,19 @@ declare global {
 
 interface Props {
   name: string;
-  values: string[]
+  value: string[]
   onChange: (name: string, values: string[]) => void;
 
   // optional
   disabled?: boolean;
   filterable?: boolean;
   leadingIcon?: GoAIconType,
-  maxHeight?: number;
+  maxHeight?: string,
   error?: boolean;
   multiselect?: boolean;
   placeholder?: string;
   testId?: string;
+  width?: string;
 }
 
 export const GoADropdown: FC<Props> = (props) => {
@@ -51,8 +54,8 @@ export const GoADropdown: FC<Props> = (props) => {
     }
     const current = el.current;
     const handler = (state: any) => {
-      const { name, value } = state.detail;
-      props.onChange(name, value);
+      const { name, values } = state.detail;
+      props.onChange(name, values);
     };
     current.addEventListener('_change', handler);
     return () => {
@@ -64,7 +67,7 @@ export const GoADropdown: FC<Props> = (props) => {
     <goa-dropdown
       ref={el}
       name={props.name}
-      values={JSON.stringify(props.values)}
+      value={JSON.stringify(props.value)}
       leadingicon={props.leadingIcon}
       maxheight={props.maxHeight}
       placeholder={props.placeholder}
@@ -72,7 +75,8 @@ export const GoADropdown: FC<Props> = (props) => {
       disabled={props.disabled}
       multiselect={props.multiselect}
       error={props.error}
-      data-testid={props.testId}
+      testid={props.testId}
+      width={props.width}
     >
       {props.children}
     </goa-dropdown>

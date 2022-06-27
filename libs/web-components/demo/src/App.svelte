@@ -447,7 +447,7 @@
       var dropdown = document.getElementById("dropdown");
       dropdown.addEventListener("_change", e => {
         console.log("_change", e.detail);
-        dropdown.setAttribute("values", JSON.stringify(e.detail.value));
+        dropdown.setAttribute("value", e.detail.value);
       });
     </script>
 
