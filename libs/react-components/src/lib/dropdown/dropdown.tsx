@@ -30,8 +30,8 @@ declare global {
 
 interface Props {
   name: string;
-  value: string[]
-  onChange: (name: string, values: string[]) => void;
+  value: string[] | string;
+  onChange: (name: string, values: string[] | string) => void;
 
   // optional
   disabled?: boolean;
@@ -54,8 +54,8 @@ export const GoADropdown: FC<Props> = (props) => {
     }
     const current = el.current;
     const handler = (state: any) => {
-      const { name, values } = state.detail;
-      props.onChange(name, values);
+      const { name, value, values } = state.detail;
+      props.onChange(name, props.multiselect ? values : value);
     };
     current.addEventListener('_change', handler);
     return () => {

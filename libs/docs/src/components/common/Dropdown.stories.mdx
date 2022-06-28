@@ -78,7 +78,7 @@ export const Template = (args) => {
   <Tab label="React">
     <CodeSnippet lang="tsx" code={`
       const [value, setValue] = useState('green');
-      function onChange(name, value) {
+      function onChange(name: string, value: string | string[]) {
         setValue(value);
       }
       return (

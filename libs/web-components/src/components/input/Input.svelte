@@ -166,7 +166,7 @@
 
   @media (min-width: 640px) {
     .container {
-      max-width: var(--width);
+      width: var(--width);
     }
   }
 

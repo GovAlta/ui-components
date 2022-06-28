@@ -5,6 +5,7 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { onMount, onDestroy, tick } from "svelte";
   import { BIND, BindMessage, Option } from "./types";
+  import { toBoolean } from "../../common/utils";
 
   const MAX_HEIGHT = "300px";
 
@@ -15,14 +16,14 @@
   export let leadingicon: GoAIconType = null;
   export let maxheight: string = MAX_HEIGHT;
   export let placeholder: string = "";
-  export let disabled: boolean = false;
-  export let error: boolean = false;
   export let testid: string = "";
   export let width: string = "";
-  export let multiselect: boolean = false;
+  export let disabled: string = "false";
+  export let error: string = "false";
+  export let multiselect: string = "false";
 
-  // TODO: remove this once goa-input has the toBoolean method removed
-  $: isError = error ? "true" : "false";
+  $: _disabled = toBoolean(disabled);
+  $: _multiselect = toBoolean(multiselect);
 
   // Private
   let _values: string[] = [];
@@ -47,12 +48,12 @@
     let rawValue: string[];
     try {
       rawValue = JSON.parse(value || "[]");
-    } catch(e) {
+    } catch (e) {
       rawValue = [value];
     }
     const rawValues = typeof rawValue === "object" ? rawValue : [rawValue];
     // convert all values to strings to avoid later type comparison issues
-    _values = rawValues.map((val: unknown) => `${val}`)
+    _values = rawValues.map((val: unknown) => `${val}`);
 
     bindContext();
   });
@@ -61,7 +62,7 @@
     el.removeEventListener("focus", onFocus, true);
     el.removeEventListener("blur", onBlur, true);
     deleteContext(name);
-  })
+  });
 
   // Functions
 
@@ -70,12 +71,12 @@
     ctx.subscribe(data => {
       switch (data?.type) {
         case BIND: {
-          const _data = data as BindMessage
+          const _data = data as BindMessage;
           const selected = _values.includes(_data.value);
 
           options = [...options, { ..._data, selected }];
           if (selected) {
-            selectedLabel = _data.label
+            selectedLabel = _data.label;
           }
           if (!width && maxLetterCount < _data.label.length) {
             maxLetterCount = _data.label.length;
@@ -85,11 +86,11 @@
           break;
         }
       }
-    })
+    });
   }
 
   async function showMenu() {
-    if (disabled || isMenuVisible) {
+    if (_disabled || isMenuVisible) {
       return;
     }
     isMenuVisible = true;
@@ -120,9 +121,9 @@
   // Event handlers
 
   function onSelect(val: string, label: string) {
-    if (disabled) return;
+    if (_disabled) return;
     selectedLabel = label;
-    if (multiselect) {
+    if (_multiselect) {
       _values.push(val);
       el.dispatchEvent(
         new CustomEvent("_change", {
@@ -131,7 +132,7 @@
         }),
       );
     } else {
-      _values = [val]
+      _values = [val];
       el.dispatchEvent(
         new CustomEvent("_change", {
           composed: true,
@@ -190,13 +191,16 @@
   function onHighlight(e: Event) {
     highlightedIndex = Number((e.target as HTMLElement).dataset.index);
   }
-</script>
 
+</script>
 
 <!-- Template -->
 
-
-<div data-testid={testid} class="goa-dropdown-box" bind:this={el}>
+<div 
+  data-testid={testid} 
+  class="goa-dropdown-box" 
+  style={`--width: ${width || computedWidth}`}
+  bind:this={el}>
   <!-- background -->
   {#if isMenuVisible}
     <div
@@ -210,11 +214,11 @@
   <div data-testid={`${name}-dropdown`}>
     <goa-input
       on:click={showMenu}
-      error={isError}
+      error={error}
       {disabled}
       {leadingicon}
       {placeholder}
-      width={width || computedWidth}
+      width="100%"
       id={`${name}-dropdown-input`}
       name="search"
       readonly
@@ -266,7 +270,7 @@
 
   @media (min-width: 640px) {
     .goa-dropdown-box {
-      width: unset;
+      width: var(--width);
     }
   }
 

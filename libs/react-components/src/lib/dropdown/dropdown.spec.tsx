@@ -11,16 +11,16 @@ describe('GoADropdown', () => {
 
     const { baseElement } = render(
       <GoADropdown name="favColor" value={[]} onChange={fn}>
-        <GoADropdownOption label="Red" value="red" />
-        <GoADropdownOption label="Blue" value="blue" />
-        <GoADropdownOption label="Yellow" value="yellow" />
+        <GoADropdownOption name="favColor" label="Red" value="red" />
+        <GoADropdownOption name="favColor" label="Blue" value="blue" />
+        <GoADropdownOption name="favColor" label="Yellow" value="yellow" />
       </GoADropdown>
     );
 
     const el = baseElement.querySelector("goa-dropdown")
-    fireEvent(el, new CustomEvent("_change", { detail: { name: "favColor", values: ["blue"]}}));
+    fireEvent(el, new CustomEvent("_change", { detail: { name: "favColor", value: "blue"}}));
     await waitFor(() => {
-      expect(fn).toBeCalledWith('favColor', ['blue']);
+      expect(fn).toBeCalledWith('favColor', 'blue');
     });
   })
 
@@ -36,9 +36,9 @@ describe('GoADropdown', () => {
       testId="foo"
       width="200px"
       onChange={() => { }}>
-        <GoADropdownOption label="Red" value="red" />
-        <GoADropdownOption label="Blue" value="blue" />
-        <GoADropdownOption label="Yellow" value="yellow" />
+        <GoADropdownOption name="favColor" label="Red" value="red" />
+        <GoADropdownOption name="favColor" label="Blue" value="blue" />
+        <GoADropdownOption name="favColor" label="Yellow" value="yellow" />
     </GoADropdown>);
 
     const el = baseElement.querySelector("goa-dropdown")
