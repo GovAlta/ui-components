@@ -3,7 +3,8 @@
   name="desserts"
   text="Ice Cream"
   value="10"
-  (_change)="onChange($event)"
+  [checked]="checkbox1Checked"
+  (_change)="onChange()"
 >
 </goa-checkbox>
 
@@ -12,7 +13,8 @@
   name="desserts"
   text="Ice Cream"
   value="10"
-  checked
+  [checked]="checkbox2Checked"
+  (_change)="onChange2()"
 ></goa-checkbox>
 
 <h3>Disabled</h3>
@@ -24,4 +26,11 @@
 ></goa-checkbox>
 
 <h3>Error</h3>
-<goa-checkbox name="desserts" text="Ice Cream" value="10" error></goa-checkbox>
+<goa-checkbox
+  name="desserts"
+  text="Ice Cream"
+  value="10"
+  [checked]="checkbox3Checked"
+  (_change)="onChange3()"
+  error
+></goa-checkbox>

@@ -7,10 +7,22 @@ import { Component } from '@angular/core';
 })
 export class CheckboxComponent {
 
+  checkbox1Checked = false;
+  checkbox2Checked = true;
+  checkbox3Checked = false;
+
   constructor() { }
 
-  onChange(e: any) {
-    console.log(e.detail.name, e.detail.checked, e.detail.value);
+  onChange() {
+    this.checkbox1Checked = !this.checkbox1Checked;
+  }
+
+  onChange2() {
+    this.checkbox2Checked = !this.checkbox2Checked;
+  }
+
+  onChange3() {
+    this.checkbox3Checked = !this.checkbox3Checked;
   }
 
 }
