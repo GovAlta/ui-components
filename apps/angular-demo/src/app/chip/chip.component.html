@@ -1,0 +1,25 @@
+<h3>Basic</h3>
+<goa-chip content="Chip Text"></goa-chip>
+
+<br />
+<h3>Leading icon</h3>
+<goa-chip content="Chip Text" leadingicon="close-circle"></goa-chip>
+
+<br />
+<h3>Delete event</h3>
+<goa-chip
+  *ngFor="let chip of chips"
+  [content]="chip"
+  deletable="true"
+  (_click)="deleteChip(chip)"
+></goa-chip>
+
+<br />
+<h3>Error state</h3>
+<goa-chip content="Chip Text" error="true"></goa-chip>
+<goa-chip
+  content="Chip Text"
+  error="true"
+  deletable="true"
+  (_click)="onClick()"
+></goa-chip>
