@@ -1,11 +1,11 @@
 name: Dependabot Jira
 
 on:
-  pull_request:
+  issues:
     types:
       - opened
     branches:
-      - master
+      - alpha
 
 env:
   JIRA_BASE_URL: https://goa-dio.atlassian.net
