@@ -18,7 +18,6 @@ jobs:
   create_jira:
     name: Dependabot Jira
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.id == 27856297 #id dependabot user
     steps:
     - name: Login to Jira
       uses: atlassian/gajira-login@v2.0.0
