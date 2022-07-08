@@ -16,7 +16,9 @@ import { CircularProgressComponent } from './circular-progress/circular-progress
 import { HeroBannerComponent } from './hero-banner/hero-banner.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { MicrositeHeaderComponent } from './microsite-header/microsite-header.component';
-
+import { ContainerComponent } from './container/container.component';
+import { SkeletonComponent } from './skeleton/skeleton.component';
+import { FormItemComponent } from './form-item/form-item.component';
 
 const routes: Routes = [
   { path: 'button', component: ButtonComponentComponent },
@@ -30,6 +32,9 @@ const routes: Routes = [
   { path: 'badge', component: BadgeComponent },
   { path: 'callout', component: CalloutComponent },
   { path: 'chip', component: ChipComponent },
+  { path: 'container', component: ContainerComponent },
+  { path: 'skeleton', component: SkeletonComponent },
+  { path: 'form-item', component: FormItemComponent },
   { path: 'circular-progress', component: CircularProgressComponent },
   { path: 'hero-banner', component: HeroBannerComponent },
   { path: 'microsite-header', component: MicrositeHeaderComponent },
