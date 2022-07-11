@@ -7,7 +7,7 @@ export type CircularProgressSize = "small" | "large";
 interface WCProps {
   type?: CircularProgressType;
   variant?: CircularProgressVariant;
-  size?: CircularProgressSize;
+  size: CircularProgressSize;
   message?: string;
   visible?: string;
   progress?: number;
@@ -26,7 +26,7 @@ declare global {
 export interface CircularProgressProps {
   type?: CircularProgressType;
   variant?: CircularProgressVariant;
-  size?: CircularProgressSize;
+  size: CircularProgressSize;
   message?: string;
   visible?: boolean;
   progress?: number;
