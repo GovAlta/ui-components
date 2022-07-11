@@ -87,8 +87,7 @@
   }
 
   .goa-radio-group--vertical {
-    display: flex;
-    flex-direction: column;
+    display: inline-block;
   }
 
   /* Radio Items */
@@ -98,8 +97,9 @@
     --goa-radio-border-width: 1px;
     --goa-radio-border-width--checked: 7px;
 
+    display: inline-block;
     box-sizing: border-box;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     min-height: 3rem;
   }
