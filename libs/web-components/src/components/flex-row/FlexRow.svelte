@@ -21,7 +21,9 @@
   }
 
   .goa-flex-row {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
   }
 
   @media (min-width: 640px) {

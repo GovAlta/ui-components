@@ -17,7 +17,7 @@ import { GoAChip } from './lib/chip/chip';
 import { GoACircularProgress } from './lib/circular-progress/circular-progress';
 import { GoAContainer } from './lib/container/container';
 import { GoADropdown, GoADropdownOption } from './lib/dropdown/dropdown';
-import { GoAFlexRow } from './lib/flex';
+import { GoAFlexRow } from './lib/flex-row/flex-row';
 import { GoAFormItem } from './lib/form';
 import { GoAHeroBanner } from './lib/hero-banner/hero-banner';
 import { GoAHeroBannerActions } from './lib/hero-banner/hero-banner-actions';
