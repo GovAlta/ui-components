@@ -40,6 +40,9 @@ import type { GoABadgeType } from './lib/badge/badge';
 export * from './lib/flex-column/flex-column';
 
 export * from './lib/page/page';
+
+export * from './lib/divider/divider';
+
 export type { GoAIconType };
 export type { GoABadgeType };
 
