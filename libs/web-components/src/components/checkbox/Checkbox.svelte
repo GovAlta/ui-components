@@ -5,16 +5,15 @@
   import { toBoolean } from "../../common/utils";
   // Required
   export let name: string;
+  export let checked: string;
 
   // Optional values
   export let text: string = "";
   export let value: string = "";
-  export let checked: string;
   export let disabled: string;
   export let error: string;
   export let testid: string = "";
 
-  $: id = `id-${name}`;
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
@@ -38,14 +37,14 @@
 <!-- View -->
 
 <label
-  for={id}
+  for={name}
   class="goa-checkbox"
   class:goa-checkbox--disabled={isDisabled}
   class:goa-checkbox--error={isError}
 >
   <div class="goa-checkbox-container" class:goa-checkbox--selected={isChecked}>
     <input
-      {id}
+      id={name}
       data-testid={testid}
       {name}
       checked={isChecked}
@@ -75,7 +74,7 @@
     {/if}
   </div>
   <div class="goa-checkbox-text" data-testid="text">
-    <slot name="main">
+    <slot>
       {text}
     </slot>
   </div>
@@ -86,6 +85,7 @@
   :host {
     box-sizing: border-box;
     font-family: var(--font-family);
+    display: block;
   }
   .goa-checkbox {
     display: inline-flex;
