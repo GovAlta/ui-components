@@ -11,16 +11,19 @@ When(/^cs Navigating to Text Area component$/, function () {
 
 Then(/^cs I should be able to validate css properties of a basic TextArea$/, function () {
   cy.get('goa-textarea[name="comment"]').should("be.visible");
+  //cy.get('goa-textarea[name="comment"]').focus()
   cy.get('goa-textarea[name="comment"]').find('textarea').should("have.css", "border", "1px solid " + hexToRgb(properties["color-gray-600"]));
   cy.get('goa-textarea[name="comment"]').find('textarea').should("have.css", "background", hexToRgb(properties["goa-color-text-light"]) + " none repeat scroll 0% 0% / auto padding-box border-box");
   cy.get('goa-textarea[name="comment"]').find('textarea').should("have.css", "color", hexToRgb(properties["goa-color-text"]))
   cy.get('goa-textarea[name="comment"]').find('textarea').should("have.css", "padding", remToPx(properties["input-padding"]))
   cy.get('goa-textarea[name="comment"]').find('textarea').should("have.css", "font-size", remToPx(properties["input-font-size"]))
   cy.get('goa-textarea[name="comment"]').find('textarea').should("have.css", "font-family", (properties["font-family"]))
+  // cy.get('goa-textarea[name="comment"]').find('textarea').should("have.css", "width", "60ch")
 });
 Then(/^cs I should be able to validate css properties of a inFocus TextArea$/, function () {
-  cy.get('goa-textarea[name="comment"]').find('textarea').eq(0).click({ force: true })
-  // cy.get('goa-textarea[name="comment"]').find('goa-textarea').should("have.css", "box-shadow", "0 0 0 3px " + hexToRgb(properties["goa-color-interactive-focus"]));
+  cy.get('goa-textarea[name="comment-basic"]').find('textarea').focus()
+  // cy.get('goa-textarea[name="comment"]').find('textarea').eq(0).focus()
+  cy.get('goa-textarea[name="comment-basic"]').find('.goa-textarea').should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"])+" 0px 0px 0px 3px");
 
 });
 Then(/^cs I should be able to validate css properties of a Disabled TextArea$/, function () {
@@ -31,6 +34,13 @@ Then(/^cs I should be able to validate css properties of a Disabled TextArea$/, 
 Then(/^cs I should be able to validate css properties of a ErrorSate TextArea$/, function () {
   cy.get('goa-textarea[name="comment"]').find('textarea[class="goa-textarea error"]').eq(0).should("be.visible");
   cy.get('goa-textarea[name="comment"]').find('textarea[class="goa-textarea error"]').should("have.css", "border-color", hexToRgb(properties["goa-color-interactiveerror"]));
+  cy.get('goa-textarea[name="comment"]').find('textarea[class="goa-textarea error"]').focus()
+  // cy.get('goa-textarea[name="comment"]').filter((k, el) => {
+  //   const color = window.getComputedStyle(el).getPropertyValue('box-shadow')
+  //   return color === 'test'
+  // })
+  //cy.pause()
+  cy.get('goa-textarea[name="comment"]').find('textarea[class="goa-textarea error"]').should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]) + " 0px 0px 0px 3px");
 
 });
 
