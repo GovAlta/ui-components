@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Login to Jira
-      uses: acquia/gajira-login@server
+      uses: chrisolsen/gajira-login@master
       env:
         JIRA_BASE_URL: ${{ env.JIRA_BASE_URL }}
         JIRA_USER_EMAIL: ${{ env.JIRA_USER_EMAIL }}
-        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        JIRA_API_TOKEN: ${{ env.JIRA_API_TOKEN }}
 
     - name: Create Jira Issue
       id: create
