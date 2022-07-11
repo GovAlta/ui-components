@@ -12,23 +12,24 @@ When(/^cs Navigating to Modal basic component$/, function () {
 });
 
 Then(/^cs I should be able to validate modal component Title css properties$/, function () {
-  cy.get('div[data-testid="modal-title"]').should("have.css", "font-size",remToPx(properties["fs-xl"]));
-  cy.get('div[data-testid="modal-title"]').should("have.css", "color",hexToRgb(properties["goa-color-text"]));
-  cy.get('div[data-testid="modal-title"]').should("have.css", "font-family",remToPx(properties["font-family"]));
-
+  cy.get('div[data-testid="modal-title"]').should("have.css", "font-size", remToPx(properties["fs-xl"]));
+  cy.get('div[data-testid="modal-title"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('div[data-testid="modal-title"]').should("have.css", "font-family", properties["font-family"]);
 });
 
 Then(/^cs I should be able to validate modal component content css properties$/, function () {
-  cy.get('div[data-testid="modal-content"]').should("have.css", "margin",remToPx(properties["spacing-3"]));
-  cy.get('div[data-testid="modal-content"]').should("have.css", "font-size",remToPx(properties["fs-xl"]));
-  cy.get('div[data-testid="modal-content"]').should("have.css", "color",hexToRgb(properties["goa-color-text"]));
-  cy.get('div[data-testid="modal-content"]').should("have.css", "font-family",remToPx(properties["font-family"]));
-
+  cy.get('div[data-testid="modal-content"]').should("have.css", "margin", remToPx(properties["model-content-margin"]));
+  cy.get('div[data-testid="modal-content"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('div[data-testid="modal-content"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('div[data-testid="modal-content"]').should("have.css", "font-family", properties["font-family"]);
 });
 
-Then(/^cs cs I should be able to validate modal component close icon css properties$/, function () {
-  cy.get('div[data-testid="icon-close"]').should("have.css", "size",remToPx(properties["lh-base"]));
-});
+// Then(/^cs I should be able to validate modal component close icon css properties$/, function () {
+//   cy.get('div.modal-close').find('button[class="goa-icon-button goa-icon-button--color"').should("have.css")
+//   // , "size", remToPx(properties["lh-base"])); find('goa-icon-button[data-testid="modal-close-button"]').
+//   // cy.get('div[data-testid="icon-close"]').should("have.css", "size", remToPx(properties["lh-base"]));
+//   cy.get('div[data-testid="icon-close"]').should("have.css", "border-radius", remToPx(properties["border-radius-lg"]));
+// });
 
 
 function remToPx(rem) {

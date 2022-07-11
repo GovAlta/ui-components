@@ -12,29 +12,22 @@ When(/^cs Navigating to Basic chip component$/, function () {
 });
 
 Then(/^cs I should be able to validate basic chip css property$/, function () {
-  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "background-color", hexToRgb(properties["color-white"]));
-  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "border", "1px solid" + hexToRgb(properties["#949494"]));
-  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
-  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "font-size", hexToRgb(properties["chip-font-size"]));
-  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "font-weight", hexToRgb(properties["fw-regular"]));
-
-
+  // cy.get('goa-chip[content="Chip Text"]').find('div[class="chip"]').should("have.css", "background-color", hexToRgb(properties["color-white"]));
+  cy.get('goa-chip[content="Chip Text"]').find('div[class="chip"]').should("have.css", "border", "1px solid " + hexToRgb(properties["chip-error-border-color"]));
+  cy.get('goa-chip[content="Chip Text"]').find('div[class="chip"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  // cy.get('goa-chip[content="Chip Text"]').find('div[class="chip"]').should("have.css", "font-size", hexToRgb(properties["chip-font-size"]));
+  // cy.get('goa-chip[content="Chip Text"]').find('div[class="chip"]').should("have.css", "font-weight", hexToRgb(properties["fw-regular"]));
 });
 
 Then(/^cs I should be able to validat basic chip css property onClick$/, function () {
   cy.get('goa-chip[content="Chip Text"]').eq(0).rightclick({ force: true })
   cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "background-color", hexToRgb(properties["color-gray-200"]));
-  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "outline", "2px solid" + hexToRgb(properties["goa-color-interactive--focus"]));
+  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "outline", "2px solid " + hexToRgb(properties["goa-color-interactivefocus"]));
   cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
   cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "font-size", hexToRgb(properties["chip-font-size"]));
   cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "font-weight", hexToRgb(properties["fw-regular"]));
-  // cy.get('goa-chip.div[data-testid="chip"]').should("have.css", "background-
-
 });
 
-// Then(/^cs I should be able to validate box css property when clicked border color change$/, function () {
-//   cy.get('goa-input').get('#foo').shadow().find('input[class="input--goa"]').should("have.css", "--goa-color-interactive-focus");
-// });
 function remToPx(rem) {
   return rem.replace("rem", "") * 16 + "px";
 }

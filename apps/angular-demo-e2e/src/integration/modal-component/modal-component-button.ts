@@ -14,37 +14,36 @@ When(/^cs Navigating to Modal basic component$/, function () {
 Then(/^cs I should be able to validate modal component Title css properties$/, function () {
   cy.get('div[data-testid="modal-title"]').should("have.css", "font-size", remToPx(properties["fs-xl"]));
   cy.get('div[data-testid="modal-title"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
-  cy.get('div[data-testid="modal-title"]').should("have.css", "font-family", remToPx(properties["font-family"]));
-
+  cy.get('div[data-testid="modal-title"]').should("have.css", "font-family", properties["font-family"]);
 });
 
 Then(/^cs I should be able to validate modal component content css properties$/, function () {
-  cy.get('div[data-testid="modal-content"]').should("have.css", "margin", remToPx(properties["spacing-3"]));
-  cy.get('div[data-testid="modal-content"]').should("have.css", "font-size", remToPx(properties["fs-xl"]));
+  cy.get('div[data-testid="modal-content"]').should("have.css", "margin", remToPx(properties["model-content-margin"]));
+  cy.get('div[data-testid="modal-content"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
   cy.get('div[data-testid="modal-content"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
-  cy.get('div[data-testid="modal-content"]').should("have.css", "font-family", remToPx(properties["font-family"]));
+  cy.get('div[data-testid="modal-content"]').should("have.css", "font-family", properties["font-family"]);
 
 });
 
-Then(/^cs cs I should be able to validate modal component Primary button css properties$/, function () {
-  cy.get('goa-button[type="primary"]').find('button.primary.compact').should("have.css", 'background-color', hexToRgb(properties["goa-color-interactive"]));
-  cy.get('goa-button[type="primary"]').find('button.primary.compact').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactiveactive"]));
-  cy.get('goa-button[type="primary"]').find('button.primary.compact').should("have.css", "border");
-  cy.get('goa-button[type="primary"]').find('button.primary.compact').should("have.css", "border-radius", remToPx(properties["border-radius"]));
-  cy.get('goa-button[type="primary"]').find('button.primary.compact').should("have.css", "font-family", properties["font-family"]);
-  cy.get('goa-button[type="primary"]').find('button.primary.compact').should("have.css", "height", remToPx(properties["button-height-compact"]));
-  cy.get('goa-button[type="primary"]').find('button.primary.compact').should("have.css", "color", hexToRgb(properties["goa-color-text-light"]));
-  cy.get('goa-button[type="primary"]').find('button.primary.compact').should("have.css", "font-size", remToPx(properties["fs-base"]));
+Then(/^cs I should be able to validate modal component Primary button css properties$/, function () {
+  cy.get('button.primary').should("have.css", 'background-color', hexToRgb(properties["goa-color-interactive"]));
+  cy.get('button.primary').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactive--active"]));
+  cy.get('button.primary').should("have.css", "border");
+  cy.get('button.primary').should("have.css", "border-radius", remToPx(properties["border-radius"]));
+  cy.get('button.primary').should("have.css", "font-family", properties["font-family"]);
+  cy.get('button.primary').should("have.css", "height", remToPx(properties["button-height"]));
+  cy.get('button.primary').should("have.css", "color", hexToRgb(properties["goa-color-text-light"]));
+  cy.get('button.primary').should("have.css", "font-size", remToPx(properties["fs-lg"]));
 });
 
-Then(/^cs cs I should be able to validate modal component Secondary button css properties$/, function () {
-  cy.get('goa-button[type="secondary"]').find('button.secondary.compact').should("have.css", "border");
-  cy.get('goa-button[type="secondary"]').find('button.secondary.compact').should("have.css", "border-radius", remToPx(properties["border-radius"]));
-  cy.get('goa-button[type="secondary"]').find('button.secondary.compact').should("have.css", "font-family", properties["font-family"]);
-  cy.get('goa-button[type="secondary"]').find('button.secondary.compact').should("have.css", "height", remToPx(properties["button-height-compact"]));
-  cy.get('goa-button[type="secondary"]').find('button.secondary.compact').should("have.css", "color", hexToRgb(properties["goa-color-interactive"]));
-  cy.get('goa-button[type="secondary"]').find('button.secondary.compact').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactivehover"]));
-  cy.get('goa-button[type="secondary"]').find('button.secondary.compact').should("have.css", "font-size", remToPx(properties["fs-base"]))
+Then(/^cs I should be able to validate modal component Secondary button css properties$/, function () {
+  cy.get('button.secondary').should("have.css", "border");
+  cy.get('button.secondary').should("have.css", "border-radius", remToPx(properties["border-radius"]));
+  cy.get('button.secondary').should("have.css", "font-family", properties["font-family"]);
+  cy.get('button.secondary').should("have.css", "height", remToPx(properties["button-height"]));
+  cy.get('button.secondary').should("have.css", "color", hexToRgb(properties["goa-color-interactive"]));
+  cy.get('button.secondary').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactive--active"]));
+  cy.get('button.secondary').should("have.css", "font-size", remToPx(properties["fs-lg"]))
 });
 
 

@@ -48,6 +48,7 @@
   "goa-color-interactivefocus": "#feba35",
   "goa-color-interactiveerror": "#ec040b",
   "goa-color-brand": "#0081a2",
+  "chip-border-color":"#949494",
   "goa-color-brand-light": "#c8eefa",
   "goa-color-brand-dark": "#005072",
   "goa-color-primary": "#005daa",
@@ -78,5 +79,8 @@
   "goa-radio-diameter": "1.5rem",
   "goa-radio-border-width": "1px",
   "goa-radio-border-width--checked": "7px",
-  "goa-color-interactive--active": "#004f84"
+  "goa-color-interactive--active": "#004f84",
+  "chip-error-border-color": "#949494",
+  "model-content-margin-bottom": "1rem",
+  "model-content-margin": "0"
 }

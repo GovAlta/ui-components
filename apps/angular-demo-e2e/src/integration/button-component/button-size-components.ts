@@ -26,7 +26,7 @@ Then(/^cs I should be able to validate sizes Compact Secondary button css proper
   cy.get('goa-button[type="secondary"]').find('button.secondary.compact').should("have.css", "font-family", properties["font-family"]);
   cy.get('goa-button[type="secondary"]').find('button.secondary.compact').should("have.css", "height", remToPx(properties["button-height-compact"]));
   cy.get('goa-button[type="secondary"]').find('button.secondary.compact').should("have.css", "color", hexToRgb(properties["goa-color-interactive"]));
-  cy.get('goa-button[type="secondary"]').find('button.secondary.compact').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactivehover"]));
+  cy.get('goa-button[type="secondary"]').find('button.secondary.compact').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactiveactive"]));
   cy.get('goa-button[type="secondary"]').find('button.secondary.compact').should("have.css", "font-size", remToPx(properties["fs-base"]));
 });
 
