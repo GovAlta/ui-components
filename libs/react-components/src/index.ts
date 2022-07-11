@@ -38,6 +38,8 @@ import type { GoAIconType } from './lib/icons';
 import type { GoABadgeType } from './lib/badge/badge';
 
 export * from './lib/flex-column/flex-column';
+
+export * from './lib/page/page';
 export type { GoAIconType };
 export type { GoABadgeType };
 

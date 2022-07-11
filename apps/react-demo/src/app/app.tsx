@@ -22,7 +22,7 @@ export function App() {
         <a href="#">Sign in</a>
       </GoAAppHeader>
 
-      <GoAPageBlock>
+      <GoAPageBlock width="704px">
         <form>
           <GoAFormItem label="First Name">
             <GoAInput id="firstname" name="firstname" type="text" value={firstName} onChange={(_name, value) => setFirstName(value) } />
