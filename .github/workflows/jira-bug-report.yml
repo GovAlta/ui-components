@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Login to Jira
-      uses: danepowell/gajira-login@bearer
+      uses: acquia/gajira-login@server
       env:
         JIRA_BASE_URL: ${{ env.JIRA_BASE_URL }}
         JIRA_USER_EMAIL: ${{ env.JIRA_USER_EMAIL }}
