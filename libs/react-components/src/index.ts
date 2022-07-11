@@ -2,13 +2,37 @@
  * IMPORTANT: Do NOT export experimental components in this file.
  */
 
-import '@abgov/web-components'
+import '@abgov/web-components';
+
+import {
+  GoABadge,
+  GoAInfoBadge,
+  GoAEmergencyBadge,
+  GoASuccessBadge,
+  GoAWarningBadge,
+} from './lib/badge/badge';
+
+import {
+  GoAInput,
+  GoAInputText,
+  GoAInputPassword,
+  GoAInputDate,
+  GoAInputTime,
+  GoAInputDateTime,
+  GoAInputEmail,
+  GoAInputSearch,
+  GoAInputUrl,
+  GoAInputTel,
+  GoAInputFile,
+  GoAInputMonth,
+  GoAInputNumber,
+  GoAInputRange,
+} from './lib/input/input';
 
 import { GoAAppHeader } from './lib/app-header/app-header';
 import { GoAAppFooter } from './lib/app-footer/app-footer';
 import { GoAMetaLink } from './lib/app-footer/meta-link';
 import { GoANavigationLink } from './lib/app-footer/navigation-link';
-import { GoABadge, GoAInfoBadge, GoAEmergencyBadge, GoASuccessBadge, GoAWarningBadge } from './lib/badge/badge';
 import { GoAButton } from './lib/button/button';
 import { GoAButtonGroup } from './lib/button-group/button-group';
 import { GoACallout } from './lib/callout/callout';
@@ -22,7 +46,6 @@ import { GoAFormItem } from './lib/form';
 import { GoAHeroBanner } from './lib/hero-banner/hero-banner';
 import { GoAHeroBannerActions } from './lib/hero-banner/hero-banner-actions';
 import { GoAIcon, GoAIconButton } from './lib/icons';
-import { GoAInput, GoAInputText, GoAInputPassword, GoAInputDate, GoAInputTime, GoAInputDateTime, GoAInputEmail, GoAInputSearch, GoAInputUrl, GoAInputTel, GoAInputFile, GoAInputMonth, GoAInputNumber, GoAInputRange } from './lib/input/input';
 import { GoAMicrositeHeader } from './lib/microsite-header/microsite-header';
 import { GoAModal } from './lib/modal/modal';
 import { GoANotification } from './lib/notification/notification';
