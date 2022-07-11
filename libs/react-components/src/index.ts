@@ -36,6 +36,8 @@ import { GoATextArea } from './lib/textarea/textarea';
 import type { GoAIconType } from './lib/icons';
 // import type { BadgeType as GoABadgeType } from '@abgov/shared-common'
 import type { GoABadgeType } from './lib/badge/badge';
+
+export * from './lib/flex-column/flex-column';
 export type { GoAIconType };
 export type { GoABadgeType };
 
