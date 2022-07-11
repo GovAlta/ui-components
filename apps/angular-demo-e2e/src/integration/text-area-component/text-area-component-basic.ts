@@ -35,11 +35,6 @@ Then(/^cs I should be able to validate css properties of a ErrorSate TextArea$/,
   cy.get('goa-textarea[name="comment"]').find('textarea[class="goa-textarea error"]').eq(0).should("be.visible");
   cy.get('goa-textarea[name="comment"]').find('textarea[class="goa-textarea error"]').should("have.css", "border-color", hexToRgb(properties["goa-color-interactiveerror"]));
   cy.get('goa-textarea[name="comment"]').find('textarea[class="goa-textarea error"]').focus()
-  // cy.get('goa-textarea[name="comment"]').filter((k, el) => {
-  //   const color = window.getComputedStyle(el).getPropertyValue('box-shadow')
-  //   return color === 'test'
-  // })
-  //cy.pause()
   cy.get('goa-textarea[name="comment"]').find('textarea[class="goa-textarea error"]').should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]) + " 0px 0px 0px 3px");
 
 });
