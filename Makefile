@@ -7,24 +7,30 @@
 
 
 # svelte library 
-csl:
+sl:
 	npx nx generate @nxext/svelte:library $(name) --e2eTestRunner=none --skipFormat --no-interactive --buildable --publishable --importPath=@abgov/$(name)
 
 # svelte component
-csc:
+sc:
 	npx nx generate @nxext/svelte:component $(name) --project=web-components --no-interactive
 
 # react component
-crc:
+rc:
 	npx nx generate @nrwl/react:component $(name) --project=react-components --style=none --export --no-interactive
 
 
 # BUILD
 
-
-build:
+web-components:
 	npm run build web-components --withDeps --configuration production
 
+styles:
+	npm run build styles --withDeps --configuration production
+
+react-components:
+	npm run build react-components --withDeps --configuration production
+
+build: styles web-components react-components
 
 # RUN 
 
@@ -37,11 +43,8 @@ storybook:
 storybook-new:
 	cp libs/docs/src/_stories.mdx.template libs/docs/src/components/common/$(name).stories.mdx
 
-styles:
-	npm run build styles --withDeps --configuration production
-
 react-app:
-	npx nx run react-demo:serve
+	npx nx run react-demo:serve & (cd libs/web-components && npm run dev)
 
 demo:
 	cd libs/web-components && npm run demo
@@ -52,3 +55,6 @@ demo:
 
 test:	
 	npm run test:watch
+
+
+.DEFAULT_GOAL := build
