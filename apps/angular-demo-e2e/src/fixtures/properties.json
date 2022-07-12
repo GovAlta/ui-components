@@ -20,6 +20,7 @@
   "lh-xl": "2.75rem",
   "lh-2xl": "3.5rem",
   "box-sizing": "border-box",
+  "input-box-sizing": "content-box",
   "border-radius-sm": "0.15rem",
   "border-radius": "0.25rem",
   "border-radius-base": "0.25rem",
@@ -82,5 +83,13 @@
   "goa-color-interactive--active": "#004f84",
   "chip-error-border-color": "#949494",
   "model-content-margin-bottom": "1rem",
-  "model-content-margin": "0"
+  "model-content-margin": "0",
+  "input-border-radius-0px" : "0px",
+  "footer-max-width": "60rem",
+  "footer-navigator-column-count": "3",
+  "footer-navigator-column-gap": "1.75rem",
+  "footer-multi-section-padding-top": "1.75rem",
+  "footer-navigator-multi-flex-grow": "1",
+  "footer-navigator-multi-allservice-column-flex-grow": "2",
+  "footer-navigator-multi-social-column-flex-grow": "2"
 }
