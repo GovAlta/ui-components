@@ -13,7 +13,7 @@ interface CheckboxProps {
   ref: React.RefObject<HTMLElement>;
   id?: string;
   name: string;
-  checked?: boolean;
+  checked: boolean;
   disabled?: boolean;
   error?: boolean;
   text?: string;
@@ -24,7 +24,7 @@ interface CheckboxProps {
 export interface Props {
   id?: string;
   name: string;
-  checked?: boolean;
+  checked: boolean;
   disabled?: boolean;
   error?: boolean;
   text?: string;

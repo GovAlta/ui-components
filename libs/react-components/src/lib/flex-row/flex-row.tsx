@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 interface WCProps {
-  gap: 'small' | 'medium' | 'large';
+  gap?: 'small' | 'medium' | 'large';
 }
 
 
@@ -16,7 +16,7 @@ declare global {
 
 
 export interface Props {
-  gap: 'small' | 'medium' | 'large';
+  gap?: 'small' | 'medium' | 'large';
 };
 
 

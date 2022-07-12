@@ -166,8 +166,12 @@ export const GoAInputMonth: FC<Props> = (props) => {
   return <GoAInput {...props} type="month" />;
 }
 
-export const GoAInputNumber: FC<Props & { min?: number, max?: number, step?: number }> = (props) => {
-  return <GoAInput {...props} type="number" />;
+export const GoAInputNumber: FC<
+  Omit<Props, "value"> 
+  & { value: number }  
+  & { min?: number, max?: number, step?: number }
+  > = (props) => {
+  return <GoAInput {...props} value={props.value.toString()} type="number" />;
 }
 
 export const GoAInputRange: FC<Props & { min?: number, max?: number, step?: number }> = ({ step = 1, ...props }) => {

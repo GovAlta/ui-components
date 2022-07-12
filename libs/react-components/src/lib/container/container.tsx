@@ -6,6 +6,7 @@ type HeadingSize = 'large' | 'small' | 'none';
 interface WCProps {
   variant: ContainerVariant;
   headingsize: HeadingSize;
+  colored: boolean;
 }
 
 declare global {
@@ -21,6 +22,7 @@ interface Props {
   headingSize: HeadingSize;
   variant?: ContainerVariant;
   title?: ReactNode;
+  colored?: boolean;
   actions?: ReactNode;
   children: ReactNode;
 }
@@ -28,12 +30,13 @@ interface Props {
 export const GoAContainer: FC<Props> = ({
   headingSize,
   title,
+  colored = false,
   children,
   actions,
   variant = 'default',
 }) => {
   return (
-    <goa-container variant={variant} headingsize={headingSize}>
+    <goa-container variant={variant} headingsize={headingSize} colored={colored}>
       {title && <div slot="title">{title}</div>}
       {children}
       {actions && <div slot="actions">{actions}</div>}
