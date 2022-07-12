@@ -22,9 +22,12 @@ import { CircularProgressComponent } from './circular-progress/circular-progress
 import { HeroBannerComponent } from './hero-banner/hero-banner.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { MicrositeHeaderComponent } from './microsite-header/microsite-header.component';
+import { ContainerComponent } from './container/container.component';
+import { SkeletonComponent } from './skeleton/skeleton.component';
+import { FormItemComponent } from './form-item/form-item.component';
 
 @NgModule({
-  declarations: [AppComponent, InputComponentComponent, ButtonComponentComponent, NavigationLinkComponent, TextAreaComponent, CheckboxComponent, RadioComponent, DropdownComponent, ModalComponent, AppFooterComponent, BadgeComponent, CalloutComponent, ChipComponent, CircularProgressComponent, HeroBannerComponent, AppHeaderComponent, MicrositeHeaderComponent],
+  declarations: [AppComponent, InputComponentComponent, ButtonComponentComponent, NavigationLinkComponent, TextAreaComponent, CheckboxComponent, RadioComponent, DropdownComponent, ModalComponent, AppFooterComponent, BadgeComponent, CalloutComponent, ChipComponent, CircularProgressComponent, HeroBannerComponent, AppHeaderComponent, MicrositeHeaderComponent, ContainerComponent, SkeletonComponent, FormItemComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
