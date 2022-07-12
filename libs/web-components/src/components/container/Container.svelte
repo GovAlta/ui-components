@@ -3,6 +3,7 @@
 <!-- Script -->
 <script lang="ts">
   export let variant: 'primary' | 'info' | 'error' | 'success' | 'warning' | 'default' = 'default'
+  export let colored: boolean = false; 
   export let headingsize: 'large' | 'small' | 'none' = 'large';
   export let padding: "relaxed" | "compact" = "relaxed"
 </script>
@@ -14,6 +15,7 @@
     goa-container--${variant}
     padding--${padding}
   `}
+  class:colored={colored}
 >
   <header class="heading--{headingsize}">
     <div class="title">
@@ -65,6 +67,31 @@
     border-right: 1px solid var(--color-gray-200);
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
+  }
+
+
+  /* Colored */
+
+
+  .goa-container--default.colored .content {
+    border-color: var(--color-gray-200);
+    background-color: var(--color-gray-100);
+  }
+  .goa-container--warning.colored .content {
+    border-color: var(--goa-color-status-warning);
+    background-color: var(--goa-color-status-warning-50);
+  }
+  .goa-container--error.colored .content {
+    border-color: var(--goa-color-status-emergency);
+    background-color: var(--goa-color-status-emergency-50);
+  }
+  .goa-container--success.colored .content {
+    border-color: var(--goa-color-status-success);
+    background-color: var(--goa-color-status-success-50);
+  }
+  .goa-container--info.colored .content {
+    border-color: var(--goa-color-status-info);
+    background-color: var(--goa-color-status-info-50);
   }
 
   .title > *,

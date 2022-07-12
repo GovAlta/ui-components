@@ -72,22 +72,27 @@
   --goa-color-brand-dark: #005072;
 
   --goa-color-primary: #005daa;
+  --goa-color-primary-50: #005daa11;
   --goa-color-primary-light: #e3f2ff;
   --goa-color-primary-dark: #004f84;
 
   --goa-color-status-info: #005daa;
+  --goa-color-status-info-50: #005daa11;
   --goa-color-status-info-light: #b4daf8;
   --goa-color-status-info-dark: #00347a;
 
   --goa-color-status-warning: #feba35;
+  --goa-color-status-warning-50: #feba3511;
   --goa-color-status-warning-light: #fcefd0;
   --goa-color-status-warning-dark: #c68a00;
 
   --goa-color-status-emergency: #ec040b;
+  --goa-color-status-emergency-50: #ec040b11;
   --goa-color-status-emergency-light: #ffcecf; /* #fff0f0 */
   --goa-color-status-emergency-dark: #b00000;
 
   --goa-color-status-success: #00853f;
+  --goa-color-status-success-50: #00853f11;
   --goa-color-status-success-light: #c6e0d0;
   --goa-color-status-success-dark: #005715;
 
@@ -98,8 +103,6 @@
   --shadow-3: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
   --shadow-4: 0 15px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05);
   --shadow-5: 0 20px 40px rgba(0, 0, 0, 0.2);
-
-  --page-width-max: 1440px;
 
   /* acumin font requires this to allow for vertical alignment  */
   --font-valign-fix: 0.1rem;

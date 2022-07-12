@@ -161,10 +161,12 @@
   .top-grey-bar {
     border-top: 2px solid var(--color-gray-200);
     margin: 0;
+    margin-top: 2rem;
   }
 
   .footer {
-    max-width: 60rem;
+    max-width: var(--page-width-max);
+    padding: 0 2rem;
   }
 
   .brand {
@@ -335,13 +337,6 @@
     .logo {
       margin-top: 2.125rem;
       margin-bottom: 1.5rem;
-    }
-  }
-
-  @media (max-width: 992px) {
-    .app-footer-container {
-      padding-left: 1rem;
-      padding-right: 1rem;
     }
   }
 
