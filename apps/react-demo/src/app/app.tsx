@@ -1,87 +1,72 @@
-import { GoAAppHeader, GoAAppFooter, GoAMetaLink, GoANavigationLink, GoAButton, GoAButtonGroup, GoACheckbox, GoAFormItem, GoAInput, GoAPageBlock, GoARadioGroup, GoARadioItem, GoAMicrositeHeader } from "@abgov/react-components";
-import { useState } from "react";
+import {
+  GoAAppHeader,
+  GoAMicrositeHeader,
+  GoAAppFooter,
+  GoAPageBlock,
+  GoAPage,
+  GoAAppFooterNavSection,
+  GoAAppFooterMetaSection,
+} from '@abgov/react-components';
+import { Outlet } from 'react-router-dom';
+
 export function App() {
 
-  const [firstName, setFirstName] = useState<string>('');
-  const [desserts, setDesserts] = useState(false);
-
-  function submitForm(e: any) {
-    console.log('submitForm', firstName);
-    e.preventDefault();
-  }
-
-  function onRadioChange(name: string, value: string) {
-    console.log('onRadioChange', name, value);
-  }
-
   return (
-    <>
-      <GoAMicrositeHeader level="alpha" version="UAT" />
-
-      <GoAAppHeader url="http://google.com" title="Digital File Service">
-        <a href="#">Sign in</a>
-      </GoAAppHeader>
+    <GoAPage>
+      <section slot="header">
+        <GoAMicrositeHeader level="alpha" version="UAT" />
+        <GoAAppHeader url="/" title="Design System">
+          <a href="/login">Sign in</a>
+        </GoAAppHeader>
+      </section>
 
       <GoAPageBlock width="704px">
-        <form>
-          <GoAFormItem label="First Name">
-            <GoAInput id="firstname" name="firstname" type="text" value={firstName} onChange={(_name, value) => setFirstName(value) } />
-          </GoAFormItem>
-
-          <GoACheckbox
-            name="desserts"
-            text="Ice Cream"
-            value="10"
-            checked={desserts}
-            onChange={(name, checked, value) => {
-              setDesserts(checked);
-              console.log(name, checked, value);
-            }}
-          />
-
-          <GoAButtonGroup alignment="start">
-            <GoAButton type="primary" onClick={submitForm}>Submit</GoAButton>
-          </GoAButtonGroup>
-        </form>
+        <Outlet />
       </GoAPageBlock>
 
-      <GoARadioGroup name="basic" value="orange" onChange={onRadioChange}>
-        <GoARadioItem name="basic" label="Red" value="red" />
-        <GoARadioItem name="basic" label="Blue" value="blue" />
-        <GoARadioItem name="basic" label="Orange" value="orange"/>
-      </GoARadioGroup>
+      <section slot="footer">
+        <GoAAppFooter>
+          <GoAAppFooterNavSection name="Links" maxColumnCount={3}>
+            <a href="a.html">Arts and culture</a>
+            <a href="b.html">Education and training</a>
+            <a href="c.html">Family and social supports</a>
+            <a href="d.html">Housing and community</a>
+            <a href="e.html">Life events</a>
+            <a href="f.html">Business and economy</a>
+            <a href="g.html">Emergencies and public safety and something else</a>
+            <a href="h.html">Government</a>
+            <a href="i.html">Jobs and employment</a>
+            <a href="j.html">Moving to Alberta</a>
+          </GoAAppFooterNavSection>
 
-      <GoAAppFooter>
-        <GoAMetaLink url="privacy.html" title="Privacy" />
-        <GoAMetaLink url="disclaimer.html" title="Disclaimer" />
-        <GoAMetaLink url="accessibility.html" title="Accessibility" />
-        <GoAMetaLink url="using-alberta.html" title="Using Alberta.ca" />
+          <GoAAppFooterNavSection name="Media">
+            <a href="instagram.html">Instagram</a>
+            <a href="youtube.html">YouTube</a>
+            <a href="facebook.html">Facebook</a>
+            <a href="snapchat.html">Snapchat</a>
+            <a href="twitter.html">Twitter's really long link</a>
+          </GoAAppFooterNavSection>
 
-        <GoANavigationLink url="a.html" title="Arts and culture" />
-        <GoANavigationLink url="b.html" title="Education and training" />
-        <GoANavigationLink url="c.html" title="Family and social supports" />
-        <GoANavigationLink url="d.html" title="Housing and community" />
-        <GoANavigationLink url="e.html" title="Life events" />
-
-        <GoANavigationLink url="f.html" title="Business and economy" />
-        <GoANavigationLink url="g.html" title="Emergencies and public safety" />
-        <GoANavigationLink url="h.html" title="Government" />
-        <GoANavigationLink url="i.html" title="Jobs and employment" />
-        <GoANavigationLink url="j.html" title="Moving to Alberta" />
-
-        <GoANavigationLink url="k.html" title="Driving and transportation" />
-        <GoANavigationLink url="l.html" title="Environment" />
-        <GoANavigationLink url="m.html" title="Health" />
-        <GoANavigationLink url="n.html" title="Law and justice" />
-        <GoANavigationLink url="o.html" title="Parks and recreation" />
-
-        <GoANavigationLink  url="instagram.html" title="Instagram" />
-        <GoANavigationLink  url="youtube.html" title="YouTube" />
-        <GoANavigationLink  url="facebook.html" title="Facebook" />
-        <GoANavigationLink  url="snapchat.html" title="Snapchat" />
-        <GoANavigationLink  url="twitter.html" title="Twitter" />
-      </GoAAppFooter>
-    </>
+          <GoAAppFooterMetaSection>
+            <a href="contact.html">Contact Us</a>
+            <a href="support.html">Support</a>
+            <a href="hours.html">Hours</a>
+            <a href="about.html">About Us</a>
+            <a href="careers.html">Careers</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="support.html">Support</a>
+            <a href="hours.html">Hours</a>
+            <a href="about.html">About Us</a>
+            <a href="careers.html">Careers</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="support.html">Support</a>
+            <a href="hours.html">Hours</a>
+            <a href="about.html">About Us</a>
+            <a href="careers.html">Careers</a>
+          </GoAAppFooterMetaSection>
+        </GoAAppFooter>
+      </section>
+    </GoAPage>
   );
 }
 

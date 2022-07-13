@@ -21,6 +21,12 @@ export default {
       include: /\.svelte$/,
       exclude: /^(App|\.test)\.svelte$/,
       preprocess: preprocess({ sourceMap: true }),
+      settings: {
+        'svelte3/compiler-options': {
+          generate: false,
+          customElement: true
+        },
+      },
       compilerOptions: {
         dev: true,
         customElement: true,
