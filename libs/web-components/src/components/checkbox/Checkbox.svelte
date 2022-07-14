@@ -117,7 +117,7 @@
     padding: 3px;
 
     /* prevent squishing of checkbox */
-    flex: 0 0 auto; 
+    flex: 0 0 auto;
   }
   .goa-checkbox-container svg {
     fill: var(--color-white);
@@ -132,7 +132,7 @@
   }
 
   .goa-checkbox-container:hover {
-    border: 1px solid var(--goa-color-interactive);
+    border: 1px solid var(--goa-color-interactive--hover);
   }
 
   .goa-checkbox-container:focus-within {
