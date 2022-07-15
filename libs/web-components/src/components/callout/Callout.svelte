@@ -74,11 +74,11 @@
   .icon {
     flex: 0 0 3rem;
     text-align: center;
-    padding-top: 1.5rem;
+    padding-top: 1.75rem;
   }
   .content {
     flex: 1 1 auto;
     background-color: var(--color-gray-100);
-    padding: 1.5rem;
+    padding: 1.75rem;
   }
 </style>
