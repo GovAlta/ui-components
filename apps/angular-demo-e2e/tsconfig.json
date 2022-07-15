@@ -5,17 +5,27 @@
     "outDir": "../../dist/out-tsc",
     "target": "es2015",
     "module": "commonjs",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "allowJs": true,
     "strict": true,
     "noImplicitAny": false,
-    "types": ["cypress","node"],
+    "types": [
+      "cypress",
+      "node",
+      "cypress-axe"
+    ],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts", "src/**/*.js"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js"
+  ],
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
