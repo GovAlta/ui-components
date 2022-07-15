@@ -1,0 +1,32 @@
+[
+  {
+    "keyword": "Feature",
+    "name": "Accessibility tests",
+    "line": 1,
+    "id": "accessibility-tests",
+    "tags": [],
+    "uri": "accessibility.feature",
+    "elements": [
+      {
+        "id": "accessibility-tests;test-accessiblity-on-application-pages",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "Test accessiblity on application pages",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "cs I am a user of GOA application",
+            "result": {
+              "status": "passed",
+              "duration": 1187000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
