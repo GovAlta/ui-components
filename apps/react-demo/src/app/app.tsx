@@ -1,73 +1,46 @@
-import {
-  GoAAppHeader,
-  GoAMicrositeHeader,
-  GoAAppFooter,
-  GoAPageBlock,
-  GoAPage,
-  GoAAppFooterNavSection,
-  GoAAppFooterMetaSection,
-} from '@abgov/react-components';
-import { Outlet } from 'react-router-dom';
+import { GoAAppHeader, GoAButton, GoAButtonGroup, GoACheckbox, GoAFormItem, GoAInput, GoAPageBlock, GoARadioGroup, GoARadioItem, GoAMicrositeHeader } from "@abgov/react-components";
+import { useState } from "react";
+import ReactDOM from 'react-dom';
+import * as React from 'react';
+import { Outlet, Link } from 'react-router-dom';
+import '../styles.scss'
 
-export function App() {
-
+export default function App() {
   return (
-    <GoAPage>
-      <section slot="header">
-        <GoAMicrositeHeader level="alpha" version="UAT" />
-        <GoAAppHeader url="/" title="Design System">
-          <a href="/login">Sign in</a>
-        </GoAAppHeader>
-      </section>
+    <>
+      <GoAMicrositeHeader level="alpha" version="UAT"></GoAMicrositeHeader>
 
-      <GoAPageBlock width="704px">
-        <Outlet />
-      </GoAPageBlock>
+      <GoAAppHeader url="#" title="Design Systems">
+      </GoAAppHeader>
 
-      <section slot="footer">
-        <GoAAppFooter>
-          <GoAAppFooterNavSection name="Links" maxColumnCount={3}>
-            <a href="a.html">Arts and culture</a>
-            <a href="b.html">Education and training</a>
-            <a href="c.html">Family and social supports</a>
-            <a href="d.html">Housing and community</a>
-            <a href="e.html">Life events</a>
-            <a href="f.html">Business and economy</a>
-            <a href="g.html">Emergencies and public safety and something else</a>
-            <a href="h.html">Government</a>
-            <a href="i.html">Jobs and employment</a>
-            <a href="j.html">Moving to Alberta</a>
-          </GoAAppFooterNavSection>
+      <div className="container">
+        <div className="navigation-bar">
+          <nav>
+            <Link className="navigation-link" to="/button">Button</Link>
+            <Link className="navigation-link" to="/checkbox">Checkbox</Link>
+            <Link className="navigation-link" to="/radio">Radio</Link>
+            <Link className="navigation-link" to="/dropdown">Dropdown</Link>
+            <Link className="navigation-link" to="/input">Input</Link>
+            <Link className="navigation-link" to="/textarea">TextArea</Link>
+            <Link className="navigation-link" to="/modal">Modal</Link>
+            <Link className="navigation-link" to="/app-footer">AppFooter</Link>
+            <Link className="navigation-link" to="/badge">Badge</Link>
+            <Link className="navigation-link" to="/callout">Callout</Link>
+            <Link className="navigation-link" to="/chip">Chip</Link>
+            <Link className="navigation-link" to="/circular-progress">Circular Progress</Link>
+            <Link className="navigation-link" to="/hero-banner">Hero Banner</Link>
+            <Link className="navigation-link" to="/app-header">App Header</Link>
+            <Link className="navigation-link" to="/microsite-header">Microsite header</Link>
+            <Link className="navigation-link" to="/container">Container</Link>
+            <Link className="navigation-link" to="/skeleton">Skeleton</Link>
+            <Link className="navigation-link" to="/form-item">Form Item</Link>
+          </nav>
+        </div>
 
-          <GoAAppFooterNavSection name="Media">
-            <a href="instagram.html">Instagram</a>
-            <a href="youtube.html">YouTube</a>
-            <a href="facebook.html">Facebook</a>
-            <a href="snapchat.html">Snapchat</a>
-            <a href="twitter.html">Twitter's really long link</a>
-          </GoAAppFooterNavSection>
-
-          <GoAAppFooterMetaSection>
-            <a href="contact.html">Contact Us</a>
-            <a href="support.html">Support</a>
-            <a href="hours.html">Hours</a>
-            <a href="about.html">About Us</a>
-            <a href="careers.html">Careers</a>
-            <a href="contact.html">Contact Us</a>
-            <a href="support.html">Support</a>
-            <a href="hours.html">Hours</a>
-            <a href="about.html">About Us</a>
-            <a href="careers.html">Careers</a>
-            <a href="contact.html">Contact Us</a>
-            <a href="support.html">Support</a>
-            <a href="hours.html">Hours</a>
-            <a href="about.html">About Us</a>
-            <a href="careers.html">Careers</a>
-          </GoAAppFooterMetaSection>
-        </GoAAppFooter>
-      </section>
-    </GoAPage>
+        <div className="content">
+          <Outlet />
+        </div>
+      </div>
+    </>
   );
 }
-
-export default App;

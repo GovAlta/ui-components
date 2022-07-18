@@ -14,7 +14,7 @@ export interface FooterProps {
   children: ReactNode;
 }
 
-export function GoAAppFooter({children}: FooterProps) {
+export function GoAAppFooter({ children }: FooterProps) {
   return (
     <goa-app-footer>
       {children}
