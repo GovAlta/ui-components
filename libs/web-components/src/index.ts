@@ -1,8 +1,5 @@
 export { default as GoAPageBlock } from "./components/page-block/PageBlock.svelte";
 export { default as GoAAppHeader } from "./components/app-header/AppHeader.svelte";
-export { default as GoAAppFooter } from "./components/app-footer/AppFooter.svelte";
-export { default as GoAMetaLink } from "./components/app-footer/MetaLink.svelte";
-export { default as GoANavigationLink } from "./components/app-footer/NavigationLink.svelte";
 export { default as GoABadge } from "./components/badge/Badge.svelte";
 export { default as GoAButton } from "./components/button/Button.svelte";
 export { default as GoAButtonGroup } from "./components/button-group/ButtonGroup.svelte";
@@ -35,6 +32,11 @@ export { default as GoASkeleton } from "./components/skeleton/Skeleton.svelte";
 export { default as GoASpinner } from "./components/spinner/Spinner.svelte";
 export { default as GoATextArea } from "./components/text-area/TextArea.svelte";
 export { default as GoAFocusTrap } from "./components/focus-trap/FocusTrap.svelte";
+
+export * from "./components/footer/Footer.svelte";
+export * from "./components/footer-nav-section/FooterNavSection.svelte";
+export * from "./components/footer-meta-section/FooterMetaSection.svelte";
+
 
 // Wrappers
 export { default as ContainerWrapper } from './components/container/ContainerWrapper.test.svelte';

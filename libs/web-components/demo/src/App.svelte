@@ -665,33 +665,36 @@
   </goa-page-block>
 
 
-<goa-app-footer multicolumnsectionnames="Section 2">
+  <goa-footer>
+    <goa-footer-nav-section slot="nav" name="Section 1">
+      <a href="a.html">Arts and culture</a>
+      <a href="b.html">Education and training</a>
+      <a href="c.html">Family and social supports</a>
+      <a href="d.html">Housing and community</a>
+      <a href="e.html">Life events</a>
+    </goa-footer-nav-section>
 
-  <goa-meta-link  url="privacy.html" title="Privacy" />
-  <goa-meta-link  url="disclaimer.html" title="Disclaimer" />
-  <goa-meta-link  url="accessibility.html" title="Accessibility" />
-  <goa-meta-link  url="using-alberta.html" title="Using Alberta.ca" />
+    <goa-footer-nav-section slot="nav" name="Section 2" maxcolumncount="2">
+      <a href="f.html">Business and economy</a>
+      <a href="g.html">Emergencies and public safety</a>
+      <a href="h.html">Government</a>
+      <a href="i.html">Jobs and employment</a>
+      <a href="j.html">Moving to Alberta</a>
+      <a href="instagram.html">Instagram</a>
+      <a href="youtube.html">YouTube</a>
+      <a href="facebook.html">Facebook</a>
+      <a href="snapchat.html">Snapchat</a>
+      <a href="twitter.html">Twitter</a>
+    </goa-footer-nav-section>
 
+    <goa-footer-meta-section slot="meta">
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="accessibility.html">Accessibility</a>
+      <a href="using-alberta.html">Using Alberta.ca</a>
+    </goa-footer-meta-section>
 
-  <goa-navigation-link section="Section 1" url="a.html" title="Arts and culture" />
-  <goa-navigation-link section="Section 1"  url="b.html" title="Education and training" />
-  <goa-navigation-link section="Section 1"  url="c.html" title="Family and social supports" />
-  <goa-navigation-link section="Section 1"  url="d.html" title="Housing and community" />
-  <goa-navigation-link section="Section 1"  url="e.html" title="Life events" />
-
-  <goa-navigation-link section="Section 2"  url="f.html" title="Business and economy" />
-  <goa-navigation-link section="Section 2"  url="g.html" title="Emergencies and public safety" />
-  <goa-navigation-link section="Section 2"  url="h.html" title="Government" />
-  <goa-navigation-link section="Section 2"  url="i.html" title="Jobs and employment" />
-  <goa-navigation-link section="Section 2"  url="j.html" title="Moving to Alberta" />
-  <goa-navigation-link section="Section 2"  url="instagram.html" title="Instagram" />
-  <goa-navigation-link section="Section 2"  url="youtube.html" title="YouTube" />
-  <goa-navigation-link section="Section 2"  url="facebook.html" title="Facebook" />
-  <goa-navigation-link section="Section 2"  url="snapchat.html" title="Snapchat" />
-  <goa-navigation-link section="Section 2"  url="twitter.html" title="Twitter" />
-
-
-</goa-app-footer>
+  </goa-footer>
 
   </main>
 

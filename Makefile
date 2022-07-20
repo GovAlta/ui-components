@@ -21,6 +21,9 @@ rc:
 
 # BUILD
 
+lint:
+	npx nx run-many --target=lint --projects=react-components,styles,web-components
+
 web-components:
 	npm run build web-components --withDeps --configuration production
 

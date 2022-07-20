@@ -30,9 +30,6 @@ import {
 } from './lib/input/input';
 
 import { GoAAppHeader } from './lib/app-header/app-header';
-import { GoAAppFooter } from './lib/app-footer/app-footer';
-import { GoAMetaLink } from './lib/app-footer/meta-link';
-import { GoANavigationLink } from './lib/app-footer/navigation-link';
 import { GoAButton } from './lib/button/button';
 import { GoAButtonGroup } from './lib/button-group/button-group';
 import { GoACallout } from './lib/callout/callout';
@@ -60,6 +57,12 @@ import type { GoAIconType } from './lib/icons';
 // import type { BadgeType as GoABadgeType } from '@abgov/shared-common'
 import type { GoABadgeType } from './lib/badge/badge';
 
+export * from './lib/footer/footer';
+
+export * from './lib/footer-nav-section/footer-nav-section';
+
+export * from './lib/footer-meta-section/footer-meta-section';
+
 export * from './lib/flex-column/flex-column';
 
 export * from './lib/page/page';
@@ -71,9 +74,6 @@ export type { GoABadgeType };
 
 export {
   GoAAppHeader,
-  GoAAppFooter,
-  GoAMetaLink,
-  GoANavigationLink,
   GoABadge,
   GoAButton,
   GoAButtonGroup,
