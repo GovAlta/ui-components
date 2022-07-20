@@ -2,18 +2,18 @@
 
 <!-- Script -->
 <script lang="ts">
+import { onMount, tick } from "svelte";
+
   import { fade } from "svelte/transition";
 
   import noScroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";
   import type { SpinnerType } from "../spinner/Spinner.svelte";
 
-  // Required
-  export let type: SpinnerType;
-  export let variant: "fullscreen" | "inline";
-  export let size: "small" | "large";
-
   // Optional
+  export let type: SpinnerType = "infinite";
+  export let variant: "fullscreen" | "inline" = "inline";
+  export let size: "small" | "large" = "large";
   export let message: string = "";
   export let progress: number = 0;
   export let visible: string = "false";
@@ -22,7 +22,14 @@
   $: fullscreen = variant === "fullscreen";
   $: inline = variant === "inline";
   $: spinnerSize = size === "small" ? "large" : "xlarge"
-  $: ready = type && isVisible && size;
+
+  let ready: boolean = false;
+
+  onMount(async () => {
+    // there needs to be a slight delay in the render to prevent an invalid spinner size from being shown
+    await tick();  
+    ready = isVisible;
+  })
 
 </script>
 
