@@ -16,9 +16,6 @@
     "url": "https://github.com/GovAlta/ui-components.git",
     "directory": "libs/react-components"
   },
-  "dependencies": {
-    "@abgov/web-components": "^1.0.0-alpha.23"
-  },
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
