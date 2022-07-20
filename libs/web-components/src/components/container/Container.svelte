@@ -2,10 +2,14 @@
 
 <!-- Script -->
 <script lang="ts">
+  import { toBoolean } from "../../common/utils";
+
   export let variant: 'primary' | 'info' | 'error' | 'success' | 'warning' | 'default' = 'default'
-  export let colored: boolean = false; 
+  export let colored: string = "false"; 
   export let headingsize: 'large' | 'small' | 'none' = 'large';
   export let padding: "relaxed" | "compact" = "relaxed"
+
+  $: _colored = toBoolean(colored);
 </script>
 
 <!-- HTML -->
@@ -15,7 +19,7 @@
     goa-container--${variant}
     padding--${padding}
   `}
-  class:colored={colored}
+  class:colored={_colored}
 >
   <header class="heading--{headingsize}">
     <div class="title">
@@ -69,9 +73,7 @@
     border-bottom-right-radius: var(--border-radius);
   }
 
-
   /* Colored */
-
 
   .goa-container--default.colored .content {
     border-color: var(--color-gray-200);
