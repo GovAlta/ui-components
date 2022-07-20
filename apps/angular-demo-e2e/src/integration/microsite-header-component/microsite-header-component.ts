@@ -15,7 +15,6 @@ Then(/^cs I should be able to validate microsite Alpha header$/, function () {
   cy.get('goa-microsite-header[level="alpha"]').find('header.goa-official-site-header').find('div[data-testid="level"]').should("have.css", "color",hexToRgb(properties["goa-color-text"]));
   cy.get('goa-microsite-header[level="alpha"]').find('header.goa-official-site-header').find('div[data-testid="site-text"]').should("have.css", "font-size",remToPx(properties["fs-xs"]));
   cy.get('goa-microsite-header[level="alpha"]').find('header.goa-official-site-header').find('div[data-testid="site-text"]').should("have.css", "color",hexToRgb(properties["goa-color-text"]));
-  // cy.get('goa-microsite-header[level="alpha"]').find('header.goa-official-site-header').find('div[data-testid="version"]').should("have.css", "color",hexToRgb(properties["color-gray-600"]));
 });
 Then(/^cs I should be able to validate microsite Beta header$/, function () {
   cy.get('goa-microsite-header[level="beta"]').find('header.goa-official-site-header').should("have.css", "background-color",hexToRgb(properties["color-gray-100"]));
