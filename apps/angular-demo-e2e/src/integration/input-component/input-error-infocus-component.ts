@@ -31,7 +31,7 @@ Then(/^cs I should be able to validate css properties of a inFocus TextArea$/, f
   cy.get('div[class="goa-input variant--goa type--text"]').find('input[class="input--goa"]').should("have.css", "border-color", hexToRgb(properties["goa-color-text"]));
   cy.get('div[class="goa-input variant--goa type--text"]').find('input[class="input--goa"]').should("have.css", "border-radius", properties["input-border-radius-0px"]);
   cy.get('abgov-input-component > :nth-child(13)').find('input').focus();
-  cy.get('abgov-input-component > :nth-child(13)').find('.goa-input').should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]) + " 0px 0px 0px 3px");
+  cy.get('abgov-input-component > :nth-child(13)').find('.goa-input').should("have.css", "box-shadow").should("contain", hexToRgb(properties["goa-color-interactivefocus"]));
 });
 
 function remToPx(rem) {
