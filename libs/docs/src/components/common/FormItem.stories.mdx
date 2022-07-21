@@ -29,26 +29,35 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-form-item label="First name">
         <goa-input type="text" />
       </goa-form-item>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-form-item label="First name">
         <goa-input type="text" />
       </goa-form-item>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAFormItem label="First name">
         <GoAInput name="firstName" onChange={() => {}} />
       </GoAFormItem>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
@@ -61,29 +70,37 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-form-item label="First name" optional>
         <goa-input type="text" />
       </goa-form-item>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-form-item label="First name" optional>
         <goa-input type="text" />
       </goa-form-item>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAFormItem label="First name" optional>
         <GoAInput name="firstName" onChange={() => {}} />
       </GoAFormItem>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
-
 
 #### Help text
 
@@ -94,29 +111,37 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-form-item label="First name" helptext="Help text">
         <goa-input type="text" />
       </goa-form-item>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-form-item label="First name" helptext="Help text">
         <goa-input type="text" />
       </goa-form-item>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAFormItem label="First name" helpText="Help text">
         <GoAInput name="firstName" onChange={() => {}} />
       </GoAFormItem>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
-
 
 #### Required
 
@@ -130,28 +155,36 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-form-item label="First name" error="First name is required">
-        <goa-input type="text" error />
-      </goa-form-item>
-      <goa-form-item label="Favourite Colour" error="">
-        <goa-input type="text" />
-      </goa-form-item>
-    `}/>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-form-item label="First name" error="First name is required">
+          <goa-input type="text" error />
+        </goa-form-item>
+        <goa-form-item label="Favourite Colour" error="">
+          <goa-input type="text" />
+        </goa-form-item>
+      `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-form-item label="First name" error="First name is required"> 
-        <goa-input type="text" error />
-      </goa-form-item>
-      <goa-form-item label="Favourite Colour" error="">
-        <goa-input type="text" />
-      </goa-form-item>
-    `}/>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-form-item label="First name" error="First name is required"> 
+          <goa-input type="text" error />
+        </goa-form-item>
+        <goa-form-item label="Favourite Colour" error="">
+          <goa-input type="text" />
+        </goa-form-item>
+      `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAFormItem label="First name" error="First name is required" helpText="Help text">
         <GoAInput name="firstName" onChange={() => {}} error />
       </GoAFormItem>

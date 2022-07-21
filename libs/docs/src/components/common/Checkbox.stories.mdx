@@ -1,16 +1,18 @@
-import {
-  Meta,
-  Canvas,
-  Story,
-} from '@storybook/addon-docs';
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
 
 import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';
-import { Tabs, Tab, Note, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import {
+  Tabs,
+  Tab,
+  Note,
+  CodeSnippet,
+  SupportInfo,
+} from '@abgov/shared/storybook-common';
 import { GoACheckbox } from '@abgov/react-components';
 
 export const checkboxTemplate = (args) => {
-  const [ _, updateArgs] = useArgs();
+  const [_, updateArgs] = useArgs();
   return (
     <GoACheckbox
       name="desserts"
@@ -18,12 +20,12 @@ export const checkboxTemplate = (args) => {
       value="10"
       {...args}
       onChange={(name, value) => {
-        updateArgs({checked: !args.checked});
+        updateArgs({ checked: !args.checked });
         console.log(name, value);
-      }}>
-    </GoACheckbox>
+      }}
+    ></GoACheckbox>
   );
-}
+};
 
 <Meta title="Components/Checkbox" component={GoACheckbox} />
 
@@ -42,14 +44,17 @@ The input data, while can be selected, will not be recorded until the user press
 
 export const onChangeCheckboxTemplate = checkboxTemplate.bind({});
 onChangeCheckboxTemplate.args = {
-  checked: false
+  checked: false,
 };
 
-<Story name="Basic">{ onChangeCheckboxTemplate }</Story>
+<Story name="Basic">{onChangeCheckboxTemplate}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet code={`<goa-checkbox name="desserts" text="Ice Cream" value="10"></goa-checkbox>`} lang="html" />
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10"></goa-checkbox>`}
+      lang="html"
+    />
     <CodeSnippet
       lang="js"
       code={`
@@ -61,24 +66,32 @@ onChangeCheckboxTemplate.args = {
     />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`
+    <CodeSnippet
+      code={`
         <goa-checkbox
           name="desserts"
           text="Ice Cream"
           value="10"
           (_change)="onChange()" >
         </goa-checkbox>
-      `} lang="html" />
-    <CodeSnippet lang="ts" code={`
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
       export class SomeComponent {
         onChange(e) {
           console.log(e.detail.name, e.detail.checked, e.detail.value);
         }
       }
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
+    <CodeSnippet
+      lang="jsx"
+      code={`
       const [desserts, setDesserts] = useState(false);
       return (
         <>
@@ -94,10 +107,10 @@ onChangeCheckboxTemplate.args = {
           />
         </>
       );
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
-
 
 ## States
 
@@ -111,61 +124,88 @@ Indeterminate state is not supported as of now.
 
 export const checkedCheckboxTemplate = checkboxTemplate.bind({});
 checkedCheckboxTemplate.args = {
-  checked: true
+  checked: true,
 };
 
-<Story name="Checked">{ checkedCheckboxTemplate }</Story>
+<Story name="Checked">{checkedCheckboxTemplate}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" checked></goa-checkbox>`} lang="html" />
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" checked></goa-checkbox>`}
+      lang="html"
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" checked></goa-checkbox>`} lang="html" />
+    <CodeSnippet
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" checked></goa-checkbox>`}
+      lang="html"
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" checked></GoACheckbox>`} lang="jsx" />
+    <CodeSnippet
+      code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" checked></GoACheckbox>`}
+      lang="jsx"
+    />
   </Tab>
 </Tabs>
-
 
 ### Disabled
 
-export const disabledCheckboxTemplate = () => <GoACheckbox name="desserts" text="Ice Cream" disabled></GoACheckbox>
+export const disabledCheckboxTemplate = () => (
+  <GoACheckbox name="desserts" text="Ice Cream" disabled></GoACheckbox>
+);
 
-<Story name="Disabled">{ disabledCheckboxTemplate.bind({}) }</Story>
+<Story name="Disabled">{disabledCheckboxTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" disabled></goa-checkbox>`} lang="html" />
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" disabled></goa-checkbox>`}
+      lang="html"
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" disabled></goa-checkbox>`} lang="html" />
+    <CodeSnippet
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" disabled></goa-checkbox>`}
+      lang="html"
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" disabled></GoACheckbox>`} lang="jsx" />
+    <CodeSnippet
+      code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" disabled></GoACheckbox>`}
+      lang="jsx"
+    />
   </Tab>
 </Tabs>
-
 
 ### Error
 
 export const errorCheckboxTemplate = checkboxTemplate.bind({});
 errorCheckboxTemplate.args = {
-  error: true
+  error: true,
 };
 
-<Story name="Error">{ errorCheckboxTemplate }</Story>
+<Story name="Error">{errorCheckboxTemplate}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error></goa-checkbox>`} lang="html" />
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error></goa-checkbox>`}
+      lang="html"
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error></goa-checkbox>`} lang="html" />
+    <CodeSnippet
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error></goa-checkbox>`}
+      lang="html"
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" error></GoACheckbox>`} lang="jsx" />
+    <CodeSnippet
+      code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" error></GoACheckbox>`}
+      lang="jsx"
+    />
   </Tab>
 </Tabs>
 

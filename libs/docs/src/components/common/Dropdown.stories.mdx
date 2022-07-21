@@ -1,5 +1,11 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Tabs, Tab, CodeSnippet, SupportInfo, Markdown } from '@abgov/shared/storybook-common';
+import {
+  Tabs,
+  Tab,
+  CodeSnippet,
+  SupportInfo,
+  Markdown,
+} from '@abgov/shared/storybook-common';
 import { GoADropdown, GoADropdownOption } from '@abgov/react-components';
 import { useState } from 'react';
 
@@ -16,7 +22,7 @@ import { useState } from 'react';
 export const Template = (args) => {
   const [value, setValue] = useState('green');
   function onChange(name, value) {
-    console.log(name, value)
+    console.log(name, value);
     setValue(value);
   }
   return (
@@ -25,34 +31,42 @@ export const Template = (args) => {
       <GoADropdownOption name={args.name} value="green" label="Green" />
       <GoADropdownOption name={args.name} value="blue" label="Blue" />
     </GoADropdown>
-  )
-}
+  );
+};
 
 #### Basic
 
-<Story name="Basic" args={{ name: "basic" }}>
-  { Template.bind() }
+<Story name="Basic" args={{ name: 'basic' }}>
+  {Template.bind()}
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-dropdown id="dropdown" name="colors">
         <goa-dropdown-item value="red" name="colors" label="Red" />
         <goa-dropdown-item value="green" name="colors" label="Green" />
         <goa-dropdown-item value="blue" name="colors" label="Blue" />
       </goa-dropdown>
-    `}/>
-    <CodeSnippet lang="js" code={`
+    `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
       var dropdown = document.getElementById("dropdown");
       dropdown.addEventListener("_change", e => {
         console.log("_change", e.detail);
         dropdown.setAttribute("value", e.detail.value);
       });
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-dropdown name="colors"
           [value]="selectedColor"
           (_change)="selectColor($event)">
@@ -64,8 +78,11 @@ export const Template = (args) => {
           >
           </goa-dropdown-item>
       </goa-dropdown>
-    `}/>
-    <CodeSnippet lang="js" code={`
+    `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
       export class MyComponent {
         colors: string[] = ['red', 'green', 'blue'];
         selectedColor: string = 'red';
@@ -73,10 +90,13 @@ export const Template = (args) => {
           this.selectedColor = event.detail.value;
         }
       }
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       const [value, setValue] = useState('green');
       function onChange(name: string, value: string | string[]) {
         setValue(value);
@@ -88,43 +108,53 @@ export const Template = (args) => {
           <GoADropdownOption name="colors" value="blue" label="Blue" />
         </GoADropdown>
       )
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
-
 #### Error
-<Story name="Error" args={{ name: "error", error: true }}>
-  { Template.bind() }
+
+<Story name="Error" args={{ name: 'error', error: true }}>
+  {Template.bind()}
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-dropdown id="dropdown" name="colors" error="true">
         <goa-dropdown-item value="red" name="colors" label="Red" />
         <goa-dropdown-item value="green" name="colors" label="Green" />
         <goa-dropdown-item value="blue" name="colors" label="Blue" />
       </goa-dropdown>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-dropdown name="colors" error="true">
         <goa-dropdown-item value="red" name="colors" label="Red"></goa-dropdown-item>
         <goa-dropdown-item value="green" name="colors" label="Green"></goa-dropdown-item>
         <goa-dropdown-item value="blue" name="colors" label="Blue"></goa-dropdown-item>
       </goa-dropdown>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoADropdown name="colors" error={true} value={value} onChange={() => {}}>
         <GoADropdownOption name="colors" value="red" label="Red" />
         <GoADropdownOption name="colors" value="green" label="Green" />
         <GoADropdownOption name="colors" value="blue" label="Blue" />
       </GoADropdown>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 

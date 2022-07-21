@@ -38,6 +38,8 @@ import {
 
 # Input
 
+### Text fields let users enter and input text.
+
 [Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/DIO-DS---Components?node-id=133%3A186)
 
 export const noop = () => {};
@@ -63,7 +65,7 @@ export const InputTemplate = () => {
 <Story name="Basic">{InputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -133,7 +135,7 @@ export const IconInputTemplate = () => (
 <Story name="Icons">{IconInputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-input leadingicon="finger-print" />`}
       lang="html"
@@ -175,7 +177,7 @@ export const IconButtonInputTemplate = () => (
 <Story name="Icon Buttons">{IconButtonInputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-input id="secret" trailingicon="finger-print" />`}
       lang="html"
@@ -237,7 +239,7 @@ export const DisabledInputTemplate = () => (
 <Story name="Disabled">{DisabledInputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-input disabled="true" placeholder="Find by name" />`}
       lang="html"
@@ -268,7 +270,7 @@ export const ErrorInputTemplate = () => (
 <Story name="Error">{ErrorInputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet code={`<goa-input error  />`} lang="html" />
   </Tab>
   <Tab label="Angular">
@@ -290,7 +292,7 @@ export const FocusInputTemplate = () => (
 <Story name="Focus">{FocusInputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet code={`<goa-input />`} lang="html" />
   </Tab>
   <Tab label="Angular">
@@ -318,7 +320,7 @@ export const CharCountTemplate = () => {
 <Story name="Character count">{CharCountTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-input name="firstname" showcounter="true" />`}
       lang="html"
@@ -368,7 +370,7 @@ export const CharCountWithLimitTemplate = () => {
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-input name="firstname" showcounter="true" maxcharcount="20" />`}
       lang="html"
@@ -399,47 +401,47 @@ export const CharCountWithLimitTemplate = () => {
   </Tab>
 </Tabs>
 
-### Width 
+### Width
 
-export const WidthTemplate = ({width}) => {
+export const WidthTemplate = ({ width }) => {
   return (
     <>
-    <GoAInput
-      name="firstname"
-      placeholder="width allows for %, ch, px, etc"
-      onChange={() => {}}
-    />
-    <br />
-    <GoAInput
-      name="firstname"
-      width="100%"
-      placeholder="100%"
-      onChange={() => {}}
-    />
-    <br />
-    <GoAInput
-      name="firstname"
-      width="50%"
-      placeholder="50%"
-      onChange={() => {}}
-    />
-    <br />
-    <GoAInput
-      name="firstname"
-      width="20ch"
-      placeholder="20ch"
-      onChange={() => {}}
-    />
+      <GoAInput
+        name="firstname"
+        placeholder="width allows for %, ch, px, etc"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInput
+        name="firstname"
+        width="100%"
+        placeholder="100%"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInput
+        name="firstname"
+        width="50%"
+        placeholder="50%"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInput
+        name="firstname"
+        width="20ch"
+        placeholder="20ch"
+        onChange={() => {}}
+      />
     </>
   );
 };
 
-<Story name="Width" args={{ width: "80%"}}>
+<Story name="Width" args={{ width: '80%' }}>
   {WidthTemplate.bind({})}
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`
         <goa-input name="firstname" />

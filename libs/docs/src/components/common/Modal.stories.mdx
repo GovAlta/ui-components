@@ -18,7 +18,8 @@ import { useState } from 'react';
 [Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DIO-DS?node-id=622%3A13874)
 
 ---
-#### Basic 
+
+#### Basic
 
 export const NoActionsTemplate = (args) => {
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +45,7 @@ export const NoActionsTemplate = (args) => {
 <Story name="Basic">{NoActionsTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -125,7 +126,6 @@ export const NoActionsTemplate = (args) => {
   </Tab>
 </Tabs>
 
-
 #### With actions
 
 export const ActionsTemplate = (args) => {
@@ -139,10 +139,10 @@ export const ActionsTemplate = (args) => {
         actions={
           <GoAButtonGroup alignment="end">
             <GoAButton type="secondary" onClick={() => setShowModal(false)}>
-              Secondary 
+              Secondary
             </GoAButton>
             <GoAButton type="primary" onClick={() => setShowModal(false)}>
-              Primary 
+              Primary
             </GoAButton>
           </GoAButtonGroup>
         }
@@ -161,7 +161,7 @@ export const ActionsTemplate = (args) => {
 <Story name="With actions">{ActionsTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -257,21 +257,27 @@ export const ActionsTemplate = (args) => {
   </Tab>
 </Tabs>
 
-#### Transitions 
+#### Transitions
 
 export const TransitionsTemplate = (args) => {
   const [showModal, setShowModal] = useState(false);
-  const [speed, setSpeed] = useState("none");
+  const [speed, setSpeed] = useState('none');
   function show(speed) {
-    setSpeed(speed)
-    setShowModal(true)  
+    setSpeed(speed);
+    setShowModal(true);
   }
   return (
     <>
       <GoAButtonGroup>
-        <GoAButton type="tertiary" onClick={() => show("none")}>None</GoAButton>
-        <GoAButton type="tertiary" onClick={() => show("slow")}>Slow</GoAButton>
-        <GoAButton type="tertiary" onClick={() => show("fast")}>Fast (default)</GoAButton>
+        <GoAButton type="tertiary" onClick={() => show('none')}>
+          None
+        </GoAButton>
+        <GoAButton type="tertiary" onClick={() => show('slow')}>
+          Slow
+        </GoAButton>
+        <GoAButton type="tertiary" onClick={() => show('fast')}>
+          Fast (default)
+        </GoAButton>
       </GoAButtonGroup>
       <GoAModal
         heading="Do you agree?"
@@ -293,7 +299,7 @@ export const TransitionsTemplate = (args) => {
 <Story name="Transitions">{TransitionsTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -320,7 +326,7 @@ export const TransitionsTemplate = (args) => {
       const modal = document.getElementById('modal');
       for (const button of buttons) {
         button.addEventListener('_click', () => {
-          modal.setAttribute("transition", button.dataset.transition); 
+          modal.setAttribute("transition", button.dataset.transition);
           modal.setAttribute("open", true)
         });
       }
@@ -376,7 +382,7 @@ export const TransitionsTemplate = (args) => {
         const [speed, setSpeed] = useState("none");
         function show(speed) {
           setSpeed(speed)
-          setShowModal(true)  
+          setShowModal(true)
         }
         return (
           <>

@@ -1,5 +1,11 @@
 import { Meta } from '@storybook/addon-docs';
-import { Tabs, Tab, Note, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import {
+  Tabs,
+  Tab,
+  Note,
+  CodeSnippet,
+  SupportInfo,
+} from '@abgov/shared/storybook-common';
 import { GoACallout } from '@abgov/react-components';
 
 <Meta title="Components/Callout" />
@@ -21,26 +27,35 @@ They can also be used to alert the user to system errors.
 </GoACallout>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-callout type="emergency" title="Emergency callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-callout type="emergency" title="Emergency callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
+    <CodeSnippet
+      lang="jsx"
+      code={`
       <GoACallout type="emergency" title="Emergency callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
@@ -53,26 +68,35 @@ Important callouts are used to communicate non-emergency but still important mes
 </GoACallout>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-callout type="important" title="Important callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-callout type="important" title="Important callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
+    <CodeSnippet
+      lang="jsx"
+      code={`
       <GoACallout type="important" title="Important callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
@@ -85,29 +109,37 @@ Information callout are used to communicate non-urgent information.
 </GoACallout>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-callout type="information" title="Information callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-callout type="information" title="Information callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
+    <CodeSnippet
+      lang="jsx"
+      code={`
       <GoACallout type="information" title="Information callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
-
 
 ## Success
 
@@ -118,26 +150,35 @@ Success callouts are used to inform the user of a positive status change to a pe
 </GoACallout>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-callout type="success" title="Success callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-callout type="success" title="Success callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
+    <CodeSnippet
+      lang="jsx"
+      code={`
       <GoACallout type="success" title="Success callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
@@ -150,26 +191,35 @@ Event callouts are used to communiate information about upcoming and scheduled e
 </GoACallout>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-callout type="event" title="Event callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-callout type="event" title="Event callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
+    <CodeSnippet
+      lang="jsx"
+      code={`
       <GoACallout type="event" title="Event callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 

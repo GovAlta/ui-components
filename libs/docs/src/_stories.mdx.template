@@ -19,7 +19,7 @@ import { GoABadge } from '@abgov/react-components';
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet lang="html" code={`
       <goa-badge type="warning" content="Warning" icon />
     `}/>

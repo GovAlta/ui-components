@@ -33,7 +33,7 @@ export const noop = () => {
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -107,7 +107,7 @@ export const CharCountTemplate = () => {
 <Story name="Character count">{CharCountTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-textarea name="firstname" showcounter="true" />`}
       lang="html"
@@ -157,7 +157,7 @@ export const CharCountWithLimitTemplate = () => {
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-textarea name="firstname" showcounter="true" maxcharcount="20" />`}
       lang="html"
@@ -195,7 +195,7 @@ export const CharCountWithLimitTemplate = () => {
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -232,7 +232,7 @@ export const CharCountWithLimitTemplate = () => {
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -265,7 +265,7 @@ export const CharCountWithLimitTemplate = () => {
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -298,7 +298,7 @@ export const CharCountWithLimitTemplate = () => {
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -324,14 +324,19 @@ export const CharCountWithLimitTemplate = () => {
   </Tab>
 </Tabs>
 
-### Width 
+### Width
 
 <Story name="Width">
-  <GoATextArea name="comment" width="100%" onChange={noop} placeholder="Can units of %, ch, px, etc" />
+  <GoATextArea
+    name="comment"
+    width="100%"
+    onChange={noop}
+    placeholder="Can units of %, ch, px, etc"
+  />
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-textarea name="firstname" width="100%" />`}
       lang="html"
