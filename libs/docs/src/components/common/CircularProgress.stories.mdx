@@ -91,6 +91,30 @@ export const FullscreenProgressTemplate = () => {
   <Prop name="message" type="object" defaultValue="" description="Text displayed under the circular spinner" />
 </Props>
 
+#### Basic 
+
+<Story name="Basic">
+  <GoACircularProgress visible={true} />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress visible />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-circular-progress [visible]="visible"></goa-circular-progress>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoACircularProgress visible={visible} />
+    `}/>
+  </Tab>
+</Tabs>
+
 #### Sizes
 
 <Story name="Sizes">
@@ -116,7 +140,7 @@ export const FullscreenProgressTemplate = () => {
         variant="inline"
         message="Loading..."
         size="small | large"
-        (visible)="visible">
+        [visible]="visible">
       </goa-circular-progress>
     `}/>
   </Tab>
@@ -158,7 +182,7 @@ Message text is optional for all the variations listed.
         variant="inline"
         size="large"
         message="Loading..."
-        (visible)="visible">
+        [visible]="visible">
       </goa-circular-progress>
     `}/>
   </Tab>
@@ -193,7 +217,7 @@ Message text is optional for all the variations listed.
         type="infinite"
         variant="inline"
         size="large"
-        (visible)="visible">
+        [visible]="visible">
       </goa-circular-progress>
     `}/>
   </Tab>
