@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+.container {
+  display: flex;
+  align-items: stretch;
+  height: -webkit-fill-available;
+}
+
+.navigation-bar {
+  flex: 0 0 200px;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+.content {
+  margin: 10px;
+  flex-grow: 1;
+}
+
+.navigation-link {
+  display: block;
+}
