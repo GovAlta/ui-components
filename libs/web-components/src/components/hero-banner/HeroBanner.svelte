@@ -17,7 +17,7 @@
     background-repeat: no-repeat;
   "
 >
-  <goa-page-block>
+  <goa-page-block width="full">
     <h1 role="heading">{title}</h1>
     <div class="goa-hero-banner-content" role="note">
       <slot />
