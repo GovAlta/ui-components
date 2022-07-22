@@ -5,6 +5,8 @@ import {
   Note,
   CodeSnippet,
   SupportInfo,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import { GoACallout } from '@abgov/react-components';
 
@@ -12,26 +14,45 @@ import { GoACallout } from '@abgov/react-components';
 
 # Callout
 
-Callouts communicate important changes or facts within the body layout through a strong visual emphasis,
-so that users take notice and read the information.
+### Callouts communicate important changes or facts within the body layout through a strong visual emphasis, so that users take notice and read the information.
 
 [Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/Components---DIO-DS?node-id=434%3A14140)
 
-## Emergency
+---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="type"
+    type="emergency | important | information | event | success"
+    required="true"
+    description="Sets the callout color and side icon"
+  />
+  <Prop
+    name="heading"
+    type="string"
+    description="Callout heading text"
+  />
+</Props>
+
+#### Emergency
 
 Emergency callout are used to alert the user to only the most important pieces of information.
 They can also be used to alert the user to system errors.
 
-<GoACallout type="emergency" title="Emergency callout">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-</GoACallout>
+<Story name="Emergency">
+  <GoACallout type="emergency" heading="Emergency callout">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
 
 <Tabs>
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
-      <goa-callout type="emergency" title="Emergency callout">
+      <goa-callout type="emergency" heading="Emergency callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
     `}
@@ -41,7 +62,7 @@ They can also be used to alert the user to system errors.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-callout type="emergency" title="Emergency callout">
+      <goa-callout type="emergency" heading="Emergency callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
     `}
@@ -51,7 +72,7 @@ They can also be used to alert the user to system errors.
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoACallout type="emergency" title="Emergency callout">
+      <GoACallout type="emergency" heading="Emergency callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
     `}
@@ -59,20 +80,22 @@ They can also be used to alert the user to system errors.
   </Tab>
 </Tabs>
 
-## Important
+#### Important
 
 Important callouts are used to communicate non-emergency but still important messages to a user.
 
-<GoACallout type="important" title="Important callout">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-</GoACallout>
+<Story name="Important">
+  <GoACallout type="important" heading="Important callout">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
 
 <Tabs>
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
-      <goa-callout type="important" title="Important callout">
+      <goa-callout type="important" heading="Important callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
     `}
@@ -82,7 +105,7 @@ Important callouts are used to communicate non-emergency but still important mes
     <CodeSnippet
       lang="html"
       code={`
-      <goa-callout type="important" title="Important callout">
+      <goa-callout type="important" heading="Important callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
     `}
@@ -92,7 +115,7 @@ Important callouts are used to communicate non-emergency but still important mes
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoACallout type="important" title="Important callout">
+      <GoACallout type="important" heading="Important callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
     `}
@@ -100,20 +123,22 @@ Important callouts are used to communicate non-emergency but still important mes
   </Tab>
 </Tabs>
 
-## Information
+#### Information
 
 Information callout are used to communicate non-urgent information.
 
-<GoACallout type="information" title="Information callout">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-</GoACallout>
+<Story name="Information">
+  <GoACallout type="information" heading="Information callout">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
 
 <Tabs>
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
-      <goa-callout type="information" title="Information callout">
+      <goa-callout type="information" heading="Information callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
     `}
@@ -123,7 +148,7 @@ Information callout are used to communicate non-urgent information.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-callout type="information" title="Information callout">
+      <goa-callout type="information" heading="Information callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
     `}
@@ -133,7 +158,7 @@ Information callout are used to communicate non-urgent information.
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoACallout type="information" title="Information callout">
+      <GoACallout type="information" heading="Information callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
     `}
@@ -141,20 +166,22 @@ Information callout are used to communicate non-urgent information.
   </Tab>
 </Tabs>
 
-## Success
+#### Success
 
 Success callouts are used to inform the user of a positive status change to a performed action.
 
-<GoACallout type="success" title="Success callout">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-</GoACallout>
+<Story name="Success">
+  <GoACallout type="success" heading="Success callout">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
 
 <Tabs>
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
-      <goa-callout type="success" title="Success callout">
+      <goa-callout type="success" heading="Success callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
     `}
@@ -164,7 +191,7 @@ Success callouts are used to inform the user of a positive status change to a pe
     <CodeSnippet
       lang="html"
       code={`
-      <goa-callout type="success" title="Success callout">
+      <goa-callout type="success" heading="Success callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
     `}
@@ -174,7 +201,7 @@ Success callouts are used to inform the user of a positive status change to a pe
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoACallout type="success" title="Success callout">
+      <GoACallout type="success" heading="Success callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
     `}
@@ -182,20 +209,22 @@ Success callouts are used to inform the user of a positive status change to a pe
   </Tab>
 </Tabs>
 
-## Events
+#### Events
 
 Event callouts are used to communiate information about upcoming and scheduled events.
 
-<GoACallout type="event" title="Event callout">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-</GoACallout>
+<Story name="Events">
+  <GoACallout type="event" heading="Event callout">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
 
 <Tabs>
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
-      <goa-callout type="event" title="Event callout">
+      <goa-callout type="event" heading="Event callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
     `}
@@ -205,7 +234,7 @@ Event callouts are used to communiate information about upcoming and scheduled e
     <CodeSnippet
       lang="html"
       code={`
-      <goa-callout type="event" title="Event callout">
+      <goa-callout type="event" heading="Event callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </goa-callout>
     `}
@@ -215,7 +244,7 @@ Event callouts are used to communiate information about upcoming and scheduled e
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoACallout type="event" title="Event callout">
+      <GoACallout type="event" heading="Event callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
     `}

@@ -1,0 +1,122 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { Tabs, Tab, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import { GoAPage, GoAMicrositeHeader, GoAPageBlock, GoAAppHeader, GoAAppFooter, GoASkeleton, GoAFlexRow, GoAFlexCol } from '@abgov/react-components';
+
+<Meta title="Components/Page" />
+
+# Page
+
+### A page 
+
+[Figma design component](https://www.figma.com/file/???)
+
+---
+
+#### Basic
+
+<Story name="Basic">
+  <div style={{
+    border: "1px solid #ddd", 
+    borderRadius: "3px",
+  }}>
+    <div style={{
+      backgroundColor: "#ddd",
+      height: "24px",
+      padding: "2px",
+      display: "flex",
+      alignItems: "center",
+      paddingLeft: "8px",
+      gap: "6px",
+    }}>
+      <div style={{height: "12px", width: "12px", borderRadius: "12px", backgroundColor: "red"}}></div>  
+      <div style={{height: "12px", width: "12px", borderRadius: "12px", backgroundColor: "green"}}></div>  
+      <div style={{height: "12px", width: "12px", borderRadius: "12px", backgroundColor: "yellow"}}></div>  
+    </div>
+    <GoAPage>
+      <section slot="header">
+        <GoAMicrositeHeader level="alpha" version="UAT" />
+        <GoAAppHeader url="/" title="Design System">
+          <a href="/login">Sign in</a>
+        </GoAAppHeader>
+      </section>
+      <GoAPageBlock width="704px">
+        <p>
+          <GoASkeleton type="header" size={4} />
+          <GoASkeleton type="lines" size={1} />
+        </p>
+        <p>
+          <GoASkeleton type="header" size={4} />
+          <GoASkeleton type="lines" size={1} />
+        </p>
+        <GoAFlexRow gap="small">
+          <GoASkeleton type="card" size={4} />
+          <GoASkeleton type="card" size={4} />
+        </GoAFlexRow>
+      </GoAPageBlock>
+      <section slot="footer">
+        <GoAAppFooter />
+      </section>
+    </GoAPage>
+  </div>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet lang="html" code={`
+      <goa-page>
+        <section slot="header">
+          <goa-microsite-header level="alpha" version="UAT" />
+          <goa-app-header url="/" title="Design System">
+            <a href="/login">Sign in</a>
+          </goa-app-header>
+        </section>
+        <goa-page-block width="704px">
+          <!-- Insert custom content here -->
+        </goa-page-block>
+        <section slot="footer">
+          <goa-app-footer />
+        </section>
+      </goa-page>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-page>
+        <section slot="header">
+          <goa-microsite-header level="alpha" version="UAT" />
+          <goa-app-header url="/" title="Design System">
+            <a href="/login">Sign in</a>
+          </goa-app-header>
+        </section>
+        <goa-page-block width="704px">
+          <!-- Insert custom content here -->
+        </goa-page-block>
+        <section slot="footer">
+          <goa-app-footer />
+        </section>
+      </goa-page>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoAPage>
+        <section slot="header">
+          <GoAMicrositeHeader level="alpha" version="UAT" />
+          <GoAAppHeader url="/" title="Design System">
+            <a href="/login">Sign in</a>
+          </GoAAppHeader>
+        </section>
+        <GoAPageBlock width="704px">
+          <!-- Insert custom content here -->
+        </GoAPageBlock>
+        <section slot="footer">
+          <GoAAppFooter />
+        </section>
+      </GoAPage>
+    `}/>
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />

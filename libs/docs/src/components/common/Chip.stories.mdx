@@ -4,7 +4,8 @@ import {
   Tab,
   CodeSnippet,
   SupportInfo,
-  Markdown,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import { GoAButton, GoAChip } from '@abgov/react-components';
 import { useState } from 'react';
@@ -18,6 +19,38 @@ import { useState } from 'react';
 [Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI-DS?node-id=5668%3A223675)
 
 ---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="leadingicon"
+    type="GoAIconType"
+    required="true"
+    description="Sets the callout color and side icon"
+  />
+  <Prop
+    name="error"
+    type="boolean"
+    description=""
+  />
+  <Prop
+    name="deletable"
+    type="boolean"
+    description="Whether the chip shows a delete button"
+  />
+  <Prop
+    name="content"
+    type="string"
+    required="true"
+    description="Text within chip"
+  />
+  <Prop
+    name="_click"
+    type="CustomEvent"
+    description="Callback when deletable and delete icon is clicked"
+  />
+</Props>
 
 #### Basic
 

@@ -19,19 +19,13 @@ import {
   SupportInfo,
   Tabs,
   Tab,
-  Note,
-  Block,
-  Do,
-  Dont,
-  StateDisplay,
   CodeSnippet,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import {
   Meta,
-  Preview,
   Story,
-  ArgsTable,
-  Description,
 } from '@storybook/addon-docs';
 
 <Meta title="Components/Inputs" component={GoAInput} />
@@ -42,9 +36,78 @@ import {
 
 [Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/DIO-DS---Components?node-id=133%3A186)
 
+---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="type"
+    type="text | number | password | email | search | tel | time | url | week"
+    defaultValue="text"
+  />
+  <Prop
+    name="value"
+    type="string"
+  />
+  <Prop
+    name="placeholder"
+    type="string"
+  />
+  <Prop
+    name="leadingicon"
+    type="GoAIconType"
+  />
+  <Prop
+    name="trailingicon"
+    type="GoAIconType"
+  />
+  <Prop
+    name="disabled"
+    type="boolean"
+  />
+  <Prop
+    name="handletrailingiconclick"
+    type="boolean"
+  />
+  <Prop
+    name="focused"
+    type="boolean"
+  />
+  <Prop
+    name="readonly"
+    type="boolean"
+  />
+  <Prop
+    name="error"
+    type="boolean"
+  />
+  <Prop
+    name="width"
+    type="string"
+    defaultValue="30ch"
+  />
+  <Prop
+    name="showcounter"
+    type="boolean"
+  />
+  <Prop
+    name="maxcharcount"
+    type="number"
+  />
+  <Prop
+    name="_change"
+    type="CustomEvent<{detail: {name: string, value: string}}>"
+  />
+  <Prop
+    name="_trailingiconclick"
+    type="CustomEvent"
+  />
+</Props>
+
 export const noop = () => {};
 
-### Basic
+#### Basic
 
 export const InputTemplate = () => {
   const [value, setValue] = useState('');
@@ -121,7 +184,7 @@ export const InputTemplate = () => {
   </Tab>
 </Tabs>
 
-### Icons
+#### Icons
 
 export const IconInputTemplate = () => (
   <>
@@ -161,7 +224,7 @@ export const IconInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Icon buttons
+#### Icon buttons
 
 export const IconButtonInputTemplate = () => (
   <>
@@ -228,7 +291,7 @@ export const IconButtonInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Disabled
+#### Disabled
 
 export const DisabledInputTemplate = () => (
   <>
@@ -259,7 +322,7 @@ export const DisabledInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Error state
+#### Error state
 
 export const ErrorInputTemplate = () => (
   <>
@@ -281,7 +344,7 @@ export const ErrorInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Focus
+#### Focus
 
 export const FocusInputTemplate = () => (
   <>
@@ -303,7 +366,7 @@ export const FocusInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Character count
+#### Character count
 
 export const CharCountTemplate = () => {
   const [value, setValue] = useState('');
@@ -350,7 +413,7 @@ export const CharCountTemplate = () => {
   </Tab>
 </Tabs>
 
-### Character count with limit
+#### Character count with limit
 
 export const CharCountWithLimitTemplate = () => {
   const [value, setValue] = useState('');
@@ -401,7 +464,7 @@ export const CharCountWithLimitTemplate = () => {
   </Tab>
 </Tabs>
 
-### Width
+#### Width
 
 export const WidthTemplate = ({ width }) => {
   return (

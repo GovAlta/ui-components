@@ -4,6 +4,8 @@ import {
   Tab,
   SupportInfo,
   CodeSnippet,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import { GoAButton, GoAButtonGroup } from '@abgov/react-components';
 
@@ -15,9 +17,57 @@ export const noop = () => {};
 
 ### Use a button to carry out an important action or to navigate to another page. See also: <a href="https://www.figma.com/file/UbIKwjbxuPUvoFNYvMBGpe/%E2%9D%96-Patterns-%7C-DDI-DS?node-id=1792%3A20682">button placement</a>
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=420%3A6810)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=5910%3A235039)
 
 ---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="type"
+    type="primary | secondary | tertiary | start"
+    defaultValue="primary"
+    description=""
+  />
+  <Prop
+    name="size"
+    type="normal | compact"
+    defaultValue="normal"
+    description=""
+  />
+  <Prop
+    name="variant"
+    type="normal | danger"
+    defaultValue="normal"
+    description=""
+  />
+  <Prop
+    name="title"
+    type="string"
+    description=""
+  />
+  <Prop
+    name="disabled"
+    type="boolean"
+    defaultValue="false"
+    description=""
+  />
+  <Prop
+    name="leadingicon"
+    type="GoAIconType"
+    description=""
+  />
+  <Prop
+    name="trailingicon"
+    type="GoAIconType"
+    description=""
+  />
+  <Prop
+    name="_click"
+    type="CustomEvent"
+  />
+</Props>
 
 #### Types
 
@@ -101,8 +151,6 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
     />
   </Tab>
 </Tabs>
-
----
 
 #### Sizes
 

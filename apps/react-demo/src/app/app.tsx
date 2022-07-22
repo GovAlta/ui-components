@@ -10,7 +10,7 @@ export default function App() {
     <>
       <GoAMicrositeHeader level="alpha" version="UAT"></GoAMicrositeHeader>
 
-      <GoAAppHeader url="#" title="Design Systems">
+      <GoAAppHeader url="#" heading="Design Systems">
       </GoAAppHeader>
 
       <div className="container">

@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let title: string;
+  export let heading: string;
   export let backgroundurl: string;
 </script>
 
@@ -18,7 +18,7 @@
   "
 >
   <goa-page-block width="full">
-    <h1 role="heading">{title}</h1>
+    <h1>{heading}</h1>
     <div class="goa-hero-banner-content" role="note">
       <slot />
     </div>

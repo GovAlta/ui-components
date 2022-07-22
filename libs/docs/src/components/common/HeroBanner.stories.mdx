@@ -5,6 +5,8 @@ import {
   Tab,
   Note,
   CodeSnippet,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import {
   GoAHeroBanner,
@@ -21,11 +23,29 @@ When a page requires promotion or is featured, a photograph may be inserted into
 
 [Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/Components---DIO-DS?node-id=3800%3A118528)
 
-## Default
+--- 
 
-<Story name="Default">
+#### Properties
+
+<Props>
+  <Prop
+    name="heading"
+    type="string"
+    required="true"
+    description="Main heading text"
+  />
+  <Prop
+    name="backgroundurl"
+    type="string"
+    description="Background image url"
+  />
+</Props>
+
+#### Basic
+
+<Story name="Basic">
   <GoAHeroBanner
-    title="Hero Banner"
+    heading="Hero Banner"
     backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
   >
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,
@@ -40,7 +60,7 @@ When a page requires promotion or is featured, a photograph may be inserted into
       lang="html"
       code={`
       <goa-hero-banner
-        title="Hero Banner"
+        heading="Hero Banner"
         backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
@@ -53,7 +73,7 @@ When a page requires promotion or is featured, a photograph may be inserted into
       lang="html"
       code={`
       <goa-hero-banner
-        title="Hero Banner"
+        heading="Hero Banner"
         backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
@@ -66,7 +86,7 @@ When a page requires promotion or is featured, a photograph may be inserted into
       lang="jsx"
       code={`
       <GoAHeroBanner
-        title="Hero Banner"
+        heading="Hero Banner"
         backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
@@ -76,11 +96,11 @@ When a page requires promotion or is featured, a photograph may be inserted into
   </Tab>
 </Tabs>
 
-## With Actions
+#### With Actions
 
 <Story name="Actions">
   <GoAHeroBanner
-    title="Hero Banner"
+    heading="Hero Banner"
     backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
   >
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,
@@ -103,7 +123,7 @@ When a page requires promotion or is featured, a photograph may be inserted into
       lang="html"
       code={`
       <goa-hero-banner
-        title="Hero Banner"
+        heading="Hero Banner"
         backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
@@ -122,7 +142,7 @@ When a page requires promotion or is featured, a photograph may be inserted into
       lang="html"
       code={`
       <goa-hero-banner
-        title="Hero Banner"
+        heading="Hero Banner"
         backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
@@ -141,7 +161,7 @@ When a page requires promotion or is featured, a photograph may be inserted into
       lang="jsx"
       code={`
       <GoAHeroBanner
-        title="Hero Banner"
+        heading="Hero Banner"
         backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!

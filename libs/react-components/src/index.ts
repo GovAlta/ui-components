@@ -57,6 +57,8 @@ import type { GoAIconType } from './lib/icons';
 // import type { BadgeType as GoABadgeType } from '@abgov/shared-common'
 import type { GoABadgeType } from './lib/badge/badge';
 
+export * from './lib/page/page';
+
 export * from './lib/footer/footer';
 
 export * from './lib/footer-nav-section/footer-nav-section';

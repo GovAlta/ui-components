@@ -5,6 +5,8 @@ import {
   Note,
   CodeSnippet,
   SupportInfo,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import { GoARadioGroup, GoARadioItem } from '@abgov/react-components';
 import { useState } from 'react';
@@ -15,9 +17,31 @@ import { useState } from 'react';
 
 ### Radios allow users to select one option from a set.
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/DIO-DS---Components?node-id=102%3A26)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=7038%3A246448)
 
 ---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="name"
+    type="string"
+    required="true"
+    description="Must match the name assigned to the children"
+  />
+  <Prop
+    name="value"
+    type="string"
+    description="Value binding"
+  />
+  <Prop
+    name="_change"
+    type="CustomEvent<{detail: {name: string, value: string}}>"
+    description="onChange event"
+  />
+</Props>
+
 
 export const BasicTemplate = (args) => {
   const [value, setValue] = useState('');
@@ -73,7 +97,7 @@ export const BasicTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" (_change)="onChange()">
+      <goa-radio-group name="color" [value]="color" (_change)="onChange()">
         <goa-radio-item name="color" value="red"></goa-radio-item>
         <goa-radio-item name="color" value="blue"></goa-radio-item>
         <goa-radio-item name="color" value="orange"></goa-radio-item>
@@ -85,7 +109,7 @@ export const BasicTemplate = (args) => {
       code={`
       export class MyComponent {
         onChange(e) {
-          console.log('onChange', e.detail.name, e.detail.value);
+          this.color = e.detail.value;
         }
       }
     `}
@@ -96,11 +120,9 @@ export const BasicTemplate = (args) => {
       lang="tsx"
       code={`
       export const MyComponent = () {
-        function onChange(name: string, value: string) {
-          console.log('onChange', name, value);
-        }
+        const [color, setColor] = useState<string>("");
         return (
-          <GoARadioGroup name="color" value="orange" onChange={onChange}>
+          <GoARadioGroup name="color" value={color} onChange={(_name, value) => setColor(value) }>
             <GoARadioItem name="color" value="red" />
             <GoARadioItem name="color" value="blue" />
             <GoARadioItem name="color" value="orange"/>
@@ -183,7 +205,7 @@ Display a custom label that is different that the `value` property.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" disabled>
+      <goa-radio-group name="color" value="orange">
         <goa-radio-item name="color" label="Red" value="red" />
         <goa-radio-item name="color" label="Blue" value="blue" />
         <goa-radio-item name="color" label="Orange" value="orange" />
@@ -195,7 +217,7 @@ Display a custom label that is different that the `value` property.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" disabled">
+      <goa-radio-group name="color" value="orange"">
         <goa-radio-item name="color" label="Red" value="red"></goa-radio-item>
         <goa-radio-item name="color" label="Blue" value="blue"></goa-radio-item>
         <goa-radio-item name="color" label="Orange" value="orange"></goa-radio-item>
@@ -207,7 +229,7 @@ Display a custom label that is different that the `value` property.
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoARadioGroup name="color" value="orange" onChange={noop} disabled={true}>
+      <GoARadioGroup name="color" value="orange" onChange={noop}>
         <GoARadioItem name="color" label="Red" value="red" />
         <GoARadioItem name="color" label="Blue" value="blue" />
         <GoARadioItem name="color" label="Orange" value="orange"/>

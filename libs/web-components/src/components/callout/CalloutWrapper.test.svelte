@@ -2,10 +2,10 @@
 
 <script lang="ts">
   export let content: string;
-  export let title: string;
+  export let heading: string;
   export let type: string;
 </script>
 
-<goa-callout type={type} title={title}>
+<goa-callout type={type} heading={heading}>
   {content}
 </goa-callout>

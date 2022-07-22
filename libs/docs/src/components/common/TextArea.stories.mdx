@@ -5,6 +5,8 @@ import {
   Tabs,
   Tab,
   CodeSnippet,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import { GoATextArea } from '@abgov/react-components';
 
@@ -15,6 +17,28 @@ import { GoATextArea } from '@abgov/react-components';
 ### Text inputs let users enter and input text. Text areas can be used when trying to collect more information than may fit in a traditional form field.
 
 [Figma design documentation](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/Components---DIO-DS?node-id=458%3A16042)
+
+---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="name"
+    type="string"
+    required="true"
+  />
+  <Prop
+    name="value"
+    type="string"
+    required="true"
+    description="Bound to value"
+  />
+  <Prop
+    name="_change"
+    type="CustomEvent<{detail: { name: string, value: string }}>"
+  />
+</Props>
 
 export const noop = () => {
   /* noop */

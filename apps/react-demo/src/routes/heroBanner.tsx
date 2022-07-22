@@ -6,7 +6,7 @@ export default function HeroBanner() {
     <>
       <h3>Default</h3>
       <GoAHeroBanner
-        title="Hero Banner"
+        heading="Hero Banner"
         backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,
@@ -17,7 +17,7 @@ export default function HeroBanner() {
       <br />
       <h3>With Actions</h3>
       <GoAHeroBanner
-        title="Hero Banner"
+        heading="Hero Banner"
         backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,

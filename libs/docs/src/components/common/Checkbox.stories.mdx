@@ -8,6 +8,8 @@ import {
   Note,
   CodeSnippet,
   SupportInfo,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import { GoACheckbox } from '@abgov/react-components';
 
@@ -31,18 +33,52 @@ export const checkboxTemplate = (args) => {
 
 # Checkbox
 
-Checkboxes are contained in a fieldset for accessibility and categorization purposes.
-The option group (checkbox and label) can be selected by the user with an input device.
-The option is meant to be submitted as data and is part of a form.
-The input data, while can be selected, will not be recorded until the user presses a submission button.
+### Checkboxes are contained in a fieldset for accessibility and categorization purposes. The option group (checkbox and label) can be selected by the user with an input device. The option is meant to be submitted as data and is part of a form. The input data, while can be selected, will not be recorded until the user presses a submission button.
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI-DS?node-id=183%3A219)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=7038%3A243247)
 
-<hr />
+---
 
-## Basic
+#### Properties
 
-export const onChangeCheckboxTemplate = checkboxTemplate.bind({});
+<Props>
+  <Prop
+    name="name"
+    type="string"
+    required="true"
+  />
+  <Prop
+    name="checked"
+    type="boolean"
+    required="true"
+  />
+  <Prop
+    name="text"
+    type="string"
+  />
+  <Prop
+    name="value"
+    type="string"
+  />
+  <Prop
+    name="disabled"
+    type="boolean"
+  />
+  <Prop
+    name="error"
+    type="boolean"
+  />
+  <Prop
+    name="_change"
+    type="CustomEvent<{detail: {
+     name: string, checked: boolean, value: string
+    }}>"
+  />
+</Props>
+
+#### Basic
+
+export const onChangeCheckboxTemplate = checkboxTemplate.bind();
 onChangeCheckboxTemplate.args = {
   checked: false,
 };
@@ -112,7 +148,7 @@ onChangeCheckboxTemplate.args = {
   </Tab>
 </Tabs>
 
-## States
+#### States
 
 Checkboxes can be checked or unchecked.
 They have default, focus, hover, disabled and error states.
@@ -120,7 +156,7 @@ They have default, focus, hover, disabled and error states.
 It’s that in-between state that we might consider a “Mix” between “Selected” and “Unselected” options.
 Indeterminate state is not supported as of now.
 
-### Checked
+#### Checked
 
 export const checkedCheckboxTemplate = checkboxTemplate.bind({});
 checkedCheckboxTemplate.args = {
@@ -132,25 +168,25 @@ checkedCheckboxTemplate.args = {
 <Tabs>
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
-      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" checked></goa-checkbox>`}
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" checked="true"></goa-checkbox>`}
       lang="html"
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
-      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" checked></goa-checkbox>`}
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" checked="true"></goa-checkbox>`}
       lang="html"
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
-      code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" checked></GoACheckbox>`}
+      code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" checked={true}></GoACheckbox>`}
       lang="jsx"
     />
   </Tab>
 </Tabs>
 
-### Disabled
+#### Disabled
 
 export const disabledCheckboxTemplate = () => (
   <GoACheckbox name="desserts" text="Ice Cream" disabled></GoACheckbox>
@@ -161,25 +197,25 @@ export const disabledCheckboxTemplate = () => (
 <Tabs>
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
-      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" disabled></goa-checkbox>`}
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" disabled="true"></goa-checkbox>`}
       lang="html"
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
-      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" disabled></goa-checkbox>`}
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" disabled="true"></goa-checkbox>`}
       lang="html"
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
-      code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" disabled></GoACheckbox>`}
+      code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" disabled={true}></GoACheckbox>`}
       lang="jsx"
     />
   </Tab>
 </Tabs>
 
-### Error
+#### Error
 
 export const errorCheckboxTemplate = checkboxTemplate.bind({});
 errorCheckboxTemplate.args = {
@@ -191,19 +227,19 @@ errorCheckboxTemplate.args = {
 <Tabs>
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
-      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error></goa-checkbox>`}
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error="true"></goa-checkbox>`}
       lang="html"
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
-      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error></goa-checkbox>`}
+      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error="true"></goa-checkbox>`}
       lang="html"
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
-      code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" error></GoACheckbox>`}
+      code={`<GoACheckbox name="desserts" text="Ice Cream" value="10" error={true}></GoACheckbox>`}
       lang="jsx"
     />
   </Tab>

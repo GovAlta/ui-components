@@ -17,7 +17,7 @@ import { GoAButton, GoACircularProgress } from '@abgov/react-components';
 
 ### A circular progress component provides visual feedback to users after they request an action from the system, e.g., submitting a form, calculating a fee, configuring tables. The progress indicator holds a user’s attention by indicating continued progress while the system loads the appropriate content. The most common progress indicators are either circular or linear.
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI-DS?node-id=3799%3A118526)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=633%3A12563)
 
 ---
 
@@ -142,7 +142,7 @@ export const FullscreenProgressTemplate = () => {
   />
   <Prop
     name="message"
-    type="object"
+    type="string"
     defaultValue=""
     description="Text displayed under the circular spinner"
   />
@@ -155,7 +155,7 @@ export const FullscreenProgressTemplate = () => {
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet lang="html" code={`
       <goa-circular-progress visible />
     `}/>
@@ -199,7 +199,13 @@ export const FullscreenProgressTemplate = () => {
       <goa-circular-progress
         type="infinite"
         variant="inline"
-        size="small | large"
+        size="small"
+        message="Loading..."
+        visible />
+      <goa-circular-progress
+        type="infinite"
+        variant="inline"
+        size="large"
         message="Loading..."
         visible />
     `}
@@ -213,7 +219,14 @@ export const FullscreenProgressTemplate = () => {
         type="infinite"
         variant="inline"
         message="Loading..."
-        size="small | large"
+        size="small"
+        [visible]="visible">
+      </goa-circular-progress>
+      <goa-circular-progress
+        type="infinite"
+        variant="inline"
+        message="Loading..."
+        size="large"
         [visible]="visible">
       </goa-circular-progress>
     `}
@@ -227,7 +240,13 @@ export const FullscreenProgressTemplate = () => {
         type="infinite"
         variant="inline"
         message="Loading..."
-        size="small | large"
+        size="small"
+        visible={visible} />
+      <GoACircularProgress
+        type="infinite"
+        variant="inline"
+        message="Loading..."
+        size="large"
         visible={visible} />
     `}
     />

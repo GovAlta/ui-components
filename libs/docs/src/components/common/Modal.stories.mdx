@@ -5,6 +5,8 @@ import {
   Tab,
   Note,
   CodeSnippet,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import { GoAButton, GoAButtonGroup, GoAModal } from '@abgov/react-components';
 import { useState } from 'react';
@@ -15,9 +17,44 @@ import { useState } from 'react';
 
 ### A modal is a type of window that appears in front of the main page content and disables all other functionality while visible. Modals purposefully disrupt the user's workflow to capture their attention. The content in a modal should be succinct, direct, and contextually relevant to the user.
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DIO-DS?node-id=622%3A13874)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=633%3A10740)
 
 ---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="heading"
+    type="string"
+    description="Modal title text"
+  />
+  <Prop
+    name="open"
+    type="boolean"
+    description="Controls if modal is visible or not"
+  />
+  <Prop
+    name="closable"
+    type="boolean"
+    description="Show close icon and allow clicking the background to close the modal"
+  />
+  <Prop
+    name="transition"
+    type="fast | slow | none"
+    description="How modal transition onto screen"
+  />
+  <Prop
+    name="_close"
+    type="CustomEvent"
+    description="Dispatched when modal is closable and is closed."
+  />
+  <Prop
+    name="actions"
+    type="slot"
+    description="Content displayed in the top right of the heading bar"
+  />
+</Props>
 
 #### Basic
 

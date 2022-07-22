@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Tabs, Tab, Note, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import { Tabs, Tab, Note, CodeSnippet, SupportInfo, Props, Prop } from '@abgov/shared/storybook-common';
 import { GoAContainer, GoAButton, GoABadge } from '@abgov/react-components';
 
 <Meta
@@ -11,13 +11,37 @@ import { GoAContainer, GoAButton, GoABadge } from '@abgov/react-components';
 
 # Container
 
-Containers are used to group information, create hierarchy, facilitate navigation, highlight a feature, or promote a call-to-action.
+### Containers are used to group information, create hierarchy, facilitate navigation, highlight a feature, or promote a call-to-action. Containers should be easy to scan for relevant and actionable information.
 
-Containers should be easy to scan for relevant and actionable information.
-
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/Components---DIO-DS?node-id=1791%3A13792)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=1791%3A19104)
 
 ---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="variant"
+    type="primary | info | error | success | warning | default"
+    defaultValue="default"
+  />
+  <Prop
+    name="colored"
+    type="boolean"
+    defaultValue="false"
+  />
+  <Prop
+    name="headingsize"
+    type="large | small | none"
+    defaultValue="large"
+  />
+  <Prop
+    name="padding"
+    type="relaxed | compact"
+    defaultValue="relaxed"
+  />
+</Props>
+
 
 #### Basic
 
