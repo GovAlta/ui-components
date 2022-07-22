@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 import { createHtmlReport } from "axe-html-reporter";
-import { axeHtmlReporterOptions } from "../support/axe-html-report-utils";
+import { axeHtmlReporterOptions } from "../support/axe-html-report-utils.ts";
 
 const cucumber = require('cypress-cucumber-preprocessor').default;
 const browserify = require('@cypress/browserify-preprocessor');
@@ -15,7 +15,6 @@ module.exports = (on, config) => {
   on('file:preprocessor', cucumber(options))
   on('task',
     {
-
       // logs message to console
       log(message) {
         console.log(message)
