@@ -20,13 +20,13 @@ Then(/^cs I should be able to validate css properties of a character count TextA
   cy.get('goa-input[name="firstname"]').get('div[class="goa-input variant--goa type--text"]').find('input[class="input--goa"]').should("have.css", "border-color", hexToRgb(properties["goa-color-text"]));
   cy.get('goa-input[name="firstname"]').get('div[class="goa-input variant--goa type--text"]').find('input[class="input--goa"]').should("have.css", "border-radius", properties["input-border-radius-0px"]);
   cy.get('goa-input[name="firstname"]').get('div[class="goa-input variant--goa type--text"]').find('input[class="input--goa"]').eq(5).type("This is a test");
-  cy.get('goa-input[name="firstname"]').get('div[class="counter').contains("14");
-  cy.get('goa-input[name="firstname"]').get('div[class="counter').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
-  cy.get('goa-input[name="firstname"]').get('div[class="counter').should("have.css", "font-size", remToPx(properties["fs-sm"]));
-  cy.get('goa-input[name="firstname"]').get('div[class="counter').should("have.css", "line-height", remToPx(properties["lh-base"]));
-  cy.get('goa-input[name="firstname"]').get('div[class="counter').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-input[name="firstname"]').get('div[class="counter"]').contains("14");
+  cy.get('goa-input[name="firstname"]').get('div[class="counter"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-input[name="firstname"]').get('div[class="counter"]').should("have.css", "font-size", remToPx(properties["fs-sm"]));
+  cy.get('goa-input[name="firstname"]').get('div[class="counter"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-input[name="firstname"]').get('div[class="counter"]').should("have.css", "font-family", properties["font-family"]);
   cy.get('goa-input[name="firstname"]').eq(1).find('input').focus();
-  cy.get('goa-input[name="firstname"]').eq(1).find('.goa-input').should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]) + " 0px 0px 0px 3px");
+  cy.get('goa-input[name="firstname"]').eq(1).find('.goa-input').should("have.css", "box-shadow").should("contain",hexToRgb(properties["goa-color-interactivefocus"]));
 });
 
 Then(/^cs I should be able to validate css properties of a maxcharacter count TextArea$/, function () {

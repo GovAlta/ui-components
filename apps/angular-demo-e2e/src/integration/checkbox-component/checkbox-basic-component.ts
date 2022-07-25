@@ -11,7 +11,7 @@ When(/^cs Navigating to checkbox Type basic component$/, function () {
 
 Then(/^cs I should be able to validate basic checkbox css property$/, function () {
   cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container').should("have.css", "border");
-  cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container').should("have.css", "border", "1px solid " + hexToRgb(properties["color-gray-600"]));
+  cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container').should("have.css", "border").should("contain", hexToRgb(properties["color-gray-600"]));
   cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container').should("have.css", "box-sizing", properties["box-sizing"]);
   cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
   cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container').should("have.css", "font-size", remToPx(properties["fs-base"]));
@@ -20,7 +20,7 @@ Then(/^cs I should be able to validate basic checkbox css property$/, function (
 
 Then(/^cs I should be able to validate checked checkbox css property$/, function () {
   cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container.goa-checkbox--selected').should("have.css", "border");
-  cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container').should("have.css", "border", "1px solid " + hexToRgb(properties["color-gray-600"]));
+  cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container').should("have.css", "border").should("contain", hexToRgb(properties["color-gray-600"]));
   cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container.goa-checkbox--selected').should("have.css", "box-sizing", properties["box-sizing"]);
   cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container.goa-checkbox--selected').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
   cy.get('goa-checkbox[name="desserts"]').find('label.goa-checkbox').find('div.goa-checkbox-container.goa-checkbox--selected').should("have.css", "font-size", remToPx(properties["fs-base"]));
@@ -30,7 +30,7 @@ Then(/^cs I should be able to validate checked checkbox css property$/, function
 
 Then(/^cs I should be able to validate disabled checkbox css property$/, function () {
   cy.get('goa-checkbox[name="desserts"]').find('label[class="goa-checkbox goa-checkbox--disabled"]').should("have.css", "border");
-  cy.get('goa-checkbox[name="desserts"]').find('label[class="goa-checkbox goa-checkbox--disabled"]').find('div.goa-checkbox-container').should("have.css", "border", "1px solid " + hexToRgb(properties["color-gray-400"]));
+  cy.get('goa-checkbox[name="desserts"]').find('label[class="goa-checkbox goa-checkbox--disabled"]').find('div.goa-checkbox-container').should("have.css", "border").should('contain', hexToRgb(properties["color-gray-400"]));
   // cy.get('goa-checkbox[name="desserts"]').find('label[class="goa-checkbox goa-checkbox--disabled"]').should("have.css", "box-sizing", properties["box-sizing"]);
   cy.get('goa-checkbox[name="desserts"]').find('label[class="goa-checkbox goa-checkbox--disabled"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
   cy.get('goa-checkbox[name="desserts"]').find('label[class="goa-checkbox goa-checkbox--disabled"]').should("have.css", "font-size", remToPx(properties["fs-base"]));

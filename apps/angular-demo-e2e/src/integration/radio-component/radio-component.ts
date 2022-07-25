@@ -12,7 +12,7 @@ When(/^cs Navigating to Radio basic component$/, function () {
 Then(/^cs I should be able to validate radio basic button css property when unchecked$/, function () {
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio').find('div.goa-radio-icon').should("have.css", "border");
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio').find('div.goa-radio-icon').should("have.css", "border-radius", "50%");
-  cy.get('goa-radio-group[name="color"]').find('label.goa-radio').find('div.goa-radio-icon').should("have.css", "border", properties["goa-radio-border-width"] + " solid " + hexToRgb(properties["color-gray-600"]));
+  cy.get('goa-radio-group[name="color"]').find('label.goa-radio').find('div.goa-radio-icon').should("have.css", "border").should("contain",hexToRgb(properties["color-gray-600"]));
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio').find('div.goa-radio-icon').should("have.css", "width", remToPx(properties["goa-radio-diameter"]));
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio').find('div.goa-radio-icon').should("have.css", "height", remToPx(properties["goa-radio-diameter"]));
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio').find('div.goa-radio-icon').should("have.css", "box-sizing", properties["box-sizing"]);
@@ -25,7 +25,7 @@ Then(/^cs I should be able to validate radio basic button css property when unch
 Then(/^cs I should be able to validate radio basic button css property when checked$/, function () {
   cy.get('goa-radio-group[name="color"]').find('label[data-testid="radio-option-orange"]').find('div.goa-radio-icon').should("have.css", "border");
   cy.get('goa-radio-group[name="color"]').find('label[data-testid="radio-option-orange"]').find('div.goa-radio-icon').should("have.css", "border-radius", "50%");
-  cy.get('goa-radio-group[name="color"]').find('label[data-testid="radio-option-orange"]').find('div.goa-radio-icon').should("have.css", "border", properties["goa-radio-border-width--checked"] + " solid " + hexToRgb(properties["goa-color-interactive--active"]));
+  cy.get('goa-radio-group[name="color"]').find('label[data-testid="radio-option-orange"]').find('div.goa-radio-icon').should("have.css", "border").should("contain",hexToRgb(properties["goa-color-interactive--active"]));
   cy.get('goa-radio-group[name="color"]').find('label[data-testid="radio-option-orange"]').find('div.goa-radio-icon').should("have.css", "width", remToPx(properties["goa-radio-diameter"]));
   cy.get('goa-radio-group[name="color"]').find('label[data-testid="radio-option-orange"]').find('div.goa-radio-icon').should("have.css", "height", remToPx(properties["goa-radio-diameter"]));
   cy.get('goa-radio-group[name="color"]').find('label[data-testid="radio-option-orange"]').find('div.goa-radio-icon').should("have.css", "box-sizing", properties["box-sizing"]);
@@ -37,7 +37,7 @@ Then(/^cs I should be able to validate radio basic button css property when chec
 Then(/^cs I should be able to validate radio error button css property when unchecked$/, function () {
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "border");
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "border-radius", "50%");
-  cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "border", "2px solid " + hexToRgb(properties["goa-color-status-emergency"]));
+  cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "border").should("contain",hexToRgb(properties["goa-color-status-emergency"]));
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "width", remToPx(properties["goa-radio-diameter"]));
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "height", remToPx(properties["goa-radio-diameter"]));
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "box-sizing", properties["box-sizing"]);
@@ -49,7 +49,7 @@ Then(/^cs I should be able to validate radio error button css property when unch
 Then(/^cs I should be able to validate radio error button css property when checked$/, function () {
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "border");
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "border-radius", "50%");
-  cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "border", "2px solid " + hexToRgb(properties["goa-color-status-emergency"]));
+  cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "border").should("contain",hexToRgb(properties["goa-color-status-emergency"]));
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "width", remToPx(properties["goa-radio-diameter"]));
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "height", remToPx(properties["goa-radio-diameter"]));
   cy.get('goa-radio-group[name="color"]').find('label.goa-radio.goa-radio--error').find('div.goa-radio-icon').should("have.css", "box-sizing", properties["box-sizing"]);
