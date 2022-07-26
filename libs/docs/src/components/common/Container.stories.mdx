@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
+import { Tabs, Tab, Note, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
 import { GoAContainer, GoAButton, GoABadge } from '@abgov/react-components';
 
 <Meta
@@ -19,19 +19,245 @@ Containers should be easy to scan for relevant and actionable information.
 
 ---
 
-export const Template = (args) => {
+#### Basic
+
+export const BasicTemplate = (args) => {
   return (
-    <GoAContainer
-      title="The container title"
-      actions={<GoAButton type="primary" size="compact">Assign to me</GoAButton>}>
-        <GoAContainer headingSize="small">
-          This is a sub container
-        </GoAContainer>
+    <GoAContainer>
+      <h2>Detach to use</h2>
+      + Add things inside me
     </GoAContainer>
   )
 }
 
-<Story name="Nested">{Template.bind({})}</Story>
+The basic container can be used on it's own or within interactive or non-interactive containers.
+
+<Story name="Basic">{BasicTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Detach to use</h2>
+        + Add things inside me
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Detach to use</h2>
+        + Add things inside me
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer>
+        <h2>Detach to use</h2>
+        + Add things inside me
+      </GoAContainer>
+    `}/>
+  </Tab>
+</Tabs>
+
+
+There are three main types within the interactive and non-interactive container types: a large accent bar, a small accent bar, and a accent bar with text.
+
+#### Large accent bar
+
+Use the large accent bar container for "primary" content.
+
+export const HeadingTemplate = (args) => {
+  return (
+    <GoAContainer {...args}>
+      <h2>Heading</h2>
+      Content
+    </GoAContainer>
+  )
+}
+
+<Story name="Large default heading" args={{headingSize: "large" }}>{HeadingTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-container headingsize="large">
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-container headingsize="large">
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer headingSize="large">
+        <h2>Heading</h2>
+        Content
+      </GoAContainer>
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Small accent bar
+
+Use the small accent bar container for "secondary" content.
+
+<Story name="Small default heading" args={{headingSize: "small" }}>{HeadingTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-container headingsize="small">
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-container headingsize="small">
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer headingSize="small">
+        <h2>Heading</h2>
+        Content
+      </GoAContainer>
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Accent bar with text
+
+Use the accent bar with text for groupings of content where status or actions need to be applied to the whole container.
+
+export const HeadingTemplateWithActionButton = (args) => {
+  return (
+    <GoAContainer {...args} actions={<GoAButton type="secondary" size="compact">Edit</GoAButton>}>
+      <h2>Heading</h2>
+      Content
+    </GoAContainer>
+  )
+}
+
+export const HeadingTemplateWithActionBadge = (args) => {
+  return (
+    <GoAContainer {...args} actions={<GoABadge type="success" icon content="Badge Text" />}>
+      <h2>Heading</h2>
+      Content
+    </GoAContainer>
+  )
+}
+
+<Story
+  name="Heading with text and button"
+  args={{
+    title: "Heading",
+  }}>
+  {HeadingTemplateWithActionButton.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Heading</h2>
+        Content
+        <div slot="actions">
+          <goa-button type="secondary" size="compact">Edit</goa-button>
+        </div>
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Heading</h2>
+        Content
+        <div slot="actions">
+          <goa-button type="secondary" size="compact">Edit</goa-button>
+        </div>
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer actions={<GoAButton type="secondary" size="compact">Edit</GoAButton>}>
+        <h2>Heading</h2>
+        Content
+      </GoAContainer>
+    `}/>
+  </Tab>
+</Tabs>
+
+
+#### Heading with text only
+
+<Story
+  name="Heading with text only"
+  args={{
+    title: "Heading",
+  }}>
+  {HeadingTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Heading</h2>
+        Content
+        <div slot="actions">
+          <goa-badge type="success" icon content="Badge Text" />
+        </div>
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        <h2>Heading</h2>
+        Content
+        <div slot="actions">
+          <goa-badge type="success" icon content="Badge Text" />
+        </div>
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer actions={<GoABadge type="success" icon content="Badge Text" />}>
+        <h2>Heading</h2>
+        Content
+      </GoAContainer>
+    `}/>
+  </Tab>
+</Tabs>
+
+#### Nested
+
+<Story name="Nested">
+  <GoAContainer
+    title="The container title"
+  >
+    <h2>Custom H2</h2>
+    <GoAContainer headingSize="small">
+      This is a sub container
+    </GoAContainer>
+  </GoAContainer>
+</Story>
 
 <Tabs>
   <Tab label="Web Component">
@@ -84,7 +310,7 @@ export const Template = (args) => {
 
 There are three main types of containers; interactive, non-interactive, and basic. Each of these 3 types of containers includes several possible variants.
 
-**Interactive**
+#### Interactive
 
 Interactive containers to indicate that the content within is an action for the user to take. Use a blue accent to indicate that there is content in the container that needs to be interacted with.
 
@@ -95,7 +321,7 @@ export const InteractiveTemplate = (args) => {
       title="The container title"
       headingSize="large"
       variant="primary"
-      actions={<GoAButton type="secondary" size="compact">Assign to me</GoAButton>}>
+    >
       <h2>Heading</h2>Content
     </GoAContainer>
   )
@@ -103,13 +329,57 @@ export const InteractiveTemplate = (args) => {
 
 <Story name="Interactive">{InteractiveTemplate.bind({})}</Story>
 
-**Non-interactive**
+<Tabs>
+  <Tab label="Web Component">
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        title="The container title"
+        headingsize="large"
+        variant="primary"
+      >
+        <div slot="actions">
+          <goa-button type="secondary" size="compact">Assign to me</goa-button>
+        </div>
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-container>
+        title="The container title"
+        headingsize="large"
+        variant="primary"
+      >
+        <div slot="actions">
+          <goa-button type="secondary" size="compact">Assign to me</goa-button>
+        </div>
+        <h2>Heading</h2>
+        Content
+      </goa-container>
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="jsx" code={`
+      <GoAContainer
+        title="The container title"
+        headingSize="large"
+        variant="primary"
+        actions={<GoAButton type="secondary" size="compact">Assign to me</GoAButton>}>
+        <h2>Heading</h2>Content
+      </GoAContainer>
+    `}/>
+  </Tab>
+</Tabs>
+
+
+#### Non-interactive
 
 export const NonInteractiveTemplate = (args) => {
   return (
-    <GoAContainer
-      headingSize="large"
-    >
+    <GoAContainer headingSize="large">
       <h2>Heading</h2>Content
     </GoAContainer>
   )
@@ -146,204 +416,6 @@ Non-interactive containers indicate that the content is only for the user to rev
   </Tab>
 </Tabs>
 
-**Basic**
+---
 
-export const BasicTemplate = (args) => {
-  return (
-    <GoAContainer headingSize="none">
-      <h2>Detach to use</h2>
-      + Add things inside me
-    </GoAContainer>
-  )
-}
-
-The basic container can be used on it's own or within interactive or non-interactive containers.
-
-<Story name="Basic">{BasicTemplate.bind({})}</Story>
-
-There are three main types within the interactive and non-interactive container types: a large accent bar, a small accent bar, and a accent bar with text.
-
-**Large accent bar**
-
-Use the large accent bar container for "primary" content.
-
-export const HeadingTemplate = (args) => {
-  return (
-    <GoAContainer {...args}>
-      <h2>Heading</h2>
-      Content
-    </GoAContainer>
-  )
-}
-
-<Story name="Large primary heading" args={{headingSize: "large", variant: "primary"}}>{HeadingTemplate.bind({})}</Story>
-
-<Story name="Large default heading" args={{headingSize: "large" }}>{HeadingTemplate.bind({})}</Story>
-
-<Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-container headingsize="large">
-        <h2>Heading</h2>
-        Content
-      </goa-container>
-    `}/>
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-container headingsize="large">
-        <h2>Heading</h2>
-        Content
-      </goa-container>
-    `}/>
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
-      <GoAContainer headingSize="large">
-        <h2>Heading</h2>
-        Content
-      </GoAContainer>
-    `}/>
-  </Tab>
-</Tabs>
-
-**Small accent bar**
-
-Use the small accent bar container for "secondary" content.
-
-<Story name="Small primary heading" args={{headingSize: "small", variant: "primary"}}>{HeadingTemplate.bind({})}</Story>
-
-<Story name="Small default heading" args={{headingSize: "small" }}>{HeadingTemplate.bind({})}</Story>
-
-<Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-container headingsize="small">
-        <h2>Heading</h2>
-        Content
-      </goa-container>
-    `}/>
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-container headingsize="small">
-        <h2>Heading</h2>
-        Content
-      </goa-container>
-    `}/>
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
-      <GoAContainer headingSize="small">
-        <h2>Heading</h2>
-        Content
-      </GoAContainer>
-    `}/>
-  </Tab>
-</Tabs>
-
-**Accent bar with text**
-
-Use the accent bar with text for groupings of content where status or actions need to be applied to the whole container.
-
-export const HeadingTemplateWithActionButton = (args) => {
-  return (
-    <GoAContainer {...args} actions={<GoAButton type="secondary" size="compact">Edit</GoAButton>}>
-      <h2>Heading</h2>
-      Content
-    </GoAContainer>
-  )
-}
-
-export const HeadingTemplateWithActionBadge = (args) => {
-  return (
-    <GoAContainer {...args} actions={<GoABadge type="success" icon content="Badge Text" />}>
-      <h2>Heading</h2>
-      Content
-    </GoAContainer>
-  )
-}
-
-<Story
-  name="Heading with text and button"
-  args={{
-    title: "Heading",
-    variant: "primary"
-  }}>
-  {HeadingTemplateWithActionButton.bind({})}
-</Story>
-
-<Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-container>
-        <h2>Heading</h2>
-        Content
-        <div slot="actions">
-          <goa-button type="secondary" size="compact">Edit</goa-button>
-        </div>
-      </goa-container>
-    `}/>
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-container>
-        <h2>Heading</h2>
-        Content
-        <div slot="actions">
-          <goa-button type="secondary" size="compact">Edit</goa-button>
-        </div>
-      </goa-container>
-    `}/>
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
-      <GoAContainer actions={<GoAButton type="secondary" size="compact">Edit</GoAButton>}>
-        <h2>Heading</h2>
-        Content
-      </GoAContainer>
-    `}/>
-  </Tab>
-</Tabs>
-
-
-<Story
-  name="Heading with text only"
-  args={{
-    title: "Heading",
-  }}>
-  {HeadingTemplateWithActionBadge.bind({})}
-</Story>
-
-<Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-container>
-        <h2>Heading</h2>
-        Content
-        <div slot="actions">
-          <goa-badge type="success" icon content="Badge Text" />
-        </div>
-      </goa-container>
-    `}/>
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-container>
-        <h2>Heading</h2>
-        Content
-        <div slot="actions">
-          <goa-badge type="success" icon content="Badge Text" />
-        </div>
-      </goa-container>
-    `}/>
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet lang="jsx" code={`
-      <GoAContainer actions={<GoABadge type="success" icon content="Badge Text" />}>
-        <h2>Heading</h2>
-        Content
-      </GoAContainer>
-    `}/>
-  </Tab>
-</Tabs>
+<SupportInfo />
