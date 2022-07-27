@@ -2,6 +2,7 @@
 
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 import properties from "../../fixtures/properties.json";
+import { remToPx, hexToRgb } from '../../support/utils'
 
 Given(/^cs I am a user of GOA application$/, function () {
   cy.visit("http://localhost:4200/");
@@ -33,14 +34,3 @@ Then(/^cs I should be able to validate css properties of a inFocus TextArea$/, f
   cy.get('abgov-input-component > :nth-child(13)').find('input').focus();
   cy.get('abgov-input-component > :nth-child(13)').find('.goa-input').should("have.css", "box-shadow").should("contain", hexToRgb(properties["goa-color-interactivefocus"]));
 });
-
-function remToPx(rem) {
-  return rem.replace("rem", "") * 16 + "px";
-}
-
-//function to convery hex to rgb
-// return rgb(r, g, b)
-function hexToRgb(hex) {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? "rgb(" + parseInt(result[1], 16) + ", " + parseInt(result[2], 16) + ", " + parseInt(result[3], 16) + ")" : null;
-}

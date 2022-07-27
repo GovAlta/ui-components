@@ -37,8 +37,6 @@ Then(/^cs it should validate the css properties of meta app footer with title$/,
   cy.get('goa-app-footer[id="meta-only"]').find('div.brand').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
 });
 
-
-
 function remToPx(rem) {
   return rem.replace("rem", "") * 16 + "px";
 }

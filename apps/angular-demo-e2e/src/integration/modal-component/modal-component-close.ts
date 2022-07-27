@@ -1,5 +1,6 @@
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 import properties from "../../fixtures/properties.json";
+import { remToPx, hexToRgb } from '../../support/utils'
 
 Given(/^cs I am a user of GOA application$/, function () {
   cy.visit("http://localhost:4200/");
@@ -30,15 +31,3 @@ Then(/^cs I should be able to validate modal component content css properties$/,
 //   // cy.get('div[data-testid="icon-close"]').should("have.css", "size", remToPx(properties["lh-base"]));
 //   cy.get('div[data-testid="icon-close"]').should("have.css", "border-radius", remToPx(properties["border-radius-lg"]));
 // });
-
-
-function remToPx(rem) {
-  return rem.replace("rem", "") * 16 + "px";
-}
-
-//function to convery hex to rgb
-// return rgb(r, g, b)
-function hexToRgb(hex) {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? "rgb(" + parseInt(result[1], 16) + ", " + parseInt(result[2], 16) + ", " + parseInt(result[3], 16) + ")" : null;
-}
