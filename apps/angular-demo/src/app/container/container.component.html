@@ -1,6 +1,43 @@
 <h3>Basic</h3>
-<goa-container variant="primary" headingsize="small">
-  <div>This is a sub container</div>
+<goa-container>
+  <h2>Detach to use</h2>
+  + Add things inside me
+</goa-container>
+
+<br />
+<h3>Large accent bar</h3>
+<goa-container headingsize="large">
+  <h2>Heading</h2>
+  Content
+</goa-container>
+
+<br />
+<h3>Small accent bar</h3>
+<goa-container headingsize="small">
+  <h2>Heading</h2>
+  Content
+</goa-container>
+
+<br />
+<h3>Accent bar with text</h3>
+<goa-container>
+  <h2>Heading</h2>
+  Content
+  <div slot="actions">
+    <goa-button type="secondary" size="compact">Edit</goa-button>
+  </div>
+  <div slot="title">Heading</div>
+</goa-container>
+
+<br />
+<h3>Heading with text only</h3>
+<goa-container title="Heading">
+  <h2>Heading</h2>
+  Content
+  <div slot="actions">
+    <goa-badge type="success" icon content="Badge Text"></goa-badge>
+  </div>
+  <div slot="title">Heading</div>
 </goa-container>
 
 <br />
@@ -17,39 +54,19 @@
 </goa-container>
 
 <br />
+<h3>Interactive</h3>
+<goa-container>
+  title="The container title" headingsize="large" variant="primary" >
+  <div slot="actions">
+    <goa-button type="secondary" size="compact">Assign to me</goa-button>
+  </div>
+  <h2>Heading</h2>
+  Content
+</goa-container>
+
+<br />
 <h3>Non-interactive</h3>
 <goa-container>
   <h2>Heading</h2>
   Content
-</goa-container>
-
-<br />
-<goa-container headingsize="large">
-  <h2>Heading</h2>
-  Content
-</goa-container>
-
-<br />
-<goa-container headingsize="small">
-  <h2>Heading</h2>
-  Content
-</goa-container>
-
-<br />
-<h3>Accent bar with text</h3>
-<goa-container data-id="accent-bar">
-  <h2>Heading</h2>
-  Content
-  <div slot="actions">
-    <goa-button type="secondary" size="compact">Edit</goa-button>
-  </div>
-</goa-container>
-
-<br />
-<goa-container data-id="container-button">
-  <h2>Heading</h2>
-  Content
-  <div slot="actions">
-    <goa-badge type="success" icon content="Badge Text"></goa-badge>
-  </div>
 </goa-container>
