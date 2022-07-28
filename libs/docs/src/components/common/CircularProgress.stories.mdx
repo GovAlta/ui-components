@@ -1,16 +1,23 @@
 import { Story } from '@storybook/addon-docs';
 import { useState, useEffect, useRef } from 'react';
 
-import { Tabs, Tab, CodeSnippet, SupportInfo, Props, Prop } from '@abgov/shared/storybook-common';
+import {
+  Tabs,
+  Tab,
+  CodeSnippet,
+  SupportInfo,
+  Props,
+  Prop,
+} from '@abgov/shared/storybook-common';
 import { GoAButton, GoACircularProgress } from '@abgov/react-components';
 
 <Meta title="Components/Circular Progress" />
 
 # Circular progress
 
-### A circular progress component provides visual feedback to users after they request an action from the system, e.g., submitting a form, calculating a fee, configuring tables. The progress indicator holds a user’s attention by indicating continued progress while the system loads the appropriate content.  The most common progress indicators are either circular or linear.
+### A circular progress component provides visual feedback to users after they request an action from the system, e.g., submitting a form, calculating a fee, configuring tables. The progress indicator holds a user’s attention by indicating continued progress while the system loads the appropriate content. The most common progress indicators are either circular or linear.
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI-DS?node-id=3799%3A118526)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=633%3A12563)
 
 ---
 
@@ -27,13 +34,22 @@ export const ProgressTemplate = (args) => {
       clearInterval(handle);
     };
   }, [progress, setProgress]);
-  return <GoACircularProgress {...args} progress={progress} type="progress" variant="inline" visible={true} size="large" />
+  return (
+    <GoACircularProgress
+      {...args}
+      progress={progress}
+      type="progress"
+      variant="inline"
+      visible={true}
+      size="large"
+    />
+  );
 };
 
 export const FullscreenTemplate = (args) => {
   const [visible, setVisibility] = useState(false);
   function showProgress() {
-    setVisibility(true)
+    setVisibility(true);
     setTimeout(() => {
       setVisibility(false);
     }, 2000);
@@ -43,9 +59,14 @@ export const FullscreenTemplate = (args) => {
       <GoAButton type="primary" onClick={showProgress}>
         Show
       </GoAButton>
-      <GoACircularProgress {...args} visible={visible} variant="fullscreen" size="large" />
+      <GoACircularProgress
+        {...args}
+        visible={visible}
+        variant="fullscreen"
+        size="large"
+      />
     </>
-  )
+  );
 };
 
 export const FullscreenProgressTemplate = () => {
@@ -53,42 +74,78 @@ export const FullscreenProgressTemplate = () => {
   const [visible, setVisibility] = useState(false);
   const handle = useRef(null);
   function show() {
-    setVisibility(true)
+    setVisibility(true);
     startProgress();
   }
   function startProgress() {
     handle.current = setInterval(() => {
       setProgress((p) => {
-        return p + 20
+        return p + 20;
       });
     }, 500);
-  };
+  }
   useEffect(() => {
     if (progress >= 100) {
       clearInterval(handle.current);
       setVisibility(false);
       setProgress(0);
     }
-  }, [progress, handle])
+  }, [progress, handle]);
   return (
     <>
       <GoAButton type="primary" onClick={show}>
         Show
       </GoAButton>
-      <GoACircularProgress visible={visible} variant="fullscreen" progress={progress} type="progress" size="large" />
+      <GoACircularProgress
+        visible={visible}
+        variant="fullscreen"
+        progress={progress}
+        type="progress"
+        size="large"
+      />
     </>
-  )
+  );
 };
 
 #### Properties
 
 <Props>
-  <Prop name="type" type="infinite | progress" required={true} description="The type of progress indicator" />
-  <Prop name="variant" type="fullscreen | inline" required={true} description="The variant of progress indicator" />
-  <Prop name="visible" type="boolean" required={true} description="Shows/hides the page loader, allowing for fade transition to be applied in each transition." />
-  <Prop name="size" type="small | large" required={true} description="The size of progress indicator" />
-  <Prop name="progress" type="number" defaultValue="0" description="The progress value" />
-  <Prop name="message" type="object" defaultValue="" description="Text displayed under the circular spinner" />
+  <Prop
+    name="type"
+    type="infinite | progress"
+    required={true}
+    description="The type of progress indicator"
+  />
+  <Prop
+    name="variant"
+    type="fullscreen | inline"
+    required={true}
+    description="The variant of progress indicator"
+  />
+  <Prop
+    name="visible"
+    type="boolean"
+    required={true}
+    description="Shows/hides the page loader, allowing for fade transition to be applied in each transition."
+  />
+  <Prop
+    name="size"
+    type="small | large"
+    required={true}
+    description="The size of progress indicator"
+  />
+  <Prop
+    name="progress"
+    type="number"
+    defaultValue="0"
+    description="The progress value"
+  />
+  <Prop
+    name="message"
+    type="string"
+    defaultValue=""
+    description="Text displayed under the circular spinner"
+  />
 </Props>
 
 #### Basic 
@@ -98,7 +155,7 @@ export const FullscreenProgressTemplate = () => {
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet lang="html" code={`
       <goa-circular-progress visible />
     `}/>
@@ -118,41 +175,81 @@ export const FullscreenProgressTemplate = () => {
 #### Sizes
 
 <Story name="Sizes">
-  <GoACircularProgress type="infinite" variant="inline" visible={true} message="Loading..." size="small" />
-  <GoACircularProgress type="infinite" variant="inline" visible={true} message="Loading..." size="large" />
+  <GoACircularProgress
+    type="infinite"
+    variant="inline"
+    visible={true}
+    message="Loading..."
+    size="small"
+  />
+  <GoACircularProgress
+    type="infinite"
+    variant="inline"
+    visible={true}
+    message="Loading..."
+    size="large"
+  />
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress
         type="infinite"
         variant="inline"
-        size="small | large"
+        size="small"
         message="Loading..."
         visible />
-    `}/>
+      <goa-circular-progress
+        type="infinite"
+        variant="inline"
+        size="large"
+        message="Loading..."
+        visible />
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress
         type="infinite"
         variant="inline"
         message="Loading..."
-        size="small | large"
+        size="small"
         [visible]="visible">
       </goa-circular-progress>
-    `}/>
+      <goa-circular-progress
+        type="infinite"
+        variant="inline"
+        message="Loading..."
+        size="large"
+        [visible]="visible">
+      </goa-circular-progress>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoACircularProgress
         type="infinite"
         variant="inline"
         message="Loading..."
-        size="small | large"
+        size="small"
         visible={visible} />
-    `}/>
+      <GoACircularProgress
+        type="infinite"
+        variant="inline"
+        message="Loading..."
+        size="large"
+        visible={visible} />
+    `}
+    />
   </Tab>
 </Tabs>
 
@@ -161,22 +258,33 @@ export const FullscreenProgressTemplate = () => {
 Message text is optional for all the variations listed.
 
 <Story name="Message">
-  <GoACircularProgress type="infinite" variant="inline" visible={true} message="Loading..." size="large" />
+  <GoACircularProgress
+    type="infinite"
+    variant="inline"
+    visible={true}
+    message="Loading..."
+    size="large"
+  />
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress
         type="infinite"
         variant="inline"
         size="large"
         message="Loading..."
         visible />
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress
         type="infinite"
         variant="inline"
@@ -184,62 +292,82 @@ Message text is optional for all the variations listed.
         message="Loading..."
         [visible]="visible">
       </goa-circular-progress>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoACircularProgress
         type="infinite"
         variant="inline"
         size="large"
         message="Loading..."
         visible={visible} />
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
-
 
 #### Inline infinite
 
 <Story name="Inline infinite">
-  <GoACircularProgress type="infinite" variant="inline" visible={true} size="large" />
+  <GoACircularProgress
+    type="infinite"
+    variant="inline"
+    visible={true}
+    size="large"
+  />
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress type="infinite" variant="inline" size="large" visible />
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress
         type="infinite"
         variant="inline"
         size="large"
         [visible]="visible">
       </goa-circular-progress>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoACircularProgress type="infinite" variant="inline" size="large" visible={visible} />
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
 #### Inline progress
 
-<Story name="Inline progress">
-  {ProgressTemplate.bind({})}
-</Story>
+<Story name="Inline progress">{ProgressTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress id="progress" variant="inline" type="infinite" size="large" visible />
-    `}/>
-    <CodeSnippet lang="js" code={`
+    `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
       const el = document.getElementById('progress');
       setInterval(() => {
         let p = parseInt(el.getAttribute('progress'));
@@ -249,10 +377,13 @@ Message text is optional for all the variations listed.
           el.removeAttribute("visible");
         }
       }, 1000);
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress
         type="infinite"
         variant="inline"
@@ -260,8 +391,11 @@ Message text is optional for all the variations listed.
         [progress]="progress"
         [visible]="visible">
       </goa-circular-progress>
-    `}/>
-    <CodeSnippet lang="ts" code={`
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
       export class SomeComponent implements OnInit {
         progress: number = 0;
         visible: boolean = false;
@@ -274,10 +408,13 @@ Message text is optional for all the variations listed.
           }, 1000);
         }
       }
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       export const ProgressTemplate = () => {
         const [progress, setProgress] = useState(0);
         const updateProgress = () => {
@@ -293,31 +430,41 @@ Message text is optional for all the variations listed.
         }, [progress, setProgress]);
         return <GoACircularProgress type="infinite" progress={progress} variant="inline" size="large" visible={visible} />
       };
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
 #### Fullscreen infinite
 
-<Story name="Fullscreen infinite" args={{type: "infinite"}}>
+<Story name="Fullscreen infinite" args={{ type: 'infinite' }}>
   {FullscreenTemplate.bind({})}
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress variant="fullscreen" type="infinite" size="large" visible="true" />
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress variant="fullscreen" type="infinite" size="large" visible="true"></goa-circular-progress>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoACircularProgress variant="fullscreen" type="infinite" size="large" visible={visible} />
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
@@ -328,20 +475,29 @@ Message text is optional for all the variations listed.
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress variant="fullscreen" type="progress" size="large" visible="true" />
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress variant="fullscreen" type="progress" size="large" visible="true"></goa-circular-progress>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoACircularProgress variant="fullscreen" type="progress" size="large" visible={visible} />
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 

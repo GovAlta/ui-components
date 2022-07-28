@@ -13,7 +13,9 @@ export const Props: FC = ({ children }) => {
           <th>Description</th>
         </tr>
       </thead>
-      { children }
+      <tbody>
+        { children }
+      </tbody>
     </table>
   );
 }

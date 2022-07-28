@@ -7,7 +7,7 @@ describe("GoAHeroBanner", () => {
 
   it("renders all properties", async () => {
     const title = "Test Title";
-    const el = render(GoAHeroBanner, { title: title, backgroundurl: "somepic.png" });
+    const el = render(GoAHeroBanner, { heading: title, backgroundurl: "somepic.png" });
 
     const heading = await el.findByRole("heading")
     const background = await el.findByTestId("background");
@@ -20,7 +20,7 @@ describe("GoAHeroBanner", () => {
 
   it("renders actions", async () => {
     const el = render(GoAHeroBannerWrapper, {
-      title: "Title",
+      heading: "Title",
       backgroundurl: "somepic.png",
       content: "The content",
       actionContent: "<goa-button>Action</goa-button>",

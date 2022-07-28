@@ -4,7 +4,7 @@ import GoABadge from './AppHeader.svelte'
 
 describe('GoAAppHeader', () => {
   it('should render', async () => {
-    const baseElement = render(GoABadge, { testid: "app-header-test", url: "www.test.com", title: 'Complete' });
+    const baseElement = render(GoABadge, { testid: "app-header-test", url: "www.test.com", heading: 'Complete' });
     const appHeader = await baseElement.findByTestId('app-header-test');
     const link = appHeader.firstElementChild;
 

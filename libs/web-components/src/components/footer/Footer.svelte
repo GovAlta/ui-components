@@ -58,7 +58,7 @@
   .abgov {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    justify-content: space-between;
     width: 100%;
   }
 

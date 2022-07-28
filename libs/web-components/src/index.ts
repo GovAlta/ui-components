@@ -36,6 +36,7 @@ export { default as GoAFocusTrap } from "./components/focus-trap/FocusTrap.svelt
 export * from "./components/footer/Footer.svelte";
 export * from "./components/footer-nav-section/FooterNavSection.svelte";
 export * from "./components/footer-meta-section/FooterMetaSection.svelte";
+export * from "./components/flex-column/FlexColumn.svelte";
 
 
 // Wrappers

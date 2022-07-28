@@ -18,12 +18,12 @@
   :host {
     box-sizing: border-box;
     font-family: var(--font-family);
+    margin-bottom: 3rem;  /* Not sure this should be set to a non-zero value */
   }
 
   .goa-flex-col {
     display: flex;
     flex-direction: column;
     gap: var(--gap);
-    margin-bottom: 1rem;  /* Not sure this should be set to a non-zero value */
   }
 </style>

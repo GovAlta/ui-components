@@ -1,5 +1,13 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Tabs, Tab, Note, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import {
+  Tabs,
+  Tab,
+  Note,
+  CodeSnippet,
+  SupportInfo,
+  Props,
+  Prop,
+} from '@abgov/shared/storybook-common';
 import { GoARadioGroup, GoARadioItem } from '@abgov/react-components';
 import { useState } from 'react';
 
@@ -9,9 +17,31 @@ import { useState } from 'react';
 
 ### Radios allow users to select one option from a set.
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/DIO-DS---Components?node-id=102%3A26)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=7038%3A246448)
 
 ---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="name"
+    type="string"
+    required="true"
+    description="Must match the name assigned to the children"
+  />
+  <Prop
+    name="value"
+    type="string"
+    description="Value binding"
+  />
+  <Prop
+    name="_change"
+    type="CustomEvent<{detail: {name: string, value: string}}>"
+    description="onChange event"
+  />
+</Props>
+
 
 export const BasicTemplate = (args) => {
   const [value, setValue] = useState('');
@@ -20,70 +50,89 @@ export const BasicTemplate = (args) => {
     setValue(value);
   }
   return (
-    <GoARadioGroup name={args.name} orientation={args.orientation || "vertical"} value={value} onChange={onChange}>
+    <GoARadioGroup
+      name={args.name}
+      orientation={args.orientation || 'vertical'}
+      value={value}
+      onChange={onChange}
+    >
       <GoARadioItem name={args.name} label="Red" value="red" />
       <GoARadioItem name={args.name} label="Blue" value="blue" />
-      <GoARadioItem name={args.name} label="Orange" value="orange"/>
+      <GoARadioItem name={args.name} label="Orange" value="orange" />
     </GoARadioGroup>
-  )
-}
+  );
+};
 
 #### Basic
 
-<Story name="Basic" args={{name: "basic"}}>{BasicTemplate.bind({})}</Story>
+<Story name="Basic" args={{ name: 'basic' }}>
+  {BasicTemplate.bind({})}
+</Story>
 
 **Note:** The `name` prop is required and must be the same for the `GoARadioGroup` and `GoARadioItem` components.
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-radio-group id="my-color" name="color" value="orange">
         <goa-radio-item name="color" value="red" />
         <goa-radio-item name="color" value="blue" />
         <goa-radio-item name="color" value="orange" />
       </goa-radio-group>
-    `}/>
-    <CodeSnippet lang="js" code={`
+    `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
       const el = document.findById("my-color");
       el.addEventListener("_change", (e) => {
         console.log(e.detail.name, e.detail.value);
       });
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-radio-group name="color" value="orange" (_change)="onChange()">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-radio-group name="color" [value]="color" (_change)="onChange()">
         <goa-radio-item name="color" value="red"></goa-radio-item>
         <goa-radio-item name="color" value="blue"></goa-radio-item>
         <goa-radio-item name="color" value="orange"></goa-radio-item>
       </goa-radio-group>
-    `}/>
-    <CodeSnippet lang="ts" code={`
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
       export class MyComponent {
         onChange(e) {
-          console.log('onChange', e.detail.name, e.detail.value);
+          this.color = e.detail.value;
         }
       }
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       export const MyComponent = () {
-        function onChange(name: string, value: string) {
-          console.log('onChange', name, value);
-        }
+        const [color, setColor] = useState<string>("");
         return (
-          <GoARadioGroup name="color" value="orange" onChange={onChange}>
+          <GoARadioGroup name="color" value={color} onChange={(_name, value) => setColor(value) }>
             <GoARadioItem name="color" value="red" />
             <GoARadioItem name="color" value="blue" />
             <GoARadioItem name="color" value="orange"/>
           </GoARadioGroup>
         )
       }
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
-
 
 #### Error
 
@@ -97,42 +146,49 @@ export const ErrorTemplate = () => {
     <GoARadioGroup name="error" value={value} onChange={onChange} error={true}>
       <GoARadioItem name="error" label="Red" value="red" />
       <GoARadioItem name="error" label="Blue" value="blue" />
-      <GoARadioItem name="error" label="Orange" value="orange"/>
+      <GoARadioItem name="error" label="Orange" value="orange" />
     </GoARadioGroup>
-  )
-}
+  );
+};
 
-<Story name="Error">
-  {ErrorTemplate.bind()}
-</Story>
+<Story name="Error">{ErrorTemplate.bind()}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-radio-group name="color" value="orange" error>
         <goa-radio-item name="color" value="red" />
         <goa-radio-item name="color" value="blue" />
         <goa-radio-item name="color" value="orange" />
       </goa-radio-group>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-radio-group name="color" value="orange" error">
         <goa-radio-item name="color" value="red"></goa-radio-item>
         <goa-radio-item name="color" value="blue"></goa-radio-item>
         <goa-radio-item name="color" value="orange"></goa-radio-item>
       </goa-radio-group>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoARadioGroup name="color" value="orange" error={true}>
         <GoARadioItem name="color" value="red" />
         <GoARadioItem name="color" value="blue" />
         <GoARadioItem name="color" value="orange"/>
       </GoARadioGroup>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
@@ -140,37 +196,46 @@ export const ErrorTemplate = () => {
 
 Display a custom label that is different that the `value` property.
 
-<Story name="Label" args={{name: 'label'}}>
+<Story name="Label" args={{ name: 'label' }}>
   {BasicTemplate.bind({})}
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-radio-group name="color" value="orange" disabled>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-radio-group name="color" value="orange">
         <goa-radio-item name="color" label="Red" value="red" />
         <goa-radio-item name="color" label="Blue" value="blue" />
         <goa-radio-item name="color" label="Orange" value="orange" />
       </goa-radio-group>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-radio-group name="color" value="orange" disabled">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-radio-group name="color" value="orange"">
         <goa-radio-item name="color" label="Red" value="red"></goa-radio-item>
         <goa-radio-item name="color" label="Blue" value="blue"></goa-radio-item>
         <goa-radio-item name="color" label="Orange" value="orange"></goa-radio-item>
       </goa-radio-group>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
-      <GoARadioGroup name="color" value="orange" onChange={noop} disabled={true}>
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoARadioGroup name="color" value="orange" onChange={noop}>
         <GoARadioItem name="color" label="Red" value="red" />
         <GoARadioItem name="color" label="Blue" value="blue" />
         <GoARadioItem name="color" label="Orange" value="orange"/>
       </GoARadioGroup>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
@@ -180,78 +245,100 @@ Display a custom label that is different that the `value` property.
   <GoARadioGroup name="disabled" value="orange" disabled={true}>
     <GoARadioItem name="disabled" value="red" />
     <GoARadioItem name="disabled" value="blue" />
-    <GoARadioItem name="disabled" value="orange"/>
+    <GoARadioItem name="disabled" value="orange" />
   </GoARadioGroup>
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-radio-group name="color" value="orange" disabled>
         <goa-radio-item name="color" value="red" />
         <goa-radio-item name="color" value="blue" />
         <goa-radio-item name="color" value="orange" />
       </goa-radio-group>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-radio-group name="color" value="orange" disabled">
         <goa-radio-item name="color" value="red"></goa-radio-item>
         <goa-radio-item name="color" value="blue"></goa-radio-item>
         <goa-radio-item name="color" value="orange"></goa-radio-item>
       </goa-radio-group>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoARadioGroup name="color" value="orange" onChange={noop} disabled={true}>
         <GoARadioItem name="color" value="red" />
         <GoARadioItem name="color" value="blue" />
         <GoARadioItem name="color" value="orange"/>
       </GoARadioGroup>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
 #### Orientation
 
-<Story name="Orientation" args={{name: "orientation", orientation: "horizontal"}}>
+<Story
+  name="Orientation"
+  args={{ name: 'orientation', orientation: 'horizontal' }}
+>
   {BasicTemplate.bind()}
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-radio-group name="color" value="orange" orientation="horizontal">
         <goa-radio-item name="color" value="red" />
         <goa-radio-item name="color" value="blue" />
         <goa-radio-item name="color" value="orange" />
       </goa-radio-group>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-radio-group name="color" value="orange" orientation="horizontal">
         <goa-radio-item name="color" value="red"></goa-radio-item>
         <goa-radio-item name="color" value="blue"></goa-radio-item>
         <goa-radio-item name="color" value="orange"></goa-radio-item>
       </goa-radio-group>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoARadioGroup name="color" value="orange" onChange={noop} orientation="horizontal">
         <GoARadioItem name="color" value="red" />
         <GoARadioItem name="color" value="blue" />
         <GoARadioItem name="color" value="orange"/>
       </GoARadioGroup>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
 <Note type="best-practices">
-  Prefer the default orientation; only use <code>orientation="horizontal"</code> when absolutely necessary.
+  Prefer the default orientation; only use <code>orientation="horizontal"</code>{' '}
+  when absolutely necessary.
 </Note>
 
 ---

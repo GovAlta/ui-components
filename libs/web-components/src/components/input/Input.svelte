@@ -9,7 +9,7 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
 
   export let type:
-    | "text"
+    "text"
     | "number"
     | "password"
     | "email"

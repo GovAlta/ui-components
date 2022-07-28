@@ -1,5 +1,13 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Tabs, Tab, Note, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import {
+  Tabs,
+  Tab,
+  Note,
+  CodeSnippet,
+  SupportInfo,
+  Props,
+  Prop,
+} from '@abgov/shared/storybook-common';
 import { GoAAppHeader } from '@abgov/react-components';
 
 <Meta title="Components/App Header" />
@@ -8,55 +16,119 @@ import { GoAAppHeader } from '@abgov/react-components';
 
 ### The header helps users identify where they are and provides a quick, organized way to reach important sections of a website.
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DIO-DS?node-id=4576%3A224884)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=7224%3A263785)
 
 ---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="url"
+    type="string"
+  />
+  <Prop
+    name="heading"
+    type="string"
+  />
+</Props>
 
 #### Basic
 
 <Story name="Basic">
-  <GoAAppHeader url="example.com" />
+  <GoAAppHeader />
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-app-header url="example.com" />
-    `}/>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-app-header />
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-app-header url="example.com"></goa-app-header>
-    `}/>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-app-header></goa-app-header>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
-      <GoAAppHeader url="example.com" />
-    `}/>
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoAAppHeader />
+    `}
+    />
   </Tab>
 </Tabs>
 
-#### Title
+#### Url
 
-<Story name="Title">
-  <GoAAppHeader url="example.com" title="Ticket and Fine Payments" />
+<Story name="Url">
+  <GoAAppHeader url="https://example.com" />
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-app-header url="example.com" title="Ticket and Find Payments" />
-    `}/>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-app-header url="https://example.com" />
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-app-header url="example.com" title="Ticket and Find Payments"></goa-app-header>
-    `}/>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-app-header url="https://example.com"></goa-app-header>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
-      <GoAAppHeader url="example.com" title="Ticket and Find Payments" />
-    `}/>
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoAAppHeader url="https://example.com" />
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Heading 
+
+<Story name="Heading">
+  <GoAAppHeader heading="Ticket and Fine Payments" />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-app-header heading="Ticket and Find Payments" />
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-app-header heading="Ticket and Find Payments"></goa-app-header>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoAAppHeader heading="Ticket and Find Payments" />
+    `}
+    />
   </Tab>
 </Tabs>
 
@@ -65,33 +137,45 @@ import { GoAAppHeader } from '@abgov/react-components';
 Custom content can be added to the header by passing it in as a child component(s).
 
 <Story name="Custom Content">
-  <GoAAppHeader url="example.com" title="Ticket and Fine Payments">
+  <GoAAppHeader url="example.com" heading="Ticket and Fine Payments">
     <a href="#">Login</a> &nbsp;
     <a href="#">Help</a>
   </GoAAppHeader>
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
-      <goa-app-header url="example.com" title="Ticket and Find Payments">
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-app-header url="example.com" heading="Ticket and Find Payments">
         <a href="#">Login</a>
+        <a href="#">Help</a>
       </goa-app-header>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
-      <goa-app-header url="example.com" title="Ticket and Find Payments">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-app-header url="example.com" heading="Ticket and Find Payments">
         <a href="#">Login</a>
+        <a href="#">Help</a>
       </goa-app-header>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
-      <GoAAppHeader url="example.com" title="Ticket and Find Payments">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoAAppHeader url="example.com" heading="Ticket and Find Payments">
         <a href="#">Login</a>
+        <a href="#">Help</a>
       </GoAAppHeader>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 

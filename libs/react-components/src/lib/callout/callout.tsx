@@ -3,7 +3,7 @@ import React from 'react';
 type CalloutType = "important" | 'information' | 'event' | 'success' | 'emergency';
 
 interface WCProps {
-  title?: string;
+  heading?: string;
   type?: CalloutType;
 }
 
@@ -18,14 +18,14 @@ declare global {
 
 
 export interface CalloutProps {
-  title?: string,
+  heading?: string,
   type?: CalloutType,
   children?: React.ReactNode,
 }
 
-export const GoACallout = ({ title, type = "information", children }: CalloutProps) => {
+export const GoACallout = ({ heading, type = "information", children }: CalloutProps) => {
   return (
-    <goa-callout title={title} type={type}>
+    <goa-callout heading={heading} type={type}>
       {children}
     </goa-callout>
   );

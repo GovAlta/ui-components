@@ -11,12 +11,12 @@ export default function AppHeader() {
       <h3>Title</h3>
       <GoAAppHeader
         url="example.com"
-        title="Ticket and Find Payments"
+        heading="Ticket and Find Payments"
       ></GoAAppHeader>
 
       <br />
       <h3>Custom Content</h3>
-      <GoAAppHeader url="example.com" title="Ticket and Find Payments">
+      <GoAAppHeader url="example.com" heading="Ticket and Find Payments">
         <a title="loginUrl" href="#">Login</a>
       </GoAAppHeader>
     </>

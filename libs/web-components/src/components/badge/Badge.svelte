@@ -2,6 +2,8 @@
 
 <!-- Script -->
 <script lang="ts">
+import { onMount } from "svelte";
+
   import { toBoolean } from "../../common/utils";
   // import { BadgeType, WCBoolean, WC_FALSE } from "@abgov/shared/common";
 
@@ -38,6 +40,12 @@
     midtone: "information-circle",
     light: "information-circle",
   }[type];
+
+  onMount(() => {
+    if (!showIcon && !content) {
+      console.warn("GoABadge must have either then content or icon property set");
+    }
+  })
 </script>
 
 <!-- HTML -->

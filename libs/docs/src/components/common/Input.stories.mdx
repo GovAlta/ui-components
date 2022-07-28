@@ -19,30 +19,95 @@ import {
   SupportInfo,
   Tabs,
   Tab,
-  Note,
-  Block,
-  Do,
-  Dont,
-  StateDisplay,
   CodeSnippet,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import {
   Meta,
-  Preview,
   Story,
-  ArgsTable,
-  Description,
 } from '@storybook/addon-docs';
 
 <Meta title="Components/Inputs" component={GoAInput} />
 
 # Input
 
+### Text fields let users enter and input text.
+
 [Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/DIO-DS---Components?node-id=133%3A186)
+
+---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="type"
+    type="text | number | password | email | search | tel | time | url | week"
+    defaultValue="text"
+  />
+  <Prop
+    name="value"
+    type="string"
+  />
+  <Prop
+    name="placeholder"
+    type="string"
+  />
+  <Prop
+    name="leadingicon"
+    type="GoAIconType"
+  />
+  <Prop
+    name="trailingicon"
+    type="GoAIconType"
+  />
+  <Prop
+    name="disabled"
+    type="boolean"
+  />
+  <Prop
+    name="handletrailingiconclick"
+    type="boolean"
+  />
+  <Prop
+    name="focused"
+    type="boolean"
+  />
+  <Prop
+    name="readonly"
+    type="boolean"
+  />
+  <Prop
+    name="error"
+    type="boolean"
+  />
+  <Prop
+    name="width"
+    type="string"
+    defaultValue="30ch"
+  />
+  <Prop
+    name="showcounter"
+    type="boolean"
+  />
+  <Prop
+    name="maxcharcount"
+    type="number"
+  />
+  <Prop
+    name="_change"
+    type="CustomEvent<{detail: {name: string, value: string}}>"
+  />
+  <Prop
+    name="_trailingiconclick"
+    type="CustomEvent"
+  />
+</Props>
 
 export const noop = () => {};
 
-### Basic
+#### Basic
 
 export const InputTemplate = () => {
   const [value, setValue] = useState('');
@@ -63,7 +128,7 @@ export const InputTemplate = () => {
 <Story name="Basic">{InputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -119,7 +184,7 @@ export const InputTemplate = () => {
   </Tab>
 </Tabs>
 
-### Icons
+#### Icons
 
 export const IconInputTemplate = () => (
   <>
@@ -133,7 +198,7 @@ export const IconInputTemplate = () => (
 <Story name="Icons">{IconInputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-input leadingicon="finger-print" />`}
       lang="html"
@@ -159,7 +224,7 @@ export const IconInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Icon buttons
+#### Icon buttons
 
 export const IconButtonInputTemplate = () => (
   <>
@@ -175,7 +240,7 @@ export const IconButtonInputTemplate = () => (
 <Story name="Icon Buttons">{IconButtonInputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-input id="secret" trailingicon="finger-print" />`}
       lang="html"
@@ -226,7 +291,7 @@ export const IconButtonInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Disabled
+#### Disabled
 
 export const DisabledInputTemplate = () => (
   <>
@@ -237,7 +302,7 @@ export const DisabledInputTemplate = () => (
 <Story name="Disabled">{DisabledInputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-input disabled="true" placeholder="Find by name" />`}
       lang="html"
@@ -257,7 +322,7 @@ export const DisabledInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Error state
+#### Error state
 
 export const ErrorInputTemplate = () => (
   <>
@@ -268,7 +333,7 @@ export const ErrorInputTemplate = () => (
 <Story name="Error">{ErrorInputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet code={`<goa-input error  />`} lang="html" />
   </Tab>
   <Tab label="Angular">
@@ -279,7 +344,7 @@ export const ErrorInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Focus
+#### Focus
 
 export const FocusInputTemplate = () => (
   <>
@@ -290,7 +355,7 @@ export const FocusInputTemplate = () => (
 <Story name="Focus">{FocusInputTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet code={`<goa-input />`} lang="html" />
   </Tab>
   <Tab label="Angular">
@@ -301,7 +366,7 @@ export const FocusInputTemplate = () => (
   </Tab>
 </Tabs>
 
-### Character count
+#### Character count
 
 export const CharCountTemplate = () => {
   const [value, setValue] = useState('');
@@ -318,7 +383,7 @@ export const CharCountTemplate = () => {
 <Story name="Character count">{CharCountTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-input name="firstname" showcounter="true" />`}
       lang="html"
@@ -348,7 +413,7 @@ export const CharCountTemplate = () => {
   </Tab>
 </Tabs>
 
-### Character count with limit
+#### Character count with limit
 
 export const CharCountWithLimitTemplate = () => {
   const [value, setValue] = useState('');
@@ -368,7 +433,7 @@ export const CharCountWithLimitTemplate = () => {
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`<goa-input name="firstname" showcounter="true" maxcharcount="20" />`}
       lang="html"
@@ -399,47 +464,47 @@ export const CharCountWithLimitTemplate = () => {
   </Tab>
 </Tabs>
 
-### Width 
+#### Width
 
-export const WidthTemplate = ({width}) => {
+export const WidthTemplate = ({ width }) => {
   return (
     <>
-    <GoAInput
-      name="firstname"
-      placeholder="width allows for %, ch, px, etc"
-      onChange={() => {}}
-    />
-    <br />
-    <GoAInput
-      name="firstname"
-      width="100%"
-      placeholder="100%"
-      onChange={() => {}}
-    />
-    <br />
-    <GoAInput
-      name="firstname"
-      width="50%"
-      placeholder="50%"
-      onChange={() => {}}
-    />
-    <br />
-    <GoAInput
-      name="firstname"
-      width="20ch"
-      placeholder="20ch"
-      onChange={() => {}}
-    />
+      <GoAInput
+        name="firstname"
+        placeholder="width allows for %, ch, px, etc"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInput
+        name="firstname"
+        width="100%"
+        placeholder="100%"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInput
+        name="firstname"
+        width="50%"
+        placeholder="50%"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInput
+        name="firstname"
+        width="20ch"
+        placeholder="20ch"
+        onChange={() => {}}
+      />
     </>
   );
 };
 
-<Story name="Width" args={{ width: "80%"}}>
+<Story name="Width" args={{ width: '80%' }}>
   {WidthTemplate.bind({})}
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`
         <goa-input name="firstname" />
