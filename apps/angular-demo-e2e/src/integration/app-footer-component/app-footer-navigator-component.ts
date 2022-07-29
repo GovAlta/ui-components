@@ -1,23 +1,24 @@
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 import { linkSync } from "fs";
 import properties from "../../fixtures/properties.json";
+import { remToPx, hexToRgb } from '../../support/utils'
 
 Given(/^cs I am a user of GOA application$/, function () {
   cy.visit("http://localhost:4200/");
 });
 
 When(/^cs I navigate to App Footer section$/, function () {
-  cy.get("[label='AppFooter']").click();
+  cy.get('[path="/app-footer"]').click();
 });
 
 Then(/^cs it should validate the css properties of navigator app footer with title$/, function () {
-  cy.get('goa-app-footer[id="navigation-only"]').find('div.footer.navigation-links-only-footer').should("have.css", "max-width", remToPx(properties["footer-max-width"]));
-  cy.get('goa-app-footer[id="navigation-only"]').find('div.footer.navigation-links-only-footer').find('img[class="logo"]').should("be.visible");
-  cy.get('goa-app-footer[id="navigation-only"]').find('div.footer.navigation-links-only-footer').find('a[class="goa-copyright"]').should('have.css', "font-family", properties["font-family"]);
-  cy.get('goa-app-footer[id="navigation-only"]').find('div.footer.navigation-links-only-footer').find('a[class="goa-copyright"]').should('have.css', "font-size", remToPx(properties["fs-base"]));
-  cy.get('goa-app-footer[id="navigation-only"]').find('div.footer.navigation-links-only-footer').find('a[class="goa-copyright"]').should('have.css', "color", hexToRgb(properties["goa-color-text-secondary"]));
-  cy.get('goa-app-footer[id="navigation-only"]').find('div.footer.navigation-links-only-footer').find('a[class="goa-copyright"]').should('have.css', "line-height", remToPx(properties["lh-base"]));
-  cy.get('goa-app-footer[id="navigation-only"]').find('div[class="navigation-section-name-less"]').should("have.css", "font-family", properties["font-family"]);
+  // cy.get('goa-app-footer[id="navigation-only"]').find('div.footer.navigation-links-only-footer').should("have.css", "max-width", remToPx(properties["footer-max-width"]));
+  cy.get('goa-app-footer[id="navigation-only"]').find('.meta-section').find('img[class="logo"]').should("be.visible");
+  cy.get('goa-app-footer[id="navigation-only"]').find('.meta-section').find('a[class="goa-copyright"]').should('have.css', "font-family", properties["font-family"]);
+  cy.get('goa-app-footer[id="navigation-only"]').find('.meta-section').find('a[class="goa-copyright"]').should('have.css', "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-app-footer[id="navigation-only"]').find('.meta-section').find('a[class="goa-copyright"]').should('have.css', "color", hexToRgb(properties["goa-color-text-secondary"]));
+  cy.get('goa-app-footer[id="navigation-only"]').find('.meta-section').find('a[class="goa-copyright"]').should('have.css', "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-app-footer[id="navigation-only"]').find('.goa-app-footer-nav-section').should("have.css", "font-family", properties["font-family"]);
   cy.get('goa-app-footer[id="navigation-only"]').find('div[class="navigation-section-name-less"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
   cy.get('goa-app-footer[id="navigation-only"]').find('div[class="navigation-section-name-less"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
   cy.get('goa-app-footer[id="navigation-only"]').find('div[class="navigation-section-name-less"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
@@ -31,10 +32,10 @@ Then(/^cs it should validate the css properties of navigator app footer with tit
 });
 
 Then(/^cs it should validate the css properties of navigator app footer multi section with title$/, function () {
-  cy.get('goa-app-footer[id="navigation-only-multisection"]').find('div.footer.navigation-sections-only-footer').should("have.css", "max-width", remToPx(properties["footer-max-width"]));
-  cy.get('goa-app-footer[id="navigation-only-multisection"]').find('div.footer.navigation-sections-only-footer').should("have.css", "padding-top", remToPx(properties["footer-multi-section-padding-top"]));
-  cy.get('goa-app-footer[id="navigation-only-multisection"]').find('div.footer.navigation-sections-only-footer').find('img[class="logo"]').should("be.visible");
-  cy.get('goa-app-footer[id="navigation-only-multisection"]').find('div.footer.navigation-sections-only-footer').find('a[class="goa-copyright"]').should('have.css', "font-family", properties["font-family"]);
+  // cy.get('goa-app-footer[id="navigation-only-multisection"]').find('div.footer.navigation-sections-only-footer').should("have.css", "max-width", remToPx(properties["footer-max-width"]));
+  cy.get('goa-app-footer[id="navigation-only-multisection"]').find('.meta-section').should("have.css", "padding-top", remToPx(properties["footer-multi-section-padding-top"]));
+  cy.get('goa-app-footer[id="navigation-only-multisection"]').find('.meta-section').find('img[class="logo"]').should("be.visible");
+  cy.get('goa-app-footer[id="navigation-only-multisection"]').find('.meta-section').find('a[class="goa-copyright"]').should('have.css', "font-family", properties["font-family"]);
   cy.get('goa-app-footer[id="navigation-only-multisection"]').find('div.footer.navigation-sections-only-footer').find('a[class="goa-copyright"]').should('have.css', "font-size", remToPx(properties["fs-base"]));
   cy.get('goa-app-footer[id="navigation-only-multisection"]').find('div.footer.navigation-sections-only-footer').find('a[class="goa-copyright"]').should('have.css', "color", hexToRgb(properties["goa-color-text-secondary"]));
   cy.get('goa-app-footer[id="navigation-only-multisection"]').find('div.footer.navigation-sections-only-footer').find('a[class="goa-copyright"]').should('have.css', "line-height", remToPx(properties["lh-base"]));
@@ -53,7 +54,7 @@ Then(/^cs it should validate the css properties of navigator app footer multi se
 });
 
 Then(/^cs it should validate the css properties of navigator app footer multi section with multicolumn section$/, function () {
-  cy.get('goa-app-footer[id="navigation-only-multisection-multicolumn"]').find('div.footer.navigation-sections-only-footer').should("have.css", "max-width", remToPx(properties["footer-max-width"]));
+  // cy.get('goa-app-footer[id="navigation-only-multisection-multicolumn"]').find('div.footer.navigation-sections-only-footer').should("have.css", "max-width", remToPx(properties["footer-max-width"]));
   cy.get('goa-app-footer[id="navigation-only-multisection-multicolumn"]').find('div.footer.navigation-sections-only-footer').should("have.css", "padding-top", remToPx(properties["footer-multi-section-padding-top"]));
   cy.get('goa-app-footer[id="navigation-only-multisection-multicolumn"]').find('div.footer.navigation-sections-only-footer').find('img[class="logo"]').should("be.visible");
   cy.get('goa-app-footer[id="navigation-only-multisection-multicolumn"]').find('div.footer.navigation-sections-only-footer').find('a[class="goa-copyright"]').should('have.css', "font-family", properties["font-family"]);
@@ -77,7 +78,7 @@ Then(/^cs it should validate the css properties of navigator app footer multi se
 });
 
 Then(/^cs it should validate the css properties of navigator app footer multi section with links to meta information$/, function () {
-  cy.get('goa-app-footer[id="navigation and meta"]').find('div.footer.meta-and-navigation-links-only-footer').should("have.css", "max-width", remToPx(properties["footer-max-width"]));
+  // cy.get('goa-app-footer[id="navigation and meta"]').find('div.footer.meta-and-navigation-links-only-footer').should("have.css", "max-width", remToPx(properties["footer-max-width"]));
   cy.get('goa-app-footer[id="navigation and meta"]').find('div.footer.meta-and-navigation-links-only-footer').should("have.css", "padding-top", remToPx(properties["footer-multi-section-padding-top"]));
   cy.get('goa-app-footer[id="navigation and meta"]').find('div.footer.meta-and-navigation-links-only-footer').find('img[class="logo"]').should("be.visible");
   cy.get('goa-app-footer[id="navigation and meta"]').find('div.footer.meta-and-navigation-links-only-footer').find('a[class="goa-copyright"]').should('have.css', "font-family", properties["font-family"]);
@@ -102,7 +103,7 @@ Then(/^cs it should validate the css properties of navigator app footer multi se
 });
 
 Then(/^cs it should validate the css properties of navigator app footer multi section and links to meta info$/, function () {
-  cy.get('goa-app-footer[id="meta-and-navigation-multisection"]').find('div.footer.meta-and-navigation-sections-only-footer').should("have.css", "max-width", remToPx(properties["footer-max-width"]));
+  // cy.get('goa-app-footer[id="meta-and-navigation-multisection"]').find('div.footer.meta-and-navigation-sections-only-footer').should("have.css", "max-width", remToPx(properties["footer-max-width"]));
   cy.get('goa-app-footer[id="meta-and-navigation-multisection"]').find('div.footer.meta-and-navigation-sections-only-footer').should("have.css", "padding-top", remToPx(properties["footer-multi-section-padding-top"]));
   cy.get('goa-app-footer[id="meta-and-navigation-multisection"]').find('div.footer.meta-and-navigation-sections-only-footer').find('img[class="logo"]').should("be.visible");
   cy.get('goa-app-footer[id="meta-and-navigation-multisection"]').find('div.footer.meta-and-navigation-sections-only-footer').find('a[class="goa-copyright"]').should('have.css', "font-family", properties["font-family"]);
@@ -126,14 +127,3 @@ Then(/^cs it should validate the css properties of navigator app footer multi se
   cy.get('goa-app-footer[id="meta-and-navigation-multisection"]').find('div[class="meta-links-logo-and-copyright"]').find('div.meta-links').should('have.css', "color", hexToRgb(properties["goa-color-text"]));
   cy.get('goa-app-footer[id="meta-and-navigation-multisection"]').find('div[class="meta-links-logo-and-copyright"]').find('div.meta-links').should('have.css', "line-height", remToPx(properties["lh-base"]));
 });
-
-function remToPx(rem) {
-  return rem.replace("rem", "") * 16 + "px";
-}
-
-//function to convery hex to rgb
-// return rgb(r, g, b)
-function hexToRgb(hex) {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? "rgb(" + parseInt(result[1], 16) + ", " + parseInt(result[2], 16) + ", " + parseInt(result[3], 16) + ")" : null;
-}

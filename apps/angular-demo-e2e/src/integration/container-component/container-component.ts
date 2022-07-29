@@ -7,7 +7,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to container component$/, function () {
-  cy.get("[label='Container']").click();
+  cy.get('[path="/container"]').click();
 });
 
 Then(/^cs I should be able to validate Basic container component css property$/, function () {

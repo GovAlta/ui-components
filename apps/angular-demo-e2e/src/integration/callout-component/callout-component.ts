@@ -7,7 +7,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to CallOut component$/, function () {
-  cy.get("[label='Callout']").click();
+  cy.get('[path="/callout"]').click();
 });
 
 

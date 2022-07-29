@@ -6,14 +6,14 @@ Given(/^cs I am a user of GOA application$/, function () {
   cy.visit("http://localhost:4200/");
 });
 When(/^cs I navigate to App Header section$/, function () {
-  cy.get("[label='App Header']").click();
+  cy.get('[path="/app-header"]').click();
 });
 Then(/^cs it should validate the css properties of basic app header$/, function () {
-  cy.get('div[class="app-header"]').should("have.css", "border-bottom").should("contains",hexToRgb(properties["color-gray-100"]))
+  cy.get('div[class="app-header"]').should("have.css", "border-bottom").should("contains", hexToRgb(properties["color-gray-100"]))
   cy.get('img.image-desktop').should("be.visible")
 });
 Then(/^cs it should validate the css properties of app header with title$/, function () {
-  cy.get('div[class="app-header"]').should("have.css", "border-bottom").should("contains",hexToRgb(properties["color-gray-100"]))
+  cy.get('div[class="app-header"]').should("have.css", "border-bottom").should("contains", hexToRgb(properties["color-gray-100"]))
   cy.get('img.image-desktop').should("be.visible")
   cy.get('a[class="app-link"]').find('span').should('have.css', "font-family", properties["font-family"])
   //cy.get('a[class="app-link"]').find('span').should('have.css', "font-size", properties["fs-base"])
@@ -21,7 +21,7 @@ Then(/^cs it should validate the css properties of app header with title$/, func
 
 });
 Then(/^cs it should validate the css properties of custom app header$/, function () {
-  cy.get('div[class="app-header"]').should("have.css", "border-bottom").should("contain",hexToRgb(properties["color-gray-100"]))
+  cy.get('div[class="app-header"]').should("have.css", "border-bottom").should("contain", hexToRgb(properties["color-gray-100"]))
   cy.get('img.image-desktop').should("be.visible")
   cy.get('a[class="app-link"]').find('span').should('have.css', "font-family", properties["font-family"])
   // cy.get('a[class="app-link"]').find('span').should('have.css', "font-size", remToPx(properties["fs-base"]))

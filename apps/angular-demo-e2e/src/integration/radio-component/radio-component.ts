@@ -7,7 +7,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to Radio basic component$/, function () {
-  cy.get("[label='Radio']").click();
+  cy.get('[path="/radio"]').click();
 });
 
 Then(/^cs I should be able to validate radio basic button css property when unchecked$/, function () {

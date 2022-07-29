@@ -7,7 +7,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to dropdown error component$/, function () {
-  cy.get("[label='Dropdown']").click();
+  cy.get('[path="/dropdown"]').click();
 });
 
 Then(/^cs I should be able to validate dropdown error button css property$/, function () {

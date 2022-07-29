@@ -8,7 +8,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to form item component$/, function () {
-  cy.get("[label='Form Item']").click();
+  cy.get('[path="/form-item"]').click();
 });
 
 // First name field component

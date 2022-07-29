@@ -7,7 +7,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to checkbox Type basic component$/, function () {
-  cy.get("[label='Checkbox']").click();
+  cy.get('[path="/checkbox"]').click();
 });
 
 Then(/^cs I should be able to validate basic checkbox css property$/, function () {

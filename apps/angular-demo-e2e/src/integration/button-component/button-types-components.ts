@@ -7,7 +7,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to Button Type primary component$/, function () {
-  cy.get("[label='Button']").click();
+  cy.get('[path="/button"]').click();
 });
 
 Then(/^cs I should be able to validate primary button css property$/, function () {

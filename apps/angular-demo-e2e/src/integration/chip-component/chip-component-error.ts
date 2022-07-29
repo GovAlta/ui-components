@@ -9,7 +9,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to Basic chip component$/, function () {
-  cy.get("[label='Chip']").click();
+  cy.get('[path="/chip"]').click();
 });
 
 Then(/^cs I should be able to validate Error state chip css property$/, function () {

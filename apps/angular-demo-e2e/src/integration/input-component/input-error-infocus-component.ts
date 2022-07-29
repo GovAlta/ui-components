@@ -9,7 +9,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to Basic component$/, function () {
-  cy.get("[label='Input']").click();
+  cy.get('[path="/input"]').click();
 });
 
 Then(/^cs I should be able to validate error state box css property$/, function () {

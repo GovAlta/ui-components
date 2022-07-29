@@ -7,7 +7,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to Microsite header component$/, function () {
-  cy.get("[label='Microsite header']").click();
+  cy.get('[path="/microsite-header"]').click();
 });
 
 Then(/^cs I should be able to validate microsite Alpha header$/, function () {

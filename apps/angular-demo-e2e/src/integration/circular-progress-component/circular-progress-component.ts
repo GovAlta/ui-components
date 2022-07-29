@@ -7,7 +7,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to circular progress Type component$/, function () {
-  cy.get("[label='Circular progress']").click();
+  cy.get('[path="/circular-progress"]').click();
 });
 
 Then(/^cs I should be able to validate size small circular component css property$/, function () {

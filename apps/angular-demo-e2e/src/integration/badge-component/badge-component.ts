@@ -7,7 +7,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to Badge component$/, function () {
-  cy.get("[label='Badge']").click();
+  cy.get('[path="/badge"]').click();
 });
 
 

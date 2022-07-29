@@ -7,7 +7,7 @@ Given(/^cs I am a user of GOA application$/, function () {
 });
 
 When(/^cs Navigating to Modal basic component$/, function () {
-  cy.get("[label='Modal']").click();
+  cy.get('[path="/modal"]').click();
   cy.get('goa-button[id=button2]').find('button.primary').click({ force: true });
 
 });

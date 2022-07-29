@@ -6,8 +6,8 @@ Given(/^cs I am a user of GOA application$/, function () {
   cy.visit("http://localhost:4200/");
 });
 
-When(/^cs Navigating to Button Type primary component$/, function () {
-  cy.get('[label=Button]').click();
+When(/^cs Navigating to Button size primary component$/, function () {
+  cy.get('[path="/button"]').click();
 });
 
 Then(/^cs I should be able to validate sizes Compact primary button css property$/, function () {
