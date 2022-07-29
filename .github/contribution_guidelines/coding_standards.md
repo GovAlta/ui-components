@@ -22,6 +22,31 @@
 
 - If there are elements which will be common across multiple libraries please consider pulling those out into a library of their own or adding to an appropriate existing common library.
 
+## CSS Guidelines
+
+We are using [SCSS](https://sass-lang.com/) to do CSS compilation.
+
+- **Use Mixins**
+  Use mixins to encourage re-use and make style updates less error prone. The eventual goal is to have the core-css classes available as mixins and a compiled CSS file exported, but conversion will happen as components are pulled in.
+
+  When creating a style consider the following:
+
+  - _Is my style unique to my component?_
+
+  No need to create a mixin, or only a local one.
+
+  - _Is my style unique to my library but not to other libraries?_
+
+  Create a mixin in a common area in your library.
+
+  - _Is my style common for all components of the same type across libraries (for example angular button and vue button)?_
+
+  Create a mixin in core-css project under the component of the same name.
+
+  - _Is my style common for many components across many libraries (for example a colour pallete)?_
+
+  Create a mixin in core-css project under the mixin folder.
+
 ## Unit Testing
 
 Try to achieve unit test coverage for the configuration interface for a component. We encourage the use of [testing-library](https://testing-library.com/) to test components to provide a uniform test authoring experience across all library types. However, if testing-library does not meet the needs for a test being written feel free to use a library of your choice.
