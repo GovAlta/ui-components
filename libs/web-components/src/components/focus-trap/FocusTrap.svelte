@@ -1,166 +1,80 @@
 <svelte:options tag="goa-focus-trap" />
 
-<!-- ======================================================================= -->
 <script lang="ts">
+  import { onMount, tick } from "svelte";
   import { toBoolean } from "../../common/utils";
 
-  let ignoreFocusChanges: boolean = false;
-  let lastFocus: Element;
-  let element: Element;
+  export let active: string;
 
-  export let open: string;
-  $: isOpen = toBoolean(open);
+  let root: Element;
+  let focusableElements: HTMLElement[] = []; 
+  let eventsAttached: boolean = false;
 
   $: {
-    if (isOpen) {
-      addListeners();
+    if (toBoolean(active) && !eventsAttached) {
+      document.addEventListener('keypress', getKey, true);
+      eventsAttached = true
+    } 
+  }
+
+  $: {
+    if (!toBoolean(active) && eventsAttached) {
+      document.removeEventListener('keypress', getKey);
+      eventsAttached = false;
     }
-    else {
-      removeListeners();
+  }
+
+  onMount(async () => {
+    await tick() 
+    getChildren(root, focusableElements)
+  })
+
+  function getKey(event: KeyboardEvent) {
+    const outside = !isChild(event.target as Element);
+    if (outside) {
+      let index = event.shiftKey ? focusableElements.length - 1 : 0;
+      focusableElements[index].focus();
     }
   }
 
-  function removeListeners() {
-    document.removeEventListener('focus', trapFocus, true);
+  // finds all focusable children 
+  function getChildren(parent: Element, children: Element[]) {
+    for (const child of (parent.children) || []) {
+      if (isFocusable(child))
+        children.push(child)
+      getChildren(child, children);
+    }
+
+    const assignedElements = (parent as HTMLSlotElement).assignedElements?.() || [];
+    for (const child of assignedElements) {
+      if (isFocusable(child))
+        children.push(child)
+      getChildren(child, children);
+    }
+
+    const shadowRoot = (parent as HTMLSlotElement).shadowRoot;
+    if (shadowRoot) {
+      for (const child of (shadowRoot.children || [])) {
+        if (isFocusable(child))
+          children.push(child)
+        getChildren(child, children);
+      }
+    }
   }
 
-  function addListeners() {
-    document.addEventListener('focus', trapFocus, true);
-  }
 
-  function attemptFocusOnFirstDescendant(descendants: NodeList | Node[]) {
-
-    if (!descendants) return false;
-
-    for (let i = 0; i < descendants.length; i++) {
-
-      let descendant = descendants[i];
-
-      if (attemptFocus(descendant) ||
-          attemptFocusOnFirstDescendant(descendant.childNodes) ||
-          attemptFocusOnFirstDescendantOfSlotElement(descendant) ||
-          attemptFocusOnFirstDescendantOfShadowDOM(descendant)) {
+  function isChild(el: Element): boolean {
+    const children: Element[] = []
+    getChildren(el, children)
+    for (const fel of focusableElements) {
+      if (children.find(c => c === fel)) {
         return true;
       }
-
     }
-
     return false;
-  };
-
-  function attemptFocusOnFirstDescendantOfSlotElement(node: Node) {
-
-    if (node instanceof HTMLSlotElement) {
-
-      let assingedNodesOfSlotElement = (node as HTMLSlotElement)?.assignedNodes();
-
-      if (attemptFocusOnFirstDescendant(assingedNodesOfSlotElement)) {
-        return true;
-      }
-    }
   }
-
-  function attemptFocusOnFirstDescendantOfShadowDOM(node: Node) {
-
-    if (node instanceof HTMLElement) {
-
-      let childNodesOfShadowRoot = (node as HTMLElement)?.shadowRoot?.childNodes;
-
-      if (attemptFocusOnFirstDescendant(childNodesOfShadowRoot)) {
-        return true;
-      }
-    }
-  }
-
-  function attemptFocusOnLastDescendant(descendants: NodeList | Node[]) {
-
-    if (!descendants) return false;
-
-    for (let i = descendants.length - 1; i >= 0; i--) {
-
-      let descendant = descendants[i];
-
-      if (attemptFocus(descendant) ||
-          attemptFocusOnLastDescendant(descendant.childNodes) ||
-          attemptFocusOnLastDescendantOfSlotElement(descendant) ||
-          attemptFocusOnLastDescendantOfShadowDOM(descendant)) {
-        return true;
-      }
-
-    }
-
-    return false;
-  };
-
-  function attemptFocusOnLastDescendantOfSlotElement(node: Node) {
-
-    if (node instanceof HTMLSlotElement) {
-
-      let assingedNodesOfSlotElement = (node as HTMLSlotElement)?.assignedNodes();
-
-      if (attemptFocusOnLastDescendant(assingedNodesOfSlotElement)) {
-        return true;
-      }
-    }
-  }
-
-  function attemptFocusOnLastDescendantOfShadowDOM(node: Node) {
-
-    if (node instanceof HTMLElement) {
-
-      let childNodesOfShadowRoot = (node as HTMLElement)?.shadowRoot?.childNodes;
-
-      if (attemptFocusOnLastDescendant(childNodesOfShadowRoot)) {
-        return true;
-      }
-    }
-  }
-
-
-  function attemptFocus(element) {
-
-    if (!isFocusable(element)) {
-      return false;
-    }
-
-    ignoreFocusChanges = true;
-
-    try {
-      element.focus();
-    }
-    catch (e) {
-    }
-
-    ignoreFocusChanges = false;
-    return (document.activeElement === element);
-  };
-
-  function trapFocus(event) {
-
-    if (ignoreFocusChanges) {
-      return;
-    }
-
-    const slotElements = (element.firstChild as HTMLSlotElement)?.assignedElements();
-
-    if (!slotElements?.length) return;
-
-    const contentRootElement = slotElements[0];
-
-    if (event.composedPath().includes(contentRootElement)) {
-      lastFocus = event.target;
-    }
-    else {
-      attemptFocusOnFirstDescendant(contentRootElement.childNodes);
-      if (lastFocus == document.activeElement) {
-        attemptFocusOnLastDescendant(contentRootElement.childNodes);
-      }
-      lastFocus = document.activeElement;
-    }
-  };
 
   function isFocusable(element) {
-
     if (element.tabIndex > 0 || (element.tabIndex === 0 && element.getAttribute('tabIndex') !== null)) {
       return true;
     }
@@ -169,7 +83,7 @@
       return false;
     }
 
-    switch (element.nodeName) {
+    switch (element.tagName) {
       case 'A':
         return !!element.href && element.rel !== 'ignore';
       case 'INPUT':
@@ -185,6 +99,6 @@
 
 </script>
 
-<div bind:this={element}>
+<div bind:this={root}>
   <slot />
 </div>

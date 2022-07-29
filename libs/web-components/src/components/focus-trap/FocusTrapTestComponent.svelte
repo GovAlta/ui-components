@@ -6,7 +6,7 @@
 <!-- HTML -->
 <div>
   <input type="text" class="description" name="description" />
-  <GoAFocusTrap open="true">
+  <GoAFocusTrap active="true">
     <input type="text" class="username" name="username" />
     <input type="text" class="email" name="email" />
     <input type="text" class="address" name="address" />

@@ -1,15 +1,17 @@
 <svelte:options tag="goa-modal" />
 
 <!-- ======================================================================= -->
+<!-- Script -->
+<!-- ======================================================================= -->
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";
 
-  export let heading: string;
-  export let closable: string;
-  export let scrollable: string; // TODO: determine if this flag is needed or not, things seem to work well with it always 'on'
-  export let open: string;
+  export let heading: string = "";
+  export let closable: string = "false";
+  export let scrollable: string = "true"; // TODO: determine if this flag is needed or not, things seem to work well with it always 'on'
+  export let open: string = "false";
   export let transition: "fast" | "slow" | "none";
 
   // Temp attribute while deciding on the best way to allow for width control
@@ -40,17 +42,14 @@
     e.target.dispatchEvent(new CustomEvent("_close", { composed: true }));
     e.stopPropagation();
   }
-
 </script>
 
-<!-- ======================================================================= -->
-<!-- Script -->
 
 <!-- ======================================================================= -->
 <!-- Html -->
 <!-- ======================================================================= -->
 {#if isOpen}
-  <goa-focus-trap {open}>
+  <goa-focus-trap active={open}>
     <div
       use:noscroll={{ enable: isOpen }}
       in:fade={{ duration: _transitionTime }}
