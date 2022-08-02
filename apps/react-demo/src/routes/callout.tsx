@@ -32,6 +32,36 @@ export default function Callout() {
       <GoACallout type="event" heading="Event callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
+
+      <br />
+      <h3>Emergency</h3>
+      <GoACallout type="emergency" >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+
+      <br />
+      <h3>Important</h3>
+      <GoACallout type="important" >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+
+      <br />
+      <h3>Information</h3>
+      <GoACallout type="information" >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+
+      <br />
+      <h3>Success</h3>
+      <GoACallout type="success" >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+
+      <br />
+      <h3>Events</h3>
+      <GoACallout type="event" >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
     </>
   );
 }
