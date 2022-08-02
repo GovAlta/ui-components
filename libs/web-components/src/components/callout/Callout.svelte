@@ -29,7 +29,9 @@
     <goa-icon type={iconType} inverted={type === "important" ? "false" : "true"} />
   </span>
   <span class="content">
-    <h3>{heading}</h3>
+    {#if heading }
+      <h3>{heading}</h3>
+    {/if}
     <slot />
   </span>
 </div>
