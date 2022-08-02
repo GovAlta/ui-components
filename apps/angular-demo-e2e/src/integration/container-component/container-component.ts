@@ -15,15 +15,15 @@ Then(/^cs I should be able to validate Basic container component css property$/,
   cy.get('.goa-container--primary header').should("be.visible")
   cy.get('.goa-container--primary header').should("have.css", "background-color", hexToRgb(properties["goa-color-brand"]));
   cy.get('.goa-container--primary header').should("have.css", "border-color", hexToRgb(properties["goa-color-brand"]));
-  cy.get('.goa-container--primary header').should("have.css", "color", hexToRgb(properties["color-white"]));
+  cy.get('.goa-container--primary header').should("have.css", "color", hexToRgb(properties["goa-color-text-light"]));
   // border status
   cy.get('goa-container').find('div.content').should("have.css", "border");
-  cy.get('goa-container').find('div.content').should("have.css", "padding", "1.5rem");
-  cy.get('goa-container').find('div.content').should("have.css", "border-bottom", "1px solid " + hexToRgb(properties["color-gray-600"]));
-  cy.get('goa-container').find('div.content').should("have.css", "border-left", "1px solid " + hexToRgb(properties["color-gray-600"]));
-  cy.get('goa-container').find('div.content').should("have.css", "border-right", "1px solid " + hexToRgb(properties["color-gray-600"]));
-  cy.get('goa-container').find('div.content').should("have.css", "border-bottom-left-radius", properties["border-radius"]);
-  cy.get('goa-container').find('div.content').should("have.css", "border-bottom-right-radius", hexToRgb(properties["border-radius"]));
+  cy.get('goa-container').find('div.content').should("have.css", "padding", remToPx("1.5rem"));
+  cy.get('goa-container').find('div.content').should("have.css", "border-bottom", "1px solid " + hexToRgb(properties["color-gray-200"]));
+  cy.get('goa-container').find('div.content').should("have.css", "border-left", "1px solid " + hexToRgb(properties["color-gray-200"]));
+  cy.get('goa-container').find('div.content').should("have.css", "border-right", "1px solid " + hexToRgb(properties["color-gray-200"]));
+  cy.get('goa-container').find('div.content').should("have.css", "border-bottom-left-radius", remToPx(properties["border-radius"]));
+  cy.get('goa-container').find('div.content').should("have.css", "border-bottom-right-radius", remToPx(properties["border-radius"]));
   // content inside
 
 });

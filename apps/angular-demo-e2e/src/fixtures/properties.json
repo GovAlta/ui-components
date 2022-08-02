@@ -73,6 +73,7 @@
   "shadow-3": "0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10)",
   "shadow-4": "0 15px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05)",
   "shadow-5": "0 20px 40px rgba(0, 0, 0, 0.2)",
+  "animation":"2s ease-in-out 0s infinite normal none running pulse",
   "page-width-max": "1440px",
   "font-valign-fix": "0.1rem",
   "chip-font-size": "1rem",

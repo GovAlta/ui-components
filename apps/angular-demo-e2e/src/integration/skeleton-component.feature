@@ -8,4 +8,4 @@ Feature: Skeleton
     Then cs I should be able to validate css properties of cards skeleton
     Then cs I should be able to validate css properties of avatar skeleton
     Then cs I should be able to validate css properties of header skeleton
-    Then cs I should be able to validate css properties of thumbnail skeleton
+    Then cs I should be able to validate css properties of thumbnails skeleton
