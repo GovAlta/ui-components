@@ -23,11 +23,7 @@ import { GoATextArea } from '@abgov/react-components';
 #### Properties
 
 <Props>
-  <Prop
-    name="name"
-    type="string"
-    required="true"
-  />
+  <Prop name="name" type="string" required="true" />
   <Prop
     name="value"
     type="string"
@@ -78,14 +74,14 @@ export const noop = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea name="comment" (_change)="onChange()" value="Initial value" />
+      <goa-textarea name="comment" (_change)="onChange($event)" value="Initial value"></goa-textarea>
     `}
     />
     <CodeSnippet
       lang="ts"
       code={`
       export class SomeComponent {
-        onChange(e) {
+        onChange(e: any) {
           console.log('changed', e.detail.name, e.detail.value);
         }
       }
@@ -114,7 +110,7 @@ export const noop = () => {
   </Tab>
 </Tabs>
 
-### Character count
+#### Character count
 
 export const CharCountTemplate = () => {
   const [value, setValue] = useState('');
@@ -161,7 +157,7 @@ export const CharCountTemplate = () => {
   </Tab>
 </Tabs>
 
-### Character count with limit
+#### Character count with limit
 
 export const CharCountWithLimitTemplate = () => {
   const [value, setValue] = useState('');
@@ -231,7 +227,7 @@ export const CharCountWithLimitTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea name="comment" disabled />
+      <goa-textarea name="comment" disabled ></goa-textarea>
     `}
     />
   </Tab>
@@ -268,7 +264,7 @@ export const CharCountWithLimitTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea placeholder="Tell us what you think.." name="comment" />
+      <goa-textarea placeholder="Tell us what you think.." name="comment" ></goa-textarea>
     `}
     />
   </Tab>
@@ -301,7 +297,7 @@ export const CharCountWithLimitTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea rows="4" name="comment" />
+      <goa-textarea rows="4" name="comment" ></goa-textarea>
     `}
     />
   </Tab>
@@ -334,7 +330,7 @@ export const CharCountWithLimitTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea error name="comment" />
+      <goa-textarea error name="comment" ></goa-textarea>
     `}
     />
   </Tab>
@@ -348,7 +344,7 @@ export const CharCountWithLimitTemplate = () => {
   </Tab>
 </Tabs>
 
-### Width
+#### Width
 
 <Story name="Width">
   <GoATextArea
