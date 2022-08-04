@@ -23,10 +23,7 @@ import {
   Props,
   Prop,
 } from '@abgov/shared/storybook-common';
-import {
-  Meta,
-  Story,
-} from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/addon-docs';
 
 <Meta title="Components/Inputs" component={GoAInput} />
 
@@ -46,63 +43,23 @@ import {
     type="text | number | password | email | search | tel | time | url | week"
     defaultValue="text"
   />
-  <Prop
-    name="value"
-    type="string"
-  />
-  <Prop
-    name="placeholder"
-    type="string"
-  />
-  <Prop
-    name="leadingicon"
-    type="GoAIconType"
-  />
-  <Prop
-    name="trailingicon"
-    type="GoAIconType"
-  />
-  <Prop
-    name="disabled"
-    type="boolean"
-  />
-  <Prop
-    name="handletrailingiconclick"
-    type="boolean"
-  />
-  <Prop
-    name="focused"
-    type="boolean"
-  />
-  <Prop
-    name="readonly"
-    type="boolean"
-  />
-  <Prop
-    name="error"
-    type="boolean"
-  />
-  <Prop
-    name="width"
-    type="string"
-    defaultValue="30ch"
-  />
-  <Prop
-    name="showcounter"
-    type="boolean"
-  />
-  <Prop
-    name="maxcharcount"
-    type="number"
-  />
+  <Prop name="value" type="string" />
+  <Prop name="placeholder" type="string" />
+  <Prop name="leadingicon" type="GoAIconType" />
+  <Prop name="trailingicon" type="GoAIconType" />
+  <Prop name="disabled" type="boolean" />
+  <Prop name="handletrailingiconclick" type="boolean" />
+  <Prop name="focused" type="boolean" />
+  <Prop name="readonly" type="boolean" />
+  <Prop name="error" type="boolean" />
+  <Prop name="width" type="string" defaultValue="30ch" />
+  <Prop name="showcounter" type="boolean" />
+  <Prop name="maxcharcount" type="number" />
   <Prop
     name="_change"
     type="CustomEvent<{detail: {name: string, value: string}}>"
   />
-  <Prop
-    name="_trailingiconclick"
-    type="CustomEvent"
-  />
+  <Prop name="_trailingiconclick" type="CustomEvent" />
 </Props>
 
 export const noop = () => {};
@@ -148,14 +105,14 @@ export const InputTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-input name="foo" (_change)="onChange()"></goa-input>
+      <goa-input name="foo" (_change)="onChange($event)"></goa-input>
     `}
     />
     <CodeSnippet
       lang="ts"
       code={`
       export class SomeComponent {
-        onChange(e) {
+        onChange(e: any) {
           console.log(e.detail.name, e.detail.value);
         }
       }
@@ -264,7 +221,8 @@ export const IconButtonInputTemplate = () => (
           handletrailingiconclick="true"
           (_trailingIconClick)="handleClick()"
           trailingicon="finger-print"
-        />
+        >
+        </goa-input>
       `}
     />
     <CodeSnippet
