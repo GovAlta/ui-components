@@ -42,32 +42,12 @@ export const checkboxTemplate = (args) => {
 #### Properties
 
 <Props>
-  <Prop
-    name="name"
-    type="string"
-    required="true"
-  />
-  <Prop
-    name="checked"
-    type="boolean"
-    required="true"
-  />
-  <Prop
-    name="text"
-    type="string"
-  />
-  <Prop
-    name="value"
-    type="string"
-  />
-  <Prop
-    name="disabled"
-    type="boolean"
-  />
-  <Prop
-    name="error"
-    type="boolean"
-  />
+  <Prop name="name" type="string" required="true" />
+  <Prop name="checked" type="boolean" required="true" />
+  <Prop name="text" type="string" />
+  <Prop name="value" type="string" />
+  <Prop name="disabled" type="boolean" />
+  <Prop name="error" type="boolean" />
   <Prop
     name="_change"
     type="CustomEvent<{detail: {
@@ -108,7 +88,8 @@ onChangeCheckboxTemplate.args = {
           name="desserts"
           text="Ice Cream"
           value="10"
-          (_change)="onChange()" >
+          [checked]="dessertsChecked"
+          (_change)="onChange($event)" >
         </goa-checkbox>
       `}
       lang="html"
@@ -117,12 +98,17 @@ onChangeCheckboxTemplate.args = {
       lang="ts"
       code={`
       export class SomeComponent {
-        onChange(e) {
+
+        let dessertsChecked = false;
+
+        onChange(e: any) {
+          this.dessertsChecked = !this.dessertsChecked;
           console.log(e.detail.name, e.detail.checked, e.detail.value);
         }
       }
     `}
     />
+
   </Tab>
   <Tab label="React">
     <CodeSnippet
@@ -174,9 +160,32 @@ checkedCheckboxTemplate.args = {
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
-      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" checked="true"></goa-checkbox>`}
+      code={`
+        <goa-checkbox
+          name="desserts"
+          text="Ice Cream"
+          value="10"
+          [checked]="dessertsChecked"
+          (_change)="onChange($event)" >
+        </goa-checkbox>
+      `}
       lang="html"
     />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      export class SomeComponent {
+
+        let dessertsChecked = true;
+
+        onChange(e: any) {
+          this.dessertsChecked = !this.dessertsChecked;
+          console.log(e.detail.name, e.detail.checked, e.detail.value);
+        }
+      }
+    `}
+    />
+
   </Tab>
   <Tab label="React">
     <CodeSnippet
@@ -233,9 +242,33 @@ errorCheckboxTemplate.args = {
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
-      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" error="true"></goa-checkbox>`}
+      code={`
+        <goa-checkbox
+          name="desserts"
+          text="Ice Cream"
+          value="10"
+          error
+          [checked]="dessertsChecked"
+          (_change)="onChange($event)" >
+        </goa-checkbox>
+      `}
       lang="html"
     />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      export class SomeComponent {
+
+        let dessertsChecked = false;
+
+        onChange(e: any) {
+          this.dessertsChecked = !this.dessertsChecked;
+          console.log(e.detail.name, e.detail.checked, e.detail.value);
+        }
+      }
+    `}
+    />
+
   </Tab>
   <Tab label="React">
     <CodeSnippet
