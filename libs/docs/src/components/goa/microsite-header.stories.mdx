@@ -1,5 +1,11 @@
 import { GoAMicrositeHeader } from '@abgov/react-components';
-import { Tabs, Tab, CodeSnippet, Props, Prop } from '@abgov/shared/storybook-common';
+import {
+  Tabs,
+  Tab,
+  CodeSnippet,
+  Props,
+  Prop,
+} from '@abgov/shared/storybook-common';
 import { Meta, Story } from '@storybook/addon-docs';
 
 <Meta title="Components/Microsite Header" />
@@ -15,19 +21,9 @@ import { Meta, Story } from '@storybook/addon-docs';
 #### Properties
 
 <Props>
-  <Prop
-    name="level"
-    type="string"
-    required="true"
-  />
-  <Prop
-    name="version"
-    type="string"
-  />
-  <Prop
-    name="feedbackurl"
-    type="string"
-  />
+  <Prop name="level" type="string" required="true" />
+  <Prop name="version" type="string" />
+  <Prop name="feedbackurl" type="string" />
 </Props>
 
 #### Alpha
@@ -49,7 +45,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="alpha" version="v1.2.3"></goa-microsite-header
+      <goa-microsite-header level="alpha" version="v1.2.3"></goa-microsite-header>
     `}
     />
   </Tab>
