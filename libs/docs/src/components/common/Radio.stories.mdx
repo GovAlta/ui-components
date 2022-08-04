@@ -30,18 +30,13 @@ import { useState } from 'react';
     required="true"
     description="Must match the name assigned to the children"
   />
-  <Prop
-    name="value"
-    type="string"
-    description="Value binding"
-  />
+  <Prop name="value" type="string" description="Value binding" />
   <Prop
     name="_change"
     type="CustomEvent<{detail: {name: string, value: string}}>"
     description="onChange event"
   />
 </Props>
-
 
 export const BasicTemplate = (args) => {
   const [value, setValue] = useState('');
@@ -97,7 +92,7 @@ export const BasicTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" [value]="color" (_change)="onChange()">
+      <goa-radio-group name="color" [value]="color" (_change)="onChange($event)">
         <goa-radio-item name="color" value="red"></goa-radio-item>
         <goa-radio-item name="color" value="blue"></goa-radio-item>
         <goa-radio-item name="color" value="orange"></goa-radio-item>
@@ -108,7 +103,7 @@ export const BasicTemplate = (args) => {
       lang="ts"
       code={`
       export class MyComponent {
-        onChange(e) {
+        onChange(e: any) {
           this.color = e.detail.value;
         }
       }
@@ -170,7 +165,7 @@ export const ErrorTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" error">
+      <goa-radio-group name="color" value="orange" error>
         <goa-radio-item name="color" value="red"></goa-radio-item>
         <goa-radio-item name="color" value="blue"></goa-radio-item>
         <goa-radio-item name="color" value="orange"></goa-radio-item>
@@ -217,7 +212,7 @@ Display a custom label that is different that the `value` property.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange"">
+      <goa-radio-group name="color" value="orange">
         <goa-radio-item name="color" label="Red" value="red"></goa-radio-item>
         <goa-radio-item name="color" label="Blue" value="blue"></goa-radio-item>
         <goa-radio-item name="color" label="Orange" value="orange"></goa-radio-item>
@@ -266,7 +261,7 @@ Display a custom label that is different that the `value` property.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" disabled">
+      <goa-radio-group name="color" value="orange" disabled>
         <goa-radio-item name="color" value="red"></goa-radio-item>
         <goa-radio-item name="color" value="blue"></goa-radio-item>
         <goa-radio-item name="color" value="orange"></goa-radio-item>
