@@ -148,7 +148,7 @@ export const FullscreenProgressTemplate = () => {
   />
 </Props>
 
-#### Basic 
+#### Basic
 
 <Story name="Basic">
   <GoACircularProgress visible={true} />
@@ -156,19 +156,28 @@ export const FullscreenProgressTemplate = () => {
 
 <Tabs>
   <Tab label="Web Component" hidden={true}>
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress visible />
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-circular-progress [visible]="visible"></goa-circular-progress>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoACircularProgress visible={visible} />
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
@@ -389,7 +398,7 @@ Message text is optional for all the variations listed.
         variant="inline"
         size="large"
         [progress]="progress"
-        [visible]="visible">
+        visible
       </goa-circular-progress>
     `}
     />
@@ -398,18 +407,20 @@ Message text is optional for all the variations listed.
       code={`
       export class SomeComponent implements OnInit {
         progress: number = 0;
-        visible: boolean = false;
         ngOnInit() {
           setInterval(() => {
-            this.progress += 10;
             if (this.progress >= 100) {
-              this.visible = false;
+              this.progress = 0;
+            }
+            else {
+              this.progress += 10;
             }
           }, 1000);
         }
       }
     `}
     />
+
   </Tab>
   <Tab label="React">
     <CodeSnippet
