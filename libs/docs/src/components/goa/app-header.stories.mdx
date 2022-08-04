@@ -23,14 +23,8 @@ import { GoAAppHeader } from '@abgov/react-components';
 #### Properties
 
 <Props>
-  <Prop
-    name="url"
-    type="string"
-  />
-  <Prop
-    name="heading"
-    type="string"
-  />
+  <Prop name="url" type="string" />
+  <Prop name="heading" type="string" />
 </Props>
 
 #### Basic
@@ -99,7 +93,7 @@ import { GoAAppHeader } from '@abgov/react-components';
   </Tab>
 </Tabs>
 
-#### Heading 
+#### Heading
 
 <Story name="Heading">
   <GoAAppHeader heading="Ticket and Fine Payments" />
@@ -149,7 +143,7 @@ Custom content can be added to the header by passing it in as a child component(
       lang="html"
       code={`
       <goa-app-header url="example.com" heading="Ticket and Find Payments">
-        <a href="#">Login</a>
+        <a href="#">Login</a> &nbsp;
         <a href="#">Help</a>
       </goa-app-header>
     `}
@@ -160,7 +154,7 @@ Custom content can be added to the header by passing it in as a child component(
       lang="html"
       code={`
       <goa-app-header url="example.com" heading="Ticket and Find Payments">
-        <a href="#">Login</a>
+        <a href="#">Login</a> &nbsp;
         <a href="#">Help</a>
       </goa-app-header>
     `}
