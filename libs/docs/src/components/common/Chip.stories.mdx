@@ -29,11 +29,7 @@ import { useState } from 'react';
     required="true"
     description="Sets the callout color and side icon"
   />
-  <Prop
-    name="error"
-    type="boolean"
-    description=""
-  />
+  <Prop name="error" type="boolean" description="" />
   <Prop
     name="deletable"
     type="boolean"
@@ -188,12 +184,12 @@ export const DeleteEventTemplate = () => {
     <CodeSnippet
       lang="ts"
       code={`
-      class MyComponent {
-        chips = ["Doritos", "Fritos", "Lays"];
-        deleteChip(chip) {
-          this.chips = this.chips.filter(c => c !== chip);
+        class MyComponent {
+            chips = ["Doritos", "Fritos", "Lays"];
+            deleteChip(chip:string) {
+                this.chips = this.chips.filter(c => c !== chip);
+            }
         }
-      }
     `}
     />
   </Tab>
