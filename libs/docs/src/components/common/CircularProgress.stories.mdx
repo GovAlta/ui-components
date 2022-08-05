@@ -167,7 +167,7 @@ export const FullscreenProgressTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress type="infinite" variant="inline" size="small" [visible]="visible"></goa-circular-progress>
+      <goa-circular-progress type="infinite" variant="inline" size="small" visible></goa-circular-progress>
     `}
     />
   </Tab>
@@ -175,7 +175,7 @@ export const FullscreenProgressTemplate = () => {
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoACircularProgress type="infinite" variant="inline" size="small" visible={visible} />
+      <GoACircularProgress type="infinite" variant="inline" size="small" visible={true} />
     `}
     />
   </Tab>
@@ -229,14 +229,14 @@ export const FullscreenProgressTemplate = () => {
         variant="inline"
         message="Loading..."
         size="small"
-        [visible]="visible">
+        visible>
       </goa-circular-progress>
       <goa-circular-progress
         type="infinite"
         variant="inline"
         message="Loading..."
         size="large"
-        [visible]="visible">
+        visible>
       </goa-circular-progress>
     `}
     />
@@ -250,13 +250,13 @@ export const FullscreenProgressTemplate = () => {
         variant="inline"
         message="Loading..."
         size="small"
-        visible={visible} />
+        visible={true}/>
       <GoACircularProgress
         type="infinite"
         variant="inline"
         message="Loading..."
         size="large"
-        visible={visible} />
+        visible={true} />
     `}
     />
   </Tab>
@@ -299,7 +299,7 @@ Message text is optional for all the variations listed.
         variant="inline"
         size="large"
         message="Loading..."
-        [visible]="visible">
+        visible>
       </goa-circular-progress>
     `}
     />
@@ -313,7 +313,7 @@ Message text is optional for all the variations listed.
         variant="inline"
         size="large"
         message="Loading..."
-        visible={visible} />
+        visible={true} />
     `}
     />
   </Tab>
@@ -347,7 +347,7 @@ Message text is optional for all the variations listed.
         type="infinite"
         variant="inline"
         size="large"
-        [visible]="visible">
+        visible>
       </goa-circular-progress>
     `}
     />
@@ -356,7 +356,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoACircularProgress type="infinite" variant="inline" size="large" visible={visible} />
+      <GoACircularProgress type="infinite" variant="inline" size="large" visible={true} />
     `}
     />
   </Tab>
@@ -398,7 +398,7 @@ Message text is optional for all the variations listed.
         variant="inline"
         size="large"
         [progress]="progress"
-        visible
+        visible>
       </goa-circular-progress>
     `}
     />
@@ -439,7 +439,7 @@ Message text is optional for all the variations listed.
             clearInterval(handle);
           };
         }, [progress, setProgress]);
-        return <GoACircularProgress type="infinite" progress={progress} variant="inline" size="large" visible={visible} />
+        return <GoACircularProgress type="infinite" progress={progress} variant="inline" size="large" visible={true} />
       };
     `}
     />
@@ -465,7 +465,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress variant="fullscreen" type="infinite" size="large" visible="true"></goa-circular-progress>
+      <goa-circular-progress variant="fullscreen" type="infinite" size="large" visible></goa-circular-progress>
     `}
     />
   </Tab>
@@ -473,7 +473,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoACircularProgress variant="fullscreen" type="infinite" size="large" visible={visible} />
+      <GoACircularProgress variant="fullscreen" type="infinite" size="large" visible={true} />
     `}
     />
   </Tab>
@@ -498,7 +498,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress variant="fullscreen" type="progress" size="large" visible="true"></goa-circular-progress>
+      <goa-circular-progress variant="fullscreen" type="progress" size="large" visible></goa-circular-progress>
     `}
     />
   </Tab>
@@ -506,7 +506,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoACircularProgress variant="fullscreen" type="progress" size="large" visible={visible} />
+      <GoACircularProgress variant="fullscreen" type="progress" size="large" visible={true} />
     `}
     />
   </Tab>
