@@ -159,7 +159,7 @@ export const FullscreenProgressTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress visible />
+      <goa-circular-progress type="infinite" variant="inline" size="small" visible />
     `}
     />
   </Tab>
@@ -167,7 +167,7 @@ export const FullscreenProgressTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress [visible]="visible"></goa-circular-progress>
+      <goa-circular-progress type="infinite" variant="inline" size="small" [visible]="visible"></goa-circular-progress>
     `}
     />
   </Tab>
@@ -175,7 +175,7 @@ export const FullscreenProgressTemplate = () => {
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoACircularProgress visible={visible} />
+      <GoACircularProgress type="infinite" variant="inline" size="small" visible={visible} />
     `}
     />
   </Tab>
