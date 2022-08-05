@@ -2,8 +2,6 @@
 
 This is the web component library and utilizes Angular's web component integration.
 
-Install Angular CLI
-
 Add Dependencies
 
 ```bash
