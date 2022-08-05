@@ -6,20 +6,24 @@ import { Tabs, Tab, Note } from '@abgov/shared/storybook-common';
 # Contributors
 
 <Note type="caution">
-  This is for developers creating UI components for the ABGov ui-components library.
+  This is for developers creating UI components for the ABGov ui-components
+  library.
 </Note>
 
 ### Required programs
+
 You will need the following programs to make changes to the docs:
+
 - [Git](https://git-scm.com/downloads)
-- [VSCode](https://code.visualstudio.com)
 
 ### Recommended VSCode extensions
-This project will recommend extensions to install the ones listed below.
-- NX -> Performs builds and starts storybook
+
+This project recommends the following extensions, but these are not necessary in anyway:
+
+- Nx Console -> Performs builds and starts storybook
 - MDX -> Add highlighting to storybook files
 - Github -> Simplifies creating pull requests to merge changes
-- Paste Image -> Allows for easy pasting of copy buffered  into the .mdx files
+- Paste Image -> Allows for easy pasting of copy buffered into the .mdx files
 
 ### Fork it
 
@@ -45,15 +49,13 @@ node --version  # 14.16.1
 
 If you are not it is recommended to install [nvm](https://github.com/nvm-sh/nvm) to ensure that this is the version you are using. Once installed the `.nvmrc` will ensure that you are using the correct version.
 
-
 Install the dependencies:
 
 ```bash
 npm ci
+cd libs/web-components
+npm ci
 ```
-
-Start the web component file watcher to automatically build the web components when changes are made:
-
 
 ### Playground
 
@@ -64,18 +66,18 @@ Provides live reloading for quicker development.
 npm run --prefix libs/web-components demo
 ```
 
-### Storybook
-
-Currently, the storybook does not provide propery live reloads :()
-
-```bash
-# script: run:web-components-dev
-npm run --prefix libs/web-components dev
-```
-
 #### Start Storybook
 
 ```bash
 # script: run:web-components-storybook
 nx run web-components:storybook
+```
+
+### Run Storybook
+
+Currently, the storybook does not provide proper live reloads :(
+
+```bash
+# script: run:web-components-dev
+npm run --prefix libs/web-components dev
 ```
