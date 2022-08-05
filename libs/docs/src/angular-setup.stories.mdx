@@ -6,55 +6,27 @@ import { Meta } from '@storybook/addon-docs';
 
 ![npm (scoped)](https://img.shields.io/npm/v/@abgov/web-components/alpha?color=%230081a2&label=web-components&style=flat-square)
 
-This is the _web component_ library and utilizes Angular's web component integration.
-
-Install Angular CLI
-
-```bash
-npm install -g @angular/cli
-```
-
-Create angular app
-
-```bash
-ng new my-app
-```
+This is the web component library and utilizes Angular's web component integration.
 
 Add Dependencies
 
 ```bash
-npm i
 npm i @abgov/web-components@alpha
 npm i @abgov/styles@alpha
 ```
 
 Link ionicons in app/index.html
+Add the following in the head element
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>UiComponentAngularVerification</title>
-    <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-
-    <!-- Ionicons -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
-    <!-- -->
-  </head>
-  <body>
-    <app-root></app-root>
-  </body>
-</html>
+<script
+  type="module"
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+></script>
 ```
 
 Update `src/app/app.module.ts` as per the three steps below
@@ -78,57 +50,8 @@ import '@abgov/web-components';
 export class AppModule {}
 ```
 
-Change the `src/app/app.component.html` to include the following:
-
-```html
-<goa-microsite-header level="alpha" version="UAT"></goa-microsite-header>
-
-<goa-app-header url="http://google.com" title="Digital File Service">
-  <a href="#">Sign in</a>
-</goa-app-header>
-
-<goa-page-block>
-  <form>
-    <goa-form-item label="First Name">
-      <goa-input name="firstname" (_change)="onInputChangeEvent($event)" type="text"></goa-input>
-    </goa-form-item>
-
-    <goa-button-group alignment="start">
-      <goa-button type="primary" (_click)="submitForm()">Submit</goa-button>
-    </goa-button-group>
-  </form>
-</goa-page-block>
-```
-
-Update the `src/app/app.component.ts` to include the following:
-
-```typescript
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'abgov-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-})
-export class AppComponent {
-  onInputChangeEvent(event: any) {
-    console.log('onEvent', event.detail);
-  }
-  submitForm() {
-    console.log('handleClick');
-  }
-}
-```
-
 Add the styles link in the `src/styles.css` file
 
 ```css
 @import '@abgov/styles/styles.esm.css';
-```
-
-Build and serve my-app locally
-
-```bash
-cd my-app
-ng serve --open
 ```
