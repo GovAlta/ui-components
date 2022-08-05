@@ -1,6 +1,19 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Tabs, Tab, CodeSnippet, SupportInfo, Props, Prop } from '@abgov/shared/storybook-common';
-import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } from '@abgov/react-components';
+import {
+  Tabs,
+  Tab,
+  CodeSnippet,
+  SupportInfo,
+  Props,
+  Prop,
+} from '@abgov/shared/storybook-common';
+import {
+  GoAFormItem,
+  GoAInput,
+  GoAFlexRow,
+  GoADropdown,
+  GoADropdownOption,
+} from '@abgov/react-components';
 
 <Meta title="Components/Form Item" />
 
@@ -15,12 +28,28 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
 #### Properties
 
 <Props>
-  <Prop name="label" type="string" description="Text displayed describing form field" />
-  <Prop name="helptext" type="string" description="Text displayed under the form field providing an addition explanation" />
-  <Prop name="error" type="string" description="The error message for the form field. Leave blank to indicate valid field." />
-  <Prop name="optional" type="boolean" defaultValue="false" description="Flag to show/hide the indicator to whether the field is optional" />
+  <Prop
+    name="label"
+    type="string"
+    description="Text displayed describing form field"
+  />
+  <Prop
+    name="helptext"
+    type="string"
+    description="Text displayed under the form field providing an addition explanation"
+  />
+  <Prop
+    name="error"
+    type="string"
+    description="The error message for the form field. Leave blank to indicate valid field."
+  />
+  <Prop
+    name="optional"
+    type="boolean"
+    defaultValue="false"
+    description="Flag to show/hide the indicator to whether the field is optional"
+  />
 </Props>
-
 
 #### Basic
 
@@ -46,7 +75,7 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
       lang="html"
       code={`
       <goa-form-item label="First name">
-        <goa-input type="text" />
+        <goa-input type="text"></goa-input>
       </goa-form-item>
     `}
     />
@@ -87,7 +116,7 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
       lang="html"
       code={`
       <goa-form-item label="First name" optional>
-        <goa-input type="text" />
+        <goa-input type="text"></goa-input>
       </goa-form-item>
     `}
     />
@@ -128,7 +157,7 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
       lang="html"
       code={`
       <goa-form-item label="First name" helptext="Help text">
-        <goa-input type="text" />
+        <goa-input type="text"></goa-input>
       </goa-form-item>
     `}
     />
@@ -177,12 +206,12 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
       lang="html"
       code={`
         <!-- Error message should be a dynamic value -->
-        <goa-form-item label="First name" error="First name is required"> 
-          <goa-input type="text" error />
+        <goa-form-item label="First name" error="First name is required">
+          <goa-input type="text" error></goa-input>
         </goa-form-item>
         <!-- Blank error indicates a valid field -->
         <goa-form-item label="Favourite Colour" error="">
-          <goa-input type="text" />
+          <goa-input type="text"></goa-input>
         </goa-form-item>
       `}
     />
@@ -216,10 +245,11 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
   </GoAFlexRow>
 </Story>
 
-
 <Tabs>
   <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-flex-row gap="small">
         <goa-form-item label="First name">
           <goa-input type="text" width="100%" />
@@ -228,22 +258,28 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
           <goa-input type="text" width="100%" />
         </goa-form-item>
       </goa-flex-row>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-flex-row gap="small">
         <goa-form-item label="First name">
-          <goa-input type="text" width="100%" />
+          <goa-input type="text" width="100%"></goa-input>
         </goa-form-item>
         <goa-form-item label="Last Name">
-          <goa-input type="text" width="100%" />
+          <goa-input type="text" width="100%"></goa-input>
         </goa-form-item>
       </goa-flex-row>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAFlexRow gap="small">
         <GoAFormItem label="First name">
           <GoAInput name="firstName" onChange={() => {}} width="100%" />
@@ -252,7 +288,8 @@ import { GoAFormItem, GoAInput, GoAFlexRow, GoADropdown, GoADropdownOption } fro
           <GoAInput name="lastName" onChange={() => {}} width="100%" />
         </GoAFormItem>
       </GoAFlexRow>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
