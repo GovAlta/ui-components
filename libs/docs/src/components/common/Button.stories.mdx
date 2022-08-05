@@ -42,31 +42,11 @@ export const noop = () => {};
     defaultValue="normal"
     description=""
   />
-  <Prop
-    name="title"
-    type="string"
-    description=""
-  />
-  <Prop
-    name="disabled"
-    type="boolean"
-    defaultValue="false"
-    description=""
-  />
-  <Prop
-    name="leadingicon"
-    type="GoAIconType"
-    description=""
-  />
-  <Prop
-    name="trailingicon"
-    type="GoAIconType"
-    description=""
-  />
-  <Prop
-    name="_click"
-    type="CustomEvent"
-  />
+  <Prop name="title" type="string" description="" />
+  <Prop name="disabled" type="boolean" defaultValue="false" description="" />
+  <Prop name="leadingicon" type="GoAIconType" description="" />
+  <Prop name="trailingicon" type="GoAIconType" description="" />
+  <Prop name="_click" type="CustomEvent" />
 </Props>
 
 #### Types
@@ -308,17 +288,17 @@ There are two button sizes: Normal (default) and Compact.
       code={`
         <goa-button-group alignment="start">
           <goa-button leadingicon="airplane" type="primary">Leading</goa-button>
-          <goa-button leadingicon="airplane" type="primary">Trailing</goa-button>
+          <goa-button trailingIcon="airplane" type="primary">Trailing</goa-button>
           <goa-button leadingicon="archive" trailingicon="airplane" type="primary">Both</goa-button>
         </goa-button-group>
         <goa-button-group alignment="start">
           <goa-button leadingicon="airplane" type="secondary">Leading</goa-button>
-          <goa-button leadingicon="airplane" type="secondary">Trailing</goa-button>
+          <goa-button trailingIcon="airplane" type="secondary">Trailing</goa-button>
           <goa-button leadingicon="archive" trailingicon="airplane" type="secondary">Both</goa-button>
         </goa-button-group>
         <goa-button-group alignment="start">
           <goa-button leadingicon="airplane" type="tertiary">Leading</goa-button>
-          <goa-button leadingicon="airplane" type="secondary">Trailing</goa-button>
+          <goa-button trailingIcon="airplane" type="secondary">Trailing</goa-button>
           <goa-button leadingicon="archive" trailingicon="airplane" type="secondary">Both</goa-button>
         </goa-button-group>
       `}
@@ -330,17 +310,17 @@ There are two button sizes: Normal (default) and Compact.
       code={`
         <goa-button-group alignment="start">
           <goa-button leadingicon="airplane" (_click)="onClick" type="primary">Leading</goa-button>
-          <goa-button leadingicon="airplane" (_click)="onClick" type="primary">Trailing</goa-button>
+          <goa-button trailingIcon="airplane" (_click)="onClick" type="primary">Trailing</goa-button>
           <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick" type="primary">Both</goa-button>
         </goa-button-group>
         <goa-button-group alignment="start">
           <goa-button leadingicon="airplane" (_click)="onClick" type="secondary">Leading</goa-button>
-          <goa-button leadingicon="airplane" (_click)="onClick" type="secondary">Trailing</goa-button>
+          <goa-button trailingIcon="airplane" (_click)="onClick" type="secondary">Trailing</goa-button>
           <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick" type="secondary">Both</goa-button>
         </goa-button-group>
         <goa-button-group alignment="start">
           <goa-button leadingicon="airplane" (_click)="onClick" type="tertiary">Leading</goa-button>
-          <goa-button leadingicon="airplane" (_click)="onClick" type="secondary">Trailing</goa-button>
+          <goa-button trailingIcon="airplane" (_click)="onClick" type="secondary">Trailing</goa-button>
           <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick" type="secondary">Both</goa-button>
         </goa-button-group>
       `}
