@@ -1,6 +1,6 @@
 # About
 
-This project contains the Government of Alberta UI components. The output packages support multiple frontend frameworks, React and Angular. The project is designed to be used to help bring consistency to all Government of Alberta websites and web applications. It's also being designed to help ease the burden on designers and developers alike throughout the development process.
+This project contains the Government of Alberta UI components. This web component project supports multiple frontend frameworks, React and Angular. The project is designed to be used to help bring consistency to all Government of Alberta websites and web applications. It's also being designed to help ease the burden on designers and developers alike throughout the development process.
 
 ## Contribution Guidelines
 
