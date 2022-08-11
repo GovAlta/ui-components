@@ -15,6 +15,7 @@ import { Tabs, Tab, Note } from '@abgov/shared/storybook-common';
 You will need the following programs to make changes to the docs:
 
 - [Git](https://git-scm.com/downloads)
+- NodeJS >= 14.16 (latest version is best)
 
 ### Recommended VSCode extensions
 
@@ -39,16 +40,6 @@ git checkout upstream/alpha
 
 All PR branches will be created from your repo and and merged into the upstream repo via pull requests. To keep up to date perform fetch and merges from the upstream repo.
 
-### Node Version
-
-Ensure you are running the following version of node.
-
-```bash
-node --version  # 14.16.1
-```
-
-If you are not it is recommended to install [nvm](https://github.com/nvm-sh/nvm) to ensure that this is the version you are using. Once installed the `.nvmrc` will ensure that you are using the correct version.
-
 Install the dependencies:
 
 ```bash
@@ -70,7 +61,7 @@ npm run --prefix libs/web-components demo
 
 ```bash
 # script: run:web-components-storybook
-nx run web-components:storybook
+npm run run:docs-storybook
 ```
 
 ### Run Storybook
