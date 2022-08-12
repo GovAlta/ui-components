@@ -135,8 +135,22 @@ export const CharCountTemplate = () => {
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
-      code={`<goa-textarea name="firstname" showcounter="true"></goa-textarea>`}
       lang="html"
+      code={`
+      <goa-textarea name="comment" showcounter="true" (_change)="onChange($event)" [value]="val"></goa-textarea>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      export class SomeComponent {
+        val = "";
+        onChange(e: any) {
+          val = e.detail.value;
+          console.log('changed', e.detail.name, e.detail.value);
+        }
+      }
+    `}
     />
   </Tab>
   <Tab label="React">
@@ -185,8 +199,22 @@ export const CharCountWithLimitTemplate = () => {
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
-      code={`<goa-textarea name="firstname" showcounter="true" maxcharcount="20"></goa-textarea>`}
       lang="html"
+      code={`
+      <goa-textarea name="comment" showcounter="true" maxcharcount="20" (_change)="onChange($event)" [value]="val"></goa-textarea>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      export class SomeComponent {
+        val = "";
+        onChange(e: any) {
+          val = e.detail.value;
+          console.log('changed', e.detail.name, e.detail.value);
+        }
+      }
+    `}
     />
   </Tab>
   <Tab label="React">
