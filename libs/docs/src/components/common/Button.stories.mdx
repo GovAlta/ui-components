@@ -93,10 +93,10 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
   <Tab label="Angular">
     <CodeSnippet
       code={`
-        <goa-button (_click)="onClick" type="primary">Primary</goa-button>
-        <goa-button (_click)="onClick" type="secondary">Secondary</goa-button>
-        <goa-button (_click)="onClick" type="tertiary">Tertiary</goa-button>
-        <goa-button (_click)="onClick" type="start">Get Started</goa-button>
+        <goa-button (_click)="onClick()" type="primary">Primary</goa-button>
+        <goa-button (_click)="onClick()" type="secondary">Secondary</goa-button>
+        <goa-button (_click)="onClick()" type="tertiary">Tertiary</goa-button>
+        <goa-button (_click)="onClick()" type="start">Get Started</goa-button>
       `}
       lang="html"
     />
@@ -192,9 +192,9 @@ There are two button sizes: Normal (default) and Compact.
   <Tab label="Angular">
     <CodeSnippet
       code={`
-        <goa-button size="compact" (_click)="onClick" type="primary">Compact Primary</goa-button>
-        <goa-button size="compact" (_click)="onClick" type="secondary">Compact Secondary</goa-button>
-        <goa-button size="compact" (_click)="onClick" type="tertiary">Compact Tertiary</goa-button>
+        <goa-button size="compact" (_click)="onClick()" type="primary">Compact Primary</goa-button>
+        <goa-button size="compact" (_click)="onClick()" type="secondary">Compact Secondary</goa-button>
+        <goa-button size="compact" (_click)="onClick()" type="tertiary">Compact Tertiary</goa-button>
       `}
       lang="html"
     />
@@ -309,19 +309,19 @@ There are two button sizes: Normal (default) and Compact.
     <CodeSnippet
       code={`
         <goa-button-group alignment="start">
-          <goa-button leadingicon="airplane" (_click)="onClick" type="primary">Leading</goa-button>
-          <goa-button trailingIcon="airplane" (_click)="onClick" type="primary">Trailing</goa-button>
-          <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick" type="primary">Both</goa-button>
+          <goa-button leadingicon="airplane" (_click)="onClick()" type="primary">Leading</goa-button>
+          <goa-button trailingIcon="airplane" (_click)="onClick()" type="primary">Trailing</goa-button>
+          <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick()" type="primary">Both</goa-button>
         </goa-button-group>
         <goa-button-group alignment="start">
-          <goa-button leadingicon="airplane" (_click)="onClick" type="secondary">Leading</goa-button>
-          <goa-button trailingIcon="airplane" (_click)="onClick" type="secondary">Trailing</goa-button>
-          <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick" type="secondary">Both</goa-button>
+          <goa-button leadingicon="airplane" (_click)="onClick()" type="secondary">Leading</goa-button>
+          <goa-button trailingIcon="airplane" (_click)="onClick()" type="secondary">Trailing</goa-button>
+          <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick()" type="secondary">Both</goa-button>
         </goa-button-group>
         <goa-button-group alignment="start">
-          <goa-button leadingicon="airplane" (_click)="onClick" type="tertiary">Leading</goa-button>
-          <goa-button trailingIcon="airplane" (_click)="onClick" type="secondary">Trailing</goa-button>
-          <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick" type="secondary">Both</goa-button>
+          <goa-button leadingicon="airplane" (_click)="onClick()" type="tertiary">Leading</goa-button>
+          <goa-button trailingIcon="airplane" (_click)="onClick()" type="secondary">Trailing</goa-button>
+          <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick()" type="secondary">Both</goa-button>
         </goa-button-group>
       `}
       lang="html"
