@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class TextAreaComponent {
 
-  value2 = "";
-  value3 = "";
+  characterCountFieldValue = "";
+  characterCountWithLimitValue = "";
 
   constructor() { }
 
@@ -16,13 +16,13 @@ export class TextAreaComponent {
     console.log('changed', e.detail.name, e.detail.value);
   }
 
-  onChange2(e: any) {
-    this.value2 = e.detail.value;
+  characterCountOnChange(e: any) {
+    this.characterCountFieldValue = e.detail.value;
     console.log('changed', e.detail.name, e.detail.value);
   }
 
-  onChange3(e: any) {
-    this.value3 = e.detail.value;
+  characterCountWithLimitOnChange(e: any) {
+    this.characterCountWithLimitValue = e.detail.value;
     console.log('changed', e.detail.name, e.detail.value);
   }
 }
