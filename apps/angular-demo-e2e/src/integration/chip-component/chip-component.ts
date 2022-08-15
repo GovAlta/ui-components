@@ -21,10 +21,10 @@ Then(/^cs I should be able to validate basic chip css property$/, function () {
 });
 
 Then(/^cs I should be able to validat basic chip css property onClick$/, function () {
-  cy.get('goa-chip[content="Chip Text"]').eq(0).rightclick({ force: true })
-  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "background-color", hexToRgb(properties["color-gray-200"]));
+  cy.get('goa-chip[content="Chip Text"]').eq(0).find('.chip').focus()
+  // cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "background-color", hexToRgb(properties["color-gray-200"]));
   cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "outline").should("contain", hexToRgb(properties["goa-color-interactivefocus"]));
   cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
-  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "font-size", hexToRgb(properties["chip-font-size"]));
-  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "font-weight", hexToRgb(properties["fw-regular"]));
+  cy.get('goa-chip[content="Chip Text"]').find('.chip').should("have.css", "font-size", remToPx(properties["chip-font-size"]));
+  cy.get('goa-chip[content="Chip Text"]').eq(0).should("have.css", "font-weight", (properties["fw-regular"]));
 });

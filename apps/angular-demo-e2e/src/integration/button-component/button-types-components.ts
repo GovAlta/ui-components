@@ -42,11 +42,11 @@ Then(/^cs I should be able to validate Tertiary button css property$/, function 
 });
 
 Then(/^cs I should be able to validate Getting started button css property$/, function () {
-  cy.get('goa-button[type="start"]').find('start.trailing').should("have.css", "border");
-  cy.get('goa-button[type="start"]').find('start.trailing').should("have.css", "border-radius", remToPx(properties["border-radius"]));
-  cy.get('goa-button[type="start"]').find('start.trailing').should("have.css", "font-family", properties["font-family"]);
-  cy.get('goa-button[type="start"]').find('start.trailing').should("have.css", "color", hexToRgb(properties["goa-color-interactive"]));
-  cy.get('goa-button[type="start"]').find('start.trailing').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactivehover"]));
+  cy.get('goa-button[type="start"]').find('.start.trailing').should("have.css", "border");
+  cy.get('goa-button[type="start"]').find('.start.trailing').should("have.css", "border-radius", remToPx(properties["border-radius"]));
+  cy.get('goa-button[type="start"]').find('.start.trailing').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-button[type="start"]').find('.start.trailing').should("have.css", "color", hexToRgb(properties["goa-color-text-light"]));
+  cy.get('goa-button[type="start"]').find('.start.trailing').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactivehover"]));
   // cy.get('goa-button[type="start"]').find('start.trailing').eq(0).click({ force: true }).should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]));
-  cy.get('goa-button[type="start"]').find('start.trailing').should("have.css", "font-size", remToPx(properties["fs-lg"]));
+  cy.get('goa-button[type="start"]').find('.start.trailing').should("have.css", "font-size", remToPx(properties["fs-lg"]));
 });

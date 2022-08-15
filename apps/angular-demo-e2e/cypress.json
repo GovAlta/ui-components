@@ -11,5 +11,17 @@
   "chromeWebSecurity": false,
   "testFiles": "**/*.feature",
   "ignoreTestFiles": "*.js",
-  "includeShadowDom": true
+  "includeShadowDom": true,
+  "reporter": "../../../node_modules/cypress-mochawesome-reporter/",
+  "reporterOptions": {
+    "charts": true,
+    "reportPageTitle": "Cypress Test for Angular Demo E2E",
+    "reportFilename": "[status]_[datetime]-[name]-report",
+    "embeddedScreenshots": true,
+    "inlineAssets": true,
+    "saveAllAttempts": false,
+    "overwrite": false,
+    "json": false,
+    "html": true
+  }
 }

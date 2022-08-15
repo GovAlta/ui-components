@@ -28,8 +28,9 @@ Then(/^cs I should be able to validate modal component content css properties$/,
 
 Then(/^cs I should be able to validate modal component Primary button css properties$/, function () {
   cy.get('button.primary').should("have.css", 'background-color', hexToRgb(properties["goa-color-interactive"]));
-  cy.get('goa-button[type="primary"]').find('button.primary').focus().should("have.css", "box-shadow").should("contain",hexToRgb(properties["goa-color-interactivefocus"]));
-  cy.get('goa-button[type="primary"]').find('button.primary').focus().should("have.css", "border-color", hexToRgb(properties["goa-color-interactive--active"]));
+  cy.get('goa-button[type="primary"]').find('button.primary').rightclick({ force: true })
+  cy.get('goa-button[type="primary"]').find('button.primary').should("have.css", "box-shadow").should("contain", hexToRgb(properties["goa-color-interactivefocus"]));
+  cy.get('goa-button[type="primary"]').find('button.primary').should("have.css", "border-color", hexToRgb(properties["goa-color-interactive--active"]));
   cy.get('button.primary').should("have.css", "border");
   cy.get('button.primary').should("have.css", "border-radius", remToPx(properties["border-radius"]));
   cy.get('button.primary').should("have.css", "font-family", properties["font-family"]);
@@ -44,7 +45,8 @@ Then(/^cs I should be able to validate modal component Secondary button css prop
   cy.get('button.secondary').should("have.css", "font-family", properties["font-family"]);
   cy.get('button.secondary').should("have.css", "height", remToPx(properties["button-height"]));
   cy.get('button.secondary').should("have.css", "color", hexToRgb(properties["goa-color-interactive"]));
-  cy.get('button.secondary').eq(0).focus().should("have.css", "box-shadow").should("contain",hexToRgb(properties["goa-color-interactivefocus"]));
-  cy.get('button.secondary').eq(0).focus().should("have.css", "border-color", hexToRgb(properties["goa-color-interactive--active"]));
+  cy.get('button.secondary').eq(0).rightclick({ force: true })
+  cy.get('button.secondary').eq(0).should("have.css", "box-shadow").should("contain", hexToRgb(properties["goa-color-interactivefocus"]));
+  cy.get('button.secondary').eq(0).should("have.css", "border-color", hexToRgb(properties["goa-color-interactive--active"]));
   cy.get('button.secondary').should("have.css", "font-size", remToPx(properties["fs-lg"]))
 });

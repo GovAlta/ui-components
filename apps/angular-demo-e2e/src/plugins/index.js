@@ -7,6 +7,7 @@ const browserify = require('@cypress/browserify-preprocessor');
 const resolve = require('resolve');
 
 module.exports = (on, config) => {
+  require('cypress-mochawesome-reporter/plugin')(on);
   const options = {
     ...browserify.defaultOptions,
     typescript: resolve.sync('typescript', { baseDir: config.projectRoot }),

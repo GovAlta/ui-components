@@ -27,26 +27,159 @@ Then(/^cs I should be able to validate Basic container component css property$/,
   // content inside
 
 });
-Then(/^cs I should be able to validate container with button css property$/, function () {
-  // header css
-  cy.get('goa-container[data-id="accent-bar"]').should("be.visible")
-  cy.get('goa-container[data-id="accent-bar"]').find('header').should("have.css", "background-color'", hexToRgb(properties["color-gray-100"]));
-  cy.get('goa-container[data-id="accent-bar"]').find('.heading--large').should("have.css", "border-color", hexToRgb(properties["color-gray-200"]))
-  cy.get('goa-container[data-id="accent-bar"]').find('.heading--large').should("have.css", "color", hexToRgb(properties["color-black"]))
-  cy.get('goa-container[data-id="accent-bar"]').find('.heading--large').should("have.css", "padding", remToPx(properties["fs-xl"]))
-  // header text
-  cy.get('goa-container[data-id="accent-bar"]').find("h2").should("have.css", "font-size", remToPx(properties["fs-2xl"]));
-  cy.get('goa-container[data-id="accent-bar"]').find("h2").should("have.css", "line-height", remToPx(properties["lh-xl"]));
-  cy.get('goa-container[data-id="accent-bar"]').find("h2").should("have.css", "font-weight", remToPx(properties["fw-regular"]));
-  // border status
-  cy.get('goa-container[data-id="accent-bar"]').find("button").should("have.css", "border").should("contain", "goa-color-interactive");
-  cy.get('goa-container[data-id="accent-bar"]').find("button").should("have.css", "background", hexToRgb(properties["color-white"]));
-  cy.get('goa-container[data-id="accent-bar"]').find("button").should("have.css", "color", hexToRgb(properties["goa-color-interactive"]));
-  cy.get('goa-container[data-id="accent-bar"]').find("button").focus()
-  cy.get('goa-container[data-id="accent-bar"]').find("button").should("have.css", "border-color", hexToRgb(properties["color-gray-600"]));
-  cy.get('goa-container[data-id="accent-bar"]').find("button").should("have.css", "box-shadow", hexToRgb(properties["color-gray-600"]));
-  cy.get('goa-container[data-id="accent-bar"]').find("button").should("have.css", "border-radius", ["0.25rem"]);
-  cy.get('goa-container[data-id="accent-bar"]').find("button").should("have.css", "background", hexToRgb(properties["color-gray-100"]));
-  // content inside
 
+Then(/^cs I should be able to validate container with large accent bar$/, function () {
+  cy.get('goa-container[headingsize="large"]').find('header[class="heading--large"]').should("be.visible");
+  cy.get('goa-container[headingsize="large"]').find('header[class="heading--large"]').should("have.css", "background-color", hexToRgb(properties["color-gray-100"]));
+  cy.get('goa-container[headingsize="large"]').find('header[class="heading--large"]').should("have.css", "border-color", hexToRgb(properties["color-gray-200"]));
+  cy.get('goa-container[headingsize="large"]').find('header[class="heading--large"]').should("have.css", "padding", "0px " + remToPx("1.5rem"));
+  cy.get('goa-container[headingsize="large"]').find('header[class="heading--large"]').should("have.css", "border-width", "1px");
+  cy.get('goa-container[headingsize="large"]').find('header[class="heading--large"]').should("have.css", "border-style", "solid");
+  // content
+  cy.get('goa-container[headingsize="large"]').find('div[class="content"]').should("be.visible");
+  cy.get('goa-container[headingsize="large"]').find('div[class="content"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container[headingsize="large"]').find('div[class="content"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container[headingsize="large"]').find('div[class="content"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-container[headingsize="large"]').find('div[class="content"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container[headingsize="small"]').find('div[class="content"]').should("have.css", "font-weight", "400");
+});
+
+Then(/^cs I should be able to validate container with small accent bar$/, function () {
+  cy.get('goa-container[headingsize="small"]').find('header[class="heading--small"]').should("be.visible");
+  cy.get('goa-container[headingsize="small"]').find('header[class="heading--small"]').should("have.css", "background-color", hexToRgb(properties["color-gray-100"]));
+  cy.get('goa-container[headingsize="small"]').find('header[class="heading--small"]').should("have.css", "border-color", hexToRgb(properties["color-gray-200"]));
+  cy.get('goa-container[headingsize="small"]').find('header[class="heading--small"]').should("have.css", "padding", "0px " + remToPx("1.5rem"));
+  cy.get('goa-container[headingsize="small"]').find('header[class="heading--small"]').should("have.css", "border-width", "1px");
+  cy.get('goa-container[headingsize="small"]').find('header[class="heading--small"]').should("have.css", "border-style", "solid");
+  // content
+  cy.get('goa-container[headingsize="small"]').find('div[class="content"]').should("be.visible");
+  cy.get('goa-container[headingsize="small"]').find('div[class="content"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container[headingsize="small"]').find('div[class="content"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container[headingsize="small"]').find('div[class="content"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-container[headingsize="small"]').find('div[class="content"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container[headingsize="small"]').find('div[class="content"]').should("have.css", "font-weight", "400");
+});
+
+Then(/^cs I should be able to validate container with accent bar with text$/, function () {
+  cy.get('goa-container').find('header[class="heading--large"]').should("be.visible");
+  cy.get('goa-container').find('header[class="heading--large"]').should("have.css", "background-color", hexToRgb(properties["color-gray-100"]));
+  cy.get('goa-container').find('header[class="heading--large"]').should("have.css", "border-color", hexToRgb(properties["color-gray-200"]));
+  cy.get('goa-container').find('header[class="heading--large"]').should("have.css", "padding", "0px " + remToPx("1.5rem"));
+  cy.get('goa-container').find('header[class="heading--large"]').should("have.css", "border-width", "1px");
+  cy.get('goa-container').find('header[class="heading--large"]').should("have.css", "border-style", "solid");
+
+  // title
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("be.visible");
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "line-height", remToPx(properties["lh-lg"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "font-weight", "700");
+
+  // action
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("be.visible");
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "font-weight", "700");
+
+  // content
+  cy.get('goa-container').find('div[class="content"]').should("be.visible");
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "font-weight", "400");
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "padding", remToPx("1.5rem"));
+});
+
+Then(/^cs I should be able to validate container with heading with text only$/, function () {
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').should("be.visible");
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').should("have.css", "background-color", hexToRgb(properties["color-gray-100"]));
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').should("have.css", "border-color", hexToRgb(properties["color-gray-200"]));
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').should("have.css", "padding", "0px " + remToPx("1.5rem"));
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').should("have.css", "border-width", "1px");
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').should("have.css", "border-style", "solid");
+
+  // title
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="title"]').should("be.visible");
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "line-height", remToPx(properties["lh-lg"]));
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "font-weight", "700");
+
+  // action
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="actions"]').should("be.visible");
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container[title="Heading"]').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "font-weight", "700");
+
+  cy.get('goa-container[title="Heading"]').find('div[slot="actions"]').should("be.visible");
+  cy.get('goa-container[title="Heading"]').find('div[slot="actions"]').find('div[data-type="goa-badge"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container[title="Heading"]').find('div[slot="actions"]').find('div[data-type="goa-badge"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container[title="Heading"]').find('div[slot="actions"]').find('div[data-type="goa-badge"]').should("have.css", "color", hexToRgb(properties["goa-color-text-light"]));
+  cy.get('goa-container[title="Heading"]').find('div[slot="actions"]').find('div[data-type="goa-badge"]').should("have.css", "font-weight", "400");
+  cy.get('goa-container[title="Heading"]').find('div[slot="actions"]').find('div[data-type="goa-badge"]').should("have.css", "background-color", hexToRgb(properties["goa-color-status-success"]));
+
+
+  // content
+  cy.get('goa-container[title="Heading"]').find('div[class="content"]').should("be.visible");
+  cy.get('goa-container[title="Heading"]').find('div[class="content"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container[title="Heading"]').find('div[class="content"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container[title="Heading"]').find('div[class="content"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-container[title="Heading"]').find('div[class="content"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container[title="Heading"]').find('div[class="content"]').should("have.css", "font-weight", "400");
+});
+
+Then(/^cs I should be able to validate container nested$/, function () {
+  cy.get('goa-container').find('header[class="heading--large"]').should("be.visible");
+  cy.get('goa-container').find('header[class="heading--large"]').should("have.css", "background-color", hexToRgb(properties["color-gray-100"]));
+  cy.get('goa-container').find('header[class="heading--large"]').should("have.css", "border-color", hexToRgb(properties["color-gray-200"]));
+  cy.get('goa-container').find('header[class="heading--large"]').should("have.css", "padding", "0px " + remToPx("1.5rem"));
+  cy.get('goa-container').find('header[class="heading--large"]').should("have.css", "border-width", "1px");
+  cy.get('goa-container').find('header[class="heading--large"]').should("have.css", "border-style", "solid");
+
+  // title
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("be.visible");
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "line-height", remToPx(properties["lh-lg"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="title"]').should("have.css", "font-weight", "700");
+
+  // action
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("be.visible");
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container').find('header[class="heading--large"]').find('div[class="actions"]').should("have.css", "font-weight", "700");
+
+  // content
+  cy.get('goa-container').find('div[class="content"]').should("be.visible");
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "font-weight", "400");
+  cy.get('goa-container').find('div[class="content"]').should("have.css", "padding", remToPx("1.5rem"));
+
+  // nested header
+  cy.get('goa-container[variant="primary"]').find('header[class="heading--small"]').should("be.visible");
+  cy.get('goa-container[variant="primary"]').find('header[class="heading--small"]').should("have.css", "background-color", hexToRgb(properties["goa-color-brand"]));
+  cy.get('goa-container[variant="primary"]').find('header[class="heading--small"]').should("have.css", "padding", "0px " + remToPx("1.5rem"));
+  cy.get('goa-container[variant="primary"]').find('header[class="heading--small"]').should("have.css", "border-width", "1px");
+  cy.get('goa-container[variant="primary"]').find('header[class="heading--small"]').should("have.css", "border-style", "solid");
+
+  // content nested
+  cy.get('goa-container[variant="primary"]').find('div[class="content"]').should("be.visible");
+  cy.get('goa-container[variant="primary"]').find('div[class="content"]').should("have.css", "font-family", properties["font-family"]);
+  cy.get('goa-container[variant="primary"]').find('div[class="content"]').should("have.css", "font-size", remToPx(properties["fs-base"]));
+  cy.get('goa-container[variant="primary"]').find('div[class="content"]').should("have.css", "line-height", remToPx(properties["lh-base"]));
+  cy.get('goa-container[variant="primary"]').find('div[class="content"]').should("have.css", "color", hexToRgb(properties["goa-color-text"]));
+  cy.get('goa-container[variant="primary"]').find('div[class="content"]').should("have.css", "font-weight", "400");
 });
