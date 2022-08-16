@@ -14,9 +14,9 @@
   export let size: SpinnerSize;
 
   // optional
-  export let invert = false;
+  export let invert: boolean = false;
   export let type: SpinnerType = "infinite";
-  export let progress = "0";
+  export let progress: string = "0";
   export let testid: string = "";
 
   const _progress = tweened(0, {
@@ -27,7 +27,7 @@
   // Reactive
 
   $: {
-    _progress.set(parseFloat(progress));
+    _progress.set(parseFloat(progress) || -1);
   }
 
   $: diameter = size && {

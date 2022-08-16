@@ -38,7 +38,6 @@ export const ProgressTemplate = (args) => {
     <GoACircularProgress
       {...args}
       progress={progress}
-      type="progress"
       variant="inline"
       visible={true}
       size="large"
@@ -56,7 +55,7 @@ export const FullscreenTemplate = (args) => {
   }
   return (
     <>
-      <GoAButton type="primary" onClick={showProgress}>
+      <GoAButton onClick={showProgress}>
         Show
       </GoAButton>
       <GoACircularProgress
@@ -93,14 +92,13 @@ export const FullscreenProgressTemplate = () => {
   }, [progress, handle]);
   return (
     <>
-      <GoAButton type="primary" onClick={show}>
+      <GoAButton onClick={show}>
         Show
       </GoAButton>
       <GoACircularProgress
         visible={visible}
         variant="fullscreen"
         progress={progress}
-        type="progress"
         size="large"
       />
     </>
@@ -111,34 +109,28 @@ export const FullscreenProgressTemplate = () => {
 
 <Props>
   <Prop
-    name="type"
-    type="infinite | progress"
-    required={true}
-    description="The type of progress indicator"
-  />
-  <Prop
     name="variant"
     type="fullscreen | inline"
-    required={true}
+    defaultValue="inline"
     description="The variant of progress indicator"
   />
   <Prop
     name="visible"
     type="boolean"
-    required={true}
+    defaultValue="false"
     description="Shows/hides the page loader, allowing for fade transition to be applied in each transition."
   />
   <Prop
     name="size"
     type="small | large"
-    required={true}
+    defaultValue="large"
     description="The size of progress indicator"
   />
   <Prop
     name="progress"
     type="number"
-    defaultValue="0"
-    description="The progress value"
+    defaultValue="-1"
+    description="The progress value. Setting this value will change the type from `infinite` to `progress`"
   />
   <Prop
     name="message"
@@ -159,7 +151,7 @@ export const FullscreenProgressTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress type="infinite" variant="inline" size="large" visible />
+      <goa-circular-progress visible />
     `}
     />
   </Tab>
@@ -167,7 +159,7 @@ export const FullscreenProgressTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress type="infinite" variant="inline" size="large" visible></goa-circular-progress>
+      <goa-circular-progress visible="true"></goa-circular-progress>
     `}
     />
   </Tab>
@@ -175,7 +167,7 @@ export const FullscreenProgressTemplate = () => {
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoACircularProgress type="infinite" variant="inline" size="large" visible={true} />
+      <GoACircularProgress visible={true} />
     `}
     />
   </Tab>
@@ -185,17 +177,11 @@ export const FullscreenProgressTemplate = () => {
 
 <Story name="Sizes">
   <GoACircularProgress
-    type="infinite"
-    variant="inline"
     visible={true}
-    message="Loading..."
     size="small"
   />
   <GoACircularProgress
-    type="infinite"
-    variant="inline"
     visible={true}
-    message="Loading..."
     size="large"
   />
 </Story>
@@ -206,16 +192,10 @@ export const FullscreenProgressTemplate = () => {
       lang="html"
       code={`
       <goa-circular-progress
-        type="infinite"
-        variant="inline"
         size="small"
-        message="Loading..."
         visible />
       <goa-circular-progress
-        type="infinite"
-        variant="inline"
         size="large"
-        message="Loading..."
         visible />
     `}
     />
@@ -225,16 +205,10 @@ export const FullscreenProgressTemplate = () => {
       lang="html"
       code={`
       <goa-circular-progress
-        type="infinite"
-        variant="inline"
-        message="Loading..."
         size="small"
         visible>
       </goa-circular-progress>
       <goa-circular-progress
-        type="infinite"
-        variant="inline"
-        message="Loading..."
         size="large"
         visible>
       </goa-circular-progress>
@@ -246,15 +220,9 @@ export const FullscreenProgressTemplate = () => {
       lang="tsx"
       code={`
       <GoACircularProgress
-        type="infinite"
-        variant="inline"
-        message="Loading..."
         size="small"
         visible={true}/>
       <GoACircularProgress
-        type="infinite"
-        variant="inline"
-        message="Loading..."
         size="large"
         visible={true} />
     `}
@@ -268,11 +236,8 @@ Message text is optional for all the variations listed.
 
 <Story name="Message">
   <GoACircularProgress
-    type="infinite"
-    variant="inline"
     visible={true}
     message="Loading..."
-    size="large"
   />
 </Story>
 
@@ -282,9 +247,6 @@ Message text is optional for all the variations listed.
       lang="html"
       code={`
       <goa-circular-progress
-        type="infinite"
-        variant="inline"
-        size="large"
         message="Loading..."
         visible />
     `}
@@ -295,9 +257,6 @@ Message text is optional for all the variations listed.
       lang="html"
       code={`
       <goa-circular-progress
-        type="infinite"
-        variant="inline"
-        size="large"
         message="Loading..."
         visible>
       </goa-circular-progress>
@@ -309,9 +268,6 @@ Message text is optional for all the variations listed.
       lang="tsx"
       code={`
       <GoACircularProgress
-        type="infinite"
-        variant="inline"
-        size="large"
         message="Loading..."
         visible={true} />
     `}
@@ -322,12 +278,7 @@ Message text is optional for all the variations listed.
 #### Inline infinite
 
 <Story name="Inline infinite">
-  <GoACircularProgress
-    type="infinite"
-    variant="inline"
-    visible={true}
-    size="large"
-  />
+  <GoACircularProgress variant="inline" visible={true} />
 </Story>
 
 <Tabs>
@@ -335,29 +286,30 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress type="infinite" variant="inline" size="large" visible />
-    `}
+        <goa-circular-progress variant="inline" visible />
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress
-        type="infinite"
-        variant="inline"
-        size="large"
-        visible>
-      </goa-circular-progress>
-    `}
+        <goa-circular-progress
+          variant="inline"
+          visible>
+        </goa-circular-progress>
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoACircularProgress type="infinite" variant="inline" size="large" visible={true} />
-    `}
+        <GoACircularProgress 
+          variant="inline" 
+          visible={true}
+        />
+      `}
     />
   </Tab>
 </Tabs>
@@ -371,7 +323,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress id="progress" variant="inline" type="infinite" size="large" visible />
+      <goa-circular-progress id="progress" variant="inline" visible />
     `}
     />
     <CodeSnippet
@@ -394,9 +346,7 @@ Message text is optional for all the variations listed.
       lang="html"
       code={`
       <goa-circular-progress
-        type="progress"
         variant="inline"
-        size="large"
         [progress]="progress"
         visible>
       </goa-circular-progress>
@@ -439,7 +389,7 @@ Message text is optional for all the variations listed.
             clearInterval(handle);
           };
         }, [progress, setProgress]);
-        return <GoACircularProgress type="infinite" progress={progress} variant="inline" size="large" visible={true} />
+        return <GoACircularProgress progress={progress} variant="inline" visible={true} />
       };
     `}
     />
@@ -448,7 +398,7 @@ Message text is optional for all the variations listed.
 
 #### Fullscreen infinite
 
-<Story name="Fullscreen infinite" args={{ type: 'infinite' }}>
+<Story name="Fullscreen infinite">
   {FullscreenTemplate.bind({})}
 </Story>
 
@@ -457,7 +407,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress variant="fullscreen" type="infinite" size="large" visible="true" />
+      <goa-circular-progress variant="fullscreen" visible="true" />
     `}
     />
   </Tab>
@@ -465,7 +415,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress variant="fullscreen" type="infinite" size="large" visible></goa-circular-progress>
+      <goa-circular-progress variant="fullscreen" visible></goa-circular-progress>
     `}
     />
   </Tab>
@@ -473,7 +423,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoACircularProgress variant="fullscreen" type="infinite" size="large" visible={true} />
+      <GoACircularProgress variant="fullscreen" visible={true} />
     `}
     />
   </Tab>
@@ -490,7 +440,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress variant="fullscreen" type="progress" size="large" visible="true" />
+      <goa-circular-progress variant="fullscreen" visible="true" />
     `}
     />
   </Tab>
@@ -498,7 +448,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-circular-progress variant="fullscreen" type="progress" size="large" visible></goa-circular-progress>
+      <goa-circular-progress variant="fullscreen" visible></goa-circular-progress>
     `}
     />
   </Tab>
@@ -506,7 +456,7 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoACircularProgress variant="fullscreen" type="progress" size="large" visible={true} />
+      <GoACircularProgress variant="fullscreen" visible={true} />
     `}
     />
   </Tab>
