@@ -15,9 +15,10 @@
 
   // optional
   export let invert: boolean = false;
-  export let type: SpinnerType = "infinite";
-  export let progress: string = "0";
+  export let progress: number = -1;
   export let testid: string = "";
+
+  let type: SpinnerType = "infinite";
 
   const _progress = tweened(0, {
     duration: 500,
@@ -27,7 +28,14 @@
   // Reactive
 
   $: {
-    _progress.set(parseFloat(progress) || -1);
+    // Typescript recognizes `progress` as a number, but once compiled, due to it being a web component, progress is a string.
+    // This line makes both sides happy.
+    const p = parseFloat(progress + ''); 
+
+    if (p >= 0) {
+      _progress.set(p || 1);  // start at 1 to prevent incorrect arc calculations
+      type = "progress"
+    } 
   }
 
   $: diameter = size && {
