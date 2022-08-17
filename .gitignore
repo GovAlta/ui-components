@@ -29,6 +29,9 @@ node_modules/
 # Dist folder
 dist
 
+# Coverage
+coverage
+
 # Storybook build output
 storybook-static/
 

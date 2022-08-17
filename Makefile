@@ -54,5 +54,8 @@ demo:
 test:	
 	npm run test:watch
 
+coverage:	
+	npx nx run web-components:test --codeCoverage
+
 
 .DEFAULT_GOAL := build
