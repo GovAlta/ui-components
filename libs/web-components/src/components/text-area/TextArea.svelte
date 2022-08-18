@@ -14,6 +14,7 @@
   export let error: string = "false";
   export let readonly: string = "false";
   export let disabled: string = "false";
+  export let arialabel: string = ""; 
 
   export let showcounter: string = "false";
   export let maxcharcount: number = 0;
@@ -53,6 +54,7 @@
     {placeholder}
     {value}
     {rows}
+    aria-label={arialabel || name}
     class="goa-textarea"
     class:error={isError}
     disabled={isDisabled}
