@@ -46,6 +46,9 @@ storybook:
 react-app:
 	npx nx run react-demo:serve 
 
+ng-app:
+	npx nx run angular-demo:serve 
+
 demo:
 	cd libs/web-components && npm run demo
 
