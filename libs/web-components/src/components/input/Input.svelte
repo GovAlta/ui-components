@@ -34,6 +34,7 @@
   export let error: string = "false";
   export let testid: string = "";
   export let width: string = "30ch";
+  export let arialabel: string = ""; 
 
   // character counter
   export let showcounter: string = "false";
@@ -110,6 +111,8 @@
       {type}
       {value}
       {placeholder}
+      role="textbox" 
+      aria-label={arialabel || name}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
     />

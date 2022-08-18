@@ -43,6 +43,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     type="text | number | password | email | search | tel | time | url | week"
     defaultValue="text"
   />
+  <Prop name="name" type="string" />
   <Prop name="value" type="string" />
   <Prop name="placeholder" type="string" />
   <Prop name="leadingicon" type="GoAIconType" />
@@ -55,10 +56,8 @@ import { Meta, Story } from '@storybook/addon-docs';
   <Prop name="width" type="string" defaultValue="30ch" />
   <Prop name="showcounter" type="boolean" />
   <Prop name="maxcharcount" type="number" />
-  <Prop
-    name="_change"
-    type="CustomEvent<{detail: {name: string, value: string}}>"
-  />
+  <Prop name="arialabel" type="string" description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name" />
+  <Prop name="_change" type="CustomEvent<{detail: {name: string, value: string}}>" />
   <Prop name="_trailingiconclick" type="CustomEvent" />
 </Props>
 
