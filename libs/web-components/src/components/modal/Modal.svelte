@@ -50,7 +50,7 @@
 <!-- Html -->
 <!-- ======================================================================= -->
 {#if isOpen}
-  <goa-focus-trap {open}>
+  <goa-focus-trap active={open}>
     <div
       use:noscroll={{ enable: isOpen }}
       in:fade={{ duration: _transitionTime }}
