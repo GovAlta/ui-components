@@ -92,6 +92,7 @@
     justify-content: center;
     margin: 0.25rem;
     padding: 0 0.75rem;
+    cursor: default;
   }
 
   .text {
