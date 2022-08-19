@@ -2,6 +2,8 @@
 
 <!-- ======================================================================= -->
 <script lang="ts">
+  import { onMount } from "svelte";
+
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";
@@ -19,12 +21,9 @@
   $: isScrollable = toBoolean(scrollable);
   $: isOpen = toBoolean(open);
 
-  let scrollOffset = 0;
-  $: {
-    if (isOpen) {
-      scrollOffset = window.pageYOffset;
-    }
-  }
+  onMount(() => {
+    console.log("in the modal v2");
+  })
 
   $: _transitionTime =
     transition === "none"
@@ -57,7 +56,7 @@
       out:fade={{ delay: _transitionTime, duration: _transitionTime}}
       data-testid="modal"
       class="modal"
-      style="--scroll-offset: {scrollOffset}px; {width && `--width: ${width};`};"
+      style="{width && `--width: ${width};`};"
     >
       <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
       <div
@@ -108,9 +107,8 @@
   }
   .modal {
     font-family: var(--font-family);
-    position: absolute;
-    top: var(--scroll-offset, 0);
-    left: 0;
+    position: fixed;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
