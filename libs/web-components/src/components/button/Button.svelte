@@ -102,7 +102,7 @@
   }
 
   button {
-    display: flex;
+    display: inline-flex;
     box-sizing: border-box;
     border-radius: 0.25rem;
     border: 2px solid var(--goa-color-interactive);
