@@ -19,7 +19,7 @@ which display minimal amounts of information, system feedback, or states.
 <Props>
   <Prop
     name="type"
-    type="success | warning | information | emergency | inactive | dark | midtone | light"
+    type="success | important | information | emergency | inactive | dark | midtone | light"
     required={true}
     description="Defines the context and colour of the badge"
   />
@@ -35,12 +35,12 @@ which display minimal amounts of information, system feedback, or states.
   />
 </Props>
 
-#### Basic 
+#### Basic
 
 <Story name="Basic">
   <GoABadge type="information" content="Information" />
   <GoABadge type="success" content="Success" />
-  <GoABadge type="warning" content="Warning" />
+  <GoABadge type="important" content="Important" />
   <GoABadge type="emergency" content="Emergency" />
   <GoABadge type="dark" content="Dark" />
   <GoABadge type="midtone" content="Midtone" />
@@ -54,7 +54,7 @@ which display minimal amounts of information, system feedback, or states.
       code={`
         <goa-badge type="information" content="Information" />
         <goa-badge type="success" content="Success" />
-        <goa-badge type="warning" content="Warning" />
+        <goa-badge type="important" content="Important" />
         <goa-badge type="emergency" content="Emergency" />
         <goa-badge type="dark" content="Dark" />
         <goa-badge type="midtone" content="Midtone" />
@@ -68,7 +68,7 @@ which display minimal amounts of information, system feedback, or states.
       code={`
         <goa-badge type="information" content="Information"></goa-badge>
         <goa-badge type="success" content="Success"></goa-badge>
-        <goa-badge type="warning" content="Warning"></goa-badge>
+        <goa-badge type="important" content="Important"></goa-badge>
         <goa-badge type="emergency" content="Emergency"></goa-badge>
         <goa-badge type="dark" content="Dark"></goa-badge>
         <goa-badge type="midtone" content="Midtone"></goa-badge>
@@ -82,7 +82,7 @@ which display minimal amounts of information, system feedback, or states.
       code={`
         <GoABadge type="information" content="Information" />
         <GoABadge type="success" content="Success" />
-        <GoABadge type="warning" content="Warning" />
+        <GoABadge type="important" content="Important" />
         <GoABadge type="emergency" content="Emergency" />
         <GoABadge type="dark" content="Dark" />
         <GoABadge type="midtone" content="Midtone" />
@@ -98,7 +98,7 @@ which display minimal amounts of information, system feedback, or states.
 <Story name="Icon">
   <GoABadge type="information" icon />
   <GoABadge type="success" icon />
-  <GoABadge type="warning" icon />
+  <GoABadge type="important" icon />
   <GoABadge type="emergency" icon />
   <GoABadge type="dark" icon />
   <GoABadge type="midtone" icon />
@@ -112,7 +112,7 @@ which display minimal amounts of information, system feedback, or states.
       code={`
         <goa-badge type="information" icon />
         <goa-badge type="success" icon />
-        <goa-badge type="warning" icon />
+        <goa-badge type="important" icon />
         <goa-badge type="emergency" icon />
         <goa-badge type="dark" icon />
         <goa-badge type="midtone" icon />
@@ -126,7 +126,7 @@ which display minimal amounts of information, system feedback, or states.
       code={`
         <goa-badge type="information" icon></goa-badge>
         <goa-badge type="success" icon></goa-badge>
-        <goa-badge type="warning" icon></goa-badge>
+        <goa-badge type="important" icon></goa-badge>
         <goa-badge type="emergency" icon></goa-badge>
         <goa-badge type="dark" icon></goa-badge>
         <goa-badge type="midtone" icon></goa-badge>
@@ -140,7 +140,7 @@ which display minimal amounts of information, system feedback, or states.
       code={`
         <GoABadge type="information" icon />
         <GoABadge type="success" icon />
-        <GoABadge type="warning" icon />
+        <GoABadge type="important" icon />
         <GoABadge type="emergency" icon />
         <GoABadge type="dark" icon />
         <GoABadge type="midtone" icon />
@@ -153,7 +153,7 @@ which display minimal amounts of information, system feedback, or states.
 <Story name="Text and Icon">
   <GoABadge type="information" content="Information" icon />
   <GoABadge type="success" content="Success" icon />
-  <GoABadge type="warning" content="Warning" icon />
+  <GoABadge type="important" content="Important" icon />
   <GoABadge type="emergency" content="Emergency" icon />
   <GoABadge type="dark" content="Dark" icon />
   <GoABadge type="midtone" content="Midtone" icon />
@@ -167,7 +167,7 @@ which display minimal amounts of information, system feedback, or states.
       code={`
         <goa-badge type="information" content="Information" icon />
         <goa-badge type="success" content="Success" icon />
-        <goa-badge type="warning" content="Warning" icon />
+        <goa-badge type="important" content="Important" icon />
         <goa-badge type="emergency" content="Emergency" icon />
         <goa-badge type="dark" content="Dark" icon />
         <goa-badge type="midtone" content="Midtone" icon />
@@ -181,7 +181,7 @@ which display minimal amounts of information, system feedback, or states.
       code={`
         <goa-badge type="information" content="Information" icon="true"></goa-badge>
         <goa-badge type="success" content="Success" icon="true"></goa-badge>
-        <goa-badge type="warning" content="Warning" icon="true"></goa-badge>
+        <goa-badge type="important" content="Important" icon="true"></goa-badge>
         <goa-badge type="emergency" content="Emergency" icon="true"></goa-badge>
         <goa-badge type="dark" content="Dark" icon="true"></goa-badge>
         <goa-badge type="midtone" content="Midtone" icon="true"></goa-badge>
@@ -195,7 +195,7 @@ which display minimal amounts of information, system feedback, or states.
       code={`
         <GoABadge type="information" content="Information" icon />
         <GoABadge type="success" content="Success" icon />
-        <GoABadge type="warning" content="Warning" icon />
+        <GoABadge type="important" content="Important" icon />
         <GoABadge type="emergency" content="Emergency" icon />
         <GoABadge type="dark" content="Dark" icon />
         <GoABadge type="midtone" content="Midtone" icon />
