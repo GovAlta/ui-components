@@ -21,7 +21,10 @@ import { Meta, Story } from '@storybook/addon-docs';
 #### Properties
 
 <Props>
-  <Prop name="level" type="string" required="true" />
+  <Prop
+    name="type"
+    type="alpha | beta | live |"
+    required="true" />
   <Prop name="version" type="string" />
   <Prop name="feedbackurl" type="string" />
 </Props>
@@ -29,7 +32,7 @@ import { Meta, Story } from '@storybook/addon-docs';
 #### Alpha
 
 <Story name="Alpha">
-  <GoAMicrositeHeader level="alpha" />
+  <GoAMicrositeHeader type="alpha" />
 </Story>
 
 <Tabs>
@@ -37,7 +40,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="alpha" version="v1.2.3" />
+      <goa-microsite-header type="alpha" version="v1.2.3" />
     `}
     />
   </Tab>
@@ -45,7 +48,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="alpha" version="v1.2.3"></goa-microsite-header>
+      <goa-microsite-header type="alpha" version="v1.2.3"></goa-microsite-header>
     `}
     />
   </Tab>
@@ -53,7 +56,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoAMicrositeHeader level="alpha" version="v1.2.3" />
+      <GoAMicrositeHeader type="alpha" version="v1.2.3" />
     `}
     />
   </Tab>
@@ -62,7 +65,7 @@ import { Meta, Story } from '@storybook/addon-docs';
 #### Beta
 
 <Story name="Beta">
-  <GoAMicrositeHeader level="beta" />
+  <GoAMicrositeHeader type="beta" />
 </Story>
 
 <Tabs>
@@ -70,7 +73,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="beta"/>
+      <goa-microsite-header type="beta"/>
     `}
     />
   </Tab>
@@ -78,7 +81,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="beta"></goa-microsite-header>
+      <goa-microsite-header type="beta"></goa-microsite-header>
     `}
     />
   </Tab>
@@ -86,7 +89,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoAMicrositeHeader level="beta"/>
+      <GoAMicrositeHeader type="beta"/>
     `}
     />
   </Tab>
@@ -95,7 +98,7 @@ import { Meta, Story } from '@storybook/addon-docs';
 #### Live
 
 <Story name="Live">
-  <GoAMicrositeHeader level="live" />
+  <GoAMicrositeHeader type="live" />
 </Story>
 
 <Tabs>
@@ -103,7 +106,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="live"/>
+      <goa-microsite-header type="live"/>
     `}
     />
   </Tab>
@@ -111,7 +114,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="live"></goa-microsite-header>
+      <goa-microsite-header type="live"></goa-microsite-header>
     `}
     />
   </Tab>
@@ -119,7 +122,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoAMicrositeHeader level="live"/>
+      <GoAMicrositeHeader type="live"/>
     `}
     />
   </Tab>
@@ -128,7 +131,7 @@ import { Meta, Story } from '@storybook/addon-docs';
 #### Version
 
 <Story name="Version">
-  <GoAMicrositeHeader level="alpha" version="v1.2.3" />
+  <GoAMicrositeHeader type="alpha" version="v1.2.3" />
 </Story>
 
 <Tabs>
@@ -136,7 +139,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="alpha" version="v1.2.3" />
+      <goa-microsite-header type="alpha" version="v1.2.3" />
     `}
     />
   </Tab>
@@ -144,7 +147,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="alpha" version="v1.2.3"></goa-microsite-header>
+      <goa-microsite-header type="alpha" version="v1.2.3"></goa-microsite-header>
     `}
     />
   </Tab>
@@ -152,7 +155,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoAMicrositeHeader level="alpha" version="v1.2.3" />
+      <GoAMicrositeHeader type="alpha" version="v1.2.3" />
     `}
     />
   </Tab>
@@ -162,7 +165,7 @@ import { Meta, Story } from '@storybook/addon-docs';
 
 <Story name="Feedback Url">
   <GoAMicrositeHeader
-    level="alpha"
+    type="alpha"
     version="v1.2.3"
     feedbackUrl="https://example.com/feedback"
   />
@@ -173,7 +176,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="alpha" version="v1.2.3" feedbackurl="https://example.com/feedback" />
+      <goa-microsite-header type="alpha" version="v1.2.3" feedbackurl="https://example.com/feedback" />
     `}
     />
   </Tab>
@@ -181,7 +184,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header level="alpha" version="v1.2.3" feedbackurl="https://example.com/feedback"></goa-microsite-header>
+      <goa-microsite-header type="alpha" version="v1.2.3" feedbackurl="https://example.com/feedback"></goa-microsite-header>
     `}
     />
   </Tab>
@@ -189,7 +192,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoAMicrositeHeader level="alpha" version="v1.2.3" feedbackUrl="https://example.com/feedback" />
+      <GoAMicrositeHeader type="alpha" version="v1.2.3" feedbackUrl="https://example.com/feedback" />
     `}
     />
   </Tab>
