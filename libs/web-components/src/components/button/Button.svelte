@@ -5,10 +5,10 @@
   import { toBoolean } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
-  const BUTTON_TYPES = ["primary", "secondary", "tertiary", "start"]; 
+  const BUTTON_TYPES = ["primary", "secondary", "tertiary", "start"];
   type ButtonType = (typeof BUTTON_TYPES)[number];
 
-  const SIZES = ["", "compact"]; 
+  const SIZES = ["", "compact"];
   type Size = (typeof SIZES)[number];
 
   const VARIANTS = ["", "danger"];
@@ -29,9 +29,9 @@
   }
 
   // optional
-  export let type: ButtonType = "primary"; 
-  export let size: Size = ""; 
-  export let variant: Variant = ""; 
+  export let type: ButtonType = "primary";
+  export let size: Size = "";
+  export let variant: Variant = "";
   export let title: string = "";
   export let disabled: string = "false";
   export let leadingicon: GoAIconType = null;
@@ -102,7 +102,7 @@
   }
 
   button {
-    display: flex;
+    display: inline-flex;
     box-sizing: border-box;
     border-radius: 0.25rem;
     border: 2px solid var(--goa-color-interactive);
@@ -193,7 +193,7 @@
 
   button.tertiary {
     border: 1px solid transparent;
-    background: var(--color-white);
+    background: transparent;
     color: var(--goa-color-interactive);
     text-decoration: underline;
   }

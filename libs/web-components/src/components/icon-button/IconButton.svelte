@@ -52,7 +52,7 @@
 
 <style>
   :host {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     box-sizing: border-box;
     font-family: var(--font-family);

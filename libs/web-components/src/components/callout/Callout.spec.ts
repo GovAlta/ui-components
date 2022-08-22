@@ -75,4 +75,11 @@ describe('GoACalloutComponent', () => {
     const callout = baseElement.container.querySelector('goa-callout');
     expect(callout).toContainHTML("This is the content")
   });
+
+  it('should render - without the heading', async () => {
+    const baseElement = render(GoACallout, { type: "emergency", content: 'This is the content', testid: "testid" });
+    const el = baseElement.queryByTestId("testid");
+    const heading = el.querySelector('h3');
+    expect(heading).toBeNull();
+  });
 });

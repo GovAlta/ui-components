@@ -103,7 +103,7 @@
     border-radius: 3px;
     background: var(--color-white);
     color: var(--color-black, #ccc);
-    padding: var(--input-padding, 0.5rem);
+    padding: var(--textarea-padding-vertical, 0.5rem) var(--textarea-padding-horizontal, 0.5rem);
     font-size: var(--input-font-size);
     font-family: var(--font-family);
 

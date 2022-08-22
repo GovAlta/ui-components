@@ -12,20 +12,20 @@ declare global {
 export type ServiceLevel = 'alpha' | 'beta' | 'live'
 
 interface WebComponentProps {
-  level: ServiceLevel;
+  type: ServiceLevel;
   version?: string;
   feedbackurl?: string;
 }
 
 export interface HeaderProps {
-  level: ServiceLevel;
+  type: ServiceLevel;
   version?: string;
   feedbackUrl?: string;
 }
 
-export const GoAMicrositeHeader: FC<HeaderProps> = ({ level, version, feedbackUrl }) => {
+export const GoAMicrositeHeader: FC<HeaderProps> = ({ type, version, feedbackUrl }) => {
   return (
-    <goa-microsite-header level={level} version={version} feedbackurl={feedbackUrl} />
+    <goa-microsite-header type={type} version={version} feedbackurl={feedbackUrl} />
   )
 };
 

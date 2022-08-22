@@ -6,7 +6,7 @@ export default function MicrositeHeader() {
   return (
     <>
       <h3>Alpha</h3>
-      <GoAMicrositeHeader level="alpha" version="v1.2.3"></GoAMicrositeHeader>
+      <GoAMicrositeHeader level="alpha"></GoAMicrositeHeader>
 
       <br />
       <h3>Beta</h3>
