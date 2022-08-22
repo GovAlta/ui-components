@@ -59,9 +59,14 @@
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    padding: 1rem 0.5rem;
+    padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--color-gray-100);
   }
+    @media (max-width: 640px) {
+      .app-header {
+        padding: 1rem 1rem;
+      }
+    }
 
   .app-link {
     display: flex;

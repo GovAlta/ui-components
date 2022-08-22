@@ -41,6 +41,11 @@
   // Hooks
 
   onMount(async () => {
+    if (!name) {
+      console.error("goa-dropdown: missing the required `name` attribute. It must match the children's name attribute.")
+      return;
+    }
+
     el.addEventListener("focus", onFocus, true);
     el.addEventListener("blur", onBlur, true);
 

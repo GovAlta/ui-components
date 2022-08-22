@@ -2,7 +2,10 @@ import '@testing-library/jest-dom';
 import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
 import GoADropdown from './DropdownWrapper.test.svelte';
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup()
+  jest.clearAllMocks();
+});
 
 describe('GoADropdown', () => {
 
@@ -28,6 +31,17 @@ describe('GoADropdown', () => {
         expect(option).toHaveTextContent(item);
       }
     });
+  });
+
+  it("raise an error if name is not supplied", () => {
+    jest.spyOn(console, "error");
+    const items = ["red", "blue", "orange"];
+    render(GoADropdown, {
+      testid: 'test-id',
+      items,
+    });
+
+    expect(console.error["mock"].calls.length).toBe(4);  // 4 = 1 parent + 3 chilren
   });
 
   describe("single selection", () => {

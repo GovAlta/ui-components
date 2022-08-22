@@ -43,6 +43,9 @@
   --input-border-radius: 0.25rem;
   --input-font-size: var(--fs-base);
 
+  --textarea-padding-vertical: 0.625rem;
+  --textarea-padding-horizontal: 0.75rem;
+
   --button-height: 2.625rem;  /* 42px */
   --button-height-compact: 2rem;  /* 32px */
   --button-height-tall: 3.25rem;  /* 52px */
