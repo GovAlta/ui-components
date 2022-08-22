@@ -20,7 +20,7 @@ import { useState } from 'react';
 
 ---
 
-#### Properties
+#### Dropdown properties
 
 <Props>
   <Prop
@@ -60,10 +60,35 @@ import { useState } from 'react';
     type="boolean"
     description="Sets the dropdown in an error state"
   />
+  <Prop 
+    name="arialabel" 
+    type="string" 
+    description="Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name" 
+  />
   <Prop
     name="_change"
     type="CustomEvent<{detail: { name: string, value: string }}>"
     description="Sets the dropdown in an error state"
+  />
+</Props>
+
+
+#### Dropdown item properties
+<Props>
+  <Prop
+    name="name"
+    type="string"
+    description="Must match the name of the parent GoADropdown component"
+  />
+  <Prop
+    name="value"
+    type="string"
+    description="The value of the item. This value will be contained within the onChange event"
+  />
+  <Prop
+    name="label"
+    type="string"
+    description="The displayed value within the selection box. The `value` property is the fallback value."
   />
 </Props>
 

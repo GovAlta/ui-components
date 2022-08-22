@@ -12,6 +12,7 @@
   // Props
 
   export let name: string;
+  export let arialabel: string = "";
   export let value: string = "";
   export let leadingicon: GoAIconType = null;
   export let maxheight: string = MAX_HEIGHT;
@@ -225,7 +226,7 @@
       {placeholder}
       width="100%"
       id={`${name}-dropdown-input`}
-      name="search"
+      aria-label={arialabel || name}
       readonly
       trailingicon="chevron-down"
       type="text"
@@ -245,6 +246,7 @@
     <slot />
     {#each options as option, index (option.value)}
       <li
+        aria-label={option.label || option.value}
         data-testid={`${option.value}-dropdown-item`}
         data-index={index}
         class="goa-dropdown-option"

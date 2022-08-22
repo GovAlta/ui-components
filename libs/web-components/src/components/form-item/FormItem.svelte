@@ -8,7 +8,7 @@
   export let label: string = "";
   export let helptext: string = "";
   export let error: string = "";
-  export let optional: string;
+  export let optional: string = "";
 
   $: isOptional = toBoolean(optional);
 </script>
@@ -16,12 +16,12 @@
 <!-- HTML -->
 <div class="goa-form-item">
   {#if label}
-    <label for="">
+    <div class="label">
       {label}
       {#if isOptional}
         <em>(optional)</em>
       {/if}
-    </label>
+    </div>
   {/if}
   <div class="form-item-input">
     <slot />
@@ -45,7 +45,7 @@
     box-sizing: border-box;
   }
 
-  label {
+  .label {
     display: block;
     font-weight: var(--fw-bold);
     color: var(--goa-color-text);
@@ -56,7 +56,7 @@
     text-overflow: ellipsis;
   }
 
-  label em {
+  .label em {
     color: var(--color-gray-600);
     font-weight: var(--fw-regular);
     font-size: var(--fs-sm);
