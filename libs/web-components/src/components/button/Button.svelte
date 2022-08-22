@@ -11,7 +11,7 @@
   const SIZES = ["", "compact"];
   type Size = (typeof SIZES)[number];
 
-  const VARIANTS = ["", "danger"];
+  const VARIANTS = ["", "destructive"];
   type Variant = (typeof VARIANTS)[number];
 
   // type check functions
@@ -213,50 +213,50 @@
     outline: none;
   }
 
-  .primary.danger {
+  .primary.destructive {
     color: var(--color-white);
     background: var(--goa-color-status-emergency);
     border-color: var(--goa-color-status-emergency);
   }
-  .primary.danger:hover {
+  .primary.destructive:hover {
     background: var(--goa-color-status-emergency-dark);
     border-color: var(--goa-color-status-emergency-dark);
   }
-  .primary.danger:focus,
-  .primary.danger:active {
+  .primary.destructive:focus,
+  .primary.destructive:active {
     background: var(--goa-color-status-emergency-dark);
     border-color: var(--goa-color-status-emergency-dark);
   }
 
-  .secondary.danger {
+  .secondary.destructive {
     color: var(--goa-color-status-emergency);
     border-color: var(--goa-color-status-emergency);
     background: var(--color-white);
   }
-  .secondary.danger:hover {
+  .secondary.destructive:hover {
     border-color: var(--goa-color-status-emergency-dark);
     color: var(--goa-color-status-emergency-dark);
     background: var(--color-white);
   }
-  .secondary.danger:focus,
-  .secondary.danger:active {
+  .secondary.destructive:focus,
+  .secondary.destructive:active {
     color: var(--goa-color-status-emergency-dark);
     border-color: var(--goa-color-status-emergency-dark);
     background: var(--color-white);
   }
 
-  .tertiary.danger {
+  .tertiary.destructive {
     color: var(--goa-color-status-emergency);
     border-color: var(--color-gray-200);
     background: var(--color-white);
   }
-  .tertiary.danger:hover {
+  .tertiary.destructive:hover {
     border-color: var(--goa-color-status-emergency-dark);
     color: var(--goa-color-status-emergency-dark);
     background: var(--color-white);
   }
-  .tertiary.danger:focus,
-  .tertiary.danger:active {
+  .tertiary.destructive:focus,
+  .tertiary.destructive:active {
     color: var(--goa-color-status-emergency-dark);
     border-color: var(--goa-color-status-emergency-dark);
     background: var(--color-white);
