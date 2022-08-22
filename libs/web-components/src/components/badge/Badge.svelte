@@ -12,7 +12,6 @@ import { onMount } from "svelte";
     | "warning"
     | "information"
     | "emergency"
-    | "inactive"
     | "dark"
     | "midtone"
     | "light";
@@ -35,7 +34,6 @@ import { onMount } from "svelte";
     warning: "alert-circle",
     information: "information-circle",
     emergency: "warning",
-    inactive: "information-circle",
     dark: "information-circle",
     midtone: "information-circle",
     light: "information-circle",
@@ -129,9 +127,9 @@ import { onMount } from "svelte";
     background-color: var(--color-white);
     color: var(--goa-color-text);
   }
-
+/* 
   .goa-badge.badge-inactive {
     background-color: var(--color-white);
     color: var(--goa-color-text);
-  }
+  } */
 </style>
