@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { GoAIconType } from '../..';
+import { format } from "date-fns";
+
 type GoAInputType =
   "text"
   | "number"
@@ -160,16 +162,29 @@ export const GoAInputPassword: FC<Props> = (props) => {
   return <GoAInput {...props} type="password" />;
 }
 
-export const GoAInputDate: FC<Props & { min?: string, max?: string }> = (props) => {
-  return <GoAInput {...props} type="date" />;
+export const GoAInputDate: FC<Omit<Props, "value"> & { value: Date | string}> = ({value, min, max, ...props}) => {
+  const _value: Date = typeof value === "string" ? new Date(value) : value;
+  const _min = min ? format(new Date(min), "yyyy-MM-dd") : "";
+  const _max = max ? format(new Date(max), "yyyy-MM-dd") : "";
+  return <GoAInput {...props} min={_min} max={_max} value={format(_value, "yyyy-MM-dd")} type="date" />;
 }
 
-export const GoAInputTime: FC<Props> = (props) => {
-  return <GoAInput {...props} type="time" />;
+export const GoAInputTime: FC<Omit<Props, "value"> & { value: Date | string}> = ({value, ...props}) => {
+  try {
+    const d: Date = typeof value === "string" ? new Date(value) : value;
+    return <GoAInput {...props} value={format(d, "hh:mm")} type="time" />;
+  } catch(e) {
+    return <GoAInput {...props} value={value as string} type="time" />;
+  }
 }
 
-export const GoAInputDateTime: FC<Props & { min?: string, max?: string }> = (props) => {
-  return <GoAInput {...props} type="datetime-local" />;
+export const GoAInputDateTime: FC<
+  Omit<Props, "value">
+  & { value: Date}
+  > = ({value, ...props}) => {
+
+  const d: Date = typeof value === "string" ? new Date(value) : value;
+  return <GoAInput {...props} value={format(d, "yyyy-MM-dd'T'hh:mm")} type="datetime-local" />;
 }
 
 export const GoAInputEmail: FC<Props> = (props) => {
