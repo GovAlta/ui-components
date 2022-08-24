@@ -8,12 +8,11 @@ import { GoAIconType } from '../icons';
 export type GoABadgeType
   = 'information'
   | 'success'
-  | 'warning'
+  | 'important'
   | 'emergency'
   | 'dark'
   | 'midtone'
   | 'light'
-  | 'inactive'
   ;
 
 interface GoABadgeProps {
@@ -60,7 +59,7 @@ export const GoASuccessBadge: FC<GoABadgeProps> = ({ content, testId }: GoABadge
 
 export const GoAWarningBadge: FC<GoABadgeProps> = ({ content, testId }: GoABadgeProps) => {
   return (
-    <GoABadge type="warning" icon="warning" content={content} testId={testId} />
+    <GoABadge type="important" icon="warning" content={content} testId={testId} />
   )
 }
 
