@@ -9,7 +9,7 @@ import { onMount } from "svelte";
 
   export let type:
     | "success"
-    | "warning"
+    | "important"
     | "information"
     | "emergency"
     | "dark"
@@ -31,7 +31,7 @@ import { onMount } from "svelte";
 
   $: iconType = {
     success: "checkmark-circle",
-    warning: "alert-circle",
+    important: "alert-circle",
     information: "information-circle",
     emergency: "warning",
     dark: "information-circle",
@@ -103,7 +103,7 @@ import { onMount } from "svelte";
     color: var(--goa-color-text-light);
   }
 
-  .goa-badge.badge-warning {
+  .goa-badge.badge-important {
     background-color: var(--goa-color-status-warning);
     color: var(--goa-color-text);
   }
@@ -127,7 +127,7 @@ import { onMount } from "svelte";
     background-color: var(--color-white);
     color: var(--goa-color-text);
   }
-/* 
+/*
   .goa-badge.badge-inactive {
     background-color: var(--color-white);
     color: var(--goa-color-text);
