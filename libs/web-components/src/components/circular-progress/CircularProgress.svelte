@@ -6,14 +6,12 @@
   import { fade } from "svelte/transition";
   import noScroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";
-  import type { SpinnerType } from "../spinner/Spinner.svelte";
 
   // Optional
-  export let type: SpinnerType = "infinite";
   export let variant: "fullscreen" | "inline" = "inline";
   export let size: "small" | "large" = "large";
   export let message: string = "";
-  export let progress: number = 0;
+  export let progress: number = -1;
   export let visible: string = "false";
 
   $: isVisible = toBoolean(visible);
@@ -38,14 +36,14 @@
       use:noScroll={{ enable: true }}
       class:fullscreen
     >
-      <goa-spinner {type} size={spinnerSize} progress={progress || 0} />
+      <goa-spinner size={spinnerSize} progress={progress} />
       {#if message}
         <div class="message">{message}</div>
       {/if}
     </div>
   {:else if inline}
     <div class:inline class={"spinner-"+spinnerSize}>
-      <goa-spinner {type} size={spinnerSize} progress={progress || 0} />
+      <goa-spinner size={spinnerSize} progress={progress} />
       {#if message}
         <div class="message">{message}</div>
       {/if}

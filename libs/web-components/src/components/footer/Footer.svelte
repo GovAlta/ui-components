@@ -25,7 +25,6 @@
   .app-footer {
     background-color: var(--color-gray-100);
     padding: 2rem;
-    margin-top: 2rem;
     border-top: 2px solid var(--color-gray-200);
     border-bottom: 1rem solid var(--goa-color-brand);
   } 
@@ -100,7 +99,7 @@
 
 </style>
 
-<footer class="app-footer" bind:this={rootEl}>
+<div class="app-footer" bind:this={rootEl}>
   <div class="nav-links">
     <slot name="nav" />
   </div>
@@ -130,5 +129,5 @@
       <a href="https://alberta.ca" class="goa-copyright">© {year} Government of Alberta</a>
     </div>
   </div>
-</footer>
+</div>
 

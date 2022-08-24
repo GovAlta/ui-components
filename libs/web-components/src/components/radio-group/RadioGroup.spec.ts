@@ -2,7 +2,10 @@ import '@testing-library/jest-dom';
 import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
 import GoARadioGroup from './RadioGroupWrapper.test.svelte';
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup()
+  jest.clearAllMocks();
+});
 
 describe('GoARadioGroup Component', () => {
 
@@ -23,6 +26,16 @@ describe('GoARadioGroup Component', () => {
         expect(input).toHaveAttribute("name", "favcolor");
       }
     })
+  });
+
+  it("raise an error if name is not supplied", () => {
+    jest.spyOn(console, "error");
+    const items = ["red", "blue", "orange"];
+    render(GoARadioGroup, {
+      items,
+    });
+
+    expect(console.error["mock"].calls.length).toBe(4);  // 4 = 1 parent + 3 chilren
   });
 
   it('should handle the events', async () => {

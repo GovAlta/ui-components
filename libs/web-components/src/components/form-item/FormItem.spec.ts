@@ -14,7 +14,7 @@ describe("GoA FormItem", () => {
       error: "the error",
     });
 
-    const label = document.querySelector("label");
+    const label = document.querySelector(".label");
     expect(label.innerHTML).toContain("the label");
 
     const optional = document.querySelector("em");
@@ -30,7 +30,7 @@ describe("GoA FormItem", () => {
   it("should not render options if not provided", async () => {
     render(GoAFormItem, {});
 
-    const label = document.querySelector("label");
+    const label = document.querySelector(".label");
     expect(label).toBeNull();
 
     const helpText = document.querySelector(".help-msg");

@@ -1,12 +1,30 @@
 export default function(_node: HTMLElement, opts: { enable: boolean }) {
 
+  let toggledScrolling = false;
+
   function hideScrollbars() {
+    if (!isScrollable()) {
+      return;
+    }
+
     const scrollbarWidth = calculateScrollbarWidth();
-    document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = scrollbarWidth + 'px';
+    if (scrollbarWidth > 0) {
+      toggledScrolling = true;
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = scrollbarWidth + 'px';
+    } 
+  }
+
+  function isScrollable() {
+    return document.body.style.overflow !== "hidden"
   }
 
   function resetScrollbars() {
+    if (!toggledScrolling) {
+      return;
+    }
+
+    toggledScrolling = false;
     // need to perform on the next render cycle to allow the css transitions to take place
     setTimeout(() => {
       document.body.style.overflow = '';
@@ -44,9 +62,7 @@ export default function(_node: HTMLElement, opts: { enable: boolean }) {
 
   return {
     update() {
-      if (opts.enable) {
-        hideScrollbars();
-      } else {
+      if (!opts.enable) {
         resetScrollbars();
       }
     },

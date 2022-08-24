@@ -16,6 +16,7 @@
     | "date"
     | "datetime-local"
     | "month"
+    | "range"
     | "search"
     | "tel"
     | "time"
@@ -34,6 +35,11 @@
   export let error: string = "false";
   export let testid: string = "";
   export let width: string = "30ch";
+  export let arialabel: string = ""; 
+
+  export let min: string = "";
+  export let max: string = "";
+  export let step: number;
 
   // character counter
   export let showcounter: string = "false";
@@ -110,6 +116,11 @@
       {type}
       {value}
       {placeholder}
+      {min}
+      {max}
+      {step}
+      role="textbox" 
+      aria-label={arialabel || name}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
     />
