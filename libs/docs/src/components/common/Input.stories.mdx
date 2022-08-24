@@ -421,6 +421,139 @@ export const CharCountWithLimitTemplate = () => {
   </Tab>
 </Tabs>
 
+
+#### Min/Max 
+
+export const MinMaxTemplate = () => {
+  const [value, setValue] = useState(0);
+  return (
+    <GoAInputNumber
+      name="favouriteEvenNumber"
+      value={value}
+      min={0}
+      max={99}
+      step={2}
+      onChange={(name, value) => setValue(value)}
+    />
+  );
+};
+
+<Story name="Min / Max">
+  {MinMaxTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`<goa-input name="favouriteEvenNumber" type="number" min="0" max="99" step="2"></goa-input>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+      const [value, setValue] = useState('');
+      return (
+        <GoAInputNumber
+          name="favouriteEvenNumber"
+          value={value}
+          min={0}
+          max={99}
+          step={2}
+          onChange={(name, value) => setValue(value)}
+        />
+      )
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Date and time
+
+export const DateTemplate = () => {
+  const [date, setDate] = useState(new Date());
+  const [minDate, setMinDate] = useState(new Date());
+  const [maxDate, setMaxDate] = useState(getDateWithMonthOffset(1));
+  function getDateWithMonthOffset(offset) {
+    let d = new Date();
+    d.setMonth(d.getMonth() + offset);
+    return d;
+  }
+  return (
+    <GoAInputDate
+      name="withinTheNextMonth"
+      value={date}
+      min={minDate}
+      max={maxDate}
+      onChange={(name, value) => setValue(value)}
+    />
+  )
+};
+
+<Story name="Date and time">
+  {DateTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        import { format } from "date-fns";
+        export class MyComponent {
+          date = format(new Date(), "yyyy-MM-dd");
+          minDate = format(new Date(), "yyyy-MM-dd");
+          maxDate = this.getDateWithMonthOffset(1);
+          getDateWithMonthOffset(offset) {
+            const d = new Date();
+            d.setMonth(d.getMonth() + offset);
+            return d;
+          }
+          onChange(e: any) {
+            this.date = e.detail.value;
+          }
+        }   
+      `}
+      lang="ts"
+    />
+    <CodeSnippet
+      code={`<goa-input 
+        type="date" 
+        name="withinTheNextMonth" 
+        [min]="minDate" 
+        [max]="maxDate" 
+        [value]="date" 
+        (_change)="onChange($event)">
+      </goa-input>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        const [date, setDate] = useState(new Date());
+        const [minDate, setMinDate] = useState(new Date());
+        const [maxDate, setMaxDate] = useState(getDateWithMonthOffset(1));
+        function getDateWithMonthOffset(offset) {
+          const d = new Date();
+          d.setMonth(d.getMonth() + offset);
+          return d;
+        }
+        return (
+          <GoAInputDate
+            name="withinTheNextMonth"
+            value={date}
+            min={minDate}
+            max={maxDate}
+            onChange={(name, value) => setValue(value)}
+          />
+        )
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
 #### Width
 
 export const WidthTemplate = ({ width }) => {
