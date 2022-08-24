@@ -138,7 +138,6 @@
     <!-- Trailing Icon Button -->
     {#if trailingicon && handlesTrailingIconClick}
       <goa-icon-button
-        class="goa-input-trailing-icon"
         on:click={doClick}
         disabled={isDisabled}
         variant="nocolor"
@@ -225,19 +224,11 @@
   }
 
   .goa-input-leading-icon {
-    display: flex;
-    align-items: center;
     margin-left: 0.5rem;
   }
 
   .goa-input-trailing-icon {
-    display: flex;
-    align-items: center;
     margin-right: 0.5rem;
-  }
-
-  .goa-input-trailing-icon > .goa-icon-button {
-    margin-right: -0.5rem;
   }
 
   input {
