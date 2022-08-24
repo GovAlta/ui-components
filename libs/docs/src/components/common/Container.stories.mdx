@@ -30,8 +30,8 @@ import { GoAContainer, GoAButton, GoABadge } from '@abgov/react-components';
 <Props>
   <Prop
     name="variant"
-    type="primary | info | error | success | warning | default"
-    defaultValue="default"
+    type="interactive | info | error | success | important | non-interactive"
+    defaultValue="non-interactive"
   />
   <Prop name="colored" type="boolean" defaultValue="false" />
   <Prop name="headingsize" type="large | small | none" defaultValue="large" />
@@ -441,7 +441,7 @@ export const RelaxedPaddingTemplate = () => {
           <goa-button type="primary" size="compact">Assign to me</goa-button>
         </div>
         <h2>Custom H2</h2>
-        <goa-container variant="primary" headingsize="small">
+        <goa-container variant="interactive" headingsize="small">
           <div>This is a sub container </div>
         </goa-container>
       </goa-container>
@@ -458,7 +458,7 @@ export const RelaxedPaddingTemplate = () => {
           <goa-button type="primary" size="compact">Assign to me</goa-button>
         </div>
         <h2>Custom H2</h2>
-        <goa-container variant="primary" headingsize="small">
+        <goa-container variant="interactive" headingsize="small">
           <div>This is a sub container </div>
         </goa-container>
       </goa-container>
@@ -475,7 +475,7 @@ export const RelaxedPaddingTemplate = () => {
         children={
           <>
             <h2>Custom H2</h2>
-            <GoAContainer variant="primary" headingSize="small">
+            <GoAContainer variant="interactive" headingSize="small">
               <div>This is a sub container </div>
             </GoAContainer>
           </>
@@ -499,7 +499,7 @@ export const InteractiveTemplate = (args) => {
     <GoAContainer
       title="The container title"
       headingSize="large"
-      variant="primary"
+      variant="interactive"
     >
       <h2>Heading</h2>Content
     </GoAContainer>
@@ -516,7 +516,7 @@ export const InteractiveTemplate = (args) => {
       <goa-container>
         title="The container title"
         headingsize="large"
-        variant="primary"
+        variant="interactive"
       >
         <div slot="actions">
           <goa-button type="secondary" size="compact">Assign to me</goa-button>
@@ -534,7 +534,7 @@ export const InteractiveTemplate = (args) => {
       <goa-container>
         title="The container title"
         headingsize="large"
-        variant="primary"
+        variant="interactive"
       >
         <div slot="actions">
           <goa-button type="secondary" size="compact">Assign to me</goa-button>
@@ -552,7 +552,7 @@ export const InteractiveTemplate = (args) => {
       <GoAContainer
         title="The container title"
         headingSize="large"
-        variant="primary"
+        variant="interactive"
         actions={<GoAButton type="secondary" size="compact">Assign to me</GoAButton>}>
         <h2>Heading</h2>Content
       </GoAContainer>

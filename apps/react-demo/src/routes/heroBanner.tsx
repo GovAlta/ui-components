@@ -26,7 +26,7 @@ export default function HeroBanner() {
         <div slot="actions">
           <GoAButtonGroup alignment='start'>
             <GoAButton onClick={() => void 0}>Action</GoAButton>
-            <GoAButton onClick={() => void 0} type="tertiary">Other Action</GoAButton>
+            <GoAButton onClick={() => void 0} type="secondary">Other Action</GoAButton>
           </GoAButtonGroup>
         </div>
       </GoAHeroBanner>

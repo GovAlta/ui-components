@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, fireEvent } from '@testing-library/svelte'; 
+import { render, fireEvent } from '@testing-library/svelte';
 import GoAButton from './Button.svelte'
 
 describe('GoAButtonComponent', () => {
@@ -52,7 +52,7 @@ describe('GoAButtonComponent', () => {
   });
 
   describe("variant", () => {
-    ["", "danger"].forEach(variant => {
+    ["", "destructive"].forEach(variant => {
       it(`should render ${variant} variant`, async () => {
         const baseElement = render(GoAButton, { variant });
         const button = await baseElement.findByRole("button");

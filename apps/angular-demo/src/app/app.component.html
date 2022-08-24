@@ -1,83 +1,32 @@
-<goa-microsite-header level="alpha" version="UAT"></goa-microsite-header>
+<goa-layout-full-nav>
+  <section slot="header">
+    <goa-microsite-header level="alpha" version="UAT"></goa-microsite-header>
+    <goa-app-header heading="Design Systems"></goa-app-header>
+  </section>
 
-<goa-app-header url="http://google.com" title="Design Systems">
-</goa-app-header>
+  <section slot="nav">
+    <abgov-navigation-link label="Button" path="/button"></abgov-navigation-link>
+    <abgov-navigation-link label="Checkbox" path="/checkbox"></abgov-navigation-link>
+    <abgov-navigation-link label="Radio" path="/radio"></abgov-navigation-link> 
+    <abgov-navigation-link label="Dropdown" path="/dropdown"></abgov-navigation-link>
+    <abgov-navigation-link label="Input" path="/input"></abgov-navigation-link>
+    <abgov-navigation-link label="TextArea" path="/textarea"></abgov-navigation-link>
+    <abgov-navigation-link label="Modal" path="/modal"></abgov-navigation-link>
+    <abgov-navigation-link label="AppFooter" path="/app-footer"></abgov-navigation-link>
+    <abgov-navigation-link label="Badge" path="/badge"></abgov-navigation-link>
+    <abgov-navigation-link label="Callout" path="/callout"></abgov-navigation-link>
+    <abgov-navigation-link label="Chip" path="/chip"></abgov-navigation-link>
+    <abgov-navigation-link label="Circular progress" path="/circular-progress"></abgov-navigation-link>
+    <abgov-navigation-link label="Hero Banner" path="/hero-banner"></abgov-navigation-link>
+    <abgov-navigation-link label="App Header" path="/app-header"></abgov-navigation-link>
+    <abgov-navigation-link label="Microsite header" path="/microsite-header"></abgov-navigation-link>
+    <abgov-navigation-link label="Container" path="/container"></abgov-navigation-link>
+    <abgov-navigation-link label="Skeleton" path="/skeleton"></abgov-navigation-link>
+    <abgov-navigation-link label="Form Item" path="/form-item"></abgov-navigation-link>
+  </section>
 
-<div class="container">
-  <div class="navigation-bar">
-    <nav>
-      <abgov-navigation-link
-        label="Button"
-        path="/button"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Checkbox"
-        path="/checkbox"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Radio"
-        path="/radio"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Dropdown"
-        path="/dropdown"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Input"
-        path="/input"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="TextArea"
-        path="/textarea"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Modal"
-        path="/modal"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="AppFooter"
-        path="/app-footer"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Badge"
-        path="/badge"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Callout"
-        path="/callout"
-      ></abgov-navigation-link>
-      <abgov-navigation-link label="Chip" path="/chip"></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Circular progress"
-        path="/circular-progress"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Hero Banner"
-        path="/hero-banner"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="App Header"
-        path="/app-header"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Microsite header"
-        path="/microsite-header"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Container"
-        path="/container"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Skeleton"
-        path="/skeleton"
-      ></abgov-navigation-link>
-      <abgov-navigation-link
-        label="Form Item"
-        path="/form-item"
-      ></abgov-navigation-link>
-    </nav>
-  </div>
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+  <router-outlet></router-outlet>
+
+  <goa-app-footer slot="footer"></goa-app-footer>
+
+</goa-layout-full-nav>

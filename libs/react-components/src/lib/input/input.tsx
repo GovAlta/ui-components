@@ -1,9 +1,23 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { GoAIconType } from '../..';
+type GoAInputType =
+  "text"
+  | "number"
+  | "password"
+  | "email"
+  | "date"
+  | "datetime-local"
+  | "month"
+  | "range"
+  | "search"
+  | "tel"
+  | "time"
+  | "url"
+  | "week";
 
 interface WCProps {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
-  type: string;
+  type: GoAInputType;
   name: string;
   value: string;
   id?: string;
@@ -20,6 +34,11 @@ interface WCProps {
   handletrailingiconclick: boolean;
   width?: string;
   testid?: string;
+
+  // type=number
+  min?: string;
+  max?: string;
+  step?: number;
 }
 
 
@@ -54,9 +73,14 @@ export interface Props {
   showCounter?: boolean;
   maxCharCount?: number;
   testId?: string;
+
+  // type=number
+  min?: string;
+  max?: string;
+  step?: number;
 };
 
-export const GoAInput: FC<Props & { type: string }> = ({
+export const GoAInput: FC<Props & { type: GoAInputType }> = ({
   id,
   name,
   type,
@@ -73,6 +97,9 @@ export const GoAInput: FC<Props & { type: string }> = ({
   showCounter,
   maxCharCount,
   testId,
+  min,
+  max,
+  step,
   onTrailingIconClick,
   onChange,
 }) => {
@@ -115,6 +142,9 @@ export const GoAInput: FC<Props & { type: string }> = ({
       data-testid={testId}
       value={value}
       width={width}
+      min={min}
+      max={max}
+      step={step}
       showcounter={showCounter}
       maxcharcount={maxCharCount}
       handletrailingiconclick={!!onTrailingIconClick}
@@ -167,14 +197,12 @@ export const GoAInputMonth: FC<Props> = (props) => {
 }
 
 export const GoAInputNumber: FC<
-  Omit<Props, "value"> 
-  & { value: number }  
-  & { min?: number, max?: number, step?: number }
-  > = (props) => {
-  return <GoAInput {...props} value={props.value.toString()} type="number" />;
+  Omit<Props, "value" | "min" | "max"> 
+  & { value: number, min?: number, max?: number}> = ({min, max, value, ...props}) => {
+  return <GoAInput {...props} min={min?.toString()} max={max?.toString()} value={value.toString()} type="number" />;
 }
 
-export const GoAInputRange: FC<Props & { min?: number, max?: number, step?: number }> = ({ step = 1, ...props }) => {
+export const GoAInputRange: FC<Props> = (props) => {
   return <GoAInput {...props} type="range" />;
 }
 

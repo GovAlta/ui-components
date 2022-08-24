@@ -5,7 +5,7 @@ import GoABadge from './Badge.svelte'
 describe('GoABadgeComponent', () => {
 
   [
-    'success', 'warning', 'error', 'information', 'emergency', 'inactive', 'dark', 'midtone', 'light'
+    'success', 'warning', 'error', 'information', 'emergency', 'dark', 'midtone', 'light'
   ].forEach(type => {
     it(`should render - ${type}`, async () => {
       const baseElement = render(GoABadge, { testid: "badge-test", type, content: 'Content' });
@@ -21,7 +21,6 @@ describe('GoABadgeComponent', () => {
     warning: "alert-circle",
     information: "information-circle",
     emergency: "warning",
-    inactive: "information-circle",
     dark: "information-circle",
     midtone: "information-circle",
     light: "information-circle",
