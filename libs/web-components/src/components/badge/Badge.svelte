@@ -127,7 +127,11 @@ import { onMount } from "svelte";
     background-color: var(--color-white);
     color: var(--goa-color-text);
   }
+<<<<<<< HEAD
 /*
+=======
+/*
+>>>>>>> 1d3b83880230328cb88e73be592dee290be8cea4
   .goa-badge.badge-inactive {
     background-color: var(--color-white);
     color: var(--goa-color-text);
