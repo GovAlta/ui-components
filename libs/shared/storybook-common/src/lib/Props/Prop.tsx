@@ -22,7 +22,7 @@ export const Prop: FC<Props> = ({ name, type, required, defaultValue, descriptio
       <td><code>{ name }</code></td>
       <td><code>{formatTypes()}</code></td>
       <td>{ required ? "Yes" : "No" }</td>
-      <td>{ defaultValue || "-" }</td>
+      <td>{ defaultValue }</td>
       <td>{ description }</td>
     </tr>
   );

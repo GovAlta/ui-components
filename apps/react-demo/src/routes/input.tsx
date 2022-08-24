@@ -1,4 +1,4 @@
-import { GoAInput } from '@abgov/react-components';
+import { GoAInput, GoAInputNumber } from '@abgov/react-components';
 import * as React from 'react';
 import { useState } from 'react';
 
@@ -63,6 +63,10 @@ export default function Input() {
     console.log('handleTrailingIconClick');
   }
 
+  function noop(...props: unknown[]) {
+    console.log(props)
+  }
+
   return (
     <>
       <h3>Basic</h3>
@@ -80,12 +84,19 @@ export default function Input() {
         type="text"
         leadingIcon="finger-print"></GoAInput>
 
-      <GoAInput
+      <GoAInputNumber
         name="foo3"
-        value={value3}
-        onChange={onChange3}
-        type="text"
-        trailingIcon="finger-print"></GoAInput>
+        value={0}
+        onChange={noop}
+      />
+      <GoAInputNumber
+        name="foo3"
+        value={0}
+        min={0}
+        max={20}
+        step={2}
+        onChange={noop}
+      />
 
       <h3>Icon Buttons</h3>
       <GoAInput

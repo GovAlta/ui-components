@@ -15,6 +15,11 @@
 
   // Hooks
   onMount(async () => {
+    if (!name) {
+      console.error("goa-dropdown-item: missing the required `name` attribute. It must match the parent's name attribute")
+      return;
+    }
+
     ctx = await getContext(name);
     ctx.notify({
       type: BIND,

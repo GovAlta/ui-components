@@ -46,6 +46,9 @@ storybook:
 react-app:
 	npx nx run react-demo:serve 
 
+ng-app:
+	npx nx run angular-demo:serve 
+
 demo:
 	cd libs/web-components && npm run demo
 
@@ -53,6 +56,9 @@ demo:
 
 test:	
 	npm run test:watch
+
+coverage:	
+	npx nx run web-components:test --codeCoverage
 
 
 .DEFAULT_GOAL := build

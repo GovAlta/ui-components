@@ -5,6 +5,7 @@
   import GoADropdownItem from './DropdownItem.svelte';
 
   export let name: string;
+  export let arialabel: string;
   export let value: string = "";
   export let leadingicon: GoAIconType = null;
   export let maxheight: string = "300px";
@@ -17,7 +18,7 @@
 </script>
 
 <!-- HTML -->
-<GoADropdown {name} {value} {testid} {error} {leadingicon} {maxheight} {placeholder} {disabled} {width}>
+<GoADropdown {name} {arialabel} {value} {testid} {error} {leadingicon} {maxheight} {placeholder} {disabled} {width}>
   {#each items as item (item) }
     <GoADropdownItem {name} value={item} label={item} />
   {/each}

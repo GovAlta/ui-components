@@ -26,6 +26,11 @@
   let el: HTMLElement;
 
   onMount(() => {
+    if (!name) {
+      console.error("goa-radio: missing the required `name` attribute. It must match the children's name attribute.")
+      return;
+    }
+
     ctx = createContext(name);
     ctx.subscribe((msg) => {
       switch (msg?.type) {
