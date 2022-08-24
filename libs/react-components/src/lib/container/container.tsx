@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-type ContainerVariant = 'primary' | 'info' | 'error' | 'success' | 'warning' | 'default';
+type ContainerVariant = 'interactive' | 'info' | 'error' | 'success' | 'warning' | 'non-interactive';
 type HeadingSize = 'large' | 'small' | 'none';
 type ContainerPadding = "relaxed" | "compact";
 
