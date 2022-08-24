@@ -148,25 +148,25 @@ describe('GoAInput Component', () => {
     expect(onClick).toBeCalledTimes(1);
   });
 
-    describe("type=number", () => {
-      it("doesn't show numeric props if type isn't number", async () => {
-        const el = render(GoAInput);
-        const root = el.container.querySelector('input');
-        expect(root).toBeTruthy();
-        expect(root).toHaveAttribute("min", "")
-        expect(root).toHaveAttribute("max", "")
-        expect(root).not.toHaveAttribute("step")
-      });
+  describe("type=number", () => {
+    it("doesn't show numeric props if type isn't number", async () => {
+      const el = render(GoAInput);
+      const input = el.container.querySelector('input');
+      expect(input).toBeTruthy();
+      expect(input).toHaveAttribute("min", "")
+      expect(input).toHaveAttribute("max", "")
+      expect(input).not.toHaveAttribute("step")
+    });
 
-      it("allows for a numeric props", async () => {
-        const el = render(GoAInput, { type: "number", min: "0", max: "10", step: 2 });
-        const root = el.container.querySelector('input');
-        expect(root).toBeTruthy();
-        expect(root).toHaveAttribute("min", "0")
-        expect(root).toHaveAttribute("max", "10")
-        expect(root).toHaveAttribute("step", "2")
-      });
-    })
+    it("allows for a numeric props", async () => {
+      const el = render(GoAInput, { type: "number", min: "0", max: "10", step: 2 });
+      const input = el.container.querySelector('input');
+      expect(input).toBeTruthy();
+      expect(input).toHaveAttribute("min", "0")
+      expect(input).toHaveAttribute("max", "10")
+      expect(input).toHaveAttribute("step", "2")
+    });
+  })
 
   describe("Search type", () => {
     it("clears the input when the search x icon is clicked", async () => {
