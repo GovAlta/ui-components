@@ -1,7 +1,4 @@
 import React, { FC } from 'react';
-import { GoAIconType } from '../icons';
-
-// import type { BadgeType } from '@abgov/shared/common';
 
 // TODO: move types like this into a shared file
 // export type BadgeType;
@@ -17,14 +14,14 @@ export type GoABadgeType
 
 interface GoABadgeProps {
   type: GoABadgeType;
-  icon?: GoAIconType;
+  icon?: boolean;
   content?: string;
   testId?: string;
 }
 
 interface WCProps {
   type: GoABadgeType;
-  icon?: GoAIconType;
+  icon?: boolean;
   content?: string;
   testid?: string;
 }
@@ -45,26 +42,26 @@ export const GoABadge: FC<GoABadgeProps> = ({ type, content, icon, testId }: GoA
   )
 }
 
-export const GoAInfoBadge: FC<GoABadgeProps> = ({ content, testId }: GoABadgeProps) => {
+export const GoAInfoBadge: FC<GoABadgeProps> = ({ content, testId, icon }: GoABadgeProps) => {
   return (
-    <GoABadge type="information" icon="information-circle" content={content} testId={testId} />
+    <GoABadge type="information" icon={icon} content={content} testId={testId} />
   )
 }
 
-export const GoASuccessBadge: FC<GoABadgeProps> = ({ content, testId }: GoABadgeProps) => {
+export const GoASuccessBadge: FC<GoABadgeProps> = ({ content, testId, icon }: GoABadgeProps) => {
   return (
-    <GoABadge type="success" icon="checkmark-circle" content={content} testId={testId} />
+    <GoABadge type="success" icon={icon} content={content} testId={testId} />
   )
 }
 
-export const GoAWarningBadge: FC<GoABadgeProps> = ({ content, testId }: GoABadgeProps) => {
+export const GoAImportantBadge: FC<GoABadgeProps> = ({ content, testId, icon }: GoABadgeProps) => {
   return (
-    <GoABadge type="important" icon="warning" content={content} testId={testId} />
+    <GoABadge type="important" icon={icon} content={content} testId={testId} />
   )
 }
 
-export const GoAEmergencyBadge: FC<GoABadgeProps> = ({ content, testId }: GoABadgeProps) => {
+export const GoAEmergencyBadge: FC<GoABadgeProps> = ({ content, testId, icon }: GoABadgeProps) => {
   return (
-    <GoABadge type="emergency" icon="alert-circle" content={content} testId={testId} />
+    <GoABadge type="emergency" icon={icon} content={content} testId={testId} />
   )
 }
