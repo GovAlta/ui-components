@@ -9,7 +9,7 @@ import {
   GoAInfoBadge,
   GoAEmergencyBadge,
   GoASuccessBadge,
-  GoAWarningBadge,
+  GoAImportantBadge,
 } from './lib/badge/badge';
 
 import {
@@ -118,5 +118,5 @@ export {
   GoASpinner,
   GoASuccessBadge,
   GoATextArea,
-  GoAWarningBadge,
+  GoAImportantBadge,
 };
