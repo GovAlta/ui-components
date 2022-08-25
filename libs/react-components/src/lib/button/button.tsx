@@ -4,7 +4,7 @@ import { GoAIconType } from '../icons';
 
 export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'start';
 export type ButtonSize = 'compact' | '';
-export type ButtonVariant = '' | 'danger'
+export type ButtonVariant = '' | 'destructive'
 
 interface WCProps {
   type?: ButtonType;
