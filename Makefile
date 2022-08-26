@@ -18,22 +18,25 @@ story:
 
 #### BUILD
 
-lint:
+build-lint:
 	npx nx run-many --target=lint --projects=react-components,styles,web-components
 
-web-components:
+build-web-components:
 	npm run build web-components --withDeps --configuration production
 
-styles:
+build-styles:
 	npm run build styles --withDeps --configuration production
 
-react-components:
+build-react-components:
 	npm run build react-components --withDeps --configuration production
 
-react-demo:
+build-react-app:
 	npm run build react-demo --withDeps --configuration production
 
-build: styles web-components react-components react-demo
+build-ng-app:
+	npm run build react-demo --withDeps --configuration production
+
+build: build-styles build-web-components build-react-components build-react-app build-ng-app
 
 #### RUN 
 

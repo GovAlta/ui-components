@@ -36,6 +36,8 @@ import { useState } from 'react';
     type="CustomEvent<{detail: {name: string, value: string}}>"
     description="onChange event"
   />
+  <Prop name="error" type="boolean" defaultValue="false" description="if we show an error or not" />
+  <Prop name="disabled" type="boolean" defaultValue="false" description="if the component is disabled or not" />
 </Props>
 
 export const BasicTemplate = (args) => {
