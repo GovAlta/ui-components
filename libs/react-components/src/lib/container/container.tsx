@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-type ContainerVariant = 'interactive' | 'info' | 'error' | 'success' | 'important' | 'non-interactive';
+type ContainerVariant = 'interactive' | 'non-interactive' | 'info' | 'error' | 'success' | 'warning';
 type HeadingSize = 'large' | 'small' | 'none';
 type ContainerPadding = "relaxed" | "compact";
 
@@ -36,7 +36,7 @@ export const GoAContainer: FC<Props> = ({
   padding,
   children,
   actions,
-  variant = 'interactive',
+  variant,
 }) => {
   return (
     <goa-container variant={variant} padding={padding} headingsize={headingSize} colored={colored}>
