@@ -5,10 +5,10 @@ type HeadingSize = 'large' | 'small' | 'none';
 type ContainerPadding = "relaxed" | "compact";
 
 interface WCProps {
-  variant: ContainerVariant;
-  headingsize: HeadingSize;
-  colored: boolean;
-  padding: ContainerPadding;
+  variant?: ContainerVariant;
+  headingsize?: HeadingSize;
+  colored?: boolean;
+  padding?: ContainerPadding;
 }
 
 declare global {
@@ -21,11 +21,11 @@ declare global {
 }
 
 interface Props {
-  headingSize: HeadingSize;
+  headingSize?: HeadingSize;
   variant?: ContainerVariant;
   title?: ReactNode;
   colored?: boolean;
-  padding: ContainerPadding;
+  padding?: ContainerPadding;
   actions?: ReactNode;
 }
 
