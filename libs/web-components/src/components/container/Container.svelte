@@ -96,9 +96,8 @@
     background-color: var(--goa-color-status-info-50);
   }
 
-  .title > *,
-  .actions > * {
-    line-height: 3rem;
+  .title, .actions {
+    padding: 0.5rem 0;
   }
 
   /* Padding variants */
