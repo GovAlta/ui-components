@@ -8,10 +8,10 @@
   const BUTTON_TYPES = ["primary", "secondary", "tertiary", "start"];
   type ButtonType = (typeof BUTTON_TYPES)[number];
 
-  const SIZES = ["", "compact"];
+  const SIZES = ["normal", "compact"];
   type Size = (typeof SIZES)[number];
 
-  const VARIANTS = ["", "destructive"];
+  const VARIANTS = ["normal", "destructive"];
   type Variant = (typeof VARIANTS)[number];
 
   // type check functions
@@ -30,8 +30,8 @@
 
   // optional
   export let type: ButtonType = "primary";
-  export let size: Size = "";
-  export let variant: Variant = "";
+  export let size: Size = "normal";
+  export let variant: Variant = "normal";
   export let title: string = "";
   export let disabled: string = "false";
   export let leadingicon: GoAIconType = null;
