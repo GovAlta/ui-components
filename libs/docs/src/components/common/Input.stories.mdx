@@ -14,7 +14,7 @@ import {
   GoAInputRange,
   GoAFormItem,
 } from '@abgov/react-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   SupportInfo,
   Tabs,
@@ -40,7 +40,7 @@ import { Meta, Story } from '@storybook/addon-docs';
 <Props>
   <Prop
     name="type"
-    type="text | number | password | email | search | tel | time | url | week"
+    type="text | number | password | email | search | tel | date | datetime-locale | time | url | week"
     defaultValue="text"
   />
   <Prop name="name" type="string" />
@@ -56,6 +56,9 @@ import { Meta, Story } from '@storybook/addon-docs';
   <Prop name="width" type="string" defaultValue="30ch" />
   <Prop name="showcounter" type="boolean" />
   <Prop name="maxcharcount" type="number" />
+  <Prop name="min" type="string | date" description="A string value *must* be in ISO 8601 format" />
+  <Prop name="max" type="string | date" description="A string value *must* be in ISO 8601 format" />
+  <Prop name="step" type="number" description="By how much number of day value will change by" />
   <Prop name="arialabel" type="string" description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name" />
   <Prop name="_change" type="CustomEvent<{detail: {name: string, value: string}}>" />
   <Prop name="_trailingiconclick" type="CustomEvent" />
@@ -486,7 +489,7 @@ export const DateTemplate = () => {
       value={date}
       min={minDate}
       max={maxDate}
-      onChange={(name, value) => setValue(value)}
+      onChange={(name, value) => setDate(value)}
     />
   )
 };
@@ -545,7 +548,7 @@ export const DateTemplate = () => {
             value={date}
             min={minDate}
             max={maxDate}
-            onChange={(name, value) => setValue(value)}
+            onChange={(name, value) => setDate(value)}
           />
         )
       `}

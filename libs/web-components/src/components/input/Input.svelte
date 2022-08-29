@@ -35,15 +35,15 @@
   export let error: string = "false";
   export let testid: string = "";
   export let width: string = "30ch";
-  export let arialabel: string = ""; 
-
-  export let min: string = "";
-  export let max: string = "";
-  export let step: number;
+  export let arialabel: string = null; 
+  export let min: string = null;
+  export let max: string = null;
+  export let step: number = null;
 
   // character counter
   export let showcounter: string = "false";
   export let maxcharcount: number = 0;
+
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
@@ -241,6 +241,12 @@
 
     width: 0;
     flex: 1 1 auto;
+  }
+
+  input[type=date],
+  input[type="datetime-local"],
+  input[type=number] {
+    font-family: var(--font-family);
   }
 
   input[readonly] {
