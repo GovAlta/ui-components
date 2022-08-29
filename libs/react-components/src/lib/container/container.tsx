@@ -1,14 +1,14 @@
 import React, { FC, ReactNode } from 'react';
 
-type ContainerVariant = 'primary' | 'info' | 'error' | 'success' | 'warning' | 'default';
+type ContainerVariant = 'interactive' | 'non-interactive' | 'info' | 'error' | 'success' | 'warning';
 type HeadingSize = 'large' | 'small' | 'none';
 type ContainerPadding = "relaxed" | "compact";
 
 interface WCProps {
-  variant: ContainerVariant;
-  headingsize: HeadingSize;
-  colored: boolean;
-  padding: ContainerPadding;
+  variant?: ContainerVariant;
+  headingsize?: HeadingSize;
+  colored?: boolean;
+  padding?: ContainerPadding;
 }
 
 declare global {
@@ -21,11 +21,11 @@ declare global {
 }
 
 interface Props {
-  headingSize: HeadingSize;
+  headingSize?: HeadingSize;
   variant?: ContainerVariant;
   title?: ReactNode;
   colored?: boolean;
-  padding: ContainerPadding;
+  padding?: ContainerPadding;
   actions?: ReactNode;
 }
 
@@ -36,7 +36,7 @@ export const GoAContainer: FC<Props> = ({
   padding,
   children,
   actions,
-  variant = 'default',
+  variant,
 }) => {
   return (
     <goa-container variant={variant} padding={padding} headingsize={headingSize} colored={colored}>
