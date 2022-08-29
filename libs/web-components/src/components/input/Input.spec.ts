@@ -151,20 +151,31 @@ describe('GoAInput Component', () => {
   describe("type=number", () => {
     it("doesn't show numeric props if type isn't number", async () => {
       const el = render(GoAInput);
-      const input = el.container.querySelector('input');
-      expect(input).toBeTruthy();
-      expect(input).toHaveAttribute("min", "")
-      expect(input).toHaveAttribute("max", "")
-      expect(input).not.toHaveAttribute("step")
+      const root = el.container.querySelector('input');
+      expect(root).toBeTruthy();
+      expect(root).not.toHaveAttribute("min")
+      expect(root).not.toHaveAttribute("max")
+      expect(root).not.toHaveAttribute("step")
     });
 
     it("allows for a numeric props", async () => {
       const el = render(GoAInput, { type: "number", min: "0", max: "10", step: 2 });
+      const root = el.container.querySelector('input');
+      expect(root).toBeTruthy();
+      expect(root).toHaveAttribute("min", "0")
+      expect(root).toHaveAttribute("max", "10")
+      expect(root).toHaveAttribute("step", "2")
+    });
+  })
+
+  describe("type=date", () => {
+    it("allows for a date type", async () => {
+      const el = render(GoAInput, { type: "date" });
       const input = el.container.querySelector('input');
       expect(input).toBeTruthy();
-      expect(input).toHaveAttribute("min", "0")
-      expect(input).toHaveAttribute("max", "10")
-      expect(input).toHaveAttribute("step", "2")
+      expect(input).not.toHaveAttribute("min")
+      expect(input).not.toHaveAttribute("max")
+      expect(input).not.toHaveAttribute("step")
     });
   })
 

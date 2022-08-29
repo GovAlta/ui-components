@@ -13,6 +13,14 @@
 <goa-input name="foo" type="number" min="0" max="10" step="2"></goa-input>
 <goa-input name="foo" type="number"></goa-input>
 
+<h3>Date and time</h3>
+<goa-input name="foo" type="date"></goa-input>
+<goa-input name="foo" type="datetime-local"></goa-input>
+<goa-input name="foo" type="time"></goa-input>
+<goa-input name="foo" type="time" min="" max=""></goa-input>
+
+<goa-input type="date" name="Date with min max" [value]="valueDate" [min]="minDate" (_change)="onChange($event)"></goa-input>
+
 <h3>Icon Buttons</h3>
 <goa-input
   name="foo"
