@@ -26,7 +26,7 @@ export const noop = () => {};
 <Props>
   <Prop
     name="type"
-    type="primary | secondary | tertiary | start"
+    type="primary | submit | secondary | tertiary | start"
     defaultValue="primary"
     description=""
   />
@@ -57,6 +57,9 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
   <GoAButtonGroup alignment="start">
     <GoAButton type="primary" onClick={() => console.log('clicked')}>
       Primary
+    </GoAButton>
+    <GoAButton type="submit" onClick={() => console.log('clicked')}>
+      Submit 
     </GoAButton>
     <GoAButton type="secondary" onClick={() => console.log('clicked')}>
       Secondary
