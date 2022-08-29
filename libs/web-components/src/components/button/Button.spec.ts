@@ -28,7 +28,7 @@ describe('GoAButtonComponent', () => {
   })
 
   describe("size", () => {
-    ["compact", ""].forEach(size => {
+    ["compact", "normal"].forEach(size => {
       it(`should render ${size} size`, async () => {
         const { findByRole } = render(GoAButton, { size });
         const button = await findByRole("button");
@@ -52,7 +52,7 @@ describe('GoAButtonComponent', () => {
   });
 
   describe("variant", () => {
-    ["", "destructive"].forEach(variant => {
+    ["normal", "destructive"].forEach(variant => {
       it(`should render ${variant} variant`, async () => {
         const baseElement = render(GoAButton, { variant });
         const button = await baseElement.findByRole("button");
