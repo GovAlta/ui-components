@@ -41,15 +41,43 @@
 
   // Hooks
 
-  onMount(async () => {
-    if (!name) {
-      console.error("goa-dropdown: missing the required `name` attribute. It must match the children's name attribute.")
-      return;
-    }
+  onMount(() => {
+    const maxAttempts = 10;
+    let attempts = 0; 
+    const fn = setInterval(async () => {
+      attempts++;
+      if (name && el) {
+        addEventListeners();
+        parseValues();
+        bindContext();
 
+        clearInterval(fn);
+      }
+      if (attempts > maxAttempts) {
+        console.error("goa-dropdown: missing the required `name` attribute. It must match the children's name attribute.")
+        clearInterval(fn);
+      }
+    }, 10);
+  })
+
+  onDestroy(() => {
+    removeEventListeners();
+    deleteContext(name);
+  });
+
+  // Functions
+
+  function addEventListeners() {
     el.addEventListener("focus", onFocus, true);
     el.addEventListener("blur", onBlur, true);
+  }
 
+  function removeEventListeners() {
+    el.removeEventListener("focus", onFocus, true);
+    el.removeEventListener("blur", onBlur, true);
+  }
+
+  function parseValues() {
     // parse and convert values to strings to avoid later type comparison issues
     let rawValue: string[];
     try {
@@ -60,17 +88,7 @@
     const rawValues = typeof rawValue === "object" ? rawValue : [rawValue];
     // convert all values to strings to avoid later type comparison issues
     _values = rawValues.map((val: unknown) => `${val}`);
-
-    bindContext();
-  });
-
-  onDestroy(() => {
-    el.removeEventListener("focus", onFocus, true);
-    el.removeEventListener("blur", onBlur, true);
-    deleteContext(name);
-  });
-
-  // Functions
+  }
 
   function bindContext() {
     ctx = createContext(name);
@@ -207,6 +225,7 @@
   class="goa-dropdown-box" 
   style={`--width: ${width || computedWidth}`}
   bind:this={el}>
+
   <!-- background -->
   {#if isMenuVisible}
     <div
@@ -244,7 +263,7 @@
     style={`overflow-y: auto; max-height: ${maxheight}`}
   >
     <slot />
-    {#each options as option, index (option.value)}
+    {#each options as option, index}
       <li
         aria-label={option.label || option.value}
         data-testid={`${option.value}-dropdown-item`}
@@ -256,7 +275,7 @@
         style={`display: ${false ? "none" : "block"}`}
         on:click={() => onSelect(option.value, option.label)}
       >
-        {option.label}
+        {option.label || option.value}
       </li>
     {/each}
   </ul>

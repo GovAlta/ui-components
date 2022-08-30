@@ -10,8 +10,8 @@
   export let leadingicon: GoAIconType = null;
   export let maxheight: string = "300px";
   export let placeholder: string = "";
-  export let disabled: boolean = false;
-  export let error: boolean = false;
+  export let disabled: string = "false";
+  export let error: string = "false";
   export let width: string = "";
   export let testid: string = "";
   export let items: string[];
