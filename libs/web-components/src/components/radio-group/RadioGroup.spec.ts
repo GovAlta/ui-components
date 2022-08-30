@@ -28,14 +28,16 @@ describe('GoARadioGroup Component', () => {
     })
   });
 
-  it("raise an error if name is not supplied", () => {
+  it("raise an error if name is not supplied", async () => {
     jest.spyOn(console, "error");
     const items = ["red", "blue", "orange"];
     render(GoARadioGroup, {
       items,
     });
 
-    expect(console.error["mock"].calls.length).toBe(4);  // 4 = 1 parent + 3 chilren
+    await waitFor(() => {
+      expect(console.error["mock"].calls.length).toBeGreaterThan(0); 
+    })
   });
 
   it('should handle the events', async () => {

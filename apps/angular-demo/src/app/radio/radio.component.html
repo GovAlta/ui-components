@@ -32,3 +32,21 @@
   <goa-radio-item name="color4" value="blue"></goa-radio-item>
   <goa-radio-item name="color4" value="orange"></goa-radio-item>
 </goa-radio-group>
+
+<h3>Dynamic</h3>
+<div *ngFor="let item of dynamicItems">
+  <h4>{{item.name}}</h4>
+  <goa-radio-group
+    [attr.name]="item.name"
+    [value]="item.value"
+    (_change)="onChange($event)"
+  >
+    <goa-radio-item
+      *ngFor="let option of item.options"
+      [attr.name]="item.name"
+      [value]="option.value"
+      [label]="option.value"
+    >
+    </goa-radio-item>
+  </goa-radio-group>
+</div>
