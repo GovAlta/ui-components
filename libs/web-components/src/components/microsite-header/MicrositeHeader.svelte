@@ -15,7 +15,7 @@
 <!-- HTML -->
 <header class="goa-official-site-header">
   {#if type === "live"}
-    <div class="service-level service-level--live">
+    <div class="service-type service-type--live">
       <svg
         width="26"
         height="26"
@@ -35,7 +35,7 @@
   {#if ["alpha", "beta"].includes(type)}
     <div
       data-testid="type"
-      class="service-level service-level--{type.toLowerCase()}"
+      class="service-type service-type--{type.toLowerCase()}"
     >
       {capitalize(type)}
     </div>
