@@ -43,11 +43,11 @@ export const checkboxTemplate = (args) => {
 
 <Props>
   <Prop name="name" type="string" required="true" />
-  <Prop name="checked" type="boolean" required="true" />
+  <Prop name="checked" type="boolean" defaultValue="false" required="true" />
   <Prop name="text" type="string" />
   <Prop name="value" type="string" />
-  <Prop name="disabled" type="boolean" />
-  <Prop name="error" type="boolean" />
+  <Prop name="disabled" type="boolean" defaultValue="false" />
+  <Prop name="error" type="boolean" defaultValue="false" />
   <Prop
     name="_change"
     type="CustomEvent<{detail: {
