@@ -5,13 +5,13 @@
   import { toBoolean } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
-  const BUTTON_TYPES = ["primary", "secondary", "tertiary", "start"];
+  const BUTTON_TYPES = ["primary", "submit", "secondary", "tertiary", "start"];
   type ButtonType = (typeof BUTTON_TYPES)[number];
 
-  const SIZES = ["", "compact"];
+  const SIZES = ["normal", "compact"];
   type Size = (typeof SIZES)[number];
 
-  const VARIANTS = ["", "destructive"];
+  const VARIANTS = ["normal", "destructive"];
   type Variant = (typeof VARIANTS)[number];
 
   // type check functions
@@ -30,8 +30,8 @@
 
   // optional
   export let type: ButtonType = "primary";
-  export let size: Size = "";
-  export let variant: Variant = "";
+  export let size: Size = "normal";
+  export let variant: Variant = "normal";
   export let title: string = "";
   export let disabled: string = "false";
   export let leadingicon: GoAIconType = null;
@@ -145,6 +145,7 @@
 
   /* Primary */
   button.start,
+  button.submit,
   button.primary {
     border: 2px solid var(--goa-color-interactive);
     background: var(--goa-color-interactive);
@@ -152,6 +153,7 @@
   }
 
   button.start:hover,
+  button.submit:hover,
   button.primary:hover {
     border-color: var(--goa-color-interactive--hover);
     background: var(--goa-color-interactive--hover);
@@ -159,6 +161,8 @@
 
   button.start:focus,
   button.start:active,
+  button.submit:focus,
+  button.submit:active,
   button.primary:focus,
   button.primary:active {
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
@@ -213,15 +217,18 @@
     outline: none;
   }
 
+  .submit.destructive,
   .primary.destructive {
     color: var(--color-white);
     background: var(--goa-color-status-emergency);
     border-color: var(--goa-color-status-emergency);
   }
+  .submit.destructive:hover,
   .primary.destructive:hover {
     background: var(--goa-color-status-emergency-dark);
     border-color: var(--goa-color-status-emergency-dark);
   }
+  .submit.destructive:focus,
   .primary.destructive:focus,
   .primary.destructive:active {
     background: var(--goa-color-status-emergency-dark);

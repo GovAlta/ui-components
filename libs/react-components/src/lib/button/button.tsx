@@ -3,8 +3,8 @@ import './button.css';
 import { GoAIconType } from '../icons';
 
 export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'start';
-export type ButtonSize = 'compact' | '';
-export type ButtonVariant = '' | 'destructive'
+export type ButtonSize = 'compact' | 'normal';
+export type ButtonVariant = 'normal' | 'destructive'
 
 interface WCProps {
   type?: ButtonType;
@@ -43,8 +43,8 @@ export const GoAButton: FC<ButtonProps> = ({
   title,
   disabled = false,
   type = 'primary',
-  size = '',
-  variant = '',
+  size,
+  variant,
   leadingIcon,
   trailingIcon,
   children,
