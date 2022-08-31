@@ -16,6 +16,7 @@
     | "date"
     | "datetime-local"
     | "month"
+    | "range"
     | "search"
     | "tel"
     | "time"
@@ -34,10 +35,15 @@
   export let error: string = "false";
   export let testid: string = "";
   export let width: string = "30ch";
+  export let arialabel: string = null; 
+  export let min: string = null;
+  export let max: string = null;
+  export let step: number = null;
 
   // character counter
   export let showcounter: string = "false";
   export let maxcharcount: number = 0;
+
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
@@ -110,6 +116,11 @@
       {type}
       {value}
       {placeholder}
+      {min}
+      {max}
+      {step}
+      role="textbox" 
+      aria-label={arialabel || name}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
     />
@@ -127,7 +138,6 @@
     <!-- Trailing Icon Button -->
     {#if trailingicon && handlesTrailingIconClick}
       <goa-icon-button
-        class="goa-input-trailing-icon"
         on:click={doClick}
         disabled={isDisabled}
         variant="nocolor"
@@ -214,19 +224,11 @@
   }
 
   .goa-input-leading-icon {
-    display: flex;
-    align-items: center;
     margin-left: 0.5rem;
   }
 
   .goa-input-trailing-icon {
-    display: flex;
-    align-items: center;
     margin-right: 0.5rem;
-  }
-
-  .goa-input-trailing-icon > .goa-icon-button {
-    margin-right: -0.5rem;
   }
 
   input {
@@ -239,6 +241,12 @@
 
     width: 0;
     flex: 1 1 auto;
+  }
+
+  input[type=date],
+  input[type="datetime-local"],
+  input[type=number] {
+    font-family: var(--font-family);
   }
 
   input[readonly] {

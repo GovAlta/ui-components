@@ -1,141 +1,153 @@
-import { GoAInput } from '@abgov/react-components';
+import { GoAInput, GoAInputDate, GoAInputDateTime, GoAInputNumber, GoAInputTime } from '@abgov/react-components';
+import { format } from 'date-fns';
 import * as React from 'react';
-import { useState } from 'react';
 
 export default function Input() {
 
-  const [value, setValue] = useState('');
-  const [value2, setValue2] = useState('');
-  const [value3, setValue3] = useState('');
-  const [value4, setValue4] = useState('');
-  const [value5, setValue5] = useState('');
-  const [value6, setValue6] = useState('');
-  const [value7, setValue7] = useState('');
-  const [value8, setValue8] = useState('');
-  const [value9, setValue9] = useState('');
-
-  function onChange(name: string, value: string) {
-    setValue(value);
-    console.log(name, value);
+  function noop(...args: unknown[]) {
+    console.log(args)
   }
 
-  function onChange2(name: string, value: string) {
-    setValue2(value);
-    console.log(name, value);
-  }
-
-  function onChange3(name: string, value: string) {
-    setValue3(value);
-    console.log(name, value);
-  }
-
-  function onChange4(name: string, value: string) {
-    setValue4(value);
-    console.log(name, value);
-  }
-
-  function onChange5(name: string, value: string) {
-    setValue5(value);
-    console.log(name, value);
-  }
-
-  function onChange6(name: string, value: string) {
-    setValue6(value);
-    console.log(name, value);
-  }
-
-  function onChange7(name: string, value: string) {
-    setValue7(value);
-    console.log(name, value);
-  }
-
-  function onChange8(name: string, value: string) {
-    setValue8(value);
-    console.log(name, value);
-  }
-
-  function onChange9(name: string, value: string) {
-    setValue9(value);
-    console.log(name, value);
-  }
-
-  function handleTrailingIconClick() {
-    console.log('handleTrailingIconClick');
-  }
+  const date = new Date();
+  const minDate = new Date();
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() + 1);
 
   return (
     <>
       <h3>Basic</h3>
       <GoAInput
-        name="foo"
-        value={value}
+        name=""
+        value=""
         type="text"
-        onChange={onChange}></GoAInput>
+        onChange={noop}
+      />
+      <GoAInputNumber
+        name=""
+        placeholder="Number"
+        value={0}
+        min={0}
+        max={10}
+        onChange={noop}
+      />
+      <GoAInputDate
+        name="Date from string value"
+        value={date.toISOString()}
+        onChange={noop}
+      />
+      <GoAInputDate
+        name="Date"
+        value={date}
+        onChange={noop}
+      />
+      <GoAInputDateTime
+        name="Date Time"
+        value={date}
+        onChange={noop}
+      />
+
+      Time from Date value
+      <GoAInputTime
+        name="Time from date value"
+        value={date}
+        onChange={noop}
+      />
+
+      Time from string datetime ISO 8601 value
+      <GoAInputTime
+        name="Time w/ string datetime ISO 8601 value"
+        value={date.toISOString()}
+        onChange={noop}
+      />
+
+      Time from string mm:ss value
+      <GoAInputTime
+        name="Time from string mm:ss value"
+        value={format(date, "hh:mm")}
+        onChange={noop}
+      />
+
+      Time with a min and max 
+      <GoAInputDate
+        name="Date with min max"
+        value={date.toISOString()}
+        min={minDate.toISOString()}
+        max={maxDate.toISOString()}
+        onChange={noop}
+      />
 
       <h3>Icons</h3>
       <GoAInput
-        name="foo2"
-        value={value2}
-        onChange={onChange2}
+        name=""
+        value=""
+        onChange={noop}
         type="text"
-        leadingIcon="finger-print"></GoAInput>
+        leadingIcon="finger-print"
+      />
 
       <GoAInput
-        name="foo3"
-        value={value3}
-        onChange={onChange3}
+        name=""
+        value=""
+        onChange={noop}
         type="text"
-        trailingIcon="finger-print"></GoAInput>
+        trailingIcon="finger-print"
+      />
 
       <h3>Icon Buttons</h3>
       <GoAInput
         trailingIcon="finger-print"
-        name="foo4"
-        value={value4}
-        onChange={onChange4}
+        name=""
+        value=""
+        onChange={noop}
         type="text"
-        onTrailingIconClick={handleTrailingIconClick}></GoAInput>
+        onTrailingIconClick={noop}
+      />
 
       <h3>Disabled</h3>
       <GoAInput
-        name="foo5"
-        value={value5}
-        onChange={onChange5}
+        name=""
+        value=""
+        onChange={noop}
         type="text"
-        disabled={true} placeholder="Find by name"></GoAInput>
+        disabled={true} 
+        placeholder="Find by name"
+      />
 
       <h3>Error state</h3>
       <GoAInput
-        name="foo6"
-        value={value6}
-        onChange={onChange6}
+        name=""
+        value=""
+        onChange={noop}
         type="text"
-        error={true}></GoAInput>
+        error={true}
+      />
 
       <h3>Focus</h3>
       <GoAInput
-        name="foo7"
-        value={value7}
-        onChange={onChange7}
+        name=""
+        value=""
+        onChange={noop}
         type="text"
-      ></GoAInput>
+      />
 
       <h3>Character count</h3>
       <GoAInput
         name="firstname"
-        value={value8}
-        onChange={onChange8}
+        value=""
+        onChange={noop}
         type="text"
-        maxCharCount={20}></GoAInput>
+        maxCharCount={20}
+      />
 
       <h3>Character count with limit</h3>
       <GoAInput
         name="firstname"
-        value={value9}
-        onChange={onChange9}
+        value=""
+        onChange={noop}
         type="text"
         showCounter={true}
-        maxCharCount={20}></GoAInput>
+        maxCharCount={20}
+      />
     </>
   );
 }

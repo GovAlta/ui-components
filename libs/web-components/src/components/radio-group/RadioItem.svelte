@@ -11,17 +11,28 @@
 
   let ctx: ContextStore;
 
-  onMount(async () => {
-    if (!name) {
-      console.error("goa-radio-item: missing the required `name` attribute. It must match the parent's name attribute.")
-      return;
-    }
+  onMount(() => {
+    const maxAttempts = 10;
+    let attempts = 0; 
+    const fn = setInterval(() => {
+      attempts++;
+      if (name) {
+        ctx = getContext(name);
+        if (!ctx) {
+          return;
+        }
+        ctx.notify({
+          type: BIND,
+          value,
+          label,
+        });
+        clearInterval(fn);
+      }
+      if (attempts > maxAttempts) {
+        console.error("goa-radio-item: missing the required `name` attribute. It must match the parent's name attribute.")
+        clearInterval(fn);
+      }
+    }, 10);
+  })
 
-    ctx = await getContext(name);
-    ctx.notify({
-      type: BIND,
-      value,
-      label,
-    });
-  });
 </script>
