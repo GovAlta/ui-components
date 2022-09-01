@@ -221,8 +221,7 @@ describe('GoAInput Component', () => {
     });
 
     it("shows a char count with a max count", async () => {
-      const { component, container } = render(GoAInput, { name: 'test-name', type: "text", showcounter: "true", value: "Jim", maxcharcount: "50" });
-      const input = container.querySelector('input');
+      const { container } = render(GoAInput, { name: 'test-name', type: "text", showcounter: "true", value: "Jim", maxcharcount: "50" });
       const counterEl = container.querySelector(".counter");
       expect(counterEl.innerHTML).toContain("3/50");
     });
@@ -232,4 +231,20 @@ describe('GoAInput Component', () => {
       expect(container.querySelector(".counter-error")).not.toBeNull();
     });
   });
+
+  describe("Prefix and suffix text", () => {
+    it("does not show prefix or suffix text", async () => {
+      const { container } = render(GoAInput, { type: "text" });
+      expect(container.querySelector(".prefix")).toBeNull();
+      expect(container.querySelector(".suffix")).toBeNull();
+    });
+    it("shows prefix text", async () => {
+      const { container } = render(GoAInput, { type: "text", prefix: "$" });
+      expect(container.querySelector(".prefix").innerHTML).toContain("$");
+    });
+    it("shows suffix text", async () => {
+      const { container } = render(GoAInput, { type: "text", suffix: "per item" });
+      expect(container.querySelector(".suffix").innerHTML).toContain("per item");
+    });
+  })
 });
