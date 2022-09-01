@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 interface WCProps {
   heading?: string;
   url?: string;
+  maxcontentwidth?: string;
 }
 
 declare global {
@@ -17,12 +18,13 @@ declare global {
 interface Props {
   heading?: string;
   url?: string;
+  maxContentWidth?: string;
   children?: React.ReactNode;
 }
 
-export const GoAAppHeader: FC<Props> = ({ heading, url, children }) => {
+export const GoAAppHeader: FC<Props> = ({ heading, url, maxContentWidth, children }) => {
   return (
-    <goa-app-header heading={heading} url={url}>
+    <goa-app-header heading={heading} url={url} maxcontentwidth={maxContentWidth}>
       {children}
     </goa-app-header>
   )

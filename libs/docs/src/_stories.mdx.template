@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Tabs, Tab, CodeSnippet, SupportInfo, Markdown } from '@abgov/shared/storybook-common';
+import { Props, Prop, Tabs, Tab, CodeSnippet, SupportInfo, Markdown } from '@abgov/shared/storybook-common';
 import { GoABadge } from '@abgov/react-components';
 
 <Meta title="Components/[Document Title]" />
@@ -11,6 +11,12 @@ import { GoABadge } from '@abgov/react-components';
 [Figma design component](https://www.figma.com/file/???)
 
 ---
+
+#### Properties
+
+<Props>
+  <Prop name="" type="string" description="" defaultValue="" />
+</Props>
 
 #### Basic
 

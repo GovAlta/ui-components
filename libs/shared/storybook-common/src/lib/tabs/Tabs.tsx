@@ -60,7 +60,7 @@ function Tabs(props: TabsProps): JSX.Element {
 
 interface TabProps {
   label: string;
-  hidden: boolean;
+  hidden?: boolean;
 }
 
 function Tab(props: TabProps & { children: ReactNode }): JSX.Element {
