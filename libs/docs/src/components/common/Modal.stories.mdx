@@ -5,6 +5,8 @@ import {
   Tab,
   Note,
   CodeSnippet,
+  Props,
+  Prop,
 } from '@abgov/shared/storybook-common';
 import { GoAButton, GoAButtonGroup, GoAModal } from '@abgov/react-components';
 import { useState } from 'react';
@@ -15,10 +17,46 @@ import { useState } from 'react';
 
 ### A modal is a type of window that appears in front of the main page content and disables all other functionality while visible. Modals purposefully disrupt the user's workflow to capture their attention. The content in a modal should be succinct, direct, and contextually relevant to the user.
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DIO-DS?node-id=622%3A13874)
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=633%3A10740)
 
 ---
-#### Basic 
+
+#### Properties
+
+<Props>
+  <Prop
+    name="heading"
+    type="string"
+    description="Modal title text"
+  />
+  <Prop
+    name="open"
+    type="boolean"
+    description="Controls if modal is visible or not"
+  />
+  <Prop
+    name="closable"
+    type="boolean"
+    description="Show close icon and allow clicking the background to close the modal"
+  />
+  <Prop
+    name="transition"
+    type="fast | slow | none"
+    description="How modal transition onto screen"
+  />
+  <Prop
+    name="_close"
+    type="CustomEvent"
+    description="Dispatched when modal is closable and is closed."
+  />
+  <Prop
+    name="actions"
+    type="slot"
+    description="Content displayed in the top right of the heading bar"
+  />
+</Props>
+
+#### Basic
 
 export const NoActionsTemplate = (args) => {
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +82,7 @@ export const NoActionsTemplate = (args) => {
 <Story name="Basic">{NoActionsTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -125,7 +163,6 @@ export const NoActionsTemplate = (args) => {
   </Tab>
 </Tabs>
 
-
 #### With actions
 
 export const ActionsTemplate = (args) => {
@@ -139,10 +176,10 @@ export const ActionsTemplate = (args) => {
         actions={
           <GoAButtonGroup alignment="end">
             <GoAButton type="secondary" onClick={() => setShowModal(false)}>
-              Secondary 
+              Secondary
             </GoAButton>
             <GoAButton type="primary" onClick={() => setShowModal(false)}>
-              Primary 
+              Primary
             </GoAButton>
           </GoAButtonGroup>
         }
@@ -161,7 +198,7 @@ export const ActionsTemplate = (args) => {
 <Story name="With actions">{ActionsTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -257,21 +294,27 @@ export const ActionsTemplate = (args) => {
   </Tab>
 </Tabs>
 
-#### Transitions 
+#### Transitions
 
 export const TransitionsTemplate = (args) => {
   const [showModal, setShowModal] = useState(false);
-  const [speed, setSpeed] = useState("none");
+  const [speed, setSpeed] = useState('none');
   function show(speed) {
-    setSpeed(speed)
-    setShowModal(true)  
+    setSpeed(speed);
+    setShowModal(true);
   }
   return (
     <>
       <GoAButtonGroup>
-        <GoAButton type="tertiary" onClick={() => show("none")}>None</GoAButton>
-        <GoAButton type="tertiary" onClick={() => show("slow")}>Slow</GoAButton>
-        <GoAButton type="tertiary" onClick={() => show("fast")}>Fast (default)</GoAButton>
+        <GoAButton type="tertiary" onClick={() => show('none')}>
+          None
+        </GoAButton>
+        <GoAButton type="tertiary" onClick={() => show('slow')}>
+          Slow
+        </GoAButton>
+        <GoAButton type="tertiary" onClick={() => show('fast')}>
+          Fast (default)
+        </GoAButton>
       </GoAButtonGroup>
       <GoAModal
         heading="Do you agree?"
@@ -293,7 +336,7 @@ export const TransitionsTemplate = (args) => {
 <Story name="Transitions">{TransitionsTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       lang="html"
       code={`
@@ -320,7 +363,7 @@ export const TransitionsTemplate = (args) => {
       const modal = document.getElementById('modal');
       for (const button of buttons) {
         button.addEventListener('_click', () => {
-          modal.setAttribute("transition", button.dataset.transition); 
+          modal.setAttribute("transition", button.dataset.transition);
           modal.setAttribute("open", true)
         });
       }
@@ -376,7 +419,7 @@ export const TransitionsTemplate = (args) => {
         const [speed, setSpeed] = useState("none");
         function show(speed) {
           setSpeed(speed)
-          setShowModal(true)  
+          setShowModal(true)
         }
         return (
           <>

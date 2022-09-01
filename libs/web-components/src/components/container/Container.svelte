@@ -4,8 +4,8 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
 
-  export let variant: 'primary' | 'info' | 'error' | 'success' | 'warning' | 'default' = 'default'
-  export let colored: string = "false"; 
+  export let variant: 'interactive' | 'info' | 'error' | 'success' | 'important' | 'non-interactive' = 'non-interactive'
+  export let colored: string = "false";
   export let headingsize: 'large' | 'small' | 'none' = 'large';
   export let padding: "relaxed" | "compact" = "relaxed"
 
@@ -13,9 +13,9 @@
 </script>
 
 <!-- HTML -->
-<div 
+<div
   class={`
-    goa-container 
+    goa-container
     goa-container--${variant}
     padding--${padding}
   `}
@@ -75,11 +75,11 @@
 
   /* Colored */
 
-  .goa-container--default.colored .content {
+  .goa-container--non-interactive.colored .content {
     border-color: var(--color-gray-200);
     background-color: var(--color-gray-100);
   }
-  .goa-container--warning.colored .content {
+  .goa-container--important.colored .content {
     border-color: var(--goa-color-status-warning);
     background-color: var(--goa-color-status-warning-50);
   }
@@ -96,20 +96,19 @@
     background-color: var(--goa-color-status-info-50);
   }
 
-  .title > *,
-  .actions > * {
-    line-height: 3rem;
+  .title, .actions {
+    padding: 0.5rem 0;
   }
 
   /* Padding variants */
 
   .padding--relaxed header {
     padding: 0 1.5rem;
-  } 
+  }
 
   .padding--relaxed .content {
     padding: 1.5rem;
-  } 
+  }
 
   .padding--compact header,
   .padding--compact .content {
@@ -128,21 +127,21 @@
   @media screen and (max-width: 480px) {
     .padding--relaxed header {
       padding: 0 1rem;
-    } 
+    }
     .padding--relaxed .content {
       padding: 1rem;
-    } 
+    }
   }
 
   /* colors */
 
-  .goa-container--default header {
+  .goa-container--non-interactive header {
     background-color: var(--color-gray-100);
     border-color: var(--color-gray-200);
     color: var(--color-black);
   }
 
-  .goa-container--primary header {
+  .goa-container--interactive header {
     background-color: var(--goa-color-brand);
     border-color: var(--goa-color-brand);
     color: var(--color-white);
@@ -168,7 +167,7 @@
     color: var(--color-white);
   }
 
-  .goa-container--warning header {
+  .goa-container--important header {
     background-color: var(--goa-color-status-warning);
     border-color: var(--goa-color-status-warning);
     color: var(--color-white);

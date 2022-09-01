@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 interface WCProps {
-  title?: string;
+  heading?: string;
   url?: string;
 }
 
@@ -15,13 +15,13 @@ declare global {
 }
 
 interface Props {
-  title?: string;
+  heading?: string;
   url?: string;
 }
 
-export const GoAAppHeader: FC<Props> = ({ title, url, children }) => {
+export const GoAAppHeader: FC<Props> = ({ heading, url, children }) => {
   return (
-    <goa-app-header title={title} url={url}>
+    <goa-app-header heading={heading} url={url}>
       {children}
     </goa-app-header>
   )

@@ -7,14 +7,14 @@ describe('Callout', () => {
     const result = render(
       <GoACallout
         type='information'
-        title='Callout Title'
+        heading='Callout Title'
       >
         Information to the user goes in the content. Information can include markup as desired.
       </GoACallout>
     );
 
     const el = result.container.querySelector("goa-callout");
-    expect(el.getAttribute('title')).toContain('Callout Title');
+    expect(el.getAttribute('heading')).toContain('Callout Title');
     expect(el.getAttribute('type')).toContain('information');
   });
 });

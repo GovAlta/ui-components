@@ -20,9 +20,7 @@
   export let inverted: string;
 
   // private
-  $: css = `goa-icon-button goa-icon-button--${variant} ${
-    isInverted ? "goa-icon-button--inverted" : ""
-  }`;
+  $: css = `${variant} ${isInverted ? "inverted" : ""}`;
   $: isDisabled = toBoolean(disabled);
   $: isInverted = toBoolean(inverted);
 
@@ -52,32 +50,32 @@
 
 <style>
   :host {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     box-sizing: border-box;
     font-family: var(--font-family);
   }
-  .goa-icon-button,
-  .goa-icon-button * {
+  button,
+  button * {
     box-sizing: border-box;
   }
 
-  .goa-icon-button {
+  button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     background: transparent;
     cursor: pointer;
-    padding: 0;
     border: none;
   }
 
-  .goa-icon-button--color {
+  .color {
     border-radius: 0.5rem;
     padding: calc(var(--size) / 4);
   }
 
   /* Primary */
-  .goa-icon-button--color {
+  .color {
     border-radius: 0.5rem;
     color: var(--goa-color-interactive);
     fill: var(--goa-color-interactive);
@@ -85,27 +83,27 @@
     transition: background-color 100ms ease-in, transform 100ms ease-in;
   }
 
-  .goa-icon-button--color:active,
-  .goa-icon-button--nocolor:active {
+  .color:active,
+  .nocolor:active {
     transform: scale(0.9);
     border: none;
   }
 
-  .goa-icon-button--color:hover {
+  .color:hover {
     background-color: var(--goa-color-primary-light);
   }
 
-  .goa-icon-button--color.goa-icon-button--inverted:hover {
+  .color.inverted:hover {
     background-color: var(--goa-color-primary-dark);
   }
 
-  .goa-icon-button:disabled {
+  button:disabled {
     color: var(--color-gray-200);
     fill: var(--color-gray-200);
     transform: none;
     cursor: default;
   }
-  .goa-icon-button:disabled:hover {
+  button:disabled:hover {
     background-color: transparent;
   }
 </style>

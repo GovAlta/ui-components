@@ -1,20 +1,24 @@
 import * as React from 'react';
 import { GoADropdown, GoADropdownOption } from "@abgov/react-components";
-import { useState } from 'react';
 
 export default function Dropdown() {
 
-  const [value, setValue] = useState('');
-
-  function onChange(name: string, value: any) {
-    setValue(value);
+  function noop(name: string, value: string | string[]) {
+    // do nothing
   }
 
-  const [value2, setValue2] = useState('');
-
-  function onChange2(name: string, value: any) {
-    setValue2(value);
-  }
+  const dynamicItems = [
+    {
+      name: "Fruits", 
+      value: "banana",
+      options: [{value: "apple"}, {value: "orange"}, {value: "banana"}]
+    },
+    {
+      name: "Vegetables", 
+      value: "carrot",
+      options: [{value: "brocolli"}, {value: "carrot"}, {value: "spinach"}]
+    },
+  ]
 
   return (
     <>
@@ -22,36 +26,42 @@ export default function Dropdown() {
       <GoADropdown
         name="colors"
         placeholder="Select a user"
-        value={value}
-        onChange={onChange}
+        value="blue"
+        onChange={noop}
       >
-        <GoADropdownOption value="red" name="colors" label="Red"></GoADropdownOption>
-        <GoADropdownOption
-          value="green"
-          name="colors"
-          label="Green"
-        ></GoADropdownOption>
-        <GoADropdownOption
-          value="blue"
-          name="colors"
-          label="Blue"
-        ></GoADropdownOption>
+        <GoADropdownOption value="red" name="colors" label="Red" />
+        <GoADropdownOption value="green" name="colors" label="Green" />
+        <GoADropdownOption value="blue" name="colors" label="Blue" />
       </GoADropdown >
 
       <h3>Error</h3>
-      <GoADropdown name="colors2" placeholder="Select a user" error={true} value={value2} onChange={onChange2}>
-        <GoADropdownOption value="red" name="colors2" label="Red"></GoADropdownOption>
-        <GoADropdownOption
-          value="green"
-          name="colors2"
-          label="Green"
-        ></GoADropdownOption>
-        <GoADropdownOption
-          value="blue"
-          name="colors2"
-          label="Blue"
-        ></GoADropdownOption>
+      <GoADropdown 
+        name="colors2" 
+        placeholder="Select a user" 
+        error={true} 
+        value="green" 
+        onChange={noop}
+      >
+        <GoADropdownOption value="red" name="colors2" label="Red" />
+        <GoADropdownOption value="green" name="colors2" label="Green" />
+        <GoADropdownOption value="blue" name="colors2" label="Blue" />
       </GoADropdown>
+
+      <h3>Dynamic</h3>
+      {dynamicItems.map(item => 
+        <div>
+          <GoADropdown 
+            key={item.name} 
+            name={item.name} 
+            value={item.value} 
+            onChange={noop}
+          >
+            {item.options.map(option => 
+              <GoADropdownOption key={option.value} value={option.value} name={item.name} label={option.value} />
+            )} 
+          </GoADropdown>
+        </div>
+      )}
     </>
   );
 }

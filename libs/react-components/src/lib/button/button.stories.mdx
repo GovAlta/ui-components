@@ -23,7 +23,7 @@ import { DoDont } from '@abgov/shared/storybook-common';
     variant: {
       control: {
         type: 'select',
-        options: ['default', 'danger'],
+        options: ['default', 'destructive'],
       },
     },
     size: {
@@ -108,10 +108,10 @@ export const Template = (args) => {
 
 <Canvas>
   <Story
-    name="Danger - large"
+    name="Destructive - large"
     args={{
       size: 'large',
-      variant: 'danger',
+      variant: 'destructive',
       title: 'Delete',
       onClick: (value) => {
         action('button clicked')(value);
@@ -124,10 +124,10 @@ export const Template = (args) => {
 
 <Canvas>
   <Story
-    name="Danger - medium"
+    name="Destructive - medium"
     args={{
       size: 'medium',
-      variant: 'danger',
+      variant: 'destructive',
       title: 'Delete',
       onClick: (value) => {
         action('button clicked')(value);
@@ -140,10 +140,10 @@ export const Template = (args) => {
 
 <Canvas>
   <Story
-    name="Danger - small"
+    name="Destructive - small"
     args={{
       size: 'small',
-      variant: 'danger',
+      variant: 'destructive',
       title: 'Delete',
       onClick: (value) => {
         action('button clicked')(value);
@@ -159,7 +159,7 @@ export const Template = (args) => {
 ```html
 <GoAButton type="primary" title="Save"> Save </GoAButton>
 
-<GoAButton variant="danger" type="primary" title="Delete"> Delete </GoAButton>
+<GoAButton variant="destructive" type="primary" title="Delete"> Delete </GoAButton>
 ```
 
 ## Properties

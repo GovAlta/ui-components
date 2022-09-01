@@ -38,7 +38,7 @@ describe('GoA Button', () => {
   })
 
   describe("type", () => {
-    ["primary", "secondary", "tertiary"].forEach((type: ButtonType) => {
+    ["primary", "submit", "secondary", "tertiary"].forEach((type: ButtonType) => {
       it(`should render ${type} type`, async () => {
         const { container }= render(<GoAButton type={type} onClick={noop}>Button</GoAButton>);
         const button = container.querySelector("goa-button");

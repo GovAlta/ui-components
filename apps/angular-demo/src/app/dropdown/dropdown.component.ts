@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'abgov-dropdown',
@@ -9,6 +9,19 @@ export class DropdownComponent {
 
   colors: string[] = ['red', 'green', 'blue'];
   selectedColor = "red";
+
+  groups = [
+    {
+      name: "Fruits", 
+      value: "banana",
+      items: [{value: "apple"}, {value: "orange"}, {value: "banana"}]
+    },
+    {
+      name: "Vegetables", 
+      value: "carrot",
+      items: [{value: "brocolli"}, {value: "carrot"}, {value: "spinach"}]
+    },
+  ]
 
   constructor() { }
 

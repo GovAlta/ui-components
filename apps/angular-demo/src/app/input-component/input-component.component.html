@@ -6,11 +6,24 @@
 ></goa-input>
 
 <h3>Icons</h3>
-<goa-input leadingicon="finger-print"></goa-input>
-<goa-input trailingicon="finger-print"></goa-input>
+<goa-input name="foo" leadingicon="finger-print"></goa-input>
+<goa-input name="foo" trailingicon="finger-print"></goa-input>
+
+<h3>Number</h3>
+<goa-input name="foo" type="number" min="0" max="10" step="2"></goa-input>
+<goa-input name="foo" type="number"></goa-input>
+
+<h3>Date and time</h3>
+<goa-input name="foo" type="date"></goa-input>
+<goa-input name="foo" type="datetime-local"></goa-input>
+<goa-input name="foo" type="time"></goa-input>
+<goa-input name="foo" type="time" min="" max=""></goa-input>
+
+<goa-input type="date" name="Date with min max" [value]="valueDate" [min]="minDate" (_change)="onChange($event)"></goa-input>
 
 <h3>Icon Buttons</h3>
 <goa-input
+  name="foo"
   trailingicon="finger-print"
   handletrailingiconclick="true"
   (_trailingIconClick)="handleTrailingIconClick()"
@@ -18,13 +31,13 @@
 ></goa-input>
 
 <h3>Disabled</h3>
-<goa-input disabled="true" placeholder="Find by name"></goa-input>
+<goa-input name="foo" disabled="true" placeholder="Find by name"></goa-input>
 
 <h3>Error state</h3>
-<goa-input error></goa-input>
+<goa-input name="foo" error></goa-input>
 
 <h3>Focus</h3>
-<goa-input></goa-input>
+<goa-input name="foo"></goa-input>
 
 <h3>Character count</h3>
 <goa-input name="firstname" showcounter="true"></goa-input>

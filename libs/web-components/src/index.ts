@@ -22,7 +22,6 @@ export { default as GoAIconButton } from './components/icon-button/IconButton.sv
 export { default as GoAInput } from './components/input/Input.svelte';
 export { default as GoAModal } from "./components/modal/Modal.svelte";
 export { default as GoANotification } from "./components/notification/Notification.svelte";
-export { default as GoAPageLayout } from "./layouts/PageLayout.svelte";
 export { default as GoACircularProgress } from "./components/circular-progress/CircularProgress.svelte";
 export { default as GoARadioGroup } from "./components/radio-group/RadioGroup.svelte";
 export { default as GoARadioItem } from "./components/radio-group/RadioItem.svelte";
@@ -36,6 +35,8 @@ export { default as GoAFocusTrap } from "./components/focus-trap/FocusTrap.svelt
 export * from "./components/footer/Footer.svelte";
 export * from "./components/footer-nav-section/FooterNavSection.svelte";
 export * from "./components/footer-meta-section/FooterMetaSection.svelte";
+export * from "./components/flex-column/FlexColumn.svelte";
+export * from "./layouts/FullScreenNavbarLayout.svelte";
 
 
 // Wrappers

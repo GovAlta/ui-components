@@ -9,7 +9,7 @@ import {
   GoAInfoBadge,
   GoAEmergencyBadge,
   GoASuccessBadge,
-  GoAWarningBadge,
+  GoAImportantBadge,
 } from './lib/badge/badge';
 
 import {
@@ -56,6 +56,8 @@ import { GoATextArea } from './lib/textarea/textarea';
 import type { GoAIconType } from './lib/icons';
 // import type { BadgeType as GoABadgeType } from '@abgov/shared-common'
 import type { GoABadgeType } from './lib/badge/badge';
+
+export * from './lib/page/page';
 
 export * from './lib/footer/footer';
 
@@ -116,5 +118,5 @@ export {
   GoASpinner,
   GoASuccessBadge,
   GoATextArea,
-  GoAWarningBadge,
+  GoAImportantBadge,
 };

@@ -4,19 +4,22 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
 
+  export let active: string;
+
   let ignoreFocusChanges: boolean = false;
   let lastFocus: Element;
   let element: Element;
+  let hasListeners: boolean = false;
 
-  export let open: string;
-  $: isOpen = toBoolean(open);
-
+  $: isActive = toBoolean(active);
   $: {
-    if (isOpen) {
+    if (isActive && !hasListeners) {
       addListeners();
+      hasListeners = true;
     }
-    else {
+    if (!isActive && hasListeners) {
       removeListeners();
+      hasListeners = false;
     }
   }
 
@@ -28,146 +31,117 @@
     document.addEventListener('focus', trapFocus, true);
   }
 
-  function attemptFocusOnFirstDescendant(descendants: NodeList | Node[]) {
+  // ====
+  // First Node 
+  // ====
 
-    if (!descendants) return false;
+  function focusOnFirstNode(nodes: NodeList | Node[]): boolean {
+    if (!nodes) return false;
 
-    for (let i = 0; i < descendants.length; i++) {
+    for (const node of nodes) {
+      const isFocusable 
+        = focus(node)
+        ||  focusOnFirstNode(node.childNodes)
+        ||  focusOnFirstNodeOfSlot(node)
+        ||  focusOnFirstNodeOfShadowDOM(node);
 
-      let descendant = descendants[i];
-
-      if (attemptFocus(descendant) ||
-          attemptFocusOnFirstDescendant(descendant.childNodes) ||
-          attemptFocusOnFirstDescendantOfSlotElement(descendant) ||
-          attemptFocusOnFirstDescendantOfShadowDOM(descendant)) {
+      if (isFocusable) {
         return true;
       }
+    }
+    return false;
+  };
 
+  function focusOnFirstNodeOfSlot(node: Node): boolean {
+    if (!(node instanceof HTMLSlotElement)) return false;
+
+    if (focusOnFirstNode(node.assignedNodes())) {
+      return true;
+    }
+  }
+
+  function focusOnFirstNodeOfShadowDOM(node: Node): boolean {
+    if (!(node instanceof HTMLElement)) return false;
+
+    if (focusOnFirstNode(node.shadowRoot?.childNodes)) {
+      return true;
+    }
+  }
+
+  // ====
+  // Last Node 
+  // ====
+
+  function focusOnLastNode(nodes: NodeList | Node[]): boolean {
+    if (!nodes) return false;
+
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      let node = nodes[i];
+      if (focus(node) ||
+          focusOnLastNode(node.childNodes) ||
+          focusOnLastNodeOfSlot(node) ||
+          focusOnLastNodeOfShadowDOM(node)) {
+        return true;
+      }
     }
 
     return false;
   };
 
-  function attemptFocusOnFirstDescendantOfSlotElement(node: Node) {
+  function focusOnLastNodeOfSlot(node: Node): boolean {
+    if (!(node instanceof HTMLSlotElement)) return false;
 
-    if (node instanceof HTMLSlotElement) {
-
-      let assingedNodesOfSlotElement = (node as HTMLSlotElement)?.assignedNodes();
-
-      if (attemptFocusOnFirstDescendant(assingedNodesOfSlotElement)) {
-        return true;
-      }
+    if (focusOnLastNode(node.assignedNodes())) {
+      return true;
     }
   }
 
-  function attemptFocusOnFirstDescendantOfShadowDOM(node: Node) {
+  function focusOnLastNodeOfShadowDOM(node: Node): boolean {
+    if (!(node instanceof HTMLElement)) return false;
 
-    if (node instanceof HTMLElement) {
-
-      let childNodesOfShadowRoot = (node as HTMLElement)?.shadowRoot?.childNodes;
-
-      if (attemptFocusOnFirstDescendant(childNodesOfShadowRoot)) {
-        return true;
-      }
-    }
-  }
-
-  function attemptFocusOnLastDescendant(descendants: NodeList | Node[]) {
-
-    if (!descendants) return false;
-
-    for (let i = descendants.length - 1; i >= 0; i--) {
-
-      let descendant = descendants[i];
-
-      if (attemptFocus(descendant) ||
-          attemptFocusOnLastDescendant(descendant.childNodes) ||
-          attemptFocusOnLastDescendantOfSlotElement(descendant) ||
-          attemptFocusOnLastDescendantOfShadowDOM(descendant)) {
-        return true;
-      }
-
-    }
-
-    return false;
-  };
-
-  function attemptFocusOnLastDescendantOfSlotElement(node: Node) {
-
-    if (node instanceof HTMLSlotElement) {
-
-      let assingedNodesOfSlotElement = (node as HTMLSlotElement)?.assignedNodes();
-
-      if (attemptFocusOnLastDescendant(assingedNodesOfSlotElement)) {
-        return true;
-      }
-    }
-  }
-
-  function attemptFocusOnLastDescendantOfShadowDOM(node: Node) {
-
-    if (node instanceof HTMLElement) {
-
-      let childNodesOfShadowRoot = (node as HTMLElement)?.shadowRoot?.childNodes;
-
-      if (attemptFocusOnLastDescendant(childNodesOfShadowRoot)) {
-        return true;
-      }
+    if (focusOnLastNode(node.shadowRoot?.childNodes)) {
+      return true;
     }
   }
 
 
-  function attemptFocus(element) {
-
-    if (!isFocusable(element)) {
-      return false;
-    }
-
-    ignoreFocusChanges = true;
+  function focus(element): boolean {
+    if (!isFocusable(element)) return false;
 
     try {
+      ignoreFocusChanges = true;
       element.focus();
-    }
-    catch (e) {
+    } catch(e) {}
+    finally {
+      ignoreFocusChanges = false;
     }
 
-    ignoreFocusChanges = false;
     return (document.activeElement === element);
   };
 
-  function trapFocus(event) {
-
-    if (ignoreFocusChanges) {
-      return;
-    }
+  function trapFocus(event): void {
+    if (ignoreFocusChanges) return;
 
     const slotElements = (element.firstChild as HTMLSlotElement)?.assignedElements();
-
     if (!slotElements?.length) return;
 
     const contentRootElement = slotElements[0];
-
     if (event.composedPath().includes(contentRootElement)) {
       lastFocus = event.target;
+      return;
     }
-    else {
-      attemptFocusOnFirstDescendant(contentRootElement.childNodes);
-      if (lastFocus == document.activeElement) {
-        attemptFocusOnLastDescendant(contentRootElement.childNodes);
-      }
-      lastFocus = document.activeElement;
+
+    focusOnFirstNode(contentRootElement.childNodes);
+    if (lastFocus == document.activeElement) {
+      focusOnLastNode(contentRootElement.childNodes);
     }
+    lastFocus = document.activeElement;
   };
 
-  function isFocusable(element) {
-
-    if (element.tabIndex > 0 || (element.tabIndex === 0 && element.getAttribute('tabIndex') !== null)) {
-      return true;
-    }
-
-    if (element.disabled) {
-      return false;
-    }
+  function isFocusable(element): boolean {
+    const isTabbable = element.tabIndex > 0 || (element.tabIndex === 0 && element.getAttribute('tabIndex') !== null);
+    if (isTabbable) return true;
+    if (element.disabled) return false;
 
     switch (element.nodeName) {
       case 'A':
@@ -187,4 +161,7 @@
 
 <div bind:this={element}>
   <slot />
+  <!-- When goa-modal is the last display element in a page,
+    the tab key press jumps out. The empty span with tabIndex="0" keeps the focus trapped mysteriously-->
+  <span tabindex="0"></span>
 </div>

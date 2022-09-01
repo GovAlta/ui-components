@@ -19,22 +19,29 @@ interface TabsProps {
 function Tabs(props: TabsProps): JSX.Element {
   const [activeTabIndex, setActiveTabIndex] = useState(props.activeIndex);
 
+  useEffect(() => {
+    setActiveTabIndex(props.activeIndex ?? 0);
+  }, [props.activeIndex]);
+
   function selectTab(index: number) {
     setActiveTabIndex(index);
   }
 
-  useEffect(() => {
-    setActiveTabIndex(props.activeIndex ?? 0);
-  }, [props.activeIndex]);
+  function activeChildren(): ReactNode[] {
+    return Children
+      .toArray(props.children) 
+      .filter(child => !child?.["props"]?.["hidden"])
+  }
 
   return (
     <>
       <SCTabs>
         {
           // eslint-disable-next-line
-          Children.map<JSX.Element, any>(props.children, (child: any, index: number) => {
+          activeChildren() 
+            .map((child: JSX.Element, index: number) => {
             return (
-              <TabItem active={activeTabIndex === index} onSelect={() => selectTab(index)}>
+              <TabItem key={child.key} visible={!child.props.hidden} active={activeTabIndex === index} onSelect={() => selectTab(index)}>
                 {child.props.label}
               </TabItem>
             );
@@ -43,7 +50,7 @@ function Tabs(props: TabsProps): JSX.Element {
       </SCTabs>
       {
         // eslint-disable-next-line
-        Children.toArray(props.children).filter((_child: any, index: number) => {
+        activeChildren().filter((_child: any, index: number) => {
           return index === activeTabIndex;
         })
       }
@@ -53,6 +60,7 @@ function Tabs(props: TabsProps): JSX.Element {
 
 interface TabProps {
   label: string;
+  hidden: boolean;
 }
 
 function Tab(props: TabProps & { children: ReactNode }): JSX.Element {
@@ -68,11 +76,16 @@ export { Tabs, Tab };
 interface TabItemProps {
   onSelect: () => void;
   active?: boolean;
+  visible: boolean;
 }
 
 function TabItem(props: TabItemProps & { children: ReactNode }) {
   function selectTab() {
     props.onSelect();
+  }
+
+  if (!props.visible) {
+    return <span></span>;
   }
   return (
     <SCTab className={props.active && 'active'} onClick={() => selectTab()}>

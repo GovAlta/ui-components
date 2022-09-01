@@ -13,15 +13,28 @@
   // private
   let ctx: ContextStore;
 
-  // Hooks
-  onMount(async () => {
-    ctx = await getContext(name);
-    ctx.notify({
-      type: BIND,
-      name,
-      label,
-      value,
-    });
-  });
+  onMount(() => {
+    const maxAttempts = 10;
+    let attempts = 0; 
+    const fn = setInterval(() => {
+      if (name && value) {
+        ctx = getContext(name);
+        if (!ctx) {
+          return;
+        }
+        ctx.notify({
+          type: BIND,
+          name,
+          label,
+          value,
+        });
+        clearInterval(fn);
+      }
+      if (attempts > maxAttempts) {
+        console.error("goa-dropdown-item: missing the required `name` attribute. It must match the parent's name attribute")
+        clearInterval(fn);
+      }
+    }, 10);
+  })
 
 </script>

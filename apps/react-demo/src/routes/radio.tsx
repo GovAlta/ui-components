@@ -7,6 +7,19 @@ export default function Radio() {
     console.log('onChange', name, value);
   }
 
+  const dynamicItems = [
+    {
+      name: "Fruits", 
+      value: "banana",
+      options: [{value: "apple"}, {value: "orange"}, {value: "banana"}]
+    },
+    {
+      name: "Vegetables", 
+      value: "carrot",
+      options: [{value: "brocolli"}, {value: "carrot"}, {value: "spinach"}]
+    },
+  ]
+
   return (
     <>
       <h3>Basic</h3>
@@ -43,6 +56,18 @@ export default function Radio() {
         <GoARadioItem name="color5" value="blue"></GoARadioItem>
         <GoARadioItem name="color5" value="orange"></GoARadioItem>
       </GoARadioGroup >
+
+      <h3>Dynamic</h3>
+      {dynamicItems.map(item => 
+        <div>
+          <h4>{item.name}</h4>
+          <GoARadioGroup key={item.name} name={item.name} value={item.value} onChange={onChange}>
+            {item.options.map(option => 
+              <GoARadioItem key={option.value} value={option.value} name={item.name} label={option.value} />
+            )} 
+          </GoARadioGroup>
+        </div>
+      )}
 
     </>
   );

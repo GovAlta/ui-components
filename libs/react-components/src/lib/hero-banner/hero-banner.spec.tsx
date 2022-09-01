@@ -10,19 +10,19 @@ describe('GoAHeroBanner', () => {
   it('renders all with properties', () => {
     const { baseElement } = render(
       <GoAHeroBanner
-        title="Upgrading our bitumen"
+        heading="Upgrading our bitumen"
         backgroundUrl="some-bg.png"
       />
     );
     const el = baseElement.querySelector('goa-hero-banner');
-    expect(el.getAttribute("title")).toEqual("Upgrading our bitumen");
+    expect(el.getAttribute("heading")).toEqual("Upgrading our bitumen");
     expect(el.getAttribute("backgroundurl")).toEqual("some-bg.png");
   });
 
   it('renders content', async () => {
     const { baseElement } = render(
       <GoAHeroBanner
-        title="Upgrading our bitumen"
+        heading="Upgrading our bitumen"
         backgroundUrl="some-bg.png"
       >
         This is the hero banner content
@@ -35,7 +35,7 @@ describe('GoAHeroBanner', () => {
   it('renders actions', async () => {
     const { baseElement } = render(
       <GoAHeroBanner
-        title="Upgrading our bitumen"
+        heading="Upgrading our bitumen"
         backgroundUrl="some-bg.png"
       >
         This is the hero banner content

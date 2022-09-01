@@ -11,6 +11,8 @@
 
   onMount(async () => {
     await tick();
+
+    // remap slot content
     children = rootEl.querySelector("slot").assignedElements() as HTMLLinkElement[];
 
     const isValid = 

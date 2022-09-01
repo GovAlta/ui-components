@@ -6,11 +6,18 @@
 ></goa-textarea>
 
 <h3>Character count</h3>
-<goa-textarea name="firstname" showcounter="true"></goa-textarea>
+<goa-textarea
+  name="CharacterCountField"
+  [value]="characterCountFieldValue"
+  (_change)="characterCountOnChange($event)"
+  showcounter="true"
+></goa-textarea>
 
 <h3>Character count with limit</h3>
 <goa-textarea
-  name="firstname"
+  name="CharacterCountWithLimitField"
+  [value]="characterCountWithLimitValue"
+  (_change)="characterCountWithLimitOnChange($event)"
   showcounter="true"
   maxcharcount="20"
 ></goa-textarea>

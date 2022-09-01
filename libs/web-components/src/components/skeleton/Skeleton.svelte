@@ -4,7 +4,8 @@
 <script lang="ts">
   export let width: number = 320;
   export let size: number = 1;
-  export let type: "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile";
+  export let count: number = 3;
+  export let type: "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile" | "lines";
 </script>
 
 <!-- HTML -->
@@ -13,9 +14,7 @@
     <svelte:self type="image" {size} />
     <div class="card-content">
       <svelte:self type="header" {size} />
-      <svelte:self type="text" {size} />
-      <svelte:self type="text" {size} />
-      <svelte:self type="text" {size} />
+      <svelte:self type="lines" {size} count={3} />
     </div>
   </div>
 {:else if type === "profile"}
@@ -28,6 +27,10 @@
       <svelte:self type="text-small" {size} />
     </div>
   </div>
+{:else if type === "lines"}
+  {#each Array(count) as _item}
+    <svelte:self type="text" {size} {count} />
+  {/each}
 {:else}
   <div class="skeleton {type} {`${type}-${size}`}"></div>
 {/if}
@@ -77,11 +80,12 @@
   .text,
   .text-1,
   .text-2,
-  .text-4,
+  .text-3,
   .text-4 {
     width: 100%;
     height: .75rem;
     border-radius: 0.25rem;
+    margin: 6px 0;
   }
 
   .title,
@@ -130,25 +134,25 @@
   .header-1 {
     width: 50%;
     height: 18px;
-    margin-bottom: 12px;
+    margin: 12px 0;
     border-radius: 0.25rem;
   }
   .header-2 {
     width: 60%;
     height: 20px;
-    margin-bottom: 14px;
+    margin: 14px 0;
     border-radius: 0.25rem;
   }
   .header-3 {
     width: 70%;
     height: 22px;
-    margin-bottom: 16px;
+    margin: 16px 0;
     border-radius: 0.25rem;
   }
   .header-4 {
     width: 80%;
     height: 24px;
-    margin-bottom: 18px;
+    margin: 18px 0;
     border-radius: 0.3rem;
   }
 

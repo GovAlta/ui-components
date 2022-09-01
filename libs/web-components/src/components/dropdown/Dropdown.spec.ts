@@ -2,7 +2,10 @@ import '@testing-library/jest-dom';
 import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
 import GoADropdown from './DropdownWrapper.test.svelte';
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup()
+  jest.clearAllMocks();
+});
 
 describe('GoADropdown', () => {
 
@@ -28,6 +31,19 @@ describe('GoADropdown', () => {
         expect(option).toHaveTextContent(item);
       }
     });
+  });
+
+  it("raise an error if name is not supplied", async () => {
+    jest.spyOn(console, "error");
+    const items = ["red", "blue", "orange"];
+    render(GoADropdown, {
+      testid: 'test-id',
+      items,
+    });
+
+    await waitFor(() => {
+      expect(console.error["mock"].calls.length).toBeGreaterThan(0); 
+    })
   });
 
   describe("single selection", () => {
@@ -341,6 +357,36 @@ describe('GoADropdown', () => {
       await waitFor(() => {
         expect(menu).toHaveStyle("max-height: 400px");
       });
+    });
+  })
+
+  describe("aria-labels", () => {
+    it("show the aria label", async () => {
+      const items = ["red", "blue", "pink"];
+      const result = render(GoADropdown, {
+        testid: 'test-id',
+        name: 'favcolor',
+        arialabel: 'Favourite Color',
+        items,
+      });
+
+      const dropdown = result.queryByTestId("test-id");
+      const input = dropdown.querySelector('goa-input');
+
+      // selected value
+      expect(input).toHaveAttribute("aria-label", "Favourite Color")
+
+      fireEvent.click(input);
+
+      const menu = result.queryByTestId("dropdown-menu");
+      await waitFor(() => {
+        expect(menu).toHaveStyle("max-height: 300px");  // 300px is default value 
+
+        for (const item of items) {
+          const option = menu.querySelector(`li[data-testid="${item}-dropdown-item"]`);
+          expect(option).toHaveAttribute("aria-label", item)
+        }
+      }) 
     });
   })
 

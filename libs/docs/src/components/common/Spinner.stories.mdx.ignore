@@ -59,7 +59,7 @@ export const ButtonTemplate = (args) => (
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet lang="html" code={`
       <goa-spinner type="progress" size="small" />
       <goa-spinner type="progress" size="medium" />
@@ -92,7 +92,7 @@ export const ButtonTemplate = (args) => (
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet lang="html" code={`
       <goa-spinner type="progress" size="small" invert />
       <goa-spinner type="progress" size="medium" invert />
@@ -125,7 +125,7 @@ export const ButtonTemplate = (args) => (
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet lang="html" code={`
       <goa-spinner id="progress" type="progress" size="large" />
       <goa-spinner type="infinite" size="large" />
@@ -156,7 +156,7 @@ export const ButtonTemplate = (args) => (
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
+  <Tab label="Web Component" hidden={true}>
     <CodeSnippet lang="html" code={`
       <goa-button>
         Processing... <goa-spinner size="small" invert />

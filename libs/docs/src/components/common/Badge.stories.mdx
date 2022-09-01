@@ -1,7 +1,7 @@
-import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/addon-docs';
 
-import { action } from '@storybook/addon-actions';
-import { Tabs, Tab, Note, SupportInfo } from '@abgov/shared/storybook-common';
+import { Tabs, Tab, Note, SupportInfo, Props, Prop, CodeSnippet } from '@abgov/shared/storybook-common';
+import { GoABadge } from '@abgov/react-components';
 
 <Meta title="Components/Badge" />
 
@@ -12,167 +12,199 @@ which display minimal amounts of information, system feedback, or states.
 
 [Figma design component](https://www.figma.com/file/qWGWDvULAAZuVaDpXCRzqP/DS-Website?node-id=820%3A11807)
 
-<hr />
+---
 
-## Component Preview
+#### Properties
 
-<Story name="Badge with icon and text">
-  <goa-badge type="information" content="Information" icon />
-  &nbsp;
-  <goa-badge type="success" content="Success" icon />
-  &nbsp;
-  <goa-badge type="warning" content="Warning" icon />
-  &nbsp;
-  <goa-badge type="emergency" content="Emergency" icon />
-  &nbsp;
-  <goa-badge type="dark" content="Dark" icon />
-  &nbsp;
-  <goa-badge type="midtone" content="Midtone" icon />
-  &nbsp;
-  <goa-badge type="light" content="Light" icon />
-  &nbsp;
-</Story>
+<Props>
+  <Prop
+    name="type"
+    type="success | important | information | emergency | dark | midtone | light"
+    required={true}
+    description="Defines the context and colour of the badge"
+  />
+  <Prop
+    name="content"
+    type="string"
+    description="Badge text"
+  />
+  <Prop
+    name="icon"
+    type="boolean"
+    default={false}
+    description="Flag to show the icon corresponding to the defined type"
+  />
+</Props>
 
-<Story name="Badge with text only">
-  <goa-badge type="information" content="Information" />
-  &nbsp;
-  <goa-badge type="success" content="Success" />
-  &nbsp;
-  <goa-badge type="warning" content="Warning" />
-  &nbsp;
-  <goa-badge type="emergency" content="Emergency" />
-  &nbsp;
-  <goa-badge type="dark" content="Dark" />
-  &nbsp;
-  <goa-badge type="midtone" content="Midtone" />
-  &nbsp;
-  <goa-badge type="light" content="Light" />
-</Story>
+#### Basic
 
-<Story name="Badge with icon only">
-  <goa-badge type="information" icon />
-  &nbsp;
-  <goa-badge type="success" icon />
-  &nbsp;
-  <goa-badge type="warning" icon />
-  &nbsp;
-  <goa-badge type="emergency" icon />
-  &nbsp;
-  <goa-badge type="dark" icon />
-  &nbsp;
-  <goa-badge type="midtone" icon />
-  &nbsp;
-  <goa-badge type="light" icon />
+<Story name="Basic">
+  <GoABadge type="information" content="Information" />
+  <GoABadge type="success" content="Success" />
+  <GoABadge type="important" content="Important" />
+  <GoABadge type="emergency" content="Emergency" />
+  <GoABadge type="dark" content="Dark" />
+  <GoABadge type="midtone" content="Midtone" />
+  <GoABadge type="light" content="Light" />
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <pre>{`<goa-badge type="warning" content="Warning" icon />`}</pre>
-    <pre>{`<goa-badge type="warning" content="Warning" />`}</pre>
-    <pre>{`<goa-badge type="warning" icon />`}</pre>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" content="Information" />
+        <goa-badge type="success" content="Success" />
+        <goa-badge type="important" content="Important" />
+        <goa-badge type="emergency" content="Emergency" />
+        <goa-badge type="dark" content="Dark" />
+        <goa-badge type="midtone" content="Midtone" />
+        <goa-badge type="light" content="Light" />
+      `}
+    />
   </Tab>
   <Tab label="Angular">
-    <pre>{`<goa-badge type="warning" content="Warning" icon />`}</pre>
-    <pre>{`<goa-badge type="warning" content="Warning" />`}</pre>
-    <pre>{`<goa-badge type="warning" icon />`}</pre>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" content="Information"></goa-badge>
+        <goa-badge type="success" content="Success"></goa-badge>
+        <goa-badge type="important" content="Important"></goa-badge>
+        <goa-badge type="emergency" content="Emergency"></goa-badge>
+        <goa-badge type="dark" content="Dark"></goa-badge>
+        <goa-badge type="midtone" content="Midtone"></goa-badge>
+        <goa-badge type="light" content="Light"></goa-badge>
+      `}
+    />
   </Tab>
   <Tab label="React">
-    <pre>{`<GoABadge type="warning" content="Warning" icon />`}</pre>
-    <pre>{`<GoABadge type="warning" content="Warning" />`}</pre>
-    <pre>{`<GoABadge type="warning" icon />`}</pre>
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        <GoABadge type="information" content="Information" />
+        <GoABadge type="success" content="Success" />
+        <GoABadge type="important" content="Important" />
+        <GoABadge type="emergency" content="Emergency" />
+        <GoABadge type="dark" content="Dark" />
+        <GoABadge type="midtone" content="Midtone" />
+        <GoABadge type="light" content="Light" />
+      `}
+    />
   </Tab>
 </Tabs>
 
-## Layouts and variants
+#### Icons
 
-In order to provide flexibility and accommodate special use-cases, the icon before the text is optional.
 
-![](.images/2022-02-08-13-31-13.png)
+<Story name="Icon">
+  <GoABadge type="information" icon />
+  <GoABadge type="success" icon />
+  <GoABadge type="important" icon />
+  <GoABadge type="emergency" icon />
+  <GoABadge type="dark" icon />
+  <GoABadge type="midtone" icon />
+  <GoABadge type="light" icon />
+</Story>
 
-<Note type="best-practices">
-  Icons are optional and limited to the <strong>Essential Icons</strong> (as
-  indicated in Iconography) --{' '}
-  <i>Alert and Message Navigation and User Interface</i>
-</Note>
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" icon />
+        <goa-badge type="success" icon />
+        <goa-badge type="important" icon />
+        <goa-badge type="emergency" icon />
+        <goa-badge type="dark" icon />
+        <goa-badge type="midtone" icon />
+        <goa-badge type="light" icon />
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" icon></goa-badge>
+        <goa-badge type="success" icon></goa-badge>
+        <goa-badge type="important" icon></goa-badge>
+        <goa-badge type="emergency" icon></goa-badge>
+        <goa-badge type="dark" icon></goa-badge>
+        <goa-badge type="midtone" icon></goa-badge>
+        <goa-badge type="light" icon></goa-badge>
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        <GoABadge type="information" icon />
+        <GoABadge type="success" icon />
+        <GoABadge type="important" icon />
+        <GoABadge type="emergency" icon />
+        <GoABadge type="dark" icon />
+        <GoABadge type="midtone" icon />
+        <GoABadge type="light" icon />
+      `}
+    />
+  </Tab>
+</Tabs>
 
-The default badge surface is text without icon.
-There are also an icon + text and icon-only badge.
+<Story name="Text and Icon">
+  <GoABadge type="information" content="Information" icon />
+  <GoABadge type="success" content="Success" icon />
+  <GoABadge type="important" content="Important" icon />
+  <GoABadge type="emergency" content="Emergency" icon />
+  <GoABadge type="dark" content="Dark" icon />
+  <GoABadge type="midtone" content="Midtone" icon />
+  <GoABadge type="light" content="Light" icon />
+</Story>
 
-The icons used should be supplemental and enhance the semantic meaning of the badge, used sparingly, and only with semantic colours (as defined below).
-
-![](.images/2022-02-08-14-28-51.png)
-
-<Note type="caution">
-  The Icon-only badge is limited to only:
-  <ul>
-    <li>mobile implementations;</li>
-    <li>
-      if space is at a premium and a full badge would be detrimental to the
-      layout; and,
-    </li>
-    <li>
-      if the semantic meaning of the icon is sufficiently clear without the
-      text.
-    </li>
-  </ul>
-</Note>
-
-## Sizing, Padding and Margins
-
-### Text and Icon Sizing
-
-The text in the badge has the “Captions” properties (Weight: Regular, Size: 14, Line-height: 24) and the icon is 14px × 14px.
-
-<goa-badge type="information" content="Information" icon />
-
-#### Internal padding
-
-The internal padding of the badge is generally 4px for vertical padding and 8px for horizontal padding. However, due to better visual layout, the vertical spacing for the text is different, as outlined below.
-
-![](.images/2022-02-08-14-46-38.png)
-
-#### External margins
-
-The margins of the badge are minimum 4px all-round. In groups of other badges, this results 8px between neighbouring badges, both vertically and horizontally.
-
-With other non-badge elements, this margin is a minimum of 8px.
-
-![](.images/2022-02-08-14-47-57.png)
-
-## Colours
-
-#### Semantic Colours
-
-Badge colours used are in-line with already defined colours in the design system.
-
-The “Information” badge uses blue text on a grey ground.
-
-![](.images/2022-02-08-14-48-54.png)
-
-#### Custom Colours
-
-Recognizing and understanding there may be instances or scenarios where a unique colour is necessary, there is a certain amount of flexibility afforded to the badges. Ensure that the colours are in accordance with WCAG 2.0 standards, and maintain a contrast ratio of 4.5 or higher for all text sizes.
-
-<Note type="caution">
-  Custom colors should be used sparingly.
-
-There should be a very unique use-case or specific reason for this, and the colours should align to the Government of Alberta and Alberta.ca branding guidelines as closely as possible.
-
-</Note>
-
-#### The following general rules apply:
-
-1. Dark-coloured backgrounds are accessible with white text.
-2. Midtone and light-coloured backgrounds are accessible with dark text.
-
-<Note type="dont">
-  Don't use <strong>Interactive colours</strong> as these colours are reserved
-  for links, buttons, and other interactive elements. Badges are inherently used
-  for information and organization, not interactivity.
-  <br />
-  <br />
-  <img src=".images/2022-02-08-14-52-01.png" />
-</Note>
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" content="Information" icon />
+        <goa-badge type="success" content="Success" icon />
+        <goa-badge type="important" content="Important" icon />
+        <goa-badge type="emergency" content="Emergency" icon />
+        <goa-badge type="dark" content="Dark" icon />
+        <goa-badge type="midtone" content="Midtone" icon />
+        <goa-badge type="light" content="Light" icon />
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" content="Information" icon="true"></goa-badge>
+        <goa-badge type="success" content="Success" icon="true"></goa-badge>
+        <goa-badge type="important" content="Important" icon="true"></goa-badge>
+        <goa-badge type="emergency" content="Emergency" icon="true"></goa-badge>
+        <goa-badge type="dark" content="Dark" icon="true"></goa-badge>
+        <goa-badge type="midtone" content="Midtone" icon="true"></goa-badge>
+        <goa-badge type="light" content="Light" icon="true"></goa-badge>
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        <GoABadge type="information" content="Information" icon />
+        <GoABadge type="success" content="Success" icon />
+        <GoABadge type="important" content="Important" icon />
+        <GoABadge type="emergency" content="Emergency" icon />
+        <GoABadge type="dark" content="Dark" icon />
+        <GoABadge type="midtone" content="Midtone" icon />
+        <GoABadge type="light" content="Light" icon />
+      `}
+    />
+  </Tab>
+</Tabs>
 
 ---
 

@@ -1,15 +1,31 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import GoACard from './container';
+import GoAContainer from './container';
+import { GoAButton } from '../button/button';
 
-describe('GoA Card', () => {
-  const title = 'My Card title';
+describe('Container', () => {
 
-  it('should render title', () => {
-    const { baseElement } = render(
-      <GoACard type="primary" title={title} />
+  it("should render the properties", () => {
+    const { container } = render(<GoAContainer
+      variant="interactive"
+      colored={false}
+      headingSize="large"
+      padding="relaxed"
+      title={"Text title"}
+      actions={<GoAButton onClick={() => {}}>Save</GoAButton>}
+    >
+      Container content
+      </GoAContainer>
     );
 
-    expect(baseElement).toBeTruthy();
+    const el = container.querySelector("goa-container");
+    expect(el).toBeTruthy();
+    expect(el.getAttribute("variant")).toEqual("interactive");
+    expect(el.getAttribute("colored")).toEqual("false");
+    expect(el.getAttribute("headingsize")).toEqual("large");
+    expect(el.getAttribute("padding")).toEqual("relaxed");
+
+    expect(el.querySelector("*[slot=title]").innerHTML).toContain("Text title");
+    expect(el.querySelector("*[slot=actions]").querySelector("goa-button")).not.toBeFalsy();
   });
 });

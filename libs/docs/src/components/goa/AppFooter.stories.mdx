@@ -1,14 +1,25 @@
-import {
-  Meta,
-  Canvas,
-  Story,
-} from '@storybook/addon-docs';
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
 
 import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';
-import { SupportInfo, Tabs, Tab, Note, CodeSnippet } from '@abgov/shared/storybook-common';
-import { GoAAppFooter, GoAAppFooterNavSection, GoAAppFooterMetaSection, GoACallout, GoAMetaLink, GoANavigationLink } from '@abgov/react-components';
-import "@abgov/styles"
+import {
+  SupportInfo,
+  Tabs,
+  Tab,
+  Note,
+  CodeSnippet,
+  Props,
+  Prop,
+} from '@abgov/shared/storybook-common';
+import {
+  GoAAppFooter,
+  GoAAppFooterNavSection,
+  GoAAppFooterMetaSection,
+  GoACallout,
+  GoAMetaLink,
+  GoANavigationLink,
+} from '@abgov/react-components';
+import '@abgov/styles';
 
 <Meta title="Components/AppFooter" component={GoAAppFooter} />
 
@@ -16,41 +27,56 @@ import "@abgov/styles"
 
 The footer resides at the bottom of every page of your service, providing copyright information and other information related to your service.
 
-[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI-DS?node-id=582%3A5939)
-
-<GoACallout type="important" title="Refactoring may be needed for future releases">
-  As this component transitions from Alpha to Beta, there may be significant changes to improve its operation. 
-</GoACallout>
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=5652%3A228700)
 
 ---
 
-#### Default Footer
+#### Basic
 
-<Story name="Default Footer">
-  <GoAAppFooter/>
+<Story name="Basic">
+  <GoAAppFooter />
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer />
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer></goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAAppFooter />
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
-#### Footer with links to meta information
+#### Meta Information 
 
-<Story name="Footer with links to meta information">
+#### Properties
+
+<Props>
+  <Prop
+    name="slot"
+    type="meta"
+    description="Anchor elements to display in the bottom meta section"
+  />
+</Props>
+
+<Story name="Meta information">
   <GoAAppFooter>
     <GoAAppFooterMetaSection>
       <a href="privacy.html">Privacy</a>
@@ -62,32 +88,40 @@ The footer resides at the bottom of every page of your service, providing copyri
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-meta-section>
+        <goa-app-footer-meta-section slot="meta">
           <a href="privacy.html">Privacy</a>
           <a href="disclaimer.html">Disclaimer</a>
           <a href="accessibility.html">Accessibility</a>
           <a href="using-alberta.html">Using Alberta.ca</a>
         </goa-app-footer-meta-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-meta-section>
+        <goa-app-footer-meta-section slot="meta">
           <a href="privacy.html">Privacy</a>
           <a href="disclaimer.html">Disclaimer</a>
           <a href="accessibility.html">Accessibility</a>
           <a href="using-alberta.html">Using Alberta.ca</a>
         </goa-app-footer-meta-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAAppFooter>
         <GoAAppFooterMetaSection>
           <a href="privacy.html">Privacy</a>
@@ -96,15 +130,32 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="using-alberta.html">Using Alberta.ca</a>
         </GoAAppFooterMetaSection>
       </GoAAppFooter>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
-#### Footer with secondary navigation
+#### Secondary navigation
 
-<Story name="Footer with secondary navigation">
+#### Properties
+
+<Props>
+  <Prop
+    name="maxcolumncount"
+    type="number"
+    defaultValue="1"
+    description="Allow links to be distributed over the set value of columns on higher resolutions"
+  />
+  <Prop
+    name="slot"
+    type="nav"
+    description="Anchor elements to display in the top navigation section"
+  />
+</Props>
+
+<Story name="Secondary navigation">
   <GoAAppFooter>
-    <GoAAppFooterNavSection maxcolumncount={3}>
+    <GoAAppFooterNavSection maxColumnCount={3}>
       <a href="a.html">Arts and culture</a>
       <a href="b.html">Education and training</a>
       <a href="c.html">Family and social supports</a>
@@ -120,10 +171,12 @@ The footer resides at the bottom of every page of your service, providing copyri
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section maxcolumncount="3">
+        <goa-app-footer-nav-section maxcolumncount="3" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -136,12 +189,15 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="twitter.html">Twitter</a>
         </goa-app-footer-nav-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section maxcolumncount="3">
+        <goa-app-footer-nav-section maxcolumncount="3" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -154,12 +210,15 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="twitter.html">Twitter</a>
         </goa-app-footer-nav-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAAppFooter>
-        <GoAAppFooterNavSection maxcolumncount={3}>
+        <GoAAppFooterNavSection maxColumnCount={3}>
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -172,43 +231,46 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="twitter.html">Twitter</a>
         </GoAAppFooterNavSection>
       </GoAAppFooter>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
-#### Footer with secondary navigation with multiple sections
+#### Secondary navigation with multiple sections
 
-<Story name="Footer with secondary navigation with multiple sections">
+<Story name="Secondary navigation with multiple sections">
   <GoAAppFooter>
-      <GoAAppFooterNavSection name="All Services">
-        <a href="a.html">Arts and culture</a>
-        <a href="b.html">Education and training</a>
-        <a href="c.html">Family and social supports</a>
-        <a href="d.html">Housing and community</a>
-        <a href="e.html">Life events</a>
-      </GoAAppFooterNavSection>
-      <GoAAppFooterNavSection name="Social Media">
-        <a href="instagram.html">Instagram</a>
-        <a href="youtube.html">YouTube</a>
-        <a href="facebook.html">Facebook</a>
-        <a href="snapchat.html">Snapchat</a>
-        <a href="twitter.html">Twitter</a>
-      </GoAAppFooterNavSection>
+    <GoAAppFooterNavSection name="All Services">
+      <a href="a.html">Arts and culture</a>
+      <a href="b.html">Education and training</a>
+      <a href="c.html">Family and social supports</a>
+      <a href="d.html">Housing and community</a>
+      <a href="e.html">Life events</a>
+    </GoAAppFooterNavSection>
+    <GoAAppFooterNavSection name="Social Media">
+      <a href="instagram.html">Instagram</a>
+      <a href="youtube.html">YouTube</a>
+      <a href="facebook.html">Facebook</a>
+      <a href="snapchat.html">Snapchat</a>
+      <a href="twitter.html">Twitter</a>
+    </GoAAppFooterNavSection>
   </GoAAppFooter>
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services">
+        <goa-app-footer-nav-section name="All Services" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
           <a href="d.html">Housing and community</a>
           <a href="e.html">Life events</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-nav-section name="Social Media">
+        <goa-app-footer-nav-section name="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
@@ -216,19 +278,22 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="twitter.html">Twitter</a>
         </goa-app-footer-nav-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services">
+        <goa-app-footer-nav-section name="All Services" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
           <a href="d.html">Housing and community</a>
           <a href="e.html">Life events</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-nav-section name="Social Media">
+        <goa-app-footer-nav-section name="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
@@ -236,10 +301,13 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="twitter.html">Twitter</a>
         </goa-app-footer-nav-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAAppFooter>
         <GoAAppFooterNavSection name="All Services">
           <a href="a.html">Arts and culture</a>
@@ -256,16 +324,16 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="twitter.html">Twitter</a>
         </GoAAppFooterNavSection>
       </GoAAppFooter>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
+#### Secondary navigation with multi column section
 
-#### Footer with secondary navigation with multi column section
-
-<Story name="Footer with secondary navigation with multi column section">
+<Story name="Secondary navigation with multi column section">
   <GoAAppFooter>
-    <GoAAppFooterNavSection name="All Services" maxcolumncount={2}>
+    <GoAAppFooterNavSection name="All Services" maxColumnCount={2}>
       <a href="a.html">Arts and culture</a>
       <a href="b.html">Education and training</a>
       <a href="c.html">Family and social supports</a>
@@ -288,10 +356,12 @@ The footer resides at the bottom of every page of your service, providing copyri
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services" maxcolumncount="2">
+        <goa-app-footer-nav-section name="All Services" maxcolumncount="2" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -302,21 +372,24 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="h.html">Government</a>
           <a href="i.html">Jobs and employment</a>
           <a href="j.html">Moving to Alberta</a>
-        </goa-app-footer-nav-section>    
-        <goa-app-footer-nav-section name="Social Media">    
+        </goa-app-footer-nav-section>
+        <goa-app-footer-nav-section name="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
           <a href="snapchat.html">Snapchat</a>
           <a href="twitter.html">Twitter</a>
-        </goa-app-footer-nav-section>    
+        </goa-app-footer-nav-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services" maxcolumncount="2">
+        <goa-app-footer-nav-section name="All Services" maxcolumncount="2" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -327,21 +400,24 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="h.html">Government</a>
           <a href="i.html">Jobs and employment</a>
           <a href="j.html">Moving to Alberta</a>
-        </goa-app-footer-nav-section>    
-        <goa-app-footer-nav-section name="Social Media">    
+        </goa-app-footer-nav-section>
+        <goa-app-footer-nav-section name="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
           <a href="snapchat.html">Snapchat</a>
           <a href="twitter.html">Twitter</a>
-        </goa-app-footer-nav-section>    
+        </goa-app-footer-nav-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAAppFooter>
-        <GoAAppFooterNavSection name="All Services" maxcolumncount={2}>
+        <GoAAppFooterNavSection name="All Services" maxColumnCount={2}>
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -361,16 +437,16 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="twitter.html">Twitter</a>
         </GoAAppFooterNavSection>
       </GoAAppFooter>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
+#### Secondary navigation and links to meta information
 
-#### Footer with secondary navigation and links to meta information
-
-<Story name="Footer with secondary navigation and links to meta information">
+<Story name="Secondary navigation and links to meta information">
   <GoAAppFooter>
-    <GoAAppFooterNavSection maxcolumncount={2}>
+    <GoAAppFooterNavSection maxColumnCount={2}>
       <a href="a.html">Arts and culture</a>
       <a href="b.html">Education and training</a>
       <a href="c.html">Family and social supports</a>
@@ -392,10 +468,12 @@ The footer resides at the bottom of every page of your service, providing copyri
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section maxcolumncount="2">
+        <goa-app-footer-nav-section maxcolumncount="2" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -406,19 +484,22 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="snapchat.html">Snapchat</a>
           <a href="twitter.html">Twitter</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-meta-section>
+        <goa-app-footer-meta-section slot="meta">
           <a href="privacy.html">Privacy</a>
           <a href="disclaimer.html">Disclaimer</a>
           <a href="accessibility.html">Accessibility</a>
           <a href="using-alberta.html">Using Alberta.ca</a>
         </goa-app-footer-meta-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section maxcolumncount="2">
+        <goa-app-footer-nav-section maxcolumncount="2" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -430,19 +511,22 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="snapchat.html">Snapchat</a>
           <a href="twitter.html">Twitter</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-meta-section>
+        <goa-app-footer-meta-section slot="meta">
           <a href="privacy.html">Privacy</a>
           <a href="disclaimer.html">Disclaimer</a>
           <a href="accessibility.html">Accessibility</a>
           <a href="using-alberta.html">Using Alberta.ca</a>
         </goa-app-footer-meta-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAAppFooter>
-        <GoAAppFooterNavSection maxcolumncount={2}>
+        <GoAAppFooterNavSection maxColumnCount={2}>
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -461,14 +545,14 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="using-alberta.html">Using Alberta.ca</a>
         </GoAAppFooterMetaSection>
       </GoAAppFooter>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 
+#### Secondary navigation with multiple sections and links to meta information
 
-#### Footer with secondary navigation with multiple sections and links to meta information
-
-<Story name="Footer with secondary navigation with multiple sections and links to meta information">
+<Story name="Secondary navigation with multiple sections and links to meta information">
   <GoAAppFooter>
     <GoAAppFooterNavSection name="All Services">
       <a href="a.html">Arts and culture</a>
@@ -494,60 +578,68 @@ The footer resides at the bottom of every page of your service, providing copyri
 </Story>
 
 <Tabs>
-  <Tab label="Web Component">
-    <CodeSnippet lang="html" code={`
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services">
+        <goa-app-footer-nav-section name="All Services" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
           <a href="d.html">Housing and community</a>
           <a href="e.html">Life events</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-nav-section name="Social Media">
+        <goa-app-footer-nav-section name="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
           <a href="snapchat.html">Snapchat</a>
           <a href="twitter.html">Twitter</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-meta-section>
+        <goa-app-footer-meta-section slot="meta">
           <a href="privacy.html">Privacy</a>
           <a href="disclaimer.html">Disclaimer</a>
           <a href="accessibility.html">Accessibility</a>
           <a href="using-alberta.html">Using Alberta.ca</a>
         </goa-app-footer-meta-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services">
+        <goa-app-footer-nav-section name="All Services" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
           <a href="d.html">Housing and community</a>
           <a href="e.html">Life events</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-nav-section name="Social Media">
+        <goa-app-footer-nav-section name="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
           <a href="snapchat.html">Snapchat</a>
           <a href="twitter.html">Twitter</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-meta-section>
+        <goa-app-footer-meta-section slot="meta">
           <a href="privacy.html">Privacy</a>
           <a href="disclaimer.html">Disclaimer</a>
           <a href="accessibility.html">Accessibility</a>
           <a href="using-alberta.html">Using Alberta.ca</a>
         </goa-app-footer-meta-section>
       </goa-app-footer>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       <GoAAppFooter>
         <GoAAppFooterNavSection name="All Services">
           <a href="a.html">Arts and culture</a>
@@ -570,7 +662,8 @@ The footer resides at the bottom of every page of your service, providing copyri
           <a href="using-alberta.html">Using Alberta.ca</a>
         </GoAAppFooterMetaSection>
       </GoAAppFooter>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 

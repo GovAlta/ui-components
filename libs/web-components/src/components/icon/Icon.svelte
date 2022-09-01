@@ -524,9 +524,9 @@
   // optional
   export let size: IconSize = "medium";
   export let theme: IconTheme = "outline";
-  export let inverted: string;
-  export let fillcolor: string;
-  export let hovercolor: string;
+  export let inverted: string = "false";
+  export let fillcolor: string = "";
+  export let hovercolor: string = "";
   export let opacity: number = 1;
   export let title: string = "";
 

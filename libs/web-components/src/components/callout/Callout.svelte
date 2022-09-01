@@ -6,7 +6,7 @@
   export let type: "emergency" | "important" | "information" | "event" | "success";
 
   // export let type: CalloutType = "";
-  export let title: string;
+  export let heading: string = "";
   export let testid: string = "";
 
   $: iconType =
@@ -24,12 +24,14 @@
 </script>
 
 <!-- HTML -->
-<div class="notification" data-testid="{testid}">
+<div class="notification" data-testid={testid}>
   <span class="icon {type}">
     <goa-icon type={iconType} inverted={type === "important" ? "false" : "true"} />
   </span>
   <span class="content">
-    <h3>{title}</h3>
+    {#if heading }
+      <h3>{heading}</h3>
+    {/if}
     <slot />
   </span>
 </div>

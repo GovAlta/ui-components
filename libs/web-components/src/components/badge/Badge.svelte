@@ -2,15 +2,16 @@
 
 <!-- Script -->
 <script lang="ts">
+import { onMount } from "svelte";
+
   import { toBoolean } from "../../common/utils";
   // import { BadgeType, WCBoolean, WC_FALSE } from "@abgov/shared/common";
 
   export let type:
     | "success"
-    | "warning"
+    | "important"
     | "information"
     | "emergency"
-    | "inactive"
     | "dark"
     | "midtone"
     | "light";
@@ -30,14 +31,19 @@
 
   $: iconType = {
     success: "checkmark-circle",
-    warning: "alert-circle",
+    important: "alert-circle",
     information: "information-circle",
     emergency: "warning",
-    inactive: "information-circle",
     dark: "information-circle",
     midtone: "information-circle",
     light: "information-circle",
   }[type];
+
+  onMount(() => {
+    if (!showIcon && !content) {
+      console.warn("GoABadge must have either then content or icon property set");
+    }
+  })
 </script>
 
 <!-- HTML -->
@@ -97,7 +103,7 @@
     color: var(--goa-color-text-light);
   }
 
-  .goa-badge.badge-warning {
+  .goa-badge.badge-important {
     background-color: var(--goa-color-status-warning);
     color: var(--goa-color-text);
   }
@@ -121,9 +127,9 @@
     background-color: var(--color-white);
     color: var(--goa-color-text);
   }
-
+/*
   .goa-badge.badge-inactive {
     background-color: var(--color-white);
     color: var(--goa-color-text);
-  }
+  } */
 </style>

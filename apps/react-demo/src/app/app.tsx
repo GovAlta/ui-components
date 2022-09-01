@@ -8,9 +8,9 @@ import '../styles.scss'
 export default function App() {
   return (
     <>
-      <GoAMicrositeHeader level="alpha" version="UAT"></GoAMicrositeHeader>
+      <GoAMicrositeHeader type="alpha" version="UAT"></GoAMicrositeHeader>
 
-      <GoAAppHeader url="#" title="Design Systems">
+      <GoAAppHeader url="#" heading="Design Systems">
       </GoAAppHeader>
 
       <div className="container">

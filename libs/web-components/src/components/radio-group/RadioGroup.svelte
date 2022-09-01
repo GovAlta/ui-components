@@ -26,16 +26,28 @@
   let el: HTMLElement;
 
   onMount(() => {
-    ctx = createContext(name);
-    ctx.subscribe((msg) => {
-      switch (msg?.type) {
-        case BIND: {
-          options = [...options, msg as RadioMessage];
-        }
-      }
-    });
+    const maxAttempts = 10;
+    let attempts = 0; 
+    const fn = setInterval(async () => {
+      attempts++;
+      if (name) {
+        ctx = createContext(name);
+        ctx.subscribe((msg) => {
+          switch (msg?.type) {
+            case BIND: {
+              options = [...options, msg as RadioMessage];
+            }
+          }
+        });
 
-  });
+        clearInterval(fn);
+      }
+      if (attempts > maxAttempts) {
+        console.error("goa-radio: missing the required `name` attribute. It must match the children's name attribute.")
+        clearInterval(fn);
+      }
+    }, 10);
+  })
 
   function onChange(newValue: string) {
     if (newValue === value) return;

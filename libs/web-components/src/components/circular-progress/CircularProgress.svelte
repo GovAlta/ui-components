@@ -2,53 +2,48 @@
 
 <!-- Script -->
 <script lang="ts">
-import { onMount, tick } from "svelte";
-
+  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-
   import noScroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";
-  import type { SpinnerType } from "../spinner/Spinner.svelte";
 
   // Optional
-  export let type: SpinnerType = "infinite";
   export let variant: "fullscreen" | "inline" = "inline";
   export let size: "small" | "large" = "large";
   export let message: string = "";
-  export let progress: number = 0;
+  export let progress: number = -1;
   export let visible: string = "false";
 
   $: isVisible = toBoolean(visible);
-  $: fullscreen = variant === "fullscreen";
-  $: inline = variant === "inline";
-  $: spinnerSize = size === "small" ? "large" : "xlarge"
 
-  let ready: boolean = false;
+  let spinnerSize: "large" | "xlarge";
+  let fullscreen: boolean;
+  let inline: boolean; 
 
   onMount(async () => {
-    // there needs to be a slight delay in the render to prevent an invalid spinner size from being shown
-    await tick();  
-    ready = isVisible;
+    spinnerSize = size === "small" ? "large" : "xlarge"
+    fullscreen = variant === "fullscreen";
+    inline = variant === "inline";
   })
 
 </script>
 
 <!-- HTML -->
-{#if ready}
+{#if isVisible}
   {#if fullscreen}
     <div
       transition:fade={{ duration: 300 }}
       use:noScroll={{ enable: true }}
       class:fullscreen
     >
-      <goa-spinner {type} size={spinnerSize} progress={progress || 0} />
+      <goa-spinner size={spinnerSize} progress={progress} />
       {#if message}
         <div class="message">{message}</div>
       {/if}
     </div>
   {:else if inline}
     <div class:inline class={"spinner-"+spinnerSize}>
-      <goa-spinner {type} size={spinnerSize} progress={progress || 0} />
+      <goa-spinner size={spinnerSize} progress={progress} />
       {#if message}
         <div class="message">{message}</div>
       {/if}

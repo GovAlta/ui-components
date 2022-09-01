@@ -1,9 +1,25 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { GoAIconType } from '../..';
+import { format } from "date-fns";
+
+type GoAInputType =
+  "text"
+  | "number"
+  | "password"
+  | "email"
+  | "date"
+  | "datetime-local"
+  | "month"
+  | "range"
+  | "search"
+  | "tel"
+  | "time"
+  | "url"
+  | "week";
 
 interface WCProps {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
-  type: string;
+  type: GoAInputType;
   name: string;
   value: string;
   id?: string;
@@ -20,6 +36,11 @@ interface WCProps {
   handletrailingiconclick: boolean;
   width?: string;
   testid?: string;
+
+  // type=number
+  min?: string;
+  max?: string;
+  step?: number;
 }
 
 
@@ -54,9 +75,14 @@ export interface Props {
   showCounter?: boolean;
   maxCharCount?: number;
   testId?: string;
+
+  // type=number
+  min?: string;
+  max?: string;
+  step?: number;
 };
 
-export const GoAInput: FC<Props & { type: string }> = ({
+export const GoAInput: FC<Props & { type: GoAInputType }> = ({
   id,
   name,
   type,
@@ -73,6 +99,9 @@ export const GoAInput: FC<Props & { type: string }> = ({
   showCounter,
   maxCharCount,
   testId,
+  min,
+  max,
+  step,
   onTrailingIconClick,
   onChange,
 }) => {
@@ -115,6 +144,9 @@ export const GoAInput: FC<Props & { type: string }> = ({
       data-testid={testId}
       value={value}
       width={width}
+      min={min}
+      max={max}
+      step={step}
       showcounter={showCounter}
       maxcharcount={maxCharCount}
       handletrailingiconclick={!!onTrailingIconClick}
@@ -130,16 +162,29 @@ export const GoAInputPassword: FC<Props> = (props) => {
   return <GoAInput {...props} type="password" />;
 }
 
-export const GoAInputDate: FC<Props & { min?: string, max?: string }> = (props) => {
-  return <GoAInput {...props} type="date" />;
+export const GoAInputDate: FC<Omit<Props, "value"> & { value: Date | string}> = ({value, min, max, ...props}) => {
+  const _value: Date = typeof value === "string" ? new Date(value) : value;
+  const _min = min ? format(new Date(min), "yyyy-MM-dd") : "";
+  const _max = max ? format(new Date(max), "yyyy-MM-dd") : "";
+  return <GoAInput {...props} min={_min} max={_max} value={format(_value, "yyyy-MM-dd")} type="date" />;
 }
 
-export const GoAInputTime: FC<Props> = (props) => {
-  return <GoAInput {...props} type="time" />;
+export const GoAInputTime: FC<Omit<Props, "value"> & { value: Date | string}> = ({value, ...props}) => {
+  try {
+    const d: Date = typeof value === "string" ? new Date(value) : value;
+    return <GoAInput {...props} value={format(d, "hh:mm")} type="time" />;
+  } catch(e) {
+    return <GoAInput {...props} value={value as string} type="time" />;
+  }
 }
 
-export const GoAInputDateTime: FC<Props & { min?: string, max?: string }> = (props) => {
-  return <GoAInput {...props} type="datetime-local" />;
+export const GoAInputDateTime: FC<
+  Omit<Props, "value">
+  & { value: Date}
+  > = ({value, ...props}) => {
+
+  const d: Date = typeof value === "string" ? new Date(value) : value;
+  return <GoAInput {...props} value={format(d, "yyyy-MM-dd'T'hh:mm")} type="datetime-local" />;
 }
 
 export const GoAInputEmail: FC<Props> = (props) => {
@@ -167,14 +212,12 @@ export const GoAInputMonth: FC<Props> = (props) => {
 }
 
 export const GoAInputNumber: FC<
-  Omit<Props, "value"> 
-  & { value: number }  
-  & { min?: number, max?: number, step?: number }
-  > = (props) => {
-  return <GoAInput {...props} value={props.value.toString()} type="number" />;
+  Omit<Props, "value" | "min" | "max"> 
+  & { value: number, min?: number, max?: number}> = ({min, max, value, ...props}) => {
+  return <GoAInput {...props} min={min?.toString()} max={max?.toString()} value={value.toString()} type="number" />;
 }
 
-export const GoAInputRange: FC<Props & { min?: number, max?: number, step?: number }> = ({ step = 1, ...props }) => {
+export const GoAInputRange: FC<Props> = (props) => {
   return <GoAInput {...props} type="range" />;
 }
 

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

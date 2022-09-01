@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 interface WCProps {
-  title: string;
+  heading: string;
   backgroundurl: string;
 }
 
@@ -15,13 +15,13 @@ declare global {
 }
 
 interface Props {
-  title: string;
+  heading: string;
   backgroundUrl: string;
 }
 
-export const GoAHeroBanner: FC<Props> = ({ title, backgroundUrl, children}) => {
+export const GoAHeroBanner: FC<Props> = ({ heading, backgroundUrl, children}) => {
   return (
-    <goa-hero-banner title={title} backgroundurl={backgroundUrl}>
+    <goa-hero-banner heading={heading} backgroundurl={backgroundUrl}>
       {children}
     </goa-hero-banner>
   );
