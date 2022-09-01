@@ -134,9 +134,16 @@ small {
 }
 
 /* Components */
-
+goa-two-column-layout h1:first-of-type,
+goa-two-column-layout h2:first-of-type,
+goa-two-column-layout h3:first-of-type,
 goa-container h1:first-of-type,
 goa-container h2:first-of-type,
 goa-container h3:first-of-type {
   margin-top: 0;
+}
+
+goa-two-column-layout [slot=nav] a {
+  display: block;
+  padding: 0.5rem 0;
 }

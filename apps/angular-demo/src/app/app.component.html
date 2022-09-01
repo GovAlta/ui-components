@@ -1,7 +1,7 @@
-<goa-layout-full-nav>
+<goa-two-column-layout maxcontentwidth="1400px" navcolumnwidth="30ch">
   <section slot="header">
     <goa-microsite-header level="alpha" version="UAT"></goa-microsite-header>
-    <goa-app-header heading="Design Systems"></goa-app-header>
+    <goa-app-header heading="Design Systems" maxcontentwidth="1400px"></goa-app-header>
   </section>
 
   <section slot="nav">
@@ -23,10 +23,11 @@
     <abgov-navigation-link label="Container" path="/container"></abgov-navigation-link>
     <abgov-navigation-link label="Skeleton" path="/skeleton"></abgov-navigation-link>
     <abgov-navigation-link label="Form Item" path="/form-item"></abgov-navigation-link>
+    <abgov-navigation-link label="Two column layout" path="/two-column-layout"></abgov-navigation-link>
   </section>
 
   <router-outlet></router-outlet>
 
-  <goa-app-footer slot="footer"></goa-app-footer>
+  <goa-app-footer slot="footer" maxcontentwidth="1400px"></goa-app-footer>
 
-</goa-layout-full-nav>
+</goa-two-column-layout>
