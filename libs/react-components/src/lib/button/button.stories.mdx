@@ -17,7 +17,7 @@ import { DoDont } from '@abgov/shared/storybook-common';
     type: {
       control: {
         type: 'select',
-        options: ['primary', 'secondary', 'tertiary', 'borderless'],
+        options: ['primary', 'submit', 'secondary', 'tertiary', 'borderless'],
       },
     },
     variant: {
@@ -47,6 +47,9 @@ export const Template = (args) => {
     <div>
       <GoAButton {...args} type="primary">
         Primary
+      </GoAButton>
+      <GoAButton {...args} type="submit">
+        Submit
       </GoAButton>
       <GoAButton {...args} type="secondary">
         Secondary

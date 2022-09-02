@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useEffect, useRef } from 'react';
 import './button.css';
 import { GoAIconType } from '../icons';
 
-export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'start';
+export type ButtonType = 'primary' | 'submit' | 'secondary' | 'tertiary' | 'start';
 export type ButtonSize = 'compact' | 'normal';
 export type ButtonVariant = 'normal' | 'destructive'
 

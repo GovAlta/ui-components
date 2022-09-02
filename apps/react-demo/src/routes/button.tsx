@@ -11,6 +11,7 @@ export default function Button() {
     <>
       <h3>Types</h3>
       <GoAButton onClick={() => onClick()} type="primary">Primary</GoAButton ><br />
+      <GoAButton onClick={() => onClick()} type="submit">Submit</GoAButton><br />
       <GoAButton onClick={() => onClick()} type="secondary" > Secondary</GoAButton ><br />
       <GoAButton onClick={() => onClick()} type="tertiary" > Tertiary</GoAButton ><br />
       <GoAButton onClick={() => onClick()} type="start" > Get Started</GoAButton ><br />
