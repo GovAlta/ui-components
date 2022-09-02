@@ -5,12 +5,10 @@ import GoAButton from './Button.svelte'
 describe('GoAButtonComponent', () => {
 
   it('should render', async () => {
-    const buttonText = 'Test Title';
-    const baseElement = render(GoAButton, { title: buttonText });
+    const baseElement = render(GoAButton);
     const button = await baseElement.findByRole('button');
 
     expect(button).toBeTruthy();
-    expect(button).toContainHTML(buttonText)
   });
 
   describe("events", () => {
@@ -60,17 +58,6 @@ describe('GoAButtonComponent', () => {
         expect(button).toBeTruthy();
         expect(button.className).toContain(variant);
       });
-    });
-  });
-
-  describe("title", () => {
-    it('should show button title', async () => {
-      const buttonTitle = 'hovering';
-      const baseElement = render(GoAButton, { title: buttonTitle });
-      const button = await baseElement.findByRole("button");
-
-      expect(button).toBeTruthy();
-      expect(button.title).toContain(buttonTitle);
     });
   });
 
