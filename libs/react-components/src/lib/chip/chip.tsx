@@ -18,8 +18,7 @@ declare global {
   }
 }
 
-
-export interface Props {
+interface Props {
   onClick?: () => void;
   deletable?: boolean;
   leadingIcon?: string;
