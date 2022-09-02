@@ -30,14 +30,34 @@ import { useState } from 'react';
     required="true"
     description="Must match the name assigned to the children"
   />
-  <Prop name="value" type="string" description="Value binding" />
+  <Prop 
+    name="value" 
+    type="string" 
+    description="Value binding" 
+  />
+  <Prop 
+    name="orientation" 
+    type="horizontal | vertical" 
+    defaultValue="vertical"
+    description="Child radio items orientation" 
+  />
+  <Prop 
+    name="error" 
+    type="boolean" 
+    defaultValue="false" 
+    description="Flag to whether component is in an error state"
+  />
+  <Prop 
+    name="disabled" 
+    type="boolean" 
+    defaultValue="false" 
+    description="Flag to whether component is disabled"
+  />
   <Prop
     name="_change"
     type="CustomEvent<{detail: {name: string, value: string}}>"
     description="onChange event"
   />
-  <Prop name="error" type="boolean" defaultValue="false" description="if we show an error or not" />
-  <Prop name="disabled" type="boolean" defaultValue="false" description="if the component is disabled or not" />
 </Props>
 
 export const BasicTemplate = (args) => {

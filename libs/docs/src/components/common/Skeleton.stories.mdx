@@ -22,62 +22,36 @@ import { GoASkeleton } from '@abgov/react-components';
 
 #### Properties
 
-<Tabs>
-  <Tab label="Web Component" hidden={true}>
-    <Props>
-      <Prop
-        name="type"
-        type="image | text | title | text-small | avatar | header | paragraph | thumbnail | card | profile"
-        required={false}
-        defaultValue="1"
-        description="Size can affect either the height, width or both for different skeleton types."
-      />
-      <Prop
-        name="size"
-        type="string"
-        required={false}
-        defaultValue="1"
-        description="Size can affect either the height, width or both for different skeleton types."
-      />
-    </Props>
-  </Tab>
-  <Tab label="Angular">
-    <Props>
-      <Prop
-        name="type"
-        type="image | text | title | text-small | avatar | header | paragraph | thumbnail | card | profile"
-        required={false}
-        defaultValue="1"
-        description="Size can affect either the height, width or both for different skeleton types."
-      />
-      <Prop
-        name="size"
-        type="string"
-        required={false}
-        defaultValue="1"
-        description="Size can affect either the height, width or both for different skeleton types."
-      />
-    </Props>
-  </Tab>
-  <Tab label="React">
-    <Props>
-      <Prop
-        name="type"
-        type="image | text | title | text-small | avatar | header | paragraph | thumbnail | card | profile"
-        required={false}
-        defaultValue="1"
-        description="Size can affect either the height, width or both for different skeleton types."
-      />
-      <Prop
-        name="size"
-        type="number"
-        required={false}
-        defaultValue="1"
-        description="Size can affect either the height, width or both for different skeleton types."
-      />
-    </Props>
-  </Tab>
-</Tabs>
+<Props>
+  <Prop
+    name="type"
+    type="image | text | title | text-small | avatar | header | paragraph | thumbnail | card | profile"
+    required="false"
+    defaultvalue="1"
+    description="Size can affect either the height, width or both for different skeleton types."
+  />
+  <Prop
+    name="size"
+    type="string"
+    required="false"
+    defaultvalue="1"
+    description="Size can affect either the height, width or both for different skeleton types."
+  />
+  <Prop
+    name="linecount"
+    type="number"
+    required="false"
+    defaultvalue="3"
+    description="Used within components that contain multiple lines."
+  />
+  <Prop
+    name="width"
+    type="string"
+    required="false"
+    defaultvalue="1"
+    description="Set component width. Currently only used in `card` type."
+  />
+</Props>
 
 #### Text
 

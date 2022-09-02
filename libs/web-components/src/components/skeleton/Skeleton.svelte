@@ -4,7 +4,7 @@
 <script lang="ts">
   export let width: number = 320;
   export let size: number = 1;
-  export let count: number = 3;
+  export let linecount: number = 3;
   export let type: "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile" | "lines";
 </script>
 
@@ -28,8 +28,8 @@
     </div>
   </div>
 {:else if type === "lines"}
-  {#each Array(count) as _item}
-    <svelte:self type="text" {size} {count} />
+  {#each Array(linecount) as _item}
+    <svelte:self type="text" {size} count={linecount} />
   {/each}
 {:else}
   <div class="skeleton {type} {`${type}-${size}`}"></div>

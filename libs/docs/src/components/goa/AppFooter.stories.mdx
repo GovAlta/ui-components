@@ -31,6 +31,33 @@ The footer resides at the bottom of every page of your service, providing copyri
 
 ---
 
+#### Meta properties
+
+<Props>
+  <Prop
+    name="slot"
+    type="meta"
+    description="Anchor elements to display in the bottom meta section"
+  />
+</Props>
+
+#### Secondary navigation properties
+
+<Props>
+  <Prop
+    name="maxcolumncount"
+    type="number"
+    defaultValue="1"
+    description="Allow links to be distributed over the set value of columns on higher resolutions"
+  />
+  <Prop
+    name="slot"
+    type="nav"
+    description="Anchor elements to display in the top navigation section"
+  />
+</Props>
+
+
 #### Basic
 
 <Story name="Basic">
@@ -63,18 +90,6 @@ The footer resides at the bottom of every page of your service, providing copyri
     />
   </Tab>
 </Tabs>
-
-#### Meta Information 
-
-#### Properties
-
-<Props>
-  <Prop
-    name="slot"
-    type="meta"
-    description="Anchor elements to display in the bottom meta section"
-  />
-</Props>
 
 <Story name="Meta information">
   <GoAAppFooter>
@@ -137,21 +152,6 @@ The footer resides at the bottom of every page of your service, providing copyri
 
 #### Secondary navigation
 
-#### Properties
-
-<Props>
-  <Prop
-    name="maxcolumncount"
-    type="number"
-    defaultValue="1"
-    description="Allow links to be distributed over the set value of columns on higher resolutions"
-  />
-  <Prop
-    name="slot"
-    type="nav"
-    description="Anchor elements to display in the top navigation section"
-  />
-</Props>
 
 <Story name="Secondary navigation">
   <GoAAppFooter>
