@@ -11,7 +11,7 @@ declare global {
 
 /* eslint-disable-next-line */
 export interface FooterMetaSectionProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function GoAAppFooterMetaSection({children}: FooterMetaSectionProps) {

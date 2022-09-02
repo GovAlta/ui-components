@@ -15,7 +15,7 @@ declare global {
 
 export interface PageBlockProps {
   width: "full" | string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const GoAPageBlock: FC<PageBlockProps> = (props) => {

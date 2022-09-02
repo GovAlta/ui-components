@@ -27,6 +27,7 @@ interface Props {
   orientation?: 'horizontal' | 'vertical';
   testId?: string;
   error?: boolean;
+  children?: React.ReactNode;
   onChange: (name: string, value: string) => void;
 }
 

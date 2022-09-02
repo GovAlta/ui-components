@@ -11,7 +11,7 @@ declare global {
 
 /* eslint-disable-next-line */
 export interface FooterProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function GoAAppFooter({ children }: FooterProps) {

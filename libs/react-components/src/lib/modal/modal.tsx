@@ -25,6 +25,7 @@ interface Props {
   actions?: React.ReactElement;
   onClose?: () => void;
   transition?: "fast" | "slow" | "none";
+  children?: React.ReactNode;
   open?: boolean;
 }
 

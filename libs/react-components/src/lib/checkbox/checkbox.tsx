@@ -29,6 +29,7 @@ export interface Props {
   error?: boolean;
   text?: string;
   value?: string | number | boolean;
+  children?: React.ReactNode;
   testId?: string;
   onChange?: (name: string, checked: boolean, value: string) => void;
 }

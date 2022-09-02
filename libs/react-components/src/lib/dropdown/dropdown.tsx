@@ -43,6 +43,7 @@ interface Props {
   placeholder?: string;
   testId?: string;
   width?: string;
+  children?: React.ReactNode;
 }
 
 export const GoADropdown: FC<Props> = (props) => {

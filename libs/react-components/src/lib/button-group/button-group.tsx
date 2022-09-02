@@ -18,6 +18,7 @@ declare global {
 
 type ButtonGroupProps = {
   alignment: Alignment;
+  children?: React.ReactNode;
 };
 
 export const GoAButtonGroup: FC<ButtonGroupProps> = ({ alignment, children }) => {

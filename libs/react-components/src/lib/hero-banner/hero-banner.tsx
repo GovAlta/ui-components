@@ -17,6 +17,7 @@ declare global {
 interface Props {
   heading: string;
   backgroundUrl: string;
+  children?: React.ReactNode;
 }
 
 export const GoAHeroBanner: FC<Props> = ({ heading, backgroundUrl, children}) => {

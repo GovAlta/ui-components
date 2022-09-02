@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 
-export type GoAHeroBannerActionsType = FC;
+export type GoAHeroBannerActionsType = {
+  children?: React.ReactNode;
+};
 
-export const GoAHeroBannerActions: GoAHeroBannerActionsType = ({ children }) => {
+export const GoAHeroBannerActions: FC<GoAHeroBannerActionsType> = ({ children }) => {
   return (
     <div slot="actions">
       {children}

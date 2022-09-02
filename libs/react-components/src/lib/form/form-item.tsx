@@ -21,6 +21,7 @@ interface GoAFormItemProps {
   optional?: boolean;
   error?: string;
   helpText?: string;
+  children?: React.ReactNode;
 };
 
 export const GoAFormItem: FC<GoAFormItemProps> = ({ children, helpText, error, optional, label }) => {

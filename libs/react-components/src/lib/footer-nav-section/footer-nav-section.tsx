@@ -18,7 +18,7 @@ declare global {
 interface FooterNavSectionProps {
   name: string;
   maxColumnCount?: number;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 

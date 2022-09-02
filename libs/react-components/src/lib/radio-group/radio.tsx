@@ -25,6 +25,7 @@ interface Props {
   disabled?: boolean;
   checked?: boolean;
   error?: boolean;
+  children?: React.ReactNode;
   testId?: string;
 }
 
