@@ -49,18 +49,6 @@ describe('GoA Button', () => {
     });
   });
 
-  describe("title", () => {
-    it('should show button title', async () => {
-      const title = 'hovering';
-      const { container }= render(<GoAButton title={title} onClick={noop}>Button</GoAButton>);
-      const button = container.querySelector("goa-button");
-
-      expect(button).toBeTruthy();
-      expect(button.getAttribute("title")).toEqual(title);
-    });
-  });
-
-
   it('responds to events', async () => {
     const onClick = jest.fn()
     const { container } = render(<GoAButton onClick={onClick}>Button</GoAButton>);
