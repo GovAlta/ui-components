@@ -17,6 +17,7 @@ declare global {
 
 export interface Props {
   gap?: 'small' | 'medium' | 'large';
+  children?: React.ReactNode;
 };
 
 

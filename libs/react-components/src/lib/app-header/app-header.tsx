@@ -17,6 +17,7 @@ declare global {
 interface Props {
   heading?: string;
   url?: string;
+  children?: React.ReactNode;
 }
 
 export const GoAAppHeader: FC<Props> = ({ heading, url, children }) => {

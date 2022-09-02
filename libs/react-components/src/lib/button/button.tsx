@@ -34,7 +34,7 @@ type ButtonProps = {
   leadingIcon?: GoAIconType;
   trailingIcon?: GoAIconType;
   onClick: (e: any) => void;
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export const GoAButton: FC<ButtonProps> = ({

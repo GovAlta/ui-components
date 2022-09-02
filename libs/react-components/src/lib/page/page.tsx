@@ -10,7 +10,7 @@ declare global {
 }
 
 export interface PageProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function GoAPage(props: PageProps) {
