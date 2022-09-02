@@ -15,7 +15,7 @@ declare global {
 }
 
 
-export interface Props {
+interface Props {
   gap?: 'small' | 'medium' | 'large';
 };
 

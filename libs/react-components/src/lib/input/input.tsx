@@ -56,7 +56,7 @@ declare global {
 }
 
 
-export interface Props {
+interface Props {
   // required
   name: string;
   value: string;

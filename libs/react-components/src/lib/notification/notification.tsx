@@ -16,8 +16,7 @@ declare global {
   }
 }
 
-
-export interface Props {
+interface Props {
   type?: NotificationType,
   children?: React.ReactNode,
 }
