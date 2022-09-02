@@ -32,7 +32,6 @@
   export let type: ButtonType = "primary";
   export let size: Size = "normal";
   export let variant: Variant = "normal";
-  export let title: string = "";
   export let disabled: string = "false";
   export let leadingicon: GoAIconType = null;
   export let trailingicon: GoAIconType = null;
@@ -63,7 +62,6 @@
   class="{type} {size} {variant}"
   class:leading={leadingicon}
   class:trailing={trailingicon || type === "start"}
-  {title}
   on:click={clickHandler}
   disabled={isDisabled}
   data-testid={testid}

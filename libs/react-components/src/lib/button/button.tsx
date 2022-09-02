@@ -11,7 +11,6 @@ interface WCProps {
   size?: ButtonSize;
   variant?: ButtonVariant;
   disabled?: boolean
-  title?: string;
   leadingicon?: string;
   trailingicon?: string;
   ref: React.RefObject<HTMLElement>;
@@ -29,7 +28,6 @@ declare global {
 
 type ButtonProps = {
   type?: ButtonType;
-  title?: string;
   size?: ButtonSize;
   variant?: ButtonVariant;
   disabled?: boolean;
@@ -40,7 +38,6 @@ type ButtonProps = {
 };
 
 export const GoAButton: FC<ButtonProps> = ({
-  title,
   disabled = false,
   type = 'primary',
   size,
@@ -72,7 +69,6 @@ export const GoAButton: FC<ButtonProps> = ({
       size={size}
       variant={variant}
       disabled={disabled}
-      title={title}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
     >
