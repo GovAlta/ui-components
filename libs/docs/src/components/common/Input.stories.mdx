@@ -60,6 +60,8 @@ import { Meta, Story } from '@storybook/addon-docs';
   <Prop name="max" type="string | date" description="A string value *must* be in ISO 8601 format" />
   <Prop name="step" type="number" description="By how much number of day value will change by" />
   <Prop name="arialabel" type="string" description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name" />
+  <Prop name="prefix" type="string" description="The text that comes before the input" />
+  <Prop name="suffix" type="string" description="The text that comes after the input" />
   <Prop name="_change" type="CustomEvent<{detail: {name: string, value: string}}>" />
   <Prop name="_trailingiconclick" type="CustomEvent" />
 </Props>
@@ -626,6 +628,42 @@ export const WidthTemplate = ({ width }) => {
         <GoAInput name="firstname" width="100%" onChange={() => {}} />
         <GoAInput name="firstname" width="50%" onChange={() => {}} />
         <GoAInput name="firstname" width="20ch" onChange={() => {}} />
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Prefix and suffix 
+
+<Story name="Prefix and suffix">
+  <>
+    <h5>Prefix</h5>
+    <GoAInput name="input" prefix="$" onChange={() => {}} />
+    <h5>Suffix</h5>
+    <GoAInput name="input" suffix="items" onChange={() => {}} />
+    <h5>Both</h5>
+    <GoAInput name="input" prefix="$" suffix="per item" onChange={() => {}} />
+  </>
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-input name="input" prefix="$" onChange={() => {}}></goa-input>
+        <goa-input name="input" suffix="items" onChange={() => {}}></goa-input>
+        <goa-input name="input" prefix="$" suffix="per item" onChange={() => {}}></goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAInput name="input" prefix="$" onChange={() => {}} />
+        <GoAInput name="input" suffix="items" onChange={() => {}} />
+        <GoAInput name="input" prefix="$" suffix="per item" onChange={() => {}} />
       `}
       lang="tsx"
     />

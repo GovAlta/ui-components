@@ -39,6 +39,8 @@
   export let min: string = null;
   export let max: string = null;
   export let step: number = null;
+  export let prefix: string = "";
+  export let suffix: string = "";
 
   // character counter
   export let showcounter: string = "false";
@@ -97,6 +99,12 @@
     `}
     class:error={isError}
   >
+    {#if prefix}
+      <div class="prefix">
+        { prefix }
+      </div>
+    {/if}
+
     {#if leadingicon}
       <goa-icon
         class="goa-input-leading-icon"
@@ -146,6 +154,10 @@
         data-testid="trailing-icon-button"
       />
     {/if}
+
+    {#if suffix}
+      <span class="suffix">{ suffix }</span>
+    {/if}
   </div>
 
   <!-- Counter -->
@@ -194,7 +206,7 @@
     background: white;
 
     display: inline-flex;
-    align-items: center;
+    align-items: stretch;
 
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
@@ -285,6 +297,26 @@
 
   .goa-input--disabled input:hover {
     cursor: default !important;
+  }
+
+  .prefix, 
+  .suffix {
+    background-color: var(--color-gray-100);
+    padding: 0 0.75rem;
+    display: flex;
+    align-items: center;
+  }
+  .prefix {
+    /* background-clip doesn't want to work */
+    border-top-left-radius: var(--input-border-radius);
+    border-bottom-left-radius: var(--input-border-radius);
+    border-right: 1px solid var(--color-gray-600);
+  }
+  .suffix {
+    /* background-clip doesn't want to work */
+    border-top-right-radius: var(--input-border-radius);
+    border-bottom-right-radius: var(--input-border-radius);
+    border-left: 1px solid var(--color-gray-600);
   }
 
   /* Themes */

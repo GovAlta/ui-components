@@ -36,9 +36,9 @@
   <goa-page-block width="702px">
     <h2>Playground</h2>
 
-    <input type="text" />
-    <input type="text" />
-    <input type="text" />
+    <goa-input prefix="$" suffix="per item" type="text" />
+    <goa-input type="text" />
+    <goa-input type="text" />
 
     <button on:click={showModal}>Click</button>
 
