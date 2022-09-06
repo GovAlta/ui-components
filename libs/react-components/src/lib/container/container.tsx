@@ -27,6 +27,7 @@ interface Props {
   colored?: boolean;
   padding?: ContainerPadding;
   actions?: ReactNode;
+  children?: ReactNode;
 }
 
 export const GoAContainer: FC<Props> = ({
