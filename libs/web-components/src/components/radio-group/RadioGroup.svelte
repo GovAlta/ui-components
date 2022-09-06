@@ -9,7 +9,7 @@
 
   export let name: string;
   export let value: string;
-  export let orientation = 'vertical';
+  export let orientation: 'vertical' | 'horizontal' = 'vertical';
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";

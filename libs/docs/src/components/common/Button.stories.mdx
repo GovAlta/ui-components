@@ -42,10 +42,27 @@ export const noop = () => {};
     defaultValue="normal"
     description=""
   />
-  <Prop name="disabled" type="boolean" defaultValue="false" description="" />
-  <Prop name="leadingicon" type="GoAIconType" description="" />
-  <Prop name="trailingicon" type="GoAIconType" description="" />
-  <Prop name="_click" type="CustomEvent" />
+  <Prop 
+    name="disabled" 
+    type="boolean" 
+    defaultValue="false" 
+    description="Whether button can be pressed" 
+  />
+  <Prop 
+    name="leadingicon" 
+    type="GoAIconType" 
+    description="Icon shown to the left of the text" 
+  />
+  <Prop 
+    name="trailingicon" 
+    type="GoAIconType" 
+    description="Icon shown to the right of the text" 
+  />
+  <Prop 
+    name="_click" 
+    type="CustomEvent" 
+    description="Callback function when button is clicked" 
+  />
 </Props>
 
 #### Types
