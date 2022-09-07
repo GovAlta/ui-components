@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 interface WCProps {
   label: string;
-  optional?: boolean;
+  optional?: string;
   error?: string;
   helptext?: string;
 }
@@ -26,7 +26,7 @@ interface GoAFormItemProps {
 
 export const GoAFormItem: FC<GoAFormItemProps> = ({ children, helpText, error, optional, label }) => {
   return (
-    <goa-form-item label={label} error={error} optional={optional} helptext={helpText}>
+    <goa-form-item label={label} error={error} optional={optional ? "true" : "false"} helptext={helpText}>
       {children}
     </goa-form-item>
   )
