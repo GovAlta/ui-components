@@ -7,12 +7,14 @@ import { format } from "date-fns";
   styleUrls: ['./input-component.component.css']
 })
 export class InputComponentComponent {
-
   constructor() { }
 
-  valueDate = format(new Date(), "yyyy-MM-dd");
-  minDate = format(new Date(), "yyyy-MM-dd");
-  maxDate = this.getDateWithMonthOffset(1);
+  date = new Date();
+  formatDate = format(this.date, "yyyy-MM-dd");
+  time = format(this.date, "HH:mm:ss");
+  dateTime = format(this.date, "yyyy-MM-dd HH:mm")
+  minDate = format(this.date, "yyyy-MM-dd");
+  maxDate = format(this.getDateWithMonthOffset(1), "yyyy-MM-dd");
 
   getDateWithMonthOffset(offset: number) {
     const d = new Date();
@@ -26,9 +28,5 @@ export class InputComponentComponent {
 
   handleTrailingIconClick() {
     console.log('handleTrailingIconClick');
-  }
-
-  onChange(e: any) {
-    this.valueDate = e.detail.value;
   }
 }

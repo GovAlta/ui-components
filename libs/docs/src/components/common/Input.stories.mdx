@@ -474,7 +474,7 @@ export const MinMaxTemplate = () => {
   </Tab>
 </Tabs>
 
-#### Date and time
+#### Date
 
 export const DateTemplate = () => {
   const [date, setDate] = useState(new Date());
@@ -496,7 +496,7 @@ export const DateTemplate = () => {
   )
 };
 
-<Story name="Date and time">
+<Story name="Date">
   {DateTemplate.bind({})}
 </Story>
 
@@ -508,7 +508,7 @@ export const DateTemplate = () => {
         export class MyComponent {
           date = format(new Date(), "yyyy-MM-dd");
           minDate = format(new Date(), "yyyy-MM-dd");
-          maxDate = this.getDateWithMonthOffset(1);
+          maxDate = format(this.getDateWithMonthOffset(1), "yyyy-MM-dd");
           getDateWithMonthOffset(offset) {
             const d = new Date();
             d.setMonth(d.getMonth() + offset);
@@ -522,14 +522,17 @@ export const DateTemplate = () => {
       lang="ts"
     />
     <CodeSnippet
-      code={`<goa-input
-        type="date"
-        name="withinTheNextMonth"
-        [min]="minDate"
-        [max]="maxDate"
-        [value]="date"
-        (_change)="onChange($event)">
-      </goa-input>`}
+      code={`
+        <goa-input
+          type="date"
+          name="withinTheNextMonth"
+          [min]="minDate"
+          [max]="maxDate"
+          [value]="date"
+          (_change)="onChange($event)"
+        >
+        </goa-input>
+      `}
       lang="html"
     />
   </Tab>
@@ -551,6 +554,121 @@ export const DateTemplate = () => {
             min={minDate}
             max={maxDate}
             onChange={(name, value) => setDate(value)}
+          />
+        )
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Time
+
+Note: you can use the `step` attribute < 60 to allow for seconds
+
+export const TimeTemplate = () => {
+  const [date, setDate] = useState(new Date());
+  return (
+    <GoAInputTime
+      name="timeExample"
+      value={date}
+      step="1"
+    />
+  )
+};
+
+<Story name="Time">
+  {TimeTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        import { format } from "date-fns";
+        export class MyComponent {
+          time = format(new Date(), "HH:mm:ss");
+        }
+      `}
+      lang="ts"
+    />
+    <CodeSnippet
+      code={`
+        <goa-input
+          type="time"
+          name="timeExample"
+          [value]="time"
+          step="1"
+        >
+        </goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        const [date, setDate] = useState(new Date());
+        return (
+          <GoAInputTime
+            name="timeExample"
+            value={date}
+            step="1"
+          />
+        )
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Date and Time
+
+export const DateTimeTemplate = () => {
+  const [date, setDate] = useState(new Date());
+  return (
+    <GoAInputDateTime
+      name="dateTimeExample"
+      value={date}
+    />
+  )
+};
+
+<Story name="Date and Time">
+  {DateTimeTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        import { format } from "date-fns";
+        export class MyComponent {
+          dateTime = format(new Date(), "yyyy-MM-dd HH:mm")
+        }
+      `}
+      lang="ts"
+    />
+    <CodeSnippet
+      code={`
+        <goa-input
+          type="datetime-local"
+          name="dateTimeExample"
+          [value]="date"
+        >
+        </goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        const [date, setDate] = useState(new Date());
+        return (
+          <GoAInputDateTime
+            name="dateTimeExample"
+            value={date}
           />
         )
       `}
