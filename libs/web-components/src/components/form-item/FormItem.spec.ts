@@ -6,7 +6,65 @@ afterEach(cleanup);
 
 describe("GoA FormItem", () => {
 
-  it("should render", async () => {
+  it("should render with no params", async () => {
+    const result =  render(GoAFormItem);
+    const el = result.container.querySelector(".goa-form-item");
+
+    const label = el.querySelector(".label");
+    expect(label).toBeFalsy();
+
+    const optional = document.querySelector("em");
+    expect(optional).toBeFalsy();
+
+    const helpText = document.querySelector(".help-msg");
+    expect(helpText).toBeFalsy();
+
+    const errMsg = document.querySelector(".error-msg");
+    expect(errMsg).toBeFalsy();
+  });
+
+  it("should not show optional text for a required (default) field", async () => {
+    const result =  render(GoAFormItem, {
+      label: "Credit Card Number"
+    });
+    const el = result.container.querySelector(".goa-form-item");
+
+    const label = el.querySelector(".label");
+    expect(label).toBeTruthy();
+
+    const optional = document.querySelector("em");
+    expect(optional).toBeFalsy();
+
+    const helpText = document.querySelector(".help-msg");
+    expect(helpText).toBeFalsy();
+
+    const errMsg = document.querySelector(".error-msg");
+    expect(errMsg).toBeFalsy();
+  });
+
+
+  it("should not show optional text for a required (default) field when set to false", async () => {
+    const result =  render(GoAFormItem, {
+      label: "Credit Card Number",
+      optional: "false"
+    });
+    const el = result.container.querySelector(".goa-form-item");
+
+    const label = el.querySelector(".label");
+    expect(label).toBeTruthy();
+
+    const optional = document.querySelector("em");
+    expect(optional).toBeFalsy();
+
+    const helpText = document.querySelector(".help-msg");
+    expect(helpText).toBeFalsy();
+
+    const errMsg = document.querySelector(".error-msg");
+    expect(errMsg).toBeFalsy();
+  });
+
+
+  it("should render all params", async () => {
     render(GoAFormItem, {
       label: "the label",
       helptext: "the helptext",
