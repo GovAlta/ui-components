@@ -65,6 +65,7 @@ export default function Input() {
         name="Time from string mm:ss value"
         value={format(date, "hh:mm")}
         onChange={noop}
+        step={1}
       />
 
       Time with a min and max 
