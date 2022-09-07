@@ -8,7 +8,7 @@
   export let label: string = "";
   export let helptext: string = "";
   export let error: string = "";
-  export let optional: string = "";
+  export let optional: string = "false";
 
   $: isOptional = toBoolean(optional);
 </script>
