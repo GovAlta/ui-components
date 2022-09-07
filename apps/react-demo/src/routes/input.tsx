@@ -28,6 +28,7 @@ export default function Input() {
         value={0}
         min={0}
         max={10}
+        step={2}
         onChange={noop}
       />
       <GoAInputDate
