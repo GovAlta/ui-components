@@ -22,7 +22,9 @@ export default function Dropdown() {
 
   return (
     <>
-      <h3>Dropdown</h3>
+      <h1>Dropdown</h1>
+
+      <h2>Default</h2>
       <GoADropdown
         name="colors"
         placeholder="Select a user"
@@ -34,7 +36,7 @@ export default function Dropdown() {
         <GoADropdownOption value="blue" name="colors" label="Blue" />
       </GoADropdown >
 
-      <h3>Error</h3>
+      <h2>Error</h2>
       <GoADropdown 
         name="colors2" 
         placeholder="Select a user" 
@@ -47,7 +49,7 @@ export default function Dropdown() {
         <GoADropdownOption value="blue" name="colors2" label="Blue" />
       </GoADropdown>
 
-      <h3>Dynamic</h3>
+      <h2>Dynamic</h2>
       {dynamicItems.map(item => 
         <div>
           <GoADropdown 

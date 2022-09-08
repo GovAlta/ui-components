@@ -5,23 +5,24 @@ import * as React from 'react';
 export default function MicrositeHeader() {
   return (
     <>
-      <h3>Alpha</h3>
+      <h1>Microsite Header</h1>
+      <h2>Alpha</h2>
       <GoAMicrositeHeader type="alpha"></GoAMicrositeHeader>
 
       <br />
-      <h3>Beta</h3>
+      <h2>Beta</h2>
       <GoAMicrositeHeader type="beta"></GoAMicrositeHeader>
 
       <br />
-      <h3>Live</h3>
+      <h2>Live</h2>
       <GoAMicrositeHeader type="live"></GoAMicrositeHeader>
 
       <br />
-      <h3>Version</h3>
+      <h2>Version</h2>
       <GoAMicrositeHeader type="alpha" version="v1.2.3"></GoAMicrositeHeader>
 
       <br />
-      <h3>Feedback Url</h3>
+      <h2>Feedback Url</h2>
       <GoAMicrositeHeader
         type="alpha"
         version="v1.2.3"

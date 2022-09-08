@@ -1,39 +1,41 @@
-<h3>Basic</h3>
+<h1>Radio</h1>
+
+<h2>Basic</h2>
 <goa-radio-group name="color" value="orange" (_change)="onChange($event)">
   <goa-radio-item name="color" value="red"></goa-radio-item>
   <goa-radio-item name="color" value="blue"></goa-radio-item>
   <goa-radio-item name="color" value="orange"></goa-radio-item>
 </goa-radio-group>
 
-<h3>Error</h3>
+<h2>Error</h2>
 <goa-radio-group name="color1" value="orange" error>
   <goa-radio-item name="color1" value="red"></goa-radio-item>
   <goa-radio-item name="color1" value="blue"></goa-radio-item>
   <goa-radio-item name="color1" value="orange"></goa-radio-item>
 </goa-radio-group>
 
-<h3>Label</h3>
+<h2>Label</h2>
 <goa-radio-group name="color2" value="orange">
   <goa-radio-item name="color2" label="Red" value="red"></goa-radio-item>
   <goa-radio-item name="color2" label="Blue" value="blue"></goa-radio-item>
   <goa-radio-item name="color2" label="Orange" value="orange"></goa-radio-item>
 </goa-radio-group>
 
-<h3>Disabled</h3>
+<h2>Disabled</h2>
 <goa-radio-group name="color3" value="orange" disabled>
   <goa-radio-item name="color3" value="red"></goa-radio-item>
   <goa-radio-item name="color3" value="blue"></goa-radio-item>
   <goa-radio-item name="color3" value="orange"></goa-radio-item>
 </goa-radio-group>
 
-<h3>Orientation</h3>
+<h2>Orientation</h2>
 <goa-radio-group name="color4" value="orange" orientation="horizontal">
   <goa-radio-item name="color4" value="red"></goa-radio-item>
   <goa-radio-item name="color4" value="blue"></goa-radio-item>
   <goa-radio-item name="color4" value="orange"></goa-radio-item>
 </goa-radio-group>
 
-<h3>Dynamic</h3>
+<h2>Dynamic</h2>
 <div *ngFor="let item of dynamicItems">
   <h4>{{item.name}}</h4>
   <goa-radio-group

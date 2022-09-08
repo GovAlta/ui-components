@@ -4,7 +4,8 @@ import * as React from 'react';
 export default function HeroBanner() {
   return (
     <>
-      <h3>Default</h3>
+      <h1>Hero Banner</h1>
+      <h2>Default</h2>
       <GoAHeroBanner
         heading="Hero Banner"
         backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
@@ -15,7 +16,7 @@ export default function HeroBanner() {
       </GoAHeroBanner>
 
       <br />
-      <h3>With Actions</h3>
+      <h2>With Actions</h2>
       <GoAHeroBanner
         heading="Hero Banner"
         backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"

@@ -15,7 +15,8 @@ export default function Input() {
 
   return (
     <>
-      <h3>Basic</h3>
+      <h1>Input</h1>
+      <h2>Basic</h2>
       <GoAInput
         name=""
         value=""
@@ -78,7 +79,7 @@ export default function Input() {
         onChange={noop}
       />
 
-      <h3>Icons</h3>
+      <h2>Icons</h2>
       <GoAInput
         name=""
         value=""
@@ -95,7 +96,7 @@ export default function Input() {
         trailingIcon="finger-print"
       />
 
-      <h3>Icon Buttons</h3>
+      <h2>Icon Buttons</h2>
       <GoAInput
         trailingIcon="finger-print"
         name=""
@@ -105,7 +106,7 @@ export default function Input() {
         onTrailingIconClick={noop}
       />
 
-      <h3>Disabled</h3>
+      <h2>Disabled</h2>
       <GoAInput
         name=""
         value=""
@@ -115,7 +116,7 @@ export default function Input() {
         placeholder="Find by name"
       />
 
-      <h3>Error state</h3>
+      <h2>Error state</h2>
       <GoAInput
         name=""
         value=""
@@ -124,7 +125,7 @@ export default function Input() {
         error={true}
       />
 
-      <h3>Focus</h3>
+      <h2>Focus</h2>
       <GoAInput
         name=""
         value=""
@@ -132,7 +133,7 @@ export default function Input() {
         type="text"
       />
 
-      <h3>Character count</h3>
+      <h2>Character count</h2>
       <GoAInput
         name="firstname"
         value=""
@@ -141,7 +142,7 @@ export default function Input() {
         maxCharCount={20}
       />
 
-      <h3>Character count with limit</h3>
+      <h2>Character count with limit</h2>
       <GoAInput
         name="firstname"
         value=""

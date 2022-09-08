@@ -4,25 +4,26 @@ import * as React from 'react';
 export default function FormItem() {
   return (
     <>
-      <h3>Basic</h3>
+      <h1>Form Item</h1>
+      <h2>Basic</h2>
       <GoAFormItem label="First name">
         <GoAInput name="firstName" value="" onChange={() => void 0} type="text"></GoAInput>
       </GoAFormItem>
 
       <br />
-      <h3>Optional</h3>
+      <h2>Optional</h2>
       <GoAFormItem label="First name" optional>
         <GoAInput name="firstName2" value="" onChange={() => void 0} type="text"></GoAInput>
       </GoAFormItem>
 
       <br />
-      <h3>Help text</h3>
+      <h2>Help text</h2>
       <GoAFormItem label="First name" helpText="Help text">
         <GoAInput name="firstName3" value="" onChange={() => void 0} type="text"></GoAInput>
       </GoAFormItem>
 
       <br />
-      <h3>Required</h3>
+      <h2>Required</h2>
       <GoAFormItem
         label="First name"
         error="First name is required"
@@ -32,7 +33,7 @@ export default function FormItem() {
       </GoAFormItem>
 
       <br />
-      <h3>Form row</h3>
+      <h2>Form row</h2>
       <GoAFlexRow gap="small">
         <GoAFormItem
           label="First name"
