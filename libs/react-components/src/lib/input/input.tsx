@@ -89,7 +89,7 @@ interface Props {
 export const GoAInput: FC<Props & { type?: GoAInputType }> = ({
   id,
   name,
-  type = 'text',
+  type,
   leadingIcon,
   trailingIcon,
   variant = 'goa',
