@@ -22,42 +22,43 @@ export default function Radio() {
 
   return (
     <>
-      <h3>Basic</h3>
+      <h1>Radio Button</h1>
+      <h2>Basic</h2>
       <GoARadioGroup name="color" value="orange" onChange={onChange}>
         <GoARadioItem name="color" value="red"></GoARadioItem>
         <GoARadioItem name="color" value="blue"></GoARadioItem>
         <GoARadioItem name="color" value="orange"></GoARadioItem>
       </GoARadioGroup >
 
-      <h3>Error</h3>
+      <h2>Error</h2>
       <GoARadioGroup name="color2" value="orange" error onChange={onChange}>
         <GoARadioItem name="color2" value="red"></GoARadioItem>
         <GoARadioItem name="color2" value="blue"></GoARadioItem>
         <GoARadioItem name="color2" value="orange"></GoARadioItem>
       </GoARadioGroup >
 
-      <h3>Label</h3>
+      <h2>Label</h2>
       <GoARadioGroup name="color3" value="orange" onChange={onChange}>
         <GoARadioItem name="color3" label="Red" value="red"></GoARadioItem>
         <GoARadioItem name="color3" label="Blue" value="blue"></GoARadioItem>
         <GoARadioItem name="color3" label="Orange" value="orange"></GoARadioItem>
       </GoARadioGroup >
 
-      <h3>Disabled</h3>
+      <h2>Disabled</h2>
       <GoARadioGroup name="color4" value="orange" disabled onChange={onChange}>
         <GoARadioItem name="color4" value="red"></GoARadioItem>
         <GoARadioItem name="color4" value="blue"></GoARadioItem>
         <GoARadioItem name="color4" value="orange"></GoARadioItem>
       </GoARadioGroup >
 
-      <h3>Orientation</h3>
+      <h2>Orientation</h2>
       <GoARadioGroup name="color5" value="orange" orientation="horizontal" onChange={onChange}>
         <GoARadioItem name="color5" value="red"></GoARadioItem>
         <GoARadioItem name="color5" value="blue"></GoARadioItem>
         <GoARadioItem name="color5" value="orange"></GoARadioItem>
       </GoARadioGroup >
 
-      <h3>Dynamic</h3>
+      <h2>Dynamic</h2>
       {dynamicItems.map(item => 
         <div>
           <h4>{item.name}</h4>

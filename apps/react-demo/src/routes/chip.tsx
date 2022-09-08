@@ -26,19 +26,20 @@ export default function Chip() {
 
   return (
     <>
-      <h3>Basic</h3>
+      <h1>Chip</h1>
+      <h2>Basic</h2>
       <GoAChip content="Chip Text"></GoAChip>
 
       <br />
-      <h3>Leading icon</h3>
+      <h2>Leading icon</h2>
       <GoAChip content="Chip Text" leadingIcon="close-circle"></GoAChip>
 
       <br />
-      <h3>Delete event</h3>
+      <h2>Delete event</h2>
       {ChipsToDeleteExample(chips, deleteChip)}
 
       <br />
-      <h3>Error state</h3>
+      <h2>Error state</h2>
       <GoAChip content="Chip Text" deletable={true}></GoAChip>
       <GoAChip
         content="Chip Text"

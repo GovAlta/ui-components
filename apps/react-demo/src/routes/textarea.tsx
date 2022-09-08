@@ -61,54 +61,57 @@ export default function TextArea() {
 
   return (
     <>
-      <h3>Basic</h3>
+      <h1>TextArea</h1>
+      <h2>Basic</h2>
       <GoATextArea
         name="comment-basic"
         value={value}
         onChange={onChange}
-      ></GoATextArea>
+      />
 
-      <h3>Character count</h3>
+      <h2>Character count</h2>
       <GoATextArea name="firstname"
         value={value2}
         onChange={onChange2}
-        showCounter={true}></GoATextArea>
+        showCounter={true}
+      />
 
-      <h3>Character count with limit</h3>
+      <h2>Character count with limit</h2>
       <GoATextArea
         name="firstname"
         value={value3}
         onChange={onChange3}
         showCounter={true}
         maxCharCount={20}
-      ></GoATextArea>
+      />
 
-      <h3>Disabled</h3>
+      <h2>Disabled</h2>
       <GoATextArea name="comment-disabled"
         value={value4}
         onChange={onChange4}
-        disabled={true}></GoATextArea>
+        disabled={true}
+      />
 
-      <h3>Placeholder</h3>
+      <h2>Placeholder</h2>
       <GoATextArea
         placeholder="Tell us what you think.."
         name="comment"
         value={value5}
         onChange={onChange5}
-      ></GoATextArea>
+      />
 
-      <h3>Rows</h3>
+      <h2>Rows</h2>
       <GoATextArea rows={4} name="comment"
         value={value6}
         onChange={onChange6}
-      ></GoATextArea>
+      />
 
-      <h3>Error state</h3>
+      <h2>Error state</h2>
       <GoATextArea
         error={true} name="comment"
         value={value7}
         onChange={onChange7}
-      ></GoATextArea>
+      />
     </>
   );
 }

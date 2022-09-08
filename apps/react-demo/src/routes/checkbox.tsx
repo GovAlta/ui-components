@@ -25,7 +25,9 @@ export default function Checkbox() {
 
   return (
     <>
-      <h3>Basic</h3>
+      <h1>Checkbox</h1>
+
+      <h2>Basic</h2>
       <GoACheckbox
         name="desserts"
         text="Ice Cream"
@@ -35,7 +37,7 @@ export default function Checkbox() {
       >
       </GoACheckbox>
 
-      <h3>Checked</h3>
+      <h2>Checked</h2>
       <GoACheckbox
         name="desserts"
         text="Ice Cream"
@@ -44,7 +46,7 @@ export default function Checkbox() {
         onChange={(name, checked, value) => onChange2(name, checked, value)}
       ></GoACheckbox>
 
-      <h3>Disabled</h3>
+      <h2>Disabled</h2>
       <GoACheckbox
         name="desserts"
         text="Ice Cream"
@@ -53,7 +55,7 @@ export default function Checkbox() {
         checked={false}
       ></GoACheckbox>
 
-      <h3>Error</h3>
+      <h2>Error</h2>
       <GoACheckbox
         name="desserts"
         text="Ice Cream"

@@ -1,11 +1,13 @@
-<h3>Basic</h3>
+<h1>Text Area</h1>
+
+<h2>Basic</h2>
 <goa-textarea
   name="comment-basic"
   (_change)="onChange($event)"
   value="Initial value"
 ></goa-textarea>
 
-<h3>Character count</h3>
+<h2>Character count</h2>
 <goa-textarea
   name="CharacterCountField"
   [value]="characterCountFieldValue"
@@ -13,7 +15,7 @@
   showcounter="true"
 ></goa-textarea>
 
-<h3>Character count with limit</h3>
+<h2>Character count with limit</h2>
 <goa-textarea
   name="CharacterCountWithLimitField"
   [value]="characterCountWithLimitValue"
@@ -22,17 +24,17 @@
   maxcharcount="20"
 ></goa-textarea>
 
-<h3>Disabled</h3>
+<h2>Disabled</h2>
 <goa-textarea name="comment-disabled" disabled></goa-textarea>
 
-<h3>Placeholder</h3>
+<h2>Placeholder</h2>
 <goa-textarea
   placeholder="Tell us what you think.."
   name="comment"
 ></goa-textarea>
 
-<h3>Rows</h3>
+<h2>Rows</h2>
 <goa-textarea rows="4" name="comment"></goa-textarea>
 
-<h3>Error state</h3>
+<h2>Error state</h2>
 <goa-textarea error name="comment"></goa-textarea>

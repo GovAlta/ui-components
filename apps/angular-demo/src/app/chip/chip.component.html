@@ -1,12 +1,12 @@
-<h3>Basic</h3>
+<h1>Chip</h1>
+
+<h2>Basic</h2>
 <goa-chip content="Chip Text"></goa-chip>
 
-<br />
-<h3>Leading icon</h3>
+<h2>Leading icon</h2>
 <goa-chip content="Chip Text" leadingicon="close-circle"></goa-chip>
 
-<br />
-<h3>Delete event</h3>
+<h2>Delete event</h2>
 <goa-chip
   *ngFor="let chip of chips"
   [content]="chip"
@@ -14,8 +14,7 @@
   (_click)="deleteChip(chip)"
 ></goa-chip>
 
-<br />
-<h3>Error state</h3>
+<h2>Error state</h2>
 <goa-chip content="Chip Text" error="true"></goa-chip>
 <goa-chip
   content="Chip Text"
