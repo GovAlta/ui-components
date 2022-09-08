@@ -86,10 +86,10 @@ interface Props {
   step?: number;
 };
 
-export const GoAInput: FC<Props & { type: GoAInputType }> = ({
+export const GoAInput: FC<Props & { type?: GoAInputType }> = ({
   id,
   name,
-  type,
+  type = 'text',
   leadingIcon,
   trailingIcon,
   variant = 'goa',

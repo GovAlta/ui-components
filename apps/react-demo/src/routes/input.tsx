@@ -150,6 +150,11 @@ export default function Input() {
         showCounter={true}
         maxCharCount={20}
       />
+
+      <h3>Prefix and Suffix</h3>
+      <GoAInput name="input" value="" prefix="$" onChange={noop} />
+      <GoAInput name="input" value="" suffix="items" onChange={noop} />
+      <GoAInput name="input" value="" prefix="$" suffix="per item" onChange={noop} />
     </>
   );
 }

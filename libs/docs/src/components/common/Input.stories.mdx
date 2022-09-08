@@ -769,9 +769,9 @@ export const WidthTemplate = ({ width }) => {
   <Tab label="Angular">
     <CodeSnippet
       code={`
-        <goa-input name="input" prefix="$" onChange={() => {}}></goa-input>
-        <goa-input name="input" suffix="items" onChange={() => {}}></goa-input>
-        <goa-input name="input" prefix="$" suffix="per item" onChange={() => {}}></goa-input>
+        <goa-input name="input" prefix="$"></goa-input>
+        <goa-input name="input" suffix="items"></goa-input>
+        <goa-input name="input" prefix="$" suffix="per item"></goa-input>
       `}
       lang="html"
     />
@@ -779,9 +779,9 @@ export const WidthTemplate = ({ width }) => {
   <Tab label="React">
     <CodeSnippet
       code={`
-        <GoAInput name="input" prefix="$" onChange={() => {}} />
-        <GoAInput name="input" suffix="items" onChange={() => {}} />
-        <GoAInput name="input" prefix="$" suffix="per item" onChange={() => {}} />
+        <GoAInput name="input" value="" prefix="$" onChange={() => {}} />
+        <GoAInput name="input" value="" suffix="items" onChange={() => {}} />
+        <GoAInput name="input" value="" prefix="$" suffix="per item" onChange={() => {}} />
       `}
       lang="tsx"
     />
