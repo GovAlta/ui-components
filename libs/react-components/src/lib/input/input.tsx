@@ -19,7 +19,7 @@ type GoAInputType =
 
 interface WCProps {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
-  type: GoAInputType;
+  type?: GoAInputType;
   name: string;
   value: string;
   id?: string;
