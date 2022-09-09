@@ -15,7 +15,6 @@ describe('GoA Button', () => {
     expect(screen.getByText(buttonText));
   });
 
-
   describe("size", () => {
     ["compact", "normal"].forEach((size: ButtonSize) => {
       it(`should render ${size} size`, async () => {
@@ -27,15 +26,6 @@ describe('GoA Button', () => {
       });
     });
   });
-
-  describe("a11y", () => {
-    it('should have a role = button', async () => {
-      const baseElement = render(<GoAButton onClick={noop}>Button</GoAButton>);
-      const button = await baseElement.findByRole("button");
-
-      expect(button).toBeTruthy();
-    })
-  })
 
   describe("type", () => {
     ["primary", "submit", "secondary", "tertiary"].forEach((type: ButtonType) => {

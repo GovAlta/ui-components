@@ -64,7 +64,6 @@ export const GoAButton: FC<ButtonProps> = ({
   return (
     <goa-button
       ref={el}
-      role="button"
       type={type}
       size={size}
       variant={variant}
