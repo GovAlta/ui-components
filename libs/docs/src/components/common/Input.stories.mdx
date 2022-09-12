@@ -44,64 +44,59 @@ import { Meta, Story } from '@storybook/addon-docs';
     defaultValue="text"
     description="Sets the type of the input field"
   />
+  <Prop name="name" type="string" />
+  <Prop name="value" type="string" />
+  <Prop name="placeholder" type="string" />
+  <Prop name="leadingicon" type="GoAIconType" />
+  <Prop name="disabled" type="boolean" defaultValue="false" />
+  <Prop name="trailingicon" type="GoAIconType" />
   <Prop
-    name="name"
-    type="string"
-    description="Name of input value that is received in the _change event"
+    name="handletrailingiconclick"
+    type="boolean"
+    defaultValue="false"
+    description="Only required for Angular and web-component usage"
   />
-  <Prop name="value" type="string" description="Bound to value" />
+  <Prop name="focused" type="boolean" defaultValue="false" />
+  <Prop name="readonly" type="boolean" defaultValue="false" />
+  <Prop name="error" type="boolean" defaultValue="false" />
+  <Prop name="width" type="string" defaultValue="30ch" />
+  <Prop name="showcounter" type="boolean" defaultValue="false" />
+  <Prop name="maxcharcount" type="number" />
   <Prop
-    name="placeholder"
-    type="string"
-    description="Text displayed within the input when no value is set"
+    name="min"
+    type="string | date"
+    description="A string value *must* be in ISO 8601 format"
   />
-  <Prop name="leadingicon" type="GoAIconType" description="Icon shown to the left of the text"/>
-  <Prop name="trailingicon" type="GoAIconType" description="Icon shown to the right of the text" />
-  <Prop name="disabled" type="boolean" defaultValue="false" description="Disable this control. It will not receive focus or events"/>
-  <Prop name="handletrailingiconclick" type="boolean" defaultValue="false" description="Only required for Angular and web-component usage"/>
-  <Prop name="focused" type="boolean" defaultValue="false" description="Sets the cursor focus to the input"/>
-  <Prop name="readonly" type="boolean" defaultValue="false" description="Makes the input readonly"/>
-  <Prop name="error" type="boolean" defaultValue="false" description="Sets the input to an error state"/>
-  <Prop name="width" type="string" defaultValue="30ch" description="Set the width of the text input area" />
-  <Prop name="showcounter" type="boolean" defaultValue="false" description="Shows the number of characters entered if it is set to True"/>
-<Prop name="maxcharcount" type="number" description="Maximum number of characters allowed in the input box"/>
-<Prop
-  name="min"
-  type="string | date"
-  description="A string value *must* be in ISO 8601 format"
-/>
-<Prop
-  name="max"
-  type="string | date"
-  description="A string value *must* be in ISO 8601 format"
-/>
-<Prop
-  name="step"
-  type="number"
-  description="By how much number of day or time value will change by"
-/>
-<Prop
-  name="arialabel"
-  type="string"
-  description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name"
-/>
-<Prop
-  name="prefix"
-  type="string"
-  description="Text that comes before the input"
-/>
-<Prop
-  name="suffix"
-  type="string"
-  description="Text that comes after the input"
-/>
-  <Prop name="autocapitalize" type="on | off | none | sentences | words | characters" defaultValue="off" description="Controls whether and how text input is automatically capitalized as it is entered/edited by the user." />
+  <Prop
+    name="max"
+    type="string | date"
+    description="A string value *must* be in ISO 8601 format"
+  />
+  <Prop
+    name="step"
+    type="number"
+    description="By how much number of day or time value will change by"
+  />
+  <Prop
+    name="arialabel"
+    type="string"
+    description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name"
+  />
+  <Prop
+    name="prefix"
+    type="string"
+    description="The text that comes before the input"
+  />
+  <Prop
+    name="suffix"
+    type="string"
+    description="The text that comes after the input"
+  />
   <Prop
     name="_change"
     type="CustomEvent<{detail: {name: string, value: string}}>"
-    description="Callback function invoked when input value is changed"
   />
-  <Prop name="_trailingiconclick" type="CustomEvent" description="onclick function invoked when trailing icon is clicked"/>
+  <Prop name="_trailingiconclick" type="CustomEvent" />
 </Props>
 
 export const noop = () => {};
@@ -856,19 +851,38 @@ export const WidthTemplate = ({ width }) => {
   </Tab>
 </Tabs>
 
-
-#### Autocapitalize 
+#### Autocapitalize
 
 export const AutocapitalizeTemplate = () => {
   return (
     <>
-      <GoAInputText name="chars" autoCapitalize="off" placeholder="off | none" onChange={() => {}} />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="off"
+        placeholder="off | none"
+        onChange={() => {}}
+      />
       <br />
-      <GoAInputText name="chars" autoCapitalize="on" placeholder="on | sentences" onChange={() => {}} />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="on"
+        placeholder="on | sentences"
+        onChange={() => {}}
+      />
       <br />
-      <GoAInputText name="chars" autoCapitalize="words" placeholder="words" onChange={() => {}} />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="words"
+        placeholder="words"
+        onChange={() => {}}
+      />
       <br />
-      <GoAInputText name="chars" autoCapitalize="characters" placeholder="characters" onChange={() => {}} />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="characters"
+        placeholder="characters"
+        onChange={() => {}}
+      />
     </>
   );
 };
