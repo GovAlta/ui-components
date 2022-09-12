@@ -67,17 +67,13 @@
   data-testid={testid}
 >
   {#if type === "start"}
-    <div class="text">
-      <slot />
-    </div>
+    <slot class="text" />
     <goa-icon id="trailing-icon" type="arrow-forward" inverted="true" />
   {:else}
     {#if leadingicon}
       <goa-icon id="leading-icon" type={leadingicon} inverted={isButtonDark} />
     {/if}
-    <div class="text">
-      <slot />
-    </div>
+    <slot class="text" />
     {#if trailingicon}
       <goa-icon id="trailing-icon" type={trailingicon} inverted={isButtonDark} />
     {/if}
