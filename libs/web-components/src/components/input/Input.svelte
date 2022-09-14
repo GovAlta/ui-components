@@ -178,7 +178,6 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
   }
 
   .container {
@@ -255,6 +254,7 @@
     flex: 1 1 auto;
   }
 
+  input[type=text],
   input[type=date],
   input[type="datetime-local"],
   input[type=number] {
