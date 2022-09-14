@@ -17,12 +17,15 @@ type GoAInputType =
   | "url"
   | "week";
 
+type GoAAutoCapitalize = "on" | "off" | "none" | "sentences" | "words" | "characters";
+
 interface WCProps {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
   type?: GoAInputType;
   name: string;
   value: string;
   id?: string;
+  autocapitalize?: GoAAutoCapitalize;
   placeholder?: string;
   leadingicon?: string;
   trailingicon?: string;
@@ -56,7 +59,7 @@ declare global {
 }
 
 
-interface Props {
+export interface InputProps {
   // required
   name: string;
   value: string;
@@ -65,6 +68,7 @@ interface Props {
   // optional
   id?: string;
   disabled?: boolean;
+  autoCapitalize?: GoAAutoCapitalize;
   placeholder?: string;
   leadingIcon?: GoAIconType;
   trailingIcon?: GoAIconType;
@@ -86,10 +90,11 @@ interface Props {
   step?: number;
 };
 
-export const GoAInput: FC<Props & { type?: GoAInputType }> = ({
+export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   id,
   name,
   type,
+  autoCapitalize,
   leadingIcon,
   trailingIcon,
   variant = 'goa',
@@ -139,6 +144,7 @@ export const GoAInput: FC<Props & { type?: GoAInputType }> = ({
       focused={focused}
       type={type}
       name={name}
+      autocapitalize={autoCapitalize}
       id={id}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
@@ -162,22 +168,22 @@ export const GoAInput: FC<Props & { type?: GoAInputType }> = ({
   );
 };
 
-export const GoAInputText: FC<Props> = (props) => {
+export const GoAInputText: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="text" />;
 }
 
-export const GoAInputPassword: FC<Props> = (props) => {
+export const GoAInputPassword: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="password" />;
 }
 
-export const GoAInputDate: FC<Omit<Props, "value"> & { value: Date | string}> = ({value, min, max, ...props}) => {
+export const GoAInputDate: FC<Omit<InputProps, "value"> & { value: Date | string}> = ({value, min, max, ...props}) => {
   const _value: Date = typeof value === "string" ? new Date(value) : value;
   const _min = min ? format(new Date(min), "yyyy-MM-dd") : "";
   const _max = max ? format(new Date(max), "yyyy-MM-dd") : "";
   return <GoAInput {...props} min={_min} max={_max} value={format(_value, "yyyy-MM-dd")} type="date" />;
 }
 
-export const GoAInputTime: FC<Omit<Props, "value"> & { value: Date | string}> = ({value, ...props}) => {
+export const GoAInputTime: FC<Omit<InputProps, "value"> & { value: Date | string}> = ({value, ...props}) => {
   try {
     const d: Date = typeof value === "string" ? new Date(value) : value;
     return <GoAInput {...props} value={format(d, "hh:mm")} type="time" />;
@@ -187,7 +193,7 @@ export const GoAInputTime: FC<Omit<Props, "value"> & { value: Date | string}> = 
 }
 
 export const GoAInputDateTime: FC<
-  Omit<Props, "value">
+  Omit<InputProps, "value">
   & { value: Date}
   > = ({value, ...props}) => {
 
@@ -195,37 +201,37 @@ export const GoAInputDateTime: FC<
   return <GoAInput {...props} value={format(d, "yyyy-MM-dd'T'hh:mm")} type="datetime-local" />;
 }
 
-export const GoAInputEmail: FC<Props> = (props) => {
+export const GoAInputEmail: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="email" />;
 }
 
-export const GoAInputSearch: FC<Props> = (props) => {
+export const GoAInputSearch: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="search" trailingIcon="search" />;
 }
 
-export const GoAInputUrl: FC<Props> = (props) => {
+export const GoAInputUrl: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="url" />;
 }
 
-export const GoAInputTel: FC<Props> = (props) => {
+export const GoAInputTel: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="tel" />;
 }
 
-export const GoAInputFile: FC<Props> = (props) => {
+export const GoAInputFile: FC<InputProps> = (props) => {
   return <input id={props.id} name={props.name} type="file" onChange={(e) => props.onChange(e.target.name, e.target.value)} style={{ backgroundColor: 'revert' }} />;
 }
 
-export const GoAInputMonth: FC<Props> = (props) => {
+export const GoAInputMonth: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="month" />;
 }
 
 export const GoAInputNumber: FC<
-  Omit<Props, "value" | "min" | "max"> 
+  Omit<InputProps, "value" | "min" | "max"> 
   & { value: number, min?: number, max?: number}> = ({min, max, value, ...props}) => {
   return <GoAInput {...props} min={min?.toString()} max={max?.toString()} value={value.toString()} type="number" />;
 }
 
-export const GoAInputRange: FC<Props> = (props) => {
+export const GoAInputRange: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="range" />;
 }
 

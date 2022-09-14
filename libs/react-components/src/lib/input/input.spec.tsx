@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { render } from '@testing-library/react';
 import { fireEvent, screen } from '@testing-library/dom';
-import { GoAInputText, Props as InputProps } from './input';
+import { GoAInputText, InputProps } from './input';
 import { GoAIconType } from '../icons';
 
 const noop = () => { };
@@ -16,13 +16,14 @@ const defaultProps: InputProps = {
 
 describe('Input', () => {
   it('should render', () => {
-    const props = {
+    const props: InputProps = {
       ...defaultProps,
       name: "foo",
       value: "bar",
       id: "foo",
       leadingIcon: "search" as GoAIconType,
       trailingIcon: "close" as GoAIconType,
+      autoCapitalize: "on",
       variant: "bare",
       disabled: true,
       readonly: true,
@@ -45,6 +46,7 @@ describe('Input', () => {
     expect(input.getAttribute("id")).toBe("foo");
     expect(input.getAttribute("leadingicon")).toBe("search");
     expect(input.getAttribute("trailingicon")).toBe("close");
+    expect(input.getAttribute("autocapitalize")).toBe("on");
     expect(input.getAttribute("variant")).toBe("bare");
     expect(input.getAttribute("disabled")).toBeTruthy();
     expect(input.getAttribute("readonly")).toBeTruthy();

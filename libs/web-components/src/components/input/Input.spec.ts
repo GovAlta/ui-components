@@ -86,6 +86,12 @@ describe('GoAInput Component', () => {
       const root = el.container.querySelector('[aria-label="firstName"]');
       expect(root).toBeTruthy();
     });
+
+    it("has an autocapitalize prop", async () => {
+      const el = render(GoAInput, { testid: "input-test", autocapitalize: "on" });
+      const root = el.container.querySelector('[autocapitalize=on]');
+      expect(root).toBeTruthy();
+    });
   })
 
 
