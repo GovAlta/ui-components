@@ -1,15 +1,14 @@
 <svelte:options tag="goa-radio-group" />
 
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
-  import { deleteContext, ContextStore, createContext } from '../../common/context-store';
+  import { onDestroy } from "svelte";
+  import { deleteContext, ContextStore, getContext } from "../../common/context-store";
   import type { RadioMessage } from "./types";
-  import { toBoolean } from '../../common/utils';
-  import { BIND } from './types';
+  import { toBoolean } from "../../common/utils";
 
   export let name: string;
   export let value: string;
-  export let orientation: 'vertical' | 'horizontal' = 'vertical';
+  export let orientation: "vertical" | "horizontal" = "vertical";
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = ""; // TODO: remove this param
@@ -17,69 +16,60 @@
   let options: RadioMessage[] = [];
 
   // private
-  let isError: boolean
+  let isError: boolean;
   let ctx: ContextStore;
 
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
 
+  let isBound = false;
   let el: HTMLElement;
-
-  onMount(() => {
-    const maxAttempts = 10;
-    let attempts = 0; 
-    const fn = setInterval(async () => {
-      attempts++;
-      if (name) {
-        ctx = createContext(name);
-        ctx.subscribe((msg) => {
-          switch (msg?.type) {
-            case BIND: {
-              options = [...options, msg as RadioMessage];
-            }
-          }
-        });
-
-        clearInterval(fn);
-      }
-      if (attempts > maxAttempts) {
-        console.error("goa-radio: missing the required `name` attribute. It must match the children's name attribute.")
-        clearInterval(fn);
-      }
-    }, 10);
-  })
+  $: {
+    if (name && !isBound) {
+      isBound = true;
+      ctx = getContext(name);
+      ctx.subscribe(msg => {
+        if (!msg) return;
+        options = [...options, msg as RadioMessage];
+      });
+    }
+  }
 
   function onChange(newValue: string) {
     if (newValue === value) return;
 
     value = newValue;
-    el.dispatchEvent(new CustomEvent('_change', {
-      composed: true,
-      detail: { name, value: value}
-    }))
+    el.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        detail: { name, value: value },
+      }),
+    );
   }
 
   onDestroy(() => {
     deleteContext(name);
   });
-
 </script>
 
 <!-- Html -->
-<div
-  bind:this={el}
-  class={`goa-radio-group--${orientation}`}
-  data-testid={testid}
->
+<div bind:this={el} class={`goa-radio-group--${orientation}`} data-testid={testid}>
   <slot />
-  {#each options as option (option.value) }
+  {#each options as option (option.value)}
     <label
       data-testid="radio-option-{option.value}"
       class="goa-radio"
       class:goa-radio--disabled={isDisabled}
       class:goa-radio--error={isError}
     >
-      <input type="radio" {name} value={option.value} disabled={isDisabled} checked={option.value === value} on:change={() => onChange(option.value)} />
+      <input
+        type="radio"
+        {name}
+        value={option.value}
+        disabled={isDisabled}
+        checked={option.value === value}
+        on:change={() => onChange(option.value)}
+      />
       <div class="goa-radio-icon" />
       <span class="goa-radio-label">
         {option.label || option.value}
@@ -155,7 +145,7 @@
     transition: box-shadow 100ms ease-in-out;
 
     /* prevent squishing of radio button */
-    flex: 0 0 auto; 
+    flex: 0 0 auto;
   }
 
   .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
@@ -173,7 +163,8 @@
 
   /* Checked */
   input[type="radio"]:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive--active);
+    border: var(--goa-radio-border-width--checked) solid
+      var(--goa-color-interactive--active);
   }
 
   /* Not checked */
@@ -188,7 +179,8 @@
 
   /* Disabled and checked */
   input[type="radio"]:disabled:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive--active);
+    border: var(--goa-radio-border-width--checked) solid
+      var(--goa-color-interactive--active);
   }
 
   /* Error */

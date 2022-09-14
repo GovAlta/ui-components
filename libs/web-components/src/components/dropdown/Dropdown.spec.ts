@@ -1,16 +1,17 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
-import userEvent from "@testing-library/user-event";
+import { deleteContext } from '../../common/context-store';
 import GoADropdown from './DropdownWrapper.test.svelte';
 
 afterEach(() => {
+  deleteContext("favcolor")
   cleanup()
   jest.clearAllMocks();
 });
 
 describe('GoADropdown', () => {
 
-  it('should render', async () => {
+  it('dropdown should render', async () => {
     const items = ["red", "blue", "orange"];
     const result = render(GoADropdown, {
       name: 'favcolor',
@@ -31,19 +32,6 @@ describe('GoADropdown', () => {
         expect(option).toHaveTextContent(item);
       }
     });
-  });
-
-  it("raise an error if name is not supplied", async () => {
-    const mock = jest.spyOn(console, "error").mockImplementation();
-    const items = ["red", "blue", "orange"];
-    render(GoADropdown, {
-      items,
-    });
-
-    await waitFor(() => {
-      expect(console.error["mock"].calls.length).toBeGreaterThan(0);
-    })
-    mock.mockRestore();
   });
 
   describe("single selection", () => {
@@ -347,9 +335,10 @@ describe('GoADropdown', () => {
 
   describe("aria-labels", () => {
     it("show the aria label", async () => {
-      const items = ["red", "blue", "pink"];
+      const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
         name: 'favcolor',
+        value: "orange",
         arialabel: 'Favourite Color',
         items,
       });
@@ -360,14 +349,15 @@ describe('GoADropdown', () => {
       // selected value
       expect(input).toHaveAttribute("aria-label", "Favourite Color")
 
-      fireEvent.click(input);
+      await fireEvent.click(input);
 
       const menu = result.queryByTestId("dropdown-menu");
       await waitFor(() => {
         expect(menu).toHaveStyle("max-height: 276px");  // 276px is default value
 
         for (const item of items) {
-          const option = menu.querySelector(`li[data-testid="dropdown-item-${item}"]`);
+          const option = result.queryByTestId(`dropdown-item-${item}`);
+          expect(option).toBeTruthy();
           expect(option).toHaveAttribute("aria-label", item)
         }
       })
