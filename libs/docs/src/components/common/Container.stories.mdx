@@ -29,7 +29,7 @@ import { GoAContainer, GoAButton, GoABadge, GoAFlexRow, GoACallout} from '@abgov
 
 <Props>
   <Prop
-    name="variant"
+    name="type"
     type="interactive | info | error | success | important | non-interactive"
     defaultValue="non-interactive"
   />
@@ -40,12 +40,16 @@ import { GoAContainer, GoAButton, GoABadge, GoAFlexRow, GoACallout} from '@abgov
 
 #### Basic, interactive, non-interactive 
 
-There are three main types of containers; interactive, non-interactive, and basic. Each of these 3 types of containers includes several possible variants. 
+There are three main types of containers; interactive, non-interactive, and basic. Each of these 3 types of containers includes several possible types. 
 
 #### Basic Container
 
 <Story name="Basic">
   <GoAContainer>
+    <h2>Detach to use</h2>
+    + Add things inside me
+  </GoAContainer>
+  <GoAContainer colored={true}>
     <h2>Detach to use</h2>
     + Add things inside me
   </GoAContainer>
@@ -92,7 +96,7 @@ The basic container can be used on it’s own or within interactive or non-inter
 #### Interactive Container
 
 <Story name="Interactive">
-  <GoAContainer variant="interactive">
+  <GoAContainer type="interactive">
     <h2>Heading</h2>
     Content
   </GoAContainer>
@@ -105,7 +109,7 @@ Interactive containers to indicate that the content within is an action for the 
     <CodeSnippet
       lang="html"
       code={`
-      <goa-container variant="interactive">
+      <goa-container type="interactive">
         <h2>Heading</h2>
         Content
       </goa-container>
@@ -116,7 +120,7 @@ Interactive containers to indicate that the content within is an action for the 
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoAContainer variant="interactive">
+      <GoAContainer type="interactive">
         <h2>Heading</h2>
         Content
       </GoAContainer>
@@ -130,7 +134,7 @@ Interactive containers to indicate that the content within is an action for the 
 Non-interactive containers indicate that the content is only for the user to review. Use a grey accent to indicate that there is content in the container and that the content is not interactive. 
 
 <Story name="Non-interactive">
-  <GoAContainer variant="non-interactive">
+  <GoAContainer type="non-interactive">
     <h2>Heading</h2>
     Content
   </GoAContainer>
@@ -141,7 +145,7 @@ Non-interactive containers indicate that the content is only for the user to rev
     <CodeSnippet
       lang="html"
       code={`
-      <goa-container variant="non-interactive">
+      <goa-container type="non-interactive">
         <h2>Heading</h2>
         Content
       </goa-container>
@@ -152,7 +156,7 @@ Non-interactive containers indicate that the content is only for the user to rev
     <CodeSnippet
       lang="jsx"
       code={`
-      <GoAContainer variant="non-interactive">
+      <GoAContainer type="non-interactive">
         <h2>Heading</h2>
         Content
       </GoAContainer>
@@ -161,7 +165,7 @@ Non-interactive containers indicate that the content is only for the user to rev
   </Tab>
 </Tabs>
 
-#### Heading bar variants (large, small, with text)
+#### Heading bar types (large, small, with text)
 
 There are three main types within the interactive and non-interactive container types: a large accent bar, a small accent bar, and an accent bar with text.
 
@@ -181,11 +185,11 @@ export const HeadingTemplate = (args) => {
 
 <Story name="Large heading bar">
   <GoAFlexRow gap="medium">
-    <GoAContainer variant="interactive">
+    <GoAContainer type="interactive">
       <h2>Heading</h2>
       Content
     </GoAContainer>
-    <GoAContainer variant="non-interactive">
+    <GoAContainer type="non-interactive">
       <h2>Heading</h2>
       Content
     </GoAContainer>
@@ -198,11 +202,11 @@ export const HeadingTemplate = (args) => {
       lang="html"
       code={`
         <goa-flex-row gap="medium">
-          <goa-container variant="interactive">
+          <goa-container type="interactive">
             <h2>Heading</h2>
             Content
           </goa-container>
-          <goa-container variant="non-interactive">
+          <goa-container type="non-interactive">
             <h2>Heading</h2>
             Content
           </goa-container>
@@ -215,11 +219,11 @@ export const HeadingTemplate = (args) => {
       lang="jsx"
       code={`
         <GoAFlexRow gap="medium">
-          <GoAContainer variant="interactive">
+          <GoAContainer type="interactive">
             <h2>Heading</h2>
             Content
           </GoAContainer>
-          <GoAContainer variant="non-interactive">
+          <GoAContainer type="non-interactive">
             <h2>Heading</h2>
             Content
           </GoAContainer>
@@ -235,11 +239,11 @@ export const HeadingTemplate = (args) => {
 <Story name="Small heading bar">
   <>
     <GoAFlexRow gap="medium">
-      <GoAContainer variant="interactive" headingSize="small">
+      <GoAContainer type="interactive" headingSize="small">
         <h2>Heading</h2>
         Content
       </GoAContainer>
-      <GoAContainer variant="non-interactive" headingSize="small">
+      <GoAContainer type="non-interactive" headingSize="small">
         <h2>Heading</h2>
         Content
       </GoAContainer>
@@ -253,11 +257,11 @@ export const HeadingTemplate = (args) => {
       lang="html"
       code={`
         <goa-flex-row gap="medium">
-          <goa-container variant="interactive" headingSize="small">
+          <goa-container type="interactive" headingSize="small">
             <h2>Heading</h2>
             Content
           </goa-container>
-          <goa-container variant="non-interactive" headingSize="small">
+          <goa-container type="non-interactive" headingSize="small">
             <h2>Heading</h2>
             Content
           </goa-container>
@@ -270,11 +274,11 @@ export const HeadingTemplate = (args) => {
       lang="jsx"
       code={`
         <GoAFlexRow gap="medium">
-          <GoAContainer variant="interactive" headingSize="small">
+          <GoAContainer type="interactive" headingSize="small">
             <h2>Heading</h2>
             Content
           </GoAContainer>
-          <GoAContainer variant="non-interactive" headingSize="small">
+          <GoAContainer type="non-interactive" headingSize="small">
             <h2>Heading</h2>
             Content
           </GoAContainer>
@@ -289,11 +293,11 @@ export const HeadingTemplate = (args) => {
 <Story name="Accent bar with text">
   <>
     <GoAFlexRow gap="medium">
-      <GoAContainer variant="interactive" title="Heading" >
+      <GoAContainer type="interactive" title="Heading" >
         Content
       </GoAContainer>
       <GoAContainer 
-        variant="non-interactive"
+        type="non-interactive"
         title="Heading"
         actions={ 
           <GoABadge type="success" content="Badge Text" icon={true} /> 
@@ -322,11 +326,11 @@ export const HeadingTemplate = (args) => {
       lang="html"
       code={`
         <goa-flex-row gap="medium">
-          <goa-container variant="interactive" title="Heading" >
+          <goa-container type="interactive" title="Heading" >
             Content
           </goa-container>
           <goa-container 
-            variant="non-interactive"
+            type="non-interactive"
             title="Heading"
           >
             <goa-badge slot="actions" type="success" content="Badge Text" icon="true" /> 
@@ -341,11 +345,11 @@ export const HeadingTemplate = (args) => {
       lang="jsx"
       code={`
         <GoAFlexRow gap="medium">
-          <GoAContainer variant="interactive" title="Heading" >
+          <GoAContainer type="interactive" title="Heading" >
             Content
           </GoAContainer>
           <GoAContainer 
-            variant="non-interactive"
+            type="non-interactive"
             title="Heading"
             actions={ 
               <GoABadge type="success" content="Badge Text" icon={true} /> 
@@ -367,7 +371,7 @@ export const HeadingTemplate = (args) => {
       <h2>Non-interactive Container</h2>
       Content
     </GoAContainer>
-    <GoAContainer variant="info" colored={true} headingSize="none">
+    <GoAContainer type="info" colored={true} headingSize="none">
       <h2>Info Container</h2>
       Content
     </GoAContainer>
