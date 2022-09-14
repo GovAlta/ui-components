@@ -245,7 +245,10 @@
       {placeholder}
       width="100%"
       id={`${name}-dropdown-input`}
+      role="combobox"
       aria-label={arialabel || name}
+      aria-expanded={isMenuVisible}
+      aria-controls="menu"
       readonly
       trailingicon="chevron-down"
       type="text"
@@ -255,6 +258,9 @@
 
   <!-- list and filter -->
   <ul
+    id="menu"
+    role="listbox"
+    aria-activedescendant={selectedLabel}
     data-testid="dropdown-menu"
     bind:this={menuEl}
     tabindex="0"
@@ -262,10 +268,11 @@
     class:dropdown-active={isMenuVisible}
     style={`overflow-y: auto; max-height: ${maxheight}`}
   >
-    <slot />
     {#each options as option, index}
       <li
+        id={option.label}
         aria-label={option.label || option.value}
+        role="option"
         data-testid={`${option.value}-dropdown-item`}
         data-index={index}
         class="goa-dropdown-option"
@@ -278,6 +285,7 @@
         {option.label || option.value}
       </li>
     {/each}
+    <slot />
   </ul>
 </div>
 
