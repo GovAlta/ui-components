@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/addon-docs';
 import {
   Tabs,
   Tab,
@@ -59,7 +59,7 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
       Primary
     </GoAButton>
     <GoAButton type="submit" onClick={() => console.log('clicked')}>
-      Submit 
+      Submit
     </GoAButton>
     <GoAButton type="secondary" onClick={() => console.log('clicked')}>
       Secondary
@@ -223,6 +223,310 @@ There are two button sizes: Normal (default) and Compact.
         </GoAButton>
         <GoAButton size="compact" type="tertiary" onClick={() => console.log('clicked')}>
           Compact Tertiary
+        </GoAButton>
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### variant
+
+There are two variant types: Normal (default) and Destructive.
+
+#### Normal variant button
+
+<Story name="Normal variant">
+  <GoAButtonGroup alignment="start">
+    <GoAButton type="primary" onClick={() => console.log('clicked')}>
+      Normal Primary
+    </GoAButton>
+    <GoAButton
+      type="secondary"
+      variant="normal"
+      onClick={() => console.log('clicked')}
+    >
+      Normal Secondary
+    </GoAButton>
+    <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
+      Normal Tertiary
+    </GoAButton>
+  </GoAButtonGroup>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`
+        <goa-button variant="normal" type="primary">Normal Primary</goa-button>
+        <goa-button type="secondary">Normal Secondary</goa-button>
+        <goa-button type="tertiary">Normal Tertiary</goa-button>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        document.querySelector('goa-button').addEventListener('click', () => {
+          console.log('clicked');
+        });
+      `}
+      lang="js"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-button variant="normal" (_click)="onClick()" type="primary">Normal Primary</goa-button>
+        <goa-button (_click)="onClick()" type="secondary">Normal Secondary</goa-button> {/*If variant not specified, normal will be considered by default */}
+        <goa-button (_click)="onClick()" type="tertiary">Normal Tertiary</goa-button>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        export class SomeOtherComponent {
+          onClick() {
+            console.log('clicked');
+          }
+        }
+      `}
+      lang="ts"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAButton variant="normal" type="primary" onClick={() => console.log('clicked')}>
+          Normal Primary
+        </GoAButton>
+        <GoAButton type="secondary" onClick={() => console.log('clicked')}>
+          Normal Secondary
+        </GoAButton>
+        <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
+          Normal Tertiary
+        </GoAButton>
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Destructive variant button
+
+<Story name="Destructive variant">
+  <GoAButtonGroup alignment="start">
+    <GoAButton
+      type="primary"
+      variant="destructive"
+      onClick={() => console.log('clicked')}
+    >
+      Destructive Primary
+    </GoAButton>
+    <GoAButton
+      type="secondary"
+      variant="destructive"
+      onClick={() => console.log('clicked')}
+    >
+      Destructive Secondary
+    </GoAButton>
+    <GoAButton
+      type="tertiary"
+      variant="destructive"
+      onClick={() => console.log('clicked')}
+    >
+      Destructive Tertiary
+    </GoAButton>
+  </GoAButtonGroup>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`
+        <goa-button variant="destructive" type="primary">Destructive Primary</goa-button>
+        <goa-button variant="destructive" type="secondary">Destructive Secondary</goa-button>
+        <goa-button variant="destructive" type="tertiary">Destructive Tertiary</goa-button>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        document.querySelector('goa-button').addEventListener('click', () => {
+          console.log('clicked');
+        });
+      `}
+      lang="js"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-button variant="destructive" (_click)="onClick()" type="primary">Destructive Primary</goa-button>
+        <goa-button variant="destructive" (_click)="onClick()" type="secondary">Destructive Secondary</goa-button>
+        <goa-button variant="destructive" (_click)="onClick()" type="tertiary">Destructive Tertiary</goa-button>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        export class SomeOtherComponent {
+          onClick() {
+            console.log('clicked');}
+        }
+      `}
+      lang="ts"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAButton variant="destructive" type="primary" onClick={() => console.log('clicked')}>
+          Destructive Primary
+        </GoAButton>
+        <GoAButton variant="destructive" type="secondary" onClick={() => console.log('clicked')}>
+          Destructive Secondary
+        </GoAButton>
+        <GoAButton variant="destructive" type="tertiary" onClick={() => console.log('clicked')}>
+          Destructive Tertiary
+        </GoAButton>
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### title
+
+<Story name="Title">
+  <GoAButtonGroup alignment="start">
+    <GoAButton
+      type="primary"
+      title="Go to Next Page."
+      onClick={() => console.log('clicked')}
+    >
+      Next
+    </GoAButton>
+    <GoAButton
+      type="submit"
+      title="Submit the form."
+      onClick={() => console.log('clicked')}
+    >
+      Submit
+    </GoAButton>
+    <GoAButton
+      type="tertiary"
+      title="Click here to open the link."
+      onClick={() => console.log('clicked')}
+    >
+      Click Me
+    </GoAButton>
+  </GoAButtonGroup>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`
+        <goa-button type="primary" title="Go to Next Page.">Next</goa-button>
+        <goa-button type="submit" title="Submit the form.">Submit</goa-button>
+        <goa-button type="tertiary" title="Click here to open the link.">Click Me</goa-button>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        document.querySelector('goa-button').addEventListener('click', () => {
+          console.log('clicked');
+        });
+      `}
+      lang="js"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-button type="primary" (_click)="onClick()" title="Go to Next Page.">Next</goa-button>
+        <goa-button type="submit" (_click)="onClick()" title="Submit the form.">Submit</goa-button>
+        <goa-button type="tertiary" (_click)="onClick()" title="Click here to open the link.">Click Me</goa-button>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        export class SomeOtherComponent {
+          onClick() {
+            console.log('clicked');}
+        }
+      `}
+      lang="ts"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAButton type="primary" onClick={() => console.log('clicked')} title="Go to Next Page.">
+        Next
+        </GoAButton>
+        <GoAButton type="submit" onClick={() => console.log('clicked')} title="Submit the form.">
+        Submit
+        </GoAButton>
+        <GoAButton type="tertiary" onClick={() => console.log('clicked')} title="Click here to open the link.">
+        Click Me
+        </GoAButton>
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Disabled
+
+<Story name="Disabled">
+  <GoAButtonGroup alignment="start">
+    <GoAButton type="primary" disabled="true">
+      Primary
+    </GoAButton>
+    <GoAButton type="submit" disabled="true">
+      Submit
+    </GoAButton>
+    <GoAButton type="secondary" disabled="true">
+      Secondary
+    </GoAButton>
+  </GoAButtonGroup>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`
+        <goa-button type="primary" disabled="true">Primary</goa-button>
+        <goa-button type="submit" disabled="true">Submit</goa-button>
+        <goa-button type="secondary" disabled="true">Secondary</goa-button>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-button type="primary" disabled="true">Primary</goa-button>
+        <goa-button type="submit" disabled="true">Submit</goa-button>
+        <goa-button type="secondary" disabled="true">Secondary</goa-button>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAButton type="primary" disabled={true}>
+        Primary
+        </GoAButton>
+        <GoAButton type="submit" disabled={true}>
+        Submit
+        </GoAButton>
+        <GoAButton type="Secondary" disabled={true}>
+        Secondary
         </GoAButton>
     `}
       lang="tsx"
