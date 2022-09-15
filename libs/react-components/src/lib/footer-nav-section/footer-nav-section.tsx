@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 
 interface WCProps {
-  name?: string;
   maxcolumncount?: number;
 }
 
@@ -16,15 +15,14 @@ declare global {
 
 /* eslint-disable-next-line */
 interface FooterNavSectionProps {
-  name: string;
   maxColumnCount?: number;
   children?: ReactNode;
 }
 
 
-export function GoAAppFooterNavSection({name, maxColumnCount = 1, children}: FooterNavSectionProps) {
+export function GoAAppFooterNavSection({maxColumnCount = 1, children}: FooterNavSectionProps) {
   return (
-    <goa-app-footer-nav-section slot="nav" name={name} maxcolumncount={maxColumnCount}>
+    <goa-app-footer-nav-section slot="nav" maxcolumncount={maxColumnCount}>
       {children}
     </goa-app-footer-nav-section>
   );
