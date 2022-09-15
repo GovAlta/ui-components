@@ -68,7 +68,7 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
       Tertiary
     </GoAButton>
     <GoAButton type="start" onClick={() => console.log('clicked')}>
-      Get Started
+      Get started
     </GoAButton>
   </GoAButtonGroup>
 </Story>
@@ -99,7 +99,7 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
         <goa-button (_click)="onClick()" type="primary">Primary</goa-button>
         <goa-button (_click)="onClick()" type="secondary">Secondary</goa-button>
         <goa-button (_click)="onClick()" type="tertiary">Tertiary</goa-button>
-        <goa-button (_click)="onClick()" type="start">Get Started</goa-button>
+        <goa-button (_click)="onClick()" type="start">Get started</goa-button>
       `}
       lang="html"
     />
@@ -127,7 +127,7 @@ There are three main button types: Primary, Secondary, and Tertiary. If there is
           Tertiary
         </GoAButton>
         <GoAButton type="start" onClick={() => console.log('clicked')}>
-          Get Started
+          Get started
         </GoAButton>
     `}
       lang="tsx"
@@ -177,9 +177,9 @@ There are two button sizes: Normal (default) and Compact.
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`
-        <goa-button size="compact" type="primary">Compact Primary</goa-button>
-        <goa-button size="compact" type="secondary">Compact Secondary</goa-button>
-        <goa-button size="compact" type="tertiary">Compact Tertiary</goa-button>
+        <goa-button size="compact" type="primary">Compact primary</goa-button>
+        <goa-button size="compact" type="secondary">Compact secondary</goa-button>
+        <goa-button size="compact" type="tertiary">Compact tertiary</goa-button>
       `}
       lang="html"
     />
@@ -195,9 +195,9 @@ There are two button sizes: Normal (default) and Compact.
   <Tab label="Angular">
     <CodeSnippet
       code={`
-        <goa-button size="compact" (_click)="onClick()" type="primary">Compact Primary</goa-button>
-        <goa-button size="compact" (_click)="onClick()" type="secondary">Compact Secondary</goa-button>
-        <goa-button size="compact" (_click)="onClick()" type="tertiary">Compact Tertiary</goa-button>
+        <goa-button size="compact" (_click)="onClick()" type="primary">Compact primary</goa-button>
+        <goa-button size="compact" (_click)="onClick()" type="secondary">Compact secondary</goa-button>
+        <goa-button size="compact" (_click)="onClick()" type="tertiary">Compact tertiary</goa-button>
       `}
       lang="html"
     />
@@ -216,13 +216,13 @@ There are two button sizes: Normal (default) and Compact.
     <CodeSnippet
       code={`
         <GoAButton size="compact" type="primary" onClick={() => console.log('clicked')}>
-          Compact Primary
+          Compact primary
         </GoAButton>
         <GoAButton size="compact" type="secondary" onClick={() => console.log('clicked')}>
-          Compact Secondary
+          Compact secondary
         </GoAButton>
         <GoAButton size="compact" type="tertiary" onClick={() => console.log('clicked')}>
-          Compact Tertiary
+          Compact tertiary
         </GoAButton>
     `}
       lang="tsx"
@@ -230,26 +230,26 @@ There are two button sizes: Normal (default) and Compact.
   </Tab>
 </Tabs>
 
-#### variant
+#### Variant
 
 There are two variant types: Normal (default) and Destructive.
 
-#### Normal variant button
+#### Normal variant
 
 <Story name="Normal variant">
   <GoAButtonGroup alignment="start">
     <GoAButton type="primary" onClick={() => console.log('clicked')}>
-      Normal Primary
+      Normal primary
     </GoAButton>
     <GoAButton
       type="secondary"
       variant="normal"
       onClick={() => console.log('clicked')}
     >
-      Normal Secondary
+      Normal secondary
     </GoAButton>
     <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
-      Normal Tertiary
+      Normal tertiary
     </GoAButton>
   </GoAButtonGroup>
 </Story>
@@ -258,9 +258,9 @@ There are two variant types: Normal (default) and Destructive.
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`
-        <goa-button variant="normal" type="primary">Normal Primary</goa-button>
-        <goa-button type="secondary">Normal Secondary</goa-button>
-        <goa-button type="tertiary">Normal Tertiary</goa-button>
+        <goa-button variant="normal" type="primary">Normal primary</goa-button>
+        <goa-button type="secondary">Normal secondary</goa-button>
+        <goa-button type="tertiary">Normal tertiary</goa-button>
       `}
       lang="html"
     />
@@ -276,9 +276,9 @@ There are two variant types: Normal (default) and Destructive.
   <Tab label="Angular">
     <CodeSnippet
       code={`
-        <goa-button variant="normal" (_click)="onClick()" type="primary">Normal Primary</goa-button>
-        <goa-button (_click)="onClick()" type="secondary">Normal Secondary</goa-button> {/*If variant not specified, normal will be considered by default */}
-        <goa-button (_click)="onClick()" type="tertiary">Normal Tertiary</goa-button>
+        <goa-button variant="normal" (_click)="onClick()" type="primary">Normal primary</goa-button>
+        <goa-button (_click)="onClick()" type="secondary">Normal secondary</goa-button> {/*If variant not specified, normal will be considered by default */}
+        <goa-button (_click)="onClick()" type="tertiary">Normal tertiary</goa-button>
       `}
       lang="html"
     />
@@ -297,13 +297,13 @@ There are two variant types: Normal (default) and Destructive.
     <CodeSnippet
       code={`
         <GoAButton variant="normal" type="primary" onClick={() => console.log('clicked')}>
-          Normal Primary
+          Normal primary
         </GoAButton>
         <GoAButton type="secondary" onClick={() => console.log('clicked')}>
-          Normal Secondary
+          Normal secondary
         </GoAButton>
         <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
-          Normal Tertiary
+          Normal tertiary
         </GoAButton>
     `}
       lang="tsx"
@@ -311,7 +311,7 @@ There are two variant types: Normal (default) and Destructive.
   </Tab>
 </Tabs>
 
-#### Destructive variant button
+#### Destructive variant
 
 <Story name="Destructive variant">
   <GoAButtonGroup alignment="start">
@@ -320,21 +320,7 @@ There are two variant types: Normal (default) and Destructive.
       variant="destructive"
       onClick={() => console.log('clicked')}
     >
-      Destructive Primary
-    </GoAButton>
-    <GoAButton
-      type="secondary"
-      variant="destructive"
-      onClick={() => console.log('clicked')}
-    >
-      Destructive Secondary
-    </GoAButton>
-    <GoAButton
-      type="tertiary"
-      variant="destructive"
-      onClick={() => console.log('clicked')}
-    >
-      Destructive Tertiary
+      Destructive primary
     </GoAButton>
   </GoAButtonGroup>
 </Story>
@@ -343,9 +329,7 @@ There are two variant types: Normal (default) and Destructive.
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`
-        <goa-button variant="destructive" type="primary">Destructive Primary</goa-button>
-        <goa-button variant="destructive" type="secondary">Destructive Secondary</goa-button>
-        <goa-button variant="destructive" type="tertiary">Destructive Tertiary</goa-button>
+        <goa-button variant="destructive" type="primary">Destructive primary</goa-button>
       `}
       lang="html"
     />
@@ -361,9 +345,7 @@ There are two variant types: Normal (default) and Destructive.
   <Tab label="Angular">
     <CodeSnippet
       code={`
-        <goa-button variant="destructive" (_click)="onClick()" type="primary">Destructive Primary</goa-button>
-        <goa-button variant="destructive" (_click)="onClick()" type="secondary">Destructive Secondary</goa-button>
-        <goa-button variant="destructive" (_click)="onClick()" type="tertiary">Destructive Tertiary</goa-button>
+        <goa-button variant="destructive" (_click)="onClick()" type="primary">Destructive primary</goa-button>
       `}
       lang="html"
     />
@@ -381,13 +363,7 @@ There are two variant types: Normal (default) and Destructive.
     <CodeSnippet
       code={`
         <GoAButton variant="destructive" type="primary" onClick={() => console.log('clicked')}>
-          Destructive Primary
-        </GoAButton>
-        <GoAButton variant="destructive" type="secondary" onClick={() => console.log('clicked')}>
-          Destructive Secondary
-        </GoAButton>
-        <GoAButton variant="destructive" type="tertiary" onClick={() => console.log('clicked')}>
-          Destructive Tertiary
+          Destructive primary
         </GoAButton>
     `}
       lang="tsx"
@@ -395,13 +371,13 @@ There are two variant types: Normal (default) and Destructive.
   </Tab>
 </Tabs>
 
-#### title
+#### Title
 
 <Story name="Title">
   <GoAButtonGroup alignment="start">
     <GoAButton
       type="primary"
-      title="Go to Next Page."
+      title="Go to next page."
       onClick={() => console.log('clicked')}
     >
       Next
@@ -418,7 +394,7 @@ There are two variant types: Normal (default) and Destructive.
       title="Click here to open the link."
       onClick={() => console.log('clicked')}
     >
-      Click Me
+      Click me
     </GoAButton>
   </GoAButtonGroup>
 </Story>
@@ -427,9 +403,9 @@ There are two variant types: Normal (default) and Destructive.
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
       code={`
-        <goa-button type="primary" title="Go to Next Page.">Next</goa-button>
+        <goa-button type="primary" title="Go to next page.">Next</goa-button>
         <goa-button type="submit" title="Submit the form.">Submit</goa-button>
-        <goa-button type="tertiary" title="Click here to open the link.">Click Me</goa-button>
+        <goa-button type="tertiary" title="Click here to open the link.">Click me</goa-button>
       `}
       lang="html"
     />
@@ -445,9 +421,9 @@ There are two variant types: Normal (default) and Destructive.
   <Tab label="Angular">
     <CodeSnippet
       code={`
-        <goa-button type="primary" (_click)="onClick()" title="Go to Next Page.">Next</goa-button>
+        <goa-button type="primary" (_click)="onClick()" title="Go to next page.">Next</goa-button>
         <goa-button type="submit" (_click)="onClick()" title="Submit the form.">Submit</goa-button>
-        <goa-button type="tertiary" (_click)="onClick()" title="Click here to open the link.">Click Me</goa-button>
+        <goa-button type="tertiary" (_click)="onClick()" title="Click here to open the link.">Click me</goa-button>
       `}
       lang="html"
     />
@@ -464,14 +440,14 @@ There are two variant types: Normal (default) and Destructive.
   <Tab label="React">
     <CodeSnippet
       code={`
-        <GoAButton type="primary" onClick={() => console.log('clicked')} title="Go to Next Page.">
+        <GoAButton type="primary" onClick={() => console.log('clicked')} title="Go to next page.">
         Next
         </GoAButton>
         <GoAButton type="submit" onClick={() => console.log('clicked')} title="Submit the form.">
         Submit
         </GoAButton>
         <GoAButton type="tertiary" onClick={() => console.log('clicked')} title="Click here to open the link.">
-        Click Me
+        Click me
         </GoAButton>
     `}
       lang="tsx"
