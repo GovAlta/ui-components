@@ -250,83 +250,6 @@ There are two button sizes: Normal (default) and Compact.
 
 There are two variant types: Normal (default) and Destructive.
 
-#### Normal variant
-
-<Story name="Normal variant">
-  <GoAButtonGroup alignment="start">
-    <GoAButton type="primary" onClick={() => console.log('clicked')}>
-      Normal primary
-    </GoAButton>
-    <GoAButton
-      type="secondary"
-      variant="normal"
-      onClick={() => console.log('clicked')}
-    >
-      Normal secondary
-    </GoAButton>
-    <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
-      Normal tertiary
-    </GoAButton>
-  </GoAButtonGroup>
-</Story>
-
-<Tabs>
-  <Tab label="Web Component" hidden={true}>
-    <CodeSnippet
-      code={`
-        <goa-button variant="normal" type="primary">Normal primary</goa-button>
-        <goa-button type="secondary">Normal secondary</goa-button>
-        <goa-button type="tertiary">Normal tertiary</goa-button>
-      `}
-      lang="html"
-    />
-    <CodeSnippet
-      code={`
-        document.querySelector('goa-button').addEventListener('click', () => {
-          console.log('clicked');
-        });
-      `}
-      lang="js"
-    />
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet
-      code={`
-        <goa-button variant="normal" (_click)="onClick()" type="primary">Normal primary</goa-button>
-        <goa-button (_click)="onClick()" type="secondary">Normal secondary</goa-button> {/*If variant not specified, normal will be considered by default */}
-        <goa-button (_click)="onClick()" type="tertiary">Normal tertiary</goa-button>
-      `}
-      lang="html"
-    />
-    <CodeSnippet
-      code={`
-        export class SomeOtherComponent {
-          onClick() {
-            console.log('clicked');
-          }
-        }
-      `}
-      lang="ts"
-    />
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet
-      code={`
-        <GoAButton variant="normal" type="primary" onClick={() => console.log('clicked')}>
-          Normal primary
-        </GoAButton>
-        <GoAButton type="secondary" onClick={() => console.log('clicked')}>
-          Normal secondary
-        </GoAButton>
-        <GoAButton type="tertiary" onClick={() => console.log('clicked')}>
-          Normal tertiary
-        </GoAButton>
-    `}
-      lang="tsx"
-    />
-  </Tab>
-</Tabs>
-
 #### Destructive variant
 
 <Story name="Destructive variant">
@@ -457,13 +380,13 @@ There are two variant types: Normal (default) and Destructive.
     <CodeSnippet
       code={`
         <GoAButton type="primary" onClick={() => console.log('clicked')} title="Go to next page.">
-        Next
+          Next
         </GoAButton>
         <GoAButton type="submit" onClick={() => console.log('clicked')} title="Submit the form.">
-        Submit
+          Submit
         </GoAButton>
         <GoAButton type="tertiary" onClick={() => console.log('clicked')} title="Click here to open the link.">
-        Click me
+          Click me
         </GoAButton>
     `}
       lang="tsx"
@@ -484,6 +407,9 @@ There are two variant types: Normal (default) and Destructive.
     <GoAButton type="secondary" disabled="true">
       Secondary
     </GoAButton>
+    <GoAButton type="tertiary" disabled="true">
+      Tertiary
+    </GoAButton>
   </GoAButtonGroup>
 </Story>
 
@@ -494,6 +420,7 @@ There are two variant types: Normal (default) and Destructive.
         <goa-button type="primary" disabled="true">Primary</goa-button>
         <goa-button type="submit" disabled="true">Submit</goa-button>
         <goa-button type="secondary" disabled="true">Secondary</goa-button>
+        <goa-button type="tertiary" disabled="true">Tertiary</goa-button>
       `}
       lang="html"
     />
@@ -504,6 +431,7 @@ There are two variant types: Normal (default) and Destructive.
         <goa-button type="primary" disabled="true">Primary</goa-button>
         <goa-button type="submit" disabled="true">Submit</goa-button>
         <goa-button type="secondary" disabled="true">Secondary</goa-button>
+        <goa-button type="tertiary" disabled="true">Tertiary</goa-button>
       `}
       lang="html"
     />
@@ -511,14 +439,17 @@ There are two variant types: Normal (default) and Destructive.
   <Tab label="React">
     <CodeSnippet
       code={`
-        <GoAButton type="primary" disabled={true}>
-        Primary
+        <GoAButton type="primary" disabled="true">
+          Primary
         </GoAButton>
-        <GoAButton type="submit" disabled={true}>
-        Submit
+        <GoAButton type="submit" disabled="true">
+          Submit
         </GoAButton>
-        <GoAButton type="Secondary" disabled={true}>
-        Secondary
+        <GoAButton type="secondary" disabled="true">
+          Secondary
+        </GoAButton>
+        <GoaButton type="tertiary" disabled="true">
+          Tertiary
         </GoAButton>
     `}
       lang="tsx"
