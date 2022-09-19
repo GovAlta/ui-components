@@ -42,17 +42,46 @@ export const checkboxTemplate = (args) => {
 #### Properties
 
 <Props>
-  <Prop name="name" type="string" required="true" />
-  <Prop name="checked" type="boolean" required="true" />
-  <Prop name="text" type="string" />
-  <Prop name="value" type="string" />
-  <Prop name="disabled" type="boolean" defaultValue="false" />
-  <Prop name="error" type="boolean" defaultValue="false" />
+  <Prop
+    name="name"
+    type="string"
+    required="true"
+    description="Must match the name assigned to the children"
+  />
+  <Prop
+    name="checked"
+    type="boolean"
+    required="true"
+    description="Mark the checkbox item as selected"
+  />
+  <Prop
+    name="text"
+    type="string"
+    description="Content to display as the label for the Checkbox"
+  />
+  <Prop
+    name="value"
+    type="string"
+    description="The value binding to the checkbox"
+  />
+  <Prop
+    name="disabled"
+    type="boolean"
+    defaultValue="false"
+    description="Disable this control. It will not receive focus or events"
+  />
+  <Prop
+    name="error"
+    type="boolean"
+    defaultValue="false"
+    description="Show an error on the checkbox item"
+  />
   <Prop
     name="_change"
     type="CustomEvent<{detail: {
      name: string, checked: boolean, value: string
     }}>"
+    description="Callback function when checkbox is checked or unchecked"
   />
 </Props>
 

@@ -27,8 +27,9 @@ import { useState } from 'react';
   <Prop
     name="heading"
     type="string"
-    description="Modal title text"
-  />
+    description="Heading text within the modal"
+/>
+
   <Prop
     name="open"
     type="boolean"
@@ -45,6 +46,7 @@ import { useState } from 'react';
     name="transition"
     type="fast | slow | none"
     description="How modal transition onto screen"
+    defaultValue="none"
   />
   <Prop
     name="_close"
@@ -54,7 +56,7 @@ import { useState } from 'react';
   <Prop
     name="actions"
     type="slot"
-    description="Content displayed in the top right of the heading bar"
+    description="Buttons displayed in the bottom right of the modal instead of a close icon"
   />
 </Props>
 

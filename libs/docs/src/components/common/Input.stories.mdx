@@ -42,28 +42,66 @@ import { Meta, Story } from '@storybook/addon-docs';
     name="type"
     type="text | number | password | email | search | tel | date | datetime-locale | time | url | week"
     defaultValue="text"
+    description="Sets the type of the input field"
   />
-  <Prop name="name" type="string" />
-  <Prop name="value" type="string" />
-  <Prop name="placeholder" type="string" />
-  <Prop name="leadingicon" type="GoAIconType" />
-  <Prop name="trailingicon" type="GoAIconType" />
-  <Prop name="disabled" type="boolean" defaultValue="false" />
-  <Prop name="handletrailingiconclick" type="boolean" defaultValue="false" />
-  <Prop name="focused" type="boolean" defaultValue="false" />
-  <Prop name="readonly" type="boolean" defaultValue="false"/>
-  <Prop name="error" type="boolean" defaultValue="false" />
-  <Prop name="width" type="string" defaultValue="30ch" />
-  <Prop name="showcounter" type="boolean" defaultValue="false" />
-  <Prop name="maxcharcount" type="number" />
-  <Prop name="min" type="string | date" description="A string value *must* be in ISO 8601 format" />
-  <Prop name="max" type="string | date" description="A string value *must* be in ISO 8601 format" />
-  <Prop name="step" type="number" description="By how much number of day or time value will change by" />
-  <Prop name="arialabel" type="string" description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name" />
-  <Prop name="prefix" type="string" description="The text that comes before the input" />
-  <Prop name="suffix" type="string" description="The text that comes after the input" />
-  <Prop name="_change" type="CustomEvent<{detail: {name: string, value: string}}>" />
-  <Prop name="_trailingiconclick" type="CustomEvent" />
+  <Prop
+    name="name"
+    type="string"
+    description="Name of input value that is received in the _change event"
+  />
+  <Prop name="value" type="string" description="Bound to value" />
+  <Prop
+    name="placeholder"
+    type="string"
+    description="Text displayed within the input when no value is set"
+  />
+  <Prop name="leadingicon" type="GoAIconType" description="Icon shown to the left of the text"/>
+  <Prop name="trailingicon" type="GoAIconType" description="Icon shown to the right of the text" />
+  <Prop name="disabled" type="boolean" defaultValue="false" description="Disable this control. It will not receive focus or events"/>
+  <Prop name="handletrailingiconclick" type="boolean" defaultValue="false" description="Only required for Angular and web-component usage"/>
+  <Prop name="focused" type="boolean" defaultValue="false" description="Sets the cursor focus to the input"/>
+  <Prop name="readonly" type="boolean" defaultValue="false" description="Makes the input readonly"/>
+  <Prop name="error" type="boolean" defaultValue="false" description="Sets the input to an error state"/>
+  <Prop name="width" type="string" defaultValue="30ch" description="Set the width of the text input area" />
+  <Prop name="showcounter" type="boolean" defaultValue="false" description="Shows the number of characters entered if it is set to True"/>
+<Prop name="maxcharcount" type="number" description="Maximum number of characters allowed in the input box"/>
+<Prop
+  name="min"
+  type="string | date"
+  description="A string value *must* be in ISO 8601 format"
+/>
+<Prop
+  name="max"
+  type="string | date"
+  description="A string value *must* be in ISO 8601 format"
+/>
+<Prop
+  name="step"
+  type="number"
+  description="By how much number of day or time value will change by"
+/>
+<Prop
+  name="arialabel"
+  type="string"
+  description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name"
+/>
+<Prop
+  name="prefix"
+  type="string"
+  description="Text that comes before the input"
+/>
+<Prop
+  name="suffix"
+  type="string"
+  description="Text that comes after the input"
+/>
+
+  <Prop
+    name="_change"
+    type="CustomEvent<{detail: {name: string, value: string}}>"
+    description="Callback function invoked when input value is changed"
+  />
+  <Prop name="_trailingiconclick" type="CustomEvent" description="onclick function invoked when trailing icon is clicked"/>
 </Props>
 
 export const noop = () => {};
@@ -426,7 +464,6 @@ export const CharCountWithLimitTemplate = () => {
   </Tab>
 </Tabs>
 
-
 #### Min/Max
 
 export const MinMaxTemplate = () => {
@@ -443,9 +480,7 @@ export const MinMaxTemplate = () => {
   );
 };
 
-<Story name="Min / Max">
-  {MinMaxTemplate.bind({})}
-</Story>
+<Story name="Min / Max">{MinMaxTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Angular">
@@ -493,12 +528,10 @@ export const DateTemplate = () => {
       max={maxDate}
       onChange={(name, value) => setDate(value)}
     />
-  )
+  );
 };
 
-<Story name="Date">
-  {DateTemplate.bind({})}
-</Story>
+<Story name="Date">{DateTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Angular">
@@ -566,18 +599,10 @@ export const DateTemplate = () => {
 
 export const TimeComponent = () => {
   const [date, setDate] = useState(new Date());
-  return (
-    <GoAInputTime
-      name="timeExample"
-      value={date}
-      step="1"
-    />
-  )
-}
+  return <GoAInputTime name="timeExample" value={date} step="1" />;
+};
 
-<Story name="Time">
-  {TimeComponent.bind({})}
-</Story>
+<Story name="Time">{TimeComponent.bind({})}</Story>
 
 <Tabs>
   <Tab label="Angular">
@@ -624,17 +649,10 @@ export const TimeComponent = () => {
 
 export const DateTimeExample = () => {
   const [date, setDate] = useState(new Date());
-  return (
-    <GoAInputDateTime
-      name="dateTimeExample"
-      value={date}
-    />
-  )
-}
+  return <GoAInputDateTime name="dateTimeExample" value={date} />;
+};
 
-<Story name="Date and Time">
-  {DateTimeExample.bind({})}
-</Story>
+<Story name="Date and Time">{DateTimeExample.bind({})}</Story>
 
 <Tabs>
   <Tab label="Angular">
@@ -679,18 +697,10 @@ export const DateTimeExample = () => {
 
 export const TimeWithSecondsExample = () => {
   const [time, setTime] = useState(new Date());
-  return (
-    <GoAInputTime
-      name="timeseconnds"
-      value={time}
-      step="1"
-    />
-  )
-}
+  return <GoAInputTime name="timeseconnds" value={time} step="1" />;
+};
 
-<Story name="Time with seconds">
-  { TimeWithSecondsExample.bind({}) }
-</Story>
+<Story name="Time with seconds">{TimeWithSecondsExample.bind({})}</Story>
 
 When working with the `type=time` step controls the second step value (defaults to 60)
 
@@ -810,7 +820,7 @@ export const WidthTemplate = ({ width }) => {
   </Tab>
 </Tabs>
 
-#### Prefix and suffix 
+#### Prefix and suffix
 
 <Story name="Prefix and suffix">
   <>

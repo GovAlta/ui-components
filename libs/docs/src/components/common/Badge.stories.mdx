@@ -1,6 +1,14 @@
 import { Meta, Story } from '@storybook/addon-docs';
 
-import { Tabs, Tab, Note, SupportInfo, Props, Prop, CodeSnippet } from '@abgov/shared/storybook-common';
+import {
+  Tabs,
+  Tab,
+  Note,
+  SupportInfo,
+  Props,
+  Prop,
+  CodeSnippet,
+} from '@abgov/shared/storybook-common';
 import { GoABadge } from '@abgov/react-components';
 
 <Meta title="Components/Badge" />
@@ -21,18 +29,14 @@ which display minimal amounts of information, system feedback, or states.
     name="type"
     type="success | important | information | emergency | dark | midtone | light"
     required={true}
-    description="Defines the context and colour of the badge"
+    description="Define the context and colour of the badge"
   />
-  <Prop
-    name="content"
-    type="string"
-    description="Badge text"
-  />
+  <Prop name="content" type="string" description="Text label of the badge" />
   <Prop
     name="icon"
     type="boolean"
     defaultValue="false"
-    description="Flag to show the icon corresponding to the defined type"
+    description="Include an icon in the badge"
   />
 </Props>
 
@@ -94,7 +98,6 @@ which display minimal amounts of information, system feedback, or states.
 </Tabs>
 
 #### Icons
-
 
 <Story name="Icon">
   <GoABadge type="information" icon />

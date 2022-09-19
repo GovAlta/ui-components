@@ -54,9 +54,7 @@ export const FullscreenTemplate = (args) => {
   }
   return (
     <>
-      <GoAButton onClick={showProgress}>
-        Show
-      </GoAButton>
+      <GoAButton onClick={showProgress}>Show</GoAButton>
       <GoACircularProgress
         {...args}
         visible={visible}
@@ -91,9 +89,7 @@ export const FullscreenProgressTemplate = () => {
   }, [progress, handle]);
   return (
     <>
-      <GoAButton onClick={show}>
-        Show
-      </GoAButton>
+      <GoAButton onClick={show}>Show</GoAButton>
       <GoACircularProgress
         visible={visible}
         variant="fullscreen"
@@ -111,31 +107,31 @@ export const FullscreenProgressTemplate = () => {
     name="variant"
     type="fullscreen | inline"
     defaultValue="inline"
-    description="The variant of progress indicator"
+    description="Stretch across the full screen or use it inline"
   />
   <Prop
     name="visible"
     type="boolean"
     defaultValue="false"
-    description="Shows/hides the page loader, allowing for fade transition to be applied in each transition."
+    description="Show/hide the page loader. This allows for fade transition to be applied in each transition."
   />
   <Prop
     name="size"
     type="small | large"
     defaultValue="large"
-    description="The size of progress indicator"
+    description="Size of the progress indicator"
   />
   <Prop
     name="progress"
     type="number"
     defaultValue="-1"
-    description="The progress value. Setting this value will change the type from `infinite` to `progress`"
+    description="Set the progress value. Setting this value will change the type from `infinite` to `progress`"
   />
   <Prop
     name="message"
     type="string"
     defaultValue=""
-    description="Text displayed under the circular spinner"
+    description="Loading message displayed under the progress indicator"
   />
 </Props>
 
@@ -175,14 +171,8 @@ export const FullscreenProgressTemplate = () => {
 #### Sizes
 
 <Story name="Sizes">
-  <GoACircularProgress
-    visible={true}
-    size="small"
-  />
-  <GoACircularProgress
-    visible={true}
-    size="large"
-  />
+  <GoACircularProgress visible={true} size="small" />
+  <GoACircularProgress visible={true} size="large" />
 </Story>
 
 <Tabs>
@@ -234,10 +224,7 @@ export const FullscreenProgressTemplate = () => {
 Message text is optional for all the variations listed.
 
 <Story name="Message">
-  <GoACircularProgress
-    visible={true}
-    message="Loading..."
-  />
+  <GoACircularProgress visible={true} message="Loading..." />
 </Story>
 
 <Tabs>
@@ -304,8 +291,8 @@ Message text is optional for all the variations listed.
     <CodeSnippet
       lang="tsx"
       code={`
-        <GoACircularProgress 
-          variant="inline" 
+        <GoACircularProgress
+          variant="inline"
           visible={true}
         />
       `}
@@ -397,9 +384,7 @@ Message text is optional for all the variations listed.
 
 #### Fullscreen infinite
 
-<Story name="Fullscreen infinite">
-  {FullscreenTemplate.bind({})}
-</Story>
+<Story name="Fullscreen infinite">{FullscreenTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Web Component" hidden={true}>

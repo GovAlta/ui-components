@@ -25,15 +25,12 @@ import { GoACallout } from '@abgov/react-components';
 <Props>
   <Prop
     name="type"
-    type="emergency | important | information | event | success"
+    type="Information | important | emergency | success | event"
     required="true"
-    description="Sets the callout color and side icon"
+    defaultValue="Information"
+    description="Define the context and colour of the callout"
   />
-  <Prop
-    name="heading"
-    type="string"
-    description="Callout heading text"
-  />
+  <Prop name="heading" type="string" description="Callout heading text" />
 </Props>
 
 #### Emergency

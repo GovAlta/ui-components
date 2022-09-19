@@ -8,7 +8,13 @@ import {
   Props,
   Prop,
 } from '@abgov/shared/storybook-common';
-import { GoAContainer, GoAButton, GoABadge, GoAFlexRow, GoACallout} from '@abgov/react-components';
+import {
+  GoAContainer,
+  GoAButton,
+  GoABadge,
+  GoAFlexRow,
+  GoACallout,
+} from '@abgov/react-components';
 
 <Meta
   title="Components/Container"
@@ -30,24 +36,39 @@ import { GoAContainer, GoAButton, GoABadge, GoAFlexRow, GoACallout} from '@abgov
 <Props>
   <Prop
     name="variant"
-    type="interactive | info | error | success | important | non-interactive"
+    type="interactive | non-interactive"
     defaultValue="non-interactive"
+    description="Choose the type of container the type of the accent bar"
   />
-  <Prop name="colored" type="boolean" defaultValue="false" />
-  <Prop name="headingsize" type="large | small | none" defaultValue="large" />
-  <Prop name="padding" type="relaxed | compact" defaultValue="relaxed" />
+  <Prop
+    name="colored"
+    type="boolean"
+    defaultValue="false"
+    description="Gives the container background a colour"
+  />
+  <Prop
+    name="headingsize"
+    type="large | small | none"
+    defaultValue="large"
+    description="set the size of the accent bar"
+  />
+  <Prop
+    name="padding"
+    type="relaxed | compact"
+    defaultValue="relaxed"
+    description="sets the amount of white space in the container"
+  />
 </Props>
 
-#### Basic, interactive, non-interactive 
+#### Basic, interactive, non-interactive
 
-There are three main types of containers; interactive, non-interactive, and basic. Each of these 3 types of containers includes several possible variants. 
+There are three main types of containers; interactive, non-interactive, and basic. Each of these 3 types of containers includes several possible variants.
 
 #### Basic Container
 
 <Story name="Basic">
   <GoAContainer>
-    <h2>Detach to use</h2>
-    + Add things inside me
+    <h2>Detach to use</h2>+ Add things inside me
   </GoAContainer>
 </Story>
 
@@ -127,7 +148,7 @@ Interactive containers to indicate that the content within is an action for the 
 
 #### Non-interactive Container
 
-Non-interactive containers indicate that the content is only for the user to review. Use a grey accent to indicate that there is content in the container and that the content is not interactive. 
+Non-interactive containers indicate that the content is only for the user to review. Use a grey accent to indicate that there is content in the container and that the content is not interactive.
 
 <Story name="Non-interactive">
   <GoAContainer variant="non-interactive">
@@ -165,7 +186,6 @@ Non-interactive containers indicate that the content is only for the user to rev
 
 There are three main types within the interactive and non-interactive container types: a large accent bar, a small accent bar, and an accent bar with text.
 
-
 export const HeadingTemplate = (args) => {
   return (
     <GoAContainer {...args}>
@@ -175,9 +195,7 @@ export const HeadingTemplate = (args) => {
   );
 };
 
-
 #### Use the large heading bar container for "primary" content.
-
 
 <Story name="Large heading bar">
   <GoAFlexRow gap="medium">
@@ -228,7 +246,6 @@ export const HeadingTemplate = (args) => {
     />
   </Tab>
 </Tabs>
-
 
 #### Use the small accent bar container for "secondary" content.
 
@@ -289,15 +306,13 @@ export const HeadingTemplate = (args) => {
 <Story name="Accent bar with text">
   <>
     <GoAFlexRow gap="medium">
-      <GoAContainer variant="interactive" title="Heading" >
+      <GoAContainer variant="interactive" title="Heading">
         Content
       </GoAContainer>
-      <GoAContainer 
+      <GoAContainer
         variant="non-interactive"
         title="Heading"
-        actions={ 
-          <GoABadge type="success" content="Badge Text" icon={true} /> 
-        }
+        actions={<GoABadge type="success" content="Badge Text" icon={true} />}
       >
         Content
       </GoAContainer>
@@ -325,11 +340,11 @@ export const HeadingTemplate = (args) => {
           <goa-container variant="interactive" title="Heading" >
             Content
           </goa-container>
-          <goa-container 
+          <goa-container
             variant="non-interactive"
             title="Heading"
           >
-            <goa-badge slot="actions" type="success" content="Badge Text" icon="true" /> 
+            <goa-badge slot="actions" type="success" content="Badge Text" icon="true" />
             Content
           </goa-container>
         </goa-flex-row>
@@ -344,11 +359,11 @@ export const HeadingTemplate = (args) => {
           <GoAContainer variant="interactive" title="Heading" >
             Content
           </GoAContainer>
-          <GoAContainer 
+          <GoAContainer
             variant="non-interactive"
             title="Heading"
-            actions={ 
-              <GoABadge type="success" content="Badge Text" icon={true} /> 
+            actions={
+              <GoABadge type="success" content="Badge Text" icon={true} />
             }
           >
             Content
@@ -359,7 +374,7 @@ export const HeadingTemplate = (args) => {
   </Tab>
 </Tabs>
 
-#### Alternate colour for default container 
+#### Alternate colour for default container
 
 <Story name="Alternate colour">
   <GoAFlexRow gap="medium">
@@ -399,7 +414,6 @@ export const HeadingTemplate = (args) => {
   </Tab>
 </Tabs>
 
-
 #### Compact Padding
 
 <Story name="Compact Padding">
@@ -435,7 +449,6 @@ export const HeadingTemplate = (args) => {
 </Tabs>
 
 #### Additional examples (interactive container with content and basic container inside, non-interactive container with content and grey basic container inside)
-
 
 <Story name="Interactive container with basic container inside">
   <GoAContainer headingSize="large">
@@ -481,7 +494,6 @@ export const HeadingTemplate = (args) => {
   </Tab>
 </Tabs>
 
-
 #### Non-interactive container with complex content and basic grey container inside
 
 <Story name="Non-interactive container with complex content">
@@ -501,20 +513,23 @@ export const HeadingTemplate = (args) => {
         <td align="right">$275.00</td>
       </tr>
     </table>
-    <br/>
+    <br />
     <GoACallout type="important">
-      Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident.
+      Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
+      labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet.
+      Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum
+      Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident.
     </GoACallout>
     <GoAContainer headingSize="none" colored={true}>
       <GoAFlexRow>
         <section>
           Topic
-          <br/>
+          <br />
           <strong>Content</strong>
         </section>
         <section>
           Topic
-          <br/>
+          <br />
           <strong>Content</strong>
         </section>
       </GoAFlexRow>

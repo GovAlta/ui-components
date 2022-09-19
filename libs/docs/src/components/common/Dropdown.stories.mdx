@@ -32,10 +32,12 @@ import { useState } from 'react';
   <Prop
     name="value"
     type="string"
+    description="Stores the value of the item selected from the dropdown"
   />
   <Prop
     name="leadingicon"
     type="GoAIconType"
+    description="Show an icon to the left of the dropdown option"
   />
   <Prop
     name="maxheight"
@@ -45,6 +47,7 @@ import { useState } from 'react';
   <Prop
     name="placeholder"
     type="string"
+    description="The text displayed for the dropdown before a selection is made."
   />
   <Prop
     name="width"
@@ -55,12 +58,13 @@ import { useState } from 'react';
     name="disabled"
     type="boolean"
     defaultValue="false"
+    description="Disable this control"
   />
   <Prop
     name="error"
     type="boolean"
     defaultValue="false"
-    description="Sets the dropdown in an error state"
+    description="Show an error state"
   />
   <Prop
     name="arialabel"
@@ -70,12 +74,12 @@ import { useState } from 'react';
   <Prop
     name="_change"
     type="CustomEvent<{detail: { name: string, value: string }}>"
-    description="onClick callback function"
+    description="Callback function when dropdown value is changed"
   />
 </Props>
 
-
 #### Dropdown item properties
+
 <Props>
   <Prop
     name="name"
@@ -93,7 +97,6 @@ import { useState } from 'react';
     description="The displayed value within the selection box. The `value` property is the fallback value."
   />
 </Props>
-
 
 export const Template = (args) => {
   const [value, setValue] = useState('green');
