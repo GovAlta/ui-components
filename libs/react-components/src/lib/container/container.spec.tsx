@@ -7,7 +7,7 @@ describe('Container', () => {
 
   it("should render the properties", () => {
     const { container } = render(<GoAContainer
-      variant="interactive"
+      type="interactive"
       colored={false}
       headingSize="large"
       padding="relaxed"
@@ -20,7 +20,7 @@ describe('Container', () => {
 
     const el = container.querySelector("goa-container");
     expect(el).toBeTruthy();
-    expect(el.getAttribute("variant")).toEqual("interactive");
+    expect(el.getAttribute("type")).toEqual("interactive");
     expect(el.getAttribute("colored")).toEqual("false");
     expect(el.getAttribute("headingsize")).toEqual("large");
     expect(el.getAttribute("padding")).toEqual("relaxed");

@@ -5,12 +5,12 @@
   export let title;
   export let actions = "";
   export let content;
-  export let variant = "default";
+  export let type = "default";
   export let headingsize = "large";
 </script>
 
 <!-- HTML -->
-<goa-container variant={variant} headingsize={headingsize}>
+<goa-container type={type} headingsize={headingsize}>
   {#if title}
     <div slot="title" class="title">{title}</div>
   {/if}

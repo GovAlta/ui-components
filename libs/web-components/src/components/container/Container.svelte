@@ -4,7 +4,7 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
 
-  export let variant: 'interactive' | 'info' | 'error' | 'success' | 'important' | 'non-interactive' = 'non-interactive'
+  export let type: 'interactive' | 'info' | 'error' | 'success' | 'important' | 'non-interactive' = 'non-interactive'
   export let colored: string = "false";
   export let headingsize: 'large' | 'small' | 'none' = 'large';
   export let padding: "relaxed" | "compact" = "relaxed"
@@ -16,7 +16,7 @@
 <div
   class={`
     goa-container
-    goa-container--${variant}
+    goa-container--${type}
     padding--${padding}
   `}
   class:colored={_colored}

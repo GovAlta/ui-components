@@ -67,17 +67,13 @@
   data-testid={testid}
 >
   {#if type === "start"}
-    <div class="text">
-      <slot />
-    </div>
+    <slot class="text" />
     <goa-icon id="trailing-icon" type="arrow-forward" inverted="true" />
   {:else}
     {#if leadingicon}
       <goa-icon id="leading-icon" type={leadingicon} inverted={isButtonDark} />
     {/if}
-    <div class="text">
-      <slot />
-    </div>
+    <slot class="text" />
     {#if trailingicon}
       <goa-icon id="trailing-icon" type={trailingicon} inverted={isButtonDark} />
     {/if}
@@ -146,7 +142,7 @@
   button.submit,
   button.primary {
     border: 2px solid var(--goa-color-interactive);
-    background: var(--goa-color-interactive);
+    background-color: var(--goa-color-interactive);
     color: var(--goa-color-text-light);
   }
 
@@ -154,7 +150,7 @@
   button.submit:hover,
   button.primary:hover {
     border-color: var(--goa-color-interactive--hover);
-    background: var(--goa-color-interactive--hover);
+    background-color: var(--goa-color-interactive--hover);
   }
 
   button.start:focus,
@@ -165,7 +161,7 @@
   button.primary:active {
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
     border-color: var(--goa-color-interactive--active);
-    background: var(--goa-color-interactive--active);
+    background-color: var(--goa-color-interactive--active);
     outline: none;
   }
 
@@ -173,21 +169,21 @@
 
   button.secondary {
     border: 2px solid var(--goa-color-interactive);
-    background: var(--color-white);
+    background-color: var(--color-white);
     color: var(--goa-color-interactive);
   }
 
   button.secondary:hover {
     border-color: var(--goa-color-interactive--hover);
     color: var(--goa-color-interactive--hover);
-    background: var(--color-gray-100);
+    background-color: var(--color-gray-100);
   }
 
   button.secondary:focus,
   button.secondary:active {
     border-color: var(--goa-color-interactive--active);
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
-    background: var(--color-gray-100);
+    background-color: var(--color-gray-100);
     outline: none;
   }
 
@@ -195,7 +191,7 @@
 
   button.tertiary {
     border: 1px solid transparent;
-    background: transparent;
+    background-color: transparent;
     color: var(--goa-color-interactive);
     text-decoration: underline;
   }
@@ -203,13 +199,13 @@
   button.tertiary:hover {
     border-color: var(--color-gray-100);
     color: var(--goa-color-interactive--hover);
-    background: var(--color-gray-100);
+    background-color: var(--color-gray-100);
   }
 
   button.tertiary:focus,
   button.tertiary:active {
     border-color: var(--color-gray-100);
-    background: var(--color-gray-100);
+    background-color: var(--color-gray-100);
     color: var(--goa-color-interactive--active);
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
     outline: none;
@@ -218,52 +214,52 @@
   .submit.destructive,
   .primary.destructive {
     color: var(--color-white);
-    background: var(--goa-color-status-emergency);
+    background-color: var(--goa-color-status-emergency);
     border-color: var(--goa-color-status-emergency);
   }
   .submit.destructive:hover,
   .primary.destructive:hover {
-    background: var(--goa-color-status-emergency-dark);
+    background-color: var(--goa-color-status-emergency-dark);
     border-color: var(--goa-color-status-emergency-dark);
   }
   .submit.destructive:focus,
   .primary.destructive:focus,
   .primary.destructive:active {
-    background: var(--goa-color-status-emergency-dark);
+    background-color: var(--goa-color-status-emergency-dark);
     border-color: var(--goa-color-status-emergency-dark);
   }
 
   .secondary.destructive {
     color: var(--goa-color-status-emergency);
     border-color: var(--goa-color-status-emergency);
-    background: var(--color-white);
+    background-color: var(--color-white);
   }
   .secondary.destructive:hover {
     border-color: var(--goa-color-status-emergency-dark);
     color: var(--goa-color-status-emergency-dark);
-    background: var(--color-white);
+    background-color: var(--color-white);
   }
   .secondary.destructive:focus,
   .secondary.destructive:active {
     color: var(--goa-color-status-emergency-dark);
     border-color: var(--goa-color-status-emergency-dark);
-    background: var(--color-white);
+    background-color: var(--color-white);
   }
 
   .tertiary.destructive {
     color: var(--goa-color-status-emergency);
     border-color: var(--color-gray-200);
-    background: var(--color-white);
+    background-color: var(--color-white);
   }
   .tertiary.destructive:hover {
     border-color: var(--goa-color-status-emergency-dark);
     color: var(--goa-color-status-emergency-dark);
-    background: var(--color-white);
+    background-color: var(--color-white);
   }
   .tertiary.destructive:focus,
   .tertiary.destructive:active {
     color: var(--goa-color-status-emergency-dark);
     border-color: var(--goa-color-status-emergency-dark);
-    background: var(--color-white);
+    background-color: var(--color-white);
   }
 </style>

@@ -24,6 +24,8 @@
     | "week" = "text";
   export let name: string = "";
   export let value: string = "";
+
+  export let autocapitalize: "on" | "off" | "none" | "sentences" | "words" | "characters" = "off";
   export let placeholder: string = "";
   export let leadingicon: GoAIconType = null;
   export let trailingicon: GoAIconType = null;
@@ -120,6 +122,7 @@
       readonly={isReadonly}
       disabled={isDisabled}
       data-testid={testid}
+      {autocapitalize}
       {name}
       {type}
       {value}
@@ -178,7 +181,6 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
   }
 
   .container {
@@ -255,6 +257,7 @@
     flex: 1 1 auto;
   }
 
+  input[type=text],
   input[type=date],
   input[type="datetime-local"],
   input[type=number] {
