@@ -26,24 +26,25 @@ import { useState } from 'react';
   <Prop
     name="leadingicon"
     type="GoAIconType"
-    description="Sets the chip color and side icon"
-  />
-  <Prop 
-    name="error" 
+    description="Show an icon to the left of the text"
+/>
+
+  <Prop
+    name="error"
     type="boolean"
     defaultValue="false"
-    description="Flag to whether component is in an error state" />
+    description="Show an error state" />
   <Prop
     name="deletable"
     type="boolean"
     defaultValue="false"
-    description="Whether the chip shows a delete button"
+    description="Show a delete icon button on the right of the text label"
   />
   <Prop
     name="content"
     type="string"
     required="true"
-    description="Text within chip"
+    description="Text label of the chip"
   />
   <Prop
     name="_click"

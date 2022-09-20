@@ -28,40 +28,40 @@ export const noop = () => {};
     name="type"
     type="primary | submit | secondary | tertiary | start"
     defaultValue="primary"
-    description=""
+    description="Define the type of button"
   />
   <Prop
     name="size"
     type="normal | compact"
     defaultValue="normal"
-    description=""
+    description="Set the size of button [to compact]"
   />
   <Prop
     name="variant"
     type="normal | destructive"
     defaultValue="normal"
-    description=""
+    description="Style this button to show a destructive action"
   />
-  <Prop 
-    name="disabled" 
-    type="boolean" 
-    defaultValue="false" 
-    description="Whether button can be pressed" 
+  <Prop
+    name="disabled"
+    type="boolean"
+    defaultValue="false"
+    description="Disable this button"
   />
-  <Prop 
-    name="leadingicon" 
-    type="GoAIconType" 
-    description="Icon shown to the left of the text" 
+  <Prop
+    name="leadingicon"
+    type="GoAIconType"
+    description="Show an icon to the left of the text"
   />
-  <Prop 
-    name="trailingicon" 
-    type="GoAIconType" 
-    description="Icon shown to the right of the text" 
+  <Prop
+    name="trailingicon"
+    type="GoAIconType"
+    description="Show an icon to the right of the text"
   />
-  <Prop 
-    name="_click" 
-    type="CustomEvent" 
-    description="Callback function when button is clicked" 
+  <Prop
+    name="_click"
+    type="CustomEvent"
+    description="Callback function when button is clicked"
   />
 </Props>
 

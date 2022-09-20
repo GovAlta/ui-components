@@ -23,18 +23,66 @@ import { GoATextArea } from '@abgov/react-components';
 #### Properties
 
 <Props>
-  <Prop name="name" type="string" required="true" description="Name of input value that is received in the _change event" />
+  <Prop
+    name="name"
+    type="string"
+    required="true"
+    description="Name of input value that is received in the _change event"
+  />
   <Prop name="value" type="string" description="Bound to value" />
-  <Prop name="placeholder" type="string" description="Helper text displayed when no value is set" />
-  <Prop name="rows" type="number" defaultValue="3" description="Row count" />
-  <Prop name="width" type="string" defaultValue="60ch" description="Width of textarea" />
-  <Prop name="error" type="boolean" defaultValue="false" description="When `true` component have a red border" />
-  <Prop name="readonly" type="boolean" defaultValue="false" description="Flag to make component readonly" />
-  <Prop name="disabled" type="boolean" defaultValue="false" description="Flag to disable component from user input" />
-  <Prop name="showcounter" type="boolean" defaultValue="false" description="Show/hide the character counter" />
-  <Prop name="maxcharcount" type="number" description="Max character count" />
-  <Prop name="arialabel" type="string" description="Defines how the text will be translated for the screen reader. If not specified it will fall back to the name" />
-  <Prop name="_change" type="CustomEvent<{detail: { name: string, value: string }}>" description="Event triggered on each input value change" />
+  <Prop
+    name="placeholder"
+    type="string"
+    description="Text displayed within the input when no value is set"
+  />
+  <Prop
+    name="rows"
+    type="number"
+    defaultValue="3"
+    description="Set the number of rows"
+  />
+  <Prop
+    name="width"
+    type="string"
+    defaultValue="60ch"
+    description="Width of text area"
+  />
+  <Prop
+    name="error"
+    type="boolean"
+    defaultValue="false"
+    description="Sets the input to an error state"
+  />
+  <Prop
+    name="readonly"
+    type="boolean"
+    defaultValue="false"
+    description="Sets the input to a read only state"
+  />
+  <Prop
+    name="disabled"
+    type="boolean"
+    defaultValue="false"
+    description="Sets the input to a disabled state"
+  />
+  <Prop
+    name="showcounter"
+    type="boolean"
+    defaultValue="false"
+    description="Show/hide the character counter"
+  />
+  <Prop name="maxcharcount" type="number" description="Set the max character count" />
+
+  <Prop
+    name="arialabel"
+    type="string"
+    description="Defines how the text will be translated for the screen reader. If not specified it will fall back to the name"
+  />
+  <Prop
+    name="_change"
+    type="CustomEvent<{detail: { name: string, value: string }}>"
+    description="Event triggered on each input value change"
+  />
 </Props>
 
 export const noop = () => {
