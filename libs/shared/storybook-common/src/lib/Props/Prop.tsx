@@ -3,12 +3,13 @@ import React, { FC } from "react";
 type Props = {
   name: string;
   type: string;
+  lang: string;
   required: boolean;
   description: string;
   defaultValue: string;
 }
 
-export const Prop: FC<Props> = ({ name, type, required, defaultValue, description }) => {
+export const Prop: FC<Props> = ({ name, type, lang, required, defaultValue, description }) => {
 
   const formatTypes = () => {
     return type

@@ -35,6 +35,7 @@ export * from "./components/scrollable/Scrollable.svelte";
 export * from "./components/skeleton/Skeleton.svelte";
 export * from "./components/spinner/Spinner.svelte";
 export * from "./components/text-area/TextArea.svelte";
+export * from "./layouts/two-column-layout/TwoColumnLayout.svelte";
 export * from "./layouts/FullScreenNavbarLayout.svelte";
 
 // Wrappers

@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/svelte';
-import GoABadge from './AppHeader.svelte'
+import GoAAppHeader from './AppHeader.svelte'
 
 describe('GoAAppHeader', () => {
   it('should render', async () => {
-    const baseElement = render(GoABadge, { testid: "app-header-test", url: "www.test.com", heading: 'Complete' });
+    const baseElement = render(GoAAppHeader, { testid: "app-header-test", url: "www.test.com", heading: 'Complete' });
     const appHeader = await baseElement.findByTestId('app-header-test');
-    const link = appHeader.firstElementChild;
+    const link = appHeader.querySelector("a");
 
     expect(appHeader).toBeTruthy();
     expect(link).toBeTruthy();

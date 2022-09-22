@@ -19,6 +19,7 @@ import { MicrositeHeaderComponent } from './microsite-header/microsite-header.co
 import { ContainerComponent } from './container/container.component';
 import { SkeletonComponent } from './skeleton/skeleton.component';
 import { FormItemComponent } from './form-item/form-item.component';
+import { TwoColumnLayoutComponent } from './two-column-layout/two-column-layout.component';
 
 const routes: Routes = [
   { path: 'button', component: ButtonComponentComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'hero-banner', component: HeroBannerComponent },
   { path: 'microsite-header', component: MicrositeHeaderComponent },
   { path: 'modal', component: ModalComponent },
+  { path: 'two-column-layout', component: TwoColumnLayoutComponent },
   { path: '', redirectTo: '/input', pathMatch: 'full' }
 ];
 
