@@ -36,7 +36,7 @@ import {
 <Props>
   <Prop
     name="type"
-    type="interactive | non-interactive"
+    type="interactive | info | error | success | important | non-interactive"
     defaultValue="non-interactive"
     description="Choose the type of container the type of the accent bar"
   />
@@ -62,7 +62,7 @@ import {
 
 #### Basic, interactive, non-interactive
 
-There are three main types of containers; interactive, non-interactive, and basic. Each of these 3 types of containers includes several possible types. 
+There are three main types of containers; interactive, non-interactive, and basic. Each of these 3 types of containers includes several possible types.
 
 #### Basic Container
 
@@ -313,7 +313,7 @@ export const HeadingTemplate = (args) => {
       <GoAContainer type="interactive" title="Heading" >
         Content
       </GoAContainer>
-      <GoAContainer 
+      <GoAContainer
         type="non-interactive"
         title="Heading"
         actions={<GoABadge type="success" content="Badge Text" icon={true} />}
@@ -344,7 +344,7 @@ export const HeadingTemplate = (args) => {
           <goa-container type="interactive" title="Heading" >
             Content
           </goa-container>
-          <goa-container 
+          <goa-container
             type="non-interactive"
             title="Heading"
           >
@@ -363,7 +363,7 @@ export const HeadingTemplate = (args) => {
           <GoAContainer type="interactive" title="Heading" >
             Content
           </GoAContainer>
-          <GoAContainer 
+          <GoAContainer
             type="non-interactive"
             title="Heading"
             actions={
