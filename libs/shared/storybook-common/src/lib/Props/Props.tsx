@@ -1,8 +1,14 @@
 import React, { FC } from "react";
+import { Tab, Tabs } from "../tabs/Tabs";
 import "./Props.css";
 
-export const Props: FC = ({ children }) => {
-  return (
+interface Props {
+  showTabs?: boolean;
+}
+
+export const Props: FC<Props> = (props) => {
+
+  const table = (children: React.ReactNode) => 
     <table className="props">
       <thead>
         <tr>
@@ -17,7 +23,28 @@ export const Props: FC = ({ children }) => {
         { children }
       </tbody>
     </table>
-  );
+
+  const filterBy = (children: React.ReactNode, lang: string) => {
+    const _children = React.Children.toArray(children);
+    return _children.filter((child: React.ReactElement )=> {
+      return !child.props["lang"] || child.props["lang"] === lang;
+    })
+  }
+
+  if (props.showTabs) {
+    return (
+      <Tabs>
+        <Tab label="Angular">
+          { table(filterBy(props.children, "angular")) }
+        </Tab>
+        <Tab label="React">
+          { table(filterBy(props.children, "react")) }
+        </Tab>
+      </Tabs>
+    );
+  }
+
+  return table(props.children)
 }
 
 export default Props;
