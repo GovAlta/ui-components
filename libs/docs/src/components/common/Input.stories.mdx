@@ -43,6 +43,7 @@ import { Meta, Story } from '@storybook/addon-docs';
     type="text | number | password | email | search | tel | date | datetime-locale | time | url | week"
     defaultValue="text"
     description="Sets the type of the input field"
+    description="Sets the type of the input field"
   />
   <Prop
     name="name"
@@ -528,7 +529,7 @@ export const DateTemplate = () => {
       max={maxDate}
       onChange={(name, value) => setDate(value)}
     />
-  );
+  );;
 };
 
 <Story name="Date">{DateTemplate.bind({})}</Story>
@@ -856,19 +857,38 @@ export const WidthTemplate = ({ width }) => {
   </Tab>
 </Tabs>
 
-
-#### Autocapitalize 
+#### Autocapitalize
 
 export const AutocapitalizeTemplate = () => {
   return (
     <>
-      <GoAInputText name="chars" autoCapitalize="off" placeholder="off | none" onChange={() => {}} />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="off"
+        placeholder="off | none"
+        onChange={() => {}}
+      />
       <br />
-      <GoAInputText name="chars" autoCapitalize="on" placeholder="on | sentences" onChange={() => {}} />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="on"
+        placeholder="on | sentences"
+        onChange={() => {}}
+      />
       <br />
-      <GoAInputText name="chars" autoCapitalize="words" placeholder="words" onChange={() => {}} />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="words"
+        placeholder="words"
+        onChange={() => {}}
+      />
       <br />
-      <GoAInputText name="chars" autoCapitalize="characters" placeholder="characters" onChange={() => {}} />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="characters"
+        placeholder="characters"
+        onChange={() => {}}
+      />
     </>
   );
 };

@@ -34,7 +34,7 @@ build-react-app:
 	npm run build react-demo --withDeps --configuration production
 
 build-ng-app:
-	npm run build react-demo --withDeps --configuration production
+	npm run build angular-demo --withDeps --configuration production
 
 build: build-styles build-web-components build-react-components build-react-app build-ng-app
 
