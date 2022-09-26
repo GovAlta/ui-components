@@ -3,7 +3,7 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
 
-  export let name: string = "";
+  export let heading: string = "";
   export let maxcolumncount: number = 1;
 
   let rootEl: HTMLElement;
@@ -96,8 +96,8 @@
 
 <!-- Template -->
 <section bind:this={rootEl}>
-  {#if name}
-    <div class="title">{name}</div>
+  {#if heading}
+    <div class="title">{heading}</div>
     <goa-divider spacing="small" />
   {/if}
 
