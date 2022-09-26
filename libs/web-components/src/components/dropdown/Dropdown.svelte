@@ -144,7 +144,7 @@
 
   // Event handlers
 
-  function onSelect(val: string, label: string) {
+  function onSelect(val: string, label: string, close: boolean) {
     if (_disabled) return;
     selectedLabel = label;
     if (_multiselect) {
@@ -164,7 +164,9 @@
         }),
       );
     }
-    closeMenu();
+    if (close) {
+      closeMenu();
+    }
   }
 
   const onInputKeyDown = (e: KeyboardEvent) => {
@@ -189,20 +191,22 @@
   function onMenuKeyDown(e: KeyboardEvent) {
     switch (e.key) {
       case "ArrowUp":
-        if (highlightedIndex === 0) {
-          highlightedIndex = options.length - 1;
-        } else {
+        if (highlightedIndex > 0) {
           highlightedIndex--;
+          onSelect(options[highlightedIndex].value, options[highlightedIndex].label, false);
         }
         e.preventDefault();
         break;
       case "ArrowDown":
-        highlightedIndex = (highlightedIndex + 1) % options.length;
+        if (highlightedIndex < options.length - 1) {
+          highlightedIndex++;
+          onSelect(options[highlightedIndex].value, options[highlightedIndex].label, false);
+        }
         e.preventDefault();
         break;
       case "Tab":
       case "Enter":
-        onSelect(options[highlightedIndex].value, options[highlightedIndex].label);
+        closeMenu();
         e.preventDefault();
         break;
       case "Escape":
@@ -271,16 +275,17 @@
     {#each options as option, index}
       <li
         id={option.label}
-        aria-label={option.label || option.value}
         role="option"
-        data-testid={`${option.value}-dropdown-item`}
-        data-index={index}
+        aria-label={option.label || option.value}
+        aria-selected={_values.includes(option.value) ? "true" : "false"}
         class="goa-dropdown-option"
         class:goa-dropdown-option--disabled={false}
         class:goa-dropdown-option--tabbed={index === highlightedIndex}
         class:goa-dropdown-option--selected={_values.includes(option.value)}
+        data-testid={`${option.value}-dropdown-item`}
+        data-index={index}
         style={`display: ${false ? "none" : "block"}`}
-        on:click={() => onSelect(option.value, option.label)}
+        on:click={() => onSelect(option.value, option.label, true)}
       >
         {option.label || option.value}
       </li>
