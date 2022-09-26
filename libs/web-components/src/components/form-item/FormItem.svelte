@@ -71,6 +71,7 @@
   .help-msg {
     font-size: var(--fs-sm);
     color: var(--goa-color-text);
+    margin-right: 56px;
   }
 
   .error-msg {
