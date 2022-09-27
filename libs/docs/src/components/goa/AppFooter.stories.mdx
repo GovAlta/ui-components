@@ -32,6 +32,17 @@ The footer will not position itself on the bottom of the page, but must instead 
 
 ---
 
+#### App Footer properties
+
+<Props>
+  <Prop
+    name="maxcontentwidth"
+    type="string"
+    defaultValue="--layout-max-content-width defined within the styles lib"
+    description="Maximum width of the content area"
+  />
+</Props>
+
 #### Meta links properties
 
 <Props>
@@ -52,15 +63,14 @@ The footer will not position itself on the bottom of the page, but must instead 
     description="Set the number of columns for navigation links on larger viewports"
   />
   <Prop
+    name="heading"
+    type="string"
+    description="Sub heading of the navigation links"
+  />
+  <Prop
     name="slot"
     type="nav"
     description="Anchor elements to display in the top navigation section"
-  />
-  <Prop
-    name="maxcontentwidth"
-    type="string"
-    defaultValue="--layout-max-content-width defined within the styles lib"
-    description="Maximum width of the content area"
   />
 </Props>
 
@@ -245,14 +255,14 @@ The footer will not position itself on the bottom of the page, but must instead 
 
 <Story name="Secondary navigation with multiple sections">
   <GoAAppFooter>
-    <GoAAppFooterNavSection name="All Services">
+    <GoAAppFooterNavSection heading="All Services">
       <a href="a.html">Arts and culture</a>
       <a href="b.html">Education and training</a>
       <a href="c.html">Family and social supports</a>
       <a href="d.html">Housing and community</a>
       <a href="e.html">Life events</a>
     </GoAAppFooterNavSection>
-    <GoAAppFooterNavSection name="Social Media">
+    <GoAAppFooterNavSection heading="Social Media">
       <a href="instagram.html">Instagram</a>
       <a href="youtube.html">YouTube</a>
       <a href="facebook.html">Facebook</a>
@@ -268,14 +278,14 @@ The footer will not position itself on the bottom of the page, but must instead 
       lang="html"
       code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services" slot="nav">
+        <goa-app-footer-nav-section heading="All Services" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
           <a href="d.html">Housing and community</a>
           <a href="e.html">Life events</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-nav-section name="Social Media" slot="nav">
+        <goa-app-footer-nav-section heading="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
@@ -291,14 +301,14 @@ The footer will not position itself on the bottom of the page, but must instead 
       lang="html"
       code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services" slot="nav">
+        <goa-app-footer-nav-section heading="All Services" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
           <a href="d.html">Housing and community</a>
           <a href="e.html">Life events</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-nav-section name="Social Media" slot="nav">
+        <goa-app-footer-nav-section heading="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
@@ -314,14 +324,14 @@ The footer will not position itself on the bottom of the page, but must instead 
       lang="tsx"
       code={`
       <GoAAppFooter>
-        <GoAAppFooterNavSection name="All Services">
+        <GoAAppFooterNavSection heading="All Services">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
           <a href="d.html">Housing and community</a>
           <a href="e.html">Life events</a>
         </GoAAppFooterNavSection>
-        <GoAAppFooterNavSection name="Social Media">
+        <GoAAppFooterNavSection heading="Social Media">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
@@ -338,7 +348,7 @@ The footer will not position itself on the bottom of the page, but must instead 
 
 <Story name="Secondary navigation with multi column section">
   <GoAAppFooter>
-    <GoAAppFooterNavSection name="All Services" maxColumnCount={2}>
+    <GoAAppFooterNavSection heading="All Services" maxColumnCount={2}>
       <a href="a.html">Arts and culture</a>
       <a href="b.html">Education and training</a>
       <a href="c.html">Family and social supports</a>
@@ -350,7 +360,7 @@ The footer will not position itself on the bottom of the page, but must instead 
       <a href="i.html">Jobs and employment</a>
       <a href="j.html">Moving to Alberta</a>
     </GoAAppFooterNavSection>
-    <GoAAppFooterNavSection name="Social Media">
+    <GoAAppFooterNavSection heading="Social Media">
       <a href="instagram.html">Instagram</a>
       <a href="youtube.html">YouTube</a>
       <a href="facebook.html">Facebook</a>
@@ -366,7 +376,7 @@ The footer will not position itself on the bottom of the page, but must instead 
       lang="html"
       code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services" maxcolumncount="2" slot="nav">
+        <goa-app-footer-nav-section heading="All Services" maxcolumncount="2" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -378,7 +388,7 @@ The footer will not position itself on the bottom of the page, but must instead 
           <a href="i.html">Jobs and employment</a>
           <a href="j.html">Moving to Alberta</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-nav-section name="Social Media" slot="nav">
+        <goa-app-footer-nav-section heading="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
@@ -394,7 +404,7 @@ The footer will not position itself on the bottom of the page, but must instead 
       lang="html"
       code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services" maxcolumncount="2" slot="nav">
+        <goa-app-footer-nav-section heading="All Services" maxcolumncount="2" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -406,7 +416,7 @@ The footer will not position itself on the bottom of the page, but must instead 
           <a href="i.html">Jobs and employment</a>
           <a href="j.html">Moving to Alberta</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-nav-section name="Social Media" slot="nav">
+        <goa-app-footer-nav-section heading="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
@@ -422,7 +432,7 @@ The footer will not position itself on the bottom of the page, but must instead 
       lang="tsx"
       code={`
       <GoAAppFooter>
-        <GoAAppFooterNavSection name="All Services" maxColumnCount={2}>
+        <GoAAppFooterNavSection heading="All Services" maxColumnCount={2}>
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
@@ -434,7 +444,7 @@ The footer will not position itself on the bottom of the page, but must instead 
           <a href="i.html">Jobs and employment</a>
           <a href="j.html">Moving to Alberta</a>
         </GoAAppFooterNavSection>
-        <GoAAppFooterNavSection name="Social Media">
+        <GoAAppFooterNavSection heading="Social Media">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
@@ -559,14 +569,14 @@ The footer will not position itself on the bottom of the page, but must instead 
 
 <Story name="Secondary navigation with multiple sections and links to meta information">
   <GoAAppFooter>
-    <GoAAppFooterNavSection name="All Services">
+    <GoAAppFooterNavSection heading="All Services">
       <a href="a.html">Arts and culture</a>
       <a href="b.html">Education and training</a>
       <a href="c.html">Family and social supports</a>
       <a href="d.html">Housing and community</a>
       <a href="e.html">Life events</a>
     </GoAAppFooterNavSection>
-    <GoAAppFooterNavSection name="Social Media">
+    <GoAAppFooterNavSection heading="Social Media">
       <a href="instagram.html">Instagram</a>
       <a href="youtube.html">YouTube</a>
       <a href="facebook.html">Facebook</a>
@@ -588,14 +598,14 @@ The footer will not position itself on the bottom of the page, but must instead 
       lang="html"
       code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services" slot="nav">
+        <goa-app-footer-nav-section heading="All Services" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
           <a href="d.html">Housing and community</a>
           <a href="e.html">Life events</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-nav-section name="Social Media" slot="nav">
+        <goa-app-footer-nav-section heading="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
@@ -617,14 +627,14 @@ The footer will not position itself on the bottom of the page, but must instead 
       lang="html"
       code={`
       <goa-app-footer>
-        <goa-app-footer-nav-section name="All Services" slot="nav">
+        <goa-app-footer-nav-section heading="All Services" slot="nav">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
           <a href="d.html">Housing and community</a>
           <a href="e.html">Life events</a>
         </goa-app-footer-nav-section>
-        <goa-app-footer-nav-section name="Social Media" slot="nav">
+        <goa-app-footer-nav-section heading="Social Media" slot="nav">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
@@ -646,14 +656,14 @@ The footer will not position itself on the bottom of the page, but must instead 
       lang="tsx"
       code={`
       <GoAAppFooter>
-        <GoAAppFooterNavSection name="All Services">
+        <GoAAppFooterNavSection heading="All Services">
           <a href="a.html">Arts and culture</a>
           <a href="b.html">Education and training</a>
           <a href="c.html">Family and social supports</a>
           <a href="d.html">Housing and community</a>
           <a href="e.html">Life events</a>
         </GoAAppFooterNavSection>
-        <GoAAppFooterNavSection name="Social Media">
+        <GoAAppFooterNavSection heading="Social Media">
           <a href="instagram.html">Instagram</a>
           <a href="youtube.html">YouTube</a>
           <a href="facebook.html">Facebook</a>
