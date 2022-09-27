@@ -63,8 +63,6 @@ import { Meta, Story } from '@storybook/addon-docs';
   <Prop name="readonly" type="boolean" defaultValue="false" description="Makes the input readonly"/>
   <Prop name="error" type="boolean" defaultValue="false" description="Sets the input to an error state"/>
   <Prop name="width" type="string" defaultValue="30ch" description="Set the width of the text input area" />
-  <Prop name="showcounter" type="boolean" defaultValue="false" description="Shows the number of characters entered if it is set to True"/>
-<Prop name="maxcharcount" type="number" description="Maximum number of characters allowed in the input box"/>
 <Prop
   name="min"
   type="string | date"
@@ -365,105 +363,6 @@ export const FocusInputTemplate = () => (
     <CodeSnippet code={`<GoAInput name="foo" />`} lang="jsx" />
   </Tab>
 </Tabs>
-
-#### Character count
-
-export const CharCountTemplate = () => {
-  const [value, setValue] = useState('');
-  return (
-    <GoAInput
-      name="firstname"
-      value={value}
-      showCounter={true}
-      onChange={(name, value) => setValue(value)}
-    />
-  );
-};
-
-<Story name="Character count">{CharCountTemplate.bind({})}</Story>
-
-<Tabs>
-  <Tab label="Web Component" hidden={true}>
-    <CodeSnippet
-      code={`<goa-input name="firstname" showcounter="true" />`}
-      lang="html"
-    />
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet
-      code={`<goa-input name="firstname" showcounter="true"></goa-input>`}
-      lang="html"
-    />
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet
-      code={`
-      const [value, setValue] = useState('');
-      return (
-        <GoAInput
-          name="firstname"
-          value={value}
-          showCounter={true}
-          onChange={(name, value) => setValue(value)}
-        />
-      )
-    `}
-      lang="tsx"
-    />
-  </Tab>
-</Tabs>
-
-#### Character count with limit
-
-export const CharCountWithLimitTemplate = () => {
-  const [value, setValue] = useState('');
-  return (
-    <GoAInput
-      name="firstname"
-      value={value}
-      showCounter={true}
-      maxCharCount={20}
-      onChange={(name, value) => setValue(value)}
-    />
-  );
-};
-
-<Story name="Character count with limit">
-  {CharCountWithLimitTemplate.bind({})}
-</Story>
-
-<Tabs>
-  <Tab label="Web Component" hidden={true}>
-    <CodeSnippet
-      code={`<goa-input name="firstname" showcounter="true" maxcharcount="20" />`}
-      lang="html"
-    />
-  </Tab>
-  <Tab label="Angular">
-    <CodeSnippet
-      code={`<goa-input name="firstname" showcounter="true" maxcharcount="20"></goa-input>`}
-      lang="html"
-    />
-  </Tab>
-  <Tab label="React">
-    <CodeSnippet
-      code={`
-      const [value, setValue] = useState('');
-      return (
-        <GoAInput
-          name="firstname"
-          value={value}
-          showCounter={true}
-          maxCharCount={20}
-          onChange={(name, value) => setValue(value)}
-        />
-      )
-    `}
-      lang="tsx"
-    />
-  </Tab>
-</Tabs>
-
 #### Min/Max
 
 export const MinMaxTemplate = () => {
@@ -857,7 +756,7 @@ export const WidthTemplate = ({ width }) => {
 </Tabs>
 
 
-#### Autocapitalize 
+#### Autocapitalize
 
 export const AutocapitalizeTemplate = () => {
   return (
