@@ -177,6 +177,7 @@ export const ActionsTemplate = (args) => {
       <GoAModal
         heading="Heading"
         open={showModal}
+        onClose={() => setShowModal(false)}
         actions={
           <GoAButtonGroup alignment="end">
             <GoAButton type="secondary" onClick={() => setShowModal(false)}>
@@ -207,7 +208,7 @@ export const ActionsTemplate = (args) => {
       lang="html"
       code={`
       <goa-button id="button">Open Modal</goa-button>
-      <goa-modal id="modal" heading="Heading">
+      <goa-modal id="modal" heading="Heading" closable>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
@@ -229,6 +230,9 @@ export const ActionsTemplate = (args) => {
           modal.setAttribute("open", false)
         });
       })
+      modal.addEventListener("_close", () => {
+        modal.removeAttribute("open")
+      });
     `}
     />
   </Tab>
@@ -237,7 +241,7 @@ export const ActionsTemplate = (args) => {
       lang="html"
       code={`
       <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
-      <goa-modal id="modal" heading="Do you agree?" [open]="isOpen">
+      <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
@@ -278,6 +282,7 @@ export const ActionsTemplate = (args) => {
             <GoAModal
               heading="Heading"
               open={showModal}
+              onClose={() => setShowModal(false)}
               actions={
                 <GoAButtonGroup alignment="end">
                   <GoAButton onClick={() => setShowModal(false)}>Secondary</GoAButton>
@@ -317,7 +322,7 @@ export const TransitionsTemplate = (args) => {
           Slow
         </GoAButton>
         <GoAButton type="tertiary" onClick={() => show('fast')}>
-          Fast (default)
+          Fast
         </GoAButton>
       </GoAButtonGroup>
       <GoAModal
@@ -347,7 +352,7 @@ export const TransitionsTemplate = (args) => {
       <goa-button-group>
         <goa-button data-transition="none" type="tertiary">None</goa-button>
         <goa-button data-transition="slow" type="tertiary">Slow</goa-button>
-        <goa-button data-transition="fast" type="tertiary">Fast (default)</goa-button>
+        <goa-button data-transition="fast" type="tertiary">Fast</goa-button>
       </goa-button-group>
       <goa-modal id="modal" heading="Do you agree?" closable>
         <p>
@@ -384,7 +389,7 @@ export const TransitionsTemplate = (args) => {
       <goa-button-group>
         <goa-button type="tertiary" (_click)="openModal('none')">None</goa-button>
         <goa-button type="tertiary" (_click)="openModal('slow')">Slow</goa-button>
-        <goa-button type="tertiary" (_click)="openModal('fast')">Fast (default)</goa-button>
+        <goa-button type="tertiary" (_click)="openModal('fast')">Fast</goa-button>
       </goa-button-group>
       <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable [transition]="transition">
         <p>
@@ -403,7 +408,7 @@ export const TransitionsTemplate = (args) => {
       code={`
       export class SomeComponent {
         isOpen = false;
-        transition: "fast" | "slow" | "none" = "fast";
+        transition: "fast" | "slow" | "none" = "none";
         openModal(transition) {
           this.transition = transition;
           this.isOpen = true;
@@ -429,7 +434,7 @@ export const TransitionsTemplate = (args) => {
           <>
             <GoAButton onClick={() => show("none")}>None</GoAButton>
             <GoAButton onClick={() => show("slow")}>Slow</GoAButton>
-            <GoAButton onClick={() => show("fast")}>Fast (default)</GoAButton>
+            <GoAButton onClick={() => show("fast")}>Fast</GoAButton>
             <GoAModal
               heading="Do you agree?"
               open={showModal}

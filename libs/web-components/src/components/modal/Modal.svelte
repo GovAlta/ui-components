@@ -12,7 +12,7 @@
   export let closable: string;
   export let scrollable: string; // TODO: determine if this flag is needed or not, things seem to work well with it always 'on'
   export let open: string;
-  export let transition: "fast" | "slow" | "none";
+  export let transition: "fast" | "slow" | "none" = "none";
 
   // Temp attribute while deciding on the best way to allow for width control
   export let width: string;
