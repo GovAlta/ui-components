@@ -22,7 +22,7 @@ import { useState } from 'react';
 
 #### Dropdown properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="name"
     type="string"
@@ -36,11 +36,26 @@ import { useState } from 'react';
   />
   <Prop
     name="leadingicon"
+    lang="angular"
+    type="GoAIconType"
+    description="Show an icon to the left of the dropdown option"
+  />
+  <Prop
+    name="leadingIcon"
+    lang="react"
     type="GoAIconType"
     description="Show an icon to the left of the dropdown option"
   />
   <Prop
     name="maxheight"
+    lang="angular"
+    type="string"
+    defaultValue="276px"
+    description="Maximum height of the dropdown menu items popover"
+  />
+  <Prop
+    name="maxHeight"
+    lang="react"
     type="string"
     defaultValue="276px"
     description="Maximum height of the dropdown menu items popover"
@@ -74,6 +89,13 @@ import { useState } from 'react';
   />
   <Prop
     name="_change"
+    lang="angular"
+    type="CustomEvent<{detail: { name: string, value: string }}>"
+    description="Callback function when dropdown value is changed"
+  />
+  <Prop
+    name="onChange"
+    lang="react"
     type="CustomEvent<{detail: { name: string, value: string }}>"
     description="Callback function when dropdown value is changed"
   />

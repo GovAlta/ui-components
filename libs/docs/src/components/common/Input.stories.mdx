@@ -37,7 +37,7 @@ import { Meta, Story } from '@storybook/addon-docs';
 
 #### Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="type"
     type="text | number | password | email | search | tel | date | datetime-locale | time | url | week"
@@ -55,10 +55,14 @@ import { Meta, Story } from '@storybook/addon-docs';
     type="string"
     description="Text displayed within the input when no value is set"
   />
-  <Prop name="leadingicon" type="GoAIconType" description="Icon shown to the left of the text"/>
-  <Prop name="trailingicon" type="GoAIconType" description="Icon shown to the right of the text" />
+  <Prop name="leadingicon" lang="angular" type="GoAIconType" description="Icon shown to the left of the text"/>
+  <Prop name="trailingicon" lang="angular" type="GoAIconType" description="Icon shown to the right of the text" />
+
+  <Prop name="leadingIcon" lang="react" type="GoAIconType" description="Icon shown to the left of the text"/>
+  <Prop name="trailingIcon" lang="react" type="GoAIconType" description="Icon shown to the right of the text" />
+
   <Prop name="disabled" type="boolean" defaultValue="false" description="Disable this control. It will not receive focus or events"/>
-  <Prop name="handletrailingiconclick" type="boolean" defaultValue="false" description="Only required for Angular and web-component usage"/>
+  <Prop name="handletrailingiconclick" lang="angular" type="boolean" defaultValue="false" description="Only required for Angular and web-component usage"/>
   <Prop name="focused" type="boolean" defaultValue="false" description="Sets the cursor focus to the input"/>
   <Prop name="readonly" type="boolean" defaultValue="false" description="Makes the input readonly"/>
   <Prop name="error" type="boolean" defaultValue="false" description="Sets the input to an error state"/>
@@ -93,13 +97,23 @@ import { Meta, Story } from '@storybook/addon-docs';
   type="string"
   description="Text that comes after the input"
 />
-  <Prop name="autocapitalize" type="on | off | none | sentences | words | characters" defaultValue="off" description="Controls whether and how text input is automatically capitalized as it is entered/edited by the user." />
+  <Prop name="autoCapitalize" type="on | off | none | sentences | words | characters" defaultValue="off" description="Controls whether and how text input is automatically capitalized as it is entered/edited by the user." />
   <Prop
     name="_change"
+    lang="angular"
     type="CustomEvent<{detail: {name: string, value: string}}>"
     description="Callback function invoked when input value is changed"
   />
-  <Prop name="_trailingiconclick" type="CustomEvent" description="onclick function invoked when trailing icon is clicked"/>
+  <Prop name="_trailingiconclick" lang="angular" type="CustomEvent" description="onclick function invoked when trailing icon is clicked"/>
+
+  <Prop
+    name="onChange"
+    lang="react"
+    type="CustomEvent<{detail: {name: string, value: string}}>"
+    description="Callback function invoked when input value is changed"
+  />
+  <Prop name="onTrailingIconClick" lang="react" type="CustomEvent" description="onclick function invoked when trailing icon is clicked"/>
+
 </Props>
 
 export const noop = () => {};

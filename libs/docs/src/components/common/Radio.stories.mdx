@@ -23,7 +23,7 @@ import { useState } from 'react';
 
 #### Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="name"
     type="string"
@@ -52,6 +52,14 @@ import { useState } from 'react';
 
   <Prop
     name="_change"
+    lang="angular"
+    type="CustomEvent<{detail: {name: string, value: string}}>"
+    description="onChange event"
+  />
+
+  <Prop
+    name="onChange"
+    lang="react"
     type="CustomEvent<{detail: {name: string, value: string}}>"
     description="onChange event"
   />

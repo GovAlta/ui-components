@@ -34,9 +34,17 @@ The footer will not position itself on the bottom of the page, but must instead 
 
 #### App Footer properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="maxcontentwidth"
+    lang="angular"
+    type="string"
+    defaultValue="--layout-max-content-width defined within the styles lib"
+    description="Maximum width of the content area"
+  />
+  <Prop
+    name="maxContentWidth"
+    lang="react"
     type="string"
     defaultValue="--layout-max-content-width defined within the styles lib"
     description="Maximum width of the content area"
@@ -55,9 +63,17 @@ The footer will not position itself on the bottom of the page, but must instead 
 
 #### Secondary navigation properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="maxcolumncount"
+    lang="angular"
+    type="number"
+    defaultValue="1"
+    description="Set the number of columns for navigation links on larger viewports"
+  />
+  <Prop
+    name="maxColumnCount"
+    lang="react"
     type="number"
     defaultValue="1"
     description="Set the number of columns for navigation links on larger viewports"

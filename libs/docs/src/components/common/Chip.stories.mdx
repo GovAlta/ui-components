@@ -22,9 +22,16 @@ import { useState } from 'react';
 
 #### Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="leadingicon"
+    lang="angular"
+    type="GoAIconType"
+    description="Show an icon to the left of the text"
+/>
+<Prop
+    name="leadingIcon"
+    lang="react"
     type="GoAIconType"
     description="Show an icon to the left of the text"
 />
@@ -48,6 +55,13 @@ import { useState } from 'react';
   />
   <Prop
     name="_click"
+    lang="angular"
+    type="CustomEvent"
+    description="Callback when deletable and delete icon is clicked"
+  />
+  <Prop
+    name="onClick"
+    lang="react"
     type="CustomEvent"
     description="Callback when deletable and delete icon is clicked"
   />

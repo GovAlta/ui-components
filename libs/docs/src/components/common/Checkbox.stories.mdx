@@ -41,7 +41,7 @@ export const checkboxTemplate = (args) => {
 
 #### Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="name"
     type="string"
@@ -78,6 +78,15 @@ export const checkboxTemplate = (args) => {
   />
   <Prop
     name="_change"
+    lang="angular"
+    type="CustomEvent<{detail: {
+     name: string, checked: boolean, value: string
+    }}>"
+    description="Callback function when checkbox is checked or unchecked"
+  />
+  <Prop
+    name="onChange"
+    lang="react"
     type="CustomEvent<{detail: {
      name: string, checked: boolean, value: string
     }}>"

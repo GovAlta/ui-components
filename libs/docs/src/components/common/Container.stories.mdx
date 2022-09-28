@@ -33,7 +33,7 @@ import {
 
 #### Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="type"
     type="interactive | info | error | success | important | non-interactive"
@@ -48,6 +48,14 @@ import {
   />
   <Prop
     name="headingsize"
+    lang="angular"
+    type="large | small | none"
+    defaultValue="large"
+    description="set the size of the accent bar"
+  />
+  <Prop
+    name="headingSize"
+    lang="react"
     type="large | small | none"
     defaultValue="large"
     description="set the size of the accent bar"

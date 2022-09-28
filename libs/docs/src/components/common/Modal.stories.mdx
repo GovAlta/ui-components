@@ -23,7 +23,7 @@ import { useState } from 'react';
 
 #### Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="heading"
     type="string"
@@ -50,12 +50,26 @@ import { useState } from 'react';
   />
   <Prop
     name="_close"
+    lang="angular"
     type="CustomEvent"
     description="Dispatched when modal is closable and is closed."
   />
   <Prop
     name="actions"
+    lang="angular"
     type="slot"
+    description="Buttons displayed in the bottom right of the modal instead of a close icon"
+  />
+  <Prop
+    name="onClose"
+    lang="react"
+    type="CustomEvent"
+    description="Dispatched when modal is closable and is closed."
+  />
+  <Prop
+    name="actions"
+    lang="react"
+    type="ReactNode"
     description="Buttons displayed in the bottom right of the modal instead of a close icon"
   />
 </Props>
