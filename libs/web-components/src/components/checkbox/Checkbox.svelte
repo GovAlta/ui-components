@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { toBoolean } from "../../common/utils";
+  import { fromBoolean, toBoolean } from "../../common/utils";
   // Required
   export let name: string;
   export let checked: string;
@@ -24,6 +24,9 @@
     // out of sync with the events.
     const newCheckStatus = !isChecked;
     const _value = newCheckStatus ? `${value || "checked"}` : "";
+ 
+    // set the local state
+    checked = fromBoolean(newCheckStatus);
 
     e.target.dispatchEvent(
       new CustomEvent("_change", {
