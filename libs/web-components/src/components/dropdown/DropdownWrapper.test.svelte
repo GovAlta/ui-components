@@ -8,7 +8,7 @@
   export let arialabel: string;
   export let value: string = "";
   export let leadingicon: GoAIconType = null;
-  export let maxheight: string = "300px";
+  export let maxheight: string = "276px";
   export let placeholder: string = "";
   export let disabled: string = "false";
   export let error: string = "false";

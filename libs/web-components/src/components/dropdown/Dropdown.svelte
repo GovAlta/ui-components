@@ -7,7 +7,7 @@
   import { BIND, BindMessage, Option } from "./types";
   import { toBoolean } from "../../common/utils";
 
-  const MAX_HEIGHT = "300px";
+  const MAX_HEIGHT = "276px";
 
   // Props
 
@@ -43,7 +43,7 @@
 
   onMount(() => {
     const maxAttempts = 10;
-    let attempts = 0; 
+    let attempts = 0;
     const fn = setInterval(async () => {
       attempts++;
       if (name && el) {
@@ -224,9 +224,9 @@
 
 <!-- Template -->
 
-<div 
-  data-testid={testid} 
-  class="goa-dropdown-box" 
+<div
+  data-testid={testid}
+  class="goa-dropdown-box"
   style={`--width: ${width || computedWidth}`}
   bind:this={el}>
 
