@@ -42,7 +42,7 @@ describe('GoADropdown', () => {
     });
 
     await waitFor(() => {
-      expect(console.error["mock"].calls.length).toBeGreaterThan(0); 
+      expect(console.error["mock"].calls.length).toBeGreaterThan(0);
     })
   });
 
@@ -281,7 +281,7 @@ describe('GoADropdown', () => {
       await waitFor(() => {
         expect(dropdown).toHaveStyle("--width: 20ch");
         expect(input).toHaveAttribute("width", "100%");  // 20ch is min width when being calculated
-      }) 
+      })
     });
 
     it("uses the non-percent width supplied", async () => {
@@ -336,8 +336,8 @@ describe('GoADropdown', () => {
 
       const menu = result.queryByTestId("dropdown-menu");
       await waitFor(() => {
-        expect(menu).toHaveStyle("max-height: 300px");  // 300px is default value 
-      }) 
+        expect(menu).toHaveStyle("max-height: 276px");  // 276px is default value
+      })
     });
 
     it("uses the height when supplied", async () => {
@@ -380,13 +380,13 @@ describe('GoADropdown', () => {
 
       const menu = result.queryByTestId("dropdown-menu");
       await waitFor(() => {
-        expect(menu).toHaveStyle("max-height: 300px");  // 300px is default value 
+        expect(menu).toHaveStyle("max-height: 276px");  // 276px is default value
 
         for (const item of items) {
           const option = menu.querySelector(`li[data-testid="${item}-dropdown-item"]`);
           expect(option).toHaveAttribute("aria-label", item)
         }
-      }) 
+      })
     });
   })
 
