@@ -1,13 +1,13 @@
 import React, { FC, ReactNode } from 'react';
 
 type ContainerType = 'interactive' | 'non-interactive' | 'info' | 'error' | 'success' | 'warning';
-type HeadingSize = 'large' | 'small' | 'none';
+type AccentBar = 'large' | 'small' | 'none';
 type ContainerPadding = "relaxed" | "compact";
 
 interface WCProps {
   type?: ContainerType;
-  headingsize?: HeadingSize;
-  colored?: boolean;
+  accentbar?: AccentBar;
+  backgroundcolour?: boolean;
   padding?: ContainerPadding;
 }
 
@@ -21,26 +21,26 @@ declare global {
 }
 
 interface Props {
-  headingSize?: HeadingSize;
+  accentBar?: AccentBar;
   type?: ContainerType;
   title?: ReactNode;
-  colored?: boolean;
+  backgroundColour?: boolean;
   padding?: ContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
 }
 
 export const GoAContainer: FC<Props> = ({
-  headingSize,
+  accentBar,
   title,
-  colored = false,
+  backgroundColour = false,
   padding,
   children,
   actions,
   type,
 }) => {
   return (
-    <goa-container type={type} padding={padding} headingsize={headingSize} colored={colored}>
+    <goa-container type={type} padding={padding} accentbar={accentBar} backgroundcolour={backgroundColour}>
       {title && <div slot="title">{title}</div>}
       {children}
       {actions && <div slot="actions">{actions}</div>}

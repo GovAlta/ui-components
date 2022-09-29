@@ -5,11 +5,11 @@
   import { toBoolean } from "../../common/utils";
 
   export let type: 'interactive' | 'info' | 'error' | 'success' | 'important' | 'non-interactive' = 'non-interactive'
-  export let colored: string = "false";
-  export let headingsize: 'large' | 'small' | 'none' = 'large';
+  export let backgroundcolour: string = "false";
+  export let accentbar: 'large' | 'small' | 'none' = 'large';
   export let padding: "relaxed" | "compact" = "relaxed"
 
-  $: _colored = toBoolean(colored);
+  $: _backgroundcolour = toBoolean(backgroundcolour);
 </script>
 
 <!-- HTML -->
@@ -19,9 +19,9 @@
     goa-container--${type}
     padding--${padding}
   `}
-  class:colored={_colored}
+  class:backgroundcolour={_backgroundcolour}
 >
-  <header class="heading--{headingsize}">
+  <header class="heading--{accentbar}">
     <div class="title">
       <slot name="title" />
     </div>
@@ -73,25 +73,25 @@
     border-bottom-right-radius: var(--border-radius);
   }
 
-  /* Colored */
+  /* Background Colour */
 
-  .goa-container--non-interactive.colored .content {
+  .goa-container--non-interactive.backgroundcolour .content {
     border-color: var(--color-gray-200);
     background-color: var(--color-gray-100);
   }
-  .goa-container--important.colored .content {
+  .goa-container--important.backgroundcolour .content {
     border-color: var(--goa-color-status-warning);
     background-color: var(--goa-color-status-warning-50);
   }
-  .goa-container--error.colored .content {
+  .goa-container--error.backgroundcolour .content {
     border-color: var(--goa-color-status-emergency);
     background-color: var(--goa-color-status-emergency-50);
   }
-  .goa-container--success.colored .content {
+  .goa-container--success.backgroundcolour .content {
     border-color: var(--goa-color-status-success);
     background-color: var(--goa-color-status-success-50);
   }
-  .goa-container--info.colored .content {
+  .goa-container--info.backgroundcolour .content {
     border-color: var(--goa-color-status-info);
     background-color: var(--goa-color-status-info-50);
   }
