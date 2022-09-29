@@ -96,7 +96,7 @@ import { useState } from 'react';
   <Prop
     name="onChange"
     lang="react"
-    type="CustomEvent<{detail: { name: string, value: string }}>"
+    type="(name: string, values: string[] | string) => void"
     description="Callback function when dropdown value is changed"
   />
 </Props>

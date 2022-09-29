@@ -62,7 +62,7 @@ import { Meta, Story } from '@storybook/addon-docs';
   <Prop name="trailingIcon" lang="react" type="GoAIconType" description="Icon shown to the right of the text" />
 
   <Prop name="disabled" type="boolean" defaultValue="false" description="Disable this control. It will not receive focus or events"/>
-  <Prop name="handletrailingiconclick" lang="angular" type="boolean" defaultValue="false" description="Only required for Angular and web-component usage"/>
+  <Prop name="handleTrailingIconClick" lang="angular" type="boolean" defaultValue="false" description="Flag that will result in an icon button component being rendered instead of an icon"/>
   <Prop name="focused" type="boolean" defaultValue="false" description="Sets the cursor focus to the input"/>
   <Prop name="readonly" type="boolean" defaultValue="false" description="Makes the input readonly"/>
   <Prop name="error" type="boolean" defaultValue="false" description="Sets the input to an error state"/>
@@ -109,10 +109,10 @@ import { Meta, Story } from '@storybook/addon-docs';
   <Prop
     name="onChange"
     lang="react"
-    type="CustomEvent<{detail: {name: string, value: string}}>"
+    type="(name: string, value: string) => void"
     description="Callback function invoked when input value is changed"
   />
-  <Prop name="onTrailingIconClick" lang="react" type="CustomEvent" description="onclick function invoked when trailing icon is clicked"/>
+  <Prop name="onTrailingIconClick" lang="react" type="() => void" description="onclick function invoked when trailing icon is clicked"/>
 
 </Props>
 
