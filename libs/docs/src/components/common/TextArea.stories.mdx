@@ -22,7 +22,7 @@ import { GoATextArea } from '@abgov/react-components';
 
 #### Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="name"
     type="string"
@@ -67,11 +67,21 @@ import { GoATextArea } from '@abgov/react-components';
   />
   <Prop
     name="showcounter"
+    lang="angular"
     type="boolean"
     defaultValue="false"
     description="Show/hide the character counter"
   />
-  <Prop name="maxcharcount" type="number" description="Set the max character count" />
+  <Prop name="maxcharcount" lang="angular" type="number" description="Set the max character count" />
+
+  <Prop
+    name="showCounter"
+    lang="react"
+    type="boolean"
+    defaultValue="false"
+    description="Show/hide the character counter"
+  />
+  <Prop name="maxCharCount" lang="react" type="number" description="Set the max character count" />
 
   <Prop
     name="arialabel"
@@ -80,7 +90,16 @@ import { GoATextArea } from '@abgov/react-components';
   />
   <Prop
     name="_change"
+    lang="angular"
     type="CustomEvent<{detail: { name: string, value: string }}>"
+    description="Event triggered on each input value change"
+  />
+
+
+  <Prop
+    name="onChange"
+    lang="react"
+    type="(name: string, value: string) => void"
     description="Event triggered on each input value change"
   />
 </Props>

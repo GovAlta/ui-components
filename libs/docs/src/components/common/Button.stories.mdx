@@ -23,7 +23,7 @@ export const noop = () => {};
 
 #### Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="type"
     type="primary | submit | secondary | tertiary | start"
@@ -50,17 +50,38 @@ export const noop = () => {};
   />
   <Prop
     name="leadingicon"
+    lang="angular"
     type="GoAIconType"
     description="Show an icon to the left of the text"
   />
   <Prop
     name="trailingicon"
+    lang="angular"
     type="GoAIconType"
     description="Show an icon to the right of the text"
   />
   <Prop
     name="_click"
+    lang="angular"
     type="CustomEvent"
+    description="Callback function when button is clicked"
+  />
+  <Prop
+    name="leadingIcon"
+    lang="react"
+    type="GoAIconType"
+    description="Show an icon to the left of the text"
+  />
+  <Prop
+    name="trailingIcon"
+    lang="react"
+    type="GoAIconType"
+    description="Show an icon to the right of the text"
+  />
+  <Prop
+    name="onClick"
+    lang="react"
+    type="(e: any) => void"
     description="Callback function when button is clicked"
   />
 </Props>
