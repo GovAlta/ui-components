@@ -31,7 +31,6 @@ export * from './lib/modal/modal';
 export * from './lib/notification/notification';
 export * from './lib/page-block/page-block';
 export * from './lib/one-column-layout/one-column-layout';
-export * from './lib/one-column-layout/one-column-layout';
 export * from './lib/radio-group/radio-group';
 export * from './lib/skeleton/skeleton';
 export * from './lib/spinner/spinner';
