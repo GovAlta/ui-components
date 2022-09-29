@@ -4,7 +4,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-page': React.HTMLAttributes<HTMLElement>
+      'goa-one-column-layout': React.HTMLAttributes<HTMLElement>
     }
   }
 }
@@ -13,12 +13,12 @@ export interface PageProps {
   children?: ReactNode;
 }
 
-export function GoAPage(props: PageProps) {
+export function GoAOneColumnLayout(props: PageProps) {
   return (
-    <goa-page>
+    <goa-one-column-layout>
       {props.children}
-    </goa-page>
+    </goa-one-column-layout>
   );
 }
 
-export default GoAPage;
+export default GoAOneColumnLayout;
