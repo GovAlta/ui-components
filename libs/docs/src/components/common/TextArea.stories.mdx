@@ -54,7 +54,7 @@ import { GoATextArea } from '@abgov/react-components';
     description="Sets the input to an error state"
   />
   <Prop
-    name="readonly"
+    name="readOnly"
     type="boolean"
     defaultValue="false"
     description="Sets the input to a read only state"
@@ -66,25 +66,15 @@ import { GoATextArea } from '@abgov/react-components';
     description="Sets the input to a disabled state"
   />
   <Prop
-    name="showcounter"
-    lang="angular"
-    type="boolean"
-    defaultValue="false"
-    description="Show/hide the character counter"
-  />
-  <Prop name="maxcharcount" lang="angular" type="number" description="Set the max character count" />
-
-  <Prop
     name="showCounter"
-    lang="react"
     type="boolean"
     defaultValue="false"
     description="Show/hide the character counter"
   />
-  <Prop name="maxCharCount" lang="react" type="number" description="Set the max character count" />
+  <Prop name="maxCharCount" type="number" description="Set the max character count" />
 
   <Prop
-    name="arialabel"
+    name="ariaLabel"
     type="string"
     description="Defines how the text will be translated for the screen reader. If not specified it will fall back to the name"
   />
@@ -205,7 +195,7 @@ export const CharCountTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea name="comment" showcounter="true" (_change)="onChange($event)" [value]="val"></goa-textarea>
+      <goa-textarea name="comment" showCounter="true" (_change)="onChange($event)" [value]="val"></goa-textarea>
     `}
     />
     <CodeSnippet
@@ -269,7 +259,7 @@ export const CharCountWithLimitTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea name="comment" showcounter="true" maxcharcount="20" (_change)="onChange($event)" [value]="val"></goa-textarea>
+      <goa-textarea name="comment" showCounter="true" maxCharCount="20" (_change)="onChange($event)" [value]="val"></goa-textarea>
     `}
     />
     <CodeSnippet

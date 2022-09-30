@@ -27,21 +27,14 @@ import {
 
 #### Properties
 
-<Props showTabs={true}>
+<Props>
   <Prop
     name="label"
     type="string"
     description="Text displayed describing form field"
   />
   <Prop
-    name="helptext"
-    lang="angular"
-    type="string"
-    description="Help text displayed under the form field to provide an additional explanation"
-  />
-  <Prop
     name="helpText"
-    lang="react"
     type="string"
     description="Help text displayed under the form field to provide an additional explanation"
   />
@@ -163,7 +156,7 @@ import {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-form-item label="First name" helptext="Help text">
+      <goa-form-item label="First name" helpText="Help text">
         <goa-input type="text"></goa-input>
       </goa-form-item>
     `}
