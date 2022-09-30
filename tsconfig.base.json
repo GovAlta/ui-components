@@ -23,9 +23,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@abgov/angular-components": [
-        "libs/angular-components/src/index.ts"
-      ],
       "@abgov/docs": [
         "libs/docs/src/index.ts"
       ],
@@ -40,9 +37,6 @@
       ],
       "@abgov/styles": [
         "dist/libs/styles/styles.esm.css"
-      ],
-      "@abgov/vue-components": [
-        "libs/vue-components/src/index.ts"
       ],
       "@abgov/web-components": [
         "dist/libs/web-components/web-components.es.js"
