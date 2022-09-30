@@ -8,7 +8,7 @@ import {
   Props,
   Prop,
 } from '@abgov/shared/storybook-common';
-import { GoARadioGroup, GoARadioItem } from '@abgov/react-components';
+import { GoARadioGroup, GoARadioItem, GoACallout } from '@abgov/react-components';
 import { useState } from 'react';
 
 <Meta title="Components/Radio" />
@@ -64,6 +64,13 @@ import { useState } from 'react';
     description="onChange event"
   />
 </Props>
+
+#### Note
+<Story name="Information">
+  <GoACallout type="information">
+    The name values for parent/children must match. To avoid name clashes, the name shared with the parent/children must be unique.
+  </GoACallout>
+</Story>
 
 export const BasicTemplate = (args) => {
   const [value, setValue] = useState('');
