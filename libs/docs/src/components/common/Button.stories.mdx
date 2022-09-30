@@ -49,14 +49,12 @@ export const noop = () => {};
     description="Disable this button"
   />
   <Prop
-    name="leadingicon"
-    lang="angular"
+    name="leadingIcon"
     type="GoAIconType"
     description="Show an icon to the left of the text"
   />
   <Prop
-    name="trailingicon"
-    lang="angular"
+    name="trailingIcon"
     type="GoAIconType"
     description="Show an icon to the right of the text"
   />
@@ -65,18 +63,6 @@ export const noop = () => {};
     lang="angular"
     type="CustomEvent"
     description="Callback function when button is clicked"
-  />
-  <Prop
-    name="leadingIcon"
-    lang="react"
-    type="GoAIconType"
-    description="Show an icon to the left of the text"
-  />
-  <Prop
-    name="trailingIcon"
-    lang="react"
-    type="GoAIconType"
-    description="Show an icon to the right of the text"
   />
   <Prop
     name="onClick"
@@ -476,19 +462,19 @@ There are two variant types: Normal (default) and Destructive.
     <CodeSnippet
       code={`
         <goa-button-group alignment="start">
-          <goa-button leadingicon="airplane" (_click)="onClick()" type="primary">Leading</goa-button>
-          <goa-button trailingicon="airplane" (_click)="onClick()" type="primary">Trailing</goa-button>
-          <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick()" type="primary">Both</goa-button>
+          <goa-button leadingIcon="airplane" (_click)="onClick()" type="primary">Leading</goa-button>
+          <goa-button trailingIcon="airplane" (_click)="onClick()" type="primary">Trailing</goa-button>
+          <goa-button leadingIcon="archive" trailingIcon="airplane" (_click)="onClick()" type="primary">Both</goa-button>
         </goa-button-group>
         <goa-button-group alignment="start">
-          <goa-button leadingicon="airplane" (_click)="onClick()" type="secondary">Leading</goa-button>
-          <goa-button trailingicon="airplane" (_click)="onClick()" type="secondary">Trailing</goa-button>
-          <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick()" type="secondary">Both</goa-button>
+          <goa-button leadingIcon="airplane" (_click)="onClick()" type="secondary">Leading</goa-button>
+          <goa-button trailingIcon="airplane" (_click)="onClick()" type="secondary">Trailing</goa-button>
+          <goa-button leadingIcon="archive" trailingIcon="airplane" (_click)="onClick()" type="secondary">Both</goa-button>
         </goa-button-group>
         <goa-button-group alignment="start">
-          <goa-button leadingicon="airplane" (_click)="onClick()" type="tertiary">Leading</goa-button>
-          <goa-button trailingicon="airplane" (_click)="onClick()" type="tertiary">Trailing</goa-button>
-          <goa-button leadingicon="archive" trailingicon="airplane" (_click)="onClick()" type="tertiary">Both</goa-button>
+          <goa-button leadingIcon="airplane" (_click)="onClick()" type="tertiary">Leading</goa-button>
+          <goa-button trailingIcon="airplane" (_click)="onClick()" type="tertiary">Trailing</goa-button>
+          <goa-button leadingIcon="archive" trailingIcon="airplane" (_click)="onClick()" type="tertiary">Both</goa-button>
         </goa-button-group>
       `}
       lang="html"

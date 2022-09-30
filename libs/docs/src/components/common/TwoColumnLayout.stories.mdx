@@ -15,8 +15,8 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
 #### Properties
 
 <Props showTabs={true}>
-  <Prop name="navcolumnwidth" type="string" description="% | px | rem | ch | etc" defaultValue="256px" />
-  <Prop name="maxcontentwidth" type="string" description="% | px | rem | ch | etc" defaultValue="904px" />
+  <Prop name="navColumnWidth" type="string" description="% | px | rem | ch | etc" defaultValue="256px" />
+  <Prop name="maxContentWidth" type="string" description="% | px | rem | ch | etc" defaultValue="904px" />
 
   <Prop name="header" lang="angular" type="slot" required="true" description="How to add GoAAppHeader component" />
   <Prop name="footer" lang="angular" type="slot" required="true" description="How to add GoAAppFooter component" />
@@ -98,7 +98,7 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
 </Tabs>
 
 
-#### Max content width 
+#### Max content width
 
 <Story name="Max Content Width">
   <Browser>
@@ -125,9 +125,9 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
 <Tabs>
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
-      <goa-two-column-layout maxcontentwidth="100%">
+      <goa-two-column-layout maxContentWidth="100%">
         <section slot="header">
-          <goa-app-header maxcontentwidth="100%"></goa-app-header>
+          <goa-app-header maxContentWidth="100%"></goa-app-header>
         </section>
         <section slot="nav">
           <a href="#dashboard">Dashboard</a>
@@ -141,7 +141,7 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
           Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
         </p>
         <section slot="footer">
-          <goa-app-footer maxcontentwidth="100%"></goa-app-footer>
+          <goa-app-footer maxContentWidth="100%"></goa-app-footer>
         </section>
       </goa-two-column-layout>
     `}/>
@@ -171,7 +171,7 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
 </Tabs>
 
 
-#### Nav column width 
+#### Nav column width
 
 <Story name="Nav Column Width">
   <Browser>
@@ -198,7 +198,7 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
 <Tabs>
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
-      <goa-two-column-layout navcoloumnwidth="16ch">
+      <goa-two-column-layout navColumnWidth="16ch">
         <section slot="header">
           <goa-app-header></goa-app-header>
         </section>
