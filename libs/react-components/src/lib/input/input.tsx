@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { GoAIconType } from '../..';
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 type GoAInputType =
   "text"
-  | "number"
   | "password"
   | "email"
+  | "number"
   | "date"
   | "datetime-local"
   | "month"
@@ -43,8 +43,8 @@ interface WCProps {
   testid?: string;
 
   // type=number
-  min?: string;
-  max?: string;
+  min?: string | number;
+  max?: string | number;
   step?: number;
 }
 
@@ -59,11 +59,9 @@ declare global {
 }
 
 
-export interface InputProps {
+interface BaseProps {
   // required
   name: string;
-  value: string;
-  onChange: (name: string, value: string) => void;
 
   // optional
   id?: string;
@@ -83,12 +81,31 @@ export interface InputProps {
   prefix?: string;
   suffix?: string;
   testId?: string;
-
-  // type=number
-  min?: string;
-  max?: string;
-  step?: number;
 };
+
+export interface InputProps extends BaseProps {
+  onChange: (name: string, value: string) => void;
+  value: string;
+  min?: number | string;
+  max?: number | string;
+  step?: number;
+}
+
+interface NumberInputProps extends BaseProps {
+  onChange: (name: string, value: number) => void;
+  value: number;
+  min?: number;
+  max?: number;
+  step?: number;
+}
+
+interface DateInputProps extends BaseProps {
+  onChange: (name: string, value: Date) => void;
+  value: string | Date;
+  min?: string | Date;
+  max?: string | Date;
+  step?: number;
+}
 
 export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   id,
@@ -176,29 +193,40 @@ export const GoAInputPassword: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="password" />;
 }
 
-export const GoAInputDate: FC<Omit<InputProps, "value"> & { value: Date | string}> = ({value, min, max, ...props}) => {
-  const _value: Date = typeof value === "string" ? new Date(value) : value;
-  const _min = min ? format(new Date(min), "yyyy-MM-dd") : "";
-  const _max = max ? format(new Date(max), "yyyy-MM-dd") : "";
-  return <GoAInput {...props} min={_min} max={_max} value={format(_value, "yyyy-MM-dd")} type="date" />;
+export const GoAInputDate: FC<DateInputProps> = ({value, min = "", max = "", ...props}) => {
+  const _format = (value: Date): string => {
+    return format(value, "yyyy-MM-dd");
+  }
+  const _value = _format(typeof value === "string" ? parseISO(value) : value);
+  const _min = min && _format(typeof min === "string" ? parseISO(min) : min);
+  const _max = max && _format(typeof max === "string" ? parseISO(max) : max);
+
+  const onDateChange = (name: string, value: string) => {
+    props.onChange(name, parseISO(value)) 
+  }
+
+  return <GoAInput {...props} onChange={onDateChange} min={_min} max={_max} value={_value} type="date" />;
 }
 
-export const GoAInputTime: FC<Omit<InputProps, "value"> & { value: Date | string}> = ({value, ...props}) => {
+export const GoAInputTime: FC<DateInputProps> = ({value, min = "", max = "", ...props}) => {
+  const onDateChange = (name: string, value: string) => {
+    props.onChange(name, parseISO(value)) 
+  }
   try {
-    const d: Date = typeof value === "string" ? new Date(value) : value;
-    return <GoAInput {...props} value={format(d, "hh:mm")} type="time" />;
+    const d: Date = typeof value === "string" ? parseISO(value) : value;
+
+    return <GoAInput {...props}onChange={onDateChange} value={format(d, "hh:mm")} type="time" />;
   } catch(e) {
-    return <GoAInput {...props} value={value as string} type="time" />;
+    return <GoAInput {...props} onChange={onDateChange}  value={value as string} type="time" />;
   }
 }
 
-export const GoAInputDateTime: FC<
-  Omit<InputProps, "value">
-  & { value: Date}
-  > = ({value, ...props}) => {
-
-  const d: Date = typeof value === "string" ? new Date(value) : value;
-  return <GoAInput {...props} value={format(d, "yyyy-MM-dd'T'hh:mm")} type="datetime-local" />;
+export const GoAInputDateTime: FC<DateInputProps> = ({value, min = "", max = "", ...props}) => {
+  const d: Date = typeof value === "string" ? parseISO(value) : value;
+  const onDateChange = (name: string, value: string) => {
+    props.onChange(name, parseISO(value)) 
+  }
+  return <GoAInput {...props} onChange={onDateChange} value={format(d, "yyyy-MM-dd'T'hh:mm")} type="datetime-local" />;
 }
 
 export const GoAInputEmail: FC<InputProps> = (props) => {
@@ -225,10 +253,11 @@ export const GoAInputMonth: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="month" />;
 }
 
-export const GoAInputNumber: FC<
-  Omit<InputProps, "value" | "min" | "max"> 
-  & { value: number, min?: number, max?: number}> = ({min, max, value, ...props}) => {
-  return <GoAInput {...props} min={min?.toString()} max={max?.toString()} value={value.toString()} type="number" />;
+export const GoAInputNumber: FC<NumberInputProps> = ({min = Number.MIN_VALUE, max= Number.MAX_VALUE, value, ...props}) => {
+  const onNumberChange = (name: string, value: string) => {
+    props.onChange(name, parseInt(value));
+  }
+  return <GoAInput {...props} onChange={onNumberChange} min={min?.toString()} max={max?.toString()} value={value.toString()} type="number" />;
 }
 
 export const GoAInputRange: FC<InputProps> = (props) => {
