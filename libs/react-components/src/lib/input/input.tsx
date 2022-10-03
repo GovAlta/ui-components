@@ -2,6 +2,8 @@ import React, { FC, useEffect, useRef } from 'react';
 import { GoAIconType } from '../..';
 import { format, parseISO } from "date-fns";
 
+export type GoADate = Date | string;
+
 type GoAInputType =
   "text"
   | "password"
@@ -83,27 +85,30 @@ interface BaseProps {
   testId?: string;
 };
 
+type OnChange = (name: string, value: string) => void;
 export interface InputProps extends BaseProps {
-  onChange: (name: string, value: string) => void;
+  onChange: OnChange;
   value: string;
   min?: number | string;
   max?: number | string;
   step?: number;
 }
 
+type OnNumberChange = (name: string, value: number) => void;
 interface NumberInputProps extends BaseProps {
-  onChange: (name: string, value: number) => void;
+  onChange: OnNumberChange;
   value: number;
   min?: number;
   max?: number;
   step?: number;
 }
 
+type OnDateChange = (name: string, value: GoADate) => void;
 interface DateInputProps extends BaseProps {
-  onChange: (name: string, value: Date) => void;
-  value: string | Date;
-  min?: string | Date;
-  max?: string | Date;
+  onChange: OnDateChange;
+  value: GoADate;
+  min?: GoADate;
+  max?: GoADate;
   step?: number;
 }
 
@@ -185,6 +190,49 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   );
 };
 
+const onDateChangeHandler = (onChange: OnDateChange) => {
+  return (name: string, value: string) => {
+    if (!value) {
+      onChange(name, new Date(0));
+      return;
+    }
+    onChange(name, parseISO(value)) 
+  }
+}
+
+const onTimeChangeHandler = (onChange: OnChange) => {
+  return (name: string, value: string) => {
+    if (!value) {
+      onChange(name, "");
+      return;
+    }
+    onChange(name, value) 
+  }
+}
+
+function toDate(value: GoADate): Date {
+  if (!value) {
+    return new Date(0);
+  }
+  if (typeof value === "string") {
+    return parseISO(value)
+  }
+  return value;
+}
+
+function toString(value: GoADate, tmpl = "yyyy-MM-dd"): string {
+  if (!value) {
+    return "";
+  }
+  if (typeof value === "string") {
+    return format(parseISO(value), tmpl) ;
+  }
+  if (value.toISOString() === new Date(0).toISOString()) {
+    return "";
+  }
+  return format(value, tmpl) ;
+}
+
 export const GoAInputText: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="text" />;
 }
@@ -194,39 +242,32 @@ export const GoAInputPassword: FC<InputProps> = (props) => {
 }
 
 export const GoAInputDate: FC<DateInputProps> = ({value, min = "", max = "", ...props}) => {
-  const _format = (value: Date): string => {
-    return format(value, "yyyy-MM-dd");
-  }
-  const _value = _format(typeof value === "string" ? parseISO(value) : value);
-  const _min = min && _format(typeof min === "string" ? parseISO(min) : min);
-  const _max = max && _format(typeof max === "string" ? parseISO(max) : max);
-
-  const onDateChange = (name: string, value: string) => {
-    props.onChange(name, parseISO(value)) 
-  }
-
-  return <GoAInput {...props} onChange={onDateChange} min={_min} max={_max} value={_value} type="date" />;
+  return <GoAInput 
+    {...props} 
+    type="date"
+    onChange={onDateChangeHandler(props.onChange)} 
+    min={toString(min)} 
+    max={toString(max)} 
+    value={toString(value)} 
+  />;
 }
 
-export const GoAInputTime: FC<DateInputProps> = ({value, min = "", max = "", ...props}) => {
-  const onDateChange = (name: string, value: string) => {
-    props.onChange(name, parseISO(value)) 
-  }
-  try {
-    const d: Date = typeof value === "string" ? parseISO(value) : value;
-
-    return <GoAInput {...props}onChange={onDateChange} value={format(d, "hh:mm")} type="time" />;
-  } catch(e) {
-    return <GoAInput {...props} onChange={onDateChange}  value={value as string} type="time" />;
-  }
+export const GoAInputTime: FC<InputProps> = ({value, min = "", max = "", ...props}) => {
+  return <GoAInput 
+    {...props} 
+    onChange={onTimeChangeHandler(props.onChange)}
+    value={value} 
+    type="time" 
+  />;
 }
 
 export const GoAInputDateTime: FC<DateInputProps> = ({value, min = "", max = "", ...props}) => {
-  const d: Date = typeof value === "string" ? parseISO(value) : value;
-  const onDateChange = (name: string, value: string) => {
-    props.onChange(name, parseISO(value)) 
-  }
-  return <GoAInput {...props} onChange={onDateChange} value={format(d, "yyyy-MM-dd'T'hh:mm")} type="datetime-local" />;
+  return <GoAInput 
+    {...props} 
+    onChange={onDateChangeHandler(props.onChange)} 
+    value={toString(value, "yyyy-MM-dd'T'hh:mm")} 
+    type="datetime-local" 
+  />;
 }
 
 export const GoAInputEmail: FC<InputProps> = (props) => {
