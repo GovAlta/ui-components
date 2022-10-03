@@ -28,8 +28,11 @@ export class InputComponentComponent {
   }
 
   setDate(event: any) {
-    console.log('setDate', event.detail);
-    const d = parseISO(event.detail.value)
+    const raw = event.detail.value;
+    if (!raw) {
+      return;
+    }
+    const d = parseISO(raw)
     this.boundDate = format(d, "yyyy-MM-dd")
   }
 
