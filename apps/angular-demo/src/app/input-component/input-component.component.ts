@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 @Component({
   selector: 'abgov-input-component',
@@ -10,6 +10,7 @@ export class InputComponentComponent {
   constructor() { }
 
   date = new Date();
+  boundDate = format(this.date, "yyyy-MM-dd");
   formatDate = format(this.date, "yyyy-MM-dd");
   time = format(this.date, "HH:mm:ss");
   dateTime = format(this.date, "yyyy-MM-dd HH:mm")
@@ -24,6 +25,12 @@ export class InputComponentComponent {
 
   onInputChangeEvent(event: any) {
     console.log('onEvent', event.detail);
+  }
+
+  setDate(event: any) {
+    console.log('setDate', event.detail);
+    const d = parseISO(event.detail.value)
+    this.boundDate = format(d, "yyyy-MM-dd")
   }
 
   handleTrailingIconClick() {

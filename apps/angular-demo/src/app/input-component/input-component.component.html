@@ -16,6 +16,7 @@
 <goa-input name="foo" type="number"></goa-input>
 
 <h2>Date and time</h2>
+<goa-input name="boundDate" type="date" [value]="boundDate" (_change)="setDate($event)"></goa-input>
 <goa-input name="foo" type="date" [value]="formatDate"></goa-input>
 <goa-input name="datetime" type="datetime-local" [value]="dateTime"></goa-input>
 <goa-input name="time" type="time" [value]="time" step="1"></goa-input>
