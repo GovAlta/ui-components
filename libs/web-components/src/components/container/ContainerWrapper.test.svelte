@@ -6,11 +6,11 @@
   export let actions = "";
   export let content;
   export let type = "default";
-  export let accentbar = "large";
+  export let accent = "thick";
 </script>
 
 <!-- HTML -->
-<goa-container type={type} accentbar={accentbar}>
+<goa-container type={type} accent={accent}>
   {#if title}
     <div slot="title" class="title">{title}</div>
   {/if}

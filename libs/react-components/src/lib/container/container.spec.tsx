@@ -8,8 +8,7 @@ describe('Container', () => {
   it("should render the properties", () => {
     const { container } = render(<GoAContainer
       type="interactive"
-      backgroundcolour={false}
-      accentBar="large"
+      accent="thick"
       padding="relaxed"
       title={"Text title"}
       actions={<GoAButton onClick={() => {}}>Save</GoAButton>}
@@ -21,8 +20,7 @@ describe('Container', () => {
     const el = container.querySelector("goa-container");
     expect(el).toBeTruthy();
     expect(el.getAttribute("type")).toEqual("interactive");
-    expect(el.getAttribute("backgroundcolour")).toEqual("false");
-    expect(el.getAttribute("accentbar")).toEqual("large");
+    expect(el.getAttribute("accent")).toEqual("thick");
     expect(el.getAttribute("padding")).toEqual("relaxed");
 
     expect(el.querySelector("*[slot=title]").innerHTML).toContain("Text title");
