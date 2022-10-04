@@ -24,18 +24,10 @@ import { useState } from 'react';
 
 <Props showTabs={true}>
   <Prop
-    name="leadingicon"
-    lang="angular"
-    type="GoAIconType"
-    description="Show an icon to the left of the text"
-/>
-<Prop
     name="leadingIcon"
-    lang="react"
     type="GoAIconType"
     description="Show an icon to the left of the text"
 />
-
   <Prop
     name="error"
     type="boolean"
@@ -119,7 +111,7 @@ import { useState } from 'react';
     <CodeSnippet
       lang="html"
       code={`
-      <goa-chip content="Chip Text" leadingicon="close-circle"></goa-chip>
+      <goa-chip content="Chip Text" leadingIcon="close-circle"></goa-chip>
     `}
     />
   </Tab>

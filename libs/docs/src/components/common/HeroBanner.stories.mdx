@@ -27,15 +27,14 @@ When a page requires promotion or is featured, a photograph may be inserted into
 
 #### Properties
 
-<Props showTabs={true}>
+<Props>
   <Prop
     name="heading"
     type="string"
     required="true"
     description="Main heading text"
   />
-  <Prop name="backgroundurl" lang="angular" type="string" description="Background image url" />
-  <Prop name="backgroundUrl" lang="react" type="string" description="Background image url" />
+  <Prop name="backgroundUrl" type="string" description="Background image url" />
 </Props>
 
 #### Basic
@@ -71,7 +70,7 @@ When a page requires promotion or is featured, a photograph may be inserted into
       code={`
       <goa-hero-banner
         heading="Hero Banner"
-        backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
+        backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
       </goa-hero-banner>
@@ -140,7 +139,7 @@ When a page requires promotion or is featured, a photograph may be inserted into
       code={`
       <goa-hero-banner
         heading="Hero Banner"
-        backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
+        backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
         <div slot="actions">
