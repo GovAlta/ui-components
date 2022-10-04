@@ -10,6 +10,7 @@
   export let error: string = "false";
   export let deletable: string = "false";
   export let content: string;
+  export let variant: "filter";
 
   let el: HTMLElement;
   let _hovering: boolean = false;
@@ -34,6 +35,7 @@
   class="chip"
   class:deletable={_deletable}
   class:error={_error}
+  class:variant={variant}
   tabindex="0"
   on:click={e => _deletable && onDelete(e)}
   on:mouseover={() => _hovering = true}
@@ -55,8 +57,8 @@
       type="close-circle"
       fillcolor={_error
         ? "var(--goa-color-status-emergency)"
-        : _hovering 
-          ? "var(--goa-color-interactive--hover)" 
+        : _hovering
+          ? "var(--goa-color-interactive--hover)"
         : "var(--color-gray-600)"
       }
       opacity={_error

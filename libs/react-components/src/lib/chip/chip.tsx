@@ -1,11 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 
+type ChipVariant = "filter"
+
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
   leadingicon: string;
   error: boolean;
   deletable: boolean;
   content: string;
+  variant: string;
 }
 
 
@@ -24,9 +27,10 @@ interface Props {
   leadingIcon?: string;
   error?: boolean;
   content: string;
+  variant?: ChipVariant;
 }
 
-export const GoAChip = ({ leadingIcon = "", deletable = false, error = false, content, onClick }: Props) => {
+export const GoAChip = ({ leadingIcon = "", deletable = false, error = false, variant, content, onClick }: Props) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) return;
@@ -42,7 +46,7 @@ export const GoAChip = ({ leadingIcon = "", deletable = false, error = false, co
   }, [el, onClick])
 
   return (
-    <goa-chip ref={el} leadingicon={leadingIcon} error={error} deletable={deletable} content={content} />
+    <goa-chip ref={el} leadingicon={leadingIcon} error={error} deletable={deletable} content={content} variant={variant} />
   )
 };
 
