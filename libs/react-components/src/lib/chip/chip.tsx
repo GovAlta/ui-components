@@ -8,7 +8,7 @@ interface WCProps {
   error: boolean;
   deletable: boolean;
   content: string;
-  variant: string;
+  variant?: string;
 }
 
 
