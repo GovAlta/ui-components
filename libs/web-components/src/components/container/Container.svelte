@@ -2,14 +2,9 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { toBoolean } from "../../common/utils";
-
-  export let type: 'interactive' | 'info' | 'error' | 'success' | 'important' | 'non-interactive' = 'non-interactive'
-  export let colored: string = "false";
-  export let headingsize: 'large' | 'small' | 'none' = 'large';
+  export let type: 'interactive' | 'info' | 'error' | 'success' | 'important' | 'non-interactive' = 'interactive'
+  export let accent: 'thick' | 'thin' | 'filled' = 'filled';
   export let padding: "relaxed" | "compact" = "relaxed"
-
-  $: _colored = toBoolean(colored);
 </script>
 
 <!-- HTML -->
@@ -18,10 +13,10 @@
     goa-container
     goa-container--${type}
     padding--${padding}
+    accent--${accent}
   `}
-  class:colored={_colored}
 >
-  <header class="heading--{headingsize}">
+  <header class="heading--{accent}">
     <div class="title">
       <slot name="title" />
     </div>
@@ -73,25 +68,25 @@
     border-bottom-right-radius: var(--border-radius);
   }
 
-  /* Colored */
+  /* Background Colour */
 
-  .goa-container--non-interactive.colored .content {
+  .goa-container--non-interactive.accent--filled .content {
     border-color: var(--color-gray-200);
     background-color: var(--color-gray-100);
   }
-  .goa-container--important.colored .content {
+  .goa-container--important.accent--filled .content {
     border-color: var(--goa-color-status-warning);
     background-color: var(--goa-color-status-warning-50);
   }
-  .goa-container--error.colored .content {
+  .goa-container--error.accent--filled .content {
     border-color: var(--goa-color-status-emergency);
     background-color: var(--goa-color-status-emergency-50);
   }
-  .goa-container--success.colored .content {
+  .goa-container--success.accent--filled .content {
     border-color: var(--goa-color-status-success);
     background-color: var(--goa-color-status-success-50);
   }
-  .goa-container--info.colored .content {
+  .goa-container--info.accent--filled .content {
     border-color: var(--goa-color-status-info);
     background-color: var(--goa-color-status-info-50);
   }
@@ -174,31 +169,31 @@
   }
 
   /* Sizes */
-  .heading--large {
+  .heading--thick {
     padding: 0.5rem 1.5rem;
     max-height: 3rem;
     min-height: 1rem;
   }
 
-  .heading--large .title {
+  .heading--thick .title {
     line-height: 2rem;
   }
 
-  .heading--small {
+  .heading--thin {
     height: 0.5rem;
   }
 
-  .heading--none {
+  .heading--filled {
     display: none;
   }
-  .heading--none ~ .content {
+  .heading--filled ~ .content {
     border-top: 1px solid var(--color-gray-200);
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
   }
 
-  .heading--small .title,
-  .heading--small .actions {
+  .heading--thin .title,
+  .heading--thin .actions {
     display: none;
   }
 
