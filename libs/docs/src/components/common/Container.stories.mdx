@@ -33,7 +33,7 @@ import {
 
 #### Properties
 
-<Props showTabs={true}>
+<Props>
   <Prop
     name="type"
     type="interactive | info | error | success | important | non-interactive"
@@ -47,15 +47,7 @@ import {
     description="Gives the container background a colour"
   />
   <Prop
-    name="headingsize"
-    lang="angular"
-    type="large | small | none"
-    defaultValue="large"
-    description="set the size of the accent bar"
-  />
-  <Prop
     name="headingSize"
-    lang="react"
     type="large | small | none"
     defaultValue="large"
     description="set the size of the accent bar"
@@ -481,7 +473,7 @@ export const HeadingTemplate = (args) => {
       <goa-container>
         <h2>Heading</h2>
         <p>Content</p>
-        <goa-container headingsize="none">
+        <goa-container headingSize="none">
           <h2>Heading</h2>
           <p>Content</p>
         </goa-container>

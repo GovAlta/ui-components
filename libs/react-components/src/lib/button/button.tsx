@@ -33,7 +33,7 @@ type ButtonProps = {
   disabled?: boolean;
   leadingIcon?: GoAIconType;
   trailingIcon?: GoAIconType;
-  onClick: (e: any) => void;
+  onClick?: (e: any) => void;
   children?: ReactNode;
 };
 
@@ -51,6 +51,9 @@ export const GoAButton: FC<ButtonProps> = ({
   useEffect(() => {
     if (!el.current) {
       return;
+    }
+    if (!onClick) {
+      return
     }
     const current = el.current;
     const listener = (e: any) => { onClick(e); };
