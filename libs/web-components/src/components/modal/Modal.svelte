@@ -21,10 +21,6 @@
   $: isScrollable = toBoolean(scrollable);
   $: isOpen = toBoolean(open);
 
-  onMount(() => {
-    console.log("in the modal v2");
-  })
-
   $: _transitionTime =
     transition === "none"
       ? 0

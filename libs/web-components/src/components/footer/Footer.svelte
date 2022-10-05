@@ -36,7 +36,7 @@
   .content {
     padding: 2rem 1rem;
     margin: 0 auto;
-    width: min(var(--max-content-width), 100vw);
+    width: min(var(--max-content-width), 100%);
   }
   @media (min-width: 640px) {
     .content {

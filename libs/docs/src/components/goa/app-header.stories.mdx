@@ -36,7 +36,7 @@ import { GoAAppHeader } from '@abgov/react-components';
   <Prop
     name="maxContentWidth"
     type="string"
-    defaultValue="--layout-max-content-width defined within the styles lib"
+    defaultValue="1280px"
     description="Maximum width of the content area"
   />
 </Props>
@@ -179,6 +179,53 @@ Custom content can be added to the header by passing it in as a child component(
       lang="tsx"
       code={`
       <GoAAppHeader url="https://example.com" heading="Ticket and Find Payments">
+        <a href="#">Login</a>
+        <a href="#">Help</a>
+      </GoAAppHeader>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Max Content Width
+
+You can change the maximum width of the app header
+
+<Story name="Max Content Width">
+  <GoAAppHeader url="https://example.com" heading="Ticket and Fine Payments" maxContentWidth="600px">
+    <a href="#">Login</a> &nbsp;
+    <a href="#">Help</a>
+  </GoAAppHeader>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-app-header url="https://example.com" heading="Ticket and Find Payments" maxContentWidth="600px">
+        <a href="#">Login</a> &nbsp;
+        <a href="#">Help</a>
+      </goa-app-header>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-app-header url="https://example.com" heading="Ticket and Find Payments" maxContentWidth="600px">
+        <a href="#">Login</a> &nbsp;
+        <a href="#">Help</a>
+      </goa-app-header>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoAAppHeader url="https://example.com" heading="Ticket and Find Payments" maxContentWidth="600px">
         <a href="#">Login</a>
         <a href="#">Help</a>
       </GoAAppHeader>
