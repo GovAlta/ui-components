@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-type ContainerType = 'interactive' | 'non-interactive' | 'info' | 'error' | 'success' | 'warning';
+type ContainerType = 'interactive' | 'non-interactive' | 'info' | 'error' | 'success' | 'important';
 type Accent = 'thick' | 'thin' | 'filled';
 type ContainerPadding = "relaxed" | "compact";
 
