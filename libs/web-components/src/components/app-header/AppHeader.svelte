@@ -81,7 +81,7 @@
   }
   @media (min-width: 640px) {
     .content {
-      padding: 2rem 1.5rem;
+      padding: 1.5rem 1.5rem;
     }
   }
 
