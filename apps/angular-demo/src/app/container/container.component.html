@@ -8,14 +8,14 @@
 
 
 <h2>Large accent bar</h2>
-<goa-container headingsize="large">
+<goa-container accent="thick">
   <h2>Heading</h2>
   Content
 </goa-container>
 
 
 <h2>Small accent bar</h2>
-<goa-container headingsize="small">
+<goa-container accent="thin">
   <h2>Heading</h2>
   Content
 </goa-container>
@@ -50,15 +50,14 @@
     <goa-button type="primary" size="compact">Assign to me</goa-button>
   </div>
   <h2>Custom H2</h2>
-  <goa-container type="primary" headingsize="small">
+  <goa-container accent="thin">
     <div>This is a sub container</div>
   </goa-container>
 </goa-container>
 
 
 <h2>Interactive</h2>
-<goa-container>
-  title="The container title" headingsize="large" type="primary" >
+<goa-container title="The container title" accent="thick">
   <div slot="actions">
     <goa-button type="secondary" size="compact">Assign to me</goa-button>
   </div>
@@ -68,7 +67,7 @@
 
 
 <h2>Non-interactive</h2>
-<goa-container>
+<goa-container type="non-interactive">
   <h2>Heading</h2>
   Content
 </goa-container>

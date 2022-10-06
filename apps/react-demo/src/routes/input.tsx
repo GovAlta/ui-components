@@ -1,16 +1,23 @@
 import { GoAInput, GoAInputDate, GoAInputDateTime, GoAInputNumber, GoAInputTime } from '@abgov/react-components';
 import { format } from 'date-fns';
 import * as React from 'react';
+import { useState } from 'react';
 
 export default function Input() {
 
-  function noop(...args: unknown[]) {
-    console.log(args)
+  const [date, setDate] = useState<Date>(new Date());
+  const [minDate, setMinDate] = useState<Date>(new Date());
+  const [maxDate, setMaxDate] = useState<Date>(new Date());
+
+  function noop() {
+    // noop
   }
 
-  const date = new Date();
-  const minDate = new Date();
-  const maxDate = new Date();
+  function onDateChange(_name: string, value: Date) {
+    console.log("onDateChange", value)
+    setDate(value)
+  }
+
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
   return (
@@ -32,51 +39,69 @@ export default function Input() {
         step={2}
         onChange={noop}
       />
+
+      <h4>Date from string value</h4>
       <GoAInputDate
         name="Date from string value"
         value={date.toISOString()}
-        onChange={noop}
+        onChange={onDateChange}
       />
+      <h4>Date from Date value</h4>
       <GoAInputDate
         name="Date"
         value={date}
-        onChange={noop}
+        onChange={onDateChange}
       />
+      <h4>DateTime from string value</h4>
+      <GoAInputDateTime
+        name="Date Time"
+        value={date.toISOString()}
+        onChange={onDateChange}
+      />
+      <h4>DateTime from Date value</h4>
       <GoAInputDateTime
         name="Date Time"
         value={date}
-        onChange={noop}
+        onChange={onDateChange}
       />
 
       Time from Date value
       <GoAInputTime
         name="Time from date value"
         value={date}
-        onChange={noop}
+        onChange={onDateChange}
       />
 
       Time from string datetime ISO 8601 value
       <GoAInputTime
         name="Time w/ string datetime ISO 8601 value"
         value={date.toISOString()}
-        onChange={noop}
+        onChange={onDateChange}
       />
 
       Time from string mm:ss value
       <GoAInputTime
         name="Time from string mm:ss value"
         value={format(date, "hh:mm")}
-        onChange={noop}
+        onChange={onDateChange}
         step={1}
       />
-
-      Time with a min and max 
+  
+      <h4>Date with a min and max and string values</h4>
       <GoAInputDate
         name="Date with min max"
         value={date.toISOString()}
         min={minDate.toISOString()}
         max={maxDate.toISOString()}
-        onChange={noop}
+        onChange={onDateChange}
+      />
+      <h4>Date with a min and max and Date values</h4>
+      <GoAInputDate
+        name="Date with min max"
+        value={date}
+        min={minDate}
+        max={maxDate}
+        onChange={onDateChange}
       />
 
       <h2>Icons</h2>

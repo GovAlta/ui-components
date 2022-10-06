@@ -1,4 +1,5 @@
 import {
+  GoAButton,
   GoAInput,
   GoAInputText,
   GoAInputPassword,
@@ -63,36 +64,36 @@ import { Meta, Story } from '@storybook/addon-docs';
   <Prop name="readOnly" type="boolean" defaultValue="false" description="Makes the input readonly"/>
   <Prop name="error" type="boolean" defaultValue="false" description="Sets the input to an error state"/>
   <Prop name="width" type="string" defaultValue="30ch" description="Set the width of the text input area" />
-<Prop
-  name="min"
-  type="string | date"
-  description="A string value *must* be in ISO 8601 format"
-/>
-<Prop
-  name="max"
-  type="string | date"
-  description="A string value *must* be in ISO 8601 format"
-/>
-<Prop
-  name="step"
-  type="number"
-  description="By how much number of day or time value will change by"
-/>
-<Prop
-  name="ariaLabel"
-  type="string"
-  description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name"
-/>
-<Prop
-  name="prefix"
-  type="string"
-  description="Text that comes before the input"
-/>
-<Prop
-  name="suffix"
-  type="string"
-  description="Text that comes after the input"
-/>
+  <Prop
+    name="min"
+    type="string | date"
+    description="A string value *must* be in ISO 8601 format"
+  />
+  <Prop
+    name="max"
+    type="string | date"
+    description="A string value *must* be in ISO 8601 format"
+  />
+  <Prop
+    name="step"
+    type="number"
+    description="By how much number of day or time value will change by"
+  />
+  <Prop
+    name="ariaLabel"
+    type="string"
+    description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name"
+  />
+  <Prop
+    name="prefix"
+    type="string"
+    description="Text that comes before the input"
+  />
+  <Prop
+    name="suffix"
+    type="string"
+    description="Text that comes after the input"
+  />
   <Prop name="autoCapitalize" type="on | off | none | sentences | words | characters" defaultValue="off" description="Controls whether and how text input is automatically capitalized as it is entered/edited by the user." />
   <Prop
     name="_change"
@@ -105,8 +106,8 @@ import { Meta, Story } from '@storybook/addon-docs';
   <Prop
     name="onChange"
     lang="react"
-    type="(name: string, value: string) => void"
-    description="Callback function invoked when input value is changed"
+    type="(name: string, value: string | Date | number) => void"
+    description="Callback function invoked when input value is changed. The value type varies on the component type ie. GoAInput vs GoAInputDate"
   />
   <Prop name="onTrailingIconClick" lang="react" type="() => void" description="onclick function invoked when trailing icon is clicked"/>
 
@@ -354,11 +355,14 @@ export const ErrorInputTemplate = () => (
 
 #### Focus
 
-export const FocusInputTemplate = () => (
-  <>
-    <GoAInput name="foo" focused={true} value="Some value" onChange={noop} />
+export const FocusInputTemplate = () => {
+  const [focused, setFocused] = useState(false);
+  return <>
+    <GoAInput name="foo" focused={focused} value="Some value" onChange={noop} />
+    <br />
+    <GoAButton onClick={() => setFocused(true)}>Click to focus</GoAButton>
   </>
-);
+};
 
 <Story name="Focus">{FocusInputTemplate.bind({})}</Story>
 
@@ -373,6 +377,7 @@ export const FocusInputTemplate = () => (
     <CodeSnippet code={`<GoAInput name="foo" />`} lang="jsx" />
   </Tab>
 </Tabs>
+
 #### Min/Max
 
 export const MinMaxTemplate = () => {
@@ -421,7 +426,7 @@ export const MinMaxTemplate = () => {
 #### Date
 
 export const DateTemplate = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] =  useState(new Date());
   const [minDate, setMinDate] = useState(new Date());
   const [maxDate, setMaxDate] = useState(getDateWithMonthOffset(1));
   function getDateWithMonthOffset(offset) {
@@ -435,7 +440,9 @@ export const DateTemplate = () => {
       value={date}
       min={minDate}
       max={maxDate}
-      onChange={(name, value) => setDate(value)}
+      onChange={(name, value) => {
+        setDate(value)
+      }}
     />
   );
 };
@@ -495,7 +502,9 @@ export const DateTemplate = () => {
             value={date}
             min={minDate}
             max={maxDate}
-            onChange={(name, value) => setDate(value)}
+            onChange={(name, value) => {
+              setDate(value)
+            }}
           />
         )
       `}
@@ -508,7 +517,7 @@ export const DateTemplate = () => {
 
 export const TimeComponent = () => {
   const [date, setDate] = useState(new Date());
-  return <GoAInputTime name="timeExample" value={date} step="1" />;
+  return <GoAInputTime name="timeExample" value={date} step={1} />;
 };
 
 <Story name="Time">{TimeComponent.bind({})}</Story>
@@ -545,7 +554,7 @@ export const TimeComponent = () => {
           <GoAInputTime
             name="timeExample"
             value={date}
-            step="1"
+            step={1}
           />
         )
       `}
@@ -558,7 +567,13 @@ export const TimeComponent = () => {
 
 export const DateTimeExample = () => {
   const [date, setDate] = useState(new Date());
-  return <GoAInputDateTime name="dateTimeExample" value={date} />;
+  return <GoAInputDateTime 
+    name="dateTimeExample" 
+    value={date}
+    onChange={(name, value) => {
+      setDate(value)
+    }}
+  />;
 };
 
 <Story name="Date and Time">{DateTimeExample.bind({})}</Story>
@@ -591,10 +606,13 @@ export const DateTimeExample = () => {
       code={`
         const [date, setDate] = useState(new Date());
         return (
-          <GoAInputDateTime
-            name="dateTimeExample"
+          return <GoAInputDateTime 
+            name="dateTimeExample" 
             value={date}
-          />
+            onChange={(name, value) => {
+              setDate(value)
+            }}
+          />;
         )
       `}
       lang="tsx"
@@ -606,7 +624,7 @@ export const DateTimeExample = () => {
 
 export const TimeWithSecondsExample = () => {
   const [time, setTime] = useState(new Date());
-  return <GoAInputTime name="timeseconnds" value={time} step="1" />;
+  return <GoAInputTime name="timeseconnds" value={time} step={1} />;
 };
 
 <Story name="Time with seconds">{TimeWithSecondsExample.bind({})}</Story>
@@ -645,7 +663,7 @@ When working with the `type=time` step controls the second step value (defaults 
           <GoAInputTime
             name="timeseconnds"
             value={time}
-            step="1"
+            step={1}
           />
         )
       `}
