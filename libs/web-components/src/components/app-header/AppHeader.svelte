@@ -13,7 +13,7 @@
 <div 
   class="app-header" 
   data-testid={testid}
-  style={`--max-content-width: ${maxcontentwidth || "var(--layout-max-content-width)"}`}
+  style={`--max-content-width: ${maxcontentwidth || "100%"}`}
 >
   <div class="content">
     {#if url}

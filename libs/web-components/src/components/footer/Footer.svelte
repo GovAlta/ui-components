@@ -117,7 +117,7 @@
 <div 
   class="app-footer" 
   bind:this={rootEl}
-  style={`--max-content-width: ${maxcontentwidth || "var(--layout-max-content-width)"}`}
+  style={`--max-content-width: ${maxcontentwidth || "100%"}`}
 >
   <div class="content">
     <div class="nav-links">
