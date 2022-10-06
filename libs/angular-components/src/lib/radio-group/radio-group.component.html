@@ -1,9 +1,0 @@
-<div class="goa-radio-group" [ngClass]="{'goa-radio-group-disabled': disabled}">
-  <span *ngIf="title" class="radio-group-title">{{title}}</span>
-  <span *ngIf="required" class="required-label" i18n="Required label for dropdown">(Required)</span>
-  <div *ngIf="helperText" class="helper-text">{{helperText}}</div>
-  <div class="goa-radios">
-    <ng-content></ng-content>
-  </div>
-  <div *ngIf="hasError()" class="error-text">{{requiredErrorMessage}}</div>
-</div>
