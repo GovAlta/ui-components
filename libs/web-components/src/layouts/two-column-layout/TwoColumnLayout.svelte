@@ -154,7 +154,7 @@
 <div 
   class="page"
   style={`
-    --max-content-width: ${maxcontentwidth || "var(--layout-max-content-width)"};
+    --max-content-width: ${maxcontentwidth || "100%"};
     --nav-column-width: ${navcolumnwidth || "var(--layout-nav-column-width)"};
   `}
 >
