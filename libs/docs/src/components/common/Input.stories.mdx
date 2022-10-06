@@ -14,6 +14,7 @@ import {
   GoAInputNumber,
   GoAInputRange,
   GoAFormItem,
+  GoACallout
 } from '@abgov/react-components';
 import { useState, useEffect } from 'react';
 import {
@@ -112,6 +113,13 @@ import { Meta, Story } from '@storybook/addon-docs';
   <Prop name="onTrailingIconClick" lang="react" type="() => void" description="onclick function invoked when trailing icon is clicked"/>
 
 </Props>
+
+#### Note
+<Story name="Information">
+  <GoACallout type="information">
+    Use the Form Item as a wrapper for the Input component to add more features such as label, help and error texts etc.
+  </GoACallout>
+</Story>
 
 export const noop = () => {};
 
