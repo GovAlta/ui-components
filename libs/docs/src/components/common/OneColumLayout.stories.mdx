@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Tabs, Tab, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
+import { Tabs, Tab, Browser, CodeSnippet, SupportInfo } from '@abgov/shared/storybook-common';
 import { GoAOneColumnLayout, GoAMicrositeHeader, GoAPageBlock, GoAAppHeader, GoAAppFooter, GoASkeleton, GoAFlexRow, GoAFlexCol } from '@abgov/react-components';
 
 <Meta title="Layouts/One Column" />
@@ -15,23 +15,7 @@ import { GoAOneColumnLayout, GoAMicrositeHeader, GoAPageBlock, GoAAppHeader, GoA
 #### Basic
 
 <Story name="Basic">
-  <div style={{
-    border: "1px solid #ddd", 
-    borderRadius: "3px",
-  }}>
-    <div style={{
-      backgroundColor: "#ddd",
-      height: "24px",
-      padding: "2px",
-      display: "flex",
-      alignItems: "center",
-      paddingLeft: "8px",
-      gap: "6px",
-    }}>
-      <div style={{height: "12px", width: "12px", borderRadius: "12px", backgroundColor: "red"}}></div>  
-      <div style={{height: "12px", width: "12px", borderRadius: "12px", backgroundColor: "green"}}></div>  
-      <div style={{height: "12px", width: "12px", borderRadius: "12px", backgroundColor: "yellow"}}></div>  
-    </div>
+  <Browser>
     <GoAOneColumnLayout>
       <section slot="header">
         <GoAMicrositeHeader level="alpha" version="UAT" />
@@ -57,7 +41,7 @@ import { GoAOneColumnLayout, GoAMicrositeHeader, GoAPageBlock, GoAAppHeader, GoA
         <GoAAppFooter />
       </section>
     </GoAOneColumnLayout>
-  </div>
+  </Browser>
 </Story>
 
 <Tabs>
