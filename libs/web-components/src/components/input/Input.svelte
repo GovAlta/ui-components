@@ -37,7 +37,7 @@
   export let error: string = "false";
   export let testid: string = "";
   export let width: string = "30ch";
-  export let arialabel: string = null; 
+  export let arialabel: string = null;
   export let min: string = null;
   export let max: string = null;
   export let step: number = null;
@@ -130,7 +130,7 @@
       {min}
       {max}
       {step}
-      role="textbox" 
+      role="textbox"
       aria-label={arialabel || name}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
@@ -153,7 +153,7 @@
         disabled={isDisabled}
         variant="nocolor"
         size="medium"
-        type={trailingicon}
+        icon={trailingicon}
         data-testid="trailing-icon-button"
       />
     {/if}
@@ -302,7 +302,7 @@
     cursor: default !important;
   }
 
-  .prefix, 
+  .prefix,
   .suffix {
     background-color: var(--color-gray-100);
     padding: 0 0.75rem;

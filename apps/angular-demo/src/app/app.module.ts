@@ -26,9 +26,10 @@ import { ContainerComponent } from './container/container.component';
 import { SkeletonComponent } from './skeleton/skeleton.component';
 import { FormItemComponent } from './form-item/form-item.component';
 import { TwoColumnLayoutComponent } from './two-column-layout/two-column-layout.component'
+import { IconButtonComponent } from './icon-button/icon-button.component';
 
 @NgModule({
-  declarations: [TwoColumnLayoutComponent, AppComponent, InputComponentComponent, ButtonComponentComponent, NavigationLinkComponent, TextAreaComponent, CheckboxComponent, RadioComponent, DropdownComponent, ModalComponent, AppFooterComponent, BadgeComponent, CalloutComponent, ChipComponent, CircularProgressComponent, HeroBannerComponent, AppHeaderComponent, MicrositeHeaderComponent, ContainerComponent, SkeletonComponent, FormItemComponent],
+  declarations: [TwoColumnLayoutComponent, AppComponent, InputComponentComponent, ButtonComponentComponent, NavigationLinkComponent, TextAreaComponent, CheckboxComponent, RadioComponent, DropdownComponent, ModalComponent, AppFooterComponent, BadgeComponent, CalloutComponent, ChipComponent, CircularProgressComponent, HeroBannerComponent, AppHeaderComponent, MicrositeHeaderComponent, ContainerComponent, SkeletonComponent, FormItemComponent, IconButtonComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

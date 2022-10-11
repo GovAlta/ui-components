@@ -31,7 +31,7 @@
       <slot />
     </div>
     <div class="close">
-      <goa-icon-button on:click={close} type="close" inverted />
+      <goa-icon-button on:click={close} icon="close" inverted />
     </div>
   </div>
 {/if}
