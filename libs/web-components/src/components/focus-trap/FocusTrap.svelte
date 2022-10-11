@@ -159,9 +159,15 @@
 
 </script>
 
-<div bind:this={element}>
+<div id="root" bind:this={element}>
   <slot />
   <!-- When goa-modal is the last display element in a page,
     the tab key press jumps out. The empty span with tabIndex="0" keeps the focus trapped mysteriously-->
   <span tabindex="0"></span>
 </div>
+
+<style>
+  #root {
+    display: inline;
+  }
+</style>
