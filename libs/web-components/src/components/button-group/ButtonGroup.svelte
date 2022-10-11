@@ -25,5 +25,6 @@
     justify-content: var(--alignment);
     flex-wrap: wrap;
     gap: var(--gap-size);
+    padding: 3px 0;  /* prevent button box shadow from being cut off */
   }
 </style>
