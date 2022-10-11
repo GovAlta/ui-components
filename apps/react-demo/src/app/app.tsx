@@ -34,6 +34,7 @@ export default function App() {
             <Link className="navigation-link" to="/container">Container</Link>
             <Link className="navigation-link" to="/skeleton">Skeleton</Link>
             <Link className="navigation-link" to="/form-item">Form Item</Link>
+            <Link className="navigation-link" to="/icon-button">Icon Button</Link>
           </nav>
         </div>
 

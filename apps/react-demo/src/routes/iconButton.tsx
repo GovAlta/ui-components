@@ -2,7 +2,7 @@ import {
   GoAIconButton
 } from '@abgov/react-components';
 
-export default function FormItem() {
+export default function IconButton() {
   return (
     <>
       <h1>Icon Button</h1>

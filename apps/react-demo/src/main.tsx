@@ -22,6 +22,7 @@ import MicrositeHeader from './routes/micrositeHeader';
 import Container from './routes/container';
 import Skeleton from './routes/skeleton';
 import FormItem from './routes/formItem';
+import IconButton from './routes/iconButton';
 
 import '@abgov/styles';
 
@@ -48,6 +49,7 @@ ReactDOM.render(
         <Route path="container" element={<Container />} />
         <Route path="skeleton" element={<Skeleton />} />
         <Route path="form-item" element={<FormItem />} />
+        <Route path="icon-button" element={<IconButton />} />
       </Route>
     </Routes>
   </BrowserRouter>,
