@@ -2,9 +2,11 @@ import React from 'react';
 
 export type SkeletonType = "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile";
 
+type SkeletonSize = 1 | 2 | 3 | 4;
+
 interface WCProps {
   width?: string;
-  size?: number;
+  size?: SkeletonSize;
   linecount?: number;
   type: SkeletonType;
 }
@@ -20,7 +22,7 @@ declare global {
 
 export interface SkeletonProps {
   width?: string;
-  size?: number;
+  size?: SkeletonSize;
   lineCount?: number;
   type: SkeletonType;
 }

@@ -3,7 +3,7 @@
 <!-- Script -->
 <script lang="ts">
   export let width: number = 320;
-  export let size: number = 1;
+  export let size: 1 | 2 | 3 | 4 = 1;
   export let linecount: number = 3;
   export let type: "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile" | "lines";
 </script>
