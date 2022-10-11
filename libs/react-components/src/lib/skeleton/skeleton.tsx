@@ -3,7 +3,9 @@ import React from 'react';
 export type SkeletonType = "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile";
 
 interface WCProps {
-  size: number;
+  width?: string;
+  size?: number;
+  linecount?: number;
   type: SkeletonType;
 }
 
@@ -17,12 +19,14 @@ declare global {
 }
 
 export interface SkeletonProps {
-  type: SkeletonType;
+  width?: string;
   size?: number;
+  lineCount?: number;
+  type: SkeletonType;
 }
 
-export const GoASkeleton = ({ type, size = 1  }: SkeletonProps) => {
-  return <goa-skeleton type={type} size={size} />;
+export const GoASkeleton = ({ width, size, lineCount, type }: SkeletonProps) => {
+  return <goa-skeleton width={width} linecount={lineCount} type={type} size={size} />;
 };
 
 export default GoASkeleton;
