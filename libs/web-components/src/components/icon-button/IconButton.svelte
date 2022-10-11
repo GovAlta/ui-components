@@ -7,7 +7,7 @@
   type IconButtonVariant = "color" | "nocolor";
 
   // required
-  export let type: GoAIconType;
+  export let icon: GoAIconType;
 
   // optional
   export let size: IconSize = "medium";
@@ -45,7 +45,7 @@
   data-testid={testId}
   on:click={handleClick}
 >
-  <goa-icon title={title} {type} {size} {theme} inverted={isInverted} />
+  <goa-icon title={title} type={icon} {size} {theme} inverted={isInverted} />
 </button>
 
 <style>
@@ -63,34 +63,44 @@
   button {
     display: inline-flex;
     align-items: center;
+    box-sizing: border-box;
     justify-content: center;
     background: transparent;
     cursor: pointer;
     border: none;
-  }
-
-  .color {
-    border-radius: 0.5rem;
-    padding: calc(var(--size) / 4);
+    padding: 0 0.75rem;
   }
 
   /* Primary */
   .color {
     border-radius: 0.5rem;
+    padding: calc(var(--size) / 4);
     color: var(--goa-color-interactive);
     fill: var(--goa-color-interactive);
     cursor: pointer;
     transition: background-color 100ms ease-in, transform 100ms ease-in;
   }
 
-  .color:active,
-  .nocolor:active {
-    transform: scale(0.9);
-    border: none;
+  .nocolor {
+    border-radius: 0.5rem;
+    padding: calc(var(--size) / 4);
   }
 
-  .color:hover {
-    background-color: var(--goa-color-primary-light);
+  button:hover {
+    background-color: var(--color-gray-100);
+    border-color: var(--color-gray-100);
+    color: var(--goa-color-interactive--hover);
+    outline: none;
+
+  }
+
+  button:focus,
+  button:active {
+    background-color: var(--color-gray-100);
+    border-color: var(--goa-color-interactive--active);
+    color: var(--goa-color-interactive--active);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
+    outline: none;
   }
 
   .color.inverted:hover {
@@ -98,11 +108,11 @@
   }
 
   button:disabled {
-    color: var(--color-gray-200);
-    fill: var(--color-gray-200);
+    pointer-events: none;
+    opacity: 0.5;
     transform: none;
     cursor: default;
-  }
+    }
   button:disabled:hover {
     background-color: transparent;
   }

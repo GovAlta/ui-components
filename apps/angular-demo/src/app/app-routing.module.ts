@@ -20,6 +20,7 @@ import { ContainerComponent } from './container/container.component';
 import { SkeletonComponent } from './skeleton/skeleton.component';
 import { FormItemComponent } from './form-item/form-item.component';
 import { TwoColumnLayoutComponent } from './two-column-layout/two-column-layout.component';
+import { IconButtonComponent } from './icon-button/icon-button.component';
 
 const routes: Routes = [
   { path: 'button', component: ButtonComponentComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'microsite-header', component: MicrositeHeaderComponent },
   { path: 'modal', component: ModalComponent },
   { path: 'two-column-layout', component: TwoColumnLayoutComponent },
+  { path: 'icon-button', component: IconButtonComponent },
   { path: '', redirectTo: '/input', pathMatch: 'full' }
 ];
 

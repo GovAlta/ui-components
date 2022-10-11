@@ -1,9 +1,11 @@
 import React, { FC, useEffect, useRef } from 'react'
-import { IconSize, GoAIconType, IconVariant } from './icon';
+import { IconSize, GoAIconType } from './icon';
+
+type IconVariant = 'color' | 'nocolor'
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
-  type: GoAIconType,
+  icon: GoAIconType,
   size?: IconSize;
   variant?: IconVariant;
   title?: string;
@@ -21,20 +23,23 @@ declare global {
 }
 
 interface Props {
-  type: GoAIconType,
+  icon: GoAIconType,
   size?: IconSize;
   variant?: IconVariant;
   title?: string;
   disabled?: boolean;
   children?: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
-export const GoAIconButton: FC<Props> = ({ type, disabled, variant = 'primary', onClick, size = 'medium', title, children }) =>  {
+export const GoAIconButton: FC<Props> = ({ icon, disabled, variant = 'color', onClick, size = 'medium', title, children }) => {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!ref.current) {
       return;
+    }
+    if (!onClick) {
+      return
     }
     const current = ref.current;
     const listener = (e: any) => {
@@ -48,7 +53,7 @@ export const GoAIconButton: FC<Props> = ({ type, disabled, variant = 'primary', 
   }, [ref, onClick])
 
   return (
-    <goa-icon-button ref={ref} type={type} disabled={disabled} variant={variant} size={size} title={title}>
+    <goa-icon-button ref={ref} icon={icon} disabled={disabled} variant={variant} size={size} title={title}>
       {children}
     </goa-icon-button>
   )

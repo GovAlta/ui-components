@@ -67,7 +67,7 @@
           <div class="modal-close">
             <goa-icon-button
               data-testid="modal-close-button"
-              type="close"
+              icon="close"
               on:click={close}
             />
           </div>
