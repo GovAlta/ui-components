@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let width: number = 320;
+  export let maxwidth: string;
   export let size: 1 | 2 | 3 | 4 = 1;
   export let linecount: number = 3;
   export let type: "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile" | "lines";
@@ -10,7 +10,7 @@
 
 <!-- HTML -->
 {#if type === "card"}
-  <div class="card card-{size}" style="--width: {width}px;">
+  <div class="card card-{size}" style="--max-width: {maxwidth};">
     <svelte:self type="image" {size} />
     <div class="card-content">
       <svelte:self type="header" {size} />
@@ -224,9 +224,9 @@
     width: 100%;
   }
 
-  @media (min-width: 320px) {
+  @media (min-width: 480px) {
     .card {
-      width: var(--width);
+      max-width: var(--max-width);
     }
   }
 

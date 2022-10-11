@@ -5,7 +5,7 @@ export type SkeletonType = "image" | "text" | "title" | "text-small" | "avatar" 
 type SkeletonSize = 1 | 2 | 3 | 4;
 
 interface WCProps {
-  width?: string;
+  maxwidth?: string;
   size?: SkeletonSize;
   linecount?: number;
   type: SkeletonType;
@@ -21,14 +21,14 @@ declare global {
 }
 
 export interface SkeletonProps {
-  width?: string;
+  maxWidth?: string;
   size?: SkeletonSize;
   lineCount?: number;
   type: SkeletonType;
 }
 
-export const GoASkeleton = ({ width, size, lineCount, type }: SkeletonProps) => {
-  return <goa-skeleton width={width} linecount={lineCount} type={type} size={size} />;
+export const GoASkeleton = ({ maxWidth, size, lineCount, type }: SkeletonProps) => {
+  return <goa-skeleton maxwidth={maxWidth} linecount={lineCount} type={type} size={size} />;
 };
 
 export default GoASkeleton;
