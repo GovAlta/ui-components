@@ -29,7 +29,7 @@ export default function(_node: HTMLElement, opts: { enable: boolean }) {
     setTimeout(() => {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '0';
-    }, 200); // 500ms allows for any close animations to complete
+    }, 200); 
   }
 
   function calculateScrollbarWidth() {
