@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GoAButton, GoAModal, GoAButtonGroup } from "@abgov/react-components";
+import { GoAButton, GoAModal, GoAButtonGroup, ModalTransition } from "@abgov/react-components";
 import { useState } from 'react';
 
 export default function Modal() {
@@ -7,10 +7,9 @@ export default function Modal() {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showModal3, setShowModal3] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [speed, setSpeed] = useState<any>("none");
+  const [speed, setSpeed] = useState<ModalTransition>("none");
 
-  function show(speed: string) {
+  function show(speed: ModalTransition) {
     setSpeed(speed)
     setShowModal(true)
   }
