@@ -51,9 +51,6 @@
     color: var(--goa-color-text);
     font-size: var(--fs-base);
     padding: 0.5rem 0;
-    overflow-x: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   .label em {
