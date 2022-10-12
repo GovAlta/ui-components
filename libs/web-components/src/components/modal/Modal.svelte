@@ -1,9 +1,9 @@
 <svelte:options tag="goa-modal" />
 
 <!-- ======================================================================= -->
+<!-- Script -->
+<!-- ======================================================================= -->
 <script lang="ts">
-  import { onMount } from "svelte";
-
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";
@@ -28,18 +28,15 @@
         ? 400
         : 200;
 
-  function close(e) {
+  function close(e: Event) {
     if (!isClosable) {
       return;
     }
     e.target.dispatchEvent(new CustomEvent("_close", { composed: true }));
     e.stopPropagation();
   }
-
 </script>
 
-<!-- ======================================================================= -->
-<!-- Script -->
 
 <!-- ======================================================================= -->
 <!-- Html -->
@@ -94,7 +91,6 @@
 
 <!-- ======================================================================= -->
 <!-- Css -->
-
 <!-- ======================================================================= -->
 <style>
   :host {
