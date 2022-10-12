@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
 
+export type ModalTransition = "fast" | "slow" | "none";
+
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
   heading?: string;
@@ -7,7 +9,7 @@ interface WCProps {
   width?: string;
   closable?: boolean;
   scrollable?: boolean;
-  transition?: "fast" | "slow" | "none";
+  transition?: ModalTransition; 
 }
 
 declare global {
@@ -24,7 +26,7 @@ interface Props {
   width?: string;
   actions?: React.ReactElement;
   onClose?: () => void;
-  transition?: "fast" | "slow" | "none";
+  transition?: ModalTransition; 
   children?: React.ReactNode;
   open?: boolean;
 }
