@@ -8,7 +8,7 @@ import {
   Props,
   Prop,
 } from '@abgov/shared/storybook-common';
-import { GoAButton, GoAButtonGroup, GoAModal } from '@abgov/react-components';
+import { GoAButton, GoAButtonGroup, GoAModal, GoACallout } from '@abgov/react-components';
 import { useState } from 'react';
 
 <Meta title="Components/Modal" />
@@ -28,8 +28,7 @@ import { useState } from 'react';
     name="heading"
     type="string"
     description="Heading text within the modal"
-/>
-
+  />
   <Prop
     name="open"
     type="boolean"
@@ -472,6 +471,104 @@ export const TransitionsTemplate = (args) => {
           </>
         );
     `}
+    />
+  </Tab>
+</Tabs>
+
+
+#### Route Changes 
+
+When a route change is performed in an event triggered within the modal, you **must** close the modal before the route change occurs.
+
+export const RouteChangesTemplate = (args) => {
+  const [showModal, setShowModal] = useState(false);
+  return (
+    <>
+      <GoAButton onClick={() => setShowModal(true)}>Show</GoAButton>
+      <GoAModal
+        heading="Do you agree?"
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        actions={
+          <GoAButtonGroup alignment="end">
+            <GoAButton 
+              size="medium"
+              onClick={() => {
+                setShowModal(false);
+              }}
+              >
+              Submit 
+            </GoAButton>
+          </GoAButtonGroup>
+        }
+      >
+        <p>Note: We can't actually perform route changes in storybook :(</p>
+      </GoAModal>
+    </>
+  )
+};
+
+<Story name="Route changes">{RouteChangesTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-button type="primary" (_click)="isOpen = true">Show</goa-button>
+        <goa-modal heading="Do you agree?" [open]="isOpen">
+          <p>Note: We can't actually perform route changes in storybook :(</p>
+          <goa-button-group alignment="end" slot="actions">
+            <goa-button type="primary" (_click)="closeModal()">Primary</goa-button>
+          </goa-button-group>
+        </goa-modal>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        isOpen = false;
+        closeModal() {
+          this.isOpen = false;
+          setTimeout(() => this.router.navigate(["/some-path"]), 0)
+        }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [showModal, setShowModal] = useState(false);
+        const navigate = useNavigate();
+        return (
+          <>
+            <GoAButton onClick={() => setShowModal(true)}>Show</GoAButton>
+            <GoAModal
+              heading="Do you agree?"
+              open={showModal}
+              onClose={() => setShowModal(false)}
+              actions={
+                <GoAButtonGroup alignment="end">
+                  <GoAButton 
+                    size="medium"
+                    onClick={() => {
+                      setShowModal(false);
+                      // setTimeout will allow any modal transitions to be run 
+                      // setTimeout(() => navigate("/some-path"), 300) } 
+                      navigate("/some-path")
+                    }}
+                    >
+                    Submit 
+                  </GoAButton>
+                </GoAButtonGroup>
+              }
+            >
+              <p>Note: We can't actually perform route changes in storybook :(</p>
+            </GoAModal>
+          </>
+        )
+      `}
     />
   </Tab>
 </Tabs>
