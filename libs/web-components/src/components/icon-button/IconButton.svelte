@@ -74,7 +74,7 @@
   /* Primary */
   .color {
     border-radius: 0.5rem;
-    padding: calc(var(--size) / 4);
+    padding: 4px;
     color: var(--goa-color-interactive);
     fill: var(--goa-color-interactive);
     cursor: pointer;
@@ -83,7 +83,7 @@
 
   .nocolor {
     border-radius: 0.5rem;
-    padding: calc(var(--size) / 4);
+    padding: 4px;
   }
 
   button:hover {
