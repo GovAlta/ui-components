@@ -17,7 +17,6 @@
   export let leadingicon: GoAIconType = null;
   export let maxheight: string = MAX_HEIGHT;
   export let placeholder: string = "";
-  export let testid: string = "";
   export let width: string = "";
   export let disabled: string = "false";
   export let error: string = "false";
@@ -126,13 +125,11 @@
     menuEl.focus();
 
     // bind up/down arrows to navigate options
-    menuEl.addEventListener("keydown", onMenuKeyDown);
     menuEl.addEventListener("mouseover", onHighlight);
   }
 
   function closeMenu() {
     menuEl.removeEventListener("blur", closeMenu);
-    menuEl.removeEventListener("keydown", onMenuKeyDown);
     menuEl.removeEventListener("mouseover", onHighlight);
     setHighlightedIndexToSelected();
     isMenuVisible = false;
@@ -172,11 +169,46 @@
   const onInputKeyDown = (e: KeyboardEvent) => {
     switch (e.key) {
       case " ":
-        showMenu();
+      case "Enter":
+        isMenuVisible ? closeMenu() : showMenu();
+        e.preventDefault();
+        break;
+      case "Escape":
+        isMenuVisible && closeMenu();
+        e.preventDefault();
+        break;
+      case "ArrowDown":
+        if (e.altKey) {
+          isMenuVisible ? closeMenu() : showMenu();
+          break;
+        }
+        _handleArrowDown();
+        e.preventDefault();
+        break;
+      case "ArrowUp":
+        if (e.altKey) {
+          isMenuVisible ? closeMenu() : showMenu();
+          break;
+        }
+        _handleArrowUp();
         e.preventDefault();
         break;
     }
   };
+
+  function _handleArrowDown() {
+    if (highlightedIndex < options.length - 1) {
+      highlightedIndex++;
+      onSelect(options[highlightedIndex].value, options[highlightedIndex].label, false);
+    }
+  }
+
+  function _handleArrowUp() {
+    if (highlightedIndex > 0) {
+      highlightedIndex--;
+      onSelect(options[highlightedIndex].value, options[highlightedIndex].label, false);
+    }
+  }
 
   // add required bindings to component
   function onFocus() {
@@ -188,34 +220,6 @@
     el.removeEventListener("keydown", onInputKeyDown);
   }
 
-  function onMenuKeyDown(e: KeyboardEvent) {
-    switch (e.key) {
-      case "ArrowUp":
-        if (highlightedIndex > 0) {
-          highlightedIndex--;
-          onSelect(options[highlightedIndex].value, options[highlightedIndex].label, false);
-        }
-        e.preventDefault();
-        break;
-      case "ArrowDown":
-        if (highlightedIndex < options.length - 1) {
-          highlightedIndex++;
-          onSelect(options[highlightedIndex].value, options[highlightedIndex].label, false);
-        }
-        e.preventDefault();
-        break;
-      case "Tab":
-      case "Enter":
-        closeMenu();
-        e.preventDefault();
-        break;
-      case "Escape":
-        closeMenu();
-        e.preventDefault();
-        break;
-    }
-  }
-
   function onHighlight(e: Event) {
     highlightedIndex = Number((e.target as HTMLElement).dataset.index);
   }
@@ -225,7 +229,7 @@
 <!-- Template -->
 
 <div
-  data-testid={testid}
+  data-testid={`${name}-dropdown`}
   class="goa-dropdown-box"
   style={`--width: ${width || computedWidth}`}
   bind:this={el}>
@@ -240,25 +244,23 @@
   {/if}
 
   <!-- readonly input  -->
-  <div data-testid={`${name}-dropdown`}>
-    <goa-input
-      on:click={showMenu}
-      error={error}
-      {disabled}
-      {leadingicon}
-      {placeholder}
-      width="100%"
-      id={`${name}-dropdown-input`}
-      role="combobox"
-      aria-label={arialabel || name}
-      aria-expanded={isMenuVisible}
-      aria-controls="menu"
-      readonly
-      trailingicon="chevron-down"
-      type="text"
-      value={selectedLabel}
-    />
-  </div>
+  <goa-input
+    on:click={showMenu}
+    error={error}
+    {disabled}
+    {leadingicon}
+    {placeholder}
+    width="100%"
+    data-testid={`${name}-dropdown-input`}
+    role="combobox"
+    aria-label={arialabel || name}
+    aria-expanded={isMenuVisible}
+    aria-controls="menu"
+    readonly
+    trailingicon="chevron-down"
+    type="text"
+    value={selectedLabel}
+  />
 
   <!-- list and filter -->
   <ul
@@ -282,7 +284,7 @@
         class:goa-dropdown-option--disabled={false}
         class:goa-dropdown-option--tabbed={index === highlightedIndex}
         class:goa-dropdown-option--selected={_values.includes(option.value)}
-        data-testid={`${option.value}-dropdown-item`}
+        data-testid={`dropdown-item-${option.value}`}
         data-index={index}
         style={`display: ${false ? "none" : "block"}`}
         on:click={() => onSelect(option.value, option.label, true)}

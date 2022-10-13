@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
+import userEvent from "@testing-library/user-event";
 import GoADropdown from './DropdownWrapper.test.svelte';
 
 afterEach(() => {
@@ -12,13 +13,12 @@ describe('GoADropdown', () => {
   it('should render', async () => {
     const items = ["red", "blue", "orange"];
     const result = render(GoADropdown, {
-      testid: 'test-id',
       name: 'favcolor',
       value: 'orange',
       items,
     });
 
-    const dropdown = result.queryByTestId("test-id");
+    const dropdown = result.queryByTestId("favcolor-dropdown");
     const inputField = dropdown.querySelector('goa-input');
 
     // show menu
@@ -26,7 +26,7 @@ describe('GoADropdown', () => {
 
     await waitFor(() => {
       for (const item of items) {
-        const option = result.queryByTestId(`${item}-dropdown-item`);
+        const option = result.queryByTestId(`dropdown-item-${item}`);
         expect(option).toBeTruthy();
         expect(option).toHaveTextContent(item);
       }
@@ -37,7 +37,6 @@ describe('GoADropdown', () => {
     jest.spyOn(console, "error");
     const items = ["red", "blue", "orange"];
     render(GoADropdown, {
-      testid: 'test-id',
       items,
     });
 
@@ -50,13 +49,12 @@ describe('GoADropdown', () => {
     it('has a preselected value', async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         value: 'orange',
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
 
       // show menu
@@ -69,7 +67,7 @@ describe('GoADropdown', () => {
 
       await waitFor(() => {
         // validate input label
-        const input = result.container.querySelector("#favcolor-dropdown-input");
+        const input = result.container.querySelector("[data-testid=favcolor-dropdown-input]");
         expect(input).toBeTruthy();
 
         // validate the label
@@ -85,12 +83,11 @@ describe('GoADropdown', () => {
       const onClick = jest.fn();
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
 
       // show menu
@@ -107,7 +104,7 @@ describe('GoADropdown', () => {
 
       await waitFor(async () => {
         // select item
-        const option = result.queryByTestId("orange-dropdown-item");
+        const option = result.queryByTestId("dropdown-item-orange");
         await fireEvent.click(option);
         expect(onClick).toHaveBeenCalledTimes(1);
         expect(selectedValue).toEqual("orange");
@@ -119,13 +116,12 @@ describe('GoADropdown', () => {
     it('can be enabled', async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         disabled: false,
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
       await fireEvent.click(inputField);
 
@@ -143,13 +139,12 @@ describe('GoADropdown', () => {
     it('can be disabled', async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         disabled: true,
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
       await fireEvent.click(inputField);
 
@@ -171,13 +166,12 @@ describe('GoADropdown', () => {
     it('does not show an error state', async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         error: false,
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
 
       // show menu
@@ -190,13 +184,12 @@ describe('GoADropdown', () => {
     it('shows an error state', async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         error: true,
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
 
       // show menu
@@ -212,12 +205,11 @@ describe('GoADropdown', () => {
     it('does not show a leading icon', async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
       expect(input).not.toHaveAttribute("leadingicon", "add");
     });
@@ -225,13 +217,12 @@ describe('GoADropdown', () => {
     it('shows a leading icon', async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         leadingicon: "add",
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
       expect(input).toHaveAttribute("leadingicon", "add");
     });
@@ -241,12 +232,11 @@ describe('GoADropdown', () => {
     it('does not show a placeholder', async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
       expect(input).toHaveAttribute("placeholder", "");
     });
@@ -254,13 +244,12 @@ describe('GoADropdown', () => {
     it('shows a placeholder', async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         placeholder: "some text",
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
       expect(input).toHaveAttribute("placeholder", "some text");
     });
@@ -270,12 +259,11 @@ describe('GoADropdown', () => {
     it("dropdown should have the default width", async () => {
       const items = ["red", "blue", "pink"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
 
       await waitFor(() => {
@@ -287,13 +275,12 @@ describe('GoADropdown', () => {
     it("uses the non-percent width supplied", async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         width: "500px",
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
 
       await waitFor(() => {
@@ -305,13 +292,12 @@ describe('GoADropdown', () => {
     it("sets the input width to 100% when percent value used", async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         width: "100%",
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
 
       await waitFor(() => {
@@ -325,12 +311,11 @@ describe('GoADropdown', () => {
     it("uses the default max height", async () => {
       const items = ["red", "blue", "pink"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
       fireEvent.click(input);
 
@@ -343,13 +328,12 @@ describe('GoADropdown', () => {
     it("uses the height when supplied", async () => {
       const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         maxheight: "400px",
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
       fireEvent.click(input);
 
@@ -364,13 +348,12 @@ describe('GoADropdown', () => {
     it("show the aria label", async () => {
       const items = ["red", "blue", "pink"];
       const result = render(GoADropdown, {
-        testid: 'test-id',
         name: 'favcolor',
         arialabel: 'Favourite Color',
         items,
       });
 
-      const dropdown = result.queryByTestId("test-id");
+      const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
 
       // selected value
@@ -383,11 +366,86 @@ describe('GoADropdown', () => {
         expect(menu).toHaveStyle("max-height: 276px");  // 276px is default value
 
         for (const item of items) {
-          const option = menu.querySelector(`li[data-testid="${item}-dropdown-item"]`);
+          const option = menu.querySelector(`li[data-testid="dropdown-item-${item}"]`);
           expect(option).toHaveAttribute("aria-label", item)
         }
       })
     });
+  })
+
+  describe.skip("keyboard bindings", () => {
+    const space = new KeyboardEvent('keydown', { 
+      keyCode: 32, key: " ", code: "Space" 
+    });
+    const enter = new KeyboardEvent('keydown', { 
+      keyCode: 13, key: "Enter" 
+    });
+    const downArrow = new KeyboardEvent('keydown', { 
+      keyCode: 40, key: "ArrowDown", code: "ArrowDown" 
+    });
+    const upArrow = new KeyboardEvent('keydown', { 
+      keyCode: 38, key: "ArrowUp", code: "ArrowUp" 
+    });
+    const altDownArrow = new KeyboardEvent('keydown', { 
+      altKey: true, keyCode: 40, key: "ArrowDown", code: "ArrowDown" 
+    });
+    const altUpArrow = new KeyboardEvent('keydown', { 
+      altKey: true, keyCode: 38, key: "ArrowUp", code: "ArrowUp" 
+    });
+
+    const items = ["red", "blue", "pink"];
+
+    for (const event of [space, enter]) {
+      it(`should show the dropdown menu on <${event.key}>`, async () => {
+
+        const user = userEvent.setup();
+
+        const result = render(GoADropdown, { name: 'favcolor', items, value: "red" });
+        const dropdown = result.queryByTestId("favcolor-dropdown");
+        const input = result.queryByTestId('favcolor-dropdown-input');
+
+        // == Focus menu
+        // await fireEvent.focus(input);
+        // // input.focus();
+        // expect(input).toHaveFocus();
+
+        await fireEvent.click(input)
+
+        // == Open menu
+        // method 1
+        // await fireEvent.keyDown(menu, {key: " ", code: "Space", keyCode: 32})
+        // method 2
+        // await user.keyboard("[Space]")
+        // method 3
+        // document.dispatchEvent(event);
+        const menu = result.queryByTestId("dropdown-menu");
+        await waitFor(() => {
+          expect(menu.classList).toContain("dropdown-active")
+        })
+
+        // == Select third item
+        // method 1 
+        // await fireEvent.keyDown(menu, {key: "ArrowDown", code: "ArrowDown", keyCode: 40})
+        // await fireEvent.keyDown(menu, {key: "ArrowDown", code: "ArrowDown", keyCode: 40})
+        // await fireEvent.keyDown(menu, {key: " ", code: "Space", keyCode: 32})
+        
+        // method 2
+        await user.keyboard("{ArrowDown}")
+        await user.keyboard("{ArrowDown}")
+        await user.keyboard("{Space}")
+        
+        // method 3
+        // document.dispatchEvent(downArrow)
+        // document.dispatchEvent(downArrow)
+        // document.dispatchEvent(space)
+
+        const menuItem = result.queryByTestId("dropdown-item-pink");
+        await waitFor(() => {
+          expect(input.innerHTML).toContain("pink")
+          expect(menuItem.getAttribute("aria-selected")).toBe("true");
+        })
+      })
+    }
   })
 
 });
