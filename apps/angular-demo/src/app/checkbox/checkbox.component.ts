@@ -10,6 +10,8 @@ export class CheckboxComponent {
   checkbox1Checked = false;
   checkbox2Checked = true;
   checkbox3Checked = false;
+  bindingVal = "";
+  bindingNoVal = "";
 
   constructor() { }
 

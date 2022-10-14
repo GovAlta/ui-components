@@ -126,7 +126,7 @@ export const BasicTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" [value]="color" (_change)="onChange($event)">
+      <goa-radio-group name="color" goaValue ([ngModel]="color")>
         <goa-radio-item name="color" value="red"></goa-radio-item>
         <goa-radio-item name="color" value="blue"></goa-radio-item>
         <goa-radio-item name="color" value="orange"></goa-radio-item>
@@ -137,9 +137,7 @@ export const BasicTemplate = (args) => {
       lang="ts"
       code={`
       export class MyComponent {
-        onChange(e: any) {
-          this.color = e.detail.value;
-        }
+        color = "";
       }
     `}
     />

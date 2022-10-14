@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import '@abgov/web-components';
+import { ValueDirective, ValuesDirective } from '@abgov/angular-components';
+
 import { InputComponentComponent } from './input-component/input-component.component';
 import { ButtonComponentComponent } from './button-component/button-component.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,11 +31,17 @@ import { TwoColumnLayoutComponent } from './two-column-layout/two-column-layout.
 import { IconButtonComponent } from './icon-button/icon-button.component';
 
 @NgModule({
-  declarations: [TwoColumnLayoutComponent, AppComponent, InputComponentComponent, ButtonComponentComponent, NavigationLinkComponent, TextAreaComponent, CheckboxComponent, RadioComponent, DropdownComponent, ModalComponent, AppFooterComponent, BadgeComponent, CalloutComponent, ChipComponent, CircularProgressComponent, HeroBannerComponent, AppHeaderComponent, MicrositeHeaderComponent, ContainerComponent, SkeletonComponent, FormItemComponent, IconButtonComponent],
+  declarations: [
+    TwoColumnLayoutComponent, AppComponent, InputComponentComponent, ButtonComponentComponent, NavigationLinkComponent, TextAreaComponent, CheckboxComponent, RadioComponent, DropdownComponent, ModalComponent, AppFooterComponent, BadgeComponent, CalloutComponent, ChipComponent, CircularProgressComponent, HeroBannerComponent, AppHeaderComponent, MicrositeHeaderComponent, ContainerComponent, SkeletonComponent, FormItemComponent, IconButtonComponent,
+    ValueDirective,
+    ValuesDirective,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

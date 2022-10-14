@@ -1,9 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDirs": [
-      "."
-    ],
+    "rootDirs": ["."],
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -12,39 +10,22 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@abgov/docs": [
-        "libs/docs/src/index.ts"
-      ],
-      "@abgov/react-components": [
-        "libs/react-components/src/index.ts"
-      ],
-      "@abgov/shared/common": [
-        "libs/shared/common/src/index.ts"
-      ],
+      "@abgov/angular-components": ["libs/angular-components/src/index.ts"],
+      "@abgov/docs": ["libs/docs/src/index.ts"],
+      "@abgov/react-components": ["libs/react-components/src/index.ts"],
+      "@abgov/shared/common": ["libs/shared/common/src/index.ts"],
       "@abgov/shared/storybook-common": [
         "libs/shared/storybook-common/src/index.ts"
       ],
-      "@abgov/styles": [
-        "dist/libs/styles/styles.esm.css"
-      ],
-      "@abgov/web-components": [
-        "dist/libs/web-components/web-components.es.js"
-      ]
+      "@abgov/styles": ["dist/libs/styles/styles.esm.css"],
+      "@abgov/web-components": ["dist/libs/web-components/web-components.es.js"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

@@ -1,6 +1,54 @@
 {
   "version": 1,
   "projects": {
+    "angular-components": {
+      "projectType": "library",
+      "root": "libs/angular-components",
+      "sourceRoot": "libs/angular-components/src",
+      "prefix": "goa",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/angular-components"],
+          "options": {
+            "project": "libs/angular-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/angular-components/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/angular-components/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/angular-components"],
+          "options": {
+            "jestConfig": "libs/angular-components/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular-components/src/**/*.ts",
+              "libs/angular-components/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "release": {
+        "builder": "@nrwl/workspace:run-commands",
+        "options": {
+          "command": "npx semantic-release -e ./libs/angular-components/.releaserc.json"
+        }
+      },
+      "tags": []
+    },
     "angular-demo": {
       "projectType": "application",
       "root": "apps/angular-demo",

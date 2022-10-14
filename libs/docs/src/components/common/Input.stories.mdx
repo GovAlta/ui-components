@@ -164,16 +164,14 @@ export const InputTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-input name="foo" (_change)="onChange($event)"></goa-input>
+      <goa-input goaValue [(ngModel)]="firstName"></goa-input>
     `}
     />
     <CodeSnippet
       lang="ts"
       code={`
       export class SomeComponent {
-        onChange(e: any) {
-          console.log(e.detail.name, e.detail.value);
-        }
+        firstName = "";  
       }
     `}
     />

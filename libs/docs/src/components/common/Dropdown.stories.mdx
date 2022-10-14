@@ -161,16 +161,17 @@ export const Template = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-dropdown name="colors"
-          [value]="selectedColor"
-          (_change)="selectColor($event)">
-          <goa-dropdown-item
-            name="colors"
-            *ngFor="let color of colors"
-            [value]="color"
-            [label]="color"
-          >
-          </goa-dropdown-item>
+      <goa-dropdown 
+        name="colors"
+        goaValue
+        [(ngModel)]="selectedColor"
+        <goa-dropdown-item
+          name="colors"
+          *ngFor="let color of colors"
+          [value]="color"
+          [label]="color"
+        >
+        </goa-dropdown-item>
       </goa-dropdown>
     `}
     />
@@ -180,9 +181,6 @@ export const Template = (args) => {
       export class MyComponent {
         colors: string[] = ['red', 'green', 'blue'];
         selectedColor: string = 'red';
-        selectColor(event: any) {
-          this.selectedColor = event.detail.value;
-        }
       }
     `}
     />

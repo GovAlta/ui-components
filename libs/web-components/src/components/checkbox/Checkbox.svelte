@@ -2,6 +2,8 @@
 
 <!-- Script -->
 <script lang="ts">
+  import { onMount } from "svelte";
+
   import { fromBoolean, toBoolean } from "../../common/utils";
   // Required
   export let name: string;
@@ -10,20 +12,30 @@
   // Optional values
   export let text: string = "";
   export let value: string = "";
-  export let disabled: string;
-  export let error: string;
+  export let disabled: string = "false";
+  export let error: string = "false";
   export let testid: string = "";
 
+  // Private
+  let _value: string;
+
+  // Binding
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
   $: isIndeterminate = false; // Desighn review. To be built with TreeView Later
 
+
+  onMount(() => {
+    // hold on to the initial value to prevent losing it on check changes
+    _value = value;  
+  })
+
   function onChange(e: Event) {
     // An empty string is required as setting the second value to `null` caused the data to get
     // out of sync with the events.
     const newCheckStatus = !isChecked;
-    const _value = newCheckStatus ? `${value || "checked"}` : "";
+    const newValue = newCheckStatus ? `${_value || "checked"}` : "";
  
     // set the local state
     checked = fromBoolean(newCheckStatus);
@@ -31,7 +43,7 @@
     e.target.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
-        detail: { name, checked: newCheckStatus, value: _value },
+        detail: { name, checked: newCheckStatus, value: newValue },
       }),
     );
   }
