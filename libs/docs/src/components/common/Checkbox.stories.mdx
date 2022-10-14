@@ -121,12 +121,12 @@ onChangeCheckboxTemplate.args = {
     <CodeSnippet
       code={`
         <goa-checkbox
+          goaValue
           name="desserts"
           text="Ice Cream"
           value="10"
-          [checked]="dessertsChecked"
-          (_change)="onChange($event)" >
-        </goa-checkbox>
+          [(ngModel)]="bindingVal"
+        ></goa-checkbox>
       `}
       lang="html"
     />
@@ -134,11 +134,7 @@ onChangeCheckboxTemplate.args = {
       lang="ts"
       code={`
       export class SomeComponent {
-        let dessertsChecked = false;
-        onChange(e: any) {
-          this.dessertsChecked = !this.dessertsChecked;
-          console.log(e.detail.name, e.detail.checked, e.detail.value);
-        }
+        iceCreamCost = "";
       }
     `}
     />

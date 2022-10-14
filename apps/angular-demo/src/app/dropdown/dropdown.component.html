@@ -49,3 +49,15 @@
     </goa-dropdown-item>
   </goa-dropdown>
 </div>
+
+<h2>Binding</h2>
+<div>Selected Color: {{boundVal}}</div>
+<goa-dropdown
+  name="boundColor"
+  [(ngModel)]="boundVal"
+  placeholder="Select a color"
+>
+  <goa-dropdown-item value="red" name="boundColor" label="Red"></goa-dropdown-item>
+  <goa-dropdown-item value="green" name="boundColor" label="Green"></goa-dropdown-item>
+  <goa-dropdown-item value="blue" name="boundColor" label="Blue"></goa-dropdown-item>
+</goa-dropdown>

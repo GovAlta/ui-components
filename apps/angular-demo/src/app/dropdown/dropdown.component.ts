@@ -9,6 +9,7 @@ export class DropdownComponent {
 
   colors: string[] = ['red', 'green', 'blue'];
   selectedColor = "red";
+  boundVal = "";
 
   groups = [
     {

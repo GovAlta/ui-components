@@ -9,6 +9,8 @@ export class RadioComponent {
 
   constructor() { }
 
+  boundVal = ""
+
   dynamicItems = [
     {
       name: "Fruits", 

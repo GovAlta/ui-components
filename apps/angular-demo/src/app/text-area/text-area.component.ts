@@ -10,6 +10,8 @@ export class TextAreaComponent {
   characterCountFieldValue = "";
   characterCountWithLimitValue = "";
 
+  boundVal = ""
+
   constructor() { }
 
   onChange(e: any) {

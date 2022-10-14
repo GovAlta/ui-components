@@ -132,16 +132,14 @@ export const noop = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea name="comment" (_change)="onChange($event)" value="Initial value"></goa-textarea>
+      <goa-textarea name="comment" goaValue ([ngModel])="description"></goa-textarea>
     `}
     />
     <CodeSnippet
       lang="ts"
       code={`
       export class SomeComponent {
-        onChange(e: any) {
-          console.log('changed', e.detail.name, e.detail.value);
-        }
+        description = "";
       }
     `}
     />

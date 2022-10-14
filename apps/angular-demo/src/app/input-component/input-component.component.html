@@ -51,3 +51,33 @@
 <goa-input type="text" name="chars" autoCapitalize="on" placeholder="on | sentences"></goa-input>
 <goa-input type="text" name="chars" autoCapitalize="words" placeholder="words"></goa-input>
 <goa-input type="text" name="chars" autoCapitalize="characters" placeholder="characters"></goa-input>
+
+<h2>Binding</h2>
+
+<p>{{wcVal}}</p>
+<goa-input [value]="wcVal" (_change)="updateInput($event)"></goa-input>
+
+<h2>Angular Reactive Forms Component using Web Component</h2>
+<p>{{reactiveFormCtrl.value}}</p>
+<p>Valid (min value 0): {{reactiveFormCtrl.valid}}</p>
+<goa-input goaValue [formControl]="reactiveFormCtrl"></goa-input>
+<goa-input goaValue [formControl]="reactiveFormCtrl"></goa-input>
+
+
+<h2>Angular Template Forms Component using Web Component</h2>
+<p>{{tempDrivenVal }}</p>
+<goa-input goaValue [(ngModel)]="tempDrivenVal"></goa-input>
+<goa-input goaValue [(ngModel)]="tempDrivenVal"></goa-input>
+
+<h2>Slider binding</h2>
+<p>{{sliderVal }}</p>
+<goa-input goaValue type="range" [(ngModel)]="sliderVal"></goa-input>
+
+
+<h2>Date binding</h2>
+<p>{{dateVal }}</p>
+<goa-input goaValue type="date" [(ngModel)]="dateVal"></goa-input>
+
+<h2>Values binding</h2>
+<p>{{arrayVal | json }}</p>
+<goa-input goaValues [(ngModel)]="arrayVal"></goa-input>
