@@ -30,7 +30,7 @@
 
 
 <h2>Form row</h2>
-<goa-input type="number" name="firstName" min="0" max="6" step="2"></goa-input>
+<goa-input type="number" arialabel="Number Input" name="firstName" min="0" max="6" step="2"></goa-input>
 <goa-form-row gap="small">
   <goa-form-item
     label="First name"
@@ -39,6 +39,7 @@
   >
     <goa-input
       name="firstName"
+      arialabel="First Name Required"
       error
       width="100%"
       showCounter="true"
@@ -51,6 +52,6 @@
     error="Last name is required"
     helptext="Help text"
   >
-    <goa-input name="lastName" error width="100%"></goa-input>
+    <goa-input name="lastName" arialabel="Last Name" error width="100%"></goa-input>
   </goa-form-item>
 </goa-form-row>
