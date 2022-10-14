@@ -26,7 +26,7 @@
 
   $: _size = {
     small: "1rem",
-    medium: "1.5rem",
+    medium: "1rem",
     large: "2rem",
   }[size];
 
