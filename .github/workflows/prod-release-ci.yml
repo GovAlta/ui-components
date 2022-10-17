@@ -31,7 +31,7 @@ jobs:
         id: last_successful_commit
         with:
           branch: ${{ steps.get_branch_name.outputs.short_ref }}
-          workflow_id: beta-release-ci.yml
+          workflow_id: release-ci.yml
           github_token: ${{ secrets.RELEASE_TOKEN }}
       - name: Lint
         run: npx nx affected --target=lint --base=${{ steps.last_successful_commit.outputs.commit_hash }}
@@ -39,18 +39,39 @@ jobs:
         run: npx nx affected --target=test --base=${{ steps.last_successful_commit.outputs.commit_hash }}
       - name: Build
         run: |
-          npx nx affected --target=build --base=${{ steps.last_successful_commit.outputs.commit_hash }} --prod --with-deps
-          npx nx affected --target=post --base=${{ steps.last_successful_commit.outputs.commit_hash }}
+          npx nx affected --target=build --base=${{ steps.last_successful_commit.outputs.commit_hash }} --prod --with-deps --exclude=angular-components
+          npx nx affected --target=post --base=${{ steps.last_successful_commit.outputs.commit_hash }} --exclude=angular-components
+      - name: Build Storybooks
+        run: |
+          npm run build:docs-storybook
+          cp nginx.conf dist/storybook
+      - name: Oc login
+        uses: redhat-actions/oc-login@v1
+        with:
+          # URL to your OpenShift cluster.
+          # Refer to Step 2.
+          openshift_server_url: ${{ secrets.ARO_SERVER }}
+          openshift_token: ${{ secrets.ARO_TOKEN }}
+
+          # Disables SSL cert checking. Use this if you don't have the certificate authority data.
+          insecure_skip_tls_verify: true
+          # This method is more secure, if the certificate from Step 4 is available.
+          # certificate_authority_data: ${{ secrets.CA_DATA }}
+
+          # Optional - this sets your Kubernetes context's current namespace after logging in.
+          namespace: ui-components-build
+      - name: Start Build
+        run: oc start-build ui-components --from-dir dist/storybook --follow
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx nx affected --target release --base=${{ steps.last_successful_commit.outputs.commit_hash }}
+        run: npx nx affected --target release --base=${{ steps.last_successful_commit.outputs.commit_hash }} --exclude=angular-components
 
   deployProd:
     # The type of runner that the job will run on
     runs-on: ubuntu-20.04
-    needs: deployTest
+    needs: build
     environment:
       name: Prod
     steps:
@@ -59,8 +80,8 @@ jobs:
         with:
           # URL to your OpenShift cluster.
           # Refer to Step 2.
-          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER }}
-          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+          openshift_server_url: ${{ secrets.ARO_SERVER }}
+          openshift_token: ${{ secrets.ARO_TOKEN }}
 
           # Disables SSL cert checking. Use this if you don't have the certificate authority data.
           insecure_skip_tls_verify: true
@@ -68,10 +89,10 @@ jobs:
           # certificate_authority_data: ${{ secrets.CA_DATA }}
 
           # Optional - this sets your Kubernetes context's current namespace after logging in.
-          namespace: ui-components-dev
-      - name: Tag Prod
-        run: oc tag ui-components:test ui-components:prod
-      - name: Deploy Prod
+          namespace: ui-components-build
+      - name: Tag Dev
+        run: oc tag ui-components:latest ui-components:prod
+      - name: Deploy Dev
         run: |
           oc project ui-components-prod
           oc rollout latest dc/ui-components
