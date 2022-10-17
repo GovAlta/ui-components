@@ -68,7 +68,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx nx affected --target release --base=${{ steps.last_successful_commit.outputs.commit_hash }} --exclude=angular-components
 
-  deployDev:
+  deployProd:
     # The type of runner that the job will run on
     runs-on: ubuntu-20.04
     needs: build
