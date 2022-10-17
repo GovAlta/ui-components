@@ -61,7 +61,7 @@ jobs:
           # Optional - this sets your Kubernetes context's current namespace after logging in.
           namespace: ui-components-build
       - name: Start Build
-        run: oc start-build ui-components --from-dir dist/storybook --follow
+        run: oc start-build ui-components --from-dir dist/storybook --follow --wait
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
