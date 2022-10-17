@@ -104,29 +104,10 @@ export default function Input() {
         type="text"
       />
 
-      <h2>Character count</h2>
-      <GoAInput
-        name="firstname"
-        value=""
-        onChange={noop}
-        type="text"
-        maxCharCount={20}
-      />
-
-      <h2>Character count with limit</h2>
-      <GoAInput
-        name="firstname"
-        value=""
-        onChange={noop}
-        type="text"
-        showCounter={true}
-        maxCharCount={20}
-      />
- 
-     <h2>Prefix and Suffix</h2>
-     <GoAInput name="input" value="" prefix="$" onChange={noop} />
-     <GoAInput name="input" value="" suffix="items" onChange={noop} />
-     <GoAInput name="input" value="" prefix="$" suffix="per item" onChange={noop} />
+      <h2>Prefix and Suffix</h2>
+      <GoAInput name="input" value="" prefix="$" onChange={noop} />
+      <GoAInput name="input" value="" suffix="items" onChange={noop} />
+      <GoAInput name="input" value="" prefix="$" suffix="per item" onChange={noop} />
     </>
   );
 }

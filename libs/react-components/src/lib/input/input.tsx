@@ -36,8 +36,6 @@ interface WCProps {
   error?: boolean;
   readonly?: boolean;
   focused?: boolean;
-  showcounter?: boolean;
-  maxcharcount?: number;
   handletrailingiconclick: boolean;
   width?: string;
   prefix?: string;
@@ -78,8 +76,6 @@ interface BaseProps {
   readonly?: boolean;
   error?: boolean;
   width?: string;
-  showCounter?: boolean;
-  maxCharCount?: number;
   prefix?: string;
   suffix?: string;
   testId?: string;
@@ -127,8 +123,6 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   placeholder,
   error,
   width,
-  showCounter,
-  maxCharCount,
   testId,
   min,
   max,
@@ -183,8 +177,6 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
       step={step}
       prefix={prefix}
       suffix={suffix}
-      showcounter={showCounter}
-      maxcharcount={maxCharCount}
       handletrailingiconclick={!!onTrailingIconClick}
     />
   );
