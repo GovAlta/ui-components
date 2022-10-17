@@ -54,7 +54,7 @@ describe("GoA FormItem", () => {
     expect(label).toBeTruthy();
 
     const requirement = document.querySelector("em");
-    expect(requirement).toContain("required");
+    expect(requirement.innerHTML).toContain("required");
 
     const helpText = document.querySelector(".help-msg");
     expect(helpText).toBeFalsy();
