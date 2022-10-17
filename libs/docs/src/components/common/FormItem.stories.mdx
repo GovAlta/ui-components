@@ -24,7 +24,7 @@ import {
 
 # Form item
 
-### A form item wraps an input control such as a text input, checkbox, or radio with a text label, optional label, helper text, and error text.
+### A form item wraps an input control such as a text input, checkbox, or radio with a text label, requirement label, helper text, and error text.
 
 ---
 
@@ -49,10 +49,9 @@ import {
     description="Error text displayed under the form field. Leave blank to indicate valid field."
   />
   <Prop
-    name="optional"
-    type="boolean"
-    defaultValue="false"
-    description="Show/hide an optional indicator next to the text label."
+    name="requirement"
+    type="optional | required"
+    description="Marks the field with optional/required label."
   />
 </Props>
 
@@ -181,33 +180,33 @@ import {
   </Tab>
 </Tabs>
 
-## Optional label
+## Requirement label
 
-<Story name="Optional label">
-  <GoAFormItem label="First name" optional>
+<Story name="Requirement label">
+  <GoAFormItem label="First name" requirement="required">
     <GoAInput name="firstName"/>
   </GoAFormItem>
   <div style={{ padding: '8px'}}></div>
-  <GoAFormItem label="Checkbox Colors" optional>
+  <GoAFormItem label="Checkbox Colors" requirement="optional">
     <GoACheckbox name="colors" text="Red" value="red"></GoACheckbox>
     <GoACheckbox name="colors" text="Blue" value="blue"></GoACheckbox>
   </GoAFormItem>
   <div style={{ padding: '8px'}}></div>
-  <GoAFormItem label="Radio Colors" optional>
+  <GoAFormItem label="Radio Colors" requirement="required">
     <GoARadioGroup name="colors">
         <GoARadioItem name="colors" label="Red" value="red" />
         <GoARadioItem name="colors" label="Blue" value="blue" />
     </GoARadioGroup>
   </GoAFormItem>
   <div style={{ padding: '8px'}}></div>
-  <GoAFormItem label="Dropdown Colors" optional>
+  <GoAFormItem label="Dropdown Colors" requirement="optional">
     <GoADropdown name="colors">
       <GoADropdownOption name="colors" value="red" label="Red" />
       <GoADropdownOption name="colors" value="green" label="Green" />
     </GoADropdown>
   </GoAFormItem>
   <div style={{ padding: '8px'}}></div>
-  <GoAFormItem label="Button label" optional>
+  <GoAFormItem label="Button label" requirement="required">
     <GoAButtonGroup alignment="start">
       <GoAButton type="primary">Next</GoAButton>
     </GoAButtonGroup>
@@ -219,26 +218,26 @@ import {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-form-item label="First name" optional>
+      <goa-form-item label="First name" requirement="required">
         <goa-input name="firstName" />
       </goa-form-item>
-      <goa-form-item label="Checkbox Colors" optional>
+      <goa-form-item label="Checkbox Colors" requirement="optional">
         <goa-checkbox name="colors" text="Red" value="red"></goa-checkbox>
         <goa-checkbox name="colors" text="Blue" value="blue"></goa-checkbox>
       </goa-form-item>
-      <goa-form-item label="Radio Colors" optional>
+      <goa-form-item label="Radio Colors" requirement="required">
         <goa-radio-group name="colors">
             <goa-radio-item name="colors" label="Red" value="red" />
             <goa-radio-item name="colors" label="Blue" value="blue" />
         </goa-radio-group>
       </goa-form-item>
-      <goa-form-item label="Dropdown Colors" optional>
+      <goa-form-item label="Dropdown Colors" requirement="optional">
         <goa-dropdown name="colors">
           <goa-dropdown-item name="colors" value="red" label="Red" />
           <goa-dropdown-item name="colors" value="green" label="Green" />
         </goa-dropdown>
       </goa-form-item>
-      <goa-form-item label="Button label" optional>
+      <goa-form-item label="Button label" requirement="required">
           <goa-button type="primary">Next</goa-button>
       </goa-form-item>
     `}
@@ -248,26 +247,26 @@ import {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-form-item label="First name" optional>
+      <goa-form-item label="First name" requirement="required">
         <goa-input name="firstName"></goa-input>
       </goa-form-item>
-      <goa-form-item label="Checkbox Colors" optional>
+      <goa-form-item label="Checkbox Colors" requirement="optional">
         <goa-checkbox name="colors" text="Red" value="red"></goa-checkbox>
         <goa-checkbox name="colors" text="Blue" value="blue"></goa-checkbox>
       </goa-form-item>
-      <goa-form-item label="Radio Colors" optional>
+      <goa-form-item label="Radio Colors" requirement="required">
         <goa-radio-group name="colors">
             <goa-radio-item name="colors" label="Red" value="red"></goa-radio-item>
             <goa-radio-item name="colors" label="Blue" value="blue"></goa-radio-item>
         </goa-radio-group>
       </goa-form-item>
-      <goa-form-item label="Dropdown Colors" optional>
+      <goa-form-item label="Dropdown Colors" requirement="optional">
         <goa-dropdown name="colors">
           <goa-dropdown-item name="colors" value="red" label="Red"></goa-dropdown-item>
           <goa-dropdown-item name="colors" value="green" label="Green"></goa-dropdown-item>
         </goa-dropdown>
       </goa-form-item>
-      <goa-form-item label="Button label" optional>
+      <goa-form-item label="Button label" requirement="required">
           <goa-button type="primary">Next</goa-button>
       </goa-form-item>
     `}
@@ -277,26 +276,26 @@ import {
     <CodeSnippet
       lang="tsx"
       code={`
-          <GoAFormItem label="First name" optional>
+          <GoAFormItem label="First name" requirement="required">
             <GoAInput name="firstName" value="" onChange={() => void 0}/>
           </GoAFormItem>
-          <GoAFormItem label="Checkbox Colors" optional>
+          <GoAFormItem label="Checkbox Colors" requirement="optional">
             <GoACheckbox name="colors" text="Red" value="red" checked={false}></GoACheckbox>
             <GoACheckbox name="colors" text="Blue" value="blue" checked={false}></GoACheckbox>
           </GoAFormItem>
-          <GoAFormItem label="Radio Colors" optional>
+          <GoAFormItem label="Radio Colors" requirement="required">
             <GoARadioGroup name="colors" onChange={() => { }}>
                 <GoARadioItem name="colors" label="Red" value="red" />
                 <GoARadioItem name="colors" label="Blue" value="blue" />
             </GoARadioGroup>
           </GoAFormItem>
-          <GoAFormItem label="Dropdown Colors" optional>
+          <GoAFormItem label="Dropdown Colors" requirement="optional">
             <GoADropdown name="colors" error={false} value="" onChange={() => { }}>
               <GoADropdownOption name="colors" value="red" label="Red" />
               <GoADropdownOption name="colors" value="green" label="Green" />
             </GoADropdown>
           </GoAFormItem>
-            <GoAFormItem label="Button label" optional>
+            <GoAFormItem label="Button label" requirement="required">
             <GoAButtonGroup alignment="start">
               <GoAButton type="primary">Next</GoAButton>
             </GoAButtonGroup>

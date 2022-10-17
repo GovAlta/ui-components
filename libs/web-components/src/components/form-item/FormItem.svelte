@@ -4,13 +4,14 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
 
+  type RequirementText = "optional" | "required";
+
   // Optional
   export let label: string = "";
   export let helptext: string = "";
   export let error: string = "";
-  export let optional: string = "false";
+  export let requirement: RequirementText = "";
 
-  $: isOptional = toBoolean(optional);
 </script>
 
 <!-- HTML -->
@@ -18,8 +19,8 @@
   {#if label}
     <div class="label">
       {label}
-      {#if isOptional}
-        <em>(optional)</em>
+      {#if requirement}
+        <em>({requirement})</em>
       {/if}
     </div>
   {/if}

@@ -12,7 +12,7 @@ export default function FormItem() {
 
       <br />
       <h2>Optional</h2>
-      <GoAFormItem label="First name" optional>
+      <GoAFormItem label="First name" requirement="optional">
         <GoAInput name="firstName2" value="" onChange={() => void 0} type="text"></GoAInput>
       </GoAFormItem>
 
@@ -28,9 +28,10 @@ export default function FormItem() {
         label="First name"
         error="First name is required"
         helpText="Help text"
+        requirement="required"
       >
         <GoAInput name="firstName4" value="" onChange={() => void 0} type="text" error></GoAInput>
-      </GoAFormItem>
+      </GoAFormItem >
 
       <br />
       <h2>Form row</h2>

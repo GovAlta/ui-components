@@ -7,7 +7,7 @@
 
 
 <h2>Optional</h2>
-<goa-form-item label="Middle name" optional>
+<goa-form-item label="Middle name" requirement="optional">
   <goa-input arialabel="Middle Name"  name="middleName" type="text"></goa-input>
 </goa-form-item>
 
@@ -24,6 +24,7 @@
   error="First name is required"
   helptext="Help text"
   id ="fn_error"
+  requirement="required"
 >
   <goa-input arialabel="First Name capital" name="firstName" type="text" error></goa-input>
 </goa-form-item>
