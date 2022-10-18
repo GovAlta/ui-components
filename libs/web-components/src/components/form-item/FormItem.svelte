@@ -3,8 +3,15 @@
 <!-- Script -->
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
-
-  type RequirementType = "optional" | "required";
+  import { onMount } from "svelte";
+  
+  const REQUIREMENT_TYPES = ["optional", "required"];
+  type RequirementType = (typeof REQUIREMENT_TYPES)[number];
+  
+  // type check function
+  function isRequirementType(value: string): value is RequirementType {
+    return REQUIREMENT_TYPES.includes(value);
+  }
 
   // Optional
   export let label: string = "";
@@ -12,6 +19,12 @@
   export let error: string = "";
   export let requirement: RequirementType = "";
 
+  onMount(() => {
+    if (!isRequirementType(requirement)) {
+      throw "Invalid requirement type";
+    }
+  })
+  
 </script>
 
 <!-- HTML -->
@@ -19,7 +32,7 @@
   {#if label}
     <div class="label">
       {label}
-      {#if requirement}
+      {#if REQUIREMENT_TYPES.includes(requirement)}
         <em>({requirement})</em>
       {/if}
     </div>

@@ -23,7 +23,7 @@ describe("GoA FormItem", () => {
     expect(errMsg).toBeFalsy();
   });
 
-  it("should not show optional text for a required (default) field", async () => {
+  it("should not show any requirement text for a field when requirement is not set", async () => {
     const result = render(GoAFormItem, {
       label: "Credit Card Number"
     });
@@ -34,6 +34,26 @@ describe("GoA FormItem", () => {
 
     const requirement = document.querySelector("em");
     expect(requirement).toBeFalsy();
+
+    const helpText = document.querySelector(".help-msg");
+    expect(helpText).toBeFalsy();
+
+    const errMsg = document.querySelector(".error-msg");
+    expect(errMsg).toBeFalsy();
+  });
+
+  it("should show optional text for a field when requirement set to optional", async () => {
+    const result = render(GoAFormItem, {
+      label: "Credit Card Number",
+      requirement: "optional"
+    });
+    const el = result.container.querySelector(".goa-form-item");
+
+    const label = el.querySelector(".label");
+    expect(label).toBeTruthy();
+
+    const requirement = document.querySelector("em");
+    expect(requirement.innerHTML).toContain("optional");
 
     const helpText = document.querySelector(".help-msg");
     expect(helpText).toBeFalsy();
@@ -63,7 +83,30 @@ describe("GoA FormItem", () => {
     expect(errMsg).toBeFalsy();
   });
 
+  it("should not show any text for a field when requirement value is mispelled/invalid", async () => {
+    try{
+      render(GoAFormItem, {
+        label: "Credit Card Number",
+        requirement: "requireddd"
+      });
+    }
+    catch (e:any){ 
+      console.log(e,'error');
+    }
 
+    const label = document.querySelector(".label");
+    expect(label).toBeTruthy();
+
+    const requirement = document.querySelector("em");
+    expect(requirement).toBeNull();
+
+    const helpText = document.querySelector(".help-msg");
+    expect(helpText).toBeFalsy();
+
+    const errMsg = document.querySelector(".error-msg");
+    expect(errMsg).toBeFalsy();
+  });
+  
   it("should render all params", async () => {
     render(GoAFormItem, {
       label: "the label",
