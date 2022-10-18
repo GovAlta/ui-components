@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 
-type RequirementText = 'optional' | 'required'
+type RequirementType = 'optional' | 'required'
 
 interface WCProps {
   label: string;
-  requirement?: RequirementText;
+  requirement?: RequirementType;
   error?: string;
   helptext?: string;
 }
@@ -20,7 +20,7 @@ declare global {
 
 interface GoAFormItemProps {
   label: string;
-  requirement?: RequirementText;
+  requirement?: RequirementType;
   error?: string;
   helpText?: string;
   children?: React.ReactNode;

@@ -4,13 +4,13 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
 
-  type RequirementText = "optional" | "required";
+  type RequirementType = "optional" | "required";
 
   // Optional
   export let label: string = "";
   export let helptext: string = "";
   export let error: string = "";
-  export let requirement: RequirementText = "";
+  export let requirement: RequirementType = "";
 
 </script>
 
