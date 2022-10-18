@@ -2,7 +2,7 @@ import svelte from "rollup-plugin-svelte";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import livereload from "rollup-plugin-livereload";
-import css from "rollup-plugin-css-only";
+// import css from "rollup-plugin-css-only";
 import preprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 
@@ -55,7 +55,7 @@ export default {
     }),
     // we'll extract any component CSS out into
     // a separate file - better for performance
-    css({ output: "bundle.css" }),
+    // css({ output: "bundle.css" }),
 
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
