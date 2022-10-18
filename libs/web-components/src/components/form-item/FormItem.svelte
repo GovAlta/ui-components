@@ -5,7 +5,7 @@
   import { toBoolean } from "../../common/utils";
   import { onMount } from "svelte";
   
-  const REQUIREMENT_TYPES = ["optional", "required"];
+  const REQUIREMENT_TYPES = ["optional", "required", ""];
   type RequirementType = (typeof REQUIREMENT_TYPES)[number];
   
   // type check function
@@ -32,7 +32,7 @@
   {#if label}
     <div class="label">
       {label}
-      {#if REQUIREMENT_TYPES.includes(requirement)}
+      {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
         <em>({requirement})</em>
       {/if}
     </div>

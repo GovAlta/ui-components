@@ -82,30 +82,6 @@ describe("GoA FormItem", () => {
     const errMsg = document.querySelector(".error-msg");
     expect(errMsg).toBeFalsy();
   });
-
-  it("should not show any text for a field when requirement value is mispelled/invalid", async () => {
-    try{
-      render(GoAFormItem, {
-        label: "Credit Card Number",
-        requirement: "requireddd"
-      });
-    }
-    catch (e:any){ 
-      console.log(e,'error');
-    }
-
-    const label = document.querySelector(".label");
-    expect(label).toBeTruthy();
-
-    const requirement = document.querySelector("em");
-    expect(requirement).toBeNull();
-
-    const helpText = document.querySelector(".help-msg");
-    expect(helpText).toBeFalsy();
-
-    const errMsg = document.querySelector(".error-msg");
-    expect(errMsg).toBeFalsy();
-  });
   
   it("should render all params", async () => {
     render(GoAFormItem, {
@@ -142,6 +118,30 @@ describe("GoA FormItem", () => {
 
     const requirement = document.querySelector("em");
     expect(requirement).toBeNull();
+  });
+  
+  it("should not show any text for a field when requirement value is mispelled/invalid", async () => {
+    try{
+      render(GoAFormItem, {
+        label: "Credit Card Number",
+        requirement: "requireddd"
+      });
+    }
+    catch (e:any){ 
+      console.log(e,'error');
+    }
+
+    const label = document.querySelector(".label");
+    expect(label).toBeTruthy();
+
+    const requirement = document.querySelector("em");
+    expect(requirement).toBeNull();
+
+    const helpText = document.querySelector(".help-msg");
+    expect(helpText).toBeFalsy();
+
+    const errMsg = document.querySelector(".error-msg");
+    expect(errMsg).toBeFalsy();
   });
 
 });
