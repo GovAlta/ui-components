@@ -45,8 +45,6 @@ export default function FormItem() {
             type="text"
             error
             width="100%"
-            showCounter={true}
-            maxCharCount={20}
           ></GoAInput>
         </GoAFormItem>
         <GoAFormItem

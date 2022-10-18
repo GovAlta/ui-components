@@ -44,17 +44,12 @@
   export let prefix: string = "";
   export let suffix: string = "";
 
-  // character counter
-  export let showcounter: string = "false";
-  export let maxcharcount: number = 0;
-
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
-  $: showCounter = toBoolean(showcounter);
 
   let inputEl: HTMLElement;
   $: if (isFocused && inputEl) {
@@ -162,21 +157,7 @@
       <span class="suffix">{ suffix }</span>
     {/if}
   </div>
-
-  <!-- Counter -->
-  {#if showCounter}
-    {#if maxcharcount > 0}
-      <div class="counter" class:counter-error={value.length > maxcharcount}>
-        {value.length}{`/${maxcharcount}`}
-      </div>
-    {:else if value.length > 0}
-      <div class="counter">
-        {value.length}
-      </div>
-    {/if}
-  {/if}
 </div>
-
 <!-- Styles -->
 <style>
   :host {
@@ -337,17 +318,6 @@
   .variant--bare:active,
   .variant--bare:focus-within {
     box-shadow: none;
-  }
-
-  .counter {
-    position: absolute;
-    padding-top: 0.25rem;
-    right: 0;
-    font-size: var(--fs-sm);
-  }
-
-  .counter-error {
-    color: var(--goa-color-interactive--error);
   }
 
   .error:hover,
