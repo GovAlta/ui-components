@@ -71,21 +71,16 @@ import { GoATextArea } from '@abgov/react-components';
     defaultValue="false"
     description="Show/hide the character counter"
   />
-  <Prop name="maxCharCount" type="number" description="Set the max character count" />
-
+  <Prop
+    name="maxCharCount"
+    type="number"
+    description="Set the max character count"
+  />
   <Prop
     name="ariaLabel"
     type="string"
     description="Defines how the text will be translated for the screen reader. If not specified it will fall back to the name"
   />
-  <Prop
-    name="_change"
-    lang="angular"
-    type="CustomEvent<{detail: { name: string, value: string }}>"
-    description="Event triggered on each input value change"
-  />
-
-
   <Prop
     name="onChange"
     lang="react"
@@ -115,53 +110,53 @@ export const noop = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea id="comment" name="comment" value="Initial value" />
-    `}
+        <goa-textarea id="comment" name="comment" value="Initial value" />
+      `}
     />
     <CodeSnippet
       lang="js"
       code={`
-      var textarea = document.getElementById('comment');
-      textarea.addEventListener('_change', function(e) {
-        console.log('changed', e.detail.name, e.detail.value);
-      });
-    `}
+        var textarea = document.getElementById('comment');
+        textarea.addEventListener('_change', function(e) {
+          console.log('changed', e.detail.name, e.detail.value);
+        });
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea name="comment" goaValue ([ngModel])="description"></goa-textarea>
-    `}
+        <goa-textarea name="comment" goaValue ([ngModel])="description"></goa-textarea>
+      `}
     />
     <CodeSnippet
       lang="ts"
       code={`
-      export class SomeComponent {
-        description = "";
-      }
-    `}
+        export class SomeComponent {
+          description = "";
+        }
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      export function MyPage() {
-        const [value, setValue] = useState<string>('Initial value');
-        return (
-          <GoATextArea
-            value={value}
-            name="comment"
-            onChange={(name, value) => {
-              setValue(value);
-              console.log('changed', name, value);
-            }}
-          />
-        )
-      }
-    `}
+        export function MyPage() {
+          const [value, setValue] = useState<string>('Initial value');
+          return (
+            <GoATextArea
+              value={value}
+              name="comment"
+              onChange={(name, value) => {
+                setValue(value);
+                console.log('changed', name, value);
+              }}
+            />
+          )
+        }
+      `}
     />
   </Tab>
 </Tabs>
@@ -193,35 +188,36 @@ export const CharCountTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea name="comment" showCounter="true" (_change)="onChange($event)" [value]="val"></goa-textarea>
-    `}
+        <goa-textarea
+          goaValue
+          name="comment"
+          showCounter="true"
+          [(ngModel)]="val"
+        ></goa-textarea>
+      `}
     />
     <CodeSnippet
       lang="ts"
       code={`
-      export class SomeComponent {
-        val = "";
-        onChange(e: any) {
-          val = e.detail.value;
-          console.log('changed', e.detail.name, e.detail.value);
+        export class SomeComponent {
+          val = "";
         }
-      }
-    `}
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       code={`
-      const [value, setValue] = useState('');
-      return (
-        <GoATextArea
-          name="firstname"
-          value={value}
-          showCounter={true}
-          onChange={(name, value) => setValue(value)}
-        />
-      )
-    `}
+        const [value, setValue] = useState('');
+        return (
+          <GoATextArea
+            name="firstname"
+            value={value}
+            showCounter={true}
+            onChange={(name, value) => setValue(value)}
+          />
+        )
+      `}
       lang="tsx"
     />
   </Tab>
@@ -257,36 +253,38 @@ export const CharCountWithLimitTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea name="comment" showCounter="true" maxCharCount="20" (_change)="onChange($event)" [value]="val"></goa-textarea>
-    `}
+        <goa-textarea
+          goaValue
+          name="comment"
+          showCounter="true"
+          maxCharCount="20"
+          [(ngModel)]="val"
+        ></goa-textarea>
+      `}
     />
     <CodeSnippet
       lang="ts"
       code={`
-      export class SomeComponent {
-        val = "";
-        onChange(e: any) {
-          val = e.detail.value;
-          console.log('changed', e.detail.name, e.detail.value);
+        export class SomeComponent {
+          val = "";
         }
-      }
-    `}
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       code={`
-      const [value, setValue] = useState('');
-      return (
-        <GoATextArea
-          name="firstname"
-          value={value}
-          showCounter={true}
-          maxCharCount={20}
-          onChange={(name, value) => setValue(value)}
-        />
-      )
-    `}
+        const [value, setValue] = useState('');
+        return (
+          <GoATextArea
+            name="firstname"
+            value={value}
+            showCounter={true}
+            maxCharCount={20}
+            onChange={(name, value) => setValue(value)}
+          />
+        )
+      `}
       lang="tsx"
     />
   </Tab>
@@ -303,24 +301,24 @@ export const CharCountWithLimitTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea name="comment" disabled />
-    `}
+        <goa-textarea name="comment" disabled />
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea name="comment" disabled ></goa-textarea>
-    `}
+        <goa-textarea name="comment" disabled></goa-textarea>
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoATextArea name="comment" disabled={true} />
-    `}
+        <GoATextArea name="comment" disabled={true} />
+      `}
     />
   </Tab>
 </Tabs>
@@ -340,24 +338,24 @@ export const CharCountWithLimitTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea placeholder="Tell us what you think.." name="comment" />
-    `}
+        <goa-textarea placeholder="Tell us what you think.." name="comment" />
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea placeholder="Tell us what you think.." name="comment" ></goa-textarea>
-    `}
+        <goa-textarea placeholder="Tell us what you think.." name="comment"></goa-textarea>
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoATextArea placeholder="Tell us what you think.." name="comment" onChange={noop}  />
-    `}
+        <GoATextArea placeholder="Tell us what you think.." name="comment" onChange={noop}  />
+      `}
     />
   </Tab>
 </Tabs>
@@ -373,24 +371,24 @@ export const CharCountWithLimitTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea rows="4" name="comment" />
-    `}
+        <goa-textarea rows="4" name="comment" />
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea rows="4" name="comment" ></goa-textarea>
-    `}
+        <goa-textarea rows="4" name="comment"></goa-textarea>
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoATextArea rows={4} name="comment" onChange={noop}  />
-    `}
+        <GoATextArea rows={4} name="comment" onChange={noop} />
+      `}
     />
   </Tab>
 </Tabs>
@@ -406,24 +404,24 @@ export const CharCountWithLimitTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea error name="comment" />
-    `}
+        <goa-textarea error name="comment" />
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-textarea error name="comment" ></goa-textarea>
-    `}
+        <goa-textarea error name="comment"></goa-textarea>
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoATextArea error={true} name="comment" />
-    `}
+        <GoATextArea error={true} name="comment" />
+      `}
     />
   </Tab>
 </Tabs>
