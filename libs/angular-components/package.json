@@ -8,17 +8,13 @@
   "license": "Apache-2.0",
   "keywords": [
     "GoA",
-    "template",
+    "ui-components",
     "Angular"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/GovAlta/ui-components.git",
     "directory": "libs/angular-components"
-  },
-  "peerDependencies": {
-    "@angular/common": "^12.2.0",
-    "@angular/core": "^12.2.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

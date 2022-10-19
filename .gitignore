@@ -101,3 +101,5 @@ apps/angular-demo-e2e/src/cucumber-json/callout-component.cucumber.json
 apps/angular-demo-e2e/src/cucumber-json/button-component.cucumber.json
 apps/angular-demo-e2e/src/cucumber-json/current-sprint-noop.cucumber.json
 apps/angular-demo-e2e/src/cucumber-json/button-component.cucumber.json
+
+.angular
