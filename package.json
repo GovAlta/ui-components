@@ -2,6 +2,7 @@
   "name": "abgov",
   "version": "0.0.0",
   "scripts": {
+    "init": "git config core.hooksPath .githooks",
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
