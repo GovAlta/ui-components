@@ -1,3 +1,7 @@
+#### PROJECT SETUP
+init:
+	git config core.hooksPath .githooks
+
 #### CREATE
 
 # svelte library 
@@ -52,8 +56,10 @@ react-app:
 ng-app:
 	npx nx run angular-demo:serve 
 
-demo:
-	cd libs/web-components && npm run demo
+format:
+	npm run format
+
+#### TEST
 
 #### TEST
 
