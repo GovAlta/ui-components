@@ -30,7 +30,11 @@ import { useState } from 'react';
     required="true"
     description="Must match the name assigned to the children"
   />
-  <Prop name="value" type="string" description="Value binding" />
+  <Prop
+    name="value"
+    type="string"
+    description="Value binding"
+  />
   <Prop
     name="orientation"
     type="horizontal | vertical"
@@ -42,21 +46,13 @@ import { useState } from 'react';
     type="boolean"
     defaultValue="false"
     description="Set the component to an error state"
-/>
-<Prop
-  name="disabled"
-  type="boolean"
-  defaultValue="false"
-  description="Set the component to disabled"
-/>
-
-  <Prop
-    name="_change"
-    lang="angular"
-    type="CustomEvent<{detail: {name: string, value: string}}>"
-    description="onChange event"
   />
-
+  <Prop
+    name="disabled"
+    type="boolean"
+    defaultValue="false"
+    description="Set the component to disabled"
+  />
   <Prop
     name="onChange"
     lang="react"
@@ -105,58 +101,58 @@ export const BasicTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group id="my-color" name="color" value="orange">
-        <goa-radio-item name="color" value="red" />
-        <goa-radio-item name="color" value="blue" />
-        <goa-radio-item name="color" value="orange" />
-      </goa-radio-group>
-    `}
+        <goa-radio-group id="my-color" name="color" value="orange">
+          <goa-radio-item name="color" value="red" />
+          <goa-radio-item name="color" value="blue" />
+          <goa-radio-item name="color" value="orange" />
+        </goa-radio-group>
+      `}
     />
     <CodeSnippet
       lang="js"
       code={`
-      const el = document.findById("my-color");
-      el.addEventListener("_change", (e) => {
-        console.log(e.detail.name, e.detail.value);
-      });
-    `}
+        const el = document.findById("my-color");
+        el.addEventListener("_change", (e) => {
+          console.log(e.detail.name, e.detail.value);
+        });
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" goaValue ([ngModel]="color")>
-        <goa-radio-item name="color" value="red"></goa-radio-item>
-        <goa-radio-item name="color" value="blue"></goa-radio-item>
-        <goa-radio-item name="color" value="orange"></goa-radio-item>
-      </goa-radio-group>
-    `}
+        <goa-radio-group name="color" goaValue ([ngModel]="color")>
+          <goa-radio-item name="color" value="red"></goa-radio-item>
+          <goa-radio-item name="color" value="blue"></goa-radio-item>
+          <goa-radio-item name="color" value="orange"></goa-radio-item>
+        </goa-radio-group>
+      `}
     />
     <CodeSnippet
       lang="ts"
       code={`
-      export class MyComponent {
-        color = "";
-      }
-    `}
+        export class MyComponent {
+          color = "";
+        }
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      export const MyComponent = () {
-        const [color, setColor] = useState<string>("");
-        return (
-          <GoARadioGroup name="color" value={color} onChange={(_name, value) => setColor(value) }>
-            <GoARadioItem name="color" value="red" />
-            <GoARadioItem name="color" value="blue" />
-            <GoARadioItem name="color" value="orange"/>
-          </GoARadioGroup>
-        )
-      }
-    `}
+        export const MyComponent = () {
+          const [color, setColor] = useState<string>("");
+          return (
+            <GoARadioGroup name="color" value={color} onChange={(_name, value) => setColor(value) }>
+              <GoARadioItem name="color" value="red" />
+              <GoARadioItem name="color" value="blue" />
+              <GoARadioItem name="color" value="orange"/>
+            </GoARadioGroup>
+          )
+        }
+      `}
     />
   </Tab>
 </Tabs>
@@ -185,36 +181,36 @@ export const ErrorTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" error>
-        <goa-radio-item name="color" value="red" />
-        <goa-radio-item name="color" value="blue" />
-        <goa-radio-item name="color" value="orange" />
-      </goa-radio-group>
-    `}
+        <goa-radio-group name="color" value="orange" error>
+          <goa-radio-item name="color" value="red" />
+          <goa-radio-item name="color" value="blue" />
+          <goa-radio-item name="color" value="orange" />
+        </goa-radio-group>
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" error>
-        <goa-radio-item name="color" value="red"></goa-radio-item>
-        <goa-radio-item name="color" value="blue"></goa-radio-item>
-        <goa-radio-item name="color" value="orange"></goa-radio-item>
-      </goa-radio-group>
-    `}
+        <goa-radio-group name="color" value="orange" error>
+          <goa-radio-item name="color" value="red"></goa-radio-item>
+          <goa-radio-item name="color" value="blue"></goa-radio-item>
+          <goa-radio-item name="color" value="orange"></goa-radio-item>
+        </goa-radio-group>
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoARadioGroup name="color" value="orange" error={true}>
-        <GoARadioItem name="color" value="red" />
-        <GoARadioItem name="color" value="blue" />
-        <GoARadioItem name="color" value="orange"/>
-      </GoARadioGroup>
-    `}
+        <GoARadioGroup name="color" value="orange" error={true}>
+          <GoARadioItem name="color" value="red" />
+          <GoARadioItem name="color" value="blue" />
+          <GoARadioItem name="color" value="orange"/>
+        </GoARadioGroup>
+      `}
     />
   </Tab>
 </Tabs>
@@ -232,36 +228,36 @@ Display a custom label that is different that the `value` property.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange">
-        <goa-radio-item name="color" label="Red" value="red" />
-        <goa-radio-item name="color" label="Blue" value="blue" />
-        <goa-radio-item name="color" label="Orange" value="orange" />
-      </goa-radio-group>
-    `}
+        <goa-radio-group name="color" value="orange">
+          <goa-radio-item name="color" label="Red" value="red" />
+          <goa-radio-item name="color" label="Blue" value="blue" />
+          <goa-radio-item name="color" label="Orange" value="orange" />
+        </goa-radio-group>
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange">
-        <goa-radio-item name="color" label="Red" value="red"></goa-radio-item>
-        <goa-radio-item name="color" label="Blue" value="blue"></goa-radio-item>
-        <goa-radio-item name="color" label="Orange" value="orange"></goa-radio-item>
-      </goa-radio-group>
-    `}
+        <goa-radio-group name="color" value="orange">
+          <goa-radio-item name="color" label="Red" value="red"></goa-radio-item>
+          <goa-radio-item name="color" label="Blue" value="blue"></goa-radio-item>
+          <goa-radio-item name="color" label="Orange" value="orange"></goa-radio-item>
+        </goa-radio-group>
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoARadioGroup name="color" value="orange" onChange={noop}>
-        <GoARadioItem name="color" label="Red" value="red" />
-        <GoARadioItem name="color" label="Blue" value="blue" />
-        <GoARadioItem name="color" label="Orange" value="orange"/>
-      </GoARadioGroup>
-    `}
+        <GoARadioGroup name="color" value="orange" onChange={noop}>
+          <GoARadioItem name="color" label="Red" value="red" />
+          <GoARadioItem name="color" label="Blue" value="blue" />
+          <GoARadioItem name="color" label="Orange" value="orange"/>
+        </GoARadioGroup>
+      `}
     />
   </Tab>
 </Tabs>
@@ -281,36 +277,36 @@ Display a custom label that is different that the `value` property.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" disabled>
-        <goa-radio-item name="color" value="red" />
-        <goa-radio-item name="color" value="blue" />
-        <goa-radio-item name="color" value="orange" />
-      </goa-radio-group>
-    `}
+        <goa-radio-group name="color" value="orange" disabled>
+          <goa-radio-item name="color" value="red" />
+          <goa-radio-item name="color" value="blue" />
+          <goa-radio-item name="color" value="orange" />
+        </goa-radio-group>
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" disabled>
-        <goa-radio-item name="color" value="red"></goa-radio-item>
-        <goa-radio-item name="color" value="blue"></goa-radio-item>
-        <goa-radio-item name="color" value="orange"></goa-radio-item>
-      </goa-radio-group>
-    `}
+        <goa-radio-group name="color" value="orange" disabled>
+          <goa-radio-item name="color" value="red"></goa-radio-item>
+          <goa-radio-item name="color" value="blue"></goa-radio-item>
+          <goa-radio-item name="color" value="orange"></goa-radio-item>
+        </goa-radio-group>
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoARadioGroup name="color" value="orange" onChange={noop} disabled={true}>
-        <GoARadioItem name="color" value="red" />
-        <GoARadioItem name="color" value="blue" />
-        <GoARadioItem name="color" value="orange"/>
-      </GoARadioGroup>
-    `}
+        <GoARadioGroup name="color" value="orange" onChange={noop} disabled={true}>
+          <GoARadioItem name="color" value="red" />
+          <GoARadioItem name="color" value="blue" />
+          <GoARadioItem name="color" value="orange"/>
+        </GoARadioGroup>
+      `}
     />
   </Tab>
 </Tabs>
@@ -329,36 +325,36 @@ Display a custom label that is different that the `value` property.
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" orientation="horizontal">
-        <goa-radio-item name="color" value="red" />
-        <goa-radio-item name="color" value="blue" />
-        <goa-radio-item name="color" value="orange" />
-      </goa-radio-group>
-    `}
+        <goa-radio-group name="color" value="orange" orientation="horizontal">
+          <goa-radio-item name="color" value="red" />
+          <goa-radio-item name="color" value="blue" />
+          <goa-radio-item name="color" value="orange" />
+        </goa-radio-group>
+      `}
     />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-radio-group name="color" value="orange" orientation="horizontal">
-        <goa-radio-item name="color" value="red"></goa-radio-item>
-        <goa-radio-item name="color" value="blue"></goa-radio-item>
-        <goa-radio-item name="color" value="orange"></goa-radio-item>
-      </goa-radio-group>
-    `}
+        <goa-radio-group name="color" value="orange" orientation="horizontal">
+          <goa-radio-item name="color" value="red"></goa-radio-item>
+          <goa-radio-item name="color" value="blue"></goa-radio-item>
+          <goa-radio-item name="color" value="orange"></goa-radio-item>
+        </goa-radio-group>
+      `}
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoARadioGroup name="color" value="orange" onChange={noop} orientation="horizontal">
-        <GoARadioItem name="color" value="red" />
-        <GoARadioItem name="color" value="blue" />
-        <GoARadioItem name="color" value="orange"/>
-      </GoARadioGroup>
-    `}
+        <GoARadioGroup name="color" value="orange" onChange={noop} orientation="horizontal">
+          <GoARadioItem name="color" value="red" />
+          <GoARadioItem name="color" value="blue" />
+          <GoARadioItem name="color" value="orange"/>
+        </GoARadioGroup>
+      `}
     />
   </Tab>
 </Tabs>

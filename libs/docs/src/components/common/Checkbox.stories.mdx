@@ -77,14 +77,6 @@ export const checkboxTemplate = (args) => {
     description="Show an error on the checkbox item"
   />
   <Prop
-    name="_change"
-    lang="angular"
-    type="CustomEvent<{detail: {
-     name: string, checked: boolean, value: string
-    }}>"
-    description="Callback function when checkbox is checked or unchecked"
-  />
-  <Prop
     name="onChange"
     lang="react"
     type="(name: string, checked: boolean, value: string) => void"
@@ -124,8 +116,7 @@ onChangeCheckboxTemplate.args = {
           goaValue
           name="desserts"
           text="Ice Cream"
-          value="10"
-          [(ngModel)]="bindingVal"
+          [(ngModel)]="iceCreamCost"
         ></goa-checkbox>
       `}
       lang="html"
@@ -133,33 +124,32 @@ onChangeCheckboxTemplate.args = {
     <CodeSnippet
       lang="ts"
       code={`
-      export class SomeComponent {
-        iceCreamCost = "";
-      }
-    `}
+        export class SomeComponent {
+          iceCreamCost = "10";
+        }
+      `}
     />
-
   </Tab>
   <Tab label="React">
     <CodeSnippet
       lang="jsx"
       code={`
-      const [desserts, setDesserts] = useState(false);
-      return (
-        <>
-        <GoACheckbox
-            name="desserts"
-            text="Ice Cream"
-            value="10"
-            checked={desserts}
-            onChange={(name, checked, value) => {
-              setDesserts(checked);
-              console.log(name, checked, value);
-            }}
-          />
-        </>
-      );
-    `}
+        const [desserts, setDesserts] = useState(false);
+        return (
+          <>
+          <GoACheckbox
+              name="desserts"
+              text="Ice Cream"
+              value="10"
+              checked={desserts}
+              onChange={(name, checked, value) => {
+                setDesserts(checked);
+                console.log(name, checked, value);
+              }}
+            />
+          </>
+        );
+      `}
     />
   </Tab>
 </Tabs>
@@ -192,11 +182,10 @@ checkedCheckboxTemplate.args = {
     <CodeSnippet
       code={`
         <goa-checkbox
+          goaValue
           name="desserts"
           text="Ice Cream"
-          value="10"
-          [checked]="dessertsChecked"
-          (_change)="onChange($event)" >
+          [(ngModel)]="dessertsChecked"
         </goa-checkbox>
       `}
       lang="html"
@@ -204,13 +193,9 @@ checkedCheckboxTemplate.args = {
     <CodeSnippet
       lang="ts"
       code={`
-      export class SomeComponent {
-        let dessertsChecked = true;
-        onChange(e: any) {
-          this.dessertsChecked = !this.dessertsChecked;
-          console.log(e.detail.name, e.detail.checked, e.detail.value);
+        export class SomeComponent {
+          dessertsChecked = 10;
         }
-      }
     `}
     />
 
@@ -272,12 +257,13 @@ errorCheckboxTemplate.args = {
     <CodeSnippet
       code={`
         <goa-checkbox
+          goaValue
           name="desserts"
           text="Ice Cream"
-          value="10"
+          [(ngModel)]="dessertsChecked"
           error
-          [checked]="dessertsChecked"
-          (_change)="onChange($event)" >
+          [checked]="true"
+        >
         </goa-checkbox>
       `}
       lang="html"
@@ -286,11 +272,7 @@ errorCheckboxTemplate.args = {
       lang="ts"
       code={`
       export class SomeComponent {
-        let dessertsChecked = false;
-        onChange(e: any) {
-          this.dessertsChecked = !this.dessertsChecked;
-          console.log(e.detail.name, e.detail.checked, e.detail.value);
-        }
+        let dessertsChecked;
       }
     `}
     />
