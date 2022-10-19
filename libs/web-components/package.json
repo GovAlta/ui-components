@@ -14,8 +14,6 @@
   "module": "web-components.umd.js",
   "scripts": {
     "dev": "rollup -c rollup.config.js -w",
-    "demo": "rollup -c rollup.demo.config.js -w",
-    "start": "sirv demo/public",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "license": "Apache-2.0",
@@ -41,7 +39,6 @@
     "rollup-plugin-summary": "^1.3.0",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.0",
-    "sirv-cli": "^1.0.0",
     "svelte": "^3.0.0",
     "svelte-check": "^2.0.0",
     "svelte-preprocess": "^4.0.0",
