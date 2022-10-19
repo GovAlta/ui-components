@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 
+type RequirementType = 'optional' | 'required'
+
 interface WCProps {
   label: string;
-  optional?: string;
+  requirement?: RequirementType;
   error?: string;
   helptext?: string;
 }
@@ -18,15 +20,15 @@ declare global {
 
 interface GoAFormItemProps {
   label: string;
-  optional?: boolean;
+  requirement?: RequirementType;
   error?: string;
   helpText?: string;
   children?: React.ReactNode;
 };
 
-export const GoAFormItem: FC<GoAFormItemProps> = ({ children, helpText, error, optional, label }) => {
+export const GoAFormItem: FC<GoAFormItemProps> = ({ children, helpText, error, requirement, label }) => {
   return (
-    <goa-form-item label={label} error={error} optional={optional ? "true" : "false"} helptext={helpText}>
+    <goa-form-item label={label} error={error} requirement={requirement} helptext={helpText}>
       {children}
     </goa-form-item>
   )
