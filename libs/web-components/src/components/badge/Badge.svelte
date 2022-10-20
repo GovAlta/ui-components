@@ -5,7 +5,6 @@
 import { onMount } from "svelte";
 
   import { toBoolean } from "../../common/utils";
-  // import { BadgeType, WCBoolean, WC_FALSE } from "@abgov/shared/common";
 
   export let type:
     | "success"
@@ -18,14 +17,8 @@ import { onMount } from "svelte";
 
   // optional
   export let testid: string = "";
-  export let icon: string = "false";
-
-  // required
-  // export let type: BadgeType;
-
-  // optional
   export let content: string = "";
-  // export let icon: WCBoolean = WC_FALSE;
+  export let icon: string = "false";
 
   $: showIcon = toBoolean(icon);
 

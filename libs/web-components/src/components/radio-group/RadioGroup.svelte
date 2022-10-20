@@ -12,7 +12,7 @@
   export let orientation: 'vertical' | 'horizontal' = 'vertical';
   export let disabled: string = "false";
   export let error: string = "false";
-  export let testid: string = "";
+  export let testid: string = ""; // TODO: remove this param
 
   let options: RadioMessage[] = [];
 

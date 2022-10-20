@@ -27,7 +27,7 @@
 
   onMount(() => {
     if (!isValidSize(width)) {
-      throw "Invalid PageBlock width";
+      console.error("Invalid PageBlock width");
     }
 
     _width = Sizes[width] || width;

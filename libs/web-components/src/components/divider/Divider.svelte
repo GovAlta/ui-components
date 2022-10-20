@@ -20,7 +20,7 @@
 
   onMount(() => {
     if (!isSpacing(spacing)) {
-      throw "Invalid spacing";
+      console.error("Invalid spacing");
     }
   });
 </script>

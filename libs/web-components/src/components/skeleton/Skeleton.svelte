@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let maxwidth: string;
+  export let maxwidth: string = "";
   export let size: 1 | 2 | 3 | 4 = 1;
   export let linecount: number = 3;
   export let type: "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile" | "lines";
@@ -14,7 +14,7 @@
     <svelte:self type="image" {size} />
     <div class="card-content">
       <svelte:self type="header" {size} />
-      <svelte:self type="lines" {size} count={3} />
+      <svelte:self type="lines" {size} linecount={3} />
     </div>
   </div>
 {:else if type === "profile"}
@@ -29,7 +29,7 @@
   </div>
 {:else if type === "lines"}
   {#each Array(linecount) as _item}
-    <svelte:self type="text" {size} count={linecount} />
+    <svelte:self type="text" {size} linecount={linecount} />
   {/each}
 {:else}
   <div class="skeleton {type} {`${type}-${size}`}"></div>
