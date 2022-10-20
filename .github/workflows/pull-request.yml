@@ -31,5 +31,5 @@ jobs:
       - name: Build
         run: |
           npm run build:styles 
-          npx nx affected --target=build --base=origin/${{ github.base_ref }} --exclude=vue-components
-          npx nx affected --target=post --base=origin/${{ github.base_ref }} --exclude=vue-components
+          npx nx affected --target=build --base=origin/${{ github.base_ref }}
+          npx nx affected --target=post --base=origin/${{ github.base_ref }}
