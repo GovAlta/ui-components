@@ -11,7 +11,8 @@
   gap: 4px;
 }
 
-.note-content, .note-caution p {
+.note-content,
+.note-caution p {
   font-size: var(--fs-base);
 }
 
@@ -25,7 +26,7 @@
 }
 
 .note-caution h3:before {
-  content: '';
+  content: "";
   background-image: url(./warning-outline.svg);
   width: 20px;
   height: 20px;
@@ -50,13 +51,12 @@
 }
 
 .note-dont h3:before {
-  content: '';
+  content: "";
   background-image: url(./close-circle-outline.svg);
   width: 20px;
   height: 20px;
   display: inline-block;
 }
-
 
 .note-do {
   border-left: 2px solid var(--goa-color-status-success);
@@ -68,7 +68,7 @@
 }
 
 .note-do h3:before {
-  content: '';
+  content: "";
   background-image: url(./checkmark-circle-outline.svg);
   width: 20px;
   height: 20px;

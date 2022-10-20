@@ -1,3 +1,3 @@
 export function sharedCommon(): string {
-  return 'shared-common';
+  return "shared-common";
 }

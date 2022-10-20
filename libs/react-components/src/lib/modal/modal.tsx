@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from "react";
 
 export type ModalTransition = "fast" | "slow" | "none";
 
@@ -9,14 +9,14 @@ interface WCProps {
   width?: string;
   closable?: boolean;
   scrollable?: boolean;
-  transition?: ModalTransition; 
+  transition?: ModalTransition;
 }
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-modal': WCProps & React.HTMLAttributes<HTMLElement>
+      "goa-modal": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -26,12 +26,20 @@ interface Props {
   width?: string;
   actions?: React.ReactElement;
   onClose?: () => void;
-  transition?: ModalTransition; 
+  transition?: ModalTransition;
   children?: React.ReactNode;
   open?: boolean;
 }
 
-export const GoAModal: FC<Props> = ({ heading, children, open, width, actions, transition, onClose }) => {
+export const GoAModal: FC<Props> = ({
+  heading,
+  children,
+  open,
+  width,
+  actions,
+  transition,
+  onClose,
+}) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -42,22 +50,26 @@ export const GoAModal: FC<Props> = ({ heading, children, open, width, actions, t
       onClose?.();
     };
 
-    current.addEventListener('_close', listener)
+    current.addEventListener("_close", listener);
     return () => {
-      current.removeEventListener('_close', listener);
-    }
-  }, [el, onClose])
+      current.removeEventListener("_close", listener);
+    };
+  }, [el, onClose]);
 
   return (
-    <goa-modal ref={el} heading={heading} open={open} closable={!!onClose} scrollable={true} width={width} transition={transition}>
-      {actions &&
-        <div slot="actions">
-          {actions}
-        </div>
-      }
+    <goa-modal
+      ref={el}
+      heading={heading}
+      open={open}
+      closable={!!onClose}
+      scrollable={true}
+      width={width}
+      transition={transition}
+    >
+      {actions && <div slot="actions">{actions}</div>}
       {children}
     </goa-modal>
   );
-}
+};
 
 export default GoAModal;

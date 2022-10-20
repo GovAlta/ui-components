@@ -9,46 +9,168 @@ When(/^cs Navigating to Button Type primary component$/, function () {
   cy.get("[label='Button']").click();
 });
 
-Then(/^cs I should be able to validate primary button css property$/, function () {
-  cy.get('goa-button[type="primary"]').find('button.primary').should("have.css", "border");
-  cy.get('goa-button[type="primary"]').find('button.primary').should("have.css", "border-radius", remToPx(properties["border-radius"]));
-  cy.get('goa-button[type="primary"]').find('button.primary').should("have.css", "background-color", hexToRgb(properties["goa-color-interactive"]));
-  cy.get('goa-button[type="primary"]').find('button.primary').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactiveactive"]));
-  // cy.get('goa-button[type="primary"]').find('button.primary').eq(0).click({ force: true }).should("have.css", "box-shadow", "0 0 0 3px " + hexToRgb(properties["goa-color-interactivefocus"]));
-  cy.get('goa-button[type="primary"]').find('button.primary').should("have.css", "font-family", properties["font-family"]);
-  cy.get('goa-button[type="primary"]').find('button.primary').should("have.css", "color", hexToRgb(properties["goa-color-text-light"]));
-  cy.get('goa-button[type="primary"]').find('button.primary').should("have.css", "font-size", remToPx(properties["fs-lg"]));
-});
+Then(
+  /^cs I should be able to validate primary button css property$/,
+  function () {
+    cy.get('goa-button[type="primary"]')
+      .find("button.primary")
+      .should("have.css", "border");
+    cy.get('goa-button[type="primary"]')
+      .find("button.primary")
+      .should(
+        "have.css",
+        "border-radius",
+        remToPx(properties["border-radius"])
+      );
+    cy.get('goa-button[type="primary"]')
+      .find("button.primary")
+      .should(
+        "have.css",
+        "background-color",
+        hexToRgb(properties["goa-color-interactive"])
+      );
+    cy.get('goa-button[type="primary"]')
+      .find("button.primary")
+      .eq(0)
+      .rightclick({ force: true })
+      .should(
+        "have.css",
+        "border-color",
+        hexToRgb(properties["goa-color-interactiveactive"])
+      );
+    // cy.get('goa-button[type="primary"]').find('button.primary').eq(0).click({ force: true }).should("have.css", "box-shadow", "0 0 0 3px " + hexToRgb(properties["goa-color-interactivefocus"]));
+    cy.get('goa-button[type="primary"]')
+      .find("button.primary")
+      .should("have.css", "font-family", properties["font-family"]);
+    cy.get('goa-button[type="primary"]')
+      .find("button.primary")
+      .should(
+        "have.css",
+        "color",
+        hexToRgb(properties["goa-color-text-light"])
+      );
+    cy.get('goa-button[type="primary"]')
+      .find("button.primary")
+      .should("have.css", "font-size", remToPx(properties["fs-lg"]));
+  }
+);
 
-Then(/^cs I should be able to validate secondary button css property$/, function () {
-  cy.get('goa-button[type="secondary"]').find('button.secondary').should("have.css", "border");
-  cy.get('goa-button[type="secondary"]').find('button.secondary').should("have.css", "border-radius", remToPx(properties["border-radius"]));
-  cy.get('goa-button[type="secondary"]').find('button.secondary').should("have.css", "font-family", properties["font-family"]);
-  cy.get('goa-button[type="secondary"]').find('button.secondary').should("have.css", "color", hexToRgb(properties["goa-color-interactive"]));
-  cy.get('goa-button[type="secondary"]').find('button.secondary').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactivehover"]));
-  // cy.get('goa-button[type="secondary"]').find('button.secondary').eq(0).click({ force: true }).should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]));
-  cy.get('goa-button[type="secondary"]').find('button.secondary').should("have.css", "font-size", remToPx(properties["fs-lg"]));
-});
+Then(
+  /^cs I should be able to validate secondary button css property$/,
+  function () {
+    cy.get('goa-button[type="secondary"]')
+      .find("button.secondary")
+      .should("have.css", "border");
+    cy.get('goa-button[type="secondary"]')
+      .find("button.secondary")
+      .should(
+        "have.css",
+        "border-radius",
+        remToPx(properties["border-radius"])
+      );
+    cy.get('goa-button[type="secondary"]')
+      .find("button.secondary")
+      .should("have.css", "font-family", properties["font-family"]);
+    cy.get('goa-button[type="secondary"]')
+      .find("button.secondary")
+      .should(
+        "have.css",
+        "color",
+        hexToRgb(properties["goa-color-interactive"])
+      );
+    cy.get('goa-button[type="secondary"]')
+      .find("button.secondary")
+      .eq(0)
+      .rightclick({ force: true })
+      .should(
+        "have.css",
+        "border-color",
+        hexToRgb(properties["goa-color-interactivehover"])
+      );
+    // cy.get('goa-button[type="secondary"]').find('button.secondary').eq(0).click({ force: true }).should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]));
+    cy.get('goa-button[type="secondary"]')
+      .find("button.secondary")
+      .should("have.css", "font-size", remToPx(properties["fs-lg"]));
+  }
+);
 
-Then(/^cs I should be able to validate Tertiary button css property$/, function () {
-  cy.get('goa-button[type="tertiary"]').find('button.tertiary').should("have.css", "border");
-  cy.get('goa-button[type="tertiary"]').find('button.tertiary').should("have.css", "border-radius", remToPx(properties["border-radius"]));
-  cy.get('goa-button[type="tertiary"]').find('button.tertiary').should("have.css", "font-family", properties["font-family"]);
-  cy.get('goa-button[type="tertiary"]').find('button.tertiary').should("have.css", "color", hexToRgb(properties["goa-color-interactive"]));
-  cy.get('goa-button[type="tertiary"]').find('button.tertiary').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["color-gray-100"]));
-  // cy.get('goa-button[type="tertiary"]').find('button.tertiary').eq(0).click({ force: true }).should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]));
-  cy.get('goa-button[type="tertiary"]').find('button.tertiary').should("have.css", "font-size", remToPx(properties["fs-lg"]));
-});
+Then(
+  /^cs I should be able to validate Tertiary button css property$/,
+  function () {
+    cy.get('goa-button[type="tertiary"]')
+      .find("button.tertiary")
+      .should("have.css", "border");
+    cy.get('goa-button[type="tertiary"]')
+      .find("button.tertiary")
+      .should(
+        "have.css",
+        "border-radius",
+        remToPx(properties["border-radius"])
+      );
+    cy.get('goa-button[type="tertiary"]')
+      .find("button.tertiary")
+      .should("have.css", "font-family", properties["font-family"]);
+    cy.get('goa-button[type="tertiary"]')
+      .find("button.tertiary")
+      .should(
+        "have.css",
+        "color",
+        hexToRgb(properties["goa-color-interactive"])
+      );
+    cy.get('goa-button[type="tertiary"]')
+      .find("button.tertiary")
+      .eq(0)
+      .rightclick({ force: true })
+      .should(
+        "have.css",
+        "border-color",
+        hexToRgb(properties["color-gray-100"])
+      );
+    // cy.get('goa-button[type="tertiary"]').find('button.tertiary').eq(0).click({ force: true }).should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]));
+    cy.get('goa-button[type="tertiary"]')
+      .find("button.tertiary")
+      .should("have.css", "font-size", remToPx(properties["fs-lg"]));
+  }
+);
 
-Then(/^cs I should be able to validate Getting started button css property$/, function () {
-  cy.get('goa-button[type="start"]').find('start.trailing').should("have.css", "border");
-  cy.get('goa-button[type="start"]').find('start.trailing').should("have.css", "border-radius", remToPx(properties["border-radius"]));
-  cy.get('goa-button[type="start"]').find('start.trailing').should("have.css", "font-family", properties["font-family"]);
-  cy.get('goa-button[type="start"]').find('start.trailing').should("have.css", "color", hexToRgb(properties["goa-color-interactive"]));
-  cy.get('goa-button[type="start"]').find('start.trailing').eq(0).rightclick({ force: true }).should("have.css", "border-color", hexToRgb(properties["goa-color-interactivehover"]));
-  // cy.get('goa-button[type="start"]').find('start.trailing').eq(0).click({ force: true }).should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]));
-  cy.get('goa-button[type="start"]').find('start.trailing').should("have.css", "font-size", remToPx(properties["fs-lg"]));
-});
+Then(
+  /^cs I should be able to validate Getting started button css property$/,
+  function () {
+    cy.get('goa-button[type="start"]')
+      .find("start.trailing")
+      .should("have.css", "border");
+    cy.get('goa-button[type="start"]')
+      .find("start.trailing")
+      .should(
+        "have.css",
+        "border-radius",
+        remToPx(properties["border-radius"])
+      );
+    cy.get('goa-button[type="start"]')
+      .find("start.trailing")
+      .should("have.css", "font-family", properties["font-family"]);
+    cy.get('goa-button[type="start"]')
+      .find("start.trailing")
+      .should(
+        "have.css",
+        "color",
+        hexToRgb(properties["goa-color-interactive"])
+      );
+    cy.get('goa-button[type="start"]')
+      .find("start.trailing")
+      .eq(0)
+      .rightclick({ force: true })
+      .should(
+        "have.css",
+        "border-color",
+        hexToRgb(properties["goa-color-interactivehover"])
+      );
+    // cy.get('goa-button[type="start"]').find('start.trailing').eq(0).click({ force: true }).should("have.css", "box-shadow", hexToRgb(properties["goa-color-interactivefocus"]));
+    cy.get('goa-button[type="start"]')
+      .find("start.trailing")
+      .should("have.css", "font-size", remToPx(properties["fs-lg"]));
+  }
+);
 
 function remToPx(rem) {
   return rem.replace("rem", "") * 16 + "px";
@@ -58,5 +180,13 @@ function remToPx(rem) {
 // return rgb(r, g, b)
 function hexToRgb(hex) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? "rgb(" + parseInt(result[1], 16) + ", " + parseInt(result[2], 16) + ", " + parseInt(result[3], 16) + ")" : null;
+  return result
+    ? "rgb(" +
+        parseInt(result[1], 16) +
+        ", " +
+        parseInt(result[2], 16) +
+        ", " +
+        parseInt(result[3], 16) +
+        ")"
+    : null;
 }

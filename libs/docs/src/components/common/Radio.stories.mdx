@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from "@storybook/addon-docs";
 import {
   Tabs,
   Tab,
@@ -7,9 +7,13 @@ import {
   SupportInfo,
   Props,
   Prop,
-} from '@abgov/shared/storybook-common';
-import { GoARadioGroup, GoARadioItem, GoACallout } from '@abgov/react-components';
-import { useState } from 'react';
+} from "@abgov/shared/storybook-common";
+import {
+  GoARadioGroup,
+  GoARadioItem,
+  GoACallout,
+} from "@abgov/react-components";
+import { useState } from "react";
 
 <Meta title="Components/Radio" />
 
@@ -30,11 +34,7 @@ import { useState } from 'react';
     required="true"
     description="Must match the name assigned to the children"
   />
-  <Prop
-    name="value"
-    type="string"
-    description="Value binding"
-  />
+  <Prop name="value" type="string" description="Value binding" />
   <Prop
     name="orientation"
     type="horizontal | vertical"
@@ -62,22 +62,24 @@ import { useState } from 'react';
 </Props>
 
 #### Note
+
 <Story name="Information">
   <GoACallout type="information">
-    The name values for parent/children must match. To avoid name clashes, the name shared with the parent/children must be unique.
+    The name values for parent/children must match. To avoid name clashes, the
+    name shared with the parent/children must be unique.
   </GoACallout>
 </Story>
 
 export const BasicTemplate = (args) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   function onChange(name, value) {
-    console.log('onChange', name, value);
+    console.log("onChange", name, value);
     setValue(value);
   }
   return (
     <GoARadioGroup
       name={args.name}
-      orientation={args.orientation || 'vertical'}
+      orientation={args.orientation || "vertical"}
       value={value}
       onChange={onChange}
     >
@@ -90,7 +92,7 @@ export const BasicTemplate = (args) => {
 
 #### Basic
 
-<Story name="Basic" args={{ name: 'basic' }}>
+<Story name="Basic" args={{ name: "basic" }}>
   {BasicTemplate.bind({})}
 </Story>
 
@@ -160,9 +162,9 @@ export const BasicTemplate = (args) => {
 #### Error
 
 export const ErrorTemplate = () => {
-  const [value, setValue] = useState('blue');
+  const [value, setValue] = useState("blue");
   function onChange(name, value) {
-    console.log('onChange', name, value);
+    console.log("onChange", name, value);
     setValue(value);
   }
   return (
@@ -219,7 +221,7 @@ export const ErrorTemplate = () => {
 
 Display a custom label that is different that the `value` property.
 
-<Story name="Label" args={{ name: 'label' }}>
+<Story name="Label" args={{ name: "label" }}>
   {BasicTemplate.bind({})}
 </Story>
 
@@ -315,7 +317,7 @@ Display a custom label that is different that the `value` property.
 
 <Story
   name="Orientation"
-  args={{ name: 'orientation', orientation: 'horizontal' }}
+  args={{ name: "orientation", orientation: "horizontal" }}
 >
   {BasicTemplate.bind()}
 </Story>
@@ -360,7 +362,7 @@ Display a custom label that is different that the `value` property.
 </Tabs>
 
 <Note type="best-practices">
-  Prefer the default orientation; only use <code>orientation="horizontal"</code>{' '}
+  Prefer the default orientation; only use <code>orientation="horizontal"</code>{" "}
   when absolutely necessary.
 </Note>
 

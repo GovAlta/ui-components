@@ -1,19 +1,19 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import GoAContainer from './container';
-import { GoAButton } from '../button/button';
+import React from "react";
+import { render } from "@testing-library/react";
+import GoAContainer from "./container";
+import { GoAButton } from "../button/button";
 
-describe('Container', () => {
-
+describe("Container", () => {
   it("should render the properties", () => {
-    const { container } = render(<GoAContainer
-      type="interactive"
-      accent="thick"
-      padding="relaxed"
-      title={"Text title"}
-      actions={<GoAButton onClick={() => {}}>Save</GoAButton>}
-    >
-      Container content
+    const { container } = render(
+      <GoAContainer
+        type="interactive"
+        accent="thick"
+        padding="relaxed"
+        title={"Text title"}
+        actions={<GoAButton onClick={() => {}}>Save</GoAButton>}
+      >
+        Container content
       </GoAContainer>
     );
 
@@ -24,6 +24,8 @@ describe('Container', () => {
     expect(el.getAttribute("padding")).toEqual("relaxed");
 
     expect(el.querySelector("*[slot=title]").innerHTML).toContain("Text title");
-    expect(el.querySelector("*[slot=actions]").querySelector("goa-button")).not.toBeFalsy();
+    expect(
+      el.querySelector("*[slot=actions]").querySelector("goa-button")
+    ).not.toBeFalsy();
   });
 });

@@ -6,9 +6,9 @@
 //@import '../../../dist/libs/styles/styles.esm.css';
 //@import '@abgov/styles/styles.esm.css';
 /****/
-@import '../../../dist/libs/styles/styles.esm.css';
+@import "../../../dist/libs/styles/styles.esm.css";
 
-section[slot=nav] a {
+section[slot="nav"] a {
   display: block;
   padding: 0.5rem 0;
 }

@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'abgov-skeleton',
-  templateUrl: './skeleton.component.html',
-  styleUrls: ['./skeleton.component.css']
+  selector: "abgov-skeleton",
+  templateUrl: "./skeleton.component.html",
+  styleUrls: ["./skeleton.component.css"],
 })
 export class SkeletonComponent {
-
-  constructor() { }
-
+  constructor() {}
 }

@@ -9,7 +9,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-app-footer-nav-section': WCProps & React.HTMLAttributes<HTMLElement>
+      "goa-app-footer-nav-section": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -21,10 +21,17 @@ interface FooterNavSectionProps {
   children?: ReactNode;
 }
 
-
-export function GoAAppFooterNavSection({heading, maxColumnCount = 1, children}: FooterNavSectionProps) {
+export function GoAAppFooterNavSection({
+  heading,
+  maxColumnCount = 1,
+  children,
+}: FooterNavSectionProps) {
   return (
-    <goa-app-footer-nav-section slot="nav" heading={heading} maxcolumncount={maxColumnCount}>
+    <goa-app-footer-nav-section
+      slot="nav"
+      heading={heading}
+      maxcolumncount={maxColumnCount}
+    >
       {children}
     </goa-app-footer-nav-section>
   );

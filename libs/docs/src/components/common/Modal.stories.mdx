@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from "@storybook/addon-docs";
 import {
   SupportInfo,
   Tabs,
@@ -7,9 +7,14 @@ import {
   CodeSnippet,
   Props,
   Prop,
-} from '@abgov/shared/storybook-common';
-import { GoAButton, GoAButtonGroup, GoAModal, GoACallout } from '@abgov/react-components';
-import { useState } from 'react';
+} from "@abgov/shared/storybook-common";
+import {
+  GoAButton,
+  GoAButtonGroup,
+  GoAModal,
+  GoACallout,
+} from "@abgov/react-components";
+import { useState } from "react";
 
 <Meta title="Components/Modal" />
 
@@ -320,7 +325,7 @@ export const ActionsTemplate = (args) => {
 
 export const TransitionsTemplate = (args) => {
   const [showModal, setShowModal] = useState(false);
-  const [speed, setSpeed] = useState('none');
+  const [speed, setSpeed] = useState("none");
   function show(speed) {
     setSpeed(speed);
     setShowModal(true);
@@ -328,13 +333,13 @@ export const TransitionsTemplate = (args) => {
   return (
     <>
       <GoAButtonGroup>
-        <GoAButton type="tertiary" onClick={() => show('none')}>
+        <GoAButton type="tertiary" onClick={() => show("none")}>
           None
         </GoAButton>
-        <GoAButton type="tertiary" onClick={() => show('slow')}>
+        <GoAButton type="tertiary" onClick={() => show("slow")}>
           Slow
         </GoAButton>
-        <GoAButton type="tertiary" onClick={() => show('fast')}>
+        <GoAButton type="tertiary" onClick={() => show("fast")}>
           Fast
         </GoAButton>
       </GoAButtonGroup>
@@ -475,8 +480,7 @@ export const TransitionsTemplate = (args) => {
   </Tab>
 </Tabs>
 
-
-#### Route Changes 
+#### Route Changes
 
 When a route change is performed in an event triggered within the modal, you **must** close the modal before the route change occurs.
 
@@ -491,13 +495,13 @@ export const RouteChangesTemplate = (args) => {
         onClose={() => setShowModal(false)}
         actions={
           <GoAButtonGroup alignment="end">
-            <GoAButton 
+            <GoAButton
               size="medium"
               onClick={() => {
                 setShowModal(false);
               }}
-              >
-              Submit 
+            >
+              Submit
             </GoAButton>
           </GoAButtonGroup>
         }
@@ -505,7 +509,7 @@ export const RouteChangesTemplate = (args) => {
         <p>Note: We can't actually perform route changes in storybook :(</p>
       </GoAModal>
     </>
-  )
+  );
 };
 
 <Story name="Route changes">{RouteChangesTemplate.bind({})}</Story>

@@ -1,20 +1,22 @@
-import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
-import GoATextArea from './textarea';
+import React from "react";
+import { fireEvent, render } from "@testing-library/react";
+import GoATextArea from "./textarea";
 
-describe('TextArea', () => {
+describe("TextArea", () => {
   it("renders the text area", async () => {
-    const { findByTestId } = render(<GoATextArea
-      testId="textarea-testid"
-      name="textarea-name"
-      value="textarea-value"
-      rows={10}
-      placeholder="textarea-placeholder"
-      disabled={true}
-      showCounter={true}
-      maxCharCount={50}
-      onChange={() => { }}
-    />);
+    const { findByTestId } = render(
+      <GoATextArea
+        testId="textarea-testid"
+        name="textarea-name"
+        value="textarea-value"
+        rows={10}
+        placeholder="textarea-placeholder"
+        disabled={true}
+        showCounter={true}
+        maxCharCount={50}
+        onChange={() => {}}
+      />
+    );
 
     const el = await findByTestId("textarea-testid");
     expect(el.getAttribute("name")).toBe("textarea-name");
@@ -30,23 +32,30 @@ describe('TextArea', () => {
     const onChange = jest.fn();
     const newValue = "new-value";
 
-    const { findByTestId } = render(<GoATextArea
-      testId="textarea-testid"
-      name="textarea-name"
-      value="textarea-value"
-      rows={10}
-      placeholder="textarea-placeholder"
-      disabled={true}
-      onChange={(name: string, value: string) => {
-        expect(name).toBe("textarea-name");
-        expect(value).toBe(newValue);
-        onChange();
-      }}
-    />);
+    const { findByTestId } = render(
+      <GoATextArea
+        testId="textarea-testid"
+        name="textarea-name"
+        value="textarea-value"
+        rows={10}
+        placeholder="textarea-placeholder"
+        disabled={true}
+        onChange={(name: string, value: string) => {
+          expect(name).toBe("textarea-name");
+          expect(value).toBe(newValue);
+          onChange();
+        }}
+      />
+    );
 
     const el = await findByTestId("textarea-testid");
 
-    fireEvent(el, new CustomEvent('_change', { detail: { name: "textarea-name", value: newValue } }));
+    fireEvent(
+      el,
+      new CustomEvent("_change", {
+        detail: { name: "textarea-name", value: newValue },
+      })
+    );
 
     expect(onChange).toBeCalled();
   });

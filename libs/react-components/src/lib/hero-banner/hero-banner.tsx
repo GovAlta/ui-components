@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
 interface WCProps {
   heading: string;
@@ -9,7 +9,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-hero-banner': WCProps & React.HTMLAttributes<HTMLElement>
+      "goa-hero-banner": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -20,7 +20,11 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export const GoAHeroBanner: FC<Props> = ({ heading, backgroundUrl, children}) => {
+export const GoAHeroBanner: FC<Props> = ({
+  heading,
+  backgroundUrl,
+  children,
+}) => {
   return (
     <goa-hero-banner heading={heading} backgroundurl={backgroundUrl}>
       {children}

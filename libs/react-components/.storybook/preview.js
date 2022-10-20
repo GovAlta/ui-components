@@ -1,10 +1,10 @@
-import { addParameters } from '@storybook/react';
-import { DocsPage, DocsContainer } from '@storybook/addon-docs';
+import { addParameters } from "@storybook/react";
+import { DocsPage, DocsContainer } from "@storybook/addon-docs";
 
 addParameters({
   docs: {
     container: DocsContainer,
-    page: DocsPage
+    page: DocsPage,
   },
-  controls: { expanded: true }
+  controls: { expanded: true },
 });

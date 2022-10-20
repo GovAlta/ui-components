@@ -1,16 +1,16 @@
-const { getJestProjects } = require('@nrwl/jest');
+const { getJestProjects } = require("@nrwl/jest");
 
 module.exports = {
-  testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
+  testMatch: ["**/+(*.)+(spec|test).+(ts|js)?(x)"],
   transform: {
-    '^.+\\.(ts|js|html)$': 'ts-jest',
+    "^.+\\.(ts|js|html)$": "ts-jest",
   },
-  preset: './jest.preset.js',
-  resolver: '@nrwl/jest/plugins/resolver',
-  moduleFileExtensions: ['ts', 'js', 'html'],
+  preset: "./jest.preset.js",
+  resolver: "@nrwl/jest/plugins/resolver",
+  moduleFileExtensions: ["ts", "js", "html"],
   moduleNameMapper: {
-    '\\.(scss|sass|css)$': 'identity-obj-proxy',
+    "\\.(scss|sass|css)$": "identity-obj-proxy",
   },
-  coverageReporters: ['html'],
+  coverageReporters: ["html"],
   projects: getJestProjects(),
 };

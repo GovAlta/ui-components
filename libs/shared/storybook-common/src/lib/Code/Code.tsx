@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import { CopyBlock, github as theme } from 'react-code-blocks';
-import "./Code.css"
+import React, { FC } from "react";
+import { CopyBlock, github as theme } from "react-code-blocks";
+import "./Code.css";
 type Language =
-  "abap"
+  | "abap"
   | "actionscript"
   | "ada"
   | "arduino"
@@ -86,8 +86,7 @@ type Language =
   | "vhdl"
   | "xml"
   | "xquery"
-  | "yaml"
-  ;
+  | "yaml";
 
 interface Props {
   lang: Language;
@@ -99,7 +98,7 @@ const cleanTabs = (code = "", tabSize: number): string => {
   const lines = code.split("\n");
 
   if (lines.length === 1) {
-    return code.trim();;
+    return code.trim();
   }
 
   const space0 = lines[0].length - lines[0].trimLeft().length;
@@ -107,13 +106,12 @@ const cleanTabs = (code = "", tabSize: number): string => {
   const space = space0 < tabSize ? space1 : space0;
 
   return lines
-    .map(line => line.substring(space))
+    .map((line) => line.substring(space))
     .join("\n")
     .trim();
-}
+};
 
 export const CodeSnippet: FC<Props> = ({ lang, code, tabSize = 2 }) => {
-
   const cleanCode = cleanTabs(code, tabSize);
 
   return (
@@ -127,4 +125,4 @@ export const CodeSnippet: FC<Props> = ({ lang, code, tabSize = 2 }) => {
       />
     </div>
   );
-}
+};

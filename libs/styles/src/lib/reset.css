@@ -143,7 +143,7 @@ goa-container h3:first-of-type {
   margin-top: 0;
 }
 
-goa-two-column-layout [slot=nav] a {
+goa-two-column-layout [slot="nav"] a {
   display: block;
   padding: 0.5rem 0;
 }

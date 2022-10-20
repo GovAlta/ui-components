@@ -1,9 +1,9 @@
-import { render } from '@testing-library/react';
+import { render } from "@testing-library/react";
 
-import FooterNavSection from './footer-nav-section';
+import FooterNavSection from "./footer-nav-section";
 
-describe('FooterNavSection', () => {
-  it('should render successfully', () => {
+describe("FooterNavSection", () => {
+  it("should render successfully", () => {
     const { baseElement } = render(<FooterNavSection />);
     expect(baseElement).toBeTruthy();
   });

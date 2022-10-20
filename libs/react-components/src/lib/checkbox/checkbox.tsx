@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from "react";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-checkbox': CheckboxProps & React.HTMLAttributes<HTMLElement>
+      "goa-checkbox": CheckboxProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -34,7 +34,18 @@ export interface Props {
   onChange?: (name: string, checked: boolean, value: string) => void;
 }
 
-export const GoACheckbox: FC<Props> = ({ id, name, testId, error, disabled, checked, value, text, children, onChange }) => {
+export const GoACheckbox: FC<Props> = ({
+  id,
+  name,
+  testId,
+  error,
+  disabled,
+  checked,
+  value,
+  text,
+  children,
+  onChange,
+}) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -45,12 +56,12 @@ export const GoACheckbox: FC<Props> = ({ id, name, testId, error, disabled, chec
       onChange?.(name, e.detail.checked, e.detail.value);
     };
 
-    current.addEventListener('_change', listener)
+    current.addEventListener("_change", listener);
 
     return () => {
-      current.removeEventListener('_change', listener);
-    }
-  }, [])
+      current.removeEventListener("_change", listener);
+    };
+  }, []);
 
   return (
     <goa-checkbox
@@ -66,7 +77,7 @@ export const GoACheckbox: FC<Props> = ({ id, name, testId, error, disabled, chec
     >
       {children}
     </goa-checkbox>
-  )
+  );
 };
 
 export default GoACheckbox;

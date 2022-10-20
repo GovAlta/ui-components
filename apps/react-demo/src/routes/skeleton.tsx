@@ -1,5 +1,5 @@
-import { GoASkeleton } from '@abgov/react-components';
-import * as React from 'react';
+import { GoASkeleton } from "@abgov/react-components";
+import * as React from "react";
 
 export default function Skeleton() {
   return (
@@ -49,7 +49,6 @@ export default function Skeleton() {
       <GoASkeleton type="profile" size={2}></GoASkeleton>
       <GoASkeleton type="profile" size={3}></GoASkeleton>
       <GoASkeleton type="profile" size={4}></GoASkeleton>
-
     </>
   );
 }

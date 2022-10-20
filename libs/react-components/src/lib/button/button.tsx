@@ -1,16 +1,21 @@
-import React, { FC, ReactNode, useEffect, useRef } from 'react';
-import './button.css';
-import { GoAIconType } from '../icons';
+import React, { FC, ReactNode, useEffect, useRef } from "react";
+import "./button.css";
+import { GoAIconType } from "../icons";
 
-export type ButtonType = 'primary' | 'submit' | 'secondary' | 'tertiary' | 'start';
-export type ButtonSize = 'compact' | 'normal';
-export type ButtonVariant = 'normal' | 'destructive'
+export type ButtonType =
+  | "primary"
+  | "submit"
+  | "secondary"
+  | "tertiary"
+  | "start";
+export type ButtonSize = "compact" | "normal";
+export type ButtonVariant = "normal" | "destructive";
 
 interface WCProps {
   type?: ButtonType;
   size?: ButtonSize;
   variant?: ButtonVariant;
-  disabled?: boolean
+  disabled?: boolean;
   leadingicon?: string;
   trailingicon?: string;
   ref: React.RefObject<HTMLElement>;
@@ -21,7 +26,7 @@ declare global {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      'goa-button': WCProps & React.HTMLAttributes<HTMLElement>
+      "goa-button": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -39,13 +44,13 @@ type ButtonProps = {
 
 export const GoAButton: FC<ButtonProps> = ({
   disabled = false,
-  type = 'primary',
+  type = "primary",
   size,
   variant,
   leadingIcon,
   trailingIcon,
   children,
-  onClick
+  onClick,
 }) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -53,16 +58,18 @@ export const GoAButton: FC<ButtonProps> = ({
       return;
     }
     if (!onClick) {
-      return
+      return;
     }
     const current = el.current;
-    const listener = (e: any) => { onClick(e); };
+    const listener = (e: any) => {
+      onClick(e);
+    };
 
-    current.addEventListener('_click', listener)
+    current.addEventListener("_click", listener);
     return () => {
-      current.removeEventListener('_click', listener);
-    }
-  }, [el, onClick])
+      current.removeEventListener("_click", listener);
+    };
+  }, [el, onClick]);
 
   return (
     <goa-button

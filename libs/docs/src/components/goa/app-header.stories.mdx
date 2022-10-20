@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from "@storybook/addon-docs";
 import {
   Tabs,
   Tab,
@@ -7,8 +7,8 @@ import {
   SupportInfo,
   Props,
   Prop,
-} from '@abgov/shared/storybook-common';
-import { GoAAppHeader } from '@abgov/react-components';
+} from "@abgov/shared/storybook-common";
+import { GoAAppHeader } from "@abgov/react-components";
 
 <Meta title="Components/App Header" />
 
@@ -192,7 +192,11 @@ Custom content can be added to the header by passing it in as a child component(
 You can change the maximum width of the app header
 
 <Story name="Max Content Width">
-  <GoAAppHeader url="https://example.com" heading="Ticket and Fine Payments" maxContentWidth="600px">
+  <GoAAppHeader
+    url="https://example.com"
+    heading="Ticket and Fine Payments"
+    maxContentWidth="600px"
+  >
     <a href="#">Login</a> &nbsp;
     <a href="#">Help</a>
   </GoAAppHeader>

@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'abgov-circular-progress',
-  templateUrl: './circular-progress.component.html',
-  styleUrls: ['./circular-progress.component.css']
+  selector: "abgov-circular-progress",
+  templateUrl: "./circular-progress.component.html",
+  styleUrls: ["./circular-progress.component.css"],
 })
 export class CircularProgressComponent implements OnInit {
-
   progress = 0;
   message = "Progress starting";
 
@@ -19,32 +18,25 @@ export class CircularProgressComponent implements OnInit {
   fullscreenProgressVisible = false;
   showFullscreenProgressInterval: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-
     setInterval(() => {
-
       if (this.progress >= 100) {
         this.progress = 0;
-      }
-      else {
+      } else {
         this.progress += 10;
       }
       this.message = "Progress at " + this.progress;
 
-
       if (this.fullScreenProgress >= 100) {
         this.fullScreenProgress = 0;
         this.fullscreenProgressVisible = false;
-      }
-      else {
+      } else {
         this.fullScreenProgress += 10;
       }
       this.fullScreenMessage = "Progress at " + this.fullScreenProgress;
-
     }, 1000);
-
   }
 
   showFullscreenInfinite() {
@@ -59,5 +51,4 @@ export class CircularProgressComponent implements OnInit {
   showFullscreenProgress() {
     this.fullscreenProgressVisible = true;
   }
-
 }

@@ -5,33 +5,41 @@
   <goa-input arialabel="First Name 1" name="firstname" type="text"></goa-input>
 </goa-form-item>
 
-
 <h2>Optional</h2>
 <goa-form-item label="Middle name" requirement="optional">
-  <goa-input arialabel="Middle Name"  name="middleName" type="text"></goa-input>
+  <goa-input arialabel="Middle Name" name="middleName" type="text"></goa-input>
 </goa-form-item>
-
 
 <h2>Help text</h2>
 <goa-form-item label="First name" id="fname_text" helptext="Help text">
   <goa-input arialabel="First Name 2" name="firstName" type="text"></goa-input>
 </goa-form-item>
 
-
 <h2>Required</h2>
 <goa-form-item
   label="First name"
   error="First name is required"
   helptext="Help text"
-  id ="fn_error"
+  id="fn_error"
   requirement="required"
 >
-  <goa-input arialabel="First Name capital" name="firstName" type="text" error></goa-input>
+  <goa-input
+    arialabel="First Name capital"
+    name="firstName"
+    type="text"
+    error
+  ></goa-input>
 </goa-form-item>
 
-
 <h2>Form row</h2>
-<goa-input type="number" arialabel="Number Input" name="firstName" min="0" max="6" step="2"></goa-input>
+<goa-input
+  type="number"
+  arialabel="Number Input"
+  name="firstName"
+  min="0"
+  max="6"
+  step="2"
+></goa-input>
 <goa-form-row gap="small">
   <goa-form-item
     label="First name"
@@ -51,6 +59,11 @@
     error="Last name is required"
     helptext="Help text"
   >
-    <goa-input name="lastName" arialabel="Last Name" error width="100%"></goa-input>
+    <goa-input
+      name="lastName"
+      arialabel="Last Name"
+      error
+      width="100%"
+    ></goa-input>
   </goa-form-item>
 </goa-form-row>

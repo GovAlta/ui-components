@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useRef } from 'react';
-import { GoAIconType } from '../..';
+import React, { FC, useEffect, useRef } from "react";
+import { GoAIconType } from "../..";
 import { format, parseISO } from "date-fns";
 
 export type GoADate = Date | string;
 
 type GoAInputType =
-  "text"
+  | "text"
   | "password"
   | "email"
   | "number"
@@ -19,7 +19,13 @@ type GoAInputType =
   | "url"
   | "week";
 
-type GoAAutoCapitalize = "on" | "off" | "none" | "sentences" | "words" | "characters";
+type GoAAutoCapitalize =
+  | "on"
+  | "off"
+  | "none"
+  | "sentences"
+  | "words"
+  | "characters";
 
 interface WCProps {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
@@ -48,16 +54,14 @@ interface WCProps {
   step?: number;
 }
 
-
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-input': WCProps & React.HTMLAttributes<HTMLInputElement>
+      "goa-input": WCProps & React.HTMLAttributes<HTMLInputElement>;
     }
   }
 }
-
 
 interface BaseProps {
   // required
@@ -71,7 +75,7 @@ interface BaseProps {
   leadingIcon?: GoAIconType;
   trailingIcon?: GoAIconType;
   onTrailingIconClick?: () => void;
-  variant?: 'goa' | 'bare';
+  variant?: "goa" | "bare";
   focused?: boolean;
   readonly?: boolean;
   error?: boolean;
@@ -79,7 +83,7 @@ interface BaseProps {
   prefix?: string;
   suffix?: string;
   testId?: string;
-};
+}
 
 type OnChange = (name: string, value: string) => void;
 export interface InputProps extends BaseProps {
@@ -115,7 +119,7 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   autoCapitalize,
   leadingIcon,
   trailingIcon,
-  variant = 'goa',
+  variant = "goa",
   focused,
   disabled,
   readonly,
@@ -146,13 +150,13 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
       onTrailingIconClick?.();
     };
 
-    current.addEventListener('_change', changeListener)
-    current.addEventListener('_trailingIconClick', clickListener)
+    current.addEventListener("_change", changeListener);
+    current.addEventListener("_trailingIconClick", clickListener);
     return () => {
-      current.removeEventListener('_change', changeListener);
-      current.removeEventListener('_trailingIconClick', clickListener);
-    }
-  }, [ref, onChange, onTrailingIconClick])
+      current.removeEventListener("_change", changeListener);
+      current.removeEventListener("_trailingIconClick", clickListener);
+    };
+  }, [ref, onChange, onTrailingIconClick]);
 
   return (
     <goa-input
@@ -188,9 +192,9 @@ const onDateChangeHandler = (onChange: OnDateChange) => {
       onChange(name, new Date(0));
       return;
     }
-    onChange(name, parseISO(value)) 
-  }
-}
+    onChange(name, parseISO(value));
+  };
+};
 
 const onTimeChangeHandler = (onChange: OnChange) => {
   return (name: string, value: string) => {
@@ -198,16 +202,16 @@ const onTimeChangeHandler = (onChange: OnChange) => {
       onChange(name, "");
       return;
     }
-    onChange(name, value) 
-  }
-}
+    onChange(name, value);
+  };
+};
 
 function toDate(value: GoADate): Date {
   if (!value) {
     return new Date(0);
   }
   if (typeof value === "string") {
-    return parseISO(value)
+    return parseISO(value);
   }
   return value;
 }
@@ -217,84 +221,127 @@ function toString(value: GoADate, tmpl = "yyyy-MM-dd"): string {
     return "";
   }
   if (typeof value === "string") {
-    return format(parseISO(value), tmpl) ;
+    return format(parseISO(value), tmpl);
   }
   if (value.toISOString() === new Date(0).toISOString()) {
     return "";
   }
-  return format(value, tmpl) ;
+  return format(value, tmpl);
 }
 
 export const GoAInputText: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="text" />;
-}
+};
 
 export const GoAInputPassword: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="password" />;
-}
+};
 
-export const GoAInputDate: FC<DateInputProps> = ({value, min = "", max = "", ...props}) => {
-  return <GoAInput 
-    {...props} 
-    type="date"
-    onChange={onDateChangeHandler(props.onChange)} 
-    min={toString(min)} 
-    max={toString(max)} 
-    value={toString(value)} 
-  />;
-}
+export const GoAInputDate: FC<DateInputProps> = ({
+  value,
+  min = "",
+  max = "",
+  ...props
+}) => {
+  return (
+    <GoAInput
+      {...props}
+      type="date"
+      onChange={onDateChangeHandler(props.onChange)}
+      min={toString(min)}
+      max={toString(max)}
+      value={toString(value)}
+    />
+  );
+};
 
-export const GoAInputTime: FC<InputProps> = ({value, min = "", max = "", ...props}) => {
-  return <GoAInput 
-    {...props} 
-    onChange={onTimeChangeHandler(props.onChange)}
-    value={value} 
-    type="time" 
-  />;
-}
+export const GoAInputTime: FC<InputProps> = ({
+  value,
+  min = "",
+  max = "",
+  ...props
+}) => {
+  return (
+    <GoAInput
+      {...props}
+      onChange={onTimeChangeHandler(props.onChange)}
+      value={value}
+      type="time"
+    />
+  );
+};
 
-export const GoAInputDateTime: FC<DateInputProps> = ({value, min = "", max = "", ...props}) => {
-  return <GoAInput 
-    {...props} 
-    onChange={onDateChangeHandler(props.onChange)} 
-    value={toString(value, "yyyy-MM-dd'T'hh:mm")} 
-    type="datetime-local" 
-  />;
-}
+export const GoAInputDateTime: FC<DateInputProps> = ({
+  value,
+  min = "",
+  max = "",
+  ...props
+}) => {
+  return (
+    <GoAInput
+      {...props}
+      onChange={onDateChangeHandler(props.onChange)}
+      value={toString(value, "yyyy-MM-dd'T'hh:mm")}
+      type="datetime-local"
+    />
+  );
+};
 
 export const GoAInputEmail: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="email" />;
-}
+};
 
 export const GoAInputSearch: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="search" trailingIcon="search" />;
-}
+};
 
 export const GoAInputUrl: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="url" />;
-}
+};
 
 export const GoAInputTel: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="tel" />;
-}
+};
 
 export const GoAInputFile: FC<InputProps> = (props) => {
-  return <input id={props.id} name={props.name} type="file" onChange={(e) => props.onChange(e.target.name, e.target.value)} style={{ backgroundColor: 'revert' }} />;
-}
+  return (
+    <input
+      id={props.id}
+      name={props.name}
+      type="file"
+      onChange={(e) => props.onChange(e.target.name, e.target.value)}
+      style={{ backgroundColor: "revert" }}
+    />
+  );
+};
 
 export const GoAInputMonth: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="month" />;
-}
+};
 
-export const GoAInputNumber: FC<NumberInputProps> = ({min = Number.MIN_VALUE, max= Number.MAX_VALUE, value, ...props}) => {
+export const GoAInputNumber: FC<NumberInputProps> = ({
+  min = Number.MIN_VALUE,
+  max = Number.MAX_VALUE,
+  value,
+  ...props
+}) => {
   const onNumberChange = (name: string, value: string) => {
     props.onChange(name, parseInt(value));
-  }
-  return <GoAInput {...props} onChange={onNumberChange} min={min?.toString()} max={max?.toString()} value={value.toString()} type="number" />;
-}
+  };
+  return (
+    <GoAInput
+      {...props}
+      onChange={onNumberChange}
+      min={min?.toString()}
+      max={max?.toString()}
+      value={value.toString()}
+      type="number"
+    />
+  );
+};
 
 export const GoAInputRange: FC<InputProps> = (props) => {
   return <GoAInput {...props} type="range" />;
-}
+};
 
 export default GoAInput;

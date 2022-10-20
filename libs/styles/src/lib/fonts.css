@@ -1,61 +1,61 @@
-@import url('https://p.typekit.net/p.css?s=1&k=nur5yta&ht=tk&f=26036.26037.26044.26046.26047&a=14638192&app=typekit&e=css');
+@import url("https://p.typekit.net/p.css?s=1&k=nur5yta&ht=tk&f=26036.26037.26044.26046.26047&a=14638192&app=typekit&e=css");
 
 @font-face {
-  font-family: 'acumin-pro-semi-condensed';
-  src: url('https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/l?subset_id=1&fvd=n4&v=3')
-      format('woff2'),
-    url('https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/d?subset_id=1&fvd=n4&v=3')
-      format('woff'),
-    url('https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/a?subset_id=1&fvd=n4&v=3')
-      format('opentype');
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/l?subset_id=1&fvd=n4&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/d?subset_id=1&fvd=n4&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/a?subset_id=1&fvd=n4&v=3")
+      format("opentype");
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'acumin-pro-semi-condensed';
-  src: url('https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/l?subset_id=1&fvd=i4&v=3')
-      format('woff2'),
-    url('https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/d?subset_id=1&fvd=i4&v=3')
-      format('woff'),
-    url('https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/a?subset_id=1&fvd=i4&v=3')
-      format('opentype');
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/l?subset_id=1&fvd=i4&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/d?subset_id=1&fvd=i4&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/a?subset_id=1&fvd=i4&v=3")
+      format("opentype");
   font-style: italic;
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'acumin-pro-semi-condensed';
-  src: url('https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/l?subset_id=1&fvd=n7&v=3')
-      format('woff2'),
-    url('https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/d?subset_id=1&fvd=n7&v=3')
-      format('woff'),
-    url('https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/a?subset_id=1&fvd=n7&v=3')
-      format('opentype');
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/l?subset_id=1&fvd=n7&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/d?subset_id=1&fvd=n7&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/a?subset_id=1&fvd=n7&v=3")
+      format("opentype");
   font-style: normal;
   font-weight: 700;
 }
 
 @font-face {
-  font-family: 'acumin-pro-semi-condensed';
-  src: url('https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/l?subset_id=1&fvd=i7&v=3')
-      format('woff2'),
-    url('https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/d?subset_id=1&fvd=i7&v=3')
-      format('woff'),
-    url('https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/a?subset_id=1&fvd=i7&v=3')
-      format('opentype');
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/l?subset_id=1&fvd=i7&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/d?subset_id=1&fvd=i7&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/a?subset_id=1&fvd=i7&v=3")
+      format("opentype");
   font-style: italic;
   font-weight: 700;
 }
 
 @font-face {
-  font-family: 'acumin-pro-semi-condensed';
-  src: url('https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/l?subset_id=1&fvd=n6&v=3')
-      format('woff2'),
-    url('https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/d?subset_id=1&fvd=n6&v=3')
-      format('woff'),
-    url('https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/a?subset_id=1&fvd=n6&v=3')
-      format('opentype');
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/l?subset_id=1&fvd=n6&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/d?subset_id=1&fvd=n6&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/a?subset_id=1&fvd=n6&v=3")
+      format("opentype");
   font-style: normal;
   font-weight: 600;
 }

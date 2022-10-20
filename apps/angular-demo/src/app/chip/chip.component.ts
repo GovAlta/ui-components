@@ -1,22 +1,20 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'abgov-chip',
-  templateUrl: './chip.component.html',
-  styleUrls: ['./chip.component.css']
+  selector: "abgov-chip",
+  templateUrl: "./chip.component.html",
+  styleUrls: ["./chip.component.css"],
 })
 export class ChipComponent {
-
   chips = ["Doritos", "Fritos", "Lays"];
 
-  constructor() { }
+  constructor() {}
 
   deleteChip(chip: string) {
-    this.chips = this.chips.filter(c => c !== chip);
+    this.chips = this.chips.filter((c) => c !== chip);
   }
 
   onClick() {
     console.log("deleting clicked");
   }
-
 }

@@ -1,6 +1,5 @@
-import { GoAMicrositeHeader } from '@abgov/react-components';
-import * as React from 'react';
-
+import { GoAMicrositeHeader } from "@abgov/react-components";
+import * as React from "react";
 
 export default function MicrositeHeader() {
   return (

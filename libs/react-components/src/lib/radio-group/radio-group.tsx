@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from "react";
 
-export * from './radio';
+export * from "./radio";
 
 interface RadioGroupProps {
   ref: React.RefObject<HTMLElement>;
@@ -15,7 +15,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-radio-group': RadioGroupProps & React.HTMLAttributes<HTMLElement>
+      "goa-radio-group": RadioGroupProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -24,7 +24,7 @@ interface Props {
   name: string;
   value?: string;
   disabled?: boolean;
-  orientation?: 'horizontal' | 'vertical';
+  orientation?: "horizontal" | "vertical";
   testId?: string;
   error?: boolean;
   children?: React.ReactNode;
@@ -35,14 +35,13 @@ export const GoARadioGroup: FC<Props> = ({
   name,
   value,
   children,
-  orientation = 'vertical',
+  orientation = "vertical",
   disabled = false,
   error = false,
   testId,
   onChange,
 }) => {
-
-  const el = useRef<HTMLElement>(null)
+  const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!el.current) {
@@ -50,17 +49,17 @@ export const GoARadioGroup: FC<Props> = ({
     }
     const listener = (e: any) => {
       if (!onChange) {
-        console.warn("Missing onChange function")
+        console.warn("Missing onChange function");
         return;
       }
       onChange(name, e.detail.value);
-    }
+    };
     const currentEl = el.current;
     currentEl.addEventListener("_change", listener);
     return () => {
       currentEl.removeEventListener("_change", listener);
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <goa-radio-group

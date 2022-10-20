@@ -1,1 +1,1 @@
-export { GoAFormItem } from './form-item';
+export { GoAFormItem } from "./form-item";

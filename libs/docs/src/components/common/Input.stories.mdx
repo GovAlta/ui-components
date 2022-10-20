@@ -15,8 +15,8 @@ import {
   GoAInputRange,
   GoAFormItem,
   GoACallout,
-} from '@abgov/react-components';
-import { useState, useEffect } from 'react';
+} from "@abgov/react-components";
+import { useState, useEffect } from "react";
 import {
   SupportInfo,
   Tabs,
@@ -24,8 +24,8 @@ import {
   CodeSnippet,
   Props,
   Prop,
-} from '@abgov/shared/storybook-common';
-import { Meta, Story } from '@storybook/addon-docs';
+} from "@abgov/shared/storybook-common";
+import { Meta, Story } from "@storybook/addon-docs";
 
 <Meta title="Components/Inputs" component={GoAInput} />
 
@@ -174,7 +174,7 @@ export const noop = () => {};
 #### Basic
 
 export const InputTemplate = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   return (
     <>
       <GoAInputText
@@ -250,7 +250,7 @@ export const InputTemplate = () => {
 
 export const IconInputTemplate = () => (
   <>
-    <div style={{ display: 'flex', gap: '4px', flexDirection: 'column' }}>
+    <div style={{ display: "flex", gap: "4px", flexDirection: "column" }}>
       <GoAInputText name="foo" leadingIcon="finger-print" onChange={noop} />
       <GoAInputText name="foo" trailingIcon="finger-print" onChange={noop} />
     </div>
@@ -293,7 +293,7 @@ export const IconButtonInputTemplate = () => (
     <GoAInputText
       name="foo"
       trailingIcon="finger-print"
-      onTrailingIconClick={() => alert('clicked')}
+      onTrailingIconClick={() => alert("clicked")}
       onChange={noop}
     />
   </>
@@ -772,7 +772,7 @@ export const WidthTemplate = ({ width }) => {
   );
 };
 
-<Story name="Width" args={{ width: '80%' }}>
+<Story name="Width" args={{ width: "80%" }}>
   {WidthTemplate.bind({})}
 </Story>
 

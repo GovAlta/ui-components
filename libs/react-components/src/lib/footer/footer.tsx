@@ -8,7 +8,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-app-footer': WCProps & React.HTMLAttributes<HTMLElement>
+      "goa-app-footer": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
