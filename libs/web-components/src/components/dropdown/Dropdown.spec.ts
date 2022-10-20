@@ -380,18 +380,18 @@ describe('GoADropdown', () => {
     const enter = new KeyboardEvent('keydown', { 
       keyCode: 13, key: "Enter" 
     });
-    const downArrow = new KeyboardEvent('keydown', { 
-      keyCode: 40, key: "ArrowDown", code: "ArrowDown" 
-    });
-    const upArrow = new KeyboardEvent('keydown', { 
-      keyCode: 38, key: "ArrowUp", code: "ArrowUp" 
-    });
-    const altDownArrow = new KeyboardEvent('keydown', { 
-      altKey: true, keyCode: 40, key: "ArrowDown", code: "ArrowDown" 
-    });
-    const altUpArrow = new KeyboardEvent('keydown', { 
-      altKey: true, keyCode: 38, key: "ArrowUp", code: "ArrowUp" 
-    });
+    // const downArrow = new KeyboardEvent('keydown', { 
+    //   keyCode: 40, key: "ArrowDown", code: "ArrowDown" 
+    // });
+    // const upArrow = new KeyboardEvent('keydown', { 
+    //   keyCode: 38, key: "ArrowUp", code: "ArrowUp" 
+    // });
+    // const altDownArrow = new KeyboardEvent('keydown', { 
+    //   altKey: true, keyCode: 40, key: "ArrowDown", code: "ArrowDown" 
+    // });
+    // const altUpArrow = new KeyboardEvent('keydown', { 
+    //   altKey: true, keyCode: 38, key: "ArrowUp", code: "ArrowUp" 
+    // });
 
     const items = ["red", "blue", "pink"];
 
@@ -401,7 +401,7 @@ describe('GoADropdown', () => {
         const user = userEvent.setup();
 
         const result = render(GoADropdown, { name: 'favcolor', items, value: "red" });
-        const dropdown = result.queryByTestId("favcolor-dropdown");
+        // const dropdown = result.queryByTestId("favcolor-dropdown");
         const input = result.queryByTestId('favcolor-dropdown-input');
 
         // == Focus menu

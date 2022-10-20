@@ -61,7 +61,7 @@ format:
 #### TEST
 
 lint:
-	npx nx run-many --target=lint --projects=react-components,web-components,styles
+	npx nx run-many --target=lint --projects=angular-components,react-components,web-components,styles
 
 test:	
 	npm run test:watch

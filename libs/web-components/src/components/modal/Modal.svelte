@@ -51,6 +51,7 @@
       class="modal"
       style="{width && `--width: ${width};`};"
     >
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
       <div
         in:fly={{ duration: _transitionTime, y: 200 }}
@@ -62,6 +63,7 @@
         {/if}
         {#if isClosable}
           <div class="modal-close">
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
             <goa-icon-button
               data-testid="modal-close-button"
               icon="close"

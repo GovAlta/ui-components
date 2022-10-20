@@ -236,6 +236,7 @@
 
   <!-- background -->
   {#if isMenuVisible}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
       data-testid={`${name}-dropdown-background`}
       class="goa-dropdown-background"
@@ -244,6 +245,7 @@
   {/if}
 
   <!-- readonly input  -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <goa-input
     on:click={showMenu}
     error={error}
@@ -275,6 +277,7 @@
     style={`overflow-y: auto; max-height: ${maxheight}`}
   >
     {#each options as option, index}
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <li
         id={option.label}
         role="option"

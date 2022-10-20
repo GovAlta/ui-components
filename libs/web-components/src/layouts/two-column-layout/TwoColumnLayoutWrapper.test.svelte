@@ -1,3 +1,5 @@
+<svelte:options tag="test-two-column-layout" />
+
 <!-- Script -->
 <script lang="ts">
   export let navcolumnwidth: string = "";  

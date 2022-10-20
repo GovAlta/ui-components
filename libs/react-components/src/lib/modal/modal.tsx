@@ -46,7 +46,7 @@ export const GoAModal: FC<Props> = ({
       return;
     }
     const current = el.current;
-    const listener = (e: any) => {
+    const listener = () => {
       onClose?.();
     };
 

@@ -52,8 +52,9 @@ export const GoACheckbox: FC<Props> = ({
       return;
     }
     const current = el.current;
-    const listener = (e: any) => {
-      onChange?.(name, e.detail.checked, e.detail.value);
+    const listener = (e: unknown) => {
+      const ce = e as CustomEvent;
+      onChange?.(name, ce.detail.checked, ce.detail.value);
     };
 
     current.addEventListener("_change", listener);
@@ -61,7 +62,7 @@ export const GoACheckbox: FC<Props> = ({
     return () => {
       current.removeEventListener("_change", listener);
     };
-  }, []);
+  }, [name, onChange]);
 
   return (
     <goa-checkbox

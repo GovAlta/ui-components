@@ -16,7 +16,7 @@ describe('GoABadgeComponent', () => {
     });
   });
 
-  for (const [type, iconType] of Object.entries({
+  for (const [type] of Object.entries({
     success: "checkmark-circle",
     important: "alert-circle",
     information: "information-circle",

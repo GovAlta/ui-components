@@ -11,6 +11,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     },
   ],
 })
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export class ValueDirective implements ControlValueAccessor {
   private _value = "";
 

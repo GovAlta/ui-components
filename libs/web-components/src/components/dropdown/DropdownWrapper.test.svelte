@@ -1,3 +1,4 @@
+<svelte:options tag="test-dropdown-wrapper" />
 <!-- Script -->
 <script lang="ts">
   import type { GoAIconType } from '../icon/Icon.svelte';

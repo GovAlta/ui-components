@@ -127,7 +127,7 @@ describe("GoA FormItem", () => {
         requirement: "requireddd"
       });
     }
-    catch (e:any){ 
+    catch (e) { 
       console.log(e,'error');
     }
 

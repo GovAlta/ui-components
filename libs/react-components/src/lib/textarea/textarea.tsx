@@ -57,8 +57,8 @@ export const GoATextArea: FC<Props> = ({
       return;
     }
     const current = el.current;
-    const listener: EventListener = (e: any) => {
-      const { name, value } = e.detail;
+    const listener: EventListener = (e: unknown) => {
+      const { name, value } = (e as CustomEvent).detail;
       onChange(name, value);
     };
 

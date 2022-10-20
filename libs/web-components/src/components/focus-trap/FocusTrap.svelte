@@ -40,7 +40,7 @@
 
     for (const node of nodes) {
       const isFocusable 
-        = focus(node)
+        = focus(node as HTMLElement)
         ||  focusOnFirstNode(node.childNodes)
         ||  focusOnFirstNodeOfSlot(node)
         ||  focusOnFirstNodeOfShadowDOM(node);
@@ -77,7 +77,7 @@
 
     for (let i = nodes.length - 1; i >= 0; i--) {
       let node = nodes[i];
-      if (focus(node) ||
+      if (focus(node as HTMLElement) ||
           focusOnLastNode(node.childNodes) ||
           focusOnLastNodeOfSlot(node) ||
           focusOnLastNodeOfShadowDOM(node)) {
@@ -105,7 +105,7 @@
   }
 
 
-  function focus(element): boolean {
+  function focus(element: HTMLElement): boolean {
     if (!isFocusable(element)) return false;
 
     try {
@@ -119,7 +119,7 @@
     return (document.activeElement === element);
   };
 
-  function trapFocus(event): void {
+  function trapFocus(event: Event): void {
     if (ignoreFocusChanges) return;
 
     const slotElements = (element.firstChild as HTMLSlotElement)?.assignedElements();
@@ -127,7 +127,7 @@
 
     const contentRootElement = slotElements[0];
     if (event.composedPath().includes(contentRootElement)) {
-      lastFocus = event.target;
+      lastFocus = event.target as Element;
       return;
     }
 
@@ -138,16 +138,20 @@
     lastFocus = document.activeElement;
   };
 
-  function isFocusable(element): boolean {
+  function isFocusable(element: HTMLElement): boolean {
     const isTabbable = element.tabIndex > 0 || (element.tabIndex === 0 && element.getAttribute('tabIndex') !== null);
     if (isTabbable) return true;
-    if (element.disabled) return false;
+    if (element["disabled"]) return false;
 
     switch (element.nodeName) {
-      case 'A':
-        return !!element.href && element.rel !== 'ignore';
-      case 'INPUT':
-        return element.type !== 'hidden' && element.type !== 'file';
+      case 'A': {
+        const el = element as HTMLLinkElement;
+        return !!el.href && el.rel !== 'ignore';
+      }
+      case 'INPUT': {
+        const el = element as HTMLInputElement;
+        return el.type !== 'hidden' && el.type !== 'file';
+      }
       case 'BUTTON':
       case 'SELECT':
       case 'TEXTAREA':
@@ -161,8 +165,7 @@
 
 <div id="root" bind:this={element}>
   <slot />
-  <!-- When goa-modal is the last display element in a page,
-    the tab key press jumps out. The empty span with tabIndex="0" keeps the focus trapped mysteriously-->
+  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <span tabindex="0"></span>
 </div>
 

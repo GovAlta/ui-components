@@ -1,3 +1,4 @@
+<svelte:options tag="test-radiogroup-wrapper" />
 <!-- Script -->
 <script lang="ts">
   import GoARadioGroup from "./RadioGroup.svelte";
