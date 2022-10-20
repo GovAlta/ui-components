@@ -77,7 +77,7 @@ describe('GoACalloutComponent', () => {
   });
 
   it('should render - without the heading', async () => {
-    const baseElement = render(GoACallout, { type: "emergency", content: 'This is the content', testid: "testid" });
+    const baseElement = render(GoACallout, { type: "emergency", testid: "testid" });
     const el = baseElement.queryByTestId("testid");
     const heading = el.querySelector('h3');
     expect(heading).toBeNull();

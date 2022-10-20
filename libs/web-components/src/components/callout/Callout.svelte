@@ -2,11 +2,10 @@
 
 <!-- Script -->
 <script lang="ts">
-  // import type { CalloutType } from "@abgov/shared/common";
   export let type: "emergency" | "important" | "information" | "event" | "success";
 
-  // export let type: CalloutType = "";
   export let heading: string = "";
+  // TODO: get rid of testid
   export let testid: string = "";
 
   $: iconType =

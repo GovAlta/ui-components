@@ -21,7 +21,7 @@
 
   onMount(() => {
     if (!isRequirementType(requirement)) {
-      throw "Invalid requirement type";
+      console.error("Invalid requirement type", requirement);
     }
   })
   

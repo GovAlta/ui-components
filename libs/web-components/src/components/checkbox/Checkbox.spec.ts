@@ -11,6 +11,7 @@ async function createElement(props = {}) {
 describe('GoACheckbox Component', () => {
 
   it("should render", async () => {
+
     const el = await createElement();
     const checkbox = await el.findByTestId(testid);
     expect(checkbox).toBeTruthy();

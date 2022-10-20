@@ -50,7 +50,6 @@ describe("GoADropdown", () => {
     );
 
     const el = baseElement.querySelector("goa-dropdown");
-    console.log(el.innerHTML);
     expect(el.getAttribute("leadingicon")).toBe("color-wand");
   });
 });

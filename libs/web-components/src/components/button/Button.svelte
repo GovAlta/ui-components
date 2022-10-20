@@ -47,13 +47,13 @@
 
   onMount(() => {
     if (!isButtonType(type)) {
-      throw "Invalid button type";
+      console.error("Invalid button type")
     }
     if (!isSize(size)) {
-      throw "Invalid button size";
+      console.error("Invalid button size");
     }
     if (!isVariant(variant)) {
-      throw "Invalid button variant";
+      console.error("Invalid button variant");
     }
   })
 </script>

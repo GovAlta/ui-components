@@ -7,9 +7,9 @@
   import { fromBoolean, toBoolean } from "../../common/utils";
   // Required
   export let name: string;
-  export let checked: string;
 
   // Optional values
+  export let checked: string = "false";
   export let text: string = "";
   export let value: string = "";
   export let disabled: string = "false";

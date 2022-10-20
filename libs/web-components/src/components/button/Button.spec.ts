@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, fireEvent } from '@testing-library/svelte';
+import { render, fireEvent, waitFor } from '@testing-library/svelte';
 import GoAButton from './Button.svelte'
 
 describe('GoAButtonComponent', () => {
@@ -60,5 +60,34 @@ describe('GoAButtonComponent', () => {
       });
     });
   });
+
+  describe("Invalid attrs", () => {
+    let consoleMock: jest.SpyInstance;
+    beforeEach(() => {
+      consoleMock = jest.spyOn(console, "error").mockImplementation();
+      expect(console.error["mock"].calls.length).toBe(0);
+    })
+    afterEach(() => consoleMock.mockRestore())
+
+    it("invalid type", async () => {
+      render(GoAButton, { type: "foobar" });
+      await waitFor(() => {
+        expect(console.error["mock"].calls.length).toBeGreaterThan(0);
+      })
+    });
+
+    it("invalid size", async () => {
+      render(GoAButton, { size: "verybig" });
+      await waitFor(() => {
+        expect(console.error["mock"].calls.length).toBeGreaterThan(0);
+      })
+    });
+    it("invalid variant", async () => {
+      render(GoAButton, { variant: "sweet" });
+      await waitFor(() => {
+        expect(console.error["mock"].calls.length).toBeGreaterThan(0);
+      })
+    });
+  })
 
 });

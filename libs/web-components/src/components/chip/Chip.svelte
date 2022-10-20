@@ -5,12 +5,13 @@
   import { toBoolean } from "../../common/utils";
 
   import type { GoAIconType } from "../icon/Icon.svelte";
+  type ChipVariant = "filter"
 
   export let leadingicon: GoAIconType = null;
   export let error: string = "false";
   export let deletable: string = "false";
   export let content: string;
-  export let variant: "filter";
+  export let variant: ChipVariant;
 
   let el: HTMLElement;
   let _hovering: boolean = false;

@@ -8,17 +8,15 @@
   import noscroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";
 
-  export let heading: string;
-  export let closable: string;
-  export let scrollable: string; // TODO: determine if this flag is needed or not, things seem to work well with it always 'on'
-  export let open: string;
+  export let heading: string = "";
+  export let closable: string = "false";
+  export let open: string = "false";
   export let transition: "fast" | "slow" | "none" = "none";
+  export let width: string = "";
 
-  // Temp attribute while deciding on the best way to allow for width control
-  export let width: string;
+  const isScrollable = true; 
 
   $: isClosable = toBoolean(closable);
-  $: isScrollable = toBoolean(scrollable);
   $: isOpen = toBoolean(open);
 
   $: _transitionTime =

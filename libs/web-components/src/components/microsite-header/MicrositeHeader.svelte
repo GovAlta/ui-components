@@ -3,8 +3,8 @@
 <!-- Script -->
 <script lang="ts">
   export let type: "live" | "alpha" | "beta";
-  export let version: string;
-  export let feedbackurl: string;
+  export let version: string = "";
+  export let feedbackurl: string = "";
 
   function capitalize(val: string): string {
     if (!val || (val && val.length === 0)) return "";

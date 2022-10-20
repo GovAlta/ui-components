@@ -5,10 +5,18 @@ import GoACircularProgress from './CircularProgress.svelte'
 describe('GoACircularProgress', () => {
 
   ["fullscreen", "inline"].forEach((variant) => {
-    ["infinite", "progress"].forEach((type: string) => {
+    [-1, 0].forEach((progress: number) => {
       ["small", "large"].forEach((size: string) => {
+        const type = progress ? "infinite" : "progress";
+
         it(`renders the ${type} type of the ${variant} variant`, async () => {
-          const { container } = render(GoACircularProgress, { type, variant, size, message: "the message", visible: "true" });
+          const { container } = render(GoACircularProgress, { 
+            variant, 
+            size, 
+            progress,
+            message: "the message", 
+            visible: "true" 
+          });
 
           await waitFor(() => {
             expect(container.querySelector(`.${variant}`)).toBeTruthy();
