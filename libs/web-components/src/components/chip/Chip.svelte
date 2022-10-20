@@ -29,6 +29,8 @@
 </script>
 
 <!-- HTML -->
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   bind:this={el}
   data-testid="chip"

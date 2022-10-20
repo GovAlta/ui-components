@@ -1,4 +1,5 @@
-<svelte:options tag="goa-app-header" />
+<!-- svelte-ignore missing-custom-element-compile-options -->
+<svelte:options tag="goa-app-header"/>
 
 <!-- Script -->
 <script lang="ts">
@@ -10,8 +11,8 @@
 </script>
 
 <!-- HTML -->
-<div 
-  class="app-header" 
+<div
+  class="app-header"
   data-testid={testid}
   style={`--max-content-width: ${maxcontentwidth || "100%"}`}
 >

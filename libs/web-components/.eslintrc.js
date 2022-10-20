@@ -9,7 +9,10 @@ module.exports = {
       parserOptions: {
         project: ['libs/web-components/tsconfig.*?.json'],
       },
-      rules: {},
+      rules: {
+        "missing-custom-element-compile-options": "off",
+        "a11y-click-events-have-key-events": "off",
+      },
     },
     {
       files: ['*.ts', '*.tsx'],
@@ -22,6 +25,10 @@ module.exports = {
     {
       files: ['*.svelte'],
       processor: 'svelte3/svelte3',
+      rules: {
+        "missing-custom-element-compile-options": "off",
+        "a11y-click-events-have-key-events": "off",
+      }
     },
   ],
   settings: {

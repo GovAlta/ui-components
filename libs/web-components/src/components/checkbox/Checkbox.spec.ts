@@ -69,7 +69,7 @@ describe('GoACheckbox Component', () => {
       const checkbox = await findByTestId(testid);
       const change = jest.fn();
 
-      checkbox.addEventListener('_change', (event:any) => {
+      checkbox.addEventListener('_change', (event: CustomEvent) => {
         expect(event.detail.name).toBe('checkbox-test-name');
         expect(event.detail.value).toBe('foobar');
         expect(event.detail.checked).toBeTruthy();
@@ -85,7 +85,7 @@ describe('GoACheckbox Component', () => {
       const checkbox = await findByTestId(testid);
       const change = jest.fn();
 
-      checkbox.addEventListener('_change', (event:any) => {
+      checkbox.addEventListener('_change', (event: CustomEvent) => {
         expect(event.detail.name).toBe('checkbox-test-name');
         expect(event.detail.value).toBe('checked');
         expect(event.detail.checked).toBeTruthy();
@@ -101,7 +101,7 @@ describe('GoACheckbox Component', () => {
       const checkbox = await findByTestId(testid);
       const change = jest.fn();
 
-      checkbox.addEventListener('_change', (event:any) => {
+      checkbox.addEventListener('_change', (event: CustomEvent) => {
         expect(event.detail.name).toBe('checkbox-test-name');
         expect(event.detail.value).toBe('');
         expect(event.detail.checked).toBeFalsy();

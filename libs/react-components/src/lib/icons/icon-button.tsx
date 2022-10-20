@@ -49,7 +49,7 @@ export const GoAIconButton: FC<Props> = ({
       return;
     }
     const current = ref.current;
-    const listener = (e: any) => {
+    const listener = () => {
       onClick();
     };
 

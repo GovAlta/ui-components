@@ -62,16 +62,17 @@
     });
   }
 
-  function onKeyUp(e) {
+  function onKeyUp(e: Event) {
+    const ee = e.target as HTMLInputElement;
     e.target.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
         bubbles: false,
         cancelable: true,
-        detail: { name, value: e.target.value },
+        detail: { name, value: ee.value },
       }),
     );
-    value = e.target.value;
+    value = ee.value;
   }
 
   function doClick() {
@@ -143,6 +144,7 @@
 
     <!-- Trailing Icon Button -->
     {#if trailingicon && handlesTrailingIconClick}
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-icon-button
         on:click={doClick}
         disabled={isDisabled}

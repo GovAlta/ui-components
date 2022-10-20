@@ -53,8 +53,8 @@ export const GoADropdown: FC<Props> = (props) => {
       return;
     }
     const current = el.current;
-    const handler = (state: any) => {
-      const { name, value, values } = state.detail;
+    const handler = (e: unknown) => {
+      const { name, value, values } = (e as CustomEvent).detail;
       props.onChange(name, props.multiselect ? values : value);
     };
     current.addEventListener("_change", handler);

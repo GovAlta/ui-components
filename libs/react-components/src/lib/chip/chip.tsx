@@ -43,7 +43,7 @@ export const GoAChip = ({
     if (!onClick) return;
 
     const current = el.current;
-    const listener = (e: any) => {
+    const listener = () => {
       onClick();
     };
 

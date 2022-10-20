@@ -47,19 +47,19 @@ export const GoARadioGroup: FC<Props> = ({
     if (!el.current) {
       return;
     }
-    const listener = (e: any) => {
+    const listener = (e: unknown) => {
       if (!onChange) {
         console.warn("Missing onChange function");
         return;
       }
-      onChange(name, e.detail.value);
+      onChange(name, (e as CustomEvent).detail.value);
     };
     const currentEl = el.current;
     currentEl.addEventListener("_change", listener);
     return () => {
       currentEl.removeEventListener("_change", listener);
     };
-  }, []);
+  }, [name, onChange]);
 
   return (
     <goa-radio-group

@@ -1,3 +1,4 @@
+<svelte:options tag="test-modal-wrapper" />
 <!-- Script -->
 <script lang="ts">
   export let content: string = "";

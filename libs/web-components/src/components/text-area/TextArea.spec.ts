@@ -32,7 +32,7 @@ describe("GoATextArea", () => {
     });
 
     const textarea = result.queryByTestId("test-id");
-    textarea.addEventListener("_change", (e: any) => {
+    textarea.addEventListener("_change", (e: CustomEvent) => {
       expect(e.detail.name).toBe("name");
       expect(e.detail.value).toBe("bar");
       onChange();
@@ -97,8 +97,7 @@ describe("GoATextArea", () => {
     });
 
     it("shows a char count with a max count", async () => {
-      const { component, container } = render(GoATextArea, { name: 'test-name', showcounter: "true", value: "Jim", maxcharcount: "50" });
-      const input = container.querySelector('input');
+      const { container } = render(GoATextArea, { name: 'test-name', showcounter: "true", value: "Jim", maxcharcount: "50" });
       const counterEl = container.querySelector(".counter");
       expect(counterEl.innerHTML).toContain("3/50");
     });

@@ -31,6 +31,7 @@
       <slot />
     </div>
     <div class="close">
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-icon-button on:click={close} icon="close" inverted />
     </div>
   </div>

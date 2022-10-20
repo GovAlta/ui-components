@@ -19,7 +19,7 @@ export default {
     typescript({ sourceMap: true }),
     svelte({
       include: /\.svelte$/,
-      exclude: /^(App|\.test)\.svelte$/,
+      exclude: /^(\.test)\.svelte$/,
       preprocess: preprocess({ sourceMap: true }),
       settings: {
         'svelte3/compiler-options': {
@@ -28,19 +28,11 @@ export default {
         },
       },
       compilerOptions: {
-        dev: true,
         customElement: true,
       },
     }),
-    svelte({
-      include: /App\.svelte/,
-      compilerOptions: {
-        // enable run-time checks when not in production
-        dev: true,
-      },
-    }),
     resolve(),
-    // terser(),
+    terser(),
     summary(),
   ],
   watch: {

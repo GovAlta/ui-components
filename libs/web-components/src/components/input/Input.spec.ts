@@ -191,7 +191,7 @@ describe('GoAInput Component', () => {
       const input = await findByTestId('input-test');
       const search = jest.fn();
 
-      input.addEventListener('_change', (e: CustomEvent) => {
+      input.addEventListener('_change', () => {
         search();
       });
 
@@ -204,7 +204,7 @@ describe('GoAInput Component', () => {
       const input = await findByTestId('input-test');
       const search = jest.fn();
 
-      input.addEventListener('_change', (e: CustomEvent) => {
+      input.addEventListener('_change', () => {
         search();
       });
 

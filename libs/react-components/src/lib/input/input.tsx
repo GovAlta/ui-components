@@ -142,11 +142,11 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
       return;
     }
     const current = ref.current;
-    const changeListener = (e: any) => {
-      const { name, value } = e.detail;
+    const changeListener = (e: unknown) => {
+      const { name, value } = (e as CustomEvent).detail;
       onChange(name, value);
     };
-    const clickListener = (e: any) => {
+    const clickListener = () => {
       onTrailingIconClick?.();
     };
 
@@ -205,16 +205,6 @@ const onTimeChangeHandler = (onChange: OnChange) => {
     onChange(name, value);
   };
 };
-
-function toDate(value: GoADate): Date {
-  if (!value) {
-    return new Date(0);
-  }
-  if (typeof value === "string") {
-    return parseISO(value);
-  }
-  return value;
-}
 
 function toString(value: GoADate, tmpl = "yyyy-MM-dd"): string {
   if (!value) {
