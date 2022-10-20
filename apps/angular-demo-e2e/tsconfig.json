@@ -9,7 +9,7 @@
     "allowJs": true,
     "strict": true,
     "noImplicitAny": false,
-    "types": ["cypress","node"],
+    "types": ["cypress", "node"],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,

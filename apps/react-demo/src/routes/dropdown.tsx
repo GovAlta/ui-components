@@ -1,24 +1,27 @@
-import * as React from 'react';
+import * as React from "react";
 import { GoADropdown, GoADropdownOption } from "@abgov/react-components";
 
 export default function Dropdown() {
-
   function noop(name: string, value: string | string[]) {
     // do nothing
   }
 
   const dynamicItems = [
     {
-      name: "Fruits", 
+      name: "Fruits",
       value: "banana",
-      options: [{value: "apple"}, {value: "orange"}, {value: "banana"}]
+      options: [{ value: "apple" }, { value: "orange" }, { value: "banana" }],
     },
     {
-      name: "Vegetables", 
+      name: "Vegetables",
       value: "carrot",
-      options: [{value: "brocolli"}, {value: "carrot"}, {value: "spinach"}]
+      options: [
+        { value: "brocolli" },
+        { value: "carrot" },
+        { value: "spinach" },
+      ],
     },
-  ]
+  ];
 
   return (
     <>
@@ -34,14 +37,14 @@ export default function Dropdown() {
         <GoADropdownOption value="red" name="colors" label="Red" />
         <GoADropdownOption value="green" name="colors" label="Green" />
         <GoADropdownOption value="blue" name="colors" label="Blue" />
-      </GoADropdown >
+      </GoADropdown>
 
       <h2>Error</h2>
-      <GoADropdown 
-        name="colors2" 
-        placeholder="Select a user" 
-        error={true} 
-        value="green" 
+      <GoADropdown
+        name="colors2"
+        placeholder="Select a user"
+        error={true}
+        value="green"
         onChange={noop}
       >
         <GoADropdownOption value="red" name="colors2" label="Red" />
@@ -50,21 +53,25 @@ export default function Dropdown() {
       </GoADropdown>
 
       <h2>Dynamic</h2>
-      {dynamicItems.map(item => 
+      {dynamicItems.map((item) => (
         <div>
-          <GoADropdown 
-            key={item.name} 
-            name={item.name} 
-            value={item.value} 
+          <GoADropdown
+            key={item.name}
+            name={item.name}
+            value={item.value}
             onChange={noop}
           >
-            {item.options.map(option => 
-              <GoADropdownOption key={option.value} value={option.value} name={item.name} label={option.value} />
-            )} 
+            {item.options.map((option) => (
+              <GoADropdownOption
+                key={option.value}
+                value={option.value}
+                name={item.name}
+                label={option.value}
+              />
+            ))}
           </GoADropdown>
         </div>
-      )}
+      ))}
     </>
   );
 }
-

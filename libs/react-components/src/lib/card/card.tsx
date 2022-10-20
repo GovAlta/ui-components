@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
 interface WCProps {
   elevation: number;
@@ -9,7 +9,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-card': WCProps & React.HTMLAttributes<HTMLElement>
+      "goa-card": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -20,11 +20,7 @@ interface Props {
 }
 
 export const GoACard: FC<Props> = ({ elevation, children }) => {
-  return (
-    <goa-card elevation={elevation}>
-      {children}
-    </goa-card>
-  );
+  return <goa-card elevation={elevation}>{children}</goa-card>;
 };
 
 export default GoACard;

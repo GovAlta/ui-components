@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from "@storybook/addon-docs";
 import {
   Tabs,
   Tab,
@@ -6,13 +6,9 @@ import {
   SupportInfo,
   Props,
   Prop,
-} from '@abgov/shared/storybook-common';
+} from "@abgov/shared/storybook-common";
 
-import {
-  GoAIconButton,
-  GoAButtonGroup
-} from '@abgov/react-components';
-
+import { GoAIconButton, GoAButtonGroup } from "@abgov/react-components";
 
 <Meta title="Components/Icon Button" />
 
@@ -45,11 +41,7 @@ import {
     defaultValue="color"
     description="Style this button to show color or nocolor"
   />
-  <Prop
-    name="title"
-    type="string"
-    description="Sets the title of the button"
-  />
+  <Prop name="title" type="string" description="Sets the title of the button" />
   <Prop
     name="disabled"
     type="boolean"
@@ -74,10 +66,10 @@ import {
 
 <Story name="Icons">
   <GoAButtonGroup alignment="start">
-    <GoAIconButton icon="airplane" onClick={() => console.log('clicked')}/>
-    <GoAIconButton icon="close" onClick={() => console.log('clicked')}/>
-    <GoAIconButton icon="refresh" onClick={() => console.log('clicked')}/>
-    <GoAIconButton icon="play-back" onClick={() => console.log('clicked')}/>
+    <GoAIconButton icon="airplane" onClick={() => console.log("clicked")} />
+    <GoAIconButton icon="close" onClick={() => console.log("clicked")} />
+    <GoAIconButton icon="refresh" onClick={() => console.log("clicked")} />
+    <GoAIconButton icon="play-back" onClick={() => console.log("clicked")} />
   </GoAButtonGroup>
 </Story>
 
@@ -139,9 +131,9 @@ import {
 
 <Story name="Sizes">
   <GoAButtonGroup alignment="start">
-    <GoAIconButton icon="close" size="small"/>
-    <GoAIconButton icon="close" size="medium"/>
-    <GoAIconButton icon="close" size="large"/>
+    <GoAIconButton icon="close" size="small" />
+    <GoAIconButton icon="close" size="medium" />
+    <GoAIconButton icon="close" size="large" />
   </GoAButtonGroup>
 </Story>
 
@@ -182,8 +174,8 @@ import {
 
 <Story name="Variant">
   <GoAButtonGroup alignment="start">
-    <GoAIconButton icon="close" variant="color"/>
-    <GoAIconButton icon="close" variant="nocolor"/>
+    <GoAIconButton icon="close" variant="color" />
+    <GoAIconButton icon="close" variant="nocolor" />
   </GoAButtonGroup>
 </Story>
 
@@ -221,8 +213,8 @@ import {
 
 <Story name="Title">
   <GoAButtonGroup alignment="start">
-    <GoAIconButton icon="close" title="Close"/>
-    <GoAIconButton icon="download" title="Download"/>
+    <GoAIconButton icon="close" title="Close" />
+    <GoAIconButton icon="download" title="Download" />
   </GoAButtonGroup>
 </Story>
 
@@ -260,8 +252,8 @@ import {
 
 <Story name="Disabled">
   <GoAButtonGroup alignment="start">
-    <GoAIconButton icon="close" disabled/>
-    <GoAIconButton icon="download" disabled/>
+    <GoAIconButton icon="close" disabled />
+    <GoAIconButton icon="download" disabled />
   </GoAButtonGroup>
 </Story>
 
@@ -298,4 +290,3 @@ import {
 ---
 
 <SupportInfo />
-

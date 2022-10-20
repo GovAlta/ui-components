@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from "@storybook/addon-docs";
 import {
   Tabs,
   Tab,
@@ -6,9 +6,9 @@ import {
   SupportInfo,
   Props,
   Prop,
-} from '@abgov/shared/storybook-common';
-import { GoAButton, GoAChip } from '@abgov/react-components';
-import { useState } from 'react';
+} from "@abgov/shared/storybook-common";
+import { GoAButton, GoAChip } from "@abgov/react-components";
+import { useState } from "react";
 
 <Meta title="Components/Chip" />
 
@@ -27,17 +27,19 @@ import { useState } from 'react';
     name="variant"
     type="filter"
     defaultValue="filter"
-    description="The type of chip to use"/>
+    description="The type of chip to use"
+  />
   <Prop
     name="leadingIcon"
     type="GoAIconType"
     description="Show an icon to the left of the text"
-/>
+  />
   <Prop
     name="error"
     type="boolean"
     defaultValue="false"
-    description="Show an error state" />
+    description="Show an error state"
+  />
   <Prop
     name="deletable"
     type="boolean"
@@ -133,7 +135,7 @@ import { useState } from 'react';
 #### Delete event
 
 export const DeleteEventTemplate = () => {
-  const [chips, setChips] = useState(['Doritos', 'Fritos', 'Lays']);
+  const [chips, setChips] = useState(["Doritos", "Fritos", "Lays"]);
   const deleteChip = (chip) => {
     setChips((chips) => chips.filter((c) => c !== chip));
   };
@@ -142,7 +144,7 @@ export const DeleteEventTemplate = () => {
       <>
         <GoAButton
           type="tertiary"
-          onClick={() => setChips(['Doritos', 'Fritos', 'Lays'])}
+          onClick={() => setChips(["Doritos", "Fritos", "Lays"])}
         >
           Gimme more chips
         </GoAButton>
@@ -246,7 +248,7 @@ export const DeleteEventTemplate = () => {
     content="Chip Text"
     error={true}
     deletable={true}
-    onClick={(e) => console.log('deleting...')}
+    onClick={(e) => console.log("deleting...")}
   />
 </Story>
 

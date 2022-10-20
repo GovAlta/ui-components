@@ -5,7 +5,8 @@ declare global {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      'goa-dropdown-item': DropdownOptionProps & React.HTMLAttributes<HTMLElement>
+      "goa-dropdown-item": DropdownOptionProps &
+        React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -25,8 +26,15 @@ interface Props {
 
 export const GoADropdownOption: FC<Props> = (props) => {
   return (
-    <goa-dropdown-item data-testid={props.testId} name={props.name} value={props.value} label={props.label}>{props.children}</goa-dropdown-item>
+    <goa-dropdown-item
+      data-testid={props.testId}
+      name={props.name}
+      value={props.value}
+      label={props.label}
+    >
+      {props.children}
+    </goa-dropdown-item>
   );
-}
+};
 
 export default GoADropdownOption;

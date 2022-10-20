@@ -1,32 +1,32 @@
-import { StrictMode } from 'react';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { StrictMode } from "react";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import App from './app/app';
-import Button from './routes/button';
-import Checkbox from './routes/checkbox';
-import Radio from './routes/radio';
-import Dropdown from './routes/dropdown';
-import Input from './routes/input';
-import TextArea from './routes/textarea';
-import Modal from './routes/modal';
-import AppFooter from './routes/appFooter';
-import Badge from './routes/badge';
-import Callout from './routes/callout';
-import Chip from './routes/chip';
-import CircularProgress from './routes/circularProgress';
-import HeroBanner from './routes/heroBanner';
-import AppHeader from './routes/appHeader';
-import MicrositeHeader from './routes/micrositeHeader';
-import Container from './routes/container';
-import Skeleton from './routes/skeleton';
-import FormItem from './routes/formItem';
-import IconButton from './routes/iconButton';
+import App from "./app/app";
+import Button from "./routes/button";
+import Checkbox from "./routes/checkbox";
+import Radio from "./routes/radio";
+import Dropdown from "./routes/dropdown";
+import Input from "./routes/input";
+import TextArea from "./routes/textarea";
+import Modal from "./routes/modal";
+import AppFooter from "./routes/appFooter";
+import Badge from "./routes/badge";
+import Callout from "./routes/callout";
+import Chip from "./routes/chip";
+import CircularProgress from "./routes/circularProgress";
+import HeroBanner from "./routes/heroBanner";
+import AppHeader from "./routes/appHeader";
+import MicrositeHeader from "./routes/micrositeHeader";
+import Container from "./routes/container";
+import Skeleton from "./routes/skeleton";
+import FormItem from "./routes/formItem";
+import IconButton from "./routes/iconButton";
 
-import '@abgov/styles';
+import "@abgov/styles";
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 ReactDOM.render(
   <BrowserRouter>
     <Routes>

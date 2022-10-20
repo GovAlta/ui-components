@@ -1,11 +1,15 @@
-import { GoAInput, GoAInputDate, GoAInputDateTime, GoAInputTime } from '@abgov/react-components';
-import * as React from 'react';
+import {
+  GoAInput,
+  GoAInputDate,
+  GoAInputDateTime,
+  GoAInputTime,
+} from "@abgov/react-components";
+import * as React from "react";
 
 import type { GoADate } from "@abgov/react-components";
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Input() {
-
   const [date, setDate] = useState<GoADate>("2022-08-08");
   const [time, setTime] = useState<string>("12:12");
   const [minDate, _setMinDate] = useState<Date>(new Date());
@@ -16,17 +20,17 @@ export default function Input() {
   }
 
   function onDateChange(_name: string, value: GoADate) {
-    setDate(value)
+    setDate(value);
   }
 
   function onTimeChange(_name: string, value: string) {
-    setTime(value)
+    setTime(value);
   }
 
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
   return (
-    <>  
+    <>
       <h4>Date with a min and max and Date values</h4>
       <GoAInputDate
         name="Date with min max"
@@ -83,31 +87,26 @@ export default function Input() {
         value=""
         onChange={noop}
         type="text"
-        disabled={true} 
+        disabled={true}
         placeholder="Find by name"
       />
 
       <h2>Error state</h2>
-      <GoAInput
-        name=""
-        value=""
-        onChange={noop}
-        type="text"
-        error={true}
-      />
+      <GoAInput name="" value="" onChange={noop} type="text" error={true} />
 
       <h2>Focus</h2>
-      <GoAInput
-        name=""
-        value=""
-        onChange={noop}
-        type="text"
-      />
+      <GoAInput name="" value="" onChange={noop} type="text" />
 
       <h2>Prefix and Suffix</h2>
       <GoAInput name="input" value="" prefix="$" onChange={noop} />
       <GoAInput name="input" value="" suffix="items" onChange={noop} />
-      <GoAInput name="input" value="" prefix="$" suffix="per item" onChange={noop} />
+      <GoAInput
+        name="input"
+        value=""
+        prefix="$"
+        suffix="per item"
+        onChange={noop}
+      />
     </>
   );
 }

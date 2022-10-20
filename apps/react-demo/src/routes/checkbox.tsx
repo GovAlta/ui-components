@@ -1,9 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 import { GoACheckbox } from "@abgov/react-components";
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Checkbox() {
-
   const [desserts1, setDesserts1] = useState(false);
   const [desserts2, setDesserts2] = useState(true);
   const [desserts3, setDesserts3] = useState(false);
@@ -34,8 +33,7 @@ export default function Checkbox() {
         value={10}
         checked={desserts1}
         onChange={(name, checked, value) => onChange1(name, checked, value)}
-      >
-      </GoACheckbox>
+      ></GoACheckbox>
 
       <h2>Checked</h2>
       <GoACheckbox
@@ -64,7 +62,6 @@ export default function Checkbox() {
         onChange={(name, checked, value) => onChange3(name, checked, value)}
         error
       ></GoACheckbox>
-
     </>
   );
 }

@@ -22,11 +22,11 @@ and verify the issue you're about to submit isn't a duplicate.
 (What version of the package)
 (What browser)
 
-### What is the current *bug* behavior?
+### What is the current _bug_ behavior?
 
 (What actually happens)
 
-### What is the expected *correct* behavior?
+### What is the expected _correct_ behavior?
 
 (What you should see instead)
 
@@ -36,9 +36,11 @@ and verify the issue you're about to submit isn't a duplicate.
 logs, and code as it's tough to read otherwise.)
 
 ### Possible fixes / Bugfix branch
+
 <!---
 If at all possible [contribute yourself](../../contributing.md)!
 -->
+
 (link to bugfix branch or file/line of code believed to be problem)
 
 /label ~bug

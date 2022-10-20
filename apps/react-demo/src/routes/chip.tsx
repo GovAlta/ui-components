@@ -1,27 +1,29 @@
-import { GoAChip } from '@abgov/react-components';
-import * as React from 'react';
-import { useState } from 'react';
+import { GoAChip } from "@abgov/react-components";
+import * as React from "react";
+import { useState } from "react";
 
 export default function Chip() {
-
-  const [chips, setChips] = useState([
-    "Doritos",
-    "Fritos",
-    "Lays",
-  ]);
+  const [chips, setChips] = useState(["Doritos", "Fritos", "Lays"]);
 
   const deleteChip = (chip: string) => {
-    setChips((chips) => chips.filter(c => c !== chip));
+    setChips((chips) => chips.filter((c) => c !== chip));
   };
 
   function ChipsToDeleteExample(chips: string[], deleteChipHandler: any) {
-    return <>
-      {
-        chips.map((chip) => {
-          return <GoAChip key={chip} deletable={true} content={chip} onClick={() => deleteChipHandler(chip)} />
-        })
-      }
-    </>;
+    return (
+      <>
+        {chips.map((chip) => {
+          return (
+            <GoAChip
+              key={chip}
+              deletable={true}
+              content={chip}
+              onClick={() => deleteChipHandler(chip)}
+            />
+          );
+        })}
+      </>
+    );
   }
 
   return (
@@ -43,8 +45,12 @@ export default function Chip() {
       <GoAChip content="Chip Text" deletable={true}></GoAChip>
       <GoAChip
         content="Chip Text"
-        error={true} deletable={true} onClick={() => { console.log("deleting") }}
-      ></GoAChip >
+        error={true}
+        deletable={true}
+        onClick={() => {
+          console.log("deleting");
+        }}
+      ></GoAChip>
     </>
   );
 }

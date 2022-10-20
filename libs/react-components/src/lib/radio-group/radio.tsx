@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
 interface RadioItemProps {
   name: string;
@@ -13,7 +13,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-radio-item': RadioItemProps & React.HTMLAttributes<HTMLElement>
+      "goa-radio-item": RadioItemProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -29,7 +29,16 @@ interface Props {
   testId?: string;
 }
 
-export const GoARadioItem: FC<Props> = ({ name, label, value, disabled, checked, error, testId, children }) => {
+export const GoARadioItem: FC<Props> = ({
+  name,
+  label,
+  value,
+  disabled,
+  checked,
+  error,
+  testId,
+  children,
+}) => {
   return (
     <goa-radio-item
       name={name}

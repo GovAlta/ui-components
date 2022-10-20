@@ -1,10 +1,5 @@
-import {
-  forwardRef,
-  Directive,
-  ElementRef,
-  HostListener
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { forwardRef, Directive, ElementRef, HostListener } from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Directive({
   selector: "[goaValue]",
@@ -13,8 +8,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => ValueDirective),
       multi: true,
-    }
-  ]
+    },
+  ],
 })
 export class ValueDirective implements ControlValueAccessor {
   private _value = "";
@@ -49,14 +44,13 @@ export class ValueDirective implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  constructor(protected elementRef: ElementRef) { }
+  constructor(protected elementRef: ElementRef) {}
 
-  @HostListener('_change', ['$event.detail.value'])
+  @HostListener("_change", ["$event.detail.value"])
   listenForValueChange(value: string) {
-    this.value = value ;
+    this.value = value;
   }
 }
-
 
 @Directive({
   selector: "[goaValues]",
@@ -65,8 +59,8 @@ export class ValueDirective implements ControlValueAccessor {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => ValuesDirective),
       multi: true,
-    }
-  ]
+    },
+  ],
 })
 export class ValuesDirective implements ControlValueAccessor {
   private _value?: string[] = [];
@@ -80,7 +74,7 @@ export class ValuesDirective implements ControlValueAccessor {
 
   set value(val: string[] | undefined) {
     if (val && val !== this._value) {
-      this._setValue(val)
+      this._setValue(val);
       this.elementRef.nativeElement.value = JSON.stringify(val);
     }
   }
@@ -99,12 +93,12 @@ export class ValuesDirective implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  constructor(protected elementRef: ElementRef) { }
+  constructor(protected elementRef: ElementRef) {}
 
-  @HostListener('_change', ['$event.detail.value'])
-  listenForValueChange(value: string){
+  @HostListener("_change", ["$event.detail.value"])
+  listenForValueChange(value: string) {
     if (!value) {
-      this._setValue(undefined)
+      this._setValue(undefined);
       return;
     }
 
@@ -113,10 +107,8 @@ export class ValuesDirective implements ControlValueAccessor {
     } catch (e) {
       // we still need to trigger the events to prevent any previous
       // valid value to remain set.
-      const v = value.match(/^[\w\s,]*$/)
-        ? value.split(",")
-        : undefined; 
-      this._setValue(v)
+      const v = value.match(/^[\w\s,]*$/) ? value.split(",") : undefined;
+      this._setValue(v);
     }
   }
 

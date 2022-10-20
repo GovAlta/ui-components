@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from "@storybook/addon-docs";
 
 <Meta title="Setup/Angular" />
 
@@ -33,10 +33,10 @@ Update `src/app/app.module.ts` as per the three steps below
 
 ```typescript
 // 1. Import the CUSTOM_ELEMENTS_SCHEMA
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 // 2. Import the web-components lib
-import '@abgov/angular-components';
+import "@abgov/angular-components";
 
 @NgModule({
   declarations: [AppComponent],
@@ -53,5 +53,5 @@ export class AppModule {}
 Add the styles link in the `src/styles.css` file
 
 ```css
-@import '@abgov/styles/styles.esm.css';
+@import "@abgov/styles/styles.esm.css";
 ```

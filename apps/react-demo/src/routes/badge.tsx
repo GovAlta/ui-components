@@ -1,5 +1,5 @@
-import { GoABadge, GoAInfoBadge } from '@abgov/react-components';
-import * as React from 'react';
+import { GoABadge, GoAInfoBadge } from "@abgov/react-components";
+import * as React from "react";
 
 export default function Badge() {
   return (
@@ -39,8 +39,6 @@ export default function Badge() {
       <GoABadge type="light" content="Light" icon={true}></GoABadge>
       <GoABadge type="light" content="Light"></GoABadge>
       <GoABadge type="light" icon={true}></GoABadge>
-
     </>
   );
 }
-

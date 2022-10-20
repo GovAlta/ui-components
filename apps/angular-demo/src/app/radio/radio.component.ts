@@ -1,31 +1,33 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'abgov-radio',
-  templateUrl: './radio.component.html',
-  styleUrls: ['./radio.component.css']
+  selector: "abgov-radio",
+  templateUrl: "./radio.component.html",
+  styleUrls: ["./radio.component.css"],
 })
 export class RadioComponent {
+  constructor() {}
 
-  constructor() { }
-
-  boundVal = ""
+  boundVal = "";
 
   dynamicItems = [
     {
-      name: "Fruits", 
+      name: "Fruits",
       value: "banana",
-      options: [{value: "apple"}, {value: "orange"}, {value: "banana"}]
+      options: [{ value: "apple" }, { value: "orange" }, { value: "banana" }],
     },
     {
-      name: "Vegetables", 
+      name: "Vegetables",
       value: "carrot",
-      options: [{value: "brocolli"}, {value: "carrot"}, {value: "spinach"}]
+      options: [
+        { value: "brocolli" },
+        { value: "carrot" },
+        { value: "spinach" },
+      ],
     },
-  ]
+  ];
 
   onChange(e: any) {
-    console.log('onChange', e.detail.name, e.detail.value);
+    console.log("onChange", e.detail.name, e.detail.value);
   }
-
 }

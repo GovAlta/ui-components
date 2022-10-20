@@ -52,7 +52,9 @@ We are using [SCSS](https://sass-lang.com/) to do CSS compilation.
 Try to achieve unit test coverage for the configuration interface for a component. We encourage the use of [testing-library](https://testing-library.com/) to test components to provide a uniform test authoring experience across all library types. However, if testing-library does not meet the needs for a test being written feel free to use a library of your choice.
 
 Please try to use the attribute <b>data-testid</b> as the selector within unit testing.
+
 ## State
+
 Stateless components are preferred. For complex components, such as table, date-picker and form, please restrict the UI related states within a container component and keep the sub components as stateless as possible.
 
 ## Documentation

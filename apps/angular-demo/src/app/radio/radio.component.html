@@ -37,7 +37,7 @@
 
 <h2>Dynamic</h2>
 <div *ngFor="let item of dynamicItems">
-  <h4>{{item.name}}</h4>
+  <h4>{{ item.name }}</h4>
   <goa-radio-group
     [attr.name]="item.name"
     [value]="item.value"
@@ -54,10 +54,8 @@
 </div>
 
 <h2>Binding</h2>
-<div>
-  Selected value: {{boundVal}}
-</div>
-<goa-radio-group name="bindingColor" [(ngModel)]="boundVal" >
+<div>Selected value: {{ boundVal }}</div>
+<goa-radio-group name="bindingColor" [(ngModel)]="boundVal">
   <goa-radio-item name="bindingColor" value="red"></goa-radio-item>
   <goa-radio-item name="bindingColor" value="blue"></goa-radio-item>
   <goa-radio-item name="bindingColor" value="orange"></goa-radio-item>

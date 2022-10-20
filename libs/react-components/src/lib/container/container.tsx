@@ -1,7 +1,13 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode } from "react";
 
-type ContainerType = 'interactive' | 'non-interactive' | 'info' | 'error' | 'success' | 'important';
-type Accent = 'thick' | 'thin' | 'filled';
+type ContainerType =
+  | "interactive"
+  | "non-interactive"
+  | "info"
+  | "error"
+  | "success"
+  | "important";
+type Accent = "thick" | "thin" | "filled";
 type ContainerPadding = "relaxed" | "compact";
 
 interface WCProps {
@@ -14,7 +20,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-container': WCProps & React.HTMLAttributes<HTMLElement>
+      "goa-container": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }

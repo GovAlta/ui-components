@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef } from "react";
 import { GoAIconType } from "../icons";
 
-export * from './dropdown-option';
+export * from "./dropdown-option";
 
 interface WCProps {
   ref: React.MutableRefObject<HTMLElement | null>;
@@ -23,7 +23,7 @@ declare global {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      'goa-dropdown': WCProps & React.HTMLAttributes<HTMLElement>
+      "goa-dropdown": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -36,8 +36,8 @@ interface Props {
   // optional
   disabled?: boolean;
   filterable?: boolean;
-  leadingIcon?: GoAIconType,
-  maxHeight?: string,
+  leadingIcon?: GoAIconType;
+  maxHeight?: string;
   error?: boolean;
   multiselect?: boolean;
   placeholder?: string;
@@ -47,7 +47,6 @@ interface Props {
 }
 
 export const GoADropdown: FC<Props> = (props) => {
-
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -58,11 +57,11 @@ export const GoADropdown: FC<Props> = (props) => {
       const { name, value, values } = state.detail;
       props.onChange(name, props.multiselect ? values : value);
     };
-    current.addEventListener('_change', handler);
+    current.addEventListener("_change", handler);
     return () => {
-      current.removeEventListener('_change', handler);
-    }
-  }, [el, props])
+      current.removeEventListener("_change", handler);
+    };
+  }, [el, props]);
 
   return (
     <goa-dropdown
@@ -82,6 +81,6 @@ export const GoADropdown: FC<Props> = (props) => {
       {props.children}
     </goa-dropdown>
   );
-}
+};
 
 export default GoADropdown;

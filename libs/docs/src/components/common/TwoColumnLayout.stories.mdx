@@ -1,6 +1,19 @@
-import { Meta, Story } from '@storybook/addon-docs';
-import { Props, Prop, Browser, Tabs, Tab, CodeSnippet, SupportInfo, Markdown } from '@abgov/shared/storybook-common';
-import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-components';
+import { Meta, Story } from "@storybook/addon-docs";
+import {
+  Props,
+  Prop,
+  Browser,
+  Tabs,
+  Tab,
+  CodeSnippet,
+  SupportInfo,
+  Markdown,
+} from "@abgov/shared/storybook-common";
+import {
+  GoATwoColumnLayout,
+  GoAAppHeader,
+  GoAAppFooter,
+} from "@abgov/react-components";
 
 <Meta title="Layouts/Two Column" />
 
@@ -18,9 +31,29 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
   <Prop name="navColumnWidth" type="string" description="% | px | rem | ch | etc" defaultValue="256px" />
   <Prop name="maxContentWidth" type="string" description="% | px | rem | ch | etc" defaultValue="904px" />
 
-  <Prop name="header" lang="angular" type="slot" required="true" description="How to add GoAAppHeader component" />
-  <Prop name="footer" lang="angular" type="slot" required="true" description="How to add GoAAppFooter component" />
-  <Prop name="nav" lang="angular" type="slot" required="true" description="Component containing nav links for application" />
+{" "}
+
+<Prop
+  name="header"
+  lang="angular"
+  type="slot"
+  required="true"
+  description="How to add GoAAppHeader component"
+/>
+<Prop
+  name="footer"
+  lang="angular"
+  type="slot"
+  required="true"
+  description="How to add GoAAppFooter component"
+/>
+<Prop
+  name="nav"
+  lang="angular"
+  type="slot"
+  required="true"
+  description="Component containing nav links for application"
+/>
 
   <Prop name="header" lang="react" type="ReactNode" required="true" description="GoAAppHeader component" />
   <Prop name="footer" lang="react" type="ReactNode"  required="true"description="GoAAppFooter component" />
@@ -34,17 +67,20 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
     <GoATwoColumnLayout
       header={<GoAAppHeader />}
       footer={<GoAAppFooter />}
-      nav={<>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#accounts">Accounts</a>
-        <a href="#invoices">Invoices</a>
-        <a href="#employees">Employees</a>
-        <a href="#claims">Claims</a>
-      </>}
+      nav={
+        <>
+          <a href="#dashboard">Dashboard</a>
+          <a href="#accounts">Accounts</a>
+          <a href="#invoices">Invoices</a>
+          <a href="#employees">Employees</a>
+          <a href="#claims">Claims</a>
+        </>
+      }
     >
       <h1>Heading 1</h1>
       <p>
-        Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+        Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
+        cillum sint consectetur cupidatat.
       </p>
     </GoATwoColumnLayout>
   </Browser>
@@ -52,7 +88,9 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
 
 <Tabs>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-two-column-layout>
         <section slot="header">
           <goa-app-header></goa-app-header>
@@ -72,10 +110,13 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
           <goa-app-footer></goa-app-footer>
         </section>
       </goa-two-column-layout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       import { GoAAppHeader, GoAAppFooter } from '@abgov/react-components';
       <GoATwoColumnLayout
         header={<GoAAppHeader />}
@@ -93,10 +134,10 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
           Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
         </p>
       </GoATwoColumnLayout>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
-
 
 #### Max content width
 
@@ -106,17 +147,20 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
       header={<GoAAppHeader maxContentWidth="100%" />}
       footer={<GoAAppFooter maxContentWidth="100%" />}
       maxContentWidth="100%"
-      nav={<>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#accounts">Accounts</a>
-        <a href="#invoices">Invoices</a>
-        <a href="#employees">Employees</a>
-        <a href="#claims">Claims</a>
-      </>}
+      nav={
+        <>
+          <a href="#dashboard">Dashboard</a>
+          <a href="#accounts">Accounts</a>
+          <a href="#invoices">Invoices</a>
+          <a href="#employees">Employees</a>
+          <a href="#claims">Claims</a>
+        </>
+      }
     >
       <h1>Heading 1</h1>
       <p>
-        Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+        Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
+        cillum sint consectetur cupidatat.
       </p>
     </GoATwoColumnLayout>
   </Browser>
@@ -124,7 +168,9 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
 
 <Tabs>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-two-column-layout maxContentWidth="100%">
         <section slot="header">
           <goa-app-header maxContentWidth="100%"></goa-app-header>
@@ -144,10 +190,13 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
           <goa-app-footer maxContentWidth="100%"></goa-app-footer>
         </section>
       </goa-two-column-layout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       import { GoAAppHeader, GoAAppFooter } from '@abgov/react-components';
       <GoATwoColumnLayout
         maxContentWidth="100%"
@@ -166,10 +215,10 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
           Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
         </p>
       </GoATwoColumnLayout>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
-
 
 #### Nav column width
 
@@ -179,17 +228,20 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
       header={<GoAAppHeader />}
       footer={<GoAAppFooter />}
       navColumnWidth="16ch"
-      nav={<>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#accounts">Accounts</a>
-        <a href="#invoices">Invoices</a>
-        <a href="#employees">Employees</a>
-        <a href="#claims">Claims</a>
-      </>}
+      nav={
+        <>
+          <a href="#dashboard">Dashboard</a>
+          <a href="#accounts">Accounts</a>
+          <a href="#invoices">Invoices</a>
+          <a href="#employees">Employees</a>
+          <a href="#claims">Claims</a>
+        </>
+      }
     >
       <h1>Heading 1</h1>
       <p>
-        Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+        Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
+        cillum sint consectetur cupidatat.
       </p>
     </GoATwoColumnLayout>
   </Browser>
@@ -197,7 +249,9 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
 
 <Tabs>
   <Tab label="Angular">
-    <CodeSnippet lang="html" code={`
+    <CodeSnippet
+      lang="html"
+      code={`
       <goa-two-column-layout navColumnWidth="16ch">
         <section slot="header">
           <goa-app-header></goa-app-header>
@@ -217,10 +271,13 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
           <goa-app-footer></goa-app-footer>
         </section>
       </goa-two-column-layout>
-    `}/>
+    `}
+    />
   </Tab>
   <Tab label="React">
-    <CodeSnippet lang="tsx" code={`
+    <CodeSnippet
+      lang="tsx"
+      code={`
       import { GoAAppHeader, GoAAppFooter } from '@abgov/react-components';
       <GoATwoColumnLayout
         navColumnWidth="16ch"
@@ -239,7 +296,8 @@ import { GoATwoColumnLayout, GoAAppHeader, GoAAppFooter } from '@abgov/react-com
           Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
         </p>
       </GoATwoColumnLayout>
-    `}/>
+    `}
+    />
   </Tab>
 </Tabs>
 

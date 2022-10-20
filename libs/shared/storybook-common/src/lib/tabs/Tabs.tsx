@@ -1,5 +1,5 @@
-import React, { Children, ReactNode, useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { Children, ReactNode, useState, useEffect } from "react";
+import styled from "styled-components";
 
 /**
  *
@@ -28,9 +28,9 @@ function Tabs(props: TabsProps): JSX.Element {
   }
 
   function activeChildren(): ReactNode[] {
-    return Children
-      .toArray(props.children) 
-      .filter(child => !child?.["props"]?.["hidden"])
+    return Children.toArray(props.children).filter(
+      (child) => !child?.["props"]?.["hidden"]
+    );
   }
 
   return (
@@ -38,10 +38,14 @@ function Tabs(props: TabsProps): JSX.Element {
       <SCTabs>
         {
           // eslint-disable-next-line
-          activeChildren() 
-            .map((child: JSX.Element, index: number) => {
+          activeChildren().map((child: JSX.Element, index: number) => {
             return (
-              <TabItem key={child.key} visible={!child.props.hidden} active={activeTabIndex === index} onSelect={() => selectTab(index)}>
+              <TabItem
+                key={child.key}
+                visible={!child.props.hidden}
+                active={activeTabIndex === index}
+                onSelect={() => selectTab(index)}
+              >
                 {child.props.label}
               </TabItem>
             );
@@ -88,7 +92,7 @@ function TabItem(props: TabItemProps & { children: ReactNode }) {
     return <span></span>;
   }
   return (
-    <SCTab className={props.active && 'active'} onClick={() => selectTab()}>
+    <SCTab className={props.active && "active"} onClick={() => selectTab()}>
       {props.children}
     </SCTab>
   );
@@ -128,7 +132,6 @@ const SCTab = styled.div`
     border-bottom: 4px solid var(--goa-color-brand);
     padding-bottom: 0;
   }
-
 `;
 
 const TabContent = styled.div`
@@ -144,7 +147,7 @@ const TabContent = styled.div`
   }
 
   pre {
-    padding: 1rem!important;
-    background-color: #fafafa!important;
+    padding: 1rem !important;
+    background-color: #fafafa !important;
   }
 `;

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Callout } from '../callout/Callout';
+import React from "react";
+import { Callout } from "../callout/Callout";
 
 /**
  * Show a list Do's and Don'ts in a callout format.
@@ -16,13 +16,9 @@ export const DoDont = ({ dos, donts }) => {
 };
 
 export const Do = ({ description }) => {
-  return (
-    <Callout positive={true} content={description} />
-  );
+  return <Callout positive={true} content={description} />;
 };
 
 export const Dont = ({ description }) => {
-  return (
-    <Callout positive={false} content={description} />
-  );
+  return <Callout positive={false} content={description} />;
 };

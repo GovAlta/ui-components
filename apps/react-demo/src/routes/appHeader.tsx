@@ -1,5 +1,5 @@
-import { GoAAppHeader } from '@abgov/react-components';
-import * as React from 'react';
+import { GoAAppHeader } from "@abgov/react-components";
+import * as React from "react";
 
 export default function AppHeader() {
   return (
@@ -16,10 +16,14 @@ export default function AppHeader() {
       ></GoAAppHeader>
 
       <h2>Custom Content</h2>
-      <GoAAppHeader url="https://example.com" heading="Ticket and Fine Payments">
-        <a title="loginUrl" href="#">Login</a>
+      <GoAAppHeader
+        url="https://example.com"
+        heading="Ticket and Fine Payments"
+      >
+        <a title="loginUrl" href="#">
+          Login
+        </a>
       </GoAAppHeader>
     </>
   );
 }
-

@@ -1,16 +1,13 @@
 **Add the following to the title!**  
 **feat:** for features - increment minor version number  
 **fix:** for bugfix - increment build number  
-**break:** for breaking change - increment major version number  
-  
+**break:** for breaking change - increment major version number
 
 **1. What this code change do:**
 
 -
 
--
-
-**2. Make sure that you've checked the boxes below before you submit MR:**
+- **2. Make sure that you've checked the boxes below before you submit MR:**
 
 - [ ] I have read and followed the [contribution guidelines](../../contributing.md)
 - [ ] I have run a build locally.

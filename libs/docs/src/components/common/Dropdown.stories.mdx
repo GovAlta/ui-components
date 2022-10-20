@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from "@storybook/addon-docs";
 import {
   Tabs,
   Tab,
@@ -6,13 +6,13 @@ import {
   SupportInfo,
   Props,
   Prop,
-} from '@abgov/shared/storybook-common';
+} from "@abgov/shared/storybook-common";
 import {
   GoADropdown,
   GoADropdownOption,
   GoACallout,
-} from '@abgov/react-components';
-import { useState } from 'react';
+} from "@abgov/react-components";
+import { useState } from "react";
 
 <Meta title="Components/Dropdown" />
 
@@ -114,7 +114,7 @@ import { useState } from 'react';
 </Story>
 
 export const Template = (args) => {
-  const [value, setValue] = useState('green');
+  const [value, setValue] = useState("green");
   function onChange(name, value) {
     console.log(name, value);
     setValue(value);
@@ -130,7 +130,7 @@ export const Template = (args) => {
 
 #### Basic
 
-<Story name="Basic" args={{ name: 'basic' }}>
+<Story name="Basic" args={{ name: "basic" }}>
   {Template.bind()}
 </Story>
 
@@ -207,7 +207,7 @@ export const Template = (args) => {
 
 #### Error
 
-<Story name="Error" args={{ name: 'error', error: true }}>
+<Story name="Error" args={{ name: "error", error: true }}>
   {Template.bind()}
 </Story>
 

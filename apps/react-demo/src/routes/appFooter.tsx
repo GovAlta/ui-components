@@ -1,5 +1,5 @@
 import { GoAAppFooter } from "@abgov/react-components";
-import * as React from 'react';
+import * as React from "react";
 
 export default function AppFooter() {
   return (

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Meta, Story } from '@storybook/addon-docs';
+import { useState } from "react";
+import { Meta, Story } from "@storybook/addon-docs";
 import {
   SupportInfo,
   Tabs,
@@ -7,8 +7,8 @@ import {
   CodeSnippet,
   Props,
   Prop,
-} from '@abgov/shared/storybook-common';
-import { GoATextArea } from '@abgov/react-components';
+} from "@abgov/shared/storybook-common";
+import { GoATextArea } from "@abgov/react-components";
 
 <Meta title="Components/Text area" component={GoATextArea} />
 
@@ -99,7 +99,7 @@ export const noop = () => {
   <GoATextArea
     name="comment"
     onChange={(name, value) => {
-      console.log('changed', name, value);
+      console.log("changed", name, value);
     }}
     value="Initial value"
   />
@@ -164,7 +164,7 @@ export const noop = () => {
 #### Character count
 
 export const CharCountTemplate = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   return (
     <GoATextArea
       name="comment"
@@ -226,7 +226,7 @@ export const CharCountTemplate = () => {
 #### Character count with limit
 
 export const CharCountWithLimitTemplate = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   return (
     <GoATextArea
       name="comment"

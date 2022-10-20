@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from "react";
 
 interface WCProps {
   ref: React.Ref<HTMLTextAreaElement>;
@@ -17,7 +17,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'goa-textarea': WCProps & React.HTMLAttributes<HTMLElement>
+      "goa-textarea": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -35,7 +35,7 @@ interface Props {
   width?: string;
   testId?: string;
   onChange: (name: string, value: string) => void;
-};
+}
 
 export const GoATextArea: FC<Props> = ({
   name,
@@ -48,7 +48,7 @@ export const GoATextArea: FC<Props> = ({
   width,
   testId,
   error,
-  onChange
+  onChange,
 }) => {
   const el = useRef<HTMLTextAreaElement>(null);
 
@@ -62,11 +62,11 @@ export const GoATextArea: FC<Props> = ({
       onChange(name, value);
     };
 
-    current.addEventListener('_change', listener)
+    current.addEventListener("_change", listener);
     return () => {
-      current.removeEventListener('_change', listener);
-    }
-  }, [el, onChange])
+      current.removeEventListener("_change", listener);
+    };
+  }, [el, onChange]);
 
   return (
     <goa-textarea
@@ -81,8 +81,7 @@ export const GoATextArea: FC<Props> = ({
       width={width}
       error={error}
       data-testid={testId}
-    >
-    </goa-textarea>
+    ></goa-textarea>
   );
 };
 
