@@ -4,7 +4,7 @@
   import { toBoolean } from "../../common/utils";
   import type { IconSize, IconTheme, GoAIconType } from "../icon/Icon.svelte";
 
-  type IconButtonVariant = "color" | "nocolor";
+  type IconButtonVariant = "color" | "nocolor" | "dark";
 
   // required
   export let icon: GoAIconType;
@@ -23,11 +23,10 @@
   $: css = `${variant} ${isInverted ? "inverted" : ""}`;
   $: isDisabled = toBoolean(disabled);
   $: isInverted = toBoolean(inverted);
-
-  $: _size = {
-    small: "1rem",
-    medium: "1rem",
-    large: "2rem",
+  $: _paddingSize = {
+    small: "0.25rem",
+    medium: "0.25rem",
+    large: "0.5rem",
   }[size];
 
   function handleClick(e) {
@@ -38,7 +37,7 @@
 </script>
 
 <button
-  style="--size: {_size}"
+  style="--pading-size: {_paddingSize}"
   title={title}
   disabled={isDisabled}
   class={css}
@@ -68,22 +67,20 @@
     background: transparent;
     cursor: pointer;
     border: none;
-    padding: 0 0.75rem;
+    border-radius: 0.5rem;
+    padding: var(--pading-size);
   }
 
   /* Primary */
-  .color {
-    border-radius: 0.5rem;
-    padding: calc(var(--size) / 4);
+  .color,.dark {
     color: var(--goa-color-interactive);
     fill: var(--goa-color-interactive);
     cursor: pointer;
     transition: background-color 100ms ease-in, transform 100ms ease-in;
   }
 
-  .nocolor {
-    border-radius: 0.5rem;
-    padding: calc(var(--size) / 4);
+  .dark:not(.inverted){
+    color: unset;
   }
 
   button:hover {
@@ -91,7 +88,6 @@
     border-color: var(--color-gray-100);
     color: var(--goa-color-interactive--hover);
     outline: none;
-
   }
 
   button:focus,
@@ -116,4 +112,15 @@
   button:disabled:hover {
     background-color: transparent;
   }
+
+  button.dark:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  button.dark:focus,
+  button.dark:active {
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 3px var(--color-white);
+  }
+
 </style>

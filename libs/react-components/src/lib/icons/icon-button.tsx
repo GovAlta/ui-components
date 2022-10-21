@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef } from "react";
 import { IconSize, GoAIconType } from "./icon";
 
-type IconVariant = "color" | "nocolor";
+type IconVariant = "color" | "nocolor" | "dark";
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
