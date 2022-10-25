@@ -107,8 +107,7 @@ export class ValuesDirective implements ControlValueAccessor {
     try {
       this.value = JSON.parse(value);
     } catch (e) {
-      // we still need to trigger the events to prevent any previous
-      // valid value to remain set.
+      // we still need to trigger the events to prevent any previous valid value to remain set.
       const v = value.match(/^[\w\s,]*$/) ? value.split(",") : undefined;
       this._setValue(v);
     }
