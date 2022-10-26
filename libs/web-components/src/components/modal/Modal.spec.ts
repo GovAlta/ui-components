@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, fireEvent, cleanup } from '@testing-library/svelte';
+import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
 import GoAModal from './Modal.svelte'
 import GoAModalWrapper from './ModalWrapper.test.svelte'
 
@@ -55,7 +55,40 @@ describe('Modal Component', () => {
     const el = render(GoAModalWrapper, { actionContent });
 
     expect(el.container.querySelector("[slot=actions]").innerHTML).toContain(actionContent);
-  })
+  });
 
+  ["emergency", "important", "information", "success", "event"].forEach(calloutVariant => {
+    it(`renders the ${calloutVariant} callout modal`, async () => {
+      const el = render(GoAModal, { open: "true", heading: "Heading", type: "callout", "calloutvariant": calloutVariant });
+      expect(el.queryByTestId("modal-title").innerHTML).toContain("Heading");
+      expect(el.container.querySelector(`.${calloutVariant}`)).toBeTruthy();
+    });
+  });
+
+  it("should not render if the type is callout and calloutVariant is not set", async () => {
+    try {
+      render(GoAModal, { open: "true", heading: "Heading", type: "callout" });
+    }
+    catch (e: any) {
+      console.log(e, 'error');
+    }
+    await waitFor(() => {
+      const type = document.querySelector('goa-icon').getAttribute("type");;
+      expect(type).toBeFalsy();
+    })
+  });
+
+  it("should not render if the type is callout and calloutVariant is invalid", async () => {
+    try {
+      render(GoAModal, { open: "true", heading: "Heading", type: "callout", calloutvariant: "importantt" });
+    }
+    catch (e: any) {
+      console.log(e, 'error');
+    }
+    await waitFor(() => {
+      const type = document.querySelector("goa-icon").getAttribute("type");
+      expect(type).toBeFalsy();
+    })
+  });
 
 });
