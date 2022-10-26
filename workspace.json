@@ -39,12 +39,12 @@
               "libs/angular-components/src/**/*.html"
             ]
           }
-        }
-      },
-      "release": {
-        "builder": "@nrwl/workspace:run-commands",
-        "options": {
-          "command": "npx semantic-release -e ./libs/angular-components/.releaserc.json"
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "npx semantic-release -e ./libs/angular-components/.releaserc.json"
+          }
         }
       },
       "tags": []
