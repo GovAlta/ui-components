@@ -122,7 +122,6 @@
 
     // hide menu on blur
     menuEl.addEventListener("blur", closeMenu);
-    menuEl.focus();
 
     // bind up/down arrows to navigate options
     menuEl.addEventListener("mouseover", onHighlight);
