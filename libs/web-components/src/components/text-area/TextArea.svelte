@@ -10,19 +10,20 @@
   export let rows: number = 3;
   export let testid: string = "";
   export let width: string = "60ch";
-
   export let error: string = "false";
   export let readonly: string = "false";
   export let disabled: string = "false";
   export let arialabel: string = ""; 
 
-  export let showcounter: string = "false";
+  // export let showcounter: string = "false";
   export let maxcharcount: number = 0;
 
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
-  $: showCounter = toBoolean(showcounter);
+
+  let showCounter = false;
+  // $: showCounter = toBoolean(showcounter);
 
   function onChange(e: Event) {
     const target = e.target as HTMLTextAreaElement;

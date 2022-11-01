@@ -7,23 +7,6 @@
   value="Initial value"
 ></goa-textarea>
 
-<h2>Character count</h2>
-<goa-textarea
-  name="CharacterCountField"
-  [value]="characterCountFieldValue"
-  (_change)="characterCountOnChange($event)"
-  showcounter="true"
-></goa-textarea>
-
-<h2>Character count with limit</h2>
-<goa-textarea
-  name="CharacterCountWithLimitField"
-  [value]="characterCountWithLimitValue"
-  (_change)="characterCountWithLimitOnChange($event)"
-  showcounter="true"
-  maxcharcount="20"
-></goa-textarea>
-
 <h2>Disabled</h2>
 <goa-textarea name="comment-disabled" disabled></goa-textarea>
 
