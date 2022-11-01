@@ -1,7 +1,12 @@
 import React, { FC, useEffect, useRef } from "react";
 
 export type ModalTransition = "fast" | "slow" | "none";
-export type CalloutVariant = "information" | "important" | "emergency" | "success" | "event";
+export type CalloutVariant =
+  | "information"
+  | "important"
+  | "emergency"
+  | "success"
+  | "event";
 export type ModalType = "default" | "callout";
 
 interface WCProps {
@@ -76,7 +81,11 @@ export const GoAModal: FC<Props> = ({
       type={type}
       calloutVariant={calloutVariant}
     >
-      {actions && <div slot="actions">{actions}</div>}
+      {actions && (
+        <div style={{ margin: "1.5rem 0 0" }} slot="actions">
+          {actions}
+        </div>
+      )}
       {children}
     </goa-modal>
   );

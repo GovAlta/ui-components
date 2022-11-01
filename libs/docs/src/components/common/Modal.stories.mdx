@@ -207,7 +207,6 @@ export const ActionsTemplate = (args) => {
       <GoAModal
         heading="Heading"
         open={showModal}
-        onClose={() => setShowModal(false)}
         actions={
           <GoAButtonGroup alignment="end">
             <GoAButton type="secondary" onClick={() => setShowModal(false)}>
@@ -238,7 +237,7 @@ export const ActionsTemplate = (args) => {
       lang="html"
       code={`
       <goa-button id="button">Open Modal</goa-button>
-      <goa-modal id="modal" heading="Heading" closable>
+      <goa-modal id="modal" heading="Heading">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
@@ -260,9 +259,6 @@ export const ActionsTemplate = (args) => {
           modal.setAttribute("open", false)
         });
       })
-      modal.addEventListener("_close", () => {
-        modal.removeAttribute("open")
-      });
     `}
     />
   </Tab>
@@ -271,7 +267,7 @@ export const ActionsTemplate = (args) => {
       lang="html"
       code={`
       <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
-      <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable>
+      <goa-modal id="modal" heading="Do you agree?" [open]="isOpen">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
@@ -292,9 +288,6 @@ export const ActionsTemplate = (args) => {
         openModal() {
           this.isOpen = true;
         }
-        closeModal() {
-          this.isOpen = false;
-        }
       }
     `}
     />
@@ -312,7 +305,6 @@ export const ActionsTemplate = (args) => {
             <GoAModal
               heading="Heading"
               open={showModal}
-              onClose={() => setShowModal(false)}
               actions={
                 <GoAButtonGroup alignment="end">
                   <GoAButton onClick={() => setShowModal(false)}>Secondary</GoAButton>
@@ -504,7 +496,6 @@ export const RouteChangesTemplate = (args) => {
       <GoAModal
         heading="Do you agree?"
         open={showModal}
-        onClose={() => setShowModal(false)}
         actions={
           <GoAButtonGroup alignment="end">
             <GoAButton
@@ -563,19 +554,18 @@ export const RouteChangesTemplate = (args) => {
             <GoAModal
               heading="Do you agree?"
               open={showModal}
-              onClose={() => setShowModal(false)}
               actions={
                 <GoAButtonGroup alignment="end">
-                  <GoAButton 
+                  <GoAButton
                     size="medium"
                     onClick={() => {
                       setShowModal(false);
-                      // setTimeout will allow any modal transitions to be run 
-                      // setTimeout(() => navigate("/some-path"), 300) } 
+                      // setTimeout will allow any modal transitions to be run
+                      // setTimeout(() => navigate("/some-path"), 300) }
                       navigate("/some-path")
                     }}
                     >
-                    Submit 
+                    Submit
                   </GoAButton>
                 </GoAButtonGroup>
               }
@@ -601,10 +591,16 @@ export const CalloutVariantTemplate = (args) => {
   return (
     <>
       <GoAButtonGroup>
-        <GoAButton onClick={() => show("information")}>Information Callout</GoAButton>
-        <GoAButton onClick={() => show("important")}>Important Callout</GoAButton>
+        <GoAButton onClick={() => show("information")}>
+          Information Callout
+        </GoAButton>
+        <GoAButton onClick={() => show("important")}>
+          Important Callout
+        </GoAButton>
         <GoAButton onClick={() => show("success")}>Success Callout</GoAButton>
-        <GoAButton onClick={() => show("emergency")}>Emergency Callout</GoAButton>
+        <GoAButton onClick={() => show("emergency")}>
+          Emergency Callout
+        </GoAButton>
         <GoAButton onClick={() => show("event")}>Event Callout</GoAButton>
       </GoAButtonGroup>
       <GoAModal
@@ -612,7 +608,6 @@ export const CalloutVariantTemplate = (args) => {
         calloutVariant={calloutVariant}
         heading="Do you agree?"
         open={showModal}
-        onClose={() => setShowModal(false)}
         actions={
           <GoAButtonGroup alignment="end">
             <GoAButton type="secondary" onClick={() => setShowModal(false)}>
@@ -649,7 +644,7 @@ export const CalloutVariantTemplate = (args) => {
         <goa-button data-callout="emergency">Emergency Callout</goa-button>
         <goa-button data-callout="event">Event Callout</goa-button>
       </goa-button-group>
-      <goa-modal id="modal" type="callout" calloutVariant={calloutVariant} heading="Do you agree?" closable>
+      <goa-modal id="modal" type="callout" calloutVariant={calloutVariant} heading="Do you agree?">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
@@ -689,7 +684,7 @@ export const CalloutVariantTemplate = (args) => {
         <goa-button (_click)="openModal('emergency')">Emergency Callout</goa-button>
         <goa-button (_click)="openModal('event')">Event Callout</goa-button>
       </goa-button-group>
-      <goa-modal id="modal" type="callout" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable [calloutVariant]="calloutVariant">
+      <goa-modal id="modal" type="callout" heading="Do you agree?" [open]="isOpen" [calloutVariant]="calloutVariant">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
@@ -743,7 +738,6 @@ export const CalloutVariantTemplate = (args) => {
                 calloutVariant={calloutVariant}
                 heading="Do you agree?"
                 open={showModal}
-                onClose={() => setShowModal(false)}
                 actions={
                   <GoAButtonGroup alignment="end">
                     <GoAButton type="secondary" onClick={() => setShowModal(false)}>
