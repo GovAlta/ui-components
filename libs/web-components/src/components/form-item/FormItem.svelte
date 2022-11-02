@@ -4,10 +4,10 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
   import { onMount } from "svelte";
-  
+
   const REQUIREMENT_TYPES = ["optional", "required", ""];
   type RequirementType = (typeof REQUIREMENT_TYPES)[number];
-  
+
   // type check function
   function isRequirementType(value: string): value is RequirementType {
     return REQUIREMENT_TYPES.includes(value);
@@ -24,7 +24,7 @@
       console.error("Invalid requirement type", requirement);
     }
   })
-  
+
 </script>
 
 <!-- HTML -->
@@ -41,7 +41,10 @@
     <slot />
   </div>
   {#if error}
-    <div class="error-msg">{error}</div>
+    <div class="error-msg">
+      <goa-icon type="warning" size="small" theme="filled" style="pointer-events: none;" />
+      {error}
+    </div>
   {/if}
   {#if helptext}
     <div class="help-msg">{helptext}</div>
@@ -86,6 +89,8 @@
   }
 
   .error-msg {
+    display: inline-flex;
+    gap: 0.25rem;
     font-size: var(--fs-sm);
     color: var(--goa-color-interactive--error);
     margin-bottom: 0.25rem;
