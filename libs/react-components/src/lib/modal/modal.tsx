@@ -82,7 +82,7 @@ export const GoAModal: FC<Props> = ({
       calloutVariant={calloutVariant}
     >
       {actions && (
-        <div style={{ margin: "1.5rem 0 0" }} slot="actions">
+        <div slot="actions">
           {actions}
         </div>
       )}
