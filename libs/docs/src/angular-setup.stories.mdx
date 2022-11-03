@@ -11,6 +11,7 @@ This is the web component library and utilizes Angular's web component integrati
 Add Dependencies
 
 ```bash
+npm i @abgov/web-components@alpha
 npm i @abgov/angular-components@alpha
 npm i @abgov/styles@alpha
 ```
@@ -29,22 +30,28 @@ Add the following in the head element
 ></script>
 ```
 
-Update `src/app/app.module.ts` as per the three steps below
+Update `src/app/app.module.ts` as per the four steps below
 
 ```typescript
 // 1. Import the CUSTOM_ELEMENTS_SCHEMA
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
-// 2. Import the web-components lib
-import "@abgov/angular-components";
+// 2. Import the libs
+import "@abgov/web-components";
+import { AngularComponentsModule } from "@abgov/angular-components";
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule],
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    // 3. Add the needed imports
+    BrowserModule,
+    AngularComponentsModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
-
-  // 3. Add the CUSTOM_ELEMENTS_SCHEMA to the NgModule
+  // 4. Add the CUSTOM_ELEMENTS_SCHEMA to the NgModule
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
