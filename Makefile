@@ -31,13 +31,16 @@ build-styles:
 build-react-components:
 	npm run build react-components --withDeps --configuration production
 
+build-ng-components:
+	npm run build angular-components --withDeps --configuration production
+
 build-react-app:
 	npm run build react-demo --withDeps --configuration production
 
 build-ng-app:
 	npm run build angular-demo --withDeps --configuration production
 
-build: build-styles build-web-components build-react-components build-react-app build-ng-app
+build: build-styles build-web-components build-react-components build-ng-components build-react-app build-ng-app
 
 #### RUN 
 

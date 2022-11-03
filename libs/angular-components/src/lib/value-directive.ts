@@ -11,11 +11,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     },
   ],
 })
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export class ValueDirective implements ControlValueAccessor {
   private _value = "";
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   onChange: any = () => {};
   onTouched: any = () => {};
 
@@ -55,16 +54,16 @@ export class ValueDirective implements ControlValueAccessor {
 }
 
 @Directive({
-  selector: "[goaValues]",
+  selector: "[goaValueList]",
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ValuesDirective),
+      useExisting: forwardRef(() => ValueListDirective),
       multi: true,
     },
   ],
 })
-export class ValuesDirective implements ControlValueAccessor {
+export class ValueListDirective implements ControlValueAccessor {
   private _value?: string[] = [];
 
   onChange: any = () => {};

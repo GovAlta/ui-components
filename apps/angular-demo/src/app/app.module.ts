@@ -5,8 +5,12 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { ValueDirective, ValuesDirective } from "@abgov/angular-components";
+import "@abgov/web-components";
+import { AngularComponentsModule } from "@abgov/angular-components";
 
+// ******
+// Routes
+// ******
 import { InputComponentComponent } from "./input-component/input-component.component";
 import { ButtonComponentComponent } from "./button-component/button-component.component";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -54,8 +58,6 @@ import { IconButtonComponent } from "./icon-button/icon-button.component";
     SkeletonComponent,
     FormItemComponent,
     IconButtonComponent,
-    ValueDirective,
-    ValuesDirective,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +65,7 @@ import { IconButtonComponent } from "./icon-button/icon-button.component";
     NoopAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularComponentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

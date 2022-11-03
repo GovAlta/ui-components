@@ -1,11 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-
-import "@abgov/web-components";
+import { ValueDirective, ValueListDirective } from "./value-directive";
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  declarations: [ValueDirective, ValueListDirective],
+  exports: [ValueDirective, ValueListDirective],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AngularComponentsModule {}
+
+export { ValueDirective, ValueListDirective };
