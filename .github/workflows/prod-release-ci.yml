@@ -27,7 +27,7 @@ jobs:
       - name: Lint
         run: npx nx run-many --target=lint --all
       - name: Test
-        run: npx nx run-many --target=test -all
+        run: npx nx run-many --target=test --all
       - name: Build
         run: |
           npx nx run-many --target=build --all --prod --with-deps
