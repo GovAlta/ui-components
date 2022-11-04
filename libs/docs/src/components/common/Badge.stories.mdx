@@ -1,0 +1,214 @@
+import { Meta, Story } from "@storybook/addon-docs";
+
+import {
+  Tabs,
+  Tab,
+  Note,
+  SupportInfo,
+  Props,
+  Prop,
+  CodeSnippet,
+} from "@abgov/shared/storybook-common";
+import { GoABadge } from "@abgov/react-components";
+
+<Meta title="Components/Badge" />
+
+# Badge
+
+Badges are system driven, non-interactive, small labels
+which display minimal amounts of information, system feedback, or states.
+
+[Figma design component](https://www.figma.com/file/qWGWDvULAAZuVaDpXCRzqP/DS-Website?node-id=820%3A11807)
+
+---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="type"
+    type="success | important | information | emergency | dark | midtone | light"
+    required={true}
+    description="Define the context and colour of the badge"
+  />
+  <Prop
+    name="icon"
+    type="boolean"
+    defaultValue="false"
+    description="Include an icon in the badge"
+  />
+  <Prop name="content" type="string" description="Text label of the badge" />
+</Props>
+
+#### Basic
+
+<Story name="Basic">
+  <GoABadge type="information" content="Information" />
+  <GoABadge type="success" content="Success" />
+  <GoABadge type="important" content="Important" />
+  <GoABadge type="emergency" content="Emergency" />
+  <GoABadge type="dark" content="Dark" />
+  <GoABadge type="midtone" content="Midtone" />
+  <GoABadge type="light" content="Light" />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" content="Information" />
+        <goa-badge type="success" content="Success" />
+        <goa-badge type="important" content="Important" />
+        <goa-badge type="emergency" content="Emergency" />
+        <goa-badge type="dark" content="Dark" />
+        <goa-badge type="midtone" content="Midtone" />
+        <goa-badge type="light" content="Light" />
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" content="Information"></goa-badge>
+        <goa-badge type="success" content="Success"></goa-badge>
+        <goa-badge type="important" content="Important"></goa-badge>
+        <goa-badge type="emergency" content="Emergency"></goa-badge>
+        <goa-badge type="dark" content="Dark"></goa-badge>
+        <goa-badge type="midtone" content="Midtone"></goa-badge>
+        <goa-badge type="light" content="Light"></goa-badge>
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        <GoABadge type="information" content="Information" />
+        <GoABadge type="success" content="Success" />
+        <GoABadge type="important" content="Important" />
+        <GoABadge type="emergency" content="Emergency" />
+        <GoABadge type="dark" content="Dark" />
+        <GoABadge type="midtone" content="Midtone" />
+        <GoABadge type="light" content="Light" />
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Icons
+
+<Story name="Icon">
+  <GoABadge type="information" icon />
+  <GoABadge type="success" icon />
+  <GoABadge type="important" icon />
+  <GoABadge type="emergency" icon />
+  <GoABadge type="dark" icon />
+  <GoABadge type="midtone" icon />
+  <GoABadge type="light" icon />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" icon />
+        <goa-badge type="success" icon />
+        <goa-badge type="important" icon />
+        <goa-badge type="emergency" icon />
+        <goa-badge type="dark" icon />
+        <goa-badge type="midtone" icon />
+        <goa-badge type="light" icon />
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" icon></goa-badge>
+        <goa-badge type="success" icon></goa-badge>
+        <goa-badge type="important" icon></goa-badge>
+        <goa-badge type="emergency" icon></goa-badge>
+        <goa-badge type="dark" icon></goa-badge>
+        <goa-badge type="midtone" icon></goa-badge>
+        <goa-badge type="light" icon></goa-badge>
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        <GoABadge type="information" icon />
+        <GoABadge type="success" icon />
+        <GoABadge type="important" icon />
+        <GoABadge type="emergency" icon />
+        <GoABadge type="dark" icon />
+        <GoABadge type="midtone" icon />
+        <GoABadge type="light" icon />
+      `}
+    />
+  </Tab>
+</Tabs>
+
+<Story name="Text and Icon">
+  <GoABadge type="information" content="Information" icon />
+  <GoABadge type="success" content="Success" icon />
+  <GoABadge type="important" content="Important" icon />
+  <GoABadge type="emergency" content="Emergency" icon />
+  <GoABadge type="dark" content="Dark" icon />
+  <GoABadge type="midtone" content="Midtone" icon />
+  <GoABadge type="light" content="Light" icon />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" content="Information" icon />
+        <goa-badge type="success" content="Success" icon />
+        <goa-badge type="important" content="Important" icon />
+        <goa-badge type="emergency" content="Emergency" icon />
+        <goa-badge type="dark" content="Dark" icon />
+        <goa-badge type="midtone" content="Midtone" icon />
+        <goa-badge type="light" content="Light" icon />
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-badge type="information" content="Information" icon></goa-badge>
+        <goa-badge type="success" content="Success" icon></goa-badge>
+        <goa-badge type="important" content="Important" icon></goa-badge>
+        <goa-badge type="emergency" content="Emergency" icon></goa-badge>
+        <goa-badge type="dark" content="Dark" icon></goa-badge>
+        <goa-badge type="midtone" content="Midtone" icon></goa-badge>
+        <goa-badge type="light" content="Light" icon></goa-badge>
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        <GoABadge type="information" content="Information" icon />
+        <GoABadge type="success" content="Success" icon />
+        <GoABadge type="important" content="Important" icon />
+        <GoABadge type="emergency" content="Emergency" icon />
+        <GoABadge type="dark" content="Dark" icon />
+        <GoABadge type="midtone" content="Midtone" icon />
+        <GoABadge type="light" content="Light" icon />
+      `}
+    />
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />

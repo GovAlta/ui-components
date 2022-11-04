@@ -1,202 +1,119 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import React, { useState } from "react";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  logDOM,
+} from "@testing-library/react";
 
-import { GoARadioGroup, GoARadio } from './radio-group';
+import { GoARadioGroup, GoARadioItem } from "./radio-group";
 
-describe('RadioGroup', () => {
+describe("RadioGroup", () => {
   const baseMockData = {
-    title: 'mock title',
-    helperText: 'mock helper text',
+    title: "mock title",
+    helperText: "mock helper text",
     disabled: false,
-    labelPosition: 'after',
+    labelPosition: "after",
     required: true,
-    requiredErrorMessage: 'mock required error message',
+    requiredErrorMessage: "mock required error message",
 
     radios: [
-      { text: 'Apples', value: 'apples' },
-      { text: 'Oranges', value: 'oranges' },
-      { text: 'Bananas', value: 'bananas' },
+      { text: "Apples", value: "apples" },
+      { text: "Oranges", value: "oranges" },
+      { text: "Bananas", value: "bananas" },
     ],
   };
 
-  function getTemplate(data) {
+  function Template(data, onChange) {
+    let value = data.value;
+    function setValue(newValue) {
+      value = newValue;
+    }
     return (
       <GoARadioGroup
         name="fruits"
-        title={data.title}
-        helperText={data.helperText}
         disabled={data.disabled}
-        labelPosition={data.labelPosition}
-        required={data.required}
-        value={data.value}
-        requiredErrorMessage={data.requiredErrorMessage}
-        onChange={() => {}}
+        value={value}
+        onChange={(name, newValue) => onChange && onChange(name, newValue)}
       >
         {data.radios.map((radio) => (
-          <GoARadio key={radio.value} value={radio.value}>
+          <GoARadioItem
+            key={radio.value}
+            label={radio.text}
+            name="fruits"
+            checked={data.value === radio.value}
+            value={radio.value}
+          >
             {radio.text}
-          </GoARadio>
+          </GoARadioItem>
         ))}
       </GoARadioGroup>
     );
   }
 
-  function getDynamicTemplate(data) {
-    return (
-      <GoARadioGroup
-        name="dynamic-fruits"
-        title={data.title}
-        helperText={data.helperText}
-        disabled={data.disabled}
-        labelPosition={data.labelPosition}
-        required={data.required}
-        value={data.value}
-        requiredErrorMessage={data.requiredErrorMessage}
-        items={data.radios}
-        onChange={() => {}}
-      />
-    );
-  }
+  describe("Basic rendering", () => {
+    const mockData = { ...baseMockData };
 
-  describe('Basic rendering', () => {
-    let mockData = { ...baseMockData };
-
-    it('should render successfully', async () => {
-      const { baseElement } = render(getTemplate(baseMockData));
+    it("should render successfully", async () => {
+      const { baseElement } = render(Template(baseMockData, null));
       expect(baseElement).toBeTruthy();
     });
-
-    it('should render dynamic successfully', async () => {
-      const { baseElement } = render(getDynamicTemplate(baseMockData));
-      expect(baseElement).toBeTruthy();
-    });
-
-    test('should render bound labels', async () => {
-      render(getTemplate({ ...mockData, required: true }));
-
-      expect(
-        screen.queryByText(mockData.title, { exact: false })
-      ).not.toBeNull();
-      expect(
-        screen.queryByText(mockData.helperText, { exact: false })
-      ).not.toBeNull();
-      expect(
-        screen.queryByText(mockData.requiredErrorMessage, { exact: false })
-      ).not.toBeNull();
-    });
-
-    test('should render dynamic bound labels', async () => {
-      render(getDynamicTemplate(mockData));
-
-      expect(
-        screen.queryByText(mockData.title, { exact: false })
-      ).not.toBeNull();
-      expect(
-        screen.queryByText(mockData.helperText, { exact: false })
-      ).not.toBeNull();
-      expect(
-        screen.queryByText(mockData.requiredErrorMessage, { exact: false })
-      ).not.toBeNull();
-    });
   });
 
-  describe('Is Required Tests', () => {
-    let mockData;
-    beforeEach(() => {
-      mockData = { ...baseMockData, required: true };
-    });
-
-    test('should render required indicator', async () => {
-      render(getTemplate(mockData));
-      expect(screen.queryByText('(Required)')).not.toBeNull();
-    });
-
-    test('should render required error message when not selected', async () => {
-      render(getTemplate(mockData));
-      expect(screen.queryByText(mockData.requiredErrorMessage)).not.toBeNull();
-    });
-
-    test('should not render required error message when is selected', async () => {
-      render(getTemplate(mockData));
-
-      const orangesRadioControl = screen.getByText('Oranges');
-      fireEvent.click(orangesRadioControl);
-
-      expect(screen.queryByText(mockData.requiredErrorMessage)).toBeNull();
-    });
-
-    test('should render red radios when not selected', async () => {
-      render(getTemplate(mockData));
-      const onScreenRadios = document.querySelectorAll('.goa-radio');
-
-      onScreenRadios.forEach((r) => {
-        expect(r.classList).toContain('has-error');
-      });
-    });
-  });
-
-  describe('Is Not Required Tests', () => {
-    let mockData;
-    beforeEach(() => {
-      mockData = { ...baseMockData, required: false };
-    });
-
-    test('should not render required indicator', async () => {
-      render(getTemplate(mockData));
-      expect(screen.queryByText('(Required)')).toBeNull();
-    });
-
-    test('should not render required error message when not selected', async () => {
-      render(getTemplate(mockData));
-      expect(screen.queryByText(mockData.requiredErrorMessage)).toBeNull();
-    });
-
-    test('should not render red radios when not selected', async () => {
-      render(getTemplate(mockData));
-      const onScreenRadios = document.querySelectorAll('.goa-radio');
-
-      onScreenRadios.forEach((r) => {
-        expect(r.classList).not.toContain('has-error');
-      });
-    });
-  });
-
-  describe('Initial data', () => {
-    const selectedValue = 'oranges';
+  describe("Initial data", () => {
+    const selectedValue = "oranges";
 
     let mockData;
     beforeEach(() => {
       mockData = { ...baseMockData, value: selectedValue };
     });
 
-    test('initial data is set', async () => {
-      render(getTemplate(mockData));
+    it("initial data is set", async () => {
+      render(Template(mockData, null));
 
-      const radios = document.querySelectorAll<HTMLInputElement>(
-        'input[type=radio]'
-      );
+      const radios =
+        document.querySelectorAll<HTMLInputElement>("input[type=radio]");
       radios.forEach((radio) => {
         expect(radio.checked).toBe(radio.value === selectedValue);
       });
     });
   });
 
-  describe('Selection Change Tests', () => {
-    const selectedValue = 'oranges';
+  describe("Selection Change Tests", () => {
+    it("event should not fire when disabled", async () => {
+      const onChange = jest.fn();
+      render(
+        Template(
+          { ...baseMockData, value: "oranges", disabled: true },
+          onChange
+        )
+      );
 
-    let mockData;
-    beforeEach(() => {
-      mockData = { ...baseMockData, value: selectedValue };
+      // const radios = screen.getAllByRole('radio');
+      waitFor(() => {
+        const radios =
+          document.querySelectorAll<HTMLInputElement>("input[type=radio]");
+        fireEvent.click(radios[0]);
+        expect(onChange).not.toBeCalled();
+      });
     });
+  });
 
-    test('change event should work', async () => {
-      render(getTemplate(mockData));
+  it("change event should work", async () => {
+    let newValue;
+    render(
+      Template({ ...baseMockData, value: "oranges" }, (_name, _newValue) => {
+        newValue = _newValue;
+      })
+    );
 
-      const radios = screen.getAllByRole('radio', {});
+    // const radios = screen.getAllByRole('radio');
+    waitFor(() => {
+      const radios =
+        document.querySelectorAll<HTMLInputElement>("input[type=radio]");
       fireEvent.click(radios[0]);
-
-      const checked = screen.getByRole('radio', { checked: true }) as HTMLInputElement;
-      expect(checked.value).toBe('apples');
+      expect(newValue).toBe("apples");
     });
   });
 });

@@ -1,0 +1,35 @@
+name: Dependabot Jira
+
+on:
+  issues:
+    types:
+      - opened
+    branches:
+      - alpha
+
+env:
+  JIRA_BASE_URL: https://goa-dio.atlassian.net
+  JIRA_USER_EMAIL: chris.olsen@gov.ab.ca
+  JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+  JIRA_PROJECT: DDIDS
+  JIRA_ISSUE_TYPE: Bug
+
+jobs:
+  create_jira:
+    name: Dependabot Jira
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Jira Issue
+        id: create
+        uses: atlassian/gajira-create@v2.0.1
+        env:
+          JIRA_BASE_URL: ${{ env.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ env.JIRA_USER_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        with:
+          project: ${{ env.JIRA_PROJECT }}
+          issuetype: ${{ env.JIRA_ISSUE_TYPE }}
+          summary: |
+            [${{github.event.repository.name }}] ${{github.event.pull_request.title }}
+          description: |
+            ${{github.event.pull_request.html_url }}

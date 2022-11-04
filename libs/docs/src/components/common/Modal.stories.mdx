@@ -1,0 +1,582 @@
+import { Meta, Story } from "@storybook/addon-docs";
+import {
+  SupportInfo,
+  Tabs,
+  Tab,
+  Note,
+  CodeSnippet,
+  Props,
+  Prop,
+} from "@abgov/shared/storybook-common";
+import {
+  GoAButton,
+  GoAButtonGroup,
+  GoAModal,
+  GoACallout,
+} from "@abgov/react-components";
+import { useState } from "react";
+
+<Meta title="Components/Modal" />
+
+# Modal
+
+### A modal is a type of window that appears in front of the main page content and disables all other functionality while visible. Modals purposefully disrupt the user's workflow to capture their attention. The content in a modal should be succinct, direct, and contextually relevant to the user.
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=633%3A10740)
+
+---
+
+#### Properties
+
+<Props showTabs={true}>
+  <Prop
+    name="heading"
+    type="string"
+    description="Heading text within the modal"
+  />
+  <Prop
+    name="open"
+    type="boolean"
+    defaultValue="false"
+    description="Controls if modal is visible or not"
+  />
+  <Prop
+    name="closable"
+    type="boolean"
+    defaultValue="false"
+    description="Show close icon and allow clicking the background to close the modal"
+  />
+  <Prop
+    name="transition"
+    type="fast | slow | none"
+    description="How modal transition onto screen"
+    defaultValue="none"
+  />
+  <Prop
+    name="_close"
+    lang="angular"
+    type="CustomEvent"
+    description="Dispatched when modal is closable and is closed."
+  />
+  <Prop
+    name="actions"
+    lang="angular"
+    type="slot"
+    description="Buttons displayed in the bottom right of the modal instead of a close icon"
+  />
+  <Prop
+    name="onClose"
+    lang="react"
+    type="() => void"
+    description="Dispatched when modal is closable and is closed."
+  />
+  <Prop
+    name="actions"
+    lang="react"
+    type="ReactNode"
+    description="Buttons displayed in the bottom right of the modal instead of a close icon"
+  />
+</Props>
+
+#### Basic
+
+export const NoActionsTemplate = (args) => {
+  const [showModal, setShowModal] = useState(false);
+  return (
+    <>
+      <GoAButton onClick={() => setShowModal(true)}>Open Modal</GoAButton>
+      <GoAModal
+        heading="Heading"
+        open={showModal}
+        onClose={() => setShowModal(false)}
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+      </GoAModal>
+    </>
+  );
+};
+
+<Story name="Basic">{NoActionsTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-button id="button">Open Modal</goa-button>
+      <goa-modal id="modal" heading="Heading" closable>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+          Repellendus ducimus officia asperiores. Eos, eius numquam.
+        </p>
+      </goa-modal>
+    `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        const modal = document.getElementById('modal');
+        modal.addEventListener("_close", () => {
+          modal.removeAttribute("open")
+        });
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
+        <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+            natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+            Repellendus ducimus officia asperiores. Eos, eius numquam.
+          </p>
+        </goa-modal>
+      `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      export class SomeComponent {
+        isOpen = false;
+        openModal() {
+          this.isOpen = true;
+        }
+        closeModal() {
+          this.isOpen = false;
+        }
+      }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      const [showModal, setShowModal] = useState(false);
+      return (
+        <>
+          <GoAButton onClick={() => setShowModal(true)}>
+            Open Modal
+          </GoAButton>
+          <GoAModal
+            heading="Heading"
+            open={showModal}
+            onClose={() => setShowModal(false)}
+          >
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+              natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+              Repellendus ducimus officia asperiores. Eos, eius numquam.
+            </p>
+          </GoAModal>
+        </>
+      )
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### With actions
+
+export const ActionsTemplate = (args) => {
+  const [showModal, setShowModal] = useState(false);
+  return (
+    <>
+      <GoAButton onClick={() => setShowModal(true)}>Open Modal</GoAButton>
+      <GoAModal
+        heading="Heading"
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        actions={
+          <GoAButtonGroup alignment="end">
+            <GoAButton type="secondary" onClick={() => setShowModal(false)}>
+              Secondary
+            </GoAButton>
+            <GoAButton type="primary" onClick={() => setShowModal(false)}>
+              Primary
+            </GoAButton>
+          </GoAButtonGroup>
+        }
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+      </GoAModal>
+    </>
+  );
+};
+
+<Story name="With actions">{ActionsTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-button id="button">Open Modal</goa-button>
+      <goa-modal id="modal" heading="Heading" closable>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+          Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <goa-button-group alignment="end" slot="actions">
+          <goa-button>Secondary</goa-button>
+          <goa-button>Primary</goa-button>
+        </goa-button-group>
+      </goa-modal>
+    `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+      const buttons = document.getElementsByTagName('goa-button');
+      const modal = document.getElementById('modal');
+      for (const button of buttons) {
+        button.addEventListener('_click', () => {
+          modal.setAttribute("open", false)
+        });
+      })
+      modal.addEventListener("_close", () => {
+        modal.removeAttribute("open")
+      });
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
+      <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+          Repellendus ducimus officia asperiores. Eos, eius numquam.
+        </p>
+        <goa-button-group alignment="end" slot="actions">
+          <goa-button (_click)="closeModal()">Secondary</goa-button>
+          <goa-button (_click)="closeModal()">Primary</goa-button>
+        </goa-button-group>
+      </goa-modal>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      export class SomeComponent {
+        isOpen = false;
+        openModal() {
+          this.isOpen = true;
+        }
+        closeModal() {
+          this.isOpen = false;
+        }
+      }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [showModal, setShowModal] = useState(false);
+        return (
+          <>
+            <GoAButton onClick={() => setShowModal(true)}>
+              Open Modal
+            </GoAButton>
+            <GoAModal
+              heading="Heading"
+              open={showModal}
+              onClose={() => setShowModal(false)}
+              actions={
+                <GoAButtonGroup alignment="end">
+                  <GoAButton onClick={() => setShowModal(false)}>Secondary</GoAButton>
+                  <GoAButton onClick={() => setShowModal(false)}>Primary</GoAButton>
+                </GoAButtonGroup>
+              }
+            >
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+                natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+                Repellendus ducimus officia asperiores. Eos, eius numquam.
+              </p>
+            </GoAModal>
+          </>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Transitions
+
+export const TransitionsTemplate = (args) => {
+  const [showModal, setShowModal] = useState(false);
+  const [speed, setSpeed] = useState("none");
+  function show(speed) {
+    setSpeed(speed);
+    setShowModal(true);
+  }
+  return (
+    <>
+      <GoAButtonGroup>
+        <GoAButton type="tertiary" onClick={() => show("none")}>
+          None
+        </GoAButton>
+        <GoAButton type="tertiary" onClick={() => show("slow")}>
+          Slow
+        </GoAButton>
+        <GoAButton type="tertiary" onClick={() => show("fast")}>
+          Fast
+        </GoAButton>
+      </GoAButtonGroup>
+      <GoAModal
+        heading="Do you agree?"
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        transition={speed}
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+      </GoAModal>
+    </>
+  );
+};
+
+<Story name="Transitions">{TransitionsTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-button-group>
+        <goa-button data-transition="none" type="tertiary">None</goa-button>
+        <goa-button data-transition="slow" type="tertiary">Slow</goa-button>
+        <goa-button data-transition="fast" type="tertiary">Fast</goa-button>
+      </goa-button-group>
+      <goa-modal id="modal" heading="Do you agree?" closable>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+          Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
+        <goa-button-group alignment="end" slot="actions">
+          <goa-button slot="actions" size="medium">I Agree</goa-button>
+        </goa-button-group>
+      </goa-modal>
+    `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+      const buttons = document.getElementsByTagName('goa-button');
+      const modal = document.getElementById('modal');
+      for (const button of buttons) {
+        button.addEventListener('_click', () => {
+          modal.setAttribute("transition", button.dataset.transition);
+          modal.setAttribute("open", true)
+        });
+      }
+      modal.addEventListener("_close", () => {
+        modal.removeAttribute("open")
+      });
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-button-group>
+        <goa-button type="tertiary" (_click)="openModal('none')">None</goa-button>
+        <goa-button type="tertiary" (_click)="openModal('slow')">Slow</goa-button>
+        <goa-button type="tertiary" (_click)="openModal('fast')">Fast</goa-button>
+      </goa-button-group>
+      <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable [transition]="transition">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+          Repellendus ducimus officia asperiores. Eos, eius numquam.
+        </p>
+        <goa-button-group alignment="end" slot="actions">
+          <goa-button slot="actions" size="medium">I Agree</goa-button>
+        </goa-button-group>
+      </goa-modal>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      export class SomeComponent {
+        isOpen = false;
+        transition: "fast" | "slow" | "none" = "none";
+        openModal(transition) {
+          this.transition = transition;
+          this.isOpen = true;
+        }
+        closeModal() {
+          this.isOpen = false;
+        }
+      }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [showModal, setShowModal] = useState(false);
+        const [speed, setSpeed] = useState("none");
+        function show(speed) {
+          setSpeed(speed)
+          setShowModal(true)
+        }
+        return (
+          <>
+            <GoAButton onClick={() => show("none")}>None</GoAButton>
+            <GoAButton onClick={() => show("slow")}>Slow</GoAButton>
+            <GoAButton onClick={() => show("fast")}>Fast</GoAButton>
+            <GoAModal
+              heading="Do you agree?"
+              open={showModal}
+              onClose={() => setShowModal(false)}
+              transition={speed}
+              actions={
+                <GoAButtonGroup alignment="end">
+                  <GoAButton onClick={() => setShowModal(false)} size="medium">
+                    I Agree
+                  </GoAButton>
+                </GoAButtonGroup>
+              }
+            >
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+                obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+                explicabo eligendi eius laboriosam! Repellendus ducimus officia
+                asperiores. Eos, eius numquam.
+              </p>
+            </GoAModal>
+          </>
+        );
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Route Changes
+
+When a route change is performed in an event triggered within the modal, you **must** close the modal before the route change occurs.
+
+export const RouteChangesTemplate = (args) => {
+  const [showModal, setShowModal] = useState(false);
+  return (
+    <>
+      <GoAButton onClick={() => setShowModal(true)}>Show</GoAButton>
+      <GoAModal
+        heading="Do you agree?"
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        actions={
+          <GoAButtonGroup alignment="end">
+            <GoAButton
+              size="medium"
+              onClick={() => {
+                setShowModal(false);
+              }}
+            >
+              Submit
+            </GoAButton>
+          </GoAButtonGroup>
+        }
+      >
+        <p>Note: We can't actually perform route changes in storybook :(</p>
+      </GoAModal>
+    </>
+  );
+};
+
+<Story name="Route changes">{RouteChangesTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-button type="primary" (_click)="isOpen = true">Show</goa-button>
+        <goa-modal heading="Do you agree?" [open]="isOpen">
+          <p>Note: We can't actually perform route changes in storybook :(</p>
+          <goa-button-group alignment="end" slot="actions">
+            <goa-button type="primary" (_click)="closeModal()">Primary</goa-button>
+          </goa-button-group>
+        </goa-modal>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        isOpen = false;
+        closeModal() {
+          this.isOpen = false;
+          setTimeout(() => this.router.navigate(["/some-path"]), 0)
+        }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [showModal, setShowModal] = useState(false);
+        const navigate = useNavigate();
+        return (
+          <>
+            <GoAButton onClick={() => setShowModal(true)}>Show</GoAButton>
+            <GoAModal
+              heading="Do you agree?"
+              open={showModal}
+              onClose={() => setShowModal(false)}
+              actions={
+                <GoAButtonGroup alignment="end">
+                  <GoAButton 
+                    size="medium"
+                    onClick={() => {
+                      setShowModal(false);
+                      // setTimeout will allow any modal transitions to be run 
+                      // setTimeout(() => navigate("/some-path"), 300) } 
+                      navigate("/some-path")
+                    }}
+                    >
+                    Submit 
+                  </GoAButton>
+                </GoAButtonGroup>
+              }
+            >
+              <p>Note: We can't actually perform route changes in storybook :(</p>
+            </GoAModal>
+          </>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />

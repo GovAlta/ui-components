@@ -1,0 +1,10 @@
+goa-button-group > goa-button ~ goa-button {
+  margin: 0;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 480px) {
+  goa-button-group > goa-button ~ goa-button {
+    margin: 0;
+  }
+}

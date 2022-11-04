@@ -1,79 +1,64 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { screen } from '@testing-library/dom'
-import userEvent from '@testing-library/user-event';
-import GoAButton from './button';
+import React from "react";
+import { render } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/dom";
+import GoAButton, { ButtonSize, ButtonType } from "./button";
 
-describe('GoA Button', () => {
-  const buttonText = 'Test Title';
-  const buttonClassName = 'goa-button';
-  const buttonSecondaryClassName = 'goa--secondary';
-  const buttonTertiaryClassName = 'goa--tertiary';
-  const buttonSmallClassName = 'btn-small';
-  const buttonTitle = 'hovering';
+describe("GoA Button", () => {
+  const buttonText = "Test Title";
 
-  it('should render content', () => {
-    const { baseElement } = render(<GoAButton buttonType='primary' buttonSize='normal'>{buttonText}</GoAButton>);
+  const noop = () => {};
+
+  it("should render content", () => {
+    const { baseElement } = render(
+      <GoAButton onClick={() => {}}>{buttonText}</GoAButton>
+    );
 
     expect(baseElement).toBeTruthy();
     expect(screen.getByText(buttonText));
   });
 
-  test('buttonType=primary should render primary styling', () => {
-    render(<GoAButton buttonType='primary' buttonSize='normal'>{buttonText}</GoAButton>);
+  describe("size", () => {
+    ["compact", "normal"].forEach((size: ButtonSize) => {
+      it(`should render ${size} size`, async () => {
+        const { container } = render(
+          <GoAButton size={size} onClick={noop}>
+            Button
+          </GoAButton>
+        );
 
-    const button = screen.getByRole('button');
-    expect(button.className).toContain(buttonClassName);
-    expect(button.className).not.toContain(buttonSecondaryClassName);
-    expect(button.className).not.toContain(buttonTertiaryClassName);
+        const button = container.querySelector("goa-button");
+        expect(button).toBeTruthy();
+        expect(button.getAttribute("size")).toEqual(size);
+      });
+    });
   });
 
-  test('buttonType=secondary should render secondary styling', () => {
-    render(<GoAButton buttonType='secondary'>{buttonText}</GoAButton>);
+  describe("type", () => {
+    ["primary", "submit", "secondary", "tertiary"].forEach(
+      (type: ButtonType) => {
+        it(`should render ${type} type`, async () => {
+          const { container } = render(
+            <GoAButton type={type} onClick={noop}>
+              Button
+            </GoAButton>
+          );
+          const button = container.querySelector("goa-button");
 
-    const button = screen.getByRole('button');
-    expect(button.className).toContain(buttonClassName);
-    expect(button.className).toContain(buttonSecondaryClassName);
-    expect(button.className).not.toContain(buttonTertiaryClassName);
+          expect(button).toBeTruthy();
+          expect(button.getAttribute("type")).toEqual(type);
+        });
+      }
+    );
   });
 
-  test('buttonType=tertiary should render tertiary styling', () => {
-    render(<GoAButton buttonType='tertiary'>{buttonText}</GoAButton>);
+  it("responds to events", async () => {
+    const onClick = jest.fn();
+    const { container } = render(
+      <GoAButton onClick={onClick}>Button</GoAButton>
+    );
+    const button = container.querySelector("goa-button");
 
-    const button = screen.getByRole('button');
-    expect(button.className).toContain(buttonClassName);
-    expect(button.className).not.toContain(buttonSecondaryClassName);
-    expect(button.className).toContain(buttonTertiaryClassName);
+    fireEvent(button, new CustomEvent("_click"));
+    expect(onClick).toBeCalled();
   });
-
-  test('buttonSize=small should render small styling', () => {
-    render(<GoAButton buttonType='tertiary' buttonSize='small'>{buttonText}</GoAButton>);
-
-
-    const button = screen.getByRole('button');
-    expect(button.className).toContain(buttonSmallClassName);
-  });
-
-  test('buttonSize unset should render no small styling', () => {
-    render(<GoAButton buttonType='tertiary'>{buttonText}</GoAButton>);
-
-    const button = screen.getByRole('button');
-    expect(button.className).not.toContain(buttonSmallClassName);
-  });
-
-  test('title is set to button title', () => {
-    render(<GoAButton buttonType='tertiary' title={buttonTitle}>{buttonText}</GoAButton>);
-
-    const button = screen.getByRole('button');
-    expect(button.title).toContain(buttonTitle);
-  });
-
-  test('responds to events', () => {
-    const onClickStub = jest.fn()
-    render(<GoAButton data-testid="goaButton" buttonType='tertiary' onClick={onClickStub}>{buttonText}</GoAButton>);
-    const button = screen.getByTestId('goaButton');
-    userEvent.click(button)
-    expect(onClickStub).toHaveBeenCalled()
-  });
-
 });

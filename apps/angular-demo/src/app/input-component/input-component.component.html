@@ -1,0 +1,112 @@
+<h1>Input</h1>
+
+<h2>Basic</h2>
+<goa-input
+  id="foo"
+  name="foo"
+  (_change)="onInputChangeEvent($event)"
+></goa-input>
+
+<h2>Icons</h2>
+<goa-input name="foo" leadingicon="finger-print"></goa-input>
+<goa-input name="foo" trailingicon="finger-print"></goa-input>
+
+<h2>Number</h2>
+<goa-input name="foo" type="number" min="0" max="10" step="2"></goa-input>
+<goa-input name="foo" type="number"></goa-input>
+
+<h2>Date and time</h2>
+<goa-input
+  name="boundDate"
+  type="date"
+  [value]="boundDate"
+  (_change)="setDate($event)"
+></goa-input>
+<goa-input name="foo" type="date" [value]="formatDate"></goa-input>
+<goa-input name="datetime" type="datetime-local" [value]="dateTime"></goa-input>
+<goa-input name="time" type="time" [value]="time" step="1"></goa-input>
+
+<goa-input
+  type="date"
+  name="Date with min max"
+  [value]="formatDate"
+  [min]="minDate"
+  [max]="maxDate"
+></goa-input>
+
+<h2>Icon Buttons</h2>
+<goa-input
+  name="foo"
+  trailingicon="finger-print"
+  handletrailingiconclick="true"
+  (_trailingIconClick)="handleTrailingIconClick()"
+  (_change)="onInputChangeEvent($event)"
+></goa-input>
+
+<h2>Disabled</h2>
+<goa-input name="foo" disabled="true" placeholder="Find by name"></goa-input>
+
+<h2>Error state</h2>
+<goa-input name="foo" error></goa-input>
+
+<h2>Focus</h2>
+<goa-input name="foo"></goa-input>
+
+<h2>Prefix and Suffix</h2>
+<goa-input name="input" prefix="$"></goa-input>
+<goa-input name="input" suffix="items"></goa-input>
+<goa-input name="input" prefix="$" suffix="per item"></goa-input>
+
+<h2>Auto capitalize</h2>
+<goa-input
+  type="text"
+  name="chars"
+  autoCapitalize="off"
+  placeholder="off | none"
+></goa-input>
+<goa-input
+  type="text"
+  name="chars"
+  autoCapitalize="on"
+  placeholder="on | sentences"
+></goa-input>
+<goa-input
+  type="text"
+  name="chars"
+  autoCapitalize="words"
+  placeholder="words"
+></goa-input>
+<goa-input
+  type="text"
+  name="chars"
+  autoCapitalize="characters"
+  placeholder="characters"
+></goa-input>
+
+<h2>Binding</h2>
+
+<p>{{ wcVal }}</p>
+<goa-input [value]="wcVal" (_change)="updateInput($event)"></goa-input>
+
+<h2>Angular Reactive Forms Component using Web Component</h2>
+<p>{{ reactiveFormCtrl.value }}</p>
+<p>Valid (min value 0): {{ reactiveFormCtrl.valid }}</p>
+<goa-input goaValue [formControl]="reactiveFormCtrl"></goa-input>
+<goa-input goaValue [formControl]="reactiveFormCtrl"></goa-input>
+
+<h2>Angular Template Forms Component using Web Component</h2>
+<p>{{ tempDrivenVal }}</p>
+<goa-input goaValue [(ngModel)]="tempDrivenVal"></goa-input>
+<goa-input goaValue [(ngModel)]="tempDrivenVal"></goa-input>
+
+<h2>Slider binding</h2>
+<p>{{ sliderVal }}</p>
+<goa-input goaValue type="range" [(ngModel)]="sliderVal"></goa-input>
+
+<h2>Date binding</h2>
+<p>{{ dateVal }}</p>
+<goa-input goaValue type="date" [(ngModel)]="dateVal"></goa-input>
+
+<h2>Values binding</h2>
+<p>{{ arrayVal | json }}</p>
+<goa-input goaValueList [(ngModel)]="arrayVal"></goa-input>

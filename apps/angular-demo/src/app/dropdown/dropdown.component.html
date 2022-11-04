@@ -1,0 +1,80 @@
+<h1>Dropdown</h1>
+
+<goa-dropdown
+  name="colors"
+  placeholder="Select a user"
+  [value]="selectedColor"
+  (_change)="selectColor($event)"
+>
+  <goa-dropdown-item
+    name="colors"
+    *ngFor="let color of colors"
+    [value]="color"
+    [label]="color"
+  >
+  </goa-dropdown-item>
+</goa-dropdown>
+
+<h2>Error</h2>
+<goa-dropdown
+  arialabel="Select user"
+  name="colors2"
+  placeholder="Select a user"
+  error="true"
+>
+  <goa-dropdown-item value="red" name="colors2" label="Red"></goa-dropdown-item>
+  <goa-dropdown-item
+    value="green"
+    name="colors2"
+    label="Green"
+  ></goa-dropdown-item>
+  <goa-dropdown-item
+    value="blue"
+    name="colors2"
+    label="Blue"
+  ></goa-dropdown-item>
+</goa-dropdown>
+
+<h2>Dynamic</h2>
+<div *ngFor="let group of groups">
+  <h4>{{ group.name }}</h4>
+  <goa-dropdown
+    [attr.name]="group.name"
+    [value]="group.value"
+    placeholder="Select a user"
+    (_change)="selectColor($event)"
+  >
+    <goa-dropdown-item
+      *ngFor="let item of group.items"
+      [attr.name]="group.name"
+      [value]="item.value"
+      [label]="item.value"
+    >
+    </goa-dropdown-item>
+  </goa-dropdown>
+</div>
+
+<h2>Binding</h2>
+<div>Selected Color: {{ boundVal }}</div>
+<goa-dropdown
+  goaValue
+  name="boundColor"
+  [(ngModel)]="boundVal"
+  placeholder="Select a color"
+>
+  <goa-dropdown-item
+    value="red"
+    name="boundColor"
+    label="Red"
+  ></goa-dropdown-item>
+  <goa-dropdown-item
+    value="green"
+    name="boundColor"
+    label="Green"
+  ></goa-dropdown-item>
+  <goa-dropdown-item
+    value="blue"
+    name="boundColor"
+    label="Blue"
+  ></goa-dropdown-item>
+</goa-dropdown>

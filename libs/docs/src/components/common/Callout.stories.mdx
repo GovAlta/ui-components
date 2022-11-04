@@ -1,0 +1,253 @@
+import { Meta } from "@storybook/addon-docs";
+import {
+  Tabs,
+  Tab,
+  Note,
+  CodeSnippet,
+  SupportInfo,
+  Props,
+  Prop,
+} from "@abgov/shared/storybook-common";
+import { GoACallout } from "@abgov/react-components";
+
+<Meta title="Components/Callout" />
+
+# Callout
+
+### Callouts communicate important changes or facts within the body layout through a strong visual emphasis, so that users take notice and read the information.
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/Components---DIO-DS?node-id=434%3A14140)
+
+---
+
+#### Properties
+
+<Props>
+  <Prop
+    name="type"
+    type="information | important | emergency | success | event"
+    required="true"
+    description="Define the context and colour of the callout"
+  />
+  <Prop name="heading" type="string" description="Callout heading text" />
+</Props>
+
+#### Emergency
+
+Emergency callout are used to alert the user to only the most important pieces of information.
+They can also be used to alert the user to system errors.
+
+<Story name="Emergency">
+  <GoACallout type="emergency" heading="Emergency callout">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="emergency" heading="Emergency callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="emergency" heading="Emergency callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoACallout type="emergency" heading="Emergency callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Important
+
+Important callouts are used to communicate non-emergency but still important messages to a user.
+
+<Story name="Important">
+  <GoACallout type="important" heading="Important callout">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="important" heading="Important callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="important" heading="Important callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoACallout type="important" heading="Important callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Information
+
+Information callout are used to communicate non-urgent information.
+
+<Story name="Information">
+  <GoACallout type="information" heading="Information callout">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="information" heading="Information callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="information" heading="Information callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoACallout type="information" heading="Information callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Success
+
+Success callouts are used to inform the user of a positive status change to a performed action.
+
+<Story name="Success">
+  <GoACallout type="success" heading="Success callout">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="success" heading="Success callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="success" heading="Success callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoACallout type="success" heading="Success callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Events
+
+Event callouts are used to communiate information about upcoming and scheduled events.
+
+<Story name="Events">
+  <GoACallout type="event" heading="Event callout">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="event" heading="Event callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="event" heading="Event callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoACallout type="event" heading="Event callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />

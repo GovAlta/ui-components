@@ -1,0 +1,931 @@
+import {
+  GoAButton,
+  GoAInput,
+  GoAInputText,
+  GoAInputPassword,
+  GoAInputDate,
+  GoAInputTime,
+  GoAInputDateTime,
+  GoAInputEmail,
+  GoAInputUrl,
+  GoAInputTel,
+  GoAInputFile,
+  GoAInputMonth,
+  GoAInputNumber,
+  GoAInputRange,
+  GoAFormItem,
+  GoACallout,
+} from "@abgov/react-components";
+import { useState, useEffect } from "react";
+import {
+  SupportInfo,
+  Tabs,
+  Tab,
+  CodeSnippet,
+  Props,
+  Prop,
+} from "@abgov/shared/storybook-common";
+import { Meta, Story } from "@storybook/addon-docs";
+
+<Meta title="Components/Inputs" component={GoAInput} />
+
+# Input
+
+### Text fields let users enter and input text.
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/DIO-DS---Components?node-id=133%3A186)
+
+---
+
+#### Properties
+
+<Props showTabs={true}>
+  <Prop
+    name="type"
+    type="text | number | password | email | search | tel | date | datetime-locale | time | url | week"
+    defaultValue="text"
+    description="Sets the type of the input field"
+  />
+  <Prop
+    name="name"
+    type="string"
+    description="Name of input value that is received in the _change event"
+  />
+  <Prop name="value" type="string" description="Bound to value" />
+  <Prop
+    name="placeholder"
+    type="string"
+    description="Text displayed within the input when no value is set"
+  />
+  <Prop
+    name="leadingIcon"
+    type="GoAIconType"
+    description="Icon shown to the left of the text"
+  />
+  <Prop
+    name="trailingIcon"
+    type="GoAIconType"
+    description="Icon shown to the right of the text"
+  />
+  <Prop
+    name="disabled"
+    type="boolean"
+    defaultValue="false"
+    description="Disable this control. It will not receive focus or events"
+  />
+  <Prop
+    name="handleTrailingIconClick"
+    lang="angular"
+    type="boolean"
+    defaultValue="false"
+    description="Flag that will result in an icon button component being rendered instead of an icon"
+  />
+  <Prop
+    name="focused"
+    type="boolean"
+    defaultValue="false"
+    description="Sets the cursor focus to the input"
+  />
+  <Prop
+    name="readOnly"
+    type="boolean"
+    defaultValue="false"
+    description="Makes the input readonly"
+  />
+  <Prop
+    name="error"
+    type="boolean"
+    defaultValue="false"
+    description="Sets the input to an error state"
+  />
+  <Prop
+    name="width"
+    type="string"
+    defaultValue="30ch"
+    description="Set the width of the text input area"
+  />
+  <Prop
+    name="min"
+    type="string | date"
+    description="A string value *must* be in ISO 8601 format"
+  />
+  <Prop
+    name="max"
+    type="string | date"
+    description="A string value *must* be in ISO 8601 format"
+  />
+  <Prop
+    name="step"
+    type="number"
+    description="By how much number of day or time value will change by"
+  />
+  <Prop
+    name="ariaLabel"
+    type="string"
+    description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name"
+  />
+  <Prop
+    name="prefix"
+    type="string"
+    description="Text that comes before the input"
+  />
+  <Prop
+    name="suffix"
+    type="string"
+    description="Text that comes after the input"
+  />
+  <Prop
+    name="autoCapitalize"
+    type="on | off | none | sentences | words | characters"
+    defaultValue="off"
+    description="Controls whether and how text input is automatically capitalized as it is entered/edited by the user."
+  />
+  <Prop
+    name="_trailingIconClick"
+    lang="angular"
+    type="CustomEvent"
+    description="onclick function invoked when trailing icon is clicked"
+  />
+  <Prop
+    name="onChange"
+    lang="react"
+    type="(name: string, value: string | Date | number) => void"
+    description="Callback function invoked when input value is changed. The value type varies on the component type ie. GoAInput vs GoAInputDate"
+  />
+  <Prop
+    name="onTrailingIconClick"
+    lang="react"
+    type="() => void"
+    description="onclick function invoked when trailing icon is clicked"
+  />
+</Props>
+
+#### Note
+
+<Story name="Information">
+  <GoACallout type="information">
+    Use the Form Item as a wrapper for the Input component to add more features
+    such as label, help and error texts etc.
+  </GoACallout>
+</Story>
+
+export const noop = () => {};
+
+#### Basic
+
+export const InputTemplate = () => {
+  const [value, setValue] = useState("");
+  return (
+    <>
+      <GoAInputText
+        name="firstname"
+        value={value}
+        onChange={(name, value) => {
+          setValue(value);
+          console.log(name, value);
+        }}
+      />
+    </>
+  );
+};
+
+<Story name="Basic">{InputTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-input id="foo" name="foo" />
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        document.querySelector('#foo').addEventListener('_change', (e) => {
+          console.log(e.detail.name, e.detail.value);
+        });
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-input goaValue [(ngModel)]="firstName"></goa-input>
+      `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        export class SomeComponent {
+          firstName = "";
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+        const [value, setValue] = useState('');
+        return (
+          <>
+            <GoAInputText
+              name="firstname"
+              value={value}
+              onChange={(name, value) => {
+                setValue(value);
+                console.log(name, value);
+              }}
+            />
+          </>
+        );
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Icons
+
+export const IconInputTemplate = () => (
+  <>
+    <div style={{ display: "flex", gap: "4px", flexDirection: "column" }}>
+      <GoAInputText name="foo" leadingIcon="finger-print" onChange={noop} />
+      <GoAInputText name="foo" trailingIcon="finger-print" onChange={noop} />
+    </div>
+  </>
+);
+
+<Story name="Icons">{IconInputTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`<goa-input leadingicon="finger-print" />`}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`<goa-input trailingicon="finger-print" />`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`<goa-input leadingIcon="finger-print"></goa-input>`}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`<goa-input trailingIcon="finger-print"></goa-input>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInput leadingIcon="finger-print" />`} lang="jsx" />
+    <CodeSnippet code={`<GoAInput trailingIcon="finger-print" />`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+#### Icon buttons
+
+export const IconButtonInputTemplate = () => (
+  <>
+    <GoAInputText
+      name="foo"
+      trailingIcon="finger-print"
+      onTrailingIconClick={() => alert("clicked")}
+      onChange={noop}
+    />
+  </>
+);
+
+<Story name="Icon Buttons">{IconButtonInputTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`<goa-input id="secret" trailingicon="finger-print" />`}
+      lang="html"
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        var el = document.getElementById('secret')
+        el.addEventListener('_trailingIconClick', clickHandler);
+        // to later remove the event listener
+        el.removeEventListener('_trailingIconClick', clickHandler);
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-input
+          id="secret"
+          handleTrailingIconClick="true"
+          (_trailingIconClick)="handleClick()"
+          trailingIcon="finger-print"
+        >
+        </goa-input>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        export class SomeComponent {
+          handleClick() {
+            console.log('handleClick');
+          }
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+        <GoAInputText
+          name="secret"
+          trailingIcon="finger-print"
+          onTrailingIconClick={() => alert('clicked')} />
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Disabled
+
+export const DisabledInputTemplate = () => (
+  <>
+    <GoAInput name="foo" disabled={true} value="Disabled" onChange={noop} />
+  </>
+);
+
+<Story name="Disabled">{DisabledInputTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`<goa-input disabled="true" placeholder="Find by name" />`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`<goa-input disabled="true" placeholder="Find by name"></goa-input>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`<GoAInput disabled={true} placeholder="Find by name" />`}
+      lang="jsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Error state
+
+export const ErrorInputTemplate = () => (
+  <>
+    <GoAInput name="foo" error={true} value="Some value" onChange={noop} />
+  </>
+);
+
+<Story name="Error">{ErrorInputTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet code={`<goa-input error  />`} lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-input error></goa-input>`} lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInput name="foo" error={true} />`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+#### Focus
+
+export const FocusInputTemplate = () => {
+  const [focused, setFocused] = useState(false);
+  return (
+    <>
+      <GoAInput
+        name="foo"
+        focused={focused}
+        value="Some value"
+        onChange={noop}
+      />
+      <br />
+      <GoAButton onClick={() => setFocused(true)}>Click to focus</GoAButton>
+    </>
+  );
+};
+
+<Story name="Focus">{FocusInputTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet code={`<goa-input />`} lang="html" />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet code={`<goa-input ></goa-input>`} lang="html" />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet code={`<GoAInput name="foo" />`} lang="jsx" />
+  </Tab>
+</Tabs>
+
+#### Min/Max
+
+export const MinMaxTemplate = () => {
+  const [value, setValue] = useState(0);
+  return (
+    <GoAInputNumber
+      name="favouriteEvenNumber"
+      value={value}
+      min={0}
+      max={99}
+      step={2}
+      onChange={(name, value) => setValue(value)}
+    />
+  );
+};
+
+<Story name="Min / Max">{MinMaxTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`<goa-input name="favouriteEvenNumber" type="number" min="0" max="99" step="2"></goa-input>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+      const [value, setValue] = useState('');
+      return (
+        <GoAInputNumber
+          name="favouriteEvenNumber"
+          value={value}
+          min={0}
+          max={99}
+          step={2}
+          onChange={(name, value) => setValue(value)}
+        />
+      )
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Date
+
+export const DateTemplate = () => {
+  const [date, setDate] = useState(new Date());
+  const [minDate, setMinDate] = useState(new Date());
+  const [maxDate, setMaxDate] = useState(getDateWithMonthOffset(1));
+  function getDateWithMonthOffset(offset) {
+    let d = new Date();
+    d.setMonth(d.getMonth() + offset);
+    return d;
+  }
+  return (
+    <GoAInputDate
+      name="withinTheNextMonth"
+      value={date}
+      min={minDate}
+      max={maxDate}
+      onChange={(name, value) => {
+        setDate(value);
+      }}
+    />
+  );
+};
+
+<Story name="Date">{DateTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        import { format } from "date-fns";
+        export class MyComponent {
+          date = format(new Date(), "yyyy-MM-dd");
+          minDate = format(new Date(), "yyyy-MM-dd");
+          maxDate = format(this.getDateWithMonthOffset(1), "yyyy-MM-dd");
+          getDateWithMonthOffset(offset) {
+            const d = new Date();
+            d.setMonth(d.getMonth() + offset);
+            return d;
+          }
+          onChange(e: any) {
+            this.date = e.detail.value;
+          }
+        }
+      `}
+      lang="ts"
+    />
+    <CodeSnippet
+      code={`
+        <goa-input
+          goaValue
+          type="date"
+          name="withinTheNextMonth"
+          [min]="minDate"
+          [max]="maxDate"
+          [(ngModel)]="date"
+        >
+        </goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        const [date, setDate] = useState(new Date());
+        const [minDate, setMinDate] = useState(new Date());
+        const [maxDate, setMaxDate] = useState(getDateWithMonthOffset(1));
+        function getDateWithMonthOffset(offset) {
+          const d = new Date();
+          d.setMonth(d.getMonth() + offset);
+          return d;
+        }
+        return (
+          <GoAInputDate
+            name="withinTheNextMonth"
+            value={date}
+            min={minDate}
+            max={maxDate}
+            onChange={(name, value) => {
+              setDate(value)
+            }}
+          />
+        )
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Time
+
+export const TimeComponent = () => {
+  const [date, setDate] = useState(new Date());
+  return <GoAInputTime name="timeExample" value={date} step={1} />;
+};
+
+<Story name="Time">{TimeComponent.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        import { format } from "date-fns";
+        export class MyComponent {
+          time = format(new Date(), "HH:mm:ss");
+        }
+      `}
+      lang="ts"
+    />
+    <CodeSnippet
+      code={`
+        <goa-input
+          goaValue
+          type="time"
+          name="timeExample"
+          [(ngModel)]="time"
+          step="1"
+        >
+        </goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        const [date, setDate] = useState(new Date());
+        return (
+          <GoAInputTime
+            name="timeExample"
+            value={date}
+            step={1}
+          />
+        )
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Date and Time
+
+export const DateTimeExample = () => {
+  const [date, setDate] = useState(new Date());
+  return (
+    <GoAInputDateTime
+      name="dateTimeExample"
+      value={date}
+      onChange={(name, value) => {
+        setDate(value);
+      }}
+    />
+  );
+};
+
+<Story name="Date and Time">{DateTimeExample.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        import { format } from "date-fns";
+        export class MyComponent {
+          dateTime = format(new Date(), "yyyy-MM-dd HH:mm")
+        }
+      `}
+      lang="ts"
+    />
+    <CodeSnippet
+      code={`
+        <goa-input
+          type="datetime-local"
+          name="dateTimeExample"
+          [value]="date"
+        >
+        </goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        const [date, setDate] = useState(new Date());
+        return (
+          return <GoAInputDateTime
+            name="dateTimeExample"
+            value={date}
+            onChange={(name, value) => {
+              setDate(value)
+            }}
+          />;
+        )
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Time w/ seconds
+
+export const TimeWithSecondsExample = () => {
+  const [time, setTime] = useState(new Date());
+  return <GoAInputTime name="timeseconnds" value={time} step={1} />;
+};
+
+<Story name="Time with seconds">{TimeWithSecondsExample.bind({})}</Story>
+
+When working with the `type=time` step controls the second step value (defaults to 60)
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        import { format } from "date-fns";
+        export class MyComponent {
+          dateTime = format(new Date(), "HH:mm:ss")
+        }
+      `}
+      lang="ts"
+    />
+    <CodeSnippet
+      code={`
+        <goa-input
+          goaValue
+          type="time"
+          name="dateTimeExample"
+          step="1"
+          [(ngModel)]="date"
+        >
+        </goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        const [time, setTime] = useState(new Date());
+        return (
+          <GoAInputTime
+            name="timeseconnds"
+            value={time}
+            step={1}
+          />
+        )
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Width
+
+export const WidthTemplate = ({ width }) => {
+  return (
+    <>
+      <GoAInput
+        name="firstname"
+        placeholder="width allows for %, ch, px, etc"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInput
+        name="firstname"
+        width="100%"
+        placeholder="100%"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInput
+        name="firstname"
+        width="50%"
+        placeholder="50%"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInput
+        name="firstname"
+        width="20ch"
+        placeholder="20ch"
+        onChange={() => {}}
+      />
+    </>
+  );
+};
+
+<Story name="Width" args={{ width: "80%" }}>
+  {WidthTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`
+        <goa-input name="firstname" />
+        <goa-input name="firstname" width="100%" />
+        <goa-input name="firstname" width="50%" />
+        <goa-input name="firstname" width="20ch" />
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-input name="firstname"></goa-input>
+        <goa-input name="firstname" width="100%"></goa-input>
+        <goa-input name="firstname" width="50%"></goa-input>
+        <goa-input name="firstname" width="20ch"></goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAInput name="firstname" onChange={() => {}} />
+        <GoAInput name="firstname" width="100%" onChange={() => {}} />
+        <GoAInput name="firstname" width="50%" onChange={() => {}} />
+        <GoAInput name="firstname" width="20ch" onChange={() => {}} />
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Prefix and suffix
+
+<Story name="Prefix and suffix">
+  <>
+    <h5>Prefix</h5>
+    <GoAInput name="input" prefix="$" onChange={() => {}} />
+    <h5>Suffix</h5>
+    <GoAInput name="input" suffix="items" onChange={() => {}} />
+    <h5>Both</h5>
+    <GoAInput name="input" prefix="$" suffix="per item" onChange={() => {}} />
+  </>
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-input name="input" prefix="$"></goa-input>
+        <goa-input name="input" suffix="items"></goa-input>
+        <goa-input name="input" prefix="$" suffix="per item"></goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAInput name="input" value="" prefix="$" onChange={() => {}} />
+        <GoAInput name="input" value="" suffix="items" onChange={() => {}} />
+        <GoAInput name="input" value="" prefix="$" suffix="per item" onChange={() => {}} />
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Autocapitalize
+
+export const AutocapitalizeTemplate = () => {
+  return (
+    <>
+      <GoAInputText
+        name="chars"
+        autoCapitalize="off"
+        placeholder="off | none"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="on"
+        placeholder="on | sentences"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="words"
+        placeholder="words"
+        onChange={() => {}}
+      />
+      <br />
+      <GoAInputText
+        name="chars"
+        autoCapitalize="characters"
+        placeholder="characters"
+        onChange={() => {}}
+      />
+    </>
+  );
+};
+
+<Story name="Auto capitalize">{AutocapitalizeTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-input type="text" name="chars" autoCapitalize="off" placeholder="off | none"}>
+        <goa-input type="text" name="chars" autoCapitalize="on" placeholder="on | sentences" />
+        <goa-input type="text" name="chars" autoCapitalize="words" placeholder="words" />
+        <goa-input type="text" name="chars" autoCapitalize="characters" placeholder="characters" />
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-input type="text" name="chars" autoCapitalize="off" placeholder="off | none"></goa-input>
+        <goa-input type="text" name="chars" autoCapitalize="on" placeholder="on | sentences"></goa-input>
+        <goa-input type="text" name="chars" autoCapitalize="words" placeholder="words"></goa-input>
+        <goa-input type="text" name="chars" autoCapitalize="characters" placeholder="characters"></goa-input>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+        return (
+          <>
+            <GoAInputText name="chars" autoCapitalize="off" placeholder="off | none" onChange={() => {}} />
+            <GoAInputText name="chars" autoCapitalize="on" placeholder="on | sentences" onChange={() => {}} />
+            <GoAInputText name="chars" autoCapitalize="words" placeholder="words" onChange={() => {}} />
+            <GoAInputText name="chars" autoCapitalize="characters" placeholder="characters" onChange={() => {}} />
+          </>
+        );
+    `}
+    />
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />

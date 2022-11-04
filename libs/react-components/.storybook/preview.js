@@ -1,13 +1,10 @@
-import { addDecorator, addParameters } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs';
-import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
+import { addParameters } from "@storybook/react";
+import { DocsPage, DocsContainer } from "@storybook/addon-docs";
 
 addParameters({
   docs: {
     container: DocsContainer,
-    page: DocsPage
+    page: DocsPage,
   },
-  controls: { expanded: true }
+  controls: { expanded: true },
 });
-
-addDecorator(withKnobs);

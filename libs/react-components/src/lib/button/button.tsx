@@ -1,52 +1,89 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './button.scss';
+import React, { FC, ReactNode, useEffect, useRef } from "react";
+import "./button.css";
+import { GoAIconType } from "../icons";
 
-type ButtonType = 'primary' | 'secondary' | 'tertiary';
-type ButtonSize = 'small' | 'normal';
+export type ButtonType =
+  | "primary"
+  | "submit"
+  | "secondary"
+  | "tertiary"
+  | "start";
+export type ButtonSize = "compact" | "normal";
+export type ButtonVariant = "normal" | "destructive";
 
-type AppProps = {
-  /**
-   * Type of button
-   */
-  buttonType?: ButtonType;
-  /**
-   * Size of button
-   */
-  buttonSize?: ButtonSize;
-  /**
-   * Mouseover popup description
-   */
-  title?: string;
-  children?: React.ReactNode;
-  [key: string]: any;
+interface WCProps {
+  type?: ButtonType;
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  disabled?: boolean;
+  leadingicon?: string;
+  trailingicon?: string;
+  ref: React.RefObject<HTMLElement>;
+}
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      "goa-button": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+
+type ButtonProps = {
+  type?: ButtonType;
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  disabled?: boolean;
+  leadingIcon?: GoAIconType;
+  trailingIcon?: GoAIconType;
+  onClick?: () => void;
+  children?: ReactNode;
 };
 
-export const GoAButton = ({
-  buttonType = 'primary',
-  buttonSize = 'normal',
-  title = null,
-  children = null,
-  ...props
-}: AppProps) => {
-  let btnTypeClass = buttonType === 'primary' ? '' : `goa--${buttonType}`;
-  let btnSize = buttonSize === 'small' ? 'btn-small' : '';
+export const GoAButton: FC<ButtonProps> = ({
+  disabled = false,
+  type = "primary",
+  size,
+  variant,
+  leadingIcon,
+  trailingIcon,
+  children,
+  onClick,
+}) => {
+  const el = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!el.current) {
+      return;
+    }
+    if (!onClick) {
+      return;
+    }
+    const current = el.current;
+    const listener = () => {
+      onClick();
+    };
+
+    current.addEventListener("_click", listener);
+    return () => {
+      current.removeEventListener("_click", listener);
+    };
+  }, [el, onClick]);
+
   return (
-    <button
-      className={`goa-button ${btnSize} ${btnTypeClass}`}
-      title={title}
-      {...props}
+    <goa-button
+      ref={el}
+      type={type}
+      size={size}
+      variant={variant}
+      disabled={disabled}
+      leadingicon={leadingIcon}
+      trailingicon={trailingIcon}
     >
       {children}
-    </button>
+    </goa-button>
   );
-};
-
-GoAButton.propTypes = {
-  buttonSize: PropTypes.string,
-  buttonType: PropTypes.string,
-  title: PropTypes.string,
-  children: PropTypes.node,
 };
 
 export default GoAButton;

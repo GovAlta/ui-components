@@ -1,28 +1,26 @@
 {
   "name": "@abgov/react-components",
-  "version": "0.7.53",
-  "description": "Government of Alberta - DIO - React JS shared ui components",
+  "version": "0.0.0",
+  "description": "Government of Alberta - UI components for React",
   "bugs": {
-    "url": "https://gitlab.gov.ab.ca/dio/core/ui-components/-/issues"
+    "url": "https://github.com/GovAlta/ui-components/issues"
   },
-  "keywoards": [
+  "license": "Apache-2.0",
+  "keywords": [
     "GoA",
     "template",
-    "react"
+    "React"
   ],
   "repository": {
     "type": "git",
-    "url": "https://gitlab.gov.ab.ca/dio/core/ui-components.git",
+    "url": "https://github.com/GovAlta/ui-components.git",
     "directory": "libs/react-components"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": ">=17.0.2",
+    "react-dom": ">=17.0.2"
   },
   "dependencies": {
-    "classnames": "^2.2.6"
-  },
-  "devDependencies": {
-    "@types/classnames": "^2.2.11"
+    "date-fns": "^2.29.2"
   }
 }

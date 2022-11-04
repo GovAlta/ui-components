@@ -1,9 +1,0 @@
-<div
-  *ngIf="!isProdEnvironment && !(closed | async)"
-  class="goa-app-version-header"
->
-  <span class="content-wrapper">
-    <span class="environment-and-version">{{ environment }} {{ version }}</span>
-    <span class="close" (click)="onCloseClick()">X</span>
-  </span>
-</div>

@@ -1,0 +1,47 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { Props, Prop, Tabs, Tab, CodeSnippet, SupportInfo, Markdown } from '@abgov/shared/storybook-common';
+import { GoABadge } from '@abgov/react-components';
+
+<Meta title="Components/[Document Title]" />
+
+# [Title]
+
+### [description]
+
+[Figma design component](https://www.figma.com/file/???)
+
+---
+
+#### Properties
+
+<Props>
+  <Prop name="" type="string" description="" defaultValue="" />
+</Props>
+
+#### Basic
+
+<Story name="Basic">
+  <GoABadge type="warning" content="Warning" icon={true} />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet lang="html" code={`
+      <goa-badge type="warning" content="Warning" icon />
+    `}/>
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet lang="html" code={`
+      <goa-badge type="warning" content="Warning" icon />
+    `}/>
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet lang="tsx" code={`
+      <GoABadge type="warning" content="Warning" icon />
+    `}/>
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />

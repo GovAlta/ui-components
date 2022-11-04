@@ -1,0 +1,27 @@
+<svelte:options tag="goa-card-group" />
+
+<!-- Script -->
+<script lang="ts">
+
+</script>
+
+<!-- HTML -->
+<div class="card-group">
+  <slot />
+</div>
+
+<!-- Style -->
+<style>
+  :host {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
+  .card-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+    width: 100%;
+  }
+
+</style>

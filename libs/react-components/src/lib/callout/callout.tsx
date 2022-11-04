@@ -1,45 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import '../../theme.scss';
-import '../../../../core-css/src/lib/styles/callout/callout.scss'
+import React from "react";
 
-type calloutType = "important" | 'information' | 'event' | 'success' | 'emergency';
+type CalloutType =
+  | "important"
+  | "information"
+  | "event"
+  | "success"
+  | "emergency";
 
-export interface CalloutProps {
-  /**
-   * Callout title.
-  */
-  title?: string,
-  /**
-   * The type of the callout, changes stylings and icons.
-  */
-  type?: calloutType,
-  /**
-   * Callout description
-  */
-  content?: string,
-  children?: React.ReactNode,
+interface WCProps {
+  heading?: string;
+  type?: CalloutType;
 }
 
-export const GoACallout = ({ title, type = "information", content, children = null, ...props }: CalloutProps) => {
-  return (
-    <div>
-      <div className={`goa-callout goa--${type}`}>
-        <div>
-          <h3>{title}</h3>
-          <div className="messages">
-            {content || children}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-callout": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
 
-GoACallout.propTypes = {
-  title: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  content: PropTypes.string,
+export interface CalloutProps {
+  heading?: string;
+  type?: CalloutType;
+  children?: React.ReactNode;
+}
+
+export const GoACallout = ({
+  heading,
+  type = "information",
+  children,
+}: CalloutProps) => {
+  return (
+    <goa-callout heading={heading} type={type}>
+      {children}
+    </goa-callout>
+  );
 };
 
 export default GoACallout;

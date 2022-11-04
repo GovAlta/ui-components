@@ -20,5 +20,15 @@
   },
   "[vue]": {
     "editor.defaultFormatter": "octref.vetur"
-  }
+  },
+  "cSpell.words": [
+    "checkmark",
+    "colour",
+    "colours",
+    "dashmark",
+    "ionicon",
+    "neighbouring",
+    "Scrollable",
+    "testid"
+  ]
 }

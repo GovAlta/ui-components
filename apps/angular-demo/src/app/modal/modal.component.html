@@ -1,0 +1,68 @@
+<goa-button id="button" (_click)="openModal()">Open Basic Modal</goa-button>
+<goa-modal
+  id="modal"
+  heading="Do you agree?"
+  [open]="isOpen"
+  (_close)="closeModal()"
+  closable
+>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+</goa-modal>
+
+<goa-button id="button2" (_click)="openModal2()"
+  >Open Modal with actions</goa-button
+>
+<goa-modal id="modal2" heading="Do you agree?" [open]="isOpen2">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <goa-button-group alignment="end" slot="actions">
+    <goa-button type="secondary" (_click)="closeModal2()">Secondary</goa-button>
+    <goa-button type="primary" (_click)="closeModal2()">Primary</goa-button>
+  </goa-button-group>
+</goa-modal>
+
+<goa-button-group>
+  <goa-button type="tertiary" (_click)="showModal('none')">None</goa-button>
+  <goa-button type="tertiary" (_click)="showModal('slow')">Slow</goa-button>
+  <goa-button type="tertiary" (_click)="showModal('fast')">Fast</goa-button>
+</goa-button-group>
+<goa-modal
+  id="modal3"
+  heading="Do you agree?"
+  [open]="isOpen3"
+  (_close)="closeModal3()"
+  closable
+  [transition]="transition"
+>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+</goa-modal>
+
+<goa-button type="tertiary" (_click)="isOpen4 = true">Route Change</goa-button>
+<goa-modal heading="Do you agree?" [open]="isOpen4">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <goa-button-group alignment="end" slot="actions">
+    <goa-button type="primary" (_click)="closeModal4()">Primary</goa-button>
+  </goa-button-group>
+</goa-modal>
+
+<!-- To show scrollbars -->
+<div style="height: 100vh"></div>

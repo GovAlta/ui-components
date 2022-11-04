@@ -1,0 +1,57 @@
+<h1>Checkbox</h1>
+
+<h2>Basic</h2>
+<goa-checkbox
+  name="desserts"
+  text="Ice Cream"
+  value="10"
+  [checked]="checkbox1Checked"
+  (_change)="onChange()"
+>
+</goa-checkbox>
+
+<h2>Checked</h2>
+<goa-checkbox
+  name="desserts"
+  text="Ice Cream"
+  value="10"
+  [checked]="checkbox2Checked"
+  (_change)="onChange2()"
+></goa-checkbox>
+
+<h2>Disabled</h2>
+<goa-checkbox
+  name="desserts"
+  text="Ice Cream"
+  value="10"
+  disabled
+></goa-checkbox>
+
+<h2>Error</h2>
+<goa-checkbox
+  name="desserts"
+  text="Ice Cream"
+  value="10"
+  [checked]="checkbox3Checked"
+  (_change)="onChange3()"
+  error
+></goa-checkbox>
+
+<h2>Binding</h2>
+<div>Binding: {{ bindingVal }}</div>
+<goa-checkbox
+  goaValue
+  name="desserts"
+  text="Ice Cream"
+  value="IceCream"
+  [(ngModel)]="bindingVal"
+></goa-checkbox>
+
+<div>Binding: {{ bindingNoVal }}</div>
+<goa-checkbox
+  goaValue
+  name="desserts"
+  text="Ice Cream"
+  checked="true"
+  [(ngModel)]="bindingNoVal"
+></goa-checkbox>
