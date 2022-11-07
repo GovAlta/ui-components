@@ -2,11 +2,16 @@
 
 <!-- Script -->
 <script lang="ts">
-  // import type { ButtonGroupAlignment } from "@abgov/shared/common";
-  // export let alignment: ButtonGroupAlignment = "start";
-  //export let gap: "small" | "medium" | "large" = "medium";
+  import { onMount } from "svelte";
 
-   import { onMount } from "svelte";
+  export let alignment: ButtonAlignment;
+  export let gap: Gap = "relaxed";
+
+  $: _alignment = alignment === "start"
+    ? "flex-start"
+    : alignment === "center"
+    ? "center"
+    : "flex-end";
 
   const BUTTON_ALIGNMENTS = ["start", "end", "center"];
   type ButtonAlignment = (typeof BUTTON_ALIGNMENTS)[number];
@@ -24,15 +29,8 @@
     return GAP.includes(value);
   }
 
-  export let alignment: ButtonAlignment;
-  export let gap: Gap = "relaxed";
 
-  $: _alignment =
-  alignment === "start"
-    ? "flex-start"
-    : alignment === "center"
-      ? "center"
-      : "flex-end";
+
 
   onMount(() => {
     if (!isButtonAlignment(alignment)) {
