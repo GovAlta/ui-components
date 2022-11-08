@@ -59,36 +59,19 @@ describe('Modal Component', () => {
 
   ["emergency", "important", "information", "success", "event"].forEach(calloutVariant => {
     it(`renders the ${calloutVariant} callout modal`, async () => {
-      const el = render(GoAModal, { open: "true", heading: "Heading", type: "callout", "calloutvariant": calloutVariant });
+      const el = render(GoAModal, { open: "true", heading: "Heading", "calloutvariant": calloutVariant });
       expect(el.queryByTestId("modal-title").innerHTML).toContain("Heading");
       expect(el.container.querySelector(`.${calloutVariant}`)).toBeTruthy();
     });
   });
 
-  it("should not render if the type is callout and calloutVariant is not set", async () => {
-    try {
-      render(GoAModal, { open: "true", heading: "Heading", type: "callout" });
-    }
-    catch (e: any) {
-      console.log(e, 'error');
-    }
+  it("should not render an invalid calloutVariant", async () => {
+    const mock = jest.spyOn(console, "error").mockImplementation();
+    render(GoAModal, { open: "true", heading: "Heading", calloutvariant: "importantttttt" });
     await waitFor(() => {
-      const type = document.querySelector('goa-icon').getAttribute("type");;
-      expect(type).toBeFalsy();
+      expect(console.error["mock"].calls.length).toBeGreaterThan(0);
     })
-  });
-
-  it("should not render if the type is callout and calloutVariant is invalid", async () => {
-    try {
-      render(GoAModal, { open: "true", heading: "Heading", type: "callout", calloutvariant: "importantt" });
-    }
-    catch (e: any) {
-      console.log(e, 'error');
-    }
-    await waitFor(() => {
-      const type = document.querySelector("goa-icon").getAttribute("type");
-      expect(type).toBeFalsy();
-    })
+    mock.mockRestore();
   });
 
 });

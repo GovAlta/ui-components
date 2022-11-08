@@ -2,31 +2,26 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
-  const BUTTON_TYPES = ["primary", "submit", "secondary", "tertiary", "start"];
-  type ButtonType = (typeof BUTTON_TYPES)[number];
+  // Validators
+  const [Types, validateType] = typeValidator(
+    "Button type",
+    ["primary", "submit", "secondary", "tertiary", "start"],
+    true,
+  );
+  const [Sizes, validateSize] = typeValidator("Button size", ["normal", "compact"], true);
+  const [Variants, validateVariant] = typeValidator(
+    "Button variant",
+    ["normal", "destructive"],
+    true,
+  );
 
-  const SIZES = ["normal", "compact"];
-  type Size = (typeof SIZES)[number];
-
-  const VARIANTS = ["normal", "destructive"];
-  type Variant = (typeof VARIANTS)[number];
-
-  // type check functions
-
-  function isButtonType(value: string): value is ButtonType {
-    return BUTTON_TYPES.includes(value);
-  }
-
-  function isSize(value: string): value is Size {
-    return SIZES.includes(value);
-  }
-
-  function isVariant(value: string): value is Variant {
-    return VARIANTS.includes(value);
-  }
+  // Types
+  type ButtonType = typeof Types[number];
+  type Size = typeof Sizes[number];
+  type Variant = typeof Variants[number];
 
   // optional
   export let type: ButtonType = "primary";
@@ -38,7 +33,7 @@
   export let testid: string = "";
 
   $: isDisabled = toBoolean(disabled);
-  $: isButtonDark = type === "primary" || type === "start"
+  $: isButtonDark = type === "primary" || type === "start";
 
   function clickHandler(e: Event) {
     this.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
@@ -46,16 +41,10 @@
   }
 
   onMount(() => {
-    if (!isButtonType(type)) {
-      console.error("Invalid button type")
-    }
-    if (!isSize(size)) {
-      console.error("Invalid button size");
-    }
-    if (!isVariant(variant)) {
-      console.error("Invalid button variant");
-    }
-  })
+    validateType(type);
+    validateSize(size);
+    validateVariant(variant);
+  });
 </script>
 
 <button
@@ -119,7 +108,9 @@
   }
 
   .text {
-    padding-bottom: var(--font-valign-fix);  /* acumin font requires this to allow for vertical alignment  */
+    padding-bottom: var(
+      --font-valign-fix
+    ); /* acumin font requires this to allow for vertical alignment  */
   }
 
   button:disabled {
