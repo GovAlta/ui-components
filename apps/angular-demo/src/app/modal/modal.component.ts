@@ -11,10 +11,18 @@ export class ModalComponent {
 
   transition: "fast" | "slow" | "none" = "fast";
 
+  calloutVariant:
+    | "information"
+    | "important"
+    | "success"
+    | "emergency"
+    | "event" = "information";
+
   isOpen = false;
   isOpen2 = false;
   isOpen3 = false;
   isOpen4 = false;
+  isOpen5 = false;
 
   openModal() {
     this.isOpen = true;
@@ -41,8 +49,24 @@ export class ModalComponent {
     setTimeout(() => this.router.navigate(["/input"]), 0);
   }
 
+  closeModal5() {
+    this.isOpen5 = false;
+  }
+
   showModal(transition: "fast" | "slow" | "none") {
     this.transition = transition;
     this.isOpen3 = true;
+  }
+
+  showCalloutModal(
+    calloutVariant:
+      | "information"
+      | "important"
+      | "success"
+      | "emergency"
+      | "event"
+  ) {
+    this.calloutVariant = calloutVariant;
+    this.isOpen5 = true;
   }
 }

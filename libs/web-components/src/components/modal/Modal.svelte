@@ -7,14 +7,26 @@
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { toBoolean } from "../../common/utils";
+  import { onMount } from "svelte";
+
+  const CALLOUT_VARIANT = ["emergency", "important", "information", "success", "event"];
+
+  type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
+
+  // type check function
+  function isCalloutVariantType(value: string): value is calloutVariant {
+    return CALLOUT_VARIANT.includes(value);
+  }
 
   export let heading: string = "";
   export let closable: string = "false";
   export let open: string = "false";
   export let transition: "fast" | "slow" | "none" = "none";
   export let width: string = "";
+  export let type: "default" | "callout" = "default";
+  export let calloutvariant: CalloutVariant;
 
-  const isScrollable = true; 
+  const isScrollable = true;
 
   $: isClosable = toBoolean(closable);
   $: isOpen = toBoolean(open);
@@ -26,6 +38,19 @@
         ? 400
         : 200;
 
+  $: iconType =
+    calloutvariant === "emergency"
+      ? "warning"
+      : calloutvariant === "important"
+      ? "alert-circle"
+      : calloutvariant === "information"
+      ? "information-circle"
+      : calloutvariant === "success"
+      ? "checkmark-circle"
+      : calloutvariant === "event"
+      ? "calendar"
+      : "";
+
   function close(e: Event) {
     if (!isClosable) {
       return;
@@ -33,6 +58,14 @@
     e.target.dispatchEvent(new CustomEvent("_close", { composed: true }));
     e.stopPropagation();
   }
+
+  onMount(() => {
+    if (type === "callout" && !isCalloutVariantType(calloutvariant)) {
+      calloutvariant = "";
+      throw "Invalid callout variant";
+    }
+  })
+
 </script>
 
 
@@ -56,6 +89,12 @@
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
         class="modal-pane"
       >
+      {#if type === "callout"}
+        <div class="callout-bar {calloutvariant}">
+            <goa-icon type={iconType} inverted={calloutvariant === "important" ? "false" : "true"}/>
+        </div>
+      {/if}
+      <div class="content">
         {#if heading}
           <div data-testid="modal-title" class="modal-title">{heading}</div>
         {/if}
@@ -66,24 +105,26 @@
               data-testid="modal-close-button"
               icon="close"
               on:click={close}
+              variant="nocolor"
             />
           </div>
         {/if}
         <div data-testid="modal-content" class="modal-content">
           {#if isScrollable}
-            <goa-scrollable direction="vertical" height="50" hpadding="1.75">
+            <goa-scrollable direction="vertical" height="50">
               <slot />
             </goa-scrollable>
           {:else}
-            <div style="margin: 1.75rem">
+            <div style="margin: 2rem">
               <slot />
             </div>
           {/if}
           <slot />
         </div>
-        <div data-testid="modal-actions" class="modal-actions">
+        <div class="modal-actions" data-testid="modal-actions">
           <slot name="actions" />
         </div>
+      </div>
       </div>
     </div>
   </goa-focus-trap>
@@ -119,6 +160,33 @@
     z-index: 1000;
   }
 
+  .emergency {
+    background-color: var(--goa-color-status-emergency);
+  }
+  .important {
+    background-color: var(--goa-color-status-warning);
+  }
+  .information {
+    background-color: var(--goa-color-status-info);
+  }
+  .event {
+    background-color: var(--goa-color-status-info);
+  }
+  .success {
+    background-color: var(--goa-color-status-success);
+  }
+
+  .callout-bar {
+    flex: 0 0 3rem;
+    text-align: center;
+    padding-top: 2rem;
+  }
+  .content {
+    flex: 1 1 auto;
+    width: 100%;
+    margin: 2rem 2rem;
+  }
+
   /* Modal Pane ========================================================================= */
 
   .modal-pane {
@@ -126,7 +194,7 @@
     background-color: #fff;
     z-index: 1001;
     width: 90%;
-
+    display: flex;
     margin: 1rem;
     box-shadow: var(--shadow-2);
     border-radius: 4px;
@@ -143,28 +211,33 @@
   /* Modal Actions ============================================================================== */
 
   .modal-actions {
-    text-align: right;
-    padding: 0 1.75rem;
-    margin: 1.75rem 0;
-    flex: 1 1 auto;
+    margin: 1.5rem 0 0;
   }
+
+  .modal-actions:empty {
+   margin: 0;
+}
 
   /* Modal Close Icon ======================================================================= */
 
   .modal-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 2rem;
+    right: 2rem;
   }
 
   /* Modal Title ============================================================================ */
 
   .modal-title {
     font-size: var(--fs-xl);
-    padding-bottom: 1rem;
-    padding: 0 1.75rem;
-    margin: 1.75rem 0;
+    margin: 0 0 1.5rem;
     margin-right: 40px; /*  close icon spacing */
     flex: 0 0 auto;
+  }
+
+  /* Modal Content ============================================================================ */
+
+  .modal-content {
+    line-height: 1.75rem;
   }
 </style>

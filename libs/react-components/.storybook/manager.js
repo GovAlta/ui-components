@@ -1,1 +1,1 @@
-import '../../../.storybook/manager';
+import "../../../.storybook/manager";

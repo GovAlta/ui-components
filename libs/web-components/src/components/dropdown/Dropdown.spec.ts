@@ -375,23 +375,23 @@ describe('GoADropdown', () => {
   })
 
   describe.skip("keyboard bindings", () => {
-    const space = new KeyboardEvent('keydown', { 
-      keyCode: 32, key: " ", code: "Space" 
+    const space = new KeyboardEvent('keydown', {
+      keyCode: 32, key: " ", code: "Space"
     });
-    const enter = new KeyboardEvent('keydown', { 
-      keyCode: 13, key: "Enter" 
+    const enter = new KeyboardEvent('keydown', {
+      keyCode: 13, key: "Enter"
     });
-    // const downArrow = new KeyboardEvent('keydown', { 
-    //   keyCode: 40, key: "ArrowDown", code: "ArrowDown" 
+    // const downArrow = new KeyboardEvent('keydown', {
+    //   keyCode: 40, key: "ArrowDown", code: "ArrowDown"
     // });
-    // const upArrow = new KeyboardEvent('keydown', { 
-    //   keyCode: 38, key: "ArrowUp", code: "ArrowUp" 
+    // const upArrow = new KeyboardEvent('keydown', {
+    //   keyCode: 38, key: "ArrowUp", code: "ArrowUp"
     // });
-    // const altDownArrow = new KeyboardEvent('keydown', { 
-    //   altKey: true, keyCode: 40, key: "ArrowDown", code: "ArrowDown" 
+    // const altDownArrow = new KeyboardEvent('keydown', {
+    //   altKey: true, keyCode: 40, key: "ArrowDown", code: "ArrowDown"
     // });
-    // const altUpArrow = new KeyboardEvent('keydown', { 
-    //   altKey: true, keyCode: 38, key: "ArrowUp", code: "ArrowUp" 
+    // const altUpArrow = new KeyboardEvent('keydown', {
+    //   altKey: true, keyCode: 38, key: "ArrowUp", code: "ArrowUp"
     // });
 
     const items = ["red", "blue", "pink"];
@@ -399,7 +399,7 @@ describe('GoADropdown', () => {
     for (const event of [space, enter]) {
       it(`should show the dropdown menu on <${event.key}>`, async () => {
 
-        const user = userEvent.setup();
+        const user = {};
 
         const result = render(GoADropdown, { name: 'favcolor', items, value: "red" });
         // const dropdown = result.queryByTestId("favcolor-dropdown");
@@ -425,16 +425,16 @@ describe('GoADropdown', () => {
         })
 
         // == Select third item
-        // method 1 
+        // method 1
         // await fireEvent.keyDown(menu, {key: "ArrowDown", code: "ArrowDown", keyCode: 40})
         // await fireEvent.keyDown(menu, {key: "ArrowDown", code: "ArrowDown", keyCode: 40})
         // await fireEvent.keyDown(menu, {key: " ", code: "Space", keyCode: 32})
-        
+
         // method 2
-        await user.keyboard("{ArrowDown}")
-        await user.keyboard("{ArrowDown}")
-        await user.keyboard("{Space}")
-        
+        // await user.keyboard("{ArrowDown}")
+        // await user.keyboard("{ArrowDown}")
+        // await user.keyboard("{Space}")
+
         // method 3
         // document.dispatchEvent(downArrow)
         // document.dispatchEvent(downArrow)

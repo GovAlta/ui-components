@@ -1,6 +1,13 @@
 import React, { FC, useEffect, useRef } from "react";
 
 export type ModalTransition = "fast" | "slow" | "none";
+export type CalloutVariant =
+  | "information"
+  | "important"
+  | "emergency"
+  | "success"
+  | "event";
+export type ModalType = "default" | "callout";
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
@@ -10,6 +17,8 @@ interface WCProps {
   closable?: boolean;
   scrollable?: boolean;
   transition?: ModalTransition;
+  type?: ModalType;
+  calloutVariant?: CalloutVariant;
 }
 
 declare global {
@@ -29,6 +38,8 @@ interface Props {
   transition?: ModalTransition;
   children?: React.ReactNode;
   open?: boolean;
+  type?: ModalType;
+  calloutVariant?: CalloutVariant;
 }
 
 export const GoAModal: FC<Props> = ({
@@ -38,6 +49,8 @@ export const GoAModal: FC<Props> = ({
   width,
   actions,
   transition,
+  type,
+  calloutVariant,
   onClose,
 }) => {
   const el = useRef<HTMLElement>(null);
@@ -65,8 +78,14 @@ export const GoAModal: FC<Props> = ({
       scrollable={true}
       width={width}
       transition={transition}
+      type={type}
+      calloutVariant={calloutVariant}
     >
-      {actions && <div slot="actions">{actions}</div>}
+      {actions && (
+        <div slot="actions">
+          {actions}
+        </div>
+      )}
       {children}
     </goa-modal>
   );
