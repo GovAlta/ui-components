@@ -83,6 +83,9 @@ export default function App() {
             <Link className="navigation-link" to="/icon-button">
               Icon Button
             </Link>
+            <Link className="navigation-link" to="/button-group">
+              Button Group
+            </Link>
           </nav>
         </div>
 
