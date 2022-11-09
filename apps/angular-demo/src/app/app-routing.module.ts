@@ -23,6 +23,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
 import { IconButtonComponent } from "./icon-button/icon-button.component";
 import { NotificationBannerComponent } from "./notification-banner/notification-banner.component";
 import { ButtonGroupComponent } from "./button-group/button-group.component";
+import { DividerComponent } from "./divider/divider.component";
 
 const routes: Routes = [
   { path: "button", component: ButtonComponentComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: "icon-button", component: IconButtonComponent },
   { path: "notification-banner", component: NotificationBannerComponent },
   { path: "button-group", component: ButtonGroupComponent },
+  { path: "divider", component: DividerComponent },
   { path: "", redirectTo: "/input", pathMatch: "full" },
 ];
 
