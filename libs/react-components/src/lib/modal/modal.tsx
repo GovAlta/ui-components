@@ -85,11 +85,7 @@ export const GoAModal: FC<Props> = ({
       transition={transition}
       calloutVariant={calloutVariant}
     >
-      {actions && (
-        <div slot="actions">
-          {actions}
-        </div>
-      )}
+      {actions && <div slot="actions">{actions}</div>}
       {children}
     </goa-modal>
   );
