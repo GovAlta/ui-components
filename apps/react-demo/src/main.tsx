@@ -23,6 +23,7 @@ import Container from "./routes/container";
 import Skeleton from "./routes/skeleton";
 import FormItem from "./routes/formItem";
 import IconButton from "./routes/iconButton";
+import NotificationBanner from "./routes/notificationBanner";
 import ButtonGroup from "./routes/buttonGroup";
 
 import "@abgov/styles";
@@ -51,6 +52,7 @@ ReactDOM.render(
         <Route path="skeleton" element={<Skeleton />} />
         <Route path="form-item" element={<FormItem />} />
         <Route path="icon-button" element={<IconButton />} />
+        <Route path="notification-banner" element={<NotificationBanner />} />
         <Route path="button-group" element={<ButtonGroup />} />
       </Route>
     </Routes>
