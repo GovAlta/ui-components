@@ -1,42 +1,33 @@
 <svelte:options tag="goa-modal" />
 
-<!-- ======================================================================= -->
-<!-- Script -->
-<!-- ======================================================================= -->
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
-  import { toBoolean } from "../../common/utils";
+  import { toBoolean, typeValidator } from "../../common/utils";
   import { onMount } from "svelte";
 
-  const CALLOUT_VARIANT = ["emergency", "important", "information", "success", "event"];
-
-  type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
-
-  // type check function
-  function isCalloutVariantType(value: string): value is calloutVariant {
-    return CALLOUT_VARIANT.includes(value);
-  }
+  const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator("Callout variant", [
+    "emergency",
+    "important",
+    "information",
+    "success",
+    "event",
+  ]);
+  type CalloutVariant = typeof CALLOUT_VARIANT[number];
 
   export let heading: string = "";
   export let closable: string = "false";
   export let open: string = "false";
   export let transition: "fast" | "slow" | "none" = "none";
   export let width: string = "";
-  export let type: "default" | "callout" = "default";
-  export let calloutvariant: CalloutVariant;
+  export let calloutvariant: CalloutVariant = null;
 
   const isScrollable = true;
 
   $: isClosable = toBoolean(closable);
   $: isOpen = toBoolean(open);
 
-  $: _transitionTime =
-    transition === "none"
-      ? 0
-      : transition === "slow"
-        ? 400
-        : 200;
+  $: _transitionTime = transition === "none" ? 0 : transition === "slow" ? 400 : 200;
 
   $: iconType =
     calloutvariant === "emergency"
@@ -60,24 +51,16 @@
   }
 
   onMount(() => {
-    if (type === "callout" && !isCalloutVariantType(calloutvariant)) {
-      calloutvariant = "";
-      throw "Invalid callout variant";
-    }
-  })
-
+    validateCalloutVariant(calloutvariant);
+  });
 </script>
 
-
-<!-- ======================================================================= -->
-<!-- Html -->
-<!-- ======================================================================= -->
 {#if isOpen}
   <goa-focus-trap active={open}>
     <div
       use:noscroll={{ enable: isOpen }}
       in:fade={{ duration: _transitionTime }}
-      out:fade={{ delay: _transitionTime, duration: _transitionTime}}
+      out:fade={{ delay: _transitionTime, duration: _transitionTime }}
       data-testid="modal"
       class="modal"
       style="{width && `--width: ${width};`};"
@@ -89,42 +72,45 @@
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
         class="modal-pane"
       >
-      {#if type === "callout"}
-        <div class="callout-bar {calloutvariant}">
-            <goa-icon type={iconType} inverted={calloutvariant === "important" ? "false" : "true"}/>
-        </div>
-      {/if}
-      <div class="content">
-        {#if heading}
-          <div data-testid="modal-title" class="modal-title">{heading}</div>
-        {/if}
-        {#if isClosable}
-          <div class="modal-close">
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <goa-icon-button
-              data-testid="modal-close-button"
-              icon="close"
-              on:click={close}
-              variant="nocolor"
+        {#if calloutvariant !== ""}
+          <div class="callout-bar {calloutvariant}">
+            <goa-icon
+              type={iconType}
+              inverted={calloutvariant === "important" ? "false" : "true"}
             />
           </div>
         {/if}
-        <div data-testid="modal-content" class="modal-content">
-          {#if isScrollable}
-            <goa-scrollable direction="vertical" height="50">
-              <slot />
-            </goa-scrollable>
-          {:else}
-            <div style="margin: 2rem">
-              <slot />
+        <div class="content">
+          {#if heading}
+            <div data-testid="modal-title" class="modal-title">{heading}</div>
+          {/if}
+          {#if isClosable}
+            <div class="modal-close">
+              <!-- svelte-ignore a11y-click-events-have-key-events -->
+              <goa-icon-button
+                data-testid="modal-close-button"
+                icon="close"
+                on:click={close}
+                variant="nocolor"
+              />
             </div>
           {/if}
-          <slot />
+          <div data-testid="modal-content" class="modal-content">
+            {#if isScrollable}
+              <goa-scrollable direction="vertical" height="50">
+                <slot />
+              </goa-scrollable>
+            {:else}
+              <div style="margin: 2rem">
+                <slot />
+              </div>
+            {/if}
+            <slot />
+          </div>
+          <div class="modal-actions" data-testid="modal-actions">
+            <slot name="actions" />
+          </div>
         </div>
-        <div class="modal-actions" data-testid="modal-actions">
-          <slot name="actions" />
-        </div>
-      </div>
       </div>
     </div>
   </goa-focus-trap>
@@ -132,6 +118,7 @@
 
 <!-- ======================================================================= -->
 <!-- Css -->
+
 <!-- ======================================================================= -->
 <style>
   :host {
@@ -187,8 +174,6 @@
     margin: 2rem 2rem;
   }
 
-  /* Modal Pane ========================================================================= */
-
   .modal-pane {
     position: relative;
     background-color: #fff;
@@ -208,17 +193,13 @@
     }
   }
 
-  /* Modal Actions ============================================================================== */
-
   .modal-actions {
     margin: 1.5rem 0 0;
   }
 
   .modal-actions:empty {
-   margin: 0;
-}
-
-  /* Modal Close Icon ======================================================================= */
+    margin: 0;
+  }
 
   .modal-close {
     position: absolute;
@@ -226,16 +207,12 @@
     right: 2rem;
   }
 
-  /* Modal Title ============================================================================ */
-
   .modal-title {
     font-size: var(--fs-xl);
     margin: 0 0 1.5rem;
     margin-right: 40px; /*  close icon spacing */
     flex: 0 0 auto;
   }
-
-  /* Modal Content ============================================================================ */
 
   .modal-content {
     line-height: 1.75rem;

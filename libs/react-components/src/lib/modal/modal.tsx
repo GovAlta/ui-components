@@ -7,7 +7,6 @@ export type CalloutVariant =
   | "emergency"
   | "success"
   | "event";
-export type ModalType = "default" | "callout";
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
@@ -17,7 +16,6 @@ interface WCProps {
   closable?: boolean;
   scrollable?: boolean;
   transition?: ModalTransition;
-  type?: ModalType;
   calloutVariant?: CalloutVariant;
 }
 
@@ -38,7 +36,7 @@ interface Props {
   transition?: ModalTransition;
   children?: React.ReactNode;
   open?: boolean;
-  type?: ModalType;
+  type?: string;
   calloutVariant?: CalloutVariant;
 }
 
@@ -54,6 +52,13 @@ export const GoAModal: FC<Props> = ({
   onClose,
 }) => {
   const el = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (type) {
+      console.warn("GoAModal [type] is deprecated.");
+    }
+  }, [type]);
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -78,14 +83,9 @@ export const GoAModal: FC<Props> = ({
       scrollable={true}
       width={width}
       transition={transition}
-      type={type}
       calloutVariant={calloutVariant}
     >
-      {actions && (
-        <div slot="actions">
-          {actions}
-        </div>
-      )}
+      {actions && <div slot="actions">{actions}</div>}
       {children}
     </goa-modal>
   );

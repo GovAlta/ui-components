@@ -16,7 +16,8 @@ export default function Modal() {
   const [showModal2, setShowModal2] = useState(false);
   const [showModal3, setShowModal3] = useState(false);
   const [speed, setSpeed] = useState<ModalTransition>("none");
-  const [calloutVariant, setCalloutVariant] = useState<CalloutVariant>("information");
+  const [calloutVariant, setCalloutVariant] =
+    useState<CalloutVariant>("information");
 
   function showCallout(calloutVariant: CalloutVariant) {
     setCalloutVariant(calloutVariant);

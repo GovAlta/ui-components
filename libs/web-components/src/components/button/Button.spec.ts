@@ -35,6 +35,15 @@ describe('GoAButtonComponent', () => {
         expect(button.className).toContain(size);
       });
     });
+
+    it("should not allow for invalid size", async () => {
+      const mock = jest.spyOn(console, "error").mockImplementation();
+      render(GoAButton, { size: "huuuuuuge" });
+      await waitFor(() => {
+        expect(console.error["mock"].calls.length).toBeGreaterThan(0);
+      })
+      mock.mockRestore();
+    });
   });
 
   describe("type", () => {
