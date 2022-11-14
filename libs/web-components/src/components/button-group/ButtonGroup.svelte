@@ -3,48 +3,37 @@
 <!-- Script -->
 <script lang="ts">
   import { onMount } from "svelte";
+  import { typeValidator } from "../../common/utils";
 
-  export let alignment: ButtonAlignment;
+  export let alignment: ButtonAlignment = "start";
   export let gap: Gap = "relaxed";
 
-  $: _alignment = alignment === "start"
-    ? "flex-start"
-    : alignment === "center"
-    ? "center"
-    : "flex-end";
+  const [BUTTON_ALIGNMENTS, validateAlignment] = typeValidator("alignment", [
+    "start",
+    "end",
+    "center",
+  ]);
+  type ButtonAlignment = typeof BUTTON_ALIGNMENTS[number];
 
-  const BUTTON_ALIGNMENTS = ["start", "end", "center"];
-  type ButtonAlignment = (typeof BUTTON_ALIGNMENTS)[number];
+  const [GAPS, validateGap] = typeValidator("gap", ["relaxed", "compact"]);
+  type Gap = typeof GAPS[number];
 
-  const GAP = ["relaxed", "compact"];
-  type Gap = (typeof GAP)[number];
-
-  // type check functions
-
-  function isButtonAlignment(value: string): value is ButtonAlignment {
-    return BUTTON_ALIGNMENTS.includes(value);
-  }
-
-  function isGap(value: string): value is Gap {
-    return GAP.includes(value);
-  }
-
-
-
+  $: _alignment = {
+    start: "flex-start",
+    end: "flex-end",
+    center: "center",
+  }[alignment];
 
   onMount(() => {
-    if (!isButtonAlignment(alignment)) {
-      console.error("Invalid button group alignment");
-    }
-    if (!isGap(gap)) {
-      console.error("Invalid button group gap");
-    }
-  })
-
+    validateAlignment(alignment);
+    validateGap(gap);
+  });
 </script>
 
 <!-- HTML -->
-<div style="--alignment: {_alignment}; --gap-size: {gap === "relaxed" ? "1rem" : "0.75rem"}">
+<div
+  style="--alignment: {_alignment}; --gap-size: {gap === 'relaxed' ? '1rem' : '0.75rem'}"
+>
   <slot />
 </div>
 
@@ -58,8 +47,9 @@
     display: flex;
     flex-direction: row;
     justify-content: var(--alignment);
+    align-items: center;
     flex-wrap: wrap;
     gap: var(--gap-size);
-    padding: 3px 0;  /* prevent button box shadow from being cut off */
+    padding: 3px 0; /* prevent button box shadow from being cut off */
   }
 </style>
