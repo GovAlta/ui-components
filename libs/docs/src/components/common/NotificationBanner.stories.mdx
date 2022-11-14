@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from "@storybook/addon-docs";
 import {
   Tabs,
   Tab,
@@ -6,15 +6,15 @@ import {
   SupportInfo,
   Props,
   Prop,
-} from '@abgov/shared/storybook-common';
+} from "@abgov/shared/storybook-common";
 
 import {
   GoAIcon,
   GoAButtonGroup,
   GoAFormItem,
-  GoANotification
-} from '@abgov/react-components';
-import { useState } from 'react';
+  GoANotification,
+} from "@abgov/react-components";
+import { useState } from "react";
 
 <Meta title="Components/Notification Banner" />
 
@@ -35,19 +35,39 @@ import { useState } from 'react';
     required="Yes"
     description="Define the context and colour of the notification banner"
   />
- </Props>
+</Props>
 
 ### Types
 
 <Story name="Types">
   <h4>Information</h4>
-  <GoANotification type="information">Lorem ipsum dolor <a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a> Lorem ipsum dolor</GoANotification>
+  <GoANotification type="information">
+    Lorem ipsum dolor{" "}
+    <a href="https://example.com">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor
+      sit amet, consectetur adipiscing elit.
+    </a>{" "}
+    Lorem ipsum dolor
+  </GoANotification>
   <h4>Important</h4>
-  <GoANotification type="important"><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></GoANotification>
+  <GoANotification type="important">
+    <a href="https://example.com">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor
+      sit amet, consectetur adipiscing elit.
+    </a>
+  </GoANotification>
   <h4>Emergency</h4>
-  <GoANotification type="emergency"><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></GoANotification>
+  <GoANotification type="emergency">
+    <a href="https://example.com">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor
+      sit amet, consectetur adipiscing elit.
+    </a>
+  </GoANotification>
   <h4>Event</h4>
-  <GoANotification type="event">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</GoANotification>
+  <GoANotification type="event">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor
+    sit amet, consectetur adipiscing elit.
+  </GoANotification>
 </Story>
 
 <Tabs>
