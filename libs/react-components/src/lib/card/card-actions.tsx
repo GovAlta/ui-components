@@ -1,14 +1,10 @@
-import React, { FC } from "react";
-
-interface WCProps {
-  children: React.ReactNode;
-}
+import { FC } from "react";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-card-actions": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-card-actions": React.HTMLAttributes<HTMLElement>;
     }
   }
 }

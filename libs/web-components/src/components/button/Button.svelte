@@ -2,6 +2,8 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
   import { typeValidator, toBoolean } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
@@ -32,6 +34,11 @@
   export let trailingicon: GoAIconType = null;
   export let testid: string = "";
 
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
+
   $: isDisabled = toBoolean(disabled);
   $: isButtonDark = type === "primary" || type === "start";
 
@@ -51,8 +58,10 @@
   class="{type} {size} {variant}"
   class:leading={leadingicon}
   class:trailing={trailingicon || type === "start"}
+  style={calculateMargin(mt, mr, mb, ml)}
   on:click={clickHandler}
   disabled={isDisabled}
+  on:click={clickHandler}
   data-testid={testid}
 >
   {#if type === "start"}

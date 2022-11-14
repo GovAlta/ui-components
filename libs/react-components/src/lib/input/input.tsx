@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef } from "react";
 import { GoAIconType } from "../..";
 import { format, parseISO } from "date-fns";
+import { Margins } from "../../common/styling";
 
 export type GoADate = Date | string;
 
@@ -27,7 +28,7 @@ type GoAAutoCapitalize =
   | "words"
   | "characters";
 
-interface WCProps {
+interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
   type?: GoAInputType;
   name: string;
@@ -63,7 +64,7 @@ declare global {
   }
 }
 
-interface BaseProps {
+interface BaseProps extends Margins {
   // required
   name: string;
 
@@ -133,6 +134,10 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   step,
   prefix,
   suffix,
+  mt,
+  mr,
+  mb,
+  ml,
   onTrailingIconClick,
   onChange,
 }) => {
@@ -181,6 +186,10 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
       step={step}
       prefix={prefix}
       suffix={suffix}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
       handletrailingiconclick={!!onTrailingIconClick}
     />
   );

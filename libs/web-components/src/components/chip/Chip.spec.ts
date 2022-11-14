@@ -28,7 +28,7 @@ describe('GoAChip', () => {
   })
 
   it("should show the trailing button and handle the the click event", async () => {
-    const result = render(GoAChip, { content: "Some Badge", deletable: true, variant: "filter" });
+    const result = render(GoAChip, { testid: "chip", content: "Some Badge", deletable: true, variant: "filter" });
     const deleteIcon = result.container.querySelector(".delete-icon");
     const chip = await result.findByTestId("chip");
     const onClick = jest.fn();
@@ -39,4 +39,25 @@ describe('GoAChip', () => {
 
     expect(onClick).toHaveBeenCalled();
   })
+
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoAChip, {
+        testid: "chip-test",
+        variant: "filter",
+        content: "test",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const chip = await baseElement.findByTestId("chip-test");
+
+      expect(chip).toBeTruthy();
+      expect(chip).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(chip).toHaveStyle("margin-right:var(--goa-spacing-m)");
+      expect(chip).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
+      expect(chip).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+    });
+  });
 })

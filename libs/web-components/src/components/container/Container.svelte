@@ -2,13 +2,30 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let type: 'interactive' | 'info' | 'error' | 'success' | 'important' | 'non-interactive' = 'interactive'
-  export let accent: 'thick' | 'thin' | 'filled' = 'filled';
-  export let padding: "relaxed" | "compact" = "relaxed"
+  import { calculateMargin, Spacing } from "../../common/styling";
+
+  export let type:
+    | "interactive"
+    | "info"
+    | "error"
+    | "success"
+    | "important"
+    | "non-interactive" = "interactive";
+  export let accent: "thick" | "thin" | "filled" = "filled";
+  export let padding: "relaxed" | "compact" = "relaxed";
+  export let testid: string = "";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = "m";
+  export let ml: Spacing = null;
 </script>
 
 <!-- HTML -->
 <div
+  data-testid={testid}
+  style={calculateMargin(mt, mr, mb, ml)}
   class={`
     goa-container
     goa-container--${type}
@@ -39,7 +56,6 @@
   }
 
   .goa-container {
-    margin-bottom: 1rem;
     box-sizing: border-box;
   }
 
@@ -91,7 +107,8 @@
     background-color: var(--goa-color-status-info-50);
   }
 
-  .title, .actions {
+  .title,
+  .actions {
     padding: 0.5rem 0;
   }
 
@@ -201,5 +218,4 @@
     display: flex;
     align-items: center;
   }
-
 </style>

@@ -3,15 +3,24 @@
 <!-- Script -->
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
-
   import type { GoAIconType } from "../icon/Icon.svelte";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+
   type ChipVariant = "filter"
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   export let leadingicon: GoAIconType = null;
   export let error: string = "false";
   export let deletable: string = "false";
   export let content: string;
   export let variant: ChipVariant;
+  export let testid: string = "";
 
   let el: HTMLElement;
   let _hovering: boolean = false;
@@ -34,11 +43,12 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   bind:this={el}
-  data-testid="chip"
+  data-testid={testid}
   class="chip"
   class:deletable={_deletable}
   class:error={_error}
   class:variant={variant}
+  style={calculateMargin(mt, mr, mb, ml)}
   tabindex="0"
   on:click={e => _deletable && onDelete(e)}
   on:mouseover={() => _hovering = true}
@@ -95,7 +105,6 @@
     gap: 0.25rem;
     height: 2rem;
     justify-content: center;
-    margin: 0.25rem;
     padding: 0 0.75rem;
     cursor: default;
   }

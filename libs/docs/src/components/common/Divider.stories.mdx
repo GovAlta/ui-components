@@ -1,5 +1,6 @@
 import { Meta, Story } from "@storybook/addon-docs";
 import {
+  Box,
   Tabs,
   Tab,
   CodeSnippet,
@@ -21,26 +22,76 @@ import { GoADivider } from "@abgov/react-components";
 
 ## Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
-    name="spacing"
-    type="small | medium | large | none"
-    defaultValue="small"
-    description="Defines the spacing between vertical elements above and below the divider"
+    name="mt"
+    type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+    defaultValue="none"
+    description="Top margin"
+  />
+  <Prop
+    name="mr"
+    type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+    defaultValue="none"
+    description="Right margin"
+  />
+  <Prop
+    name="mb"
+    type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+    defaultValue="none"
+    description="Bottom margin"
+  />
+  <Prop
+    name="ml"
+    type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+    defaultValue="none"
+    description="Left margin"
   />
 </Props>
 
 ## Spacing
 
 <Story name="Spacing">
-  <h3>Small</h3>
-  <GoADivider spacing="small"></GoADivider>
-  <h3>Medium</h3>
-  <GoADivider spacing="medium"></GoADivider>
-  <h3>Large</h3>
-  <GoADivider spacing="large"></GoADivider>
   <h3>None</h3>
-  <GoADivider spacing="none"></GoADivider>
+  <Box />
+  <GoADivider></GoADivider>
+  <Box />
+  <h3>3xs</h3>
+  <Box />
+  <GoADivider mt="3xs" mb="3xs"></GoADivider>
+  <Box />
+  <h3>2xs</h3>
+  <Box />
+  <GoADivider mt="2xs" mb="2xs"></GoADivider>
+  <Box />
+  <h3>xs</h3>
+  <Box />
+  <GoADivider mt="xs" mb="xs"></GoADivider>
+  <Box />
+  <h3>Small</h3>
+  <Box />
+  <GoADivider mt="s" mb="s"></GoADivider>
+  <Box />
+  <h3>Medium</h3>
+  <Box />
+  <GoADivider mt="m" mb="m"></GoADivider>
+  <Box />
+  <h3>Large</h3>
+  <Box />
+  <GoADivider mt="l" mb="l"></GoADivider>
+  <Box />
+  <h3>xl</h3>
+  <Box />
+  <GoADivider mt="xl" mb="xl"></GoADivider>
+  <Box />
+  <h3>2xl</h3>
+  <Box />
+  <GoADivider mt="2xl" mb="2xl"></GoADivider>
+  <Box />
+  <h3>3xl</h3>
+  <Box />
+  <GoADivider mt="3xl" mb="3xl"></GoADivider>
+  <Box />
 </Story>
 
 <Tabs>
@@ -48,10 +99,10 @@ import { GoADivider } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
-      <goa-divider spacing="small"></goa-divider>
-      <goa-divider spacing="medium"></goa-divider>
-      <goa-divider spacing="large"></goa-divider>
-      <goa-divider spacing="none"></goa-divider>
+      <goa-divider mt="s" mb="s"></goa-divider>
+      <goa-divider mt="m" mb="m"></goa-divider>
+      <goa-divider mt="l" mb="l"></goa-divider>
+      <goa-divider></goa-divider>
       `}
     />
   </Tab>
@@ -59,10 +110,10 @@ import { GoADivider } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
-      <goa-divider spacing="small"></goa-divider>
-      <goa-divider spacing="medium"></goa-divider>
-      <goa-divider spacing="large"></goa-divider>
-      <goa-divider spacing="none"></goa-divider>
+      <goa-divider mt="s" mb="s"></goa-divider>
+      <goa-divider mt="m" mb="m"></goa-divider>
+      <goa-divider mt="l" mb="l"></goa-divider>
+      <goa-divider></goa-divider>
       `}
     />
   </Tab>
@@ -70,10 +121,10 @@ import { GoADivider } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
-      <GoADivider spacing="small"></GoADivider>
-      <GoADivider spacing="medium"></GoADivider>
-      <GoADivider spacing="large"></GoADivider>
-      <GoADivider spacing="none"></GoADivider>
+      <GoADivider mt="s" mb="s"></GoADivider>
+      <GoADivider mt="m" mb="m"></GoADivider>
+      <GoADivider mt="l" mb="l"></GoADivider>
+      <GoADivider></GoADivider>
       `}
     />
   </Tab>

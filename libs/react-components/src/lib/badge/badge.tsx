@@ -1,7 +1,6 @@
 import React, { FC } from "react";
+import { Margins } from "../../common/styling";
 
-// TODO: move types like this into a shared file
-// export type BadgeType;
 export type GoABadgeType =
   | "information"
   | "success"
@@ -11,14 +10,14 @@ export type GoABadgeType =
   | "midtone"
   | "light";
 
-interface GoABadgeProps {
+interface GoABadgeProps extends Margins {
   type: GoABadgeType;
   icon?: boolean;
   content?: string;
   testId?: string;
 }
 
-interface WCProps {
+interface WCProps extends Margins {
   type: GoABadgeType;
   icon?: boolean;
   content?: string;
@@ -40,16 +39,36 @@ export const GoABadge: FC<GoABadgeProps> = ({
   content,
   icon,
   testId,
+  mt,
+  mr,
+  mb,
+  ml,
 }: GoABadgeProps) => {
   return (
-    <goa-badge type={type} content={content} icon={icon} testid={testId} />
+    <goa-badge
+      type={type}
+      content={content}
+      icon={icon}
+      testid={testId}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+    />
   );
 };
 
+/**
+ * @deprecated
+ */
 export const GoAInfoBadge: FC<GoABadgeProps> = ({
   content,
   testId,
   icon,
+  mt,
+  mr,
+  mb,
+  ml,
 }: GoABadgeProps) => {
   return (
     <GoABadge
@@ -57,36 +76,88 @@ export const GoAInfoBadge: FC<GoABadgeProps> = ({
       icon={icon}
       content={content}
       testId={testId}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
     />
   );
 };
 
+/**
+ * @deprecated
+ */
 export const GoASuccessBadge: FC<GoABadgeProps> = ({
   content,
   testId,
   icon,
+  mt,
+  mr,
+  mb,
+  ml,
 }: GoABadgeProps) => {
   return (
-    <GoABadge type="success" icon={icon} content={content} testId={testId} />
+    <GoABadge
+      type="success"
+      icon={icon}
+      content={content}
+      testId={testId}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+    />
   );
 };
 
+/**
+ * @deprecated
+ */
 export const GoAImportantBadge: FC<GoABadgeProps> = ({
   content,
   testId,
   icon,
+  mt,
+  mr,
+  mb,
+  ml,
 }: GoABadgeProps) => {
   return (
-    <GoABadge type="important" icon={icon} content={content} testId={testId} />
+    <GoABadge
+      type="important"
+      icon={icon}
+      content={content}
+      testId={testId}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+    />
   );
 };
 
+/**
+ * @deprecated
+ */
 export const GoAEmergencyBadge: FC<GoABadgeProps> = ({
   content,
   testId,
   icon,
+  mt,
+  mr,
+  mb,
+  ml,
 }: GoABadgeProps) => {
   return (
-    <GoABadge type="emergency" icon={icon} content={content} testId={testId} />
+    <GoABadge
+      type="emergency"
+      icon={icon}
+      content={content}
+      testId={testId}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+    />
   );
 };

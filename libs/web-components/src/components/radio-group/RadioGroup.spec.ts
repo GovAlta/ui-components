@@ -1,6 +1,7 @@
-import "@testing-library/jest-dom";
-import { render, fireEvent, cleanup, waitFor } from "@testing-library/svelte";
-import GoARadioGroup from "./RadioGroupWrapper.test.svelte";
+import '@testing-library/jest-dom';
+import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
+import GoARadioGroupWrapper from './RadioGroupWrapper.test.svelte';
+import GoARadioGroup from './RadioGroup.svelte';
 
 afterEach(() => {
   cleanup();
@@ -11,10 +12,10 @@ describe("GoARadioGroup Component", () => {
   it("should render", async () => {
     const mock = jest.spyOn(console, "error").mockImplementation();
     const items = ["red", "blue", "orange"];
-    const result = render(GoARadioGroup, {
-      name: "favcolor",
-      value: "orange",
-      testid: "test-id",
+    const result = render(GoARadioGroupWrapper, {
+      name: 'favcolor',
+      value: 'orange',
+      testid: 'test-id',
       items,
     });
 
@@ -35,10 +36,10 @@ describe("GoARadioGroup Component", () => {
 
   it("should handle the events", async () => {
     const items = ["red", "blue", "orange"];
-    const result = render(GoARadioGroup, {
-      name: "favcolor3",
-      value: "orange",
-      testid: "test-id",
+    const result = render(GoARadioGroupWrapper, {
+      name: 'favcolor',
+      value: 'orange',
+      testid: 'test-id',
       items,
     });
 
@@ -58,6 +59,28 @@ describe("GoARadioGroup Component", () => {
       fireEvent.click(red);
       expect(red.checked).toBe(true);
       expect(orange.checked).toBe(false);
+    });
+  });
+
+
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoARadioGroup, {
+        testid: "radiogroup-test",
+        name: "test",
+        value: "",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const radiogroup = await baseElement.findByTestId("radiogroup-test");
+
+      expect(radiogroup).toBeTruthy();
+      expect(radiogroup).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(radiogroup).toHaveStyle("margin-right:var(--goa-spacing-m)");
+      expect(radiogroup).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
+      expect(radiogroup).toHaveStyle("margin-left:var(--goa-spacing-xl)");
     });
   });
 });

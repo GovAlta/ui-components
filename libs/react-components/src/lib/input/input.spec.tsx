@@ -1,9 +1,8 @@
 import "@testing-library/jest-dom";
-import React from "react";
 import { render } from "@testing-library/react";
 import { fireEvent, screen } from "@testing-library/dom";
 import { GoAInputText, InputProps } from "./input";
-import { GoAIconType } from "../icons";
+import { GoAIconType } from "../icon/icon";
 
 const noop = () => {};
 const testId = "test-id";
@@ -31,6 +30,10 @@ describe("Input", () => {
       prefix: "foo",
       suffix: "bar",
       testId: testId,
+      mt: "s",
+      mr: "m",
+      mb: "l",
+      ml: "xl",
       onTrailingIconClick: noop,
     };
 
@@ -52,6 +55,10 @@ describe("Input", () => {
     expect(input.getAttribute("prefix")).toBe("foo");
     expect(input.getAttribute("suffix")).toBe("bar");
     expect(input.getAttribute("data-testid")).toBe(testId);
+    expect(input.getAttribute("mt")).toBe("s");
+    expect(input.getAttribute("mr")).toBe("m");
+    expect(input.getAttribute("mb")).toBe("l");
+    expect(input.getAttribute("ml")).toBe("xl");
     expect(input.getAttribute("handletrailingiconclick")).toBeTruthy();
   });
 

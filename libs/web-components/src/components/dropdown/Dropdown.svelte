@@ -4,8 +4,10 @@
   import { deleteContext, ContextStore, getContext } from "../../common/context-store";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { BindMessage, Option } from "./types";
+  import type { Spacing } from "../../common/styling";
   import { onDestroy, tick } from "svelte";
   import { toBoolean } from "../../common/utils";
+  import { calculateMargin } from "../../common/styling";
 
   const MAX_HEIGHT = "276px";
 
@@ -21,6 +23,12 @@
   export let disabled: string = "false";
   export let error: string = "false";
   export let multiselect: string = "false";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   $: _disabled = toBoolean(disabled);
   $: _multiselect = toBoolean(multiselect);
@@ -213,9 +221,12 @@
 <div
   data-testid={`${name}-dropdown`}
   class="goa-dropdown-box"
-  style={`--width: ${width || computedWidth}`}
-  bind:this={el}
->
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)}
+    --width: ${width || computedWidth}
+  `}
+  bind:this={el}>
+
   <!-- background -->
   {#if isMenuVisible}
     <!-- svelte-ignore a11y-click-events-have-key-events -->

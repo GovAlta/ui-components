@@ -421,7 +421,6 @@
     | "wifi"
     | "wine"
     | "woman"
-
     | "logo-alipay"
     | "logo-amazon"
     | "logo-amplify"
@@ -512,11 +511,18 @@
     | "logo-yahoo"
     | "logo-yen"
     | "logo-youtube";
-
 </script>
 
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   // required
   export let type: GoAIconType;
@@ -529,6 +535,7 @@
   export let hovercolor: string = "";
   export let opacity: number = 1;
   export let title: string = "";
+  export let testid: string = "";
 
   $: isInverted = toBoolean(inverted);
 
@@ -542,9 +549,10 @@
 <div
   class="goa-icon"
   class:inverted={isInverted}
-  data-testid={`icon-${type}`}
-  title={title}
+  data-testid={testid}
+  {title}
   style={`
+    ${calculateMargin(mt, mr, mb, ml)}
     --size: ${_size};
     --fill-color: ${fillcolor};
     --hover-color: ${hovercolor};
@@ -552,10 +560,9 @@
   `}
 >
   {#if type}
-    <ion-icon name={
-      theme === "filled" || type.indexOf("logo") === 0
-        ? type 
-        : `${type}-${theme}`} />
+    <ion-icon
+      name={theme === "filled" || type.indexOf("logo") === 0 ? type : `${type}-${theme}`}
+    />
   {/if}
 </div>
 
@@ -566,8 +573,8 @@
   }
 
   ion-icon {
-    pointer-events: none; 
-    width: 100%; 
+    pointer-events: none;
+    width: 100%;
     height: 100%;
   }
 

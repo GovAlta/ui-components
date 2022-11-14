@@ -2,16 +2,24 @@
 
 <script lang="ts">
   import { onDestroy } from "svelte";
-  import { deleteContext, ContextStore, getContext } from "../../common/context-store";
   import type { RadioMessage } from "./types";
+  import type { Spacing } from "../../common/styling";
+  import { deleteContext, ContextStore, getContext } from "../../common/context-store";
   import { toBoolean } from "../../common/utils";
+  import { calculateMargin } from "../../common/styling";
 
   export let name: string;
   export let value: string;
   export let orientation: "vertical" | "horizontal" = "vertical";
   export let disabled: string = "false";
   export let error: string = "false";
-  export let testid: string = ""; // TODO: remove this param
+  export let testid: string = "";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   let options: RadioMessage[] = [];
 
@@ -53,7 +61,12 @@
 </script>
 
 <!-- Html -->
-<div bind:this={el} class={`goa-radio-group--${orientation}`} data-testid={testid}>
+<div
+  bind:this={el}
+  style={calculateMargin(mt, mr, mb, ml)}
+  class={`goa-radio-group--${orientation}`}
+  data-testid={testid}
+>
   <slot />
   {#each options as option (option.value)}
     <label

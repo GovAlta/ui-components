@@ -1,13 +1,16 @@
 import { render } from "@testing-library/react";
 
-import GoADivider, { DividerSpacing } from "./divider";
+import GoADivider from "./divider";
 
-describe("Divider", () =>
-  describe("type", () => {
-    ["small", "medium", "large", "none"].forEach((spacing: DividerSpacing) => {
-      it(`should render ${spacing} notification`, async function () {
-        const { baseElement } = render(<GoADivider spacing={spacing} />);
-        expect(baseElement).toBeTruthy();
-      });
-    });
-  }));
+describe("Divider", () => {
+  it("should render successfully", () => {
+    const { container } = render(<GoADivider mt="s" mr="m" mb="l" ml="xl" />);
+
+    const el = container.querySelector("goa-divider");
+
+    expect(el.getAttribute("mt")).toBe("s");
+    expect(el.getAttribute("mr")).toBe("m");
+    expect(el.getAttribute("mb")).toBe("l");
+    expect(el.getAttribute("ml")).toBe("xl");
+  });
+});

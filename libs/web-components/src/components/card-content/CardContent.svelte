@@ -15,7 +15,7 @@
     box-sizing: border-box;
     font-family: var(--font-family);
   }
-  .card-content{
+  .card-content {
     padding: 1rem;
   }
 </style>

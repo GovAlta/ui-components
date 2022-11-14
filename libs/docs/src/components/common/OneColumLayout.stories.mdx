@@ -13,7 +13,7 @@ import {
   GoAAppHeader,
   GoAAppFooter,
   GoASkeleton,
-  GoAFlexRow,
+  GoAGrid,
   GoAFlexCol,
 } from "@abgov/react-components";
 
@@ -47,10 +47,10 @@ import {
           <GoASkeleton type="header" size={4} />
           <GoASkeleton type="lines" size={1} />
         </p>
-        <GoAFlexRow gap="small">
+        <GoAGrid>
           <GoASkeleton type="card" size={2} />
           <GoASkeleton type="card" size={2} />
-        </GoAFlexRow>
+        </GoAGrid>
       </GoAPageBlock>
       <section slot="footer">
         <GoAAppFooter />

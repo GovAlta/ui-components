@@ -143,4 +143,22 @@ describe("GoA FormItem", () => {
     mock.mockRestore();
   });
 
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoAFormItem, {
+        testid: "formitem-test",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const formitem = await baseElement.findByTestId("formitem-test");
+
+      expect(formitem).toBeTruthy();
+      expect(formitem).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(formitem).toHaveStyle("margin-right:var(--goa-spacing-m)");
+      expect(formitem).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
+      expect(formitem).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+    });
+  });
 });

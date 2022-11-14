@@ -2,10 +2,17 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let type: "emergency" | "important" | "information" | "event" | "success";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
 
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = "l";
+  export let ml: Spacing = null;
+
+  export let type: "emergency" | "important" | "information" | "event" | "success";
   export let heading: string = "";
-  // TODO: get rid of testid
   export let testid: string = "";
 
   $: iconType =
@@ -23,7 +30,11 @@
 </script>
 
 <!-- HTML -->
-<div class="notification" data-testid={testid}>
+<div 
+  style={calculateMargin(mt, mr, mb, ml)}
+  class="notification" 
+  data-testid={testid}
+>
   <span class="icon {type}">
     <goa-icon type={iconType} inverted={type === "important" ? "false" : "true"} />
   </span>
@@ -46,7 +57,6 @@
     align-items: stretch;
     border-radius: 3px;
     overflow: hidden;
-    margin-bottom: 1.75rem;
   }
 
   h3 {

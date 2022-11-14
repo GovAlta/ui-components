@@ -7,6 +7,8 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
 
   export let type:
     "text"
@@ -43,6 +45,12 @@
   export let step: number = null;
   export let prefix: string = "";
   export let suffix: string = "";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
@@ -85,6 +93,7 @@
 <div
   class="container"
   style={`
+    ${calculateMargin(mt, mr, mb, ml)};
     --width: ${width};
   `}
   >
@@ -169,6 +178,7 @@
   .container {
     position: relative;
     width: 100%;
+    display: inline-block;
   }
 
   @media (min-width: 640px) {

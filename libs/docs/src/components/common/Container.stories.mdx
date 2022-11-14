@@ -12,7 +12,8 @@ import {
   GoAContainer,
   GoAButton,
   GoABadge,
-  GoAFlexRow,
+  GoABlock,
+  GoAGrid,
   GoACallout,
 } from "@abgov/react-components";
 
@@ -82,10 +83,40 @@ import {
   />
 </Props>
 
+<details>
+  <summary>Additional Properties</summary>
+  <Props showTabs={true}>
+    <Prop
+      name="mt"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+      defaultValue="none"
+      description="Top margin"
+    />
+    <Prop
+      name="mr"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+      defaultValue="none"
+      description="Right margin"
+    />
+    <Prop
+      name="mb"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+      defaultValue="none"
+      description="Bottom margin"
+    />
+    <Prop
+      name="ml"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+      defaultValue="none"
+      description="Left margin"
+    />
+  </Props>
+</details>
+
 #### Container types
 
 <Story name="Container types">
-  <GoAFlexRow gap="medium">
+  <GoAGrid minChildWidth="200px">
     <GoAContainer>
       <h2>Interactive container</h2>
       Content
@@ -94,8 +125,8 @@ import {
       <h2>Non-Interactive container</h2>
       Content
     </GoAContainer>
-  </GoAFlexRow>
-  <GoAFlexRow gap="medium">
+  </GoAGrid>
+  <GoAGrid minChildWidth="200px">
     <GoAContainer type="info">
       <h2>Info Container</h2>
       Content
@@ -104,8 +135,8 @@ import {
       <h2>Error Container</h2>
       Content
     </GoAContainer>
-  </GoAFlexRow>
-  <GoAFlexRow gap="medium">
+  </GoAGrid>
+  <GoAGrid minChildWidth="200px">
     <GoAContainer type="success">
       <h2>Success Container</h2>
       Content
@@ -114,7 +145,7 @@ import {
       <h2>Important Container</h2>
       Content
     </GoAContainer>
-  </GoAFlexRow>
+  </GoAGrid>
   <GoAContainer accent="thin" type="interactive">
     <h2>Interactive Container w/ Header</h2>
     If you use an accent, the background colour won't be filled in
@@ -126,7 +157,7 @@ import {
     <CodeSnippet
       lang="html"
       code={`
-        <goa-flex-row gap="medium">
+        <goa-grid>
           <goa-container>
             <h2>Interactive Container</h2>
             Content
@@ -135,8 +166,8 @@ import {
             <h2>Non-Interactive Container</h2>
             Content
           </goa-container>
-        </goa-flex-row>
-        <goa-flex-row gap="medium">
+        </goa-grid>
+        <goa-grid>
           <goa-container type="info">
             <h2>Info Container</h2>
             Content
@@ -145,8 +176,8 @@ import {
             <h2>Error Container</h2>
             Content
           </goa-container>
-        </goa-flex-row>
-        <goa-flex-row>
+        </goa-grid>
+        <goa-grid>
           <goa-container type="success">
             <h2>Success Container</h2>
             Content
@@ -155,7 +186,7 @@ import {
             <h2>Important Container</h2>
             Content
           </goa-container>
-        </goa-flex-row>
+        </goa-grid>
         <goa-container accent="thin" type="success">
           <h2>Success Container w/ Header</h2>
           If you use an accent, the background colour won't be filled in
@@ -167,7 +198,7 @@ import {
     <CodeSnippet
       lang="jsx"
       code={`
-        <GoAFlexRow gap="medium">
+        <GoAGrid minChildWidth="200px">
           <GoAContainer>
             <h2>Interactive Container</h2>
             Content
@@ -176,8 +207,8 @@ import {
             <h2>Non-Interactive Container</h2>
             Content
           </GoAContainer>
-        </GoAFlexRow>
-        <GoAFlexRow gap="medium">
+        </GoAGrid>
+        <GoAGrid minChildWidth="200px">
           <GoAContainer type="info">
             <h2>Info Container</h2>
             Content
@@ -186,8 +217,8 @@ import {
             <h2>Error Container</h2>
             Content
           </GoAContainer>
-        </GoAFlexRow>
-        <GoAFlexRow gap="medium">
+        </GoAGrid>
+        <GoAGrid minChildWidth="200px">
           <GoAContainer type="success">
             <h2>Success Container</h2>
             Content
@@ -196,7 +227,7 @@ import {
             <h2>Important Container</h2>
             Content
           </GoAContainer>
-        </GoAFlexRow>
+        </GoAGrid>
         <GoAContainer accent="thin" type="success">
           <h2>Success Container w/ Header</h2>
           If you use an accent, the background colour won't be filled in
@@ -222,7 +253,7 @@ export const HeadingTemplate = (args) => {
 #### Use the thick accent bar container for "primary" content.
 
 <Story name="Thick accent bar">
-  <GoAFlexRow gap="medium">
+  <GoAGrid minChildWidth="200px">
     <GoAContainer accent="thick">
       <h2>Heading</h2>
       Content
@@ -231,7 +262,7 @@ export const HeadingTemplate = (args) => {
       <h2>Heading</h2>
       Content
     </GoAContainer>
-  </GoAFlexRow>
+  </GoAGrid>
 </Story>
 
 <Tabs>
@@ -239,7 +270,7 @@ export const HeadingTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-        <goa-flex-row gap="medium">
+        <goa-grid>
           <goa-container accent="thick">
             <h2>Heading</h2>
             Content
@@ -248,7 +279,7 @@ export const HeadingTemplate = (args) => {
             <h2>Heading</h2>
             Content
           </goa-container>
-        </goa-flex-row>
+        </goa-grid>
     `}
     />
   </Tab>
@@ -256,7 +287,7 @@ export const HeadingTemplate = (args) => {
     <CodeSnippet
       lang="jsx"
       code={`
-        <GoAFlexRow gap="medium">
+        <GoAGrid minChildWidth="200px">
           <GoAContainer accent="thick">
             <h2>Heading</h2>
             Content
@@ -265,7 +296,7 @@ export const HeadingTemplate = (args) => {
             <h2>Heading</h2>
             Content
           </GoAContainer>
-        </GoAFlexRow>
+        </GoAGrid>
     `}
     />
   </Tab>
@@ -274,18 +305,16 @@ export const HeadingTemplate = (args) => {
 #### Use the thin accent bar container for "secondary" content.
 
 <Story name="Thin accent bar">
-  <>
-    <GoAFlexRow gap="medium">
-      <GoAContainer accent="thin">
-        <h2>Heading</h2>
-        Content
-      </GoAContainer>
-      <GoAContainer type="non-interactive" accent="thin">
-        <h2>Heading</h2>
-        Content
-      </GoAContainer>
-    </GoAFlexRow>
-  </>
+  <GoAGrid minChildWidth="200px">
+    <GoAContainer accent="thin">
+      <h2>Heading</h2>
+      Content
+    </GoAContainer>
+    <GoAContainer type="non-interactive" accent="thin">
+      <h2>Heading</h2>
+      Content
+    </GoAContainer>
+  </GoAGrid>
 </Story>
 
 <Tabs>
@@ -293,7 +322,7 @@ export const HeadingTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-        <goa-flex-row gap="medium">
+        <goa-grid>
           <goa-container accent="thin">
             <h2>Heading</h2>
             Content
@@ -302,7 +331,7 @@ export const HeadingTemplate = (args) => {
             <h2>Heading</h2>
             Content
           </goa-container>
-        </goa-flex-row>
+        </goa-grid>
     `}
     />
   </Tab>
@@ -310,7 +339,7 @@ export const HeadingTemplate = (args) => {
     <CodeSnippet
       lang="jsx"
       code={`
-        <GoAFlexRow gap="medium">
+        <GoAGrid minChildWidth="200px">
           <GoAContainer accent="thin">
             <h2>Heading</h2>
             Content
@@ -319,7 +348,7 @@ export const HeadingTemplate = (args) => {
             <h2>Heading</h2>
             Content
           </GoAContainer>
-        </GoAFlexRow>
+        </GoAGrid>
     `}
     />
   </Tab>
@@ -329,7 +358,7 @@ export const HeadingTemplate = (args) => {
 
 <Story name="Accent bar with content">
   <>
-    <GoAFlexRow gap="medium">
+    <GoAGrid minChildWidth="200px">
       <GoAContainer accent="thick" title="Heading">
         Content
       </GoAContainer>
@@ -341,7 +370,7 @@ export const HeadingTemplate = (args) => {
       >
         Content
       </GoAContainer>
-    </GoAFlexRow>
+    </GoAGrid>
   </>
 </Story>
 
@@ -361,7 +390,7 @@ export const HeadingTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-        <goa-flex-row gap="medium">
+        <goa-grid>
           <goa-container accent="thick" title="Heading" >
             Content
           </goa-container>
@@ -373,7 +402,7 @@ export const HeadingTemplate = (args) => {
             <goa-badge slot="actions" type="success" content="Badge Text" icon="true" />
             Content
           </goa-container>
-        </goa-flex-row>
+        </goa-grid>
     `}
     />
   </Tab>
@@ -381,7 +410,7 @@ export const HeadingTemplate = (args) => {
     <CodeSnippet
       lang="jsx"
       code={`
-        <GoAFlexRow gap="medium">
+        <GoAGrid minChildWidth="200px">
           <GoAContainer accent="thick" title="Heading">
             Content
           </GoAContainer>
@@ -395,7 +424,7 @@ export const HeadingTemplate = (args) => {
           >
             Content
           </GoAContainer>
-        </GoAFlexRow>
+        </GoAGrid>
     `}
     />
   </Tab>
@@ -484,24 +513,25 @@ export const HeadingTemplate = (args) => {
 #### Container with complex content
 
 <Story name="Container with complex content">
-  <GoAContainer type="non-interactive">
+  <GoAContainer>
     <h2>Heading</h2>
     <table width="100%">
-      <tr>
-        <td>Content</td>
-        <td align="right">$2,110.00</td>
-      </tr>
-      <tr>
-        <td>Content</td>
-        <td align="right">$525.00</td>
-      </tr>
-      <tr>
-        <td>Content</td>
-        <td align="right">$275.00</td>
-      </tr>
+      <tbody>
+        <tr>
+          <td>Content</td>
+          <td align="right">$2,110.00</td>
+        </tr>
+        <tr>
+          <td>Content</td>
+          <td align="right">$525.00</td>
+        </tr>
+        <tr>
+          <td>Content</td>
+          <td align="right">$275.00</td>
+        </tr>
+      </tbody>
     </table>
-    <br />
-    <GoACallout type="important">
+    <GoACallout type="important" mt="m">
       Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
       labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet.
       Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum
@@ -531,8 +561,7 @@ export const HeadingTemplate = (args) => {
               <td align="right">$275.00</td>
             </tr>
           </table>
-          <br/>
-          <goa-callout type="important">
+          <goa-callout type="important" mt="l">
             Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
           </goa-callout>
         </goa-container>
@@ -559,8 +588,7 @@ export const HeadingTemplate = (args) => {
               <td align="right">$275.00</td>
             </tr>
           </table>
-          <br/>
-          <GoACallout type="important">
+          <GoACallout type="important" mt="l">
             Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
           </GoACallout>
         </GoAContainer>
