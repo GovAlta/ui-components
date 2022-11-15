@@ -65,7 +65,6 @@
     padding: 1.5rem;
     display: flex;
     gap: 1rem;
-    border-radius: 3px;
   }
 
   .emergency {
