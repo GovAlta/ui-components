@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-export type NotificationType = "important" | "information" | "event" | "emergency";
+export type NotificationType =
+  | "important"
+  | "information"
+  | "event"
+  | "emergency";
 
 interface WCProps {
   type: NotificationType;
