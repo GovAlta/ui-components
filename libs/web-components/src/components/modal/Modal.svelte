@@ -72,7 +72,7 @@
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
         class="modal-pane"
       >
-        {#if calloutvariant !== ""}
+        {#if calloutvariant !== null}
           <div class="callout-bar {calloutvariant}">
             <goa-icon
               type={iconType}
@@ -167,6 +167,7 @@
     flex: 0 0 3rem;
     text-align: center;
     padding-top: 2rem;
+    border-radius: 4px 0px 0px 4px;
   }
   .content {
     flex: 1 1 auto;
@@ -181,9 +182,10 @@
     width: 90%;
     display: flex;
     margin: 1rem;
-    box-shadow: var(--shadow-2);
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.16);
     border-radius: 4px;
     max-height: 90%;
+    border: 1px solid var(--color-gray-600);
   }
 
   @media (min-width: 640px) {
@@ -193,12 +195,8 @@
     }
   }
 
-  .modal-actions {
+  .modal-actions ::slotted(div) {
     margin: 1.5rem 0 0;
-  }
-
-  .modal-actions:empty {
-    margin: 0;
   }
 
   .modal-close {
