@@ -30,7 +30,7 @@ You can view how you can contribute [here](contributing.md).
 
 ## Storybook
 
-You can view the current storybook [here](https://ui-components-ui-components-dev.os99.gov.ab.ca/?path=/docs/overview--page). This has all the info on how to implement our components, as well as how to get setup to contribute.
+You can view the current storybook [here](https://ui-components.alberta.ca/?path=/story/overview--page). This has all the info on how to implement our components, as well as how to get setup to contribute.
 
 ### Library and Applications
 
@@ -39,3 +39,4 @@ You can view the current storybook [here](https://ui-components-ui-components-de
 | web-components   | Library of native web components. Published to NPM [@abgov/web-components](https://www.npmjs.com/package/@abgov/web-components).    |
 | styles           | Library of GoA web styles. Published to NPM [@abgov/styles](https://www.npmjs.com/package/@abgov/styles).                           |
 | react-components | Library of components for React. Published to NPM [@abgov/react-components](https://www.npmjs.com/package/@abgov/react-components). |
+| angular-components | Library of components for Angular. Published to NPM [@abgov/angular-components](https://www.npmjs.com/package/@abgov/angular-components). |
