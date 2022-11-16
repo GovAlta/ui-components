@@ -64,5 +64,40 @@
   </goa-button-group>
 </goa-modal>
 
+<goa-button-group>
+  <goa-button (_click)="showCalloutModal('information')"
+    >Information Callout</goa-button
+  >
+  <goa-button (_click)="showCalloutModal('important')"
+    >Important Callout</goa-button
+  >
+  <goa-button (_click)="showCalloutModal('success')"
+    >Success Callout</goa-button
+  >
+  <goa-button (_click)="showCalloutModal('emergency')"
+    >Emergency Callout</goa-button
+  >
+  <goa-button (_click)="showCalloutModal('event')">Event Callout</goa-button>
+</goa-button-group>
+<goa-modal
+  type="callout"
+  heading="Do you agree?"
+  [open]="isOpen5"
+  (_close)="closeModal5()"
+  [calloutvariant]="calloutVariant"
+  closable
+>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <goa-button-group alignment="end" slot="actions">
+    <goa-button (_click)="closeModal5()">Secondary</goa-button>
+    <goa-button (_click)="closeModal5()">Primary</goa-button>
+  </goa-button-group>
+</goa-modal>
+
 <!-- To show scrollbars -->
 <div style="height: 100vh"></div>

@@ -1,6 +1,12 @@
 import React, { FC, useEffect, useRef } from "react";
 
 export type ModalTransition = "fast" | "slow" | "none";
+export type CalloutVariant =
+  | "information"
+  | "important"
+  | "emergency"
+  | "success"
+  | "event";
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
@@ -10,6 +16,7 @@ interface WCProps {
   closable?: boolean;
   scrollable?: boolean;
   transition?: ModalTransition;
+  calloutVariant?: CalloutVariant;
 }
 
 declare global {
@@ -29,6 +36,8 @@ interface Props {
   transition?: ModalTransition;
   children?: React.ReactNode;
   open?: boolean;
+  type?: string;
+  calloutVariant?: CalloutVariant;
 }
 
 export const GoAModal: FC<Props> = ({
@@ -38,9 +47,18 @@ export const GoAModal: FC<Props> = ({
   width,
   actions,
   transition,
+  type,
+  calloutVariant,
   onClose,
 }) => {
   const el = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (type) {
+      console.warn("GoAModal [type] is deprecated.");
+    }
+  }, [type]);
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -65,6 +83,7 @@ export const GoAModal: FC<Props> = ({
       scrollable={true}
       width={width}
       transition={transition}
+      calloutVariant={calloutVariant}
     >
       {actions && <div slot="actions">{actions}</div>}
       {children}

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, fireEvent, cleanup } from '@testing-library/svelte';
+import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
 import GoAModal from './Modal.svelte'
 import GoAModalWrapper from './ModalWrapper.test.svelte'
 
@@ -55,7 +55,23 @@ describe('Modal Component', () => {
     const el = render(GoAModalWrapper, { actionContent });
 
     expect(el.container.querySelector("[slot=actions]").innerHTML).toContain(actionContent);
-  })
+  });
 
+  ["emergency", "important", "information", "success", "event"].forEach(calloutVariant => {
+    it(`renders the ${calloutVariant} callout modal`, async () => {
+      const el = render(GoAModal, { open: "true", heading: "Heading", "calloutvariant": calloutVariant });
+      expect(el.queryByTestId("modal-title").innerHTML).toContain("Heading");
+      expect(el.container.querySelector(`.${calloutVariant}`)).toBeTruthy();
+    });
+  });
+
+  it("should not render an invalid calloutVariant", async () => {
+    const mock = jest.spyOn(console, "error").mockImplementation();
+    render(GoAModal, { open: "true", heading: "Heading", calloutvariant: "importantttttt" });
+    await waitFor(() => {
+      expect(console.error["mock"].calls.length).toBeGreaterThan(0);
+    })
+    mock.mockRestore();
+  });
 
 });

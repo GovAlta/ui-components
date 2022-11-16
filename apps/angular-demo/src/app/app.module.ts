@@ -33,6 +33,8 @@ import { SkeletonComponent } from "./skeleton/skeleton.component";
 import { FormItemComponent } from "./form-item/form-item.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
 import { IconButtonComponent } from "./icon-button/icon-button.component";
+import { NotificationBannerComponent } from "./notification-banner/notification-banner.component";
+import { ButtonGroupComponent } from "./button-group/button-group.component";
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { IconButtonComponent } from "./icon-button/icon-button.component";
     SkeletonComponent,
     FormItemComponent,
     IconButtonComponent,
+    NotificationBannerComponent,
+    ButtonGroupComponent,
   ],
   imports: [
     BrowserModule,

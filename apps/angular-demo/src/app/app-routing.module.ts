@@ -21,6 +21,8 @@ import { SkeletonComponent } from "./skeleton/skeleton.component";
 import { FormItemComponent } from "./form-item/form-item.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
 import { IconButtonComponent } from "./icon-button/icon-button.component";
+import { NotificationBannerComponent } from "./notification-banner/notification-banner.component";
+import { ButtonGroupComponent } from "./button-group/button-group.component";
 
 const routes: Routes = [
   { path: "button", component: ButtonComponentComponent },
@@ -43,6 +45,8 @@ const routes: Routes = [
   { path: "modal", component: ModalComponent },
   { path: "two-column-layout", component: TwoColumnLayoutComponent },
   { path: "icon-button", component: IconButtonComponent },
+  { path: "notification-banner", component: NotificationBannerComponent },
+  { path: "button-group", component: ButtonGroupComponent },
   { path: "", redirectTo: "/input", pathMatch: "full" },
 ];
 
