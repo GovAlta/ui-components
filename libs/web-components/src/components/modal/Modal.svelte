@@ -199,6 +199,11 @@
     margin: 1.5rem 0 0;
   }
 
+  .modal-content ::slotted(:last-child) {
+    margin-bottom: 0 !important;
+  }
+
+
   .modal-close {
     position: absolute;
     top: 2rem;
