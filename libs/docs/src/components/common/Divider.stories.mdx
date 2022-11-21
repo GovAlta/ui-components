@@ -1,0 +1,80 @@
+import { Meta, Story } from "@storybook/addon-docs";
+import {
+  Tabs,
+  Tab,
+  CodeSnippet,
+  SupportInfo,
+  Props,
+  Prop,
+} from "@abgov/shared/storybook-common";
+import { GoADivider } from "@abgov/react-components";
+
+<Meta title="Utility/Divider" />
+
+# Divider
+
+### Dividers are used to indicate a sepearation of layout, or to distinguish large chunks of information on a page.
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI?node-id=8360%3A259065)
+
+---
+
+## Properties
+
+<Props>
+  <Prop
+    name="spacing"
+    type="small | medium | large | none"
+    defaultValue="small"
+    description="Defines the spacing between vertical elements above and below the divider"
+  />
+</Props>
+
+## Spacing
+
+<Story name="Spacing">
+  <h3>Small</h3>
+  <GoADivider spacing="small"></GoADivider>
+  <h3>Medium</h3>
+  <GoADivider spacing="medium"></GoADivider>
+  <h3>Large</h3>
+  <GoADivider spacing="large"></GoADivider>
+  <h3>None</h3>
+  <GoADivider spacing="none"></GoADivider>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-divider spacing="small"></goa-divider>
+      <goa-divider spacing="medium"></goa-divider>
+      <goa-divider spacing="large"></goa-divider>
+      <goa-divider spacing="none"></goa-divider>
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-divider spacing="small"></goa-divider>
+      <goa-divider spacing="medium"></goa-divider>
+      <goa-divider spacing="large"></goa-divider>
+      <goa-divider spacing="none"></goa-divider>
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <GoADivider spacing="small"></GoADivider>
+      <GoADivider spacing="medium"></GoADivider>
+      <GoADivider spacing="large"></GoADivider>
+      <GoADivider spacing="none"></GoADivider>
+      `}
+    />
+  </Tab>
+</Tabs>

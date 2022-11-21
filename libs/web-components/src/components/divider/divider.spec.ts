@@ -9,10 +9,11 @@ describe('Divider', () => {
     small: "1rem",
     medium: "2rem",
     large: "4rem",
+    none: "0rem"
   };
 
-  ["small", "medium", "large"].forEach(spacing => {
-    it(`renders the ${spacing}}`, async () => {
+  ["small", "medium", "large", "none"].forEach(spacing => {
+    it(`renders the ${spacing} spacing`, async () => {
       const { container } = render(Divider, { spacing })
       const el = container.querySelector("hr");
       expect(el.getAttribute("style")).toEqual(`--spacing: ${sizes[spacing]};`);
@@ -29,5 +30,11 @@ describe('Divider', () => {
     })
 
     mock.mockRestore();
+  })
+
+  it("renders small spacing if spacing is not set", async () => {
+    const { container } = render(Divider)
+    const el = container.querySelector("hr");
+    expect(el.getAttribute("style")).toEqual(`--spacing: 1rem;`);
   })
 })

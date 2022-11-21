@@ -1,10 +1,13 @@
 import { render } from "@testing-library/react";
 
-import Divider from "./divider";
+import GoADivider, { DividerSpacing } from "./divider";
 
-describe("Divider", () => {
-  it("should render successfully", () => {
-    const { baseElement } = render(<Divider />);
-    expect(baseElement).toBeTruthy();
-  });
-});
+describe("Divider", () =>
+  describe("type", () => {
+    ["small", "medium", "large", "none"].forEach((spacing: DividerSpacing) => {
+      it(`should render ${spacing} notification`, async function () {
+        const { baseElement } = render(<GoADivider spacing={spacing} />);
+        expect(baseElement).toBeTruthy();
+      });
+    });
+  }));

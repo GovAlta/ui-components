@@ -3,9 +3,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  export let spacing: string = "";
+  export let spacing: string = "small";
 
-  const SPACING = ["small", "medium", "large"];
+  const SPACING = ["small", "medium", "large", "none"];
   type Spacing = typeof SPACING[number];
 
   function isSpacing(value: string): value is Spacing {
@@ -16,6 +16,7 @@
     small: "1rem",
     medium: "2rem",
     large: "4rem",
+    none: "0rem"
   }[spacing];
 
   onMount(() => {

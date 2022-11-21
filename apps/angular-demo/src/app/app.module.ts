@@ -35,6 +35,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
 import { IconButtonComponent } from "./icon-button/icon-button.component";
 import { NotificationBannerComponent } from "./notification-banner/notification-banner.component";
 import { ButtonGroupComponent } from "./button-group/button-group.component";
+import { DividerComponent } from "./divider/divider.component";
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ButtonGroupComponent } from "./button-group/button-group.component";
     IconButtonComponent,
     NotificationBannerComponent,
     ButtonGroupComponent,
+    DividerComponent,
   ],
   imports: [
     BrowserModule,

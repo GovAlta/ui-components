@@ -89,6 +89,9 @@ export default function App() {
             <Link className="navigation-link" to="/button-group">
               Button Group
             </Link>
+            <Link className="navigation-link" to="/divider">
+              Divider
+            </Link>
           </nav>
         </div>
 

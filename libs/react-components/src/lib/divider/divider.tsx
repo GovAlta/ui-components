@@ -1,7 +1,9 @@
-type DividerSpacing = "small" | "medium" | "large";
+import React from "react";
+
+export type DividerSpacing = "small" | "medium" | "large" | "none";
 
 interface WCDividerProps {
-  spacing: DividerSpacing;
+  spacing?: DividerSpacing;
 }
 
 declare global {
@@ -16,7 +18,7 @@ declare global {
 
 /* eslint-disable-next-line */
 export interface DividerProps {
-  spacing: DividerSpacing;
+  spacing?: DividerSpacing;
 }
 
 export function GoADivider(props: DividerProps) {
