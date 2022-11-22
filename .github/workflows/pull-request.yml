@@ -33,3 +33,12 @@ jobs:
           npm run build:styles 
           npx nx affected --target=build --base=origin/${{ github.base_ref }}
           npx nx affected --target=post --base=origin/${{ github.base_ref }}
+      - name: Build Storybooks
+        run: |
+          npm run build:docs-storybook
+          cp nginx.conf dist/storybook
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          storybookBuildDir: dist/storybook
