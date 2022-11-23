@@ -194,7 +194,8 @@ export const Template = (args) => {
         <goa-dropdown
           goaValue
           name="colors"
-          [(ngModel)]="selectedColor"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value">
           <goa-dropdown-item
             name="colors"
             *ngFor="let color of colors"
@@ -208,9 +209,10 @@ export const Template = (args) => {
     <CodeSnippet
       lang="js"
       code={`
+        import { FormControl } from "@angular/forms";
         export class MyComponent {
           colors: string[] = ['red', 'green', 'blue'];
-          selectedColor: string = 'red';
+          reactiveFormCtrl = new FormControl("red");
         }
       `}
     />

@@ -60,3 +60,16 @@
   <goa-radio-item name="bindingColor" value="blue"></goa-radio-item>
   <goa-radio-item name="bindingColor" value="orange"></goa-radio-item>
 </goa-radio-group>
+
+<h2>Reactive Binding</h2>
+<div>Selected value: {{ reactiveFormCtrl.value }}</div>
+<goa-radio-group
+  goaValue
+  name="bindingColor"
+  [formControl]="reactiveFormCtrl"
+  [value]="reactiveFormCtrl.value"
+>
+  <goa-radio-item name="bindingColor" value="red"></goa-radio-item>
+  <goa-radio-item name="bindingColor" value="blue"></goa-radio-item>
+  <goa-radio-item name="bindingColor" value="orange"></goa-radio-item>
+</goa-radio-group>

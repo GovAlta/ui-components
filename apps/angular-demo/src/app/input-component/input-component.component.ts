@@ -19,6 +19,8 @@ export class InputComponentComponent {
   wcVal = "event bound";
   tempDrivenVal = "template bound";
   reactiveFormCtrl = new FormControl("reactive form");
+  reactiveDateFormCtrl = new FormControl(format(this.date, "yyyy-MM-dd"));
+  reactiveTimeFormCtrl = new FormControl(this.time);
   sliderVal = 50;
   dateVal = format(this.date, "yyyy-MM-dd");
   arrayVal = undefined;

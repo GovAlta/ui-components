@@ -263,14 +263,15 @@ export const InputTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-        <goa-input goaValue [(ngModel)]="firstName"></goa-input>
+        <goa-input goaValue [formControl]="reactiveFormCtrl" [value]="reactiveFormCtrl.value"></goa-input>
       `}
     />
     <CodeSnippet
       lang="ts"
       code={`
+        import { FormControl } from "@angular/forms";
         export class SomeComponent {
-          firstName = "";
+          reactiveFormCtrl = new FormControl("reactive form");
         }
       `}
     />
@@ -566,10 +567,12 @@ export const DateTemplate = () => {
     <CodeSnippet
       code={`
         import { format } from "date-fns";
+        import { FormControl } from "@angular/forms";
         export class MyComponent {
           date = format(new Date(), "yyyy-MM-dd");
           minDate = format(new Date(), "yyyy-MM-dd");
           maxDate = format(this.getDateWithMonthOffset(1), "yyyy-MM-dd");
+          reactiveDateFormCtrl = new FormControl(date);
           getDateWithMonthOffset(offset) {
             const d = new Date();
             d.setMonth(d.getMonth() + offset);
@@ -590,7 +593,8 @@ export const DateTemplate = () => {
           name="withinTheNextMonth"
           [min]="minDate"
           [max]="maxDate"
-          [(ngModel)]="date"
+          [formControl]="reactiveDateFormCtrl"
+          [value]="reactiveDateFormCtrl.value"
         >
         </goa-input>
       `}
@@ -639,8 +643,10 @@ export const TimeComponent = () => {
     <CodeSnippet
       code={`
         import { format } from "date-fns";
+        import { FormControl } from "@angular/forms";
         export class MyComponent {
           time = format(new Date(), "HH:mm:ss");
+          reactiveTimeFormCtrl = new FormControl(this.time);
         }
       `}
       lang="ts"
@@ -651,7 +657,8 @@ export const TimeComponent = () => {
           goaValue
           type="time"
           name="timeExample"
-          [(ngModel)]="time"
+          [formControl]="reactiveTimeFormCtrl"
+          [value]="reactiveTimeFormCtrl.value"
           step="1"
         >
         </goa-input>
@@ -751,8 +758,10 @@ When working with the `type=time` step controls the second step value (defaults 
     <CodeSnippet
       code={`
         import { format } from "date-fns";
+        import { FormControl } from "@angular/forms";
         export class MyComponent {
           dateTime = format(new Date(), "HH:mm:ss")
+          reactiveDateTimeFormCtrl = new FormControl(this.dateTime);
         }
       `}
       lang="ts"
@@ -764,7 +773,8 @@ When working with the `type=time` step controls the second step value (defaults 
           type="time"
           name="dateTimeExample"
           step="1"
-          [(ngModel)]="date"
+          [formControl]="reactiveDateTimeFormCtrl"
+          [value]="reactiveDateTimeFormCtrl.value"
         >
         </goa-input>
       `}

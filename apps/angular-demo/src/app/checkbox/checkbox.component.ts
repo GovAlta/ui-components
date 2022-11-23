@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "abgov-checkbox",
@@ -9,6 +10,7 @@ export class CheckboxComponent {
   checkbox1Checked = false;
   checkbox2Checked = true;
   checkbox3Checked = false;
+  reactiveFormCtrl = new FormControl();
   bindingVal = "";
   bindingNoVal = "";
 

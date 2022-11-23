@@ -146,7 +146,8 @@ onChangeCheckboxTemplate.args = {
           goaValue
           name="desserts"
           text="Ice Cream"
-          [(ngModel)]="iceCreamCost"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
         ></goa-checkbox>
       `}
       lang="html"
@@ -154,8 +155,9 @@ onChangeCheckboxTemplate.args = {
     <CodeSnippet
       lang="ts"
       code={`
+        import { FormControl } from "@angular/forms";
         export class SomeComponent {
-          iceCreamCost = "10";
+          reactiveFormCtrl = new FormControl();
         }
       `}
     />
@@ -215,7 +217,8 @@ checkedCheckboxTemplate.args = {
           goaValue
           name="desserts"
           text="Ice Cream"
-          [(ngModel)]="dessertsChecked"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
         </goa-checkbox>
       `}
       lang="html"
@@ -225,6 +228,7 @@ checkedCheckboxTemplate.args = {
       code={`
         export class SomeComponent {
           dessertsChecked = 10;
+          reactiveFormCtrl = new FormControl();
         }
     `}
     />
@@ -290,7 +294,8 @@ errorCheckboxTemplate.args = {
           goaValue
           name="desserts"
           text="Ice Cream"
-          [(ngModel)]="dessertsChecked"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
           error
           [checked]="true"
         >
@@ -301,8 +306,9 @@ errorCheckboxTemplate.args = {
     <CodeSnippet
       lang="ts"
       code={`
+      import { FormControl } from "@angular/forms";
       export class SomeComponent {
-        let dessertsChecked;
+        reactiveFormCtrl = new FormControl();
       }
     `}
     />

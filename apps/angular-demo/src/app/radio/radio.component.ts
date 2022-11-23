@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "abgov-radio",
@@ -9,6 +10,8 @@ export class RadioComponent {
   constructor() {}
 
   boundVal = "";
+
+  reactiveFormCtrl = new FormControl();
 
   dynamicItems = [
     {
