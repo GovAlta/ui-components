@@ -41,7 +41,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "postinstall": "ngcc --properties es2015 browser module main",
-    "chromatic": "npx chromatic --build-script-name=build:docs-storybook"
+    "chromatic": "npx chromatic --storybook-build-dir=dist/storybook/docs"
   },
   "private": true,
   "dependencies": {
