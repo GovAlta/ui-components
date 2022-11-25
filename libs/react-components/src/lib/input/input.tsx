@@ -271,7 +271,7 @@ export const GoAInputDateTime: FC<DateInputProps> = ({
     <GoAInput
       {...props}
       onChange={onDateChangeHandler(props.onChange)}
-      value={toString(value, "yyyy-MM-dd'T'hh:mm")}
+      value={toString(value, "yyyy-MM-dd'T'HH:mm")}
       type="datetime-local"
     />
   );
