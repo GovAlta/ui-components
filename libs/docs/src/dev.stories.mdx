@@ -65,27 +65,28 @@ You need to run this command to hook up our gitcommits, which will help format y
 git config --local core.hooksPath .githooks/
 ```
 
-### Playground
+### Build
 
-Provides live reloading for quicker development.
+Run this before running anything below
 
 ```bash
-# script: run:web-components-demo
-npm run --prefix libs/web-components demo
+npm run build:all
 ```
 
-#### Start Storybook
+#### Run Storybook
 
 ```bash
-# script: run:web-components-storybook
-nx run web-components:storybook
+npm run run:docs-storybook
 ```
 
-### Run Storybook
-
-Currently, the storybook does not provide proper live reloads :(
+#### Angular Dev Environment
 
 ```bash
-# script: run:web-components-dev
-npm run --prefix libs/web-components dev
+npm run run:angular-demo
+```
+
+#### React Dev Environment
+
+```bash
+npm run run:react-demo
 ```
