@@ -1,10 +1,10 @@
 <svelte:options tag="goa-dropdown" />
 
 <script lang="ts">
-  import { deleteContext, ContextStore, createContext } from "../../common/context-store";
+  import { deleteContext, ContextStore, getContext } from "../../common/context-store";
   import type { GoAIconType } from "../icon/Icon.svelte";
-  import { onMount, onDestroy, tick } from "svelte";
-  import { BIND, BindMessage, Option } from "./types";
+  import type { BindMessage, Option } from "./types";
+  import { onDestroy, tick } from "svelte";
   import { toBoolean } from "../../common/utils";
 
   const MAX_HEIGHT = "276px";
@@ -38,26 +38,15 @@
   let menuEl: HTMLElement;
   let ctx: ContextStore;
 
-  // Hooks
-
-  onMount(() => {
-    const maxAttempts = 10;
-    let attempts = 0;
-    const fn = setInterval(async () => {
-      attempts++;
-      if (name && el) {
-        addEventListeners();
-        parseValues();
-        bindContext();
-
-        clearInterval(fn);
-      }
-      if (attempts > maxAttempts) {
-        console.error("goa-dropdown: missing the required `name` attribute. It must match the children's name attribute.")
-        clearInterval(fn);
-      }
-    }, 10);
-  })
+  let isBound = false;
+  $: {
+    if (name && el && !isBound) {
+      isBound = true;
+      addEventListeners();
+      parseValues();
+      bindContext();
+    }
+  }
 
   onDestroy(() => {
     removeEventListeners();
@@ -90,25 +79,20 @@
   }
 
   function bindContext() {
-    ctx = createContext(name);
+    ctx = getContext(name);
     ctx.subscribe(data => {
-      switch (data?.type) {
-        case BIND: {
-          const _data = data as BindMessage;
-          const selected = _values.includes(_data.value);
+      const _data = data as BindMessage;
+      const selected = _values.includes(_data.value);
 
-          options = [...options, { ..._data, selected }];
-          if (selected) {
-            selectedLabel = _data.label;
-          }
-          if (!width && maxLetterCount < _data.label.length) {
-            maxLetterCount = _data.label.length;
-            computedWidth = `${Math.max(20, maxLetterCount + 12)}ch`;
-          }
-          setHighlightedIndexToSelected();
-          break;
-        }
+      options = [...options, { ..._data, selected }];
+      if (selected) {
+        selectedLabel = _data.label;
       }
+      if (!width && maxLetterCount < _data.label.length) {
+        maxLetterCount = _data.label.length;
+        computedWidth = `${Math.max(20, maxLetterCount + 12)}ch`;
+      }
+      setHighlightedIndexToSelected();
     });
   }
 
@@ -222,7 +206,6 @@
   function onHighlight(e: Event) {
     highlightedIndex = Number((e.target as HTMLElement).dataset.index);
   }
-
 </script>
 
 <!-- Template -->
@@ -231,8 +214,8 @@
   data-testid={`${name}-dropdown`}
   class="goa-dropdown-box"
   style={`--width: ${width || computedWidth}`}
-  bind:this={el}>
-
+  bind:this={el}
+>
   <!-- background -->
   {#if isMenuVisible}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -247,7 +230,7 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <goa-input
     on:click={showMenu}
-    error={error}
+    {error}
     {disabled}
     {leadingicon}
     {placeholder}
