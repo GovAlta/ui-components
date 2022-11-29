@@ -48,10 +48,30 @@ import { Meta, Story } from "@storybook/addon-docs";
   />
   <Prop
     name="name"
+    lang="angular"
     type="string"
     description="Name of input value that is received in the _change event"
   />
-  <Prop name="value" type="string" description="Bound to value" />
+  <Prop
+    name="name"
+    lang="react"
+    type="string"
+    required={true}
+    description="Name of input value that is received in the _change event"
+  />
+  <Prop
+    name="value"
+    lang="angular"
+    type="string"
+    description="Bound to value"
+  />
+  <Prop
+    name="value"
+    lang="react"
+    type="string"
+    required={true}
+    description="Bound to value"
+  />
   <Prop
     name="placeholder"
     type="string"
@@ -150,6 +170,7 @@ import { Meta, Story } from "@storybook/addon-docs";
     name="onChange"
     lang="react"
     type="(name: string, value: string | Date | number) => void"
+    required={true}
     description="Callback function invoked when input value is changed. The value type varies on the component type ie. GoAInput vs GoAInputDate"
   />
   <Prop
