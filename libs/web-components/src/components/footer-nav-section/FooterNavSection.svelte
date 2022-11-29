@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
+  import { injectCss } from "../../common/styling";
 
   export let heading: string = "";
   export let maxcolumncount: number = 1;
@@ -15,35 +16,52 @@
     // remap slot content
     children = rootEl.querySelector("slot").assignedElements() as HTMLLinkElement[];
 
-    const isValid = 
-      children
-        .map(child => child.hasAttribute("href"))
-        .reduce((sum: boolean, valid: boolean) => {
-          return sum && valid
-        }, true);
+    const isValid = children
+      .map(child => child.hasAttribute("href"))
+      .reduce((sum: boolean, valid: boolean) => {
+        return sum && valid;
+      }, true);
 
     if (!isValid) {
       children = [];
-      console.warn("GoAFooterNavSection children must be anchor elements.")
+      console.warn("GoAFooterNavSection children must be anchor elements.");
       return;
     }
 
-    // This is pretty hacky, but the only way I could get access to 
-    // the root element and add the required styles
-    const style = document.createElement("style") 
-    style.innerHTML = `
-      :host { 
-        flex-grow: ${maxcolumncount};
-      }
-    `;
-    rootEl.appendChild(style);
+    injectCss(rootEl, ":host", {
+      "flex-grow": maxcolumncount,
+    });
   });
 </script>
 
+<!-- Template -->
+<section bind:this={rootEl}>
+  {#if heading}
+    <div class="title">{heading}</div>
+    <goa-divider spacing="small" />
+  {/if}
+
+  <div class="hidden">
+    <slot />
+  </div>
+
+  <ul
+    class="links"
+    style={`
+      --narrow-display-type: ${Math.ceil(maxcolumncount / 2) > 1 ? "block" : "flex"};
+      --narrow-column-count: ${Math.ceil(maxcolumncount / 2)};
+      --wide-display-type: ${maxcolumncount > 1 ? "block" : "flex"};
+      --wide-column-count: ${maxcolumncount};
+    `}
+  >
+    {#each children as child}
+      <li><a href={child.href}>{child.innerHTML}</a></li>
+    {/each}
+  </ul>
+</section>
+
 <!-- Styles -->
-
 <style>
-
   :host {
     /* The flex-grow is set via code above  */
     flex: auto;
@@ -91,31 +109,4 @@
   a {
     color: var(--goa-color-text);
   }
-
 </style>
-
-<!-- Template -->
-<section bind:this={rootEl}>
-  {#if heading}
-    <div class="title">{heading}</div>
-    <goa-divider spacing="small" />
-  {/if}
-
-  <div class="hidden">
-    <slot />
-  </div>
-
-  <ul 
-    class="links" 
-    style={`
-      --narrow-display-type: ${Math.ceil(maxcolumncount / 2) > 1 ? "block" : "flex"};
-      --narrow-column-count: ${Math.ceil(maxcolumncount / 2)};
-      --wide-display-type: ${maxcolumncount > 1 ? "block" : "flex"};
-      --wide-column-count: ${maxcolumncount};
-    `}>
-    {#each children as child}
-      <li><a href={child.href}>{child.innerHTML}</a></li>
-    {/each}
-  </ul>
-
-</section>

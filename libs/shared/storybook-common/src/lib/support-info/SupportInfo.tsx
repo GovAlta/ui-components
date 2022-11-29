@@ -17,7 +17,7 @@ export const SupportInfo = () => {
       </GoACallout>
       <h3>Help improve this page</h3>
       To help make sure that this page is useful, relevant, and up to date, you
-      can:
+      can:&nbsp;
       <a href="https://github.com/GovAlta/ui-components/issues/new/choose">
         Create an issue for a proposed update or contribution
       </a>

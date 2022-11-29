@@ -12,4 +12,24 @@ describe('GoARadioGroup Component', () => {
       expect(baseElement.container.querySelector('.skeleton')).toBeTruthy()
     });
   }
+
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoASkeleton, {
+        testid: "skeleton-test",
+        type: "text",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const skeleton = await baseElement.findByTestId("skeleton-test");
+
+      expect(skeleton).toBeTruthy();
+      expect(skeleton).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(skeleton).toHaveStyle("margin-right:var(--goa-spacing-m)");
+      expect(skeleton).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
+      expect(skeleton).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+    });
+  });
 });

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

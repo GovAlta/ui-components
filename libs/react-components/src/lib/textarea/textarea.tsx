@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef } from "react";
+import { Margins } from "../../common/styling";
 
-interface WCProps {
+interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
   name: string;
   value: string;
@@ -22,7 +23,7 @@ declare global {
   }
 }
 
-interface Props {
+interface Props extends Margins {
   name: string;
   value: string;
   id?: string;
@@ -48,6 +49,10 @@ export const GoATextArea: FC<Props> = ({
   width,
   testId,
   error,
+  mt,
+  mr,
+  mb,
+  ml,
   onChange,
 }) => {
   const el = useRef<HTMLTextAreaElement>(null);
@@ -81,6 +86,10 @@ export const GoATextArea: FC<Props> = ({
       width={width}
       error={error}
       data-testid={testId}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
     ></goa-textarea>
   );
 };

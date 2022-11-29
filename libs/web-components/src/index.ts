@@ -14,8 +14,7 @@ export * from "./components/circular-progress/CircularProgress.svelte";
 export * from "./components/container/Container.svelte";
 export * from "./components/dropdown/Dropdown.svelte";
 export * from "./components/dropdown/DropdownItem.svelte";
-export * from "./components/flex-column/FlexColumn.svelte";
-export * from "./components/flex-row/FlexRow.svelte";
+export * from "./components/grid/Grid.svelte";
 export * from "./components/focus-trap/FocusTrap.svelte";
 export * from "./components/footer-meta-section/FooterMetaSection.svelte";
 export * from "./components/footer-nav-section/FooterNavSection.svelte";
@@ -42,3 +41,7 @@ export * from "./layouts/FullScreenNavbarLayout.svelte";
 // Wrappers
 export * from "./components/container/ContainerWrapper.test.svelte";
 export * from "./components/divider/Divider.svelte";
+
+export { default as Spacer } from './components/spacer/Spacer.svelte';
+
+export { default as Block } from './components/block/Block.svelte';

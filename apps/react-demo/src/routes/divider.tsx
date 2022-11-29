@@ -6,13 +6,13 @@ export default function Divider() {
       <h1>Divider</h1>
 
       <h2>Small</h2>
-      <GoADivider spacing="small"></GoADivider>
+      <GoADivider mt="s" mb="s"></GoADivider>
       <h2>Medium</h2>
-      <GoADivider spacing="medium"></GoADivider>
+      <GoADivider mt="m" mb="m"></GoADivider>
       <h2>Large</h2>
-      <GoADivider spacing="large"></GoADivider>
+      <GoADivider mt="l" mb="l"></GoADivider>
       <h2>None</h2>
-      <GoADivider spacing="none"></GoADivider>
+      <GoADivider></GoADivider>
     </>
   );
 }

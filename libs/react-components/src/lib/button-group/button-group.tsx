@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import "./button-group.css";
+import { Margins } from "../../common/styling";
 
 type Alignment = "start" | "end" | "center";
 export type Gap = "relaxed" | "compact";
 
-interface WCProps {
+interface WCProps extends Margins {
   alignment: Alignment;
   gap?: Gap;
 }
@@ -18,19 +18,30 @@ declare global {
   }
 }
 
-type ButtonGroupProps = {
+interface ButtonGroupProps extends Margins {
   alignment: Alignment;
   gap?: Gap;
   children?: React.ReactNode;
-};
+}
 
 export const GoAButtonGroup: FC<ButtonGroupProps> = ({
   alignment,
   gap,
   children,
+  mt,
+  mr,
+  mb,
+  ml,
 }) => {
   return (
-    <goa-button-group alignment={alignment} gap={gap}>
+    <goa-button-group
+      alignment={alignment}
+      gap={gap}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+    >
       {children}
     </goa-button-group>
   );

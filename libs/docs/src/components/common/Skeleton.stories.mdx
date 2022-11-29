@@ -8,7 +8,7 @@ import {
   Props,
   Prop,
 } from "@abgov/shared/storybook-common";
-import { GoASkeleton, GoAFlexRow } from "@abgov/react-components";
+import { GoASkeleton, GoAGrid } from "@abgov/react-components";
 
 <Meta title="Components/Skeleton" />
 
@@ -51,6 +51,36 @@ import { GoASkeleton, GoAFlexRow } from "@abgov/react-components";
     description="Set component maximum width. Currently only used in `card` skeleton type"
   />
 </Props>
+
+<details>
+  <summary>Additional Properties</summary>
+  <Props showTabs={true}>
+    <Prop
+      name="mt"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+      defaultValue="none"
+      description="Top margin"
+    />
+    <Prop
+      name="mr"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+      defaultValue="none"
+      description="Right margin"
+    />
+    <Prop
+      name="mb"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+      defaultValue="none"
+      description="Bottom margin"
+    />
+    <Prop
+      name="ml"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl"
+      defaultValue="none"
+      description="Left margin"
+    />
+  </Props>
+</details>
 
 #### Text
 
@@ -178,12 +208,12 @@ import { GoASkeleton, GoAFlexRow } from "@abgov/react-components";
 #### Cards
 
 <Story name="Cards">
-  <GoAFlexRow gap="small">
+  <GoAGrid>
     <GoASkeleton type="card" />
     <GoASkeleton type="card" size={2} />
     <GoASkeleton type="card" size={3} />
     <GoASkeleton type="card" size={4} />
-  </GoAFlexRow>
+  </GoAGrid>
   <div>
     <GoASkeleton type="card" maxWidth="400px" />
     &nbsp; &nbsp;
@@ -196,12 +226,12 @@ import { GoASkeleton, GoAFlexRow } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
-        <goa-flex-row gap="small">
+        <goa-grid>
           <goa-skeleton type="card" />
           <goa-skeleton type="card" size="2" />
           <goa-skeleton type="card" size="3" />
           <goa-skeleton type="card" size="4" />
-        </goa-flex-row>
+        </goa-grid>
     `}
     />
   </Tab>
@@ -209,12 +239,12 @@ import { GoASkeleton, GoAFlexRow } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
-        <goa-flex-row gap="small">
+        <goa-grid>
           <goa-skeleton type="card"></goa-skeleton>
           <goa-skeleton type="card" size="2"></goa-skeleton>
           <goa-skeleton type="card" size="3"></goa-skeleton>
           <goa-skeleton type="card" size="4"></goa-skeleton>
-        </goa-flex-row>
+        </goa-grid>
     `}
     />
   </Tab>
@@ -222,12 +252,12 @@ import { GoASkeleton, GoAFlexRow } from "@abgov/react-components";
     <CodeSnippet
       lang="tsx"
       code={`
-        <GoAFlexRow gap="small">
+        <GoAGrid>
           <GoASkeleton type="card" />
           <GoASkeleton type="card" size={2} />
           <GoASkeleton type="card" size={3} />
           <GoASkeleton type="card" size={4} />
-        <GoAFlexRow gap="small">
+        <GoAGrid>
     `}
     />
   </Tab>

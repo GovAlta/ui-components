@@ -1,4 +1,3 @@
-import React from "react";
 import { render } from "@testing-library/react";
 import { fireEvent, screen } from "@testing-library/dom";
 import GoAButton, { ButtonSize, ButtonType } from "./button";
@@ -7,6 +6,36 @@ describe("GoA Button", () => {
   const buttonText = "Test Title";
 
   const noop = () => {};
+
+  it("should render the properties", () => {
+    const { container } = render(
+      <GoAButton
+        disabled={true}
+        type="primary"
+        size="compact"
+        variant="destructive"
+        leadingIcon="car"
+        trailingIcon="bag"
+        mt="s"
+        mr="m"
+        mb="l"
+        ml="xl"
+      />
+    );
+    const el = container.querySelector("goa-button");
+
+    expect(el.getAttribute("disabled")).toBe("true");
+    expect(el.getAttribute("type")).toBe("primary");
+    expect(el.getAttribute("size")).toBe("compact");
+    expect(el.getAttribute("variant")).toBe("destructive");
+    expect(el.getAttribute("leadingicon")).toBe("car");
+    expect(el.getAttribute("trailingicon")).toBe("bag");
+
+    expect(el.getAttribute("mt")).toBe("s");
+    expect(el.getAttribute("mr")).toBe("m");
+    expect(el.getAttribute("mb")).toBe("l");
+    expect(el.getAttribute("ml")).toBe("xl");
+  });
 
   it("should render content", () => {
     const { baseElement } = render(

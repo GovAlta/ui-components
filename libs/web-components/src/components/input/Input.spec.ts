@@ -228,4 +228,23 @@ describe('GoAInput Component', () => {
       expect(container.querySelector(".suffix").innerHTML).toContain("per item");
     });
   })
+
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoAInput, {
+        testid: "input-test",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const input = await baseElement.findByTestId("input-test");
+
+      expect(input).toBeTruthy();
+      expect(input).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(input).toHaveStyle("margin-right:var(--goa-spacing-m)");
+      expect(input).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
+      expect(input).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+    });
+  });
 });

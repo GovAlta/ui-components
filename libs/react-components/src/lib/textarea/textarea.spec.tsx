@@ -1,4 +1,3 @@
-import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 import GoATextArea from "./textarea";
 
@@ -14,6 +13,10 @@ describe("TextArea", () => {
         disabled={true}
         showCounter={true}
         maxCharCount={50}
+        mt="s"
+        mr="m"
+        mb="l"
+        ml="xl"
         onChange={() => {}}
       />
     );
@@ -26,6 +29,10 @@ describe("TextArea", () => {
     expect(el.getAttribute("disabled")).toBe("true");
     expect(el.getAttribute("showcounter")).toBe("true");
     expect(el.getAttribute("maxcharcount")).toBe("50");
+    expect(el.getAttribute("mt")).toBe("s");
+    expect(el.getAttribute("mr")).toBe("m");
+    expect(el.getAttribute("mb")).toBe("l");
+    expect(el.getAttribute("ml")).toBe("xl");
   });
 
   it("handles the onChange event", async () => {

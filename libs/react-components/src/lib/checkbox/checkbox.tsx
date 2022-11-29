@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useRef } from "react";
+import { Margins } from "../../common/styling";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -9,7 +10,7 @@ declare global {
   }
 }
 
-interface CheckboxProps {
+interface CheckboxProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   id?: string;
   name: string;
@@ -21,7 +22,7 @@ interface CheckboxProps {
 }
 
 /* eslint-disable-next-line */
-export interface Props {
+export interface Props extends Margins {
   id?: string;
   name: string;
   checked: boolean;
@@ -45,6 +46,10 @@ export const GoACheckbox: FC<Props> = ({
   text,
   children,
   onChange,
+  mt,
+  mr,
+  mb,
+  ml,
 }) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -75,6 +80,10 @@ export const GoACheckbox: FC<Props> = ({
       disabled={disabled}
       text={text}
       value={value}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
     >
       {children}
     </goa-checkbox>

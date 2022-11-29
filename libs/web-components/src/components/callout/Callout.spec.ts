@@ -82,4 +82,24 @@ describe('GoACalloutComponent', () => {
     const heading = el.querySelector('h3');
     expect(heading).toBeNull();
   });
+
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoACallout, {
+        testid: "callout-test",
+        type: "important",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const callout = await baseElement.findByTestId("callout-test");
+
+      expect(callout).toBeTruthy();
+      expect(callout).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(callout).toHaveStyle("margin-right:var(--goa-spacing-m)");
+      expect(callout).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
+      expect(callout).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+    });
+  });
 });

@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useEffect, useRef } from "react";
-import "./button.css";
-import { GoAIconType } from "../icons";
+import { Margins } from "../../common/styling";
+import { GoAIconType } from "../icon/icon";
 
 export type ButtonType =
   | "primary"
@@ -11,7 +11,7 @@ export type ButtonType =
 export type ButtonSize = "compact" | "normal";
 export type ButtonVariant = "normal" | "destructive";
 
-interface WCProps {
+interface WCProps extends Margins {
   type?: ButtonType;
   size?: ButtonSize;
   variant?: ButtonVariant;
@@ -31,7 +31,7 @@ declare global {
   }
 }
 
-type ButtonProps = {
+interface ButtonProps extends Margins {
   type?: ButtonType;
   size?: ButtonSize;
   variant?: ButtonVariant;
@@ -40,7 +40,7 @@ type ButtonProps = {
   trailingIcon?: GoAIconType;
   onClick?: () => void;
   children?: ReactNode;
-};
+}
 
 export const GoAButton: FC<ButtonProps> = ({
   disabled = false,
@@ -51,6 +51,10 @@ export const GoAButton: FC<ButtonProps> = ({
   trailingIcon,
   children,
   onClick,
+  mt,
+  mr,
+  mb,
+  ml,
 }) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -80,6 +84,10 @@ export const GoAButton: FC<ButtonProps> = ({
       disabled={disabled}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
     >
       {children}
     </goa-button>

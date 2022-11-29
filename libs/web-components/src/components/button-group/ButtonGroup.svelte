@@ -2,11 +2,20 @@
 
 <!-- Script -->
 <script lang="ts">
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
   import { typeValidator } from "../../common/utils";
 
   export let alignment: ButtonAlignment = "start";
   export let gap: Gap = "relaxed";
+  export let testid: string = "";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   const [BUTTON_ALIGNMENTS, validateAlignment] = typeValidator("alignment", [
     "start",
@@ -31,8 +40,9 @@
 </script>
 
 <!-- HTML -->
-<div
-  style="--alignment: {_alignment}; --gap-size: {gap === 'relaxed' ? '1rem' : '0.75rem'}"
+<div 
+  data-testid={testid}
+  style="{calculateMargin(mt, mr, mb, ml)}; --alignment: {_alignment}; --gap-size: {gap === "relaxed" ? "1rem" : "0.75rem"}"
 >
   <slot />
 </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Margins } from "../../common/styling";
 
 type GoAIconFilledType = `${GoAIconType}-${IconTheme}`;
 
@@ -540,22 +541,36 @@ export type IconSize = "small" | "medium" | "large" | "xlarge";
 export type IconVariant = "primary" | "secondary" | "tertiary";
 export type IconTheme = "outline" | "filled" | "sharp";
 
-interface Props {
+interface Props extends Margins {
   type: GoAIconType;
   size?: IconSize;
   theme?: IconTheme;
 }
 
-interface WCProps {
+interface WCProps extends Margins {
   type: GoAIconType;
-  theme: IconTheme;
-  size: IconSize;
+  theme?: IconTheme;
+  size?: IconSize;
 }
 
 export function GoAIcon({
   type,
-  theme = "outline",
-  size = "medium",
+  theme,
+  size,
+  mt,
+  mr,
+  mb,
+  ml,
 }: Props): JSX.Element {
-  return <goa-icon type={type} theme={theme} size={size} />;
+  return (
+    <goa-icon
+      type={type}
+      theme={theme}
+      size={size}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+    />
+  );
 }

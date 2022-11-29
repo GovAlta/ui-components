@@ -1,11 +1,4 @@
-import React, { useState } from "react";
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  logDOM,
-} from "@testing-library/react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
 
 import { GoARadioGroup, GoARadioItem } from "./radio-group";
 
@@ -35,6 +28,10 @@ describe("RadioGroup", () => {
         name="fruits"
         disabled={data.disabled}
         value={value}
+        mt="s"
+        mr="m"
+        mb="l"
+        ml="xl"
         onChange={(name, newValue) => onChange && onChange(name, newValue)}
       >
         {data.radios.map((radio) => (
@@ -57,7 +54,14 @@ describe("RadioGroup", () => {
 
     it("should render successfully", async () => {
       const { baseElement } = render(Template(baseMockData, null));
+
       expect(baseElement).toBeTruthy();
+      const el = baseElement.querySelector("goa-radio-group");
+
+      expect(el.getAttribute("mt")).toBe("s");
+      expect(el.getAttribute("mr")).toBe("m");
+      expect(el.getAttribute("mb")).toBe("l");
+      expect(el.getAttribute("ml")).toBe("xl");
     });
   });
 

@@ -11,7 +11,6 @@ async function createElement(props = {}) {
 describe('GoACheckbox Component', () => {
 
   it("should render", async () => {
-
     const el = await createElement();
     const checkbox = await el.findByTestId(testid);
     expect(checkbox).toBeTruthy();
@@ -20,13 +19,13 @@ describe('GoACheckbox Component', () => {
   describe("properties", () => {
     it("allows for setting of the value", async () => {
       const el = await createElement({ value: "foobar" });
-      const checkbox = await el.findByTestId(testid);
+      const checkbox = el.container.querySelector("input");
       expect((checkbox as HTMLInputElement).value).toBe("foobar");
     });
 
     it("allows for setting of the name", async () => {
       const el = await createElement();
-      const checkbox = await el.findByTestId(testid);
+      const checkbox = el.container.querySelector("input");
       expect((checkbox as HTMLInputElement).name).toBe("checkbox-test-name");
       expect((checkbox as HTMLInputElement).id).toBe("checkbox-test-name");
     });
@@ -45,7 +44,7 @@ describe('GoACheckbox Component', () => {
       const svg = await el.findByTestId('checkmark');
       expect(svg).toBeTruthy();
 
-      const checkbox = await el.findByTestId(testid);
+      const checkbox = el.container.querySelector("input");
       expect((checkbox as HTMLInputElement).checked).toBeTruthy();
     });
 
@@ -53,7 +52,7 @@ describe('GoACheckbox Component', () => {
       const el = await createElement({ disabled: "true" });
       const root = el.container.querySelector('.goa-checkbox--disabled');
       expect(root).toBeTruthy();
-      const checkbox = await el.findByTestId(testid);
+      const checkbox = el.container.querySelector("input");
       expect((checkbox as HTMLInputElement).disabled).toBeTruthy();
     });
 
@@ -66,8 +65,8 @@ describe('GoACheckbox Component', () => {
 
   describe("events", () => {
     it("handles change event that results in checked state with value initialized", async () => {
-      const { findByTestId } = await createElement({ value: 'foobar' });
-      const checkbox = await findByTestId(testid);
+      const el = await createElement({ value: 'foobar' });
+      const checkbox = el.container.querySelector("input");
       const change = jest.fn();
 
       checkbox.addEventListener('_change', (event: CustomEvent) => {
@@ -82,8 +81,8 @@ describe('GoACheckbox Component', () => {
     });
 
     it("handles change event that results in checked state with value not initialized", async () => {
-      const { findByTestId } = await createElement({});
-      const checkbox = await findByTestId(testid);
+      const el = await createElement({});
+      const checkbox = el.container.querySelector("input");
       const change = jest.fn();
 
       checkbox.addEventListener('_change', (event: CustomEvent) => {
@@ -98,8 +97,8 @@ describe('GoACheckbox Component', () => {
     });
 
     it("handles change event that results in unchecked state", async () => {
-      const { findByTestId } = await createElement({checked:true, value: "foo"});
-      const checkbox = await findByTestId(testid);
+      const el = await createElement({checked:true, value: "foo"});
+      const checkbox = el.container.querySelector("input");
       const change = jest.fn();
 
       checkbox.addEventListener('_change', (event: CustomEvent) => {
@@ -114,5 +113,23 @@ describe('GoACheckbox Component', () => {
     });
   });
 
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoACheckbox, {
+        testid: "checkbox-test",
+        name: "test",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const checkbox = await baseElement.findByTestId("checkbox-test");
 
+      expect(checkbox).toBeTruthy();
+      expect(checkbox).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(checkbox).toHaveStyle("margin-right:var(--goa-spacing-m)");
+      expect(checkbox).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
+      expect(checkbox).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+    });
+  });
 });

@@ -38,7 +38,20 @@
   /* spacing */
   --spacing-1: 0.5rem;
   --spacing-2: 0.875rem;
-  --spacing-3: 1.75rem;
+  /* --spacing-3: 1.75rem; */
+
+  --goa-spacing-none: 0;
+  --goa-spacing-3xs: 0.125rem;
+  --goa-spacing-2xs: 0.25rem;
+  --goa-spacing-xs: 0.5rem;
+  --goa-spacing-s: 0.75rem;
+  --goa-spacing-m: 1rem;
+  --goa-spacing-l: 1.5rem;
+  --goa-spacing-xl: 2rem;
+  --goa-spacing-2xl: 3rem;
+  --goa-spacing-3xl: 4rem;
+  --goa-spacing-4xl: 8rem;
+  --goa-spacing-fill: 100%;
 
   /* input TODO: ensure these are being used */
   --input-padding: 0.5rem;

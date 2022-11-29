@@ -15,6 +15,14 @@ export function fromBoolean(value: boolean): string {
   return value ? "true" : "false";
 }
 
+export function validateRequired(componentName: string, props: Record<string, unknown>) {
+  Object.entries(props).forEach(prop => {
+    if (!prop[1]) {
+      console.error(`${componentName}: ${prop[0]} is required`);
+    }
+  })
+}
+
 export function typeValidator(
   message: string,
   values: string[],

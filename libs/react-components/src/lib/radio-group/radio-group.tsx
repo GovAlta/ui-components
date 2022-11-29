@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useRef } from "react";
+import { Margins } from "../../common/styling";
 
 export * from "./radio";
 
-interface RadioGroupProps {
+interface RadioGroupProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   name: string;
   value?: string;
@@ -20,7 +21,7 @@ declare global {
   }
 }
 
-interface Props {
+interface Props extends Margins {
   name: string;
   value?: string;
   disabled?: boolean;
@@ -39,6 +40,10 @@ export const GoARadioGroup: FC<Props> = ({
   disabled = false,
   error = false,
   testId,
+  mt,
+  mr,
+  mb,
+  ml,
   onChange,
 }) => {
   const el = useRef<HTMLElement>(null);
@@ -70,6 +75,10 @@ export const GoARadioGroup: FC<Props> = ({
       orientation={orientation}
       disabled={disabled}
       error={error}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
     >
       {children}
     </goa-radio-group>

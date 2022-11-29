@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { render } from "@testing-library/react";
 import { screen, fireEvent } from "@testing-library/dom";
 import GoACheckbox, { Props as CheckboxProps } from "./checkbox";
@@ -16,6 +15,10 @@ describe("GoA Checkbox", () => {
       checked: true,
       error: false,
       testId: testId,
+      mt: "s",
+      mr: "m",
+      mb: "l",
+      ml: "xl",
     };
 
     render(<GoACheckbox {...props} />);
@@ -30,6 +33,10 @@ describe("GoA Checkbox", () => {
     expect(checkbox.getAttribute("checked")).toBe("true");
     expect(checkbox.getAttribute("error")).toBe("false");
     expect(checkbox.getAttribute("data-testid")).toBe(testId);
+    expect(checkbox.getAttribute("mt")).toBe("s");
+    expect(checkbox.getAttribute("mr")).toBe("m");
+    expect(checkbox.getAttribute("mb")).toBe("l");
+    expect(checkbox.getAttribute("ml")).toBe("xl");
   });
 
   it("should handle the onChange event", async function () {
