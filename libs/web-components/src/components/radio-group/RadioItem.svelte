@@ -1,6 +1,8 @@
 <svelte:options tag="goa-radio-item" />
 
 <script lang="ts">
+  import { tick } from "svelte";
+
   import { getContext, ContextStore } from "../../common/context-store";
 
   export let value: string;
@@ -11,10 +13,13 @@
 
   let isBound = false;
   $: {
-    if (name && !isBound) {
-      isBound = true;
-      ctx = getContext(name);
-      ctx.notify({ type: "bind", value, label });
-    }
+    (async () => {
+      await tick();
+      if (!isBound) {
+        isBound = true;
+        ctx = getContext(name);
+        ctx.notify({ type: "bind", value, label });
+      }
+    })();
   }
 </script>

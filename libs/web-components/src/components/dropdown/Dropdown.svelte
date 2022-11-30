@@ -48,12 +48,15 @@
 
   let isBound = false;
   $: {
-    if (name && el && !isBound) {
-      isBound = true;
-      addEventListeners();
-      parseValues();
-      bindContext();
-    }
+    (async () => {
+      await tick();
+      if (name && el && !isBound) {
+        isBound = true;
+        addEventListeners();
+        parseValues();
+        bindContext();
+      }
+    })();
   }
 
   onDestroy(() => {
@@ -225,8 +228,8 @@
     ${calculateMargin(mt, mr, mb, ml)}
     --width: ${width || computedWidth}
   `}
-  bind:this={el}>
-
+  bind:this={el}
+>
   <!-- background -->
   {#if isMenuVisible}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
