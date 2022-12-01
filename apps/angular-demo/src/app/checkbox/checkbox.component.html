@@ -55,3 +55,13 @@
   checked="true"
   [(ngModel)]="bindingNoVal"
 ></goa-checkbox>
+
+<h2>Reactive Binding</h2>
+<div>Binding: {{ reactiveFormCtrl.value }}</div>
+<goa-checkbox
+  goaValue
+  name="desserts"
+  text="Ice Cream"
+  [formControl]="reactiveFormCtrl"
+  [value]="reactiveFormCtrl.value"
+></goa-checkbox>

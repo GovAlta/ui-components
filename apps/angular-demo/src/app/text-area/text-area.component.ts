@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "abgov-text-area",
@@ -7,6 +8,7 @@ import { Component } from "@angular/core";
 })
 export class TextAreaComponent {
   boundVal = "";
+  reactiveFormCtrl = new FormControl();
 
   constructor() {}
 

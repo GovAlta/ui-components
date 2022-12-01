@@ -91,8 +91,16 @@
 <h2>Angular Reactive Forms Component using Web Component</h2>
 <p>{{ reactiveFormCtrl.value }}</p>
 <p>Valid (min value 0): {{ reactiveFormCtrl.valid }}</p>
-<goa-input goaValue [formControl]="reactiveFormCtrl"></goa-input>
-<goa-input goaValue [formControl]="reactiveFormCtrl"></goa-input>
+<goa-input
+  goaValue
+  [formControl]="reactiveFormCtrl"
+  [value]="reactiveFormCtrl.value"
+></goa-input>
+<goa-input
+  goaValue
+  [formControl]="reactiveFormCtrl"
+  [value]="reactiveFormCtrl.value"
+></goa-input>
 
 <h2>Angular Template Forms Component using Web Component</h2>
 <p>{{ tempDrivenVal }}</p>
@@ -110,3 +118,22 @@
 <h2>Values binding</h2>
 <p>{{ arrayVal | json }}</p>
 <goa-input goaValueList [(ngModel)]="arrayVal"></goa-input>
+
+<h2>Reactive binding - Date</h2>
+<p>{{ reactiveDateFormCtrl.value }}</p>
+<goa-input
+  goaValue
+  type="date"
+  [formControl]="reactiveDateFormCtrl"
+  [value]="reactiveDateFormCtrl.value"
+></goa-input>
+
+<h2>Reactive binding - Time</h2>
+<p>{{ reactiveTimeFormCtrl.value }}</p>
+<goa-input
+  goaValue
+  type="time"
+  [formControl]="reactiveTimeFormCtrl"
+  [value]="reactiveTimeFormCtrl.value"
+  step="1"
+></goa-input>

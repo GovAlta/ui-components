@@ -146,14 +146,15 @@ export const noop = () => {
     <CodeSnippet
       lang="html"
       code={`
-        <goa-textarea name="comment" goaValue ([ngModel])="description"></goa-textarea>
+        <goa-textarea name="comment" goaValue [formControl]="reactiveFormCtrl" [value]="reactiveFormCtrl.value"></goa-textarea>
       `}
     />
     <CodeSnippet
       lang="ts"
       code={`
+        import { FormControl } from "@angular/forms";
         export class SomeComponent {
-          description = "";
+          reactiveFormCtrl = new FormControl();
         }
       `}
     />
