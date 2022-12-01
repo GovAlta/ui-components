@@ -1,4 +1,4 @@
-export type Spacing = "none" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl";
+export type Spacing = "none" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl";
 
 /**
  * import type { Spacing } from "../../common/types";
