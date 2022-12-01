@@ -47,11 +47,11 @@
 </script>
 
 <!-- HTML -->
-<div 
+<div
   style={calculateMargin(mt, mr, mb, ml)}
   data-testid={testid}
-  data-type="goa-badge" 
-  class="goa-badge badge-{type}" 
+  data-type="goa-badge"
+  class="goa-badge badge-{type}"
   class:icon-only={showIcon && !content}
 >
   {#if showIcon}
@@ -129,5 +129,4 @@
     background-color: var(--color-white);
     color: var(--goa-color-text);
   }
-
 </style>

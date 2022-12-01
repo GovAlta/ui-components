@@ -8,7 +8,8 @@ export type Spacing =
   | "l"
   | "xl"
   | "2xl"
-  | "3xl";
+  | "3xl"
+  | "4xl";
 export interface Margins {
   mt?: Spacing;
   mr?: Spacing;
