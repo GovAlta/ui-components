@@ -80,6 +80,27 @@
   ></goa-dropdown-item>
 </goa-dropdown>
 
+<h1>Margin Spacing</h1>
+
+<goa-dropdown
+  name="colors"
+  placeholder="Select a user"
+  [value]="selectedColor"
+  (_change)="selectColor($event)"
+  mt="m"
+  mb="xs"
+  ml="xl"
+  mr="2xl"
+>
+  <goa-dropdown-item
+    name="colors"
+    *ngFor="let color of colors"
+    [value]="color"
+    [label]="color"
+  >
+  </goa-dropdown-item>
+</goa-dropdown>
+
 <h2>Reactive Binding</h2>
 <div>Selected Color: {{ reactiveFormCtrl.value }}</div>
 <goa-dropdown

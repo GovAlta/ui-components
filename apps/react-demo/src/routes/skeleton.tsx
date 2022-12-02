@@ -49,6 +49,9 @@ export default function Skeleton() {
       <GoASkeleton type="profile" size={2}></GoASkeleton>
       <GoASkeleton type="profile" size={3}></GoASkeleton>
       <GoASkeleton type="profile" size={4}></GoASkeleton>
+
+      <h2>Margin Spacing</h2>
+      <GoASkeleton mt="m" mb="xs" ml="xl" mr="2xl" type="text"></GoASkeleton>
     </>
   );
 }

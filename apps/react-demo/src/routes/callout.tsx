@@ -63,6 +63,19 @@ export default function Callout() {
       <GoACallout type="event">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
+
+      <br />
+      <h2>Margin Spacing</h2>
+      <GoACallout
+        mt="m"
+        mb="xs"
+        ml="xl"
+        mr="2xl"
+        type="emergency"
+        heading="Emergency callout"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
     </>
   );
 }

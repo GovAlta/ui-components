@@ -74,6 +74,19 @@ export default function Button() {
       >
         Both
       </GoAButton>
+
+      <h2>Margin Spacing</h2>
+      <GoAButton
+        mt="m"
+        mb="xs"
+        ml="xl"
+        mr="2xl"
+        size="compact"
+        onClick={() => onClick()}
+        type="primary"
+      >
+        Compact Primary
+      </GoAButton>
     </>
   );
 }

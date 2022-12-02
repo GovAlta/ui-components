@@ -122,6 +122,17 @@
 <p>{{ arrayVal | json }}</p>
 <goa-input goaValueList [(ngModel)]="arrayVal"></goa-input>
 
+<h2>Margin Spacing</h2>
+<goa-input
+  id="foo"
+  name="foo"
+  (_change)="onInputChangeEvent($event)"
+  mt="m"
+  mb="xs"
+  ml="xl"
+  mr="2xl"
+></goa-input>
+
 <h2>Reactive binding - Date</h2>
 <p>{{ reactiveDateFormCtrl.value }}</p>
 <goa-input

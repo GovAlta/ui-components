@@ -104,6 +104,20 @@ export default function Radio() {
         <GoARadioItem name="aria" value="blue"></GoARadioItem>
         <GoARadioItem name="aria" value="orange"></GoARadioItem>
       </GoARadioGroup>
+      <h2>Margin Spacing</h2>
+      <GoARadioGroup
+        mt="m"
+        mb="xs"
+        ml="xl"
+        mr="2xl"
+        name="color"
+        value="orange"
+        onChange={onChange}
+      >
+        <GoARadioItem name="color" value="red"></GoARadioItem>
+        <GoARadioItem name="color" value="blue"></GoARadioItem>
+        <GoARadioItem name="color" value="orange"></GoARadioItem>
+      </GoARadioGroup>
     </>
   );
 }

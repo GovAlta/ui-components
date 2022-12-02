@@ -56,6 +56,20 @@
   [(ngModel)]="bindingNoVal"
 ></goa-checkbox>
 
+<h2>Margin Spacing</h2>
+<goa-checkbox
+  name="desserts"
+  text="Ice Cream"
+  value="10"
+  [checked]="checkbox1Checked"
+  (_change)="onChange()"
+  mt="m"
+  mb="xs"
+  ml="xl"
+  mr="2xl"
+>
+</goa-checkbox>
+
 <h2>Reactive Binding</h2>
 <div>Binding: {{ reactiveFormCtrl.value }}</div>
 <goa-checkbox

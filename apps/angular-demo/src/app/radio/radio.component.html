@@ -61,6 +61,21 @@
   <goa-radio-item name="bindingColor" value="orange"></goa-radio-item>
 </goa-radio-group>
 
+<h2>Margin Spacing</h2>
+<goa-radio-group
+  mt="m"
+  mb="xs"
+  ml="xl"
+  mr="2xl"
+  name="color"
+  value="orange"
+  (_change)="onChange($event)"
+>
+  <goa-radio-item name="color" value="red"></goa-radio-item>
+  <goa-radio-item name="color" value="blue"></goa-radio-item>
+  <goa-radio-item name="color" value="orange"></goa-radio-item>
+</goa-radio-group>
+
 <h2>Reactive Binding</h2>
 <div>Selected value: {{ reactiveFormCtrl.value }}</div>
 <goa-radio-group

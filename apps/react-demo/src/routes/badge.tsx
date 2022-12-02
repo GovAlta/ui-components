@@ -39,6 +39,17 @@ export default function Badge() {
       <GoABadge type="light" content="Light" icon={true}></GoABadge>
       <GoABadge type="light" content="Light"></GoABadge>
       <GoABadge type="light" icon={true}></GoABadge>
+
+      <h2>Margin Spacing</h2>
+      <GoABadge
+        mt="m"
+        mb="xs"
+        ml="xl"
+        mr="2xl"
+        type="important"
+        content="Important"
+        icon={true}
+      ></GoABadge>
     </>
   );
 }
