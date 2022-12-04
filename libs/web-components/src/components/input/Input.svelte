@@ -314,6 +314,12 @@
     border-bottom-right-radius: var(--input-border-radius);
     border-left: 1px solid var(--color-gray-600);
   }
+  .goa-input--disabled .prefix {
+    border-right: 1px solid var(--color-gray-200);
+  }
+  .goa-input--disabled .suffix {
+    border-left: 1px solid var(--color-gray-200);
+  }
 
   /* Themes */
   input.input--goa {

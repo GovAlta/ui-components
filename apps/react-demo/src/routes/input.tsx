@@ -107,6 +107,16 @@ export default function Input() {
         suffix="per item"
         onChange={noop}
       />
+
+      <h2>Disabled Prefix/Suffix</h2>
+      <GoAInput
+        name="foo"
+        value=""
+        prefix="$"
+        suffix="per item"
+        disabled={true}
+        onChange={noop}
+      />
     </>
   );
 }
