@@ -61,8 +61,6 @@ format:
 
 #### TEST
 
-#### TEST
-
 lint:
 	npx nx run-many --target=lint --projects=angular-components,react-components,web-components,styles
 
@@ -72,5 +70,9 @@ test:
 coverage:	
 	npx nx run web-components:test --codeCoverage
 
+#### OTHER
+
+ngrok:
+	ngrok http $(port) --host-header=localhost
 
 .DEFAULT_GOAL := build

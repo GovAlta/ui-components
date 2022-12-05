@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
-import GoARadioGroupWrapper from './RadioGroupWrapper.test.svelte';
+import { getContext } from '../../common/context-store';
 import GoARadioGroup from './RadioGroup.svelte';
 
 afterEach(() => {
@@ -10,14 +10,19 @@ afterEach(() => {
 
 describe("GoARadioGroup Component", () => {
   it("should render", async () => {
+    const name = 'favcolor';
     const mock = jest.spyOn(console, "error").mockImplementation();
     const items = ["red", "blue", "orange"];
-    const result = render(GoARadioGroupWrapper, {
-      name: 'favcolor',
+    const result = render(GoARadioGroup, {
+      name,
       value: 'orange',
       testid: 'test-id',
-      items,
     });
+
+    const ctx = getContext(name)
+    for (const item of items) {
+      ctx.notify({ type: "bind", name, value: item })
+    }
 
     await waitFor(() => {
       for (const item of items) {
@@ -35,13 +40,18 @@ describe("GoARadioGroup Component", () => {
   });
 
   it("should handle the events", async () => {
+    const name = 'favcolor';
     const items = ["red", "blue", "orange"];
-    const result = render(GoARadioGroupWrapper, {
-      name: 'favcolor',
+    const result = render(GoARadioGroup, {
+      name,
       value: 'orange',
       testid: 'test-id',
-      items,
     });
+
+    const ctx = getContext(name)
+    for (const item of items) {
+      ctx.notify({ type: "bind", name, value: item })
+    }
 
     const radioGroup = await result.findByTestId("test-id");
 
