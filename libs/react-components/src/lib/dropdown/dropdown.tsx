@@ -51,6 +51,13 @@ interface Props extends Margins {
   width?: string;
 }
 
+function stringify(value: string | string[]): string {
+  if (typeof value === "string") {
+    return value;
+  }
+  return JSON.stringify(value);
+}
+
 export const GoADropdown: FC<Props> = (props) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -72,7 +79,7 @@ export const GoADropdown: FC<Props> = (props) => {
     <goa-dropdown
       ref={el}
       name={props.name}
-      value={JSON.stringify(props.value)}
+      value={stringify(props.value)}
       arialabel={props.ariaLabel}
       disabled={props.disabled}
       error={props.error}

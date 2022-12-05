@@ -33,6 +33,7 @@
   export let ml: Spacing = null;
 
   $: _disabled = toBoolean(disabled);
+  $: _error = toBoolean(error);
   $: _multiselect = toBoolean(multiselect);
   $: _native = toBoolean(native);
 
@@ -247,15 +248,18 @@
   bind:this={el}
 >
   {#if _native}
-    <select on:change={onNativeSelect}>
+    <select
+      on:change={onNativeSelect}
+      disabled={_disabled}
+      class:error={_error}
+      aria-label={arialabel || name}
+    >
       {#each options as option (option.value)}
         <option
           selected={option.value === value}
           value={option.value}
-          aria-label={option.label || option.value}
+          aria-label={option.label || option.value}>{option.label || option.value}</option
         >
-          {option.label || option.value}
-        </option>
       {/each}
     </select>
   {:else}
@@ -431,6 +435,18 @@
     border: 1px solid var(--color-gray-600);
     border-radius: var(--input-border-radius);
     background-color: var(--color-white);
+  }
+
+  .dropdown-native:has(select:disabled) {
+    background-color: var(--color-gray-100);
+    border-color: var(--color-gray-200);
+    box-shadow: none;
+    color: var(--goa-color-text-secondary);
+    cursor: default;
+  }
+
+  .dropdown-native:has(select.error) {
+    border: 2px solid var(--goa-color-interactive--error);
   }
 
   select {

@@ -21,7 +21,7 @@ describe("GoADropdown", () => {
         mr="m"
         mb="l"
         ml="xl"
-        onChange={() => {}}
+        onChange={() => { }}
       >
         <GoADropdownOption name="favColor" label="Red" value="red" />
         <GoADropdownOption name="favColor" label="Blue" value="blue" />
@@ -37,11 +37,11 @@ describe("GoADropdown", () => {
     expect(el.getAttribute("ml")).toBe("xl");
   });
 
-  it("should allow for a single selection.....", async () => {
+  it("should allow for a single selection", async () => {
     const fn = jest.fn();
 
     const { baseElement } = render(
-      <GoADropdown name="favColor" value={[]} onChange={fn}>
+      <GoADropdown name="favColor" value="yellow" onChange={fn} native={true}>
         <GoADropdownOption name="favColor" label="Red" value="red" />
         <GoADropdownOption name="favColor" label="Blue" value="blue" />
         <GoADropdownOption name="favColor" label="Yellow" value="yellow" />

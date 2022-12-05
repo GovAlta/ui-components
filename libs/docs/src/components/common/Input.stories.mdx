@@ -128,12 +128,12 @@ import { Meta, Story } from "@storybook/addon-docs";
   <Prop
     name="min"
     type="string | date"
-    description="A string value *must* be in ISO 8601 format"
+    description="A string value **must** be in ISO 8601 format"
   />
   <Prop
     name="max"
     type="string | date"
-    description="A string value *must* be in ISO 8601 format"
+    description="A string value **must** be in ISO 8601 format"
   />
   <Prop
     name="step"
@@ -148,20 +148,12 @@ import { Meta, Story } from "@storybook/addon-docs";
   <Prop
     name="prefix"
     type="string"
-    description={
-      <>
-        Text that comes before the input. <strong>Deprecated</strong>
-      </>
-    }
+    description="Text that comes before the input. **Deprecated**"
   />
   <Prop
     name="suffix"
     type="string"
-    description={
-      <>
-        Text that comes after the input. <strong>Deprecated</strong>
-      </>
-    }
+    description="Text that comes after the input. **Deprecated**"
   />
   <Prop
     name="autoCapitalize"

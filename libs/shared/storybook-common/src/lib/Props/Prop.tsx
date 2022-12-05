@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import ReactMarkdown from "react-markdown";
 
 type Props = {
   name: string;
@@ -34,7 +35,9 @@ export const Prop: FC<Props> = ({
       </td>
       <td>{required ? "Yes" : "No"}</td>
       <td>{defaultValue}</td>
-      <td>{description}</td>
+      <td>
+        <ReactMarkdown>{description}</ReactMarkdown>
+      </td>
     </tr>
   );
 };
