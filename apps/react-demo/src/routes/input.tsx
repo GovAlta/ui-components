@@ -108,6 +108,16 @@ export default function Input() {
         onChange={noop}
       />
 
+      <h2>Disabled Prefix/Suffix</h2>
+      <GoAInput
+        name="foo"
+        value=""
+        prefix="$"
+        suffix="per item"
+        disabled={true}
+        onChange={noop}
+      />
+
       <h2>Aria Label</h2>
       <GoAInput
         name=""

@@ -90,18 +90,10 @@
   placeholder="Select a color"
 >
   <goa-dropdown-item
-    value="red"
-    name="boundColor"
-    label="Red"
-  ></goa-dropdown-item>
-  <goa-dropdown-item
-    value="green"
-    name="boundColor"
-    label="Green"
-  ></goa-dropdown-item>
-  <goa-dropdown-item
-    value="blue"
-    name="boundColor"
-    label="Blue"
-  ></goa-dropdown-item>
+    name="colors"
+    *ngFor="let color of colors"
+    [value]="color"
+    [label]="color"
+  >
+  </goa-dropdown-item>
 </goa-dropdown>
