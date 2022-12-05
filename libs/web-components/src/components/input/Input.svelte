@@ -11,7 +11,7 @@
   import { calculateMargin } from "../../common/styling";
 
   export let type:
-    "text"
+    | "text"
     | "number"
     | "password"
     | "email"
@@ -27,7 +27,13 @@
   export let name: string = "";
   export let value: string = "";
 
-  export let autocapitalize: "on" | "off" | "none" | "sentences" | "words" | "characters" = "off";
+  export let autocapitalize:
+    | "on"
+    | "off"
+    | "none"
+    | "sentences"
+    | "words"
+    | "characters" = "off";
   export let placeholder: string = "";
   export let leadingicon: GoAIconType = null;
   export let trailingicon: GoAIconType = null;
@@ -51,7 +57,6 @@
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
-
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
@@ -96,7 +101,7 @@
     ${calculateMargin(mt, mr, mb, ml)};
     --width: ${width};
   `}
-  >
+>
   <div
     class={`
       goa-input
@@ -108,7 +113,7 @@
   >
     {#if prefix}
       <div class="prefix">
-        { prefix }
+        {prefix}
       </div>
     {/if}
 
@@ -165,10 +170,11 @@
     {/if}
 
     {#if suffix}
-      <span class="suffix">{ suffix }</span>
+      <span class="suffix">{suffix}</span>
     {/if}
   </div>
 </div>
+
 <!-- Styles -->
 <style>
   :host {
@@ -218,7 +224,6 @@
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
   }
 
-
   /* type=range does not have an outline/box-shadow */
   .goa-input.type--range {
     border: none;
@@ -250,10 +255,10 @@
     flex: 1 1 auto;
   }
 
-  input[type=text],
-  input[type=date],
+  input[type="text"],
+  input[type="date"],
   input[type="datetime-local"],
-  input[type=number] {
+  input[type="number"] {
     font-family: var(--font-family);
   }
 
@@ -289,7 +294,6 @@
   .goa-input--disabled input:focus {
     color: var(--goa-color-text-secondary);
   }
-
 
   .goa-input--disabled input:hover {
     cursor: default !important;

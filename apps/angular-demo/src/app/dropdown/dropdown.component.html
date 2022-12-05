@@ -1,5 +1,27 @@
 <h1>Dropdown</h1>
 
+<goa-select
+  name="select-color"
+  (_change)="handleSelectChange($event)"
+  value="blue"
+>
+  <goa-option name="select-color" value="red">Red</goa-option>
+  <goa-option name="select-color" value="green">Green</goa-option>
+  <goa-option name="select-color" value="blue">Blue</goa-option>
+</goa-select>
+
+<br />
+<br />
+
+<goa-select goaValue name="basic" [formControl]="color" [value]="color.value">
+  <goa-option name="basic" label="Red" value="red"></goa-option>
+  <goa-option name="basic" label="Green" value="green"></goa-option>
+  <goa-option name="basic" label="Blue" value="blue"></goa-option>
+</goa-select>
+
+<br />
+<br />
+
 <goa-dropdown
   name="colors"
   placeholder="Select a user"

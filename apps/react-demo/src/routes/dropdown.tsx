@@ -1,5 +1,10 @@
 import * as React from "react";
-import { GoADropdown, GoADropdownOption } from "@abgov/react-components";
+import {
+  GoASelect,
+  GoADropdown,
+  GoADropdownOption,
+  GoAOption,
+} from "@abgov/react-components";
 
 export default function Dropdown() {
   function noop(name: string, value: string | string[]) {
@@ -26,6 +31,16 @@ export default function Dropdown() {
   return (
     <>
       <h1>Dropdown</h1>
+
+      <GoASelect
+        name="select-ex"
+        value="green"
+        onChange={(name, value) => console.log(name, value)}
+      >
+        <GoAOption name="select-ex" value="red" />
+        <GoAOption name="select-ex" value="green" />
+        <GoAOption name="select-ex" value="blue" />
+      </GoASelect>
 
       <h2>Default</h2>
       <GoADropdown

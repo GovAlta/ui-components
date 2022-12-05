@@ -1,0 +1,232 @@
+import { Meta, Story } from "@storybook/addon-docs";
+import {
+  Props,
+  Prop,
+  Tabs,
+  Tab,
+  CodeSnippet,
+  SupportInfo,
+  Markdown,
+} from "@abgov/shared/storybook-common";
+import { GoASelect, GoAOption } from "@abgov/react-components";
+
+<Meta title="Components/Select" />
+
+# Select
+
+### Custom wrapper around the native select and options elements.
+
+---
+
+#### GoASelect Properties
+
+<Props showTabs={true}>
+  <Prop
+    name="name"
+    type="string"
+    description="Property name. This value must match the children's name."
+    required="true"
+  />
+  <Prop
+    name="value"
+    type="string"
+    description="Value contained within the onChange event. Will be what is displayed if no label is provided."
+    required="true"
+  />
+  <Prop
+    name="disabled"
+    type="boolean"
+    defaultValue="false"
+    description="Disable this control. It will not receive focus or events"
+  />
+  <Prop
+    name="error"
+    type="boolean"
+    defaultValue="false"
+    description="Sets the input to an error state"
+  />
+  <Prop
+    name="ariaLabel"
+    type="string"
+    description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name"
+  />
+  <Prop
+    name="onChange"
+    lang="react"
+    type="(name: string, value: string) => void"
+    required={true}
+    description="Callback function invoked when select is changed."
+  />
+</Props>
+
+#### GoAOption Properties
+
+<Props showTabs={true}>
+  <Prop
+    name="name"
+    type="string"
+    description="Property name. This value must match the parents's name."
+    required="true"
+  />
+  <Prop
+    name="value"
+    type="string"
+    description="The value of the item. This value will be contained within the onChange event"
+    required="true"
+  />
+  <Prop
+    name="label"
+    type="string"
+    description="The displayed value within the selection box. The `value` property is the fallback value."
+  />
+</Props>
+
+#### Basic
+
+<Story name="Basic">
+  <GoASelect name="basic" onChange={(name, value) => console.log(name, value)}>
+    <GoAOption name="basic" value="red" />
+    <GoAOption name="basic" value="green" />
+    <GoAOption name="basic" value="blue" />
+  </GoASelect>
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+    <goa-select goaValue name="basic" [formControl]="color" [value]="color.value">
+      <goa-option name="basic" value="red" />
+      <goa-option name="basic" value="green" />
+      <goa-option name="basic" value="blue" />
+    </goa-select>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          color = new FormControl("");
+        }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+    <GoASelect name="basic" onChange={(name, value) => console.log(name, value) }>
+      <GoAOption name="basic" value="red" />
+      <GoAOption name="basic" value="green" />
+      <GoAOption name="basic" value="blue" />
+    </GoASelect>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Custom labels
+
+<Story name="Custom Labels">
+  <GoASelect
+    name="custom-label"
+    onChange={(name, value) => console.log(name, value)}
+  >
+    <GoAOption name="custom-label" label="Red" value="red" />
+    <GoAOption name="custom-label" label="Green" value="green" />
+    <GoAOption name="custom-label" label="Blue" value="blue" />
+  </GoASelect>
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+    <goa-select goaValue name="custom-label" [formControl]="color" [value]="color.value">
+      <goa-option name="custom-label" value="red">Red</goa-option>
+      <goa-option name="custom-label" value="green">Green</goa-option>
+      <goa-option name="custom-label" value="blue">Blue</goa-option>
+    </goa-select>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          color = new FormControl("");
+        }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+    <GoASelect name="custom-label" onChange={(name, value) => console.log(name, value) }>
+      <GoAOption name="custom-label" label="Red" value="red" />
+      <GoAOption name="custom-label" label="Green" value="green" />
+      <GoAOption name="custom-label" label="Blue" value="blue" />
+    </GoASelect>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+
+#### Disabled 
+
+<Story name="Disabled">
+  <GoASelect
+    name="disabled"
+    onChange={(name, value) => console.log(name, value)}
+    disabled={true}
+  >
+    <GoAOption name="disabled" label="Red" value="red" />
+    <GoAOption name="disabled" label="Green" value="green" />
+    <GoAOption name="disabled" label="Blue" value="blue" />
+  </GoASelect>
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+    <goa-select goaValue name="disabled" [formControl]="color" [value]="color.value" disabled="true">
+      <goa-option name="disabled" value="red">Red</goa-option>
+      <goa-option name="disabled" value="green">Green</goa-option>
+      <goa-option name="disabled" value="blue">Blue</goa-option>
+    </goa-select>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          color = new FormControl("");
+        }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+    <GoASelect name="disabled" onChange={(name, value) => console.log(name, value) } disabled={true}>
+      <GoAOption name="disabled" label="Red" value="red" />
+      <GoAOption name="disabled" label="Green" value="green" />
+      <GoAOption name="disabled" label="Blue" value="blue" />
+    </GoASelect>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />
