@@ -77,6 +77,11 @@ export const checkboxTemplate = (args) => {
     description="Show an error on the checkbox item"
   />
   <Prop
+    name="ariaLabel"
+    type="string"
+    description="Defines how the text will be translated for the screen reader. It not specified it will fall back to the name"
+  />
+  <Prop
     name="onChange"
     lang="react"
     type="(name: string, checked: boolean, value: string) => void"

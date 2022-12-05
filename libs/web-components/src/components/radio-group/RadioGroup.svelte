@@ -14,6 +14,7 @@
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
+  export let arialabel: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -81,6 +82,7 @@
         value={option.value}
         disabled={isDisabled}
         checked={option.value === value}
+        aria-label={arialabel || name}
         on:change={() => onChange(option.value)}
       />
       <div class="goa-radio-icon" />

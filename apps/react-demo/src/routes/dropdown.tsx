@@ -72,6 +72,19 @@ export default function Dropdown() {
           </GoADropdown>
         </div>
       ))}
+
+      <h2>Aria Label</h2>
+      <GoADropdown
+        name="aria"
+        placeholder="Select a user"
+        value="blue"
+        onChange={noop}
+        ariaLabel="Some random aria label"
+      >
+        <GoADropdownOption value="red" name="aria" label="Red" />
+        <GoADropdownOption value="green" name="aria" label="Green" />
+        <GoADropdownOption value="blue" name="aria" label="Blue" />
+      </GoADropdown>
     </>
   );
 }

@@ -62,6 +62,16 @@ export default function Checkbox() {
         onChange={(name, checked, value) => onChange3(name, checked, value)}
         error
       ></GoACheckbox>
+
+      <h2>Aria Label</h2>
+      <GoACheckbox
+        name="aria"
+        text="Aria Label"
+        value="10"
+        checked={desserts3}
+        onChange={(name, checked, value) => onChange3(name, checked, value)}
+        ariaLabel="Some random aria label here"
+      ></GoACheckbox>
     </>
   );
 }

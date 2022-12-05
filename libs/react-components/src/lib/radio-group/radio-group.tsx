@@ -10,6 +10,7 @@ interface RadioGroupProps extends Margins {
   orientation: string;
   disabled: boolean;
   error: boolean;
+  arialabel?: string;
 }
 
 declare global {
@@ -28,6 +29,7 @@ interface Props extends Margins {
   orientation?: "horizontal" | "vertical";
   testId?: string;
   error?: boolean;
+  ariaLabel?: string;
   children?: React.ReactNode;
   onChange: (name: string, value: string) => void;
 }
@@ -40,6 +42,7 @@ export const GoARadioGroup: FC<Props> = ({
   disabled = false,
   error = false,
   testId,
+  ariaLabel,
   mt,
   mr,
   mb,
@@ -75,6 +78,7 @@ export const GoARadioGroup: FC<Props> = ({
       orientation={orientation}
       disabled={disabled}
       error={error}
+      arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}

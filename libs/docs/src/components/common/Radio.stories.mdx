@@ -54,6 +54,11 @@ import { useState } from "react";
     description="Set the component to disabled"
   />
   <Prop
+    name="ariaLabel"
+    type="string"
+    description="Defines how the text will be translated for the screen reader. It not specified it will fall back to the name"
+  />
+  <Prop
     name="onChange"
     lang="react"
     type="(name: string, value: string) => void"

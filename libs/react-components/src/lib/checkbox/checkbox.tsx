@@ -19,6 +19,7 @@ interface CheckboxProps extends Margins {
   error?: boolean;
   text?: string;
   value?: string | number | boolean;
+  arialabel?: string;
 }
 
 /* eslint-disable-next-line */
@@ -32,6 +33,7 @@ export interface Props extends Margins {
   value?: string | number | boolean;
   children?: React.ReactNode;
   testId?: string;
+  ariaLabel?: string;
   onChange?: (name: string, checked: boolean, value: string) => void;
 }
 
@@ -46,6 +48,7 @@ export const GoACheckbox: FC<Props> = ({
   text,
   children,
   onChange,
+  ariaLabel,
   mt,
   mr,
   mb,
@@ -80,6 +83,7 @@ export const GoACheckbox: FC<Props> = ({
       disabled={disabled}
       text={text}
       value={value}
+      arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}

@@ -71,6 +71,15 @@ export default function TextArea() {
         value={value7}
         onChange={onChange7}
       />
+
+      <h2>Aria Label</h2>
+      <GoATextArea
+        rows={4}
+        name="aria"
+        value={value6}
+        onChange={onChange6}
+        ariaLabel="Some random aria label here"
+      />
     </>
   );
 }

@@ -107,6 +107,14 @@ export default function Input() {
         suffix="per item"
         onChange={noop}
       />
+
+      <h2>Aria Label</h2>
+      <GoAInput
+        name=""
+        value=""
+        ariaLabel="Some random aria label here"
+        onChange={noop}
+      />
     </>
   );
 }

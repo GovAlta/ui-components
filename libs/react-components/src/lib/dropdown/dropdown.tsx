@@ -17,6 +17,7 @@ interface WCProps extends Margins {
   multiselect?: boolean;
   width?: string;
   testid?: string;
+  arialabel?: string;
 }
 
 declare global {
@@ -45,6 +46,7 @@ interface Props extends Margins {
   testId?: string;
   width?: string;
   children?: React.ReactNode;
+  ariaLabel?: string;
 }
 
 export const GoADropdown: FC<Props> = (props) => {
@@ -78,6 +80,7 @@ export const GoADropdown: FC<Props> = (props) => {
       error={props.error}
       testid={props.testId}
       width={props.width}
+      arialabel={props.ariaLabel}
       mt={props.mt}
       mr={props.mr}
       mb={props.mb}
