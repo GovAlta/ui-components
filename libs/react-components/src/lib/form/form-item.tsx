@@ -1,8 +1,9 @@
 import React, { FC } from "react";
+import { Margins } from "../../common/styling";
 
 type RequirementType = "optional" | "required";
 
-interface WCProps {
+interface WCProps extends Margins {
   label: string;
   requirement?: RequirementType;
   error?: string;
@@ -18,7 +19,7 @@ declare global {
   }
 }
 
-interface GoAFormItemProps {
+interface GoAFormItemProps extends Margins {
   label: string;
   requirement?: RequirementType;
   error?: string;
@@ -32,6 +33,10 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({
   error,
   requirement,
   label,
+  mt,
+  mr,
+  mb,
+  ml,
 }) => {
   return (
     <goa-form-item
@@ -39,6 +44,10 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({
       error={error}
       requirement={requirement}
       helptext={helpText}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
     >
       {children}
     </goa-form-item>

@@ -3,6 +3,8 @@
 <!-- Script -->
 <script lang="ts">
   import { onMount } from "svelte";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
 
   import { fromBoolean, toBoolean } from "../../common/utils";
   // Required
@@ -15,6 +17,12 @@
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   // Private
   let _value: string;
@@ -52,7 +60,9 @@
 <!-- View -->
 
 <label
+  data-testid={testid}
   for={name}
+  style={calculateMargin(mt, mr, mb, ml)}
   class="goa-checkbox"
   class:goa-checkbox--disabled={isDisabled}
   class:goa-checkbox--error={isError}
@@ -60,7 +70,6 @@
   <div class="goa-checkbox-container" class:goa-checkbox--selected={isChecked}>
     <input
       id={name}
-      data-testid={testid}
       {name}
       checked={isChecked}
       disabled={isDisabled}

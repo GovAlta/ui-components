@@ -61,6 +61,36 @@ import { useState } from "react";
   />
 </Props>
 
+<details>
+  <summary>Additional Properties</summary>
+  <Props showTabs={true}>
+    <Prop
+      name="mt"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Top margin"
+    />
+    <Prop
+      name="mr"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Right margin"
+    />
+    <Prop
+      name="mb"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Bottom margin"
+    />
+    <Prop
+      name="ml"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Left margin"
+    />
+  </Props>
+</details>
+
 #### Note
 
 <Story name="Information">
@@ -124,7 +154,7 @@ export const BasicTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-        <goa-radio-group name="color" goaValue ([ngModel]="color")>
+        <goa-radio-group name="color" goaValue [formControl]="reactiveFormCtrl" [value]="reactiveFormCtrl.value">
           <goa-radio-item name="color" value="red"></goa-radio-item>
           <goa-radio-item name="color" value="blue"></goa-radio-item>
           <goa-radio-item name="color" value="orange"></goa-radio-item>
@@ -134,8 +164,9 @@ export const BasicTemplate = (args) => {
     <CodeSnippet
       lang="ts"
       code={`
+        import { FormControl } from "@angular/forms";
         export class MyComponent {
-          color = "";
+          reactiveFormCtrl = new FormControl();
         }
       `}
     />
@@ -195,11 +226,20 @@ export const ErrorTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-        <goa-radio-group name="color" value="orange" error>
+        <goa-radio-group name="color" value="orange" [formControl]="reactiveFormCtrl" [value]="reactiveFormCtrl.value" error>
           <goa-radio-item name="color" value="red"></goa-radio-item>
           <goa-radio-item name="color" value="blue"></goa-radio-item>
           <goa-radio-item name="color" value="orange"></goa-radio-item>
         </goa-radio-group>
+      `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          reactiveFormCtrl = new FormControl();
+        }
       `}
     />
   </Tab>

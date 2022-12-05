@@ -9,7 +9,7 @@ import {
   Prop,
   CodeSnippet,
 } from "@abgov/shared/storybook-common";
-import { GoABadge } from "@abgov/react-components";
+import { GoABadge, GoABlock } from "@abgov/react-components";
 
 <Meta title="Components/Badge" />
 
@@ -40,16 +40,48 @@ which display minimal amounts of information, system feedback, or states.
   <Prop name="content" type="string" description="Text label of the badge" />
 </Props>
 
+<details>
+  <summary>Additional Properties</summary>
+  <Props showTabs={true}>
+    <Prop
+      name="mt"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Top margin"
+    />
+    <Prop
+      name="mr"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Right margin"
+    />
+    <Prop
+      name="mb"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Bottom margin"
+    />
+    <Prop
+      name="ml"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Left margin"
+    />
+  </Props>
+</details>
+
 #### Basic
 
 <Story name="Basic">
-  <GoABadge type="information" content="Information" />
-  <GoABadge type="success" content="Success" />
-  <GoABadge type="important" content="Important" />
-  <GoABadge type="emergency" content="Emergency" />
-  <GoABadge type="dark" content="Dark" />
-  <GoABadge type="midtone" content="Midtone" />
-  <GoABadge type="light" content="Light" />
+  <GoABlock gap="2xs">
+    <GoABadge type="information" content="Information" />
+    <GoABadge type="success" content="Success" />
+    <GoABadge type="important" content="Important" />
+    <GoABadge type="emergency" content="Emergency" />
+    <GoABadge type="dark" content="Dark" />
+    <GoABadge type="midtone" content="Midtone" />
+    <GoABadge type="light" content="Light" />
+  </GoABlock>
 </Story>
 
 <Tabs>
@@ -100,13 +132,15 @@ which display minimal amounts of information, system feedback, or states.
 #### Icons
 
 <Story name="Icon">
-  <GoABadge type="information" icon />
-  <GoABadge type="success" icon />
-  <GoABadge type="important" icon />
-  <GoABadge type="emergency" icon />
-  <GoABadge type="dark" icon />
-  <GoABadge type="midtone" icon />
-  <GoABadge type="light" icon />
+  <GoABlock gap="2xs">
+    <GoABadge type="information" icon />
+    <GoABadge type="success" icon />
+    <GoABadge type="important" icon />
+    <GoABadge type="emergency" icon />
+    <GoABadge type="dark" icon />
+    <GoABadge type="midtone" icon />
+    <GoABadge type="light" icon />
+  </GoABlock>
 </Story>
 
 <Tabs>
@@ -155,13 +189,15 @@ which display minimal amounts of information, system feedback, or states.
 </Tabs>
 
 <Story name="Text and Icon">
-  <GoABadge type="information" content="Information" icon />
-  <GoABadge type="success" content="Success" icon />
-  <GoABadge type="important" content="Important" icon />
-  <GoABadge type="emergency" content="Emergency" icon />
-  <GoABadge type="dark" content="Dark" icon />
-  <GoABadge type="midtone" content="Midtone" icon />
-  <GoABadge type="light" content="Light" icon />
+  <GoABlock gap="2xs">
+    <GoABadge type="information" content="Information" icon />
+    <GoABadge type="success" content="Success" icon />
+    <GoABadge type="important" content="Important" icon />
+    <GoABadge type="emergency" content="Emergency" icon />
+    <GoABadge type="dark" content="Dark" icon />
+    <GoABadge type="midtone" content="Midtone" icon />
+    <GoABadge type="light" content="Light" icon />
+  </GoABlock>
 </Story>
 
 <Tabs>

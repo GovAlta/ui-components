@@ -45,6 +45,12 @@ jobs:
         run: |
           npm run build:docs-storybook
           cp nginx.conf dist/storybook
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          storybookBuildDir: dist/storybook/docs
+          exitOnceUploaded: true
       - name: Oc login
         uses: redhat-actions/oc-login@v1
         with:

@@ -2,38 +2,55 @@
 
 <!-- Script -->
 <script lang="ts">
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+
   export let maxwidth: string = "";
   export let size: 1 | 2 | 3 | 4 = 1;
   export let linecount: number = 3;
   export let type: "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile" | "lines";
+  export let testid: string = "";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 </script>
 
 <!-- HTML -->
-{#if type === "card"}
-  <div class="card card-{size}" style="--max-width: {maxwidth};">
-    <svelte:self type="image" {size} />
-    <div class="card-content">
-      <svelte:self type="header" {size} />
-      <svelte:self type="lines" {size} linecount={3} />
+<div 
+  data-testid={testid}
+  style="{calculateMargin(mt, mr, mb, ml)};">
+  {#if type === "card"}
+    <div 
+      class="card card-{size}" 
+      style="--max-width: {maxwidth};"
+    >
+      <svelte:self type="image" {size} />
+      <div class="card-content">
+        <svelte:self type="header" {size} />
+        <svelte:self type="lines" {size} linecount={3} />
+      </div>
     </div>
-  </div>
-{:else if type === "profile"}
-  <div class="profile profile-{size}">
-    <div class="profile-avatar">
-      <svelte:self type="avatar" {size} />
+  {:else if type === "profile"}
+    <div class="profile profile-{size}">
+      <div class="profile-avatar">
+        <svelte:self type="avatar" {size} />
+      </div>
+      <div class="profile-name">
+        <svelte:self type="title" {size} />
+        <svelte:self type="text-small" {size} />
+      </div>
     </div>
-    <div class="profile-name">
-      <svelte:self type="title" {size} />
-      <svelte:self type="text-small" {size} />
-    </div>
-  </div>
-{:else if type === "lines"}
-  {#each Array(linecount) as _item}
-    <svelte:self type="text" {size} linecount={linecount} />
-  {/each}
-{:else}
-  <div class="skeleton {type} {`${type}-${size}`}"></div>
-{/if}
+  {:else if type === "lines"}
+    {#each Array(linecount) as _item}
+      <svelte:self type="text" {size} linecount={linecount} />
+    {/each}
+  {:else}
+    <div class="skeleton {type} {`${type}-${size}`}"></div>
+  {/if}
+</div>
 
 <!-- Style -->
 <style>

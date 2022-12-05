@@ -2,24 +2,36 @@
 
 <!-- Script -->
 <script lang="ts">
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+
   export let elevation: number = 0;
-  export let width: number = 320;
+  export let width: string = "100%";
+  export let height: "auto" | "max" = "auto";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   //optional
-  export let testId: string = "";
+  export let testid: string = "";
 </script>
 
 <!-- HTML -->
 <div
-  data-testid={testId}
+  data-testid={testid}
   class="card"
   style="
-    --width: {width}px;
-    { elevation === 0
-      ? `border: 1px solid var(--color-gray-200);`
-      : `box-shadow: var(--shadow-${elevation});`
-    }
-  ">
+    --width: {width};
+    --height: {height === 'auto' ? 'auto' : '100%'};
+    {calculateMargin(mt, mr, mb, ml)}
+    {elevation === 0
+    ? `border: 1px solid var(--color-gray-200);`
+    : `box-shadow: var(--shadow-${elevation});`}
+  "
+>
   <slot />
 </div>
 
@@ -29,22 +41,15 @@
     box-sizing: border-box;
     font-family: var(--font-family);
   }
-  /* :host {
-    width: 100%;
-  }
-  */
   .card {
-    display: flex;
-    flex-direction: column;
     background-color: var(--color-white);
     border-radius: 4px;
     overflow: hidden;
-    width: 100%;
+    height: var(--height);
   }
   @media (min-width: 320px) {
     .card {
-      width: var(--width);
-      margin: 0 auto
+      margin: 0 auto;
     }
   }
 </style>

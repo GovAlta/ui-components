@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from "react";
+import { Margins } from "../../common/styling";
 
 type ContainerType =
   | "interactive"
@@ -10,7 +11,7 @@ type ContainerType =
 type Accent = "thick" | "thin" | "filled";
 type ContainerPadding = "relaxed" | "compact";
 
-interface WCProps {
+interface WCProps extends Margins {
   type?: ContainerType;
   accent?: Accent;
   padding?: ContainerPadding;
@@ -25,7 +26,7 @@ declare global {
   }
 }
 
-interface Props {
+interface Props extends Margins {
   accent?: Accent;
   type?: ContainerType;
   title?: ReactNode;
@@ -41,9 +42,21 @@ export const GoAContainer: FC<Props> = ({
   children,
   actions,
   type,
+  mt,
+  mr,
+  mb,
+  ml,
 }) => {
   return (
-    <goa-container type={type} padding={padding} accent={accent}>
+    <goa-container
+      type={type}
+      padding={padding}
+      accent={accent}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+    >
       {title && <div slot="title">{title}</div>}
       {children}
       {actions && <div slot="actions">{actions}</div>}

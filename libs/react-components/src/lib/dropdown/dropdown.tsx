@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useRef } from "react";
-import { GoAIconType } from "../icons";
+import { Margins } from "../../common/styling";
+import { GoAIconType } from "../icon/icon";
 
 export * from "./dropdown-option";
 
-interface WCProps {
+interface WCProps extends Margins {
   ref: React.MutableRefObject<HTMLElement | null>;
   name: string;
   value: string;
@@ -28,7 +29,7 @@ declare global {
   }
 }
 
-interface Props {
+interface Props extends Margins {
   name: string;
   value: string[] | string;
   onChange: (name: string, values: string[] | string) => void;
@@ -77,6 +78,10 @@ export const GoADropdown: FC<Props> = (props) => {
       error={props.error}
       testid={props.testId}
       width={props.width}
+      mt={props.mt}
+      mr={props.mr}
+      mb={props.mb}
+      ml={props.ml}
     >
       {props.children}
     </goa-dropdown>

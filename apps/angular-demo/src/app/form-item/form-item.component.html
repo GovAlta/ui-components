@@ -32,15 +32,17 @@
 </goa-form-item>
 
 <h2>Form row</h2>
-<goa-input
-  type="number"
-  arialabel="Number Input"
-  name="firstName"
-  min="0"
-  max="6"
-  step="2"
-></goa-input>
-<goa-form-row gap="small">
+
+<goa-block direction="column" gap="2xl">
+  <goa-input
+    type="number"
+    arialabel="Number Input"
+    name="firstName"
+    min="0"
+    max="6"
+    step="2"
+  ></goa-input>
+
   <goa-form-item
     label="First name"
     error="First name is required"
@@ -66,4 +68,4 @@
       width="100%"
     ></goa-input>
   </goa-form-item>
-</goa-form-row>
+</goa-block>

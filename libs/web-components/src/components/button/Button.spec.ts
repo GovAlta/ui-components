@@ -99,4 +99,22 @@ describe('GoAButtonComponent', () => {
     });
   })
 
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoAButton, {
+        testid: "button-test",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const button = await baseElement.findByTestId("button-test");
+
+      expect(button).toBeTruthy();
+      expect(button).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(button).toHaveStyle("margin-right:var(--goa-spacing-m)");
+      expect(button).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
+      expect(button).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+    });
+  });
 });

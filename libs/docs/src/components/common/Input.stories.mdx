@@ -48,10 +48,30 @@ import { Meta, Story } from "@storybook/addon-docs";
   />
   <Prop
     name="name"
+    lang="angular"
     type="string"
     description="Name of input value that is received in the _change event"
   />
-  <Prop name="value" type="string" description="Bound to value" />
+  <Prop
+    name="name"
+    lang="react"
+    type="string"
+    required={true}
+    description="Name of input value that is received in the _change event"
+  />
+  <Prop
+    name="value"
+    lang="angular"
+    type="string"
+    description="Bound to value"
+  />
+  <Prop
+    name="value"
+    lang="react"
+    type="string"
+    required={true}
+    description="Bound to value"
+  />
   <Prop
     name="placeholder"
     type="string"
@@ -150,6 +170,7 @@ import { Meta, Story } from "@storybook/addon-docs";
     name="onChange"
     lang="react"
     type="(name: string, value: string | Date | number) => void"
+    required={true}
     description="Callback function invoked when input value is changed. The value type varies on the component type ie. GoAInput vs GoAInputDate"
   />
   <Prop
@@ -159,6 +180,36 @@ import { Meta, Story } from "@storybook/addon-docs";
     description="onclick function invoked when trailing icon is clicked"
   />
 </Props>
+
+<details>
+  <summary>Additional Properties</summary>
+  <Props showTabs={true}>
+    <Prop
+      name="mt"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Top margin"
+    />
+    <Prop
+      name="mr"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Right margin"
+    />
+    <Prop
+      name="mb"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Bottom margin"
+    />
+    <Prop
+      name="ml"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Left margin"
+    />
+  </Props>
+</details>
 
 #### Note
 
@@ -212,14 +263,15 @@ export const InputTemplate = () => {
     <CodeSnippet
       lang="html"
       code={`
-        <goa-input goaValue [(ngModel)]="firstName"></goa-input>
+        <goa-input goaValue [formControl]="reactiveFormCtrl" [value]="reactiveFormCtrl.value"></goa-input>
       `}
     />
     <CodeSnippet
       lang="ts"
       code={`
+        import { FormControl } from "@angular/forms";
         export class SomeComponent {
-          firstName = "";
+          reactiveFormCtrl = new FormControl("reactive form");
         }
       `}
     />
@@ -515,10 +567,12 @@ export const DateTemplate = () => {
     <CodeSnippet
       code={`
         import { format } from "date-fns";
+        import { FormControl } from "@angular/forms";
         export class MyComponent {
           date = format(new Date(), "yyyy-MM-dd");
           minDate = format(new Date(), "yyyy-MM-dd");
           maxDate = format(this.getDateWithMonthOffset(1), "yyyy-MM-dd");
+          reactiveDateFormCtrl = new FormControl(date);
           getDateWithMonthOffset(offset) {
             const d = new Date();
             d.setMonth(d.getMonth() + offset);
@@ -539,7 +593,8 @@ export const DateTemplate = () => {
           name="withinTheNextMonth"
           [min]="minDate"
           [max]="maxDate"
-          [(ngModel)]="date"
+          [formControl]="reactiveDateFormCtrl"
+          [value]="reactiveDateFormCtrl.value"
         >
         </goa-input>
       `}
@@ -588,8 +643,10 @@ export const TimeComponent = () => {
     <CodeSnippet
       code={`
         import { format } from "date-fns";
+        import { FormControl } from "@angular/forms";
         export class MyComponent {
           time = format(new Date(), "HH:mm:ss");
+          reactiveTimeFormCtrl = new FormControl(this.time);
         }
       `}
       lang="ts"
@@ -600,7 +657,8 @@ export const TimeComponent = () => {
           goaValue
           type="time"
           name="timeExample"
-          [(ngModel)]="time"
+          [formControl]="reactiveTimeFormCtrl"
+          [value]="reactiveTimeFormCtrl.value"
           step="1"
         >
         </goa-input>
@@ -700,8 +758,10 @@ When working with the `type=time` step controls the second step value (defaults 
     <CodeSnippet
       code={`
         import { format } from "date-fns";
+        import { FormControl } from "@angular/forms";
         export class MyComponent {
           dateTime = format(new Date(), "HH:mm:ss")
+          reactiveDateTimeFormCtrl = new FormControl(this.dateTime);
         }
       `}
       lang="ts"
@@ -713,7 +773,8 @@ When working with the `type=time` step controls the second step value (defaults 
           type="time"
           name="dateTimeExample"
           step="1"
-          [(ngModel)]="date"
+          [formControl]="reactiveDateTimeFormCtrl"
+          [value]="reactiveDateTimeFormCtrl.value"
         >
         </goa-input>
       `}

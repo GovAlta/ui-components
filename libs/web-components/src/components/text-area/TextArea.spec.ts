@@ -83,4 +83,23 @@ describe("GoATextArea", () => {
     expect(root).toBeTruthy();
   });
 
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoATextArea, {
+        testid: "textarea-test",
+        name: "test",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const textarea = await baseElement.findByTestId("textarea-test");
+
+      expect(textarea).toBeTruthy();
+      expect(textarea).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(textarea).toHaveStyle("margin-right:var(--goa-spacing-m)");
+      expect(textarea).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
+      expect(textarea).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+    });
+  });
 });

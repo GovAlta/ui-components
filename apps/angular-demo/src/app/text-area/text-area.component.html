@@ -25,3 +25,12 @@
 <h2>Binding</h2>
 {{ boundVal }}
 <goa-textarea goaValue name="binding" [(ngModel)]="boundVal"></goa-textarea>
+
+<h2>Reactive Binding</h2>
+{{ reactiveFormCtrl.value }}
+<goa-textarea
+  goaValue
+  name="binding"
+  [formControl]="reactiveFormCtrl"
+  [value]="reactiveFormCtrl.value"
+></goa-textarea>

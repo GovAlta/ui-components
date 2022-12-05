@@ -4,7 +4,7 @@ export * from "./lib/Props/Prop";
 export * from "./lib/Props/Props";
 export * from "./lib/State";
 export * from "./lib/best-practices/BestPractices";
-export * from "./lib/block/Block";
+export * from "./lib/box/Box";
 export * from "./lib/browser/Browser";
 export * from "./lib/do-dont/DoDont";
 export * from "./lib/note/Note";

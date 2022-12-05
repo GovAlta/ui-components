@@ -40,7 +40,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "postinstall": "ngcc --properties es2015 browser module main"
+    "postinstall": "ngcc --properties es2015 browser module main",
+    "chromatic": "npx chromatic --storybook-build-dir=dist/storybook/docs"
   },
   "private": true,
   "dependencies": {
@@ -145,6 +146,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "27.2.3",
     "babel-loader": "8.1.0",
+    "chromatic": "^6.11.4",
     "classnames": "^2.3.1",
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^3.6.0",
@@ -207,7 +209,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/GovAlta/ui-components.git"
+    "url": "git+https://github.com/GovAlta/ui-components.git"
   },
-  "readme": "README.md"
+  "readme": "README.md",
+  "description": "README.md",
+  "bugs": {
+    "url": "https://github.com/GovAlta/ui-components/issues"
+  },
+  "homepage": "https://github.com/GovAlta/ui-components#readme",
+  "_id": "abgov@0.0.0"
 }

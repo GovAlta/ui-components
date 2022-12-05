@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
 
-import FlexColumn from "./flex-column";
+import Spacer from "./spacer";
 
-describe("FlexColumn", () => {
+describe("Spacer", () => {
   it("should render successfully", () => {
-    const { baseElement } = render(<FlexColumn />);
+    const { baseElement } = render(<Spacer />);
     expect(baseElement).toBeTruthy();
   });
 });

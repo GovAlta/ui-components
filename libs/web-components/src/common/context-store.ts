@@ -1,4 +1,5 @@
-import { Writable, writable } from 'svelte/store';
+import { tick } from "svelte";
+import { Writable, writable } from "svelte/store";
 
 /**
  * Currently the Svelte context api does not work when compiled to web-components.
@@ -13,8 +14,8 @@ export interface Message {
 }
 
 export interface ContextStore {
-  subscribe: (cb: (msg: Message) => void) => void
-  notify: (msg: Message) => void
+  subscribe: (cb: (msg: Message) => void) => void;
+  notify: (msg: Message) => void;
 }
 
 class ContextStoreInternal implements ContextStore {
@@ -26,28 +27,31 @@ class ContextStoreInternal implements ContextStore {
 
   subscribe(cb: (msg: Message) => void) {
     this.store.subscribe(state => {
-      cb((state as unknown) as Message)
-    })
+      if (!state) return;
+      cb(state as unknown as Message);
+    });
   }
 
   notify(msg: Message) {
-    this.store.update(() => msg);
+    const fn = async () => {
+      await tick();
+      this.store.update(() => msg);
+    };
+    fn();
   }
-}
-
-// Create the context within the parent element
-export function createContext(name: string): ContextStore {
-  const ctx = new ContextStoreInternal();
-  stores[name] = ctx
-  return ctx
 }
 
 // Get the context reference within the children elements
 export function getContext(name: string): ContextStore {
-  return stores[name];
+  let ctx = stores[name];
+  if (!ctx) {
+    ctx = new ContextStoreInternal();
+  }
+  stores[name] = ctx;
+  return ctx;
 }
 
-// Delete the context in the onDestroy hook of the parent element 
+// Delete the context in the onDestroy hook of the parent element
 export function deleteContext(name: string) {
   const store = stores[name];
   if (!store) return;

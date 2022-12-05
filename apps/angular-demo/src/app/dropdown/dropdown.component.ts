@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "abgov-dropdown",
@@ -9,6 +10,7 @@ export class DropdownComponent {
   colors: string[] = ["red", "green", "blue"];
   selectedColor = "red";
   boundVal = "";
+  reactiveFormCtrl = new FormControl("red");
 
   groups = [
     {

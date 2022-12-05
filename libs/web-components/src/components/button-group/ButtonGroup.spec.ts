@@ -42,4 +42,23 @@ describe("GoA ButtonGroup", () => {
     });
     mock.mockRestore();
   });
+
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoAButtonGroup, {
+        testid: "buttongroup-test",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const buttongroup = await baseElement.findByTestId("buttongroup-test");
+
+      expect(buttongroup).toBeTruthy();
+      expect(buttongroup).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(buttongroup).toHaveStyle("margin-right:var(--goa-spacing-m)");
+      expect(buttongroup).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
+      expect(buttongroup).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+    });
+  });
 });

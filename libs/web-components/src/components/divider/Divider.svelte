@@ -1,37 +1,25 @@
 <svelte:options tag="goa-divider" />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { calculateMargin, Spacing } from "../../common/styling";
 
-  export let spacing: string = "";
+  export let testid: string = "";
 
-  const SPACING = ["small", "medium", "large"];
-  type Spacing = typeof SPACING[number];
-
-  function isSpacing(value: string): value is Spacing {
-    return SPACING.includes(value);
-  }
-
-  $: _spacing = {
-    small: "1rem",
-    medium: "2rem",
-    large: "4rem",
-  }[spacing];
-
-  onMount(() => {
-    if (!isSpacing(spacing)) {
-      console.error("Invalid spacing");
-    }
-  });
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 </script>
 
-<hr style="--spacing: {_spacing}" />
+<hr data-testid={testid} style={calculateMargin(mt, mr, mb, ml)} />
 
 <style>
   hr {
     padding: 0;
-    margin: var(--spacing) 0;
+    margin: 0;
+    height: 1px;
+    background-color: var(--color-gray-200);
     border: none;
-    border-top: 1px solid var(--color-gray-200);
   }
 </style>

@@ -1,4 +1,4 @@
-import { GoAFormItem, GoAFlexRow, GoAInput } from "@abgov/react-components";
+import { GoAFormItem, GoAGrid, GoAInput } from "@abgov/react-components";
 import * as React from "react";
 
 export default function FormItem() {
@@ -56,7 +56,7 @@ export default function FormItem() {
 
       <br />
       <h2>Form row</h2>
-      <GoAFlexRow gap="small">
+      <GoAGrid minChildWidth="30ch">
         <GoAFormItem
           label="First name"
           error="First name is required"
@@ -85,7 +85,7 @@ export default function FormItem() {
             width="100%"
           ></GoAInput>
         </GoAFormItem>
-      </GoAFlexRow>
+      </GoAGrid>
     </>
   );
 }

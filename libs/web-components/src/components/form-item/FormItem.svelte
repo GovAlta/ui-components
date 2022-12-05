@@ -2,8 +2,17 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { toBoolean } from "../../common/utils";
   import { onMount } from "svelte";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+
+  export let testid: string = "";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   const REQUIREMENT_TYPES = ["optional", "required", ""];
   type RequirementType = (typeof REQUIREMENT_TYPES)[number];
@@ -28,7 +37,11 @@
 </script>
 
 <!-- HTML -->
-<div class="goa-form-item">
+<div 
+  data-testid={testid}
+  style={calculateMargin(mt, mr, mb, ml)}
+  class="goa-form-item"
+>
   {#if label}
     <div class="label">
       {label}

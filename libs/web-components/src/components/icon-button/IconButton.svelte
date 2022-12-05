@@ -3,6 +3,8 @@
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
   import type { IconSize, IconTheme, GoAIconType } from "../icon/Icon.svelte";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
 
   type IconButtonVariant = "color" | "nocolor" | "dark";
 
@@ -13,11 +15,16 @@
   export let size: IconSize = "medium";
   export let theme: IconTheme = "outline";
   export let variant: IconButtonVariant = "color";
-
   export let title: string = "";
-  export let testId: string = "";
-  export let disabled: string;
-  export let inverted: string;
+  export let testid: string = "";
+  export let disabled: string = "false";
+  export let inverted: string = "false";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   // private
   $: css = `${variant} ${isInverted ? "inverted" : ""}`;
@@ -37,11 +44,11 @@
 </script>
 
 <button
-  style="--pading-size: {_paddingSize}"
+  style="{calculateMargin(mt, mr, mb, ml)}; --pading-size: {_paddingSize}"
   title={title}
   disabled={isDisabled}
   class={css}
-  data-testid={testId}
+  data-testid={testid}
   on:click={handleClick}
 >
   <goa-icon title={title} type={icon} {size} {theme} inverted={isInverted} />

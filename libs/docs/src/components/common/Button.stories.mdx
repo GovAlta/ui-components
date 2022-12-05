@@ -72,6 +72,36 @@ export const noop = () => {};
   />
 </Props>
 
+<details>
+  <summary>Additional Properties</summary>
+  <Props showTabs={true}>
+    <Prop
+      name="mt"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Top margin"
+    />
+    <Prop
+      name="mr"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Right margin"
+    />
+    <Prop
+      name="mb"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Bottom margin"
+    />
+    <Prop
+      name="ml"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Left margin"
+    />
+  </Props>
+</details>
+
 #### Types
 
 There are three main button types: Primary, Secondary, and Tertiary. If there is only one button on a page, it should be a primary button. There should only ever be one primary button on a page
@@ -183,7 +213,7 @@ There are two button sizes: Normal (default) and Compact.
 “Small” buttons can be inside of a table where information is dense and space is at a premium.
 
 <Story name="Compact size">
-  <GoAButtonGroup alignment="start" gap="small">
+  <GoAButtonGroup alignment="start">
     <GoAButton type="primary" size="compact">
       Compact primary
     </GoAButton>

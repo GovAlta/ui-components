@@ -1,18 +1,20 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
-import userEvent from "@testing-library/user-event";
-import GoADropdown from './DropdownWrapper.test.svelte';
+import GoADropdownWrapper from './DropdownWrapper.test.svelte';
+import GoADropdown from './Dropdown.svelte';
+import { deleteContext } from '../../common/context-store';
 
 afterEach(() => {
+  deleteContext("favcolor")
   cleanup()
   jest.clearAllMocks();
 });
 
-describe('GoADropdown', () => {
+describe('GoADropdownWrapper', () => {
 
-  it('should render', async () => {
+  it('dropdown should render', async () => {
     const items = ["red", "blue", "orange"];
-    const result = render(GoADropdown, {
+    const result = render(GoADropdownWrapper, {
       name: 'favcolor',
       value: 'orange',
       items,
@@ -33,23 +35,10 @@ describe('GoADropdown', () => {
     });
   });
 
-  it("raise an error if name is not supplied", async () => {
-    const mock = jest.spyOn(console, "error").mockImplementation();
-    const items = ["red", "blue", "orange"];
-    render(GoADropdown, {
-      items,
-    });
-
-    await waitFor(() => {
-      expect(console.error["mock"].calls.length).toBeGreaterThan(0);
-    })
-    mock.mockRestore();
-  });
-
   describe("single selection", () => {
     it('has a preselected value', async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         value: 'orange',
         items,
@@ -83,7 +72,7 @@ describe('GoADropdown', () => {
     it('selects a value', async () => {
       const onClick = jest.fn();
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         items,
       });
@@ -116,7 +105,7 @@ describe('GoADropdown', () => {
   describe("disabled", () => {
     it('can be enabled', async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         disabled: false,
         items,
@@ -139,7 +128,7 @@ describe('GoADropdown', () => {
 
     it('can be disabled', async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         disabled: true,
         items,
@@ -166,7 +155,7 @@ describe('GoADropdown', () => {
 
     it('does not show an error state', async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         error: false,
         items,
@@ -184,7 +173,7 @@ describe('GoADropdown', () => {
 
     it('shows an error state', async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         error: true,
         items,
@@ -205,7 +194,7 @@ describe('GoADropdown', () => {
   describe("leading icon", () => {
     it('does not show a leading icon', async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         items,
       });
@@ -217,7 +206,7 @@ describe('GoADropdown', () => {
 
     it('shows a leading icon', async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         leadingicon: "add",
         items,
@@ -232,7 +221,7 @@ describe('GoADropdown', () => {
   describe("placeholder", () => {
     it('does not show a placeholder', async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         items,
       });
@@ -244,7 +233,7 @@ describe('GoADropdown', () => {
 
     it('shows a placeholder', async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         placeholder: "some text",
         items,
@@ -259,7 +248,7 @@ describe('GoADropdown', () => {
   describe("width", () => {
     it("dropdown should have the default width", async () => {
       const items = ["red", "blue", "pink"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         items,
       });
@@ -275,7 +264,7 @@ describe('GoADropdown', () => {
 
     it("uses the non-percent width supplied", async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         width: "500px",
         items,
@@ -292,7 +281,7 @@ describe('GoADropdown', () => {
 
     it("sets the input width to 100% when percent value used", async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         width: "100%",
         items,
@@ -311,7 +300,7 @@ describe('GoADropdown', () => {
   describe("maxheight", () => {
     it("uses the default max height", async () => {
       const items = ["red", "blue", "pink"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         items,
       });
@@ -328,7 +317,7 @@ describe('GoADropdown', () => {
 
     it("uses the height when supplied", async () => {
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name: 'favcolor',
         maxheight: "400px",
         items,
@@ -347,27 +336,29 @@ describe('GoADropdown', () => {
 
   describe("aria-labels", () => {
     it("show the aria label", async () => {
-      const items = ["red", "blue", "pink"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
+      const items = ["red", "blue", "orange"];
+      const result = render(GoADropdownWrapper, {
+        name: 'favcolor3',
+        value: "orange",
         arialabel: 'Favourite Color',
         items,
       });
 
-      const dropdown = result.queryByTestId("favcolor-dropdown");
+      const dropdown = result.queryByTestId("favcolor3-dropdown");
       const input = dropdown.querySelector('goa-input');
 
       // selected value
       expect(input).toHaveAttribute("aria-label", "Favourite Color")
 
-      fireEvent.click(input);
+      await fireEvent.click(input);
 
       const menu = result.queryByTestId("dropdown-menu");
       await waitFor(() => {
         expect(menu).toHaveStyle("max-height: 276px");  // 276px is default value
 
         for (const item of items) {
-          const option = menu.querySelector(`li[data-testid="dropdown-item-${item}"]`);
+          const option = result.queryByTestId(`dropdown-item-${item}`);
+          expect(option).toBeTruthy();
           expect(option).toHaveAttribute("aria-label", item)
         }
       })
@@ -401,7 +392,7 @@ describe('GoADropdown', () => {
 
         const user = {};
 
-        const result = render(GoADropdown, { name: 'favcolor', items, value: "red" });
+        const result = render(GoADropdownWrapper, { name: 'favcolor', items, value: "red" });
         // const dropdown = result.queryByTestId("favcolor-dropdown");
         const input = result.queryByTestId('favcolor-dropdown-input');
 
@@ -449,4 +440,22 @@ describe('GoADropdown', () => {
     }
   })
 
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoADropdown, {
+        name: "test",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const dropdown = await baseElement.findByTestId("test-dropdown");
+
+      expect(dropdown).toBeTruthy();
+      expect(dropdown).toHaveStyle("margin-top:var(--goa-spacing-s)");
+      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-spacing-m)");
+      expect(dropdown).toHaveStyle("margin-right:var(--goa-spacing-l)");
+      expect(dropdown).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+    });
+  });
 });

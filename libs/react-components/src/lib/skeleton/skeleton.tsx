@@ -1,4 +1,5 @@
 import React from "react";
+import { Margins } from "../../common/styling";
 
 export type SkeletonType =
   | "image"
@@ -14,7 +15,7 @@ export type SkeletonType =
 
 type SkeletonSize = 1 | 2 | 3 | 4;
 
-interface WCProps {
+interface WCProps extends Margins {
   maxwidth?: string;
   size?: SkeletonSize;
   linecount?: number;
@@ -30,7 +31,7 @@ declare global {
   }
 }
 
-export interface SkeletonProps {
+export interface SkeletonProps extends Margins {
   maxWidth?: string;
   size?: SkeletonSize;
   lineCount?: number;
@@ -42,6 +43,10 @@ export const GoASkeleton = ({
   size,
   lineCount,
   type,
+  mt,
+  mr,
+  mb,
+  ml,
 }: SkeletonProps) => {
   return (
     <goa-skeleton
@@ -49,6 +54,10 @@ export const GoASkeleton = ({
       linecount={lineCount}
       type={type}
       size={size}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
     />
   );
 };

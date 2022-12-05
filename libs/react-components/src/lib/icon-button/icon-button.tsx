@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useRef } from "react";
-import { IconSize, GoAIconType } from "./icon";
+import { Margins } from "../../common/styling";
+import { IconSize, GoAIconType } from "../icon/icon";
 
 type IconVariant = "color" | "nocolor" | "dark";
 
-interface WCProps {
+interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   icon: GoAIconType;
   size?: IconSize;
@@ -21,7 +22,7 @@ declare global {
   }
 }
 
-interface Props {
+interface Props extends Margins {
   icon: GoAIconType;
   size?: IconSize;
   variant?: IconVariant;
@@ -39,6 +40,10 @@ export const GoAIconButton: FC<Props> = ({
   size = "medium",
   title,
   children,
+  mt,
+  mr,
+  mb,
+  ml,
 }) => {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -67,6 +72,10 @@ export const GoAIconButton: FC<Props> = ({
       variant={variant}
       size={size}
       title={title}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
     >
       {children}
     </goa-icon-button>

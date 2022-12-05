@@ -1,9 +1,9 @@
 <svelte:options tag="goa-dropdown-item" />
 
 <script lang="ts">
-  import { getContext, ContextStore } from '../../common/context-store';
-  import { onMount } from "svelte";
-  import { BIND } from "./types";
+  import { tick } from "svelte";
+
+  import { getContext, ContextStore } from "../../common/context-store";
 
   // public
   export let name: string = "";
@@ -13,28 +13,15 @@
   // private
   let ctx: ContextStore;
 
-  onMount(() => {
-    const maxAttempts = 10;
-    let attempts = 0; 
-    const fn = setInterval(() => {
-      if (name && value) {
+  let isBound = false;
+  $: {
+    (async () => {
+      await tick();
+      if (!isBound) {
+        isBound = true;
         ctx = getContext(name);
-        if (!ctx) {
-          return;
-        }
-        ctx.notify({
-          type: BIND,
-          name,
-          label,
-          value,
-        });
-        clearInterval(fn);
+        ctx.notify({ type: "bind", name, label, value });
       }
-      if (attempts > maxAttempts) {
-        console.error("goa-dropdown-item: missing the required `name` attribute. It must match the parent's name attribute")
-        clearInterval(fn);
-      }
-    }, 10);
-  })
-
+    })();
+  }
 </script>

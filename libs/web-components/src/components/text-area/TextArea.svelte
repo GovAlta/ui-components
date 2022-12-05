@@ -3,6 +3,8 @@
 <!-- Script -->
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
 
   export let name: string;
   export let value: string = "";
@@ -14,6 +16,12 @@
   export let readonly: string = "false";
   export let disabled: string = "false";
   export let arialabel: string = ""; 
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   // export let showcounter: string = "false";
   export let maxcharcount: number = 0;
@@ -47,6 +55,7 @@
 <div
   class="container"
   style={`
+    ${calculateMargin(mt, mr, mb, ml)};
     --width: ${width};
   `}
 >

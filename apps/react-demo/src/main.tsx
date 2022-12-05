@@ -25,6 +25,7 @@ import FormItem from "./routes/formItem";
 import IconButton from "./routes/iconButton";
 import NotificationBanner from "./routes/notificationBanner";
 import ButtonGroup from "./routes/buttonGroup";
+import Divider from "./routes/divider";
 
 import "@abgov/styles";
 
@@ -54,6 +55,7 @@ ReactDOM.render(
         <Route path="icon-button" element={<IconButton />} />
         <Route path="notification-banner" element={<NotificationBanner />} />
         <Route path="button-group" element={<ButtonGroup />} />
+        <Route path="divider" element={<Divider />} />
       </Route>
     </Routes>
   </BrowserRouter>,
