@@ -632,6 +632,36 @@ describe("NativeSelect", () => {
     });
   })
 
+  it("renders disabled state", async () => {
+    const name = "error-label"
+    const { container } = render(GoADropdown, { name, native: true, disabled: true })
+
+    const ctx = getContext(name)
+    ctx.notify({ type: "bind", name, value: "red" })
+    ctx.notify({ type: "bind", name, value: "green" })
+    ctx.notify({ type: "bind", name, value: "blue" })
+
+    await waitFor(() => {
+      const el = container.querySelector("select:disabled")
+      expect(el).toBeTruthy();
+    });
+  })
+
+  it("renders an error state", async () => {
+    const name = "error-label"
+    const { container } = render(GoADropdown, { name, native: true, error: true })
+
+    const ctx = getContext(name)
+    ctx.notify({ type: "bind", name, value: "red" })
+    ctx.notify({ type: "bind", name, value: "green" })
+    ctx.notify({ type: "bind", name, value: "blue" })
+
+    await waitFor(() => {
+      const el = container.querySelector("select.error")
+      expect(el).toBeTruthy();
+    });
+  })
+
   it("shows an error when no name is provided", async () => {
     const mock = jest.spyOn(console, "warn").mockImplementation();
     render(GoADropdown, { value: "green", native: true })

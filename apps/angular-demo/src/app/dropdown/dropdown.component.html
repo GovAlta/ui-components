@@ -1,39 +1,14 @@
 <h1>Dropdown</h1>
+<select>
+  <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+</select>
 
-<goa-dropdown
-  name="colors"
-  placeholder="Select a user"
-  leadingIcon="alarm"
-  native="true"
-  [value]="selectedColor"
-  (_change)="selectColor($event)"
->
+<goa-dropdown name="colors1" native="true">
   <goa-dropdown-item
-    name="colors"
+    name="colors1"
     *ngFor="let color of colors"
     [value]="color"
     [label]="color"
-  >
-  </goa-dropdown-item>
-</goa-dropdown>
-
-<h2>Error</h2>
-<goa-dropdown
-  arialabel="Select user"
-  name="colors2"
-  placeholder="Select a user"
-  error="true"
->
-  <goa-dropdown-item value="red" name="colors2" label="Red"></goa-dropdown-item>
-  <goa-dropdown-item
-    value="green"
-    name="colors2"
-    label="Green"
-  ></goa-dropdown-item>
-  <goa-dropdown-item
-    value="blue"
-    name="colors2"
-    label="Blue"
   ></goa-dropdown-item>
 </goa-dropdown>
 
