@@ -17,6 +17,7 @@
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
+  export let arialabel: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -75,6 +76,7 @@
       disabled={isDisabled}
       type="checkbox"
       value={`${value}`}
+      aria-label={arialabel || name}
       on:change={onChange}
     />
     {#if isIndeterminate}

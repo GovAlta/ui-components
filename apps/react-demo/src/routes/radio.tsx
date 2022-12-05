@@ -91,6 +91,19 @@ export default function Radio() {
           </GoARadioGroup>
         </div>
       ))}
+
+      <h2>Aria Label</h2>
+      <GoARadioGroup
+        name="aria"
+        value="orange"
+        orientation="horizontal"
+        onChange={onChange}
+        ariaLabel="Some random aria label here"
+      >
+        <GoARadioItem name="aria" value="red"></GoARadioItem>
+        <GoARadioItem name="aria" value="blue"></GoARadioItem>
+        <GoARadioItem name="aria" value="orange"></GoARadioItem>
+      </GoARadioGroup>
     </>
   );
 }

@@ -48,6 +48,7 @@ interface WCProps extends Margins {
   prefix?: string;
   suffix?: string;
   testid?: string;
+  arialabel?: string;
 
   // type=number
   min?: string | number;
@@ -84,6 +85,7 @@ interface BaseProps extends Margins {
   prefix?: string;
   suffix?: string;
   testId?: string;
+  ariaLabel?: string;
 }
 
 type OnChange = (name: string, value: string) => void;
@@ -134,6 +136,7 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   step,
   prefix,
   suffix,
+  ariaLabel,
   mt,
   mr,
   mb,
@@ -186,6 +189,7 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
       step={step}
       prefix={prefix}
       suffix={suffix}
+      arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}

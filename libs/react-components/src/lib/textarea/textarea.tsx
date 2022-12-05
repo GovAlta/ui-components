@@ -12,6 +12,7 @@ interface WCProps extends Margins {
   showcounter?: boolean;
   maxcharcount?: number;
   width?: string;
+  arialabel?: string;
 }
 
 declare global {
@@ -35,6 +36,7 @@ interface Props extends Margins {
   maxCharCount?: number;
   width?: string;
   testId?: string;
+  ariaLabel?: string;
   onChange: (name: string, value: string) => void;
 }
 
@@ -49,6 +51,7 @@ export const GoATextArea: FC<Props> = ({
   width,
   testId,
   error,
+  ariaLabel,
   mt,
   mr,
   mb,
@@ -86,6 +89,7 @@ export const GoATextArea: FC<Props> = ({
       width={width}
       error={error}
       data-testid={testId}
+      arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}
