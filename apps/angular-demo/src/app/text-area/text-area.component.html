@@ -26,6 +26,17 @@
 {{ boundVal }}
 <goa-textarea goaValue name="binding" [(ngModel)]="boundVal"></goa-textarea>
 
+<h2>Margin Spacing</h2>
+<goa-textarea
+  mt="m"
+  mb="xs"
+  ml="xl"
+  mr="2xl"
+  name="comment-basic"
+  (_change)="onChange($event)"
+  value="Initial value"
+></goa-textarea>
+
 <h2>Reactive Binding</h2>
 {{ reactiveFormCtrl.value }}
 <goa-textarea

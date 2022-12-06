@@ -85,6 +85,21 @@ export default function Dropdown() {
         <GoADropdownOption value="green" name="aria" label="Green" />
         <GoADropdownOption value="blue" name="aria" label="Blue" />
       </GoADropdown>
+      <h2>Margin Spacing</h2>
+      <GoADropdown
+        name="colors"
+        placeholder="Select a user"
+        value="blue"
+        onChange={noop}
+        mt="m"
+        mb="xs"
+        ml="xl"
+        mr="2xl"
+      >
+        <GoADropdownOption value="red" name="colors" label="Red" />
+        <GoADropdownOption value="green" name="colors" label="Green" />
+        <GoADropdownOption value="blue" name="colors" label="Blue" />
+      </GoADropdown>
     </>
   );
 }

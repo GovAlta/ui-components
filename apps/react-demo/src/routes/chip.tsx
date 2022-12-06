@@ -51,6 +51,8 @@ export default function Chip() {
           console.log("deleting");
         }}
       ></GoAChip>
+      <h2>Margin Spacing</h2>
+      <GoAChip mt="m" mb="xs" ml="xl" mr="2xl" content="Chip Text"></GoAChip>
     </>
   );
 }

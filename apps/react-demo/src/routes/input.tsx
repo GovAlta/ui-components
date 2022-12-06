@@ -125,6 +125,18 @@ export default function Input() {
         ariaLabel="Some random aria label here"
         onChange={noop}
       />
+      <h4>Margin Spacing</h4>
+      <GoAInputDate
+        mt="m"
+        mb="xs"
+        ml="xl"
+        mr="2xl"
+        name="Date with min max"
+        value={date}
+        min={minDate}
+        max={maxDate}
+        onChange={onDateChange}
+      />
     </>
   );
 }

@@ -1,6 +1,11 @@
 import * as React from "react";
 import { useState } from "react";
-import { GoATextArea } from "@abgov/react-components";
+import {
+  GoATextArea,
+  GoAInput,
+  GoAFormItem,
+  GoAGrid,
+} from "@abgov/react-components";
 
 export default function TextArea() {
   const [value, setValue] = useState("Initial value");
@@ -79,6 +84,16 @@ export default function TextArea() {
         value={value6}
         onChange={onChange6}
         ariaLabel="Some random aria label here"
+      />
+      <h2>Margin Spacing</h2>
+      <GoATextArea
+        name="comment-basic"
+        value={value}
+        onChange={onChange}
+        mt="m"
+        mb="xs"
+        ml="xl"
+        mr="2xl"
       />
     </>
   );
