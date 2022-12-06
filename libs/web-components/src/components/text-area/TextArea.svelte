@@ -108,17 +108,14 @@
     display: block;
     width: 100%;
     box-sizing: border-box;
-
     outline: none;
     transition: box-shadow 0.1s ease-in;
     border: 1px solid var(--color-gray-600);
     border-radius: 3px;
-    background: var(--color-white);
     color: var(--color-black, #ccc);
     padding: var(--textarea-padding-vertical, 0.5rem) var(--textarea-padding-horizontal, 0.5rem);
     font-size: var(--input-font-size);
     font-family: var(--font-family);
-
     min-width: 100%;
   }
 
@@ -141,14 +138,14 @@
   .goa-textarea:focus-within {
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
   }
-  .goa-textarea:disabled {
+
+  .goa-textarea:disabled,
+  .goa-textarea:disabled:hover,
+  .goa-textarea:disabled:active,
+  .goa-textarea:disabled:focus {
+    background-color: var(--color-gray-100);
     border-color: var(--color-gray-200);
-  }
-  .goa-textarea:disabled:hover {
-    border-color: var(--color-gray-200);
-  }
-  .goa-textarea:disabled:focus,
-  .goa-textarea:disabled:active {
+    cursor: default;
     box-shadow: none;
   }
 

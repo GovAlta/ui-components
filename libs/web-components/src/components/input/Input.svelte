@@ -198,14 +198,10 @@
     transition: box-shadow 0.1s ease-in;
     border: 1px solid var(--color-gray-600);
     border-radius: var(--input-border-radius);
-    background: white;
-
     display: inline-flex;
     align-items: stretch;
-
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
-
     min-width: 100%;
   }
 
