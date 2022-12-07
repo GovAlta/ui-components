@@ -13,6 +13,7 @@
   export let disabled: string = "false";
   export let error: string = "false";
   export let arialabel: string = "";
+  export let width: string = "";
 
   // Private
   $: _disabled = toBoolean(disabled);
@@ -40,7 +41,7 @@
     validateRequired("goa-select", { name, value });
   });
 
-  function onChange(e) {
+  function onChange(e: Event & { currentTarget: EventTarget & HTMLSelectElement }) {
     e.target.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
@@ -54,6 +55,7 @@
 
 <div class="wrapper" class:error={_error} class:disabled={_disabled}>
   <select
+    style={`width: ${width}`}
     on:change={onChange}
     bind:this={_selectEl}
     disabled={_disabled}

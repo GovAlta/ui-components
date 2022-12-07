@@ -7,6 +7,7 @@ interface WCProps extends Margins {
   value?: string;
   disabled?: boolean;
   arialabel?: string;
+  width?: string;
   error?: boolean;
 }
 
@@ -26,6 +27,7 @@ export interface SelectProps extends Margins {
   disabled?: boolean;
   error?: boolean;
   ariaLabel?: string;
+  width?: string;
   children?: ReactNode;
   onChange: (name: string, value: string) => void;
 }
@@ -36,6 +38,7 @@ export function GoASelect({
   disabled,
   error,
   ariaLabel,
+  width,
   children,
   onChange,
   mt,
@@ -71,6 +74,7 @@ export function GoASelect({
       disabled={disabled}
       error={error}
       arialabel={ariaLabel}
+      width={width}
       mt={mt}
       mr={mr}
       mb={mb}

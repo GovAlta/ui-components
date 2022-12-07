@@ -110,5 +110,35 @@ describe("NativeSelect", () => {
     })
     mock.mockRestore();
   })
+
+  it("can be disabled", async () => {
+    const name = "disabled"
+    const { container } = render(NativeSelect, { name, value: "green", disabled: true })
+
+    const ctx = getContext(name)
+    ctx.notify({ type: "bind", name, value: "red" })
+    ctx.notify({ type: "bind", name, value: "green" })
+    ctx.notify({ type: "bind", name, value: "blue" })
+
+    const select = container.querySelector("select");
+    await waitFor(async () => {
+      expect(select.getAttribute("disabled")).toBeFalsy()
+    })
+  })
+
+  it("can accept a width param", async () => {
+    const name = "disabled"
+    const { container } = render(NativeSelect, { name, value: "green", width: "30ch" })
+
+    const ctx = getContext(name)
+    ctx.notify({ type: "bind", name, value: "red" })
+    ctx.notify({ type: "bind", name, value: "green" })
+    ctx.notify({ type: "bind", name, value: "blue" })
+
+    const select = container.querySelector("select");
+    await waitFor(async () => {
+      expect(select.getAttribute("style")).toContain("width: 30ch")
+    })
+  })
 })
 
