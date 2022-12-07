@@ -20,6 +20,9 @@ rc:
 story:
 	cp libs/docs/src/_stories.mdx.template libs/docs/src/components/common/$(name).stories.mdx
 
+# new component
+component: sc rc story
+
 #### BUILD
 
 build-web-components:
