@@ -203,7 +203,6 @@
     margin-bottom: 0 !important;
   }
 
-
   .modal-close {
     position: absolute;
     top: 2rem;

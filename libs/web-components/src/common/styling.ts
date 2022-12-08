@@ -23,6 +23,17 @@ export function calculateMargin(mt: string, mr: string, mb: string, ml: string) 
 
 /**
  * This allows for :host styles that are dependent on component variables.
+ * The injectCss function also allow for dynamic styling to be added where, within the component template, there 
+ * is nothing that matches the selector, resulting in the selector being removed on compile.
+ *
+ * <script>
+ *   let el: HTMLElement;
+ *   onMount(() => injectCss(el, "span", { color: "red" }))
+ * </script>
+ * <div bind:this={el}>
+ *   <span>Foobar</span>
+ * </div
+ *
  */
 export function injectCss(el: HTMLElement, rootSelector: string, css: Record<string, string | number>, media?: string) {
   const style = document.createElement("style");

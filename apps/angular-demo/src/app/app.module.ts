@@ -34,6 +34,7 @@ import { NotificationBannerComponent } from "./notification-banner/notification-
 import { RadioComponent } from "./radio/radio.component";
 import { SkeletonComponent } from "./skeleton/skeleton.component";
 import { SpacingComponent } from "./spacing/spacing";
+import { TableComponent } from "./table/table";
 import { TextAreaComponent } from "./text-area/text-area.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
 
@@ -63,6 +64,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
     RadioComponent,
     SkeletonComponent,
     SpacingComponent,
+    TableComponent,
     TextAreaComponent,
     TwoColumnLayoutComponent,
   ],
