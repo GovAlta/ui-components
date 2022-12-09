@@ -18,7 +18,7 @@ export function fromBoolean(value: boolean): string {
 export function validateRequired(componentName: string, props: Record<string, unknown>) {
   Object.entries(props).forEach(prop => {
     if (!prop[1]) {
-      console.error(`${componentName}: ${prop[0]} is required`);
+      console.warn(`${componentName}: ${prop[0]} is required`);
     }
   })
 }

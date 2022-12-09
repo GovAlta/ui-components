@@ -39,6 +39,19 @@ export default function Dropdown() {
         <GoADropdownOption value="blue" name="colors" label="Blue" />
       </GoADropdown>
 
+      <h2>Native</h2>
+      <GoADropdown
+        name="colors-native"
+        placeholder="Select a user"
+        value="blue"
+        native={true}
+        onChange={noop}
+      >
+        <GoADropdownOption value="red" name="colors-native" label="Red" />
+        <GoADropdownOption value="green" name="colors-native" label="Green" />
+        <GoADropdownOption value="blue" name="colors-native" label="Blue" />
+      </GoADropdown>
+
       <h2>Error</h2>
       <GoADropdown
         name="colors2"

@@ -12,6 +12,8 @@ export class DropdownComponent {
   boundVal = "";
   reactiveFormCtrl = new FormControl("red");
 
+  color = new FormControl("green");
+
   groups = [
     {
       name: "Fruits",
@@ -28,6 +30,11 @@ export class DropdownComponent {
   constructor() {}
 
   selectColor(event: any) {
+    console.log("Select Color", event);
     this.selectedColor = event.detail.value;
+  }
+
+  handleSelectChange(event: any) {
+    console.log("select change", event.detail.value, event);
   }
 }

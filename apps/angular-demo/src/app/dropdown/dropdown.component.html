@@ -3,6 +3,8 @@
 <goa-dropdown
   name="colors"
   placeholder="Select a user"
+  leadingIcon="alarm"
+  native="true"
   [value]="selectedColor"
   (_change)="selectColor($event)"
 >
@@ -105,13 +107,14 @@
 <div>Selected Color: {{ reactiveFormCtrl.value }}</div>
 <goa-dropdown
   goaValue
-  name="boundColor"
+  native="true"
+  name="boundColors2"
   [formControl]="reactiveFormCtrl"
   [value]="reactiveFormCtrl.value"
   placeholder="Select a color"
 >
   <goa-dropdown-item
-    name="colors"
+    name="boundColors2"
     *ngFor="let color of colors"
     [value]="color"
     [label]="color"
