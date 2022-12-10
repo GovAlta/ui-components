@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
 import GoADropdown from './Dropdown.svelte';
-import { deleteContext, getContext } from '../../common/context-store';
+import GoADropdownWrapper from './DropdownWrapper.test.svelte';
 
 afterEach(() => {
-  deleteContext("favcolor")
   cleanup()
   jest.clearAllMocks();
 });
@@ -14,12 +13,7 @@ describe('GoADropdown', () => {
   it('dropdown should render', async () => {
     const name = 'favcolor';
     const items = ["red", "blue", "orange"];
-    const result = render(GoADropdown, { name, value: 'orange' });
-
-    const ctx = getContext(name)
-    for (const item of items) {
-      ctx.notify({ type: "bind", name, value: item })
-    }
+    const result = render(GoADropdownWrapper, { name, value: 'orange', items });
 
     const dropdown = result.queryByTestId("favcolor-dropdown");
     const inputField = dropdown.querySelector('goa-input');
@@ -40,12 +34,7 @@ describe('GoADropdown', () => {
     it('has a preselected value', async () => {
       const name = 'preselected-color';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, { name, value: 'orange' });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
+      const result = render(GoADropdownWrapper, { name, value: 'orange', items });
 
       const dropdown = result.queryByTestId(`${name}-dropdown`);
       const inputField = dropdown.querySelector('goa-input');
@@ -78,12 +67,7 @@ describe('GoADropdown', () => {
       const onClick = jest.fn();
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, { name });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
+      const result = render(GoADropdownWrapper, { name, items });
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
@@ -114,15 +98,11 @@ describe('GoADropdown', () => {
     it('can be enabled', async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
+      const result = render(GoADropdownWrapper, {
+        name,
         disabled: false,
+        items,
       });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
@@ -142,15 +122,11 @@ describe('GoADropdown', () => {
     it('can be disabled', async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name,
         disabled: true,
+        items,
       });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
@@ -174,15 +150,11 @@ describe('GoADropdown', () => {
     it('does not show an error state', async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
+      const result = render(GoADropdownWrapper, {
         name,
         error: false,
+        items,
       });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
@@ -196,16 +168,10 @@ describe('GoADropdown', () => {
 
     it('shows an error state', async () => {
       const name = 'favcolor';
-      const items = ["red", "blue", "orange"];
       const result = render(GoADropdown, {
-        name: 'favcolor',
+        name,
         error: true,
       });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown.querySelector('goa-input');
@@ -223,14 +189,7 @@ describe('GoADropdown', () => {
     it('does not show a leading icon', async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
-      });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
+      const result = render(GoADropdownWrapper, { name, items });
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
@@ -240,15 +199,11 @@ describe('GoADropdown', () => {
     it('shows a leading icon', async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
+      const result = render(GoADropdownWrapper, {
+        name,
         leadingicon: "add",
+        items,
       });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
@@ -260,14 +215,7 @@ describe('GoADropdown', () => {
     it('does not show a placeholder', async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
-      });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
+      const result = render(GoADropdownWrapper, { name, items });
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
@@ -277,15 +225,11 @@ describe('GoADropdown', () => {
     it('shows a placeholder', async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
+      const result = render(GoADropdownWrapper, {
+        name,
         placeholder: "some text",
+        items,
       });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
@@ -297,14 +241,7 @@ describe('GoADropdown', () => {
     it("dropdown should have the default width", async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "pink"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
-      });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
+      const result = render(GoADropdownWrapper, { name, items });
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
@@ -318,15 +255,11 @@ describe('GoADropdown', () => {
     it("uses the non-percent width supplied", async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
+      const result = render(GoADropdownWrapper, {
+        name,
         width: "500px",
+        items,
       });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
@@ -340,15 +273,11 @@ describe('GoADropdown', () => {
     it("sets the input width to 100% when percent value used", async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
         width: "100%",
       });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
@@ -364,14 +293,7 @@ describe('GoADropdown', () => {
     it("uses the default max height", async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "pink"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
-      });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
+      const result = render(GoADropdownWrapper, { name, items });
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
@@ -386,15 +308,11 @@ describe('GoADropdown', () => {
     it("uses the height when supplied", async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
-        name: 'favcolor',
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
         maxheight: "400px",
       });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const input = dropdown.querySelector('goa-input');
@@ -411,16 +329,12 @@ describe('GoADropdown', () => {
     it("show the aria label", async () => {
       const name = 'favcolor3';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdown, {
-        name: 'favcolor3',
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
         value: "orange",
         arialabel: 'Favourite Color',
       });
-
-      const ctx = getContext(name)
-      for (const item of items) {
-        ctx.notify({ type: "bind", name, value: item })
-      }
 
       const dropdown = result.queryByTestId("favcolor3-dropdown");
       const input = dropdown.querySelector('goa-input');
@@ -468,7 +382,7 @@ describe('GoADropdown', () => {
     for (const event of [space, enter]) {
       it(`should show the dropdown menu on <${event.key}>`, async () => {
 
-        const user = {};
+        // const user = {};
 
         const result = render(GoADropdown, { name: 'favcolor', items, value: "red" });
         // const dropdown = result.queryByTestId("favcolor-dropdown");
@@ -541,12 +455,13 @@ describe('GoADropdown', () => {
 describe("NativeSelect", () => {
   it("renders children", async () => {
     const name = "native-select"
-    const { container } = render(GoADropdown, { name, value: "green", native: true })
-
-    const ctx = getContext(name)
-    ctx.notify({ type: "bind", name, value: "red" })
-    ctx.notify({ type: "bind", name, value: "green" })
-    ctx.notify({ type: "bind", name, value: "blue" })
+    const items = ["red", "green", "blue"];
+    const { container } = render(GoADropdownWrapper, { 
+      name, 
+      value: "green", 
+      native: true, 
+      items,
+    })
 
     await waitFor(() => {
       const options = container.querySelectorAll("select option")
@@ -556,12 +471,8 @@ describe("NativeSelect", () => {
 
   it("dispatches the event on selection", async () => {
     const name = "event-selection";
-    const { container } = render(GoADropdown, { name, value: "green", native: true })
-
-    const ctx = getContext(name)
-    ctx.notify({ type: "bind", name, value: "red" })
-    ctx.notify({ type: "bind", name, value: "green" })
-    ctx.notify({ type: "bind", name, value: "blue" })
+    const items = ["red", "green", "blue"];
+    const { container } = render(GoADropdownWrapper, { name, value: "green", native: true, items })
 
     const onChange = jest.fn();
     const select = container.querySelector("select")
@@ -598,30 +509,22 @@ describe("NativeSelect", () => {
 
   it("shows the label text when provided", async () => {
     const name = "custom-label"
-    const { container } = render(GoADropdown, { name, value: "green", native: true })
-
-    const ctx = getContext(name)
-    ctx.notify({ type: "bind", name, value: "red", label: "Red" })
-    ctx.notify({ type: "bind", name, value: "green", label: "Green" })
-    ctx.notify({ type: "bind", name, value: "blue", label: "Blue" })
+    const items = ["red", "green", "blue"];
+    const { container } = render(GoADropdownWrapper, { name, value: "green", native: true, items })
 
     await waitFor(() => {
       const options = container.querySelectorAll("select option")
       expect(options.length).toBe(3)
-      expect(options[0].textContent.trim()).toBe("Red")
-      expect(options[1].textContent.trim()).toBe("Green")
-      expect(options[2].textContent.trim()).toBe("Blue")
+      expect(options[0].textContent.trim()).toBe("red")
+      expect(options[1].textContent.trim()).toBe("green")
+      expect(options[2].textContent.trim()).toBe("blue")
     });
   })
 
   it("shows the value when no lable is provided", async () => {
     const name = "value-label"
-    const { container } = render(GoADropdown, { name, value: "green", native: true })
-
-    const ctx = getContext(name)
-    ctx.notify({ type: "bind", name, value: "red" })
-    ctx.notify({ type: "bind", name, value: "green" })
-    ctx.notify({ type: "bind", name, value: "blue" })
+    const items = ["red", "green", "blue"];
+    const { container } = render(GoADropdownWrapper, { name, value: "green", native: true, items })
 
     await waitFor(() => {
       const options = container.querySelectorAll("select option")
@@ -634,12 +537,8 @@ describe("NativeSelect", () => {
 
   it("renders disabled state", async () => {
     const name = "error-label"
-    const { container } = render(GoADropdown, { name, native: true, disabled: true })
-
-    const ctx = getContext(name)
-    ctx.notify({ type: "bind", name, value: "red" })
-    ctx.notify({ type: "bind", name, value: "green" })
-    ctx.notify({ type: "bind", name, value: "blue" })
+    const items = ["red", "green", "blue"];
+    const { container } = render(GoADropdownWrapper, { name, native: true, disabled: true, items })
 
     await waitFor(() => {
       const el = container.querySelector("select:disabled")
@@ -649,26 +548,12 @@ describe("NativeSelect", () => {
 
   it("renders an error state", async () => {
     const name = "error-label"
-    const { container } = render(GoADropdown, { name, native: true, error: true })
-
-    const ctx = getContext(name)
-    ctx.notify({ type: "bind", name, value: "red" })
-    ctx.notify({ type: "bind", name, value: "green" })
-    ctx.notify({ type: "bind", name, value: "blue" })
+    const items = ["red", "green", "blue"];
+    const { container } = render(GoADropdownWrapper, { name, native: true, error: true, items })
 
     await waitFor(() => {
       const el = container.querySelector("select.error")
       expect(el).toBeTruthy();
     });
-  })
-
-  it("shows an error when no name is provided", async () => {
-    const mock = jest.spyOn(console, "warn").mockImplementation();
-    render(GoADropdown, { value: "green", native: true })
-
-    await waitFor(() => {
-      expect(console.warn["mock"].calls.length).toBeGreaterThan(0);
-    })
-    mock.mockRestore();
   })
 })

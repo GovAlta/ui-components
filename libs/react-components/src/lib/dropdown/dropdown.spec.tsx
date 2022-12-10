@@ -21,7 +21,7 @@ describe("GoADropdown", () => {
         mr="m"
         mb="l"
         ml="xl"
-        onChange={() => { }}
+        onChange={() => {}}
       >
         <GoADropdownOption name="favColor" label="Red" value="red" />
         <GoADropdownOption name="favColor" label="Blue" value="blue" />

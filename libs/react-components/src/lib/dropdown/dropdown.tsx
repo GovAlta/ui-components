@@ -13,11 +13,11 @@ interface WCProps extends Margins {
   leadingicon?: string;
   maxheight?: string;
   multiselect?: boolean;
-  name: string;
+  name?: string;
   native?: boolean;
   placeholder?: string;
   testid?: string;
-  value: string;
+  value?: string;
   width?: string;
 }
 
@@ -32,8 +32,8 @@ declare global {
 }
 
 interface Props extends Margins {
-  name: string;
-  value: string[] | string;
+  name?: string;
+  value?: string[] | string;
   onChange: (name: string, values: string[] | string) => void;
 
   // optional
@@ -51,7 +51,10 @@ interface Props extends Margins {
   width?: string;
 }
 
-function stringify(value: string | string[]): string {
+function stringify(value: string | string[] | undefined): string {
+  if (typeof value === "undefined") {
+    return "";
+  }
   if (typeof value === "string") {
     return value;
   }

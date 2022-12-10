@@ -1,15 +1,17 @@
 <svelte:options tag="goa-dropdown" />
 
 <script lang="ts">
-  import { deleteContext, ContextStore, getContext } from "../../common/context-store";
   import type { GoAIconType } from "../icon/Icon.svelte";
-  import type { BindMessage, Option } from "./types";
   import type { Spacing } from "../../common/styling";
   import { onDestroy, onMount, tick } from "svelte";
-  import { toBoolean, validateRequired } from "../../common/utils";
+  import { toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
 
-  const MAX_HEIGHT = "276px";
+  interface Option {
+    label: string;
+    value: string;
+    selected: boolean;
+  }
 
   // Props
 
@@ -17,16 +19,13 @@
   export let arialabel: string = "";
   export let value: string = "";
   export let leadingicon: GoAIconType = null;
-  export let maxheight: string = MAX_HEIGHT;
+  export let maxheight: string = "276px";
   export let placeholder: string = "";
   export let width: string = "";
   export let disabled: string = "false";
   export let error: string = "false";
   export let multiselect: string = "false";
-
   export let native: string = "false";
-
-  // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -39,55 +38,92 @@
 
   // Private
   let _values: string[] = [];
-  let options: Option[] = [];
-  let selectedLabel: string = "";
-  let isMenuVisible = false;
-  let highlightedIndex: number = 0;
-  let maxLetterCount: number = 0;
-  let computedWidth: string;
+  let _options: Option[] = [];
+  let _selectedLabel: string = "";
+  let _isMenuVisible = false;
+  let _highlightedIndex: number = 0;
+  let _computedWidth: string;
 
-  let el: HTMLElement;
-  let menuEl: HTMLElement;
-  let ctx: ContextStore;
+  let _el: HTMLElement;
+  let _menuEl: HTMLElement;
+  let _selectEl: HTMLSelectElement;
 
-  let isBound = false;
-  $: {
-    (async () => {
-      await tick();
-      if (name && el && !isBound) {
-        isBound = true;
-        if (!_native) {
-          addKeyboardEventListeners();
-        }
-        parseValues();
-        bindContext();
-      }
-    })();
-  }
-
-  onMount(() => {
-    validateRequired("GoADropdown", { name });
+  onMount(async () => {
+    await tick();
+    _values = parseValues();
+    _options = getOptions();
+    if (!_native) {
+      _computedWidth = getCustomDropdownWidth(_options);
+      addKeyboardEventListeners();
+      setHighlightedIndexToSelected();
+    }
   });
 
   onDestroy(() => {
     removeKeyboardEventListeners();
-    deleteContext(name);
   });
 
   // Functions
 
+  function getChildren(): Element[] {
+    const slot = _el.querySelector("slot") as HTMLSlotElement;
+    if (slot) {
+      // default
+      return slot.assignedElements();
+    }
+    // unit tests
+    const el = _native ? _selectEl : _el;
+    return [...el.children] as Element[];
+  }
+
+
+  // Create a list of the options based on the children within the slot
+  // The children don't have to be goa-dropdown-item elements. Any child element
+  // work as long as it has a value and label content
+  function getOptions(): Option[] {
+    const children = getChildren();
+    return children.map((el: HTMLElement) => {
+      const option = el as unknown as Option
+      const value = el.getAttribute("value") || option.value;
+      const label = 
+        el.getAttribute("label") 
+        || option.label 
+        || value;
+      const selected = _values.includes(value);
+      if (selected) {
+        _selectedLabel = label;
+        _values = [value];
+      }
+      return { selected, value, label};
+    });
+  }
+
+  // compute the required width to enure all children fit
+  function getCustomDropdownWidth(options: Option[]) {
+    let width: string;
+    let maxCount = 0;
+    options.forEach((option: Option) => {
+      const label = option.label || option.value || "";
+      if (!width && maxCount < label.length) {
+        maxCount = label.length;
+        width = `${Math.max(20, maxCount + 12)}ch`;
+      }
+    });
+    return width;
+  }
+
   function addKeyboardEventListeners() {
-    el.addEventListener("focus", onFocus, true);
-    el.addEventListener("blur", onBlur, true);
+    _el.addEventListener("focus", onFocus, true);
+    _el.addEventListener("blur", onBlur, true);
   }
 
   function removeKeyboardEventListeners() {
-    el.removeEventListener("focus", onFocus, true);
-    el.removeEventListener("blur", onBlur, true);
+    _el.removeEventListener("focus", onFocus, true);
+    _el.removeEventListener("blur", onBlur, true);
   }
 
+  // parse and convert values to strings to avoid later type comparison issues
   function parseValues() {
-    // parse and convert values to strings to avoid later type comparison issues
     let rawValue: string[];
     try {
       rawValue = JSON.parse(value || "[]");
@@ -96,76 +132,54 @@
     }
     const rawValues = typeof rawValue === "object" ? rawValue : [rawValue];
     // convert all values to strings to avoid later type comparison issues
-    _values = rawValues.map((val: unknown) => `${val}`);
-  }
-
-  function bindContext() {
-    ctx = getContext(name);
-    ctx.subscribe(data => {
-      const _data = data as BindMessage;
-      const selected = _values.includes(_data.value);
-      const label = _data.label || _data.value;
-
-      options = [...options, { ..._data, selected }];
-      if (selected) {
-        selectedLabel = label;
-      }
-      if (!width && maxLetterCount < label.length) {
-        maxLetterCount = label.length;
-        computedWidth = `${Math.max(20, maxLetterCount + 12)}ch`;
-      }
-      setHighlightedIndexToSelected();
-    });
+    return rawValues.map((val: unknown) => `${val}`);
   }
 
   async function showMenu() {
-    if (_disabled || isMenuVisible) {
+    if (_disabled || _isMenuVisible) {
       return;
     }
-    isMenuVisible = true;
+    _isMenuVisible = true;
 
     await tick();
 
     // hide menu on blur
-    menuEl.addEventListener("blur", closeMenu);
+    _menuEl.addEventListener("blur", closeMenu);
 
     // bind up/down arrows to navigate options
-    menuEl.addEventListener("mouseover", onHighlight);
+    _menuEl.addEventListener("mouseover", onHighlight);
   }
 
   function closeMenu() {
-    menuEl.removeEventListener("blur", closeMenu);
-    menuEl.removeEventListener("mouseover", onHighlight);
+    _menuEl.removeEventListener("blur", closeMenu);
+    _menuEl.removeEventListener("mouseover", onHighlight);
     setHighlightedIndexToSelected();
-    isMenuVisible = false;
+    _isMenuVisible = false;
   }
 
   function setHighlightedIndexToSelected() {
-    highlightedIndex = options.findIndex(option => _values.includes(option.value));
+    _highlightedIndex = _options.findIndex(option => _values.includes(option.value));
   }
 
   // Event handlers
 
-  function onSelect(value: string, label: string, close: boolean) {
+  /**
+  * @property value the selected value
+  */
+  function onSelect(value: string, label: string, close?: boolean) {
     if (_disabled) return;
-    selectedLabel = label;
+    _selectedLabel = label;
+
+    let detail: Record<string, unknown>;
     if (_multiselect) {
       _values.push(value);
-      el.dispatchEvent(
-        new CustomEvent("_change", {
-          composed: true,
-          detail: { name, values: _values },
-        }),
-      );
+      detail = { name, values: _values };
     } else {
       _values = [value];
-      el.dispatchEvent(
-        new CustomEvent("_change", {
-          composed: true,
-          detail: { name, value },
-        }),
-      );
+      detail = { name, value };
     }
+
+    _el.dispatchEvent(new CustomEvent("_change", { composed: true, detail }));
     if (close) {
       closeMenu();
     }
@@ -175,16 +189,16 @@
     switch (e.key) {
       case " ":
       case "Enter":
-        isMenuVisible ? closeMenu() : showMenu();
+        _isMenuVisible ? closeMenu() : showMenu();
         e.preventDefault();
         break;
       case "Escape":
-        isMenuVisible && closeMenu();
+        _isMenuVisible && closeMenu();
         e.preventDefault();
         break;
       case "ArrowDown":
         if (e.altKey) {
-          isMenuVisible ? closeMenu() : showMenu();
+          _isMenuVisible ? closeMenu() : showMenu();
           break;
         }
         _handleArrowDown();
@@ -192,7 +206,7 @@
         break;
       case "ArrowUp":
         if (e.altKey) {
-          isMenuVisible ? closeMenu() : showMenu();
+          _isMenuVisible ? closeMenu() : showMenu();
           break;
         }
         _handleArrowUp();
@@ -202,37 +216,45 @@
   };
 
   function _handleArrowDown() {
-    if (highlightedIndex < options.length - 1) {
-      highlightedIndex++;
-      onSelect(options[highlightedIndex].value, options[highlightedIndex].label, false);
+    if (_highlightedIndex < _options.length - 1) {
+      _highlightedIndex++;
+      onSelect(
+        _options[_highlightedIndex].value,
+        _options[_highlightedIndex].label,
+        false,
+      );
     }
   }
 
   function _handleArrowUp() {
-    if (highlightedIndex > 0) {
-      highlightedIndex--;
-      onSelect(options[highlightedIndex].value, options[highlightedIndex].label, false);
+    if (_highlightedIndex > 0) {
+      _highlightedIndex--;
+      onSelect(
+        _options[_highlightedIndex].value,
+        _options[_highlightedIndex].label,
+        false,
+      );
     }
   }
 
   // add required bindings to component
   function onFocus() {
-    el.addEventListener("keydown", onInputKeyDown);
+    _el.addEventListener("keydown", onInputKeyDown);
   }
 
   // remove all bindings from component
   function onBlur() {
-    el.removeEventListener("keydown", onInputKeyDown);
+    _el.removeEventListener("keydown", onInputKeyDown);
   }
 
   function onHighlight(e: Event) {
-    highlightedIndex = Number((e.target as HTMLElement).dataset.index);
+    _highlightedIndex = Number((e.target as HTMLElement).dataset.index);
   }
 
   function onNativeSelect(e: Event) {
     const target = e.currentTarget as HTMLSelectElement;
-    const option = options[target.selectedIndex];
-    onSelect(option.value, option.label, false);
+    const option = _options[target.selectedIndex];
+    onSelect(option.value, option.label);
   }
 </script>
 
@@ -243,27 +265,31 @@
   class:dropdown-native={_native}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
-    --width: ${width || computedWidth}
+    --width: ${width || _computedWidth}
   `}
-  bind:this={el}
+  bind:this={_el}
 >
   {#if _native}
     <select
+      bind:this={_selectEl}
       on:change={onNativeSelect}
       disabled={_disabled}
       class:error={_error}
       aria-label={arialabel || name}
     >
-      {#each options as option (option.value)}
+     <slot />
+      {#each _options as option, index (index)}
         <option
-          selected={option.value === value}
+          selected={option.selected}
           value={option.value}
-          aria-label={option.label || option.value}>{option.label || option.value}</option
+          aria-label={option.label}
         >
+          {option.label}
+        </option>
       {/each}
     </select>
   {:else}
-    {#if isMenuVisible}
+    {#if _isMenuVisible}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
         data-testid={`${name}-dropdown-background`}
@@ -271,6 +297,8 @@
         on:click={closeMenu}
       />
     {/if}
+
+    <slot />
 
     <!-- readonly input  -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -281,29 +309,29 @@
       {leadingicon}
       {placeholder}
       aria-controls="menu"
-      aria-expanded={isMenuVisible}
+      aria-expanded={_isMenuVisible}
       aria-label={arialabel || name}
       data-testid={`${name}-dropdown-input`}
       readonly
       role="combobox"
       trailingicon="chevron-down"
       type="text"
-      value={selectedLabel}
+      value={_selectedLabel}
       width="100%"
     />
     <!-- list and filter -->
     <ul
       id="menu"
       role="listbox"
-      aria-activedescendant={selectedLabel}
+      aria-activedescendant={_selectedLabel}
       data-testid="dropdown-menu"
-      bind:this={menuEl}
+      bind:this={_menuEl}
       tabindex="0"
       class="dropdown-list"
-      class:dropdown-active={isMenuVisible}
+      class:dropdown-active={_isMenuVisible}
       style={`overflow-y: auto; max-height: ${maxheight}`}
     >
-      {#each options as option, index}
+      {#each _options as option, index (index)}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <li
           id={option.label}
@@ -312,17 +340,17 @@
           aria-selected={_values.includes(option.value) ? "true" : "false"}
           class="dropdown-option"
           class:dropdown-option--disabled={false}
-          class:dropdown-option--tabbed={index === highlightedIndex}
+          class:dropdown-option--tabbed={index === _highlightedIndex}
           class:dropdown-option--selected={_values.includes(option.value)}
           data-testid={`dropdown-item-${option.value}`}
           data-index={index}
+          data-value={option.value}
           style={`display: ${false ? "none" : "block"}`}
           on:click={() => onSelect(option.value, option.label, true)}
         >
           {option.label || option.value}
         </li>
       {/each}
-      <slot />
     </ul>
   {/if}
 </div>
@@ -457,7 +485,7 @@
     appearance: none;
     padding: calc(var(--input-padding) + 2px);
     padding-left: 0.5rem;
-    padding-right: 2rem;
+    padding-right: 3rem;
     outline: none;
     width: 100%;
   }
