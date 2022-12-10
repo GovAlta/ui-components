@@ -13,7 +13,7 @@ interface WCProps extends Margins {
   leadingicon?: string;
   maxheight?: string;
   multiselect?: boolean;
-  name: string;
+  name?: string;
   native?: boolean;
   placeholder?: string;
   testid?: string;
@@ -32,7 +32,7 @@ declare global {
 }
 
 interface Props extends Margins {
-  name: string;
+  name?: string;
   value: string[] | string;
   onChange: (name: string, values: string[] | string) => void;
 

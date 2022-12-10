@@ -1,37 +1,31 @@
-import '@testing-library/jest-dom';
-import { render, fireEvent, cleanup, waitFor } from '@testing-library/svelte';
-import { getContext } from '../../common/context-store';
-import GoARadioGroup from './RadioGroup.svelte';
+import "@testing-library/jest-dom";
+import { fireEvent, render, waitFor } from "@testing-library/svelte";
+import GoARadioGroup from "./RadioGroup.svelte";
+import GoARadioGroupWrapper from "./RadioGroupWrapper.test.svelte";
 
 afterEach(() => {
-  cleanup();
+  // cleanup();
   jest.clearAllMocks();
 });
 
 describe("GoARadioGroup Component", () => {
   it("should render", async () => {
-    const name = 'favcolor';
+    const name = "favcolor";
     const mock = jest.spyOn(console, "error").mockImplementation();
     const items = ["red", "blue", "orange"];
-    const result = render(GoARadioGroup, {
+    const result = render(GoARadioGroupWrapper, {
       name,
-      value: 'orange',
-      testid: 'test-id',
+      value: "orange",
+      testid: "test-id",
+      items,
     });
-
-    const ctx = getContext(name)
-    for (const item of items) {
-      ctx.notify({ type: "bind", name, value: item })
-    }
 
     await waitFor(() => {
       for (const item of items) {
-        const radio = result.queryByTestId(`radio-option-${item}`);
-        expect(radio).toBeTruthy();
-        const input = radio.querySelector("input");
-        expect(input).toHaveAttribute("name", "favcolor");
+        const label = result.queryByTestId(`radio-option-${item}`);
+        expect(label).toBeTruthy()
       }
-    });
+    })
 
     await waitFor(() => {
       expect(console.error["mock"].calls.length).toBe(0);
@@ -40,18 +34,14 @@ describe("GoARadioGroup Component", () => {
   });
 
   it("should handle the events", async () => {
-    const name = 'favcolor';
+    const name = "favcolor";
     const items = ["red", "blue", "orange"];
-    const result = render(GoARadioGroup, {
+    const result = render(GoARadioGroupWrapper, {
       name,
-      value: 'orange',
-      testid: 'test-id',
+      value: "orange",
+      testid: "test-id",
+      items,
     });
-
-    const ctx = getContext(name)
-    for (const item of items) {
-      ctx.notify({ type: "bind", name, value: item })
-    }
 
     const radioGroup = await result.findByTestId("test-id");
 
@@ -71,7 +61,6 @@ describe("GoARadioGroup Component", () => {
       expect(orange.checked).toBe(false);
     });
   });
-
 
   describe("Margins", () => {
     it(`should add the margin`, async () => {
@@ -94,3 +83,4 @@ describe("GoARadioGroup Component", () => {
     });
   });
 });
+

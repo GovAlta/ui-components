@@ -1,11 +1,33 @@
 <h1>Dropdown</h1>
-<select>
-  <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
-</select>
 
-<goa-dropdown name="colors1" native="true">
+<goa-dropdown name="colors1" native="true" placeholder="Select..." value="">
+  <option value="red">Red</option>
+  <option value="green">Green</option>
+  <option value="blue">Blue</option>
+</goa-dropdown>
+
+<goa-dropdown name="colors1" native="true" placeholder="Select..." value="">
+  <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+</goa-dropdown>
+
+<goa-dropdown name="colors1" native="true" placeholder="Select..." value="">
   <goa-dropdown-item
-    name="colors1"
+    *ngFor="let color of colors"
+    [value]="color"
+    [label]="color"
+  ></goa-dropdown-item>
+</goa-dropdown>
+
+<goa-dropdown name="colors1" placeholder="Select">
+  <goa-dropdown-item
+    *ngFor="let color of colors"
+    [value]="color"
+    [label]="color"
+  ></goa-dropdown-item>
+</goa-dropdown>
+
+<goa-dropdown name="colors1" value="red">
+  <goa-dropdown-item
     *ngFor="let color of colors"
     [value]="color"
     [label]="color"
