@@ -83,7 +83,7 @@
     background-color: var(--color-gray-100);
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1.5rem;
+    padding: 0.25rem 1.5rem;
   }
     @media (max-width: 640px) {
       .goa-official-site-header {
@@ -104,7 +104,7 @@
 
   .service-type {
     font-weight: bold;
-    padding: 0.25rem;
+    padding: 0.125rem 0.25rem;
     display: flex;
     margin-right: 1rem;
     line-height: initial;
