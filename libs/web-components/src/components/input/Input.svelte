@@ -253,6 +253,7 @@
 
   input[type="text"],
   input[type="date"],
+  input[type="time"],
   input[type="datetime-local"],
   input[type="number"] {
     font-family: var(--font-family);
