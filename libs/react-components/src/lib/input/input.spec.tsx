@@ -3,6 +3,7 @@ import { render } from "@testing-library/react";
 import { fireEvent, screen } from "@testing-library/dom";
 import { GoAInputText, InputProps } from "./input";
 import { GoAIconType } from "../icon/icon";
+import React from "react";
 
 const noop = () => {};
 const testId = "test-id";
@@ -34,6 +35,8 @@ describe("Input", () => {
       mr: "m",
       mb: "l",
       ml: "xl",
+      leadingContent: "$",
+      trailingContent: "items",
       onTrailingIconClick: noop,
     };
 
@@ -59,6 +62,12 @@ describe("Input", () => {
     expect(input.getAttribute("mr")).toBe("m");
     expect(input.getAttribute("mb")).toBe("l");
     expect(input.getAttribute("ml")).toBe("xl");
+    expect(
+      input.querySelector("[slot='leadingContent']").textContent
+    ).toContain("$");
+    expect(
+      input.querySelector("[slot='trailingContent']").textContent
+    ).toContain("items");
     expect(input.getAttribute("handletrailingiconclick")).toBeTruthy();
   });
 

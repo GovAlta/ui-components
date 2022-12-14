@@ -86,6 +86,8 @@ interface BaseProps extends Margins {
   suffix?: string;
   testId?: string;
   ariaLabel?: string;
+  leadingContent?: React.ReactNode;
+  trailingContent?: React.ReactNode;
 }
 
 type OnChange = (name: string, value: string) => void;
@@ -141,6 +143,8 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   mr,
   mb,
   ml,
+  leadingContent,
+  trailingContent,
   onTrailingIconClick,
   onChange,
 }) => {
@@ -195,7 +199,10 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
       mb={mb}
       ml={ml}
       handletrailingiconclick={!!onTrailingIconClick}
-    />
+    >
+      {leadingContent && <div slot="leadingContent">{leadingContent}</div>}
+      {trailingContent && <div slot="trailingContent">{trailingContent}</div>}
+    </goa-input>
   );
 };
 

@@ -15,6 +15,7 @@ import {
   GoAInputRange,
   GoAFormItem,
   GoACallout,
+  GoABadge,
 } from "@abgov/react-components";
 import { useState, useEffect } from "react";
 import {
@@ -147,12 +148,20 @@ import { Meta, Story } from "@storybook/addon-docs";
   <Prop
     name="prefix"
     type="string"
-    description="Text that comes before the input"
+    description={
+      <>
+        Text that comes before the input. <strong>Deprecated</strong>
+      </>
+    }
   />
   <Prop
     name="suffix"
     type="string"
-    description="Text that comes after the input"
+    description={
+      <>
+        Text that comes after the input. <strong>Deprecated</strong>
+      </>
+    }
   />
   <Prop
     name="autoCapitalize"
@@ -165,6 +174,34 @@ import { Meta, Story } from "@storybook/addon-docs";
     lang="angular"
     type="CustomEvent"
     description="onclick function invoked when trailing icon is clicked"
+  />
+  <Prop
+    name="leadingContent"
+    type="slot"
+    lang="angular"
+    defaultValue=""
+    description="Sets the content to the left of the input field"
+  />
+  <Prop
+    name="leadingContent"
+    type="ReactNode"
+    lang="react"
+    defaultValue=""
+    description="Sets the content to the left of the input field"
+  />
+  <Prop
+    name="trailingContent"
+    type="slot"
+    lang="angular"
+    defaultValue=""
+    description="Sets the content to the right of the input field"
+  />
+  <Prop
+    name="trailingContent"
+    type="ReactNode"
+    lang="react"
+    defaultValue=""
+    description="Sets the content to the right of the input field"
   />
   <Prop
     name="onChange"
@@ -873,10 +910,14 @@ export const WidthTemplate = ({ width }) => {
   </Tab>
 </Tabs>
 
-#### Prefix and suffix
+#### Prefix and suffix **(Deprecated)**
 
 <Story name="Prefix and suffix">
   <>
+    <GoACallout type="information">
+      Use of prefix and suffix properties are deprecated. Instead use
+      leadingContent and trailingContent
+    </GoACallout>
     <h5>Prefix</h5>
     <GoAInput name="input" prefix="$" onChange={() => {}} />
     <h5>Suffix</h5>
@@ -983,6 +1024,62 @@ export const AutocapitalizeTemplate = () => {
           </>
         );
     `}
+    />
+  </Tab>
+</Tabs>
+
+#### LeadingContent and TrailingContent
+
+<Story name="LeadingContent and TrailingContent">
+  <>
+    <h5>Leading Content</h5>
+    <GoAInput
+      name="input"
+      value=""
+      leadingContent={<GoABadge type="success" icon />}
+      onChange={noop}
+    />
+    <h5>Trailing Content</h5>
+    <GoAInput name="input" value="" trailingContent="items" onChange={noop} />
+    <h5>Leading and Trailing Content</h5>
+    <GoAInput
+      name="input"
+      value=""
+      leadingContent={
+        <div style={{ width: "50px", textAlign: "center" }}>$</div>
+      }
+      trailingContent="SomeText"
+      onChange={noop}
+    />
+  </>
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-input name="input">
+          <div slot="leadingContent"><goa-badge type="success" icon></goa-badge></div>
+        </goa-input>
+        <goa-input name="input">
+          <div slot="trailingContent">items</div>
+        </goa-input>
+        <goa-input name="input">
+          <div slot="leadingcontent"><div style={{ width:"50px", text-align: "center"}}>$</div></div>
+          <div slot="trailingContent">items</div>
+        </goa-input>
+      `}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        <GoAInput name="input" value="" leadingContent={<GoABadge type="success" icon />} onChange={() => {}} />
+        <GoAInput name="input" value="" trailingContent="items" onChange={() => {}} />
+        <GoAInput name="input" value="" leadingContent={<div style={{ width:"50px", textAlign: "center"}}>$</div>} trailingContent="items" onChange={() => {}} />
+      `}
+      lang="tsx"
     />
   </Tab>
 </Tabs>
