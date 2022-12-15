@@ -2,8 +2,11 @@
 
 <!-- Script -->
 <script lang="ts">
+
   export let heading: string;
   export let backgroundurl: string;
+  export let minheight: string = "600px";
+
 </script>
 
 <!-- HTML -->
@@ -15,7 +18,8 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  "
+    min-height: {minheight}
+    "
 >
   <goa-page-block width="full">
     <h1>{heading}</h1>
@@ -37,7 +41,6 @@
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-    min-height: 600px;
     border-bottom: 8px solid var(--goa-color-brand);
     color: var(--color-white);
     background-position: center center;

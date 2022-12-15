@@ -47,4 +47,29 @@ describe("GoAHeroBanner", () => {
     const el = baseElement.querySelector("goa-hero-banner goa-button");
     expect(el.textContent).toBe("Submit");
   });
+
+  describe("Min Height", () => {
+    it("uses the default min height", async () => {
+      const { baseElement } = render(
+        <GoAHeroBanner
+          heading="Upgrading our bitumen"
+          backgroundUrl="some-bg.png"
+        />
+      );
+      const el = baseElement.querySelector("goa-hero-banner");
+      expect(el.getAttribute("minheight")).toBeNull();
+    });
+
+    it("uses the min height when supplied", async () => {
+      const { baseElement } = render(
+        <GoAHeroBanner
+          heading="Upgrading our bitumen"
+          backgroundUrl="some-bg.png"
+          minHeight="700px"
+        />
+      );
+      const el = baseElement.querySelector("goa-hero-banner");
+      expect(el.getAttribute("minheight")).toBe("700px");
+    });
+  });
 });
