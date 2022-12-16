@@ -16,6 +16,7 @@ export * from "./components/circular-progress/CircularProgress.svelte";
 export * from "./components/container/Container.svelte";
 export * from "./components/divider/Divider.svelte";
 export * from "./components/dropdown/Dropdown.svelte";
+export * from "./components/dropdown/DropdownItem.svelte";
 export * from "./components/focus-trap/FocusTrap.svelte";
 export * from "./components/footer/Footer.svelte";
 export * from "./components/footer-meta-section/FooterMetaSection.svelte";

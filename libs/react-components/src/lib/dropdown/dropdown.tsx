@@ -2,8 +2,6 @@ import React, { FC, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconType } from "../icon/icon";
 
-export * from "./dropdown-option";
-
 interface WCProps extends Margins {
   ref: React.MutableRefObject<HTMLElement | null>;
   arialabel?: string;

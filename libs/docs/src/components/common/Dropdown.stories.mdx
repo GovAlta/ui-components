@@ -9,7 +9,7 @@ import {
 } from "@abgov/shared/storybook-common";
 import {
   GoADropdown,
-  GoADropdownOption,
+  GoADropdownItem,
   GoACallout,
 } from "@abgov/react-components";
 import { useState } from "react";
@@ -144,9 +144,9 @@ export const Template = (args) => {
   }
   return (
     <GoADropdown {...args} value={value} onChange={onChange}>
-      <GoADropdownOption value="red" label="Red" />
-      <GoADropdownOption value="green" label="Green" />
-      <GoADropdownOption value="blue" label="Blue" />
+      <GoADropdownItem value="red" label="Item>
+      <GoADropdownItem value="green" label="GrItem>
+      <GoADropdownItem value="blue" label="BItem>
     </GoADropdown>
   );
 };
@@ -217,9 +217,9 @@ export const Template = (args) => {
         }
         return (
           <GoADropdown name="colors" value={value} onChange={onChange}>
-            <GoADropdownOption value="red" label="Red" />
-            <GoADropdownOption value="green" label="Green" />
-            <GoADropdownOption value="blue" label="Blue" />
+            <GoADropdownItem value="red" label="Item>
+            <GoADropdownItem value="green" label="GrItem>
+            <GoADropdownItem value="blue" label="BItem>
           </GoADropdown>
         )
       `}
@@ -263,9 +263,9 @@ export const Template = (args) => {
       lang="tsx"
       code={`
         <GoADropdown name="colors" error={true} value={value} onChange={() => {}}>
-          <GoADropdownOption value="red" label="Red" />
-          <GoADropdownOption value="green" label="Green" />
-          <GoADropdownOption value="blue" label="Blue" />
+          <GoADropdownItem value="red" label="Item>
+          <GoADropdownItem value="green" label="GrItem>
+          <GoADropdownItem value="blue" label="BItem>
         </GoADropdown>
       `}
     />
@@ -280,9 +280,9 @@ export const Template = (args) => {
     onChange={(name, value) => console.log(name, value)}
     native={true}
   >
-    <GoADropdownOption name="native" value="red" label="Red" />
-    <GoADropdownOption name="native" value="green" label="Green" />
-    <GoADropdownOption name="native" value="blue" label="Blue" />
+    <GoADropdownItem name="native" value="red" label="Item>
+    <GoADropdownItem name="native" value="green" label="GrItem>
+    <GoADropdownItem name="native" value="blue" label="BItem>
   </GoADropdown>
 </Story>
 
@@ -349,9 +349,9 @@ export const Template = (args) => {
         }
         return (
           <GoADropdown name="colors" value={value} onChange={onChange} native={true}>
-            <GoADropdownOption value="red" label="Red" />
-            <GoADropdownOption value="green" label="Green" />
-            <GoADropdownOption value="blue" label="Blue" />
+            <GoADropdownItem value="red" label="Item>
+            <GoADropdownItem value="green" label="GrItem>
+            <GoADropdownItem value="blue" label="BItem>
           </GoADropdown>
         )
       `}

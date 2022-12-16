@@ -21,6 +21,6 @@
 <!-- HTML -->
 <GoADropdown {name} {arialabel} {native} {value} {error} {leadingicon} {maxheight} {placeholder} {disabled} {width}>
   {#each items as item (item) }
-    <goa-dropdown-option {name} value={item} label={item} />
+    <goa-dropdown-item {name} value={item} label={item} />
   {/each}
 </GoADropdown>

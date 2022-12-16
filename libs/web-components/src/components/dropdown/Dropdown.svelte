@@ -278,7 +278,7 @@
       aria-label={arialabel || name}
     >
      <slot />
-      {#each _options as option, index (index)}
+      {#each _options as option}
         <option
           selected={option.selected}
           value={option.value}
@@ -338,10 +338,10 @@
           role="option"
           aria-label={option.label || option.value}
           aria-selected={_values.includes(option.value) ? "true" : "false"}
-          class="dropdown-option"
-          class:dropdown-option--disabled={false}
-          class:dropdown-option--tabbed={index === _highlightedIndex}
-          class:dropdown-option--selected={_values.includes(option.value)}
+          class="dropdown-item"
+          class:dropdown-item--disabled={false}
+          class:dropdown-item--tabbed={index === _highlightedIndex}
+          class:dropdown-item--selected={_values.includes(option.value)}
           data-testid={`dropdown-item-${option.value}`}
           data-index={index}
           data-value={option.value}
@@ -421,7 +421,7 @@
   }
 
   /* dropdown items */
-  .dropdown-option {
+  .dropdown-item {
     margin: 0;
     padding: 0.5rem;
     cursor: pointer;
@@ -432,28 +432,28 @@
     white-space: nowrap;
   }
 
-  .dropdown-option--tabbed {
+  .dropdown-item--tabbed {
     background: var(--color-gray-100);
     color: var(--goa-color-interactive--hover);
   }
 
-  .dropdown-option--disabled {
+  .dropdown-item--disabled {
     opacity: 0.5;
     cursor: default;
   }
 
-  .dropdown-option--disabled:hover {
+  .dropdown-item--disabled:hover {
     cursor: default;
     color: var(--color-gray-600);
   }
 
-  .dropdown-option--selected {
+  .dropdown-item--selected {
     background: var(--goa-color-interactive);
     color: var(--color-white);
   }
 
-  .dropdown-option--tabbed.dropdown-option--selected,
-  .dropdown-option--selected:hover {
+  .dropdown-item--tabbed.dropdown-item--selected,
+  .dropdown-item--selected:hover {
     background: var(--goa-color-interactive--hover);
     color: var(--color-white);
   }

@@ -17,6 +17,7 @@ export * from "./lib/circular-progress/circular-progress";
 export * from "./lib/container/container";
 export * from "./lib/divider/divider";
 export * from "./lib/dropdown/dropdown";
+export * from "./lib/dropdown/dropdown-item";
 export * from "./lib/footer-meta-section/footer-meta-section";
 export * from "./lib/footer-nav-section/footer-nav-section";
 export * from "./lib/footer/footer";

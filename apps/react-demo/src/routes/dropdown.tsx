@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GoADropdown, GoADropdownOption } from "@abgov/react-components";
+import { GoADropdown, GoADropdownItem } from "@abgov/react-components";
 
 export default function Dropdown() {
   function noop(name: string, value: string | string[]) {
@@ -29,9 +29,9 @@ export default function Dropdown() {
 
       <h2>Default</h2>
       <GoADropdown name="colors" placeholder="Select a user" onChange={noop}>
-        <GoADropdownOption key="red" value="red" label="Red" />
-        <GoADropdownOption key="green" value="green" label="Green" />
-        <GoADropdownOption key="value" value="blue" label="Blue" />
+        <GoADropdownItem key="red" value="red" label="Red" />
+        <GoADropdownItem key="green" value="green" label="Green" />
+        <GoADropdownItem key="value" value="blue" label="Blue" />
       </GoADropdown>
 
       <h2>Native</h2>
@@ -42,9 +42,9 @@ export default function Dropdown() {
         native={true}
         onChange={noop}
       >
-        <GoADropdownOption key="red" value="red" label="Red" />
-        <GoADropdownOption key="green" value="green" label="Green" />
-        <GoADropdownOption key="blue" value="blue" label="Blue" />
+        <GoADropdownItem key="red" value="red" label="Red" />
+        <GoADropdownItem key="green" value="green" label="Green" />
+        <GoADropdownItem key="blue" value="blue" label="Blue" />
       </GoADropdown>
 
       <h2>Error</h2>
@@ -55,9 +55,9 @@ export default function Dropdown() {
         value="green"
         onChange={noop}
       >
-        <GoADropdownOption key="red" value="red" label="Red" />
-        <GoADropdownOption key="green" value="green" label="Green" />
-        <GoADropdownOption key="blue" value="blue" label="Blue" />
+        <GoADropdownItem key="red" value="red" label="Red" />
+        <GoADropdownItem key="green" value="green" label="Green" />
+        <GoADropdownItem key="blue" value="blue" label="Blue" />
       </GoADropdown>
 
       <h2>Dynamic</h2>
@@ -69,7 +69,7 @@ export default function Dropdown() {
           onChange={noop}
         >
           {item.options.map((option) => (
-            <GoADropdownOption
+            <GoADropdownItem
               key={option.value}
               value={option.value}
               name={item.name}
@@ -87,9 +87,9 @@ export default function Dropdown() {
         onChange={noop}
         ariaLabel="Some random aria label"
       >
-        <GoADropdownOption key="red" value="red" label="Red" />
-        <GoADropdownOption key="green" value="green" label="Green" />
-        <GoADropdownOption key="blue" value="blue" label="Blue" />
+        <GoADropdownItem key="red" value="red" label="Red" />
+        <GoADropdownItem key="green" value="green" label="Green" />
+        <GoADropdownItem key="blue" value="blue" label="Blue" />
       </GoADropdown>
 
       <h2>Margin Spacing</h2>
@@ -103,9 +103,9 @@ export default function Dropdown() {
         ml="xl"
         mr="2xl"
       >
-        <GoADropdownOption key="red" value="red" label="Red" />
-        <GoADropdownOption key="green" value="green" label="Green" />
-        <GoADropdownOption key="blue" value="blue" label="Blue" />
+        <GoADropdownItem key="red" value="red" label="Red" />
+        <GoADropdownItem key="green" value="green" label="Green" />
+        <GoADropdownItem key="blue" value="blue" label="Blue" />
       </GoADropdown>
     </>
   );

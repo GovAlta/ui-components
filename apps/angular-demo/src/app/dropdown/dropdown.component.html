@@ -1,15 +1,18 @@
 <h1>Dropdown</h1>
 
-<h2>Is Mobile</h2>
-<goa-dropdown [native]="isMobile" value="green" disabled="true">
+<h2>Mobile</h2>
+<goa-dropdown [native]="isMobile" value="green">
   <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
   <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
   <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
 </goa-dropdown>
 
 <h2>Others</h2>
-<goa-dropdown native="true" value="">
-  <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+<goa-dropdown native="true">
+  <goa-dropdown-item
+    *ngFor="let color of colors"
+    [value]="color"
+  ></goa-dropdown-item>
 </goa-dropdown>
 
 <goa-dropdown name="colors1" native="true" value="">

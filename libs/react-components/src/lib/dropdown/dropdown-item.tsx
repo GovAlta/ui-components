@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 interface WCProps {
   value: string;
@@ -27,7 +27,15 @@ interface Props {
   name?: string;
 }
 
-export function GoADropdownOption({ value, label, name, testId }: Props) {
+export function GoADropdownOption(props: Props) {
+  useEffect(() => {
+    console.warn("GoADropdownOption is deprecated. Please use GoADropdownItem");
+  }, []);
+
+  return <GoADropdownItem {...props} />;
+}
+
+export function GoADropdownItem({ value, label, name, testId }: Props) {
   return (
     <goa-dropdown-item
       data-testid={testId}
@@ -37,5 +45,3 @@ export function GoADropdownOption({ value, label, name, testId }: Props) {
     />
   );
 }
-
-export default GoADropdownOption;

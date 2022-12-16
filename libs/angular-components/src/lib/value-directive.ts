@@ -32,6 +32,7 @@ export class ValueDirective implements ControlValueAccessor {
   }
 
   writeValue(value: string) {
+    console.log("writeValue", value);
     if (value) {
       this.value = value;
     }

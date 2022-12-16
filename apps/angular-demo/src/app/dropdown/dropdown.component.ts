@@ -15,7 +15,7 @@ export class DropdownComponent {
   color = new FormControl("green");
 
   isMobile = window.matchMedia("(any-pointer:coarse)").matches;
-  disabled = true;
+  disabled = false;
 
   groups = [
     {
