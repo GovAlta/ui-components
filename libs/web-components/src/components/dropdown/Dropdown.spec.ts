@@ -30,7 +30,7 @@ describe('GoADropdown', () => {
     });
   });
 
-  describe.skip("single selection", () => {
+  describe("single selection", () => {
     it('has a preselected value', async () => {
       const name = 'preselected-color';
       const items = ["red", "blue", "orange"];
@@ -94,7 +94,7 @@ describe('GoADropdown', () => {
     });
   })
 
-  describe.skip("disabled", () => {
+  describe("disabled", () => {
     it('can be enabled', async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
@@ -145,7 +145,7 @@ describe('GoADropdown', () => {
 
   })
 
-  describe.skip("error state", () => {
+  describe("error state", () => {
 
     it('does not show an error state', async () => {
       const name = 'favcolor';
@@ -185,7 +185,7 @@ describe('GoADropdown', () => {
   })
 
 
-  describe.skip("leading icon", () => {
+  describe("leading icon", () => {
     it('does not show a leading icon', async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
@@ -211,7 +211,7 @@ describe('GoADropdown', () => {
     });
   })
 
-  describe.skip("placeholder", () => {
+  describe("placeholder", () => {
     it('does not show a placeholder', async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "orange"];
@@ -237,7 +237,7 @@ describe('GoADropdown', () => {
     });
   })
 
-  describe.skip("width", () => {
+  describe("width", () => {
     it("dropdown should have the default width", async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "pink"];
@@ -289,7 +289,7 @@ describe('GoADropdown', () => {
     });
   })
 
-  describe.skip("maxheight", () => {
+  describe("maxheight", () => {
     it("uses the default max height", async () => {
       const name = 'favcolor';
       const items = ["red", "blue", "pink"];
@@ -325,7 +325,7 @@ describe('GoADropdown', () => {
     });
   })
 
-  describe.skip("aria-labels", () => {
+  describe("aria-labels", () => {
     it("show the aria label", async () => {
       const name = 'favcolor3';
       const items = ["red", "blue", "orange"];
@@ -432,7 +432,7 @@ describe('GoADropdown', () => {
     }
   })
 
-  describe.skip("Margins", () => {
+  describe("Margins", () => {
     it(`should add the margin`, async () => {
       const baseElement = render(GoADropdown, {
         name: "test",
@@ -452,7 +452,7 @@ describe('GoADropdown', () => {
   });
 });
 
-describe.skip("NativeSelect", () => {
+describe("NativeSelect", () => {
   it("renders children", async () => {
     const name = "native-select"
     const items = ["red", "green", "blue"];

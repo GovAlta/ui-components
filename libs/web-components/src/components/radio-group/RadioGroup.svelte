@@ -3,7 +3,6 @@
 <script lang="ts">
   import type { Spacing } from "../../common/styling";
   import { typeValidator, toBoolean } from "../../common/utils";
-  import { toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import { onMount, tick } from "svelte";
 
