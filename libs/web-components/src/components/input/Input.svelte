@@ -9,6 +9,7 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { onMount } from "svelte";
 
   export let type:
     | "text"
@@ -91,6 +92,13 @@
   function doClick() {
     this.dispatchEvent(new CustomEvent("_trailingIconClick", { composed: true }));
   }
+
+  onMount(() => {
+    if (prefix != "" || suffix != "") {
+      console.warn("GoAInput [prefix] and [suffix] properties are deprecated. Instead use leadingContent and trailingContent.");
+    }
+  });
+
 </script>
 
 <!-- HTML -->
@@ -116,6 +124,9 @@
         {prefix}
       </div>
     {/if}
+    <div class="leading-content">
+      <slot name="leadingContent" />
+    </div>
 
     {#if leadingicon}
       <goa-icon
@@ -172,6 +183,9 @@
     {#if suffix}
       <span class="suffix">{suffix}</span>
     {/if}
+    <div class="trailing-content">
+      <slot name="trailingContent" />
+    </div>
   </div>
 </div>
 
@@ -297,28 +311,34 @@
   }
 
   .prefix,
-  .suffix {
+  .suffix,
+  .leading-content ::slotted(div), .trailing-content ::slotted(div) {
     background-color: var(--color-gray-100);
     padding: 0 0.75rem;
     display: flex;
     align-items: center;
   }
-  .prefix {
+
+  .leading-content ::slotted(div), .trailing-content ::slotted(div) {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .prefix, .leading-content ::slotted(div) {
     /* background-clip doesn't want to work */
     border-top-left-radius: var(--input-border-radius);
     border-bottom-left-radius: var(--input-border-radius);
     border-right: 1px solid var(--color-gray-600);
   }
-  .suffix {
+  .suffix, .trailing-content ::slotted(div) {
     /* background-clip doesn't want to work */
     border-top-right-radius: var(--input-border-radius);
     border-bottom-right-radius: var(--input-border-radius);
     border-left: 1px solid var(--color-gray-600);
   }
-  .goa-input--disabled .prefix {
+  .goa-input--disabled .prefix, .goa-input--disabled .leading-content ::slotted(div) {
     border-right: 1px solid var(--color-gray-200);
   }
-  .goa-input--disabled .suffix {
+  .goa-input--disabled .suffix, .goa-input--disabled .trailing-content ::slotted(div) {
     border-left: 1px solid var(--color-gray-200);
   }
 

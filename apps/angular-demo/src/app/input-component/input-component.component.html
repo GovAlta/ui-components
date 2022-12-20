@@ -151,3 +151,21 @@
   [value]="reactiveTimeFormCtrl.value"
   step="1"
 ></goa-input>
+
+<h2>Leading Content</h2>
+<goa-input name="input">
+  <div slot="leadingContent"><goa-badge type="success" icon></goa-badge></div>
+</goa-input>
+
+<h2>Trailing Content</h2>
+<goa-input name="input">
+  <div slot="trailingContent">items</div>
+</goa-input>
+
+<h2>Leading and Trailing Content</h2>
+<goa-input name="input">
+  <div slot="leadingContent">
+    <div style="width: 50px; text-align: center">$</div>
+  </div>
+  <div slot="trailingContent">SomeText</div>
+</goa-input>

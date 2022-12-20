@@ -137,6 +137,28 @@ export default function Input() {
         max={maxDate}
         onChange={onDateChange}
       />
+
+      <h2>Leading Content</h2>
+      <GoAInput name="input" value="" leadingContent="$" onChange={noop} />
+      <h2>Trailing Content</h2>
+      <GoAInput name="input" value="" trailingContent="items" onChange={noop} />
+      <h2>Leading and Trailing Content</h2>
+      <GoAInput
+        name="input"
+        value=""
+        leadingContent="$"
+        trailingContent="items"
+        onChange={noop}
+      />
+      <h2>Disabled Leading and Trailing Content</h2>
+      <GoAInput
+        name="input"
+        value=""
+        leadingContent="$"
+        trailingContent="items"
+        onChange={noop}
+        disabled={true}
+      />
     </>
   );
 }
