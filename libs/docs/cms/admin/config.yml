@@ -1,0 +1,38 @@
+backend:
+  name: github
+  repo: GovAlta/ui-components
+  branch: alpha
+
+publish_mode: editorial_workflow
+local_backend: true
+media_folder: 'public' # Media files will be stored in the repo under public/
+public_folder: '/' # The src attribute for uploaded media will begin with /
+
+collections:
+ - name: 'docs'
+   label: 'Docs'
+   folder: 'libs/docs/src/'
+   create: true
+   extension: mdx
+   publish: false
+   slug: '{{title}}.stories'
+   format: yaml-frontmatter
+   frontmatter_delimiter: ['<!--', '-->']
+   identifier_field: '{{title}}'
+   fields:
+     - { label: 'Title', name: 'title', widget: 'string' }
+     - { label: 'Body', name: 'body', widget: 'markdown', modes: ['raw'] }
+ - name: 'components'
+   label: 'Components'
+   folder: 'libs/docs/src/components/common'
+   create: true
+   publish: false
+   extension: mdx
+   slug: '{{title}}.stories'
+   format: yaml-frontmatter
+   frontmatter_delimiter: ['<!--', '-->']
+   identifier_field: '{{title}}'
+   fields:
+     - { label: 'Title', name: 'title', widget: 'string' }
+     - { label: 'Body', name: 'body', widget: 'markdown', modes: ['raw'] }
+
