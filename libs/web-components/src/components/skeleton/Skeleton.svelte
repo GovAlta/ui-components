@@ -4,11 +4,24 @@
 <script lang="ts">
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { onMount } from "svelte";
+  import { typeValidator } from "../../common/utils";
+
+  // Validator
+  const [Types, validateType] = typeValidator("Skeleton type",
+    ["image", "text", "title", "text-small", "avatar", "header", "paragraph", "thumbnail", "card", "profile", "lines"],
+    true
+  );
+  const [Sizes, validateSize] = typeValidator("Skeleton size", ["1", "2", "3", "4"]);
+
+  // Type
+  type SkeletonType = typeof Types[number];
+  type SkeletonSize = typeof Sizes[number];
 
   export let maxwidth: string = "";
-  export let size: 1 | 2 | 3 | 4 = 1;
+  export let size: SkeletonSize = "1";
   export let linecount: number = 3;
-  export let type: "image" | "text" | "title" | "text-small" | "avatar" | "header" | "paragraph" | "thumbnail" | "card" | "profile" | "lines";
+  export let type: SkeletonType;
   export let testid: string = "";
 
   // margin
@@ -16,15 +29,20 @@
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
+
+  onMount(() => {
+    validateType(type);
+    validateSize(size);
+  });
 </script>
 
 <!-- HTML -->
-<div 
+<div
   data-testid={testid}
   style="{calculateMargin(mt, mr, mb, ml)};">
   {#if type === "card"}
-    <div 
-      class="card card-{size}" 
+    <div
+      class="card card-{size}"
       style="--max-width: {maxwidth};"
     >
       <svelte:self type="image" {size} />

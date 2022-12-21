@@ -1,12 +1,20 @@
 <svelte:options tag="goa-icon-button" />
 
 <script lang="ts">
-  import { toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean } from "../../common/utils";
   import type { IconSize, IconTheme, GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { onMount } from "svelte";
 
-  type IconButtonVariant = "color" | "nocolor" | "dark";
+ // Validator
+  const [Variants, validateVariant] = typeValidator(
+    "Icon Button Variant",
+    ["color", "nocolor", "dark"],
+    true,
+  );
+
+  type Variant = typeof Variants[number];
 
   // required
   export let icon: GoAIconType;
@@ -14,7 +22,7 @@
   // optional
   export let size: IconSize = "medium";
   export let theme: IconTheme = "outline";
-  export let variant: IconButtonVariant = "color";
+  export let variant: Variant = "color";
   export let title: string = "";
   export let testid: string = "";
   export let disabled: string = "false";
@@ -41,6 +49,10 @@
       new CustomEvent("_click", { composed: true, detail: { event: e } }),
     );
   }
+
+  onMount(() => {
+    validateVariant(variant);
+  });
 </script>
 
 <button

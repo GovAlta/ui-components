@@ -4,16 +4,19 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
+  import { typeValidator, toBoolean } from "../../common/utils";
+
+  // Validator
+  const [Types, validateType] = typeValidator(
+    "Notification type",
+    ["emergency", "important", "information", "event"],
+    true,
+  );
+
+  // Type
+  type NotificationType = (typeof Types)[number];
 
   export let type: NotificationType = "";
-
-  const NOTIFICATION_TYPES = ["emergency", "important", "information", "event"];
-  type NotificationType = (typeof NOTIFICATION_TYPES)[number];
-
-  // type check function
-  function isNotificationType(value: string): value is NotificationType {
-    return NOTIFICATION_TYPES.includes(value);
-  }
 
   let show = true;
   $: iconType =
@@ -28,9 +31,7 @@
       : "";
 
   onMount(() => {
-    if (!isNotificationType(type)) {
-      console.error("Invalid notification type");
-    }
+    validateType(type);
   })
 
   function close() {

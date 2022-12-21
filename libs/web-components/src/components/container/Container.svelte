@@ -3,16 +3,24 @@
 <!-- Script -->
 <script lang="ts">
   import { calculateMargin, Spacing } from "../../common/styling";
+  import { typeValidator } from "../../common/utils";
+  import { onMount } from "svelte";
 
-  export let type:
-    | "interactive"
-    | "info"
-    | "error"
-    | "success"
-    | "important"
-    | "non-interactive" = "interactive";
-  export let accent: "thick" | "thin" | "filled" = "filled";
-  export let padding: "relaxed" | "compact" = "relaxed";
+  // Validator
+  const [Types, validateType] = typeValidator("Container type",
+    ["interactive", "info", "error", "success", "important", "non-interactive"]
+  );
+  const [Accents, validateAccent] = typeValidator("Container accent", ["thick", "thin", "filled"]);
+  const [Paddings, validatePadding] = typeValidator("Container padding", ["relaxed", "compact" ]);
+
+  // Types
+  type Type = typeof Types[number];
+  type Accent = typeof Accents[number];
+  type Padding = typeof Paddings[number];
+
+  export let type: Type = "interactive";
+  export let accent: Accent = "filled";
+  export let padding: Padding = "relaxed";
   export let testid: string = "";
 
   // margin
@@ -20,6 +28,12 @@
   export let mr: Spacing = null;
   export let mb: Spacing = "m";
   export let ml: Spacing = null;
+
+  onMount(() => {
+    validateType(type);
+    validateAccent(accent);
+    validatePadding(padding);
+  });
 </script>
 
 <!-- HTML -->

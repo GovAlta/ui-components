@@ -5,16 +5,19 @@
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean } from "../../common/utils";
 
-  export let type:
-    | "success"
-    | "important"
-    | "information"
-    | "emergency"
-    | "dark"
-    | "midtone"
-    | "light";
+  // Validator
+  const [Types, validateType] = typeValidator(
+    "Badge type",
+    ["success", "important", "information", "emergency", "dark", "midtone", "light"],
+    true,
+  );
+
+  //Type
+  type BadgeType = typeof Types[number];
+
+  export let type: BadgeType;
 
   // optional
   export let testid: string = "";
@@ -40,6 +43,7 @@
   }[type];
 
   onMount(() => {
+    validateType(type);
     if (!showIcon && !content) {
       console.warn("GoABadge must have either then content or icon property set");
     }
