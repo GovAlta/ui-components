@@ -5,36 +5,32 @@
 </script>
 
 <script lang="ts">
-  import { toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
 
-  export let type:
-    | "text"
-    | "number"
-    | "password"
-    | "email"
-    | "date"
-    | "datetime-local"
-    | "month"
-    | "range"
-    | "search"
-    | "tel"
-    | "time"
-    | "url"
-    | "week" = "text";
+  // Validators
+  const [Types, validateType] = typeValidator(
+    "Input type",
+    ["text", "number", "password", "email", "date", "datetime-local", "month", "range", "search", "tel", "time", "url", "week"]
+  );
+
+  const [AutoCapitalize, validateAutoCapitalize] = typeValidator(
+    "Input auto capitalize",
+    ["on", "off", "none", "sentences", "words", "characters"]
+  );
+
+  // Types
+  type Type = typeof Types[number];
+  type AutoCapitalize = typeof AutoCapitalize[number];
+
+  export let type: Type = "text";
   export let name: string = "";
   export let value: string = "";
 
-  export let autocapitalize:
-    | "on"
-    | "off"
-    | "none"
-    | "sentences"
-    | "words"
-    | "characters" = "off";
+  export let autocapitalize: AutoCapitalize = "off";
   export let placeholder: string = "";
   export let leadingicon: GoAIconType = null;
   export let trailingicon: GoAIconType = null;
@@ -94,6 +90,8 @@
   }
 
   onMount(() => {
+    validateType(type);
+    validateAutoCapitalize(autocapitalize);
     if (prefix != "" || suffix != "") {
       console.warn("GoAInput [prefix] and [suffix] properties are deprecated. Instead use leadingContent and trailingContent.");
     }

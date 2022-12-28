@@ -7,7 +7,6 @@ describe("GoABadgeComponent", () => {
   const badgeTypes = [
     "success",
     "important",
-    "error",
     "information",
     "emergency",
     "dark",

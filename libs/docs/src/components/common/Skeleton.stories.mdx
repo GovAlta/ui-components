@@ -32,21 +32,18 @@ import { GoASkeleton, GoAGrid } from "@abgov/react-components";
   <Prop
     name="size"
     type="1 | 2 | 3 | 4"
-    required="false"
     defaultValue="1"
     description="Size can affect either the height, width or both for different skeleton types."
   />
   <Prop
     name="lineCount"
     type="number"
-    required="false"
     defaultValue="3"
     description="Used within components that contain multiple lines."
   />
   <Prop
     name="maxWidth"
     type="string"
-    required="false"
     defaultValue="320px"
     description="Set component maximum width. Currently only used in `card` skeleton type"
   />
@@ -208,7 +205,7 @@ import { GoASkeleton, GoAGrid } from "@abgov/react-components";
 #### Cards
 
 <Story name="Cards">
-  <GoAGrid>
+  <GoAGrid minChildWidth="30ch">
     <GoASkeleton type="card" />
     <GoASkeleton type="card" size={2} />
     <GoASkeleton type="card" size={3} />
@@ -226,7 +223,7 @@ import { GoASkeleton, GoAGrid } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
-        <goa-grid>
+        <goa-grid minChildWidth="30ch">
           <goa-skeleton type="card" />
           <goa-skeleton type="card" size="2" />
           <goa-skeleton type="card" size="3" />
@@ -239,7 +236,7 @@ import { GoASkeleton, GoAGrid } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
-        <goa-grid>
+        <goa-grid minChildWidth="30ch">
           <goa-skeleton type="card"></goa-skeleton>
           <goa-skeleton type="card" size="2"></goa-skeleton>
           <goa-skeleton type="card" size="3"></goa-skeleton>
@@ -252,7 +249,7 @@ import { GoASkeleton, GoAGrid } from "@abgov/react-components";
     <CodeSnippet
       lang="tsx"
       code={`
-        <GoAGrid>
+        <GoAGrid minChildWidth="30ch">
           <GoASkeleton type="card" />
           <GoASkeleton type="card" size={2} />
           <GoASkeleton type="card" size={3} />

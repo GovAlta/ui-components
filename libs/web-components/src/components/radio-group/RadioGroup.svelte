@@ -5,12 +5,21 @@
   import type { RadioMessage } from "./types";
   import type { Spacing } from "../../common/styling";
   import { deleteContext, ContextStore, getContext } from "../../common/context-store";
-  import { toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
+  import { onMount } from "svelte";
+
+  // Validator
+  const [Orientations, validateOrientation] = typeValidator("Radio group orientation",
+    ["vertical", "horizontal"]
+  );
+
+  // Type
+  type Orientation = typeof Orientations[number];
 
   export let name: string;
   export let value: string;
-  export let orientation: "vertical" | "horizontal" = "vertical";
+  export let orientation: Orientation = "vertical";
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
@@ -58,6 +67,10 @@
 
   onDestroy(() => {
     deleteContext(name);
+  });
+
+  onMount(() => {
+    validateOrientation(orientation);
   });
 </script>
 

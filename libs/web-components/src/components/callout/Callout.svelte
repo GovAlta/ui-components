@@ -4,6 +4,18 @@
 <script lang="ts">
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { onMount } from "svelte";
+  import { typeValidator } from "../../common/utils";
+
+  // Validator
+  const [Types, validateType] = typeValidator(
+    "Callout type",
+    ["emergency", "important", "information", "event", "success"],
+    true,
+  );
+
+  //Type
+  type CalloutType = typeof Types[number];
 
   // margin
   export let mt: Spacing = null;
@@ -11,7 +23,7 @@
   export let mb: Spacing = "l";
   export let ml: Spacing = null;
 
-  export let type: "emergency" | "important" | "information" | "event" | "success";
+  export let type: CalloutType;
   export let heading: string = "";
   export let testid: string = "";
 
@@ -27,12 +39,16 @@
       : type === "event"
       ? "calendar"
       : "";
+
+  onMount(() => {
+    validateType(type);
+  });
 </script>
 
 <!-- HTML -->
-<div 
+<div
   style={calculateMargin(mt, mr, mb, ml)}
-  class="notification" 
+  class="notification"
   data-testid={testid}
 >
   <span class="icon {type}">
