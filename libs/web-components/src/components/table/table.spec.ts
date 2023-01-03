@@ -1,0 +1,29 @@
+import TableWrapper from './TableWrapper.test.svelte'
+import { render } from '@testing-library/svelte'
+import Table from './Table.svelte';
+
+describe("GoATable", () => {
+  
+  const columnTitles = ["First Name", "Last Name", "Age"];
+  const data = [
+    ["John", "Smith", 39],
+    ["Jim", "Brown", 29],
+    ["Jacob", "Green", 49],
+    ["James", "White", 32],
+  ];
+
+  it('renders', async () => {
+    const { container } = render(TableWrapper, { columnTitles, data})
+    expect(container.querySelectorAll("tbody tr")).toHaveLength(4);
+  })
+
+  it('binds all params', async () => {
+    const width = "100%";
+    const stickyheader = "true"
+    const { container } = render(Table, { width, stickyheader })
+    const table = container.querySelector("table");
+    const style = table.getAttribute("style");
+    expect(style).toContain("width: 100%");
+    expect(table.classList.contains("sticky"));
+  })
+})

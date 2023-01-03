@@ -23,6 +23,7 @@ import { NotificationBannerComponent } from "./notification-banner/notification-
 import { RadioComponent } from "./radio/radio.component";
 import { SkeletonComponent } from "./skeleton/skeleton.component";
 import { SpacingComponent } from "./spacing/spacing";
+import { TableComponent } from "./table/table";
 import { TextAreaComponent } from "./text-area/text-area.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
 
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: "radio", component: RadioComponent },
   { path: "skeleton", component: SkeletonComponent },
   { path: "spacing", component: SpacingComponent },
+  { path: "table", component: TableComponent },
   { path: "textarea", component: TextAreaComponent },
   { path: "two-column-layout", component: TwoColumnLayoutComponent },
   { path: "", redirectTo: "/input", pathMatch: "full" },

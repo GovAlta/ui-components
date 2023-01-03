@@ -36,5 +36,6 @@ export * from "./lib/radio-group/radio-group";
 export * from "./lib/skeleton/skeleton";
 export * from "./lib/spacer/spacer";
 export * from "./lib/spinner/spinner";
+export * from "./lib/table/table";
 export * from "./lib/textarea/textarea";
 export * from "./lib/two-column-layout/two-column-layout";

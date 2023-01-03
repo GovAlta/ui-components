@@ -1,0 +1,46 @@
+<goa-table width="100%" mb="xl">
+  <thead>
+    <tr>
+      <th>Col 1</th>
+      <th>Col 2</th>
+      <th>Col 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users; index as i">
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+      <td>{{ user.age }}</td>
+    </tr>
+  </tbody>
+</goa-table>
+
+<goa-table width="500px" mb="xl">
+  <thead>
+    <tr>
+      <th>Col 1</th>
+      <th>Col 2</th>
+      <th>Col 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <goa-block alignment="center" gap="xs">
+          <goa-icon type="alarm"></goa-icon>Item 1
+        </goa-block>
+      </td>
+      <td>Item 2</td>
+      <td>Item 3</td>
+    </tr>
+    <tr>
+      <td>
+        <goa-block alignment="center" gap="xs">
+          <goa-icon type="alarm"></goa-icon>Item 1
+        </goa-block>
+      </td>
+      <td>Item 2</td>
+      <td>Item 3</td>
+    </tr>
+  </tbody>
+</goa-table>
