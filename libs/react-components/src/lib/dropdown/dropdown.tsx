@@ -2,8 +2,6 @@ import React, { FC, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconType } from "../icon/icon";
 
-export * from "./dropdown-option";
-
 interface WCProps extends Margins {
   ref: React.MutableRefObject<HTMLElement | null>;
   arialabel?: string;
@@ -13,11 +11,11 @@ interface WCProps extends Margins {
   leadingicon?: string;
   maxheight?: string;
   multiselect?: boolean;
-  name: string;
+  name?: string;
   native?: boolean;
   placeholder?: string;
   testid?: string;
-  value: string;
+  value?: string;
   width?: string;
 }
 
@@ -32,8 +30,8 @@ declare global {
 }
 
 interface Props extends Margins {
-  name: string;
-  value: string[] | string;
+  name?: string;
+  value?: string[] | string;
   onChange: (name: string, values: string[] | string) => void;
 
   // optional
@@ -49,6 +47,16 @@ interface Props extends Margins {
   placeholder?: string;
   testId?: string;
   width?: string;
+}
+
+function stringify(value: string | string[] | undefined): string {
+  if (typeof value === "undefined") {
+    return "";
+  }
+  if (typeof value === "string") {
+    return value;
+  }
+  return JSON.stringify(value);
 }
 
 export const GoADropdown: FC<Props> = (props) => {
@@ -72,7 +80,7 @@ export const GoADropdown: FC<Props> = (props) => {
     <goa-dropdown
       ref={el}
       name={props.name}
-      value={JSON.stringify(props.value)}
+      value={stringify(props.value)}
       arialabel={props.ariaLabel}
       disabled={props.disabled}
       error={props.error}

@@ -1,10 +1,25 @@
 import "@testing-library/jest-dom";
 import { render, cleanup, fireEvent, waitFor } from "@testing-library/react";
-import { GoADropdown, GoADropdownOption } from "./dropdown";
+import { GoADropdown } from "./dropdown";
+import { GoADropdownItem, GoADropdownOption } from "./dropdown-item";
 
 afterEach(cleanup);
 
 describe("GoADropdown", () => {
+  it("should inform the user that GoADropdownOption is deprecated", async () => {
+    const mock = jest.spyOn(console, "warn").mockImplementation();
+    render(
+      <GoADropdown onChange={() => {}}>
+        <GoADropdownOption value="foo" />
+      </GoADropdown>
+    );
+
+    await waitFor(() => {
+      expect(console.warn["mock"].calls.length).toBe(1);
+    });
+    mock.mockRestore();
+  });
+
   it("should bind all web-component attributes", async () => {
     const { baseElement } = render(
       <GoADropdown
@@ -23,9 +38,9 @@ describe("GoADropdown", () => {
         ml="xl"
         onChange={() => {}}
       >
-        <GoADropdownOption name="favColor" label="Red" value="red" />
-        <GoADropdownOption name="favColor" label="Blue" value="blue" />
-        <GoADropdownOption name="favColor" label="Yellow" value="yellow" />
+        <GoADropdownItem name="favColor" label="Red" value="red" />
+        <GoADropdownItem name="favColor" label="Blue" value="blue" />
+        <GoADropdownItem name="favColor" label="Yellow" value="yellow" />
       </GoADropdown>
     );
 
@@ -37,14 +52,14 @@ describe("GoADropdown", () => {
     expect(el.getAttribute("ml")).toBe("xl");
   });
 
-  it("should allow for a single selection.....", async () => {
+  it("should allow for a single selection", async () => {
     const fn = jest.fn();
 
     const { baseElement } = render(
-      <GoADropdown name="favColor" value={[]} onChange={fn}>
-        <GoADropdownOption name="favColor" label="Red" value="red" />
-        <GoADropdownOption name="favColor" label="Blue" value="blue" />
-        <GoADropdownOption name="favColor" label="Yellow" value="yellow" />
+      <GoADropdown name="favColor" value="yellow" onChange={fn} native={true}>
+        <GoADropdownItem name="favColor" label="Red" value="red" />
+        <GoADropdownItem name="favColor" label="Blue" value="blue" />
+        <GoADropdownItem name="favColor" label="Yellow" value="yellow" />
       </GoADropdown>
     );
 

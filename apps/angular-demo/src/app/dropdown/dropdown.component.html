@@ -1,39 +1,41 @@
 <h1>Dropdown</h1>
 
-<goa-dropdown
-  name="colors"
-  placeholder="Select a user"
-  leadingIcon="alarm"
-  native="true"
-  [value]="selectedColor"
-  (_change)="selectColor($event)"
->
+<h2>Mobile</h2>
+<goa-dropdown [native]="isMobile" value="green">
+  <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
+  <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+  <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
+</goa-dropdown>
+
+<h2>Others</h2>
+<goa-dropdown native="true">
   <goa-dropdown-item
-    name="colors"
+    *ngFor="let color of colors"
+    [value]="color"
+  ></goa-dropdown-item>
+</goa-dropdown>
+
+<goa-dropdown name="colors1" native="true" value="">
+  <goa-dropdown-item
     *ngFor="let color of colors"
     [value]="color"
     [label]="color"
-  >
-  </goa-dropdown-item>
+  ></goa-dropdown-item>
 </goa-dropdown>
 
-<h2>Error</h2>
-<goa-dropdown
-  arialabel="Select user"
-  name="colors2"
-  placeholder="Select a user"
-  error="true"
->
-  <goa-dropdown-item value="red" name="colors2" label="Red"></goa-dropdown-item>
+<goa-dropdown name="colors1" placeholder="Select">
   <goa-dropdown-item
-    value="green"
-    name="colors2"
-    label="Green"
+    *ngFor="let color of colors"
+    [value]="color"
+    [label]="color"
   ></goa-dropdown-item>
+</goa-dropdown>
+
+<goa-dropdown name="colors1" value="red">
   <goa-dropdown-item
-    value="blue"
-    name="colors2"
-    label="Blue"
+    *ngFor="let color of colors"
+    [value]="color"
+    [label]="color"
   ></goa-dropdown-item>
 </goa-dropdown>
 
@@ -111,7 +113,6 @@
   name="boundColors2"
   [formControl]="reactiveFormCtrl"
   [value]="reactiveFormCtrl.value"
-  placeholder="Select a color"
 >
   <goa-dropdown-item
     name="boundColors2"
@@ -120,4 +121,22 @@
     [label]="color"
   >
   </goa-dropdown-item>
+</goa-dropdown>
+
+<goa-dropdown goaValue name="colors123" [formControl]="reactiveFormCtrl">
+  <goa-dropdown-item
+    *ngFor="let color of colors"
+    [value]="color"
+    [label]="color"
+  ></goa-dropdown-item>
+</goa-dropdown>
+
+<h4>Disabled</h4>
+
+<goa-dropdown goaValue name="colors123" [formControl]="reactiveFormCtrl">
+  <goa-dropdown-item
+    *ngFor="let color of colors"
+    [value]="color"
+    [label]="color"
+  ></goa-dropdown-item>
 </goa-dropdown>
