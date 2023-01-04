@@ -1,0 +1,219 @@
+import { Meta, Story } from "@storybook/addon-docs";
+import {
+  Props,
+  Prop,
+  Tabs,
+  Tab,
+  CodeSnippet,
+  SupportInfo,
+  Markdown,
+} from "@abgov/shared/storybook-common";
+import { GoATable } from "@abgov/react-components";
+
+<Meta title="Components/Table" />
+
+# Table
+
+### Table is a set of structured data that is easy for a user to scan, examine, and compare.
+
+[Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DDI)
+
+---
+
+#### Properties
+
+<Props showTabs={true}>
+  <Prop
+    name="width"
+    type="string"
+    description="Width of the table. By default it will fit the enclosed content."
+  />
+</Props>
+
+<details>
+  <summary>Additional Properties</summary>
+  <Props showTabs={true}>
+    <Prop
+      name="mt"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Top margin"
+    />
+    <Prop
+      name="mr"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Right margin"
+    />
+    <Prop
+      name="mb"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Bottom margin"
+    />
+    <Prop
+      name="ml"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Left margin"
+    />
+  </Props>
+</details>
+
+export const TableTemplate = (args) => {
+  return (
+    <GoATable {...args}>
+      <thead>
+        <tr>
+          <th>Col 1</th>
+          <th>Col 2</th>
+          <th>Col 3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Item 1</td>
+          <td>Item 2</td>
+          <td>Item 3</td>
+        </tr>
+        <tr>
+          <td>Item 4</td>
+          <td>Item 5</td>
+          <td>Item 6</td>
+        </tr>
+      </tbody>
+    </GoATable>
+  );
+};
+
+#### Basic
+
+<Story name="Basic">{TableTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-table>
+        <thead>
+          <tr>
+            <th>Col 1</th>
+            <th>Col 2</th>
+            <th>Col 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Item 1</td>
+            <td>Item 2</td>
+            <td>Item 3</td>
+          </tr>
+          <tr>
+            <td>Item 4</td>
+            <td>Item 5</td>
+            <td>Item 6</td>
+          </tr>
+        </tbody>
+      </goa-table>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoATable>
+        <thead>
+          <tr>
+            <th>Col 1</th>
+            <th>Col 2</th>
+            <th>Col 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Item 1</td>
+            <td>Item 2</td>
+            <td>Item 3</td>
+          </tr>
+          <tr>
+            <td>Item 4</td>
+            <td>Item 5</td>
+            <td>Item 6</td>
+          </tr>
+        </tbody>
+      </GoATable>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Width
+
+<Story name="Width" args={{ width: "100%" }}>
+  {TableTemplate.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-table width="100%">
+        <thead>
+          <tr>
+            <th>Col 1</th>
+            <th>Col 2</th>
+            <th>Col 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Item 1</td>
+            <td>Item 2</td>
+            <td>Item 3</td>
+          </tr>
+          <tr>
+            <td>Item 4</td>
+            <td>Item 5</td>
+            <td>Item 6</td>
+          </tr>
+        </tbody>
+      </goa-table>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoATable width="100%">
+        <thead>
+          <tr>
+            <th>Col 1</th>
+            <th>Col 2</th>
+            <th>Col 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Item 1</td>
+            <td>Item 2</td>
+            <td>Item 3</td>
+          </tr>
+          <tr>
+            <td>Item 4</td>
+            <td>Item 5</td>
+            <td>Item 6</td>
+          </tr>
+        </tbody>
+      </GoATable>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />

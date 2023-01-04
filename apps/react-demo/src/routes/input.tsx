@@ -107,6 +107,58 @@ export default function Input() {
         suffix="per item"
         onChange={noop}
       />
+
+      <h2>Disabled Prefix/Suffix</h2>
+      <GoAInput
+        name="foo"
+        value=""
+        prefix="$"
+        suffix="per item"
+        disabled={true}
+        onChange={noop}
+      />
+
+      <h2>Aria Label</h2>
+      <GoAInput
+        name=""
+        value=""
+        ariaLabel="Some random aria label here"
+        onChange={noop}
+      />
+      <h4>Margin Spacing</h4>
+      <GoAInputDate
+        mt="m"
+        mb="xs"
+        ml="xl"
+        mr="2xl"
+        name="Date with min max"
+        value={date}
+        min={minDate}
+        max={maxDate}
+        onChange={onDateChange}
+      />
+
+      <h2>Leading Content</h2>
+      <GoAInput name="input" value="" leadingContent="$" onChange={noop} />
+      <h2>Trailing Content</h2>
+      <GoAInput name="input" value="" trailingContent="items" onChange={noop} />
+      <h2>Leading and Trailing Content</h2>
+      <GoAInput
+        name="input"
+        value=""
+        leadingContent="$"
+        trailingContent="items"
+        onChange={noop}
+      />
+      <h2>Disabled Leading and Trailing Content</h2>
+      <GoAInput
+        name="input"
+        value=""
+        leadingContent="$"
+        trailingContent="items"
+        onChange={noop}
+        disabled={true}
+      />
     </>
   );
 }

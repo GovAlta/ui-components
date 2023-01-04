@@ -20,6 +20,9 @@ rc:
 story:
 	cp libs/docs/src/_stories.mdx.template libs/docs/src/components/common/$(name).stories.mdx
 
+# new component
+component: sc rc story
+
 #### BUILD
 
 build-web-components:
@@ -61,8 +64,6 @@ format:
 
 #### TEST
 
-#### TEST
-
 lint:
 	npx nx run-many --target=lint --projects=angular-components,react-components,web-components,styles
 
@@ -72,5 +73,9 @@ test:
 coverage:	
 	npx nx run web-components:test --codeCoverage
 
+#### OTHER
+
+ngrok:
+	ngrok http $(port) --host-header=localhost
 
 .DEFAULT_GOAL := build

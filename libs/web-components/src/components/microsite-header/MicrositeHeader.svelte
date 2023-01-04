@@ -2,7 +2,15 @@
 
 <!-- Script -->
 <script lang="ts">
-  export let type: "live" | "alpha" | "beta";
+  import { onMount } from "svelte";
+  import { typeValidator } from "../../common/utils";
+
+  // Validator
+  const [Types, validateType] = typeValidator("Microsite header type", ["live", "alpha", "beta"], true);
+  // Type
+  type Type = typeof Types[number];
+
+  export let type: Type;
   export let version: string = "";
   export let feedbackurl: string = "";
 
@@ -10,6 +18,10 @@
     if (!val || (val && val.length === 0)) return "";
     return val[0].toUpperCase() + val.slice(1);
   }
+
+  onMount(() => {
+    validateType(type);
+  });
 </script>
 
 <!-- HTML -->
@@ -83,7 +95,7 @@
     background-color: var(--color-gray-100);
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1.5rem;
+    padding: 0.25rem 1.5rem;
   }
     @media (max-width: 640px) {
       .goa-official-site-header {
@@ -104,7 +116,7 @@
 
   .service-type {
     font-weight: bold;
-    padding: 0.25rem;
+    padding: 0.125rem 0.25rem;
     display: flex;
     margin-right: 1rem;
     line-height: initial;

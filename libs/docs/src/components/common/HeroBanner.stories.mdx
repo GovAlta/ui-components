@@ -35,6 +35,12 @@ When a page requires promotion or is featured, a photograph may be inserted into
     description="Main heading text"
   />
   <Prop name="backgroundUrl" type="string" description="Background image url" />
+  <Prop
+    name="minHeight"
+    type="string"
+    defaultValue="600px"
+    description="Sets the height of the HeroBanner"
+  />
 </Props>
 
 #### Basic
@@ -187,6 +193,64 @@ When a page requires promotion or is featured, a photograph may be inserted into
   </ul>
 </Note>
 
+#### Min Height
+
+<Story name="Min Height">
+  <GoAHeroBanner
+    heading="Hero Banner"
+    backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
+    minHeight="300px"
+  >
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,
+    eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis
+    hic!
+  </GoAHeroBanner>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-hero-banner
+        heading="Hero Banner"
+        backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
+        minHeight="300px"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+      </goa-hero-banner>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-hero-banner
+        heading="Hero Banner"
+        backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg"
+        minHeight="300px"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+      </goa-hero-banner>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoAHeroBanner
+        heading="Hero Banner"
+        backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg"
+        minHeight="300px"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+      </GoAHeroBanner>
+    `}
+    />
+  </Tab>
+</Tabs>
 ---
 
 <SupportInfo />

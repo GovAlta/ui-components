@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent, waitFor, cleanup } from '@testing-library/svelte';
 import GoAInput from './Input.svelte'
+import GoAInputWrapper from './Input.test.svelte'
 
 afterEach(cleanup);
 
@@ -219,13 +220,23 @@ describe('GoAInput Component', () => {
       expect(container.querySelector(".prefix")).toBeNull();
       expect(container.querySelector(".suffix")).toBeNull();
     });
-    it("shows prefix text", async () => {
+    it("shows prefix text and also a warning message in console", async () => {
+      const mock = jest.spyOn(console, "warn").mockImplementation();
       const { container } = render(GoAInput, { type: "text", prefix: "$" });
       expect(container.querySelector(".prefix").innerHTML).toContain("$");
+      await waitFor(() => {
+        expect(console.warn["mock"].calls.length).toBeGreaterThan(0);
+      })
+      mock.mockRestore();
     });
-    it("shows suffix text", async () => {
+    it("shows suffix text and also a warning message in console", async () => {
+      const mock = jest.spyOn(console, "warn").mockImplementation();
       const { container } = render(GoAInput, { type: "text", suffix: "per item" });
       expect(container.querySelector(".suffix").innerHTML).toContain("per item");
+      await waitFor(() => {
+        expect(console.warn["mock"].calls.length).toBeGreaterThan(0);
+      })
+      mock.mockRestore();
     });
   })
 
@@ -247,4 +258,26 @@ describe('GoAInput Component', () => {
       expect(input).toHaveStyle("margin-left:var(--goa-spacing-xl)");
     });
   });
+
+  describe("Leading and Trailing content", () => {
+    it("should not have a slot for the leading and trailing content", async () => {
+      const el = render(GoAInputWrapper, { type: "text" });
+      expect(el.container.querySelector("[slot=leadingContent]")).toBeNull();
+      expect(el.container.querySelector("[slot=trailingContent]")).toBeNull();
+    });
+
+    it("should have a slot for the leading content", async () => {
+      const content = "$";
+      const el = render(GoAInputWrapper, { leadingContent: content });
+      expect(el.container.innerHTML).toContain(content);
+      expect(el.container.querySelector("[slot=leadingContent]").innerHTML).toContain(content);
+    });
+
+    it("should have a slot for the trailing content", async () => {
+      const content = "items";
+      const el = render(GoAInputWrapper, { trailingContent: content });
+      expect(el.container.innerHTML).toContain(content);
+      expect(el.container.querySelector("[slot=trailingContent]").innerHTML).toContain(content);
+    });
+  })
 });

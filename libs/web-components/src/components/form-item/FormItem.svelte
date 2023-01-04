@@ -5,6 +5,16 @@
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { typeValidator, toBoolean } from "../../common/utils";
+
+  // Validators
+  const [REQUIREMENT_TYPES, validateRequirementType] = typeValidator(
+    "Requirement type",
+    ["optional", "required"],
+    false,
+  );
+
+  type RequirementType = (typeof REQUIREMENT_TYPES)[number];
 
   export let testid: string = "";
 
@@ -14,14 +24,6 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  const REQUIREMENT_TYPES = ["optional", "required", ""];
-  type RequirementType = (typeof REQUIREMENT_TYPES)[number];
-
-  // type check function
-  function isRequirementType(value: string): value is RequirementType {
-    return REQUIREMENT_TYPES.includes(value);
-  }
-
   // Optional
   export let label: string = "";
   export let helptext: string = "";
@@ -29,15 +31,13 @@
   export let requirement: RequirementType = "";
 
   onMount(() => {
-    if (!isRequirementType(requirement)) {
-      console.error("Invalid requirement type", requirement);
-    }
+    validateRequirementType(requirement);
   })
 
 </script>
 
 <!-- HTML -->
-<div 
+<div
   data-testid={testid}
   style={calculateMargin(mt, mr, mb, ml)}
   class="goa-form-item"

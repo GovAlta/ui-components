@@ -5,29 +5,32 @@
 </script>
 
 <script lang="ts">
-  import { toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { onMount } from "svelte";
 
-  export let type:
-    "text"
-    | "number"
-    | "password"
-    | "email"
-    | "date"
-    | "datetime-local"
-    | "month"
-    | "range"
-    | "search"
-    | "tel"
-    | "time"
-    | "url"
-    | "week" = "text";
+  // Validators
+  const [Types, validateType] = typeValidator(
+    "Input type",
+    ["text", "number", "password", "email", "date", "datetime-local", "month", "range", "search", "tel", "time", "url", "week"]
+  );
+
+  const [AutoCapitalize, validateAutoCapitalize] = typeValidator(
+    "Input auto capitalize",
+    ["on", "off", "none", "sentences", "words", "characters"]
+  );
+
+  // Types
+  type Type = typeof Types[number];
+  type AutoCapitalize = typeof AutoCapitalize[number];
+
+  export let type: Type = "text";
   export let name: string = "";
   export let value: string = "";
 
-  export let autocapitalize: "on" | "off" | "none" | "sentences" | "words" | "characters" = "off";
+  export let autocapitalize: AutoCapitalize = "off";
   export let placeholder: string = "";
   export let leadingicon: GoAIconType = null;
   export let trailingicon: GoAIconType = null;
@@ -51,7 +54,6 @@
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
-
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
@@ -86,6 +88,15 @@
   function doClick() {
     this.dispatchEvent(new CustomEvent("_trailingIconClick", { composed: true }));
   }
+
+  onMount(() => {
+    validateType(type);
+    validateAutoCapitalize(autocapitalize);
+    if (prefix != "" || suffix != "") {
+      console.warn("GoAInput [prefix] and [suffix] properties are deprecated. Instead use leadingContent and trailingContent.");
+    }
+  });
+
 </script>
 
 <!-- HTML -->
@@ -96,7 +107,7 @@
     ${calculateMargin(mt, mr, mb, ml)};
     --width: ${width};
   `}
-  >
+>
   <div
     class={`
       goa-input
@@ -108,9 +119,12 @@
   >
     {#if prefix}
       <div class="prefix">
-        { prefix }
+        {prefix}
       </div>
     {/if}
+    <div class="leading-content">
+      <slot name="leadingContent" />
+    </div>
 
     {#if leadingicon}
       <goa-icon
@@ -165,10 +179,14 @@
     {/if}
 
     {#if suffix}
-      <span class="suffix">{ suffix }</span>
+      <span class="suffix">{suffix}</span>
     {/if}
+    <div class="trailing-content">
+      <slot name="trailingContent" />
+    </div>
   </div>
 </div>
+
 <!-- Styles -->
 <style>
   :host {
@@ -198,14 +216,10 @@
     transition: box-shadow 0.1s ease-in;
     border: 1px solid var(--color-gray-600);
     border-radius: var(--input-border-radius);
-    background: white;
-
     display: inline-flex;
     align-items: stretch;
-
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
-
     min-width: 100%;
   }
 
@@ -217,7 +231,6 @@
   .goa-input:focus-within {
     box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
   }
-
 
   /* type=range does not have an outline/box-shadow */
   .goa-input.type--range {
@@ -250,10 +263,11 @@
     flex: 1 1 auto;
   }
 
-  input[type=text],
-  input[type=date],
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
   input[type="datetime-local"],
-  input[type=number] {
+  input[type="number"] {
     font-family: var(--font-family);
   }
 
@@ -290,29 +304,40 @@
     color: var(--goa-color-text-secondary);
   }
 
-
   .goa-input--disabled input:hover {
     cursor: default !important;
   }
 
   .prefix,
-  .suffix {
+  .suffix,
+  .leading-content ::slotted(div), .trailing-content ::slotted(div) {
     background-color: var(--color-gray-100);
     padding: 0 0.75rem;
     display: flex;
     align-items: center;
   }
-  .prefix {
+
+  .leading-content ::slotted(div), .trailing-content ::slotted(div) {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .prefix, .leading-content ::slotted(div) {
     /* background-clip doesn't want to work */
     border-top-left-radius: var(--input-border-radius);
     border-bottom-left-radius: var(--input-border-radius);
     border-right: 1px solid var(--color-gray-600);
   }
-  .suffix {
+  .suffix, .trailing-content ::slotted(div) {
     /* background-clip doesn't want to work */
     border-top-right-radius: var(--input-border-radius);
     border-bottom-right-radius: var(--input-border-radius);
     border-left: 1px solid var(--color-gray-600);
+  }
+  .goa-input--disabled .prefix, .goa-input--disabled .leading-content ::slotted(div) {
+    border-right: 1px solid var(--color-gray-200);
+  }
+  .goa-input--disabled .suffix, .goa-input--disabled .trailing-content ::slotted(div) {
+    border-left: 1px solid var(--color-gray-200);
   }
 
   /* Themes */

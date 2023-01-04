@@ -13,12 +13,18 @@
     "success",
     "event",
   ]);
+
+  const [Transitions, validateTransition] = typeValidator("Modal transition",
+    ["fast", "slow", "none"]
+  );
+
   type CalloutVariant = typeof CALLOUT_VARIANT[number];
+  type Transition = typeof Transitions[number];
 
   export let heading: string = "";
   export let closable: string = "false";
   export let open: string = "false";
-  export let transition: "fast" | "slow" | "none" = "none";
+  export let transition: Transition = "none";
   export let width: string = "";
   export let calloutvariant: CalloutVariant = null;
 
@@ -52,6 +58,7 @@
 
   onMount(() => {
     validateCalloutVariant(calloutvariant);
+    validateTransition(transition);
   });
 </script>
 
@@ -202,7 +209,6 @@
   .modal-content ::slotted(:last-child) {
     margin-bottom: 0 !important;
   }
-
 
   .modal-close {
     position: absolute;

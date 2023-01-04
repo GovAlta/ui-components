@@ -5,11 +5,22 @@
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import noScroll from "../../common/no-scroll";
-  import { toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean } from "../../common/utils";
+
+  // Validators
+  const [Variants, validateVariant] = typeValidator(
+    "Circular progress variant",
+    ["fullscreen", "inline"]
+  );
+  const [Sizes, validateSize] = typeValidator("Button size", ["small", "large"]);
+
+  // Types
+  type Size = typeof Sizes[number];
+  type Variant = typeof Variants[number];
 
   // Optional
-  export let variant: "fullscreen" | "inline" = "inline";
-  export let size: "small" | "large" = "large";
+  export let variant: Variant = "inline";
+  export let size: Size = "large";
   export let message: string = "";
   export let progress: number = -1;
   export let visible: string = "false";
@@ -18,9 +29,11 @@
 
   let spinnerSize: "large" | "xlarge";
   let fullscreen: boolean;
-  let inline: boolean; 
+  let inline: boolean;
 
   onMount(async () => {
+    validateVariant(variant);
+    validateSize(size);
     spinnerSize = size === "small" ? "large" : "xlarge"
     fullscreen = variant === "fullscreen";
     inline = variant === "inline";

@@ -69,6 +69,19 @@ export default function ButtonGroup() {
           Secondary
         </GoAButton>
       </GoAButtonGroup>
+
+      <h2>Margin Spacing</h2>
+      <GoAButtonGroup mt="m" mb="xs" ml="xl" mr="2xl" alignment="start">
+        <GoAButton type="primary" onClick={() => console.log("clicked")}>
+          Primary
+        </GoAButton>
+        <GoAButton type="submit" onClick={() => console.log("clicked")}>
+          Submit
+        </GoAButton>
+        <GoAButton type="secondary" onClick={() => console.log("clicked")}>
+          Secondary
+        </GoAButton>
+      </GoAButtonGroup>
     </>
   );
 }

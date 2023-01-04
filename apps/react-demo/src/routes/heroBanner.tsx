@@ -37,6 +37,17 @@ export default function HeroBanner() {
           </GoAButtonGroup>
         </div>
       </GoAHeroBanner>
+      <br />
+      <h2>Min Height</h2>
+      <GoAHeroBanner
+        heading="Hero Banner"
+        backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
+        minHeight="700px"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
+        optio, eius expedita, quasi vero maxime, laudantium voluptates eaque
+        illum officiis hic!
+      </GoAHeroBanner>
     </>
   );
 }

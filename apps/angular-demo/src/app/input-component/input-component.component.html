@@ -57,6 +57,9 @@
 <goa-input name="input" suffix="items"></goa-input>
 <goa-input name="input" prefix="$" suffix="per item"></goa-input>
 
+<h2>Disabled Prefix/Suffix</h2>
+<goa-input name="foo" disabled="true" prefix="$" suffix="per item"></goa-input>
+
 <h2>Auto capitalize</h2>
 <goa-input
   type="text"
@@ -119,6 +122,17 @@
 <p>{{ arrayVal | json }}</p>
 <goa-input goaValueList [(ngModel)]="arrayVal"></goa-input>
 
+<h2>Margin Spacing</h2>
+<goa-input
+  id="foo"
+  name="foo"
+  (_change)="onInputChangeEvent($event)"
+  mt="m"
+  mb="xs"
+  ml="xl"
+  mr="2xl"
+></goa-input>
+
 <h2>Reactive binding - Date</h2>
 <p>{{ reactiveDateFormCtrl.value }}</p>
 <goa-input
@@ -137,3 +151,21 @@
   [value]="reactiveTimeFormCtrl.value"
   step="1"
 ></goa-input>
+
+<h2>Leading Content</h2>
+<goa-input name="input">
+  <div slot="leadingContent"><goa-badge type="success" icon></goa-badge></div>
+</goa-input>
+
+<h2>Trailing Content</h2>
+<goa-input name="input">
+  <div slot="trailingContent">items</div>
+</goa-input>
+
+<h2>Leading and Trailing Content</h2>
+<goa-input name="input">
+  <div slot="leadingContent">
+    <div style="width: 50px; text-align: center">$</div>
+  </div>
+  <div slot="trailingContent">SomeText</div>
+</goa-input>

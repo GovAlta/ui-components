@@ -499,7 +499,6 @@ export const RouteChangesTemplate = (args) => {
         actions={
           <GoAButtonGroup alignment="end">
             <GoAButton
-              size="medium"
               onClick={() => {
                 setShowModal(false);
               }}
@@ -583,7 +582,7 @@ export const RouteChangesTemplate = (args) => {
 
 export const CalloutVariantTemplate = (args) => {
   const [showModal, setShowModal] = useState(false);
-  const [calloutVariant, setCalloutVariant] = useState(false);
+  const [calloutVariant, setCalloutVariant] = useState("");
   function show(calloutVariant) {
     setCalloutVariant(calloutVariant);
     setShowModal(true);

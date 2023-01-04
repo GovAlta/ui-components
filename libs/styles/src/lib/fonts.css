@@ -1,4 +1,5 @@
 @import url("https://p.typekit.net/p.css?s=1&k=nur5yta&ht=tk&f=26036.26037.26044.26046.26047&a=14638192&app=typekit&e=css");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 
 @font-face {
   font-family: "acumin-pro-semi-condensed";
@@ -58,4 +59,12 @@
       format("opentype");
   font-style: normal;
   font-weight: 600;
+}
+
+@font-face {
+  font-family: "roboto-mono";
+  src: url("https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_ROW4.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 400;
 }

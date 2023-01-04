@@ -10,7 +10,12 @@ export class DropdownComponent {
   colors: string[] = ["red", "green", "blue"];
   selectedColor = "red";
   boundVal = "";
-  reactiveFormCtrl = new FormControl("red");
+  reactiveFormCtrl = new FormControl({ value: "green", disabled: true });
+
+  color = new FormControl("green");
+
+  isMobile = window.matchMedia("(any-pointer:coarse)").matches;
+  disabled = false;
 
   groups = [
     {
@@ -28,6 +33,11 @@ export class DropdownComponent {
   constructor() {}
 
   selectColor(event: any) {
+    console.log("Select Color", event);
     this.selectedColor = event.detail.value;
+  }
+
+  handleSelectChange(event: any) {
+    console.log("select change", event.detail.value, event);
   }
 }

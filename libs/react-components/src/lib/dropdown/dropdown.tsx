@@ -2,21 +2,21 @@ import React, { FC, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconType } from "../icon/icon";
 
-export * from "./dropdown-option";
-
 interface WCProps extends Margins {
   ref: React.MutableRefObject<HTMLElement | null>;
-  name: string;
-  value: string;
-  leadingicon?: string;
-  maxheight?: string;
-  placeholder?: string;
-  filterable?: boolean;
+  arialabel?: string;
   disabled?: boolean;
   error?: boolean;
+  filterable?: boolean;
+  leadingicon?: string;
+  maxheight?: string;
   multiselect?: boolean;
-  width?: string;
+  name?: string;
+  native?: boolean;
+  placeholder?: string;
   testid?: string;
+  value?: string;
+  width?: string;
 }
 
 declare global {
@@ -30,21 +30,33 @@ declare global {
 }
 
 interface Props extends Margins {
-  name: string;
-  value: string[] | string;
+  name?: string;
+  value?: string[] | string;
   onChange: (name: string, values: string[] | string) => void;
 
   // optional
+  ariaLabel?: string;
+  children?: React.ReactNode;
   disabled?: boolean;
+  error?: boolean;
   filterable?: boolean;
   leadingIcon?: GoAIconType;
   maxHeight?: string;
-  error?: boolean;
   multiselect?: boolean;
+  native?: boolean;
   placeholder?: string;
   testId?: string;
   width?: string;
-  children?: React.ReactNode;
+}
+
+function stringify(value: string | string[] | undefined): string {
+  if (typeof value === "undefined") {
+    return "";
+  }
+  if (typeof value === "string") {
+    return value;
+  }
+  return JSON.stringify(value);
 }
 
 export const GoADropdown: FC<Props> = (props) => {
@@ -68,20 +80,22 @@ export const GoADropdown: FC<Props> = (props) => {
     <goa-dropdown
       ref={el}
       name={props.name}
-      value={JSON.stringify(props.value)}
+      value={stringify(props.value)}
+      arialabel={props.ariaLabel}
+      disabled={props.disabled}
+      error={props.error}
+      filterable={props.filterable}
       leadingicon={props.leadingIcon}
       maxheight={props.maxHeight}
-      placeholder={props.placeholder}
-      filterable={props.filterable}
-      disabled={props.disabled}
-      multiselect={props.multiselect}
-      error={props.error}
-      testid={props.testId}
-      width={props.width}
-      mt={props.mt}
-      mr={props.mr}
       mb={props.mb}
       ml={props.ml}
+      mr={props.mr}
+      mt={props.mt}
+      multiselect={props.multiselect}
+      native={props.native}
+      placeholder={props.placeholder}
+      testid={props.testId}
+      width={props.width}
     >
       {props.children}
     </goa-dropdown>

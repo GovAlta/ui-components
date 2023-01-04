@@ -1,19 +1,31 @@
 <svelte:options tag="goa-radio-group" />
 
 <script lang="ts">
-  import { onDestroy } from "svelte";
-  import type { RadioMessage } from "./types";
   import type { Spacing } from "../../common/styling";
-  import { deleteContext, ContextStore, getContext } from "../../common/context-store";
-  import { toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
+  import { onMount, tick } from "svelte";
+
+  // Validator
+  const [Orientations, validateOrientation] = typeValidator("Radio group orientation",
+    ["vertical", "horizontal"]
+  );
+
+  // Type
+  type Orientation = typeof Orientations[number];
+
+  interface RadioOption {
+    label: string;
+    value: string;
+  }
 
   export let name: string;
   export let value: string;
-  export let orientation: "vertical" | "horizontal" = "vertical";
+  export let orientation: Orientation = "vertical";
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
+  export let arialabel: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -21,28 +33,53 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  let options: RadioMessage[] = [];
+  let options: RadioOption[] = [];
 
   // private
-  let isError: boolean;
-  let ctx: ContextStore;
-
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
 
-  let isBound = false;
   let el: HTMLElement;
-  $: {
-    if (name && !isBound) {
-      isBound = true;
-      ctx = getContext(name);
-      ctx.subscribe(msg => {
-        if (!msg) return;
-        options = [...options, msg as RadioMessage];
-      });
-    }
+
+  onMount(async () => {
+    await tick();
+
+    options = getOptions();
+  });
+
+  /**
+  * Allows the child elements to be obtainable within unit tests
+  * @returns List of child elements
+  */
+  function getChildren(): Element[] {
+    const slot = el.querySelector("slot") as HTMLSlotElement;
+    if (slot)
+      // default
+      return [...slot.assignedElements()];
+    else
+      // unit tests
+      return [...el.children] as Element[];
   }
 
+  /**
+  * Maps the child elements to a list of RadioOptions
+  */
+  function getOptions(): RadioOption[] {
+    const children = getChildren();
+
+    return children.map((el: HTMLElement) => {
+      const option = el as unknown as RadioOption & { innerText: string };
+      const value = el.getAttribute("value") || option.value;
+      const label =
+        el.getAttribute("label") || el.innerText || option.label || option.innerText;
+      return { value, label };
+    });
+  }
+
+  /**
+  * Handles changing of the radio items
+  * @param newValue Selected value
+  */
   function onChange(newValue: string) {
     if (newValue === value) return;
 
@@ -55,8 +92,8 @@
     );
   }
 
-  onDestroy(() => {
-    deleteContext(name);
+  onMount(() => {
+    validateOrientation(orientation);
   });
 </script>
 
@@ -81,6 +118,7 @@
         value={option.value}
         disabled={isDisabled}
         checked={option.value === value}
+        aria-label={arialabel || name}
         on:change={() => onChange(option.value)}
       />
       <div class="goa-radio-icon" />

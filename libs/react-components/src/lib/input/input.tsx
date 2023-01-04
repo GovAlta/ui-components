@@ -48,6 +48,7 @@ interface WCProps extends Margins {
   prefix?: string;
   suffix?: string;
   testid?: string;
+  arialabel?: string;
 
   // type=number
   min?: string | number;
@@ -84,6 +85,9 @@ interface BaseProps extends Margins {
   prefix?: string;
   suffix?: string;
   testId?: string;
+  ariaLabel?: string;
+  leadingContent?: React.ReactNode;
+  trailingContent?: React.ReactNode;
 }
 
 type OnChange = (name: string, value: string) => void;
@@ -134,10 +138,13 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   step,
   prefix,
   suffix,
+  ariaLabel,
   mt,
   mr,
   mb,
   ml,
+  leadingContent,
+  trailingContent,
   onTrailingIconClick,
   onChange,
 }) => {
@@ -186,12 +193,16 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
       step={step}
       prefix={prefix}
       suffix={suffix}
+      arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}
       ml={ml}
       handletrailingiconclick={!!onTrailingIconClick}
-    />
+    >
+      {leadingContent && <div slot="leadingContent">{leadingContent}</div>}
+      {trailingContent && <div slot="trailingContent">{trailingContent}</div>}
+    </goa-input>
   );
 };
 

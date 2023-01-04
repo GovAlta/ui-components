@@ -133,6 +133,7 @@ small {
   color: var(--color-gray);
 }
 
+/* TODO: move these styles into the component using either the ::slotted or :global */
 /* Components */
 goa-two-column-layout h1:first-of-type,
 goa-two-column-layout h2:first-of-type,

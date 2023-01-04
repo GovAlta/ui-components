@@ -3,6 +3,7 @@ import React, { FC } from "react";
 interface WCProps {
   heading: string;
   backgroundurl: string;
+  minheight?: string;
 }
 
 declare global {
@@ -17,16 +18,22 @@ declare global {
 interface Props {
   heading: string;
   backgroundUrl: string;
+  minHeight?: string;
   children?: React.ReactNode;
 }
 
 export const GoAHeroBanner: FC<Props> = ({
   heading,
   backgroundUrl,
+  minHeight,
   children,
 }) => {
   return (
-    <goa-hero-banner heading={heading} backgroundurl={backgroundUrl}>
+    <goa-hero-banner
+      heading={heading}
+      backgroundurl={backgroundUrl}
+      minheight={minHeight}
+    >
       {children}
     </goa-hero-banner>
   );

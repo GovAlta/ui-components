@@ -9,7 +9,7 @@ import {
 } from "@abgov/shared/storybook-common";
 import {
   GoADropdown,
-  GoADropdownOption,
+  GoADropdownItem,
   GoACallout,
 } from "@abgov/react-components";
 import { useState } from "react";
@@ -18,7 +18,7 @@ import { useState } from "react";
 
 # Dropdown
 
-### Dropdowns hide a long list of options, arranged vertically. A single select menu list is revealed upon intercation with this component.
+### Dropdowns hide a long list of options, arranged vertically. A single select menu list is revealed upon interaction with this component.
 
 [Figma design component](https://www.figma.com/file/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Components-%7C-DIO-DS?node-id=700%3A7316)
 
@@ -30,7 +30,6 @@ import { useState } from "react";
   <Prop
     name="name"
     type="string"
-    required="true"
     description="Must be unique in the rendered view and must match the children's name"
   />
   <Prop
@@ -41,18 +40,18 @@ import { useState } from "react";
   <Prop
     name="leadingIcon"
     type="GoAIconType"
-    description="Show an icon to the left of the dropdown option"
+    description="Show an icon to the left of the dropdown option. **Non-native only**"
   />
   <Prop
     name="maxHeight"
     type="string"
     defaultValue="276px"
-    description="Maximum height of the dropdown menu items popover"
+    description="Maximum height of the dropdown menu items popover. **Non-native only**"
   />
   <Prop
     name="placeholder"
     type="string"
-    description="The text displayed for the dropdown before a selection is made."
+    description="The text displayed for the dropdown before a selection is made. **Non-native only**"
   />
   <Prop
     name="width"
@@ -75,6 +74,12 @@ import { useState } from "react";
     name="ariaLabel"
     type="string"
     description="Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name"
+  />
+  <Prop
+    name="native"
+    type="boolean"
+    defaultValue="false"
+    description="When true will render the native <select> html element"
   />
   <Prop
     name="onChange"
@@ -118,11 +123,6 @@ import { useState } from "react";
 
 <Props>
   <Prop
-    name="name"
-    type="string"
-    description="Must match the name of the parent GoADropdown component"
-  />
-  <Prop
     name="value"
     type="string"
     description="The value of the item. This value will be contained within the onChange event"
@@ -136,33 +136,24 @@ import { useState } from "react";
 
 #### Note
 
-<Story name="Information">
-  <GoACallout type="information">
-    The name values for parent/children must match. To avoid name clashes, the
-    name shared with the parent/children must be unique.
-  </GoACallout>
-</Story>
-
 export const Template = (args) => {
-  const [value, setValue] = useState("green");
+  const [value, setValue] = useState("");
   function onChange(name, value) {
     console.log(name, value);
     setValue(value);
   }
   return (
-    <GoADropdown {...args} name={args.name} value={value} onChange={onChange}>
-      <GoADropdownOption name={args.name} value="red" label="Red" />
-      <GoADropdownOption name={args.name} value="green" label="Green" />
-      <GoADropdownOption name={args.name} value="blue" label="Blue" />
+    <GoADropdown {...args} value={value} onChange={onChange}>
+      <GoADropdownItem value="red" label="Red" />
+      <GoADropdownItem value="green" label="Green" />
+      <GoADropdownItem value="blue" label="Blue" />
     </GoADropdown>
   );
 };
 
 #### Basic
 
-<Story name="Basic" args={{ name: "basic" }}>
-  {Template.bind()}
-</Story>
+<Story name="Basic">{Template.bind()}</Story>
 
 <Tabs>
   <Tab label="Web Component" hidden={true}>
@@ -170,9 +161,9 @@ export const Template = (args) => {
       lang="html"
       code={`
         <goa-dropdown id="dropdown" name="colors">
-          <goa-dropdown-item value="red" name="colors" label="Red" />
-          <goa-dropdown-item value="green" name="colors" label="Green" />
-          <goa-dropdown-item value="blue" name="colors" label="Blue" />
+          <goa-dropdown-item value="red" label="Red" />
+          <goa-dropdown-item value="green" label="Green" />
+          <goa-dropdown-item value="blue" label="Blue" />
         </goa-dropdown>
       `}
     />
@@ -197,7 +188,6 @@ export const Template = (args) => {
           [formControl]="reactiveFormCtrl"
           [value]="reactiveFormCtrl.value">
           <goa-dropdown-item
-            name="colors"
             *ngFor="let color of colors"
             [value]="color"
             [label]="color"
@@ -227,9 +217,9 @@ export const Template = (args) => {
         }
         return (
           <GoADropdown name="colors" value={value} onChange={onChange}>
-            <GoADropdownOption name="colors" value="red" label="Red" />
-            <GoADropdownOption name="colors" value="green" label="Green" />
-            <GoADropdownOption name="colors" value="blue" label="Blue" />
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
           </GoADropdown>
         )
       `}
@@ -249,9 +239,9 @@ export const Template = (args) => {
       lang="html"
       code={`
         <goa-dropdown id="dropdown" name="colors" error="true">
-          <goa-dropdown-item value="red" name="colors" label="Red" />
-          <goa-dropdown-item value="green" name="colors" label="Green" />
-          <goa-dropdown-item value="blue" name="colors" label="Blue" />
+          <goa-dropdown-item value="red" label="Red" />
+          <goa-dropdown-item value="green" label="Green" />
+          <goa-dropdown-item value="blue" label="Blue" />
         </goa-dropdown>
       `}
     />
@@ -261,9 +251,9 @@ export const Template = (args) => {
       lang="html"
       code={`
         <goa-dropdown name="colors" error="true">
-          <goa-dropdown-item value="red" name="colors" label="Red"></goa-dropdown-item>
-          <goa-dropdown-item value="green" name="colors" label="Green"></goa-dropdown-item>
-          <goa-dropdown-item value="blue" name="colors" label="Blue"></goa-dropdown-item>
+          <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
+          <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+          <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
         </goa-dropdown>
       `}
     />
@@ -273,10 +263,97 @@ export const Template = (args) => {
       lang="tsx"
       code={`
         <GoADropdown name="colors" error={true} value={value} onChange={() => {}}>
-          <GoADropdownOption name="colors" value="red" label="Red" />
-          <GoADropdownOption name="colors" value="green" label="Green" />
-          <GoADropdownOption name="colors" value="blue" label="Blue" />
+          <GoADropdownItem value="red" label="Red" />
+          <GoADropdownItem value="green" label="Green" />
+          <GoADropdownItem value="blue" label="Blue" />
         </GoADropdown>
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Native
+
+<Story name="Native">
+  <GoADropdown
+    name="native"
+    onChange={(name, value) => console.log(name, value)}
+    native={true}
+  >
+    <GoADropdownItem name="native" value="red" label="Red" />
+    <GoADropdownItem name="native" value="green" label="Green" />
+    <GoADropdownItem name="native" value="blue" label="Blue" />
+  </GoADropdown>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown id="dropdown" name="colors" native>
+          <goa-dropdown-item value="red" label="Red" />
+          <goa-dropdown-item value="green" label="Green" />
+          <goa-dropdown-item value="blue" label="Blue" />
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        var dropdown = document.getElementById("dropdown");
+        dropdown.addEventListener("_change", e => {
+          console.log("_change", e.detail);
+          dropdown.setAttribute("value", e.detail.value);
+        });
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown
+          goaValue
+          name="colors"
+          native="true"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value">
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl("red");
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState('green');
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoADropdown name="colors" value={value} onChange={onChange} native={true}>
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
+          </GoADropdown>
+        )
       `}
     />
   </Tab>

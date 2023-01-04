@@ -32,4 +32,22 @@ describe("GoAHeroBanner", () => {
     })
   })
 
+  describe("Min Height", () => {
+    it("uses the default min height", async () => {
+      const result = render(GoAHeroBanner, { heading: "Jeading", backgroundurl: "somepic.png" });
+      const heroBanner = result.queryByTestId("background");
+      await waitFor(() => {
+        expect(heroBanner).toHaveStyle("min-height: 600px");  // 600px is default value
+      })
+    });
+
+    it("uses the min height when supplied", async () => {
+      const result = render(GoAHeroBanner, { heading: "Jeading", backgroundurl: "somepic.png", minheight: "700px" });
+      const heroBanner = result.queryByTestId("background");
+      await waitFor(() => {
+        expect(heroBanner).toHaveStyle("min-height: 700px");
+      })
+    });
+  })
+
 });

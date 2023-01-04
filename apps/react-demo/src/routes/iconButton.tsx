@@ -39,6 +39,16 @@ export default function IconButton() {
       <h2>Disabled</h2>
       <GoAIconButton icon="close" disabled></GoAIconButton>
       <GoAIconButton icon="download" disabled></GoAIconButton>
+
+      <h2>Margin Spacing</h2>
+      <GoAIconButton
+        mt="m"
+        mb="xs"
+        ml="xl"
+        mr="2xl"
+        icon="airplane"
+        onClick={() => console.log("clicked")}
+      ></GoAIconButton>
     </>
   );
 }
