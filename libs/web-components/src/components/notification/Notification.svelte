@@ -60,7 +60,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   .notification {
     padding: 1.5rem;
@@ -69,22 +69,22 @@
   }
 
   .emergency {
-    background-color: var(--goa-color-status-emergency);
-    color: var(--color-white);
+    background-color: var(--goa-color-emergency-default);
+    color: var(--goa-color-greyscale-white);
   }
 
   .important {
-    background-color: var(--goa-color-status-warning);
+    background-color: var(--goa-color-warning-default);
   }
 
   .information {
-    background-color: var(--goa-color-status-info);
-    color: var(--color-white);
+    background-color: var(--goa-color-info-default);
+    color: var(--goa-color-greyscale-white);
   }
   .event {
     /* TODO: this color name doesn't make sense */
-    background-color: var(--goa-color-status-success);
-    color: var(--color-white);
+    background-color: var(--goa-color-success-default);
+    color: var(--goa-color-greyscale-white);
   }
 
   .icon {

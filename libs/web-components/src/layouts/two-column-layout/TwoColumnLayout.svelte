@@ -37,7 +37,7 @@
   }
 
   .content {
-    flex: 1 1 auto; 
+    flex: 1 1 auto;
     position: relative;
 
     display: flex;
@@ -57,8 +57,8 @@
 
   .nav {
     padding: 0 1rem;
-    transition: transform 200ms ease-in-out; 
-    background-color: var(--color-white);
+    transition: transform 200ms ease-in-out;
+    background-color: var(--goa-color-greyscale-white);
   }
 
   .nav > * {
@@ -100,7 +100,7 @@
   /** Come back to when hiding sidebar is added
   .toggle-menu-button {
     position: absolute;
-    transition: transform 200ms ease-in-out; 
+    transition: transform 200ms ease-in-out;
     top: 0;
     padding: 6px;
     z-index: 9999;
@@ -139,7 +139,7 @@
     /** icons styles
     .open .toggle-menu-button {
       transform: translateX(calc(-1 * var(--nav-column-width)));
-      transition: transform 200ms ease-in-out; 
+      transition: transform 200ms ease-in-out;
     }
     .toggle-menu-button {
       visibility: hidden;
@@ -150,11 +150,11 @@
 
 </style>
 
-<div 
+<div
   class="page"
   style={`
     --max-content-width: ${maxcontentwidth || "100%"};
-    --nav-column-width: ${navcolumnwidth || "var(--layout-nav-column-width)"};
+    --nav-column-width: ${navcolumnwidth || "256px"};
   `}
 >
   <header class="header">

@@ -5,9 +5,8 @@ This library contains react components from the Government of Alberta.
 Add Dependencies
 
 ```bash
-npm i @abgov/react-components@alpha
-npm i @abgov/web-components@alpha
-npm i @abgov/styles@alpha
+npm i @abgov/react-components
+npm i @abgov/web-components
 ```
 
 Link ionicons in app/index.html
@@ -27,5 +26,5 @@ Add the following to the head element
 Import the styles in the `src/index.css` file
 
 ```css
-@import "@abgov/styles/styles.esm.css";
+@import "@abgov/web-components/index.css";
 ```

@@ -1,3 +1,5 @@
+import "./index.svelte";
+
 export * from "./components/app-header/AppHeader.svelte";
 export * from "./components/badge/Badge.svelte";
 export * from "./components/block/Block.svelte";

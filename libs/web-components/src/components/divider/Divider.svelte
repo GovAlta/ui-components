@@ -19,7 +19,7 @@
     padding: 0;
     margin: 0;
     height: 1px;
-    background-color: var(--color-gray-200);
+    background-color: var(--goa-color-greyscale-200);
     border: none;
   }
 </style>

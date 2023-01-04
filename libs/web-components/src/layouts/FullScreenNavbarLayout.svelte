@@ -5,8 +5,8 @@
     height: 100vh;
     grid-template-columns: auto;
     grid-template-rows: min-content auto min-content;
-    grid-template-areas: 
-      "header"  
+    grid-template-areas:
+      "header"
       "content"
       "nav"
       "footer";
@@ -19,18 +19,18 @@
     .page {
       grid-template-columns: 300px auto;
       grid-template-rows: min-content auto min-content;
-      grid-template-areas: 
-        "header header"  
+      grid-template-areas:
+        "header header"
         "nav content"
         "footer footer";
     }
   }
 
   .header {
-    grid-area: header;  
+    grid-area: header;
   }
   .footer {
-    grid-area: footer;  
+    grid-area: footer;
   }
 
   main {
@@ -42,7 +42,7 @@
   .nav {
     grid-area: nav;
     padding: 1rem;
-    background-color: var(--color-gray-100);
+    background-color: var(--goa-color-greyscale-100);
   }
 </style>
 

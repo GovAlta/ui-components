@@ -80,7 +80,7 @@
   "goa-radio-diameter": "1.5rem",
   "goa-radio-border-width": "1px",
   "goa-radio-border-width--checked": "7px",
-  "goa-color-interactive--active": "#004f84",
+  "goa-color-interactive-hover": "#004f84",
   "chip-error-border-color": "#949494",
   "model-content-margin-bottom": "1rem",
   "model-content-margin": "0",

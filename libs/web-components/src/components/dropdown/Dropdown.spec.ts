@@ -444,10 +444,10 @@ describe('GoADropdown', () => {
       const dropdown = await baseElement.findByTestId("test-dropdown");
 
       expect(dropdown).toBeTruthy();
-      expect(dropdown).toHaveStyle("margin-top:var(--goa-spacing-s)");
-      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-spacing-m)");
-      expect(dropdown).toHaveStyle("margin-right:var(--goa-spacing-l)");
-      expect(dropdown).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+      expect(dropdown).toHaveStyle("margin-top:var(--goa-space-s)");
+      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-space-m)");
+      expect(dropdown).toHaveStyle("margin-right:var(--goa-space-l)");
+      expect(dropdown).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
 });

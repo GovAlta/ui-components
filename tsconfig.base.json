@@ -43,6 +43,9 @@
       ],
       "@abgov/web-components": [
         "dist/libs/web-components/web-components.es.js"
+      ],
+      "@abgov/web-components/index.css": [
+        "dist/libs/web-components/index.css"
       ]
     }
   },

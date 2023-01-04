@@ -252,10 +252,10 @@ describe('GoAInput Component', () => {
       const input = await baseElement.findByTestId("input-test");
 
       expect(input).toBeTruthy();
-      expect(input).toHaveStyle("margin-top:var(--goa-spacing-s)");
-      expect(input).toHaveStyle("margin-right:var(--goa-spacing-m)");
-      expect(input).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
-      expect(input).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+      expect(input).toHaveStyle("margin-top:var(--goa-space-s)");
+      expect(input).toHaveStyle("margin-right:var(--goa-space-m)");
+      expect(input).toHaveStyle("margin-bottom:var(--goa-space-l)");
+      expect(input).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
 

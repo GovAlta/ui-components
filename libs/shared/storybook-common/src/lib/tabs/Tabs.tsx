@@ -129,7 +129,7 @@ const SCTab = styled.div`
   }
 
   &.active {
-    border-bottom: 4px solid var(--goa-color-brand);
+    border-bottom: 4px solid var(--goa-color-brand-default);
     padding-bottom: 0;
   }
 `;

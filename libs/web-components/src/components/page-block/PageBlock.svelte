@@ -9,7 +9,7 @@
   const Sizes = {
     "full": "100%",
   }
-  
+
   // Required
   export let width: Size;
 
@@ -17,7 +17,7 @@
   export let _width: string;
 
   function isValidSize(value: string) {
-    if (["full"].includes((width))) 
+    if (["full"].includes((width)))
       return true;
     if (isValidDimension(value))
       return true;
@@ -36,7 +36,7 @@
 </script>
 
 <!-- HTML -->
-<div 
+<div
   class="page-content"
   style={`--max-width: ${_width}`}
 >
@@ -47,7 +47,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   .page-content {
     max-width: var(--max-width);

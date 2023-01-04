@@ -37,7 +37,7 @@
 
   onMount(() => {
     // hold on to the initial value to prevent losing it on check changes
-    _value = value;  
+    _value = value;
   })
 
   function onChange(e: Event) {
@@ -45,7 +45,7 @@
     // out of sync with the events.
     const newCheckStatus = !isChecked;
     const newValue = newCheckStatus ? `${_value || "checked"}` : "";
- 
+
     // set the local state
     checked = fromBoolean(newCheckStatus);
 
@@ -110,7 +110,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
     display: block;
   }
   .goa-checkbox {
@@ -133,9 +133,9 @@
 
   .goa-checkbox-container {
     box-sizing: border-box;
-    border: 1px solid var(--color-gray-600);
+    border: 1px solid var(--goa-color-greyscale-700);
     border-radius: 2px;
-    background-color: var(--color-white);
+    background-color: var(--goa-color-greyscale-white);
     height: 1.5rem;
     width: 1.5rem;
     display: flex;
@@ -146,46 +146,46 @@
     flex: 0 0 auto;
   }
   .goa-checkbox-container svg {
-    fill: var(--color-white);
+    fill: var(--goa-color-greyscale-white);
   }
 
   .goa-checkbox-container.goa-checkbox--selected {
-    background-color: var(--goa-color-interactive);
+    background-color: var(--goa-color-interactive-default);
   }
 
   .goa-checkbox-container.goa-checkbox--selected:hover {
-    background-color: var(--goa-color-interactive--hover);
+    background-color: var(--goa-color-interactive-hover);
   }
 
   .goa-checkbox-container:hover {
-    border: 1px solid var(--goa-color-interactive--hover);
+    border: 1px solid var(--goa-color-interactive-hover);
   }
 
   .goa-checkbox-container:focus-within {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
     outline: none;
   }
 
   .goa-checkbox-text {
     padding-left: 0.5rem;
     user-select: none;
-    font-weight: var(--fw-regular);
+    font-weight: var(--goa-font-weight-regular);
   }
 
   .goa-checkbox--disabled .goa-checkbox-container,
   .goa-checkbox--disabled .goa-checkbox-container:hover {
-    border: 1px solid var(--color-gray-400);
+    border: 1px solid var(--goa-color-greyscale-400);
   }
 
   /* Error state */
   .goa-checkbox--error .goa-checkbox-container,
   .goa-checkbox--error .goa-checkbox-container:hover {
-    border: 1px solid var(--goa-color-status-emergency);
-    box-shadow: inset 0 0 0 1px var(--goa-color-status-emergency);
-    background-color: var(--color-white);
+    border: 1px solid var(--goa-color-emergency-default);
+    box-shadow: inset 0 0 0 1px var(--goa-color-emergency-default);
+    background-color: var(--goa-color-greyscale-white);
   }
 
   .goa-checkbox--error .goa-checkbox-container svg {
-    fill: var(--goa-color-status-emergency);
+    fill: var(--goa-color-emergency-default);
   }
 </style>

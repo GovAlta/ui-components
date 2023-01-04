@@ -68,8 +68,8 @@
   }
 
   .title {
-    font-size: var(--fs-xl);
-    line-height: var(--lh-lg);
+    font-size: var(--goa-font-size-7);
+    line-height: var(--goa-line-height-4);
   }
 
   .hidden {
@@ -107,6 +107,6 @@
   }
 
   a {
-    color: var(--goa-color-text);
+    color: var(--goa-color-text-default);
   }
 </style>
