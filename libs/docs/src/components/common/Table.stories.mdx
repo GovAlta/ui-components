@@ -28,6 +28,12 @@ import { GoATable } from "@abgov/react-components";
     type="string"
     description="Width of the table. By default it will fit the enclosed content."
   />
+  <Prop
+    name="variant"
+    type="normal | relaxed"
+    defaultValue="normal"
+    description="A relaxed variant of the table with more vertical padding for the cells"
+  />
 </Props>
 
 <details>
@@ -149,9 +155,9 @@ export const TableTemplate = (args) => {
   </Tab>
 </Tabs>
 
-#### Width
+#### Custom Width
 
-<Story name="Width" args={{ width: "100%" }}>
+<Story name="Custom Width" args={{ width: "100%" }}>
   {TableTemplate.bind()}
 </Story>
 
@@ -189,6 +195,71 @@ export const TableTemplate = (args) => {
       lang="tsx"
       code={`
       <GoATable width="100%">
+        <thead>
+          <tr>
+            <th>Col 1</th>
+            <th>Col 2</th>
+            <th>Col 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Item 1</td>
+            <td>Item 2</td>
+            <td>Item 3</td>
+          </tr>
+          <tr>
+            <td>Item 4</td>
+            <td>Item 5</td>
+            <td>Item 6</td>
+          </tr>
+        </tbody>
+      </GoATable>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Relaxed Variant
+
+<Story name="Relaxed Variant" args={{variant: "relaxed"}}>
+  {TableTemplate.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-table variant="relaxed">
+        <thead>
+          <tr>
+            <th>Col 1</th>
+            <th>Col 2</th>
+            <th>Col 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Item 1</td>
+            <td>Item 2</td>
+            <td>Item 3</td>
+          </tr>
+          <tr>
+            <td>Item 4</td>
+            <td>Item 5</td>
+            <td>Item 6</td>
+          </tr>
+        </tbody>
+      </goa-table>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoATable variant="relaxed">
         <thead>
           <tr>
             <th>Col 1</th>

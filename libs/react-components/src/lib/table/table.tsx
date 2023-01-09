@@ -1,9 +1,12 @@
 import React, { ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
+export type TableVariant = "normal" | "relaxed";
+
 interface WCProps extends Margins {
   width?: string;
   stickyheader?: boolean;
+  variant?: TableVariant
 }
 
 declare global {
@@ -20,12 +23,13 @@ declare global {
 export interface TableProps extends Margins {
   width?: string;
   // stickyHeader?: boolean; TODO: enable this later
-  children?: ReactNode;
+  variant?: TableVariant;
+  children: ReactNode;
 }
 
 export function GoATable(props: TableProps) {
   return (
-    <goa-table width={props.width} stickyheader={false}>
+    <goa-table width={props.width} stickyheader={false} variant={props.variant}>
       <template>
         <table>{props.children}</table>
       </template>
