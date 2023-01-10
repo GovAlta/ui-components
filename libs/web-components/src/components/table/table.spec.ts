@@ -26,6 +26,6 @@ describe("GoATable", () => {
     const style = table.getAttribute("style");
     expect(style).toContain("width: 100%");
     expect(table.classList.contains("sticky"));
-    expect(table.classList).contains(variant);
+    expect(table.classList.contains(variant));
   })
 })
