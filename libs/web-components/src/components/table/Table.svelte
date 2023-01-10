@@ -3,11 +3,21 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
-  import { toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean } from "../../common/utils";
+
+  // Validators
+  const [Variants, validateVariant] = typeValidator(
+    "Table variant",
+    ["normal", "relaxed"],
+    true,
+  );
+  type Variant = typeof Variants[number];
 
   // Public
   export let width: string = "";
   export let stickyheader: string = "false";
+  export let variant: Variant = "normal";
+
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -18,6 +28,7 @@
   $: _stickyHeader = toBoolean(stickyheader);
 
   onMount(() => {
+    validateVariant(variant);
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
 
     if (slot) {
@@ -31,10 +42,11 @@
 </script>
 
 <table
+  class={variant}
   class:sticky={_stickyHeader}
   bind:this={_rootEl}
   style={`
-    width: ${width};
+    ${width ? `width: ${width};`: ``}
     ${calculateMargin(mt, mr, mb, ml)}
   `}
 >
@@ -59,10 +71,15 @@
     top: 0;
   }
   td {
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1rem 0.5rem;
     border-bottom: 1px solid var(--color-gray-200);
     line-height: 1rem;
   }
+
+  table.relaxed td{
+    padding: 1.25rem 1rem 1rem;
+  }
+
   th {
     background-color: var(--color-white);
     color: var(--goa-color-text-secondary);
