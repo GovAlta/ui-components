@@ -6,7 +6,7 @@ export type TableVariant = "normal" | "relaxed";
 interface WCProps extends Margins {
   width?: string;
   stickyheader?: boolean;
-  variant?: TableVariant
+  variant?: TableVariant;
 }
 
 declare global {
