@@ -43,11 +43,12 @@
   export let testid: string = "";
   export let width: string = "30ch";
   export let arialabel: string = null;
-  export let min: string = null;
-  export let max: string = null;
-  export let step: number = null;
+  export let min: string = "";
+  export let max: string = "";
+  export let step: number = 1;
   export let prefix: string = "";
   export let suffix: string = "";
+  export let debounce: number = 0;
 
   // margin
   export let mt: Spacing = null;
@@ -72,17 +73,28 @@
     });
   }
 
+  let _debounceId = null;
   function onKeyUp(e: Event) {
-    const ee = e.target as HTMLInputElement;
-    e.target.dispatchEvent(
-      new CustomEvent("_change", {
-        composed: true,
-        bubbles: false,
-        cancelable: true,
-        detail: { name, value: ee.value },
-      }),
-    );
-    value = ee.value;
+    const input = e.target as HTMLInputElement;
+
+    if (!input) return;
+
+    if (_debounceId != null) {
+      clearTimeout(_debounceId);
+    }
+
+    _debounceId = setTimeout(() => {
+      input.dispatchEvent(
+        new CustomEvent("_change", {
+          composed: true,
+          bubbles: false,
+          cancelable: true,
+          detail: { name, value: input.value },
+        }),
+      );
+    }, debounce);
+    
+    value = input.value;
   }
 
   function doClick() {
@@ -260,6 +272,7 @@
     padding: var(--goa-space-xs);
     line-height: calc(40px - calc(var(--goa-space-xs) * 2));
     background-color: transparent;
+
     width: 0;
     flex: 1 1 auto;
     font-family: var(--goa-font-family-sans);

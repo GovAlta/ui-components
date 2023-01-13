@@ -126,7 +126,9 @@ describe('GoAInput Component', () => {
     });
 
     await fireEvent.keyUp(input, { target: { value: 'foobar' } });
-    expect(change).toBeCalledTimes(1);
+    await waitFor(() => {
+      expect(change).toBeCalledTimes(1);
+    })
   });
 
   // The change event is what is fired when selecting a date from the calender supplied
@@ -141,7 +143,9 @@ describe('GoAInput Component', () => {
     });
 
     await fireEvent.change(input)
-    expect(change).toBeCalledTimes(1);
+    await waitFor(() => {
+      expect(change).toBeCalledTimes(1);
+    })
   })
 
   it("handles trailing icon click", async () => {
@@ -156,15 +160,6 @@ describe('GoAInput Component', () => {
   });
 
   describe("type=number", () => {
-    it("doesn't show numeric props if type isn't number", async () => {
-      const el = render(GoAInput);
-      const root = el.container.querySelector('input');
-      expect(root).toBeTruthy();
-      expect(root).not.toHaveAttribute("min")
-      expect(root).not.toHaveAttribute("max")
-      expect(root).not.toHaveAttribute("step")
-    });
-
     it("allows for a numeric props", async () => {
       const el = render(GoAInput, { type: "number", min: "0", max: "10", step: 2 });
       const root = el.container.querySelector('input');
@@ -180,9 +175,9 @@ describe('GoAInput Component', () => {
       const el = render(GoAInput, { type: "date" });
       const input = el.container.querySelector('input');
       expect(input).toBeTruthy();
-      expect(input).not.toHaveAttribute("min")
-      expect(input).not.toHaveAttribute("max")
-      expect(input).not.toHaveAttribute("step")
+      expect(input.getAttribute("min")).toBe("")
+      expect(input.getAttribute("max")).toBe("")
+      expect(input.getAttribute("step")).toBe("1")
     });
   })
 
@@ -197,7 +192,9 @@ describe('GoAInput Component', () => {
       });
 
       await fireEvent(input, new Event("search"))
-      expect(search).toBeCalledTimes(1);
+      await waitFor(() => {
+        expect(search).toBeCalledTimes(1);
+      })
     })
 
     it("does fire the search event if it is not a search input type", async () => {
@@ -261,7 +258,7 @@ describe('GoAInput Component', () => {
 
   describe("Leading and Trailing content", () => {
     it("should not have a slot for the leading and trailing content", async () => {
-      const el = render(GoAInputWrapper, { type: "text" });
+      const el = render(GoAInputWrapper);
       expect(el.container.querySelector("[slot=leadingContent]")).toBeNull();
       expect(el.container.querySelector("[slot=trailingContent]")).toBeNull();
     });
@@ -279,5 +276,25 @@ describe('GoAInput Component', () => {
       expect(el.container.innerHTML).toContain(content);
       expect(el.container.querySelector("[slot=trailingContent]").innerHTML).toContain(content);
     });
+  })
+
+  it("should delay the _change event when debounce is set", async () => {
+    const fn = jest.fn();
+    const el = render(GoAInput, { testid: "input-test", debounce: 1000 });
+    const input = el.getByTestId("input-test");
+    expect(input).toBeTruthy();
+
+    input.addEventListener('_change', (e: CustomEvent) => {
+      fn();
+    });
+
+    await fireEvent.keyUp(input, { target: { value: 'foobar' } });
+    await waitFor(() => {
+      expect(fn).not.toBeCalled();
+    }, { timeout: 500 })
+
+    await waitFor(() => {
+      expect(fn).toBeCalled();
+    }, { timeout: 2000})
   })
 });
