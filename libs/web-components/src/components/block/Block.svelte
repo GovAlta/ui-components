@@ -17,8 +17,8 @@
 <div
   class="block"
   style={`
-    ${calculateMargin(mt, mr, mb, ml)}
-    --gap: var(--goa-space-${gap});
+    ${calculateMargin(mt, mr, mb, ml)};
+    --gap: var(--goa-spacing-${gap});
     --alignment: ${alignment};
     --direction: ${direction};
   `}
@@ -32,5 +32,5 @@
     flex-direction: var(--direction);
     align-items: var(--alignment);
     gap: var(--gap);
-  }
+  } 
 </style>

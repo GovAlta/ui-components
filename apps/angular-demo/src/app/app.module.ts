@@ -31,6 +31,7 @@ import { MicrositeHeaderComponent } from "./microsite-header/microsite-header.co
 import { ModalComponent } from "./modal/modal.component";
 import { NavigationLinkComponent } from "./navigation-link/navigation-link.component";
 import { NotificationBannerComponent } from "./notification-banner/notification-banner.component";
+import { PaginateComponent } from "./paginate/paginate";
 import { RadioComponent } from "./radio/radio.component";
 import { SkeletonComponent } from "./skeleton/skeleton.component";
 import { SpacingComponent } from "./spacing/spacing";
@@ -61,6 +62,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
     ModalComponent,
     NavigationLinkComponent,
     NotificationBannerComponent,
+    PaginateComponent,
     RadioComponent,
     SkeletonComponent,
     SpacingComponent,

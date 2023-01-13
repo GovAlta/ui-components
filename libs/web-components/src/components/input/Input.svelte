@@ -272,8 +272,7 @@
     padding: var(--goa-space-xs);
     line-height: calc(40px - calc(var(--goa-space-xs) * 2));
     background-color: transparent;
-
-    width: 0;
+    width: 100%;
     flex: 1 1 auto;
     font-family: var(--goa-font-family-sans);
   }

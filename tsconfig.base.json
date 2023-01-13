@@ -38,9 +38,6 @@
       "@abgov/shared/storybook-common": [
         "libs/shared/storybook-common/src/index.ts"
       ],
-      "@abgov/styles": [
-        "dist/libs/styles/styles.esm.css"
-      ],
       "@abgov/web-components": [
         "dist/libs/web-components/web-components.es.js"
       ],

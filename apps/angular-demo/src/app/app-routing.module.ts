@@ -21,6 +21,7 @@ import { MicrositeHeaderComponent } from "./microsite-header/microsite-header.co
 import { ModalComponent } from "./modal/modal.component";
 import { NotificationBannerComponent } from "./notification-banner/notification-banner.component";
 import { RadioComponent } from "./radio/radio.component";
+import { PaginateComponent } from "./paginate/paginate";
 import { SkeletonComponent } from "./skeleton/skeleton.component";
 import { SpacingComponent } from "./spacing/spacing";
 import { TableComponent } from "./table/table";
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: "microsite-header", component: MicrositeHeaderComponent },
   { path: "modal", component: ModalComponent },
   { path: "notification-banner", component: NotificationBannerComponent },
+  { path: "paginate", component: PaginateComponent },
   { path: "radio", component: RadioComponent },
   { path: "skeleton", component: SkeletonComponent },
   { path: "spacing", component: SpacingComponent },
