@@ -85,9 +85,9 @@
     return children.map((el: HTMLElement) => {
       const option = el as unknown as Option
       const value = el.getAttribute("value") || option.value;
-      const label = 
-        el.getAttribute("label") 
-        || option.label 
+      const label =
+        el.getAttribute("label")
+        || option.label
         || value;
       const selected = _values.includes(value);
       if (selected) {
@@ -310,7 +310,7 @@
       {placeholder}
       aria-controls="menu"
       aria-expanded={_isMenuVisible}
-      aria-label={arialabel || name}
+      arialabel={arialabel || name}
       data-testid={`${name}-dropdown-input`}
       readonly
       role="combobox"
@@ -318,6 +318,7 @@
       type="text"
       value={_selectedLabel}
       width="100%"
+      name={name}
     />
     <!-- list and filter -->
     <ul

@@ -340,7 +340,7 @@ describe('GoADropdown', () => {
       const input = dropdown.querySelector('goa-input');
 
       // selected value
-      expect(input).toHaveAttribute("aria-label", "Favourite Color")
+      expect(input).toHaveAttribute("arialabel", "Favourite Color")
 
       await fireEvent.click(input);
 
@@ -456,10 +456,10 @@ describe("NativeSelect", () => {
   it("renders children", async () => {
     const name = "native-select"
     const items = ["red", "green", "blue"];
-    const { container } = render(GoADropdownWrapper, { 
-      name, 
-      value: "green", 
-      native: true, 
+    const { container } = render(GoADropdownWrapper, {
+      name,
+      value: "green",
+      native: true,
       items,
     })
 
@@ -495,7 +495,7 @@ describe("NativeSelect", () => {
       }),
     );
 
-    // The commented out code is the way I would like to test 
+    // The commented out code is the way I would like to test
     // fireEvent.click(select)
     await waitFor(async () => {
       // const option = select.querySelector("option[value=blue]")
