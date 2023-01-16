@@ -48,7 +48,7 @@
       <svelte:self type="image" {size} />
       <div class="card-content">
         <svelte:self type="header" {size} />
-        <svelte:self type="lines" {size} linecount={3} />
+        <svelte:self type="lines" {size} linecount={linecount} />
       </div>
     </div>
   {:else if type === "profile"}
@@ -62,7 +62,7 @@
       </div>
     </div>
   {:else if type === "lines"}
-    {#each Array(linecount) as _item}
+    {#each Array(Number.parseInt(linecount+"")) as _item}
       <svelte:self type="text" {size} linecount={linecount} />
     {/each}
   {:else}
