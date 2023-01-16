@@ -114,6 +114,11 @@
   function getCustomDropdownWidth(options: Option[]) {
     let width: string;
     let maxCount = 0;
+
+    if (options.length === 0 && placeholder !== "") {
+      return `${placeholder.length + 12}ch`;
+    }
+    
     options.forEach((option: Option) => {
       const label = option.label || option.value || "";
       if (!width && maxCount < label.length) {
