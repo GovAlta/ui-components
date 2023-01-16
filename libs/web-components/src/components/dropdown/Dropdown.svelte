@@ -52,11 +52,20 @@
     await tick();
     _values = parseValues();
     _options = getOptions();
+
     if (!_native) {
       _computedWidth = getCustomDropdownWidth(_options);
       addKeyboardEventListeners();
       setHighlightedIndexToSelected();
     }
+
+    // watch for DOM changes within the slot => dynamic binding
+    const slot = _el.querySelector("slot");
+    slot?.addEventListener("slotchange", (_e) => {
+      _selectedLabel = "";
+      _values = parseValues();
+      _options = getOptions();
+    })
   });
 
   onDestroy(() => {
@@ -82,20 +91,23 @@
   // work as long as it has a value and label content
   function getOptions(): Option[] {
     const children = getChildren();
-    return children.map((el: HTMLElement) => {
-      const option = el as unknown as Option
-      const value = el.getAttribute("value") || option.value;
-      const label =
-        el.getAttribute("label")
-        || option.label
-        || value;
-      const selected = _values.includes(value);
-      if (selected) {
-        _selectedLabel = label;
-        _values = [value];
-      }
-      return { selected, value, label};
-    });
+
+    return children
+      .filter((child: Element) => child.tagName === "GOA-DROPDOWN-ITEM")
+      .map((el: HTMLElement) => {
+          const option = el as unknown as Option
+          const value = el.getAttribute("value") || option.value;
+          const label =
+            el.getAttribute("label")
+            || option.label
+            || value;
+          const selected = _values.includes(value);
+          if (selected) {
+            _selectedLabel = label;
+            _values = [value];
+          }
+          return { selected, value, label};
+        });    
   }
 
   // compute the required width to enure all children fit
@@ -277,7 +289,7 @@
       class:error={_error}
       aria-label={arialabel || name}
     >
-     <slot />
+      <slot />
       {#each _options as option}
         <option
           selected={option.selected}
@@ -297,8 +309,6 @@
         on:click={closeMenu}
       />
     {/if}
-
-    <slot />
 
     <!-- readonly input  -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -320,7 +330,9 @@
       width="100%"
       name={name}
     />
+
     <!-- list and filter -->
+    <slot />
     <ul
       id="menu"
       role="listbox"
