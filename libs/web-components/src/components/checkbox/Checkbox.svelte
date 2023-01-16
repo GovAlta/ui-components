@@ -37,7 +37,7 @@
 
   onMount(() => {
     // hold on to the initial value to prevent losing it on check changes
-    _value = value;  
+    _value = value;
   })
 
   function onChange(e: Event) {
@@ -45,7 +45,7 @@
     // out of sync with the events.
     const newCheckStatus = !isChecked;
     const newValue = newCheckStatus ? `${_value || "checked"}` : "";
- 
+
     // set the local state
     checked = fromBoolean(newCheckStatus);
 
@@ -127,8 +127,12 @@
   }
 
   /* disabled state */
-  .goa-checkbox--disabled {
+  .goa-checkbox--disabled .goa-checkbox-text{
     opacity: 40%;
+  }
+
+  .goa-checkbox--disabled:hover {
+    cursor: default;
   }
 
   .goa-checkbox-container {
