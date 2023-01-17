@@ -57,8 +57,8 @@ export default function Table() {
         </tfoot>
       </GoATable>
 
-      <h4>Static Table</h4>
-      <GoATable width="100%">
+      <h4>Static Relaxed Table Variant</h4>
+      <GoATable width="100%" variant="relaxed">
         <TableStaticHead />
         <TableStaticBody />
       </GoATable>

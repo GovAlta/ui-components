@@ -30,6 +30,6 @@ jobs:
         run: npx nx affected --target=test --base=origin/${{ github.base_ref }}
       - name: Build
         run: |
-          npm run build:styles 
+          npm run build:styles
           npx nx affected --target=build --base=origin/${{ github.base_ref }}
           npx nx affected --target=post --base=origin/${{ github.base_ref }}

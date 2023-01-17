@@ -327,6 +327,56 @@ errorCheckboxTemplate.args = {
   </Tab>
 </Tabs>
 
+#### Formatting Options
+
+export const FormattingCheckboxTemplate = () => (
+  <GoACheckbox name="desserts" value="10">
+    <b>Ice Cream</b>
+  </GoACheckbox>
+);
+
+<Story name="Formatting Options">{FormattingCheckboxTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`<goa-checkbox name="desserts" value="10"><b>Ice Cream</b></goa-checkbox>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-checkbox
+          goaValue
+          name="desserts"
+          value="10"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
+        >
+          <b>Ice Cream</b>
+        </goa-checkbox>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      import { FormControl } from "@angular/forms";
+      export class SomeComponent {
+        reactiveFormCtrl = new FormControl();
+      }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`<GoACheckbox name="desserts" value="10"><b>Ice Cream</b></GoACheckbox>`}
+      lang="jsx"
+    />
+  </Tab>
+</Tabs>
+
 ---
 
 <SupportInfo />
