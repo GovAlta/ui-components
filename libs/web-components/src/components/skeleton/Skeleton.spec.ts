@@ -26,10 +26,10 @@ describe('GoARadioGroup Component', () => {
       const skeleton = await baseElement.findByTestId("skeleton-test");
 
       expect(skeleton).toBeTruthy();
-      expect(skeleton).toHaveStyle("margin-top:var(--goa-spacing-s)");
-      expect(skeleton).toHaveStyle("margin-right:var(--goa-spacing-m)");
-      expect(skeleton).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
-      expect(skeleton).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+      expect(skeleton).toHaveStyle("margin-top:var(--goa-space-s)");
+      expect(skeleton).toHaveStyle("margin-right:var(--goa-space-m)");
+      expect(skeleton).toHaveStyle("margin-bottom:var(--goa-space-l)");
+      expect(skeleton).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
 });

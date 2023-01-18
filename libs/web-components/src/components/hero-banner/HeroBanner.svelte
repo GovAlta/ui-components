@@ -34,15 +34,15 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   .goa-hero {
     box-sizing: border-box;
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-    border-bottom: 8px solid var(--goa-color-brand);
-    color: var(--color-white);
+    border-bottom: 8px solid var(--goa-color-brand-default);
+    color: var(--goa-color-greyscale-white);
     background-position: center center;
     width: 100%;
     padding: 3.5rem 0;
@@ -51,10 +51,10 @@
   h1 {
     margin: 0 0 1.75rem;
     padding: 0;
-    color: var(--color-white);
-    font-size: var(--fs-3xl);
-    line-height: var(--lh-2xl);
-    font-weight: var(--fw-bold);
+    color: var(--goa-color-greyscale-white);
+    font-size: var(--goa-font-size-10);
+    line-height: var(--goa-line-height-7);
+    font-weight: var(--goa-font-weight-bold);
   }
 
   .goa-hero-banner-content {

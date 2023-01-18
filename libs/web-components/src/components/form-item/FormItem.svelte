@@ -68,7 +68,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
 
   * {
@@ -77,17 +77,17 @@
 
   .label {
     display: block;
-    font-weight: var(--fw-bold);
-    color: var(--goa-color-text);
-    font-size: var(--fs-base);
+    font-weight: var(--goa-font-weight-bold);
+    color: var(--goa-color-text-default);
+    font-size: var(--goa-font-size-4);
     padding: 0.5rem 0;
   }
 
   .label em {
-    color: var(--color-gray-600);
-    font-weight: var(--fw-regular);
-    font-size: var(--fs-sm);
-    line-height: var(--lh-sm);
+    color: var(--goa-color-greyscale-700);
+    font-weight: var(--goa-font-weight-regular);
+    font-size: var(--goa-font-size-2);
+    line-height: var(--goa-line-height-1);
     font-style: normal;
   }
 
@@ -96,16 +96,16 @@
   }
 
   .help-msg {
-    font-size: var(--fs-sm);
-    color: var(--goa-color-text);
+    font-size: var(--goa-font-size-2);
+    color: var(--goa-color-text-default);
     margin-right: 56px;
   }
 
   .error-msg {
     display: inline-flex;
     gap: 0.25rem;
-    font-size: var(--fs-sm);
-    color: var(--goa-color-interactive--error);
+    font-size: var(--goa-font-size-2);
+    color: var(--goa-color-interactive-error);
     margin-bottom: 0.25rem;
   }
 </style>

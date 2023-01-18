@@ -40,7 +40,7 @@
 </script>
 
 <!-- HTML -->
-<div 
+<div
   data-testid={testid}
   style="{calculateMargin(mt, mr, mb, ml)}; --alignment: {_alignment}; --gap-size: {gap === "relaxed" ? "1rem" : "0.75rem"}"
 >
@@ -51,7 +51,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   div {
     display: flex;

@@ -74,7 +74,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   @keyframes pulse {
     0% {
@@ -89,7 +89,7 @@
   }
 
   .skeleton {
-    background-color: var(--color-gray-100);
+    background-color: var(--goa-color-greyscale-100);
     animation: pulse 2s infinite ease-in-out;
     overflow: hidden;
     margin: 10px 0;
@@ -97,7 +97,7 @@
 
   .image,
   .image-1 {
-    background-color: var(--color-gray-100);
+    background-color: var(--goa-color-greyscale-100);
     flex: 1 1 100px;
     height: 100px;
     margin: 0;
@@ -251,7 +251,7 @@
   .card-2,
   .card-3,
   .card-4 {
-    border: 1px solid var(--color-gray-100);
+    border: 1px solid var(--goa-color-greyscale-100);
     border-radius: 4px;
   }
 

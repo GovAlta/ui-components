@@ -27,7 +27,7 @@ import Skeleton from "./routes/skeleton";
 import Table from "./routes/table";
 import TextArea from "./routes/textarea";
 
-import "@abgov/styles";
+import "@abgov/web-components/index.css";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

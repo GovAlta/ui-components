@@ -27,7 +27,7 @@
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
     --min-child-width: ${minchildwidth || 0};
-    gap: var(--goa-spacing-${gap})
+    gap: var(--goa-space-${gap})
   `}
 >
   <slot />
@@ -37,7 +37,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
 
   .goa-grid {

@@ -71,7 +71,7 @@
     display: inline-flex;
     align-items: center;
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   button,
   button * {
@@ -92,8 +92,8 @@
 
   /* Primary */
   .color,.dark {
-    color: var(--goa-color-interactive);
-    fill: var(--goa-color-interactive);
+    color: var(--goa-color-interactive-default);
+    fill: var(--goa-color-interactive-default);
     cursor: pointer;
     transition: background-color 100ms ease-in, transform 100ms ease-in;
   }
@@ -103,23 +103,23 @@
   }
 
   button:hover {
-    background-color: var(--color-gray-100);
-    border-color: var(--color-gray-100);
-    color: var(--goa-color-interactive--hover);
+    background-color: var(--goa-color-greyscale-100);
+    border-color: var(--goa-color-greyscale-100);
+    color: var(--goa-color-interactive-hover);
     outline: none;
   }
 
   button:focus,
   button:active {
-    background-color: var(--color-gray-100);
-    border-color: var(--goa-color-interactive--active);
-    color: var(--goa-color-interactive--active);
-    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
+    background-color: var(--goa-color-greyscale-100);
+    border-color: var(--goa-color-interactive-focus);
+    color: var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
     outline: none;
   }
 
   .color.inverted:hover {
-    background-color: var(--goa-color-primary-dark);
+    background-color: var(--goa-color-interactive-hover);
   }
 
   button:disabled {
@@ -139,7 +139,7 @@
   button.dark:focus,
   button.dark:active {
     background-color: rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 0 3px var(--color-white);
+    box-shadow: 0 0 0 3px var(--goa-color-greyscale-white);
   }
 
 </style>

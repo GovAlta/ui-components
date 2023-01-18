@@ -21,7 +21,11 @@ Then(
       );
     cy.get('goa-circular-progress[size="small"]')
       .find("path")
-      .should("have.css", "stroke", hexToRgb(properties["goa-color-primary"]));
+      .should(
+        "have.css",
+        "stroke",
+        hexToRgb(properties["goa-color-status-info-default"])
+      );
     cy.get('goa-circular-progress[size="small"]')
       .find("circle")
       .should("have.css", "cx", "32px");
@@ -48,7 +52,11 @@ Then(
       );
     cy.get('goa-circular-progress[size="large"]')
       .find("path")
-      .should("have.css", "stroke", hexToRgb(properties["goa-color-primary"]));
+      .should(
+        "have.css",
+        "stroke",
+        hexToRgb(properties["goa-color-status-info-default"])
+      );
     cy.get('goa-circular-progress[size="large"]')
       .find("circle")
       .should("have.css", "cx", "50px");
@@ -76,7 +84,11 @@ Then(
       );
     cy.get('goa-circular-progress[size="small"]')
       .find("path")
-      .should("have.css", "stroke", hexToRgb(properties["goa-color-primary"]));
+      .should(
+        "have.css",
+        "stroke",
+        hexToRgb(properties["goa-color-status-info-default"])
+      );
     cy.get('goa-circular-progress[size="small"]')
       .find("circle")
       .should("have.css", "cx", "32px");
@@ -109,7 +121,11 @@ Then(
       );
     cy.get('goa-circular-progress[size="large"]')
       .find("path")
-      .should("have.css", "stroke", hexToRgb(properties["goa-color-primary"]));
+      .should(
+        "have.css",
+        "stroke",
+        hexToRgb(properties["goa-color-status-info-default"])
+      );
     cy.get('goa-circular-progress[size="large"]')
       .find("circle")
       .should("have.css", "cx", "50px");

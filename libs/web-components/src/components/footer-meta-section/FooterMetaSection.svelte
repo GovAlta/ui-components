@@ -10,7 +10,7 @@
     await tick();
     children = rootEl.querySelector("slot").assignedElements() as HTMLLinkElement[];
 
-    const isValid = 
+    const isValid =
       children
         .map(child => child.hasAttribute("href"))
         .reduce((sum: boolean, valid: boolean) => {
@@ -42,7 +42,7 @@
   }
 
   a {
-    color: var(--goa-color-text);
+    color: var(--goa-color-text-default);
     white-space: nowrap;
   }
 </style>

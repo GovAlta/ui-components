@@ -42,10 +42,10 @@ describe("GoACardComponent", () => {
             const card = await baseElement.findByTestId("card-test");
 
             expect(card).toBeTruthy();
-            expect(card).toHaveStyle("margin-top:var(--goa-spacing-s)");
-            expect(card).toHaveStyle("margin-right:var(--goa-spacing-m)");
-            expect(card).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
-            expect(card).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+            expect(card).toHaveStyle("margin-top:var(--goa-space-s)");
+            expect(card).toHaveStyle("margin-right:var(--goa-space-m)");
+            expect(card).toHaveStyle("margin-bottom:var(--goa-space-l)");
+            expect(card).toHaveStyle("margin-left:var(--goa-space-xl)");
         });
     });
 });

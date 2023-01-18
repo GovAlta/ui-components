@@ -78,7 +78,7 @@ Then(
       .should(
         "have.css",
         "border-color",
-        hexToRgb(properties["goa-color-interactive--active"])
+        hexToRgb(properties["goa-color-interactive-hover"])
       );
     cy.get("button.primary").should("have.css", "border");
     cy.get("button.primary").should(
@@ -144,7 +144,7 @@ Then(
       .should(
         "have.css",
         "border-color",
-        hexToRgb(properties["goa-color-interactive--active"])
+        hexToRgb(properties["goa-color-interactive-hover"])
       );
     cy.get("button.secondary").should(
       "have.css",

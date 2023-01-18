@@ -66,7 +66,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   .notification {
     display: flex;
@@ -76,26 +76,26 @@
   }
 
   h3 {
-    font-size: var(--fs-xl);
-    line-height: var(--lh-base);
-    font-weight: var(--fw-regular);
+    font-size: var(--goa-font-size-7);
+    line-height: var(--goa-line-height-2);
+    font-weight: var(--goa-font-weight-regular);
     margin-top: 0;
   }
 
   .emergency {
-    background-color: var(--goa-color-status-emergency);
+    background-color: var(--goa-color-emergency-default);
   }
   .important {
-    background-color: var(--goa-color-status-warning);
+    background-color: var(--goa-color-warning-default);
   }
   .information {
-    background-color: var(--goa-color-status-info);
+    background-color: var(--goa-color-info-default);
   }
   .event {
-    background-color: var(--goa-color-status-info);
+    background-color: var(--goa-color-info-default);
   }
   .success {
-    background-color: var(--goa-color-status-success);
+    background-color: var(--goa-color-success-default);
   }
 
   .icon {
@@ -105,7 +105,7 @@
   }
   .content {
     flex: 1 1 auto;
-    background-color: var(--color-gray-100);
+    background-color: var(--goa-color-greyscale-100);
     padding: 1.75rem;
   }
 </style>

@@ -13,16 +13,16 @@
 
 .note-content,
 .note-caution p {
-  font-size: var(--fs-base);
+  font-size: var(--goa-font-size-4);
 }
 
 .note-caution {
-  border-left: 2px solid var(--goa-color-status-warning);
+  border-left: 2px solid var(--goa-color-warning-default);
 }
 
 .note-caution h3 {
-  color: var(--goa-color-status-warning);
-  font-weight: var(--fw-regular);
+  color: var(--goa-color-warning-default);
+  font-weight: var(--goa-font-weight-regular);
 }
 
 .note-caution h3:before {
@@ -34,20 +34,20 @@
 }
 
 .note-best-practices {
-  border-left: 2px solid var(--goa-color-brand);
+  border-left: 2px solid var(--goa-color-brand-default);
 }
 .note-best-practices h3 {
-  color: var(--goa-color-brand);
-  font-weight: var(--fw-regular);
+  color: var(--goa-color-brand-default);
+  font-weight: var(--goa-font-weight-regular);
 }
 
 .note-dont {
-  border-left: 2px solid var(--goa-color-status-emergency);
+  border-left: 2px solid var(--goa-color-emergency-default);
 }
 
 .note-dont h3 {
-  color: var(--goa-color-status-emergency);
-  font-weight: var(--fw-regular);
+  color: var(--goa-color-emergency-default);
+  font-weight: var(--goa-font-weight-regular);
 }
 
 .note-dont h3:before {
@@ -59,12 +59,12 @@
 }
 
 .note-do {
-  border-left: 2px solid var(--goa-color-status-success);
+  border-left: 2px solid var(--goa-color-success-default);
 }
 
 .note-do h3 {
-  color: var(--goa-color-status-success);
-  font-weight: var(--fw-regular);
+  color: var(--goa-color-success-default);
+  font-weight: var(--goa-font-weight-regular);
 }
 
 .note-do h3:before {

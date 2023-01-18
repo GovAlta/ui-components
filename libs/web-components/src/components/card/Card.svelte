@@ -28,7 +28,7 @@
     --height: {height === 'auto' ? 'auto' : '100%'};
     {calculateMargin(mt, mr, mb, ml)}
     {elevation === 0
-    ? `border: 1px solid var(--color-gray-200);`
+    ? `border: 1px solid var(--goa-color-greyscale-200);`
     : `box-shadow: var(--shadow-${elevation});`}
   "
 >
@@ -39,10 +39,10 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   .card {
-    background-color: var(--color-white);
+    background-color: var(--goa-color-greyscale-white);
     border-radius: 4px;
     overflow: hidden;
     height: var(--height);

@@ -70,29 +70,29 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
 
   a {
-    color: var(--goa-color-interactive);
+    color: var(--goa-color-interactive-default);
     cursor: pointer;
   }
 
   a:hover {
-    color: var(--goa-color-interactive--hover);
+    color: var(--goa-color-interactive-hover);
   }
 
   a:focus {
     outline-width: thin;
     outline-style: solid;
-    outline-color: var(--goa-color-interactive--hover);
+    outline-color: var(--goa-color-interactive-hover);
     outline-offset: 0px;
   }
 
   .goa-official-site-header {
     display: flex;
-    font-size: var(--fs-sm);
-    background-color: var(--color-gray-100);
+    font-size: var(--goa-font-size-2);
+    background-color: var(--goa-color-greyscale-100);
     align-items: center;
     justify-content: space-between;
     padding: 0.25rem 1.5rem;
@@ -123,12 +123,12 @@
   }
 
   .service-type--alpha {
-    background-color: var(--goa-color-status-warning);
-    color: var(--goa-color-text);
+    background-color: var(--goa-color-warning-default);
+    color: var(--goa-color-text-default);
   }
 
   .service-type--beta {
-    background-color: var(--goa-color-brand);
+    background-color: var(--goa-color-brand-default);
     color: var(--goa-color-text-light);
   }
 
@@ -137,7 +137,7 @@
   }
 
   .site-text {
-    color: var(--goa-color-text);
+    color: var(--goa-color-text-default);
     line-height: 1.25rem;
   }
 

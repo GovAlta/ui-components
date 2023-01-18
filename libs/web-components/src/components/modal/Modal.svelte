@@ -130,10 +130,10 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   .modal {
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
     position: fixed;
     inset: 0;
     display: flex;
@@ -155,19 +155,19 @@
   }
 
   .emergency {
-    background-color: var(--goa-color-status-emergency);
+    background-color: var(--goa-color-emergency-default);
   }
   .important {
-    background-color: var(--goa-color-status-warning);
+    background-color: var(--goa-color-warning-default);
   }
   .information {
-    background-color: var(--goa-color-status-info);
+    background-color: var(--goa-color-info-default);
   }
   .event {
-    background-color: var(--goa-color-status-info);
+    background-color: var(--goa-color-info-default);
   }
   .success {
-    background-color: var(--goa-color-status-success);
+    background-color: var(--goa-color-success-default);
   }
 
   .callout-bar {
@@ -189,10 +189,10 @@
     width: 90%;
     display: flex;
     margin: 1rem;
-    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.16);
+    box-shadow: var(--goa-shadow-modal);
     border-radius: 4px;
     max-height: 90%;
-    border: 1px solid var(--color-gray-600);
+    border: 1px solid var(--goa-color-greyscale-700);
   }
 
   @media (min-width: 640px) {
@@ -217,7 +217,7 @@
   }
 
   .modal-title {
-    font-size: var(--fs-xl);
+    font-size: var(--goa-font-size-7);
     margin: 0 0 1.5rem;
     margin-right: 40px; /*  close icon spacing */
     flex: 0 0 auto;

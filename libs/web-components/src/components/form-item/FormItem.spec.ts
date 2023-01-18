@@ -82,7 +82,7 @@ describe("GoA FormItem", () => {
     const errMsg = document.querySelector(".error-msg");
     expect(errMsg).toBeFalsy();
   });
-  
+
   it("should render all params", async () => {
     render(GoAFormItem, {
       label: "the label",
@@ -119,7 +119,7 @@ describe("GoA FormItem", () => {
     const requirement = document.querySelector("em");
     expect(requirement).toBeNull();
   });
-  
+
   it("should not show any text for a field when requirement value is mispelled/invalid", async () => {
     const mock = jest.spyOn(console, "error").mockImplementation();
 
@@ -155,10 +155,10 @@ describe("GoA FormItem", () => {
       const formitem = await baseElement.findByTestId("formitem-test");
 
       expect(formitem).toBeTruthy();
-      expect(formitem).toHaveStyle("margin-top:var(--goa-spacing-s)");
-      expect(formitem).toHaveStyle("margin-right:var(--goa-spacing-m)");
-      expect(formitem).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
-      expect(formitem).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+      expect(formitem).toHaveStyle("margin-top:var(--goa-space-s)");
+      expect(formitem).toHaveStyle("margin-right:var(--goa-space-m)");
+      expect(formitem).toHaveStyle("margin-bottom:var(--goa-space-l)");
+      expect(formitem).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
 });

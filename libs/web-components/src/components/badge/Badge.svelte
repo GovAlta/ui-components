@@ -74,7 +74,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
 
   .goa-badge {
@@ -83,7 +83,7 @@
     border-radius: 0.25rem;
     padding: 3px 0.5rem; /* is calc(3 / 16 * 1rem) better for scaling? */
     gap: 0.25rem;
-    font-weight: var(--fw-regular);
+    font-weight: var(--goa-font-weight-regular);
   }
 
   .icon-only {
@@ -92,45 +92,43 @@
 
   .goa-badge-content {
     text-transform: capitalize;
-    font-size: var(--fs-sm);
-    line-height: var(--lh-sm);
-    padding-bottom: var(
-      --font-valign-fix
-    ); /* acumin font requires this to allow for vertical alignment  */
+    font-size: var(--goa-font-size-2);
+    line-height: var(--goa-line-height-1);
+    padding-bottom: var(--font-valign-fix, 0); /* acumin font requires this to allow for vertical alignment  */
   }
 
   .goa-badge.badge-information {
-    background-color: var(--color-gray-100);
-    color: var(--goa-color-status-info);
+    background-color: var(--goa-color-greyscale-100);
+    color: var(--goa-color-info-default);
   }
 
   .goa-badge.badge-success {
-    background-color: var(--goa-color-status-success);
+    background-color: var(--goa-color-success-default);
     color: var(--goa-color-text-light);
   }
 
   .goa-badge.badge-important {
-    background-color: var(--goa-color-status-warning);
-    color: var(--goa-color-text);
+    background-color: var(--goa-color-warning-default);
+    color: var(--goa-color-text-default);
   }
 
   .goa-badge.badge-emergency {
-    background-color: var(--goa-color-status-emergency);
+    background-color: var(--goa-color-emergency-default);
     color: var(--goa-color-text-light);
   }
 
   .goa-badge.badge-dark {
-    background-color: var(--color-black);
+    background-color: var(--goa-color-greyscale-black);
     color: var(--goa-color-text-light);
   }
 
   .goa-badge.badge-midtone {
-    background-color: var(--color-gray-600);
+    background-color: var(--goa-color-greyscale-700);
     color: var(--goa-color-text-light);
   }
 
   .goa-badge.badge-light {
-    background-color: var(--color-white);
-    color: var(--goa-color-text);
+    background-color: var(--goa-color-greyscale-white);
+    color: var(--goa-color-text-default);
   }
 </style>
