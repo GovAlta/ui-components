@@ -208,6 +208,7 @@
   .goa-input,
   .goa-input * {
     box-sizing: border-box;
+    line-height: normal;
   }
 
   .goa-input {
@@ -221,6 +222,7 @@
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
     min-width: 100%;
+    background-color: var(--color-white);
   }
 
   .goa-input:hover {

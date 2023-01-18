@@ -127,8 +127,12 @@
   }
 
   /* disabled state */
-  .goa-checkbox--disabled {
+  .goa-checkbox--disabled .goa-checkbox-text{
     opacity: 40%;
+  }
+
+  .goa-checkbox--disabled:hover {
+    cursor: default;
   }
 
   .goa-checkbox-container {

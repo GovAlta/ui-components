@@ -203,7 +203,7 @@
     box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
   }
 
-  .goa-radio--disabled {
+  .goa-radio--disabled .goa-radio-label{
     opacity: 0.4;
   }
   .goa-radio--disabled:hover {
