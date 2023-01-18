@@ -39,7 +39,7 @@ import { GoASkeleton, GoAGrid } from "@abgov/react-components";
     name="lineCount"
     type="number"
     defaultValue="3"
-    description="Used within components that contain multiple lines."
+    description="Used within components that contain multiple lines. Currently only used in `card` skeleton type"
   />
   <Prop
     name="maxWidth"
@@ -445,6 +445,91 @@ import { GoASkeleton, GoAGrid } from "@abgov/react-components";
       <GoASkeleton type="profile" size={2} />
       <GoASkeleton type="profile" size={3} />
       <GoASkeleton type="profile" size={4} />
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Line count
+
+<Story name="Line count">
+  <>
+  <GoAGrid minChildWidth="30ch">
+    <GoASkeleton type="card" lineCount={5}/>
+    <GoASkeleton type="card" lineCount={2}/>
+    <GoASkeleton type="card" lineCount={3}/>
+  </GoAGrid>
+  </>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-skeleton type="card" lineCount="5" />
+      <goa-skeleton type="card" lineCount="2" />
+      <goa-skeleton type="card" lineCount="3" />
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-skeleton type="card" lineCount="5" />
+      <goa-skeleton type="card" lineCount="2" />
+      <goa-skeleton type="card" lineCount="3" />
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoASkeleton type="card" lineCount={5}/>
+      <GoASkeleton type="card" lineCount={2}/>
+      <GoASkeleton type="card" lineCount={3}/>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Max width
+
+<Story name="Max width">
+  <>
+    <GoASkeleton type="card" maxWidth="500px"/>
+    <br/>
+    <GoASkeleton type="card" maxWidth="700px"/>
+  </>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-skeleton type="card" maxwidth="500px" />
+      <goa-skeleton type="card" maxwidth="700px" />
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-skeleton type="card" maxwidth="500px" />
+      <goa-skeleton type="card" maxwidth="700px" />
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoASkeleton type="card" maxWidth="500px"/>
+      <GoASkeleton type="card" maxWidth="700px"/>
     `}
     />
   </Tab>
