@@ -1,0 +1,23 @@
+<goa-table width="100%" mb="xl">
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of pageUsers; index as i">
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+      <td>{{ user.age }}</td>
+    </tr>
+  </tbody>
+</goa-table>
+
+<goa-pagination
+  [itemcount]="users.length"
+  perpagecount="10"
+  [pagenumber]="page"
+  (_change)="handlePageChange($event)"
+></goa-pagination>

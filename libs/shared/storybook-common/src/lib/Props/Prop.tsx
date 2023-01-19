@@ -35,8 +35,10 @@ export const Prop: FC<Props> = ({
       </td>
       <td>{required ? "Yes" : "No"}</td>
       <td>{defaultValue}</td>
-      <td>
-        <ReactMarkdown>{description}</ReactMarkdown>
+      <td className="">
+        <ReactMarkdown components={{ p: React.Fragment }}>
+          {description}
+        </ReactMarkdown>
       </td>
     </tr>
   );

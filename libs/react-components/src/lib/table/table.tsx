@@ -29,7 +29,14 @@ export interface TableProps extends Margins {
 
 export function GoATable(props: TableProps) {
   return (
-    <goa-table width={props.width} stickyheader={false} variant={props.variant}>
+    <goa-table
+      width={props.width}
+      stickyheader={false}
+      mt={props.mt}
+      mb={props.mb}
+      ml={props.ml}
+      mr={props.mr}
+    >
       <template>
         <table>{props.children}</table>
       </template>

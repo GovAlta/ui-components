@@ -43,8 +43,9 @@
   $: isButtonDark = type === "primary" || type === "start";
 
   function clickHandler(e: Event) {
-    this.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
-    e.stopPropagation();
+    if (!isDisabled) {
+      this.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
+    }
   }
 
   onMount(() => {
