@@ -18,7 +18,7 @@
   class="block"
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
-    --gap: var(--goa-spacing-${gap});
+    --gap: var(--goa-space-${gap});
     --alignment: ${alignment};
     --direction: ${direction};
   `}
