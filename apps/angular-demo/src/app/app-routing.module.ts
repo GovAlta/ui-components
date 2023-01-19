@@ -12,6 +12,7 @@ import { CheckboxComponent } from "./checkbox/checkbox.component";
 import { ChipComponent } from "./chip/chip.component";
 import { CircularProgressComponent } from "./circular-progress/circular-progress.component";
 import { ContainerComponent } from "./container/container.component";
+import { DetailComponent } from "./detail/detail";
 import { DropdownComponent } from "./dropdown/dropdown.component";
 import { FormItemComponent } from "./form-item/form-item.component";
 import { GridComponent } from "./grid/grid";
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: "chip", component: ChipComponent },
   { path: "circular-progress", component: CircularProgressComponent },
   { path: "container", component: ContainerComponent },
+  { path: "detail", component: DetailComponent },
   { path: "dropdown", component: DropdownComponent },
   { path: "form-item", component: FormItemComponent },
   { path: "grid", component: GridComponent },
