@@ -481,6 +481,7 @@
     border: 1px solid var(--goa-color-greyscale-700);
     border-radius: var(--goa-border-radius-m);
     background-color: var(--goa-color-greyscale-white);
+    transition: box-shadow 0.1s ease-in;
   }
 
   .dropdown-native:has(select:disabled) {
@@ -493,6 +494,10 @@
 
   .dropdown-native:has(select.error) {
     border: 2px solid var(--goa-color-interactive-error);
+  }
+  .dropdown-native:hover {
+    border-color: var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }
 
   select {
