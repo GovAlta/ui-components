@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
+import { AccordionComponent } from "./accordion/accordion.component";
 import { AppFooterComponent } from "./app-footer/app-footer.component";
 import { AppHeaderComponent } from "./app-header/app-header.component";
 import { BadgeComponent } from "./badge/badge.component";
@@ -29,6 +30,7 @@ import { TextAreaComponent } from "./text-area/text-area.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
 
 const routes: Routes = [
+  { path: "accordion", component: AccordionComponent },
   { path: "app-footer", component: AppFooterComponent },
   { path: "app-header", component: AppHeaderComponent },
   { path: "badge", component: BadgeComponent },
