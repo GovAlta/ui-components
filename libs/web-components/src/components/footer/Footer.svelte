@@ -124,12 +124,12 @@
       <slot name="nav" />
     </div>
 
-    {#if navLinks?.length}
+    {#if navLinks && navLinks.length > 0}
       <goa-divider spacing="small" />
     {/if}
 
     <div class="meta-section"
-      class:with-meta-links={metaLinks?.length}
+      class:with-meta-links={metaLinks && metaLinks.length > 0}
     >
       <div class="meta-links">
         <slot name="meta" />
@@ -137,7 +137,7 @@
 
       <div
         class="abgov"
-        class:with-meta-links={metaLinks?.length}
+        class:with-meta-links={metaLinks && metaLinks.length > 0}
       >
         <a href="https://alberta.ca">
           <img
