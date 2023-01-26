@@ -11,8 +11,6 @@ export default {
   input: "src/index.ts",
   output: {
     sourcemap: true,
-    format: "es", // es, iife, umd
-    // name: "app",
     file: "../../dist/libs/web-components/web-components.es.js",
   },
   plugins: [
@@ -39,6 +37,6 @@ export default {
   ],
   watch: {
     clearScreen: true,
-    include: ["src/**/*.ts", "src/**/*.svelte"],
+    include: ["src/**/*.ts", "src/**/*.svelte", "src/**/*.css"],
   },
 };
