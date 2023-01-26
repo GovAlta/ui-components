@@ -40,6 +40,7 @@ export * from "./components/spacer/Spacer.svelte";
 export * from './components/spacer/Spacer.svelte';
 export * from "./components/spinner/Spinner.svelte";
 export * from './components/table/Table.svelte';
+export * from './components/table/TableSortHeader.svelte';
 export * from "./components/text-area/TextArea.svelte";
 export * from "./layouts/FullScreenNavbarLayout.svelte";
 export * from "./layouts/FullScreenNavbarLayout.svelte";
