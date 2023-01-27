@@ -93,7 +93,7 @@
         }),
       );
     }, debounce);
-    
+
     value = input.value;
   }
 
@@ -234,7 +234,7 @@
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
     min-width: 100%;
-    background-color: var(--color-white);
+    background-color: var(--goa-color-greyscale-white);
   }
 
   .goa-input:hover {
