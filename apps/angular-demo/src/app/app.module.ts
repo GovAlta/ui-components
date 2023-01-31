@@ -11,6 +11,7 @@ import "@abgov/web-components";
 // ******
 // Routes
 // ******
+import { AccordionComponent } from "./accordion/accordion.component";
 import { AppFooterComponent } from "./app-footer/app-footer.component";
 import { AppHeaderComponent } from "./app-header/app-header.component";
 import { BadgeComponent } from "./badge/badge.component";
@@ -41,6 +42,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
 
 @NgModule({
   declarations: [
+    AccordionComponent,
     AppComponent,
     AppFooterComponent,
     AppHeaderComponent,
