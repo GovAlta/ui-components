@@ -11,7 +11,8 @@ export type SkeletonType =
   | "paragraph"
   | "thumbnail"
   | "card"
-  | "profile";
+  | "profile"
+  | "article";
 
 type SkeletonSize = 1 | 2 | 3 | 4;
 

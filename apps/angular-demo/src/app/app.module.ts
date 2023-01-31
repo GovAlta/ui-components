@@ -25,6 +25,7 @@ import { ContainerComponent } from "./container/container.component";
 import { DetailComponent } from "./detail/detail";
 import { DropdownComponent } from "./dropdown/dropdown.component";
 import { FormItemComponent } from "./form-item/form-item.component";
+import { FormStepperComponent } from "./form-stepper/form-stepper.component";
 import { GridComponent } from "./grid/grid";
 import { HeroBannerComponent } from "./hero-banner/hero-banner.component";
 import { IconButtonComponent } from "./icon-button/icon-button.component";
@@ -58,6 +59,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
     DetailComponent,
     DropdownComponent,
     FormItemComponent,
+    FormStepperComponent,
     GridComponent,
     HeroBannerComponent,
     IconButtonComponent,
