@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { fireEvent, screen } from "@testing-library/dom";
 import { GoAInputText, InputProps } from "./input";
 import { GoAIconType } from "../icon/icon";
@@ -31,6 +31,7 @@ describe("Input", () => {
       prefix: "foo",
       suffix: "bar",
       testId: testId,
+      debounce: 1000,
       mt: "s",
       mr: "m",
       mb: "l",
@@ -58,6 +59,7 @@ describe("Input", () => {
     expect(input.getAttribute("prefix")).toBe("foo");
     expect(input.getAttribute("suffix")).toBe("bar");
     expect(input.getAttribute("data-testid")).toBe(testId);
+    expect(input.getAttribute("debounce")).toBe("1000");
     expect(input.getAttribute("mt")).toBe("s");
     expect(input.getAttribute("mr")).toBe("m");
     expect(input.getAttribute("mb")).toBe("l");

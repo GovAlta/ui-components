@@ -72,7 +72,7 @@
   }
   td {
     padding: 0.75rem 1rem 0.5rem;
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--goa-color-greyscale-200);
     line-height: 1rem;
   }
 
@@ -81,18 +81,18 @@
   }
 
   th {
-    background-color: var(--color-white);
+    background-color: var(--goa-color-greyscale-white);
     color: var(--goa-color-text-secondary);
     padding: 1rem;
     vertical-align: middle;
     text-align: left;
-    border-bottom: 2px solid var(--color-gray-600);
+    border-bottom: 2px solid var(--goa-color-greyscale-700);
   }
   tfoot td {
-    background-color: var(--color-gray-100);
+    background-color: var(--goa-color-greyscale-100);
   }
   tfoot tr:first-child td {
-    border-top: 2px solid var(--color-gray-200);
+    border-top: 2px solid var(--goa-color-greyscale-200);
   }
   tfoot tr:last-child td {
     border-bottom: none;

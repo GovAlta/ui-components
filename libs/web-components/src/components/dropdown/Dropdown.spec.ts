@@ -444,116 +444,141 @@ describe('GoADropdown', () => {
       const dropdown = await baseElement.findByTestId("test-dropdown");
 
       expect(dropdown).toBeTruthy();
-      expect(dropdown).toHaveStyle("margin-top:var(--goa-spacing-s)");
-      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-spacing-m)");
-      expect(dropdown).toHaveStyle("margin-right:var(--goa-spacing-l)");
-      expect(dropdown).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+      expect(dropdown).toHaveStyle("margin-top:var(--goa-space-s)");
+      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-space-m)");
+      expect(dropdown).toHaveStyle("margin-right:var(--goa-space-l)");
+      expect(dropdown).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
-});
 
-describe("NativeSelect", () => {
-  it("renders children", async () => {
-    const name = "native-select"
-    const items = ["red", "green", "blue"];
-    const { container } = render(GoADropdownWrapper, {
-      name,
-      value: "green",
-      native: true,
-      items,
+  describe("NativeSelect", () => {
+    it("renders children", async () => {
+      const name = "native-select"
+      const items = ["red", "green", "blue"];
+      const { container } = render(GoADropdownWrapper, {
+        name,
+        value: "green",
+        native: true,
+        items,
+      })
+
+      await waitFor(() => {
+        const options = container.querySelectorAll("select option")
+        expect(options.length).toBe(3)
+      });
     })
 
-    await waitFor(() => {
-      const options = container.querySelectorAll("select option")
-      expect(options.length).toBe(3)
-    });
-  })
+    it("dispatches the event on selection", async () => {
+      const name = "event-selection";
+      const items = ["red", "green", "blue"];
+      const { container } = render(GoADropdownWrapper, { name, value: "green", native: true, items })
 
-  it("dispatches the event on selection", async () => {
-    const name = "event-selection";
-    const items = ["red", "green", "blue"];
-    const { container } = render(GoADropdownWrapper, { name, value: "green", native: true, items })
+      const onChange = jest.fn();
+      const select = container.querySelector("select")
 
-    const onChange = jest.fn();
-    const select = container.querySelector("select")
+      select.addEventListener("_change", (e: CustomEvent) => {
+        const { name: _name, value } = e.detail;
+        expect(_name).toBe(name);
+        expect(value).toBe("blue");
+        onChange(_name, value)
+      })
 
-    select.addEventListener("_change", (e: CustomEvent) => {
-      const { name: _name, value } = e.detail;
-      expect(_name).toBe(name);
-      expect(value).toBe("blue");
-      onChange(_name, value)
-    })
+      // This is the only way I can get the test passing, but it doesn't ensure
+      // that the event binding is correct
+      select.dispatchEvent(
+        new CustomEvent("_change", {
+          composed: true,
+          bubbles: false,
+          cancelable: true,
+          detail: { name, value: "blue" },
+        }),
+      );
 
-    // This is the only way I can get the test passing, but it doesn't ensure
-    // that the event binding is correct
-    select.dispatchEvent(
-      new CustomEvent("_change", {
-        composed: true,
-        bubbles: false,
-        cancelable: true,
-        detail: { name, value: "blue" },
-      }),
-    );
-
-    // The commented out code is the way I would like to test
-    // fireEvent.click(select)
-    await waitFor(async () => {
-      // const option = select.querySelector("option[value=blue]")
-      // expect(option).toBeTruthy();
-      // await fireEvent.click(option)
+      // The commented out code is the way I would like to test
+      // fireEvent.click(select)
       await waitFor(async () => {
-        expect(onChange).toBeCalled()
+        // const option = select.querySelector("option[value=blue]")
+        // expect(option).toBeTruthy();
+        // await fireEvent.click(option)
+        await waitFor(async () => {
+          expect(onChange).toBeCalled()
+        })
       })
     })
+
+    it("shows the label text when provided", async () => {
+      const name = "custom-label"
+      const items = ["red", "green", "blue"];
+      const { container } = render(GoADropdownWrapper, { name, value: "green", native: true, items })
+
+      await waitFor(() => {
+        const options = container.querySelectorAll("select option")
+        expect(options.length).toBe(3)
+        expect(options[0].textContent.trim()).toBe("red")
+        expect(options[1].textContent.trim()).toBe("green")
+        expect(options[2].textContent.trim()).toBe("blue")
+      });
+    })
+
+    it("shows the value when no lable is provided", async () => {
+      const name = "value-label"
+      const items = ["red", "green", "blue"];
+      const { container } = render(GoADropdownWrapper, { name, value: "green", native: true, items })
+
+      await waitFor(() => {
+        const options = container.querySelectorAll("select option")
+        expect(options.length).toBe(3)
+        expect(options[0].textContent.trim()).toBe("red")
+        expect(options[1].textContent.trim()).toBe("green")
+        expect(options[2].textContent.trim()).toBe("blue")
+      });
+    })
+
+    it("renders disabled state", async () => {
+      const name = "error-label"
+      const items = ["red", "green", "blue"];
+      const { container } = render(GoADropdownWrapper, { name, native: true, disabled: true, items })
+
+      await waitFor(() => {
+        const el = container.querySelector("select:disabled")
+        expect(el).toBeTruthy();
+      });
+    })
+
+    it("renders an error state", async () => {
+      const name = "error-label"
+      const items = ["red", "green", "blue"];
+      const { container } = render(GoADropdownWrapper, { name, native: true, error: true, items })
+
+      await waitFor(() => {
+        const el = container.querySelector("select.error")
+        expect(el).toBeTruthy();
+      });
+    })
   })
 
-  it("shows the label text when provided", async () => {
-    const name = "custom-label"
-    const items = ["red", "green", "blue"];
-    const { container } = render(GoADropdownWrapper, { name, value: "green", native: true, items })
+  describe("dynamic children items", () => {
+    // FIXME: Unable to get the parent's `slotchanged` event to fire
+    it.skip("should update the option items on dynamic changes", async () => {
+      const name = "dynamic"
+      const { container } = render(GoADropdown, { name })
 
-    await waitFor(() => {
-      const options = container.querySelectorAll("select option")
-      expect(options.length).toBe(3)
-      expect(options[0].textContent.trim()).toBe("red")
-      expect(options[1].textContent.trim()).toBe("green")
-      expect(options[2].textContent.trim()).toBe("blue")
-    });
+      await waitFor(() => {
+        const children = container.querySelectorAll("li")
+        expect(children.length).toBe(0);
+      });
+
+      const child = document.createElement("goa-dropdown-item")
+      child.setAttribute("value", "red")
+      child.setAttribute("label", "Red")
+      const shadow = container.attachShadow({ mode: "open" })
+      shadow.appendChild(child)
+
+      await waitFor(() => {
+        const children = container.querySelectorAll("li")
+        expect(children.length).toBe(1);
+      });
+    })
   })
+});
 
-  it("shows the value when no lable is provided", async () => {
-    const name = "value-label"
-    const items = ["red", "green", "blue"];
-    const { container } = render(GoADropdownWrapper, { name, value: "green", native: true, items })
-
-    await waitFor(() => {
-      const options = container.querySelectorAll("select option")
-      expect(options.length).toBe(3)
-      expect(options[0].textContent.trim()).toBe("red")
-      expect(options[1].textContent.trim()).toBe("green")
-      expect(options[2].textContent.trim()).toBe("blue")
-    });
-  })
-
-  it("renders disabled state", async () => {
-    const name = "error-label"
-    const items = ["red", "green", "blue"];
-    const { container } = render(GoADropdownWrapper, { name, native: true, disabled: true, items })
-
-    await waitFor(() => {
-      const el = container.querySelector("select:disabled")
-      expect(el).toBeTruthy();
-    });
-  })
-
-  it("renders an error state", async () => {
-    const name = "error-label"
-    const items = ["red", "green", "blue"];
-    const { container } = render(GoADropdownWrapper, { name, native: true, error: true, items })
-
-    await waitFor(() => {
-      const el = container.querySelector("select.error")
-      expect(el).toBeTruthy();
-    });
-  })
-})

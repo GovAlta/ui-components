@@ -52,11 +52,20 @@
     await tick();
     _values = parseValues();
     _options = getOptions();
+
     if (!_native) {
       _computedWidth = getCustomDropdownWidth(_options);
       addKeyboardEventListeners();
       setHighlightedIndexToSelected();
     }
+
+    // watch for DOM changes within the slot => dynamic binding
+    const slot = _el.querySelector("slot");
+    slot?.addEventListener("slotchange", (_e) => {
+      _selectedLabel = "";
+      _values = parseValues();
+      _options = getOptions();
+    })
   });
 
   onDestroy(() => {
@@ -82,26 +91,34 @@
   // work as long as it has a value and label content
   function getOptions(): Option[] {
     const children = getChildren();
-    return children.map((el: HTMLElement) => {
-      const option = el as unknown as Option
-      const value = el.getAttribute("value") || option.value;
-      const label =
-        el.getAttribute("label")
-        || option.label
-        || value;
-      const selected = _values.includes(value);
-      if (selected) {
-        _selectedLabel = label;
-        _values = [value];
-      }
-      return { selected, value, label};
-    });
+
+    return children
+      .filter((child: Element) => child.tagName === "GOA-DROPDOWN-ITEM")
+      .map((el: HTMLElement) => {
+          const option = el as unknown as Option
+          const value = el.getAttribute("value") || option.value;
+          const label =
+            el.getAttribute("label")
+            || option.label
+            || value;
+          const selected = _values.includes(value);
+          if (selected) {
+            _selectedLabel = label;
+            _values = [value];
+          }
+          return { selected, value, label};
+        });    
   }
 
   // compute the required width to enure all children fit
   function getCustomDropdownWidth(options: Option[]) {
     let width: string;
     let maxCount = 0;
+
+    if (options.length === 0 && placeholder !== "") {
+      return `${placeholder.length + 12}ch`;
+    }
+    
     options.forEach((option: Option) => {
       const label = option.label || option.value || "";
       if (!width && maxCount < label.length) {
@@ -277,7 +294,7 @@
       class:error={_error}
       aria-label={arialabel || name}
     >
-     <slot />
+      <slot />
       {#each _options as option}
         <option
           selected={option.selected}
@@ -297,8 +314,6 @@
         on:click={closeMenu}
       />
     {/if}
-
-    <slot />
 
     <!-- readonly input  -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -320,7 +335,9 @@
       width="100%"
       name={name}
     />
+
     <!-- list and filter -->
+    <slot />
     <ul
       id="menu"
       role="listbox"
@@ -359,7 +376,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
 
   .dropdown {
@@ -390,8 +407,8 @@
     margin: 0;
     margin-top: 3px;
     list-style-type: none;
-    background: var(--color-white);
-    border-radius: var(--input-border-radius);
+    background: var(--goa-color-greyscale-white);
+    border-radius: var(--goa-border-radius-m);
     outline: none;
     box-shadow: var(--shadow-1);
     z-index: 99;
@@ -426,7 +443,7 @@
     margin: 0;
     padding: 0.5rem;
     cursor: pointer;
-    color: var(--color-black);
+    color: var(--goa-color-greyscale-black);
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -434,8 +451,8 @@
   }
 
   .dropdown-item--tabbed {
-    background: var(--color-gray-100);
-    color: var(--goa-color-interactive--hover);
+    background: var(--goa-color-greyscale-100);
+    color: var(--goa-color-interactive-hover);
   }
 
   .dropdown-item--disabled {
@@ -445,46 +462,46 @@
 
   .dropdown-item--disabled:hover {
     cursor: default;
-    color: var(--color-gray-600);
+    color: var(--goa-color-greyscale-700);
   }
 
   .dropdown-item--selected {
-    background: var(--goa-color-interactive);
-    color: var(--color-white);
+    background: var(--goa-color-interactive-default);
+    color: var(--goa-color-greyscale-white);
   }
 
   .dropdown-item--tabbed.dropdown-item--selected,
   .dropdown-item--selected:hover {
-    background: var(--goa-color-interactive--hover);
-    color: var(--color-white);
+    background: var(--goa-color-interactive-hover);
+    color: var(--goa-color-greyscale-white);
   }
 
   /* Native styling  */
   .dropdown-native {
-    border: 1px solid var(--color-gray-600);
-    border-radius: var(--input-border-radius);
-    background-color: var(--color-white);
+    border: 1px solid var(--goa-color-greyscale-700);
+    border-radius: var(--goa-border-radius-m);
+    background-color: var(--goa-color-greyscale-white);
   }
 
   .dropdown-native:has(select:disabled) {
-    background-color: var(--color-gray-100);
-    border-color: var(--color-gray-200);
+    background-color: var(--goa-color-greyscale-100);
+    border-color: var(--goa-color-greyscale-200);
     box-shadow: none;
     color: var(--goa-color-text-secondary);
     cursor: default;
   }
 
   .dropdown-native:has(select.error) {
-    border: 2px solid var(--goa-color-interactive--error);
+    border: 2px solid var(--goa-color-interactive-error);
   }
 
   select {
     border: none;
     background-color: transparent;
-    color: var(--goa-color-text);
-    font-size: var(--input-font-size);
+    color: var(--goa-color-text-default);
+    font-size: var(--goa-font-size-4);
     appearance: none;
-    padding: calc(var(--input-padding) + 2px);
+    padding: calc(var(--goa-space-xs) + 2px);
     padding-left: 0.5rem;
     padding-right: 3rem;
     outline: none;
@@ -504,6 +521,6 @@
   }
 
   .dropdown-native:focus-within {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
 </style>

@@ -13,6 +13,9 @@ export default function App() {
       <div className="container">
         <div className="navigation-bar">
           <nav>
+            <Link className="navigation-link" to="/pagination">
+              Pagination
+            </Link>
             <Link className="navigation-link" to="/app-footer">
               AppFooter
             </Link>

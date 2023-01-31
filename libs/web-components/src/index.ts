@@ -1,3 +1,5 @@
+import "./index.svelte";
+
 export * from "./components/app-header/AppHeader.svelte";
 export * from "./components/badge/Badge.svelte";
 export * from "./components/block/Block.svelte";
@@ -43,3 +45,5 @@ export * from "./layouts/FullScreenNavbarLayout.svelte";
 export * from "./layouts/FullScreenNavbarLayout.svelte";
 export * from "./layouts/one-column-layout/OneColumnLayout.svelte";
 export * from "./layouts/two-column-layout/TwoColumnLayout.svelte";
+
+export { default as Pagination } from './components/pagination/Pagination.svelte';

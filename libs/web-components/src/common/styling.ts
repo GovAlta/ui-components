@@ -14,16 +14,16 @@ export type Spacing = "none" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "
  */
 export function calculateMargin(mt: string, mr: string, mb: string, ml: string) {
   return [
-    mt && `margin-top:var(--goa-spacing-${mt});`,
-    mr && `margin-right:var(--goa-spacing-${mr});`,
-    mb && `margin-bottom:var(--goa-spacing-${mb});`,
-    ml && `margin-left:var(--goa-spacing-${ml});`,
+    mt && `margin-top:var(--goa-space-${mt});`,
+    mr && `margin-right:var(--goa-space-${mr});`,
+    mb && `margin-bottom:var(--goa-space-${mb});`,
+    ml && `margin-left:var(--goa-space-${ml});`,
   ].join(" ");
 }
 
 /**
  * This allows for :host styles that are dependent on component variables.
- * The injectCss function also allow for dynamic styling to be added where, within the component template, there 
+ * The injectCss function also allow for dynamic styling to be added where, within the component template, there
  * is nothing that matches the selector, resulting in the selector being removed on compile.
  *
  * <script>

@@ -28,10 +28,10 @@
   }
 
   .app-footer {
-    background-color: var(--color-gray-100);
-    border-top: 2px solid var(--color-gray-200);
-    border-bottom: 1rem solid var(--goa-color-brand);
-  } 
+    background-color: var(--goa-color-greyscale-100);
+    border-top: 2px solid var(--goa-color-greyscale-200);
+    border-bottom: 1rem solid var(--goa-color-brand-default);
+  }
 
   .content {
     padding: 2rem 1rem;
@@ -85,7 +85,7 @@
     .nav-links {
       flex-direction: row;
     }
-    
+
     .abgov {
       align-items: center;
       flex-direction: row-reverse;
@@ -114,8 +114,8 @@
 
 </style>
 
-<div 
-  class="app-footer" 
+<div
+  class="app-footer"
   bind:this={rootEl}
   style={`--max-content-width: ${maxcontentwidth || "100%"}`}
 >
@@ -124,20 +124,20 @@
       <slot name="nav" />
     </div>
 
-    {#if navLinks?.length}
+    {#if navLinks && navLinks.length > 0}
       <goa-divider spacing="small" />
     {/if}
 
-    <div class="meta-section" 
-      class:with-meta-links={metaLinks?.length}
+    <div class="meta-section"
+      class:with-meta-links={metaLinks && metaLinks.length > 0}
     >
       <div class="meta-links">
         <slot name="meta" />
       </div>
 
-      <div 
+      <div
         class="abgov"
-        class:with-meta-links={metaLinks?.length}
+        class:with-meta-links={metaLinks && metaLinks.length > 0}
       >
         <a href="https://alberta.ca">
           <img
@@ -151,4 +151,3 @@
     </div>
   </div>
 </div>
-

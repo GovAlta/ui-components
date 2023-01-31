@@ -67,7 +67,7 @@ Then(
       .find('label[data-testid="radio-option-orange"]')
       .find("div.goa-radio-icon")
       .should("have.css", "border")
-      .should("contain", hexToRgb(properties["goa-color-interactive--active"]));
+      .should("contain", hexToRgb(properties["goa-color-interactive-hover"]));
     cy.get('goa-radio-group[name="color"]')
       .find('label[data-testid="radio-option-orange"]')
       .find("div.goa-radio-icon")

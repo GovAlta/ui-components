@@ -132,7 +132,7 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   .goa-radio-group--horizontal {
     display: flex;
@@ -175,16 +175,16 @@
   }
 
   input[type="radio"]:hover ~ .goa-radio-icon {
-    border-color: var(--goa-color-interactive--hover);
+    border-color: var(--goa-color-interactive-hover);
   }
 
   input[type="radio"]:focus ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--focus);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
   }
 
   .goa-radio-label {
     padding: 0.5rem;
-    font-weight: var(--fw-regular);
+    font-weight: var(--goa-font-weight-regular);
   }
 
   .goa-radio-icon {
@@ -200,10 +200,10 @@
   }
 
   .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive--focus);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
   }
 
-  .goa-radio--disabled {
+  .goa-radio--disabled .goa-radio-label{
     opacity: 0.4;
   }
   .goa-radio--disabled:hover {
@@ -215,30 +215,30 @@
   /* Checked */
   input[type="radio"]:checked ~ .goa-radio-icon {
     border: var(--goa-radio-border-width--checked) solid
-      var(--goa-color-interactive--active);
+      var(--goa-color-interactive-hover);
   }
 
   /* Not checked */
   input[type="radio"]:not(:checked) ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width) solid var(--color-gray-600);
+    border: var(--goa-radio-border-width) solid var(--goa-color-greyscale-700);
   }
 
   /* Disabled */
   input[type="radio"]:disabled ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width) solid var(--color-gray-600);
+    border: var(--goa-radio-border-width) solid var(--goa-color-greyscale-700);
   }
 
   /* Disabled and checked */
   input[type="radio"]:disabled:checked ~ .goa-radio-icon {
     border: var(--goa-radio-border-width--checked) solid
-      var(--goa-color-interactive--active);
+      var(--goa-color-interactive-hover);
   }
 
   /* Error */
   .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon {
-    border: 7px solid var(--goa-color-status-emergency);
+    border: 7px solid var(--goa-color-emergency-default);
   }
   .goa-radio--error input[type="radio"]:not(:checked) ~ .goa-radio-icon {
-    border: 2px solid var(--goa-color-status-emergency);
+    border: 2px solid var(--goa-color-emergency-default);
   }
 </style>

@@ -126,10 +126,10 @@ describe('GoACheckbox Component', () => {
       const checkbox = await baseElement.findByTestId("checkbox-test");
 
       expect(checkbox).toBeTruthy();
-      expect(checkbox).toHaveStyle("margin-top:var(--goa-spacing-s)");
-      expect(checkbox).toHaveStyle("margin-right:var(--goa-spacing-m)");
-      expect(checkbox).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
-      expect(checkbox).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+      expect(checkbox).toHaveStyle("margin-top:var(--goa-space-s)");
+      expect(checkbox).toHaveStyle("margin-right:var(--goa-space-m)");
+      expect(checkbox).toHaveStyle("margin-bottom:var(--goa-space-l)");
+      expect(checkbox).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
 });

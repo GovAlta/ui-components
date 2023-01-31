@@ -54,10 +54,10 @@ describe('GoAChip', () => {
       const chip = await baseElement.findByTestId("chip-test");
 
       expect(chip).toBeTruthy();
-      expect(chip).toHaveStyle("margin-top:var(--goa-spacing-s)");
-      expect(chip).toHaveStyle("margin-right:var(--goa-spacing-m)");
-      expect(chip).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
-      expect(chip).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+      expect(chip).toHaveStyle("margin-top:var(--goa-space-s)");
+      expect(chip).toHaveStyle("margin-right:var(--goa-space-m)");
+      expect(chip).toHaveStyle("margin-bottom:var(--goa-space-l)");
+      expect(chip).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
 })

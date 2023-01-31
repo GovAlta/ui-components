@@ -24,8 +24,10 @@ module.exports = {
         __dirname,
         "../libs/shared/common/src/index.ts"
       ),
-
-      "@abgov/styles": path.resolve(__dirname, "../libs/styles/src/index.ts"),
+      "@abgov/web-components/index.css": path.resolve(
+        __dirname,
+        "../dist/libs/web-components/index.css"
+      ),
       "@abgov/web-components": path.resolve(
         __dirname,
         "../dist/libs/web-components/web-components.es.js"

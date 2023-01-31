@@ -35,6 +35,7 @@ interface WCProps extends Margins {
   value: string;
   id?: string;
   autocapitalize?: GoAAutoCapitalize;
+  debounce?: number;
   placeholder?: string;
   leadingicon?: string;
   trailingicon?: string;
@@ -71,6 +72,7 @@ interface BaseProps extends Margins {
 
   // optional
   id?: string;
+  debounce?: number;
   disabled?: boolean;
   autoCapitalize?: GoAAutoCapitalize;
   placeholder?: string;
@@ -119,6 +121,7 @@ interface DateInputProps extends BaseProps {
 
 export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   id,
+  debounce,
   name,
   type,
   autoCapitalize,
@@ -173,6 +176,7 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   return (
     <goa-input
       ref={ref}
+      debounce={debounce}
       focused={focused}
       type={type}
       name={name}

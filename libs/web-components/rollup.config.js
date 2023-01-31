@@ -5,13 +5,14 @@ import summary from "rollup-plugin-summary";
 import preprocess from "svelte-preprocess";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
+import css from 'rollup-plugin-css-only';
 
 export default {
   input: "src/index.ts",
   output: {
     sourcemap: true,
     format: "es", // es, iife, umd
-    name: "app",
+    // name: "app",
     file: "../../dist/libs/web-components/web-components.es.js",
   },
   plugins: [
@@ -31,6 +32,7 @@ export default {
         customElement: true,
       },
     }),
+		css({output: 'index.css' }),
     resolve(),
     terser(),
     summary(),

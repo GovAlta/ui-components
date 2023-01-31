@@ -26,14 +26,16 @@ import Radio from "./routes/radio";
 import Skeleton from "./routes/skeleton";
 import Table from "./routes/table";
 import TextArea from "./routes/textarea";
+import Pagination from "./routes/pagination";
 
-import "@abgov/styles";
+import "@abgov/web-components/index.css";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
+        <Route path="pagination" element={<Pagination />} />
         <Route path="app-footer" element={<AppFooter />} />
         <Route path="app-header" element={<AppHeader />} />
         <Route path="badge" element={<Badge />} />

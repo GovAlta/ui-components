@@ -60,12 +60,12 @@
 <style>
   * {
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
   .app-header {
     margin: 0 auto;
-    background-color: var(--color-white);
-    border-bottom: 1px solid var(--color-gray-100);
+    background-color: var(--goa-color-greyscale-white);
+    border-bottom: 1px solid var(--goa-color-greyscale-100);
   }
     @media (max-width: 640px) {
       .app-header {

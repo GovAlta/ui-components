@@ -15,7 +15,7 @@
   export let error: string = "false";
   export let readonly: string = "false";
   export let disabled: string = "false";
-  export let arialabel: string = ""; 
+  export let arialabel: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -90,8 +90,11 @@
 <!-- Style -->
 <style>
   :host {
+    --textarea-padding-vertical: 0.625rem;
+    --textarea-padding-horizontal: 0.75rem;
+
     box-sizing: border-box;
-    font-family: var(--font-family);
+    font-family: var(--goa-font-family-sans);
   }
 
   .container {
@@ -110,12 +113,12 @@
     box-sizing: border-box;
     outline: none;
     transition: box-shadow 0.1s ease-in;
-    border: 1px solid var(--color-gray-600);
+    border: 1px solid var(--goa-color-greyscale-700);
     border-radius: 3px;
-    color: var(--color-black, #ccc);
-    padding: var(--textarea-padding-vertical, 0.5rem) var(--textarea-padding-horizontal, 0.5rem);
-    font-size: var(--input-font-size);
-    font-family: var(--font-family);
+    color: var(--goa-color-greyscale-black, #ccc);
+    padding: var(--textarea-padding-vertical) var(--textarea-padding-horizontal);
+    font-size: var(--goa-font-size-4);
+    font-family: var(--goa-font-family-sans);
     min-width: 100%;
   }
 
@@ -131,20 +134,20 @@
   }
 
   .goa-textarea:hover {
-    border-color: var(--goa-color-interactive--hover);
+    border-color: var(--goa-color-interactive-hover);
   }
   .goa-textarea:active,
   .goa-textarea:focus,
   .goa-textarea:focus-within {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive--focus);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
 
   .goa-textarea:disabled,
   .goa-textarea:disabled:hover,
   .goa-textarea:disabled:active,
   .goa-textarea:disabled:focus {
-    background-color: var(--color-gray-100);
-    border-color: var(--color-gray-200);
+    background-color: var(--goa-color-greyscale-100);
+    border-color: var(--goa-color-greyscale-200);
     cursor: default;
     box-shadow: none;
   }
@@ -153,16 +156,16 @@
     position: absolute;
     right: 0;
     padding-top: 0.25rem;
-    font-size: var(--fs-sm);
+    font-size: var(--goa-font-size-2);
   }
 
   .counter-error {
-    color: var(--goa-color-interactive--error)
+    color: var(--goa-color-interactive-error)
   }
 
   .error:hover,
   .error:focus,
   .error {
-    border: 2px solid var(--goa-color-interactive--error);
+    border: 2px solid var(--goa-color-interactive-error);
   }
 </style>

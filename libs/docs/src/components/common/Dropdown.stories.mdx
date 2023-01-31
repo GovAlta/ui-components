@@ -359,6 +359,366 @@ export const Template = (args) => {
   </Tab>
 </Tabs>
 
+#### Disabled
+
+<Story name="Disabled" args={{ name: "disabled", disabled: true }}>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown id="dropdown" name="colors" disabled="true">
+          <goa-dropdown-item value="red" label="Red" />
+          <goa-dropdown-item value="green" label="Green" />
+          <goa-dropdown-item value="blue" label="Blue" />
+        </goa-dropdown>
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown name="colors" disabled="true">
+          <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
+          <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+          <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        <GoADropdown name="colors" disabled={true} value={value} onChange={() => {}}>
+          <GoADropdownItem value="red" label="Red" />
+          <GoADropdownItem value="green" label="Green" />
+          <GoADropdownItem value="blue" label="Blue" />
+        </GoADropdown>
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Leading icon
+
+<Story name="Leading icon" args={{ name: "colors", leadingIcon: "airplane" }}>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown id="dropdown" name="colors" leadingicon="airplane">
+          <goa-dropdown-item value="red" label="Red" />
+          <goa-dropdown-item value="green" label="Green" />
+          <goa-dropdown-item value="blue" label="Blue" />
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        var dropdown = document.getElementById("dropdown");
+        dropdown.addEventListener("_change", e => {
+          console.log("_change", e.detail);
+          dropdown.setAttribute("value", e.detail.value);
+        });
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown
+          goaValue
+          name="colors"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
+          leadingicon="airplane">
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl("red");
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState('green');
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoADropdown name="colors" value={value} onChange={onChange} leadingIcon="airplane">
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
+          </GoADropdown>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Max height
+
+<Story name="Max height" args={{ name: "colors", maxHeight: "80px" }}>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown id="dropdown" name="colors" maxheight="80px">
+          <goa-dropdown-item value="red" label="Red" />
+          <goa-dropdown-item value="green" label="Green" />
+          <goa-dropdown-item value="blue" label="Blue" />
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        var dropdown = document.getElementById("dropdown");
+        dropdown.addEventListener("_change", e => {
+          console.log("_change", e.detail);
+          dropdown.setAttribute("value", e.detail.value);
+        });
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown
+          goaValue
+          name="colors"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
+          maxheight="80px">
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl("red");
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState('green');
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoADropdown name="colors" value={value} onChange={onChange} maxHeight="80px">
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
+          </GoADropdown>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Placeholder
+
+<Story name="Placeholder" args={{ name: "colors", placeholder: "Select a color" }}>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown id="dropdown" name="colors" placeholder="Select a color">
+          <goa-dropdown-item value="red" label="Red" />
+          <goa-dropdown-item value="green" label="Green" />
+          <goa-dropdown-item value="blue" label="Blue" />
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        var dropdown = document.getElementById("dropdown");
+        dropdown.addEventListener("_change", e => {
+          console.log("_change", e.detail);
+          dropdown.setAttribute("value", e.detail.value);
+        });
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown
+          goaValue
+          name="colors"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
+          placeholder="Select a color">
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl();
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState('green');
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoADropdown name="colors" onChange={onChange} placeholder="Select a color">
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
+          </GoADropdown>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Width
+
+<Story name="Width" args={{ name: "colors", width: "350px" }}>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown id="dropdown" name="colors" width="350px">
+          <goa-dropdown-item value="red" label="Red" />
+          <goa-dropdown-item value="green" label="Green" />
+          <goa-dropdown-item value="blue" label="Blue" />
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        var dropdown = document.getElementById("dropdown");
+        dropdown.addEventListener("_change", e => {
+          console.log("_change", e.detail);
+          dropdown.setAttribute("value", e.detail.value);
+        });
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown
+          goaValue
+          name="colors"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
+          width="350px">
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl("red");
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState('green');
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoADropdown name="colors" value={value} onChange={onChange} width="350px">
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
+          </GoADropdown>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
 ---
 
 <SupportInfo />

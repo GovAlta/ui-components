@@ -31,7 +31,7 @@ export const ProgressSpinner = (args) => {
 }
 
 export const SizesTemplate = (args) => (
-  <div style={{backgroundColor: args.invert ? 'var(--goa-color-primary)' : '', padding: '2rem', display: 'flex', justifyContent: 'center', gap: '1rem', alignItems: 'center'}}>
+  <div style={{backgroundColor: args.invert ? 'var(--goa-color-interactive-default)' : '', padding: '2rem', display: 'flex', justifyContent: 'center', gap: '1rem', alignItems: 'center'}}>
     <GoASpinner {...args} size="small" />
     <GoASpinner {...args} size="medium" />
     <GoASpinner {...args} size="large" />

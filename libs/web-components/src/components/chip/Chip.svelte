@@ -69,10 +69,10 @@
       theme="filled"
       type="close-circle"
       fillcolor={_error
-        ? "var(--goa-color-status-emergency)"
+        ? "var(--goa-color-emergency-default)"
         : _hovering
-          ? "var(--goa-color-interactive--hover)"
-        : "var(--color-gray-600)"
+          ? "var(--goa-color-interactive-hover)"
+        : "var(--goa-color-greyscale-700)"
       }
       opacity={_error
         ? _hovering
@@ -93,15 +93,15 @@
   .chip {
     vertical-align: middle;
     align-items: center;
-    background-color: var(--color-white);
+    background-color: var(--goa-color-greyscale-white);
     border-radius: 99px;
     border: 1px solid #949494;  /* TODO: change this to a defined color value when one is defined in the design specs */
     box-sizing: border-box;
-    color: var(--goa-color-text);
+    color: var(--goa-color-text-default);
     display: inline-flex;
     flex-direction: row;
-    font-size: var(--chip-font-size);
-    font-weight: var(--fw-regular);
+    font-size: var(--goa-font-size-3);
+    font-weight: var(--goa-font-weight-regular);
     gap: 0.25rem;
     height: 2rem;
     justify-content: center;
@@ -110,16 +110,16 @@
   }
 
   .text {
-    padding-bottom: var(--font-valign-fix);  /* acumin font requires this to allow for vertical alignment  */
+    padding-bottom: var(--font-valign-fix, 0);  /* acumin font requires this to allow for vertical alignment  */
   }
 
   .chip:focus {
-    outline: 2px solid var(--goa-color-interactive--focus);
-    background-color: var(--color-white);
+    outline: 2px solid var(--goa-color-interactive-focus);
+    background-color: var(--goa-color-greyscale-white);
   }
 
   .chip:hover {
-    background-color: var(--color-gray-200);
+    background-color: var(--goa-color-greyscale-200);
   }
 
   .deletable {
@@ -132,6 +132,6 @@
 
   .error,
   .error:hover {
-    background-color: var(--goa-color-status-emergency-light);
+    background-color: var(--goa-color-emergency-light);
   }
 </style>

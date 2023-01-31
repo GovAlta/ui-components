@@ -76,11 +76,10 @@ describe("GoARadioGroup Component", () => {
       const radiogroup = await baseElement.findByTestId("radiogroup-test");
 
       expect(radiogroup).toBeTruthy();
-      expect(radiogroup).toHaveStyle("margin-top:var(--goa-spacing-s)");
-      expect(radiogroup).toHaveStyle("margin-right:var(--goa-spacing-m)");
-      expect(radiogroup).toHaveStyle("margin-bottom:var(--goa-spacing-l)");
-      expect(radiogroup).toHaveStyle("margin-left:var(--goa-spacing-xl)");
+      expect(radiogroup).toHaveStyle("margin-top:var(--goa-space-s)");
+      expect(radiogroup).toHaveStyle("margin-right:var(--goa-space-m)");
+      expect(radiogroup).toHaveStyle("margin-bottom:var(--goa-space-l)");
+      expect(radiogroup).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
 });
-

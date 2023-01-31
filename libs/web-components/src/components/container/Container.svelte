@@ -65,8 +65,8 @@
 <style>
   :host {
     box-sizing: border-box;
-    font-family: var(--font-family);
-    font-size: var(--fs-base);
+    font-family: var(--goa-font-family-sans);
+    font-size: var(--goa-font-size-4);
   }
 
   .goa-container {
@@ -83,42 +83,42 @@
     justify-content: space-between;
     font-weight: 700;
 
-    font-size: var(--fs-base);
+    font-size: var(--goa-font-size-4);
     border-width: 1px;
     border-style: solid;
-    border-top-left-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius);
+    border-top-left-radius: var(--goa-border-radius-m);
+    border-top-right-radius: var(--goa-border-radius-m);
   }
 
   .content {
-    border-bottom: 1px solid var(--color-gray-200);
-    border-left: 1px solid var(--color-gray-200);
-    border-right: 1px solid var(--color-gray-200);
-    border-bottom-left-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
+    border-bottom: 1px solid var(--goa-color-greyscale-200);
+    border-left: 1px solid var(--goa-color-greyscale-200);
+    border-right: 1px solid var(--goa-color-greyscale-200);
+    border-bottom-left-radius: var(--goa-border-radius-m);
+    border-bottom-right-radius: var(--goa-border-radius-m);
   }
 
   /* Background Colour */
 
   .goa-container--non-interactive.accent--filled .content {
-    border-color: var(--color-gray-200);
-    background-color: var(--color-gray-100);
+    border-color: var(--goa-color-greyscale-200);
+    background-color: var(--goa-color-greyscale-100);
   }
   .goa-container--important.accent--filled .content {
-    border-color: var(--goa-color-status-warning);
-    background-color: var(--goa-color-status-warning-50);
+    border-color: var(--goa-color-warning-default);
+    background-color: var(--goa-color-warning-background);
   }
   .goa-container--error.accent--filled .content {
-    border-color: var(--goa-color-status-emergency);
-    background-color: var(--goa-color-status-emergency-50);
+    border-color: var(--goa-color-emergency-default);
+    background-color: var(--goa-color-emergency-background);
   }
   .goa-container--success.accent--filled .content {
-    border-color: var(--goa-color-status-success);
-    background-color: var(--goa-color-status-success-50);
+    border-color: var(--goa-color-success-default);
+    background-color: var(--goa-color-success-background);
   }
   .goa-container--info.accent--filled .content {
-    border-color: var(--goa-color-status-info);
-    background-color: var(--goa-color-status-info-50);
+    border-color: var(--goa-color-info-default);
+    background-color: var(--goa-color-info-background);
   }
 
   .title,
@@ -162,41 +162,41 @@
   /* colors */
 
   .goa-container--non-interactive header {
-    background-color: var(--color-gray-100);
-    border-color: var(--color-gray-200);
-    color: var(--color-black);
+    background-color: var(--goa-color-greyscale-100);
+    border-color: var(--goa-color-greyscale-200);
+    color: var(--goa-color-greyscale-black);
   }
 
   .goa-container--interactive header {
-    background-color: var(--goa-color-brand);
-    border-color: var(--goa-color-brand);
-    color: var(--color-white);
+    background-color: var(--goa-color-brand-default);
+    border-color: var(--goa-color-brand-default);
+    color: var(--goa-color-greyscale-white);
   }
 
   .goa-container--info header {
-    background-color: var(--goa-color-status-info);
-    border-color: var(--goa-color-status-info);
-    color: var(--color-white);
+    background-color: var(--goa-color-info-default);
+    border-color: var(--goa-color-info-default);
+    color: var(--goa-color-greyscale-white);
   }
 
   .goa-container--error header {
     /* TODO: need a better color name here */
-    background-color: var(--goa-color-status-emergency);
-    border-color: var(--goa-color-status-emergency);
-    color: var(--color-white);
+    background-color: var(--goa-color-emergency-default);
+    border-color: var(--goa-color-emergency-default);
+    color: var(--goa-color-greyscale-white);
   }
 
   .goa-container--success header {
     /* TODO: need a better color name here */
-    background-color: var(--goa-color-status-success);
-    border-color: var(--goa-color-status-success);
-    color: var(--color-white);
+    background-color: var(--goa-color-success-default);
+    border-color: var(--goa-color-success-default);
+    color: var(--goa-color-greyscale-white);
   }
 
   .goa-container--important header {
-    background-color: var(--goa-color-status-warning);
-    border-color: var(--goa-color-status-warning);
-    color: var(--color-white);
+    background-color: var(--goa-color-warning-default);
+    border-color: var(--goa-color-warning-default);
+    color: var(--goa-color-greyscale-white);
   }
 
   /* Sizes */
@@ -218,9 +218,9 @@
     display: none;
   }
   .heading--filled ~ .content {
-    border-top: 1px solid var(--color-gray-200);
-    border-top-left-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius);
+    border-top: 1px solid var(--goa-color-greyscale-200);
+    border-top-left-radius: var(--goa-border-radius-m);
+    border-top-right-radius: var(--goa-border-radius-m);
   }
 
   .heading--thin .title,

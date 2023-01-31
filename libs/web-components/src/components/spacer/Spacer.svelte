@@ -12,8 +12,8 @@
 
   onMount(() => {
     injectCss(rootEl, ":host", {
-      width: `var(--goa-spacing-${hspacing})`,
-      height: `var(--goa-spacing-${vspacing})`,
+      width: `var(--goa-space-${hspacing})`,
+      height: `var(--goa-space-${vspacing})`,
     });
   });
 </script>

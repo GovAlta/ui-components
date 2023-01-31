@@ -8,68 +8,6 @@
 ></script>
 
 <style>
-  @font-face {
-    font-family: "acumin-pro-semi-condensed";
-    src: url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/l?subset_id=1&fvd=n4&v=3")
-        format("woff2"),
-      url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/d?subset_id=1&fvd=n4&v=3")
-        format("woff"),
-      url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/a?subset_id=1&fvd=n4&v=3")
-        format("opentype");
-    font-style: normal;
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: "acumin-pro-semi-condensed";
-    src: url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/l?subset_id=1&fvd=i4&v=3")
-        format("woff2"),
-      url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/d?subset_id=1&fvd=i4&v=3")
-        format("woff"),
-      url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/a?subset_id=1&fvd=i4&v=3")
-        format("opentype");
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: "acumin-pro-semi-condensed";
-    src: url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/l?subset_id=1&fvd=n7&v=3")
-        format("woff2"),
-      url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/d?subset_id=1&fvd=n7&v=3")
-        format("woff"),
-      url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/a?subset_id=1&fvd=n7&v=3")
-        format("opentype");
-    font-style: normal;
-    font-weight: 700;
-  }
-
-  @font-face {
-    font-family: "acumin-pro-semi-condensed";
-    src: url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/l?subset_id=1&fvd=i7&v=3")
-        format("woff2"),
-      url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/d?subset_id=1&fvd=i7&v=3")
-        format("woff"),
-      url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/a?subset_id=1&fvd=i7&v=3")
-        format("opentype");
-    font-style: italic;
-    font-weight: 700;
-  }
-
-  @font-face {
-    font-family: "acumin-pro-semi-condensed";
-    src: url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/l?subset_id=1&fvd=n6&v=3")
-        format("woff2"),
-      url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/d?subset_id=1&fvd=n6&v=3")
-        format("woff"),
-      url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/a?subset_id=1&fvd=n6&v=3")
-        format("opentype");
-    font-style: normal;
-    font-weight: 600;
-  }
-</style>
-
-<style>
   *:not(pre, code, pre span, code span) {
     font-family: acumin-pro-semi-condensed, sans-serif !important;
   }
@@ -80,22 +18,22 @@
   textarea,
   p,
   li {
-    font-size: var(--fs-base) !important;
+    font-size: var(--goa-font-size-4) !important;
   }
 
   a {
-    color: var(--goa-color-interactive) !important;
+    color: var(--goa-color-interactive-default) !important;
     cursor: pointer !important;
   }
 
   a:hover {
-    color: var(--goa-color-interactive--hover) !important;
+    color: var(--goa-color-interactive-hover) !important;
   }
 
   a:focus {
     outline-width: thin !important;
     outline-style: solid !important;
-    outline-color: var(--goa-color-interactive--hover) !important;
+    outline-color: var(--goa-color-interactive-hover) !important;
     outline-offset: 0px !important;
   }
 
@@ -122,20 +60,22 @@
   }
 
   h1 {
-    font-size: var(--fs-3xl) !important;
-    line-height: var(--lh-2xl) !important;
-    font-weight: var(--fw-bold) !important;
+    font-size: var(--goa-font-size-10) !important;
+    line-height: var(--goa-line-height-7) !important;
+    font-weight: var(--goa-font-weight-bold) !important;
   }
+
   h2 {
-    font-size: var(--fs-2xl) !important;
-    line-height: var(--lh-xl) !important;
-    font-weight: var(--fw-regular) !important;
+    font-size: var(--goa-font-size-9) !important;
+    line-height: var(--goa-line-height-6) !important;
+    font-weight: var(--goa-font-weight-regular) !important;
     border-bottom: none !important;
   }
+
   h3 {
-    font-size: var(--fs-xl) !important;
-    line-height: var(--lh-lg) !important;
-    font-weight: var(--fw-regular) !important;
+    font-size: var(--goa-font-size-7) !important;
+    line-height: var(--goa-line-height-4) !important;
+    font-weight: var(--goa-font-weight-regular) !important;
   }
 
   h4 {
@@ -145,9 +85,9 @@
   h4,
   h5,
   h6 {
-    font-size: var(--fs-base) !important;
-    line-height: var(--lh-base) !important;
-    font-weight: var(--fw-bold) !important;
+    font-size: var(--goa-font-size-4) !important;
+    line-height: var(--goa-line-height-2) !important;
+    font-weight: var(--goa-font-weight-bold) !important;
   }
 
   h3 + h1 {
@@ -164,7 +104,7 @@
   }
 
   goa-app-footer-meta-section a {
-    color: var(--goa-color-text) !important;
+    color: var(--goa-color-text-default) !important;
     white-space: nowrap;
   }
 

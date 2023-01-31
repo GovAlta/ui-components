@@ -34,6 +34,7 @@ export * from "./lib/notification/notification";
 export * from "./lib/one-column-layout/one-column-layout";
 export * from "./lib/page-block/page-block";
 export * from "./lib/radio-group/radio-group";
+export * from "./lib/pagination/pagination";
 export * from "./lib/skeleton/skeleton";
 export * from "./lib/spacer/spacer";
 export * from "./lib/spinner/spinner";

@@ -1,27 +1,35 @@
 import * as React from "react";
 import { GoADropdown, GoADropdownItem } from "@abgov/react-components";
+import { useState } from "react";
 
 export default function Dropdown() {
-  function noop(name: string, value: string | string[]) {
+  function noop(_name: string, _value: string | string[]) {
     // do nothing
   }
 
-  const dynamicItems = [
-    {
-      name: "Fruits",
-      value: "banana",
-      options: [{ value: "apple" }, { value: "orange" }, { value: "banana" }],
-    },
-    {
-      name: "Vegetables",
-      value: "carrot",
-      options: [
-        { value: "brocolli" },
-        { value: "carrot" },
-        { value: "spinach" },
-      ],
-    },
+  const provinces: string[] = [
+    "BC",
+    "Alberta",
+    "Saskatchewan",
+    "Manitoba",
+    "Ontario",
+    "Quebec",
   ];
+
+  const cities: Record<string, string[]> = {
+    BC: ["Vancouver", "Kelowna", "Fernie"],
+    Alberta: ["Edmonton", "Calgary"],
+    Saskatchewan: ["Regina", "Saskatoon"],
+    Manitoba: ["Winnipeg"],
+    Ontario: ["Toronto", "Ottawa"],
+    Quebec: ["Montreal", "Quebec City"],
+  };
+
+  const [pcities, setPcities] = useState<string[]>([]);
+
+  function selectProvince(_name: string, value: string | string[]) {
+    if (typeof value === "string") setPcities(cities[value]);
+  }
 
   return (
     <>
@@ -61,23 +69,17 @@ export default function Dropdown() {
       </GoADropdown>
 
       <h2>Dynamic</h2>
-      {dynamicItems.map((item) => (
-        <GoADropdown
-          key={item.name}
-          name={item.name}
-          value={item.value}
-          onChange={noop}
-        >
-          {item.options.map((option) => (
-            <GoADropdownItem
-              key={option.value}
-              value={option.value}
-              name={item.name}
-              label={option.value}
-            />
-          ))}
-        </GoADropdown>
-      ))}
+      <GoADropdown name="province" onChange={selectProvince}>
+        {provinces.map((p) => (
+          <GoADropdownItem key={p} value={p} label={p} />
+        ))}
+      </GoADropdown>
+
+      <GoADropdown name="city" onChange={noop} placeholder="City">
+        {pcities.map((p) => (
+          <GoADropdownItem key={p} value={p} label={p} />
+        ))}
+      </GoADropdown>
 
       <h2>Aria Label</h2>
       <GoADropdown
