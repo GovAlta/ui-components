@@ -18,12 +18,14 @@ declare global {
 interface FooterNavSectionProps {
   maxColumnCount?: number;
   heading?: string;
+  testId?: string;
   children?: ReactNode;
 }
 
 export function GoAAppFooterNavSection({
   heading,
   maxColumnCount = 1,
+  testId,
   children,
 }: FooterNavSectionProps) {
   return (
@@ -31,6 +33,7 @@ export function GoAAppFooterNavSection({
       slot="nav"
       heading={heading}
       maxcolumncount={maxColumnCount}
+      data-testid={testId}
     >
       {children}
     </goa-app-footer-nav-section>

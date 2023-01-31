@@ -38,6 +38,7 @@ interface Props {
   open?: boolean;
   type?: string;
   calloutVariant?: CalloutVariant;
+  testId?: string;
 }
 
 export const GoAModal: FC<Props> = ({
@@ -50,6 +51,7 @@ export const GoAModal: FC<Props> = ({
   type,
   calloutVariant,
   onClose,
+  testId,
 }) => {
   const el = useRef<HTMLElement>(null);
 
@@ -84,6 +86,7 @@ export const GoAModal: FC<Props> = ({
       width={width}
       transition={transition}
       calloutVariant={calloutVariant}
+      data-testid={testId}
     >
       {actions && <div slot="actions">{actions}</div>}
       {children}

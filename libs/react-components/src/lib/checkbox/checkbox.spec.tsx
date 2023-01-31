@@ -23,7 +23,7 @@ describe("GoA Checkbox", () => {
 
     render(<GoACheckbox {...props} />);
 
-    const checkbox = screen.getByTestId(testId);
+    const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox).toBeTruthy();
     expect(checkbox.getAttribute("id")).toBe("abc");
     expect(checkbox.getAttribute("name")).toBe("foo");
@@ -60,8 +60,8 @@ describe("GoA Checkbox", () => {
       testId: testId,
     };
 
-    const { getByTestId } = render(<GoACheckbox {...props} />);
-    const checkbox = getByTestId(testId);
+    render(<GoACheckbox {...props} />);
+    const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox).toBeTruthy();
 
     await fireEvent(

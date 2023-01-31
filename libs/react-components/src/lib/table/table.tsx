@@ -24,6 +24,7 @@ export interface TableProps extends Margins {
   width?: string;
   // stickyHeader?: boolean; TODO: enable this later
   variant?: TableVariant;
+  testId?: string;
   children: ReactNode;
 }
 
@@ -32,6 +33,7 @@ export function GoATable(props: TableProps) {
     <goa-table
       width={props.width}
       stickyheader={false}
+      data-testid={props.testId}
       mt={props.mt}
       mb={props.mb}
       ml={props.ml}

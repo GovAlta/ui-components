@@ -22,6 +22,7 @@ export interface BlockProps extends Margins {
   gap?: Spacing;
   direction?: Direction;
   alignment?: Alignment;
+  testId?: string;
   children?: ReactNode;
 }
 
@@ -35,6 +36,7 @@ export function GoABlock(props: BlockProps) {
       mr={props.mr}
       mb={props.mb}
       ml={props.ml}
+      data-testid={props.testId}
     >
       {props.children}
     </goa-block>

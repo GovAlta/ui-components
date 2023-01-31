@@ -3,7 +3,7 @@ import GoATextArea from "./textarea";
 
 describe("TextArea", () => {
   it("renders the text area", async () => {
-    const { findByTestId } = render(
+    render(
       <GoATextArea
         testId="textarea-testid"
         name="textarea-name"
@@ -21,7 +21,7 @@ describe("TextArea", () => {
       />
     );
 
-    const el = await findByTestId("textarea-testid");
+    const el = document.querySelector("goa-textarea");
     expect(el.getAttribute("name")).toBe("textarea-name");
     expect(el.getAttribute("value")).toBe("textarea-value");
     expect(el.getAttribute("rows")).toBe("10");
@@ -39,7 +39,7 @@ describe("TextArea", () => {
     const onChange = jest.fn();
     const newValue = "new-value";
 
-    const { findByTestId } = render(
+    render(
       <GoATextArea
         testId="textarea-testid"
         name="textarea-name"
@@ -55,7 +55,7 @@ describe("TextArea", () => {
       />
     );
 
-    const el = await findByTestId("textarea-testid");
+    const el = document.querySelector("goa-textarea");
 
     fireEvent(
       el,

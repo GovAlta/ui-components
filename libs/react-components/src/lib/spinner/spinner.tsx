@@ -8,7 +8,6 @@ interface WCProps {
   type: SpinnerType;
   invert?: boolean;
   progress?: number;
-  testid?: string;
 }
 
 declare global {
@@ -41,7 +40,7 @@ export const GoASpinner = ({
       size={size}
       progress={progress}
       invert={invert}
-      testid={testId}
+      data-testid={testId}
     />
   );
 };

@@ -22,18 +22,21 @@ export interface HeaderProps {
   type: ServiceLevel;
   version?: string;
   feedbackUrl?: string;
+  testId?: string;
 }
 
 export const GoAMicrositeHeader: FC<HeaderProps> = ({
   type,
   version,
   feedbackUrl,
+  testId,
 }) => {
   return (
     <goa-microsite-header
       type={type}
       version={version}
       feedbackurl={feedbackUrl}
+      data-testid={testId}
     />
   );
 };

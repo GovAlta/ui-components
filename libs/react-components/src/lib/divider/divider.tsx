@@ -11,9 +11,15 @@ declare global {
   }
 }
 
-export function GoADivider(props: Margins) {
+export function GoADivider(props: Margins & { testId?: string }) {
   return (
-    <goa-divider mt={props.mt} mr={props.mr} mb={props.mb} ml={props.ml} />
+    <goa-divider
+      mt={props.mt}
+      mr={props.mr}
+      mb={props.mb}
+      ml={props.ml}
+      data-testid={props.testId}
+    />
   );
 }
 

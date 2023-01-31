@@ -21,7 +21,6 @@ interface WCProps extends Margins {
   type: GoABadgeType;
   icon?: boolean;
   content?: string;
-  testid?: string;
 }
 
 declare global {
@@ -49,7 +48,7 @@ export const GoABadge: FC<GoABadgeProps> = ({
       type={type}
       content={content}
       icon={icon}
-      testid={testId}
+      data-testid={testId}
       mt={mt}
       mr={mr}
       mb={mb}

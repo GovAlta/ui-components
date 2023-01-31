@@ -20,10 +20,17 @@ declare global {
 export interface SpacerProps {
   hSpacing?: Spacing | "fill";
   vSpacing?: Spacing;
+  testId?: string;
 }
 
 export function GoASpacer(props: SpacerProps) {
-  return <goa-spacer hspacing={props.hSpacing} vspacing={props.vSpacing} />;
+  return (
+    <goa-spacer
+      hspacing={props.hSpacing}
+      vspacing={props.vSpacing}
+      data-testid={props.testId}
+    />
+  );
 }
 
 export default GoASpacer;

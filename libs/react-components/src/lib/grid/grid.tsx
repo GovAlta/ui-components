@@ -18,6 +18,7 @@ declare global {
 interface Props extends Margins {
   gap?: Spacing;
   minChildWidth: string;
+  testId?: string;
   children?: React.ReactNode;
 }
 
@@ -28,6 +29,7 @@ export const GoAGrid: FC<Props> = ({
   mr,
   mb,
   ml,
+  testId,
   children,
 }) => {
   return (
@@ -38,6 +40,7 @@ export const GoAGrid: FC<Props> = ({
       mr={mr}
       mb={mb}
       ml={ml}
+      data-testid={testId}
     >
       {children}
     </goa-grid>

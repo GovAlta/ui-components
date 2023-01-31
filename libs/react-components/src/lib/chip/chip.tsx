@@ -28,6 +28,7 @@ interface Props extends Margins {
   error?: boolean;
   content: string;
   variant?: ChipVariant;
+  testId?: string;
 }
 
 export const GoAChip = ({
@@ -41,6 +42,7 @@ export const GoAChip = ({
   mr,
   mb,
   ml,
+  testId,
 }: Props) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -70,6 +72,7 @@ export const GoAChip = ({
       mr={mr}
       mb={mb}
       ml={ml}
+      data-testid={testId}
     />
   );
 };

@@ -22,10 +22,19 @@ declare global {
 interface Props {
   type?: NotificationType;
   children?: React.ReactNode;
+  testId?: string;
 }
 
-export const GoANotification = ({ type = "information", children }: Props) => {
-  return <goa-notification type={type}>{children}</goa-notification>;
+export const GoANotification = ({
+  type = "information",
+  children,
+  testId,
+}: Props) => {
+  return (
+    <goa-notification type={type} data-testid={testId}>
+      {children}
+    </goa-notification>
+  );
 };
 
 export default GoANotification;
