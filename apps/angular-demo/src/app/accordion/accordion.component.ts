@@ -1,4 +1,3 @@
-
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,5 +5,5 @@ import { Component } from "@angular/core";
   templateUrl: "./accordion.component.html",
 })
 export class AccordionComponent {
-  constructor() { }
+  constructor() {}
 }

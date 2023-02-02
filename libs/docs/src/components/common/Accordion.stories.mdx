@@ -22,7 +22,10 @@ import { useState } from "react";
 
 # Accordion
 
-<GoACallout>Accordion containers enable multiple content sections to be displayed in a limited space and collapsed or expanded by the user. You can create hierarchy of information by hiding secondary content inside collapsed expand containers.
+<GoACallout>
+  Accordion containers enable multiple content sections to be displayed in a
+  limited space and collapsed or expanded by the user. You can create hierarchy
+  of information by hiding secondary content inside collapsed expand containers.
 </GoACallout>
 
 [Figma design component](https://www.figma.com/file/MwuK2yVZZQMN2Nbk9NYSQ7/Component---Accordion?node-id=1494%3A267193&t=asvP565R4YH82k9y-1)
@@ -108,9 +111,9 @@ import { useState } from "react";
 <Story name="Basic">
   <GoAAccordion heading="Heading">
     <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-    nostrud exercitation ullamco laboris nisi
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi
     </p>
   </GoAAccordion>
 </Story>
@@ -151,13 +154,13 @@ import { useState } from "react";
 #### Heading size
 
 <Story name="Heading size">
-    <GoAAccordion heading="Medium Heading" headingSize="medium">
-      <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-      nostrud exercitation ullamco laboris nisi
-      </p>
-    </GoAAccordion>
+  <GoAAccordion heading="Medium Heading" headingSize="medium">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi
+    </p>
+  </GoAAccordion>
 </Story>
 
 <Tabs>
@@ -195,7 +198,10 @@ import { useState } from "react";
 
 #### Accordion Group
 
-<GoACallout>The open prop on accordion component can be used to control a group of accordions.</GoACallout>
+<GoACallout>
+  The open prop on accordion component can be used to control a group of
+  accordions.
+</GoACallout>
 
 export const AccordionGroupTemplate = () => {
   const [open, setOpen] = useState(false);
@@ -208,23 +214,23 @@ export const AccordionGroupTemplate = () => {
       <br />
       <GoAAccordion heading="Heading" open={open}>
         <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-        nostrud exercitation ullamco laboris nisi
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi
         </p>
       </GoAAccordion>
       <GoAAccordion heading="Heading" open={open}>
         <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-        nostrud exercitation ullamco laboris nisi
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi
         </p>
       </GoAAccordion>
       <GoAAccordion heading="Heading" open={open}>
         <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-        nostrud exercitation ullamco laboris nisi
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi
         </p>
       </GoAAccordion>
     </>
@@ -341,7 +347,7 @@ export const AccordionGroupTemplate = () => {
       heading="This is a heading"
       secondaryText="Secondary Text"
       headingContent={
-        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <GoABadge type="success" content="Success" />
         </div>
       }
