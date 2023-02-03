@@ -7,7 +7,7 @@ interface WCProps extends Margins {
   open?: boolean;
   headingSize?: HeadingSize;
   heading: string;
-  secondaryText?: string
+  secondaryText?: string;
   headingContent?: ReactNode;
 }
 

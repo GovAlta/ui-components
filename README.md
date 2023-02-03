@@ -37,6 +37,8 @@ You can view the current storybook [here](https://ui-components.alberta.ca/?path
 | Library            | Description                                                                                                                               |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | web-components     | Library of native web components. Published to NPM [@abgov/web-components](https://www.npmjs.com/package/@abgov/web-components).          |
-| styles             | Library of GoA web styles. Published to NPM [@abgov/styles](https://www.npmjs.com/package/@abgov/styles).                                 |
+| ~~styles~~         | Deprecated [^1]                                                                                                                           |
 | react-components   | Library of components for React. Published to NPM [@abgov/react-components](https://www.npmjs.com/package/@abgov/react-components).       |
 | angular-components | Library of components for Angular. Published to NPM [@abgov/angular-components](https://www.npmjs.com/package/@abgov/angular-components). |
+
+[^1]: The npm package, @abgov/styles is now deprecated. Import styles(css) from the web-components package. `@import "@abgov/web-components/index.css";`. For more instructions find the appropriate setup documentation [here](https://ui-components.alberta.ca)

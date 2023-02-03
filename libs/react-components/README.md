@@ -1,8 +1,8 @@
 # React UI Components
 
-This library contains react components from the Government of Alberta.
+![npm (scoped)](https://img.shields.io/npm/v/@abgov/react-components?color=%230081a2&label=react-components&style=flat-square)
 
-Add Dependencies
+This library contains react components from the Government of Alberta.
 
 ```bash
 npm i @abgov/react-components
@@ -23,8 +23,12 @@ Add the following to the head element
 ></script>
 ```
 
-Import the styles in the `src/index.css` file
+Import the web-component styles in the `src/index.css` file
 
 ```css
 @import "@abgov/web-components/index.css";
 ```
+
+---
+
+[Visit Design System](https://ui-components.alberta.ca)
