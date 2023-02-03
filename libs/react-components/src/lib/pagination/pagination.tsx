@@ -25,6 +25,7 @@ export interface PaginationProps extends Margins {
   pageNumber: number;
   variant?: "all" | "links-only";
   onChange: (page: number) => void;
+  testId?: string;
 }
 
 export function GoAPagination(props: PaginationProps) {
@@ -57,6 +58,7 @@ export function GoAPagination(props: PaginationProps) {
       mb={props.mb}
       ml={props.ml}
       mr={props.mr}
+      data-testid={props.testId}
     />
   );
 }

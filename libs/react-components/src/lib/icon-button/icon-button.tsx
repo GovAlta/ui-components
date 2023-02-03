@@ -30,6 +30,7 @@ interface Props extends Margins {
   disabled?: boolean;
   children?: React.ReactNode;
   onClick?: () => void;
+  testId?: string;
 }
 
 export const GoAIconButton: FC<Props> = ({
@@ -39,6 +40,7 @@ export const GoAIconButton: FC<Props> = ({
   onClick,
   size = "medium",
   title,
+  testId,
   children,
   mt,
   mr,
@@ -76,6 +78,7 @@ export const GoAIconButton: FC<Props> = ({
       mr={mr}
       mb={mb}
       ml={ml}
+      data-testid={testId}
     >
       {children}
     </goa-icon-button>

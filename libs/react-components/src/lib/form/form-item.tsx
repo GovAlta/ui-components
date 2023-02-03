@@ -25,6 +25,7 @@ interface GoAFormItemProps extends Margins {
   error?: string;
   helpText?: string;
   children?: React.ReactNode;
+  testId?: string;
 }
 
 export const GoAFormItem: FC<GoAFormItemProps> = ({
@@ -37,6 +38,7 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({
   mr,
   mb,
   ml,
+  testId,
 }) => {
   return (
     <goa-form-item
@@ -48,6 +50,7 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({
       mr={mr}
       mb={mb}
       ml={ml}
+      data-testid={testId}
     >
       {children}
     </goa-form-item>

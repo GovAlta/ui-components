@@ -17,11 +17,16 @@ declare global {
 export interface FooterProps {
   maxContentWidth?: string;
   children?: ReactNode;
+  testId?: string;
 }
 
-export function GoAAppFooter({ maxContentWidth, children }: FooterProps) {
+export function GoAAppFooter({
+  maxContentWidth,
+  children,
+  testId,
+}: FooterProps) {
   return (
-    <goa-app-footer maxcontentwidth={maxContentWidth}>
+    <goa-app-footer maxcontentwidth={maxContentWidth} data-testid={testId}>
       {children}
     </goa-app-footer>
   );

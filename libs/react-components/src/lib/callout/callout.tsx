@@ -25,12 +25,14 @@ declare global {
 export interface CalloutProps extends Margins {
   heading?: string;
   type?: CalloutType;
+  testId?: string;
   children?: React.ReactNode;
 }
 
 export const GoACallout = ({
   heading,
   type = "information",
+  testId,
   children,
   mt,
   mr,
@@ -38,7 +40,15 @@ export const GoACallout = ({
   ml,
 }: CalloutProps) => {
   return (
-    <goa-callout heading={heading} type={type} mt={mt} mr={mr} mb={mb} ml={ml}>
+    <goa-callout
+      heading={heading}
+      type={type}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+      data-testid={testId}
+    >
       {children}
     </goa-callout>
   );

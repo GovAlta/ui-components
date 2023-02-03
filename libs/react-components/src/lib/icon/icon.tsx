@@ -545,6 +545,7 @@ interface Props extends Margins {
   type: GoAIconType;
   size?: IconSize;
   theme?: IconTheme;
+  testId?: string;
 }
 
 interface WCProps extends Margins {
@@ -561,6 +562,7 @@ export function GoAIcon({
   mr,
   mb,
   ml,
+  testId,
 }: Props): JSX.Element {
   return (
     <goa-icon
@@ -571,6 +573,7 @@ export function GoAIcon({
       mr={mr}
       mb={mb}
       ml={ml}
+      data-testid={testId}
     />
   );
 }

@@ -33,6 +33,7 @@ interface Props extends Margins {
   padding?: ContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
+  testId?: string;
 }
 
 export const GoAContainer: FC<Props> = ({
@@ -46,6 +47,7 @@ export const GoAContainer: FC<Props> = ({
   mr,
   mb,
   ml,
+  testId,
 }) => {
   return (
     <goa-container
@@ -56,6 +58,7 @@ export const GoAContainer: FC<Props> = ({
       mr={mr}
       mb={mb}
       ml={ml}
+      data-testid={testId}
     >
       {title && <div slot="title">{title}</div>}
       {children}

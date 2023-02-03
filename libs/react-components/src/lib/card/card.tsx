@@ -19,6 +19,7 @@ declare global {
 interface Props extends Margins {
   elevation?: number;
   width?: string;
+  testId?: string;
   children?: React.ReactNode;
 }
 
@@ -29,6 +30,7 @@ export const GoACard: FC<Props> = ({
   mr,
   mb,
   ml,
+  testId,
   children,
 }) => {
   return (
@@ -39,6 +41,7 @@ export const GoACard: FC<Props> = ({
       mr={mr}
       mb={mb}
       ml={ml}
+      data-testid={testId}
     >
       {children}
     </goa-card>

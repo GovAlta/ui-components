@@ -21,12 +21,14 @@ declare global {
 interface ButtonGroupProps extends Margins {
   alignment: Alignment;
   gap?: Gap;
+  testId?: string;
   children?: React.ReactNode;
 }
 
 export const GoAButtonGroup: FC<ButtonGroupProps> = ({
   alignment,
   gap,
+  testId,
   children,
   mt,
   mr,
@@ -41,6 +43,7 @@ export const GoAButtonGroup: FC<ButtonGroupProps> = ({
       mr={mr}
       mb={mb}
       ml={ml}
+      data-testid={testId}
     >
       {children}
     </goa-button-group>
