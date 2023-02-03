@@ -120,6 +120,7 @@
     font-size: var(--goa-font-size-4);
     font-family: var(--goa-font-family-sans);
     min-width: 100%;
+    resize: vertical;
   }
 
   @media (min-width: 640px) {
