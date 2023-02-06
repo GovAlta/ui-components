@@ -28,12 +28,24 @@ import { useState } from "react";
 
 ### Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="type"
     type="information | important | emergency | event"
     required="Yes"
     description="Define the context and colour of the notification banner"
+  />
+  <Prop
+    name="_dismiss"
+    lang="angular"
+    type="CustomEvent"
+    description="Dispatched when notification banner is closed."
+  />
+  <Prop
+    name="onDismiss"
+    lang="react"
+    type="() => void"
+    description="Dispatched when notification banner is closed."
   />
 </Props>
 
@@ -41,7 +53,10 @@ import { useState } from "react";
 
 <Story name="Types">
   <h4>Information</h4>
-  <GoANotification type="information">
+  <GoANotification
+    type="information"
+    onDismiss={() => console.log("dismissed")}
+  >
     Lorem ipsum dolor{" "}
     <a href="https://example.com">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor
@@ -50,21 +65,21 @@ import { useState } from "react";
     Lorem ipsum dolor
   </GoANotification>
   <h4>Important</h4>
-  <GoANotification type="important">
+  <GoANotification type="important" onDismiss={() => console.log("dismissed")}>
     <a href="https://example.com">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor
       sit amet, consectetur adipiscing elit.
     </a>
   </GoANotification>
   <h4>Emergency</h4>
-  <GoANotification type="emergency">
+  <GoANotification type="emergency" onDismiss={() => console.log("dismissed")}>
     <a href="https://example.com">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor
       sit amet, consectetur adipiscing elit.
     </a>
   </GoANotification>
   <h4>Event</h4>
-  <GoANotification type="event">
+  <GoANotification type="event" onDismiss={() => console.log("dismissed")}>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor
     sit amet, consectetur adipiscing elit.
   </GoANotification>
@@ -81,25 +96,43 @@ import { useState } from "react";
       `}
       lang="html"
     />
+    <CodeSnippet
+      code={`
+        document.querySelector('goa-notification').addEventListener('_dismiss', () => {
+          console.log('dismissed');
+        });
+      `}
+      lang="js"
+    />
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
       code={`
-        <goa-notification type="information">Lorem ipsum dolor <a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a> Lorem ipsum dolor</goa-notification>
-        <goa-notification type="important"><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></goa-notification>
-        <goa-notification type="emergency"><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></goa-notification>
-        <goa-notification type="event">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</goa-notification>
+        <goa-notification type="information" (_dismiss)="onDismiss()">Lorem ipsum dolor <a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a> Lorem ipsum dolor</goa-notification>
+        <goa-notification type="important" (_dismiss)="onDismiss()"><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></goa-notification>
+        <goa-notification type="emergency" (_dismiss)="onDismiss()"><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></goa-notification>
+        <goa-notification type="event" (_dismiss)="onDismiss()">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</goa-notification>
       `}
       lang="html"
+    />
+    <CodeSnippet
+      code={`
+        export class SomeOtherComponent {
+          onDismiss() {
+            console.log('dismissed');
+          }
+        }
+      `}
+      lang="ts"
     />
   </Tab>
   <Tab label="React">
     <CodeSnippet
       code={`
-        <GoANotification type="information">Lorem ipsum dolor <a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a> Lorem ipsum dolor</GoANotification>
-        <GoANotification type="important"><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></GoANotification>
-        <GoANotification type="emergency"><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></GoANotification>
-        <GoANotification type="event">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</GoANotification>
+        <GoANotification type="information" onDismiss={() => console.log("dismissed")}>Lorem ipsum dolor <a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a> Lorem ipsum dolor</GoANotification>
+        <GoANotification type="important" onDismiss={() => console.log("dismissed")}><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></GoANotification>
+        <GoANotification type="emergency" onDismiss={() => console.log("dismissed")}><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></GoANotification>
+        <GoANotification type="event" onDismiss={() => console.log("dismissed")}>Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</GoANotification>
     `}
       lang="tsx"
     />

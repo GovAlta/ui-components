@@ -34,8 +34,10 @@
     validateType(type);
   })
 
-  function close() {
+  function close(e: Event) {
     show = false;
+    e.target.dispatchEvent(new CustomEvent("_dismiss", { composed: true }));
+    e.stopPropagation();
   }
 </script>
 
