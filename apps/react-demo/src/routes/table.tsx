@@ -52,7 +52,7 @@ export default function Table() {
             <tr key={user.id}>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
-              <td>{user.age}</td>
+              <td className="goa-table-number-column">{user.age}</td>
             </tr>
           ))}
         </tbody>

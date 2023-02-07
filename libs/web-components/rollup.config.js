@@ -6,6 +6,7 @@ import preprocess from "svelte-preprocess";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import css from 'rollup-plugin-css-only';
+import {replaceCodePlugin} from 'vite-plugin-replace';
 
 export default {
   input: "src/index.ts",
@@ -34,6 +35,14 @@ export default {
     resolve(),
     terser(),
     summary(),
+    replaceCodePlugin({
+      replacements: [
+          {
+              from: /:global\(([\[\]\(\)\-\.\:\*\w]+)\)/g,
+              to: "$1",
+          }
+      ]
+    }),
   ],
   watch: {
     clearScreen: true,
