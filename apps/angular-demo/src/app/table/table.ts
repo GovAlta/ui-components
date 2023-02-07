@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
+import { faker } from "@faker-js/faker";
 
 interface User {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   age: number;
@@ -17,90 +18,18 @@ export class TableComponent {
   constructor() {
     for (let i = 0; i < 10; i++) {
       this.users.push({
-        id: Math.random(),
-        firstName: getFirstName(),
-        lastName: getLastName(),
-        age: getAge(),
+        id: faker.datatype.uuid(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        age: faker.datatype.number({ min: 18, max: 60 }),
       });
     }
   }
+
+  handleSort(event: any) {
+    const { sortBy, sortDir } = event.detail;
+    this.users.sort(
+      (a: any, b: any) => (a[sortBy] > b[sortBy] ? -1 : 1) * sortDir
+    );
+  }
 }
-
-function getFirstName(): string {
-  const index = Math.floor(Math.random() * (firstNames.length - 1));
-  return firstNames[index];
-}
-
-function getLastName(): string {
-  const index = Math.floor(Math.random() * (lastNames.length - 1));
-  return lastNames[index];
-}
-
-function getAge(): number {
-  return 18 + Math.floor(Math.random() * 60);
-}
-
-const firstNames = [
-  "James",
-  "John",
-  "Robert",
-  "Michael",
-  "William",
-  "David",
-  "Richard",
-  "Charles",
-  "Josep",
-  "Thomas",
-  "Christopher",
-  "Daniel",
-  "Paul",
-  "Mark",
-  "Donald",
-  "Georg",
-  "Kenneth",
-  "Steve",
-  "Edward",
-  "Brian",
-  "Ronald",
-  "Anthon",
-  "Kevin",
-  "Jason",
-  "Matthew",
-  "Gary",
-  "Timothy",
-  "Jose",
-  "Larry",
-  "Jeffrey",
-  "Frank",
-  "Scot",
-  "Eric",
-  "Stephen",
-  "Andrew",
-];
-
-const lastNames = [
-  "Smith",
-  "Johnson",
-  "Williams",
-  "Brown",
-  "Jones",
-  "Garcia",
-  "Miller",
-  "Davis",
-  "Rodriguez",
-  "Martinez",
-  "Hernandez",
-  "Lopez",
-  "Gonzalez",
-  "Wilson",
-  "Anderson",
-  "Thomas",
-  "Taylor",
-  "Moore",
-  "Jackson",
-  "Martin",
-  "Lee",
-  "Thompson",
-  "White",
-  "Harris",
-];

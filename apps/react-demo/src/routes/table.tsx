@@ -1,6 +1,14 @@
 import * as React from "react";
 import { GoATable } from "@abgov/react-components";
 import { useEffect } from "react";
+import { faker } from "@faker-js/faker";
+
+interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  age: number;
+}
 
 export default function Table() {
   const [data, setData] = React.useState<User[]>([]);
@@ -9,10 +17,10 @@ export default function Table() {
     const users: User[] = [];
     for (let i = 0; i < 10; i++) {
       users.push({
-        id: Math.random(),
-        firstName: getFirstName(),
-        lastName: getLastName(),
-        age: getAge(),
+        id: faker.datatype.uuid(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        age: faker.datatype.number({ min: 18, max: 60 }),
       });
     }
     setData(users);
@@ -66,13 +74,6 @@ export default function Table() {
   );
 }
 
-interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  age: number;
-}
-
 function TableStaticHead() {
   return (
     <thead>
@@ -109,82 +110,3 @@ function TableStaticBody() {
     </tbody>
   );
 }
-
-function getFirstName(): string {
-  const index = Math.floor(Math.random() * (firstNames.length - 1));
-  return firstNames[index];
-}
-
-function getLastName(): string {
-  const index = Math.floor(Math.random() * (lastNames.length - 1));
-  return lastNames[index];
-}
-
-function getAge(): number {
-  return 18 + Math.floor(Math.random() * 60);
-}
-
-const firstNames = [
-  "James",
-  "John",
-  "Robert",
-  "Michael",
-  "William",
-  "David",
-  "Richard",
-  "Charles",
-  "Josep",
-  "Thomas",
-  "Christopher",
-  "Daniel",
-  "Paul",
-  "Mark",
-  "Donald",
-  "Georg",
-  "Kenneth",
-  "Steve",
-  "Edward",
-  "Brian",
-  "Ronald",
-  "Anthon",
-  "Kevin",
-  "Jason",
-  "Matthew",
-  "Gary",
-  "Timothy",
-  "Jose",
-  "Larry",
-  "Jeffrey",
-  "Frank",
-  "Scot",
-  "Eric",
-  "Stephen",
-  "Andrew",
-];
-
-const lastNames = [
-  "Smith",
-  "Johnson",
-  "Williams",
-  "Brown",
-  "Jones",
-  "Garcia",
-  "Miller",
-  "Davis",
-  "Rodriguez",
-  "Martinez",
-  "Hernandez",
-  "Lopez",
-  "Gonzalez",
-  "Wilson",
-  "Anderson",
-  "Thomas",
-  "Taylor",
-  "Moore",
-  "Jackson",
-  "Martin",
-  "Lee",
-  "Thompson",
-  "White",
-  "Harris",
-];
