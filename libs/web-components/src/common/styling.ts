@@ -1,4 +1,28 @@
-export type Spacing = "none" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl";
+export type Spacing = "none" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl" | string;
+
+const conversions = {
+  "0": "none",
+  "1": "3xs",
+  "2": "2xs",
+  "3": "xs",
+  "4": "s",
+  "5": "m",
+  "6": "l",
+  "7": "xl",
+  "8": "2xl",
+  "9": "3xl",
+  "10": "4xl",
+}
+
+/**
+ * Allow for 0-10 values to be used along side the existing Spacing values
+ */
+function convertSpacing(size: Spacing): Spacing {
+  if (!Number.isInteger(+size)) {
+    return size  
+  }
+  return conversions[size] || "";
+}
 
 /**
  * import type { Spacing } from "../../common/types";
@@ -13,6 +37,10 @@ export type Spacing = "none" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "
  * style={calculateMargin(mt, mr, mb, ml)}
  */
 export function calculateMargin(mt: string, mr: string, mb: string, ml: string) {
+  mt = convertSpacing(mt);
+  mb = convertSpacing(mb);
+  ml = convertSpacing(ml);
+  mr = convertSpacing(mr);
   return [
     mt && `margin-top:var(--goa-space-${mt});`,
     mr && `margin-right:var(--goa-space-${mr});`,

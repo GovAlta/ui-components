@@ -22,6 +22,7 @@ import { CheckboxComponent } from "./checkbox/checkbox.component";
 import { ChipComponent } from "./chip/chip.component";
 import { CircularProgressComponent } from "./circular-progress/circular-progress.component";
 import { ContainerComponent } from "./container/container.component";
+import { DetailComponent } from "./detail/detail";
 import { DropdownComponent } from "./dropdown/dropdown.component";
 import { FormItemComponent } from "./form-item/form-item.component";
 import { GridComponent } from "./grid/grid";
@@ -54,6 +55,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
     ChipComponent,
     CircularProgressComponent,
     ContainerComponent,
+    DetailComponent,
     DropdownComponent,
     FormItemComponent,
     GridComponent,
