@@ -35,7 +35,7 @@
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
     if (!slot || slot.assignedElements().length === 0) {
       return;
-    } 
+    }
     // React needs to nest data in a <template><table>...</table></template>
     const content = slot.assignedElements()[0].querySelectorAll("template table > *");
     _rootEl.append(...(content.length > 0 ? content : slot.assignedElements()));
@@ -57,7 +57,7 @@
             const newDirection = direction === "desc" ? "asc" : "desc";
 
             sortDir = newDirection === "asc" ? 1 : -1
-            child.setAttribute("direction", newDirection)    
+            child.setAttribute("direction", newDirection)
           } else {
             child.setAttribute("direction", "none")
           }
@@ -87,8 +87,8 @@
 >
   <slot />
 
-  <!-- 
-    prevents console errors being seen in react 
+  <!--
+    prevents console errors being seen in react
     and prevents the internal styles from being removed
   -->
   <template>
@@ -113,9 +113,14 @@
     top: 0;
   }
   td {
+    font: var(--goa-typography-body-m);
     padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--goa-color-greyscale-200);
-    line-height: 1rem;
+  }
+
+  table :global(.goa-table-number-column) {
+    font: var(--goa-typography-number-m);
+    text-align: right;
   }
 
   table.relaxed td {
@@ -146,5 +151,5 @@
   tfoot tr:last-child td {
     border-bottom: none;
   }
-  
+
 </style>

@@ -25,11 +25,12 @@ describe("Notification Banner", () => {
   it("Event triggered on notification banner dismiss", async () => {
     const onDismiss = jest.fn();
     const { container } = render(
-      <GoANotification type="information" onDismiss={onDismiss}>Information to the user goes in the content</GoANotification>
+      <GoANotification type="information" onDismiss={onDismiss}>
+        Information to the user goes in the content
+      </GoANotification>
     );
     const notificationBanner = container.querySelector("goa-notification");
     fireEvent(notificationBanner, new CustomEvent("_dismiss"));
     expect(onDismiss).toBeCalled();
   });
-
 });

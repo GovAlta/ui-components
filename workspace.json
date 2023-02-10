@@ -649,6 +649,7 @@
             "frameworkConfigFile": "@nxext/svelte/plugins/vite",
             "outputPath": "dist/libs/web-components",
             "svelteConfig": "libs/web-components/svelte.config.js",
+            "configFile": "libs/web-components/svelte.build.config.js",
             "assets": [
               {
                 "glob": "/*",
