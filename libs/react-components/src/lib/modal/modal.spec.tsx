@@ -19,8 +19,9 @@ describe("Modal Tests", () => {
     );
     const modal = baseElement.querySelector("goa-modal");
     const actionContent = modal.querySelector("[slot='actions']");
+    const heading = modal.querySelector("[slot='heading']");
 
-    expect(modal.getAttribute("heading")).toBe("Modal Heading");
+    expect(heading.textContent).toContain("Modal Heading");
     expect(modal.getAttribute("open")).toBe("true");
     expect(modal.getAttribute("width")).toBe("500px");
     expect(modal.getAttribute("closable")).toBe("true");

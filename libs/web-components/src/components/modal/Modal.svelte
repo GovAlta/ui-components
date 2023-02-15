@@ -21,7 +21,6 @@
   type CalloutVariant = typeof CALLOUT_VARIANT[number];
   type Transition = typeof Transitions[number];
 
-  export let heading: string = "";
   export let closable: string = "false";
   export let open: string = "false";
   export let transition: Transition = "none";
@@ -32,6 +31,16 @@
 
   $: isClosable = toBoolean(closable);
   $: isOpen = toBoolean(open);
+
+  let contentEl: HTMLElement = null;
+  let scrollEL: HTMLElement = null;
+
+  $: if(isOpen && scrollEL) {
+    if(scrollEL.scrollHeight > scrollEL.offsetHeight)
+        { //if scroll exists
+          contentEl.classList.add("scroll-top");
+        }
+  };
 
   $: _transitionTime = transition === "none" ? 0 : transition === "slow" ? 400 : 200;
 
@@ -60,6 +69,23 @@
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
   });
+
+  function handleScroll(e: CustomEvent) {
+      if(e.detail.scrollHeight > e.detail.offsetHeight){ //if scroll exists
+        contentEl.classList.remove("scroll-top", "scroll-middle", "scroll-bottom");
+
+        if(e.detail.scrollTop == 0){ //in the top
+          contentEl.classList.add("scroll-top");
+        }
+        else if (Math.abs(e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight) < 1) { //in the bottom
+          contentEl.classList.add("scroll-bottom");
+        }
+        else if(e.detail.scrollTop > 0){ //in the middle
+          contentEl.classList.add("scroll-middle");
+        }
+      }
+  }
+
 </script>
 
 {#if isOpen}
@@ -88,9 +114,9 @@
           </div>
         {/if}
         <div class="content">
-          {#if heading}
-            <div data-testid="modal-title" class="modal-title">{heading}</div>
-          {/if}
+            <div data-testid="modal-title" class="modal-title">
+              <slot name="heading" />
+            </div>
           {#if isClosable}
             <div class="modal-close">
               <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -102,9 +128,9 @@
               />
             </div>
           {/if}
-          <div data-testid="modal-content" class="modal-content">
+          <div data-testid="modal-content" class="modal-content" bind:this={contentEl}>
             {#if isScrollable}
-              <goa-scrollable direction="vertical" height="50">
+              <goa-scrollable direction="vertical" height="50" bind:this={scrollEL} on:_scroll={handleScroll}>
                 <slot />
               </goa-scrollable>
             {:else}
@@ -202,8 +228,8 @@
     }
   }
 
-  .modal-actions ::slotted(div) {
-    margin: 1.5rem 0 0;
+  .modal-actions ::slotted(*) {
+    padding: 1.5rem 0 0;
   }
 
   .modal-content ::slotted(:last-child) {
@@ -225,5 +251,21 @@
 
   .modal-content {
     line-height: 1.75rem;
+  }
+
+  .scroll-top {
+    box-shadow: inset 0px -8px 6px -6px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--goa-color-greyscale-200);
+  }
+
+  .scroll-middle {
+    box-shadow: inset 0px 8px 6px -6px rgba(0, 0, 0, 0.1), inset 0px -8px 6px -6px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--goa-color-greyscale-200);
+    border-bottom: 1px solid var(--goa-color-greyscale-200);
+  }
+
+  .scroll-bottom {
+    box-shadow: inset 0px 8px 6px -6px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--goa-color-greyscale-200);
   }
 </style>
