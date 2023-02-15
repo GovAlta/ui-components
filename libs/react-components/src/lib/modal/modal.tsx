@@ -10,7 +10,7 @@ export type CalloutVariant =
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
-  heading?: string;
+  heading?: React.ReactNode;
   open?: boolean;
   width?: string;
   closable?: boolean;
@@ -29,7 +29,7 @@ declare global {
 }
 
 interface Props {
-  heading?: string;
+  heading?: React.ReactNode;
   width?: string;
   actions?: React.ReactElement;
   onClose?: () => void;
@@ -79,7 +79,6 @@ export const GoAModal: FC<Props> = ({
   return (
     <goa-modal
       ref={el}
-      heading={heading}
       open={open}
       closable={!!onClose}
       scrollable={true}
@@ -88,6 +87,7 @@ export const GoAModal: FC<Props> = ({
       calloutVariant={calloutVariant}
       data-testid={testId}
     >
+      {heading && <div slot="heading">{heading}</div>}
       {actions && <div slot="actions">{actions}</div>}
       {children}
     </goa-modal>

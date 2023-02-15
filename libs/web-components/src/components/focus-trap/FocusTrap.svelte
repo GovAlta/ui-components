@@ -8,7 +8,7 @@
 
   let ignoreFocusChanges: boolean = false;
   let lastFocus: Element;
-  let element: Element;
+  let rootEl: Element;
   let hasListeners: boolean = false;
 
   $: isActive = toBoolean(active);
@@ -104,14 +104,13 @@
     }
   }
 
-
   function focus(element: HTMLElement): boolean {
     if (!isFocusable(element)) return false;
 
     try {
       ignoreFocusChanges = true;
-      element.focus();
-    } catch(e) {}
+      element && element.focus();
+    }
     finally {
       ignoreFocusChanges = false;
     }
@@ -122,7 +121,7 @@
   function trapFocus(event: Event): void {
     if (ignoreFocusChanges) return;
 
-    const slotElements = (element.firstChild as HTMLSlotElement)?.assignedElements();
+    const slotElements = (rootEl.firstChild as HTMLSlotElement)?.assignedElements();
     if (!slotElements?.length) return;
 
     const contentRootElement = slotElements[0];
@@ -163,14 +162,14 @@
 
 </script>
 
-<div id="root" bind:this={element}>
+<div bind:this={rootEl}>
   <slot />
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <span tabindex="0"></span>
 </div>
 
 <style>
-  #root {
+  div {
     display: inline;
   }
 </style>
