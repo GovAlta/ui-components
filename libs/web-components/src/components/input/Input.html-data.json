@@ -1,0 +1,124 @@
+{
+  "name": "goa-input",
+  "attributes": [
+    {
+      "name": "type",
+      "description": "Sets the type of the input field",
+      "values": [{"name": "text"},{"name": "number"},{"name": "password"},{"name": "email"},{"name": "search"},{"name": "tel"},{"name": "date"},{"name": "datetime-locale"},{"name": "time"},{"name": "url"},{"name": "week"}],
+      "default": "text"
+    },
+    {
+      "name": "name",
+      "description": "Name of input value that is received in the _change event",
+      "type": "string"
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "Bound to value"
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "description": "Text displayed within the input when no value is set"
+    },
+    {
+      "name": "leadingIcon",
+      "description": "Icon shown to the left of the text",
+      "valueSet": "goaIconType"
+    },
+    {
+      "name": "trailingIcon",
+      "description": "Icon shown to the right of the text",
+      "valueSet": "goaIconType"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Disable this control. It will not receive focus or events",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "handleTrailingIconClick",
+      "description": "Flag that will result in an icon button component being rendered instead of an icon",
+      "type": "boolean",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "focused",
+      "description": "Sets the cursor focus to the input",
+      "type": "boolean",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "readOnly",
+      "description": "Makes the input readonly",
+      "type": "boolean",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "error",
+      "description": "Sets the input to an error state",
+      "type": "boolean",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "width",
+      "description": "Set the width of the text input area",
+      "type": "string",
+      "default": "30ch"
+    },
+    {
+      "name": "min",
+      "description": "A string value must be in ISO 8601 format",
+      "type": "string"
+    },
+    {
+      "name": "max",
+      "description": "A string value must be in ISO 8601 format",
+      "type": "string"
+    },
+    {
+      "name": "step",
+      "description": "By how much number of day or time value will change by",
+      "type": "number"
+    },
+    {
+      "name": "ariaLabel",
+      "description": "Defines how the input will be translated for the screen reader. If not specified it will fall back to the name",
+      "type": "string"
+    },
+    {
+      "name": "autoCapitalize",
+      "description": "Controls whether and how text input is automatically capitalized as it is entered/edited by the user.",
+      "type": "string",
+      "values": [{"name": "on"},{"name": "off"},{"name": "none"},{"name": "sentences"},{"name": "words"},{"name": "characters"}],
+      "default": "off"
+    },
+    {
+      "name": "_trailingIconClick",
+      "description": "onclick function invoked when trailing icon is clicked"
+    },
+    {
+      "name": "leadingContent",
+      "type": "slot",
+      "description": "Sets the content to the left of the input field"
+    },
+    {
+      "name": "trailingContent",
+      "type": "slot",
+      "description": "Sets the content to the right of the input field"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Input",
+      "url": "{{siteUrl}}/?path=/docs/components-inputs--information"
+    }
+  ]
+}

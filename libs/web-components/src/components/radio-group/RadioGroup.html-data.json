@@ -1,0 +1,47 @@
+{
+  "name": "goa-radio-group",
+  "required": ["name"],
+  "attributes": [
+    {
+      "name": "name",
+      "description": "Must match the name assigned to the children",
+      "type": "string"
+    },
+    {
+      "name": "value",
+      "description": "Value binding",
+      "type": "string"
+    },
+    {
+      "name": "orientation",
+      "description": "Orientation of the radio items",
+      "values": [{"name": "horizontal"},{"name": "vertical"}],
+      "default": "vertical"
+    },
+    {
+      "name": "error",
+      "description": "Set the component to an error state",
+      "type": "boolean",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "disabled",
+      "description": "Set the component to disabled",
+      "type": "boolean",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "description": "Defines how the text will be translated for the screen reader. It not specified it will fall back to the name"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA RadioGroup",
+      "url": "{{siteUrl}}/?path=/docs/components-radio--basic"
+    }
+  ]
+}

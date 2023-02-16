@@ -21,6 +21,9 @@
   "[vue]": {
     "editor.defaultFormatter": "octref.vetur"
   },
+  "html.customData": [
+    "./dist/libs/web-components/html.html-data.json"
+  ],
   "cSpell.words": [
     "checkmark",
     "colour",

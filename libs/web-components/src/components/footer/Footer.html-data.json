@@ -1,0 +1,17 @@
+{
+  "name": "goa-app-footer",
+  "attributes": [
+    {
+      "name": "maxContentWidth",
+      "description": "The maximum width of the main content area",
+      "type": "string",
+      "default": "100%"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Footer",
+      "url": "{{siteUrl}}/?path=/docs/components-app-footer--basic"
+    }
+  ]
+}

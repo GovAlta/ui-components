@@ -1,0 +1,51 @@
+{
+  "name": "goa-block",
+  "attributes": [
+    {
+      "name": "gap",
+      "description": "Spacing between items",
+      "valueSet": "spacing",
+      "default": "m"
+    },
+    {
+      "name": "direction",
+      "description": "Stacking direction of child components",
+      "values": [{"name": "row"}, {"name": "column"}],
+      "type": "string",
+      "default": "row"
+    },
+    {
+      "name": "alignment",
+      "description": "Primary axis alignment",
+      "values": [{"name": "center"}, {"name": "start"}, {"name": "end"}],
+      "type": "string",
+      "default": "start"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Block",
+      "url": "{{siteUrl}}/iframe.html?viewMode=docs&id=utility-block--horizontal&args=#used-when-grouping-components-into-a-block-with-consistent-space-between"
+    }
+  ]
+}

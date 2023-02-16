@@ -1,0 +1,44 @@
+{
+  "name": "goa-icon-button",
+  "attributes": [
+    {
+      "name": "icon",
+      "description": "Set the icon",
+      "valueSet": "goaIconType"
+    },
+    {
+      "name": "size",
+      "description": "Set the size of button",
+      "values": [{"name": "small"},{"name": "medium"},{"name": "large"}],
+      "default": "medium"
+    },
+    {
+      "name": "variant",
+      "description": "Style this button to show color, nocolor or dark",
+      "values": [{"name": "color"},{"name": "nocolor"},{"name": "dark"}],
+      "default": "color"
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "description": "Sets the title of the button"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Disable this button",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "_click",
+      "description": "Callback function when button is clicked"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Icon Buttons",
+      "url": "{{siteUrl}]/?path=/docs/components-icon-button--icons"
+    }
+  ]
+}

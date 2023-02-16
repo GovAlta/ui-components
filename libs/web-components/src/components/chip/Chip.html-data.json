@@ -1,0 +1,67 @@
+{
+  "name": "goa-chip",
+  "required": "content",
+  "attributes": [
+    {
+      "name": "variant",
+      "description": "The type of chip to use",
+      "values": [{ "name": "filter" }],
+      "default": "filter"
+    },
+    {
+      "name": "leadingIcon",
+      "type": "string",
+      "description": "Show an icon to the left of the text",
+      "valueSet": "goaIconType"
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "description": "Show an error state",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "deletable",
+      "type": "boolean",
+      "description": "Show a delete icon button on the right of the text label",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "content",
+      "type": "string",
+      "description": "Text label of the chip"
+    },
+    {
+      "name": "_click",
+      "description": "Callback when deletable and delete icon is clicked"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Chip",
+      "url": "{{siteUrl}}/?path=/docs/components-chip--basic"
+    }
+  ]
+}

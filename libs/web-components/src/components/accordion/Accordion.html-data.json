@@ -1,0 +1,79 @@
+{
+  "name": "goa-accordion",
+  "required": ["heading"],
+  "attributes": [
+    {
+      "name": "heading",
+      "description": "Sets the heading text",
+      "type": "string"
+    },
+    {
+      "name": "secondaryText",
+      "description": "Sets secondary text",
+      "type": "string"
+    },
+    {
+      "name": "open",
+      "default": "false",
+      "description": "Sets the state of the accordion container open or closed",
+      "values": [
+        {
+          "name": "false",
+          "description": "Container is closed."
+        },
+        {
+          "name": "true",
+          "description": "Container is opened."
+        }
+      ],
+      "type": "boolean"
+    },
+    {
+      "name": "headingSize",
+      "default": "small",
+      "description": "Sets the heading size of the accordion container heading",
+      "values": [
+        {
+          "name": "small",
+          "description": "Heading size of the accordion container is small"
+        },
+        {
+          "name": "medium",
+          "description": "Heading size of the accordion container is medium"
+        }
+      ],
+      "type": "string"
+    },
+    {
+      "name": "headingcontent",
+      "description": "Add components to the accordion container heading such as badges",
+      "type": "slot"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Accordion",
+      "url": "{{siteUrl}}/?path=/docs/components-accordion--basic#accordion"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "name": "goa-dropdown",
+  "attributes": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Must be unique in the rendered view and must match the children's name"
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "Stores the value of the item selected from the dropdown"
+    },
+    {
+      "name": "leadingIcon",
+      "valueSet": "goaIconType",
+      "description": "Show an icon to the left of the dropdown option. Non-native only"
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "description": "Maximum height of the dropdown menu items popover. Non-native only",
+      "default": "276px"
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "description": "The text displayed for the dropdown before a selection is made. Non-native only"
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "description": "Override the autosized menu width"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Disable this control",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "description": "Show an error state",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "description": "Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name"
+    },
+    {
+      "name": "native",
+      "type": "boolean",
+      "description": "When true will render the native <select> html element",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Dropdown",
+      "url": "{{siteUrl}}/?path=/docs/components-dropdown--basic"
+    }
+  ]
+}

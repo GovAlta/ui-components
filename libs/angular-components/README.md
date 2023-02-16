@@ -56,6 +56,17 @@ Add the styles link in the `src/styles.css` file
 @import "@abgov/web-components/index.css";
 ```
 
+### VS Code Support
+In order to use VS Code's [HTML/CSS Custom Data](https://github.com/microsoft/vscode-custom-data) 
+support to enhance GoA Web Components HTML editing experience, include our html custom data setting found in `.vscode/settings.json`:
+```json
+{
+  "html.customData": [
+    "./node_modules/@abgov/web-components/html.html-data.json"
+  ]
+}
+```
+
 ---
 
 [Visit Design System](https://ui-components.alberta.ca)

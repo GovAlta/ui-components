@@ -1,0 +1,21 @@
+{
+  "name": "goa-radio-item",
+  "attributes": [
+    {
+      "name": "label",
+      "description": "Text to show to the user",
+      "type": "string"
+    },
+    {
+      "name": "value",
+      "description": "Value of the item that will be returned when selected",
+      "type": "string"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA RadioGroupItem",
+      "url": "{{siteUrl}}/?path=/docs/components-radio--basic"
+    }
+  ]
+}

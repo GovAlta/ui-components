@@ -1,0 +1,21 @@
+{
+  "name": "goa-notification",
+  "required": ["type"],
+  "attributes": [
+    {
+      "name": "type",
+      "description": "Define the context and colour of the notification banner",
+      "values": [{"name": "information"},{"name": "important"},{"name": "emergency"},{"name": "event"}]
+    },
+    {
+      "name": "_dismiss",
+      "description": "Dispatched when notification banner is closed."
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Notification",
+      "url": "{{siteUrl}}/?path=/docs/components-notification-banner--types"
+    }
+  ]
+}

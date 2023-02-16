@@ -1,0 +1,25 @@
+{
+  "name": "goa-microsite-header",
+  "required": ["type"],
+  "attributes": [
+    {
+      "name": "type",
+      "values": [{"name": "alpha"},{"name": "beta"},{"name": "live"}]
+    },
+    {
+      "name": "version",
+      "type": "string"
+    },
+    {
+      "name": "feedbackUrl",
+      "type": "string",
+      "description": "Url to feedback page that will be displayed when provided."
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Microsite Header",
+      "url": "{{siteUrl}}/?path=/docs/components-microsite-header--alpha"
+    }
+  ]
+}

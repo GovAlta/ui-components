@@ -1,0 +1,31 @@
+{
+  "name": "goa-divider",
+  "attributes": [
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Divider",
+      "url": "{{siteUrl}}/?path=/docs/utility-divider--spacing#divider"
+    }
+  ]
+}

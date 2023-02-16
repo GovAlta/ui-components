@@ -1,0 +1,72 @@
+{
+  "name": "goa-checkbox",
+  "required": ["name", "checked"],
+  "attributes": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Must match the name assigned to the children"
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "description": "Mark the checkbox item as selected",
+      "valueSet": "boolean"
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "description": "Content to display as the label for the Checkbox"
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "The value binding to the checkbox"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Disable this control. It will not receive focus or events",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "description": "Show an error on the checkbox item",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the name\n"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Checkbox",
+      "url": "{{siteUrl}}/?path=/docs/components-checkbox--basic#checkbox"
+    }
+  ]
+}
