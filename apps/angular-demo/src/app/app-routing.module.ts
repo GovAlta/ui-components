@@ -26,6 +26,7 @@ import { RadioComponent } from "./radio/radio.component";
 import { PaginateComponent } from "./paginate/paginate";
 import { SkeletonComponent } from "./skeleton/skeleton.component";
 import { SpacingComponent } from "./spacing/spacing";
+import { StylesComponent } from "./styles/styles.component";
 import { TableComponent } from "./table/table";
 import { TextAreaComponent } from "./text-area/text-area.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: "radio", component: RadioComponent },
   { path: "skeleton", component: SkeletonComponent },
   { path: "spacing", component: SpacingComponent },
+  { path: "styles", component: StylesComponent },
   { path: "table", component: TableComponent },
   { path: "textarea", component: TextAreaComponent },
   { path: "two-column-layout", component: TwoColumnLayoutComponent },
@@ -66,4 +68,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

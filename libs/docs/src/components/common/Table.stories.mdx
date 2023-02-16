@@ -106,6 +106,32 @@ export const TableTemplate = (args) => {
   );
 };
 
+export const TableNumberTemplate = (args) => {
+  return (
+    <GoATable {...args}>
+      <thead>
+        <tr>
+          <th>Col 1</th>
+          <th>Col 2</th>
+          <th>Number Column</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Item 1</td>
+          <td>Item 2</td>
+          <td className="goa-table-number-column">54</td>
+        </tr>
+        <tr>
+          <td>Item 4</td>
+          <td>Item 5</td>
+          <td className="goa-table-number-column">5467</td>
+        </tr>
+      </tbody>
+    </GoATable>
+  );
+};
+
 export const SortableTableTemplate = (args) => {
   const [users, setUsers] = useState([]);
   const [sortCol, setSortCol] = useState("");
@@ -153,7 +179,7 @@ export const SortableTableTemplate = (args) => {
           <tr key={user.id}>
             <td>{user.firstName}</td>
             <td>{user.lastName}</td>
-            <td className="goa-table-number-column">{user.age}</td>
+            <td>{user.age}</td>
           </tr>
         ))}
       </tbody>
@@ -356,12 +382,6 @@ export const SortableTableTemplate = (args) => {
 
 #### Sortable columns
 
-<GoACallout>
-  Columns with numerical data can be styled by adding a css class{" "}
-  <i>goa-table-column-number</i>. This sets the appropriate font and alignment
-  on these table cells
-</GoACallout>
-
 <Story name="Sortable">{SortableTableTemplate.bind()}</Story>
 
 <Tabs>
@@ -412,7 +432,7 @@ export const SortableTableTemplate = (args) => {
             <tr *ngFor="let user of users; index as i">
               <td>{{ user.firstName }}</td>
               <td>{{ user.lastName }}</td>
-              <td class="goa-table-number-column">{{ user.age }}</td>
+              <td>{{ user.age }}</td>
             </tr>
           </tbody>
         </goa-table>
@@ -459,13 +479,82 @@ export const SortableTableTemplate = (args) => {
                 <tr key={user.id}>
                   <td>{user.firstName}</td>
                   <td>{user.lastName}</td>
-                  <td className="goa-table-number-column">{user.age}</td>
+                  <td>{user.age}</td>
                 </tr>
               )}
             </tbody>
           </GoATable>
         );
     `}
+    />
+  </Tab>
+</Tabs>
+
+#### Number Columns
+
+<GoACallout>
+  Columns with numerical data can be styled by adding a css class{" "}
+  <i>goa-table-column-number</i>. This sets the appropriate font and alignment
+  on these table cells
+</GoACallout>
+
+<Story name="Number Columns">{TableNumberTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-table>
+          <thead>
+            <tr>
+              <th>Col 1</th>
+              <th>Col 2</th>
+              <th>Number Column</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Item 1</td>
+              <td>Item 2</td>
+              <td class="goa-table-number-column">54</td>
+            </tr>
+            <tr>
+              <td>Item 4</td>
+              <td>Item 5</td>
+              <td class="goa-table-number-column">5467</td>
+            </tr>
+          </tbody>
+        </goa-table>
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        <GoATable>
+          <thead>
+            <tr>
+              <th>Col 1</th>
+              <th>Col 2</th>
+              <th>Number Column</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Item 1</td>
+              <td>Item 2</td>
+              <td className="goa-table-number-column">54</td>
+            </tr>
+            <tr>
+              <td>Item 4</td>
+              <td>Item 5</td>
+              <td className="goa-table-number-column">5467</td>
+            </tr>
+          </tbody>
+        </GoATable>
+      `}
     />
   </Tab>
 </Tabs>

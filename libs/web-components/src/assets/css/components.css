@@ -1,0 +1,22 @@
+ol.goa-ordered-list, ul.goa-unordered-list {
+  font: var(--goa-typography-body-l);
+}
+
+ol.goa-ordered-list li {
+  margin-bottom: var(--goa-line-height-1);
+  padding: var(--goa-space-xs);
+}
+
+ol.goa-ordered-list ol, ol.goa-ordered-list ul,
+ul.goa-unordered-list ol, ul.goa-unordered-list ul {
+  margin-left: var(--goa-space-l);
+  margin-top: 1.25rem;
+}
+
+ul.goa-unordered-list li {
+  margin-bottom: 1.25rem;
+}
+
+ul.goa-unordered-list li::marker {
+  color: var(--goa-color-brand-default);
+}

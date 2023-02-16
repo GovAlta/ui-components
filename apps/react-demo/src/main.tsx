@@ -25,6 +25,7 @@ import Modal from "./routes/modal";
 import NotificationBanner from "./routes/notificationBanner";
 import Radio from "./routes/radio";
 import Skeleton from "./routes/skeleton";
+import Styles from "./routes/styles";
 import Table from "./routes/table";
 import TextArea from "./routes/textarea";
 import Pagination from "./routes/pagination";
@@ -59,6 +60,7 @@ ReactDOM.render(
         <Route path="pagination" element={<Pagination />} />
         <Route path="radio" element={<Radio />} />
         <Route path="skeleton" element={<Skeleton />} />
+        <Route path="styles" element={<Styles />} />
         <Route path="table" element={<Table />} />
         <Route path="textarea" element={<TextArea />} />
       </Route>
