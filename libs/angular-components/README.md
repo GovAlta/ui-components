@@ -8,7 +8,7 @@ Add Dependencies
 
 ```bash
 npm i @abgov/web-components
-npm i @abgov/angular-components -f
+npm i @abgov/angular-components
 ```
 
 Link ionicons in app/index.html
