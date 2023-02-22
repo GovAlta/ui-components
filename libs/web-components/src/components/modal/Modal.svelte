@@ -6,6 +6,18 @@
   import { toBoolean, typeValidator } from "../../common/utils";
   import { onMount } from "svelte";
 
+  // Public
+  export let closable: string = "false";
+  export let open: string = "false";
+  export let transition: Transition = "none";
+  export let width: string = "";
+  export let calloutvariant: CalloutVariant = null;
+
+  // Private
+  let contentEl: HTMLElement = null;
+  let scrollEl: HTMLElement = null;
+
+  // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator("Callout variant", [
     "emergency",
     "important",
@@ -20,26 +32,16 @@
 
   type CalloutVariant = typeof CALLOUT_VARIANT[number];
   type Transition = typeof Transitions[number];
-
-  export let closable: string = "false";
-  export let open: string = "false";
-  export let transition: Transition = "none";
-  export let width: string = "";
-  export let calloutvariant: CalloutVariant = null;
-
-  const isScrollable = true;
-
+   
+  // Reactive
   $: isClosable = toBoolean(closable);
   $: isOpen = toBoolean(open);
 
-  let contentEl: HTMLElement = null;
-  let scrollEL: HTMLElement = null;
-
-  $: if(isOpen && scrollEL) {
-    if(scrollEL.scrollHeight > scrollEL.offsetHeight)
-        { //if scroll exists
-          contentEl.classList.add("scroll-top");
-        }
+  $: if(isOpen && scrollEl) {
+    const hasScroll = scrollEl.scrollHeight > scrollEl.offsetHeight;
+    if (hasScroll) {
+      contentEl.classList.add("scroll-top");
+    }
   };
 
   $: _transitionTime = transition === "none" ? 0 : transition === "slow" ? 400 : 200;
@@ -57,6 +59,13 @@
       ? "calendar"
       : "";
 
+  // Hooks
+  onMount(() => {
+    validateCalloutVariant(calloutvariant);
+    validateTransition(transition);
+  });
+
+  // Functions
   function close(e: Event) {
     if (!isClosable) {
       return;
@@ -65,25 +74,23 @@
     e.stopPropagation();
   }
 
-  onMount(() => {
-    validateCalloutVariant(calloutvariant);
-    validateTransition(transition);
-  });
-
   function handleScroll(e: CustomEvent) {
-      if(e.detail.scrollHeight > e.detail.offsetHeight){ //if scroll exists
-        contentEl.classList.remove("scroll-top", "scroll-middle", "scroll-bottom");
-
-        if(e.detail.scrollTop == 0){ //in the top
-          contentEl.classList.add("scroll-top");
-        }
-        else if (Math.abs(e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight) < 1) { //in the bottom
-          contentEl.classList.add("scroll-bottom");
-        }
-        else if(e.detail.scrollTop > 0){ //in the middle
-          contentEl.classList.add("scroll-middle");
-        }
+    const hasScroll = e.detail.scrollHeight > e.detail.offsetHeight;
+    if (hasScroll) {
+      const atTop = e.detail.scrollTop == 0;
+      const atBottom = Math.abs(e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight) < 1;
+    
+      contentEl.classList.remove("scroll-top", "scroll-middle", "scroll-bottom");
+      if (atTop) {
+        contentEl.classList.add("scroll-top");
       }
+      else if (atBottom) {
+        contentEl.classList.add("scroll-bottom");
+      }
+      else {
+        contentEl.classList.add("scroll-middle");
+      }
+    }
   }
 
 </script>
@@ -129,16 +136,9 @@
             </div>
           {/if}
           <div data-testid="modal-content" class="modal-content" bind:this={contentEl}>
-            {#if isScrollable}
-              <goa-scrollable direction="vertical" height="50" bind:this={scrollEL} on:_scroll={handleScroll}>
-                <slot />
-              </goa-scrollable>
-            {:else}
-              <div style="margin: 2rem">
-                <slot />
-              </div>
-            {/if}
-            <slot />
+            <goa-scrollable direction="vertical" hpadding="1.9rem" height="50" bind:this={scrollEl} on:_scroll={handleScroll}>
+              <slot />
+            </goa-scrollable>
           </div>
           <div class="modal-actions" data-testid="modal-actions">
             <slot name="actions" />
@@ -230,6 +230,10 @@
 
   .modal-actions ::slotted(*) {
     padding: 1.5rem 0 0;
+  }
+
+  .modal-content {
+    margin: 0 -2rem;
   }
 
   .modal-content ::slotted(:last-child) {

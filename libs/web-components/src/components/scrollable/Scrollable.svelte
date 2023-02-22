@@ -3,18 +3,26 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
+  // Public
   export let direction: "vertical" | "horizontal" = "vertical";
-  export let hpadding: number = 0;
-  export let vpadding: number = 0;
+  export let hpadding: string = "";
+  export let vpadding: string = "";
   export let height: number = 0;
-
-  let _el: HTMLElement;
   export let offsetHeight: number;
   export let scrollHeight: number;
 
+  // Private
+  let _el: HTMLElement;
+
   function onScroll(e: Event) {
-    e.target.dispatchEvent(new CustomEvent("_scroll", { composed: true, detail: { offsetHeight: _el.offsetHeight,
-      scrollHeight: _el.scrollHeight, scrollTop: _el.scrollTop} }));
+    e.target.dispatchEvent(new CustomEvent("_scroll", { 
+      composed: true, 
+      detail: { 
+        offsetHeight: _el.offsetHeight,
+        scrollHeight: _el.scrollHeight, 
+        scrollTop: _el.scrollTop,
+      } 
+    }));
     e.stopPropagation();
   }
 
@@ -29,8 +37,8 @@
   --max-height: ${height};
   overflow-y: ${direction === "vertical" ? 'auto' : 'hidden'};
   overflow-x: ${direction === "horizontal" ? 'auto' : 'hidden'};
-  margin: ${vpadding}rem 0;
-  padding: 0 ${hpadding}rem;
+  margin: ${vpadding} 0;
+  padding: 0 ${hpadding};
 `}>
   <slot />
 </div>
