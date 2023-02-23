@@ -82,6 +82,9 @@ export default function App() {
             <Link className="navigation-link" to="/skeleton">
               Skeleton
             </Link>
+            <Link className="navigation-link" to="/styles">
+              Styles
+            </Link>
             <Link className="navigation-link" to="/table">
               Table
             </Link>
