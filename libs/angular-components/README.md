@@ -1,6 +1,6 @@
 # Angular UI Components
 
-![npm (scoped)](https://img.shields.io/npm/v/@abgov/web-components?color=%230081a2&label=web-components&style=flat-square)
+![npm (scoped)](https://img.shields.io/npm/v/@abgov/angular-components?color=%230081a2&label=angular-components&style=flat-square)
 
 This is the web component library and utilizes Angular's web component integration.
 
