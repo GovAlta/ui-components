@@ -216,14 +216,14 @@
     box-shadow: 0 0 0 1px var(--goa-color-interactive-hover);
   }
 
-  /* Checked:hover */  
+  /* Checked:hover */
   input[type="radio"]:checked:hover ~ .goa-radio-icon {
     border: 7px solid var(--goa-color-interactive-hover);
     box-shadow: 0 0 0 1px var(--goa-color-interactive-hover);
   }
 
   /* Default:focus */
-  input[type="radio"]:focus ~ .goa-radio-icon {
+  input[type="radio"]:focus ~ .goa-radio-icon, input[type="radio"]:active ~ .goa-radio-icon {
     box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
   }
 
