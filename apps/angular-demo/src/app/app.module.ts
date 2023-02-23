@@ -42,6 +42,7 @@ import { SpacingComponent } from "./spacing/spacing";
 import { TableComponent } from "./table/table";
 import { TextAreaComponent } from "./text-area/text-area.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
+import { PopoverComponent } from "./popover/popover.component";
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
     NavigationLinkComponent,
     NotificationBannerComponent,
     PaginateComponent,
+    PopoverComponent,
     RadioComponent,
     SkeletonComponent,
     SpacingComponent,

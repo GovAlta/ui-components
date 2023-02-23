@@ -24,12 +24,13 @@ import Input from "./routes/input";
 import MicrositeHeader from "./routes/micrositeHeader";
 import Modal from "./routes/modal";
 import NotificationBanner from "./routes/notificationBanner";
+import Pagination from "./routes/pagination";
+import Popover from "./routes/popover";
 import Radio from "./routes/radio";
 import Skeleton from "./routes/skeleton";
 import Styles from "./routes/styles";
 import Table from "./routes/table";
 import TextArea from "./routes/textarea";
-import Pagination from "./routes/pagination";
 
 import "@abgov/web-components/index.css";
 
@@ -60,6 +61,7 @@ ReactDOM.render(
         <Route path="modal" element={<Modal />} />
         <Route path="notification-banner" element={<NotificationBanner />} />
         <Route path="pagination" element={<Pagination />} />
+        <Route path="popover" element={<Popover />} />
         <Route path="radio" element={<Radio />} />
         <Route path="skeleton" element={<Skeleton />} />
         <Route path="styles" element={<Styles />} />
