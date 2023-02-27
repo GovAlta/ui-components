@@ -134,8 +134,6 @@ import { useState } from "react";
   />
 </Props>
 
-#### Note
-
 export const Template = (args) => {
   const [value, setValue] = useState("");
   function onChange(name, value) {
@@ -564,7 +562,10 @@ export const Template = (args) => {
 
 #### Placeholder
 
-<Story name="Placeholder" args={{ name: "colors", placeholder: "Select a color" }}>
+<Story
+  name="Placeholder"
+  args={{ name: "colors", placeholder: "Select a color" }}
+>
   {Template.bind()}
 </Story>
 

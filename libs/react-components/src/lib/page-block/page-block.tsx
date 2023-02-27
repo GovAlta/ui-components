@@ -15,9 +15,14 @@ declare global {
 
 export interface PageBlockProps {
   width: "full" | string;
+  testId?: string;
   children?: ReactNode;
 }
 
 export const GoAPageBlock: FC<PageBlockProps> = (props) => {
-  return <goa-page-block width={props.width}>{props.children}</goa-page-block>;
+  return (
+    <goa-page-block width={props.width} data-testid={props.testId}>
+      {props.children}
+    </goa-page-block>
+  );
 };

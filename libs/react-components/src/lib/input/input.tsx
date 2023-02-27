@@ -48,7 +48,6 @@ interface WCProps extends Margins {
   width?: string;
   prefix?: string;
   suffix?: string;
-  testid?: string;
   arialabel?: string;
 
   // type=number

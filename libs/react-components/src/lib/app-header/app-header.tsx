@@ -20,12 +20,14 @@ interface Props {
   url?: string;
   maxContentWidth?: string;
   children?: React.ReactNode;
+  testId?: string;
 }
 
 export const GoAAppHeader: FC<Props> = ({
   heading,
   url,
   maxContentWidth,
+  testId,
   children,
 }) => {
   return (
@@ -33,6 +35,7 @@ export const GoAAppHeader: FC<Props> = ({
       heading={heading}
       url={url}
       maxcontentwidth={maxContentWidth}
+      data-testid={testId}
     >
       {children}
     </goa-app-header>

@@ -5,6 +5,7 @@ export type { GoAIconType } from "./lib/icon/icon";
 export type { GoABadgeType } from "./lib/badge/badge";
 
 // Components
+export * from "./lib/accordion/accordion";
 export * from "./lib/app-header/app-header";
 export * from "./lib/badge/badge";
 export * from "./lib/block/block";
@@ -15,6 +16,7 @@ export * from "./lib/checkbox/checkbox";
 export * from "./lib/chip/chip";
 export * from "./lib/circular-progress/circular-progress";
 export * from "./lib/container/container";
+export * from "./lib/details/details";
 export * from "./lib/divider/divider";
 export * from "./lib/dropdown/dropdown";
 export * from "./lib/dropdown/dropdown-item";

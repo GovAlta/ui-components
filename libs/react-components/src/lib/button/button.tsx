@@ -39,6 +39,7 @@ interface ButtonProps extends Margins {
   leadingIcon?: GoAIconType;
   trailingIcon?: GoAIconType;
   onClick?: () => void;
+  testId?: string;
   children?: ReactNode;
 }
 
@@ -49,6 +50,7 @@ export const GoAButton: FC<ButtonProps> = ({
   variant,
   leadingIcon,
   trailingIcon,
+  testId,
   children,
   onClick,
   mt,
@@ -84,6 +86,7 @@ export const GoAButton: FC<ButtonProps> = ({
       disabled={disabled}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
+      data-testid={testId}
       mt={mt}
       mr={mr}
       mb={mb}

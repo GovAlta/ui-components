@@ -19,6 +19,7 @@ interface Props {
   heading: string;
   backgroundUrl: string;
   minHeight?: string;
+  testId?: string;
   children?: React.ReactNode;
 }
 
@@ -27,12 +28,14 @@ export const GoAHeroBanner: FC<Props> = ({
   backgroundUrl,
   minHeight,
   children,
+  testId,
 }) => {
   return (
     <goa-hero-banner
       heading={heading}
       backgroundurl={backgroundUrl}
       minheight={minHeight}
+      data-testid={testId}
     >
       {children}
     </goa-hero-banner>

@@ -13,8 +13,8 @@ export default function App() {
       <div className="container">
         <div className="navigation-bar">
           <nav>
-            <Link className="navigation-link" to="/pagination">
-              Pagination
+            <Link className="navigation-link" to="/accordion">
+              Accordion
             </Link>
             <Link className="navigation-link" to="/app-footer">
               AppFooter
@@ -73,11 +73,17 @@ export default function App() {
             <Link className="navigation-link" to="/notification-banner">
               Notification Banner
             </Link>
+            <Link className="navigation-link" to="/pagination">
+              Pagination
+            </Link>
             <Link className="navigation-link" to="/radio">
               Radio
             </Link>
             <Link className="navigation-link" to="/skeleton">
               Skeleton
+            </Link>
+            <Link className="navigation-link" to="/styles">
+              Styles
             </Link>
             <Link className="navigation-link" to="/table">
               Table

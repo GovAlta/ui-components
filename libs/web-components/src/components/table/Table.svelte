@@ -1,9 +1,10 @@
 <svelte:options tag="goa-table" />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
   import { typeValidator, toBoolean } from "../../common/utils";
+  import type { Direction } from "./TableSortHeader.svelte";
 
   // Validators
   const [Variants, validateVariant] = typeValidator(
@@ -29,16 +30,50 @@
 
   onMount(() => {
     validateVariant(variant);
-    const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
+    attachSortEventHandling();
 
-    if (slot) {
-      // React needs to nest data in a <template><table>...</table></template>
-      const content = slot.assignedElements()[0].querySelectorAll("template table > *");
-      _rootEl.append(...(content.length > 0 ? content : slot.assignedElements()));
-    } else {
-      return [..._rootEl.children] as Element[];
+    const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
+    if (!slot || slot.assignedElements().length === 0) {
+      return;
     }
+    // React needs to nest data in a <template><table>...</table></template>
+    const content = slot.assignedElements()[0].querySelectorAll("template table > *");
+    _rootEl.append(...(content.length > 0 ? content : slot.assignedElements()));
   });
+
+  async function attachSortEventHandling() {
+    await tick();
+    const headings = _rootEl.querySelectorAll("goa-table-sort-header");
+    headings.forEach(heading => {
+      heading.addEventListener("click", () => {
+        const sortBy = heading.getAttribute("name")
+        let sortDir: number;
+
+        // relay state to all children
+        headings.forEach(child => {
+          if (child.getAttribute("name") === sortBy) {
+            const direction = child.getAttribute("direction") as Direction;
+            // starting direction is desc
+            const newDirection = direction === "desc" ? "asc" : "desc";
+
+            sortDir = newDirection === "asc" ? 1 : -1
+            child.setAttribute("direction", newDirection)
+          } else {
+            child.setAttribute("direction", "none")
+          }
+        })
+
+        heading.dispatchEvent(new CustomEvent("_sort", {
+          composed: true,
+          bubbles: false,
+          cancelable: true,
+          detail: {sortBy, sortDir},
+        }));
+      })
+    })
+ }
+
+
 </script>
 
 <table
@@ -51,7 +86,11 @@
   `}
 >
   <slot />
-  <!-- prevents console errors being seen in react  -->
+
+  <!--
+    prevents console errors being seen in react
+    and prevents the internal styles from being removed
+  -->
   <template>
     <thead><tr><th /></tr></thead>
     <tbody><tr><td /></tr></tbody>
@@ -60,6 +99,9 @@
 </table>
 
 <style>
+  :host {
+    overflow-x: auto;
+  }
   table {
     border-collapse: collapse;
   }
@@ -71,30 +113,43 @@
     top: 0;
   }
   td {
-    padding: 0.75rem 1rem 0.5rem;
+    font: var(--goa-typography-body-m);
+    padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--goa-color-greyscale-200);
-    line-height: 1rem;
   }
 
-  table.relaxed td{
-    padding: 1.25rem 1rem 1rem;
+  table :global(.goa-table-number-column) {
+    font: var(--goa-typography-number-m);
+    text-align: right;
+  }
+
+  table.relaxed td {
+    padding: 1rem;
   }
 
   th {
     background-color: var(--goa-color-greyscale-white);
     color: var(--goa-color-text-secondary);
     padding: 1rem;
-    vertical-align: middle;
     text-align: left;
     border-bottom: 2px solid var(--goa-color-greyscale-700);
+    vertical-align: bottom;
   }
+
+  th:has(goa-table-sort-header) {
+    padding: 0;
+  }
+
   tfoot td {
     background-color: var(--goa-color-greyscale-100);
   }
+
   tfoot tr:first-child td {
     border-top: 2px solid var(--goa-color-greyscale-200);
   }
+
   tfoot tr:last-child td {
     border-bottom: none;
   }
+
 </style>

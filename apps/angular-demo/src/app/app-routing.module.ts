@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
+import { AccordionComponent } from "./accordion/accordion.component";
 import { AppFooterComponent } from "./app-footer/app-footer.component";
 import { AppHeaderComponent } from "./app-header/app-header.component";
 import { BadgeComponent } from "./badge/badge.component";
@@ -11,6 +12,7 @@ import { CheckboxComponent } from "./checkbox/checkbox.component";
 import { ChipComponent } from "./chip/chip.component";
 import { CircularProgressComponent } from "./circular-progress/circular-progress.component";
 import { ContainerComponent } from "./container/container.component";
+import { DetailComponent } from "./detail/detail";
 import { DropdownComponent } from "./dropdown/dropdown.component";
 import { FormItemComponent } from "./form-item/form-item.component";
 import { GridComponent } from "./grid/grid";
@@ -24,11 +26,13 @@ import { RadioComponent } from "./radio/radio.component";
 import { PaginateComponent } from "./paginate/paginate";
 import { SkeletonComponent } from "./skeleton/skeleton.component";
 import { SpacingComponent } from "./spacing/spacing";
+import { StylesComponent } from "./styles/styles.component";
 import { TableComponent } from "./table/table";
 import { TextAreaComponent } from "./text-area/text-area.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
 
 const routes: Routes = [
+  { path: "accordion", component: AccordionComponent },
   { path: "app-footer", component: AppFooterComponent },
   { path: "app-header", component: AppHeaderComponent },
   { path: "badge", component: BadgeComponent },
@@ -39,6 +43,7 @@ const routes: Routes = [
   { path: "chip", component: ChipComponent },
   { path: "circular-progress", component: CircularProgressComponent },
   { path: "container", component: ContainerComponent },
+  { path: "detail", component: DetailComponent },
   { path: "dropdown", component: DropdownComponent },
   { path: "form-item", component: FormItemComponent },
   { path: "grid", component: GridComponent },
@@ -52,6 +57,7 @@ const routes: Routes = [
   { path: "radio", component: RadioComponent },
   { path: "skeleton", component: SkeletonComponent },
   { path: "spacing", component: SpacingComponent },
+  { path: "styles", component: StylesComponent },
   { path: "table", component: TableComponent },
   { path: "textarea", component: TextAreaComponent },
   { path: "two-column-layout", component: TwoColumnLayoutComponent },
@@ -62,4 +68,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

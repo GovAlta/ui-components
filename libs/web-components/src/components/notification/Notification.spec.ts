@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, waitFor } from '@testing-library/svelte';
+import { render, waitFor, fireEvent } from '@testing-library/svelte';
 import GoANotification from './Notification.svelte'
 
 describe('GoANotificationComponent', () => {
@@ -20,5 +20,14 @@ describe('GoANotificationComponent', () => {
       expect(console.error["mock"].calls.length).toBeGreaterThan(0);
     })
     mock.mockRestore();
+  });
+
+  it("Event triggered on notification banner dismiss", async () => {
+    const onDismiss = jest.fn();
+    const { container } = render(GoANotification, { type: "information" });
+    const closeIcon = container.querySelector("goa-icon-button");
+    closeIcon.addEventListener("_dismiss", onDismiss);
+    await fireEvent.click(closeIcon);
+    expect(onDismiss).toBeCalled();
   });
 });

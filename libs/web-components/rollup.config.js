@@ -6,13 +6,12 @@ import preprocess from "svelte-preprocess";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import css from 'rollup-plugin-css-only';
+import {replaceCodePlugin} from 'vite-plugin-replace';
 
 export default {
   input: "src/index.ts",
   output: {
     sourcemap: true,
-    format: "es", // es, iife, umd
-    // name: "app",
     file: "../../dist/libs/web-components/web-components.es.js",
   },
   plugins: [
@@ -36,9 +35,17 @@ export default {
     resolve(),
     terser(),
     summary(),
+    replaceCodePlugin({
+      replacements: [
+          {
+              from: /:global\(([\[\]\(\)\-\.\:\*\w]+)\)/g,
+              to: "$1",
+          }
+      ]
+    }),
   ],
   watch: {
     clearScreen: true,
-    include: ["src/**/*.ts", "src/**/*.svelte"],
+    include: ["src/**/*.ts", "src/**/*.svelte", "src/**/*.css"],
   },
 };

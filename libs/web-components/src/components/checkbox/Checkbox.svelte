@@ -127,12 +127,8 @@
   }
 
   /* disabled state */
-  .goa-checkbox--disabled .goa-checkbox-text{
+  .goa-checkbox--disabled .goa-checkbox-text {
     opacity: 40%;
-  }
-
-  .goa-checkbox--disabled:hover {
-    cursor: default;
   }
 
   .goa-checkbox-container {
@@ -162,11 +158,13 @@
   }
 
   .goa-checkbox-container:hover {
-    border: 1px solid var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    border: none;
   }
 
   .goa-checkbox-container:focus-within {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    border: 1px solid var(--goa-color-greyscale-700);
     outline: none;
   }
 
@@ -179,6 +177,12 @@
   .goa-checkbox--disabled .goa-checkbox-container,
   .goa-checkbox--disabled .goa-checkbox-container:hover {
     border: 1px solid var(--goa-color-greyscale-400);
+    box-shadow: none;
+  }
+
+  .goa-checkbox--disabled, 
+  input[type=checkbox][disabled]:hover {
+    cursor: default;
   }
 
   /* Error state */

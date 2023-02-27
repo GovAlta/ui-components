@@ -11,6 +11,7 @@ import "@abgov/web-components";
 // ******
 // Routes
 // ******
+import { AccordionComponent } from "./accordion/accordion.component";
 import { AppFooterComponent } from "./app-footer/app-footer.component";
 import { AppHeaderComponent } from "./app-header/app-header.component";
 import { BadgeComponent } from "./badge/badge.component";
@@ -21,6 +22,7 @@ import { CheckboxComponent } from "./checkbox/checkbox.component";
 import { ChipComponent } from "./chip/chip.component";
 import { CircularProgressComponent } from "./circular-progress/circular-progress.component";
 import { ContainerComponent } from "./container/container.component";
+import { DetailComponent } from "./detail/detail";
 import { DropdownComponent } from "./dropdown/dropdown.component";
 import { FormItemComponent } from "./form-item/form-item.component";
 import { GridComponent } from "./grid/grid";
@@ -41,6 +43,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
 
 @NgModule({
   declarations: [
+    AccordionComponent,
     AppComponent,
     AppFooterComponent,
     AppHeaderComponent,
@@ -52,6 +55,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
     ChipComponent,
     CircularProgressComponent,
     ContainerComponent,
+    DetailComponent,
     DropdownComponent,
     FormItemComponent,
     GridComponent,
@@ -82,4 +86,4 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule { }

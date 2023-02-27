@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, waitFor } from "@testing-library/react";
-import { fireEvent, screen } from "@testing-library/dom";
+import { fireEvent } from "@testing-library/dom";
 import { GoAInputText, InputProps } from "./input";
 import { GoAIconType } from "../icon/icon";
 import React from "react";
@@ -43,7 +43,7 @@ describe("Input", () => {
 
     render(<GoAInputText {...props} />);
 
-    const input = screen.getByTestId(testId);
+    const input = document.querySelector("goa-input");
     expect(input).toBeTruthy();
     expect(input.getAttribute("name")).toBe("foo");
     expect(input.getAttribute("value")).toBe("bar");
@@ -83,9 +83,9 @@ describe("Input", () => {
       validateOnChange();
     };
     const props = { ...defaultProps, onChange };
-    const { getByTestId } = render(<GoAInputText {...props} />);
+    render(<GoAInputText {...props} />);
 
-    const input = getByTestId(testId);
+    const input = document.querySelector("goa-input");
     expect(input).toBeTruthy();
 
     fireEvent(

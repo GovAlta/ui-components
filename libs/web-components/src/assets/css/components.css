@@ -1,0 +1,12 @@
+ol.goa-ordered-list li, ul.goa-unordered-list li {
+  padding: var(--goa-space-xs);
+}
+
+ol.goa-ordered-list ol, ol.goa-ordered-list ul,
+ul.goa-unordered-list ol, ul.goa-unordered-list ul {
+  margin-left: var(--goa-space-l);
+}
+
+ul.goa-unordered-list li::marker {
+  color: var(--goa-color-brand-default);
+}

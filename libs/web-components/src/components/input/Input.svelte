@@ -239,6 +239,7 @@
 
   .goa-input:hover {
     border-color: var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }
   .goa-input:active,
   .goa-input:focus,
@@ -363,13 +364,17 @@
     box-shadow: none;
   }
 
-  .error:hover,
-  .error:focus,
-  .error {
+  .error,
+  .error:hover {
     border: 2px solid var(--goa-color-interactive-error);
+    box-shadow: 0 0 0 1px var(--goa-color-interactive-error);
+  }
+  .error:focus-within:hover {
+    border: 2px solid var(--goa-color-interactive-error);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
 
-  input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-search-cancel-button {
+  input[type="search"]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-search-cancel-button {
     position: relative;
     right: var(--search-icon-offset);
     cursor: pointer;

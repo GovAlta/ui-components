@@ -14,7 +14,6 @@ interface WCProps extends Margins {
   name?: string;
   native?: boolean;
   placeholder?: string;
-  testid?: string;
   value?: string;
   width?: string;
 }
@@ -94,7 +93,7 @@ export const GoADropdown: FC<Props> = (props) => {
       multiselect={props.multiselect}
       native={props.native}
       placeholder={props.placeholder}
-      testid={props.testId}
+      data-testid={props.testId}
       width={props.width}
     >
       {props.children}

@@ -112,7 +112,6 @@
     width: 100%;
     box-sizing: border-box;
     outline: none;
-    transition: box-shadow 0.1s ease-in;
     border: 1px solid var(--goa-color-greyscale-700);
     border-radius: 3px;
     color: var(--goa-color-greyscale-black, #ccc);
@@ -120,6 +119,7 @@
     font-size: var(--goa-font-size-4);
     font-family: var(--goa-font-family-sans);
     min-width: 100%;
+    resize: vertical;
   }
 
   @media (min-width: 640px) {
@@ -134,12 +134,12 @@
   }
 
   .goa-textarea:hover {
-    border-color: var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }
   .goa-textarea:active,
   .goa-textarea:focus,
   .goa-textarea:focus-within {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
   }
 
   .goa-textarea:disabled,
@@ -163,9 +163,16 @@
     color: var(--goa-color-interactive-error)
   }
 
-  .error:hover,
-  .error:focus,
   .error {
-    border: 2px solid var(--goa-color-interactive-error);
+    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
+    box-shadow: 0 0 0 var(--goa-border-width-s) var(--goa-color-interactive-error);
+  }
+  .error:hover {
+    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-error);
+  }
+
+  .error:active,
+  .error:focus {
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
   }
 </style>

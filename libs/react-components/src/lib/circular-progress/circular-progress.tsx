@@ -26,6 +26,7 @@ export interface CircularProgressProps {
   message?: string;
   visible?: boolean;
   progress?: number;
+  testId?: string;
 }
 
 export const GoACircularProgress = ({
@@ -34,6 +35,7 @@ export const GoACircularProgress = ({
   progress,
   variant,
   size,
+  testId,
 }: CircularProgressProps) => {
   return (
     <goa-circular-progress
@@ -42,6 +44,7 @@ export const GoACircularProgress = ({
       progress={progress}
       variant={variant}
       size={size}
+      data-testid={testId}
     />
   );
 };

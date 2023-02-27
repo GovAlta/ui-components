@@ -7,4 +7,8 @@ import { Component } from "@angular/core";
 })
 export class NotificationBannerComponent {
   constructor() {}
+
+  onDismiss() {
+    console.log("dismissed");
+  }
 }

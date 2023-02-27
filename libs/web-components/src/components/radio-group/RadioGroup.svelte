@@ -174,14 +174,6 @@
     opacity: 0;
   }
 
-  input[type="radio"]:hover ~ .goa-radio-icon {
-    border-color: var(--goa-color-interactive-hover);
-  }
-
-  input[type="radio"]:focus ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
-  }
-
   .goa-radio-label {
     padding: 0.5rem;
     font-weight: var(--goa-font-weight-regular);
@@ -199,6 +191,7 @@
     flex: 0 0 auto;
   }
 
+  /* What is this? */
   .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
     box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
   }
@@ -212,31 +205,52 @@
 
   /* States */
 
-  /* Checked */
-  input[type="radio"]:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid
-      var(--goa-color-interactive-hover);
-  }
-
-  /* Not checked */
+  /* Default */
   input[type="radio"]:not(:checked) ~ .goa-radio-icon {
     border: var(--goa-radio-border-width) solid var(--goa-color-greyscale-700);
+  }
+
+  /* Default:hover */
+  input[type="radio"]:hover ~ .goa-radio-icon {
+    border: 1px solid var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 1px var(--goa-color-interactive-hover);
+  }
+
+  /* Checked:hover */  
+  input[type="radio"]:checked:hover ~ .goa-radio-icon {
+    border: 7px solid var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 1px var(--goa-color-interactive-hover);
+  }
+
+  /* Default:focus */
+  input[type="radio"]:focus ~ .goa-radio-icon {
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
+  }
+
+  /* Checked */
+  input[type="radio"]:checked ~ .goa-radio-icon {
+    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive-default);
   }
 
   /* Disabled */
   input[type="radio"]:disabled ~ .goa-radio-icon {
     border: var(--goa-radio-border-width) solid var(--goa-color-greyscale-700);
+    box-shadow: none;
   }
 
   /* Disabled and checked */
   input[type="radio"]:disabled:checked ~ .goa-radio-icon {
     border: var(--goa-radio-border-width--checked) solid
       var(--goa-color-interactive-hover);
+    box-shadow: none;
   }
 
   /* Error */
   .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon {
     border: 7px solid var(--goa-color-emergency-default);
+  }
+  .goa-radio--error input[type="radio"]:hover ~ .goa-radio-icon {
+    box-shadow: 0 0 0 1px var(--goa-color-emergency-default);
   }
   .goa-radio--error input[type="radio"]:not(:checked) ~ .goa-radio-icon {
     border: 2px solid var(--goa-color-emergency-default);

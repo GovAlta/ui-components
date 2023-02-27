@@ -36,6 +36,7 @@ export interface SkeletonProps extends Margins {
   size?: SkeletonSize;
   lineCount?: number;
   type: SkeletonType;
+  testId?: string;
 }
 
 export const GoASkeleton = ({
@@ -43,6 +44,7 @@ export const GoASkeleton = ({
   size,
   lineCount,
   type,
+  testId,
   mt,
   mr,
   mb,
@@ -58,6 +60,7 @@ export const GoASkeleton = ({
       mr={mr}
       mb={mb}
       ml={ml}
+      data-testid={testId}
     />
   );
 };
