@@ -86,4 +86,4 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}

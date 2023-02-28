@@ -4,5 +4,4 @@ import { Component } from "@angular/core";
   selector: "abgov-styles",
   templateUrl: "./styles.component.html",
 })
-export class StylesComponent {
-}
+export class StylesComponent {}
