@@ -1,0 +1,89 @@
+{
+  "name": "goa-button",
+  "attributes": [
+    {
+      "name": "type",
+      "description": "Define the type of button",
+      "type": "string",
+      "values": [{ "name": "primary" }, { "name": "submit"}, { "name": "secondary"}, {"name":  "tertiary"}, {"name": "start"}],
+      "default": "primary"
+    },
+    {
+      "name": "size",
+      "description": "Set the size of button [to compact]",
+      "type": "string",
+      "values": [
+        {
+          "name": "normal"
+        },
+        {
+          "name": "compact"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "name": "variant",
+      "type": "string",
+      "description": "Style this button to show a destructive action",
+      "values": [
+        {
+          "name": "normal"
+        },
+        {
+          "name": "destructive"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Disable this button",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "leadingIcon",
+      "type": "string",
+      "description": "Show an icon to the left of the text",
+      "valueSet": "goaIconType"
+    },
+    {
+      "name": "trailingIcon",
+      "description": "Show an icon to the right of the text",
+      "type": "string",
+      "valueSet": "goaIconType"
+    },
+    {
+      "name": "_click",
+      "description": "Callback function when button is clicked"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Button",
+      "url": "{{siteUrl}}/iframe.html?viewMode=docs&id=components-button--types&args=#button"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "goa-table-sort-header",
+  "attributes": [
+    {
+      "name": "direction",
+      "description": "Horizontal spacing",
+      "type": "string",
+      "values": [{"name": "asc"}, {"name": "desc"}, {"name": "none"}],
+      "default": "none"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Table Sort Header",
+      "url": "{{siteUrl}}/?path=/docs/components-table--basic"
+    }
+  ]
+}

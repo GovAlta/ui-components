@@ -1,0 +1,27 @@
+{
+  "name": "goa-app-header",
+  "attributes": [
+    {
+      "name": "url",
+      "description": "Set the URL to link from the alberta.ca logo. A full url is required",
+      "type": "string"
+    },
+    {
+      "name": "heading",
+      "description": "Set the service name to display in the app header",
+      "type": "string"
+    },
+    {
+      "name": "maxContentWidth",
+      "default": "100%",
+      "description": "Maximum width of the content area",
+      "type": "string"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA App header",
+      "url": "{{siteUrl}}/iframe.html?viewMode=docs&id=components-app-header--basic&args=#app-header"
+    }
+  ]
+}

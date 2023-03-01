@@ -1,0 +1,59 @@
+{
+  "name": "goa-container",
+  "attributes": [
+    {
+      "name": "type",
+      "description": "Choose the type of container the type of the accent bar",
+      "values": [{ "name": "interactive" }, { "name": "info"}, {"name": "error"}, {"name": "success"}, {"name": "important"}, {"name": "non-interactive"}],
+      "default": "interactive"
+    },
+    {
+      "name": "accent",
+      "description": "Sets the style of accent on the container",
+      "values": [{"name": "thick"}, {"name": "thin"}, {"name": "filled"}],
+      "default": "filled"
+    },
+    {
+      "name": "padding",
+      "description": "Sets the amount of white space in the container",
+      "values": [{"name": "relaxed"},{"name": "compact"}],
+      "default": "relaxed"
+    },
+    {
+      "name": "title",
+      "type": "slot",
+      "description": "Sets the content in the left of the accent bar"
+    },
+    {
+      "name": "action",
+      "type": "slot",
+      "description": "Sets the content in the right of the accent bar"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Container",
+      "url": "{{siteUrl}}/?path=/docs/components-container--container-types#container"
+    }
+  ]
+}

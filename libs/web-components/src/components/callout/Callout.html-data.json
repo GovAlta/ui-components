@@ -1,0 +1,42 @@
+{
+  "name": "goa-callout",
+  "required": ["type"],
+  "attributes": [
+    {
+      "name": "type",
+      "description": "Define the context and colour of the callout",
+      "values": [{ "name": "information" }, { "name": "important"}, { "name": "emergency"}, { "name": "success"}, { "name": "event"}]
+    },
+    {
+      "name": "heading",
+      "type": "string",
+      "description": "Callout heading text"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Callout",
+      "url": "{{siteUrl}}/?path=/docs/components-callout--emergency"
+    }
+  ]
+}

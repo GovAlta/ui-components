@@ -1,0 +1,39 @@
+{
+  "name": "goa-two-column-layout",
+  "required": ["header", "footer", "nav"],
+  "attributes": [
+    {
+      "name": "navColumnWidth",
+      "type": "string",
+      "description": "% | px | rem | ch | etc",
+      "default": "256px"
+    },
+    {
+      "name": "maxContentWidth",
+      "type": "string",
+      "description": "% | px | rem | ch | etc",
+      "default": "100%"
+    },
+    {
+      "name": "header",
+      "type": "slot",
+      "description": "How to add GoAAppHeader component"
+    },
+    {
+      "name": "footer",
+      "type": "slot",
+      "description": "How to add GoAAppFooter component"
+    },
+    {
+      "name": "nav",
+      "type": "slot",
+      "description": "Component containing nav links for application"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Two column layout",
+      "url": "{{siteUrl}}/?path=/docs/layouts-two-column--basic"
+    }
+  ]
+}

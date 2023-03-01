@@ -1,0 +1,28 @@
+{
+  "name": "goa-hero-banner",
+  "required": ["heading"],
+  "attributes": [
+    {
+      "name": "heading",
+      "type": "string",
+      "description": "Main heading text"
+    },
+    {
+      "name": "backgroundUrl",
+      "type": "string",
+      "description": "Background image url"
+    },
+    {
+      "name": "minHeight",
+      "type": "string",
+      "description": "Sets the height of the HeroBanner",
+      "default": "600px"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Hero Banner",
+      "url": "{{siteUrl}}/?path=/docs/components-hero-banner--basic"
+    }
+  ]
+}
