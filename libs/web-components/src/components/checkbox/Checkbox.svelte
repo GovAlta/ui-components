@@ -162,7 +162,7 @@
     border: none;
   }
 
-  .goa-checkbox-container:focus-within {
+  .goa-checkbox-container:focus-within,.goa-checkbox-container:focus, .goa-checkbox-container:active {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
     border: 1px solid var(--goa-color-greyscale-700);
     outline: none;
@@ -180,7 +180,7 @@
     box-shadow: none;
   }
 
-  .goa-checkbox--disabled, 
+  .goa-checkbox--disabled,
   input[type=checkbox][disabled]:hover {
     cursor: default;
   }
