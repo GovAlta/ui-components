@@ -537,6 +537,19 @@
   export let title: string = "";
   export let testid: string = "";
 
+  // Private
+  const _iconOverrides = {
+    pencil: `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.1442 5.47956L12.5355 1.87088L13.7196 0.686776C14.0391 0.367257 14.4385 0.212197 14.9178 0.221594C15.3971 0.230992 15.7965 0.39545 16.116 0.714969L17.3283 1.92726C17.6478 2.24678 17.8076 2.64148 17.8076 3.11136C17.8076 3.58124 17.6478 3.97594 17.3283 4.29546L16.1442 5.47956ZM1.03951 17.8424C0.795173 17.8424 0.593125 17.7626 0.433365 17.6028C0.273605 17.443 0.193726 17.241 0.193726 16.9966V14.5721C0.193726 14.4593 0.212521 14.356 0.250112 14.262C0.287702 14.168 0.353485 14.074 0.447461 13.9801L11.4689 2.93435L15.0776 6.54303L4.05615 17.5887C3.96217 17.6827 3.8682 17.7485 3.77422 17.7861C3.68024 17.8236 3.57687 17.8424 3.4641 17.8424H1.03951Z" fill="#333333"/>
+</svg>`,
+    checkmark: `<svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M6.20129 11.5368L15.9974 0.341265C16.3611 -0.0743717 16.9929 -0.116489 17.4085 0.247193C17.8241 0.610875 17.8663 1.24264 17.5026 1.65827L7.00258 13.6583C6.82032 13.8666 6.5599 13.99 6.28328 13.9992C6.00666 14.0084 5.7386 13.9026 5.54289 13.7069L1.04289 9.20688C0.652369 8.81635 0.652369 8.18319 1.04289 7.79266C1.43342 7.40214 2.06658 7.40214 2.45711 7.79266L6.20129 11.5368Z" fill="#333333"/>
+</svg>`,
+    remove: `<svg width="16" height="20" viewBox="0 0 16 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.5 -0.000244141C0.947715 -0.000244141 0.5 0.447471 0.5 0.999756C0.5 1.55204 0.947715 1.99976 1.5 1.99976H15C15.5523 1.99976 16 1.55204 16 0.999756C16 0.447471 15.5523 -0.000244141 15 -0.000244141H1.5Z" fill="#333333"/>
+</svg>`,
+  }
+
   $: isInverted = toBoolean(inverted);
 
   $: _size = {
@@ -560,9 +573,16 @@
   `}
 >
   {#if type}
-    <ion-icon
-      name={theme === "filled" || type.indexOf("logo") === 0 ? type : `${type}-${theme}`}
-    />
+    {#if Object.keys(_iconOverrides).includes(type)}
+      <div class="icon-override">
+        {@html _iconOverrides[type]}
+        <span />
+      </div>
+    {:else}
+      <ion-icon
+        name={theme === "filled" || type.indexOf("logo") === 0 ? type : `${type}-${theme}`}
+      />
+    {/if}
   {/if}
 </div>
 
@@ -594,7 +614,17 @@
     color: var(--hover-color);
   }
 
-  .inverted {
+  .icon-override {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .icon-override * {
+    fill: var(--goa-color-interactive-default);
+  }
+
+  .inverted * {
     color: #fff;
     fill: #fff;
   }

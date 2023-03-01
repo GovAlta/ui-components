@@ -12,7 +12,8 @@
 
   onMount(() => {
     injectCss(rootEl, ":host", {
-      width: `var(--goa-space-${hspacing})`,
+      display: "block",
+      width: hspacing === "fill" ? "100%" : `var(--goa-space-${hspacing})`,
       height: `var(--goa-space-${vspacing})`,
     });
   });

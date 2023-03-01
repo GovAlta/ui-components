@@ -15,6 +15,7 @@ import { ContainerComponent } from "./container/container.component";
 import { DetailComponent } from "./detail/detail";
 import { DropdownComponent } from "./dropdown/dropdown.component";
 import { FormItemComponent } from "./form-item/form-item.component";
+import { FormStepperComponent } from "./form-stepper/form-stepper.component";
 import { GridComponent } from "./grid/grid";
 import { HeroBannerComponent } from "./hero-banner/hero-banner.component";
 import { IconButtonComponent } from "./icon-button/icon-button.component";
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: "detail", component: DetailComponent },
   { path: "dropdown", component: DropdownComponent },
   { path: "form-item", component: FormItemComponent },
+  { path: "form-stepper", component: FormStepperComponent },
   { path: "grid", component: GridComponent },
   { path: "hero-banner", component: HeroBannerComponent },
   { path: "icon-button", component: IconButtonComponent },

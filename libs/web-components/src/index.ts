@@ -49,3 +49,8 @@ export * from "./layouts/FullScreenNavbarLayout.svelte";
 export * from "./layouts/FullScreenNavbarLayout.svelte";
 export * from "./layouts/one-column-layout/OneColumnLayout.svelte";
 export * from "./layouts/two-column-layout/TwoColumnLayout.svelte";
+
+export { default as Pagination } from './components/pagination/Pagination.svelte';
+export { default as FormStepper } from './components/form-stepper/FormStepper.svelte';
+export { default as FormStep } from './components/form-step/FormStep.svelte';
+export { default as Pages } from './components/pages/Pages.svelte';

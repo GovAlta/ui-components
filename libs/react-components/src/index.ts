@@ -1,11 +1,15 @@
 import "@abgov/web-components";
 
+export * from "./lib/pages/pages";
+
 // Types
 export type { GoAIconType } from "./lib/icon/icon";
 export type { GoABadgeType } from "./lib/badge/badge";
 
 // Components
 export * from "./lib/accordion/accordion";
+export * from "./lib/form-step/form-step";
+export * from "./lib/form-stepper/form-stepper";
 export * from "./lib/app-header/app-header";
 export * from "./lib/badge/badge";
 export * from "./lib/block/block";
