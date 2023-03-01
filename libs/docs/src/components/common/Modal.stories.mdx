@@ -11,8 +11,10 @@ import {
 import {
   GoAButton,
   GoAButtonGroup,
+  GoAFormItem,
   GoAModal,
   GoACallout,
+  GoAInput,
 } from "@abgov/react-components";
 import { useState } from "react";
 
@@ -43,7 +45,16 @@ import { useState } from "react";
   />
   <Prop
     name="heading"
-    type="string"
+    type="slot"
+    lang="angular"
+    defaultValue=""
+    description="Heading text within the modal"
+  />
+  <Prop
+    name="heading"
+    type="ReactNode"
+    lang="react"
+    defaultValue=""
     description="Heading text within the modal"
   />
   <Prop
@@ -98,10 +109,65 @@ export const NoActionsTemplate = (args) => {
     <>
       <GoAButton onClick={() => setShowModal(true)}>Open Modal</GoAButton>
       <GoAModal
-        heading="Heading"
+        heading="Do you agree?"
+        width="70vw"
         open={showModal}
         onClose={() => setShowModal(false)}
       >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
           obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
@@ -116,36 +182,12 @@ export const NoActionsTemplate = (args) => {
 <Story name="Basic">{NoActionsTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component" hidden={true}>
-    <CodeSnippet
-      lang="html"
-      code={`
-      <goa-button id="button">Open Modal</goa-button>
-      <goa-modal id="modal" heading="Heading" closable>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
-          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
-          Repellendus ducimus officia asperiores. Eos, eius numquam.
-        </p>
-      </goa-modal>
-    `}
-    />
-    <CodeSnippet
-      lang="js"
-      code={`
-        const modal = document.getElementById('modal');
-        modal.addEventListener("_close", () => {
-          modal.removeAttribute("open")
-        });
-      `}
-    />
-  </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
         <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
-        <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable>
+        <goa-modal id="modal" [open]="isOpen" (_close)="closeModal()" closable heading="Do you agree?">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
             natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
@@ -180,7 +222,7 @@ export const NoActionsTemplate = (args) => {
             Open Modal
           </GoAButton>
           <GoAModal
-            heading="Heading"
+            heading="Do you agree?"
             open={showModal}
             onClose={() => setShowModal(false)}
           >
@@ -205,7 +247,7 @@ export const ActionsTemplate = (args) => {
     <>
       <GoAButton onClick={() => setShowModal(true)}>Open Modal</GoAButton>
       <GoAModal
-        heading="Heading"
+        heading="Do you agree?"
         open={showModal}
         actions={
           <GoAButtonGroup alignment="end">
@@ -232,51 +274,23 @@ export const ActionsTemplate = (args) => {
 <Story name="With actions">{ActionsTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component" hidden={true}>
-    <CodeSnippet
-      lang="html"
-      code={`
-      <goa-button id="button">Open Modal</goa-button>
-      <goa-modal id="modal" heading="Heading">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
-          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
-          Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <goa-button-group alignment="end" slot="actions">
-          <goa-button>Secondary</goa-button>
-          <goa-button>Primary</goa-button>
-        </goa-button-group>
-      </goa-modal>
-    `}
-    />
-    <CodeSnippet
-      lang="js"
-      code={`
-      const buttons = document.getElementsByTagName('goa-button');
-      const modal = document.getElementById('modal');
-      for (const button of buttons) {
-        button.addEventListener('_click', () => {
-          modal.setAttribute("open", false)
-        });
-      })
-    `}
-    />
-  </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
       <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
-      <goa-modal id="modal" heading="Do you agree?" [open]="isOpen">
+      <goa-modal id="modal" [open]="isOpen" heading="Do you agree?">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
           Repellendus ducimus officia asperiores. Eos, eius numquam.
         </p>
-        <goa-button-group alignment="end" slot="actions">
-          <goa-button (_click)="closeModal()">Secondary</goa-button>
-          <goa-button (_click)="closeModal()">Primary</goa-button>
-        </goa-button-group>
+        <div slot="actions">
+          <goa-button-group alignment="end">
+            <goa-button (_click)="closeModal()">Secondary</goa-button>
+            <goa-button (_click)="closeModal()">Primary</goa-button>
+          </goa-button-group>
+        </div>
       </goa-modal>
     `}
     />
@@ -303,7 +317,7 @@ export const ActionsTemplate = (args) => {
               Open Modal
             </GoAButton>
             <GoAModal
-              heading="Heading"
+              heading="Do you agree?"
               open={showModal}
               actions={
                 <GoAButtonGroup alignment="end">
@@ -367,43 +381,6 @@ export const TransitionsTemplate = (args) => {
 <Story name="Transitions">{TransitionsTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component" hidden={true}>
-    <CodeSnippet
-      lang="html"
-      code={`
-      <goa-button-group>
-        <goa-button data-transition="none" type="tertiary">None</goa-button>
-        <goa-button data-transition="slow" type="tertiary">Slow</goa-button>
-        <goa-button data-transition="fast" type="tertiary">Fast</goa-button>
-      </goa-button-group>
-      <goa-modal id="modal" heading="Do you agree?" closable>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
-          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
-          Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <goa-button-group alignment="end" slot="actions">
-          <goa-button slot="actions" size="medium">I Agree</goa-button>
-        </goa-button-group>
-      </goa-modal>
-    `}
-    />
-    <CodeSnippet
-      lang="js"
-      code={`
-      const buttons = document.getElementsByTagName('goa-button');
-      const modal = document.getElementById('modal');
-      for (const button of buttons) {
-        button.addEventListener('_click', () => {
-          modal.setAttribute("transition", button.dataset.transition);
-          modal.setAttribute("open", true)
-        });
-      }
-      modal.addEventListener("_close", () => {
-        modal.removeAttribute("open")
-      });
-    `}
-    />
-  </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
@@ -413,15 +390,17 @@ export const TransitionsTemplate = (args) => {
         <goa-button type="tertiary" (_click)="openModal('slow')">Slow</goa-button>
         <goa-button type="tertiary" (_click)="openModal('fast')">Fast</goa-button>
       </goa-button-group>
-      <goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable [transition]="transition">
+      <goa-modal [open]="isOpen" (_close)="closeModal()" closable [transition]="transition" heading="Do you agree?" >
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
           Repellendus ducimus officia asperiores. Eos, eius numquam.
         </p>
-        <goa-button-group alignment="end" slot="actions">
-          <goa-button slot="actions" size="medium">I Agree</goa-button>
-        </goa-button-group>
+        <div slot="actions">
+          <goa-button-group alignment="end">
+            <goa-button slot="actions" size="medium">I Agree</goa-button>
+          </goa-button-group>
+        </div>
       </goa-modal>
     `}
     />
@@ -522,11 +501,13 @@ export const RouteChangesTemplate = (args) => {
       lang="html"
       code={`
         <goa-button type="primary" (_click)="isOpen = true">Show</goa-button>
-        <goa-modal heading="Do you agree?" [open]="isOpen">
+        <goa-modal [open]="isOpen" heading="Do you agree?">
           <p>Note: We can't actually perform route changes in storybook :(</p>
-          <goa-button-group alignment="end" slot="actions">
-            <goa-button type="primary" (_click)="closeModal()">Primary</goa-button>
-          </goa-button-group>
+          <div slot="actions">
+            <goa-button-group alignment="end">
+              <goa-button type="primary" (_click)="closeModal()">Primary</goa-button>
+            </goa-button-group>
+          </div> 
         </goa-modal>
     `}
     />
@@ -632,46 +613,6 @@ export const CalloutVariantTemplate = (args) => {
 <Story name="Callout Variant">{CalloutVariantTemplate.bind({})}</Story>
 
 <Tabs>
-  <Tab label="Web Component" hidden={true}>
-    <CodeSnippet
-      lang="html"
-      code={`
-      <goa-button-group>
-        <goa-button data-callout="information">Information Callout</goa-button>
-        <goa-button data-callout="important">Important Callout</goa-button>
-        <goa-button data-callout="success">Success Callout</goa-button>
-        <goa-button data-callout="emergency">Emergency Callout</goa-button>
-        <goa-button data-callout="event">Event Callout</goa-button>
-      </goa-button-group>
-      <goa-modal id="modal" type="callout" calloutVariant={calloutVariant} heading="Do you agree?">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
-          natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
-          Repellendus ducimus officia asperiores. Eos, eius numquam.</p>
-        <goa-button-group alignment="end" slot="actions">
-          <goa-button>Secondary</goa-button>
-          <goa-button>Primary</goa-button>
-        </goa-button-group>
-      </goa-modal>
-    `}
-    />
-    <CodeSnippet
-      lang="js"
-      code={`
-      const buttons = document.getElementsByTagName('goa-button');
-      const modal = document.getElementById('modal');
-      for (const button of buttons) {
-        button.addEventListener('_click', () => {
-          modal.setAttribute("calloutVariant", button.dataset.callout);
-          modal.setAttribute("open", true)
-        });
-      }
-      modal.addEventListener("_close", () => {
-        modal.removeAttribute("open")
-      });
-    `}
-    />
-  </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
@@ -683,16 +624,18 @@ export const CalloutVariantTemplate = (args) => {
         <goa-button (_click)="openModal('emergency')">Emergency Callout</goa-button>
         <goa-button (_click)="openModal('event')">Event Callout</goa-button>
       </goa-button-group>
-      <goa-modal id="modal" type="callout" heading="Do you agree?" [open]="isOpen" [calloutVariant]="calloutVariant">
+      <goa-modal id="modal" type="callout" [open]="isOpen" [calloutVariant]="calloutVariant" heading="Do you agree?">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
           Repellendus ducimus officia asperiores. Eos, eius numquam.
         </p>
-        <goa-button-group alignment="end" slot="actions">
-          <goa-button>Secondary</goa-button>
-          <goa-button>Primary</goa-button>
-        </goa-button-group>
+        <div slot="actions">
+          <goa-button-group alignment="end">
+            <goa-button>Secondary</goa-button>
+            <goa-button>Primary</goa-button>
+          </goa-button-group>
+        </div>
       </goa-modal>
     `}
     />
@@ -757,6 +700,184 @@ export const CalloutVariantTemplate = (args) => {
               </GoAModal>
             </>
           );
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Formatting Options
+
+export const FormattingTemplate = (args) => {
+  const [showModal1, setShowModal1] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  return (
+    <>
+      <GoAButtonGroup>
+        <GoAButton onClick={() => setShowModal1(true)}>With Actions</GoAButton>
+        <GoAButton onClick={() => setShowModal2(true)}>
+          Without Actions
+        </GoAButton>
+      </GoAButtonGroup>
+      <GoAModal
+        heading={
+          <>
+            Lorem <b>ipsum</b> dolor <b>sit</b> amet
+          </>
+        }
+        open={showModal1}
+        actions={
+          <GoAButtonGroup alignment="end">
+            <GoAButton type="secondary" onClick={() => setShowModal1(false)}>
+              Secondary
+            </GoAButton>
+            <GoAButton type="primary" onClick={() => setShowModal1(false)}>
+              Primary
+            </GoAButton>
+          </GoAButtonGroup>
+        }
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque
+          qui iusto similique, libero explicabo eligendi eius laboriosam!
+        </p>
+        <GoAFormItem label="First name" ml="xs">
+          <GoAInput name="firstName" />
+        </GoAFormItem>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+      </GoAModal>
+      <GoAModal
+        heading={
+          <>
+            Lorem <b>ipsum</b> dolor <b>sit</b> amet
+          </>
+        }
+        open={showModal2}
+        onClose={() => setShowModal2(false)}
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque
+          qui iusto similique, libero explicabo eligendi eius laboriosam!
+          Repellendus ducimus officia asperiores. Eos, eius numquam.
+        </p>
+        <GoAFormItem label="First name" ml="xs">
+          <GoAInput name="firstName" />
+        </GoAFormItem>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+      </GoAModal>
+    </>
+  );
+};
+
+<Story name="Formatting Options">{FormattingTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
+      <goa-modal id="modal" [open]="isOpen">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+        <goa-form-item label="First name" ml="xs">
+          <goa-input name="firstName"></goa-input>
+        </goa-form-item>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+        <div slot="heading">Lorem <b>ipsum</b> dolor <b>sit</b> amet</div>
+        <div slot="actions">
+          <goa-button-group alignment="end">
+            <goa-button (_click)="closeModal()">Secondary</goa-button>
+            <goa-button (_click)="closeModal()">Primary</goa-button>
+          </goa-button-group>
+        </div>
+      </goa-modal>
+    `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      export class SomeComponent {
+        isOpen = false;
+        openModal() {
+          this.isOpen = true;
+        }
+      }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [showModal, setShowModal] = useState(false);
+        return (
+          <>
+            <GoAButton onClick={() => setShowModal(true)}>
+              Open Modal
+            </GoAButton>
+            <GoAModal
+              heading={<>Lorem <b>ipsum</b> dolor <b>sit</b> amet</>}
+              open={showModal}
+              actions={
+                <GoAButtonGroup alignment="end">
+                  <GoAButton onClick={() => setShowModal(false)}>Secondary</GoAButton>
+                  <GoAButton onClick={() => setShowModal(false)}>Primary</GoAButton>
+                </GoAButtonGroup>
+              }
+            >
+              <p>
+               Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+                obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+                explicabo eligendi eius laboriosam! Repellendus ducimus officia
+                asperiores. Eos, eius numquam.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+                obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+                explicabo eligendi eius laboriosam! Repellendus ducimus officia
+                asperiores. Eos, eius numquam.
+              </p>
+              <GoAFormItem label="First name" ml="xs">
+                <GoAInput name="firstName" />
+              </GoAFormItem>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+                obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+                explicabo eligendi eius laboriosam! Repellendus ducimus officia
+                asperiores. Eos, eius numquam.
+              </p>
+            </GoAModal>
+          </>
+        )
       `}
     />
   </Tab>

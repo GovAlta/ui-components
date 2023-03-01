@@ -6,8 +6,9 @@ export default function Table() {
       <h2>Ordered List</h2>
       <ol className="goa-ordered-list">
         <li>
-          Mix flour, baking powder, sugar, and salt. Lots of really long text, let's
-          see how this wraps, I have no idea what's going to happen, fun times.
+          Mix flour, baking powder, sugar, and salt. Lots of really long text,
+          let's see how this wraps, I have no idea what's going to happen, fun
+          times.
         </li>
         <li>In another bowl, mix eggs, milk, and oil.</li>
         <li>Stir both mixtures together.</li>

@@ -1,18 +1,44 @@
 <svelte:options tag="goa-scrollable" />
 
 <script lang="ts">
+  import { onMount } from "svelte";
+
+  // Public
   export let direction: "vertical" | "horizontal" = "vertical";
-  export let hpadding: number = 0;
-  export let vpadding: number = 0;
-  export let height: number = 0;
+  export let hpadding: string = "";
+  export let vpadding: string = "";
+  export let maxheight: string = "";
+  export let offsetHeight: number;
+  export let scrollHeight: number;
+
+  // Private
+  let _el: HTMLElement;
+
+  function onScroll(e: Event) {
+    e.target.dispatchEvent(new CustomEvent("_scroll", { 
+      composed: true, 
+      detail: { 
+        offsetHeight: _el.offsetHeight,
+        scrollHeight: _el.scrollHeight, 
+        scrollTop: _el.scrollTop,
+      } 
+    }));
+    e.stopPropagation();
+  }
+
+  onMount(() => {
+    offsetHeight = _el.offsetHeight;
+    scrollHeight = _el.scrollHeight;
+  });
+
 </script>
 
-<div class="goa-scrollable" style={`
-  --max-height: ${height};
+<div class="goa-scrollable" bind:this={_el} on:scroll={onScroll} style={`
+  max-height: ${maxheight || "50vh"};
   overflow-y: ${direction === "vertical" ? 'auto' : 'hidden'};
   overflow-x: ${direction === "horizontal" ? 'auto' : 'hidden'};
-  margin: ${vpadding}rem 0;
-  padding: 0 ${hpadding}rem;
+  margin: ${vpadding} 0;
+  padding: 0 ${hpadding};
 `}>
   <slot />
 </div>
@@ -20,7 +46,6 @@
 <style>
   .goa-scrollable {
     scroll-behavior: smooth;
-    max-height: calc(100vh * var(--max-height, 100) / 100);
   }
 
   .goa-scrollable::-webkit-scrollbar {

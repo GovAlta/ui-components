@@ -33,7 +33,7 @@ export default {
     }),
 		css({output: 'index.css' }),
     resolve(),
-    terser(),
+    // terser(),
     summary(),
     replaceCodePlugin({
       replacements: [

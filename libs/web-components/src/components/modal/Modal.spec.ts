@@ -18,8 +18,9 @@ describe('Modal Component', () => {
   })
 
   it("should show the heading", async () => {
-    const el = render(GoAModal, { open: "true", heading: "Test heading" });
-    expect(el.queryByTestId("modal-title").innerHTML).toContain("Test heading");
+    const heading = "Test heading";
+    const el = render(GoAModalWrapper, { heading });
+    expect(el.container.querySelector("[slot=heading]").innerHTML).toContain(heading);
   })
 
   it("should close on icon click when made to be closable", async () => {
@@ -59,15 +60,14 @@ describe('Modal Component', () => {
 
   ["emergency", "important", "information", "success", "event"].forEach(calloutVariant => {
     it(`renders the ${calloutVariant} callout modal`, async () => {
-      const el = render(GoAModal, { open: "true", heading: "Heading", "calloutvariant": calloutVariant });
-      expect(el.queryByTestId("modal-title").innerHTML).toContain("Heading");
+      const el = render(GoAModal, { open: "true", "calloutvariant": calloutVariant });
       expect(el.container.querySelector(`.${calloutVariant}`)).toBeTruthy();
     });
   });
 
   it("should not render an invalid calloutVariant", async () => {
     const mock = jest.spyOn(console, "error").mockImplementation();
-    render(GoAModal, { open: "true", heading: "Heading", calloutvariant: "importantttttt" });
+    render(GoAModal, { open: "true", calloutvariant: "importantttttt" });
     await waitFor(() => {
       expect(console.error["mock"].calls.length).toBeGreaterThan(0);
     })
