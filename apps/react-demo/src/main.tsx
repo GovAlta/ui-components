@@ -18,6 +18,7 @@ import Divider from "./routes/divider";
 import Dropdown from "./routes/dropdown";
 import FormItem from "./routes/formItem";
 import HeroBanner from "./routes/heroBanner";
+import Icon from "./routes/icon";
 import IconButton from "./routes/iconButton";
 import Input from "./routes/input";
 import MicrositeHeader from "./routes/micrositeHeader";
@@ -52,6 +53,7 @@ ReactDOM.render(
         <Route path="dropdown" element={<Dropdown />} />
         <Route path="form-item" element={<FormItem />} />
         <Route path="hero-banner" element={<HeroBanner />} />
+        <Route path="icon" element={<Icon />} />
         <Route path="icon-button" element={<IconButton />} />
         <Route path="input" element={<Input />} />
         <Route path="microsite-header" element={<MicrositeHeader />} />

@@ -28,6 +28,7 @@ import { FormItemComponent } from "./form-item/form-item.component";
 import { FormStepperComponent } from "./form-stepper/form-stepper.component";
 import { GridComponent } from "./grid/grid";
 import { HeroBannerComponent } from "./hero-banner/hero-banner.component";
+import { IconComponent } from "./icon/icon.component";
 import { IconButtonComponent } from "./icon-button/icon-button.component";
 import { InputComponentComponent } from "./input-component/input-component.component";
 import { MicrositeHeaderComponent } from "./microsite-header/microsite-header.component";
@@ -62,6 +63,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
     FormStepperComponent,
     GridComponent,
     HeroBannerComponent,
+    IconComponent,
     IconButtonComponent,
     InputComponentComponent,
     MicrositeHeaderComponent,

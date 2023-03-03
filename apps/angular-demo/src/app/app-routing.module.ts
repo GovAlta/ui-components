@@ -18,6 +18,7 @@ import { FormItemComponent } from "./form-item/form-item.component";
 import { FormStepperComponent } from "./form-stepper/form-stepper.component";
 import { GridComponent } from "./grid/grid";
 import { HeroBannerComponent } from "./hero-banner/hero-banner.component";
+import { IconComponent } from "./icon/icon.component";
 import { IconButtonComponent } from "./icon-button/icon-button.component";
 import { InputComponentComponent } from "./input-component/input-component.component";
 import { MicrositeHeaderComponent } from "./microsite-header/microsite-header.component";
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: "form-stepper", component: FormStepperComponent },
   { path: "grid", component: GridComponent },
   { path: "hero-banner", component: HeroBannerComponent },
+  { path: "icon", component: IconComponent },
   { path: "icon-button", component: IconButtonComponent },
   { path: "input", component: InputComponentComponent },
   { path: "microsite-header", component: MicrositeHeaderComponent },
