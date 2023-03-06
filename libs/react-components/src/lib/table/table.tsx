@@ -53,6 +53,7 @@ export function GoATable(props: TableProps) {
       ref={ref}
       width={props.width}
       stickyheader={false}
+      variant={props.variant}
       data-testid={props.testId}
       mt={props.mt}
       mb={props.mb}
