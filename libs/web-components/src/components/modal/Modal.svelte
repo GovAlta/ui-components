@@ -15,6 +15,7 @@
   export let calloutvariant: CalloutVariant = null;
 
   // Private
+  let _rootEl: HTMLElement = null;
   let _contentEl: HTMLElement = null;
   let _scrollEl: HTMLElement = null;
 
@@ -33,7 +34,7 @@
 
   type CalloutVariant = typeof CALLOUT_VARIANT[number];
   type Transition = typeof Transitions[number];
-   
+
   // Reactive
   $: _isClosable = toBoolean(closable);
   $: _isOpen = toBoolean(open);
@@ -44,6 +45,10 @@
       _contentEl.classList.add("scroll-top");
     }
   };
+
+  $: if(_isOpen && _contentEl) {
+    window.addEventListener('keydown', onInputKeyDown);
+  }
 
   $: _transitionTime = transition === "none" ? 0 : transition === "slow" ? 400 : 200;
 
@@ -62,7 +67,8 @@
 
   $: if (!_isOpen) {
     // prevent null issues
-    _contentEl = _scrollEl = null;
+    _contentEl = _scrollEl = _rootEl = null;
+    window.removeEventListener('keydown', onInputKeyDown)
   }
 
   // Hooks
@@ -76,16 +82,25 @@
     if (!_isClosable) {
       return;
     }
-    e.target.dispatchEvent(new CustomEvent("_close", { composed: true }));
+    _rootEl?.dispatchEvent(new CustomEvent("_close", { composed: true }));
     e.stopPropagation();
   }
+
+  const onInputKeyDown = (e: KeyboardEvent) => {
+    switch (e.key) {
+      case "Escape":
+        close(e);
+        e.preventDefault();
+        break;
+    }
+  };
 
   function handleScroll(e: CustomEvent) {
     const hasScroll = e.detail.scrollHeight > e.detail.offsetHeight;
     if (_isOpen && hasScroll) {
       const atTop = e.detail.scrollTop == 0;
       const atBottom = Math.abs(e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight) < 1;
-    
+
       _contentEl.classList.remove("scroll-top", "scroll-bottom", "scroll-middle");
       if (atTop) {
         _contentEl.classList.add("scroll-top");
@@ -110,6 +125,7 @@
       data-testid="modal"
       class="modal"
       style={width && `--width: ${width};`}
+      bind:this={_rootEl}
     >
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
@@ -174,7 +190,7 @@
   :host * {
     box-sizing: border-box;
   }
-  
+
   .modal {
     font-family: var(--goa-font-family-sans);
     position: fixed;
