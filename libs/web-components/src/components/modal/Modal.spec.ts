@@ -26,9 +26,9 @@ describe('Modal Component', () => {
   it("should close on icon click when made to be closable", async () => {
     const el = render(GoAModal, { open: "true", closable: "true" });
     const click = jest.fn();
-
+    const rootEl = el.queryByTestId("modal");
     const closeIcon = el.queryByTestId("modal-close-button");
-    closeIcon.addEventListener("_close", click);
+    rootEl.addEventListener("_close", click);
     await fireEvent.click(closeIcon);
     expect(click).toBeCalled();
   })
@@ -36,9 +36,9 @@ describe('Modal Component', () => {
   it("should close on background click when made to be closable", async () => {
     const el = render(GoAModal, { open: "true", closable: "true" });
     const click = jest.fn();
-
+    const rootEl = el.queryByTestId("modal");
     const closeIcon = el.queryByTestId("modal-overlay");
-    closeIcon.addEventListener("_close", click);
+    rootEl.addEventListener("_close", click);
     await fireEvent.click(closeIcon);
     expect(click).toBeCalled();
   })
@@ -73,5 +73,15 @@ describe('Modal Component', () => {
     })
     mock.mockRestore();
   });
+
+  it("should close on 'esc' key press when modal is closable", async () => {
+    const el = render(GoAModal, { open: "true", closable: "true" });
+    const handleClose = jest.fn();
+    const rootEl = el.queryByTestId("modal");
+
+    rootEl.addEventListener("_close", handleClose);
+    await fireEvent.keyDown(window, { key: 'Escape', keyCode: 27 });
+    expect(handleClose).toBeCalled();
+  })
 
 });
