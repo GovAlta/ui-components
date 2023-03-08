@@ -410,9 +410,9 @@ export const SortableTableTemplate = (args) => {
           // sort handler
           handleSort(event: any) {
             const { sortBy, sortDir } = event.detail;
-            this.users.sort((a: any, b: any) => {
-              return (a[sortBy] > b[sortBy] ? -1 : 1) * sortDir;
-            })
+            this.users.sort(
+              (a: any, b: any) => (a[sortBy] > b[sortBy] ? -1 : 1) * sortDir
+            );
           }
         }
       `}
