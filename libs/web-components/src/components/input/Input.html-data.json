@@ -4,7 +4,41 @@
     {
       "name": "type",
       "description": "Sets the type of the input field",
-      "values": [{"name": "text"},{"name": "number"},{"name": "password"},{"name": "email"},{"name": "search"},{"name": "tel"},{"name": "date"},{"name": "datetime-locale"},{"name": "time"},{"name": "url"},{"name": "week"}],
+      "values": [
+        {
+          "name": "text"
+        },
+        {
+          "name": "number"
+        },
+        {
+          "name": "password"
+        },
+        {
+          "name": "email"
+        },
+        {
+          "name": "search"
+        },
+        {
+          "name": "tel"
+        },
+        {
+          "name": "date"
+        },
+        {
+          "name": "datetime-locale"
+        },
+        {
+          "name": "time"
+        },
+        {
+          "name": "url"
+        },
+        {
+          "name": "week"
+        }
+      ],
       "default": "text"
     },
     {
@@ -75,17 +109,17 @@
     },
     {
       "name": "min",
-      "description": "A string value must be in ISO 8601 format",
+      "description": "A string value that supports any number, or an ISO 8601 format if using the date or datetime type",
       "type": "string"
     },
     {
       "name": "max",
-      "description": "A string value must be in ISO 8601 format",
+      "description": "A string value that supports any number, or an ISO 8601 format if using the date or datetime type",
       "type": "string"
     },
     {
       "name": "step",
-      "description": "By how much number of day or time value will change by",
+      "description": "How much a number or date should change by",
       "type": "number"
     },
     {
@@ -97,7 +131,26 @@
       "name": "autoCapitalize",
       "description": "Controls whether and how text input is automatically capitalized as it is entered/edited by the user.",
       "type": "string",
-      "values": [{"name": "on"},{"name": "off"},{"name": "none"},{"name": "sentences"},{"name": "words"},{"name": "characters"}],
+      "values": [
+        {
+          "name": "on"
+        },
+        {
+          "name": "off"
+        },
+        {
+          "name": "none"
+        },
+        {
+          "name": "sentences"
+        },
+        {
+          "name": "words"
+        },
+        {
+          "name": "characters"
+        }
+      ],
       "default": "off"
     },
     {
