@@ -36,6 +36,7 @@ export * from "./components/modal/Modal.svelte";
 export * from "./components/notification/Notification.svelte";
 export * from "./components/page-block/PageBlock.svelte";
 export * from './components/pagination/Pagination.svelte';
+export * from './components/popover/Popover.svelte';
 export * from "./components/radio-group/RadioGroup.svelte";
 export * from "./components/scrollable/Scrollable.svelte";
 export * from "./components/skeleton/Skeleton.svelte";

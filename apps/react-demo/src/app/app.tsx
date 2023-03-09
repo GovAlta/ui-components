@@ -79,6 +79,9 @@ export default function App() {
             <Link className="navigation-link" to="/pagination">
               Pagination
             </Link>
+            <Link className="navigation-link" to="/popover">
+              Popover
+            </Link>
             <Link className="navigation-link" to="/radio">
               Radio
             </Link>

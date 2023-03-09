@@ -26,6 +26,7 @@ import { ModalComponent } from "./modal/modal.component";
 import { NotificationBannerComponent } from "./notification-banner/notification-banner.component";
 import { RadioComponent } from "./radio/radio.component";
 import { PaginateComponent } from "./paginate/paginate";
+import { PopoverComponent } from "./popover/popover.component";
 import { SkeletonComponent } from "./skeleton/skeleton.component";
 import { SpacingComponent } from "./spacing/spacing";
 import { StylesComponent } from "./styles/styles.component";
@@ -58,6 +59,7 @@ const routes: Routes = [
   { path: "modal", component: ModalComponent },
   { path: "notification-banner", component: NotificationBannerComponent },
   { path: "paginate", component: PaginateComponent },
+  { path: "popover", component: PopoverComponent },
   { path: "radio", component: RadioComponent },
   { path: "skeleton", component: SkeletonComponent },
   { path: "spacing", component: SpacingComponent },
