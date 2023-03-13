@@ -9,13 +9,36 @@
     {
       "name": "size",
       "description": "Set the size of button",
-      "values": [{"name": "small"},{"name": "medium"},{"name": "large"}],
+      "values": [
+        {
+          "name": "small"
+        },
+        {
+          "name": "medium"
+        },
+        {
+          "name": "large"
+        }
+      ],
       "default": "medium"
     },
     {
       "name": "variant",
-      "description": "Style this button to show color, nocolor or dark",
-      "values": [{"name": "color"},{"name": "nocolor"},{"name": "dark"}],
+      "description": "Style this button to show color, nocolor, dark or destructive action",
+      "values": [
+        {
+          "name": "color"
+        },
+        {
+          "name": "nocolor"
+        },
+        {
+          "name": "dark"
+        },
+        {
+          "name": "destructive"
+        }
+      ],
       "default": "color"
     },
     {

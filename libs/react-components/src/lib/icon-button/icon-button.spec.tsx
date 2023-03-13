@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
-import { GoAIconButton } from "./icon-button";
+import { GoAIconButton, IconButtonVariant } from "./icon-button";
+import React from "react";
 
 describe("GoA IconButton", () => {
   it("should render the properties", () => {
@@ -13,5 +14,21 @@ describe("GoA IconButton", () => {
     expect(el.getAttribute("mr")).toBe("m");
     expect(el.getAttribute("mb")).toBe("l");
     expect(el.getAttribute("ml")).toBe("xl");
+  });
+
+  describe("Variants", () => {
+    ["color", "nocolor", "dark", "destructive"].forEach(
+      (variant: IconButtonVariant) => {
+        it(`should render ${variant} variant`, async () => {
+          const { container } = render(
+            <GoAIconButton variant={variant} icon="information" />
+          );
+
+          const el = container.querySelector("goa-icon-button");
+          expect(el).toBeTruthy();
+          expect(el.getAttribute("variant")).toEqual(variant);
+        });
+      }
+    );
   });
 });

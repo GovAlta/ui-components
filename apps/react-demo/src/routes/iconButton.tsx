@@ -31,6 +31,8 @@ export default function IconButton() {
       <h2>Variant</h2>
       <GoAIconButton icon="close" variant="color"></GoAIconButton>
       <GoAIconButton icon="close" variant="nocolor"></GoAIconButton>
+      <GoAIconButton icon="close" variant="dark"></GoAIconButton>
+      <GoAIconButton icon="close" variant="destructive"></GoAIconButton>
 
       <h2>Title</h2>
       <GoAIconButton icon="close" title="Close"></GoAIconButton>
@@ -39,6 +41,11 @@ export default function IconButton() {
       <h2>Disabled</h2>
       <GoAIconButton icon="close" disabled></GoAIconButton>
       <GoAIconButton icon="download" disabled></GoAIconButton>
+      <GoAIconButton
+        icon="airplane"
+        variant="destructive"
+        disabled
+      ></GoAIconButton>
 
       <h2>Margin Spacing</h2>
       <GoAIconButton

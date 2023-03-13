@@ -2,13 +2,13 @@ import React, { FC, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { IconSize, GoAIconType } from "../icon/icon";
 
-type IconVariant = "color" | "nocolor" | "dark";
+export type IconButtonVariant = "color" | "nocolor" | "dark" | "destructive";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   icon: GoAIconType;
   size?: IconSize;
-  variant?: IconVariant;
+  variant?: IconButtonVariant;
   title?: string;
   disabled?: boolean;
 }
@@ -25,7 +25,7 @@ declare global {
 interface Props extends Margins {
   icon: GoAIconType;
   size?: IconSize;
-  variant?: IconVariant;
+  variant?: IconButtonVariant;
   title?: string;
   disabled?: boolean;
   children?: React.ReactNode;
