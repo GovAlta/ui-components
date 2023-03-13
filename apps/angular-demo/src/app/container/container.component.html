@@ -19,23 +19,23 @@
 </goa-container>
 
 <h2>Accent bar with text</h2>
-<goa-container>
-  <h2>Heading</h2>
-  Content
+<goa-container accent="thick">
   <div slot="actions">
     <goa-button type="secondary" size="compact">Edit</goa-button>
   </div>
-  <div slot="title">Heading</div>
+  <div slot="title">Group Heading</div>
+  <h2>Heading</h2>
+  Content
 </goa-container>
 
 <h2>Heading with text only</h2>
-<goa-container title="Heading">
+<goa-container accent="thick">
   <h2>Heading</h2>
   Content
   <div slot="actions">
     <goa-badge type="success" icon content="Badge Text"></goa-badge>
   </div>
-  <div slot="title">Heading</div>
+  <div slot="title">Group Heading</div>
 </goa-container>
 
 <h2>Nested</h2>
@@ -51,10 +51,11 @@
 </goa-container>
 
 <h2>Interactive</h2>
-<goa-container title="The container title" accent="thick">
+<goa-container accent="thick">
   <div slot="actions">
     <goa-button type="secondary" size="compact">Assign to me</goa-button>
   </div>
+  <div slot="title">The container title</div>
   <h2>Heading</h2>
   Content
 </goa-container>
