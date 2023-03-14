@@ -23,7 +23,6 @@
     "GoA",
     "Web Components"
   ],
-  "files": ["README.md"],
   "repository": {
     "type": "git",
     "url": "https://github.com/GovAlta/ui-components.git",
