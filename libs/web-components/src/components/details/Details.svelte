@@ -11,12 +11,12 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  let _isMouseOver: boolean = false 
+  let _isMouseOver: boolean = false
   let _summaryEl: HTMLElement;
 
   onMount(() => {
     validateRequired("Details", { heading });
-  
+
     _summaryEl.addEventListener("mouseover", () => {
       _isMouseOver = true;
     });
@@ -25,7 +25,7 @@
       _isMouseOver = false;
     });
   })
-  
+
 </script>
 
 <style>
@@ -41,7 +41,7 @@
   details ::slotted(*) {
     font: var(--goa-typography-body-m);
   }
-  
+
   summary {
     padding: 0.5rem;
     margin-bottom: 0.5rem;
@@ -97,11 +97,15 @@
     margin-left: 1.1rem;
     margin-bottom: var(--goa-space-s);
   }
+
+  .content ::slotted(p:last-child) {
+    margin-bottom: 0 !important;
+  }
 </style>
 
 <details style={calculateMargin(mt, mr, mb, ml)}>
   <summary bind:this={_summaryEl}>
-    <goa-icon 
+    <goa-icon
       mt="1"
       mr="2"
       type="chevron-forward"

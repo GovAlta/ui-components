@@ -61,8 +61,8 @@ export const GoAContainer: FC<Props> = ({
       data-testid={testId}
     >
       {title && <div slot="title">{title}</div>}
-      {children}
       {actions && <div slot="actions">{actions}</div>}
+      {children}
     </goa-container>
   );
 };

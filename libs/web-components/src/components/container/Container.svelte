@@ -98,6 +98,10 @@
     border-bottom-right-radius: var(--goa-border-radius-m);
   }
 
+  .content ::slotted(p:last-child) {
+    margin-bottom: 0 !important;
+  }
+
   /* Background Colour */
 
   .goa-container--non-interactive.accent--filled .content {

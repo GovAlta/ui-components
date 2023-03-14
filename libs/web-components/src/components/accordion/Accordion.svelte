@@ -144,6 +144,10 @@
     padding-right: 2rem;
   }
 
+  .content ::slotted(p:last-child) {
+    margin-bottom: 0 !important;
+  }
+
   summary goa-icon{
     padding: 0.125rem 1rem;
   }
