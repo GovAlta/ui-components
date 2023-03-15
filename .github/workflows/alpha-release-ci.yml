@@ -41,6 +41,8 @@ jobs:
         run: |
           npx nx affected --target=build --base=${{ steps.last_successful_commit.outputs.commit_hash }} --prod --with-deps
           npx nx affected --target=post --base=${{ steps.last_successful_commit.outputs.commit_hash }}
+      - name: Update VsCode documentation
+        run: npm run build:vscode-doc
       - name: Build Storybooks
         run: |
           npm run build:docs-storybook

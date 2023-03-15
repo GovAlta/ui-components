@@ -1,0 +1,52 @@
+{
+  "name": "goa-form-item",
+  "attributes": [
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "description": "Creates a label for a form item"
+    },
+    {
+      "name": "helpText",
+      "type": "string",
+      "description": "Help text displayed under the form field to provide an additional explanation"
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "description": "Error text displayed under the form field. Leave blank to indicate valid field."
+    },
+    {
+      "name": "requirement",
+      "type": "string",
+      "values": ["optional","required"],
+      "description": "Marks the field with optional/required label."
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Form item",
+      "url": "{{siteUrl}}?path=/docs/utility-form-item--text-label"
+    }
+  ]
+}

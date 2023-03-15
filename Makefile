@@ -47,6 +47,9 @@ build: build-styles build-web-components build-react-components build-ng-compone
 
 #### RUN 
 
+playground:
+	cd libs/web-components && HOST=0.0.0.0 npm run playground
+
 dev:
 	cd libs/web-components && npm run dev
 

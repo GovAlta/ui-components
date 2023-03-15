@@ -1,0 +1,35 @@
+{
+  "name": "goa-skeleton",
+  "required": ["type"],
+  "attributes": [
+    {
+      "name": "type",
+      "description": "Pre-set skeleton shapes to represent your content",
+      "values": [{"name": "image"},{"name": "text"},{"name": "title"},{"name": "text-small"},{"name": "avatar"},{"name": "header"},{"name": "paragraph"},{"name": "thumbnail"},{"name": "card"},{"name": "profile"}]
+    },
+    {
+      "name": "size",
+      "description": "Size can affect either the height, width or both for different skeleton types",
+      "values": [{"name": "1"},{"name": "2"},{"name": "3"},{"name": "4"}],
+      "default": "1"
+    },
+    {
+      "name": "lineCount",
+      "type": "number",
+      "description": "Used within components that contain multiple lines. Currently only used in card skeleton type",
+      "default": "3"
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "description": "Set component maximum width. Currently only used in card skeleton type",
+      "default": "320px"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Skeleton",
+      "url": "{{siteUrl}}/?path=/docs/components-skeleton--text"
+    }
+  ]
+}

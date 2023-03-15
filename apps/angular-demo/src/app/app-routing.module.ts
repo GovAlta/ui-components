@@ -15,8 +15,10 @@ import { ContainerComponent } from "./container/container.component";
 import { DetailComponent } from "./detail/detail";
 import { DropdownComponent } from "./dropdown/dropdown.component";
 import { FormItemComponent } from "./form-item/form-item.component";
+import { FormStepperComponent } from "./form-stepper/form-stepper.component";
 import { GridComponent } from "./grid/grid";
 import { HeroBannerComponent } from "./hero-banner/hero-banner.component";
+import { IconComponent } from "./icon/icon.component";
 import { IconButtonComponent } from "./icon-button/icon-button.component";
 import { InputComponentComponent } from "./input-component/input-component.component";
 import { MicrositeHeaderComponent } from "./microsite-header/microsite-header.component";
@@ -24,6 +26,7 @@ import { ModalComponent } from "./modal/modal.component";
 import { NotificationBannerComponent } from "./notification-banner/notification-banner.component";
 import { RadioComponent } from "./radio/radio.component";
 import { PaginateComponent } from "./paginate/paginate";
+import { PopoverComponent } from "./popover/popover.component";
 import { SkeletonComponent } from "./skeleton/skeleton.component";
 import { SpacingComponent } from "./spacing/spacing";
 import { StylesComponent } from "./styles/styles.component";
@@ -46,14 +49,17 @@ const routes: Routes = [
   { path: "detail", component: DetailComponent },
   { path: "dropdown", component: DropdownComponent },
   { path: "form-item", component: FormItemComponent },
+  { path: "form-stepper", component: FormStepperComponent },
   { path: "grid", component: GridComponent },
   { path: "hero-banner", component: HeroBannerComponent },
+  { path: "icon", component: IconComponent },
   { path: "icon-button", component: IconButtonComponent },
   { path: "input", component: InputComponentComponent },
   { path: "microsite-header", component: MicrositeHeaderComponent },
   { path: "modal", component: ModalComponent },
   { path: "notification-banner", component: NotificationBannerComponent },
   { path: "paginate", component: PaginateComponent },
+  { path: "popover", component: PopoverComponent },
   { path: "radio", component: RadioComponent },
   { path: "skeleton", component: SkeletonComponent },
   { path: "spacing", component: SpacingComponent },
@@ -68,4 +74,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

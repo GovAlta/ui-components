@@ -11,6 +11,6 @@ export default create({
   fontCode: "monospace",
 
   brandTitle: "Alberta Design System",
-  brandUrl: "https://alberta.ca",
+  brandUrl: "https://ui-components.alberta.ca",
   brandImage: logo,
 });

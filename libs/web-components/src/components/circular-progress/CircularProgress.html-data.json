@@ -1,0 +1,42 @@
+{
+  "name": "goa-circular-progress",
+  "attributes": [
+    {
+      "name": "variant",
+      "description": "Stretch across the full screen or use it inline",
+      "values": [{ "name": "fullscreen" }, {"name": "inline"}],
+      "default": "inline"
+    },
+    {
+      "name": "visible",
+      "type": "boolean",
+      "description": "Show/hide the page loader. This allows for fade transition to be applied in each transition.",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "size",
+      "description": "Size of the progress indicator",
+      "values": [{"name": "small"}, {"name": "large"}],
+      "default": "large"
+    },
+    {
+      "name": "progress",
+      "type": "number",
+      "description": "Set the progress value. Setting this value will change the type from infinite to progress",
+      "values": [{"name": "-1"}],
+      "default": "-1"
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "description": "Loading message displayed under the progress indicator"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Circular progress",
+      "url": "{{siteUrl}}/?path=/docs/components-circular-progress--basic"
+    }
+  ]
+}

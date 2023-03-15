@@ -1,0 +1,9 @@
+{
+  "name": "goa-one-column-layout",
+  "references": [
+    {
+      "name": "GoA One Column Layout",
+      "url": "{{siteUrl}}/?path=/docs/layouts-one-column--basic"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<h2>Popover</h2>
+<goa-popover>
+  <h3>This is a popover</h3>
+  <p>It can be used for a number of different contexts.</p>
+  <div slot="target">
+    <goa-button type="secondary" size="compact">Click me</goa-button>
+  </div>
+</goa-popover>
+
+<goa-popover>
+  <h3>interactable content</h3>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi tempora optio
+    illum iste consectetur harum vel voluptatem eos quos deleniti, sequi
+    sapiente porro culpa repellendus eligendi in architecto natus omnis. Lorem
+    ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, nam
+    corporis. Omnis tempora non aspernatur nostrum pariatur quibusdam magni eum
+    vitae similique, laboriosam reiciendis repellat sapiente. Nobis laudantium
+    facilis incidunt!
+  </p>
+  <goa-button-group>
+    <goa-button type="primary" (_click)="onClick()">Primary</goa-button>
+    <goa-button type="submit" (_click)="onClick()">Submit</goa-button>
+    <goa-button type="secondary" (_click)="onClick()">Secondary</goa-button>
+  </goa-button-group>
+  <div slot="target">
+    <goa-button type="secondary" size="compact">Click me</goa-button>
+  </div>
+</goa-popover>

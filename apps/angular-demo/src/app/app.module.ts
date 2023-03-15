@@ -25,8 +25,10 @@ import { ContainerComponent } from "./container/container.component";
 import { DetailComponent } from "./detail/detail";
 import { DropdownComponent } from "./dropdown/dropdown.component";
 import { FormItemComponent } from "./form-item/form-item.component";
+import { FormStepperComponent } from "./form-stepper/form-stepper.component";
 import { GridComponent } from "./grid/grid";
 import { HeroBannerComponent } from "./hero-banner/hero-banner.component";
+import { IconComponent } from "./icon/icon.component";
 import { IconButtonComponent } from "./icon-button/icon-button.component";
 import { InputComponentComponent } from "./input-component/input-component.component";
 import { MicrositeHeaderComponent } from "./microsite-header/microsite-header.component";
@@ -40,6 +42,7 @@ import { SpacingComponent } from "./spacing/spacing";
 import { TableComponent } from "./table/table";
 import { TextAreaComponent } from "./text-area/text-area.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
+import { PopoverComponent } from "./popover/popover.component";
 
 @NgModule({
   declarations: [
@@ -58,8 +61,10 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
     DetailComponent,
     DropdownComponent,
     FormItemComponent,
+    FormStepperComponent,
     GridComponent,
     HeroBannerComponent,
+    IconComponent,
     IconButtonComponent,
     InputComponentComponent,
     MicrositeHeaderComponent,
@@ -67,6 +72,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
     NavigationLinkComponent,
     NotificationBannerComponent,
     PaginateComponent,
+    PopoverComponent,
     RadioComponent,
     SkeletonComponent,
     SpacingComponent,
@@ -86,4 +92,4 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}

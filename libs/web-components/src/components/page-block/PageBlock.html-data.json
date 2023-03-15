@@ -1,0 +1,10 @@
+{
+  "name": "goa-page-block",
+  "required": ["width"],
+  "attributes": [
+    {
+      "name": "width",
+      "type": "string"
+    }
+  ]
+}

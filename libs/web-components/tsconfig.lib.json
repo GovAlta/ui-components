@@ -16,7 +16,7 @@
     "**/*.spec.ts",
     "**/*_spec.ts",
     "public/*",
-    "demo/*",
+    "playground/*",
     "**/*.stories.ts",
     "**/*.stories.js"
   ]

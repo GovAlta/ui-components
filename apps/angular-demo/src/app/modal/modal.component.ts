@@ -23,6 +23,8 @@ export class ModalComponent {
   isOpen3 = false;
   isOpen4 = false;
   isOpen5 = false;
+  isOpen6 = false;
+  isOpen7 = false;
 
   openModal() {
     this.isOpen = true;
@@ -51,6 +53,22 @@ export class ModalComponent {
 
   closeModal5() {
     this.isOpen5 = false;
+  }
+
+  openModal6() {
+    this.isOpen6 = true;
+  }
+
+  closeModal6() {
+    this.isOpen6 = false;
+  }
+
+  openModal7() {
+    this.isOpen7 = true;
+  }
+
+  closeModal7() {
+    this.isOpen7 = false;
   }
 
   showModal(transition: "fast" | "slow" | "none") {

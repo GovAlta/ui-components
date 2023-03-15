@@ -5,6 +5,8 @@ import {
   GoAButtonGroup,
   ModalTransition,
   CalloutVariant,
+  GoAFormItem,
+  GoAInput,
 } from "@abgov/react-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +17,8 @@ export default function Modal() {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showModal3, setShowModal3] = useState(false);
+  const [showModal4, setShowModal4] = useState(false);
+  const [showModal5, setShowModal5] = useState(false);
   const [speed, setSpeed] = useState<ModalTransition>("none");
   const [calloutVariant, setCalloutVariant] =
     useState<CalloutVariant>("information");
@@ -143,6 +147,74 @@ export default function Modal() {
           </GoAButtonGroup>
         }
       >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+      </GoAModal>
+
+      <h2>Formatting Options</h2>
+      <GoAButton onClick={() => setShowModal4(true)}>With Actions</GoAButton>
+      <GoAModal
+        heading={
+          <>
+            Lorem <b>ipsum</b> dolor <b>sit</b> amet
+          </>
+        }
+        open={showModal4}
+        actions={
+          <GoAButtonGroup alignment="end">
+            <GoAButton onClick={() => setShowModal4(false)}>
+              Secondary
+            </GoAButton>
+            <GoAButton onClick={() => setShowModal4(false)}>Primary</GoAButton>
+          </GoAButtonGroup>
+        }
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque
+          qui iusto similique, libero explicabo eligendi eius laboriosam!
+          Repellendus ducimus officia asperiores. Eos, eius numquam.
+        </p>
+        <GoAFormItem label="First name">
+          <GoAInput name="firstName" value="" onChange={() => void 0} />
+        </GoAFormItem>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+      </GoAModal>
+
+      <GoAButton onClick={() => setShowModal5(true)}>Without Actions</GoAButton>
+      <GoAModal
+        heading={
+          <>
+            Lorem <b>ipsum</b> dolor <b>sit</b> amet
+          </>
+        }
+        open={showModal5}
+        onClose={() => setShowModal5(false)}
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque
+          qui iusto similique, libero explicabo eligendi eius laboriosam!
+          Repellendus ducimus officia asperiores. Eos, eius numquam.
+        </p>
+        <GoAFormItem label="First name">
+          <GoAInput name="firstName" value="" onChange={() => void 0} />
+        </GoAFormItem>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
           obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero

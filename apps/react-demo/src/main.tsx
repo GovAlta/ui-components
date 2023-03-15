@@ -18,17 +18,19 @@ import Divider from "./routes/divider";
 import Dropdown from "./routes/dropdown";
 import FormItem from "./routes/formItem";
 import HeroBanner from "./routes/heroBanner";
+import Icon from "./routes/icon";
 import IconButton from "./routes/iconButton";
 import Input from "./routes/input";
 import MicrositeHeader from "./routes/micrositeHeader";
 import Modal from "./routes/modal";
 import NotificationBanner from "./routes/notificationBanner";
+import Pagination from "./routes/pagination";
+import Popover from "./routes/popover";
 import Radio from "./routes/radio";
 import Skeleton from "./routes/skeleton";
 import Styles from "./routes/styles";
 import Table from "./routes/table";
 import TextArea from "./routes/textarea";
-import Pagination from "./routes/pagination";
 
 import "@abgov/web-components/index.css";
 
@@ -52,12 +54,14 @@ ReactDOM.render(
         <Route path="dropdown" element={<Dropdown />} />
         <Route path="form-item" element={<FormItem />} />
         <Route path="hero-banner" element={<HeroBanner />} />
+        <Route path="icon" element={<Icon />} />
         <Route path="icon-button" element={<IconButton />} />
         <Route path="input" element={<Input />} />
         <Route path="microsite-header" element={<MicrositeHeader />} />
         <Route path="modal" element={<Modal />} />
         <Route path="notification-banner" element={<NotificationBanner />} />
         <Route path="pagination" element={<Pagination />} />
+        <Route path="popover" element={<Popover />} />
         <Route path="radio" element={<Radio />} />
         <Route path="skeleton" element={<Skeleton />} />
         <Route path="styles" element={<Styles />} />

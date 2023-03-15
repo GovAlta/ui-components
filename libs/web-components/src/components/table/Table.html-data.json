@@ -1,0 +1,26 @@
+{
+  "name": "goa-table",
+  "attributes": [
+    {
+      "name": "width",
+      "type": "string",
+      "description": "Width of the table. By default it will fit the enclosed content."
+    },
+    {
+      "name": "variant",
+      "description": "A relaxed variant of the table with more vertical padding for the cells",
+      "values": [{"name": "normal"},{"name": "relaxed"}],
+      "default": "normal"
+    },
+    {
+      "name": "_sort",
+      "description": "Sort event fired when a GoATableSortHeader component is used."
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Table",
+      "url": "{{siteUrl}}/?path=/docs/components-table--basic"
+    }
+  ]
+}

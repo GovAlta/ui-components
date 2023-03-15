@@ -1,0 +1,55 @@
+{
+  "name": "goa-modal",
+  "required": ["type"],
+  "attributes": [
+    {
+      "name": "type",
+      "description": "Type of Modal",
+      "values": [{"name": "default"},{"name": "callout"}]
+    },
+    {
+      "name": "calloutVariant",
+      "description": "Define the context and colour of the callout modal. It is required when type is set to callout.",
+      "values": [{"name": "information"},{"name": "important"},{"name": "emergency"},{"name": "success"},{"name": "event"}]
+    },
+    {
+      "name": "heading",
+      "type": "string",
+      "description": "Heading text within the modal"
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "Controls if modal is visible or not",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "closable",
+      "description": "Show close icon and allow clicking the background to close the modal",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "transition",
+      "description": "How modal transition onto screen",
+      "values": [{"name": "fast"},{"name": "slow"},{"name": "none"}],
+      "default": "none"
+    },
+    {
+      "name": "_close",
+      "description": "Dispatched when modal is closable and is closed"
+    },
+    {
+      "name": "actions",
+      "description": "Buttons displayed in the bottom right of the modal instead of a close icon",
+      "values": [{"name": "slot"}]
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Modal",
+      "url": "{{siteUrl}}/?path=/docs/components-modal--basic"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ textarea,
 button,
 textarea {
   background: #fff;
-  font-family: acumin-pro-semi-condensed, sans-serif;
+  font-family: var(--goa-font-family-sans);
   font-weight: 400;
   font-size: var(--goa-font-size-4);
   color: var(--goa-color-text-default);

@@ -1,0 +1,39 @@
+{
+  "name": "goa-pagination",
+  "required": ["pagenumber", "itemcount"],
+  "attributes": [
+    {
+      "name": "pagenumber",
+      "description": "The current page being viewed (non-zero based)",
+      "type": "number"
+    },
+    {
+      "name": "itemcount",
+      "description": "Total number of data items within all pages",
+      "type": "number"
+    },
+    {
+      "name": "perpagecount",
+      "description": "Number of data items shown per page",
+      "type": "number",
+      "default": "10"
+    },
+    {
+      "name": "_change",
+      "description": "Callback function for page change events",
+      "values": [{"name": "(e: { detail: { page: number }}) => void"}]
+    },
+    {
+      "name": "variant",
+      "description": "Controls which nav controls are visible",
+      "values": [{"name": "all"},{"name": "links-only"}],
+      "default": "all"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Pagination",
+      "url": "{{siteUrl}}/?path=/docs/components-pagination--basic"
+    }
+  ]
+}

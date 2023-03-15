@@ -1,0 +1,72 @@
+{
+  "name": "goa-badge",
+  "required": ["type"],
+  "attributes": [
+    {
+      "name": "type",
+      "description": "Define the context and colour of the badge",
+      "type": "string",
+      "values": [
+        {
+          "name": "success"
+        },
+        {
+          "name": "important"
+        },
+        {
+          "name": "information"
+        },
+        {
+          "name": "emergency"
+        },
+        {
+          "name": "dark"
+        },
+        {
+          "name": "midtone"
+        },
+        {
+          "name": "light"
+        }
+      ]
+    },
+    {
+      "name": "icon",
+      "type": "boolean",
+      "description": "Include an icon in the badge",
+      "default": "false",
+      "valueSet": "boolean"
+    },
+    {
+      "name": "content",
+      "description": "Text label of the badge",
+      "type": "string"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Badge",
+      "url": "{{siteUrl}}/iframe.html?viewMode=docs&id=components-badge--basic&args=#badge"
+    }
+  ]
+}

@@ -8,8 +8,20 @@
   import { typeValidator } from "../../common/utils";
 
   // Validator
-  const [Types, validateType] = typeValidator("Skeleton type",
-    ["image", "text", "title", "text-small", "avatar", "header", "paragraph", "thumbnail", "card", "profile", "lines"],
+  const [Types, validateType] = typeValidator("Skeleton type", [
+    "image", 
+    "text", 
+    "title", 
+    "text-small", 
+    "avatar", 
+    "header", 
+    "paragraph", 
+    "thumbnail", 
+    "card", 
+    "lines",
+    "profile", 
+    "article",
+  ],
     true
   );
   const [Sizes, validateSize] = typeValidator("Skeleton size", ["1", "2", "3", "4"]);
@@ -65,6 +77,19 @@
     {#each Array(Number.parseInt(linecount+"")) as _item}
       <svelte:self type="text" {size} linecount={linecount} />
     {/each}
+  {:else if type === "article"}
+    <div>
+      <div style="display: flex; gap: 1rem;">
+        <div style="flex: 1 1 auto">
+          <svelte:self type="image" {size} />
+        </div>
+        <div style="flex: 2 2 auto">
+          <svelte:self type="header" size="4" />
+          <svelte:self type="header" size="1" />
+        </div>
+      </div>
+      <svelte:self type="lines" {size} />
+    </div>
   {:else}
     <div class="skeleton {type} {`${type}-${size}`}"></div>
   {/if}

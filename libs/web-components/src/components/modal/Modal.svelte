@@ -6,6 +6,20 @@
   import { toBoolean, typeValidator } from "../../common/utils";
   import { onMount } from "svelte";
 
+  // Public
+  export let heading: string = "";
+  export let closable: string = "false";
+  export let open: string = "false";
+  export let transition: Transition = "none";
+  export let width: string = "";
+  export let calloutvariant: CalloutVariant = null;
+
+  // Private
+  let _rootEl: HTMLElement = null;
+  let _contentEl: HTMLElement = null;
+  let _scrollEl: HTMLElement = null;
+
+  // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator("Callout variant", [
     "emergency",
     "important",
@@ -21,21 +35,24 @@
   type CalloutVariant = typeof CALLOUT_VARIANT[number];
   type Transition = typeof Transitions[number];
 
-  export let heading: string = "";
-  export let closable: string = "false";
-  export let open: string = "false";
-  export let transition: Transition = "none";
-  export let width: string = "";
-  export let calloutvariant: CalloutVariant = null;
+  // Reactive
+  $: _isClosable = toBoolean(closable);
+  $: _isOpen = toBoolean(open);
 
-  const isScrollable = true;
+  $: if(_isOpen && _scrollEl && _contentEl) {
+    const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
+    if (hasScroll) {
+      _contentEl.classList.add("scroll-top");
+    }
+  };
 
-  $: isClosable = toBoolean(closable);
-  $: isOpen = toBoolean(open);
+  $: if(_isOpen && _contentEl) {
+    window.addEventListener('keydown', onInputKeyDown);
+  }
 
   $: _transitionTime = transition === "none" ? 0 : transition === "slow" ? 400 : 200;
 
-  $: iconType =
+  $: _iconType =
     calloutvariant === "emergency"
       ? "warning"
       : calloutvariant === "important"
@@ -48,29 +65,67 @@
       ? "calendar"
       : "";
 
-  function close(e: Event) {
-    if (!isClosable) {
-      return;
-    }
-    e.target.dispatchEvent(new CustomEvent("_close", { composed: true }));
-    e.stopPropagation();
+  $: if (!_isOpen) {
+    // prevent null issues
+    _contentEl = _scrollEl = _rootEl = null;
+    window.removeEventListener('keydown', onInputKeyDown)
   }
 
+  // Hooks
   onMount(() => {
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
   });
+
+  // Functions
+  function close(e: Event) {
+    if (!_isClosable) {
+      return;
+    }
+    _rootEl?.dispatchEvent(new CustomEvent("_close", { composed: true }));
+    e.stopPropagation();
+  }
+
+  const onInputKeyDown = (e: KeyboardEvent) => {
+    switch (e.key) {
+      case "Escape":
+        close(e);
+        e.preventDefault();
+        break;
+    }
+  };
+
+  function handleScroll(e: CustomEvent) {
+    const hasScroll = e.detail.scrollHeight > e.detail.offsetHeight;
+    if (_isOpen && hasScroll) {
+      const atTop = e.detail.scrollTop == 0;
+      const atBottom = Math.abs(e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight) < 1;
+
+      _contentEl.classList.remove("scroll-top", "scroll-bottom", "scroll-middle");
+      if (atTop) {
+        _contentEl.classList.add("scroll-top");
+      }
+      else if (atBottom) {
+        _contentEl.classList.add("scroll-bottom");
+      }
+      else {
+        _contentEl.classList.add("scroll-middle");
+      }
+    }
+  }
+
 </script>
 
-{#if isOpen}
+{#if _isOpen}
   <goa-focus-trap active={open}>
     <div
-      use:noscroll={{ enable: isOpen }}
+      use:noscroll={{ enable: _isOpen }}
       in:fade={{ duration: _transitionTime }}
       out:fade={{ delay: _transitionTime, duration: _transitionTime }}
       data-testid="modal"
       class="modal"
-      style="{width && `--width: ${width};`};"
+      style={width && `--width: ${width};`}
+      bind:this={_rootEl}
     >
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
@@ -82,37 +137,36 @@
         {#if calloutvariant !== null}
           <div class="callout-bar {calloutvariant}">
             <goa-icon
-              type={iconType}
+              type={_iconType}
               inverted={calloutvariant === "important" ? "false" : "true"}
             />
           </div>
         {/if}
         <div class="content">
-          {#if heading}
-            <div data-testid="modal-title" class="modal-title">{heading}</div>
-          {/if}
-          {#if isClosable}
-            <div class="modal-close">
-              <!-- svelte-ignore a11y-click-events-have-key-events -->
-              <goa-icon-button
-                data-testid="modal-close-button"
-                icon="close"
-                on:click={close}
-                variant="nocolor"
-              />
+          <header>
+            <div data-testid="modal-title" class="modal-title">
+              {#if heading}
+                {heading}
+              {:else}
+                <slot name="heading" />
+              {/if}
             </div>
-          {/if}
-          <div data-testid="modal-content" class="modal-content">
-            {#if isScrollable}
-              <goa-scrollable direction="vertical" height="50">
-                <slot />
-              </goa-scrollable>
-            {:else}
-              <div style="margin: 2rem">
-                <slot />
+            {#if _isClosable}
+              <div class="modal-close">
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <goa-icon-button
+                  data-testid="modal-close-button"
+                  icon="close"
+                  on:click={close}
+                  variant="nocolor"
+                />
               </div>
             {/if}
-            <slot />
+          </header>
+          <div data-testid="modal-content" class="modal-content" bind:this={_contentEl}>
+            <goa-scrollable direction="vertical" hpadding="1.9rem" maxheight="70vh" bind:this={_scrollEl} on:_scroll={handleScroll}>
+              <slot />
+            </goa-scrollable>
           </div>
           <div class="modal-actions" data-testid="modal-actions">
             <slot name="actions" />
@@ -132,6 +186,11 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
+
+  :host * {
+    box-sizing: border-box;
+  }
+
   .modal {
     font-family: var(--goa-font-family-sans);
     position: fixed;
@@ -179,7 +238,13 @@
   .content {
     flex: 1 1 auto;
     width: 100%;
-    margin: 2rem 2rem;
+    margin: 2rem;
+  }
+  .content header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    justify-content: space-between;
   }
 
   .modal-pane {
@@ -188,42 +253,44 @@
     z-index: 1001;
     width: 90%;
     display: flex;
-    margin: 1rem;
     box-shadow: var(--goa-shadow-modal);
     border-radius: 4px;
-    max-height: 90%;
     border: 1px solid var(--goa-color-greyscale-700);
   }
 
   @media (min-width: 640px) {
     .modal-pane {
       width: var(--width, 60ch);
-      max-height: 80%;
     }
   }
 
-  .modal-actions ::slotted(div) {
-    margin: 1.5rem 0 0;
+  .modal-actions ::slotted(*) {
+    padding: 1.5rem 0 0;
+  }
+
+  .modal-content {
+    margin: 0 -2rem;
+    line-height: 1.75rem;
   }
 
   .modal-content ::slotted(:last-child) {
     margin-bottom: 0 !important;
   }
 
-  .modal-close {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-  }
-
   .modal-title {
     font-size: var(--goa-font-size-7);
-    margin: 0 0 1.5rem;
-    margin-right: 40px; /*  close icon spacing */
     flex: 0 0 auto;
   }
 
-  .modal-content {
-    line-height: 1.75rem;
+  .scroll-top {
+    box-shadow: inset 0px -8px 6px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  .scroll-middle {
+    box-shadow: inset 0px -8px 6px -6px rgba(0, 0, 0, 0.1), inset 0px 8px 6px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  .scroll-bottom {
+    box-shadow: inset 0px 8px 6px -6px rgba(0, 0, 0, 0.1);
   }
 </style>

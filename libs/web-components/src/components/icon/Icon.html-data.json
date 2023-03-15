@@ -1,0 +1,73 @@
+{
+  "name": "goa-icon",
+  "attributes": [
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "type",
+      "valueSet": "goaIconType"
+    },
+    {
+      "name": "size",
+      "values": [
+        {"name": "small"},
+        {"name": "medium"},
+        {"name": "large"},
+        {"name": "xlarge"}
+      ]
+    },
+    {
+      "name": "theme",
+      "values": [
+        {
+          "name": "outline"
+        },
+        {
+          "name": "filled"
+        },
+        {
+          "name": "sharp"
+        }
+      ]
+    },
+    {
+      "name": "inverted",
+      "type": "boolean",
+      "valueSet": "boolean"
+    },
+    {
+      "name": "fillcolor",
+      "type": "string"
+    },
+    {
+      "name": "hovercolor",
+      "type": "string"
+    },
+    {
+      "name": "opacity",
+      "type": "string"
+    },
+    {
+      "name": "title",
+      "type": "string"
+    }
+  ]
+}

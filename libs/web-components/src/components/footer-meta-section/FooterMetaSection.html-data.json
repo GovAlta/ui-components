@@ -1,0 +1,9 @@
+{
+  "name": "goa-app-footer-meta-section",
+  "references": [
+    {
+      "name": "GoA Footer",
+      "url": "{{siteUrl}}/?path=/docs/components-app-footer--basic"
+    }
+  ]
+}

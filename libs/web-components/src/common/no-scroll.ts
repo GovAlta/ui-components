@@ -6,13 +6,10 @@ export default function(_node: HTMLElement, opts: { enable: boolean }) {
     if (!isScrollable()) {
       return;
     }
-
     const scrollbarWidth = calculateScrollbarWidth();
-    if (scrollbarWidth > 0) {
-      toggledScrolling = true;
-      document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = scrollbarWidth + 'px';
-    } 
+    toggledScrolling = true;
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = scrollbarWidth + 'px';
   }
 
   function isScrollable() {

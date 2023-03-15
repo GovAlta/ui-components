@@ -58,6 +58,9 @@ export default function App() {
             <Link className="navigation-link" to="/hero-banner">
               Hero Banner
             </Link>
+            <Link className="navigation-link" to="/icon">
+              Icon
+            </Link>
             <Link className="navigation-link" to="/icon-button">
               Icon Button
             </Link>
@@ -75,6 +78,9 @@ export default function App() {
             </Link>
             <Link className="navigation-link" to="/pagination">
               Pagination
+            </Link>
+            <Link className="navigation-link" to="/popover">
+              Popover
             </Link>
             <Link className="navigation-link" to="/radio">
               Radio
