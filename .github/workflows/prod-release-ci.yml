@@ -32,6 +32,8 @@ jobs:
         run: |
           npx nx run-many --target=build --all --prod --with-deps
           npx nx run-many --target=post --all
+      - name: Update VsCode documentation
+        run: npm run build:vscode-doc
       - name: Build Storybooks
         run: |
           npm run build:docs-storybook
