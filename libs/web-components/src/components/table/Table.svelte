@@ -30,7 +30,7 @@
 
   onMount(() => {
     validateVariant(variant);
-    attachSortEventHandling();
+    setTimeout(attachSortEventHandling,0);
 
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
     if (!slot || slot.assignedElements().length === 0) {
