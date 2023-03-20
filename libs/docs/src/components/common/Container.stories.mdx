@@ -61,21 +61,21 @@ import {
     description="Sets the content in the left of the accent bar"
   />
   <Prop
-    name="title"
+    name="heading"
     type="ReactNode"
     lang="react"
     defaultValue=""
     description="Sets the content in the left of the accent bar"
   />
   <Prop
-    name="action"
+    name="actions"
     type="slot"
     lang="angular"
     defaultValue=""
     description="Sets the content in the right of the accent bar"
   />
   <Prop
-    name="action"
+    name="actions"
     type="ReactNode"
     lang="react"
     defaultValue=""
@@ -357,16 +357,32 @@ export const HeadingTemplate = (args) => {
 #### Use the accent bar for groupings of content where status or actions need to be applied to the whole container.
 
 <Story name="Accent bar with content">
+  <GoACallout>
+    Accent bar is made up of slots <i>title</i> and <i>actions</i>. These should
+    always be used in conjugation with the property <i>accent="thick"</i>
+  </GoACallout>
   <>
     <GoAGrid minChildWidth="200px">
-      <GoAContainer accent="thick" title="Heading">
+      <GoAContainer accent="thick" heading="Group Heading">
         Content
       </GoAContainer>
       <GoAContainer
         type="non-interactive"
         accent="thick"
-        title="Heading"
+        heading="Group Heading"
         actions={<GoABadge type="success" content="Badge Text" icon={true} />}
+      >
+        Content
+      </GoAContainer>
+      <GoAContainer
+        type="non-interactive"
+        accent="thick"
+        heading="Group Heading"
+        actions={
+          <GoAButton type="secondary" size="compact">
+            Edit
+          </GoAButton>
+        }
       >
         Content
       </GoAContainer>
@@ -379,10 +395,27 @@ export const HeadingTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-      <goa-container>
-        <h2>Heading</h2>
-        Content
-      </goa-container>
+      <goa-grid>
+        <goa-container accent="thick">
+          <div slot="title">Group Heading</div>
+          Content
+        </goa-container>
+        <goa-container
+          type="non-interactive"
+          accent="thick"
+        >
+          <goa-badge slot="actions" type="success" content="Badge Text" icon="true"></goa-badge>
+          <div slot="title">Group Heading</div>
+          Content
+        </goa-container>
+        <goa-container accent="thick">
+          <div slot="actions">
+            <goa-button type="secondary" size="compact">Edit</goa-button>
+          </div>
+          <div slot="title">Group Heading</div>
+          Content
+        </goa-container>
+      </goa-grid>
     `}
     />
   </Tab>
@@ -391,15 +424,23 @@ export const HeadingTemplate = (args) => {
       lang="html"
       code={`
         <goa-grid>
-          <goa-container accent="thick" title="Heading" >
+          <goa-container accent="thick">
+            <div slot="title">Group Heading</div>
             Content
           </goa-container>
           <goa-container
             type="non-interactive"
             accent="thick"
-            title="Heading"
           >
-            <goa-badge slot="actions" type="success" content="Badge Text" icon="true" />
+            <goa-badge slot="actions" type="success" content="Badge Text" icon="true"></goa-badge>
+            <div slot="title">Group Heading</div>
+            Content
+          </goa-container>
+          <goa-container accent="thick">
+            <div slot="actions">
+              <goa-button type="secondary" size="compact">Edit</goa-button>
+            </div>
+            <div slot="title">Group Heading</div>
             Content
           </goa-container>
         </goa-grid>
@@ -411,16 +452,24 @@ export const HeadingTemplate = (args) => {
       lang="jsx"
       code={`
         <GoAGrid minChildWidth="200px">
-          <GoAContainer accent="thick" title="Heading">
+          <GoAContainer accent="thick" heading="Group Heading">
             Content
           </GoAContainer>
           <GoAContainer
             type="non-interactive"
             accent="thick"
-            title="Heading"
+            heading="Group Heading"
             actions={
               <GoABadge type="success" content="Badge Text" icon={true} />
             }
+          >
+            Content
+          </GoAContainer>
+          <GoAContainer
+            type="non-interactive"
+            accent="thick"
+            heading="Group Heading"
+            actions={<GoAButton type="secondary" size="compact">Edit</GoAButton>}
           >
             Content
           </GoAContainer>
@@ -545,7 +594,7 @@ export const HeadingTemplate = (args) => {
     <CodeSnippet
       lang="html"
       code={`
-        <goa-container type="non-interactive">
+        <goa-container>
           <h2>Heading</h2>
           <table width="100%">
             <tr>
@@ -572,7 +621,7 @@ export const HeadingTemplate = (args) => {
     <CodeSnippet
       lang="jsx"
       code={`
-        <GoAContainer type="non-interactive">
+        <GoAContainer>
           <h2>Heading</h2>
           <table width="100%">
             <tr>

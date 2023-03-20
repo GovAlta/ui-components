@@ -29,6 +29,7 @@ declare global {
 interface Props extends Margins {
   accent?: Accent;
   type?: ContainerType;
+  heading?: ReactNode;
   title?: ReactNode;
   padding?: ContainerPadding;
   actions?: ReactNode;
@@ -38,6 +39,7 @@ interface Props extends Margins {
 
 export const GoAContainer: FC<Props> = ({
   accent,
+  heading,
   title,
   padding,
   children,
@@ -49,6 +51,7 @@ export const GoAContainer: FC<Props> = ({
   ml,
   testId,
 }) => {
+  const headingContent = heading || title;
   return (
     <goa-container
       type={type}
@@ -60,7 +63,8 @@ export const GoAContainer: FC<Props> = ({
       ml={ml}
       data-testid={testId}
     >
-      {title && <div slot="title">{title}</div>}
+      {headingContent && <div slot="title">{headingContent}</div>}
+      {children}
       {actions && <div slot="actions">{actions}</div>}
       {children}
     </goa-container>
