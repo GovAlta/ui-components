@@ -28,10 +28,18 @@
     {
       "name": "size",
       "values": [
-        {"name": "small"},
-        {"name": "medium"},
-        {"name": "large"},
-        {"name": "xlarge"}
+        {
+          "name": "small"
+        },
+        {
+          "name": "medium"
+        },
+        {
+          "name": "large"
+        },
+        {
+          "name": "xlarge"
+        }
       ]
     },
     {
@@ -52,18 +60,6 @@
       "name": "inverted",
       "type": "boolean",
       "valueSet": "boolean"
-    },
-    {
-      "name": "fillcolor",
-      "type": "string"
-    },
-    {
-      "name": "hovercolor",
-      "type": "string"
-    },
-    {
-      "name": "opacity",
-      "type": "string"
     },
     {
       "name": "title",
