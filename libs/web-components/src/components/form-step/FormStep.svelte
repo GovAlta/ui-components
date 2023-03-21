@@ -95,7 +95,7 @@
     font-weight: var(--goa-font-weight-bold)
   }
   [data-status=complete] .status {
-    background-color: var(--goa-color-interactive-default);
+    background: var(--goa-color-interactive-default);
   }
   [aria-current="step"][data-status=complete] .status {
     background: var(--goa-color-greyscale-white);

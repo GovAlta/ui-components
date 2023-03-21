@@ -147,10 +147,10 @@
 
   /* 2.5rem = 40px where 40px = height of form stepper icons */
   /* 2px = 4px / 2, where 4px is thickness of progress bar */
-  /* 1.75rem = 28px = padding as per design specs */
+  /* 1.5rem = 24px = padding as per design specs */
   progress.horizontal {
     display: block;
-    top: calc(1.75rem + (2.5rem / 2) - 2px);
+    top: calc(1.5rem + (2.5rem / 2) - 2px);
     left: calc(var(--step-width) / 2);
     width: calc(100% - var(--step-width));
   }
@@ -163,7 +163,7 @@
       rotate(90deg) 
       translate(
         calc(50% + 1.25rem + 1.75rem), 
-        calc((var(--height) - var(--step-height)) / 2 - 1.25rem - 1.75rem)
+        calc((var(--height) - var(--step-height)) / 2 - 1.25rem - 1.5rem)
       );
   }
 
