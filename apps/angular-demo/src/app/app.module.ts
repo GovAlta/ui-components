@@ -24,6 +24,7 @@ import { CircularProgressComponent } from "./circular-progress/circular-progress
 import { ContainerComponent } from "./container/container.component";
 import { DetailComponent } from "./detail/detail";
 import { DropdownComponent } from "./dropdown/dropdown.component";
+import { FileUploadComponent } from "./file-upload/file-upload";
 import { FormItemComponent } from "./form-item/form-item.component";
 import { FormStepperComponent } from "./form-stepper/form-stepper.component";
 import { GridComponent } from "./grid/grid";
@@ -60,6 +61,7 @@ import { PopoverComponent } from "./popover/popover.component";
     ContainerComponent,
     DetailComponent,
     DropdownComponent,
+    FileUploadComponent,
     FormItemComponent,
     FormStepperComponent,
     GridComponent,

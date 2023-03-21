@@ -52,6 +52,9 @@ export default function App() {
             <Link className="navigation-link" to="/dropdown">
               Dropdown
             </Link>
+            <Link className="navigation-link" to="/file-upload">
+              File Upload
+            </Link>
             <Link className="navigation-link" to="/form-item">
               Form Item
             </Link>

@@ -14,6 +14,7 @@ import { CircularProgressComponent } from "./circular-progress/circular-progress
 import { ContainerComponent } from "./container/container.component";
 import { DetailComponent } from "./detail/detail";
 import { DropdownComponent } from "./dropdown/dropdown.component";
+import { FileUploadComponent } from "./file-upload/file-upload";
 import { FormItemComponent } from "./form-item/form-item.component";
 import { FormStepperComponent } from "./form-stepper/form-stepper.component";
 import { GridComponent } from "./grid/grid";
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: "container", component: ContainerComponent },
   { path: "detail", component: DetailComponent },
   { path: "dropdown", component: DropdownComponent },
+  { path: "file-upload", component: FileUploadComponent },
   { path: "form-item", component: FormItemComponent },
   { path: "form-stepper", component: FormStepperComponent },
   { path: "grid", component: GridComponent },

@@ -16,6 +16,7 @@ import CircularProgress from "./routes/circularProgress";
 import Container from "./routes/container";
 import Divider from "./routes/divider";
 import Dropdown from "./routes/dropdown";
+import FileUpload from "./routes/fileUpload";
 import FormItem from "./routes/formItem";
 import HeroBanner from "./routes/heroBanner";
 import Icon from "./routes/icon";
@@ -52,6 +53,7 @@ ReactDOM.render(
         <Route path="container" element={<Container />} />
         <Route path="divider" element={<Divider />} />
         <Route path="dropdown" element={<Dropdown />} />
+        <Route path="file-upload" element={<FileUpload />} />
         <Route path="form-item" element={<FormItem />} />
         <Route path="hero-banner" element={<HeroBanner />} />
         <Route path="icon" element={<Icon />} />
