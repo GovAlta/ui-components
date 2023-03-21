@@ -66,7 +66,6 @@ export const GoAContainer: FC<Props> = ({
       {headingContent && <div slot="title">{headingContent}</div>}
       {children}
       {actions && <div slot="actions">{actions}</div>}
-      {children}
     </goa-container>
   );
 };
