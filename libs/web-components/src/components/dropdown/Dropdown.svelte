@@ -6,6 +6,7 @@
   import { onDestroy, onMount, tick } from "svelte";
   import { toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
+  import noscroll from "../../common/no-scroll";
 
   interface Option {
     label: string;
@@ -43,6 +44,7 @@
   let _isMenuVisible = false;
   let _highlightedIndex: number = 0;
   let _computedWidth: string;
+  let _dropdownMenuPos: string = "auto";
 
   let _el: HTMLElement;
   let _menuEl: HTMLElement;
@@ -167,6 +169,7 @@
 
     // bind up/down arrows to navigate options
     _menuEl.addEventListener("mouseover", onHighlight);
+    setDropdownMenuPosition();
   }
 
   function closeMenu() {
@@ -174,6 +177,15 @@
     _menuEl.removeEventListener("mouseover", onHighlight);
     setHighlightedIndexToSelected();
     _isMenuVisible = false;
+    _dropdownMenuPos = "auto";
+  }
+
+  function setDropdownMenuPosition() {
+    const dropdownRect = _el.getBoundingClientRect();
+    const menuRect = _menuEl.getBoundingClientRect();
+    if (window.innerHeight - dropdownRect.top < dropdownRect.height + menuRect.height) {
+      _dropdownMenuPos = menuRect.top - dropdownRect.top + 'px';
+    }
   }
 
   function setHighlightedIndexToSelected() {
@@ -314,6 +326,7 @@
         data-testid={`${name}-dropdown-background`}
         class="dropdown-background"
         on:click={closeMenu}
+        use:noscroll={{ enable: _isMenuVisible }}
       />
     {/if}
 
@@ -349,7 +362,11 @@
       tabindex="0"
       class="dropdown-list"
       class:dropdown-active={_isMenuVisible}
-      style={`overflow-y: auto; max-height: ${maxheight}`}
+      style={`
+        overflow-y: auto;
+        max-height: ${maxheight};
+        --bottom: ${_dropdownMenuPos};
+      `}
     >
       {#each _options as option, index (index)}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -414,7 +431,7 @@
     outline: none;
     box-shadow: var(--shadow-1);
     z-index: 99;
-
+    bottom: var(--bottom);
     scroll-behavior: smooth;
     scrollbar-width: thin; /* Firefox */
 
