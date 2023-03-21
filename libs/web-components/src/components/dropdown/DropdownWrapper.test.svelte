@@ -16,9 +16,13 @@
   export let width: string = "";
 	export let native: boolean = false;
   export let items: string[];
+  function setValue() {
+    value = "orange";
+  }
 </script>
 
 <!-- HTML -->
+<button on:click={setValue}>Set value</button>
 <GoADropdown {name} {arialabel} {native} {value} {error} {leadingicon} {maxheight} {placeholder} {disabled} {width}>
   {#each items as item (item) }
     <goa-dropdown-item {name} value={item} label={item} />

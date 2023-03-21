@@ -48,22 +48,24 @@
   let _menuEl: HTMLElement;
   let _selectEl: HTMLSelectElement;
 
-  onMount(async () => {
-    await tick();
-    _values = parseValues();
-    _options = getOptions();
-
-    if (!_native) {
-      _computedWidth = getCustomDropdownWidth(_options);
-      addKeyboardEventListeners();
-      setHighlightedIndexToSelected();
+  $: {
+    if (_el) {
+      _values = parseValues(value);
+      _options = getOptions();
+      if (!_native) {
+        _computedWidth = getCustomDropdownWidth(_options);
+        addKeyboardEventListeners();
+        setHighlightedIndexToSelected();
+      }
     }
+  }
 
+  onMount(async () => {
     // watch for DOM changes within the slot => dynamic binding
     const slot = _el.querySelector("slot");
     slot?.addEventListener("slotchange", (_e) => {
       _selectedLabel = "";
-      _values = parseValues();
+      _values = parseValues(value);
       _options = getOptions();
     })
   });
@@ -107,7 +109,7 @@
             _values = [value];
           }
           return { selected, value, label};
-        });    
+        });
   }
 
   // compute the required width to enure all children fit
@@ -118,7 +120,7 @@
     if (options.length === 0 && placeholder !== "") {
       return `${placeholder.length + 12}ch`;
     }
-    
+
     options.forEach((option: Option) => {
       const label = option.label || option.value || "";
       if (!width && maxCount < label.length) {
@@ -140,12 +142,12 @@
   }
 
   // parse and convert values to strings to avoid later type comparison issues
-  function parseValues() {
+  function parseValues(selectedValue: string) {
     let rawValue: string[];
     try {
-      rawValue = JSON.parse(value || "[]");
+      rawValue = JSON.parse(selectedValue || "[]");
     } catch (e) {
-      rawValue = [value];
+      rawValue = [selectedValue];
     }
     const rawValues = typeof rawValue === "object" ? rawValue : [rawValue];
     // convert all values to strings to avoid later type comparison issues
