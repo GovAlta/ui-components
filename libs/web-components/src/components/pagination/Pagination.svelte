@@ -23,7 +23,7 @@
   $: _pageCount = Math.ceil(itemcount / perpagecount)
 
   // private
-  let inputEl: HTMLInputElement = null;
+  let pageDropdownEl: HTMLElement = null;
   let hiddenEl: HTMLInputElement = null;  // needed to allow the inputEl's event to be cancelled
 
   // hooks
@@ -32,14 +32,10 @@
     validateRequired("GoAPagination", { itemcount, pagenumber })
     validateVariant(variant)
 
-    // prevent event propagation if value is non-numeric 
-    // (input[type=number] returns blank for non-numeric numbers)
-    inputEl && inputEl.addEventListener("_change", (e: CustomEvent) => {
+    // prevent event propagation
+    pageDropdownEl && pageDropdownEl.addEventListener("_change", (e: CustomEvent) => {
       const page = Number.parseInt(e.detail.value)
       e.stopPropagation();
-      if (isNaN(page)) {
-        return;
-      }
 
       hiddenEl.dispatchEvent(new CustomEvent("_change", {composed: true, bubbles: true, detail: { page }}))
     })
@@ -82,7 +78,11 @@
       <goa-block data-testid="page-selector" alignment="center" gap="s">
         <span>Page</span>
         <input bind:this={hiddenEl} type="hidden" />
-        <goa-input bind:this={inputEl} type="number" value={pagenumber} width="8ch" debounce="500" min="1" max={_pageCount} />
+        <goa-dropdown bind:this={pageDropdownEl} value="{pagenumber}" width="70px">
+          {#each {length: _pageCount} as _, i}
+            <goa-dropdown-item value="{i+1}" label="{i+1}"/>
+          {/each}
+        </goa-dropdown>
         <span>of {_pageCount}</span>
       </goa-block>
     {/if}

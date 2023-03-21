@@ -402,15 +402,8 @@
     position: relative;
     cursor: pointer;
     display: inline-block;
-    width: 100%;
+    width: var(--width, 100%);
   }
-
-  @media (min-width: 640px) {
-    .dropdown {
-      width: var(--width);
-    }
-  }
-
   .dropdown-background {
     cursor: default;
     position: fixed;
