@@ -109,6 +109,8 @@
 
 <h2>Reactive Binding</h2>
 <div>Selected Color: {{ reactiveFormCtrl.value }}</div>
+<goa-button (_click)="reactiveFormCtrl.setValue('red')" type="tertiary">Update to red</goa-button>
+<br/>
 <goa-dropdown
   goaValue
   native="true"
@@ -124,6 +126,7 @@
   >
   </goa-dropdown-item>
 </goa-dropdown>
+&nbsp;
 
 <goa-dropdown goaValue name="colors123" [formControl]="reactiveFormCtrl">
   <goa-dropdown-item
@@ -132,6 +135,7 @@
     [label]="color"
   ></goa-dropdown-item>
 </goa-dropdown>
+<br/>
 
 <h4>Disabled</h4>
 

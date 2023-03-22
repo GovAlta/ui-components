@@ -92,6 +92,22 @@ describe('GoADropdown', () => {
         expect(selectedValue).toEqual("orange");
       });
     });
+
+    it('can be selected programmatically', async() => {
+      const name = 'program-color';
+      const items = ["red", "blue", "orange"];
+      const result = render(GoADropdownWrapper, {name, value: 'blue', items});
+
+      const button = result.queryByRole("button");
+
+      await waitFor(async() => {
+        await fireEvent.click(button);
+        // validate the selected item
+        const selected = result.container.querySelector(".dropdown-item--selected");
+        expect(selected).not.toBeNull();
+        expect(selected.innerHTML).toContain("orange");
+      });
+    })
   })
 
   describe("disabled", () => {
