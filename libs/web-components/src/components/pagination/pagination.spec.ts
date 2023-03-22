@@ -3,9 +3,10 @@ import { fireEvent, render, waitFor } from '@testing-library/svelte'
 
 describe("GoAPagination", () => {
   it("it renders all parts", async () => {
-    const { getByTestId } = render(Pagination, { pagenumber: 1, itemcount: 100 })
+    const { getByTestId } = render(Pagination, { pagenumber: 1, itemcount: 100, perpagecount: "10, 20" })
 
     const pageSelector = getByTestId("page-selector");
+    const itemCountSelector = getByTestId("item-count-selector");
     const pageLinks = getByTestId("page-links");
 
     // input
@@ -13,6 +14,15 @@ describe("GoAPagination", () => {
     expect(pageInput.getAttribute("type")).toBe("number")
     expect(pageInput.getAttribute("value")).toBe("1")
     expect(pageInput.getAttribute("debounce")).toBe("500")
+
+    //item count dropdown
+    const itemCount = itemCountSelector.querySelector("goa-dropdown");
+    expect(itemCount.getAttribute("value")).toBe("10")
+    expect(itemCount.getAttribute("width")).toBe("8ch")
+    const itemCountOptions = itemCount.querySelectorAll("goa-dropdown-item");
+    expect(itemCountOptions.length).toBe(2);
+    expect(itemCountOptions[0].getAttribute("value")).toBe("10");
+    expect(itemCountOptions[1].getAttribute("value")).toBe("20");
 
     // links
     const prev = pageLinks.querySelector("goa-button:first-child");
@@ -124,4 +134,21 @@ describe("GoAPagination", () => {
     })
     mock.mockRestore();
   })
+
+  it("should handle the item count change event", async () => {
+    const { container, getByTestId } = render(Pagination, { pagenumber: 1, itemcount: 100, perpagecount: "10, 20" })
+    const itemCountSelector = getByTestId("item-count-selector");
+    const itemCount = itemCountSelector.querySelector("goa-dropdown");
+    const totalPageCount = getByTestId("page-selector");
+
+    const fn = jest.fn(() => {});
+
+    container.addEventListener("_changeItemCount", fn);
+    await waitFor(async () => {
+      await fireEvent(itemCount, new CustomEvent("_change", { detail: { value: 20 } }))
+      expect(fn).toBeCalledTimes(1);
+      // total page count should be 5 when item count is 20
+      expect(totalPageCount.innerHTML).toContain("of 5");
+    });
+  });
 })

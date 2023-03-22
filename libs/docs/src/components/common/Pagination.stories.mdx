@@ -42,8 +42,8 @@ import { faker } from "@faker-js/faker";
   <Prop
     lang="angular"
     name="perpagecount"
-    type="number"
-    description="Number of data items shown per page"
+    type="number | number[]"
+    description="Number of data items shown per page. If an array is provided, a dropdown will be shown to allow the user to change the number of items shown per page."
     defaultValue="10"
   />
   <Prop
@@ -69,8 +69,8 @@ import { faker } from "@faker-js/faker";
   <Prop
     lang="react"
     name="perPageCount"
-    type="number"
-    description="Number of data items shown per page"
+    type="number|number[]"
+    description="Number of data items shown per page. If an array is provided, a dropdown will be shown to allow the user to change the number of items shown per page."
     defaultValue="10"
   />
   <Prop
@@ -93,6 +93,7 @@ export const PaginationTableTemplate = (args) => {
   const [users, setUsers] = useState([]);
   const [pageUsers, setPageUsers] = useState([]);
   const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(5);
   useEffect(() => {
     const _users = [];
     for (let i = 0; i < 100; i++) {
@@ -104,13 +105,19 @@ export const PaginationTableTemplate = (args) => {
       });
     }
     setUsers(_users);
-    setPageUsers(_users.slice(0, 10));
+    setPageUsers(_users.slice(0, perPage));
   }, []);
   function changePage(newPage) {
-    const offset = (newPage - 1) * 10;
-    const _users = users.slice(offset, offset + 10);
+    const offset = (newPage - 1) * perPage;
+    const _users = users.slice(offset, offset + perPage);
     setPage(newPage);
     setPageUsers(_users);
+  }
+  function changePerPageCount(newCount) {
+    const offset = (page - 1) * newCount;
+    const _users = users.slice(offset, offset + newCount);
+    setPageUsers(_users);
+    setPerPage(newCount);
   }
   return (
     <>
@@ -135,15 +142,16 @@ export const PaginationTableTemplate = (args) => {
       <GoAPagination
         variant={args.variant}
         itemCount={users.length}
-        perPageCount={10}
+        perPageCount={args.perPageCount}
         pageNumber={page}
         onChange={changePage}
+        onItemCountChange={changePerPageCount}
       />
     </>
   );
 };
 
-<Story name="Basic" args={{ variant: "all" }}>
+<Story name="Basic" args={{ variant: "all", perPageCount: 5 }}>
   {PaginationTableTemplate.bind({})}
 </Story>
 
@@ -191,7 +199,7 @@ export const PaginationTableTemplate = (args) => {
           }
           this.pageUsers = this.users.slice(0, 10)
         }
-      }    
+      }
     `}
     />
     <CodeSnippet
@@ -229,6 +237,8 @@ export const PaginationTableTemplate = (args) => {
       const [pageUsers, setPageUsers] = useState([]);
       // page number
       const [page, setPage] = useState(1);
+      // number of items per page
+      const [perPage, setPerPage] = useState(10);
       useEffect(() => {
         const _users = []
         for (let i = 0; i < 100; i++) {
@@ -242,13 +252,19 @@ export const PaginationTableTemplate = (args) => {
         // init data set
         setUsers(_users)
         // save current page
-        setPageUsers(_users.slice(0, 10))
+        setPageUsers(_users.slice(0, perPage))
       }, [])
       function changePage(newPage) {
-        const offset = (newPage - 1) * 10;
-        const _users = users.slice(offset, offset + 10)
+        const offset = (newPage - 1) * perPage;
+        const _users = users.slice(offset, offset + perPage)
         setPage(newPage);
         setPageUsers(_users)
+      }
+      function changePerPage {newCount) {
+        const offset = (page - 1) * newCount;
+        const _users = users.slice(offset, offset + newCount);
+        setPageUsers(_users);
+        setPerPage(newCount);
       }
       return <>
         <GoATable width="100%" mb="xl">
@@ -269,21 +285,25 @@ export const PaginationTableTemplate = (args) => {
             )}
           </tbody>
         </GoATable>
-        <GoAPagination itemCount={users.length} perPageCount={10} pageNumber={page} onChange={changePage} />
+        <GoAPagination itemCount={users.length} perPageCount={[5, 10, 20]} pageNumber={page} onChange={changePage} onItemCountChange={changePerPage}/>
       </>
     `}
     />
   </Tab>
 </Tabs>
 
-#### Nav only
+#### Links only
+
+<Story name="Links Only" args={{ variant: "links-only" }}>
+  {PaginationTableTemplate.bind({})}
+</Story>
 
 <Tabs>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-pagination variant="nav" [itemcount]="users.length" perpagecount="10" [pagenumber]="page" (_change)="handlePageChange($event)"></goa-pagination>
+      <goa-pagination variant="links-only" [itemcount]="users.length" perpagecount="10" [pagenumber]="page" (_change)="handlePageChange($event)"></goa-pagination>
     `}
     />
   </Tab>
@@ -292,16 +312,66 @@ export const PaginationTableTemplate = (args) => {
       lang="tsx"
       code={`
       return <>
-        <GoAPagination variant="nav" itemCount={users.length} perPageCount={10} pageNumber={page} onChange={changePage} />
+        <GoAPagination variant="links-only" itemCount={users.length} perPageCount={10} pageNumber={page} onChange={changePage} />
       </>
     `}
     />
   </Tab>
 </Tabs>
 
-<Story name="Nav" args={{ variant: "links-only" }}>
+#### Fixed item count
+
+<Story name="Fixed item count" args={{ perPageCount: 5 }}>
   {PaginationTableTemplate.bind({})}
 </Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-pagination [itemcount]="users.length" perpagecount="5" [pagenumber]="page" (_change)="handlePageChange($event)"></goa-pagination>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      return <>
+        <GoAPagination itemCount={users.length} perPageCount={5} pageNumber={page} onChange={changePage} />
+      </>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Variable item count
+
+<Story name="Variable item count" args={{ perPageCount: [5, 10, 20, 30] }}>
+  {PaginationTableTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-pagination [itemcount]="users.length" perpagecount="5, 10, 20,30" [pagenumber]="page" (_change)="handlePageChange($event)"></goa-pagination>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      return <>
+        <GoAPagination itemCount={users.length} perPageCount={[5,10,20,30]} pageNumber={page} onChange={changePage} />
+      </>
+    `}
+    />
+  </Tab>
+</Tabs>
 
 ---
 

@@ -4,7 +4,7 @@ import { Margins } from "../../common/styling";
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | undefined>;
   itemcount: number;
-  perpagecount?: number;
+  perpagecount?: number | number[];
   pagenumber: number;
   variant?: "all" | "links-only";
 }
@@ -21,10 +21,11 @@ declare global {
 /* eslint-disable-next-line */
 export interface PaginationProps extends Margins {
   itemCount: number;
-  perPageCount?: number;
+  perPageCount?: number | number[];
   pageNumber: number;
   variant?: "all" | "links-only";
   onChange: (page: number) => void;
+  onItemCountChange?: (count: number) => void;
   testId?: string;
 }
 
@@ -41,9 +42,16 @@ export function GoAPagination(props: PaginationProps) {
       props.onChange(page);
     };
 
+    const changeItemsPerPage = (e: Event) => {
+      const { count } = (e as CustomEvent).detail;
+      props.onItemCountChange && props.onItemCountChange(count);
+    };
+
     current.addEventListener("_change", changeListener);
+    current.addEventListener("_changeItemCount", changeItemsPerPage);
     return () => {
-      current.removeEventListener("_change", changeListener);
+      current.addEventListener("_change", changeListener);
+      current.addEventListener("_changeItemCount", changeItemsPerPage);
     };
   }, [ref, props.onChange]);
 

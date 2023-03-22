@@ -15,6 +15,11 @@ export function fromBoolean(value: boolean): string {
   return value ? "true" : "false";
 }
 
+export function toArray(value: string): string[] {
+  const val = value?.split(" ").join("");
+  return Array.from(val?.split(',')|| '');
+}
+
 export function validateRequired(componentName: string, props: Record<string, unknown>) {
   Object.entries(props).forEach(prop => {
     if (!prop[1]) {

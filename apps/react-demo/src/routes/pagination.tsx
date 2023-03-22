@@ -13,6 +13,7 @@ export default function PaginationPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [pageUsers, setPageUsers] = useState<User[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [perPage, setPerPage] = useState<number>(5);
 
   useEffect(() => {
     const _users = [];
@@ -25,13 +26,20 @@ export default function PaginationPage() {
       });
     }
     setUsers(_users);
-    setPageUsers(_users.slice(0, 10));
+    setPageUsers(_users.slice(0, perPage));
   }, []);
 
   function changePage(newPage: number) {
-    const offset = (newPage - 1) * 10;
-    const _users = users.slice(offset, offset + 10);
+    const offset = (newPage - 1) * perPage;
+    const _users = users.slice(offset, offset + perPage);
     setPage(newPage);
+    setPageUsers(_users);
+  }
+
+  function changePerPage(count: number) {
+    const offset = (page - 1) * count;
+    const _users = users.slice(offset, offset + count);
+    setPerPage(count);
     setPageUsers(_users);
   }
 
@@ -58,9 +66,10 @@ export default function PaginationPage() {
 
       <GoAPagination
         itemCount={users.length}
-        perPageCount={10}
+        perPageCount={[5, 10, 20]}
         pageNumber={page}
         onChange={changePage}
+        onItemCountChange={changePerPage}
       />
     </>
   );

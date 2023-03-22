@@ -16,13 +16,21 @@ export class PaginateComponent {
   users: User[] = [];
   pageUsers: User[] = [];
   page = 1;
+  perPageCount = 5;
 
   handlePageChange(event: Event) {
     const e = event as CustomEvent;
     this.page = e.detail.page;
 
-    const offset = (this.page - 1) * 10;
-    this.pageUsers = this.users.slice(offset, offset + 10);
+    const offset = (this.page - 1) * this.perPageCount;
+    this.pageUsers = this.users.slice(offset, offset + this.perPageCount);
+  }
+
+  handlePerPageCountChange(event: Event) {
+    const e = event as CustomEvent;
+    this.perPageCount = e.detail.count;
+    this.pageUsers = this.users.slice(0, this.perPageCount);
+    console.log("pageusers", this.pageUsers);
   }
 
   constructor() {
@@ -35,6 +43,6 @@ export class PaginateComponent {
       });
     }
 
-    this.pageUsers = this.users.slice(0, 10);
+    this.pageUsers = this.users.slice(0, this.perPageCount);
   }
 }

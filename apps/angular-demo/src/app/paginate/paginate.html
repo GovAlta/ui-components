@@ -17,7 +17,8 @@
 
 <goa-pagination
   [itemcount]="users.length"
-  perpagecount="10"
+  perpagecount="5,10,20"
   [pagenumber]="page"
   (_change)="handlePageChange($event)"
+  (_changeItemCount)="handlePerPageCountChange($event)"
 ></goa-pagination>

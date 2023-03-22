@@ -30,6 +30,21 @@ describe("Pagination", () => {
     expect(el.getAttribute("mr")).toBe("xl");
   });
 
+  it("should render with multiple perPageCount", () => {
+    const { baseElement } = render(
+      <Pagination
+        onChange={() => {}}
+        pageNumber={1}
+        itemCount={100}
+        perPageCount={[20, 50, 100]}
+      />
+    );
+
+    const el = baseElement.querySelector("goa-pagination");
+
+    expect(el.getAttribute("perpagecount")).toBe("20,50,100");
+  });
+
   it("should handle the onChange event", async () => {
     const fn = jest.fn();
 
@@ -42,6 +57,30 @@ describe("Pagination", () => {
 
     await waitFor(() => {
       expect(fn).toBeCalledWith(2);
+    });
+  });
+
+  it("should handle the onItemCountChange event", async () => {
+    const fn = jest.fn();
+
+    const { baseElement } = render(
+      <Pagination
+        onItemCountChange={fn}
+        pageNumber={1}
+        itemCount={100}
+        perPageCount={20}
+        onChange={() => {}}
+      />
+    );
+
+    const el = baseElement.querySelector("goa-pagination");
+    fireEvent(
+      el,
+      new CustomEvent("_changeItemCount", { detail: { count: 10 } })
+    );
+
+    await waitFor(() => {
+      expect(fn).toBeCalledWith(10);
     });
   });
 });
