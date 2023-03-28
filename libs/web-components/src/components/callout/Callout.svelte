@@ -41,7 +41,7 @@
       : "";
 
   onMount(() => {
-    validateType(type);
+    setTimeout(() => validateType(type), 1);
   });
 </script>
 

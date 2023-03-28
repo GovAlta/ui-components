@@ -43,7 +43,7 @@
   }[type];
 
   onMount(() => {
-    validateType(type);
+    setTimeout(() => validateType(type), 1);
     if (!showIcon && !content) {
       console.warn("GoABadge must have either then content or icon property set");
     }
