@@ -8,7 +8,7 @@ import {
   Props,
   Prop,
 } from "@abgov/shared/storybook-common";
-import { GoAAppHeader } from "@abgov/react-components";
+import { GoAAppHeader, GoAMicrositeHeader } from "@abgov/react-components";
 
 <Meta title="Components/App Header" />
 
@@ -44,6 +44,7 @@ import { GoAAppHeader } from "@abgov/react-components";
 #### Basic
 
 <Story name="Basic">
+  <GoAMicrositeHeader type="live" />
   <GoAAppHeader />
 </Story>
 
@@ -52,6 +53,7 @@ import { GoAAppHeader } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
+      <goa-microsite-header type="live"/>
       <goa-app-header />
     `}
     />
@@ -60,6 +62,7 @@ import { GoAAppHeader } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
+      <goa-microsite-header type="live"></goa-microsite-header>
       <goa-app-header></goa-app-header>
     `}
     />
@@ -68,6 +71,7 @@ import { GoAAppHeader } from "@abgov/react-components";
     <CodeSnippet
       lang="tsx"
       code={`
+      <GoAMicrositeHeader type="live"/>
       <GoAAppHeader />
     `}
     />
@@ -77,6 +81,7 @@ import { GoAAppHeader } from "@abgov/react-components";
 #### Url
 
 <Story name="Url">
+  <GoAMicrositeHeader type="live" />
   <GoAAppHeader url="https://example.com" />
 </Story>
 
@@ -85,6 +90,7 @@ import { GoAAppHeader } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
+      <goa-microsite-header type="live"/>
       <goa-app-header url="https://example.com" />
     `}
     />
@@ -93,6 +99,7 @@ import { GoAAppHeader } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
+      <goa-microsite-header type="live"></goa-microsite-header>
       <goa-app-header url="https://example.com"></goa-app-header>
     `}
     />
@@ -101,6 +108,7 @@ import { GoAAppHeader } from "@abgov/react-components";
     <CodeSnippet
       lang="tsx"
       code={`
+      <GoAMicrositeHeader type="live"/>
       <GoAAppHeader url="https://example.com" />
     `}
     />
@@ -110,6 +118,7 @@ import { GoAAppHeader } from "@abgov/react-components";
 #### Heading
 
 <Story name="Heading">
+  <GoAMicrositeHeader type="live" />
   <GoAAppHeader heading="Ticket and Fine Payments" />
 </Story>
 
@@ -118,6 +127,7 @@ import { GoAAppHeader } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
+      <goa-microsite-header type="live"/>
       <goa-app-header heading="Ticket and Fine Payments" />
     `}
     />
@@ -126,6 +136,7 @@ import { GoAAppHeader } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
+      <goa-microsite-header type="live"></goa-microsite-header>
       <goa-app-header heading="Ticket and Fine Payments"></goa-app-header>
     `}
     />
@@ -134,6 +145,7 @@ import { GoAAppHeader } from "@abgov/react-components";
     <CodeSnippet
       lang="tsx"
       code={`
+      <GoAMicrositeHeader type="live"/>
       <GoAAppHeader heading="Ticket and Fine Payments" />
     `}
     />
@@ -145,6 +157,7 @@ import { GoAAppHeader } from "@abgov/react-components";
 Custom content can be added to the header by passing it in as a child component(s).
 
 <Story name="Custom Content">
+  <GoAMicrositeHeader type="live" />
   <GoAAppHeader url="https://example.com" heading="Ticket and Fine Payments">
     <a href="#">Login</a> &nbsp;
     <a href="#">Help</a>
@@ -156,6 +169,7 @@ Custom content can be added to the header by passing it in as a child component(
     <CodeSnippet
       lang="html"
       code={`
+      <goa-microsite-header type="live"/>
       <goa-app-header url="https://example.com" heading="Ticket and Find Payments">
         <a href="#">Login</a> &nbsp;
         <a href="#">Help</a>
@@ -167,6 +181,7 @@ Custom content can be added to the header by passing it in as a child component(
     <CodeSnippet
       lang="html"
       code={`
+      <goa-microsite-header type="live"></goa-microsite-header>
       <goa-app-header url="https://example.com" heading="Ticket and Find Payments">
         <a href="#">Login</a> &nbsp;
         <a href="#">Help</a>
@@ -178,6 +193,7 @@ Custom content can be added to the header by passing it in as a child component(
     <CodeSnippet
       lang="tsx"
       code={`
+      <GoAMicrositeHeader type="live"/>
       <GoAAppHeader url="https://example.com" heading="Ticket and Find Payments">
         <a href="#">Login</a>
         <a href="#">Help</a>
@@ -192,6 +208,7 @@ Custom content can be added to the header by passing it in as a child component(
 You can change the maximum width of the app header
 
 <Story name="Max Content Width">
+  <GoAMicrositeHeader type="live" />
   <GoAAppHeader
     url="https://example.com"
     heading="Ticket and Fine Payments"
@@ -207,6 +224,7 @@ You can change the maximum width of the app header
     <CodeSnippet
       lang="html"
       code={`
+      <goa-microsite-header type="live"/>
       <goa-app-header url="https://example.com" heading="Ticket and Find Payments" maxContentWidth="600px">
         <a href="#">Login</a> &nbsp;
         <a href="#">Help</a>
@@ -218,6 +236,7 @@ You can change the maximum width of the app header
     <CodeSnippet
       lang="html"
       code={`
+      <goa-microsite-header type="live"></goa-microsite-header>
       <goa-app-header url="https://example.com" heading="Ticket and Find Payments" maxContentWidth="600px">
         <a href="#">Login</a> &nbsp;
         <a href="#">Help</a>
@@ -229,6 +248,7 @@ You can change the maximum width of the app header
     <CodeSnippet
       lang="tsx"
       code={`
+      <GoAMicrositeHeader type="live"/>
       <GoAAppHeader url="https://example.com" heading="Ticket and Find Payments" maxContentWidth="600px">
         <a href="#">Login</a>
         <a href="#">Help</a>
