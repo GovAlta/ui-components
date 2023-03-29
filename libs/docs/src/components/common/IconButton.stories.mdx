@@ -37,9 +37,9 @@ import { GoAIconButton, GoAButtonGroup } from "@abgov/react-components";
   />
   <Prop
     name="variant"
-    type="color | nocolor | dark"
+    type="color | nocolor | dark | destructive"
     defaultValue="color"
-    description="Style this button to show color, nocolor or dark"
+    description="Style this button to show color, nocolor, dark or destructive action"
   />
   <Prop name="title" type="string" description="Sets the title of the button" />
   <Prop
@@ -206,6 +206,8 @@ import { GoAIconButton, GoAButtonGroup } from "@abgov/react-components";
   <GoAButtonGroup alignment="start">
     <GoAIconButton icon="close" variant="color" />
     <GoAIconButton icon="close" variant="nocolor" />
+    <GoAIconButton icon="close" variant="dark" />
+    <GoAIconButton icon="close" variant="destructive" />
   </GoAButtonGroup>
 </Story>
 
@@ -215,6 +217,8 @@ import { GoAIconButton, GoAButtonGroup } from "@abgov/react-components";
       code={`
         <goa-icon-button icon="close" variant="color"/>
         <goa-icon-button icon="close" variant="nocolor"/>
+        <goa-icon-button icon="close" variant="dark"/>
+        <goa-icon-button icon="close" variant="destructive"/>
       `}
       lang="html"
     />
@@ -224,6 +228,8 @@ import { GoAIconButton, GoAButtonGroup } from "@abgov/react-components";
       code={`
         <goa-icon-button icon="close" variant="color"></goa-icon-button>
         <goa-icon-button icon="close" variant="nocolor"></goa-icon-button>
+        <goa-icon-button icon="close" variant="dark"></goa-icon-button>
+        <goa-icon-button icon="close" variant="destructive"></goa-icon-button>
       `}
       lang="html"
     />
@@ -233,6 +239,8 @@ import { GoAIconButton, GoAButtonGroup } from "@abgov/react-components";
       code={`
         <GoAIconButton icon="close" variant="color"></GoAIconButton>
         <GoAIconButton icon="close" variant="nocolor"></GoAIconButton>
+        <GoAIconButton icon="close" variant="dark"></GoAIconButton>
+        <GoAIconButton icon="close" variant="destructive"></GoAIconButton>
     `}
       lang="tsx"
     />
@@ -284,6 +292,7 @@ import { GoAIconButton, GoAButtonGroup } from "@abgov/react-components";
   <GoAButtonGroup alignment="start">
     <GoAIconButton icon="close" disabled />
     <GoAIconButton icon="download" disabled />
+    <GoAIconButton icon="airplane" variant="destructive" disabled />
   </GoAButtonGroup>
 </Story>
 
@@ -293,6 +302,7 @@ import { GoAIconButton, GoAButtonGroup } from "@abgov/react-components";
       code={`
         <goa-icon-button icon="close" disabled/>
         <goa-icon-button icon="download" disabled/>
+        <goa-icon-button icon="airplane" variant="destructive" disabled/>
       `}
       lang="html"
     />
@@ -302,6 +312,7 @@ import { GoAIconButton, GoAButtonGroup } from "@abgov/react-components";
       code={`
         <goa-icon-button icon="close" disabled></goa-icon-button>
         <goa-icon-button icon="download" disabled></goa-icon-button>
+        <goa-icon-button icon="airplane" variant="destructive" disabled></goa-icon-button>
       `}
       lang="html"
     />
@@ -311,6 +322,7 @@ import { GoAIconButton, GoAButtonGroup } from "@abgov/react-components";
       code={`
         <GoAIconButton icon="close" disabled></GoAIconButton>
         <GoAIconButton icon="download" disabled></GoAIconButton>
+        <GoAIconButton icon="airplane" variant="destructive" disabled></GoAIconButton>
     `}
       lang="tsx"
     />

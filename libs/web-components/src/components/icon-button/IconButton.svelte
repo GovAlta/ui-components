@@ -10,7 +10,7 @@
  // Validator
   const [Variants, validateVariant] = typeValidator(
     "Icon Button Variant",
-    ["color", "nocolor", "dark"],
+    ["color", "nocolor", "dark", "destructive"],
     true,
   );
 
@@ -102,15 +102,15 @@
     color: unset;
   }
 
-  button:hover {
+  button:hover:not(.destructive) {
     background-color: var(--goa-color-greyscale-100);
     border-color: var(--goa-color-greyscale-100);
     color: var(--goa-color-interactive-hover);
     outline: none;
   }
 
-  button:focus,
-  button:active {
+  button:focus:not(.destructive),
+  button:active:not(.destructive) {
     background-color: var(--goa-color-greyscale-100);
     border-color: var(--goa-color-interactive-focus);
     color: var(--goa-color-interactive-focus);
@@ -122,12 +122,32 @@
     background-color: var(--goa-color-interactive-hover);
   }
 
+  .destructive {
+    color: var(--goa-color-emergency-dark);
+    fill: var(--goa-color-emergency-dark);
+  }
+
+  .destructive:hover {
+    background-color: var(--goa-color-emergency-light);
+    border-color: var(--goa-color-emergency-light);
+    outline: none;
+  }
+
+  .destructive:focus,
+  .destructive:active {
+    background-color: var(--goa-color-emergency-light);
+    border-color: var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    outline: none;
+  }
+
   button:disabled {
     pointer-events: none;
     opacity: 0.5;
     transform: none;
     cursor: default;
-    }
+  }
+
   button:disabled:hover {
     background-color: transparent;
   }

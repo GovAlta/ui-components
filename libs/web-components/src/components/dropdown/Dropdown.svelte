@@ -6,6 +6,7 @@
   import { onDestroy, onMount, tick } from "svelte";
   import { toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
+  import noscroll from "../../common/no-scroll";
 
   interface Option {
     label: string;
@@ -43,27 +44,30 @@
   let _isMenuVisible = false;
   let _highlightedIndex: number = 0;
   let _computedWidth: string;
+  let _dropdownMenuPos: string = "auto";
 
   let _el: HTMLElement;
   let _menuEl: HTMLElement;
   let _selectEl: HTMLSelectElement;
 
-  onMount(async () => {
-    await tick();
-    _values = parseValues();
-    _options = getOptions();
-
-    if (!_native) {
-      _computedWidth = getCustomDropdownWidth(_options);
-      addKeyboardEventListeners();
-      setHighlightedIndexToSelected();
+  $: {
+    if (_el) {
+      _values = parseValues(value);
+      _options = getOptions();
+      if (!_native) {
+        _computedWidth = getCustomDropdownWidth(_options);
+        addKeyboardEventListeners();
+        setHighlightedIndexToSelected();
+      }
     }
+  }
 
+  onMount(async () => {
     // watch for DOM changes within the slot => dynamic binding
     const slot = _el.querySelector("slot");
     slot?.addEventListener("slotchange", (_e) => {
       _selectedLabel = "";
-      _values = parseValues();
+      _values = parseValues(value);
       _options = getOptions();
     })
   });
@@ -107,7 +111,7 @@
             _values = [value];
           }
           return { selected, value, label};
-        });    
+        });
   }
 
   // compute the required width to enure all children fit
@@ -118,7 +122,7 @@
     if (options.length === 0 && placeholder !== "") {
       return `${placeholder.length + 12}ch`;
     }
-    
+
     options.forEach((option: Option) => {
       const label = option.label || option.value || "";
       if (!width && maxCount < label.length) {
@@ -140,12 +144,12 @@
   }
 
   // parse and convert values to strings to avoid later type comparison issues
-  function parseValues() {
+  function parseValues(selectedValue: string) {
     let rawValue: string[];
     try {
-      rawValue = JSON.parse(value || "[]");
+      rawValue = JSON.parse(selectedValue || "[]");
     } catch (e) {
-      rawValue = [value];
+      rawValue = [selectedValue];
     }
     const rawValues = typeof rawValue === "object" ? rawValue : [rawValue];
     // convert all values to strings to avoid later type comparison issues
@@ -165,6 +169,7 @@
 
     // bind up/down arrows to navigate options
     _menuEl.addEventListener("mouseover", onHighlight);
+    setDropdownMenuPosition();
   }
 
   function closeMenu() {
@@ -172,6 +177,15 @@
     _menuEl.removeEventListener("mouseover", onHighlight);
     setHighlightedIndexToSelected();
     _isMenuVisible = false;
+    _dropdownMenuPos = "auto";
+  }
+
+  function setDropdownMenuPosition() {
+    const dropdownRect = _el.getBoundingClientRect();
+    const menuRect = _menuEl.getBoundingClientRect();
+    if (window.innerHeight - dropdownRect.top < dropdownRect.height + menuRect.height) {
+      _dropdownMenuPos = menuRect.top - dropdownRect.top + 'px';
+    }
   }
 
   function setHighlightedIndexToSelected() {
@@ -312,6 +326,7 @@
         data-testid={`${name}-dropdown-background`}
         class="dropdown-background"
         on:click={closeMenu}
+        use:noscroll={{ enable: _isMenuVisible }}
       />
     {/if}
 
@@ -347,7 +362,11 @@
       tabindex="0"
       class="dropdown-list"
       class:dropdown-active={_isMenuVisible}
-      style={`overflow-y: auto; max-height: ${maxheight}`}
+      style={`
+        overflow-y: auto;
+        max-height: ${maxheight};
+        --bottom: ${_dropdownMenuPos};
+      `}
     >
       {#each _options as option, index (index)}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -383,15 +402,8 @@
     position: relative;
     cursor: pointer;
     display: inline-block;
-    width: 100%;
+    width: var(--width, 100%);
   }
-
-  @media (min-width: 640px) {
-    .dropdown {
-      width: var(--width);
-    }
-  }
-
   .dropdown-background {
     cursor: default;
     position: fixed;
@@ -412,7 +424,7 @@
     outline: none;
     box-shadow: var(--shadow-1);
     z-index: 99;
-
+    bottom: var(--bottom);
     scroll-behavior: smooth;
     scrollbar-width: thin; /* Firefox */
 

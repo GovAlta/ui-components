@@ -91,7 +91,6 @@
   }
 
   .goa-badge-content {
-    text-transform: capitalize;
     font-size: var(--goa-font-size-2);
     line-height: var(--goa-line-height-1);
     padding-bottom: var(--font-valign-fix, 0); /* acumin font requires this to allow for vertical alignment  */

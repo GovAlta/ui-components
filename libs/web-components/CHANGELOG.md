@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2023-03-28
+
+- New `destructive` variant for `goa-icon`
+- Page selector for `goa-pagination` has been changed to a dropdown
+- `goa-accordion`, `goa-container`, and `goa-details` now have the final `<p>` tag with a zero margin-bottom
+- The sort functionality now works for dynamic headers in Angular v15
+- `goa-dropdown` positioning has been adjusted to open up when opened at the bottom of a page
+- Selected value of dropdowns can now be changed via code
+
 ## [1.7.0] - 2023-03-14
 
 - New component [Form Stepper](https://ui-components.alberta.ca/?path=/docs/components-form-stepper--basic)

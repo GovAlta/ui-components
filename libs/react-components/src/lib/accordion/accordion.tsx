@@ -54,8 +54,8 @@ export const GoAAccordion: FC<Props> = ({
       mb={mb}
       ml={ml}
     >
-      {children}
       {headingContent && <div slot="headingcontent">{headingContent}</div>}
+      {children}
     </goa-accordion>
   );
 };

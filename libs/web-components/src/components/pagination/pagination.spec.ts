@@ -8,12 +8,16 @@ describe("GoAPagination", () => {
     const pageSelector = getByTestId("page-selector");
     const pageLinks = getByTestId("page-links");
 
-    // input
-    const pageInput = pageSelector.querySelector("goa-input")
-    expect(pageInput.getAttribute("type")).toBe("number")
-    expect(pageInput.getAttribute("value")).toBe("1")
-    expect(pageInput.getAttribute("debounce")).toBe("500")
-
+    // page number dropdown
+    const pageNumberDropdown = pageSelector.querySelector("goa-dropdown");
+    expect(pageNumberDropdown.getAttribute("value")).toBe("1");
+    const pageDropdownItems = pageSelector.querySelectorAll('goa-dropdown-item');
+    expect(pageDropdownItems.length).toBe(10);
+    for (let pageNumber = 1; pageNumber < 10; pageNumber++) {
+      const pageDropdownItem = pageSelector.querySelector(`goa-dropdown-item:nth-child(${pageNumber})`);
+      expect(pageDropdownItem.getAttribute("value")).toBe(`${pageNumber}`);
+      expect(pageDropdownItem.getAttribute("label")).toBe(`${pageNumber}`);
+    }
     // links
     const prev = pageLinks.querySelector("goa-button:first-child");
     const next = pageLinks.querySelector("goa-button:last-child");
@@ -25,15 +29,15 @@ describe("GoAPagination", () => {
     expect(next.getAttribute("disabled")).toBe("false")
   })
 
-  it("handles the page input events", async () => {
+  it("handles the page dropdown select events", async () => {
     const { container } = render(Pagination, { pagenumber: 1, itemcount: 100 })
-    const pageInput = container.querySelector("goa-input")
+    const pageNumberDropdown = container.querySelector("goa-dropdown");
 
     const fn = jest.fn();
 
-    pageInput.addEventListener("_change", fn);
+    pageNumberDropdown.addEventListener("_change", fn);
 
-    await fireEvent(pageInput, new CustomEvent("_change", { detail: { page: 2 } }))
+    await fireEvent(pageNumberDropdown, new CustomEvent("_change", { detail: { page: 2 } }))
     await waitFor(() => {
       expect(fn).toBeCalledTimes(1);
     })
@@ -84,20 +88,6 @@ describe("GoAPagination", () => {
     container.addEventListener("_change", fn);
 
     await fireEvent.click(nextLink)
-    await waitFor(() => {
-      expect(fn).not.toBeCalled();
-    })
-  })
-
-  it("does not fire an event for a non-numeric page number", async () => {
-    const { container } = render(Pagination, { pagenumber: 1, itemcount: 100 })
-    const input = container.querySelector("goa-input");
-    const fn = jest.fn();
-
-    container.addEventListener("_change", fn);
-
-    // await fireEvent.keyUp(input, { target: { value: 2 }})
-    await fireEvent(input, new CustomEvent("_change", { detail: { page: "2abc" } }))
     await waitFor(() => {
       expect(fn).not.toBeCalled();
     })

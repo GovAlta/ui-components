@@ -22,4 +22,19 @@ describe("IconButton", () => {
       expect(iconButton).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
+
+  describe("Variants", () => {
+    ["color", "nocolor", "dark", "destructive"].forEach(variant => {
+      it(`renders the ${variant} variant`, async () => {
+        const el = render(GoAIconButton, {
+          testid: "iconButton-test", icon: "ellipsis",
+          variant: variant,
+        });
+        const iconButton = await el.findByTestId("iconButton-test");
+
+        expect(iconButton).toBeTruthy();
+        expect(iconButton.className).toContain(`${variant}`);
+      });
+    });
+  });
 })
