@@ -45,14 +45,14 @@ import { useState } from "react";
   />
   <Prop
     name="heading"
-    type="slot"
+    type="string | slot"
     lang="angular"
     defaultValue=""
     description="Heading text within the modal"
   />
   <Prop
     name="heading"
-    type="ReactNode"
+    type="string | ReactNode"
     lang="react"
     defaultValue=""
     description="Heading text within the modal"
@@ -507,7 +507,7 @@ export const RouteChangesTemplate = (args) => {
             <goa-button-group alignment="end">
               <goa-button type="primary" (_click)="closeModal()">Primary</goa-button>
             </goa-button-group>
-          </div> 
+          </div>
         </goa-modal>
     `}
     />
@@ -744,7 +744,7 @@ export const FormattingTemplate = (args) => {
           adipisicing elit. Mollitia obcaecati id molestiae, natus dicta, eaque
           qui iusto similique, libero explicabo eligendi eius laboriosam!
         </p>
-        <GoAFormItem label="First name" ml="xs">
+        <GoAFormItem label="First name">
           <GoAInput name="firstName" />
         </GoAFormItem>
         <p>
@@ -772,7 +772,7 @@ export const FormattingTemplate = (args) => {
           qui iusto similique, libero explicabo eligendi eius laboriosam!
           Repellendus ducimus officia asperiores. Eos, eius numquam.
         </p>
-        <GoAFormItem label="First name" ml="xs">
+        <GoAFormItem label="First name">
           <GoAInput name="firstName" />
         </GoAFormItem>
         <p>
@@ -805,7 +805,7 @@ export const FormattingTemplate = (args) => {
           explicabo eligendi eius laboriosam! Repellendus ducimus officia
           asperiores. Eos, eius numquam.
         </p>
-        <goa-form-item label="First name" ml="xs">
+        <goa-form-item label="First name">
           <goa-input name="firstName"></goa-input>
         </goa-form-item>
         <p>
@@ -866,7 +866,7 @@ export const FormattingTemplate = (args) => {
                 explicabo eligendi eius laboriosam! Repellendus ducimus officia
                 asperiores. Eos, eius numquam.
               </p>
-              <GoAFormItem label="First name" ml="xs">
+              <GoAFormItem label="First name">
                 <GoAInput name="firstName" />
               </GoAFormItem>
               <p>
