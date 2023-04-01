@@ -23,6 +23,7 @@ export function validateRequired(componentName: string, props: Record<string, un
   })
 }
 
+// To avoid console errors due to late binding, we need to use setTimeout before calling typeValidator
 export function typeValidator(
   message: string,
   values: string[],
