@@ -58,6 +58,40 @@ import {
   />
 </Props>
 
+<details>
+  <summary>Additional Properties</summary>
+  <GoACallout>
+    These margins would be applied to the target element and the popover will
+    align itself accordingly
+  </GoACallout>
+  <Props showTabs={true}>
+    <Prop
+      name="mt"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Top margin"
+    />
+    <Prop
+      name="mr"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Right margin"
+    />
+    <Prop
+      name="mb"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Bottom margin"
+    />
+    <Prop
+      name="ml"
+      type="none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl"
+      defaultValue="none"
+      description="Left margin"
+    />
+  </Props>
+</details>
+
 #### Basic
 
 <Story name="Basic">
@@ -68,7 +102,7 @@ import {
       </GoAButton>
     }
   >
-    <h3>This is a popover</h3>
+    <p>This is a popover</p>
     It can be used for a number of different contexts.
   </GoAPopover>
 </Story>
@@ -79,7 +113,7 @@ import {
       lang="html"
       code={`
       <goa-popover>
-        <h3>This is a popover</h3>
+        <p>This is a popover</p>
         It can be used for a number of different contexts.
         <div slot="target">
           <goa-button type="secondary" size="compact">Click me</goa-button>
@@ -97,7 +131,7 @@ import {
           Click me
         </GoAButton>
       }>
-        <h3>This is a popover</h3>
+        <p>This is a popover</p>
         It can be used for a number of different contexts.
       </GoAPopover>
     `}
@@ -116,7 +150,7 @@ import {
     }
     maxWidth="500px"
   >
-    <h3>This is a popover</h3>
+    <p>This is a popover</p>
     It can be used for a number of different contexts.
   </GoAPopover>
 </Story>
@@ -127,7 +161,7 @@ import {
       lang="html"
       code={`
       <goa-popover maxwidth="500px">
-        <h3>This is a popover</h3>
+        <p>This is a popover</p>
         It can be used for a number of different contexts.
         <div slot="target">
           <goa-button type="secondary" size="compact">Click me</goa-button>
@@ -147,7 +181,7 @@ import {
       }
       maxWidth="500px"
       >
-        <h3>This is a popover</h3>
+        <p>This is a popover</p>
         It can be used for a number of different contexts.
       </GoAPopover>
     `}
