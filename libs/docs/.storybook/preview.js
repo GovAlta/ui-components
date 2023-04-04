@@ -8,6 +8,7 @@ export const parameters = {
       order: [
         "Overview",
         "Layouts",
+        ["One Column", "Two Column", "Three Column"],
         "Components",
         "Utility",
         "Setup",

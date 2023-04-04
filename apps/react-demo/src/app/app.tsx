@@ -100,6 +100,9 @@ export default function App() {
             <Link className="navigation-link" to="/textarea">
               TextArea
             </Link>
+            <Link className="navigation-link" to="/three-column-layout">
+              Three Column Layout
+            </Link>
           </nav>
         </div>
 

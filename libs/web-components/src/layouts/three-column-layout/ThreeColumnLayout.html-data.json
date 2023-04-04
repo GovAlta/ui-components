@@ -1,0 +1,50 @@
+{
+  "name": "goa-three-column-layout",
+  "required": ["header", "footer", "nav"],
+  "attributes": [
+    {
+      "name": "leftcolumnwidth",
+      "type": "string",
+      "description": "% | px | rem | ch | etc",
+      "default": "256px"
+    },
+    {
+      "name": "maxcontentwidth",
+      "type": "string",
+      "description": "% | px | rem | ch | etc",
+      "default": "100%"
+    },
+    {
+      "name": "rightcolumnwidth",
+      "type": "string",
+      "description": "% | px | rem | ch | etc",
+      "default": "100%"
+    },
+    {
+      "name": "header",
+      "type": "slot",
+      "description": "Space for GoAAppHeader component"
+    },
+    {
+      "name": "footer",
+      "type": "slot",
+      "description": "Space for GoAAppFooter component"
+    },
+    {
+      "name": "nav",
+      "type": "slot",
+      "description": "Component containing nav links for application"
+    },
+    {
+      "name": "sidebar",
+      "type": "slot",
+      "description": "Component containing sidebar section (right column)"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Three Column Layout",
+      "url": "{{siteUrl}}/?path=/docs/layouts-three-column--basic"
+    }
+  ]
+}
