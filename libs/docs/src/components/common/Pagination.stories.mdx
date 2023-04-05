@@ -8,8 +8,16 @@ import {
   CodeSnippet,
   SupportInfo,
   Markdown,
+  Box,
 } from "@abgov/shared/storybook-common";
-import { GoAPagination, GoATable } from "@abgov/react-components";
+import {
+  GoAPagination,
+  GoATable,
+  GoADropdown,
+  GoADropdownItem,
+  GoASpacer,
+  GoABlock,
+} from "@abgov/react-components";
 import { faker } from "@faker-js/faker";
 
 <Meta title="Components/Pagination" />
@@ -93,6 +101,7 @@ export const PaginationTableTemplate = (args) => {
   const [users, setUsers] = useState([]);
   const [pageUsers, setPageUsers] = useState([]);
   const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
   useEffect(() => {
     const _users = [];
     for (let i = 0; i < 100; i++) {
@@ -104,13 +113,20 @@ export const PaginationTableTemplate = (args) => {
       });
     }
     setUsers(_users);
-    setPageUsers(_users.slice(0, 10));
+    setPageUsers(_users.slice(0, perPage));
   }, []);
   function changePage(newPage) {
-    const offset = (newPage - 1) * 10;
-    const _users = users.slice(offset, offset + 10);
+    const offset = (newPage - 1) * perPage;
+    const _users = users.slice(offset, offset + perPage);
     setPage(newPage);
     setPageUsers(_users);
+  }
+  function changePerPage(name, value) {
+    const newPerPage = parseInt(value, 10);
+    const offset = (page - 1) * newPerPage;
+    const _users = users.slice(offset, offset + newPerPage);
+    setPageUsers(_users);
+    setPerPage(newPerPage);
   }
   return (
     <>
@@ -132,13 +148,38 @@ export const PaginationTableTemplate = (args) => {
           ))}
         </tbody>
       </GoATable>
-      <GoAPagination
-        variant={args.variant}
-        itemCount={users.length}
-        perPageCount={10}
-        pageNumber={page}
-        onChange={changePage}
-      />
+      {args.showPerPageDropdown && (
+        <GoABlock alignment="center">
+          <GoABlock mb="m" alignment="center" gap="m">
+            <span>Show</span>
+            <GoADropdown onChange={changePerPage} value="10" width="8ch">
+              <GoADropdownItem value="10"></GoADropdownItem>
+              <GoADropdownItem value="20"></GoADropdownItem>
+              <GoADropdownItem value="30"></GoADropdownItem>
+            </GoADropdown>
+            <span
+              style={{ whiteSpace: "nowrap" }}
+            >{`of ${users.length} items`}</span>
+          </GoABlock>
+          <GoASpacer hSpacing="fill" />
+          <GoAPagination
+            variant={args.variant}
+            itemCount={users.length}
+            perPageCount={perPage}
+            pageNumber={page}
+            onChange={changePage}
+          />
+        </GoABlock>
+      )}
+      {!args.showPerPageDropdown && (
+        <GoAPagination
+          variant={args.variant}
+          itemCount={users.length}
+          perPageCount={perPage}
+          pageNumber={page}
+          onChange={changePage}
+        />
+      )}
     </>
   );
 };
@@ -174,11 +215,12 @@ export const PaginationTableTemplate = (args) => {
         users: User[] = [];
         pageUsers: User[] = []
         page: number = 1;
+        perPage: number = 10;
         handlePageChange(event: Event) {
           const e = event as CustomEvent
           this.page = e.detail.page;
-          const offset = (this.page - 1) * 10;
-          this.pageUsers = this.users.slice(offset, offset + 10)
+          const offset = (this.page - 1) * this.perPage;
+          this.pageUsers = this.users.slice(offset, offset + this.perPage)
         }
         constructor() {
           for (let i = 0; i < 100; i++) {
@@ -189,9 +231,9 @@ export const PaginationTableTemplate = (args) => {
               age: faker.datatype.number({min: 18, max: 60}),
             });
           }
-          this.pageUsers = this.users.slice(0, 10)
+          this.pageUsers = this.users.slice(0, this.perPage)
         }
-      }    
+      }
     `}
     />
     <CodeSnippet
@@ -302,6 +344,191 @@ export const PaginationTableTemplate = (args) => {
 <Story name="Nav" args={{ variant: "links-only" }}>
   {PaginationTableTemplate.bind({})}
 </Story>
+
+#### Items per page
+
+<Story name="Items per page" args={{ showPerPageDropdown: true }}>
+  {PaginationTableTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="ts"
+      code={`
+      import { faker } from "@faker-js/faker";
+      interface User {
+        id: string;
+        firstName: string;
+        lastName: string;
+        age: number;
+      }
+      @Component({
+        selector: "abgov-paginate",
+        templateUrl: "./paginate.html",
+      })
+      export class PaginateComponent {
+        users: User[] = [];
+        pageUsers: User[] = []
+        page: number = 1;
+        perPage: number = 10;
+        handlePageChange(event: Event) {
+          const e = event as CustomEvent
+          this.page = e.detail.page;
+          const offset = (this.page - 1) * this.perPage;
+          this.pageUsers = this.users.slice(offset, offset + this.perPage)
+        }
+        handlePerPageChange(event: Event) {
+          const e = event as CustomEvent
+          this.perPage = parseInt(e.detail.value, 10);
+          const offset = (this.page - 1) * this.perPage;
+          this.pageUsers = this.users.slice(offset, offset + this.perPage)
+        }
+        constructor() {
+          for (let i = 0; i < 100; i++) {
+            this.users.push({
+              id: faker.datatype.uuid(),
+              firstName: faker.name.firstName(),
+              lastName: faker.name.lastName(),
+              age: faker.datatype.number({min: 18, max: 60}),
+            });
+          }
+          this.pageUsers = this.users.slice(0, this.perPage)
+        }
+      }
+    `}
+    />
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-table width="100%" mb="xl">
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of pageUsers; index as i">
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.age }}</td>
+          </tr>
+        </tbody>
+      </goa-table>
+      <goa-block alignment="center">
+        <goa-block mb="m" alignment="center">
+          show
+          <goa-dropdown
+            (_change)="handlePerPageChange($event)"
+            value="10"
+            width="8ch"
+          >
+            <goa-dropdown-item value="10"></goa-dropdown-item>
+            <goa-dropdown-item value="20"></goa-dropdown-item>
+            <goa-dropdown-item value="30"></goa-dropdown-item>
+          </goa-dropdown>
+          <span style="white-space: 'nowrap'">of 100 items</span>
+        </goa-block>
+        <goa-spacer hspacing="fill"></goa-spacer>
+        <goa-pagination
+          [itemcount]="users.length"
+          [perpagecount]="perPage"
+          [pagenumber]="page"
+          (_change)="handlePageChange($event)"
+        ></goa-pagination>
+      </goa-block>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      import { faker } from "@faker-js/faker";
+      const Table = () => {
+        // ...
+        // table data
+        const [users, setUsers ] = useState<any>([])
+        // subset of data shown per page
+        const [pageUsers, setPageUsers] = useState<any>([]);
+        // page number
+        const [page, setPage] = useState(1);
+        //count per page
+        const [perPage, setPerPage] = useState(10);
+        useEffect(() => {
+          const _users = []
+          for (let i = 0; i < 100; i++) {
+            _users.push({
+              id: faker.datatype.uuid(),
+              firstName: faker.name.firstName(),
+              lastName: faker.name.lastName(),
+              age: faker.datatype.number({min: 18, max: 60}),
+            });
+          }
+          // init data set
+          setUsers(_users)
+          // save current page
+          setPageUsers(_users.slice(0, perPage))
+        }, [])
+        function changePage(newPage: any) {
+          const offset = (newPage - 1) * perPage;
+          const _users = users.slice(offset, offset + perPage)
+          setPage(newPage);
+          setPageUsers(_users)
+        }
+        function changePerPage(name: any, value:any) {
+          const newPerPage = parseInt(value, 10);
+          const offset = (page - 1) * newPerPage;
+          const _users = users.slice(offset, offset + newPerPage);
+          setPageUsers(_users);
+          setPerPage(newPerPage);
+        }
+        return <>
+          <GoATable width="100%" mb="xl">
+            <thead>
+              <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Age</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pageUsers.map(u:any =>
+                <tr key={u.id}>
+                  <td>{u.firstName}</td>
+                  <td>{u.lastName}</td>
+                  <td>{u.age}</td>
+                </tr>
+              )}
+            </tbody>
+          </GoATable>
+          <GoABlock alignment="center">
+            <GoABlock mb="m" alignment="center" gap="m">
+              <span>Show</span>
+              <GoADropdown onChange={changePerPage} value="10" width="8ch">
+                <GoADropdownItem value="10"></GoADropdownItem>
+                <GoADropdownItem value="20"></GoADropdownItem>
+                <GoADropdownItem value="30"></GoADropdownItem>
+              </GoADropdown>
+              <span style={{whiteSpace: 'nowrap'}}>of {users.length} items</span>
+            </GoABlock>
+            <GoASpacer hSpacing="fill" />
+            <GoAPagination
+              variant={args.variant}
+              itemCount={users.length}
+              perPageCount={perPage}
+              pageNumber={page}
+              onChange={changePage}
+            />
+          </GoABlock>
+        </>
+      }
+    `}
+    />
+  </Tab>
+</Tabs>
 
 ---
 
