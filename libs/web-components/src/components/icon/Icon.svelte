@@ -532,7 +532,6 @@
   export let theme: IconTheme = "outline";
   export let inverted: string = "false";
   export let fillcolor: string = "";
-  export let hovercolor: string = "";
   export let opacity: number = 1;
   export let title: string = "";
   export let testid: string = "";
@@ -568,7 +567,6 @@
     ${calculateMargin(mt, mr, mb, ml)}
     --size: ${_size};
     --fill-color: ${fillcolor};
-    --hover-color: ${hovercolor};
     --opacity: ${opacity};
   `}
 >
@@ -607,11 +605,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .goa-icon:hover ion-icon {
-    fill: var(--hover-color);
-    color: var(--hover-color);
   }
 
   .icon-override {
