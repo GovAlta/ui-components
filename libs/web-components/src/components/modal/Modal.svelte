@@ -18,6 +18,7 @@
   let _rootEl: HTMLElement = null;
   let _contentEl: HTMLElement = null;
   let _scrollEl: HTMLElement = null;
+  let _headerEl: HTMLElement = null;
 
   // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator("Callout variant", [
@@ -48,6 +49,15 @@
 
   $: if(_isOpen && _contentEl) {
     window.addEventListener('keydown', onInputKeyDown);
+
+    const children = getChildren();
+
+    if (_headerEl.querySelector("div.modal-title").textContent ||
+        _headerEl.querySelector("div.modal-close") ||
+        children.length
+    ) {
+      _headerEl.classList.add("has-content");
+    }
   }
 
   $: _transitionTime = transition === "none" ? 0 : transition === "slow" ? 400 : 200;
@@ -67,8 +77,8 @@
 
   $: if (!_isOpen) {
     // prevent null issues
-    _contentEl = _scrollEl = _rootEl = null;
-    window.removeEventListener('keydown', onInputKeyDown)
+    _contentEl = _scrollEl = _rootEl = _headerEl = null;
+    window.removeEventListener('keydown', onInputKeyDown);
   }
 
   // Hooks
@@ -114,6 +124,14 @@
     }
   }
 
+  function getChildren(): Element[] {
+    const slot = _headerEl.querySelector("slot") as HTMLSlotElement;
+    if (slot) {
+      return [...slot.assignedElements()];
+    } else {
+      return [..._headerEl.children] as Element[];  // unit tests
+    }
+  }
 </script>
 
 {#if _isOpen}
@@ -143,7 +161,7 @@
           </div>
         {/if}
         <div class="content">
-          <header>
+          <header bind:this={_headerEl}>
             <div data-testid="modal-title" class="modal-title">
               {#if heading}
                 {heading}
@@ -242,9 +260,11 @@
   }
   .content header {
     display: flex;
-    align-items: center;
-    margin-bottom: 2rem;
     justify-content: space-between;
+  }
+
+  .content :global(header.has-content) {
+    margin-bottom: 2rem;
   }
 
   .modal-pane {
@@ -278,8 +298,12 @@
   }
 
   .modal-title {
-    font-size: var(--goa-font-size-7);
-    flex: 0 0 auto;
+    font: var(--goa-typography-heading-m);
+  }
+
+  .modal-close {
+    padding-left: var(--goa-space-m);
+    margin-top: var(--goa-space-2xs);
   }
 
   .scroll-top {
