@@ -63,6 +63,7 @@
   $: isDisabled = toBoolean(disabled);
 
   let inputEl: HTMLElement;
+  let _rootEL: HTMLElement;
   $: if (isFocused && inputEl) {
     setTimeout(() => inputEl.focus(), 1);
   }
@@ -72,6 +73,9 @@
       onKeyUp(e);
     });
   }
+
+  let _leadingContentSlot = false;
+  let _trailingContentSlot = false;
 
   let _debounceId = null;
   function onKeyUp(e: Event) {
@@ -107,6 +111,14 @@
     if (prefix != "" || suffix != "") {
       console.warn("GoAInput [prefix] and [suffix] properties are deprecated. Instead use leadingContent and trailingContent.");
     }
+    const leadingContentSlot = _rootEL.querySelector("slot[name=leadingContent]") as HTMLSlotElement;
+    if (leadingContentSlot && leadingContentSlot.assignedNodes().length > 0) {
+      _leadingContentSlot = true;
+    }
+    const trailingContentSlot = _rootEL.querySelector("slot[name=trailingContent]") as HTMLSlotElement;
+    if (trailingContentSlot && trailingContentSlot.assignedNodes().length > 0) {
+      _trailingContentSlot = true;
+    }
   });
 
 </script>
@@ -119,6 +131,7 @@
     ${calculateMargin(mt, mr, mb, ml)};
     --width: ${width};
   `}
+  bind:this={_rootEL}
 >
   <div
     class={`
@@ -126,6 +139,8 @@
       ${isDisabled ? "goa-input--disabled" : ""}
       variant--${variant}
       type--${type}
+      ${_leadingContentSlot ? "goa-input-leading-content": ""}
+      ${_trailingContentSlot ? "goa-input-trailing-content": ""}
     `}
     class:error={isError}
   >
@@ -148,7 +163,11 @@
 
     <input
       bind:this={inputEl}
-      class={`input--${variant}`}
+      class={`
+        input--${variant}
+        ${_leadingContentSlot && !isDisabled ? "input-leading-content": ""}
+        ${_trailingContentSlot && !isDisabled ? "input-trailing-content": ""}
+      `}
       style={`--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`}
       readonly={isReadonly}
       disabled={isDisabled}
@@ -237,13 +256,13 @@
     background-color: var(--goa-color-greyscale-white);
   }
 
-  .goa-input:hover {
+  .goa-input:hover:not(.goa-input-leading-content):not(.goa-input-trailing-content) {
     border-color: var(--goa-color-interactive-hover);
     box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }
-  .goa-input:active,
-  .goa-input:focus,
-  .goa-input:focus-within {
+  .goa-input:active:not(.goa-input-leading-content):not(.goa-input-trailing-content),
+  .goa-input:focus:not(.goa-input-leading-content):not(.goa-input-trailing-content),
+  .goa-input:focus-within:not(.goa-input-leading-content):not(.goa-input-trailing-content) {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
 
@@ -276,6 +295,7 @@
     width: 100%;
     flex: 1 1 auto;
     font-family: var(--goa-font-family-sans);
+    z-index: 1;
   }
 
   input[readonly] {
@@ -299,9 +319,9 @@
   .goa-input--disabled:active,
   .goa-input--disabled:focus {
     background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-greyscale-200);
+    border-color: var(--goa-color-greyscale-200) !important;
     cursor: default;
-    box-shadow: none;
+    box-shadow: none !important;
   }
 
   .goa-input--disabled input,
@@ -364,14 +384,72 @@
     box-shadow: none;
   }
 
-  .error,
-  .error:hover {
+  .error:not(.goa-input-leading-content):not(.goa-input-trailing-content),
+  .error:hover:not(.goa-input-leading-content):not(.goa-input-trailing-content) {
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 1px var(--goa-color-interactive-error);
   }
-  .error:focus-within:hover {
+  .error:focus-within:hover:not(.goa-input-leading-content):not(.goa-input-trailing-content) {
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+  }
+
+  .error .input-leading-content,
+  .error .input-leading-content:hover,
+  .error .input-trailing-content,
+  .error .input-trailing-content:hover {
+    outline: var(--goa-border-width-s) solid var(--goa-color-interactive-error);
+    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-error);
+  }
+
+  .error .input-leading-content:focus,
+  .error .input-trailing-content:focus,
+  .error .input-leading-content:active,
+  .error .input-trailing-content:active  {
+    outline: var(--goa-border-width-s) solid var(--goa-color-interactive-error);
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+  }
+
+  .input-leading-content:hover,
+  .input-trailing-content:hover {
+    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    outline: var(--goa-border-width-s) solid var(--goa-color-interactive-hover);
+  }
+
+  .input-leading-content:active,
+  .input-leading-content:focus,
+  .input-leading-content:focus-within,
+  .input-trailing-content:active,
+  .input-trailing-content:focus,
+  .input-trailing-content:focus-within {
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    outline: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
+  }
+
+  .error .input-trailing-content,
+  .input-trailing-content:hover,
+  .input-trailing-content:active,
+  .input-trailing-content:focus,
+  .input-trailing-content:focus-within {
+    border-top-left-radius: var(--goa-border-radius-m);
+    border-bottom-left-radius: var(--goa-border-radius-m);
+  }
+
+  .error .input-leading-content,
+  .input-leading-content:hover,
+  .input-leading-content:active,
+  .input-leading-content:focus,
+  .input-leading-content:focus-within {
+    border-top-right-radius: var(--goa-border-radius-m);
+    border-bottom-right-radius: var(--goa-border-radius-m);
+  }
+
+  .input-leading-content.input-trailing-content,
+  .input-leading-content.input-trailing-content:hover,
+  .input-leading-content.input-trailing-content:active,
+  .input-leading-content.input-trailing-content:focus,
+  .input-leading-content.input-trailing-content:focus-within {
+    border-radius: 0;
   }
 
   input[type="search"]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-search-cancel-button {
