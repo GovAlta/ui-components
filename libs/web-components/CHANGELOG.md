@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2023-04-11
+
+- New component [File Upload](https://ui-components.alberta.ca/?path=/docs/components-file-upload--basic)
+- Variables can now be used for `type` properties for the following components:
+  - `Badge`
+  - `Callout`
+  - `Microsite Header`
+  - `Notification Banner`
+  - `Skeleton`
+- Yellow border now appears `onFocus` for elements in the `Form Stepper` component on Safari
+- Long headers will now wrap properly in Modals.
+- If no header or `closable` property in a Modal, the content will now fill that space appropriately
+- Interaction states (hover, focus, error), will now only appear on the `Input` element, and not on any leading or trailing content
+- Hover state on Icons in Containers and Callouts now doesn't happen
+
 ## [1.8.0] - 2023-03-28
 
 - New `destructive` variant for `goa-icon`
