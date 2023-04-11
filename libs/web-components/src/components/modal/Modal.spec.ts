@@ -9,46 +9,59 @@ describe('Modal Component', () => {
 
   it("should open when the `open` attribute is set to true", async () => {
     const el = render(GoAModal, { open: "true" });
-    expect(el.queryByTestId("modal")).toBeTruthy();
+
+    await waitFor(() => {
+      expect(el.queryByTestId("modal")).toBeTruthy();
+    })
   });
 
   it("should close when the `open` attribute is set to false", async () => {
     const el = render(GoAModal, { open: "false" });
-    expect(el.queryByTestId("modal")).toBeFalsy();
+    await waitFor(() => {
+      expect(el.queryByTestId("modal")).toBeFalsy();
+    })
   })
 
   it("should show the heading", async () => {
     const heading = "Test heading";
     const el = render(GoAModalWrapper, { heading });
-    expect(el.container.querySelector("[slot=heading]").innerHTML).toContain(heading);
+    await waitFor(() => {
+      expect(el.container.querySelector("[slot=heading]").innerHTML).toContain(heading);
+    })
   })
 
   it("should close on icon click when made to be closable", async () => {
     const el = render(GoAModal, { open: "true", closable: "true" });
     const click = jest.fn();
-    const rootEl = el.queryByTestId("modal");
-    const closeIcon = el.queryByTestId("modal-close-button");
-    rootEl.addEventListener("_close", click);
-    await fireEvent.click(closeIcon);
-    expect(click).toBeCalled();
+    await waitFor(async () => {
+      const rootEl = el.queryByTestId("modal");
+      const closeIcon = el.queryByTestId("modal-close-button");
+      rootEl.addEventListener("_close", click);
+      await fireEvent.click(closeIcon);
+      expect(click).toBeCalled();
+    })
   })
 
   it("should close on background click when made to be closable", async () => {
     const el = render(GoAModal, { open: "true", closable: "true" });
-    const click = jest.fn();
-    const rootEl = el.queryByTestId("modal");
-    const closeIcon = el.queryByTestId("modal-overlay");
-    rootEl.addEventListener("_close", click);
-    await fireEvent.click(closeIcon);
-    expect(click).toBeCalled();
+    await waitFor(async () => {    
+      const click = jest.fn();
+      const rootEl = el.queryByTestId("modal");
+      const closeIcon = el.queryByTestId("modal-overlay");
+      rootEl.addEventListener("_close", click);
+      await fireEvent.click(closeIcon);
+      expect(click).toBeCalled();
+    })
   })
 
   it("should have a slot for the default content", async () => {
     const content = "This is the content";
     const el = render(GoAModalWrapper, { content });
 
-    expect(el.container.innerHTML).toContain(content);
-    expect(el.container.querySelector("[slot=content]").innerHTML).toContain(content);
+    await waitFor(() => {
+      expect(el.container.innerHTML).toContain(content);
+      expect(el.container.querySelector("[slot=content]").innerHTML).toContain(content);
+    })
   })
 
   it("should have a slot for actions", async () => {
@@ -61,7 +74,10 @@ describe('Modal Component', () => {
   ["emergency", "important", "information", "success", "event"].forEach(calloutVariant => {
     it(`renders the ${calloutVariant} callout modal`, async () => {
       const el = render(GoAModal, { open: "true", "calloutvariant": calloutVariant });
-      expect(el.container.querySelector(`.${calloutVariant}`)).toBeTruthy();
+
+      await waitFor(() => {
+        expect(el.container.querySelector(`.${calloutVariant}`)).toBeTruthy();
+      })
     });
   });
 
@@ -77,11 +93,13 @@ describe('Modal Component', () => {
   it("should close on 'esc' key press when modal is closable", async () => {
     const el = render(GoAModal, { open: "true", closable: "true" });
     const handleClose = jest.fn();
-    const rootEl = el.queryByTestId("modal");
+    await waitFor(async () => {
+      const rootEl = el.queryByTestId("modal");
 
-    rootEl.addEventListener("_close", handleClose);
-    await fireEvent.keyDown(window, { key: 'Escape', keyCode: 27 });
-    expect(handleClose).toBeCalled();
+      rootEl.addEventListener("_close", handleClose);
+      await fireEvent.keyDown(window, { key: 'Escape', keyCode: 27 });
+      expect(handleClose).toBeCalled();
+    })
   })
 
 });

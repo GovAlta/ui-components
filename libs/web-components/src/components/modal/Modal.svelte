@@ -4,7 +4,7 @@
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { toBoolean, typeValidator } from "../../common/utils";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   // Public
   export let heading: string = "";
@@ -38,7 +38,12 @@
 
   // Reactive
   $: _isClosable = toBoolean(closable);
-  $: _isOpen = toBoolean(open);
+
+  // Moving the reactive var into a timeout prevents accessing null stylesheet
+  // reference to allow for creation of the @keyframes for the in:fade and out:fade transitions.
+  // DDIDS-1288
+  let _isOpen: boolean = false;
+  $: setTimeout(() => _isOpen = toBoolean(open), 1)
 
   $: if(_isOpen && _scrollEl && _contentEl) {
     const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
@@ -82,7 +87,8 @@
   }
 
   // Hooks
-  onMount(() => {
+  onMount(async () => {
+    await tick()
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
   });
