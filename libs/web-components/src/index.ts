@@ -55,3 +55,5 @@ export { default as Pagination } from './components/pagination/Pagination.svelte
 export { default as FormStepper } from './components/form-stepper/FormStepper.svelte';
 export { default as FormStep } from './components/form-step/FormStep.svelte';
 export { default as Pages } from './components/pages/Pages.svelte';
+export { default as FileUploadInput } from './components/file-upload-input/FileUploadInput.svelte';
+export { default as FileUploadCard } from './components/file-upload-card/FileUploadCard.svelte';

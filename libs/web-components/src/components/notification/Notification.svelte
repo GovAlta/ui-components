@@ -31,7 +31,7 @@
       : "";
 
   onMount(() => {
-    validateType(type);
+    setTimeout(() => validateType(type), 1);
   })
 
   function close(e: Event) {

@@ -42,8 +42,8 @@
       _stepEl.dispatchEvent(new CustomEvent("_click", {
         composed: true,
         bubbles: true,
-        detail: +childindex   
-      }))          
+        detail: +childindex
+      }))
     })
   })
 
@@ -66,7 +66,10 @@
     padding: var(--goa-space-l);
   }
 
-  [role="listitem"]:not([aria-disabled="true"]):focus-within {
+  [role="listitem"]:not([aria-disabled="true"]):focus-within,
+  [role="listitem"]:not([aria-disabled="true"]):focus,
+  [role="listitem"]:not([aria-disabled="true"]):active
+  {
     outline: var(--goa-color-interactive-focus) solid var(--goa-border-width-l);
   }
 
@@ -82,7 +85,7 @@
     justify-content: center;
     box-sizing: border-box;
     border-radius: 999px;
-    border: 4px solid var(--goa-color-interactive-default);  
+    border: 4px solid var(--goa-color-interactive-default);
     background: var(--goa-color-greyscale-white);
     height: 2.5rem;
     width: 2.5rem;
@@ -92,7 +95,7 @@
     font-weight: var(--goa-font-weight-bold)
   }
   [data-status=complete] .status {
-    background-color: var(--goa-color-interactive-default);
+    background: var(--goa-color-interactive-default);
   }
   [aria-current="step"][data-status=complete] .status {
     background: var(--goa-color-greyscale-white);
@@ -104,11 +107,11 @@
   }
 
   [role="listitem"]:not(
-    [data-status=complete], 
-    [data-status=incomplete], 
+    [data-status=complete],
+    [data-status=incomplete],
     [aria-current="step"]
   ) .status {
-    border-color: var(--goa-color-greyscale-500);  
+    border-color: var(--goa-color-greyscale-500);
   }
 
   .text {
@@ -130,7 +133,7 @@
       flex-direction: row;
       align-items: center;
       text-align: start;
-    }  
+    }
 
     .details {
       margin-left: 1rem;
@@ -141,8 +144,9 @@
 
 <label
   id={arialabel}
-  bind:this={_stepEl} 
+  bind:this={_stepEl}
   role="listitem"
+  tabindex="-1"
   for={text}
   data-status={status}
   aria-disabled={!_isEnabled ? "true" : "false"}
@@ -150,7 +154,7 @@
   aria-label={`${arialabel} ${text} ${status || ""}`}
 >
   <input id={text} bind:this={_checkbox} type="checkbox" checked={_isCurrent} disabled={!_isEnabled} />
-  <div 
+  <div
     data-testid="status"
     class="status">
     {#if _isCurrent}

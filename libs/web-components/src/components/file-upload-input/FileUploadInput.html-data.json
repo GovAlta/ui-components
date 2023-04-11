@@ -1,0 +1,46 @@
+{
+  "name": "goa-file-upload-input",
+  "attributes": [
+    {
+      "name": "variant",
+      "description": "The variant to be used",
+      "values": [
+        {
+          "name": "dragdrop"
+        },
+        {
+          "name": "button"
+        }
+      ],
+      "default": "dragdrop"
+    },
+    {
+      "name": "accept",
+      "description": "[Mimetype](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept) to limit the types of files.",
+      "valueSet": "string",
+      "default": "*"
+    },
+    {
+      "name": "maxfilesize",
+      "description": "Max allowed file size",
+      "valueSet": "string",
+      "default": "5MB"
+    },
+    {
+      "name": "_select",
+      "description": "Event fired for each file selected"
+    },
+    {
+      "name": "",
+      "description": "",
+      "valueSet": "string",
+      "default": ""
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA FileUploadInput",
+      "url": "{{siteUrl}}/?path=/docs/components-file-upload--basic"
+    }
+  ]
+}

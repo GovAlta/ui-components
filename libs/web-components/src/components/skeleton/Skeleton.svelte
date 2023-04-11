@@ -9,17 +9,17 @@
 
   // Validator
   const [Types, validateType] = typeValidator("Skeleton type", [
-    "image", 
-    "text", 
-    "title", 
-    "text-small", 
-    "avatar", 
-    "header", 
-    "paragraph", 
-    "thumbnail", 
-    "card", 
+    "image",
+    "text",
+    "title",
+    "text-small",
+    "avatar",
+    "header",
+    "paragraph",
+    "thumbnail",
+    "card",
     "lines",
-    "profile", 
+    "profile",
     "article",
   ],
     true
@@ -43,7 +43,7 @@
   export let ml: Spacing = null;
 
   onMount(() => {
-    validateType(type);
+    setTimeout(() => validateType(type), 1);
     validateSize(size);
   });
 </script>

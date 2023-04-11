@@ -1,6 +1,9 @@
 import "@abgov/web-components";
 
 export * from "./lib/pages/pages";
+export * from "./lib/file-upload-card/file-upload-card";
+
+export * from "./lib/file-upload-input/file-upload-input";
 
 // Types
 export type { GoAIconType } from "./lib/icon/icon";
