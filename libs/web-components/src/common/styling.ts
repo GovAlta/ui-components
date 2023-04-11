@@ -1,4 +1,6 @@
-export type Spacing = "none" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl" | string;
+export type Spacing = 
+  "none" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl" |
+  "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
 
 const conversions = {
   "0": "none",
@@ -36,7 +38,7 @@ function convertSpacing(size: Spacing): Spacing {
  * // add the following style attribute to the root element
  * style={calculateMargin(mt, mr, mb, ml)}
  */
-export function calculateMargin(mt: string, mr: string, mb: string, ml: string) {
+export function calculateMargin(mt: Spacing, mr: Spacing, mb: Spacing, ml: Spacing) {
   mt = convertSpacing(mt);
   mb = convertSpacing(mb);
   ml = convertSpacing(ml);

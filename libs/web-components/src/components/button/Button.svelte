@@ -255,18 +255,13 @@
 
   .tertiary.destructive {
     color: var(--goa-color-emergency-default);
-    border-color: var(--goa-color-greyscale-200);
-    background-color: var(--goa-color-greyscale-white);
+    border-color: transparent;
   }
   .tertiary.destructive:hover {
-    border-color: var(--goa-color-emergency-dark);
     color: var(--goa-color-emergency-dark);
-    background-color: var(--goa-color-greyscale-white);
   }
   .tertiary.destructive:focus,
   .tertiary.destructive:active {
     color: var(--goa-color-emergency-dark);
-    border-color: var(--goa-color-emergency-dark);
-    background-color: var(--goa-color-greyscale-white);
   }
 </style>
