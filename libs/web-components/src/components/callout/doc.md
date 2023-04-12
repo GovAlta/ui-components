@@ -8,4 +8,8 @@ Use it like this:
 <goa-callout type="emergency" heading="Emergency callout">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 </goa-callout>
+
+<goa-callout type="emergency" heading="Emergency callout" size="medium">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+</goa-callout>
 ```
