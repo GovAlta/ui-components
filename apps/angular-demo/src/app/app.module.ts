@@ -44,7 +44,7 @@ import { TableComponent } from "./table/table";
 import { TextAreaComponent } from "./text-area/text-area.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
 import { PopoverComponent } from "./popover/popover.component";
-import {ThreeColumnLayoutComponent} from "./three-column-layout/three-column-layout.component";
+import { ThreeColumnLayoutComponent } from "./three-column-layout/three-column-layout.component";
 
 @NgModule({
   declarations: [
@@ -82,7 +82,7 @@ import {ThreeColumnLayoutComponent} from "./three-column-layout/three-column-lay
     TableComponent,
     TextAreaComponent,
     TwoColumnLayoutComponent,
-    ThreeColumnLayoutComponent
+    ThreeColumnLayoutComponent,
   ],
   imports: [
     BrowserModule,
