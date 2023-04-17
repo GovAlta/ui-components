@@ -132,7 +132,7 @@
     color: var(--goa-color-text-secondary);
     padding: 1rem;
     text-align: left;
-    border-bottom: 2px solid var(--goa-color-greyscale-700);
+    border-bottom: 2px solid var(--goa-color-greyscale-600);
     vertical-align: bottom;
   }
 
