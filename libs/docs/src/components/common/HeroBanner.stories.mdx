@@ -41,6 +41,12 @@ When a page requires promotion or is featured, a photograph may be inserted into
     defaultValue="600px"
     description="Sets the height of the HeroBanner"
   />
+  <Prop
+    name="maxContentWidth"
+    type="string"
+    defaultValue="100%"
+    description="Maximum width of the content area"
+  />
 </Props>
 
 #### Basic
@@ -246,6 +252,91 @@ When a page requires promotion or is featured, a photograph may be inserted into
         minHeight="300px"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+      </GoAHeroBanner>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Max Content Width
+
+<Story name="Max Content Width">
+  <GoAHeroBanner
+    heading="Hero Banner"
+    backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
+    maxContentWidth="600px"
+  >
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,
+    eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis
+    hic!
+    <GoAHeroBannerActions>
+      <GoAButtonGroup>
+        <GoAButton onClick={() => {}}>Action</GoAButton>
+        <GoAButton onClick={() => {}} type="secondary">
+          Other Action
+        </GoAButton>
+      </GoAButtonGroup>
+    </GoAHeroBannerActions>
+  </GoAHeroBanner>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-hero-banner
+        heading="Hero Banner"
+        backgroundurl="https://i.picsum.photos/id/1076/600/400.jpg"
+        maxcontentwidth="600px"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+        <div slot="actions">
+          <goa-button-group>
+            <goa-button>Action</goa-button>
+            <goa-button type="secondary">Other Action</goa-button>
+          </goa-button-group>
+        </div>
+      </goa-hero-banner>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-hero-banner
+        heading="Hero Banner"
+        backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg"
+        maxContentWidth="600px"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+        <div slot="actions">
+          <goa-button-group>
+            <goa-button>Action</goa-button>
+            <goa-button type="secondary">Other Action</goa-button>
+          </goa-button-group>
+        </div>
+      </goa-hero-banner>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoAHeroBanner
+        heading="Hero Banner"
+        backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg"
+        maxContentWidth="600px"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio, eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis hic!
+        <GoAHeroBannerActions>
+          <GoAButtonGroup>
+            <GoAButton onClick={() => {}}>Action</GoAButton>
+            <GoAButton onClick={() => {}} type="secondary">Other Action</GoAButton>
+          </GoAButtonGroup>
+        </GoAHeroBannerActions>
       </GoAHeroBanner>
     `}
     />

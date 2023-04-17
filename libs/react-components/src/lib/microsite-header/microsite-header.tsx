@@ -16,6 +16,7 @@ interface WebComponentProps {
   type: ServiceLevel;
   version?: string;
   feedbackurl?: string;
+  maxcontentwidth?: string;
 }
 
 export interface HeaderProps {
@@ -23,12 +24,14 @@ export interface HeaderProps {
   version?: string;
   feedbackUrl?: string;
   testId?: string;
+  maxContentWidth?: string;
 }
 
 export const GoAMicrositeHeader: FC<HeaderProps> = ({
   type,
   version,
   feedbackUrl,
+  maxContentWidth,
   testId,
 }) => {
   return (
@@ -37,6 +40,7 @@ export const GoAMicrositeHeader: FC<HeaderProps> = ({
       version={version}
       feedbackurl={feedbackUrl}
       data-testid={testId}
+      maxcontentwidth={maxContentWidth}
     />
   );
 };

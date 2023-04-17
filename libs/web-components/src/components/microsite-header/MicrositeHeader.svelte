@@ -13,6 +13,7 @@
   export let type: Type;
   export let version: string = "";
   export let feedbackurl: string = "";
+  export let maxcontentwidth = "100%";
 
   function capitalize(val: string): string {
     if (!val || (val && val.length === 0)) return "";
@@ -25,33 +26,35 @@
 </script>
 
 <!-- HTML -->
-<header class="goa-official-site-header">
-  {#if type === "live"}
-    <div data-testid="type" class="site-text">
-      An official site of the <a href="https://www.alberta.ca/index.aspx">Alberta Government</a>
-    </div>
-  {/if}
+<header class="goa-official-site-header" style={`--max-content-width: ${maxcontentwidth}`}>
+  <div class="content-container">
+    {#if type === "live"}
+      <div data-testid="type" class="site-text">
+        An official site of the <a href="https://www.alberta.ca/index.aspx">Alberta Government</a>
+      </div>
+    {/if}
 
-  {#if ["alpha", "beta"].includes(type)}
-    <div
-      data-testid="type"
-      class="service-type service-type--{type.toLowerCase()}"
-    >
-      {capitalize(type)}
-    </div>
-    <div data-testid="site-text" class="site-text">
-      This is a new <a href="https://www.alberta.ca/index.aspx">Alberta Government</a> service
-      {#if feedbackurl}
-        <span data-testid="feedback">— help us improve it by giving <a href={feedbackurl}>feedback</a></span>
-      {/if}
-    </div>
-  {/if}
-  <div class="spacer" />
-  {#if version}
-    <div data-testid="version" class="version">
-      {version}
-    </div>
-  {/if}
+    {#if ["alpha", "beta"].includes(type)}
+      <div
+        data-testid="type"
+        class="service-type service-type--{type.toLowerCase()}"
+      >
+        {capitalize(type)}
+      </div>
+      <div data-testid="site-text" class="site-text">
+        This is a new <a href="https://www.alberta.ca/index.aspx">Alberta Government</a> service
+        {#if feedbackurl}
+          <span data-testid="feedback">— help us improve it by giving <a href={feedbackurl}>feedback</a></span>
+        {/if}
+      </div>
+    {/if}
+    <div class="spacer" />
+    {#if version}
+      <div data-testid="version" class="version">
+        {version}
+      </div>
+    {/if}
+  </div>
 </header>
 
 <!-- Style -->
@@ -78,19 +81,33 @@
   }
 
   .goa-official-site-header {
-    display: flex;
     font-size: var(--goa-font-size-2);
     background-color: var(--goa-color-greyscale-100);
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.25rem 1.5rem;
+    padding: 0.5rem 1rem;
   }
-    @media (max-width: 640px) {
-      .goa-official-site-header {
-        padding: 0.5rem 1rem;
-        align-items: start;
-      }
+
+  .content-container {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    max-width: min(var(--max-content-width), 100%);
+    margin: 0 auto;
+  }
+
+  @media (min-width: 640px) {
+    .goa-official-site-header {
+      padding: 0.25rem 2rem;
     }
+    .content-container {
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .goa-official-site-header {
+      padding: 0.25rem 4.5rem;
+    }
+  }
 
   .spacer {
     flex: 1 1 auto;
