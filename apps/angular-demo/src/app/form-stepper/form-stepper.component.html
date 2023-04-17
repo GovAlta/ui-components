@@ -12,7 +12,7 @@
   <div>/* Page 3 content */</div>
   <div>/* Page 4 content */</div>
 </goa-pages>
-<goa-button-group alignment="center">
-  <goa-button (_click)="setPage(step - 1)" type="tertiary">Previous</goa-button>
-  <goa-button (_click)="setPage(step + 1)" type="tertiary">Next</goa-button>
-</goa-button-group>
+<div style="display: flex; justify-content: space-between">
+  <goa-button (_click)="setPage(step - 1)" type="secondary">Previous</goa-button>
+  <goa-button (_click)="setPage(step + 1)" type="primary">Next</goa-button>
+</div>

@@ -96,7 +96,15 @@ import {
   />
 </Props>
 
-#### Basic
+#### Open navigation
+
+If the service requires, you can allow the user to move forward to a new step before fully completing a step. In this case, the form validation should be run when the user attempts to submit the form at the end of the form stepper process.
+
+- The user can use the stepper to navigate between steps.
+
+- The user does not have to complete all of the information to move to the next step.
+
+Set the step value to -1 for open navigation
 
 export const BasicTemplate = () => {
   const [step, setStep] = useState(-1);
@@ -134,7 +142,7 @@ export const BasicTemplate = () => {
   );
 };
 
-<Story name="Basic">{BasicTemplate.bind({})}</Story>
+<Story name="Open navigation">{BasicTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Angular">
@@ -179,12 +187,22 @@ export const BasicTemplate = () => {
             <div><!-- Page 4 content --></div>
           </GoAPages>
         </>
-      )  
+      )
     `}/>
   </Tab>
 </Tabs>
 
-#### Controlled
+#### Controlled navigation
+
+The user needs to partially or completely finish a step to be able to move forward to the next step. In this case:
+
+- A step that is “Not started” will not be clickable.
+
+- A user cannot use the stepper to navigate to another page.
+
+- Clicking the Active step when you are on that step will do nothing. (no page refresh).
+
+To use the controlled type you must set a step value ≥ 1
 
 export const ControlledTemplate = () => {
   const [step, setStep] = useState(1);
@@ -222,19 +240,19 @@ export const ControlledTemplate = () => {
           <GoASkeleton type="lines" />
         </div>
       </GoAPages>
-      <GoAButtonGroup alignment="center">
-        <GoAButton type="tertiary" onClick={() => setPage(step - 1)}>
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+        <GoAButton type="secondary" onClick={() => setPage(step - 1)}>
           Previous
         </GoAButton>
-        <GoAButton type="tertiary" onClick={() => setPage(step + 1)}>
+        <GoAButton type="primary" onClick={() => setPage(step + 1)}>
           Next
         </GoAButton>
-      </GoAButtonGroup>
+      </div>
     </>
   );
 };
 
-<Story name="Controlled">{ControlledTemplate.bind({})}</Story>
+<Story name="Controlled navigation">{ControlledTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Angular">
@@ -251,10 +269,10 @@ export const ControlledTemplate = () => {
         <div><!-- Page 3 content --></div>
         <div><!-- Page 4 content --></div>
       </goa-pagest>
-      <goa-buttont-group alignment="center">
-        <goa-button (_click)="setPage(step-1)" type="tertiary">Previous</goa-button>
-        <goa-button (_click)="setPage(step+1)" type="tertiary">Next</goa-button>
-      </goa-button-group>
+      <div style="display: flex; justify-content: space-between">
+        <goa-button (_click)="setPage(step-1)" type="secondary">Previous</goa-button>
+        <goa-button (_click)="setPage(step+1)" type="primary">Next</goa-button>
+      </div>
     `}/>
     <CodeSnippet lang="ts" code={`
       export class SomeComponent {
@@ -290,12 +308,12 @@ export const ControlledTemplate = () => {
             <div><!-- Page 3 content --></div>
             <div><!-- Page 4 content --></div>
           </GoAPages>
-          <GoAButtonGroup alignment="center">
-            <GoAButton type="tertiary" onClick={() => setPage(step - 1)}>Previous</GoAButton>
-            <GoAButton type="tertiary" onClick={() => setPage(step + 1)}>Next</GoAButton>
-          </GoAButtonGroup>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <GoAButton type="secondary" onClick={() => setPage(step - 1)}>Previous</GoAButton>
+            <GoAButton type="primary" onClick={() => setPage(step + 1)}>Next</GoAButton>
+          </div>
         </>
-      )  
+      )
     `}/>
   </Tab>
 </Tabs>
@@ -342,21 +360,23 @@ export const StatusTemplate = () => {
           <GoASkeleton type="lines" />
         </div>
       </GoAPages>
-      <GoAButtonGroup alignment="center">
-        <GoAButton type="tertiary" onClick={() => setPage(step - 1)}>
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+        <GoAButton type="secondary" onClick={() => setPage(step - 1)}>
           Previous
         </GoAButton>
-        <GoAButton type="tertiary" onClick={() => setPage(step + 1)}>
+        <GoAButton type="primary" onClick={() => setPage(step + 1)}>
           Next
         </GoAButton>
-      </GoAButtonGroup>
+      </div>
     </>
   );
 };
 
-#### Status
+#### Step status
 
-<Story name="Status">{StatusTemplate.bind({})}</Story>
+The status of each step can be configured to either “complete” or “incomplete” using the status property.
+
+<Story name="Step status">{StatusTemplate.bind({})}</Story>
 
 <Tabs>
   <Tab label="Angular">
@@ -373,10 +393,10 @@ export const StatusTemplate = () => {
         <div><!-- Page 3 content --></div>
         <div><!-- Page 4 content --></div>
       </goa-pages>
-      <goa-button-group alignment="center">
-        <goa-button (_click)="setPage(step-1)" type="tertiary">Previous</goa-button>
-        <goa-button (_click)="setPage(step+1)" type="tertiary">Next</goa-button>
-      </goa-button-group>
+      <div style="display: flex; justify-content: space-between">
+        <goa-button (_click)="setPage(step-1)" type="secondary">Previous</goa-button>
+        <goa-button (_click)="setPage(step+1)" type="primary">Next</goa-button>
+      </div>
     `}/>
     <CodeSnippet lang="ts" code={`
       export class SomeComponent {
@@ -420,12 +440,12 @@ export const StatusTemplate = () => {
             <div><!-- Page 3 content --></div>
             <div><!-- Page 4 content --></div>
           </GoAPages>
-          <GoAButtonGroup alignment="center">
-            <GoAButton type="tertiary" onClick={() => setPage(step - 1)}>Previous</GoAButton>
-            <GoAButton type="tertiary" onClick={() => setPage(step + 1)}>Next</GoAButton>
-          </GoAButtonGroup>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <GoAButton type="secondary" onClick={() => setPage(step - 1)}>Previous</GoAButton>
+            <GoAButton type="primary" onClick={() => setPage(step + 1)}>Next</GoAButton>
+          </div>
         </>
-      )  
+      )
     `}/>
   </Tab>
 </Tabs>
