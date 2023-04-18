@@ -70,7 +70,7 @@ ReactDOM.render(
         <Route path="styles" element={<Styles />} />
         <Route path="table" element={<Table />} />
         <Route path="textarea" element={<TextArea />} />
-        <Route path="three-column-layout" element={<ThreeColumnLayout/>}/>
+        <Route path="three-column-layout" element={<ThreeColumnLayout />} />
       </Route>
     </Routes>
   </BrowserRouter>,

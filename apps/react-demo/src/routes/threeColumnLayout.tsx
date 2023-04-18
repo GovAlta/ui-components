@@ -1,13 +1,27 @@
-import {GoAAppFooter, GoAAppHeader, GoAThreeColumnLayout} from "@abgov/react-components";
+import {
+  GoAAppFooter,
+  GoAAppHeader,
+  GoAThreeColumnLayout,
+} from "@abgov/react-components";
 
 export default function ThreeColumnLayout() {
   const nav = (
     <>
-      <a className="navigation-link" href="#dashboard">Dashboard</a>
-      <a className="navigation-link" href="#accounts">Accounts</a>
-      <a className="navigation-link" href="#invoices">Invoices</a>
-      <a className="navigation-link" href="#employees">Employees</a>
-      <a className="navigation-link" href="#claims">Claims</a>
+      <a className="navigation-link" href="#dashboard">
+        Dashboard
+      </a>
+      <a className="navigation-link" href="#accounts">
+        Accounts
+      </a>
+      <a className="navigation-link" href="#invoices">
+        Invoices
+      </a>
+      <a className="navigation-link" href="#employees">
+        Employees
+      </a>
+      <a className="navigation-link" href="#claims">
+        Claims
+      </a>
     </>
   );
   const sidebar = (
@@ -22,50 +36,50 @@ export default function ThreeColumnLayout() {
       <p>Add main content here.</p>
     </>
   );
-  return(
+  return (
     <>
       <h1>Basic</h1>
       <GoAThreeColumnLayout
-        header={
-          <GoAAppHeader/>
-        }
-        footer={
-          <GoAAppFooter/>
-        }
+        header={<GoAAppHeader />}
+        footer={<GoAAppFooter />}
         nav={nav}
-        sidebar={sidebar}>
+        sidebar={sidebar}
+      >
         {mainContent}
       </GoAThreeColumnLayout>
 
       <h1>Max Content Width</h1>
       <GoAThreeColumnLayout
         maxContentWidth={"100%"}
-        header={<GoAAppHeader/>}
-        footer={<GoAAppFooter/>}
+        header={<GoAAppHeader />}
+        footer={<GoAAppFooter />}
         nav={nav}
-        sidebar={sidebar}>
+        sidebar={sidebar}
+      >
         {mainContent}
       </GoAThreeColumnLayout>
 
       <h1>Nav Column Width</h1>
       <GoAThreeColumnLayout
         leftColumnWidth={"32ch"}
-        header={<GoAAppHeader/>}
-        footer={<GoAAppFooter/>}
+        header={<GoAAppHeader />}
+        footer={<GoAAppFooter />}
         nav={nav}
-        sidebar={sidebar}>
+        sidebar={sidebar}
+      >
         {mainContent}
       </GoAThreeColumnLayout>
 
       <h1>Sidebar Column Width</h1>
       <GoAThreeColumnLayout
         rightColumnWidth={"32ch"}
-        header={<GoAAppHeader/>}
-        footer={<GoAAppFooter/>}
+        header={<GoAAppHeader />}
+        footer={<GoAAppFooter />}
         nav={nav}
-        sidebar={sidebar}>
+        sidebar={sidebar}
+      >
         {mainContent}
       </GoAThreeColumnLayout>
     </>
-  )
+  );
 }

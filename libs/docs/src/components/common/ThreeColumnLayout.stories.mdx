@@ -1,4 +1,4 @@
-import {Meta, Story} from "@storybook/addon-docs";
+import { Meta, Story } from "@storybook/addon-docs";
 import {
   Props,
   Prop,
@@ -16,7 +16,7 @@ import {
   GoAMicrositeHeader,
 } from "@abgov/react-components";
 
-<Meta title="Layouts/Three Column"/>
+<Meta title="Layouts/Three Column" />
 
 # Three column layout
 
@@ -62,13 +62,15 @@ import {
     type="string"
     lang="angular"
     description="Set the maximum width of all three columns. Values can be: px, %, ch etc."
-    defaultValue="100%"/>
+    defaultValue="100%"
+  />
   <Prop
     name="maxContentWidth"
     type="string"
     lang="react"
     description="Set the maximum width of all three columns. Values can be: px, %, ch etc."
-    defaultValue="100%"/>
+    defaultValue="100%"
+  />
   <Prop
     name="header"
     lang="angular"
@@ -103,7 +105,8 @@ import {
     name="nav"
     lang="react"
     type="ReactNode"
-    description="Component containing nav links for application"/>
+    description="Component containing nav links for application"
+  />
   <Prop
     name="sidebar"
     lang="angular"
@@ -122,19 +125,20 @@ import {
 
 <Story name="Basic">
   <GoACallout type="information">
-    For situations where default values of 256px for the nav column and sidebar, and 100% for main content.
+    For situations where default values of 256px for the nav column and sidebar,
+    and 100% for main content.
   </GoACallout>
   <Browser>
     <GoAThreeColumnLayout
       header={
         <>
-          <GoAMicrositeHeader type="alpha" version="UAT"/>
+          <GoAMicrositeHeader type="alpha" version="UAT" />
           <GoAAppHeader url="/" heading="Design System">
             <a href="/login">Sign in</a>
           </GoAAppHeader>
         </>
       }
-      footer={<GoAAppFooter/>}
+      footer={<GoAAppFooter />}
       nav={
         <>
           <a href="#dashboard">Dashboard</a>
@@ -234,18 +238,20 @@ import {
 <Story name="Max Content Width">
   <GoACallout type="information">
     For situations where it is desirable to control the maximum width of the
-    main content area. The nav and sidebar column width are still fully customizable.
+    main content area. The nav and sidebar column width are still fully
+    customizable.
   </GoACallout>
   <Browser>
     <GoAThreeColumnLayout
       header={
         <>
-          <GoAMicrositeHeader type="alpha" version="UAT"/>
+          <GoAMicrositeHeader type="alpha" version="UAT" />
           <GoAAppHeader url="/" heading="Design System" maxContentWidth="100%">
             <a href="/login">Sign in</a>
           </GoAAppHeader>
-        </>}
-      footer={<GoAAppFooter maxContentWidth="100%"/>}
+        </>
+      }
+      footer={<GoAAppFooter maxContentWidth="100%" />}
       maxContentWidth="800px"
       nav={
         <>
@@ -355,13 +361,13 @@ import {
     <GoAThreeColumnLayout
       header={
         <>
-          <GoAMicrositeHeader type="alpha" version="UAT"/>
+          <GoAMicrositeHeader type="alpha" version="UAT" />
           <GoAAppHeader url="/" heading="Design System" maxContentWidth="100%">
             <a href="/login">Sign in</a>
           </GoAAppHeader>
         </>
       }
-      footer={<GoAAppFooter/>}
+      footer={<GoAAppFooter />}
       leftColumnWidth="16ch"
       nav={
         <>
@@ -462,25 +468,24 @@ import {
   </Tab>
 </Tabs>
 
-
 #### Sidebar column width
 
 <Story name="Sidebar Column Width">
   <GoACallout type="information">
-    For situations where it is desirable to control how wide the sidebar column is
-    and have the content area occupy the remaining page width.
+    For situations where it is desirable to control how wide the sidebar column
+    is and have the content area occupy the remaining page width.
   </GoACallout>
   <Browser>
     <GoAThreeColumnLayout
       header={
         <>
-          <GoAMicrositeHeader type="alpha" version="UAT"/>
+          <GoAMicrositeHeader type="alpha" version="UAT" />
           <GoAAppHeader url="/" heading="Design System" maxContentWidth="100%">
             <a href="/login">Sign in</a>
           </GoAAppHeader>
         </>
       }
-      footer={<GoAAppFooter/>}
+      footer={<GoAAppFooter />}
       rightColumnWidth="16ch"
       nav={
         <>

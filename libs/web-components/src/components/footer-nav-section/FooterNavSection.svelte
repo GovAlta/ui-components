@@ -70,6 +70,7 @@
   .title {
     font-size: var(--goa-font-size-7);
     line-height: var(--goa-line-height-4);
+    padding-bottom: var(--goa-space-l);
   }
 
   .hidden {

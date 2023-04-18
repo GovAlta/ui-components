@@ -1,4 +1,4 @@
-import {render} from "@testing-library/react";
+import { render } from "@testing-library/react";
 import ThreeColumnLayout from "./three-column-layout";
 import { GoAAppHeader } from "../app-header/app-header";
 import { GoAAppFooter } from "../footer/footer";
@@ -26,7 +26,7 @@ describe("ThreeColumnLayout", () => {
         header={<GoAAppHeader />}
         footer={<GoAAppFooter />}
         nav={<Links />}
-        sidebar={<SideBar/>}
+        sidebar={<SideBar />}
       >
         <h1>Heading</h1>
         <p>
@@ -42,8 +42,12 @@ describe("ThreeColumnLayout", () => {
     expect(baseElement.innerHTML).toContain("<goa-app-header>");
     expect(baseElement.innerHTML).toContain("<goa-app-footer>");
     expect(baseElement.querySelectorAll("[slot=nav] a").length).toEqual(5);
-    expect(baseElement.querySelector("[slot=sidebar] h2").innerHTML).toContain("Sidebar");
-    expect(baseElement.querySelector("[slot=sidebar] p").innerHTML).toContain("Add content.");
+    expect(baseElement.querySelector("[slot=sidebar] h2").innerHTML).toContain(
+      "Sidebar"
+    );
+    expect(baseElement.querySelector("[slot=sidebar] p").innerHTML).toContain(
+      "Add content."
+    );
   });
 
   it("should render leftColumnWidth, rightColumnWidth, maxContentWidth accordingly", () => {
@@ -52,7 +56,7 @@ describe("ThreeColumnLayout", () => {
         header={<GoAAppHeader />}
         footer={<GoAAppFooter />}
         nav={<Links />}
-        sidebar={<SideBar/>}
+        sidebar={<SideBar />}
         leftColumnWidth="20%"
         rightColumnWidth="300px"
         maxContentWidth="50%"
@@ -65,7 +69,9 @@ describe("ThreeColumnLayout", () => {
       </ThreeColumnLayout>
     );
 
-    const goaThreeColumnLayout = baseElement.querySelector("goa-three-column-layout");
+    const goaThreeColumnLayout = baseElement.querySelector(
+      "goa-three-column-layout"
+    );
     expect(goaThreeColumnLayout).toBeTruthy();
     expect(goaThreeColumnLayout.getAttribute("leftcolumnwidth")).toBe("20%");
     expect(goaThreeColumnLayout.getAttribute("rightcolumnwidth")).toBe("300px");
