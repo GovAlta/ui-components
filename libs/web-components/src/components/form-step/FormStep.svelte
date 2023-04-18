@@ -92,6 +92,11 @@
     width: 2.5rem;
   }
 
+  .status > * {
+    fill: var(--fill-color, var(--goa-color-interactive-default));
+    color: var(--fill-color, var(--goa-color-interactive-default));
+  }
+
   [aria-current="step"] .text {
     font-weight: var(--goa-font-weight-bold)
   }
