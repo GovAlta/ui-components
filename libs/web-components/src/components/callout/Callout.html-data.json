@@ -13,6 +13,11 @@
       "description": "Callout heading text"
     },
     {
+      "name": "size",
+      "description": "Define the size of the callouts.",
+      "values": [{"name": "medium"}, {"name": "large"}]
+    },
+    {
       "name": "mt",
       "description": "Top margin",
       "valueSet": "spacing"

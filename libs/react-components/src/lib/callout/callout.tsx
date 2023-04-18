@@ -8,9 +8,12 @@ type CalloutType =
   | "success"
   | "emergency";
 
+type CalloutSize = "medium" | "large";
+
 interface WCProps extends Margins {
   heading?: string;
   type?: CalloutType;
+  size?: CalloutSize;
 }
 
 declare global {
@@ -25,6 +28,7 @@ declare global {
 export interface CalloutProps extends Margins {
   heading?: string;
   type?: CalloutType;
+  size?: CalloutSize;
   testId?: string;
   children?: React.ReactNode;
 }
@@ -32,6 +36,7 @@ export interface CalloutProps extends Margins {
 export const GoACallout = ({
   heading,
   type = "information",
+  size = "large",
   testId,
   children,
   mt,
@@ -43,6 +48,7 @@ export const GoACallout = ({
     <goa-callout
       heading={heading}
       type={type}
+      size={size}
       mt={mt}
       mr={mr}
       mb={mb}
