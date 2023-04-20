@@ -137,6 +137,8 @@
   button.compact {
     height: var(--button-height-compact);
     font-size: var(--goa-font-size-4);
+    padding-left: var(--goa-space-xs);
+    padding-right: var(--goa-space-xs);
   }
 
   button.start {
