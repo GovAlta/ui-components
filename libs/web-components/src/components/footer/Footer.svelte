@@ -40,7 +40,13 @@
   }
   @media (min-width: 640px) {
     .content {
-      padding: 2rem 1.5rem;
+      padding: 2rem 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .content {
+      padding: 2rem 4.5rem;
     }
   }
 

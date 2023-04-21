@@ -9,6 +9,7 @@ export type NotificationType =
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
   type: NotificationType;
+  maxcontentwidth?: string;
 }
 
 declare global {
@@ -22,6 +23,7 @@ declare global {
 
 interface Props {
   type?: NotificationType;
+  maxContentWidth?: string;
   children?: React.ReactNode;
   onDismiss?: () => void;
   testId?: string;
@@ -29,6 +31,7 @@ interface Props {
 
 export const GoANotification = ({
   type = "information",
+  maxContentWidth,
   children,
   testId,
   onDismiss,
@@ -51,7 +54,12 @@ export const GoANotification = ({
   }, [el, onDismiss]);
 
   return (
-    <goa-notification ref={el} type={type} data-testid={testId}>
+    <goa-notification
+      ref={el}
+      type={type}
+      data-testid={testId}
+      maxcontentwidth={maxContentWidth}
+    >
       {children}
     </goa-notification>
   );

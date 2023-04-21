@@ -13,19 +13,27 @@
     ["emergency", "important", "information", "event", "success"],
     true,
   );
+  const [CalloutSizes, validateCalloutSize] = typeValidator("Callout size",
+    ["medium", "large"]
+  );
 
   //Type
   type CalloutType = typeof Types[number];
+  type CalloutSize = typeof CalloutSizes[number];
 
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = "l";
   export let ml: Spacing = null;
-
+  export let size: CalloutSize = "large";
   export let type: CalloutType;
   export let heading: string = "";
   export let testid: string = "";
+  let screenSize = 0;
+  let iconSize = "medium";
+
+  $: isMediumCallout = screenSize < 640 || size === "medium";
 
   $: iconType =
     type === "emergency"
@@ -41,22 +49,32 @@
       : "";
 
   onMount(() => {
-    setTimeout(() => validateType(type), 1);
+    validateCalloutSize(size);
+    setTimeout(() => {
+      validateType(type);
+      iconSize = isMediumCallout ? "small" : "medium";
+    })
   });
 </script>
 
 <!-- HTML -->
+<svelte:window bind:innerWidth={screenSize} />
 <div
   style={calculateMargin(mt, mr, mb, ml)}
   class="notification"
+  class:medium={isMediumCallout}
   data-testid={testid}
 >
   <span class="icon {type}">
-    <goa-icon type={iconType} inverted={type === "important" ? "false" : "true"} />
+    <goa-icon
+      type={iconType}
+      size={iconSize}
+      inverted={type === "important" ? "false" : "true"}
+    />
   </span>
   <span class="content">
     {#if heading }
-      <h3>{heading}</h3>
+      <h3 class:medium={isMediumCallout}>{heading}</h3>
     {/if}
     <slot />
   </span>
@@ -71,15 +89,16 @@
   .notification {
     display: flex;
     align-items: stretch;
-    border-radius: 3px;
     overflow: hidden;
+    font: var(--goa-typography-body-m);
   }
 
   h3 {
     font-size: var(--goa-font-size-7);
     line-height: var(--goa-line-height-2);
     font-weight: var(--goa-font-weight-regular);
-    margin-top: 0;
+    margin-top: var(--goa-space-none);
+    margin-bottom: var(--goa-space-m);
   }
 
   .emergency {
@@ -99,13 +118,32 @@
   }
 
   .icon {
-    flex: 0 0 3rem;
     text-align: center;
-    padding-top: 1.75rem;
+    padding-top: var(--goa-space-l);
+    padding-left: var(--goa-space-s);
+    padding-right: var(--goa-space-s);
   }
   .content {
     flex: 1 1 auto;
     background-color: var(--goa-color-greyscale-100);
-    padding: 1.75rem;
+    padding: var(--goa-space-l);
+  }
+  /*Medium callout style*/
+  .notification.medium {
+    font: var(--goa-typography-body-s);
+    max-width: 22rem;
+  }
+  h3.medium {
+    font: var(--goa-typography-heading-xs);
+    margin-bottom: var(--goa-space-2xs);
+  }
+  .notification.medium .content {
+    padding: var(--goa-space-s);
+    margin-top: calc(-1 * var(--goa-space-3xs));
+  }
+  .notification.medium .icon {
+    padding-top: var(--goa-space-s);
+    padding-left: var(--goa-space-2xs);
+    padding-right: var(--goa-space-2xs);
   }
 </style>

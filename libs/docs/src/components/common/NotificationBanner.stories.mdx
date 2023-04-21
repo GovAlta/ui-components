@@ -47,6 +47,12 @@ import { useState } from "react";
     type="() => void"
     description="Dispatched when notification banner is closed."
   />
+  <Prop
+    name="maxContentWidth"
+    type="string"
+    defaultValue="100%"
+    description="Maximum width of the content area"
+  />
 </Props>
 
 ### Types
@@ -133,6 +139,50 @@ import { useState } from "react";
         <GoANotification type="important" onDismiss={() => console.log("dismissed")}><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></GoANotification>
         <GoANotification type="emergency" onDismiss={() => console.log("dismissed")}><a href="https://example.com">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></GoANotification>
         <GoANotification type="event" onDismiss={() => console.log("dismissed")}>Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</GoANotification>
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Max Content Width
+
+You can change the maximum width of the notification banner by setting the `maxContentWidth` property.
+
+<Story name="Max Content Width">
+  <GoANotification
+    type="event"
+    onDismiss={() => console.log("dismissed")}
+    maxContentWidth="600px"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor
+    sit amet, consectetur adipiscing elit.
+  </GoANotification>
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-notification type="event" (_dismiss)="onDismiss()" maxcontentwidth="600px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</goa-notification>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      code={`
+        export class SomeOtherComponent {
+          onDismiss() {
+            console.log('dismissed');
+          }
+        }
+      `}
+      lang="ts"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+       <GoANotification type="event" onDismiss={() => console.log("dismissed")} maxContentWidth="600px">Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit.</GoANotification>
     `}
       lang="tsx"
     />

@@ -66,12 +66,8 @@
     margin: 0 auto;
     background-color: var(--goa-color-greyscale-white);
     border-bottom: 1px solid var(--goa-color-greyscale-100);
+    padding: 1rem 1rem;
   }
-    @media (max-width: 640px) {
-      .app-header {
-        padding: 1rem 1rem;
-      }
-    }
 
   .content {
     margin: 0 auto;
@@ -82,8 +78,14 @@
 
   }
   @media (min-width: 640px) {
-    .content {
-      padding: 1.5rem 1.125rem;
+    .app-header {
+      padding: 1.5rem 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .app-header {
+      padding: 1.5rem 4.5rem;
     }
   }
 

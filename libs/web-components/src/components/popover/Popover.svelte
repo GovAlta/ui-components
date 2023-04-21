@@ -3,6 +3,7 @@
 <!-- Script -->
 <script lang="ts">
   import { onMount, tick,onDestroy } from "svelte";
+  import { calculateMargin, Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
 
   export let testid: string = "";
@@ -11,6 +12,14 @@
 
   let _isContentVisible = false;
   let _targetEl: HTMLElement;
+  let _popoverEl: HTMLElement;
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
+
 
 
   $: paddedContent = toBoolean(padded);
@@ -24,8 +33,10 @@
     removeEventListeners();
   });
 
-  function showPopover() {
+  async function showPopover() {
     _isContentVisible = true;
+    await tick();
+    setPopoverPosition();
   }
 
   function closePopover() {
@@ -46,6 +57,56 @@
     }
   };
 
+  function getBoundingClientRectWithMargins(el: Element): Omit<DOMRect, 'toJSON'> {
+    const rect = el.getBoundingClientRect();
+    const style = window.getComputedStyle(el);
+    const mTop = parseInt(style.marginTop, 10) || 0;
+    const mRight = parseInt(style.marginRight, 10) || 0;
+    const mBottom = parseInt(style.marginBottom, 10) || 0;
+    const mLeft = parseInt(style.marginLeft, 10) || 0;
+
+    return {
+      top: rect.top - mTop,
+      right: rect.right + mRight,
+      bottom: rect.bottom + mBottom,
+      left: rect.left - mLeft,
+      width: rect.width + mLeft + mRight,
+      height: rect.height + mTop + mBottom,
+      x: rect.x - mLeft,
+      y: rect.y - mTop,
+    };
+  }
+
+
+  function setPopoverPosition() {
+    // Get target and content rectangles
+    const targetRect = getBoundingClientRectWithMargins(_targetEl);
+    const contentRect = getBoundingClientRectWithMargins(_popoverEl);
+
+    // Calculate available space above and below the target element
+    const spaceAbove = targetRect.top;
+    const spaceBelow = window.innerHeight - targetRect.bottom;
+
+    // Determine if there's more space above or below the target element
+    const displayAbove = spaceAbove > contentRect.height &&
+                        spaceAbove > spaceBelow &&
+                        spaceBelow < contentRect.height;
+
+    // If there's more space above, display the popover above the target element
+    if (displayAbove) {
+      _popoverEl.style.top = `${-contentRect.height -targetRect.height - 4}px`;
+    } else {
+      _popoverEl.style.top = '0px';
+    }
+
+    // Move the popover to the left if it is too far to the right and only if there is space to the left
+    if (window.innerWidth - targetRect.right < contentRect.width && targetRect.left > contentRect.width) {
+      _popoverEl.style.left = `-${(contentRect.width - targetRect.width)}px`;
+    } else {
+      _popoverEl.style.left = '0px';
+    }
+  }
+
   function addFocusEventListener() {
     _targetEl.addEventListener("focus", onFocus, true);
   }
@@ -65,7 +126,9 @@
 <!-- HTML -->
 
 <div
-  data-testid={testid}>
+  data-testid={testid}
+  style={calculateMargin(mt, mr, mb, ml)}
+  >
   <div class="popover-target"
     bind:this={_targetEl}
     on:click={showPopover}
@@ -82,13 +145,15 @@
       class="popover-background"
       on:click={closePopover}
     />
-    <div class="popover-container">
+    <div class="popover-container"
+    >
       <section data-testid="popover-content"
        class="popover-content"
        style="
         max-width: {maxwidth};
-        padding: {paddedContent ? 'var(--goa-space-m)' : '0'}
+        padding: {paddedContent ? 'var(--goa-space-m)' : '0'};
        "
+       bind:this={_popoverEl}
       >
         <slot />
       </section>
@@ -124,10 +189,10 @@
     margin-top: 3px;
     list-style-type: none;
     background: var(--goa-color-greyscale-white);
-    border-radius: var(--goa-border-radius-m);
     outline: none;
-    box-shadow: var(--shadow-1);
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
     z-index: 99;
+    width: max-content;
   }
 
   .popover-background {

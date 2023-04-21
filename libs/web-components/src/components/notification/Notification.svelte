@@ -4,7 +4,7 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
-  import { typeValidator, toBoolean } from "../../common/utils";
+  import { typeValidator } from "../../common/utils";
 
   // Validator
   const [Types, validateType] = typeValidator(
@@ -17,6 +17,7 @@
   type NotificationType = (typeof Types)[number];
 
   export let type: NotificationType = "";
+  export let maxcontentwidth = "100%";
 
   let show = true;
   $: iconType =
@@ -43,17 +44,19 @@
 
 <!-- HTML -->
 {#if show}
-  <div transition:fade class="notification {type}">
-    <div class="icon">
-      <goa-icon type={iconType} inverted={type === "important" ? "false" : "true"} />
-    </div>
-    <div class="content">
-      <slot />
-    </div>
-    <div class="close">
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <goa-icon-button on:click={close} icon="close" variant="dark"
-        inverted={type === "important" ? "false" : "true"}/>
+  <div transition:fade class="notification {type}" style={`--max-content-width: ${maxcontentwidth}`}>
+    <div class="content-container">
+      <div class="icon">
+        <goa-icon type={iconType} inverted={type === "important" ? "false" : "true"} />
+      </div>
+      <div class="content">
+        <slot />
+      </div>
+      <div class="close">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <goa-icon-button on:click={close} icon="close" variant="dark"
+          inverted={type === "important" ? "false" : "true"}/>
+      </div>
     </div>
   </div>
 {/if}
@@ -65,10 +68,22 @@
     font-family: var(--goa-font-family-sans);
   }
   .notification {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
     display: flex;
-    gap: 1rem;
   }
+
+  @media (min-width: 640px) {
+    .notification {
+      padding: 1.5rem 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .notification {
+      padding: 1.5rem 4.5rem;
+    }
+  }
+
 
   .emergency {
     background-color: var(--goa-color-emergency-default);
@@ -92,6 +107,16 @@
   .icon {
     flex: 0 0 auto;
   }
+
+  .content-container {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    gap: 1rem;
+    margin: 0 auto;
+    max-width: min(var(--max-content-width), 100%);
+  }
+
   .content {
     flex: 1 1 auto;
   }

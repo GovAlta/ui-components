@@ -2,7 +2,6 @@ import { Meta } from "@storybook/addon-docs";
 import {
   Tabs,
   Tab,
-  Note,
   CodeSnippet,
   SupportInfo,
   Props,
@@ -30,6 +29,12 @@ import { GoACallout } from "@abgov/react-components";
     description="Define the context and colour of the callout"
   />
   <Prop name="heading" type="string" description="Callout heading text" />
+  <Prop
+    name="size"
+    type="medium | large"
+    defaultValue="large"
+    description="The medium callout has reduced padding and type size to adjust for a compact area and smaller viewport width when a smaller size is required."
+  />
 </Props>
 
 <details>
@@ -271,6 +276,60 @@ Event callouts are used to communiate information about upcoming and scheduled e
       lang="jsx"
       code={`
       <GoACallout type="event" heading="Event callout">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Medium Callouts
+The medium callout has reduced padding and type size to adjust for a compact area and smaller viewport width when a smaller size is required. The large callout will responsively transform into the small callout below a 640px viewport width. The small callout may also be used on desktop.
+
+<Story name="Medium">
+  <GoACallout type="information" heading="Info callout" size="medium">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+  <GoACallout type="information" size="medium">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </GoACallout>
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="information" heading="Info callout" size="medium">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+      <goa-callout type="information" size="medium">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-callout type="information" heading="Info callout" size="medium">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+      <goa-callout type="information" size="medium">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </goa-callout>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoACallout type="information" heading="Info callout" size="medium">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </GoACallout>
+      <GoACallout type="information" size="medium">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
     `}

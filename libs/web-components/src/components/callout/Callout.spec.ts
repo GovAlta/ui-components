@@ -82,6 +82,18 @@ describe('GoACalloutComponent', () => {
     const heading = el.querySelector('h3');
     expect(heading).toBeNull();
   });
+  it("should render - with size medium", async() => {
+    const baseElement = render(GoACallout, { type: "emergency", size: "medium", heading: "Heading", testid: "testid" });
+    const el = baseElement.queryByTestId("testid");
+
+    const heading = el.querySelector("h3.medium");
+    expect(heading).toHaveClass("medium");
+
+    setTimeout(() => {
+      const icon = el.querySelector("goa-icon");
+      expect(icon).toHaveAttribute("size", "small");
+    });
+  });
 
   describe("Margins", () => {
     it(`should add the margin`, async () => {

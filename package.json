@@ -49,7 +49,7 @@
   },
   "private": true,
   "dependencies": {
-    "@abgov/design-tokens": "^1.1.0",
+    "@abgov/design-tokens": "^1.1.1",
     "@angular/animations": "^12.2.0",
     "@angular/cdk": "12.2.13",
     "@angular/common": "12.2.13",

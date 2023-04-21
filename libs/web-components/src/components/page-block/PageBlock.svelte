@@ -52,6 +52,16 @@
   .page-content {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 1.75rem;
+    padding: 0 1rem;
+  }
+  @media (min-width: 640px) {
+    .page-content {
+      padding: 0 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .page-content {
+      padding: 0 4.5rem;
+    }
   }
 </style>

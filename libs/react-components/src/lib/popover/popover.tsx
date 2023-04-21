@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
-interface WCProps {
+interface WCProps extends Margins {
   maxwidth?: string;
   padded?: boolean;
 }
@@ -15,7 +15,7 @@ declare global {
   }
 }
 
-interface Props {
+interface Props extends Margins {
   target?: ReactNode;
   testId?: string;
   maxWidth?: string;
@@ -28,9 +28,21 @@ export const GoAPopover: FC<Props> = ({
   maxWidth,
   padded,
   children,
+  mt,
+  mr,
+  mb,
+  ml,
 }) => {
   return (
-    <goa-popover data-testid={testId} maxwidth={maxWidth} padded={padded}>
+    <goa-popover
+      data-testid={testId}
+      maxwidth={maxWidth}
+      padded={padded}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+    >
       {children}
       {target && <div slot="target">{target}</div>}
     </goa-popover>

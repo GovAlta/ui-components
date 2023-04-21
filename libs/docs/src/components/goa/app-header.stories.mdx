@@ -208,7 +208,7 @@ Custom content can be added to the header by passing it in as a child component(
 You can change the maximum width of the app header
 
 <Story name="Max Content Width">
-  <GoAMicrositeHeader type="live" />
+  <GoAMicrositeHeader type="live" maxContentWidth="600px" />
   <GoAAppHeader
     url="https://example.com"
     heading="Ticket and Fine Payments"
@@ -224,7 +224,7 @@ You can change the maximum width of the app header
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header type="live"/>
+      <goa-microsite-header type="live" maxcontentwidth="600px"/>
       <goa-app-header url="https://example.com" heading="Ticket and Find Payments" maxContentWidth="600px">
         <a href="#">Login</a> &nbsp;
         <a href="#">Help</a>
@@ -236,7 +236,7 @@ You can change the maximum width of the app header
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header type="live"></goa-microsite-header>
+      <goa-microsite-header type="live" maxContentWidth="600px"></goa-microsite-header>
       <goa-app-header url="https://example.com" heading="Ticket and Find Payments" maxContentWidth="600px">
         <a href="#">Login</a> &nbsp;
         <a href="#">Help</a>
@@ -248,7 +248,7 @@ You can change the maximum width of the app header
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoAMicrositeHeader type="live"/>
+      <GoAMicrositeHeader type="live" maxContentWidth="600px"/>
       <GoAAppHeader url="https://example.com" heading="Ticket and Find Payments" maxContentWidth="600px">
         <a href="#">Login</a>
         <a href="#">Help</a>

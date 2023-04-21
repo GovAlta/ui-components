@@ -66,17 +66,18 @@
     padding: var(--goa-space-l);
   }
 
-  [role="listitem"]:not([aria-disabled="true"]):focus-within,
-  [role="listitem"]:not([aria-disabled="true"]):focus,
-  [role="listitem"]:not([aria-disabled="true"]):active
+  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):focus-within,
+  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):focus,
+  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):active
   {
     outline: var(--goa-color-interactive-focus) solid var(--goa-border-width-l);
   }
 
-  [role="listitem"]:not([aria-disabled="true"]):hover {
+  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):hover {
     background-color: rgba(0,0,0,0.05);
     cursor: pointer;
   }
+
 
   .status {
     flex: 0 0 auto;
@@ -89,6 +90,11 @@
     background: var(--goa-color-greyscale-white);
     height: 2.5rem;
     width: 2.5rem;
+  }
+
+  .status > * {
+    fill: var(--fill-color, var(--goa-color-interactive-default));
+    color: var(--fill-color, var(--goa-color-interactive-default));
   }
 
   [aria-current="step"] .text {
@@ -153,7 +159,7 @@
   aria-current={_isCurrent ? "step" : "false"}
   aria-label={`${arialabel} ${text} ${status || ""}`}
 >
-  <input id={text} bind:this={_checkbox} type="checkbox" checked={_isCurrent} disabled={!_isEnabled} />
+  <input id={text} bind:this={_checkbox} type="checkbox" checked={_isCurrent} aria-disabled={!_isEnabled}/>
   <div
     data-testid="status"
     class="status">

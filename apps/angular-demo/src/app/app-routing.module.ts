@@ -34,6 +34,7 @@ import { StylesComponent } from "./styles/styles.component";
 import { TableComponent } from "./table/table";
 import { TextAreaComponent } from "./text-area/text-area.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
+import { ThreeColumnLayoutComponent } from "./three-column-layout/three-column-layout.component";
 
 const routes: Routes = [
   { path: "accordion", component: AccordionComponent },
@@ -69,6 +70,7 @@ const routes: Routes = [
   { path: "table", component: TableComponent },
   { path: "textarea", component: TextAreaComponent },
   { path: "two-column-layout", component: TwoColumnLayoutComponent },
+  { path: "three-column-layout", component: ThreeColumnLayoutComponent },
   { path: "", redirectTo: "/input", pathMatch: "full" },
 ];
 

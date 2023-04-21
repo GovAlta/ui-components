@@ -7,6 +7,7 @@ describe("Callout", () => {
       <GoACallout
         type="information"
         heading="Callout Title"
+        size="medium"
         mt="s"
         mr="m"
         mb="l"
@@ -20,6 +21,7 @@ describe("Callout", () => {
     const el = result.container.querySelector("goa-callout");
     expect(el.getAttribute("heading")).toContain("Callout Title");
     expect(el.getAttribute("type")).toContain("information");
+    expect(el.getAttribute("size")).toContain("medium");
     expect(el.getAttribute("mt")).toBe("s");
     expect(el.getAttribute("mr")).toBe("m");
     expect(el.getAttribute("mb")).toBe("l");

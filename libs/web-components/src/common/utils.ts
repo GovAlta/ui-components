@@ -53,11 +53,11 @@ export function getTimestamp(val?: Date) {
     hour24 === 0 && 12
     || hour24 > 12 && hour24 - 12
     || hour24;
-  const meridium = 
+  const meridium =
     hour24 === 0 && "AM"
     || hour24 >= 12 && "PM"
     || "AM";
-  const min = 
+  const min =
     min0 < 10 && `0${min0}`
     || min0;
   const ordinal

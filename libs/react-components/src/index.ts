@@ -51,3 +51,4 @@ export * from "./lib/spinner/spinner";
 export * from "./lib/table/table";
 export * from "./lib/textarea/textarea";
 export * from "./lib/two-column-layout/two-column-layout";
+export * from "./lib/three-column-layout/three-column-layout";

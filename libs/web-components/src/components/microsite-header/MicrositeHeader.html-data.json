@@ -14,6 +14,12 @@
       "name": "feedbackUrl",
       "type": "string",
       "description": "Url to feedback page that will be displayed when provided."
+    },
+    {
+      "name": "maxContentWidth",
+      "default": "100%",
+      "description": "Maximum width of the content area",
+      "type": "string"
     }
   ],
   "references": [

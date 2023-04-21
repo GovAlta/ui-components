@@ -10,6 +10,12 @@
     {
       "name": "_dismiss",
       "description": "Dispatched when notification banner is closed."
+    },
+    {
+      "name": "maxContentWidth",
+      "default": "100%",
+      "description": "Maximum width of the content area",
+      "type": "string"
     }
   ],
   "references": [

@@ -32,6 +32,7 @@ import Skeleton from "./routes/skeleton";
 import Styles from "./routes/styles";
 import Table from "./routes/table";
 import TextArea from "./routes/textarea";
+import ThreeColumnLayout from "./routes/threeColumnLayout";
 
 import "@abgov/web-components/index.css";
 
@@ -69,6 +70,7 @@ ReactDOM.render(
         <Route path="styles" element={<Styles />} />
         <Route path="table" element={<Table />} />
         <Route path="textarea" element={<TextArea />} />
+        <Route path="three-column-layout" element={<ThreeColumnLayout />} />
       </Route>
     </Routes>
   </BrowserRouter>,

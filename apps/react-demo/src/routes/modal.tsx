@@ -78,18 +78,16 @@ export default function Modal() {
           None
         </GoAButton>
         <GoAButton type="tertiary" onClick={() => show("slow")}>
-          {" "}
           Slow
         </GoAButton>
         <GoAButton type="tertiary" onClick={() => show("fast")}>
-          {" "}
           Fast
         </GoAButton>
       </GoAButtonGroup>
       <GoAModal
         heading="Do you agree?"
         open={showModal3}
-        onClose={() => setShowModal2(false)}
+        onClose={() => setShowModal3(false)}
         transition={speed}
       >
         <p>
@@ -104,7 +102,7 @@ export default function Modal() {
           onClick={() => {
             setShowModal3(false);
             // setTimeout(() => navigate("/input"), 300) } // will allow any modal animations to be run
-            navigate("/input");
+            // navigate("/input");
           }}
         >
           Click
