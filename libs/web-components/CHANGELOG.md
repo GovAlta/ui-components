@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2023-04-21
+- Added a 3-column layout: https://ui-components.alberta.ca/?path=/docs/layouts-three-column--basic
+- Added a smaller callout variant for space-efficient use on small screens.
+- Enhanced Popover component with dynamic positioning, allowing it to appear above, below, or to the left and right as needed.
+- Removed the Alberta logo from the “production” Microsite header, increasing space for content on narrow screens.
+- Fixed icon overrides for “pencil,” “checkmark,” and “remove.”
+- Removed click effects on the active step of the Stepper component.
+- Improved accessibility by indicating disabled stepper steps to screen readers.
+- Enabled programmatic control of the Modal’s opening and closing through the “open” property.
+- Increased spacing between the Footer’s header and underline.
+- Updated the Table header’s border-bottom color to grey-600.
+
 ## [1.9.0] - 2023-04-11
 
 - New component [File Upload](https://ui-components.alberta.ca/?path=/docs/components-file-upload--basic)
