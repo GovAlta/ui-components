@@ -28,6 +28,12 @@ import { Meta, Story } from "@storybook/addon-docs";
     type="string"
     description="Url to feedback page that will be displayed when provided."
   />
+  <Prop
+    name="maxContentWidth"
+    type="string"
+    defaultValue="100%"
+    description="Maximum width of the content area"
+  />
 </Props>
 
 #### Alpha
@@ -194,6 +200,44 @@ import { Meta, Story } from "@storybook/addon-docs";
       lang="jsx"
       code={`
       <GoAMicrositeHeader type="alpha" version="v1.2.3" feedbackUrl="https://example.com/feedback" />
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Max Content Width
+
+<Story name="Max Content Width">
+  <GoAMicrositeHeader
+    type="alpha"
+    version="v1.2.3"
+    feedbackUrl="https://example.com/feedback"
+    maxContentWidth="600px"
+  />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header type="alpha" version="v1.2.3" feedbackurl="https://example.com/feedback" maxcontentwidth="600px"/>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header type="alpha" version="v1.2.3" feedbackUrl="https://example.com/feedback" maxContentWidth="600px"></goa-microsite-header>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoAMicrositeHeader type="alpha" version="v1.2.3" feedbackUrl="https://example.com/feedback" maxContentWidth="600px"/>
     `}
     />
   </Tab>

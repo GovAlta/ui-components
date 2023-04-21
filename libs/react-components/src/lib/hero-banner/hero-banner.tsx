@@ -4,6 +4,7 @@ interface WCProps {
   heading: string;
   backgroundurl: string;
   minheight?: string;
+  maxcontentwidth?: string;
 }
 
 declare global {
@@ -21,12 +22,14 @@ interface Props {
   minHeight?: string;
   testId?: string;
   children?: React.ReactNode;
+  maxContentWidth?: string;
 }
 
 export const GoAHeroBanner: FC<Props> = ({
   heading,
   backgroundUrl,
   minHeight,
+  maxContentWidth,
   children,
   testId,
 }) => {
@@ -35,6 +38,7 @@ export const GoAHeroBanner: FC<Props> = ({
       heading={heading}
       backgroundurl={backgroundUrl}
       minheight={minHeight}
+      maxcontentwidth={maxContentWidth}
       data-testid={testId}
     >
       {children}

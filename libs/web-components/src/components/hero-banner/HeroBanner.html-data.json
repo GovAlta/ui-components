@@ -17,6 +17,12 @@
       "type": "string",
       "description": "Sets the height of the HeroBanner",
       "default": "600px"
+    },
+    {
+      "name": "maxContentWidth",
+      "default": "100%",
+      "description": "Maximum width of the content area",
+      "type": "string"
     }
   ],
   "references": [

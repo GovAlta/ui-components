@@ -6,6 +6,7 @@
   export let heading: string;
   export let backgroundurl: string;
   export let minheight: string = "600px";
+  export let maxcontentwidth = "100%";
 
 </script>
 
@@ -18,10 +19,10 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: {minheight}
+    min-height: {minheight};
     "
 >
-  <goa-page-block width="full">
+  <goa-page-block width={maxcontentwidth || "full"}>
     <h1>{heading}</h1>
     <div class="goa-hero-banner-content" role="note">
       <slot />
