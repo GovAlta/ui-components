@@ -79,3 +79,12 @@
   [formControl]="reactiveFormCtrl"
   [value]="reactiveFormCtrl.value"
 ></goa-checkbox>
+
+<h2>Reactive Binding [Disabled]</h2>
+<goa-checkbox
+  goaValue
+  name="desserts"
+  text="Ice Cream"
+  [formControl]="reactiveFormCtrl"
+  [attr.disabled]="true"
+></goa-checkbox>

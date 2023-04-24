@@ -90,6 +90,14 @@ import { Meta, Story } from "@storybook/addon-docs";
   />
   <Prop
     name="disabled"
+    lang="angular"
+    type="boolean"
+    defaultValue="false"
+    description="Disables this input. The input will not receive focus or events. **Use [attr.disabled] with [formControl]**"
+  />
+  <Prop
+    name="disabled"
+    lang="react"
     type="boolean"
     defaultValue="false"
     description="Disable this control. It will not receive focus or events"
@@ -454,8 +462,21 @@ export const DisabledInputTemplate = () => (
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
-      code={`<goa-input disabled="true" placeholder="Find by name"></goa-input>`}
+      code={`
+        <goa-input disabled="true" placeholder="Find by name"></goa-input>
+        <!-- Use [attr.disabled] with [formControl] -->
+        <goa-input goaValue [formControl]="reactiveFormCtrl" [attr.disabled]="true" placeholder="Find by name"></goa-input>
+      `}
       lang="html"
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class SomeComponent {
+          reactiveFormCtrl = new FormControl("reactive form");
+        }
+      `}
     />
   </Tab>
   <Tab label="React">

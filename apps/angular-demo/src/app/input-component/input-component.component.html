@@ -169,3 +169,11 @@
   </div>
   <div slot="trailingContent">SomeText</div>
 </goa-input>
+
+<h2>Reactive binding - Disabled</h2>
+<goa-input
+  goaValue
+  [formControl]="reactiveFormCtrl"
+  [value]="reactiveFormCtrl.value"
+  [attr.disabled]="true"
+></goa-input>
