@@ -32,7 +32,10 @@
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
-  $: isIndeterminate = false; // Desighn review. To be built with TreeView Later
+  $: isIndeterminate = false; // Design review. To be built with TreeView Later
+  $: if(value && (value.toLowerCase() === "checked" || value.toLowerCase() === "true")) {
+    checked = value;
+  };
 
 
   onMount(() => {

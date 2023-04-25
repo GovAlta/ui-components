@@ -48,6 +48,20 @@ describe('GoACheckbox Component', () => {
       expect((checkbox as HTMLInputElement).checked).toBeTruthy();
     });
 
+    ["checked", "true", "Checked", "True"].forEach(value => {
+      it(`can be checked with value set to ${value}`, async () => {
+        const el = await createElement({ value: value });
+        const root = el.container.querySelector('.goa-checkbox--selected');
+        expect(root).toBeTruthy();
+
+        const svg = await el.findByTestId('checkmark');
+        expect(svg).toBeTruthy();
+
+        const checkbox = el.container.querySelector("input");
+        expect((checkbox as HTMLInputElement).checked).toBeTruthy();
+      });
+    });
+
     it("can be disabled", async () => {
       const el = await createElement({ disabled: "true" });
       const root = el.container.querySelector('.goa-checkbox--disabled');
@@ -97,7 +111,7 @@ describe('GoACheckbox Component', () => {
     });
 
     it("handles change event that results in unchecked state", async () => {
-      const el = await createElement({checked:true, value: "foo"});
+      const el = await createElement({ checked: true, value: "foo" });
       const checkbox = el.container.querySelector("input");
       const change = jest.fn();
 

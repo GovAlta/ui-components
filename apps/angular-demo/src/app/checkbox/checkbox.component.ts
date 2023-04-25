@@ -11,10 +11,12 @@ export class CheckboxComponent {
   checkbox2Checked = true;
   checkbox3Checked = false;
   reactiveFormCtrl = new FormControl();
+  testFormCtrl = new FormControl("checked");
+  test1FormCtrl = new FormControl("checked");
   bindingVal = "";
   bindingNoVal = "";
 
-  constructor() {}
+  constructor() { }
 
   onChange() {
     this.checkbox1Checked = !this.checkbox1Checked;
