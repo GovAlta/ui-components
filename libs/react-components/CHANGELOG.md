@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a smaller callout variant for space-efficient use on small screens.
 
 ## [4.9.0] - 2023-04-11
+
 - New component [File Upload](https://ui-components.alberta.ca/?path=/docs/components-file-upload--basic)
 
 ## [4.8.0] - 2023-03-28
