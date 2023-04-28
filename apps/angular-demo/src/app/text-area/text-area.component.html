@@ -45,3 +45,11 @@
   [formControl]="reactiveFormCtrl"
   [value]="reactiveFormCtrl.value"
 ></goa-textarea>
+
+<h2>Reactive Binding - Disabled</h2>
+<goa-textarea
+  name="comment"
+  goaValue
+  [formControl]="reactiveFormCtrl"
+  [attr.disabled]="true"
+></goa-textarea>

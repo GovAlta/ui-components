@@ -66,6 +66,14 @@ export const checkboxTemplate = (args) => {
   />
   <Prop
     name="disabled"
+    lang="angular"
+    type="boolean"
+    defaultValue="false"
+    description="Disable this control. It will not receive focus or events. **Use [attr.disabled] with [formControl]**"
+  />
+  <Prop
+    name="disabled"
+    lang="react"
     type="boolean"
     defaultValue="false"
     description="Disable this control. It will not receive focus or events"
@@ -264,8 +272,21 @@ export const disabledCheckboxTemplate = () => (
   </Tab>
   <Tab label="Angular">
     <CodeSnippet
-      code={`<goa-checkbox name="desserts" text="Ice Cream" value="10" disabled="true"></goa-checkbox>`}
+      code={`
+        <goa-checkbox name="desserts" text="Ice Cream" value="10" disabled="true"></goa-checkbox>
+        <!-- Use [attr.disabled] with [formControl] -->
+        <goa-checkbox name="desserts" text="Ice Cream" value="10" goaValue [formControl]="reactiveFormCtrl" [attr.disabled]="true"></goa-checkbox>
+      `}
       lang="html"
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class SomeComponent {
+          reactiveFormCtrl = new FormControl();
+        }
+      `}
     />
   </Tab>
   <Tab label="React">

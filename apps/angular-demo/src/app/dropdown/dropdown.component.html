@@ -141,7 +141,12 @@
 
 <h4>Disabled</h4>
 
-<goa-dropdown goaValue name="colors123" [formControl]="reactiveFormCtrl">
+<goa-dropdown
+  goaValue
+  name="colors123"
+  [formControl]="reactiveFormCtrl"
+  [attr.disabled]="true"
+>
   <goa-dropdown-item
     *ngFor="let color of colors"
     [value]="color"
