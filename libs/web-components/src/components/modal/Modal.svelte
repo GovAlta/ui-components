@@ -262,15 +262,25 @@
   .content {
     flex: 1 1 auto;
     width: 100%;
-    margin: 2rem;
+    margin: var(--goa-space-xl);
   }
+
   .content header {
     display: flex;
     justify-content: space-between;
   }
 
   .content :global(header.has-content) {
-    margin-bottom: 2rem;
+    margin-bottom: var(--goa-space-l);
+  }
+
+  @media (max-width: 640px) {
+    .content {
+      margin: var(--goa-space-l);
+    }
+    .content :global(header.has-content) {
+      margin-bottom: var(--goa-space-m);
+    }
   }
 
   .modal-pane {
@@ -291,7 +301,13 @@
   }
 
   .modal-actions ::slotted(*) {
-    padding: 1.5rem 0 0;
+    padding: var(--goa-space-xl) 0 0;
+  }
+
+  @media (max-width: 640px) {
+    .modal-actions ::slotted(*) {
+      padding: var(--goa-space-l) 0 0;
+    }
   }
 
   .modal-content {
