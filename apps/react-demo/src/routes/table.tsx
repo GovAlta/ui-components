@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GoATable } from "@abgov/react-components";
+import { GoATable, GoATableSortHeader } from "@abgov/react-components";
 import { useEffect } from "react";
 import { faker } from "@faker-js/faker";
 
@@ -12,6 +12,7 @@ interface User {
 
 export default function Table() {
   const [data, setData] = React.useState<User[]>([]);
+  const [users, setUsers] = React.useState<User[]>([]);
 
   useEffect(() => {
     const users: User[] = [];
@@ -33,6 +34,27 @@ export default function Table() {
       return a.firstName < b.firstName ? -1 : 1;
     });
     setData(old);
+  }
+
+  useEffect(() => {
+    const _users: User[] = [];
+    for (let i = 0; i < 10; i++) {
+      _users.push({
+        id: faker.datatype.uuid(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        age: faker.datatype.number({ min: 18, max: 60 }),
+      });
+    }
+    setUsers(_users);
+  }, []);
+
+  function sortData(sortBy: string, sortDir: number) {
+    const _users = [...users];
+    _users.sort((a: any, b: any) => {
+      return (a[sortBy] > b[sortBy] ? -1 : 1) * sortDir;
+    });
+    setUsers(_users);
   }
 
   return (
@@ -69,6 +91,34 @@ export default function Table() {
       <GoATable width="100%" variant="relaxed">
         <TableStaticHead />
         <TableStaticBody />
+      </GoATable>
+
+      <h4>Sortable Table</h4>
+      <GoATable onSort={sortData}>
+        <thead>
+          <tr>
+            <th>
+              <GoATableSortHeader name="firstName">
+                First name
+              </GoATableSortHeader>
+            </th>
+            <th>
+              <GoATableSortHeader name="lastName">Last name</GoATableSortHeader>
+            </th>
+            <th>
+              <GoATableSortHeader name="age">Age</GoATableSortHeader>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.firstName}</td>
+              <td>{user.lastName}</td>
+              <td>{user.age}</td>
+            </tr>
+          ))}
+        </tbody>
       </GoATable>
     </>
   );
