@@ -86,7 +86,7 @@
     background: transparent;
     cursor: pointer;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: var(--goa-border-radius-m);
     padding: var(--pading-size);
   }
 
