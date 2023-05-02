@@ -244,12 +244,13 @@
   <goa-form-item label="First name" ml="xs">
     <goa-input name="firstName"></goa-input>
   </goa-form-item>
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
-    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
-    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
-    numquam.
-  </p>
+  <goa-form-item label="Dropdown" ml="xs">
+    <goa-dropdown name="colors" error="true" native="true">
+      <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
+      <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+      <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
+    </goa-dropdown>
+  </goa-form-item>
   <div slot="heading">Lorem <b>ipsum</b> dolor <b>sit</b> amet</div>
 </goa-modal>
 

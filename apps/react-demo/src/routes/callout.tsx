@@ -78,10 +78,7 @@ export default function Callout() {
       </GoACallout>
 
       <h2>Medium Callouts</h2>
-      <GoACallout
-        type="information"
-        size="medium"
-        heading="Small Callout">
+      <GoACallout type="information" size="medium" heading="Small Callout">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </GoACallout>
     </>
