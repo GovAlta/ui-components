@@ -61,6 +61,11 @@
       "name": "ml",
       "description": "Left margin",
       "valueSet": "spacing"
+    },
+    {
+      "name": "arialabel",
+      "description": "Label for screen readers",
+      "type": "string"
     }
   ],
   "references": [
