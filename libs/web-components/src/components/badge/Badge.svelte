@@ -5,7 +5,7 @@
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { typeValidator, toBoolean } from "../../common/utils";
+  import {typeValidator, toBoolean} from "../../common/utils";
 
   // Validator
   const [Types, validateType] = typeValidator(
@@ -23,6 +23,7 @@
   export let testid: string = "";
   export let content: string = "";
   export let icon: string = "false";
+  export let arialabel: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -30,7 +31,9 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  // private
   $: showIcon = toBoolean(icon);
+  $: showIconOnly = showIcon && !content;
 
   $: iconType = {
     success: "checkmark-circle",
@@ -47,6 +50,9 @@
     if (!showIcon && !content) {
       console.warn("GoABadge must have either then content or icon property set");
     }
+    if (showIconOnly && !arialabel) {
+      console.warn("GoABadge with icon only requires an arialabel");
+    }
   });
 </script>
 
@@ -56,12 +62,16 @@
   data-testid={testid}
   data-type="goa-badge"
   class="goa-badge badge-{type}"
-  class:icon-only={showIcon && !content}
+  class:icon-only={showIconOnly}
 >
   {#if showIcon}
-    <goa-icon type={iconType} size="small" />
+      <goa-icon
+        arialabel={showIconOnly && arialabel ? arialabel : null}
+        type={iconType}
+        size="small"
+      />
   {:else}
-    <div style="height: 1.2rem; margin-left:-0.25rem;" />
+  <div style="height: 1.2rem; margin-left:-0.25rem;" />
   {/if}
   {#if content}
     <div class="goa-badge-content">
