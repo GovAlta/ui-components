@@ -216,11 +216,18 @@
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
-    padding: 3rem;
+    padding: var(--goa-space-xl);
     color: var(--goa-color-interactive-default);
     text-align: center;
     cursor: pointer;
   }
+
+  @media (max-width: 640px) {
+    .dragdrop {
+      padding-top: 1.75rem;
+    }
+  }
+
   .dragdrop:active,
   .dragdrop:focus-within {
     border-style: solid;  
@@ -236,8 +243,8 @@
     background: var(--goa-color-info-background);
   }
   .state-hover {
-    background: var(--goa-color-greyscale-100);  
-    border-style: solid;
+    background: var(--goa-color-greyscale-100);
+    border-style: dashed;
   }
   .state-dragenter {
     background: var(--goa-color-info-background);  
@@ -258,6 +265,7 @@
 
   goa-icon {
     margin-top: 4px;
+    margin-right: 4px;
   }
 
   .browse-files {
