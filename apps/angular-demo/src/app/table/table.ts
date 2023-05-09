@@ -24,6 +24,7 @@ export class TableComponent {
         age: faker.datatype.number({ min: 18, max: 60 }),
       });
     }
+    this.users.sort((a, b) => (a.firstName < b.firstName ? 1 : -1));
   }
 
   handleSort(event: any) {

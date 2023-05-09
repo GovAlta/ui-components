@@ -46,6 +46,9 @@ export default function Table() {
         age: faker.datatype.number({ min: 18, max: 60 }),
       });
     }
+    _users.sort((a, b) => {
+      return a.firstName < b.firstName ? 1 : -1;
+    });
     setUsers(_users);
   }, []);
 
@@ -98,7 +101,7 @@ export default function Table() {
         <thead>
           <tr>
             <th>
-              <GoATableSortHeader name="firstName">
+              <GoATableSortHeader name="firstName" direction="asc">
                 First name
               </GoATableSortHeader>
             </th>

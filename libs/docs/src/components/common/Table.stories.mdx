@@ -150,6 +150,9 @@ export const SortableTableTemplate = (args) => {
         age: faker.datatype.number({ min: 18, max: 60 }),
       });
     }
+    _users.sort((a, b) => {
+      return a.firstName < b.firstName ? 1 : -1;
+    });
     setUsers(_users);
   }, []);
   function sortData(sortBy, sortDir) {
@@ -164,7 +167,9 @@ export const SortableTableTemplate = (args) => {
       <thead>
         <tr>
           <th>
-            <GoATableSortHeader name="firstName">First name</GoATableSortHeader>
+            <GoATableSortHeader name="firstName" direction="asc">
+              First name
+            </GoATableSortHeader>
           </th>
           <th>
             <GoATableSortHeader name="lastName">Last name</GoATableSortHeader>
@@ -382,6 +387,12 @@ export const SortableTableTemplate = (args) => {
 
 #### Sortable columns
 
+<GoACallout>
+  The default table sort direction can be implemented like this
+  &lt;goa-table-sort-header name="date" direction="desc"&gt; <br />
+  The direction values can be either “desc” or “asc”
+</GoACallout>
+
 <Story name="Sortable">{SortableTableTemplate.bind()}</Story>
 
 <Tabs>
@@ -406,6 +417,7 @@ export const SortableTableTemplate = (args) => {
                 age: faker.datatype.number({ min: 18, max: 60 }),
               });
             }
+            this.users.sort((a, b) => (a.firstName < b.firstName ? 1 : -1));
           }
           // sort handler
           handleSort(event: any) {
@@ -423,7 +435,7 @@ export const SortableTableTemplate = (args) => {
         <goa-table width="100%" mb="xl" (_sort)="handleSort($event)">
           <thead>
             <tr>
-              <th><goa-table-sort-header name="firstName">First name and really long header</goa-table-sort-header></th>
+              <th><goa-table-sort-header name="firstName" direction="asc">First name and really long header</goa-table-sort-header></th>
               <th><goa-table-sort-header name="lastName">Last name</goa-table-sort-header></th>
               <th><goa-table-sort-header name="age">Age</goa-table-sort-header></th>
             </tr>
@@ -454,6 +466,9 @@ export const SortableTableTemplate = (args) => {
               age: faker.datatype.number({ min: 18, max: 60 }),
             });
           }
+          _users.sort((a, b) => {
+            return a.firstName < b.firstName ? 1 : -1;
+          });
           setUsers(_users);
         }, []);
         function sortData(sortBy: string, sortDir: number) {
@@ -467,7 +482,7 @@ export const SortableTableTemplate = (args) => {
           <GoATable {...args} onSort={sortData}>
             <thead>
               <tr>
-                <th><GoATableSortHeader name="firstName">First name</GoATableSortHeader></th>
+                <th><GoATableSortHeader name="firstName" direction="asc">First name</GoATableSortHeader></th>
                 <th><GoATableSortHeader name="lastName">Last name</GoATableSortHeader></th>
                 <th><GoATableSortHeader name="age">Age</GoATableSortHeader></th>
               </tr>
