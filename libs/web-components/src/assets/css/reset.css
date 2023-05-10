@@ -57,7 +57,8 @@ dd {
   margin-left: 0.5rem;
 }
 
-a {
+a,
+a:visited {
   color: var(--goa-color-interactive-default);
   cursor: pointer;
 }
