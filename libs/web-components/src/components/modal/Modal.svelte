@@ -141,7 +141,7 @@
 </script>
 
 {#if _isOpen}
-  <goa-focus-trap active={open}>
+  <goa-focus-trap {open}>
     <div
       use:noscroll={{ enable: _isOpen }}
       in:fade={{ duration: _transitionTime }}
@@ -203,7 +203,6 @@
 
 <!-- ======================================================================= -->
 <!-- Css -->
-
 <!-- ======================================================================= -->
 <style>
   :host {
@@ -284,7 +283,6 @@
   }
 
   .modal-pane {
-    position: relative;
     background-color: #fff;
     z-index: 1001;
     width: 90%;
