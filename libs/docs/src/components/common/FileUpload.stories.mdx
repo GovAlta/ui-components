@@ -170,8 +170,19 @@ export const UploadTemplate = (props) => {
     <CodeSnippet
       lang="ts"
       code={`
+      interface Uploader {
+        upload: (url: string | ArrayBuffer) => void;
+        abort: () => void;
+      }
+      interface Upload {
+        file: File;
+        uploader: Uploader;
+      }
+      class MockUploader implements Uploader {
+        // implement your logic to upload files
+      }
       export class FileUploadComponent {
-        uploads: Upload[] = [];
+        uploads: Upload[] = []; //Upload is customized according to project needs, it should have the file property
         progressList: Record<string, number> = {};
         uploadFile(e: any) {
           const { file } = e.detail;
@@ -180,8 +191,8 @@ export const UploadTemplate = (props) => {
           }
           const reader = new FileReader()
           reader.onload = (e) => {
-            const url = e.target!.result;  
-            const uploader = new MockUploader();    
+            const url = e.target!.result;
+            const uploader = new MockUploader(); //Customize the service class to upload a file to the server
             this.uploads = [...this.uploads, { file, uploader }]
             uploader.oncomplete = () => console.log("File upload complete")    
             uploader.onprogress = (percent: number) => this.progressList[file.name] = percent;
