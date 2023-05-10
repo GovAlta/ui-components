@@ -62,7 +62,8 @@ a {
   cursor: pointer;
 }
 
-a:hover {
+a:hover,
+a:active {
   color: var(--goa-color-interactive-hover);
 }
 

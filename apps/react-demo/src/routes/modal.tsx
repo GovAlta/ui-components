@@ -7,6 +7,9 @@ import {
   CalloutVariant,
   GoAFormItem,
   GoAInput,
+  GoADropdown,
+  GoADropdownItem,
+  GoAPopover,
 } from "@abgov/react-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +56,6 @@ export default function Modal() {
       <br />
       <h2>Modal with Actions</h2>
       <GoAButton onClick={() => setShowModal2(true)}>
-        {" "}
         Open Modal with actions
       </GoAButton>
       <GoAModal heading="Do you agree?" open={showModal2} transition="fast">
@@ -63,6 +65,18 @@ export default function Modal() {
           explicabo eligendi eius laboriosam! Repellendus ducimus officia
           asperiores. Eos, eius numquam.
         </p>
+
+        <GoAPopover
+          target={
+            <GoAButton type="secondary" size="compact">
+              Click me
+            </GoAButton>
+          }
+        >
+          <p>This is a popover</p>
+          It can be used for a number of different contexts.
+        </GoAPopover>
+
         <GoAButtonGroup alignment="end">
           <GoAButton type="secondary" onClick={() => setShowModal2(false)}>
             Secondary
