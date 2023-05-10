@@ -70,5 +70,5 @@ export function getTimestamp(val?: Date) {
 }
 
 export function cssVar(name: string, value: string | number): string {
-  return value ? `${name}: ${value}` : "";
+  return value ? `${name}: ${value};` : "";
 }
