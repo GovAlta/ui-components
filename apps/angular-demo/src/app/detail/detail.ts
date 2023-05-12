@@ -5,5 +5,9 @@ import { Component } from "@angular/core";
   templateUrl: "./detail.html",
 })
 export class DetailComponent {
+  isOpen1 = true;
   constructor() {}
+  toggle() {
+    this.isOpen1 = !this.isOpen1;
+  }
 }

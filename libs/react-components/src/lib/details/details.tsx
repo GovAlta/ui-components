@@ -3,6 +3,7 @@ import { Margins } from "../../common/styling";
 
 interface WCProps extends Margins {
   heading: string;
+  open?: boolean;
 }
 
 declare global {
@@ -18,6 +19,7 @@ declare global {
 /* eslint-disable-next-line */
 export interface DetailsProps extends Margins {
   heading: string;
+  open?: boolean;
   children: ReactNode;
 }
 
@@ -25,6 +27,7 @@ export function GoADetails(props: DetailsProps) {
   return (
     <goa-details
       heading={props.heading}
+      open={props.open}
       mt={props.mt}
       mr={props.mr}
       mb={props.mb}
