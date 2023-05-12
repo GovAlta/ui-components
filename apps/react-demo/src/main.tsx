@@ -35,6 +35,7 @@ import TextArea from "./routes/textarea";
 import ThreeColumnLayout from "./routes/threeColumnLayout";
 
 import "@abgov/web-components/index.css";
+import Details from "./routes/details";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
@@ -71,6 +72,7 @@ ReactDOM.render(
         <Route path="table" element={<Table />} />
         <Route path="textarea" element={<TextArea />} />
         <Route path="three-column-layout" element={<ThreeColumnLayout />} />
+        <Route path="details" element={<Details />} />
       </Route>
     </Routes>
   </BrowserRouter>,

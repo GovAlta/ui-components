@@ -26,6 +26,11 @@
       "name": "ml",
       "description": "Left margin",
       "valueSet": "spacing"
+    },
+    {
+      "name": "open",
+      "description": "Controls if details is expanded or collapsed",
+      "valueSet": "boolean"
     }
   ],
   "references": [
