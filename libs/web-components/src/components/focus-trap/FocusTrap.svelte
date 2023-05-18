@@ -32,14 +32,14 @@
   }
 
   // ====
-  // First Node 
+  // First Node
   // ====
 
   function focusOnFirstNode(nodes: NodeList | Node[]): boolean {
     if (!nodes) return false;
 
     for (const node of nodes) {
-      const isFocusable 
+      const isFocusable
         = focus(node as HTMLElement)
         ||  focusOnFirstNode(node.childNodes)
         ||  focusOnFirstNodeOfSlot(node)
@@ -69,7 +69,7 @@
   }
 
   // ====
-  // Last Node 
+  // Last Node
   // ====
 
   function focusOnLastNode(nodes: NodeList | Node[]): boolean {
