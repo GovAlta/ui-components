@@ -67,10 +67,15 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
     font-size: var(--goa-font-size-4);
+    display: flex;
+    flex: 1 1 auto;
   }
 
   .goa-container {
     box-sizing: border-box;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
   }
 
   .goa-container * {
@@ -96,6 +101,9 @@
     border-right: 1px solid var(--goa-color-greyscale-200);
     border-bottom-left-radius: var(--goa-border-radius-m);
     border-bottom-right-radius: var(--goa-border-radius-m);
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
   }
 
   .content ::slotted(p:last-child) {
