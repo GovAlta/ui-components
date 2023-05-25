@@ -58,3 +58,7 @@ export { default as FormStep } from './components/form-step/FormStep.svelte';
 export { default as Pages } from './components/pages/Pages.svelte';
 export { default as FileUploadInput } from './components/file-upload-input/FileUploadInput.svelte';
 export { default as FileUploadCard } from './components/file-upload-card/FileUploadCard.svelte';
+
+export { default as Sidebar } from './components/sidebar/Sidebar.svelte';
+
+export { default as SidebarGroup } from './components/sidebar-group/SidebarGroup.svelte';

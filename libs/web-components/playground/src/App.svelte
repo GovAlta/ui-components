@@ -13,6 +13,7 @@
   import '../../src';
   // import component here
   // ex. import "./pg-form-stepper.svelte";
+  import "./pg-sidebar.svelte";
 
 </script>
 
@@ -22,6 +23,7 @@
 
   <!-- Testing component goes here -->
   <!-- ex. <pg-form-stepper /> -->
+  <pg-sidebar />
 </main>
 
 <style>
