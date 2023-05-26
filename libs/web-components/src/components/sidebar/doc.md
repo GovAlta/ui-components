@@ -1,18 +1,8 @@
-<goa-two-column-layout maxcontentwidth="1400px" navcolumnwidth="30ch">
-  <section slot="header">
-    <goa-microsite-header
-      type="alpha"
-      level="alpha"
-      version="UAT"
-    ></goa-microsite-header>
-    <goa-app-header
-      heading="Design Systems"
-      maxcontentwidth="1400px"
-    ></goa-app-header>
-  </section>
+# Left Navigation Menu
 
-  <section slot="nav">
-    <goax-sidebar (_change)="handleMenu($event)">
+Use it like this:
+```html
+<goax-sidebar (_change)="handleMenu($event)">
       <goax-sidebar-item
         *ngFor="let localMenu of localMenus"
         [active]="localMenu.active"
@@ -35,10 +25,5 @@
           </goax-sidebar-item>
         </ng-template>
       </goax-sidebar-item>
-    </goax-sidebar>
-  </section>
-
-  <router-outlet></router-outlet>
-
-  <goa-app-footer slot="footer" maxcontentwidth="1400px"></goa-app-footer>
-</goa-two-column-layout>
+</goax-sidebar>
+```
