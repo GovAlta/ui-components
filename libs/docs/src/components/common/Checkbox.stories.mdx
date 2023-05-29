@@ -156,11 +156,10 @@ onChangeCheckboxTemplate.args = {
     <CodeSnippet
       code={`
         <goa-checkbox
-          goaValue
+          goaChecked
           name="desserts"
           text="Ice Cream"
           [formControl]="reactiveFormCtrl"
-          [value]="reactiveFormCtrl.value"
         ></goa-checkbox>
       `}
       lang="html"
@@ -227,11 +226,10 @@ checkedCheckboxTemplate.args = {
     <CodeSnippet
       code={`
         <goa-checkbox
-          goaValue
+          goaChecked
           name="desserts"
           text="Ice Cream"
           [formControl]="reactiveFormCtrl"
-          [value]="reactiveFormCtrl.value"
         </goa-checkbox>
       `}
       lang="html"
@@ -275,7 +273,7 @@ export const disabledCheckboxTemplate = () => (
       code={`
         <goa-checkbox name="desserts" text="Ice Cream" value="10" disabled="true"></goa-checkbox>
         <!-- Use [attr.disabled] with [formControl] -->
-        <goa-checkbox name="desserts" text="Ice Cream" value="10" goaValue [formControl]="reactiveFormCtrl" [attr.disabled]="true"></goa-checkbox>
+        <goa-checkbox name="desserts" text="Ice Cream" value="10" goaChecked [formControl]="reactiveFormCtrl" [attr.disabled]="true"></goa-checkbox>
       `}
       lang="html"
     />
@@ -317,13 +315,11 @@ errorCheckboxTemplate.args = {
     <CodeSnippet
       code={`
         <goa-checkbox
-          goaValue
+          goaChecked
+          error
           name="desserts"
           text="Ice Cream"
           [formControl]="reactiveFormCtrl"
-          [value]="reactiveFormCtrl.value"
-          error
-          [checked]="true"
         >
         </goa-checkbox>
       `}
@@ -369,11 +365,10 @@ export const FormattingCheckboxTemplate = () => (
     <CodeSnippet
       code={`
         <goa-checkbox
-          goaValue
+          goaChecked
           name="desserts"
           value="10"
           [formControl]="reactiveFormCtrl"
-          [value]="reactiveFormCtrl.value"
         >
           <b>Ice Cream</b>
         </goa-checkbox>
