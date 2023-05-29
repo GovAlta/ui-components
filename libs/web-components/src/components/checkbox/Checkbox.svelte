@@ -32,8 +32,7 @@
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
-  $: isIndeterminate = false; // Desighn review. To be built with TreeView Later
-
+  $: isIndeterminate = false; // Design review. To be built with TreeView Later
 
   onMount(() => {
     // hold on to the initial value to prevent losing it on check changes
