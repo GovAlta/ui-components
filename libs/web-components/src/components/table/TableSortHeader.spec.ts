@@ -8,13 +8,23 @@ describe("GoATableSortHeader", () => {
     expect(container.querySelector("button")).toBeTruthy();
   })
 
-  it('binds direction param', async () => {
+  it('binds asc direction param', async () => {
     const direction = "asc";
     const { container } = render(TableSortHeader, { direction })
     const button = container.querySelector("button");
-    const img = container.querySelector("img");
+    const icon = container.querySelector("goa-icon");
 
     expect(button.classList.contains("asc"));
-    expect(img.getAttribute("alt")).toBe("asc");
+    expect(icon.getAttribute("type")).toBe("caret-up")
+  })
+
+  it('binds desc direction param', async () => {
+    const direction = "desc";
+    const { container } = render(TableSortHeader, { direction })
+    const button = container.querySelector("button");
+    const icon = container.querySelector("goa-icon");
+
+    expect(button.classList.contains("desc"));
+    expect(icon.getAttribute("type")).toBe("caret-down")
   })
 })

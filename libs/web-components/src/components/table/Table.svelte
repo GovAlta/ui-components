@@ -55,9 +55,9 @@
         // relay state to all children
         headings.forEach(child => {
           if (child.getAttribute("name") === sortBy) {
-            const direction = child.getAttribute("direction") as Direction;
-            // starting direction is desc
-            const newDirection = direction === "desc" ? "asc" : "desc";
+            const direction = child["direction"] as Direction;
+            // starting direction is asc
+            const newDirection = direction === "asc" ? "desc" : "asc";
 
             sortDir = newDirection === "asc" ? 1 : -1
             child.setAttribute("direction", newDirection)
@@ -69,6 +69,7 @@
         dispatch(heading, {sortBy, sortDir})
       })
 
+      // dispatch the default sort params if initially set
       const initialSortBy = heading.getAttribute("name");
       const initialDirection = heading["direction"] as Direction;
       if (initialDirection && initialDirection !== "none") {
