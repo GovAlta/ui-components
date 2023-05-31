@@ -30,8 +30,11 @@
 
   onMount(() => {
     validateVariant(variant);
-    setTimeout(attachSortEventHandling,0);
 
+    // without setTimeout it won't properly sort in Safari
+    setTimeout(attachSortEventHandling, 0)
+
+    // exit here if when running tests (tests don't have assignedElements)
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
     if (!slot || slot.assignedElements().length === 0) {
       return;
@@ -63,30 +66,40 @@
           }
         })
 
-        heading.dispatchEvent(new CustomEvent("_sort", {
-          composed: true,
-          bubbles: false,
-          cancelable: true,
-          detail: {sortBy, sortDir},
-        }));
+        dispatch(heading, {sortBy, sortDir})
       })
+
+      const initialSortBy = heading.getAttribute("name");
+      const initialDirection = heading["direction"] as Direction;
+      if (initialDirection && initialDirection !== "none") {
+        setTimeout(() => {
+          dispatch(heading, {sortBy: initialSortBy, sortDir: initialDirection === "asc" ? 1 : -1})
+        }, 10)
+      } 
     })
- }
+  }
 
-
+  function dispatch(el: Element, params: {sortBy: string, sortDir: number}) {
+    el.dispatchEvent(new CustomEvent("_sort", {
+      composed: true,
+      bubbles: true,
+      cancelable: false,
+      detail: params,
+    }));
+  }
 </script>
 
 <table
   class={variant}
   class:sticky={_stickyHeader}
   bind:this={_rootEl}
+
   style={`
     ${width ? `width: ${width};`: ``}
     ${calculateMargin(mt, mr, mb, ml)}
-  `}
->
+  `}>
   <slot />
-
+  
   <!--
     prevents console errors being seen in react
     and prevents the internal styles from being removed

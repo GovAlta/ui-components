@@ -1,6 +1,6 @@
 import * as React from "react";
 import { GoATable, GoATableSortHeader } from "@abgov/react-components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { faker } from "@faker-js/faker";
 
 interface User {
@@ -11,8 +11,8 @@ interface User {
 }
 
 export default function Table() {
-  const [data, setData] = React.useState<User[]>([]);
-  const [users, setUsers] = React.useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
+  const [sortDir, setSortDir] = useState<number>(1);
 
   useEffect(() => {
     const users: User[] = [];
@@ -24,32 +24,11 @@ export default function Table() {
         age: faker.datatype.number({ min: 18, max: 60 }),
       });
     }
-    setData(users);
-  }, []);
-
-  function sortByFirstName() {
-    const old = [...data];
-    old.sort((a, b) => {
-      if (a.firstName === b.firstName) return 0;
-      return a.firstName < b.firstName ? -1 : 1;
-    });
-    setData(old);
-  }
-
-  useEffect(() => {
-    const _users: User[] = [];
-    for (let i = 0; i < 10; i++) {
-      _users.push({
-        id: faker.datatype.uuid(),
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        age: faker.datatype.number({ min: 18, max: 60 }),
-      });
-    }
-    setUsers(_users);
+    setUsers(users);
   }, []);
 
   function sortData(sortBy: string, sortDir: number) {
+    console.log("sorting data")
     const _users = [...users];
     _users.sort((a: any, b: any) => {
       return (a[sortBy] > b[sortBy] ? -1 : 1) * sortDir;
@@ -60,7 +39,7 @@ export default function Table() {
   return (
     <>
       <h4>Dynamic Table</h4>
-      <button onClick={sortByFirstName}>First Name</button>
+      <button onClick={() => sortData("firstName", sortDir)}>First Name</button>
       <GoATable width="100%">
         <thead>
           <tr>
@@ -70,7 +49,7 @@ export default function Table() {
           </tr>
         </thead>
         <tbody>
-          {data.map((user) => (
+          {users.map((user) => (
             <tr key={user.id}>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
@@ -98,7 +77,7 @@ export default function Table() {
         <thead>
           <tr>
             <th>
-              <GoATableSortHeader name="firstName">
+              <GoATableSortHeader name="firstName" direction="desc">
                 First name
               </GoATableSortHeader>
             </th>
@@ -106,7 +85,7 @@ export default function Table() {
               <GoATableSortHeader name="lastName">Last name</GoATableSortHeader>
             </th>
             <th>
-              <GoATableSortHeader name="age">Age</GoATableSortHeader>
+              <GoATableSortHeader name="age" direction="desc">Age</GoATableSortHeader>
             </th>
           </tr>
         </thead>
