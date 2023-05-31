@@ -28,10 +28,9 @@ export default function Table() {
   }, []);
 
   function sortData(sortBy: string, sortDir: number) {
-    console.log("sorting data")
     const _users = [...users];
     _users.sort((a: any, b: any) => {
-      return (a[sortBy] > b[sortBy] ? -1 : 1) * sortDir;
+      return (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir;
     });
     setUsers(_users);
   }
@@ -77,7 +76,7 @@ export default function Table() {
         <thead>
           <tr>
             <th>
-              <GoATableSortHeader name="firstName" direction="desc">
+              <GoATableSortHeader name="firstName">
                 First name
               </GoATableSortHeader>
             </th>
@@ -85,7 +84,9 @@ export default function Table() {
               <GoATableSortHeader name="lastName">Last name</GoATableSortHeader>
             </th>
             <th>
-              <GoATableSortHeader name="age" direction="desc">Age</GoATableSortHeader>
+              <GoATableSortHeader name="age" direction="asc">
+                Age
+              </GoATableSortHeader>
             </th>
           </tr>
         </thead>
