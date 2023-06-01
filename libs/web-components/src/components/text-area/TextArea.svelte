@@ -31,23 +31,20 @@
   $: isReadonly = toBoolean(readonly);
 
   let showCounter = false;
+  let _textAreaEl: HTMLTextAreaElement;
+  
   // $: showCounter = toBoolean(showcounter);
-
-  function onChange(e: Event) {
-    const target = e.target as HTMLTextAreaElement;
-    const value = target.value;
-
-    if (isDisabled) return;
-
-    e.target.dispatchEvent(
-      new CustomEvent("_change", {
-        composed: true,
-        bubbles: false,
-        cancelable: true,
-        detail: { event: e, name, value },
-      }),
-    );
-    e.stopPropagation();
+  $: {
+    if (_textAreaEl && !isDisabled) {
+      _textAreaEl.dispatchEvent(
+        new CustomEvent("_change", {
+          composed: true,
+          bubbles: false,
+          cancelable: true,
+          detail: { name, value },
+        }),
+      );
+    };
   }
 </script>
 
@@ -62,7 +59,6 @@
   <textarea
     {name}
     {placeholder}
-    {value}
     {rows}
     aria-label={arialabel || name}
     class="goa-textarea"
@@ -70,7 +66,8 @@
     disabled={isDisabled}
     readonly={isReadonly}
     data-testid={testid}
-    on:keyup={onChange}
+    bind:this={_textAreaEl}
+    bind:value={value}
   />
   {#if showCounter}
     {#if maxcharcount > 0}
