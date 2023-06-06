@@ -170,6 +170,15 @@ describe('GoAInput Component', () => {
     });
   })
 
+  describe("maxlength", () => {
+    it("allows for a maxlength prop", async () => {
+      const el = render(GoAInput, { maxlength: 10 });
+      const root = el.container.querySelector('input');
+      expect(root).toBeTruthy();
+      expect(root).toHaveAttribute("maxlength", "10")
+    });
+  });
+
   describe("type=date", () => {
     it("allows for a date type", async () => {
       const el = render(GoAInput, { type: "date" });
