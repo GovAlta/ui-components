@@ -154,6 +154,18 @@ import { Meta, Story } from "@storybook/addon-docs";
     description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name"
   />
   <Prop
+    name="maxlength"
+    lang="angular"
+    description="Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input."
+    type="number"
+  />
+  <Prop
+    name="maxLength"
+    lang="react"
+    description="Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input."
+    type="number"
+  />
+  <Prop
     name="prefix"
     type="string"
     description="Text that comes before the input. **Deprecated**"
@@ -579,6 +591,43 @@ export const MinMaxTemplate = () => {
           step={2}
           onChange={(name, value) => setValue(value)}
         />
+      )
+    `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Max Length
+
+export const MaxLengthTemplate = () => {
+  const [value, setValue] = useState('');
+  return (
+    <GoAFormItem label="Name" helpText={"Max length is 10"}>
+      <GoAInput maxLength={10} name="name" onChange={(name, value) => setValue(value)} value={value}/>
+    </GoAFormItem>
+  );
+};
+
+<Story name="Max Length">{MaxLengthTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`<goa-form-item label="Name" helptext="Max length is 10.">
+<goa-input name="name" maxLength="10"></goa-input>
+</goa-form-item>`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+      const [value, setValue] = useState('');
+      return (
+        <GoAFormItem label="Name" helpText={"Max length is 10"}>
+            <GoAInput maxLength={10} name="name" onChange={(name, value) => setValue(value)} value={value}/>
+        </GoAFormItem>
       )
     `}
       lang="tsx"
