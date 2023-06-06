@@ -60,13 +60,12 @@ describe('GoADropdown', () => {
         // validate the label
         // expect(input.value).toContain('orange');
       });
-
     });
 
     it('selects a value', async () => {
       const onClick = jest.fn();
       const name = 'favcolor';
-      const items = ["red", "blue", "orange"];
+      const items = ["", "blue", "orange"];
       const result = render(GoADropdownWrapper, { name, items });
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
@@ -106,6 +105,23 @@ describe('GoADropdown', () => {
         const selected = result.container.querySelector(".dropdown-item--selected");
         expect(selected).not.toBeNull();
         expect(selected.innerHTML).toContain("orange");
+      });
+    })
+
+    
+    it('a blank value can be selected programmatically', async() => {
+      const name = 'blank-color';
+      const items = ["", "blue", "orange"];
+      const result = render(GoADropdownWrapper, {name, value: 'blue', items, resetValue: ""});
+
+      const resetButton = result.queryByRole("button");
+
+      await waitFor(async() => {
+        await fireEvent.click(resetButton);
+        // validate the selected item
+        const selected = result.container.querySelector(".dropdown-item--selected");
+        expect(selected).not.toBeNull();
+        expect(selected.innerHTML).toContain("");
       });
     })
   })
@@ -199,7 +215,6 @@ describe('GoADropdown', () => {
       expect(option).not.toBeNull();
     });
   })
-
 
   describe("leading icon", () => {
     it('does not show a leading icon', async () => {
