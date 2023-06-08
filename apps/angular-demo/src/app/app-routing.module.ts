@@ -33,6 +33,7 @@ import { SpacingComponent } from "./spacing/spacing";
 import { StylesComponent } from "./styles/styles.component";
 import { TableComponent } from "./table/table";
 import { TextAreaComponent } from "./text-area/text-area.component";
+import { TooltipComponent } from "./tooltip/tooltip.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
 import { ThreeColumnLayoutComponent } from "./three-column-layout/three-column-layout.component";
 
@@ -69,6 +70,7 @@ const routes: Routes = [
   { path: "styles", component: StylesComponent },
   { path: "table", component: TableComponent },
   { path: "textarea", component: TextAreaComponent },
+  { path: "tooltip", component: TooltipComponent },
   { path: "two-column-layout", component: TwoColumnLayoutComponent },
   { path: "three-column-layout", component: ThreeColumnLayoutComponent },
   { path: "", redirectTo: "/", pathMatch: "full" },
