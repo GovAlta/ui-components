@@ -33,11 +33,12 @@ import Skeleton from "./routes/skeleton";
 import Styles from "./routes/styles";
 import Table from "./routes/table";
 import TextArea from "./routes/textarea";
+import Tooltip from "./routes/tooltip";
 import ThreeColumnLayout from "./routes/threeColumnLayout";
 
 import "@abgov/web-components/index.css";
 import Details from "./routes/details";
-import {FormStepperRoute} from "./routes/formStepper";
+import { FormStepperRoute } from "./routes/formStepper";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
@@ -74,9 +75,10 @@ ReactDOM.render(
         <Route path="styles" element={<Styles />} />
         <Route path="table" element={<Table />} />
         <Route path="textarea" element={<TextArea />} />
+        <Route path="tooltip" element={<Tooltip />} />
         <Route path="three-column-layout" element={<ThreeColumnLayout />} />
         <Route path="details" element={<Details />} />
-        <Route path="form-stepper" element={<FormStepperRoute/>} />
+        <Route path="form-stepper" element={<FormStepperRoute />} />
       </Route>
     </Routes>
   </BrowserRouter>,

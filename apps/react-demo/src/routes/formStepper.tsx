@@ -1,15 +1,21 @@
-import {useState} from "react";
-import {GoAButton, GoAFormStep, GoAFormStepper, GoAFormStepStatusType, GoAPages} from "@abgov/react-components";
+import { useState } from "react";
+import {
+  GoAButton,
+  GoAFormStep,
+  GoAFormStepper,
+  GoAFormStepStatusType,
+  GoAPages,
+} from "@abgov/react-components";
 
 export function FormStepperRoute() {
   const [step, setStep] = useState<number>(2);
-// controlled by the user based on form completion
+  // controlled by the user based on form completion
   const [status, setStatus] = useState<GoAFormStepStatusType[]>([
     "complete",
     "complete",
     "complete",
-    "complete"
-  ])
+    "complete",
+  ]);
   function setPage(page: number) {
     if (page < 1 || page > 4) return;
     setStep(page);
@@ -28,10 +34,14 @@ export function FormStepperRoute() {
         <div>3</div>
         <div>4</div>
       </GoAPages>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        <GoAButton type="secondary" onClick={() => setPage(step - 1)}>Previous</GoAButton>
-        <GoAButton type="primary" onClick={() => setPage(step + 1)}>Next</GoAButton>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <GoAButton type="secondary" onClick={() => setPage(step - 1)}>
+          Previous
+        </GoAButton>
+        <GoAButton type="primary" onClick={() => setPage(step + 1)}>
+          Next
+        </GoAButton>
       </div>
     </>
-  )
+  );
 }
