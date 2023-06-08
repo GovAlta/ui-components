@@ -45,6 +45,7 @@ import { TextAreaComponent } from "./text-area/text-area.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
 import { PopoverComponent } from "./popover/popover.component";
 import { ThreeColumnLayoutComponent } from "./three-column-layout/three-column-layout.component";
+import { TooltipComponent } from "./tooltip/tooltip.component";
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { ThreeColumnLayoutComponent } from "./three-column-layout/three-column-l
     SpacingComponent,
     TableComponent,
     TextAreaComponent,
+    TooltipComponent,
     TwoColumnLayoutComponent,
     ThreeColumnLayoutComponent,
   ],

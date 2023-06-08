@@ -1,6 +1,6 @@
 import React from "react";
 
-export type GoAFormStepStatusType  = "complete" | "incomplete";
+export type GoAFormStepStatusType = "complete" | "incomplete";
 
 interface WCProps {
   text: string;

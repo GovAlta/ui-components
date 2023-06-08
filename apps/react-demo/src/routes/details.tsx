@@ -7,10 +7,7 @@ export default function Details() {
   return (
     <>
       <GoAButton onClick={() => setOpen(!open)}>Toggle Details</GoAButton>
-      <GoADetails
-        heading="This is the title"
-        open={open}
-      >
+      <GoADetails heading="This is the title" open={open}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel
           lacinia metus, sed sodales lectus. Aliquam sed volutpat velit. Sed in

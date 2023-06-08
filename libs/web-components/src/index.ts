@@ -46,6 +46,7 @@ export * from "./components/spinner/Spinner.svelte";
 export * from './components/table/Table.svelte';
 export * from './components/table/TableSortHeader.svelte';
 export * from "./components/text-area/TextArea.svelte";
+export * from "./components/tooltip/Tooltip.svelte";
 export * from "./layouts/FullScreenNavbarLayout.svelte";
 export * from "./layouts/FullScreenNavbarLayout.svelte";
 export * from "./layouts/one-column-layout/OneColumnLayout.svelte";

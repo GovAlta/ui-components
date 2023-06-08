@@ -5,7 +5,9 @@ import { GoADetails } from "./details";
 describe("Detail", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoADetails heading="The heading" open={true}>The content</GoADetails>
+      <GoADetails heading="The heading" open={true}>
+        The content
+      </GoADetails>
     );
 
     const el = baseElement.querySelector("goa-details");
