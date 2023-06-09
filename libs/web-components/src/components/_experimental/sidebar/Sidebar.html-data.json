@@ -1,0 +1,10 @@
+{
+  "name": "goax-sidebar",
+  "attributes": [
+    {
+      "name": "_change",
+      "type": "function",
+      "description": "Return the menu item that is clicked"
+    }
+  ]
+}
