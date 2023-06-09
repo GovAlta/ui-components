@@ -49,6 +49,7 @@
   export let prefix: string = "";
   export let suffix: string = "";
   export let debounce: number = 0;
+  export let maxlength: number = null;
 
   // margin
   export let mt: Spacing = null;
@@ -180,6 +181,7 @@
       {min}
       {max}
       {step}
+      {maxlength}
       role="textbox"
       aria-label={arialabel || name}
       on:keyup={onKeyUp}

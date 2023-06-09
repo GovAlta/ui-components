@@ -38,6 +38,7 @@ describe("Input", () => {
       ml: "xl",
       leadingContent: "$",
       trailingContent: "items",
+      maxLength: 10,
       onTrailingIconClick: noop,
     };
 
@@ -64,6 +65,7 @@ describe("Input", () => {
     expect(input.getAttribute("mr")).toBe("m");
     expect(input.getAttribute("mb")).toBe("l");
     expect(input.getAttribute("ml")).toBe("xl");
+    expect(input.getAttribute("maxlength")).toBe("10");
     expect(
       input.querySelector("[slot='leadingContent']").textContent
     ).toContain("$");
