@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef } from "react";
 import { GoAIconType } from "../..";
-import { format, parseISO } from "date-fns";
+import { format, parse, parseISO } from "date-fns";
 import { Margins } from "../../common/styling";
 
 export type GoADate = Date | string;
@@ -215,7 +215,10 @@ const onDateChangeHandler = (onChange: OnDateChange) => {
       onChange(name, new Date(0));
       return;
     }
-    onChange(name, parseISO(value));
+    const d = parseISO(value)
+    if (!isNaN(d.getDate())) {
+      onChange(name, d);
+    }
   };
 };
 
@@ -237,6 +240,9 @@ function toString(value: GoADate, tmpl = "yyyy-MM-dd"): string {
     return format(parseISO(value), tmpl);
   }
   if (value.toISOString() === new Date(0).toISOString()) {
+    return "";
+  }
+  if (value.getFullYear().toString().length > 4) {
     return "";
   }
   return format(value, tmpl);
@@ -294,7 +300,7 @@ export const GoAInputDateTime: FC<DateInputProps> = ({
     <GoAInput
       {...props}
       onChange={onDateChangeHandler(props.onChange)}
-      value={toString(value, "yyyy-MM-dd'T'HH:mm")}
+      value={toString(value, "yyyy-MM-dd'T'HH:mm:ss'")}
       type="datetime-local"
     />
   );
