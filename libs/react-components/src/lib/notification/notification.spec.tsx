@@ -33,4 +33,15 @@ describe("Notification Banner", () => {
     fireEvent(notificationBanner, new CustomEvent("_dismiss"));
     expect(onDismiss).toBeCalled();
   });
+
+  it("should render notification banner with ariaLive", async () => {
+    render(
+      <GoANotification type="information" ariaLive="assertive">
+        Information to the user goes in the content
+      </GoANotification>
+    );
+    const el = document.querySelector("goa-notification");
+    expect(el).not.toBeNull();
+    expect(el.getAttribute("ariaLive")).toEqual("assertive");
+  });
 });

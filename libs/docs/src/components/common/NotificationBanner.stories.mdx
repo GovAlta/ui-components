@@ -13,6 +13,7 @@ import {
   GoAButtonGroup,
   GoAFormItem,
   GoANotification,
+  GoACallout,
 } from "@abgov/react-components";
 import { useState } from "react";
 
@@ -50,10 +51,44 @@ import { useState } from "react";
   <Prop
     name="maxContentWidth"
     type="string"
+    lang="react"
     defaultValue="100%"
     description="Maximum width of the content area"
   />
+  <Prop
+    name="maxcontentwidth"
+    type="string"
+    lang="angular"
+    defaultValue="100%"
+    description="Maximum width of the content area"
+  />
+  <Prop
+    name="arialive"
+    type="polite | assertive | off"
+    lang="angular"
+    defaultValue="polite"
+    description="Indicates how assistive technology should handle updates to the live region"
+  />
+  <Prop
+    name="ariaLive"
+    type="polite | assertive | off"
+    lang="react"
+    defaultValue="polite"
+    description="Indicates how assistive technology should handle updates to the live region"
+  />
 </Props>
+
+<GoACallout type="information">
+  Notification Banner component use "alert" role that implicitly defines
+  "aria-live" as "polite" as default, and "aria-atomic" as "true". Normally,
+  only arialive="polite" is used. Any region which receives updates that are
+  important for the user to receive, but not so rapid as to be annoying, should
+  receive this attribute. The screen reader will speak changes whenever the user
+  is idle.
+  <br />
+  arialive="assertive" should only be used for time-sensitive/critical
+  notifications that absolutely require the user’s immediate attention.
+</GoACallout>
 
 ### Types
 

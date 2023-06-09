@@ -604,12 +604,12 @@
   }
 
   .goa-icon--small {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: var(--goa-icon-size-m);
+    height: var(--goa-icon-size-m);
   }
   .goa-icon--medium {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--goa-icon-size-l);
+    height: var(--goa-icon-size-l);
   }
   .goa-icon--large {
     width: 2rem;

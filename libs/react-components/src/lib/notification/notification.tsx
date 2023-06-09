@@ -6,10 +6,13 @@ export type NotificationType =
   | "event"
   | "emergency";
 
+export type AriaLiveType = "polite" | "assertive" | "off";
+
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
   type: NotificationType;
   maxcontentwidth?: string;
+  arialive?: AriaLiveType;
 }
 
 declare global {
@@ -23,6 +26,7 @@ declare global {
 
 interface Props {
   type?: NotificationType;
+  ariaLive?: AriaLiveType;
   maxContentWidth?: string;
   children?: React.ReactNode;
   onDismiss?: () => void;
@@ -31,6 +35,7 @@ interface Props {
 
 export const GoANotification = ({
   type = "information",
+  ariaLive,
   maxContentWidth,
   children,
   testId,
@@ -59,6 +64,7 @@ export const GoANotification = ({
       type={type}
       data-testid={testId}
       maxcontentwidth={maxContentWidth}
+      arialive={ariaLive}
     >
       {children}
     </goa-notification>
