@@ -2,9 +2,15 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { toBoolean } from "../../common/utils";
+  import {toBoolean, typeValidator} from "../../common/utils";
 
-  type FormStepStatus = "incomplete" | "complete";
+  // Validator
+  const [StatusTypes, validateStatus] = typeValidator(
+    "Form Step status",
+    ["incomplete", "complete"],
+    true
+  );
+  type FormStepStatus =  typeof StatusTypes[number];
 
   // ======
   // Public
@@ -31,9 +37,10 @@
   // ========
 
   $: _isCurrent = toBoolean(current);
-  $: _isEnabled = toBoolean(enabled);
+  $: _isEnabled = toBoolean(enabled) || status === "complete";
 
   onMount(() => {
+    validateStatus(status);
     // event binding
     _stepEl.addEventListener("click", () => {
       if (!_isEnabled) return;

@@ -51,6 +51,7 @@ export default function App() {
             <Link to="/styles">Styles</Link>
             <Link to="/table">Table</Link>
             <Link to="/textarea">TextArea</Link>
+            <Link to="/form-stepper">FormStepper</Link>
           </GoASidebarGroup>
           <GoASidebarGroup heading="Layout">
             <Link to="/three-column-layout">Three Column Layout</Link>

@@ -39,8 +39,18 @@
   // than the number of steps
   $: _progress = (_maxProgressStep-1) / (_steps.length-1) * 100;
   $: setCurrentStepStatus(step);
-  $: { 
+  $: {
     if (_steps.length) {
+
+      // allow access to all steps if not step property is provided
+      if (step <= 0) {
+        step = 1;
+        setTimeout(() => {
+          dispatch(step);
+        }, 1)
+        _maxAllowedStep = _steps.length;
+      }
+
       if (step > _maxProgressStep) _maxProgressStep = step;
       if (step > _maxAllowedStep) _maxAllowedStep = step;
       _steps.forEach((stepEl: Element, index: number) => {
@@ -50,7 +60,7 @@
   }
 
   onMount(async () => {
-    await tick()    
+    await tick()
 
     // children steps
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
@@ -59,15 +69,6 @@
     } else {
       // for unit tests only
       _steps = [..._rootEl.querySelector("goa-grid").children] as Element[];
-    }
-
-    // allow access to all steps if not step property is provided
-    if (step <= 0) {
-      step = 1;
-      setTimeout(() => {
-        dispatch(step);
-      }, 1)
-      _maxAllowedStep = _steps.length;
     }
 
     // set step a11y label
@@ -81,7 +82,7 @@
     _rootEl.addEventListener("_click", (e: Event) => {
       step = (e as CustomEvent).detail;
       dispatch(step);
-    })      
+    })
 
     setCurrentStepStatus(step)
     calcStepDims();
@@ -103,8 +104,8 @@
     _rootEl.dispatchEvent(new CustomEvent("_change", {
       composed: true,
       bubbles: true,
-      detail: { step }   
-    }))          
+      detail: { step }
+    }))
   }
 
   function setCurrentStepStatus(step: number) {
@@ -159,10 +160,10 @@
   progress.vertical {
     display: none;
     width: calc(var(--height) - var(--step-height));
-    transform: 
-      rotate(90deg) 
+    transform:
+      rotate(90deg)
       translate(
-        calc(50% + 1.25rem + 1.75rem), 
+        calc(50% + 1.25rem + 1.75rem),
         calc((var(--height) - var(--step-height)) / 2 - 1.25rem - 1.5rem)
       );
   }
@@ -196,7 +197,7 @@
   <div
     class="form-stepper"
     style={`
-      ${calculateMargin(mt, mr, mb, ml)}; 
+      ${calculateMargin(mt, mr, mb, ml)};
       --progress: ${_progress}%;
       --step-width: ${_stepWidth}px;
       --step-height: ${_stepHeight}px;

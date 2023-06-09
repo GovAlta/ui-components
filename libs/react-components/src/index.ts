@@ -11,6 +11,7 @@ export * from "./lib/file-upload-input/file-upload-input";
 // Types
 export type { GoAIconType } from "./lib/icon/icon";
 export type { GoABadgeType } from "./lib/badge/badge";
+export type { GoAFormStepStatusType } from "./lib/form-step/form-step";
 
 // Components
 export * from "./lib/accordion/accordion";
