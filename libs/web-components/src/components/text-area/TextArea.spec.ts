@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render } from "@testing-library/svelte";
+import { fireEvent, render, waitFor } from "@testing-library/svelte";
 import GoATextArea from "./TextArea.svelte"
 
 describe("GoATextArea", () => {
@@ -38,8 +38,11 @@ describe("GoATextArea", () => {
       onChange();
     });
 
-    await fireEvent.keyUp(textarea, { target: { value: 'bar' } });
-    expect(onChange).toBeCalledTimes(1);
+    await fireEvent.input(textarea, { target: { value: 'bar' } });
+
+    await waitFor(() => {
+      expect(onChange).toBeCalledTimes(1);
+    })
   })
 
   it("can be disabled", async () => {
