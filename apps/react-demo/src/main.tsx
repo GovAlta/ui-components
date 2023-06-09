@@ -28,6 +28,7 @@ import NotificationBanner from "./routes/notificationBanner";
 import Pagination from "./routes/pagination";
 import Popover from "./routes/popover";
 import Radio from "./routes/radio";
+import Sidebar from "./routes/sidebar";
 import Skeleton from "./routes/skeleton";
 import Styles from "./routes/styles";
 import Table from "./routes/table";
@@ -67,6 +68,7 @@ ReactDOM.render(
         <Route path="pagination" element={<Pagination />} />
         <Route path="popover" element={<Popover />} />
         <Route path="radio" element={<Radio />} />
+        <Route path="sidebar" element={<Sidebar />} />
         <Route path="skeleton" element={<Skeleton />} />
         <Route path="styles" element={<Styles />} />
         <Route path="table" element={<Table />} />

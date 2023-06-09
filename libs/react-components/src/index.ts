@@ -1,5 +1,8 @@
 import "@abgov/web-components";
 
+export * from "./lib/sidebar-group/sidebar-group";
+export * from "./lib/sidebar/sidebar";
+
 export * from "./lib/pages/pages";
 export * from "./lib/file-upload-card/file-upload-card";
 
