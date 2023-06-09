@@ -536,7 +536,7 @@
   export let opacity: number = 1;
   export let title: string = "";
   export let testid: string = "";
-
+  export let arialabel: string = "";
   // Private
   const _iconOverrides = {
     pencil: `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M16.1442 5.47956L12.5355 1.87088L13.7196 0.686776C14.0391 0.367257 14.4385 0.212197 14.9178 0.221594C15.3971 0.230992 15.7965 0.39545 16.116 0.714969L17.3283 1.92726C17.6478 2.24678 17.8076 2.64148 17.8076 3.11136C17.8076 3.58124 17.6478 3.97594 17.3283 4.29546L16.1442 5.47956ZM1.03951 17.8424C0.795173 17.8424 0.593125 17.7626 0.433365 17.6028C0.273605 17.443 0.193726 17.241 0.193726 16.9966V14.5721C0.193726 14.4593 0.212521 14.356 0.250112 14.262C0.287702 14.168 0.353485 14.074 0.447461 13.9801L11.4689 2.93435L15.0776 6.54303L4.05615 17.5887C3.96217 17.6827 3.8682 17.7485 3.77422 17.7861C3.68024 17.8236 3.57687 17.8424 3.4641 17.8424H1.03951Z" fill="currentcolor"/> </svg>`,
@@ -559,6 +559,8 @@
 </script>
 
 <div
+  role={arialabel ? "img" : "presentation"}
+  aria-label={arialabel}
   class={`goa-icon goa-icon--${size}`}
   class:inverted={isInverted}
   data-testid={testid}

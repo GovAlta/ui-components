@@ -2,5 +2,5 @@
 
 Use it like this:
 ```html
-<goa-icon type="alarm"></goa-icon>
+<goa-icon type="alarm" arialabel="Alert"></goa-icon>
 ```

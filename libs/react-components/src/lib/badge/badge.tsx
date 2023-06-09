@@ -15,12 +15,14 @@ interface GoABadgeProps extends Margins {
   icon?: boolean;
   content?: string;
   testId?: string;
+  ariaLabel?: string;
 }
 
 interface WCProps extends Margins {
   type: GoABadgeType;
   icon?: boolean;
   content?: string;
+  arialabel?: string;
 }
 
 declare global {
@@ -42,6 +44,7 @@ export const GoABadge: FC<GoABadgeProps> = ({
   mr,
   mb,
   ml,
+  ariaLabel,
 }: GoABadgeProps) => {
   return (
     <goa-badge
@@ -49,6 +52,7 @@ export const GoABadge: FC<GoABadgeProps> = ({
       content={content}
       icon={icon}
       data-testid={testId}
+      arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}
@@ -68,6 +72,7 @@ export const GoAInfoBadge: FC<GoABadgeProps> = ({
   mr,
   mb,
   ml,
+  ariaLabel,
 }: GoABadgeProps) => {
   return (
     <GoABadge
@@ -75,6 +80,7 @@ export const GoAInfoBadge: FC<GoABadgeProps> = ({
       icon={icon}
       content={content}
       testId={testId}
+      ariaLabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}
@@ -94,12 +100,14 @@ export const GoASuccessBadge: FC<GoABadgeProps> = ({
   mr,
   mb,
   ml,
+  ariaLabel,
 }: GoABadgeProps) => {
   return (
     <GoABadge
       type="success"
       icon={icon}
       content={content}
+      ariaLabel={ariaLabel}
       testId={testId}
       mt={mt}
       mr={mr}
@@ -120,6 +128,7 @@ export const GoAImportantBadge: FC<GoABadgeProps> = ({
   mr,
   mb,
   ml,
+  ariaLabel,
 }: GoABadgeProps) => {
   return (
     <GoABadge
@@ -127,6 +136,7 @@ export const GoAImportantBadge: FC<GoABadgeProps> = ({
       icon={icon}
       content={content}
       testId={testId}
+      ariaLabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}
@@ -146,6 +156,7 @@ export const GoAEmergencyBadge: FC<GoABadgeProps> = ({
   mr,
   mb,
   ml,
+  ariaLabel,
 }: GoABadgeProps) => {
   return (
     <GoABadge
@@ -153,6 +164,7 @@ export const GoAEmergencyBadge: FC<GoABadgeProps> = ({
       icon={icon}
       content={content}
       testId={testId}
+      ariaLabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}

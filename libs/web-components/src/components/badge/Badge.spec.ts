@@ -69,4 +69,28 @@ describe("GoABadgeComponent", () => {
       expect(badge).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
+
+  describe("AriaLabel", () => {
+    it(`should add the text that screen reader should read if arialabel is set for icon-only badge`, async () => {
+      const result = render(GoABadge, {
+        testid: "badge-test",
+        type: "success",
+        icon: "true",
+        arialabel: "Text that screen reader should read",
+      });
+      const goaIcon = await result.container.querySelector("goa-icon");
+      expect(goaIcon.getAttribute("arialabel")).toBe("Text that screen reader should read");
+    });
+    it(`should ignore arialabel for not icon-only badge`, async () => {
+      const result = render(GoABadge, {
+        testid: "badge-test",
+        type: "success",
+        content: "abc",
+        icon: "true",
+        arialabel: "Text that screen reader should read",
+      });
+      const goaIcon = await result.container.querySelector("goa-icon");
+      expect(goaIcon.getAttribute("arialabel")).toBe(null);
+    });
+  });
 });
