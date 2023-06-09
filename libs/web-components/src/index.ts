@@ -51,8 +51,8 @@ export * from "./layouts/FullScreenNavbarLayout.svelte";
 export * from "./layouts/one-column-layout/OneColumnLayout.svelte";
 export * from "./layouts/two-column-layout/TwoColumnLayout.svelte";
 export * from "./layouts/three-column-layout/ThreeColumnLayout.svelte";
-export * from "./components/sidebar/Sidebar.svelte";
-export * from "./components/sidebar/SidebarItem.svelte";
+export * from "./components/_experimental/sidebar/Sidebar.svelte";
+export * from "./components/_experimental/sidebar/SidebarItem.svelte";
 
 export { default as Pagination } from './components/pagination/Pagination.svelte';
 export { default as FormStepper } from './components/form-stepper/FormStepper.svelte';
@@ -60,3 +60,6 @@ export { default as FormStep } from './components/form-step/FormStep.svelte';
 export { default as Pages } from './components/pages/Pages.svelte';
 export { default as FileUploadInput } from './components/file-upload-input/FileUploadInput.svelte';
 export { default as FileUploadCard } from './components/file-upload-card/FileUploadCard.svelte';
+
+export { default as Sidebar } from './components/sidebar/Sidebar.svelte';
+export { default as SidebarGroup } from './components/sidebar-group/SidebarGroup.svelte';

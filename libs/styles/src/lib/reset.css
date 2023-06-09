@@ -41,10 +41,10 @@ ol {
   padding-left: 1rem;
 }
 
-li > ul,
-li > ol,
-li > ul,
-li > ol {
+li>ul,
+li>ol,
+li>ul,
+li>ol {
   padding-left: 0;
   margin-top: 0;
 }
@@ -116,7 +116,7 @@ h6 {
   font-weight: var(--goa-font-weight-bold);
 }
 
-h3 + h1 {
+h3+h1 {
   margin-top: -1rem;
 }
 

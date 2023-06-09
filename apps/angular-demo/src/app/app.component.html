@@ -12,30 +12,48 @@
   </section>
 
   <section slot="nav">
-    <goax-sidebar (_change)="handleMenu($event)">
-      <goax-sidebar-item
-        *ngFor="let localMenu of localMenus"
-        [active]="localMenu.active"
-        [displayname]="localMenu.displayname"
-        [name]="localMenu.name"
-        [url]="localMenu.url"
-      >
-        <ng-template
-          *ngIf="localMenu.items"
-          ngFor
-          let-subMenu
-          [ngForOf]="localMenu.items"
-        >
-          <goax-sidebar-item
-            [active]="subMenu.active"
-            [name]="subMenu.name"
-            [displayname]="subMenu.displayname"
-            [url]="subMenu.url"
-          >
-          </goax-sidebar-item>
-        </ng-template>
-      </goax-sidebar-item>
-    </goax-sidebar>
+    <goa-sidebar>
+      <goa-sidebar-group heading="Components">
+        <a routerLink="/accordion"> Accordion </a>
+        <a routerLink="/app-footer"> AppFooter </a>
+        <a routerLink="/app-header"> App Header </a>
+        <a routerLink="/badge"> Badge </a>
+        <a routerLink="/button"> Button </a>
+        <a routerLink="/button-group"> Button Group </a>
+        <a routerLink="/callout"> Callout </a>
+        <a routerLink="/checkbox"> Checkbox </a>
+        <a routerLink="/chip"> Chip </a>
+        <a routerLink="/circular-progress"> Circular Progress </a>
+        <a routerLink="/container"> Container </a>
+        <a routerLink="/dropdown"> Dropdown </a>
+        <a routerLink="/detail"> Detail </a>
+        <a routerLink="/file-upload"> File Upload </a>
+        <a routerLink="/form-item"> Form Item </a>
+        <a routerLink="/form-stepper"> Form Stepper </a>
+        <a routerLink="/hero-banner"> Hero Banner </a>
+        <a routerLink="/icon"> Icon </a>
+        <a routerLink="/icon-button"> Icon Button </a>
+        <a routerLink="/input"> Input </a>
+        <a routerLink="/microsite-header"> Microsite header </a>
+        <a routerLink="/modal"> Modal </a>
+        <a routerLink="/notification-banner"> Notification Banner </a>
+        <a routerLink="/paginate"> Pagination </a>
+        <a routerLink="/popover"> Popover </a>
+        <a routerLink="/radio"> Radio </a>
+        <a routerLink="/skeleton"> Skeleton </a>
+        <a routerLink="/table"> Table </a>
+        <a routerLink="/textarea"> TextArea </a>
+      </goa-sidebar-group>
+      <goa-sidebar-group heading="Utils">
+        <a routerLink="/spacing"> Spacing </a>
+        <a routerLink="/grid"> Grid </a>
+        <a routerLink="/styles"> Styles </a>
+      </goa-sidebar-group>
+      <goa-sidebar-group heading="Layouts">
+        <a routerLink="/two-column-layout"> Two Column Layout </a>
+        <a routerLink="/three-column-layout"> Three Column Layout </a>
+      </goa-sidebar-group>
+    </goa-sidebar>
   </section>
 
   <router-outlet></router-outlet>

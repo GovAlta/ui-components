@@ -108,8 +108,8 @@
     white-space: nowrap;
   }
 
-  goa-two-column-layout [slot="nav"] a {
-    display: block;
-    padding: 0.5rem 0;
+  goa-sidebar a:focus-visible,
+  goa-sidebar-group a:focus-visible {
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus) !important;
   }
 </style>
