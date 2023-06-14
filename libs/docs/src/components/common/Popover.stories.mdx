@@ -10,6 +10,7 @@ import {
 } from "@abgov/shared/storybook-common";
 import {
   GoAPopover,
+  GoABlock,
   GoABadge,
   GoAButton,
   GoACallout,
@@ -39,6 +40,12 @@ import {
     type="boolean"
     description="Whether or not the popover should have padding"
     defaultValue="true"
+  />
+  <Prop
+    name="position"
+    type="above | below | auto"
+    defaultValue="auto"
+    description="Provides control to where the popover content is positioned"
   />
   <Prop
     name="target"
@@ -242,6 +249,76 @@ import {
         <li>Item 1</li>
         <li>Item 2</li>
         <li>Item 3</li>
+      </GoAPopover>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### Position
+
+<Story name="Position">
+  <GoABlock gap="m">
+    <GoAPopover
+      position="above"
+      target={
+        <GoAButton type="secondary" size="compact">
+          Above
+        </GoAButton>
+      }
+    >
+      This is the popover content
+    </GoAPopover>
+    <GoAPopover
+      position="below"
+      target={
+        <GoAButton type="secondary" size="compact">
+          Below
+        </GoAButton>
+      }
+    >
+      This is the popover content
+    </GoAPopover>
+    <GoAPopover
+      position="auto"
+      target={
+        <GoAButton type="secondary" size="compact">
+          Auto
+        </GoAButton>
+      }
+    >
+      This is the popover content
+    </GoAPopover>
+  </GoABlock>
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-popover position="above">
+        <div slot="target">
+          <goa-button type="secondary" size="compact">Click me</goa-button>
+        </div>
+        This is the popover content
+      </goa-popover>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoAPopover
+        position="above"
+        target={
+          <GoAButton type="secondary" size="compact">
+            Click me
+          </GoAButton>
+        }
+      >
+        This is the popover content
       </GoAPopover>
     `}
     />

@@ -63,3 +63,4 @@ export { default as FileUploadCard } from './components/file-upload-card/FileUpl
 
 export { default as Sidebar } from './components/sidebar/Sidebar.svelte';
 export { default as SidebarGroup } from './components/sidebar-group/SidebarGroup.svelte';
+export { default as AppHeaderMenu } from './components/app-header-menu/AppHeaderMenu.svelte';

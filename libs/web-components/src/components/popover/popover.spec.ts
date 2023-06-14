@@ -20,8 +20,10 @@ it('should close content when clicked outside the content container', async () =
   const result = render(Popover)
   const target = result.queryByTestId("popover-target");
   await fireEvent.click(target);
-  expect(result.queryByTestId("popover-content")).toBeTruthy();
   const background = result.queryByTestId("popover-background");
+  expect(result.queryByTestId("popover-content")).toBeTruthy();
+  expect(result.queryByTestId("popover-background")).toBeTruthy();
+
   await fireEvent.click(background);
   expect(result.queryByTestId("popover-content")).toBeNull();
 });
