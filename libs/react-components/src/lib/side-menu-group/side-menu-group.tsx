@@ -9,23 +9,23 @@ declare global {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      "goa-sidebar-group": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-side-menu-group": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
 
 /* eslint-disable-next-line */
-interface SidebarGroupProps {
+interface SideMenuGroupProps {
   heading: string;
   children?: ReactNode;
 }
 
-export function GoASidebarGroup(props: SidebarGroupProps) {
+export function GoASideMenuGroup(props: SideMenuGroupProps) {
   return (
-    <goa-sidebar-group heading={props.heading}>
+    <goa-side-menu-group heading={props.heading}>
       {props.children}
-    </goa-sidebar-group>
+    </goa-side-menu-group>
   );
 }
 
-export default GoASidebarGroup;
+export default GoASideMenuGroup;

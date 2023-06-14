@@ -1,9 +1,9 @@
-<svelte:options tag="goa-sidebar-group" />
+<svelte:options tag="goa-side-menu-group" />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
 
-  type SidebarGroupElement = HTMLElement & { heading?: string }
+  type SideMenuGroupElement = HTMLElement & { heading?: string }
 
   export let heading: string;
 
@@ -60,7 +60,7 @@
     return url.endsWith(_slug);
   }
 
-  function matchesChild(el: SidebarGroupElement, url: string): boolean {
+  function matchesChild(el: SideMenuGroupElement, url: string): boolean {
     if (url.endsWith(toSlug(el.heading))) {
       return true; 
     }
@@ -95,8 +95,8 @@
         child.classList.remove("current")  
       }
 
-      // FIXME: hack to get sidebar-group (level >= 2) marked as children
-      if (child.tagName === "GOA-SIDEBAR-GROUP") {
+      // get side-menu-group (level >= 2) marked as children
+      if (child.tagName === "GOA-SIDE-MENU-GROUP") {
         child.setAttribute("child", "true")
       }
     })
@@ -146,8 +146,8 @@
   }
 
   /**
-   * .heading: the heading of a level 1 sidebar-group 
-   * :host([child=true]) a.heading: the heading of a level >=2 sidebar-group 
+   * .heading: the heading of a level 1 side-menu-group 
+   * :host([child=true]) a.heading: the heading of a level >=2 side-menu-group 
    */
   :host([child=true]) a.heading,
   .heading {
@@ -171,12 +171,12 @@
     background: var(--goa-color-info-background);
   }
 
-  :host([child=true]) .sidebar-group.current a.heading {
+  :host([child=true]) .side-menu-group.current a.heading {
     background: var(--goa-color-info-background);
     border-left: 4px solid var(--goa-color-interactive-disabled);
   }
 
-  .sidebar-group.current .heading {
+  .side-menu-group.current .heading {
     background: #CEDFEE;
   }
   .heading:hover {
@@ -195,7 +195,7 @@
 
 <div 
   bind:this={_rootEl}
-  class="sidebar-group"
+  class="side-menu-group"
   class:current={_current}
 >
   <a 

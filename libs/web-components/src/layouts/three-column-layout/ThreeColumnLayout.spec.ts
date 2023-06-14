@@ -8,6 +8,7 @@ describe("ThreeColumnLayout", () => {
     const footer = el.querySelector("[slot=footer]");
     const nav = el.querySelector("[slot=nav]");
     const sidebar = el.querySelector("[slot=sidebar]");
+    const sideMenu = el.querySelector("[slot=side-menu]");
     const layout = el.querySelector("goa-three-column-layout");
 
 
@@ -24,5 +25,8 @@ describe("ThreeColumnLayout", () => {
     expect(sidebar).toBeTruthy();
     expect(sidebar.querySelector("h2").innerHTML).toContain("Sidebar");
     expect(sidebar.querySelector("p").innerHTML).toContain("Sidebar content.");
+    expect(sideMenu).toBeTruthy();
+    expect(sideMenu.querySelector("h2").innerHTML).toContain("SideMenu");
+    expect(sideMenu.querySelector("p").innerHTML).toContain("Side menu content.");
   })
 })

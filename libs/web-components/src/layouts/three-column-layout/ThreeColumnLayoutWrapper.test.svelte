@@ -23,6 +23,10 @@
     <h2>Sidebar</h2>
     <p>Sidebar content.</p>
   </section>
+  <section slot="side-menu">
+    <h2>SideMenu</h2>
+    <p>Side menu content.</p>
+  </section>
   <goa-app-footer slot="footer">
   </goa-app-footer>
 </goa-three-column-layout>

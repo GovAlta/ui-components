@@ -7,7 +7,7 @@
   import '../../src';
   // import component here
   // ex. import "./pg-form-stepper.svelte";
-  import "./pg-sidebar.svelte";
+  import "./pg-sidemenu.svelte";
 
 </script>
 
@@ -19,7 +19,7 @@
 
   <!-- Testing component goes here -->
   <!-- ex. <pg-form-stepper /> -->
-  <pg-sidebar />
+  <pg-sidemenu />
 </main>
 
   <h1>App</h1>

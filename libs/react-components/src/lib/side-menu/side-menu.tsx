@@ -5,18 +5,18 @@ declare global {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      "goa-sidebar": React.HTMLAttributes<HTMLElement>;
+      "goa-side-menu": React.HTMLAttributes<HTMLElement>;
     }
   }
 }
 
 /* eslint-disable-next-line */
-export interface SidebarProps {
+export interface SideMenuProps {
   children: ReactNode;
 }
 
-export function GoASidebar(props: SidebarProps) {
-  return <goa-sidebar>{props.children}</goa-sidebar>;
+export function GoASideMenu(props: SideMenuProps) {
+  return <goa-side-menu>{props.children}</goa-side-menu>;
 }
 
-export default GoASidebar;
+export default GoASideMenu;
