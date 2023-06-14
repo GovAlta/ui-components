@@ -1,9 +1,9 @@
-import SidebarGroup from './SidebarGroup.svelte'
+import SideMenuGroup from './SideMenuGroup.svelte'
 import { fireEvent, render, waitFor } from '@testing-library/svelte'
 import { tick } from 'svelte'
 
 it("clicking expands and collapses the group", async () => {
-  const { queryByTestId, queryByRole } = render(SidebarGroup, { heading: "Some group"})
+  const { queryByTestId, queryByRole } = render(SideMenuGroup, { heading: "Some group"})
   await tick(); // needed since there is a tick in the component
   const link = queryByRole("link")
   const group = queryByTestId("group");

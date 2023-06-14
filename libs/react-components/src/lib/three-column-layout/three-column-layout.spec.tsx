@@ -12,9 +12,9 @@ const Links = () => (
     <a href="#claims">Claims</a>
   </>
 );
-const SideBar = () => (
+const SideMenu = () => (
   <>
-    <h2>Sidebar</h2>
+    <h2>Side Menu</h2>
     <p>Add content.</p>
   </>
 );
@@ -26,7 +26,7 @@ describe("ThreeColumnLayout", () => {
         header={<GoAAppHeader />}
         footer={<GoAAppFooter />}
         nav={<Links />}
-        sidebar={<SideBar />}
+        sideMenu={<SideMenu />}
       >
         <h1>Heading</h1>
         <p>
@@ -42,10 +42,10 @@ describe("ThreeColumnLayout", () => {
     expect(baseElement.innerHTML).toContain("<goa-app-header>");
     expect(baseElement.innerHTML).toContain("<goa-app-footer>");
     expect(baseElement.querySelectorAll("[slot=nav] a").length).toEqual(5);
-    expect(baseElement.querySelector("[slot=sidebar] h2").innerHTML).toContain(
-      "Sidebar"
-    );
-    expect(baseElement.querySelector("[slot=sidebar] p").innerHTML).toContain(
+    expect(
+      baseElement.querySelector("[slot=side-menu] h2").innerHTML
+    ).toContain("Side Menu");
+    expect(baseElement.querySelector("[slot=side-menu] p").innerHTML).toContain(
       "Add content."
     );
   });
@@ -56,7 +56,7 @@ describe("ThreeColumnLayout", () => {
         header={<GoAAppHeader />}
         footer={<GoAAppFooter />}
         nav={<Links />}
-        sidebar={<SideBar />}
+        sideMenu={<SideMenu />}
         leftColumnWidth="20%"
         rightColumnWidth="300px"
         maxContentWidth="50%"

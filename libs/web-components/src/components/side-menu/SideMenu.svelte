@@ -1,4 +1,4 @@
-<svelte:options tag="goa-sidebar" />
+<svelte:options tag="goa-side-menu" />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
@@ -71,14 +71,14 @@
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
   }
   
-  .sidebar {
+  .side-menu {
     display: block;
   }
 </style>
 
 <div 
   bind:this={_rootEl}
-  class="sidebar"
+  class="side-menu"
 >
   <slot />
 </div>

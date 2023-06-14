@@ -7,11 +7,11 @@ import {
   CodeSnippet,
   SupportInfo,
 } from "@abgov/shared/storybook-common";
-import { GoASidebar, GoASidebarGroup } from "@abgov/react-components";
+import { GoASideMenu, GoASideMenuGroup } from "@abgov/react-components";
 
-<Meta title="Components/Sidebar" />
+<Meta title="Components/SideMenu" />
 
-# Sidebar
+# SideMenu
 
 ### The side menu is a navigation component positioned on the left side of the screen.
 
@@ -19,7 +19,7 @@ import { GoASidebar, GoASidebarGroup } from "@abgov/react-components";
 
 ---
 
-#### SidebarGroup Properties
+#### Side Menu Group Properties
 
 <Props showTabs={true}>
   <Prop name="heading" type="string" description="Group header text" />
@@ -29,10 +29,10 @@ import { GoASidebar, GoASidebarGroup } from "@abgov/react-components";
 
 <Story name="Basic">
   <div style={{ width: "26ch" }}>
-    <GoASidebar>
+    <GoASideMenu>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
-    </GoASidebar>
+    </GoASideMenu>
   </div>
 </Story>
 
@@ -41,10 +41,10 @@ import { GoASidebar, GoASidebarGroup } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
-      <goa-sidebar>
+      <goa-side-menu>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-      </goa-sidebar>
+      </goa-side-menu>
     `}
     />
   </Tab>
@@ -52,10 +52,10 @@ import { GoASidebar, GoASidebarGroup } from "@abgov/react-components";
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoASidebar>
+      <GoASideMenu>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-      </GoASidebar>
+      </GoASideMenu>
     `}
     />
   </Tab>
@@ -63,18 +63,18 @@ import { GoASidebar, GoASidebarGroup } from "@abgov/react-components";
 
 <Story name="Submenu groups">
   <div style={{ width: "26ch" }}>
-    <GoASidebar>
+    <GoASideMenu>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
-      <GoASidebarGroup heading="Links">
+      <GoASideMenuGroup heading="Links">
         <a href="#foo">Foo</a>
         <a href="#bar">Bar</a>
-        <GoASidebarGroup heading="More Links">
+        <GoASideMenuGroup heading="More Links">
           <a href="#more-foo">More Foo</a>
           <a href="#more-bar">More Bar</a>
-        </GoASidebarGroup>
-      </GoASidebarGroup>
-    </GoASidebar>
+        </GoASideMenuGroup>
+      </GoASideMenuGroup>
+    </GoASideMenu>
   </div>
 </Story>
 
@@ -83,18 +83,18 @@ import { GoASidebar, GoASidebarGroup } from "@abgov/react-components";
     <CodeSnippet
       lang="html"
       code={`
-      <goa-sidebar>
+      <goa-side-menu>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-        <goa-sidebar-group heading="Links">
+        <goa-side-menu-group heading="Links">
           <a href="#foo">Foo</a>
           <a href="#bar">Bar</a>
-          <goa-sidebar-group heading="More Links">
+          <goa-side-menu-group heading="More Links">
             <a href="#more-foo">More Foo</a>
             <a href="#more-bar">More Bar</a>
-          </goa-sidebar-group>
-        </goa-sidebar-group>
-      </goa-sidebar>
+          </goa-side-menu-group>
+        </goa-side-menu-group>
+      </goa-side-menu>
     `}
     />
   </Tab>
@@ -102,18 +102,18 @@ import { GoASidebar, GoASidebarGroup } from "@abgov/react-components";
     <CodeSnippet
       lang="tsx"
       code={`
-      <GoASidebar>
+      <GoASideMenu>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-        <GoASidebarGroup heading="Links">
+        <GoASideMenuGroup heading="Links">
           <a href="#foo">Foo</a>
           <a href="#bar">Bar</a>
-          <GoASidebarGroup heading="More Links">
+          <GoASideMenuGroup heading="More Links">
             <a href="#more-foo">More Foo</a>
             <a href="#more-bar">More Bar</a>
-          </GoASidebarGroup>
-        </GoASidebarGroup>
-      </GoASidebar>
+          </GoASideMenuGroup>
+        </GoASideMenuGroup>
+      </GoASideMenu>
     `}
     />
   </Tab>

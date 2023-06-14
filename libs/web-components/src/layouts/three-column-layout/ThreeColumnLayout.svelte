@@ -13,7 +13,7 @@
   style={`
     --max-content-width: ${maxcontentwidth || "100%"};
     --nav-column-width: ${leftcolumnwidth || "256px"};
-    --sidebar-column-width: ${rightcolumnwidth || "256px"}
+    --side-menu-column-width: ${rightcolumnwidth || "256px"}
   `}
 >
   <header class="header">
@@ -29,8 +29,10 @@
       <slot />
     </main>
 
-    <nav class="nav sidebar">
+    <nav class="nav side-menu">
+      <!-- DEPRECATED: sidebar is deprecated  -->
       <slot name="sidebar"/>
+      <slot name="side-menu"/>
     </nav>
   </section>
 
@@ -95,11 +97,11 @@
       transform: translateX(0);
     }
 
-    .nav:not(.sidebar) {
+    .nav:not(.side-menu) {
       flex: 0 0 var(--nav-column-width);
     }
-    .nav.sidebar {
-      flex: 0 0 var(--sidebar-column-width);
+    .nav.side-menu {
+      flex: 0 0 var(--side-menu-column-width);
     }
     main {
       padding-right: 2rem;

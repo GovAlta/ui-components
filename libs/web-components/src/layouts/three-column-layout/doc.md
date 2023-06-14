@@ -1,5 +1,5 @@
 # Three column layout
-A three column layout to use as a starting point for your page. Typically, this is used for a side navigation alongside the main content of a page and a sidebar on the right.
+A three column layout to use as a starting point for your page. Typically, this is used for a side navigation alongside the main content of a page and a sidemenu on the right.
 
 Use it like this:
 ```html
@@ -16,8 +16,8 @@ Use it like this:
   </section>
   <h1>Main content</h1>
   <p>Add in your content here</p>
-  <section slot="sidebar">
-    <h2>Sidebar</h2>
+  <section slot="side-menu">
+    <h2>Side Menu</h2>
     <p>Add in your content here</p>
   </section>
   <section slot="footer">
