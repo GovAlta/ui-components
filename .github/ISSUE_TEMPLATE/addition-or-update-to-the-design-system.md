@@ -2,7 +2,7 @@
 name: Addition or update to the design system
 about: propose an addition or update to the design system
 title: ""
-labels: Update or addition
+labels: ""
 assignees: ""
 ---
 
@@ -22,7 +22,11 @@ If you need help putting your submission together please get in touch with the d
 
 # Have you already started or completed work on this component or pattern?
 
+> Links to repo or figma design can be helpful here
+
 # Are you currently using the proposed component within your service?
+
+> Link to a repo using the system, better yet link to the actual file so we can see how it's used
 
 # Anything else
 

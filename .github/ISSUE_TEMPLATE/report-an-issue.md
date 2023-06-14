@@ -2,12 +2,15 @@
 name: Report an issue
 about: Log a bug to help us improve
 title: ""
-labels: bug
+labels: ""
 assignees: ""
 ---
 
-If you need help putting your report together
-Get in touch with the design system team on Slack at [#design-system-support](https://goa-dio.slack.com/archives/C02PLLT9HQ9)
+A couple things to make sure of before you create an issue:
+1. Is your [Web Component Module](https://www.npmjs.com/package/@abgov/web-components) up to date
+  * Is your [Angular Module](https://www.npmjs.com/package/@abgov/angular-components) up to date
+  * Is your [React Module](https://www.npmjs.com/package/@abgov/react-components) up to date
+2. Have you gone over the [documentation](https://ui-components.alberta.ca/?path=/story/overview--page)
 
 ### Describe the bug
 
@@ -15,7 +18,10 @@ Get in touch with the design system team on Slack at [#design-system-support](ht
 
 ### What is the level of criticality
 
-> Describe the level of impact that this bug has on your service.
+* Critical
+* High
+* Medium
+* Low
 
 ### To Reproduce (include pictures or video if helpful)
 
@@ -32,19 +38,5 @@ Steps to reproduce the behaviour:
 
 ### System configuration
 
-#### Desktop (please complete the following information):
-
-- OS: [e.g. iOS]
-- Browser [e.g. chrome, safari]
-- Version [e.g. 22]
-
-#### Smartphone (please complete the following information):
-
-- Device: [e.g. iPhone6]
-- OS: [e.g. iOS12.1]
-- Browser [e.g. stock browser, safari]
-- Version [e.g. 22]
-
-### Additional context
-
-> Add any other context about the problem here.
+* Angular or React version
+* Browser(s) tested on
