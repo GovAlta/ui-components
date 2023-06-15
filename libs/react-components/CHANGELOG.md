@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.11.0] - 2023-06-19
+- Added a new wrapper for `GoATableSortHeader`
+- Added an `ariaLive` property for `GoANotification`
+- Added an `ariaLabel` property for `GoABadge`
+- New component added, `GoAAppHeaderMenu` for use inside `GoAAppHeader`
+- New `position` property added to `GoAPopover`
+- Added `open` property to `GoADetails`
+- Added `maxLength` property to `GoAInput`
+- Added new `GoAFormStepStatusType` for `GoAFormStep` component, to be used to remove eslint messages
+- Added new `GoASideMenuGroup` and `GoASideMenu` component
+
 ## [4.10.0] - 2023-04-21
 
 - Added a 3-column layout [3-column layout](https://ui-components.alberta.ca/?path=/docs/layouts-three-column--basic)
