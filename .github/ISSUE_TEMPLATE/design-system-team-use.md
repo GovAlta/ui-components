@@ -7,7 +7,3 @@ assignees: ""
 ---
 
 ## Acceptance Criteria:
-
-* Put acceptance criteria here
-  * And here
-    * Or here
