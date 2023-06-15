@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] - 2023-06-19
+- Removed `onHover` and `onFocus` treatments from the Icon component
+- Updated paddings and margins for the Modal component mobile view
+- Added an `arialive` property to the Notification Banner component
+- Updated the visual appearance of the File Upload component
+- Added an `arialabel` property for the Badge component
+- New `position` property added to Popover component
+- Large update to the App Header component
+  - The ability to add navigaton items using the new component App Header Menu
+  - You can now have a "signed in" dropdown for user functionality
+  - Notification icon to support in app notifications
+  - Increased accessibility w/ Navigation Landmark and Keyboard Navigation
+- Container has been updated to align in size when used inside a Grid component
+- Removed `max-width` from Callout component
+- Added `open` property to Details component
+- Added the ability to apply sorting to the Table component on creation
+- Textarea component will now update properly if the browser's spellcheck is used
+- Dropdown component can now be reset to a "blank" value
+- Added a `maxlength` property to the Input component
+- Modified Form Stepper component to allow for freely traversing all complete steps
+- Added a new Side Menu component
+
 ## [1.10.0] - 2023-04-21
 - Added a 3-column layout: https://ui-components.alberta.ca/?path=/docs/layouts-three-column--basic
 - Added a smaller callout variant for space-efficient use on small screens.
