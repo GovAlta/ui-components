@@ -35,8 +35,8 @@ body:
       label: To Reproduce
       description: >-
         Please put detailed steps required to reproduce your issue
-      validations:
-        required: true
+    validations:
+      required: true
   - type: textarea
     id: logs
     attributes:
