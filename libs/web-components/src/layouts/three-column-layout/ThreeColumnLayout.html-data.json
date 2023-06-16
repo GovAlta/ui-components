@@ -1,6 +1,10 @@
 {
   "name": "goa-three-column-layout",
-  "required": ["header", "footer", "nav"],
+  "required": [
+    "header",
+    "footer",
+    "nav"
+  ],
   "attributes": [
     {
       "name": "leftcolumnwidth",
@@ -36,9 +40,9 @@
       "description": "Component containing nav links for application"
     },
     {
-      "name": "sidebar",
+      "name": "side-menu",
       "type": "slot",
-      "description": "Component containing sidebar section (right column)"
+      "description": "Component containing side menu section (right column)"
     }
   ],
   "references": [

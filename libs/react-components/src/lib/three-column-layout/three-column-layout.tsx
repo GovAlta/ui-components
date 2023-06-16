@@ -19,10 +19,11 @@ interface Props {
   leftColumnWidth?: string;
   rightColumnWidth?: string;
   maxContentWidth?: string;
-  header: ReactNode;
-  footer: ReactNode;
-  nav: ReactNode;
-  sidebar: ReactNode;
+  header?: ReactNode;
+  footer?: ReactNode;
+  nav?: ReactNode;
+  sidebar?: ReactNode; // DEPRECATED
+  sideMenu?: ReactNode;
   children: ReactNode;
 }
 
@@ -35,7 +36,8 @@ export function GoAThreeColumnLayout(props: Props) {
     >
       {props.header && <div slot="header">{props.header}</div>}
       {props.nav && <div slot="nav">{props.nav}</div>}
-      {props.sidebar && <div slot="sidebar">{props.sidebar}</div>}
+      {props.sidebar && <div slot="side-menu">{props.sidebar}</div>}
+      {props.sideMenu && <div slot="side-menu">{props.sideMenu}</div>}
       {props.children}
       {props.footer && <div slot="footer">{props.footer}</div>}
     </goa-three-column-layout>

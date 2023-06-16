@@ -1,17 +1,17 @@
-# Sidebar group
+# Side menu group
 
 Use it like this:
 ```html
-<goa-sidebar>
+<goa-side-menu>
   <a href="#about">About</a>
   <a href="#contact">Contact</a>
-  <goa-sidebar-group heading="Links">
+  <goa-side-menu-group heading="Links">
     <a href="#foo">Foo</a>
     <a href="#bar">Bar</a>
-    <goa-sidebar-group heading="More Links">
+    <goa-side-menu-group heading="More Links">
       <a href="#more-foo">More Foo</a>
       <a href="#more-bar">More Bar</a>
-    </goa-sidebar-group>
-  </goa-sidebar-group>
-</goa-sidebar>
+    </goa-side-menu-group>
+  </goa-side-menu-group>
+</goa-side-menu>
 ```
