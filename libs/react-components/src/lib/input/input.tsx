@@ -216,7 +216,7 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
 const onDateChangeHandler = (onChange: OnDateChange) => {
   return (name: string, value: string) => {
     if (!value) {
-      onChange(name, new Date(0));
+      onChange(name, "");
       return;
     }
     onChange(name, parseISO(value));
