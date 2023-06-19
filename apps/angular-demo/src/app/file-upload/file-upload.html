@@ -10,7 +10,7 @@
   [size]="upload.file.size"
   [filename]="upload.file.name"
   [progress]="progressList[upload.file.name]"
-  (delete)="deleteFile(upload)"
-  (cancel)="deleteFile(upload)"
+  (_delete)="deleteFile(upload)"
+  (_cancel)="deleteFile(upload)"
 >
 </goa-file-upload-card>
