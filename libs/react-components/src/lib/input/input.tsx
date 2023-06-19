@@ -54,6 +54,7 @@ interface WCProps extends Margins {
   min?: string | number;
   max?: string | number;
   step?: number;
+  maxlength?: number;
 }
 
 declare global {
@@ -89,6 +90,7 @@ interface BaseProps extends Margins {
   ariaLabel?: string;
   leadingContent?: React.ReactNode;
   trailingContent?: React.ReactNode;
+  maxLength?: number;
 }
 
 type OnChange = (name: string, value: string) => void;
@@ -147,6 +149,7 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   ml,
   leadingContent,
   trailingContent,
+  maxLength,
   onTrailingIconClick,
   onChange,
 }) => {
@@ -194,6 +197,7 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
       min={min}
       max={max}
       step={step}
+      maxlength={maxLength}
       prefix={prefix}
       suffix={suffix}
       arialabel={ariaLabel}
@@ -212,7 +216,7 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
 const onDateChangeHandler = (onChange: OnDateChange) => {
   return (name: string, value: string) => {
     if (!value) {
-      onChange(name, new Date(0));
+      onChange(name, "");
       return;
     }
     onChange(name, parseISO(value));

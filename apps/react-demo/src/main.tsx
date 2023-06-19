@@ -28,6 +28,7 @@ import NotificationBanner from "./routes/notificationBanner";
 import Pagination from "./routes/pagination";
 import Popover from "./routes/popover";
 import Radio from "./routes/radio";
+import SideMenu from "./routes/sideMenu";
 import Skeleton from "./routes/skeleton";
 import Styles from "./routes/styles";
 import Table from "./routes/table";
@@ -35,6 +36,8 @@ import TextArea from "./routes/textarea";
 import ThreeColumnLayout from "./routes/threeColumnLayout";
 
 import "@abgov/web-components/index.css";
+import Details from "./routes/details";
+import {FormStepperRoute} from "./routes/formStepper";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
@@ -66,11 +69,14 @@ ReactDOM.render(
         <Route path="pagination" element={<Pagination />} />
         <Route path="popover" element={<Popover />} />
         <Route path="radio" element={<Radio />} />
+        <Route path="side-menu" element={<SideMenu />} />
         <Route path="skeleton" element={<Skeleton />} />
         <Route path="styles" element={<Styles />} />
         <Route path="table" element={<Table />} />
         <Route path="textarea" element={<TextArea />} />
         <Route path="three-column-layout" element={<ThreeColumnLayout />} />
+        <Route path="details" element={<Details />} />
+        <Route path="form-stepper" element={<FormStepperRoute/>} />
       </Route>
     </Routes>
   </BrowserRouter>,

@@ -1,0 +1,124 @@
+import { Meta, Story } from "@storybook/addon-docs";
+import {
+  Props,
+  Prop,
+  Tabs,
+  Tab,
+  CodeSnippet,
+  SupportInfo,
+} from "@abgov/shared/storybook-common";
+import { GoASideMenu, GoASideMenuGroup } from "@abgov/react-components";
+
+<Meta title="Components/SideMenu" />
+
+# SideMenu
+
+### The side menu is a navigation component positioned on the left side of the screen.
+
+[Figma design component](https://www.figma.com/file/k9ZHctiEnN74GEhGWpio3K/Component---Side-Menu?type=design&node-id=2541-9368&t=lnUt5z25Ypo1Fq5T-4)
+
+---
+
+#### Side Menu Group Properties
+
+<Props showTabs={true}>
+  <Prop name="heading" type="string" description="Group header text" />
+</Props>
+
+#### Basic
+
+<Story name="Basic">
+  <div style={{ width: "26ch" }}>
+    <GoASideMenu>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </GoASideMenu>
+  </div>
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-side-menu>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </goa-side-menu>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoASideMenu>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </GoASideMenu>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+<Story name="Submenu groups">
+  <div style={{ width: "26ch" }}>
+    <GoASideMenu>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <GoASideMenuGroup heading="Links">
+        <a href="#foo">Foo</a>
+        <a href="#bar">Bar</a>
+        <GoASideMenuGroup heading="More Links">
+          <a href="#more-foo">More Foo</a>
+          <a href="#more-bar">More Bar</a>
+        </GoASideMenuGroup>
+      </GoASideMenuGroup>
+    </GoASideMenu>
+  </div>
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-side-menu>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <goa-side-menu-group heading="Links">
+          <a href="#foo">Foo</a>
+          <a href="#bar">Bar</a>
+          <goa-side-menu-group heading="More Links">
+            <a href="#more-foo">More Foo</a>
+            <a href="#more-bar">More Bar</a>
+          </goa-side-menu-group>
+        </goa-side-menu-group>
+      </goa-side-menu>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      <GoASideMenu>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <GoASideMenuGroup heading="Links">
+          <a href="#foo">Foo</a>
+          <a href="#bar">Bar</a>
+          <GoASideMenuGroup heading="More Links">
+            <a href="#more-foo">More Foo</a>
+            <a href="#more-bar">More Bar</a>
+          </GoASideMenuGroup>
+        </GoASideMenuGroup>
+      </GoASideMenu>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+---
+
+<SupportInfo />

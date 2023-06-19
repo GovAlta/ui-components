@@ -14,10 +14,12 @@
   export let disabled: string = "false";
   export let error: string = "false";
   export let width: string = "";
-	export let native: boolean = false;
+	export let native: string = "false";
   export let items: string[];
+
+  export let resetValue = "orange";
   function setValue() {
-    value = "orange";
+    value = resetValue;
   }
 </script>
 

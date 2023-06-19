@@ -1,5 +1,9 @@
 import "@abgov/web-components";
 
+export * from "./lib/side-menu-group/side-menu-group";
+export * from "./lib/side-menu/side-menu";
+
+export * from "./lib/app-header-menu/app-header-menu";
 export * from "./lib/pages/pages";
 export * from "./lib/file-upload-card/file-upload-card";
 
@@ -8,6 +12,7 @@ export * from "./lib/file-upload-input/file-upload-input";
 // Types
 export type { GoAIconType } from "./lib/icon/icon";
 export type { GoABadgeType } from "./lib/badge/badge";
+export type { GoAFormStepStatusType } from "./lib/form-step/form-step";
 
 // Components
 export * from "./lib/accordion/accordion";
@@ -49,6 +54,7 @@ export * from "./lib/skeleton/skeleton";
 export * from "./lib/spacer/spacer";
 export * from "./lib/spinner/spinner";
 export * from "./lib/table/table";
+export * from "./lib/table/table-sort-header";
 export * from "./lib/textarea/textarea";
 export * from "./lib/two-column-layout/two-column-layout";
 export * from "./lib/three-column-layout/three-column-layout";

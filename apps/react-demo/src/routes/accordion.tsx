@@ -15,6 +15,7 @@ export default function Accordion() {
         secondaryText="Secondary Text"
         headingContent={<GoABadge type="success" content="Success" />}
       >
+        <a href="#">Some link</a>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus dolore
         placeat aperiam officiis, sit corporis nulla dolorem non vero ex nobis
         aliquam cumque amet asperiores. Vitae amet ullam quas nemo?

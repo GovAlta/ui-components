@@ -5,62 +5,60 @@
       level="alpha"
       version="UAT"
     ></goa-microsite-header>
-    <goa-app-header
-      heading="Design Systems"
-      maxcontentwidth="1400px"
-    ></goa-app-header>
+    <goa-app-header heading="Design Systems" maxcontentwidth="1400px">
+      <a href="#">Support</a>
+      <goa-app-header-menu heading="Tickets" leadingIcon="ticket">
+        <a href="#">Cases</a>
+        <a href="#">Payments</a>
+        <a href="#">Outstanding</a>
+      </goa-app-header-menu>
+      <a href="#" className="interactive">Sign in</a>
+    </goa-app-header>
   </section>
 
   <section slot="nav">
-    <abgov-nav-link label="Accordion" path="/accordion"></abgov-nav-link>
-    <abgov-nav-link label="App Header" path="/app-header"></abgov-nav-link>
-    <abgov-nav-link label="AppFooter" path="/app-footer"></abgov-nav-link>
-    <abgov-nav-link label="Badge" path="/badge"></abgov-nav-link>
-    <abgov-nav-link label="Button Group" path="/button-group"></abgov-nav-link>
-    <abgov-nav-link label="Button" path="/button"></abgov-nav-link>
-    <abgov-nav-link label="Callout" path="/callout"></abgov-nav-link>
-    <abgov-nav-link label="Checkbox" path="/checkbox"></abgov-nav-link>
-    <abgov-nav-link label="Chip" path="/chip"></abgov-nav-link>
-    <abgov-nav-link
-      label="Circular progress"
-      path="/circular-progress"
-    ></abgov-nav-link>
-    <abgov-nav-link label="Container" path="/container"></abgov-nav-link>
-    <abgov-nav-link label="Details" path="/detail"></abgov-nav-link>
-    <abgov-nav-link label="Dropdown" path="/dropdown"></abgov-nav-link>
-    <abgov-nav-link label="File Upload" path="/file-upload"></abgov-nav-link>
-    <abgov-nav-link label="Form Item" path="/form-item"></abgov-nav-link>
-    <abgov-nav-link label="Form Stepper" path="/form-stepper"></abgov-nav-link>
-    <abgov-nav-link label="Grid" path="/grid"></abgov-nav-link>
-    <abgov-nav-link label="Hero Banner" path="/hero-banner"></abgov-nav-link>
-    <abgov-nav-link label="Icon" path="/icon"></abgov-nav-link>
-    <abgov-nav-link label="Icon Button" path="/icon-button"></abgov-nav-link>
-    <abgov-nav-link label="Input" path="/input"></abgov-nav-link>
-    <abgov-nav-link
-      label="Microsite header"
-      path="/microsite-header"
-    ></abgov-nav-link>
-    <abgov-nav-link label="Modal" path="/modal"></abgov-nav-link>
-    <abgov-nav-link
-      label="Notification Banner"
-      path="/notification-banner"
-    ></abgov-nav-link>
-    <abgov-nav-link label="Paginate" path="/paginate"></abgov-nav-link>
-    <abgov-nav-link label="Popover" path="/popover"></abgov-nav-link>
-    <abgov-nav-link label="Radio" path="/radio"></abgov-nav-link>
-    <abgov-nav-link label="Skeleton" path="/skeleton"></abgov-nav-link>
-    <abgov-nav-link label="Spacing" path="/spacing"></abgov-nav-link>
-    <abgov-nav-link label="Styles" path="/styles"></abgov-nav-link>
-    <abgov-nav-link label="Table" path="/table"></abgov-nav-link>
-    <abgov-nav-link label="TextArea" path="/textarea"></abgov-nav-link>
-    <abgov-nav-link
-      label="Two column layout"
-      path="/two-column-layout"
-    ></abgov-nav-link>
-    <abgov-nav-link
-      label="Three column layout"
-      path="/three-column-layout"
-    ></abgov-nav-link>
+    <goa-side-menu>
+      <goa-side-menu-group heading="Components">
+        <a routerLink="/accordion"> Accordion </a>
+        <a routerLink="/app-footer"> AppFooter </a>
+        <a routerLink="/app-header"> App Header </a>
+        <a routerLink="/badge"> Badge </a>
+        <a routerLink="/button"> Button </a>
+        <a routerLink="/button-group"> Button Group </a>
+        <a routerLink="/callout"> Callout </a>
+        <a routerLink="/checkbox"> Checkbox </a>
+        <a routerLink="/chip"> Chip </a>
+        <a routerLink="/circular-progress"> Circular Progress </a>
+        <a routerLink="/container"> Container </a>
+        <a routerLink="/dropdown"> Dropdown </a>
+        <a routerLink="/detail"> Detail </a>
+        <a routerLink="/file-upload"> File Upload </a>
+        <a routerLink="/form-item"> Form Item </a>
+        <a routerLink="/form-stepper"> Form Stepper </a>
+        <a routerLink="/hero-banner"> Hero Banner </a>
+        <a routerLink="/icon"> Icon </a>
+        <a routerLink="/icon-button"> Icon Button </a>
+        <a routerLink="/input"> Input </a>
+        <a routerLink="/microsite-header"> Microsite header </a>
+        <a routerLink="/modal"> Modal </a>
+        <a routerLink="/notification-banner"> Notification Banner </a>
+        <a routerLink="/paginate"> Pagination </a>
+        <a routerLink="/popover"> Popover </a>
+        <a routerLink="/radio"> Radio </a>
+        <a routerLink="/skeleton"> Skeleton </a>
+        <a routerLink="/table"> Table </a>
+        <a routerLink="/textarea"> TextArea </a>
+      </goa-side-menu-group>
+      <goa-side-menu-group heading="Utils">
+        <a routerLink="/spacing"> Spacing </a>
+        <a routerLink="/grid"> Grid </a>
+        <a routerLink="/styles"> Styles </a>
+      </goa-side-menu-group>
+      <goa-side-menu-group heading="Layouts">
+        <a routerLink="/two-column-layout"> Two Column Layout </a>
+        <a routerLink="/three-column-layout"> Three Column Layout </a>
+      </goa-side-menu-group>
+    </goa-side-menu>
   </section>
 
   <router-outlet></router-outlet>

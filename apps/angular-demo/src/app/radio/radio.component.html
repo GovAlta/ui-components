@@ -88,3 +88,16 @@
   <goa-radio-item name="bindingColor" value="blue"></goa-radio-item>
   <goa-radio-item name="bindingColor" value="orange"></goa-radio-item>
 </goa-radio-group>
+
+<h2>Reactive Binding - Disabled</h2>
+<goa-radio-group
+  name="color"
+  goaValue
+  [formControl]="reactiveFormCtrl"
+  [attr.disabled]="true"
+  value="reactiveFormCtrl.value"
+>
+  <goa-radio-item name="color" value="red"></goa-radio-item>
+  <goa-radio-item name="color" value="blue"></goa-radio-item>
+  <goa-radio-item name="color" value="orange"></goa-radio-item>
+</goa-radio-group>

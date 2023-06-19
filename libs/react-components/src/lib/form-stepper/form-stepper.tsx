@@ -18,7 +18,7 @@ declare global {
 
 export interface FormStepperProps extends Margins {
   step?: number;
-  testId: string;
+  testId?: string;
   children?: ReactNode;
   onChange?: (step: number) => void;
 }
@@ -41,7 +41,7 @@ export function GoAFormStepper({
     const current = ref.current;
     const changeListener = (e: unknown) => {
       const { step } = (e as CustomEvent).detail;
-      onChange?.(step);
+      onChange?.(+step);
     };
 
     current.addEventListener("_change", changeListener);

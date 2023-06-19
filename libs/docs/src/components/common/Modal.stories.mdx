@@ -65,6 +65,7 @@ import { useState } from "react";
   />
   <Prop
     name="closable"
+    lang="angular"
     type="boolean"
     defaultValue="false"
     description="Show close icon and allow clicking the background to close the modal"
@@ -100,6 +101,12 @@ import { useState } from "react";
     description="Buttons displayed in the bottom right of the modal instead of a close icon"
   />
 </Props>
+
+<GoACallout>
+  When using a dropdown inside a modal where there is limited space for the menu
+  items to display, ensure the "native" property is set to "true" for the
+  dropdown to function properly.
+</GoACallout>
 
 #### Basic
 

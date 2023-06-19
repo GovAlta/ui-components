@@ -21,6 +21,7 @@ describe("GoA Badge", () => {
         mr="m"
         mb="l"
         ml="xl"
+        ariaLabel="text"
       />
     );
     const el = container.querySelector("goa-badge");
@@ -31,5 +32,6 @@ describe("GoA Badge", () => {
     expect(el.getAttribute("mr")).toBe("m");
     expect(el.getAttribute("mb")).toBe("l");
     expect(el.getAttribute("ml")).toBe("xl");
+    expect(el.getAttribute("arialabel")).toBe("text");
   });
 });

@@ -24,9 +24,9 @@ export default function ThreeColumnLayout() {
       </a>
     </>
   );
-  const sidebar = (
+  const sideMenu = (
     <>
-      <h2>Sidebar</h2>
+      <h2>Side Menu</h2>
       <p>Add in your content here.</p>
     </>
   );
@@ -43,7 +43,7 @@ export default function ThreeColumnLayout() {
         header={<GoAAppHeader />}
         footer={<GoAAppFooter />}
         nav={nav}
-        sidebar={sidebar}
+        sideMenu={sideMenu}
       >
         {mainContent}
       </GoAThreeColumnLayout>
@@ -54,7 +54,7 @@ export default function ThreeColumnLayout() {
         header={<GoAAppHeader />}
         footer={<GoAAppFooter />}
         nav={nav}
-        sidebar={sidebar}
+        sideMenu={sideMenu}
       >
         {mainContent}
       </GoAThreeColumnLayout>
@@ -65,18 +65,18 @@ export default function ThreeColumnLayout() {
         header={<GoAAppHeader />}
         footer={<GoAAppFooter />}
         nav={nav}
-        sidebar={sidebar}
+        sideMenu={sideMenu}
       >
         {mainContent}
       </GoAThreeColumnLayout>
 
-      <h1>Sidebar Column Width</h1>
+      <h1>Side menu Column Width</h1>
       <GoAThreeColumnLayout
         rightColumnWidth={"32ch"}
         header={<GoAAppHeader />}
         footer={<GoAAppFooter />}
         nav={nav}
-        sidebar={sidebar}
+        sideMenu={sideMenu}
       >
         {mainContent}
       </GoAThreeColumnLayout>

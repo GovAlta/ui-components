@@ -1,0 +1,9 @@
+{
+  "name": "goa-side-menu-group",
+  "attributes": [
+    {
+      "name": "heading",
+      "description": "Heading text for group"
+    },
+  ]
+}

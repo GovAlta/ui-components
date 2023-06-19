@@ -100,11 +100,12 @@
       .filter((child: Element) => child.tagName === "GOA-DROPDOWN-ITEM")
       .map((el: HTMLElement) => {
           const option = el as unknown as Option
-          const value = el.getAttribute("value") || option.value;
+          const value = el.getAttribute("value") || option.value || "";
           const label =
             el.getAttribute("label")
             || option.label
             || value;
+
           const selected = _values.includes(value);
           if (selected) {
             _selectedLabel = label;
@@ -147,7 +148,7 @@
   function parseValues(selectedValue: string) {
     let rawValue: string[];
     try {
-      rawValue = JSON.parse(selectedValue || "[]");
+      rawValue = JSON.parse(selectedValue || `[""]`);
     } catch (e) {
       rawValue = [selectedValue];
     }

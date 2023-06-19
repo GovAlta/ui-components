@@ -61,6 +61,14 @@ import { GoATextArea } from "@abgov/react-components";
   />
   <Prop
     name="disabled"
+    lang="angular"
+    type="boolean"
+    defaultValue="false"
+    description="Sets the input to a disabled state.  **Use [attr.disabled] with [formControl]**"
+  />
+  <Prop
+    name="disabled"
+    lang="react"
     type="boolean"
     defaultValue="false"
     description="Sets the input to a disabled state"
@@ -201,6 +209,17 @@ export const noop = () => {
       lang="html"
       code={`
         <goa-textarea name="comment" disabled></goa-textarea>
+        <!-- Use [attr.disabled] with [formControl] -->
+        <goa-textarea name="comment" goaValue [formControl]="reactiveFormCtrl" [attr.disabled]="true"></goa-textarea>
+      `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class SomeComponent {
+          reactiveFormCtrl = new FormControl();
+        }
       `}
     />
   </Tab>

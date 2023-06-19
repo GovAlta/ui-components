@@ -2,170 +2,125 @@
 
 <!-- ======================================================================= -->
 <script lang="ts">
-  import { toBoolean } from "../../common/utils";
+  import { onMount } from "svelte";
 
-  export let active: string;
+  // Private
 
-  let ignoreFocusChanges: boolean = false;
-  let lastFocus: Element;
-  let rootEl: Element;
-  let hasListeners: boolean = false;
+  let rootEl: HTMLElement;
+  let boundryStartEl: HTMLElement;
+  let boundryEndEl: HTMLElement;
+  let isShiftPressed: boolean;
 
-  $: isActive = toBoolean(active);
-  $: {
-    if (isActive && !hasListeners) {
-      addListeners();
-      hasListeners = true;
-    }
-    if (!isActive && hasListeners) {
-      removeListeners();
-      hasListeners = false;
-    }
+  // Hooks
+
+  onMount(() => {
+    // event is attached to the rootEl, eliminating the need to remove the listener since it 
+    // will be removed when the associated element is removed.
+    rootEl.addEventListener("focus", onFocus, true);
+    rootEl.addEventListener("keydown", onKeydown, true);
+    rootEl.addEventListener("keyup", onKeyup, true);
+
+    boundryStartEl = rootEl.querySelector("[data-tab-boundry=start]")
+    boundryEndEl = rootEl.querySelector("[data-tab-boundry=end]")
+  })
+
+  function onKeydown(e: KeyboardEvent) {
+    if (e.shiftKey) isShiftPressed = true;
   }
 
-  function removeListeners() {
-    document.removeEventListener('focus', trapFocus, true);
+  function onKeyup(e: KeyboardEvent) {
+    if (e.shiftKey) isShiftPressed = false;
   }
 
-  function addListeners() {
-    document.addEventListener('focus', trapFocus, true);
-  }
+  // Functions
 
-  // ====
-  // First Node 
-  // ====
+  function isFocusable(node: Node): Node {
+    const element = node as HTMLElement;
+    const isTabbable = 
+      element.tabIndex > 0 
+      || element.tabIndex === 0 
+      && element.getAttribute('tabIndex') !== null;
 
-  function focusOnFirstNode(nodes: NodeList | Node[]): boolean {
-    if (!nodes) return false;
-
-    for (const node of nodes) {
-      const isFocusable 
-        = focus(node as HTMLElement)
-        ||  focusOnFirstNode(node.childNodes)
-        ||  focusOnFirstNodeOfSlot(node)
-        ||  focusOnFirstNodeOfShadowDOM(node);
-
-      if (isFocusable) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  function focusOnFirstNodeOfSlot(node: Node): boolean {
-    if (!(node instanceof HTMLSlotElement)) return false;
-
-    if (focusOnFirstNode(node.assignedNodes())) {
-      return true;
-    }
-  }
-
-  function focusOnFirstNodeOfShadowDOM(node: Node): boolean {
-    if (!(node instanceof HTMLElement)) return false;
-
-    if (focusOnFirstNode(node.shadowRoot?.childNodes)) {
-      return true;
-    }
-  }
-
-  // ====
-  // Last Node 
-  // ====
-
-  function focusOnLastNode(nodes: NodeList | Node[]): boolean {
-    if (!nodes) return false;
-
-    for (let i = nodes.length - 1; i >= 0; i--) {
-      let node = nodes[i];
-      if (focus(node as HTMLElement) ||
-          focusOnLastNode(node.childNodes) ||
-          focusOnLastNodeOfSlot(node) ||
-          focusOnLastNodeOfShadowDOM(node)) {
-        return true;
-      }
-    }
-
-    return false;
-  };
-
-  function focusOnLastNodeOfSlot(node: Node): boolean {
-    if (!(node instanceof HTMLSlotElement)) return false;
-
-    if (focusOnLastNode(node.assignedNodes())) {
-      return true;
-    }
-  }
-
-  function focusOnLastNodeOfShadowDOM(node: Node): boolean {
-    if (!(node instanceof HTMLElement)) return false;
-
-    if (focusOnLastNode(node.shadowRoot?.childNodes)) {
-      return true;
-    }
-  }
-
-  function focus(element: HTMLElement): boolean {
-    if (!isFocusable(element)) return false;
-
-    try {
-      ignoreFocusChanges = true;
-      element && element.focus();
-    }
-    finally {
-      ignoreFocusChanges = false;
-    }
-
-    return (document.activeElement === element);
-  };
-
-  function trapFocus(event: Event): void {
-    if (ignoreFocusChanges) return;
-
-    const slotElements = (rootEl.firstChild as HTMLSlotElement)?.assignedElements();
-    if (!slotElements?.length) return;
-
-    const contentRootElement = slotElements[0];
-    if (event.composedPath().includes(contentRootElement)) {
-      lastFocus = event.target as Element;
-      return;
-    }
-
-    focusOnFirstNode(contentRootElement.childNodes);
-    if (lastFocus == document.activeElement) {
-      focusOnLastNode(contentRootElement.childNodes);
-    }
-    lastFocus = document.activeElement;
-  };
-
-  function isFocusable(element: HTMLElement): boolean {
-    const isTabbable = element.tabIndex > 0 || (element.tabIndex === 0 && element.getAttribute('tabIndex') !== null);
-    if (isTabbable) return true;
-    if (element["disabled"]) return false;
+    if (isTabbable) return node;
+    if (element["disabled"]) return null;
 
     switch (element.nodeName) {
       case 'A': {
         const el = element as HTMLLinkElement;
-        return !!el.href && el.rel !== 'ignore';
+        if (!!el.href && el.rel !== 'ignore')
+          return node;
       }
       case 'INPUT': {
         const el = element as HTMLInputElement;
-        return el.type !== 'hidden' && el.type !== 'file';
+        if (el.type !== 'hidden' && el.type !== 'file')
+          return node
       }
       case 'BUTTON':
       case 'SELECT':
       case 'TEXTAREA':
-        return true;
+        return node;
       default:
-        return false;
+        return null;
     }
-  };
+  }
 
+  // Focus event handler  
+  function onFocus(event: Event): void {
+    const el = event.target as HTMLElement;
+        
+    if (el.dataset.tabBoundry === "start") {
+      if (isShiftPressed) {
+        boundryEndEl.focus();        
+        return
+      } 
+      const next = findFirstNode([el.nextElementSibling], false) as HTMLElement;
+      next?.focus()
+      return;
+    } 
+
+    if (el.dataset.tabBoundry === "end") {
+      if (!isShiftPressed) {
+        boundryStartEl.focus();
+        return;
+      }
+      const next = findFirstNode([el.previousElementSibling], true) as HTMLElement;
+      next?.focus()
+      return;
+    }
+  }
+
+  function findFirstNode(nodes: NodeList | Node [], reversed: boolean = false): Node {
+    const nodeList = reversed ? [...nodes].reverse() : nodes;
+    for (const node of nodeList) {
+      const el = 
+        isFocusable(node)
+        || findFirstNode(node.childNodes, reversed)
+        || findFirstNodeOfSlot(node, reversed)
+        || findFirstNodeOfShadowDOM(node, reversed);
+      if (el) {
+        return el
+      }
+    }
+    return null;
+  }
+  
+  function findFirstNodeOfSlot(node: Node, reversed: boolean): Node {
+    if (!(node instanceof HTMLSlotElement)) return null;
+    return findFirstNode([...node.assignedNodes()], reversed);
+  }
+
+  function findFirstNodeOfShadowDOM(node: Node, reversed: boolean): Node {
+    if (!(node instanceof HTMLElement)) return null;
+    return findFirstNode([...node.shadowRoot?.childNodes || []], reversed);
+  }
 </script>
 
 <div bind:this={rootEl}>
+  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+  <span data-tab-boundry="start" tabindex="0"></span>
   <slot />
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-  <span tabindex="0"></span>
+  <span data-tab-boundry="end" tabindex="0"></span>
 </div>
 
 <style>

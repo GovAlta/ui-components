@@ -15,6 +15,11 @@
 <goa-input name="foo" type="number" min="0" max="10" step="2"></goa-input>
 <goa-input name="foo" type="number"></goa-input>
 
+<h2>Max Length</h2>
+<goa-form-item label="Max Length" helptext="Maximum is 10.">
+  <goa-input name="foo" maxlength="10"></goa-input>
+</goa-form-item>
+
 <h2>Date and time</h2>
 <goa-input
   name="boundDate"
@@ -169,3 +174,11 @@
   </div>
   <div slot="trailingContent">SomeText</div>
 </goa-input>
+
+<h2>Reactive binding - Disabled</h2>
+<goa-input
+  goaValue
+  [formControl]="reactiveFormCtrl"
+  [value]="reactiveFormCtrl.value"
+  [attr.disabled]="true"
+></goa-input>

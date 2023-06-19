@@ -1,6 +1,9 @@
 <h2>Detail</h2>
 
+<goa-button (_click)="toggle()"> Toggle Details </goa-button>
+<br />
 <goa-details
+  [open]="isOpen1"
   heading="This is the titleThis is the titleThis is the titleThis is the titleThis is the titleThis is the titleThis is the titleThis is the title"
 >
   <p>

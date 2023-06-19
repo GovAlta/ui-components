@@ -166,6 +166,11 @@
       "name": "trailingContent",
       "type": "slot",
       "description": "Sets the content to the right of the input field"
+    },
+    {
+      "name": "maxlength",
+      "type": "number",
+      "description": "Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input."
     }
   ],
   "references": [

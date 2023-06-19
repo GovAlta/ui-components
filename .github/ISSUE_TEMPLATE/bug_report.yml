@@ -1,0 +1,62 @@
+name: Bug report 🐞
+description: >-
+  Something is broken and you have a reliable reproduction? Let us know here.
+  For questions, please use "Question" below.
+title: "[Bug]: "
+labels:
+  - Bug
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Please make sure you're using the latest version of either
+        [Angular Components](https://www.npmjs.com/package/@abgov/angular-components) or
+        [React Components](https://www.npmjs.com/package/@abgov/react-components) and
+        [Web Components](https://www.npmjs.com/package/@abgov/web-components). Refer to our
+        setup documentation for [Angular](https://ui-components.alberta.ca/?path=/docs/setup-angular--page) or
+        [React](https://ui-components.alberta.ca/?path=/docs/setup-react--page)
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is
+    validations:
+      required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: Provide Code
+      description: >-
+        Please provide the simplest code required to reproduce your issue.
+      placeholder: We prioritize issues with code provided, as we have an easier time reproducing these issues
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: To Reproduce
+      description: >-
+        Please put detailed steps required to reproduce your issue
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant console log output
+      description: Please paste any console log errors you're seeing
+      render: shell
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Edge
+        - Mobile Android
+        - Mobile iOS
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.

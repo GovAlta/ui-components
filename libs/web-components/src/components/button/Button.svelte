@@ -116,6 +116,7 @@
     letter-spacing: var(--goa-letter-spacing-button);
     line-height: 100%;
     padding: 0 0.75rem;
+    white-space: nowrap;
 
     /* for leading and trailing icon vertical alignment */
     gap: 0.5rem;

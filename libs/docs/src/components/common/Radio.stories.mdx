@@ -49,6 +49,14 @@ import { useState } from "react";
   />
   <Prop
     name="disabled"
+    lang="angular"
+    type="boolean"
+    defaultValue="false"
+    description="Set the component to disabled. **Use [attr.disabled] with [formControl]**"
+  />
+  <Prop
+    name="disabled"
+    lang="react"
     type="boolean"
     defaultValue="false"
     description="Set the component to disabled"
@@ -344,6 +352,21 @@ Display a custom label that is different that the `value` property.
           <goa-radio-item value="blue"></goa-radio-item>
           <goa-radio-item value="orange"></goa-radio-item>
         </goa-radio-group>
+        <!-- Use [attr.disabled] with [formControl] -->
+        <goa-radio-group name="color" goaValue [formControl]="reactiveFormCtrl" [attr.disabled]="true" value="reactiveFormCtrl.value">
+          <goa-radio-item value="red"></goa-radio-item>
+          <goa-radio-item value="blue"></goa-radio-item>
+          <goa-radio-item value="orange"></goa-radio-item>
+        </goa-radio-group>
+      `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          reactiveFormCtrl = new FormControl();
+        }
       `}
     />
   </Tab>

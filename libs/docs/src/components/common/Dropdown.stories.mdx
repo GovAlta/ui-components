@@ -60,6 +60,14 @@ import { useState } from "react";
   />
   <Prop
     name="disabled"
+    lang="angular"
+    type="boolean"
+    defaultValue="false"
+    description="Disable this control. **Use [attr.disabled] with [formControl]**"
+  />
+  <Prop
+    name="disabled"
+    lang="react"
     type="boolean"
     defaultValue="false"
     description="Disable this control"
@@ -88,7 +96,11 @@ import { useState } from "react";
     description="Callback function when dropdown value is changed"
   />
 </Props>
-
+<GoACallout>
+  When using a dropdown inside a modal where there is limited space for the menu
+  items to display, ensure the "native" property is set to "true" for the
+  dropdown to function properly.
+</GoACallout>
 <details>
   <summary>Additional Properties</summary>
   <Props showTabs={true}>
@@ -385,6 +397,21 @@ export const Template = (args) => {
           <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
           <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
         </goa-dropdown>
+        <!-- Use [attr.disabled] with [formControl] -->
+        <goa-dropdown name="colors" goaValue [formControl]="reactiveFormCtrl" [attr.disabled]="true">
+          <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
+          <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+          <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          reactiveFormCtrl = new FormControl("red");
+        }
       `}
     />
   </Tab>

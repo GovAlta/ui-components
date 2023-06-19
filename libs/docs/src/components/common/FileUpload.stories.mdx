@@ -170,8 +170,19 @@ export const UploadTemplate = (props) => {
     <CodeSnippet
       lang="ts"
       code={`
+      interface Uploader {
+        upload: (url: string | ArrayBuffer) => void;
+        abort: () => void;
+      }
+      interface Upload {
+        file: File;
+        uploader: Uploader;
+      }
+      class MockUploader implements Uploader {
+        // implement your logic to upload files
+      }
       export class FileUploadComponent {
-        uploads: Upload[] = [];
+        uploads: Upload[] = []; //Upload is customized according to project needs, it should have the file property
         progressList: Record<string, number> = {};
         uploadFile(e: any) {
           const { file } = e.detail;
@@ -180,10 +191,10 @@ export const UploadTemplate = (props) => {
           }
           const reader = new FileReader()
           reader.onload = (e) => {
-            const url = e.target!.result;  
-            const uploader = new MockUploader();    
+            const url = e.target!.result;
+            const uploader = new MockUploader(); //Customize the service class to upload a file to the server
             this.uploads = [...this.uploads, { file, uploader }]
-            uploader.oncomplete = () => console.log("File upload complete")    
+            uploader.oncomplete = () => console.log("File upload complete")
             uploader.onprogress = (percent: number) => this.progressList[file.name] = percent;
             uploader.onabort = () => console.log("Aborting the upload");
             uploader.onfail = (err: string) =>  console.log("Upload failed: ", err)
@@ -191,27 +202,27 @@ export const UploadTemplate = (props) => {
               uploader.upload(url)
             }
           }
-          reader.readAsDataURL(file)  
+          reader.readAsDataURL(file)
         }
         deleteFile(upload: Upload) {
           upload.uploader.abort()
           this.uploads = [...this.uploads].filter(u => u.file.name !== upload.file.name)
-        }  
+        }
       }
     `}
     />
     <CodeSnippet
       lang="html"
       code={`
-      <goa-file-upload-input (_selectFile)="uploadFile($event)"></goa-file-upload-input> 
+      <goa-file-upload-input (_selectFile)="uploadFile($event)"></goa-file-upload-input>
       <goa-file-upload-card
         *ngFor="let upload of uploads; index as i"
         [type]="upload.file.type"
         [size]="upload.file.size"
         [filename]="upload.file.name"
         [progress]="progressList[upload.file.name]"
-        (delete)="deleteFile(upload)"
-        (cancel)="deleteFile(upload)"
+        (_delete)="deleteFile(upload)"
+        (_cancel)="deleteFile(upload)"
       >
       </goa-file-upload-card>
     `}
@@ -279,7 +290,7 @@ export const UploadTemplate = (props) => {
 <Tabs>
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
-      <goa-file-upload-input variant="button" (_selectFile)="uploadFile($event)"></goa-file-upload-input> 
+      <goa-file-upload-input variant="button" (_selectFile)="uploadFile($event)"></goa-file-upload-input>
       <!-- see the basic example for upload code -->
     `}/>
   </Tab>
@@ -307,7 +318,7 @@ export const UploadTemplate = (props) => {
 <Tabs>
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
-      <goa-file-upload-input accept="image/*,application/pdf" (_selectFile)="uploadFile($event)"></goa-file-upload-input> 
+      <goa-file-upload-input accept="image/*,application/pdf" (_selectFile)="uploadFile($event)"></goa-file-upload-input>
       <!-- see the basic example for upload code -->
     `}/>
   </Tab>
@@ -335,7 +346,7 @@ export const UploadTemplate = (props) => {
 <Tabs>
   <Tab label="Angular">
     <CodeSnippet lang="html" code={`
-      <goa-file-upload-input maxfilesize="5MB" (_selectFile)="uploadFile($event)"></goa-file-upload-input> 
+      <goa-file-upload-input maxfilesize="5MB" (_selectFile)="uploadFile($event)"></goa-file-upload-input>
       <!-- see the basic example for upload code -->
     `}/>
   </Tab>

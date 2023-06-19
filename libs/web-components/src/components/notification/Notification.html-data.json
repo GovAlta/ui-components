@@ -12,10 +12,16 @@
       "description": "Dispatched when notification banner is closed."
     },
     {
-      "name": "maxContentWidth",
+      "name": "maxcontentwidth",
       "default": "100%",
       "description": "Maximum width of the content area",
       "type": "string"
+    },
+    {
+      "name": "arialive",
+      "default": "polite",
+      "description": "Aria live attribute",
+      "values": [{"name": "polite"},{"name": "assertive"}, {"name": "off"}]
     }
   ],
   "references": [

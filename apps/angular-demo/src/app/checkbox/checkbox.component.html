@@ -79,3 +79,32 @@
   [formControl]="reactiveFormCtrl"
   [value]="reactiveFormCtrl.value"
 ></goa-checkbox>
+
+<h2>Reactive Binding [Disabled]</h2>
+<goa-checkbox
+  goaValue
+  name="desserts"
+  text="Ice Cream"
+  [formControl]="reactiveFormCtrl"
+  [attr.disabled]="true"
+></goa-checkbox>
+
+<h2>Reactive Binding - checked</h2>
+<div>Binding: {{ testFormCtrl.value }}</div>
+<goa-checkbox
+  goaValue
+  name="desserts"
+  text="Ice Cream"
+  [formControl]="testFormCtrl"
+></goa-checkbox>
+
+<div>Binding: {{ test1FormCtrl.value }}</div>
+<button (click)="test1FormCtrl.setValue('checked')">
+  Set Value to checked
+</button>
+<goa-checkbox
+  goaChecked
+  name="desserts"
+  text="Ice Cream"
+  [formControl]="test1FormCtrl"
+></goa-checkbox>

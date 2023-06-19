@@ -1,6 +1,6 @@
 import * as React from "react";
-import { GoATable } from "@abgov/react-components";
-import { useEffect } from "react";
+import { GoATable, GoATableSortHeader } from "@abgov/react-components";
+import { useEffect, useState } from "react";
 import { faker } from "@faker-js/faker";
 
 interface User {
@@ -11,7 +11,8 @@ interface User {
 }
 
 export default function Table() {
-  const [data, setData] = React.useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
+  const [sortDir, setSortDir] = useState<number>(1);
 
   useEffect(() => {
     const users: User[] = [];
@@ -23,22 +24,21 @@ export default function Table() {
         age: faker.datatype.number({ min: 18, max: 60 }),
       });
     }
-    setData(users);
+    setUsers(users);
   }, []);
 
-  function sortByFirstName() {
-    const old = [...data];
-    old.sort((a, b) => {
-      if (a.firstName === b.firstName) return 0;
-      return a.firstName < b.firstName ? -1 : 1;
+  function sortData(sortBy: string, sortDir: number) {
+    const _users = [...users];
+    _users.sort((a: any, b: any) => {
+      return (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir;
     });
-    setData(old);
+    setUsers(_users);
   }
 
   return (
     <>
       <h4>Dynamic Table</h4>
-      <button onClick={sortByFirstName}>First Name</button>
+      <button onClick={() => sortData("firstName", sortDir)}>First Name</button>
       <GoATable width="100%">
         <thead>
           <tr>
@@ -48,7 +48,7 @@ export default function Table() {
           </tr>
         </thead>
         <tbody>
-          {data.map((user) => (
+          {users.map((user) => (
             <tr key={user.id}>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
@@ -69,6 +69,36 @@ export default function Table() {
       <GoATable width="100%" variant="relaxed">
         <TableStaticHead />
         <TableStaticBody />
+      </GoATable>
+
+      <h4>Sortable Table</h4>
+      <GoATable onSort={sortData}>
+        <thead>
+          <tr>
+            <th>
+              <GoATableSortHeader name="firstName">
+                First name
+              </GoATableSortHeader>
+            </th>
+            <th>
+              <GoATableSortHeader name="lastName">Last name</GoATableSortHeader>
+            </th>
+            <th>
+              <GoATableSortHeader name="age" direction="asc">
+                Age
+              </GoATableSortHeader>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.firstName}</td>
+              <td>{user.lastName}</td>
+              <td>{user.age}</td>
+            </tr>
+          ))}
+        </tbody>
       </GoATable>
     </>
   );

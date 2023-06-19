@@ -141,7 +141,7 @@
 </script>
 
 {#if _isOpen}
-  <goa-focus-trap active={open}>
+  <goa-focus-trap {open}>
     <div
       use:noscroll={{ enable: _isOpen }}
       in:fade={{ duration: _transitionTime }}
@@ -203,7 +203,6 @@
 
 <!-- ======================================================================= -->
 <!-- Css -->
-
 <!-- ======================================================================= -->
 <style>
   :host {
@@ -262,19 +261,28 @@
   .content {
     flex: 1 1 auto;
     width: 100%;
-    margin: 2rem;
+    margin: var(--goa-space-xl);
   }
+
   .content header {
     display: flex;
     justify-content: space-between;
   }
 
   .content :global(header.has-content) {
-    margin-bottom: 2rem;
+    margin-bottom: var(--goa-space-l);
+  }
+
+  @media (max-width: 640px) {
+    .content {
+      margin: var(--goa-space-l);
+    }
+    .content :global(header.has-content) {
+      margin-bottom: var(--goa-space-m);
+    }
   }
 
   .modal-pane {
-    position: relative;
     background-color: #fff;
     z-index: 1001;
     width: 90%;
@@ -291,7 +299,13 @@
   }
 
   .modal-actions ::slotted(*) {
-    padding: 1.5rem 0 0;
+    padding: var(--goa-space-xl) 0 0;
+  }
+
+  @media (max-width: 640px) {
+    .modal-actions ::slotted(*) {
+      padding: var(--goa-space-l) 0 0;
+    }
   }
 
   .modal-content {

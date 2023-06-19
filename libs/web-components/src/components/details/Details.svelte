@@ -3,16 +3,21 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
-  import { validateRequired } from "../../common/utils";
+  import { toBoolean, validateRequired} from "../../common/utils";
 
   export let heading: string;
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
+  export let open: string = "false";
 
   let _isMouseOver: boolean = false
   let _summaryEl: HTMLElement;
+  let _detailsEl: HTMLElement;
+
+  $: _isOpen = toBoolean(open);
+
 
   onMount(() => {
     validateRequired("Details", { heading });
@@ -24,8 +29,7 @@
     _summaryEl.addEventListener("mouseout", () => {
       _isMouseOver = false;
     });
-  })
-
+  });
 </script>
 
 <style>
@@ -103,7 +107,11 @@
   }
 </style>
 
-<details style={calculateMargin(mt, mr, mb, ml)}>
+<details
+  bind:this={_detailsEl}
+  open={_isOpen}
+  on:toggle={({target}) => open = `${target.open}`}
+  style={calculateMargin(mt, mr, mb, ml)}>
   <summary bind:this={_summaryEl}>
     <goa-icon
       mt="1"

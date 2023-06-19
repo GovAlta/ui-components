@@ -131,7 +131,6 @@
   /*Medium callout style*/
   .notification.medium {
     font: var(--goa-typography-body-s);
-    max-width: 22rem;
   }
   h3.medium {
     font: var(--goa-typography-heading-xs);

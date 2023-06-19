@@ -71,7 +71,7 @@ const routes: Routes = [
   { path: "textarea", component: TextAreaComponent },
   { path: "two-column-layout", component: TwoColumnLayoutComponent },
   { path: "three-column-layout", component: ThreeColumnLayoutComponent },
-  { path: "", redirectTo: "/input", pathMatch: "full" },
+  { path: "", redirectTo: "/", pathMatch: "full" },
 ];
 
 @NgModule({

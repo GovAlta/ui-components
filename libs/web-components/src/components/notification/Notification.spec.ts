@@ -9,7 +9,12 @@ describe('GoANotificationComponent', () => {
       const { container } = render(GoANotification, { type: type });
       await waitFor(() => {
         expect(container.querySelector(`.${type}`)).toBeTruthy();
-      })
+        const notificationDiv = container.querySelector(".content-container");
+        expect(notificationDiv).toBeTruthy();
+        expect(notificationDiv).toHaveAttribute("role", "alert");
+        expect(notificationDiv).toHaveAttribute("aria-live", "polite");
+        expect(notificationDiv).toHaveAttribute("aria-atomic", "true");
+      });
     });
   });
 
@@ -25,7 +30,7 @@ describe('GoANotificationComponent', () => {
   it("Event triggered on notification banner dismiss", async () => {
     const onDismiss = jest.fn();
     const { container } = render(GoANotification, { type: "information" });
-    const closeIcon = container.querySelector("goa-icon-button");
+    const closeIcon = container.querySelector(".close button");
     closeIcon.addEventListener("_dismiss", onDismiss);
     await fireEvent.click(closeIcon);
     expect(onDismiss).toBeCalled();

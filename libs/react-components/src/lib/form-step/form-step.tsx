@@ -1,10 +1,10 @@
 import React from "react";
 
-type Status = "complete" | "incomplete";
+export type GoAFormStepStatusType  = "complete" | "incomplete";
 
 interface WCProps {
   text: string;
-  status?: Status;
+  status?: GoAFormStepStatusType;
 }
 
 declare global {
@@ -19,7 +19,7 @@ declare global {
 
 export interface FormStepProps {
   text: string;
-  status?: Status;
+  status?: GoAFormStepStatusType;
 }
 
 export function GoAFormStep(props: FormStepProps) {

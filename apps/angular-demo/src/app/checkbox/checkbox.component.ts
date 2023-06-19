@@ -11,6 +11,8 @@ export class CheckboxComponent {
   checkbox2Checked = true;
   checkbox3Checked = false;
   reactiveFormCtrl = new FormControl();
+  testFormCtrl = new FormControl("checked");
+  test1FormCtrl = new FormControl();
   bindingVal = "";
   bindingNoVal = "";
 

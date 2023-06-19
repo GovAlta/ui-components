@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
 
   type Variant = "dragdrop" | "button";
-  
+
   // Public
 
   export let variant: Variant = "dragdrop";
@@ -17,8 +17,8 @@
   let _fileInput: HTMLInputElement;
   let _state: "hover" | "dragenter" | "default" = "default";
 
-  let issues = []  
-  
+  let issues = []
+
   // Hooks
 
   onMount(() => {
@@ -31,7 +31,7 @@
           issues = [{filename: file.name, error}, ...issues]
           return;
         }
-        dispatch(file) 
+        dispatch(file)
       })
       _fileInput.value = null
     }, true)
@@ -51,7 +51,7 @@
   function isValidFileType(file: File): boolean {
     const typeMatchers = accept.split(",");
     for (const matcher of typeMatchers) {
-      const matches = 
+      const matches =
         file.type.match(matcher.replace("*", ".*").replace("/", "\/"))
         || file.name.endsWith(accept);
       if (matches) {
@@ -71,9 +71,9 @@
   }
 
   function dispatch(file: File) {
-    _el.dispatchEvent(new CustomEvent("_selectFile", { 
+    _el.dispatchEvent(new CustomEvent("_selectFile", {
       composed: true,
-      detail: { file } 
+      detail: { file }
     }))
   }
 
@@ -121,18 +121,18 @@
   function onDragEnter() {
     _state = "dragenter";
   }
-  
+
   function onDragLeave(e: DragEvent) {
     // hovering over child components will result in the dragleave event to be fired,
     // so we must validate to whether the mouse pointer is within the bounds of the
     // dropable area
     const rect = _el.getBoundingClientRect();
-    const withinBounds = 
-      e.clientX > rect.x 
+    const withinBounds =
+      e.clientX > rect.x
       && e.clientX <= rect.x + rect.width
-      && e.clientY > rect.y 
+      && e.clientY > rect.y
       && e.clientY <= rect.y + rect.height;
-      
+
     if (!withinBounds) {
       _state = "default";
     }
@@ -147,14 +147,14 @@
   }
 </script>
 
-<!-- svelte-ignore 
-  a11y-click-events-have-key-events 
+<!-- svelte-ignore
+  a11y-click-events-have-key-events
   a11y-mouse-events-have-key-events
 -->
 {#if variant === "dragdrop"}
   <div
     bind:this={_el}
-    data-testid="dragdrop"      
+    data-testid="dragdrop"
     class={`dragdrop state-${_state}`}
     on:click={openFilePicker}
     on:drop={onDrop}
@@ -216,18 +216,25 @@
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
-    padding: 3rem;
+    padding: var(--goa-space-xl);
     color: var(--goa-color-interactive-default);
     text-align: center;
     cursor: pointer;
   }
+
+  @media (max-width: 640px) {
+    .dragdrop {
+      padding-top: 1.75rem;
+    }
+  }
+
   .dragdrop:active,
   .dragdrop:focus-within {
-    border-style: solid;  
+    border-style: solid;
     outline: none;
   }
   .dragdrop:hover div {
-    color: var(--goa-color-interactive-hover);  
+    color: var(--goa-color-interactive-hover);
   }
 
   /** States **/
@@ -236,14 +243,14 @@
     background: var(--goa-color-info-background);
   }
   .state-hover {
-    background: var(--goa-color-greyscale-100);  
-    border-style: solid;
+    background: var(--goa-color-greyscale-100);
+    border-style: dashed;
   }
   .state-dragenter {
-    background: var(--goa-color-info-background);  
+    background: var(--goa-color-info-background);
     border-style: solid;
   }
-  
+
   .instructions {
     display: flex;
     align-items: center;
@@ -258,6 +265,7 @@
 
   goa-icon {
     margin-top: 4px;
+    margin-right: 4px;
   }
 
   .browse-files {
