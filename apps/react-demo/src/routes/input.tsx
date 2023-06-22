@@ -41,7 +41,12 @@ export default function Input() {
         onChange={onDateChange}
       />
       <GoAFormItem label="Max Length" helpText={"Max length is 10"}>
-        <GoAInput maxLength={10} name="Max Length Value" onChange={noop} value=""/>
+        <GoAInput
+          maxLength={10}
+          name="Max Length Value"
+          onChange={noop}
+          value=""
+        />
       </GoAFormItem>
 
       <h4>Time from Date value</h4>

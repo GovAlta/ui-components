@@ -601,10 +601,15 @@ export const MinMaxTemplate = () => {
 #### Max Length
 
 export const MaxLengthTemplate = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   return (
     <GoAFormItem label="Name" helpText={"Max length is 10"}>
-      <GoAInput maxLength={10} name="name" onChange={(name, value) => setValue(value)} value={value}/>
+      <GoAInput
+        maxLength={10}
+        name="name"
+        onChange={(name, value) => setValue(value)}
+        value={value}
+      />
     </GoAFormItem>
   );
 };

@@ -58,3 +58,5 @@ export * from "./lib/table/table-sort-header";
 export * from "./lib/textarea/textarea";
 export * from "./lib/two-column-layout/two-column-layout";
 export * from "./lib/three-column-layout/three-column-layout";
+export * from "./lib/tabs/tabs";
+export * from "./lib/tab/tab";
