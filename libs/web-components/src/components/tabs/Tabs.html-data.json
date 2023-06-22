@@ -1,0 +1,11 @@
+{
+  "name": "goa-tabs",
+  "attributes": [
+  ],
+  "references": [
+    {
+      "name": "GoA Tabs",
+      "url": "{{siteUrl}}/?path=/docs/components-tabs--basic"
+    }
+  ]
+}

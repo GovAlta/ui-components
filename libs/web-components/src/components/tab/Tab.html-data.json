@@ -1,0 +1,27 @@
+{
+  "name": "goa-tab",
+  "attributes": [
+    {
+      "name": "heading",
+      "type": "slot",
+      "description": "Add components to the tab heading such as badges"
+    },
+    {
+      "name": "open",
+      "description": "Sets the state of the tab open or closed",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "content",
+      "type": "slot",
+      "description": "Tab content"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Tab Item",
+      "url": "{{siteUrl}}/?path=/docs/components-tabs--basic"
+    }
+  ]
+}

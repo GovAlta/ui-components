@@ -37,7 +37,8 @@ import ThreeColumnLayout from "./routes/threeColumnLayout";
 
 import "@abgov/web-components/index.css";
 import Details from "./routes/details";
-import {FormStepperRoute} from "./routes/formStepper";
+import Tabs from "./routes/tabs";
+import { FormStepperRoute } from "./routes/formStepper";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
@@ -76,7 +77,8 @@ ReactDOM.render(
         <Route path="textarea" element={<TextArea />} />
         <Route path="three-column-layout" element={<ThreeColumnLayout />} />
         <Route path="details" element={<Details />} />
-        <Route path="form-stepper" element={<FormStepperRoute/>} />
+        <Route path="form-stepper" element={<FormStepperRoute />} />
+        <Route path="tabs" element={<Tabs />} />
       </Route>
     </Routes>
   </BrowserRouter>,
