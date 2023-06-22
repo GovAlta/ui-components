@@ -46,6 +46,7 @@ import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.
 import { PopoverComponent } from "./popover/popover.component";
 import { ThreeColumnLayoutComponent } from "./three-column-layout/three-column-layout.component";
 import { TooltipComponent } from "./tooltip/tooltip.component";
+import { TabsComponent } from "./tabs/tabs";
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { TooltipComponent } from "./tooltip/tooltip.component";
     TooltipComponent,
     TwoColumnLayoutComponent,
     ThreeColumnLayoutComponent,
+    TabsComponent,
   ],
   imports: [
     BrowserModule,

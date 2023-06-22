@@ -1,0 +1,16 @@
+{
+  "name": "goa-tab",
+  "attributes": [
+    {
+      "name": "heading",
+      "type": "slot",
+      "description": "Add components to the tab heading such as badges"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Tab Item",
+      "url": "{{siteUrl}}/?path=/docs/components-tabs--basic"
+    }
+  ]
+}
