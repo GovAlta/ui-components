@@ -208,6 +208,7 @@
         size="medium"
         icon={trailingicon}
         data-testid="trailing-icon-button"
+        class="goa-input-trailing-icon-button"
       />
     {/if}
 
@@ -280,11 +281,15 @@
   }
 
   .goa-input-leading-icon {
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
   }
 
   .goa-input-trailing-icon {
-    margin-right: 0.5rem;
+    margin-right: var(--goa-space-s);
+  }
+
+  .goa-input-trailing-icon-button {
+    margin-right: var(--goa-space-xs);
   }
 
   input {
