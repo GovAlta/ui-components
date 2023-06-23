@@ -176,9 +176,7 @@
   .filename {
     grid-area: filename;
     font-size: var(--goa-font-size-4);
-    overflow: hidden;
     overflow-wrap: anywhere;
-    text-overflow: ellipsis;
   }
 
   .error-msg {
