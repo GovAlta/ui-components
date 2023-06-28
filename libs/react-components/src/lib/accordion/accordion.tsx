@@ -27,6 +27,7 @@ interface Props extends Margins {
   heading: string;
   headingContent?: ReactNode;
   testid?: string;
+  children: ReactNode;
 }
 
 export const GoAAccordion: FC<Props> = ({
