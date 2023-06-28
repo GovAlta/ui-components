@@ -19,7 +19,7 @@
 
   // Reactive
 
-  $: _status = 
+  $: _status =
       error && "error"
       || (progress >= 0 && progress < 100) && "uploading"
       || "uploaded"
@@ -29,7 +29,7 @@
   // Functions
 
   function getFiletypeIcon(filename: string, type: string): string {
-    // file extensions 
+    // file extensions
     const parts = filename.split(".");
     const ext = parts[parts.length - 1]
     const extTypeIcon =
@@ -47,7 +47,7 @@
     if (extTypeIcon) return extTypeIcon;
 
     // mimetype
-    const mimeTypeIcon = 
+    const mimeTypeIcon =
       type === "application/vnd.ms-powerpoint"  && "goa-ppt"
       || type.includes("presentationml")        && "goa-ppt"
       || type.includes("wordprocessingml")      && "goa-doc"
@@ -69,17 +69,17 @@
 
   function formatFileSize(bytes: number) {
     switch(true) {
-      case bytes < 1024:  
+      case bytes < 1024:
         return bytes + "B";
       case bytes < 1024 * 1024:
         return Math.round(bytes/1024) + "KB";
-      case bytes < Math.pow(1024, 3):  
+      case bytes < Math.pow(1024, 3):
         return Math.round(bytes/Math.pow(1024, 2)) + "MB";
     }
   }
 </script>
 
-<div 
+<div
   data-testid="root"
   bind:this={_rootEl}
   class={`root ${_status}`}
@@ -132,7 +132,7 @@
     display: grid;
     grid-template-columns: 38px auto;
     grid-template-rows: repeat(2, auto);
-    grid-template-areas:  
+    grid-template-areas:
       "icon details"
       "action action";
     gap: 1rem;
@@ -142,7 +142,7 @@
   .root.error {
     border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
   }
-  
+
   @media (min-width: 480px) {
     .root {
       grid-template-columns: 38px 1fr auto;
@@ -175,11 +175,8 @@
 
   .filename {
     grid-area: filename;
-
     font-size: var(--goa-font-size-4);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
   }
 
   .error-msg {
@@ -205,7 +202,7 @@
   }
 
   progress {
-    flex: 1 1 auto;  
+    flex: 1 1 auto;
 
     -webkit-appearance: none;
     appearance: none;
@@ -215,7 +212,7 @@
     background: var(--goa-color-greyscale-200);
     color: var(--goa-color-greyscale-700);
   }
-  
+
   /* iOS tweaks */
   progress::-webkit-progress-value {
     background: var(--goa-color-interactive-default);
