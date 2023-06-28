@@ -24,6 +24,7 @@ interface Props extends Margins {
   maxWidth?: string;
   padded?: boolean;
   position?: Position;
+  children: ReactNode;
 }
 
 export const GoAPopover: FC<Props> = ({
