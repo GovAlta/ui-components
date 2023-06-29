@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef } from "react";
 import { GoAIconType } from "../..";
-import { format, parseISO } from "date-fns";
+import { format, isValid, parseISO } from "date-fns";
 import { Margins } from "../../common/styling";
 
 export type GoADate = Date | string;
@@ -215,11 +215,14 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
 
 const onDateChangeHandler = (onChange: OnDateChange) => {
   return (name: string, value: string) => {
+
     if (!value) {
-      onChange(name, new Date(0));
+      onChange(name, "");
       return;
     }
-    onChange(name, parseISO(value));
+    if (isValid(new Date(value))) {
+      onChange(name, parseISO(value));
+    }
   };
 };
 

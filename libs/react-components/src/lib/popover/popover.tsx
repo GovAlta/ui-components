@@ -1,9 +1,12 @@
 import React, { FC, ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
+type Position = "above" | "below" | "auto";
+
 interface WCProps extends Margins {
   maxwidth?: string;
   padded?: boolean;
+  position?: Position;
 }
 
 declare global {
@@ -20,6 +23,8 @@ interface Props extends Margins {
   testId?: string;
   maxWidth?: string;
   padded?: boolean;
+  position?: Position;
+  children: ReactNode;
 }
 
 export const GoAPopover: FC<Props> = ({
@@ -27,6 +32,7 @@ export const GoAPopover: FC<Props> = ({
   testId,
   maxWidth,
   padded,
+  position,
   children,
   mt,
   mr,
@@ -38,6 +44,7 @@ export const GoAPopover: FC<Props> = ({
       data-testid={testId}
       maxwidth={maxWidth}
       padded={padded}
+      position={position}
       mt={mt}
       mr={mr}
       mb={mb}

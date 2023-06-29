@@ -1,9 +1,0 @@
-{
-  "name": "goa-sidebar-group",
-  "attributes": [
-    {
-      "name": "heading",
-      "description": "Heading text for group"
-    },
-  ]
-}

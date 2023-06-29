@@ -1,10 +1,10 @@
 <script
   type="module"
-  src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"
+  src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
 ></script>
 <script
-  nomodule=""
-  src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"
+  nomodule
+  src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
 ></script>
 
 <style>
@@ -22,19 +22,19 @@
   }
 
   a {
-    color: var(--goa-color-interactive-default) !important;
-    cursor: pointer !important;
+    color: var(--goa-color-interactive-default);
+    cursor: pointer;
   }
 
   a:hover {
-    color: var(--goa-color-interactive-hover) !important;
+    color: var(--goa-color-interactive-hover);
   }
 
   a:focus {
-    outline-width: thin !important;
-    outline-style: solid !important;
-    outline-color: var(--goa-color-interactive-hover) !important;
-    outline-offset: 0px !important;
+    outline-width: thin;
+    outline-style: solid;
+    outline-color: var(--goa-color-interactive-hover);
+    outline-offset: 0px;
   }
 
   a[target="_blank"] {
@@ -90,9 +90,11 @@
     font-weight: var(--goa-font-weight-bold) !important;
   }
 
-  h3 + h1 {
+  h3+h1 {
     margin-top: -1rem !important;
   }
+
+  /* Force component styles */
 
   goa-container
     h1:first-of-type
@@ -107,9 +109,3 @@
     color: var(--goa-color-text-default) !important;
     white-space: nowrap;
   }
-
-  goa-sidebar a:focus-visible,
-  goa-sidebar-group a:focus-visible {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus) !important;
-  }
-</style>

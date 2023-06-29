@@ -2,69 +2,154 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { onMount, tick,onDestroy } from "svelte";
+  import { onMount, tick } from "svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
-  import { toBoolean } from "../../common/utils";
+  import { cssVar, toBoolean } from "../../common/utils";
 
-  export let testid: string = "";
+  // Public
+
+  // to allow for data-testid queries within tests
+  export let testid: string = "popover";
+  // prevents the popover from exceeding this width
   export let maxwidth: string = "320px";
+  // allow width to be hardcoded
+  // TODO: do I need this prop???
+  export let width: string = "";  
+  // allows to override the default padding when content needs to be flush with boundries
   export let padded: string = "true";
+  // provides control to where the popover content is positioned
+  export let position: "above" | "below" | "auto" = "auto";
 
-  let _isContentVisible = false;
-  let _targetEl: HTMLElement;
-  let _popoverEl: HTMLElement;
-
-  // margin
+  // margins
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  // Exposed privates
+  // **Required only to allow popover position to be customized when used within 
+  // other components. These props should _not_ be documented.**
 
+  // allow for outside control of whether popover is open/closed (see AppHeaderMenu)
+  export let open: string = "false";
+  // allows tabindex to be set to -1 to skip tabbing if a parent is handling events
+  export let tabindex: string = "0";
+  // additional vertical offset that is added to popover's position
+  export let voffset = "";
+  // additional horizontal offset that is added to popover's position
+  export let hoffset = "";
+  // width of outline seen when focused
+  export let focusborderwidth = "var(--goa-border-width-l)";
+  // border radius of popover window
+  export let borderradius = "var(--goa-border-radius-m)";
 
-  $: paddedContent = toBoolean(padded);
+  // Private
+
+  let _rootEl: HTMLElement;
+  let _targetEl: HTMLElement;
+  let _popoverEl: HTMLElement;
+  let _focusTrapEl: HTMLElement;
+  let _initFocusedEl: HTMLElement;
+
+  // Reactive
+
+  $: _padded = toBoolean(padded);
+  $: _open = toBoolean(open);
+  $: (async () => _open && await setPopoverPosition())()
+  $: {
+    if (_open) {
+      window.addEventListener("popstate", handleUrlChange, true);   
+    } else {
+      window.removeEventListener("popstate", handleUrlChange, true);   
+    }
+  }
+
+  // Hooks
 
   onMount(async () => {
     await tick();
-    addFocusEventListener();
+    _targetEl.addEventListener("keydown", onTargetEvent);    
+
+    const slot =  _targetEl.querySelector("slot");
+    let children: Element[];
+    if (slot) {
+      children = slot.assignedElements();
+    } else {
+      // for unit tests only
+      children = [..._targetEl.children] as Element[];
+    }
+    
+    _initFocusedEl = 
+      children
+      .find(el => (el as HTMLElement).tabIndex >= 0) as HTMLElement
+      || _targetEl;
   });
 
-  onDestroy(() => {
-    removeEventListeners();
-  });
+  // Functions
 
-  async function showPopover() {
-    _isContentVisible = true;
-    await tick();
-    setPopoverPosition();
+  // Called on window popstate changes. This allows for clicking links within 
+  // the popover to close the popover
+  function handleUrlChange(_e: Event) {
+    closePopover();
   }
 
-  function closePopover() {
-    _isContentVisible = false;
-  }
-
-  const onInputKeyDown = (e: KeyboardEvent) => {
+  // Handles events when the targetEl has focus
+  function onTargetEvent(e: KeyboardEvent) {
     switch (e.key) {
       case " ":
       case "Enter":
-        _isContentVisible ? closePopover() : showPopover();
-        e.preventDefault();
+        openPopover();
         break;
       case "Escape":
-        _isContentVisible && closePopover();
-        e.preventDefault();
+        closePopover();
         break;
     }
-  };
+  }
 
-  function getBoundingClientRectWithMargins(el: Element): Omit<DOMRect, 'toJSON'> {
+  // Event binding when the focusTrapEl has focus. This is required since the 
+  // popover exists within the slot of the FocusTrap which prevents the existing
+  // targetEl eventing binding from "hearing" the events
+  function onFocusTrapEvent(e: KeyboardEvent) {
+    switch (e.key) {
+      case "Enter":
+        // setTimeout allows the url to change before closing
+        setTimeout(closePopover, 1)
+        break;
+      case "Escape":
+        closePopover();
+        break;
+    }
+  }
+
+  // Opens the popover and adds the required binding to the new slot element
+  function openPopover() {  
+    (async () => {
+      _open = true;
+      await tick();
+      _focusTrapEl.addEventListener("keydown", onFocusTrapEvent, true);
+      _rootEl.dispatchEvent(new CustomEvent("_open", { composed: true }))
+    })()
+  }
+
+  // Ensures that upon closing of the popover that the element that triggered
+  // the popover to be shown re-attains focus and that any window event binding
+  // is removed (it may not have been added if target was clicked)
+  function closePopover() {
+    _initFocusedEl.focus();
+    _open = false;
+    window.removeEventListener("popstate", handleUrlChange, true);
+    _rootEl.dispatchEvent(new CustomEvent("_close", { composed: true }))
+  }
+
+  function getBoundingClientRectWithMargins(el: Element): Omit<DOMRect, "toJSON"> {
+
     const rect = el.getBoundingClientRect();
     const style = window.getComputedStyle(el);
     const mTop = parseInt(style.marginTop, 10) || 0;
     const mRight = parseInt(style.marginRight, 10) || 0;
     const mBottom = parseInt(style.marginBottom, 10) || 0;
     const mLeft = parseInt(style.marginLeft, 10) || 0;
-
+  
     return {
       top: rect.top - mTop,
       right: rect.right + mRight,
@@ -77,9 +162,11 @@
     };
   }
 
+  async function setPopoverPosition() {
+    await tick();
 
-  function setPopoverPosition() {
     // Get target and content rectangles
+    const rootRect = _rootEl.getBoundingClientRect();
     const targetRect = getBoundingClientRectWithMargins(_targetEl);
     const contentRect = getBoundingClientRectWithMargins(_popoverEl);
 
@@ -88,89 +175,92 @@
     const spaceBelow = window.innerHeight - targetRect.bottom;
 
     // Determine if there's more space above or below the target element
-    const displayAbove = spaceAbove > contentRect.height &&
-                        spaceAbove > spaceBelow &&
-                        spaceBelow < contentRect.height;
+    const displayOnTop = 
+      position === "auto"
+      ? spaceBelow < contentRect.height && spaceAbove > contentRect.height && spaceAbove > spaceBelow
+      : position === "above";
+
+    // when popover is within a modal and the scrollbars are hidden we don't need to take into
+    // account the scroll offset
+    const usingNoScroll = document.body.style.overflow === "hidden"
+    const windowOffset = usingNoScroll ? 0 : window.scrollY;
 
     // If there's more space above, display the popover above the target element
-    if (displayAbove) {
-      _popoverEl.style.top = `${-contentRect.height -targetRect.height - 4}px`;
-    } else {
-      _popoverEl.style.top = '0px';
-    }
+    _popoverEl.style.top = displayOnTop
+      ? `${rootRect.top - contentRect.height + windowOffset}px`
+      : `${rootRect.top + rootRect.height + windowOffset}px`;
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
-    if (window.innerWidth - targetRect.right < contentRect.width && targetRect.left > contentRect.width) {
-      _popoverEl.style.left = `-${(contentRect.width - targetRect.width)}px`;
-    } else {
-      _popoverEl.style.left = '0px';
-    }
-  }
+    const displayOnRight = 
+      document.body.clientWidth - targetRect.left < contentRect.width 
+      && targetRect.left > contentRect.width;
 
-  function addFocusEventListener() {
-    _targetEl.addEventListener("focus", onFocus, true);
+    _popoverEl.style.left = displayOnRight
+      ? `${rootRect.left + targetRect.width - contentRect.width}px`
+      : `${rootRect.left}px`;
   }
-
-  function removeEventListeners() {
-    _targetEl.removeEventListener("focus", onFocus);
-    _targetEl.removeEventListener("keydown", onInputKeyDown);
-  }
-
-  // add required bindings to component
-  function onFocus() {
-    _targetEl.addEventListener("keydown", onInputKeyDown);
-  }
-
 </script>
 
 <!-- HTML -->
 
 <div
+  bind:this={_rootEl}
   data-testid={testid}
-  style={calculateMargin(mt, mr, mb, ml)}
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)}
+    ${cssVar("--offset-top", voffset)}
+    ${cssVar("--offset-bottom", voffset)}
+    ${cssVar("--offset-left", hoffset)}
+    ${cssVar("--offset-right", hoffset)}
+    ${cssVar("--focus-border-width", focusborderwidth)}
+    ${cssVar("--border-radius", borderradius)}
+  `}
   >
   <div class="popover-target"
+    tabindex={+tabindex}
     bind:this={_targetEl}
-    on:click={showPopover}
-    tabindex="0"
+    on:click={openPopover}
     data-testid="popover-target"
   >
-    <slot name="target" tabindex="-1"/>
+    <slot name="target" />
   </div>
-  {#if _isContentVisible}
-  <goa-focus-trap active={_isContentVisible}>
+  {#if _open}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
       data-testid="popover-background"
       class="popover-background"
       on:click={closePopover}
     />
-    <div class="popover-container"
-    >
-      <section data-testid="popover-content"
-       class="popover-content"
-       style="
-        max-width: {maxwidth};
-        padding: {paddedContent ? 'var(--goa-space-m)' : '0'};
-       "
-       bind:this={_popoverEl}
+    <div class="popover-container">
+      <section 
+        bind:this={_popoverEl}
+        data-testid="popover-content"
+        class="popover-content"
+        style={`
+          ${cssVar("width", width)}
+          max-width: ${maxwidth};
+          padding: ${_padded ? "var(--goa-space-m)" : "0"};
+        `}
       >
-        <slot />
+        <goa-focus-trap open="true">
+          <div bind:this={_focusTrapEl}>
+            <slot />
+          </div>
+        </goa-focus-trap>
       </section>
     </div>
-
-  </goa-focus-trap>
   {/if}
 </div>
 
-
-
 <!-- Style -->
+
 <style>
   :host {
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
     font-size: var(--goa-font-size-4);
+    display: flex;
+    align-items: center;
   }
 
   .popover-target {
@@ -178,21 +268,37 @@
     cursor: pointer;
   }
 
-  .popover-target:focus{
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+  .popover-target:focus {
+    outline: var(--focus-border-width) solid var(--goa-color-interactive-focus);
   }
 
   .popover-content {
+    color: var(--goa-color-text-default);
     position: absolute;
     left: 0;
     right: 0;
-    margin-top: 3px;
+    width: fit-content;
+    max-width: 260px;
     list-style-type: none;
     background: var(--goa-color-greyscale-white);
+    border-radius: var(--border-radius);
     outline: none;
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
     z-index: 99;
     width: max-content;
+
+    margin-top: var(--offset-top, 3px);
+    margin-bottom: var(--offset-bottom, 3px);
+    margin-left: var(--offset-left, 0);
+    margin-right: var(--offset-right, 0);
+  }
+
+  ::slotted(ul) {
+    display: block;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    line-height: 2rem;
   }
 
   .popover-background {
@@ -201,9 +307,4 @@
     z-index: 98;
     inset: 0;
   }
-
-  .popover-container {
-    position: relative;
-  }
-
 </style>

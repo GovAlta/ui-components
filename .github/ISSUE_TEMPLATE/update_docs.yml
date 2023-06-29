@@ -1,0 +1,20 @@
+name: Update docs ✍️
+description: >-
+  Find a mistake in our documentation, or have a suggestion to improve them? Let us know here.
+title: "[Documentation]: "
+labels:
+  - Documentation
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the problem
+      description: >-
+        Let us know what needs to be fixed in the documentation. Please provide us with URLs for the documentation in question
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.

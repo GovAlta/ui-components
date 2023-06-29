@@ -8,7 +8,11 @@ import {
   Props,
   Prop,
 } from "@abgov/shared/storybook-common";
-import { GoAAppHeader, GoAMicrositeHeader } from "@abgov/react-components";
+import {
+  GoAAppHeader,
+  GoAAppHeaderMenu,
+  GoAMicrositeHeader,
+} from "@abgov/react-components";
 
 <Meta title="Components/App Header" />
 
@@ -20,9 +24,9 @@ import { GoAAppHeader, GoAMicrositeHeader } from "@abgov/react-components";
 
 ---
 
-#### PropertiesSet the URL to link from the alberta.ca logo. A full url is required
+#### AppHeader Properties
 
-<Props>
+<Props showTabs={true}>
   <Prop
     name="url"
     type="string"
@@ -38,6 +42,22 @@ import { GoAAppHeader, GoAMicrositeHeader } from "@abgov/react-components";
     type="string"
     defaultValue="100%"
     description="Maximum width of the content area"
+  />
+</Props>
+
+#### AppHeaderMenu Properties
+
+<Props showTabs={true}>
+  <Prop
+    name="heading"
+    required="true"
+    type="string"
+    description="Text describing menu items"
+  />
+  <Prop
+    name="leadingIcon"
+    type="GoAIconType"
+    description="The icon shown to the left of the text"
   />
 </Props>
 
@@ -159,34 +179,34 @@ Custom content can be added to the header by passing it in as a child component(
 <Story name="Custom Content">
   <GoAMicrositeHeader type="live" />
   <GoAAppHeader url="https://example.com" heading="Ticket and Fine Payments">
-    <a href="#">Login</a> &nbsp;
-    <a href="#">Help</a>
+    <a href="#">Support</a>
+    <GoAAppHeaderMenu heading="Tickets" leadingIcon="ticket">
+      <a href="#">Cases</a>
+      <a href="#">Payments</a>
+      <a href="#">Outstanding</a>
+    </GoAAppHeaderMenu>
+    <a href="#" className="interactive">
+      Sign in
+    </a>
   </GoAAppHeader>
 </Story>
 
 <Tabs>
-  <Tab label="Web Component" hidden={true}>
-    <CodeSnippet
-      lang="html"
-      code={`
-      <goa-microsite-header type="live"/>
-      <goa-app-header url="https://example.com" heading="Ticket and Find Payments">
-        <a href="#">Login</a> &nbsp;
-        <a href="#">Help</a>
-      </goa-app-header>
-    `}
-    />
-  </Tab>
   <Tab label="Angular">
     <CodeSnippet
       lang="html"
       code={`
-      <goa-microsite-header type="live"></goa-microsite-header>
-      <goa-app-header url="https://example.com" heading="Ticket and Find Payments">
-        <a href="#">Login</a> &nbsp;
-        <a href="#">Help</a>
-      </goa-app-header>
-    `}
+        <goa-microsite-header type="live"></goa-microsite-header>
+        <goa-app-header url="https://example.com" heading="Ticket and Fine Payments">
+          <a href="#">Support</a>
+          <goa-app-header-menu heading="Tickets" leadingIcon="ticket">
+            <a href="#">Cases</a>
+            <a href="#">Payments</a>
+            <a href="#">Outstanding</a>
+          </goa-app-header-menu>
+          <a href="#" className="interactive">Sign in</a>
+        </goa-app-header>
+      `}
     />
   </Tab>
   <Tab label="React">
@@ -194,9 +214,14 @@ Custom content can be added to the header by passing it in as a child component(
       lang="tsx"
       code={`
       <GoAMicrositeHeader type="live"/>
-      <GoAAppHeader url="https://example.com" heading="Ticket and Find Payments">
-        <a href="#">Login</a>
-        <a href="#">Help</a>
+      <GoAAppHeader url="https://example.com" heading="Ticket and Fine Payments">
+        <a href="#">Support</a>
+        <GoAAppHeaderMenu heading="Tickets" leadingIcon="ticket">
+          <a href="#">Cases</a>
+          <a href="#">Payments</a>
+          <a href="#">Outstanding</a>
+        </GoAAppHeaderMenu>
+        <a href="#" className="interactive">Sign in</a>
       </GoAAppHeader>
     `}
     />
@@ -214,7 +239,7 @@ You can change the maximum width of the app header
     heading="Ticket and Fine Payments"
     maxContentWidth="600px"
   >
-    <a href="#">Login</a> &nbsp;
+    <a href="#">Login</a>
     <a href="#">Help</a>
   </GoAAppHeader>
 </Story>

@@ -1,15 +1,9 @@
-<h1>Header</h1>
-
-<h2>Basic</h2>
-<goa-app-header url="example.com"></goa-app-header>
-
-<h2>Heading</h2>
-<goa-app-header
-  url="https://example.com"
-  heading="Ticket and Fine Payments"
-></goa-app-header>
-
-<h2>Custom Content</h2>
 <goa-app-header url="https://example.com" heading="Ticket and Fine Payments">
-  <a title="loginUrl" href="#">Login</a>
+  <a href="#">Support</a>
+  <goa-app-header-menu heading="Tickets" leadingIcon="ticket">
+    <a href="#">Cases</a>
+    <a href="#">Payments</a>
+    <a href="#">Outstanding</a>
+  </goa-app-header-menu>
+  <a href="#" class="interactive">Sign in</a>
 </goa-app-header>

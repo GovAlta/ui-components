@@ -1,24 +1,25 @@
-import React from "react";
-import { Callout } from "../callout/Callout";
+import React, { FC } from "react";
+import { GoAIcon } from "@abgov/react-components";
+import "./DoDont.css";
 
-/**
- * Show a list Do's and Don'ts in a callout format.
- * @property {string} dos The "do's content text"
- * @property {string} donts The "dont's content text"
- */
-export const DoDont = ({ dos, donts }) => {
+type DoDont = "do" | "dont";
+interface Props {
+  type: DoDont;
+  content: string;
+  description?: string;
+}
+
+export const DoDont: FC<Props> = ({ type, content, description }) => {
   return (
-    <div>
-      <Callout positive={true} content={dos} />
-      <Callout positive={false} content={donts} />
-    </div>
+    <>
+      <div className="container">
+        {content}
+      </div>
+      <div className="content" data-positive={type}>
+        {type === "do" ? <GoAIcon type="checkmark-circle" /> : <GoAIcon type="close-circle" />}
+        <div className="content-label">{type}</div>
+      </div>
+      <div> {description} </div>
+    </>
   );
-};
-
-export const Do = ({ description }) => {
-  return <Callout positive={true} content={description} />;
-};
-
-export const Dont = ({ description }) => {
-  return <Callout positive={false} content={description} />;
 };

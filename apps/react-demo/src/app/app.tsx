@@ -2,8 +2,8 @@ import {
   GoAAppFooter,
   GoAAppHeader,
   GoAMicrositeHeader,
-  GoASidebar,
-  GoASidebarGroup,
+  GoASideMenu,
+  GoASideMenuGroup,
   GoATwoColumnLayout,
 } from "@abgov/react-components";
 import { Outlet, Link } from "react-router-dom";
@@ -19,8 +19,8 @@ export default function App() {
       }
       footer={<GoAAppFooter />}
       nav={
-        <GoASidebar>
-          <GoASidebarGroup heading="Components">
+        <GoASideMenu>
+          <GoASideMenuGroup heading="Components">
             <Link to="/accordion">Accordion</Link>
             <Link to="/app-footer">AppFooter</Link>
             <Link to="/app-header">App Header</Link>
@@ -46,17 +46,17 @@ export default function App() {
             <Link to="/pagination">Pagination</Link>
             <Link to="/popover">Popover</Link>
             <Link to="/radio">Radio</Link>
-            <Link to="/sidebar">Sidebar</Link>
+            <Link to="/side-menu">SideMenu</Link>
             <Link to="/skeleton">Skeleton</Link>
             <Link to="/styles">Styles</Link>
             <Link to="/table">Table</Link>
             <Link to="/textarea">TextArea</Link>
             <Link to="/form-stepper">FormStepper</Link>
-          </GoASidebarGroup>
-          <GoASidebarGroup heading="Layout">
+          </GoASideMenuGroup>
+          <GoASideMenuGroup heading="Layout">
             <Link to="/three-column-layout">Three Column Layout</Link>
-          </GoASidebarGroup>
-        </GoASidebar>
+          </GoASideMenuGroup>
+        </GoASideMenu>
       }
     >
       <Outlet />
