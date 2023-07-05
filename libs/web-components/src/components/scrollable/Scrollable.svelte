@@ -1,7 +1,7 @@
 <svelte:options tag="goa-scrollable" />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   // Public
   export let direction: "vertical" | "horizontal" = "vertical";
@@ -26,7 +26,8 @@
     e.stopPropagation();
   }
 
-  onMount(() => {
+  onMount(async () => {
+    await tick()
     offsetHeight = _el.offsetHeight;
     scrollHeight = _el.scrollHeight;
   });
