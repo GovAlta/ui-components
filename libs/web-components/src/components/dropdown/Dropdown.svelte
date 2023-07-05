@@ -227,6 +227,7 @@
       case "Escape":
         _isMenuVisible && closeMenu();
         e.preventDefault();
+        e.stopPropagation();
         break;
       case "ArrowDown":
         if (e.altKey) {
@@ -321,75 +322,66 @@
       {/each}
     </select>
   {:else}
-    {#if _isMenuVisible}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <div
-        data-testid={`${name}-dropdown-background`}
-        class="dropdown-background"
-        on:click={closeMenu}
-        use:noscroll={{ enable: _isMenuVisible }}
-      />
-    {/if}
-
-    <!-- readonly input  -->
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <goa-input
-      on:click={showMenu}
-      {error}
-      {disabled}
-      {leadingicon}
-      {placeholder}
-      aria-controls="menu"
-      aria-expanded={_isMenuVisible}
-      arialabel={arialabel || name}
-      data-testid={`${name}-dropdown-input`}
-      readonly
-      role="combobox"
-      trailingicon="chevron-down"
-      type="text"
-      value={_selectedLabel}
-      width="100%"
-      name={name}
-    />
-
     <!-- list and filter -->
     <slot />
-    <ul
-      id="menu"
-      role="listbox"
-      aria-activedescendant={_selectedLabel}
-      data-testid="dropdown-menu"
-      bind:this={_menuEl}
-      tabindex="0"
-      class="dropdown-list"
-      class:dropdown-active={_isMenuVisible}
-      style={`
-        overflow-y: auto;
-        max-height: ${maxheight};
-        --bottom: ${_dropdownMenuPos};
-      `}
-    >
-      {#each _options as option, index (index)}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <li
-          id={option.label}
-          role="option"
-          aria-label={option.label || option.value}
-          aria-selected={_values.includes(option.value) ? "true" : "false"}
-          class="dropdown-item"
-          class:dropdown-item--disabled={false}
-          class:dropdown-item--tabbed={index === _highlightedIndex}
-          class:dropdown-item--selected={_values.includes(option.value)}
-          data-testid={`dropdown-item-${option.value}`}
-          data-index={index}
-          data-value={option.value}
-          style={`display: ${false ? "none" : "block"}`}
-          on:click={() => onSelect(option.value, option.label, true)}
-        >
-          {option.label || option.value}
-        </li>
-      {/each}
-    </ul>
+    <goa-popover {disabled} open={_isMenuVisible} padded="false" width={width || _computedWidth}>
+    
+      <!-- readonly input  -->
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <goa-input
+        slot="target"
+        on:click={showMenu}
+        {error}
+        {disabled}
+        {leadingicon}
+        {placeholder}
+        aria-controls="menu"
+        aria-expanded={_isMenuVisible}
+        arialabel={arialabel || name}
+        data-testid={`${name}-dropdown-input`}
+        readonly
+        role="combobox"
+        trailingicon="chevron-down"
+        type="text"
+        value={_selectedLabel}
+        width="100%"
+        name={name}
+      />
+
+      <ul
+        id="menu"
+        role="listbox"
+        aria-activedescendant={_selectedLabel}
+        data-testid="dropdown-menu"
+        bind:this={_menuEl}
+        tabindex="0"
+        style={`
+          overflow-y: auto;
+          max-height: ${maxheight};
+        `}
+      >
+        {#each _options as option, index (index)}
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <li
+            id={option.label}
+            role="option"
+            aria-label={option.label || option.value}
+            aria-selected={_values.includes(option.value) ? "true" : "false"}
+            class="dropdown-item"
+            class:dropdown-item--disabled={false}
+            class:dropdown-item--tabbed={index === _highlightedIndex}
+            class:dropdown-item--selected={_values.includes(option.value)}
+            data-testid={`dropdown-item-${option.value}`}
+            data-index={index}
+            data-value={option.value}
+            style={`display: ${false ? "none" : "block"}`}
+            on:click={() => onSelect(option.value, option.label, true)}
+          >
+            {option.label || option.value}
+          </li>
+        {/each}
+      </ul>
+    </goa-popover>
   {/if}
 </div>
 
@@ -400,58 +392,13 @@
   }
 
   .dropdown {
-    position: relative;
     cursor: pointer;
     display: inline-block;
     width: var(--width, 100%);
   }
-  .dropdown-background {
-    cursor: default;
-    position: fixed;
-    z-index: 98;
-    inset: 0;
-  }
-
-  .dropdown-list {
-    position: absolute;
-    left: 0;
-    right: 0;
-    padding: 0;
-    margin: 0;
-    margin-top: 3px;
-    list-style-type: none;
-    background: var(--goa-color-greyscale-white);
-    border-radius: var(--goa-border-radius-m);
-    outline: none;
-    box-shadow: var(--shadow-1);
-    z-index: 99;
-    bottom: var(--bottom);
-    scroll-behavior: smooth;
-    scrollbar-width: thin; /* Firefox */
-
-    display: none;
-  }
-
-  /* To prevent a tabindex reset the dropdown must remain in the DOM when menu is closed */
-  .dropdown-active {
-    display: block;
-  }
-
-  /* Chrome based browsers and Safari */
-  .dropdown-list::-webkit-scrollbar {
-    width: 6px;
-  }
-  .dropdown-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  .dropdown-list::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-  .dropdown-list::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
 
   /* dropdown items */
+
   .dropdown-item {
     margin: 0;
     padding: 0.5rem;

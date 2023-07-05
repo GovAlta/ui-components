@@ -13,7 +13,6 @@
   // prevents the popover from exceeding this width
   export let maxwidth: string = "320px";
   // allow width to be hardcoded
-  // TODO: do I need this prop???
   export let width: string = "";  
   // allows to override the default padding when content needs to be flush with boundries
   export let padded: string = "true";
@@ -32,6 +31,8 @@
 
   // allow for outside control of whether popover is open/closed (see AppHeaderMenu)
   export let open: string = "false";
+  // allows outside control of the `open` property ex. when used within dropdown
+  export let disabled: string = "false";
   // allows tabindex to be set to -1 to skip tabbing if a parent is handling events
   export let tabindex: string = "0";
   // additional vertical offset that is added to popover's position
@@ -55,6 +56,7 @@
 
   $: _padded = toBoolean(padded);
   $: _open = toBoolean(open);
+  $: _disabled = toBoolean(disabled);
   $: (async () => _open && await setPopoverPosition())()
   $: {
     if (_open) {
@@ -123,7 +125,8 @@
 
   // Opens the popover and adds the required binding to the new slot element
   function openPopover() {  
-    (async () => {
+    if (_disabled) return;
+    ;(async () => {
       _open = true;
       await tick();
       _focusTrapEl.addEventListener("keydown", onFocusTrapEvent, true);
