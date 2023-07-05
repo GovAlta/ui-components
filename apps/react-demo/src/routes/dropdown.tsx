@@ -47,6 +47,13 @@ export default function Dropdown() {
         <GoADropdownItem key="value" value="blue" label="Blue" />
       </GoADropdown>
 
+      <h2>Disabled</h2>
+      <GoADropdown name="colors" placeholder="Select a color" onChange={noop} disabled={true}>
+        <GoADropdownItem key="red" value="red" label="Red" />
+        <GoADropdownItem key="green" value="green" label="Green" />
+        <GoADropdownItem key="value" value="blue" label="Blue" />
+      </GoADropdown>
+
       <h2>
         Reactive Binding
         <GoAButton onClick={() => setSelectedColor("red")} type="tertiary">
