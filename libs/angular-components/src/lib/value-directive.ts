@@ -23,12 +23,10 @@ export class ValueDirective implements ControlValueAccessor {
   }
 
   set value(val: string) {
-    if (val !== this._value) {
-      this._value = val;
-      this.onChange(this._value);
-      this.onTouched();
-      this.elementRef.nativeElement.value = val;
-    }
+    this._value = val;
+    this.onChange(this._value);
+    this.onTouched();
+    this.elementRef.nativeElement.value = val;
   }
 
   writeValue(value: string) {
