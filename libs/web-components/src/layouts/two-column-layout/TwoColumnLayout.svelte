@@ -3,25 +3,8 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
 
-  export let navcolumnwidth: string = "";  // blank value falls back to the css var
-  export let maxcontentwidth: string = "";   // "
-
-  // For sliding nav bar
-  // let open: boolean = false;
-  // function toggleMenu() {
-  //   open = !open;
-  // }
-
-  // For sliding nav bar
-  // let rootEl: HTMLElement;
-  // onMount(async () => {
-  //   await tick();
-  //   const navSlot = rootEl.querySelector("slot[name=nav]") as HTMLSlotElement;
-  //   const navLinks = navSlot.assignedElements();
-  //   for (const link of navLinks) {
-  //     link.addEventListener("click", () => open = false);
-  //   }
-  // });
+  export let navcolumnwidth: string = "";  // blank values falls back to the css var
+  export let maxcontentwidth: string = ""; 
 
 </script>
 
@@ -33,12 +16,10 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    position: relative;
   }
 
   .content {
     flex: 1 1 auto;
-    position: relative;
 
     display: flex;
     flex-direction: column;
@@ -97,55 +78,11 @@
     }
   }
 
-  /** Come back to when hiding sidebar is added
-  .toggle-menu-button {
-    position: absolute;
-    transition: transform 200ms ease-in-out;
-    top: 0;
-    padding: 6px;
-    z-index: 9999;
-  }
-
-  @media (max-width: 639px) {
-    .nav {
-      position: absolute;
-      left: calc(-1 * var(--nav-column-width));
-      width: var(--nav-column-width);
-      bottom: 0;
-      top: 0;
-      z-index: 999;
-    }
-
-    .open .nav {
-      transform: translateX(var(--nav-column-width));
-      box-shadow: 3px 0 7px -4px rgba(0,0,0,0.15);
-    }
-
-    .open .toggle-menu-button {
-      transform: translateX(200px);
-    }
-
-    .open main {
-      pointer-events: none;
-    }
-  }
-  **/
-
   @media (min-width: 640px) {
     .nav {
       transform: translateX(0);
       flex: 0 0 var(--nav-column-width);
     }
-    /** icons styles
-    .open .toggle-menu-button {
-      transform: translateX(calc(-1 * var(--nav-column-width)));
-      transition: transform 200ms ease-in-out;
-    }
-    .toggle-menu-button {
-      visibility: hidden;
-      pointer-events: none;
-    }
-    **/
   }
 
 </style>
@@ -162,7 +99,6 @@
   </header>
 
   <section class="content">
-    <!--<goa-icon-button variant="nocolor" class="toggle-menu-button" type="menu" on:click={toggleMenu} />-->
     <nav class="nav">
       <slot name="nav" />
     </nav>
