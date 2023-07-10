@@ -5,7 +5,7 @@
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { typeValidator, toBoolean } from "../../common/utils";
+  import { typeValidator } from "../../common/utils";
 
   // Validators
   const [REQUIREMENT_TYPES, validateRequirementType] = typeValidator(
@@ -29,6 +29,7 @@
   export let helptext: string = "";
   export let error: string = "";
   export let requirement: RequirementType = "";
+  export let id: string = "";
 
   onMount(() => {
     validateRequirementType(requirement);
@@ -43,7 +44,7 @@
   class="goa-form-item"
 >
   {#if label}
-    <div class="label">
+    <div class="label" id={id}>
       {label}
       {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
         <em>({requirement})</em>

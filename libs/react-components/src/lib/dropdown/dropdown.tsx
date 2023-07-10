@@ -5,6 +5,7 @@ import { GoAIconType } from "../icon/icon";
 interface WCProps extends Margins {
   ref: React.MutableRefObject<HTMLElement | null>;
   arialabel?: string;
+  arialabelledby?: string;
   disabled?: boolean;
   error?: boolean;
   filterable?: boolean;
@@ -17,6 +18,7 @@ interface WCProps extends Margins {
   value?: string;
   width?: string;
   relative?: boolean;
+  id?: string;
 }
 
 declare global {
@@ -36,6 +38,8 @@ interface Props extends Margins {
 
   // optional
   ariaLabel?: string;
+  ariaLabelledBy?: string;
+  id?: string;
   children?: React.ReactNode;
   disabled?: boolean;
   error?: boolean;
@@ -83,6 +87,7 @@ export const GoADropdown: FC<Props> = (props) => {
       name={props.name}
       value={stringify(props.value)}
       arialabel={props.ariaLabel}
+      arialabelledby={props.ariaLabelledBy}
       disabled={props.disabled}
       error={props.error}
       filterable={props.filterable}
@@ -98,6 +103,7 @@ export const GoADropdown: FC<Props> = (props) => {
       data-testid={props.testId}
       width={props.width}
       relative={props.relative}
+      id={props.id}
     >
       {props.children}
     </goa-dropdown>

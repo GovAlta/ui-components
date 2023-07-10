@@ -10,6 +10,11 @@
       "name": "label",
       "type": "string",
       "description": "The displayed value within the selection box. The value property is the fallback value."
+    },
+    {
+      "name": "filter",
+      "type": "string",
+      "description": "When true the dropdown will have the ability to filter options by typing into the input field."
     }
   ],
   "references": [

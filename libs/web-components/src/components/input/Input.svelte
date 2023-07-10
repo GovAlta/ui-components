@@ -43,6 +43,7 @@
   export let testid: string = "";
   export let width: string = "30ch";
   export let arialabel: string = null;
+  export let arialabelledby: string = null;
   export let min: string = "";
   export let max: string = "";
   export let step: number = 1;
@@ -50,6 +51,7 @@
   export let suffix: string = "";
   export let debounce: number = 0;
   export let maxlength: number = null;
+  export let id: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -198,8 +200,10 @@
       {max}
       {step}
       {maxlength}
+      id={id || name}
       role="textbox"
       aria-label={arialabel || name}
+      aria-labelledby={arialabelledby}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
       on:focus={onFocus}
@@ -485,6 +489,6 @@
     height: 1.2rem;
     width: 1.2rem;
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>')
-      center center no-repeat;
+    center center no-repeat;
   }
 </style>

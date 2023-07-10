@@ -8,9 +8,10 @@ afterEach(cleanup);
 describe('GoAInput Component', () => {
 
   it("should render", async () => {
-    const el = render(GoAInput, { testid: "input-test" });
+    const el = render(GoAInput, { testid: "input-test", id: "test" });
     const input = await el.findByTestId('input-test');
     expect(input).toBeTruthy();
+    expect(input.getAttribute("id")).toBe("test");
   });
 
   describe("Properties", () => {
@@ -85,6 +86,12 @@ describe('GoAInput Component', () => {
     it("defaults to the name property if arialabel is not supplied", async () => {
       const el = render(GoAInput, { testid: "input-test", name: "firstName" });
       const root = el.container.querySelector('[aria-label="firstName"]');
+      expect(root).toBeTruthy();
+    });
+
+    it("accepts an arialabelledby property", async () => {
+      const el = render(GoAInput, { testid: "input-test", arialabelledby: "firstName" });
+      const root = el.container.querySelector('[aria-labelledby="firstName"]');
       expect(root).toBeTruthy();
     });
 

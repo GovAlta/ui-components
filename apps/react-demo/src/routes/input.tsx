@@ -38,7 +38,6 @@ export default function Input() {
     console.log("onBlur -> Name :: Value ===", _name, " :: ", value);
   }
 
-
   return (
     <>
       <h4>Date with a min and max and Date values</h4>
@@ -113,7 +112,14 @@ export default function Input() {
       <GoAInput name="" value="" onChange={noop} type="text" error={true} />
 
       <h2>Focus</h2>
-      <GoAInput name="" value="" onChange={noop} type="text" onFocus={onFocusChange} onBlur={onBlurChange} />
+      <GoAInput
+        name=""
+        value=""
+        onChange={noop}
+        type="text"
+        onFocus={onFocusChange}
+        onBlur={onBlurChange}
+      />
 
       <h2>Prefix and Suffix</h2>
       <GoAInput name="input" value="" prefix="$" onChange={noop} />

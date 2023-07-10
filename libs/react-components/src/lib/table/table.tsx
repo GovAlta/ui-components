@@ -60,7 +60,7 @@ export function GoATable(props: TableProps) {
       ml={props.ml}
       mr={props.mr}
     >
-      <table style={{width: "100%"}}>{props.children}</table>
+      <table style={{ width: "100%" }}>{props.children}</table>
     </goa-table>
   );
 }

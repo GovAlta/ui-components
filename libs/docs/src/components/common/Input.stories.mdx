@@ -149,10 +149,30 @@ import { Meta, Story } from "@storybook/addon-docs";
     description="How much a number or date should change by"
   />
   <Prop
-    name="ariaLabel"
+    name="arialabel"
+    lang="angular"
     type="string"
-    description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name"
+    description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. If both arialabel and arialabelledby are specified, arialabelledby will be used"
   />
+  <Prop
+    name="ariaLabel"
+    lang="react"
+    type="string"
+    description="Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. If both arialabel and arialabelledby are specified, arialabelledby will be used"
+  />
+  <Prop
+    name="arialabelledby"
+    lang="angular"
+    type="string"
+    description="The aria-labelledby attribute identifies the element (or elements) that labels the dropdown it is applied to. Normally it is the id of the label."
+  />
+  <Prop
+    name="ariaLabelledBy"
+    lang="react"
+    type="string"
+    description="The aria-labelledby attribute identifies the element (or elements) that labels the dropdown it is applied to. Normally it is the id of the label."
+  />
+
   <Prop
     name="maxlength"
     lang="angular"

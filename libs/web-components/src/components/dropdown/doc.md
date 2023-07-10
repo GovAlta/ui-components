@@ -6,6 +6,8 @@ Use it like this:
 <goa-dropdown
   goaValue
   name="colors"
+  id="colors"
+  filterable="true"
   [formControl]="reactiveFormCtrl"
   [value]="reactiveFormCtrl.value">
   <goa-dropdown-item

@@ -80,6 +80,7 @@ describe("GoABadgeComponent", () => {
       });
       const goaIcon = await result.container.querySelector("goa-icon");
       expect(goaIcon.getAttribute("arialabel")).toBe("Text that screen reader should read");
+      expect(goaIcon.getAttribute("role")).toBe("presentation");
     });
     it(`should ignore arialabel for not icon-only badge`, async () => {
       const result = render(GoABadge, {
@@ -91,6 +92,7 @@ describe("GoABadgeComponent", () => {
       });
       const goaIcon = await result.container.querySelector("goa-icon");
       expect(goaIcon.getAttribute("arialabel")).toBe(null);
+      expect(goaIcon.getAttribute("role")).toBe(null);
     });
   });
 });

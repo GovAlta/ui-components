@@ -28,14 +28,18 @@ describe("GoADropdown", () => {
         value={[""]}
         maxHeight="100px"
         placeholder="Select..."
+        filterable={true}
         disabled={true}
         error={true}
         testId="foo"
+        id="foo-dropdown"
         width="200px"
         mt="s"
         mr="m"
         mb="l"
         ml="xl"
+        ariaLabel={"label"}
+        ariaLabelledBy={"foo-dropdown-label"}
         onChange={() => {}}
       >
         <GoADropdownItem name="favColor" label="Red" value="red" />
@@ -50,6 +54,10 @@ describe("GoADropdown", () => {
     expect(el.getAttribute("mr")).toBe("m");
     expect(el.getAttribute("mb")).toBe("l");
     expect(el.getAttribute("ml")).toBe("xl");
+    expect(el.getAttribute("id")).toBe("foo-dropdown");
+    expect(el.getAttribute("filterable")).toBe("true");
+    expect(el.getAttribute("arialabel")).toBe("label");
+    expect(el.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
   });
 
   it("should allow for a single selection", async () => {

@@ -5,7 +5,7 @@ import { GoAInputDateTime, GoAInputText, InputProps } from "./input";
 import { GoAIconType } from "../icon/icon";
 import React from "react";
 
-const noop = () => { };
+const noop = () => {};
 const testId = "test-id";
 const defaultProps: InputProps = {
   name: "",
@@ -97,7 +97,7 @@ describe("Input", () => {
     expect(validateOnChange).toBeCalled();
   });
 
-  it('should not error out with invalid dates', () => {
+  it("should not error out with invalid dates", () => {
     const mockOnChangeHandler = jest.fn();
     const { container } = render(
       <GoAInputDateTime
@@ -106,19 +106,25 @@ describe("Input", () => {
         value={new Date()}
       />
     );
-    const inputElement = container.querySelector('goa-input[type="datetime-local"]');
+    const inputElement = container.querySelector(
+      'goa-input[type="datetime-local"]'
+    );
     expect(inputElement).toBeTruthy();
     //invalid dates do not trigger change event
     fireEvent(
       inputElement,
-      new CustomEvent("_change", { detail: { name: "dateInput", value: 'invalid date' } })
+      new CustomEvent("_change", {
+        detail: { name: "dateInput", value: "invalid date" },
+      })
     );
     expect(mockOnChangeHandler).not.toBeCalled();
     const newDate = new Date().toISOString();
     //valid dates trigger change event
     fireEvent(
       inputElement,
-      new CustomEvent("_change", { detail: { name: "dateInput", value: newDate } })
+      new CustomEvent("_change", {
+        detail: { name: "dateInput", value: newDate },
+      })
     );
     expect(mockOnChangeHandler).toBeCalledWith("dateInput", new Date(newDate));
   });

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 interface WCProps {
   value: string;
   label?: string;
+  filter?: string;
 
   // @deprecated
   name?: string;
@@ -21,6 +22,7 @@ declare global {
 interface Props {
   value: string;
   label?: string;
+  filter?: string;
   testId?: string;
 
   // @deprecated
@@ -35,12 +37,13 @@ export function GoADropdownOption(props: Props) {
   return <GoADropdownItem {...props} />;
 }
 
-export function GoADropdownItem({ value, label, name, testId }: Props) {
+export function GoADropdownItem({ value, label, filter, name, testId }: Props) {
   return (
     <goa-dropdown-item
       data-testid={testId}
       value={value}
       label={label}
+      filter={filter}
       name={name}
     />
   );

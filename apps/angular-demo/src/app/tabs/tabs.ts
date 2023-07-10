@@ -4,5 +4,4 @@ import { Component } from "@angular/core";
   selector: "abgov-tabs",
   templateUrl: "./tabs.html",
 })
-export class TabsComponent {
-}
+export class TabsComponent {}

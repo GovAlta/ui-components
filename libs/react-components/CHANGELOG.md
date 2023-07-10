@@ -8,19 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.13.0] - 2023-08-01
 
 ### Added
+
 - New property for Dropdown component `relative` that is required if a parent container has relative positioning
 - New events available for the Input component, onFocus and onBlur
 
 ### Fixed
+
 - onClick events inside a GoATable will now fire correctly
 
 ## [4.12.0] - 2023-07-17
 
 ### Added
+
 - New component [Tooltip](https://ui-components.alberta.ca/?path=/docs/components-tooltip--basic)
 - New component [Tabs](https://ui-components.alberta.ca/?path=/docs/components-tabs--basic)
 
 ### Fixed
+
 - Added children properties for Accordion and Popover components
 - Can no longer cause a page crash entering an invalid number with the `GoAInputDate` component
 

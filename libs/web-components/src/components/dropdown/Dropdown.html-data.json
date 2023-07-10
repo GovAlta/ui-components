@@ -28,6 +28,11 @@
       "description": "The text displayed for the dropdown before a selection is made. Non-native only"
     },
     {
+      "name": "id",
+      "type": "string",
+      "description": "Set an id for the dropdown component."
+    },
+    {
       "name": "width",
       "type": "string",
       "description": "Override the autosized menu width"
@@ -47,9 +52,14 @@
       "default": "false"
     },
     {
-      "name": "ariaLabel",
+      "name": "arialabel",
       "type": "string",
-      "description": "Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name"
+      "description": "Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. If both arialabel and arialabelledby are specified, arialabelledby will be used"
+    },
+    {
+      "name": "arialabelledby",
+      "type": "string",
+      "description": "The aria-labelledby attribute identifies the element (or elements) that labels the dropdown it is applied to. Normally it is the id of the label."
     },
     {
       "name": "native",
@@ -83,6 +93,12 @@
       "name": "ml",
       "description": "Left margin",
       "valueSet": "spacing"
+    },
+    {
+      "name": "filterable",
+      "description": "When true, the dropdown will be filterable. Non-native only",
+      "valueSet": "boolean",
+      "default": "false"
     }
   ],
   "references": [

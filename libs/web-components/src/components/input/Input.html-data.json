@@ -88,7 +88,7 @@
       "default": "false"
     },
     {
-      "name": "readOnly",
+      "name": "readonly",
       "description": "Makes the input readonly",
       "type": "boolean",
       "valueSet": "boolean",
@@ -123,8 +123,13 @@
       "type": "number"
     },
     {
-      "name": "ariaLabel",
-      "description": "Defines how the input will be translated for the screen reader. If not specified it will fall back to the name",
+      "name": "arialabel",
+      "description": "Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. If both arialabel and arialabelledby are specified, arialabelledby will be used",
+      "type": "string"
+    },
+    {
+      "name": "arialabelledby",
+      "description": "The aria-labelledby attribute identifies the element (or elements) that labels the input it is applied to. Normally it is the id of the label.",
       "type": "string"
     },
     {
@@ -171,6 +176,11 @@
       "name": "maxlength",
       "type": "number",
       "description": "Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input."
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Unique identifier of the input"
     }
   ],
   "references": [

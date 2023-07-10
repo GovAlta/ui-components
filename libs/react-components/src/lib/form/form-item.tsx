@@ -8,6 +8,7 @@ interface WCProps extends Margins {
   requirement?: RequirementType;
   error?: string;
   helptext?: string;
+  id?: string;
 }
 
 declare global {
@@ -26,6 +27,7 @@ interface GoAFormItemProps extends Margins {
   helpText?: string;
   children?: React.ReactNode;
   testId?: string;
+  id?: string;
 }
 
 export const GoAFormItem: FC<GoAFormItemProps> = ({
@@ -39,6 +41,7 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({
   mb,
   ml,
   testId,
+  id,
 }) => {
   return (
     <goa-form-item
@@ -51,6 +54,7 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({
       mb={mb}
       ml={ml}
       data-testid={testId}
+      id={id}
     >
       {children}
     </goa-form-item>
