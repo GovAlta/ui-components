@@ -41,6 +41,11 @@
       "type": "string",
       "values": ["optional","required"],
       "description": "Marks the field with optional/required label."
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "ID of the label."
     }
   ],
   "references": [

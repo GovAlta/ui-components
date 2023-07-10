@@ -89,10 +89,12 @@ describe("GoA FormItem", () => {
       helptext: "the helptext",
       requirement: "optional",
       error: "the error",
+      id: "labelId"
     });
 
     const label = document.querySelector(".label");
     expect(label.innerHTML).toContain("the label");
+    expect(label.getAttribute("id")).toBe("labelId");
 
     const requirement = document.querySelector("em");
     expect(requirement.innerHTML).toContain("optional");

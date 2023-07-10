@@ -54,7 +54,9 @@ export default function Table() {
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
               <td className="goa-table-number-column">{user.age}</td>
-              <td><button onClick={() => alert("here")}>Click</button></td>
+              <td>
+                <button onClick={() => alert("here")}>Click</button>
+              </td>
             </tr>
           ))}
         </tbody>

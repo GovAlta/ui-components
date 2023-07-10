@@ -12,6 +12,7 @@ describe("GoAFormItem", () => {
         requirement="optional"
         error="This is an error"
         helpText="This is some help text"
+        id="firstName"
       />
     );
     const el = baseElement.querySelector("goa-form-item");
@@ -19,5 +20,6 @@ describe("GoAFormItem", () => {
     expect(el.getAttribute("requirement")).toEqual("optional");
     expect(el.getAttribute("error")).toEqual("This is an error");
     expect(el.getAttribute("helptext")).toEqual("This is some help text");
+    expect(el.getAttribute("id")).toEqual("firstName");
   });
 });

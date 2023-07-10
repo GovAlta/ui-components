@@ -11,6 +11,7 @@ import {
   GoADropdown,
   GoADropdownItem,
   GoACallout,
+  GoAFormItem,
 } from "@abgov/react-components";
 import { useState } from "react";
 
@@ -38,13 +39,28 @@ import { useState } from "react";
     description="Stores the value of the item selected from the dropdown"
   />
   <Prop
-    name="leadingIcon"
+    name="leadingicon"
+    lang="angular"
     type="GoAIconType"
     description="Show an icon to the left of the dropdown option. **Non-native only**"
   />
   <Prop
+    name="leadingIcon"
+    lang="react"
+    type="GoAIconType"
+    description="Show an icon to the left of the dropdown option. **Non-native only**"
+  />
+  <Prop
+    name="maxheight"
+    type="string"
+    lang="angular"
+    defaultValue="276px"
+    description="Maximum height of the dropdown menu items popover. **Non-native only**"
+  />
+  <Prop
     name="maxHeight"
     type="string"
+    lang="react"
     defaultValue="276px"
     description="Maximum height of the dropdown menu items popover. **Non-native only**"
   />
@@ -86,8 +102,33 @@ import { useState } from "react";
   />
   <Prop
     name="ariaLabel"
+    lang="react"
     type="string"
     description="Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name"
+  />
+  <Prop
+    name="arialabel"
+    lang="angular"
+    type="string"
+    description="Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name"
+  />
+  <Prop
+    name="ariaLabelledBy"
+    lang="react"
+    type="string"
+    description="The aria-labelledby attribute identifies the element (or elements) that labels the dropdown it is applied to. Normally it is the id of the label."
+  />
+  <Prop
+    name="arialabelledby"
+    lang="angular"
+    type="string"
+    description="The aria-labelledby attribute identifies the element (or elements) that labels the dropdown it is applied to. Normally it is the id of the label."
+  />
+  <Prop
+    name="id"
+    type="string"
+    defaultValue="name of the dropdown"
+    description="Set an id for the dropdown component, should be unique, to associate with form's label 'for' attribute."
   />
   <Prop
     name="native"
@@ -96,16 +137,30 @@ import { useState } from "react";
     description="When true will render the native <select> html element"
   />
   <Prop
+    name="filterable"
+    type="boolean"
+    defaultValue="false"
+    description="When true the dropdown will have the ability to filter options by typing into the input field."
+  />
+  <Prop
     name="onChange"
     lang="react"
-    type="(name: string, values: string[] | string) => void"
+    type="(name: string, values: string[] | string | null) => void"
+    description="Callback function when dropdown value is changed"
+  />
+  <Prop
+    name="_change"
+    lang="angular"
+    type="(name: string, value: string | string[] | null) => void"
     description="Callback function when dropdown value is changed"
   />
 </Props>
 <GoACallout>
-  When using a dropdown inside a modal where there is limited space for the menu
-  items to display, ensure the "native" property is set to "true" for the
-  dropdown to function properly.
+  The dropdown and the filterable dropdown both help a user select an option
+  from a list. The decision to use either the basic dropdown or the filterable
+  dropdown depends on the complexity of the list. If there are 10 or more
+  options, use a dropdown that is filterable to help the user search and filter
+  through the data.
 </GoACallout>
 <details>
   <summary>Additional Properties</summary>
@@ -150,16 +205,26 @@ import { useState } from "react";
     type="string"
     description="The displayed value within the selection box. The `value` property is the fallback value."
   />
+  <Prop
+    name="filter"
+    type="string"
+    description="In case of the filterable dropdown, this property is for us to set what we want to search the option with different keywords. The `label` or `value` property is the fallback value."
+  />
 </Props>
 
 export const Template = (args) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(args.value ? args.value : "");
   function onChange(name, value) {
     console.log(name, value);
     setValue(value);
   }
   return (
-    <GoADropdown {...args} value={value} onChange={onChange}>
+    <GoADropdown
+      {...args}
+      filterable={args.filterable}
+      value={value}
+      onChange={onChange}
+    >
       <GoADropdownItem value="red" label="Red" />
       <GoADropdownItem value="green" label="Green" />
       <GoADropdownItem value="blue" label="Blue" />
@@ -167,9 +232,28 @@ export const Template = (args) => {
   );
 };
 
+export const TemplateAccessibility = (args) => {
+  const [value, setValue] = useState(args.value);
+  function onChange(name, value) {
+    console.log(name, value);
+    setValue(value);
+  }
+  return (
+    <GoAFormItem label="Color" fieldId={args.id ? args.id : "color"}>
+      <GoADropdown {...args} value={value} onChange={onChange}>
+        <GoADropdownItem value="red" label="Red" />
+        <GoADropdownItem value="green" label="Green" />
+        <GoADropdownItem value="blue" label="Blue" />
+      </GoADropdown>
+    </GoAFormItem>
+  );
+};
+
 #### Basic
 
-<Story name="Basic">{Template.bind()}</Story>
+<Story name="Basic" args={{ name: "colors" }}>
+  {Template.bind()}
+</Story>
 
 <Tabs>
   <Tab label="Web Component" hidden={true}>
@@ -202,6 +286,64 @@ export const Template = (args) => {
           goaValue
           name="colors"
           [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
+        >
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl("");
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState('');
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoADropdown name="colors" value={value} onChange={onChange}>
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
+          </GoADropdown>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Filterable Dropdown
+
+<Story name="Filterable" args={{ filterable: true }}>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown
+          goaValue
+          filterable="true"
+          name="colors"
+          [formControl]="reactiveFormCtrl"
           [value]="reactiveFormCtrl.value">
           <goa-dropdown-item
             *ngFor="let color of colors"
@@ -218,7 +360,7 @@ export const Template = (args) => {
         import { FormControl } from "@angular/forms";
         export class MyComponent {
           colors: string[] = ['red', 'green', 'blue'];
-          reactiveFormCtrl = new FormControl("red");
+          reactiveFormCtrl = new FormControl("");
         }
       `}
     />
@@ -227,12 +369,12 @@ export const Template = (args) => {
     <CodeSnippet
       lang="tsx"
       code={`
-        const [value, setValue] = useState('green');
+        const [value, setValue] = useState('');
         function onChange(name: string, value: string | string[]) {
           setValue(value);
         }
         return (
-          <GoADropdown name="colors" value={value} onChange={onChange}>
+          <GoADropdown name="colors" filterable value={value} onChange={onChange}>
             <GoADropdownItem value="red" label="Red" />
             <GoADropdownItem value="green" label="Green" />
             <GoADropdownItem value="blue" label="Blue" />
@@ -279,6 +421,42 @@ export const Template = (args) => {
       lang="tsx"
       code={`
         <GoADropdown name="colors" error={true} value={value} onChange={() => {}}>
+          <GoADropdownItem value="red" label="Red" />
+          <GoADropdownItem value="green" label="Green" />
+          <GoADropdownItem value="blue" label="Blue" />
+        </GoADropdown>
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Error and Filterable
+
+<Story
+  name="Error and Filterable"
+  args={{ name: "error", error: true, filterable: true }}
+>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown name="colors" filterable="true" error="true">
+          <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
+          <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+          <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        <GoADropdown name="colors" filterable="true" error={true} value={value} onChange={() => {}}>
           <GoADropdownItem value="red" label="Red" />
           <GoADropdownItem value="green" label="Green" />
           <GoADropdownItem value="blue" label="Blue" />
@@ -435,6 +613,69 @@ export const Template = (args) => {
   </Tab>
 </Tabs>
 
+#### Disabled and Filterable
+
+<Story
+  name="Disabled and Filterable"
+  args={{ name: "disabled", value: "red", disabled: true, filterable: true }}
+>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown id="dropdown" name="colors" disabled="true">
+          <goa-dropdown-item value="red" label="Red" />
+          <goa-dropdown-item value="green" label="Green" />
+          <goa-dropdown-item value="blue" label="Blue" />
+        </goa-dropdown>
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown name="colors" disabled="true" filterable="true" value="red">
+          <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
+          <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+          <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
+        </goa-dropdown>
+        <!-- Use [attr.disabled] with [formControl] -->
+        <goa-dropdown name="colors" goaValue [formControl]="reactiveFormCtrl" [attr.disabled]="true" filterable="true">
+          <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
+          <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+          <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          reactiveFormCtrl = new FormControl("red");
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+  <CodeSnippet
+    lang="tsx"
+    code={`
+        <GoADropdown name="colors" disabled={true} filterable={true} value={'red'} onChange={() => {}}>
+          <GoADropdownItem value="red" label="Red" />
+          <GoADropdownItem value="green" label="Green" />
+          <GoADropdownItem value="blue" label="Blue" />
+        </GoADropdown>
+      `}
+  />
+</Tab>
+</Tabs>
+
 #### Leading icon
 
 <Story name="Leading icon" args={{ name: "colors", leadingIcon: "airplane" }}>
@@ -499,6 +740,89 @@ export const Template = (args) => {
       lang="tsx"
       code={`
         const [value, setValue] = useState('green');
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoADropdown name="colors" value={value} onChange={onChange} leadingIcon="airplane">
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
+          </GoADropdown>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Leading icon and Filterable
+
+<Story
+  name="Leading icon and Filterable"
+  args={{ name: "colors", leadingIcon: "airplane", filterable: true }}
+>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown id="dropdown" name="colors" leadingicon="airplane">
+          <goa-dropdown-item value="red" label="Red" />
+          <goa-dropdown-item value="green" label="Green" />
+          <goa-dropdown-item value="blue" label="Blue" />
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        var dropdown = document.getElementById("dropdown");
+        dropdown.addEventListener("_change", e => {
+          console.log("_change", e.detail);
+          dropdown.setAttribute("value", e.detail.value);
+        });
+      `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown
+          goaValue
+          filterable="true"
+          name="colors"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
+          leadingicon="airplane">
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl("");
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState('');
         function onChange(name: string, value: string | string[]) {
           setValue(value);
         }
@@ -593,6 +917,67 @@ export const Template = (args) => {
   </Tab>
 </Tabs>
 
+#### Max height and Filterable
+
+<Story
+  name="Max height and Filterable"
+  args={{ name: "colors", maxHeight: "80px", filterable: true }}
+>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown
+          goaValue
+          filterable="true"
+          name="colors"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
+          maxheight="80px">
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl("");
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState('');
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoADropdown name="colors" filterable value={value} onChange={onChange} maxHeight="80px">
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
+          </GoADropdown>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
 #### Placeholder
 
 <Story
@@ -665,6 +1050,67 @@ export const Template = (args) => {
         }
         return (
           <GoADropdown name="colors" onChange={onChange} placeholder="Select a color">
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
+          </GoADropdown>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Placeholder and Filterable
+
+<Story
+  name="Placeholder and Filterable"
+  args={{ name: "colors", placeholder: "Select a color", filterable: true }}
+>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown
+          goaValue
+          filterable="true"
+          name="colors"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
+          placeholder="Select a color">
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl();
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState('');
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoADropdown name="colors" onChange={onChange} filterable="true" placeholder="Select a color">
             <GoADropdownItem value="red" label="Red" />
             <GoADropdownItem value="green" label="Green" />
             <GoADropdownItem value="blue" label="Blue" />
@@ -753,6 +1199,147 @@ export const Template = (args) => {
     />
   </Tab>
 </Tabs>
+
+#### Width and Filterable
+
+<Story
+  name="Width and Filterable"
+  args={{ name: "colors", width: "350px", filterable: true }}
+>
+  {Template.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-dropdown
+          goaValue
+          filterable="true"
+          name="colors"
+          [formControl]="reactiveFormCtrl"
+          [value]="reactiveFormCtrl.value"
+          width="350px">
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl("");
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState("");
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoADropdown name="colors" filterable value={value} onChange={onChange} width="350px">
+            <GoADropdownItem value="red" label="Red" />
+            <GoADropdownItem value="green" label="Green" />
+            <GoADropdownItem value="blue" label="Blue" />
+          </GoADropdown>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Good Accessibility Practice
+
+<Story
+  name="Good Accessibility Practice"
+  args={{ name: "colors", id: "colors" }}
+>
+  {TemplateAccessibility.bind()}
+</Story>
+
+<br />
+
+<GoACallout type="important">
+  Include an 'arialabel' attribute whenever you’re hiding a label or not using
+  GoAFormItem. This 'arialabel' should provide a succinct, meaningful
+  description of the dropdown’s purpose or the information it represents.
+</GoACallout>
+
+<GoACallout type="information">
+  Include an 'arialabelledby' for the GoADropdown that matches with the 'id' for the GoAFormItem. It
+  ensures that assistive technology can refer the correct label when presenting
+  a form control of the dropdown.
+</GoACallout>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-form-item label="Color" id="colorLabel">
+            <goa-dropdown
+            id="color"
+            arialabelledby="colorLabel"
+            goaValue
+            name="colors"
+            [formControl]="reactiveFormCtrl"
+            [value]="reactiveFormCtrl.value">
+          <goa-dropdown-item
+            *ngFor="let color of colors"
+            [value]="color"
+            [label]="color"
+          >
+          </goa-dropdown-item>
+        </goa-dropdown>
+      </goa-form-item>
+      `}
+    />
+    <CodeSnippet
+      lang="js"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          colors: string[] = ['red', 'green', 'blue'];
+          reactiveFormCtrl = new FormControl("");
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        const [value, setValue] = useState("");
+        function onChange(name: string, value: string | string[]) {
+          setValue(value);
+        }
+        return (
+          <GoAFormItem label="Color" id="colorLabel">
+          <GoACombobox id="color" ariaLabelledBy="colorLabel" name="colors" value={value} onChange={onChange}>
+            <GoAComboboxItem value="red" label="Red" />
+            <GoAComboboxItem value="green" label="Green" />
+            <GoAComboboxItem value="blue" label="Blue" />
+          </GoACombobox>
+        </GoAFormItem>
+        )
+      `}
+    />
+  </Tab>
+</Tabs>
+
 ---
 
 <SupportInfo />

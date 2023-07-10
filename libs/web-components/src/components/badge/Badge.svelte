@@ -67,6 +67,7 @@
   {#if showIcon}
       <goa-icon
         arialabel={showIconOnly && arialabel ? arialabel : null}
+        role={showIconOnly && arialabel ? "presentation" : null}
         type={iconType}
         size="small"
       />

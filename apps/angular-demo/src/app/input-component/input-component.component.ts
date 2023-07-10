@@ -82,8 +82,6 @@ export class InputComponentComponent implements OnInit {
   handleTrailingIconClick() {
     console.log("handleTrailingIconClick");
   }
-
-
 }
 
 function getFirstName(): string {
