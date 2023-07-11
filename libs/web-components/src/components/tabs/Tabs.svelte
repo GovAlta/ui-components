@@ -146,20 +146,16 @@
     font: var(--goa-typography-heading-s);
   }
 
+  [role="tab"]:hover:not([aria-selected="true"]), 
+  [role="tab"]:focus:not([aria-selected="true"]) {
+    border-color: var(--goa-color-greyscale-200);
+  }
+
   [role="tab"]:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
   }
 
-  [role="tab"]:hover:not([aria-selected="true"]), 
-  [role="tab"]:focus:not([aria-selected="true"]),
-  [role="tab"]:focus-visible:not([aria-selected="true"]) {
-    border-color: var(--goa-color-greyscale-200);
-  }
-
   @media(min-width: 640px) {
-    [role="tablist"] {
-      border-bottom: none;
-    }
     .tabs {
       border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
       display: flex;
