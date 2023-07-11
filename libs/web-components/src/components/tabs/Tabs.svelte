@@ -1,135 +1,97 @@
 <svelte:options tag="goa-tabs"/>
 
 <script lang="ts">
-  import {onDestroy, onMount, tick} from 'svelte';
+  import { onDestroy, onMount, tick } from 'svelte';
+
+  export let current: number = 1;
 
   let _rootEl: HTMLElement;
-  let _tabItemsEl: Element[];
-  let _tabPanelEl: HTMLElement;
-  let _contentItemsEl: Map<number, HTMLElement[]> = new Map();
+  let _tabItems: Element[];
+  let _tabs: HTMLElement;
 
   // ========
-  // Reactive
+  // Hooks
   // ========
-
-  $: {
-    if (_tabItemsEl) {
-      init();
-      addKeyboardEventListeners();
-    }
-  }
 
   onMount(async () => {
     await tick();
+
+    // init listeners
+    _rootEl.addEventListener("focus", handleKeydownEvents, true);
+    
+    // setup tabs
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
+    
     if (slot) {
-      _tabItemsEl = slot.assignedElements();
+      _tabItems = slot.assignedElements();
     } else {
-      _tabItemsEl = [..._rootEl.querySelectorAll("goa-tab")] as Element[]; // for unit tests
+      _tabItems = [..._rootEl.querySelectorAll("goa-tab")] as Element[]; // for unit tests
     }
-    _rootEl.addEventListener("open", (e: Event) => {
-      const openingIndex = +(e as CustomEvent).detail.childIndex;
-      replacePanel(openingIndex);
-      _tabItemsEl.map((tabItemEl, index) => {
-        tabItemEl.setAttribute("open", index === openingIndex ? "true" : "false");
-      });
+
+    _tabItems.map((el, index) => {
+      const tab = [...el.children].find(child => child.getAttribute("slot") === "heading") as HTMLElement;
+      const button = document.createElement("button")
+
+      tab.classList.add("tab")
+      button.appendChild(tab);
+      button.setAttribute("role", "tab")
+      button.addEventListener("click", () => setCurrentTab(index + 1))
+
+      _tabs.appendChild(button)
     });
 
+    setCurrentTab(current);
   });
 
   onDestroy(() => {
-    removeKeyboardEventListeners();
+    _rootEl.removeEventListener("focus", handleKeydownEvents, true);
   });
 
-  function init() {
-    if (_tabItemsEl) {
-      _tabItemsEl.map((tabItemEl, index) => {
-        tabItemEl.setAttribute("childindex", index.toString());
-        let content = Array.from(tabItemEl.children)
-          .filter(child => child.slot !== 'heading') as HTMLElement[];
-        if (content.length === 0 && tabItemEl.textContent) {
-          // If the default slot is not wrapped within HTML node
-          let textElement = document.createElement("p");
-          textElement.textContent = tabItemEl.textContent;
-          content = [textElement];
-        }
-        _contentItemsEl.set(index, content);
-        if (tabItemEl.getAttribute("open") === "true") {
-          replacePanel(index);
-        }
-      });
+  // =========
+  // Functions
+  // =========
+
+  function setCurrentTab(tab: number) {
+    if (tab > _tabItems.length) {
+      tab = _tabItems.length;
     }
-  }
-
-  function replacePanel(index: number) {
-    if (_tabPanelEl) {
-      // Clear the current content
-      while (_tabPanelEl.firstChild) {
-        _tabPanelEl.removeChild(_tabPanelEl.firstChild);
-      }
-      for (const contentElement of _contentItemsEl.get(index)) {
-        _tabPanelEl.appendChild(contentElement);
-      }
-      _tabPanelEl.id = `tabpanel-${index}`;
-      _tabPanelEl.setAttribute("aria-labelledby", `tab-${index}`);
+    if (tab < 1) {
+      tab = 1;
     }
+    current = +tab;
+
+    _tabItems.map((el, index) => {
+      el.setAttribute("open", (index + 1) === current ? "true" : "false");
+    });
+
+    [..._tabs.querySelectorAll("[role=tab]")].map((el, index) => {
+      el.setAttribute("aria-selected", (index + 1) === current ? "true" : "false");
+    });
   }
 
-  function addKeyboardEventListeners() {
-    _rootEl.addEventListener("focus", onFocus, true);
-  }
-
-  function removeKeyboardEventListeners() {
-    _rootEl.removeEventListener("focus", onFocus, true);
-  }
-
-  function onFocus() {
+  function handleKeydownEvents() {
     _rootEl.addEventListener("keydown", onKeyDown);
-  }
-
-  function setSelectedToPreviousTab(target) {
-    const currentIndex = +target.getAttribute("childindex");
-    if (currentIndex === 0) {
-      setSelectedTab(_tabItemsEl.length - 1);
-    } else {
-      setSelectedTab(currentIndex - 1);
-    }
-  }
-
-  function setSelectedToNextTab(target) {
-    const currentIndex = +target.getAttribute("childindex");
-    if (currentIndex === _tabItemsEl.length - 1) {
-      setSelectedTab(0);
-    } else {
-      setSelectedTab(currentIndex + 1);
-    }
-  }
-
-  function setSelectedTab(index: number) {
-    const tabItemEl = _tabItemsEl[index] as HTMLElement
-    const button = tabItemEl.shadowRoot.querySelector("button") as HTMLButtonElement;
-    button.focus();
-    _tabItemsEl[index].setAttribute("open", "true");
   }
 
   function onKeyDown(e: KeyboardEvent) {
     let isHandled = false;
-    let target = e.target as HTMLElement;
     switch (e.key) {
+      case 'ArrowUp':
       case 'ArrowLeft':
-        setSelectedToPreviousTab(target);
+        setCurrentTab(current - 1)
         isHandled = true;
         break;
+      case 'ArrowDown':
       case 'ArrowRight':
-        setSelectedToNextTab(target);
+        setCurrentTab(current + 1)
         isHandled = true;
         break;
       case 'Home':
-        setSelectedTab(0);
+        setCurrentTab(1);
         isHandled = true;
         break;
       case 'End':
-        setSelectedTab(_tabItemsEl.length - 1);
+        setCurrentTab(_tabItems.length);
         isHandled = true;
         break;
       default:
@@ -140,19 +102,24 @@
       e.preventDefault();
     }
   }
-
 </script>
 
 <!--HTML-->
-<div class="tab">
-  <div role="tablist" bind:this={_rootEl}>
+
+<div role="tablist" bind:this={_rootEl}>
+  <div class="tabs" bind:this={_tabs}></div>
+  <div class="tabpanel">
     <slot/>
   </div>
-  <div bind:this={_tabPanelEl}
-       role="tabpanel"
-       tabindex="0">
-  </div>
 </div>
+
+<!-- prevent certain styles from being stripped out -->
+<template>
+  <button role="tab" aria-selected="false" style="display:none">
+    <div class="tab" />
+  </button>
+  <button role="tab" aria-selected="true" style="display:none" />
+</template>  
 
 <style>
   :host {
@@ -160,28 +127,65 @@
     font: var(--goa-typography-body-m);
   }
 
-  [role="tablist"] {
-    min-width: 100%;
-    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  .tab {
+    display: flex;
+    gap: 1rem;  
   }
 
-  [role="tabpanel"] {
-    background: var(--goa-color-greyscale-white);
-    width: 100%;
-    overflow: auto;
+  [role="tab"] {
+    background: none;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+    font: var(--goa-typography-body-m);
+    color: var(--goa-color-text-default);
   }
 
-  @media (min-width: 640px) {
+  [role="tab"][aria-selected="true"] {
+    font: var(--goa-typography-heading-s);
+  }
+
+  [role="tab"]:focus-visible {
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+  }
+
+  [role="tab"]:hover:not([aria-selected="true"]), 
+  [role="tab"]:focus:not([aria-selected="true"]),
+  [role="tab"]:focus-visible:not([aria-selected="true"]) {
+    border-color: var(--goa-color-greyscale-200);
+  }
+
+  @media(min-width: 640px) {
     [role="tablist"] {
-      display: flex;
       border-bottom: none;
+    }
+    .tabs {
+      border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+      display: flex;
       gap: var(--goa-space-xl);
     }
-    [role="tabpanel"] {
-      border-top: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-      position: relative;
-      top: var(--goa-border-width-l);
+    [role="tab"] {
+      padding: var(--goa-space-s) var(--goa-space-m);
+      border-bottom: 4px solid transparent;
+    }
+    [role="tab"][aria-selected="true"] {
+      border-color: var(--goa-color-interactive-default);
     }
   }
+
+  @media(max-width: 639px) {
+    [role="tab"] {
+      width: 100%;
+      padding: var(--goa-space-xs) 0;
+      padding-left: 12px;
+      border-left: 4px solid transparent;
+    }
+    [role="tab"][aria-selected="true"] {
+      border-color: var(--goa-color-interactive-default);
+      background: var(--goa-color-info-background);
+    }
+  }
+  
 </style>
 
