@@ -83,6 +83,7 @@
     const input = e.target as HTMLInputElement;
 
     if (!input) return;
+    if (isReadonly) return;
 
     if (_debounceId != null) {
       clearTimeout(_debounceId);
