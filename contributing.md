@@ -5,7 +5,7 @@ We encourage contributions to the UI Component Library, but, in order to maintai
 
 ## How to Get Setup
 
-[Get Setup](https://ui-components-ui-components-dev.os99.gov.ab.ca/?path=/docs/setup-contributors--page)
+[Get Setup](https://ui-components.alberta.ca/?path=/docs/setup-contributors--page)
 
 ## Coding Guidelines
 
