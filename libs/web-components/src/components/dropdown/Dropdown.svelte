@@ -6,7 +6,6 @@
   import { onDestroy, onMount, tick } from "svelte";
   import { toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import noscroll from "../../common/no-scroll";
 
   interface Option {
     label: string;
@@ -44,7 +43,6 @@
   let _isMenuVisible = false;
   let _highlightedIndex: number = 0;
   let _computedWidth: string;
-  let _dropdownMenuPos: string = "auto";
 
   let _el: HTMLElement;
   let _menuEl: HTMLElement;
@@ -170,7 +168,6 @@
 
     // bind up/down arrows to navigate options
     _menuEl.addEventListener("mouseover", onHighlight);
-    setDropdownMenuPosition();
   }
 
   function closeMenu() {
@@ -178,15 +175,6 @@
     _menuEl.removeEventListener("mouseover", onHighlight);
     setHighlightedIndexToSelected();
     _isMenuVisible = false;
-    _dropdownMenuPos = "auto";
-  }
-
-  function setDropdownMenuPosition() {
-    const dropdownRect = _el.getBoundingClientRect();
-    const menuRect = _menuEl.getBoundingClientRect();
-    if (window.innerHeight - dropdownRect.top < dropdownRect.height + menuRect.height) {
-      _dropdownMenuPos = menuRect.top - dropdownRect.top + 'px';
-    }
   }
 
   function setHighlightedIndexToSelected() {
@@ -374,7 +362,7 @@
             data-testid={`dropdown-item-${option.value}`}
             data-index={index}
             data-value={option.value}
-            style={`display: ${false ? "none" : "block"}`}
+            style="display: block"
             on:click={() => onSelect(option.value, option.label, true)}
           >
             {option.label || option.value}
