@@ -210,6 +210,7 @@
       case " ":
       case "Enter":
         _isMenuVisible ? closeMenu() : showMenu();
+        _menuEl.focus();  // set menu focus to allow arrow keys to trigger scrolling within option list
         e.preventDefault();
         break;
       case "Escape":
@@ -223,7 +224,6 @@
           break;
         }
         _handleArrowDown();
-        e.preventDefault();
         break;
       case "ArrowUp":
         if (e.altKey) {
@@ -231,7 +231,6 @@
           break;
         }
         _handleArrowUp();
-        e.preventDefault();
         break;
     }
   };
