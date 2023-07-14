@@ -164,14 +164,9 @@ describe('GoADropdown', () => {
       const inputField = dropdown.querySelector('goa-input');
       await fireEvent.click(inputField);
 
-      const onClick = jest.fn()
-      dropdown.addEventListener('_change', () => {
-        onClick();
-      })
-
       await waitFor(async () => {
-        const menu = result.queryByTestId("dropdown-menu");
-        expect(menu).not.toBeVisible()
+        const menu = result.queryByTestId("popover-content");
+        expect(menu).toBeNull();
       });
     });
 

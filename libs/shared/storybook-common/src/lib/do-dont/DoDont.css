@@ -19,6 +19,6 @@
   padding-bottom: var(--font-valign-fix);
 }
 
-[data-positive="dont"].content {
+[data-positive="Dont"].content {
   color: var(--goa-color-emergency-default);
 }

@@ -33,6 +33,7 @@ export default function App() {
             <Link to="/circular-progress">Circular Progress</Link>
             <Link to="/container">Container</Link>
             <Link to="/divider">Divider</Link>
+            <Link to="/do-dont">Do Don't</Link>
             <Link to="/dropdown">Dropdown</Link>
             <Link to="/file-upload">File Upload</Link>
             <Link to="/form-item">Form Item</Link>

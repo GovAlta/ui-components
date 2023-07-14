@@ -2,26 +2,28 @@
 
 <script lang="ts">
 
-  let value: string = "blue";
-
-  function onChange({detail}: CustomEvent) {
-    value = detail.value;
-  }
-
+  let open: boolean = false;
+  let value: string = "blue"
 </script>
 
-<goa-dropdown on:_change={onChange} value={value}>
-  <goa-dropdown-item value="" label="Red"></goa-dropdown-item>
-  <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
-  <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
-  <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
-</goa-dropdown>
 
-<goa-dropdown native="true" on:_change={onChange} value={value}>
-  <goa-dropdown-item value="" label="Red"></goa-dropdown-item>
-  <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
-  <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
-  <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
-</goa-dropdown>
+<goa-modal {open} closable="true" on:_close={() => open = false}>
+  <goa-dropdown on:_change={() => {}} value={value} disabled={false}>
+    <goa-dropdown-item value="" label="Red"></goa-dropdown-item>
+    <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+    <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
+    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+  </goa-dropdown>
+</goa-modal>
 
-<goa-button on:_click={() => value = ""}>Reset</goa-button>
+<button on:click={() => open = !open}>
+  Show
+</button>

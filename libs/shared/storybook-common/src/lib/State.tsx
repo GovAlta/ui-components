@@ -44,11 +44,16 @@ export const StateDisplay: FC<Props> = ({
       <div style={style}>
         <div style={elStyle}>
           <h4>Component</h4>
-          {React.Children.map(children, (child: ReactElement) => (
-            <div style={exampleChild}>
-              {React.cloneElement(child, { ...child.props })}
-            </div>
-          ))}
+          {React.Children.map(children, (child) => {
+            if (React.isValidElement(child)) {
+              return (
+                <div style={exampleChild}>
+                  {React.cloneElement(child as ReactElement, { ...child.props })}
+                </div>
+              );
+            }
+            return null;
+          })}
         </div>
         <div style={elStyle}>
           <h4>State</h4>

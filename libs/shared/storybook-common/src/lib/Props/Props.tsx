@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ReactFragment } from "react";
 import { Tab, Tabs } from "../tabs/Tabs";
 import "./Props.css";
 
@@ -24,8 +24,11 @@ export const Props: FC<Props> = (props) => {
 
   const filterBy = (children: React.ReactNode, lang: string) => {
     const _children = React.Children.toArray(children);
-    return _children.filter((child: React.ReactElement) => {
-      return !child.props["lang"] || child.props["lang"] === lang;
+    return _children.filter((child: React.ReactChild | ReactFragment) => {
+      if (React.isValidElement(child)) {
+        return !child.props["lang"] || child.props["lang"] === lang;
+      }
+      return false;
     });
   };
 

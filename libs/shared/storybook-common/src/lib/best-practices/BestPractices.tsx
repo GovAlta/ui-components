@@ -1,7 +1,13 @@
-import React from "react";
+import React, { FC, ReactNode } from "react";
 import "./BestPractice.css";
 
-export const BestPractices = ({ children }) => {
+
+interface Props {
+  children?: ReactNode;
+  description?: string;
+}
+
+export const BestPractices: FC<Props> = ({ children }) => {
   return (
     <div className="best-practices">
       <div className="best-practices-title">Best Practices</div>
@@ -10,7 +16,7 @@ export const BestPractices = ({ children }) => {
   );
 };
 
-export const BestPracticeItem = ({ description }) => {
+export const BestPracticeItem: FC<Props> = ({ description }) => {
   return (
     <li className="best-practice-item">
       <span>{description}</span>

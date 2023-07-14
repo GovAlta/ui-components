@@ -2,7 +2,7 @@
 
 <!-- ======================================================================= -->
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   // Private
 
@@ -13,7 +13,8 @@
 
   // Hooks
 
-  onMount(() => {
+  onMount(async () => {
+    await tick();
     // event is attached to the rootEl, eliminating the need to remove the listener since it 
     // will be removed when the associated element is removed.
     rootEl.addEventListener("focus", onFocus, true);

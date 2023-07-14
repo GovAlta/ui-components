@@ -29,7 +29,12 @@ function Tabs(props: TabsProps): JSX.Element {
 
   function activeChildren(): ReactNode[] {
     return Children.toArray(props.children).filter(
-      (child) => !child?.["props"]?.["hidden"]
+      (child) => {
+        if (React.isValidElement(child)) {
+          return !child?.["props"]?.["hidden"]
+        }
+        return true;
+      }
     );
   }
 
@@ -38,17 +43,20 @@ function Tabs(props: TabsProps): JSX.Element {
       <SCTabs>
         {
           // eslint-disable-next-line
-          activeChildren().map((child: JSX.Element, index: number) => {
-            return (
-              <TabItem
-                key={child.key}
-                visible={!child.props.hidden}
-                active={activeTabIndex === index}
-                onSelect={() => selectTab(index)}
-              >
-                {child.props.label}
-              </TabItem>
-            );
+          activeChildren().map((child: React.ReactNode, index: number) => {
+            if (React.isValidElement(child)) {
+              return (
+                <TabItem
+                  key={child.key}
+                  visible={!child.props.hidden}
+                  active={activeTabIndex === index}
+                  onSelect={() => selectTab(index)}
+                >
+                  {child.props.label}
+                </TabItem>
+              );
+            }
+            return null;
           })
         }
       </SCTabs>
@@ -92,7 +100,7 @@ function TabItem(props: TabItemProps & { children: ReactNode }) {
     return <span></span>;
   }
   return (
-    <SCTab className={props.active && "active"} onClick={() => selectTab()}>
+    <SCTab className={props.active ? "active" : undefined} onClick={() => selectTab()}>
       {props.children}
     </SCTab>
   );
