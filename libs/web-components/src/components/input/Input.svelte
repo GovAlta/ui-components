@@ -9,7 +9,7 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   // Validators
   const [Types, validateType] = typeValidator(
@@ -107,7 +107,9 @@
     this.dispatchEvent(new CustomEvent("_trailingIconClick", { composed: true }));
   }
 
-  onMount(() => {
+  onMount(async () => {
+    await tick();
+
     validateType(type);
     validateAutoCapitalize(autocapitalize);
     if (prefix != "" || suffix != "") {
