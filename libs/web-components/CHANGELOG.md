@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.12.0] - 2023-07-17
+
+### Added
+- New component [Tooltip](https://ui-components.alberta.ca/?path=/docs/components-tooltip--basic)
+- New component [Tabs](https://ui-components.alberta.ca/?path=/docs/components-tabs--basic)
+
+### Fixed
+- File Upload Card no lunger truncates the file name
+- Updated right padding on `trailingIcon` property for Input component
+- No console errors when opening a modal
+- Incorrect values are no longer emitted by the Dropdown component when using objects
+- Dropdown component keyboard accesibility has been fixed when using objects
+
 ## [1.11.0] - 2023-06-19
 - Removed `onHover` and `onFocus` treatments from the Icon component
 - Updated paddings and margins for the Modal component mobile view
