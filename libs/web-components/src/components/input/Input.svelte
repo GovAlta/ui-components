@@ -103,6 +103,19 @@
     value = input.value;
   }
 
+  function onFocus(e: Event){
+    const input = e.target as HTMLInputElement;
+    input.dispatchEvent(new CustomEvent("_focus", {
+      composed: true,
+      detail: { name, value: input.value } }));
+  }
+  function onBlur(e: Event){
+    const input = e.target as HTMLInputElement;
+    input.dispatchEvent(new CustomEvent("_blur", {
+      composed: true,
+      detail: { name, value: input.value } }));
+  }
+
   function doClick() {
     this.dispatchEvent(new CustomEvent("_trailingIconClick", { composed: true }));
   }
@@ -187,6 +200,8 @@
       aria-label={arialabel || name}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
+      on:focus={onFocus}
+      on:blur={onBlur}
     />
 
     <!-- Trailing Icon -->

@@ -62,6 +62,14 @@ export class InputComponentComponent implements OnInit {
     console.log("onEvent", event.detail);
   }
 
+  onFocusEvent(event: any) {
+    console.log("on Focus Event: ", event.detail);
+  }
+
+  onBlurEvent(event: any) {
+    console.log("on Blur Event: ", event.detail);
+  }
+
   setDate(event: any) {
     const raw = event.detail.value;
     if (!raw) {
@@ -74,6 +82,8 @@ export class InputComponentComponent implements OnInit {
   handleTrailingIconClick() {
     console.log("handleTrailingIconClick");
   }
+
+
 }
 
 function getFirstName(): string {

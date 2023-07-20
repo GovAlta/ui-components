@@ -228,6 +228,30 @@ import { Meta, Story } from "@storybook/addon-docs";
     type="() => void"
     description="onclick function invoked when trailing icon is clicked"
   />
+  <Prop
+    name="onFocus"
+    lang="react"
+    type="(name: string, value: string | Date | number) => void"
+    description="Function invoked when an element receives focus"
+  />
+  <Prop
+    name="onBlur"
+    lang="react"
+    type="(name: string, value: string | Date | number) => void"
+    description="Function invoked when an element loses focus"
+  />
+  <Prop
+    name="_focus"
+    lang="angular"
+    type="() => void"
+    description="Function invoked when an element receives focus"
+  />
+  <Prop
+    name="_blur"
+    lang="angular"
+    type="() => void"
+    description="Function invoked when an element loses focus"
+  />
 </Props>
 
 <details>

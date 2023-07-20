@@ -94,30 +94,42 @@ interface BaseProps extends Margins {
 }
 
 type OnChange = (name: string, value: string) => void;
+type OnFocus = (name: string, value: string) => void;
+type OnBlur = (name: string, value: string) => void;
 export interface InputProps extends BaseProps {
   onChange: OnChange;
   value: string;
   min?: number | string;
   max?: number | string;
   step?: number;
+  onFocus?: OnFocus;
+  onBlur?: OnBlur;
 }
 
 type OnNumberChange = (name: string, value: number) => void;
+type OnNumberFocus = (name: string, value: number) => void;
+type OnNumberBlur = (name: string, value: number) => void;
 interface NumberInputProps extends BaseProps {
   onChange: OnNumberChange;
   value: number;
   min?: number;
   max?: number;
   step?: number;
+  onFocus?: OnNumberFocus;
+  onBlur?: OnNumberBlur;
 }
 
 type OnDateChange = (name: string, value: GoADate) => void;
+type OnDateFocus = (name: string, value: GoADate) => void;
+type OnDateBlur = (name: string, value: GoADate) => void;
 interface DateInputProps extends BaseProps {
   onChange: OnDateChange;
   value: GoADate;
   min?: GoADate;
   max?: GoADate;
   step?: number;
+  onFocus?: OnDateFocus;
+  onBlur?: OnDateBlur;
 }
 
 export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
@@ -152,6 +164,8 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   maxLength,
   onTrailingIconClick,
   onChange,
+  onFocus,
+  onBlur,
 }) => {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -167,13 +181,27 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
       onTrailingIconClick?.();
     };
 
+    const focusListener = (e: unknown) => {
+      const { name, value } = (e as CustomEvent).detail;
+      onFocus?.(name, value);
+    };
+
+    const blurListener = (e: unknown) => {
+      const { name, value } = (e as CustomEvent).detail;
+      onBlur?.(name, value);
+    };
+
     current.addEventListener("_change", changeListener);
     current.addEventListener("_trailingIconClick", clickListener);
+    current.addEventListener("_focus", focusListener);
+    current.addEventListener("_blur", blurListener);
     return () => {
       current.removeEventListener("_change", changeListener);
       current.removeEventListener("_trailingIconClick", clickListener);
+      current.removeEventListener("_focus", focusListener);
+      current.removeEventListener("_blur", blurListener);
     };
-  }, [ref, onChange, onTrailingIconClick]);
+  }, [ref, onChange, onTrailingIconClick, onFocus, onBlur]);
 
   return (
     <goa-input
@@ -348,6 +376,12 @@ export const GoAInputNumber: FC<NumberInputProps> = ({
   const onNumberChange = (name: string, value: string) => {
     props.onChange(name, parseInt(value));
   };
+  const onFocus = (name: string, value: string) => {
+    props.onFocus?.(name, parseInt(value));
+  };
+  const onBlur = (name: string, value: string) => {
+    props.onBlur?.(name, parseInt(value));
+  };
   return (
     <GoAInput
       {...props}
@@ -355,6 +389,8 @@ export const GoAInputNumber: FC<NumberInputProps> = ({
       min={min?.toString()}
       max={max?.toString()}
       value={value.toString()}
+      onFocus={onFocus}
+      onBlur={onBlur}
       type="number"
     />
   );
