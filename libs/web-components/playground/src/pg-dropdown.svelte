@@ -12,23 +12,38 @@
   }
 </script>
 
-<goa-modal {open} closable="true" on:_close={() => open = false}>
-  <goa-checkbox on:_change={onCheckboxChange}>Native</goa-checkbox>
-  <goa-dropdown on:_change={() => {}} value={value} native={native}>
-    <goa-dropdown-item value="" label="Red"></goa-dropdown-item>
+
+  <goa-dropdown on:_change={() => {}} value={value} disabled={false}>
+    <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
     <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
     <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
     <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
-    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
-    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
-    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
-    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
-    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
-    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
-    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
-    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+    <goa-dropdown-item value="grey" label="Grey"></goa-dropdown-item>
+    <goa-dropdown-item value="teal" label="Teal"></goa-dropdown-item>
+    <goa-dropdown-item value="yellow" label="Yellow"></goa-dropdown-item>
+    <goa-dropdown-item value="orange" label="Orange"></goa-dropdown-item>
+    <goa-dropdown-item value="gold" label="Gold"></goa-dropdown-item>
+    <goa-dropdown-item value="silver" label="Silver"></goa-dropdown-item>
+    <goa-dropdown-item value="ping" label="Pink"></goa-dropdown-item>
   </goa-dropdown>
-</goa-modal>
+
+  <goa-dropdown native="true" on:_change={() => {}} value={value} disabled={false}>
+    <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
+    <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+    <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
+    <goa-dropdown-item value="white" label="White"></goa-dropdown-item>
+    <goa-dropdown-item value="grey" label="Grey"></goa-dropdown-item>
+    <goa-dropdown-item value="teal" label="Teal"></goa-dropdown-item>
+    <goa-dropdown-item value="yellow" label="Yellow"></goa-dropdown-item>
+    <goa-dropdown-item value="orange" label="Orange"></goa-dropdown-item>
+    <goa-dropdown-item value="gold" label="Gold"></goa-dropdown-item>
+    <goa-dropdown-item value="silver" label="Silver"></goa-dropdown-item>
+    <goa-dropdown-item value="ping" label="Pink"></goa-dropdown-item>
+  </goa-dropdown>
+  
+<div style="height: 200vh">
+
+</div>
 
 <button on:click={() => open = !open}>
   Show
