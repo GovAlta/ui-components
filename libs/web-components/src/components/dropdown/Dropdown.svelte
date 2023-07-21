@@ -64,11 +64,11 @@
   onMount(async () => {
     // watch for DOM changes within the slot => dynamic binding
     const slot = _el.querySelector("slot");
-    slot?.addEventListener("slotchange", (_e) => {
+    slot?.addEventListener("slotchange", _e => {
       _selectedLabel = "";
       _values = parseValues(value);
       _options = getOptions();
-    })
+    });
   });
 
   onDestroy(() => {
@@ -88,7 +88,6 @@
     return [...el.children] as Element[];
   }
 
-
   // Create a list of the options based on the children within the slot
   // The children don't have to be goa-dropdown-item elements. Any child element
   // work as long as it has a value and label content
@@ -98,20 +97,17 @@
     return children
       .filter((child: Element) => child.tagName === "GOA-DROPDOWN-ITEM")
       .map((el: HTMLElement) => {
-          const option = el as unknown as Option
-          const value = el.getAttribute("value") || option.value || "";
-          const label =
-            el.getAttribute("label")
-            || option.label
-            || value;
+        const option = el as unknown as Option;
+        const value = el.getAttribute("value") || option.value || "";
+        const label = el.getAttribute("label") || option.label || value;
 
-          const selected = _values.includes(value);
-          if (selected) {
-            _selectedLabel = label;
-            _values = [value];
-          }
-          return { selected, value, label};
-        });
+        const selected = _values.includes(value);
+        if (selected) {
+          _selectedLabel = label;
+          _values = [value];
+        }
+        return { selected, value, label };
+      });
   }
 
   // compute the required width to enure all children fit
@@ -203,66 +199,174 @@
     }
   }
 
+  function MenuVisibleKeyDownHandler() {
+    const handle = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case " ":
+          onSpace(e);
+          break;
+        case "Enter":
+          onEnter(e);
+          break;
+        case "Escape":
+          onEscape(e);
+          break;
+        case "ArrowUp":
+          onArrowUp(e);
+          break;
+        case "ArrowDown":
+          onArrowDown(e);
+          break;
+      }
+    };
+
+    const onSpace = (e: KeyboardEvent) => {
+      e.preventDefault();
+    };
+
+    const onEnter = (e: KeyboardEvent) => {
+      onSelect(
+        _options[_highlightedIndex].value,
+        _options[_highlightedIndex].label,
+        false,
+      );
+      closeMenu();
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    const onEscape = (e: KeyboardEvent) => {
+      closeMenu();
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    const onArrowUp = (e: KeyboardEvent) => {
+      if (e.altKey) {
+        closeMenu();
+      }
+      if (_highlightedIndex > 0) {
+        _highlightedIndex--;
+      }
+      onSelect(
+        _options[_highlightedIndex].value,
+        _options[_highlightedIndex].label,
+        false,
+      );
+      // e.stopPropagation();
+      // e.preventDefault();
+    };
+
+    const onArrowDown = (e: KeyboardEvent) => {
+      if (e.altKey) {
+        closeMenu();
+      }
+      if (_highlightedIndex < _options.length - 1) {
+        _highlightedIndex++;
+      }
+      onSelect(
+        _options[_highlightedIndex].value,
+        _options[_highlightedIndex].label,
+        false,
+      );
+      console.log("on arrow down")
+      // e.stopPropagation();
+      // e.preventDefault();
+    };
+
+    return {
+      handle,
+    };
+  }
+
+  function MenuHiddenKeyDownHandler() {
+    const handle = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case " ":
+          onSpace(e);
+          break;
+        case "Enter":
+          onEnter(e);
+          break;
+        case "Escape":
+          onEscape(e);
+          break;
+        case "ArrowUp":
+          onArrowUp(e);
+          break;
+        case "ArrowDown":
+          onArrowDown(e);
+          break;
+      }
+    };
+
+    const onSpace = (e: KeyboardEvent) => {
+      showMenu();
+      _menuEl.focus(); // set menu focus to allow arrow keys to trigger scrolling within option list
+      e.preventDefault();
+    };
+
+    const onEnter = (e: KeyboardEvent) => {
+      showMenu();
+      _menuEl.focus(); // set menu focus to allow arrow keys to trigger scrolling within option list
+      e.preventDefault();
+    };
+
+    const onEscape = (_e: KeyboardEvent) => {};
+
+    const onArrowUp = (e: KeyboardEvent) => {
+      if (e.altKey) {
+        showMenu();
+      }
+      if (_highlightedIndex > 0) {
+        _highlightedIndex--;
+      }
+      onSelect(_options[_highlightedIndex].value, _options[_highlightedIndex].label)
+      e.stopPropagation();
+      e.preventDefault();
+    };
+
+    // FIXME: here 
+    const onArrowDown = (e: KeyboardEvent) => {
+      if (e.altKey) {
+        showMenu();
+      }
+      if (_highlightedIndex < _options.length - 1) {
+        _highlightedIndex++;
+      }
+      onSelect(_options[_highlightedIndex].value, _options[_highlightedIndex].label)
+      e.stopPropagation();
+      e.preventDefault();
+    };
+
+    return {
+      handle,
+    };
+  }
+
+  const menuVisibleHandler = MenuVisibleKeyDownHandler();
+  const menuHiddenHandler = MenuHiddenKeyDownHandler();
+
   const onInputKeyDown = (e: KeyboardEvent) => {
-    switch (e.key) {
-      case " ":
-      case "Enter":
-        _isMenuVisible ? closeMenu() : showMenu();
-        _menuEl.focus();  // set menu focus to allow arrow keys to trigger scrolling within option list
-        e.preventDefault();
-        break;
-      case "Escape":
-        _isMenuVisible && closeMenu();
-        e.preventDefault();
-        e.stopPropagation();
-        break;
-      case "ArrowDown":
-        if (e.altKey) {
-          _isMenuVisible ? closeMenu() : showMenu();
-          break;
-        }
-        _handleArrowDown();
-        break;
-      case "ArrowUp":
-        if (e.altKey) {
-          _isMenuVisible ? closeMenu() : showMenu();
-          break;
-        }
-        _handleArrowUp();
-        break;
+    if (_isMenuVisible) {
+      menuVisibleHandler.handle(e);
+    } else {
+      menuHiddenHandler.handle(e);
     }
   };
 
-  function _handleArrowDown() {
-    if (_highlightedIndex < _options.length - 1) {
-      _highlightedIndex++;
-      onSelect(
-        _options[_highlightedIndex].value,
-        _options[_highlightedIndex].label,
-        false,
-      );
-    }
-  }
-
-  function _handleArrowUp() {
-    if (_highlightedIndex > 0) {
-      _highlightedIndex--;
-      onSelect(
-        _options[_highlightedIndex].value,
-        _options[_highlightedIndex].label,
-        false,
-      );
-    }
-  }
-
   // add required bindings to component
   function onFocus() {
-    _el.addEventListener("keydown", onInputKeyDown);
+    if (!_native) {
+      _el.addEventListener("keydown", onInputKeyDown);
+    }
   }
 
   // remove all bindings from component
   function onBlur() {
-    _el.removeEventListener("keydown", onInputKeyDown);
+    if (!_native) {
+      _el.removeEventListener("keydown", onInputKeyDown);
+    }
   }
 
   function onHighlight(e: Event) {
@@ -297,11 +401,7 @@
     >
       <slot />
       {#each _options as option}
-        <option
-          selected={option.selected}
-          value={option.value}
-          aria-label={option.label}
-        >
+        <option selected={option.selected} value={option.value} aria-label={option.label}>
           {option.label}
         </option>
       {/each}
@@ -309,28 +409,35 @@
   {:else}
     <!-- list and filter -->
     <slot />
-    <goa-popover {disabled} {relative} open={_isMenuVisible} padded="false" width={width || _computedWidth}>
+    <goa-popover 
+      {disabled} 
+      {relative} 
+      tabindex="-1"
+      open={_isMenuVisible} 
+      padded="false" 
+      width={width || _computedWidth}
+    >
     
       <!-- readonly input  -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-input
         slot="target"
         on:click={showMenu}
-        {error}
         {disabled}
+        {error}
         {leadingicon}
+        {name}
         {placeholder}
         aria-controls="menu"
         aria-expanded={_isMenuVisible}
         arialabel={arialabel || name}
         data-testid={`${name}-dropdown-input`}
-        readonly
         role="combobox"
         trailingicon="chevron-down"
         type="text"
         value={_selectedLabel}
         width="100%"
-        name={name}
+        readonly
       />
 
       <ul
@@ -339,8 +446,8 @@
         aria-activedescendant={_selectedLabel}
         data-testid="dropdown-menu"
         bind:this={_menuEl}
-        tabindex="0"
         style={`
+          outline: none;
           overflow-y: auto;
           max-height: ${maxheight};
         `}
@@ -350,6 +457,8 @@
           <li
             id={option.label}
             role="option"
+            tabindex="0"
+            style="display: block"
             aria-label={option.label || option.value}
             aria-selected={_values.includes(option.value) ? "true" : "false"}
             class="dropdown-item"
@@ -359,7 +468,6 @@
             data-testid={`dropdown-item-${option.value}`}
             data-index={index}
             data-value={option.value}
-            style="display: block"
             on:click={() => onSelect(option.value, option.label, true)}
           >
             {option.label || option.value}
@@ -423,6 +531,7 @@
 
   /* Native styling  */
   .dropdown-native {
+    position: relative;
     border: 1px solid var(--goa-color-greyscale-700);
     border-radius: var(--goa-border-radius-m);
     background-color: var(--goa-color-greyscale-white);
@@ -447,12 +556,13 @@
 
   select {
     border: none;
+    font: var(--goa-font-family-sans);
     background-color: transparent;
     color: var(--goa-color-text-default);
     font-size: var(--goa-font-size-4);
     appearance: none;
-    padding: calc(var(--goa-space-xs) + 2px);
-    padding-left: 0.5rem;
+    padding: calc(var(--goa-space-xs) + 1px);
+    padding-left: var(--goa-space-s);
     padding-right: 3rem;
     outline: none;
     width: 100%;
