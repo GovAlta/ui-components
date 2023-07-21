@@ -39,9 +39,6 @@
     if (!slot || slot.assignedElements().length === 0) {
       return;
     }
-    // React needs to nest data in a <template><table>...</table></template>
-    const content = slot.assignedElements()[0].querySelectorAll("template table > *");
-    _rootEl.append(...(content.length > 0 ? content : slot.assignedElements()));
   });
 
   async function attachSortEventHandling() {

@@ -125,7 +125,7 @@ function TableStaticBody() {
             <goa-icon type="alarm"></goa-icon>Item 1
           </goa-block>
         </td>
-        <td>Item 2</td>
+        <td>Item 2 <button onClick={() => alert("clicked")}>CLick Me</button></td>
         <td>Item 3</td>
       </tr>
       <tr>

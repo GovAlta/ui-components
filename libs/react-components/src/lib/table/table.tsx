@@ -60,9 +60,7 @@ export function GoATable(props: TableProps) {
       ml={props.ml}
       mr={props.mr}
     >
-      <template>
-        <table>{props.children}</table>
-      </template>
+      {props.children}
     </goa-table>
   );
 }
