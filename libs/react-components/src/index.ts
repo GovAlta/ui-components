@@ -1,6 +1,7 @@
 import "@abgov/web-components";
 
 export * from "./lib/side-menu-group/side-menu-group";
+export * from "./lib/side-menu-heading/side-menu-heading";
 export * from "./lib/side-menu/side-menu";
 
 export * from "./lib/app-header-menu/app-header-menu";

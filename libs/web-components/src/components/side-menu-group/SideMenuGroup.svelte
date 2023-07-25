@@ -17,7 +17,7 @@
     await tick(); // needed to allow for window location to be read
     checkUrlMatches();
     setCurrent();
-    addEventListeners();       
+    addEventListeners();
   })
 
   function checkUrlMatches() {
@@ -31,7 +31,7 @@
   function addEventListeners() {
     // listen to events by children (if child is open the parent also has to be open)
     _rootEl.addEventListener("_open", () => {
-      _open = true;  
+      _open = true;
       _current = true;
     })
 
@@ -62,9 +62,9 @@
 
   function matchesChild(el: SideMenuGroupElement, url: string): boolean {
     if (url.endsWith(toSlug(el.heading))) {
-      return true; 
+      return true;
     }
-    
+
     const slot = el.querySelector("slot") as HTMLSlotElement;
     if (!slot) {
       return false;
@@ -75,7 +75,7 @@
     })
   }
 
-  function setCurrent() {  
+  function setCurrent() {
     const url = document.location.href;
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
     if (!slot) {
@@ -92,7 +92,7 @@
         child.classList.add("current");
         notifyParent(true);
       } else {
-        child.classList.remove("current")  
+        child.classList.remove("current")
       }
 
       // get side-menu-group (level >= 2) marked as children
@@ -108,11 +108,11 @@
   }
 
   function notifyParent(current: boolean) {
-    _rootEl.dispatchEvent(new CustomEvent("_open", { 
-      bubbles: true, 
-      composed: true, 
+    _rootEl.dispatchEvent(new CustomEvent("_open", {
+      bubbles: true,
+      composed: true,
       detail: { current },
-    }))  
+    }))
   }
 
 </script>
@@ -120,17 +120,22 @@
 <style>
 
   ::slotted(a),
+  ::slotted(goa-side-menu-heading),
   ::slotted(a:visited) {
     /* required to override base styles */
-    color: var(--goa-color-text-default) !important; 
-
+    color: var(--goa-color-text-default) !important;
     display: block;
     font: var(--goa-typography-body-m);
-    border-left: 4px solid var(--goa-color-greyscale-100);
-    padding: 0.5rem 1rem;
     margin-left: 1rem;
-    text-decoration: none;
   }
+
+  ::slotted(a),
+  ::slotted(a:visited) {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-left: 4px solid var(--goa-color-greyscale-100);
+  }
+
   ::slotted(a.current) {
     font: var(--goa-typography-heading-s);
     border-left: 4px solid var(--goa-color-interactive-disabled);
@@ -140,14 +145,14 @@
     background: var(--goa-color-info-background);
     border-color: var(--goa-color-greyscale-200);
   }
-  ::slotted(a:focus-visible), 
+  ::slotted(a:focus-visible),
   .heading:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
   }
 
   /**
-   * .heading: the heading of a level 1 side-menu-group 
-   * :host([child=true]) a.heading: the heading of a level >=2 side-menu-group 
+   * .heading: the heading of a level 1 side-menu-group
+   * :host([child=true]) a.heading: the heading of a level >=2 side-menu-group
    */
   :host([child=true]) a.heading,
   .heading {
@@ -159,7 +164,7 @@
     padding: 0.5rem 1rem 0.5rem 2rem;
     text-decoration: none;
   }
-  
+
   :host([child=true]) a.heading {
     margin-left: 1rem;
     border-left: 4px solid var(--goa-color-greyscale-100);
@@ -193,14 +198,14 @@
 
 </style>
 
-<div 
+<div
   bind:this={_rootEl}
   class="side-menu-group"
   class:current={_current}
 >
-  <a 
-    href={`#${_slug}`} 
-    class="heading" 
+  <a
+    href={`#${_slug}`}
+    class="heading"
     on:click={handleClick}
   >
     {heading}

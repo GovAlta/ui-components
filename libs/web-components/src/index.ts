@@ -65,6 +65,7 @@ export { default as FileUploadCard } from './components/file-upload-card/FileUpl
 export { default as AppHeaderMenu } from './components/app-header-menu/AppHeaderMenu.svelte';
 export { default as SideMenu } from './components/side-menu/SideMenu.svelte';
 export { default as SideMenuGroup } from './components/side-menu-group/SideMenuGroup.svelte';
+export { default as SideMenuHeading } from './components/side-menu-heading/SideMenuHeading.svelte';
 export { default as Tabs } from './components/tabs/Tabs.svelte';
 export { default as Tab } from './components/tab/Tab.svelte';
 
