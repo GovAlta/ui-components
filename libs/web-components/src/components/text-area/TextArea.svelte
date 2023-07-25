@@ -32,7 +32,7 @@
 
   let showCounter = false;
   let _textAreaEl: HTMLTextAreaElement;
-  
+
   // $: showCounter = toBoolean(showcounter);
   $: {
     if (_textAreaEl && !isDisabled) {
@@ -88,7 +88,7 @@
 <style>
   :host {
     --textarea-padding-vertical: 0.625rem;
-    --textarea-padding-horizontal: 0.75rem;
+    --textarea-padding-horizontal: var(--goa-space-s);
 
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
