@@ -37,6 +37,7 @@ import { TooltipComponent } from "./tooltip/tooltip.component";
 import { TwoColumnLayoutComponent } from "./two-column-layout/two-column-layout.component";
 import { ThreeColumnLayoutComponent } from "./three-column-layout/three-column-layout.component";
 import { TabsComponent } from "./tabs/tabs";
+import { SideMenuComponent } from "./sidemenu/sidemenu.component";
 
 const routes: Routes = [
   { path: "accordion", component: AccordionComponent },
@@ -66,6 +67,7 @@ const routes: Routes = [
   { path: "paginate", component: PaginateComponent },
   { path: "popover", component: PopoverComponent },
   { path: "radio", component: RadioComponent },
+  { path: "side-menu", component: SideMenuComponent },
   { path: "skeleton", component: SkeletonComponent },
   { path: "spacing", component: SpacingComponent },
   { path: "styles", component: StylesComponent },
@@ -82,4 +84,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
