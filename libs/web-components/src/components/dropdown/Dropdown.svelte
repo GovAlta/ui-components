@@ -26,6 +26,7 @@
   export let error: string = "false";
   export let multiselect: string = "false";
   export let native: string = "false";
+  export let relative: string = "false";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -183,9 +184,6 @@
 
   // Event handlers
 
-  /**
-  * @property value the selected value
-  */
   function onSelect(value: string, label: string, close?: boolean) {
     if (_disabled) return;
     _selectedLabel = label;
@@ -311,7 +309,7 @@
   {:else}
     <!-- list and filter -->
     <slot />
-    <goa-popover {disabled} open={_isMenuVisible} padded="false" width={width || _computedWidth}>
+    <goa-popover {disabled} {relative} open={_isMenuVisible} padded="false" width={width || _computedWidth}>
     
       <!-- readonly input  -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->

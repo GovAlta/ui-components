@@ -19,6 +19,8 @@
   // provides control to where the popover content is positioned
   export let position: "above" | "below" | "auto" = "auto";
 
+  export let relative: string = "false";
+
   // margins
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -57,6 +59,7 @@
   $: _padded = toBoolean(padded);
   $: _open = toBoolean(open);
   $: _disabled = toBoolean(disabled);
+  $: _relative = toBoolean(relative);
   $: (async () => _open && await setPopoverPosition())()
   $: {
     if (_open) {
@@ -189,18 +192,32 @@
     const windowOffset = usingNoScroll ? 0 : window.scrollY;
 
     // If there's more space above, display the popover above the target element
-    _popoverEl.style.top = displayOnTop
-      ? `${rootRect.top - contentRect.height + windowOffset}px`
-      : `${rootRect.top + rootRect.height + windowOffset}px`;
+    if (_relative) {
+      _popoverEl.style.top = displayOnTop
+        ? `-${contentRect.height}px`
+        : `${rootRect.height}px`;
+    } else {
+      _popoverEl.style.top = displayOnTop
+        ? `${rootRect.top - contentRect.height + windowOffset}px`
+        : `${rootRect.top + rootRect.height + windowOffset}px`;
+    }
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
     const displayOnRight = 
       document.body.clientWidth - targetRect.left < contentRect.width 
       && targetRect.left > contentRect.width;
 
-    _popoverEl.style.left = displayOnRight
-      ? `${rootRect.left + targetRect.width - contentRect.width}px`
-      : `${rootRect.left}px`;
+    if (_relative) {
+      if (displayOnRight) {
+        _popoverEl.style.right = "0";
+      } else {
+        _popoverEl.style.left = "0";
+      }
+    } else {
+      _popoverEl.style.left = displayOnRight
+        ? `${rootRect.left + targetRect.width - contentRect.width}px`
+        : `${rootRect.left}px`;
+    }
   }
 </script>
 
@@ -210,6 +227,7 @@
   bind:this={_rootEl}
   data-testid={testid}
   style={`
+    ${_relative && "position: relative;"}
     ${calculateMargin(mt, mr, mb, ml)}
     ${cssVar("--offset-top", voffset)}
     ${cssVar("--offset-bottom", voffset)}
@@ -278,8 +296,6 @@
   .popover-content {
     color: var(--goa-color-text-default);
     position: absolute;
-    left: 0;
-    right: 0;
     width: fit-content;
     max-width: 260px;
     list-style-type: none;

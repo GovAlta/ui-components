@@ -7,6 +7,7 @@ interface WCProps extends Margins {
   maxwidth?: string;
   padded?: boolean;
   position?: Position;
+  relative?: boolean;
 }
 
 declare global {
@@ -25,6 +26,7 @@ interface Props extends Margins {
   padded?: boolean;
   position?: Position;
   children: ReactNode;
+  relative?: boolean;
 }
 
 export const GoAPopover: FC<Props> = ({
@@ -33,6 +35,7 @@ export const GoAPopover: FC<Props> = ({
   maxWidth,
   padded,
   position,
+  relative,
   children,
   mt,
   mr,
@@ -45,6 +48,7 @@ export const GoAPopover: FC<Props> = ({
       maxwidth={maxWidth}
       padded={padded}
       position={position}
+      relative={relative}
       mt={mt}
       mr={mr}
       mb={mb}

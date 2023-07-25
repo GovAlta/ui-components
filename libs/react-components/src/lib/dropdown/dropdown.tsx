@@ -16,6 +16,7 @@ interface WCProps extends Margins {
   placeholder?: string;
   value?: string;
   width?: string;
+  relative?: boolean;
 }
 
 declare global {
@@ -46,6 +47,7 @@ interface Props extends Margins {
   placeholder?: string;
   testId?: string;
   width?: string;
+  relative?: boolean;
 }
 
 function stringify(value: string | string[] | undefined): string {
@@ -95,6 +97,7 @@ export const GoADropdown: FC<Props> = (props) => {
       placeholder={props.placeholder}
       data-testid={props.testId}
       width={props.width}
+      relative={props.relative}
     >
       {props.children}
     </goa-dropdown>
