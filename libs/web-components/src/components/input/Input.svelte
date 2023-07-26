@@ -9,7 +9,7 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   // Validators
   const [Types, validateType] = typeValidator(
@@ -120,7 +120,9 @@
     this.dispatchEvent(new CustomEvent("_trailingIconClick", { composed: true }));
   }
 
-  onMount(() => {
+  onMount(async () => {
+    await tick();
+
     validateType(type);
     validateAutoCapitalize(autocapitalize);
     if (prefix != "" || suffix != "") {
@@ -312,7 +314,7 @@
     display: inline-block;
     color: var(--goa-color-text-default);
     font-size: var(--goa-font-size-4);
-    padding: var(--goa-space-xs);
+    padding: var(--goa-space-s);
     line-height: calc(40px - calc(var(--goa-space-xs) * 2));
     background-color: transparent;
     width: 100%;
