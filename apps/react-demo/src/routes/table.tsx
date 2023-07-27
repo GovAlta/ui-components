@@ -45,6 +45,7 @@ export default function Table() {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Age</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -53,14 +54,13 @@ export default function Table() {
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
               <td className="goa-table-number-column">{user.age}</td>
+              <td><button onClick={() => alert("here")}>Click</button></td>
             </tr>
           ))}
         </tbody>
         <tfoot>
           <tr>
-            <td>This is the footer</td>
-            <td>This is the footer</td>
-            <td>This is the footer</td>
+            <td colSpan={4}>This is the footer</td>
           </tr>
         </tfoot>
       </GoATable>

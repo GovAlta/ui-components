@@ -26,6 +26,7 @@
 
   // Private
   let _rootEl: HTMLElement;
+  let _isTableRoot: boolean = false;
   $: _stickyHeader = toBoolean(stickyheader);
 
   onMount(() => {
@@ -39,9 +40,9 @@
     if (!slot || slot.assignedElements().length === 0) {
       return;
     }
-    // React needs to nest data in a <template><table>...</table></template>
-    const content = slot.assignedElements()[0].querySelectorAll("template table > *");
-    _rootEl.append(...(content.length > 0 ? content : slot.assignedElements()));
+
+    // React has everything nested in a table to prevent invalid DOM errors
+    _isTableRoot = slot.assignedElements()[0].tagName === "TABLE";
   });
 
   async function attachSortEventHandling() {
@@ -90,80 +91,35 @@
   }
 </script>
 
-<table
-  class={variant}
-  class:sticky={_stickyHeader}
+<div 
   bind:this={_rootEl}
-
+  class={`goatable ${variant}`}
+  class:sticky={_stickyHeader}
   style={`
-    ${width ? `width: ${width};`: ``}
+    ${width && `width: ${width};`}
     ${calculateMargin(mt, mr, mb, ml)}
-  `}>
-  <slot />
-  
-  <!--
-    prevents console errors being seen in react
-    and prevents the internal styles from being removed
-  -->
-  <template>
-    <thead><tr><th /></tr></thead>
-    <tbody><tr><td /></tr></tbody>
-    <tfoot><tr><td /></tr></tfoot>
-  </template>
-</table>
+  `}
+>
+  {#if _isTableRoot}
+    <slot />
+  {:else}
+    <table
+      style={
+       width && "width: 100%;"
+      }
+    >
+      <slot />
+    </table>
+  {/if}
+</div>
 
 <style>
+  /* other styles can be found in the assets/css/components.css file */
   :host {
     overflow-x: auto;
   }
   table {
     border-collapse: collapse;
   }
-  table.sticky {
-    position: relative;
-  }
-  table.sticky thead {
-    position: sticky;
-    top: 0;
-  }
-  td {
-    font: var(--goa-typography-body-m);
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--goa-color-greyscale-200);
-  }
-
-  table :global(.goa-table-number-column) {
-    font: var(--goa-typography-number-m);
-    text-align: right;
-  }
-
-  table.relaxed td {
-    padding: 1rem;
-  }
-
-  th {
-    background-color: var(--goa-color-greyscale-white);
-    color: var(--goa-color-text-secondary);
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 2px solid var(--goa-color-greyscale-600);
-    vertical-align: bottom;
-  }
-
-  th:has(goa-table-sort-header) {
-    padding: 0;
-  }
-
-  tfoot td {
-    background-color: var(--goa-color-greyscale-100);
-  }
-
-  tfoot tr:first-child td {
-    border-top: 2px solid var(--goa-color-greyscale-200);
-  }
-
-  tfoot tr:last-child td {
-    border-bottom: none;
-  }
-
 </style>
+
