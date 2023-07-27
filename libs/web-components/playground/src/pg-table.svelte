@@ -1,4 +1,4 @@
-<svelte:options tag="pg-table" />
+<svelte:options tag={null} />
 
 <script lang="ts">
 
@@ -39,29 +39,36 @@
 </script>
 
 <goa-table on:_sort={sortData}>
-  <thead>
-    <tr>
-      <th>
-        <goa-table-sort-header name="firstName">
-          First name
-        </goa-table-sort-header>
-      </th>
-      <th>
-        <goa-table-sort-header name="lastName">Last name</goa-table-sort-header>
-      </th>
-      <th>
-        <goa-table-sort-header name="age" direction="asc">Age</goa-table-sort-header>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each _users as user}
+    <thead>
       <tr>
-        <td>{user.firstName}</td>
-        <td>{user.lastName}</td>
-        <td>{user.age}</td>
+        <th>
+          <goa-table-sort-header name="firstName">
+            First name
+          </goa-table-sort-header>
+        </th>
+        <th>
+          <goa-table-sort-header name="lastName">Last name</goa-table-sort-header>
+        </th>
+        <th>
+          <goa-table-sort-header name="age" direction="asc">Age</goa-table-sort-header>
+        </th>
+        <th></th>
       </tr>
-    {/each}
-  </tbody>
+    </thead>
+    <tbody>
+      {#each _users as user}
+        <tr>
+          <td>{user.firstName}</td>
+          <td>{user.lastName}</td>
+          <td class="goa-table-number-column">{user.age}</td>
+          <td><button on:click={() => alert("here")}>Click</button></td>
+        </tr>
+      {/each}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colSpan={4}>This is the footer</td>
+      </tr>
+    </tfoot>
 </goa-table>
 

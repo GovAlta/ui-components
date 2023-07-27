@@ -73,3 +73,54 @@ goa-app-header a.interactive {
 goa-app-header a.interactive:hover {
   color: var(--goa-color-interactive-hover);
 }
+
+/* Table */
+
+goa-table table {
+  border-collapse: collapse;
+}
+
+goa-table.relaxed td {
+  padding: 1rem;
+}
+
+goa-table.sticky thead {
+  position: sticky;
+  top: 0;
+}
+
+goa-table td {
+  font: var(--goa-typography-body-m);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--goa-color-greyscale-200);
+}
+
+goa-table thead th {
+  background-color: var(--goa-color-greyscale-white);
+  color: var(--goa-color-text-secondary);
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--goa-color-greyscale-600);
+  vertical-align: bottom;
+}
+
+goa-table th:has(goa-table-sort-header) {
+  padding: 0;
+}
+
+.goa-table-number-column {
+  font: var(--goa-typography-number-m);
+  text-align: right;
+}
+
+goa-table tfoot td {
+  background-color: var(--goa-color-greyscale-100);
+}
+
+goa-table tfoot tr:first-child td {
+  border-top: 2px solid var(--goa-color-greyscale-200);
+}
+
+goa-table tfoot tr:last-child td {
+  border-bottom: none;
+}
