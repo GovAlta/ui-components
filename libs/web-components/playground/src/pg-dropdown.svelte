@@ -1,7 +1,6 @@
 <svelte:options tag="pg-dropdown" />
 
 <script lang="ts">
-
   let open: boolean = true;
   let value: string = "blue"
   let native: boolean = false;

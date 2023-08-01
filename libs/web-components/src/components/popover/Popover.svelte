@@ -60,6 +60,7 @@
   $: _open = toBoolean(open);
   $: _disabled = toBoolean(disabled);
   $: _relative = toBoolean(relative);
+  
   $: (async () => _open && await setPopoverPosition())()
   $: {
     if (_open) {
