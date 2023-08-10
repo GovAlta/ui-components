@@ -314,7 +314,7 @@
     display: inline-block;
     color: var(--goa-color-text-default);
     font-size: var(--goa-font-size-4);
-    padding: var(--goa-space-s);
+    padding: var(--goa-space-xs) var(--goa-space-s);
     line-height: calc(40px - calc(var(--goa-space-xs) * 2));
     background-color: transparent;
     width: 100%;
