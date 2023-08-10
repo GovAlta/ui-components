@@ -7,7 +7,7 @@ import {
   Props,
   Prop,
 } from "@abgov/shared/storybook-common";
-import { GoAButton, GoAButtonGroup } from "@abgov/react-components";
+import { GoAButton, GoAButtonGroup, GoACallout } from "@abgov/react-components";
 
 <Meta title="Components/Button" />
 
@@ -105,6 +105,11 @@ export const noop = () => {};
 #### Types
 
 There are three main button types: Primary, Secondary, and Tertiary. If there is only one button on a page, it should be a primary button. There should only ever be one primary button on a page
+
+<GoACallout type="information">
+  <i>type=submit</i> is only used for styling but doesn't auto submit a form
+  when placed inside a form.
+</GoACallout>
 
 <Story name="Types">
   <GoAButtonGroup alignment="start">
