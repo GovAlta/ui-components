@@ -65,6 +65,11 @@ export const checkboxTemplate = (args) => {
     description="The value binding to the checkbox"
   />
   <Prop
+    name="description"
+    type="string"
+    description="Additional content added below the content text"
+  />
+  <Prop
     name="disabled"
     lang="angular"
     type="boolean"
@@ -186,6 +191,64 @@ onChangeCheckboxTemplate.args = {
               text="Ice Cream"
               value="10"
               checked={desserts}
+              onChange={(name, checked, value) => {
+                setDesserts(checked);
+                console.log(name, checked, value);
+              }}
+            />
+          </>
+        );
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Description
+
+<Story
+  name="Description"
+  args={{ checked: false, description: "Get a sundae shower" }}
+>
+  {checkboxTemplate.bind()}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      code={`
+        <goa-checkbox
+          goaChecked
+          name="desserts"
+          text="Ice Cream"
+          description="Get a sundae shower"
+          [formControl]="reactiveFormCtrl"
+        ></goa-checkbox>
+      `}
+      lang="html"
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class SomeComponent {
+          reactiveFormCtrl = new FormControl();
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+        const [desserts, setDesserts] = useState(false);
+        return (
+          <>
+          <GoACheckbox
+              name="desserts"
+              text="Ice Cream"
+              value="10"
+              checked={desserts}
+              description="Get a sundae shower"
               onChange={(name, checked, value) => {
                 setDesserts(checked);
                 console.log(name, checked, value);

@@ -10,6 +10,11 @@
       "name": "value",
       "description": "Value of the item that will be returned when selected",
       "type": "string"
+    },
+    {
+      "name": "description",
+      "description": "Text added below the label text",
+      "type": "string"
     }
   ],
   "references": [
