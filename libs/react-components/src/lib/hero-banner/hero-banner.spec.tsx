@@ -12,11 +12,20 @@ describe("GoAHeroBanner", () => {
       <GoAHeroBanner
         heading="Upgrading our bitumen"
         backgroundUrl="some-bg.png"
+        backgroundColor="#000"
+        textColor="#fff"
+        minHeight="500px"
+        maxContentWidth="500px"
       />
     );
     const el = baseElement.querySelector("goa-hero-banner");
     expect(el.getAttribute("heading")).toEqual("Upgrading our bitumen");
     expect(el.getAttribute("backgroundurl")).toEqual("some-bg.png");
+    expect(el.getAttribute("backgroundcolor")).toEqual("#000");
+    expect(el.getAttribute("textcolor")).toEqual("#fff");
+    expect(el.getAttribute("minheight")).toEqual("500px");
+    expect(el.getAttribute("maxcontentwidth")).toEqual("500px");
+
   });
 
   it("renders content", async () => {
@@ -40,7 +49,7 @@ describe("GoAHeroBanner", () => {
       >
         This is the hero banner content
         <GoAHeroBannerActions>
-          <GoAButton onClick={() => {}}>Submit</GoAButton>
+          <GoAButton onClick={() => { }}>Submit</GoAButton>
         </GoAHeroBannerActions>
       </GoAHeroBanner>
     );

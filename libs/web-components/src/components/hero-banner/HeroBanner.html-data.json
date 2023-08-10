@@ -8,21 +8,31 @@
       "description": "Main heading text"
     },
     {
-      "name": "backgroundUrl",
+      "name": "backgroundurl",
       "type": "string",
       "description": "Background image url"
     },
     {
-      "name": "minHeight",
+      "name": "minheight",
       "type": "string",
       "description": "Sets the height of the HeroBanner",
       "default": "600px"
     },
     {
-      "name": "maxContentWidth",
+      "name": "maxcontentwidth",
       "default": "100%",
       "description": "Maximum width of the content area",
       "type": "string"
+    },
+    {
+      "name": "backgroundcolor",
+      "type": "string",
+      "description": "Background color for the hero banner"
+    },
+    {
+      "name": "textcolor",
+      "type": "string",
+      "description": "Content color within hero banner"
     }
   ],
   "references": [
