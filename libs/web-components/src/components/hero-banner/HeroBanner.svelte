@@ -2,32 +2,37 @@
 
 <!-- Script -->
 <script lang="ts">
-
   export let heading: string;
   export let backgroundurl: string;
-  export let minheight: string = "600px";
+  export let minheight: string;
   export let maxcontentwidth = "100%";
+  export let backgroundcolor: string = "#f8f8f8";
+  export let textcolor: string = "";
 
+  /* Set minheight to support old default value of 600px */
+  $: if (!minheight && backgroundurl) minheight = "600px";
 </script>
 
 <!-- HTML -->
 <div
   class="goa-hero"
+  class:with-image={backgroundurl}
   data-testid="background"
   style="
-    background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.40) 40%, rgba(0, 0, 0, 0.6) 100%), url({backgroundurl});
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     min-height: {minheight};
-    "
+    --hero-banner-background-color: {backgroundcolor};
+    --hero-banner-text-color: {textcolor};
+    --hero-background-url: url({backgroundurl});
+  "
 >
   <goa-page-block width={maxcontentwidth || "full"}>
     <h1>{heading}</h1>
     <div class="goa-hero-banner-content" role="note">
       <slot />
     </div>
-    <slot name="actions" />
+    <div class="goa-hero-banner-actions">
+      <slot name="actions" />
+    </div>
   </goa-page-block>
 </div>
 
@@ -38,30 +43,45 @@
     font-family: var(--goa-font-family-sans);
   }
   .goa-hero {
+    background: var(--hero-banner-background-color);
     box-sizing: border-box;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    border-bottom: 8px solid var(--goa-color-brand-default);
-    color: var(--goa-color-greyscale-white);
+    color: var(--hero-banner-text-color, var(--goa-color-text-default));
     background-position: center center;
     width: 100%;
-    padding: 3.5rem 0;
+    padding: var(--goa-space-3xl) 0;
+  }
+
+  .goa-hero.with-image {
+    border-bottom: 8px solid var(--goa-color-brand-default);
+    justify-content: flex-end;
+    background: unset;
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.4) 40%,
+        rgba(0, 0, 0, 0.6) 100%
+      ),
+      var(--hero-background-url);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--hero-banner-text-color, var(--goa-color-text-light));
   }
 
   h1 {
-    margin: 0 0 1.75rem;
-    padding: 0;
-    color: var(--goa-color-greyscale-white);
-    font-size: var(--goa-font-size-10);
-    line-height: var(--goa-line-height-7);
-    font-weight: var(--goa-font-weight-bold);
+    font: var(--goa-typography-heading-xl);
+    margin: 0;
   }
 
   .goa-hero-banner-content {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    margin-bottom: 1.75rem;
-    color: #fff;
+    font: var(--goa-typography-body-l);
+    margin: var(--goa-space-l) 0 0;
+  }
+
+  .goa-hero-banner-actions {
+    margin: var(--goa-space-l) 0 0;
   }
 </style>

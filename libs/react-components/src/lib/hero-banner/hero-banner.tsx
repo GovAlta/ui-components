@@ -2,9 +2,11 @@ import React, { FC } from "react";
 
 interface WCProps {
   heading: string;
-  backgroundurl: string;
+  backgroundurl?: string;
   minheight?: string;
   maxcontentwidth?: string;
+  backgroundcolor?: string;
+  textcolor?: string;
 }
 
 declare global {
@@ -18,11 +20,13 @@ declare global {
 
 interface Props {
   heading: string;
-  backgroundUrl: string;
+  backgroundUrl?: string;
   minHeight?: string;
   testId?: string;
   children?: React.ReactNode;
   maxContentWidth?: string;
+  backgroundColor?: string;
+  textColor?: string;
 }
 
 export const GoAHeroBanner: FC<Props> = ({
@@ -30,6 +34,8 @@ export const GoAHeroBanner: FC<Props> = ({
   backgroundUrl,
   minHeight,
   maxContentWidth,
+  backgroundColor,
+  textColor,
   children,
   testId,
 }) => {
@@ -39,6 +45,8 @@ export const GoAHeroBanner: FC<Props> = ({
       backgroundurl={backgroundUrl}
       minheight={minHeight}
       maxcontentwidth={maxContentWidth}
+      backgroundcolor={backgroundColor}
+      textcolor={textColor}
       data-testid={testId}
     >
       {children}
