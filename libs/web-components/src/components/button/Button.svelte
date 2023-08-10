@@ -64,6 +64,7 @@
   disabled={isDisabled}
   on:click={clickHandler}
   data-testid={testid}
+  type={type == "submit" ? type : "button"}
 >
   {#if type === "start"}
     <span class="text">
