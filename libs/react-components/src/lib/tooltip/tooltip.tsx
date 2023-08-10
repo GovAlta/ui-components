@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
 /* eslint-disable-next-line */
@@ -23,6 +23,7 @@ interface TooltipProps extends Margins {
   content?: string;
   hAlign?: string;
   testId?: string;
+  children: ReactNode;
 }
 
 export const GoATooltip: React.FC<TooltipProps> = (props) => {
