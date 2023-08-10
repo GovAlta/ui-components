@@ -51,6 +51,7 @@ export default function App() {
             <Link to="/styles">Styles</Link>
             <Link to="/table">Table</Link>
             <Link to="/textarea">TextArea</Link>
+            <Link to="/tooltip">Tooltip</Link>
             <Link to="/tabs">Tabs</Link>
             <Link to="/form-stepper">FormStepper</Link>
           </GoASideMenuGroup>
