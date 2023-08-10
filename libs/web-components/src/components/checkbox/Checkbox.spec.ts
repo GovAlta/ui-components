@@ -36,6 +36,12 @@ describe('GoACheckbox Component', () => {
       expect(div).toHaveTextContent("foobar");
     });
 
+    it("allows setting checkbox description", async () => {
+      const el = await createElement({ description: "foobar" });
+      const div = await el.findByTestId('description');
+      expect(div).toHaveTextContent("foobar");
+    });
+
     it("can be checked", async () => {
       const el = await createElement({ checked: "true" });
       const root = el.container.querySelector('.goa-checkbox--selected');
@@ -97,7 +103,7 @@ describe('GoACheckbox Component', () => {
     });
 
     it("handles change event that results in unchecked state", async () => {
-      const el = await createElement({checked:true, value: "foo"});
+      const el = await createElement({ checked: true, value: "foo" });
       const checkbox = el.container.querySelector("input");
       const change = jest.fn();
 

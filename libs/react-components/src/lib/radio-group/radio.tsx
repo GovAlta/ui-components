@@ -3,6 +3,7 @@ import React, { FC } from "react";
 interface RadioItemProps {
   name: string;
   value: string;
+  description?: string;
   label?: string;
   disabled?: boolean;
   checked?: boolean;
@@ -21,6 +22,7 @@ declare global {
 interface Props {
   value: string;
   label?: string;
+  description?: string;
   name: string;
   disabled?: boolean;
   checked?: boolean;
@@ -33,6 +35,7 @@ export const GoARadioItem: FC<Props> = ({
   name,
   label,
   value,
+  description,
   disabled,
   checked,
   error,
@@ -44,6 +47,7 @@ export const GoARadioItem: FC<Props> = ({
       name={name}
       label={label}
       value={value}
+      description={description}
       error={error}
       disabled={disabled}
       checked={checked}

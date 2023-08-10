@@ -17,6 +17,7 @@
   interface RadioOption {
     label: string;
     value: string;
+    description?: string;
   }
 
   export let name: string;
@@ -72,7 +73,8 @@
       const value = el.getAttribute("value") || option.value;
       const label =
         el.getAttribute("label") || el.innerText || option.label || option.innerText;
-      return { value, label };
+      const description = el.getAttribute("description") || option.description;;
+      return { value, label, description };
     });
   }
 
@@ -105,27 +107,35 @@
   data-testid={testid}
 >
   <slot />
-  {#each options as option (option.value)}
-    <label
-      data-testid="radio-option-{option.value}"
-      class="goa-radio"
-      class:goa-radio--disabled={isDisabled}
-      class:goa-radio--error={isError}
-    >
-      <input
-        type="radio"
-        {name}
-        value={option.value}
-        disabled={isDisabled}
-        checked={option.value === value}
-        aria-label={arialabel || name}
-        on:change={() => onChange(option.value)}
-      />
-      <div class="goa-radio-icon" />
-      <span class="goa-radio-label">
-        {option.label || option.value}
-      </span>
-    </label>
+  {#each options as option, index (option.value)}
+    <div class="goa-radio-container">
+      <label
+        data-testid="radio-option-{option.value}"
+        class="goa-radio"
+        class:goa-radio--disabled={isDisabled}
+        class:goa-radio--error={isError}
+      >
+        <input
+          type="radio"
+          {name}
+          value={option.value}
+          disabled={isDisabled}
+          checked={option.value === value}
+          aria-label={arialabel || name}
+          aria-describedby={`description-${name}-${index}`}
+          on:change={() => onChange(option.value)}
+        />
+        <div class="goa-radio-icon" />
+        <span class="goa-radio-label">
+          {option.label || option.value}
+        </span>
+      </label>
+      {#if option.description}
+        <div class="goa-radio-description" id={`description-${name}-${index}`}>
+          {option.description}
+        </div>
+      {/if}
+    </div>
   {/each}
 </div>
 
@@ -153,8 +163,10 @@
     display: inline-block;
     box-sizing: border-box;
     display: flex;
-    align-items: center;
-    min-height: 3rem;
+  }
+
+  .goa-radio-container{
+    padding-bottom: 1rem;
   }
 
   .goa-radio:hover {
@@ -175,8 +187,14 @@
   }
 
   .goa-radio-label {
-    padding: 0.5rem;
+    padding: 0 0.5rem;
     font-weight: var(--goa-font-weight-regular);
+  }
+
+  .goa-radio-description {
+    font: var(--goa-typography-body-xs);
+    margin-left: var(--goa-space-xl);
+    margin-top: var(--goa-space-2xs);
   }
 
   .goa-radio-icon {
@@ -189,6 +207,7 @@
 
     /* prevent squishing of radio button */
     flex: 0 0 auto;
+    margin-top: var(--font-valign-fix);
   }
 
   /* What is this? */
@@ -223,7 +242,10 @@
   }
 
   /* Default:focus */
-  input[type="radio"]:focus ~ .goa-radio-icon, input[type="radio"]:active ~ .goa-radio-icon {
+  input[type="radio"]:focus ~ .goa-radio-icon,
+  input[type="radio"]:hover:active ~ .goa-radio-icon,
+  input[type="radio"]:hover:focus ~ .goa-radio-icon,
+  input[type="radio"]:active ~ .goa-radio-icon {
     box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
   }
 
@@ -236,6 +258,7 @@
   input[type="radio"]:disabled ~ .goa-radio-icon {
     border: var(--goa-radio-border-width) solid var(--goa-color-greyscale-700);
     box-shadow: none;
+    opacity: 40%;
   }
 
   /* Disabled and checked */
@@ -251,6 +274,9 @@
   }
   .goa-radio--error input[type="radio"]:hover ~ .goa-radio-icon {
     box-shadow: 0 0 0 1px var(--goa-color-emergency-default);
+  }
+  .goa-radio--error input[type="radio"]:disabled:hover ~ .goa-radio-icon {
+    box-shadow: none;
   }
   .goa-radio--error input[type="radio"]:not(:checked) ~ .goa-radio-icon {
     border: 2px solid var(--goa-color-emergency-default);

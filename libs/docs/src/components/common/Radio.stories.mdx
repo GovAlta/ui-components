@@ -114,6 +114,11 @@ import { useState } from "react";
     description="Value of the item that will be returned when selected"
   />
   <Prop name="label" type="string" description="Text to show to the user" />
+  <Prop
+    name="description"
+    type="string"
+    description="Addition text to the bottom of the label"
+  />
 </Props>
 
 export const BasicTemplate = (args) => {
@@ -129,9 +134,25 @@ export const BasicTemplate = (args) => {
       value={value}
       onChange={onChange}
     >
-      <GoARadioItem label="Red" value="red" />
+      <GoARadioItem
+        label="Red"
+        value="red"
+        description={
+          args.showDescription
+            ? "Additional details about color red"
+            : undefined
+        }
+      />
       <GoARadioItem label="Blue" value="blue" />
-      <GoARadioItem label="Orange" value="orange" />
+      <GoARadioItem
+        label="Orange"
+        value="orange"
+        description={
+          args.showDescription
+            ? "Additional details about color orange"
+            : undefined
+        }
+      />
     </GoARadioGroup>
   );
 };
@@ -198,6 +219,53 @@ export const BasicTemplate = (args) => {
               <GoARadioItem value="red" />
               <GoARadioItem value="blue" />
               <GoARadioItem value="orange"/>
+            </GoARadioGroup>
+          )
+        }
+      `}
+    />
+  </Tab>
+</Tabs>
+
+#### Description
+
+<Story name="Description" args={{ name: "description", showDescription: true }}>
+  {BasicTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-radio-group name="color" goaValue [formControl]="reactiveFormCtrl" [value]="reactiveFormCtrl.value">
+          <goa-radio-item value="red" description="Additional details about color red"></goa-radio-item>
+          <goa-radio-item value="blue"></goa-radio-item>
+          <goa-radio-item value="orange" description="Additional details about color orange"></goa-radio-item>
+        </goa-radio-group>
+      `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        import { FormControl } from "@angular/forms";
+        export class MyComponent {
+          reactiveFormCtrl = new FormControl();
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+        export const MyComponent = () {
+          const [color, setColor] = useState<string>("");
+          return (
+            <GoARadioGroup name="color" value={color} onChange={(_name, value) => setColor(value) }>
+              <GoARadioItem value="red" description="Additional details about color red"/>
+              <GoARadioItem value="blue" />
+              <GoARadioItem value="orange" description="Additional details about color orange"/>
             </GoARadioGroup>
           )
         }

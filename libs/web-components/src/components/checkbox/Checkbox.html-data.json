@@ -24,6 +24,11 @@
       "description": "The value binding to the checkbox"
     },
     {
+      "name": "description",
+      "type": "string",
+      "description": "The description added below the label text"
+    },
+    {
       "name": "disabled",
       "type": "boolean",
       "description": "Disable this control. It will not receive focus or events",
