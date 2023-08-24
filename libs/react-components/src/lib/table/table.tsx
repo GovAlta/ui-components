@@ -27,11 +27,11 @@ export interface TableProps extends Margins {
   // stickyHeader?: boolean; TODO: enable this later
   variant?: TableVariant;
   testId?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function GoATable(props: TableProps) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLTableElement>(null);
   useEffect(() => {
     if (!ref.current) {
       return;

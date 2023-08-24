@@ -47,8 +47,9 @@
 
   async function attachSortEventHandling() {
     await tick();
-    const headings = _rootEl.querySelectorAll("goa-table-sort-header");
-    headings.forEach(heading => {
+    const contentSlot = _rootEl.querySelector("slot") as HTMLSlotElement;
+    const headings = contentSlot.assignedElements().find(el => el.tagName==="THEAD" || el.tagName==="TABLE")?.querySelectorAll("goa-table-sort-header");
+    headings?.forEach(heading => {
       heading.addEventListener("click", () => {
         const sortBy = heading.getAttribute("name")
         let sortDir: number;
@@ -77,7 +78,7 @@
         setTimeout(() => {
           dispatch(heading, {sortBy: initialSortBy, sortDir: initialDirection === "asc" ? 1 : -1})
         }, 10)
-      } 
+      }
     })
   }
 
@@ -91,7 +92,7 @@
   }
 </script>
 
-<div 
+<div
   bind:this={_rootEl}
   class={`goatable ${variant}`}
   class:sticky={_stickyHeader}
