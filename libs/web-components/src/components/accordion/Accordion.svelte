@@ -27,14 +27,26 @@
   export let ml: Spacing = null;
 
   let _hovering: boolean = false;
+  let _titleEl: HTMLElement = null;
+  let _headingContentSlotChildren: Element[] = [];
 
   $: isOpen = toBoolean(open);
-
   onMount(() => {
     validateRequired("GoAAccordion", {heading})
     validateHeadingSize(headingsize);
+    _headingContentSlotChildren = getChildren();
   })
-
+  function getChildren(): Element[] {
+    if (_titleEl) {
+      const slot = _titleEl.querySelector("slot") as HTMLSlotElement;
+      if (slot) {
+        return [...slot.assignedElements()];
+      } else {
+        return [..._titleEl.children] as Element[];  // unit tests
+      }
+    }
+    return [];
+  }
 </script>
 
 <!-- HTML -->
@@ -56,10 +68,12 @@
       <goa-icon type="chevron-forward"
         fillcolor={_hovering?"var(--goa-color-interactive-hover)": "var(--goa-color-interactive-default)"}
       ></goa-icon>
-      <div class="title">
+      <div class="title" bind:this={_titleEl}>
         <span class="heading heading-{headingsize}" data-testid={`${testid}-heading`}>{heading}</span>
         <span class="secondary-text">{secondarytext}</span>
-        <div class="heading-content">
+        <div class="heading-content"
+             class:heading-content-top={_headingContentSlotChildren.length}
+        >
           <slot name="headingcontent" />
         </div>
       </div>
@@ -202,6 +216,13 @@
     summary .title {
       flex-direction: column;
       align-items: flex-start;
+      padding-bottom: 0.875rem;
+    }
+    summary .title span {
+      padding-bottom: 0;
+    }
+    summary .heading-content.heading-content-top {
+      margin-top: var(--goa-space-xs);
     }
   }
 
