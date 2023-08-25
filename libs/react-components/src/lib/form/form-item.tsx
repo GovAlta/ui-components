@@ -4,7 +4,7 @@ import { Margins } from "../../common/styling";
 type RequirementType = "optional" | "required";
 
 interface WCProps extends Margins {
-  label: string;
+  label?: string;
   requirement?: RequirementType;
   error?: string;
   helptext?: string;
@@ -21,7 +21,7 @@ declare global {
 }
 
 interface GoAFormItemProps extends Margins {
-  label: string;
+  label?: string;
   requirement?: RequirementType;
   error?: string;
   helpText?: string;
