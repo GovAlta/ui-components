@@ -53,7 +53,19 @@ export default function FormItem() {
           error
         ></GoAInput>
       </GoAFormItem>
-
+      <br/>
+      <GoAFormItem
+        helpText="No label is still valid"
+      >
+        <GoAInput
+          name="lasstName"
+          value=""
+          onChange={() => void 0}
+          type="text"
+          error
+          width="100%"
+        ></GoAInput>
+      </GoAFormItem>
       <br />
       <h2>Form row</h2>
       <GoAGrid minChildWidth="30ch">
