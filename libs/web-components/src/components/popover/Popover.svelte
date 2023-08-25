@@ -13,7 +13,7 @@
   // prevents the popover from exceeding this width
   export let maxwidth: string = "320px";
   // allow width to be hardcoded
-  export let width: string = "";  
+  export let width: string = "";
   // allows to override the default padding when content needs to be flush with boundries
   export let padded: string = "true";
   // provides control to where the popover content is positioned
@@ -28,7 +28,7 @@
   export let ml: Spacing = null;
 
   // Exposed privates
-  // **Required only to allow popover position to be customized when used within 
+  // **Required only to allow popover position to be customized when used within
   // other components. These props should _not_ be documented.**
 
   // allow for outside control of whether popover is open/closed (see AppHeaderMenu)
@@ -60,13 +60,13 @@
   $: _open = toBoolean(open);
   $: _disabled = toBoolean(disabled);
   $: _relative = toBoolean(relative);
-  
+
   $: (async () => _open && await setPopoverPosition())()
   $: {
     if (_open) {
-      window.addEventListener("popstate", handleUrlChange, true);   
+      window.addEventListener("popstate", handleUrlChange, true);
     } else {
-      window.removeEventListener("popstate", handleUrlChange, true);   
+      window.removeEventListener("popstate", handleUrlChange, true);
     }
   }
 
@@ -74,7 +74,7 @@
 
   onMount(async () => {
     await tick();
-    _targetEl.addEventListener("keydown", onTargetEvent);    
+    _targetEl.addEventListener("keydown", onTargetEvent);
 
     const slot =  _targetEl.querySelector("slot");
     let children: Element[];
@@ -84,8 +84,8 @@
       // for unit tests only
       children = [..._targetEl.children] as Element[];
     }
-    
-    _initFocusedEl = 
+
+    _initFocusedEl =
       children
       .find(el => (el as HTMLElement).tabIndex >= 0) as HTMLElement
       || _targetEl;
@@ -93,7 +93,7 @@
 
   // Functions
 
-  // Called on window popstate changes. This allows for clicking links within 
+  // Called on window popstate changes. This allows for clicking links within
   // the popover to close the popover
   function handleUrlChange(_e: Event) {
     closePopover();
@@ -112,7 +112,7 @@
     }
   }
 
-  // Event binding when the focusTrapEl has focus. This is required since the 
+  // Event binding when the focusTrapEl has focus. This is required since the
   // popover exists within the slot of the FocusTrap which prevents the existing
   // targetEl eventing binding from "hearing" the events
   function onFocusTrapEvent(e: KeyboardEvent) {
@@ -128,7 +128,7 @@
   }
 
   // Opens the popover and adds the required binding to the new slot element
-  function openPopover() {  
+  function openPopover() {
     if (_disabled) return;
     ;(async () => {
       _open = true;
@@ -156,7 +156,7 @@
     const mRight = parseInt(style.marginRight, 10) || 0;
     const mBottom = parseInt(style.marginBottom, 10) || 0;
     const mLeft = parseInt(style.marginLeft, 10) || 0;
-  
+
     return {
       top: rect.top - mTop,
       right: rect.right + mRight,
@@ -182,7 +182,7 @@
     const spaceBelow = window.innerHeight - targetRect.bottom;
 
     // Determine if there's more space above or below the target element
-    const displayOnTop = 
+    const displayOnTop =
       position === "auto"
       ? spaceBelow < contentRect.height && spaceAbove > contentRect.height && spaceAbove > spaceBelow
       : position === "above";
@@ -204,8 +204,8 @@
     }
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
-    const displayOnRight = 
-      document.body.clientWidth - targetRect.left < contentRect.width 
+    const displayOnRight =
+      document.body.clientWidth - targetRect.left < contentRect.width
       && targetRect.left > contentRect.width;
 
     if (_relative) {
@@ -236,6 +236,7 @@
     ${cssVar("--offset-right", hoffset)}
     ${cssVar("--focus-border-width", focusborderwidth)}
     ${cssVar("--border-radius", borderradius)}
+    ${cssVar("width", "100%")}
   `}
   >
   <div class="popover-target"
@@ -254,7 +255,7 @@
       on:click={closePopover}
     />
     <div class="popover-container">
-      <section 
+      <section
         bind:this={_popoverEl}
         data-testid="popover-content"
         class="popover-content"
@@ -286,7 +287,6 @@
   }
 
   .popover-target {
-    width: fit-content;
     cursor: pointer;
   }
 

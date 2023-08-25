@@ -44,10 +44,12 @@
   let _isMenuVisible = false;
   let _highlightedIndex: number = 0;
   let _computedWidth: string;
+  let _inputWidth: string;
 
   let _el: HTMLElement;
   let _menuEl: HTMLElement;
   let _selectEl: HTMLSelectElement;
+  let _inputEl: HTMLInputElement;
 
   $: {
     if (_el) {
@@ -59,6 +61,11 @@
         setHighlightedIndexToSelected();
       }
     }
+  }
+
+  $: if(_inputEl && _options.length) {
+    _inputWidth = `${_inputEl.getBoundingClientRect().width}px`;
+    console.log(_inputWidth);
   }
 
   onMount(async () => {
@@ -326,7 +333,7 @@
       e.preventDefault();
     };
 
-    // FIXME: here 
+    // FIXME: here
     const onArrowDown = (e: KeyboardEvent) => {
       if (e.altKey) {
         showMenu();
@@ -409,19 +416,21 @@
   {:else}
     <!-- list and filter -->
     <slot />
-    <goa-popover 
-      {disabled} 
-      {relative} 
+    <goa-popover
+      {disabled}
+      {relative}
       tabindex="-1"
-      open={_isMenuVisible} 
-      padded="false" 
+      open={_isMenuVisible}
+      padded="false"
       width={width || _computedWidth}
+      maxwidth={_inputWidth}
     >
-    
+
       <!-- readonly input  -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-input
         slot="target"
+        bind:this={_inputEl}
         on:click={showMenu}
         {disabled}
         {error}
@@ -436,7 +445,7 @@
         trailingicon="chevron-down"
         type="text"
         value={_selectedLabel}
-        width="100%"
+        width={width || "100%"}
         readonly
       />
 

@@ -92,14 +92,14 @@ describe('GoADropdown', () => {
       });
     });
 
-    it('can be selected programmatically', async() => {
+    it('can be selected programmatically', async () => {
       const name = 'program-color';
       const items = ["red", "blue", "orange"];
-      const result = render(GoADropdownWrapper, {name, value: 'blue', items});
+      const result = render(GoADropdownWrapper, { name, value: 'blue', items });
 
       const button = result.queryByRole("button");
 
-      await waitFor(async() => {
+      await waitFor(async () => {
         await fireEvent.click(button);
         // validate the selected item
         const selected = result.container.querySelector(".dropdown-item--selected");
@@ -108,15 +108,15 @@ describe('GoADropdown', () => {
       });
     })
 
-    
-    it('a blank value can be selected programmatically', async() => {
+
+    it('a blank value can be selected programmatically', async () => {
       const name = 'blank-color';
       const items = ["", "blue", "orange"];
-      const result = render(GoADropdownWrapper, {name, value: 'blue', items, resetValue: ""});
+      const result = render(GoADropdownWrapper, { name, value: 'blue', items, resetValue: "" });
 
       const resetButton = result.queryByRole("button");
 
-      await waitFor(async() => {
+      await waitFor(async () => {
         await fireEvent.click(resetButton);
         // validate the selected item
         const selected = result.container.querySelector(".dropdown-item--selected");
@@ -273,8 +273,8 @@ describe('GoADropdown', () => {
       const input = dropdown.querySelector('goa-input');
 
       await waitFor(() => {
-        expect(dropdown).toHaveStyle("--width: 20ch");
-        expect(input).toHaveAttribute("width", "100%");  // 20ch is min width when being calculated
+        expect(dropdown).toHaveStyle("--width: 20ch"); // 20ch is min width when being calculated
+        expect(input).toHaveAttribute("width", "100%");
       })
     });
 
@@ -292,7 +292,7 @@ describe('GoADropdown', () => {
 
       await waitFor(() => {
         expect(dropdown).toHaveStyle("--width: 500px");
-        expect(input).toHaveAttribute("width", "100%");
+        expect(input).toHaveAttribute("width", "500px");
       });
     });
 
