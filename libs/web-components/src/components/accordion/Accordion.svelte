@@ -27,6 +27,7 @@
   export let ml: Spacing = null;
 
   let _hovering: boolean = false;
+  let _headingContentHeight = 0;
 
   $: isOpen = toBoolean(open);
 
@@ -59,7 +60,10 @@
       <div class="title">
         <span class="heading heading-{headingsize}" data-testid={`${testid}-heading`}>{heading}</span>
         <span class="secondary-text">{secondarytext}</span>
-        <div class="heading-content">
+        <div class="heading-content"
+             bind:clientHeight={_headingContentHeight}
+             class:heading-content-top={_headingContentHeight > 0}
+        >
           <slot name="headingcontent" />
         </div>
       </div>
@@ -202,6 +206,13 @@
     summary .title {
       flex-direction: column;
       align-items: flex-start;
+      padding-bottom: 0.875rem;
+    }
+    summary .title span {
+      padding-bottom: 0;
+    }
+    summary .heading-content.heading-content-top {
+      margin-top: var(--goa-space-xs);
     }
   }
 
