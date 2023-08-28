@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 interface RadioItemProps {
-  name: string;
+  name?: string;
   value: string;
   description?: string;
   label?: string;
@@ -22,8 +22,8 @@ declare global {
 interface Props {
   value: string;
   label?: string;
+  name?: string;
   description?: string;
-  name: string;
   disabled?: boolean;
   checked?: boolean;
   error?: boolean;

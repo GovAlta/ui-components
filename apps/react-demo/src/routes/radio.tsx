@@ -28,9 +28,9 @@ export default function Radio() {
       <h1>Radio Button</h1>
       <h2>Basic</h2>
       <GoARadioGroup name="color" value="orange" onChange={onChange}>
-        <GoARadioItem name="color" value="red"></GoARadioItem>
-        <GoARadioItem name="color" value="blue"></GoARadioItem>
-        <GoARadioItem name="color" value="orange"></GoARadioItem>
+        <GoARadioItem value="red"></GoARadioItem>
+        <GoARadioItem value="blue"></GoARadioItem>
+        <GoARadioItem value="orange"></GoARadioItem>
       </GoARadioGroup>
 
       <h2>Error</h2>
