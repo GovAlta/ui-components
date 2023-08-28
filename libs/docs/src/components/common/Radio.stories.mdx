@@ -63,6 +63,13 @@ import { useState } from "react";
   />
   <Prop
     name="ariaLabel"
+    lang="react"
+    type="string"
+    description="Defines how the text will be translated for the screen reader. It not specified it will fall back to the name"
+  />
+  <Prop
+    name="arialabel"
+    lang="angular"
     type="string"
     description="Defines how the text will be translated for the screen reader. It not specified it will fall back to the name"
   />
@@ -141,8 +148,6 @@ export const BasicTemplate = (args) => {
 <Story name="Basic" args={{ name: "basic" }}>
   {BasicTemplate.bind({})}
 </Story>
-
-**Note:** The `name` prop is required and must be the same for the `GoARadioGroup` and `GoARadioItem` components.
 
 <Tabs>
   <Tab label="Web Component" hidden={true}>

@@ -33,7 +33,7 @@
       "default": "false"
     },
     {
-      "name": "ariaLabel",
+      "name": "arialabel",
       "type": "string",
       "description": "Defines how the text will be translated for the screen reader. It not specified it will fall back to the name"
     }
