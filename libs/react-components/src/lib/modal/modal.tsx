@@ -12,7 +12,7 @@ interface WCProps {
   ref: React.RefObject<HTMLElement>;
   heading?: React.ReactNode;
   open?: boolean;
-  width?: string;
+  maxwidth?: string;
   closable?: boolean;
   scrollable?: boolean;
   transition?: ModalTransition;
@@ -30,7 +30,7 @@ declare global {
 
 interface Props {
   heading?: React.ReactNode;
-  width?: string;
+  maxWidth?: string;
   actions?: React.ReactElement;
   onClose?: () => void;
   transition?: ModalTransition;
@@ -39,27 +39,38 @@ interface Props {
   type?: string;
   calloutVariant?: CalloutVariant;
   testId?: string;
+
+  // @deprecated: use maxWidth
+  width?: string;
 }
 
 export const GoAModal: FC<Props> = ({
   heading,
   children,
+  maxWidth,
   open,
-  width,
   actions,
   transition,
   type,
   calloutVariant,
   onClose,
   testId,
+
+  width,
 }) => {
   const el = useRef<HTMLElement>(null);
 
+  // deprecation
   useEffect(() => {
     if (type) {
       console.warn("GoAModal [type] is deprecated.");
     }
   }, [type]);
+
+  // deprecation
+  useEffect(() => {
+    maxWidth = width;
+  }, [width]);
 
   useEffect(() => {
     if (!el.current) {
@@ -82,7 +93,7 @@ export const GoAModal: FC<Props> = ({
       open={open}
       closable={!!onClose}
       scrollable={true}
-      width={width}
+      maxwidth={maxWidth}
       transition={transition}
       calloutVariant={calloutVariant}
       data-testid={testId}

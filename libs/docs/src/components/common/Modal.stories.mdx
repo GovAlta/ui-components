@@ -64,6 +64,20 @@ import { useState } from "react";
     description="Controls if modal is visible or not"
   />
   <Prop
+    name="maxWidth"
+    type="string"
+    lang="react"
+    defaultValue=""
+    description="Set the max allowed width of the modal"
+  />
+  <Prop
+    name="maxwidth"
+    lang="angular"
+    type="string"
+    defaultValue=""
+    description="Set the max allowed width of the modal"
+  />
+  <Prop
     name="closable"
     lang="angular"
     type="boolean"
@@ -117,7 +131,7 @@ export const NoActionsTemplate = (args) => {
       <GoAButton onClick={() => setShowModal(true)}>Open Modal</GoAButton>
       <GoAModal
         heading="Do you agree?"
-        width="70vw"
+        maxWidth="70vw"
         open={showModal}
         onClose={() => setShowModal(false)}
       >
@@ -886,6 +900,102 @@ export const FormattingTemplate = (args) => {
           </>
         )
       `}
+    />
+  </Tab>
+</Tabs>
+
+
+#### Max Width
+
+export const MaxWidthTemplate = (args) => {
+  const [showModal, setShowModal] = useState(false);
+  const [maxWidth, setMaxWidth] = useState("90vw");
+  return (
+    <>
+      <GoAFormItem label="Max Width" helpText="Enter width with unit (px,vw,rem,em,ch)">
+        <GoAInput onChange={(name, val) => setMaxWidth(val)} value={maxWidth} />
+      </GoAFormItem>
+      <GoAButton mt="l" onClick={() => setShowModal(true)}>Open Modal</GoAButton>
+      <GoAModal
+        heading="Do you agree?"
+        maxWidth={maxWidth}
+        open={showModal}
+        onClose={() => setShowModal(false)}
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+          obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+          explicabo eligendi eius laboriosam! Repellendus ducimus officia
+          asperiores. Eos, eius numquam.
+        </p>
+      </GoAModal>
+    </>
+  );
+};
+
+<Story name="Max Width">{MaxWidthTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-button (_click)="openModal()">Open Modal</goa-button>
+        <goa-modal 
+          [open]="isOpen" 
+          (_close)="closeModal()" 
+          closable 
+          heading="Do you agree?"
+          maxwidth="90vw"
+        >
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+            natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+            Repellendus ducimus officia asperiores. Eos, eius numquam.
+          </p>
+        </goa-modal>
+      `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+      export class SomeComponent {
+        isOpen = false;
+        openModal() {
+          this.isOpen = true;
+        }
+        closeModal() {
+          this.isOpen = false;
+        }
+      }
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="tsx"
+      code={`
+      const [showModal, setShowModal] = useState(false);
+      return (
+        <>
+          <GoAButton onClick={() => setShowModal(true)}>
+            Open Modal
+          </GoAButton>
+          <GoAModal
+            heading="Do you agree?"
+            open={showModal}
+            maxWidth="90vw"
+            onClose={() => setShowModal(false)}
+          >
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
+              natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
+              Repellendus ducimus officia asperiores. Eos, eius numquam.
+            </p>
+          </GoAModal>
+        </>
+      )
+    `}
     />
   </Tab>
 </Tabs>

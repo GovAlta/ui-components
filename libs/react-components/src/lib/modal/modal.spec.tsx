@@ -9,7 +9,7 @@ describe("Modal Tests", () => {
     const props = {
       heading: "Modal Heading",
       open: true,
-      width: "500px",
+      maxWidth: "500px",
       actions: <GoAButton onClick={() => {}}>Close</GoAButton>,
       onClose: () => {},
     };
@@ -23,7 +23,7 @@ describe("Modal Tests", () => {
 
     expect(heading.textContent).toContain("Modal Heading");
     expect(modal.getAttribute("open")).toBe("true");
-    expect(modal.getAttribute("width")).toBe("500px");
+    expect(modal.getAttribute("maxwidth")).toBe("500px");
     expect(modal.getAttribute("closable")).toBe("true");
     expect(modal.textContent).toContain("Modal Content");
     expect(actionContent.textContent).toContain("Close");
