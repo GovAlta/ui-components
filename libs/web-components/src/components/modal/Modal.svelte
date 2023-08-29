@@ -11,8 +11,11 @@
   export let closable: string = "false";
   export let open: string = "false";
   export let transition: Transition = "none";
-  export let width: string = "";
   export let calloutvariant: CalloutVariant = null;
+  export let maxwidth: string = "60ch";
+
+  // @deprecated: use maxwidth
+  export let width: string = "";
 
   // Private
   let _rootEl: HTMLElement = null;
@@ -91,6 +94,11 @@
     await tick()
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
+
+    if (width) {
+      maxwidth = width;
+      console.warn("`width` is deprecated. Please use `maxwidth` instead.")
+    }
   });
 
   // Functions
@@ -148,7 +156,7 @@
       out:fade={{ delay: _transitionTime, duration: _transitionTime }}
       data-testid="modal"
       class="modal"
-      style={width && `--width: ${width};`}
+      style={`--maxwidth: ${maxwidth};`}
       bind:this={_rootEl}
     >
       <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -294,7 +302,7 @@
 
   @media (min-width: 640px) {
     .modal-pane {
-      width: var(--width, 60ch);
+      max-width: var(--maxwidth);
     }
   }
 

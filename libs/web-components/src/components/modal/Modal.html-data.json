@@ -5,17 +5,28 @@
     {
       "name": "type",
       "description": "Type of Modal",
-      "values": [{"name": "default"},{"name": "callout"}]
+      "values": [{ "name": "default" }, { "name": "callout" }]
     },
     {
       "name": "calloutVariant",
       "description": "Define the context and colour of the callout modal. It is required when type is set to callout.",
-      "values": [{"name": "information"},{"name": "important"},{"name": "emergency"},{"name": "success"},{"name": "event"}]
+      "values": [
+        { "name": "information" },
+        { "name": "important" },
+        { "name": "emergency" },
+        { "name": "success" },
+        { "name": "event" }
+      ]
     },
     {
       "name": "heading",
       "type": "string",
       "description": "Heading text within the modal"
+    },
+    {
+      "name": "maxwidth",
+      "type": "string",
+      "description": "Max width of the modal"
     },
     {
       "name": "open",
@@ -33,7 +44,7 @@
     {
       "name": "transition",
       "description": "How modal transition onto screen",
-      "values": [{"name": "fast"},{"name": "slow"},{"name": "none"}],
+      "values": [{ "name": "fast" }, { "name": "slow" }, { "name": "none" }],
       "default": "none"
     },
     {
@@ -43,7 +54,7 @@
     {
       "name": "actions",
       "description": "Buttons displayed in the bottom right of the modal instead of a close icon",
-      "values": [{"name": "slot"}]
+      "values": [{ "name": "slot" }]
     }
   ],
   "references": [
