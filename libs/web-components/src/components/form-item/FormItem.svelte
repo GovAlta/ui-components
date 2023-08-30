@@ -13,8 +13,14 @@
     ["optional", "required"],
     false,
   );
+  const [LABEL_SIZE_TYPES, validateLabelSize] = typeValidator(
+    "Label size type",
+    ["regular", "large"],
+    false,
+  );
 
   type RequirementType = (typeof REQUIREMENT_TYPES)[number];
+  type LabelSizeType = (typeof LABEL_SIZE_TYPES)[number];
 
   export let testid: string = "";
 
@@ -26,6 +32,7 @@
 
   // Optional
   export let label: string = "";
+  export let labelsize: LabelSizeType = "regular";
   export let helptext: string = "";
   export let error: string = "";
   export let requirement: RequirementType = "";
@@ -44,7 +51,7 @@
   class="goa-form-item"
 >
   {#if label}
-    <div class="label" id={id}>
+    <div class={`label ${labelsize}`} id={id}>
       {label}
       {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
         <em>({requirement})</em>
@@ -82,6 +89,10 @@
     color: var(--goa-color-text-default);
     font-size: var(--goa-font-size-4);
     padding: 0.5rem 0;
+  }
+
+  .label.large {
+    font: var(--goa-typography-heading-l);
   }
 
   .label em {
