@@ -5,6 +5,7 @@ type RequirementType = "optional" | "required";
 
 interface WCProps extends Margins {
   label?: string;
+  labelsize?: string;
   requirement?: RequirementType;
   error?: string;
   helptext?: string;
@@ -22,6 +23,7 @@ declare global {
 
 interface GoAFormItemProps extends Margins {
   label?: string;
+  labelSize?: string;
   requirement?: RequirementType;
   error?: string;
   helpText?: string;
@@ -36,6 +38,7 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({
   error,
   requirement,
   label,
+  labelSize,
   mt,
   mr,
   mb,
@@ -46,6 +49,7 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({
   return (
     <goa-form-item
       label={label}
+      labelsize={labelSize}
       error={error}
       requirement={requirement}
       helptext={helpText}

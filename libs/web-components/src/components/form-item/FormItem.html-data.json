@@ -27,6 +27,11 @@
       "description": "Creates a label for a form item"
     },
     {
+      "name": "labelsize",
+      "type": "regular | large",
+      "description": "Set a regular or large label size"
+    },
+    {
       "name": "helpText",
       "type": "string",
       "description": "Help text displayed under the form field to provide an additional explanation"
