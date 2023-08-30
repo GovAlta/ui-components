@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.14.0] - 2023-08-30
+
+### Added
+- New [Side Menu Heading](https://ui-components.alberta.ca/?path=/docs/components-sidemenu--section-headings) component added to Side Menu component
+- New [description](https://ui-components.alberta.ca/?path=/docs/components-radio--description) property added to Radio component
+- New [description](https://alpha.ui-components.alberta.ca/?path=/docs/components-checkbox--description) property added to Checkbox component
+- Button property `type` of submit now renders an actual submit button. This has no effect on the actual button due to web component limitations.
+- Added `filterable` property to Dropdown component which turns it into a Combobox
+- Added `arialabelledby` property to Dropdown, Form Item, and Input components for increased accessibility when combined with Form Item component
+
+### Fixed
+- Keyboard accessibility for Dropdown component now working as intended
+- `LeadingContent` and `TrailingContent` properties on Input component should no longer have margin-bottom
+- Icon in Dropdown component will now flip when dropdown is open vs. closed
+- Table sorting is working properly again
+
 ## [1.13.0] - 2023-08-01
 
 ### Added

@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.14.0] - 2023-08-30
+
+### Added
+- New [Side Menu Heading](https://ui-components.alberta.ca/?path=/docs/components-sidemenu--section-headings) component added to Side Menu component
+- New [description](https://ui-components.alberta.ca/?path=/docs/components-radio--description) property added to Radio component
+- New [description](https://alpha.ui-components.alberta.ca/?path=/docs/components-checkbox--description) property added to Checkbox component
+- Added `filterable` property to Dropdown component which turns it into a Combobox
+- Added `arialabelledby` property to Dropdown, Form Item, and Input components for increased accessibility when combined with Form Item component
+
+### Fixes
+- No `children` errors should exist when using the latest version of React
+- `label` property no longer required for Form Item component
+
 ## [4.13.0] - 2023-08-01
 
 ### Added
