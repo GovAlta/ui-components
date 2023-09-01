@@ -30,13 +30,13 @@ jobs:
         with:
           main-branch-name: alpha
       - name: Lint
-        run: npx nx affected --target=lint --base=${{ steps.last_successful_commit.outputs.base }}
+        run: npx nx run-many --target=lint --all
       - name: Test
-        run: npx nx affected --target=test --base=${{ steps.last_successful_commit.outputs.base }}
+        run: npx nx run-many --target=test --all
       - name: Build
         run: |
-          npx nx affected --target=build --base=${{ steps.last_successful_commit.outputs.base }} --prod --with-deps
-          npx nx affected --target=post --base=${{ steps.last_successful_commit.outputs.base }}
+          npx nx run-many --target=build --all --prod --with-deps
+          npx nx run-many --target=post --all
       - name: Update VsCode documentation
         run: npm run build:vscode-doc
       - name: Build Storybooks
