@@ -44,6 +44,7 @@
 
     if (isTabbable) return node;
     if (element["disabled"]) return null;
+    if (element.tabIndex < 0 || element.getAttribute?.("tabindex") === "-1") return null;
 
     switch (element.nodeName) {
       case 'A': {
