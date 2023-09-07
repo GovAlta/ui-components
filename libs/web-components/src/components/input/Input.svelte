@@ -111,6 +111,7 @@
       composed: true,
       detail: { name, value: input.value } }));
   }
+
   function onBlur(e: Event){
     const input = e.target as HTMLInputElement;
     input.dispatchEvent(new CustomEvent("_blur", {
@@ -140,27 +141,21 @@
     }
   });
 
+
 </script>
 
 <!-- HTML -->
 
 <div
   class="container"
-  style={`
-    ${calculateMargin(mt, mr, mb, ml)};
-    --width: ${width};
-  `}
+  style={`--width: ${width};${calculateMargin(mt, mr, mb, ml)}`}
   bind:this={_rootEL}
 >
   <div
-    class={`
-      goa-input
-      ${isDisabled ? "goa-input--disabled" : ""}
-      variant--${variant}
-      type--${type}
-      ${_leadingContentSlot ? "goa-input-leading-content": ""}
-      ${_trailingContentSlot ? "goa-input-trailing-content": ""}
-    `}
+    class="goa-input variant--{variant} type--{type}"
+    class:input--disabled={isDisabled}
+    class:input-leading-content={_leadingContentSlot}
+    class:input-trailing-content={_trailingContentSlot}
     class:error={isError}
   >
     {#if prefix}
@@ -168,6 +163,7 @@
         {prefix}
       </div>
     {/if}
+
     <div class="leading-content">
       <slot name="leadingContent" />
     </div>
@@ -182,11 +178,9 @@
 
     <input
       bind:this={inputEl}
-      class={`
-        input--${variant}
-        ${_leadingContentSlot && !isDisabled ? "input-leading-content": ""}
-        ${_trailingContentSlot && !isDisabled ? "input-trailing-content": ""}
-      `}
+      class="input--{variant}"
+      class:input-leading-content={_leadingContentSlot && !isDisabled}
+      class:input-trailing-content={_trailingContentSlot && !isDisabled}
       style={`--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`}
       readonly={isReadonly}
       disabled={isDisabled}
