@@ -1,5 +1,8 @@
 import "@abgov/web-components";
 
+export * from "./lib/date-picker/date-picker";
+export * from "./lib/calendar/calendar";
+
 export * from "./lib/side-menu-group/side-menu-group";
 export * from "./lib/side-menu-heading/side-menu-heading";
 export * from "./lib/side-menu/side-menu";
