@@ -18,8 +18,11 @@
   export let padded: string = "true";
   // provides control to where the popover content is positioned
   export let position: "above" | "below" | "auto" = "auto";
-
+  // ajust positioning when popover component is contained within a relative positioned parent
   export let relative: string = "false";
+
+  export let autoclose: string = "false"
+
 
   // margins
   export let mt: Spacing = null;
@@ -53,14 +56,15 @@
   let _popoverEl: HTMLElement;
   let _focusTrapEl: HTMLElement;
   let _initFocusedEl: HTMLElement;
+  let _sectionHeight: number;
 
-  let _sectionHeight;
   // Reactive
 
   $: _padded = toBoolean(padded);
   $: _open = toBoolean(open);
   $: _disabled = toBoolean(disabled);
   $: _relative = toBoolean(relative);
+  $: _autoClose = toBoolean(autoclose);
 
   $: (async () => _open && await setPopoverPosition())()
   $: (async () => _sectionHeight && await setPopoverPosition())()
@@ -119,10 +123,6 @@
   // targetEl eventing binding from "hearing" the events
   function onFocusTrapEvent(e: KeyboardEvent) {
     switch (e.key) {
-      case "Enter":
-        // setTimeout allows the url to change before closing
-        setTimeout(closePopover, 1)
-        break;
       case "Escape":
         closePopover();
         break;
