@@ -1,14 +1,13 @@
 import "@testing-library/jest-dom";
 import { render, cleanup } from "@testing-library/svelte";
-import GoAFormItem from "./FormItem.svelte"
+import GoAFormItem from "./FormItem.svelte";
 
 afterEach(cleanup);
 
 describe("GoA FormItem", () => {
-
   it("should render with no params", async () => {
-    const result = render(GoAFormItem);
-    const el = result.container.querySelector(".goa-form-item");
+    const result = render(GoAFormItem, { testid: "foo" });
+    const el = result.queryByTestId("foo");
 
     const label = el.querySelector(".label");
     expect(label).toBeFalsy();
@@ -25,9 +24,10 @@ describe("GoA FormItem", () => {
 
   it("should not show any requirement text for a field when requirement is not set", async () => {
     const result = render(GoAFormItem, {
-      label: "Credit Card Number"
+      testid: "foo",
+      label: "Credit Card Number",
     });
-    const el = result.container.querySelector(".goa-form-item");
+    const el = result.queryByTestId("foo");
 
     const label = el.querySelector(".label");
     expect(label).toBeTruthy();
@@ -44,10 +44,11 @@ describe("GoA FormItem", () => {
 
   it("should show optional text for a field when requirement set to optional", async () => {
     const result = render(GoAFormItem, {
+      testid: "foo",
       label: "Credit Card Number",
-      requirement: "optional"
+      requirement: "optional",
     });
-    const el = result.container.querySelector(".goa-form-item");
+    const el = result.queryByTestId("foo");
 
     const label = el.querySelector(".label");
     expect(label).toBeTruthy();
@@ -62,13 +63,13 @@ describe("GoA FormItem", () => {
     expect(errMsg).toBeFalsy();
   });
 
-
   it("should show required text for a field when requirement set to required", async () => {
     const result = render(GoAFormItem, {
+      testid: "foo",
       label: "Credit Card Number",
-      requirement: "required"
+      requirement: "required",
     });
-    const el = result.container.querySelector(".goa-form-item");
+    const el = result.queryByTestId("foo");
 
     const label = el.querySelector(".label");
     expect(label).toBeTruthy();
@@ -89,7 +90,7 @@ describe("GoA FormItem", () => {
       helptext: "the helptext",
       requirement: "optional",
       error: "the error",
-      id: "labelId"
+      id: "labelId",
     });
 
     const label = document.querySelector(".label");
@@ -127,7 +128,7 @@ describe("GoA FormItem", () => {
 
     render(GoAFormItem, {
       label: "Credit Card Number",
-      requirement: "requireddddddddd"
+      requirement: "requireddddddddd",
     });
 
     const label = document.querySelector(".label");
