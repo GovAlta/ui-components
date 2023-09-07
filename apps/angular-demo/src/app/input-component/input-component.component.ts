@@ -22,6 +22,8 @@ export class InputComponentComponent implements OnInit {
   minDate = format(this.date, "yyyy-MM-dd");
   maxDate = format(this.getDateWithMonthOffset(1), "yyyy-MM-dd");
 
+  reactiveDate2FormCtrl = new FormControl(new Date());
+
   wcVal = "event bound";
   tempDrivenVal = "template bound";
   reactiveFormCtrl = new FormControl("reactive form");

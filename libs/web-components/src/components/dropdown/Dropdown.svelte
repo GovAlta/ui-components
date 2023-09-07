@@ -49,7 +49,7 @@
   let _inputValue: string = "";
   let _isMenuVisible = false;
   let _highlightedIndex: number = -1; // keep track highlighted option, for arrow up/down
-  let _computedWidth: string;
+  let _width: string;
   let _selectedOption = undefined; // to keep track if value is matched to combobox option
   let _previousSelectedValue = ""; // to keep track if value is changed from previously selected value - for clear button
   let _inputWidth: string;
@@ -57,21 +57,19 @@
   let _el: HTMLElement;
   let _menuEl: HTMLElement;
   let _selectEl: HTMLSelectElement;
-  let _popOverEl: HTMLElement;
   let _inputEl: HTMLInputElement;
 
   // Reactive statement
 
   $: if (_el) {
-      _values = parseValues(value);
-      _options = getOptions();
-      if (!_native) {
-        _computedWidth = getCustomDropdownWidth(_options);
-      }
-      if (_options.length) {
-        // Keep track of initialized value
-        updateSelectedValue(value);
-      }
+    _values = parseValues(value);
+    _options = getOptions();
+    if (!_native) {
+      _width = width || getCustomDropdownWidth(_options);
+    }
+    if (_options.length) {
+      updateSelectedValue(value);
+    }
   }
 
   $: if(_inputEl && _options.length) {
@@ -122,22 +120,25 @@
   }
 
   // compute the required width to enure all children fit
-  function getCustomDropdownWidth(options: Option[]) {
-    let width: string;
-    let maxCount = 0;
+  function getCustomDropdownWidth(options: Option[]): string {
+    // set width to longest item
+    const optionsWidth = options
+      .map((option: Option) => {
+        const label = `${option.label}` || `${option.value}` || "";
+        return label.length;
+      })
+      .sort((a: number, b:number) => a > b ? 1 : -1)
+      .pop();
 
-    if (options.length === 0 && placeholder !== "") {
-      return `${placeholder.length + 12}ch`;
+    // longest one defines the width
+    let maxWidth = Math.max(optionsWidth, placeholder.length) + 8;
+
+    // compensate for icon width
+    if (leadingicon) {
+      maxWidth += 2;
     }
 
-    options.forEach((option: Option) => {
-      const label = option.label || option.value || "";
-      if (!width && maxCount < label.length) {
-        maxCount = label.length;
-        width = `${Math.max(20, maxCount + 12)}ch`;
-      }
-    });
-    return width;
+    return `${maxWidth}ch`;
   }
 
   function isOptionInView(node: HTMLLIElement): boolean {
@@ -272,9 +273,8 @@
      */
     if (query.endsWith(" ") || queryWords.length > 1) {
       if (queryWords.length !== filterWords.length) return false;
-      const isLastWord = (word: string, index: number, array: string[]) => index === array.length - 1;
       return queryWords.every((word, index) =>
-        isLastWord(word, index, queryWords)
+        index === queryWords.length - 1
           ? filterWords[index].startsWith(word) // last word should be prefix match: american sa ==> american samoa
           : filterWords[index] === word // other words should be exact match: b c should not match bc
       );
@@ -537,7 +537,7 @@
   class:dropdown-native={_native}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
-    --width: ${width || _computedWidth}
+    --width: ${_width}
   `}
   bind:this={_el}
 >
@@ -569,8 +569,7 @@
       {relative}
       open={_isMenuVisible}
       padded="false"
-      width={width || _computedWidth}
-      bind:this={_popOverEl}
+      width={_width}
       tabindex="-1"
       on:_open={showMenu}
       on:_close={closeMenu}
