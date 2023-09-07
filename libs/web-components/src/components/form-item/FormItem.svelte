@@ -48,7 +48,6 @@
 <div
   data-testid={testid}
   style={calculateMargin(mt, mr, mb, ml)}
-  class="goa-form-item"
 >
   {#if label}
     <div class={`label ${labelsize}`} id={id}>
@@ -88,7 +87,7 @@
     font-weight: var(--goa-font-weight-bold);
     color: var(--goa-color-text-default);
     font-size: var(--goa-font-size-4);
-    padding: 0.5rem 0;
+    padding-bottom: 0.5rem;
   }
 
   .label.large {
