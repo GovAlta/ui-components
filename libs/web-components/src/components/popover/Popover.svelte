@@ -238,6 +238,7 @@
     ${cssVar("--offset-right", hoffset)}
     ${cssVar("--focus-border-width", focusborderwidth)}
     ${cssVar("--border-radius", borderradius)}
+    ${cssVar("width", "100%")}
   `}
   >
   <div class="popover-target"
@@ -289,7 +290,6 @@
   }
 
   .popover-target {
-    width: fit-content;
     cursor: pointer;
   }
 
