@@ -52,6 +52,7 @@
   let _computedWidth: string;
   let _selectedOption = undefined; // to keep track if value is matched to combobox option
   let _previousSelectedValue = ""; // to keep track if value is changed from previously selected value - for clear button
+  let _inputWidth: string;
 
   let _el: HTMLElement;
   let _menuEl: HTMLElement;
@@ -72,6 +73,11 @@
         updateSelectedValue(value);
       }
   }
+
+  $: if(_inputEl && _options.length) {
+    _inputWidth = `${_inputEl.getBoundingClientRect().width}px`;
+  }
+
 
   afterUpdate(() => {
     if (_options.length === 0) return;
@@ -568,6 +574,7 @@
       tabindex="-1"
       on:_open={showMenu}
       on:_close={closeMenu}
+      maxwidth={_inputWidth}
     >
       <div
         slot="target"
