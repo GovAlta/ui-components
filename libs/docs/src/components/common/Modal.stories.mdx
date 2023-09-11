@@ -39,8 +39,15 @@ import { useState } from "react";
     description="Type of Modal"
   />
   <Prop
+    name="calloutvariant"
+    type="information | important | emergency | success | event"
+    lang="angular"
+    description="Define the context and colour of the callout modal. It is required when type is set to callout."
+  />
+  <Prop
     name="calloutVariant"
     type="information | important | emergency | success | event"
+    lang="react"
     description="Define the context and colour of the callout modal. It is required when type is set to callout."
   />
   <Prop
@@ -645,7 +652,7 @@ export const CalloutVariantTemplate = (args) => {
         <goa-button (_click)="openModal('emergency')">Emergency Callout</goa-button>
         <goa-button (_click)="openModal('event')">Event Callout</goa-button>
       </goa-button-group>
-      <goa-modal id="modal" type="callout" [open]="isOpen" [calloutVariant]="calloutVariant" heading="Do you agree?">
+      <goa-modal id="modal" type="callout" [open]="isOpen" [calloutvariant]="calloutVariant" heading="Do you agree?">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati id molestiae,
           natus dicta, eaque qui iusto similique, libero explicabo eligendi eius laboriosam!
