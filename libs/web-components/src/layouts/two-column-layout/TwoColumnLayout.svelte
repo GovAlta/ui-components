@@ -1,8 +1,6 @@
 <svelte:options tag="goa-two-column-layout" />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
-
   export let navcolumnwidth: string = "";  // blank values falls back to the css var
   export let maxcontentwidth: string = ""; 
 
@@ -47,8 +45,7 @@
     padding: 0.5rem 0;
   }
 
-
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .page {
       gap: 2rem;
     }
@@ -62,6 +59,8 @@
 
     .nav {
       padding: 0 2rem;
+      transform: translateX(0);
+      flex: 0 0 var(--nav-column-width);
     }
 
     main {
@@ -69,19 +68,9 @@
     }
   }
 
-  @media (min-width: 1300px) {
-    .content {
-    }
-
+  @media (--desktop) {
     main {
       padding-right: 4.5rem;
-    }
-  }
-
-  @media (min-width: 640px) {
-    .nav {
-      transform: translateX(0);
-      flex: 0 0 var(--nav-column-width);
     }
   }
 

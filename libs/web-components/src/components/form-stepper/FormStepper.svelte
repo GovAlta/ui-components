@@ -179,7 +179,7 @@
     background: var(--goa-color-interactive-default);
   }
 
-  @media (max-width: 639px) {
+  @media (--mobile) {
     progress.horizontal {
       display: none;
     }

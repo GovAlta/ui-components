@@ -5,8 +5,11 @@ import summary from "rollup-plugin-summary";
 import preprocess from "svelte-preprocess";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
-import css from 'rollup-plugin-css-only';
-import {replaceCodePlugin} from 'vite-plugin-replace';
+import css from "rollup-plugin-css-only";
+import { replaceCodePlugin } from "vite-plugin-replace";
+import postcssGlobalData from "@csstools/postcss-global-data";
+import autoprefixer from "autoprefixer";
+import postcssCustomMedia from "postcss-custom-media";
 
 export default {
   input: "src/index.ts",
@@ -20,28 +23,39 @@ export default {
     svelte({
       include: /\.svelte$/,
       exclude: /^(\.test)\.svelte$/,
-      preprocess: preprocess({ sourceMap: true }),
+      preprocess: preprocess({
+        sourceMap: true,
+        postcss: {
+          plugins: [
+            postcssGlobalData({
+              files: ["./src/assets/css/breakpoints.css"],
+            }),
+            autoprefixer(),
+            postcssCustomMedia(),
+          ],
+        },
+      }),
       settings: {
-        'svelte3/compiler-options': {
+        "svelte3/compiler-options": {
           generate: false,
-          customElement: true
+          customElement: true,
         },
       },
       compilerOptions: {
         customElement: true,
       },
     }),
-		css({output: 'index.css' }),
+    css({ output: "index.css" }),
     resolve(),
-    // terser(),
+    terser(),
     summary(),
     replaceCodePlugin({
       replacements: [
-          {
-              from: /:global\(([\[\]\(\)\-\.\:\*\w]+)\)/g,
-              to: "$1",
-          }
-      ]
+        {
+          from: /:global\(([\[\]\(\)\-\.\:\*\w]+)\)/g,
+          to: "$1",
+        },
+      ],
     }),
   ],
   watch: {

@@ -34,17 +34,23 @@
   }
 
   .content {
-    padding: 2rem 1rem;
     margin: 0 auto;
     width: min(var(--max-content-width), 100%);
   }
-  @media (min-width: 640px) {
+
+  @media (--mobile) {
+    .content {
+      padding: 2rem 1rem;
+    }
+  }
+
+  @media (--tablet) {
     .content {
       padding: 2rem 2rem;
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (--desktop) {
     .content {
       padding: 2rem 4.5rem;
     }
@@ -82,7 +88,7 @@
     width: 100%;
   }
 
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .meta-section {
       flex-direction: row;
       gap: 2rem;
@@ -104,7 +110,7 @@
     width: unset;
   }
 
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .abgov.with-meta-links {
       align-items: flex-end;
     }

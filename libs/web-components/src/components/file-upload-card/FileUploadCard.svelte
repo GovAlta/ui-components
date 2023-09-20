@@ -143,7 +143,7 @@
     border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
   }
 
-  @media (min-width: 480px) {
+  @media not (--mobile) {
     .root {
       grid-template-columns: 38px 1fr auto;
       grid-template-rows: auto;

@@ -1,6 +1,25 @@
-export type Spacing = 
-  "none" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl" |
-  "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+export type Spacing =
+  | "none"
+  | "3xs"
+  | "2xs"
+  | "xs"
+  | "s"
+  | "m"
+  | "l"
+  | "xl"
+  | "2xl"
+  | "3xl"
+  | "4xl"
+  | "0"
+  | "1"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6"
+  | "7"
+  | "8"
+  | "9";
 
 const conversions = {
   "0": "none",
@@ -14,14 +33,14 @@ const conversions = {
   "8": "2xl",
   "9": "3xl",
   "10": "4xl",
-}
+};
 
 /**
  * Allow for 0-10 values to be used along side the existing Spacing values
  */
 function convertSpacing(size: Spacing): Spacing {
   if (!Number.isInteger(+size)) {
-    return size  
+    return size;
   }
   return conversions[size] || "";
 }
@@ -38,7 +57,12 @@ function convertSpacing(size: Spacing): Spacing {
  * // add the following style attribute to the root element
  * style={calculateMargin(mt, mr, mb, ml)}
  */
-export function calculateMargin(mt: Spacing, mr: Spacing, mb: Spacing, ml: Spacing) {
+export function calculateMargin(
+  mt: Spacing,
+  mr: Spacing,
+  mb: Spacing,
+  ml: Spacing,
+) {
   mt = convertSpacing(mt);
   mb = convertSpacing(mb);
   ml = convertSpacing(ml);
@@ -65,9 +89,17 @@ export function calculateMargin(mt: Spacing, mr: Spacing, mb: Spacing, ml: Spaci
  * </div
  *
  */
-export function injectCss(el: HTMLElement, rootSelector: string, css: Record<string, string | number>, media?: string) {
+export function injectCss(
+  el: HTMLElement,
+  rootSelector: string,
+  css: Record<string, string | number>,
+  media?: string,
+) {
+  if (!el) return;
   const style = document.createElement("style");
-  const _css = Object.entries(css).map(entry => `${entry[0]}: ${entry[1]};`).join(" ");
+  const _css = Object.entries(css)
+    .map((entry) => `${entry[0]}: ${entry[1]};`)
+    .join(" ");
   if (media) {
     style.innerHTML = `@media (${media}) { ${rootSelector} {${_css}} }`;
   } else {

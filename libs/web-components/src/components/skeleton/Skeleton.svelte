@@ -284,7 +284,7 @@
     width: 100%;
   }
 
-  @media (min-width: 480px) {
+  @media not (--mobile) {
     .card {
       max-width: var(--max-width);
     }

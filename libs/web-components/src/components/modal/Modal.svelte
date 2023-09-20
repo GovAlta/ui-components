@@ -281,7 +281,7 @@
     margin-bottom: var(--goa-space-l);
   }
 
-  @media (max-width: 640px) {
+  @media (--mobile) {
     .content {
       margin: var(--goa-space-l);
     }
@@ -300,17 +300,14 @@
     border: 1px solid var(--goa-color-greyscale-700);
   }
 
-  @media (min-width: 640px) {
-    .modal-pane {
-      max-width: var(--maxwidth);
-    }
-  }
-
   .modal-actions ::slotted(*) {
     padding: var(--goa-space-xl) 0 0;
   }
 
-  @media (max-width: 640px) {
+  @media (--mobile) {
+    .modal-pane {
+      max-width: var(--maxwidth);
+    }
     .modal-actions ::slotted(*) {
       padding: var(--goa-space-l) 0 0;
     }

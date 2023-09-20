@@ -64,7 +64,7 @@
     width: 100%;
   }
 
-  @media (min-width: 480px) {
+  @media not (--mobile) {
     .controls {
       flex-direction: row;
       justify-content: space-between;

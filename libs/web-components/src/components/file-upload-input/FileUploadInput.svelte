@@ -222,7 +222,7 @@
     cursor: pointer;
   }
 
-  @media (max-width: 640px) {
+  @media (--mobile) {
     .dragdrop {
       padding-top: 1.75rem;
     }
@@ -257,7 +257,7 @@
     gap: 0.5rem;
   }
 
-  @media (max-width: 640px) {
+  @media (--mobile) {
     .instructions {
       flex-direction: column;
     }

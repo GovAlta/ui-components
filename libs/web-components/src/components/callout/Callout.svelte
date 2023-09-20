@@ -6,6 +6,8 @@
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
   import { typeValidator } from "../../common/utils";
+  import { MOBILE_BP } from "../../common/breakpoints";
+
 
   // Validator
   const [Types, validateType] = typeValidator(
@@ -33,7 +35,7 @@
   let screenSize = 0;
   let iconSize = "medium";
 
-  $: isMediumCallout = screenSize < 640 || size === "medium";
+  $: isMediumCallout = screenSize < MOBILE_BP || size === "medium";
 
   $: iconType =
     type === "emergency"

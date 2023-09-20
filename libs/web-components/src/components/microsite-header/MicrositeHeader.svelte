@@ -94,7 +94,7 @@
     margin: 0 auto;
   }
 
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .goa-official-site-header {
       padding: 0.25rem 2rem;
     }
@@ -103,7 +103,7 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (--desktop) {
     .goa-official-site-header {
       padding: 0.25rem 4.5rem;
     }

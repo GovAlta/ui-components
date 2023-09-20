@@ -98,7 +98,7 @@
     position: relative;
     width: 100%;
   }
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .container {
       max-width: var(--width);
     }
@@ -119,7 +119,7 @@
     resize: vertical;
   }
 
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .goa-textarea {
       min-width: 0;
       width: var(--width);

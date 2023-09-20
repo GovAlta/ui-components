@@ -24,14 +24,12 @@
 </script>
 
 <div class="scroll">
-  <div class="inner">
-  <goa-form-stepper ml="s" mr="s" {step}>
+  <goa-form-stepper {step}>
     <goa-form-step text="Personal Info" status={state[0]} />
     <goa-form-step text="Payment Details" status={state[1]} />
     <goa-form-step text="Other" status={state[2]} />
     <goa-form-step text="Other 2" />
   </goa-form-stepper>
-  </div>
 </div>
 <goa-pages current={step}>
   <section>
@@ -56,15 +54,5 @@
   .scroll {
     overflow-x: auto;
     padding: 1rem;
-  }
-
-  .scroll .inner {
-    width: 1600px;
-  }
-
-  @media (max-width: 640px) {
-    .scroll .inner {
-      width: unset; 
-    }
   }
 </style>

@@ -15,7 +15,7 @@
     gap: 0 0;
   }
 
-  @media (min-width: 640px) {
+  @media (--mobile) {
     .page {
       grid-template-columns: 300px auto;
       grid-template-rows: min-content auto min-content;
