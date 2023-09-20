@@ -40,10 +40,6 @@
     <goa-dropdown-item value="ping" label="Pink"></goa-dropdown-item>
   </goa-dropdown>
   
-<div style="height: 200vh">
-
-</div>
-
 <button on:click={() => open = !open}>
   Show
 </button>

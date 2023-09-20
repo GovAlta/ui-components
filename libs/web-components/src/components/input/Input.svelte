@@ -255,7 +255,7 @@
     display: inline-block;
   }
 
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .container {
       width: var(--width);
     }

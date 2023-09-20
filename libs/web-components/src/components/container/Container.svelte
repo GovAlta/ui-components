@@ -162,7 +162,7 @@
   }
 
   /* Override padding in small screens to the compact value */
-  @media screen and (max-width: 480px) {
+  @media (--mobile) {
     .padding--relaxed header {
       padding: 0 1rem;
     }

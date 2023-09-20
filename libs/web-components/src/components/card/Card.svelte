@@ -47,7 +47,7 @@
     overflow: hidden;
     height: var(--height);
   }
-  @media (min-width: 320px) {
+  @media not (--mobile) {
     .card {
       margin: 0 auto;
     }

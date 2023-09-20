@@ -54,12 +54,12 @@
     margin: 0 auto;
     padding: 0 1rem;
   }
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .page-content {
       padding: 0 2rem;
     }
   }
-  @media (min-width: 1024px) {
+  @media (--desktop) {
     .page-content {
       padding: 0 4.5rem;
     }

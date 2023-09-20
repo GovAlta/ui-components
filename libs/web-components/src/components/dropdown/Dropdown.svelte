@@ -725,7 +725,7 @@
   {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .dropdown-input-group {
       width: var(--width);
     }

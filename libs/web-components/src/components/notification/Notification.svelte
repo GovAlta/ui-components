@@ -83,13 +83,13 @@
     display: flex;
   }
 
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .notification {
       padding: var(--goa-space-l) var(--goa-space-xl);
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (--desktop) {
     .notification {
       padding: var(--goa-space-l) calc(3 * var(--goa-space-l));
     }

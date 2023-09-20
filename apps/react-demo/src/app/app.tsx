@@ -1,6 +1,7 @@
 import {
   GoAAppFooter,
   GoAAppHeader,
+  GoAAppHeaderMenu,
   GoAMicrositeHeader,
   GoASideMenu,
   GoASideMenuGroup,
@@ -14,7 +15,15 @@ export default function App() {
       header={
         <>
           <GoAMicrositeHeader type="alpha" version="UAT"></GoAMicrositeHeader>
-          <GoAAppHeader url="#" heading="Design Systems"></GoAAppHeader>
+          <GoAAppHeader url="#" heading="Design Systems">
+            <a href="#">Support</a>
+            <GoAAppHeaderMenu heading="Tickets" leadingIcon="ticket">
+              <a href="#">Cases</a>
+              <a href="#">Payments</a>
+              <a href="#">Outstanding</a>
+            </GoAAppHeaderMenu>
+            <a href="#" className="interactive">Sign in</a>
+          </GoAAppHeader>
         </>
       }
       footer={<GoAAppFooter />}

@@ -80,7 +80,7 @@
     padding: 0.5rem 0;
   }
 
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .page {
       gap: 2rem;
     }
@@ -108,12 +108,7 @@
     }
   }
 
-
-
-  @media (min-width: 1300px) {
-    .content {
-    }
-
+  @media (--desktop) {
     main {
       padding-right: 4.5rem;
     }

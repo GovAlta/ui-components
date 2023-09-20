@@ -141,7 +141,7 @@
     margin-top: 0.75rem;
   }
 
-  @media (max-width: 639px) {
+  @media (--mobile) {
     [role="listitem"] {
       flex-direction: row;
       align-items: center;

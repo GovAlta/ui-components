@@ -1,4 +1,5 @@
 {
   "singleQuote": false,
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "plugins": ["prettier-plugin-svelte"]
 }

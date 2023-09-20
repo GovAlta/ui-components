@@ -195,7 +195,7 @@
   }
 
 
-  @media (max-width: 640px) {
+  @media (--mobile) {
     summary {
       align-items: flex-start;
     }

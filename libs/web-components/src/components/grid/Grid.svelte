@@ -46,7 +46,7 @@
     gap: var(--gap);
   }
 
-  @media (min-width: 640px) {
+  @media not (--mobile) {
     .goa-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(var(--min-child-width), 1fr));

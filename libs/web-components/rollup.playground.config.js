@@ -5,6 +5,9 @@ import livereload from "rollup-plugin-livereload";
 import css from "rollup-plugin-css-only";
 import preprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
+import postcssGlobalData from "@csstools/postcss-global-data";
+import autoprefixer from "autoprefixer";
+import postcssCustomMedia from "postcss-custom-media";
 
 function serve() {
   let server;
@@ -16,10 +19,14 @@ function serve() {
   return {
     writeBundle() {
       if (server) return;
-      server = require("child_process").spawn("npm", ["run", "start", "--", "--dev"], {
-        stdio: ["ignore", "inherit", "inherit"],
-        shell: true,
-      });
+      server = require("child_process").spawn(
+        "npm",
+        ["run", "start", "--", "--dev"],
+        {
+          stdio: ["ignore", "inherit", "inherit"],
+          shell: true,
+        },
+      );
 
       process.on("SIGTERM", toExit);
       process.on("exit", toExit);
@@ -37,11 +44,22 @@ export default {
   },
   plugins: [
     commonjs(),
-    typescript({ sourceMap: true}),
+    typescript({ sourceMap: true }),
     svelte({
       include: /\.svelte$/,
       exclude: /(App)\.svelte/,
-      preprocess: preprocess({ sourceMap: true }),
+      preprocess: preprocess({
+        sourceMap: true,
+        postcss: {
+          plugins: [
+            postcssGlobalData({
+              files: ["./src/assets/css/breakpoints.css"],
+            }),
+            autoprefixer(),
+            postcssCustomMedia(),
+          ],
+        },
+      }),
       compilerOptions: {
         dev: true,
         customElement: true,
@@ -62,7 +80,7 @@ export default {
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
       browser: true,
-      dedupe: ["svelte"],
+      // dedupe: ["svelte"],
     }),
 
     serve(),
@@ -72,4 +90,3 @@ export default {
     clearScreen: false,
   },
 };
-

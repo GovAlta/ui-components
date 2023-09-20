@@ -1,14 +1,14 @@
-const sveltePreprocess = require('svelte-preprocess');
+const sveltePreprocess = require("svelte-preprocess");
 
 module.exports = {
   settings: {
-    'svelte3/compiler-options': {
+    "svelte3/compiler-options": {
       generate: false,
-      customElement: true
+      customElement: true,
     },
   },
   compilerOptions: {
-    customElement: true
+    customElement: true,
   },
   preprocess: sveltePreprocess(),
 };

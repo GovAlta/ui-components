@@ -83,22 +83,24 @@
     padding-left: 0;
   }
 
-  @media (min-width: 720px) {
+  @media not (--mobile) {
     .links {
-      display: var(--narrow-display-type);
       list-style-type: none;
       padding-left: 0;
       flex-direction: column;
+    }
+  }
+
+  @media (--tablet) {
+    .links {
+      display: var(--narrow-display-type);
       column-count: var(--narrow-column-count);
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (--desktop) {
     .links {
       display: var(--wide-display-type);
-      list-style-type: none;
-      padding-left: 0;
-      flex-direction: column;
       column-count: var(--wide-column-count);
     }
   }

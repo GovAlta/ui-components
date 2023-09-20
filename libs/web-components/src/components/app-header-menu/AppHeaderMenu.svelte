@@ -5,6 +5,7 @@
   import { onMount, tick } from "svelte";
   import { validateRequired } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
+  import { TABLET_BP } from "../../common/breakpoints";
 
   // Required
   export let heading: string;
@@ -28,7 +29,7 @@
   let _open = false;
 
   // Reactive
-  $: _desktop = _innerWidth >= 960;
+  $: _desktop = _innerWidth >= TABLET_BP;
 
   // call the method when window changes to desktop size
   $: _desktop && bindToPopoverCloseEvent()
@@ -207,11 +208,7 @@
     color: var(--goa-color-interactive-default);
   }
 
-  /* ============= */
-  /* Mobile/Tablet */
-  /* ============= */
-
-  @media (max-width: 959px) {
+  @media not (--desktop) {
     button {
       box-shadow: inset 0 1px 0 0 var(--goa-color-greyscale-200);
       height: 3rem;
@@ -228,12 +225,8 @@
       flex: 0 0 auto;
     }
   }
-
-  /* ============= */
-  /* Desktop       */
-  /* ============= */
   
-  @media (min-width: 960px) {
+  @media (--desktop) {
     button[slot=target] {
       font-weight: var(--goa-font-weight-bold);
       /* ensures that the button spans 100% of the height of the desktop app header bar */

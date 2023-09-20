@@ -5,6 +5,7 @@
 <!-- Script -->
 <script lang="ts">
   import { onMount, tick } from "svelte";
+  import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
 
   // optional
   export let heading: string = "";
@@ -24,9 +25,9 @@
   
   // Reactive
 
-  $: _mobile = _windowWidth < 480;
-  $: _tablet = _windowWidth >= 480 && _windowWidth < 960;
-  $: _desktop = _windowWidth >= 960;
+  $: _mobile = _windowWidth < MOBILE_BP;
+  $: _tablet = _windowWidth >= MOBILE_BP && _windowWidth < TABLET_BP;
+  $: _desktop = _windowWidth >= TABLET_BP;
   $: (async () => _showToggleMenu = !_desktop && (await hasChildren()))()
 
   // Functions
@@ -282,10 +283,7 @@
     color: var(--goa-color-interactive-default);
   }
 
-  /* ============ */
-  /* Mobile       */
-  /* ============ */
-  @media (max-width: 479px) {
+  @media (--mobile) {
     .image-desktop {
       display: none;
     }
@@ -297,7 +295,7 @@
     }
   }
 
-  @media (min-width: 480px) {
+  @media not (--mobile) {
     *, ::slotted(*) {
       font: var(--goa-typography-body-m);
     } 
@@ -315,11 +313,7 @@
     }
   }
 
-  /* ============ */
-  /* Tablet       */
-  /* ============ */
-
-  @media (min-width: 480px) and (max-width: 959px) {
+  @media (--tablet) {
     .image-desktop {
       display: block;
     }
@@ -327,12 +321,8 @@
       display: none;
     }
   }
-
-  /* ============= */
-  /* Desktop       */
-  /* ============= */
   
-  @media (min-width: 960px) {  
+  @media (--desktop) {  
     .image-desktop {
       display: block;
     }
