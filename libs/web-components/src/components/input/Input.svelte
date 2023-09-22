@@ -46,7 +46,7 @@
   export let arialabelledby: string = null;
   export let min: string = "";
   export let max: string = "";
-  export let step: number = 1;
+  export let step: number = 60;
   export let prefix: string = "";
   export let suffix: string = "";
   export let debounce: number = 0;
