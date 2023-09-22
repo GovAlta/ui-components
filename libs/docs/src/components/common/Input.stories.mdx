@@ -780,7 +780,7 @@ export const DateTemplate = () => {
 #### Time
 
 export const TimeComponent = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState < string > "12:12";
   return <GoAInputTime name="timeExample" value={date} step={1} />;
 };
 
@@ -793,7 +793,7 @@ export const TimeComponent = () => {
         import { format } from "date-fns";
         import { FormControl } from "@angular/forms";
         export class MyComponent {
-          time = format(new Date(), "HH:mm:ss");
+          time = "12:12";
           reactiveTimeFormCtrl = new FormControl(this.time);
         }
       `}
@@ -817,11 +817,11 @@ export const TimeComponent = () => {
   <Tab label="React">
     <CodeSnippet
       code={`
-        const [date, setDate] = useState(new Date());
+        const [time, setTime] = useState<string>("12:12");
         return (
           <GoAInputTime
             name="timeExample"
-            value={date}
+            value={time}
             step={1}
           />
         )
