@@ -780,7 +780,7 @@ export const DateTemplate = () => {
 #### Time
 
 export const TimeComponent = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("12:12");
   return <GoAInputTime name="timeExample" value={date} step={1} />;
 };
 
@@ -793,7 +793,7 @@ export const TimeComponent = () => {
         import { format } from "date-fns";
         import { FormControl } from "@angular/forms";
         export class MyComponent {
-          time = format(new Date(), "HH:mm:ss");
+          time = "12:12";
           reactiveTimeFormCtrl = new FormControl(this.time);
         }
       `}
@@ -817,11 +817,11 @@ export const TimeComponent = () => {
   <Tab label="React">
     <CodeSnippet
       code={`
-        const [date, setDate] = useState(new Date());
+        const [time, setTime] = useState<string>("12:12");
         return (
           <GoAInputTime
             name="timeExample"
-            value={date}
+            value={time}
             step={1}
           />
         )
@@ -899,7 +899,7 @@ export const TimeWithSecondsExample = () => {
 
 <Story name="Time with seconds">{TimeWithSecondsExample.bind({})}</Story>
 
-When working with the `type=time` step controls the second step value (defaults to 60)
+When working with `type=time` the `step` property controls the seconds step value (set to 60 if you don't want seconds)
 
 <Tabs>
   <Tab label="Angular">
