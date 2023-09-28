@@ -24,22 +24,22 @@
 
   // private
   let pageDropdownEl: HTMLElement = null;
-  let hiddenEl: HTMLInputElement = null;  // needed to allow the inputEl's event to be cancelled
+  let hiddenEl: HTMLInputElement = null; // needed to allow the inputEl's event to be cancelled
+  $: pageDropdownEl && pageDropdownEl.addEventListener('_change', handlePageNumber); // needed to allow the inputEl's event to be cancelled
 
   // hooks
   onMount(async () => {
     await tick()
     validateRequired("GoAPagination", { itemcount, pagenumber })
     validateVariant(variant)
-
-    // prevent event propagation
-    pageDropdownEl && pageDropdownEl.addEventListener("_change", (e: CustomEvent) => {
-      const page = Number.parseInt(e.detail.value)
-      e.stopPropagation();
-
-      hiddenEl.dispatchEvent(new CustomEvent("_change", {composed: true, bubbles: true, detail: { page }}))
-    })
   })
+
+  function handlePageNumber(e) {
+    const page = Number.parseInt(e.detail.value)
+    e.stopPropagation();
+
+    hiddenEl.dispatchEvent(new CustomEvent("_change", {composed: true, bubbles: true, detail: { page }}))
+  }
 
   // functions
   function goto(e: Event, offset: number) {
