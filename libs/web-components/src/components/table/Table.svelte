@@ -119,6 +119,10 @@
   :host {
     overflow-x: auto;
   }
+  .goatable {
+    width: 0;
+  }
+
   table {
     border-collapse: collapse;
   }
