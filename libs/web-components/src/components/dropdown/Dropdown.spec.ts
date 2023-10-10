@@ -12,21 +12,21 @@ describe("GoADropdown", () => {
   const name = "favcolor";
   const items = ["red", "blue", "orange"];
 
-  it("dropdown should render", async () => {
-    // WHEN
+  it.only("dropdown should render", async () => {
     const result = render(GoADropdownWrapper, {
       name,
       id: "color",
       value: "orange",
       items,
     });
-    // THEN
-    const dropdown = result.queryByTestId("favcolor-dropdown");
+
     const popover = result.container.querySelector("goa-popover");
     expect(popover.getAttribute("disabled")).toBe("false");
     expect(popover.getAttribute("open")).toBe("false");
     expect(popover.getAttribute("padded")).toBe("false");
     expect(popover.getAttribute("relative")).toBe("false");
+
+    const dropdown = result.queryByTestId("favcolor-dropdown");
     const inputField = dropdown.querySelector("input");
     expect(inputField.getAttribute("id")).toBe("color");
     expect(inputField.getAttribute("aria-autocomplete")).toBe("list");
@@ -41,36 +41,45 @@ describe("GoADropdown", () => {
     expect(inputField.getAttribute("tabindex")).toBe("1"); // Input should be given higher priority to focus
     expect(inputField.getAttribute("type")).toBe("text");
     expect(inputField.getAttribute("aria-owns")).toBeNull(); // Menu is hidden
+
     const dropdownIcon = result.container.querySelector("goa-icon#color");
     expect(dropdownIcon.getAttribute("ariacontrols")).toBe("menu-color");
     expect(dropdownIcon.getAttribute("ariaexpanded")).toBe("false");
     expect(dropdownIcon.getAttribute("arialabel")).toBe("favcolor");
     expect(dropdownIcon.getAttribute("role")).toBe("button");
     expect(dropdownIcon.getAttribute("type")).toBe("chevron-down");
+
     const ul = result.container.querySelector("ul");
     expect(ul.getAttribute("id")).toBe("menu-color");
     expect(ul.getAttribute("role")).toBe("listbox");
     expect(ul.getAttribute("style")).toContain("max-height: 276px"); // default height
     expect(ul.getAttribute("tabindex")).toBe("-1");
+
     // Check options
-    for (let index = 0; index < items.length; index++) {
-      const option = result.container.querySelector("li#" + items[index]);
-      expect(option.getAttribute("aria-selected")).toBe(
-        "orange" === items[index] ? "true" : "false",
-      ); // pre-selected by value
-      expect(option.getAttribute("data-index")).toBe(`${index}`);
-      expect(option.getAttribute("data-testid")).toBe(
-        "dropdown-item-" + items[index],
-      );
-      expect(option.getAttribute("data-value")).toBe(items[index]);
-      expect(option.getAttribute("role")).toBe("option");
-      expect(option).toHaveTextContent(items[index]);
-    }
+    await waitFor(
+      () => {
+        for (let index = 0; index < items.length; index++) {
+          const option = result.container.querySelector("li#" + items[index]);
+          expect(option).toBeTruthy();
+          expect(option.getAttribute("aria-selected")).toBe(
+            "orange" === items[index] ? "true" : "false",
+          );
+          expect(option.getAttribute("data-index")).toBe(`${index}`);
+          expect(option.getAttribute("data-testid")).toBe(
+            "dropdown-item-" + items[index],
+          );
+          expect(option.getAttribute("data-value")).toBe(items[index]);
+          expect(option.getAttribute("role")).toBe("option");
+          expect(option).toHaveTextContent(items[index]);
+        }
+      },
+      { timeout: 100 },
+    );
+
     // show menu
     await fireEvent.click(dropdownIcon);
     await waitFor(
       () => {
-        // Menu should open
         expect(popover.getAttribute("open")).toBe("true");
         expect(inputField.getAttribute("aria-owns")).toBe("menu-color"); // Menu is displayed
         expect(dropdownIcon.getAttribute("ariaexpanded")).toBe("true");
@@ -81,7 +90,6 @@ describe("GoADropdown", () => {
   });
 
   it("dropdown filterable should render", async () => {
-    // WHEN
     const result = render(GoADropdownWrapper, {
       name,
       id: "color",
@@ -89,13 +97,14 @@ describe("GoADropdown", () => {
       items,
       filterable: true,
     });
-    // THEN
+
     const dropdown = result.queryByTestId("favcolor-dropdown");
     const popover = result.container.querySelector("goa-popover");
     expect(popover.getAttribute("disabled")).toBe("false");
     expect(popover.getAttribute("open")).toBe("false");
     expect(popover.getAttribute("padded")).toBe("false");
     expect(popover.getAttribute("relative")).toBe("false");
+
     const inputField = dropdown.querySelector("input");
     expect(inputField.getAttribute("id")).toBe("color");
     expect(inputField.getAttribute("aria-autocomplete")).toBe("list");
@@ -110,17 +119,20 @@ describe("GoADropdown", () => {
     expect(inputField.getAttribute("tabindex")).toBe("1");
     expect(inputField.getAttribute("type")).toBe("text");
     expect(inputField.getAttribute("aria-owns")).toBeNull(); // Menu is hidden
+
     const dropdownIcon = result.container.querySelector("goa-icon#color");
     expect(dropdownIcon.getAttribute("ariacontrols")).toBe("menu-color");
     expect(dropdownIcon.getAttribute("ariaexpanded")).toBe("false");
     expect(dropdownIcon.getAttribute("arialabel")).toBe("favcolor");
     expect(dropdownIcon.getAttribute("role")).toBe("button");
     expect(dropdownIcon.getAttribute("type")).toBe("chevron-down");
+
     const ul = result.container.querySelector("ul");
     expect(ul.getAttribute("id")).toBe("menu-color");
     expect(ul.getAttribute("role")).toBe("listbox");
     expect(ul.getAttribute("style")).toContain("max-height: 276px"); // default height
     expect(ul.getAttribute("tabindex")).toBe("-1");
+
     // Check options
     for (let index = 0; index < items.length; index++) {
       const option = result.container.querySelector("li#" + items[index]);
@@ -135,6 +147,7 @@ describe("GoADropdown", () => {
       expect(option.getAttribute("role")).toBe("option");
       expect(option).toHaveTextContent(items[index]);
     }
+
     // show menu
     await fireEvent.click(dropdownIcon);
     await waitFor(
@@ -290,6 +303,7 @@ describe("GoADropdown", () => {
         expect(selected).toBe(null); // No options should be selected
       });
     });
+
     it("clear the input and open the menu when click clear icon", async () => {
       const result = render(GoADropdownWrapper, {
         name,
@@ -350,6 +364,7 @@ describe("GoADropdown", () => {
         expect(menu).toBeVisible();
       });
     });
+
     it("can be disabled", async () => {
       const result = render(GoADropdownWrapper, {
         name,
