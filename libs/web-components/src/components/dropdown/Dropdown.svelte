@@ -1,22 +1,29 @@
 <svelte:options tag="goa-dropdown"/>
 
 <script lang="ts">
-  import type {GoAIconType} from "../icon/Icon.svelte";
-  import type {Spacing} from "../../common/styling";
-  import {afterUpdate, onMount, tick} from "svelte";
-  import {cssVar, toBoolean} from "../../common/utils";
-  import {calculateMargin} from "../../common/styling";
+  import { onMount, tick } from "svelte";
+
+  import type { GoAIconType} from "../icon/Icon.svelte";
+  import type { Spacing } from "../../common/styling";
+  import { cssVar, toBoolean } from "../../common/utils";
+  import { calculateMargin } from "../../common/styling";
 
   interface Option {
     label: string;
     value: string;
-    filter: string; // filter keyword to search
+    filter: string;
   }
+
+  interface EventHandler {
+    handle: (e: KeyboardEvent) => void;
+  }
+
   // Props
+
   export let name: string;
   export let arialabel: string = "";
   export let arialabelledby: string = "";
-  export let value: string = ""; // if not found option (filterable), value falls back to empty string
+  export let value: string = "";
   export let filterable: string = "false";
   export let leadingicon: GoAIconType = null;
   export let maxheight: string = "276px";
@@ -31,37 +38,25 @@
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
+
+  // FIXME: why was this added?
   export let id: string = ""; // for accessibility to control the menu
+
+  // 
+  // Reactive
+  // 
 
   $: _disabled = toBoolean(disabled);
   $: _error = toBoolean(error);
   $: _multiselect = toBoolean(multiselect);
   $: _native = toBoolean(native);
   $: _filterable = toBoolean(filterable) && !_native; // Will replace datalist for filterable true
-  $: _filteredOptions = _filterable ? _options.filter(option => isMatched(option, _inputValue)) : _options;
+  $: _filteredOptions = _filterable 
+    ? _options.filter(option => isMatched(option, _inputElValue)) 
+    : _options;
 
-  // Accessibility
-  $: _activeDescendantId = _filteredOptions[_highlightedIndex] ? _filteredOptions[_highlightedIndex].value : undefined; //To keep track of active descendant for the accessibility
-
-  // Private
-  let _values: string[] = [];
-  let _options: Option[] = [];
-  let _inputValue: string = "";
-  let _isMenuVisible = false;
-  let _highlightedIndex: number = -1; // keep track highlighted option, for arrow up/down
-  let _width: string;
-  let _selectedOption = undefined; // to keep track if value is matched to combobox option
-  let _previousSelectedValue = ""; // to keep track if value is changed from previously selected value - for clear button
-  let _inputWidth: string;
-
-  let _el: HTMLElement;
-  let _menuEl: HTMLElement;
-  let _selectEl: HTMLSelectElement;
-  let _inputEl: HTMLInputElement;
-
-  // Reactive statement
-
-  $: if (_el) {
+  // init
+  $: if (_rootEl) {
     _values = parseValues(value);
     _options = getOptions();
     if (!_native) {
@@ -72,34 +67,75 @@
     }
   }
 
-  $: if(_inputEl && _options.length) {
-    _inputWidth = `${_inputEl.getBoundingClientRect().width}px`;
-  }
+  // To keep track of active descendant for the accessibility
+  $: _activeDescendantId = _filteredOptions[_highlightedIndex] 
+    ? _filteredOptions[_highlightedIndex].value 
+    : undefined; 
 
+  // define popover width based on calculated input width
+  $: _inputEl && _options.length && setPopoverWidth();
+
+  //
+  // Private
+  // 
+
+  let _values: string[] = [];
+  let _options: Option[] = [];
+  let _inputElValue: string = "";
+  let _isMenuVisible = false;
+  let _highlightedIndex: number = -1; // keep track highlighted option, for arrow up/down
+  let _width: string;
+  let _selectedOption = undefined; // to keep track if value is matched to combobox option
+  let _previousSelectedValue = ""; // to keep track if value is changed from previously selected value - for clear button
+  let _popoverWidth: string;
+
+  let _rootEl: HTMLElement;
+  let _menuEl: HTMLElement;
+  let _selectEl: HTMLSelectElement;
+  let _inputEl: HTMLInputElement;
+  let _eventHandler: EventHandler;
+
+  //
+  // Hooks
+  //
+
+  onMount(async () => {
+    // watch for DOM changes within the slot => dynamic binding
+    const slot = _rootEl.querySelector("slot");
+    slot?.addEventListener("slotchange", _e => {
+      _values = parseValues(value);
+      _options = getOptions();
+    });
+
+    if (_filterable) {
+      _eventHandler = ComboboxKeyDownHandler()
+    } else {
+      _eventHandler = DropdownKeyDownHandler()
+    }
+  });
 
   afterUpdate(() => {
     if (_options.length === 0) return;
     _isMenuVisible ? _inputEl.focus() : updateInputValue(_selectedOption);
   });
 
-  onMount(async () => {
-    // watch for DOM changes within the slot => dynamic binding
-    const slot = _el.querySelector("slot");
-    slot?.addEventListener("slotchange", _e => {
-      _values = parseValues(value);
-      _options = getOptions();
-    });
-  });
-
+  //
   // Functions
+  //
+
+  // sets the popover width to match the input's width
+  function setPopoverWidth() {
+    _popoverWidth = `${_inputEl.getBoundingClientRect().width}px`;
+  }
+
   function getChildren(): Element[] {
-    const slot = _el.querySelector("slot") as HTMLSlotElement;
+    const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
     if (slot) {
       // default
       return slot.assignedElements();
     }
     // unit tests
-    const el = _native ? _selectEl : _el;
+    const el = _native ? _selectEl : _rootEl;
     return [...el.children] as Element[];
   }
 
@@ -107,8 +143,7 @@
   // The children don't have to be goa-dropdown-item elements. Any child element
   // work as long as it has a value and label content
   function getOptions(): Option[] {
-    const children = getChildren();
-    return children
+    return getChildren()
       .filter((child: Element) => child.tagName === "GOA-DROPDOWN-ITEM")
       .map((el: HTMLElement) => {
         const option = el as unknown as Option;
@@ -120,7 +155,7 @@
   }
 
   // compute the required width to enure all children fit
-  function getCustomDropdownWidth(options: Option[]): string {
+  function calculateWidth(options: Option[]): string {
     // set width to longest item
     const optionsWidth = options
       .map((option: Option) => {
@@ -144,18 +179,15 @@
   function isOptionInView(node: HTMLLIElement): boolean {
     const liOptionRect = node.getBoundingClientRect();
     const ulRect = _menuEl.getBoundingClientRect();
-    return liOptionRect.top >= 0 &&
-      liOptionRect.left >= 0 &&
-      liOptionRect.bottom <= ulRect.height &&
-      liOptionRect.right <= ulRect.width;
+    return liOptionRect.top >= 0 
+      && liOptionRect.left >= 0 
+      && liOptionRect.bottom <= ulRect.height 
+      && liOptionRect.right <= ulRect.width;
   }
 
-  /**
-   * Change the direction of highlighted options for Arrow up and down
-   * @param position: -1 for previous option, +1 for next option
-   */
-  function changeHighlightedOption(position: number) {
-    let index = _highlightedIndex + position;
+  // Change the direction of highlighted options for Arrow up and down
+  function changeHighlightedOption(offset: number) {
+    let index = _highlightedIndex + offset;
     let items = !_filteredOptions?.length ? _options : _filteredOptions;
     if (items.length === 0) return;
 
@@ -170,10 +202,8 @@
   }
 
   function scrollToOption(index: number) {
-    const liNode = _menuEl.querySelector(`li[data-index='${index}']`) as HTMLLIElement;
-
+    const liNode = _menuEl.querySelector(`li[data-index="${index}"]`) as HTMLLIElement;
     if (!liNode) return;
-
     if (isOptionInView(liNode)) return;
 
     liNode.scrollIntoView({behavior: "smooth", block: "nearest"});
@@ -196,18 +226,13 @@
     return rawValues.map((val: unknown) => `${val}`);
   }
 
-  /**
-   * Update the dropdown selected style/attribute based on new value
-   * @param selectedValue
-   */
+  // Update the dropdown selected style/attribute based on new value
   function setSelectedOption(selectedValue: string) {
     return _filterable ? setSelectedOptionByInputValue() :
       _selectedOption = _options.find(item => item.value === selectedValue);
   }
 
-  /**
-   * Update according to input's value (for filterable dropdown)
-   */
+  // Update according to input's value (for filterable dropdown)
   function setSelectedOptionByInputValue() {
     const filteredItems = _options.filter(item => isMatched(item, _inputValue));
     const isTypingInputMatchedOption = filteredItems.length === 1 && _isMenuVisible;
@@ -222,10 +247,7 @@
     _activeDescendantId = undefined;
   }
 
-  /**
-   * Update input's value according to selected dropdown option
-   * @param option
-   */
+  // Update input's value according to selected dropdown option
   function updateInputValue(option?: Option) {
     _highlightedIndex = -1;
     _inputValue = option ? option.label : "";
@@ -235,10 +257,7 @@
     }
   }
 
-  /**
-   * Keep track the component's local value based on new selected value
-   * @param newSelectedValue
-   */
+  // Keep track the component's local value based on new selected value
   function updateSelectedValue(newSelectedValue: string) {
     if (_previousSelectedValue !== newSelectedValue) {
       _previousSelectedValue = newSelectedValue;
@@ -267,10 +286,8 @@
     //In case option is "white whale", "american samoa"
     const filterWords = option.filter.toLowerCase().split(/\s+/);
 
-    /**
-     * "b c" should not match "bc", "red " should not match "red"
-     * but "american sa" should match "american samoa"
-     */
+    // "b c" should not match "bc", "red " should not match "red"
+    // but "american sa" should match "american samoa"
     if (query.endsWith(" ") || queryWords.length > 1) {
       if (queryWords.length !== filterWords.length) return false;
       return queryWords.every((word, index) =>
@@ -284,8 +301,8 @@
     return filterWords.some(word => word.startsWith(queryWords[0]));
   }
 
-  function dispatchValue(optionValue: string) {
-    const option = _options.find(item => item.value === optionValue);
+  function dispatchValue(value: string) {
+    const option = _options.find(item => item.value === value);
     const newValue = option ? option.value : "";
 
     let detail: Record<string, unknown>;
@@ -296,7 +313,7 @@
       _values = [newValue];
       detail = {name, value: newValue};
     }
-    _el.dispatchEvent(new CustomEvent("_change", {composed: true, detail}));
+    _rootEl.dispatchEvent(new CustomEvent("_change", {composed: true, detail}));
   }
 
   // Event handlers
@@ -306,13 +323,51 @@
     _selectedOption = option;
     if (!_native) {
       closeMenu();
-      _inputValue = option.label;
+      _inputElValue = option.label;
       _inputEl.focus();
     }
   }
 
-  function ComboboxKeyDownHandler() {
+  function ComboboxKeyDownHandler(): EventHandler {
+    function onEnter() {
+      _isMenuVisible = !_isMenuVisible;
+      if (_highlightedIndex < 0) {
+        const matchedOption = _filteredOptions
+          .find(option => option.label.toLowerCase() === _inputElValue?.toLowerCase());
+        selectOption(matchedOption);
+        return;
+      }
+      const highlightedOption = _filteredOptions[_highlightedIndex];
+      selectOption(highlightedOption);
+      _highlightedIndex = -1; // reset highlighted option
+    };
 
+    function onArrowUp() {
+      showMenu();
+      changeHighlightedOption(-1);
+    };
+
+    function onArrowDown() {
+      showMenu();
+      changeHighlightedOption(1);
+    };
+
+    function onBackspace() {
+      showMenu();
+      if (_inputElValue.length === 1) {
+        removeSelectedValue();
+      }
+    }
+
+    function selectOption(option: Option) {
+      closeMenu();
+      if (option) {
+        _selectedOption = option;
+        _inputElValue = option.label;
+        value = option.value;
+      }
+    }
+  
     const handle = (e: KeyboardEvent) => {
       let stopPropagation = false;
       switch (e.key) {
@@ -321,12 +376,12 @@
           stopPropagation = true;
           break;
         case "Escape":
-        case 'Esc':
+        case "Esc":
           closeMenu();
           removeSelectedValue();
           stopPropagation = true;
           break;
-        case 'Up':
+        case "Up":
         case "ArrowUp":
           onArrowUp();
           stopPropagation = true;
@@ -339,24 +394,24 @@
         case "Tab":
           closeMenu();
           break;
-        case 'Home':
+        case "Home":
           _inputEl.setSelectionRange(0, 0);
           stopPropagation = true;
           break;
-        case 'End':
-          _inputEl.setSelectionRange(_inputValue.length, _inputValue.length);
+        case "End":
+          _inputEl.setSelectionRange(_inputElValue.length, _inputElValue.length);
           stopPropagation = true;
           break;
-        case 'Backspace':
-          if (_inputValue.length === 0) {
+        case "Backspace":
+          if (_inputElValue.length === 0) {
             // backspace should not open the filterable dropdown if input has no words
             stopPropagation = true;
             return;
           }
           onBackspace();
           break;
-        case ' ':
-          if (_inputValue.length === 0) {
+        case " ":
+          if (_inputElValue.length === 0) {
             // space should not open the filterable dropdown if input has no words
            stopPropagation = true;
           }
@@ -366,7 +421,7 @@
             if (!_isMenuVisible) {
               showMenu();
             }
-            if (!_inputValue.length) {
+            if (!_inputElValue.length) {
               removeSelectedValue();
             }
           }
@@ -379,49 +434,34 @@
       }
     }
 
-    const onEnter = () => {
-      _isMenuVisible = !_isMenuVisible;
-      if (_highlightedIndex < 0) {
-        const matchedOption = _filteredOptions.find(option => option.label.toLowerCase() === _inputValue?.toLowerCase());
-        selectOption(matchedOption);
-        return;
-      }
-      const highlightedOption = _filteredOptions[_highlightedIndex];
-      selectOption(highlightedOption);
-      _highlightedIndex = -1; // reset highlighted option
+    return { handle };
+  }
+
+  function DropdownKeyDownHandler(): EventHandler {
+    function onSpace() {
+      _isMenuVisible = !_isMenuVisible; // toggle menu
+      if (_highlightedIndex > -1 && _filteredOptions[_highlightedIndex].value !== value)
+        value = _filteredOptions[_highlightedIndex].value;
     };
 
-    const onArrowUp = () => {
-      showMenu();
+    function onEnter() {
+      _isMenuVisible = !_isMenuVisible;
+      if (_highlightedIndex > -1 && _filteredOptions[_highlightedIndex].value !== value) {
+        value = _filteredOptions[_highlightedIndex].value;
+        closeMenu();
+      }
+    };
+
+    function onArrowUp() {
+      if (!_isMenuVisible) showMenu();
       changeHighlightedOption(-1);
     };
 
-    const onArrowDown = () => {
-      showMenu();
+    function onArrowDown() {
+      if (!_isMenuVisible) showMenu();
       changeHighlightedOption(1);
     };
-
-    const onBackspace = () => {
-      showMenu();
-      if (_inputValue.length === 1) {
-        removeSelectedValue();
-      }
-    }
-
-    const selectOption = (option: Option) => {
-      closeMenu();
-      if (option) {
-        _inputValue = option.label;
-        _selectedOption = option;
-        value = option.value;
-      }
-    }
-
-    return {
-      handle,
-    };
-  }
-  function DropdownKeyDownHandler() {
+  
     const handle = (e: KeyboardEvent) => {
       let stopPropagation = false;
       switch (e.key) {
@@ -459,46 +499,12 @@
       }
     };
 
-    const onSpace = () => {
-      _isMenuVisible = !_isMenuVisible; // toggle menu
-      if (_highlightedIndex > -1 && _filteredOptions[_highlightedIndex].value !== value)
-        value = _filteredOptions[_highlightedIndex].value;
-    };
-
-    const onEnter = () => {
-      _isMenuVisible = !_isMenuVisible;
-      if (_highlightedIndex > -1 && _filteredOptions[_highlightedIndex].value !== value) {
-        value = _filteredOptions[_highlightedIndex].value;
-        closeMenu();
-      }
-    };
-
-    const onArrowUp = () => {
-      if (!_isMenuVisible) showMenu();
-      changeHighlightedOption(-1);
-    };
-
-    const onArrowDown = () => {
-      if (!_isMenuVisible) showMenu();
-      changeHighlightedOption(1);
-    };
-
-    return {
-      handle
-    };
+    return { handle };
   }
-
-  const comboboxHandler = ComboboxKeyDownHandler();
-  const dropdownHandler = DropdownKeyDownHandler();
 
   const onInputKeyDown = (e: KeyboardEvent) => {
     if (_disabled) return;
-
-    if (_filterable) {
-      comboboxHandler.handle(e);
-    } else {
-      dropdownHandler.handle(e);
-    }
+    _eventHandler.handle(e);
   }
 
   function onNativeSelect(e: Event) {
@@ -514,7 +520,7 @@
     updateInputValue(_selectedOption);
   }
 
-  async function onClick() {
+  async function onChevronClick() {
     if (_disabled) return;
     showMenu();
     if (_filterable) {
@@ -526,7 +532,7 @@
   function onClear() {
     removeSelectedValue();
     _inputEl.focus();
-    onClick();
+    onChevronClick();
   }
 </script>
 
@@ -539,7 +545,7 @@
     ${calculateMargin(mt, mr, mb, ml)}
     --width: ${_width}
   `}
-  bind:this={_el}
+  bind:this={_rootEl}
 >
   {#if _native}
     <select
@@ -573,16 +579,16 @@
       tabindex="-1"
       on:_open={showMenu}
       on:_close={closeMenu}
-      maxwidth={_inputWidth}
+      maxwidth={_popoverWidth}
     >
       <div
         slot="target"
-        style={`
-          ${cssVar("width", width)}
-        `}
+        style={cssVar("width", width)}
         class="dropdown-input-group"
         class:dropdown-input-group--disabled={_disabled}
-        class:error={_error}>
+        class:error={_error}
+      >
+
         {#if leadingicon}
           <goa-icon
             class="dropdown-input--leading-icon"
@@ -590,62 +596,60 @@
             type={leadingicon}
           />
         {/if}
+
         <input
-          style={`cursor: ${!_disabled ? (_filterable ? "auto" : "pointer") : 'default'}`}
+          style={`cursor: ${!_disabled ? (_filterable ? "auto" : "pointer") : "default"}`}
           bind:this={_inputEl}
-          bind:value={_inputValue}
+          bind:value={_inputElValue}
           tabindex="1"
           type="text"
           role="combobox"
           autocomplete="off"
           aria-autocomplete="list"
-          aria-controls="{`menu-${id||name}`}"
+          aria-controls={`menu-${id||name}`}
           aria-expanded={_isMenuVisible}
           aria-label={arialabel || name}
           aria-labelledby={arialabelledby}
           id={`${id || name}`}
-          aria-activedescendant="{_activeDescendantId}"
-          aria-disabled="{_disabled}"
-          aria-owns="{_isMenuVisible ? `menu-${id||name}` : undefined}"
+          aria-activedescendant={_activeDescendantId}
+          aria-disabled={_disabled}
+          aria-owns={_isMenuVisible ? `menu-${id||name}` : undefined}
           aria-haspopup="listbox"
-          disabled="{_disabled}"
-          readonly="{!_filterable}"
-          placeholder="{placeholder}"
-          name="{name}"
+          disabled={_disabled}
+          readonly={!_filterable}
+          placeholder={placeholder}
+          name={name}
           on:keydown={onInputKeyDown}
-          />
-        {#if _inputValue && _filterable}
+        />
+
+        {#if _inputEl?.value && _filterable}
           <goa-icon
-            tabindex="{_disabled ? -1 : 0}"
+            tabindex={_disabled ? -1 : 0}
             role="button"
-            arialabel="clear {arialabel || name}"
-            on:click|stopPropagation="{onClear}"
-            on:keydown="{(e) => {
-            if (e.key === 'Enter') {
-              // for keyboard accessibility to press the clear icon
-              onClear();
-            }
-          }}"
+            arialabel={`clear {arialabel || name}`}
+            on:click|stopPropagation={onClear}
+            on:keydown={(e) => { if (e.key === "Enter") { onClear(); }
+          }}
             class="dropdown-icon--clear"
             class:disabled={_disabled}
             size="medium"
             type="close"
           />
-        {/if}
-        {#if (_filterable && _inputValue.length === 0) || !_filterable}
+        {:else}
           <goa-icon
             role="button"
             id={`${id||name}`}
             arialabel={arialabel || name}
-            ariacontrols="{`menu-${id||name}`}"
+            ariacontrols={`menu-${id||name}`}
             ariaexpanded={_isMenuVisible ? "true" : "false"}
             class="dropdown-icon--arrow"
             size="medium"
-            type={_isMenuVisible ? 'chevron-up' : 'chevron-down'}
-            on:click={onClick}
+            type={_isMenuVisible ? "chevron-up" : "chevron-down"}
+            on:click={onChevronClick}
           />
         {/if}
       </div>
+
       <!--Menu-->
       <ul
         id={`menu-${id||name}`}
@@ -661,28 +665,26 @@
           max-height: ${maxheight};
         `}
       >
-        {#if _filteredOptions.length > 0}
-          {#each _filteredOptions as option, index (index)}
-            <li
-              id={option.value}
-              role="option"
-              style="display: block"
-              aria-selected={value === option.value}
-              class="dropdown-item"
-              class:dropdown-item--highlighted={index === _highlightedIndex}
-              data-testid={`dropdown-item-${option.value}`}
-              data-index={index}
-              data-value={option.value}
-              on:click={() => onSelect(option)}
-            >
-              {option.label || option.value}
-            </li>
-          {/each}
-        {:else}
-          <li class="dropdown-item" data-testid="dropdown-item-not-found">
-            No matches found
+        {#each _filteredOptions as option, index (index)}
+          <li
+            id={option.value}
+            role="option"
+            style="display: block"
+            aria-selected={value === option.value}
+            class="dropdown-item"
+            class:dropdown-item--highlighted={index === _highlightedIndex}
+            data-testid={`dropdown-item-${option.value}`}
+            data-index={index}
+            data-value={option.value}
+            on:click={() => onSelect(option)}
+          >
+            {option.label || option.value}
           </li>
-        {/if}
+      {:else}
+        <li class="dropdown-item" data-testid="dropdown-item-not-found">
+          No matches found
+        </li>
+      {/each}
       </ul>
     </goa-popover>
   {/if}
