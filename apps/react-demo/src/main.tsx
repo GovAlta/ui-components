@@ -55,6 +55,7 @@ ReactDOM.render(
         <Route path="callout" element={<Callout />} />
         <Route path="checkbox" element={<Checkbox />} />
         <Route path="chip" element={<Chip />} />
+        <Route path="chip/:id" element={<>Chip 123</>} />
         <Route path="circular-progress" element={<CircularProgress />} />
         <Route path="container" element={<Container />} />
         <Route path="divider" element={<Divider />} />

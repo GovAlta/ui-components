@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
+  import { isUrlMatch } from "../../common/urls";
 
   type SideMenuGroupElement = HTMLElement & { heading?: string }
 
@@ -21,8 +22,7 @@
   })
 
   function checkUrlMatches() {
-    const url = window.location.href;
-    _open = matchesMenu(url) || matchesChild(_rootEl, url);
+    _open = matchesMenu() || matchesChild(_rootEl);
     if (_open) {
       notifyParent(true);
     }
@@ -56,12 +56,12 @@
     return path?.toLowerCase().replace(/ /g, "-");
   }
 
-  function matchesMenu(url: string): boolean {
-    return url.endsWith(_slug);
+  function matchesMenu(): boolean {
+    return isUrlMatch(document.location, _slug);
   }
 
-  function matchesChild(el: SideMenuGroupElement, url: string): boolean {
-    if (url.endsWith(toSlug(el.heading))) {
+  function matchesChild(el: SideMenuGroupElement): boolean {
+    if (isUrlMatch(document.location, toSlug(el.heading))) {
       return true;
     }
 
@@ -71,7 +71,7 @@
     }
     const children = slot.assignedElements();
     return !!children.find((child: Element) => {
-      return url.endsWith(child.getAttribute("href"));
+      return isUrlMatch(document.location, child.getAttribute("href"));
     })
   }
 
@@ -86,7 +86,8 @@
 
     _current = false;
     children.forEach((child: Element) => {
-      const current = url.endsWith(child.getAttribute("href"));
+      const url = child.getAttribute("href");
+      const current = isUrlMatch(document.location, url);
       if (current) {
         _current = true;
         child.classList.add("current");
