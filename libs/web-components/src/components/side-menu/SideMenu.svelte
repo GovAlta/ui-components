@@ -2,16 +2,17 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
+  import { isUrlMatch } from "../../common/urls";
 
   let _rootEl: HTMLElement;
 
   onMount(async () => {
     await tick();
-    setCurrent(window.location.toString());
+    setCurrentUrl();
     addEventListeners();
   })
 
-  function setCurrent(url: string) {  
+  function setCurrentUrl() {  
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
     if (!slot) {
       return false;
@@ -22,7 +23,7 @@
         .filter((el: HTMLElement) => el.tagName === "A");
 
     links.forEach((child: HTMLElement) => {
-      const current = url.endsWith(child.getAttribute("href"));
+      const current = isUrlMatch(document.location, child.getAttribute("href"));
       if (current) {
         child.classList.add("current");
       } else {
@@ -35,16 +36,16 @@
     // watch path changes
     let currentLocation = document.location.href;
     const observer = new MutationObserver((_mutationList) => {
-      if (currentLocation !== document.location.href) {
+      if (isUrlMatch(document.location, currentLocation)) {
         currentLocation = document.location.href;
-        setCurrent(currentLocation);
+        setCurrentUrl();
       }
     });
     observer.observe(document.body, {childList: true, subtree: true });
 
     // watch hash / browser history changes
     window.addEventListener("popstate", () => {
-      setCurrent(document.location.href);
+      setCurrentUrl();
     })
   }
 </script>
