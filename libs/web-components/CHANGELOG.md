@@ -5,9 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.0] - 2023-10-26
+
+### Added
+
+- New properties for [Hero Banner](https://ui-components.alberta.ca/?path=/docs/components-hero-banner--basic), `backgroundcolor` and `textcolor`
+- Modified the default background for Hero Banner, light grey with no gradient
+- Added a `maxwidth` property for Modal component
+- New [Datepicker](https://ui-components.alberta.ca/?path=/docs/components-datepicker--basic) component has been created
+- New [`labelsize`](https://ui-components.alberta.ca/?path=/docs/utility-form-item--label-size) property for Form Item component
+
+### Fixed
+
+- Width property on Dropdown component now behaving as expected
+- `name` is no longer mandatory for Radio component
+- Table component should now have a horizontal scroll added to it if it's to large for the container
+- Accordion component on smaller screens now have proper padding
+
 ## [1.14.0] - 2023-08-30
 
 ### Added
+
 - New [Side Menu Heading](https://ui-components.alberta.ca/?path=/docs/components-sidemenu--section-headings) component added to Side Menu component
 - New [description](https://ui-components.alberta.ca/?path=/docs/components-radio--description) property added to Radio component
 - New [description](https://alpha.ui-components.alberta.ca/?path=/docs/components-checkbox--description) property added to Checkbox component
@@ -16,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `arialabelledby` property to Dropdown, Form Item, and Input components for increased accessibility when combined with Form Item component
 
 ### Fixed
+
 - Keyboard accessibility for Dropdown component now working as intended
 - `LeadingContent` and `TrailingContent` properties on Input component should no longer have margin-bottom
 - Icon in Dropdown component will now flip when dropdown is open vs. closed
