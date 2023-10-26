@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.15.0] - 2023-10-26
+
+### Added
+
+- New properties for [Hero Banner](https://ui-components.alberta.ca/?path=/docs/components-hero-banner--basic), `backgroundcolor` and `textcolor`
+- Modified the default background for Hero Banner, light grey with no gradient
+- Added a `maxwidth` property for Modal component
+- New [Datepicker](https://ui-components.alberta.ca/?path=/docs/components-datepicker--basic) component has been created
+- New `labelsize` property for Form Item component
+
+### Fixed
+
+- `name` is no longer mandatory for Radio component
+
 ## [4.14.0] - 2023-08-30
 
 ### Added
