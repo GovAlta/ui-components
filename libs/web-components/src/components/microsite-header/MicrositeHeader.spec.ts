@@ -48,7 +48,6 @@ describe('GoAMicrositeHeader', () => {
   it(`should show a feedback url if provided`, async () => {
     const { queryByTestId } = render(GoAMicrositeHeader, { type: 'alpha', feedbackurl: 'http://example.com' });
     const feedback = queryByTestId('feedback');
-
     expect(feedback).toContainHTML('http://example.com');
   });
 
@@ -58,4 +57,19 @@ describe('GoAMicrositeHeader', () => {
 
     expect(feedback).toBeNull();
   });
+
+  it('should set target=_blank on all urls', () => {
+    const { queryByTestId } = render(GoAMicrositeHeader, { type: 'alpha', feedbackurl: 'http://example.com' });
+    const feedbackURL = queryByTestId('feedback').querySelector('a');
+    const headerURL = queryByTestId('site-text').querySelector('a');
+    expect(feedbackURL).toHaveAttribute('target', '_blank');
+    expect(headerURL).toHaveAttribute('target', '_blank');
+  })
+  it('should set target=_self when specified', () => {
+    const { queryByTestId } = render(GoAMicrositeHeader, { type: 'alpha', feedbackurl: 'http://example.com', feedbackurltarget: "self", headerurltarget: "self" });
+    const feedbackURL = queryByTestId('feedback').querySelector('a');
+    const headerURL = queryByTestId('site-text').querySelector('a');
+    expect(feedbackURL).toHaveAttribute('target', '_self');
+    expect(headerURL).toHaveAttribute('target', '_self');
+  })
 });
