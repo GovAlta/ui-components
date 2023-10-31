@@ -11,7 +11,7 @@
   "semantic-release": "semantic-release",
   "main": "web-components.es.js",
   "unpkg": "web-components.es.js",
-  "module": "web-components.umd.js",
+  "module": "web-components.es.js",
   "scripts": {
     "dev": "rollup -c rollup.config.js -w",
     "playground": "rollup -c rollup.playground.config.js -w",
