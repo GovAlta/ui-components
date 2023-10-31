@@ -5,7 +5,7 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       "goa-microsite-header": WebComponentProps &
-        React.HTMLAttributes<HTMLElement>;
+      React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -17,6 +17,8 @@ interface WebComponentProps {
   version?: string;
   feedbackurl?: string;
   maxcontentwidth?: string;
+  feedbackurltarget?: "self" | "blank";
+  headerurltarget?: "self" | "blank";
 }
 
 export interface HeaderProps {
@@ -25,6 +27,8 @@ export interface HeaderProps {
   feedbackUrl?: string;
   testId?: string;
   maxContentWidth?: string;
+  feedbackUrlTarget?: "self" | "blank";
+  headerUrlTarget?: "self" | "blank";
 }
 
 export const GoAMicrositeHeader: FC<HeaderProps> = ({
@@ -32,6 +36,8 @@ export const GoAMicrositeHeader: FC<HeaderProps> = ({
   version,
   feedbackUrl,
   maxContentWidth,
+  feedbackUrlTarget,
+  headerUrlTarget,
   testId,
 }) => {
   return (
@@ -41,6 +47,8 @@ export const GoAMicrositeHeader: FC<HeaderProps> = ({
       feedbackurl={feedbackUrl}
       data-testid={testId}
       maxcontentwidth={maxContentWidth}
+      feedbackurltarget={feedbackUrlTarget}
+      headerurltarget={headerUrlTarget}
     />
   );
 };

@@ -20,6 +20,38 @@
       "default": "100%",
       "description": "Maximum width of the content area",
       "type": "string"
+    },
+    {
+      "name": "headerurltarget",
+      "default": "blank",
+      "description": "Sets the target=_blank attribute on the header url",
+      "values": [
+        {
+          "name": "self",
+          "description": "target=_self"
+        },
+        {
+          "name": "blank",
+          "description": "target=_blank"
+        }
+      ],
+      "type": "self | blank"
+    },
+    {
+      "name": "feedbackurltarget",
+      "default": "blank",
+      "description": "Sets the target=_blank attribute on the feedback url",
+      "values": [
+        {
+          "name": "self",
+          "description": "target=_self"
+        },
+        {
+          "name": "blank",
+          "description": "target=_blank"
+        }
+      ],
+      "type": "self | blank"
     }
   ],
   "references": [
