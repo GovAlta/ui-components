@@ -14,7 +14,6 @@ interface WCProps {
   open?: boolean;
   maxwidth?: string;
   closable?: boolean;
-  scrollable?: boolean;
   transition?: ModalTransition;
   calloutVariant?: CalloutVariant;
 }
@@ -92,7 +91,6 @@ export const GoAModal: FC<Props> = ({
       ref={el}
       open={open}
       closable={!!onClose}
-      scrollable={true}
       maxwidth={maxWidth}
       transition={transition}
       calloutVariant={calloutVariant}
