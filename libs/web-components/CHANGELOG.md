@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.15.0] - 2023-10-26
+## [1.15.0] - 2023-10-31
 
 ### Added
 
@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `name` is no longer mandatory for Radio component
 - Table component should now have a horizontal scroll added to it if it's to large for the container
 - Accordion component on smaller screens now have proper padding
+- SideMenu component will properly highlight links if your URLs have different elements in them
 
 ## [1.14.0] - 2023-08-30
 
