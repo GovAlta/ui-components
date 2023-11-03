@@ -57,11 +57,11 @@
   }
 
   function matchesMenu(): boolean {
-    return isUrlMatch(document.location, _slug);
+    return isUrlMatch(document.location, _slug) >= 0;
   }
 
   function matchesChild(el: SideMenuGroupElement): boolean {
-    if (isUrlMatch(document.location, toSlug(el.heading))) {
+    if (isUrlMatch(document.location, toSlug(el.heading)) >= 0) {
       return true;
     }
 
@@ -71,36 +71,41 @@
     }
     const children = slot.assignedElements();
     return !!children.find((child: Element) => {
-      return isUrlMatch(document.location, child.getAttribute("href"));
+      return isUrlMatch(document.location, child.getAttribute("href")) >= 0;
     })
   }
 
   function setCurrent() {
-    const url = document.location.href;
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
     if (!slot) {
       return false;
     }
 
     const children = slot.assignedElements();
-
+    let maxMatchWeight = -1;
+    let matchedChild = null;
+  
     _current = false;
     children.forEach((child: Element) => {
       const url = child.getAttribute("href");
-      const current = isUrlMatch(document.location, url);
-      if (current) {
-        _current = true;
-        child.classList.add("current");
-        notifyParent(true);
-      } else {
-        child.classList.remove("current")
+      const weight = isUrlMatch(document.location, url);
+      if (weight > maxMatchWeight) {
+         maxMatchWeight = weight;
+          matchedChild = child; 
       }
+      child.classList.remove("current")
 
       // get side-menu-group (level >= 2) marked as children
       if (child.tagName === "GOA-SIDE-MENU-GROUP") {
         child.setAttribute("child", "true")
       }
     })
+
+    if (matchedChild) {
+      _current = true;
+      matchedChild.classList.add("current");
+      notifyParent(true);
+    } 
   }
 
   function handleClick(e: Event) {

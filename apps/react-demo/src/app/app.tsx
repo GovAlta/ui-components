@@ -30,6 +30,7 @@ export default function App() {
       nav={
         <GoASideMenu>
           <GoASideMenuGroup heading="Components">
+            <Link to="/">Nothing here</Link>
             <Link to="/accordion">Accordion</Link>
             <Link to="/app-footer">AppFooter</Link>
             <Link to="/app-header">App Header</Link>
