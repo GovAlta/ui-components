@@ -288,6 +288,16 @@
     .content :global(header.has-content) {
       margin-bottom: var(--goa-space-m);
     }
+
+    .modal-actions ::slotted(*) {
+      padding: var(--goa-space-l) 0 0;
+    }
+  }
+
+  @media (--desktop) {
+    .modal-pane {
+      max-width: var(--maxwidth);
+    }
   }
 
   .modal-pane {
@@ -302,15 +312,6 @@
 
   .modal-actions ::slotted(*) {
     padding: var(--goa-space-xl) 0 0;
-  }
-
-  @media (--mobile) {
-    .modal-pane {
-      max-width: var(--maxwidth);
-    }
-    .modal-actions ::slotted(*) {
-      padding: var(--goa-space-l) 0 0;
-    }
   }
 
   .modal-content {
