@@ -1,11 +1,11 @@
 <svelte:options tag="goa-dropdown"/>
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
 
   import type { GoAIconType} from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
-  import { cssVar, toBoolean } from "../../common/utils";
+  import { cssVar, fromBoolean, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
 
   interface Option {
@@ -15,7 +15,8 @@
   }
 
   interface EventHandler {
-    handle: (e: KeyboardEvent) => void;
+    handleKeyUp: (e: KeyboardEvent) => void;
+    handleKeyDown: (e: KeyboardEvent) => void;
   }
 
   // Props
@@ -39,8 +40,24 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  // FIXME: why was this added?
-  export let id: string = ""; // for accessibility to control the menu
+  //
+  // Private
+  // 
+
+  let _options: Option[] = [];
+  let _isMenuVisible = false;
+  let _highlightedIndex: number = -1;
+  let _width: string;
+
+  let _rootEl: HTMLElement;
+  let _menuEl: HTMLElement;
+  let _selectEl: HTMLSelectElement;
+  let _inputEl: HTMLInputElement;
+  let _eventHandler: EventHandler;
+
+  let _isDirty: boolean = false;
+  let _filteredOptions: Option[] = [];
+  let _values: string[] = []
 
   // 
   // Reactive
@@ -50,82 +67,75 @@
   $: _error = toBoolean(error);
   $: _multiselect = toBoolean(multiselect);
   $: _native = toBoolean(native);
-  $: _filterable = toBoolean(filterable) && !_native; // Will replace datalist for filterable true
-  $: _filteredOptions = _filterable 
-    ? _options.filter(option => isMatched(option, _inputElValue)) 
-    : _options;
+  $: _filterable = toBoolean(filterable) && !_native;
 
-  // init
-  $: if (_rootEl) {
-    _values = parseValues(value);
-    _options = getOptions();
-    if (!_native) {
-      _width = width || getCustomDropdownWidth(_options);
-    }
-    if (_options.length) {
-      updateSelectedValue(value);
-    }
-  }
 
   // To keep track of active descendant for the accessibility
   $: _activeDescendantId = _filteredOptions[_highlightedIndex] 
     ? _filteredOptions[_highlightedIndex].value 
     : undefined; 
 
-  // define popover width based on calculated input width
-  $: _inputEl && _options.length && setPopoverWidth();
-
-  //
-  // Private
-  // 
-
-  let _values: string[] = [];
-  let _options: Option[] = [];
-  let _inputElValue: string = "";
-  let _isMenuVisible = false;
-  let _highlightedIndex: number = -1; // keep track highlighted option, for arrow up/down
-  let _width: string;
-  let _selectedOption = undefined; // to keep track if value is matched to combobox option
-  let _previousSelectedValue = ""; // to keep track if value is changed from previously selected value - for clear button
-  let _popoverWidth: string;
-
-  let _rootEl: HTMLElement;
-  let _menuEl: HTMLElement;
-  let _selectEl: HTMLSelectElement;
-  let _inputEl: HTMLInputElement;
-  let _eventHandler: EventHandler;
+  $: {
+    _values = parseValues(value)
+    // updating _inputEl.value is done within seperate function
+    // to prevent unwanted reactive updates.
+    setDisplayedValue();  
+  }
 
   //
   // Hooks
   //
 
   onMount(async () => {
+    _eventHandler = _filterable  
+      ? new ComboboxKeyUpHandler(_inputEl) 
+      : new DropdownKeyUpHandler(_inputEl);            
+
+    // the following is required to appease the jest testing gods in that they don't respond
+    // to the slotchange event
+    _options = getOptions();
+    if (!_native) {
+      _inputEl.value = _options.find(o => o.value === value)?.label ?? "";      
+      _width = width || calculateWidth(_options);
+    }  
+    syncFilteredOptions();
+
     // watch for DOM changes within the slot => dynamic binding
     const slot = _rootEl.querySelector("slot");
-    slot?.addEventListener("slotchange", _e => {
-      _values = parseValues(value);
+    slot?.addEventListener("slotchange", (_) => {
       _options = getOptions();
+      syncFilteredOptions();
+      _width = width || calculateWidth(_options);
+
+      if (!_native) {
+        _inputEl.value = _options.find(o => o.value === value)?.label ?? "";      
+      }
     });
-
-    if (_filterable) {
-      _eventHandler = ComboboxKeyDownHandler()
-    } else {
-      _eventHandler = DropdownKeyDownHandler()
-    }
-  });
-
-  afterUpdate(() => {
-    if (_options.length === 0) return;
-    _isMenuVisible ? _inputEl.focus() : updateInputValue(_selectedOption);
   });
 
   //
   // Functions
   //
 
-  // sets the popover width to match the input's width
-  function setPopoverWidth() {
-    _popoverWidth = `${_inputEl.getBoundingClientRect().width}px`;
+  // prevents unwanted reactive updates.
+  function setDisplayedValue() {
+    if (_inputEl) {
+      const option = _options.find(o => o.value == _values[0]); // possible string number comparison
+      _inputEl.value = option?.label ?? option?.value ?? "";
+    }
+  }
+
+  // parse and convert values to strings to avoid later type comparison issues
+  function parseValues(selectedValue: string) {
+    let rawValue: string[];
+    try {
+      rawValue = JSON.parse(selectedValue || `[""]`);
+    } catch (e) {
+      rawValue = [selectedValue];
+    }
+    const rawValues = typeof rawValue === "object" ? rawValue : [rawValue];
+    // convert all values to strings to avoid later type comparison issues
+    return rawValues.map((val: unknown) => `${val}`);
   }
 
   function getChildren(): Element[] {
@@ -154,7 +164,7 @@
       });
   }
 
-  // compute the required width to enure all children fit
+  // compute the required width to ensure all children fit
   function calculateWidth(options: Option[]): string {
     // set width to longest item
     const optionsWidth = options
@@ -176,15 +186,6 @@
     return `${maxWidth}ch`;
   }
 
-  function isOptionInView(node: HTMLLIElement): boolean {
-    const liOptionRect = node.getBoundingClientRect();
-    const ulRect = _menuEl.getBoundingClientRect();
-    return liOptionRect.top >= 0 
-      && liOptionRect.left >= 0 
-      && liOptionRect.bottom <= ulRect.height 
-      && liOptionRect.right <= ulRect.width;
-  }
-
   // Change the direction of highlighted options for Arrow up and down
   function changeHighlightedOption(offset: number) {
     let index = _highlightedIndex + offset;
@@ -204,307 +205,99 @@
   function scrollToOption(index: number) {
     const liNode = _menuEl.querySelector(`li[data-index="${index}"]`) as HTMLLIElement;
     if (!liNode) return;
-    if (isOptionInView(liNode)) return;
+
+    const liOptionRect = liNode.getBoundingClientRect();
+    const ulRect = _menuEl.getBoundingClientRect();
+    const isInView = 
+      liOptionRect.top >= 0 
+      && liOptionRect.left >= 0 
+      && liOptionRect.bottom <= ulRect.height 
+      && liOptionRect.right <= ulRect.width;
+
+    if (isInView) return;
 
     liNode.scrollIntoView({behavior: "smooth", block: "nearest"});
   }
 
-  function isPrintableCharacter(inputChar: string): boolean {
-    return inputChar.length === 1 && inputChar.match(/\S| /) != null;
-  }
-
-  // parse and convert values to strings to avoid later type comparison issues
-  function parseValues(selectedValue: string) {
-    let rawValue: string[];
-    try {
-      rawValue = JSON.parse(selectedValue || `[""]`);
-    } catch (e) {
-      rawValue = [selectedValue];
-    }
-    const rawValues = typeof rawValue === "object" ? rawValue : [rawValue];
-    // convert all values to strings to avoid later type comparison issues
-    return rawValues.map((val: unknown) => `${val}`);
-  }
-
-  // Update the dropdown selected style/attribute based on new value
-  function setSelectedOption(selectedValue: string) {
-    return _filterable ? setSelectedOptionByInputValue() :
-      _selectedOption = _options.find(item => item.value === selectedValue);
-  }
-
-  // Update according to input's value (for filterable dropdown)
-  function setSelectedOptionByInputValue() {
-    const filteredItems = _options.filter(item => isMatched(item, _inputValue));
-    const isTypingInputMatchedOption = filteredItems.length === 1 && _isMenuVisible;
-
-    if (!isTypingInputMatchedOption) {
-      // follow local value
-      _selectedOption = _options.find(item => item.value === value);
-      return;
-    }
-    _selectedOption = filteredItems[0];
-    updateInputValue(_selectedOption);
-    _activeDescendantId = undefined;
-  }
-
-  // Update input's value according to selected dropdown option
-  function updateInputValue(option?: Option) {
-    _highlightedIndex = -1;
-    _inputValue = option ? option.label : "";
-    value = option ? option.value : "";
-    if (!option) {
-      _activeDescendantId = undefined;
-    }
-  }
-
-  // Keep track the component's local value based on new selected value
-  function updateSelectedValue(newSelectedValue: string) {
-    if (_previousSelectedValue !== newSelectedValue) {
-      _previousSelectedValue = newSelectedValue;
-      setSelectedOption(newSelectedValue);
-      _values = [value]; // Keep track _values, for multiSelect later
-      dispatchValue(value);
-    }
+  function syncFilteredOptions() {
+    _filteredOptions = _filterable 
+      ? _options.filter(option => isFilterMatch(option, _inputEl.value)) 
+      : _options;      
   }
 
   function showMenu() {
     if (_disabled) {
       return;
     }
-    _isMenuVisible = true;
+
+    setTimeout(() => {
+      syncFilteredOptions();
+      _isMenuVisible = true;
+      _inputEl.focus();
+    }, 0)
   }
 
-  function closeMenu() {
+  function hideMenu() {
     _isMenuVisible = false;
   }
 
-  function isMatched(option: Option, query: string) {
-    if (query.length === 0) return true;
+  function isFilterMatch(option: Option, filter: string) {
+    if (filter.length === 0) return true;
 
-    // in case query is "white whale", "b c"
-    const queryWords = query.toLowerCase().split(/\s+/);
-    //In case option is "white whale", "american samoa"
-    const filterWords = option.filter.toLowerCase().split(/\s+/);
+    let value = option.filter || option.label || option.value;
+    value = value.toLowerCase();
+    filter = filter.toLowerCase();
 
-    // "b c" should not match "bc", "red " should not match "red"
-    // but "american sa" should match "american samoa"
-    if (query.endsWith(" ") || queryWords.length > 1) {
-      if (queryWords.length !== filterWords.length) return false;
-      return queryWords.every((word, index) =>
-        index === queryWords.length - 1
-          ? filterWords[index].startsWith(word) // last word should be prefix match: american sa ==> american samoa
-          : filterWords[index] === word // other words should be exact match: b c should not match bc
-      );
-    }
-
-    // Single-word query "al" for "Alabama"
-    return filterWords.some(word => word.startsWith(queryWords[0]));
+    return value.startsWith(filter) || value.includes(" " + filter);
   }
 
-  function dispatchValue(value: string) {
-    const option = _options.find(item => item.value === value);
-    const newValue = option ? option.value : "";
+  function dispatchValue(value?: string) {
+    const detail = _multiselect 
+      ? {name, values: [value, ..._values]}
+      : {name, value: value};
 
-    let detail: Record<string, unknown>;
-    if (_multiselect) {
-      _values.push(newValue);
-      detail = {name, values: _values};
-    } else {
-      _values = [newValue];
-      detail = {name, value: newValue};
-    }
-    _rootEl.dispatchEvent(new CustomEvent("_change", {composed: true, detail}));
+    setTimeout(() => {
+      _rootEl.dispatchEvent(new CustomEvent("_change", {composed: true, detail}));
+      _isDirty = false;
+    }, 1)
   }
 
+  // 
   // Event handlers
+  // 
+  
   function onSelect(option: Option) {
     if (_disabled) return;
-    value = option.value;
-    _selectedOption = option;
     if (!_native) {
-      closeMenu();
-      _inputElValue = option.label;
-      _inputEl.focus();
+      _isDirty = true;
+      hideMenu();
+      _inputEl.value = option.label;
     }
+    dispatchValue(option.value);
   }
 
-  function ComboboxKeyDownHandler(): EventHandler {
-    function onEnter() {
-      _isMenuVisible = !_isMenuVisible;
-      if (_highlightedIndex < 0) {
-        const matchedOption = _filteredOptions
-          .find(option => option.label.toLowerCase() === _inputElValue?.toLowerCase());
-        selectOption(matchedOption);
-        return;
-      }
-      const highlightedOption = _filteredOptions[_highlightedIndex];
-      selectOption(highlightedOption);
-      _highlightedIndex = -1; // reset highlighted option
-    };
-
-    function onArrowUp() {
-      showMenu();
-      changeHighlightedOption(-1);
-    };
-
-    function onArrowDown() {
-      showMenu();
-      changeHighlightedOption(1);
-    };
-
-    function onBackspace() {
-      showMenu();
-      if (_inputElValue.length === 1) {
-        removeSelectedValue();
-      }
-    }
-
-    function selectOption(option: Option) {
-      closeMenu();
-      if (option) {
-        _selectedOption = option;
-        _inputElValue = option.label;
-        value = option.value;
-      }
-    }
-  
-    const handle = (e: KeyboardEvent) => {
-      let stopPropagation = false;
-      switch (e.key) {
-        case "Enter":
-          onEnter();
-          stopPropagation = true;
-          break;
-        case "Escape":
-        case "Esc":
-          closeMenu();
-          removeSelectedValue();
-          stopPropagation = true;
-          break;
-        case "Up":
-        case "ArrowUp":
-          onArrowUp();
-          stopPropagation = true;
-          break;
-        case "Down":
-        case "ArrowDown":
-          onArrowDown();
-          stopPropagation = true;
-          break;
-        case "Tab":
-          closeMenu();
-          break;
-        case "Home":
-          _inputEl.setSelectionRange(0, 0);
-          stopPropagation = true;
-          break;
-        case "End":
-          _inputEl.setSelectionRange(_inputElValue.length, _inputElValue.length);
-          stopPropagation = true;
-          break;
-        case "Backspace":
-          if (_inputElValue.length === 0) {
-            // backspace should not open the filterable dropdown if input has no words
-            stopPropagation = true;
-            return;
-          }
-          onBackspace();
-          break;
-        case " ":
-          if (_inputElValue.length === 0) {
-            // space should not open the filterable dropdown if input has no words
-           stopPropagation = true;
-          }
-          break;
-        default:
-          if (isPrintableCharacter(e.key)) {
-            if (!_isMenuVisible) {
-              showMenu();
-            }
-            if (!_inputElValue.length) {
-              removeSelectedValue();
-            }
-          }
-          break;
-      }
-
-      if (stopPropagation) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    }
-
-    return { handle };
-  }
-
-  function DropdownKeyDownHandler(): EventHandler {
-    function onSpace() {
-      _isMenuVisible = !_isMenuVisible; // toggle menu
-      if (_highlightedIndex > -1 && _filteredOptions[_highlightedIndex].value !== value)
-        value = _filteredOptions[_highlightedIndex].value;
-    };
-
-    function onEnter() {
-      _isMenuVisible = !_isMenuVisible;
-      if (_highlightedIndex > -1 && _filteredOptions[_highlightedIndex].value !== value) {
-        value = _filteredOptions[_highlightedIndex].value;
-        closeMenu();
-      }
-    };
-
-    function onArrowUp() {
-      if (!_isMenuVisible) showMenu();
-      changeHighlightedOption(-1);
-    };
-
-    function onArrowDown() {
-      if (!_isMenuVisible) showMenu();
-      changeHighlightedOption(1);
-    };
-  
-    const handle = (e: KeyboardEvent) => {
-      let stopPropagation = false;
-      switch (e.key) {
-        case " ":
-          onSpace();
-          stopPropagation = true;
-          break;
-        case "Enter":
-          onEnter();
-          stopPropagation = true;
-          break;
-        case "Escape":
-          closeMenu();
-          break;
-        case "Up":
-        case "ArrowUp":
-          onArrowUp();
-          stopPropagation = true;
-          break;
-        case "Down":
-        case "ArrowDown":
-          onArrowDown();
-          stopPropagation = true;
-          break;
-        case "Tab":
-          closeMenu();
-          break;
-        default:
-          break;
-      }
-
-      if (stopPropagation) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    };
-
-    return { handle };
-  }
-
-  const onInputKeyDown = (e: KeyboardEvent) => {
+  function onInputKeyUp(e: KeyboardEvent) {
     if (_disabled) return;
-    _eventHandler.handle(e);
+    _eventHandler.handleKeyUp(e);
+  }
+
+  function onInputKeyDown(e: KeyboardEvent) {
+    if (_disabled) return;
+    _eventHandler.handleKeyDown(e);
+  }
+
+  function onClearIconKeyDown(e: KeyboardEvent) {
+    if (e.key === "Enter" || e.key === " ") { 
+      e.stopPropagation();
+      reset();
+      showMenu();
+    }
+  } 
+
+  function onClearIconClick(e: Event) {
+    reset();
+    showMenu();
+    e.stopPropagation();
   }
 
   function onNativeSelect(e: Event) {
@@ -513,27 +306,175 @@
     onSelect(option);
   }
 
-  function removeSelectedValue() {
+  function reset() {
     if (_disabled) return;
-    _previousSelectedValue = null;
-    _selectedOption = undefined;
-    updateInputValue(_selectedOption);
+
+    _activeDescendantId = undefined;
+    _highlightedIndex = -1;
+    _inputEl.value = "";     
+    _isDirty = false;
+    syncFilteredOptions();
+    
+    dispatchValue("");
   }
 
-  async function onChevronClick() {
-    if (_disabled) return;
+
+  function onChevronClick(e: Event) {
     showMenu();
-    if (_filterable) {
-      await tick();
+    e.stopPropagation();
+  }
+  
+  class ComboboxKeyUpHandler implements EventHandler {
+
+    constructor(private input: HTMLInputElement) {
+      input.addEventListener("blur", async (e) => {
+        if (!_isDirty) return;
+        if (!_filterable) return;
+      
+        const input = e.target as HTMLInputElement;
+        const selectedOption = _filteredOptions.find(o => o.label === input.value);        
+
+        if (!selectedOption) {
+          dispatchValue("");
+          input.value = "";
+        }
+      })      
+    }
+
+    onEscape(e: KeyboardEvent) {
+      reset();
       _inputEl.focus();
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
+    onEnter(e: KeyboardEvent) {
+      const option = _filteredOptions[_highlightedIndex];
+      if (option) {
+        onSelect(option);
+      }
+
+      if (_inputEl.value) {
+        hideMenu();
+      } else {
+        showMenu();
+      }
+      
+      e.stopPropagation();
+    };
+
+    onArrow(e: KeyboardEvent, direction: "up" | "down") {
+      if (!_isMenuVisible) showMenu();
+      changeHighlightedOption(direction === "up" ? -1 : 1);
+      e.stopPropagation();
+    };
+
+    onTab(_: KeyboardEvent) {
+      const matchedOption = _filteredOptions
+        .find(option => option.label.toLowerCase() === this.input.value.toLowerCase());
+      if (matchedOption) {
+        onSelect(matchedOption);
+      }
+      hideMenu();
+    }
+
+    onKeyUp(_: KeyboardEvent) {
+      showMenu();
+      _isDirty = true;      
+    }
+  
+    handleKeyUp(e: KeyboardEvent) {
+      switch (e.key) {
+        case "Enter":
+          this.onEnter(e);
+          break;
+        case "ArrowUp":
+          this.onArrow(e, "up");
+          break;
+        case "ArrowDown":
+          this.onArrow(e, "down");
+          break;
+        case "Home":
+          this.input.setSelectionRange(0, 0);
+          break;
+        case "End":
+          this.input.setSelectionRange(this.input.value.length, this.input.value.length);
+          break;
+        default:
+          this.onKeyUp(e);
+          break;
+      }
+    }
+
+    handleKeyDown(e: KeyboardEvent) {
+      switch (e.key) {
+        case "Escape":
+          this.onEscape(e);
+          break;
+        case "Tab":
+          this.onTab(e);
+          break;
+      }
     }
   }
 
-  function onClear() {
-    removeSelectedValue();
-    _inputEl.focus();
-    onChevronClick();
+  class DropdownKeyUpHandler implements EventHandler {
+    constructor(_input: HTMLInputElement) {  }
+
+    onEnter(e: KeyboardEvent) {
+      if (_isMenuVisible) {
+        const option = _filteredOptions[_highlightedIndex];
+        if (option) {
+          onSelect(option)
+        }
+        hideMenu();
+      } else {
+        showMenu();  
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    onArrow(e: KeyboardEvent, direction: "up" | "down") {
+      if (!_isMenuVisible) showMenu();
+      changeHighlightedOption(direction === "up" ? -1 : 1);
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  
+    handleKeyDown(e: KeyboardEvent) {
+      switch (e.key) {
+        case " ":
+        case "Enter":
+          this.onEnter(e);
+          break;
+        case "ArrowUp":
+          this.onArrow(e, "up");
+          break;
+        case "ArrowDown":
+          this.onArrow(e, "down");
+          break;
+        case "Tab":
+          hideMenu();
+          break;
+      }
+
+      return false;
+    }
+
+    handleKeyUp(e: KeyboardEvent) {
+      switch (e.key) {
+        case "ArrowUp":
+        case "ArrowDown":
+        case " ":
+        case "Enter":
+          e.preventDefault();
+          e.stopPropagation();
+      }
+    }
   }
+
 </script>
 
 <!-- Template -->
@@ -542,21 +483,21 @@
   class="dropdown"
   class:dropdown-native={_native}
   style={`
+    --width: ${_width};
     ${calculateMargin(mt, mr, mb, ml)}
-    --width: ${_width}
   `}
   bind:this={_rootEl}
 >
   {#if _native}
     <select
+      {name}
+      aria-label={arialabel || name}
+      aria-labelledby={arialabelledby}
+      class:error={_error}
+      disabled={_disabled}
+      id={name}
       bind:this={_selectEl}
       on:change={onNativeSelect}
-      disabled={_disabled}
-      class:error={_error}
-      aria-labelledby={arialabelledby}
-      aria-label={arialabel || name}
-      id={id || name}
-      name="{name}"
     >
       <slot/>
       {#each _options as option}
@@ -573,13 +514,14 @@
     <goa-popover
       {disabled}
       {relative}
+      data-testid="option-list"
+      maxwidth={"1000px"}
       open={_isMenuVisible}
       padded="false"
-      width={_width}
       tabindex="-1"
+      width={_width}
       on:_open={showMenu}
-      on:_close={closeMenu}
-      maxwidth={_popoverWidth}
+      on:_close={hideMenu}
     >
       <div
         slot="target"
@@ -598,38 +540,42 @@
         {/if}
 
         <input
-          style={`cursor: ${!_disabled ? (_filterable ? "auto" : "pointer") : "default"}`}
+          style={`
+            cursor: ${!_disabled ? (_filterable ? "auto" : "pointer") : "default"};
+          `}
+          data-testid="input"
           bind:this={_inputEl}
-          bind:value={_inputElValue}
-          tabindex="1"
           type="text"
           role="combobox"
           autocomplete="off"
           aria-autocomplete="list"
-          aria-controls={`menu-${id||name}`}
+          aria-controls={`menu-${name}`}
           aria-expanded={_isMenuVisible}
           aria-label={arialabel || name}
           aria-labelledby={arialabelledby}
-          id={`${id || name}`}
+          id={name}
           aria-activedescendant={_activeDescendantId}
           aria-disabled={_disabled}
-          aria-owns={_isMenuVisible ? `menu-${id||name}` : undefined}
+          aria-owns={_isMenuVisible ? `menu-${name}` : undefined}
           aria-haspopup="listbox"
           disabled={_disabled}
           readonly={!_filterable}
           placeholder={placeholder}
           name={name}
           on:keydown={onInputKeyDown}
+          on:keyup={onInputKeyUp}
         />
 
         {#if _inputEl?.value && _filterable}
           <goa-icon
+            id={name}
             tabindex={_disabled ? -1 : 0}
             role="button"
-            arialabel={`clear {arialabel || name}`}
-            on:click|stopPropagation={onClear}
-            on:keydown={(e) => { if (e.key === "Enter") { onClear(); }
-          }}
+            arialabel={`clear ${arialabel || name}`}
+            ariacontrols={`menu-${name}`}
+            ariaexpanded={fromBoolean(_isMenuVisible)}
+            on:click|stopPropagation={onClearIconClick}
+            on:keydown={onClearIconKeyDown}
             class="dropdown-icon--clear"
             class:disabled={_disabled}
             size="medium"
@@ -638,10 +584,11 @@
         {:else}
           <goa-icon
             role="button"
-            id={`${id||name}`}
+            tabindex="-1"
+            id={name}
             arialabel={arialabel || name}
-            ariacontrols={`menu-${id||name}`}
-            ariaexpanded={_isMenuVisible ? "true" : "false"}
+            ariacontrols={`menu-${name}`}
+            ariaexpanded={fromBoolean(_isMenuVisible)}
             class="dropdown-icon--arrow"
             size="medium"
             type={_isMenuVisible ? "chevron-up" : "chevron-down"}
@@ -652,7 +599,7 @@
 
       <!--Menu-->
       <ul
-        id={`menu-${id||name}`}
+        id={`menu-${name}`}
         role="listbox"
         tabindex="-1"
         data-testid="dropdown-menu"
@@ -660,6 +607,7 @@
         aria-label={arialabel || name}
         aria-labelledby={arialabelledby}
         style={`
+          width: ${_width};
           outline: none;
           overflow-y: auto;
           max-height: ${maxheight};
@@ -668,23 +616,24 @@
         {#each _filteredOptions as option, index (index)}
           <li
             id={option.value}
-            role="option"
-            style="display: block"
-            aria-selected={value === option.value}
+            aria-selected={_inputEl.value === (option.label || option.value) }
             class="dropdown-item"
             class:dropdown-item--highlighted={index === _highlightedIndex}
-            data-testid={`dropdown-item-${option.value}`}
+            class:selected={ _inputEl.value === (option.label || option.value)}
             data-index={index}
+            data-testid={`dropdown-item-${option.value}`}
             data-value={option.value}
+            role="option"
+            style="display: block"
             on:click={() => onSelect(option)}
           >
             {option.label || option.value}
           </li>
-      {:else}
-        <li class="dropdown-item" data-testid="dropdown-item-not-found">
-          No matches found
-        </li>
-      {/each}
+        {:else}
+          <li class="dropdown-item" data-testid="dropdown-item-not-found">
+            No matches found
+          </li>
+        {/each}
       </ul>
     </goa-popover>
   {/if}
@@ -717,45 +666,54 @@
     cursor: pointer;
     width: 100%;
   }
+
   .dropdown-input-group:hover{
     border-color: var(--goa-color-interactive-hover);
     box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }
+
   .dropdown-input-group:focus,
-  .dropdown-input-group:focus-within
-  {
+  .dropdown-input-group:focus-within {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
+
   @media not (--mobile) {
     .dropdown-input-group {
       width: var(--width);
     }
   }
+
   .dropdown-input-group.error,
   .dropdown-input-group.error:hover {
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 1px var(--goa-color-interactive-error);
   }
+
   .dropdown-input-group.error:focus-within,
   .dropdown-input-group.error:focus {
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
+
   .dropdown-icon--arrow,
   .dropdown-icon--clear {
     margin-right: var(--goa-space-s);
   }
+
   .dropdown-icon--clear:focus:not(.disabled),
-  .dropdown-icon--clear:active:not(.disabled){
+  .dropdown-icon--clear:active:not(.disabled) {
     color: var(--goa-color-interactive-focus);
     outline: none;
   }
+
   .dropdown-input--leading-icon {
     margin-left: 0.75rem;
   }
+
   .dropdown-input--leading-icon + input {
     padding-left: 0.5rem;
   }
+
   input {
     display: inline-block;
     color: var(--goa-color-text-default);
@@ -769,6 +727,7 @@
     font-family: var(--goa-font-family-sans);
     z-index: 1;
   }
+
   input,
   input:focus,
   input:hover,
@@ -776,14 +735,15 @@
     outline: none;
     border: none;
   }
+
   input[aria-disabled="true"] {
     color: var(--goa-color-text-secondary);
   }
+
   .dropdown-input-group--disabled,
   .dropdown-input-group--disabled:hover,
   .dropdown-input-group--disabled:active,
-  .dropdown-input-group--disabled:focus
-  {
+  .dropdown-input-group--disabled:focus {
     background-color: var(--goa-color-greyscale-100);
     border-color: var(--goa-color-greyscale-200) !important;
     cursor: default;
@@ -880,4 +840,5 @@
   .dropdown-native:focus-within {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
+
 </style>
