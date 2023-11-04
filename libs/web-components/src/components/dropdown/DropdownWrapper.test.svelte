@@ -17,10 +17,10 @@
   export let width: string = "";
 	export let native: string = "false";
   export let items: string[];
-  export let id: string = "";
   export let filterable: boolean = false;
 
   export let resetValue = "orange";
+
   function setValue() {
     value = resetValue;
   }
@@ -28,7 +28,7 @@
 
 <!-- HTML -->
 <button on:click={setValue}>Set value</button>
-<GoADropdown {name} {arialabel} {arialabelledby} {native} {value} {id} {error} {leadingicon} {maxheight} {placeholder} {disabled} {width} {filterable}>
+<GoADropdown {name} {arialabel} {arialabelledby} {native} {value} {error} {leadingicon} {maxheight} {placeholder} {disabled} {width} {filterable}>
   {#each items as item (item)}
     <goa-dropdown-item {name} value={item} label={item} />
   {/each}
