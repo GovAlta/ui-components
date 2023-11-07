@@ -496,6 +496,7 @@
 </script>
 
 <!-- Template -->
+<div id="container">
 <div
   data-testid={`${name}-dropdown`}
   class="dropdown"
@@ -654,6 +655,7 @@
     </goa-popover>
   {/if}
 </div>
+</div>
 
 <style>
   :host {
@@ -661,11 +663,29 @@
     font-family: var(--goa-font-family-sans);
   }
 
+  #container {
+    container: self / inline-size;
+  }
+
+
   .dropdown {
     cursor: pointer;
     width: var(--width, 100%);
   }
 
+  @container (--container-mobile) {
+    .dropdown {
+      width: 100%;
+    }
+  }
+
+  @container (--container-not-mobile) {
+    .dropdown {
+      width: var(--width, 100%);
+    }
+  }
+
+  /** input **/
   .dropdown-input-group {
     box-sizing: border-box;
     outline: none;
@@ -692,10 +712,10 @@
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
 
-  @media not (--mobile) {
-    .dropdown-input-group {
+  @container (--container-not-mobile) {
+    /*.dropdown-input-group {
       width: var(--width);
-    }
+    }*/
   }
 
   .dropdown-input-group.error,

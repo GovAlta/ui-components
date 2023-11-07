@@ -8,7 +8,6 @@
   const [StatusTypes, validateStatus] = typeValidator(
     "Form Step status",
     ["incomplete", "complete"],
-    true
   );
   type FormStepStatus =  typeof StatusTypes[number];
 
@@ -75,8 +74,7 @@
 
   [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):focus-within,
   [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):focus,
-  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):active
-  {
+  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):active {
     outline: var(--goa-color-interactive-focus) solid var(--goa-border-width-l);
   }
 
@@ -84,7 +82,6 @@
     background-color: rgba(0,0,0,0.05);
     cursor: pointer;
   }
-
 
   .status {
     flex: 0 0 auto;
@@ -107,12 +104,15 @@
   [aria-current="step"] .text {
     font-weight: var(--goa-font-weight-bold)
   }
+
   [data-status=complete] .status {
     background: var(--goa-color-interactive-default);
   }
+
   [aria-current="step"][data-status=complete] .status {
     background: var(--goa-color-greyscale-white);
   }
+
   .step-number {
     margin-bottom: var(--font-valign-fix);
     font-weight: var(--goa-font-weight-bold);
@@ -141,7 +141,7 @@
     margin-top: 0.75rem;
   }
 
-  @media (--mobile) {
+  @container (--container-mobile) {
     [role="listitem"] {
       flex-direction: row;
       align-items: center;

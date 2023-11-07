@@ -52,21 +52,23 @@
 
 <!-- HTML -->
 {#if show}
-  <div transition:fade class="notification {type}" style={`--max-content-width: ${maxcontentwidth}`}>
-    <div class="content-container" role="alert" aria-live={arialive} aria-atomic="true">
-      <div class="icon">
-        <goa-icon type={iconType} inverted={type === "important" ? "false" : "true"} />
-      </div>
-      <div class="content">
-        <slot />
-      </div>
-      <div class="close">
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <button
-            class={type}
-            on:click={close}>
-            <goa-icon type="close" inverted={type === "important" ? "false" : "true"} />
-          </button>
+  <div id="container">
+    <div transition:fade class="notification {type}" style={`--max-content-width: ${maxcontentwidth}`}>
+      <div class="content-container" role="alert" aria-live={arialive} aria-atomic="true">
+        <div class="icon">
+          <goa-icon type={iconType} inverted={type === "important" ? "false" : "true"} />
+        </div>
+        <div class="content">
+          <slot />
+        </div>
+        <div class="close">
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <button
+              class={type}
+              on:click={close}>
+              <goa-icon type="close" inverted={type === "important" ? "false" : "true"} />
+            </button>
+        </div>
       </div>
     </div>
   </div>
@@ -78,23 +80,28 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
+
+  #container {
+    container: self / inline-size;
+  }
+
   .notification {
     padding: var(--goa-space-l) var(--goa-space-m);
     display: flex;
+
   }
 
-  @media not (--mobile) {
+  @container self (--container-not-mobile) {
     .notification {
       padding: var(--goa-space-l) var(--goa-space-xl);
     }
   }
 
-  @media (--desktop) {
+  @container self (--container-desktop) {
     .notification {
       padding: var(--goa-space-l) calc(3 * var(--goa-space-l));
     }
   }
-
 
   .emergency {
     background-color: var(--goa-color-emergency-default);

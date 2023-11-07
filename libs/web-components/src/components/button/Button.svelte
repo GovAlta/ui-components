@@ -93,7 +93,8 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
-  @media (--mobile) {
+  
+  @container (--container-mobile) {
     /* expand the button and :host container on small screens  */
     :host {
       width: 100%;

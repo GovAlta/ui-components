@@ -32,6 +32,7 @@
   main {
     flex: 1 1 auto;
     padding: 0 1rem;
+    /* container-type: inline-size; */
   }
 
   .nav {

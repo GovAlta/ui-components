@@ -37,38 +37,36 @@
 </script>
 
 <!-- HTML -->
-<div
-  data-testid={testid}
-  style={calculateMargin(mt, mr, mb, ml)}
-  class={`
-    goa-container
-    goa-container--${type}
-    padding--${padding}
-    accent--${accent}
-  `}
->
-  <header class="heading--{accent}">
-    <div class="title">
-      <slot name="title" />
-    </div>
+<div id="container">
+  <div
+    data-testid={testid}
+    style={calculateMargin(mt, mr, mb, ml)}
+    class={`
+      goa-container
+      goa-container--${type}
+      padding--${padding}
+      accent--${accent}
+    `}
+  >
+    <header class="heading--{accent}">
+      <div class="title">
+        <slot name="title" />
+      </div>
 
-    <div class="actions">
-      <slot name="actions" />
+      <div class="actions">
+        <slot name="actions" />
+      </div>
+    </header>
+    <div class="content">
+      <slot />
     </div>
-  </header>
-  <div class="content">
-    <slot />
   </div>
 </div>
 
 <!-- Style -->
 <style>
-  :host {
-    box-sizing: border-box;
-    font-family: var(--goa-font-family-sans);
-    font-size: var(--goa-font-size-4);
-    display: flex;
-    flex: 1 1 auto;
+  #container {
+    container: self / inline-size;    
   }
 
   .goa-container {
@@ -162,12 +160,14 @@
   }
 
   /* Override padding in small screens to the compact value */
-  @media (--mobile) {
+  @container self (--container-mobile) {   
     .padding--relaxed header {
       padding: 0 1rem;
+      color: red;
     }
     .padding--relaxed .content {
       padding: 1rem;
+      color: red;
     }
   }
 

@@ -65,10 +65,11 @@
       on:focus={() => _hovering = false}
       on:blur={() => _hovering = false}
     >
-      <goa-icon type="chevron-forward"
+      <goa-icon 
+        type="chevron-forward"
         fillcolor={_hovering?"var(--goa-color-interactive-hover)": "var(--goa-color-interactive-default)"}
-      ></goa-icon>
-      <div class="title" bind:this={_titleEl}>
+      />
+      <div class="title">
         <span class="heading heading-{headingsize}" data-testid={`${testid}-heading`}>{heading}</span>
         <span class="secondary-text">{secondarytext}</span>
         <div class="heading-content"
@@ -113,72 +114,6 @@
     position: relative;
   }
 
-  summary.container-medium {
-    min-height: 4rem;
-  }
-
-  summary::marker, /* Latest Chrome, Edge, Firefox */
-  summary::-webkit-details-marker /* Safari */ {
-    display: none;
-  }
-
-  summary .title{
-    display: flex;
-    align-items: center;
-    flex: 1;
-  }
-
-  .title span {
-    padding-bottom: var(--goa-space-3xs, 0);
-  }
-
-  summary .heading {
-    font: var(--goa-typography-heading-s);
-    padding-right: 1rem;
-  }
-
-  summary .secondary-text {
-    font: var(--goa-typography-body-s);
-    line-height: 1.5rem;
-    padding-right: 1rem;
-  }
-
-  summary .heading-content {
-    flex: 1
-  }
-
-  .content {
-    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    border-left: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    border-right: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    border-bottom-left-radius: var(--goa-border-radius-m);
-    border-bottom-right-radius: var(--goa-border-radius-m);
-    padding: 1.5rem;
-    padding-left: 3.5rem;
-    padding-right: 2rem;
-  }
-
-  .content ::slotted(p:last-child) {
-    margin-bottom: 0 !important;
-  }
-
-  summary goa-icon{
-    padding: 0.125rem 1rem;
-  }
-
-  summary.container-medium goa-icon{
-    padding: 0.375rem 1rem;
-  }
-
-  details[open] goa-icon {
-    transform: rotate(90deg);
-  }
-
-  details[open] summary {
-    border-bottom-left-radius: var(--goa-border-radius-none);
-    border-bottom-right-radius: var(--goa-border-radius-none);
-  }
-
   summary:hover {
     background-color: var(--goa-color-greyscale-200);
   }
@@ -202,28 +137,85 @@
     border-radius: 4px;
   }
 
-  /* Sizes */
-  summary .heading.heading-medium{
-    line-height: 2rem;
-    font: var(--goa-typography-heading-m);
+  summary::marker, /* Latest Chrome, Edge, Firefox */
+  summary::-webkit-details-marker /* Safari */ {
+    display: none;
   }
 
+  .container-medium {
+    min-height: 4rem;
+  }
 
-  @media (--mobile) {
-    summary {
-      align-items: flex-start;
-    }
-    summary .title {
+  .title {
+    display: flex;
+    flex: 1;
+  }
+
+  @container (--container-mobile) {
+    .title {
       flex-direction: column;
-      align-items: flex-start;
-      padding-bottom: 0.875rem;
     }
-    summary .title span {
-      padding-bottom: 0;
+  }
+
+  @container (--container-not-mobile) {
+    .title {
+      align-items: center;
     }
-    summary .heading-content.heading-content-top {
-      margin-top: var(--goa-space-xs);
-    }
+  }
+
+  .title span {
+    padding-bottom: var(--goa-space-3xs, 0);
+  }
+
+  .heading {
+    font: var(--goa-typography-heading-s);
+    padding-right: 1rem;
+  }
+
+  .secondary-text {
+    font: var(--goa-typography-body-s);
+    line-height: 1.5rem;
+    padding-right: 1rem;
+  }
+
+  .heading-content {
+    flex: 1
+  }
+
+  summary goa-icon{
+    padding: 0.125rem 1rem;
+  }
+
+  .container-medium goa-icon{
+    padding: 0.375rem 1rem;
+  }
+
+  .content {
+    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-left: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-right: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-bottom-left-radius: var(--goa-border-radius-m);
+    border-bottom-right-radius: var(--goa-border-radius-m);
+    padding: 1.5rem;
+  }
+
+  .content ::slotted(p:last-child) {
+    margin-bottom: 0 !important;
+  }
+
+  details[open] goa-icon {
+    transform: rotate(90deg);
+  }
+
+  details[open] summary {
+    border-bottom-left-radius: var(--goa-border-radius-none);
+    border-bottom-right-radius: var(--goa-border-radius-none);
+  }
+
+  /* Sizes */
+  .heading.heading-medium{
+    line-height: 2rem;
+    font: var(--goa-typography-heading-m);
   }
 
 </style>

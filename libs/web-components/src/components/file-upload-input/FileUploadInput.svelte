@@ -216,16 +216,12 @@
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
-    padding: var(--goa-space-xl);
+    padding: var(--goa-space-xl) 0;
     color: var(--goa-color-interactive-default);
     text-align: center;
     cursor: pointer;
-  }
 
-  @media (--mobile) {
-    .dragdrop {
-      padding-top: 1.75rem;
-    }
+    container: self / inline-size;
   }
 
   .dragdrop:active,
@@ -255,12 +251,6 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-  }
-
-  @media (--mobile) {
-    .instructions {
-      flex-direction: column;
-    }
   }
 
   goa-icon {
@@ -302,5 +292,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  @container self (--container-mobile) {
+    .dragdrop {
+      padding-top: 1.75rem;
+    }
+    .instructions {
+      flex-direction: column;
+    }
   }
 </style>

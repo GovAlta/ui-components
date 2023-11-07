@@ -30,7 +30,7 @@
   type SkeletonType = typeof Types[number];
   type SkeletonSize = typeof Sizes[number];
 
-  export let maxwidth: string = "";
+  export let maxwidth: string = "300px";
   export let size: SkeletonSize = "1";
   export let linecount: number = 3;
   export let type: SkeletonType;
@@ -43,13 +43,14 @@
   export let ml: Spacing = null;
 
   onMount(() => {
-    setTimeout(() => validateType(type), 1);
+    validateType(type);
     validateSize(size);
   });
 </script>
 
 <!-- HTML -->
 <div
+  id="container"
   data-testid={testid}
   style="{calculateMargin(mt, mr, mb, ml)};">
   {#if type === "card"}
@@ -111,6 +112,10 @@
     100% {
       opacity: 0.5;
     }
+  }
+
+  #container {
+    container: self / inline-size;  
   }
 
   .skeleton {
@@ -280,13 +285,15 @@
     border-radius: 4px;
   }
 
-  .card {
-    width: 100%;
+  @container self (--container-mobile) {
+    .card {
+      width: 100%;
+    }
   }
 
-  @media not (--mobile) {
+  @container self (--container-not-mobile) {
     .card {
-      max-width: var(--max-width);
+      width: var(--max-width);
     }
   }
 

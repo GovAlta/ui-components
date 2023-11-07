@@ -65,48 +65,41 @@
 </script>
 
 <!-- HTML -->
-<div
-  data-testid="root"
-  class="root"
-  class:error={isError || (maxcount > 0 && count > maxcount)}
-  class:disabled={isDisabled}
-  style={`
-    ${calculateMargin(mt, mr, mb, ml)};
-    --width: ${width};
-    --char-count-padding: ${countby ? "2rem" : "0"};
-  `}
->
-  <textarea
-    bind:this={_textareaEl}
-    {name}
-    {placeholder}
-    {rows}
-    aria-label={arialabel || name}
-    disabled={isDisabled}
-    readonly={isReadonly}
-    data-testid={testid}
-    bind:value={value}
-    on:keyup={onKeyPress}
-    on:change={onChange}
-  />
-
-  {#if maxcount > 0 && !isDisabled}
-    <div
-      class="counter"
-      class:counter-error={count > maxcount}>
-      {#if count > maxcount}
-        {count - maxcount} {pluralize(countby, count - maxcount)} too many
-      {:else if count < maxcount}
-        {maxcount - count} {pluralize(countby, maxcount - count)} remaining
+<div id="container">
+  <div
+    class="root"
+    style={`
+      ${calculateMargin(mt, mr, mb, ml)};
+      --width: ${width};
+    `}
+  >
+    <textarea
+      {name}
+      {placeholder}
+      {rows}
+      aria-label={arialabel || name}
+      class="goa-textarea"
+      class:error={isError}
+      disabled={isDisabled}
+      readonly={isReadonly}
+      data-testid={testid}
+      bind:this={_textAreaEl}
+      bind:value={value}
+    />
+    {#if showCounter}
+      {#if maxcharcount > 0}
+        <div
+          class="counter"
+          class:counter-error={value.length > maxcharcount}>
+          {value.length}{`/${maxcharcount}`}
+        </div>
+      {:else if value.length > 0}
+        <div class="counter">
+          {value.length}
+        </div>
       {/if}
-    </div>
-  {/if}
-
-  {#if countby && maxcount < 0 && count > 0 && !isDisabled}
-    <div class="counter">
-      {count} {pluralize(countby, count)}
-    </div>
-  {/if}
+    {/if}
+  </div>
 </div>
 
 <!-- Style -->
@@ -119,6 +112,10 @@
     font-family: var(--goa-font-family-sans);
   }
 
+  #container {
+    container: self / inline-size;
+  }
+
   .root {
     position: relative;
     width: 100%;
@@ -127,22 +124,8 @@
     border-radius: 3px;
   }
 
-  .root:has(textarea:disabled) {
-    background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-greyscale-200);
-    cursor: default;
-    box-shadow: none;
-  }
-
-  @media not (--mobile) {
-    .root {
-      max-width: var(--width);
-    }
-  }
-
   textarea {
     display: block;
-    width: 100%;
     box-sizing: border-box;
     outline: none;
     border: none;
@@ -151,16 +134,27 @@
     padding: var(--textarea-padding-vertical) var(--textarea-padding-horizontal);
     font-size: var(--goa-font-size-4);
     font-family: var(--goa-font-family-sans);
-    min-width: 100%;
     resize: vertical;
   }
 
-  @media not (--mobile) {
+  @container self (--container-mobile) {
+    .goa-textarea {
+      width: 100%;
+      min-width: 100%;
+    }
+  }
+
+  @container self (--container-not-mobile) {
+    .root {
+      max-width: var(--width);
+    }
     .goa-textarea {
       min-width: 0;
       width: var(--width);
     }
   }
+
+
 
   .goa-textarea[readonly] {
     cursor: pointer;

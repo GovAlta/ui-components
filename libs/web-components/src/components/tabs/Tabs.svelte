@@ -141,10 +141,12 @@
 
 <!--HTML-->
 
-<div role="tablist" bind:this={_rootEl}>
-  <div class="tabs" bind:this={_tabs}></div>
-  <div class="tabpanel" tabindex="0" bind:this={_panelEl} role="tabpanel">
-    <slot/>
+<div id="container">
+  <div role="tablist" bind:this={_rootEl}>
+    <div class="tabs" bind:this={_tabs}></div>
+    <div class="tabpanel" tabindex="0" bind:this={_panelEl} role="tabpanel">
+      <slot/>
+    </div>
   </div>
 </div>
 
@@ -160,6 +162,10 @@
   :host {
     box-sizing: border-box;
     font: var(--goa-typography-body-m);
+  }
+
+  #container {
+    container: self / inline-size;
   }
 
   .tab {
@@ -192,7 +198,7 @@
     border-color: var(--goa-color-greyscale-200);
   }
 
-  @media not (--mobile) {
+  @container self (--container-not-mobile) {
     [role="tablist"] {
       border-bottom: none;
     }
@@ -210,7 +216,7 @@
     }
   }
 
-  @media (--mobile) {
+  @container self (--container-mobile) {
     [role="tab"] {
       width: 100%;
       padding: var(--goa-space-xs) 0;

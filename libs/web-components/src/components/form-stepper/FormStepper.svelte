@@ -39,24 +39,21 @@
   // than the number of steps
   $: _progress = (_maxProgressStep-1) / (_steps.length-1) * 100;
   $: setCurrentStepStatus(step);
-  $: {
-    if (_steps.length) {
-
-      // allow access to all steps if not step property is provided
-      if (step <= 0) {
-        step = 1;
-        setTimeout(() => {
-          dispatch(step);
-        }, 1)
-        _maxAllowedStep = _steps.length;
-      }
-
-      if (step > _maxProgressStep) _maxProgressStep = step;
-      if (step > _maxAllowedStep) _maxAllowedStep = step;
-      _steps.forEach((stepEl: Element, index: number) => {
-        stepEl.setAttribute("enabled", index > _maxAllowedStep - 1 ? "false" : "true")
-      })
+  $: if (_steps.length) {
+    // allow access to all steps if not step property is provided
+    if (step <= 0) {
+      step = 1;
+      setTimeout(() => {
+        dispatch(step);
+      }, 1)
+      _maxAllowedStep = _steps.length;
     }
+
+    if (step > _maxProgressStep) _maxProgressStep = step;
+    if (step > _maxAllowedStep) _maxAllowedStep = step;
+    _steps.forEach((stepEl: Element, index: number) => {
+      stepEl.setAttribute("enabled", index > _maxAllowedStep - 1 ? "false" : "true")
+    })
   }
 
   onMount(async () => {
@@ -91,6 +88,7 @@
       _showProgressBars = true;
     }, 10)
 
+    // FIXME: use bind:clientWidth instead
     // add listener to recalculate the step widths
     window.addEventListener('resize', calcStepDims);
     window.addEventListener('orientationchange', calcStepDims);
@@ -125,6 +123,10 @@
 </script>
 
 <style>
+  .root {
+    container: self / inline-size;
+  }
+
   .form-stepper {
     position: relative;
   }
@@ -179,7 +181,7 @@
     background: var(--goa-color-interactive-default);
   }
 
-  @media (--mobile) {
+  @container self (--container-mobile) {
     progress.horizontal {
       display: none;
     }
@@ -193,9 +195,10 @@
 
 </style>
 
-<section role="list">
+<div class="root">
   <div
     class="form-stepper"
+    role="list"
     style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --progress: ${_progress}%;
@@ -210,9 +213,9 @@
       <progress class="vertical" value={_progress} max="100"></progress>
     {/if}
     <div class="slots" bind:this={_gridEl}>
-      <goa-grid minchildwidth="1px">
+      <goa-grid minchildwidth="16ch">
         <slot />
       </goa-grid>
     </div>
   </div>
-</section>
+</div>
