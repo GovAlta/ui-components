@@ -149,7 +149,7 @@
     border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
   }
 
-  @container self (--container-not-mobile) {
+  @container self (--not-mobile) {
     .root {
       grid-template-columns: 38px 1fr auto;
       grid-template-rows: auto;

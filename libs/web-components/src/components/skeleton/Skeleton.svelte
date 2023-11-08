@@ -115,7 +115,7 @@
   }
 
   #container {
-    container: self / inline-size;  
+    container: self / inline-size;
   }
 
   .skeleton {
@@ -285,13 +285,13 @@
     border-radius: 4px;
   }
 
-  @container self (--container-mobile) {
+  @container self (--mobile) {
     .card {
       width: 100%;
     }
   }
 
-  @container self (--container-not-mobile) {
+  @container self (--not-mobile) {
     .card {
       width: var(--max-width);
     }

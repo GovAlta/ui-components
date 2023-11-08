@@ -29,7 +29,6 @@
     "directory": "libs/web-components"
   },
   "devDependencies": {
-    "@csstools/postcss-global-data": "^2.1.0",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
     "@rollup/plugin-typescript": "^8.0.0",

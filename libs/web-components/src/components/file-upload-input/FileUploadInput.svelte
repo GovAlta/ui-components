@@ -294,7 +294,7 @@
     gap: 0.5rem;
   }
 
-  @container self (--container-mobile) {
+  @container self (--mobile) {
     .dragdrop {
       padding-top: 1.75rem;
     }

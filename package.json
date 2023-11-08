@@ -99,7 +99,6 @@
     "@babel/preset-react": "7.9.4",
     "@babel/preset-typescript": "7.9.0",
     "@compodoc/compodoc": "^1.1.15",
-    "@csstools/postcss-global-data": "^2.1.0",
     "@faker-js/faker": "^7.6.0",
     "@nrwl/angular": "13.1.4",
     "@nrwl/cypress": "13.1.4",

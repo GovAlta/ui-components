@@ -66,7 +66,7 @@
 <!-- Style -->
 <style>
   #container {
-    container: self / inline-size;    
+    container: self / inline-size;
   }
 
   .goa-container {
@@ -160,7 +160,7 @@
   }
 
   /* Override padding in small screens to the compact value */
-  @container self (--container-mobile) {   
+  @container self (--mobile) {
     .padding--relaxed header {
       padding: 0 1rem;
       color: red;

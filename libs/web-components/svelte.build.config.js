@@ -9,27 +9,27 @@ module.exports = {
           to: "$1",
         },
         {
-          from: /\(--container-mobile\)/g,
+          from: /\(--mobile\)/g,
           to: "(max-width: 623px)"
         },
         {
-          from: /\(--container-not-mobile\)/g,
+          from: /\(--not-mobile\)/g,
           to: "(min-width: 624px)",
         },
         {
-          from: /\(--container-tablet\)/,
+          from: /\(--tablet\)/,
           to: "(min-width: 624px) and (max-width: 1023px)",
         },
         {
-          from: /\(--container-not-tablet\)/,
+          from: /\(--not-tablet\)/,
           to: "(max-width: 623px) or (min-width: 1024px)",
         },
         {
-          from: /\(--container-desktop\)/,
+          from: /\(--desktop\)/,
           to: "(min-width: 1024px)",
         },
         {
-          from: /\(--container-not-desktop\)/,
+          from: /\(--not-desktop\)/,
           to: "(max-width: 1023px)",
         },
       ],

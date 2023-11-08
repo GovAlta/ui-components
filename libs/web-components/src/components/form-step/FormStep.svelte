@@ -141,7 +141,7 @@
     margin-top: 0.75rem;
   }
 
-  @container (--container-mobile) {
+  @container (--mobile) {
     [role="listitem"] {
       flex-direction: row;
       align-items: center;

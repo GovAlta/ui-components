@@ -181,7 +181,7 @@
     background: var(--goa-color-interactive-default);
   }
 
-  @container self (--container-mobile) {
+  @container self (--mobile) {
     progress.horizontal {
       display: none;
     }

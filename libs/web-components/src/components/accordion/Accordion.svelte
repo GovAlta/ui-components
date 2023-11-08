@@ -65,7 +65,7 @@
       on:focus={() => _hovering = false}
       on:blur={() => _hovering = false}
     >
-      <goa-icon 
+      <goa-icon
         type="chevron-forward"
         fillcolor={_hovering?"var(--goa-color-interactive-hover)": "var(--goa-color-interactive-default)"}
       />
@@ -151,13 +151,13 @@
     flex: 1;
   }
 
-  @container (--container-mobile) {
+  @container (--mobile) {
     .title {
       flex-direction: column;
     }
   }
 
-  @container (--container-not-mobile) {
+  @container (--not-mobile) {
     .title {
       align-items: center;
     }

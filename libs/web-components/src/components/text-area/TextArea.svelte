@@ -137,14 +137,14 @@
     resize: vertical;
   }
 
-  @container self (--container-mobile) {
+  @container self (--mobile) {
     .goa-textarea {
       width: 100%;
       min-width: 100%;
     }
   }
 
-  @container self (--container-not-mobile) {
+  @container self (--not-mobile) {
     .root {
       max-width: var(--width);
     }

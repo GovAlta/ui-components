@@ -673,13 +673,13 @@
     width: var(--width, 100%);
   }
 
-  @container (--container-mobile) {
+  @container (--mobile) {
     .dropdown {
       width: 100%;
     }
   }
 
-  @container (--container-not-mobile) {
+  @container (--not-mobile) {
     .dropdown {
       width: var(--width, 100%);
     }

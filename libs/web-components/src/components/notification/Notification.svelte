@@ -91,13 +91,13 @@
 
   }
 
-  @container self (--container-not-mobile) {
+  @container self (--not-mobile) {
     .notification {
       padding: var(--goa-space-l) var(--goa-space-xl);
     }
   }
 
-  @container self (--container-desktop) {
+  @container self (--desktop) {
     .notification {
       padding: var(--goa-space-l) calc(3 * var(--goa-space-l));
     }

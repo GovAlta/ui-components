@@ -53,7 +53,7 @@
   "references": [
     {
       "name": "GoA Container",
-      "url": "{{siteUrl}}/?path=/docs/components-container--container-types#container"
+      "url": "{{siteUrl}}/?path=/docs/components-container--types#container"
     }
   ]
 }
