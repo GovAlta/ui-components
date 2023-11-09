@@ -19,6 +19,11 @@ export default function TextArea() {
     console.log(name, value);
   }
 
+  function onKeyPress(name: string, value: string, key: string) {
+    setValue(value);
+    console.log(name, value, key);
+  }
+
   function onChange4(name: string, value: string) {
     setValue4(value);
     console.log(name, value);
@@ -94,6 +99,15 @@ export default function TextArea() {
         mb="xs"
         ml="xl"
         mr="2xl"
+      />
+
+      <h2>on Key Press</h2>
+      <GoATextArea
+        rows={4}
+        name="comment"
+        value={value6}
+        onChange={onChange6}
+        onKeyPress={onKeyPress}
       />
     </>
   );

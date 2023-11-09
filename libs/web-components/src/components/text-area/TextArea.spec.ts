@@ -45,6 +45,29 @@ describe("GoATextArea", () => {
     })
   })
 
+  it("handles the keypress event", async () => {
+    const onKeyPress = jest.fn();
+    const result = render(GoATextArea, {
+      name: "name",
+      value: "foo",
+      testid: "keypress",
+    });
+
+    const textarea = result.queryByTestId("keypress");
+    textarea.addEventListener("_keyPress", (e: CustomEvent) => {
+      expect(e.detail.name).toBe("name");
+      expect(e.detail.value).toBe("foo");
+      expect(e.detail.key).toBe("o");
+      onKeyPress();
+    });
+
+    await fireEvent.keyUp(textarea, { target: { value: 'foo' }, key: "o" });
+
+    await waitFor(() => {
+      expect(onKeyPress).toBeCalledTimes(1);
+    })
+  })
+
   it("can be disabled", async () => {
     const onChange = jest.fn();
     const result = render(GoATextArea, {

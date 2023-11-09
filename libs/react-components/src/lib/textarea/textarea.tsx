@@ -38,6 +38,7 @@ export interface GoATextAreaProps extends Margins {
   testId?: string;
   ariaLabel?: string;
   onChange: (name: string, value: string) => void;
+  onKeyPress?: (name: string, value: string, key: string) => void;
 }
 
 export function GoATextarea({
@@ -57,6 +58,7 @@ export function GoATextarea({
   mb,
   ml,
   onChange,
+  onKeyPress,
 }: GoATextAreaProps): JSX.Element {
   const el = useRef<HTMLTextAreaElement>(null);
 
@@ -70,9 +72,16 @@ export function GoATextarea({
       onChange(name, value);
     };
 
+    const keypressListener = (e: unknown) => {
+      const { name, value, key } = (e as CustomEvent).detail;
+      onKeyPress?.(name, value, key);
+    }
+
     current.addEventListener("_change", listener);
+    current.addEventListener("_keyPress", keypressListener);
     return () => {
       current.removeEventListener("_change", listener);
+      current.removeEventListener("_keyPress", listener);
     };
   }, [el, onChange]);
 

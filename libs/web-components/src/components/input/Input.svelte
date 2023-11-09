@@ -102,6 +102,12 @@
       );
     }, debounce);
 
+    input.dispatchEvent(
+      new CustomEvent("_keyPress", {
+        composed: true,
+        detail: { name, value: input.value, key: (e as KeyboardEvent).key }
+      }),
+    );
     value = input.value;
   }
 

@@ -93,46 +93,40 @@ interface BaseProps extends Margins {
   maxLength?: number;
 }
 
-type OnChange = (name: string, value: string) => void;
-type OnFocus = (name: string, value: string) => void;
-type OnBlur = (name: string, value: string) => void;
+type OnChange<T = string> = (name: string, value: T) => void;
+type OnFocus<T = string> = (name: string, value: T) => void;
+type OnBlur<T = string> = (name: string, value: T) => void;
+type OnKeyPress<T = string> = (name: string, value: T, key: string) => void;
 export interface GoAInputProps extends BaseProps {
-  onChange: OnChange;
+  onChange: OnChange<string>;
   value: string;
   min?: number | string;
   max?: number | string;
   step?: number;
-  onFocus?: OnFocus;
-  onBlur?: OnBlur;
+  onFocus?: OnFocus<string>;
+  onBlur?: OnBlur<string>;
+  onKeyPress?: OnKeyPress<string>;
 }
 
-// legacy
-export type InputProps = GoAInputProps;
-
-type OnNumberChange = (name: string, value: number) => void;
-type OnNumberFocus = (name: string, value: number) => void;
-type OnNumberBlur = (name: string, value: number) => void;
-export interface GoANumberInputProps extends BaseProps {
-  onChange: OnNumberChange;
+interface GoANumberInputProps extends BaseProps {
+  onChange: OnChange<number>;
   value: number;
   min?: number;
   max?: number;
   step?: number;
-  onFocus?: OnNumberFocus;
-  onBlur?: OnNumberBlur;
+  onFocus?: OnFocus<number>;
+  onBlur?: OnBlur<number>;
+  onKeyPress?: OnKeyPress<number>;
 }
-
-type OnDateChange = (name: string, value: GoADate) => void;
-type OnDateFocus = (name: string, value: GoADate) => void;
-type OnDateBlur = (name: string, value: GoADate) => void;
-export interface GoADateInputProps extends BaseProps {
-  onChange: OnDateChange;
+interface GoADateInputProps extends BaseProps {
+  onChange: OnChange<GoADate>;
   value: GoADate;
   min?: GoADate;
   max?: GoADate;
   step?: number;
-  onFocus?: OnDateFocus;
-  onBlur?: OnDateBlur;
+  onFocus?: OnFocus<GoADate>;
+  onBlur?: OnBlur<GoADate>;
+  onKeyPress?: OnKeyPress<GoADate>;
 }
 
 export function GoAInput({
@@ -169,6 +163,7 @@ export function GoAInput({
   onChange,
   onFocus,
   onBlur,
+  onKeyPress,
 }: GoAInputProps & { type?: GoAInputType }): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -194,17 +189,24 @@ export function GoAInput({
       onBlur?.(name, value);
     };
 
+    const keypressListener = (e: unknown) => {
+      const { name, value, key } = (e as CustomEvent).detail;
+      onKeyPress?.(name, value, key);
+    }
+
     current.addEventListener("_change", changeListener);
     current.addEventListener("_trailingIconClick", clickListener);
     current.addEventListener("_focus", focusListener);
     current.addEventListener("_blur", blurListener);
+    current.addEventListener("_keyPress", keypressListener);
     return () => {
       current.removeEventListener("_change", changeListener);
       current.removeEventListener("_trailingIconClick", clickListener);
       current.removeEventListener("_focus", focusListener);
       current.removeEventListener("_blur", blurListener);
+      current.removeEventListener("_keyPress", keypressListener);
     };
-  }, [ref, onChange, onTrailingIconClick, onFocus, onBlur]);
+  }, [ref, onChange, onTrailingIconClick, onFocus, onBlur, onKeyPress]);
 
   return (
     <goa-input
@@ -244,7 +246,7 @@ export function GoAInput({
   );
 };
 
-const onDateChangeHandler = (onChange: OnDateChange) => {
+const onDateChangeHandler = (onChange: OnChange<GoADate>) => {
   return (name: string, value: string) => {
 
     if (!value) {
@@ -385,6 +387,9 @@ export function GoAInputNumber({
   const onBlur = (name: string, value: string) => {
     props.onBlur?.(name, parseInt(value));
   };
+  const onKeyPress = (name: string, value: string, key: string) => {
+    props.onKeyPress?.(name, parseInt(value), key);
+  };
   return (
     <GoAInput
       {...props}
@@ -395,6 +400,7 @@ export function GoAInputNumber({
       onFocus={onFocus}
       onBlur={onBlur}
       type="number"
+      onKeyPress={onKeyPress}
     />
   );
 };
