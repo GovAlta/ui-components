@@ -5,7 +5,7 @@
     "init": "git config core.hooksPath .githooks",
     "nx": "nx",
     "start": "nx serve",
-   "build": "nx build",
+    "build": "nx build",
     "post": "nx post",
     "checkin-validate": "npm run build:all && npm run lint:all && npm run test:all",
     "build:all": "nx run-many --target=build --all && nx run-many --target=post --all",
@@ -219,7 +219,7 @@
     "yargs": "^15.4.1",
     "zone.js": "~0.11.4"
   },
- "overrides": {
+  "overrides": {
     "prebuild": {
       "node-gyp": "$node-gyp"
     }
