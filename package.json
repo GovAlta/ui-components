@@ -5,7 +5,7 @@
     "init": "git config core.hooksPath .githooks",
     "nx": "nx",
     "start": "nx serve",
-    "build": "nx build",
+   "build": "nx build",
     "post": "nx post",
     "checkin-validate": "npm run build:all && npm run lint:all && npm run test:all",
     "build:all": "nx run-many --target=build --all && nx run-many --target=post --all",
@@ -177,6 +177,7 @@
     "jest-preset-angular": "10.0.1",
     "jest-transform-stub": "^2.0.0",
     "ng-packagr": "12.2.5",
+    "node-gyp": "10.0.1",
     "npm-publish-git-tag": "^3.0.4",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.29",
@@ -217,6 +218,11 @@
     "webpack": "^5.67.0",
     "yargs": "^15.4.1",
     "zone.js": "~0.11.4"
+  },
+ "overrides": {
+    "prebuild": {
+      "node-gyp": "$node-gyp"
+    }
   },
   "repository": {
     "type": "git",
