@@ -53,3 +53,10 @@
   [formControl]="reactiveFormCtrl"
   [attr.disabled]="true"
 ></goa-textarea>
+
+<h2>On Key Press</h2>
+<goa-textarea
+  name="comment-basic"
+  (_keyPress)="onKeyPress($event)"
+  value="Initial value"
+></goa-textarea>

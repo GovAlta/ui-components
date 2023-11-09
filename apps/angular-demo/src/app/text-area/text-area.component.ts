@@ -10,9 +10,13 @@ export class TextAreaComponent {
   boundVal = "";
   reactiveFormCtrl = new FormControl();
 
-  constructor() {}
+  constructor() { }
 
   onChange(e: any) {
     console.log("changed", e.detail.name, e.detail.value);
+  }
+
+  onKeyPress(e: any) {
+    console.log("changed", e.detail.name, e.detail.value, e.detail.key);
   }
 }

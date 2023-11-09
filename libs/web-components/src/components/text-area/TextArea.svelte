@@ -46,6 +46,17 @@
       );
     };
   }
+
+  function onKeyPress(e: KeyboardEvent) {
+    if (_textAreaEl && !isDisabled) {
+      _textAreaEl.dispatchEvent(
+        new CustomEvent("_keyPress", {
+          composed: true,
+          detail: { name, value: value, key: e.key }
+        }),
+      );
+    }
+  }
 </script>
 
 <!-- HTML -->
@@ -68,6 +79,7 @@
     data-testid={testid}
     bind:this={_textAreaEl}
     bind:value={value}
+    on:keyup={onKeyPress}
   />
   {#if showCounter}
     {#if maxcharcount > 0}
