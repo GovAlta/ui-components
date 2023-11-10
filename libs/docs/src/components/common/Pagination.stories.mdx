@@ -264,6 +264,12 @@ export const PaginationTableTemplate = (args) => {
       lang="tsx"
       code={`
       import { faker } from "@faker-js/faker";
+      interface User {
+        id: string;
+        firstName: string;
+        lastName: string;
+        age: number;
+      }
       // ...
       // table data
       const [users, setUsers ] = useState([])
@@ -302,7 +308,7 @@ export const PaginationTableTemplate = (args) => {
             </tr>
           </thead>
           <tbody>
-            {pageUsers.map(u =>
+            {pageUsers.map((u:User) =>
               <tr key={u.id}>
                 <td>{u.firstName}</td>
                 <td>{u.lastName}</td>
@@ -447,6 +453,12 @@ export const PaginationTableTemplate = (args) => {
       lang="tsx"
       code={`
       import { faker } from "@faker-js/faker";
+      interface User {
+        id: string;
+        firstName: string;
+        lastName: string;
+        age: number;
+      }
       const Table = () => {
         // ...
         // table data
@@ -495,7 +507,7 @@ export const PaginationTableTemplate = (args) => {
               </tr>
             </thead>
             <tbody>
-              {pageUsers.map(u:any =>
+              {pageUsers.map((u:User) =>
                 <tr key={u.id}>
                   <td>{u.firstName}</td>
                   <td>{u.lastName}</td>
@@ -516,7 +528,6 @@ export const PaginationTableTemplate = (args) => {
             </GoABlock>
             <GoASpacer hSpacing="fill" />
             <GoAPagination
-              variant={args.variant}
               itemCount={users.length}
               perPageCount={perPage}
               pageNumber={page}
