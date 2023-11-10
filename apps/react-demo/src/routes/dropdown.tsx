@@ -46,11 +46,12 @@ export default function Dropdown() {
 
       <h2>Default</h2>
       <h4>Not Filterable</h4>
-      <GoADropdown name="colors" placeholder="Select a color" onChange={noop}>
+      <GoADropdown value={selectedColor} name="colors" placeholder="Select a color" onChange={onChange}>
         <GoADropdownItem key="red" value="red" label="Red" />
         <GoADropdownItem key="green" value="green" label="Green" />
         <GoADropdownItem key="value" value="blue" label="Blue" />
       </GoADropdown>
+
       <h4>Filterable</h4>
       <GoADropdown
         filterable
@@ -64,6 +65,7 @@ export default function Dropdown() {
       </GoADropdown>
 
       <h2>Disabled</h2>
+
       <h4>Not Filterable</h4>
       <GoADropdown
         name="colors"
@@ -75,6 +77,7 @@ export default function Dropdown() {
         <GoADropdownItem key="green" value="green" label="Green" />
         <GoADropdownItem key="value" value="blue" label="Blue" />
       </GoADropdown>
+
       <h4>Filterable</h4>
       <GoADropdown
         name="colors"
@@ -87,6 +90,7 @@ export default function Dropdown() {
         <GoADropdownItem key="green" value="green" label="Green" />
         <GoADropdownItem key="value" value="blue" label="Blue" />
       </GoADropdown>
+
       <h2>
         Reactive Binding
         <GoAButton onClick={() => setSelectedColor("red")} type="tertiary">
@@ -106,6 +110,7 @@ export default function Dropdown() {
         <GoADropdownItem key="green" value="green" label="Green" />
         <GoADropdownItem key="value" value="blue" label="Blue" />
       </GoADropdown>
+
       <h4>Not Filterable</h4>
       <GoADropdown
         name="colors"
@@ -132,6 +137,7 @@ export default function Dropdown() {
         <GoADropdownItem key="green" value="green" label="Green" />
         <GoADropdownItem key="blue" value="blue" label="Blue" />
       </GoADropdown>
+
       <h4>Filterable</h4>
       <GoADropdown
         name="colors-native"
@@ -160,6 +166,7 @@ export default function Dropdown() {
         <GoADropdownItem key="blue" value="blue" label="Blue" />
       </GoADropdown>
       <h4>Filterable</h4>
+
       <GoADropdown
         name="colors2"
         placeholder="Select a user"
@@ -186,6 +193,7 @@ export default function Dropdown() {
           <GoADropdownItem key={p} value={p} label={p} />
         ))}
       </GoADropdown>
+
       <h4>Filterable</h4>
       <GoADropdown name="province" filterable onChange={selectProvince}>
         {provinces.map((p) => (
@@ -212,6 +220,7 @@ export default function Dropdown() {
         <GoADropdownItem key="green" value="green" label="Green" />
         <GoADropdownItem key="blue" value="blue" label="Blue" />
       </GoADropdown>
+
       <h4>Filterable</h4>
       <GoADropdown
         name="aria"
