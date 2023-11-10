@@ -78,7 +78,7 @@
       <goa-block data-testid="page-selector" alignment="center" gap="s">
         <span>Page</span>
         <input bind:this={hiddenEl} type="hidden" />
-        <goa-dropdown bind:this={pageDropdownEl} value="{pagenumber}" width="70px">
+        <goa-dropdown bind:this={pageDropdownEl} value="{pagenumber}">
           {#each {length: _pageCount} as _, i}
             <goa-dropdown-item value="{i+1}" label="{i+1}"/>
           {/each}
