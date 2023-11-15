@@ -170,7 +170,7 @@
 
     {#if leadingicon}
       <goa-icon
-        class="goa-input-leading-icon"
+        class="leading-icon"
         data-testid="leading-icon"
         type={leadingicon}
       />
@@ -207,7 +207,7 @@
     <!-- Trailing Icon -->
     {#if trailingicon && !handlesTrailingIconClick}
       <goa-icon
-        class="goa-input-trailing-icon"
+        class="trailing-icon"
         data-testid="trailing-icon"
         size="medium"
         type={trailingicon}
@@ -224,7 +224,7 @@
         size="medium"
         icon={trailingicon}
         data-testid="trailing-icon-button"
-        class="goa-input-trailing-icon-button"
+        class="trailing-icon-button"
       />
     {/if}
 
@@ -275,13 +275,13 @@
     background-color: var(--goa-color-greyscale-white);
   }
 
-  .goa-input:hover:not(.goa-input-leading-content):not(.goa-input-trailing-content) {
+  .goa-input:hover:not(.leading-content):not(.trailing-content) {
     border-color: var(--goa-color-interactive-hover);
     box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }
-  .goa-input:active:not(.goa-input-leading-content):not(.goa-input-trailing-content),
-  .goa-input:focus:not(.goa-input-leading-content):not(.goa-input-trailing-content),
-  .goa-input:focus-within:not(.goa-input-leading-content):not(.goa-input-trailing-content) {
+  .goa-input:active:not(.leading-content):not(.trailing-content),
+  .goa-input:focus:not(.leading-content):not(.trailing-content),
+  .goa-input:focus-within:not(.leading-content):not(.trailing-content) {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
 
@@ -296,15 +296,15 @@
     box-shadow: none;
   }
 
-  .goa-input-leading-icon {
+  .leading-icon {
     margin-left: 0.75rem;
   }
 
-  .goa-input-trailing-icon {
+  .trailing-icon {
     margin-right: var(--goa-space-s);
   }
 
-  .goa-input-trailing-icon-button {
+  .trailing-icon-button {
     margin-right: var(--goa-space-xs);
   }
 
@@ -325,7 +325,7 @@
     cursor: pointer;
   }
 
-  .goa-input-leading-icon + input {
+  .leading-icon + input {
     padding-left: 0.5rem;
   }
 
@@ -337,30 +337,31 @@
     border: none;
   }
 
-  .goa-input--disabled,
-  .goa-input--disabled:hover,
-  .goa-input--disabled:active,
-  .goa-input--disabled:focus {
+  .input--disabled,
+  .input--disabled:hover,
+  .input--disabled:active,
+  .input--disabled:focus {
     background-color: var(--goa-color-greyscale-100);
     border-color: var(--goa-color-greyscale-200) !important;
     cursor: default;
     box-shadow: none !important;
   }
 
-  .goa-input--disabled input,
-  .goa-input--disabled input:hover,
-  .goa-input--disabled input:active,
-  .goa-input--disabled input:focus {
+  .input--disabled input,
+  .input--disabled input:hover,
+  .input--disabled input:active,
+  .input--disabled input:focus {
     color: var(--goa-color-text-secondary);
   }
 
-  .goa-input--disabled input:hover {
+  .input--disabled input:hover {
     cursor: default !important;
   }
 
   .prefix,
   .suffix,
-  .leading-content ::slotted(div), .trailing-content ::slotted(div) {
+  .leading-content ::slotted(div),
+  .trailing-content ::slotted(div) {
     background-color: var(--goa-color-greyscale-100);
     padding: 0 0.75rem;
     display: flex;
@@ -377,16 +378,21 @@
     border-bottom-left-radius: var(--goa-border-radius-m);
     border-right: 1px solid var(--goa-color-greyscale-700);
   }
+
   .suffix, .trailing-content ::slotted(div) {
     /* background-clip doesn't want to work */
     border-top-right-radius: var(--goa-border-radius-m);
     border-bottom-right-radius: var(--goa-border-radius-m);
     border-left: 1px solid var(--goa-color-greyscale-700);
   }
-  .goa-input--disabled .prefix, .goa-input--disabled .leading-content ::slotted(div) {
+
+  .input--disabled .prefix, 
+  .input--disabled .leading-content ::slotted(div) {
     border-right: 1px solid var(--goa-color-greyscale-200);
   }
-  .goa-input--disabled .suffix, .goa-input--disabled .trailing-content ::slotted(div) {
+
+  .input--disabled .suffix, 
+  .input--disabled .trailing-content ::slotted(div) {
     border-left: 1px solid var(--goa-color-greyscale-200);
   }
 
@@ -407,12 +413,13 @@
     box-shadow: none;
   }
 
-  .error:not(.goa-input-leading-content):not(.goa-input-trailing-content),
-  .error:hover:not(.goa-input-leading-content):not(.goa-input-trailing-content) {
+  .error:not(.leading-content):not(.trailing-content),
+  .error:hover:not(.leading-content):not(.trailing-content) {
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 1px var(--goa-color-interactive-error);
   }
-  .error:focus-within:hover:not(.goa-input-leading-content):not(.goa-input-trailing-content) {
+
+  .error:focus-within:hover:not(.leading-content):not(.trailing-content) {
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
