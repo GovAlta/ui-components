@@ -2,19 +2,25 @@ import React, { FC, ReactNode, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconType } from "../icon/icon";
 
-export type ButtonType =
+export type GoAButtonType =
   | "primary"
   | "submit"
   | "secondary"
   | "tertiary"
   | "start";
-export type ButtonSize = "compact" | "normal";
-export type ButtonVariant = "normal" | "destructive";
+
+export type GoAButtonSize = "compact" | "normal";
+export type GoAButtonVariant = "normal" | "destructive";
+
+// legacy type names
+export type ButtonType = GoAButtonType;
+export type ButtonSize = GoAButtonSize;
+export type ButtonVariant = GoAButtonVariant;
 
 interface WCProps extends Margins {
-  type?: ButtonType;
-  size?: ButtonSize;
-  variant?: ButtonVariant;
+  type?: GoAButtonType;
+  size?: GoAButtonSize;
+  variant?: GoAButtonVariant;
   disabled?: boolean;
   leadingicon?: string;
   trailingicon?: string;
@@ -32,9 +38,9 @@ declare global {
 }
 
 interface ButtonProps extends Margins {
-  type?: ButtonType;
-  size?: ButtonSize;
-  variant?: ButtonVariant;
+  type?: GoAButtonType;
+  size?: GoAButtonSize;
+  variant?: GoAButtonVariant;
   disabled?: boolean;
   leadingIcon?: GoAIconType;
   trailingIcon?: GoAIconType;

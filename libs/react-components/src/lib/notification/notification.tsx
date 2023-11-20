@@ -1,18 +1,21 @@
 import React, { useEffect, useRef } from "react";
 
-export type NotificationType =
+export type GoANotificationType =
   | "important"
   | "information"
   | "event"
   | "emergency";
 
-export type AriaLiveType = "polite" | "assertive" | "off";
+export type GoAAriaLiveType = "polite" | "assertive" | "off";
+
+export type NotificationType = GoANotificationType;
+export type AriaLiveType = GoAAriaLiveType;
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
-  type: NotificationType;
+  type: GoANotificationType;
   maxcontentwidth?: string;
-  arialive?: AriaLiveType;
+  arialive?: GoAAriaLiveType;
 }
 
 declare global {
@@ -24,9 +27,9 @@ declare global {
   }
 }
 
-interface Props {
-  type?: NotificationType;
-  ariaLive?: AriaLiveType;
+export interface GoANotificationProps {
+  type?: GoANotificationType;
+  ariaLive?: GoAAriaLiveType;
   maxContentWidth?: string;
   children?: React.ReactNode;
   onDismiss?: () => void;
@@ -40,7 +43,7 @@ export const GoANotification = ({
   children,
   testId,
   onDismiss,
-}: Props) => {
+}: GoANotificationProps) => {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {

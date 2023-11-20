@@ -1,12 +1,16 @@
 import React, { FC, useEffect, useRef } from "react";
 
-export type ModalTransition = "fast" | "slow" | "none";
-export type CalloutVariant =
+export type GoAModalTransition = "fast" | "slow" | "none";
+export type GoAModalCalloutVariant =
   | "information"
   | "important"
   | "emergency"
   | "success"
   | "event";
+
+// leagcy type names
+export type ModalTransition = GoAModalTransition;
+export type CalloutVariant = GoAModalCalloutVariant;
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
@@ -14,8 +18,8 @@ interface WCProps {
   open?: boolean;
   maxwidth?: string;
   closable?: boolean;
-  transition?: ModalTransition;
-  calloutVariant?: CalloutVariant;
+  transition?: GoAModalTransition;
+  calloutvariant?: GoAModalCalloutVariant;
 }
 
 declare global {
@@ -27,23 +31,24 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoAModalProps {
   heading?: React.ReactNode;
   maxWidth?: string;
   actions?: React.ReactElement;
   onClose?: () => void;
-  transition?: ModalTransition;
+  transition?: GoAModalTransition;
   children?: React.ReactNode;
   open?: boolean;
-  type?: string;
-  calloutVariant?: CalloutVariant;
+  calloutVariant?: GoAModalCalloutVariant;
   testId?: string;
 
   // @deprecated: use maxWidth
   width?: string;
+  // @deprecated: use variant
+  type?: string;
 }
 
-export const GoAModal: FC<Props> = ({
+export const GoAModal: FC<GoAModalProps> = ({
   heading,
   children,
   maxWidth,
@@ -93,7 +98,7 @@ export const GoAModal: FC<Props> = ({
       closable={!!onClose}
       maxwidth={maxWidth}
       transition={transition}
-      calloutVariant={calloutVariant}
+      calloutvariant={calloutVariant}
       data-testid={testId}
     >
       {heading && <div slot="heading">{heading}</div>}

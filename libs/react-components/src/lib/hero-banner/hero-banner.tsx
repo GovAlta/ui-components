@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoAHeroBannerProps {
   heading: string;
   backgroundUrl?: string;
   minHeight?: string;
@@ -29,7 +29,7 @@ interface Props {
   textColor?: string;
 }
 
-export const GoAHeroBanner: FC<Props> = ({
+export const GoAHeroBanner: FC<GoAHeroBannerProps> = ({
   heading,
   backgroundUrl,
   minHeight,

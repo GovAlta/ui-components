@@ -15,14 +15,14 @@ declare global {
   }
 }
 
-interface Props extends Margins {
+export interface GoAGridProps extends Margins {
   gap?: Spacing;
   minChildWidth: string;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export const GoAGrid: FC<Props> = ({
+export const GoAGrid: FC<GoAGridProps> = ({
   gap,
   minChildWidth,
   mt,

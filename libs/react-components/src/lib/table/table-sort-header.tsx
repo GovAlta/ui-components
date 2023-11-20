@@ -17,13 +17,13 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-interface Props {
+export interface GoATableSortProps {
   name?: string;
   direction?: Direction;
   children?: React.ReactNode;
 }
 
-export const GoATableSortHeader: FC<Props> = ({
+export const GoATableSortHeader: FC<GoATableSortProps> = ({
   name,
   direction = "none",
   children,

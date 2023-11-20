@@ -1,20 +1,20 @@
 import React, { FC, ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
-type ContainerType =
+export type GoAContainerType =
   | "interactive"
   | "non-interactive"
   | "info"
   | "error"
   | "success"
   | "important";
-type Accent = "thick" | "thin" | "filled";
-type ContainerPadding = "relaxed" | "compact";
+export type GoAContainerAccent = "thick" | "thin" | "filled";
+export type GoAContainerPadding = "relaxed" | "compact";
 
 interface WCProps extends Margins {
-  type?: ContainerType;
-  accent?: Accent;
-  padding?: ContainerPadding;
+  type?: GoAContainerType;
+  accent?: GoAContainerAccent;
+  padding?: GoAContainerPadding;
 }
 
 declare global {
@@ -26,18 +26,18 @@ declare global {
   }
 }
 
-interface Props extends Margins {
-  accent?: Accent;
-  type?: ContainerType;
+export interface GoAContainerProps extends Margins {
+  accent?: GoAContainerAccent;
+  type?: GoAContainerType;
   heading?: ReactNode;
   title?: ReactNode;
-  padding?: ContainerPadding;
+  padding?: GoAContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
   testId?: string;
 }
 
-export const GoAContainer: FC<Props> = ({
+export const GoAContainer: FC<GoAContainerProps> = ({
   accent,
   heading,
   title,

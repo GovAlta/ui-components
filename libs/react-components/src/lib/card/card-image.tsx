@@ -14,12 +14,12 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoACardImageProps {
   src: string;
   height: string;
 }
 
-export const GoACardImage: FC<Props> = ({ src, height }) => {
+export const GoACardImage: FC<GoACardImageProps> = ({ src, height }) => {
   return <goa-card-image src={src} height={height} />;
 };
 

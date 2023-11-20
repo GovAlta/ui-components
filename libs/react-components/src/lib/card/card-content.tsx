@@ -9,11 +9,11 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoACardContentProps {
   children?: React.ReactNode;
 }
 
-export const GoACardContent: FC<Props> = ({ children }) => {
+export const GoACardContent: FC<GoACardContentProps> = ({ children }) => {
   return <goa-card-content>{children}</goa-card-content>;
 };
 

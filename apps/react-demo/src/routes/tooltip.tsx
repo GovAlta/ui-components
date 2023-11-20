@@ -1,4 +1,4 @@
-import { GoAButton, GoATooltip, GoAIcon } from "@abgov/react-components";
+import { GoAButton, GoATooltip, GoAIcon, GoATooltipPosition, GoATooltipHorizontalAlignment } from "@abgov/react-components";
 
 export default function Tooltip() {
   const positions = ["top", "bottom", "right", "left"];
@@ -23,8 +23,8 @@ export default function Tooltip() {
               <div key={position + align} style={{ margin: "10px" }}>
                 <GoATooltip
                   content={`This is a ${position} tooltip with ${align} alignment`}
-                  position={position}
-                  hAlign={align}
+                  position={position as GoATooltipPosition}
+                  hAlign={align as GoATooltipHorizontalAlignment}
                 >
                   <GoAIcon type="information-circle" />
                 </GoATooltip>
@@ -34,7 +34,7 @@ export default function Tooltip() {
             <div key={position} style={{ margin: "10px" }}>
               <GoATooltip
                 content={`This is a ${position} tooltip`}
-                position={position}
+                position={position as GoATooltipPosition}
               >
                 <GoAIcon type="information-circle" />
               </GoATooltip>
@@ -59,11 +59,10 @@ export default function Tooltip() {
                 <GoATooltip
                   content={`Hover me for a ${position} tooltip with ${align} alignment`}
                   position={position}
-                  hAlign={align}
+                  hAlign={align as GoATooltipHorizontalAlignment}
                 >
-                  <GoAButton type="secondary">{`${
-                    position.charAt(0).toUpperCase() + position.slice(1)
-                  } Hover me`}</GoAButton>
+                  <GoAButton type="secondary">{`${position.charAt(0).toUpperCase() + position.slice(1)
+                    } Hover me`}</GoAButton>
                 </GoATooltip>
               </div>
             ))
@@ -71,11 +70,10 @@ export default function Tooltip() {
             <div key={position} style={{ margin: "10px" }}>
               <GoATooltip
                 content={`Hover me for a ${position} tooltip`}
-                position={position}
+                position={position as GoATooltipPosition}
               >
-                <GoAButton type="secondary">{`${
-                  position.charAt(0).toUpperCase() + position.slice(1)
-                } Hover me`}</GoAButton>
+                <GoAButton type="secondary">{`${position.charAt(0).toUpperCase() + position.slice(1)
+                  } Hover me`}</GoAButton>
               </GoATooltip>
             </div>
           )

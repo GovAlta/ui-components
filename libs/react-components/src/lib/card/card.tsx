@@ -16,14 +16,14 @@ declare global {
   }
 }
 
-interface Props extends Margins {
+export interface GoACardProps extends Margins {
   elevation?: number;
   width?: string;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export const GoACard: FC<Props> = ({
+export const GoACard: FC<GoACardProps> = ({
   elevation,
   width,
   mt,

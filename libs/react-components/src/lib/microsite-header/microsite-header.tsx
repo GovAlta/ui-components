@@ -10,25 +10,29 @@ declare global {
   }
 }
 
-export type ServiceLevel = "alpha" | "beta" | "live";
+export type GoAServiceLevel = "alpha" | "beta" | "live";
+export type GoALinkTarget = "self" | "blank";
+
+// leagcy type name
+export type ServiceLevel = GoAServiceLevel;
 
 interface WebComponentProps {
-  type: ServiceLevel;
+  type: GoAServiceLevel;
   version?: string;
   feedbackurl?: string;
   maxcontentwidth?: string;
-  feedbackurltarget?: "self" | "blank";
-  headerurltarget?: "self" | "blank";
+  feedbackurltarget?: GoALinkTarget
+  headerurltarget?: GoALinkTarget;
 }
 
 export interface HeaderProps {
-  type: ServiceLevel;
+  type: GoAServiceLevel;
   version?: string;
   feedbackUrl?: string;
   testId?: string;
   maxContentWidth?: string;
-  feedbackUrlTarget?: "self" | "blank";
-  headerUrlTarget?: "self" | "blank";
+  feedbackUrlTarget?: GoALinkTarget;
+  headerUrlTarget?: GoALinkTarget;
 }
 
 export const GoAMicrositeHeader: FC<HeaderProps> = ({

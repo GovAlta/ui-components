@@ -19,7 +19,7 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface PaginationProps extends Margins {
+export interface GoAPaginationProps extends Margins {
   itemCount: number;
   perPageCount?: number;
   pageNumber: number;
@@ -28,7 +28,10 @@ export interface PaginationProps extends Margins {
   testId?: string;
 }
 
-export function GoAPagination(props: PaginationProps) {
+// legacy
+export type PaginationProps = GoAPaginationProps;
+
+export function GoAPagination(props: GoAPaginationProps) {
   const ref = useRef<HTMLElement>();
 
   useEffect(() => {
