@@ -24,7 +24,7 @@ interface CheckboxProps extends Margins {
 }
 
 /* eslint-disable-next-line */
-export interface Props extends Margins {
+export interface GoACheckboxProps extends Margins {
   id?: string;
   name: string;
   checked: boolean;
@@ -39,7 +39,10 @@ export interface Props extends Margins {
   onChange?: (name: string, checked: boolean, value: string) => void;
 }
 
-export const GoACheckbox: FC<Props> = ({
+// legacy
+export type Props = GoACheckboxProps;
+
+export const GoACheckbox: FC<GoACheckboxProps> = ({
   id,
   name,
   testId,

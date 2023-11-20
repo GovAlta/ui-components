@@ -24,7 +24,7 @@ declare global {
   }
 }
 
-interface Props extends Margins {
+export interface GoATextAreaProps extends Margins {
   name: string;
   value: string;
   id?: string;
@@ -40,7 +40,7 @@ interface Props extends Margins {
   onChange: (name: string, value: string) => void;
 }
 
-export const GoATextArea: FC<Props> = ({
+export const GoATextArea: FC<GoATextAreaProps> = ({
   name,
   value,
   placeholder,

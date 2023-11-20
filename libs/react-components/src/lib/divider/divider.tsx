@@ -11,7 +11,11 @@ declare global {
   }
 }
 
-export function GoADivider(props: Margins & { testId?: string }) {
+export interface GoADividerProps extends Margins {
+  testId?: string;
+}
+
+export function GoADivider(props: GoADividerProps) {
   return (
     <goa-divider
       mt={props.mt}

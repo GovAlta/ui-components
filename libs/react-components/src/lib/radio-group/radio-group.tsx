@@ -3,11 +3,13 @@ import { Margins } from "../../common/styling";
 
 export * from "./radio";
 
-interface RadioGroupProps extends Margins {
+export type GoARadioGroupOrientation = "horizontal" | "vertical";
+
+interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   name: string;
   value?: string;
-  orientation: string;
+  orientation: GoARadioGroupOrientation;
   disabled: boolean;
   error: boolean;
   arialabel?: string;
@@ -17,16 +19,16 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-radio-group": RadioGroupProps & React.HTMLAttributes<HTMLElement>;
+      "goa-radio-group": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
 
-interface Props extends Margins {
+export interface GoARadioGroupProps extends Margins {
   name: string;
   value?: string;
   disabled?: boolean;
-  orientation?: "horizontal" | "vertical";
+  orientation?: GoARadioGroupOrientation;
   testId?: string;
   error?: boolean;
   ariaLabel?: string;
@@ -34,7 +36,7 @@ interface Props extends Margins {
   onChange: (name: string, value: string) => void;
 }
 
-export const GoARadioGroup: FC<Props> = ({
+export const GoARadioGroup: FC<GoARadioGroupProps> = ({
   name,
   value,
   children,

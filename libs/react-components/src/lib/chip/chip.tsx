@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
-type ChipVariant = "filter";
+export type GoAChipVariant = "filter";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
@@ -21,13 +21,13 @@ declare global {
   }
 }
 
-interface Props extends Margins {
+export interface GoAChipProps extends Margins {
   onClick?: () => void;
   deletable?: boolean;
   leadingIcon?: string;
   error?: boolean;
   content: string;
-  variant?: ChipVariant;
+  variant?: GoAChipVariant;
   testId?: string;
 }
 
@@ -43,7 +43,7 @@ export const GoAChip = ({
   mb,
   ml,
   testId,
-}: Props) => {
+}: GoAChipProps) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) return;

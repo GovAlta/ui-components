@@ -1,14 +1,6 @@
 import React, { FC, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
-interface Props extends Margins {
-  name?: string;
-  value?: Date;
-  min?: Date;
-  max?: Date;
-  onChange: (name: string, value: Date) => void;
-}
-
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   name?: string;
@@ -27,7 +19,15 @@ declare global {
   }
 }
 
-export const GoADatePicker: FC<Props> = ({
+export interface GoADatePickerProps extends Margins {
+  name?: string;
+  value?: Date;
+  min?: Date;
+  max?: Date;
+  onChange: (name: string, value: Date) => void;
+}
+
+export const GoADatePicker: FC<GoADatePickerProps> = ({
   name,
   value,
   min,
@@ -37,7 +37,7 @@ export const GoADatePicker: FC<Props> = ({
   mb,
   ml,
   onChange,
-}: Props) => {
+}: GoADatePickerProps) => {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!ref.current) {

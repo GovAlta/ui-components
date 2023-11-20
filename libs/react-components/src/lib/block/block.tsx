@@ -18,7 +18,7 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface BlockProps extends Margins {
+export interface GoABlockProps extends Margins {
   gap?: Spacing;
   direction?: Direction;
   alignment?: Alignment;
@@ -26,7 +26,10 @@ export interface BlockProps extends Margins {
   children?: ReactNode;
 }
 
-export function GoABlock(props: BlockProps) {
+// legacy
+export type BlockProps = GoABlockProps;
+
+export function GoABlock(props: GoABlockProps) {
   return (
     <goa-block
       gap={props.gap}

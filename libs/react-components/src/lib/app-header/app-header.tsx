@@ -15,7 +15,7 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoAAppHeaderProps {
   heading?: string;
   url?: string;
   maxContentWidth?: string;
@@ -23,7 +23,7 @@ interface Props {
   testId?: string;
 }
 
-export const GoAAppHeader: FC<Props> = ({
+export const GoAAppHeader: FC<GoAAppHeaderProps> = ({
   heading,
   url,
   maxContentWidth,

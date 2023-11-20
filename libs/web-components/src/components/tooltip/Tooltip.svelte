@@ -4,12 +4,14 @@
   import { onDestroy, onMount } from "svelte";
   import { typeValidator } from "../../common/utils";
   import { Spacing, calculateMargin } from "../../common/styling";
+
   // Validator
   const [Positions, validatePosition] = typeValidator(
     "Tooltip positions",
     ["top", "bottom", "left", "right"],
     false,
   );
+
   const [Alignment, validateAlignment] = typeValidator(
     "Tooltip alignment",
     ["left", "right", "center"],

@@ -1,11 +1,11 @@
 import React, { FC, ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
-type HeadingSize = "small" | "medium";
+export type GoAHeadingSize = "small" | "medium";
 
 interface WCProps extends Margins {
   open?: boolean;
-  headingSize?: HeadingSize;
+  headingSize?: GoAHeadingSize;
   heading: string;
   secondaryText?: string;
   headingContent?: ReactNode;
@@ -20,9 +20,9 @@ declare global {
   }
 }
 
-interface Props extends Margins {
+export interface GoAAccordionProps extends Margins {
   open?: boolean;
-  headingSize?: HeadingSize;
+  headingSize?: GoAHeadingSize;
   secondaryText?: string;
   heading: string;
   headingContent?: ReactNode;
@@ -30,7 +30,7 @@ interface Props extends Margins {
   children: ReactNode;
 }
 
-export const GoAAccordion: FC<Props> = ({
+export const GoAAccordion: FC<GoAAccordionProps> = ({
   open,
   heading,
   headingSize,

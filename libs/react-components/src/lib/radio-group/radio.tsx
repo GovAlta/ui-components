@@ -19,7 +19,7 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoARadioItemProps {
   value: string;
   label?: string;
   name?: string;
@@ -31,7 +31,7 @@ interface Props {
   testId?: string;
 }
 
-export const GoARadioItem: FC<Props> = ({
+export const GoARadioItem: FC<GoARadioItemProps> = ({
   name,
   label,
   value,

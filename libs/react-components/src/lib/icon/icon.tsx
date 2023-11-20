@@ -1,7 +1,7 @@
 import React from "react";
 import { Margins } from "../../common/styling";
 
-type GoAIconFilledType = `${GoAIconType}-${IconTheme}`;
+export type GoAIconFilledType = `${GoAIconType}-${GoAIconTheme}`;
 
 interface IonIconProps {
   name: GoAIconType | GoAIconFilledType;
@@ -537,21 +537,26 @@ export type GoAIconType =
   | "logo-yen"
   | "logo-youtube";
 
-export type IconSize = "small" | "medium" | "large" | "xlarge";
-export type IconVariant = "primary" | "secondary" | "tertiary";
-export type IconTheme = "outline" | "filled" | "sharp";
+export type GoAIconSize = "small" | "medium" | "large" | "xlarge";
+export type GoAIconVariant = "primary" | "secondary" | "tertiary";
+export type GoAIconTheme = "outline" | "filled" | "sharp";
 
-interface Props extends Margins {
+// legacy naming
+export type IconSize = GoAIconSize;
+export type IconVariant = GoAIconVariant;
+export type IconTheme = GoAIconTheme;
+
+export interface GoAIconProps extends Margins {
   type: GoAIconType;
-  size?: IconSize;
-  theme?: IconTheme;
+  size?: GoAIconSize;
+  theme?: GoAIconTheme;
   testId?: string;
 }
 
 interface WCProps extends Margins {
   type: GoAIconType;
-  theme?: IconTheme;
-  size?: IconSize;
+  theme?: GoAIconTheme;
+  size?: GoAIconSize;
 }
 
 export function GoAIcon({
@@ -563,7 +568,7 @@ export function GoAIcon({
   mb,
   ml,
   testId,
-}: Props): JSX.Element {
+}: GoAIconProps): JSX.Element {
   return (
     <goa-icon
       type={type}

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 
-type Variant = "dragdrop" | "button";
+export type GoAFileUploadInputVariant = "dragdrop" | "button";
 
 interface WCProps {
   ref: React.MutableRefObject<HTMLElement | null>;
-  variant?: Variant;
+  variant?: GoAFileUploadInputVariant;
   accept?: string;
   maxfilesize?: string;
 }
@@ -21,7 +21,7 @@ declare global {
 
 /* eslint-disable-next-line */
 interface FileUploadInputProps {
-  variant?: Variant;
+  variant?: GoAFileUploadInputVariant;
   accept?: string;
   maxFileSize?: string;
   onSelectFile: (file: File) => void;

@@ -15,7 +15,7 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoAThreeColumnLayoutProps {
   leftColumnWidth?: string;
   rightColumnWidth?: string;
   maxContentWidth?: string;
@@ -27,7 +27,7 @@ interface Props {
   children: ReactNode;
 }
 
-export function GoAThreeColumnLayout(props: Props) {
+export function GoAThreeColumnLayout(props: GoAThreeColumnLayoutProps) {
   return (
     <goa-three-column-layout
       leftcolumnwidth={props.leftColumnWidth}

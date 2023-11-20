@@ -10,14 +10,6 @@ export type GoABadgeType =
   | "midtone"
   | "light";
 
-interface GoABadgeProps extends Margins {
-  type: GoABadgeType;
-  icon?: boolean;
-  content?: string;
-  testId?: string;
-  ariaLabel?: string;
-}
-
 interface WCProps extends Margins {
   type: GoABadgeType;
   icon?: boolean;
@@ -33,6 +25,14 @@ declare global {
       "goa-badge": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
+}
+
+export interface GoABadgeProps extends Margins {
+  type: GoABadgeType;
+  icon?: boolean;
+  content?: string;
+  testId?: string;
+  ariaLabel?: string;
 }
 
 export const GoABadge: FC<GoABadgeProps> = ({
