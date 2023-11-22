@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconType } from "../icon/icon";
 
@@ -64,7 +64,7 @@ function stringify(value: string | string[] | undefined): string {
   return JSON.stringify(value);
 }
 
-export const GoADropdown: FC<GoADropdownProps> = (props) => {
+export function GoADropdown(props: GoADropdownProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {

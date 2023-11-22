@@ -1,5 +1,3 @@
-import React, { FC } from "react";
-
 interface RadioItemProps {
   name?: string;
   value: string;
@@ -31,7 +29,7 @@ export interface GoARadioItemProps {
   testId?: string;
 }
 
-export const GoARadioItem: FC<GoARadioItemProps> = ({
+export function GoARadioItem({
   name,
   label,
   value,
@@ -41,7 +39,7 @@ export const GoARadioItem: FC<GoARadioItemProps> = ({
   error,
   testId,
   children,
-}) => {
+}: GoARadioItemProps): JSX.Element {
   return (
     <goa-radio-item
       name={name}

@@ -1,4 +1,3 @@
-import React from "react";
 import { Spacing } from "../../common/styling";
 
 /* eslint-disable-next-line */

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface WCProps {
   heading: string;
@@ -20,7 +20,7 @@ interface SideMenuGroupProps {
   children?: ReactNode;
 }
 
-export function GoASideMenuGroup(props: SideMenuGroupProps) {
+export function GoASideMenuGroup(props: SideMenuGroupProps): JSX.Element {
   return (
     <goa-side-menu-group heading={props.heading}>
       {props.children}

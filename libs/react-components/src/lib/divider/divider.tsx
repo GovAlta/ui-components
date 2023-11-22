@@ -1,4 +1,3 @@
-import React from "react";
 import { Margins } from "../../common/styling";
 
 declare global {

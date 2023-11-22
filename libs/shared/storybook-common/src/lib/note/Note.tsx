@@ -1,10 +1,11 @@
-import React, { FC } from "react";
+import { ReactNode } from "react";
 import "./Note.css";
 
 type NoteType = "caution" | "do" | "dont" | "best-practices";
 
 interface Props {
   type: NoteType;
+  children: ReactNode;
 }
 
 function getTitle(type: NoteType) {
@@ -20,7 +21,7 @@ function getTitle(type: NoteType) {
   }
 }
 
-export const Note: FC<Props> = (props) => {
+export function Note(props: Props): JSX.Element {
   return (
     <div className={`note note-${props.type}`}>
       <h3 className="note-title">{getTitle(props.type)}</h3>

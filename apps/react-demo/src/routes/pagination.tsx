@@ -1,5 +1,5 @@
 import { GoAPagination, GoATable } from "@abgov/react-components";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { faker } from "@faker-js/faker";
 
 interface User {

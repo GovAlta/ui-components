@@ -1,5 +1,3 @@
-import React, { FC } from "react";
-
 interface WCProps {
   heading: string;
   backgroundurl?: string;
@@ -29,7 +27,7 @@ export interface GoAHeroBannerProps {
   textColor?: string;
 }
 
-export const GoAHeroBanner: FC<GoAHeroBannerProps> = ({
+export function GoAHeroBanner({
   heading,
   backgroundUrl,
   minHeight,
@@ -38,7 +36,7 @@ export const GoAHeroBanner: FC<GoAHeroBannerProps> = ({
   textColor,
   children,
   testId,
-}) => {
+}: GoAHeroBannerProps): JSX.Element {
   return (
     <goa-hero-banner
       heading={heading}

@@ -1,7 +1,6 @@
 import { render } from "@testing-library/react";
 
 import SideMenuHeading from "./side-menu-heading";
-import React from "react";
 
 describe("SideMenuHeading", () => {
   it("should render successfully", () => {

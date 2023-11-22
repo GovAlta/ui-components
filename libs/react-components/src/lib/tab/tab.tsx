@@ -1,5 +1,3 @@
-import React, { FC } from "react";
-
 interface WCProps {
   heading?: React.ReactNode;
 }
@@ -18,7 +16,7 @@ export interface TabItemProps {
   children?: React.ReactNode;
 }
 
-export const GoATab: FC<TabItemProps> = ({ heading, children }) => {
+export function GoATab({ heading, children }: TabItemProps): JSX.Element {
   return (
     <goa-tab>
       {heading && <span slot="heading">{heading}</span>}

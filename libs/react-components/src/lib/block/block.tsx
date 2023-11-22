@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Alignment, Direction, Margins, Spacing } from "../../common/styling";
 
 export interface WCProps extends Margins {

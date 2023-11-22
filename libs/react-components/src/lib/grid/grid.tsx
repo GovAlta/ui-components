@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import { Margins, Spacing } from "../../common/styling";
 
 interface WCProps extends Margins {
@@ -22,7 +21,7 @@ export interface GoAGridProps extends Margins {
   children?: React.ReactNode;
 }
 
-export const GoAGrid: FC<GoAGridProps> = ({
+export function GoAGrid({
   gap,
   minChildWidth,
   mt,
@@ -31,7 +30,7 @@ export const GoAGrid: FC<GoAGridProps> = ({
   ml,
   testId,
   children,
-}) => {
+}: GoAGridProps): JSX.Element {
   return (
     <goa-grid
       gap={gap}

@@ -1,6 +1,5 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render, waitFor } from "@testing-library/react";
-import React, { useState } from "react";
+import { render } from "@testing-library/react";
 import GoAButton from "../../lib/button/button";
 import { GoAModal } from "./modal";
 

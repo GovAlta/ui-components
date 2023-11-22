@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconSize, GoAIconType } from "../icon/icon";
 
@@ -36,7 +36,7 @@ export interface GoAIconButtonProps extends Margins {
   testId?: string;
 }
 
-export const GoAIconButton: FC<GoAIconButtonProps> = ({
+export function GoAIconButton({
   icon,
   disabled,
   variant = "color",
@@ -49,7 +49,7 @@ export const GoAIconButton: FC<GoAIconButtonProps> = ({
   mr,
   mb,
   ml,
-}) => {
+}: GoAIconButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!ref.current) {

@@ -1,12 +1,13 @@
-import React, { FC } from "react";
+import React, { ReactNode } from "react";
 import { Tab, Tabs } from "../tabs/Tabs";
 import "./Props.css";
 
 interface Props {
   showTabs?: boolean;
+  children?: ReactNode;
 }
 
-export const Props: FC<Props> = (props) => {
+export function Props(props: Props): JSX.Element {
   const table = (children: React.ReactNode) => (
     <table className="props">
       <thead>

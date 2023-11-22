@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import ReactMarkdown from "react-markdown";
 
 type Props = {
@@ -10,14 +10,14 @@ type Props = {
   defaultValue: string;
 };
 
-export const Prop: FC<Props> = ({
+export function Prop({
   name,
   type,
   lang,
   required,
   defaultValue,
   description,
-}) => {
+}: Props): JSX.Element {
   const formatTypes = () => {
     return type
       .split("|")
