@@ -6,6 +6,7 @@ import {
   waitFor,
 } from "@testing-library/svelte";
 import { addDays, lastDayOfMonth, startOfDay } from "date-fns";
+import { tick } from "svelte";
 
 function toDayStart(d: Date): Date {
   d.setHours(0);
@@ -17,6 +18,7 @@ function toDayStart(d: Date): Date {
 
 it("it renders", async () => {
   const { container, queryByTestId } = render(Calendar);
+  await tick()
 
   const monthsEl = queryByTestId("months");
   const yearsEl = queryByTestId("years");
@@ -56,8 +58,9 @@ it("it renders", async () => {
   }
 });
 
-it("should have no date selected if one not provided", () => {
+it("should have no date selected if one not provided", async () => {
   const { container } = render(Calendar);
+  await tick()
 
   const selectedDate = container.querySelector(".selected");
   expect(selectedDate).toBeFalsy();
@@ -66,6 +69,7 @@ it("should have no date selected if one not provided", () => {
 it("sets the preset date value", async () => {
   const date = new Date().toISOString();
   const { container } = render(Calendar, { value: date });
+  await tick()
 
   const timestamp = toDayStart(new Date(date));
   const dayEl = container
@@ -80,6 +84,7 @@ it("provides the defined year range", async () => {
   const min = new Date(now.getFullYear() - diff, now.getMonth(), now.getDate());
   const max = new Date(now.getFullYear() + diff, now.getMonth(), now.getDate());
   const { queryByTestId } = render(Calendar, { min, max });
+  await tick()
 
   const years = queryByTestId("years").querySelectorAll("goa-dropdown-item");
 
@@ -106,6 +111,7 @@ it("show the default year range", async () => {
     now.getDate(),
   );
   const { queryByTestId } = render(Calendar, { min, max });
+  await tick()
 
   const years = queryByTestId("years").querySelectorAll("goa-dropdown-item");
 
@@ -121,6 +127,7 @@ it("show the default year range", async () => {
 it("emits an event when a date is selected", async () => {
   const name = "birthdate";
   const { container, queryByTestId } = render(Calendar, { name });
+  await tick()
 
   const today = toDayStart(new Date());
   const todayEl = container.querySelector(
@@ -143,6 +150,7 @@ it("emits an event when a date is selected", async () => {
 
 it("updates the calendar when a new month is selected", async () => {
   const { container, queryByTestId } = render(Calendar);
+  await tick()
 
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const monthsEl = queryByTestId("months");
@@ -180,6 +188,7 @@ it("updates the calendar when a new month is selected", async () => {
 
 it("updates the calendar when a new year is selected", async () => {
   const { container, queryByTestId } = render(Calendar);
+  await tick()
 
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const yearsEl = queryByTestId("years");
@@ -218,6 +227,7 @@ it("updates the calendar when a new year is selected", async () => {
 
 it("handle the arrow key presses", async () => {
   const { container, queryByTestId } = render(Calendar, { value: new Date() });
+  await tick()
 
   let timestamp = toDayStart(new Date());
   const calendarEl = queryByTestId("calendar");
@@ -275,6 +285,7 @@ it("prevents date click selection outside of allowed range", async () => {
   const max = new Date();
   const today = startOfDay(new Date());
   const { container, queryByTestId } = render(Calendar, { min, max });
+  await tick()
 
   const yesterday = addDays(today, -1);
   const tomorrow = addDays(today, +1);
@@ -305,6 +316,7 @@ it("prevents date keyboard selection outside of allowed range", async () => {
   const min = new Date(); // today is the only date selectable
   const max = new Date();
   const { queryByTestId } = render(Calendar, { min, max });
+  await tick()
 
   const onChange = jest.fn();
   const calendarEl = queryByTestId("calendar");
