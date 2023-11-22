@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconType } from "../icon/icon";
 
@@ -49,7 +49,7 @@ interface ButtonProps extends Margins {
   children?: ReactNode;
 }
 
-export const GoAButton: FC<ButtonProps> = ({
+export function GoAButton({
   disabled = false,
   type = "primary",
   size,
@@ -63,7 +63,7 @@ export const GoAButton: FC<ButtonProps> = ({
   mr,
   mb,
   ml,
-}) => {
+}: ButtonProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {

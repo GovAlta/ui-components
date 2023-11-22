@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface WCProps {
   maxcontentwidth?: string;
@@ -24,7 +24,7 @@ export function GoAAppFooter({
   maxContentWidth,
   children,
   testId,
-}: FooterProps) {
+}: FooterProps): JSX.Element {
   return (
     <goa-app-footer maxcontentwidth={maxContentWidth} data-testid={testId}>
       {children}

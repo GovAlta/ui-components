@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
 export type GoAContainerType =
@@ -37,7 +37,7 @@ export interface GoAContainerProps extends Margins {
   testId?: string;
 }
 
-export const GoAContainer: FC<GoAContainerProps> = ({
+export function GoAContainer({
   accent,
   heading,
   title,
@@ -50,7 +50,7 @@ export const GoAContainer: FC<GoAContainerProps> = ({
   mb,
   ml,
   testId,
-}) => {
+}: GoAContainerProps): JSX.Element {
   const headingContent = heading || title;
   return (
     <goa-container

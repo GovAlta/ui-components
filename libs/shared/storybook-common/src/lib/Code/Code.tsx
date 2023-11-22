@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import { CopyBlock, github as theme } from "react-code-blocks";
 import "./Code.css";
 type Language =
@@ -111,7 +110,7 @@ const cleanTabs = (code = "", tabSize: number): string => {
     .trim();
 };
 
-export const CodeSnippet: FC<Props> = ({ lang, code, tabSize = 2 }) => {
+export function CodeSnippet({ lang, code, tabSize = 2 }: Props): JSX.Element {
   const cleanCode = cleanTabs(code, tabSize);
 
   return (

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
 interface WCProps extends Margins {
@@ -40,7 +40,7 @@ export interface GoATextAreaProps extends Margins {
   onChange: (name: string, value: string) => void;
 }
 
-export const GoATextArea: FC<GoATextAreaProps> = ({
+export function GoATextArea({
   name,
   value,
   placeholder,
@@ -57,7 +57,7 @@ export const GoATextArea: FC<GoATextAreaProps> = ({
   mb,
   ml,
   onChange,
-}) => {
+}: GoATextAreaProps): JSX.Element {
   const el = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {

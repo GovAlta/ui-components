@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export interface WCPageBlockProps {
   width: "full" | string;
@@ -19,7 +19,7 @@ export interface PageBlockProps {
   children?: ReactNode;
 }
 
-export const GoAPageBlock: FC<PageBlockProps> = (props) => {
+export function GoAPageBlock(props: PageBlockProps): JSX.Element {
   return (
     <goa-page-block width={props.width} data-testid={props.testId}>
       {props.children}

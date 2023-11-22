@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
 export type GoATableVariant = "normal" | "relaxed";

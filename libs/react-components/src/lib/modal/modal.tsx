@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import { ReactElement, ReactNode, RefObject, useEffect, useRef } from "react";
 
 export type GoAModalTransition = "fast" | "slow" | "none";
 export type GoAModalCalloutVariant =
@@ -13,8 +13,8 @@ export type ModalTransition = GoAModalTransition;
 export type CalloutVariant = GoAModalCalloutVariant;
 
 interface WCProps {
-  ref: React.RefObject<HTMLElement>;
-  heading?: React.ReactNode;
+  ref: RefObject<HTMLElement>;
+  heading?: ReactNode;
   open?: boolean;
   maxwidth?: string;
   closable?: boolean;
@@ -32,12 +32,12 @@ declare global {
 }
 
 export interface GoAModalProps {
-  heading?: React.ReactNode;
+  heading?: ReactNode;
   maxWidth?: string;
-  actions?: React.ReactElement;
+  actions?: ReactElement;
   onClose?: () => void;
   transition?: GoAModalTransition;
-  children?: React.ReactNode;
+  children?: ReactNode;
   open?: boolean;
   calloutVariant?: GoAModalCalloutVariant;
   testId?: string;
@@ -48,7 +48,7 @@ export interface GoAModalProps {
   type?: string;
 }
 
-export const GoAModal: FC<GoAModalProps> = ({
+export function GoAModal({
   heading,
   children,
   maxWidth,
@@ -61,7 +61,7 @@ export const GoAModal: FC<GoAModalProps> = ({
   testId,
 
   width,
-}) => {
+}: GoAModalProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   // deprecation

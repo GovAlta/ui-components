@@ -1,5 +1,3 @@
-import React, { FC } from "react";
-
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
@@ -35,7 +33,7 @@ export interface HeaderProps {
   headerUrlTarget?: GoALinkTarget;
 }
 
-export const GoAMicrositeHeader: FC<HeaderProps> = ({
+export function GoAMicrositeHeader({
   type,
   version,
   feedbackUrl,
@@ -43,7 +41,7 @@ export const GoAMicrositeHeader: FC<HeaderProps> = ({
   feedbackUrlTarget,
   headerUrlTarget,
   testId,
-}) => {
+}: HeaderProps): JSX.Element {
   return (
     <goa-microsite-header
       type={type}

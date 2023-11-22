@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
 export type GoAHeadingSize = "small" | "medium";
@@ -30,7 +30,7 @@ export interface GoAAccordionProps extends Margins {
   children: ReactNode;
 }
 
-export const GoAAccordion: FC<GoAAccordionProps> = ({
+export function GoAAccordion({
   open,
   heading,
   headingSize,
@@ -42,7 +42,7 @@ export const GoAAccordion: FC<GoAAccordionProps> = ({
   mr,
   mb,
   ml,
-}) => {
+}: GoAAccordionProps): JSX.Element {
   return (
     <goa-accordion
       open={open}

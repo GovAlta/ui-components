@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -15,7 +15,7 @@ export interface SideMenuProps {
   children: ReactNode;
 }
 
-export function GoASideMenu(props: SideMenuProps) {
+export function GoASideMenu(props: SideMenuProps): JSX.Element {
   return <goa-side-menu>{props.children}</goa-side-menu>;
 }
 

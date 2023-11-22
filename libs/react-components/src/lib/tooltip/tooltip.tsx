@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
 export type GoATooltipPosition = "top" | "bottom" | "left" | "right";
@@ -29,7 +29,7 @@ export interface GoATooltipProps extends Margins {
   children?: ReactNode;
 }
 
-export const GoATooltip: React.FC<GoATooltipProps> = (props) => {
+export function GoATooltip(props: GoATooltipProps): JSX.Element {
   return (
     <goa-tooltip
       position={props.position}

@@ -1,9 +1,8 @@
 import "@testing-library/jest-dom";
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
 import { GoAInputDateTime, GoAInputText, InputProps } from "./input";
 import { GoAIconType } from "../icon/icon";
-import React from "react";
 
 const noop = () => {};
 const testId = "test-id";

@@ -1,5 +1,4 @@
 import "@testing-library/jest-dom";
-import React from "react";
 import { render } from "@testing-library/react";
 import GoANotification, { NotificationType } from "./notification";
 import { fireEvent } from "@testing-library/dom";

@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import { Margins } from "../../common/styling";
 
 export type GoAFormItemRequirement = "optional" | "required";
@@ -33,7 +32,7 @@ interface GoAFormItemProps extends Margins {
   id?: string;
 }
 
-export const GoAFormItem: FC<GoAFormItemProps> = ({
+export function GoAFormItem({
   children,
   helpText,
   error,
@@ -46,7 +45,7 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({
   ml,
   testId,
   id,
-}) => {
+}: GoAFormItemProps): JSX.Element {
   return (
     <goa-form-item
       label={label}

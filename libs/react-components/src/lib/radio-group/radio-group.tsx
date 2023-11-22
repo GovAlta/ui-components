@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
 export * from "./radio";
@@ -36,7 +36,7 @@ export interface GoARadioGroupProps extends Margins {
   onChange: (name: string, value: string) => void;
 }
 
-export const GoARadioGroup: FC<GoARadioGroupProps> = ({
+export function GoARadioGroup({
   name,
   value,
   children,
@@ -50,7 +50,7 @@ export const GoARadioGroup: FC<GoARadioGroupProps> = ({
   mb,
   ml,
   onChange,
-}) => {
+}: GoARadioGroupProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {

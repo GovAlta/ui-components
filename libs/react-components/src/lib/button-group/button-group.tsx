@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import { Margins } from "../../common/styling";
 
 export type GoAButtonGroupAlignment = "start" | "end" | "center";
@@ -28,7 +27,7 @@ interface ButtonGroupProps extends Margins {
   children?: React.ReactNode;
 }
 
-export const GoAButtonGroup: FC<ButtonGroupProps> = ({
+export function GoAButtonGroup({
   alignment,
   gap,
   testId,
@@ -37,7 +36,7 @@ export const GoAButtonGroup: FC<ButtonGroupProps> = ({
   mr,
   mb,
   ml,
-}) => {
+}: ButtonGroupProps): JSX.Element {
   return (
     <goa-button-group
       alignment={alignment}

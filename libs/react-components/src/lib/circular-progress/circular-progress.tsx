@@ -1,5 +1,3 @@
-import React from "react";
-
 export type GoACircularProgressVariant = "fullscreen" | "inline";
 export type GoACircularProgressSize = "small" | "large";
 

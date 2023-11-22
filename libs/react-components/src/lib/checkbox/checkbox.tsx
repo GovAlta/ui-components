@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
 declare global {
@@ -42,7 +42,7 @@ export interface GoACheckboxProps extends Margins {
 // legacy
 export type Props = GoACheckboxProps;
 
-export const GoACheckbox: FC<GoACheckboxProps> = ({
+export function GoACheckbox({
   id,
   name,
   testId,
@@ -59,7 +59,7 @@ export const GoACheckbox: FC<GoACheckboxProps> = ({
   mr,
   mb,
   ml,
-}) => {
+}: GoACheckboxProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
