@@ -34,13 +34,16 @@ declare global {
   }
 }
 
-export interface SkeletonProps extends Margins {
+export interface GoASkeletonProps extends Margins {
   maxWidth?: string;
   size?: GoASkeletonSize;
   lineCount?: number;
   type: GoASkeletonType;
   testId?: string;
 }
+
+// legacy name
+export type SkeletonProps = GoASkeletonProps;
 
 export const GoASkeleton = ({
   maxWidth,
@@ -52,7 +55,7 @@ export const GoASkeleton = ({
   mr,
   mb,
   ml,
-}: SkeletonProps) => {
+}: GoASkeletonProps) => {
   return (
     <goa-skeleton
       maxwidth={maxWidth}

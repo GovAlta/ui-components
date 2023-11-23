@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-export interface SpinnerProps {
+export interface GoASpinnerProps {
   type: SpinnerType;
   size: SpinnerSize;
   invert?: boolean;
@@ -25,13 +25,15 @@ export interface SpinnerProps {
   testId?: string;
 }
 
+export type SpinnerProps = GoASpinnerProps;
+
 export function GoASpinner({
   type,
   size,
   progress,
   invert,
   testId,
-}: SpinnerProps): JSX.Element {
+}: GoASpinnerProps): JSX.Element {
   return (
     <goa-spinner
       type={type}

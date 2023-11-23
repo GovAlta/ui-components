@@ -16,12 +16,12 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-interface PagesProps extends Margins {
+export interface GoAPagesProps extends Margins {
   current?: number;
   children?: ReactNode;
 }
 
-export function GoAPages(props: PagesProps): JSX.Element {
+export function GoAPages(props: GoAPagesProps): JSX.Element {
   return (
     <goa-pages
       current={props.current}

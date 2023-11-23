@@ -20,7 +20,7 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-interface FileUploadInputProps {
+export interface GoAFileUploadInputProps {
   variant?: GoAFileUploadInputVariant;
   accept?: string;
   maxFileSize?: string;
@@ -32,7 +32,7 @@ export function GoAFileUploadInput({
   accept,
   maxFileSize,
   onSelectFile,
-}: FileUploadInputProps) {
+}: GoAFileUploadInputProps) {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {

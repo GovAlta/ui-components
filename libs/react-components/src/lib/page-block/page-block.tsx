@@ -13,11 +13,14 @@ declare global {
   }
 }
 
-export interface PageBlockProps {
+export interface GoAPageBlockProps {
   width: "full" | string;
   testId?: string;
   children?: ReactNode;
 }
+
+// legacy name
+export type PageBlockProps = GoAPageBlockProps;
 
 export function GoAPageBlock(props: PageBlockProps): JSX.Element {
   return (

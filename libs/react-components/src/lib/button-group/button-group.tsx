@@ -20,7 +20,7 @@ declare global {
   }
 }
 
-interface ButtonGroupProps extends Margins {
+export interface GoAButtonGroupProps extends Margins {
   alignment: GoAButtonGroupAlignment;
   gap?: GoAButtonGroupGap;
   testId?: string;
@@ -36,7 +36,7 @@ export function GoAButtonGroup({
   mr,
   mb,
   ml,
-}: ButtonGroupProps): JSX.Element {
+}: GoAButtonGroupProps): JSX.Element {
   return (
     <goa-button-group
       alignment={alignment}

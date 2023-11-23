@@ -11,11 +11,14 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface SideMenuProps {
+export interface GoASideMenuProps {
   children: ReactNode;
 }
 
-export function GoASideMenu(props: SideMenuProps): JSX.Element {
+// legacy
+export type SideMenuProps = GoASideMenuProps;
+
+export function GoASideMenu(props: GoASideMenuProps): JSX.Element {
   return <goa-side-menu>{props.children}</goa-side-menu>;
 }
 
