@@ -16,12 +16,15 @@ declare global {
   }
 }
 
-export interface FormStepperProps extends Margins {
+export interface GoAFormStepperProps extends Margins {
   step?: number;
   testId?: string;
   children?: ReactNode;
   onChange?: (step: number) => void;
 }
+
+// legacy
+export type FormStepperProps = GoAFormStepperProps;
 
 export function GoAFormStepper({
   testId,
@@ -32,7 +35,7 @@ export function GoAFormStepper({
   mr,
   onChange,
   children,
-}: FormStepperProps) {
+}: GoAFormStepperProps) {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!ref.current) {

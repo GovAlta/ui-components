@@ -2,7 +2,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-microsite-header": WebComponentProps &
+      "goa-microsite-header": WCProps &
       React.HTMLAttributes<HTMLElement>;
     }
   }
@@ -14,7 +14,7 @@ export type GoALinkTarget = "self" | "blank";
 // leagcy type name
 export type ServiceLevel = GoAServiceLevel;
 
-interface WebComponentProps {
+interface WCProps {
   type: GoAServiceLevel;
   version?: string;
   feedbackurl?: string;
@@ -23,7 +23,7 @@ interface WebComponentProps {
   headerurltarget?: GoALinkTarget;
 }
 
-export interface HeaderProps {
+export interface GoAHeaderProps {
   type: GoAServiceLevel;
   version?: string;
   feedbackUrl?: string;
@@ -33,6 +33,9 @@ export interface HeaderProps {
   headerUrlTarget?: GoALinkTarget;
 }
 
+// legacy name
+export type HeaderProps = GoAHeaderProps;
+
 export function GoAMicrositeHeader({
   type,
   version,
@@ -41,7 +44,7 @@ export function GoAMicrositeHeader({
   feedbackUrlTarget,
   headerUrlTarget,
   testId,
-}: HeaderProps): JSX.Element {
+}: GoAHeaderProps): JSX.Element {
   return (
     <goa-microsite-header
       type={type}

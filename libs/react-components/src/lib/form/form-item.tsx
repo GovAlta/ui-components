@@ -21,7 +21,7 @@ declare global {
   }
 }
 
-interface GoAFormItemProps extends Margins {
+export interface GoAFormItemProps extends Margins {
   label?: string;
   labelSize?: GoAFormItemLabelSize;
   requirement?: GoAFormItemRequirement;

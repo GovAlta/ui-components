@@ -17,13 +17,13 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-interface SideMenuSectionTitleProps {
+export interface GoASideMenuHeadingProps {
   meta?: ReactNode;
   icon?: GoAIconType
   children?: ReactNode;
 }
 
-export function GoASideMenuHeading(props: SideMenuSectionTitleProps) {
+export function GoASideMenuHeading(props: GoASideMenuHeadingProps) {
   return (
     <goa-side-menu-heading icon={props.icon}>
       {props.children}

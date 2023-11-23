@@ -24,7 +24,7 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface TableProps extends Margins {
+export interface GoATableProps extends Margins {
   width?: string;
   onSort?: (sortBy: string, sortDir: number) => void;
   // stickyHeader?: boolean; TODO: enable this later
@@ -33,7 +33,10 @@ export interface TableProps extends Margins {
   children?: ReactNode;
 }
 
-export function GoATable(props: TableProps) {
+// legacy name
+export type TableProps = GoATableProps;
+
+export function GoATable(props: GoATableProps) {
   const ref = useRef<HTMLTableElement>(null);
   useEffect(() => {
     if (!ref.current) {

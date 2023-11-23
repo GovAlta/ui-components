@@ -37,7 +37,7 @@ declare global {
   }
 }
 
-interface ButtonProps extends Margins {
+export interface GoAButtonProps extends Margins {
   type?: GoAButtonType;
   size?: GoAButtonSize;
   variant?: GoAButtonVariant;
@@ -63,7 +63,7 @@ export function GoAButton({
   mr,
   mb,
   ml,
-}: ButtonProps): JSX.Element {
+}: GoAButtonProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {

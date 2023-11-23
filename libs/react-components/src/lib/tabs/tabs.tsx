@@ -10,12 +10,12 @@ declare global {
   }
 }
 
-interface TabsProps {
+export interface GoATabsProps {
   initialTab?: number;
   children?: React.ReactNode;
 }
 
-export function GoATabs({ initialTab, children }: TabsProps): JSX.Element {
+export function GoATabs({ initialTab, children }: GoATabsProps): JSX.Element {
   return <goa-tabs initialtab={initialTab}>{children}</goa-tabs>;
 }
 

@@ -15,12 +15,15 @@ declare global {
   }
 }
 
-export interface FormStepProps {
+export interface GoAFormStepProps {
   text: string;
   status?: GoAFormStepStatusType;
 }
 
-export function GoAFormStep(props: FormStepProps) {
+// legacy name
+export type FormStepProps = GoAFormStepProps;
+
+export function GoAFormStep(props: GoAFormStepProps) {
   return <goa-form-step text={props.text} status={props.status} />;
 }
 

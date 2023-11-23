@@ -5,12 +5,12 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-checkbox": CheckboxProps & React.HTMLAttributes<HTMLElement>;
+      "goa-checkbox": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
 
-interface CheckboxProps extends Margins {
+interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   id?: string;
   name: string;

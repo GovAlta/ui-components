@@ -6,8 +6,8 @@ export type CircularProgressVariant = GoACircularProgressVariant;
 export type CircularProgressSize = GoACircularProgressSize;
 
 interface WCProps {
-  variant?: CircularProgressVariant;
-  size?: CircularProgressSize;
+  variant?: GoACircularProgressVariant;
+  size?: GoACircularProgressSize;
   message?: string;
   visible?: string;
   progress?: number;
@@ -23,8 +23,8 @@ declare global {
 }
 
 export interface GoACircularProgressProps {
-  variant?: CircularProgressVariant;
-  size?: CircularProgressSize;
+  variant?: GoACircularProgressVariant;
+  size?: GoACircularProgressSize;
   message?: string;
   visible?: boolean;
   progress?: number;

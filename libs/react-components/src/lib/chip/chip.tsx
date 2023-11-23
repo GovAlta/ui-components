@@ -9,7 +9,7 @@ interface WCProps extends Margins {
   error: boolean;
   deletable: boolean;
   content: string;
-  variant?: string;
+  variant?: GoAChipVariant;
 }
 
 declare global {

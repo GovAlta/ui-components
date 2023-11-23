@@ -15,7 +15,7 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-interface FooterNavSectionProps {
+export interface GoAFooterNavSectionProps {
   maxColumnCount?: number;
   heading?: string;
   testId?: string;
@@ -27,7 +27,7 @@ export function GoAAppFooterNavSection({
   maxColumnCount = 1,
   testId,
   children,
-}: FooterNavSectionProps) {
+}: GoAFooterNavSectionProps) {
   return (
     <goa-app-footer-nav-section
       slot="nav"
