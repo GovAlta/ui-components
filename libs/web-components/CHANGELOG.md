@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.17.0] - 2023-11-27
+
+### Added
+
+- Added properties to control if Microsite Header links open in a new tab or not ([#1330](https://github.com/GovAlta/ui-components/issues/1330))
+
+### Fixed
+
+- Improved Side Menu URL matching ([#1444](https://github.com/GovAlta/ui-components/issues/1444))
+- Fixed maxWidth functionality for the Modal component ([#1446](https://github.com/GovAlta/ui-components/issues/1446))
+- Dropdown change event will no longer fire on page load ([#1378](https://github.com/GovAlta/ui-components/issues/1378))
+- Disabled inputs will now appear properly as disabled ([#1453](https://github.com/GovAlta/ui-components/issues/1453))
+- Pagination page select dropdown will now be properly sized ([#1360](https://github.com/GovAlta/ui-components/issues/1360))
+- Removed top grey border from App Header links ([#1464](https://github.com/GovAlta/ui-components/issues/1286)
+
 ## [1.15.0] - 2023-10-31
 
 ### Added
