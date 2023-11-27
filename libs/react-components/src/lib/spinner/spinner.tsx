@@ -1,5 +1,3 @@
-import React from "react";
-
 export type SpinnerType = "infinite" | "progress";
 export type SpinnerSize = "small" | "medium" | "large" | "xlarge";
 
@@ -19,7 +17,7 @@ declare global {
   }
 }
 
-export interface SpinnerProps {
+export interface GoASpinnerProps {
   type: SpinnerType;
   size: SpinnerSize;
   invert?: boolean;
@@ -27,13 +25,15 @@ export interface SpinnerProps {
   testId?: string;
 }
 
-export const GoASpinner = ({
+export type SpinnerProps = GoASpinnerProps;
+
+export function GoASpinner({
   type,
   size,
   progress,
   invert,
   testId,
-}: SpinnerProps) => {
+}: GoASpinnerProps): JSX.Element {
   return (
     <goa-spinner
       type={type}

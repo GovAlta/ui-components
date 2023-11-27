@@ -1,5 +1,3 @@
-import { FC } from "react";
-
 interface WCProps {
   src: string;
   height: string;
@@ -14,12 +12,12 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoACardImageProps {
   src: string;
   height: string;
 }
 
-export const GoACardImage: FC<Props> = ({ src, height }) => {
+export function GoACardImage({ src, height }: GoACardImageProps): JSX.Element {
   return <goa-card-image src={src} height={height} />;
 };
 

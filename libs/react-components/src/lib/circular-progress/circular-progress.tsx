@@ -1,11 +1,13 @@
-import React from "react";
+export type GoACircularProgressVariant = "fullscreen" | "inline";
+export type GoACircularProgressSize = "small" | "large";
 
-export type CircularProgressVariant = "fullscreen" | "inline";
-export type CircularProgressSize = "small" | "large";
+// legacy naming
+export type CircularProgressVariant = GoACircularProgressVariant;
+export type CircularProgressSize = GoACircularProgressSize;
 
 interface WCProps {
-  variant?: CircularProgressVariant;
-  size?: CircularProgressSize;
+  variant?: GoACircularProgressVariant;
+  size?: GoACircularProgressSize;
   message?: string;
   visible?: string;
   progress?: number;
@@ -20,9 +22,9 @@ declare global {
   }
 }
 
-export interface CircularProgressProps {
-  variant?: CircularProgressVariant;
-  size?: CircularProgressSize;
+export interface GoACircularProgressProps {
+  variant?: GoACircularProgressVariant;
+  size?: GoACircularProgressSize;
   message?: string;
   visible?: boolean;
   progress?: number;
@@ -36,7 +38,7 @@ export const GoACircularProgress = ({
   variant,
   size,
   testId,
-}: CircularProgressProps) => {
+}: GoACircularProgressProps) => {
   return (
     <goa-circular-progress
       visible={visible ? "true" : "false"}

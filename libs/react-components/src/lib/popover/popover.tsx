@@ -1,12 +1,12 @@
-import React, { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
-type Position = "above" | "below" | "auto";
+export type GoAPosition = "above" | "below" | "auto";
 
 interface WCProps extends Margins {
   maxwidth?: string;
   padded?: boolean;
-  position?: Position;
+  position?: GoAPosition;
   relative?: boolean;
 }
 
@@ -19,17 +19,17 @@ declare global {
   }
 }
 
-interface Props extends Margins {
+export interface GoAPopoverProps extends Margins {
   target?: ReactNode;
   testId?: string;
   maxWidth?: string;
   padded?: boolean;
-  position?: Position;
+  position?: GoAPosition;
   children: ReactNode;
   relative?: boolean;
 }
 
-export const GoAPopover: FC<Props> = ({
+export function GoAPopover({
   target,
   testId,
   maxWidth,
@@ -41,7 +41,7 @@ export const GoAPopover: FC<Props> = ({
   mr,
   mb,
   ml,
-}) => {
+}: GoAPopoverProps): JSX.Element {
   return (
     <goa-popover
       data-testid={testId}

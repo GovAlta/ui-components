@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface WCProps {
   heading: string;
@@ -15,12 +15,12 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-interface SideMenuGroupProps {
+export interface GoASideMenuGroupProps {
   heading: string;
   children?: ReactNode;
 }
 
-export function GoASideMenuGroup(props: SideMenuGroupProps) {
+export function GoASideMenuGroup(props: GoASideMenuGroupProps): JSX.Element {
   return (
     <goa-side-menu-group heading={props.heading}>
       {props.children}

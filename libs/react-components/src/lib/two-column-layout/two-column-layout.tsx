@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface WCProps {
   navcolumnwidth?: string;
@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoATwoColumnLayoutProps {
   navColumnWidth?: string;
   maxContentWidth?: string;
   header: ReactNode;
@@ -23,7 +23,7 @@ interface Props {
   children: ReactNode;
 }
 
-export function GoATwoColumnLayout(props: Props) {
+export function GoATwoColumnLayout(props: GoATwoColumnLayoutProps) {
   return (
     <goa-two-column-layout
       navcolumnwidth={props.navColumnWidth}

@@ -10,6 +10,7 @@
     await tick();
     setCurrentUrl();
     addEventListeners();
+
   })
 
   function setCurrentUrl() {  
@@ -22,14 +23,20 @@
         .assignedElements()
         .filter((el: HTMLElement) => el.tagName === "A");
 
+    let currentEl: HTMLElement;
+    let maxWeight = 0;
     links.forEach((child: HTMLElement) => {
-      const current = isUrlMatch(document.location, child.getAttribute("href"));
-      if (current) {
-        child.classList.add("current");
-      } else {
-        child.classList.remove("current");
-      }
+      const weight = isUrlMatch(document.location, child.getAttribute("href"));
+      if (weight > maxWeight) {
+        maxWeight = weight
+        currentEl = child
+      } 
+      child.classList.remove("current");
     })
+
+    if (currentEl) {
+      currentEl.classList.add("current");
+    }
   }
 
   function addEventListeners() {

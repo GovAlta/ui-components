@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
 interface WCProps extends Margins {
@@ -16,12 +16,12 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-interface PagesProps extends Margins {
+export interface GoAPagesProps extends Margins {
   current?: number;
   children?: ReactNode;
 }
 
-export function GoAPages(props: PagesProps) {
+export function GoAPages(props: GoAPagesProps): JSX.Element {
   return (
     <goa-pages
       current={props.current}

@@ -1,5 +1,3 @@
-import React, { useEffect, useRef } from "react";
-
 interface WCProps {
   initialtab?: number;
 }
@@ -12,12 +10,12 @@ declare global {
   }
 }
 
-interface TabsProps {
+export interface GoATabsProps {
   initialTab?: number;
   children?: React.ReactNode;
 }
 
-export function GoATabs({ initialTab, children }: TabsProps) {
+export function GoATabs({ initialTab, children }: GoATabsProps): JSX.Element {
   return <goa-tabs initialtab={initialTab}>{children}</goa-tabs>;
 }
 

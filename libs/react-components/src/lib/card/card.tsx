@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Margins } from "../../common/styling";
 
 interface WCProps extends Margins {
@@ -16,14 +15,14 @@ declare global {
   }
 }
 
-interface Props extends Margins {
+export interface GoACardProps extends Margins {
   elevation?: number;
   width?: string;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export const GoACard: FC<Props> = ({
+export function GoACard({
   elevation,
   width,
   mt,
@@ -32,7 +31,7 @@ export const GoACard: FC<Props> = ({
   ml,
   testId,
   children,
-}) => {
+}: GoACardProps): JSX.Element {
   return (
     <goa-card
       width={width}

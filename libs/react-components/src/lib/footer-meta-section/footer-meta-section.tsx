@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -10,11 +10,14 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface FooterMetaSectionProps {
+export interface GoAAppFooterMetaSectionProps {
   children?: ReactNode;
 }
 
-export function GoAAppFooterMetaSection({ children }: FooterMetaSectionProps) {
+// legacy name
+export type FooterMetaSectionProps = GoAAppFooterMetaSectionProps;
+
+export function GoAAppFooterMetaSection({ children }: GoAAppFooterMetaSectionProps) {
   return (
     <goa-app-footer-meta-section slot="meta">
       {children}

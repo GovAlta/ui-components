@@ -1,10 +1,10 @@
-import React, { CSSProperties, FC, ReactElement } from "react";
+import React, { CSSProperties, ReactElement, ReactNode } from "react";
 
 interface Props {
   title?: string;
   description?: string;
-
   state: Record<string, string>;
+  children?: ReactNode;
 }
 
 const style: CSSProperties = {
@@ -31,12 +31,12 @@ const exampleChild: CSSProperties = {
   marginBottom: "1rem",
 };
 
-export const StateDisplay: FC<Props> = ({
+export function StateDisplay({
   children,
   title,
   description,
   state,
-}) => {
+}: Props): JSX.Element {
   return (
     <>
       {title && <h3>{title}</h3>}

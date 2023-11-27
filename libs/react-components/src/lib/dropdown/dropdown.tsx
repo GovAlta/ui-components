@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconType } from "../icon/icon";
 
@@ -31,7 +31,7 @@ declare global {
   }
 }
 
-interface Props extends Margins {
+export interface GoADropdownProps extends Margins {
   name?: string;
   value?: string[] | string;
   onChange: (name: string, values: string[] | string) => void;
@@ -64,7 +64,7 @@ function stringify(value: string | string[] | undefined): string {
   return JSON.stringify(value);
 }
 
-export const GoADropdown: FC<Props> = (props) => {
+export function GoADropdown(props: GoADropdownProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {

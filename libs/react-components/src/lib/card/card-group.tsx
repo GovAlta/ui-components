@@ -1,5 +1,3 @@
-import { FC } from "react";
-
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
@@ -9,11 +7,11 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoACardGroupProps {
   children?: React.ReactNode;
 }
 
-export const GoACardGroup: FC<Props> = ({ children }) => {
+export function GoACardGroup({ children }: GoACardGroupProps): JSX.Element {
   return <goa-card-group>{children}</goa-card-group>;
 };
 

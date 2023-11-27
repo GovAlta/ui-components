@@ -1,4 +1,3 @@
-import React from "react";
 import { render } from "@testing-library/react";
 import GoAMicrositeHeader, { ServiceLevel } from "./microsite-header";
 
@@ -17,4 +16,10 @@ describe("Header", () => {
     const el = document.querySelector("goa-microsite-header");
     expect(el.getAttribute("version")).toEqual("v1.2.3");
   });
+  it("should set self url target", () => {
+    render(<GoAMicrositeHeader type="alpha" headerUrlTarget="self" feedbackUrlTarget="self" />);
+    const el = document.querySelector("goa-microsite-header");
+    expect(el.getAttribute("headerUrlTarget")).toBe("self");
+    expect(el.getAttribute("feedbackUrlTarget")).toBe("self");
+  })
 });

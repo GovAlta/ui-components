@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import { Margins } from "../../common/styling";
 
 export type GoABadgeType =
@@ -9,14 +8,6 @@ export type GoABadgeType =
   | "dark"
   | "midtone"
   | "light";
-
-interface GoABadgeProps extends Margins {
-  type: GoABadgeType;
-  icon?: boolean;
-  content?: string;
-  testId?: string;
-  ariaLabel?: string;
-}
 
 interface WCProps extends Margins {
   type: GoABadgeType;
@@ -35,7 +26,15 @@ declare global {
   }
 }
 
-export const GoABadge: FC<GoABadgeProps> = ({
+export interface GoABadgeProps extends Margins {
+  type: GoABadgeType;
+  icon?: boolean;
+  content?: string;
+  testId?: string;
+  ariaLabel?: string;
+}
+
+export function GoABadge({
   type,
   content,
   icon,
@@ -45,7 +44,7 @@ export const GoABadge: FC<GoABadgeProps> = ({
   mb,
   ml,
   ariaLabel,
-}: GoABadgeProps) => {
+}: GoABadgeProps): JSX.Element {
   return (
     <goa-badge
       type={type}
@@ -64,7 +63,7 @@ export const GoABadge: FC<GoABadgeProps> = ({
 /**
  * @deprecated
  */
-export const GoAInfoBadge: FC<GoABadgeProps> = ({
+export function GoAInfoBadge({
   content,
   testId,
   icon,
@@ -73,7 +72,7 @@ export const GoAInfoBadge: FC<GoABadgeProps> = ({
   mb,
   ml,
   ariaLabel,
-}: GoABadgeProps) => {
+}: GoABadgeProps): JSX.Element {
   return (
     <GoABadge
       type="information"
@@ -92,7 +91,7 @@ export const GoAInfoBadge: FC<GoABadgeProps> = ({
 /**
  * @deprecated
  */
-export const GoASuccessBadge: FC<GoABadgeProps> = ({
+export function GoASuccessBadge({
   content,
   testId,
   icon,
@@ -101,7 +100,7 @@ export const GoASuccessBadge: FC<GoABadgeProps> = ({
   mb,
   ml,
   ariaLabel,
-}: GoABadgeProps) => {
+}: GoABadgeProps): JSX.Element {
   return (
     <GoABadge
       type="success"
@@ -120,7 +119,7 @@ export const GoASuccessBadge: FC<GoABadgeProps> = ({
 /**
  * @deprecated
  */
-export const GoAImportantBadge: FC<GoABadgeProps> = ({
+export function GoAImportantBadge({
   content,
   testId,
   icon,
@@ -129,7 +128,7 @@ export const GoAImportantBadge: FC<GoABadgeProps> = ({
   mb,
   ml,
   ariaLabel,
-}: GoABadgeProps) => {
+}: GoABadgeProps): JSX.Element {
   return (
     <GoABadge
       type="important"
@@ -148,7 +147,7 @@ export const GoAImportantBadge: FC<GoABadgeProps> = ({
 /**
  * @deprecated
  */
-export const GoAEmergencyBadge: FC<GoABadgeProps> = ({
+export function GoAEmergencyBadge({
   content,
   testId,
   icon,
@@ -157,7 +156,7 @@ export const GoAEmergencyBadge: FC<GoABadgeProps> = ({
   mb,
   ml,
   ariaLabel,
-}: GoABadgeProps) => {
+}: GoABadgeProps): JSX.Element {
   return (
     <GoABadge
       type="emergency"

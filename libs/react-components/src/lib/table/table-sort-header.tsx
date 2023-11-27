@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 export type Direction = "asc" | "desc" | "none";
 
 interface WCProps {
@@ -17,17 +16,17 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-interface Props {
+export interface GoATableSortProps {
   name?: string;
   direction?: Direction;
   children?: React.ReactNode;
 }
 
-export const GoATableSortHeader: FC<Props> = ({
+export function GoATableSortHeader({
   name,
   direction = "none",
   children,
-}) => {
+}: GoATableSortProps): JSX.Element {
   return (
     <goa-table-sort-header name={name} direction={direction}>
       {children}

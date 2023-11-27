@@ -21,9 +21,6 @@
   // ajust positioning when popover component is contained within a relative positioned parent
   export let relative: string = "false";
 
-  export let autoclose: string = "false"
-
-
   // margins
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -64,7 +61,6 @@
   $: _open = toBoolean(open);
   $: _disabled = toBoolean(disabled);
   $: _relative = toBoolean(relative);
-  $: _autoClose = toBoolean(autoclose);
 
   $: (async () => _open && await setPopoverPosition())()
   $: (async () => _sectionHeight && await setPopoverPosition())()
@@ -249,6 +245,7 @@
   >
     <slot name="target" />
   </div>
+
   {#if _open}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
@@ -264,7 +261,7 @@
         class="popover-content"
         style={`
           ${cssVar("width", width)}
-          max-width: ${maxwidth < width ? width : maxwidth};
+          max-width: ${maxwidth};
           padding: ${_padded ? "var(--goa-space-m)" : "0"};
         `}
       >
@@ -301,7 +298,6 @@
     color: var(--goa-color-text-default);
     position: absolute;
     width: fit-content;
-    max-width: 260px;
     list-style-type: none;
     background: var(--goa-color-greyscale-white);
     border-radius: var(--border-radius);

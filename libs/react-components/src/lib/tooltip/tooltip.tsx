@@ -1,11 +1,14 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Margins } from "../../common/styling";
+
+export type GoATooltipPosition = "top" | "bottom" | "left" | "right";
+export type GoATooltipHorizontalAlignment = "left" | "right" | "center";
 
 /* eslint-disable-next-line */
 interface WCProps extends Margins {
-  position?: string;
+  position?: GoATooltipPosition;
   content?: string;
-  halign?: string;
+  halign?: GoATooltipHorizontalAlignment;
 }
 
 declare global {
@@ -18,15 +21,15 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-interface TooltipProps extends Margins {
-  position?: string;
+export interface GoATooltipProps extends Margins {
+  position?: GoATooltipPosition;
   content?: string;
-  hAlign?: string;
+  hAlign?: GoATooltipHorizontalAlignment;
   testId?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
-export const GoATooltip: React.FC<TooltipProps> = (props) => {
+export function GoATooltip(props: GoATooltipProps): JSX.Element {
   return (
     <goa-tooltip
       position={props.position}

@@ -70,34 +70,50 @@
   }
 
   function handleKeyDown(e: KeyboardEvent) { 
-    if (!_date) return;
-    
     if (["Space", "Enter"].includes(e.key)) {
       showCalendar();
       return;
     }
 
+    // in the key event handling below the first line `_date ||= ...` is to initialize the date, if
+    // it hasn't yet been set to 1 unit opposite of what the keybinding does ex. if ArrowDown is
+    // clicked, which moves the datepicker one week ahead, the date is initialize one week before.
+    // This is to allow the starting date displayed to be that of today no matter what key is 
+    // pressed.
+
     switch (e.key) {
       case "ArrowLeft":
+        _date ||= addDays(new Date(), 1);
         _date = addDays(_date, -1);
         break;
       case "ArrowRight":
+        _date ||= addDays(new Date(), -1);
         _date = addDays(_date, 1);
         break;
       case "ArrowDown":
+        _date ||= addDays(new Date(), -7);
         _date = addDays(_date, 7);
         break;
       case "ArrowUp":
+        _date ||= addDays(new Date(), 7);
         _date = addDays(_date, -7);
         break;
       case "PageUp":
+        _date ||= (e.shiftKey ? addYears(new Date(), 1) : addMonths(new Date(), 1));
         _date = e.shiftKey ? addYears(_date, -1) : addMonths(_date, -1);
         break;
       case "PageDown":
+        _date ||= (e.shiftKey ? addYears(new Date(), -1) : addMonths(new Date(), -1));
         _date = e.shiftKey ? addYears(_date, 1) : addMonths(_date, 1);
         break;
+      default:
+        return;
     }
+
     dispatchValue(_date);
+
+    e.preventDefault();
+    e.stopPropagation();
   }
 </script>
 

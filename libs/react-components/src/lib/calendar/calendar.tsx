@@ -1,13 +1,5 @@
-import React, { FC, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
-
-interface Props extends Margins {
-  name?: string;
-  value?: Date;
-  min?: Date;
-  max?: Date;
-  onChange: (name: string, value: Date) => void;
-}
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
@@ -27,7 +19,15 @@ declare global {
   }
 }
 
-export const GoACalendar: FC<Props> = ({
+export interface GoACalendarProps extends Margins {
+  name?: string;
+  value?: Date;
+  min?: Date;
+  max?: Date;
+  onChange: (name: string, value: Date) => void;
+}
+
+export function GoACalendar({
   name,
   value,
   min,
@@ -37,7 +37,7 @@ export const GoACalendar: FC<Props> = ({
   mb,
   ml,
   onChange,
-}: Props) => {
+}: GoACalendarProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!ref.current) {

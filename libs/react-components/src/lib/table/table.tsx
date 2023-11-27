@@ -1,13 +1,16 @@
-import React, { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
-export type TableVariant = "normal" | "relaxed";
+export type GoATableVariant = "normal" | "relaxed";
+
+// legacy naming
+export type TableVariant = GoATableVariant;
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | null>;
   width?: string;
   stickyheader?: boolean;
-  variant?: TableVariant;
+  variant?: GoATableVariant;
 }
 
 declare global {
@@ -21,16 +24,19 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface TableProps extends Margins {
+export interface GoATableProps extends Margins {
   width?: string;
   onSort?: (sortBy: string, sortDir: number) => void;
   // stickyHeader?: boolean; TODO: enable this later
-  variant?: TableVariant;
+  variant?: GoATableVariant;
   testId?: string;
   children?: ReactNode;
 }
 
-export function GoATable(props: TableProps) {
+// legacy name
+export type TableProps = GoATableProps;
+
+export function GoATable(props: GoATableProps) {
   const ref = useRef<HTMLTableElement>(null);
   useEffect(() => {
     if (!ref.current) {

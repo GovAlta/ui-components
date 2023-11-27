@@ -34,6 +34,19 @@ import { Meta, Story } from "@storybook/addon-docs";
     defaultValue="100%"
     description="Maximum width of the content area"
   />
+  <Prop
+    name="feedbackUrlTarget"
+    type="self | blank"
+    defaultValue="blank"
+    description="For internal feedback urls sets target='_self'"
+  />
+  <Prop
+    name="headerUrlTarget"
+    type="self | blank"
+    defaultValue="blank"
+    description="For internal header urls sets target='_self'"
+  />
+
 </Props>
 
 #### Alpha
@@ -238,6 +251,63 @@ import { Meta, Story } from "@storybook/addon-docs";
       lang="jsx"
       code={`
       <GoAMicrositeHeader type="alpha" version="v1.2.3" feedbackUrl="https://example.com/feedback" maxContentWidth="600px"/>
+    `}
+    />
+  </Tab>
+</Tabs>
+
+#### External Urls
+
+<Story name="External Urls">
+  <GoAMicrositeHeader
+    type="alpha"
+    version="v1.2.3"
+    feedbackUrl="https://example.com/feedback"
+    feedbackUrlTarget="self"
+    headerUrlTarget="self"
+  />
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header
+        type="alpha"
+        version="v1.2.3"
+        feedbackurl="https://example.com/feedback"
+        feedbackurltarget="self"
+        headerurltarget="self"/>
+    `}
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+      <goa-microsite-header
+        type="alpha"
+        version="v1.2.3"
+        feedbackUrl="https://example.com/feedback"
+        feedbackUrlTarget="self"
+        headerUrlTarget="self"
+      >
+      </goa-microsite-header>
+    `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      lang="jsx"
+      code={`
+      <GoAMicrositeHeader
+        type="alpha"
+        version="v1.2.3"
+        feedbackUrl="https://example.com/feedback"
+        feedbackUrlTarget="self"
+        headerUrlTarget="self"
+      />
     `}
     />
   </Tab>

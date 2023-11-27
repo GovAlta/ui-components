@@ -1,4 +1,3 @@
-import React from "react";
 import { Spacing } from "../../common/styling";
 
 /* eslint-disable-next-line */
@@ -17,13 +16,15 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface SpacerProps {
+export interface GoASpacerProps {
   hSpacing?: Spacing | "fill";
   vSpacing?: Spacing;
   testId?: string;
 }
 
-export function GoASpacer(props: SpacerProps) {
+export type SpacerProps = GoASpacerProps;
+
+export function GoASpacer(props: GoASpacerProps) {
   return (
     <goa-spacer
       hspacing={props.hSpacing}

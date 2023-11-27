@@ -1,5 +1,3 @@
-import React, { FC } from "react";
-
 interface WCProps {
   heading?: React.ReactNode;
 }
@@ -13,12 +11,14 @@ declare global {
   }
 }
 
-export interface TabItemProps {
+export interface GoATabItemProps {
   heading?: React.ReactNode;
   children?: React.ReactNode;
 }
 
-export const GoATab: FC<TabItemProps> = ({ heading, children }) => {
+export type TabItemProps = GoATabItemProps;
+
+export function GoATab({ heading, children }: GoATabItemProps): JSX.Element {
   return (
     <goa-tab>
       {heading && <span slot="heading">{heading}</span>}

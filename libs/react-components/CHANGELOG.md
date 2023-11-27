@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.17.0] - 2023-11-27
+
+### Added
+
+- Added properties to control if Microsite Header links open in a new tab or not ([#1330](https://github.com/GovAlta/ui-components/issues/1330))
+
+### Fixed
+
+- Removed `scrollable` property from Modal. It was never actually used. ([#1346](https://github.com/GovAlta/ui-components/issues/1346))
+
 ## [4.15.0] - 2023-10-31
 
 ### Added

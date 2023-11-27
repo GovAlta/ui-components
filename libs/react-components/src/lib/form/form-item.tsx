@@ -1,12 +1,12 @@
-import React, { FC } from "react";
 import { Margins } from "../../common/styling";
 
-type RequirementType = "optional" | "required";
+export type GoAFormItemRequirement = "optional" | "required";
+export type GoAFormItemLabelSize = "regular" | "large";
 
 interface WCProps extends Margins {
   label?: string;
-  labelsize?: string;
-  requirement?: RequirementType;
+  labelsize?: GoAFormItemLabelSize;
+  requirement?: GoAFormItemRequirement;
   error?: string;
   helptext?: string;
   id?: string;
@@ -21,10 +21,10 @@ declare global {
   }
 }
 
-interface GoAFormItemProps extends Margins {
+export interface GoAFormItemProps extends Margins {
   label?: string;
-  labelSize?: string;
-  requirement?: RequirementType;
+  labelSize?: GoAFormItemLabelSize;
+  requirement?: GoAFormItemRequirement;
   error?: string;
   helpText?: string;
   children?: React.ReactNode;
@@ -32,7 +32,7 @@ interface GoAFormItemProps extends Margins {
   id?: string;
 }
 
-export const GoAFormItem: FC<GoAFormItemProps> = ({
+export function GoAFormItem({
   children,
   helpText,
   error,
@@ -45,7 +45,7 @@ export const GoAFormItem: FC<GoAFormItemProps> = ({
   ml,
   testId,
   id,
-}) => {
+}: GoAFormItemProps): JSX.Element {
   return (
     <goa-form-item
       label={label}

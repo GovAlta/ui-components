@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface WCProps {
   ref: React.MutableRefObject<HTMLElement | null>;
@@ -20,7 +20,7 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-interface FileUploadCardProps {
+export interface GoAFileUploadCardProps {
   filename: string;
   size: number;
   type?: string;
@@ -38,7 +38,7 @@ export function GoAFileUploadCard({
   error,
   onDelete,
   onCancel,
-}: FileUploadCardProps) {
+}: GoAFileUploadCardProps) {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {

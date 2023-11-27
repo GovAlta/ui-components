@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -9,11 +9,13 @@ declare global {
   }
 }
 
-export interface PageProps {
+export interface GoAPageProps {
   children?: ReactNode;
 }
 
-export function GoAOneColumnLayout(props: PageProps) {
+export type PageProps = GoAPageProps;
+
+export function GoAOneColumnLayout(props: GoAPageProps) {
   return <goa-one-column-layout>{props.children}</goa-one-column-layout>;
 }
 

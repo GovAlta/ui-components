@@ -1,12 +1,14 @@
-import React, { FC } from "react";
 import { Margins } from "../../common/styling";
 
-type Alignment = "start" | "end" | "center";
-export type Gap = "relaxed" | "compact";
+export type GoAButtonGroupAlignment = "start" | "end" | "center";
+export type GoAButtonGroupGap = "relaxed" | "compact";
+
+// legacy naming
+export type Gap = GoAButtonGroupGap;
 
 interface WCProps extends Margins {
-  alignment: Alignment;
-  gap?: Gap;
+  alignment: GoAButtonGroupAlignment;
+  gap?: GoAButtonGroupGap;
 }
 
 declare global {
@@ -18,14 +20,14 @@ declare global {
   }
 }
 
-interface ButtonGroupProps extends Margins {
-  alignment: Alignment;
-  gap?: Gap;
+export interface GoAButtonGroupProps extends Margins {
+  alignment: GoAButtonGroupAlignment;
+  gap?: GoAButtonGroupGap;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export const GoAButtonGroup: FC<ButtonGroupProps> = ({
+export function GoAButtonGroup({
   alignment,
   gap,
   testId,
@@ -34,7 +36,7 @@ export const GoAButtonGroup: FC<ButtonGroupProps> = ({
   mr,
   mb,
   ml,
-}) => {
+}: GoAButtonGroupProps): JSX.Element {
   return (
     <goa-button-group
       alignment={alignment}

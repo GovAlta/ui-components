@@ -1,6 +1,5 @@
 import { render } from "@testing-library/react";
 import GoATableSortHeader from "./table-sort-header";
-import React from "react";
 
 describe("GoATableSortHeader", () => {
   it("renders", async () => {

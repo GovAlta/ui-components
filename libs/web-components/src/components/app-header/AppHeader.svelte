@@ -22,7 +22,7 @@
   let _windowWidth = window.innerWidth;
   let _showToggleMenu = false;
   let _showMenu = false;
-  
+
   // Reactive
 
   $: _mobile = _windowWidth < MOBILE_BP;
@@ -36,7 +36,7 @@
   const hideMenu = () => _showMenu = false;
 
   // Hooks
-  
+
   onMount(() => {
     window.addEventListener("popstate", () => {
       // only hide menu for non-desktop screens
@@ -52,10 +52,10 @@
   // Update component if the current browser url matches one of this element's child links
   function setCurrentLink() {
     if (!_slotParentEl) return;
-    
+
     const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
     if (!slot) return;
-    
+
     const link = slot.assignedElements()
       .filter(el => el.tagName === "A")
       .map(el => {
@@ -74,7 +74,7 @@
 
   // *Menu* children count
   // When in mobile mode, while the children are not visible the children are rendered in a div[display: none]
-  // element to allow for the children count to be obtained. 
+  // element to allow for the children count to be obtained.
   async function hasChildren() {
     await tick();
 
@@ -87,8 +87,8 @@
     } else {
       // testing
       return [..._slotParentEl.querySelectorAll("a")].length > 0
-    }    
-  }  
+    }
+  }
 </script>
 
 <!-- HTML -->
@@ -122,15 +122,15 @@
     {#if _showToggleMenu && _mobile}
       <button on:click={toggleMenu} class="menu-toggle-area" data-testid="menu-toggle">
         Menu <goa-icon type={_showMenu ? "chevron-up" : "chevron-down" } mt="1" />
-      </button> 
+      </button>
     {/if}
 
     <!-- Menu and menu button for tablet -->
     {#if _showToggleMenu && _tablet}
       <goa-popover
-        class="menu" 
-        open={_showMenu} 
-        context="app-header-menu" 
+        class="menu"
+        open={_showMenu}
+        context="app-header-menu"
         focusborderwidth="0"
         borderradius="0"
         padded="false"
@@ -142,19 +142,19 @@
         <div slot="target">
           <button on:click={toggleMenu} class="menu-toggle-area" data-testid="menu-toggle">
             Menu <goa-icon type={_showMenu ? "chevron-up" : "chevron-down" } mt="1" />
-          </button> 
+          </button>
         </div>
 
         {#if _showMenu}
           <div bind:this={_slotParentEl} data-testid="slot">
-            <slot />  
+            <slot />
           </div>
         {/if}
       </goa-popover>
     {/if}
 
-    <!-- 
-      Need to render slot content to allow mobile and tablet views to 
+    <!--
+      Need to render slot content to allow mobile and tablet views to
       know whether or not to show the Menu button. `_slotContainer` provides
       a reference to determine if any slot children exist.
     -->
@@ -204,7 +204,7 @@
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: 3.375rem auto;
-    grid-template-areas: 
+    grid-template-areas:
       "header menu"
       "links links";
   }
@@ -266,9 +266,8 @@
     display: block;
     padding: calc((3rem - var(--goa-line-height-3)) / 2) 1rem;
     text-decoration: none;
-    cursor: pointer;    
+    cursor: pointer;
     white-space: nowrap;
-    box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
   }
   ::slotted(a:hover) {
     background-color: var(--goa-color-greyscale-100);
@@ -293,12 +292,15 @@
     .show-menu {
       border-bottom: var(--goa-border-width-m) solid var(--goa-color-greyscale-200);
     }
+    ::slotted(a) {
+      box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
+    }
   }
 
   @media not (--mobile) {
     *, ::slotted(*) {
       font: var(--goa-typography-body-m);
-    } 
+    }
     .layout {
       grid-template-rows: 4rem auto;
     }
@@ -320,9 +322,12 @@
     .image-mobile {
       display: none;
     }
+    ::slotted(a) {
+      box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
+    }
   }
-  
-  @media (--desktop) {  
+
+  @media (--desktop) {
     .image-desktop {
       display: block;
     }
@@ -338,7 +343,7 @@
       margin: 0 auto;
       width: min(var(--max-content-width), 100%);
     }
-    
+
     .header-logo-title-area {
       grid-area: header;
       display: flex;
@@ -353,7 +358,7 @@
       display: flex;
       align-items: stretch;
     }
-    
+
     ::slotted(goa-app-header-menu),
     ::slotted(a),
     ::slotted(a:visited) {

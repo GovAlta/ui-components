@@ -1,256 +1,20 @@
 <h1>Dropdown</h1>
 
-<h2>Mobile</h2>
-<h4>Not Filter</h4>
-<goa-dropdown [native]="isMobile" value="green">
-  <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
-  <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
-  <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
-</goa-dropdown>
-
-<h4>Filterable</h4>
-<goa-dropdown [native]="isMobile" filterable="true" value="green">
-  <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
-  <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
-  <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
-</goa-dropdown>
-
 <hr />
-<h2>Others</h2>
-<h4>Not Filter</h4>
-<goa-dropdown native="true">
-  <goa-dropdown-item
-    *ngFor="let color of colors"
-    [value]="color"
-  ></goa-dropdown-item>
-</goa-dropdown>
 
-<goa-dropdown name="colors1" native="true" value="">
-  <goa-dropdown-item
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  ></goa-dropdown-item>
-</goa-dropdown>
-
-<goa-dropdown name="colors1" placeholder="Select">
-  <goa-dropdown-item
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  ></goa-dropdown-item>
-</goa-dropdown>
-
-<goa-dropdown name="colors1" value="red">
-  <goa-dropdown-item
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  ></goa-dropdown-item>
-</goa-dropdown>
-
-<h4>Filterable</h4>
-<goa-dropdown native="true" filterable="true">
-  <goa-dropdown-item
-    *ngFor="let color of colors"
-    [value]="color"
-  ></goa-dropdown-item>
-</goa-dropdown>
-
-<goa-dropdown name="colors1" native="true" value="" filterable="true">
-  <goa-dropdown-item
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  ></goa-dropdown-item>
-</goa-dropdown>
-
-<goa-dropdown name="colors1" placeholder="Select" filterable="true">
-  <goa-dropdown-item
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  ></goa-dropdown-item>
-</goa-dropdown>
-
-<goa-dropdown name="colors1" value="red" filterable="true">
-  <goa-dropdown-item
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  ></goa-dropdown-item>
-</goa-dropdown>
-
-<hr />
-<h2>Dynamic</h2>
-<h4>Not Filter</h4>
-<goa-dropdown name="province" (_change)="selectProvince($event)">
-  <goa-dropdown-item
-    *ngFor="let name of provinces"
-    [attr.name]="name"
-    [value]="name"
-    [label]="name"
-  >
-  </goa-dropdown-item>
-</goa-dropdown>
-
-<goa-dropdown name="city" placeholder="Select a city">
-  <goa-dropdown-item
-    *ngFor="let name of pcities"
-    [attr.name]="name"
-    [value]="name"
-    [label]="name"
-  >
-  </goa-dropdown-item>
-</goa-dropdown>
-
-<hr />
-<h4>Filterable</h4>
-<goa-dropdown
-  name="province"
-  (_change)="selectProvince($event)"
-  filterable="true"
->
-  <goa-dropdown-item
-    *ngFor="let name of provinces"
-    [attr.name]="name"
-    [value]="name"
-    [label]="name"
-  >
-  </goa-dropdown-item>
-</goa-dropdown>
-
-<goa-dropdown name="city" placeholder="Select a city" filterable="true">
-  <goa-dropdown-item
-    *ngFor="let name of pcities"
-    [attr.name]="name"
-    [value]="name"
-    [label]="name"
-  >
-  </goa-dropdown-item>
-</goa-dropdown>
-
-<hr />
-<h2>Binding</h2>
-<h4>Not Filterable</h4>
-<div>Selected Color: {{ boundVal }}</div>
-<goa-dropdown
-  goaValue
-  name="boundColor"
-  [(ngModel)]="boundVal"
-  [value]="selectedColor"
-  placeholder="Select a color"
->
-  <goa-dropdown-item
-    value="red"
-    name="boundColor"
-    label="Red"
-  ></goa-dropdown-item>
-  <goa-dropdown-item
-    value="green"
-    name="boundColor"
-    label="Green"
-  ></goa-dropdown-item>
-  <goa-dropdown-item
-    value="blue"
-    name="boundColor"
-    label="Blue"
-  ></goa-dropdown-item>
-</goa-dropdown>
-
-<h4>Filterable</h4>
-<div>Selected Color: {{ boundVal }}</div>
-<goa-dropdown
-  goaValue
-  name="boundColor"
-  [(ngModel)]="boundVal"
-  [value]="selectedColor"
-  filterable="true"
-  placeholder="Select a color"
->
-  <goa-dropdown-item
-    value="red"
-    name="boundColor"
-    label="Red"
-  ></goa-dropdown-item>
-  <goa-dropdown-item
-    value="green"
-    name="boundColor"
-    label="Green"
-  ></goa-dropdown-item>
-  <goa-dropdown-item
-    value="blue"
-    name="boundColor"
-    label="Blue"
-  ></goa-dropdown-item>
-</goa-dropdown>
-
-<hr />
-<h1>Margin Spacing</h1>
-<h4>Not Filterable</h4>
-<goa-dropdown
-  name="colors"
-  placeholder="Select a user"
-  [value]="selectedColor"
-  (_change)="selectColor($event)"
-  mt="m"
-  mb="xs"
-  ml="xl"
-  mr="2xl"
->
-  <goa-dropdown-item
-    name="colors"
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  >
-  </goa-dropdown-item>
-</goa-dropdown>
-<h4>Filterable</h4>
-<goa-dropdown
-  name="colors"
-  placeholder="Select a user"
-  [value]="selectedColor"
-  (_change)="selectColor($event)"
-  mt="m"
-  mb="xs"
-  ml="xl"
-  mr="2xl"
-  filterable="true"
->
-  <goa-dropdown-item
-    name="colors"
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  >
-  </goa-dropdown-item>
-</goa-dropdown>
-
-<hr />
-<h2>Reactive Binding</h2>
-<h4>Not Filterable</h4>
 <div>Selected Color: {{ reactiveFormCtrl.value }}</div>
-<goa-button (_click)="reactiveFormCtrl.setValue('red')" type="tertiary"
-  >Update to red</goa-button
->
+<goa-button (_click)="reactiveFormCtrl.setValue('red')" type="tertiary">
+  Update to red
+</goa-button>
 <br />
-<goa-dropdown
-  goaValue
-  native="true"
-  name="boundColors2"
-  [formControl]="reactiveFormCtrl"
-  [value]="reactiveFormCtrl.value"
->
+
+<goa-dropdown goaValue name="colors123" native="true" [formControl]="reactiveFormCtrl">
   <goa-dropdown-item
-    name="boundColors2"
     *ngFor="let color of colors"
     [value]="color"
     [label]="color"
-  >
-  </goa-dropdown-item>
+  ></goa-dropdown-item>
 </goa-dropdown>
-&nbsp;
 
 <goa-dropdown goaValue name="colors123" [formControl]="reactiveFormCtrl">
   <goa-dropdown-item
@@ -259,37 +23,12 @@
     [label]="color"
   ></goa-dropdown-item>
 </goa-dropdown>
-<br />
 
-<h4>Filterable</h4>
-<div>Selected Color: {{ reactiveFormCtrl.value }}</div>
-<goa-button (_click)="reactiveFormCtrl.setValue('red')" type="tertiary"
-  >Update to red</goa-button
->
-<br />
 <goa-dropdown
   goaValue
-  native="true"
-  name="boundColors2"
-  [formControl]="reactiveFormCtrl"
-  [value]="reactiveFormCtrl.value"
   filterable="true"
->
-  <goa-dropdown-item
-    name="boundColors2"
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  >
-  </goa-dropdown-item>
-</goa-dropdown>
-&nbsp;
-
-<goa-dropdown
-  goaValue
   name="colors123"
   [formControl]="reactiveFormCtrl"
-  filterable="true"
 >
   <goa-dropdown-item
     *ngFor="let color of colors"
@@ -297,35 +36,5 @@
     [label]="color"
   ></goa-dropdown-item>
 </goa-dropdown>
-<br />
 
-<hr />
-<h2>Disabled</h2>
-<h4>Not Filterable</h4>
-<goa-dropdown
-  goaValue
-  name="colors123"
-  [formControl]="reactiveFormCtrl"
-  [attr.disabled]="true"
->
-  <goa-dropdown-item
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  ></goa-dropdown-item>
-</goa-dropdown>
-<h4>Filterable</h4>
-
-<goa-dropdown
-  goaValue
-  name="colors123"
-  [formControl]="reactiveFormCtrl"
-  [attr.disabled]="true"
-  filterable="true"
->
-  <goa-dropdown-item
-    *ngFor="let color of colors"
-    [value]="color"
-    [label]="color"
-  ></goa-dropdown-item>
-</goa-dropdown>
+<button>stop</button>

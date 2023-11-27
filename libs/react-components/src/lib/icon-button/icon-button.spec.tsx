@@ -1,6 +1,5 @@
 import { render } from "@testing-library/react";
 import { GoAIconButton, IconButtonVariant } from "./icon-button";
-import React from "react";
 
 describe("GoA IconButton", () => {
   it("should render the properties", () => {

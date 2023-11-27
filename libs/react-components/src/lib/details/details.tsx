@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
 interface WCProps extends Margins {
@@ -17,13 +17,15 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface DetailsProps extends Margins {
+export interface GoADetailsProps extends Margins {
   heading: string;
   open?: boolean;
   children: ReactNode;
 }
 
-export function GoADetails(props: DetailsProps) {
+export type DetailsProps = GoADetailsProps;
+
+export function GoADetails(props: GoADetailsProps) {
   return (
     <goa-details
       heading={props.heading}

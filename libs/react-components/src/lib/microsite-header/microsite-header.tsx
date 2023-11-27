@@ -1,39 +1,50 @@
-import React, { FC } from "react";
-
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-microsite-header": WebComponentProps &
-        React.HTMLAttributes<HTMLElement>;
+      "goa-microsite-header": WCProps &
+      React.HTMLAttributes<HTMLElement>;
     }
   }
 }
 
-export type ServiceLevel = "alpha" | "beta" | "live";
+export type GoAServiceLevel = "alpha" | "beta" | "live";
+export type GoALinkTarget = "self" | "blank";
 
-interface WebComponentProps {
-  type: ServiceLevel;
+// leagcy type name
+export type ServiceLevel = GoAServiceLevel;
+
+interface WCProps {
+  type: GoAServiceLevel;
   version?: string;
   feedbackurl?: string;
   maxcontentwidth?: string;
+  feedbackurltarget?: GoALinkTarget
+  headerurltarget?: GoALinkTarget;
 }
 
-export interface HeaderProps {
-  type: ServiceLevel;
+export interface GoAHeaderProps {
+  type: GoAServiceLevel;
   version?: string;
   feedbackUrl?: string;
   testId?: string;
   maxContentWidth?: string;
+  feedbackUrlTarget?: GoALinkTarget;
+  headerUrlTarget?: GoALinkTarget;
 }
 
-export const GoAMicrositeHeader: FC<HeaderProps> = ({
+// legacy name
+export type HeaderProps = GoAHeaderProps;
+
+export function GoAMicrositeHeader({
   type,
   version,
   feedbackUrl,
   maxContentWidth,
+  feedbackUrlTarget,
+  headerUrlTarget,
   testId,
-}) => {
+}: GoAHeaderProps): JSX.Element {
   return (
     <goa-microsite-header
       type={type}
@@ -41,6 +52,8 @@ export const GoAMicrositeHeader: FC<HeaderProps> = ({
       feedbackurl={feedbackUrl}
       data-testid={testId}
       maxcontentwidth={maxContentWidth}
+      feedbackurltarget={feedbackUrlTarget}
+      headerurltarget={headerUrlTarget}
     />
   );
 };

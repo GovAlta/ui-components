@@ -1,5 +1,3 @@
-import React, { FC } from "react";
-
 interface WCProps {
   heading?: string;
   url?: string;
@@ -15,7 +13,7 @@ declare global {
   }
 }
 
-interface Props {
+export interface GoAAppHeaderProps {
   heading?: string;
   url?: string;
   maxContentWidth?: string;
@@ -23,13 +21,13 @@ interface Props {
   testId?: string;
 }
 
-export const GoAAppHeader: FC<Props> = ({
+export function GoAAppHeader({
   heading,
   url,
   maxContentWidth,
   testId,
   children,
-}) => {
+}: GoAAppHeaderProps): JSX.Element {
   return (
     <goa-app-header
       heading={heading}

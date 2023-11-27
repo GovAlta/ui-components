@@ -911,7 +911,6 @@ export const FormattingTemplate = (args) => {
   </Tab>
 </Tabs>
 
-
 #### Max Width
 
 export const MaxWidthTemplate = (args) => {
@@ -919,10 +918,12 @@ export const MaxWidthTemplate = (args) => {
   const [maxWidth, setMaxWidth] = useState("90vw");
   return (
     <>
-      <GoAFormItem label="Max Width" helpText="Enter width with unit (px,vw,rem,em,ch)">
+      <GoAFormItem helpText="Enter width with unit (px,vw,rem,em,ch)">
         <GoAInput onChange={(name, val) => setMaxWidth(val)} value={maxWidth} />
       </GoAFormItem>
-      <GoAButton mt="l" onClick={() => setShowModal(true)}>Open Modal</GoAButton>
+      <GoAButton mt="l" onClick={() => setShowModal(true)}>
+        Open Modal
+      </GoAButton>
       <GoAModal
         heading="Do you agree?"
         maxWidth={maxWidth}
@@ -948,10 +949,10 @@ export const MaxWidthTemplate = (args) => {
       lang="html"
       code={`
         <goa-button (_click)="openModal()">Open Modal</goa-button>
-        <goa-modal 
-          [open]="isOpen" 
-          (_close)="closeModal()" 
-          closable 
+        <goa-modal
+          [open]="isOpen"
+          (_close)="closeModal()"
+          closable
           heading="Do you agree?"
           maxwidth="90vw"
         >

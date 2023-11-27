@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { GoAIconType } from "../icon/icon";
 
 interface WCProps {

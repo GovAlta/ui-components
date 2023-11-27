@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface WCProps {
   maxcontentwidth?: string;
@@ -14,17 +14,20 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface FooterProps {
+export interface GoAAppFooterProps {
   maxContentWidth?: string;
   children?: ReactNode;
   testId?: string;
 }
 
+// legacy name
+export type FooterProps = GoAAppFooterProps;
+
 export function GoAAppFooter({
   maxContentWidth,
   children,
   testId,
-}: FooterProps) {
+}: GoAAppFooterProps): JSX.Element {
   return (
     <goa-app-footer maxcontentwidth={maxContentWidth} data-testid={testId}>
       {children}

@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { GoAIconType } from "../..";
 import { format, isValid, parseISO } from "date-fns";
 import { Margins } from "../../common/styling";
 
 export type GoADate = Date | string;
 
-type GoAInputType =
+export type GoAInputType =
   | "text"
   | "password"
   | "email"
@@ -20,7 +20,7 @@ type GoAInputType =
   | "url"
   | "week";
 
-type GoAAutoCapitalize =
+export type GoAAutoCapitalize =
   | "on"
   | "off"
   | "none"
@@ -96,7 +96,7 @@ interface BaseProps extends Margins {
 type OnChange = (name: string, value: string) => void;
 type OnFocus = (name: string, value: string) => void;
 type OnBlur = (name: string, value: string) => void;
-export interface InputProps extends BaseProps {
+export interface GoAInputProps extends BaseProps {
   onChange: OnChange;
   value: string;
   min?: number | string;
@@ -106,10 +106,13 @@ export interface InputProps extends BaseProps {
   onBlur?: OnBlur;
 }
 
+// legacy
+export type InputProps = GoAInputProps;
+
 type OnNumberChange = (name: string, value: number) => void;
 type OnNumberFocus = (name: string, value: number) => void;
 type OnNumberBlur = (name: string, value: number) => void;
-interface NumberInputProps extends BaseProps {
+export interface GoANumberInputProps extends BaseProps {
   onChange: OnNumberChange;
   value: number;
   min?: number;
@@ -122,7 +125,7 @@ interface NumberInputProps extends BaseProps {
 type OnDateChange = (name: string, value: GoADate) => void;
 type OnDateFocus = (name: string, value: GoADate) => void;
 type OnDateBlur = (name: string, value: GoADate) => void;
-interface DateInputProps extends BaseProps {
+export interface GoADateInputProps extends BaseProps {
   onChange: OnDateChange;
   value: GoADate;
   min?: GoADate;
@@ -132,7 +135,7 @@ interface DateInputProps extends BaseProps {
   onBlur?: OnDateBlur;
 }
 
-export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
+export function GoAInput({
   id,
   debounce,
   name,
@@ -166,7 +169,7 @@ export const GoAInput: FC<InputProps & { type?: GoAInputType }> = ({
   onChange,
   onFocus,
   onBlur,
-}) => {
+}: GoAInputProps & { type?: GoAInputType }): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!ref.current) {
@@ -277,20 +280,20 @@ function toString(value: GoADate, tmpl = "yyyy-MM-dd"): string {
   return format(value, tmpl);
 }
 
-export const GoAInputText: FC<InputProps> = (props) => {
+export function GoAInputText(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="text" />;
 };
 
-export const GoAInputPassword: FC<InputProps> = (props) => {
+export function GoAInputPassword(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="password" />;
 };
 
-export const GoAInputDate: FC<DateInputProps> = ({
+export function GoAInputDate({
   value,
   min = "",
   max = "",
   ...props
-}) => {
+}: GoADateInputProps): JSX.Element {
   return (
     <GoAInput
       {...props}
@@ -303,12 +306,12 @@ export const GoAInputDate: FC<DateInputProps> = ({
   );
 };
 
-export const GoAInputTime: FC<InputProps> = ({
+export function GoAInputTime({
   value,
   min = "",
   max = "",
   ...props
-}) => {
+}: GoAInputProps): JSX.Element {
   return (
     <GoAInput
       {...props}
@@ -319,12 +322,12 @@ export const GoAInputTime: FC<InputProps> = ({
   );
 };
 
-export const GoAInputDateTime: FC<DateInputProps> = ({
+export function GoAInputDateTime({
   value,
   min = "",
   max = "",
   ...props
-}) => {
+}: GoADateInputProps): JSX.Element {
   return (
     <GoAInput
       {...props}
@@ -335,23 +338,23 @@ export const GoAInputDateTime: FC<DateInputProps> = ({
   );
 };
 
-export const GoAInputEmail: FC<InputProps> = (props) => {
+export function GoAInputEmail(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="email" />;
 };
 
-export const GoAInputSearch: FC<InputProps> = (props) => {
+export function GoAInputSearch(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="search" trailingIcon="search" />;
 };
 
-export const GoAInputUrl: FC<InputProps> = (props) => {
+export function GoAInputUrl(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="url" />;
 };
 
-export const GoAInputTel: FC<InputProps> = (props) => {
+export function GoAInputTel(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="tel" />;
 };
 
-export const GoAInputFile: FC<InputProps> = (props) => {
+export function GoAInputFile(props: GoAInputProps): JSX.Element {
   return (
     <input
       id={props.id}
@@ -363,16 +366,16 @@ export const GoAInputFile: FC<InputProps> = (props) => {
   );
 };
 
-export const GoAInputMonth: FC<InputProps> = (props) => {
+export function GoAInputMonth(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="month" />;
 };
 
-export const GoAInputNumber: FC<NumberInputProps> = ({
+export function GoAInputNumber({
   min = Number.MIN_VALUE,
   max = Number.MAX_VALUE,
   value,
   ...props
-}) => {
+}: GoANumberInputProps): JSX.Element {
   const onNumberChange = (name: string, value: string) => {
     props.onChange(name, parseInt(value));
   };
@@ -396,7 +399,7 @@ export const GoAInputNumber: FC<NumberInputProps> = ({
   );
 };
 
-export const GoAInputRange: FC<InputProps> = (props) => {
+export function GoAInputRange(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="range" />;
 };
 

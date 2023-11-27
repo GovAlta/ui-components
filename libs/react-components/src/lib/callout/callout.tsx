@@ -1,19 +1,18 @@
-import React from "react";
 import { Margins } from "../../common/styling";
 
-type CalloutType =
+export type GoACalloutType =
   | "important"
   | "information"
   | "event"
   | "success"
   | "emergency";
 
-type CalloutSize = "medium" | "large";
+export type GoACalloutSize = "medium" | "large";
 
 interface WCProps extends Margins {
   heading?: string;
-  type?: CalloutType;
-  size?: CalloutSize;
+  type?: GoACalloutType;
+  size?: GoACalloutSize;
 }
 
 declare global {
@@ -25,13 +24,15 @@ declare global {
   }
 }
 
-export interface CalloutProps extends Margins {
+export interface GoACalloutProps extends Margins {
   heading?: string;
-  type?: CalloutType;
-  size?: CalloutSize;
+  type?: GoACalloutType;
+  size?: GoACalloutSize;
   testId?: string;
   children?: React.ReactNode;
 }
+
+export type CalloutProps = GoACalloutProps;
 
 export const GoACallout = ({
   heading,
@@ -43,7 +44,7 @@ export const GoACallout = ({
   mr,
   mb,
   ml,
-}: CalloutProps) => {
+}: GoACalloutProps) => {
   return (
     <goa-callout
       heading={heading}

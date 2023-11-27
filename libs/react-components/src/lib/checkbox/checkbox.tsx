@@ -1,16 +1,16 @@
-import React, { FC, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-checkbox": CheckboxProps & React.HTMLAttributes<HTMLElement>;
+      "goa-checkbox": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
 
-interface CheckboxProps extends Margins {
+interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   id?: string;
   name: string;
@@ -24,7 +24,7 @@ interface CheckboxProps extends Margins {
 }
 
 /* eslint-disable-next-line */
-export interface Props extends Margins {
+export interface GoACheckboxProps extends Margins {
   id?: string;
   name: string;
   checked: boolean;
@@ -39,7 +39,10 @@ export interface Props extends Margins {
   onChange?: (name: string, checked: boolean, value: string) => void;
 }
 
-export const GoACheckbox: FC<Props> = ({
+// legacy
+export type Props = GoACheckboxProps;
+
+export function GoACheckbox({
   id,
   name,
   testId,
@@ -56,7 +59,7 @@ export const GoACheckbox: FC<Props> = ({
   mr,
   mb,
   ml,
-}) => {
+}: GoACheckboxProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
