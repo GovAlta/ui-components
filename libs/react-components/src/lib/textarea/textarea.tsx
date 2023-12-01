@@ -40,7 +40,7 @@ export interface GoATextAreaProps extends Margins {
   onChange: (name: string, value: string) => void;
 }
 
-export function GoATextArea({
+export function GoATextarea({
   name,
   value,
   placeholder,
@@ -96,6 +96,7 @@ export function GoATextArea({
       ml={ml}
     ></goa-textarea>
   );
-};
+}
+export {GoATextarea as GoATextArea}
+export default GoATextarea;
 
-export default GoATextArea;
