@@ -67,7 +67,7 @@ it("dispatches a value on date selection", async () => {
 
 it("allows for date navigation via the keyboard", async () => {
   const inputDate = new Date();
-  let expected = new Date(
+  const currentDate = new Date(
     inputDate.getFullYear(),
     inputDate.getMonth(),
     inputDate.getDate(),
@@ -98,58 +98,58 @@ it("allows for date navigation via the keyboard", async () => {
   });
 
   // left arrow
-  expected = addDays(expected, -1);
+  const expectedLA = addDays(currentDate, -1);
   await fireEvent(input, arrowLeftEvent);
   await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expected);
+    expect(handler).toHaveBeenCalledWith(expectedLA);
   });
 
   // right arrow
-  expected = addDays(expected, 1);
+  const expectedRA = addDays(currentDate, 1);
   await fireEvent(input, arrowRightEvent);
   await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expected);
+    expect(handler).toHaveBeenCalledWith(expectedRA);
   });
 
   // up arrow
-  expected = addDays(expected, -7);
+  const expectedUA = addDays(currentDate, -7);
   await fireEvent(input, arrowUpEvent);
   await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expected);
+    expect(handler).toHaveBeenCalledWith(expectedUA);
   });
 
   // down arrow
-  expected = addDays(expected, 7);
+  const expectedDA = addDays(currentDate, 7);
   await fireEvent(input, arrowDownEvent);
   await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expected);
+    expect(handler).toHaveBeenCalledWith(expectedDA);
   });
 
   // page up
-  expected = addMonths(expected, -1);
+  const expectedPU = addMonths(currentDate, -1);
   await fireEvent(input, pageUpEvent);
   await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expected);
+    expect(handler).toHaveBeenCalledWith(expectedPU);
   });
 
   // page down
-  expected = addMonths(expected, 1);
+  const expectedPD = addMonths(currentDate, 1);
   await fireEvent(input, pageDownEvent);
   await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expected);
+    expect(handler).toHaveBeenCalledWith(expectedPD);
   });
 
   // shift page up
-  expected = addYears(expected, -1);
+  const expectedSPU = addYears(currentDate, -1);
   await fireEvent(input, shiftPageUpEvent);
   await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expected);
+    expect(handler).toHaveBeenCalledWith(expectedSPU);
   });
 
   // shift page down
-  expected = addYears(expected, 1);
+  const expectedSPD = addYears(currentDate, 1);
   await fireEvent(input, shiftPageDownEvent);
   await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expected);
+    expect(handler).toHaveBeenCalledWith(expectedSPD);
   });
 });
