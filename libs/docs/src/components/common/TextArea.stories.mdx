@@ -101,6 +101,44 @@ import { GoATextArea } from "@abgov/react-components";
     lang="angular"
     type="() => void"
     description="Event triggered on each key press"
+    name="countBy"
+    required="true"
+    type="character | word"
+    lang="react"
+    description="What the count is of"
+  />
+  <Prop
+    name="showCount"
+    type="boolean"
+    lang="react"
+    defaultValue="false"
+    description="Show/hide the count"
+  />
+  <Prop
+    name="maxCount"
+    lang="react"
+    type="number"
+    description="Set the max count"
+  />
+  <Prop
+    name="countby"
+    required="true"
+    type="character | word"
+    lang="angular"
+    description="What the count is of"
+  />
+  <Prop
+    name="showcount"
+    type="boolean"
+    lang="angular"
+    defaultValue="false"
+    description="Show/hide the count"
+  />
+  <Prop
+    name="maxcount"
+    lang="angular"
+    type="number"
+    description="Set the max count"
   />
 </Props>
 
@@ -206,6 +244,139 @@ export const noop = () => {
     />
   </Tab>
 </Tabs>
+
+#### Word count
+
+export const CharCountTemplate = () => {
+  const [value, setValue] = useState("");
+  return (
+    <GoATextArea
+      name="comment"
+      value={value}
+      countBy="word"
+      showCount={true}
+      onChange={(name, value) => setValue(value)}
+    />
+  );
+};
+
+<Story name="Word count">{CharCountTemplate.bind({})}</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`<goa-textarea name="firstname" showcount="true" />`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-textarea
+          goaValue
+          name="comment"
+          countby="word"
+          showcount="true"
+          [(ngModel)]="val"
+        ></goa-textarea>
+      `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        export class SomeComponent {
+          val = "";
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        const [value, setValue] = useState('');
+        return (
+          <GoATextArea
+            name="firstname"
+            value={value}
+            countBy="word"
+            showCount={true}
+            onChange={(name, value) => setValue(value)}
+          />
+        )
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
+#### Character count with limit
+
+export const CharCountWithLimitTemplate = () => {
+  const [value, setValue] = useState("");
+  return (
+    <GoATextArea
+      name="comment"
+      value={value}
+      countBy="character"
+      maxCount={20}
+      onChange={(name, value) => setValue(value)}
+    />
+  );
+};
+
+<Story name="Character count with limit">
+  {CharCountWithLimitTemplate.bind({})}
+</Story>
+
+<Tabs>
+  <Tab label="Web Component" hidden={true}>
+    <CodeSnippet
+      code={`<goa-textarea name="firstname" maxcount="20" />`}
+      lang="html"
+    />
+  </Tab>
+  <Tab label="Angular">
+    <CodeSnippet
+      lang="html"
+      code={`
+        <goa-textarea
+          goaValue
+          name="comment"
+          countby="character"
+          maxcount="20"
+          [(ngModel)]="val"
+        ></goa-textarea>
+      `}
+    />
+    <CodeSnippet
+      lang="ts"
+      code={`
+        export class SomeComponent {
+          val = "";
+        }
+      `}
+    />
+  </Tab>
+  <Tab label="React">
+    <CodeSnippet
+      code={`
+        const [value, setValue] = useState('');
+        return (
+          <GoATextArea
+            name="firstname"
+            value={value}
+            countBy="character"
+            maxCount={20}
+            onChange={(name, value) => setValue(value)}
+          />
+        )
+      `}
+      lang="tsx"
+    />
+  </Tab>
+</Tabs>
+
 
 #### Disabled
 

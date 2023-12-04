@@ -11,8 +11,9 @@ describe("TextArea", () => {
         rows={10}
         placeholder="textarea-placeholder"
         disabled={true}
-        showCounter={true}
-        maxCharCount={50}
+        countBy="word"
+        showCount={true}
+        maxCount={50}
         mt="s"
         mr="m"
         mb="l"
@@ -27,8 +28,9 @@ describe("TextArea", () => {
     expect(el.getAttribute("rows")).toBe("10");
     expect(el.getAttribute("placeholder")).toBe("textarea-placeholder");
     expect(el.getAttribute("disabled")).toBe("true");
-    expect(el.getAttribute("showcounter")).toBe("true");
-    expect(el.getAttribute("maxcharcount")).toBe("50");
+    expect(el.getAttribute("showcount")).toBe("true");
+    expect(el.getAttribute("countby")).toBe("word");
+    expect(el.getAttribute("maxcount")).toBe("50");
     expect(el.getAttribute("mt")).toBe("s");
     expect(el.getAttribute("mr")).toBe("m");
     expect(el.getAttribute("mb")).toBe("l");
@@ -44,6 +46,7 @@ describe("TextArea", () => {
         testId="textarea-testid"
         name="textarea-name"
         value="textarea-value"
+        countBy="word"
         rows={10}
         placeholder="textarea-placeholder"
         disabled={true}
