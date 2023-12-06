@@ -1,7 +1,7 @@
 <svelte:options tag="goa-dropdown"/>
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { afterUpdate, beforeUpdate, onMount } from "svelte";
 
   import type { GoAIconType} from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -96,7 +96,22 @@
     _options = getOptions();
     if (!_native) {
       _inputEl.value = _options.find(o => o.value === value)?.label ?? "";      
-      _width = width || calculateWidth(_options);
+
+      if (width) {
+        if (width.endsWith("%")) {
+          const percent = parseInt(width) / 100;
+          const rootRect = _rootEl.getBoundingClientRect();
+          _width = percent * rootRect.width + "px";
+        } else {
+          _width = width;
+        }
+      }
+
+      // This is only here to allow the Jest tests to pass :(
+      if (!width && _options.length > 0) {
+        _width = getLongestChildWidth(_options);
+      }
+       
     }  
     syncFilteredOptions();
 
@@ -105,7 +120,10 @@
     slot?.addEventListener("slotchange", (_) => {
       _options = getOptions();
       syncFilteredOptions();
-      _width = width || calculateWidth(_options);
+
+      if (!width) {
+        _width = getLongestChildWidth(_options);
+      }
 
       if (!_native) {
         _inputEl.value = _options.find(o => o.value === value)?.label ?? "";      
@@ -165,7 +183,7 @@
   }
 
   // compute the required width to ensure all children fit
-  function calculateWidth(options: Option[]): string {
+  function getLongestChildWidth(options: Option[]): string {
     // set width to longest item
     const optionsWidth = options
       .map((option: Option) => {
@@ -483,8 +501,8 @@
   class="dropdown"
   class:dropdown-native={_native}
   style={`
+    ${calculateMargin(mt, mr, mb, ml)};
     --width: ${_width};
-    ${calculateMargin(mt, mr, mb, ml)}
   `}
   bind:this={_rootEl}
 >
@@ -515,7 +533,7 @@
       {disabled}
       {relative}
       data-testid="option-list"
-      maxwidth={"1000px"}
+      maxwidth="99999px"
       open={_isMenuVisible}
       padded="false"
       tabindex="-1"
@@ -525,7 +543,6 @@
     >
       <div
         slot="target"
-        style={cssVar("width", width)}
         class="dropdown-input-group"
         class:dropdown-input-group--disabled={_disabled}
         class:error={_error}
@@ -607,7 +624,6 @@
         aria-label={arialabel || name}
         aria-labelledby={arialabelledby}
         style={`
-          width: ${_width};
           outline: none;
           overflow-y: auto;
           max-height: ${maxheight};
@@ -647,11 +663,9 @@
 
   .dropdown {
     cursor: pointer;
-    display: inline-block;
     width: var(--width, 100%);
   }
 
-  /** input **/
   .dropdown-input-group {
     box-sizing: border-box;
     outline: none;
@@ -660,14 +674,15 @@
     border-radius: var(--goa-border-radius-m);
     display: inline-flex;
     align-items: stretch;
+
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
     background-color: var(--goa-color-greyscale-white);
     cursor: pointer;
-    width: 100%;
+    width: var(--width, 100%);
   }
 
-  .dropdown-input-group:hover{
+  .dropdown-input-group:hover {
     border-color: var(--goa-color-interactive-hover);
     box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }
