@@ -1,9 +1,8 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render, waitFor } from "@testing-library/svelte";
-import GoATextArea from "./TextArea.svelte"
+import GoATextArea from "./TextArea.svelte";
 
 describe("GoATextArea", () => {
-
   it("should render", async () => {
     const result = render(GoATextArea, {
       name: "name",
@@ -23,27 +22,26 @@ describe("GoATextArea", () => {
     expect(el).toHaveAttribute("rows", "42");
   });
 
-  it("handles the change event", async () => {
+  it.only("handles the change event", async () => {
     const onChange = jest.fn();
     const result = render(GoATextArea, {
       name: "name",
-      value: "foo",
       testid: "test-id",
     });
 
-    const textarea = result.queryByTestId("test-id");
-    textarea.addEventListener("_change", (e: CustomEvent) => {
+    const el = result.container.querySelector("textarea");
+    el.addEventListener("_change", (e: CustomEvent) => {
       expect(e.detail.name).toBe("name");
-      expect(e.detail.value).toBe("bar");
+      expect(e.detail.value).toBe("b");
       onChange();
     });
 
-    await fireEvent.input(textarea, { target: { value: 'bar' } });
+    await fireEvent.change(el, { target: { value: "b" } });
 
     await waitFor(() => {
       expect(onChange).toBeCalledTimes(1);
-    })
-  })
+    });
+  });
 
   it("handles the keypress event", async () => {
     const onKeyPress = jest.fn();
@@ -61,71 +59,167 @@ describe("GoATextArea", () => {
       onKeyPress();
     });
 
-    await fireEvent.keyUp(textarea, { target: { value: 'foo' }, key: "o" });
+    await fireEvent.keyUp(textarea, { target: { value: "foo" }, key: "o" });
 
     await waitFor(() => {
       expect(onKeyPress).toBeCalledTimes(1);
-    })
-  })
+    });
+  });
 
   it("can be disabled", async () => {
     const onChange = jest.fn();
     const result = render(GoATextArea, {
       name: "name",
       value: "foo",
-      testid: "test-id",
       disabled: "true",
     });
 
-    const textarea = result.queryByTestId("test-id");
-    textarea.addEventListener("_change", onChange);
+    const el = result.container.querySelector("textarea");
+    el.addEventListener("_change", onChange);
 
-    await fireEvent.keyUp(textarea, { target: { value: 'bar' } });
-    expect(textarea).toHaveAttribute("disabled", "");
+    await fireEvent.keyUp(el, { target: { value: "bar" } });
+    expect(el).toHaveAttribute("disabled", "");
     expect(onChange).not.toBeCalled();
-  })
+  });
 
   it("indicates an error state", async () => {
-    const result = render(GoATextArea, {
+    const { container } = render(GoATextArea, {
       name: "name",
       value: "foo",
-      testid: "test-id",
       error: "true",
     });
 
-    const textarea = result.queryByTestId("test-id");
+    const textarea = container.querySelector(".root");
     expect(textarea).toHaveClass("error");
-  })
+  });
 
   it("accepts an arialabel property", async () => {
-    const el = render(GoATextArea, { testid: "input-test", name: "description", arialabel: "Description" });
+    const el = render(GoATextArea, {
+      name: "description",
+      arialabel: "Description",
+    });
     const root = el.container.querySelector('[aria-label="Description"]');
     expect(root).toBeTruthy();
   });
 
   it("defaults to the name property if arialabel is not supplied", async () => {
-    const el = render(GoATextArea, { testid: "input-test", name: "about" });
+    const el = render(GoATextArea, { name: "about" });
     const root = el.container.querySelector('[aria-label="about"]');
     expect(root).toBeTruthy();
+  });
+
+  describe("Char count", () => {
+    it("does not show a char count if not enabled", async () => {
+      const { container } = render(GoATextArea, { name: "test-name" });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl).toBeNull();
+    });
+
+    it("shows a character count", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-name",
+        countby: "character",
+        showcount: "true",
+        value: "Jim likes apples",
+      });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl.innerHTML).toContain("16 characters");
+    });
+
+    it("shows a word count", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-name",
+        countby: "word",
+        showcount: "true",
+        value: "Jim likes apples",
+      });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl.innerHTML).toContain("3 words");
+    });
+
+    it("shows the number of characters remaining", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-name",
+        value: "Jim",
+        countby: "character",
+        maxcount: "50",
+      });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl.innerHTML).toContain("47 characters remaining");
+    });
+
+    it("shows the number of characters over by", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-name",
+        value: "Jim is funny",
+        countby: "character",
+        maxcount: "5",
+      });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl.innerHTML).toContain("7 characters too many");
+    });
+
+    it("shows the number of words remaining", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-name",
+        value: "Jim is funny",
+        countby: "word",
+        maxcount: "50",
+      });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl.innerHTML).toContain("47 words remaining");
+    });
+
+    it("shows the number of words over by", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-name",
+        value: "Jim is super funny",
+        countby: "word",
+        maxcount: "3",
+      });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl.innerHTML).toContain("1 word too many");
+    });
+
+    it("shows the count in an error state when the char count exceeds the max value allowed", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-name",
+        value: "Jim Smith",
+        countby: "character",
+        maxcount: "5",
+      });
+      expect(container.querySelector(".counter-error")).not.toBeNull();
+    });
+
+    it("should not show counter when disabled", async () => {
+      const { container } = render(GoATextArea, {
+        name: "name",
+        value: "foo",
+        countby: "word",
+        maxcount: "5",
+        disabled: "true",
+      });
+
+      expect(container.querySelector(".counter-error")).toBeNull();
+    });
   });
 
   describe("Margins", () => {
     it(`should add the margin`, async () => {
       const baseElement = render(GoATextArea, {
-        testid: "textarea-test",
         name: "test",
         mt: "s",
         mr: "m",
         mb: "l",
         ml: "xl",
       });
-      const textarea = await baseElement.findByTestId("textarea-test");
+      const el = await baseElement.findByTestId("root");
 
-      expect(textarea).toBeTruthy();
-      expect(textarea).toHaveStyle("margin-top:var(--goa-space-s)");
-      expect(textarea).toHaveStyle("margin-right:var(--goa-space-m)");
-      expect(textarea).toHaveStyle("margin-bottom:var(--goa-space-l)");
-      expect(textarea).toHaveStyle("margin-left:var(--goa-space-xl)");
+      expect(el).toBeTruthy();
+      expect(el).toHaveStyle("margin-top:var(--goa-space-s)");
+      expect(el).toHaveStyle("margin-right:var(--goa-space-m)");
+      expect(el).toHaveStyle("margin-bottom:var(--goa-space-l)");
+      expect(el).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
 });

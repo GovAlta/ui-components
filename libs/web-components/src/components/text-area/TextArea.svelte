@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { toBoolean } from "../../common/utils";
+  import { pluralize, toBoolean } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
@@ -16,6 +16,9 @@
   export let readonly: string = "false";
   export let disabled: string = "false";
   export let arialabel: string = "";
+  export let countby: "character" | "word";
+  export let showcount: string = "false";
+  export let maxcount: number = -1;
 
   // margin
   export let mt: Spacing = null;
@@ -23,76 +26,88 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  // export let showcounter: string = "false";
-  export let maxcharcount: number = 0;
+  // reactive
 
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
+  $: showCount = toBoolean(showcount);
+  $: count = countby === "character" 
+    ? value.length
+    : value.split(" ").filter(word => word.trim().length > 0).length;
 
-  let showCounter = false;
-  let _textAreaEl: HTMLTextAreaElement;
+  // privates
 
-  // $: showCounter = toBoolean(showcounter);
-  $: {
-    if (_textAreaEl && !isDisabled) {
-      _textAreaEl.dispatchEvent(
-        new CustomEvent("_change", {
-          composed: true,
-          bubbles: false,
-          cancelable: true,
-          detail: { name, value },
-        }),
-      );
-    };
+  let _textareaEl: HTMLTextAreaElement;
+
+  // functions
+  
+  function onChange(e: Event & { currentTarget: EventTarget & HTMLTextAreaElement } ) {
+    if (isDisabled) return;
+
+    const el = e.currentTarget;
+    _textareaEl.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        detail: { name, value: el.value },
+      }),
+    );
   }
 
   function onKeyPress(e: KeyboardEvent) {
-    if (_textAreaEl && !isDisabled) {
-      _textAreaEl.dispatchEvent(
-        new CustomEvent("_keyPress", {
-          composed: true,
-          detail: { name, value: value, key: e.key }
-        }),
-      );
-    }
+    if (isDisabled) return;
+
+    _textareaEl.dispatchEvent(
+      new CustomEvent("_keyPress", {
+        composed: true,
+        detail: { name, value, key: e.key }
+      }),
+    );
   }
 </script>
 
 <!-- HTML -->
 <div
-  class="container"
+  data-testid="root"
+  class="root"
+  class:error={isError || (maxcount > 0 && count > maxcount)}
+  class:disabled={isDisabled}
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     --width: ${width};
+    --char-count-padding: ${showCount || maxcount > 0 ? "2rem" : "0"};
   `}
 >
   <textarea
+    bind:this={_textareaEl}
     {name}
     {placeholder}
     {rows}
     aria-label={arialabel || name}
-    class="goa-textarea"
-    class:error={isError}
     disabled={isDisabled}
     readonly={isReadonly}
     data-testid={testid}
-    bind:this={_textAreaEl}
     bind:value={value}
     on:keyup={onKeyPress}
+    on:change={onChange}
   />
-  {#if showCounter}
-    {#if maxcharcount > 0}
-      <div
-        class="counter"
-        class:counter-error={value.length > maxcharcount}>
-        {value.length}{`/${maxcharcount}`}
-      </div>
-    {:else if value.length > 0}
-      <div class="counter">
-        {value.length}
-      </div>
-    {/if}
+
+  {#if maxcount > 0 && !isDisabled}
+    <div
+      class="counter"
+      class:counter-error={count > maxcount}>
+      {#if count > maxcount}
+        {count - maxcount} {pluralize(countby, count - maxcount)} too many
+      {:else if count < maxcount}
+        {maxcount - count} {pluralize(countby, maxcount - count)} remaining
+      {/if}
+    </div>
+  {/if}
+
+  {#if showCount && count > 0 && !isDisabled}
+    <div class="counter">
+      {count} {pluralize(countby, count)}
+    </div>
   {/if}
 </div>
 
@@ -106,23 +121,33 @@
     font-family: var(--goa-font-family-sans);
   }
 
-  .container {
+  .root {
     position: relative;
     width: 100%;
+    padding-bottom: var(--char-count-padding);
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
+    border-radius: 3px;
   }
+
+  .root:has(textarea:disabled) {
+    background-color: var(--goa-color-greyscale-100);
+    border-color: var(--goa-color-greyscale-200);
+    cursor: default;
+    box-shadow: none;
+  }
+
   @media not (--mobile) {
-    .container {
+    .root {
       max-width: var(--width);
     }
   }
 
-  .goa-textarea {
+  textarea {
     display: block;
     width: 100%;
     box-sizing: border-box;
     outline: none;
-    border: 1px solid var(--goa-color-greyscale-700);
-    border-radius: 3px;
+    border: none;
     color: var(--goa-color-greyscale-black, #ccc);
     padding: var(--textarea-padding-vertical) var(--textarea-padding-horizontal);
     font-size: var(--goa-font-size-4);
@@ -142,44 +167,53 @@
     cursor: pointer;
   }
 
-  .goa-textarea:hover {
+  .root:hover {
     box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }
-  .goa-textarea:active,
-  .goa-textarea:focus,
-  .goa-textarea:focus-within {
+
+  .root:focus-within {
     box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
-  }
-
-  .goa-textarea:disabled,
-  .goa-textarea:disabled:hover,
-  .goa-textarea:disabled:active,
-  .goa-textarea:disabled:focus {
-    background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-greyscale-200);
-    cursor: default;
-    box-shadow: none;
-  }
-
-  .counter {
-    position: absolute;
-    right: 0;
-    padding-top: 0.25rem;
-    font-size: var(--goa-font-size-2);
   }
 
   .counter-error {
     color: var(--goa-color-interactive-error)
   }
 
+  .counter {
+    position: absolute;
+    right: 0.75rem;
+    font-size: var(--goa-font-size-2);
+  }
+
+  textarea {
+    resize: none;
+    scroll-behavior: smooth;
+    max-height: calc(100vh * var(--max-height, 100) / 100);
+  }
+
+  textarea::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  textarea::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  textarea::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
   .error {
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
-    box-shadow: 0 0 0 var(--goa-border-width-s) var(--goa-color-interactive-error);
+    border-color: var(--goa-color-interactive-error);
+    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-error);
   }
   .error:hover {
     box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-error);
   }
-
   .error:active,
   .error:focus {
     box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
