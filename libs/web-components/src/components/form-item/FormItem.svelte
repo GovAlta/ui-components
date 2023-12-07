@@ -62,7 +62,7 @@
   </div>
   {#if error}
     <div class="error-msg">
-      <goa-icon type="warning" size="small" theme="filled" style="pointer-events: none;" />
+      <goa-icon type="warning" size="small" theme="filled" mt="2xs" />
       {error}
     </div>
   {/if}
@@ -114,6 +114,7 @@
 
   .error-msg {
     display: inline-flex;
+    align-items: flex-start;
     gap: 0.25rem;
     font-size: var(--goa-font-size-2);
     color: var(--goa-color-interactive-error);

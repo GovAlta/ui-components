@@ -1,7 +1,7 @@
 <svelte:options tag="goa-date-picker" />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   import { addDays, addMonths, addYears, format, isValid, startOfDay } from "date-fns";
   import type { Spacing } from "../../common/styling";
 
@@ -26,15 +26,25 @@
   let _showPopover: boolean = false;
 
   onMount(async () => {
+    await initDate()
+  });
+
+  afterUpdate(async() => {
+    await initDate()
+	});
+
+  async function initDate(){
     _date = value && startOfDay(new Date(value));
     if (value && !isValid(_date)) {
       console.error(`${value} is not a valid date`);
     }
-  });
+  }
 
   function onCalendarChange(e: CustomEvent) {
     _date = e.detail.value;
+    value = _date.toISOString();
     hideCalendar();
+    dispatchValue(_date);
     e.stopPropagation();
     e.preventDefault();
   }
@@ -69,7 +79,7 @@
     _showPopover = true;
   }
 
-  function handleKeyDown(e: KeyboardEvent) { 
+  function handleKeyDown(e: KeyboardEvent) {
     if (["Space", "Enter"].includes(e.key)) {
       showCalendar();
       return;
@@ -78,7 +88,7 @@
     // in the key event handling below the first line `_date ||= ...` is to initialize the date, if
     // it hasn't yet been set to 1 unit opposite of what the keybinding does ex. if ArrowDown is
     // clicked, which moves the datepicker one week ahead, the date is initialize one week before.
-    // This is to allow the starting date displayed to be that of today no matter what key is 
+    // This is to allow the starting date displayed to be that of today no matter what key is
     // pressed.
 
     switch (e.key) {

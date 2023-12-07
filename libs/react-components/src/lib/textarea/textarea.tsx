@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
+
+type CountBy = "character" | "word";
+
 interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
   name: string;
@@ -13,6 +16,9 @@ interface WCProps extends Margins {
   maxcharcount?: number;
   width?: string;
   arialabel?: string;
+  countby?: CountBy;
+  showcount?: boolean;
+  maxcount?: number;
 }
 
 declare global {
@@ -24,6 +30,7 @@ declare global {
   }
 }
 
+
 export interface GoATextAreaProps extends Margins {
   name: string;
   value: string;
@@ -32,22 +39,26 @@ export interface GoATextAreaProps extends Margins {
   rows?: number;
   error?: boolean;
   disabled?: boolean;
-  showCounter?: boolean;
-  maxCharCount?: number;
   width?: string;
   testId?: string;
   ariaLabel?: string;
+  countBy?: CountBy;
+  showCount?: boolean;
+  maxCount?: number;
+  
   onChange: (name: string, value: string) => void;
+  onKeyPress?: (name: string, value: string, key: string) => void;
 }
 
-export function GoATextArea({
+export function GoATextarea({
   name,
   value,
   placeholder,
   rows,
   disabled,
-  showCounter,
-  maxCharCount,
+  countBy,
+  showCount,
+  maxCount,
   width,
   testId,
   error,
@@ -57,6 +68,7 @@ export function GoATextArea({
   mb,
   ml,
   onChange,
+  onKeyPress,
 }: GoATextAreaProps): JSX.Element {
   const el = useRef<HTMLTextAreaElement>(null);
 
@@ -70,9 +82,16 @@ export function GoATextArea({
       onChange(name, value);
     };
 
+    const keypressListener = (e: unknown) => {
+      const { name, value, key } = (e as CustomEvent).detail;
+      onKeyPress?.(name, value, key);
+    }
+
     current.addEventListener("_change", listener);
+    current.addEventListener("_keyPress", keypressListener);
     return () => {
       current.removeEventListener("_change", listener);
+      current.removeEventListener("_keyPress", listener);
     };
   }, [el, onChange]);
 
@@ -84,8 +103,9 @@ export function GoATextArea({
       value={value}
       rows={rows}
       disabled={disabled}
-      showcounter={showCounter}
-      maxcharcount={maxCharCount}
+      countby={countBy}
+      showcount={showCount}
+      maxcount={maxCount}
       width={width}
       error={error}
       data-testid={testId}
@@ -96,6 +116,7 @@ export function GoATextArea({
       ml={ml}
     ></goa-textarea>
   );
-};
+}
+export {GoATextarea as GoATextArea}
+export default GoATextarea;
 
-export default GoATextArea;

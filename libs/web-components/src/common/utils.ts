@@ -20,7 +20,7 @@ export function validateRequired(componentName: string, props: Record<string, un
     if (!prop[1]) {
       console.warn(`${componentName}: ${prop[0]} is required`);
     }
-  })
+  });
 }
 
 // To avoid console errors due to late binding, we need to use setTimeout before calling typeValidator
@@ -41,34 +41,44 @@ export function typeValidator(
 }
 
 export function getTimestamp(val?: Date) {
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const now = val || new Date();
   const hour24 = now.getHours();
-  const min0 = now.getMinutes()
+  const min0 = now.getMinutes();
 
-  const date = now.getDate()
+  const date = now.getDate();
   const month = months[now.getMonth()];
   const year = now.getFullYear();
-  const hour =
-    hour24 === 0 && 12
-    || hour24 > 12 && hour24 - 12
-    || hour24;
-  const meridium =
-    hour24 === 0 && "AM"
-    || hour24 >= 12 && "PM"
-    || "AM";
-  const min =
-    min0 < 10 && `0${min0}`
-    || min0;
-  const ordinal
-     = date % 10 === 1 && date !== 11 && "st"
-    || date % 10 === 2 && date !== 12 && "nd"
-    || date % 10 === 3 && date !== 13 && "rd"
-    || "th";
+  const hour = (hour24 === 0 && 12) || (hour24 > 12 && hour24 - 12) || hour24;
+  const meridium = (hour24 === 0 && "AM") || (hour24 >= 12 && "PM") || "AM";
+  const min = (min0 < 10 && `0${min0}`) || min0;
+  const ordinal =
+    (date % 10 === 1 && date !== 11 && "st") ||
+    (date % 10 === 2 && date !== 12 && "nd") ||
+    (date % 10 === 3 && date !== 13 && "rd") ||
+    "th";
 
-  return `${month} ${date}${ordinal} ${year}, ${hour}:${min} ${meridium}`
+  return `${month} ${date}${ordinal} ${year}, ${hour}:${min} ${meridium}`;
 }
 
 export function cssVar(name: string, value: string | number): string {
   return value ? `${name}: ${value};` : "";
+}
+
+export function pluralize(word: string, count: number) {
+  if (count === 1) return word;
+  return `${word}s`;
 }

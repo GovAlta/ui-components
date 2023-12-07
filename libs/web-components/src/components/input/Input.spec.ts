@@ -158,6 +158,7 @@ describe("GoAInput Component", () => {
     });
     const input = await findByTestId("input-test");
     const change = jest.fn();
+    const keypress = jest.fn();
 
     input.addEventListener("_change", (e: CustomEvent) => {
       expect(e.detail.name).toBe("test-name");
@@ -165,9 +166,17 @@ describe("GoAInput Component", () => {
       change();
     });
 
-    await fireEvent.keyUp(input, { target: { value: "foobar" } });
+    input.addEventListener("_keyPress", (e: CustomEvent) => {
+      expect(e.detail.name).toBe("test-name");
+      expect(e.detail.value).toBe("foobar");
+      expect(e.detail.key).toBe("r");
+      keypress();
+    });
+
+    await fireEvent.keyUp(input, { target: { value: "foobar" }, key: 'r' });
     await waitFor(() => {
       expect(change).toBeCalledTimes(1);
+      expect(keypress).toBeCalledTimes(1);
     });
   });
 

@@ -72,6 +72,10 @@ export class InputComponentComponent implements OnInit {
     console.log("on Blur Event: ", event.detail);
   }
 
+  onKeyPressEvent(event: any) {
+    console.log("on Key Press Event: ", event.detail);
+  }
+
   setDate(event: any) {
     const raw = event.detail.value;
     if (!raw) {
