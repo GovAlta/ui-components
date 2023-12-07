@@ -12,7 +12,6 @@ describe("TextArea", () => {
         placeholder="textarea-placeholder"
         disabled={true}
         countBy="word"
-        showCount={true}
         maxCount={50}
         mt="s"
         mr="m"
@@ -28,7 +27,6 @@ describe("TextArea", () => {
     expect(el.getAttribute("rows")).toBe("10");
     expect(el.getAttribute("placeholder")).toBe("textarea-placeholder");
     expect(el.getAttribute("disabled")).toBe("true");
-    expect(el.getAttribute("showcount")).toBe("true");
     expect(el.getAttribute("countby")).toBe("word");
     expect(el.getAttribute("maxcount")).toBe("50");
     expect(el.getAttribute("mt")).toBe("s");

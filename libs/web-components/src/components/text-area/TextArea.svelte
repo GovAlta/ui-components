@@ -17,7 +17,6 @@
   export let disabled: string = "false";
   export let arialabel: string = "";
   export let countby: "character" | "word";
-  export let showcount: string = "false";
   export let maxcount: number = -1;
 
   // margin
@@ -31,7 +30,6 @@
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
-  $: showCount = toBoolean(showcount);
   $: count = countby === "character" 
     ? value.length
     : value.split(" ").filter(word => word.trim().length > 0).length;
@@ -75,7 +73,7 @@
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     --width: ${width};
-    --char-count-padding: ${showCount || maxcount > 0 ? "2rem" : "0"};
+    --char-count-padding: ${countby ? "2rem" : "0"};
   `}
 >
   <textarea
@@ -104,7 +102,7 @@
     </div>
   {/if}
 
-  {#if showCount && count > 0 && !isDisabled}
+  {#if countby && maxcount < 0 && count > 0 && !isDisabled}
     <div class="counter">
       {count} {pluralize(countby, count)}
     </div>
@@ -148,6 +146,7 @@
     box-sizing: border-box;
     outline: none;
     border: none;
+    border-radius: 3px;
     color: var(--goa-color-greyscale-black, #ccc);
     padding: var(--textarea-padding-vertical) var(--textarea-padding-horizontal);
     font-size: var(--goa-font-size-4);

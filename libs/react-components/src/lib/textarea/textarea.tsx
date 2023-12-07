@@ -12,12 +12,9 @@ interface WCProps extends Margins {
   rows?: number;
   error?: boolean;
   disabled?: boolean;
-  showcounter?: boolean;
-  maxcharcount?: number;
   width?: string;
   arialabel?: string;
   countby?: CountBy;
-  showcount?: boolean;
   maxcount?: number;
 }
 
@@ -43,7 +40,6 @@ export interface GoATextAreaProps extends Margins {
   testId?: string;
   ariaLabel?: string;
   countBy?: CountBy;
-  showCount?: boolean;
   maxCount?: number;
   
   onChange: (name: string, value: string) => void;
@@ -57,7 +53,6 @@ export function GoATextarea({
   rows,
   disabled,
   countBy,
-  showCount,
   maxCount,
   width,
   testId,
@@ -104,7 +99,6 @@ export function GoATextarea({
       rows={rows}
       disabled={disabled}
       countby={countBy}
-      showcount={showCount}
       maxcount={maxCount}
       width={width}
       error={error}
