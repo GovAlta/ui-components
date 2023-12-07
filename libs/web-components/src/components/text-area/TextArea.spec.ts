@@ -22,7 +22,7 @@ describe("GoATextArea", () => {
     expect(el).toHaveAttribute("rows", "42");
   });
 
-  it.only("handles the change event", async () => {
+  it("handles the change event", async () => {
     const onChange = jest.fn();
     const result = render(GoATextArea, {
       name: "name",
@@ -119,7 +119,6 @@ describe("GoATextArea", () => {
       const { container } = render(GoATextArea, {
         name: "test-name",
         countby: "character",
-        showcount: "true",
         value: "Jim likes apples",
       });
       const counterEl = container.querySelector(".counter");
@@ -130,7 +129,6 @@ describe("GoATextArea", () => {
       const { container } = render(GoATextArea, {
         name: "test-name",
         countby: "word",
-        showcount: "true",
         value: "Jim likes apples",
       });
       const counterEl = container.querySelector(".counter");

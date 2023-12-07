@@ -108,13 +108,6 @@ import { GoATextArea } from "@abgov/react-components";
     description="What the count is of"
   />
   <Prop
-    name="showCount"
-    type="boolean"
-    lang="react"
-    defaultValue="false"
-    description="Show/hide the count"
-  />
-  <Prop
     name="maxCount"
     lang="react"
     type="number"
@@ -126,13 +119,6 @@ import { GoATextArea } from "@abgov/react-components";
     type="character | word"
     lang="angular"
     description="What the count is of"
-  />
-  <Prop
-    name="showcount"
-    type="boolean"
-    lang="angular"
-    defaultValue="false"
-    description="Show/hide the count"
   />
   <Prop
     name="maxcount"
@@ -254,7 +240,6 @@ export const CharCountTemplate = () => {
       name="comment"
       value={value}
       countBy="word"
-      showCount={true}
       onChange={(name, value) => setValue(value)}
     />
   );
@@ -265,7 +250,7 @@ export const CharCountTemplate = () => {
 <Tabs>
   <Tab label="Web Component" hidden={true}>
     <CodeSnippet
-      code={`<goa-textarea name="firstname" showcount="true" />`}
+      code={`<goa-textarea name="firstname" countby="word" />`}
       lang="html"
     />
   </Tab>
@@ -277,7 +262,6 @@ export const CharCountTemplate = () => {
           goaValue
           name="comment"
           countby="word"
-          showcount="true"
           [(ngModel)]="val"
         ></goa-textarea>
       `}
@@ -300,7 +284,6 @@ export const CharCountTemplate = () => {
             name="firstname"
             value={value}
             countBy="word"
-            showCount={true}
             onChange={(name, value) => setValue(value)}
           />
         )
