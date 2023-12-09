@@ -275,6 +275,10 @@
   .goa-radio--error input[type="radio"]:hover ~ .goa-radio-icon {
     box-shadow: 0 0 0 1px var(--goa-color-emergency-default);
   }
+  .goa-radio--error input[type="radio"]:hover:active ~ .goa-radio-icon,
+  .goa-radio--error input[type="radio"]:hover:focus ~ .goa-radio-icon {
+    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
+  }
   .goa-radio--error input[type="radio"]:disabled:hover ~ .goa-radio-icon {
     box-shadow: none;
   }
