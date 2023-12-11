@@ -255,21 +255,26 @@
   }
 
   /* Disabled */
-  input[type="radio"]:disabled ~ .goa-radio-icon {
+  input[type="radio"]:disabled ~ .goa-radio-icon,
+  input[type="radio"]:disabled:focus ~ .goa-radio-icon,
+  input[type="radio"]:disabled:active ~ .goa-radio-icon {
     border: var(--goa-radio-border-width) solid var(--goa-color-greyscale-700);
     box-shadow: none;
     opacity: 40%;
   }
 
   /* Disabled and checked */
-  input[type="radio"]:disabled:checked ~ .goa-radio-icon {
+  input[type="radio"]:disabled:checked ~ .goa-radio-icon,
+  input[type="radio"]:disabled:checked:focus ~ .goa-radio-icon,
+  input[type="radio"]:disabled:checked:active ~ .goa-radio-icon {
     border: var(--goa-radio-border-width--checked) solid
       var(--goa-color-interactive-hover);
     box-shadow: none;
   }
 
   /* Error */
-  .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon {
+  .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon,
+  .goa-radio--error input[type="radio"]:disabled:checked ~ .goa-radio-icon {
     border: 7px solid var(--goa-color-emergency-default);
   }
   .goa-radio--error input[type="radio"]:hover ~ .goa-radio-icon {
