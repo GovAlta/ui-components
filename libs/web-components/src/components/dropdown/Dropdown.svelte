@@ -42,7 +42,7 @@
 
   //
   // Private
-  // 
+  //
 
   let _options: Option[] = [];
   let _isMenuVisible = false;
@@ -59,9 +59,9 @@
   let _filteredOptions: Option[] = [];
   let _values: string[] = []
 
-  // 
+  //
   // Reactive
-  // 
+  //
 
   $: _disabled = toBoolean(disabled);
   $: _error = toBoolean(error);
@@ -71,15 +71,15 @@
 
 
   // To keep track of active descendant for the accessibility
-  $: _activeDescendantId = _filteredOptions[_highlightedIndex] 
-    ? _filteredOptions[_highlightedIndex].value 
-    : undefined; 
+  $: _activeDescendantId = _filteredOptions[_highlightedIndex]
+    ? _filteredOptions[_highlightedIndex].value
+    : undefined;
 
   $: {
     _values = parseValues(value)
     // updating _inputEl.value is done within seperate function
     // to prevent unwanted reactive updates.
-    setDisplayedValue();  
+    setDisplayedValue();
   }
 
   //
@@ -87,15 +87,15 @@
   //
 
   onMount(async () => {
-    _eventHandler = _filterable  
-      ? new ComboboxKeyUpHandler(_inputEl) 
-      : new DropdownKeyUpHandler(_inputEl);            
+    _eventHandler = _filterable
+      ? new ComboboxKeyUpHandler(_inputEl)
+      : new DropdownKeyUpHandler(_inputEl);
 
     // the following is required to appease the jest testing gods in that they don't respond
     // to the slotchange event
     _options = getOptions();
     if (!_native) {
-      _inputEl.value = _options.find(o => o.value === value)?.label ?? "";      
+      _inputEl.value = _options.find(o => o.value === value)?.label ?? "";
 
       if (width) {
         if (width.endsWith("%")) {
@@ -111,8 +111,8 @@
       if (!width && _options.length > 0) {
         _width = getLongestChildWidth(_options);
       }
-       
-    }  
+
+    }
     syncFilteredOptions();
 
     // watch for DOM changes within the slot => dynamic binding
@@ -126,7 +126,7 @@
       }
 
       if (!_native) {
-        _inputEl.value = _options.find(o => o.value === value)?.label ?? "";      
+        setDisplayedValue();
       }
     });
   });
@@ -226,10 +226,10 @@
 
     const liOptionRect = liNode.getBoundingClientRect();
     const ulRect = _menuEl.getBoundingClientRect();
-    const isInView = 
-      liOptionRect.top >= 0 
-      && liOptionRect.left >= 0 
-      && liOptionRect.bottom <= ulRect.height 
+    const isInView =
+      liOptionRect.top >= 0
+      && liOptionRect.left >= 0
+      && liOptionRect.bottom <= ulRect.height
       && liOptionRect.right <= ulRect.width;
 
     if (isInView) return;
@@ -238,9 +238,9 @@
   }
 
   function syncFilteredOptions() {
-    _filteredOptions = _filterable 
-      ? _options.filter(option => isFilterMatch(option, _inputEl.value)) 
-      : _options;      
+    _filteredOptions = _filterable
+      ? _options.filter(option => isFilterMatch(option, _inputEl.value))
+      : _options;
   }
 
   function showMenu() {
@@ -270,7 +270,7 @@
   }
 
   function dispatchValue(value?: string) {
-    const detail = _multiselect 
+    const detail = _multiselect
       ? {name, values: [value, ..._values]}
       : {name, value: value};
 
@@ -280,10 +280,10 @@
     }, 1)
   }
 
-  // 
+  //
   // Event handlers
-  // 
-  
+  //
+
   function onSelect(option: Option) {
     if (_disabled) return;
     if (!_native) {
@@ -305,12 +305,12 @@
   }
 
   function onClearIconKeyDown(e: KeyboardEvent) {
-    if (e.key === "Enter" || e.key === " ") { 
+    if (e.key === "Enter" || e.key === " ") {
       e.stopPropagation();
       reset();
       showMenu();
     }
-  } 
+  }
 
   function onClearIconClick(e: Event) {
     reset();
@@ -329,10 +329,10 @@
 
     _activeDescendantId = undefined;
     _highlightedIndex = -1;
-    _inputEl.value = "";     
+    _inputEl.value = "";
     _isDirty = false;
     syncFilteredOptions();
-    
+
     dispatchValue("");
   }
 
@@ -341,22 +341,22 @@
     showMenu();
     e.stopPropagation();
   }
-  
+
   class ComboboxKeyUpHandler implements EventHandler {
 
     constructor(private input: HTMLInputElement) {
       input.addEventListener("blur", async (e) => {
         if (!_isDirty) return;
         if (!_filterable) return;
-      
+
         const input = e.target as HTMLInputElement;
-        const selectedOption = _filteredOptions.find(o => o.label === input.value);        
+        const selectedOption = _filteredOptions.find(o => o.label === input.value);
 
         if (!selectedOption) {
           dispatchValue("");
           input.value = "";
         }
-      })      
+      })
     }
 
     onEscape(e: KeyboardEvent) {
@@ -365,7 +365,7 @@
       e.preventDefault();
       e.stopPropagation();
     }
-    
+
     onEnter(e: KeyboardEvent) {
       const option = _filteredOptions[_highlightedIndex];
       if (option) {
@@ -377,7 +377,7 @@
       } else {
         showMenu();
       }
-      
+
       e.stopPropagation();
     };
 
@@ -398,9 +398,9 @@
 
     onKeyUp(_: KeyboardEvent) {
       showMenu();
-      _isDirty = true;      
+      _isDirty = true;
     }
-  
+
     handleKeyUp(e: KeyboardEvent) {
       switch (e.key) {
         case "Enter":
@@ -447,7 +447,7 @@
         }
         hideMenu();
       } else {
-        showMenu();  
+        showMenu();
       }
 
       e.preventDefault();
@@ -460,7 +460,7 @@
       e.preventDefault();
       e.stopPropagation();
     }
-  
+
     handleKeyDown(e: KeyboardEvent) {
       switch (e.key) {
         case " ":
