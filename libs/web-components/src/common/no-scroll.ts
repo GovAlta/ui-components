@@ -1,5 +1,4 @@
-export default function(_node: HTMLElement, opts: { enable: boolean }) {
-
+export default function (_node: HTMLElement, opts: { enable: boolean }) {
   let toggledScrolling = false;
 
   function hideScrollbars() {
@@ -8,12 +7,12 @@ export default function(_node: HTMLElement, opts: { enable: boolean }) {
     }
     const scrollbarWidth = calculateScrollbarWidth();
     toggledScrolling = true;
-    document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = scrollbarWidth + 'px';
+    document.body.style.overflow = "hidden";
+    document.body.style.borderRight = `${scrollbarWidth}px solid #eee`;
   }
 
   function isScrollable() {
-    return document.body.style.overflow !== "hidden"
+    return document.body.style.overflow !== "hidden";
   }
 
   function resetScrollbars() {
@@ -24,9 +23,9 @@ export default function(_node: HTMLElement, opts: { enable: boolean }) {
     toggledScrolling = false;
     // need to perform on the next render cycle to allow the css transitions to take place
     setTimeout(() => {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '0';
-    }, 200); 
+      document.body.style.overflow = "";
+      document.body.style.borderRight = "";
+    }, 200);
   }
 
   function calculateScrollbarWidth() {
@@ -35,13 +34,13 @@ export default function(_node: HTMLElement, opts: { enable: boolean }) {
       return 0;
     }
 
-    const outer = document.createElement('div');
-    outer.style.visibility = 'hidden';
-    outer.style.overflow = 'scroll';
+    const outer = document.createElement("div");
+    outer.style.visibility = "hidden";
+    outer.style.overflow = "scroll";
     document.body.appendChild(outer);
 
     // Creating inner element and placing it in the container
-    const inner = document.createElement('div');
+    const inner = document.createElement("div");
     outer.appendChild(inner);
 
     // Calculating difference between container's full width and the child width
@@ -54,7 +53,7 @@ export default function(_node: HTMLElement, opts: { enable: boolean }) {
   }
 
   if (opts.enable) {
-    hideScrollbars()
+    hideScrollbars();
   }
 
   return {
@@ -66,6 +65,6 @@ export default function(_node: HTMLElement, opts: { enable: boolean }) {
 
     destroy() {
       resetScrollbars();
-    }
-  }
+    },
+  };
 }
