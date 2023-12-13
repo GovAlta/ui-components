@@ -6,7 +6,13 @@
   import { toBoolean, typeValidator } from "../../common/utils";
   import { onMount, tick } from "svelte";
 
+  type CalloutVariant = typeof CALLOUT_VARIANT[number];
+  type Transition = typeof Transitions[number];
+
+  // ******
   // Public
+  // ******
+
   export let heading: string = "";
   export let closable: string = "false";
   export let open: string = "false";
@@ -17,11 +23,16 @@
   // @deprecated: use maxwidth
   export let width: string = "";
 
+  // *******
   // Private
+  // *******
+
   let _rootEl: HTMLElement = null;
-  let _contentEl: HTMLElement = null;
+  let _scrollPos: "top" | "middle" | "bottom" = "top";
   let _scrollEl: HTMLElement = null;
   let _headerEl: HTMLElement = null;
+  let _isOpen: boolean = false;
+  let _requiresTopPadding: boolean;
 
   // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator("Callout variant", [
@@ -36,39 +47,38 @@
     ["fast", "slow", "none"]
   );
 
-  type CalloutVariant = typeof CALLOUT_VARIANT[number];
-  type Transition = typeof Transitions[number];
-
+  // ********
   // Reactive
+  // ********
+
   $: _isClosable = toBoolean(closable);
 
   // Moving the reactive var into a timeout prevents accessing null stylesheet
   // reference to allow for creation of the @keyframes for the in:fade and out:fade transitions.
   // DDIDS-1288
-  let _isOpen: boolean = false;
   $: setTimeout(() => _isOpen = toBoolean(open), 1)
 
-  $: if(_isOpen && _scrollEl && _contentEl) {
+  // Show the shadow at the top of the content after scrolling down
+  $: if(_isOpen && _scrollEl) {
     const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
     if (hasScroll) {
-      _contentEl.classList.add("scroll-top");
+      _scrollPos = "top"
     }
   };
 
-  $: if(_isOpen && _contentEl) {
-    window.addEventListener('keydown', onInputKeyDown);
-
-    const children = getChildren();
-
-    if (_headerEl.querySelector("div.modal-title").textContent ||
-        _headerEl.querySelector("div.modal-close") ||
-        children.length
-    ) {
-      _headerEl.classList.add("has-content");
-    }
+  $: if(_isOpen && _rootEl) {
+    _requiresTopPadding = 
+      !!_headerEl.querySelector("div.modal-title").textContent
+      || !!_headerEl.querySelector("div.modal-close") 
+      || getChildren().length > 0
   }
 
-  $: _transitionTime = transition === "none" ? 0 : transition === "slow" ? 400 : 200;
+  $: _transitionTime = 
+    transition === "none" 
+      ? 0 
+      : transition === "slow" 
+      ? 400 
+      : 200;
 
   $: _iconType =
     calloutvariant === "emergency"
@@ -83,17 +93,17 @@
       ? "calendar"
       : "";
 
-  $: if (!_isOpen) {
-    // prevent null issues
-    _contentEl = _scrollEl = _rootEl = _headerEl = null;
-    window.removeEventListener('keydown', onInputKeyDown);
-  }
-
+  // *****
   // Hooks
+  // *****
+
   onMount(async () => {
     await tick()
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
+
+    // event listenerts
+    window.addEventListener('keydown', onInputKeyDown);
 
     if (width) {
       maxwidth = width;
@@ -101,7 +111,10 @@
     }
   });
 
+  // *********
   // Functions
+  // *********
+
   function close(e: Event) {
     if (!_isClosable) {
       return;
@@ -111,6 +124,9 @@
   }
 
   const onInputKeyDown = (e: KeyboardEvent) => {
+    if (!_isOpen) {
+      return;
+    }
     switch (e.key) {
       case "Escape":
         close(e);
@@ -121,21 +137,21 @@
 
   function handleScroll(e: CustomEvent) {
     const hasScroll = e.detail.scrollHeight > e.detail.offsetHeight;
-    if (_isOpen && hasScroll) {
-      const atTop = e.detail.scrollTop == 0;
-      const atBottom = Math.abs(e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight) < 1;
-
-      _contentEl.classList.remove("scroll-top", "scroll-bottom", "scroll-middle");
-      if (atTop) {
-        _contentEl.classList.add("scroll-top");
-      }
-      else if (atBottom) {
-        _contentEl.classList.add("scroll-bottom");
-      }
-      else {
-        _contentEl.classList.add("scroll-middle");
-      }
+    if (!_isOpen || !hasScroll) return;
+    
+    // top
+    if (e.detail.scrollTop == 0) {
+      _scrollPos = "top";
+      return;
     }
+
+    // bottom
+    if (Math.abs(e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight) < 1) {
+      _scrollPos = "bottom"
+      return;
+    }
+
+    _scrollPos = "middle";
   }
 
   function getChildren(): Element[] {
@@ -155,7 +171,7 @@
       in:fade={{ duration: _transitionTime }}
       out:fade={{ delay: _transitionTime, duration: _transitionTime }}
       data-testid="modal"
-      class="modal"
+      class={`modal ${_scrollPos}`}
       style={`--maxwidth: ${maxwidth};`}
       bind:this={_rootEl}
     >
@@ -175,7 +191,10 @@
           </div>
         {/if}
         <div class="content">
-          <header bind:this={_headerEl}>
+          <header 
+            bind:this={_headerEl}
+            class:has-content={_requiresTopPadding}
+          >
             <div data-testid="modal-title" class="modal-title">
               {#if heading}
                 {heading}
@@ -195,7 +214,7 @@
               </div>
             {/if}
           </header>
-          <div data-testid="modal-content" class="modal-content" bind:this={_contentEl}>
+          <div data-testid="modal-content" class="modal-content">
             <goa-scrollable direction="vertical" hpadding="1.9rem" maxheight="70vh" bind:this={_scrollEl} on:_scroll={handleScroll}>
               <slot />
             </goa-scrollable>
@@ -277,7 +296,7 @@
     justify-content: space-between;
   }
 
-  .content :global(header.has-content) {
+  header.has-content {
     margin-bottom: var(--goa-space-l);
   }
 
@@ -285,7 +304,7 @@
     .content {
       margin: var(--goa-space-l);
     }
-    .content :global(header.has-content) {
+    header.has-content {
       margin-bottom: var(--goa-space-m);
     }
 
