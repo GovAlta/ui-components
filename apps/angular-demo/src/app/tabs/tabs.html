@@ -29,3 +29,30 @@
   </goa-tab>
   <goa-tab heading="Test 1"> Testing </goa-tab>
 </goa-tabs>
+
+<goa-tabs data-cy="TabsSelector">
+  <goa-tab heading="Country">
+     <p>
+       <b>Select Country</b>
+     </p>
+     <goa-dropdown
+      goaValue
+      name="colors"
+      [formControl]="reactiveFormCtrl"
+      [value]="reactiveFormCtrl.value"
+      data-cy="CountrydropdownSelector"
+    >
+      <goa-dropdown-item
+        *ngFor="let color of colors"
+        [value]="color"
+        [label]="color"
+      >
+      </goa-dropdown-item>
+    </goa-dropdown>
+  </goa-tab>
+  <goa-tab heading="Province">
+    <p>
+      <b>Province</b>
+    </p>
+  </goa-tab>
+</goa-tabs>

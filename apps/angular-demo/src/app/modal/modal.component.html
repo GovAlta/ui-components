@@ -165,7 +165,7 @@
 </goa-modal>
 
 <goa-button-group>
-  <goa-button (_click)="showCalloutModal('information')"
+  <goa-button (_click)="showCalloutModal('information')" data-cy='InformationCallout'
     >Information Callout</goa-button
   >
   <goa-button (_click)="showCalloutModal('important')"
@@ -194,7 +194,7 @@
   </p>
   <div slot="actions">
     <goa-button-group alignment="end">
-      <goa-button (_click)="closeModal5()">Secondary</goa-button>
+      <goa-button (_click)="closeModal5()" data-cy='ModalCloseSecondaryButton'>Secondary</goa-button>
       <goa-button (_click)="closeModal5()">Primary</goa-button>
     </goa-button-group>
   </div>
