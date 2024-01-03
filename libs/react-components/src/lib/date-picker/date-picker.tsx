@@ -5,6 +5,8 @@ interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   name?: string;
   value?: string;
+  disabled?: boolean;
+  width?: string;
   min?: string;
   max?: string;
 }
@@ -24,10 +26,14 @@ export interface GoADatePickerProps extends Margins {
   value?: Date;
   min?: Date;
   max?: Date;
+  disabled?: boolean;
+  width?: string;
   onChange: (name: string, value: Date) => void;
 }
 
 export function GoADatePicker({
+  disabled,
+  width,
   name,
   value,
   min,
@@ -60,6 +66,8 @@ export function GoADatePicker({
       mr={mr}
       mb={mb}
       ml={ml}
+      disabled={disabled}
+      width={width}
     />
   );
 };

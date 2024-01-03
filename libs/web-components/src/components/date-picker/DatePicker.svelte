@@ -1,9 +1,10 @@
 <svelte:options tag="goa-date-picker" />
 
 <script lang="ts">
-  import { afterUpdate, onMount } from "svelte";
+  import { afterUpdate, onMount, tick } from "svelte";
   import { addDays, addMonths, addYears, format, isValid, startOfDay } from "date-fns";
   import type { Spacing } from "../../common/styling";
+  import { toBoolean } from "../../common/utils";
 
   type DateValue = {
     type: "date";
@@ -14,18 +15,21 @@
   export let min: string = "";
   export let max: string = "";
   export let relative: string = "false";
-
+  export let width: string = "30ch";
+  export let disabled: string = "false";
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
+  $: isDisabled = toBoolean(disabled);
 
   let _rootEl: Element;
   let _date: Date;
   let _showPopover: boolean = false;
 
   onMount(async () => {
+    await tick();
     await initDate()
   });
 
@@ -76,7 +80,7 @@
   }
 
   function showCalendar() {
-    _showPopover = true;
+    _showPopover = !isDisabled;
   }
 
   function handleKeyDown(e: KeyboardEvent) {
@@ -135,12 +139,15 @@
   {mb}
   {ml}
   {mr}
+  {disabled}
   open={_showPopover}
   on:_close={() => dispatchValue(_date)}
 >
   <goa-input
     slot="target"
     readonly="true"
+    {width}
+    {disabled}
     trailingicon="calendar"
     value={formatDate(_date)}
     on:click={showCalendar}
