@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.18.1] - 2024-01-16
+
+### Fixed
+
+- Dropdown width percentage is now based off parent container instead of window ([#1496](https://github.com/GovAlta/ui-components/issues/1496))
+- Radio focus state now stays after element is selected ([#1430](https://github.com/GovAlta/ui-components/issues/1430))
+- Helper text in Form Item no longer has a margin right ([#1318](https://github.com/GovAlta/ui-components/issues/1318))
+- Disabled Radio no longer has a focus state ([#1431](https://github.com/GovAlta/ui-components/issues/1431))
+- Dropdown shows the initial page number in Pagination ([#1458](https://github.com/GovAlta/ui-components/issues/1458))
+- Second "eye" icon no longer shows in Edge browser for password Input ([#1499](https://github.com/GovAlta/ui-components/issues/1499))
+
 ## [1.18.0] - 2023-12-07
 
 ### Added
