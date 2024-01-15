@@ -1,13 +1,15 @@
 <h1>Button</h1>
 
 <h2>Types</h2>
-<goa-button (_click)="onClick()" type="submit">Submit</goa-button>
-<goa-button (_click)="onClick()" type="secondary">Secondary</goa-button>
+<goa-button (_click)="onClick()" data-cy="defaultButton">Default</goa-button>
+
+<goa-button (_click)="onClick()" data-cy="submitButton" type="submit">Submit</goa-button>
+<goa-button (_click)="onClick()" data-cy="secondaryButton" type="secondary">Secondary</goa-button>
 <goa-button (_click)="onClick()" type="submit" ml="xl" mr="xl" mb="xl" mt="l">
   Get Started here
 </goa-button>
-<goa-button (_click)="onClick()" type="tertiary">Tertiary</goa-button>
-<goa-button (_click)="onClick()" type="start">Get Started</goa-button>
+<goa-button (_click)="onClick()" data-cy="tertiaryButton" type="tertiary">Tertiary</goa-button>
+<goa-button (_click)="onClick()" data-cy="startButton" type="start">Get Started</goa-button>
 
 <goa-button-group gap="2" align="left">
   <goa-button (_click)="onClick()" type="submit"> Get Started </goa-button>
@@ -15,34 +17,49 @@
   <goa-button (_click)="onClick()" type="start">Get Started</goa-button>
 </goa-button-group>
 
+<h2>Destructive</h2>
+<goa-button (_click)="onClick()" data-cy="primaryDestructiveButton" variant="destructive" type="primary">Primary Destructive</goa-button>
+<goa-button (_click)="onClick()" data-cy="secondaryDestructiveButton" variant="destructive" type="secondary">Primary Destructive</goa-button>
+<goa-button (_click)="onClick()" data-cy="tertiaryDestructiveButton" variant="destructive" type="tertiary">Primary Destructive</goa-button>
+
 <h2>Disabled</h2>
-<goa-button (_click)="onClick()" type="primary" disabled>Primary</goa-button>
-<goa-button (_click)="onClick()" type="secondary" disabled="true">
+<goa-button (_click)="onClick()" data-cy="disabledPrimaryButton" type="primary" disabled>Primary</goa-button>
+<goa-button (_click)="onClick()" data-cy="disabledSecondaryButton" type="secondary" disabled="true">
   Secondary
 </goa-button>
-<goa-button (_click)="onClick()" type="tertiary" disabled>Tertiary</goa-button>
-<goa-button (_click)="onClick()" type="start" disabled>Get Started</goa-button>
+<goa-button (_click)="onClick()" data-cy="disabledTertiaryButton" type="tertiary" disabled>Tertiary</goa-button>
+<goa-button (_click)="onClick()" data-cy="disabledStartButton" type="start" disabled>Get Started</goa-button>
 
 <h2>Sizes</h2>
-<goa-button size="compact" (_click)="onClick()" type="primary">
+<goa-button data-cy="ButtonPrimaryCompact" size="compact" (_click)="onClick()" type="primary">
   Compact Primary
 </goa-button>
-<goa-button size="compact" (_click)="onClick()" type="secondary">
+<goa-button data-cy="ButtonSecondaryCompact" size="compact" (_click)="onClick()" type="secondary">
   Compact Secondary
 </goa-button>
-<goa-button size="compact" (_click)="onClick()" type="tertiary">
+<goa-button data-cy="ButtonTertiaryCompact" size="compact" (_click)="onClick()" type="tertiary">
   Compact Tertiary
+</goa-button>
+<goa-button data-cy="ButtonPrimaryNormal" size="normal" (_click)="onClick()" type="primary">
+  Normal Primary
+</goa-button>
+<goa-button data-cy="ButtonSecondaryNormal" size="normal" (_click)="onClick()" type="secondary">
+  Normal Secondary
+</goa-button>
+<goa-button data-cy="ButtonTertiaryNormal" size="normal" (_click)="onClick()" type="tertiary">
+  Normal Tertiary
 </goa-button>
 
 <h2>Icons</h2>
 <goa-button-group gap="2" align="left">
-  <goa-button leadingicon="airplane" (_click)="onClick()" type="primary">
+  <goa-button data-cy="leadingIconButton" leadingicon="airplane" (_click)="onClick()" type="primary">
     Leading
   </goa-button>
-  <goa-button trailingIcon="airplane" (_click)="onClick()" type="primary">
+  <goa-button data-cy="TrailingIconButton" trailingIcon="airplane" (_click)="onClick()" type="primary">
     Trailing
   </goa-button>
   <goa-button
+    data-cy="LeadTrailIconButton"
     leadingicon="archive"
     trailingicon="airplane"
     (_click)="onClick()"

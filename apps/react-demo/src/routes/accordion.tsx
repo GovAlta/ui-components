@@ -20,11 +20,8 @@ export default function Accordion() {
         placeat aperiam officiis, sit corporis nulla dolorem non vero ex nobis
         aliquam cumque amet asperiores. Vitae amet ullam quas nemo?
       </GoAAccordion>
-      <GoAAccordion heading="This is a heading" secondaryText="Secondary Text">
+      <GoAAccordion heading="This is a test ID" secondaryText="Secondary Text" testid="headingAccordion">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-        repudiandae ab error exercitationem vero tempora animi odio! Quibusdam
-        voluptas laudantium ullam ipsum, fugiat nobis possimus. Cum eum ipsum
-        odio ex.
       </GoAAccordion>
 
       <GoAAccordion
@@ -35,6 +32,7 @@ export default function Accordion() {
             <GoABadge type="success" content="Success" />
           </div>
         }
+        testid="secondaryAccordion"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
         harum aliquid officia provident recusandae facilis dolor minus magnam
@@ -76,6 +74,8 @@ export default function Accordion() {
           </div>
         }
         open
+        testid="defaultOpenAccordion"
+        headingSize="medium"
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
         repudiandae ab error exercitationem vero tempora animi odio! Quibusdam

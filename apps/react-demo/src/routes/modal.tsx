@@ -126,7 +126,7 @@ export default function Modal() {
       <br />
       <h2>Callout Variants</h2>
       <GoAButtonGroup alignment="start">
-        <GoAButton onClick={() => showCallout("information")}>
+        <GoAButton testId="InformationCallout" onClick={() => showCallout("information")}>
           Information Callout
         </GoAButton>
         <GoAButton onClick={() => showCallout("important")}>
@@ -150,7 +150,7 @@ export default function Modal() {
         onClose={() => setShowModal(false)}
         actions={
           <GoAButtonGroup alignment="end">
-            <GoAButton type="secondary" onClick={() => setShowModal(false)}>
+            <GoAButton testId="ModalCloseSecondaryButton" type="secondary" onClick={() => setShowModal(false)}>
               Secondary
             </GoAButton>
             <GoAButton type="primary" onClick={() => setShowModal(false)}>

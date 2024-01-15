@@ -61,6 +61,7 @@ export default function PaginationPage() {
         perPageCount={10}
         pageNumber={page}
         onChange={changePage}
+        testId='paginationDropdown'
       />
     </>
   );
