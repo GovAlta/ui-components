@@ -6,6 +6,25 @@
 </script>
 
 <goa-modal {open} closable="true" on:_close={() => (open = false)}>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellat quas suscipit corporis repudiandae totam tempore molestias, nesciunt, vero ullam debitis labore, perferendis accusamus ad explicabo deleniti? Amet, dolor tempore.
   <goa-dropdown on:_change={() => {}} {value} disabled={false}>
     <goa-dropdown-item value="" label="Red" />
     <goa-dropdown-item value="green" label="Green" />

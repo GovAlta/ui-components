@@ -109,7 +109,6 @@
   .help-msg {
     font-size: var(--goa-font-size-2);
     color: var(--goa-color-text-default);
-    margin-right: 56px;
   }
 
   .error-msg {

@@ -226,17 +226,17 @@
   bind:this={_rootEl}
   data-testid={testid}
   style={`
-    ${_relative && "position: relative;"}
+    ${width && `width: ${width};`}
+    ${_relative && "position: relative;" || ""}
     ${calculateMargin(mt, mr, mb, ml)}
     ${cssVar("--offset-top", voffset)}
     ${cssVar("--offset-bottom", voffset)}
     ${cssVar("--offset-left", hoffset)}
     ${cssVar("--offset-right", hoffset)}
     ${cssVar("--focus-border-width", focusborderwidth)}
-    ${cssVar("--border-radius", borderradius)}
-    ${cssVar("width", "100%")}
-  `}
-  >
+    ${cssVar("--border-radius", borderradius)
+  }
+`}>
   <div class="popover-target"
     tabindex={+tabindex}
     bind:this={_targetEl}

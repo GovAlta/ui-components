@@ -96,6 +96,12 @@
 
   function onKeyDown(e: KeyboardEvent) {
     let isHandled = false;
+    const isTabButtonFocused = e.target && _tabs.contains(e.target as Node);
+
+    if (!isTabButtonFocused) {
+      return;
+    }
+
     switch (e.key) {
       case 'ArrowUp':
       case 'ArrowLeft':

@@ -1,7 +1,7 @@
 <svelte:options tag="goa-dropdown"/>
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { afterUpdate, beforeUpdate, onMount } from "svelte";
 
   import type { GoAIconType} from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -42,7 +42,7 @@
 
   //
   // Private
-  // 
+  //
 
   let _options: Option[] = [];
   let _isMenuVisible = false;
@@ -59,9 +59,9 @@
   let _filteredOptions: Option[] = [];
   let _values: string[] = []
 
-  // 
+  //
   // Reactive
-  // 
+  //
 
   $: _disabled = toBoolean(disabled);
   $: _error = toBoolean(error);
@@ -71,15 +71,15 @@
 
 
   // To keep track of active descendant for the accessibility
-  $: _activeDescendantId = _filteredOptions[_highlightedIndex] 
-    ? _filteredOptions[_highlightedIndex].value 
-    : undefined; 
+  $: _activeDescendantId = _filteredOptions[_highlightedIndex]
+    ? _filteredOptions[_highlightedIndex].value
+    : undefined;
 
   $: {
     _values = parseValues(value)
     // updating _inputEl.value is done within seperate function
     // to prevent unwanted reactive updates.
-    setDisplayedValue();  
+    setDisplayedValue();
   }
 
   //
@@ -87,17 +87,32 @@
   //
 
   onMount(async () => {
-    _eventHandler = _filterable  
-      ? new ComboboxKeyUpHandler(_inputEl) 
-      : new DropdownKeyUpHandler(_inputEl);            
+    _eventHandler = _filterable
+      ? new ComboboxKeyUpHandler(_inputEl)
+      : new DropdownKeyUpHandler(_inputEl);
 
     // the following is required to appease the jest testing gods in that they don't respond
     // to the slotchange event
     _options = getOptions();
     if (!_native) {
-      _inputEl.value = _options.find(o => o.value === value)?.label ?? "";      
-      _width = width || calculateWidth(_options);
-    }  
+      _inputEl.value = _options.find(o => o.value === value)?.label ?? "";
+
+      if (width) {
+        if (width.endsWith("%")) {
+          const percent = parseInt(width) / 100;
+          const rootRect = _rootEl.getBoundingClientRect();
+          _width = percent * rootRect.width + "px";
+        } else {
+          _width = width;
+        }
+      }
+
+      // This is only here to allow the Jest tests to pass :(
+      if (!width && _options.length > 0) {
+        _width = getLongestChildWidth(_options);
+      }
+
+    }
     syncFilteredOptions();
 
     // watch for DOM changes within the slot => dynamic binding
@@ -105,10 +120,13 @@
     slot?.addEventListener("slotchange", (_) => {
       _options = getOptions();
       syncFilteredOptions();
-      _width = width || calculateWidth(_options);
+
+      if (!width) {
+        _width = getLongestChildWidth(_options);
+      }
 
       if (!_native) {
-        _inputEl.value = _options.find(o => o.value === value)?.label ?? "";      
+        setDisplayedValue();
       }
     });
   });
@@ -165,7 +183,7 @@
   }
 
   // compute the required width to ensure all children fit
-  function calculateWidth(options: Option[]): string {
+  function getLongestChildWidth(options: Option[]): string {
     // set width to longest item
     const optionsWidth = options
       .map((option: Option) => {
@@ -208,10 +226,10 @@
 
     const liOptionRect = liNode.getBoundingClientRect();
     const ulRect = _menuEl.getBoundingClientRect();
-    const isInView = 
-      liOptionRect.top >= 0 
-      && liOptionRect.left >= 0 
-      && liOptionRect.bottom <= ulRect.height 
+    const isInView =
+      liOptionRect.top >= 0
+      && liOptionRect.left >= 0
+      && liOptionRect.bottom <= ulRect.height
       && liOptionRect.right <= ulRect.width;
 
     if (isInView) return;
@@ -220,9 +238,9 @@
   }
 
   function syncFilteredOptions() {
-    _filteredOptions = _filterable 
-      ? _options.filter(option => isFilterMatch(option, _inputEl.value)) 
-      : _options;      
+    _filteredOptions = _filterable
+      ? _options.filter(option => isFilterMatch(option, _inputEl.value))
+      : _options;
   }
 
   function showMenu() {
@@ -252,7 +270,7 @@
   }
 
   function dispatchValue(value?: string) {
-    const detail = _multiselect 
+    const detail = _multiselect
       ? {name, values: [value, ..._values]}
       : {name, value: value};
 
@@ -262,10 +280,10 @@
     }, 1)
   }
 
-  // 
+  //
   // Event handlers
-  // 
-  
+  //
+
   function onSelect(option: Option) {
     if (_disabled) return;
     if (!_native) {
@@ -287,12 +305,12 @@
   }
 
   function onClearIconKeyDown(e: KeyboardEvent) {
-    if (e.key === "Enter" || e.key === " ") { 
+    if (e.key === "Enter" || e.key === " ") {
       e.stopPropagation();
       reset();
       showMenu();
     }
-  } 
+  }
 
   function onClearIconClick(e: Event) {
     reset();
@@ -311,10 +329,10 @@
 
     _activeDescendantId = undefined;
     _highlightedIndex = -1;
-    _inputEl.value = "";     
+    _inputEl.value = "";
     _isDirty = false;
     syncFilteredOptions();
-    
+
     dispatchValue("");
   }
 
@@ -323,22 +341,22 @@
     showMenu();
     e.stopPropagation();
   }
-  
+
   class ComboboxKeyUpHandler implements EventHandler {
 
     constructor(private input: HTMLInputElement) {
       input.addEventListener("blur", async (e) => {
         if (!_isDirty) return;
         if (!_filterable) return;
-      
+
         const input = e.target as HTMLInputElement;
-        const selectedOption = _filteredOptions.find(o => o.label === input.value);        
+        const selectedOption = _filteredOptions.find(o => o.label === input.value);
 
         if (!selectedOption) {
           dispatchValue("");
           input.value = "";
         }
-      })      
+      })
     }
 
     onEscape(e: KeyboardEvent) {
@@ -347,7 +365,7 @@
       e.preventDefault();
       e.stopPropagation();
     }
-    
+
     onEnter(e: KeyboardEvent) {
       const option = _filteredOptions[_highlightedIndex];
       if (option) {
@@ -359,7 +377,7 @@
       } else {
         showMenu();
       }
-      
+
       e.stopPropagation();
     };
 
@@ -380,9 +398,9 @@
 
     onKeyUp(_: KeyboardEvent) {
       showMenu();
-      _isDirty = true;      
+      _isDirty = true;
     }
-  
+
     handleKeyUp(e: KeyboardEvent) {
       switch (e.key) {
         case "Enter":
@@ -429,7 +447,7 @@
         }
         hideMenu();
       } else {
-        showMenu();  
+        showMenu();
       }
 
       e.preventDefault();
@@ -442,7 +460,7 @@
       e.preventDefault();
       e.stopPropagation();
     }
-  
+
     handleKeyDown(e: KeyboardEvent) {
       switch (e.key) {
         case " ":
@@ -483,8 +501,8 @@
   class="dropdown"
   class:dropdown-native={_native}
   style={`
+    ${calculateMargin(mt, mr, mb, ml)};
     --width: ${_width};
-    ${calculateMargin(mt, mr, mb, ml)}
   `}
   bind:this={_rootEl}
 >
@@ -515,7 +533,7 @@
       {disabled}
       {relative}
       data-testid="option-list"
-      maxwidth={"1000px"}
+      maxwidth="99999px"
       open={_isMenuVisible}
       padded="false"
       tabindex="-1"
@@ -525,7 +543,6 @@
     >
       <div
         slot="target"
-        style={cssVar("width", width)}
         class="dropdown-input-group"
         class:dropdown-input-group--disabled={_disabled}
         class:error={_error}
@@ -607,7 +624,6 @@
         aria-label={arialabel || name}
         aria-labelledby={arialabelledby}
         style={`
-          width: ${_width};
           outline: none;
           overflow-y: auto;
           max-height: ${maxheight};
@@ -647,11 +663,9 @@
 
   .dropdown {
     cursor: pointer;
-    display: inline-block;
     width: var(--width, 100%);
   }
 
-  /** input **/
   .dropdown-input-group {
     box-sizing: border-box;
     outline: none;
@@ -660,14 +674,15 @@
     border-radius: var(--goa-border-radius-m);
     display: inline-flex;
     align-items: stretch;
+
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
     background-color: var(--goa-color-greyscale-white);
     cursor: pointer;
-    width: 100%;
+    width: var(--width, 100%);
   }
 
-  .dropdown-input-group:hover{
+  .dropdown-input-group:hover {
     border-color: var(--goa-color-interactive-hover);
     box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }

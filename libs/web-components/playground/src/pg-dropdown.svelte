@@ -16,15 +16,24 @@
   }
 </script>
 
-  <goa-dropdown on:_change={(e) => setValue(e)} value={value} disabled={false} leadingicon="airplane">
-    <goa-dropdown-item value="red" label="red"></goa-dropdown-item>
-    <goa-dropdown-item value="blue" label="blue"></goa-dropdown-item>
-  </goa-dropdown>
+  <goa-container type="information">
 
-  <goa-dropdown filterable="true" on:_change={(e) => setValue(e)} value={value} disabled={false} leadingicon="airplane">
-    <goa-dropdown-item value="red" label="red"></goa-dropdown-item>
-    <goa-dropdown-item value="blue" label="blue"></goa-dropdown-item>
-  </goa-dropdown>
+    <goa-dropdown on:_change={(e) => setValue(e)} value={value} disabled={false} leadingicon="airplane" width="100%">
+      <goa-dropdown-item value="red" label="red"></goa-dropdown-item>
+      <goa-dropdown-item value="blue" label="blue"></goa-dropdown-item>
+    </goa-dropdown>
+
+    <goa-dropdown on:_change={(e) => setValue(e)} value={value} disabled={false} leadingicon="airplane" width="80%">
+      <goa-dropdown-item value="red" label="red"></goa-dropdown-item>
+      <goa-dropdown-item value="blue" label="blue"></goa-dropdown-item>
+    </goa-dropdown>
+
+    <goa-dropdown on:_change={(e) => setValue(e)} value={value} disabled={false} leadingicon="airplane">
+      <goa-dropdown-item value="red" label="red"></goa-dropdown-item>
+      <goa-dropdown-item value="blue" label="blue"></goa-dropdown-item>
+    </goa-dropdown>
+
+  </goa-container>
   
 <button on:click={() => open = !open}>
   Show
