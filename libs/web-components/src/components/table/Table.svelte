@@ -1,10 +1,11 @@
-<svelte:options tag="goa-table" />
+<svelte:options customElement="goa-table" />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
-  import { calculateMargin, Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
   import { typeValidator, toBoolean } from "../../common/utils";
-  import type { Direction } from "./TableSortHeader.svelte";
+  import type { GoATableSortDirection } from "./TableSortHeader.svelte";
+  import type { Spacing } from "../../common/styling";
 
   // Validators
   const [Variants, validateVariant] = typeValidator(
@@ -12,9 +13,10 @@
     ["normal", "relaxed"],
     true,
   );
-  type Variant = typeof Variants[number];
+  type Variant = (typeof Variants)[number];
 
   // Public
+
   export let width: string = "";
   export let stickyheader: string = "false";
   export let variant: Variant = "normal";
@@ -25,15 +27,21 @@
   export let ml: Spacing = null;
 
   // Private
+
   let _rootEl: HTMLElement;
   let _isTableRoot: boolean = false;
+
+  // Reactive
+
   $: _stickyHeader = toBoolean(stickyheader);
+
+  // Hooks
 
   onMount(() => {
     validateVariant(variant);
 
     // without setTimeout it won't properly sort in Safari
-    setTimeout(attachSortEventHandling, 0)
+    setTimeout(attachSortEventHandling, 0);
 
     // exit here if when running tests (tests don't have assignedElements)
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
@@ -45,50 +53,65 @@
     _isTableRoot = slot.assignedElements()[0].tagName === "TABLE";
   });
 
+  // Functions
+
   async function attachSortEventHandling() {
     await tick();
-    const contentSlot = _rootEl.querySelector("slot") as HTMLSlotElement;
-    const headings = contentSlot.assignedElements().find(el => el.tagName==="THEAD" || el.tagName==="TABLE")?.querySelectorAll("goa-table-sort-header");
-    headings?.forEach(heading => {
+    const contentSlot = _rootEl?.querySelector("slot") as HTMLSlotElement;
+    const headings = contentSlot
+      ?.assignedElements()
+      .find((el) => el.tagName === "THEAD" || el.tagName === "TABLE")
+      ?.querySelectorAll("goa-table-sort-header");
+
+    headings?.forEach((heading) => {
       heading.addEventListener("click", () => {
-        const sortBy = heading.getAttribute("name")
-        let sortDir: number;
+        const sortBy = heading.getAttribute("name");
+        let sortDir: number = 0;
 
         // relay state to all children
-        headings.forEach(child => {
+        headings.forEach((child) => {
           if (child.getAttribute("name") === sortBy) {
-            const direction = child["direction"] as Direction;
+            // @ts-expect-error
+            const direction = child["direction"] as GoATableSortDirection;
             // starting direction is asc
             const newDirection = direction === "asc" ? "desc" : "asc";
 
-            sortDir = newDirection === "asc" ? 1 : -1
-            child.setAttribute("direction", newDirection)
+            sortDir = newDirection === "asc" ? 1 : -1;
+            child.setAttribute("direction", newDirection);
           } else {
-            child.setAttribute("direction", "none")
+            child.setAttribute("direction", "none");
           }
-        })
+        });
 
-        dispatch(heading, {sortBy, sortDir})
-      })
+        if (sortBy && sortDir !== 0) {
+          dispatch(heading, { sortBy, sortDir });
+        }
+      });
 
       // dispatch the default sort params if initially set
       const initialSortBy = heading.getAttribute("name");
-      const initialDirection = heading["direction"] as Direction;
-      if (initialDirection && initialDirection !== "none") {
+      // @ts-ignore
+      const initialDirection = heading["direction"] as GoATableSortDirection;
+      if (initialSortBy && initialDirection && initialDirection !== "none") {
         setTimeout(() => {
-          dispatch(heading, {sortBy: initialSortBy, sortDir: initialDirection === "asc" ? 1 : -1})
-        }, 10)
+          dispatch(heading, {
+            sortBy: initialSortBy,
+            sortDir: initialDirection === "asc" ? 1 : -1,
+          });
+        }, 10);
       }
-    })
+    });
   }
 
-  function dispatch(el: Element, params: {sortBy: string, sortDir: number}) {
-    el.dispatchEvent(new CustomEvent("_sort", {
-      composed: true,
-      bubbles: true,
-      cancelable: false,
-      detail: params,
-    }));
+  function dispatch(el: Element, params: { sortBy: string; sortDir: number }) {
+    el.dispatchEvent(
+      new CustomEvent("_sort", {
+        composed: true,
+        bubbles: true,
+        cancelable: false,
+        detail: params,
+      }),
+    );
   }
 </script>
 
@@ -97,18 +120,14 @@
   class={`goatable ${variant}`}
   class:sticky={_stickyHeader}
   style={`
-    ${width && `width: ${width};`}
+    ${`width: ${width || "100%"};`}
     ${calculateMargin(mt, mr, mb, ml)}
   `}
 >
   {#if _isTableRoot}
     <slot />
   {:else}
-    <table
-      style={
-       width && "width: 100%;"
-      }
-    >
+    <table style={width && "width: 100%;"}>
       <slot />
     </table>
   {/if}
@@ -127,4 +146,3 @@
     border-collapse: collapse;
   }
 </style>
-

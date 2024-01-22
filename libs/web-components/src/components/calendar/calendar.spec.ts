@@ -7,6 +7,7 @@ import {
 } from "@testing-library/svelte";
 import { addDays, lastDayOfMonth, startOfDay } from "date-fns";
 import { tick } from "svelte";
+import { it, expect, vi } from "vitest";
 
 function toDayStart(d: Date): Date {
   d.setHours(0);
@@ -33,25 +34,24 @@ it("it renders", async () => {
     const d = new Date(lastDate);
     d.setDate(i);
     const dayEl = container
-      .querySelector(`[data-date="${d.getTime()}"]`)
-      .querySelector("[data-testid=date]");
+      ?.querySelector(`[data-date="${d.getTime()}"]`)
+      ?.querySelector("[data-testid=date]");
     expect(dayEl).toBeTruthy();
   }
 
   // today's date
   const today = toDayStart(new Date());
   const todayEl = container
-    .querySelector(`.today[data-date="${today.getTime()}"]`)
-    .querySelector("[data-testid=date]");
+    ?.querySelector(`.today[data-date="${today.getTime()}"]`)
+    ?.querySelector("[data-testid=date]");
   expect(todayEl).toBeTruthy();
 
   // months
-  const monthEls =
-    queryByTestId("months").querySelectorAll("goa-dropdown-item");
+  const monthEls = queryByTestId("months")?.querySelectorAll("goa-dropdown-item");
 
-  expect(monthEls.length).toBe(12);
+  expect(monthEls?.length).toBe(12);
   for (let i = 0; i < 12; i++) {
-    const month = queryByTestId("months").querySelector(
+    const month = queryByTestId("months")?.querySelector(
       `goa-dropdown-item[value="${i}"]`,
     );
     expect(month).toBeTruthy();
@@ -135,7 +135,7 @@ it("emits an event when a date is selected", async () => {
   );
   expect(todayEl).toBeTruthy();
 
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const calendarEl = queryByTestId("calendar");
   calendarEl.addEventListener("_change", (e) => {
     onChange((e as CustomEvent).detail);
@@ -290,7 +290,7 @@ it("prevents date click selection outside of allowed range", async () => {
   const yesterday = addDays(today, -1);
   const tomorrow = addDays(today, +1);
 
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const calendarEl = queryByTestId("calendar");
   calendarEl.addEventListener("_change", (e) => {
     onChange((e as CustomEvent).detail);
@@ -318,7 +318,7 @@ it("prevents date keyboard selection outside of allowed range", async () => {
   const { queryByTestId } = render(Calendar, { min, max });
   await tick()
 
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const calendarEl = queryByTestId("calendar");
   calendarEl.addEventListener("_change", (e) => {
     onChange((e as CustomEvent).detail);

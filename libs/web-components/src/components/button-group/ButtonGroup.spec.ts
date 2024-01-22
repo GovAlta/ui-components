@@ -1,6 +1,6 @@
-import "@testing-library/jest-dom";
 import { render, cleanup, waitFor } from "@testing-library/svelte";
 import GoAButtonGroup from "./ButtonGroup.svelte";
+import { it, describe } from "vitest";
 
 afterEach(cleanup);
 
@@ -26,7 +26,7 @@ describe("GoA ButtonGroup", () => {
   });
 
   it(`should not render ButtonGroup with invalid alignment`, async () => {
-    const mock = jest.spyOn(console, "error").mockImplementation();
+    const mock = vi.spyOn(console, "error").mockImplementation(() => {});
     render(GoAButtonGroup, { alignment: "staart" });
     await waitFor(() => {
       expect(console.error["mock"].calls.length).toBeGreaterThan(0);
@@ -35,7 +35,7 @@ describe("GoA ButtonGroup", () => {
   });
 
   it(`should not render ButtonGroup with invalid gap`, async () => {
-    const mock = jest.spyOn(console, "error").mockImplementation();
+    const mock = vi.spyOn(console, "error").mockImplementation(() => {});
     render(GoAButtonGroup, { alignment: "start", gap: "relaaexd" });
     await waitFor(() => {
       expect(console.error["mock"].calls.length).toBeGreaterThan(0);

@@ -1,5 +1,6 @@
 import FileUploadInput from './FileUploadInput.svelte'
 import { fireEvent, render, waitFor } from '@testing-library/svelte'
+import { describe, it, expect, vi } from "vitest";
 
 it('it renders', async () => {
   const { queryByTestId } = render(FileUploadInput)
@@ -15,15 +16,11 @@ describe("File selection", () => {
 
   const file = new File([new ArrayBuffer(1e6)], 'file.jpg', { type: "image/jpg" });
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-  })
-
   it("reads the selected file and triggers the _selectFile event", async () => {
     const { queryByTestId } = render(FileUploadInput)
 
-    const onChange = jest.fn()
-    const onFileSelect = jest.fn()
+    const onChange = vi.fn()
+    const onFileSelect = vi.fn()
     const dragdrop = queryByTestId("dragdrop")
     const input = queryByTestId("input") as HTMLInputElement;
 

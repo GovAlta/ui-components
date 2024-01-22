@@ -1,11 +1,12 @@
-<svelte:options tag="goa-grid" />
+<svelte:options customElement="goa-grid" />
 
 <!-- Script -->
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { calculateMargin, Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
   import { validateRequired } from "../../common/utils";
+  import type { Spacing } from "../../common/styling";
 
   export let gap: Spacing = "m";
   export let minchildwidth: string = "";
@@ -49,7 +50,10 @@
   @media not (--mobile) {
     .goa-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(var(--min-child-width), 1fr));
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(var(--min-child-width), 1fr)
+      );
     }
   }
 </style>

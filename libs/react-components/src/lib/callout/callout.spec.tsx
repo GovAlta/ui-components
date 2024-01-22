@@ -19,12 +19,12 @@ describe("Callout", () => {
     );
 
     const el = result.container.querySelector("goa-callout");
-    expect(el.getAttribute("heading")).toContain("Callout Title");
-    expect(el.getAttribute("type")).toContain("information");
-    expect(el.getAttribute("size")).toContain("medium");
-    expect(el.getAttribute("mt")).toBe("s");
-    expect(el.getAttribute("mr")).toBe("m");
-    expect(el.getAttribute("mb")).toBe("l");
-    expect(el.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("heading")).toContain("Callout Title");
+    expect(el?.getAttribute("type")).toContain("information");
+    expect(el?.getAttribute("size")).toContain("medium");
+    expect(el?.getAttribute("mt")).toBe("s");
+    expect(el?.getAttribute("mr")).toBe("m");
+    expect(el?.getAttribute("mb")).toBe("l");
+    expect(el?.getAttribute("ml")).toBe("xl");
   });
 });

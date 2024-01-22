@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/svelte';
 import GoACircularProgress from './CircularProgress.svelte'
+import { it, describe } from "vitest";
 
 describe('GoACircularProgress', () => {
 
@@ -10,12 +10,12 @@ describe('GoACircularProgress', () => {
         const type = progress ? "infinite" : "progress";
 
         it(`renders the ${type} type of the ${variant} variant`, async () => {
-          const { container } = render(GoACircularProgress, { 
-            variant, 
-            size, 
+          const { container } = render(GoACircularProgress, {
+            variant,
+            size,
             progress,
-            message: "the message", 
-            visible: "true" 
+            message: "the message",
+            visible: "true"
           });
 
           await waitFor(() => {

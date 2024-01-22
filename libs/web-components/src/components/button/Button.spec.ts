@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
 import { render, fireEvent, waitFor } from '@testing-library/svelte';
 import GoAButton from './Button.svelte'
+import { it, describe, vi } from "vitest";
 
 describe('GoAButtonComponent', () => {
 
@@ -13,7 +13,7 @@ describe('GoAButtonComponent', () => {
 
   describe("events", () => {
     it('should handle the click event', async () => {
-      const onClick = jest.fn();
+      const onClick = vi.fn();
       const results = render(GoAButton, { testid: 'button-test' });
       const button = await results.findByTestId('button-test');
 
@@ -37,7 +37,7 @@ describe('GoAButtonComponent', () => {
     });
 
     it("should not allow for invalid size", async () => {
-      const mock = jest.spyOn(console, "error").mockImplementation();
+      const mock = vi.spyOn(console, "error").mockImplementation(() => { });
       render(GoAButton, { size: "huuuuuuge" });
       await waitFor(() => {
         expect(console.error["mock"].calls.length).toBeGreaterThan(0);
@@ -71,9 +71,9 @@ describe('GoAButtonComponent', () => {
   });
 
   describe("Invalid attrs", () => {
-    let consoleMock: jest.SpyInstance;
+    let consoleMock: vi.SpyInstance;
     beforeEach(() => {
-      consoleMock = jest.spyOn(console, "error").mockImplementation();
+      consoleMock = vi.spyOn(console, "error").mockImplementation(() => { });
       expect(console.error["mock"].calls.length).toBe(0);
     })
     afterEach(() => consoleMock.mockRestore())

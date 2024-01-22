@@ -42,10 +42,11 @@ describe("ThreeColumnLayout", () => {
     expect(baseElement.innerHTML).toContain("<goa-app-header>");
     expect(baseElement.innerHTML).toContain("<goa-app-footer>");
     expect(baseElement.querySelectorAll("[slot=nav] a").length).toEqual(5);
+
     expect(
-      baseElement.querySelector("[slot=side-menu] h2").innerHTML
+      baseElement?.querySelector("[slot=side-menu] h2")?.innerHTML
     ).toContain("Side Menu");
-    expect(baseElement.querySelector("[slot=side-menu] p").innerHTML).toContain(
+    expect(baseElement?.querySelector("[slot=side-menu] p")?.innerHTML).toContain(
       "Add content."
     );
   });
@@ -69,12 +70,13 @@ describe("ThreeColumnLayout", () => {
       </ThreeColumnLayout>
     );
 
-    const goaThreeColumnLayout = baseElement.querySelector(
+    const el = baseElement.querySelector(
       "goa-three-column-layout"
     );
-    expect(goaThreeColumnLayout).toBeTruthy();
-    expect(goaThreeColumnLayout.getAttribute("leftcolumnwidth")).toBe("20%");
-    expect(goaThreeColumnLayout.getAttribute("rightcolumnwidth")).toBe("300px");
-    expect(goaThreeColumnLayout.getAttribute("maxcontentwidth")).toBe("50%");
+
+    expect(el).toBeTruthy();
+    expect(el?.getAttribute("leftcolumnwidth")).toBe("20%");
+    expect(el?.getAttribute("rightcolumnwidth")).toBe("300px");
+    expect(el?.getAttribute("maxcontentwidth")).toBe("50%");
   });
 });

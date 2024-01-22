@@ -21,13 +21,12 @@ import {
   ],
 })
 
-// export class CheckedDirective implements ControlValueAccessor {
 export class CheckedDirective extends CheckboxControlValueAccessor {
   private _checked = false;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  override onChange: any = () => { };
+  override onTouched: any = () => { };
 
   constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
     super(renderer, elementRef);
@@ -44,15 +43,15 @@ export class CheckedDirective extends CheckboxControlValueAccessor {
     this.elementRef.nativeElement.checked = checked;
   }
 
-  writeValue(checked: any) {
+  override writeValue(checked: any) {
     this.value = checked;
   }
 
-  registerOnChange(fn: (_: any) => void) {
+  override registerOnChange(fn: (_: any) => void) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void) {
+  override registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
 

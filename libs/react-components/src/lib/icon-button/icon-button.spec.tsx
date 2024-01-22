@@ -8,15 +8,15 @@ describe("GoA IconButton", () => {
     );
     const el = container.querySelector("goa-icon-button");
 
-    expect(el.getAttribute("icon")).toBe("information");
-    expect(el.getAttribute("mt")).toBe("s");
-    expect(el.getAttribute("mr")).toBe("m");
-    expect(el.getAttribute("mb")).toBe("l");
-    expect(el.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("icon")).toBe("information");
+    expect(el?.getAttribute("mt")).toBe("s");
+    expect(el?.getAttribute("mr")).toBe("m");
+    expect(el?.getAttribute("mb")).toBe("l");
+    expect(el?.getAttribute("ml")).toBe("xl");
   });
 
   describe("Variants", () => {
-    ["color", "nocolor", "dark", "destructive"].forEach(
+    (["color", "nocolor", "dark", "destructive"] as const).forEach(
       (variant: IconButtonVariant) => {
         it(`should render ${variant} variant`, async () => {
           const { container } = render(
@@ -25,7 +25,7 @@ describe("GoA IconButton", () => {
 
           const el = container.querySelector("goa-icon-button");
           expect(el).toBeTruthy();
-          expect(el.getAttribute("variant")).toEqual(variant);
+          expect(el?.getAttribute("variant")).toEqual(variant);
         });
       }
     );

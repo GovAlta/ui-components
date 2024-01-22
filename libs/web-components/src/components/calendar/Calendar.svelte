@@ -1,4 +1,4 @@
-<svelte:options tag="goa-calendar" />
+<svelte:options customElement="goa-calendar" />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
@@ -18,6 +18,7 @@
   } from "date-fns";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { isValidDate } from "../../common/utils";
 
   // ******
   // Public
@@ -44,7 +45,7 @@
   // Privates
   // ********
 
-  let _selectedDate: Date; // date set by the user
+  let _selectedDate: Date | null; // date set by the user
   let _calendarDate: Date; // date that the calendar is synced to (days of month, month/year dropdowns)
   let _min: Date;
   let _max: Date;
@@ -52,41 +53,55 @@
   let _previousMonthDays: Date[] = [];
   let _nextMonthDays: Date[] = [];
   let _nextMonthDayCount: number;
-  let _months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-  let _years: number[] = [];
+  let _months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let _years: string[] = [];
   let _calendarEl: HTMLElement;
 
   // *****
   // Hooks
   // *****
 
-  onMount(async() => {
-    await tick()
+  onMount(async () => {
     _calendarDate = _selectedDate = value
       ? startOfDay(new Date(value))
       : startOfDay(new Date());
-    _min = min && new Date(min) || addYears(_selectedDate, -5);
-    _max = max && new Date(max) || addYears(_selectedDate, 5);
+    _min = (min && new Date(min)) || addYears(_selectedDate, -5);
+    _max = (max && new Date(max)) || addYears(_selectedDate, 5);
 
     // define year range to show in dropdown
     const yearCount = _max.getFullYear() - _min.getFullYear() + 1;
     let yearStart = _min.getFullYear();
     _years = new Array(yearCount)
       .fill(undefined)
-      .map((_, i) => yearStart + i)
+      .map((_, i) => `${yearStart + i}`)
       .sort();
 
-    renderCalendar({type: "date", value: _selectedDate});
     initKeybindings();
+
+    await tick();
+    renderCalendar({ type: "date", value: _selectedDate });
   });
 
   // *********
   // Functions
   // *********
 
-  type DateChange = { type: "date", value: Date };
-  type MonthChange = { type: "month", value: number };
-  type YearChange = { type: "year", value: number };
+  type DateChange = { type: "date"; value: Date };
+  type MonthChange = { type: "month"; value: number };
+  type YearChange = { type: "year"; value: number };
 
   function renderCalendar(change: DateChange | MonthChange | YearChange) {
     switch (change.type) {
@@ -101,11 +116,22 @@
         break;
     }
 
+    if (!isValidDate(_calendarDate)) {
+      return;
+    }
+
     // day count
     const dayCount = getDaysInMonth(_calendarDate);
     _monthDays = new Array(dayCount)
       .fill(undefined)
-      .map((_, i) => new Date(_calendarDate.getFullYear(), _calendarDate.getMonth(), i + 1));
+      .map(
+        (_, i) =>
+          new Date(
+            _calendarDate.getFullYear(),
+            _calendarDate.getMonth(),
+            i + 1,
+          ),
+      );
 
     // previous month days to fill the start of the calendar
     const prevMonthEnd = lastDayOfMonth(addMonths(_calendarDate, -1));
@@ -118,7 +144,8 @@
 
     // next month days to fill the end of the calendar
     _nextMonthDays = [];
-    _nextMonthDayCount = 7 - ((_previousMonthDays.length + _monthDays.length) % 7);
+    _nextMonthDayCount =
+      7 - ((_previousMonthDays.length + _monthDays.length) % 7);
     // ensure a full week is not appended to the end
     if (_nextMonthDayCount < 7) {
       const nextMonthStart = setDate(addMonths(_calendarDate, 1), 1);
@@ -145,8 +172,10 @@
       _calendarDate = newDate;
 
       await tick();
-      const focusedDateEl = _calendarEl.querySelector(`[data-date="${newDate.getTime()}"]`) as HTMLButtonElement;
-      focusedDateEl?.focus()
+      const focusedDateEl = _calendarEl.querySelector(
+        `[data-date="${newDate.getTime()}"]`,
+      ) as HTMLButtonElement;
+      focusedDateEl?.focus();
     };
 
     _calendarEl.addEventListener("keydown", (e: KeyboardEvent) => {
@@ -168,7 +197,7 @@
           _selectedDate = null;
           break;
         case "Home": {
-          let homeDate = new Date(_calendarDate)
+          let homeDate = new Date(_calendarDate);
           homeDate.setDate(1);
           handleKeyClick(e, homeDate);
           break;
@@ -205,6 +234,9 @@
   }
 
   function dispatchValue() {
+    if (!_selectedDate) return;
+    if (!isValidDate(_selectedDate)) return;
+
     value = _selectedDate.toISOString();
     _calendarEl.dispatchEvent(
       new CustomEvent("_change", {
@@ -235,7 +267,11 @@
   }
 
   function onDateClick(e: Event) {
-    const newDate = new Date(+(e.target as HTMLElement).dataset.date);
+    const el = e.target as HTMLElement;
+    const raw = parseInt(el.dataset["date"] || "0");
+    if (!raw) return;
+
+    const newDate = new Date(raw);
 
     if (newDate < _min || newDate > _max) {
       return;
@@ -249,7 +285,6 @@
     _selectedDate = _calendarDate = newDate;
     dispatchValue();
   }
-
 </script>
 
 <div
@@ -258,7 +293,15 @@
 >
   <goa-block mb="m">
     <goa-form-item label="Month" mt="0">
-      <goa-dropdown arialabel={`${name} month`} data-testid="months" width="calc(314px / 2 - 1.5rem)" relative="true" value={_calendarDate?.getMonth()} on:_change={setMonth}>
+      <goa-dropdown
+        name="month"
+        arialabel={`${name} month`}
+        data-testid="months"
+        width="calc(314px / 2 - 1.5rem)"
+        relative="true"
+        value={_calendarDate?.getMonth()}
+        on:_change={setMonth}
+      >
         {#each _months as month, i}
           <goa-dropdown-item value={i} label={month} />
         {/each}
@@ -266,7 +309,15 @@
     </goa-form-item>
 
     <goa-form-item label="Year" mt="0">
-      <goa-dropdown arialabel={`${name} year`} data-testid="years" width="calc(314px / 2 - 1.5rem)" relative="true" value={_calendarDate?.getFullYear()} on:_change={setYear}>
+      <goa-dropdown
+        name="year"
+        arialabel={`${name} year`}
+        data-testid="years"
+        width="calc(314px / 2 - 1.5rem)"
+        relative="true"
+        value={_calendarDate?.getFullYear()}
+        on:_change={setYear}
+      >
         {#each _years as year}
           <goa-dropdown-item value={year} />
         {/each}
@@ -430,5 +481,4 @@
   .today.selected .day-num {
     border-bottom: 3px solid var(--goa-color-greyscale-white);
   }
-
 </style>

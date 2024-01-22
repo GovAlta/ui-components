@@ -1,7 +1,7 @@
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/svelte';
+import { render, waitFor } from '@testing-library/svelte';
 import GoACallout from './Callout.svelte'
 import GoACalloutWrapper from './CalloutWrapper.test.svelte'
+import { it, describe } from "vitest";
 
 describe('GoACalloutComponent', () => {
   it('should render - emergency', async () => {
@@ -82,14 +82,15 @@ describe('GoACalloutComponent', () => {
     const heading = el.querySelector('h3');
     expect(heading).toBeNull();
   });
-  it("should render - with size medium", async() => {
+
+  it("should render - with size medium", async () => {
     const baseElement = render(GoACallout, { type: "emergency", size: "medium", heading: "Heading", testid: "testid" });
     const el = baseElement.queryByTestId("testid");
 
     const heading = el.querySelector("h3.medium");
     expect(heading).toHaveClass("medium");
 
-    setTimeout(() => {
+    await waitFor(() => {
       const icon = el.querySelector("goa-icon");
       expect(icon).toHaveAttribute("size", "small");
     });

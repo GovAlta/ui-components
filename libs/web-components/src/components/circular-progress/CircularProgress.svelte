@@ -1,4 +1,4 @@
-<svelte:options tag="goa-circular-progress" />
+<svelte:options customElement="goa-circular-progress" />
 
 <!-- Script -->
 <script lang="ts">
@@ -10,13 +10,16 @@
   // Validators
   const [Variants, validateVariant] = typeValidator(
     "Circular progress variant",
-    ["fullscreen", "inline"]
+    ["fullscreen", "inline"],
   );
-  const [Sizes, validateSize] = typeValidator("Button size", ["small", "large"]);
+  const [Sizes, validateSize] = typeValidator("Button size", [
+    "small",
+    "large",
+  ]);
 
   // Types
-  type Size = typeof Sizes[number];
-  type Variant = typeof Variants[number];
+  type Size = (typeof Sizes)[number];
+  type Variant = (typeof Variants)[number];
 
   // Optional
   export let variant: Variant = "inline";
@@ -34,11 +37,10 @@
   onMount(async () => {
     validateVariant(variant);
     validateSize(size);
-    spinnerSize = size === "small" ? "large" : "xlarge"
+    spinnerSize = size === "small" ? "large" : "xlarge";
     fullscreen = variant === "fullscreen";
     inline = variant === "inline";
-  })
-
+  });
 </script>
 
 <!-- HTML -->
@@ -49,14 +51,14 @@
       use:noScroll={{ enable: true }}
       class:fullscreen
     >
-      <goa-spinner size={spinnerSize} progress={progress} />
+      <goa-spinner size={spinnerSize} {progress} />
       {#if message}
         <div class="message">{message}</div>
       {/if}
     </div>
   {:else if inline}
-    <div class:inline class={"spinner-"+spinnerSize}>
-      <goa-spinner size={spinnerSize} progress={progress} />
+    <div class:inline class={"spinner-" + spinnerSize}>
+      <goa-spinner size={spinnerSize} {progress} />
       {#if message}
         <div class="message">{message}</div>
       {/if}

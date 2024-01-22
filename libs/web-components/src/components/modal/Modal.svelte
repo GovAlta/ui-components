@@ -1,13 +1,13 @@
-<svelte:options tag="goa-modal" />
+<svelte:options customElement="goa-modal" />
 
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { toBoolean, typeValidator } from "../../common/utils";
-  import { onMount, tick } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
 
-  type CalloutVariant = typeof CALLOUT_VARIANT[number];
-  type Transition = typeof Transitions[number];
+  type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
+  type Transition = (typeof Transitions)[number];
 
   // ******
   // Public
@@ -17,7 +17,7 @@
   export let closable: string = "false";
   export let open: string = "false";
   export let transition: Transition = "none";
-  export let calloutvariant: CalloutVariant = null;
+  export let calloutvariant: CalloutVariant | null = null;
   export let maxwidth: string = "60ch";
 
   // @deprecated: use maxwidth
@@ -27,25 +27,24 @@
   // Private
   // *******
 
-  let _rootEl: HTMLElement = null;
+  let _rootEl: HTMLElement | null = null;
   let _scrollPos: "top" | "middle" | "bottom" = "top";
-  let _scrollEl: HTMLElement = null;
-  let _headerEl: HTMLElement = null;
+  let _scrollEl: HTMLElement | null = null;
+  let _headerEl: HTMLElement | null = null;
   let _isOpen: boolean = false;
   let _requiresTopPadding: boolean;
 
   // Type verification
-  const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator("Callout variant", [
-    "emergency",
-    "important",
-    "information",
-    "success",
-    "event",
-  ]);
-
-  const [Transitions, validateTransition] = typeValidator("Modal transition",
-    ["fast", "slow", "none"]
+  const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator(
+    "Callout variant",
+    ["emergency", "important", "information", "success", "event"],
   );
+
+  const [Transitions, validateTransition] = typeValidator("Modal transition", [
+    "fast",
+    "slow",
+    "none",
+  ]);
 
   // ********
   // Reactive
@@ -56,59 +55,59 @@
   // Moving the reactive var into a timeout prevents accessing null stylesheet
   // reference to allow for creation of the @keyframes for the in:fade and out:fade transitions.
   // DDIDS-1288
-  $: setTimeout(() => _isOpen = toBoolean(open), 1)
+  $: setTimeout(() => (_isOpen = toBoolean(open)), 1);
 
   // Show the shadow at the top of the content after scrolling down
-  $: if(_isOpen && _scrollEl) {
+  $: if (_isOpen && _scrollEl) {
     const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
     if (hasScroll) {
-      _scrollPos = "top"
+      _scrollPos = "top";
     }
-  };
-
-  $: if(_isOpen && _rootEl) {
-    _requiresTopPadding = 
-      !!_headerEl.querySelector("div.modal-title").textContent
-      || !!_headerEl.querySelector("div.modal-close") 
-      || getChildren().length > 0
   }
 
-  $: _transitionTime = 
-    transition === "none" 
-      ? 0 
-      : transition === "slow" 
-      ? 400 
-      : 200;
+  $: if (_isOpen && _rootEl) {
+    _requiresTopPadding =
+      !!_headerEl?.querySelector("div.modal-title")?.textContent ||
+      !!_headerEl?.querySelector("div.modal-close") ||
+      getChildren().length > 0;
+  }
+
+  $: _transitionTime =
+    transition === "none" ? 0 : transition === "slow" ? 400 : 200;
 
   $: _iconType =
     calloutvariant === "emergency"
       ? "warning"
       : calloutvariant === "important"
-      ? "alert-circle"
-      : calloutvariant === "information"
-      ? "information-circle"
-      : calloutvariant === "success"
-      ? "checkmark-circle"
-      : calloutvariant === "event"
-      ? "calendar"
-      : "";
+        ? "alert-circle"
+        : calloutvariant === "information"
+          ? "information-circle"
+          : calloutvariant === "success"
+            ? "checkmark-circle"
+            : calloutvariant === "event"
+              ? "calendar"
+              : "";
 
   // *****
   // Hooks
   // *****
 
   onMount(async () => {
-    await tick()
+    await tick();
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
 
     // event listenerts
-    window.addEventListener('keydown', onInputKeyDown);
+    window.addEventListener("keydown", onInputKeyDown);
 
     if (width) {
       maxwidth = width;
-      console.warn("`width` is deprecated. Please use `maxwidth` instead.")
+      console.warn("`width` is deprecated. Please use `maxwidth` instead.");
     }
+  });
+
+  onDestroy(() => {
+    window.removeEventListener("keydown", onInputKeyDown);
   });
 
   // *********
@@ -138,7 +137,7 @@
   function handleScroll(e: CustomEvent) {
     const hasScroll = e.detail.scrollHeight > e.detail.offsetHeight;
     if (!_isOpen || !hasScroll) return;
-    
+
     // top
     if (e.detail.scrollTop == 0) {
       _scrollPos = "top";
@@ -146,8 +145,12 @@
     }
 
     // bottom
-    if (Math.abs(e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight) < 1) {
-      _scrollPos = "bottom"
+    if (
+      Math.abs(
+        e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight,
+      ) < 1
+    ) {
+      _scrollPos = "bottom";
       return;
     }
 
@@ -155,11 +158,12 @@
   }
 
   function getChildren(): Element[] {
-    const slot = _headerEl.querySelector("slot") as HTMLSlotElement;
+    const slot = _headerEl?.querySelector("slot") as HTMLSlotElement;
     if (slot) {
       return [...slot.assignedElements()];
     } else {
-      return [..._headerEl.children] as Element[];  // unit tests
+      // @ts-expect-error
+      return [..._headerEl.children] as Element[]; // unit tests
     }
   }
 </script>
@@ -176,6 +180,7 @@
       bind:this={_rootEl}
     >
       <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
       <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
       <div
         in:fly={{ duration: _transitionTime, y: 200 }}
@@ -191,10 +196,7 @@
           </div>
         {/if}
         <div class="content">
-          <header 
-            bind:this={_headerEl}
-            class:has-content={_requiresTopPadding}
-          >
+          <header bind:this={_headerEl} class:has-content={_requiresTopPadding}>
             <div data-testid="modal-title" class="modal-title">
               {#if heading}
                 {heading}
@@ -205,6 +207,7 @@
             {#if _isClosable}
               <div class="modal-close">
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <goa-icon-button
                   data-testid="modal-close-button"
                   icon="close"
@@ -215,7 +218,13 @@
             {/if}
           </header>
           <div data-testid="modal-content" class="modal-content">
-            <goa-scrollable direction="vertical" hpadding="1.9rem" maxheight="70vh" bind:this={_scrollEl} on:_scroll={handleScroll}>
+            <goa-scrollable
+              direction="vertical"
+              hpadding="1.9rem"
+              maxheight="70vh"
+              bind:this={_scrollEl}
+              on:_scroll={handleScroll}
+            >
               <slot />
             </goa-scrollable>
           </div>
@@ -308,7 +317,7 @@
       margin-bottom: var(--goa-space-m);
     }
 
-    .modal-actions ::slotted(*) {
+    .modal-actions :global(::slotted(*)) {
       padding: var(--goa-space-l) 0 0;
     }
   }
@@ -329,7 +338,7 @@
     border: 1px solid var(--goa-color-greyscale-700);
   }
 
-  .modal-actions ::slotted(*) {
+  .modal-actions :global(::slotted(*)) {
     padding: var(--goa-space-xl) 0 0;
   }
 
@@ -338,7 +347,7 @@
     line-height: 1.75rem;
   }
 
-  .modal-content ::slotted(:last-child) {
+  .modal-content :global(::slotted(:last-child)) {
     margin-bottom: 0 !important;
   }
 
@@ -356,7 +365,9 @@
   }
 
   .scroll-middle {
-    box-shadow: inset 0px -8px 6px -6px rgba(0, 0, 0, 0.1), inset 0px 8px 6px -6px rgba(0, 0, 0, 0.1);
+    box-shadow:
+      inset 0px -8px 6px -6px rgba(0, 0, 0, 0.1),
+      inset 0px 8px 6px -6px rgba(0, 0, 0, 0.1);
   }
 
   .scroll-bottom {

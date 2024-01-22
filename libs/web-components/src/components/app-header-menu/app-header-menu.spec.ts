@@ -1,7 +1,8 @@
 import AppHeaderMenuWrapper from "./AppHeaderMenuWrapper.test.svelte"
-import { render, waitFor, fireEvent } from "@testing-library/svelte"
+import { render, waitFor } from "@testing-library/svelte"
 import userEvent from "@testing-library/user-event"
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
+import { it, describe } from "vitest";
 
 let user: UserEvent;
 
@@ -9,9 +10,14 @@ beforeEach(() => {
   user = userEvent.setup()
 })
 
+type Query = (q: string) => HTMLElement;
+type QueryAll = (q: string) => NodeListOf<HTMLElement>;
+
 describe("Desktop", () => {
 
-  let $, $$, heading;
+  let $: Query;
+  let $$: QueryAll;
+  let heading: string;
 
   beforeEach(() => {
     Object.defineProperty(window, 'innerWidth', {
@@ -20,7 +26,7 @@ describe("Desktop", () => {
     });
 
     heading = "Some links";
-    const result = render(AppHeaderMenuWrapper, { 
+    const result = render(AppHeaderMenuWrapper, {
       heading,
       leadingicon: "add",
     })
@@ -29,7 +35,7 @@ describe("Desktop", () => {
     $ = c.querySelector.bind(c);
     $$ = c.querySelectorAll.bind(c);
   })
-  
+
   it("renders on desktop", async () => {
 
     const popover = $("goa-popover")
@@ -51,12 +57,14 @@ describe("Desktop", () => {
       expect(links.length).toBe(3);
     })
   })
-  
+
 })
 
 describe("Mobile", () => {
 
-  let $, $$, heading;
+  let $: Query;
+  let $$: QueryAll;
+  let heading: string;
 
   beforeEach(() => {
     Object.defineProperty(window, 'innerWidth', {
@@ -65,7 +73,7 @@ describe("Mobile", () => {
     });
 
     heading = "Some links";
-    const result = render(AppHeaderMenuWrapper, { 
+    const result = render(AppHeaderMenuWrapper, {
       heading,
       leadingicon: "add",
     })
@@ -74,7 +82,7 @@ describe("Mobile", () => {
     $ = c.querySelector.bind(c);
     $$ = c.querySelectorAll.bind(c);
   })
-  
+
   it("renders on mobile", async () => {
     const button = $("button");
     const leadingIcon = $("button goa-icon[type=add]");
@@ -158,14 +166,16 @@ describe("Mobile", () => {
   })
 
   it("follows the link on `enter`", () => {
-  
+
   })
-  
+
 })
 
 describe("Tablet", () => {
 
-  let $, $$, heading;
+  let $: Query;
+  let $$: QueryAll;
+  let heading: string;
 
   beforeEach(() => {
     Object.defineProperty(window, 'innerWidth', {
@@ -174,7 +184,7 @@ describe("Tablet", () => {
     });
 
     heading = "Some links";
-    const result = render(AppHeaderMenuWrapper, { 
+    const result = render(AppHeaderMenuWrapper, {
       heading,
       leadingicon: "add",
     })
@@ -183,7 +193,7 @@ describe("Tablet", () => {
     $ = c.querySelector.bind(c);
     $$ = c.querySelectorAll.bind(c);
   })
-  
+
   it("renders on tablet", async () => {
     const button = $("button");
     const leadingIcon = $("button goa-icon[type=add]");
@@ -193,7 +203,7 @@ describe("Tablet", () => {
     expect(leadingIcon).toBeTruthy();
     expect(chevronIcon).toBeTruthy();
   })
- 
+
   it("opens/closes the menu on click", async () => {
     const btn = $("button");
     await user.click(btn)

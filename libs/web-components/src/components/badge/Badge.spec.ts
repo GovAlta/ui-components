@@ -1,6 +1,6 @@
-import "@testing-library/jest-dom";
 import { render } from "@testing-library/svelte";
 import GoABadge from "./Badge.svelte";
+import { it, describe } from "vitest";
 
 describe("GoABadgeComponent", () => {
 

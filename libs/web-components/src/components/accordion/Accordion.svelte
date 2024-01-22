@@ -1,48 +1,61 @@
-<svelte:options tag="goa-accordion" />
+<svelte:options customElement="goa-accordion" />
 
 <!-- Script -->
 <script lang="ts">
   import { onMount } from "svelte";
-  import { calculateMargin, Spacing } from "../../common/styling";
-  import { typeValidator, toBoolean, validateRequired } from "../../common/utils";
+  import { calculateMargin } from "../../common/styling";
+  import {
+    typeValidator,
+    toBoolean,
+    validateRequired,
+  } from "../../common/utils";
+  import type { Spacing } from "../../common/styling";
 
   // Validator
-  const [HeadingSizes, validateHeadingSize] = typeValidator("Accordion heading size",
-    ["small", "medium"]
+  const [HeadingSizes, validateHeadingSize] = typeValidator(
+    "Accordion heading size",
+    ["small", "medium"],
   );
 
-    // Types
-  type HeadingSize = typeof HeadingSizes[number];
+  // Types
+  type HeadingSize = (typeof HeadingSizes)[number];
 
   export let open: string = "false";
   export let heading: string = "";
   export let secondarytext: string = "";
   export let headingsize: HeadingSize = "small";
   export let testid: string = "";
-
-  // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = "xs";
   export let ml: Spacing = null;
 
+  // Private
+
   let _hovering: boolean = false;
-  let _titleEl: HTMLElement = null;
+  let _titleEl: HTMLElement;
   let _headingContentSlotChildren: Element[] = [];
 
+  // Reactive
+
   $: isOpen = toBoolean(open);
+
+  // Functions
+
   onMount(() => {
-    validateRequired("GoAAccordion", {heading})
+    validateRequired("GoAAccordion", { heading });
     validateHeadingSize(headingsize);
     _headingContentSlotChildren = getChildren();
-  })
+  });
+
   function getChildren(): Element[] {
     if (_titleEl) {
       const slot = _titleEl.querySelector("slot") as HTMLSlotElement;
       if (slot) {
-        return [...slot.assignedElements()];
+        return slot.assignedElements();
       } else {
-        return [..._titleEl.children] as Element[];  // unit tests
+        // @ts-expect-error
+        return [..._titleEl.children] as Element[]; // unit tests
       }
     }
     return [];
@@ -58,21 +71,29 @@
   data-testid={testid}
 >
   <details open={isOpen}>
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <summary
       class={`container-${headingsize}`}
-      on:mouseover={() => _hovering = true}
-      on:mouseout={() => _hovering = false}
-      on:focus={() => _hovering = false}
-      on:blur={() => _hovering = false}
+      on:mouseover={() => (_hovering = true)}
+      on:mouseout={() => (_hovering = false)}
+      on:focus={() => (_hovering = false)}
+      on:blur={() => (_hovering = false)}
     >
-      <goa-icon type="chevron-forward"
-        fillcolor={_hovering?"var(--goa-color-interactive-hover)": "var(--goa-color-interactive-default)"}
+      <goa-icon
+        type="chevron-forward"
+        fillcolor={_hovering
+          ? "var(--goa-color-interactive-hover)"
+          : "var(--goa-color-interactive-default)"}
       ></goa-icon>
       <div class="title" bind:this={_titleEl}>
-        <span class="heading heading-{headingsize}" data-testid={`${testid}-heading`}>{heading}</span>
+        <span
+          class="heading heading-{headingsize}"
+          data-testid={`${testid}-heading`}>{heading}</span
+        >
         <span class="secondary-text">{secondarytext}</span>
-        <div class="heading-content"
-             class:heading-content-top={_headingContentSlotChildren.length}
+        <div
+          class="heading-content"
+          class:heading-content-top={_headingContentSlotChildren.length}
         >
           <slot name="headingcontent" />
         </div>
@@ -104,7 +125,7 @@
     border-radius: var(--goa-border-radius-m);
     background-color: var(--goa-color-greyscale-100);
     border-color: var(--goa-color-greyscale-200);
-    color: var(--goa-color-text-default);;
+    color: var(--goa-color-text-default);
     padding: 0.875rem 1rem 0 0;
     cursor: pointer;
     list-style: none;
@@ -122,7 +143,7 @@
     display: none;
   }
 
-  summary .title{
+  summary .title {
     display: flex;
     align-items: center;
     flex: 1;
@@ -144,11 +165,12 @@
   }
 
   summary .heading-content {
-    flex: 1
+    flex: 1;
   }
 
   .content {
-    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-border-width-s) solid
+      var(--goa-color-greyscale-200);
     border-left: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
     border-right: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
     border-bottom-left-radius: var(--goa-border-radius-m);
@@ -158,15 +180,15 @@
     padding-right: 2rem;
   }
 
-  .content ::slotted(p:last-child) {
+  .content :global(::slotted(*:last-child)) {
     margin-bottom: 0 !important;
   }
 
-  summary goa-icon{
+  summary goa-icon {
     padding: 0.125rem 1rem;
   }
 
-  summary.container-medium goa-icon{
+  summary.container-medium goa-icon {
     padding: 0.375rem 1rem;
   }
 
@@ -203,11 +225,10 @@
   }
 
   /* Sizes */
-  summary .heading.heading-medium{
+  summary .heading.heading-medium {
     line-height: 2rem;
     font: var(--goa-typography-heading-m);
   }
-
 
   @media (--mobile) {
     summary {
@@ -225,5 +246,4 @@
       margin-top: var(--goa-space-xs);
     }
   }
-
 </style>

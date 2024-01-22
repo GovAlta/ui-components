@@ -1,4 +1,4 @@
-<svelte:options tag="test-radiogroup-wrapper" />
+<svelte:options customElement="test-radiogroup-wrapper" />
 
 <!-- Script -->
 <script lang="ts">

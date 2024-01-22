@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/svelte';
 import GoAChip from './Chip.svelte'
+import { describe, it, expect, vi } from "vitest";
 
 describe('GoAChip', () => {
 
@@ -15,7 +15,7 @@ describe('GoAChip', () => {
   })
 
   it("should show the leading icon", async () => {
-    const { container } = render(GoAChip, { content: "Some Badge", leadingicon: "arrow-right" , variant: "filter"});
+    const { container } = render(GoAChip, { content: "Some Badge", leadingicon: "arrow-right", variant: "filter" });
     const leadingIcon = container.querySelector(".leading-icon");
 
     expect(leadingIcon).not.toBeNull();
@@ -31,7 +31,7 @@ describe('GoAChip', () => {
     const result = render(GoAChip, { testid: "chip", content: "Some Badge", deletable: true, variant: "filter" });
     const deleteIcon = result.container.querySelector(".delete-icon");
     const chip = await result.findByTestId("chip");
-    const onClick = jest.fn();
+    const onClick = vi.fn();
 
     expect(deleteIcon).not.toBeNull();
     chip.addEventListener("_click", onClick);

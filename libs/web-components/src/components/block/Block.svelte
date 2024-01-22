@@ -1,7 +1,8 @@
-<svelte:options tag="goa-block" />
+<svelte:options customElement="goa-block" />
 
 <script lang="ts">
-  import { calculateMargin, Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+  import type { Spacing } from "../../common/styling";
 
   export let gap: Spacing = "m";
   export let direction: "row" | "column" = "row";
@@ -32,5 +33,5 @@
     flex-direction: var(--direction);
     align-items: var(--alignment);
     gap: var(--gap);
-  } 
+  }
 </style>

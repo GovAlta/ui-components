@@ -1,22 +1,35 @@
-<svelte:options tag="goa-container" />
+<svelte:options customElement="goa-container" />
 
 <!-- Script -->
 <script lang="ts">
-  import { calculateMargin, Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+  import type { Spacing } from "../../common/styling";
   import { typeValidator } from "../../common/utils";
   import { onMount } from "svelte";
 
   // Validator
-  const [Types, validateType] = typeValidator("Container type",
-    ["interactive", "info", "error", "success", "important", "non-interactive"]
-  );
-  const [Accents, validateAccent] = typeValidator("Container accent", ["thick", "thin", "filled"]);
-  const [Paddings, validatePadding] = typeValidator("Container padding", ["relaxed", "compact" ]);
+  const [Types, validateType] = typeValidator("Container type", [
+    "interactive",
+    "info",
+    "error",
+    "success",
+    "important",
+    "non-interactive",
+  ]);
+  const [Accents, validateAccent] = typeValidator("Container accent", [
+    "thick",
+    "thin",
+    "filled",
+  ]);
+  const [Paddings, validatePadding] = typeValidator("Container padding", [
+    "relaxed",
+    "compact",
+  ]);
 
   // Types
-  type Type = typeof Types[number];
-  type Accent = typeof Accents[number];
-  type Padding = typeof Paddings[number];
+  type Type = (typeof Types)[number];
+  type Accent = (typeof Accents)[number];
+  type Padding = (typeof Paddings)[number];
 
   export let type: Type = "interactive";
   export let accent: Accent = "filled";
@@ -106,7 +119,7 @@
     flex-direction: column;
   }
 
-  .content ::slotted(p:last-child) {
+  .content :global(::slotted(*:last-child)) {
     margin-bottom: 0 !important;
   }
 

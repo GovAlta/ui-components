@@ -1,5 +1,6 @@
 import { render } from '@testing-library/svelte'
 import TableSortHeader from './TableSortHeader.svelte';
+import { it, describe } from "vitest";
 
 describe("GoATableSortHeader", () => {
 

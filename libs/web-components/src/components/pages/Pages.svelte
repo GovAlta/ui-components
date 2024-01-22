@@ -1,11 +1,12 @@
-<svelte:options tag="goa-pages" />
+<svelte:options customElement="goa-pages" />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
-  import { calculateMargin, Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+  import type { Spacing } from "../../common/styling";
 
   // Public
-  export let current: number = 1  // 1-based
+  export let current: number = 1; // 1-based
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -18,19 +19,19 @@
   onMount(async () => {
     await tick();
     setCurrentPage(current);
-  })
+  });
 
   // Reactive
-  $: setCurrentPage(current)
+  $: setCurrentPage(current);
 
   function setCurrentPage(current: number) {
     if (!_rootEl) return;
 
     const children = getChildren();
     children.forEach((child: Element, index: number) => {
-      const _child = (child as HTMLElement);
-      _child.style.display = (index + 1 === +current) ? "block" : "none";
-    })
+      const _child = child as HTMLElement;
+      _child.style.display = index + 1 === +current ? "block" : "none";
+    });
   }
 
   function getChildren(): Element[] {
@@ -38,15 +39,11 @@
     if (slot) {
       return [...slot.assignedElements()];
     } else {
-      return [..._rootEl.children] as Element[];  // unit tests
-    }    
+      return [..._rootEl.children] as Element[]; // unit tests
+    }
   }
 </script>
 
-<div
-  bind:this={_rootEl} 
-  style={calculateMargin(mt, mr, mb, ml)}
-  class="pages"
->
-  <slot />  
+<div bind:this={_rootEl} style={calculateMargin(mt, mr, mb, ml)} class="pages">
+  <slot />
 </div>

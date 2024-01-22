@@ -1,7 +1,7 @@
-import "@testing-library/jest-dom";
 import { render } from "@testing-library/svelte";
 import GoAContainerWrapper from "./ContainerWrapper.test.svelte"
-import GoAContainer from "./Container.svelte"
+import GoAContainer from "./Container.svelte";
+import { it, describe } from "vitest";
 
 describe("GoA Container", () => {
 

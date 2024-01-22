@@ -15,7 +15,7 @@ export interface GoAPageProps {
 
 export type PageProps = GoAPageProps;
 
-export function GoAOneColumnLayout(props: GoAPageProps) {
+export function GoAOneColumnLayout(props: GoAPageProps): JSX.Element {
   return <goa-one-column-layout>{props.children}</goa-one-column-layout>;
 }
 

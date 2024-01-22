@@ -1,4 +1,4 @@
-<svelte:options tag="goa-scrollable" />
+<svelte:options customElement="goa-scrollable" />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
@@ -15,32 +15,38 @@
   let _el: HTMLElement;
 
   function onScroll(e: Event) {
-    e.target.dispatchEvent(new CustomEvent("_scroll", { 
-      composed: true, 
-      detail: { 
-        offsetHeight: _el.offsetHeight,
-        scrollHeight: _el.scrollHeight, 
-        scrollTop: _el.scrollTop,
-      } 
-    }));
+    e.target.dispatchEvent(
+      new CustomEvent("_scroll", {
+        composed: true,
+        detail: {
+          offsetHeight: _el.offsetHeight,
+          scrollHeight: _el.scrollHeight,
+          scrollTop: _el.scrollTop,
+        },
+      }),
+    );
     e.stopPropagation();
   }
 
   onMount(async () => {
-    await tick()
+    await tick();
     offsetHeight = _el.offsetHeight;
     scrollHeight = _el.scrollHeight;
   });
-
 </script>
 
-<div class="goa-scrollable" bind:this={_el} on:scroll={onScroll} style={`
+<div
+  class="goa-scrollable"
+  bind:this={_el}
+  on:scroll={onScroll}
+  style={`
   max-height: ${maxheight || "50vh"};
-  overflow-y: ${direction === "vertical" ? 'auto' : 'hidden'};
-  overflow-x: ${direction === "horizontal" ? 'auto' : 'hidden'};
+  overflow-y: ${direction === "vertical" ? "auto" : "hidden"};
+  overflow-x: ${direction === "horizontal" ? "auto" : "hidden"};
   margin: ${vpadding} 0;
   padding: 0 ${hpadding};
-`}>
+`}
+>
   <slot />
 </div>
 

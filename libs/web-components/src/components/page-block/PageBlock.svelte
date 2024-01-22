@@ -1,4 +1,4 @@
-<svelte:options tag="goa-page-block" />
+<svelte:options customElement="goa-page-block" />
 
 <!-- Script -->
 <script lang="ts">
@@ -7,8 +7,8 @@
 
   type Size = "full" | string;
   const Sizes = {
-    "full": "100%",
-  }
+    full: "100%",
+  };
 
   // Required
   export let width: Size;
@@ -17,10 +17,8 @@
   export let _width: string;
 
   function isValidSize(value: string) {
-    if (["full"].includes((width)))
-      return true;
-    if (isValidDimension(value))
-      return true;
+    if (["full"].includes(width)) return true;
+    if (isValidDimension(value)) return true;
 
     return false;
   }
@@ -32,14 +30,10 @@
 
     _width = Sizes[width] || width;
   });
-
 </script>
 
 <!-- HTML -->
-<div
-  class="page-content"
-  style={`--max-width: ${_width}`}
->
+<div class="page-content" style={`--max-width: ${_width}`}>
   <slot />
 </div>
 

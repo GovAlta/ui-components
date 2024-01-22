@@ -1,9 +1,13 @@
-<svelte:options tag="goa-file-upload-input" />
+<svelte:options customElement="goa-file-upload-input" />
 
 <script lang="ts">
   import { onMount } from "svelte";
 
   type Variant = "dragdrop" | "button";
+  type Issue = {
+    filename: string;
+    error: string;
+  }
 
   // Public
 
@@ -17,45 +21,51 @@
   let _fileInput: HTMLInputElement;
   let _state: "hover" | "dragenter" | "default" = "default";
 
-  let issues = []
+  let issues: Issue[] = [];
 
   // Hooks
 
   onMount(() => {
-    _fileInput.addEventListener("change", () => {
-      issues = []; // reset on every new batch of files
+    _fileInput.addEventListener(
+      "change",
+      () => {
+        issues = []; // reset on every new batch of files
 
-      [..._fileInput.files].forEach(file => {
-        const error = validate(file);
-        if (error) {
-          issues = [{filename: file.name, error}, ...issues]
-          return;
-        }
-        dispatch(file)
-      })
-      _fileInput.value = null
-    }, true)
-  })
+        // @ts-expect-error
+        [..._fileInput.files].forEach((file) => {
+          const error = validate(file);
+          if (error) {
+            issues = [{ filename: file.name, error }, ...issues];
+            return;
+          }
+          dispatch(file);
+        });
+        _fileInput.value = "";
+      },
+      true,
+    );
+  });
 
   // Functions
 
-  function validate(file: File): string {
+  function validate(file: File): string | null {
     if (!isValidFileType(file)) {
       return "Invalid file type";
     }
     if (!isValidFileSize(file)) {
       return `The file must be less than ${maxfilesize}`;
     }
+    return null;
   }
 
   function isValidFileType(file: File): boolean {
     const typeMatchers = accept.split(",");
     for (const matcher of typeMatchers) {
       const matches =
-        file.type.match(matcher.replace("*", ".*").replace("/", "\/"))
-        || file.name.endsWith(accept);
+        file.type.match(matcher.replace("*", ".*").replace("/", "/")) ||
+        file.name.endsWith(accept);
       if (matches) {
-        return true
+        return true;
       }
     }
     return false;
@@ -63,7 +73,12 @@
 
   function isValidFileSize(file: File): boolean {
     const [_, size, units] = maxfilesize.match(/(\d*)(\w*$)/);
-    const factor = { "B": 1, "KB": 1024, "MB": Math.pow(1024, 2), "GB": Math.pow(1024, 3)};
+    const factor = {
+      B: 1,
+      KB: 1024,
+      MB: Math.pow(1024, 2),
+      GB: Math.pow(1024, 3),
+    };
     if (file.size / factor[units] > parseInt(size)) {
       return false;
     }
@@ -71,14 +86,16 @@
   }
 
   function dispatch(file: File) {
-    _el.dispatchEvent(new CustomEvent("_selectFile", {
-      composed: true,
-      detail: { file }
-    }))
+    _el.dispatchEvent(
+      new CustomEvent("_selectFile", {
+        composed: true,
+        detail: { file },
+      }),
+    );
   }
 
   function openFilePicker() {
-    _fileInput.click()
+    _fileInput.click();
   }
 
   // Event handlers
@@ -93,29 +110,31 @@
 
     issues = []; // reset on every new batch of files
 
-    if (e.dataTransfer.items) {
+    if (e.dataTransfer?.items) {
+      // @ts-expect-error
       [...e.dataTransfer.items].forEach((item) => {
-        if (item.kind === 'file') {
+        if (item.kind === "file") {
           const file = item.getAsFile();
           const error = validate(file);
           if (error) {
-            issues = [{filename: file.name, error}, ...issues]
+            issues = [{ filename: file.name, error }, ...issues];
             return;
           }
-          dispatch(item.getAsFile())
+          dispatch(item.getAsFile());
         }
       });
     } else {
-      [...e.dataTransfer.files].forEach(file => {
+      // @ts-expect-error
+      [...e.dataTransfer?.files].forEach((file) => {
         const error = validate(file);
         if (error) {
-          issues = [{filename: file.name, error}, ...issues]
+          issues = [{ filename: file.name, error }, ...issues];
           return;
         }
-        dispatch(file)
-      })
+        dispatch(file);
+      });
     }
-    _fileInput.value = null
+    _fileInput.value = "";
   }
 
   function onDragEnter() {
@@ -128,10 +147,10 @@
     // dropable area
     const rect = _el.getBoundingClientRect();
     const withinBounds =
-      e.clientX > rect.x
-      && e.clientX <= rect.x + rect.width
-      && e.clientY > rect.y
-      && e.clientY <= rect.y + rect.height;
+      e.clientX > rect.x &&
+      e.clientX <= rect.x + rect.width &&
+      e.clientY > rect.y &&
+      e.clientY <= rect.y + rect.height;
 
     if (!withinBounds) {
       _state = "default";
@@ -172,23 +191,43 @@
     </div>
 
     {#if maxfilesize}
-      <em class="max-file-size" data-testid="max-file-size">Maximum file size is {maxfilesize}.</em>
+      <em class="max-file-size" data-testid="max-file-size"
+        >Maximum file size is {maxfilesize}.</em
+      >
     {/if}
 
-    <input data-testid="input" tabindex="0"  type="file" {accept} bind:this={_fileInput} multiple />
+    <input
+      data-testid="input"
+      tabindex="0"
+      type="file"
+      {accept}
+      bind:this={_fileInput}
+      multiple
+    />
   </div>
 {/if}
 
 {#if variant === "button"}
   <div class="button" bind:this={_el}>
-    <goa-button on:click={openFilePicker} type="secondary">Choose file</goa-button>
+    <goa-button on:click={openFilePicker} type="secondary"
+      >Choose file</goa-button
+    >
 
     {#if maxfilesize}
-      <em class="max-file-size" data-testid="max-file-size">Maximum file size is {maxfilesize}.</em>
+      <em class="max-file-size" data-testid="max-file-size"
+        >Maximum file size is {maxfilesize}.</em
+      >
     {/if}
   </div>
 
-  <input bind:this={_fileInput} data-testid="input" tabindex="-1" type="file" {accept} multiple />
+  <input
+    bind:this={_fileInput}
+    data-testid="input"
+    tabindex="-1"
+    type="file"
+    {accept}
+    multiple
+  />
 {/if}
 
 {#if issues.length}
@@ -205,11 +244,11 @@
   </div>
 {/if}
 
-
 <style>
   .dragdrop {
     border-radius: var(--goa-border-radius-m);
-    border: var(--goa-border-width-m) dashed var(--goa-color-interactive-default);
+    border: var(--goa-border-width-m) dashed
+      var(--goa-color-interactive-default);
     display: flex;
     font: var(--goa-typography-body-m);
     flex-direction: column;

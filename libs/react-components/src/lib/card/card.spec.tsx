@@ -9,11 +9,11 @@ describe("GoA Card", () => {
 
     const el = container.querySelector("goa-card");
 
-    expect(el.getAttribute("elevation")).toBe("2");
-    expect(el.getAttribute("width")).toBe("50ch");
-    expect(el.getAttribute("mt")).toBe("s");
-    expect(el.getAttribute("mr")).toBe("m");
-    expect(el.getAttribute("mb")).toBe("l");
-    expect(el.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("elevation")).toBe("2");
+    expect(el?.getAttribute("width")).toBe("50ch");
+    expect(el?.getAttribute("mt")).toBe("s");
+    expect(el?.getAttribute("mr")).toBe("m");
+    expect(el?.getAttribute("mb")).toBe("l");
+    expect(el?.getAttribute("ml")).toBe("xl");
   });
 });

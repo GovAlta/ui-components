@@ -1,6 +1,7 @@
 {
   "name": "@abgov/web-components",
   "version": "0.0.0",
+  "license": "Apache-2.0",
   "description": "Government of Alberta - UI Web components",
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
@@ -9,16 +10,11 @@
     "access": "public"
   },
   "semantic-release": "semantic-release",
-  "main": "web-components.es.js",
-  "unpkg": "web-components.es.js",
-  "module": "web-components.es.js",
-  "scripts": {
-    "dev": "rollup -c rollup.config.js -w",
-    "playground": "rollup -c rollup.playground.config.js -w",
-    "start": "sirv playground/public",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
-  },
-  "license": "Apache-2.0",
+  "scripts": {},
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "module": "./index.mjs",
   "keywords": [
     "GoA",
     "Web Components"
@@ -28,26 +24,9 @@
     "url": "https://github.com/GovAlta/ui-components.git",
     "directory": "libs/web-components"
   },
-  "devDependencies": {
-    "@csstools/postcss-global-data": "^2.1.0",
-    "@rollup/plugin-commonjs": "^20.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.4",
-    "@rollup/plugin-typescript": "^8.0.0",
-    "@tsconfig/svelte": "^2.0.0",
-    "rollup": "^2.0.0",
-    "rollup-plugin-clean": "^1.0.0",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-delete": "^2.0.0",
-    "rollup-plugin-livereload": "^2.0.0",
-    "rollup-plugin-summary": "^1.3.0",
-    "rollup-plugin-svelte": "^7.0.0",
-    "rollup-plugin-terser": "^7.0.0",
-    "sirv-cli": "^1.0.0",
-    "svelte": "~3.59.1",
-    "svelte-check": "^2.0.0",
-    "svelte-preprocess": "^4.0.0",
-    "tslib": "^2.0.0",
-    "typescript": "^4.0.0",
-    "vite-plugin-replace": "^0.1.1"
+  "peerDependencies": {
+    "glob": "10.x",
+    "svelte": "4.x",
+    "@sveltejs/vite-plugin-svelte": "3.x"
   }
 }

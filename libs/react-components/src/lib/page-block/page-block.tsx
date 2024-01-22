@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface WCPageBlockProps {
+interface WCProps {
   width: "full" | string;
 }
 
@@ -8,7 +8,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-page-block": WCPageBlockProps & React.HTMLAttributes<HTMLElement>;
+      "goa-page-block": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }

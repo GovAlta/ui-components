@@ -1,5 +1,6 @@
 import PagesWrapper from './PagesWrapper.test.svelte'
 import { fireEvent, render, waitFor } from '@testing-library/svelte'
+import { it } from "vitest";
 
 it("switches pages", async () => {
   const { getByTestId } = render(PagesWrapper)

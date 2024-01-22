@@ -1,8 +1,8 @@
-export type Direction = "asc" | "desc" | "none";
+export type GoATableSortDirection = "asc" | "desc" | "none";
 
 interface WCProps {
   name?: string;
-  direction?: Direction;
+  direction?: GoATableSortDirection;
 }
 
 declare global {
@@ -18,7 +18,7 @@ declare global {
 /* eslint-disable-next-line */
 export interface GoATableSortProps {
   name?: string;
-  direction?: Direction;
+  direction?: GoATableSortDirection;
   children?: React.ReactNode;
 }
 

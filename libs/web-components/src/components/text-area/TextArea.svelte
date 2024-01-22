@@ -1,4 +1,4 @@
-<svelte:options tag="goa-textarea" />
+<svelte:options customElement="goa-textarea" />
 
 <!-- Script -->
 <script lang="ts">
@@ -16,7 +16,7 @@
   export let readonly: string = "false";
   export let disabled: string = "false";
   export let arialabel: string = "";
-  export let countby: "character" | "word";
+  export let countby: "character" | "word" | "" = "";
   export let maxcount: number = -1;
 
   // margin
@@ -30,17 +30,20 @@
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
-  $: count = countby === "character" 
-    ? value.length
-    : value.split(" ").filter(word => word.trim().length > 0).length;
+  $: count =
+    countby === "character"
+      ? value.length
+      : value.split(" ").filter((word) => word.trim().length > 0).length;
 
   // privates
 
   let _textareaEl: HTMLTextAreaElement;
 
   // functions
-  
-  function onChange(e: Event & { currentTarget: EventTarget & HTMLTextAreaElement } ) {
+
+  function onChange(
+    e: Event & { currentTarget: EventTarget & HTMLTextAreaElement },
+  ) {
     if (isDisabled) return;
 
     const el = e.currentTarget;
@@ -58,7 +61,7 @@
     _textareaEl.dispatchEvent(
       new CustomEvent("_keyPress", {
         composed: true,
-        detail: { name, value, key: e.key }
+        detail: { name, value, key: e.key },
       }),
     );
   }
@@ -85,18 +88,16 @@
     disabled={isDisabled}
     readonly={isReadonly}
     data-testid={testid}
-    bind:value={value}
+    bind:value
     on:keyup={onKeyPress}
     on:change={onChange}
   />
 
   {#if maxcount > 0 && !isDisabled}
-    <div
-      class="counter"
-      class:counter-error={count > maxcount}>
-      {#if count > maxcount}
+    <div class="counter" class:counter-error={count > maxcount}>
+      {#if countby && count > maxcount}
         {count - maxcount} {pluralize(countby, count - maxcount)} too many
-      {:else if count < maxcount}
+      {:else if countby && count < maxcount}
         {maxcount - count} {pluralize(countby, maxcount - count)} remaining
       {/if}
     </div>
@@ -104,7 +105,8 @@
 
   {#if countby && maxcount < 0 && count > 0 && !isDisabled}
     <div class="counter">
-      {count} {pluralize(countby, count)}
+      {count}
+      {pluralize(countby, count)}
     </div>
   {/if}
 </div>
@@ -156,26 +158,28 @@
   }
 
   @media not (--mobile) {
-    .goa-textarea {
+    textarea {
       min-width: 0;
       width: var(--width);
     }
   }
 
-  .goa-textarea[readonly] {
+  textarea[readonly] {
     cursor: pointer;
   }
 
   .root:hover {
-    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-hover);
   }
 
   .root:focus-within {
-    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus);
   }
 
   .counter-error {
-    color: var(--goa-color-interactive-error)
+    color: var(--goa-color-interactive-error);
   }
 
   .counter {
@@ -205,16 +209,19 @@
   textarea::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-  
+
   .error {
     border-color: var(--goa-color-interactive-error);
-    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-error);
+    box-shadow: 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-error);
   }
   .error:hover {
-    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-error);
+    box-shadow: 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-error);
   }
   .error:active,
   .error:focus {
-    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus);
   }
 </style>

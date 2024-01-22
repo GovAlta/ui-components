@@ -1,4 +1,17 @@
-export type Spacing =
+type NumericSpacing =
+  | "0"
+  | "1"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6"
+  | "7"
+  | "8"
+  | "9"
+  | "10";
+
+type TShirtSpacing =
   | "none"
   | "3xs"
   | "2xs"
@@ -10,6 +23,9 @@ export type Spacing =
   | "2xl"
   | "3xl"
   | "4xl";
+
+export type Spacing = NumericSpacing | TShirtSpacing | null;
+
 export interface Margins {
   mt?: Spacing;
   mr?: Spacing;

@@ -1,17 +1,12 @@
-import "@testing-library/jest-dom";
 import { fireEvent, render, waitFor } from "@testing-library/svelte";
 import GoARadioGroup from "./RadioGroup.svelte";
 import GoARadioGroupWrapper from "./RadioGroupWrapper.test.svelte";
-
-afterEach(() => {
-  // cleanup();
-  jest.clearAllMocks();
-});
+import { describe, it, expect, vi } from "vitest";
 
 describe("GoARadioGroup Component", () => {
   it("should render", async () => {
     const name = "favcolor";
-    const mock = jest.spyOn(console, "error").mockImplementation();
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { });
     const items = ["red", "blue", "orange"];
     const result = render(GoARadioGroupWrapper, {
       name,
@@ -45,7 +40,6 @@ describe("GoARadioGroup Component", () => {
 
     const radioGroup = await result.findByTestId("test-id");
 
-    // initial state
     await waitFor(() => {
       const orange = radioGroup.querySelector<HTMLInputElement>(
         "input[type=radio][value=orange]",
@@ -53,12 +47,14 @@ describe("GoARadioGroup Component", () => {
       const red = radioGroup.querySelector<HTMLInputElement>(
         "input[type=radio][value=red]",
       );
-      expect(red.checked).toBe(false);
-      expect(orange.checked).toBe(true);
+      expect(red).toBeTruthy();
+      expect(orange).toBeTruthy();
+      expect(red?.checked).toBe(false);
+      expect(orange?.checked).toBe(true);
 
-      fireEvent.click(red);
-      expect(red.checked).toBe(true);
-      expect(orange.checked).toBe(false);
+      red && fireEvent.click(red);
+      expect(red?.checked).toBe(true);
+      expect(orange?.checked).toBe(false);
     });
   });
 
@@ -76,9 +72,13 @@ describe("GoARadioGroup Component", () => {
       const radiogroup = await baseElement.findByTestId("radiogroup-test");
 
       expect(radiogroup).toBeTruthy();
+      // @ts-expect-error: can't find method
       expect(radiogroup).toHaveStyle("margin-top:var(--goa-space-s)");
+      // @ts-expect-error: can't find method
       expect(radiogroup).toHaveStyle("margin-right:var(--goa-space-m)");
+      // @ts-expect-error: can't find method
       expect(radiogroup).toHaveStyle("margin-bottom:var(--goa-space-l)");
+      // @ts-expect-error: can't find method
       expect(radiogroup).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });

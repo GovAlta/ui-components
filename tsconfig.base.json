@@ -1,22 +1,17 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDirs": [
-      "."
-    ],
+    "rootDir": ".",
     "sourceMap": true,
-    "declaration": false,
+    "declaration": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2022",
     "module": "esnext",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
     "lib": [
-      "es2017",
+      "es2020",
       "dom"
     ],
     "skipLibCheck": true,
@@ -26,23 +21,14 @@
       "@abgov/angular-components": [
         "libs/angular-components/src/index.ts"
       ],
-      "@abgov/docs": [
-        "libs/docs/src/index.ts"
-      ],
       "@abgov/react-components": [
         "libs/react-components/src/index.ts"
       ],
-      "@abgov/shared/common": [
-        "libs/shared/common/src/index.ts"
-      ],
-      "@abgov/shared/storybook-common": [
-        "libs/shared/storybook-common/src/index.ts"
+      "@abgov/style": [
+        "dist/libs/web-components/index.css"
       ],
       "@abgov/web-components": [
-        "dist/libs/web-components/web-components.es.js"
-      ],
-      "@abgov/web-components/index.css": [
-        "dist/libs/web-components/index.css"
+        "dist/libs/web-components/index.js"
       ]
     }
   },

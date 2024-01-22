@@ -1,4 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
 
 import Calendar from "./calendar";
 
@@ -13,13 +14,13 @@ describe("Calendar", () => {
   });
 
   it("handle the event", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const name = "birthdate";
     const { container } = render(<Calendar onChange={onChange} name={name} />);
     const calendar = container.querySelector("goa-calendar");
 
     const detail = { type: "date", value: new Date(), name };
-    fireEvent(calendar, new CustomEvent("_change", { detail }));
+    calendar && fireEvent(calendar, new CustomEvent("_change", { detail }));
     expect(onChange).toBeCalled();
   });
 });

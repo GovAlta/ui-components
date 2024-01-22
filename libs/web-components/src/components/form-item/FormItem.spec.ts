@@ -1,6 +1,6 @@
-import "@testing-library/jest-dom";
 import { render, cleanup } from "@testing-library/svelte";
 import GoAFormItem from "./FormItem.svelte";
+import { it, describe } from "vitest";
 
 afterEach(cleanup);
 
@@ -124,7 +124,7 @@ describe("GoA FormItem", () => {
   });
 
   it("should not show any text for a field when requirement value is mispelled/invalid", async () => {
-    const mock = jest.spyOn(console, "error").mockImplementation();
+    const mock = vi.spyOn(console, "error").mockImplementation(() => {});
 
     render(GoAFormItem, {
       label: "Credit Card Number",

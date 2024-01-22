@@ -1,8 +1,15 @@
-<svelte:options tag="goa-date-picker" />
+<svelte:options customElement="goa-date-picker" />
 
 <script lang="ts">
   import { afterUpdate, onMount } from "svelte";
-  import { addDays, addMonths, addYears, format, isValid, startOfDay } from "date-fns";
+  import {
+    addDays,
+    addMonths,
+    addYears,
+    format,
+    isValid,
+    startOfDay,
+  } from "date-fns";
   import type { Spacing } from "../../common/styling";
 
   type DateValue = {
@@ -21,20 +28,28 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  // re-initializes the date if the value is changed externally
+  // $: value && initDate();
+
+  let _oldValue: Date;
   let _rootEl: Element;
-  let _date: Date;
+  let _date: Date | null;
   let _showPopover: boolean = false;
 
   onMount(async () => {
-    await initDate()
+    await initDate();
   });
 
-  afterUpdate(async() => {
-    await initDate()
-	});
+  // FIXME: This breaks keyboard entry
+  afterUpdate(() => {
+    // @ts-expect-error: string / int comparison is performed here
+    if (_oldValue != value) {
+      initDate();
+    }
+  });
 
-  async function initDate(){
-    _date = value && startOfDay(new Date(value));
+  async function initDate() {
+    _date = (value && startOfDay(new Date(value))) || null;
     if (value && !isValid(_date)) {
       console.error(`${value} is not a valid date`);
     }
@@ -42,15 +57,18 @@
 
   function onCalendarChange(e: CustomEvent) {
     _date = e.detail.value;
-    value = _date.toISOString();
-    hideCalendar();
-    dispatchValue(_date);
-    e.stopPropagation();
-    e.preventDefault();
+    if (_date) {
+      value = _date.toISOString();
+      hideCalendar();
+      dispatchValue(_date);
+      e.stopPropagation();
+      e.preventDefault();
+    }
   }
 
-  function dispatchValue(date: Date) {
+  function dispatchValue(date: Date | null) {
     if (!date) return;
+    _oldValue = date;
     _rootEl.dispatchEvent(
       new CustomEvent<DateValue>("_change", {
         composed: true,
@@ -63,8 +81,9 @@
     );
   }
 
-  function formatDate(d: Date | string): string {
+  function formatDate(d: Date | string | null): string {
     if (!d) return "";
+
     if (typeof d === "string") {
       return format(new Date(d), "PPP");
     }
@@ -109,11 +128,15 @@
         _date = addDays(_date, -7);
         break;
       case "PageUp":
-        _date ||= (e.shiftKey ? addYears(new Date(), 1) : addMonths(new Date(), 1));
+        _date ||= e.shiftKey
+          ? addYears(new Date(), 1)
+          : addMonths(new Date(), 1);
         _date = e.shiftKey ? addYears(_date, -1) : addMonths(_date, -1);
         break;
       case "PageDown":
-        _date ||= (e.shiftKey ? addYears(new Date(), -1) : addMonths(new Date(), -1));
+        _date ||= e.shiftKey
+          ? addYears(new Date(), -1)
+          : addMonths(new Date(), -1);
         _date = e.shiftKey ? addYears(_date, 1) : addMonths(_date, 1);
         break;
       default:
@@ -138,6 +161,7 @@
   open={_showPopover}
   on:_close={() => dispatchValue(_date)}
 >
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <goa-input
     slot="target"
     readonly="true"
@@ -146,5 +170,11 @@
     on:click={showCalendar}
     on:keydown={handleKeyDown}
   />
-  <goa-calendar {value} {min} {max} bordered="false" on:_change={onCalendarChange} />
+  <goa-calendar
+    {value}
+    {min}
+    {max}
+    bordered="false"
+    on:_change={onCalendarChange}
+  />
 </goa-popover>

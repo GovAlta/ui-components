@@ -1,10 +1,10 @@
-import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
 import { GoAInputDateTime, GoAInputText, GoAInputProps, GoAInputNumber} from "./input";
 import { GoAIconType } from "../icon/icon";
+import { describe, it, expect, vi } from "vitest";
 
-const noop = () => {};
+const noop = () => { };
 const testId = "test-id";
 const defaultProps: GoAInputProps = {
   name: "",
@@ -45,37 +45,33 @@ describe("Input", () => {
 
     const input = document.querySelector("goa-input");
     expect(input).toBeTruthy();
-    expect(input.getAttribute("name")).toBe("foo");
-    expect(input.getAttribute("value")).toBe("bar");
-    expect(input.getAttribute("type")).toBe("text");
-    expect(input.getAttribute("id")).toBe("foo");
-    expect(input.getAttribute("leadingicon")).toBe("search");
-    expect(input.getAttribute("trailingicon")).toBe("close");
-    expect(input.getAttribute("autocapitalize")).toBe("on");
-    expect(input.getAttribute("variant")).toBe("bare");
-    expect(input.getAttribute("disabled")).toBeTruthy();
-    expect(input.getAttribute("readonly")).toBeTruthy();
-    expect(input.getAttribute("placeholder")).toBe("placeholder");
-    expect(input.getAttribute("prefix")).toBe("foo");
-    expect(input.getAttribute("suffix")).toBe("bar");
-    expect(input.getAttribute("data-testid")).toBe(testId);
-    expect(input.getAttribute("debounce")).toBe("1000");
-    expect(input.getAttribute("mt")).toBe("s");
-    expect(input.getAttribute("mr")).toBe("m");
-    expect(input.getAttribute("mb")).toBe("l");
-    expect(input.getAttribute("ml")).toBe("xl");
-    expect(input.getAttribute("maxlength")).toBe("10");
-    expect(
-      input.querySelector("[slot='leadingContent']").textContent
-    ).toContain("$");
-    expect(
-      input.querySelector("[slot='trailingContent']").textContent
-    ).toContain("items");
-    expect(input.getAttribute("handletrailingiconclick")).toBeTruthy();
+    expect(input?.getAttribute("name")).toBe("foo");
+    expect(input?.getAttribute("value")).toBe("bar");
+    expect(input?.getAttribute("type")).toBe("text");
+    expect(input?.getAttribute("id")).toBe("foo");
+    expect(input?.getAttribute("leadingicon")).toBe("search");
+    expect(input?.getAttribute("trailingicon")).toBe("close");
+    expect(input?.getAttribute("autocapitalize")).toBe("on");
+    expect(input?.getAttribute("variant")).toBe("bare");
+    expect(input?.getAttribute("disabled")).toBeTruthy();
+    expect(input?.getAttribute("readonly")).toBeTruthy();
+    expect(input?.getAttribute("placeholder")).toBe("placeholder");
+    expect(input?.getAttribute("prefix")).toBe("foo");
+    expect(input?.getAttribute("suffix")).toBe("bar");
+    expect(input?.getAttribute("data-testid")).toBe(testId);
+    expect(input?.getAttribute("debounce")).toBe("1000");
+    expect(input?.getAttribute("mt")).toBe("s");
+    expect(input?.getAttribute("mr")).toBe("m");
+    expect(input?.getAttribute("mb")).toBe("l");
+    expect(input?.getAttribute("ml")).toBe("xl");
+    expect(input?.getAttribute("maxlength")).toBe("10");
+    expect(input?.querySelector("[slot='leadingContent']")?.textContent).toContain("$");
+    expect(input?.querySelector("[slot='trailingContent']")?.textContent).toContain("items");
+    expect(input?.getAttribute("handletrailingiconclick")).toBeTruthy();
   });
 
-  it("should handle the onChange event", async function () {
-    const validateOnChange = jest.fn();
+  it("should handle the onChange event", async function() {
+    const validateOnChange = vi.fn();
     const newValue = "barfoo";
 
     const onChange = (name: string, value: string) => {
@@ -89,15 +85,14 @@ describe("Input", () => {
     const input = document.querySelector("goa-input");
     expect(input).toBeTruthy();
 
-    fireEvent(
-      input,
-      new CustomEvent("_change", { detail: { name: "foo", value: newValue } })
-    );
+    input && fireEvent(input, new CustomEvent("_change", {
+      detail: { name: "foo", value: newValue }
+    }));
     expect(validateOnChange).toBeCalled();
   });
 
   it("should not error out with invalid dates", () => {
-    const mockOnChangeHandler = jest.fn();
+    const mockOnChangeHandler = vi.fn();
     const { container } = render(
       <GoAInputDateTime
         onChange={mockOnChangeHandler}
@@ -110,7 +105,7 @@ describe("Input", () => {
     );
     expect(inputElement).toBeTruthy();
     //invalid dates do not trigger change event
-    fireEvent(
+    inputElement && fireEvent(
       inputElement,
       new CustomEvent("_change", {
         detail: { name: "dateInput", value: "invalid date" },
@@ -119,7 +114,7 @@ describe("Input", () => {
     expect(mockOnChangeHandler).not.toBeCalled();
     const newDate = new Date().toISOString();
     //valid dates trigger change event
-    fireEvent(
+    inputElement && fireEvent(
       inputElement,
       new CustomEvent("_change", {
         detail: { name: "dateInput", value: newDate },
@@ -129,7 +124,7 @@ describe("Input", () => {
   });
 
   it("should handle decimal number for GoAInputNumber", () => {
-    const mockOnChangeHandler = jest.fn();
+    const mockOnChangeHandler = vitest.fn();
     const {container} = render(
       <GoAInputNumber onChange={mockOnChangeHandler} name="numberInput" value={1}/>
     );

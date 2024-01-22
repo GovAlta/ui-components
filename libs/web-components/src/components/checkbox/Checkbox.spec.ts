@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/svelte';
 import GoACheckbox from './Checkbox.svelte'
+import { it, describe } from "vitest";
 
 const testid = "checkbox-test";
 
@@ -73,7 +73,7 @@ describe('GoACheckbox Component', () => {
     it("handles change event that results in checked state with value initialized", async () => {
       const el = await createElement({ value: 'foobar' });
       const checkbox = el.container.querySelector("input");
-      const change = jest.fn();
+      const change = vi.fn();
 
       checkbox.addEventListener('_change', (event: CustomEvent) => {
         expect(event.detail.name).toBe('checkbox-test-name');
@@ -89,7 +89,7 @@ describe('GoACheckbox Component', () => {
     it("handles change event that results in checked state with value not initialized", async () => {
       const el = await createElement({});
       const checkbox = el.container.querySelector("input");
-      const change = jest.fn();
+      const change = vi.fn();
 
       checkbox.addEventListener('_change', (event: CustomEvent) => {
         expect(event.detail.name).toBe('checkbox-test-name');
@@ -105,7 +105,7 @@ describe('GoACheckbox Component', () => {
     it("handles change event that results in unchecked state", async () => {
       const el = await createElement({ checked: true, value: "foo" });
       const checkbox = el.container.querySelector("input");
-      const change = jest.fn();
+      const change = vi.fn();
 
       checkbox.addEventListener('_change', (event: CustomEvent) => {
         expect(event.detail.name).toBe('checkbox-test-name');

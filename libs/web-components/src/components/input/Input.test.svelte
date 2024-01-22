@@ -1,4 +1,5 @@
-<svelte:options tag="test-input-wrapper" />
+<svelte:options customElement="test-input-wrapper" />
+
 <!-- Script -->
 <script lang="ts">
   export let leadingContent: string = "";

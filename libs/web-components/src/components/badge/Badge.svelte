@@ -1,21 +1,29 @@
-<svelte:options tag="goa-badge" />
+<svelte:options customElement="goa-badge" />
 
 <!-- Script -->
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import {typeValidator, toBoolean} from "../../common/utils";
+  import { typeValidator, toBoolean } from "../../common/utils";
 
   // Validator
   const [Types, validateType] = typeValidator(
     "Badge type",
-    ["success", "important", "information", "emergency", "dark", "midtone", "light"],
+    [
+      "success",
+      "important",
+      "information",
+      "emergency",
+      "dark",
+      "midtone",
+      "light",
+    ],
     true,
   );
 
   //Type
-  type BadgeType = typeof Types[number];
+  type BadgeType = (typeof Types)[number];
 
   export let type: BadgeType;
 
@@ -48,7 +56,9 @@
   onMount(() => {
     setTimeout(() => validateType(type), 1);
     if (!showIcon && !content) {
-      console.warn("GoABadge must have either then content or icon property set");
+      console.warn(
+        "GoABadge must have either then content or icon property set",
+      );
     }
     if (showIconOnly && !arialabel) {
       console.warn("GoABadge with icon only requires an arialabel");
@@ -65,14 +75,14 @@
   class:icon-only={showIconOnly}
 >
   {#if showIcon}
-      <goa-icon
-        arialabel={showIconOnly && arialabel ? arialabel : null}
-        role={showIconOnly && arialabel ? "presentation" : null}
-        type={iconType}
-        size="small"
-      />
+    <goa-icon
+      arialabel={showIconOnly && arialabel ? arialabel : null}
+      role={showIconOnly && arialabel ? "presentation" : null}
+      type={iconType}
+      size="small"
+    />
   {:else}
-  <div style="height: 1.2rem; margin-left:-0.25rem;" />
+    <div style="height: 1.2rem; margin-left:-0.25rem;" />
   {/if}
   {#if content}
     <div class="goa-badge-content">
@@ -104,7 +114,10 @@
   .goa-badge-content {
     font-size: var(--goa-font-size-2);
     line-height: var(--goa-line-height-1);
-    padding-bottom: var(--font-valign-fix, 0); /* acumin font requires this to allow for vertical alignment  */
+    padding-bottom: var(
+      --font-valign-fix,
+      0
+    ); /* acumin font requires this to allow for vertical alignment  */
   }
 
   .goa-badge.badge-information {

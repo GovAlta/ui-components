@@ -1,5 +1,6 @@
 import Pagination from './Pagination.svelte'
 import { fireEvent, render, waitFor } from '@testing-library/svelte'
+import { it, describe, expect, vi } from "vitest";
 
 describe("GoAPagination", () => {
   it("it renders all parts", async () => {
@@ -9,35 +10,41 @@ describe("GoAPagination", () => {
     const pageLinks = getByTestId("page-links");
 
     // page number dropdown
-    const pageNumberDropdown = pageSelector.querySelector("goa-dropdown");
-    expect(pageNumberDropdown.getAttribute("value")).toBe("1");
-    const pageDropdownItems = pageSelector.querySelectorAll('goa-dropdown-item');
-    expect(pageDropdownItems.length).toBe(10);
+    const dropdown = pageSelector.querySelector("goa-dropdown");
+    expect(dropdown).toBeTruthy();
+    expect(dropdown?.getAttribute("value")).toBe("1");
+
+    const items = pageSelector.querySelectorAll('goa-dropdown-item');
+    expect(items.length).toBe(10);
     for (let pageNumber = 1; pageNumber < 10; pageNumber++) {
-      const pageDropdownItem = pageSelector.querySelector(`goa-dropdown-item:nth-child(${pageNumber})`);
-      expect(pageDropdownItem.getAttribute("value")).toBe(`${pageNumber}`);
-      expect(pageDropdownItem.getAttribute("label")).toBe(`${pageNumber}`);
+      const item = pageSelector.querySelector(`goa-dropdown-item:nth-child(${pageNumber})`);
+      expect(item).toBeTruthy();
+      expect(item?.getAttribute("value")).toBe(`${pageNumber}`);
+      expect(item?.getAttribute("label")).toBe(`${pageNumber}`);
     }
-    // links
+
     const prev = pageLinks.querySelector("goa-button:first-child");
     const next = pageLinks.querySelector("goa-button:last-child");
-    expect(prev.getAttribute("type")).toBe("tertiary")
-    expect(next.getAttribute("type")).toBe("tertiary")
-    expect(prev.getAttribute("leadingicon")).toBe("arrow-back")
-    expect(next.getAttribute("trailingicon")).toBe("arrow-forward")
-    expect(prev.getAttribute("disabled")).toBe("true")
-    expect(next.getAttribute("disabled")).toBe("false")
+
+    expect(prev?.getAttribute("type")).toBe("tertiary")
+    expect(next?.getAttribute("type")).toBe("tertiary")
+    expect(prev?.getAttribute("leadingicon")).toBe("arrow-back")
+    expect(next?.getAttribute("trailingicon")).toBe("arrow-forward")
+    expect(prev?.getAttribute("disabled")).toBe("true")
+    expect(next?.getAttribute("disabled")).toBe("false")
   })
 
   it("handles the page dropdown select events", async () => {
     const { container } = render(Pagination, { pagenumber: 1, itemcount: 100 })
-    const pageNumberDropdown = container.querySelector("goa-dropdown");
+    const dropdown = container.querySelector("goa-dropdown");
 
-    const fn = jest.fn();
+    expect(dropdown).toBeTruthy();
 
-    pageNumberDropdown.addEventListener("_change", fn);
+    const fn = vi.fn();
 
-    await fireEvent(pageNumberDropdown, new CustomEvent("_change", { detail: { page: 2 } }))
+    dropdown?.addEventListener("_change", fn);
+
+    dropdown && await fireEvent(dropdown, new CustomEvent("_change", { detail: { page: 2 } }))
     await waitFor(() => {
       expect(fn).toBeCalledTimes(1);
     })
@@ -51,12 +58,14 @@ describe("GoAPagination", () => {
       el.querySelector("goa-button:first-child"),
       el.querySelector("goa-button:last-child"),
     ]
-    const fn = jest.fn();
+    const fn = vi.fn();
 
     container.addEventListener("_change", fn);
 
+    expect(links.length).toBe(2);
     for (const link of links) {
-      await fireEvent.click(link)
+      expect(link).toBeTruthy();
+      link && await fireEvent.click(link)
     }
     await waitFor(() => {
       expect(fn).toBeCalledTimes(2);
@@ -68,11 +77,13 @@ describe("GoAPagination", () => {
 
     const el = getByTestId("page-links")
     const prevLink = el.querySelector("goa-button:first-child");
-    const fn = jest.fn();
+    const fn = vi.fn();
+
+    expect(prevLink).toBeTruthy();
 
     container.addEventListener("_change", fn);
 
-    await fireEvent.click(prevLink)
+    prevLink && await fireEvent.click(prevLink)
     await waitFor(() => {
       expect(fn).not.toBeCalled();
     })
@@ -83,19 +94,21 @@ describe("GoAPagination", () => {
 
     const el = getByTestId("page-links")
     const nextLink = el.querySelector("goa-button:last-child");
-    const fn = jest.fn();
+    const fn = vi.fn();
+
+    expect(nextLink).toBeTruthy();
 
     container.addEventListener("_change", fn);
 
-    await fireEvent.click(nextLink)
+    nextLink && await fireEvent.click(nextLink)
     await waitFor(() => {
       expect(fn).not.toBeCalled();
     })
   })
 
   it("validates the required params", async () => {
-    const mock = jest.spyOn(console, "warn").mockImplementation();
-    render(Pagination, { })
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
+    render(Pagination, {})
 
     await waitFor(() => {
       const calls: string[] = console.warn["mock"].calls.flat()
@@ -106,7 +119,7 @@ describe("GoAPagination", () => {
   })
 
   it("validates the variant", async () => {
-    const mock = jest.spyOn(console, "error").mockImplementation();
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { });
     render(Pagination, { pagenumber: 1, itemcount: 100, variant: "bad" })
 
     await waitFor(() => {

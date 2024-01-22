@@ -1,11 +1,11 @@
-<svelte:options tag="goa-dropdown"/>
+<svelte:options customElement="goa-dropdown" />
 
 <script lang="ts">
-  import { afterUpdate, beforeUpdate, onMount } from "svelte";
+  import { onMount } from "svelte";
 
-  import type { GoAIconType} from "../icon/Icon.svelte";
+  import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
-  import { cssVar, fromBoolean, toBoolean } from "../../common/utils";
+  import { fromBoolean, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
 
   interface Option {
@@ -26,7 +26,7 @@
   export let arialabelledby: string = "";
   export let value: string = "";
   export let filterable: string = "false";
-  export let leadingicon: GoAIconType = null;
+  export let leadingicon: GoAIconType | null = null;
   export let maxheight: string = "276px";
   export let placeholder: string = "";
   export let width: string = "";
@@ -57,7 +57,7 @@
 
   let _isDirty: boolean = false;
   let _filteredOptions: Option[] = [];
-  let _values: string[] = []
+  let _values: string[] = [];
 
   //
   // Reactive
@@ -69,14 +69,13 @@
   $: _native = toBoolean(native);
   $: _filterable = toBoolean(filterable) && !_native;
 
-
   // To keep track of active descendant for the accessibility
   $: _activeDescendantId = _filteredOptions[_highlightedIndex]
     ? _filteredOptions[_highlightedIndex].value
     : undefined;
 
   $: {
-    _values = parseValues(value)
+    _values = parseValues(value);
     // updating _inputEl.value is done within seperate function
     // to prevent unwanted reactive updates.
     setDisplayedValue();
@@ -91,11 +90,12 @@
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
 
-    // the following is required to appease the jest testing gods in that they don't respond
+    // the following is required to appease the unit testing gods in that they don't respond
     // to the slotchange event
     _options = getOptions();
+
     if (!_native) {
-      _inputEl.value = _options.find(o => o.value === value)?.label ?? "";
+      _inputEl.value = _options.find((o) => o.value === value)?.label ?? "";
 
       if (width) {
         if (width.endsWith("%")) {
@@ -107,18 +107,19 @@
         }
       }
 
-      // This is only here to allow the Jest tests to pass :(
+      // This is only here to allow the tests to pass :(
       if (!width && _options.length > 0) {
         _width = getLongestChildWidth(_options);
       }
-
     }
+
     syncFilteredOptions();
 
     // watch for DOM changes within the slot => dynamic binding
     const slot = _rootEl.querySelector("slot");
-    slot?.addEventListener("slotchange", (_) => {
+    slot?.addEventListener("slotchange", () => {
       _options = getOptions();
+
       syncFilteredOptions();
 
       if (!width) {
@@ -138,7 +139,7 @@
   // prevents unwanted reactive updates.
   function setDisplayedValue() {
     if (_inputEl) {
-      const option = _options.find(o => o.value == _values[0]); // possible string number comparison
+      const option = _options.find((o) => o.value == _values[0]); // possible string number comparison
       _inputEl.value = option?.label ?? option?.value ?? "";
     }
   }
@@ -164,6 +165,7 @@
     }
     // unit tests
     const el = _native ? _selectEl : _rootEl;
+    // @ts-expect-error
     return [...el.children] as Element[];
   }
 
@@ -173,12 +175,14 @@
   function getOptions(): Option[] {
     return getChildren()
       .filter((child: Element) => child.tagName === "GOA-DROPDOWN-ITEM")
-      .map((el: HTMLElement) => {
+      .map((el: Element) => {
         const option = el as unknown as Option;
         const value = el.getAttribute("value") || option.value || "";
-        const label = el.getAttribute("label") || option.label || el.innerHTML || value;
+        const label =
+          el.getAttribute("label") || option.label || el.innerHTML || value;
         const filter = el.getAttribute("filter") || label || value || "";
-        return {value, label, filter};
+
+        return { value, label, filter } as Option;
       });
   }
 
@@ -190,11 +194,11 @@
         const label = `${option.label}` || `${option.value}` || "";
         return label.length;
       })
-      .sort((a: number, b:number) => a > b ? 1 : -1)
+      .sort((a: number, b: number) => (a > b ? 1 : -1))
       .pop();
 
     // longest one defines the width
-    let maxWidth = Math.max(optionsWidth, placeholder.length) + 8;
+    let maxWidth = Math.max(optionsWidth || 0, placeholder.length) + 8;
 
     // compensate for icon width
     if (leadingicon) {
@@ -221,25 +225,27 @@
   }
 
   function scrollToOption(index: number) {
-    const liNode = _menuEl.querySelector(`li[data-index="${index}"]`) as HTMLLIElement;
+    const liNode = _menuEl.querySelector(
+      `li[data-index="${index}"]`,
+    ) as HTMLLIElement;
     if (!liNode) return;
 
     const liOptionRect = liNode.getBoundingClientRect();
     const ulRect = _menuEl.getBoundingClientRect();
     const isInView =
-      liOptionRect.top >= 0
-      && liOptionRect.left >= 0
-      && liOptionRect.bottom <= ulRect.height
-      && liOptionRect.right <= ulRect.width;
+      liOptionRect.top >= 0 &&
+      liOptionRect.left >= 0 &&
+      liOptionRect.bottom <= ulRect.height &&
+      liOptionRect.right <= ulRect.width;
 
     if (isInView) return;
 
-    liNode.scrollIntoView({behavior: "smooth", block: "nearest"});
+    liNode.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
   function syncFilteredOptions() {
     _filteredOptions = _filterable
-      ? _options.filter(option => isFilterMatch(option, _inputEl.value))
+      ? _options.filter((option) => isFilterMatch(option, _inputEl.value))
       : _options;
   }
 
@@ -251,8 +257,8 @@
     setTimeout(() => {
       syncFilteredOptions();
       _isMenuVisible = true;
-      _inputEl.focus();
-    }, 0)
+      _inputEl?.focus();
+    }, 0);
   }
 
   function hideMenu() {
@@ -271,13 +277,15 @@
 
   function dispatchValue(value?: string) {
     const detail = _multiselect
-      ? {name, values: [value, ..._values]}
-      : {name, value: value};
+      ? { name, values: [value, ..._values] }
+      : { name, value: value };
 
     setTimeout(() => {
-      _rootEl.dispatchEvent(new CustomEvent("_change", {composed: true, detail}));
+      _rootEl.dispatchEvent(
+        new CustomEvent("_change", { composed: true, detail }),
+      );
       _isDirty = false;
-    }, 1)
+    }, 1);
   }
 
   //
@@ -336,27 +344,27 @@
     dispatchValue("");
   }
 
-
   function onChevronClick(e: Event) {
     showMenu();
     e.stopPropagation();
   }
 
   class ComboboxKeyUpHandler implements EventHandler {
-
     constructor(private input: HTMLInputElement) {
       input.addEventListener("blur", async (e) => {
         if (!_isDirty) return;
         if (!_filterable) return;
 
         const input = e.target as HTMLInputElement;
-        const selectedOption = _filteredOptions.find(o => o.label === input.value);
+        const selectedOption = _filteredOptions.find(
+          (o) => o.label === input.value,
+        );
 
         if (!selectedOption) {
           dispatchValue("");
           input.value = "";
         }
-      })
+      });
     }
 
     onEscape(e: KeyboardEvent) {
@@ -379,17 +387,19 @@
       }
 
       e.stopPropagation();
-    };
+    }
 
     onArrow(e: KeyboardEvent, direction: "up" | "down") {
       if (!_isMenuVisible) showMenu();
       changeHighlightedOption(direction === "up" ? -1 : 1);
       e.stopPropagation();
-    };
+    }
 
     onTab(_: KeyboardEvent) {
-      const matchedOption = _filteredOptions
-        .find(option => option.label.toLowerCase() === this.input.value.toLowerCase());
+      const matchedOption = _filteredOptions.find(
+        (option) =>
+          option.label.toLowerCase() === this.input.value.toLowerCase(),
+      );
       if (matchedOption) {
         onSelect(matchedOption);
       }
@@ -416,7 +426,10 @@
           this.input.setSelectionRange(0, 0);
           break;
         case "End":
-          this.input.setSelectionRange(this.input.value.length, this.input.value.length);
+          this.input.setSelectionRange(
+            this.input.value.length,
+            this.input.value.length,
+          );
           break;
         default:
           this.onKeyUp(e);
@@ -437,13 +450,13 @@
   }
 
   class DropdownKeyUpHandler implements EventHandler {
-    constructor(_input: HTMLInputElement) {  }
+    constructor(_input: HTMLInputElement) {}
 
     onEnter(e: KeyboardEvent) {
       if (_isMenuVisible) {
         const option = _filteredOptions[_highlightedIndex];
         if (option) {
-          onSelect(option)
+          onSelect(option);
         }
         hideMenu();
       } else {
@@ -492,7 +505,6 @@
       }
     }
   }
-
 </script>
 
 <!-- Template -->
@@ -517,18 +529,16 @@
       bind:this={_selectEl}
       on:change={onNativeSelect}
     >
-      <slot/>
+      <slot />
       {#each _options as option}
-        <option
-          selected={value === option.value}
-          value={option.value}>
+        <option selected={value === option.value} value={option.value}>
           {option.label}
         </option>
       {/each}
     </select>
   {:else}
     <!-- list and filter -->
-    <slot/>
+    <slot />
     <goa-popover
       {disabled}
       {relative}
@@ -547,7 +557,6 @@
         class:dropdown-input-group--disabled={_disabled}
         class:error={_error}
       >
-
         {#if leadingicon}
           <goa-icon
             class="dropdown-input--leading-icon"
@@ -577,8 +586,8 @@
           aria-haspopup="listbox"
           disabled={_disabled}
           readonly={!_filterable}
-          placeholder={placeholder}
-          name={name}
+          {placeholder}
+          {name}
           on:keydown={onInputKeyDown}
           on:keyup={onInputKeyUp}
         />
@@ -599,6 +608,7 @@
             type="close"
           />
         {:else}
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
           <goa-icon
             role="button"
             tabindex="-1"
@@ -630,12 +640,13 @@
         `}
       >
         {#each _filteredOptions as option, index (index)}
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
           <li
             id={option.value}
-            aria-selected={_inputEl.value === (option.label || option.value) }
+            aria-selected={_inputEl.value === (option.label || option.value)}
             class="dropdown-item"
             class:dropdown-item--highlighted={index === _highlightedIndex}
-            class:selected={ _inputEl.value === (option.label || option.value)}
+            class:selected={_inputEl.value === (option.label || option.value)}
             data-index={index}
             data-testid={`dropdown-item-${option.value}`}
             data-value={option.value}
@@ -646,9 +657,11 @@
             {option.label || option.value}
           </li>
         {:else}
-          <li class="dropdown-item" data-testid="dropdown-item-not-found">
-            No matches found
-          </li>
+          {#if _filterable}
+            <li class="dropdown-item" data-testid="dropdown-item-not-found">
+              No matches found
+            </li>
+          {/if}
         {/each}
       </ul>
     </goa-popover>
@@ -684,7 +697,8 @@
 
   .dropdown-input-group:hover {
     border-color: var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-hover);
   }
 
   .dropdown-input-group:focus,
@@ -768,6 +782,8 @@
   /** menu **/
   ul[role="listbox"] {
     border-radius: var(--goa-border-radius-m);
+    padding: 0;
+    margin: 0;
   }
 
   /* dropdown items */
@@ -823,7 +839,8 @@
 
   .dropdown-native:hover {
     border-color: var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-hover);
   }
 
   select {
@@ -855,5 +872,4 @@
   .dropdown-native:focus-within {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
-
 </style>

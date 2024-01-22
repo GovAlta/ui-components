@@ -1,4 +1,5 @@
 import { render, fireEvent } from "@testing-library/react";
+import { describe, it, vi } from "vitest";
 import Table from "./table";
 
 describe("Table", () => {
@@ -9,7 +10,7 @@ describe("Table", () => {
   });
 
   it("should call onSort when _sort event is triggered", () => {
-    const onSort = jest.fn();
+    const onSort = vi.fn();
     const { getByTestId } = render(<Table onSort={onSort} testId="test-table" />);
 
     fireEvent(

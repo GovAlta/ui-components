@@ -1,4 +1,4 @@
-<svelte:options tag="goa-spinner" />
+<svelte:options customElement="goa-spinner" />
 
 <script lang="ts" context="module">
   export type SpinnerSize = "small" | "medium" | "large" | "xlarge";
@@ -30,27 +30,31 @@
   $: {
     // Typescript recognizes `progress` as a number, but once compiled, due to it being a web component, progress is a string.
     // This line makes both sides happy.
-    const p = parseFloat(progress + '');
+    const p = parseFloat(progress + "");
 
     if (p >= 0) {
-      _progress.set(p || 1);  // start at 1 to prevent incorrect arc calculations
-      type = "progress"
+      _progress.set(p || 1); // start at 1 to prevent incorrect arc calculations
+      type = "progress";
     }
   }
 
-  $: diameter = size && {
-    small: 16,
-    medium: 32,
-    large: 64,
-    xlarge: 100,
-  }[size];
+  $: diameter =
+    size &&
+    {
+      small: 16,
+      medium: 32,
+      large: 64,
+      xlarge: 100,
+    }[size];
 
-  $: strokewidth = size && {
-    small: 2,
-    medium: 4,
-    large: 7,
-    xlarge: 9,
-  }[size];
+  $: strokewidth =
+    size &&
+    {
+      small: 2,
+      medium: 4,
+      large: 7,
+      xlarge: 9,
+    }[size];
 
   $: radius = diameter / 2;
   $: pathRadius = radius - strokewidth / 2;
@@ -98,14 +102,18 @@
     <circle
       cx={radius}
       cy={radius}
-      stroke={invert ? "var(--goa-color-info-hover)" : "var(--goa-color-brand-light)"}
+      stroke={invert
+        ? "var(--goa-color-info-hover)"
+        : "var(--goa-color-brand-light)"}
       stroke-width={strokewidth}
       r={radius - strokewidth / 2}
     />
     <path
       d={getArc($_progress)}
       stroke-width={strokewidth}
-      stroke={invert ? "var(--goa-color-brand-light)" : "var(--goa-color-info-default)"}
+      stroke={invert
+        ? "var(--goa-color-brand-light)"
+        : "var(--goa-color-info-default)"}
       stroke-linecap="round"
     />
   </svg>

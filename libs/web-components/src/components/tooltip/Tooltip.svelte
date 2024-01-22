@@ -1,11 +1,29 @@
-<svelte:options tag="goa-tooltip" />
+<svelte:options customElement="goa-tooltip" />
 
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
   import { typeValidator } from "../../common/utils";
-  import { Spacing, calculateMargin } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+  import type { Spacing } from "../../common/styling";
+
+  // Public
+
+  export let content = "";
+  export let testid: string = "";
+  export let position: Position = "top";
+  export let halign: Alignment = "center";
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
+
+  // Types
+
+  type Position = (typeof Positions)[number];
+  type Alignment = (typeof Alignment)[number];
 
   // Validator
+
   const [Positions, validatePosition] = typeValidator(
     "Tooltip positions",
     ["top", "bottom", "left", "right"],
@@ -21,40 +39,45 @@
   const validator = (position: Position, align: Alignment) => {
     if (position === "left" || position === "right") {
       if (align !== "center") {
-        console.error(`[${align}] is an invalid option for position ${position}`);
+        console.error(
+          `[${align}] is an invalid option for position ${position}`,
+        );
       }
     }
   };
 
-  //Types
-  type Position = typeof Positions[number];
-  type Alignment = typeof Alignment[number];
-
-  export let content = "";
-  export let testid: string = "";
-  export let position: Position = "top";
-  export let halign: Alignment = "center"; // default to center
-
-  // margin
-  export let mt: Spacing = null;
-  export let mr: Spacing = null;
-  export let mb: Spacing = null;
-  export let ml: Spacing = null;
+  // Private
 
   let _screenSize = 0;
   let _rootEl: HTMLElement;
   let _tooltipEl: HTMLElement;
-  let _tooltipWidth = 0;
   let _initialPosition: Position;
   let _tooltipVisible = false;
-  let _showTooltipTimeout = null;
-  let _hideTooltipTimeout = null;
-  /**
-   * Use a unique id for each tooltip instance.
-   * So screen readers can identify the tooltip instance when
-   * there are multiple tooltips on the same page
-   */
+  let _showTooltipTimeout: string | number | NodeJS.Timeout | undefined;
+  let _hideTooltipTimeout: string | number | NodeJS.Timeout | undefined;
+
+  // Use a unique id for each tooltip instance.
+  // So screen readers can identify the tooltip instance when
+  // there are multiple tooltips on the same page
   let _tooltipInstanceId: string;
+
+  // Reactive
+
+  $: {
+    if (_rootEl && _tooltipEl) {
+      _rootEl.style.setProperty(
+        "--target-width",
+        `${_rootEl.getBoundingClientRect().width / 2}px`,
+      );
+    }
+  }
+
+  // call checkAndAdjustPosition function when content changes
+  $: {
+    content && checkAndAdjustPosition();
+  }
+
+  // Hooks
 
   onMount(() => {
     setTimeout(() => {
@@ -62,9 +85,10 @@
       validateAlignment(halign);
       validator(position, halign);
     }, 1);
+
     _initialPosition = position;
     _tooltipInstanceId = Math.random().toString(36);
-    _tooltipWidth = _tooltipEl.getBoundingClientRect().width;
+
     window.addEventListener("resize", checkAndAdjustPosition);
     checkAndAdjustPosition();
   });
@@ -74,33 +98,23 @@
     clearTimeout(_showTooltipTimeout);
     clearTimeout(_hideTooltipTimeout);
   });
-  $: {
-    if (_rootEl && _tooltipEl) {
-      _rootEl.style.setProperty(
-        "--target-width",
-        `${_rootEl.getBoundingClientRect().width / 2}px`,
-      );
-    }
-  }
-  // call checkAndAdjustPosition function when content changes
-  $: {
-    content;
-    checkAndAdjustPosition();
-  }
+
+  // Functions
 
   const showTooltip = () => {
     _showTooltipTimeout = setTimeout(() => {
       _tooltipVisible = true;
       checkAndAdjustPosition();
-    }, 300); // delay of 0.3s
+    }, 300);
   };
 
   const hideTooltip = () => {
-    clearTimeout(_showTooltipTimeout); // cancel any pending show action
+    clearTimeout(_showTooltipTimeout);
+
     _hideTooltipTimeout = setTimeout(() => {
       _tooltipVisible = false;
-      position = _initialPosition; // reset position back to initial
-    }, 500); // delay of 0.5s
+      position = _initialPosition;
+    }, 500);
   };
 
   function checkAndAdjustPosition() {
@@ -124,7 +138,9 @@
       Math.max(spaceLeft, spaceRight) - 10,
     );
     const shouldWrapContent =
-      newWidth > rootRect.width || newWidth > spaceLeft || newWidth > spaceRight;
+      newWidth > rootRect.width ||
+      newWidth > spaceLeft ||
+      newWidth > spaceRight;
     _tooltipEl.style.width = `${newWidth - 32}px`;
 
     if (shouldWrapContent) {
@@ -162,12 +178,16 @@
     ) {
       newAlign = spaceLeft > spaceRight ? "left" : "right";
     }
+
     // update tooltip position
-    _tooltipEl.className = `tooltiptext ${newPosition} align-${newAlign}`;
+    position = newPosition;
+    halign = newAlign;
   }
 </script>
 
 <svelte:window bind:innerWidth={_screenSize} />
+
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
   class="tooltip align-{halign}"
   bind:this={_rootEl}
@@ -187,12 +207,12 @@
   tabindex="0"
   style={calculateMargin(mt, mr, mb, ml)}
 >
-  <div class="tooltiptarget">
+  <div class="tooltip-target">
     <slot />
   </div>
   <span
     id="{_tooltipInstanceId}-tooltip"
-    class="tooltiptext {position} align-{halign}"
+    class="tooltip-text {position} align-{halign}"
     bind:this={_tooltipEl}
     style="visibility: {_tooltipVisible ? 'visible' : 'hidden'}">{content}</span
   >
@@ -212,7 +232,7 @@
     cursor: pointer;
   }
 
-  .tooltiptext {
+  .tooltip-text {
     visibility: hidden;
     font: var(--goa-typography-body-s);
     background-color: var(--goa-color-greyscale-700);
@@ -230,78 +250,81 @@
     flex-direction: column;
   }
 
-  .tooltiptarget {
+  .tooltip-target {
     margin: 4px;
   }
 
-  .tooltiptext.bottom {
+  .tooltip-text.bottom {
     top: calc(100% + 10px);
   }
 
-  .tooltiptext.top {
+  .tooltip-text.top {
     bottom: calc(100% + 10px);
   }
 
-  .tooltiptext.right {
+  .tooltip-text.right {
     left: calc(100% + 10px);
   }
 
-  .tooltiptext.left {
+  .tooltip-text.left {
     right: calc(100% + 10px);
   }
 
-  .tooltip:hover .tooltiptext,
-  .tooltip:focus .tooltiptext {
+  .tooltip:hover .tooltip-text,
+  .tooltip:focus .tooltip-text {
     opacity: 1;
   }
 
-  .tooltiptext.bottom::before,
-  .tooltiptext.top::before,
-  .tooltiptext.left::before,
-  .tooltiptext.right::before {
+  .tooltip-text.bottom::before,
+  .tooltip-text.top::before,
+  .tooltip-text.left::before,
+  .tooltip-text.right::before {
     content: "";
     position: absolute;
     border-style: solid;
-    aria-hidden: true;
   }
 
-  .tooltiptext.bottom::before {
+  .tooltip-text.bottom::before {
     top: -10px;
     left: 50%;
     border-width: 0 10px 10px 10px;
     transform: translateX(-50%);
-    border-color: transparent transparent var(--goa-color-greyscale-700) transparent;
+    border-color: transparent transparent var(--goa-color-greyscale-700)
+      transparent;
   }
-  .tooltiptext.top::before {
+  .tooltip-text.top::before {
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
     border-width: 10px 10px 0 10px;
-    border-color: var(--goa-color-greyscale-700) transparent transparent transparent;
+    border-color: var(--goa-color-greyscale-700) transparent transparent
+      transparent;
   }
-  .tooltiptext.left::before {
+  .tooltip-text.left::before {
     top: 50%;
     right: -10px;
     transform: translateY(-50%);
     border-width: 10px 0 10px 10px;
-    border-color: transparent transparent transparent var(--goa-color-greyscale-700);
+    border-color: transparent transparent transparent
+      var(--goa-color-greyscale-700);
   }
-  .tooltiptext.right::before {
+  .tooltip-text.right::before {
     top: 50%;
     left: -10px;
     transform: translateY(-50%);
     border-width: 10px 10px 10px 0;
     border-style: solid;
-    border-color: transparent var(--goa-color-greyscale-700) transparent transparent;
+    border-color: transparent var(--goa-color-greyscale-700) transparent
+      transparent;
   }
 
-  .tooltiptext.bottom.align-left::before,
-  .tooltiptext.top.align-left::before {
+  .tooltip-text.bottom.align-left::before,
+  .tooltip-text.top.align-left::before {
     left: calc(100% - (var(--target-width) + 1rem));
   }
 
-  .tooltiptext.bottom.align-right::before,
-  .tooltiptext.top.align-right::before {
+  .tooltip-text.bottom.align-right::before,
+  .tooltip-text.top.align-right::before {
     left: calc(var(--target-width) + 1rem);
   }
 
@@ -312,11 +335,11 @@
     justify-content: flex-end;
   }
 
-  .tooltiptext.align-right {
+  .tooltip-text.align-right {
     left: 0;
     margin-left: -1rem;
   }
-  .tooltiptext.align-left {
+  .tooltip-text.align-left {
     right: 0;
     margin-right: -1rem;
   }

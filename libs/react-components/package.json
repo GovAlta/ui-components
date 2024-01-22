@@ -1,14 +1,13 @@
 {
   "name": "@abgov/react-components",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Government of Alberta - UI components for React",
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
-  "license": "Apache-2.0",
   "keywords": [
     "GoA",
-    "template",
+    "ui-components",
     "React"
   ],
   "repository": {
@@ -16,11 +15,15 @@
     "url": "https://github.com/GovAlta/ui-components.git",
     "directory": "libs/react-components"
   },
-  "peerDependencies": {
-    "react": ">=17.0.2",
-    "react-dom": ">=17.0.2"
-  },
-  "dependencies": {
-    "date-fns": "^2.29.2"
+  "license": "Apache-2.0",
+  "main": "./index.js",
+  "module": "./index.mjs",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js",
+      "types": "./index.d.ts"
+    }
   }
 }
