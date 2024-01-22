@@ -1,13 +1,13 @@
-import "@testing-library/jest-dom";
 import { render, fireEvent, cleanup, waitFor } from "@testing-library/svelte";
 import GoAModal from "./Modal.svelte";
 import GoAModalWrapper from "./ModalWrapper.test.svelte";
+import { it, describe } from "vitest";
 
 afterEach(cleanup);
 
 describe("Modal Component", () => {
   it("should have a deprecated width prop", async () => {
-    const mock = jest.spyOn(console, "warn").mockImplementation();
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
 
     render(GoAModal, { open: "true", width: "500px" });
 
@@ -23,6 +23,7 @@ describe("Modal Component", () => {
 
     await waitFor(() => {
       const modalEl = el.queryByTestId("modal");
+      // @ts-expect-error: setting deprecated prop
       expect(modalEl.style["_values"]["--maxwidth"]).toBe("500px");
     });
   });
@@ -63,7 +64,7 @@ describe("Modal Component", () => {
 
   it("should close on icon click when made to be closable", async () => {
     const el = render(GoAModal, { open: "true", closable: "true" });
-    const click = jest.fn();
+    const click = vi.fn();
     await waitFor(async () => {
       const rootEl = el.queryByTestId("modal");
       const closeIcon = el.queryByTestId("modal-close-button");
@@ -76,7 +77,7 @@ describe("Modal Component", () => {
   it("should close on background click when made to be closable", async () => {
     const el = render(GoAModal, { open: "true", closable: "true" });
     await waitFor(async () => {
-      const click = jest.fn();
+      const click = vi.fn();
       const rootEl = el.queryByTestId("modal");
       const closeIcon = el.queryByTestId("modal-overlay");
       rootEl.addEventListener("_close", click);
@@ -122,7 +123,7 @@ describe("Modal Component", () => {
   );
 
   it("should not render an invalid calloutVariant", async () => {
-    const mock = jest.spyOn(console, "error").mockImplementation();
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { });
     render(GoAModal, { open: "true", calloutvariant: "importantttttt" });
     await waitFor(() => {
       expect(console.error["mock"].calls.length).toBeGreaterThan(0);
@@ -132,7 +133,7 @@ describe("Modal Component", () => {
 
   it("should close on 'esc' key press when modal is closable", async () => {
     const el = render(GoAModal, { open: "true", closable: "true" });
-    const handleClose = jest.fn();
+    const handleClose = vi.fn();
     await waitFor(async () => {
       const rootEl = el.queryByTestId("modal");
 

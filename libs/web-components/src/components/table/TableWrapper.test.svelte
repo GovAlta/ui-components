@@ -1,4 +1,4 @@
-<svelte:options tag="test-table-wrapper" />
+<svelte:options customElement="test-table-wrapper" />
 
 <script lang="ts">
   export let width: string = "";
@@ -6,7 +6,7 @@
   export let data: Record<string, unknown>[][];
 </script>
 
-<goa-table width={width}>
+<goa-table {width}>
   <thead>
     {#each columnTitles as title}
       <th>{title}</th>
@@ -15,7 +15,7 @@
   <tbody>
     {#each data as row}
       <tr>
-        {#each row as item}  
+        {#each row as item}
           <td>{item}</td>
         {/each}
       </tr>

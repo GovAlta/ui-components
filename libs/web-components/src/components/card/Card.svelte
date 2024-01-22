@@ -1,4 +1,4 @@
-<svelte:options tag="goa-card" />
+<svelte:options customElement="goa-card" />
 
 <!-- Script -->
 <script lang="ts">

@@ -1,7 +1,7 @@
-import "@testing-library/jest-dom";
 import { render, fireEvent, waitFor, cleanup } from "@testing-library/svelte";
 import GoAInput from "./Input.svelte";
 import GoAInputWrapper from "./Input.test.svelte";
+import { it, describe } from "vitest";
 
 afterEach(cleanup);
 
@@ -137,7 +137,7 @@ describe("GoAInput Component", () => {
     });
     const icon = await el.findByTestId("trailing-icon-button");
 
-    const click = jest.fn();
+    const click = vi.fn();
     icon.addEventListener("_trailingIconClick", click);
     await fireEvent.click(icon);
     expect(click).toBeCalled();
@@ -146,8 +146,10 @@ describe("GoAInput Component", () => {
   it("allows the input to be focused", async () => {
     const el = render(GoAInput, { testid: "input-test", focused: "true" });
     const input = el.container.querySelector("input");
+    expect(input).toBeTruthy();
+
     await waitFor(() => {
-      expect(input).toHaveFocus();
+      input && expect(input).toHaveFocus();
     });
   });
 
@@ -157,19 +159,21 @@ describe("GoAInput Component", () => {
       testid: "input-test",
     });
     const input = await findByTestId("input-test");
-    const change = jest.fn();
-    const keypress = jest.fn();
+    const change = vi.fn();
+    const keypress = vi.fn();
 
-    input.addEventListener("_change", (e: CustomEvent) => {
-      expect(e.detail.name).toBe("test-name");
-      expect(e.detail.value).toBe("foobar");
+    input.addEventListener("_change", (e: Event) => {
+      const ce = e as CustomEvent;
+      expect(ce.detail.name).toBe("test-name");
+      expect(ce.detail.value).toBe("foobar");
       change();
     });
 
-    input.addEventListener("_keyPress", (e: CustomEvent) => {
-      expect(e.detail.name).toBe("test-name");
-      expect(e.detail.value).toBe("foobar");
-      expect(e.detail.key).toBe("r");
+    input.addEventListener("_keyPress", (e: Event) => {
+      const ce = e as CustomEvent;
+      expect(ce.detail.name).toBe("test-name");
+      expect(ce.detail.value).toBe("foobar");
+      expect(ce.detail.key).toBe("r");
       keypress();
     });
 
@@ -189,7 +193,7 @@ describe("GoAInput Component", () => {
       type: "date",
     });
     const input = await findByTestId("input-test");
-    const change = jest.fn();
+    const change = vi.fn();
 
     input.addEventListener("_change", () => {
       change();
@@ -207,7 +211,7 @@ describe("GoAInput Component", () => {
       handletrailingiconclick: "true",
       trailingicon: "finger-print",
     });
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     const iconButton = await findByTestId("trailing-icon-button");
 
     iconButton.addEventListener("_trailingIconClick", onClick);
@@ -226,9 +230,10 @@ describe("GoAInput Component", () => {
       });
       const root = el.container.querySelector("input");
       expect(root).toBeTruthy();
-      expect(root).toHaveAttribute("min", "0");
-      expect(root).toHaveAttribute("max", "10");
-      expect(root).toHaveAttribute("step", "2");
+
+      root && expect(root).toHaveAttribute("min", "0");
+      root && expect(root).toHaveAttribute("max", "10");
+      root && expect(root).toHaveAttribute("step", "2");
     });
   });
 
@@ -246,9 +251,9 @@ describe("GoAInput Component", () => {
       const el = render(GoAInput, { type: "date" });
       const input = el.container.querySelector("input");
       expect(input).toBeTruthy();
-      expect(input.getAttribute("min")).toBe("");
-      expect(input.getAttribute("max")).toBe("");
-      expect(input.getAttribute("step")).toBe("1");
+      expect(input?.getAttribute("min")).toBe("");
+      expect(input?.getAttribute("max")).toBe("");
+      expect(input?.getAttribute("step")).toBe("1");
     });
   });
 
@@ -260,7 +265,7 @@ describe("GoAInput Component", () => {
         type: "search",
       });
       const input = await findByTestId("input-test");
-      const search = jest.fn();
+      const search = vi.fn();
 
       input.addEventListener("_change", () => {
         search();
@@ -279,7 +284,7 @@ describe("GoAInput Component", () => {
         type: "text",
       });
       const input = await findByTestId("input-test");
-      const search = jest.fn();
+      const search = vi.fn();
 
       input.addEventListener("_change", () => {
         search();
@@ -297,23 +302,24 @@ describe("GoAInput Component", () => {
       expect(container.querySelector(".suffix")).toBeNull();
     });
     it("shows prefix text and also a warning message in console", async () => {
-      const mock = jest.spyOn(console, "warn").mockImplementation();
+      const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
       const { container } = render(GoAInput, { type: "text", prefix: "$" });
-      expect(container.querySelector(".prefix").innerHTML).toContain("$");
+      const prefix = container.querySelector(".prefix");
+
+      expect(prefix).toBeTruthy();
+      expect(prefix?.innerHTML).toContain("$");
       await waitFor(() => {
         expect(console.warn["mock"].calls.length).toBeGreaterThan(0);
       });
       mock.mockRestore();
     });
     it("shows suffix text and also a warning message in console", async () => {
-      const mock = jest.spyOn(console, "warn").mockImplementation();
+      const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
       const { container } = render(GoAInput, {
         type: "text",
         suffix: "per item",
       });
-      expect(container.querySelector(".suffix").innerHTML).toContain(
-        "per item",
-      );
+      expect(container.querySelector(".suffix")?.innerHTML).toContain("per item");
       await waitFor(() => {
         expect(console.warn["mock"].calls.length).toBeGreaterThan(0);
       });
@@ -351,28 +357,29 @@ describe("GoAInput Component", () => {
       const content = "$";
       const el = render(GoAInputWrapper, { leadingContent: content });
       expect(el.container.innerHTML).toContain(content);
-      expect(
-        el.container.querySelector("[slot=leadingContent]").innerHTML,
-      ).toContain(content);
+
+      const leadingContent = el.container.querySelector("[slot=leadingContent]");
+      expect(leadingContent).toBeTruthy();
+      expect(leadingContent?.innerHTML).toContain(content);
     });
 
     it("should have a slot for the trailing content", async () => {
       const content = "items";
       const el = render(GoAInputWrapper, { trailingContent: content });
+      const trailingContent = el.container.querySelector("[slot=trailingContent]");
+
       expect(el.container.innerHTML).toContain(content);
-      expect(
-        el.container.querySelector("[slot=trailingContent]").innerHTML,
-      ).toContain(content);
+      expect(trailingContent?.innerHTML).toContain(content);
     });
   });
 
   it("should delay the _change event when debounce is set", async () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const el = render(GoAInput, { testid: "input-test", debounce: 1000 });
     const input = el.getByTestId("input-test");
     expect(input).toBeTruthy();
 
-    input.addEventListener("_change", (e: CustomEvent) => {
+    input.addEventListener("_change", () => {
       fn();
     });
 

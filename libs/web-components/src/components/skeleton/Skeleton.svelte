@@ -1,4 +1,4 @@
-<svelte:options tag="goa-skeleton" />
+<svelte:options customElement="goa-skeleton" />
 
 <!-- Script -->
 <script lang="ts">
@@ -8,27 +8,34 @@
   import { typeValidator } from "../../common/utils";
 
   // Validator
-  const [Types, validateType] = typeValidator("Skeleton type", [
-    "image",
-    "text",
-    "title",
-    "text-small",
-    "avatar",
-    "header",
-    "paragraph",
-    "thumbnail",
-    "card",
-    "lines",
-    "profile",
-    "article",
-  ],
-    true
+  const [Types, validateType] = typeValidator(
+    "Skeleton type",
+    [
+      "image",
+      "text",
+      "title",
+      "text-small",
+      "avatar",
+      "header",
+      "paragraph",
+      "thumbnail",
+      "card",
+      "lines",
+      "profile",
+      "article",
+    ],
+    true,
   );
-  const [Sizes, validateSize] = typeValidator("Skeleton size", ["1", "2", "3", "4"]);
+  const [Sizes, validateSize] = typeValidator("Skeleton size", [
+    "1",
+    "2",
+    "3",
+    "4",
+  ]);
 
   // Type
-  type SkeletonType = typeof Types[number];
-  type SkeletonSize = typeof Sizes[number];
+  type SkeletonType = (typeof Types)[number];
+  type SkeletonSize = (typeof Sizes)[number];
 
   export let maxwidth: string = "";
   export let size: SkeletonSize = "1";
@@ -49,18 +56,13 @@
 </script>
 
 <!-- HTML -->
-<div
-  data-testid={testid}
-  style="{calculateMargin(mt, mr, mb, ml)};">
+<div data-testid={testid} style="{calculateMargin(mt, mr, mb, ml)};">
   {#if type === "card"}
-    <div
-      class="card card-{size}"
-      style="--max-width: {maxwidth};"
-    >
+    <div class="card card-{size}" style="--max-width: {maxwidth};">
       <svelte:self type="image" {size} />
       <div class="card-content">
         <svelte:self type="header" {size} />
-        <svelte:self type="lines" {size} linecount={linecount} />
+        <svelte:self type="lines" {size} {linecount} />
       </div>
     </div>
   {:else if type === "profile"}
@@ -74,8 +76,8 @@
       </div>
     </div>
   {:else if type === "lines"}
-    {#each Array(Number.parseInt(linecount+"")) as _item}
-      <svelte:self type="text" {size} linecount={linecount} />
+    {#each Array(Number.parseInt(linecount + "")) as _item}
+      <svelte:self type="text" {size} {linecount} />
     {/each}
   {:else if type === "article"}
     <div>
@@ -143,7 +145,7 @@
   .text-3,
   .text-4 {
     width: 100%;
-    height: .75rem;
+    height: 0.75rem;
     border-radius: 0.25rem;
     margin: 6px 0;
   }
@@ -152,11 +154,11 @@
   .title-1,
   .title-2 {
     width: 100%;
-    height: .75rem;
+    height: 0.75rem;
     border-radius: 0.25rem;
   }
   .title-3 {
-    height: .8rem;
+    height: 0.8rem;
   }
   .title-4 {
     height: 1rem;
@@ -216,7 +218,6 @@
     border-radius: 0.3rem;
   }
 
-
   .avatar {
     display: inline-block;
   }
@@ -241,7 +242,6 @@
     height: 120px;
     border-radius: 50%;
   }
-
 
   .thumbnail {
     display: inline-block;
@@ -325,5 +325,4 @@
   .profile .profile-name {
     flex: 1 1 auto;
   }
-
 </style>

@@ -1,4 +1,4 @@
-<svelte:options tag="test-app-header-menu-wrapper" />
+<svelte:options customElement="test-app-header-menu-wrapper" />
 
 <script lang="ts">
   import type { GoAIconType } from "../icon/Icon.svelte";

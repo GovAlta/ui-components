@@ -1,4 +1,4 @@
-<svelte:options tag="test-container" />
+<svelte:options customElement="test-container" />
 
 <!-- Script -->
 <script lang="ts">
@@ -10,7 +10,7 @@
 </script>
 
 <!-- HTML -->
-<goa-container type={type} accent={accent}>
+<goa-container {type} {accent}>
   {#if title}
     <div slot="title" class="title">{title}</div>
   {/if}

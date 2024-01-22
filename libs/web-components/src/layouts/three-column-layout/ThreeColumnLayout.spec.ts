@@ -1,7 +1,9 @@
 import { render } from '@testing-library/svelte';
 import GoAThreeColumnLayout from './ThreeColumnLayoutWrapper.test.svelte';
+import { it, describe } from "vitest";
+
 describe("ThreeColumnLayout", () => {
-  it("should render", async() => {
+  it("should render", async () => {
     const baseElement = render(GoAThreeColumnLayout);
     const el = baseElement.container;
     const header = el.querySelector("[slot=header]");

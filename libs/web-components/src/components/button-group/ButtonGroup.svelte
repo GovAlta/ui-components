@@ -1,4 +1,4 @@
-<svelte:options tag="goa-button-group" />
+<svelte:options customElement="goa-button-group" />
 
 <!-- Script -->
 <script lang="ts">
@@ -22,10 +22,10 @@
     "end",
     "center",
   ]);
-  type ButtonAlignment = typeof BUTTON_ALIGNMENTS[number];
+  type ButtonAlignment = (typeof BUTTON_ALIGNMENTS)[number];
 
   const [GAPS, validateGap] = typeValidator("gap", ["relaxed", "compact"]);
-  type Gap = typeof GAPS[number];
+  type Gap = (typeof GAPS)[number];
 
   $: _alignment = {
     start: "flex-start",
@@ -42,7 +42,14 @@
 <!-- HTML -->
 <div
   data-testid={testid}
-  style="{calculateMargin(mt, mr, mb, ml)}; --alignment: {_alignment}; --gap-size: {gap === "relaxed" ? "1rem" : "0.75rem"}"
+  style="{calculateMargin(
+    mt,
+    mr,
+    mb,
+    ml,
+  )}; --alignment: {_alignment}; --gap-size: {gap === 'relaxed'
+    ? '1rem'
+    : '0.75rem'}"
 >
   <slot />
 </div>

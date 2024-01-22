@@ -1,6 +1,5 @@
 # Add files here to ignore them from prettier formatting
-*.json
 /dist
 /coverage
-/tmp
-/libs/web-components
+/.nx/cache
+.angular

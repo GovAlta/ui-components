@@ -64,15 +64,16 @@ export function GoAModal({
 }: GoAModalProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
-  // deprecation
+  // @deprecated
   useEffect(() => {
     if (type) {
       console.warn("GoAModal [type] is deprecated.");
     }
   }, [type]);
 
-  // deprecation
+  // @deprecated
   useEffect(() => {
+    // @ts-expected-error: deprecated
     maxWidth = width;
   }, [width]);
 

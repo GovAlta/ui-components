@@ -18,12 +18,12 @@ describe("GoAHeroBanner", () => {
       />
     );
     const el = baseElement.querySelector("goa-hero-banner");
-    expect(el.getAttribute("heading")).toEqual("Upgrading our bitumen");
-    expect(el.getAttribute("backgroundurl")).toEqual("some-bg.png");
-    expect(el.getAttribute("backgroundcolor")).toEqual("#000");
-    expect(el.getAttribute("textcolor")).toEqual("#fff");
-    expect(el.getAttribute("minheight")).toEqual("500px");
-    expect(el.getAttribute("maxcontentwidth")).toEqual("500px");
+    expect(el?.getAttribute("heading")).toEqual("Upgrading our bitumen");
+    expect(el?.getAttribute("backgroundurl")).toEqual("some-bg.png");
+    expect(el?.getAttribute("backgroundcolor")).toEqual("#000");
+    expect(el?.getAttribute("textcolor")).toEqual("#fff");
+    expect(el?.getAttribute("minheight")).toEqual("500px");
+    expect(el?.getAttribute("maxcontentwidth")).toEqual("500px");
 
   });
 
@@ -37,7 +37,7 @@ describe("GoAHeroBanner", () => {
       </GoAHeroBanner>
     );
     const el = baseElement.querySelector("goa-hero-banner");
-    expect(el.innerHTML).toContain("This is the hero banner content");
+    expect(el?.innerHTML).toContain("This is the hero banner content");
   });
 
   it("renders actions", async () => {
@@ -53,7 +53,7 @@ describe("GoAHeroBanner", () => {
       </GoAHeroBanner>
     );
     const el = baseElement.querySelector("goa-hero-banner goa-button");
-    expect(el.textContent).toBe("Submit");
+    expect(el?.textContent).toBe("Submit");
   });
 
   describe("Min Height", () => {
@@ -65,7 +65,7 @@ describe("GoAHeroBanner", () => {
         />
       );
       const el = baseElement.querySelector("goa-hero-banner");
-      expect(el.getAttribute("minheight")).toBeNull();
+      expect(el?.getAttribute("minheight")).toBeNull();
     });
 
     it("uses the min height when supplied", async () => {
@@ -77,7 +77,7 @@ describe("GoAHeroBanner", () => {
         />
       );
       const el = baseElement.querySelector("goa-hero-banner");
-      expect(el.getAttribute("minheight")).toBe("700px");
+      expect(el?.getAttribute("minheight")).toBe("700px");
     });
   });
 });

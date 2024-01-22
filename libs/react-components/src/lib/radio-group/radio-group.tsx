@@ -9,9 +9,9 @@ interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   name: string;
   value?: string;
-  orientation: GoARadioGroupOrientation;
-  disabled: boolean;
-  error: boolean;
+  orientation?: GoARadioGroupOrientation;
+  disabled?: boolean;
+  error?: boolean;
   arialabel?: string;
 }
 
@@ -40,7 +40,7 @@ export function GoARadioGroup({
   name,
   value,
   children,
-  orientation = "vertical",
+  orientation,
   disabled = false,
   error = false,
   testId,
@@ -51,6 +51,7 @@ export function GoARadioGroup({
   ml,
   onChange,
 }: GoARadioGroupProps): JSX.Element {
+
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {

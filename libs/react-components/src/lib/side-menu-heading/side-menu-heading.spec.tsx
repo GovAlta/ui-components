@@ -8,6 +8,6 @@ describe("SideMenuHeading", () => {
 
     const el = baseElement.querySelector("goa-side-menu-heading");
     expect(el).toBeTruthy();
-    expect(el.getAttribute("icon")).toBe("home");
+    expect(el?.getAttribute("icon")).toBe("home");
   });
 });

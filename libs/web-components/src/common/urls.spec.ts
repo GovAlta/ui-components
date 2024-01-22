@@ -1,4 +1,5 @@
 import { isUrlMatch } from "./urls";
+import { it } from "vitest";
 
 interface MyTest {
   desc: string;

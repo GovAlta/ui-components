@@ -20,8 +20,8 @@ describe("AppHeaderMenu", () => {
     );
     const el = baseElement.querySelector("goa-app-header-menu");
     expect(el).toBeTruthy();
-    expect(el.querySelector("a[href='#foo']")).toBeTruthy();
-    expect(el.querySelector("a[href='#bar']")).toBeTruthy();
-    expect(el.querySelector("a[href='#boom']")).toBeFalsy();
+    expect(el?.querySelector("a[href='#foo']")).toBeTruthy();
+    expect(el?.querySelector("a[href='#bar']")).toBeTruthy();
+    expect(el?.querySelector("a[href='#boom']")).toBeFalsy();
   });
 });

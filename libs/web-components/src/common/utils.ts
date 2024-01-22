@@ -15,6 +15,10 @@ export function fromBoolean(value: boolean): string {
   return value ? "true" : "false";
 }
 
+export function isValidDate(d: Date): boolean {
+  return !isNaN(d.getDate());
+}
+
 export function validateRequired(componentName: string, props: Record<string, unknown>) {
   Object.entries(props).forEach(prop => {
     if (!prop[1]) {
@@ -28,12 +32,16 @@ export function typeValidator(
   message: string,
   values: string[],
   required = false,
-): [string[], (value: string) => void] {
-  const validator = (value: string): void => {
+): [string[], (value: string | null) => void] {
+  const validator = (value: string | null): void => {
     if (!required && !value) {
       return;
     }
-    if (!values.includes(value)) {
+    if (required && !value) {
+      console.error(`[${value}] is an invalid ${message.toLowerCase()}`);
+      return;
+    }
+    if (!values.includes(value || "")) {
       console.error(`[${value}] is an invalid ${message.toLowerCase()}`);
     }
   };
@@ -81,4 +89,12 @@ export function cssVar(name: string, value: string | number): string {
 export function pluralize(word: string, count: number) {
   if (count === 1) return word;
   return `${word}s`;
+}
+
+export function clamp(value: number, min: number, max: number): number {
+  return value > max
+    ? max
+    : value < min
+      ? min
+      : value
 }

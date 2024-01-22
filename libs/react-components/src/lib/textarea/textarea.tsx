@@ -77,18 +77,28 @@ export function GoATextarea({
       onChange(name, value);
     };
 
+    current.addEventListener("_change", listener);
+    return () => {
+      current.removeEventListener("_change", listener);
+    };
+  }, [el, onChange]);
+
+  
+  useEffect(() => {
+    if (!el.current) {
+      return;
+    }
+    const current = el.current;
     const keypressListener = (e: unknown) => {
       const { name, value, key } = (e as CustomEvent).detail;
       onKeyPress?.(name, value, key);
     }
 
-    current.addEventListener("_change", listener);
     current.addEventListener("_keyPress", keypressListener);
     return () => {
-      current.removeEventListener("_change", listener);
-      current.removeEventListener("_keyPress", listener);
+      current.removeEventListener("_keyPress", keypressListener);
     };
-  }, [el, onChange]);
+  }, [el, onKeyPress]);
 
   return (
     <goa-textarea

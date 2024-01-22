@@ -1,4 +1,4 @@
-<svelte:options tag="goa-three-column-layout" />
+<svelte:options customElement="goa-three-column-layout" />
 
 <!-- Script -->
 <script lang="ts">
@@ -31,8 +31,8 @@
 
     <nav class="nav side-menu">
       <!-- DEPRECATED: sidebar is deprecated  -->
-      <slot name="sidebar"/>
-      <slot name="side-menu"/>
+      <slot name="sidebar" />
+      <slot name="side-menu" />
     </nav>
   </section>
 
@@ -113,7 +113,4 @@
       padding-right: 4.5rem;
     }
   }
-
 </style>
-
-

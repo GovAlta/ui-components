@@ -2,6 +2,24 @@
 
 This project contains the Government of Alberta UI components. This web component project supports multiple frontend frameworks, React and Angular. The project is designed to be used to help bring consistency to all Government of Alberta websites and web applications. It's also being designed to help ease the burden on designers and developers alike throughout the development process.
 
+## Playground Setup
+
+Run the `app-setup.sh` file.
+
+```
+./app-setup.sh
+```
+
+You can then test the playground apps at `localhost:4200` by running one of the following:
+
+```
+npm run dev:angular
+npm run dev:react
+npm run dev:web 
+```
+
+
+
 ## Contribution Guidelines
 
 The design system team is using “Discussions” in the UI-components GitHub repository for managing the creation and assessment of new ideas for platform components, services, and capabilities.
@@ -24,21 +42,21 @@ Opportunities are assessed against WiP limits.
 
 After an assessment, selected “discussions” will be transitioned to “issues” and assigned and prioritized in the different “project” views (Figma, Angular, React, etc.)
 
+## Documentation
+
+You can view the documentation [here](https://design.alberta.ca). This has all the info on how to implement our components, as well as how to get setup to contribute.
+
 ## How to Contribute
 
 You can view how you can contribute [here](contributing.md).
-
-## Storybook
-
-You can view the current storybook [here](https://ui-components.alberta.ca/?path=/story/overview--page). This has all the info on how to implement our components, as well as how to get setup to contribute.
 
 ### Library and Applications
 
 | Library            | Description                                                                                                                               |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | web-components     | Library of native web components. Published to NPM [@abgov/web-components](https://www.npmjs.com/package/@abgov/web-components).          |
-| ~~styles~~         | Deprecated [^1]                                                                                                                           |
 | react-components   | Library of components for React. Published to NPM [@abgov/react-components](https://www.npmjs.com/package/@abgov/react-components).       |
 | angular-components | Library of components for Angular. Published to NPM [@abgov/angular-components](https://www.npmjs.com/package/@abgov/angular-components). |
+| ~~styles~~         | Deprecated [^1]                                                                                                                           |
 
 [^1]: The npm package, @abgov/styles is now deprecated. Import styles(css) from the web-components package. `@import "@abgov/web-components/index.css";`. For more instructions find the appropriate setup documentation [here](https://ui-components.alberta.ca)

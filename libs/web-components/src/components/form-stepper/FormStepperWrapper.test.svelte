@@ -1,9 +1,9 @@
-<svelte:options tag="test-form-step-wrapper" />
+<svelte:options customElement="test-form-step-wrapper" />
 
 <script lang="ts">
   import GoAFormStepper from "./FormStepper.svelte";
 
-  export let step: number = -1;  
+  export let step: number = -1;
 </script>
 
 <GoAFormStepper {step}>

@@ -31,7 +31,7 @@ export interface GoAPaginationProps extends Margins {
 // legacy
 export type PaginationProps = GoAPaginationProps;
 
-export function GoAPagination(props: GoAPaginationProps) {
+export function GoAPagination({onChange, ...props}: GoAPaginationProps) {
   const ref = useRef<HTMLElement>();
 
   useEffect(() => {
@@ -41,14 +41,14 @@ export function GoAPagination(props: GoAPaginationProps) {
     const current = ref.current;
     const changeListener = (e: Event) => {
       const { page } = (e as CustomEvent).detail;
-      props.onChange(page);
+      onChange(page);
     };
 
     current.addEventListener("_change", changeListener);
     return () => {
       current.removeEventListener("_change", changeListener);
     };
-  }, [ref, props.onChange]);
+  }, [ref, onChange]);
 
   return (
     <goa-pagination

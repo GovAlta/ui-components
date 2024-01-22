@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
 import { render, waitFor, fireEvent } from '@testing-library/svelte';
 import GoANotification from './Notification.svelte'
+import { describe, it, expect, vi } from "vitest";
 
 describe('GoANotificationComponent', () => {
 
@@ -19,7 +19,7 @@ describe('GoANotificationComponent', () => {
   });
 
   it("should not render when type is mispelled/invalid", async () => {
-    const mock = jest.spyOn(console, "error").mockImplementation();
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { });
     render(GoANotification, { type: "importantt" });
     await waitFor(() => {
       expect(console.error["mock"].calls.length).toBeGreaterThan(0);
@@ -28,7 +28,7 @@ describe('GoANotificationComponent', () => {
   });
 
   it("Event triggered on notification banner dismiss", async () => {
-    const onDismiss = jest.fn();
+    const onDismiss = vi.fn();
     const { container } = render(GoANotification, { type: "information" });
     const closeIcon = container.querySelector(".close button");
     closeIcon.addEventListener("_dismiss", onDismiss);

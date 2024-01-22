@@ -1,10 +1,10 @@
-<svelte:options tag="test-app-header-wrapper" />
+<svelte:options customElement="test-app-header-wrapper" />
 
 <script lang="ts">
   import GoAAppHeader from "./AppHeader.svelte";
 
   export let heading: string;
-  export let url: string;  
+  export let url: string;
   export let haschildren: boolean = false;
 </script>
 

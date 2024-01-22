@@ -1,6 +1,7 @@
 import FormStepper from './FormStepperWrapper.test.svelte'
 import { fireEvent, render, waitFor } from '@testing-library/svelte'
 import { tick } from 'svelte';
+import { it, describe } from "vitest";
 
 function getProgress(el: Element): number {
   const progress = el.querySelector("progress.horizontal")

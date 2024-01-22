@@ -8,7 +8,7 @@ describe("FormStep", () => {
 
     const el = container.querySelector("goa-form-step");
 
-    expect(el.getAttribute("text")).toBe("Step 1");
-    expect(el.getAttribute("status")).toBe("complete");
+    expect(el?.getAttribute("text")).toBe("Step 1");
+    expect(el?.getAttribute("status")).toBe("complete");
   });
 });

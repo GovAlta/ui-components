@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom";
+import { it, describe } from "vitest";
 
 import { calculateMargin } from "./styling";
 

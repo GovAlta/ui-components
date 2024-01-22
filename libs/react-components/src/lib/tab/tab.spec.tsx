@@ -14,8 +14,8 @@ describe("GoATab", () => {
     );
     expect(container.querySelector("goa-tab")).toBeTruthy();
     const heading = container.querySelector("[slot='heading']");
-    expect(heading.innerHTML).toContain("Profile");
+    expect(heading?.innerHTML).toContain("Profile");
     const content = container.querySelector("p");
-    expect(content.innerHTML).toContain("Lorem ipsum dolor sit amet");
+    expect(content?.innerHTML).toContain("Lorem ipsum dolor sit amet");
   });
 });

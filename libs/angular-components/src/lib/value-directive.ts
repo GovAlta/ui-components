@@ -2,8 +2,7 @@ import { forwardRef, Directive, ElementRef, HostListener } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Directive({
-  selector: "[goaValue]",
-  providers: [
+  selector: "[goaValue]", providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => ValueDirective),
@@ -15,8 +14,8 @@ export class ValueDirective implements ControlValueAccessor {
   private _value = "";
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
   get value(): string {
     return this._value;
@@ -43,7 +42,7 @@ export class ValueDirective implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  constructor(protected elementRef: ElementRef) {}
+  constructor(protected elementRef: ElementRef) { }
 
   @HostListener("_change", ["$event.detail.value"])
   listenForValueChange(value: string) {
@@ -64,8 +63,8 @@ export class ValueDirective implements ControlValueAccessor {
 export class ValueListDirective implements ControlValueAccessor {
   private _value?: string[] = [];
 
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
   get value(): string[] | undefined {
     return this._value;
@@ -92,7 +91,7 @@ export class ValueListDirective implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  constructor(protected elementRef: ElementRef) {}
+  constructor(protected elementRef: ElementRef) { }
 
   @HostListener("_change", ["$event.detail.value"])
   listenForValueChange(value: string) {

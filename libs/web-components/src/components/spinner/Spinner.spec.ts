@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/svelte';
 import GoASpinner from './Spinner.svelte'
+import { it, describe } from "vitest";
 
 describe('GoASpinner', () => {
 

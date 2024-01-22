@@ -1,4 +1,4 @@
-<svelte:options tag="goa-input" />
+<svelte:options customElement="goa-input" />
 
 <script lang="ts" context="module">
   export type GoAInputVariant = "goa" | "bare";
@@ -12,19 +12,30 @@
   import { onMount, tick } from "svelte";
 
   // Validators
-  const [Types, validateType] = typeValidator(
-    "Input type",
-    ["text", "number", "password", "email", "date", "datetime-local", "month", "range", "search", "tel", "time", "url", "week"]
-  );
+  const [Types, validateType] = typeValidator("Input type", [
+    "text",
+    "number",
+    "password",
+    "email",
+    "date",
+    "datetime-local",
+    "month",
+    "range",
+    "search",
+    "tel",
+    "time",
+    "url",
+    "week",
+  ]);
 
   const [AutoCapitalize, validateAutoCapitalize] = typeValidator(
     "Input auto capitalize",
-    ["on", "off", "none", "sentences", "words", "characters"]
+    ["on", "off", "none", "sentences", "words", "characters"],
   );
 
   // Types
-  type Type = typeof Types[number];
-  type AutoCapitalize = typeof AutoCapitalize[number];
+  type Type = (typeof Types)[number];
+  type AutoCapitalize = (typeof AutoCapitalize)[number];
 
   export let type: Type = "text";
   export let name: string = "";
@@ -32,8 +43,8 @@
 
   export let autocapitalize: AutoCapitalize = "off";
   export let placeholder: string = "";
-  export let leadingicon: GoAIconType = null;
-  export let trailingicon: GoAIconType = null;
+  export let leadingicon: GoAIconType | null = null;
+  export let trailingicon: GoAIconType | null = null;
   export let variant: GoAInputVariant = "goa";
   export let disabled: string = "false";
   export let handletrailingiconclick: string = "false";
@@ -42,22 +53,28 @@
   export let error: string = "false";
   export let testid: string = "";
   export let width: string = "30ch";
-  export let arialabel: string = null;
-  export let arialabelledby: string = null;
+  export let arialabel: string = "";
+  export let arialabelledby: string = "";
   export let min: string = "";
   export let max: string = "";
   export let step: number = 1;
   export let prefix: string = "";
   export let suffix: string = "";
   export let debounce: number = 0;
-  export let maxlength: number = null;
+  export let maxlength: number | null = null;
   export let id: string = "";
-
-  // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
+
+  //
+  let _leadingContentSlot = false;
+  let _trailingContentSlot = false;
+  let _debounceId: any;
+
+  let inputEl: HTMLElement;
+  let _rootEl: HTMLElement;
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
@@ -65,22 +82,16 @@
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
 
-  let inputEl: HTMLElement;
-  let _rootEL: HTMLElement;
   $: if (isFocused && inputEl) {
     setTimeout(() => inputEl.focus(), 1);
   }
 
   $: if (inputEl && type === "search") {
-    inputEl.addEventListener("search", e => {
+    inputEl.addEventListener("search", (e) => {
       onKeyUp(e);
     });
   }
 
-  let _leadingContentSlot = false;
-  let _trailingContentSlot = false;
-
-  let _debounceId = null;
   function onKeyUp(e: Event) {
     const input = e.target as HTMLInputElement;
 
@@ -105,28 +116,37 @@
     input.dispatchEvent(
       new CustomEvent("_keyPress", {
         composed: true,
-        detail: { name, value: input.value, key: (e as KeyboardEvent).key }
+        detail: { name, value: input.value, key: (e as KeyboardEvent).key },
       }),
     );
     value = input.value;
   }
 
-  function onFocus(e: Event){
+  function onFocus(e: Event) {
     const input = e.target as HTMLInputElement;
-    input.dispatchEvent(new CustomEvent("_focus", {
-      composed: true,
-      detail: { name, value: input.value } }));
+    input.dispatchEvent(
+      new CustomEvent("_focus", {
+        composed: true,
+        detail: { name, value: input.value },
+      }),
+    );
   }
 
-  function onBlur(e: Event){
+  function onBlur(e: Event) {
     const input = e.target as HTMLInputElement;
-    input.dispatchEvent(new CustomEvent("_blur", {
-      composed: true,
-      detail: { name, value: input.value } }));
+    input.dispatchEvent(
+      new CustomEvent("_blur", {
+        composed: true,
+        detail: { name, value: input.value },
+      }),
+    );
   }
 
   function doClick() {
-    this.dispatchEvent(new CustomEvent("_trailingIconClick", { composed: true }));
+    // @ts-ignore
+    this.dispatchEvent(
+      new CustomEvent("_trailingIconClick", { composed: true }),
+    );
   }
 
   onMount(async () => {
@@ -134,20 +154,29 @@
 
     validateType(type);
     validateAutoCapitalize(autocapitalize);
+
     if (prefix != "" || suffix != "") {
-      console.warn("GoAInput [prefix] and [suffix] properties are deprecated. Instead use leadingContent and trailingContent.");
+      console.warn(
+        "GoAInput [prefix] and [suffix] properties are deprecated. Instead use leadingContent and trailingContent.",
+      );
     }
-    const leadingContentSlot = _rootEL.querySelector("slot[name=leadingContent]") as HTMLSlotElement;
+
+    const leadingContentSlot = _rootEl.querySelector(
+      "slot[name=leadingContent]",
+    ) as HTMLSlotElement;
+
     if (leadingContentSlot && leadingContentSlot.assignedNodes().length > 0) {
       _leadingContentSlot = true;
     }
-    const trailingContentSlot = _rootEL.querySelector("slot[name=trailingContent]") as HTMLSlotElement;
+
+    const trailingContentSlot = _rootEl.querySelector(
+      "slot[name=trailingContent]",
+    ) as HTMLSlotElement;
+
     if (trailingContentSlot && trailingContentSlot.assignedNodes().length > 0) {
       _trailingContentSlot = true;
     }
   });
-
-
 </script>
 
 <!-- HTML -->
@@ -155,7 +184,7 @@
 <div
   class="container"
   style={`--width: ${width};${calculateMargin(mt, mr, mb, ml)}`}
-  bind:this={_rootEL}
+  bind:this={_rootEl}
 >
   <div
     class="goa-input variant--{variant} type--{type}"
@@ -223,6 +252,7 @@
     <!-- Trailing Icon Button -->
     {#if trailingicon && handlesTrailingIconClick}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
       <goa-icon-button
         on:click={doClick}
         disabled={isDisabled}
@@ -283,7 +313,8 @@
 
   .goa-input:hover:not(.leading-content):not(.trailing-content) {
     border-color: var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-hover);
   }
   .goa-input:active:not(.leading-content):not(.trailing-content),
   .goa-input:focus:not(.leading-content):not(.trailing-content),
@@ -366,26 +397,29 @@
 
   .prefix,
   .suffix,
-  .leading-content ::slotted(div),
-  .trailing-content ::slotted(div) {
+  .leading-content :global(::slotted(div)),
+  .trailing-content :global(::slotted(div)) {
     background-color: var(--goa-color-greyscale-100);
     padding: 0 0.75rem;
     display: flex;
     align-items: center;
   }
 
-  .leading-content ::slotted(div), .trailing-content ::slotted(div) {
+  .leading-content :global(::slotted(div)),
+  .trailing-content :global(::slotted(div)) {
     padding: 0.5rem 0.75rem;
   }
 
-  .prefix, .leading-content ::slotted(div) {
+  .prefix,
+  .leading-content :global(::slotted(div)) {
     /* background-clip doesn't want to work */
     border-top-left-radius: var(--goa-border-radius-m);
     border-bottom-left-radius: var(--goa-border-radius-m);
     border-right: 1px solid var(--goa-color-greyscale-700);
   }
 
-  .suffix, .trailing-content ::slotted(div) {
+  .suffix,
+  .trailing-content :global(::slotted(div)) {
     /* background-clip doesn't want to work */
     border-top-right-radius: var(--goa-border-radius-m);
     border-bottom-right-radius: var(--goa-border-radius-m);
@@ -393,12 +427,12 @@
   }
 
   .input--disabled .prefix,
-  .input--disabled .leading-content ::slotted(div) {
+  .input--disabled .leading-content :global(::slotted(div)) {
     border-right: 1px solid var(--goa-color-greyscale-200);
   }
 
   .input--disabled .suffix,
-  .input--disabled .trailing-content ::slotted(div) {
+  .input--disabled .trailing-content :global(::slotted(div)) {
     border-left: 1px solid var(--goa-color-greyscale-200);
   }
 
@@ -435,20 +469,23 @@
   .error .input-trailing-content,
   .error .input-trailing-content:hover {
     outline: var(--goa-border-width-s) solid var(--goa-color-interactive-error);
-    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-error);
+    box-shadow: inset 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-error);
   }
 
   .error .input-leading-content:focus,
   .error .input-trailing-content:focus,
   .error .input-leading-content:active,
-  .error .input-trailing-content:active  {
+  .error .input-trailing-content:active {
     outline: var(--goa-border-width-s) solid var(--goa-color-interactive-error);
-    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus);
   }
 
   .input-leading-content:hover,
   .input-trailing-content:hover {
-    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    box-shadow: inset 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-hover);
     outline: var(--goa-border-width-s) solid var(--goa-color-interactive-hover);
   }
 
@@ -458,7 +495,8 @@
   .input-trailing-content:active,
   .input-trailing-content:focus,
   .input-trailing-content:focus-within {
-    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus);
     outline: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
   }
 
@@ -488,7 +526,10 @@
     border-radius: 0;
   }
 
-  input[type="search"]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-search-cancel-button {
+  input[type="search"]:enabled:read-write:-webkit-any(
+      :focus,
+      :hover
+    )::-webkit-search-cancel-button {
     position: relative;
     right: var(--search-icon-offset);
     cursor: pointer;
@@ -496,7 +537,7 @@
     height: 1.2rem;
     width: 1.2rem;
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>')
-    center center no-repeat;
+      center center no-repeat;
   }
 
   ::-ms-reveal {

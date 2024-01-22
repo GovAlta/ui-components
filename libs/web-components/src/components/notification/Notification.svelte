@@ -1,4 +1,4 @@
-<svelte:options tag="goa-notification" />
+<svelte:options customElement="goa-notification" />
 
 <!-- Script -->
 <script lang="ts">
@@ -9,12 +9,12 @@
   // Validator
   const [Types, validateType] = typeValidator(
     "Notification type",
-    ["emergency", "important", "information", "event"],
+    ["emergency", "important", "information", "event"] as const,
     true,
   );
   const [AriaLiveTypes, validateAriaLiveType] = typeValidator(
     "Aria-Live type",
-    ["assertive", "off", "polite"],
+    ["assertive", "off", "polite"] as const,
     true,
   );
 
@@ -31,42 +31,55 @@
     type === "emergency"
       ? "warning"
       : type === "important"
-      ? "alert-circle"
-      : type === "information"
-      ? "information-circle"
-      : type === "event"
-      ? "calendar"
-      : "";
+        ? "alert-circle"
+        : type === "information"
+          ? "information-circle"
+          : type === "event"
+            ? "calendar"
+            : "";
 
   onMount(() => {
     validateAriaLiveType(arialive);
     setTimeout(() => validateType(type), 1);
-  })
+  });
 
   function close(e: Event) {
     show = false;
-    e.target.dispatchEvent(new CustomEvent("_dismiss", { composed: true }));
+    e.target?.dispatchEvent(new CustomEvent("_dismiss", { composed: true }));
     e.stopPropagation();
   }
 </script>
 
 <!-- HTML -->
 {#if show}
-  <div transition:fade class="notification {type}" style={`--max-content-width: ${maxcontentwidth}`}>
-    <div class="content-container" role="alert" aria-live={arialive} aria-atomic="true">
+  <div
+    transition:fade
+    class="notification {type}"
+    style={`--max-content-width: ${maxcontentwidth}`}
+  >
+    <div
+      class="content-container"
+      role="alert"
+      aria-live={arialive}
+      aria-atomic="true"
+    >
       <div class="icon">
-        <goa-icon type={iconType} inverted={type === "important" ? "false" : "true"} />
+        <goa-icon
+          type={iconType}
+          inverted={type === "important" ? "false" : "true"}
+        />
       </div>
       <div class="content">
         <slot />
       </div>
       <div class="close">
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <button
-            class={type}
-            on:click={close}>
-            <goa-icon type="close" inverted={type === "important" ? "false" : "true"} />
-          </button>
+        <button class={type} on:click={close}>
+          <goa-icon
+            type="close"
+            inverted={type === "important" ? "false" : "true"}
+          />
+        </button>
       </div>
     </div>
   </div>
@@ -95,7 +108,6 @@
     }
   }
 
-
   .emergency {
     background-color: var(--goa-color-emergency-default);
     color: var(--goa-color-text-light);
@@ -106,7 +118,8 @@
     color: var(--goa-color-text-default);
   }
 
-  .information, .event {
+  .information,
+  .event {
     background-color: var(--goa-color-info-default);
     color: var(--goa-color-text-light);
   }
@@ -128,16 +141,16 @@
     flex: 1 1 auto;
   }
 
-  ::slotted(a) {
+  :global(::slotted(a)) {
     color: unset !important;
     outline: unset !important;
   }
-  ::slotted(a:focus){
-    outline: auto!important;
+  :global(::slotted(a:focus)) {
+    outline: auto !important;
     border-radius: var(--goa-border-radius-m);
   }
-  .notification.important ::slotted(a:focus) {
-    outline: unset!important;
+  .notification.important :global(::slotted(a:focus)) {
+    outline: unset !important;
     box-shadow: 0 0 0 3px var(--goa-color-greyscale-black);
     border-radius: var(--goa-border-radius-m);
   }
@@ -160,11 +173,11 @@
   .close button.information:hover,
   .close button.information:focus,
   .close button.event:hover,
-  .close button.event:focus{
+  .close button.event:focus {
     background-color: var(--goa-color-info-dark);
   }
   .close button.information:focus,
-  .close button.event:focus{
+  .close button.event:focus {
     box-shadow: 0 0 0 3px var(--goa-color-greyscale-white);
   }
   /*Important close button*/

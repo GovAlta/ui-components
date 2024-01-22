@@ -1,9 +1,9 @@
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/svelte';
-import GoATwoColumnLayout from './TwoColumnLayoutWrapper.test.svelte'
+import { render } from "@testing-library/svelte";
+import GoATwoColumnLayout from "./TwoColumnLayoutWrapper.test.svelte"
+import { it, describe } from "vitest";
 
-describe('GoAAppHeader', () => {
-  it('should render', async () => {
+describe("GoAAppHeader", () => {
+  it("should render", async () => {
     const baseElement = render(GoATwoColumnLayout);
     const el = baseElement.container;
     const header = el.querySelector("[slot=header]")
@@ -15,6 +15,6 @@ describe('GoAAppHeader', () => {
     expect(header).toBeTruthy();
     expect(footer).toBeTruthy();
     expect(nav).toBeTruthy();
-    expect(nav.querySelectorAll("a").length).toBe(5)
+    expect(nav?.querySelectorAll("a").length).toBe(5)
   });
 });

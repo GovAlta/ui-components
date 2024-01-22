@@ -1,26 +1,33 @@
 import FormStep from './FormStep.svelte'
-import { fireEvent, render, waitFor } from '@testing-library/svelte'
+import { RenderResult, fireEvent, render, waitFor } from '@testing-library/svelte'
+import { SvelteComponent } from 'svelte';
+import { describe, it, expect, vi } from "vitest";
 
-function getProps(el) {
+type Props = {
+  root: HTMLElement | null;
+  status: HTMLElement | null;
+  text: HTMLElement | null;
+  childIndex: HTMLElement | null;
+}
+
+function getProps(el: RenderResult<SvelteComponent>): Props {
   const root = el.queryByRole("listitem")
   const status = el.queryByTestId("status")
   const text = el.queryByTestId("text")
-  const childIndex = el.queryByTestId("child-index")
+  const childIndex = el.queryByTestId("step-number")
 
   return { root, status, text, childIndex }
 }
 
-describe.skip("FormStep", () => {
-  
+describe("FormStep", () => {
+
   it('it renders the default step', async () => {
-    const mock = jest.spyOn(console, "warn").mockImplementation();
-    const el = render(FormStep, { text: "Some form" })
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
+    const el = render(FormStep, { text: "Some form", childindex: "1" })
     const props = getProps(el);
 
-    expect(props.text.innerHTML).toContain("Some form")
-    expect(props.root.dataset.status).toBe("") // default
-    expect(props.status.querySelector(".step-number")).toBeTruthy();
-    expect(props.root.getAttribute("aria-disabled")).toBeTruthy();
+    expect(props.text?.innerHTML).toContain("Some form")
+    expect(props.status?.querySelector("[data-testid=step-number]")?.innerHTML).toBe("1");
 
     // no warning messages expected
     await waitFor(() => {
@@ -30,7 +37,7 @@ describe.skip("FormStep", () => {
   })
 
   it("requires a text value", async () => {
-    const mock = jest.spyOn(console, "warn").mockImplementation();
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
     render(FormStep, { /* no text */ })
 
     // 1 warning
@@ -41,25 +48,31 @@ describe.skip("FormStep", () => {
   })
 
   it("emits a _click event", async () => {
-    const click = jest.fn()
+    const click = vi.fn()
     const el = render(FormStep, { text: "Some form", enabled: true })
     const props = getProps(el);
 
-    props.root.addEventListener("_click", click)
+    expect(props.root).toBeTruthy();
+    expect(props.status).toBeTruthy();
 
-    await fireEvent.click(props.status)
+    props.root?.addEventListener("_click", click)
+
+    props.status && await fireEvent.click(props.status)
 
     expect(click).toBeCalled()
   })
 
   it("won't emit event when clicked if disabled", async () => {
-    const click = jest.fn()
+    const click = vi.fn()
     const el = render(FormStep, { text: "Some form", enabled: false })
     const props = getProps(el);
 
-    props.root.addEventListener("_click", click)
+    expect(props.root).toBeTruthy();
+    expect(props.status).toBeTruthy();
 
-    await fireEvent.click(props.status)
+    props.root?.addEventListener("_click", click)
+
+    props.status && await fireEvent.click(props.status)
 
     expect(click).not.toBeCalled()
   })
@@ -68,33 +81,42 @@ describe.skip("FormStep", () => {
     const el = render(FormStep, { text: "Some form", current: true })
     const props = getProps(el);
 
-    expect(props.root.getAttribute("aria-current")).toBe("step")
+    expect(props.root).toBeTruthy();
+    expect(props.root?.getAttribute("aria-current")).toBe("step")
   })
 
   it("renders a complete status", () => {
     const el = render(FormStep, { text: "Some form", status: "complete" })
     const props = getProps(el);
 
-    expect(props.root.dataset.status).toBe("complete")
+    expect(props.root).toBeTruthy();
+    expect(props.root?.dataset["status"]).toBe("complete")
   })
 
   it("renders an incomplete status", () => {
     const el = render(FormStep, { text: "Some form", status: "incomplete" })
     const props = getProps(el);
 
-    expect(props.root.dataset.status).toBe("incomplete")
+    expect(props.root).toBeTruthy();
+    expect(props.root?.dataset["status"]).toBe("incomplete")
   })
 
   it("renders the step number", () => {
     const el = render(FormStep, { text: "Some form", childindex: 2 })
     const props = getProps(el);
 
-    expect(props.childIndex.innerHTML).toBe("2")
+    expect(props.childIndex).toBeTruthy();
+    expect(props.childIndex?.innerHTML).toBe("2")
   })
 
   it("renders the aria label", () => {
-    const { queryByRole } = render(FormStep, { text: "Some form", arialabel: "1 of 4" })
-
-    expect(queryByRole("checkbox").getAttribute("aria-label")).toBe("1 of 4")
+    const { queryByRole } = render(FormStep, {
+      text: "Some form",
+      arialabel: "1 of 4",
+      enabled: true
+    });
+    const label = queryByRole("listitem")?.getAttribute("aria-label")
+    expect(label).toBeTruthy();
+    expect(label).toContain("1 of 4")
   })
 })

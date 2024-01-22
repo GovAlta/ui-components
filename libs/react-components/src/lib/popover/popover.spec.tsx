@@ -8,7 +8,7 @@ describe("Popover", () => {
     );
 
     const el = baseElement.querySelector("goa-popover");
-    expect(el.querySelector("[slot='target']").innerHTML).toContain(
+    expect(el?.querySelector("[slot='target']")?.innerHTML).toContain(
       "Click Action"
     );
     expect(baseElement.innerHTML).toContain("The content");
@@ -27,7 +27,7 @@ describe("Popover", () => {
     );
 
     const el = baseElement.querySelector("goa-popover");
-    expect(el.getAttribute("maxwidth")).toBe("500px");
-    expect(el.getAttribute("padded")).toBe("false");
+    expect(el?.getAttribute("maxwidth")).toBe("500px");
+    expect(el?.getAttribute("padded")).toBe("false");
   });
 });

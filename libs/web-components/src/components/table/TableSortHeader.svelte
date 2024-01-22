@@ -1,12 +1,26 @@
-<svelte:options tag="goa-table-sort-header" />
+<svelte:options customElement="goa-table-sort-header" />
 
 <script context="module" lang="ts">
-  export type Direction = "asc" | "desc" | "none"
+  export type GoATableSortDirection = "asc" | "desc" | "none";
 </script>
 
 <script lang="ts">
-  export let direction: Direction = "none";
+  export let direction: GoATableSortDirection = "none";
 </script>
+
+<button>
+  <slot />
+  {#if direction === "desc"}
+    <goa-icon type="caret-down" size="small" />
+  {:else if direction === "asc"}
+    <goa-icon type="caret-up" size="small" />
+  {:else}
+    <div class="direction--none">
+      <goa-icon type="caret-up" size="small" />
+      <goa-icon type="caret-down" size="small" />
+    </div>
+  {/if}
+</button>
 
 <style>
   :host {
@@ -64,19 +78,4 @@
     flex-direction: column;
     align-items: center;
   }
-
 </style>
-
-<button>
-  <slot />
-  {#if direction === "desc"}
-    <goa-icon type="caret-down" size="small" />
-  {:else if direction === "asc"}
-    <goa-icon type="caret-up" size="small" />
-  {:else}
-    <div class="direction--none">
-      <goa-icon type="caret-up" size="small" />
-      <goa-icon type="caret-down" size="small" />
-    </div>
-  {/if}
-</button>

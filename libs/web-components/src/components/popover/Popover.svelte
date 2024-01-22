@@ -1,10 +1,11 @@
-<svelte:options tag="goa-popover" />
+<svelte:options customElement="goa-popover" />
 
 <!-- Script -->
 <script lang="ts">
   import { onMount, tick } from "svelte";
-  import { calculateMargin, Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
   import { cssVar, toBoolean } from "../../common/utils";
+  import type { Spacing } from "../../common/styling";
 
   // Public
 
@@ -62,8 +63,8 @@
   $: _disabled = toBoolean(disabled);
   $: _relative = toBoolean(relative);
 
-  $: (async () => _open && await setPopoverPosition())()
-  $: (async () => _sectionHeight && await setPopoverPosition())()
+  $: (async () => _open && (await setPopoverPosition()))();
+  $: (async () => _sectionHeight && (await setPopoverPosition()))();
   $: {
     if (_open) {
       window.addEventListener("popstate", handleUrlChange, true);
@@ -78,19 +79,20 @@
     await tick();
     _targetEl.addEventListener("keydown", onTargetEvent);
 
-    const slot =  _targetEl.querySelector("slot");
+    const slot = _targetEl.querySelector("slot");
     let children: Element[];
     if (slot) {
       children = slot.assignedElements();
     } else {
       // for unit tests only
+      // @ts-expect-error
       children = [..._targetEl.children] as Element[];
     }
 
     _initFocusedEl =
-      children
-      .find(el => (el as HTMLElement).tabIndex >= 0) as HTMLElement
-      || _targetEl;
+      (children.find(
+        (el) => (el as HTMLElement).tabIndex >= 0,
+      ) as HTMLElement) || _targetEl;
   });
 
   // Functions
@@ -128,12 +130,12 @@
   // Opens the popover and adds the required binding to the new slot element
   function openPopover() {
     if (_disabled) return;
-    ;(async () => {
+    (async () => {
       _open = true;
       await tick();
       _focusTrapEl.addEventListener("keydown", onFocusTrapEvent, true);
-      _rootEl.dispatchEvent(new CustomEvent("_open", { composed: true }))
-    })()
+      _rootEl.dispatchEvent(new CustomEvent("_open", { composed: true }));
+    })();
   }
 
   // Ensures that upon closing of the popover that the element that triggered
@@ -143,11 +145,12 @@
     _initFocusedEl.focus();
     _open = false;
     window.removeEventListener("popstate", handleUrlChange, true);
-    _rootEl.dispatchEvent(new CustomEvent("_close", { composed: true }))
+    _rootEl.dispatchEvent(new CustomEvent("_close", { composed: true }));
   }
 
-  function getBoundingClientRectWithMargins(el: Element): Omit<DOMRect, "toJSON"> {
-
+  function getBoundingClientRectWithMargins(
+    el: Element,
+  ): Omit<DOMRect, "toJSON"> {
     const rect = el.getBoundingClientRect();
     const style = window.getComputedStyle(el);
     const mTop = parseInt(style.marginTop, 10) || 0;
@@ -182,12 +185,14 @@
     // Determine if there's more space above or below the target element
     const displayOnTop =
       position === "auto"
-      ? spaceBelow < contentRect.height && spaceAbove > contentRect.height && spaceAbove > spaceBelow
-      : position === "above";
+        ? spaceBelow < contentRect.height &&
+          spaceAbove > contentRect.height &&
+          spaceAbove > spaceBelow
+        : position === "above";
 
     // when popover is within a modal and the scrollbars are hidden we don't need to take into
     // account the scroll offset
-    const usingNoScroll = document.body.style.overflow === "hidden"
+    const usingNoScroll = document.body.style.overflow === "hidden";
     const windowOffset = usingNoScroll ? 0 : window.scrollY;
 
     // If there's more space above, display the popover above the target element
@@ -203,8 +208,8 @@
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
     const displayOnRight =
-      document.body.clientWidth - targetRect.left < contentRect.width
-      && targetRect.left > contentRect.width;
+      document.body.clientWidth - targetRect.left < contentRect.width &&
+      targetRect.left > contentRect.width;
 
     if (_relative) {
       if (displayOnRight) {
@@ -226,18 +231,21 @@
   bind:this={_rootEl}
   data-testid={testid}
   style={`
-    ${width && `width: ${width};`}
-    ${_relative && "position: relative;" || ""}
+    ${(_relative && "position: relative;") || ""}
     ${calculateMargin(mt, mr, mb, ml)}
     ${cssVar("--offset-top", voffset)}
     ${cssVar("--offset-bottom", voffset)}
     ${cssVar("--offset-left", hoffset)}
     ${cssVar("--offset-right", hoffset)}
     ${cssVar("--focus-border-width", focusborderwidth)}
-    ${cssVar("--border-radius", borderradius)
-  }
-`}>
-  <div class="popover-target"
+    ${cssVar("--border-radius", borderradius)}
+`}
+>
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+  <div
+    class="popover-target"
     tabindex={+tabindex}
     bind:this={_targetEl}
     on:click={openPopover}
@@ -247,6 +255,7 @@
   </div>
 
   {#if _open}
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
       data-testid="popover-background"
@@ -312,7 +321,7 @@
     margin-right: var(--offset-right, 0);
   }
 
-  ::slotted(ul) {
+  :global(::slotted(ul)) {
     display: block;
     padding: 0;
     margin: 0;

@@ -1,13 +1,13 @@
-import "@testing-library/jest-dom";
 import { render, cleanup, fireEvent, waitFor } from "@testing-library/react";
 import { GoADropdown } from "./dropdown";
 import { GoADropdownItem, GoADropdownOption } from "./dropdown-item";
+import { describe, it, expect, vi } from "vitest";
 
 afterEach(cleanup);
 
 describe("GoADropdown", () => {
   it("should inform the user that GoADropdownOption is deprecated", async () => {
-    const mock = jest.spyOn(console, "warn").mockImplementation();
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => {});
     render(
       <GoADropdown onChange={() => {}}>
         <GoADropdownOption value="foo" />
@@ -15,6 +15,7 @@ describe("GoADropdown", () => {
     );
 
     await waitFor(() => {
+      // @ts-expect-error: console mock
       expect(console.warn["mock"].calls.length).toBe(1);
     });
     mock.mockRestore();
@@ -49,19 +50,19 @@ describe("GoADropdown", () => {
     );
 
     const el = baseElement.querySelector("goa-dropdown");
-    expect(el.getAttribute("leadingicon")).toBe("color-wand");
-    expect(el.getAttribute("mt")).toBe("s");
-    expect(el.getAttribute("mr")).toBe("m");
-    expect(el.getAttribute("mb")).toBe("l");
-    expect(el.getAttribute("ml")).toBe("xl");
-    expect(el.getAttribute("id")).toBe("foo-dropdown");
-    expect(el.getAttribute("filterable")).toBe("true");
-    expect(el.getAttribute("arialabel")).toBe("label");
-    expect(el.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
+    expect(el?.getAttribute("leadingicon")).toBe("color-wand");
+    expect(el?.getAttribute("mt")).toBe("s");
+    expect(el?.getAttribute("mr")).toBe("m");
+    expect(el?.getAttribute("mb")).toBe("l");
+    expect(el?.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("id")).toBe("foo-dropdown");
+    expect(el?.getAttribute("filterable")).toBe("true");
+    expect(el?.getAttribute("arialabel")).toBe("label");
+    expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
   });
 
   it("should allow for a single selection", async () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
 
     const { baseElement } = render(
       <GoADropdown name="favColor" value="yellow" onChange={fn} native={true}>
@@ -72,7 +73,9 @@ describe("GoADropdown", () => {
     );
 
     const el = baseElement.querySelector("goa-dropdown");
-    fireEvent(
+    expect(el).toBeTruthy();
+    
+    el && fireEvent(
       el,
       new CustomEvent("_change", {
         detail: { name: "favColor", value: "blue" },

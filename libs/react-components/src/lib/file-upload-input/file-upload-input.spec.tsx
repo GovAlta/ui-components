@@ -1,4 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
 
 import FileUploadInput from "./file-upload-input";
 
@@ -16,16 +17,16 @@ describe("FileUploadInput", () => {
     );
     const el = baseElement.querySelector("goa-file-upload-input");
 
-    expect(el.getAttribute("maxfilesize")).toBe("10MB");
-    expect(el.getAttribute("accept")).toBe("image/*");
-    expect(el.getAttribute("variant")).toBe("dragdrop");
+    expect(el?.getAttribute("maxfilesize")).toBe("10MB");
+    expect(el?.getAttribute("accept")).toBe("image/*");
+    expect(el?.getAttribute("variant")).toBe("dragdrop");
   });
 
   it("handles the onSelectFile event", () => {
-    const onSelect = jest.fn();
+    const onSelect = vi.fn();
     const { baseElement } = render(<FileUploadInput onSelectFile={onSelect} />);
     const el = baseElement.querySelector("goa-file-upload-input");
-    fireEvent(el, new CustomEvent("_selectFile", { detail: {} }));
+    el && fireEvent(el, new CustomEvent("_selectFile", { detail: {} }));
 
     expect(onSelect).toBeCalled();
   });

@@ -23,17 +23,17 @@ describe("Container", () => {
     const el = container.querySelector("goa-container");
 
     expect(el).toBeTruthy();
-    expect(el.getAttribute("type")).toEqual("interactive");
-    expect(el.getAttribute("accent")).toEqual("thick");
-    expect(el.getAttribute("padding")).toEqual("relaxed");
-    expect(el.getAttribute("mt")).toBe("s");
-    expect(el.getAttribute("mr")).toBe("m");
-    expect(el.getAttribute("mb")).toBe("l");
-    expect(el.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("type")).toEqual("interactive");
+    expect(el?.getAttribute("accent")).toEqual("thick");
+    expect(el?.getAttribute("padding")).toEqual("relaxed");
+    expect(el?.getAttribute("mt")).toBe("s");
+    expect(el?.getAttribute("mr")).toBe("m");
+    expect(el?.getAttribute("mb")).toBe("l");
+    expect(el?.getAttribute("ml")).toBe("xl");
 
-    expect(el.querySelector("*[slot=title]").innerHTML).toContain("Text title");
+    expect(el?.querySelector("*[slot=title]")?.innerHTML).toContain("Text title");
     expect(
-      el.querySelector("*[slot=actions]").querySelector("goa-button")
+      el?.querySelector("*[slot=actions]")?.querySelector("goa-button")
     ).not.toBeFalsy();
   });
 });

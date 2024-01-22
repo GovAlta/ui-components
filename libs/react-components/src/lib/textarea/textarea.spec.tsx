@@ -1,5 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import GoATextArea from "./textarea";
+import { describe, it, expect, vi } from "vitest";
 
 describe("TextArea", () => {
   it("renders the text area", async () => {
@@ -36,7 +37,7 @@ describe("TextArea", () => {
   });
 
   it("handles the onChange event", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const newValue = "new-value";
 
     render(

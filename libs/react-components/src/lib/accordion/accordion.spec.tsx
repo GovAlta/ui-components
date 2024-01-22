@@ -27,10 +27,10 @@ describe("Accordion", () => {
       </GoAAccordion>
     );
     const el = baseElement.querySelector("goa-accordion");
-    const headingContent = el.querySelector("[slot='headingcontent']");
-    expect(el.getAttribute("secondarytext")).toBe("Secondary Text");
-    expect(el.getAttribute("open")).toBe("true");
-    const badge = headingContent.querySelector("goa-badge");
-    expect(badge.getAttribute("content")).toBe("test-badge");
+    const headingContent = el?.querySelector("[slot='headingcontent']");
+    expect(el?.getAttribute("secondarytext")).toBe("Secondary Text");
+    expect(el?.getAttribute("open")).toBe("true");
+    const badge = headingContent?.querySelector("goa-badge");
+    expect(badge?.getAttribute("content")).toBe("test-badge");
   });
 });

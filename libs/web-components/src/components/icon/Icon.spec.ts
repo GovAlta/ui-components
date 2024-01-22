@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
 import { render } from '@testing-library/svelte';
 import GoAIcon from './Icon.svelte'
+import { it, describe } from "vitest";
 
 describe("Icon", () => {
   describe("Margins", () => {
@@ -22,7 +22,7 @@ describe("Icon", () => {
       expect(icon).toHaveStyle("margin-left:var(--goa-space-xl)");
       expect(icon.getAttribute("role")).toBe("img");
     });
-    it("should render the goa-icon with accessibility add-ons attribute accordingly", async() => {
+    it("should render the goa-icon with accessibility add-ons attribute accordingly", async () => {
       const baseElement = render(GoAIcon, {
         testid: "icon-test",
         type: "ellipse",
@@ -42,7 +42,7 @@ describe("Icon", () => {
         testid: "icon-test",
         type: "ellipse",
         arialabel: "aria-label-test",
-        });
+      });
       const icon = await baseElement.findByTestId("icon-test");
       expect(icon).toBeTruthy();
       expect(icon.getAttribute("role")).toBe("img");

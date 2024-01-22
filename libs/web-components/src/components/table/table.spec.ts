@@ -1,6 +1,7 @@
 import TableWrapper from './TableWrapper.test.svelte'
 import { render } from '@testing-library/svelte'
 import Table from './Table.svelte';
+import { it, describe } from "vitest";
 
 describe("GoATable", () => {
 

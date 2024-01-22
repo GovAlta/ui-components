@@ -26,12 +26,12 @@ describe("GoA Badge", () => {
     );
     const el = container.querySelector("goa-badge");
 
-    expect(el.getAttribute("type")).toBe("information");
-    expect(el.getAttribute("content")).toBe("Text Content");
-    expect(el.getAttribute("mt")).toBe("s");
-    expect(el.getAttribute("mr")).toBe("m");
-    expect(el.getAttribute("mb")).toBe("l");
-    expect(el.getAttribute("ml")).toBe("xl");
-    expect(el.getAttribute("arialabel")).toBe("text");
+    expect(el?.getAttribute("type")).toBe("information");
+    expect(el?.getAttribute("content")).toBe("Text Content");
+    expect(el?.getAttribute("mt")).toBe("s");
+    expect(el?.getAttribute("mr")).toBe("m");
+    expect(el?.getAttribute("mb")).toBe("l");
+    expect(el?.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("arialabel")).toBe("text");
   });
 });

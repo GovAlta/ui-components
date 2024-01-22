@@ -1,6 +1,6 @@
-import "@testing-library/jest-dom";
 import { fireEvent, render, waitFor } from "@testing-library/svelte";
 import GoATextArea from "./TextArea.svelte";
+import { describe, it, expect, vi } from "vitest";
 
 describe("GoATextArea", () => {
   it("should render", async () => {
@@ -23,7 +23,7 @@ describe("GoATextArea", () => {
   });
 
   it("handles the change event", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const result = render(GoATextArea, {
       name: "name",
       testid: "test-id",
@@ -44,7 +44,7 @@ describe("GoATextArea", () => {
   });
 
   it("handles the keypress event", async () => {
-    const onKeyPress = jest.fn();
+    const onKeyPress = vi.fn();
     const result = render(GoATextArea, {
       name: "name",
       value: "foo",
@@ -67,7 +67,7 @@ describe("GoATextArea", () => {
   });
 
   it("can be disabled", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const result = render(GoATextArea, {
       name: "name",
       value: "foo",

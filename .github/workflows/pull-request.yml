@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: "20"
       - uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -26,9 +26,9 @@ jobs:
       # Run with the target branch as the base.
       - name: Lint
         run: npx nx affected --target=lint --base=origin/${{ github.base_ref }}
-      - name: Test
-        run: npx nx affected --target=test --base=origin/${{ github.base_ref }}
       - name: Build
         run: |
           npx nx affected --target=build --base=origin/${{ github.base_ref }}
           npx nx affected --target=post --base=origin/${{ github.base_ref }}
+      - name: Test
+        run: npm run test

@@ -1,13 +1,11 @@
-# GoA Web components
+# web-components
 
-This library contains custom components from the Government of Alberta.
+This library was generated with [Nx](https://nx.dev).
 
-### [View Angular Setup](https://ui-components.alberta.ca/?path=/docs/setup-angular--page)
+## Building
 
-### [View React Setup](https://ui-components.alberta.ca/?path=/docs/setup-react--page)
+Run `nx build web-components` to build the library.
 
-### [View Vue Setup](https://ui-components.alberta.ca/?path=/docs/setup-vue--page)
+## Running unit tests
 
----
-
-[Visit Design System](https://ui-components.alberta.ca)
+Run `nx test web-components` to execute the unit tests via [Vitest](https://vitest.dev/).

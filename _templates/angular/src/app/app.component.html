@@ -1,0 +1,30 @@
+<goa-one-column-layout>
+  <section slot="header">
+    <goa-microsite-header type="alpha" version="UAT" />
+    <goa-app-header url="/" heading="Design System">
+      <a href="/login">Sign in</a>
+    </goa-app-header>
+  </section>
+
+  <div style="display: flex;">
+    <section style="flex: 0 0 250px;">
+      <goa-side-menu>
+        <goa-side-menu-group heading="Components">
+
+          <!-- Add links here -->
+          <!-- <a routerLink="/accordion"> Accordion </a> -->
+
+        </goa-side-menu-group>
+
+        <!-- Add links here -->
+
+      </goa-side-menu>
+    </section>
+
+    <router-outlet></router-outlet>
+  </div>
+
+  <section slot="footer">
+    <goa-app-footer />
+  </section>
+</goa-one-column-layout>
