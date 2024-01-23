@@ -51,6 +51,7 @@ export default function ButtonGroup() {
           type="primary"
           size="compact"
           onClick={() => console.log("clicked")}
+          testId="primaryCompactButton"
         >
           Primary
         </GoAButton>
@@ -58,6 +59,7 @@ export default function ButtonGroup() {
           type="submit"
           size="compact"
           onClick={() => console.log("clicked")}
+          testId="submitCompactButton"
         >
           Submit
         </GoAButton>
@@ -65,6 +67,7 @@ export default function ButtonGroup() {
           type="secondary"
           size="compact"
           onClick={() => console.log("clicked")}
+          testId="secondaryCompactButton"
         >
           Secondary
         </GoAButton>
