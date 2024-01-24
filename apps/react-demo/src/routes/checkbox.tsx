@@ -33,6 +33,7 @@ export default function Checkbox() {
         value={10}
         checked={desserts1}
         onChange={(name, checked, value) => onChange1(name, checked, value)}
+        testId="basicCheckbox"
       ></GoACheckbox>
 
       <h2>Checked</h2>
@@ -42,6 +43,7 @@ export default function Checkbox() {
         value="10"
         checked={desserts2}
         onChange={(name, checked, value) => onChange2(name, checked, value)}
+        testId="defaultCheckedCheckbox"
       ></GoACheckbox>
 
       <h2>Disabled</h2>
@@ -51,6 +53,7 @@ export default function Checkbox() {
         value="10"
         disabled
         checked={false}
+        testId="disabledCheckbox"
       ></GoACheckbox>
 
       <h2>Error</h2>
@@ -61,6 +64,7 @@ export default function Checkbox() {
         checked={desserts3}
         onChange={(name, checked, value) => onChange3(name, checked, value)}
         error
+        testId="errorCheckbox"
       ></GoACheckbox>
 
       <h2>Aria Label</h2>
