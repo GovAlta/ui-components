@@ -6,9 +6,16 @@ This is the web component library and utilizes Angular's web component integrati
 
 ### Add Dependencies
 
+Angular >=16 dependencies
 ```bash
 npm i @abgov/web-components
 npm i @abgov/angular-components
+```
+
+Angular <16 dependencies
+```bash
+npm i @abgov/web-components
+npm i @abgov/angular-components@2.5.0
 ```
 
 ### Icons
