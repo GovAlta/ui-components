@@ -7,7 +7,7 @@ type CountBy = "character" | "word";
 interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
   name: string;
-  value: string;
+  value?: string;
   placeholder?: string;
   rows?: number;
   error?: boolean;
@@ -27,10 +27,9 @@ declare global {
   }
 }
 
-
 export interface GoATextAreaProps extends Margins {
   name: string;
-  value: string;
+  value?: string;
   id?: string;
   placeholder?: string;
   rows?: number;
