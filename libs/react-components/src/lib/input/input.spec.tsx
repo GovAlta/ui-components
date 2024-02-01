@@ -1,12 +1,12 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
-import { GoAInputDateTime, GoAInputText, InputProps } from "./input";
+import { GoAInputDateTime, GoAInputText, GoAInputProps, GoAInputNumber} from "./input";
 import { GoAIconType } from "../icon/icon";
 
 const noop = () => {};
 const testId = "test-id";
-const defaultProps: InputProps = {
+const defaultProps: GoAInputProps = {
   name: "",
   value: "",
   testId: testId,
@@ -15,7 +15,7 @@ const defaultProps: InputProps = {
 
 describe("Input", () => {
   it("should render", () => {
-    const props: InputProps = {
+    const props: GoAInputProps = {
       ...defaultProps,
       name: "foo",
       value: "bar",
@@ -127,4 +127,25 @@ describe("Input", () => {
     );
     expect(mockOnChangeHandler).toBeCalledWith("dateInput", new Date(newDate));
   });
+
+  it("should handle decimal number for GoAInputNumber", () => {
+    const mockOnChangeHandler = jest.fn();
+    const {container} = render(
+      <GoAInputNumber onChange={mockOnChangeHandler} name="numberInput" value={1}/>
+    );
+
+    const inputElement = container.querySelector("goa-input[type='number']");
+    expect(inputElement).toBeTruthy();
+    const decimalValue = 1.3;
+    inputElement && fireEvent(
+      inputElement,
+      new CustomEvent("_change", {
+        detail: {
+          name: "numberInput",
+          value: decimalValue
+        }
+      })
+    );
+    expect(mockOnChangeHandler).toBeCalledWith("numberInput", decimalValue);
+  })
 });
