@@ -379,16 +379,16 @@ export function GoAInputNumber({
   ...props
 }: GoANumberInputProps): JSX.Element {
   const onNumberChange = (name: string, value: string) => {
-    props.onChange(name, parseInt(value));
+    props.onChange(name, parseFloat(value));
   };
   const onFocus = (name: string, value: string) => {
-    props.onFocus?.(name, parseInt(value));
+    props.onFocus?.(name, parseFloat(value));
   };
   const onBlur = (name: string, value: string) => {
-    props.onBlur?.(name, parseInt(value));
+    props.onBlur?.(name, parseFloat(value));
   };
   const onKeyPress = (name: string, value: string, key: string) => {
-    props.onKeyPress?.(name, parseInt(value), key);
+    props.onKeyPress?.(name, parseFloat(value), key);
   };
   return (
     <GoAInput
