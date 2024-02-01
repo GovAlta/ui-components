@@ -32,7 +32,7 @@ interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
   type?: GoAInputType;
   name: string;
-  value: string;
+  value?: string;
   id?: string;
   autocapitalize?: GoAAutoCapitalize;
   debounce?: number;
@@ -97,9 +97,10 @@ type OnChange<T = string> = (name: string, value: T) => void;
 type OnFocus<T = string> = (name: string, value: T) => void;
 type OnBlur<T = string> = (name: string, value: T) => void;
 type OnKeyPress<T = string> = (name: string, value: T, key: string) => void;
+
 export interface GoAInputProps extends BaseProps {
   onChange: OnChange<string>;
-  value: string;
+  value?: string;
   min?: number | string;
   max?: number | string;
   step?: number;
@@ -110,7 +111,7 @@ export interface GoAInputProps extends BaseProps {
 
 interface GoANumberInputProps extends BaseProps {
   onChange: OnChange<number>;
-  value: number;
+  value?: number;
   min?: number;
   max?: number;
   step?: number;
@@ -118,9 +119,10 @@ interface GoANumberInputProps extends BaseProps {
   onBlur?: OnBlur<number>;
   onKeyPress?: OnKeyPress<number>;
 }
+
 interface GoADateInputProps extends BaseProps {
   onChange: OnChange<GoADate>;
-  value: GoADate;
+  value?: GoADate;
   min?: GoADate;
   max?: GoADate;
   step?: number;
@@ -269,7 +271,7 @@ const onTimeChangeHandler = (onChange: OnChange) => {
   };
 };
 
-function toString(value: GoADate, tmpl = "yyyy-MM-dd"): string {
+function toString(value: GoADate | null | undefined, tmpl = "yyyy-MM-dd"): string {
   if (!value) {
     return "";
   }
@@ -396,7 +398,7 @@ export function GoAInputNumber({
       onChange={onNumberChange}
       min={min?.toString()}
       max={max?.toString()}
-      value={value.toString()}
+      value={value?.toString()}
       onFocus={onFocus}
       onBlur={onBlur}
       type="number"

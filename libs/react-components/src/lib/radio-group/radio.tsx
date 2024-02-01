@@ -1,6 +1,6 @@
 interface RadioItemProps {
   name?: string;
-  value: string;
+  value?: string;
   description?: string;
   label?: string;
   disabled?: boolean;
@@ -18,7 +18,7 @@ declare global {
 }
 
 export interface GoARadioItemProps {
-  value: string;
+  value?: string;
   label?: string;
   name?: string;
   description?: string;
