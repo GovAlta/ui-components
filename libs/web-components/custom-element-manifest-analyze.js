@@ -34,12 +34,10 @@ function report(tags) {
     "valueSets": globalAttributes["valueSets"]
   };
 
-  console.log("Saving file to ", outputPath);
   fs.writeFile(outputPath,
     JSON.stringify(content),
     function(err) {
       if (err) return console.error("[Error] Cannot write the report.");
-      console.log("html.html-data.json generated with tags");
     });
 }
 
@@ -58,7 +56,6 @@ const filePaths = await glob(`${cwd}/libs/web-components/src/**/*.html-data.json
 
 const tags = [];
 filePaths.map(filePath => {
-  console.log("Processing", filePath);
   getDescription(filePath);
   try {
     const tag = JSON.parse(fs.readFileSync(filePath).toString());
