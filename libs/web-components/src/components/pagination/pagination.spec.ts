@@ -107,7 +107,7 @@ describe("GoAPagination", () => {
   })
 
   it("validates the required params", async () => {
-    const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
     render(Pagination, {})
 
     await waitFor(() => {
@@ -119,7 +119,7 @@ describe("GoAPagination", () => {
   })
 
   it("validates the variant", async () => {
-    const mock = vi.spyOn(console, "error").mockImplementation(() => { });
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
     render(Pagination, { pagenumber: 1, itemcount: 100, variant: "bad" })
 
     await waitFor(() => {

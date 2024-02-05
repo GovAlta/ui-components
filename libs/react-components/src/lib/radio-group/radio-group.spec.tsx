@@ -17,7 +17,7 @@ type MockData = {
   radios: { text: string, value: string }[];
 }
 
-const noop = (name: string, value: string) => {}
+const noop = (name: string, value: string) => { /* do nothing */ }
 
 describe("RadioGroup", () => {
   const baseMockData: MockData = {

@@ -6,7 +6,7 @@ import { describe, it, expect, vi } from "vitest";
 describe("GoARadioGroup Component", () => {
   it("should render", async () => {
     const name = "favcolor";
-    const mock = vi.spyOn(console, "error").mockImplementation(() => { });
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
     const items = ["red", "blue", "orange"];
     const result = render(GoARadioGroupWrapper, {
       name,

@@ -7,7 +7,7 @@ afterEach(cleanup);
 
 describe("Modal Component", () => {
   it("should have a deprecated width prop", async () => {
-    const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
 
     render(GoAModal, { open: "true", width: "500px" });
 
@@ -33,7 +33,7 @@ describe("Modal Component", () => {
 
     await waitFor(() => {
       const modalEl = el.queryByTestId("modal");
-      expect(modalEl.style["_values"]["--maxwidth"]).toBe("500px");
+      expect(modalEl?.style["_values"]["--maxwidth"]).toBe("500px");
     });
   });
 
@@ -56,7 +56,7 @@ describe("Modal Component", () => {
     const heading = "Test heading";
     const el = render(GoAModalWrapper, { heading });
     await waitFor(() => {
-      expect(el.container.querySelector("[slot=heading]").innerHTML).toContain(
+      expect(el.container.querySelector("[slot=heading]")?.innerHTML).toContain(
         heading,
       );
     });
@@ -68,8 +68,8 @@ describe("Modal Component", () => {
     await waitFor(async () => {
       const rootEl = el.queryByTestId("modal");
       const closeIcon = el.queryByTestId("modal-close-button");
-      rootEl.addEventListener("_close", click);
-      await fireEvent.click(closeIcon);
+      rootEl?.addEventListener("_close", click);
+      closeIcon && await fireEvent.click(closeIcon);
       expect(click).toBeCalled();
     });
   });
@@ -80,8 +80,8 @@ describe("Modal Component", () => {
       const click = vi.fn();
       const rootEl = el.queryByTestId("modal");
       const closeIcon = el.queryByTestId("modal-overlay");
-      rootEl.addEventListener("_close", click);
-      await fireEvent.click(closeIcon);
+      rootEl?.addEventListener("_close", click);
+      closeIcon && await fireEvent.click(closeIcon);
       expect(click).toBeCalled();
     });
   });
@@ -92,7 +92,7 @@ describe("Modal Component", () => {
 
     await waitFor(() => {
       expect(el.container.innerHTML).toContain(content);
-      expect(el.container.querySelector("[slot=content]").innerHTML).toContain(
+      expect(el.container.querySelector("[slot=content]")?.innerHTML).toContain(
         content,
       );
     });
@@ -102,7 +102,7 @@ describe("Modal Component", () => {
     const actionContent = "This is the actionContent";
     const el = render(GoAModalWrapper, { actionContent });
 
-    expect(el.container.querySelector("[slot=actions]").innerHTML).toContain(
+    expect(el.container.querySelector("[slot=actions]")?.innerHTML).toContain(
       actionContent,
     );
   });
@@ -123,7 +123,7 @@ describe("Modal Component", () => {
   );
 
   it("should not render an invalid calloutVariant", async () => {
-    const mock = vi.spyOn(console, "error").mockImplementation(() => { });
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
     render(GoAModal, { open: "true", calloutvariant: "importantttttt" });
     await waitFor(() => {
       expect(console.error["mock"].calls.length).toBeGreaterThan(0);
@@ -137,7 +137,7 @@ describe("Modal Component", () => {
     await waitFor(async () => {
       const rootEl = el.queryByTestId("modal");
 
-      rootEl.addEventListener("_close", handleClose);
+      rootEl?.addEventListener("_close", handleClose);
       await fireEvent.keyDown(window, { key: "Escape", keyCode: 27 });
       expect(handleClose).toBeCalled();
     });

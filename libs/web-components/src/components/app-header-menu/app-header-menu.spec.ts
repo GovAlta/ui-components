@@ -165,8 +165,8 @@ describe("Mobile", () => {
     })
   })
 
-  it("follows the link on `enter`", () => {
-
+  it.skip("follows the link on `enter`", () => {
+    /* do nothing */
   })
 
 })

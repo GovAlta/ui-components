@@ -49,6 +49,6 @@ export const GoACircularProgress = ({
       data-testid={testId}
     />
   );
-};
+}
 
 export default GoACircularProgress;

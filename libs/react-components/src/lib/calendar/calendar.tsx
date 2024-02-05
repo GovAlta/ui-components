@@ -62,6 +62,6 @@ export function GoACalendar({
       ml={ml}
     />
   );
-};
+}
 
 export default GoACalendar;

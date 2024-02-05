@@ -58,6 +58,6 @@ export function GoAPopover({
       {target && <div slot="target">{target}</div>}
     </goa-popover>
   );
-};
+}
 
 export default GoAPopover;

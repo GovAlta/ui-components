@@ -8,8 +8,8 @@ describe("Modal Tests", () => {
       heading: "Modal Heading",
       open: true,
       maxWidth: "500px",
-      actions: <GoAButton onClick={() => { }}>Close</GoAButton>,
-      onClose: () => { },
+      actions: <GoAButton onClick={() => { /* do nothing */ }}>Close</GoAButton>,
+      onClose: () => { /* do nothing */ },
     };
 
     const { baseElement } = render(

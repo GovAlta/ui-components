@@ -36,7 +36,7 @@ it("shows and hides tooltip on mouseenter/mouseleave", async () => {
 
 
 it("validates the props", async () => {
-  const mock = vi.spyOn(console, "error").mockImplementation(() => { });
+  const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
   render(Tooltip, { position: "left", halign: "left" })
   render(Tooltip, { position: "left", halign: "right" })
   render(Tooltip, { position: "right", halign: "left" })

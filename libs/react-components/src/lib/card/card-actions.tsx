@@ -13,6 +13,6 @@ export interface GoACardActionsProps {
 
 export function GoACardActions({ children }: GoACardActionsProps): JSX.Element {
   return <goa-card-actions>{children}</goa-card-actions>;
-};
+}
 
 export default GoACardActions;

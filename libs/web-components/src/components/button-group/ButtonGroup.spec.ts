@@ -26,7 +26,7 @@ describe("GoA ButtonGroup", () => {
   });
 
   it(`should not render ButtonGroup with invalid alignment`, async () => {
-    const mock = vi.spyOn(console, "error").mockImplementation(() => {});
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
     render(GoAButtonGroup, { alignment: "staart" });
     await waitFor(() => {
       expect(console.error["mock"].calls.length).toBeGreaterThan(0);
@@ -35,7 +35,7 @@ describe("GoA ButtonGroup", () => {
   });
 
   it(`should not render ButtonGroup with invalid gap`, async () => {
-    const mock = vi.spyOn(console, "error").mockImplementation(() => {});
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
     render(GoAButtonGroup, { alignment: "start", gap: "relaaexd" });
     await waitFor(() => {
       expect(console.error["mock"].calls.length).toBeGreaterThan(0);

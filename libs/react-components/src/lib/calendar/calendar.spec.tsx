@@ -5,7 +5,7 @@ import Calendar from "./calendar";
 
 describe("Calendar", () => {
   it("should render successfully", () => {
-    const noop = () => {};
+    const noop = () => { /* do nothing */ };
     const { baseElement, container } = render(<Calendar onChange={noop} />);
     expect(baseElement).toBeTruthy();
 

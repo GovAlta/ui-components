@@ -7,7 +7,7 @@ describe("Pagination", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
       <Pagination
-        onChange={() => {}}
+        onChange={() => { /* do nothing */ }}
         pageNumber={1}
         itemCount={100}
         perPageCount={20}

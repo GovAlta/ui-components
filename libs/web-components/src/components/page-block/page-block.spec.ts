@@ -6,7 +6,7 @@ afterEach(cleanup);
 
 describe('PageBlock', () => {
   it("informs user of invalid width", async () => {
-    const mock = vi.spyOn(console, "error").mockImplementation(() => {});
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
     expect(console.error["mock"].calls.length).toBe(0);
     render(PageBlock, { width: "200miles" })
 

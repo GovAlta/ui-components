@@ -43,6 +43,6 @@ export function GoASpinner({
       data-testid={testId}
     />
   );
-};
+}
 
 export default GoASpinner;

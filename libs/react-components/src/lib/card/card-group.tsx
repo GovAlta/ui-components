@@ -13,6 +13,6 @@ export interface GoACardGroupProps {
 
 export function GoACardGroup({ children }: GoACardGroupProps): JSX.Element {
   return <goa-card-group>{children}</goa-card-group>;
-};
+}
 
 export default GoACardGroup;

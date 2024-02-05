@@ -90,6 +90,6 @@ export function GoARadioGroup({
       {children}
     </goa-radio-group>
   );
-};
+}
 
 export default GoARadioGroup;

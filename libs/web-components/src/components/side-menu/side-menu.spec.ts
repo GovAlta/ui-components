@@ -2,4 +2,4 @@
 // import { render } from "@testing-library/svelte";
 import { it } from "vitest";
 
-it.skip("test", async () => { });
+it.skip("test", async () => { /* do nothing */ });

@@ -13,6 +13,6 @@ export interface GoACardContentProps {
 
 export function GoACardContent({ children }: GoACardContentProps): JSX.Element {
   return <goa-card-content>{children}</goa-card-content>;
-};
+}
 
 export default GoACardContent;

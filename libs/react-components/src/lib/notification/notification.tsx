@@ -72,6 +72,6 @@ export const GoANotification = ({
       {children}
     </goa-notification>
   );
-};
+}
 
 export default GoANotification;

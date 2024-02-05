@@ -44,6 +44,6 @@ export function GoAGrid({
       {children}
     </goa-grid>
   );
-};
+}
 
 export default GoAGrid;

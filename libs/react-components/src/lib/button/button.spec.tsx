@@ -6,7 +6,7 @@ import { describe, it, expect, vi } from "vitest";
 describe("GoA Button", () => {
   const buttonText = "Test Title";
 
-  const noop = () => {};
+  const noop = () => { /* do nothing */ };
 
   it("should render the properties", () => {
     const { container } = render(
@@ -40,7 +40,7 @@ describe("GoA Button", () => {
 
   it("should render content", () => {
     const { baseElement } = render(
-      <GoAButton onClick={() => {}}>{buttonText}</GoAButton>
+      <GoAButton onClick={() => { /* do nothing */ }}>{buttonText}</GoAButton>
     );
 
     expect(baseElement).toBeTruthy();

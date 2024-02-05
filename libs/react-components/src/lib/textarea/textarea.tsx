@@ -40,7 +40,7 @@ export interface GoATextAreaProps extends Margins {
   ariaLabel?: string;
   countBy?: CountBy;
   maxCount?: number;
-  
+
   onChange: (name: string, value: string) => void;
   onKeyPress?: (name: string, value: string, key: string) => void;
 }
@@ -82,7 +82,7 @@ export function GoATextarea({
     };
   }, [el, onChange]);
 
-  
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -120,6 +120,7 @@ export function GoATextarea({
     ></goa-textarea>
   );
 }
+
 export {GoATextarea as GoATextArea}
 export default GoATextarea;
 

@@ -4,7 +4,7 @@ import { GoAInputDateTime, GoAInputText, GoAInputProps, GoAInputNumber} from "./
 import { GoAIconType } from "../icon/icon";
 import { describe, it, expect, vi } from "vitest";
 
-const noop = () => { };
+const noop = () => { /* do nothing */ };
 const testId = "test-id";
 const defaultProps: GoAInputProps = {
   name: "",

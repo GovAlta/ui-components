@@ -45,6 +45,6 @@ export function GoACard({
       {children}
     </goa-card>
   );
-};
+}
 
 export default GoACard;

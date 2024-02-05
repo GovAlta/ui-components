@@ -6,7 +6,7 @@ import DatePicker from "./date-picker";
 
 describe("DatePicker", () => {
   it("should render successfully", () => {
-    const noop = () => {};
+    const noop = () => { /* do nothing */ };
     const value = new Date();
     const min = addMonths(value, -1);
     const max = addMonths(value, 1);

@@ -7,9 +7,9 @@ afterEach(cleanup);
 
 describe("GoADropdown", () => {
   it("should inform the user that GoADropdownOption is deprecated", async () => {
-    const mock = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
     render(
-      <GoADropdown onChange={() => {}}>
+      <GoADropdown onChange={() => { /* do nothing */ }}>
         <GoADropdownOption value="foo" />
       </GoADropdown>
     );
@@ -41,7 +41,7 @@ describe("GoADropdown", () => {
         ml="xl"
         ariaLabel={"label"}
         ariaLabelledBy={"foo-dropdown-label"}
-        onChange={() => {}}
+        onChange={() => { /* do nothing */ }}
       >
         <GoADropdownItem name="favColor" label="Red" value="red" />
         <GoADropdownItem name="favColor" label="Blue" value="blue" />
@@ -74,7 +74,7 @@ describe("GoADropdown", () => {
 
     const el = baseElement.querySelector("goa-dropdown");
     expect(el).toBeTruthy();
-    
+
     el && fireEvent(
       el,
       new CustomEvent("_change", {
