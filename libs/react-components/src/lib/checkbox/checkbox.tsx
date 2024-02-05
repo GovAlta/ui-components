@@ -99,6 +99,6 @@ export function GoACheckbox({
       {children}
     </goa-checkbox>
   );
-};
+}
 
 export default GoACheckbox;

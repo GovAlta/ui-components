@@ -18,7 +18,7 @@ describe("TextArea", () => {
         mr="m"
         mb="l"
         ml="xl"
-        onChange={() => {}}
+        onChange={() => { /* do nothing */ }}
       />
     );
 

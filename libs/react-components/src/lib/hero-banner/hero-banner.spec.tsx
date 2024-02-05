@@ -48,7 +48,7 @@ describe("GoAHeroBanner", () => {
       >
         This is the hero banner content
         <GoAHeroBannerActions>
-          <GoAButton onClick={() => { }}>Submit</GoAButton>
+          <GoAButton onClick={() => { /* do nothing */ }}>Submit</GoAButton>
         </GoAHeroBannerActions>
       </GoAHeroBanner>
     );

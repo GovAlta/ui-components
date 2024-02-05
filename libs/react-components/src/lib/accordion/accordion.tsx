@@ -59,6 +59,6 @@ export function GoAAccordion({
       {children}
     </goa-accordion>
   );
-};
+}
 
 export default GoAAccordion;

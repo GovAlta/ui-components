@@ -62,6 +62,6 @@ export function GoADatePicker({
       ml={ml}
     />
   );
-};
+}
 
 export default GoADatePicker;

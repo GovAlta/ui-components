@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 
 import FileUploadInput from "./file-upload-input";
 
-const noop = () => {};
+const noop = () => { /* do nothing */ };
 
 describe("FileUploadInput", () => {
   it("should render successfully", () => {

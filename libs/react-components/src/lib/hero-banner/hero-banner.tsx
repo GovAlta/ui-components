@@ -50,6 +50,6 @@ export function GoAHeroBanner({
       {children}
     </goa-hero-banner>
   );
-};
+}
 
 export default GoAHeroBanner;

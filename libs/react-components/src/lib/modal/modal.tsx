@@ -107,6 +107,6 @@ export function GoAModal({
       {children}
     </goa-modal>
   );
-};
+}
 
 export default GoAModal;

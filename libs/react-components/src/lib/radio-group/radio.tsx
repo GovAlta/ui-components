@@ -54,6 +54,6 @@ export function GoARadioItem({
       {children}
     </goa-radio-item>
   );
-};
+}
 
 export default GoARadioItem;

@@ -28,4 +28,4 @@ export function GoAPageBlock(props: PageBlockProps): JSX.Element {
       {props.children}
     </goa-page-block>
   );
-};
+}

@@ -22,7 +22,7 @@ function getProps(el: RenderResult<SvelteComponent>): Props {
 describe("FormStep", () => {
 
   it('it renders the default step', async () => {
-    const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
     const el = render(FormStep, { text: "Some form", childindex: "1" })
     const props = getProps(el);
 
@@ -37,7 +37,7 @@ describe("FormStep", () => {
   })
 
   it("requires a text value", async () => {
-    const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
     render(FormStep, { /* no text */ })
 
     // 1 warning

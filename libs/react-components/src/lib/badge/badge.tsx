@@ -58,7 +58,7 @@ export function GoABadge({
       ml={ml}
     />
   );
-};
+}
 
 /**
  * @deprecated
@@ -86,7 +86,7 @@ export function GoAInfoBadge({
       ml={ml}
     />
   );
-};
+}
 
 /**
  * @deprecated
@@ -114,7 +114,7 @@ export function GoASuccessBadge({
       ml={ml}
     />
   );
-};
+}
 
 /**
  * @deprecated
@@ -142,7 +142,7 @@ export function GoAImportantBadge({
       ml={ml}
     />
   );
-};
+}
 
 /**
  * @deprecated
@@ -170,4 +170,4 @@ export function GoAEmergencyBadge({
       ml={ml}
     />
   );
-};
+}

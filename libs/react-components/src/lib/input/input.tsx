@@ -246,7 +246,7 @@ export function GoAInput({
       {trailingContent && <div slot="trailingContent">{trailingContent}</div>}
     </goa-input>
   );
-};
+}
 
 const onDateChangeHandler = (onChange: OnChange<GoADate>) => {
   return (name: string, value: string) => {
@@ -286,11 +286,11 @@ function toString(value: GoADate | null | undefined, tmpl = "yyyy-MM-dd"): strin
 
 export function GoAInputText(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="text" />;
-};
+}
 
 export function GoAInputPassword(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="password" />;
-};
+}
 
 export function GoAInputDate({
   value,
@@ -308,7 +308,7 @@ export function GoAInputDate({
       value={toString(value)}
     />
   );
-};
+}
 
 export function GoAInputTime({
   value,
@@ -324,7 +324,7 @@ export function GoAInputTime({
       type="time"
     />
   );
-};
+}
 
 export function GoAInputDateTime({
   value,
@@ -340,23 +340,23 @@ export function GoAInputDateTime({
       type="datetime-local"
     />
   );
-};
+}
 
 export function GoAInputEmail(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="email" />;
-};
+}
 
 export function GoAInputSearch(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="search" trailingIcon="search" />;
-};
+}
 
 export function GoAInputUrl(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="url" />;
-};
+}
 
 export function GoAInputTel(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="tel" />;
-};
+}
 
 export function GoAInputFile(props: GoAInputProps): JSX.Element {
   return (
@@ -368,11 +368,11 @@ export function GoAInputFile(props: GoAInputProps): JSX.Element {
       style={{ backgroundColor: "revert" }}
     />
   );
-};
+}
 
 export function GoAInputMonth(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="month" />;
-};
+}
 
 export function GoAInputNumber({
   min = Number.MIN_VALUE,
@@ -405,10 +405,10 @@ export function GoAInputNumber({
       onKeyPress={onKeyPress}
     />
   );
-};
+}
 
 export function GoAInputRange(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="range" />;
-};
+}
 
 export default GoAInput;

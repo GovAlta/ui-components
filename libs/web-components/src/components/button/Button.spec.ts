@@ -37,7 +37,7 @@ describe('GoAButtonComponent', () => {
     });
 
     it("should not allow for invalid size", async () => {
-      const mock = vi.spyOn(console, "error").mockImplementation(() => { });
+      const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
       render(GoAButton, { size: "huuuuuuge" });
       await waitFor(() => {
         expect(console.error["mock"].calls.length).toBeGreaterThan(0);
@@ -73,7 +73,7 @@ describe('GoAButtonComponent', () => {
   describe("Invalid attrs", () => {
     let consoleMock: vi.SpyInstance;
     beforeEach(() => {
-      consoleMock = vi.spyOn(console, "error").mockImplementation(() => { });
+      consoleMock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
       expect(console.error["mock"].calls.length).toBe(0);
     })
     afterEach(() => consoleMock.mockRestore())

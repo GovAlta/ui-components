@@ -32,6 +32,6 @@ export function GoATableSortHeader({
       {children}
     </goa-table-sort-header>
   );
-};
+}
 
 export default GoATableSortHeader;

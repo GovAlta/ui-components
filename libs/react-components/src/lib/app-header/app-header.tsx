@@ -38,6 +38,6 @@ export function GoAAppHeader({
       {children}
     </goa-app-header>
   );
-};
+}
 
 export default GoAAppHeader;

@@ -63,6 +63,6 @@ export function GoAFormItem({
       {children}
     </goa-form-item>
   );
-};
+}
 
 export default GoAFormItem;

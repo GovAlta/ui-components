@@ -14,7 +14,7 @@ describe("Container", () => {
         mr="m"
         mb="l"
         ml="xl"
-        actions={<GoAButton onClick={() => {}}>Save</GoAButton>}
+        actions={<GoAButton onClick={() => { /* do nothing */ }}>Save</GoAButton>}
       >
         Container content
       </GoAContainer>

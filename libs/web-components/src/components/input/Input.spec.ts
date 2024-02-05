@@ -302,7 +302,7 @@ describe("GoAInput Component", () => {
       expect(container.querySelector(".suffix")).toBeNull();
     });
     it("shows prefix text and also a warning message in console", async () => {
-      const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
+      const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
       const { container } = render(GoAInput, { type: "text", prefix: "$" });
       const prefix = container.querySelector(".prefix");
 
@@ -314,7 +314,7 @@ describe("GoAInput Component", () => {
       mock.mockRestore();
     });
     it("shows suffix text and also a warning message in console", async () => {
-      const mock = vi.spyOn(console, "warn").mockImplementation(() => { });
+      const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
       const { container } = render(GoAInput, {
         type: "text",
         suffix: "per item",

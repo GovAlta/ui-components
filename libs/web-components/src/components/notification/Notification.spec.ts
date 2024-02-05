@@ -19,7 +19,7 @@ describe('GoANotificationComponent', () => {
   });
 
   it("should not render when type is mispelled/invalid", async () => {
-    const mock = vi.spyOn(console, "error").mockImplementation(() => { });
+    const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
     render(GoANotification, { type: "importantt" });
     await waitFor(() => {
       expect(console.error["mock"].calls.length).toBeGreaterThan(0);
