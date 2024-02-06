@@ -79,5 +79,5 @@ setting found in `.vscode/settings.json`:
 
 ---
 
-[Visit Design System](https://ui-components.alberta.ca)
+[Visit Design System](https://design.alberta.ca)
 
