@@ -166,6 +166,7 @@
 
   summary .heading-content {
     flex: 1;
+    position: relative;
   }
 
   .content {
