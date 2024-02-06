@@ -170,8 +170,7 @@
   }
 
   .content {
-    border-bottom: var(--goa-border-width-s) solid
-      var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
     border-left: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
     border-right: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
     border-bottom-left-radius: var(--goa-border-radius-m);
