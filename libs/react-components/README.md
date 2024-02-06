@@ -26,7 +26,6 @@ Import the web-component styles in the `src/index.css` file
 ```css
 @import "@abgov/web-components/index.css";
 ```
-
 ---
 
-[Visit Design System](https://ui-components.alberta.ca)
+[Visit Design System](https://design.alberta.ca)

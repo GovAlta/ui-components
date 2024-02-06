@@ -1,11 +1,32 @@
-# web-components
+# Web Components
 
-This library was generated with [Nx](https://nx.dev).
+![npm (scoped)](https://img.shields.io/npm/v/@abgov/web-components?color=%230081a2&label=react-components&style=flat-square)
 
-## Building
+This library contains web components from the Government of Alberta.
 
-Run `nx build web-components` to build the library.
+```bash
+npm i @abgov/web-components
+```
 
-## Running unit tests
+### Icons
 
-Run `nx test web-components` to execute the unit tests via [Vitest](https://vitest.dev/).
+Link ionicons in app/index.html
+Add the following to the head element
+
+```html
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+```
+
+### Styles
+
+Import the web-component styles in the `src/index.css` file
+
+```css
+@import "@abgov/web-components/index.css";
+```
+---
+
+[Visit Design System](https://design.alberta.ca)
+
+
