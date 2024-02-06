@@ -40,7 +40,6 @@
   export let type: Type = "text";
   export let name: string = "";
   export let value: string = "";
-
   export let autocapitalize: AutoCapitalize = "off";
   export let placeholder: string = "";
   export let leadingicon: GoAIconType | null = null;
@@ -68,11 +67,9 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  //
   let _leadingContentSlot = false;
   let _trailingContentSlot = false;
   let _debounceId: any;
-
   let inputEl: HTMLElement;
   let _rootEl: HTMLElement;
 
@@ -82,6 +79,8 @@
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
 
+  // TODO: determine if this and the next reactive statement need to be reactive, as they are both
+  // things that should only be run once
   $: if (isFocused && inputEl) {
     setTimeout(() => inputEl.focus(), 1);
   }
