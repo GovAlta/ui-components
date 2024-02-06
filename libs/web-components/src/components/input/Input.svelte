@@ -82,7 +82,7 @@
   // TODO: determine if this and the next reactive statement need to be reactive, as they are both
   // things that should only be run once
   $: if (isFocused && inputEl) {
-    setTimeout(() => inputEl.focus(), 1);
+    setTimeout(() => inputEl.focus(), 2);
   }
 
   $: if (inputEl && type === "search") {
