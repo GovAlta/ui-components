@@ -45,6 +45,7 @@ describe("GoATextArea", () => {
 
   it("handles the keypress event", async () => {
     const onKeyPress = vi.fn();
+    const onChange = vi.fn();
     const result = render(GoATextArea, {
       name: "name",
       value: "foo",
@@ -59,11 +60,19 @@ describe("GoATextArea", () => {
       onKeyPress();
     });
 
+    textarea.addEventListener("_change", (e: CustomEvent) => {
+      expect(e.detail.name).toBe("name");
+      expect(e.detail.value).toBe("foo");
+      onChange();
+    });
+
     await fireEvent.keyUp(textarea, { target: { value: "foo" }, key: "o" });
 
     await waitFor(() => {
       expect(onKeyPress).toBeCalledTimes(1);
+      expect(onChange).toBeCalledTimes(1);
     });
+
   });
 
   it("can be disabled", async () => {
