@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2024-02-08
+
+### Added
+
+- Upgraded our angular components to work with our new Svelte4 library upgrade. Should see no noticeable differences at the moment, but will allow for more improvements in the future.
+This upgrade makes it so that we no longer support Angular v15. If still using this version, do not upgrade.
+
 ## [2.5.0] - 2023-08-30
 
 No actual changes in this release

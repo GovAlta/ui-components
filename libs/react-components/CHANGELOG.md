@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.19.0] - 2024-02-08
+
+### Added
+
+- Upgraded our react components to work with our new Svelte4 library upgrade. Should see no noticeable differences at the moment, but will allow for more improvements in the future.
+
+### Fixed
+
+- GoAInputNumber now parses float values correctly instead of converting to integer values ([#1532](https://github.com/GovAlta/ui-components/issues/1532))
+
 ## [4.18.0] - 2023-12-07
 
 ### Added

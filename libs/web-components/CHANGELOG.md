@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.19.0] - 2024-02-08
+
+### Fixed
+
+- Clickable elements in the Accordion header will now fire proper click events ([#1611](https://github.com/GovAlta/ui-components/issues/1611))
+
+### Added
+
+- Upgraded our web components to work with our new Svelte4 library upgrade. Should see no noticeable differences at the moment, but will allow for more improvements in the future.
+
 ## [1.18.1] - 2024-01-16
 
 ### Fixed
