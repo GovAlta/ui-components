@@ -55,5 +55,11 @@
       ]
     }
   },
+  "release": {
+    "builder": "@nrwl/workspace:run-commands",
+    "options": {
+      "command": "npx semantic-release -e ./libs/web-components/.releaserc.json"
+    }
+  },
   "tags": []
 }
