@@ -1,6 +1,6 @@
 {
   "name": "@abgov/react-components",
-  "version": "0.0.1",
+  "version": "4.18.1",
   "description": "Government of Alberta - UI components for React",
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
