@@ -41,23 +41,27 @@
 
   // functions
 
-  function onChange(
-    e: Event & { currentTarget: EventTarget & HTMLTextAreaElement },
-  ) {
+  function onChange(e: KeyboardEvent) {
     if (isDisabled) return;
-
-    const el = e.currentTarget;
-    _textareaEl.dispatchEvent(
-      new CustomEvent("_change", {
-        composed: true,
-        detail: { name, value: el.value },
-      }),
-    );
+    dispatchChange(e);
   }
 
   function onKeyPress(e: KeyboardEvent) {
     if (isDisabled) return;
+    dispatchKeyPress(e);
+    dispatchChange(e);
+  }
 
+  function dispatchChange(_: KeyboardEvent) {
+    _textareaEl.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        detail: { name, value: _textareaEl.value },
+      }),
+    );
+  }
+
+  function dispatchKeyPress(e: KeyboardEvent) {
     _textareaEl.dispatchEvent(
       new CustomEvent("_keyPress", {
         composed: true,
