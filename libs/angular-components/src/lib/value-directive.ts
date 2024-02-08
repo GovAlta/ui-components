@@ -29,9 +29,7 @@ export class ValueDirective implements ControlValueAccessor {
   }
 
   writeValue(value: string) {
-    if (value) {
-      this.value = value;
-    }
+    this.value = value;
   }
 
   registerOnChange(fn: () => void) {
