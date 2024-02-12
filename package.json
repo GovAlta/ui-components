@@ -19,6 +19,7 @@
   "private": true,
   "devDependencies": {
     "@abgov/design-tokens": "^1.1.1",
+    "@abgov/nx-release": "^5.0.0",
     "@angular-devkit/build-angular": "17.1.2",
     "@angular-devkit/core": "17.1.2",
     "@angular-devkit/schematics": "17.1.2",
@@ -102,5 +103,8 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "0.14.3"
+  },
+  "overrides": {
+    "@nrwl/devkit": "^18.0.0"
   }
 }
