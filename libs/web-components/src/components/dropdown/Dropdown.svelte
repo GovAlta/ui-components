@@ -54,6 +54,7 @@
   let _selectEl: HTMLSelectElement;
   let _inputEl: HTMLInputElement;
   let _eventHandler: EventHandler;
+  let _rootElWidth: number;
 
   let _isDirty: boolean = false;
   let _filteredOptions: Option[] = [];
@@ -90,6 +91,8 @@
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
 
+      _rootElWidth = _rootEl.getBoundingClientRect()?.width;
+
     // the following is required to appease the unit testing gods in that they don't respond
     // to the slotchange event
     _options = getOptions();
@@ -100,8 +103,7 @@
       if (width) {
         if (width.endsWith("%")) {
           const percent = parseInt(width) / 100;
-          const rootRect = _rootEl.getBoundingClientRect();
-          _width = percent * rootRect.width + "px";
+          _width = percent * _rootElWidth + "px";
         } else {
           _width = width;
         }
@@ -514,7 +516,7 @@
   class:dropdown-native={_native}
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
-    --width: ${_width};
+    --width: min(${_width}, ${_rootElWidth}px);
   `}
   bind:this={_rootEl}
 >
@@ -543,7 +545,7 @@
       {disabled}
       {relative}
       data-testid="option-list"
-      maxwidth="99999px"
+      maxwidth={`${_rootElWidth}px`}
       open={_isMenuVisible}
       padded="false"
       tabindex="-1"
