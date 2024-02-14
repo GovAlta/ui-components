@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-dropdown" />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import {onMount, tick} from "svelte";
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -305,6 +305,20 @@
     dispatchValue(option.value);
   }
 
+  /**
+   * When website autofill value without user keyboard
+   */
+  async function onChange() {
+    await tick();
+    syncFilteredOptions();
+    if (_filteredOptions.length === 1) {
+      dispatchValue(_filteredOptions[0].value);
+      setTimeout(() => {
+        hideMenu();
+      }, 100);
+    }
+  }
+
   function onInputKeyUp(e: KeyboardEvent) {
     if (_disabled) return;
     _eventHandler.handleKeyUp(e);
@@ -593,6 +607,7 @@
           {name}
           on:keydown={onInputKeyDown}
           on:keyup={onInputKeyUp}
+          on:change={onChange}
         />
 
         {#if _inputEl?.value && _filterable}
