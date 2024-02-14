@@ -188,8 +188,8 @@
   <div
     class="goa-input variant--{variant} type--{type}"
     class:input--disabled={isDisabled}
-    class:input-leading-content={_leadingContentSlot}
-    class:input-trailing-content={_trailingContentSlot}
+    class:leading-content={_leadingContentSlot}
+    class:trailing-content={_trailingContentSlot}
     class:error={isError}
   >
     {#if prefix}
