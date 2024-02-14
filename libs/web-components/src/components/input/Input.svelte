@@ -188,8 +188,8 @@
   <div
     class="goa-input variant--{variant} type--{type}"
     class:input--disabled={isDisabled}
-    class:input-leading-content={_leadingContentSlot}
-    class:input-trailing-content={_trailingContentSlot}
+    class:leading-content={_leadingContentSlot}
+    class:trailing-content={_trailingContentSlot}
     class:error={isError}
   >
     {#if prefix}
@@ -198,7 +198,7 @@
       </div>
     {/if}
 
-    <div class="leading-content">
+    <div class="leading-content-slot">
       <slot name="leadingContent" />
     </div>
 
@@ -266,7 +266,7 @@
     {#if suffix}
       <span class="suffix">{suffix}</span>
     {/if}
-    <div class="trailing-content">
+    <div class="trailing-content-slot">
       <slot name="trailingContent" />
     </div>
   </div>
@@ -310,7 +310,7 @@
     background-color: var(--goa-color-greyscale-white);
   }
 
-  .goa-input:hover:not(.leading-content):not(.trailing-content) {
+  .goa-input:not(.leading-content):not(.trailing-content):hover{
     border-color: var(--goa-color-interactive-hover);
     box-shadow: 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-hover);
@@ -396,21 +396,21 @@
 
   .prefix,
   .suffix,
-  .leading-content :global(::slotted(div)),
-  .trailing-content :global(::slotted(div)) {
+  .leading-content-slot :global(::slotted(div)),
+  .trailing-content-slot :global(::slotted(div)) {
     background-color: var(--goa-color-greyscale-100);
     padding: 0 0.75rem;
     display: flex;
     align-items: center;
   }
 
-  .leading-content :global(::slotted(div)),
-  .trailing-content :global(::slotted(div)) {
+  .leading-content-slot :global(::slotted(div)),
+  .trailing-content-slot :global(::slotted(div)) {
     padding: 0.5rem 0.75rem;
   }
 
   .prefix,
-  .leading-content :global(::slotted(div)) {
+  .leading-content-slot :global(::slotted(div)){
     /* background-clip doesn't want to work */
     border-top-left-radius: var(--goa-border-radius-m);
     border-bottom-left-radius: var(--goa-border-radius-m);
@@ -418,7 +418,7 @@
   }
 
   .suffix,
-  .trailing-content :global(::slotted(div)) {
+  .trailing-content-slot :global(::slotted(div)) {
     /* background-clip doesn't want to work */
     border-top-right-radius: var(--goa-border-radius-m);
     border-bottom-right-radius: var(--goa-border-radius-m);
@@ -426,12 +426,12 @@
   }
 
   .input--disabled .prefix,
-  .input--disabled .leading-content :global(::slotted(div)) {
+  .input--disabled .leading-content-slot :global(::slotted(div)) {
     border-right: 1px solid var(--goa-color-greyscale-200);
   }
 
   .input--disabled .suffix,
-  .input--disabled .trailing-content :global(::slotted(div)) {
+  .input--disabled .trailing-content-slot :global(::slotted(div)) {
     border-left: 1px solid var(--goa-color-greyscale-200);
   }
 
@@ -453,12 +453,12 @@
   }
 
   .error:not(.leading-content):not(.trailing-content),
-  .error:hover:not(.leading-content):not(.trailing-content) {
+  .error:not(.leading-content):not(.trailing-content):hover{
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 1px var(--goa-color-interactive-error);
   }
 
-  .error:focus-within:hover:not(.leading-content):not(.trailing-content) {
+  .error:not(.leading-content):not(.trailing-content):focus-within:hover{
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
@@ -512,16 +512,16 @@
   .input-leading-content:hover,
   .input-leading-content:active,
   .input-leading-content:focus,
-  .input-leading-content:focus-within {
+  .input-leading-content:focus-within{
     border-top-right-radius: var(--goa-border-radius-m);
     border-bottom-right-radius: var(--goa-border-radius-m);
   }
 
-  .input-leading-content.input-trailing-content,
-  .input-leading-content.input-trailing-content:hover,
-  .input-leading-content.input-trailing-content:active,
-  .input-leading-content.input-trailing-content:focus,
-  .input-leading-content.input-trailing-content:focus-within {
+  .leading-content .input-trailing-content,
+  .leading-content .input-trailing-content:hover,
+  .leading-content .input-trailing-content:active,
+  .leading-content .input-trailing-content:focus,
+  .leading-content .input-trailing-content:focus-within {
     border-radius: 0;
   }
 
