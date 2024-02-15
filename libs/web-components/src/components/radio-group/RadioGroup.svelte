@@ -196,8 +196,12 @@
   }
 
   .goa-radio-label {
-    padding: 0 0.5rem;
+    padding: 0 var(--goa-space-xs);
     font-weight: var(--goa-font-weight-regular);
+  }
+
+  .goa-radio-group--horizontal .goa-radio-label {
+    padding-right: var(--goa-space-xl);
   }
 
   .goa-radio-description {
