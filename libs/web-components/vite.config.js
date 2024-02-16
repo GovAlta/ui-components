@@ -74,6 +74,7 @@ export default defineConfig(() => ({
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
     outDir: "../../dist/libs/web-components",
+    sourcemap: true,
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,

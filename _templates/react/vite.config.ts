@@ -27,6 +27,7 @@ export default defineConfig({
   build: {
     outDir: "../../dist/playground/react",
     reportCompressedSize: true,
+    minify: false,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
