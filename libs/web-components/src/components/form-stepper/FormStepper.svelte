@@ -40,26 +40,24 @@
   // than the number of steps
   $: _progress = ((_maxProgressStep - 1) / (_steps.length - 1)) * 100;
   $: setCurrentStepStatus(step);
-  $: {
-    if (_steps.length) {
-      // allow access to all steps if not step property is provided
-      if (step <= 0) {
-        step = 1;
-        setTimeout(() => {
-          dispatch(step);
-        }, 1);
-        _maxAllowedStep = _steps.length;
-      }
-
-      if (step > _maxProgressStep) _maxProgressStep = step;
-      if (step > _maxAllowedStep) _maxAllowedStep = step;
-      _steps.forEach((stepEl: Element, index: number) => {
-        stepEl.setAttribute(
-          "enabled",
-          index > _maxAllowedStep - 1 ? "false" : "true",
-        );
-      });
+  $: if (_steps.length) {
+    // allow access to all steps if not step property is provided
+    if (step <= 0) {
+      step = 1;
+      setTimeout(() => {
+        dispatch(step);
+      }, 1);
+      _maxAllowedStep = _steps.length;
     }
+
+    if (step > _maxProgressStep) _maxProgressStep = step;
+    if (step > _maxAllowedStep) _maxAllowedStep = step;
+    _steps.forEach((stepEl: Element, index: number) => {
+      stepEl.setAttribute(
+        "enabled",
+        index > _maxAllowedStep - 1 ? "false" : "true",
+      );
+    });
   }
 
   onMount(async () => {
@@ -95,14 +93,14 @@
       _showProgressBars = true;
     }, 10);
 
-    // add listener to recalculate the step widths
-    window.addEventListener("resize", calcStepDims);
+    // recompute size listeners
     window.addEventListener("orientationchange", calcStepDims);
+    window.addEventListener("resize", calcStepDims);
   });
 
   onDestroy(() => {
-    window.removeEventListener("resize", calcStepDims);
     window.removeEventListener("orientationchange", calcStepDims);
+    window.removeEventListener("resize", calcStepDims);
   })
 
   function dispatch(step: number) {
@@ -121,45 +119,40 @@
     });
   }
 
-  function calcStepDims() {
-    // timeout required, without it the _steps elements width was not yet updated
-    setTimeout(() => {
-      _stepWidth = _steps.length > 0 ? (_steps[0] as HTMLElement).offsetWidth : 0;
-      _stepHeight = _steps.length > 0 ? (_steps[0] as HTMLElement).offsetHeight : 0;
-      _progressHeight = _gridEl?.offsetHeight;
-    }, 1);
+  async function calcStepDims() {
+    // tick required, without it the _steps elements width was not yet updated
+    await tick();
+    const step = _steps?.[0] as HTMLElement;
+    _stepWidth = step?.offsetWidth ?? 0;
+    _stepHeight = step?.offsetHeight ?? 0;
+    _progressHeight = _gridEl?.offsetHeight;
   }
 </script>
 
-<section role="list">
-  <div
-    class="form-stepper"
-    style={`
-      ${calculateMargin(mt, mr, mb, ml)};
-      --progress: ${_progress}%;
-      --step-width: ${_stepWidth}px;
-      --step-height: ${_stepHeight}px;
-      --height: ${_progressHeight}px;
-    `}
-    bind:this={_rootEl}
-  >
-    {#if _steps.length > 0 && _showProgressBars}
-      <progress class="horizontal" value={_progress} max="100"></progress>
-      <progress class="vertical" value={_progress} max="100"></progress>
-    {/if}
-    <div class="slots" bind:this={_gridEl}>
-      <goa-grid minchildwidth="1px">
-        <slot />
-      </goa-grid>
-    </div>
+<div
+  class="form-stepper"
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)};
+    --progress: ${_progress}%;
+    --step-width: ${_stepWidth}px;
+    --step-height: ${_stepHeight}px;
+    --height: ${_progressHeight}px;
+  `}
+  role="list"
+  bind:this={_rootEl}
+>
+  {#if _steps.length > 0 && _showProgressBars}
+    <progress class="horizontal" value={_progress} max="100"></progress>
+    <progress class="vertical" value={_progress} max="100"></progress>
+  {/if}
+  <div class="slots" bind:this={_gridEl}>
+    <goa-grid minchildwidth="10ch">
+      <slot />
+    </goa-grid>
   </div>
-</section>
+</div>
 
 <style>
-  .form-stepper {
-    position: relative;
-  }
-
   .slots {
     position: relative;
     inset: 0;
@@ -181,32 +174,31 @@
   /* 2px = 4px / 2, where 4px is thickness of progress bar */
   /* 1.5rem = 24px = padding as per design specs */
   progress.horizontal {
-    display: block;
     top: calc(1.5rem + (2.5rem / 2) - 2px);
     left: calc(var(--step-width) / 2);
     width: calc(100% - var(--step-width));
   }
 
+  @media (--not-mobile) {
+    progress.horizontal {
+      display: block;
+    }
+    progress.vertical {
+      display: none;
+    }
+    .form-stepper {
+      position: relative;
+    }
+  }
+
   /* 1.25rem = 20px = 40px / 2, half the height of the 40px stepper */
   progress.vertical {
-    display: none;
     width: calc(var(--height) - var(--step-height));
     transform: rotate(90deg)
       translate(
         calc(50% + 1.25rem + 1.75rem),
         calc((var(--height) - var(--step-height)) / 2 - 1.25rem - 1.5rem)
       );
-  }
-
-  /* iOS tweaks */
-  progress::-webkit-progress-value {
-    background: var(--goa-color-interactive-default);
-  }
-  progress::-webkit-progress-bar {
-    background: var(--goa-color-greyscale-200);
-  }
-  progress::-moz-progress-bar {
-    background: var(--goa-color-interactive-default);
   }
 
   @media (--mobile) {
@@ -220,4 +212,16 @@
       display: inline-block;
     }
   }
+
+  /* iOS tweaks */
+  progress::-webkit-progress-value {
+    background: var(--goa-color-interactive-default);
+  }
+  progress::-webkit-progress-bar {
+    background: var(--goa-color-greyscale-200);
+  }
+  progress::-moz-progress-bar {
+    background: var(--goa-color-interactive-default);
+  }
+
 </style>

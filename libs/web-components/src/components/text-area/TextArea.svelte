@@ -72,47 +72,49 @@
 </script>
 
 <!-- HTML -->
-<div
-  data-testid="root"
-  class="root"
-  class:error={isError || (maxcount > 0 && count > maxcount)}
-  class:disabled={isDisabled}
-  style={`
-    ${calculateMargin(mt, mr, mb, ml)};
-    --width: ${width};
-    --char-count-padding: ${countby ? "2rem" : "0"};
-  `}
->
-  <textarea
-    bind:this={_textareaEl}
-    {name}
-    {placeholder}
-    {rows}
-    aria-label={arialabel || name}
-    disabled={isDisabled}
-    readonly={isReadonly}
-    data-testid={testid}
-    bind:value
-    on:keyup={onKeyPress}
-    on:change={onChange}
-  />
+<div id="container">
+  <div
+    data-testid="root"
+    class="root"
+    class:error={isError || (maxcount > 0 && count > maxcount)}
+    class:disabled={isDisabled}
+    style={`
+      ${calculateMargin(mt, mr, mb, ml)};
+      --width: ${width};
+      --char-count-padding: ${countby ? "2rem" : "0"};
+    `}
+  >
+    <textarea
+      bind:this={_textareaEl}
+      {name}
+      {placeholder}
+      {rows}
+      aria-label={arialabel || name}
+      disabled={isDisabled}
+      readonly={isReadonly}
+      data-testid={testid}
+      bind:value
+      on:keyup={onKeyPress}
+      on:change={onChange}
+    />
 
-  {#if maxcount > 0 && !isDisabled}
-    <div class="counter" class:counter-error={count > maxcount}>
-      {#if countby && count > maxcount}
-        {count - maxcount} {pluralize(countby, count - maxcount)} too many
-      {:else if countby && count < maxcount}
-        {maxcount - count} {pluralize(countby, maxcount - count)} remaining
-      {/if}
-    </div>
-  {/if}
+    {#if maxcount > 0 && !isDisabled}
+      <div class="counter" class:counter-error={count > maxcount}>
+        {#if countby && count > maxcount}
+          {count - maxcount} {pluralize(countby, count - maxcount)} too many
+        {:else if countby && count < maxcount}
+          {maxcount - count} {pluralize(countby, maxcount - count)} remaining
+        {/if}
+      </div>
+    {/if}
 
-  {#if countby && maxcount < 0 && count > 0 && !isDisabled}
-    <div class="counter">
-      {count}
-      {pluralize(countby, count)}
-    </div>
-  {/if}
+    {#if countby && maxcount < 0 && count > 0 && !isDisabled}
+      <div class="counter">
+        {count}
+        {pluralize(countby, count)}
+      </div>
+    {/if}
+  </div>
 </div>
 
 <!-- Style -->
@@ -125,6 +127,10 @@
     font-family: var(--goa-font-family-sans);
   }
 
+  #container {
+    container: self / inline-size;
+  }
+
   .root {
     position: relative;
     width: 100%;
@@ -133,22 +139,8 @@
     border-radius: 3px;
   }
 
-  .root:has(textarea:disabled) {
-    background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-greyscale-200);
-    cursor: default;
-    box-shadow: none;
-  }
-
-  @media not (--mobile) {
-    .root {
-      max-width: var(--width);
-    }
-  }
-
   textarea {
     display: block;
-    width: 100%;
     box-sizing: border-box;
     outline: none;
     border: none;
@@ -161,7 +153,17 @@
     resize: vertical;
   }
 
-  @media not (--mobile) {
+  @container self (--mobile) {
+    textarea {
+      width: 100%;
+      min-width: 100%;
+    }
+  }
+
+  @container self (--not-mobile) {
+    .root {
+      max-width: var(--width);
+    }
     textarea {
       min-width: 0;
       width: var(--width);

@@ -65,9 +65,7 @@
 <!-- HTML -->
 <div
   style={calculateMargin(mt, mr, mb, ml)}
-  class={`
-    goa-accordion
-  `}
+  class="goa-accordion"
   data-testid={testid}
 >
   <details open={isOpen}>
@@ -118,6 +116,10 @@
     box-sizing: border-box;
   }
 
+  .goa-accordion {
+    container: self / inline-size;
+  }
+
   summary {
     min-height: 3.5rem;
     border-width: var(--goa-border-width-s);
@@ -126,85 +128,18 @@
     background-color: var(--goa-color-greyscale-100);
     border-color: var(--goa-color-greyscale-200);
     color: var(--goa-color-text-default);
-    padding: 0.875rem 1rem 0 0;
     cursor: pointer;
     list-style: none;
     display: flex;
-    align-items: flex-start;
-    position: relative;
-  }
-
-  summary.container-medium {
-    min-height: 4rem;
-  }
-
-  summary::marker, /* Latest Chrome, Edge, Firefox */
-  summary::-webkit-details-marker /* Safari */ {
-    display: none;
-  }
-
-  summary .title {
-    display: flex;
     align-items: center;
-    flex: 1;
-  }
 
-  .title span {
-    padding-bottom: var(--goa-space-3xs, 0);
-  }
-
-  summary .heading {
-    font: var(--goa-typography-heading-s);
-    padding-right: 1rem;
-  }
-
-  summary .secondary-text {
-    font: var(--goa-typography-body-s);
-    line-height: 1.5rem;
-    padding-right: 1rem;
-  }
-
-  summary .heading-content {
-    flex: 1;
+    /* safari hack (see below) */
     position: relative;
-  }
-
-  .content {
-    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    border-left: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    border-right: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    border-bottom-left-radius: var(--goa-border-radius-m);
-    border-bottom-right-radius: var(--goa-border-radius-m);
-    padding: 1.5rem;
-    padding-left: 3.5rem;
-    padding-right: 2rem;
-  }
-
-  .content :global(::slotted(*:last-child)) {
-    margin-bottom: 0 !important;
-  }
-
-  summary goa-icon {
-    padding: 0.125rem 1rem;
-  }
-
-  summary.container-medium goa-icon {
-    padding: 0.375rem 1rem;
-  }
-
-  details[open] goa-icon {
-    transform: rotate(90deg);
-  }
-
-  details[open] summary {
-    border-bottom-left-radius: var(--goa-border-radius-none);
-    border-bottom-right-radius: var(--goa-border-radius-none);
   }
 
   summary:hover {
     background-color: var(--goa-color-greyscale-200);
   }
-
   summary:focus,
   summary:active {
     background-color: var(--goa-color-greyscale-100);
@@ -224,26 +159,100 @@
     border-radius: 4px;
   }
 
+  summary::marker, /* Latest Chrome, Edge, Firefox */
+  summary::-webkit-details-marker /* Safari */ {
+    display: none;
+  }
+
+  summary goa-icon {
+    padding: 0.125rem 1rem;
+  }
+
+  .title {
+    display: flex;
+    flex: 1;
+  }
+
+  .title span {
+    padding-bottom: var(--goa-space-3xs, 0);
+  }
+
+  .heading {
+    font: var(--goa-typography-heading-s);
+    padding-right: 1rem;
+  }
+
+  .secondary-text {
+    font: var(--goa-typography-body-s);
+    line-height: 1.5rem;
+    padding-right: 1rem;
+  }
+
+  .heading-content {
+    flex: 1;
+  }
+
+  goa-icon {
+    padding: 0.125rem 1rem;
+  }
+
+  .container-medium {
+    min-height: 4rem;
+  }
+
+  .container-medium goa-icon {
+    padding: 0.375rem 1rem;
+  }
+
+  .content {
+    border-bottom: var(--goa-border-width-s) solid
+      var(--goa-color-greyscale-200);
+    border-left: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-right: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-bottom-left-radius: var(--goa-border-radius-m);
+    border-bottom-right-radius: var(--goa-border-radius-m);
+  }
+
+  .content :global(::slotted(*:last-child)) {
+    margin-bottom: 0 !important;
+  }
+  
+  details[open] goa-icon {
+    transform: rotate(90deg);
+  }
+
+  details[open] summary {
+    border-bottom-left-radius: var(--goa-border-radius-none);
+    border-bottom-right-radius: var(--goa-border-radius-none);
+  }
+
   /* Sizes */
-  summary .heading.heading-medium {
+  .heading-medium {
     line-height: 2rem;
     font: var(--goa-typography-heading-m);
   }
 
-  @media (--mobile) {
+  @container self (--mobile) {
+    .content {
+      padding: 1.5rem;
+    }
     summary {
+      padding-bottom: 1rem;
       align-items: flex-start;
     }
-    summary .title {
+    .title {
+      display: flex;
       flex-direction: column;
       align-items: flex-start;
-      padding-bottom: 0.875rem;
     }
-    summary .title span {
-      padding-bottom: 0;
+  }
+
+  @container self (--not-mobile) {
+    .content {
+      padding: 1.5rem 2rem 1.5rem 3.5rem;
     }
-    summary .heading-content.heading-content-top {
-      margin-top: var(--goa-space-xs);
+    .title {
+      align-items: center;
     }
   }
 </style>

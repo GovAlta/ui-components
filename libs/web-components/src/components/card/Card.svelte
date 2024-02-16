@@ -20,19 +20,21 @@
 </script>
 
 <!-- HTML -->
-<div
-  data-testid={testid}
-  class="card"
-  style="
+<div id="container">
+  <div
+    data-testid={testid}
+    class="card"
+    style="
     --width: {width};
     --height: {height === 'auto' ? 'auto' : '100%'};
     {calculateMargin(mt, mr, mb, ml)}
     {elevation === 0
-    ? `border: 1px solid var(--goa-color-greyscale-200);`
-    : `box-shadow: var(--shadow-${elevation});`}
+      ? `border: 1px solid var(--goa-color-greyscale-200);`
+      : `box-shadow: var(--shadow-${elevation});`}
   "
->
-  <slot />
+  >
+    <slot />
+  </div>
 </div>
 
 <!-- Style -->
@@ -41,13 +43,19 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
+
+  #container {
+    container: self / inline-size;
+  }
+
   .card {
     background-color: var(--goa-color-greyscale-white);
     border-radius: 4px;
     overflow: hidden;
     height: var(--height);
   }
-  @media not (--mobile) {
+
+  @container self (--not-mobile) {
     .card {
       margin: 0 auto;
     }

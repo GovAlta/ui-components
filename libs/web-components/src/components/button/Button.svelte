@@ -105,15 +105,6 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
-  @media (--mobile) {
-    /* expand the button and :host container on small screens  */
-    :host {
-      width: 100%;
-    }
-    button {
-      width: 100%;
-    }
-  }
 
   button {
     display: inline-flex;
@@ -139,6 +130,16 @@
       transform 0.1s ease-in-out,
       background-color 0.2s ease-in-out,
       border-color 0.2s ease-in-out;
+  }
+
+  @media (--mobile) {
+    :host {
+      width: 100%;
+    }
+    button {
+      width: 100%;
+      display: flex;
+    }
   }
 
   .text {

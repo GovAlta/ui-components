@@ -8,6 +8,13 @@
   export let direction: "row" | "column" = "row";
   export let alignment: "center" | "start" | "end" = "start";
 
+  $: _alignment =
+    alignment === "start"
+      ? "flex-start"
+      : alignment === "end"
+        ? "flex-end"
+        : "center";
+
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -20,7 +27,7 @@
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     --gap: var(--goa-space-${gap});
-    --alignment: ${alignment};
+    --alignment: ${_alignment};
     --direction: ${direction};
   `}
 >
