@@ -60,5 +60,3 @@ export * from "./lib/textarea/textarea";
 export * from "./lib/three-column-layout/three-column-layout";
 export * from "./lib/tooltip/tooltip";
 export * from "./lib/two-column-layout/two-column-layout";
-
-export * from "./common/styling"
