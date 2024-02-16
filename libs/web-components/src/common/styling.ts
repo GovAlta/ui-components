@@ -91,3 +91,22 @@ export function calculateMargin(
     ml && ml !== "none" && `margin-left:var(--goa-space-${ml});` || "",
   ].join(" ");
 }
+
+export function injectCss(
+  el: HTMLElement,
+  rootSelector: string,
+  css: Record<string, string | number>,
+  media?: string,
+) {
+  if (!el) return;
+  const style = document.createElement("style");
+  const _css = Object.entries(css)
+    .map((entry) => `${entry[0]}: ${entry[1]};`)
+    .join(" ");
+  if (media) {
+    style.innerHTML = `@media (${media}) { ${rootSelector} {${_css}} }`;
+  } else {
+    style.innerHTML = `${rootSelector} {${_css}}`;
+  }
+  el.appendChild(style);
+}

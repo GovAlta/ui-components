@@ -75,16 +75,9 @@
 </div>
 
 <!-- Style -->
-<style>
-  :host {
-    box-sizing: border-box;
-    font-family: var(--goa-font-family-sans);
-    font-size: var(--goa-font-size-4);
-    display: flex;
-    flex: 1 1 auto;
-  }
-
+<style>  
   .goa-container {
+    container: self / inline-size;
     box-sizing: border-box;
     display: flex;
     flex: 1 1 auto;
@@ -175,7 +168,7 @@
   }
 
   /* Override padding in small screens to the compact value */
-  @media (--mobile) {
+  @container self (--mobile) {
     .padding--relaxed header {
       padding: 0 1rem;
     }

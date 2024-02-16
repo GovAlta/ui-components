@@ -43,11 +43,11 @@
 </script>
 
 <!-- HTML -->
-<header
-  class="goa-official-site-header"
-  style={`--max-content-width: ${maxcontentwidth}`}
->
-  <div class="content-container">
+<div id="container">
+  <div 
+    class="content-container"
+    style={`--max-content-width: ${maxcontentwidth}`}
+  >
     {#if type === "live"}
       <div data-testid="type" class="site-text">
         An official site of the <a
@@ -87,13 +87,17 @@
       </div>
     {/if}
   </div>
-</header>
+</div>
 
 <!-- Style -->
 <style>
   :host {
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
+  }
+
+  #container {
+    container: self / inline-size;
   }
 
   a {
@@ -129,31 +133,28 @@
     background-color: var(--goa-color-interactive-hover);
   }
 
-  .goa-official-site-header {
+  .content-container {
+
     font-size: var(--goa-font-size-2);
     background-color: var(--goa-color-greyscale-100);
     padding: 0.5rem 1rem;
-  }
-
-  .content-container {
+  
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
     max-width: min(var(--max-content-width), 100%);
     margin: 0 auto;
   }
 
-  @media not (--mobile) {
-    .goa-official-site-header {
-      padding: 0.25rem 2rem;
-    }
+  @container self (--not-mobile) {
     .content-container {
       align-items: center;
+      padding: 0.25rem 2rem;
     }
   }
 
-  @media (--desktop) {
-    .goa-official-site-header {
+  @container self (--desktop) {
+    .content-container {
       padding: 0.25rem 4.5rem;
     }
   }

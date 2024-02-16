@@ -37,7 +37,7 @@
   type SkeletonType = (typeof Types)[number];
   type SkeletonSize = (typeof Sizes)[number];
 
-  export let maxwidth: string = "";
+  export let maxwidth: string = "300px";
   export let size: SkeletonSize = "1";
   export let linecount: number = 3;
   export let type: SkeletonType;
@@ -56,7 +56,10 @@
 </script>
 
 <!-- HTML -->
-<div data-testid={testid} style="{calculateMargin(mt, mr, mb, ml)};">
+<div 
+  id="container"
+  data-testid={testid} 
+  style={calculateMargin(mt, mr, mb, ml)}>
   {#if type === "card"}
     <div class="card card-{size}" style="--max-width: {maxwidth};">
       <svelte:self type="image" {size} />
@@ -103,6 +106,11 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
+
+  #container {
+    container: self / inline-size;
+  }
+  
   @keyframes pulse {
     0% {
       opacity: 0.5;
@@ -280,13 +288,14 @@
     border-radius: 4px;
   }
 
-  .card {
-    width: 100%;
-  }
-
-  @media not (--mobile) {
+  @container self (--mobile) {
     .card {
-      max-width: var(--max-width);
+      width: 100%;
+    }
+  }
+  @container self (--not-mobile) {
+    .card {
+      width: var(--max-width);
     }
   }
 

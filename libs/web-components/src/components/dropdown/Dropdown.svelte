@@ -516,9 +516,9 @@
   class="dropdown"
   class:dropdown-native={_native}
   style={`
-    ${calculateMargin(mt, mr, mb, ml)};
-    --width: min(${_width}, ${_rootElWidth}px);
-  `}
+      ${calculateMargin(mt, mr, mb, ml)};
+      --width: ${_width};
+    `}
   bind:this={_rootEl}
 >
   {#if _native}
@@ -570,8 +570,8 @@
 
         <input
           style={`
-            cursor: ${!_disabled ? (_filterable ? "auto" : "pointer") : "default"};
-          `}
+              cursor: ${!_disabled ? (_filterable ? "auto" : "pointer") : "default"};
+            `}
           data-testid="input"
           bind:this={_inputEl}
           type="text"
@@ -637,10 +637,10 @@
         aria-label={arialabel || name}
         aria-labelledby={arialabelledby}
         style={`
-          outline: none;
-          overflow-y: auto;
-          max-height: ${maxheight};
-        `}
+            outline: none;
+            overflow-y: auto;
+            max-height: ${maxheight};
+          `}
       >
         {#each _filteredOptions as option, index (index)}
           <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -682,6 +682,18 @@
     width: var(--width, 100%);
   }
 
+  @media (--mobile) {
+    .dropdown {
+      width: 100%;
+    }
+  }
+
+  @media (--not-mobile) {
+    .dropdown {
+      width: var(--width, 100%);
+    }
+  }
+
   .dropdown-input-group {
     box-sizing: border-box;
     outline: none;
@@ -709,7 +721,7 @@
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
 
-  @media not (--mobile) {
+  @container not (--mobile) {
     .dropdown-input-group {
       width: var(--width);
     }
