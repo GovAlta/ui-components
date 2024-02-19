@@ -11,6 +11,7 @@
   export let url: string = "";
   export let testid: string = "";
   export let maxcontentwidth = "";
+  export let fullmenubreakpoint: number = TABLET_BP; // minimum window width to show all menu links
 
   // Private
 
@@ -27,8 +28,8 @@
   // Reactive
 
   $: _mobile = _windowWidth < MOBILE_BP;
-  $: _tablet = _windowWidth >= MOBILE_BP && _windowWidth < TABLET_BP;
-  $: _desktop = _windowWidth >= TABLET_BP;
+  $: _tablet = _windowWidth >= MOBILE_BP && _windowWidth < fullmenubreakpoint;
+  $: _desktop = _windowWidth >= +fullmenubreakpoint;
   // @ts-expect-error
   $: (async () => (_showToggleMenu = _desktop ? false : await hasChildren()))();
 
@@ -105,6 +106,8 @@
   data-testid={testid}
   style={`--max-content-width: ${maxcontentwidth || "100%"}`}
   class:show-menu={_showMenu}
+  class:mobile={_mobile}
+  class:desktop={_desktop}
 >
   <div class="layout">
     <!-- Logo and optional heading link -->
@@ -287,9 +290,7 @@
     font: var(--goa-typography-body-m);
     text-decoration: none;
     color: var(--goa-color-text-default);
-    display: block;
     padding: calc((3rem - var(--goa-line-height-3)) / 2) 1rem;
-    text-decoration: none;
     cursor: pointer;
     white-space: nowrap;
   }
@@ -323,23 +324,21 @@
     }
   }
 
-  @media not (--mobile) {
-    *,
-    :global(::slotted(*)) {
-      font: var(--goa-typography-body-m);
-    }
-    .layout {
-      grid-template-rows: 4rem auto;
-    }
-    .header-logo-title-area {
-      padding: 0 1.5rem;
-    }
-    .title {
-      margin-left: var(--goa-space-m);
-    }
-    .header-logo-title-area {
-      min-height: 4rem;
-    }
+  :not(.mobile) *,
+  :not(.mobile):global(::slotted(*)) {
+    font: var(--goa-typography-body-m);
+  }
+  :not(.mobile) .layout {
+    grid-template-rows: 4rem auto;
+  }
+  :not(.mobile) .header-logo-title-area {
+    padding: 0 1.5rem;
+  }
+  :not(.mobile) .title {
+    margin-left: var(--goa-space-m);
+  }
+  :not(.mobile) .header-logo-title-area {
+    min-height: 4rem;
   }
 
   @media (--tablet) {
@@ -355,88 +354,90 @@
     }
   }
 
-  @media (--desktop) {
-    .image-desktop {
-      display: block;
-    }
-    .image-mobile {
-      display: none;
-    }
+  .desktop .image-desktop {
+    display: block;
+  }
 
-    .layout {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      grid-template-rows: auto;
-      grid-template-areas: "header . menu";
-      margin: 0 auto;
-      width: min(var(--max-content-width), 100%);
-    }
+  .desktop .image-mobile {
+    display: none;
+  }
 
-    .header-logo-title-area {
-      grid-area: header;
-      display: flex;
-      align-items: center;
-      grid-template-rows: 3.375rem auto;
-      color: inherit;
-      flex: 1 1 auto;
-    }
+  .desktop .layout {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto;
+    grid-template-areas: "header . menu";
+    margin: 0 auto;
+    width: min(var(--max-content-width), 100%);
+  }
 
-    .content-area {
-      grid-area: menu;
-      display: flex;
-      align-items: stretch;
-    }
+  .desktop .header-logo-title-area {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    grid-template-rows: 3.375rem auto;
+    color: inherit;
+    flex: 1 1 auto;
+  }
 
-    :global(::slotted(goa-app-header-menu)),
-    :global(::slotted(a)),
-    :global(::slotted(a:visited)) {
-      color: var(--goa-color-text-default);
-      font-weight: var(--goa-font-weight-bold);
-      grid-template-rows: 3.375rem auto;
-      display: inline-flex;
-      align-items: center;
-      padding: 0 0.75rem;
-    }
-    :global(::slotted(goa-app-header-menu)) {
-      padding: 0;
-    }
+  .desktop .content-area {
+    grid-area: menu;
+    display: flex;
+    align-items: stretch;
+  }
 
-    :global(::slotted(a:focus-within)),
-    :global(::slotted(goa-app-header-menu:focus-within)),
-    :global(::slotted(a:hover)),
-    :global(::slotted(goa-app-header-menu:hover)) {
-      background: var(--goa-color-greyscale-100);
-      cursor: pointer;
-      color: var(--goa-color-interactive-hover);
-    }
+  .desktop :global(::slotted(goa-app-header-menu)),
+  .desktop :global(::slotted(a)),
+  .desktop :global(::slotted(a:visited)) {
+    color: var(--goa-color-text-default);
+    font-weight: var(--goa-font-weight-bold);
+    grid-template-rows: 3.375rem auto;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.75rem;
+  }
 
-    :global(::slotted(a:focus)),
-    :global(::slotted(goa-app-header-menu:focus)) {
-      outline: var(--goa-border-width-l) solid
-        var(--goa-color-interactive-focus);
-      outline-offset: calc(-1 * var(--goa-border-width-l));
-    }
+  .desktop :global(::slotted(goa-app-header-menu)) {
+    padding: 0;
+  }
 
-    :global(::slotted(a.current)) {
-      border-top: 4px solid var(--goa-color-interactive-default);
-      border-bottom: 4px solid transparent;
-    }
-    :global(::slotted(a.current:hover)) {
-      border-top: 4px solid var(--goa-color-interactive-hover);
-    }
+  .desktop :global(::slotted(a:focus-within)),
+  .desktop :global(::slotted(goa-app-header-menu:focus-within)),
+  .desktop :global(::slotted(a:hover)),
+  .desktop :global(::slotted(goa-app-header-menu:hover)) {
+    background: var(--goa-color-greyscale-100);
+    cursor: pointer;
+    color: var(--goa-color-interactive-hover);
+  }
 
-    :global(::slotted(a.interactive)) {
-      font-weight: var(--goa-font-weight-medium);
-      text-decoration: underline;
-      color: var(--goa-color-interactive-default);
-      padding: 0 var(--goa-space-m);
-    }
-    :global(::slotted(a.interactive:hover)) {
-      color: var(--goa-color-interactive-hover);
-    }
-    :global(::slotted(a.interactive.current)) {
-      border-color: transparent;
-      margin-left: var(--goa-space-m);
-    }
+  .desktop :global(::slotted(a:focus)),
+  .desktop :global(::slotted(goa-app-header-menu:focus)) {
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline-offset: calc(-1 * var(--goa-border-width-l));
+  }
+
+  .desktop :global(::slotted(a.current)) {
+    border-top: 4px solid var(--goa-color-interactive-default);
+    border-bottom: 4px solid transparent;
+  }
+
+  .desktop :global(::slotted(a.current:hover)) {
+    border-top: 4px solid var(--goa-color-interactive-hover);
+  }
+
+  .desktop :global(::slotted(a.interactive)) {
+    font-weight: var(--goa-font-weight-medium);
+    text-decoration: underline;
+    color: var(--goa-color-interactive-default);
+    padding: 0 var(--goa-space-m);
+  }
+
+  .desktop :global(::slotted(a.interactive:hover)) {
+    color: var(--goa-color-interactive-hover);
+  }
+
+  .desktop :global(::slotted(a.interactive.current)) {
+    border-color: transparent;
+    margin-left: var(--goa-space-m);
   }
 </style>
