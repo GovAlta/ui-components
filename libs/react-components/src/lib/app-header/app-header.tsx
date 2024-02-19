@@ -2,6 +2,7 @@ interface WCProps {
   heading?: string;
   url?: string;
   maxcontentwidth?: string;
+  fullmenubreakpoint?: number;
 }
 
 declare global {
@@ -17,6 +18,7 @@ export interface GoAAppHeaderProps {
   heading?: string;
   url?: string;
   maxContentWidth?: string;
+  fullMenuBreakpoint?: number;
   children?: React.ReactNode;
   testId?: string;
 }
@@ -25,6 +27,7 @@ export function GoAAppHeader({
   heading,
   url,
   maxContentWidth,
+  fullMenuBreakpoint,
   testId,
   children,
 }: GoAAppHeaderProps): JSX.Element {
@@ -32,6 +35,7 @@ export function GoAAppHeader({
     <goa-app-header
       heading={heading}
       url={url}
+      fullmenubreakpoint={fullMenuBreakpoint}
       maxcontentwidth={maxContentWidth}
       data-testid={testId}
     >

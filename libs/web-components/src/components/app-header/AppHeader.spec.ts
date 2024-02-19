@@ -34,6 +34,48 @@ describe('AppHeader Desktop with children', () => {
   });
 });
 
+describe("AppHeader Desktop with a defined fullmenubreakpoint", () => {
+  let $t: (query: string) => HTMLElement | null;
+
+  const heading = "Test heading";
+  const url = "http://localhost/foo"
+
+  beforeEach(async () => {
+    Object.defineProperty(window, 'innerWidth', {
+      writable: true,
+      value: 1500, // desktop width 1500 > 1024 tablet width, but want to collapse menu
+    });
+  });
+
+  it("should show menu toggle when fullmenubreakpoint = 1700", async() => {
+    const result = render(AppHeaderWrapper, {heading, url, haschildren: true, fullmenubreakpoint: 1700});
+
+    const c = result.container
+    $t = result.queryByTestId.bind(c);
+    await waitFor(
+      () => {
+        const toggleBtn = $t("menu-toggle");
+        expect(toggleBtn).toBeTruthy();
+        const contentAreaDiv = c.querySelectorAll("div.content-area");
+        expect(contentAreaDiv.length).toBe(0);
+      },
+      { timeout: 1 },
+    );
+  });
+
+  it("should show desktop menu when fullmenubreakpoint = 1400", async() => {
+    const result = render(AppHeaderWrapper, {heading, url, haschildren: true, fullmenubreakpoint: 1400});
+
+    const c = result.container
+    $t = result.queryByTestId.bind(c);
+
+    const toggleBtn = $t("menu-toggle");
+    expect(toggleBtn).toBeFalsy();
+    const links = c.querySelectorAll("a");
+    expect(links.length).toBe(6);  // 5 custom links + 1 app header url
+  });
+})
+
 describe('AppHeader Mobile', () => {
 
   let $t: (query: string) => HTMLElement | null;
