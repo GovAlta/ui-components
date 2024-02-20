@@ -11,10 +11,9 @@
   },
   "semantic-release": "semantic-release",
   "scripts": {},
-  "private": true,
   "type": "module",
   "main": "./index.js",
-  "module": "./index.mjs",
+  "module": "./index.js",
   "keywords": [
     "GoA",
     "Web Components"
