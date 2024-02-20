@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-tooltip" />
 
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
   import { typeValidator } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
@@ -117,7 +117,10 @@
     }, 500);
   };
 
-  function checkAndAdjustPosition() {
+  async function checkAndAdjustPosition() {
+    // angular needs time to render the _tooltipEl
+    await tick();
+
     if (!_tooltipEl || !_rootEl) {
       return;
     }
