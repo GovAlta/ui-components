@@ -10,7 +10,7 @@
     "build": "nx affected -t build --exclude=angular --exclude=react --exclude=web",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "test": "vitest",
-    "lint": "nx run-many --target=lint --all",
+    "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web",
     "validate": "npm run build && npm run lint && vitest --run",
     "dev:web": "(npm run serve:web & npm run svelte:watch)",
     "dev:react": "(npm run serve:react & npm run svelte:watch)",
@@ -19,7 +19,7 @@
   "private": true,
   "devDependencies": {
     "@abgov/design-tokens": "^1.1.1",
-    "@abgov/nx-release": "^5.0.0",
+    "@abgov/nx-release": "^8.1.0",
     "@angular-devkit/build-angular": "17.1.2",
     "@angular-devkit/core": "17.1.2",
     "@angular-devkit/schematics": "17.1.2",
@@ -103,8 +103,5 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "0.14.3"
-  },
-  "overrides": {
-    "@nrwl/devkit": "^18.0.0"
   }
 }
