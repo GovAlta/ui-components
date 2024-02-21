@@ -47,7 +47,7 @@
   ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--goa-space-l);
     padding-left: 0;
   }
 
