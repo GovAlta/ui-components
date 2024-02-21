@@ -1,22 +1,7 @@
-<svelte:options tag="goa-one-column-layout" />
+<svelte:options customElement="goa-one-column-layout" />
 
 <script lang="ts">
 </script>
-
-<style>
-  .page {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .header, .footer {
-    flex: 0 0 auto;
-  }
-  main {
-    flex: 1 1 auto;
-  }
-</style>
 
 <div class="page">
   <section class="header">
@@ -31,3 +16,19 @@
     <slot name="footer" />
   </section>
 </div>
+
+<style>
+  .page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header,
+  .footer {
+    flex: 0 0 auto;
+  }
+  main {
+    flex: 1 1 auto;
+  }
+</style>

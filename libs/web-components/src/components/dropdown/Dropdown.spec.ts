@@ -1,11 +1,10 @@
-import "@testing-library/jest-dom";
 import { render, fireEvent, cleanup, waitFor } from "@testing-library/svelte";
 import GoADropdown from "./Dropdown.svelte";
 import GoADropdownWrapper from "./DropdownWrapper.test.svelte";
+import { it, describe } from "vitest";
 
 afterEach(() => {
   cleanup();
-  jest.clearAllMocks();
 });
 
 describe("GoADropdown", () => {
@@ -21,38 +20,38 @@ describe("GoADropdown", () => {
       });
 
       const popover = result.container.querySelector("goa-popover");
-      expect(popover.getAttribute("disabled")).toBe("false");
-      expect(popover.getAttribute("open")).toBe("false");
-      expect(popover.getAttribute("padded")).toBe("false");
-      expect(popover.getAttribute("relative")).toBe("false");
+      expect(popover?.getAttribute("disabled")).toBe("false");
+      expect(popover?.getAttribute("open")).toBe("false");
+      expect(popover?.getAttribute("padded")).toBe("false");
+      expect(popover?.getAttribute("relative")).toBe("false");
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
-      const inputField = dropdown.querySelector("input");
-      expect(inputField.getAttribute("id")).toBe("favcolor");
-      expect(inputField.getAttribute("aria-autocomplete")).toBe("list");
-      expect(inputField.getAttribute("aria-controls")).toBe("menu-favcolor");
-      expect(inputField.getAttribute("aria-expanded")).toBe("false");
-      expect(inputField.getAttribute("aria-disabled")).toBe("false");
-      expect(inputField.getAttribute("autocomplete")).toBe("off");
-      expect(inputField.getAttribute("name")).toBe("favcolor");
-      expect(inputField.getAttribute("readonly")).not.toBeNull();
-      expect(inputField.getAttribute("role")).toBe("combobox");
-      expect(inputField.getAttribute("style")).toContain("cursor: pointer");
-      expect(inputField.getAttribute("type")).toBe("text");
-      expect(inputField.getAttribute("aria-owns")).toBeNull(); // Menu is hidden
+      const inputField = dropdown?.querySelector("input");
+      expect(inputField?.getAttribute("id")).toBe("favcolor");
+      expect(inputField?.getAttribute("aria-autocomplete")).toBe("list");
+      expect(inputField?.getAttribute("aria-controls")).toBe("menu-favcolor");
+      expect(inputField?.getAttribute("aria-expanded")).toBe("false");
+      expect(inputField?.getAttribute("aria-disabled")).toBe("false");
+      expect(inputField?.getAttribute("autocomplete")).toBe("off");
+      expect(inputField?.getAttribute("name")).toBe("favcolor");
+      expect(inputField?.getAttribute("readonly")).not.toBeNull();
+      expect(inputField?.getAttribute("role")).toBe("combobox");
+      expect(inputField?.getAttribute("style")).toContain("cursor: pointer");
+      expect(inputField?.getAttribute("type")).toBe("text");
+      expect(inputField?.getAttribute("aria-owns")).toBeNull(); // Menu is hidden
 
       const dropdownIcon = result.container.querySelector("goa-icon#favcolor");
-      expect(dropdownIcon.getAttribute("ariacontrols")).toBe("menu-favcolor");
-      expect(dropdownIcon.getAttribute("ariaexpanded")).toBe("false");
-      expect(dropdownIcon.getAttribute("arialabel")).toBe("favcolor");
-      expect(dropdownIcon.getAttribute("role")).toBe("button");
-      expect(dropdownIcon.getAttribute("type")).toBe("chevron-down");
+      expect(dropdownIcon?.getAttribute("ariacontrols")).toBe("menu-favcolor");
+      expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("false");
+      expect(dropdownIcon?.getAttribute("arialabel")).toBe("favcolor");
+      expect(dropdownIcon?.getAttribute("role")).toBe("button");
+      expect(dropdownIcon?.getAttribute("type")).toBe("chevron-down");
 
       const ul = result.container.querySelector("ul");
-      expect(ul.getAttribute("id")).toBe("menu-favcolor");
-      expect(ul.getAttribute("role")).toBe("listbox");
-      expect(ul.getAttribute("style")).toContain("max-height: 276px"); // default height
-      expect(ul.getAttribute("tabindex")).toBe("-1");
+      expect(ul?.getAttribute("id")).toBe("menu-favcolor");
+      expect(ul?.getAttribute("role")).toBe("listbox");
+      expect(ul?.getAttribute("style")).toContain("max-height: 276px"); // default height
+      expect(ul?.getAttribute("tabindex")).toBe("-1");
 
       // Check options
       await waitFor(() => {
@@ -62,26 +61,26 @@ describe("GoADropdown", () => {
         for (let index = 0; index < items.length; index++) {
           const option = result.container.querySelector("li#" + items[index]);
           expect(option).toBeTruthy();
-          expect(option.getAttribute("aria-selected")).toBe(
+          expect(option?.getAttribute("aria-selected")).toBe(
             "orange" === items[index] ? "true" : "false",
           );
-          expect(option.getAttribute("data-index")).toBe(`${index}`);
-          expect(option.getAttribute("data-testid")).toBe(
+          expect(option?.getAttribute("data-index")).toBe(`${index}`);
+          expect(option?.getAttribute("data-testid")).toBe(
             "dropdown-item-" + items[index],
           );
-          expect(option.getAttribute("data-value")).toBe(items[index]);
-          expect(option.getAttribute("role")).toBe("option");
+          expect(option?.getAttribute("data-value")).toBe(items[index]);
+          expect(option?.getAttribute("role")).toBe("option");
           expect(option).toHaveTextContent(items[index]);
         }
       });
 
       // show menu
-      await fireEvent.click(dropdownIcon);
+      dropdownIcon && await fireEvent.click(dropdownIcon);
       await waitFor(() => {
-        expect(popover.getAttribute("open")).toBe("true");
-        expect(inputField.getAttribute("aria-owns")).toBe("menu-favcolor"); // Menu is displayed
-        expect(dropdownIcon.getAttribute("ariaexpanded")).toBe("true");
-        expect(dropdownIcon.getAttribute("type")).toBe("chevron-up");
+        expect(popover?.getAttribute("open")).toBe("true");
+        expect(inputField?.getAttribute("aria-owns")).toBe("menu-favcolor"); // Menu is displayed
+        expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("true");
+        expect(dropdownIcon?.getAttribute("type")).toBe("chevron-up");
       });
     });
 
@@ -95,54 +94,54 @@ describe("GoADropdown", () => {
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const popover = result.container.querySelector("goa-popover");
-      expect(popover.getAttribute("disabled")).toBe("false");
-      expect(popover.getAttribute("open")).toBe("false");
-      expect(popover.getAttribute("padded")).toBe("false");
-      expect(popover.getAttribute("relative")).toBe("false");
+      expect(popover?.getAttribute("disabled")).toBe("false");
+      expect(popover?.getAttribute("open")).toBe("false");
+      expect(popover?.getAttribute("padded")).toBe("false");
+      expect(popover?.getAttribute("relative")).toBe("false");
 
-      const inputField = dropdown.querySelector("input");
-      expect(inputField.getAttribute("id")).toBe("favcolor");
-      expect(inputField.getAttribute("aria-autocomplete")).toBe("list");
-      expect(inputField.getAttribute("aria-controls")).toBe("menu-favcolor");
-      expect(inputField.getAttribute("aria-expanded")).toBe("false");
-      expect(inputField.getAttribute("aria-disabled")).toBe("false");
-      expect(inputField.getAttribute("autocomplete")).toBe("off");
-      expect(inputField.getAttribute("name")).toBe("favcolor");
-      expect(inputField.getAttribute("readonly")).toBeNull(); // Input is editable
-      expect(inputField.getAttribute("role")).toBe("combobox");
-      expect(inputField.getAttribute("style")).toContain("cursor: auto"); // Input cursor
-      expect(inputField.getAttribute("type")).toBe("text");
-      expect(inputField.getAttribute("aria-owns")).toBeNull(); // Menu is hidden
+      const inputField = dropdown?.querySelector("input");
+      expect(inputField?.getAttribute("id")).toBe("favcolor");
+      expect(inputField?.getAttribute("aria-autocomplete")).toBe("list");
+      expect(inputField?.getAttribute("aria-controls")).toBe("menu-favcolor");
+      expect(inputField?.getAttribute("aria-expanded")).toBe("false");
+      expect(inputField?.getAttribute("aria-disabled")).toBe("false");
+      expect(inputField?.getAttribute("autocomplete")).toBe("off");
+      expect(inputField?.getAttribute("name")).toBe("favcolor");
+      expect(inputField?.getAttribute("readonly")).toBeNull(); // Input is editable
+      expect(inputField?.getAttribute("role")).toBe("combobox");
+      expect(inputField?.getAttribute("style")).toContain("cursor: auto"); // Input cursor
+      expect(inputField?.getAttribute("type")).toBe("text");
+      expect(inputField?.getAttribute("aria-owns")).toBeNull(); // Menu is hidden
 
       const dropdownIcon = result.container.querySelector("goa-icon#favcolor");
-      expect(dropdownIcon.getAttribute("ariacontrols")).toBe("menu-favcolor");
-      expect(dropdownIcon.getAttribute("ariaexpanded")).toBe("false");
-      expect(dropdownIcon.getAttribute("arialabel")).toBe("clear favcolor");
-      expect(dropdownIcon.getAttribute("role")).toBe("button");
-      expect(dropdownIcon.getAttribute("type")).toBe("close");
+      expect(dropdownIcon?.getAttribute("ariacontrols")).toBe("menu-favcolor");
+      expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("false");
+      expect(dropdownIcon?.getAttribute("arialabel")).toBe("clear favcolor");
+      expect(dropdownIcon?.getAttribute("role")).toBe("button");
+      expect(dropdownIcon?.getAttribute("type")).toBe("close");
 
       const ul = result.container.querySelector("ul");
-      expect(ul.getAttribute("id")).toBe("menu-favcolor");
-      expect(ul.getAttribute("role")).toBe("listbox");
-      expect(ul.getAttribute("style")).toContain("max-height: 276px"); // default height
-      expect(ul.getAttribute("tabindex")).toBe("-1");
+      expect(ul?.getAttribute("id")).toBe("menu-favcolor");
+      expect(ul?.getAttribute("role")).toBe("listbox");
+      expect(ul?.getAttribute("style")).toContain("max-height: 276px"); // default height
+      expect(ul?.getAttribute("tabindex")).toBe("-1");
 
       // Check options
       const option = result.container.querySelector("li#orange");
-      expect(option.getAttribute("aria-selected")).toBe("true");
-      expect(option.getAttribute("data-testid")).toBe("dropdown-item-orange");
-      expect(option.getAttribute("data-value")).toBe("orange");
-      expect(option.getAttribute("role")).toBe("option");
+      expect(option?.getAttribute("aria-selected")).toBe("true");
+      expect(option?.getAttribute("data-testid")).toBe("dropdown-item-orange");
+      expect(option?.getAttribute("data-value")).toBe("orange");
+      expect(option?.getAttribute("role")).toBe("option");
       expect(option).toHaveTextContent("orange");
 
       // show menu
       await fireEvent.click(dropdownIcon);
       await waitFor(() => {
         const icon = result.container.querySelector("goa-icon#favcolor");
-        expect(popover.getAttribute("open")).toBe("true");
-        expect(inputField.getAttribute("aria-owns")).toBe("menu-favcolor");
-        expect(icon.getAttribute("ariaexpanded")).toBe("true");
-        expect(icon.getAttribute("type")).toBe("chevron-up");
+        expect(popover?.getAttribute("open")).toBe("true");
+        expect(inputField?.getAttribute("aria-owns")).toBe("menu-favcolor");
+        expect(icon?.getAttribute("ariaexpanded")).toBe("true");
+        expect(icon?.getAttribute("type")).toBe("chevron-up");
       });
     });
   });
@@ -151,25 +150,29 @@ describe("GoADropdown", () => {
     it("selects a value when clicking on the option", async () => {
       const result = render(GoADropdownWrapper, { name, items });
 
-      const onClick = jest.fn();
+      const onClick = vi.fn();
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const dropdownIcon = result.container.querySelector("goa-icon");
 
-      dropdown.addEventListener("_change", (e: CustomEvent) => {
-        onClick(e.detail.name, e.detail.value);
+      expect(dropdown).toBeTruthy();
+
+      dropdown?.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        onClick(ce.detail.name, ce.detail.value);
       });
 
       // open menu
-      await fireEvent.click(dropdownIcon);
+      dropdownIcon && await fireEvent.click(dropdownIcon);
 
       // click option
       const option = result.queryByTestId("dropdown-item-orange");
-      await fireEvent.click(option);
+      expect(option).toBeTruthy();
+      option && await fireEvent.click(option);
 
       await waitFor(async () => {
         expect(onClick).toBeCalledTimes(1);
         expect(onClick).toHaveBeenCalledWith("favcolor", "orange");
-        expect(option.getAttribute("aria-selected")).toBe("true");
+        expect(option?.getAttribute("aria-selected")).toBe("true");
       });
     });
 
@@ -180,21 +183,22 @@ describe("GoADropdown", () => {
         filterable: true,
       });
       const input = result.container.querySelector("input");
+      expect(input).toBeTruthy();
 
-      await fireEvent.keyUp(input, { key: "b", code: "b" });
-      await fireEvent.input(input, { target: { value: "b" } });
+      input && await fireEvent.keyUp(input, { key: "b", code: "b" });
+      input && await fireEvent.input(input, { target: { value: "b" } });
 
       await waitFor(async () => {
         // When type in the input, will open the suggestion
         const popover = result.container.querySelector("goa-popover");
         const clearIcon = result.container.querySelector("goa-icon");
 
-        expect(popover.getAttribute("open")).toBe("true");
-        expect(input.getAttribute("aria-expanded")).toBe("true");
-        expect(clearIcon.getAttribute("arialabel")).toBe("clear favcolor");
-        expect(clearIcon.getAttribute("role")).toBe("button");
-        expect(clearIcon.getAttribute("tabindex")).toBe("0");
-        expect(clearIcon.getAttribute("type")).toBe("close");
+        expect(popover?.getAttribute("open")).toBe("true");
+        expect(input?.getAttribute("aria-expanded")).toBe("true");
+        expect(clearIcon?.getAttribute("arialabel")).toBe("clear favcolor");
+        expect(clearIcon?.getAttribute("role")).toBe("button");
+        expect(clearIcon?.getAttribute("tabindex")).toBe("0");
+        expect(clearIcon?.getAttribute("type")).toBe("close");
 
         // Should have only Blue option displayed
         const liElements = result.container.querySelectorAll("li");
@@ -265,13 +269,14 @@ describe("GoADropdown", () => {
       const result = render(GoADropdownWrapper, { name, value: "blue", items });
       const button = result.container.querySelector("button");
 
-      await fireEvent.click(button);
+      expect(button).toBeTruthy();
+      button && await fireEvent.click(button);
       await waitFor(async () => {
         const selected = result.container.querySelector(
           "li[aria-selected=true]",
         );
         expect(selected).not.toBeNull();
-        expect(selected.innerHTML).toContain("orange");
+        expect(selected?.innerHTML).toContain("orange");
       });
     });
 
@@ -284,8 +289,9 @@ describe("GoADropdown", () => {
       });
 
       const resetButton = container.querySelector("button");
+      expect(resetButton).toBeTruthy();
 
-      await fireEvent.click(resetButton);
+      resetButton && await fireEvent.click(resetButton);
       await waitFor(() => {
         const selected = container.querySelector("li[aria-selected=true]");
         expect(selected).toBe(null);
@@ -304,22 +310,27 @@ describe("GoADropdown", () => {
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const visibleElements = result.container.querySelectorAll("li");
 
+      expect(clearIcon).toBeTruthy();
+      expect(dropdown).toBeTruthy();
+      expect(visibleElements).toBeTruthy();
+
       expect(visibleElements.length).toBe(1);
 
-      const onChangeMock = jest.fn();
+      const onChangeMock = vi.fn();
 
-      dropdown.addEventListener("_change", (e) => {
-        const d = e["detail"];
+      dropdown?.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        const d = ce.detail;
         onChangeMock(d.name, d.value);
       });
 
-      await fireEvent.click(clearIcon);
+      clearIcon && await fireEvent.click(clearIcon);
       await waitFor(() => {
         const liElements = result.container.querySelectorAll("li");
         expect(liElements.length).toBe(3);
 
         const icon = result.container.querySelector("goa-icon");
-        expect(icon.getAttribute("type")).toBe("chevron-up");
+        expect(icon?.getAttribute("type")).toBe("chevron-up");
         expect(onChangeMock).toHaveBeenCalledWith("favcolor", "");
 
         const lis = result.container.querySelectorAll("li");
@@ -337,10 +348,14 @@ describe("GoADropdown", () => {
       });
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const dropdownIcon = result.container.querySelector("goa-icon");
-      await fireEvent.click(dropdownIcon);
 
-      const onClick = jest.fn();
-      dropdown.addEventListener("_change", () => {
+      expect(dropdown).toBeTruthy();
+      expect(dropdownIcon).toBeTruthy();
+
+      dropdownIcon && await fireEvent.click(dropdownIcon);
+
+      const onClick = vi.fn();
+      dropdown?.addEventListener("_change", () => {
         onClick();
       });
 
@@ -357,9 +372,8 @@ describe("GoADropdown", () => {
         items,
       });
 
-      const dropdown = result.queryByTestId("favcolor-dropdown");
       const dropdownIcon = result.container.querySelector("goa-icon");
-      await fireEvent.click(dropdownIcon);
+      dropdownIcon && await fireEvent.click(dropdownIcon);
 
       await waitFor(async () => {
         const menu = result.queryByTestId("popover-content");
@@ -377,14 +391,17 @@ describe("GoADropdown", () => {
       });
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
-      const inputField = dropdown.querySelector("input");
+      const inputField = dropdown?.querySelector("input");
+
+      expect(dropdown).toBeTruthy();
+      expect(inputField).toBeTruthy();
 
       // show menu
-      await fireEvent.focus(inputField);
+      inputField && await fireEvent.focus(inputField);
       const inputGroupDiv = result.container.querySelector(
         "div.dropdown-input-group",
       );
-      expect(inputGroupDiv.getAttribute("class")).not.toContain("error");
+      expect(inputGroupDiv?.getAttribute("class")).not.toContain("error");
     });
 
     it("shows an error state", async () => {
@@ -394,14 +411,17 @@ describe("GoADropdown", () => {
       });
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
-      const inputField = dropdown.querySelector("input");
+      const inputField = dropdown?.querySelector("input");
+
+      expect(dropdown).toBeTruthy();
+      expect(inputField).toBeTruthy();
 
       // show menu
-      await fireEvent.focus(inputField);
+      inputField && await fireEvent.focus(inputField);
       const inputGroupDiv = result.container.querySelector(
         "div.dropdown-input-group",
       );
-      expect(inputGroupDiv.getAttribute("class")).toContain("error");
+      expect(inputGroupDiv?.getAttribute("class")).toContain("error");
     });
   });
 
@@ -419,10 +439,10 @@ describe("GoADropdown", () => {
         items,
       });
       const leadingIcon = result.queryByTestId("leading-icon");
-      expect(leadingIcon.getAttribute("class")).toContain(
+      expect(leadingIcon?.getAttribute("class")).toContain(
         "dropdown-input--leading-icon",
       );
-      expect(leadingIcon.getAttribute("type")).toBe("add");
+      expect(leadingIcon?.getAttribute("type")).toBe("add");
     });
   });
 
@@ -430,7 +450,7 @@ describe("GoADropdown", () => {
     it("does not show a placeholder", async () => {
       const result = render(GoADropdownWrapper, { name, items });
       const input = result.container.querySelector("input");
-      expect(input.getAttribute("placeholder")).toBe("");
+      expect(input?.getAttribute("placeholder")).toBe("");
     });
 
     it("shows a placeholder", async () => {
@@ -440,7 +460,7 @@ describe("GoADropdown", () => {
         items,
       });
       const input = result.container.querySelector("input");
-      expect(input.getAttribute("placeholder")).toBe("some text");
+      expect(input?.getAttribute("placeholder")).toBe("some text");
     });
   });
 
@@ -452,7 +472,7 @@ describe("GoADropdown", () => {
       });
       await waitFor(() => {
         const popover = result.container.querySelector("goa-popover");
-        expect(popover.getAttribute("width")).toBe("9ch"); // 8 + 1 (letter count of longest item)
+        expect(popover?.getAttribute("width")).toBe("9ch"); // 8 + 1 (letter count of longest item)
       });
     });
 
@@ -462,7 +482,7 @@ describe("GoADropdown", () => {
         items: ["1", "2", "20chars============="],
       });
       const popover = result.container.querySelector("goa-popover");
-      expect(popover.getAttribute("width")).toBe("28ch"); // 8 + 20
+      expect(popover?.getAttribute("width")).toBe("28ch"); // 8 + 20
     });
 
     it("width increased due to leading icon", async () => {
@@ -472,7 +492,7 @@ describe("GoADropdown", () => {
         items: ["1", "2", "3"],
       });
       const popover = result.container.querySelector("goa-popover");
-      expect(popover.getAttribute("width")).toBe("11ch"); // 8 + 1 (letter count) + 2 (icon width)
+      expect(popover?.getAttribute("width")).toBe("11ch"); // 8 + 1 (letter count) + 2 (icon width)
     });
 
     it("uses the non-percent width supplied", async () => {
@@ -482,10 +502,10 @@ describe("GoADropdown", () => {
         items,
       });
       const dropdown = result.queryByTestId("favcolor-dropdown");
-      expect(dropdown.getAttribute("style")).toContain("--width: 500px");
+      expect(dropdown?.getAttribute("style")).toContain("--width: 500px");
 
       const popover = result.container.querySelector("goa-popover");
-      expect(popover.getAttribute("width")).toBe("500px"); // Equals with computed width
+      expect(popover?.getAttribute("width")).toBe("500px"); // Equals with computed width
     });
 
     it.skip("sets the input width to 100% when percent value used", async () => {
@@ -496,12 +516,12 @@ describe("GoADropdown", () => {
       });
       const dropdown = result.queryByTestId("favcolor-dropdown");
       await waitFor(() => {
-        expect(dropdown.getAttribute("style")).toContain("--width: 100%");
+        expect(dropdown?.getAttribute("style")).toContain("--width: 100%");
       });
 
       const popover = result.container.querySelector("goa-popover");
       await waitFor(() => {
-        expect(popover.getAttribute("width")).toBe("100%"); // Equals with computed width
+        expect(popover?.getAttribute("width")).toBe("100%"); // Equals with computed width
       });
     });
   });
@@ -510,7 +530,10 @@ describe("GoADropdown", () => {
     it("uses the default max height", async () => {
       const result = render(GoADropdownWrapper, { name, items });
       const dropdownIcon = result.container.querySelector("goa-icon");
-      await fireEvent.click(dropdownIcon);
+
+      expect(dropdownIcon).toBeTruthy();
+
+      dropdownIcon && await fireEvent.click(dropdownIcon);
 
       const menu = result.queryByTestId("dropdown-menu");
       await waitFor(() => {
@@ -526,7 +549,9 @@ describe("GoADropdown", () => {
       });
 
       const dropdownIcon = result.container.querySelector("goa-icon");
-      await fireEvent.click(dropdownIcon);
+      expect(dropdownIcon).toBeTruthy();
+
+      dropdownIcon && await fireEvent.click(dropdownIcon);
 
       const menu = result.queryByTestId("dropdown-menu");
       await waitFor(() => {
@@ -543,12 +568,15 @@ describe("GoADropdown", () => {
         value: "orange",
         arialabel: "Favourite Color",
       });
+
       const input = result.container.querySelector("input");
-      expect(input.getAttribute("aria-label")).toBe("Favourite Color");
+      expect(input?.getAttribute("aria-label")).toBe("Favourite Color");
+
       const dropdownIcon = result.container.querySelector("goa-icon");
-      expect(dropdownIcon.getAttribute("arialabel")).toBe("Favourite Color");
+      expect(dropdownIcon?.getAttribute("arialabel")).toBe("Favourite Color");
+
       const menu = result.container.querySelector("ul");
-      expect(menu.getAttribute("aria-label")).toBe("Favourite Color");
+      expect(menu?.getAttribute("aria-label")).toBe("Favourite Color");
     });
   });
 
@@ -560,12 +588,15 @@ describe("GoADropdown", () => {
         value: "orange",
         arialabelledby: "Favourite Color",
       });
+
       const input = result.container.querySelector("input");
-      expect(input.getAttribute("aria-labelledby")).toBe("Favourite Color");
+      expect(input?.getAttribute("aria-labelledby")).toBe("Favourite Color");
+
       const dropdownIcon = result.container.querySelector("goa-icon");
-      expect(dropdownIcon.getAttribute("arialabel")).toBe("favcolor");
+      expect(dropdownIcon?.getAttribute("arialabel")).toBe("favcolor");
+
       const menu = result.container.querySelector("ul");
-      expect(menu.getAttribute("aria-labelledby")).toBe("Favourite Color");
+      expect(menu?.getAttribute("aria-labelledby")).toBe("Favourite Color");
     });
   });
 
@@ -603,13 +634,13 @@ describe("GoADropdown", () => {
         });
         // const dropdown = result.queryByTestId("favcolor-dropdown");
         const input = result.queryByTestId("goa-input");
-
+        expect(input).toBeTruthy();
         // == Focus menu
         // await fireEvent.focus(input);
         // // input.focus();
         // expect(input).toHaveFocus();
 
-        await fireEvent.click(input);
+        input && await fireEvent.click(input);
 
         // == Open menu
         // method 1
@@ -619,8 +650,9 @@ describe("GoADropdown", () => {
         // method 3
         // document.dispatchEvent(event);
         const menu = result.queryByTestId("dropdown-menu");
+        expect(menu).toBeTruthy();
         await waitFor(() => {
-          expect(menu.classList).toContain("dropdown-active");
+          expect(menu?.classList).toContain("dropdown-active");
         });
 
         // == Select third item
@@ -641,8 +673,8 @@ describe("GoADropdown", () => {
 
         const menuItem = result.queryByTestId("dropdown-item-pink");
         await waitFor(() => {
-          expect(input.innerHTML).toContain("pink");
-          expect(menuItem.getAttribute("aria-selected")).toBe("true");
+          expect(input?.innerHTML).toContain("pink");
+          expect(menuItem?.getAttribute("aria-selected")).toBe("true");
         });
       });
     }
@@ -675,7 +707,7 @@ describe("GoADropdown", () => {
         native: true,
         items,
       });
-      expect(container.querySelector("select").getAttribute("id")).toBe(
+      expect(container?.querySelector("select")?.getAttribute("id")).toBe(
         "favcolor",
       );
       await waitFor(() => {
@@ -692,11 +724,13 @@ describe("GoADropdown", () => {
         items,
       });
 
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       const select = container.querySelector("select");
+      expect(select).toBeTruthy();
 
-      select.addEventListener("_change", (e: CustomEvent) => {
-        const { name: _name, value } = e.detail;
+      select?.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        const { name: _name, value } = ce.detail;
         expect(_name).toBe(name);
         expect(value).toBe("blue");
         onChange(_name, value);
@@ -704,7 +738,7 @@ describe("GoADropdown", () => {
 
       // This is the only way I can get the test passing, but it doesn't ensure
       // that the event binding is correct
-      select.dispatchEvent(
+      select?.dispatchEvent(
         new CustomEvent("_change", {
           composed: true,
           bubbles: false,
@@ -738,7 +772,8 @@ describe("GoADropdown", () => {
         expect(options.length).toBe(3);
 
         for (let index = 0; index < items.length; index++) {
-          expect(options[index].textContent.trim()).toBe(items[index]);
+          expect(options[index]).toBeTruthy();
+          expect(options[index]?.textContent?.trim()).toBe(items[index]);
         }
       });
     });
@@ -755,7 +790,8 @@ describe("GoADropdown", () => {
         const options = container.querySelectorAll("select option");
         expect(options.length).toBe(3);
         for (let index = 0; index < items.length; index++) {
-          expect(options[index].textContent.trim()).toBe(items[index]);
+          expect(options[index]).toBeTruthy();
+          expect(options[index]?.textContent?.trim()).toBe(items[index]);
         }
       });
     });

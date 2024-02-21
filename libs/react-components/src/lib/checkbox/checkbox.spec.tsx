@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
-import { screen, fireEvent } from "@testing-library/dom";
+import { fireEvent } from "@testing-library/dom";
 import GoACheckbox, { Props as CheckboxProps } from "./checkbox";
+import { describe, it, expect, vi } from "vitest";
 
 const testId = "test-id";
 
@@ -25,22 +26,22 @@ describe("GoA Checkbox", () => {
 
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox).toBeTruthy();
-    expect(checkbox.getAttribute("id")).toBe("abc");
-    expect(checkbox.getAttribute("name")).toBe("foo");
-    expect(checkbox.getAttribute("value")).toBe("bar");
-    expect(checkbox.getAttribute("text")).toBe("to display");
-    expect(checkbox.getAttribute("disabled")).toBe("false");
-    expect(checkbox.getAttribute("checked")).toBe("true");
-    expect(checkbox.getAttribute("error")).toBe("false");
-    expect(checkbox.getAttribute("data-testid")).toBe(testId);
-    expect(checkbox.getAttribute("mt")).toBe("s");
-    expect(checkbox.getAttribute("mr")).toBe("m");
-    expect(checkbox.getAttribute("mb")).toBe("l");
-    expect(checkbox.getAttribute("ml")).toBe("xl");
+    expect(checkbox?.getAttribute("id")).toBe("abc");
+    expect(checkbox?.getAttribute("name")).toBe("foo");
+    expect(checkbox?.getAttribute("value")).toBe("bar");
+    expect(checkbox?.getAttribute("text")).toBe("to display");
+    expect(checkbox?.getAttribute("disabled")).toBe("false");
+    expect(checkbox?.getAttribute("checked")).toBe("true");
+    expect(checkbox?.getAttribute("error")).toBe("false");
+    expect(checkbox?.getAttribute("data-testid")).toBe(testId);
+    expect(checkbox?.getAttribute("mt")).toBe("s");
+    expect(checkbox?.getAttribute("mr")).toBe("m");
+    expect(checkbox?.getAttribute("mb")).toBe("l");
+    expect(checkbox?.getAttribute("ml")).toBe("xl");
   });
 
   it("should handle the onChange event", async function () {
-    const onChangeStub = jest.fn();
+    const onChangeStub = vi.fn();
 
     function onChange(name: string, checked: boolean, value: string) {
       expect(name).toBe("foo");
@@ -64,7 +65,7 @@ describe("GoA Checkbox", () => {
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox).toBeTruthy();
 
-    await fireEvent(
+    checkbox && fireEvent(
       checkbox,
       new CustomEvent("_change", { detail: { value: "bar", checked: true } })
     );

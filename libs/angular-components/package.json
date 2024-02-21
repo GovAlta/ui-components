@@ -4,8 +4,8 @@
   "bugs": {
     "url": "https://github.com/GovAlta/ui-components/issues"
   },
-  "version": "0.0.0",
   "license": "Apache-2.0",
+  "version": "0.0.1",
   "keywords": [
     "GoA",
     "ui-components",
@@ -16,10 +16,9 @@
     "url": "https://github.com/GovAlta/ui-components.git",
     "directory": "libs/angular-components"
   },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
   "peerDependencies": {
-    "@angular/core": ">=12.0.0"
-  }
+    "@angular/core": "^17.0.0",
+    "@angular/forms": "^17.0.0"
+  },
+  "sideEffects": false
 }

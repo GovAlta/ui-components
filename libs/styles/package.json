@@ -1,8 +1,0 @@
-{
-  "name": "@abgov/styles",
-  "version": "0.0.1",
-  "publishConfig": {
-    "access": "public"
-  },
-  "semantic-release": "semantic-release"
-}

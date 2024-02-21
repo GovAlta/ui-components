@@ -59,6 +59,6 @@ export const GoACallout = ({
       {children}
     </goa-callout>
   );
-};
+}
 
 export default GoACallout;

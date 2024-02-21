@@ -19,6 +19,6 @@ export interface GoACardImageProps {
 
 export function GoACardImage({ src, height }: GoACardImageProps): JSX.Element {
   return <goa-card-image src={src} height={height} />;
-};
+}
 
 export default GoACardImage;

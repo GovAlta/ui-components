@@ -1,4 +1,4 @@
-<svelte:options tag="goa-chip" />
+<svelte:options customElement="goa-chip" />
 
 <!-- Script -->
 <script lang="ts">
@@ -7,7 +7,7 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
-  type ChipVariant = "filter"
+  type ChipVariant = "filter";
 
   // margin
   export let mt: Spacing = null;
@@ -15,7 +15,7 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  export let leadingicon: GoAIconType = null;
+  export let leadingicon: GoAIconType | null = null;
   export let error: string = "false";
   export let deletable: string = "false";
   export let content: string;
@@ -33,7 +33,9 @@
   $: _deletable = toBoolean(deletable);
 
   function onDelete(e: Event) {
-    el.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
+    el.dispatchEvent(
+      new CustomEvent("_click", { composed: true, bubbles: true }),
+    );
     e.stopPropagation();
   }
 </script>
@@ -41,20 +43,21 @@
 <!-- HTML -->
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   bind:this={el}
   data-testid={testid}
   class="chip"
   class:deletable={_deletable}
   class:error={_error}
-  class:variant={variant}
+  class:variant
   style={calculateMargin(mt, mr, mb, ml)}
   tabindex="0"
-  on:click={e => _deletable && onDelete(e)}
-  on:mouseover={() => _hovering = true}
-  on:mouseout={() => _hovering = false}
-  on:focus={() => _hovering = false}
-  on:blur={() => _hovering = false}
+  on:click={(e) => _deletable && onDelete(e)}
+  on:mouseover={() => (_hovering = true)}
+  on:mouseout={() => (_hovering = false)}
+  on:focus={() => (_hovering = false)}
+  on:blur={() => (_hovering = false)}
 >
   {#if leadingicon}
     <goa-icon class="leading-icon" size="medium" type={leadingicon} />
@@ -72,14 +75,8 @@
         ? "var(--goa-color-emergency-default)"
         : _hovering
           ? "var(--goa-color-interactive-hover)"
-        : "var(--goa-color-greyscale-700)"
-      }
-      opacity={_error
-        ? _hovering
-          ? 1
-          : 0.5
-        : 1
-      }
+          : "var(--goa-color-greyscale-700)"}
+      opacity={_error ? (_hovering ? 1 : 0.5) : 1}
     />
   {/if}
 </div>
@@ -95,7 +92,7 @@
     align-items: center;
     background-color: var(--goa-color-greyscale-white);
     border-radius: 99px;
-    border: 1px solid #949494;  /* TODO: change this to a defined color value when one is defined in the design specs */
+    border: 1px solid #949494; /* TODO: change this to a defined color value when one is defined in the design specs */
     box-sizing: border-box;
     color: var(--goa-color-text-default);
     display: inline-flex;
@@ -110,7 +107,10 @@
   }
 
   .text {
-    padding-bottom: var(--font-valign-fix, 0);  /* acumin font requires this to allow for vertical alignment  */
+    padding-bottom: var(
+      --font-valign-fix,
+      0
+    ); /* acumin font requires this to allow for vertical alignment  */
   }
 
   .chip:focus {

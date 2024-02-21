@@ -36,7 +36,7 @@ export interface GoATableProps extends Margins {
 // legacy name
 export type TableProps = GoATableProps;
 
-export function GoATable(props: GoATableProps) {
+export function GoATable({onSort, ...props}: GoATableProps) {
   const ref = useRef<HTMLTableElement>(null);
   useEffect(() => {
     if (!ref.current) {
@@ -45,14 +45,14 @@ export function GoATable(props: GoATableProps) {
     const current = ref.current;
     const sortListener = (e: unknown) => {
       const { sortBy, sortDir } = (e as CustomEvent).detail;
-      props.onSort?.(sortBy, sortDir);
+      onSort?.(sortBy, sortDir);
     };
 
     current.addEventListener("_sort", sortListener);
     return () => {
       current.removeEventListener("_sort", sortListener);
     };
-  }, [ref, props.onSort]);
+  }, [ref, onSort]);
 
   return (
     <goa-table

@@ -86,4 +86,4 @@ export function GoAIconButton({
       {children}
     </goa-icon-button>
   );
-};
+}

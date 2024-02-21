@@ -1,4 +1,4 @@
-<svelte:options tag="goa-file-upload-card" />
+<svelte:options customElement="goa-file-upload-card" />
 
 <script lang="ts">
   import { getTimestamp } from "../../common/utils";
@@ -13,7 +13,7 @@
 
   // Private
 
-  let _status: "uploading" | "uploaded" | "error" = "uploading"
+  let _status: "uploading" | "uploaded" | "error" = "uploading";
   let _rootEl: HTMLElement;
   let _fileIcon: string = "goa-file";
 
@@ -24,14 +24,14 @@
       || (progress >= 0 && progress < 100) && "uploading"
       || "uploaded"
 
-  $: _fileIcon = filename && type && getFiletypeIcon(filename, type)
+  $: _fileIcon = filename && type && getFiletypeIcon(filename, type);
 
   // Functions
 
   function getFiletypeIcon(filename: string, type: string): string {
     // file extensions
     const parts = filename.split(".");
-    const ext = parts[parts.length - 1]
+    const ext = parts[parts.length - 1];
     const extTypeIcon =
       ext === "xlxs"     && "goa-xls"
       || ext === "xls"   && "goa-xls"
@@ -62,19 +62,23 @@
   }
 
   function dispatch(action: "_delete" | "_cancel") {
-    _rootEl.dispatchEvent(new CustomEvent(action, {
-      composed: true,
-    }))
+    _rootEl.dispatchEvent(
+      new CustomEvent(action, {
+        composed: true,
+      }),
+    );
   }
 
-  function formatFileSize(bytes: number) {
-    switch(true) {
+  function formatFileSize(bytes: number): string {
+    switch (true) {
       case bytes < 1024:
         return bytes + "B";
       case bytes < 1024 * 1024:
-        return Math.round(bytes/1024) + "KB";
+        return Math.round(bytes / 1024) + "KB";
       case bytes < Math.pow(1024, 3):
-        return Math.round(bytes/Math.pow(1024, 2)) + "MB";
+        return Math.round(bytes / Math.pow(1024, 2)) + "MB";
+      default:
+        return "n/a";
     }
   }
 </script>
@@ -83,43 +87,70 @@
   data-testid="root"
   bind:this={_rootEl}
   class={`root ${_status}`}
-  class:error={error}
+  class:error
 >
-    {#if _status === "uploaded"}
-      <goa-icon class="fileicon" data-testid="icon" type={_fileIcon} fillcolor="#0070c4" size="xlarge" />
-    {:else}
-      <goa-icon class="fileicon" data-testid="icon" type="goa-file" fillcolor="#dcdcdc" size="xlarge" />
+  {#if _status === "uploaded"}
+    <goa-icon
+      class="fileicon"
+      data-testid="icon"
+      type={_fileIcon}
+      fillcolor="#0070c4"
+      size="xlarge"
+    />
+  {:else}
+    <goa-icon
+      class="fileicon"
+      data-testid="icon"
+      type="goa-file"
+      fillcolor="#dcdcdc"
+      size="xlarge"
+    />
+  {/if}
+  <div class="details">
+    <div class="filename" data-testid="filename">{filename}</div>
+    {#if _status !== "error"}
+      <div class="filesize" data-testid="filesize">{formatFileSize(size)}</div>
     {/if}
-    <div class="details">
-      <div class="filename" data-testid="filename">{filename}</div>
-      {#if _status !== "error"}
-        <div class="filesize" data-testid="filesize">{formatFileSize(size)}</div>
-      {/if}
-      {#if _status === "uploading"}
-        <div class="progress" data-testid="progress">
-          <progress value={progress} max="100" /> {Math.ceil(progress)}%
-        </div>
-      {:else if _status === "uploaded"}
-        <div class="timestamp" data-testid="timestamp">
-          Uploaded on {getTimestamp()}
-        </div>
-      {:else if _status === "error"}
-        <div class="error-msg" data-testid="error">
-          <goa-icon type="warning" size="small" theme="filled" />
-          {error}
-        </div>
-      {/if}
-    </div>
+    {#if _status === "uploading"}
+      <div class="progress" data-testid="progress">
+        <progress value={progress} max="100" />
+        {Math.ceil(progress)}%
+      </div>
+    {:else if _status === "uploaded"}
+      <div class="timestamp" data-testid="timestamp">
+        Uploaded on {getTimestamp()}
+      </div>
+    {:else if _status === "error"}
+      <div class="error-msg" data-testid="error">
+        <goa-icon type="warning" size="small" theme="filled" />
+        {error}
+      </div>
+    {/if}
+  </div>
 
-    <div class="actions" data-testid="actions">
-      {#if _status === "uploading"}
-        <goa-button type="tertiary" size="compact" on:click={() => dispatch("_cancel")}>Cancel</goa-button>
-      {:else if _status === "uploaded"}
-        <goa-button type="tertiary" size="compact" on:click={() => dispatch("_delete")} leadingicon="trash">Remove</goa-button>
-      {:else if _status === "error"}
-        <goa-button type="tertiary" size="compact" on:click={() => dispatch("_delete")} variant="destructive">Cancel</goa-button>
-      {/if}
-    </div>
+  <div class="actions" data-testid="actions">
+    {#if _status === "uploading"}
+      <goa-button
+        type="tertiary"
+        size="compact"
+        on:click={() => dispatch("_cancel")}>Cancel</goa-button
+      >
+    {:else if _status === "uploaded"}
+      <goa-button
+        type="tertiary"
+        size="compact"
+        on:click={() => dispatch("_delete")}
+        leadingicon="trash">Remove</goa-button
+      >
+    {:else if _status === "error"}
+      <goa-button
+        type="tertiary"
+        size="compact"
+        on:click={() => dispatch("_delete")}
+        variant="destructive">Cancel</goa-button
+      >
+    {/if}
+  </div>
 </div>
 
 <style>

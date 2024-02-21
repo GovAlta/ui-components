@@ -1,23 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": ".",
+    "outDir": "../../dist/out-tsc",
     "declaration": true,
-    "rootDir": "./src",
-    "types": [
-      "node"
-    ],
-    "declarationDir": "./types"
+    "types": ["node", "vite/client"]
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*_spec.ts",
-    "public/*",
-    "playground/*",
-    "**/*.stories.ts",
-    "**/*.stories.js"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["vite.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
 }

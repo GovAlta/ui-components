@@ -1,9 +1,9 @@
-<svelte:options tag="test-two-column-layout" />
+<svelte:options customElement="test-two-column-layout" />
 
 <!-- Script -->
 <script lang="ts">
-  export let navcolumnwidth: string = "";  
-  export let maxcontentwidth: string = ""; 
+  export let navcolumnwidth: string = "";
+  export let maxcontentwidth: string = "";
 </script>
 
 <!-- HTML -->
@@ -16,9 +16,11 @@
     <a href="#employees">Employees</a>
     <a href="#claims">Claims</a>
   </section>
-  
+
   <h1>Content</h1>
-  <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</p>
+  <p>
+    Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+  </p>
 
   <goa-app-footer slot="footer" />
 </goa-two-column-layout>

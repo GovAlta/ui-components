@@ -7,6 +7,6 @@ describe("SideMenuGroup", () => {
     const { baseElement } = render(<SideMenuGroup heading="some header" />);
 
     const el = baseElement.querySelector("goa-side-menu-group");
-    expect(el.getAttribute("heading")).toBe("some header");
+    expect(el?.getAttribute("heading")).toBe("some header");
   });
 });

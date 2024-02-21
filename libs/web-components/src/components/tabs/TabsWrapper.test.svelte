@@ -1,4 +1,4 @@
-<svelte:options tag="test-goa-tabs" />
+<svelte:options customElement="test-goa-tabs" />
 
 <script>
   import GoATabs from "./Tabs.svelte";

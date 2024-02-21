@@ -1,5 +1,5 @@
-import "@testing-library/jest-dom";
 import { getTimestamp } from "./utils";
+import { it, describe } from "vitest";
 
 describe("getTimestamp", () => {
   it("sets the correct postfix", () => {
@@ -41,7 +41,7 @@ describe("getTimestamp", () => {
       const d = new Date(2023, 2, parseInt(day, 10))
       expect(getTimestamp(d)).toContain(val)
     }
-  })  
+  })
 
   it("handles the 12th hour", () => {
     expect(getTimestamp(new Date(2023, 1, 1, 12, 23))).toContain("12:23 PM")

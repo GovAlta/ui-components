@@ -7,16 +7,14 @@ import {
 } from "@testing-library/svelte";
 import {
   addDays,
-  getDaysInMonth,
   format,
-  getDaysInYear,
   addMonths,
   addYears,
 } from "date-fns";
+import { it, expect, vi } from "vitest";
 
 it("it renders", async () => {
   const { container } = render(DatePicker);
-
   const popover = container.querySelector("goa-popover");
   const input = container.querySelector("goa-input");
   const calendar = container.querySelector("goa-calendar");
@@ -35,24 +33,27 @@ it("renders with props", async () => {
   const popover = container.querySelector("goa-popover");
   const input = container.querySelector("goa-input");
 
-  expect(popover.getAttribute("relative")).toBe("true");
-  expect(input.getAttribute("value")).toBe(format(value, "PPP"));
+  expect(popover?.getAttribute("relative")).toBe("true");
+  expect(input?.getAttribute("value")).toBe(format(value, "PPP"));
 });
 
 it("dispatches a value on date selection", async () => {
   const { container } = render(DatePicker);
   const popover = container.querySelector("goa-popover");
   const input = container.querySelector("goa-input");
-
   const selectedDate = new Date();
+  const handler = vi.fn();
 
-  const handler = jest.fn();
-  popover.addEventListener("_change", ({ detail }: CustomEvent) => {
+  expect(popover).toBeTruthy();
+  expect(input).toBeTruthy();
+
+  popover?.addEventListener("_change", (e: Event) => {
+    const ce = e as CustomEvent;
     handler();
-    expect(detail.value).toBe(selectedDate);
+    expect(ce.detail.value).toBe(selectedDate);
   });
 
-  input.dispatchEvent(
+  input?.dispatchEvent(
     new CustomEvent("_change", {
       composed: true,
       bubbles: true,
@@ -75,7 +76,10 @@ it("allows for date navigation via the keyboard", async () => {
 
   const { container } = render(DatePicker, { value: inputDate });
   const input = container.querySelector("goa-input");
+  expect(input).toBeTruthy();
   expect(inputDate).toBeTruthy();
+
+  if (!input) return;
 
   const arrowLeftEvent = createEvent.keyDown(input, { key: "ArrowLeft" });
   const arrowRightEvent = createEvent.keyDown(input, { key: "ArrowRight" });
@@ -92,9 +96,10 @@ it("allows for date navigation via the keyboard", async () => {
     shiftKey: true,
   });
 
-  const handler = jest.fn();
-  container.addEventListener("_change", ({ detail }: CustomEvent) => {
-    handler(detail.value);
+  const handler = vi.fn();
+  container?.addEventListener("_change", (e: Event) => {
+    const ce = e as CustomEvent
+    handler(ce.detail.value);
   });
 
   // left arrow

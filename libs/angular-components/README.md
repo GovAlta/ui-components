@@ -4,26 +4,31 @@
 
 This is the web component library and utilizes Angular's web component integration.
 
-Add Dependencies
+### Add Dependencies
 
+Angular >=16 dependencies
 ```bash
 npm i @abgov/web-components
 npm i @abgov/angular-components
 ```
 
+Angular <16 dependencies
+```bash
+npm i @abgov/web-components
+npm i @abgov/angular-components@2.5.0
+```
+
+### Icons
+
 Link ionicons in app/index.html
 Add the following in the head element
 
 ```html
-<script
-  type="module"
-  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-></script>
-<script
-  nomodule
-  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 ```
+
+### Components
 
 Update `src/app/app.module.ts` as per the four steps below
 
@@ -50,6 +55,8 @@ import { AngularComponentsModule } from "@abgov/angular-components";
 export class AppModule {}
 ```
 
+### Styles
+
 Add the styles link in the `src/styles.css` file
 
 ```css
@@ -59,7 +66,8 @@ Add the styles link in the `src/styles.css` file
 ### VS Code Support
 
 In order to use VS Code's [HTML/CSS Custom Data](https://github.com/microsoft/vscode-custom-data)
-support to enhance GoA Web Components HTML editing experience, include our html custom data setting found in `.vscode/settings.json`:
+support to enhance GoA Web Components HTML editing experience, include our html custom data 
+setting found in `.vscode/settings.json`:
 
 ```json
 {
@@ -71,4 +79,5 @@ support to enhance GoA Web Components HTML editing experience, include our html 
 
 ---
 
-[Visit Design System](https://ui-components.alberta.ca)
+[Visit Design System](https://design.alberta.ca)
+

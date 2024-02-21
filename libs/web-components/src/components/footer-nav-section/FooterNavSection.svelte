@@ -1,8 +1,7 @@
-<svelte:options tag="goa-app-footer-nav-section" />
+<svelte:options customElement="goa-app-footer-nav-section" />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
-  import { injectCss } from "../../common/styling";
 
   export let heading: string = "";
   export let maxcolumncount: number = 1;
@@ -14,10 +13,12 @@
     await tick();
 
     // remap slot content
-    children = rootEl.querySelector("slot").assignedElements() as HTMLLinkElement[];
+    children = rootEl
+      .querySelector("slot")
+      ?.assignedElements() as HTMLLinkElement[];
 
     const isValid = children
-      .map(child => child.hasAttribute("href"))
+      .map((child) => child.hasAttribute("href"))
       .reduce((sum: boolean, valid: boolean) => {
         return sum && valid;
       }, true);
@@ -27,10 +28,6 @@
       console.warn("GoAFooterNavSection children must be anchor elements.");
       return;
     }
-
-    injectCss(rootEl, ":host", {
-      "flex-grow": maxcolumncount,
-    });
   });
 </script>
 

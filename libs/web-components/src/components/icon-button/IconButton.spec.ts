@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
 import { render } from '@testing-library/svelte';
 import GoAIconButton from './IconButton.svelte'
+import { it, describe } from "vitest";
 
 describe("IconButton", () => {
   describe("Margins", () => {

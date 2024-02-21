@@ -11,6 +11,6 @@ describe("GoATableSortHeader", () => {
   it("binds direction param", async () => {
     render(<GoATableSortHeader direction="asc" />);
     const el = document.querySelector("goa-table-sort-header");
-    expect(el.getAttribute("direction")).toBe("asc");
+    expect(el?.getAttribute("direction")).toBe("asc");
   });
 });

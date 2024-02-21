@@ -1,2 +1,2 @@
-**/node_modules
-**/playground
+node_modules
+*-directive.ts

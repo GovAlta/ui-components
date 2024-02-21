@@ -1,4 +1,4 @@
-<svelte:options tag="test-pages" />
+<svelte:options customElement="test-pages" />
 
 <script lang="ts">
   import Pages from "./Pages.svelte";

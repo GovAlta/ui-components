@@ -1,4 +1,22 @@
-<svelte:options tag="goa-layout-full-nav" />
+<svelte:options customElement="goa-layout-full-nav" />
+
+<div class="page">
+  <header class="header">
+    <slot name="header" />
+  </header>
+
+  <nav class="nav">
+    <slot name="nav" />
+  </nav>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="footer">
+    <slot name="footer" />
+  </footer>
+</div>
 
 <style>
   .page {
@@ -45,21 +63,3 @@
     background-color: var(--goa-color-greyscale-100);
   }
 </style>
-
-<div class="page">
-  <header class="header">
-    <slot name="header" />
-  </header>
-
-  <nav class="nav">
-    <slot name="nav" />
-  </nav>
-
-  <main>
-    <slot />
-  </main>
-
-  <footer class="footer">
-    <slot name="footer" />
-  </footer>
-</div>

@@ -6,7 +6,7 @@ describe("SideMenu", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
       <SideMenu>
-        <a href="#">Link</a>
+        <a href="#foo">Link</a>
       </SideMenu>
     );
     expect(baseElement).toBeTruthy();

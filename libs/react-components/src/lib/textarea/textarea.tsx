@@ -7,7 +7,7 @@ type CountBy = "character" | "word";
 interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
   name: string;
-  value: string;
+  value?: string;
   placeholder?: string;
   rows?: number;
   error?: boolean;
@@ -27,10 +27,9 @@ declare global {
   }
 }
 
-
 export interface GoATextAreaProps extends Margins {
   name: string;
-  value: string;
+  value?: string;
   id?: string;
   placeholder?: string;
   rows?: number;
@@ -41,7 +40,7 @@ export interface GoATextAreaProps extends Margins {
   ariaLabel?: string;
   countBy?: CountBy;
   maxCount?: number;
-  
+
   onChange: (name: string, value: string) => void;
   onKeyPress?: (name: string, value: string, key: string) => void;
 }
@@ -77,18 +76,28 @@ export function GoATextarea({
       onChange(name, value);
     };
 
+    current.addEventListener("_change", listener);
+    return () => {
+      current.removeEventListener("_change", listener);
+    };
+  }, [el, onChange]);
+
+
+  useEffect(() => {
+    if (!el.current) {
+      return;
+    }
+    const current = el.current;
     const keypressListener = (e: unknown) => {
       const { name, value, key } = (e as CustomEvent).detail;
       onKeyPress?.(name, value, key);
     }
 
-    current.addEventListener("_change", listener);
     current.addEventListener("_keyPress", keypressListener);
     return () => {
-      current.removeEventListener("_change", listener);
-      current.removeEventListener("_keyPress", listener);
+      current.removeEventListener("_keyPress", keypressListener);
     };
-  }, [el, onChange]);
+  }, [el, onKeyPress]);
 
   return (
     <goa-textarea
@@ -111,6 +120,7 @@ export function GoATextarea({
     ></goa-textarea>
   );
 }
+
 export {GoATextarea as GoATextArea}
 export default GoATextarea;
 

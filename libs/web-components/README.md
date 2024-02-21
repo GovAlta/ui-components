@@ -1,13 +1,32 @@
-# GoA Web components
+# Web Components
 
-This library contains custom components from the Government of Alberta.
+![npm (scoped)](https://img.shields.io/npm/v/@abgov/web-components?color=%230081a2&label=react-components&style=flat-square)
 
-### [View Angular Setup](https://ui-components.alberta.ca/?path=/docs/setup-angular--page)
+This library contains web components from the Government of Alberta.
 
-### [View React Setup](https://ui-components.alberta.ca/?path=/docs/setup-react--page)
+```bash
+npm i @abgov/web-components
+```
 
-### [View Vue Setup](https://ui-components.alberta.ca/?path=/docs/setup-vue--page)
+### Icons
 
+Link ionicons in app/index.html
+Add the following to the head element
+
+```html
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+```
+
+### Styles
+
+Import the web-component styles in the `src/index.css` file
+
+```css
+@import "@abgov/web-components/index.css";
+```
 ---
 
-[Visit Design System](https://ui-components.alberta.ca)
+[Visit Design System](https://design.alberta.ca)
+
+

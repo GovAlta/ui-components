@@ -1,10 +1,35 @@
-<svelte:options tag="goa-two-column-layout" />
+<svelte:options customElement="goa-two-column-layout" />
 
 <script lang="ts">
-  export let navcolumnwidth: string = "";  // blank values falls back to the css var
-  export let maxcontentwidth: string = ""; 
-
+  export let navcolumnwidth: string = ""; // blank values falls back to the css var
+  export let maxcontentwidth: string = "";
 </script>
+
+<div
+  class="page"
+  style={`
+    --max-content-width: ${maxcontentwidth || "100%"};
+    --nav-column-width: ${navcolumnwidth || "256px"};
+  `}
+>
+  <header class="header">
+    <slot name="header" />
+  </header>
+
+  <section class="content">
+    <nav class="nav">
+      <slot name="nav" />
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+  </section>
+
+  <footer class="footer">
+    <slot name="footer" />
+  </footer>
+</div>
 
 <style>
   * {
@@ -73,31 +98,4 @@
       padding-right: 4.5rem;
     }
   }
-
 </style>
-
-<div
-  class="page"
-  style={`
-    --max-content-width: ${maxcontentwidth || "100%"};
-    --nav-column-width: ${navcolumnwidth || "256px"};
-  `}
->
-  <header class="header">
-    <slot name="header" />
-  </header>
-
-  <section class="content">
-    <nav class="nav">
-      <slot name="nav" />
-    </nav>
-
-    <main>
-      <slot />
-    </main>
-  </section>
-
-  <footer class="footer">
-    <slot name="footer" />
-  </footer>
-</div>

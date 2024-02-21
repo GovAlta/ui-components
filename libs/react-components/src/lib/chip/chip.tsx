@@ -75,6 +75,6 @@ export const GoAChip = ({
       data-testid={testId}
     />
   );
-};
+}
 
 export default GoAChip;

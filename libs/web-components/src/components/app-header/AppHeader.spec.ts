@@ -1,8 +1,10 @@
-import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/svelte';
 import userEvent from "@testing-library/user-event"
 import type { UserEvent } from '@testing-library/user-event/dist/types/setup/setup';
 import AppHeaderWrapper from './AppHeaderWrapper.test.svelte'
+import { it, describe } from "vitest";
+
+type QueryAll = (q: string) => NodeListOf<HTMLElement>;
 
 let user: UserEvent;
 
@@ -12,8 +14,6 @@ beforeEach(() => {
 
 describe('AppHeader Desktop with children', () => {
 
-  let $, $$, $t;
-
   const heading = "Test heading";
   const url = "http://localhost/foo"
 
@@ -22,26 +22,21 @@ describe('AppHeader Desktop with children', () => {
       writable: true,
       value: 1200,
     });
-
-    const result = render(AppHeaderWrapper, { heading, url, haschildren: true });
-    const c = result.container
-    $ = c.querySelector.bind(c);
-    $$ = c.querySelectorAll.bind(c);
-    $t = result.queryByTestId.bind(c)
   })
-  
-  it('should render', async () => {
-    const links = $$("a");
 
-    expect($t("title").innerHTML).toBe(heading);
-    expect($t("url").href).toBe(url);
+  it('should render', async () => {
+    const { container, queryByTestId } = render(AppHeaderWrapper, { heading, url, haschildren: true });
+    const links = container.querySelectorAll("a");
+
+    expect(queryByTestId("title")?.innerHTML).toBe(heading);
+    expect((queryByTestId("url") as HTMLLinkElement)?.href).toBe(url);
     expect(links.length).toBe(6);  // 5 custom links + 1 app header for the url
   });
 });
 
 describe('AppHeader Mobile', () => {
 
-  let $, $$, $t;
+  let $t: (query: string) => HTMLElement | null;
 
   const heading = "Test heading";
   const url = "http://localhost/foo"
@@ -54,14 +49,14 @@ describe('AppHeader Mobile', () => {
 
     const result = render(AppHeaderWrapper, { heading, url, haschildren: true });
     const c = result.container
-    $ = c.querySelector.bind(c);
-    $$ = c.querySelectorAll.bind(c);
     $t = result.queryByTestId.bind(c)
   })
 
   it("should show/hide the menu", async () => {
     const toggleBtn = $t("menu-toggle");
     expect(toggleBtn).toBeTruthy();
+
+    if (!toggleBtn) return;
 
     // not yet open
     await waitFor(() => {
@@ -88,7 +83,7 @@ describe('AppHeader Mobile', () => {
     const toggleBtn = $t("menu-toggle");
     expect(toggleBtn).toBeTruthy();
 
-    toggleBtn.focus();
+    toggleBtn?.focus();
 
     // open
     user.keyboard(" ");
@@ -109,7 +104,7 @@ describe('AppHeader Mobile', () => {
     const toggleBtn = $t("menu-toggle");
     expect(toggleBtn).toBeTruthy();
 
-    toggleBtn.focus();
+    toggleBtn?.focus();
 
     // open
     user.keyboard("{enter}");
@@ -129,7 +124,8 @@ describe('AppHeader Mobile', () => {
 
 describe('AppHeader Tablet', () => {
 
-  let $, $$, $t;
+  let $$: QueryAll;
+  let $t: (query: string) => HTMLElement | null;
 
   const heading = "Test heading";
   const url = "http://localhost/foo"
@@ -142,7 +138,6 @@ describe('AppHeader Tablet', () => {
 
     const result = render(AppHeaderWrapper, { heading, url, haschildren: true });
     const c = result.container
-    $ = c.querySelector.bind(c);
     $$ = c.querySelectorAll.bind(c);
     $t = result.queryByTestId.bind(c)
   })
@@ -150,6 +145,8 @@ describe('AppHeader Tablet', () => {
   it("should show/hide the menu", async () => {
     const toggleBtn = $t("menu-toggle");
     expect(toggleBtn).toBeTruthy();
+
+    if (!toggleBtn) return;
 
     // not yet open
     await waitFor(() => {
@@ -176,7 +173,7 @@ describe('AppHeader Tablet', () => {
     const toggleBtn = $t("menu-toggle");
     expect(toggleBtn).toBeTruthy();
 
-    toggleBtn.focus();
+    toggleBtn?.focus();
 
     // open
     user.keyboard(" ");
@@ -197,7 +194,7 @@ describe('AppHeader Tablet', () => {
     const toggleBtn = $t("menu-toggle");
     expect(toggleBtn).toBeTruthy();
 
-    toggleBtn.focus();
+    toggleBtn?.focus();
 
     // open
     user.keyboard("{enter}");

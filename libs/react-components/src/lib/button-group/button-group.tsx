@@ -50,6 +50,6 @@ export function GoAButtonGroup({
       {children}
     </goa-button-group>
   );
-};
+}
 
 export default GoAButtonGroup;

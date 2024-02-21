@@ -44,6 +44,6 @@ export function GoATooltip(props: GoATooltipProps): JSX.Element {
       {props.children}
     </goa-tooltip>
   );
-};
+}
 
 export default GoATooltip;

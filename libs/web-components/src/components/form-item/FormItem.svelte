@@ -1,4 +1,4 @@
-<svelte:options tag="goa-form-item" />
+<svelte:options customElement="goa-form-item" />
 
 <!-- Script -->
 <script lang="ts">
@@ -40,17 +40,14 @@
 
   onMount(() => {
     validateRequirementType(requirement);
-  })
-
+    validateLabelSize(labelsize);
+  });
 </script>
 
 <!-- HTML -->
-<div
-  data-testid={testid}
-  style={calculateMargin(mt, mr, mb, ml)}
->
+<div data-testid={testid} style={calculateMargin(mt, mr, mb, ml)}>
   {#if label}
-    <div class={`label ${labelsize}`} id={id}>
+    <div class={`label ${labelsize}`} {id}>
       {label}
       {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
         <em>({requirement})</em>

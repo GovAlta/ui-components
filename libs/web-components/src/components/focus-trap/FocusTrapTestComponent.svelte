@@ -1,6 +1,6 @@
 <!-- Script -->
 <script lang="ts">
-  import GoAFocusTrap from './FocusTrap.svelte';
+  import GoAFocusTrap from "./FocusTrap.svelte";
 </script>
 
 <!-- HTML -->

@@ -1,4 +1,4 @@
-<svelte:options tag="goa-hero-banner" />
+<svelte:options customElement="goa-hero-banner" />
 
 <!-- Script -->
 <script lang="ts">

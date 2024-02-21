@@ -1,6 +1,5 @@
-<svelte:options tag="goa-callout" />
+<svelte:options customElement="goa-callout" />
 
-<!-- Script -->
 <script lang="ts">
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
@@ -8,20 +7,22 @@
   import { typeValidator } from "../../common/utils";
   import { MOBILE_BP } from "../../common/breakpoints";
 
+  // Validators
 
-  // Validator
   const [Types, validateType] = typeValidator(
     "Callout type",
     ["emergency", "important", "information", "event", "success"],
     true,
   );
-  const [CalloutSizes, validateCalloutSize] = typeValidator("Callout size",
-    ["medium", "large"]
-  );
+  const [CalloutSizes, validateCalloutSize] = typeValidator("Callout size", [
+    "medium",
+    "large",
+  ]);
 
-  //Type
-  type CalloutType = typeof Types[number];
-  type CalloutSize = typeof CalloutSizes[number];
+  // Types
+
+  type CalloutType = (typeof Types)[number];
+  type CalloutSize = (typeof CalloutSizes)[number];
 
   // margin
   export let mt: Spacing = null;
@@ -32,8 +33,13 @@
   export let type: CalloutType;
   export let heading: string = "";
   export let testid: string = "";
+
+  // Private
+
   let screenSize = 0;
   let iconSize = "medium";
+
+  // Reactive
 
   $: isMediumCallout = screenSize < MOBILE_BP || size === "medium";
 
@@ -41,21 +47,21 @@
     type === "emergency"
       ? "warning"
       : type === "important"
-      ? "alert-circle"
-      : type === "information"
-      ? "information-circle"
-      : type === "success"
-      ? "checkmark-circle"
-      : type === "event"
-      ? "calendar"
-      : "";
+        ? "alert-circle"
+        : type === "information"
+          ? "information-circle"
+          : type === "success"
+            ? "checkmark-circle"
+            : type === "event"
+              ? "calendar"
+              : "";
 
   onMount(() => {
     validateCalloutSize(size);
     setTimeout(() => {
       validateType(type);
       iconSize = isMediumCallout ? "small" : "medium";
-    })
+    });
   });
 </script>
 
@@ -75,7 +81,7 @@
     />
   </span>
   <span class="content">
-    {#if heading }
+    {#if heading}
       <h3 class:medium={isMediumCallout}>{heading}</h3>
     {/if}
     <slot />

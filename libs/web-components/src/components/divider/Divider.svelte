@@ -1,7 +1,8 @@
-<svelte:options tag="goa-divider" />
+<svelte:options customElement="goa-divider" />
 
 <script lang="ts">
-  import { calculateMargin, Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+  import type { Spacing } from "../../common/styling";
 
   export let testid: string = "";
 

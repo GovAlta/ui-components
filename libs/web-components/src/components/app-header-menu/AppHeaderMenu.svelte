@@ -1,18 +1,17 @@
-<svelte:options tag="goa-app-header-menu" />
-<svelte:window bind:innerWidth={_innerWidth} />
+<svelte:options customElement="goa-app-header-menu" />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
   import { validateRequired } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { TABLET_BP } from "../../common/breakpoints";
 
   // Required
   export let heading: string;
-  
+
   // Optional
   export let leadingicon: GoAIconType;
-  export let type: "primary" | "secondary" =  "primary";
+  export let type: "primary" | "secondary" = "primary";
 
   // Private
 
@@ -32,35 +31,42 @@
   $: _desktop = _innerWidth >= TABLET_BP;
 
   // call the method when window changes to desktop size
-  $: _desktop && bindToPopoverCloseEvent()
+  $: _desktop && bindToPopoverCloseEvent();
 
   // Hooks
 
   onMount(async () => {
     await tick();
-    validateRequired("GoaAppHeaderMenu", { heading })
+    validateRequired("GoaAppHeaderMenu", { heading });
 
-    _hasCurrentLink = hasCurrentLink();
-    window.addEventListener("popstate", () => {
-      _hasCurrentLink = hasCurrentLink();
-    }, true)
-  })
+    setCurrentLink();
+    window.addEventListener("popstate", setCurrentLink, true);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener("popstate", setCurrentLink, true);
+  });
 
   // Functions
 
+  function setCurrentLink() {
+    _hasCurrentLink = hasCurrentLink();
+  }
+
   // Determine if the current browser url matches one of this element's child links
   function hasCurrentLink(): boolean {
-    if (!_slotParentEl) return;
+    if (!_slotParentEl) return false;
 
     const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
-    if (!slot) return;
-    
-    const link = slot.assignedElements()
-      .filter(el => el.tagName === "A")
-      .find(el => {
+    if (!slot) return false;
+
+    const link = slot
+      .assignedElements()
+      .filter((el) => el.tagName === "A")
+      .find((el) => {
         const href = (el as HTMLLinkElement).href;
         const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-        return href.endsWith(url)  
+        return href.endsWith(url);
       });
     return !!link;
   }
@@ -68,7 +74,7 @@
   // Ensures that the Popover _close event has a handler if the window
   // is resized after initial load
   async function bindToPopoverCloseEvent() {
-    await tick()
+    await tick();
     if (!_popoverEl) return;
     _popoverEl.removeEventListener("_close", closeMenu);
     _popoverEl.removeEventListener("_open", openMenu);
@@ -93,10 +99,12 @@
   }
 </script>
 
+<svelte:window bind:innerWidth={_innerWidth} />
+
 {#if _desktop}
   <goa-popover
     bind:this={_popoverEl}
-    context="app-header-menu" 
+    context="app-header-menu"
     focusborderwidth="0"
     borderradius="0"
     padded="false"
@@ -104,8 +112,8 @@
     width="16rem"
     position="below"
   >
-    <button 
-      slot="target" 
+    <button
+      slot="target"
       style="padding: 0 0.75rem;"
       class={type}
       class:current={_hasCurrentLink}
@@ -114,25 +122,21 @@
         <goa-icon type={leadingicon} mt="1" />
       {/if}
       {heading}
-      <goa-icon type={_open ? "chevron-up" : "chevron-down" } mt="1" />
+      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1" />
     </button>
-    
+
     <div class="desktop" bind:this={_slotParentEl}>
-      <slot />  
+      <slot />
     </div>
   </goa-popover>
 {:else}
-  <button 
-    class:open={_open}
-    on:click={toggleMenu}
-    class={type}
-  >
+  <button class:open={_open} on:click={toggleMenu} class={type}>
     {#if leadingicon}
       <goa-icon type={leadingicon} mt="1" />
     {/if}
     <span class="heading">{heading}</span>
     <goa-spacer hspacing="fill" />
-    <goa-icon type={_open ? "chevron-up" : "chevron-down" } mt="1" />
+    <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1" />
   </button>
   {#if _open}
     <div class="not-desktop" bind:this={_slotParentEl}>
@@ -180,30 +184,30 @@
     border-bottom: 1px solid var(--goa-color-greyscale-200);
   }
 
-  ::slotted(a),
-  ::slotted(a:visited) {
+  :global(::slotted(a)),
+  :global(::slotted(a:visited)) {
     box-shadow: inset 0 1px 0 0 var(--goa-color-greyscale-200);
     color: var(--goa-color-text-default);
     display: block;
     padding: calc((3rem - var(--goa-line-height-3)) / 2) 1rem;
     text-decoration: none;
   }
-  .not-desktop ::slotted(a) {
+  .not-desktop :global(::slotted(a)) {
     padding: calc((3rem - var(--goa-line-height-3)) / 2) 2.75rem;
   }
-  ::slotted(a:first-child) {
+  :global(::slotted(a:first-child)) {
     box-shadow: none;
   }
-  ::slotted(a:hover) {
+  :global(::slotted(a:hover)) {
     background: var(--goa-color-greyscale-100);
     color: var(--goa-color-interactive-hover);
   }
-  ::slotted(a:focus-visible) {
+  :global(::slotted(a:focus-visible)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: -3px;
     color: var(--goa-color-interactive-hover);
   }
-  ::slotted(a.interactive) {
+  :global(::slotted(a.interactive)) {
     text-decoration: underline;
     color: var(--goa-color-interactive-default);
   }
@@ -217,7 +221,8 @@
       width: 100%;
     }
     button:focus {
-      outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+      outline: var(--goa-border-width-l) solid
+        var(--goa-color-interactive-focus);
       outline-offset: -3px;
     }
     .heading {
@@ -225,9 +230,9 @@
       flex: 0 0 auto;
     }
   }
-  
+
   @media (--desktop) {
-    button[slot=target] {
+    button[slot="target"] {
       font-weight: var(--goa-font-weight-bold);
       /* ensures that the button spans 100% of the height of the desktop app header bar */
       height: 4rem;
@@ -235,6 +240,6 @@
     }
     button.secondary {
       font-weight: var(--goa-font-weight-regular);
-    }    
+    }
   }
 </style>

@@ -101,6 +101,6 @@ export function GoAButton({
       {children}
     </goa-button>
   );
-};
+}
 
 export default GoAButton;

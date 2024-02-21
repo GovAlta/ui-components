@@ -25,4 +25,4 @@ export function GoATab({ heading, children }: GoATabItemProps): JSX.Element {
       {children}
     </goa-tab>
   );
-};
+}

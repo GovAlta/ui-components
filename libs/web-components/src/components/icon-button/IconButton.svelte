@@ -1,4 +1,4 @@
-<svelte:options tag="goa-icon-button" />
+<svelte:options customElement="goa-icon-button" />
 
 <script lang="ts">
   import { typeValidator, toBoolean } from "../../common/utils";
@@ -7,14 +7,14 @@
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
 
- // Validator
+  // Validator
   const [Variants, validateVariant] = typeValidator(
     "Icon Button Variant",
     ["color", "nocolor", "dark", "destructive"],
     true,
   );
 
-  type Variant = typeof Variants[number];
+  type Variant = (typeof Variants)[number];
 
   // required
   export let icon: GoAIconType;
@@ -57,13 +57,13 @@
 
 <button
   style="{calculateMargin(mt, mr, mb, ml)}; --pading-size: {_paddingSize}"
-  title={title}
+  {title}
   disabled={isDisabled}
   class={css}
   data-testid={testid}
   on:click={handleClick}
 >
-  <goa-icon title={title} type={icon} {size} {theme} inverted={isInverted} />
+  <goa-icon {title} type={icon} {size} {theme} inverted={isInverted} />
 </button>
 
 <style>
@@ -91,14 +91,17 @@
   }
 
   /* Primary */
-  .color,.dark {
+  .color,
+  .dark {
     color: var(--goa-color-interactive-default);
     fill: var(--goa-color-interactive-default);
     cursor: pointer;
-    transition: background-color 100ms ease-in, transform 100ms ease-in;
+    transition:
+      background-color 100ms ease-in,
+      transform 100ms ease-in;
   }
 
-  .dark:not(.inverted){
+  .dark:not(.inverted) {
     color: unset;
   }
 
@@ -161,5 +164,4 @@
     background-color: rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 0 3px var(--goa-color-greyscale-white);
   }
-
 </style>

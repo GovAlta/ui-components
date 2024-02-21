@@ -1,4 +1,5 @@
-<svelte:options tag="test-popover-wrapper" />
+<svelte:options customElement="test-popover-wrapper" />
+
 <!-- Script -->
 <script lang="ts">
   export let content: string = "";

@@ -1,9 +1,10 @@
-<svelte:options tag="goa-details" />
+<svelte:options customElement="goa-details" />
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { calculateMargin, Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
   import { toBoolean, validateRequired} from "../../common/utils";
+  import type { Spacing } from "../../common/styling";
 
   export let heading: string;
   export let mt: Spacing = null;
@@ -42,7 +43,7 @@
     position: relative;
   }
 
-  details ::slotted(*) {
+  details :global(::slotted(*)) {
     font: var(--goa-typography-body-m);
   }
 
@@ -102,7 +103,7 @@
     margin-bottom: var(--goa-space-s);
   }
 
-  .content ::slotted(p:last-child) {
+  .content :global(::slotted(p:last-child)) {
     margin-bottom: 0 !important;
   }
 </style>

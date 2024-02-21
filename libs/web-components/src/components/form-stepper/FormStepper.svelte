@@ -1,8 +1,9 @@
-<svelte:options tag="goa-form-stepper" />
+<svelte:options customElement="goa-form-stepper" />
 
 <script lang="ts">
-  import { calculateMargin, Spacing } from "../../common/styling";
-  import { onMount, tick } from "svelte";
+  import { calculateMargin } from "../../common/styling";
+  import type { Spacing } from "../../common/styling";
+  import { onDestroy, onMount, tick } from "svelte";
 
   // ======
   // Public
@@ -37,30 +38,32 @@
 
   // handles the 1-based step value and the number of line segments is one less
   // than the number of steps
-  $: _progress = (_maxProgressStep-1) / (_steps.length-1) * 100;
+  $: _progress = ((_maxProgressStep - 1) / (_steps.length - 1)) * 100;
   $: setCurrentStepStatus(step);
   $: {
     if (_steps.length) {
-
       // allow access to all steps if not step property is provided
       if (step <= 0) {
         step = 1;
         setTimeout(() => {
           dispatch(step);
-        }, 1)
+        }, 1);
         _maxAllowedStep = _steps.length;
       }
 
       if (step > _maxProgressStep) _maxProgressStep = step;
       if (step > _maxAllowedStep) _maxAllowedStep = step;
       _steps.forEach((stepEl: Element, index: number) => {
-        stepEl.setAttribute("enabled", index > _maxAllowedStep - 1 ? "false" : "true")
-      })
+        stepEl.setAttribute(
+          "enabled",
+          index > _maxAllowedStep - 1 ? "false" : "true",
+        );
+      });
     }
   }
 
   onMount(async () => {
-    await tick()
+    await tick();
 
     // children steps
     const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
@@ -68,61 +71,89 @@
       _steps = slot.assignedElements();
     } else {
       // for unit tests only
+      // @ts-expect-error testing
       _steps = [..._rootEl.querySelector("goa-grid").children] as Element[];
     }
 
     // set step a11y label
     _steps.forEach((_step: Element, index: number) => {
-      const s = _step as HTMLElement
-      s.setAttribute("arialabel", `Step ${index+1} of ${_steps.length}`);
-      s.setAttribute("childindex", `${index+1}`);
-    })
+      const s = _step as HTMLElement;
+      s.setAttribute("arialabel", `Step ${index + 1} of ${_steps.length}`);
+      s.setAttribute("childindex", `${index + 1}`);
+    });
 
     // handle click events from progress items
     _rootEl.addEventListener("_click", (e: Event) => {
       step = (e as CustomEvent).detail;
       dispatch(step);
-    })
+    });
 
-    setCurrentStepStatus(step)
+    setCurrentStepStatus(step);
     calcStepDims();
 
     setTimeout(() => {
       _showProgressBars = true;
-    }, 10)
+    }, 10);
 
     // add listener to recalculate the step widths
-    window.addEventListener('resize', calcStepDims);
-    window.addEventListener('orientationchange', calcStepDims);
-		return () => {
-			window.removeEventListener('resize', calcStepDims);
-			window.removeEventListener('orientationchange', calcStepDims);
-		}
+    window.addEventListener("resize", calcStepDims);
+    window.addEventListener("orientationchange", calcStepDims);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener("resize", calcStepDims);
+    window.removeEventListener("orientationchange", calcStepDims);
   })
 
   function dispatch(step: number) {
-    _rootEl.dispatchEvent(new CustomEvent("_change", {
-      composed: true,
-      bubbles: true,
-      detail: { step }
-    }))
+    _rootEl?.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        bubbles: true,
+        detail: { step },
+      }),
+    );
   }
 
   function setCurrentStepStatus(step: number) {
     _steps.forEach((stepEl, index) => {
-      stepEl.setAttribute("current", index === (step-1) ? "true" : "false");
-    })
+      stepEl.setAttribute("current", index === step - 1 ? "true" : "false");
+    });
   }
 
   function calcStepDims() {
     // timeout required, without it the _steps elements width was not yet updated
     setTimeout(() => {
-      _stepWidth = _steps.length > 0 && (_steps[0] as HTMLElement).offsetWidth;
-      _stepHeight = _steps.length > 0 && (_steps[0] as HTMLElement).offsetHeight;
+      _stepWidth = _steps.length > 0 ? (_steps[0] as HTMLElement).offsetWidth : 0;
+      _stepHeight = _steps.length > 0 ? (_steps[0] as HTMLElement).offsetHeight : 0;
       _progressHeight = _gridEl?.offsetHeight;
-    }, 1)
+    }, 1);
   }
 </script>
+
+<section role="list">
+  <div
+    class="form-stepper"
+    style={`
+      ${calculateMargin(mt, mr, mb, ml)};
+      --progress: ${_progress}%;
+      --step-width: ${_stepWidth}px;
+      --step-height: ${_stepHeight}px;
+      --height: ${_progressHeight}px;
+    `}
+    bind:this={_rootEl}
+  >
+    {#if _steps.length > 0 && _showProgressBars}
+      <progress class="horizontal" value={_progress} max="100"></progress>
+      <progress class="vertical" value={_progress} max="100"></progress>
+    {/if}
+    <div class="slots" bind:this={_gridEl}>
+      <goa-grid minchildwidth="1px">
+        <slot />
+      </goa-grid>
+    </div>
+  </div>
+</section>
 
 <style>
   .form-stepper {
@@ -160,8 +191,7 @@
   progress.vertical {
     display: none;
     width: calc(var(--height) - var(--step-height));
-    transform:
-      rotate(90deg)
+    transform: rotate(90deg)
       translate(
         calc(50% + 1.25rem + 1.75rem),
         calc((var(--height) - var(--step-height)) / 2 - 1.25rem - 1.5rem)
@@ -190,29 +220,4 @@
       display: inline-block;
     }
   }
-
 </style>
-
-<section role="list">
-  <div
-    class="form-stepper"
-    style={`
-      ${calculateMargin(mt, mr, mb, ml)};
-      --progress: ${_progress}%;
-      --step-width: ${_stepWidth}px;
-      --step-height: ${_stepHeight}px;
-      --height: ${_progressHeight}px;
-    `}
-    bind:this={_rootEl}
-  >
-    {#if _steps.length > 0 && _showProgressBars}
-      <progress class="horizontal" value={_progress} max="100"></progress>
-      <progress class="vertical" value={_progress} max="100"></progress>
-    {/if}
-    <div class="slots" bind:this={_gridEl}>
-      <goa-grid minchildwidth="1px">
-        <slot />
-      </goa-grid>
-    </div>
-  </div>
-</section>

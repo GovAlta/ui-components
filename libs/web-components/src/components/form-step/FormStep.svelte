@@ -1,16 +1,16 @@
-<svelte:options tag="goa-form-step" />
+<svelte:options customElement="goa-form-step" />
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import {toBoolean, typeValidator} from "../../common/utils";
+  import { toBoolean, typeValidator } from "../../common/utils";
 
   // Validator
   const [StatusTypes, validateStatus] = typeValidator(
     "Form Step status",
     ["incomplete", "complete"],
-    true
+    false,
   );
-  type FormStepStatus =  typeof StatusTypes[number];
+  type FormStepStatus = (typeof StatusTypes)[number];
 
   // ======
   // Public
@@ -23,7 +23,7 @@
   export let enabled: string = "false";
   export let childindex: string = "";
   export let arialabel: string = "";
-  export let status: FormStepStatus;
+  export let status: FormStepStatus = "";
 
   // =======
   // Private
@@ -45,19 +45,56 @@
     _stepEl.addEventListener("click", () => {
       if (!_isEnabled) return;
 
-      _checkbox.checked = !_checkbox.checked
-      _stepEl.dispatchEvent(new CustomEvent("_click", {
-        composed: true,
-        bubbles: true,
-        detail: +childindex
-      }))
-    })
-  })
-
+      _checkbox.checked = !_checkbox.checked;
+      _stepEl.dispatchEvent(
+        new CustomEvent("_click", {
+          composed: true,
+          bubbles: true,
+          detail: +childindex,
+        }),
+      );
+    });
+  });
 </script>
 
+<label
+  id={arialabel}
+  bind:this={_stepEl}
+  role="listitem"
+  tabindex="-1"
+  for={text}
+  data-status={status}
+  aria-current={_isCurrent ? "step" : "false"}
+  aria-label={`${arialabel} ${text} ${status || ""}`}
+>
+  <input
+    id={text}
+    bind:this={_checkbox}
+    type="checkbox"
+    checked={_isCurrent}
+    aria-disabled={!_isEnabled}
+  />
+  <div data-testid="status" class="status">
+    {#if _isCurrent}
+      <goa-icon type="pencil" />
+    {:else if status === "complete"}
+      <goa-icon type="checkmark" inverted />
+    {:else if status === "incomplete"}
+      <goa-icon type="remove" />
+    {:else}
+      <div data-testid="step-number" class="step-number">{childindex}</div>
+    {/if}
+  </div>
+  <div class="details">
+    <div class="text" data-testid="text">{text}</div>
+    {#if status === "incomplete"}
+      <div class="subtext" data-testid="subtext">Partially complete</div>
+    {/if}
+  </div>
+</label>
+
 <style>
-  input[type=checkbox] {
+  input[type="checkbox"] {
     position: absolute;
     left: -9999px;
   }
@@ -75,8 +112,7 @@
 
   [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):focus-within,
   [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):focus,
-  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):active
-  {
+  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):active {
     outline: var(--goa-color-interactive-focus) solid var(--goa-border-width-l);
   }
 
@@ -84,7 +120,6 @@
     background-color: rgba(0,0,0,0.05);
     cursor: pointer;
   }
-
 
   .status {
     flex: 0 0 auto;
@@ -105,14 +140,17 @@
   }
 
   [aria-current="step"] .text {
-    font-weight: var(--goa-font-weight-bold)
+    font-weight: var(--goa-font-weight-bold);
   }
-  [data-status=complete] .status {
+
+  [data-status="complete"] .status {
     background: var(--goa-color-interactive-default);
   }
-  [aria-current="step"][data-status=complete] .status {
+
+  [aria-current="step"][data-status="complete"] .status {
     background: var(--goa-color-greyscale-white);
   }
+
   .step-number {
     margin-bottom: var(--font-valign-fix);
     font-weight: var(--goa-font-weight-bold);
@@ -120,8 +158,8 @@
   }
 
   [role="listitem"]:not(
-    [data-status=complete],
-    [data-status=incomplete],
+    [data-status="complete"],
+    [data-status="incomplete"],
     [aria-current="step"]
   ) .status {
     border-color: var(--goa-color-greyscale-500);
@@ -154,37 +192,3 @@
     }
   }
 </style>
-
-<label
-  id={arialabel}
-  bind:this={_stepEl}
-  role="listitem"
-  tabindex="-1"
-  for={text}
-  data-status={status}
-  aria-disabled={!_isEnabled ? "true" : "false"}
-  aria-current={_isCurrent ? "step" : "false"}
-  aria-label={`${arialabel} ${text} ${status || ""}`}
->
-  <input id={text} bind:this={_checkbox} type="checkbox" checked={_isCurrent} aria-disabled={!_isEnabled}/>
-  <div
-    data-testid="status"
-    class="status">
-    {#if _isCurrent}
-      <goa-icon type="pencil" />
-    {:else if status === "complete"}
-      <goa-icon type="checkmark" inverted />
-    {:else if status === "incomplete"}
-      <goa-icon type="remove" />
-    {:else}
-      <div data-testid="child-index" class="step-number">{childindex}</div>
-    {/if}
-  </div>
-  <div class="details">
-    <div class="text" data-testid="text">{text}</div>
-    {#if status === "incomplete"}
-      <div class="subtext" data-testid="subtext">Partially complete</div>
-    {/if}
-  </div>
-</label>
-

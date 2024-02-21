@@ -1,4 +1,4 @@
-<svelte:options tag="test-three-column-layout"/>
+<svelte:options customElement="test-three-column-layout" />
 
 <!--Script-->
 <script lang="ts">
@@ -27,6 +27,5 @@
     <h2>SideMenu</h2>
     <p>Side menu content.</p>
   </section>
-  <goa-app-footer slot="footer">
-  </goa-app-footer>
+  <goa-app-footer slot="footer"> </goa-app-footer>
 </goa-three-column-layout>

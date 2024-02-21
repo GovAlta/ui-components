@@ -1,5 +1,5 @@
 #!/bin/sh
 
 # Build, lint and test
-npm run checkin-validate
+npm run validate
 

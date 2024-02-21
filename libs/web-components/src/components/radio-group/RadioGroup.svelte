@@ -1,4 +1,4 @@
-<svelte:options tag="goa-radio-group" />
+<svelte:options customElement="goa-radio-group" />
 
 <script lang="ts">
   import type { Spacing } from "../../common/styling";
@@ -7,18 +7,21 @@
   import { onMount, tick } from "svelte";
 
   // Validator
-  const [Orientations, validateOrientation] = typeValidator("Radio group orientation",
-    ["vertical", "horizontal"]
+  const [Orientations, validateOrientation] = typeValidator(
+    "Radio group orientation",
+    ["vertical", "horizontal"],
   );
 
   // Type
-  type Orientation = typeof Orientations[number];
+  type Orientation = (typeof Orientations)[number];
 
   interface RadioOption {
     label: string;
     value: string;
     description?: string;
   }
+
+  // Public
 
   export let name: string;
   export let value: string;
@@ -27,61 +30,70 @@
   export let error: string = "false";
   export let testid: string = "";
   export let arialabel: string = "";
-
-  // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  let options: RadioOption[] = [];
+  // Reactive
 
-  // private
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
 
+  // Private
+
   let el: HTMLElement;
+  let options: RadioOption[] = [];
+
+  // Hooks
 
   onMount(async () => {
     await tick();
-
+    validateOrientation(orientation);
     options = getOptions();
   });
 
+  // Functions
+
   /**
-  * Allows the child elements to be obtainable within unit tests
-  * @returns List of child elements
-  */
+   * Allows the child elements to be obtainable within unit tests
+   * @returns List of child elements
+   */
   function getChildren(): Element[] {
     const slot = el.querySelector("slot") as HTMLSlotElement;
-    if (slot)
+    if (slot) {
       // default
       return [...slot.assignedElements()];
-    else
+    } else {
       // unit tests
+      // @ts-expect-error
       return [...el.children] as Element[];
+    }
   }
 
   /**
-  * Maps the child elements to a list of RadioOptions
-  */
+   * Maps the child elements to a list of RadioOptions
+   */
   function getOptions(): RadioOption[] {
     const children = getChildren();
 
-    return children.map((el: HTMLElement) => {
+    return children.map((el: Element) => {
       const option = el as unknown as RadioOption & { innerText: string };
       const value = el.getAttribute("value") || option.value;
       const label =
-        el.getAttribute("label") || el.innerText || option.label || option.innerText;
-      const description = el.getAttribute("description") || option.description;;
+        el.getAttribute("label") ||
+        option.innerText ||
+        option.label ||
+        option.innerText;
+      const description = el.getAttribute("description") || option.description;
       return { value, label, description };
     });
   }
 
   /**
-  * Handles changing of the radio items
-  * @param newValue Selected value
-  */
+   * Handles changing of the radio items
+   * @param newValue Selected value
+   */
   function onChange(newValue: string) {
     if (newValue === value) return;
 
@@ -89,14 +101,11 @@
     el.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
+        bubbles: true,
         detail: { name, value: value },
       }),
     );
   }
-
-  onMount(() => {
-    validateOrientation(orientation);
-  });
 </script>
 
 <!-- Html -->
@@ -165,7 +174,7 @@
     display: flex;
   }
 
-  .goa-radio-container{
+  .goa-radio-container {
     padding-bottom: 1rem;
   }
 
@@ -212,10 +221,11 @@
 
   /* What is this? */
   .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width)
+      var(--goa-color-interactive-focus);
   }
 
-  .goa-radio--disabled .goa-radio-label{
+  .goa-radio--disabled .goa-radio-label {
     opacity: 0.4;
   }
   .goa-radio--disabled:hover {
@@ -246,12 +256,14 @@
   input[type="radio"]:hover:active ~ .goa-radio-icon,
   input[type="radio"]:hover:focus ~ .goa-radio-icon,
   input[type="radio"]:active ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width)
+      var(--goa-color-interactive-focus);
   }
 
   /* Checked */
   input[type="radio"]:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive-default);
+    border: var(--goa-radio-border-width--checked) solid
+      var(--goa-color-interactive-default);
   }
 
   /* Disabled */
@@ -282,7 +294,8 @@
   }
   .goa-radio--error input[type="radio"]:hover:active ~ .goa-radio-icon,
   .goa-radio--error input[type="radio"]:hover:focus ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width)
+      var(--goa-color-interactive-focus);
   }
   .goa-radio--error input[type="radio"]:disabled:hover ~ .goa-radio-icon {
     box-shadow: none;

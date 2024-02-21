@@ -1,6 +1,6 @@
-import "@testing-library/jest-dom";
 import { render, cleanup } from "@testing-library/svelte";
 import Divider from "./Divider.svelte";
+import { it, describe } from "vitest";
 
 afterEach(cleanup);
 

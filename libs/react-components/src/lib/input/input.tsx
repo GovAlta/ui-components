@@ -32,7 +32,7 @@ interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
   type?: GoAInputType;
   name: string;
-  value: string;
+  value?: string;
   id?: string;
   autocapitalize?: GoAAutoCapitalize;
   debounce?: number;
@@ -97,9 +97,10 @@ type OnChange<T = string> = (name: string, value: T) => void;
 type OnFocus<T = string> = (name: string, value: T) => void;
 type OnBlur<T = string> = (name: string, value: T) => void;
 type OnKeyPress<T = string> = (name: string, value: T, key: string) => void;
+
 export interface GoAInputProps extends BaseProps {
   onChange: OnChange<string>;
-  value: string;
+  value?: string;
   min?: number | string;
   max?: number | string;
   step?: number;
@@ -110,7 +111,7 @@ export interface GoAInputProps extends BaseProps {
 
 interface GoANumberInputProps extends BaseProps {
   onChange: OnChange<number>;
-  value: number;
+  value?: number;
   min?: number;
   max?: number;
   step?: number;
@@ -118,9 +119,10 @@ interface GoANumberInputProps extends BaseProps {
   onBlur?: OnBlur<number>;
   onKeyPress?: OnKeyPress<number>;
 }
+
 interface GoADateInputProps extends BaseProps {
   onChange: OnChange<GoADate>;
-  value: GoADate;
+  value?: GoADate;
   min?: GoADate;
   max?: GoADate;
   step?: number;
@@ -244,7 +246,7 @@ export function GoAInput({
       {trailingContent && <div slot="trailingContent">{trailingContent}</div>}
     </goa-input>
   );
-};
+}
 
 const onDateChangeHandler = (onChange: OnChange<GoADate>) => {
   return (name: string, value: string) => {
@@ -269,7 +271,7 @@ const onTimeChangeHandler = (onChange: OnChange) => {
   };
 };
 
-function toString(value: GoADate, tmpl = "yyyy-MM-dd"): string {
+function toString(value: GoADate | null | undefined, tmpl = "yyyy-MM-dd"): string {
   if (!value) {
     return "";
   }
@@ -284,11 +286,11 @@ function toString(value: GoADate, tmpl = "yyyy-MM-dd"): string {
 
 export function GoAInputText(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="text" />;
-};
+}
 
 export function GoAInputPassword(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="password" />;
-};
+}
 
 export function GoAInputDate({
   value,
@@ -306,7 +308,7 @@ export function GoAInputDate({
       value={toString(value)}
     />
   );
-};
+}
 
 export function GoAInputTime({
   value,
@@ -322,7 +324,7 @@ export function GoAInputTime({
       type="time"
     />
   );
-};
+}
 
 export function GoAInputDateTime({
   value,
@@ -338,23 +340,23 @@ export function GoAInputDateTime({
       type="datetime-local"
     />
   );
-};
+}
 
 export function GoAInputEmail(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="email" />;
-};
+}
 
 export function GoAInputSearch(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="search" trailingIcon="search" />;
-};
+}
 
 export function GoAInputUrl(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="url" />;
-};
+}
 
 export function GoAInputTel(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="tel" />;
-};
+}
 
 export function GoAInputFile(props: GoAInputProps): JSX.Element {
   return (
@@ -366,11 +368,11 @@ export function GoAInputFile(props: GoAInputProps): JSX.Element {
       style={{ backgroundColor: "revert" }}
     />
   );
-};
+}
 
 export function GoAInputMonth(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="month" />;
-};
+}
 
 export function GoAInputNumber({
   min = Number.MIN_VALUE,
@@ -379,16 +381,16 @@ export function GoAInputNumber({
   ...props
 }: GoANumberInputProps): JSX.Element {
   const onNumberChange = (name: string, value: string) => {
-    props.onChange(name, parseInt(value));
+    props.onChange(name, parseFloat(value));
   };
   const onFocus = (name: string, value: string) => {
-    props.onFocus?.(name, parseInt(value));
+    props.onFocus?.(name, parseFloat(value));
   };
   const onBlur = (name: string, value: string) => {
-    props.onBlur?.(name, parseInt(value));
+    props.onBlur?.(name, parseFloat(value));
   };
   const onKeyPress = (name: string, value: string, key: string) => {
-    props.onKeyPress?.(name, parseInt(value), key);
+    props.onKeyPress?.(name, parseFloat(value), key);
   };
   return (
     <GoAInput
@@ -396,17 +398,17 @@ export function GoAInputNumber({
       onChange={onNumberChange}
       min={min?.toString()}
       max={max?.toString()}
-      value={value.toString()}
+      value={value?.toString()}
       onFocus={onFocus}
       onBlur={onBlur}
       type="number"
       onKeyPress={onKeyPress}
     />
   );
-};
+}
 
 export function GoAInputRange(props: GoAInputProps): JSX.Element {
   return <GoAInput {...props} type="range" />;
-};
+}
 
 export default GoAInput;

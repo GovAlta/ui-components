@@ -56,6 +56,6 @@ export function GoAMicrositeHeader({
       headerurltarget={headerUrlTarget}
     />
   );
-};
+}
 
 export default GoAMicrositeHeader;

@@ -1,4 +1,4 @@
-<svelte:options tag="goa-checkbox" />
+<svelte:options customElement="goa-checkbox" />
 
 <!-- Script -->
 <script lang="ts">
@@ -41,7 +41,7 @@
     // hold on to the initial value to prevent losing it on check changes
     _value = value;
     _descriptionId = `description_${name}`;
-  })
+  });
 
   function onChange(e: Event) {
     // Manually set the focus back to the checkbox after the state change
@@ -54,7 +54,7 @@
     // set the local state
     checked = fromBoolean(newCheckStatus);
 
-    e.target.dispatchEvent(
+    e.target?.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
         detail: { name, checked: newCheckStatus, value: newValue },
@@ -67,60 +67,62 @@
 
 <div style={calculateMargin(mt, mr, mb, ml)} class="goa-checkbox">
   <label
-  class="goa-checkbox-label"
-  data-testid={testid}
-  for={name}
-  class:goa-checkbox--disabled={isDisabled}
-  class:goa-checkbox--error={isError}
->
-  <div class="goa-checkbox-container" class:goa-checkbox--selected={isChecked}>
-    <input
-      bind:this={_checkboxRef}
-      id={name}
-      {name}
-      checked={isChecked}
-      disabled={isDisabled}
-      type="checkbox"
-      value={`${value}`}
-      aria-label={arialabel || name}
-      aria-describedby={description ? _descriptionId : null}
-      on:change={onChange}
-    />
-    {#if isIndeterminate}
-      <svg
-        id="dashmark"
-        data-testid="dashmark"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 15 2"
-      >
-        <rect width="15" height="2" />
-      </svg>
-    {:else if isChecked}
-      <svg
-        id="checkmark"
-        data-testid="checkmark"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 12.18"
-      >
-        <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
-      </svg>
-    {/if}
-  </div>
-  <div class="goa-checkbox-text">
-    <div class="label-text" data-testid="text">
-      <slot>
-        {text}
-      </slot>
+    class="goa-checkbox-label"
+    data-testid={testid}
+    for={name}
+    class:goa-checkbox--disabled={isDisabled}
+    class:goa-checkbox--error={isError}
+  >
+    <div
+      class="goa-checkbox-container"
+      class:goa-checkbox--selected={isChecked}
+    >
+      <input
+        bind:this={_checkboxRef}
+        id={name}
+        {name}
+        checked={isChecked}
+        disabled={isDisabled}
+        type="checkbox"
+        value={`${value}`}
+        aria-label={arialabel || name}
+        aria-describedby={description ? _descriptionId : null}
+        on:change={onChange}
+      />
+      {#if isIndeterminate}
+        <svg
+          id="dashmark"
+          data-testid="dashmark"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 15 2"
+        >
+          <rect width="15" height="2" />
+        </svg>
+      {:else if isChecked}
+        <svg
+          id="checkmark"
+          data-testid="checkmark"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 16 12.18"
+        >
+          <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
+        </svg>
+      {/if}
     </div>
-  </div>
-</label>
-{#if description}
-  <div class="description-text" id={_descriptionId} data-testid="description">
-    {description}
-  </div>
-{/if}
+    <div class="goa-checkbox-text">
+      <div class="label-text" data-testid="text">
+        <slot>
+          {text}
+        </slot>
+      </div>
+    </div>
+  </label>
+  {#if description}
+    <div class="description-text" id={_descriptionId} data-testid="description">
+      {description}
+    </div>
+  {/if}
 </div>
-
 
 <!-- Styles -->
 <style>
@@ -172,11 +174,14 @@
   }
 
   .goa-checkbox-container:hover {
-    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-hover);
     border: none;
   }
 
-  .goa-checkbox-container:focus-within,.goa-checkbox-container:focus, .goa-checkbox-container:active {
+  .goa-checkbox-container:focus-within,
+  .goa-checkbox-container:focus,
+  .goa-checkbox-container:active {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
     border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
     outline: none;
@@ -201,7 +206,7 @@
     background-color: var(--goa-color-greyscale-white);
   }
 
-  .goa-checkbox--error .goa-checkbox-container:focus-within{
+  .goa-checkbox--error .goa-checkbox-container:focus-within {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
     background-color: var(--goa-color-greyscale-white);
     border: var(--goa-border-width-s) solid var(--goa-color-emergency-default);
@@ -229,13 +234,14 @@
     background-color: var(--goa-color-interactive-default);
   }
 
-  .goa-checkbox--disabled.goa-checkbox--error .goa-checkbox-container.goa-checkbox--selected {
+  .goa-checkbox--disabled.goa-checkbox--error
+    .goa-checkbox-container.goa-checkbox--selected {
     border: var(--goa-border-width-s) solid var(--goa-color-emergency-default);
     box-shadow: inset 0 0 0 1px var(--goa-color-emergency-default);
   }
 
   .goa-checkbox--disabled,
-  input[type=checkbox][disabled]:hover {
+  input[type="checkbox"][disabled]:hover {
     cursor: default;
   }
 

@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
 import { render, cleanup } from '@testing-library/svelte';
 import GoASkeleton from './Skeleton.svelte';
+import { it, describe } from "vitest";
 
 afterEach(cleanup);
 

@@ -68,6 +68,6 @@ export function GoAContainer({
       {actions && <div slot="actions">{actions}</div>}
     </goa-container>
   );
-};
+}
 
 export default GoAContainer;

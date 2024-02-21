@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
 import { render } from '@testing-library/svelte';
 import GoAMicrositeHeader from './MicrositeHeader.svelte'
+import { it, describe } from "vitest";
 
 describe('GoAMicrositeHeader', () => {
 

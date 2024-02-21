@@ -1,4 +1,4 @@
-<svelte:options tag="goa-app-footer-meta-section" />
+<svelte:options customElement="goa-app-footer-meta-section" />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
@@ -8,22 +8,36 @@
 
   onMount(async () => {
     await tick();
-    children = rootEl.querySelector("slot").assignedElements() as HTMLLinkElement[];
+    children = rootEl
+      .querySelector("slot")
+      .assignedElements() as HTMLLinkElement[];
 
-    const isValid =
-      children
-        .map(child => child.hasAttribute("href"))
-        .reduce((sum: boolean, valid: boolean) => {
-          return sum && valid
-        }, true);
+    const isValid = children
+      .map((child) => child.hasAttribute("href"))
+      .reduce((sum: boolean, valid: boolean) => {
+        return sum && valid;
+      }, true);
 
     if (!isValid) {
       children = [];
-      console.warn("GoAFooterMetaSection children must be anchor elements.")
+      console.warn("GoAFooterMetaSection children must be anchor elements.");
       return;
     }
   });
 </script>
+
+<!-- Template -->
+<section bind:this={rootEl}>
+  <div class="hidden">
+    <slot />
+  </div>
+
+  <ul>
+    {#each children as child}
+      <li><a href={child.href}>{child.innerHTML}</a></li>
+    {/each}
+  </ul>
+</section>
 
 <style>
   .hidden {
@@ -46,18 +60,3 @@
     white-space: nowrap;
   }
 </style>
-
-
-<!-- Template -->
-<section bind:this={rootEl}>
-  <div class="hidden">
-    <slot />
-  </div>
-
-  <ul>
-    {#each children as child}
-      <li><a href={child.href}>{child.innerHTML}</a></li>
-    {/each}
-  </ul>
-
-</section>

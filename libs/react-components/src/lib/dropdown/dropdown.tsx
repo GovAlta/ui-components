@@ -108,6 +108,6 @@ export function GoADropdown(props: GoADropdownProps): JSX.Element {
       {props.children}
     </goa-dropdown>
   );
-};
+}
 
 export default GoADropdown;

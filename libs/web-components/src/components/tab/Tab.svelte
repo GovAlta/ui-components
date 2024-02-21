@@ -1,7 +1,7 @@
-<svelte:options tag="goa-tab"/>
+<svelte:options customElement="goa-tab" />
 
 <script lang="ts">
-  import {toBoolean} from "../../common/utils";
+  import { toBoolean } from "../../common/utils";
 
   // ======
   // Public
@@ -17,10 +17,10 @@
 
   let _isOpen: boolean;
   $: _isOpen = toBoolean(open);
-
 </script>
 
-<slot style="display:none" name="heading">{heading}</slot>
+<div style="display:none" data-heading={heading} />
+<slot style="display:none" name="heading" />
 {#if _isOpen}
   <div role="tabpanel">
     <slot />
@@ -28,7 +28,7 @@
 {/if}
 
 <style>
-  [role=tabpanel] {
+  [role="tabpanel"] {
     padding-top: 2rem;
   }
 </style>

@@ -1,14 +1,18 @@
-<svelte:options tag="goa-microsite-header" />
+<svelte:options customElement="goa-microsite-header" />
 
 <!-- Script -->
 <script lang="ts">
   import { onMount } from "svelte";
-  import { toBoolean, typeValidator } from "../../common/utils";
+  import { typeValidator } from "../../common/utils";
 
   // Validator
-  const [Types, validateType] = typeValidator("Microsite header type", ["live", "alpha", "beta"], true);
+  const [Types, validateType] = typeValidator(
+    "Microsite header type",
+    ["live", "alpha", "beta"],
+    true,
+  );
   // Type
-  type Type = typeof Types[number];
+  type Type = (typeof Types)[number];
 
   export let type: Type;
   export let version: string = "";
@@ -18,12 +22,13 @@
   export let feedbackurltarget: UrlTargetType = "blank";
 
   // Validator
-  const [UrlTarget, validateUrlTargetType] = typeValidator("URL target values",
-    ["self", "blank"]
+  const [UrlTarget, validateUrlTargetType] = typeValidator(
+    "URL target values",
+    ["self", "blank"],
   );
 
   // Types
-  type UrlTargetType = typeof UrlTarget[number];
+  type UrlTargetType = (typeof UrlTarget)[number];
 
   function capitalize(val: string): string {
     if (!val || (val && val.length === 0)) return "";
@@ -38,11 +43,17 @@
 </script>
 
 <!-- HTML -->
-<header class="goa-official-site-header" style={`--max-content-width: ${maxcontentwidth}`}>
+<header
+  class="goa-official-site-header"
+  style={`--max-content-width: ${maxcontentwidth}`}
+>
   <div class="content-container">
     {#if type === "live"}
       <div data-testid="type" class="site-text">
-        An official site of the <a href="https://www.alberta.ca/index.aspx" target={`_${headerurltarget}`}>Alberta Government</a>
+        An official site of the <a
+          href="https://www.alberta.ca/index.aspx"
+          target={`_${headerurltarget}`}>Alberta Government</a
+        >
       </div>
     {/if}
 
@@ -54,9 +65,18 @@
         {capitalize(type)}
       </div>
       <div data-testid="site-text" class="site-text">
-        This is a new <a href="https://www.alberta.ca/index.aspx" target={`_${headerurltarget}`}>Alberta Government</a> service
+        This is a new <a
+          href="https://www.alberta.ca/index.aspx"
+          target={`_${headerurltarget}`}>Alberta Government</a
+        >
+        service
         {#if feedbackurl}
-          <span data-testid="feedback">— help us improve it by giving <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a></span>
+          <span data-testid="feedback"
+            >— help us improve it by giving <a
+              href={feedbackurl}
+              target={`_${feedbackurltarget}`}>feedback</a
+            ></span
+          >
         {/if}
       </div>
     {/if}
@@ -101,9 +121,9 @@
     margin-left: var(--goa-space-2xs);
     vertical-align: sub;
     mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20class%3D%22ionicon%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20d%3D%22M384%20224v184a40%2040%200%200%201-40%2040H104a40%2040%200%200%201-40-40V168a40%2040%200%200%201%2040-40h167.48M336%2064h112v112M224%20288%20440%2072%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%2232%22%2F%3E%3C%2Fsvg%3E")
-    center bottom no-repeat;
+      center bottom no-repeat;
     -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20class%3D%22ionicon%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20d%3D%22M384%20224v184a40%2040%200%200%201-40%2040H104a40%2040%200%200%201-40-40V168a40%2040%200%200%201%2040-40h167.48M336%2064h112v112M224%20288%20440%2072%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%2232%22%2F%3E%3C%2Fsvg%3E")
-    center bottom no-repeat;
+      center bottom no-repeat;
   }
   a[target="_blank"]:hover:after {
     background-color: var(--goa-color-interactive-hover);
@@ -170,5 +190,4 @@
     color: var(--goa-color-text-default);
     line-height: 1.25rem;
   }
-
 </style>

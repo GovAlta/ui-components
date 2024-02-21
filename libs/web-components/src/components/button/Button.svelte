@@ -1,4 +1,4 @@
-<svelte:options tag="goa-button" />
+<svelte:options customElement="goa-button" />
 
 <script lang="ts">
   import { onMount } from "svelte";
@@ -13,7 +13,11 @@
     ["primary", "submit", "secondary", "tertiary", "start"],
     true,
   );
-  const [Sizes, validateSize] = typeValidator("Button size", ["normal", "compact"], true);
+  const [Sizes, validateSize] = typeValidator(
+    "Button size",
+    ["normal", "compact"],
+    true,
+  );
   const [Variants, validateVariant] = typeValidator(
     "Button variant",
     ["normal", "destructive"],
@@ -21,17 +25,17 @@
   );
 
   // Types
-  type ButtonType = typeof Types[number];
-  type Size = typeof Sizes[number];
-  type Variant = typeof Variants[number];
+  type ButtonType = (typeof Types)[number];
+  type Size = (typeof Sizes)[number];
+  type Variant = (typeof Variants)[number];
 
   // optional
   export let type: ButtonType = "primary";
   export let size: Size = "normal";
   export let variant: Variant = "normal";
   export let disabled: string = "false";
-  export let leadingicon: GoAIconType = null;
-  export let trailingicon: GoAIconType = null;
+  export let leadingicon: GoAIconType | null = null;
+  export let trailingicon: GoAIconType | null = null;
   export let testid: string = "";
 
   export let mt: Spacing = null;
@@ -42,9 +46,13 @@
   $: isDisabled = toBoolean(disabled);
   $: isButtonDark = type === "primary" || type === "start";
 
-  function clickHandler(e: Event) {
+  function clickHandler(_e: Event) {
+    // TODO: use e.target??
     if (!isDisabled) {
-      this.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
+      // @ts-expect-error
+      this.dispatchEvent(
+        new CustomEvent("_click", { composed: true, bubbles: true }),
+      );
     }
   }
 
@@ -79,7 +87,11 @@
       <slot />
     </span>
     {#if trailingicon}
-      <goa-icon id="trailing-icon" type={trailingicon} inverted={isButtonDark} />
+      <goa-icon
+        id="trailing-icon"
+        type={trailingicon}
+        inverted={isButtonDark}
+      />
     {/if}
   {/if}
 </button>
@@ -123,12 +135,17 @@
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out,
+    transition:
+      transform 0.1s ease-in-out,
+      background-color 0.2s ease-in-out,
       border-color 0.2s ease-in-out;
   }
 
   .text {
-    padding-bottom: var(--font-valign-fix, 0); /* acumin font requires this to allow for vertical alignment  */
+    padding-bottom: var(
+      --font-valign-fix,
+      0
+    ); /* acumin font requires this to allow for vertical alignment  */
   }
 
   button:disabled {

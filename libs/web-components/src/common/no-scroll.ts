@@ -47,7 +47,7 @@ export default function (_node: HTMLElement, opts: { enable: boolean }) {
     const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
 
     // Removing temporary elements from the DOM
-    outer.parentNode.removeChild(outer);
+    outer.parentNode?.removeChild(outer);
 
     return scrollbarWidth;
   }
