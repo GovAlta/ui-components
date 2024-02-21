@@ -19,7 +19,7 @@
   "private": true,
   "devDependencies": {
     "@abgov/design-tokens": "^1.1.1",
-    "@abgov/nx-release": "^8.1.1",
+    "@abgov/nx-release": "8.0.0",
     "@angular-devkit/build-angular": "17.1.2",
     "@angular-devkit/core": "17.1.2",
     "@angular-devkit/schematics": "17.1.2",
