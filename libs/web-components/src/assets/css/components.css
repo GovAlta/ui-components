@@ -113,6 +113,10 @@ goa-table th:has(goa-table-sort-header) {
   text-align: right;
 }
 
+.goa-table-number-header {
+  text-align: right;
+}
+
 goa-table tfoot td {
   background-color: var(--goa-color-greyscale-100);
 }
