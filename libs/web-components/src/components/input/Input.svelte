@@ -188,8 +188,8 @@
   <div
     class="goa-input variant--{variant} type--{type}"
     class:input--disabled={isDisabled}
-    class:leading-content={_leadingContentSlot}
-    class:trailing-content={_trailingContentSlot}
+    class:input-leading-content={_leadingContentSlot}
+    class:input-trailing-content={_trailingContentSlot}
     class:error={isError}
   >
     {#if prefix}
@@ -310,14 +310,14 @@
     background-color: var(--goa-color-greyscale-white);
   }
 
-  .goa-input:hover:not(.leading-content):not(.trailing-content) {
+  .goa-input:not(.input-leading-content):not(.input-trailing-content):hover {
     border-color: var(--goa-color-interactive-hover);
     box-shadow: 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-hover);
   }
-  .goa-input:active:not(.leading-content):not(.trailing-content),
-  .goa-input:focus:not(.leading-content):not(.trailing-content),
-  .goa-input:focus-within:not(.leading-content):not(.trailing-content) {
+  .goa-input:active:not(.input-leading-content):not(.input-trailing-content),
+  .goa-input:focus:not(.input-leading-content):not(.input-trailing-content),
+  .goa-input:focus-within:not(.input-leading-content):not(.input-trailing-content) {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
 
@@ -452,13 +452,13 @@
     box-shadow: none;
   }
 
-  .error:not(.leading-content):not(.trailing-content),
-  .error:hover:not(.leading-content):not(.trailing-content) {
+  .error:not(.input-leading-content):not(.input-trailing-content),
+  .error:not(.input-leading-content):not(.input-trailing-content):hover {
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 1px var(--goa-color-interactive-error);
   }
 
-  .error:focus-within:hover:not(.leading-content):not(.trailing-content) {
+  .error:not(.input-leading-content):not(.input-trailing-content):focus-within:hover {
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
@@ -481,19 +481,19 @@
       var(--goa-color-interactive-focus);
   }
 
-  .input-leading-content:hover,
-  .input-trailing-content:hover {
+  input.input-leading-content:hover,
+  input.input-trailing-content:hover {
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-hover);
     outline: var(--goa-border-width-s) solid var(--goa-color-interactive-hover);
   }
 
-  .input-leading-content:active,
-  .input-leading-content:focus,
-  .input-leading-content:focus-within,
-  .input-trailing-content:active,
-  .input-trailing-content:focus,
-  .input-trailing-content:focus-within {
+  input.input-leading-content:active,
+  input.input-leading-content:focus,
+  input.input-leading-content:focus-within,
+  input.input-trailing-content:active,
+  input.input-trailing-content:focus,
+  input.input-trailing-content:focus-within {
     box-shadow: 0 0 0 var(--goa-border-width-l)
       var(--goa-color-interactive-focus);
     outline: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
