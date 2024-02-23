@@ -2,13 +2,11 @@ import { forwardRef, Directive, ElementRef, HostListener } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Directive({
-  selector: "[goaValue]", providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ValueDirective),
-      multi: true,
-    },
-  ],
+  selector: "[goaValue]", providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => ValueDirective),
+    multi: true,
+  }],
 })
 export class ValueDirective implements ControlValueAccessor {
   private _value = "";
@@ -50,13 +48,11 @@ export class ValueDirective implements ControlValueAccessor {
 
 @Directive({
   selector: "[goaValueList]",
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ValueListDirective),
-      multi: true,
-    },
-  ],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => ValueListDirective),
+    multi: true,
+  }],
 })
 export class ValueListDirective implements ControlValueAccessor {
   private _value?: string[] = [];
@@ -69,7 +65,7 @@ export class ValueListDirective implements ControlValueAccessor {
   }
 
   set value(val: string[] | undefined) {
-    if (val && val !== this._value) {
+    if (1 === 1 && val && val !== this._value) {
       this._setValue(val);
       this.elementRef.nativeElement.value = JSON.stringify(val);
     }
