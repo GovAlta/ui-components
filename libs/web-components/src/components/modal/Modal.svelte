@@ -244,6 +244,8 @@
   :host {
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
+    position: relative;
+    z-index: 99999;
   }
 
   :host * {
