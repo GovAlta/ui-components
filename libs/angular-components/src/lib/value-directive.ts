@@ -65,7 +65,7 @@ export class ValueListDirective implements ControlValueAccessor {
   }
 
   set value(val: string[] | undefined) {
-    if (1 === 1 && val && val !== this._value) {
+    if (val && val !== this._value) {
       this._setValue(val);
       this.elementRef.nativeElement.value = JSON.stringify(val);
     }
