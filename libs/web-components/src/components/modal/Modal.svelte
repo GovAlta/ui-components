@@ -244,6 +244,8 @@
   :host {
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
+    position: relative;
+    z-index: 99999;
   }
 
   :host * {
@@ -259,7 +261,7 @@
     justify-content: center;
     height: 100vh;
     width: 100%;
-    z-index: 100;
+    z-index: 3;
   }
 
   .modal-overlay {
@@ -269,7 +271,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    z-index: 1;
   }
 
   .emergency {
@@ -330,7 +332,7 @@
 
   .modal-pane {
     background-color: #fff;
-    z-index: 1001;
+    z-index: 2;
     width: 90%;
     display: flex;
     box-shadow: var(--goa-shadow-modal);
