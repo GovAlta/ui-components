@@ -46,7 +46,6 @@
     background: var(--hero-banner-background-color);
     box-sizing: border-box;
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-direction: column;
     color: var(--hero-banner-text-color, var(--goa-color-text-default));
