@@ -16,6 +16,6 @@
 <!-- HTML -->
 <GoARadioGroup {name} {value} {orientation} {disabled} {error} {testid}>
   {#each items as item (item)}
-    <div value={item} label={item} />
+    <goa-radio-item value="{item}" label="{item}" />
   {/each}
 </GoARadioGroup>

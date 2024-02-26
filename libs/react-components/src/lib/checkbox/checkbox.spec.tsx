@@ -40,6 +40,23 @@ describe("GoA Checkbox", () => {
     expect(checkbox?.getAttribute("ml")).toBe("xl");
   });
 
+  it("should render with text description", () => {
+    render(<GoACheckbox name={"foo"} checked={false} description={"description text"}/>);
+
+    const checkbox = document.querySelector("goa-checkbox");
+    expect(checkbox?.getAttribute("description")).toBe("description text");
+  });
+
+  it("should render with slot description", () => {
+    const result = render(
+      <GoACheckbox name={"foo"} checked={false} description={<div>description slot</div>}/>);
+
+    const checkbox = document.querySelector("goa-checkbox");
+    expect(checkbox?.getAttribute("description")).toBe(null);
+    expect(result.container.querySelector('div[slot="description"]')?.innerHTML)
+      .toContain("description slot");
+  });
+
   it("should handle the onChange event", async function () {
     const onChangeStub = vi.fn();
 

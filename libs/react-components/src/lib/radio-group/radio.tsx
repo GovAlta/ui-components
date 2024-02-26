@@ -1,7 +1,7 @@
 interface RadioItemProps {
   name?: string;
   value?: string;
-  description?: string;
+  description?: string | React.ReactNode;
   label?: string;
   disabled?: boolean;
   checked?: boolean;
@@ -21,7 +21,7 @@ export interface GoARadioItemProps {
   value?: string;
   label?: string;
   name?: string;
-  description?: string;
+  description?: string | React.ReactNode;
   disabled?: boolean;
   checked?: boolean;
   error?: boolean;
@@ -45,12 +45,13 @@ export function GoARadioItem({
       name={name}
       label={label}
       value={value}
-      description={description}
+      description={typeof description === "string" ? description : undefined}
       error={error}
       disabled={disabled}
       checked={checked}
       data-testid={testId}
     >
+      {description && typeof description !== "string" && <div slot="description">{description}</div>}
       {children}
     </goa-radio-item>
   );
