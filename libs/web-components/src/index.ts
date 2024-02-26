@@ -47,6 +47,7 @@ export { default as Pages } from "./components/pages/Pages.svelte";
 export { default as Pagination } from "./components/pagination/Pagination.svelte";
 export { default as Popover } from "./components/popover/Popover.svelte";
 export { default as RadioGroup } from "./components/radio-group/RadioGroup.svelte";
+export { default as RadioItem } from "./components/radio-item/RadioItem.svelte";
 export { default as Scrollable } from "./components/scrollable/Scrollable.svelte";
 export { default as SideMenu } from "./components/side-menu/SideMenu.svelte";
 export { default as SideMenuGroup } from "./components/side-menu-group/SideMenuGroup.svelte";
@@ -62,3 +63,4 @@ export { default as TextArea } from "./components/text-area/TextArea.svelte";
 export { default as ThreeColumnLayout } from "./layouts/three-column-layout/ThreeColumnLayout.svelte";
 export { default as Tooltip } from "./components/tooltip/Tooltip.svelte";
 export { default as TwoColumnLayout } from "./layouts/two-column-layout/TwoColumnLayout.svelte";
+

@@ -117,8 +117,9 @@
       </div>
     </div>
   </label>
-  {#if description}
+  {#if $$slots.description || description}
     <div class="description-text" id={_descriptionId} data-testid="description">
+      <slot name="description"/>
       {description}
     </div>
   {/if}

@@ -14,7 +14,7 @@ type MockData = {
   required: boolean;
   requiredErrorMessage: string;
 
-  radios: { text: string, value: string }[];
+  radios: { text: string, value: string, description?: string | React.ReactNode }[];
 }
 
 const noop = (name: string, value: string) => { /* do nothing */ }
@@ -31,8 +31,8 @@ describe("RadioGroup", () => {
 
     radios: [
       { text: "Apples", value: "apples" },
-      { text: "Oranges", value: "oranges" },
-      { text: "Bananas", value: "bananas" },
+      { text: "Oranges", value: "oranges", description: "Oranges are orange" },
+      { text: "Bananas", value: "bananas", description: (<h3>Bananas are banana</h3>) },
     ],
   };
 
@@ -100,13 +100,42 @@ describe("RadioGroup", () => {
           </GoARadioItem>
         ))}
       </GoARadioGroup>);
-      
+
 
       const radios =
         document.querySelectorAll<HTMLInputElement>("input[type=radio]");
       radios.forEach((radio) => {
         expect(radio.checked).toBe(radio.value === selectedValue);
       });
+    });
+
+    it("render with description", async () => {
+      const data = baseMockData;
+      const result = render(<GoARadioGroup
+        name="fruits"
+        disabled={data.disabled}
+        value={data.value}
+        onChange={noop}
+      >
+        {data.radios.map((radio) => (
+          <GoARadioItem
+            key={radio.value}
+            label={radio.text}
+            name="fruits"
+            checked={data.value === radio.value}
+            value={radio.value}
+            description={radio.description}
+          >
+            {radio.text}
+          </GoARadioItem>
+        ))}
+      </GoARadioGroup>);
+
+      const radios = document.querySelectorAll("goa-radio-item");
+      expect(radios[0].getAttribute("description")).toBe(null);
+      expect(radios[1].getAttribute("description")).toBe("Oranges are orange");
+      expect(result.container.querySelector("div[slot='description']")?.innerHTML)
+        .toContain("Bananas are banana");
     });
   });
 
@@ -133,7 +162,7 @@ describe("RadioGroup", () => {
           </GoARadioItem>
         ))}
       </GoARadioGroup>);
-    
+
       await waitFor(() => {
         const radios = container.querySelectorAll<HTMLInputElement>("goa-radio-item");
         expect(radios[0]).toBeTruthy();
@@ -163,7 +192,7 @@ describe("RadioGroup", () => {
         </GoARadioItem>
       ))}
     </GoARadioGroup>);
-    
+
     const radios = container.querySelectorAll<HTMLInputElement>("goa-radio-item");
     const radioGroup = container.querySelector("goa-radio-group");
 
