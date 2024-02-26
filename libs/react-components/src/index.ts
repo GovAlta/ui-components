@@ -1,9 +1,11 @@
-import "@abgov/web-components";
-
-export * from "./experimental";
-export * from "./common/styling";
-
 // Components
+
+if (import.meta.env.PROD) {
+  // @ts-expect-error ignore
+  import("@abgov/web-components");
+} else {
+  console.log("GoA UI Components DEV mode")
+}
 
 export * from "./lib/accordion/accordion";
 export * from "./lib/app-header/app-header";
