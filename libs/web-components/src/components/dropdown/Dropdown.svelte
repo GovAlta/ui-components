@@ -120,8 +120,9 @@
     // watch for DOM changes within the slot => dynamic binding
     const slot = _rootEl.querySelector("slot");
     slot?.addEventListener("slotchange", () => {
-      _options = getOptions();
+      if (!_rootEl) return;
 
+      _options = getOptions();
       syncFilteredOptions();
 
       if (!width) {
