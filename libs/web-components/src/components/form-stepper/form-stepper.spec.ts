@@ -5,8 +5,19 @@ import { it, describe } from "vitest";
 
 function getProgress(el: Element): number {
   const progress = el.querySelector("progress.horizontal")
-  return +progress.getAttribute("value");
+  return +(progress?.getAttribute("value") ?? "0");
 }
+
+beforeAll(() => {
+  const ResizeObserverMock = vi.fn(() => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
+  }));
+
+  // Stub the global ResizeObserver
+  vi.stubGlobal('ResizeObserver', ResizeObserverMock);
+})
 
 describe("FormStepper", () => {
   it("it renders", async () => {
