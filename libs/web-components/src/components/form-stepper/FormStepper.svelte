@@ -4,6 +4,7 @@
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
   import { onDestroy, onMount, tick } from "svelte";
+  import { MOBILE_BP } from "../../common/breakpoints"
 
   // ======
   // Public
@@ -87,20 +88,41 @@
     });
 
     setCurrentStepStatus(step);
-    calcStepDims();
+    calcStepDimensions();
 
     setTimeout(() => {
       _showProgressBars = true;
     }, 10);
 
     // recompute size listeners
-    window.addEventListener("orientationchange", calcStepDims);
-    window.addEventListener("resize", calcStepDims);
+    window.addEventListener("orientationchange", calcStepDimensions);
+
+    const resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+      if (entries.length !== 1) return; 
+      calcStepDimensions();
+
+      const width = entries[0].contentRect.width;
+
+      for (const step of _steps) {
+        step.shadowRoot
+          ?.querySelector("label")
+          ?.dispatchEvent(new CustomEvent("resized", { 
+            bubbles: true, 
+            composed: true,
+            detail: {
+              mobile: width < MOBILE_BP,
+            }
+          }))
+      }
+    });
+
+    resizeObserver.observe(_rootEl)
+
+    return () => resizeObserver.unobserve(_rootEl);
   });
 
   onDestroy(() => {
-    window.removeEventListener("orientationchange", calcStepDims);
-    window.removeEventListener("resize", calcStepDims);
+    window.removeEventListener("orientationchange", calcStepDimensions);
   })
 
   function dispatch(step: number) {
@@ -119,7 +141,7 @@
     });
   }
 
-  async function calcStepDims() {
+  async function calcStepDimensions() {
     // tick required, without it the _steps elements width was not yet updated
     await tick();
     const step = _steps?.[0] as HTMLElement;
@@ -129,26 +151,28 @@
   }
 </script>
 
-<div
-  class="form-stepper"
-  style={`
-    ${calculateMargin(mt, mr, mb, ml)};
-    --progress: ${_progress}%;
-    --step-width: ${_stepWidth}px;
-    --step-height: ${_stepHeight}px;
-    --height: ${_progressHeight}px;
-  `}
-  role="list"
-  bind:this={_rootEl}
->
-  {#if _steps.length > 0 && _showProgressBars}
-    <progress class="horizontal" value={_progress} max="100"></progress>
-    <progress class="vertical" value={_progress} max="100"></progress>
-  {/if}
-  <div class="slots" bind:this={_gridEl}>
-    <goa-grid minchildwidth="10ch">
-      <slot />
-    </goa-grid>
+<div id="container">
+  <div
+    class="form-stepper"
+    style={`
+      ${calculateMargin(mt, mr, mb, ml)};
+      --progress: ${_progress}%;
+      --step-width: ${_stepWidth}px;
+      --step-height: ${_stepHeight}px;
+      --height: ${_progressHeight}px;
+    `}
+    role="list"
+    bind:this={_rootEl}
+  >
+    {#if _steps.length > 0 && _showProgressBars}
+      <progress class="horizontal" value={_progress} max="100"></progress>
+      <progress class="vertical" value={_progress} max="100"></progress>
+    {/if}
+    <div class="slots" bind:this={_gridEl}>
+      <goa-grid minchildwidth="10ch">
+        <slot />
+      </goa-grid>
+    </div>
   </div>
 </div>
 
@@ -157,6 +181,10 @@
     position: relative;
     inset: 0;
     z-index: 2;
+  }
+
+  #container {
+    container: self / inline-size;
   }
 
   progress {
@@ -179,7 +207,7 @@
     width: calc(100% - var(--step-width));
   }
 
-  @media (--not-mobile) {
+  @container self (--not-mobile) {
     progress.horizontal {
       display: block;
     }
@@ -201,7 +229,7 @@
       );
   }
 
-  @media (--mobile) {
+  @container self (--mobile) {
     progress.horizontal {
       display: none;
     }
@@ -209,7 +237,7 @@
       display: inline-block;
     }
     .form-stepper {
-      display: inline-block;
+      display: block;
     }
   }
 
