@@ -1,10 +1,10 @@
 // Components
 
-if (import.meta.env.PROD) {
+if (import.meta.env.DEV) {
+  console.log("GoA UI Components DEV mode")
+} else {
   // @ts-expect-error ignore
   import("@abgov/web-components");
-} else {
-  console.log("GoA UI Components DEV mode")
 }
 
 export * from "./lib/accordion/accordion";
