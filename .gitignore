@@ -43,3 +43,14 @@ Thumbs.db
 
 .nx/cache
 .angular
+
+# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
+
