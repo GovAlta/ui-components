@@ -43,6 +43,7 @@
     window.addEventListener("popstate", setCurrentLink, true);
   });
 
+
   onDestroy(() => {
     window.removeEventListener("popstate", setCurrentLink, true);
   });
@@ -83,11 +84,20 @@
     _popoverEl.addEventListener("_open", openMenu);
   }
 
-  function openMenu() {
+  async function openMenu() {
     _open = true;
+
+    await tick();
+
+    if (_slotParentEl) {
+      _slotParentEl.addEventListener("click", closeMenu);
+    }
   }
 
   function closeMenu() {
+    if (_slotParentEl) {
+      _slotParentEl.removeEventListener("click", closeMenu);
+    }
     // timeout is required to allow any other events to fire before DOM is changed
     setTimeout(() => {
       _open = false;
@@ -111,6 +121,7 @@
     tabindex="-1"
     width="16rem"
     position="below"
+    open="{_open}"
   >
     <button
       slot="target"
