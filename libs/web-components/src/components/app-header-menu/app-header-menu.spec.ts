@@ -1,8 +1,9 @@
 import AppHeaderMenuWrapper from "./AppHeaderMenuWrapper.test.svelte"
-import { render, waitFor } from "@testing-library/svelte"
+import { render, waitFor, screen } from "@testing-library/svelte"
 import userEvent from "@testing-library/user-event"
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 import { it, describe } from "vitest";
+import {tick} from "svelte";
 
 let user: UserEvent;
 
@@ -54,9 +55,20 @@ describe("Desktop", () => {
     // the default slot
     await waitFor(() => {
       expect(links).toBeTruthy();
-      expect(links.length).toBe(3);
+      expect(links.length).toBe(4);
     })
-  })
+  });
+
+  it("close the menu if the link handles other function beside navigate to new page", async () => {
+    const specialLink = $("a[href='#special']");
+    await user.click(specialLink);
+    await tick();
+    const popover = $("goa-popover")
+    expect( popover.getAttribute("open")).toBe("false");
+    // Functionality is handled as usual
+    const text = await screen.findByTestId("test-without-loading");
+    expect((await text).innerHTML).toBe("Test without loading");
+  });
 
 })
 
@@ -98,7 +110,7 @@ describe("Mobile", () => {
     await user.click(btn)
     await waitFor(() => {
       const links = $$("a");
-      expect(links.length).toBe(3);
+      expect(links.length).toBe(4);
     })
 
     // close
@@ -117,7 +129,7 @@ describe("Mobile", () => {
     await user.keyboard(" ")
     await waitFor(() => {
       const links = $$("a");
-      expect(links.length).toBe(3);
+      expect(links.length).toBe(4);
     })
 
     // close
@@ -136,10 +148,10 @@ describe("Mobile", () => {
     await user.keyboard("{enter}")
     await waitFor(() => {
       const links = $$("a");
-      expect(links.length).toBe(3);
+      expect(links.length).toBe(4);
     })
 
-    // close
+    //close
     await user.keyboard("{enter}")
     await waitFor(() => {
       const links = $$("a");
@@ -154,7 +166,7 @@ describe("Mobile", () => {
     await user.keyboard("{enter}")
     await waitFor(async () => {
       const links = $$("a");
-      expect(links.length).toBe(3);
+      expect(links.length).toBe(4);
 
       await user.keyboard("{Tab}");
       expect(document.activeElement).toBe(links[0]);
@@ -164,6 +176,14 @@ describe("Mobile", () => {
       expect(document.activeElement).toBe(links[2]);
     })
   })
+
+  it("close the menu if the link handles other function beside navigate to new page", async () => {
+    const specialLink = $("a[href='#special']");
+    await user.click(specialLink);
+    await tick();
+    const links = $$("a");
+    expect(links.length).toBe(0);
+  });
 
   it.skip("follows the link on `enter`", () => {
     /* do nothing */
@@ -209,7 +229,7 @@ describe("Tablet", () => {
     await user.click(btn)
     await waitFor(() => {
       const links = $$("a");
-      expect(links.length).toBe(3);
+      expect(links.length).toBe(4);
     })
 
     // close
@@ -228,7 +248,7 @@ describe("Tablet", () => {
     await user.keyboard(" ")
     await waitFor(() => {
       const links = $$("a");
-      expect(links.length).toBe(3);
+      expect(links.length).toBe(4);
     })
 
     // close
@@ -247,7 +267,7 @@ describe("Tablet", () => {
     await user.keyboard("{enter}")
     await waitFor(() => {
       const links = $$("a");
-      expect(links.length).toBe(3);
+      expect(links.length).toBe(4);
     })
 
     // close
@@ -265,7 +285,7 @@ describe("Tablet", () => {
     await user.keyboard("{enter}")
     await waitFor(async () => {
       const links = $$("a");
-      expect(links.length).toBe(3);
+      expect(links.length).toBe(4);
 
       await user.keyboard("{Tab}");
       expect(document.activeElement).toBe(links[0]);
@@ -275,4 +295,12 @@ describe("Tablet", () => {
       expect(document.activeElement).toBe(links[2]);
     })
   })
+
+  it("close the menu if the link handles other function beside navigate to new page", async () => {
+    const specialLink = $("a[href='#special']");
+    await user.click(specialLink);
+    await tick();
+    const links = $$("a");
+    expect(links.length).toBe(0);
+  });
 })
