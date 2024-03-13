@@ -190,21 +190,12 @@
           spaceAbove > spaceBelow
         : position === "above";
 
-    // when popover is within a modal and the scrollbars are hidden we don't need to take into
-    // account the scroll offset
-    const usingNoScroll = document.body.style.overflow === "hidden";
-    const windowOffset = usingNoScroll ? 0 : window.scrollY;
-
     // If there's more space above, display the popover above the target element
     if (_relative) {
       _popoverEl.style.top = displayOnTop
         ? `-${contentRect.height}px`
         : `${rootRect.height}px`;
-    } else {
-      _popoverEl.style.top = displayOnTop
-        ? `${rootRect.top - contentRect.height + windowOffset}px`
-        : `${rootRect.top + rootRect.height + windowOffset}px`;
-    }
+    } 
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
     const displayOnRight =
@@ -218,9 +209,11 @@
         _popoverEl.style.left = "0";
       }
     } else {
-      _popoverEl.style.left = displayOnRight
-        ? `${rootRect.left + targetRect.width - contentRect.width}px`
-        : `${rootRect.left}px`;
+      if (displayOnRight) {
+        _popoverEl.style.left = `${rootRect.left + targetRect.width - contentRect.width}px`;
+      } else {
+        _popoverEl.style.left = `${rootRect.left}px`; 
+      }
     }
   }
 </script>
