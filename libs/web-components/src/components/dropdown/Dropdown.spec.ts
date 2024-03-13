@@ -2,6 +2,7 @@ import { render, fireEvent, cleanup, waitFor } from "@testing-library/svelte";
 import GoADropdown from "./Dropdown.svelte";
 import GoADropdownWrapper from "./DropdownWrapper.test.svelte";
 import { it, describe } from "vitest";
+import { tick } from "svelte";
 
 afterEach(() => {
   cleanup();
@@ -91,6 +92,7 @@ describe("GoADropdown", () => {
         items,
         filterable: true,
       });
+      await tick();
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const popover = result.container.querySelector("goa-popover");
@@ -182,6 +184,8 @@ describe("GoADropdown", () => {
         items,
         filterable: true,
       });
+
+      await tick();
       const input = result.container.querySelector("input");
       expect(input).toBeTruthy();
 
@@ -305,6 +309,7 @@ describe("GoADropdown", () => {
         items,
         filterable: true,
       });
+      await tick();
 
       const clearIcon = result.container.querySelector("goa-icon");
       const dropdown = result.queryByTestId("favcolor-dropdown");
@@ -481,6 +486,7 @@ describe("GoADropdown", () => {
         name,
         items: ["1", "2", "20chars============="],
       });
+      await tick()
       const popover = result.container.querySelector("goa-popover");
       expect(popover?.getAttribute("width")).toBe("28ch"); // 8 + 20
     });
@@ -491,6 +497,7 @@ describe("GoADropdown", () => {
         leadingicon: "airplane",
         items: ["1", "2", "3"],
       });
+      await tick()
       const popover = result.container.querySelector("goa-popover");
       expect(popover?.getAttribute("width")).toBe("11ch"); // 8 + 1 (letter count) + 2 (icon width)
     });
