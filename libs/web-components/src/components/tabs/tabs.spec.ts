@@ -22,31 +22,31 @@ describe("Tabs", () => {
   it("should initialize the children and tab 1 as active", async () => {
     const { container, queryByTestId } = render(Tabs);
 
-    const tab1Button = queryByTestId("tab-1");
-    const tab = tab1Button?.querySelector("div.tab");
-    const tab2Button = container.querySelector("button#tab-2");
-    const tab2 = tab2Button?.querySelector("div.tab");
+    const tab1Link = queryByTestId("tab-1");
+    const tab = tab1Link?.querySelector("div.tab");
+    const tab2Link = container.querySelector("a#tab-2");
+    const tab2 = tab2Link?.querySelector("div.tab");
     const tabPanel = container.querySelector('div[role="tabpanel"]');
     const tab3 = tabPanel?.querySelector("goa-tab");
 
     await waitFor(() => {
-      expect(tab1Button).toBeTruthy();
-      expect(tab1Button?.getAttribute("aria-controls")).toBe("tabpanel-1");
-      expect(tab1Button?.getAttribute("aria-selected")).toBe("true");
-      expect(tab1Button?.getAttribute("role")).toBe("tab");
+      expect(tab1Link).toBeTruthy();
+      expect(tab1Link?.getAttribute("aria-controls")).toBe("tabpanel-1");
+      expect(tab1Link?.getAttribute("aria-selected")).toBe("true");
+      expect(tab1Link?.getAttribute("role")).toBe("tab");
 
       expect(tab).toBeTruthy();
       expect(tab?.innerHTML).toContain("Tab1");
 
       // Should add button tab-2
-      expect(tab2Button).toBeTruthy();
-      expect(tab2Button?.getAttribute("aria-controls")).toBe("tabpanel-2");
-      expect(tab2Button?.getAttribute("aria-selected")).toBe("false");
-      expect(tab2Button?.getAttribute("role")).toBe("tab");
+      expect(tab2Link).toBeTruthy();
+      expect(tab2Link?.getAttribute("aria-controls")).toBe("tabpanel-2");
+      expect(tab2Link?.getAttribute("aria-selected")).toBe("false");
+      expect(tab2Link?.getAttribute("role")).toBe("tab");
 
       expect(tab2).toBeTruthy();
       expect(tab2?.innerHTML).toContain("Tab2");
-      expect(tab2Button?.getAttribute("tabIndex")).toBe("-1");
+      expect(tab2Link?.getAttribute("tabIndex")).toBe("-1");
 
       // should replace content to the tabpanel for opening tab
       expect(tabPanel).toBeTruthy();
@@ -60,17 +60,17 @@ describe("Tabs", () => {
 
   it("should select specified tab if the tab property is set", async () => {
     const result = render(Tabs, { initialtab: 2 });
-    const tab1Button = result.container.querySelector("button#tab-1");
-    const tab2Button = result.container.querySelector("button#tab-2");
+    const tab1Link = result.container.querySelector("a#tab-1");
+    const tab2Link = result.container.querySelector("a#tab-2");
     const tabPanel = result.container.querySelector("div[role=tabpanel]");
     const goaTabs = result.container.querySelectorAll("goa-tab");
 
     await waitFor(() => {
-      expect(tab1Button).toBeTruthy();
-      expect(tab1Button?.getAttribute("aria-selected")).toBe("false");
+      expect(tab1Link).toBeTruthy();
+      expect(tab1Link?.getAttribute("aria-selected")).toBe("false");
 
-      expect(tab2Button).toBeTruthy();
-      expect(tab2Button?.getAttribute("aria-selected")).toBe("true");
+      expect(tab2Link).toBeTruthy();
+      expect(tab2Link?.getAttribute("aria-selected")).toBe("true");
 
       expect(tabPanel).toBeTruthy();
       expect(tabPanel?.getAttribute("id")).toBe("tabpanel-2");
@@ -85,7 +85,7 @@ describe("Tabs", () => {
 
     // last tab
     await waitFor(() => {
-      const tab = result.container.querySelector("button#tab-2");
+      const tab = result.container.querySelector("a#tab-2");
       expect(tab).toBeTruthy();
       expect(tab?.getAttribute("aria-selected")).toBe("true");
     });
@@ -96,9 +96,9 @@ describe("Tabs", () => {
 
     // first tab
     await waitFor(() => {
-      const tab1Button = result.container.querySelector("button#tab-1");
-      expect(tab1Button).toBeTruthy();
-      expect(tab1Button?.getAttribute("aria-selected")).toBe("true");
+      const tab1Link = result.container.querySelector("a#tab-1");
+      expect(tab1Link).toBeTruthy();
+      expect(tab1Link?.getAttribute("aria-selected")).toBe("true");
     });
   });
 });
