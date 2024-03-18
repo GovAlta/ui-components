@@ -17,6 +17,8 @@ describe("DatePicker", () => {
         min={min}
         max={max}
         value={value}
+        id="calendar"
+        focused={true}
         onChange={noop}
       />,
     );
@@ -29,6 +31,8 @@ describe("DatePicker", () => {
     expect(el?.getAttribute("value")).toBe(value.toISOString());
     expect(el?.getAttribute("min")).toBe(min.toISOString());
     expect(el?.getAttribute("max")).toBe(max.toISOString());
+    expect(el?.getAttribute("focused")).toBe("true");
+    expect(el?.getAttribute("id")).toBe("calendar");
   });
 
   it("should handle event", async () => {

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/svelte';
+import {render, waitFor} from '@testing-library/svelte';
 import GoAIconButton from './IconButton.svelte'
 import { it, describe } from "vitest";
 
@@ -20,6 +20,22 @@ describe("IconButton", () => {
       expect(iconButton).toHaveStyle("margin-right:var(--goa-space-m)");
       expect(iconButton).toHaveStyle("margin-bottom:var(--goa-space-l)");
       expect(iconButton).toHaveStyle("margin-left:var(--goa-space-xl)");
+    });
+  });
+
+  describe("focused", () => {
+    it(`should allow focus`, async () => {
+      const baseElement = render(GoAIconButton, {
+        testid: "iconButton-test",
+        icon: "ellipsis",
+        focused: "true",
+      });
+      const iconButton = await baseElement.findByTestId("iconButton-test");
+
+      expect(iconButton).toBeTruthy();
+      await waitFor(() => {
+        iconButton && expect(iconButton).toHaveFocus();
+      });
     });
   });
 

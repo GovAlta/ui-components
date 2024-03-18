@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from "@testing-library/svelte";
+import { fireEvent, render } from "@testing-library/svelte";
 import GoARadioGroup from "./RadioGroup.svelte";
 import GoARadioGroupWrapper from "./RadioGroupWrapper.test.svelte";
 import { describe, it, expect, vi } from "vitest";

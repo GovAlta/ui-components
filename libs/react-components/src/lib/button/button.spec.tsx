@@ -17,6 +17,8 @@ describe("GoA Button", () => {
         variant="destructive"
         leadingIcon="car"
         trailingIcon="bag"
+        focused={true}
+        id={"button-id"}
         mt="s"
         mr="m"
         mb="l"
@@ -31,6 +33,8 @@ describe("GoA Button", () => {
     expect(el?.getAttribute("variant")).toBe("destructive");
     expect(el?.getAttribute("leadingicon")).toBe("car");
     expect(el?.getAttribute("trailingicon")).toBe("bag");
+    expect(el?.getAttribute("focused")).toBe("true");
+    expect(el?.getAttribute("id")).toBe("button-id");
 
     expect(el?.getAttribute("mt")).toBe("s");
     expect(el?.getAttribute("mr")).toBe("m");

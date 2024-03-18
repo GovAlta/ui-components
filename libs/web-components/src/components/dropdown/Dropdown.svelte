@@ -35,6 +35,7 @@
   export let multiselect: string = "false";
   export let native: string = "false";
   export let relative: string = "false";
+  export let focused: string = "false";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -68,6 +69,7 @@
   $: _error = toBoolean(error);
   $: _multiselect = toBoolean(multiselect);
   $: _native = toBoolean(native);
+  $: isFocused = toBoolean(focused);
   $: _filterable = toBoolean(filterable) && !_native;
 
   // To keep track of active descendant for the accessibility
@@ -80,6 +82,12 @@
     // updating _inputEl.value is done within seperate function
     // to prevent unwanted reactive updates.
     setDisplayedValue();
+  }
+  $: if (isFocused) {
+    const el = _native ? _selectEl : _inputEl;
+    if (el) {
+      setTimeout(() => el.focus(), 2);
+    }
   }
 
   //
@@ -551,6 +559,7 @@
         id={name}
         bind:this={_selectEl}
         on:change={onNativeSelect}
+        on:blur={() => focused = "false"}
       >
         <slot />
         {#each _options as option}
@@ -614,6 +623,7 @@
             on:keydown={onInputKeyDown}
             on:keyup={onInputKeyUp}
             on:change={onChange}
+            on:blur={() => focused = "false"}
           />
 
           {#if _inputEl?.value && _filterable}

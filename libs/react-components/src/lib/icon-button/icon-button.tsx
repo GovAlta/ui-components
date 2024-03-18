@@ -14,6 +14,8 @@ interface WCProps extends Margins {
   variant?: GoAIconButtonVariant;
   title?: string;
   disabled?: boolean;
+  id?: string;
+  focused?: boolean;
 }
 
 declare global {
@@ -34,6 +36,8 @@ export interface GoAIconButtonProps extends Margins {
   children?: React.ReactNode;
   onClick?: () => void;
   testId?: string;
+  id?: string;
+  focused?: boolean;
 }
 
 export function GoAIconButton({
@@ -44,6 +48,8 @@ export function GoAIconButton({
   size = "medium",
   title,
   testId,
+  id,
+  focused,
   children,
   mt,
   mr,
@@ -82,6 +88,8 @@ export function GoAIconButton({
       mb={mb}
       ml={ml}
       data-testid={testId}
+      id={id}
+      focused={focused}
     >
       {children}
     </goa-icon-button>

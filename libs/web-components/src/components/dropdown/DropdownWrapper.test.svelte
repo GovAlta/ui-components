@@ -21,6 +21,8 @@
 
   export let resetValue = "orange";
 
+  export let focused: string = "false";
+
   function setValue() {
     value = resetValue;
   }
@@ -41,6 +43,7 @@
   {disabled}
   {width}
   {filterable}
+  {focused}
 >
   {#each items as item (item)}
     <goa-dropdown-item {name} value={item} label={item} />

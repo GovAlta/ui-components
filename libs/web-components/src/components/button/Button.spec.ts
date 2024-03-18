@@ -11,6 +11,15 @@ describe('GoAButtonComponent', () => {
     expect(button).toBeTruthy();
   });
 
+  it("should focus the button", async() => {
+    const baseElement = render(GoAButton, { focused: "true", testid: 'button-test' });
+    const button = baseElement.container.querySelector("button");
+    expect(button).toBeTruthy();
+    await waitFor(() => {
+      button && expect(button).toHaveFocus();
+    });
+  });
+
   describe("events", () => {
     it('should handle the click event', async () => {
       const onClick = vi.fn();

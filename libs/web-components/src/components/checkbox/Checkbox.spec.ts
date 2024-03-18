@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/svelte';
+import {render, fireEvent, waitFor} from '@testing-library/svelte';
 import GoACheckbox from './Checkbox.svelte'
 import { it, describe } from "vitest";
 
@@ -66,6 +66,15 @@ describe('GoACheckbox Component', () => {
       const el = await createElement({ error: "true" });
       const root = el.container.querySelector('.goa-checkbox--error');
       expect(root).toBeTruthy();
+    });
+
+    it("allows the checkbox to be autofocus", async() => {
+      const baseElement = await createElement({ focused: "true"});
+      const input = baseElement.container.querySelector("input");
+      expect(input).toBeTruthy();
+      await waitFor(() => {
+        input && expect(input).toHaveFocus();
+      });
     });
   });
 

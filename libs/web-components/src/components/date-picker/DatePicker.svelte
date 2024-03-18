@@ -11,6 +11,7 @@
     startOfDay,
   } from "date-fns";
   import type { Spacing } from "../../common/styling";
+  import { toBoolean } from "../../common/utils";
 
   type DateValue = {
     type: "date";
@@ -21,6 +22,7 @@
   export let min: string = "";
   export let max: string = "";
   export let relative: string = "false";
+  export let focused: string = "false";
 
   // margin
   export let mt: Spacing = null;
@@ -33,8 +35,15 @@
 
   let _oldValue: Date;
   let _rootEl: Element;
+  let _inputEl: HTMLInputElement;
   let _date: Date | null;
   let _showPopover: boolean = false;
+
+  $: isFocused = toBoolean(focused);
+
+  $: if (isFocused && _inputEl) {
+    setTimeout(() => _inputEl.setAttribute("focused", focused));
+  }
 
   onMount(async () => {
     await initDate();
@@ -167,8 +176,10 @@
     readonly="true"
     trailingicon="calendar"
     value={formatDate(_date)}
+    bind:this={_inputEl}
     on:click={showCalendar}
     on:keydown={handleKeyDown}
+    on:blur={() => focused = "false"}
   />
   <goa-calendar
     {value}

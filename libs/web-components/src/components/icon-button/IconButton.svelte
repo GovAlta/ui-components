@@ -27,6 +27,7 @@
   export let testid: string = "";
   export let disabled: string = "false";
   export let inverted: string = "false";
+  export let focused: string = "false";
 
   // margin
   export let mt: Spacing = null;
@@ -34,15 +35,23 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  // accessibility attributes
+  export let arialabel: string = undefined;
+
+  let _buttonEl: HTMLButtonElement;
   // private
   $: css = `${variant} ${isInverted ? "inverted" : ""}`;
   $: isDisabled = toBoolean(disabled);
   $: isInverted = toBoolean(inverted);
+  $: isFocused = toBoolean(focused);
   $: _paddingSize = {
     small: "0.25rem",
     medium: "0.25rem",
     large: "0.5rem",
   }[size];
+  $: if (isFocused && _buttonEl) {
+    setTimeout(() => _buttonEl.focus(), 2);
+  }
 
   function handleClick(e) {
     e.target.dispatchEvent(
@@ -59,9 +68,12 @@
   style="{calculateMargin(mt, mr, mb, ml)}; --pading-size: {_paddingSize}"
   {title}
   disabled={isDisabled}
+  aria-label={arialabel}
   class={css}
   data-testid={testid}
+  bind:this={_buttonEl}
   on:click={handleClick}
+  on:blur={() => focused = "false"}
 >
   <goa-icon {title} type={icon} {size} {theme} inverted={isInverted} />
 </button>

@@ -19,6 +19,7 @@ interface WCProps extends Margins {
   width?: string;
   relative?: boolean;
   id?: string;
+  focused?: boolean;
 }
 
 declare global {
@@ -52,6 +53,7 @@ export interface GoADropdownProps extends Margins {
   testId?: string;
   width?: string;
   relative?: boolean;
+  focused?: boolean;
 }
 
 function stringify(value: string | string[] | undefined): string {
@@ -104,6 +106,7 @@ export function GoADropdown(props: GoADropdownProps): JSX.Element {
       width={props.width}
       relative={props.relative}
       id={props.id}
+      focused={props.focused}
     >
       {props.children}
     </goa-dropdown>

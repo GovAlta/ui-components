@@ -21,6 +21,7 @@
   export let content: string;
   export let variant: ChipVariant;
   export let testid: string = "";
+  export let focused: string = "false";
 
   let el: HTMLElement;
   let _hovering: boolean = false;
@@ -30,7 +31,12 @@
   let _deletable: boolean;
 
   $: _error = toBoolean(error);
+  $: isFocused = toBoolean(focused);
   $: _deletable = toBoolean(deletable);
+
+  $: if (isFocused && el) {
+    setTimeout(() => el.focus(), 2);
+  }
 
   function onDelete(e: Event) {
     el.dispatchEvent(
@@ -57,7 +63,10 @@
   on:mouseover={() => (_hovering = true)}
   on:mouseout={() => (_hovering = false)}
   on:focus={() => (_hovering = false)}
-  on:blur={() => (_hovering = false)}
+  on:blur={() => {
+   _hovering = false;
+   focused = "false";
+  }}
 >
   {#if leadingicon}
     <goa-icon class="leading-icon" size="medium" type={leadingicon} />

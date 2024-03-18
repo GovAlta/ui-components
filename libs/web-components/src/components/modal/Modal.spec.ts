@@ -142,4 +142,14 @@ describe("Modal Component", () => {
       expect(handleClose).toBeCalled();
     });
   });
+
+  it("should focus on close button for accessibility", async () => {
+    const el = render(GoAModal, { open: "true", closable: "true" });
+    await waitFor(async () => {
+      const closeIcon = el.queryByTestId("modal-close-button");
+      await waitFor(() => {
+        closeIcon && expect(closeIcon).toHaveFocus();
+      });
+    });
+  });
 });
