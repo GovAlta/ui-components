@@ -1,6 +1,7 @@
 // Components
 
 import "@abgov/web-components";
+import "./common/styling";
 
 export * from "./lib/accordion/accordion";
 export * from "./lib/app-header/app-header";
