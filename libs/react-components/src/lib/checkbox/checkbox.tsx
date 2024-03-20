@@ -20,7 +20,7 @@ interface WCProps extends Margins {
   text?: string;
   value?: string | number | boolean;
   arialabel?: string;
-  description?: string;
+  description?: string | React.ReactNode;
 }
 
 /* eslint-disable-next-line */
@@ -35,7 +35,7 @@ export interface GoACheckboxProps extends Margins {
   children?: React.ReactNode;
   testId?: string;
   ariaLabel?: string;
-  description?: string;
+  description?: string | React.ReactNode;
   onChange?: (name: string, checked: boolean, value: string) => void;
 }
 
@@ -90,12 +90,13 @@ export function GoACheckbox({
       text={text}
       value={value}
       arialabel={ariaLabel}
-      description={description}
+      description={typeof description === "string" ? description : undefined}
       mt={mt}
       mr={mr}
       mb={mb}
       ml={ml}
     >
+      {description && typeof description !== "string" && <div slot="description">{description}</div>}
       {children}
     </goa-checkbox>
   );

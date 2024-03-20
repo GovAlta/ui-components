@@ -174,9 +174,8 @@
     await tick();
 
     // Get target and content rectangles
-    const rootRect = _rootEl.getBoundingClientRect();
     const targetRect = getBoundingClientRectWithMargins(_targetEl);
-    const contentRect = getBoundingClientRectWithMargins(_popoverEl);
+    const popoverRect = getBoundingClientRectWithMargins(_popoverEl);
 
     // Calculate available space above and below the target element
     const spaceAbove = targetRect.top;
@@ -185,43 +184,26 @@
     // Determine if there's more space above or below the target element
     const displayOnTop =
       position === "auto"
-        ? spaceBelow < contentRect.height &&
-          spaceAbove > contentRect.height &&
+        ? spaceBelow < popoverRect.height &&
+          spaceAbove > popoverRect.height &&
           spaceAbove > spaceBelow
         : position === "above";
 
-    // when popover is within a modal and the scrollbars are hidden we don't need to take into
-    // account the scroll offset
-    const usingNoScroll = document.body.style.overflow === "hidden";
-    const windowOffset = usingNoScroll ? 0 : window.scrollY;
-
-    // If there's more space above, display the popover above the target element
-    if (_relative) {
-      _popoverEl.style.top = displayOnTop
-        ? `-${contentRect.height}px`
-        : `${rootRect.height}px`;
-    } else {
-      _popoverEl.style.top = displayOnTop
-        ? `${rootRect.top - contentRect.height + windowOffset}px`
-        : `${rootRect.top + rootRect.height + windowOffset}px`;
+    if (displayOnTop) {
+      _popoverEl.style.top = 
+        relative 
+        ? `${-popoverRect.height}px`
+        : `${targetRect.y - popoverRect.height}px`;
     }
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
-    const displayOnRight =
-      document.body.clientWidth - targetRect.left < contentRect.width &&
-      targetRect.left > contentRect.width;
+    const rightAligned =
+      document.body.clientWidth - targetRect.left < popoverRect.width &&
+      targetRect.left > popoverRect.width;
 
-    if (_relative) {
-      if (displayOnRight) {
-        _popoverEl.style.right = "0";
-      } else {
-        _popoverEl.style.left = "0";
-      }
-    } else {
-      _popoverEl.style.left = displayOnRight
-        ? `${rootRect.left + targetRect.width - contentRect.width}px`
-        : `${rootRect.left}px`;
-    }
+    if (rightAligned) {
+      _popoverEl.style.left = `${targetRect.x - (popoverRect.width - targetRect.width)}px`;
+    } 
   }
 </script>
 

@@ -202,21 +202,20 @@
       type="file"
       {accept}
       bind:this={_fileInput}
-      multiple
     />
   </div>
 {/if}
 
 {#if variant === "button"}
   <div class="button" bind:this={_el}>
-    <goa-button on:click={openFilePicker} type="secondary"
-      >Choose file</goa-button
-    >
+    <goa-button on:click={openFilePicker} type="secondary">
+      Choose file
+    </goa-button>
 
     {#if maxfilesize}
-      <em class="max-file-size" data-testid="max-file-size"
-        >Maximum file size is {maxfilesize}.</em
-      >
+      <em class="max-file-size"  data-testid="max-file-size">
+        Maximum file size is {maxfilesize}.
+      </em>
     {/if}
   </div>
 
@@ -255,16 +254,12 @@
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
-    padding: var(--goa-space-xl);
+    padding: var(--goa-space-xl) 0;
     color: var(--goa-color-interactive-default);
     text-align: center;
     cursor: pointer;
-  }
 
-  @media (--mobile) {
-    .dragdrop {
-      padding-top: 1.75rem;
-    }
+    container: self / inline-size;
   }
 
   .dragdrop:active,
@@ -294,12 +289,6 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-  }
-
-  @media (--mobile) {
-    .instructions {
-      flex-direction: column;
-    }
   }
 
   goa-icon {
@@ -341,5 +330,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  @container self (--mobile) {
+    .dragdrop {
+      padding-top: 1.75rem;
+    }
+    .instructions {
+      flex-direction: column;
+    }
   }
 </style>

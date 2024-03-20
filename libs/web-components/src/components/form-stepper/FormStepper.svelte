@@ -4,6 +4,7 @@
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
   import { onDestroy, onMount, tick } from "svelte";
+  import { MOBILE_BP } from "../../common/breakpoints"
 
   // ======
   // Public
@@ -40,26 +41,24 @@
   // than the number of steps
   $: _progress = ((_maxProgressStep - 1) / (_steps.length - 1)) * 100;
   $: setCurrentStepStatus(step);
-  $: {
-    if (_steps.length) {
-      // allow access to all steps if not step property is provided
-      if (step <= 0) {
-        step = 1;
-        setTimeout(() => {
-          dispatch(step);
-        }, 1);
-        _maxAllowedStep = _steps.length;
-      }
-
-      if (step > _maxProgressStep) _maxProgressStep = step;
-      if (step > _maxAllowedStep) _maxAllowedStep = step;
-      _steps.forEach((stepEl: Element, index: number) => {
-        stepEl.setAttribute(
-          "enabled",
-          index > _maxAllowedStep - 1 ? "false" : "true",
-        );
-      });
+  $: if (_steps.length) {
+    // allow access to all steps if not step property is provided
+    if (step <= 0) {
+      step = 1;
+      setTimeout(() => {
+        dispatch(step);
+      }, 1);
+      _maxAllowedStep = _steps.length;
     }
+
+    if (step > _maxProgressStep) _maxProgressStep = step;
+    if (step > _maxAllowedStep) _maxAllowedStep = step;
+    _steps.forEach((stepEl: Element, index: number) => {
+      stepEl.setAttribute(
+        "enabled",
+        index > _maxAllowedStep - 1 ? "false" : "true",
+      );
+    });
   }
 
   onMount(async () => {
@@ -89,20 +88,41 @@
     });
 
     setCurrentStepStatus(step);
-    calcStepDims();
+    calcStepDimensions();
 
     setTimeout(() => {
       _showProgressBars = true;
     }, 10);
 
-    // add listener to recalculate the step widths
-    window.addEventListener("resize", calcStepDims);
-    window.addEventListener("orientationchange", calcStepDims);
+    // recompute size listeners
+    window.addEventListener("orientationchange", calcStepDimensions);
+
+    const resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+      if (entries.length !== 1) return; 
+      calcStepDimensions();
+
+      const width = entries[0].contentRect.width;
+
+      for (const step of _steps) {
+        step.shadowRoot
+          ?.querySelector("label")
+          ?.dispatchEvent(new CustomEvent("resized", { 
+            bubbles: true, 
+            composed: true,
+            detail: {
+              mobile: width < MOBILE_BP,
+            }
+          }))
+      }
+    });
+
+    resizeObserver.observe(_rootEl)
+
+    return () => resizeObserver.unobserve(_rootEl);
   });
 
   onDestroy(() => {
-    window.removeEventListener("resize", calcStepDims);
-    window.removeEventListener("orientationchange", calcStepDims);
+    window.removeEventListener("orientationchange", calcStepDimensions);
   })
 
   function dispatch(step: number) {
@@ -121,17 +141,17 @@
     });
   }
 
-  function calcStepDims() {
-    // timeout required, without it the _steps elements width was not yet updated
-    setTimeout(() => {
-      _stepWidth = _steps.length > 0 ? (_steps[0] as HTMLElement).offsetWidth : 0;
-      _stepHeight = _steps.length > 0 ? (_steps[0] as HTMLElement).offsetHeight : 0;
-      _progressHeight = _gridEl?.offsetHeight;
-    }, 1);
+  async function calcStepDimensions() {
+    // tick required, without it the _steps elements width was not yet updated
+    await tick();
+    const step = _steps?.[0] as HTMLElement;
+    _stepWidth = step?.offsetWidth ?? 0;
+    _stepHeight = step?.offsetHeight ?? 0;
+    _progressHeight = _gridEl?.offsetHeight;
   }
 </script>
 
-<section role="list">
+<div id="container">
   <div
     class="form-stepper"
     style={`
@@ -141,6 +161,7 @@
       --step-height: ${_stepHeight}px;
       --height: ${_progressHeight}px;
     `}
+    role="list"
     bind:this={_rootEl}
   >
     {#if _steps.length > 0 && _showProgressBars}
@@ -148,22 +169,22 @@
       <progress class="vertical" value={_progress} max="100"></progress>
     {/if}
     <div class="slots" bind:this={_gridEl}>
-      <goa-grid minchildwidth="1px">
+      <goa-grid minchildwidth="10ch">
         <slot />
       </goa-grid>
     </div>
   </div>
-</section>
+</div>
 
 <style>
-  .form-stepper {
-    position: relative;
-  }
-
   .slots {
     position: relative;
     inset: 0;
     z-index: 2;
+  }
+
+  #container {
+    container: self / inline-size;
   }
 
   progress {
@@ -181,21 +202,43 @@
   /* 2px = 4px / 2, where 4px is thickness of progress bar */
   /* 1.5rem = 24px = padding as per design specs */
   progress.horizontal {
-    display: block;
     top: calc(1.5rem + (2.5rem / 2) - 2px);
     left: calc(var(--step-width) / 2);
     width: calc(100% - var(--step-width));
   }
 
+  @container self (--not-mobile) {
+    progress.horizontal {
+      display: block;
+    }
+    progress.vertical {
+      display: none;
+    }
+    .form-stepper {
+      position: relative;
+    }
+  }
+
   /* 1.25rem = 20px = 40px / 2, half the height of the 40px stepper */
   progress.vertical {
-    display: none;
     width: calc(var(--height) - var(--step-height));
     transform: rotate(90deg)
       translate(
         calc(50% + 1.25rem + 1.75rem),
         calc((var(--height) - var(--step-height)) / 2 - 1.25rem - 1.5rem)
       );
+  }
+
+  @container self (--mobile) {
+    progress.horizontal {
+      display: none;
+    }
+    progress.vertical {
+      display: inline-block;
+    }
+    .form-stepper {
+      display: block;
+    }
   }
 
   /* iOS tweaks */
@@ -209,15 +252,4 @@
     background: var(--goa-color-interactive-default);
   }
 
-  @media (--mobile) {
-    progress.horizontal {
-      display: none;
-    }
-    progress.vertical {
-      display: inline-block;
-    }
-    .form-stepper {
-      display: inline-block;
-    }
-  }
 </style>

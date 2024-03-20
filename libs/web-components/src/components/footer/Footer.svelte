@@ -71,6 +71,8 @@
     background-color: var(--goa-color-greyscale-100);
     border-top: 2px solid var(--goa-color-greyscale-200);
     border-bottom: 1rem solid var(--goa-color-brand-default);
+
+    container: self / inline-size;
   }
 
   .content {
@@ -78,19 +80,19 @@
     width: min(var(--max-content-width), 100%);
   }
 
-  @media (--mobile) {
+  @container self (--mobile) {
     .content {
       padding: 2rem 1rem;
     }
   }
 
-  @media (--tablet) {
+  @container self (--tablet) {
     .content {
       padding: 2rem 2rem;
     }
   }
 
-  @media (--desktop) {
+  @container self (--desktop) {
     .content {
       padding: 2rem 4.5rem;
     }
@@ -128,7 +130,7 @@
     width: 100%;
   }
 
-  @media not (--mobile) {
+  @container self (--not-mobile) {
     .meta-section {
       flex-direction: row;
       gap: 2rem;
@@ -150,7 +152,7 @@
     width: unset;
   }
 
-  @media not (--mobile) {
+  @container self (--not-mobile) {
     .abgov.with-meta-links {
       align-items: flex-end;
     }

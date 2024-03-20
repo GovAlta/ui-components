@@ -6,6 +6,7 @@
   import { typeValidator, validateRequired } from "../../common/utils";
 
   // Types
+
   const [Variants, validateVariant] = typeValidator("Pagination variant", [
     "all",
     "links-only",
@@ -13,6 +14,7 @@
   type Variant = (typeof Variants)[number];
 
   // public
+
   export let pagenumber: number;
   export let itemcount: number;
   export let perpagecount: number = 10;
@@ -23,13 +25,16 @@
   export let ml: Spacing = "none";
 
   // reactive
+
   $: _pageCount = Math.ceil(itemcount / perpagecount);
 
   // private
+
   let pageDropdownEl: HTMLElement;
   let hiddenEl: HTMLInputElement; // needed to allow the inputEl's event to be cancelled
 
   // hooks
+
   onMount(async () => {
     await tick();
     validateRequired("GoAPagination", { itemcount, pagenumber });
@@ -56,6 +61,7 @@
   });
 
   // functions
+
   function goto(e: Event, offset: number) {
     const newPage = Number.parseInt(pagenumber + "") + offset;
 
@@ -120,7 +126,7 @@
     width: 100%;
   }
 
-  @media not (--mobile) {
+  @media (--not-mobile) {
     .controls {
       flex-direction: row;
       justify-content: space-between;

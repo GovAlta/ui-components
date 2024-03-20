@@ -23,15 +23,17 @@
 </script>
 
 <!-- HTML -->
-<div
-  class="goa-grid"
-  style={`
+<div id="container">
+  <div
+    class="goa-grid"
+    style={`
     ${calculateMargin(mt, mr, mb, ml)}
     --min-child-width: ${minchildwidth || 0};
     gap: var(--goa-space-${gap})
   `}
->
-  <slot />
+  >
+    <slot />
+  </div>
 </div>
 
 <!-- Style -->
@@ -41,13 +43,17 @@
     font-family: var(--goa-font-family-sans);
   }
 
+  #container {
+    container: self / inline-size;
+  }
+
   .goa-grid {
     display: flex;
     flex-direction: column;
     gap: var(--gap);
   }
 
-  @media not (--mobile) {
+  @container self (--not-mobile) {
     .goa-grid {
       display: grid;
       grid-template-columns: repeat(

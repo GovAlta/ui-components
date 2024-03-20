@@ -5,10 +5,24 @@
 </script>
 
 <script lang="ts">
+  import { onMount } from "svelte";
   export let direction: GoATableSortDirection = "none";
+
+  // Private
+  let _rootEl: HTMLElement;
+  onMount(() => {
+    if (_rootEl) {
+      // Add styling if an ancestor has a class to style number columns,
+      const hostEl = _rootEl.getRootNode().host;
+      const ancestor = hostEl?.closest("th.goa-table-number-header");
+      if (ancestor) {
+        _rootEl.style.setProperty("--header-text-align", "flex-end");
+      }
+    }
+  });
 </script>
 
-<button>
+<button bind:this={_rootEl}>
   <slot />
   {#if direction === "desc"}
     <goa-icon type="caret-down" size="small" />
@@ -27,6 +41,7 @@
     display: flex;
     align-items: flex-end;
   }
+
   button {
     border: none;
     background: none;
@@ -37,10 +52,8 @@
     color: inherit;
     width: 100%;
     height: 3.75rem;
-    align-items: center;
     padding: 0 1rem;
-    text-align: left;
-
+    justify-content: var(--header-text-align, flex-start);
     gap: 0.25rem;
     align-items: center;
   }

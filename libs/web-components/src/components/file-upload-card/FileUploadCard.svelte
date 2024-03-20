@@ -83,98 +83,106 @@
   }
 </script>
 
-<div
-  data-testid="root"
-  bind:this={_rootEl}
-  class={`root ${_status}`}
-  class:error
->
-  {#if _status === "uploaded"}
-    <goa-icon
-      class="fileicon"
-      data-testid="icon"
-      type={_fileIcon}
-      fillcolor="#0070c4"
-      size="xlarge"
-    />
-  {:else}
-    <goa-icon
-      class="fileicon"
-      data-testid="icon"
-      type="goa-file"
-      fillcolor="#dcdcdc"
-      size="xlarge"
-    />
-  {/if}
-  <div class="details">
-    <div class="filename" data-testid="filename">{filename}</div>
-    {#if _status !== "error"}
-      <div class="filesize" data-testid="filesize">{formatFileSize(size)}</div>
+<div id="container">
+  <div
+    data-testid="root"
+    bind:this={_rootEl}
+    class={`root ${_status}`}
+    class:error
+  >
+    {#if _status === "uploaded"}
+      <goa-icon
+        class="fileicon"
+        data-testid="icon"
+        type={_fileIcon}
+        fillcolor="#0070c4"
+        size="xlarge"
+      />
+    {:else}
+      <goa-icon
+        class="fileicon"
+        data-testid="icon"
+        type="goa-file"
+        fillcolor="#dcdcdc"
+        size="xlarge"
+      />
     {/if}
-    {#if _status === "uploading"}
-      <div class="progress" data-testid="progress">
-        <progress value={progress} max="100" />
-        {Math.ceil(progress)}%
-      </div>
-    {:else if _status === "uploaded"}
-      <div class="timestamp" data-testid="timestamp">
-        Uploaded on {getTimestamp()}
-      </div>
-    {:else if _status === "error"}
-      <div class="error-msg" data-testid="error">
-        <goa-icon type="warning" size="small" theme="filled" />
-        {error}
-      </div>
-    {/if}
-  </div>
+    <div class="details">
+      <div class="filename" data-testid="filename">{filename}</div>
+      {#if _status !== "error"}
+        <div class="filesize" data-testid="filesize">{formatFileSize(size)}</div>
+      {/if}
+      {#if _status === "uploading"}
+        <div class="progress" data-testid="progress">
+          <progress value={progress} max="100" />
+          {Math.ceil(progress)}%
+        </div>
+      {:else if _status === "uploaded"}
+        <div class="timestamp" data-testid="timestamp">
+          Uploaded on {getTimestamp()}
+        </div>
+      {:else if _status === "error"}
+        <div class="error-msg" data-testid="error">
+          <goa-icon type="warning" size="small" theme="filled" />
+          {error}
+        </div>
+      {/if}
+    </div>
 
-  <div class="actions" data-testid="actions">
-    {#if _status === "uploading"}
-      <goa-button
-        type="tertiary"
-        size="compact"
-        on:click={() => dispatch("_cancel")}>Cancel</goa-button
-      >
-    {:else if _status === "uploaded"}
-      <goa-button
-        type="tertiary"
-        size="compact"
-        on:click={() => dispatch("_delete")}
-        leadingicon="trash">Remove</goa-button
-      >
-    {:else if _status === "error"}
-      <goa-button
-        type="tertiary"
-        size="compact"
-        on:click={() => dispatch("_delete")}
-        variant="destructive">Cancel</goa-button
-      >
-    {/if}
+    <div class="actions" data-testid="actions">
+      {#if _status === "uploading"}
+        <goa-button
+          type="tertiary"
+          size="compact"
+          on:click={() => dispatch("_cancel")}>Cancel</goa-button
+        >
+      {:else if _status === "uploaded"}
+        <goa-button
+          type="tertiary"
+          size="compact"
+          on:click={() => dispatch("_delete")}
+          leadingicon="trash">Remove</goa-button
+        >
+      {:else if _status === "error"}
+        <goa-button
+          type="tertiary"
+          size="compact"
+          on:click={() => dispatch("_delete")}
+          variant="destructive">Cancel</goa-button
+        >
+      {/if}
+    </div>
   </div>
 </div>
 
 <style>
+  #container {
+    container: self / inline-size;
+  }
+
   .root {
+    display: grid;
     padding: var(--goa-space-l);
     border: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
     border-radius: var(--goa-border-radius-m);
     margin: 0.5rem 0;
-
-    display: grid;
-    grid-template-columns: 38px auto;
-    grid-template-rows: repeat(2, auto);
-    grid-template-areas:
-      "icon details"
-      "action action";
     gap: 1rem;
     align-items: center;
   }
 
-  .root.error {
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
+  .details {
+    grid-area: details;
+
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
   }
 
-  @media not (--mobile) {
+  .actions {
+    grid-area: action;
+  }
+
+  @container self (--not-mobile) {
     .root {
       grid-template-columns: 38px 1fr auto;
       grid-template-rows: auto;
@@ -186,22 +194,29 @@
       margin-left: 0.5rem;
     }
   }
+ 
+  @container self (--mobile) {
+    .root {
+      grid-template-columns: 38px auto;
+      grid-template-rows: repeat(2, auto);
+      grid-template-areas:
+        "icon details"
+        "action action";
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .root.error {
+    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
+  }
 
   .fileicon {
     grid-area: icon;
     align-self: center;
-  }
-
-  .actions {
-    grid-area: action;
-  }
-
-  .details {
-    grid-area: details;
-
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
   }
 
   .filename {

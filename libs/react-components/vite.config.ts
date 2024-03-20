@@ -16,7 +16,7 @@ export default defineConfig({
       entryRoot: "src",
       tsConfigFilePath: path.join(__dirname, "tsconfig.lib.json"),
       skipDiagnostics: false,
-      formats: ["es", "cjs"],
+      formats: ["es"],
       filename: "index.d.ts"
     }),
   ],
@@ -29,6 +29,7 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+    minify: false,
     sourcemap: true,
     emptyOutDir: true,
     lib: {
@@ -38,7 +39,7 @@ export default defineConfig({
       fileName: "index",
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
-      formats: ["es", "cjs"],
+      formats: ["es"],
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.

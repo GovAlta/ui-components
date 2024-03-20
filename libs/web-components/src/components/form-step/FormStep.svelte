@@ -31,6 +31,7 @@
 
   let _stepEl: HTMLElement;
   let _checkbox: HTMLInputElement;
+  let _isMobile: boolean;
 
   // ========
   // Reactive
@@ -54,12 +55,19 @@
         }),
       );
     });
+
+    _stepEl.addEventListener("resized", (e: Event) => {
+      const { mobile } = (e as CustomEvent).detail;
+      _isMobile = mobile;
+    });
   });
 </script>
 
 <label
   id={arialabel}
   bind:this={_stepEl}
+  class:mobile={_isMobile}
+  class:desktop={!_isMobile}
   role="listitem"
   tabindex="-1"
   for={text}
@@ -99,27 +107,44 @@
     left: -9999px;
   }
 
-  [role="listitem"] {
+  label {
     display: flex;
     box-sizing: border-box;
     height: 100%;
-
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
+    width: 100%;
     padding: var(--goa-space-l);
   }
 
-  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):focus-within,
-  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):focus,
-  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):active {
+  label:not([aria-disabled="true"]):not([aria-current="step"]):focus-within,
+  label:not([aria-disabled="true"]):not([aria-current="step"]):focus,
+  label:not([aria-disabled="true"]):not([aria-current="step"]):active {
     outline: var(--goa-color-interactive-focus) solid var(--goa-border-width-l);
   }
 
-  [role="listitem"]:not([aria-disabled="true"]):not([aria-current="step"]):hover {
-    background-color: rgba(0,0,0,0.05);
+  label:not([aria-disabled="true"]):not([aria-current="step"]):hover {
+    background-color: rgba(0, 0, 0, 0.05);
     cursor: pointer;
   }
+
+    label.desktop {
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label.desktop .details {
+      margin-top: 0.75rem;
+    }
+
+    label.mobile {
+      flex-direction: row;
+      align-items: center;
+      text-align: start;
+    }
+
+    label.mobile .details {
+      margin-left: 1rem;
+    }
 
   .status {
     flex: 0 0 auto;
@@ -157,11 +182,12 @@
     color: var(--goa-color-text-secondary);
   }
 
-  [role="listitem"]:not(
-    [data-status="complete"],
-    [data-status="incomplete"],
-    [aria-current="step"]
-  ) .status {
+  label:not(
+      [data-status="complete"],
+      [data-status="incomplete"],
+      [aria-current="step"]
+    )
+    .status {
     border-color: var(--goa-color-greyscale-500);
   }
 
@@ -173,22 +199,5 @@
     margin-top: 0.25rem;
     font: var(--goa-typography-body-xs);
     color: var(--goa-color-text-secondary);
-  }
-
-  .details {
-    margin-top: 0.75rem;
-  }
-
-  @media (--mobile) {
-    [role="listitem"] {
-      flex-direction: row;
-      align-items: center;
-      text-align: start;
-    }
-
-    .details {
-      margin-left: 1rem;
-      margin-top: 0;
-    }
   }
 </style>

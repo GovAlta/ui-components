@@ -7,7 +7,7 @@
     "serve:react": "nx run react:serve:development",
     "serve:angular": "nx run angular:serve:development",
     "svelte:watch": "vite build --watch libs/web-components",
-    "build": "nx affected -t build --exclude=angular --exclude=react --exclude=web",
+    "build": "nx affected --base=alpha -t build --exclude=angular --exclude=react --exclude=web",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "test": "vitest",
     "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web",
@@ -20,7 +20,7 @@
   "devDependencies": {
     "@abgov/design-tokens": "^1.1.1",
     "@abgov/nx-release": "8.0.0",
-    "@angular-devkit/build-angular": "17.1.2",
+    "@angular-devkit/build-angular": "17.2.3",
     "@angular-devkit/core": "17.1.2",
     "@angular-devkit/schematics": "17.1.2",
     "@angular-eslint/eslint-plugin": "~17.0.0",

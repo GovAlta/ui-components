@@ -6,9 +6,10 @@
   export let heading: string;
   export let url: string;
   export let haschildren: boolean = false;
+  export let fullmenubreakpoint: number;
 </script>
 
-<GoAAppHeader {heading} {url}>
+<GoAAppHeader {heading} {url} {fullmenubreakpoint}>
   {#if haschildren}
     <a href="#learnmore">Learn more</a>
     <a class="current" href="#aboutus">About Us</a>

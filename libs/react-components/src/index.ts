@@ -1,6 +1,7 @@
-import "@abgov/web-components";
-
 // Components
+
+import "@abgov/web-components";
+import "./common/styling";
 
 export * from "./lib/accordion/accordion";
 export * from "./lib/app-header/app-header";
@@ -57,5 +58,3 @@ export * from "./lib/textarea/textarea";
 export * from "./lib/three-column-layout/three-column-layout";
 export * from "./lib/tooltip/tooltip";
 export * from "./lib/two-column-layout/two-column-layout";
-
-export * from "./common/styling"

@@ -52,34 +52,36 @@
 
 <!-- HTML -->
 {#if show}
-  <div
-    transition:fade
-    class="notification {type}"
-    style={`--max-content-width: ${maxcontentwidth}`}
-  >
+  <div id="container">
     <div
-      class="content-container"
-      role="alert"
-      aria-live={arialive}
-      aria-atomic="true"
+      transition:fade
+      class="notification {type}"
+      style={`--max-content-width: ${maxcontentwidth}`}
     >
-      <div class="icon">
-        <goa-icon
-          type={iconType}
-          inverted={type === "important" ? "false" : "true"}
-        />
-      </div>
-      <div class="content">
-        <slot />
-      </div>
-      <div class="close">
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <button class={type} on:click={close}>
+      <div
+        class="content-container"
+        role="alert"
+        aria-live={arialive}
+        aria-atomic="true"
+      >
+        <div class="icon">
           <goa-icon
-            type="close"
+            type={iconType}
             inverted={type === "important" ? "false" : "true"}
           />
-        </button>
+        </div>
+        <div class="content">
+          <slot />
+        </div>
+        <div class="close">
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <button class={type} on:click={close}>
+            <goa-icon
+              type="close"
+              inverted={type === "important" ? "false" : "true"}
+            />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -91,18 +93,23 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
+
+  #container {
+    container: self / inline-size;
+  }
+  
   .notification {
     padding: var(--goa-space-l) var(--goa-space-m);
     display: flex;
   }
 
-  @media not (--mobile) {
+  @container self (--not-mobile) {
     .notification {
       padding: var(--goa-space-l) var(--goa-space-xl);
     }
   }
 
-  @media (--desktop) {
+  @container self (--desktop) {
     .notification {
       padding: var(--goa-space-l) calc(3 * var(--goa-space-l));
     }

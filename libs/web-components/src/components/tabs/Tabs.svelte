@@ -37,17 +37,21 @@
     setTimeout(() => {
       // HACK: this is done to get the initial tab set when using angular
       setCurrentTab(+initialtab);
-    }, 1)
+    }, 1);
     setCurrentTab(+initialtab);
   });
 
   function bindTabs(tabs: Element[]) {
+    const path = window.location.pathname;
+
     // create buttons (tabs) for each of the tab contents elements
     tabs.forEach((tab, index) => {
       // @ts-expect-error
       let headingEl = [...tab.children].find(
         (child) => child.getAttribute("slot") === "heading",
       ) as HTMLElement;
+
+      let tabSlug: string;
 
       if (headingEl) {
         // slot exists
@@ -64,19 +68,22 @@
           headingEl = document.createElement("div");
           headingEl.classList.add("tab");
           headingEl.textContent = heading;
-        }
+          tabSlug = heading;
+        } 
       }
 
+      tabSlug ||= "tab-" + index;
       if (headingEl) {
-        const button = document.createElement("button");
-        button.setAttribute("id", `tab-${index + 1}`);
-        button.setAttribute("data-testid", `tab-${index + 1}`);
-        button.setAttribute("role", "tab");
-        button.addEventListener("click", () => setCurrentTab(index + 1));
-        button.setAttribute("aria-controls", `tabpanel-${index + 1}`);
-        button.appendChild(headingEl);
+        const link = document.createElement("a");
+        link.setAttribute("id", `tab-${index + 1}`);
+        link.setAttribute("data-testid", `tab-${index + 1}`);
+        link.setAttribute("role", "tab");
+        link.setAttribute("href", path + "#" + tabSlug);
+        link.addEventListener("click", () => setCurrentTab(index + 1));
+        link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
+        link.appendChild(headingEl);
 
-        _tabsEl.appendChild(button);
+        _tabsEl.appendChild(link);
       }
     });
   }
@@ -102,10 +109,11 @@
     // prevent tab from exceeding limits
     _currentTab = clamp(tab, 1, _tabs.length);
 
-    // HACK: this only exists due to the `setTimeout` on line , which is required to allow the 
+    // HACK: this only exists due to the `setTimeout` on line , which is required to allow the
     // initialtab to be properly set in Angular, causes null errors.
     if (!_tabsEl) return;
 
+    let currentLocation = "";
     // @ts-expect-error
     [..._tabsEl.querySelectorAll("[role=tab]")].map((el, index) => {
       const isCurrent = index + 1 === _currentTab; // currentTab is 1-based
@@ -113,14 +121,19 @@
       el.setAttribute("aria-selected", fromBoolean(isCurrent));
       el.setAttribute("tabindex", isCurrent ? "0" : "-1");
       if (isCurrent) {
+        currentLocation = (el as HTMLLinkElement).href;
         el.focus();
-        el.removeAttribute("tabindex"); // allow tabbing to the button when the tab is active
         _tabs[index].setAttribute("open", "true"); // display tab content
       }
     });
 
     _panelEl.setAttribute("aria-labelledby", `tab-${_currentTab}`);
     _panelEl.setAttribute("id", `tabpanel-${_currentTab}`);
+
+    // update the browswers url with the new hash
+    if (currentLocation) {
+      document.location = currentLocation
+    }
   }
 
   function handleKeydownEvents() {
@@ -201,6 +214,7 @@
     border: none;
     font: var(--goa-typography-body-m);
     color: var(--goa-color-text-default);
+    text-decoration: none;
     letter-spacing: 0.03125rem;
   }
 
@@ -218,7 +232,7 @@
     border-color: var(--goa-color-greyscale-200);
   }
 
-  @media not (--mobile) {
+  @media (--not-mobile) {
     :global([role="tablist"]) {
       border-bottom: none;
     }

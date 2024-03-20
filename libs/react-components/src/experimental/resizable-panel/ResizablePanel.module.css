@@ -1,0 +1,49 @@
+.panel {
+  display: flex;
+  border: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  border-radius: var(--goa-border-radius-m);
+  background: var(--goa-color-greyscale-white);
+}
+
+.panelBackground {
+  background: #F8F8F8;
+}
+
+.children {
+  flex: 1 1 auto;
+  padding: 2rem;
+}
+
+.handle {
+  flex: 0 0 1rem;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1rem;
+  background-color: var(--goa-color-greyscale-100);
+  border-left: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  cursor: col-resize;
+  overflow: hidden;
+  border-top-right-radius: calc(var(--goa-border-radius-m) - 1);
+  border-bottom-right-radius: calc(var(--goa-border-radius-m) - 1);
+  display: flex;
+  justify-content: center;
+}
+
+.handle:active {
+  cursor: col-resize;
+}
+
+.handle goa-icon {
+  transform: rotate(90deg);
+  opacity: 0.8;
+}
+
+.width {
+  float: right;
+  position: relative;
+  top: -2rem;
+  color: var(--goa-color-greyscale-400);
+  font-family: var(--goa-font-family-number);
+  font-size: var(--goa-font-size-2);
+}
