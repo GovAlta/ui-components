@@ -7,6 +7,8 @@ interface WCProps extends Margins {
   value?: string;
   min?: string;
   max?: string;
+  id?: string;
+  focused?: boolean;
 }
 
 declare global {
@@ -24,6 +26,8 @@ export interface GoADatePickerProps extends Margins {
   value?: Date;
   min?: Date;
   max?: Date;
+  id?: string;
+  focused?: boolean;
   onChange: (name: string, value: Date) => void;
 }
 
@@ -32,6 +36,8 @@ export function GoADatePicker({
   value,
   min,
   max,
+  id,
+  focused,
   mt,
   mr,
   mb,
@@ -56,6 +62,8 @@ export function GoADatePicker({
       value={value?.toISOString()}
       min={min?.toISOString()}
       max={max?.toISOString()}
+      id={id}
+      focused={focused}
       mt={mt}
       mr={mr}
       mb={mb}

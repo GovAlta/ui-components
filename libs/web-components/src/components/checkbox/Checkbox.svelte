@@ -19,6 +19,7 @@
   export let testid: string = "";
   export let arialabel: string = "";
   export let description: string = "";
+  export let focused: string = "false";
 
   // margin
   export let mt: Spacing = null;
@@ -35,7 +36,12 @@
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
+  $: isFocused = toBoolean(focused);
   $: isIndeterminate = false; // Design review. To be built with TreeView Later
+
+  $: if (isFocused && _checkboxRef) {
+    setTimeout(() => _checkboxRef.focus(), 2);
+  }
 
   onMount(() => {
     // hold on to the initial value to prevent losing it on check changes
@@ -88,6 +94,7 @@
         aria-label={arialabel || name}
         aria-describedby={description ? _descriptionId : null}
         on:change={onChange}
+        on:blur={() => focused = "false"}
       />
       {#if isIndeterminate}
         <svg

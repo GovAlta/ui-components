@@ -430,6 +430,24 @@ describe("GoADropdown", () => {
     });
   });
 
+  describe("focused", () => {
+    it("allow dropdown to be auto-focus", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        focused: true,
+        items,
+      });
+      const dropdown = result.queryByTestId("favcolor-dropdown");
+      const inputField = dropdown?.querySelector("input");
+
+      expect(dropdown).toBeTruthy();
+      expect(inputField).toBeTruthy();
+      await waitFor(() => {
+        inputField && expect(inputField).toHaveFocus();
+      });
+    });
+  })
+
   describe("leading icon", () => {
     it("does not show a leading icon", async () => {
       const result = render(GoADropdownWrapper, { name, items });

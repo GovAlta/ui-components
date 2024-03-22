@@ -22,14 +22,19 @@
 
   // @deprecated: use maxwidth
   export let width: string = "";
-
+  // accessibility
+  export let arialabel: string = "";
+  export let selectorprimaryfocus: string = undefined; // Specify a selector to be focused when opening the modal
+  export let alert: string = "false";
   // *******
   // Private
   // *******
 
   let _rootEl: HTMLElement | null = null;
+  let _closeButtonEl: HTMLElement | null = null;
   let _scrollPos: "top" | "middle" | "bottom" = "top";
   let _scrollEl: HTMLElement | null = null;
+  let _actionEl: HTMLElement | null = null;
   let _headerEl: HTMLElement | null = null;
   let _isOpen: boolean = false;
   let _requiresTopPadding: boolean;
@@ -51,6 +56,8 @@
   // ********
 
   $: _isClosable = toBoolean(closable);
+  $: isAlertDialog = toBoolean(alert);
+  $: ariaLabel = arialabel || heading;
 
   // Moving the reactive var into a timeout prevents accessing null stylesheet
   // reference to allow for creation of the @keyframes for the in:fade and out:fade transitions.
@@ -69,7 +76,16 @@
     _requiresTopPadding =
       !!_headerEl?.querySelector("div.modal-title")?.textContent ||
       !!_headerEl?.querySelector("div.modal-close") ||
-      getChildren().length > 0;
+      getChildren(_headerEl).length > 0;
+
+    // Focus the modal to allow screen reader announces
+    const selectedEl = getNodeElementById(selectorprimaryfocus, _scrollEl) || getFirstFocusableElement();
+    if (selectedEl) {
+      focusElement(selectedEl);
+    } else {
+      console.warn("There is no focusable element to focus on when the modal opens, preventing the screen reader from announcing to the audience." +
+        " Consider setting `alert` to true if this is an announcement, or ensure `closable` is set to true.");
+    }
   }
 
   $: _transitionTime =
@@ -157,13 +173,146 @@
     _scrollPos = "middle";
   }
 
-  function getChildren(): Element[] {
-    const slot = _headerEl?.querySelector("slot") as HTMLSlotElement;
+  function getChildren(element: HTMLElement): Element[] {
+    const slot = element?.querySelector("slot") as HTMLSlotElement;
     if (slot) {
       return [...slot.assignedElements()];
     } else {
       // @ts-expect-error
-      return [..._headerEl.children] as Element[]; // unit tests
+      return [...element.children] as Element[]; // unit tests
+    }
+  }
+
+  function getNodeElementById(id: string, node: HTMLElement) {
+    if (!id) return null;
+
+    if (!node) return null;
+
+    const children = getChildren(node);
+    for (let child of children) {
+      if (child.id === id) {
+        return child as HTMLElement;
+      }
+      const selectedNode = getNodeElementById(id, child as HTMLElement);
+      if (selectedNode) return selectedNode;
+    }
+
+    return null;
+  }
+
+  function getFirstFocusableElement() {
+    // close button
+    if (_closeButtonEl) {
+      return _closeButtonEl;
+    }
+    // if no close button, find in scroll element
+    const children = getChildren(_scrollEl);
+    for (let child of children) {
+      if (isFocusable(child as HTMLElement)) {
+        return child as HTMLElement;
+      }
+    }
+    // if no scroll element, find in actions
+    const actionChildren = getChildren(_actionEl);
+    if (actionChildren.length > 0) {
+      const slotContent = actionChildren[0] as HTMLElement;
+      const allSubElements = slotContent.querySelectorAll(':scope > *');
+      for (let child of allSubElements) {
+        if (isFocusable(child as HTMLElement)) {
+          return child as HTMLElement;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  function isGoaWrapperElement(node: HTMLElement) {
+    if (!node) return false;
+
+    return node.tagName.toLowerCase() === "goa-form-item" ||
+      node.tagName.toLowerCase() === "goa-button-group";
+  }
+
+  function focusElement(node: HTMLElement) {
+    if (isNativeHTMLFocusable(node)) {
+      node.focus();
+    } else {
+      let selectedNode = node;
+      if (isGoaWrapperElement(node)) {
+        const children = getChildren(node);
+        for (let child of children) {
+          if (isFocusable(child as HTMLElement)) {
+            selectedNode = child as HTMLElement;
+            break;
+          }
+        }
+      }
+      selectedNode.setAttribute("focused", "true");
+    }
+  }
+
+  function isFocusable(node: HTMLElement) {
+    var nodeName = node.tagName.toLowerCase();
+    if (nodeName.startsWith("goa-")) {
+      return isGoaFocusableElement(node);
+    } else {
+      return isNativeHTMLFocusable(node);
+    }
+  }
+
+  function isGoaFocusableElement(node: HTMLElement) {
+    let selectedNode = node;
+
+    if (isGoaWrapperElement(node)) {
+      const children = getChildren(node);
+      for (let child of children) {
+        if (isFocusable(child)) {
+          selectedNode = child;
+          break;
+        }
+      }
+    }
+
+    if (selectedNode.getAttribute("disabled") === "true") {
+      return false;
+    }
+
+    switch (selectedNode.tagName.toLowerCase()) {
+      case "goa-input":
+      case "goa-checkbox":
+      case "goa-button":
+      case "goa-icon-button":
+      case "goa-dropdown":
+      case "goa-date-picker":
+      case "goa-chip":
+      case "goa-radio-group":
+      case "goa-radio-item":
+      case "goa-textarea":
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  function isNativeHTMLFocusable(node: HTMLElement) {
+    if (node.tabIndex < 0) {
+      return false;
+    }
+    if (node.disabled) {
+      return false;
+    }
+    switch (node.tagName.toLowerCase()) {
+      case "a":
+        return !!node.href && node.rel !== "ignore";
+      case "input":
+        return node.type !== "hidden" && node.type !== "file";
+      case "button":
+      case "select":
+      case "textarea":
+        return true;
+      default:
+        return false;
     }
   }
 </script>
@@ -177,6 +326,7 @@
       data-testid="modal"
       class={`modal ${_scrollPos}`}
       style={`--maxwidth: ${maxwidth};`}
+      role="presentation"
       bind:this={_rootEl}
     >
       <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -186,6 +336,10 @@
         in:fly={{ duration: _transitionTime, y: 200 }}
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
         class="modal-pane"
+        tabindex="-1"
+        role={isAlertDialog ? "alertdialog" : "dialog"}
+        aria-modal="true"
+        aria-label={ariaLabel}
       >
         {#if calloutvariant !== null}
           <div class="callout-bar {calloutvariant}">
@@ -210,9 +364,11 @@
                 <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <goa-icon-button
                   data-testid="modal-close-button"
+                  arialabel="Close the modal"
                   icon="close"
                   on:click={close}
                   variant="nocolor"
+                  bind:this={_closeButtonEl}
                 />
               </div>
             {/if}
@@ -228,7 +384,7 @@
               <slot />
             </goa-scrollable>
           </div>
-          <div class="modal-actions" data-testid="modal-actions">
+          <div class="modal-actions" data-testid="modal-actions" bind:this={_actionEl}>
             <slot name="actions" />
           </div>
         </div>

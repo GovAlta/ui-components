@@ -37,14 +37,21 @@
   export let leadingicon: GoAIconType | null = null;
   export let trailingicon: GoAIconType | null = null;
   export let testid: string = "";
+  export let focused: string = "false";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  let _buttonEl: HTMLButtonElement;
+
   $: isDisabled = toBoolean(disabled);
+  $: isFocused = toBoolean(focused);
   $: isButtonDark = type === "primary" || type === "start";
+  $: if (isFocused && _buttonEl) {
+    setTimeout(() => _buttonEl.focus(), 2);
+  }
 
   function clickHandler(_e: Event) {
     // TODO: use e.target??
@@ -70,9 +77,10 @@
   style={calculateMargin(mt, mr, mb, ml)}
   on:click={clickHandler}
   disabled={isDisabled}
-  on:click={clickHandler}
+  on:blur={() => focused = "false"}
   data-testid={testid}
   type={type == "submit" ? type : "button"}
+  bind:this={_buttonEl}
 >
   {#if type === "start"}
     <span class="text">

@@ -8,17 +8,25 @@
   export let description: string = "";
   export let disabled: string = "false";
   export let error: string = "false";
+  export let focused: string = "false";
   export let name: string;
   export let checked: string = "false";
   export let arialabel: string;
   export let ariadescribedby: string;
 
   let _radioItemEl: HTMLElement;
+  let _inputEl: HTMLInputElement;
 
   // Reactive
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
+  $: isFocused = toBoolean(focused);
+
+  $: if (isFocused && _inputEl) {
+    setTimeout(() => _inputEl.focus(), 2);
+  }
+
 
   function onChange() {
     if (isDisabled) return;
@@ -49,7 +57,9 @@
       checked={isChecked}
       aria-label={arialabel}
       aria-describedby={ariadescribedby}
+      bind:this={_inputEl}
       on:click={onChange}
+      on:blur={() => focused = "false"}
     />
     <div class="goa-radio-icon"/>
     <span class="goa-radio-label">

@@ -32,6 +32,7 @@ describe("GoADropdown", () => {
         filterable={true}
         disabled={true}
         error={true}
+        focused={true}
         testId="foo"
         id="foo-dropdown"
         width="200px"
@@ -59,6 +60,7 @@ describe("GoADropdown", () => {
     expect(el?.getAttribute("filterable")).toBe("true");
     expect(el?.getAttribute("arialabel")).toBe("label");
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
+    expect(el?.getAttribute("focused")).toBe("true");
   });
 
   it("should allow for a single selection", async () => {

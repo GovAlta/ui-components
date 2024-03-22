@@ -17,6 +17,7 @@ interface WCProps extends Margins {
   checked: boolean;
   disabled?: boolean;
   error?: boolean;
+  focused?: boolean;
   text?: string;
   value?: string | number | boolean;
   arialabel?: string;
@@ -30,6 +31,7 @@ export interface GoACheckboxProps extends Margins {
   checked: boolean;
   disabled?: boolean;
   error?: boolean;
+  focused?: boolean;
   text?: string;
   value?: string | number | boolean;
   children?: React.ReactNode;
@@ -49,6 +51,7 @@ export function GoACheckbox({
   error,
   disabled,
   checked,
+  focused,
   value,
   text,
   description,
@@ -87,6 +90,7 @@ export function GoACheckbox({
       error={error}
       checked={checked}
       disabled={disabled}
+      focused={focused}
       text={text}
       value={value}
       arialabel={ariaLabel}

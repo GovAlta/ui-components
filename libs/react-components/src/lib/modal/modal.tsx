@@ -20,6 +20,9 @@ interface WCProps {
   closable?: boolean;
   transition?: GoAModalTransition;
   calloutvariant?: GoAModalCalloutVariant;
+  arialabel?: string;
+  selectorprimaryfocus?: string;
+  alert?: boolean;
 }
 
 declare global {
@@ -41,6 +44,9 @@ export interface GoAModalProps {
   open?: boolean;
   calloutVariant?: GoAModalCalloutVariant;
   testId?: string;
+  ariaLabel?: string;
+  selectorPrimaryFocus?: string;
+  alert?: boolean;
 
   // @deprecated: use maxWidth
   width?: string;
@@ -59,7 +65,9 @@ export function GoAModal({
   calloutVariant,
   onClose,
   testId,
-
+  ariaLabel,
+  selectorPrimaryFocus,
+  alert,
   width,
 }: GoAModalProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
@@ -101,6 +109,9 @@ export function GoAModal({
       transition={transition}
       calloutvariant={calloutVariant}
       data-testid={testId}
+      arialabel={ariaLabel}
+      selectorprimaryfocus={selectorPrimaryFocus}
+      alert={alert}
     >
       {heading && <div slot="heading">{heading}</div>}
       {actions && <div slot="actions">{actions}</div>}

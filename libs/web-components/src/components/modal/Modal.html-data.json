@@ -48,6 +48,23 @@
       "default": "none"
     },
     {
+      "name": "arialabel",
+      "type": "string",
+      "description": "Specify the ARIA label for the modal"
+    },
+    {
+      "name": "selectorprimaryfocus",
+      "type": "string",
+      "description": "Specify a selector id to be focused when opening the modal"
+    },
+    {
+      "name": "alert",
+      "type": "boolean",
+      "description": "Set to `true` to enable alert mode",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
       "name": "_close",
       "description": "Dispatched when modal is closable and is closed"
     },

@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/svelte';
+import {fireEvent, render, waitFor} from '@testing-library/svelte';
 import GoAChip from './Chip.svelte'
 import { describe, it, expect, vi } from "vitest";
 
@@ -38,7 +38,15 @@ describe('GoAChip', () => {
     await fireEvent.click(chip);
 
     expect(onClick).toHaveBeenCalled();
-  })
+  });
+
+  it("should allow chip to be auto-focus", async() => {
+    const result = render(GoAChip, { focused: "true", testid: 'chip', content: "Some Badge" });
+    const chip = await result.findByTestId("chip");
+    await waitFor(() => {
+      chip && expect(chip).toHaveFocus();
+    });
+  });
 
   describe("Margins", () => {
     it(`should add the margin`, async () => {

@@ -10,6 +10,8 @@ interface WCProps extends Margins {
   deletable: boolean;
   content: string;
   variant?: GoAChipVariant;
+  id?: string;
+  focused?: boolean;
 }
 
 declare global {
@@ -29,6 +31,8 @@ export interface GoAChipProps extends Margins {
   content: string;
   variant?: GoAChipVariant;
   testId?: string;
+  id?: string;
+  focused?: boolean;
 }
 
 export const GoAChip = ({
@@ -43,6 +47,8 @@ export const GoAChip = ({
   mb,
   ml,
   testId,
+  id,
+  focused
 }: GoAChipProps) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -68,6 +74,8 @@ export const GoAChip = ({
       deletable={deletable}
       content={content}
       variant={variant}
+      id={id}
+      focused={focused}
       mt={mt}
       mr={mr}
       mb={mb}

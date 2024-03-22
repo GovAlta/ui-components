@@ -13,6 +13,8 @@ describe("GoA Chip", () => {
       <GoAChip
         content="some chip"
         leadingIcon="add"
+        id="chip"
+        focused={true}
         mt="s"
         mr="m"
         mb="l"
@@ -24,6 +26,8 @@ describe("GoA Chip", () => {
 
     expect(el?.getAttribute("content")).toBe("some chip");
     expect(el?.getAttribute("leadingicon")).toBe("add");
+    expect(el?.getAttribute("id")).toBe("chip");
+    expect(el?.getAttribute("focused")).toBe("true");
     expect(el?.getAttribute("mt")).toBe("s");
     expect(el?.getAttribute("mr")).toBe("m");
     expect(el?.getAttribute("mb")).toBe("l");

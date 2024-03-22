@@ -4,7 +4,7 @@ import { GoAIconButton, IconButtonVariant } from "./icon-button";
 describe("GoA IconButton", () => {
   it("should render the properties", () => {
     const { container } = render(
-      <GoAIconButton icon="information" mt="s" mr="m" mb="l" ml="xl" />
+      <GoAIconButton icon="information" mt="s" mr="m" mb="l" ml="xl" id="icon-button" focused={true}/>
     );
     const el = container.querySelector("goa-icon-button");
 
@@ -13,6 +13,8 @@ describe("GoA IconButton", () => {
     expect(el?.getAttribute("mr")).toBe("m");
     expect(el?.getAttribute("mb")).toBe("l");
     expect(el?.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("focused")).toBe("true");
+    expect(el?.getAttribute("id")).toBe("icon-button");
   });
 
   describe("Variants", () => {

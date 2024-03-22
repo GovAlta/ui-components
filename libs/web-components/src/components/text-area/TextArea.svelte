@@ -18,6 +18,7 @@
   export let arialabel: string = "";
   export let countby: "character" | "word" | "" = "";
   export let maxcount: number = -1;
+  export let focused: string = "false";
 
   // margin
   export let mt: Spacing = null;
@@ -25,19 +26,23 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  // privates
+
+  let _textareaEl: HTMLTextAreaElement;
+
   // reactive
 
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
+  $: isFocused = toBoolean(focused);
   $: count =
     countby === "character"
       ? value.length
       : value.split(" ").filter((word) => word.trim().length > 0).length;
-
-  // privates
-
-  let _textareaEl: HTMLTextAreaElement;
+  $: if (isFocused && _textareaEl) {
+    setTimeout(() => _textareaEl.focus(), 2);
+  }
 
   // functions
 
@@ -96,6 +101,7 @@
       bind:value
       on:keyup={onKeyPress}
       on:change={onChange}
+      on:blur={() => focused = "false"}
     />
 
     {#if maxcount > 0 && !isDisabled}

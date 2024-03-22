@@ -66,6 +66,14 @@ it("dispatches a value on date selection", async () => {
   });
 });
 
+it("should allow date-picker to be auto-focus", async() => {
+  const { container } = render(DatePicker, { focused: "true"});
+  const input = container.querySelector("goa-input");
+  expect(input).toBeTruthy();
+  await waitFor(() => {
+    input && expect(input.getAttribute("focused")).toBe("true");
+  });
+});
 it("allows for date navigation via the keyboard", async () => {
   const inputDate = new Date();
   const currentDate = new Date(
