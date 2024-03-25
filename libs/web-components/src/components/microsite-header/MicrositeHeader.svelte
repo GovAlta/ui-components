@@ -44,7 +44,7 @@
 
 <!-- HTML -->
 <div id="container">
-  <div 
+  <div
     class="content-container"
     style={`--max-content-width: ${maxcontentwidth}`}
   >
@@ -98,6 +98,7 @@
 
   #container {
     container: self / inline-size;
+    background-color: var(--goa-color-greyscale-100);
   }
 
   a {
@@ -136,9 +137,8 @@
   .content-container {
 
     font-size: var(--goa-font-size-2);
-    background-color: var(--goa-color-greyscale-100);
     padding: 0.5rem 1rem;
-  
+
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
