@@ -207,6 +207,7 @@
   }
 
   :global([role="tab"]) {
+    display: block;
     background: none;
     overflow: hidden;
     white-space: nowrap;
