@@ -107,6 +107,7 @@
   style={`--max-content-width: ${maxcontentwidth || "100%"}`}
   class:show-menu={_showMenu}
   class:mobile={_mobile}
+  class:tablet={_tablet}
   class:desktop={_desktop}
 >
   <div class="layout">
@@ -307,61 +308,68 @@
     color: var(--goa-color-interactive-default);
   }
 
-  @media (--mobile) {
-    .image-desktop {
-      display: none;
-    }
-    .image-mobile {
-      display: block;
-    }
-    .show-menu {
-      border-bottom: var(--goa-border-width-m) solid
-        var(--goa-color-greyscale-200);
-    }
-    :global(::slotted(a)) {
-      box-shadow: inset 0 var(--goa-border-width-s) 0 0
-        var(--goa-color-greyscale-200);
-    }
+  .mobile :global(::slotted(a)) {
+    box-shadow: inset 0 var(--goa-border-width-s) 0 0
+      var(--goa-color-greyscale-200);
+  }
+  .mobile .image-desktop {
+    display: none;
+  }
+  .mobile .image-mobile {
+    display: block;
+  }
+  .mobile.show-menu {
+    border-bottom: var(--goa-border-width-m) solid
+      var(--goa-color-greyscale-200);
   }
 
-  :not(.mobile) *,
-  :not(.mobile):global(::slotted(*)) {
+  /* Tablet */
+  .tablet *,
+  .tablet:global(::slotted(*)) {
     font: var(--goa-typography-body-m);
   }
-  :not(.mobile) .layout {
-    grid-template-rows: 4rem auto;
+  .tablet :global(::slotted(a)) {
+    box-shadow: inset 0 var(--goa-border-width-s) 0 0
+      var(--goa-color-greyscale-200);
   }
-  :not(.mobile) .header-logo-title-area {
+  .tablet .image-desktop {
+    display: block;
+  }
+  .tablet .image-mobile {
+    display: none;
+  }
+  .tablet .header-logo-title-area {
     padding: 0 1.5rem;
-  }
-  :not(.mobile) .title {
-    margin-left: var(--goa-space-m);
-  }
-  :not(.mobile) .header-logo-title-area {
     min-height: 4rem;
   }
-
-  @media (--tablet) {
-    .image-desktop {
-      display: block;
-    }
-    .image-mobile {
-      display: none;
-    }
-    :global(::slotted(a)) {
-      box-shadow: inset 0 var(--goa-border-width-s) 0 0
-        var(--goa-color-greyscale-200);
-    }
+  .tablet .layout {
+    grid-template-rows: 4rem auto;
+  }
+  .tablet .title {
+    margin-left: var(--goa-space-m);
   }
 
+  /* Desktop */
+  .desktop .content-area {
+    grid-area: menu;
+    display: flex;
+    align-items: stretch;
+  }
+  .desktop .header-logo-title-area {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    grid-template-rows: 3.375rem auto;
+    color: inherit;
+    flex: 1 1 auto;
+    min-height: 4rem;
+  }
   .desktop .image-desktop {
     display: block;
   }
-
   .desktop .image-mobile {
     display: none;
   }
-
   .desktop .layout {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -370,22 +378,6 @@
     margin: 0 auto;
     width: min(var(--max-content-width), 100%);
   }
-
-  .desktop .header-logo-title-area {
-    grid-area: header;
-    display: flex;
-    align-items: center;
-    grid-template-rows: 3.375rem auto;
-    color: inherit;
-    flex: 1 1 auto;
-  }
-
-  .desktop .content-area {
-    grid-area: menu;
-    display: flex;
-    align-items: stretch;
-  }
-
   .desktop :global(::slotted(goa-app-header-menu)),
   .desktop :global(::slotted(a)),
   .desktop :global(::slotted(a:visited)) {
@@ -396,11 +388,9 @@
     align-items: center;
     padding: 0 0.75rem;
   }
-
   .desktop :global(::slotted(goa-app-header-menu)) {
     padding: 0;
   }
-
   .desktop :global(::slotted(a:focus-within)),
   .desktop :global(::slotted(goa-app-header-menu:focus-within)),
   .desktop :global(::slotted(a:hover)),
@@ -409,33 +399,27 @@
     cursor: pointer;
     color: var(--goa-color-interactive-hover);
   }
-
   .desktop :global(::slotted(a:focus)),
   .desktop :global(::slotted(goa-app-header-menu:focus)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
   }
-
   .desktop :global(::slotted(a.current)) {
     border-top: 4px solid var(--goa-color-interactive-default);
     border-bottom: 4px solid transparent;
   }
-
   .desktop :global(::slotted(a.current:hover)) {
     border-top: 4px solid var(--goa-color-interactive-hover);
   }
-
   .desktop :global(::slotted(a.interactive)) {
     font-weight: var(--goa-font-weight-medium);
     text-decoration: underline;
     color: var(--goa-color-interactive-default);
     padding: 0 var(--goa-space-m);
   }
-
   .desktop :global(::slotted(a.interactive:hover)) {
     color: var(--goa-color-interactive-hover);
   }
-
   .desktop :global(::slotted(a.interactive.current)) {
     border-color: transparent;
     margin-left: var(--goa-space-m);
