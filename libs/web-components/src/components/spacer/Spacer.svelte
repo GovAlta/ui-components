@@ -13,9 +13,14 @@
     const width = hspacing === "fill" 
       ? "100%" 
       : `var(--goa-space-${hspacing})`;
-
     injectCss(rootEl, ":host", { width, height });
   });
 </script>
 
-<div bind:this={rootEl} />
+<div 
+  bind:this={rootEl}
+  style={`
+    height: var(--goa-space-${vspacing});
+    width: var(--goa-space-${hspacing});
+  `}
+/>
