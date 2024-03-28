@@ -77,7 +77,6 @@
 <!-- Style -->
 <style>  
   .goa-container {
-    container: self / inline-size;
     box-sizing: border-box;
     display: flex;
     flex: 1 1 auto;
