@@ -50,6 +50,7 @@
 </script>
 
 <!-- HTML -->
+
 <div
   data-testid={testid}
   style={calculateMargin(mt, mr, mb, ml)}
@@ -75,9 +76,14 @@
 </div>
 
 <!-- Style -->
-<style>  
+
+<style> 
+  :host {
+    display: flex;
+    flex: 1 1 auto;
+  }
+   
   .goa-container {
-    container: self / inline-size;
     box-sizing: border-box;
     display: flex;
     flex: 1 1 auto;

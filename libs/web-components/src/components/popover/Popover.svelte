@@ -177,6 +177,9 @@
     const targetRect = getBoundingClientRectWithMargins(_targetEl);
     const popoverRect = getBoundingClientRectWithMargins(_popoverEl);
 
+    // exit if the popover hasn't yet been filled
+    if (popoverRect.height < 20) return;
+
     // Calculate available space above and below the target element
     const spaceAbove = targetRect.top;
     const spaceBelow = window.innerHeight - targetRect.bottom;
@@ -190,10 +193,9 @@
         : position === "above";
 
     if (displayOnTop) {
-      _popoverEl.style.top = 
-        relative 
+      _popoverEl.style.top = _relative
         ? `${-popoverRect.height}px`
-        : `${targetRect.y - popoverRect.height}px`;
+        : `${targetRect.y - popoverRect.height + window.scrollY}px`;
     }
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
@@ -203,7 +205,7 @@
 
     if (rightAligned) {
       _popoverEl.style.left = `${targetRect.x - (popoverRect.width - targetRect.width)}px`;
-    } 
+    }
   }
 </script>
 
