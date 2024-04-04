@@ -174,7 +174,7 @@
   }
 
   /* Override padding in small screens to the compact value */
-  @container self (--mobile) {
+  @media (--mobile) {
     .padding--relaxed header {
       padding: 0 1rem;
     }
