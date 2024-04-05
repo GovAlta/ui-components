@@ -209,6 +209,7 @@
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <goa-icon-button
+                  data-ignore-focus="true"
                   data-testid="modal-close-button"
                   icon="close"
                   on:click={close}
