@@ -14,6 +14,7 @@ interface WCProps extends Margins {
   variant?: GoAIconButtonVariant;
   title?: string;
   disabled?: boolean;
+  arialabel?: string;
 }
 
 declare global {
@@ -34,6 +35,7 @@ export interface GoAIconButtonProps extends Margins {
   children?: React.ReactNode;
   onClick?: () => void;
   testId?: string;
+  ariaLabel?: string;
 }
 
 export function GoAIconButton({
@@ -43,6 +45,7 @@ export function GoAIconButton({
   onClick,
   size = "medium",
   title,
+  ariaLabel,
   testId,
   children,
   mt,
@@ -77,6 +80,7 @@ export function GoAIconButton({
       variant={variant}
       size={size}
       title={title}
+      arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}

@@ -54,6 +54,11 @@
       "default": "false"
     },
     {
+      "name": "arialabel",
+      "type": "string",
+      "description": "Sets the aria-label of the button"
+    },
+    {
       "name": "_click",
       "description": "Callback function when button is clicked"
     }

@@ -27,6 +27,7 @@
   export let testid: string = "";
   export let disabled: string = "false";
   export let inverted: string = "false";
+  export let arialabel: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -62,6 +63,7 @@
   class={css}
   data-testid={testid}
   on:click={handleClick}
+  aria-label={arialabel}
 >
   <goa-icon {title} type={icon} {size} {theme} inverted={isInverted} />
 </button>

@@ -132,6 +132,7 @@
   }
 
   function onBlur(e: Event) {
+    focused = "false";
     const input = e.target as HTMLInputElement;
     input.dispatchEvent(
       new CustomEvent("_blur", {
