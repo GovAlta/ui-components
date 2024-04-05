@@ -7,6 +7,7 @@ export type GoAModalCalloutVariant =
   | "emergency"
   | "success"
   | "event";
+export type GoAModalRole = "dialog" | "alertdialog";
 
 // leagcy type names
 export type ModalTransition = GoAModalTransition;
@@ -20,6 +21,7 @@ interface WCProps {
   closable?: boolean;
   transition?: GoAModalTransition;
   calloutvariant?: GoAModalCalloutVariant;
+  role?: GoAModalRole;
 }
 
 declare global {
@@ -41,7 +43,7 @@ export interface GoAModalProps {
   open?: boolean;
   calloutVariant?: GoAModalCalloutVariant;
   testId?: string;
-
+  role?: GoAModalRole;
   // @deprecated: use maxWidth
   width?: string;
   // @deprecated: use variant
@@ -59,7 +61,7 @@ export function GoAModal({
   calloutVariant,
   onClose,
   testId,
-
+  role,
   width,
 }: GoAModalProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
@@ -101,6 +103,7 @@ export function GoAModal({
       transition={transition}
       calloutvariant={calloutVariant}
       data-testid={testId}
+      role={role}
     >
       {heading && <div slot="heading">{heading}</div>}
       {actions && <div slot="actions">{actions}</div>}

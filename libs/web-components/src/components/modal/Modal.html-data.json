@@ -48,6 +48,12 @@
       "default": "none"
     },
     {
+      "name": "role",
+      "description": "Role of the modal",
+      "values": [{ "name": "dialog" }, { "name": "alertdialog" }],
+      "default": "dialog"
+    },
+    {
       "name": "_close",
       "description": "Dispatched when modal is closable and is closed"
     },

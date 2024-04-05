@@ -8,6 +8,8 @@
 
   type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
   type Transition = (typeof Transitions)[number];
+  type Role = (typeof Role)[number];
+
 
   // ******
   // Public
@@ -22,7 +24,8 @@
 
   // @deprecated: use maxwidth
   export let width: string = "";
-
+  // accessibility
+  export let role: Role = "dialog";
   // *******
   // Private
   // *******
@@ -44,6 +47,11 @@
     "fast",
     "slow",
     "none",
+  ]);
+
+  const [Role, validateRole] = typeValidator("Modal Role", [
+    "dialog",
+    "alertdialog",
   ]);
 
   // ********
@@ -96,8 +104,9 @@
     await tick();
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
+    validateRole(role);
 
-    // event listenerts
+    // event listeners
     window.addEventListener("keydown", onInputKeyDown);
 
     if (width) {
@@ -177,6 +186,7 @@
       data-testid="modal"
       class={`modal ${_scrollPos}`}
       style={`--maxwidth: ${maxwidth};`}
+      role="presentation"
       bind:this={_rootEl}
     >
       <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -186,6 +196,10 @@
         in:fly={{ duration: _transitionTime, y: 200 }}
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
         class="modal-pane"
+        tabindex="-1"
+        role={role}
+        aria-modal="true"
+        aria-labelledby="goa-modal-heading"
       >
         {#if calloutvariant !== null}
           <div class="callout-bar {calloutvariant}">
@@ -197,7 +211,7 @@
         {/if}
         <div class="content">
           <header bind:this={_headerEl} class:has-content={_requiresTopPadding}>
-            <div data-testid="modal-title" class="modal-title">
+            <div data-testid="modal-title" class="modal-title" id="goa-modal-heading">
               {#if heading}
                 {heading}
               {:else}
@@ -209,7 +223,9 @@
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <goa-icon-button
+                  data-ignore-focus="true"
                   data-testid="modal-close-button"
+                  arialabel="Close the modal"
                   icon="close"
                   on:click={close}
                   variant="nocolor"

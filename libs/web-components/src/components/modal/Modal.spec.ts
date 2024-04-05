@@ -37,6 +37,26 @@ describe("Modal Component", () => {
     });
   });
 
+  it("should have accessibility attributes by default", async() => {
+    const el = render(GoAModal, { open: "true", heading: "Test Modal" });
+
+    await waitFor(() => {
+      const modal = el.queryByRole("dialog");
+      expect(modal?.getAttribute("aria-modal")).toBe("true");
+      expect(modal?.getAttribute("aria-labelledby")).toBe("goa-modal-heading");
+      expect(modal?.getAttribute("tabindex")).toBe("-1");
+    });
+  });
+
+  it("should set role to alertdialog when alert is set", async () => {
+    const el = render(GoAModal, { open: "true", role: "alertdialog"});
+
+    await waitFor(() => {
+      const modal = el.queryByRole("alertdialog");
+      expect(modal?.getAttribute("aria-modal")).toBe("true");
+    });
+  });
+
   it("should open when the `open` attribute is set to true", async () => {
     const el = render(GoAModal, { open: "true" });
 
@@ -140,6 +160,16 @@ describe("Modal Component", () => {
       rootEl?.addEventListener("_close", handleClose);
       await fireEvent.keyDown(window, { key: "Escape", keyCode: 27 });
       expect(handleClose).toBeCalled();
+    });
+  });
+
+  it("should not focus on close button for accessibility", async () => {
+    const el = render(GoAModal, { open: "true", closable: "true" });
+    await waitFor(async () => {
+      const closeIcon = el.queryByTestId("modal-close-button");
+      await waitFor(() => {
+        closeIcon && expect(closeIcon).not.toHaveFocus();
+      });
     });
   });
 });
