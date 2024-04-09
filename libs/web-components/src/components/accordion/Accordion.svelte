@@ -88,7 +88,9 @@
           class="heading heading-{headingsize}"
           data-testid={`${testid}-heading`}>{heading}</span
         >
-        <span class="secondary-text">{secondarytext}</span>
+        {#if secondarytext}
+          <span class="secondary-text">{secondarytext}</span>
+        {/if}
         <div
           class="heading-content"
           class:heading-content-top={_headingContentSlotChildren.length}
