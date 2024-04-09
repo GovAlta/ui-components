@@ -3,7 +3,6 @@
 <!-- Script -->
 <script lang="ts">
   import { onMount } from "svelte";
-
   import { calculateMargin } from "../../common/styling";
   import { validateRequired } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
@@ -23,7 +22,6 @@
 </script>
 
 <!-- HTML -->
-<div id="container">
   <div
     class="goa-grid"
     style={`
@@ -34,7 +32,6 @@
   >
     <slot />
   </div>
-</div>
 
 <!-- Style -->
 <style>
@@ -43,17 +40,13 @@
     font-family: var(--goa-font-family-sans);
   }
 
-  #container {
-    container: self / inline-size;
-  }
-
   .goa-grid {
     display: flex;
     flex-direction: column;
     gap: var(--gap);
   }
 
-  @container self (--not-mobile) {
+  @media (--not-mobile) {
     .goa-grid {
       display: grid;
       grid-template-columns: repeat(
