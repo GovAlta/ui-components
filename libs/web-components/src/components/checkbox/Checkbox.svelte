@@ -137,9 +137,6 @@
     cursor: pointer;
   }
 
-  .goa-checkbox {
-    min-height: calc(3rem - 0.25rem);
-  }
   .goa-checkbox input[type="checkbox"] {
     /* hide the input, but still make it tab-able */
     opacity: 0;
