@@ -65,7 +65,7 @@
 
 <!-- View -->
 
-<div style={calculateMargin(mt, mr, mb, ml)} class="goa-checkbox">
+<div style={calculateMargin(mt, mr, mb, ml)} class="goa-checkbox" class:minimum-height={description}>
   <label
     class="goa-checkbox-label"
     data-testid={testid}
@@ -135,6 +135,10 @@
   .goa-checkbox-label {
     display: flex;
     cursor: pointer;
+  }
+
+  .goa-checkbox.minimum-height {
+    min-height: calc(3rem - 0.25rem);
   }
 
   .goa-checkbox input[type="checkbox"] {
