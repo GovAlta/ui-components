@@ -62,13 +62,17 @@
   `}
 >
   <header class="heading--{accent}">
-    <div class="title">
-      <slot name="title" />
-    </div>
+    {#if $$slots.title}
+      <div class="title">
+        <slot name="title" />
+      </div>
+    {/if}
 
-    <div class="actions">
-      <slot name="actions" />
-    </div>
+    {#if $$slots.actions}
+      <div class="actions">
+        <slot name="actions" />
+      </div>
+    {/if}
   </header>
   <div class="content">
     <slot />
@@ -77,12 +81,12 @@
 
 <!-- Style -->
 
-<style> 
+<style>
   :host {
     display: flex;
     flex: 1 1 auto;
   }
-   
+
   .goa-container {
     box-sizing: border-box;
     display: flex;
@@ -98,9 +102,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-weight: 700;
-
-    font-size: var(--goa-font-size-4);
+    gap: var(--goa-space-m);
+    font: var(--goa-typography-heading-s);
     border-width: 1px;
     border-style: solid;
     border-top-left-radius: var(--goa-border-radius-m);
@@ -147,7 +150,13 @@
 
   .title,
   .actions {
-    padding: 0.5rem 0;
+    padding: var(--goa-space-xs) 0;
+  }
+
+  .actions :global(::slotted(div)) {
+    display: flex;
+    align-items: center;
+    gap: var(--goa-space-m);
   }
 
   /* Padding variants */
@@ -225,13 +234,8 @@
 
   /* Sizes */
   .heading--thick {
-    padding: 0.5rem 1.5rem;
-    max-height: 3rem;
-    min-height: 1rem;
-  }
-
-  .heading--thick .title {
-    line-height: 2rem;
+    padding: var(--goa-space-xs) var(--goa-space-l);
+    min-height: var(--goa-space-m);
   }
 
   .heading--thin {
