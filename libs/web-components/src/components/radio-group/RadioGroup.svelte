@@ -39,6 +39,7 @@
 
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
+  $: value && setCurrentSelectedOption();
 
   // Private
 
