@@ -14,6 +14,9 @@
 </script>
 
 <!-- HTML -->
+
+<button data-testid="set-value" on:click={() => (value = "red")}>Set Value</button>
+
 <GoARadioGroup {name} {value} {orientation} {disabled} {error} {testid}>
   {#each items as item (item)}
     <goa-radio-item value="{item}" label="{item}" />
