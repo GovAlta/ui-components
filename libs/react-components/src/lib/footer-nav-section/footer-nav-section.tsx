@@ -20,6 +20,7 @@ export interface GoAFooterNavSectionProps {
   heading?: string;
   testId?: string;
   children?: ReactNode;
+  slot?:string
 }
 
 export function GoAAppFooterNavSection({

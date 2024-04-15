@@ -12,6 +12,7 @@ declare global {
 /* eslint-disable-next-line */
 export interface GoAAppFooterMetaSectionProps {
   children?: ReactNode;
+  slot?: string
 }
 
 // legacy name
