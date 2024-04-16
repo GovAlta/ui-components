@@ -134,6 +134,7 @@
   }
   .goa-checkbox-label {
     display: flex;
+    align-items: center;
     cursor: pointer;
   }
 
@@ -194,9 +195,10 @@
   }
 
   .goa-checkbox-text {
-    padding-left: 0.5rem;
+    padding-left: var(--goa-space-xs);
     user-select: none;
     font-weight: var(--goa-font-weight-regular);
+    line-height: var(--goa-line-height-3);
   }
 
   /* Error state */
