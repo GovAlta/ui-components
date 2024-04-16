@@ -133,7 +133,7 @@
 
   .root {
     position: relative;
-    width: 100%;
+    width: var(--width, 100%);
     padding-bottom: var(--char-count-padding);
     border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
     border-radius: 3px;
@@ -162,11 +162,11 @@
 
   @container self (--not-mobile) {
     .root {
-      max-width: var(--width);
+      max-width: var(--width, 100%);
     }
     textarea {
       min-width: 0;
-      width: var(--width);
+      width: var(--width, 100%);
     }
   }
 
