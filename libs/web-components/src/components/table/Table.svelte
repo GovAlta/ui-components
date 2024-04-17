@@ -1,4 +1,9 @@
-<svelte:options customElement="goa-table" />
+<svelte:options customElement={{
+  tag: "goa-table",
+  props: {
+    variant: { reflect: true }
+  }
+}} />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
