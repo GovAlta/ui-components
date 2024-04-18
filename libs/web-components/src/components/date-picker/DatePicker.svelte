@@ -18,6 +18,7 @@
   };
 
   export let value: string = "";
+  export let error: string = "false";
   export let min: string = "";
   export let max: string = "";
   export let relative: string = "false";
@@ -167,6 +168,7 @@
     readonly="true"
     trailingicon="calendar"
     value={formatDate(_date)}
+    error={error}
     on:click={showCalendar}
     on:keydown={handleKeyDown}
   />
