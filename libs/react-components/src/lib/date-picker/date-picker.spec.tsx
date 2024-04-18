@@ -8,6 +8,7 @@ describe("DatePicker", () => {
   it("should render successfully", () => {
     const noop = () => { /* do nothing */ };
     const value = new Date();
+    const error = true;
     const min = addMonths(value, -1);
     const max = addMonths(value, 1);
 
@@ -17,6 +18,7 @@ describe("DatePicker", () => {
         min={min}
         max={max}
         value={value}
+        error={error}
         onChange={noop}
       />,
     );
@@ -27,6 +29,7 @@ describe("DatePicker", () => {
     expect(el).toBeTruthy();
     expect(el?.getAttribute("name")).toBe("foo");
     expect(el?.getAttribute("value")).toBe(value.toISOString());
+    expect(el?.getAttribute("error")).toBe("true");
     expect(el?.getAttribute("min")).toBe(min.toISOString());
     expect(el?.getAttribute("max")).toBe(max.toISOString());
   });
