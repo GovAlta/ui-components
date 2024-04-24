@@ -88,7 +88,9 @@
           class="heading heading-{headingsize}"
           data-testid={`${testid}-heading`}>{heading}</span
         >
-        <span class="secondary-text">{secondarytext}</span>
+        {#if secondarytext}
+          <span class="secondary-text">{secondarytext}</span>
+        {/if}
         <div
           class="heading-content"
           class:heading-content-top={_headingContentSlotChildren.length}
@@ -122,6 +124,7 @@
 
   summary {
     min-height: 3.5rem;
+    padding: var(--goa-space-s) var(--goa-space-m) var(--goa-space-s) 0;
     border-width: var(--goa-border-width-s);
     border-style: solid;
     border-radius: var(--goa-border-radius-m);
@@ -131,7 +134,7 @@
     cursor: pointer;
     list-style: none;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 
     /* safari hack (see below) */
     position: relative;
@@ -216,7 +219,7 @@
   .content :global(::slotted(*:last-child)) {
     margin-bottom: 0 !important;
   }
-  
+
   details[open] goa-icon {
     transform: rotate(90deg);
   }
@@ -235,10 +238,6 @@
   @container self (--mobile) {
     .content {
       padding: 1.5rem;
-    }
-    summary {
-      padding-bottom: 1rem;
-      align-items: flex-start;
     }
     .title {
       display: flex;

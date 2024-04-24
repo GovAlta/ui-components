@@ -5,7 +5,7 @@ Use it like this:
 ```html
 <goa-button id="button" (_click)="openModal()">Open Modal</goa-button>
 
-<goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" closable>
+<goa-modal id="modal" heading="Do you agree?" [open]="isOpen" (_close)="closeModal()" role="alertdialog" closable>
   <p>
     Lorem ipsum dolor sit.
   </p>

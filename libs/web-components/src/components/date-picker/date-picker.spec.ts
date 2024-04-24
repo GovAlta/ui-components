@@ -37,6 +37,15 @@ it("renders with props", async () => {
   expect(input?.getAttribute("value")).toBe(format(value, "PPP"));
 });
 
+it("shows an error state", async () => {
+  const value = new Date();
+  const error = "true";
+  const { container } = render(DatePicker, { value, error });
+  const input = container.querySelector("goa-input");
+
+  expect(input?.getAttribute("error")).toBe("true");
+});
+
 it("dispatches a value on date selection", async () => {
   const { container } = render(DatePicker);
   const popover = container.querySelector("goa-popover");

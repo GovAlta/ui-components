@@ -243,7 +243,7 @@
     text-align: center;
     border-radius: var(--goa-border-radius-m);
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     opacity: 0;
     transition: opacity 0.3s;
     padding: var(--goa-space-xs) var(--goa-space-m);

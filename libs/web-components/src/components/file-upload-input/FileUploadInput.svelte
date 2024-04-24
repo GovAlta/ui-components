@@ -62,8 +62,8 @@
     const typeMatchers = accept.split(",");
     for (const matcher of typeMatchers) {
       const matches =
-        file.type.match(matcher.replace("*", ".*").replace("/", "/")) ||
-        file.name.endsWith(accept);
+        file.type.match(matcher.replace("*", ".*")) ||
+        file.name.endsWith(matcher.trim());
       if (matches) {
         return true;
       }

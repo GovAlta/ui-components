@@ -26,6 +26,7 @@ describe("Input", () => {
       variant: "bare",
       disabled: true,
       readonly: true,
+      focused: true,
       placeholder: "placeholder",
       prefix: "foo",
       suffix: "bar",
@@ -54,6 +55,7 @@ describe("Input", () => {
     expect(input?.getAttribute("autocapitalize")).toBe("on");
     expect(input?.getAttribute("variant")).toBe("bare");
     expect(input?.getAttribute("disabled")).toBeTruthy();
+    expect(input?.getAttribute("focused")).toBe("true");
     expect(input?.getAttribute("readonly")).toBeTruthy();
     expect(input?.getAttribute("placeholder")).toBe("placeholder");
     expect(input?.getAttribute("prefix")).toBe("foo");
