@@ -24,6 +24,7 @@ export interface GoACalendarProps extends Margins {
   value?: Date;
   min?: Date;
   max?: Date;
+  testId?: string;
   onChange: (name: string, value: Date) => void;
 }
 
@@ -32,6 +33,7 @@ export function GoACalendar({
   value,
   min,
   max,
+  testId,
   mt,
   mr,
   mb,
@@ -56,6 +58,7 @@ export function GoACalendar({
       value={value?.toISOString()}
       min={min?.toISOString()}
       max={max?.toISOString()}
+      data-testid={testId}
       mt={mt}
       mr={mr}
       mb={mb}

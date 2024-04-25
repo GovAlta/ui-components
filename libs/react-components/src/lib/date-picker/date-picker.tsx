@@ -26,6 +26,7 @@ export interface GoADatePickerProps extends Margins {
   error?: boolean;
   min?: Date;
   max?: Date;
+  testId?: string;
   onChange: (name: string, value: Date) => void;
 }
 
@@ -35,6 +36,7 @@ export function GoADatePicker({
   error,
   min,
   max,
+  testId,
   mt,
   mr,
   mb,
@@ -60,6 +62,7 @@ export function GoADatePicker({
       error={error}
       min={min?.toISOString()}
       max={max?.toISOString()}
+      data-testid={testId}
       mt={mt}
       mr={mr}
       mb={mb}

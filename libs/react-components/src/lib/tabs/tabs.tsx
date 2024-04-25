@@ -13,10 +13,18 @@ declare global {
 export interface GoATabsProps {
   initialTab?: number;
   children?: React.ReactNode;
+  testId?: string;
 }
 
-export function GoATabs({ initialTab, children }: GoATabsProps): JSX.Element {
-  return <goa-tabs initialtab={initialTab}>{children}</goa-tabs>;
+export function GoATabs({ initialTab, children, testId }: GoATabsProps): JSX.Element {
+  return (
+    <goa-tabs
+      initialtab={initialTab}
+      data-testid={testId}
+    >
+      {children}
+    </goa-tabs>
+  );
 }
 
 export default GoATabs;

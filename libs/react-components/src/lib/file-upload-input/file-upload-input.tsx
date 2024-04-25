@@ -24,6 +24,7 @@ export interface GoAFileUploadInputProps {
   variant?: GoAFileUploadInputVariant;
   accept?: string;
   maxFileSize?: string;
+  testId?: string;
   onSelectFile: (file: File) => void;
 }
 
@@ -31,6 +32,7 @@ export function GoAFileUploadInput({
   variant,
   accept,
   maxFileSize,
+  testId,
   onSelectFile,
 }: GoAFileUploadInputProps) {
   const el = useRef<HTMLElement>(null);
@@ -54,6 +56,7 @@ export function GoAFileUploadInput({
       variant={variant}
       accept={accept}
       maxfilesize={maxFileSize}
+      data-testid={testId}
     />
   );
 }

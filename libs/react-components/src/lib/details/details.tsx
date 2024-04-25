@@ -20,6 +20,7 @@ declare global {
 export interface GoADetailsProps extends Margins {
   heading: string;
   open?: boolean;
+  testId?: string;
   children: ReactNode;
 }
 
@@ -30,6 +31,7 @@ export function GoADetails(props: GoADetailsProps) {
     <goa-details
       heading={props.heading}
       open={props.open}
+      data-testid={props.testId}
       mt={props.mt}
       mr={props.mr}
       mb={props.mb}

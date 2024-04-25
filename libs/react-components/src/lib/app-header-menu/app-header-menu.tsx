@@ -10,6 +10,7 @@ interface WCProps {
 export interface GoAAppHeaderMenuProps {
   heading: string;
   leadingIcon?: GoAIconType;
+  testId?: string;
   children?: ReactNode;
 }
 
@@ -28,6 +29,7 @@ export function GoAAppHeaderMenu(props: GoAAppHeaderMenuProps) {
     <goa-app-header-menu
       heading={props.heading}
       leadingicon={props.leadingIcon}
+      data-testid={props.testId}
     >
       {props.children}
     </goa-app-header-menu>
