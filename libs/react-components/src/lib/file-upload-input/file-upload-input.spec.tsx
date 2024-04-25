@@ -13,6 +13,7 @@ describe("FileUploadInput", () => {
         maxFileSize="10MB"
         accept="image/*"
         variant="dragdrop"
+        testId="foo"
       />
     );
     const el = baseElement.querySelector("goa-file-upload-input");
@@ -20,6 +21,7 @@ describe("FileUploadInput", () => {
     expect(el?.getAttribute("maxfilesize")).toBe("10MB");
     expect(el?.getAttribute("accept")).toBe("image/*");
     expect(el?.getAttribute("variant")).toBe("dragdrop");
+    expect(el?.getAttribute("data-testid")).toBe("foo");
   });
 
   it("handles the onSelectFile event", () => {
