@@ -58,5 +58,6 @@ describe("DatePicker", () => {
     );
 
     expect(onChange).toBeCalledWith(name, value);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

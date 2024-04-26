@@ -47,10 +47,17 @@ export function GoADatePicker({
       return;
     }
     const current = ref.current;
-    current.addEventListener("_change", (e: Event) => {
+
+    const handleChange = (e: Event) => {
       onChange(name || "", (e as CustomEvent).detail.value);
-    });
-  });
+    }
+
+    current.addEventListener("_change", handleChange);
+
+    return () => {
+      current.removeEventListener("_change", handleChange);
+    }
+  }, [onChange]);
 
   return (
     <goa-date-picker
