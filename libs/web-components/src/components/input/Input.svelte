@@ -97,28 +97,41 @@
     if (!input) return;
     if (isReadonly) return;
 
-    if (_debounceId != null) {
-      clearTimeout(_debounceId);
-    }
+    dispatchKeyUp(e, input);
+    value = input.value;
+  }
 
-    _debounceId = setTimeout(() => {
-      input.dispatchEvent(
-        new CustomEvent("_change", {
-          composed: true,
-          bubbles: false,
-          cancelable: true,
-          detail: { name, value: input.value },
-        }),
-      );
-    }, debounce);
-
+  function dispatchKeyUp(e: Event, input: HTMLInputElement) {
     input.dispatchEvent(
       new CustomEvent("_keyPress", {
         composed: true,
         detail: { name, value: input.value, key: (e as KeyboardEvent).key },
       }),
     );
-    value = input.value;
+  }
+
+  function onChange(e: Event) {
+    const input = e.target as HTMLInputElement;
+    if (!input) return;
+
+    if (_debounceId != null) {
+      clearTimeout(_debounceId);
+    }
+
+    _debounceId = setTimeout(() => {
+      dispatchChange(e, input);
+    }, debounce);
+  }
+
+  function dispatchChange(_: Event, input: HTMLInputElement) {
+    input.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        bubbles: false,
+        cancelable: true,
+        detail: { name, value: input.value },
+      }),
+    );
   }
 
   function onFocus(e: Event) {
@@ -234,7 +247,7 @@
       aria-label={arialabel || name}
       aria-labelledby={arialabelledby}
       on:keyup={onKeyUp}
-      on:change={onKeyUp}
+      on:change={onChange}
       on:focus={onFocus}
       on:blur={onBlur}
     />

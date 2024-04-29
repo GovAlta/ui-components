@@ -179,7 +179,6 @@ describe("GoAInput Component", () => {
 
     await fireEvent.keyUp(input, { target: { value: "foobar" }, key: 'r' });
     await waitFor(() => {
-      expect(change).toBeCalledTimes(1);
       expect(keypress).toBeCalledTimes(1);
     });
   });
@@ -267,7 +266,7 @@ describe("GoAInput Component", () => {
       const input = await findByTestId("input-test");
       const search = vi.fn();
 
-      input.addEventListener("_change", () => {
+      input.addEventListener("_keyPress", () => {
         search();
       });
 
@@ -383,7 +382,7 @@ describe("GoAInput Component", () => {
       fn();
     });
 
-    await fireEvent.keyUp(input, { target: { value: "foobar" } });
+    await fireEvent.change(input, { target: { value: "foobar" } });
     await waitFor(
       () => {
         expect(fn).not.toBeCalled();

@@ -49,7 +49,6 @@
   function onKeyPress(e: KeyboardEvent) {
     if (isDisabled) return;
     dispatchKeyPress(e);
-    dispatchChange(e);
   }
 
   function dispatchChange(_: KeyboardEvent) {

@@ -70,7 +70,6 @@ describe("GoATextArea", () => {
 
     await waitFor(() => {
       expect(onKeyPress).toBeCalledTimes(1);
-      expect(onChange).toBeCalledTimes(1);
     });
 
   });
