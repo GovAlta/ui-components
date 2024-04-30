@@ -202,6 +202,7 @@
       type="file"
       {accept}
       bind:this={_fileInput}
+      multiple
     />
   </div>
 {/if}
