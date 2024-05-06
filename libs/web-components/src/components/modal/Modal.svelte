@@ -36,6 +36,7 @@
   let _headerEl: HTMLElement | null = null;
   let _isOpen: boolean = false;
   let _requiresTopPadding: boolean;
+  let _actionsHeight: number;
 
   // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator(
@@ -237,14 +238,14 @@
             <goa-scrollable
               direction="vertical"
               hpadding="1.9rem"
-              maxheight="70vh"
+              maxheight="calc(70vh - {_actionsHeight}px)"
               bind:this={_scrollEl}
               on:_scroll={handleScroll}
             >
               <slot />
             </goa-scrollable>
           </div>
-          <div class="modal-actions" data-testid="modal-actions">
+          <div bind:clientHeight={_actionsHeight} class="modal-actions" data-testid="modal-actions">
             <slot name="actions" />
           </div>
         </div>
