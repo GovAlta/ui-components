@@ -42,7 +42,7 @@
   });
 
   function bindTabs(tabs: Element[]) {
-    const path = window.location.pathname;
+    const path = window.location.href;
 
     // create buttons (tabs) for each of the tab contents elements
     tabs.forEach((tab, index) => {
@@ -69,7 +69,7 @@
           headingEl.classList.add("tab");
           headingEl.textContent = heading;
           tabSlug = heading;
-        } 
+        }
       }
 
       tabSlug ||= "tab-" + index;

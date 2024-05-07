@@ -33,3 +33,75 @@ export function isUrlMatch(windowUrl: URL | Location, testUrl: string): number {
   // if weight was incremented once, then it actually has a value of 1, not 0
   return weight >= 0 ? weight + 1 : weight;
 }
+
+function findSubarrayIndex(windowUrlParts: string[], urlParts: string[]) {
+  // for home page
+  if (urlParts.length === 1 && urlParts[0] === "" && windowUrlParts[windowUrlParts.length - 1] === "") {
+    return windowUrlParts.length - 1;
+  }
+
+  for (let urlPartsIndex = 0; urlPartsIndex < urlParts.length; urlPartsIndex++) {
+    for (let windowUrlPartsIndex = 0; windowUrlPartsIndex < windowUrlParts.length; windowUrlPartsIndex++) {
+      const cleanedWindowUrlPart = windowUrlParts[windowUrlPartsIndex].split("#")[0];
+      const cleanedUrlPart = urlParts[urlPartsIndex].split("#")[0];
+      if (cleanedUrlPart.length === 0 && cleanedWindowUrlPart.length === 0) {
+        // windowUrlParts = ["ui-components","#", "accordion"], and cleanedUrlPart = ["#"], we don't want it returns matched
+        break;
+      }
+      if (cleanedUrlPart === cleanedWindowUrlPart) {
+        return windowUrlPartsIndex;
+      }
+    }
+  }
+  return -1;
+}
+
+function getUrlWeight(windowUrl: string, linkHref: string) {
+
+  let windowParts = decodeURIComponent(windowUrl).replace(/^\/#?/, "").split("/");
+  const linkParts = decodeURIComponent(linkHref).replace(/^[\/#]+|[\/#]+$/g, '').split(/[\/#?]/);
+
+  let startIndex = findSubarrayIndex(windowParts, linkParts);
+  if (startIndex === -1) {
+    return -1;
+  }
+  // Weight should start with matched index on windowUrl. Ex: window.pathname="/ui-components/#/", linkHref="#/", Home menu should have higher weight than the rest
+  let weight = startIndex;
+
+  // Compare each part of the URLs
+  for (let i = 0; i < linkParts.length; i++) {
+    const cleanedWindowPartStr = windowParts[startIndex].split("#")[0];
+    const cleanedLinkPartStr = linkParts[i].split("#")[0];
+    if (cleanedWindowPartStr === cleanedLinkPartStr) {
+      // Increase weight for each matching segment
+      weight += 1;
+    } else {
+      // Break loop on first non-match
+      break;
+    }
+    startIndex++;
+  }
+
+  // Return the calculated weight
+  return weight;
+}
+
+export function getMatchedLink(links: Element[], windowUrl: string) {
+  const weights = links.map((link) =>
+    getUrlWeight(
+      windowUrl,
+      (link as HTMLLinkElement).getAttribute("href") || "",
+    ),
+  );
+  const maxWeight = Math.max(...weights);
+  if (weights.every(weight => weight === maxWeight)) {
+    // // If all weights are the same or duplicated and there are multiple links, return null
+    return null;
+  }
+  const indexOfMaxWeight = weights.indexOf(maxWeight);
+  if (indexOfMaxWeight > -1) {
+    return links[indexOfMaxWeight];
+  }
+
+  return null;
+}

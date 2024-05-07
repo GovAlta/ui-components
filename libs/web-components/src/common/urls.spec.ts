@@ -1,4 +1,4 @@
-import { isUrlMatch } from "./urls";
+import {getMatchedLink, isUrlMatch} from "./urls";
 import { it } from "vitest";
 
 interface MyTest {
@@ -124,3 +124,55 @@ it("should match urls", async () => {
     expect(isUrlMatch(spec.windowUrl, spec.testUrl)).toEqual(spec.weight);
   }
 });
+
+describe("should getMatchedLink", () => {
+  const links: any[] = [
+    { getAttribute: () => "#/" },
+    { getAttribute: () => "#/get-started" },
+    { getAttribute: () => "#/tabs" },
+    { getAttribute: () => "/patterns" },
+  ];
+
+  it("should return Home menu if we navigate to a root URL", () => {
+    const windowUrl = "/ui-components/#/";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result?.getAttribute("href")).toEqual("#/");
+  });
+
+  it("should return get-started if we navigate to /get-started", () => {
+    const windowUrl = "/ui-components/#/get-started";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result?.getAttribute("href")).toEqual("#/get-started");
+  });
+
+  it("should return get-started if we navigate to /get-started/developers", () => {
+    const windowUrl = "/ui-components/#/get-started/developers";
+    const result = getMatchedLink(links, windowUrl)
+    expect(result?.getAttribute("href")).toEqual("#/get-started");
+  });
+
+  it("should return tabs if we navigate to /tabs#tab-0", () => {
+    const windowUrl = "/ui-components/#/tabs#tab-0";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result?.getAttribute("href")).toEqual("#/tabs");
+  });
+
+  it("should return null if we navigate to /accordion", () => {
+    const windowUrl = "/ui-components/#/accordion";
+    const result = getMatchedLink(links, windowUrl);
+    console.log(result?.getAttribute("href"));
+    expect(result).toBeNull();
+  });
+
+  it("should return patterns menu if we navigate to /patterns", () => {
+    const windowUrl = "/patterns#tab-0";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result?.getAttribute("href")).toEqual("/patterns");
+  });
+
+  it("should return patterns menu if we navigate to /patterns/complex-form", () => {
+    const windowUrl = "/patterns/complex-form";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result?.getAttribute("href")).toEqual("/patterns");
+  });
+})

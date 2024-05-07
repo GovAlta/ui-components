@@ -5,6 +5,7 @@
   import { validateRequired } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { TABLET_BP } from "../../common/breakpoints";
+  import { isUrlMatch, getMatchedLink } from "../../common/urls";
 
   // Required
   export let heading: string;
@@ -40,13 +41,28 @@
     validateRequired("GoaAppHeaderMenu", { heading });
 
     setCurrentLink();
-    window.addEventListener("popstate", setCurrentLink, true);
+    addEventListener();
   });
 
 
   onDestroy(() => {
     window.removeEventListener("popstate", setCurrentLink, true);
   });
+
+  function addEventListener() {
+    // watch path changes
+    let currentLocation = document.location.href;
+    const observer = new MutationObserver((_mutationList) => {
+      if (isUrlMatch(document.location, currentLocation)) {
+        currentLocation = document.location.href;
+        setCurrentLink();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    window.addEventListener("popstate", setCurrentLink, true);
+  }
+
 
   // Functions
 
@@ -61,15 +77,13 @@
     const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
     if (!slot) return false;
 
-    const link = slot
+    const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+    const links = slot
       .assignedElements()
-      .filter((el) => el.tagName === "A")
-      .find((el) => {
-        const href = (el as HTMLLinkElement).href;
-        const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-        return href.endsWith(url);
-      });
-    return !!link;
+      .filter((el) => el.tagName === "A");
+
+    return !!getMatchedLink(links, url);
   }
 
   // Ensures that the Popover _close event has a handler if the window

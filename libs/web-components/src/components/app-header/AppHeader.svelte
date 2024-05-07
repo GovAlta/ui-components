@@ -5,6 +5,7 @@
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
   import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
+  import { isUrlMatch, getMatchedLink } from "../../common/urls";
 
   // optional
   export let heading: string = "";
@@ -40,39 +41,51 @@
 
   // Hooks
 
-  onMount(() => {
-    window.addEventListener("popstate", onRouteChange, true);
+  onMount(async() => {
+    await tick();
     setCurrentLink();
+    addEventListeners();
   });
 
   onDestroy(() => {
     window.removeEventListener("popstate", onRouteChange, true);
   });
 
+  function addEventListeners() {
+    // watch path changes
+    let currentLocation = document.location.href;
+    const observer = new MutationObserver((_mutationList) => {
+      if (isUrlMatch(document.location, currentLocation)) {
+        currentLocation = document.location.href;
+        onRouteChange();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    window.addEventListener("popstate", onRouteChange, true);
+  }
+
+
   function onRouteChange() {
     setCurrentLink();
     hideMenu();
   }
 
-  // Update component if the current browser url matches one of this element's child links
   function setCurrentLink() {
     if (!_slotParentEl) return;
 
     const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
     if (!slot) return;
 
-    const link = slot
+    const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    const links = slot
       .assignedElements()
       .filter((el) => el.tagName === "A")
       .map((el) => {
         el.classList.remove("current");
         return el;
-      })
-      .find((el) => {
-        const href = (el as HTMLLinkElement).href;
-        const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-        return href.endsWith(url);
       });
+    const link = getMatchedLink(links, url);
     if (link) {
       link.classList.add("current");
     }
@@ -392,9 +405,8 @@
     padding: 0;
   }
   .desktop :global(::slotted(a:focus-within)),
-  .desktop :global(::slotted(goa-app-header-menu:focus-within)),
-  .desktop :global(::slotted(a:hover)),
-  .desktop :global(::slotted(goa-app-header-menu:hover)) {
+  .desktop :global(::slotted(a:hover))
+  {
     background: var(--goa-color-greyscale-100);
     cursor: pointer;
     color: var(--goa-color-interactive-hover);
