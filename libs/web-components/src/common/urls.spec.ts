@@ -1,4 +1,4 @@
-import { isUrlMatch } from "./urls";
+import {getMatchedLink, isUrlMatch} from "./urls";
 import { it } from "vitest";
 
 interface MyTest {
@@ -124,3 +124,79 @@ it("should match urls", async () => {
     expect(isUrlMatch(spec.windowUrl, spec.testUrl)).toEqual(spec.weight);
   }
 });
+
+describe("should getMatchedLink", () => {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  const links: any[] = [
+    {
+      getAttribute: (attr: string) => attr === 'href' ? "#/" : null,
+    },
+    {
+      getAttribute: (attr: string) => attr === 'href' ? "#/get-started" : null,
+    },
+    {
+      getAttribute: (attr: string) => attr === 'href' ? "#/tabs" : null,
+    },
+    {
+      getAttribute: (attr: string) => attr === 'href' ? "/patterns" : null,
+    },
+    {
+      getAttribute: (attr: string) => {
+        if (attr === 'href') return "https://google.com/choose";
+        if (attr === 'target') return "_blank";
+        return null;
+      }
+    }
+  ];
+
+
+  it("should return null if we navigate to a home root / (React app)", () => {
+    const windowUrl = "/";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result).toBeNull();
+  })
+
+  it("should return Home menu if we navigate to a root #/ (Angular app)", () => {
+    const windowUrl = "/ui-components/#/";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result?.getAttribute("href")).toEqual("#/");
+  });
+
+  it("should return get-started if we navigate to /get-started", () => {
+    const windowUrl = "/ui-components/#/get-started";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result?.getAttribute("href")).toEqual("#/get-started");
+  });
+
+  it("should return get-started if we navigate to /get-started/developers", () => {
+    const windowUrl = "/ui-components/#/get-started/developers";
+    const result = getMatchedLink(links, windowUrl)
+    expect(result?.getAttribute("href")).toEqual("#/get-started");
+  });
+
+  it("should return tabs if we navigate to /tabs#tab-0", () => {
+    const windowUrl = "/ui-components/#/tabs#tab-0";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result?.getAttribute("href")).toEqual("#/tabs");
+  });
+
+  it("should return null if we navigate to /accordion", () => {
+    const windowUrl = "/ui-components/#/accordion";
+    const result = getMatchedLink(links, windowUrl);
+    console.log(result?.getAttribute("href"));
+    expect(result).toBeNull();
+  });
+
+  it("should return patterns menu if we navigate to /patterns", () => {
+    const windowUrl = "/patterns#tab-0";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result?.getAttribute("href")).toEqual("/patterns");
+  });
+
+  it("should return patterns menu if we navigate to /patterns/complex-form", () => {
+    const windowUrl = "/patterns/complex-form";
+    const result = getMatchedLink(links, windowUrl);
+    expect(result?.getAttribute("href")).toEqual("/patterns");
+  });
+
+})

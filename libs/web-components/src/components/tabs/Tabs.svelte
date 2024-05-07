@@ -50,7 +50,7 @@
   }
 
   function bindChildren() {
-    const path = window.location.pathname;
+    const path = window.location.href;
 
     // create buttons (tabs) for each of the tab contents elements
     _tabProps.forEach((tabProps, index) => {

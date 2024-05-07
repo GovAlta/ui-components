@@ -1,11 +1,16 @@
 <svelte:options customElement="goa-app-header-menu" />
-
+<script lang="ts" context="module">
+  export type GoAAppHeaderMenuProps = {
+    el: HTMLElement,
+    links: Element[],
+    currentHref?: string,
+  };
+</script>
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
   import { validateRequired } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { TABLET_BP } from "../../common/breakpoints";
-  import { isUrlMatch, getMatchedLink } from "../../common/urls";
 
   // Required
   export let heading: string;
@@ -23,6 +28,8 @@
   let _popoverEl: HTMLElement;
   // allow for finding of contained link elements within slot
   let _slotParentEl: HTMLElement;
+  // allow for binding with appheader events
+  let _rootEl: HTMLElement;
   // internal state of when the window location matches with a link within this element's slot
   let _hasCurrentLink = false;
   // open state
@@ -39,46 +46,17 @@
   onMount(async () => {
     await tick();
     validateRequired("GoaAppHeaderMenu", { heading });
-
-    setCurrentLink();
-    addEventListener();
+    dispatchInit();
+    addAppHeaderCurrentChangeListener();
   });
-
-
-  onDestroy(() => {
-    window.removeEventListener("popstate", setCurrentLink, true);
-  });
-
-  function addEventListener() {
-    // watch path changes
-    let currentLocation = document.location.href;
-    const observer = new MutationObserver((_mutationList) => {
-      if (isUrlMatch(document.location, currentLocation)) {
-        currentLocation = document.location.href;
-        onRouteChange();
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    window.addEventListener("popstate", onRouteChange, true);
-  }
-
 
   // Functions
 
-  // Determine if the current browser url matches one of this element's child links
-  function onRouteChange() {
-    setCurrentLink();
-    closeMenu();
-  }
-
-  function setCurrentLink() {
+  function dispatchInit() {
     if (!_slotParentEl) return;
 
     const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
     if (!slot) return;
-
-    const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
 
     const links = slot
       .assignedElements()
@@ -88,12 +66,47 @@
         return el;
       });
 
-      const matchedLink = getMatchedLink(links, url);
-      if (matchedLink) {
-        matchedLink.classList.add("current");
-      }
+    setTimeout(() => {
+      _rootEl?.dispatchEvent(new CustomEvent<GoAAppHeaderMenuProps>("appheadermenu:mounted", {
+        detail: {
+          el: _rootEl,
+          links: links
+        },
+        composed: true,
+        bubbles: true
+      }))
+    }, 1);
+  }
 
-      _hasCurrentLink = !!matchedLink;
+  function addAppHeaderCurrentChangeListener() {
+    _rootEl?.addEventListener("appheader:current:change", (e: Event) => {
+      const href = (e as CustomEvent).detail;
+      setCurrentLink(href);
+    })
+  }
+
+  function setCurrentLink(href: string) {
+    if (!_slotParentEl) return;
+
+    const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
+    if (!slot) return;
+
+    const links = slot
+      .assignedElements()
+      .filter((el) => el.tagName === "A")
+      .map((el) => {
+        el.classList.remove("current");
+        return el;
+      });
+
+    const matchedLink = links.find(link => link.getAttribute("href") === href);
+    if (matchedLink) {
+      matchedLink.classList.add("current");
+    }
+
+    _hasCurrentLink = !!matchedLink;
+
+    closeMenu();
   }
 
   // Ensures that the Popover _close event has a handler if the window
@@ -135,50 +148,52 @@
 
 <svelte:window bind:innerWidth={_innerWidth} />
 
-{#if _desktop}
-  <goa-popover
-    bind:this={_popoverEl}
-    context="app-header-menu"
-    focusborderwidth="0"
-    borderradius="0"
-    padded="false"
-    tabindex="-1"
-    width="16rem"
-    position="below"
-    open="{_open}"
-  >
-    <button
-      slot="target"
-      style="padding: 0 0.75rem;"
-      class={type}
-      class:current={_hasCurrentLink}
+<div bind:this={_rootEl}>
+  {#if _desktop}
+    <goa-popover
+      bind:this={_popoverEl}
+      context="app-header-menu"
+      focusborderwidth="0"
+      borderradius="0"
+      padded="false"
+      tabindex="-1"
+      width="16rem"
+      position="below"
+      open="{_open}"
     >
-      {#if leadingicon}
-        <goa-icon type={leadingicon} mt="1" />
-      {/if}
-      {heading}
-      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1" />
-    </button>
+      <button
+        slot="target"
+        style="padding: 0 0.75rem;"
+        class={type}
+        class:current={_hasCurrentLink}
+      >
+        {#if leadingicon}
+          <goa-icon type={leadingicon} mt="1"/>
+        {/if}
+        {heading}
+        <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1"/>
+      </button>
 
-    <div class="desktop" bind:this={_slotParentEl}>
-      <slot />
-    </div>
-  </goa-popover>
-{:else}
-  <button class:open={_open} on:click={toggleMenu} class={type}>
-    {#if leadingicon}
-      <goa-icon type={leadingicon} mt="1" />
+      <div class="desktop" bind:this={_slotParentEl}>
+        <slot/>
+      </div>
+    </goa-popover>
+  {:else}
+    <button class:open={_open} on:click={toggleMenu} class={type}>
+      {#if leadingicon}
+        <goa-icon type={leadingicon} mt="1"/>
+      {/if}
+      <span class="heading">{heading}</span>
+      <goa-spacer hspacing="fill"/>
+      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1"/>
+    </button>
+    {#if _open}
+      <div class="not-desktop" bind:this={_slotParentEl}>
+        <slot/>
+      </div>
     {/if}
-    <span class="heading">{heading}</span>
-    <goa-spacer hspacing="fill" />
-    <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1" />
-  </button>
-  {#if _open}
-    <div class="not-desktop" bind:this={_slotParentEl}>
-      <slot />
-    </div>
   {/if}
-{/if}
+</div>
 
 <style>
   * {
@@ -263,7 +278,7 @@
     }
     button:focus {
       outline: var(--goa-border-width-l) solid
-        var(--goa-color-interactive-focus);
+      var(--goa-color-interactive-focus);
       outline-offset: -3px;
     }
     .heading {
