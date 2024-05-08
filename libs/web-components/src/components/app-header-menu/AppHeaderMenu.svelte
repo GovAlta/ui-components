@@ -5,6 +5,7 @@
   import { validateRequired } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { TABLET_BP } from "../../common/breakpoints";
+  import { isUrlMatch, getMatchedLink } from "../../common/urls";
 
   // Required
   export let heading: string;
@@ -40,7 +41,7 @@
     validateRequired("GoaAppHeaderMenu", { heading });
 
     setCurrentLink();
-    window.addEventListener("popstate", setCurrentLink, true);
+    addEventListener();
   });
 
 
@@ -48,28 +49,51 @@
     window.removeEventListener("popstate", setCurrentLink, true);
   });
 
-  // Functions
+  function addEventListener() {
+    // watch path changes
+    let currentLocation = document.location.href;
+    const observer = new MutationObserver((_mutationList) => {
+      if (isUrlMatch(document.location, currentLocation)) {
+        currentLocation = document.location.href;
+        onRouteChange();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
 
-  function setCurrentLink() {
-    _hasCurrentLink = hasCurrentLink();
+    window.addEventListener("popstate", onRouteChange, true);
   }
 
+
+  // Functions
+
   // Determine if the current browser url matches one of this element's child links
-  function hasCurrentLink(): boolean {
-    if (!_slotParentEl) return false;
+  function onRouteChange() {
+    setCurrentLink();
+    closeMenu();
+  }
+
+  function setCurrentLink() {
+    if (!_slotParentEl) return;
 
     const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
-    if (!slot) return false;
+    if (!slot) return;
 
-    const link = slot
+    const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+    const links = slot
       .assignedElements()
       .filter((el) => el.tagName === "A")
-      .find((el) => {
-        const href = (el as HTMLLinkElement).href;
-        const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-        return href.endsWith(url);
+      .map((el) => {
+        el.classList.remove("current");
+        return el;
       });
-    return !!link;
+
+      const matchedLink = getMatchedLink(links, url);
+      if (matchedLink) {
+        matchedLink.classList.add("current");
+      }
+
+      _hasCurrentLink = !!matchedLink;
   }
 
   // Ensures that the Popover _close event has a handler if the window
@@ -212,6 +236,12 @@
   :global(::slotted(a:hover)) {
     background: var(--goa-color-greyscale-100);
     color: var(--goa-color-interactive-hover);
+  }
+  :global(::slotted(a.current)) {
+    background-color: var(--goa-color-interactive-default);
+  }
+  :global(::slotted(a.current:hover)) {
+    background: var(--goa-color-interactive-hover);
   }
   :global(::slotted(a:focus-visible)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);

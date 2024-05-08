@@ -30,8 +30,11 @@
   $: _mobile = _windowWidth < MOBILE_BP;
   $: _tablet = _windowWidth >= MOBILE_BP && _windowWidth < fullmenubreakpoint;
   $: _desktop = _windowWidth >= +fullmenubreakpoint;
-  // @ts-expect-error
-  $: (async () => (_showToggleMenu = _desktop ? false : await hasChildren()))();
+  $: (async () => {
+    _showToggleMenu = _desktop ? false : await hasChildren() as boolean;
+    onShowToggleMenuChange()
+  })();
+
 
   // Functions
 
@@ -78,13 +81,27 @@
     }
   }
 
+  function onShowToggleMenuChange() {
+    if (!_slotParentEl) return;
+
+    const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
+    if (!slot) return;
+
+    slot.assignedElements()
+      .filter((el) => el.tagName === "A")
+      .map((el) => {
+        if (_showToggleMenu) el.classList.add("inside-collapse-menu");
+        else el.classList.remove("inside-collapse-menu");
+      });
+  }
+
   // *Menu* children count
   // When in mobile mode, while the children are not visible the children are rendered in a div[display: none]
   // element to allow for the children count to be obtained.
   async function hasChildren() {
     await tick();
 
-    if (!_slotParentEl) return;
+    if (!_slotParentEl) return false;
 
     const slot = _slotParentEl?.childNodes[0] as HTMLSlotElement;
     const children = slot.assignedElements?.();
@@ -311,6 +328,8 @@
   :global(::slotted(a:focus)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
+    background: var(--goa-color-greyscale-100);
+    color: var(--goa-color-interactive-hover);
   }
   :global(::slotted(a.interactive)) {
     text-decoration: underline;
@@ -445,6 +464,15 @@
     border-color: transparent;
     margin-left: var(--goa-space-m);
   }
+  :global(::slotted(a.current.inside-collapse-menu)) {
+    color: var(--goa-color-text-light);
+    background-color: var(--goa-color-interactive-default);
+  }
+
+  :global(::slotted(a.current.inside-collapse-menu:hover)) {
+    background-color: var(--goa-color-interactive-hover);
+  }
+
   @media (--desktop) {
     /*padding is independent from fullmenubreakpoint, should use media query*/
     .container.tablet {
@@ -454,5 +482,4 @@
       padding: 0 var(--desktop-padding) 0 var(--desktop-padding);
     }
   }
-
 </style>
