@@ -84,7 +84,9 @@
     children.forEach((el, index) => {
       const option = el as unknown as RadioOption & { innerText: string };
       const optionValue = el.getAttribute("value") || option.value;
-      option.setAttribute("disabled", isDisabled);
+      if (isDisabled) {
+        option.setAttribute("disabled", isDisabled);
+      }
       option.setAttribute("error", isError);
       option.setAttribute("name", name);
       option.setAttribute("checked", optionValue === value);
