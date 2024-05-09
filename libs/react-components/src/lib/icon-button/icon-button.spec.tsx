@@ -17,7 +17,7 @@ describe("GoA IconButton", () => {
   });
 
   describe("Variants", () => {
-    (["color", "nocolor", "dark", "destructive"] as const).forEach(
+    (["color", "nocolor", "light", "dark", "destructive"] as const).forEach(
       (variant: IconButtonVariant) => {
         it(`should render ${variant} variant`, async () => {
           const { container } = render(

@@ -26,7 +26,7 @@ describe("IconButton", () => {
   });
 
   describe("Variants", () => {
-    ["color", "nocolor", "dark", "destructive"].forEach(variant => {
+    ["color", "nocolor", "light", "dark", "destructive"].forEach(variant => {
       it(`renders the ${variant} variant`, async () => {
         const el = render(GoAIconButton, {
           testid: "iconButton-test", icon: "ellipsis",
