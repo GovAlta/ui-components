@@ -22,6 +22,7 @@ describe("FileUploadCard", () => {
         type="image/png"
         progress={23}
         error="true"
+        testId="foo"
       />
     );
 
@@ -31,6 +32,7 @@ describe("FileUploadCard", () => {
     expect(el?.getAttribute("type")).toBe("image/png");
     expect(el?.getAttribute("progress")).toBe("23");
     expect(el?.getAttribute("error")).toBe("true");
+    expect(el?.getAttribute("data-testid")).toBe("foo");
   });
 
   it("dispatches and event when cancel is clicked while uploading", () => {

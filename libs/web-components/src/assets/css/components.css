@@ -80,10 +80,6 @@ goa-table table {
   border-collapse: collapse;
 }
 
-goa-table.relaxed td {
-  padding: 1rem;
-}
-
 goa-table.sticky thead {
   position: sticky;
   top: 0;
@@ -93,6 +89,10 @@ goa-table td {
   font: var(--goa-typography-body-m);
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--goa-color-greyscale-200);
+}
+
+goa-table[variant=relaxed] td {
+  padding: 1.25rem 1rem 1rem 1rem;
 }
 
 goa-table thead th {

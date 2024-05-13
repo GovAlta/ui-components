@@ -26,6 +26,7 @@ export interface GoAFileUploadCardProps {
   type?: string;
   progress?: number;
   error?: string;
+  testId?: string;
   onDelete?: () => void;
   onCancel?: () => void;
 }
@@ -36,6 +37,7 @@ export function GoAFileUploadCard({
   type,
   progress,
   error,
+  testId,
   onDelete,
   onCancel,
 }: GoAFileUploadCardProps) {
@@ -63,6 +65,7 @@ export function GoAFileUploadCard({
       type={type}
       progress={progress}
       error={error}
+      data-testid={testId}
     />
   );
 }

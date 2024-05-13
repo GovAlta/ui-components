@@ -18,6 +18,7 @@ describe("DatePicker", () => {
         min={min}
         max={max}
         value={value}
+        testId="foo"
         error={error}
         onChange={noop}
       />,
@@ -32,6 +33,7 @@ describe("DatePicker", () => {
     expect(el?.getAttribute("error")).toBe("true");
     expect(el?.getAttribute("min")).toBe(min.toISOString());
     expect(el?.getAttribute("max")).toBe(max.toISOString());
+    expect(el?.getAttribute("data-testid")).toBe("foo");
   });
 
   it("should handle event", async () => {
@@ -58,5 +60,6 @@ describe("DatePicker", () => {
     );
 
     expect(onChange).toBeCalledWith(name, value);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

@@ -81,39 +81,40 @@
 
   .label {
     display: block;
-    font-weight: var(--goa-font-weight-bold);
-    color: var(--goa-color-text-default);
-    font-size: var(--goa-font-size-4);
-    padding-bottom: 0.5rem;
+    font: var(--goa-typography-heading-s);
+    padding-bottom: var(--goa-space-xs);
   }
 
   .label.large {
     font: var(--goa-typography-heading-l);
+    padding-bottom: var(--goa-space-s);
   }
 
   .label em {
+    font: var(--goa-typography-body-xs);
     color: var(--goa-color-greyscale-700);
-    font-weight: var(--goa-font-weight-regular);
-    font-size: var(--goa-font-size-2);
-    line-height: var(--goa-line-height-1);
-    font-style: normal;
-  }
-
-  .form-item-input {
-    margin-bottom: 0.25rem;
-  }
-
-  .help-msg {
-    font-size: var(--goa-font-size-2);
-    color: var(--goa-color-text-default);
   }
 
   .error-msg {
-    display: inline-flex;
+    display: flex;
     align-items: flex-start;
-    gap: 0.25rem;
-    font-size: var(--goa-font-size-2);
+    gap: var(--goa-space-2xs);
+    font: var(--goa-typography-body-xs);
     color: var(--goa-color-interactive-error);
-    margin-bottom: 0.25rem;
+    margin-top: var(--goa-space-s);
+  }
+
+  .error-msg goa-icon {
+    transform: translateY(calc(var(--goa-space-2xs) * -1));
+  }
+
+  .help-msg {
+    font: var(--goa-typography-body-xs);
+    color: var(--goa-color-text-default);
+    margin-top: var(--goa-space-s);
+  }
+
+  .error-msg + .help-msg {
+    margin-top: var(--goa-space-xs);
   }
 </style>

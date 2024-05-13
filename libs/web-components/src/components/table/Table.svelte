@@ -1,4 +1,9 @@
-<svelte:options customElement="goa-table" />
+<svelte:options customElement={{
+  tag: "goa-table",
+  props: {
+    variant: { reflect: true }
+  }
+}} />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
@@ -120,6 +125,7 @@
   class={`goatable ${variant}`}
   class:sticky={_stickyHeader}
   style={`
+    overflow-x: auto;
     ${`width: ${width || "100%"};`}
     ${calculateMargin(mt, mr, mb, ml)}
   `}
@@ -135,9 +141,6 @@
 
 <style>
   /* other styles can be found in the assets/css/components.css file */
-  :host {
-    overflow-x: auto;
-  }
   .goatable {
     width: 0;
   }
