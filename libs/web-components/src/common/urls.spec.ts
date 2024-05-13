@@ -126,6 +126,7 @@ it("should match urls", async () => {
 });
 
 describe("should getMatchedLink", () => {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   const links: any[] = [
     { getAttribute: () => "#/" },
     { getAttribute: () => "#/get-started" },

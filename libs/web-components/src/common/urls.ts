@@ -57,8 +57,7 @@ function findSubarrayIndex(windowUrlParts: string[], urlParts: string[]) {
 }
 
 function getUrlWeight(windowUrl: string, linkHref: string) {
-
-  let windowParts = decodeURIComponent(windowUrl).replace(/^\/#?/, "").split("/");
+  const windowParts = decodeURIComponent(windowUrl).replace(/^\/#?/, "").split("/");
   const linkParts = decodeURIComponent(linkHref).replace(/^[\/#]+|[\/#]+$/g, '').split(/[\/#?]/);
 
   let startIndex = findSubarrayIndex(windowParts, linkParts);
@@ -68,7 +67,7 @@ function getUrlWeight(windowUrl: string, linkHref: string) {
   // Weight should start with matched index on windowUrl. Ex: window.pathname="/ui-components/#/", linkHref="#/", Home menu should have higher weight than the rest
   let weight = startIndex;
 
-  // Compare each part of the URLs
+
   for (let i = 0; i < linkParts.length; i++) {
     const cleanedWindowPartStr = windowParts[startIndex].split("#")[0];
     const cleanedLinkPartStr = linkParts[i].split("#")[0];
@@ -82,7 +81,6 @@ function getUrlWeight(windowUrl: string, linkHref: string) {
     startIndex++;
   }
 
-  // Return the calculated weight
   return weight;
 }
 
