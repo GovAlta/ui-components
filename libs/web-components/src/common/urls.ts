@@ -58,7 +58,7 @@ function findSubarrayIndex(windowUrlParts: string[], urlParts: string[]) {
 
 function getUrlWeight(windowUrl: string, linkHref: string) {
   const windowParts = decodeURIComponent(windowUrl).replace(/^\/#?/, "").split("/");
-  const linkParts = decodeURIComponent(linkHref).replace(/^[\/#]+|[\/#]+$/g, '').split(/[\/#?]/);
+  const linkParts = decodeURIComponent(linkHref).replace(/^\/#?/, "").split("/");
 
   let startIndex = findSubarrayIndex(windowParts, linkParts);
   if (startIndex === -1) {
