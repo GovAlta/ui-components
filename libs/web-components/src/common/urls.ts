@@ -34,20 +34,12 @@ export function isUrlMatch(windowUrl: URL | Location, testUrl: string): number {
   return weight >= 0 ? weight + 1 : weight;
 }
 
-function findSubarrayIndex(windowUrlParts: string[], urlParts: string[]) {
-  // for home page
-  if (urlParts.length === 1 && urlParts[0] === "" && windowUrlParts[windowUrlParts.length - 1] === "") {
-    return windowUrlParts.length - 1;
-  }
+function findMaxIndexMatchedToWindowUrlParts(windowUrlParts: string[], urlParts: string[]) {
 
   for (let urlPartsIndex = 0; urlPartsIndex < urlParts.length; urlPartsIndex++) {
     for (let windowUrlPartsIndex = 0; windowUrlPartsIndex < windowUrlParts.length; windowUrlPartsIndex++) {
       const cleanedWindowUrlPart = windowUrlParts[windowUrlPartsIndex].split("#")[0];
       const cleanedUrlPart = urlParts[urlPartsIndex].split("#")[0];
-      if (cleanedUrlPart.length === 0 && cleanedWindowUrlPart.length === 0) {
-        // windowUrlParts = ["ui-components","#", "accordion"], and cleanedUrlPart = ["#"], we don't want it returns matched
-        break;
-      }
       if (cleanedUrlPart === cleanedWindowUrlPart) {
         return windowUrlPartsIndex;
       }
@@ -58,15 +50,14 @@ function findSubarrayIndex(windowUrlParts: string[], urlParts: string[]) {
 
 function getUrlWeight(windowUrl: string, linkHref: string) {
   const windowParts = decodeURIComponent(windowUrl).replace(/^\/#?/, "").split("/");
-  const linkParts = decodeURIComponent(linkHref).replace(/^\/#?/, "").split("/");
+  const linkParts = decodeURIComponent(linkHref).replace(/^\//, "").split("/");
 
-  let startIndex = findSubarrayIndex(windowParts, linkParts);
+  let startIndex = findMaxIndexMatchedToWindowUrlParts(windowParts, linkParts);
   if (startIndex === -1) {
     return -1;
   }
   // Weight should start with matched index on windowUrl. Ex: window.pathname="/ui-components/#/", linkHref="#/", Home menu should have higher weight than the rest
   let weight = startIndex;
-
 
   for (let i = 0; i < linkParts.length; i++) {
     const cleanedWindowPartStr = windowParts[startIndex].split("#")[0];
@@ -92,7 +83,7 @@ export function getMatchedLink(links: Element[], windowUrl: string) {
     ),
   );
   const maxWeight = Math.max(...weights);
-  if (weights.every(weight => weight === maxWeight)) {
+  if (weights.filter(weight => weight === maxWeight).length > 1) {
     // // If all weights are the same or duplicated and there are multiple links, return null
     return null;
   }
