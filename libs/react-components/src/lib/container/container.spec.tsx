@@ -10,6 +10,7 @@ describe("Container", () => {
         accent="thick"
         padding="relaxed"
         title={"Text title"}
+        width="content"
         mt="s"
         mr="m"
         mb="l"
@@ -30,6 +31,7 @@ describe("Container", () => {
     expect(el?.getAttribute("mr")).toBe("m");
     expect(el?.getAttribute("mb")).toBe("l");
     expect(el?.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("width")).toBe("content");
 
     expect(el?.querySelector("*[slot=title]")?.innerHTML).toContain("Text title");
     expect(
