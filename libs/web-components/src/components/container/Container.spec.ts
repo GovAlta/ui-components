@@ -13,13 +13,27 @@ describe("GoA Container", () => {
     });
 
     const title = document.querySelector(".title");
-    expect(title.innerHTML).toContain("Test Title");
+    expect(title?.innerHTML).toContain("Test Title");
 
     const content = document.querySelector(".content");
-    expect(content.innerHTML).toContain("Test Content");
+    expect(content?.innerHTML).toContain("Test Content");
 
     const actions = document.querySelector(".actions");
-    expect(actions.innerHTML).toContain("Test Actions");
+    expect(actions?.innerHTML).toContain("Test Actions");
+  });
+
+  describe("Widths", () => {
+    it(`should set the width`, async () => {
+      const baseElement = render(GoAContainer, {
+        testid: "container-test",
+        width: "content",
+      });
+      const container = await baseElement.findByTestId("container-test");
+
+      expect(container).toBeTruthy();
+      expect(container?.classList).toContain('width--content');
+
+    });
   });
 
   describe("Margins", () => {

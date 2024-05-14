@@ -25,15 +25,21 @@
     "relaxed",
     "compact",
   ]);
+  const [Widths, validateWidth] = typeValidator("Container width", [
+    "full",
+    "content",
+  ]);
 
   // Types
   type Type = (typeof Types)[number];
   type Accent = (typeof Accents)[number];
   type Padding = (typeof Paddings)[number];
+  type Width = (typeof Widths)[number];
 
   export let type: Type = "interactive";
   export let accent: Accent = "filled";
   export let padding: Padding = "relaxed";
+  export let width: Width = "full";
   export let testid: string = "";
 
   // margin
@@ -46,6 +52,7 @@
     validateType(type);
     validateAccent(accent);
     validatePadding(padding);
+    validateWidth(width);
   });
 </script>
 
@@ -59,6 +66,7 @@
     goa-container--${type}
     padding--${padding}
     accent--${accent}
+    width--${width}
   `}
 >
   <header class="heading--{accent}">
@@ -259,5 +267,9 @@
   .actions {
     display: flex;
     align-items: center;
+  }
+
+  .width--content {
+    flex-grow: 0;
   }
 </style>
