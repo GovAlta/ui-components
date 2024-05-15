@@ -1,92 +1,30 @@
 <svelte:options customElement="goa-tabs" />
 
 <script lang="ts">
-  import { onDestroy, onMount, tick } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { clamp, fromBoolean } from "../../common/utils";
+  import { GoATabProps } from "../tab/Tab.svelte";
 
   export let initialtab: number = 1; // 1-based
 
   // Private
+
   let _rootEl: HTMLElement;
-  let _tabs: Element[] = [];
   let _tabsEl: HTMLElement;
   let _panelEl: HTMLElement;
   let _currentTab: number = 1;
+
+  let _tabProps: GoATabProps[] = [];
+  let _bindTimeoutId: any;
 
   // ========
   // Hooks
   // ========
 
-  onMount(async () => {
-    // init listeners
+  onMount(() => {
+    getChildren();
     addKeyboardEventListeners();
-
-    // setup tabs
-    const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
-    if (slot) {
-      slot.addEventListener("slotchange", () => {
-        _tabs = slot.assignedElements();
-        bindTabs(_tabs);
-      });
-    } else {
-      // @ts-expect-error
-      _tabs = [..._rootEl.querySelectorAll("goa-tab")] as Element[]; // for unit tests
-      bindTabs(_tabs);
-    }
-
-    setTimeout(() => {
-      // HACK: this is done to get the initial tab set when using angular
-      setCurrentTab(+initialtab);
-    }, 1);
-    setCurrentTab(+initialtab);
   });
-
-  function bindTabs(tabs: Element[]) {
-    const path = window.location.pathname;
-
-    // create buttons (tabs) for each of the tab contents elements
-    tabs.forEach((tab, index) => {
-      // @ts-expect-error
-      let headingEl = [...tab.children].find(
-        (child) => child.getAttribute("slot") === "heading",
-      ) as HTMLElement;
-
-      let tabSlug: string;
-
-      if (headingEl) {
-        // slot exists
-        headingEl?.classList.add("tab");
-      } else {
-        // heading prop is set
-        const headingDataEl = (tab.shadowRoot || tab)?.querySelector(
-          "[data-heading]",
-        ) as HTMLElement;
-
-        const heading =
-          headingDataEl?.dataset["heading"] || tab.getAttribute("heading");
-        if (heading) {
-          headingEl = document.createElement("div");
-          headingEl.classList.add("tab");
-          headingEl.textContent = heading;
-          tabSlug = heading;
-        } 
-      }
-
-      tabSlug ||= "tab-" + index;
-      if (headingEl) {
-        const link = document.createElement("a");
-        link.setAttribute("id", `tab-${index + 1}`);
-        link.setAttribute("data-testid", `tab-${index + 1}`);
-        link.setAttribute("role", "tab");
-        link.setAttribute("href", path + "#" + tabSlug);
-        link.addEventListener("click", () => setCurrentTab(index + 1));
-        link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
-        link.appendChild(headingEl);
-
-        _tabsEl.appendChild(link);
-      }
-    });
-  }
 
   onDestroy(() => {
     removeKeyboardEventListeners();
@@ -95,6 +33,66 @@
   // =========
   // Functions
   // =========
+
+  function getChildren() {
+    _rootEl.addEventListener("tab:mounted", (e: Event) => {
+      const detail = (e as CustomEvent<GoATabProps>).detail;
+      _tabProps = [..._tabProps, detail];
+
+      if (_bindTimeoutId) {
+        clearTimeout(_bindTimeoutId);
+      }
+      _bindTimeoutId = setTimeout(() => {
+        bindChildren();
+        setCurrentTab(initialtab || 1);
+      });
+    });
+  }
+
+  function bindChildren() {
+    const path = window.location.pathname;
+
+    // create buttons (tabs) for each of the tab contents elements
+    _tabProps.forEach((tabProps, index) => {
+      let tabSlug: string = "";
+      let headingEl: HTMLElement;
+
+      // sync all tabs to open tab
+      tabProps.el.dispatchEvent(
+        new CustomEvent("tabs:set-open", {
+          composed: true,
+          detail: {
+            open: index + 1 === _currentTab,
+          },
+        }),
+      );
+
+      // create tabs
+      if (tabProps.headingType === "slot") {
+        headingEl = tabProps.heading as HTMLElement;
+      } else {
+        const heading = tabProps.heading as string;
+        headingEl = document.createElement("div");
+        headingEl.textContent = heading;
+        tabSlug = heading;
+      }
+
+      headingEl.classList.add("tab");
+      tabSlug ||= "tab-" + index;
+
+      // create tab link
+      const link = document.createElement("a");
+      link.setAttribute("id", `tab-${index + 1}`);
+      link.setAttribute("data-testid", `tab-${index + 1}`);
+      link.setAttribute("role", "tab");
+      link.setAttribute("href", path + "#" + tabSlug);
+      link.addEventListener("click", () => setCurrentTab(index + 1));
+      link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
+      link.appendChild(headingEl);
+
+      _tabsEl.appendChild(link);
+    });
+  }
 
   function addKeyboardEventListeners() {
     _rootEl.addEventListener("focus", handleKeydownEvents, true);
@@ -107,32 +105,37 @@
 
   function setCurrentTab(tab: number) {
     // prevent tab from exceeding limits
-    _currentTab = clamp(tab, 1, _tabs.length);
-
-    // HACK: this only exists due to the `setTimeout` on line , which is required to allow the
-    // initialtab to be properly set in Angular, causes null errors.
-    if (!_tabsEl) return;
+    _currentTab = clamp(tab, 1, _tabProps.length);
 
     let currentLocation = "";
-    // @ts-expect-error
     [..._tabsEl.querySelectorAll("[role=tab]")].map((el, index) => {
       const isCurrent = index + 1 === _currentTab; // currentTab is 1-based
-      _tabs[index].setAttribute("open", "false");
       el.setAttribute("aria-selected", fromBoolean(isCurrent));
       el.setAttribute("tabindex", isCurrent ? "0" : "-1");
       if (isCurrent) {
         currentLocation = (el as HTMLLinkElement).href;
+        // @ts-expect-error
         el.focus();
-        _tabs[index].setAttribute("open", "true"); // display tab content
       }
     });
+
+    for (const [i, props] of _tabProps.entries()) {
+      props.el.dispatchEvent(
+        new CustomEvent("tabs:set-open", {
+          composed: true,
+          detail: {
+            open: i + 1 === tab,
+          },
+        }),
+      );
+    }
 
     _panelEl.setAttribute("aria-labelledby", `tab-${_currentTab}`);
     _panelEl.setAttribute("id", `tabpanel-${_currentTab}`);
 
     // update the browswers url with the new hash
     if (currentLocation) {
-      document.location = currentLocation
+      document.location = currentLocation;
     }
   }
 
@@ -152,7 +155,7 @@
       case "ArrowUp":
       case "ArrowLeft":
         if (_currentTab === 1) {
-          setCurrentTab(_tabs.length);
+          setCurrentTab(_tabProps.length);
         } else {
           setCurrentTab(_currentTab - 1);
         }
@@ -160,7 +163,7 @@
         break;
       case "ArrowDown":
       case "ArrowRight":
-        if (_currentTab === _tabs.length) {
+        if (_currentTab === _tabProps.length) {
           setCurrentTab(1);
         } else {
           setCurrentTab(_currentTab + 1);
@@ -172,7 +175,7 @@
         isHandled = true;
         break;
       case "End":
-        setCurrentTab(_tabs.length);
+        setCurrentTab(_tabProps.length);
         isHandled = true;
         break;
       default:

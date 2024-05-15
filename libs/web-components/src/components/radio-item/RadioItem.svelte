@@ -1,7 +1,40 @@
-<svelte:options customElement="goa-radio-item"/>
+<svelte:options customElement={{
+  tag: "goa-radio-item",
+  props: {
+    value: { reflect: true },
+    label: { reflect: true },
+    description: { reflect: true },
+    checked: { reflect: true },
+    error: { reflect: true },
+    disabled: { reflect: true },
+    ariadescribedby: { reflect: true },
+    arialabel: { reflect: true },
+  }
+}}/>
+
+<script lang="ts" context="module">
+  export type GoARadioItemProps = {
+    el: HTMLElement,
+    value: string;
+    label: string;
+    description: string;
+    disabled: boolean;
+    error: boolean;
+    name: string;
+    checked: boolean;
+    ariaLabel: string;
+    ariaDescribedBy: string;
+  }
+
+  export type RadioItemSelectProps = {
+    checked: boolean;
+  }
+
+</script>
 
 <script lang="ts">
-  import {toBoolean} from "../../common/utils";
+  import { onMount } from "svelte";
+  import {fromBoolean, toBoolean} from "../../common/utils";
 
   export let value: string;
   export let label: string;
@@ -16,9 +49,60 @@
   let _radioItemEl: HTMLElement;
 
   // Reactive
+
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
+
+  // Hooks
+
+  onMount(() => {
+    dispatchInit();
+    addInitListener();
+    addSelectListener();
+  })
+
+  // Functions
+
+  function dispatchInit() {
+    setTimeout(() => {
+      _radioItemEl?.dispatchEvent(new CustomEvent<GoARadioItemProps>("radio-item:mounted", {
+        composed: true,
+        bubbles: true,
+        detail: {
+          el: _radioItemEl,
+          name,
+          value,
+          label,
+          description,
+          disabled: isDisabled,
+          error: isError,
+          checked: isChecked,
+          ariaLabel: arialabel,
+          ariaDescribedBy: ariadescribedby,
+        }
+      }))
+    }, 10)
+  }
+
+  function addInitListener() {
+    _radioItemEl.addEventListener("radio-group:init", (e: Event) => {
+      const data = (e as CustomEvent<GoARadioItemProps>).detail;
+      isDisabled = data.disabled;
+      error = fromBoolean(data.error);
+      checked = fromBoolean(data.checked);
+      description = data.description;
+      name = data.name;
+      arialabel = data.ariaLabel;
+      ariadescribedby = data.ariaDescribedBy;
+    })  
+  }
+
+  function addSelectListener() {
+    _radioItemEl.addEventListener("radio-group:select", (e: Event) => {
+      isChecked = (e as CustomEvent<RadioItemSelectProps>).detail.checked;
+    })
+  }
 
   function onChange() {
     if (isDisabled) return;

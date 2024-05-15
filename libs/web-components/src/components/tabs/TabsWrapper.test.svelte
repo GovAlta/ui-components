@@ -8,7 +8,7 @@
 
 <GoATabs {initialtab}>
   <goa-tab heading="Tab1">
-    Tab 1 content
+    Tab  content
   </goa-tab>
   <goa-tab>
     <div slot="heading">Tab2</div>
