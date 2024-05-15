@@ -7,7 +7,8 @@
   type Issue = {
     filename: string;
     error: string;
-  }
+  };
+  type FileSizeUnit = "B" | "KB" | "MB" | "GB";
 
   // Public
 
@@ -30,7 +31,6 @@
       "change",
       () => {
         issues = []; // reset on every new batch of files
-
         // @ts-expect-error
         [..._fileInput.files].forEach((file) => {
           const error = validate(file);
@@ -72,14 +72,21 @@
   }
 
   function isValidFileSize(file: File): boolean {
-    const [_, size, units] = maxfilesize.match(/(\d*)(\w*$)/);
-    const factor = {
+    const matches = maxfilesize.match(/(\d*)(\w*$)/);
+    if (!matches) {
+      return false;
+    }
+
+    const size = matches[1];
+    const units = matches[2];
+    const factor: Record<FileSizeUnit, number> = {
       B: 1,
       KB: 1024,
       MB: Math.pow(1024, 2),
       GB: Math.pow(1024, 3),
     };
-    if (file.size / factor[units] > parseInt(size)) {
+
+    if (file.size / factor[units as FileSizeUnit] > parseInt(size)) {
       return false;
     }
     return true;
@@ -111,16 +118,17 @@
     issues = []; // reset on every new batch of files
 
     if (e.dataTransfer?.items) {
-      // @ts-expect-error
       [...e.dataTransfer.items].forEach((item) => {
         if (item.kind === "file") {
           const file = item.getAsFile();
-          const error = validate(file);
-          if (error) {
-            issues = [{ filename: file.name, error }, ...issues];
-            return;
+          if (file) {
+            const error = validate(file);
+            if (error) {
+              issues = [{ filename: file.name, error }, ...issues];
+              return;
+            }
+            dispatch(file);
           }
-          dispatch(item.getAsFile());
         }
       });
     } else {
@@ -213,7 +221,7 @@
     </goa-button>
 
     {#if maxfilesize}
-      <em class="max-file-size"  data-testid="max-file-size">
+      <em class="max-file-size" data-testid="max-file-size">
         Maximum file size is {maxfilesize}.
       </em>
     {/if}
