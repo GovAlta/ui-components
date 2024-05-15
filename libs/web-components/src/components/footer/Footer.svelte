@@ -15,9 +15,8 @@
     await tick();
     const navSlot = rootEl.querySelector("slot[name=nav]") as HTMLSlotElement;
     const metaSlot = rootEl.querySelector("slot[name=meta]") as HTMLSlotElement;
-
-    navLinks = navSlot?.assignedElements();
     metaLinks = metaSlot?.assignedElements();
+    navLinks = navSlot?.assignedElements();
   });
 </script>
 
@@ -31,7 +30,7 @@
       <slot name="nav" />
     </div>
 
-    {#if navLinks && navLinks.length > 0}
+    {#if navLinks?.length > 0}
       <goa-divider spacing="small" />
     {/if}
 
