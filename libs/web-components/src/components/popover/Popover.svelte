@@ -1,10 +1,17 @@
-<svelte:options customElement="goa-popover" />
+<svelte:options
+  customElement={{
+    tag: "goa-popover",
+    props: {
+      open: { reflect: true, type: "String" },
+    },
+  }}
+/>
 
 <!-- Script -->
 <script lang="ts">
   import { onMount, tick } from "svelte";
   import { calculateMargin } from "../../common/styling";
-  import { cssVar, toBoolean } from "../../common/utils";
+  import { cssVar, getSlottedChildren, toBoolean } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
   // Public
@@ -79,15 +86,7 @@
     await tick();
     _targetEl.addEventListener("keydown", onTargetEvent);
 
-    const slot = _targetEl.querySelector("slot");
-    let children: Element[];
-    if (slot) {
-      children = slot.assignedElements();
-    } else {
-      // for unit tests only
-      // @ts-expect-error
-      children = [..._targetEl.children] as Element[];
-    }
+    const children = getSlottedChildren(_targetEl);
 
     _initFocusedEl =
       (children.find(
