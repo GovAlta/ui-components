@@ -1,3 +1,18 @@
+export function getSlottedChildren(rootEl?: HTMLElement, parentTestSelector?: string): Element[] {
+  const slot = rootEl?.querySelector("slot");
+  if (slot) {
+    return slot.assignedElements();
+  } else {
+    // for unit tests only
+    if (parentTestSelector) {
+      // @ts-expect-error testing
+      return [...rootEl.querySelector(parentTestSelector).children] as Element[];
+    }
+    // @ts-expect-error testing
+    return [...rootEl.children] as Element[];
+  }
+}
+
 export function toBoolean(value: string): boolean {
   // this is how false will need to be represented
   if (value === "false") {

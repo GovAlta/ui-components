@@ -3,7 +3,7 @@
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
-  import { toBoolean, typeValidator } from "../../common/utils";
+  import { getSlottedChildren, toBoolean, typeValidator } from "../../common/utils";
   import { onDestroy, onMount, tick } from "svelte";
 
   type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
@@ -32,8 +32,8 @@
 
   let _rootEl: HTMLElement | null = null;
   let _scrollPos: "top" | "middle" | "bottom" = "top";
-  let _scrollEl: HTMLElement | null = null;
-  let _headerEl: HTMLElement | null = null;
+  let _scrollEl: HTMLElement | undefined;
+  let _headerEl: HTMLElement | undefined;
   let _isOpen: boolean = false;
   let _requiresTopPadding: boolean;
   let _actionsHeight: number;
@@ -78,7 +78,7 @@
     _requiresTopPadding =
       !!_headerEl?.querySelector("div.modal-title")?.textContent ||
       !!_headerEl?.querySelector("div.modal-close") ||
-      getChildren().length > 0;
+      getSlottedChildren(_headerEl).length > 0;
   }
 
   $: _transitionTime =
@@ -165,16 +165,6 @@
     }
 
     _scrollPos = "middle";
-  }
-
-  function getChildren(): Element[] {
-    const slot = _headerEl?.querySelector("slot") as HTMLSlotElement;
-    if (slot) {
-      return [...slot.assignedElements()];
-    } else {
-      // @ts-expect-error
-      return [..._headerEl.children] as Element[]; // unit tests
-    }
   }
 </script>
 
