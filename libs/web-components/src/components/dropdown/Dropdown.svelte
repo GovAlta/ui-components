@@ -279,7 +279,9 @@
     await tick();
     syncFilteredOptions();
     if (_filteredOptions.length === 1) {
-      dispatchValue(_filteredOptions[0].value);
+      const option = _filteredOptions[0];
+      dispatchValue(option.value);
+      _selectedOption = option;
       setTimeout(() => {
         hideMenu();
       }, 100);
