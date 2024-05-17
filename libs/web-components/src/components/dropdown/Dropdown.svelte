@@ -249,6 +249,7 @@
       : { name, value: value };
 
     setTimeout(() => {
+      if (!_isDirty) return;
       _rootEl?.dispatchEvent(
         new CustomEvent("_change", { composed: true, detail }),
       );
@@ -262,8 +263,8 @@
 
   function onSelect(option: Option) {
     if (_disabled) return;
+  
     if (!_native) {
-      _isDirty = true;
       hideMenu();
       _selectedOption = option;
       syncFilteredOptions();
@@ -336,7 +337,6 @@
   class ComboboxKeyUpHandler implements EventHandler {
     constructor(private input: HTMLInputElement) {
       input.addEventListener("blur", async (e) => {
-        if (!_isDirty) return;
         if (!_filterable) return;
 
         const input = e.target as HTMLInputElement;
@@ -361,6 +361,7 @@
     onEnter(e: KeyboardEvent) {
       const option = _filteredOptions[_highlightedIndex];
       if (option) {
+        _isDirty = true;
         onSelect(option);
       }
 
@@ -414,6 +415,9 @@
             this.input.value.length,
             this.input.value.length,
           );
+          break;
+        case "Tab":
+          // ignore tab
           break;
         default:
           this.onKeyUp(e);
@@ -638,7 +642,10 @@
               data-value={option.value}
               role="option"
               style="display: block"
-              on:click={() => onSelect(option)}
+              on:click={() => {
+                _isDirty = true;
+                onSelect(option);
+              }}
             >
               {option.label || option.value}
             </li>
