@@ -2,11 +2,8 @@
   tag: "goa-radio-item",
   props: {
     value: { reflect: true },
-    label: { reflect: true },
     description: { reflect: true },
     checked: { reflect: true },
-    error: { reflect: true },
-    disabled: { reflect: true },
     ariadescribedby: { reflect: true },
     arialabel: { reflect: true },
   }
