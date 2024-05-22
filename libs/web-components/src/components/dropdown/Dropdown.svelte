@@ -97,7 +97,7 @@
     _options = getOptions();
 
     if (!_native) {
-      _inputEl.value = _options.find((o) => o.value === value)?.label ?? "";
+      setDisplayedValue();
 
       if (width) {
         _width = width;
