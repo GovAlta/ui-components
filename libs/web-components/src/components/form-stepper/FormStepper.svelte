@@ -39,6 +39,8 @@
   // calculated y distance (px) between each step point
   let _stepHeight: number;
 
+  let _stepType: "free" | "constrained" | undefined;
+
   // allow css calculations for mobile view
   let _progressHeight: number;
 
@@ -81,6 +83,8 @@
   // =====
 
   onMount(() => {
+    _stepType = +step === -1 ? "free" : "constrained";
+  
     getChildren();
 
     // observer required to allow the parent to relay resize info down to the children, as the
@@ -133,7 +137,7 @@
         ariaLabel: `Step ${stepIndex} of ${_stepEls.length}`,
         childIndex: stepIndex,
         current: stepIndex === 1,
-        enabled: stepIndex <= step || step === -1,
+        enabled: stepIndex <= step || _stepType === "free",
       };
 
       el.dispatchEvent(
