@@ -107,9 +107,12 @@
     cursor: pointer;
     transition:
       background-color 100ms ease-in,
-      transform 100ms ease-in;
+      transform 100ms ease-in-out;
   }
 
+  button:active {
+    transform: translateY(2px);
+  }
   button:hover {
     outline: none;
   }
