@@ -39,6 +39,8 @@ export class GoABFileUploadInput {
   @Input() mb?: Spacing;
   @Input() mr?: Spacing;
   @Input() ml?: Spacing;
+  @Input() variant?: GoABFileUploadInputVariant;
+  @Input() maxFileSize?: string;
 
   @Output() onSelectFile = new EventEmitter<GoABFileUploadInputOnSelectFileDetail>();
 
