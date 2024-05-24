@@ -1,0 +1,94 @@
+<h1>Container</h1>
+
+
+Dynamic GoABlock
+<goab-block>
+  <div style="background: lightblue; padding: 1rem" *ngFor="let user of users">
+    {{user}}
+  </div>
+</goab-block>
+
+
+<h2>Basic</h2>
+<goab-container type="interactive" accent="thick">
+  <h2>Detach to use</h2>
+  + Add things inside me
+</goab-container>
+
+<h2>Large accent bar</h2>
+<goab-container accent="thick">
+  <h2>Heading</h2>
+  Content
+</goab-container>
+
+<h2>Small accent bar</h2>
+<goab-container accent="thin">
+  <h2>Heading</h2>
+  Content
+</goab-container>
+
+<h2>Accent bar with text</h2>
+<goab-container accent="thick">
+  <div slot="actions">
+    <goab-button type="secondary" size="compact">Edit</goab-button>
+  </div>
+  <div slot="title">Group Heading</div>
+  <h2>Heading</h2>
+  Content
+</goab-container>
+
+<h2>Heading with text only</h2>
+<goab-container accent="thick">
+  <h2>Heading</h2>
+  Content
+  <div slot="actions">
+    <goab-badge type="success" content="Badge Text"></goab-badge>
+  </div>
+  <div slot="title">Group Heading</div>
+</goab-container>
+
+<h2>Nested</h2>
+<goab-container>
+  <div slot="title">The container title</div>
+  <div slot="actions">
+    <goab-button type="primary" size="compact">Assign to me</goab-button>
+  </div>
+  <h2>Custom H2</h2>
+  <goab-container accent="thin">
+    <div>This is a sub container</div>
+  </goab-container>
+</goab-container>
+
+<h2>Interactive</h2>
+<goab-container accent="thick">
+  <div slot="actions">
+    <goab-button type="secondary" size="compact">Assign to me</goab-button>
+  </div>
+  <div slot="title">The container title</div>
+  <h2>Heading</h2>
+  Content
+</goab-container>
+
+<h2>Non-interactive</h2>
+<goab-container type="non-interactive">
+  <h2>Heading</h2>
+  Content
+</goab-container>
+
+<h2>Relaxed Padding</h2>
+<goab-container padding="relaxed">
+  <h2>Heading</h2>
+  Content
+</goab-container>
+
+<h2>Compact Padding</h2>
+<goab-container padding="compact">
+  <h2>Heading</h2>
+  Content
+</goab-container>
+
+<h2>Margin Spacing</h2>
+<goab-container mt="m" mb="xs" ml="xl" mr="2xl">
+  <h2>Detach to use</h2>
+  + Add things inside me
+</goab-container>

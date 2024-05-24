@@ -15,13 +15,11 @@ import {
   selector: "goab-modal",
   template: `
     <goa-modal
-      [attr.calloutvariant]="calloutVariant"
-      [attr.open]="open"
-      [attr.maxwidth]="maxWidth"
-      [attr.data-testid]="testId"
-      [attr.role]="role"
-      [attr.closable]="closable"
-      [attr.transition]="transition"
+      [calloutvariant]="calloutVariant"
+      [open]="open"
+      [maxwidth]="maxWidth"
+      [closable]="closable"
+      [transition]="transition"
       (_close)="_onClose()"
     >
       <ng-content></ng-content>
