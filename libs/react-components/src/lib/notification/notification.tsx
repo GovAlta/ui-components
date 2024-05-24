@@ -1,21 +1,11 @@
+import { ABGovAriaLiveType, ABGovNotificationType } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-
-export type GoANotificationType =
-  | "important"
-  | "information"
-  | "event"
-  | "emergency";
-
-export type GoAAriaLiveType = "polite" | "assertive" | "off";
-
-export type NotificationType = GoANotificationType;
-export type AriaLiveType = GoAAriaLiveType;
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
-  type: GoANotificationType;
+  type: ABGovNotificationType;
   maxcontentwidth?: string;
-  arialive?: GoAAriaLiveType;
+  arialive?: ABGovAriaLiveType;
 }
 
 declare global {
@@ -27,23 +17,23 @@ declare global {
   }
 }
 
-export interface GoANotificationProps {
-  type?: GoANotificationType;
-  ariaLive?: GoAAriaLiveType;
+export interface ABGovNotificationProps {
+  type?: ABGovNotificationType;
+  ariaLive?: ABGovAriaLiveType;
   maxContentWidth?: string;
   children?: React.ReactNode;
   onDismiss?: () => void;
   testId?: string;
 }
 
-export const GoANotification = ({
+export const ABGovNotification = ({
   type = "information",
   ariaLive,
   maxContentWidth,
   children,
   testId,
   onDismiss,
-}: GoANotificationProps) => {
+}: ABGovNotificationProps) => {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -74,4 +64,4 @@ export const GoANotification = ({
   );
 }
 
-export default GoANotification;
+export default ABGovNotification;

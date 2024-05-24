@@ -1,19 +1,19 @@
 import { render } from "@testing-library/react";
-import { GoATab } from "../tab/tab";
-import GoATabs from "./tabs";
+import { ABGovTab } from "../tab/tab";
+import ABGovTabs from "./tabs";
 
 describe("Tabs", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoATabs testId="foo" initialTab={1}>
-        <GoATab heading="Profile">
+      <ABGovTabs>
+        <ABGovTab heading="Profile">
           <p>
             <b>Profile:</b> Lorem ipsum dolor sit amet, consectetur adipiscing
             elit, sed do eiusmod tempor incididunt ut labore et dolore magna
             aliqua.
           </p>
-        </GoATab>
-      </GoATabs>
+        </ABGovTab>
+      </ABGovTabs>
     );
     const el = baseElement.querySelector("goa-tabs");
     expect(el).toBeTruthy();

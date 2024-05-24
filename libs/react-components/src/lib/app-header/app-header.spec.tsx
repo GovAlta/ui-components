@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
-import { GoAAppHeader } from "./app-header";
+import { ABGovAppHeader } from "./app-header";
 
-describe("GoAAppHeader", () => {
+describe("ABGovAppHeader", () => {
   it("should render", () => {
     const { baseElement } = render(
-      <GoAAppHeader heading="Test heading" url="test" />
+      <ABGovAppHeader heading="Test heading" url="test" />
     );
 
     const header = baseElement.querySelector("goa-app-header");

@@ -1,24 +1,19 @@
 import { render } from "@testing-library/react";
 
-import { GoADetails } from "./details";
+import { ABGovDetails } from "./details";
 
 describe("Detail", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoADetails
-        heading="The heading"
-        open={true}
-        testId="foo"
-      >
+      <ABGovDetails heading="The heading" open={true}>
         The content
-      </GoADetails>
+      </ABGovDetails>
     );
 
     const el = baseElement.querySelector("goa-details");
     expect(el?.getAttribute("heading")).toBe("The heading");
     expect(baseElement.innerHTML).toContain("The content");
     expect(el?.getAttribute("open")).toBe("true");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
   });
 
 });

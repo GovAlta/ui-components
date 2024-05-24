@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
+import { ABGovDatePickerOnChangeDetail, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
@@ -20,17 +20,17 @@ declare global {
   }
 }
 
-export interface GoADatePickerProps extends Margins {
+export interface ABGovDatePickerProps extends Margins {
   name?: string;
   value?: Date;
   error?: boolean;
   min?: Date;
   max?: Date;
   testId?: string;
-  onChange: (name: string, value: Date) => void;
+  onChange: (detail: ABGovDatePickerOnChangeDetail) => void;
 }
 
-export function GoADatePicker({
+export function ABGovDatePicker({
   name,
   value,
   error,
@@ -42,8 +42,9 @@ export function GoADatePicker({
   mb,
   ml,
   onChange,
-}: GoADatePickerProps): JSX.Element {
+}: ABGovDatePickerProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     if (!ref.current) {
       return;
@@ -51,7 +52,8 @@ export function GoADatePicker({
     const current = ref.current;
 
     const handleChange = (e: Event) => {
-      onChange(name || "", (e as CustomEvent).detail.value);
+      const detail = (e as CustomEvent<ABGovDatePickerOnChangeDetail>).detail;
+      onChange(detail);
     }
 
     current.addEventListener("_change", handleChange);
@@ -78,4 +80,4 @@ export function GoADatePicker({
   );
 }
 
-export default GoADatePicker;
+export default ABGovDatePicker;

@@ -12,7 +12,8 @@
     "module": "esnext",
     "lib": [
       "es2020",
-      "dom"
+      "dom",
+      "dom.iterable"
     ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
@@ -23,6 +24,9 @@
       ],
       "@abgov/react-components": [
         "libs/react-components/src/index.ts"
+      ],
+      "@abgov/ui-components-common": [
+        "libs/common/src/index.ts"
       ],
       "@abgov/style": [
         "dist/libs/web-components/index.css"

@@ -1,16 +1,16 @@
 import { render } from "@testing-library/react";
 import { fireEvent, screen } from "@testing-library/dom";
-import GoAButton, { ButtonSize, ButtonType } from "./button";
+import ABGovButton, { ButtonSize, ButtonType } from "./button";
 import { describe, it, expect, vi } from "vitest";
 
-describe("GoA Button", () => {
+describe("ABGov Button", () => {
   const buttonText = "Test Title";
 
   const noop = () => { /* do nothing */ };
 
   it("should render the properties", () => {
     const { container } = render(
-      <GoAButton
+      <ABGovButton
         disabled={true}
         type="primary"
         size="compact"
@@ -40,7 +40,7 @@ describe("GoA Button", () => {
 
   it("should render content", () => {
     const { baseElement } = render(
-      <GoAButton onClick={() => { /* do nothing */ }}>{buttonText}</GoAButton>
+      <ABGovButton onClick={() => { /* do nothing */ }}>{buttonText}</ABGovButton>
     );
 
     expect(baseElement).toBeTruthy();
@@ -51,9 +51,9 @@ describe("GoA Button", () => {
     (["compact", "normal"] as const).forEach((size: ButtonSize) => {
       it(`should render ${size} size`, async () => {
         const { container } = render(
-          <GoAButton size={size} onClick={noop}>
+          <ABGovButton size={size} onClick={noop}>
             Button
-          </GoAButton>
+          </ABGovButton>
         );
 
         const button = container.querySelector("goa-button");
@@ -68,9 +68,9 @@ describe("GoA Button", () => {
       (type: ButtonType) => {
         it(`should render ${type} type`, async () => {
           const { container } = render(
-            <GoAButton type={type} onClick={noop}>
+            <ABGovButton type={type} onClick={noop}>
               Button
-            </GoAButton>
+            </ABGovButton>
           );
           const button = container.querySelector("goa-button");
 
@@ -84,7 +84,7 @@ describe("GoA Button", () => {
   it("responds to events", async () => {
     const onClick = vi.fn();
     const { container } = render(
-      <GoAButton onClick={onClick}>Button</GoAButton>
+      <ABGovButton onClick={onClick}>Button</ABGovButton>
     );
     const button = container.querySelector("goa-button");
     expect(button).toBeTruthy();

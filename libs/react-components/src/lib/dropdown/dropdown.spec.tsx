@@ -1,17 +1,17 @@
 import { render, cleanup, fireEvent, waitFor } from "@testing-library/react";
-import { GoADropdown } from "./dropdown";
-import { GoADropdownItem, GoADropdownOption } from "./dropdown-item";
+import { ABGovDropdown } from "./dropdown";
+import { ABGovDropdownItem, ABGovDropdownOption } from "./dropdown-item";
 import { describe, it, expect, vi } from "vitest";
 
 afterEach(cleanup);
 
-describe("GoADropdown", () => {
-  it("should inform the user that GoADropdownOption is deprecated", async () => {
+describe("ABGovDropdown", () => {
+  it("should inform the user that ABGovDropdownOption is deprecated", async () => {
     const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
     render(
-      <GoADropdown onChange={() => { /* do nothing */ }}>
-        <GoADropdownOption value="foo" />
-      </GoADropdown>
+      <ABGovDropdown onChange={() => { /* do nothing */ }}>
+        <ABGovDropdownOption value="foo" />
+      </ABGovDropdown>
     );
 
     await waitFor(() => {
@@ -23,7 +23,7 @@ describe("GoADropdown", () => {
 
   it("should bind all web-component attributes", async () => {
     const { baseElement } = render(
-      <GoADropdown
+      <ABGovDropdown
         leadingIcon="color-wand"
         name="favColor"
         value={[""]}
@@ -43,10 +43,10 @@ describe("GoADropdown", () => {
         ariaLabelledBy={"foo-dropdown-label"}
         onChange={() => { /* do nothing */ }}
       >
-        <GoADropdownItem name="favColor" label="Red" value="red" />
-        <GoADropdownItem name="favColor" label="Blue" value="blue" />
-        <GoADropdownItem name="favColor" label="Yellow" value="yellow" />
-      </GoADropdown>
+        <ABGovDropdownItem name="favColor" label="Red" value="red" />
+        <ABGovDropdownItem name="favColor" label="Blue" value="blue" />
+        <ABGovDropdownItem name="favColor" label="Yellow" value="yellow" />
+      </ABGovDropdown>
     );
 
     const el = baseElement.querySelector("goa-dropdown");
@@ -65,11 +65,11 @@ describe("GoADropdown", () => {
     const fn = vi.fn();
 
     const { baseElement } = render(
-      <GoADropdown name="favColor" value="yellow" onChange={fn} native={true}>
-        <GoADropdownItem name="favColor" label="Red" value="red" />
-        <GoADropdownItem name="favColor" label="Blue" value="blue" />
-        <GoADropdownItem name="favColor" label="Yellow" value="yellow" />
-      </GoADropdown>
+      <ABGovDropdown name="favColor" value="yellow" onChange={fn} native={true}>
+        <ABGovDropdownItem name="favColor" label="Red" value="red" />
+        <ABGovDropdownItem name="favColor" label="Blue" value="blue" />
+        <ABGovDropdownItem name="favColor" label="Yellow" value="yellow" />
+      </ABGovDropdown>
     );
 
     const el = baseElement.querySelector("goa-dropdown");
@@ -82,7 +82,7 @@ describe("GoADropdown", () => {
       })
     );
     await waitFor(() => {
-      expect(fn).toBeCalledWith("favColor", "blue");
+      expect(fn).toBeCalledWith({ name: "favColor", value: "blue" });
     });
   });
 });

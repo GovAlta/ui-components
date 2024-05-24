@@ -1,3 +1,5 @@
+import { ABGovLinkTarget, ABGovServiceLevel } from "@abgov/ui-components-common";
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
@@ -8,35 +10,26 @@ declare global {
   }
 }
 
-export type GoAServiceLevel = "alpha" | "beta" | "live";
-export type GoALinkTarget = "self" | "blank";
-
-// leagcy type name
-export type ServiceLevel = GoAServiceLevel;
-
 interface WCProps {
-  type: GoAServiceLevel;
+  type: ABGovServiceLevel;
   version?: string;
   feedbackurl?: string;
   maxcontentwidth?: string;
-  feedbackurltarget?: GoALinkTarget
-  headerurltarget?: GoALinkTarget;
+  feedbackurltarget?: ABGovLinkTarget
+  headerurltarget?: ABGovLinkTarget;
 }
 
-export interface GoAHeaderProps {
-  type: GoAServiceLevel;
+export interface ABGovHeaderProps {
+  type: ABGovServiceLevel;
   version?: string;
   feedbackUrl?: string;
   testId?: string;
   maxContentWidth?: string;
-  feedbackUrlTarget?: GoALinkTarget;
-  headerUrlTarget?: GoALinkTarget;
+  feedbackUrlTarget?: ABGovLinkTarget;
+  headerUrlTarget?: ABGovLinkTarget;
 }
 
-// legacy name
-export type HeaderProps = GoAHeaderProps;
-
-export function GoAMicrositeHeader({
+export function ABGovMicrositeHeader({
   type,
   version,
   feedbackUrl,
@@ -44,7 +37,7 @@ export function GoAMicrositeHeader({
   feedbackUrlTarget,
   headerUrlTarget,
   testId,
-}: GoAHeaderProps): JSX.Element {
+}: ABGovHeaderProps): JSX.Element {
   return (
     <goa-microsite-header
       type={type}
@@ -58,4 +51,4 @@ export function GoAMicrositeHeader({
   );
 }
 
-export default GoAMicrositeHeader;
+export default ABGovMicrositeHeader;

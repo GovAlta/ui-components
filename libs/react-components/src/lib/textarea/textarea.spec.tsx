@@ -1,11 +1,11 @@
 import { fireEvent, render } from "@testing-library/react";
-import GoATextArea from "./textarea";
+import ABGovTextArea from "./textarea";
 import { describe, it, expect, vi } from "vitest";
 
 describe("TextArea", () => {
   it("renders the text area", async () => {
     render(
-      <GoATextArea
+      <ABGovTextArea
         testId="textarea-testid"
         name="textarea-name"
         value="textarea-value"
@@ -41,7 +41,7 @@ describe("TextArea", () => {
     const newValue = "new-value";
 
     render(
-      <GoATextArea
+      <ABGovTextArea
         testId="textarea-testid"
         name="textarea-name"
         value="textarea-value"

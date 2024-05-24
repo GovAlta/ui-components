@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
-import GoASpinner, { SpinnerSize } from "./spinner";
+import ABGovSpinner, { SpinnerSize } from "./spinner";
 
 describe("Spinner", () => {
   (["small", "medium", "large", "xlarge"] as const).forEach((size: SpinnerSize) => {
     it(`renders the ${size} spinner`, async () => {
       render(
-        <GoASpinner
+        <ABGovSpinner
           type="progress"
           size={size}
           invert

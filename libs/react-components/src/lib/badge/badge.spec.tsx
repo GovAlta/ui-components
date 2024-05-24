@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
-import { GoABadge } from "./badge";
+import { ABGovBadge } from "./badge";
 import { screen } from "@testing-library/dom";
 
-describe("GoA Badge", () => {
+describe("ABGov Badge", () => {
   it("should render", () => {
     render(
-      <GoABadge type="information" testId="badge-test" content="Text Content" />
+      <ABGovBadge type="information" testId="badge-test" content="Text Content" />
     );
 
     const badge = screen.findByTestId("badge-test");
@@ -14,7 +14,7 @@ describe("GoA Badge", () => {
 
   it("should render the properties", () => {
     const { container } = render(
-      <GoABadge
+      <ABGovBadge
         type="information"
         content="Text Content"
         mt="s"

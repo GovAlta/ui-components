@@ -1,14 +1,14 @@
 import { render, waitFor } from "@testing-library/react";
 
 import {
-  GoACircularProgress,
+  ABGovCircularProgress,
   CircularProgressVariant,
 } from "./circular-progress";
 
 describe("CircularProgress", () => {
   it("does not render anything when not visible", async () => {
     const { baseElement } = render(
-      <GoACircularProgress
+      <ABGovCircularProgress
         variant="inline"
         message="the message"
         visible={false}
@@ -23,7 +23,7 @@ describe("CircularProgress", () => {
     [-1, 50].forEach((progress: number) => {
       it(`renders the ${variant} variant`, async () => {
         const { baseElement } = render(
-          <GoACircularProgress
+          <ABGovCircularProgress
             progress={progress}
             variant={variant}
             message="the message"

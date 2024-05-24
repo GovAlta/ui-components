@@ -1,5 +1,5 @@
+import { Margins } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
-import { Margins } from "../../common/styling";
 
 interface WCProps extends Margins {
   heading: string;
@@ -17,16 +17,14 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoADetailsProps extends Margins {
+export interface ABGovDetailsProps extends Margins {
   heading: string;
   open?: boolean;
   testId?: string;
   children: ReactNode;
 }
 
-export type DetailsProps = GoADetailsProps;
-
-export function GoADetails(props: GoADetailsProps) {
+export function ABGovDetails(props: ABGovDetailsProps) {
   return (
     <goa-details
       heading={props.heading}
@@ -42,4 +40,4 @@ export function GoADetails(props: GoADetailsProps) {
   );
 }
 
-export default GoADetails;
+export default ABGovDetails;

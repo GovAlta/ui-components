@@ -10,15 +10,12 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoAAppFooterMetaSectionProps {
+export interface ABGovAppFooterMetaSectionProps {
   testId?: string;
   children?: ReactNode;
 }
 
-// legacy name
-export type FooterMetaSectionProps = GoAAppFooterMetaSectionProps;
-
-export function GoAAppFooterMetaSection({ testId, children }: GoAAppFooterMetaSectionProps) {
+export function ABGovAppFooterMetaSection({ testId, children }: ABGovAppFooterMetaSectionProps) {
   return (
     <goa-app-footer-meta-section
       data-testid= {testId}
@@ -29,4 +26,4 @@ export function GoAAppFooterMetaSection({ testId, children }: GoAAppFooterMetaSe
   );
 }
 
-export default GoAAppFooterMetaSection;
+export default ABGovAppFooterMetaSection;

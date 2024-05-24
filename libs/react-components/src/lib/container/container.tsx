@@ -1,22 +1,22 @@
+import { ABGovContainerAccent, ABGovContainerPadding, ABGovContainerType, Margins } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
-import { Margins } from "../../common/styling";
 
-export type GoAContainerType =
+export type GoABContainerType =
   | "interactive"
   | "non-interactive"
   | "info"
   | "error"
   | "success"
   | "important";
-export type GoAContainerAccent = "thick" | "thin" | "filled";
-export type GoAContainerPadding = "relaxed" | "compact";
-export type GoAContainerWidth = "full" | "content";
+export type GoABContainerAccent = "thick" | "thin" | "filled";
+export type GoABContainerPadding = "relaxed" | "compact";
+export type GoABContainerWidth = "full" | "content";
 
 interface WCProps extends Margins {
-  type?: GoAContainerType;
-  accent?: GoAContainerAccent;
-  padding?: GoAContainerPadding;
-  width?: GoAContainerWidth;
+  type?: ABGovContainerType;
+  accent?: ABGovContainerAccent;
+  padding?: ABGovContainerPadding;
+  width?: GoABContainerWidth;
 }
 
 declare global {
@@ -28,19 +28,19 @@ declare global {
   }
 }
 
-export interface GoAContainerProps extends Margins {
-  accent?: GoAContainerAccent;
-  type?: GoAContainerType;
+export interface ABGovContainerProps extends Margins {
+  accent?: ABGovContainerAccent;
+  type?: ABGovContainerType;
   heading?: ReactNode;
   title?: ReactNode;
-  padding?: GoAContainerPadding;
+  padding?: ABGovContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
-  width?: GoAContainerWidth;
+  width?: GoABContainerWidth;
   testId?: string;
 }
 
-export function GoAContainer({
+export function ABGovContainer({
   accent,
   heading,
   title,
@@ -54,7 +54,7 @@ export function GoAContainer({
   mb,
   ml,
   testId,
-}: GoAContainerProps): JSX.Element {
+}: ABGovContainerProps): JSX.Element {
   const headingContent = heading || title;
   return (
     <goa-container
@@ -75,4 +75,4 @@ export function GoAContainer({
   );
 }
 
-export default GoAContainer;
+export default ABGovContainer;
