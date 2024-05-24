@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import GoAButton from "../../lib/button/button";
-import { GoAModal } from "./modal";
+import GoABButton from "../../lib/button/button";
+import { GoABModal } from "./modal";
 
 describe("Modal Tests", () => {
   it("Modal - should render with close capability via icon and background", async () => {
@@ -8,14 +8,21 @@ describe("Modal Tests", () => {
       heading: "Modal Heading",
       open: true,
       maxWidth: "500px",
-      role: "alertdialog",
-      actions: <GoAButton onClick={() => { /* do nothing */ }}>Close</GoAButton>,
-      onClose: () => { /* do nothing */ },
+      actions: (
+        <GoABButton
+          onClick={() => {
+            /* do nothing */
+          }}
+        >
+          Close
+        </GoABButton>
+      ),
+      onClose: () => {
+        /* do nothing */
+      },
     };
 
-    const { baseElement } = render(
-      <GoAModal {...props}>Modal Content</GoAModal>
-    );
+    const { baseElement } = render(<GoABModal {...props}>Modal Content</GoABModal>);
     const modal = baseElement.querySelector("goa-modal");
     const actionContent = modal?.querySelector("[slot='actions']");
     const heading = modal?.querySelector("[slot='heading']");

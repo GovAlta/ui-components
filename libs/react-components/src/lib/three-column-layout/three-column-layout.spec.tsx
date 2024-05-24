@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import ThreeColumnLayout from "./three-column-layout";
-import { GoAAppHeader } from "../app-header/app-header";
-import { GoAAppFooter } from "../footer/footer";
+import { GoABAppHeader } from "../app-header/app-header";
+import { GoABAppFooter } from "../footer/footer";
 
 const Links = () => (
   <>
@@ -23,39 +23,39 @@ describe("ThreeColumnLayout", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
       <ThreeColumnLayout
-        header={<GoAAppHeader />}
-        footer={<GoAAppFooter />}
+        header={<GoABAppHeader />}
+        footer={<GoABAppFooter />}
         nav={<Links />}
         sideMenu={<SideMenu />}
       >
         <h1>Heading</h1>
         <p>
-          Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
-          cillum sint consectetur cupidatat.
+          Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint
+          consectetur cupidatat.
         </p>
-      </ThreeColumnLayout>
+      </ThreeColumnLayout>,
     );
     expect(baseElement).toBeTruthy();
     expect(baseElement.innerHTML).toContain(
-      "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
+      "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
     );
     expect(baseElement.innerHTML).toContain("<goa-app-header>");
     expect(baseElement.innerHTML).toContain("<goa-app-footer>");
     expect(baseElement.querySelectorAll("[slot=nav] a").length).toEqual(5);
 
-    expect(
-      baseElement?.querySelector("[slot=side-menu] h2")?.innerHTML
-    ).toContain("Side Menu");
+    expect(baseElement?.querySelector("[slot=side-menu] h2")?.innerHTML).toContain(
+      "Side Menu",
+    );
     expect(baseElement?.querySelector("[slot=side-menu] p")?.innerHTML).toContain(
-      "Add content."
+      "Add content.",
     );
   });
 
   it("should render leftColumnWidth, rightColumnWidth, maxContentWidth accordingly", () => {
     const { baseElement } = render(
       <ThreeColumnLayout
-        header={<GoAAppHeader />}
-        footer={<GoAAppFooter />}
+        header={<GoABAppHeader />}
+        footer={<GoABAppFooter />}
         nav={<Links />}
         sideMenu={<SideMenu />}
         leftColumnWidth="20%"
@@ -64,15 +64,13 @@ describe("ThreeColumnLayout", () => {
       >
         <h1>Heading</h1>
         <p>
-          Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
-          cillum sint consectetur cupidatat.
+          Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint
+          consectetur cupidatat.
         </p>
-      </ThreeColumnLayout>
+      </ThreeColumnLayout>,
     );
 
-    const el = baseElement.querySelector(
-      "goa-three-column-layout"
-    );
+    const el = baseElement.querySelector("goa-three-column-layout");
 
     expect(el).toBeTruthy();
     expect(el?.getAttribute("leftcolumnwidth")).toBe("20%");

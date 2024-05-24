@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
-import GoACallout from "./callout";
+import GoABCallout from "./callout";
 
 describe("Callout", () => {
   test("Callout shall render", async () => {
     const result = render(
-      <GoACallout
+      <GoABCallout
         type="information"
         heading="Callout Title"
         size="medium"
@@ -14,9 +14,9 @@ describe("Callout", () => {
         mb="l"
         ml="xl"
       >
-        Information to the user goes in the content. Information can include
-        markup as desired.
-      </GoACallout>
+        Information to the user goes in the content. Information can include markup as
+        desired.
+      </GoABCallout>,
     );
 
     const el = result.container.querySelector("goa-callout");

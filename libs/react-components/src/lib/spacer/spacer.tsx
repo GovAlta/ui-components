@@ -1,9 +1,12 @@
-import { Spacing } from "../../common/styling";
+import {
+  GoABSpacerHorizontalSpacing,
+  GoABSpacerVerticalSpacing,
+} from "@abgov/ui-components-common";
 
 /* eslint-disable-next-line */
 interface WCProps {
-  hspacing?: Spacing | "fill";
-  vspacing?: Spacing;
+  hspacing?: GoABSpacerHorizontalSpacing;
+  vspacing?: GoABSpacerVerticalSpacing;
 }
 
 declare global {
@@ -16,15 +19,13 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoASpacerProps {
-  hSpacing?: Spacing | "fill";
-  vSpacing?: Spacing;
+export interface GoABSpacerProps {
+  hSpacing?: GoABSpacerHorizontalSpacing;
+  vSpacing?: GoABSpacerVerticalSpacing;
   testId?: string;
 }
 
-export type SpacerProps = GoASpacerProps;
-
-export function GoASpacer(props: GoASpacerProps) {
+export function GoABSpacer(props: GoABSpacerProps) {
   return (
     <goa-spacer
       hspacing={props.hSpacing}
@@ -34,4 +35,4 @@ export function GoASpacer(props: GoASpacerProps) {
   );
 }
 
-export default GoASpacer;
+export default GoABSpacer;

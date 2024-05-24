@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import GoANotification, { NotificationType } from "./notification";
+import GoABNotification, { NotificationType } from "./notification";
 import { fireEvent } from "@testing-library/dom";
 import { describe, it, expect, vi } from "vitest";
 
@@ -7,25 +7,25 @@ describe("Notification Banner", () => {
   describe("type", () => {
     (["important", "information", "emergency", "event"] as const).forEach(
       (type: NotificationType) => {
-        it(`should render ${type} notification`, async function() {
+        it(`should render ${type} notification`, async function () {
           render(
-            <GoANotification type={type}>
+            <GoABNotification type={type}>
               Information to the user goes in the content
-            </GoANotification>
+            </GoABNotification>,
           );
           const el = document.querySelector("goa-notification");
           expect(el?.getAttribute("type")).toEqual(type);
         });
-      }
+      },
     );
   });
 
   it("Event triggered on notification banner dismiss", async () => {
     const onDismiss = vi.fn();
     const { container } = render(
-      <GoANotification type="information" onDismiss={onDismiss}>
+      <GoABNotification type="information" onDismiss={onDismiss}>
         Information to the user goes in the content
-      </GoANotification>
+      </GoABNotification>,
     );
     const notificationBanner = container.querySelector("goa-notification");
     notificationBanner && fireEvent(notificationBanner, new CustomEvent("_dismiss"));
@@ -34,9 +34,9 @@ describe("Notification Banner", () => {
 
   it("should render notification banner with ariaLive", async () => {
     render(
-      <GoANotification type="information" ariaLive="assertive">
+      <GoABNotification type="information" ariaLive="assertive">
         Information to the user goes in the content
-      </GoANotification>
+      </GoABNotification>,
     );
     const el = document.querySelector("goa-notification");
     expect(el?.getAttribute("ariaLive")).toEqual("assertive");

@@ -1,7 +1,5 @@
+import { GoABChipVariant, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
-
-export type GoAChipVariant = "filter";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
@@ -9,7 +7,7 @@ interface WCProps extends Margins {
   error: boolean;
   deletable: boolean;
   content: string;
-  variant?: GoAChipVariant;
+  variant?: GoABChipVariant;
 }
 
 declare global {
@@ -21,17 +19,17 @@ declare global {
   }
 }
 
-export interface GoAChipProps extends Margins {
+export interface GoABChipProps extends Margins {
   onClick?: () => void;
   deletable?: boolean;
   leadingIcon?: string;
   error?: boolean;
   content: string;
-  variant?: GoAChipVariant;
+  variant?: GoABChipVariant;
   testId?: string;
 }
 
-export const GoAChip = ({
+export const GoABChip = ({
   leadingIcon = "",
   deletable = false,
   error = false,
@@ -43,7 +41,7 @@ export const GoAChip = ({
   mb,
   ml,
   testId,
-}: GoAChipProps) => {
+}: GoABChipProps) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) return;
@@ -75,6 +73,6 @@ export const GoAChip = ({
       data-testid={testId}
     />
   );
-}
+};
 
-export default GoAChip;
+export default GoABChip;

@@ -1,0 +1,84 @@
+import { GoABRadioGroupOnChangeDetail, GoABRadioGroupOrientation, Spacing } from "@abgov/ui-components-common";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+
+@Component({
+  standalone: true,
+  selector: "goab-radio-group",
+  template: `
+    <goa-radio-group
+      [name]="name"
+      [value]="value"
+      [disabled]="disabled"
+      [orientation]="orientation"
+      [error]="error"
+      [arialabel]="ariaLabel"
+      [testid]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [ml]="ml"
+      [mr]="mr"
+
+      (_change)="_onChange($event)"
+    >
+      <ng-content />
+    </goa-radio-group>
+  `,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: GoABRadioGroup,
+    }
+  ]
+})
+export class GoABRadioGroup implements ControlValueAccessor {
+  @Input() name?: string;
+  @Input() value?: string;
+  @Input() disabled?: boolean;
+  @Input() orientation?: GoABRadioGroupOrientation;
+  @Input() error?: boolean;
+  @Input() ariaLabel?: string;
+  @Input() testId?: string;
+  @Input() mt?: Spacing;
+  @Input() mb?: Spacing;
+  @Input() ml?: Spacing;
+  @Input() mr?: Spacing;
+
+  @Output() onChange = new EventEmitter<GoABRadioGroupOnChangeDetail>();
+
+  _onChange(e: Event) {
+    const detail = (e as CustomEvent<GoABRadioGroupOnChangeDetail>).detail;
+    this.markAsTouched();
+    this.onChange.emit(detail);
+
+    this.fcChange?.(detail.value);
+  }
+
+  // ControlValueAccessor
+
+  private fcChange?: (value: string) => void;
+  private fcTouched?: () => {};
+  touched = false;
+
+  markAsTouched() {
+    if (!this.touched) {
+      this.fcTouched?.();
+      this.touched = true;
+    }
+  }
+  writeValue(value: string): void {
+    this.value = value;
+  }
+  registerOnChange(fn: any): void {
+    this.fcChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.fcTouched = fn
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+}

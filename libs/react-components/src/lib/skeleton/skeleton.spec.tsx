@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { GoASkeleton, SkeletonType } from "./skeleton";
+import { GoABSkeleton, SkeletonType } from "./skeleton";
 
 describe("Skeleton", () => {
   for (const type of [
@@ -16,12 +16,10 @@ describe("Skeleton", () => {
   ]) {
     it(`should render the ${type} type`, async () => {
       const { container } = render(
-        <GoASkeleton type={type as SkeletonType} mt="s" mr="m" mb="l" ml="xl" />
+        <GoABSkeleton type={type as SkeletonType} mt="s" mr="m" mb="l" ml="xl" />,
       );
 
-      expect(
-        container.querySelector(`goa-skeleton[type="${type}"]`)
-      ).toBeTruthy();
+      expect(container.querySelector(`goa-skeleton[type="${type}"]`)).toBeTruthy();
 
       const el = container.querySelector("goa-skeleton");
       expect(el?.getAttribute("mt")).toBe("s");
