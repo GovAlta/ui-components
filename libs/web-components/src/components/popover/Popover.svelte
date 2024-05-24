@@ -282,8 +282,9 @@
     cursor: pointer;
   }
 
-  .popover-target:focus {
+  .popover-target:has(:focus-visible) {
     outline: var(--focus-border-width) solid var(--goa-color-interactive-focus);
+    outline: none;
   }
 
   .popover-content {

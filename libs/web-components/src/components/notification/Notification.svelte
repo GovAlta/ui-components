@@ -165,7 +165,7 @@
   .close {
     flex: 0 0 auto;
   }
-  /*Close button*/
+
   .close button {
     background-color: transparent;
     border: none;
@@ -180,31 +180,35 @@
   .close button:active {
     transform: translateY(2px);
   }
+
   /*Information & Event Close Button*/
   .close button.information:hover,
-  .close button.information:focus,
+  .close button.information:focus-visible,
   .close button.event:hover,
-  .close button.event:focus {
+  .close button.event:focus-visible {
     background-color: var(--goa-color-info-dark);
   }
-  .close button.information:focus,
-  .close button.event:focus {
+
+  .close button.information:focus-visible,
+  .close button.event:focus-visible {
     box-shadow: 0 0 0 3px var(--goa-color-greyscale-white);
   }
+
   /*Important close button*/
   .close button.important:hover,
-  .close button.important:focus {
+  .close button.important:focus-visible {
     background-color: var(--goa-color-warning-dark);
   }
-  .close button.important:focus {
+  .close button.important:focus-visible {
     box-shadow: 0 0 0 3px var(--goa-color-greyscale-black);
   }
+
   /*Emergency close button*/
   .close button.emergency:hover,
-  .close button.emergency:focus {
+  .close button.emergency:focus-visible {
     background-color: var(--goa-color-emergency-dark);
   }
-  .close button.emergency:focus {
+  .close button.emergency:focus-visible {
     box-shadow: 0 0 0 3px var(--goa-color-greyscale-white);
   }
 </style>

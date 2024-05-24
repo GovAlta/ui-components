@@ -129,9 +129,17 @@
     transition:
       transform 0.1s ease-in-out,
       background-color 0.2s ease-in-out,
-      border-color 0.2s ease-in-out;
+      border-color 0.2s ease-in-out;  
+  }
+  button:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
   button:active {
     transform: translateY(2px);
+  }
+  button:focus-visible {
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
 
   @media (--mobile) {
@@ -151,11 +159,6 @@
     ); /* acumin font requires this to allow for vertical alignment  */
   }
 
-  button:disabled {
-    pointer-events: none;
-    opacity: 0.5;
-  }
-
   button.compact {
     height: var(--button-height-compact);
     font-size: var(--goa-font-size-4);
@@ -168,7 +171,7 @@
     font-weight: var(--goa-font-weight-bold);
   }
 
-  /* Primary */
+
   button.start,
   button.submit,
   button.primary {
@@ -176,71 +179,57 @@
     background-color: var(--goa-color-interactive-default);
     color: var(--goa-color-text-light);
   }
-
-  button.start:hover,
-  button.submit:hover,
-  button.primary:hover {
+  button:hover {
     border-color: var(--goa-color-interactive-hover);
     background-color: var(--goa-color-interactive-hover);
   }
-
-  button.start:focus,
-  button.start:active,
-  button.submit:focus,
-  button.submit:active,
-  button.primary:focus,
-  button.primary:active {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+  button:focus,
+  button:active {
     border-color: var(--goa-color-interactive-hover);
     background-color: var(--goa-color-interactive-hover);
     outline: none;
   }
 
-  /* Secondary */
 
+  /* Secondary */
   button.secondary {
     border: 2px solid var(--goa-color-interactive-default);
     background-color: var(--goa-color-greyscale-white);
     color: var(--goa-color-interactive-default);
   }
-
   button.secondary:hover {
     border-color: var(--goa-color-interactive-hover);
     color: var(--goa-color-interactive-hover);
     background-color: var(--goa-color-greyscale-100);
   }
-
   button.secondary:focus,
   button.secondary:active {
     border-color: var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
     background-color: var(--goa-color-greyscale-100);
     outline: none;
   }
 
-  /* Tertiary */
 
+  /* Tertiary */
   button.tertiary {
     border: 1px solid transparent;
     background-color: transparent;
     color: var(--goa-color-interactive-default);
     text-decoration: underline;
   }
-
   button.tertiary:hover {
     border-color: var(--goa-color-greyscale-100);
     color: var(--goa-color-interactive-hover);
     background-color: var(--goa-color-greyscale-100);
   }
-
   button.tertiary:focus,
   button.tertiary:active {
     border-color: var(--goa-color-greyscale-100);
     background-color: var(--goa-color-greyscale-100);
     color: var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
     outline: none;
   }
+
 
   .submit.destructive,
   .primary.destructive {
@@ -254,11 +243,13 @@
     border-color: var(--goa-color-emergency-dark);
   }
   .submit.destructive:focus,
+  .submit.destructive:active,
   .primary.destructive:focus,
   .primary.destructive:active {
     background-color: var(--goa-color-emergency-dark);
     border-color: var(--goa-color-emergency-dark);
   }
+
 
   .secondary.destructive {
     color: var(--goa-color-emergency-default);
@@ -276,6 +267,7 @@
     border-color: var(--goa-color-emergency-dark);
     background-color: var(--goa-color-greyscale-white);
   }
+
 
   .tertiary.destructive {
     color: var(--goa-color-emergency-default);

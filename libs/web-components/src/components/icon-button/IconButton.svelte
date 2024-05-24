@@ -46,8 +46,8 @@
     xlarge: "0.5rem",
   }[size];
 
-  function handleClick(e) {
-    e.target.dispatchEvent(
+  function handleClick(e: Event) {
+    e.target?.dispatchEvent(
       new CustomEvent("_click", { composed: true, detail: { event: e } }),
     );
   }
@@ -70,7 +70,10 @@
 </script>
 
 <button
-  style="{calculateMargin(mt, mr, mb, ml)}; --pading-size: {_paddingSize}"
+  style={`
+    --padding: ${_paddingSize};
+    ${calculateMargin(mt, mr, mb, ml)}
+  `}
   {title}
   disabled={isDisabled}
   class={css}
@@ -88,12 +91,12 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
-
-  button,
-  button * {
-    box-sizing: border-box;
+  :host:focus,
+  :host:focus-within,
+  :host:focus-visible {
+    outline: none !important;
   }
-
+  
   button {
     display: inline-flex;
     align-items: center;
@@ -103,86 +106,104 @@
     cursor: pointer;
     border: none;
     border-radius: var(--goa-border-radius-m);
-    padding: var(--pading-size);
+    padding: var(--padding);
     cursor: pointer;
     transition:
       background-color 100ms ease-in,
       transform 100ms ease-in-out;
   }
-
   button:active {
     transform: translateY(2px);
   }
   button:hover {
     outline: none;
   }
-
-  button:focus,
-  button:active {
+  button:focus-visible {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
     outline: none;
   }
-
   button:disabled {
     pointer-events: none;
     transform: none;
     cursor: default;
+    opacity: 1;
+    color: var(--goa-color-greyscale-500);
+    fill: var(--goa-color-greyscale-500);
   }
-
   button:disabled:hover {
     background-color: transparent;
   }
+
 
   .color {
     color: var(--goa-color-interactive-default);
     fill: var(--goa-color-interactive-default);
   }
+  .color:hover,
+  .color:focus {
+    color: var(--goa-color-interactive-hover);
+    fill: var(--goa-color-interactive-hover);
+    background-color: var(--goa-color-greyscale-100);
+  }
+  .color:disabled {
+    color: var(--goa-color-interactive-disabled);
+    fill: var(--goa-color-interactive-disabled);
+  }
 
-  .dark,
-  .nocolor {
+
+  .dark {
     color: var(--goa-color-greyscale-black);
     fill: var(--goa-color-greyscale-black);
   }
-
-  .destructive {
-    color: var(--goa-color-emergency-dark);
-    fill: var(--goa-color-emergency-dark);
-  }
-
-  .light,
-  .inverted {
-    color: var(--goa-color-greyscale-white);
-    fill: var(--goa-color-greyscale-white);
-  }
-
-  .color:hover,
-  .color:focus,
-  .color:active {
-    color: var(--goa-color-interactive-hover);
-    fill: var(--goa-color-interactive-hover);
-  }
-
-  .color:hover,
-  .color:focus,
-  .color:active,
-  .nocolor:hover,
-  .nocolor:focus,
-  .nocolor:active,
   .dark:hover,
   .dark:focus,
   .dark:active {
     background-color: var(--goa-color-greyscale-100);
   }
 
+
+  .nocolor {
+    color: var(--goa-color-greyscale-black);
+    fill: var(--goa-color-greyscale-black);
+  }
+  .nocolor:hover,
+  .nocolor:focus,
+  .nocolor:active {
+    background-color: var(--goa-color-greyscale-100);
+  }
+
+
+  .destructive {
+    color: var(--goa-color-emergency-dark);
+    fill: var(--goa-color-emergency-dark);
+  }
   .destructive:hover,
   .destructive:focus,
   .destructive:active {
     background-color: var(--goa-color-emergency-light);
   }
+  .destructive:disabled {
+    opacity: 0.5;
+  }
 
+
+  .light {
+    color: var(--goa-color-greyscale-white);
+    fill: var(--goa-color-greyscale-white);
+  }
   .light:hover,
   .light:focus,
-  .light:active,
+  .light:active {
+    color: var(--goa-color-greyscale-white);
+    fill: var(--goa-color-greyscale-white);
+    background-color: var(--goa-color-greyscale-700);
+  }
+
+  
+  .inverted {
+    color: var(--goa-color-greyscale-white);
+    fill: var(--goa-color-greyscale-white);
+  }
   .inverted:hover,
   .inverted:focus,
   .inverted:active {
@@ -191,21 +212,4 @@
     background-color: var(--goa-color-greyscale-700);
   }
 
-  .color:disabled {
-    color: var(--goa-color-interactive-disabled);
-    fill: var(--goa-color-interactive-disabled);
-  }
-
-  .destructive:disabled {
-    opacity: 0.5;
-  }
-
-  .light:disabled,
-  .dark:disabled,
-  .nocolor:disabled,
-  .inverted:disabled {
-    opacity: 1;
-    color: var(--goa-color-greyscale-500);
-    fill: var(--goa-color-greyscale-500);
-  }
 </style>
