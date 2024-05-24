@@ -175,6 +175,10 @@
     outline: none;
     border-radius: var(--goa-border-radius-m);
     display: inline-flex;
+    transition: transform 100ms ease-in-out;
+  }
+  .close button:active {
+    transform: translateY(2px);
   }
   /*Information & Event Close Button*/
   .close button.information:hover,
