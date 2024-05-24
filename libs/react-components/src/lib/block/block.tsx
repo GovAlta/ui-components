@@ -1,10 +1,10 @@
+import { ABGovBlockAlignment, ABGovBlockDirection, Margins, Spacing } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
-import { Alignment, Direction, Margins, Spacing } from "../../common/styling";
 
 export interface WCProps extends Margins {
   gap?: Spacing;
-  direction?: Direction;
-  alignment?: Alignment;
+  direction?: ABGovBlockDirection;
+  alignment?: ABGovBlockAlignment;
 }
 
 declare global {
@@ -18,18 +18,15 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoABlockProps extends Margins {
+export interface ABGovBlockProps extends Margins {
   gap?: Spacing;
-  direction?: Direction;
-  alignment?: Alignment;
+  direction?: ABGovBlockDirection;
+  alignment?: ABGovBlockAlignment;
   testId?: string;
   children?: ReactNode;
 }
 
-// legacy
-export type BlockProps = GoABlockProps;
-
-export function GoABlock(props: GoABlockProps) {
+export function ABGovBlock(props: ABGovBlockProps) {
   return (
     <goa-block
       gap={props.gap}

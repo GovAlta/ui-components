@@ -1,8 +1,8 @@
-export type GoAFormStepStatusType = "complete" | "incomplete";
+import { ABGovFormStepStatus } from "@abgov/ui-components-common";
 
 interface WCProps {
   text: string;
-  status?: GoAFormStepStatusType;
+  status?: ABGovFormStepStatus;
 }
 
 declare global {
@@ -15,16 +15,13 @@ declare global {
   }
 }
 
-export interface GoAFormStepProps {
+export interface ABGovFormStepProps {
   text: string;
-  status?: GoAFormStepStatusType;
+  status?: ABGovFormStepStatus;
 }
 
-// legacy name
-export type FormStepProps = GoAFormStepProps;
-
-export function GoAFormStep(props: GoAFormStepProps) {
+export function ABGovFormStep(props: ABGovFormStepProps) {
   return <goa-form-step text={props.text} status={props.status} />;
 }
 
-export default GoAFormStep;
+export default ABGovFormStep;

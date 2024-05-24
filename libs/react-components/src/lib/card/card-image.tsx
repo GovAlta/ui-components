@@ -12,13 +12,13 @@ declare global {
   }
 }
 
-export interface GoACardImageProps {
+export interface ABGovCardImageProps {
   src: string;
   height: string;
 }
 
-export function GoACardImage({ src, height }: GoACardImageProps): JSX.Element {
+export function ABGovCardImage({ src, height }: ABGovCardImageProps): JSX.Element {
   return <goa-card-image src={src} height={height} />;
 }
 
-export default GoACardImage;
+export default ABGovCardImage;

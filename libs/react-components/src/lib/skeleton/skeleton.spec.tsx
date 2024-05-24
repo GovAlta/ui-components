@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { GoASkeleton, SkeletonType } from "./skeleton";
+import { ABGovSkeleton, SkeletonType } from "./skeleton";
 
 describe("Skeleton", () => {
   for (const type of [
@@ -16,7 +16,7 @@ describe("Skeleton", () => {
   ]) {
     it(`should render the ${type} type`, async () => {
       const { container } = render(
-        <GoASkeleton type={type as SkeletonType} mt="s" mr="m" mb="l" ml="xl" />
+        <ABGovSkeleton type={type as SkeletonType} mt="s" mr="m" mb="l" ml="xl" />
       );
 
       expect(

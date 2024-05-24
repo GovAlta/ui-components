@@ -1,18 +1,9 @@
-import { Margins } from "../../common/styling";
-
-export type GoACalloutType =
-  | "important"
-  | "information"
-  | "event"
-  | "success"
-  | "emergency";
-
-export type GoACalloutSize = "medium" | "large";
+import { ABGovCalloutSize, ABGovCalloutType, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   heading?: string;
-  type?: GoACalloutType;
-  size?: GoACalloutSize;
+  type?: ABGovCalloutType;
+  size?: ABGovCalloutSize;
 }
 
 declare global {
@@ -24,17 +15,15 @@ declare global {
   }
 }
 
-export interface GoACalloutProps extends Margins {
+export interface ABGovCalloutProps extends Margins {
   heading?: string;
-  type?: GoACalloutType;
-  size?: GoACalloutSize;
+  type?: ABGovCalloutType;
+  size?: ABGovCalloutSize;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export type CalloutProps = GoACalloutProps;
-
-export const GoACallout = ({
+export const ABGovCallout = ({
   heading,
   type = "information",
   size = "large",
@@ -44,7 +33,7 @@ export const GoACallout = ({
   mr,
   mb,
   ml,
-}: GoACalloutProps) => {
+}: ABGovCalloutProps) => {
   return (
     <goa-callout
       heading={heading}
@@ -61,4 +50,4 @@ export const GoACallout = ({
   );
 }
 
-export default GoACallout;
+export default ABGovCallout;

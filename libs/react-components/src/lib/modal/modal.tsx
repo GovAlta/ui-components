@@ -1,17 +1,5 @@
+import { ABGovModalCalloutVariant, ABGovModalRole, ABGovModalTransition } from "@abgov/ui-components-common";
 import { ReactElement, ReactNode, RefObject, useEffect, useRef } from "react";
-
-export type GoAModalTransition = "fast" | "slow" | "none";
-export type GoAModalCalloutVariant =
-  | "information"
-  | "important"
-  | "emergency"
-  | "success"
-  | "event";
-export type GoAModalRole = "dialog" | "alertdialog";
-
-// leagcy type names
-export type ModalTransition = GoAModalTransition;
-export type CalloutVariant = GoAModalCalloutVariant;
 
 interface WCProps {
   ref: RefObject<HTMLElement>;
@@ -19,9 +7,9 @@ interface WCProps {
   open?: boolean;
   maxwidth?: string;
   closable?: boolean;
-  transition?: GoAModalTransition;
-  calloutvariant?: GoAModalCalloutVariant;
-  role?: GoAModalRole;
+  role?: ABGovModalRole;
+  transition?: ABGovModalTransition;
+  calloutvariant?: ABGovModalCalloutVariant;
 }
 
 declare global {
@@ -33,51 +21,32 @@ declare global {
   }
 }
 
-export interface GoAModalProps {
+export interface ABGovModalProps {
   heading?: ReactNode;
   maxWidth?: string;
   actions?: ReactElement;
   onClose?: () => void;
-  transition?: GoAModalTransition;
+  transition?: ABGovModalTransition;
   children?: ReactNode;
   open?: boolean;
-  calloutVariant?: GoAModalCalloutVariant;
+  calloutVariant?: ABGovModalCalloutVariant;
   testId?: string;
-  role?: GoAModalRole;
-  // @deprecated: use maxWidth
-  width?: string;
-  // @deprecated: use variant
-  type?: string;
+  role?: ABGovModalRole;
 }
 
-export function GoAModal({
+export function ABGovModal({
   heading,
   children,
   maxWidth,
   open,
   actions,
   transition,
-  type,
   calloutVariant,
   onClose,
   testId,
   role,
-  width,
-}: GoAModalProps): JSX.Element {
+}: ABGovModalProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
-
-  // @deprecated
-  useEffect(() => {
-    if (type) {
-      console.warn("GoAModal [type] is deprecated.");
-    }
-  }, [type]);
-
-  // @deprecated
-  useEffect(() => {
-    // @ts-expected-error: deprecated
-    maxWidth = width;
-  }, [width]);
 
   useEffect(() => {
     if (!el.current) {
@@ -112,4 +81,4 @@ export function GoAModal({
   );
 }
 
-export default GoAModal;
+export default ABGovModal;

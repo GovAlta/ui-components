@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import GoANotification, { NotificationType } from "./notification";
+import ABGovNotification, { NotificationType } from "./notification";
 import { fireEvent } from "@testing-library/dom";
 import { describe, it, expect, vi } from "vitest";
 
@@ -9,9 +9,9 @@ describe("Notification Banner", () => {
       (type: NotificationType) => {
         it(`should render ${type} notification`, async function() {
           render(
-            <GoANotification type={type}>
+            <ABGovNotification type={type}>
               Information to the user goes in the content
-            </GoANotification>
+            </ABGovNotification>
           );
           const el = document.querySelector("goa-notification");
           expect(el?.getAttribute("type")).toEqual(type);
@@ -23,9 +23,9 @@ describe("Notification Banner", () => {
   it("Event triggered on notification banner dismiss", async () => {
     const onDismiss = vi.fn();
     const { container } = render(
-      <GoANotification type="information" onDismiss={onDismiss}>
+      <ABGovNotification type="information" onDismiss={onDismiss}>
         Information to the user goes in the content
-      </GoANotification>
+      </ABGovNotification>
     );
     const notificationBanner = container.querySelector("goa-notification");
     notificationBanner && fireEvent(notificationBanner, new CustomEvent("_dismiss"));
@@ -34,9 +34,9 @@ describe("Notification Banner", () => {
 
   it("should render notification banner with ariaLive", async () => {
     render(
-      <GoANotification type="information" ariaLive="assertive">
+      <ABGovNotification type="information" ariaLive="assertive">
         Information to the user goes in the content
-      </GoANotification>
+      </ABGovNotification>
     );
     const el = document.querySelector("goa-notification");
     expect(el?.getAttribute("ariaLive")).toEqual("assertive");

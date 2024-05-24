@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
-import { GoAIcon } from "./icon";
+import { ABGovIcon } from "./icon";
 
-describe("GoA Icon", () => {
+describe("ABGov Icon", () => {
   it("should render the properties", () => {
     const { container } = render(
-      <GoAIcon type="information" mt="s" mr="m" mb="l" ml="xl" />
+      <ABGovIcon type="information" mt="s" mr="m" mb="l" ml="xl" />
     );
     const el = container.querySelector("goa-icon");
 
