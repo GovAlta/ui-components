@@ -1,16 +1,16 @@
 import { fireEvent, render } from "@testing-library/react";
-import GoAChip from "./chip";
+import ABGovChip from "./chip";
 import { describe, it, expect, vi } from "vitest";
 
-describe("GoA Chip", () => {
+describe("ABGov Chip", () => {
   it("should render", () => {
-    const { container } = render(<GoAChip content="some chip" />);
+    const { container } = render(<ABGovChip content="some chip" />);
     expect(container.innerHTML).toContain("some chip");
   });
 
   it("should bind the properties", async () => {
     const { container } = render(
-      <GoAChip
+      <ABGovChip
         content="some chip"
         leadingIcon="add"
         mt="s"
@@ -33,7 +33,7 @@ describe("GoA Chip", () => {
   it("allows for the handling of the delete event", async () => {
     const onClick = vi.fn();
     const { container } = render(
-      <GoAChip content="some chip" onClick={onClick} />
+      <ABGovChip content="some chip" onClick={onClick} />
     );
 
     const el = container.querySelector("goa-chip");

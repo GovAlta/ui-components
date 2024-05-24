@@ -1,12 +1,12 @@
 import { render, cleanup } from "@testing-library/react";
-import { GoAFormItem } from "./form-item";
+import { ABGovFormItem } from "./form-item";
 
 afterEach(cleanup);
 
-describe("GoAFormItem", () => {
+describe("ABGovFormItem", () => {
   it("renders all with properties", () => {
     const { baseElement } = render(
-      <GoAFormItem
+      <ABGovFormItem
         label="First Name"
         requirement="optional"
         error="This is an error"

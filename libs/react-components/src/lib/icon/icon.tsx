@@ -1,9 +1,7 @@
-import { Margins } from "../../common/styling";
-
-export type GoAIconFilledType = `${GoAIconType}-${GoAIconTheme}`;
+import { ABGovIconFilledType, ABGovIconSize, ABGovIconTheme, ABGovIconType, Margins } from "@abgov/ui-components-common";
 
 interface IonIconProps {
-  name: GoAIconType | GoAIconFilledType;
+  name: ABGovIconType | ABGovIconFilledType;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -569,7 +567,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-export function GoAIcon({
+export function ABGovIcon({
   type,
   theme,
   size,
@@ -583,7 +581,7 @@ export function GoAIcon({
   mb,
   ml,
   testId,
-}: GoAIconProps): JSX.Element {
+}: ABGovIconProps): JSX.Element {
   return (
     <goa-icon
       type={type}

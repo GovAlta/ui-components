@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import { GoAAppHeader } from "../app-header/app-header";
-import { GoAAppFooter } from "../footer/footer";
+import { ABGovAppHeader } from "../app-header/app-header";
+import { ABGovAppFooter } from "../footer/footer";
 
 import TwoColumnLayout from "./two-column-layout";
 
@@ -18,8 +18,8 @@ describe("TwoColumnLayout", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
       <TwoColumnLayout
-        header={<GoAAppHeader />}
-        footer={<GoAAppFooter />}
+        header={<ABGovAppHeader />}
+        footer={<ABGovAppFooter />}
         nav={<Links />}
       >
         <h1>Heading</h1>

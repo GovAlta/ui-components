@@ -2,7 +2,7 @@ import { render, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { fireEvent } from "@testing-library/dom";
 
-import { GoARadioGroup, GoARadioItem } from "./radio-group";
+import { ABGovRadioGroup, ABGovRadioItem } from "./radio-group";
 
 type MockData = {
   title: string;
@@ -39,7 +39,7 @@ describe("RadioGroup", () => {
   describe("Basic rendering", () => {
     it("should render successfully", async () => {
       const data = baseMockData;
-      const { baseElement } = render(<GoARadioGroup
+      const { baseElement } = render(<ABGovRadioGroup
         name="fruits"
         disabled={data.disabled}
         value={data.value}
@@ -50,7 +50,7 @@ describe("RadioGroup", () => {
         onChange={noop}
       >
         {data.radios.map((radio) => (
-          <GoARadioItem
+          <ABGovRadioItem
             key={radio.value}
             label={radio.text}
             name="fruits"
@@ -58,9 +58,9 @@ describe("RadioGroup", () => {
             value={radio.value}
           >
             {radio.text}
-          </GoARadioItem>
+          </ABGovRadioItem>
         ))}
-      </GoARadioGroup>);
+      </ABGovRadioGroup>);
 
       expect(baseElement).toBeTruthy();
       const el = baseElement.querySelector("goa-radio-group");
@@ -78,7 +78,7 @@ describe("RadioGroup", () => {
 
     it("initial data is set", async () => {
       const data = baseMockData;
-      render(<GoARadioGroup
+      render(<ABGovRadioGroup
         name="fruits"
         disabled={data.disabled}
         value={data.value}
@@ -89,7 +89,7 @@ describe("RadioGroup", () => {
         onChange={noop}
       >
         {data.radios.map((radio) => (
-          <GoARadioItem
+          <ABGovRadioItem
             key={radio.value}
             label={radio.text}
             name="fruits"
@@ -97,9 +97,9 @@ describe("RadioGroup", () => {
             value={radio.value}
           >
             {radio.text}
-          </GoARadioItem>
+          </ABGovRadioItem>
         ))}
-      </GoARadioGroup>);
+      </ABGovRadioGroup>);
 
 
       const radios =
@@ -111,14 +111,14 @@ describe("RadioGroup", () => {
 
     it("render with description", async () => {
       const data = baseMockData;
-      const result = render(<GoARadioGroup
+      const result = render(<ABGovRadioGroup
         name="fruits"
         disabled={data.disabled}
         value={data.value}
         onChange={noop}
       >
         {data.radios.map((radio) => (
-          <GoARadioItem
+          <ABGovRadioItem
             key={radio.value}
             label={radio.text}
             name="fruits"
@@ -127,9 +127,9 @@ describe("RadioGroup", () => {
             description={radio.description}
           >
             {radio.text}
-          </GoARadioItem>
+          </ABGovRadioItem>
         ))}
-      </GoARadioGroup>);
+      </ABGovRadioGroup>);
 
       const radios = document.querySelectorAll("goa-radio-item");
       expect(radios[0].getAttribute("description")).toBe(null);
@@ -144,14 +144,14 @@ describe("RadioGroup", () => {
       const onChange = vi.fn();
       const data = { ...baseMockData, value: "oranges", disabled: true };
 
-      const { container } = render(<GoARadioGroup
+      const { container } = render(<ABGovRadioGroup
         name="fruits"
         disabled={data.disabled}
         value={data.value}
         onChange={(name, newValue) => onChange(name, newValue)}
       >
         {data.radios.map((radio) => (
-          <GoARadioItem
+          <ABGovRadioItem
             key={radio.value}
             label={radio.text}
             name="fruits"
@@ -159,9 +159,9 @@ describe("RadioGroup", () => {
             value={radio.value}
           >
             {radio.text}
-          </GoARadioItem>
+          </ABGovRadioItem>
         ))}
-      </GoARadioGroup>);
+      </ABGovRadioGroup>);
 
       await waitFor(() => {
         const radios = container.querySelectorAll<HTMLInputElement>("goa-radio-item");
@@ -175,13 +175,13 @@ describe("RadioGroup", () => {
   it("change event should work", async () => {
     const onChange = vi.fn();
     const data = { ...baseMockData, value: "oranges" };
-    const { container } = render(<GoARadioGroup
+    const { container } = render(<ABGovRadioGroup
       name="fruits"
       value={data.value}
       onChange={onChange}
     >
       {data.radios.map((radio) => (
-        <GoARadioItem
+        <ABGovRadioItem
           key={radio.value}
           label={radio.text}
           name="fruits"
@@ -189,9 +189,9 @@ describe("RadioGroup", () => {
           value={radio.value}
         >
           {radio.text}
-        </GoARadioItem>
+        </ABGovRadioItem>
       ))}
-    </GoARadioGroup>);
+    </ABGovRadioGroup>);
 
     const radios = container.querySelectorAll<HTMLInputElement>("goa-radio-item");
     const radioGroup = container.querySelector("goa-radio-group");

@@ -1,5 +1,5 @@
+import { ABGovCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -24,7 +24,7 @@ interface WCProps extends Margins {
 }
 
 /* eslint-disable-next-line */
-export interface GoACheckboxProps extends Margins {
+export interface ABGovCheckboxProps extends Margins {
   id?: string;
   name: string;
   checked: boolean;
@@ -36,13 +36,13 @@ export interface GoACheckboxProps extends Margins {
   testId?: string;
   ariaLabel?: string;
   description?: string | React.ReactNode;
-  onChange?: (name: string, checked: boolean, value: string) => void;
+  onChange?: (detail: ABGovCheckboxOnChangeDetail) => void;
 }
 
 // legacy
-export type Props = GoACheckboxProps;
+export type Props = ABGovCheckboxProps;
 
-export function GoACheckbox({
+export function ABGovCheckbox({
   id,
   name,
   testId,
@@ -59,16 +59,16 @@ export function GoACheckbox({
   mr,
   mb,
   ml,
-}: GoACheckboxProps): JSX.Element {
+}: ABGovCheckboxProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
       return;
     }
     const current = el.current;
-    const listener = (e: unknown) => {
-      const ce = e as CustomEvent;
-      onChange?.(name, ce.detail.checked, ce.detail.value);
+    const listener = (e: Event) => {
+      const detail = (e as CustomEvent<ABGovCheckboxOnChangeDetail>).detail;
+      onChange?.(detail);
     };
 
     current.addEventListener("_change", listener);
@@ -102,4 +102,4 @@ export function GoACheckbox({
   );
 }
 
-export default GoACheckbox;
+export default ABGovCheckbox;

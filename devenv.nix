@@ -2,23 +2,23 @@
 
 {
   # https://devenv.sh/packages/
-  packages = [ 
-    pkgs.git 
-    pkgs.nodejs_21
+  packages = [
+    pkgs.git
+    pkgs.nodejs_20
     pkgs.nodePackages_latest.svelte-language-server
     pkgs.nodePackages_latest.typescript-language-server
     pkgs.vscode-langservers-extracted
   ];
 
   # https://devenv.sh/scripts/
-  scripts.hello.exec = "echo GoA UI Components";
+  scripts.hello.exec = "echo ABGov UI Components";
 
   enterShell = ''
     git --version
     node --version
     echo
     echo =================
-    echo GoA UI Components
+    echo ABGov UI Components
     echo =================
   '';
 

@@ -1,11 +1,10 @@
 import { ReactNode } from "react";
-import { Margins } from "../../common/styling";
 
-export type GoAHeadingSize = "small" | "medium";
+import type { ABGovAccordionHeadingSize, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   open?: boolean;
-  headingSize?: GoAHeadingSize;
+  headingSize?: ABGovAccordionHeadingSize;
   heading: string;
   secondaryText?: string;
   headingContent?: ReactNode;
@@ -20,9 +19,9 @@ declare global {
   }
 }
 
-export interface GoAAccordionProps extends Margins {
+export interface ABGovAccordionProps extends Margins {
   open?: boolean;
-  headingSize?: GoAHeadingSize;
+  headingSize?: ABGovAccordionHeadingSize;
   secondaryText?: string;
   heading: string;
   headingContent?: ReactNode;
@@ -30,7 +29,7 @@ export interface GoAAccordionProps extends Margins {
   children: ReactNode;
 }
 
-export function GoAAccordion({
+export function ABGovAccordion({
   open,
   heading,
   headingSize,
@@ -42,7 +41,7 @@ export function GoAAccordion({
   mr,
   mb,
   ml,
-}: GoAAccordionProps): JSX.Element {
+}: ABGovAccordionProps): JSX.Element {
   return (
     <goa-accordion
       open={open}
@@ -61,4 +60,4 @@ export function GoAAccordion({
   );
 }
 
-export default GoAAccordion;
+export default ABGovAccordion;

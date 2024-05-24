@@ -1,14 +1,14 @@
 import { render, cleanup } from "@testing-library/react";
-import GoAHeroBanner from "./hero-banner";
-import { GoAHeroBannerActions } from "./hero-banner-actions";
-import GoAButton from "../button/button";
+import ABGovHeroBanner from "./hero-banner";
+import { ABGovHeroBannerActions } from "./hero-banner-actions";
+import ABGovButton from "../button/button";
 
 afterEach(cleanup);
 
-describe("GoAHeroBanner", () => {
+describe("ABGovHeroBanner", () => {
   it("renders all with properties", () => {
     const { baseElement } = render(
-      <GoAHeroBanner
+      <ABGovHeroBanner
         heading="Upgrading our bitumen"
         backgroundUrl="some-bg.png"
         backgroundColor="#000"
@@ -29,12 +29,12 @@ describe("GoAHeroBanner", () => {
 
   it("renders content", async () => {
     const { baseElement } = render(
-      <GoAHeroBanner
+      <ABGovHeroBanner
         heading="Upgrading our bitumen"
         backgroundUrl="some-bg.png"
       >
         This is the hero banner content
-      </GoAHeroBanner>
+      </ABGovHeroBanner>
     );
     const el = baseElement.querySelector("goa-hero-banner");
     expect(el?.innerHTML).toContain("This is the hero banner content");
@@ -42,15 +42,15 @@ describe("GoAHeroBanner", () => {
 
   it("renders actions", async () => {
     const { baseElement } = render(
-      <GoAHeroBanner
+      <ABGovHeroBanner
         heading="Upgrading our bitumen"
         backgroundUrl="some-bg.png"
       >
         This is the hero banner content
-        <GoAHeroBannerActions>
-          <GoAButton onClick={() => { /* do nothing */ }}>Submit</GoAButton>
-        </GoAHeroBannerActions>
-      </GoAHeroBanner>
+        <ABGovHeroBannerActions>
+          <ABGovButton onClick={() => { /* do nothing */ }}>Submit</ABGovButton>
+        </ABGovHeroBannerActions>
+      </ABGovHeroBanner>
     );
     const el = baseElement.querySelector("goa-hero-banner goa-button");
     expect(el?.textContent).toBe("Submit");
@@ -59,7 +59,7 @@ describe("GoAHeroBanner", () => {
   describe("Min Height", () => {
     it("uses the default min height", async () => {
       const { baseElement } = render(
-        <GoAHeroBanner
+        <ABGovHeroBanner
           heading="Upgrading our bitumen"
           backgroundUrl="some-bg.png"
         />
@@ -70,7 +70,7 @@ describe("GoAHeroBanner", () => {
 
     it("uses the min height when supplied", async () => {
       const { baseElement } = render(
-        <GoAHeroBanner
+        <ABGovHeroBanner
           heading="Upgrading our bitumen"
           backgroundUrl="some-bg.png"
           minHeight="700px"

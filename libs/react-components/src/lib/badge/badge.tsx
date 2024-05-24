@@ -1,16 +1,7 @@
-import { Margins } from "../../common/styling";
-
-export type GoABadgeType =
-  | "information"
-  | "success"
-  | "important"
-  | "emergency"
-  | "dark"
-  | "midtone"
-  | "light";
+import { ABGovBadgeType, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  type: GoABadgeType;
+  type: ABGovBadgeType;
   icon?: boolean;
   content?: string;
   arialabel?: string;
@@ -26,15 +17,15 @@ declare global {
   }
 }
 
-export interface GoABadgeProps extends Margins {
-  type: GoABadgeType;
+export interface ABGovBadgeProps extends Margins {
+  type: ABGovBadgeType;
   icon?: boolean;
   content?: string;
   testId?: string;
   ariaLabel?: string;
 }
 
-export function GoABadge({
+export function ABGovBadge({
   type,
   content,
   icon,
@@ -44,7 +35,7 @@ export function GoABadge({
   mb,
   ml,
   ariaLabel,
-}: GoABadgeProps): JSX.Element {
+}: ABGovBadgeProps): JSX.Element {
   return (
     <goa-badge
       type={type}
@@ -63,7 +54,7 @@ export function GoABadge({
 /**
  * @deprecated
  */
-export function GoAInfoBadge({
+export function ABGovInfoBadge({
   content,
   testId,
   icon,
@@ -72,9 +63,9 @@ export function GoAInfoBadge({
   mb,
   ml,
   ariaLabel,
-}: GoABadgeProps): JSX.Element {
+}: ABGovBadgeProps): JSX.Element {
   return (
-    <GoABadge
+    <ABGovBadge
       type="information"
       icon={icon}
       content={content}
@@ -91,7 +82,7 @@ export function GoAInfoBadge({
 /**
  * @deprecated
  */
-export function GoASuccessBadge({
+export function ABGovSuccessBadge({
   content,
   testId,
   icon,
@@ -100,9 +91,9 @@ export function GoASuccessBadge({
   mb,
   ml,
   ariaLabel,
-}: GoABadgeProps): JSX.Element {
+}: ABGovBadgeProps): JSX.Element {
   return (
-    <GoABadge
+    <ABGovBadge
       type="success"
       icon={icon}
       content={content}
@@ -119,7 +110,7 @@ export function GoASuccessBadge({
 /**
  * @deprecated
  */
-export function GoAImportantBadge({
+export function ABGovImportantBadge({
   content,
   testId,
   icon,
@@ -128,9 +119,9 @@ export function GoAImportantBadge({
   mb,
   ml,
   ariaLabel,
-}: GoABadgeProps): JSX.Element {
+}: ABGovBadgeProps): JSX.Element {
   return (
-    <GoABadge
+    <ABGovBadge
       type="important"
       icon={icon}
       content={content}
@@ -147,7 +138,7 @@ export function GoAImportantBadge({
 /**
  * @deprecated
  */
-export function GoAEmergencyBadge({
+export function ABGovEmergencyBadge({
   content,
   testId,
   icon,
@@ -156,9 +147,9 @@ export function GoAEmergencyBadge({
   mb,
   ml,
   ariaLabel,
-}: GoABadgeProps): JSX.Element {
+}: ABGovBadgeProps): JSX.Element {
   return (
-    <GoABadge
+    <ABGovBadge
       type="emergency"
       icon={icon}
       content={content}

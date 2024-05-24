@@ -11,14 +11,12 @@ declare global {
   }
 }
 
-export interface GoATabItemProps {
+export interface ABGovTabItemProps {
   heading?: React.ReactNode;
   children?: React.ReactNode;
 }
 
-export type TabItemProps = GoATabItemProps;
-
-export function GoATab({ heading, children }: GoATabItemProps): JSX.Element {
+export function ABGovTab({ heading, children }: ABGovTabItemProps): JSX.Element {
   return (
     <goa-tab>
       {heading && <span slot="heading">{heading}</span>}

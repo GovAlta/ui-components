@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-export interface GoARadioItemProps {
+export interface ABGovRadioItemProps {
   value?: string;
   label?: string;
   name?: string;
@@ -29,7 +29,7 @@ export interface GoARadioItemProps {
   testId?: string;
 }
 
-export function GoARadioItem({
+export function ABGovRadioItem({
   name,
   label,
   value,
@@ -39,7 +39,7 @@ export function GoARadioItem({
   error,
   testId,
   children,
-}: GoARadioItemProps): JSX.Element {
+}: ABGovRadioItemProps): JSX.Element {
   return (
     <goa-radio-item
       name={name}
@@ -57,4 +57,4 @@ export function GoARadioItem({
   );
 }
 
-export default GoARadioItem;
+export default ABGovRadioItem;

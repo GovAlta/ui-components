@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
-import GoAPopover from "./popover";
+import ABGovPopover from "./popover";
 
 describe("Popover", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoAPopover target="Click Action">The content</GoAPopover>
+      <ABGovPopover target="Click Action">The content</ABGovPopover>
     );
 
     const el = baseElement.querySelector("goa-popover");
@@ -16,7 +16,7 @@ describe("Popover", () => {
 
   it("should bind all web-component attributes", () => {
     const { baseElement } = render(
-      <GoAPopover
+      <ABGovPopover
         target="Click Action"
         maxWidth="500px"
         minWidth="100px"
@@ -24,7 +24,7 @@ describe("Popover", () => {
         padded={false}
       >
         The content
-      </GoAPopover>
+      </ABGovPopover>
     );
 
     const el = baseElement.querySelector("goa-popover");

@@ -1,8 +1,5 @@
+import { ABGovTextAreaCountBy, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
-
-
-type CountBy = "character" | "word";
 
 interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
@@ -14,7 +11,7 @@ interface WCProps extends Margins {
   disabled?: boolean;
   width?: string;
   arialabel?: string;
-  countby?: CountBy;
+  countby?: ABGovTextAreaCountBy;
   maxcount?: number;
 }
 
@@ -27,7 +24,7 @@ declare global {
   }
 }
 
-export interface GoATextAreaProps extends Margins {
+export interface ABGovTextAreaProps extends Margins {
   name: string;
   value?: string;
   id?: string;
@@ -38,14 +35,14 @@ export interface GoATextAreaProps extends Margins {
   width?: string;
   testId?: string;
   ariaLabel?: string;
-  countBy?: CountBy;
+  countBy?: ABGovTextAreaCountBy;
   maxCount?: number;
 
   onChange: (name: string, value: string) => void;
   onKeyPress?: (name: string, value: string, key: string) => void;
 }
 
-export function GoATextarea({
+export function ABGovTextarea({
   name,
   value,
   placeholder,
@@ -63,7 +60,7 @@ export function GoATextarea({
   ml,
   onChange,
   onKeyPress,
-}: GoATextAreaProps): JSX.Element {
+}: ABGovTextAreaProps): JSX.Element {
   const el = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -121,6 +118,6 @@ export function GoATextarea({
   );
 }
 
-export {GoATextarea as GoATextArea}
-export default GoATextarea;
+export {ABGovTextarea as ABGovTextArea}
+export default ABGovTextarea;
 

@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import Css from "./ResizablePanel.module.css";
-import { GoAIcon } from "../../lib/icon/icon";
+import { ABGovIcon } from "../../lib/icon/icon";
 
 export type ResizableProps = {
   minWidth?: number;
@@ -75,8 +75,8 @@ export function ResizablePanel(props: ResizableProps): JSX.Element {
   }
 
   return (
-    <div 
-      ref={bgRef} 
+    <div
+      ref={bgRef}
       className={Css.panelBackground}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
@@ -87,7 +87,7 @@ export function ResizablePanel(props: ResizableProps): JSX.Element {
           {props.children}
         </div>
         <div ref={handleRef} className={Css.handle}>
-          <GoAIcon type="reorder-two" />
+          <ABGovIcon type="reorder-two" />
         </div>
       </section>
       <div ref={widthRef} className={Css.width}>{width}</div>

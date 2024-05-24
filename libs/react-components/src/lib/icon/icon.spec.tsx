@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
-import { GoAIcon } from "./icon";
+import { ABGovIcon } from "./icon";
 
-describe("GoA Icon", () => {
+describe("ABGov Icon", () => {
   it("should render the properties", () => {
     const { container } = render(
       <GoAIcon
