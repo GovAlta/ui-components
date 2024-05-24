@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<ng-component
+  heading={[Function String]}
+>
+  <goab-accordion>
+    <goa-accordion>
+      <div
+        slot="headingcontent"
+      >
+         This is the headingcontent
+      </div>
+       test content
+    </goa-accordion>
+  </goab-accordion>
+</ng-component>
+`;

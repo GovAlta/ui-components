@@ -58,7 +58,6 @@
       if (slot) {
         return slot.assignedElements();
       } else {
-        // @ts-expect-error
         return [..._titleEl.children] as Element[]; // unit tests
       }
     }

@@ -1,10 +1,12 @@
+import {
+  GoABFileUploadInputOnSelectFileDetail,
+  GoABFileUploadInputVariant,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-
-export type GoAFileUploadInputVariant = "dragdrop" | "button";
 
 interface WCProps {
   ref: React.MutableRefObject<HTMLElement | null>;
-  variant?: GoAFileUploadInputVariant;
+  variant?: GoABFileUploadInputVariant;
   accept?: string;
   maxfilesize?: string;
 }
@@ -20,21 +22,21 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoAFileUploadInputProps {
-  variant?: GoAFileUploadInputVariant;
+export interface GoABFileUploadInputProps {
+  variant?: GoABFileUploadInputVariant;
   accept?: string;
   maxFileSize?: string;
   testId?: string;
-  onSelectFile: (file: File) => void;
+  onSelectFile: (detail: GoABFileUploadInputOnSelectFileDetail) => void;
 }
 
-export function GoAFileUploadInput({
+export function GoABFileUploadInput({
   variant,
   accept,
   maxFileSize,
   testId,
   onSelectFile,
-}: GoAFileUploadInputProps) {
+}: GoABFileUploadInputProps) {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -42,7 +44,8 @@ export function GoAFileUploadInput({
 
     const current = el.current;
     const handler = (e: Event) => {
-      onSelectFile((e as CustomEvent).detail.file);
+      const detail = (e as CustomEvent<GoABFileUploadInputOnSelectFileDetail>).detail;
+      onSelectFile(detail);
     };
     current.addEventListener("_selectFile", handler);
     return () => {
@@ -61,4 +64,4 @@ export function GoAFileUploadInput({
   );
 }
 
-export default GoAFileUploadInput;
+export default GoABFileUploadInput;
