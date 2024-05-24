@@ -9,14 +9,14 @@ declare global {
   }
 }
 
-export interface GoAPageProps {
+export interface GoABPageProps {
   children?: ReactNode;
 }
 
-export type PageProps = GoAPageProps;
+export type PageProps = GoABPageProps;
 
-export function GoAOneColumnLayout(props: GoAPageProps): JSX.Element {
+export function GoABOneColumnLayout(props: GoABPageProps): JSX.Element {
   return <goa-one-column-layout>{props.children}</goa-one-column-layout>;
 }
 
-export default GoAOneColumnLayout;
+export default GoABOneColumnLayout;

@@ -1,13 +1,11 @@
-export type GoACircularProgressVariant = "fullscreen" | "inline";
-export type GoACircularProgressSize = "small" | "large";
-
-// legacy naming
-export type CircularProgressVariant = GoACircularProgressVariant;
-export type CircularProgressSize = GoACircularProgressSize;
+import {
+  GoABCircularProgressSize,
+  GoABCircularProgressVariant,
+} from "@abgov/ui-components-common";
 
 interface WCProps {
-  variant?: GoACircularProgressVariant;
-  size?: GoACircularProgressSize;
+  variant?: GoABCircularProgressVariant;
+  size?: GoABCircularProgressSize;
   message?: string;
   visible?: string;
   progress?: number;
@@ -22,23 +20,23 @@ declare global {
   }
 }
 
-export interface GoACircularProgressProps {
-  variant?: GoACircularProgressVariant;
-  size?: GoACircularProgressSize;
+export interface GoABCircularProgressProps {
+  variant?: GoABCircularProgressVariant;
+  size?: GoABCircularProgressSize;
   message?: string;
   visible?: boolean;
   progress?: number;
   testId?: string;
 }
 
-export const GoACircularProgress = ({
+export const GoABCircularProgress = ({
   visible,
   message,
   progress,
   variant,
   size,
   testId,
-}: GoACircularProgressProps) => {
+}: GoABCircularProgressProps) => {
   return (
     <goa-circular-progress
       visible={visible ? "true" : "false"}
@@ -49,6 +47,6 @@ export const GoACircularProgress = ({
       data-testid={testId}
     />
   );
-}
+};
 
-export default GoACircularProgress;
+export default GoABCircularProgress;

@@ -10,21 +10,18 @@ declare global {
   }
 }
 
-export interface GoATabsProps {
+export interface GoABTabsProps {
   initialTab?: number;
   children?: React.ReactNode;
   testId?: string;
 }
 
-export function GoATabs({ initialTab, children, testId }: GoATabsProps): JSX.Element {
+export function GoABTabs({ initialTab, testId, children }: GoABTabsProps): JSX.Element {
   return (
-    <goa-tabs
-      initialtab={initialTab}
-      data-testid={testId}
-    >
+    <goa-tabs initialtab={initialTab} data-testid={testId}>
       {children}
     </goa-tabs>
   );
 }
 
-export default GoATabs;
+export default GoABTabs;

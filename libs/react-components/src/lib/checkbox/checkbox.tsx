@@ -1,5 +1,5 @@
+import { GoABCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -38,13 +38,13 @@ export interface GoACheckboxProps extends Margins {
   ariaLabel?: string;
   description?: string | React.ReactNode;
   maxWidth?: string;
-  onChange?: (name: string, checked: boolean, value: string) => void;
+  onChange?: (detail: GoABCheckboxOnChangeDetail) => void;
 }
 
 // legacy
-export type Props = GoACheckboxProps;
+export type Props = GoABCheckboxProps;
 
-export function GoACheckbox({
+export function GoABCheckbox({
   id,
   name,
   testId,
@@ -62,16 +62,16 @@ export function GoACheckbox({
   mr,
   mb,
   ml,
-}: GoACheckboxProps): JSX.Element {
+}: GoABCheckboxProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
       return;
     }
     const current = el.current;
-    const listener = (e: unknown) => {
-      const ce = e as CustomEvent;
-      onChange?.(name, ce.detail.checked, ce.detail.value);
+    const listener = (e: Event) => {
+      const detail = (e as CustomEvent<GoABCheckboxOnChangeDetail>).detail;
+      onChange?.(detail);
     };
 
     current.addEventListener("_change", listener);
@@ -100,10 +100,12 @@ export function GoACheckbox({
       mb={mb}
       ml={ml}
     >
-      {description && typeof description !== "string" && <div slot="description">{description}</div>}
+      {description && typeof description !== "string" && (
+        <div slot="description">{description}</div>
+      )}
       {children}
     </goa-checkbox>
   );
 }
 
-export default GoACheckbox;
+export default GoABCheckbox;
