@@ -224,7 +224,7 @@
     setTimeout(async () => {
       syncFilteredOptions();
       _isMenuVisible = true;
-      _inputEl?.focus();
+      // _inputEl?.focus();
     }, 0);
   }
 
@@ -355,9 +355,12 @@
 
     onEscape(e: KeyboardEvent) {
       reset();
-      _inputEl.focus();
-      e.preventDefault();
-      e.stopPropagation();
+      // FIXME: on escape should allow the next tab click to move to the next element, currently 
+      // clicking tab after esc will refocus onto the Dropdown
+
+      // _inputEl.focus();
+      // e.preventDefault();
+      // e.stopPropagation();
     }
 
     onEnter(e: KeyboardEvent) {
@@ -674,18 +677,17 @@
     cursor: pointer;
     width: var(--width, 100%);
   }
-
   @media (--mobile) {
     .dropdown {
       width: 100%;
     }
   }
-
   @media (--not-mobile) {
     .dropdown {
       width: var(--width, 100%);
     }
   }
+
 
   .dropdown-input-group {
     box-sizing: border-box;
@@ -702,44 +704,36 @@
     cursor: pointer;
     width: var(--width, 100%);
   }
-
   .dropdown-input-group:hover {
     border-color: var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-hover);
   }
-
-  .dropdown-input-group:focus,
-  .dropdown-input-group:focus-within {
+  .dropdown-input-group:has(input:focus-visible) {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
-
+  .dropdown-input-group.error,
+  .dropdown-input-group.error:hover {
+    border: 2px solid var(--goa-color-interactive-error);
+    box-shadow: 0 0 0 1px var(--goa-color-interactive-error);
+  }
+  .dropdown-input-group.error:has(:focus-visible) {
+    border: 2px solid var(--goa-color-interactive-error);
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+  }
   @container not (--mobile) {
     .dropdown-input-group {
       width: var(--width);
     }
   }
 
-  .dropdown-input-group.error,
-  .dropdown-input-group.error:hover {
-    border: 2px solid var(--goa-color-interactive-error);
-    box-shadow: 0 0 0 1px var(--goa-color-interactive-error);
-  }
-
-  .dropdown-input-group.error:focus-within,
-  .dropdown-input-group.error:focus {
-    border: 2px solid var(--goa-color-interactive-error);
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
-  }
 
   .dropdown-icon--arrow,
   .dropdown-icon--clear {
     margin-right: var(--goa-space-s);
   }
 
+  /* TODO: add indicator to when the reset button has focus state */
   .dropdown-icon--clear:focus:not(.disabled),
   .dropdown-icon--clear:active:not(.disabled) {
-    color: var(--goa-color-interactive-focus);
     outline: none;
   }
 
@@ -847,8 +841,6 @@
 
   .dropdown-native:hover {
     border-color: var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-hover);
   }
 
   select {
@@ -877,7 +869,11 @@
     background-repeat: none;
   }
 
-  .dropdown-native:focus-within {
+  .dropdown-native:has(:focus-visible) {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+  }
+
+  goa-icon:focus-visible {
+    outline: none;
   }
 </style>

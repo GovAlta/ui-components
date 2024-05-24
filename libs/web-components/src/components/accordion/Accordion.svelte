@@ -143,15 +143,14 @@
   summary:hover {
     background-color: var(--goa-color-greyscale-200);
   }
-  summary:focus,
+  summary:focus-visible,
   summary:active {
     background-color: var(--goa-color-greyscale-100);
     outline: none;
   }
 
   /* Hack to make outline radius work on Safari */
-  summary:active::before,
-  summary:focus::before {
+  summary:focus-visible::before {
     content: "";
     position: absolute;
     top: -1px;

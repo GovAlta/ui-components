@@ -230,9 +230,7 @@
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
   }
 
-  :global([role="tab"]:hover:not([aria-selected="true"])),
-  :global([role="tab"]:focus:not([aria-selected="true"])),
-  :global([role="tab"]:focus-visible:not([aria-selected="true"])) {
+  :global([role="tab"]:hover:not([aria-selected="true"])) {
     border-color: var(--goa-color-greyscale-200);
   }
 

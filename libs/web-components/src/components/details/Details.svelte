@@ -15,7 +15,6 @@
 
   let _isMouseOver: boolean = false
   let _summaryEl: HTMLElement;
-  let _detailsEl: HTMLElement;
 
   $: _isOpen = toBoolean(open);
 
@@ -33,19 +32,46 @@
   });
 </script>
 
+<details
+  open={_isOpen}
+  on:toggle={({target}) => open = `${target.open}`}
+  style={calculateMargin(mt, mr, mb, ml)}>
+  <summary bind:this={_summaryEl}>
+    <goa-icon
+      mt="1"
+      mr="2"
+      type="chevron-forward"
+      fillcolor={_isMouseOver ? "var(--goa-color-interactive-hover)" : "var(--goa-color-interactive-default)"}
+    />
+    <span>{heading}</span>
+  </summary>
+  <div class="content">
+    <slot />
+  </div>
+</details>
+
 <style>
   :host {
     font-family: var(--goa-font-family-sans);
   }
 
+
   details {
     max-width: 75ch;
     position: relative;
   }
-
   details :global(::slotted(*)) {
     font: var(--goa-typography-body-m);
   }
+  details[open] goa-icon {
+    transform: translateX(-1px) rotate(90deg);
+    top: 0.75rem;
+  }
+  /* Hide native icon on iOS */
+  details summary::-webkit-details-marker {
+    display:none;
+  }
+
 
   summary {
     padding: 0.5rem;
@@ -54,29 +80,13 @@
     list-style: none;
     display: flex;
     align-items: flex-start;
+    border-radius: var(--goa-border-radius-m);    
   }
-
-  goa-icon {
-    /* transition: transform 80ms ease; */
-    position: absolute;
-  }
-
-  details[open] goa-icon {
-    transform: translateX(-1px) rotate(90deg);
-    top: 0.75rem;
-  }
-
-  /* Hide native icon on iOS */
-  details summary::-webkit-details-marker {
-    display:none;
-  }
-
-  summary {
-    border-radius: var(--goa-border-radius-m);
+  summary:focus-visible {
+    outline: 3px solid var(--goa-color-interactive-focus);
   }
   summary:focus,
   summary:active {
-    outline: 3px solid var(--goa-color-interactive-focus);
     border-radius: var(--goa-border-radius-m);
     color: var(--goa-color-interactive-hover);
     background-color: var(--goa-color-greyscale-100);
@@ -96,34 +106,20 @@
     color: var(--goa-color-interactive-hover);
   }
 
+
   .content {
     border-left: 4px solid var(--goa-color-greyscale-200);
     padding: 1rem;
     margin-left: 1.1rem;
     margin-bottom: var(--goa-space-s);
   }
-
   .content :global(::slotted(p:last-child)) {
     margin-bottom: 0 !important;
   }
+
+  
+  goa-icon {
+    /* transition: transform 80ms ease; */
+    position: absolute;
+  }
 </style>
-
-<details
-  bind:this={_detailsEl}
-  open={_isOpen}
-  on:toggle={({target}) => open = `${target.open}`}
-  style={calculateMargin(mt, mr, mb, ml)}>
-  <summary bind:this={_summaryEl}>
-    <goa-icon
-      mt="1"
-      mr="2"
-      type="chevron-forward"
-      fillcolor={_isMouseOver ? "var(--goa-color-interactive-hover)" : "var(--goa-color-interactive-default)"}
-    />
-    <span>{heading}</span>
-  </summary>
-  <div class="content">
-    <slot />
-  </div>
-</details>
-

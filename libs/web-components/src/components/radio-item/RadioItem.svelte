@@ -34,14 +34,14 @@
   import {fromBoolean, toBoolean} from "../../common/utils";
 
   export let value: string;
-  export let label: string;
+  export let name: string = "";
+  export let label: string = "";
   export let description: string = "";
   export let disabled: string = "false";
   export let error: string = "false";
-  export let name: string;
   export let checked: string = "false";
-  export let arialabel: string;
-  export let ariadescribedby: string;
+  export let arialabel: string = "";
+  export let ariadescribedby: string = "";
 
   let _radioItemEl: HTMLElement;
 
@@ -105,10 +105,10 @@
     if (isDisabled) return;
     if (isChecked) return;
 
-    const event = new CustomEvent('_click', {
+    const event = new CustomEvent("_click", {
       detail: value,
       composed: true,
-      bubbles: true
+      bubbles: true,
     });
     _radioItemEl.dispatchEvent(event);
   }
@@ -125,21 +125,21 @@
     <input
       type="radio"
       {name}
-      value={value}
+      {value}
       disabled={isDisabled}
       checked={isChecked}
       aria-label={arialabel}
       aria-describedby={ariadescribedby}
       on:click={onChange}
     />
-    <div class="goa-radio-icon"/>
+    <div class="goa-radio-icon" />
     <span class="goa-radio-label">
-          {label || value}
-        </span>
+      {label || value}
+    </span>
   </label>
   {#if $$slots.description || description}
     <div class="goa-radio-description">
-      <slot name="description"/>
+      <slot name="description" />
       {description}
     </div>
   {/if}
@@ -208,11 +208,6 @@
     margin-top: var(--font-valign-fix);
   }
 
-  /* What is this? */
-  .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
-  }
-
   .goa-radio--disabled .goa-radio-label {
     opacity: 0.4;
   }
@@ -245,12 +240,14 @@
   input[type="radio"]:hover:active ~ .goa-radio-icon,
   input[type="radio"]:hover:focus ~ .goa-radio-icon,
   input[type="radio"]:active ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width)
+      var(--goa-color-interactive-focus);
   }
 
   /* Checked */
   input[type="radio"]:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive-default);
+    border: var(--goa-radio-border-width--checked) solid
+      var(--goa-color-interactive-default);
   }
 
   /* Disabled */
@@ -266,7 +263,8 @@
   input[type="radio"]:disabled:checked ~ .goa-radio-icon,
   input[type="radio"]:disabled:checked:focus ~ .goa-radio-icon,
   input[type="radio"]:disabled:checked:active ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive-hover);
+    border: var(--goa-radio-border-width--checked) solid
+      var(--goa-color-interactive-hover);
     box-shadow: none;
   }
 
@@ -282,7 +280,8 @@
 
   .goa-radio--error input[type="radio"]:hover:active ~ .goa-radio-icon,
   .goa-radio--error input[type="radio"]:hover:focus ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width)
+      var(--goa-color-interactive-focus);
   }
 
   .goa-radio--error input[type="radio"]:disabled:hover ~ .goa-radio-icon {
