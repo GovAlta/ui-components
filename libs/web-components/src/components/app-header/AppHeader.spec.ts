@@ -1,36 +1,40 @@
-import { render, waitFor } from '@testing-library/svelte';
-import userEvent from "@testing-library/user-event"
-import type { UserEvent } from '@testing-library/user-event/dist/types/setup/setup';
-import AppHeaderWrapper from './AppHeaderWrapper.test.svelte'
+import { render, waitFor } from "@testing-library/svelte";
+import userEvent from "@testing-library/user-event";
+import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
+import AppHeaderWrapper from "./AppHeaderWrapper.test.svelte";
 import { it, describe } from "vitest";
+import { tick } from "svelte";
 
 type QueryAll = (q: string) => NodeListOf<HTMLElement>;
 
 let user: UserEvent;
 
 beforeEach(() => {
-  user = userEvent.setup()
-})
+  user = userEvent.setup();
+});
 
-describe('AppHeader Desktop with children', () => {
-
+describe("AppHeader Desktop with children", () => {
   const heading = "Test heading";
-  const url = "http://localhost/foo"
+  const url = "http://localhost/foo";
 
   beforeEach(() => {
-    Object.defineProperty(window, 'innerWidth', {
+    Object.defineProperty(window, "innerWidth", {
       writable: true,
       value: 1200,
     });
-  })
+  });
 
-  it('should render', async () => {
-    const { container, queryByTestId } = render(AppHeaderWrapper, { heading, url, haschildren: true });
+  it("should render", async () => {
+    const { container, queryByTestId } = render(AppHeaderWrapper, {
+      heading,
+      url,
+      haschildren: true,
+    });
     const links = container.querySelectorAll("a");
 
     expect(queryByTestId("title")?.innerHTML).toBe(heading);
     expect((queryByTestId("url") as HTMLLinkElement)?.href).toBe(url);
-    expect(links.length).toBe(6);  // 5 custom links + 1 app header for the url
+    expect(links.length).toBe(6); // 5 custom links + 1 app header for the url
   });
 });
 
@@ -38,19 +42,24 @@ describe("AppHeader Desktop with a defined fullmenubreakpoint", () => {
   let $t: (query: string) => HTMLElement | null;
 
   const heading = "Test heading";
-  const url = "http://localhost/foo"
+  const url = "http://localhost/foo";
 
   beforeEach(async () => {
-    Object.defineProperty(window, 'innerWidth', {
+    Object.defineProperty(window, "innerWidth", {
       writable: true,
       value: 1500, // desktop width 1500 > 1024 tablet width, but want to collapse menu
     });
   });
 
-  it("should show menu toggle when fullmenubreakpoint = 1700", async() => {
-    const result = render(AppHeaderWrapper, {heading, url, haschildren: true, fullmenubreakpoint: 1700});
+  it("should show menu toggle when fullmenubreakpoint = 1700", async () => {
+    const result = render(AppHeaderWrapper, {
+      heading,
+      url,
+      haschildren: true,
+      fullmenubreakpoint: 1700,
+    });
 
-    const c = result.container
+    const c = result.container;
     $t = result.queryByTestId.bind(c);
     await waitFor(
       () => {
@@ -63,36 +72,44 @@ describe("AppHeader Desktop with a defined fullmenubreakpoint", () => {
     );
   });
 
-  it("should show desktop menu when fullmenubreakpoint = 1400", async() => {
-    const result = render(AppHeaderWrapper, {heading, url, haschildren: true, fullmenubreakpoint: 1400});
+  it("should show desktop menu when fullmenubreakpoint = 1400", async () => {
+    const result = render(AppHeaderWrapper, {
+      heading,
+      url,
+      haschildren: true,
+      fullmenubreakpoint: 1400,
+    });
 
-    const c = result.container
+    const c = result.container;
     $t = result.queryByTestId.bind(c);
 
     const toggleBtn = $t("menu-toggle");
     expect(toggleBtn).toBeFalsy();
     const links = c.querySelectorAll("a");
-    expect(links.length).toBe(6);  // 5 custom links + 1 app header url
+    expect(links.length).toBe(6); // 5 custom links + 1 app header url
   });
-})
+});
 
-describe('AppHeader Mobile', () => {
-
+describe("AppHeader Mobile", () => {
   let $t: (query: string) => HTMLElement | null;
 
   const heading = "Test heading";
-  const url = "http://localhost/foo"
+  const url = "http://localhost/foo";
 
   beforeEach(async () => {
-    Object.defineProperty(window, 'innerWidth', {
+    Object.defineProperty(window, "innerWidth", {
       writable: true,
       value: 400,
     });
 
-    const result = render(AppHeaderWrapper, { heading, url, haschildren: true });
-    const c = result.container
-    $t = result.queryByTestId.bind(c)
-  })
+    const result = render(AppHeaderWrapper, {
+      heading,
+      url,
+      haschildren: true,
+    });
+    const c = result.container;
+    $t = result.queryByTestId.bind(c);
+  });
 
   it("should show/hide the menu", async () => {
     const toggleBtn = $t("menu-toggle");
@@ -104,22 +121,22 @@ describe('AppHeader Mobile', () => {
     await waitFor(() => {
       const hasMenuItems = $t("slot");
       expect(hasMenuItems).toBeFalsy();
-    })
+    });
 
     // open
     user.click(toggleBtn);
     await waitFor(() => {
       const hasMenuItems = $t("slot");
       expect(hasMenuItems).toBeTruthy();
-    })
+    });
 
     // close
     user.click(toggleBtn);
     await waitFor(() => {
       const hasMenuItems = $t("slot");
       expect(hasMenuItems).toBeFalsy();
-    })
-  })
+    });
+  });
 
   it("toggles the menu with the space key", async () => {
     const toggleBtn = $t("menu-toggle");
@@ -132,15 +149,15 @@ describe('AppHeader Mobile', () => {
     await waitFor(() => {
       const hasMenuItems = $t("slot");
       expect(hasMenuItems).toBeTruthy();
-    })
+    });
 
     // close
     user.keyboard(" ");
     await waitFor(() => {
       const hasMenuItems = $t("slot");
       expect(hasMenuItems).toBeFalsy();
-    })
-  })
+    });
+  });
 
   it("toggles the menu with the enter key", async () => {
     const toggleBtn = $t("menu-toggle");
@@ -153,36 +170,39 @@ describe('AppHeader Mobile', () => {
     await waitFor(() => {
       const hasMenuItems = $t("slot");
       expect(hasMenuItems).toBeTruthy();
-    })
+    });
 
     // close
     user.keyboard("{enter}");
     await waitFor(() => {
       const hasMenuItems = $t("slot");
       expect(hasMenuItems).toBeFalsy();
-    })
-  })
-})
+    });
+  });
+});
 
-describe('AppHeader Tablet', () => {
-
+describe("AppHeader Tablet", () => {
   let $$: QueryAll;
   let $t: (query: string) => HTMLElement | null;
 
   const heading = "Test heading";
-  const url = "http://localhost/foo"
+  const url = "http://localhost/foo";
 
   beforeEach(async () => {
-    Object.defineProperty(window, 'innerWidth', {
+    Object.defineProperty(window, "innerWidth", {
       writable: true,
       value: 800,
     });
 
-    const result = render(AppHeaderWrapper, { heading, url, haschildren: true });
-    const c = result.container
+    const result = render(AppHeaderWrapper, {
+      heading,
+      url,
+      haschildren: true,
+    });
+    const c = result.container;
     $$ = c.querySelectorAll.bind(c);
-    $t = result.queryByTestId.bind(c)
-  })
+    $t = result.queryByTestId.bind(c);
+  });
 
   it("should show/hide the menu", async () => {
     const toggleBtn = $t("menu-toggle");
@@ -194,22 +214,22 @@ describe('AppHeader Tablet', () => {
     await waitFor(() => {
       const hasMenuItems = $$("goa-popover a");
       expect(hasMenuItems.length).toBeFalsy();
-    })
+    });
 
     // open
     user.click(toggleBtn);
     await waitFor(() => {
       const hasMenuItems = $$("goa-popover a");
       expect(hasMenuItems.length).toBeTruthy();
-    })
+    });
 
     // close
     user.click(toggleBtn);
     await waitFor(() => {
       const hasMenuItems = $$("goa-popover a");
       expect(hasMenuItems.length).toBeFalsy();
-    })
-  })
+    });
+  });
 
   it("toggles the menu with the space key", async () => {
     const toggleBtn = $t("menu-toggle");
@@ -222,15 +242,15 @@ describe('AppHeader Tablet', () => {
     await waitFor(() => {
       const hasMenuItems = $$("goa-popover a");
       expect(hasMenuItems.length).toBeTruthy();
-    })
+    });
 
     // close
     user.keyboard(" ");
     await waitFor(() => {
       const hasMenuItems = $$("goa-popover a");
       expect(hasMenuItems.length).toBeFalsy();
-    })
-  })
+    });
+  });
 
   it("toggles the menu with the enter key", async () => {
     const toggleBtn = $t("menu-toggle");
@@ -243,13 +263,74 @@ describe('AppHeader Tablet', () => {
     await waitFor(() => {
       const hasMenuItems = $$("goa-popover a");
       expect(hasMenuItems.length).toBeTruthy();
-    })
+    });
 
     // close
     user.keyboard("{enter}");
     await waitFor(() => {
       const hasMenuItems = $$("goa-popover a");
       expect(hasMenuItems.length).toBeFalsy();
-    })
-  })
-})
+    });
+  });
+});
+
+describe.skip("AppHeader with correct highlighted link", () => {
+  const heading = "Test heading";
+  const url = "http://localhost/foo";
+
+  beforeEach(() => {
+    Object.defineProperty(window, "innerWidth", {
+      writable: true,
+      value: 1200,
+    });
+
+    // Mock window.location
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    delete window.location;
+  });
+
+  it("should set #learnmore to be highlighted when navigating to /foo#learnmore", async () => {
+    // Bug 1772
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    window.location = new URL("http://localhost/foo#learnmore");
+    const { container } = render(AppHeaderWrapper, {
+      heading,
+      url,
+      haschildren: true,
+    });
+
+    // Simulate route change
+    const event = new PopStateEvent("popstate", { state: {} });
+    window.dispatchEvent(event);
+
+    // Check if the correct link has the "current" class
+    const currentLink = container.querySelector("a.current");
+    expect(currentLink).toBeTruthy();
+    expect(currentLink?.getAttribute("href")).toBe("#aboutus");
+  });
+
+  it("should set #seniors under app-header-menu to be highlighted when navigating to /foo#seniors", async () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    window.location = new URL("http://localhost/foo#seniors");
+    const { container } = render(AppHeaderWrapper, {
+      heading,
+      url,
+      haschildren: true,
+    });
+
+    // Simulate route change
+    const event = new PopStateEvent("popstate", { state: {} });
+    window.dispatchEvent(event);
+
+    await tick();
+    await waitFor(() => {
+      // Check if the correct link has the "current" class
+      const currentLink = container.querySelector("a.current");
+      expect(currentLink).toBeTruthy();
+      expect(currentLink?.getAttribute("href")).toBe("#seniors");
+    });
+  });
+});

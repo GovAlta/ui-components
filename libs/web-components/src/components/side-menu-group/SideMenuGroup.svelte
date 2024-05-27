@@ -1,10 +1,16 @@
 <svelte:options customElement="goa-side-menu-group" />
 
-<script lang="ts">
-  import { onDestroy, onMount, tick } from "svelte";
-  import { isUrlMatch } from "../../common/urls";
+<script lang="ts" context="module">
+  export type SideMenuGroupProps = {
+    el: HTMLElement;
+    links: Element[];
+    currentHref?: string;
+  };
+</script>
 
-  type SideMenuGroupElement = HTMLElement & { heading?: string };
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { getSlottedChildren } from "../../common/utils";
 
   export let heading: string;
 
@@ -14,91 +20,66 @@
 
   $: _slug = toSlug(heading);
 
-  onMount(async () => {
-    await tick(); // needed to allow for window location to be read
-    checkUrlMatches();
-    setCurrent();
+  onMount(() => {
+    dispatchInit();
     addEventListeners();
   });
 
-  onDestroy(() => {
-    removeEventListeners();
-  });
+  function dispatchInit() {
+    if (!_rootEl) return;
 
-  function checkUrlMatches() {
-    _open = matchesMenu() || matchesChild(_rootEl);
-    if (_open) {
-      notifyParent(true);
-    }
+    const slottedChildren = getSlottedChildren(_rootEl);
+    if (slottedChildren.length === 0) return;
+
+    const links = slottedChildren
+      .filter((el) => el.tagName === "A")
+      .map((el) => {
+        el.classList.remove("current");
+        return el;
+      });
+
+    setTimeout(() => {
+      _rootEl.dispatchEvent(
+        new CustomEvent<SideMenuGroupProps>("sidemenugroup:mounted", {
+          detail: {
+            el: _rootEl,
+            links: links,
+          },
+          composed: true,
+          bubbles: true,
+        }),
+      );
+    }, 1);
   }
 
   function addEventListeners() {
+    // listen to events by parent sidemenu (if parent has a final link current)
+    _rootEl.addEventListener("sidemenu:current:change", (e: Event) => {
+      const href = (e as CustomEvent).detail;
+      setCurrent(href);
+    });
+
     // listen to events by children (if child is open the parent also has to be open)
-    _rootEl.addEventListener("_open", () => {
-      _open = true;
-      _current = true;
+    _rootEl.addEventListener("_open", (e: Event) => {
+      _open = _current = (e as CustomEvent).detail.current;
     });
-
-    // watch path changes
-    let currentLocation = document.location.href;
-    const observer = new MutationObserver((_mutationList) => {
-      // if path change occurs
-      if (currentLocation !== document.location.href) {
-        currentLocation = document.location.href;
-        setCurrent();
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // watch hash / browser history changes
-    window.addEventListener("popstate", setCurrent);
-  }
-
-  function removeEventListeners() {
-    window.removeEventListener("popstate", setCurrent);
   }
 
   function toSlug(path: string): string {
     return path?.toLowerCase().replace(/ /g, "-");
   }
 
-  function matchesMenu(): boolean {
-    return isUrlMatch(document.location, _slug) >= 0;
-  }
+  function setCurrent(matchedHref: string) {
+    const children = getSlottedChildren(_rootEl);
+    if (children.length === 0) return;
 
-  function matchesChild(el: SideMenuGroupElement): boolean {
-    if (isUrlMatch(document.location, toSlug(el.heading)) >= 0) {
-      return true;
-    }
-
-    const slot = el.querySelector("slot") as HTMLSlotElement;
-    if (!slot) {
-      return false;
-    }
-    const children = slot.assignedElements();
-    return !!children.find((child: Element) => {
-      return isUrlMatch(document.location, child.getAttribute("href")) >= 0;
-    });
-  }
-
-  function setCurrent() {
-    const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
-    if (!slot) {
-      return false;
-    }
-
-    const children = slot.assignedElements();
-    let maxMatchWeight = -1;
     let matchedChild = null;
 
     _current = false;
     children.forEach((child: Element) => {
       const url = child.getAttribute("href");
-      const weight = isUrlMatch(document.location, url);
-      if (weight > maxMatchWeight) {
-        maxMatchWeight = weight;
-        matchedChild = child;
-      }
+      if (url === matchedHref) matchedChild = child;
+
       child.classList.remove("current");
 
       // get side-menu-group (level >= 2) marked as children
@@ -108,10 +89,10 @@
     });
 
     if (matchedChild) {
-      _current = true;
-      matchedChild.classList.add("current");
-      notifyParent(true);
+      (matchedChild as Element).classList.add("current");
     }
+    _current = _open = !!matchedChild;
+    notifyParent(_open);
   }
 
   function handleClick(e: Event) {
@@ -167,10 +148,12 @@
     border-left: 4px solid var(--goa-color-interactive-disabled);
     background: var(--goa-color-info-background);
   }
+
   :global(::slotted(a:hover:not(.current))) {
     background: var(--goa-color-info-background);
     border-color: var(--goa-color-greyscale-200);
   }
+
   :global(::slotted(a:focus-visible)),
   .heading:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
@@ -210,6 +193,7 @@
   .side-menu-group.current .heading {
     background: #cedfee;
   }
+
   .heading:hover {
     background: #cedfee;
   }
