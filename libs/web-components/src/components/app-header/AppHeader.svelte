@@ -1,12 +1,14 @@
 <!-- svelte-ignore missing-custom-element-compile-options -->
-<svelte:options customElement="goa-app-header" />
+<svelte:options customElement="goa-app-header"/>
 
 <!-- Script -->
 <script lang="ts">
-  import { onDestroy, onMount, tick } from "svelte";
-  import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
-  import { isUrlMatch, getMatchedLink } from "../../common/urls";
-  import { GoAAppHeaderMenuProps} from "../app-header-menu/AppHeaderMenu.svelte";
+  import {onDestroy, onMount, tick} from "svelte";
+  import {MOBILE_BP, TABLET_BP} from "../../common/breakpoints";
+  import {getSlottedChildren} from "../../common/utils";
+  import {isUrlMatch, getMatchedLink} from "../../common/urls";
+  import {AppHeaderMenuProps} from "../app-header-menu/AppHeaderMenu.svelte";
+
 
   // optional
   export let heading: string = "";
@@ -29,7 +31,7 @@
   let _showMenu = false;
 
   let _appHeaderLinks: Element[] = [];
-  let _appHeaderMenuItems: GoAAppHeaderMenuProps[] = [];
+  let _appHeaderMenuItems: AppHeaderMenuProps[] = [];
 
   // Reactive
 
@@ -49,8 +51,7 @@
 
   // Hooks
 
-  onMount(async() => {
-    await tick();
+  onMount(() => {
     getChildren();
     addEventListeners();
   });
@@ -62,22 +63,25 @@
   function getChildren() {
     if (!_slotParentEl) return;
 
-    const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
-    if (!slot) return;
+    const slotChildren = getSlottedChildren(_slotParentEl);
+    if (slotChildren.length === 0) return;
 
-    _appHeaderLinks = slot
-      .assignedElements()
+    _appHeaderLinks = slotChildren
       .filter((el) => el.tagName === "A")
       .map((el) => {
         el.classList.remove("current");
         return el;
       });
+
+
   }
 
   function addEventListeners() {
 
-    _rootEl.addEventListener("appheadermenu:mounted", (e: Event) => {
-      const appHeaderMenuProps = (e as CustomEvent<GoAAppHeaderMenuProps>).detail;
+    if (!_rootEl) return;
+
+    _rootEl.addEventListener("app-header-menu:mounted", (e: Event) => {
+      const appHeaderMenuProps = (e as CustomEvent<AppHeaderMenuProps>).detail;
       _appHeaderMenuItems = [..._appHeaderMenuItems, appHeaderMenuProps];
       setCurrentLink();
     });
@@ -90,7 +94,7 @@
         onRouteChange();
       }
     });
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, {childList: true, subtree: true});
 
     window.addEventListener("popstate", onRouteChange, true);
   }
@@ -112,16 +116,17 @@
 
     links.forEach(link => link.classList.remove("current"));
 
-    const matchedLink = getMatchedLink(links, url);
+    const matchedLink = getMatchedLink(links, window.location);
     if (matchedLink) {
       matchedLink.classList.add("current");
-      dispatchCurrentLink(matchedLink.getAttribute("href") || "");
     }
+
+    dispatchCurrentLink(matchedLink?.getAttribute("href") || "");
   }
 
   function dispatchCurrentLink(href: string) {
     _appHeaderMenuItems.forEach((item) => {
-      item.el.dispatchEvent(new CustomEvent("appheader:current:change", {
+      item.el.dispatchEvent(new CustomEvent("app-header:changed", {
         composed: true,
         detail: href
       }));
@@ -162,7 +167,7 @@
   }
 </script>
 
-<svelte:window bind:innerWidth={_windowWidth} />
+<svelte:window bind:innerWidth={_windowWidth}/>
 
 <!-- HTML -->
 <div
@@ -179,16 +184,16 @@
     <!-- Logo and optional heading link -->
     {#if url}
       <a href={url} class="header-logo-title-area" data-testid="url">
-        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
-        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
+        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo}/>
+        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo}/>
         {#if heading}
           <span data-testid="title" class="title">{heading}</span>
         {/if}
       </a>
     {:else}
       <div class="header-logo-title-area">
-        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
-        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
+        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo}/>
+        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo}/>
         {#if heading}
           <span data-testid="title" class="title">{heading}</span>
         {/if}
@@ -202,10 +207,11 @@
         class="menu-toggle-area"
         data-testid="menu-toggle"
       >
-        Menu <goa-icon
-        type={_showMenu ? "chevron-up" : "chevron-down"}
-        mt="1"
-      />
+        Menu
+        <goa-icon
+          type={_showMenu ? "chevron-up" : "chevron-down"}
+          mt="1"
+        />
       </button>
     {/if}
 
@@ -229,16 +235,17 @@
             class="menu-toggle-area"
             data-testid="menu-toggle"
           >
-            Menu <goa-icon
-            type={_showMenu ? "chevron-up" : "chevron-down"}
-            mt="1"
-          />
+            Menu
+            <goa-icon
+              type={_showMenu ? "chevron-up" : "chevron-down"}
+              mt="1"
+            />
           </button>
         </div>
 
         {#if _showMenu}
           <div bind:this={_slotParentEl} data-testid="slot">
-            <slot />
+            <slot/>
           </div>
         {/if}
       </goa-popover>
@@ -251,14 +258,14 @@
     -->
     {#if !_showMenu && (_mobile || _tablet)}
       <div bind:this={_slotParentEl} style="display: none">
-        <slot />
+        <slot/>
       </div>
     {/if}
 
     <!-- Mobile and desktop slot content -->
     {#if (_showMenu && _mobile) || _desktop}
       <div bind:this={_slotParentEl} data-testid="slot" class="content-area">
-        <slot />
+        <slot/>
       </div>
     {/if}
   </div>
@@ -278,8 +285,7 @@
 
   /* spans the full page width */
   .container {
-    border-bottom: var(--goa-border-width-s) solid
-    var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
     background-color: var(--goa-color-greyscale-white);
   }
 
@@ -307,9 +313,10 @@
 
     display: flex;
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 var(--goa-space-m);
     text-decoration: none;
   }
+
   .header-logo-title-area:focus {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
@@ -338,6 +345,7 @@
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
   }
+
   goa-popover .menu-toggle-area:focus {
     outline-offset: 0;
   }
@@ -360,34 +368,38 @@
     cursor: pointer;
     white-space: nowrap;
   }
+
   :global(::slotted(a:hover)) {
     background-color: var(--goa-color-greyscale-100);
     color: var(--goa-color-interactive-hover);
   }
+
   :global(::slotted(a:focus)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
     background: var(--goa-color-greyscale-100);
     color: var(--goa-color-interactive-hover);
   }
+
   :global(::slotted(a.interactive)) {
     text-decoration: underline;
     color: var(--goa-color-interactive-default);
   }
 
   .mobile :global(::slotted(a)) {
-    box-shadow: inset 0 var(--goa-border-width-s) 0 0
-    var(--goa-color-greyscale-200);
+    box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
   }
+
   .mobile .image-desktop {
     display: none;
   }
+
   .mobile .image-mobile {
     display: block;
   }
+
   .mobile.show-menu {
-    border-bottom: var(--goa-border-width-m) solid
-    var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-border-width-m) solid var(--goa-color-greyscale-200);
   }
 
   /* Tablet */
@@ -395,23 +407,28 @@
   .tablet:global(::slotted(*)) {
     font: var(--goa-typography-body-m);
   }
+
   .tablet :global(::slotted(a)) {
-    box-shadow: inset 0 var(--goa-border-width-s) 0 0
-    var(--goa-color-greyscale-200);
+    box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
   }
+
   .tablet .image-desktop {
     display: block;
   }
+
   .tablet .image-mobile {
     display: none;
   }
+
   .tablet .header-logo-title-area {
-    padding: 0 1.5rem;
+    padding: 0 var(--goa-space-l);
     min-height: 4rem;
   }
+
   .tablet .layout {
     grid-template-rows: 4rem auto;
   }
+
   .tablet .title {
     margin-left: var(--goa-space-m);
   }
@@ -422,6 +439,7 @@
     display: flex;
     align-items: stretch;
   }
+
   .desktop .header-logo-title-area {
     grid-area: header;
     display: flex;
@@ -431,12 +449,15 @@
     flex: 1 1 auto;
     min-height: 4rem;
   }
+
   .desktop .image-desktop {
     display: block;
   }
+
   .desktop .image-mobile {
     display: none;
   }
+
   .desktop .layout {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -445,6 +466,7 @@
     margin: 0 auto;
     width: min(var(--max-content-width), 100%);
   }
+
   .desktop :global(::slotted(goa-app-header-menu)),
   .desktop :global(::slotted(a)),
   .desktop :global(::slotted(a:visited)) {
@@ -455,37 +477,44 @@
     align-items: center;
     padding: 0 0.75rem;
   }
+
   .desktop :global(::slotted(goa-app-header-menu)) {
     padding: 0;
   }
+
   .desktop :global(::slotted(a:focus-within)),
-  .desktop :global(::slotted(a:hover))
-  {
+  .desktop :global(::slotted(a:hover)) {
     background: var(--goa-color-greyscale-100);
     cursor: pointer;
     color: var(--goa-color-interactive-hover);
   }
+
   .desktop :global(::slotted(a:focus)),
   .desktop :global(::slotted(goa-app-header-menu:focus)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
   }
+
   .desktop :global(::slotted(a.current)) {
     border-top: 4px solid var(--goa-color-interactive-default);
     border-bottom: 4px solid transparent;
   }
+
   .desktop :global(::slotted(a.current:hover)) {
     border-top: 4px solid var(--goa-color-interactive-hover);
   }
+
   .desktop :global(::slotted(a.interactive)) {
     font-weight: var(--goa-font-weight-medium);
     text-decoration: underline;
     color: var(--goa-color-interactive-default);
     padding: 0 var(--goa-space-m);
   }
+
   .desktop :global(::slotted(a.interactive:hover)) {
     color: var(--goa-color-interactive-hover);
   }
+
   .desktop :global(::slotted(a.interactive.current)) {
     border-color: transparent;
     margin-left: var(--goa-space-m);

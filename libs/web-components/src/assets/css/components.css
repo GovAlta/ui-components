@@ -26,7 +26,7 @@ goa-app-header a.current.inside-collapse-menu,
 goa-app-header a.current.inside-collapse-menu:hover,
 goa-app-header-menu a.current,
 goa-app-header-menu a.current:hover {
-  color:  var(--goa-color-text-light);
+  color: var(--goa-color-text-light);
 }
 
 goa-app-header-menu a:first-of-type {
@@ -50,7 +50,7 @@ goa-table td {
   border-bottom: 1px solid var(--goa-color-greyscale-200);
 }
 
-goa-table[variant=relaxed] td {
+goa-table[variant="relaxed"] td {
   padding: 1.25rem 1rem 1rem 1rem;
 }
 

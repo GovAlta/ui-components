@@ -1,14 +1,16 @@
 <svelte:options customElement="goa-app-header-menu" />
+
 <script lang="ts" context="module">
-  export type GoAAppHeaderMenuProps = {
-    el: HTMLElement,
-    links: Element[],
-    currentHref?: string,
+  export type AppHeaderMenuProps = {
+    el: HTMLElement;
+    links: Element[];
+    currentHref?: string;
   };
 </script>
+
 <script lang="ts">
-  import { onDestroy, onMount, tick } from "svelte";
-  import { validateRequired } from "../../common/utils";
+  import { onMount, tick } from "svelte";
+  import { getSlottedChildren, validateRequired } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { TABLET_BP } from "../../common/breakpoints";
 
@@ -43,8 +45,7 @@
 
   // Hooks
 
-  onMount(async () => {
-    await tick();
+  onMount(() => {
     validateRequired("GoaAppHeaderMenu", { heading });
     dispatchInit();
     addAppHeaderCurrentChangeListener();
@@ -54,12 +55,11 @@
 
   function dispatchInit() {
     if (!_slotParentEl) return;
+    const slottedChildren = getSlottedChildren(_slotParentEl);
 
-    const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
-    if (!slot) return;
+    if (slottedChildren.length === 0) return;
 
-    const links = slot
-      .assignedElements()
+    const links = slottedChildren
       .filter((el) => el.tagName === "A")
       .map((el) => {
         el.classList.remove("current");
@@ -67,39 +67,42 @@
       });
 
     setTimeout(() => {
-      _rootEl?.dispatchEvent(new CustomEvent<GoAAppHeaderMenuProps>("appheadermenu:mounted", {
-        detail: {
-          el: _rootEl,
-          links: links
-        },
-        composed: true,
-        bubbles: true
-      }))
+      _rootEl?.dispatchEvent(
+        new CustomEvent<AppHeaderMenuProps>("app-header-menu:mounted", {
+          detail: {
+            el: _rootEl,
+            links: links,
+          },
+          composed: true,
+          bubbles: true,
+        }),
+      );
     }, 1);
   }
 
   function addAppHeaderCurrentChangeListener() {
-    _rootEl?.addEventListener("appheader:current:change", (e: Event) => {
+    _rootEl?.addEventListener("app-header:changed", (e: Event) => {
       const href = (e as CustomEvent).detail;
       setCurrentLink(href);
-    })
+    });
   }
 
   function setCurrentLink(href: string) {
     if (!_slotParentEl) return;
 
-    const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
-    if (!slot) return;
+    const slotChildren = getSlottedChildren(_slotParentEl);
+    if (slotChildren.length === 0) return;
 
-    const links = slot
-      .assignedElements()
+    const links = slotChildren
       .filter((el) => el.tagName === "A")
       .map((el) => {
         el.classList.remove("current");
         return el;
       });
 
-    const matchedLink = links.find(link => link.getAttribute("href") === href);
+    const matchedLink = links.find(
+      (link) => link.getAttribute("href") === href,
+    );
     if (matchedLink) {
       matchedLink.classList.add("current");
     }
@@ -148,7 +151,7 @@
 
 <svelte:window bind:innerWidth={_innerWidth} />
 
-<div bind:this={_rootEl}>
+<div bind:this={_rootEl} data-testid="rootEl">
   {#if _desktop}
     <goa-popover
       bind:this={_popoverEl}
@@ -159,7 +162,7 @@
       tabindex="-1"
       width="16rem"
       position="below"
-      open="{_open}"
+      open={_open}
     >
       <button
         slot="target"
@@ -168,28 +171,28 @@
         class:current={_hasCurrentLink}
       >
         {#if leadingicon}
-          <goa-icon type={leadingicon} mt="1"/>
+          <goa-icon type={leadingicon} mt="1" />
         {/if}
         {heading}
-        <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1"/>
+        <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1" />
       </button>
 
       <div class="desktop" bind:this={_slotParentEl}>
-        <slot/>
+        <slot />
       </div>
     </goa-popover>
   {:else}
     <button class:open={_open} on:click={toggleMenu} class={type}>
       {#if leadingicon}
-        <goa-icon type={leadingicon} mt="1"/>
+        <goa-icon type={leadingicon} mt="1" />
       {/if}
       <span class="heading">{heading}</span>
-      <goa-spacer hspacing="fill"/>
-      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1"/>
+      <goa-spacer hspacing="fill" />
+      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1" />
     </button>
     {#if _open}
       <div class="not-desktop" bind:this={_slotParentEl}>
-        <slot/>
+        <slot />
       </div>
     {/if}
   {/if}
@@ -215,6 +218,7 @@
     align-items: center;
     gap: 0.5rem;
   }
+
   button:active,
   button:hover,
   button:focus-within,
@@ -222,10 +226,12 @@
     background: var(--goa-color-greyscale-100);
     color: var(--goa-color-interactive-hover);
   }
+
   button.current {
     border-top: 4px solid var(--goa-color-interactive-default);
     border-bottom: 4px solid transparent;
   }
+
   button.current:hover {
     border-top: 4px solid var(--goa-color-interactive-hover);
   }
@@ -242,27 +248,34 @@
     padding: calc((3rem - var(--goa-line-height-3)) / 2) 1rem;
     text-decoration: none;
   }
+
   .not-desktop :global(::slotted(a)) {
     padding: calc((3rem - var(--goa-line-height-3)) / 2) 2.75rem;
   }
+
   :global(::slotted(a:first-child)) {
     box-shadow: none;
   }
+
   :global(::slotted(a:hover)) {
     background: var(--goa-color-greyscale-100);
     color: var(--goa-color-interactive-hover);
   }
+
   :global(::slotted(a.current)) {
     background-color: var(--goa-color-interactive-default);
   }
+
   :global(::slotted(a.current:hover)) {
     background: var(--goa-color-interactive-hover);
   }
+
   :global(::slotted(a:focus-visible)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: -3px;
     color: var(--goa-color-interactive-hover);
   }
+
   :global(::slotted(a.interactive)) {
     text-decoration: underline;
     color: var(--goa-color-interactive-default);
@@ -276,11 +289,13 @@
       padding: 0 1rem;
       width: 100%;
     }
+
     button:focus {
       outline: var(--goa-border-width-l) solid
-      var(--goa-color-interactive-focus);
+        var(--goa-color-interactive-focus);
       outline-offset: -3px;
     }
+
     .heading {
       /* prevent the menu text from line breaking too early */
       flex: 0 0 auto;
@@ -294,6 +309,7 @@
       height: 4rem;
       white-space: nowrap;
     }
+
     button.secondary {
       font-weight: var(--goa-font-weight-regular);
     }
