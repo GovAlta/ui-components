@@ -57,14 +57,22 @@
   <div class="form-item-input">
     <slot />
   </div>
-  {#if error}
+
+  {#if $$slots.error || error}
     <div class="error-msg">
       <goa-icon type="warning" size="small" theme="filled" mt="2xs" />
-      {error}
+      <slot name="error">
+        {error}
+      </slot>
     </div>
   {/if}
-  {#if helptext}
-    <div class="help-msg">{helptext}</div>
+
+  {#if $$slots.helptext || helptext}
+    <div class="help-msg">
+      <slot name="helptext">
+        {helptext}
+      </slot>
+    </div>
   {/if}
 </div>
 
