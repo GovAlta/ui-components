@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-details",
+  selector: "goab-details",
   template: `
     <goa-details
       [heading]="heading"
@@ -19,7 +19,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovDetails {
+export class GoABDetails {
   @Input() heading?: string;
   @Input() testId?: string;
   @Input() mt?: Spacing;

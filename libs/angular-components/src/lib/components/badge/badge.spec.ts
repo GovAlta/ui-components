@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovBadge } from "./badge";
+import { GoABBadge } from "./badge";
 
-let component: ABGovBadge;
-let fixture: ComponentFixture<ABGovBadge>;
+let component: GoABBadge;
+let fixture: ComponentFixture<GoABBadge>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovBadge],
+    imports: [GoABBadge],
   });
-  fixture = TestBed.createComponent(ABGovBadge);
+  fixture = TestBed.createComponent(GoABBadge);
   component = fixture.componentInstance;
 });
 

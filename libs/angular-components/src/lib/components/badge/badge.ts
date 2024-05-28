@@ -1,10 +1,10 @@
-import { ABGovBadgeType, Spacing } from "@abgov/ui-components-common";
+import { GoABBadgeType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
-import { ABGovIcon } from "../icon/icon";
+import { GoABIcon } from "../icon/icon";
 
 @Component({
   standalone: true,
-  selector: "abgov-badge",
+  selector: "goab-badge",
   template: `
     <goa-badge
       [type]="type"
@@ -21,11 +21,11 @@ import { ABGovIcon } from "../icon/icon";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovBadge {
-  @Input() type?: ABGovBadgeType;
+export class GoABBadge {
+  @Input() type?: GoABBadgeType;
   @Input() content?: string;
   @Input() testId?: string;
-  @Input() icon?: ABGovIcon;
+  @Input() icon?: GoABIcon;
   @Input() ariaLabel?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

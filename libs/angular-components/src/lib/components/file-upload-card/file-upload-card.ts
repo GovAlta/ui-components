@@ -1,9 +1,9 @@
-import { ABGovFileUploadOnCancelDetail, ABGovFileUploadOnDeleteDetail, Spacing } from "@abgov/ui-components-common";
+import { GoABFileUploadOnCancelDetail, GoABFileUploadOnDeleteDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-file-upload-card",
+  selector: "goab-file-upload-card",
   template: `<goa-file-upload-card
     [filename]="filename"
     [size]="size"
@@ -20,7 +20,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   </goa-file-upload-card>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovFileUploadCard {
+export class GoABFileUploadCard {
   @Input({ required: true }) filename!: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
@@ -31,8 +31,8 @@ export class ABGovFileUploadCard {
   @Input() progress?: number;
   @Input() error?: string;
 
-  @Output() onCancel = new EventEmitter<ABGovFileUploadOnCancelDetail>();
-  @Output() onDelete = new EventEmitter<ABGovFileUploadOnDeleteDetail>();
+  @Output() onCancel = new EventEmitter<GoABFileUploadOnCancelDetail>();
+  @Output() onDelete = new EventEmitter<GoABFileUploadOnDeleteDetail>();
 
   _onCancel() {
     this.onCancel.emit({ filename: this.filename })

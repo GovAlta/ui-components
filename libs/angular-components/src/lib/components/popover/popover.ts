@@ -1,9 +1,9 @@
-import { ABGovPopoverPosition, Spacing } from "@abgov/ui-components-common";
+import { GoABPopoverPosition, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-popover",
+  selector: "goab-popover",
   template: `
     <goa-popover
       [maxwidth]="maxWidth"
@@ -21,10 +21,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovPopover {
+export class GoABPopover {
   @Input() maxWidth?: string;
   @Input() padded?: boolean = true;
-  @Input() position?: ABGovPopoverPosition;
+  @Input() position?: GoABPopoverPosition;
   @Input() relative?: boolean;
   @Input() testId?: string;
   @Input() mt?: Spacing;

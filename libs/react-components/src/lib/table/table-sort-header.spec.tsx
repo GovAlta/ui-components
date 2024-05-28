@@ -1,15 +1,15 @@
 import { render } from "@testing-library/react";
-import ABGovTableSortHeader from "./table-sort-header";
+import GoABTableSortHeader from "./table-sort-header";
 
-describe("ABGovTableSortHeader", () => {
+describe("GoABTableSortHeader", () => {
   it("renders", async () => {
-    render(<ABGovTableSortHeader />);
+    render(<GoABTableSortHeader />);
     const el = document.querySelector("goa-table-sort-header");
     expect(el).toBeTruthy();
   });
 
   it("binds direction param", async () => {
-    render(<ABGovTableSortHeader direction="asc" />);
+    render(<GoABTableSortHeader direction="asc" />);
     const el = document.querySelector("goa-table-sort-header");
     expect(el?.getAttribute("direction")).toBe("asc");
   });

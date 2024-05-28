@@ -54,7 +54,7 @@
 </script>
 
 <svelte:head>
-  <title>ABGov Component Playground</title>
+  <title>GoAB Component Playground</title>
 </svelte:head>
 
 <goa-one-column-layout>

@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-app-footer",
+  selector: "goab-app-footer",
   template: `
     <goa-app-footer
       [maxcontentwidth]="maxContentWidth"
@@ -13,7 +13,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovAppFooter {
+export class GoABAppFooter {
   @Input() maxContentWidth?: string;
 }
 

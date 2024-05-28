@@ -1,16 +1,15 @@
 import { render } from "@testing-library/react";
-import { ABGovTab } from "./tab";
+import { GoABTab } from "./tab";
 
-describe("ABGovTab", () => {
+describe("GoABTab", () => {
   it("should render successfully", () => {
     const { container } = render(
-      <ABGovTab heading="Profile">
+      <GoABTab heading="Profile">
         <p>
-          <b>Profile:</b> Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua.
+          <b>Profile:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
-      </ABGovTab>
+      </GoABTab>,
     );
     expect(container.querySelector("goa-tab")).toBeTruthy();
     const heading = container.querySelector("[slot='heading']");

@@ -1,66 +1,66 @@
-export type ABGovSpinnerType = "infinite" | "progress";
-export type ABGovSpinnerSize = "small" | "medium" | "large" | "xlarge";
+export type GoABSpinnerType = "infinite" | "progress";
+export type GoABSpinnerSize = "small" | "medium" | "large" | "xlarge";
 
-export type ABGovRadioGroupOnChangeDetail = {
+export type GoABRadioGroupOnChangeDetail = {
   name: string;
   value: string;
 }
 
-export type ABGovInputOnChangeDetail<T = string> = {
+export type GoABInputOnChangeDetail<T = string> = {
   name: string;
   value: T;
 }
-export type ABGovInputOnFocusDetail<T = string> = ABGovInputOnChangeDetail<T>;
-export type ABGovInputOnBlurDetail<T = string> = ABGovInputOnChangeDetail<T>;
+export type GoABInputOnFocusDetail<T = string> = GoABInputOnChangeDetail<T>;
+export type GoABInputOnBlurDetail<T = string> = GoABInputOnChangeDetail<T>;
 
-export type ABGovInputOnKeyPressDetail<T = string> = {
+export type GoABInputOnKeyPressDetail<T = string> = {
   name: string;
   value: T;
   key: T;
 }
 
-export type ABGovFormStepperOnChangeDetail = {
+export type GoABFormStepperOnChangeDetail = {
   step: number;
 }
 
-export type ABGovFileUploadInputOnSelectFileDetail = {
+export type GoABFileUploadInputOnSelectFileDetail = {
   file: File;
 }
 
-export type ABGovFileUploadOnCancelDetail = {
+export type GoABFileUploadOnCancelDetail = {
   filename: string;
 }
 
-export type ABGovFileUploadOnDeleteDetail = {
+export type GoABFileUploadOnDeleteDetail = {
   filename: string;
 }
 
-export type ABGovDropdownOnChangeDetail = {
+export type GoABDropdownOnChangeDetail = {
   name?: string;
   value?: string;
   values?: string[];
 }
 
-export type ABGovDatePickerOnChangeDetail = {
+export type GoABDatePickerOnChangeDetail = {
   name?: string;
   value: string | Date;
 }
 
-export type ABGovChipVariant = "filter";
+export type GoABChipVariant = "filter";
 
-export type ABGovCheckboxOnChangeDetail = {
+export type GoABCheckboxOnChangeDetail = {
   name?: string;
   value?: string;
   checked: boolean;
 }
 
-export type ABGovCalendarOnChangeDetail = {
+export type GoABCalendarOnChangeDetail = {
   name?: string;
   value: string;
 }
 
 
-export type ABGovBadgeType =
+export type GoABBadgeType =
   | "information"
   | "success"
   | "important"
@@ -69,82 +69,82 @@ export type ABGovBadgeType =
   | "midtone"
   | "light";
 
-export type ABGovPaginationVariant = "all" | "links-only";
+export type GoABPaginationVariant = "all" | "links-only";
 
-export type ABGovFormStepperType = "constrained" | "free";
-export type ABGovFormStepStatus = "complete" | "incomplete" | "unstarted";
+export type GoABFormStepperType = "constrained" | "free";
+export type GoABFormStepStatus = "complete" | "incomplete" | "unstarted";
 
 // Formitem
-export type ABGovFormItemLabelSize = "regular" | "large";
-export type ABGovFormItemRequirement = "optional" | "required";
+export type GoABFormItemLabelSize = "regular" | "large";
+export type GoABFormItemRequirement = "optional" | "required";
 
 // FIle upload
-export type ABGovFileUploadInputVariant = "dragdrop" | "button";
+export type GoABFileUploadInputVariant = "dragdrop" | "button";
 
 // Container
-export type ABGovContainerType = "interactive" | "info" | "error" | "success" | "important";
-export type ABGovContainerAccent = "thick" | "thin" | "filled";
-export type ABGovContainerPadding = "relaxed" | "compact";
+export type GoABContainerType = "interactive" | "info" | "error" | "success" | "important";
+export type GoABContainerAccent = "thick" | "thin" | "filled";
+export type GoABContainerPadding = "relaxed" | "compact";
 
 // Callout
-export type ABGovCalloutType = "information" | "success" | "important" | "emergency" | "event";
-export type ABGovCalloutSize = "medium" | "large";
+export type GoABCalloutType = "information" | "success" | "important" | "emergency" | "event";
+export type GoABCalloutSize = "medium" | "large";
 
 // Button
-export type ABGovButtonType =
+export type GoABButtonType =
   | "primary"
   | "submit"
   | "secondary"
   | "tertiary"
   | "start";
 
-export type ABGovButtonSize = "compact" | "normal";
-export type ABGovButtonVariant = "normal" | "destructive";
+export type GoABButtonSize = "compact" | "normal";
+export type GoABButtonVariant = "normal" | "destructive";
 
 // Button group
-export type ABGovButtonGroupAlignment = "start" | "end" | "center";
-export type ABGovButtonGroupGap = "relaxed" | "compact";
+export type GoABButtonGroupAlignment = "start" | "end" | "center";
+export type GoABButtonGroupGap = "relaxed" | "compact";
 
 // Accordion
-export type ABGovAccordionHeadingSize = "small" | "medium";
+export type GoABAccordionHeadingSize = "small" | "medium";
 
 // Formstepper
 
 // Tooltip
 
-export type ABGovTooltipPosition = "top" | "bottom" | "left" | "right";
-export type ABGovTooltipHorizontalAlignment = "left" | "right" | "center";
+export type GoABTooltipPosition = "top" | "bottom" | "left" | "right";
+export type GoABTooltipHorizontalAlignment = "left" | "right" | "center";
 
 // Textarea
 
-export type ABGovTextAreaCountBy = "character" | "word";
+export type GoABTextAreaCountBy = "character" | "word";
 
 // Tabs
 
-export interface ABGovTabsProps {
+export interface GoABTabsProps {
   initialTab?: number;
 }
 
-export interface ABGovTabItemProps {
+export interface GoABTabItemProps {
   // heading?: ; slot
 }
 
 // Table
 
-export type ABGovTableVariant = "normal" | "relaxed";
-export interface ABGovTableProps extends Margins {
+export type GoABTableVariant = "normal" | "relaxed";
+export interface GoABTableProps extends Margins {
   width?: string;
   onSort?: (sortBy: string, sortDir: number) => void;
-  variant?: ABGovTableVariant;
+  variant?: GoABTableVariant;
   testId?: string;
 }
 
 // Spacer
 
-export type ABGovSpacerHorizontalSpacing = Spacing | "fill"
-export type ABGovSpacerVerticalSpacing = Spacing;
+export type GoABSpacerHorizontalSpacing = Spacing | "fill"
+export type GoABSpacerVerticalSpacing = Spacing;
 
-export interface ABGovSpacerProps {
+export interface GoABSpacerProps {
   hSpacing?: Spacing | "fill";
   vSpacing?: Spacing;
   testId?: string;
@@ -152,15 +152,15 @@ export interface ABGovSpacerProps {
 
 // Skeleton
 
-export interface ABGovSkeletonProps extends Margins {
+export interface GoABSkeletonProps extends Margins {
   maxWidth?: string;
-  size?: ABGovSkeletonSize;
+  size?: GoABSkeletonSize;
   lineCount?: number;
-  type: ABGovSkeletonType;
+  type: GoABSkeletonType;
   testId?: string;
 }
 
-export type ABGovSkeletonType =
+export type GoABSkeletonType =
   | "image"
   | "text"
   | "title"
@@ -173,23 +173,23 @@ export type ABGovSkeletonType =
   | "profile"
   | "article";
 
-export type ABGovSkeletonSize = 1 | 2 | 3 | 4;
+export type GoABSkeletonSize = 1 | 2 | 3 | 4;
 
 // Radio
 
-export type ABGovRadioGroupOrientation = "horizontal" | "vertical";
+export type GoABRadioGroupOrientation = "horizontal" | "vertical";
 
-export interface ABGovRadioGroup extends Margins {
+export interface GoABRadioGroup extends Margins {
   name: string;
   value?: string;
   disabled?: boolean;
-  orientation?: ABGovRadioGroupOrientation;
+  orientation?: GoABRadioGroupOrientation;
   testId?: string;
   error?: boolean;
   ariaLabel?: string;
 }
 
-export interface ABGovRadioItem {
+export interface GoABRadioItem {
   value?: string;
   label?: string;
   name?: string;
@@ -202,40 +202,40 @@ export interface ABGovRadioItem {
 
 // Progress
 
-export type ABGovCircularProgressVariant = "fullscreen" | "inline";
-export type ABGovCircularProgressSize = "small" | "large";
+export type GoABCircularProgressVariant = "fullscreen" | "inline";
+export type GoABCircularProgressSize = "small" | "large";
 
 // Popover
 
-export type ABGovPopoverPosition = "above" | "below" | "auto";
+export type GoABPopoverPosition = "above" | "below" | "auto";
 
-export interface ABGovPopoverProps extends Margins {
+export interface GoABPopoverProps extends Margins {
   testId?: string;
   maxWidth?: string;
   padded?: boolean;
-  position?: ABGovPopoverPosition;
+  position?: GoABPopoverPosition;
   relative?: boolean;
 }
 
 // Notification
 
-export type ABGovNotificationType =
+export type GoABNotificationType =
   | "important"
   | "information"
   | "event"
   | "emergency";
 
-export type ABGovAriaLiveType = "polite" | "assertive" | "off";
+export type GoABAriaLiveType = "polite" | "assertive" | "off";
 
 // Microsite Header
 
-export type ABGovServiceLevel = "alpha" | "beta" | "live";
-export type ABGovLinkTarget = "self" | "blank";
+export type GoABServiceLevel = "alpha" | "beta" | "live";
+export type GoABLinkTarget = "self" | "blank";
 
 // Modal
-export type ABGovModalRole = "dialog" | "alertdialog";
-export type ABGovModalTransition = "fast" | "slow" | "none";
-export type ABGovModalCalloutVariant =
+export type GoABModalRole = "dialog" | "alertdialog";
+export type GoABModalTransition = "fast" | "slow" | "none";
+export type GoABModalCalloutVariant =
   | "information"
   | "important"
   | "emergency"
@@ -244,8 +244,8 @@ export type ABGovModalCalloutVariant =
 
 // Input
 
-export type ABGovDate = Date | string;
-export type ABGovInputType =
+export type GoABDate = Date | string;
+export type GoABInputType =
   | "text"
   | "password"
   | "email"
@@ -260,7 +260,7 @@ export type ABGovInputType =
   | "url"
   | "week";
 
-export type ABGovAutoCapitalize =
+export type GoABAutoCapitalize =
   | "on"
   | "off"
   | "none"
@@ -274,7 +274,7 @@ export type OnFocus<T = string> = (name: string, value: T) => void;
 export type OnBlur<T = string> = (name: string, value: T) => void;
 export type OnKeyPress<T = string> = (name: string, value: T, key: string) => void;
 
-export interface ABGovInputProps extends BaseProps {
+export interface GoABInputProps extends BaseProps {
   onChange: OnChange<string>;
   value?: string;
   min?: number | string;
@@ -285,7 +285,7 @@ export interface ABGovInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<string>;
 }
 
-export interface ABGovNumberInputProps extends BaseProps {
+export interface GoABNumberInputProps extends BaseProps {
   onChange: OnChange<number>;
   value?: number;
   min?: number;
@@ -296,15 +296,15 @@ export interface ABGovNumberInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<number>;
 }
 
-export interface ABGovDateInputProps extends BaseProps {
-  onChange: OnChange<ABGovDate>;
-  value?: ABGovDate;
-  min?: ABGovDate;
-  max?: ABGovDate;
+export interface GoABDateInputProps extends BaseProps {
+  onChange: OnChange<GoABDate>;
+  value?: GoABDate;
+  min?: GoABDate;
+  max?: GoABDate;
   step?: number;
-  onFocus?: OnFocus<ABGovDate>;
-  onBlur?: OnBlur<ABGovDate>;
-  onKeyPress?: OnKeyPress<ABGovDate>;
+  onFocus?: OnFocus<GoABDate>;
+  onBlur?: OnBlur<GoABDate>;
+  onKeyPress?: OnKeyPress<GoABDate>;
 }
 
 interface BaseProps extends Margins {
@@ -315,10 +315,10 @@ interface BaseProps extends Margins {
   id?: string;
   debounce?: number;
   disabled?: boolean;
-  autoCapitalize?: ABGovAutoCapitalize;
+  autoCapitalize?: GoABAutoCapitalize;
   placeholder?: string;
-  leadingIcon?: ABGovIconType;
-  trailingIcon?: ABGovIconType;
+  leadingIcon?: GoABIconType;
+  trailingIcon?: GoABIconType;
   onTrailingIconClick?: () => void;
   variant?: "goa" | "bare";
   focused?: boolean;
@@ -334,8 +334,8 @@ interface BaseProps extends Margins {
 
 // Icon
 
-export type ABGovIconFilledType = `${ABGovIconType}-${ABGovIconTheme}`;
-export type ABGovIconType =
+export type GoABIconFilledType = `${GoABIconType}-${GoABIconTheme}`;
+export type GoABIconType =
   | "accessibility"
   | "add-circle"
   | "add"
@@ -842,10 +842,10 @@ export type ABGovIconType =
   | "logo-yen"
   | "logo-youtube";
 
-export type ABGovIconSize = "small" | "medium" | "large";
-export type ABGovIconTheme = "outline" | "filled";
-export type ABGovIconButtonVariant = "color" | "nocolor" | "dark" | "destructive";
-export type ABGovIconVariant = "primary" | "secondary" | "tertiary";
+export type GoABIconSize = "small" | "medium" | "large";
+export type GoABIconTheme = "outline" | "filled";
+export type GoABIconButtonVariant = "color" | "nocolor" | "dark" | "destructive";
+export type GoABIconVariant = "primary" | "secondary" | "tertiary";
 
 // Common
 
@@ -884,5 +884,5 @@ export interface Margins {
   ml?: Spacing;
 }
 
-export type ABGovBlockDirection = "row" | "column";
-export type ABGovBlockAlignment = "center" | "start" | "end";
+export type GoABBlockDirection = "row" | "column";
+export type GoABBlockAlignment = "center" | "start" | "end";

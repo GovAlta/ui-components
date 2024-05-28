@@ -1,13 +1,13 @@
 import { render } from "@testing-library/react";
 
-import { ABGovDetails } from "./details";
+import { GoABDetails } from "./details";
 
 describe("Detail", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <ABGovDetails heading="The heading" open={true}>
+      <GoABDetails heading="The heading" open={true}>
         The content
-      </ABGovDetails>
+      </GoABDetails>,
     );
 
     const el = baseElement.querySelector("goa-details");
@@ -15,5 +15,4 @@ describe("Detail", () => {
     expect(baseElement.innerHTML).toContain("The content");
     expect(el?.getAttribute("open")).toBe("true");
   });
-
 });

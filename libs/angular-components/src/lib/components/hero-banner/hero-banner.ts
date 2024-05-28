@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-hero-banner",
+  selector: "goab-hero-banner",
   template: `
     <goa-hero-banner
       [heading]="heading"
@@ -12,7 +12,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovHeroBanner {
+export class GoABHeroBanner {
   @Input() heading?: string;
 }
 

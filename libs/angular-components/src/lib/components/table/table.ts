@@ -1,14 +1,14 @@
-import { ABGovTableVariant, Spacing } from "@abgov/ui-components-common";
+import { GoABTableVariant, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
-type ABGovTableOnSortDetail = {
+type GoABTableOnSortDetail = {
   sortBy: string;
   sortDir: number;
 }
 
 @Component({
   standalone: true,
-  selector: "abgov-table",
+  selector: "goab-table",
   template: `
     <goa-table
       [width]="width"
@@ -26,19 +26,19 @@ type ABGovTableOnSortDetail = {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovTable {
+export class GoABTable {
   @Input() width?: string;
-  @Input() variant?: ABGovTableVariant;
+  @Input() variant?: GoABTableVariant;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onSort = new EventEmitter<ABGovTableOnSortDetail>();
+  @Output() onSort = new EventEmitter<GoABTableOnSortDetail>();
 
   _onSort(e: Event) {
-    const detail = (e as CustomEvent<ABGovTableOnSortDetail>).detail;
+    const detail = (e as CustomEvent<GoABTableOnSortDetail>).detail;
     this.onSort.emit(detail);
   }
 }

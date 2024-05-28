@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovCheckbox } from "./checkbox";
+import { GoABCheckbox } from "./checkbox";
 
-let component: ABGovCheckbox;
-let fixture: ComponentFixture<ABGovCheckbox>;
+let component: GoABCheckbox;
+let fixture: ComponentFixture<GoABCheckbox>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovCheckbox],
+    imports: [GoABCheckbox],
   });
-  fixture = TestBed.createComponent(ABGovCheckbox);
+  fixture = TestBed.createComponent(GoABCheckbox);
   component = fixture.componentInstance;
 });
 

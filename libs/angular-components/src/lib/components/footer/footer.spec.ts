@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovAppFooter } from "./footer";
+import { GoABAppFooter } from "./footer";
 
-let component: ABGovAppFooter;
-let fixture: ComponentFixture<ABGovAppFooter>;
+let component: GoABAppFooter;
+let fixture: ComponentFixture<GoABAppFooter>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovAppFooter],
+    imports: [GoABAppFooter],
   });
-  fixture = TestBed.createComponent(ABGovAppFooter);
+  fixture = TestBed.createComponent(GoABAppFooter);
   component = fixture.componentInstance;
 });
 

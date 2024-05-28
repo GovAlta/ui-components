@@ -1,9 +1,9 @@
-import { ABGovCalloutSize, ABGovCalloutType, Spacing } from "@abgov/ui-components-common";
+import { GoABCalloutSize, GoABCalloutType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-callout",
+  selector: "goab-callout",
   template: `
     <goa-callout
       [type]="type"
@@ -20,10 +20,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovCallout {
-  @Input() type?: ABGovCalloutType;
+export class GoABCallout {
+  @Input() type?: GoABCalloutType;
   @Input() heading?: string = "";
-  @Input() size?: ABGovCalloutSize;
+  @Input() size?: GoABCalloutSize;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

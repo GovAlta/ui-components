@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovPagination } from "./pagination";
+import { GoABPagination } from "./pagination";
 
-let component: ABGovPagination;
-let fixture: ComponentFixture<ABGovPagination>;
+let component: GoABPagination;
+let fixture: ComponentFixture<GoABPagination>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovPagination],
+    imports: [GoABPagination],
   });
-  fixture = TestBed.createComponent(ABGovPagination);
+  fixture = TestBed.createComponent(GoABPagination);
   component = fixture.componentInstance;
 });
 

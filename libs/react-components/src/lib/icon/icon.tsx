@@ -1,7 +1,13 @@
-import { ABGovIconFilledType, ABGovIconSize, ABGovIconTheme, ABGovIconType, Margins } from "@abgov/ui-components-common";
+import {
+  GoABIconFilledType,
+  GoABIconSize,
+  GoABIconTheme,
+  GoABIconType,
+  Margins,
+} from "@abgov/ui-components-common";
 
 interface IonIconProps {
-  name: ABGovIconType | ABGovIconFilledType;
+  name: GoABIconType | GoABIconFilledType;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -27,7 +33,7 @@ declare global {
   }
 }
 
-export type GoAIconType =
+export type GoABIconType =
   | "accessibility"
   | "add-circle"
   | "add"
@@ -534,19 +540,19 @@ export type GoAIconType =
   | "logo-yen"
   | "logo-youtube";
 
-export type GoAIconSize = "small" | "medium" | "large" | "xlarge";
-export type GoAIconVariant = "primary" | "secondary" | "tertiary";
-export type GoAIconTheme = "outline" | "filled" | "sharp";
+export type GoABIconSize = "small" | "medium" | "large" | "xlarge";
+export type GoABIconVariant = "primary" | "secondary" | "tertiary";
+export type GoABIconTheme = "outline" | "filled" | "sharp";
 
 // legacy naming
-export type IconSize = GoAIconSize;
-export type IconVariant = GoAIconVariant;
-export type IconTheme = GoAIconTheme;
+export type IconSize = GoABIconSize;
+export type IconVariant = GoABIconVariant;
+export type IconTheme = GoABIconTheme;
 
-export interface GoAIconProps extends Margins {
-  type: GoAIconType;
-  size?: GoAIconSize;
-  theme?: GoAIconTheme;
+export interface GoABIconProps extends Margins {
+  type: GoABIconType;
+  size?: GoABIconSize;
+  theme?: GoABIconTheme;
   inverted?: string;
   fillColor?: string;
   opacity?: number;
@@ -556,9 +562,9 @@ export interface GoAIconProps extends Margins {
 }
 
 interface WCProps extends Margins {
-  type: GoAIconType;
-  theme?: GoAIconTheme;
-  size?: GoAIconSize;
+  type: GoABIconType;
+  theme?: GoABIconTheme;
+  size?: GoABIconSize;
   inverted?: string;
   fillcolor?: string;
   opacity?: number;
@@ -567,7 +573,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-export function ABGovIcon({
+export function GoABIcon({
   type,
   theme,
   size,
@@ -581,7 +587,7 @@ export function ABGovIcon({
   mb,
   ml,
   testId,
-}: ABGovIconProps): JSX.Element {
+}: GoABIconProps): JSX.Element {
   return (
     <goa-icon
       type={type}

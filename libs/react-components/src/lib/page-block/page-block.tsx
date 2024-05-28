@@ -13,16 +13,16 @@ declare global {
   }
 }
 
-export interface ABGovPageBlockProps {
+export interface GoABPageBlockProps {
   width: "full" | string;
   testId?: string;
   children?: ReactNode;
 }
 
 // legacy name
-export type PageBlockProps = ABGovPageBlockProps;
+export type PageBlockProps = GoABPageBlockProps;
 
-export function ABGovPageBlock(props: PageBlockProps): JSX.Element {
+export function GoABPageBlock(props: PageBlockProps): JSX.Element {
   return (
     <goa-page-block width={props.width} data-testid={props.testId}>
       {props.children}

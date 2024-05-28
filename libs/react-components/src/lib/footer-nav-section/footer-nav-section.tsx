@@ -15,19 +15,19 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface ABGovFooterNavSectionProps {
+export interface GoABFooterNavSectionProps {
   maxColumnCount?: number;
   heading?: string;
   testId?: string;
   children?: ReactNode;
 }
 
-export function ABGovAppFooterNavSection({
+export function GoABAppFooterNavSection({
   heading,
   maxColumnCount = 1,
   testId,
   children,
-}: ABGovFooterNavSectionProps) {
+}: GoABFooterNavSectionProps) {
   return (
     <goa-app-footer-nav-section
       slot="nav"
@@ -40,4 +40,4 @@ export function ABGovAppFooterNavSection({
   );
 }
 
-export default ABGovAppFooterNavSection;
+export default GoABAppFooterNavSection;

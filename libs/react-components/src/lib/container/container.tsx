@@ -1,4 +1,9 @@
-import { ABGovContainerAccent, ABGovContainerPadding, ABGovContainerType, Margins } from "@abgov/ui-components-common";
+import {
+  GoABContainerAccent,
+  GoABContainerPadding,
+  GoABContainerType,
+  Margins,
+} from "@abgov/ui-components-common";
 import { ReactNode } from "react";
 
 export type GoABContainerType =
@@ -28,19 +33,19 @@ declare global {
   }
 }
 
-export interface ABGovContainerProps extends Margins {
-  accent?: ABGovContainerAccent;
-  type?: ABGovContainerType;
+export interface GoABContainerProps extends Margins {
+  accent?: GoABContainerAccent;
+  type?: GoABContainerType;
   heading?: ReactNode;
   title?: ReactNode;
-  padding?: ABGovContainerPadding;
+  padding?: GoABContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
   width?: GoABContainerWidth;
   testId?: string;
 }
 
-export function ABGovContainer({
+export function GoABContainer({
   accent,
   heading,
   title,
@@ -54,7 +59,7 @@ export function ABGovContainer({
   mb,
   ml,
   testId,
-}: ABGovContainerProps): JSX.Element {
+}: GoABContainerProps): JSX.Element {
   const headingContent = heading || title;
   return (
     <goa-container
@@ -75,4 +80,4 @@ export function ABGovContainer({
   );
 }
 
-export default ABGovContainer;
+export default GoABContainer;

@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovCallout } from "./callout";
+import { GoABCallout } from "./callout";
 
-let component: ABGovCallout;
-let fixture: ComponentFixture<ABGovCallout>;
+let component: GoABCallout;
+let fixture: ComponentFixture<GoABCallout>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovCallout],
+    imports: [GoABCallout],
   });
-  fixture = TestBed.createComponent(ABGovCallout);
+  fixture = TestBed.createComponent(GoABCallout);
   component = fixture.componentInstance;
 });
 

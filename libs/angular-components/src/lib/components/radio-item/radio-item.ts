@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-radio-item",
+  selector: "goab-radio-item",
   template: `
     <goa-radio-item
       [value]="value"
@@ -18,7 +18,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovRadioItem {
+export class GoABRadioItem {
   @Input() value?: string;
   @Input() label?: string;
   @Input() disabled?: boolean;

@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react";
-import { ABGovBadge } from "../badge/badge";
+import { GoABBadge } from "../badge/badge";
 
-import { ABGovAccordion } from "./accordion";
+import { GoABAccordion } from "./accordion";
 
 describe("Accordion", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <ABGovAccordion heading="The heading">Accordion Content</ABGovAccordion>
+      <GoABAccordion heading="The heading">Accordion Content</GoABAccordion>,
     );
     const el = baseElement.querySelector("goa-accordion");
     expect(el.getAttribute("heading")).toBe("The heading");
@@ -15,16 +15,14 @@ describe("Accordion", () => {
 
   it("should set the props correctly", () => {
     const { baseElement } = render(
-      <ABGovAccordion
+      <GoABAccordion
         heading="The heading"
         secondaryText="Secondary Text"
         open={true}
-        headingContent={
-          <ABGovBadge type="success" content="test-badge"></ABGovBadge>
-        }
+        headingContent={<GoABBadge type="success" content="test-badge"></GoABBadge>}
       >
         Accordion Content
-      </ABGovAccordion>
+      </GoABAccordion>,
     );
     const el = baseElement.querySelector("goa-accordion");
     const headingContent = el?.querySelector("[slot='headingcontent']");

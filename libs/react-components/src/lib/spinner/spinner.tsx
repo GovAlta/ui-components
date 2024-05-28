@@ -1,8 +1,8 @@
-import { ABGovSpinnerSize, ABGovSpinnerType } from "@abgov/ui-components-common";
+import { GoABSpinnerSize, GoABSpinnerType } from "@abgov/ui-components-common";
 
 interface WCProps {
-  size: ABGovSpinnerSize;
-  type: ABGovSpinnerType;
+  size: GoABSpinnerSize;
+  type: GoABSpinnerType;
   invert?: boolean;
   progress?: number;
 }
@@ -16,23 +16,23 @@ declare global {
   }
 }
 
-export interface ABGovSpinnerProps {
-  type: ABGovSpinnerType;
-  size: ABGovSpinnerSize;
+export interface GoABSpinnerProps {
+  type: GoABSpinnerType;
+  size: GoABSpinnerSize;
   invert?: boolean;
   progress?: number;
   testId?: string;
 }
 
-export type SpinnerProps = ABGovSpinnerProps;
+export type SpinnerProps = GoABSpinnerProps;
 
-export function ABGovSpinner({
+export function GoABSpinner({
   type,
   size,
   progress,
   invert,
   testId,
-}: ABGovSpinnerProps): JSX.Element {
+}: GoABSpinnerProps): JSX.Element {
   return (
     <goa-spinner
       type={type}
@@ -44,4 +44,4 @@ export function ABGovSpinner({
   );
 }
 
-export default ABGovSpinner;
+export default GoABSpinner;

@@ -1,9 +1,9 @@
-import { ABGovContainerAccent, ABGovContainerPadding, ABGovContainerType, Spacing } from "@abgov/ui-components-common";
+import { GoABContainerAccent, GoABContainerPadding, GoABContainerType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-container",
+  selector: "goab-container",
   template: `<goa-container
     [type]="type"
     [accent]="accent"
@@ -19,10 +19,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   </goa-container>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovContainer {
-  @Input() type?: ABGovContainerType;
-  @Input() accent?: ABGovContainerAccent;
-  @Input() padding?: ABGovContainerPadding;
+export class GoABContainer {
+  @Input() type?: GoABContainerType;
+  @Input() accent?: GoABContainerAccent;
+  @Input() padding?: GoABContainerPadding;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "abgov-root",
+  selector: "goab-root",
   templateUrl: "./app.component.html",
   styles: ``,
 })

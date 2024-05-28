@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovFormStepper } from "./form-stepper";
+import { GoABFormStepper } from "./form-stepper";
 
-let component: ABGovFormStepper;
-let fixture: ComponentFixture<ABGovFormStepper>;
+let component: GoABFormStepper;
+let fixture: ComponentFixture<GoABFormStepper>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovFormStepper],
+    imports: [GoABFormStepper],
   });
-  fixture = TestBed.createComponent(ABGovFormStepper);
+  fixture = TestBed.createComponent(GoABFormStepper);
   component = fixture.componentInstance;
 });
 

@@ -1,11 +1,11 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import Css from "./ResizablePanel.module.css";
-import { ABGovIcon } from "../../lib/icon/icon";
+import { GoABIcon } from "../../lib/icon/icon";
 
 export type ResizableProps = {
   minWidth?: number;
   children: ReactNode;
-}
+};
 
 type MouseState = "static" | "active";
 
@@ -18,14 +18,14 @@ export function ResizablePanel(props: ResizableProps): JSX.Element {
 
   // value refs
   const maxWidth = useRef<number>(0);
-  const resizeBarState = useRef<MouseState>("static")
+  const resizeBarState = useRef<MouseState>("static");
 
   // state
   const [width, setWidth] = useState<string>();
 
   useEffect(() => {
     maxWidth.current = bgRef.current?.getBoundingClientRect().width ?? 0;
-  }, [])
+  }, []);
 
   function resetMouseState() {
     resizeBarState.current = "static";
@@ -59,7 +59,10 @@ export function ResizablePanel(props: ResizableProps): JSX.Element {
     const newXPos = handleRef.current?.getBoundingClientRect().x ?? 0;
 
     // set width of preview area
-    const calcWidth = Math.max(newXPos - xOffset, Math.min(mouseX - xOffset, maxWidth.current));
+    const calcWidth = Math.max(
+      newXPos - xOffset,
+      Math.min(mouseX - xOffset, maxWidth.current),
+    );
     const elementWidth = Math.max(minWidth, calcWidth - 64); // 4rem padding
 
     // prevent dragging bar more than allowed
@@ -70,8 +73,11 @@ export function ResizablePanel(props: ResizableProps): JSX.Element {
     // set resizable area width
     sectionEl?.setAttribute("style", `width: ${calcWidth}px;`);
     // set displayed px width
-    widthRef.current?.setAttribute("style", `right: ${maxWidth.current - calcWidth + 32}px`);
-    setWidth(`${Math.round(elementWidth)}px`)
+    widthRef.current?.setAttribute(
+      "style",
+      `right: ${maxWidth.current - calcWidth + 32}px`,
+    );
+    setWidth(`${Math.round(elementWidth)}px`);
   }
 
   return (
@@ -83,16 +89,16 @@ export function ResizablePanel(props: ResizableProps): JSX.Element {
       onMouseUp={onMouseUp}
     >
       <section ref={sectionRef} className={Css.panel}>
-        <div className={Css.children}>
-          {props.children}
-        </div>
+        <div className={Css.children}>{props.children}</div>
         <div ref={handleRef} className={Css.handle}>
-          <ABGovIcon type="reorder-two" />
+          <GoABIcon type="reorder-two" />
         </div>
       </section>
-      <div ref={widthRef} className={Css.width}>{width}</div>
+      <div ref={widthRef} className={Css.width}>
+        {width}
+      </div>
     </div>
-  )
+  );
 }
 
 export default ResizablePanel;

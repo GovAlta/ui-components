@@ -1,9 +1,9 @@
-import { ABGovIconType, ABGovInputOnBlurDetail, ABGovInputOnChangeDetail, ABGovInputOnFocusDetail, ABGovInputOnKeyPressDetail, ABGovInputType, Spacing } from "@abgov/ui-components-common";
+import { GoABIconType, GoABInputOnBlurDetail, GoABInputOnChangeDetail, GoABInputOnFocusDetail, GoABInputOnKeyPressDetail, GoABInputType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-input",
+  selector: "goab-input",
   template: `
     <goa-input
       [type]="type"
@@ -44,14 +44,14 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovInput {
-  @Input() type?: ABGovInputType = "text";
+export class GoABInput {
+  @Input() type?: GoABInputType = "text";
   @Input() name?: string;
   @Input() value?: string = "";
   @Input() autoCapitalize?: boolean;
   @Input() placeholder?: string;
-  @Input() leadingIcon?: ABGovIconType;
-  @Input() trailingIcon?: ABGovIconType;
+  @Input() leadingIcon?: GoABIconType;
+  @Input() trailingIcon?: GoABIconType;
   @Input() variant?: string;
   @Input() disabled?: boolean;
   @Input() focused?: boolean;
@@ -75,32 +75,32 @@ export class ABGovInput {
   @Input() ml?: Spacing;
 
   @Output() onTrailingIconClick = new EventEmitter();
-  @Output() onFocus = new EventEmitter<ABGovInputOnFocusDetail>();
-  @Output() onBlur = new EventEmitter<ABGovInputOnBlurDetail>();
-  @Output() onKeyPress = new EventEmitter<ABGovInputOnKeyPressDetail>();
-  @Output() onChange = new EventEmitter<ABGovInputOnChangeDetail>();
+  @Output() onFocus = new EventEmitter<GoABInputOnFocusDetail>();
+  @Output() onBlur = new EventEmitter<GoABInputOnBlurDetail>();
+  @Output() onKeyPress = new EventEmitter<GoABInputOnKeyPressDetail>();
+  @Output() onChange = new EventEmitter<GoABInputOnChangeDetail>();
 
   _onTrailingIconClick(_: Event) {
     this.onTrailingIconClick.emit();
   }
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<ABGovInputOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoABInputOnChangeDetail>).detail;
     this.onChange.emit(detail);
   }
 
   _onKeyPress(e: Event) {
-    const detail = (e as CustomEvent<ABGovInputOnKeyPressDetail>).detail
+    const detail = (e as CustomEvent<GoABInputOnKeyPressDetail>).detail
     this.onKeyPress.emit(detail);
   }
 
   _onFocus(e: Event) {
-    const detail = (e as CustomEvent<ABGovInputOnFocusDetail>).detail
+    const detail = (e as CustomEvent<GoABInputOnFocusDetail>).detail
     this.onFocus.emit(detail);
   }
 
   _onBlur(e: Event) {
-    const detail = (e as CustomEvent<ABGovInputOnBlurDetail>).detail
+    const detail = (e as CustomEvent<GoABInputOnBlurDetail>).detail
     this.onBlur.emit(detail);
   }
 }

@@ -1,12 +1,12 @@
-import { ABGovTextAreaCountBy, Spacing } from "@abgov/ui-components-common";
+import { GoABTextAreaCountBy, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
-export type ABGovTextAreaOnChangeDetail = {
+export type GoABTextAreaOnChangeDetail = {
   name: string;
   value: string;
 }
 
-export type ABGovTextAreaOnKeyPressDetail = {
+export type GoABTextAreaOnKeyPressDetail = {
   name: string;
   value: string;
   key: string;
@@ -14,7 +14,7 @@ export type ABGovTextAreaOnKeyPressDetail = {
 
 @Component({
   standalone: true,
-  selector: "abgov-textarea",
+  selector: "goab-textarea",
   template: `
     <goa-textarea
       [name]="name"
@@ -41,7 +41,7 @@ export type ABGovTextAreaOnKeyPressDetail = {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovTextArea {
+export class GoABTextArea {
   @Input({ required: true }) name!: string;
   @Input() value?: string = "";
   @Input() id?: string;
@@ -51,7 +51,7 @@ export class ABGovTextArea {
   @Input() disabled?: boolean;
   @Input() width?: string;
   @Input() ariaLabel?: string;
-  @Input() countBy?: ABGovTextAreaCountBy;
+  @Input() countBy?: GoABTextAreaCountBy;
   @Input() maxCount?: number;
   @Input() testId?: string;
   @Input() mt?: Spacing;
@@ -59,16 +59,16 @@ export class ABGovTextArea {
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<ABGovTextAreaOnChangeDetail>();
-  @Output() onKeyPress = new EventEmitter<ABGovTextAreaOnKeyPressDetail>();
+  @Output() onChange = new EventEmitter<GoABTextAreaOnChangeDetail>();
+  @Output() onKeyPress = new EventEmitter<GoABTextAreaOnKeyPressDetail>();
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<ABGovTextAreaOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoABTextAreaOnChangeDetail>).detail;
     this.onChange.emit(detail)
   }
 
   _onKeyPress(e: any) {
-    const detail = (e as CustomEvent<ABGovTextAreaOnKeyPressDetail>).detail;
+    const detail = (e as CustomEvent<GoABTextAreaOnKeyPressDetail>).detail;
     this.onKeyPress.emit(detail)
   }
 }

@@ -1,9 +1,9 @@
-import { ABGovCheckboxOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { GoABCheckboxOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-checkbox",
+  selector: "goab-checkbox",
   template: `<goa-checkbox
     [name]="name"
     [checked]="checked"
@@ -26,7 +26,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   </goa-checkbox>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovCheckbox {
+export class GoABCheckbox {
   @Input() name?: string;
   @Input() checked?: boolean;
   @Input() disabled?: boolean;
@@ -41,10 +41,10 @@ export class ABGovCheckbox {
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<ABGovCheckboxOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoABCheckboxOnChangeDetail>();
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<ABGovCheckboxOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoABCheckboxOnChangeDetail>).detail;
     this.onChange.emit(detail)
   }
 }

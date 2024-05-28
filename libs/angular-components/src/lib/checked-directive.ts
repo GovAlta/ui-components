@@ -10,7 +10,7 @@ import {
   NG_VALUE_ACCESSOR,
 } from "@angular/forms";
 
-// @deprecated: Use the new <abgov-checkbox .. /> component
+// @deprecated: Use the new <goab-checkbox .. /> component
 @Directive({
   selector: "[goaChecked]",
   providers: [

@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-divider",
+  selector: "goab-divider",
   template: `
     <goa-divider
       [testid]="testId"
@@ -18,7 +18,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovDivider {
+export class GoABDivider {
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

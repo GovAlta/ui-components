@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-tab",
+  selector: "goab-tab",
   template: `
     <goa-tab
       [heading]="heading"
@@ -13,6 +13,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovTab {
+export class GoABTab {
   @Input() heading?: string;
 }

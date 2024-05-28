@@ -1,14 +1,17 @@
 import { useEffect, useRef } from "react";
-import { ABGovRadioGroupOnChangeDetail, ABGovRadioGroupOrientation, Margins } from "@abgov/ui-components-common";
+import {
+  GoABRadioGroupOnChangeDetail,
+  GoABRadioGroupOrientation,
+  Margins,
+} from "@abgov/ui-components-common";
 
 export * from "./radio";
-
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   name: string;
   value?: string;
-  orientation?: ABGovRadioGroupOrientation;
+  orientation?: GoABRadioGroupOrientation;
   disabled?: boolean;
   error?: boolean;
   arialabel?: string;
@@ -23,19 +26,19 @@ declare global {
   }
 }
 
-export interface ABGovRadioGroupProps extends Margins {
+export interface GoABRadioGroupProps extends Margins {
   name: string;
   value?: string;
   disabled?: boolean;
-  orientation?: ABGovRadioGroupOrientation;
+  orientation?: GoABRadioGroupOrientation;
   testId?: string;
   error?: boolean;
   ariaLabel?: string;
   children?: React.ReactNode;
-  onChange: (detail: ABGovRadioGroupOnChangeDetail) => void;
+  onChange: (detail: GoABRadioGroupOnChangeDetail) => void;
 }
 
-export function ABGovRadioGroup({
+export function GoABRadioGroup({
   name,
   value,
   children,
@@ -49,19 +52,18 @@ export function ABGovRadioGroup({
   mb,
   ml,
   onChange,
-}: ABGovRadioGroupProps): JSX.Element {
-
+}: GoABRadioGroupProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!el.current) return
+    if (!el.current) return;
 
     const listener = (e: Event) => {
       if (!onChange) {
         console.warn("Missing onChange function");
         return;
       }
-      const detail = (e as CustomEvent<ABGovRadioGroupOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoABRadioGroupOnChangeDetail>).detail;
       onChange(detail);
     };
 
@@ -93,4 +95,4 @@ export function ABGovRadioGroup({
   );
 }
 
-export default ABGovRadioGroup;
+export default GoABRadioGroup;

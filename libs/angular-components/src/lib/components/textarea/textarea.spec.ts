@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovTextArea } from "./textarea";
+import { GoABTextArea } from "./textarea";
 
-let component: ABGovTextArea;
-let fixture: ComponentFixture<ABGovTextArea>;
+let component: GoABTextArea;
+let fixture: ComponentFixture<GoABTextArea>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovTextArea],
+    imports: [GoABTextArea],
   });
-  fixture = TestBed.createComponent(ABGovTextArea);
+  fixture = TestBed.createComponent(GoABTextArea);
   component = fixture.componentInstance;
 });
 

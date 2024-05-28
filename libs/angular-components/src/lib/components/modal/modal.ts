@@ -1,9 +1,9 @@
-import { ABGovModalCalloutVariant, ABGovModalTransition } from "@abgov/ui-components-common";
+import { GoABModalCalloutVariant, GoABModalTransition } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-modal",
+  selector: "goab-modal",
   template: `
     <goa-modal
       [calloutvariant]="calloutVariant"
@@ -19,12 +19,12 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovModal {
-  @Input() calloutVariant?: ABGovModalCalloutVariant;
+export class GoABModal {
+  @Input() calloutVariant?: GoABModalCalloutVariant;
   @Input() open?: boolean;
   @Input() maxWidth?: string;
   @Input() closable: boolean = false;
-  @Input() transition?: ABGovModalTransition
+  @Input() transition?: GoABModalTransition
 
   @Output() onClose = new EventEmitter();
 
