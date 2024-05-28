@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-export interface ABGovTwoColumnLayoutProps {
+export interface GoABTwoColumnLayoutProps {
   navColumnWidth?: string;
   maxContentWidth?: string;
   header: ReactNode;
@@ -23,7 +23,7 @@ export interface ABGovTwoColumnLayoutProps {
   children: ReactNode;
 }
 
-export function ABGovTwoColumnLayout(props: ABGovTwoColumnLayoutProps) {
+export function GoABTwoColumnLayout(props: GoABTwoColumnLayoutProps) {
   return (
     <goa-two-column-layout
       navcolumnwidth={props.navColumnWidth}
@@ -37,4 +37,4 @@ export function ABGovTwoColumnLayout(props: ABGovTwoColumnLayoutProps) {
   );
 }
 
-export default ABGovTwoColumnLayout;
+export default GoABTwoColumnLayout;

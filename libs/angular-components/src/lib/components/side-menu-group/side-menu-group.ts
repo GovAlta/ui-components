@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-side-menu-group",
+  selector: "goab-side-menu-group",
   template: `
     <goa-side-menu-group
       [heading]="heading"
@@ -12,6 +12,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovSideMenuGroup {
+export class GoABSideMenuGroup {
   @Input({ required: true }) heading!: string;
 }

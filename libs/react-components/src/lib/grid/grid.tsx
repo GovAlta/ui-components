@@ -14,14 +14,14 @@ declare global {
   }
 }
 
-export interface ABGovGridProps extends Margins {
+export interface GoABGridProps extends Margins {
   gap?: Spacing;
   minChildWidth: string;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export function ABGovGrid({
+export function GoABGrid({
   gap,
   minChildWidth,
   mt,
@@ -30,7 +30,7 @@ export function ABGovGrid({
   ml,
   testId,
   children,
-}: ABGovGridProps): JSX.Element {
+}: GoABGridProps): JSX.Element {
   return (
     <goa-grid
       gap={gap}
@@ -46,4 +46,4 @@ export function ABGovGrid({
   );
 }
 
-export default ABGovGrid;
+export default GoABGrid;

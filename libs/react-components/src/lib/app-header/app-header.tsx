@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-export interface ABGovAppHeaderProps {
+export interface GoABAppHeaderProps {
   heading?: string;
   url?: string;
   maxContentWidth?: string;
@@ -23,14 +23,14 @@ export interface ABGovAppHeaderProps {
   testId?: string;
 }
 
-export function ABGovAppHeader({
+export function GoABAppHeader({
   heading,
   url,
   maxContentWidth,
   fullMenuBreakpoint,
   testId,
   children,
-}: ABGovAppHeaderProps): JSX.Element {
+}: GoABAppHeaderProps): JSX.Element {
   return (
     <goa-app-header
       heading={heading}
@@ -44,4 +44,4 @@ export function ABGovAppHeader({
   );
 }
 
-export default ABGovAppHeader;
+export default GoABAppHeader;

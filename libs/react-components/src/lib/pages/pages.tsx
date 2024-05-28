@@ -16,12 +16,12 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface ABGovPagesProps extends Margins {
+export interface GoABPagesProps extends Margins {
   current?: number;
   children?: ReactNode;
 }
 
-export function ABGovPages(props: ABGovPagesProps): JSX.Element {
+export function GoABPages(props: GoABPagesProps): JSX.Element {
   return (
     <goa-pages
       current={props.current}
@@ -35,4 +35,4 @@ export function ABGovPages(props: ABGovPagesProps): JSX.Element {
   );
 }
 
-export default ABGovPages;
+export default GoABPages;

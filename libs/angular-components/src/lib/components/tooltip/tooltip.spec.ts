@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovTooltip } from "./tooltip";
+import { GoABTooltip } from "./tooltip";
 
-let component: ABGovTooltip;
-let fixture: ComponentFixture<ABGovTooltip>;
+let component: GoABTooltip;
+let fixture: ComponentFixture<GoABTooltip>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovTooltip],
+    imports: [GoABTooltip],
   });
-  fixture = TestBed.createComponent(ABGovTooltip);
+  fixture = TestBed.createComponent(GoABTooltip);
   component = fixture.componentInstance;
 });
 

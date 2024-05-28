@@ -17,14 +17,14 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface ABGovDetailsProps extends Margins {
+export interface GoABDetailsProps extends Margins {
   heading: string;
   open?: boolean;
   testId?: string;
   children: ReactNode;
 }
 
-export function ABGovDetails(props: ABGovDetailsProps) {
+export function GoABDetails(props: GoABDetailsProps) {
   return (
     <goa-details
       heading={props.heading}
@@ -40,4 +40,4 @@ export function ABGovDetails(props: ABGovDetailsProps) {
   );
 }
 
-export default ABGovDetails;
+export default GoABDetails;

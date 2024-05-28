@@ -1,9 +1,9 @@
-import { ABGovLinkTarget, ABGovServiceLevel } from "@abgov/ui-components-common";
+import { GoABLinkTarget, GoABServiceLevel } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-microsite-header",
+  selector: "goab-microsite-header",
   template: `
     <goa-microsite-header
       [type]="type"
@@ -17,11 +17,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovMicrositeHeader {
-  @Input() type?: ABGovServiceLevel;
+export class GoABMicrositeHeader {
+  @Input() type?: GoABServiceLevel;
   @Input() version?: string;
   @Input() feedbackUrl?: string;
   @Input() maxContentWidth?: string;
-  @Input() feedbackUrlTarget?: ABGovLinkTarget;
-  @Input() headerUrlTarget?: ABGovLinkTarget;
+  @Input() feedbackUrlTarget?: GoABLinkTarget;
+  @Input() headerUrlTarget?: GoABLinkTarget;
 }

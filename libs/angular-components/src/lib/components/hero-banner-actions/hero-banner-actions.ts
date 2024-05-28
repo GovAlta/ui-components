@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-hero-banner-actions",
+  selector: "goab-hero-banner-actions",
   template: `
     <goa-hero-banner-actions>
       <ng-content />
@@ -10,7 +10,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovHeroBannerActions {
+export class GoABHeroBannerActions {
   // nothing
 }
 

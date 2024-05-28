@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovAppFooterMetaSection } from "./footer-meta-section";
+import { GoABAppFooterMetaSection } from "./footer-meta-section";
 
-let component: ABGovAppFooterMetaSection;
-let fixture: ComponentFixture<ABGovAppFooterMetaSection>;
+let component: GoABAppFooterMetaSection;
+let fixture: ComponentFixture<GoABAppFooterMetaSection>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovAppFooterMetaSection],
+    imports: [GoABAppFooterMetaSection],
   });
-  fixture = TestBed.createComponent(ABGovAppFooterMetaSection);
+  fixture = TestBed.createComponent(GoABAppFooterMetaSection);
   component = fixture.componentInstance;
 });
 

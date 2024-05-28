@@ -1,11 +1,11 @@
 import { fireEvent, render } from "@testing-library/react";
-import ABGovTextArea from "./textarea";
+import GoABTextArea from "./textarea";
 import { describe, it, expect, vi } from "vitest";
 
 describe("TextArea", () => {
   it("renders the text area", async () => {
     render(
-      <ABGovTextArea
+      <GoABTextArea
         testId="textarea-testid"
         name="textarea-name"
         value="textarea-value"
@@ -18,8 +18,10 @@ describe("TextArea", () => {
         mr="m"
         mb="l"
         ml="xl"
-        onChange={() => { /* do nothing */ }}
-      />
+        onChange={() => {
+          /* do nothing */
+        }}
+      />,
     );
 
     const el = document.querySelector("goa-textarea");
@@ -41,7 +43,7 @@ describe("TextArea", () => {
     const newValue = "new-value";
 
     render(
-      <ABGovTextArea
+      <GoABTextArea
         testId="textarea-testid"
         name="textarea-name"
         value="textarea-value"
@@ -54,7 +56,7 @@ describe("TextArea", () => {
           expect(value).toBe(newValue);
           onChange();
         }}
-      />
+      />,
     );
 
     const el = document.querySelector("goa-textarea");
@@ -63,7 +65,7 @@ describe("TextArea", () => {
       el,
       new CustomEvent("_change", {
         detail: { name: "textarea-name", value: newValue },
-      })
+      }),
     );
 
     expect(onChange).toBeCalled();

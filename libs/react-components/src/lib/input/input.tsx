@@ -1,14 +1,24 @@
 import { useEffect, useRef } from "react";
 import { format, isValid, parseISO } from "date-fns";
-import { ABGovAutoCapitalize, ABGovDate, ABGovIconType, ABGovInputOnBlurDetail, ABGovInputOnChangeDetail, ABGovInputOnFocusDetail, ABGovInputOnKeyPressDetail, ABGovInputType, Margins } from "@abgov/ui-components-common";
+import {
+  GoABAutoCapitalize,
+  GoABDate,
+  GoABIconType,
+  GoABInputOnBlurDetail,
+  GoABInputOnChangeDetail,
+  GoABInputOnFocusDetail,
+  GoABInputOnKeyPressDetail,
+  GoABInputType,
+  Margins,
+} from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
-  type?: ABGovInputType;
+  type?: GoABInputType;
   name: string;
   value?: string;
   id?: string;
-  autocapitalize?: ABGovAutoCapitalize;
+  autocapitalize?: GoABAutoCapitalize;
   debounce?: number;
   placeholder?: string;
   leadingicon?: string;
@@ -48,10 +58,10 @@ interface BaseProps extends Margins {
   id?: string;
   debounce?: number;
   disabled?: boolean;
-  autoCapitalize?: ABGovAutoCapitalize;
+  autoCapitalize?: GoABAutoCapitalize;
   placeholder?: string;
-  leadingIcon?: ABGovIconType;
-  trailingIcon?: ABGovIconType;
+  leadingIcon?: GoABIconType;
+  trailingIcon?: GoABIconType;
   onTrailingIconClick?: () => void;
   variant?: "goa" | "bare";
   focused?: boolean;
@@ -67,12 +77,12 @@ interface BaseProps extends Margins {
   maxLength?: number;
 }
 
-type OnChange<T = string> = (detail: ABGovInputOnChangeDetail<T>) => void;
-type OnFocus<T = string> = (detail: ABGovInputOnFocusDetail<T>) => void;
-type OnBlur<T = string> = (detail: ABGovInputOnBlurDetail<T>) => void;
-type OnKeyPress<T = string> = (detail: ABGovInputOnKeyPressDetail<T>) => void;
+type OnChange<T = string> = (detail: GoABInputOnChangeDetail<T>) => void;
+type OnFocus<T = string> = (detail: GoABInputOnFocusDetail<T>) => void;
+type OnBlur<T = string> = (detail: GoABInputOnBlurDetail<T>) => void;
+type OnKeyPress<T = string> = (detail: GoABInputOnKeyPressDetail<T>) => void;
 
-export interface ABGovInputProps extends BaseProps {
+export interface GoABInputProps extends BaseProps {
   onChange: OnChange<string>;
   value?: string;
   min?: number | string;
@@ -83,7 +93,7 @@ export interface ABGovInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<string>;
 }
 
-interface ABGovNumberInputProps extends BaseProps {
+interface GoABNumberInputProps extends BaseProps {
   onChange: OnChange<number>;
   value?: number;
   min?: number;
@@ -94,18 +104,18 @@ interface ABGovNumberInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<number>;
 }
 
-interface ABGovDateInputProps extends BaseProps {
-  onChange: OnChange<ABGovDate>;
-  value?: ABGovDate;
-  min?: ABGovDate;
-  max?: ABGovDate;
+interface GoABDateInputProps extends BaseProps {
+  onChange: OnChange<GoABDate>;
+  value?: GoABDate;
+  min?: GoABDate;
+  max?: GoABDate;
   step?: number;
-  onFocus?: OnFocus<ABGovDate>;
-  onBlur?: OnBlur<ABGovDate>;
-  onKeyPress?: OnKeyPress<ABGovDate>;
+  onFocus?: OnFocus<GoABDate>;
+  onBlur?: OnBlur<GoABDate>;
+  onKeyPress?: OnKeyPress<GoABDate>;
 }
 
-export function ABGovInput({
+export function GoABInput({
   id,
   debounce,
   name,
@@ -140,7 +150,7 @@ export function ABGovInput({
   onFocus,
   onBlur,
   onKeyPress,
-}: ABGovInputProps & { type?: ABGovInputType }): JSX.Element {
+}: GoABInputProps & { type?: GoABInputType }): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!ref.current) {
@@ -148,7 +158,7 @@ export function ABGovInput({
     }
     const current = ref.current;
     const changeListener = (e: Event) => {
-      const detail = (e as CustomEvent<ABGovInputOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoABInputOnChangeDetail>).detail;
       onChange(detail);
     };
     const clickListener = () => {
@@ -156,19 +166,19 @@ export function ABGovInput({
     };
 
     const focusListener = (e: Event) => {
-      const detail = (e as CustomEvent<ABGovInputOnFocusDetail>).detail;
+      const detail = (e as CustomEvent<GoABInputOnFocusDetail>).detail;
       onFocus?.(detail);
     };
 
     const blurListener = (e: Event) => {
-      const detail = (e as CustomEvent<ABGovInputOnBlurDetail>).detail;
+      const detail = (e as CustomEvent<GoABInputOnBlurDetail>).detail;
       onBlur?.(detail);
     };
 
     const keypressListener = (e: Event) => {
-      const detail = (e as CustomEvent<ABGovInputOnKeyPressDetail>).detail;
+      const detail = (e as CustomEvent<GoABInputOnKeyPressDetail>).detail;
       onKeyPress?.(detail);
-    }
+    };
 
     current.addEventListener("_change", changeListener);
     current.addEventListener("_trailingIconClick", clickListener);
@@ -223,8 +233,8 @@ export function ABGovInput({
   );
 }
 
-const onDateChangeHandler = (onChange: OnChange<ABGovDate>) => {
-  return ({ name, value }: ABGovInputOnChangeDetail<string | Date>) => {
+const onDateChangeHandler = (onChange: OnChange<GoABDate>) => {
+  return ({ name, value }: GoABInputOnChangeDetail<string | Date>) => {
     if (!value) {
       onChange({ name, value: "" });
       return;
@@ -243,7 +253,7 @@ const onDateChangeHandler = (onChange: OnChange<ABGovDate>) => {
 };
 
 const onTimeChangeHandler = (onChange: OnChange) => {
-  return ({ name, value }: ABGovInputOnChangeDetail) => {
+  return ({ name, value }: GoABInputOnChangeDetail) => {
     if (!value) {
       onChange({ name, value: "" });
       return;
@@ -252,7 +262,7 @@ const onTimeChangeHandler = (onChange: OnChange) => {
   };
 };
 
-function toString(value: ABGovDate | null | undefined, tmpl = "yyyy-MM-dd"): string {
+function toString(value: GoABDate | null | undefined, tmpl = "yyyy-MM-dd"): string {
   if (!value) {
     return "";
   }
@@ -265,22 +275,22 @@ function toString(value: ABGovDate | null | undefined, tmpl = "yyyy-MM-dd"): str
   return format(value, tmpl);
 }
 
-export function ABGovInputText(props: ABGovInputProps): JSX.Element {
-  return <ABGovInput {...props} type="text" />;
+export function GoABInputText(props: GoABInputProps): JSX.Element {
+  return <GoABInput {...props} type="text" />;
 }
 
-export function ABGovInputPassword(props: ABGovInputProps): JSX.Element {
-  return <ABGovInput {...props} type="password" />;
+export function GoABInputPassword(props: GoABInputProps): JSX.Element {
+  return <GoABInput {...props} type="password" />;
 }
 
-export function ABGovInputDate({
+export function GoABInputDate({
   value,
   min = "",
   max = "",
   ...props
-}: ABGovDateInputProps): JSX.Element {
+}: GoABDateInputProps): JSX.Element {
   return (
-    <ABGovInput
+    <GoABInput
       {...props}
       type="date"
       onChange={onDateChangeHandler(props.onChange)}
@@ -291,14 +301,14 @@ export function ABGovInputDate({
   );
 }
 
-export function ABGovInputTime({
+export function GoABInputTime({
   value,
   min = "",
   max = "",
   ...props
-}: ABGovInputProps): JSX.Element {
+}: GoABInputProps): JSX.Element {
   return (
-    <ABGovInput
+    <GoABInput
       {...props}
       onChange={onTimeChangeHandler(props.onChange)}
       value={value}
@@ -307,14 +317,14 @@ export function ABGovInputTime({
   );
 }
 
-export function ABGovInputDateTime({
+export function GoABInputDateTime({
   value,
   min = "",
   max = "",
   ...props
-}: ABGovDateInputProps): JSX.Element {
+}: GoABDateInputProps): JSX.Element {
   return (
-    <ABGovInput
+    <GoABInput
       {...props}
       onChange={onDateChangeHandler(props.onChange)}
       value={toString(value, "yyyy-MM-dd'T'HH:mm")}
@@ -323,23 +333,23 @@ export function ABGovInputDateTime({
   );
 }
 
-export function ABGovInputEmail(props: ABGovInputProps): JSX.Element {
-  return <ABGovInput {...props} type="email" />;
+export function GoABInputEmail(props: GoABInputProps): JSX.Element {
+  return <GoABInput {...props} type="email" />;
 }
 
-export function ABGovInputSearch(props: ABGovInputProps): JSX.Element {
-  return <ABGovInput {...props} type="search" trailingIcon="search" />;
+export function GoABInputSearch(props: GoABInputProps): JSX.Element {
+  return <GoABInput {...props} type="search" trailingIcon="search" />;
 }
 
-export function ABGovInputUrl(props: ABGovInputProps): JSX.Element {
-  return <ABGovInput {...props} type="url" />;
+export function GoABInputUrl(props: GoABInputProps): JSX.Element {
+  return <GoABInput {...props} type="url" />;
 }
 
-export function ABGovInputTel(props: ABGovInputProps): JSX.Element {
-  return <ABGovInput {...props} type="tel" />;
+export function GoABInputTel(props: GoABInputProps): JSX.Element {
+  return <GoABInput {...props} type="tel" />;
 }
 
-export function ABGovInputFile(props: ABGovInputProps): JSX.Element {
+export function GoABInputFile(props: GoABInputProps): JSX.Element {
   return (
     <input
       id={props.id}
@@ -351,30 +361,30 @@ export function ABGovInputFile(props: ABGovInputProps): JSX.Element {
   );
 }
 
-export function ABGovInputMonth(props: ABGovInputProps): JSX.Element {
-  return <ABGovInput {...props} type="month" />;
+export function GoABInputMonth(props: GoABInputProps): JSX.Element {
+  return <GoABInput {...props} type="month" />;
 }
 
-export function ABGovInputNumber({
+export function GoABInputNumber({
   min = Number.MIN_VALUE,
   max = Number.MAX_VALUE,
   value,
   ...props
-}: ABGovNumberInputProps): JSX.Element {
-  const onNumberChange = ({ name, value }: ABGovInputOnChangeDetail) => {
+}: GoABNumberInputProps): JSX.Element {
+  const onNumberChange = ({ name, value }: GoABInputOnChangeDetail) => {
     props.onChange({ name, value: parseFloat(value) });
   };
-  const onFocus = ({ name, value }: ABGovInputOnFocusDetail) => {
+  const onFocus = ({ name, value }: GoABInputOnFocusDetail) => {
     props.onFocus?.({ name, value: parseFloat(value) });
   };
-  const onBlur = ({ name, value }: ABGovInputOnBlurDetail) => {
+  const onBlur = ({ name, value }: GoABInputOnBlurDetail) => {
     props.onBlur?.({ name, value: parseFloat(value) });
   };
-  const onKeyPress = ({ name, value, key }: ABGovInputOnKeyPressDetail) => {
+  const onKeyPress = ({ name, value, key }: GoABInputOnKeyPressDetail) => {
     props.onKeyPress?.({ name, value: parseFloat(value), key: parseInt(key) });
   };
   return (
-    <ABGovInput
+    <GoABInput
       {...props}
       onChange={onNumberChange}
       min={min?.toString()}
@@ -388,8 +398,8 @@ export function ABGovInputNumber({
   );
 }
 
-export function ABGovInputRange(props: ABGovInputProps): JSX.Element {
-  return <ABGovInput {...props} type="range" />;
+export function GoABInputRange(props: GoABInputProps): JSX.Element {
+  return <GoABInput {...props} type="range" />;
 }
 
-export default ABGovInput;
+export default GoABInput;

@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovSpacer } from "./spacer";
+import { GoABSpacer } from "./spacer";
 
-let component: ABGovSpacer;
-let fixture: ComponentFixture<ABGovSpacer>;
+let component: GoABSpacer;
+let fixture: ComponentFixture<GoABSpacer>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovSpacer],
+    imports: [GoABSpacer],
   });
-  fixture = TestBed.createComponent(ABGovSpacer);
+  fixture = TestBed.createComponent(GoABSpacer);
   component = fixture.componentInstance;
 });
 

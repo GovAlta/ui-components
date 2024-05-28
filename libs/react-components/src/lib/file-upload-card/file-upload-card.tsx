@@ -1,4 +1,7 @@
-import { ABGovFileUploadOnCancelDetail, ABGovFileUploadOnDeleteDetail } from "@abgov/ui-components-common";
+import {
+  GoABFileUploadOnCancelDetail,
+  GoABFileUploadOnDeleteDetail,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps {
@@ -21,18 +24,18 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface ABGovFileUploadCardProps {
+export interface GoABFileUploadCardProps {
   filename: string;
   size: number;
   type?: string;
   progress?: number;
   testId: string;
   error?: string;
-  onDelete?: (detail: ABGovFileUploadOnDeleteDetail) => void;
-  onCancel?: (detail: ABGovFileUploadOnCancelDetail) => void;
+  onDelete?: (detail: GoABFileUploadOnDeleteDetail) => void;
+  onCancel?: (detail: GoABFileUploadOnCancelDetail) => void;
 }
 
-export function ABGovFileUploadCard({
+export function GoABFileUploadCard({
   filename,
   size,
   type,
@@ -41,7 +44,7 @@ export function ABGovFileUploadCard({
   testId,
   onDelete,
   onCancel,
-}: ABGovFileUploadCardProps) {
+}: GoABFileUploadCardProps) {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -71,4 +74,4 @@ export function ABGovFileUploadCard({
   );
 }
 
-export default ABGovFileUploadCard;
+export default GoABFileUploadCard;

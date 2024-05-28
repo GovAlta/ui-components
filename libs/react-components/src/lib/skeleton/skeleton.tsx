@@ -1,10 +1,10 @@
-import { ABGovSkeletonSize, ABGovSkeletonType, Margins } from "@abgov/ui-components-common";
+import { GoABSkeletonSize, GoABSkeletonType, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   maxwidth?: string;
-  size?: ABGovSkeletonSize;
+  size?: GoABSkeletonSize;
   linecount?: number;
-  type: ABGovSkeletonType;
+  type: GoABSkeletonType;
 }
 
 declare global {
@@ -16,18 +16,18 @@ declare global {
   }
 }
 
-export interface ABGovSkeletonProps extends Margins {
+export interface GoABSkeletonProps extends Margins {
   maxWidth?: string;
-  size?: ABGovSkeletonSize;
+  size?: GoABSkeletonSize;
   lineCount?: number;
-  type: ABGovSkeletonType;
+  type: GoABSkeletonType;
   testId?: string;
 }
 
 // legacy name
-export type SkeletonProps = ABGovSkeletonProps;
+export type SkeletonProps = GoABSkeletonProps;
 
-export const ABGovSkeleton = ({
+export const GoABSkeleton = ({
   maxWidth,
   size,
   lineCount,
@@ -37,7 +37,7 @@ export const ABGovSkeleton = ({
   mr,
   mb,
   ml,
-}: ABGovSkeletonProps) => {
+}: GoABSkeletonProps) => {
   return (
     <goa-skeleton
       maxwidth={maxWidth}
@@ -53,4 +53,4 @@ export const ABGovSkeleton = ({
   );
 };
 
-export default ABGovSkeleton;
+export default GoABSkeleton;

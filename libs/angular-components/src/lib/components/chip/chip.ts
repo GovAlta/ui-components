@@ -1,9 +1,9 @@
-import { ABGovIconType, Spacing } from "@abgov/ui-components-common";
+import { GoABIconType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-chip",
+  selector: "goab-chip",
   template: `<goa-chip
     [leadingicon]="leadingIcon"
     [content]="content"
@@ -17,8 +17,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   </goa-chip>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovChip {
-  @Input() leadingIcon?: ABGovIconType | null;
+export class GoABChip {
+  @Input() leadingIcon?: GoABIconType | null;
   @Input() content?: string = "";
   @Input() testId?: string;
   @Input() mt?: Spacing;

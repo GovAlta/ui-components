@@ -16,7 +16,7 @@ declare global {
   }
 }
 
-export interface ABGovHeroBannerProps {
+export interface GoABHeroBannerProps {
   heading: string;
   backgroundUrl?: string;
   minHeight?: string;
@@ -27,7 +27,7 @@ export interface ABGovHeroBannerProps {
   textColor?: string;
 }
 
-export function ABGovHeroBanner({
+export function GoABHeroBanner({
   heading,
   backgroundUrl,
   minHeight,
@@ -36,7 +36,7 @@ export function ABGovHeroBanner({
   textColor,
   children,
   testId,
-}: ABGovHeroBannerProps): JSX.Element {
+}: GoABHeroBannerProps): JSX.Element {
   return (
     <goa-hero-banner
       heading={heading}
@@ -52,4 +52,4 @@ export function ABGovHeroBanner({
   );
 }
 
-export default ABGovHeroBanner;
+export default GoABHeroBanner;

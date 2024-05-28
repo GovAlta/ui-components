@@ -1,9 +1,9 @@
-import { ABGovButtonSize, ABGovButtonType, ABGovButtonVariant, ABGovIconType, Spacing } from "@abgov/ui-components-common";
+import { GoABButtonSize, GoABButtonType, GoABButtonVariant, GoABIconType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-button",
+  selector: "goab-button",
   template: `
     <goa-button
       [type]="type"
@@ -24,13 +24,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovButton {
-  @Input() type?: ABGovButtonType;
-  @Input() size?: ABGovButtonSize;
-  @Input() variant?: ABGovButtonVariant;
+export class GoABButton {
+  @Input() type?: GoABButtonType;
+  @Input() size?: GoABButtonSize;
+  @Input() variant?: GoABButtonVariant;
   @Input() disabled?: boolean;
-  @Input() leadingIcon?: ABGovIconType;
-  @Input() trailingIcon?: ABGovIconType;
+  @Input() leadingIcon?: GoABIconType;
+  @Input() trailingIcon?: GoABIconType;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

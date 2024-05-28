@@ -4,7 +4,7 @@ exports[`should render 1`] = `
 <ng-component
   heading={[Function String]}
 >
-  <abgov-accordion>
+  <goab-accordion>
     <goa-accordion>
       <div
         slot="headingcontent"
@@ -13,6 +13,6 @@ exports[`should render 1`] = `
       </div>
        test content 
     </goa-accordion>
-  </abgov-accordion>
+  </goab-accordion>
 </ng-component>
 `;

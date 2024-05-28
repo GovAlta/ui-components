@@ -1,9 +1,9 @@
-import { ABGovAriaLiveType, ABGovNotificationType } from "@abgov/ui-components-common";
+import { GoABAriaLiveType, GoABNotificationType } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-notification",
+  selector: "goab-notification",
   template: `
     <goa-notification
       [type]="type"
@@ -17,9 +17,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovNotificationBanner {
-  @Input() type?: ABGovNotificationType;
-  @Input() ariaLive?: ABGovAriaLiveType;
+export class GoABNotificationBanner {
+  @Input() type?: GoABNotificationType;
+  @Input() ariaLive?: GoABAriaLiveType;
   @Input() maxContentWidth?: string;
   @Input() testId?: string;
 

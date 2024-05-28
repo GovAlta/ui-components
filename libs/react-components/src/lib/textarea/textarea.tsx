@@ -1,4 +1,4 @@
-import { ABGovTextAreaCountBy, Margins } from "@abgov/ui-components-common";
+import { GoABTextAreaCountBy, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
@@ -11,7 +11,7 @@ interface WCProps extends Margins {
   disabled?: boolean;
   width?: string;
   arialabel?: string;
-  countby?: ABGovTextAreaCountBy;
+  countby?: GoABTextAreaCountBy;
   maxcount?: number;
 }
 
@@ -24,7 +24,7 @@ declare global {
   }
 }
 
-export interface ABGovTextAreaProps extends Margins {
+export interface GoABTextAreaProps extends Margins {
   name: string;
   value?: string;
   id?: string;
@@ -35,14 +35,14 @@ export interface ABGovTextAreaProps extends Margins {
   width?: string;
   testId?: string;
   ariaLabel?: string;
-  countBy?: ABGovTextAreaCountBy;
+  countBy?: GoABTextAreaCountBy;
   maxCount?: number;
 
   onChange: (name: string, value: string) => void;
   onKeyPress?: (name: string, value: string, key: string) => void;
 }
 
-export function ABGovTextarea({
+export function GoABTextarea({
   name,
   value,
   placeholder,
@@ -60,7 +60,7 @@ export function ABGovTextarea({
   ml,
   onChange,
   onKeyPress,
-}: ABGovTextAreaProps): JSX.Element {
+}: GoABTextAreaProps): JSX.Element {
   const el = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -79,7 +79,6 @@ export function ABGovTextarea({
     };
   }, [el, onChange]);
 
-
   useEffect(() => {
     if (!el.current) {
       return;
@@ -88,7 +87,7 @@ export function ABGovTextarea({
     const keypressListener = (e: unknown) => {
       const { name, value, key } = (e as CustomEvent).detail;
       onKeyPress?.(name, value, key);
-    }
+    };
 
     current.addEventListener("_keyPress", keypressListener);
     return () => {
@@ -118,6 +117,5 @@ export function ABGovTextarea({
   );
 }
 
-export {ABGovTextarea as ABGovTextArea}
-export default ABGovTextarea;
-
+export { GoABTextarea as GoABTextArea };
+export default GoABTextarea;

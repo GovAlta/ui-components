@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovAppHeaderMenu } from "./header-menu";
+import { GoABAppHeaderMenu } from "./header-menu";
 
-let component: ABGovAppHeaderMenu;
-let fixture: ComponentFixture<ABGovAppHeaderMenu>;
+let component: GoABAppHeaderMenu;
+let fixture: ComponentFixture<GoABAppHeaderMenu>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovAppHeaderMenu],
+    imports: [GoABAppHeaderMenu],
   });
-  fixture = TestBed.createComponent(ABGovAppHeaderMenu);
+  fixture = TestBed.createComponent(GoABAppHeaderMenu);
   component = fixture.componentInstance;
 });
 

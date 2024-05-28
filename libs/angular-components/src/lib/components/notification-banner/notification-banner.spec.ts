@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovNotificationBanner } from "./notification-banner";
+import { GoABNotificationBanner } from "./notification-banner";
 
-let component: ABGovNotificationBanner;
-let fixture: ComponentFixture<ABGovNotificationBanner>;
+let component: GoABNotificationBanner;
+let fixture: ComponentFixture<GoABNotificationBanner>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovNotificationBanner],
+    imports: [GoABNotificationBanner],
   });
-  fixture = TestBed.createComponent(ABGovNotificationBanner);
+  fixture = TestBed.createComponent(GoABNotificationBanner);
   component = fixture.componentInstance;
 });
 

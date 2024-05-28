@@ -1,9 +1,12 @@
-import { ABGovFileUploadInputOnSelectFileDetail, ABGovFileUploadInputVariant } from "@abgov/ui-components-common";
+import {
+  GoABFileUploadInputOnSelectFileDetail,
+  GoABFileUploadInputVariant,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps {
   ref: React.MutableRefObject<HTMLElement | null>;
-  variant?: ABGovFileUploadInputVariant;
+  variant?: GoABFileUploadInputVariant;
   accept?: string;
   maxfilesize?: string;
 }
@@ -19,21 +22,21 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface ABGovFileUploadInputProps {
-  variant?: ABGovFileUploadInputVariant;
+export interface GoABFileUploadInputProps {
+  variant?: GoABFileUploadInputVariant;
   accept?: string;
   maxFileSize?: string;
   testId?: string;
-  onSelectFile: (detail: ABGovFileUploadInputOnSelectFileDetail) => void;
+  onSelectFile: (detail: GoABFileUploadInputOnSelectFileDetail) => void;
 }
 
-export function ABGovFileUploadInput({
+export function GoABFileUploadInput({
   variant,
   accept,
   maxFileSize,
   testId,
   onSelectFile,
-}: ABGovFileUploadInputProps) {
+}: GoABFileUploadInputProps) {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -41,7 +44,7 @@ export function ABGovFileUploadInput({
 
     const current = el.current;
     const handler = (e: Event) => {
-      const detail = (e as CustomEvent<ABGovFileUploadInputOnSelectFileDetail>).detail;
+      const detail = (e as CustomEvent<GoABFileUploadInputOnSelectFileDetail>).detail;
       onSelectFile(detail);
     };
     current.addEventListener("_selectFile", handler);
@@ -61,4 +64,4 @@ export function ABGovFileUploadInput({
   );
 }
 
-export default ABGovFileUploadInput;
+export default GoABFileUploadInput;

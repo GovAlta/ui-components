@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
 import { GoAIconType } from "../icon/icon";
 
-import ABGovAppHeaderMenu from "./app-header-menu";
+import GoABAppHeaderMenu from "./app-header-menu";
 
 describe("AppHeaderMenu", () => {
   it("should render with no children", () => {
-    const { baseElement } = render(<ABGovAppHeaderMenu heading="Some label" />);
+    const { baseElement } = render(<GoABAppHeaderMenu heading="Some label" />);
     const el = baseElement.querySelector("goa-app-header-menu");
 
     expect(el).toBeTruthy();
@@ -14,10 +14,10 @@ describe("AppHeaderMenu", () => {
 
   it("should render children", () => {
     const { baseElement } = render(
-      <ABGovAppHeaderMenu heading="Some label">
+      <GoABAppHeaderMenu heading="Some label">
         <a href="#foo">Foo</a>
         <a href="#bar">Bar</a>
-      </ABGovAppHeaderMenu>
+      </GoABAppHeaderMenu>,
     );
     const el = baseElement.querySelector("goa-app-header-menu");
     expect(el).toBeTruthy();
@@ -28,11 +28,8 @@ describe("AppHeaderMenu", () => {
 
   it("should set the props correctly", () => {
     const { baseElement } = render(
-      <GoAAppHeaderMenu
-        heading="Some label"
-        leadingIcon="search"
-        testId="foo"
-        />);
+      <GoAAppHeaderMenu heading="Some label" leadingIcon="search" testId="foo" />,
+    );
     const el = baseElement.querySelector("goa-app-header-menu");
     expect(el).toBeTruthy();
     expect(el?.getAttribute("heading")).toBe("Some label");

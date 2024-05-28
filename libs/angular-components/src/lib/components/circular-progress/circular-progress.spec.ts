@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovCircularProgress } from "./circular-progress";
+import { GoABCircularProgress } from "./circular-progress";
 
-let component: ABGovCircularProgress;
-let fixture: ComponentFixture<ABGovCircularProgress>;
+let component: GoABCircularProgress;
+let fixture: ComponentFixture<GoABCircularProgress>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovCircularProgress],
+    imports: [GoABCircularProgress],
   });
-  fixture = TestBed.createComponent(ABGovCircularProgress);
+  fixture = TestBed.createComponent(GoABCircularProgress);
   component = fixture.componentInstance;
 });
 

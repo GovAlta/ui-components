@@ -1,9 +1,9 @@
-import { ABGovCalendarOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { GoABCalendarOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-calendar",
+  selector: "goab-calendar",
   template: `
     <goa-calendar
       [name]="name"
@@ -22,7 +22,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovCalendar {
+export class GoABCalendar {
   @Input() name?: string;
   @Input() value?: Date;
   @Input() min?: Date;
@@ -33,10 +33,10 @@ export class ABGovCalendar {
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<ABGovCalendarOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoABCalendarOnChangeDetail>();
 
   _onChange(e: Event) {
-    const details = (e as CustomEvent<ABGovCalendarOnChangeDetail>).detail;
+    const details = (e as CustomEvent<GoABCalendarOnChangeDetail>).detail;
     this.onChange.emit(details)
   }
 }

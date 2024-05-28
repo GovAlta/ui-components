@@ -1,17 +1,17 @@
 import { render } from "@testing-library/react";
-import ABGovSpinner, { SpinnerSize } from "./spinner";
+import GoABSpinner, { SpinnerSize } from "./spinner";
 
 describe("Spinner", () => {
   (["small", "medium", "large", "xlarge"] as const).forEach((size: SpinnerSize) => {
     it(`renders the ${size} spinner`, async () => {
       render(
-        <ABGovSpinner
+        <GoABSpinner
           type="progress"
           size={size}
           invert
           testId="spinner-testid"
           progress={20}
-        />
+        />,
       );
       const el = document.querySelector("goa-spinner");
       expect(el?.getAttribute("size")).toBe(size);

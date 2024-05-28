@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-export interface ABGovRadioItemProps {
+export interface GoABRadioItemProps {
   value?: string;
   label?: string;
   name?: string;
@@ -29,7 +29,7 @@ export interface ABGovRadioItemProps {
   testId?: string;
 }
 
-export function ABGovRadioItem({
+export function GoABRadioItem({
   name,
   label,
   value,
@@ -39,7 +39,7 @@ export function ABGovRadioItem({
   error,
   testId,
   children,
-}: ABGovRadioItemProps): JSX.Element {
+}: GoABRadioItemProps): JSX.Element {
   return (
     <goa-radio-item
       name={name}
@@ -51,10 +51,12 @@ export function ABGovRadioItem({
       checked={checked}
       data-testid={testId}
     >
-      {description && typeof description !== "string" && <div slot="description">{description}</div>}
+      {description && typeof description !== "string" && (
+        <div slot="description">{description}</div>
+      )}
       {children}
     </goa-radio-item>
   );
 }
 
-export default ABGovRadioItem;
+export default GoABRadioItem;

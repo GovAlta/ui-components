@@ -1,12 +1,10 @@
 import { render } from "@testing-library/react";
-import { ABGovBadge } from "./badge";
+import { GoABBadge } from "./badge";
 import { screen } from "@testing-library/dom";
 
-describe("ABGov Badge", () => {
+describe("GoAB Badge", () => {
   it("should render", () => {
-    render(
-      <ABGovBadge type="information" testId="badge-test" content="Text Content" />
-    );
+    render(<GoABBadge type="information" testId="badge-test" content="Text Content" />);
 
     const badge = screen.findByTestId("badge-test");
     expect(badge).toBeTruthy();
@@ -14,7 +12,7 @@ describe("ABGov Badge", () => {
 
   it("should render the properties", () => {
     const { container } = render(
-      <ABGovBadge
+      <GoABBadge
         type="information"
         content="Text Content"
         mt="s"
@@ -22,7 +20,7 @@ describe("ABGov Badge", () => {
         mb="l"
         ml="xl"
         ariaLabel="text"
-      />
+      />,
     );
     const el = container.querySelector("goa-badge");
 

@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovSpinner } from "./spinner";
+import { GoABSpinner } from "./spinner";
 
-let component: ABGovSpinner;
-let fixture: ComponentFixture<ABGovSpinner>;
+let component: GoABSpinner;
+let fixture: ComponentFixture<GoABSpinner>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovSpinner],
+    imports: [GoABSpinner],
   });
-  fixture = TestBed.createComponent(ABGovSpinner);
+  fixture = TestBed.createComponent(GoABSpinner);
   component = fixture.componentInstance;
 });
 

@@ -1,9 +1,9 @@
-import { ABGovAccordionHeadingSize, Spacing } from "@abgov/ui-components-common";
+import { GoABAccordionHeadingSize, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-accordion",
+  selector: "goab-accordion",
   template: `
     <goa-accordion
       [heading]="heading"
@@ -22,12 +22,12 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovAccordion {
+export class GoABAccordion {
   @Input() heading?: string;
   @Input() secondaryText?: string;
   @Input() testId?: string;
   @Input() open?: boolean;
-  @Input() headingSize?: ABGovAccordionHeadingSize;
+  @Input() headingSize?: GoABAccordionHeadingSize;
 
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

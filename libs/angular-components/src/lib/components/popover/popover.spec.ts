@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovPopover } from "./popover";
+import { GoABPopover } from "./popover";
 
-let component: ABGovPopover;
-let fixture: ComponentFixture<ABGovPopover>;
+let component: GoABPopover;
+let fixture: ComponentFixture<GoABPopover>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovPopover],
+    imports: [GoABPopover],
   });
-  fixture = TestBed.createComponent(ABGovPopover);
+  fixture = TestBed.createComponent(GoABPopover);
   component = fixture.componentInstance;
 });
 

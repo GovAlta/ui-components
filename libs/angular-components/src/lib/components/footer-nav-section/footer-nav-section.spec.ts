@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovAppFooterNavSection } from "./footer-nav-section";
+import { GoABAppFooterNavSection } from "./footer-nav-section";
 
-let component: ABGovAppFooterNavSection;
-let fixture: ComponentFixture<ABGovAppFooterNavSection>;
+let component: GoABAppFooterNavSection;
+let fixture: ComponentFixture<GoABAppFooterNavSection>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovAppFooterNavSection],
+    imports: [GoABAppFooterNavSection],
   });
-  fixture = TestBed.createComponent(ABGovAppFooterNavSection);
+  fixture = TestBed.createComponent(GoABAppFooterNavSection);
   component = fixture.componentInstance;
 });
 

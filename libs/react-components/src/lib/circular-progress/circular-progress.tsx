@@ -1,8 +1,11 @@
-import { ABGovCircularProgressSize, ABGovCircularProgressVariant } from "@abgov/ui-components-common";
+import {
+  GoABCircularProgressSize,
+  GoABCircularProgressVariant,
+} from "@abgov/ui-components-common";
 
 interface WCProps {
-  variant?: ABGovCircularProgressVariant;
-  size?: ABGovCircularProgressSize;
+  variant?: GoABCircularProgressVariant;
+  size?: GoABCircularProgressSize;
   message?: string;
   visible?: string;
   progress?: number;
@@ -17,23 +20,23 @@ declare global {
   }
 }
 
-export interface ABGovCircularProgressProps {
-  variant?: ABGovCircularProgressVariant;
-  size?: ABGovCircularProgressSize;
+export interface GoABCircularProgressProps {
+  variant?: GoABCircularProgressVariant;
+  size?: GoABCircularProgressSize;
   message?: string;
   visible?: boolean;
   progress?: number;
   testId?: string;
 }
 
-export const ABGovCircularProgress = ({
+export const GoABCircularProgress = ({
   visible,
   message,
   progress,
   variant,
   size,
   testId,
-}: ABGovCircularProgressProps) => {
+}: GoABCircularProgressProps) => {
   return (
     <goa-circular-progress
       visible={visible ? "true" : "false"}
@@ -44,6 +47,6 @@ export const ABGovCircularProgress = ({
       data-testid={testId}
     />
   );
-}
+};
 
-export default ABGovCircularProgress;
+export default GoABCircularProgress;

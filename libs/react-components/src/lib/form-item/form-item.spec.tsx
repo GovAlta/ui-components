@@ -1,18 +1,18 @@
 import { render, cleanup } from "@testing-library/react";
-import { ABGovFormItem } from "./form-item";
+import { GoABFormItem } from "./form-item";
 
 afterEach(cleanup);
 
-describe("ABGovFormItem", () => {
+describe("GoABFormItem", () => {
   it("renders all with properties", () => {
     const { baseElement } = render(
-      <ABGovFormItem
+      <GoABFormItem
         label="First Name"
         requirement="optional"
         error="This is an error"
         helpText="This is some help text"
         id="firstName"
-      />
+      />,
     );
     const el = baseElement.querySelector("goa-form-item");
     expect(el?.getAttribute("label")).toEqual("First Name");

@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovInput } from "./input";
+import { GoABInput } from "./input";
 
-let component: ABGovInput;
-let fixture: ComponentFixture<ABGovInput>;
+let component: GoABInput;
+let fixture: ComponentFixture<GoABInput>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovInput],
+    imports: [GoABInput],
   });
-  fixture = TestBed.createComponent(ABGovInput);
+  fixture = TestBed.createComponent(GoABInput);
   component = fixture.componentInstance;
 });
 

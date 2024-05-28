@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-dropdown-item",
+  selector: "goab-dropdown-item",
   template: `
     <goa-dropdown-item
       [value]="value"
@@ -13,7 +13,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovDropdownItem {
+export class GoABDropdownItem {
   @Input() value?: string;
   @Input() filter?: string;
   @Input() label?: string;

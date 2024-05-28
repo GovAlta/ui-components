@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import { ABGovAppHeader } from "../app-header/app-header";
-import { ABGovAppFooter } from "../footer/footer";
+import { GoABAppHeader } from "../app-header/app-header";
+import { GoABAppFooter } from "../footer/footer";
 
 import TwoColumnLayout from "./two-column-layout";
 
@@ -18,21 +18,21 @@ describe("TwoColumnLayout", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
       <TwoColumnLayout
-        header={<ABGovAppHeader />}
-        footer={<ABGovAppFooter />}
+        header={<GoABAppHeader />}
+        footer={<GoABAppFooter />}
         nav={<Links />}
       >
         <h1>Heading</h1>
         <p>
-          Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
-          cillum sint consectetur cupidatat.
+          Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint
+          consectetur cupidatat.
         </p>
-      </TwoColumnLayout>
+      </TwoColumnLayout>,
     );
 
     expect(baseElement).toBeTruthy();
     expect(baseElement.innerHTML).toContain(
-      "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
+      "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
     );
     expect(baseElement.innerHTML).toContain("<goa-app-header>");
     expect(baseElement.innerHTML).toContain("<goa-app-footer>");
