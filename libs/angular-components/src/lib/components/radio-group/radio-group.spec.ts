@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovRadioGroup } from "./radio-group";
+import { GoABRadioGroup } from "./radio-group";
 
-let component: ABGovRadioGroup;
-let fixture: ComponentFixture<ABGovRadioGroup>;
+let component: GoABRadioGroup;
+let fixture: ComponentFixture<GoABRadioGroup>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovRadioGroup],
+    imports: [GoABRadioGroup],
   });
-  fixture = TestBed.createComponent(ABGovRadioGroup);
+  fixture = TestBed.createComponent(GoABRadioGroup);
   component = fixture.componentInstance;
 });
 

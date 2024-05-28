@@ -1,8 +1,12 @@
-import { ABGovButtonGroupAlignment, ABGovButtonGroupGap, Margins } from "@abgov/ui-components-common";
+import {
+  GoABButtonGroupAlignment,
+  GoABButtonGroupGap,
+  Margins,
+} from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  alignment: ABGovButtonGroupAlignment;
-  gap?: ABGovButtonGroupGap;
+  alignment: GoABButtonGroupAlignment;
+  gap?: GoABButtonGroupGap;
 }
 
 declare global {
@@ -14,14 +18,14 @@ declare global {
   }
 }
 
-export interface ABGovButtonGroupProps extends Margins {
-  alignment: ABGovButtonGroupAlignment;
-  gap?: ABGovButtonGroupGap;
+export interface GoABButtonGroupProps extends Margins {
+  alignment: GoABButtonGroupAlignment;
+  gap?: GoABButtonGroupGap;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export function ABGovButtonGroup({
+export function GoABButtonGroup({
   alignment,
   gap,
   testId,
@@ -30,7 +34,7 @@ export function ABGovButtonGroup({
   mr,
   mb,
   ml,
-}: ABGovButtonGroupProps): JSX.Element {
+}: GoABButtonGroupProps): JSX.Element {
   return (
     <goa-button-group
       alignment={alignment}
@@ -46,4 +50,4 @@ export function ABGovButtonGroup({
   );
 }
 
-export default ABGovButtonGroup;
+export default GoABButtonGroup;

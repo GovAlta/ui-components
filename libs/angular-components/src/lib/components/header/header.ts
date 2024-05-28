@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-app-header",
+  selector: "goab-app-header",
   template: `
     <goa-app-header
       [url]="url"
@@ -15,7 +15,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovAppHeader {
+export class GoABAppHeader {
   @Input() url?: string;
   @Input() heading?: string;
   @Input() maxContentWidth?: string;

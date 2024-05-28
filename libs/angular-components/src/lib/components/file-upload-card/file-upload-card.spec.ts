@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovFileUploadCard } from "./file-upload-card";
+import { GoABFileUploadCard } from "./file-upload-card";
 
-let component: ABGovFileUploadCard;
-let fixture: ComponentFixture<ABGovFileUploadCard>;
+let component: GoABFileUploadCard;
+let fixture: ComponentFixture<GoABFileUploadCard>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovFileUploadCard],
+    imports: [GoABFileUploadCard],
   });
-  fixture = TestBed.createComponent(ABGovFileUploadCard);
+  fixture = TestBed.createComponent(GoABFileUploadCard);
   component = fixture.componentInstance;
 });
 

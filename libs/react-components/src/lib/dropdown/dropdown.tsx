@@ -1,4 +1,8 @@
-import { ABGovDropdownOnChangeDetail, ABGovIconType, Margins } from "@abgov/ui-components-common";
+import {
+  GoABDropdownOnChangeDetail,
+  GoABIconType,
+  Margins,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
@@ -30,10 +34,10 @@ declare global {
   }
 }
 
-export interface ABGovDropdownProps extends Margins {
+export interface GoABDropdownProps extends Margins {
   name?: string;
   value?: string[] | string;
-  onChange: (detail: ABGovDropdownOnChangeDetail) => void;
+  onChange: (detail: GoABDropdownOnChangeDetail) => void;
 
   // optional
   ariaLabel?: string;
@@ -43,7 +47,7 @@ export interface ABGovDropdownProps extends Margins {
   disabled?: boolean;
   error?: boolean;
   filterable?: boolean;
-  leadingIcon?: ABGovIconType;
+  leadingIcon?: GoABIconType;
   maxHeight?: string;
   multiselect?: boolean;
   native?: boolean;
@@ -63,7 +67,7 @@ function stringify(value: string | string[] | undefined): string {
   return JSON.stringify(value);
 }
 
-export function ABGovDropdown(props: ABGovDropdownProps): JSX.Element {
+export function GoABDropdown(props: GoABDropdownProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -71,7 +75,7 @@ export function ABGovDropdown(props: ABGovDropdownProps): JSX.Element {
     }
     const current = el.current;
     const handler = (e: Event) => {
-      const detail = (e as CustomEvent<ABGovDropdownOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoABDropdownOnChangeDetail>).detail;
       props.onChange(detail);
     };
     current.addEventListener("_change", handler);
@@ -109,4 +113,4 @@ export function ABGovDropdown(props: ABGovDropdownProps): JSX.Element {
   );
 }
 
-export default ABGovDropdown;
+export default GoABDropdown;

@@ -1,9 +1,9 @@
-import { ABGovFormStepperOnChangeDetail, ABGovFormStepperType, Spacing } from "@abgov/ui-components-common";
+import { GoABFormStepperOnChangeDetail, GoABFormStepperType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-form-stepper",
+  selector: "goab-form-stepper",
   template: `
     <goa-form-stepper
       [step]="step"
@@ -21,19 +21,19 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovFormStepper {
+export class GoABFormStepper {
   @Input() step?: number;
-  @Input() type?: ABGovFormStepperType;
+  @Input() type?: GoABFormStepperType;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<ABGovFormStepperOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoABFormStepperOnChangeDetail>();
 
   onchange(e: Event) {
-    const detail = (e as CustomEvent<ABGovFormStepperOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoABFormStepperOnChangeDetail>).detail;
     // this.step = detail.step; // TODO: is this needed!!!!!!!!!
     this.onChange.emit(detail);
   }

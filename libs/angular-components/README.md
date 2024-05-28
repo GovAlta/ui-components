@@ -74,7 +74,7 @@ Add the styles link in the `src/styles.css` file
 ### VS Code Support
 
 In order to use VS Code's [HTML/CSS Custom Data](https://github.com/microsoft/vscode-custom-data)
-support to enhance ABGov Web Components HTML editing experience, include our html custom data
+support to enhance GoAB Web Components HTML editing experience, include our html custom data
 setting found in `.vscode/settings.json`:
 
 ```json

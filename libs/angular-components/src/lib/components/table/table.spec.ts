@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovTable } from "./table";
+import { GoABTable } from "./table";
 
-let component: ABGovTable;
-let fixture: ComponentFixture<ABGovTable>;
+let component: GoABTable;
+let fixture: ComponentFixture<GoABTable>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovTable],
+    imports: [GoABTable],
   });
-  fixture = TestBed.createComponent(ABGovTable);
+  fixture = TestBed.createComponent(GoABTable);
   component = fixture.componentInstance;
 });
 

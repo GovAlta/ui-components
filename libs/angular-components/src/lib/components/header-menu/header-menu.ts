@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-app-header-menu",
+  selector: "goab-app-header-menu",
   template: `
     <goa-app-header-menu
       [leadingicon]="leadingIcon"
@@ -13,7 +13,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovAppHeaderMenu {
+export class GoABAppHeaderMenu {
   @Input() leadingIcon?: string;
   @Input() heading?: string;
 }

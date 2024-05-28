@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { ABGovCalendarOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { GoABCalendarOnChangeDetail, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
@@ -18,16 +18,16 @@ declare global {
     }
   }
 }
-export interface ABGovCalendarProps extends Margins {
+export interface GoABCalendarProps extends Margins {
   name?: string;
   value?: Date;
   min?: Date;
   max?: Date;
   testId?: string;
-  onChange: (details: ABGovCalendarOnChangeDetail) => void;
+  onChange: (details: GoABCalendarOnChangeDetail) => void;
 }
 
-export function ABGovCalendar({
+export function GoABCalendar({
   name,
   value,
   min,
@@ -38,7 +38,7 @@ export function ABGovCalendar({
   mb,
   ml,
   onChange,
-}: ABGovCalendarProps): JSX.Element {
+}: GoABCalendarProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!ref.current) {
@@ -69,4 +69,4 @@ export function ABGovCalendar({
   );
 }
 
-export default ABGovCalendar;
+export default GoABCalendar;

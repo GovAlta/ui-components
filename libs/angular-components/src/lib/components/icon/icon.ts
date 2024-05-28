@@ -1,9 +1,9 @@
-import { ABGovIconSize, ABGovIconTheme, ABGovIconType, Spacing } from "@abgov/ui-components-common";
+import { GoABIconSize, GoABIconTheme, GoABIconType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-icon",
+  selector: "goab-icon",
   template: `
     <goa-icon
       [type]="type"
@@ -20,10 +20,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovIcon {
-  @Input({ required: true }) type!: ABGovIconType;
-  @Input() size?: ABGovIconSize = "medium";
-  @Input() theme?: ABGovIconTheme = "outline";
+export class GoABIcon {
+  @Input({ required: true }) type!: GoABIconType;
+  @Input() size?: GoABIconSize = "medium";
+  @Input() theme?: GoABIconTheme = "outline";
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

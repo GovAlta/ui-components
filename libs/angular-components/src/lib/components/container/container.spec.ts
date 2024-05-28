@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovContainer } from "./container";
+import { GoABContainer } from "./container";
 
-let component: ABGovContainer;
-let fixture: ComponentFixture<ABGovContainer>;
+let component: GoABContainer;
+let fixture: ComponentFixture<GoABContainer>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovContainer],
+    imports: [GoABContainer],
   });
-  fixture = TestBed.createComponent(ABGovContainer);
+  fixture = TestBed.createComponent(GoABContainer);
   component = fixture.componentInstance;
 });
 

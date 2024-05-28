@@ -1,9 +1,9 @@
-import { ABGovDatePickerOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { GoABDatePickerOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-datepicker",
+  selector: "goab-datepicker",
   template: `
     <goa-date-picker
       [name]="name"
@@ -21,7 +21,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
     </goa-date-picker>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovDatePicker {
+export class GoABDatePicker {
   @Input() name?: string;
   @Input() value?: Date | string;
   @Input() min?: Date | string;
@@ -32,10 +32,10 @@ export class ABGovDatePicker {
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<ABGovDatePickerOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoABDatePickerOnChangeDetail>();
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<ABGovDatePickerOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoABDatePickerOnChangeDetail>).detail;
     this.onChange.emit(detail)
   }
 }

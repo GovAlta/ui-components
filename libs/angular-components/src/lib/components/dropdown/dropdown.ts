@@ -1,9 +1,9 @@
-import { ABGovDropdownOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { GoABDropdownOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-dropdown",
+  selector: "goab-dropdown",
   template: `
     <goa-dropdown
       [name]="name"
@@ -22,7 +22,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovDropdown {
+export class GoABDropdown {
   @Input() name?: string;
   @Input() value?: string;
   @Input() label?: string;
@@ -32,10 +32,10 @@ export class ABGovDropdown {
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<ABGovDropdownOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoABDropdownOnChangeDetail>();
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<ABGovDropdownOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoABDropdownOnChangeDetail>).detail;
     this.onChange.emit(detail)
   }
 }

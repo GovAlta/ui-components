@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovColumnLayout } from "./column-layout";
+import { GoABColumnLayout } from "./column-layout";
 
-let component: ABGovColumnLayout;
-let fixture: ComponentFixture<ABGovColumnLayout>;
+let component: GoABColumnLayout;
+let fixture: ComponentFixture<GoABColumnLayout>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovColumnLayout],
+    imports: [GoABColumnLayout],
   });
-  fixture = TestBed.createComponent(ABGovColumnLayout);
+  fixture = TestBed.createComponent(GoABColumnLayout);
   component = fixture.componentInstance;
 });
 

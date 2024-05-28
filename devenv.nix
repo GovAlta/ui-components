@@ -11,14 +11,14 @@
   ];
 
   # https://devenv.sh/scripts/
-  scripts.hello.exec = "echo ABGov UI Components";
+  scripts.hello.exec = "echo GoAB UI Components";
 
   enterShell = ''
     git --version
     node --version
     echo
     echo =================
-    echo ABGov UI Components
+    echo GoAB UI Components
     echo =================
   '';
 

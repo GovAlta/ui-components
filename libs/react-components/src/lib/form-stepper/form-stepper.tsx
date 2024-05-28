@@ -1,4 +1,4 @@
-import { ABGovFormStepperOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { GoABFormStepperOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { ReactNode, useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
@@ -17,14 +17,14 @@ declare global {
   }
 }
 
-export interface ABGovFormStepperProps extends Margins {
+export interface GoABFormStepperProps extends Margins {
   step?: number;
   testId?: string;
   children?: ReactNode;
-  onChange?: (detail: ABGovFormStepperOnChangeDetail) => void;
+  onChange?: (detail: GoABFormStepperOnChangeDetail) => void;
 }
 
-export function ABGovFormStepper({
+export function GoABFormStepper({
   testId,
   step,
   mt,
@@ -33,8 +33,7 @@ export function ABGovFormStepper({
   mr,
   onChange,
   children,
-}: ABGovFormStepperProps) {
-
+}: GoABFormStepperProps) {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!ref.current) {
@@ -42,7 +41,7 @@ export function ABGovFormStepper({
     }
     const current = ref.current;
     const changeListener = (e: unknown) => {
-      const detail = (e as CustomEvent<ABGovFormStepperOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoABFormStepperOnChangeDetail>).detail;
       onChange?.(detail);
     };
 
@@ -68,4 +67,4 @@ export function ABGovFormStepper({
   );
 }
 
-export default ABGovFormStepper;
+export default GoABFormStepper;

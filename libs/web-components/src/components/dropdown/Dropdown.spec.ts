@@ -1,4 +1,4 @@
-import { render, fireEvent, cleanup, waitFor, createEvent } from "@testing-library/svelte";
+import { render, fireEvent, cleanup, waitFor } from "@testing-library/svelte";
 import GoADropdown from "./Dropdown.svelte";
 import GoADropdownWrapper from "./DropdownWrapper.test.svelte";
 import { it, describe } from "vitest";

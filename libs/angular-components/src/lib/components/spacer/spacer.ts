@@ -1,9 +1,9 @@
-import { ABGovSpacerHorizontalSpacing, ABGovSpacerVerticalSpacing } from "@abgov/ui-components-common";
+import { GoABSpacerHorizontalSpacing, GoABSpacerVerticalSpacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-spacer",
+  selector: "goab-spacer",
   template: `
     <goa-spacer
       [hspacing]="hSpacing"
@@ -13,8 +13,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovSpacer {
-  @Input() hSpacing?: ABGovSpacerHorizontalSpacing;
-  @Input() vSpacing?: ABGovSpacerVerticalSpacing;
+export class GoABSpacer {
+  @Input() hSpacing?: GoABSpacerHorizontalSpacing;
+  @Input() vSpacing?: GoABSpacerVerticalSpacing;
 }
 

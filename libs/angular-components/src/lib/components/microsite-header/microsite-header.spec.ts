@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovMicrositeHeader } from "./microsite-header";
+import { GoABMicrositeHeader } from "./microsite-header";
 
-let component: ABGovMicrositeHeader;
-let fixture: ComponentFixture<ABGovMicrositeHeader>;
+let component: GoABMicrositeHeader;
+let fixture: ComponentFixture<GoABMicrositeHeader>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovMicrositeHeader],
+    imports: [GoABMicrositeHeader],
   });
-  fixture = TestBed.createComponent(ABGovMicrositeHeader);
+  fixture = TestBed.createComponent(GoABMicrositeHeader);
   component = fixture.componentInstance;
 });
 

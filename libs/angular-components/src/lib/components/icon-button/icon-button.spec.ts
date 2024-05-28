@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovIconButton } from "./icon-button";
+import { GoABIconButton } from "./icon-button";
 
-let component: ABGovIconButton;
-let fixture: ComponentFixture<ABGovIconButton>;
+let component: GoABIconButton;
+let fixture: ComponentFixture<GoABIconButton>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovIconButton],
+    imports: [GoABIconButton],
   });
-  fixture = TestBed.createComponent(ABGovIconButton);
+  fixture = TestBed.createComponent(GoABIconButton);
   component = fixture.componentInstance;
 });
 

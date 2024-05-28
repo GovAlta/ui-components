@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-grid",
+  selector: "goab-grid",
   template: `
     <goa-grid
       [gap]="gap"
@@ -19,7 +19,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovGrid {
+export class GoABGrid {
   @Input({ required: true }) minChildWidth!: string;
   @Input() gap?: Spacing;
   @Input() testId?: string;

@@ -1,10 +1,10 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
-import { ABGovCircularProgressSize, ABGovCircularProgressVariant } from "@abgov/ui-components-common"
+import { GoABCircularProgressSize, GoABCircularProgressVariant } from "@abgov/ui-components-common"
 
 @Component({
   standalone: true,
-  selector: "abgov-circular-progress",
+  selector: "goab-circular-progress",
   template: `<goa-circular-progress
     [variant]="variant"
     [size]="size"
@@ -17,9 +17,9 @@ import { ABGovCircularProgressSize, ABGovCircularProgressVariant } from "@abgov/
   </goa-circular-progress>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovCircularProgress {
-  @Input() variant?: ABGovCircularProgressVariant;
-  @Input() size?: ABGovCircularProgressSize;
+export class GoABCircularProgress {
+  @Input() variant?: GoABCircularProgressVariant;
+  @Input() size?: GoABCircularProgressSize;
   @Input() message?: string;
   @Input() visible?: boolean;
   @Input() progress?: number;

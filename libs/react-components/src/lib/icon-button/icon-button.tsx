@@ -1,11 +1,16 @@
-import { ABGovIconButtonVariant, ABGovIconSize, ABGovIconType, Margins } from "@abgov/ui-components-common";
+import {
+  GoABIconButtonVariant,
+  GoABIconSize,
+  GoABIconType,
+  Margins,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
-  icon: ABGovIconType;
-  size?: ABGovIconSize;
-  variant?: ABGovIconButtonVariant;
+  icon: GoABIconType;
+  size?: GoABIconSize;
+  variant?: GoABIconButtonVariant;
   title?: string;
   disabled?: boolean;
   arialabel?: string;
@@ -20,10 +25,10 @@ declare global {
   }
 }
 
-export interface ABGovIconButtonProps extends Margins {
-  icon: ABGovIconType;
-  size?: ABGovIconSize;
-  variant?: ABGovIconButtonVariant;
+export interface GoABIconButtonProps extends Margins {
+  icon: GoABIconType;
+  size?: GoABIconSize;
+  variant?: GoABIconButtonVariant;
   title?: string;
   disabled?: boolean;
   children?: React.ReactNode;
@@ -32,7 +37,7 @@ export interface ABGovIconButtonProps extends Margins {
   ariaLabel?: string;
 }
 
-export function ABGovIconButton({
+export function GoABIconButton({
   icon,
   disabled,
   variant = "color",
@@ -46,7 +51,7 @@ export function ABGovIconButton({
   mr,
   mb,
   ml,
-}: ABGovIconButtonProps): JSX.Element {
+}: GoABIconButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!ref.current) {

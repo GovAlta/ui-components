@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovDropdownItem } from "./dropdown-item";
+import { GoABDropdownItem } from "./dropdown-item";
 
-let component: ABGovDropdownItem;
-let fixture: ComponentFixture<ABGovDropdownItem>;
+let component: GoABDropdownItem;
+let fixture: ComponentFixture<GoABDropdownItem>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovDropdownItem],
+    imports: [GoABDropdownItem],
   });
-  fixture = TestBed.createComponent(ABGovDropdownItem);
+  fixture = TestBed.createComponent(GoABDropdownItem);
   component = fixture.componentInstance;
 });
 

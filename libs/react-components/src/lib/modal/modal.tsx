@@ -1,4 +1,8 @@
-import { ABGovModalCalloutVariant, ABGovModalRole, ABGovModalTransition } from "@abgov/ui-components-common";
+import {
+  GoABModalCalloutVariant,
+  GoABModalRole,
+  GoABModalTransition,
+} from "@abgov/ui-components-common";
 import { ReactElement, ReactNode, RefObject, useEffect, useRef } from "react";
 
 interface WCProps {
@@ -7,9 +11,9 @@ interface WCProps {
   open?: boolean;
   maxwidth?: string;
   closable?: boolean;
-  role?: ABGovModalRole;
-  transition?: ABGovModalTransition;
-  calloutvariant?: ABGovModalCalloutVariant;
+  role?: GoABModalRole;
+  transition?: GoABModalTransition;
+  calloutvariant?: GoABModalCalloutVariant;
 }
 
 declare global {
@@ -21,20 +25,20 @@ declare global {
   }
 }
 
-export interface ABGovModalProps {
+export interface GoABModalProps {
   heading?: ReactNode;
   maxWidth?: string;
   actions?: ReactElement;
   onClose?: () => void;
-  transition?: ABGovModalTransition;
+  transition?: GoABModalTransition;
   children?: ReactNode;
   open?: boolean;
-  calloutVariant?: ABGovModalCalloutVariant;
+  calloutVariant?: GoABModalCalloutVariant;
   testId?: string;
-  role?: ABGovModalRole;
+  role?: GoABModalRole;
 }
 
-export function ABGovModal({
+export function GoABModal({
   heading,
   children,
   maxWidth,
@@ -45,7 +49,7 @@ export function ABGovModal({
   onClose,
   testId,
   role,
-}: ABGovModalProps): JSX.Element {
+}: GoABModalProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -81,4 +85,4 @@ export function ABGovModal({
   );
 }
 
-export default ABGovModal;
+export default GoABModal;

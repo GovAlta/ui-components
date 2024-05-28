@@ -1,4 +1,4 @@
-import { ABGovChipVariant, Margins } from "@abgov/ui-components-common";
+import { GoABChipVariant, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
@@ -7,7 +7,7 @@ interface WCProps extends Margins {
   error: boolean;
   deletable: boolean;
   content: string;
-  variant?: ABGovChipVariant;
+  variant?: GoABChipVariant;
 }
 
 declare global {
@@ -19,17 +19,17 @@ declare global {
   }
 }
 
-export interface ABGovChipProps extends Margins {
+export interface GoABChipProps extends Margins {
   onClick?: () => void;
   deletable?: boolean;
   leadingIcon?: string;
   error?: boolean;
   content: string;
-  variant?: ABGovChipVariant;
+  variant?: GoABChipVariant;
   testId?: string;
 }
 
-export const ABGovChip = ({
+export const GoABChip = ({
   leadingIcon = "",
   deletable = false,
   error = false,
@@ -41,7 +41,7 @@ export const ABGovChip = ({
   mb,
   ml,
   testId,
-}: ABGovChipProps) => {
+}: GoABChipProps) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) return;
@@ -73,6 +73,6 @@ export const ABGovChip = ({
       data-testid={testId}
     />
   );
-}
+};
 
-export default ABGovChip;
+export default GoABChip;

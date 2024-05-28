@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovDivider } from "./divider";
+import { GoABDivider } from "./divider";
 
-let component: ABGovDivider;
-let fixture: ComponentFixture<ABGovDivider>;
+let component: GoABDivider;
+let fixture: ComponentFixture<GoABDivider>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovDivider],
+    imports: [GoABDivider],
   });
-  fixture = TestBed.createComponent(ABGovDivider);
+  fixture = TestBed.createComponent(GoABDivider);
   component = fixture.componentInstance;
 });
 

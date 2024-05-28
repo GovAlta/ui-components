@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
-import ABGovCheckbox, { Props as CheckboxProps } from "./checkbox";
+import GoABCheckbox, { Props as CheckboxProps } from "./checkbox";
 import { describe, it, expect, vi } from "vitest";
-import { ABGovCheckboxOnChangeDetail } from "@abgov/ui-components-common";
+import { GoABCheckboxOnChangeDetail } from "@abgov/ui-components-common";
 
 const testId = "test-id";
 
-describe("ABGov Checkbox", () => {
+describe("GoAB Checkbox", () => {
   it("should render", () => {
     const props: CheckboxProps = {
       id: "abc",
@@ -23,7 +23,7 @@ describe("ABGov Checkbox", () => {
       ml: "xl",
     };
 
-    render(<ABGovCheckbox {...props} />);
+    render(<GoABCheckbox {...props} />);
 
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox).toBeTruthy();
@@ -42,7 +42,9 @@ describe("ABGov Checkbox", () => {
   });
 
   it("should render with text description", () => {
-    render(<ABGovCheckbox name={"foo"} checked={false} description={"description text"}/>);
+    render(
+      <GoABCheckbox name={"foo"} checked={false} description={"description text"} />,
+    );
 
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox?.getAttribute("description")).toBe("description text");
@@ -50,18 +52,24 @@ describe("ABGov Checkbox", () => {
 
   it("should render with slot description", () => {
     const result = render(
-      <ABGovCheckbox name={"foo"} checked={false} description={<div>description slot</div>}/>);
+      <GoABCheckbox
+        name={"foo"}
+        checked={false}
+        description={<div>description slot</div>}
+      />,
+    );
 
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox?.getAttribute("description")).toBe(null);
-    expect(result.container.querySelector('div[slot="description"]')?.innerHTML)
-      .toContain("description slot");
+    expect(
+      result.container.querySelector('div[slot="description"]')?.innerHTML,
+    ).toContain("description slot");
   });
 
   it("should handle the onChange event", async function () {
     const onChangeStub = vi.fn();
 
-    function onChange({name, value, checked}: ABGovCheckboxOnChangeDetail) {
+    function onChange({ name, value, checked }: GoABCheckboxOnChangeDetail) {
       expect(name).toBe("foo");
       expect(value).toBe("bar");
       expect(checked).toBeTruthy();
@@ -79,14 +87,17 @@ describe("ABGov Checkbox", () => {
       testId: testId,
     };
 
-    render(<ABGovCheckbox {...props} />);
+    render(<GoABCheckbox {...props} />);
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox).toBeTruthy();
 
-    checkbox && fireEvent(
-      checkbox,
-      new CustomEvent("_change", { detail: { name: "foo", value: "bar", checked: true } })
-    );
+    checkbox &&
+      fireEvent(
+        checkbox,
+        new CustomEvent("_change", {
+          detail: { name: "foo", value: "bar", checked: true },
+        }),
+      );
     expect(onChangeStub).toBeCalled();
   });
 });

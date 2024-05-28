@@ -1,8 +1,8 @@
-import { ABGovIconType } from "@abgov/ui-components-common";
+import { GoABIconType } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
 
 interface WCProps {
-  icon?: ABGovIconType;
+  icon?: GoABIconType;
 }
 
 declare global {
@@ -16,23 +16,20 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface ABGovSideMenuHeadingProps {
+export interface GoABSideMenuHeadingProps {
   meta?: ReactNode;
   testId?: string;
-  icon?: ABGovIconType
+  icon?: GoABIconType;
   children?: ReactNode;
 }
 
-export function ABGovSideMenuHeading(props: ABGovSideMenuHeadingProps) {
+export function GoABSideMenuHeading(props: GoABSideMenuHeadingProps) {
   return (
-    <goa-side-menu-heading
-      icon={props.icon}
-      data-testid={props.testId}
-    >
+    <goa-side-menu-heading icon={props.icon} data-testid={props.testId}>
       {props.children}
       {props.meta && <span slot="meta">{props.meta}</span>}
     </goa-side-menu-heading>
   );
 }
 
-export default ABGovSideMenuHeading;
+export default GoABSideMenuHeading;

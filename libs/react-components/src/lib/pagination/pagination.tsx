@@ -19,7 +19,7 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface ABGovPaginationProps extends Margins {
+export interface GoABPaginationProps extends Margins {
   itemCount: number;
   perPageCount?: number;
   pageNumber: number;
@@ -29,9 +29,9 @@ export interface ABGovPaginationProps extends Margins {
 }
 
 // legacy
-export type PaginationProps = ABGovPaginationProps;
+export type PaginationProps = GoABPaginationProps;
 
-export function ABGovPagination({onChange, ...props}: ABGovPaginationProps) {
+export function GoABPagination({ onChange, ...props }: GoABPaginationProps) {
   const ref = useRef<HTMLElement>();
 
   useEffect(() => {
@@ -66,4 +66,4 @@ export function ABGovPagination({onChange, ...props}: ABGovPaginationProps) {
   );
 }
 
-export default ABGovPagination;
+export default GoABPagination;

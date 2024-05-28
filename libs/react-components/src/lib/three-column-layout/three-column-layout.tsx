@@ -15,7 +15,7 @@ declare global {
   }
 }
 
-export interface ABGovThreeColumnLayoutProps {
+export interface GoABThreeColumnLayoutProps {
   leftColumnWidth?: string;
   rightColumnWidth?: string;
   maxContentWidth?: string;
@@ -27,7 +27,7 @@ export interface ABGovThreeColumnLayoutProps {
   children: ReactNode;
 }
 
-export function ABGovThreeColumnLayout(props: ABGovThreeColumnLayoutProps) {
+export function GoABThreeColumnLayout(props: GoABThreeColumnLayoutProps) {
   return (
     <goa-three-column-layout
       leftcolumnwidth={props.leftColumnWidth}
@@ -44,4 +44,4 @@ export function ABGovThreeColumnLayout(props: ABGovThreeColumnLayoutProps) {
   );
 }
 
-export default ABGovThreeColumnLayout;
+export default GoABThreeColumnLayout;

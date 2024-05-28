@@ -1,9 +1,9 @@
-import { ABGovSkeletonSize, ABGovSkeletonType, Spacing } from "@abgov/ui-components-common";
+import { GoABSkeletonSize, GoABSkeletonType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-skeleton",
+  selector: "goab-skeleton",
   template: `
     <goa-skeleton
       [maxwidth]="maxWidth"
@@ -20,10 +20,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovSkeleton {
-  @Input({ required: true }) type!: ABGovSkeletonType;
+export class GoABSkeleton {
+  @Input({ required: true }) type!: GoABSkeletonType;
   @Input() maxWidth?: string;
-  @Input() size?: ABGovSkeletonSize;
+  @Input() size?: GoABSkeletonSize;
   @Input() lineCount?: number;
   @Input() testId?: string;
   @Input() mt?: Spacing;

@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovGrid } from "./grid";
+import { GoABGrid } from "./grid";
 
-let component: ABGovGrid;
-let fixture: ComponentFixture<ABGovGrid>;
+let component: GoABGrid;
+let fixture: ComponentFixture<GoABGrid>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovGrid],
+    imports: [GoABGrid],
   });
-  fixture = TestBed.createComponent(ABGovGrid);
+  fixture = TestBed.createComponent(GoABGrid);
   component = fixture.componentInstance;
 });
 

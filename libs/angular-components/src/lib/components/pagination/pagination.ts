@@ -1,13 +1,13 @@
-import { ABGovPaginationVariant, Spacing } from "@abgov/ui-components-common";
+import { GoABPaginationVariant, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
-export type ABGovPaginationOnChangeDetail = {
+export type GoABPaginationOnChangeDetail = {
   page: number;
 }
 
 @Component({
   standalone: true,
-  selector: "abgov-pagination",
+  selector: "goab-pagination",
   template: `
     <goa-pagination
       [itemcount]="itemCount"
@@ -26,21 +26,21 @@ export type ABGovPaginationOnChangeDetail = {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovPagination {
+export class GoABPagination {
   @Input({ required: true }) itemCount!: number;
   @Input({ required: true }) pageNumber!: number;
   @Input() perPageCount?: number = 10;
-  @Input() variant?: ABGovPaginationVariant = "all";
+  @Input() variant?: GoABPaginationVariant = "all";
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<ABGovPaginationOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoABPaginationOnChangeDetail>();
 
   _onChange(e: any) {
-    const detail = (e as CustomEvent<ABGovPaginationOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoABPaginationOnChangeDetail>).detail;
     this.onChange.emit(detail)
   }
 }

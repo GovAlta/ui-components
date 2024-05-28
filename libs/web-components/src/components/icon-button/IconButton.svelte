@@ -46,8 +46,8 @@
     xlarge: "0.5rem",
   }[size];
 
-  function handleClick(e) {
-    e.target.dispatchEvent(
+  function handleClick(e: Event) {
+    e.target?.dispatchEvent(
       new CustomEvent("_click", { composed: true, detail: { event: e } }),
     );
   }

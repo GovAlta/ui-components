@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ABGovDatePicker } from "./date-picker";
+import { GoABDatePicker } from "./date-picker";
 
-let component: ABGovDatePicker;
-let fixture: ComponentFixture<ABGovDatePicker>;
+let component: GoABDatePicker;
+let fixture: ComponentFixture<GoABDatePicker>;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [ABGovDatePicker],
+    imports: [GoABDatePicker],
   });
-  fixture = TestBed.createComponent(ABGovDatePicker);
+  fixture = TestBed.createComponent(GoABDatePicker);
   component = fixture.componentInstance;
 });
 

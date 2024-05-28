@@ -1,29 +1,22 @@
 import { render } from "@testing-library/react";
-import ABGovPopover from "./popover";
+import GoABPopover from "./popover";
 
 describe("Popover", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <ABGovPopover target="Click Action">The content</ABGovPopover>
+      <GoABPopover target="Click Action">The content</GoABPopover>,
     );
 
     const el = baseElement.querySelector("goa-popover");
-    expect(el?.querySelector("[slot='target']")?.innerHTML).toContain(
-      "Click Action"
-    );
+    expect(el?.querySelector("[slot='target']")?.innerHTML).toContain("Click Action");
     expect(baseElement.innerHTML).toContain("The content");
   });
 
   it("should bind all web-component attributes", () => {
     const { baseElement } = render(
-      <ABGovPopover
-        target="Click Action"
-        maxWidth="500px"
-        testId="foo"
-        padded={false}
-      >
+      <GoABPopover target="Click Action" maxWidth="500px" testId="foo" padded={false}>
         The content
-      </ABGovPopover>
+      </GoABPopover>,
     );
 
     const el = baseElement.querySelector("goa-popover");

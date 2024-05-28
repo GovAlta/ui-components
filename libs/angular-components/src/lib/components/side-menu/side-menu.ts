@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 
 @Component({
   standalone: true,
-  selector: "abgov-side-menu",
+  selector: "goab-side-menu",
   template: `
     <goa-side-menu
     >
@@ -11,6 +11,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ABGovSideMenu {
+export class GoABSideMenu {
   // nothing
 }

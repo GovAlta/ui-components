@@ -1,8 +1,8 @@
-export type ABGovTableSortDirection = "asc" | "desc" | "none";
+export type GoABTableSortDirection = "asc" | "desc" | "none";
 
 interface WCProps {
   name?: string;
-  direction?: ABGovTableSortDirection;
+  direction?: GoABTableSortDirection;
 }
 
 declare global {
@@ -16,17 +16,17 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface ABGovTableSortProps {
+export interface GoABTableSortProps {
   name?: string;
-  direction?: ABGovTableSortDirection;
+  direction?: GoABTableSortDirection;
   children?: React.ReactNode;
 }
 
-export function ABGovTableSortHeader({
+export function GoABTableSortHeader({
   name,
   direction = "none",
   children,
-}: ABGovTableSortProps): JSX.Element {
+}: GoABTableSortProps): JSX.Element {
   return (
     <goa-table-sort-header name={name} direction={direction}>
       {children}
@@ -34,4 +34,4 @@ export function ABGovTableSortHeader({
   );
 }
 
-export default ABGovTableSortHeader;
+export default GoABTableSortHeader;
