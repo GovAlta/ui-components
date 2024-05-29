@@ -113,3 +113,7 @@ export function clamp(value: number, min: number, max: number): number {
       ? min
       : value
 }
+
+export function generateRandomId() {
+  return `${Math.random().toString(36).substring(2, 9)}`;
+}

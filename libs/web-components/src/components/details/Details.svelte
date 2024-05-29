@@ -3,7 +3,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { calculateMargin } from "../../common/styling";
-  import { toBoolean, validateRequired} from "../../common/utils";
+  import { toBoolean, validateRequired, generateRandomId } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
   export let heading: string;
@@ -13,14 +13,15 @@
   export let ml: Spacing = null;
   export let open: string = "false";
 
-  let _isMouseOver: boolean = false
+  let _isMouseOver: boolean = false;
   let _summaryEl: HTMLElement;
+  let _detailsId: string = "";
 
   $: _isOpen = toBoolean(open);
 
-
   onMount(() => {
     validateRequired("Details", { heading });
+    _detailsId = `details-${generateRandomId()}`;
 
     _summaryEl.addEventListener("mouseover", () => {
       _isMouseOver = true;
@@ -34,18 +35,30 @@
 
 <details
   open={_isOpen}
-  on:toggle={({target}) => open = `${target.open}`}
-  style={calculateMargin(mt, mr, mb, ml)}>
-  <summary bind:this={_summaryEl}>
+  on:toggle={({ target }) => (open = `${target?.open}`)}
+  style={calculateMargin(mt, mr, mb, ml)}
+>
+  <summary
+    bind:this={_summaryEl}
+    aria-expanded={open === "true"}
+    aria-controls={`${_detailsId}-content`}
+  >
     <goa-icon
       mt="1"
       mr="2"
       type="chevron-forward"
-      fillcolor={_isMouseOver ? "var(--goa-color-interactive-hover)" : "var(--goa-color-interactive-default)"}
+      fillcolor={_isMouseOver
+        ? "var(--goa-color-interactive-hover)"
+        : "var(--goa-color-interactive-default)"}
     />
-    <span>{heading}</span>
+    <span id={`${_detailsId}-heading`}>{heading}</span>
   </summary>
-  <div class="content">
+  <div
+    class="content"
+    role="region"
+    aria-labelledby={`${_detailsId}-heading`}
+    id={`${_detailsId}-content`}
+  >
     <slot />
   </div>
 </details>
@@ -54,7 +67,6 @@
   :host {
     font-family: var(--goa-font-family-sans);
   }
-
 
   details {
     max-width: 75ch;
@@ -69,9 +81,8 @@
   }
   /* Hide native icon on iOS */
   details summary::-webkit-details-marker {
-    display:none;
+    display: none;
   }
-
 
   summary {
     padding: 0.5rem;
@@ -80,7 +91,7 @@
     list-style: none;
     display: flex;
     align-items: flex-start;
-    border-radius: var(--goa-border-radius-m);    
+    border-radius: var(--goa-border-radius-m);
   }
   summary:focus-visible {
     outline: 3px solid var(--goa-color-interactive-focus);
@@ -106,7 +117,6 @@
     color: var(--goa-color-interactive-hover);
   }
 
-
   .content {
     border-left: 4px solid var(--goa-color-greyscale-200);
     padding: 1rem;
@@ -117,7 +127,6 @@
     margin-bottom: 0 !important;
   }
 
-  
   goa-icon {
     /* transition: transform 80ms ease; */
     position: absolute;
