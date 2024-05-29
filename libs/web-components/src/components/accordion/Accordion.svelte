@@ -8,6 +8,7 @@
     typeValidator,
     toBoolean,
     validateRequired,
+    generateRandomId,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
@@ -24,6 +25,7 @@
   export let heading: string = "";
   export let secondarytext: string = "";
   export let headingsize: HeadingSize = "small";
+  export let id: string = "";
   export let testid: string = "";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -35,7 +37,7 @@
   let _hovering: boolean = false;
   let _titleEl: HTMLElement;
   let _headingContentSlotChildren: Element[] = [];
-
+  let _accordionId: string = "";
   // Reactive
 
   $: isOpen = toBoolean(open);
@@ -46,6 +48,7 @@
     validateRequired("GoAAccordion", { heading });
     validateHeadingSize(headingsize);
     _headingContentSlotChildren = getChildren();
+    _accordionId = `accordion-${generateRandomId()}`;
   });
 
   function getChildren(): Element[] {
@@ -68,7 +71,7 @@
   class="goa-accordion"
   data-testid={testid}
 >
-  <details open={isOpen}>
+  <details open={isOpen} on:toggle={({target}) => open = `${target?.open}`}>
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <summary
       class={`container-${headingsize}`}
@@ -76,6 +79,8 @@
       on:mouseout={() => (_hovering = false)}
       on:focus={() => (_hovering = false)}
       on:blur={() => (_hovering = false)}
+      aria-controls={`${_accordionId}-content`}
+      aria-expanded={open === "true"}
     >
       <goa-icon
         type="chevron-forward"
@@ -83,7 +88,7 @@
           ? "var(--goa-color-interactive-hover)"
           : "var(--goa-color-interactive-default)"}
       ></goa-icon>
-      <div class="title" bind:this={_titleEl}>
+      <div class="title" bind:this={_titleEl} id={`${_accordionId}-heading`}>
         <span
           class="heading heading-{headingsize}"
           data-testid={`${testid}-heading`}>{heading}</span
@@ -99,7 +104,12 @@
         </div>
       </div>
     </summary>
-    <div class="content">
+    <div
+      class="content"
+      role="region"
+      aria-labelledby={`${_accordionId}-heading`}
+      id={`${_accordionId}-content`}
+    >
       <slot />
     </div>
   </details>
