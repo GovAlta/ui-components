@@ -84,7 +84,7 @@
         disabled={isDisabled}
         type="checkbox"
         value={`${value}`}
-        aria-label={arialabel || name}
+        aria-label={arialabel || text || name}
         aria-describedby={description ? _descriptionId : null}
         on:change={onChange}
       />
@@ -127,11 +127,12 @@
   :host {
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
-    display: inline-block;
+    display: block;
   }
 
   .root {
-    min-height: calc(3rem - 0.25rem);
+    display: inline-block;
+    padding-bottom: var(--goa-space-m);
   }
 
   input[type="checkbox"] {
@@ -149,7 +150,6 @@
 
   label {
     display: flex;
-    align-items: center;
     cursor: pointer;
   }
 
@@ -173,8 +173,9 @@
     border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
     border-radius: 2px;
     background-color: var(--goa-color-greyscale-white);
-    height: 1.5rem;
-    width: 1.5rem;
+    height: var(--goa-space-l);
+    width: var(--goa-space-l);
+    margin-top: var(--goa-space-3xs);
     display: flex;
     justify-content: center;
 
@@ -223,7 +224,7 @@
 
   /* Disabled */
   .disabled {
-    cursor: default;    
+    cursor: default;
   }
   .disabled .text {
     opacity: 40%;
