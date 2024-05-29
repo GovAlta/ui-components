@@ -25,8 +25,8 @@ export interface GoAFormItemProps extends Margins {
   label?: string;
   labelSize?: GoAFormItemLabelSize;
   requirement?: GoAFormItemRequirement;
-  error?: string;
-  helpText?: string;
+  error?: React.ReactNode;
+  helpText?: React.ReactNode;
   children?: React.ReactNode;
   testId?: string;
   id?: string;
