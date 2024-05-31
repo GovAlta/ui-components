@@ -279,7 +279,7 @@
     height: 100%;
     background-color: var(--goa-color-greyscale-black);
     z-index: 1;
-    opacity: 50%;
+    opacity: var(--goa-opacity-background-modal);
   }
 
   .emergency {
