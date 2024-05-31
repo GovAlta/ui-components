@@ -13,7 +13,7 @@ textarea {
 body {
   margin: 0;
   scroll-behavior: smooth;
-  line-height: var(--goa-line-height-2);
+  line-height: var(--goa-line-height-3);
 }
 
 *,
