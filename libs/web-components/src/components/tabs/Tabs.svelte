@@ -46,6 +46,7 @@
         bindChildren();
         setCurrentTab(initialtab || 1);
       });
+      e.stopPropagation();
     });
   }
 
@@ -53,6 +54,7 @@
     const path = window.location.pathname;
 
     // create buttons (tabs) for each of the tab contents elements
+    _tabsEl.replaceChildren();
     _tabProps.forEach((tabProps, index) => {
       let tabSlug: string = "";
       let headingEl: HTMLElement;
