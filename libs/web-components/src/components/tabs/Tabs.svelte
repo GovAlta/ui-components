@@ -90,7 +90,7 @@
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
       link.appendChild(headingEl);
 
-      _tabsEl.appendChild(link);
+      _tabsEl?.appendChild(link);
     });
   }
 
@@ -104,6 +104,8 @@
   }
 
   function setCurrentTab(tab: number) {
+    if (!_tabsEl) return;
+
     // prevent tab from exceeding limits
     _currentTab = clamp(tab, 1, _tabProps.length);
 
