@@ -82,9 +82,16 @@ export type GoABFormItemRequirement = "optional" | "required";
 export type GoABFileUploadInputVariant = "dragdrop" | "button";
 
 // Container
-export type GoABContainerType = "interactive" | "info" | "error" | "success" | "important";
 export type GoABContainerAccent = "thick" | "thin" | "filled";
 export type GoABContainerPadding = "relaxed" | "compact";
+export type GoABContainerType =
+  | "interactive"
+  | "non-interactive"
+  | "info"
+  | "error"
+  | "success"
+  | "important";
+export type GoABContainerWidth = "full" | "content";
 
 // Callout
 export type GoABCalloutType = "information" | "success" | "important" | "emergency" | "event";
@@ -842,7 +849,7 @@ export type GoABIconType =
   | "logo-yen"
   | "logo-youtube";
 
-export type GoABIconSize = "small" | "medium" | "large";
+export type GoABIconSize = "small" | "medium" | "large" | "xlarge";
 export type GoABIconTheme = "outline" | "filled";
 export type GoABIconButtonVariant = "color" | "nocolor" | "dark" | "destructive";
 export type GoABIconVariant = "primary" | "secondary" | "tertiary";

@@ -2,25 +2,15 @@ import {
   GoABContainerAccent,
   GoABContainerPadding,
   GoABContainerType,
+  GoABContainerWidth,
   Margins,
 } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
 
-export type GoABContainerType =
-  | "interactive"
-  | "non-interactive"
-  | "info"
-  | "error"
-  | "success"
-  | "important";
-export type GoABContainerAccent = "thick" | "thin" | "filled";
-export type GoABContainerPadding = "relaxed" | "compact";
-export type GoABContainerWidth = "full" | "content";
-
 interface WCProps extends Margins {
-  type?: ABGovContainerType;
-  accent?: ABGovContainerAccent;
-  padding?: ABGovContainerPadding;
+  type?: GoABContainerType;
+  accent?: GoABContainerAccent;
+  padding?: GoABContainerPadding;
   width?: GoABContainerWidth;
 }
 
