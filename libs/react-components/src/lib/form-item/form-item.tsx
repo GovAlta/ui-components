@@ -7,8 +7,8 @@ interface WCProps extends Margins {
   label?: string;
   labelsize?: GoAFormItemLabelSize;
   requirement?: GoAFormItemRequirement;
-  error?: React.ReactNode;
-  helptext?: React.ReactNode;
+  error?: string;
+  helptext?: string;
   id?: string;
 }
 
