@@ -45,7 +45,8 @@
       _bindTimeoutId = setTimeout(() => {
         bindChildren();
         setCurrentTab(initialtab || 1);
-      });
+      }, 1);
+      e.stopPropagation();
     });
   }
 

@@ -102,7 +102,7 @@
       if (_bindTimeoutId) {
         clearTimeout(_bindTimeoutId);
       }
-      _bindTimeoutId = setTimeout(bind);
+      _bindTimeoutId = setTimeout(bind, 1);
     });
   }
 
