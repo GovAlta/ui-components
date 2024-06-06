@@ -6,14 +6,16 @@
 
   export let gap: Spacing = "m";
   export let direction: "row" | "column" = "row";
-  export let alignment: "center" | "start" | "end" = "start";
+  export let alignment: "center" | "start" | "end" | "normal" = "normal";
 
   $: _alignment =
     alignment === "start"
       ? "flex-start"
       : alignment === "end"
         ? "flex-end"
-        : "center";
+        : alignment === "center"
+          ? "center"
+          : "normal";
 
   // margin
   export let mt: Spacing = null;
@@ -41,4 +43,5 @@
     align-items: var(--alignment);
     gap: var(--gap);
   }
+
 </style>
