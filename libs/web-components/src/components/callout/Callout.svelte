@@ -102,9 +102,7 @@
   }
 
   h3 {
-    font-size: var(--goa-font-size-7);
-    line-height: var(--goa-line-height-2);
-    font-weight: var(--goa-font-weight-regular);
+    font: var(--goa-typography-heading-m);
     margin-top: var(--goa-space-none);
     margin-bottom: var(--goa-space-m);
   }
