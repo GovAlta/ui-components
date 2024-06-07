@@ -34,11 +34,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       [mr]="mr"
       [mb]="mb"
       [ml]="ml"
-      (ontrailingiconclick)="_onTrailingIconClick($event)"
-      (onchange)="_onChange($event)"
-      (onfocus)="_onFocus($event)"
-      (onblur)="_onBlur($event)"
-      (onkeypress)="_onKeyPress($event)"
+      (_trailingiconclick)="_onTrailingIconClick($event)"
+      (_change)="_onChange($event)"
+      (_focus)="_onFocus($event)"
+      (_blur)="_onBlur($event)"
+      (_keypress)="_onKeyPress($event)"
     >
     </goa-input>
   `,
@@ -79,6 +79,12 @@ export class GoABInput {
   @Output() onBlur = new EventEmitter<GoABInputOnBlurDetail>();
   @Output() onKeyPress = new EventEmitter<GoABInputOnKeyPressDetail>();
   @Output() onChange = new EventEmitter<GoABInputOnChangeDetail>();
+
+  private handleTrailingIconClick: boolean = false;
+
+  ngOnInit() {
+    this.handleTrailingIconClick = this.onTrailingIconClick.observed;
+  }
 
   _onTrailingIconClick(_: Event) {
     this.onTrailingIconClick.emit();

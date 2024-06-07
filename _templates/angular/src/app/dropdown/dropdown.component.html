@@ -1,0 +1,73 @@
+<h1>Dropdown</h1>
+
+<goa-form-item label="Basic dropdown">
+  <goa-dropdown name="item" (_change)="onChangeDropdown($event)" filterable>
+    <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
+    <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+    <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
+  </goa-dropdown>
+</goa-form-item>
+
+<goa-form-item label="dynamic colors from backend">
+  <goa-dropdown name="firstname" filterable (_change)="onChangeDropdown($event)">
+    <goa-dropdown-item *ngFor="let color of colors" [value]="color" [label]="color"></goa-dropdown-item>
+  </goa-dropdown>
+</goa-form-item>
+
+<form [formGroup]="fg" novalidate autocomplete="on">
+
+
+  <input type="text" name="first_name" />
+  <input type="text" name="firstname" />
+  <input type="text" name="lastname" />
+  <input type="text" name="phonenumber" />
+
+  <goa-input name="firstname"></goa-input>
+
+  <goa-form-item label="dynamic colors from backend">
+    <goa-dropdown name="FirstName" filterable (_change)="onChangeDropdown($event)">
+      <goa-dropdown-item *ngFor="let color of colors" [value]="color" [label]="color"></goa-dropdown-item>
+    </goa-dropdown>
+  </goa-form-item>
+
+
+  <goa-form-item label="Country">
+    <goa-dropdown goaValue filterable relative="true" name="country" [value]="fg.value.country"
+      [formControl]="fg.controls.country" width="30ch">
+      <goa-dropdown-item *ngFor="let opt of countries" [value]="opt.code" [label]="opt.name"></goa-dropdown-item>
+    </goa-dropdown>
+  </goa-form-item>
+</form>
+
+<goa-container>
+  <goa-form-item label="Dropdown: 50% width" mb="3xl">
+    <goa-dropdown goaValue [formControl]="dropdownCtrl" width="50%">
+      <goa-dropdown-item *ngFor="let fruit of fruits" [value]="fruit.value" [label]="fruit.label"></goa-dropdown-item>
+    </goa-dropdown>
+  </goa-form-item>
+
+  <goa-spacer vspacing="3xl" />
+
+  <goa-form-item label="Dropdown - Native" mt="3xl">
+    <goa-dropdown width="30%" goaValue [formControl]="dropdownCtrl" native="true">
+      <goa-dropdown-item *ngFor="let fruit of fruits" [value]="fruit.value" [label]="fruit.label"></goa-dropdown-item>
+    </goa-dropdown>
+  </goa-form-item>
+</goa-container>
+
+<goa-container accent="thin">
+  <form [formGroup]="form">
+    <goa-form-item label="Select Option">
+      <goa-dropdown relative goaValue name="option" formControlName="option" value="option.value" width="100%">
+        <goa-dropdown-item *ngFor="let option of options" [value]="option.value" [label]="option.displayValue">
+        </goa-dropdown-item>
+      </goa-dropdown>
+    </goa-form-item>
+  </form>
+</goa-container>
+
+Date picker should display above the compoent if there isn't enough room at the bottom
+<goa-form-item label="Item">
+  <goa-date-picker (_change)="onChange($event)" name="item"
+    value="Wed Apr 03 2024 11:56:42 GMT-0600 (Mountain Daylight Time)"></goa-date-picker>
+</goa-form-item>

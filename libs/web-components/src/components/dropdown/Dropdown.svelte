@@ -11,7 +11,7 @@
 
   interface EventHandler {
     handleKeyUp: (e: KeyboardEvent) => void;
-    handleKeyDown: (e: KeyboardEvent) => void;
+    handleKeyDown: (e: KeyboardEvent) => boolean;
   }
 
   // Props
@@ -165,7 +165,7 @@
       .pop();
 
     // longest one defines the width
-    let maxWidth = Math.max(optionsWidth || 0, placeholder.length) + 8;
+    let maxWidth = Math.max(optionsWidth || 0, placeholder?.length || 0) + 8;
 
     // compensate for icon width
     if (leadingicon) {
@@ -276,6 +276,7 @@
    * When website autofill value without user keyboard
    */
   async function onChange() {
+    console.log("onChange")
     await tick();
     syncFilteredOptions();
     if (_filteredOptions.length === 1) {
@@ -295,7 +296,9 @@
 
   function onInputKeyDown(e: KeyboardEvent) {
     if (_disabled) return;
-    _eventHandler.handleKeyDown(e);
+    if (!_eventHandler.handleKeyDown(e)) {
+      onChange();
+    }
   }
 
   function onClearIconKeyDown(e: KeyboardEvent) {
@@ -430,15 +433,16 @@
       }
     }
 
-    handleKeyDown(e: KeyboardEvent) {
+    handleKeyDown(e: KeyboardEvent): boolean {
       switch (e.key) {
         case "Escape":
           this.onEscape(e);
-          break;
+          return true;
         case "Tab":
           this.onTab(e);
-          break;
+          return true;
       }
+      return false;
     }
   }
 
@@ -467,21 +471,21 @@
       e.stopPropagation();
     }
 
-    handleKeyDown(e: KeyboardEvent) {
+    handleKeyDown(e: KeyboardEvent): boolean {
       switch (e.key) {
         case " ":
         case "Enter":
           this.onEnter(e);
-          break;
+          return true;
         case "ArrowUp":
           this.onArrow(e, "up");
-          break;
+          return true;
         case "ArrowDown":
           this.onArrow(e, "down");
-          break;
+          return true;
         case "Tab":
           hideMenu();
-          break;
+          return true;
       }
 
       return false;

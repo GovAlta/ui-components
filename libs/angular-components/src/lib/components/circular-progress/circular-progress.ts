@@ -5,19 +5,22 @@ import { GoABCircularProgressSize, GoABCircularProgressVariant } from "@abgov/ui
 @Component({
   standalone: true,
   selector: "goab-circular-progress",
-  template: `<goa-circular-progress
-    [variant]="variant"
-    [size]="size"
-    [message]="message"
-    [visible]="visible"
-    [progress]="progress"
-    [testid]="testId"
-  >
-    <ng-content />
-  </goa-circular-progress>`,
+  template: `
+    <goa-circular-progress
+      [variant]="variant"
+      [size]="size"
+      [message]="message"
+      [visible]="visible"
+      [progress]="progress"
+      [testid]="testId"
+    >
+      <ng-content />
+    </goa-circular-progress>
+  `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABCircularProgress {
+  // FIX: the variant and size binding isn't working
   @Input() variant?: GoABCircularProgressVariant;
   @Input() size?: GoABCircularProgressSize;
   @Input() message?: string;
