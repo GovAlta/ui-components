@@ -6,6 +6,7 @@ interface RadioItemProps {
   disabled?: boolean;
   checked?: boolean;
   error?: boolean;
+  arialabel?: string;
 }
 
 declare global {
@@ -27,6 +28,7 @@ export interface GoARadioItemProps {
   error?: boolean;
   children?: React.ReactNode;
   testId?: string;
+  ariaLabel?: string;
 }
 
 export function GoARadioItem({
@@ -38,6 +40,7 @@ export function GoARadioItem({
   checked,
   error,
   testId,
+  ariaLabel,
   children,
 }: GoARadioItemProps): JSX.Element {
   return (
@@ -50,6 +53,7 @@ export function GoARadioItem({
       disabled={disabled}
       checked={checked}
       data-testid={testId}
+      arialabel={ariaLabel}
     >
       {description && typeof description !== "string" && <div slot="description">{description}</div>}
       {children}

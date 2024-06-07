@@ -58,7 +58,7 @@
 
   function getChildren() {
     _rootEl.addEventListener("radio-item:mounted", (e: Event) => {
-      const radioItemProps = (e as CustomEvent<GoARadioItemProps>).detail;  
+      const radioItemProps = (e as CustomEvent<GoARadioItemProps>).detail;
       _radioItems = [..._radioItems, radioItemProps];
 
       // call bindOptions once all children are attained
@@ -68,11 +68,11 @@
       _bindTimeoutId = setTimeout(() => {
         bindOptions();
       }, 1)
-    })    
+    })
   }
 
   function bindOptions() {
-    _radioItems.forEach((props, index) => {
+    _radioItems.forEach(props => {
       props.el.dispatchEvent(new CustomEvent<Partial<GoARadioItemProps>>("radio-group:init", {
         composed: true,
         detail: {
@@ -81,8 +81,6 @@
           description: props.description,
           name,
           checked: props.value === value,
-          ariaLabel: arialabel || name,
-          ariaDescribedBy: `description-${name}-${index}`,
         }
       }));
     });
@@ -112,7 +110,7 @@
       item.el.dispatchEvent(new CustomEvent<RadioItemSelectProps>("radio-group:select", {
         composed: true,
         detail: {
-          checked: item.value === value 
+          checked: item.value === value
         }
       }))
     });
@@ -125,6 +123,8 @@
   style={calculateMargin(mt, mr, mb, ml)}
   class={`goa-radio-group--${orientation}`}
   data-testid={testid}
+  role="radiogroup"
+  aria-label={arialabel}
 >
     <slot />
 </div>
