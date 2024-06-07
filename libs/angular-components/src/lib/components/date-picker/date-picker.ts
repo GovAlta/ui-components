@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
 
 @Component({
   standalone: true,
-  selector: "goab-datepicker",
+  selector: "goab-date-picker",
   template: `
     <goa-date-picker
       [name]="name"
@@ -36,6 +36,6 @@ export class GoABDatePicker {
 
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoABDatePickerOnChangeDetail>).detail;
-    this.onChange.emit(detail)
+    this.onChange.emit(detail);
   }
 }

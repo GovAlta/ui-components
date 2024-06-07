@@ -25,7 +25,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABButton {
-  @Input() type?: GoABButtonType;
+  @Input() type?: GoABButtonType = "primary";
   @Input() size?: GoABButtonSize;
   @Input() variant?: GoABButtonVariant;
   @Input() disabled?: boolean;

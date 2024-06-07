@@ -8,6 +8,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
     <goa-details
       [heading]="heading"
       [testid]="testId"
+      [open]="open"
       [mt]="mt"
       [mb]="mb"
       [ml]="ml"
@@ -22,6 +23,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 export class GoABDetails {
   @Input() heading?: string;
   @Input() testId?: string;
+  @Input() open?: boolean;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;

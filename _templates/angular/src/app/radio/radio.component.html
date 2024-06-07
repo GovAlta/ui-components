@@ -1,0 +1,101 @@
+<h1>Radio</h1>
+
+<h2>Radio group with descriptions</h2>
+<span class="customized-description-title">Test</span>
+<br>
+<goa-radio-group name="color" goaValue [formControl]="reactiveFormCtrl" value="reactiveFormCtrl.value">
+  <goa-radio-item name="color" value="red">
+    <div slot="description">
+      <span class="customized-description-title">Content description</span>
+      <small> Another test?</small>
+      <p>
+        Help test
+      </p>
+    </div>
+  </goa-radio-item>
+  <goa-radio-item name="color" value="blue" description="Item description"></goa-radio-item>
+  <goa-radio-item name="color" value="orange"></goa-radio-item>
+</goa-radio-group>
+
+<h2>Basic</h2>
+<goa-radio-group name="color" [value]="radioValue" (_change)="onChange($event)">
+  <goa-radio-item value="red"></goa-radio-item>
+  <goa-radio-item value="blue"></goa-radio-item>
+  <goa-radio-item value="orange"></goa-radio-item>
+</goa-radio-group>
+
+<h2>Error</h2>
+<goa-radio-group name="color1" value="orange" error>
+  <goa-radio-item value="red"></goa-radio-item>
+  <goa-radio-item value="blue"></goa-radio-item>
+  <goa-radio-item value="orange"></goa-radio-item>
+</goa-radio-group>
+
+<h2>Label</h2>
+<goa-radio-group name="color2" value="orange">
+  <goa-radio-item label="Red" value="red"></goa-radio-item>
+  <goa-radio-item label="Blue" value="blue"></goa-radio-item>
+  <goa-radio-item label="Orange" value="orange"></goa-radio-item>
+</goa-radio-group>
+
+<h2>Disabled</h2>
+<goa-radio-group name="color3" value="orange" disabled>
+  <goa-radio-item value="red"></goa-radio-item>
+  <goa-radio-item value="blue"></goa-radio-item>
+  <goa-radio-item value="orange"></goa-radio-item>
+</goa-radio-group>
+
+<h2>Orientation</h2>
+<goa-radio-group name="color4" value="orange" orientation="horizontal">
+  <goa-radio-item value="red"></goa-radio-item>
+  <goa-radio-item value="blue"></goa-radio-item>
+  <goa-radio-item value="orange"></goa-radio-item>
+</goa-radio-group>
+
+<h2>Dynamic</h2>
+<div *ngFor="let item of dynamicItems">
+  <h4>{{ item.name }}</h4>
+  <goa-radio-group [attr.name]="item.name" [value]="item.value" (_change)="onChange($event)">
+    <goa-radio-item *ngFor="let option of item.options" [value]="option.value" [label]="option.value">
+    </goa-radio-item>
+  </goa-radio-group>
+</div>
+
+<h2>Binding</h2>
+<div>Selected value: {{ boundVal }}</div>
+<goa-radio-group goaValue name="bindingColor" [(ngModel)]="boundVal">
+  <goa-radio-item value="red"></goa-radio-item>
+  <goa-radio-item value="blue"></goa-radio-item>
+  <goa-radio-item value="orange"></goa-radio-item>
+</goa-radio-group>
+
+<h2>Margin Spacing</h2>
+<goa-radio-group mt="m" mb="xs" ml="xl" mr="2xl" name="color" value="orange" (_change)="onChange($event)">
+  <goa-radio-item value="red"></goa-radio-item>
+  <goa-radio-item value="blue"></goa-radio-item>
+  <goa-radio-item value="orange"></goa-radio-item>
+</goa-radio-group>
+
+<h2>Reactive Binding</h2>
+<div>Selected value: {{ reactiveFormCtrl.value }}</div>
+<goa-radio-group goaValue name="bindingColor" [formControl]="reactiveFormCtrl" [value]="reactiveFormCtrl.value">
+  <goa-radio-item value="red"></goa-radio-item>
+  <goa-radio-item value="blue"></goa-radio-item>
+  <goa-radio-item value="orange"></goa-radio-item>
+</goa-radio-group>
+
+<h2>Reactive Binding - Disabled</h2>
+<goa-radio-group name="color" goaValue [formControl]="reactiveFormCtrl" [attr.disabled]="true"
+  value="reactiveFormCtrl.value">
+  <goa-radio-item value="red"></goa-radio-item>
+  <goa-radio-item value="blue"></goa-radio-item>
+  <goa-radio-item value="orange"></goa-radio-item>
+</goa-radio-group>
+
+<goa-form-item label="Basic" labelsize="large">
+  <goa-radio-group name="item" value="1" (_change)="onChange($event)">
+    <goa-radio-item value="1" label="Label"></goa-radio-item>
+    <goa-radio-item value="2" label="Label"></goa-radio-item>
+    <goa-radio-item value="3" label="Label"></goa-radio-item>
+  </goa-radio-group>
+</goa-form-item>
