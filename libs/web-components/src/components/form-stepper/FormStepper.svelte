@@ -6,7 +6,7 @@
   import { onDestroy, onMount } from "svelte";
   import { MOBILE_BP } from "../../common/breakpoints";
 
-  import type { FormStep } from "../form-step/FormStep.svelte";
+  import type { FormStep, FormStepStatus } from "../form-step/FormStep.svelte";
 
   // ======
   // Public
@@ -31,7 +31,7 @@
   let _gridEl: HTMLElement;
 
   // collection of references to the child goa-form-step web components
-  let _stepEls: HTMLElement[] = [];
+  let _steps: { el: HTMLElement, status: FormStepStatus}[] = [];
 
   // calculated x distance (px) between each step point
   let _stepWidth: number;
@@ -107,10 +107,10 @@
     // listen for children mounts, then relay information back to them
     _rootEl.addEventListener("formstep:mounted", (e: Event) => {
       const ce = e as CustomEvent;
-      const { el } = ce.detail;
+      const { el, status } = ce.detail;
 
       // save collection to allow for later event dispatching
-      _stepEls = [..._stepEls, el];
+      _steps = [..._steps, { el, status }];
 
       // ensure the below binding is only fired once per set of children
       if (_bindTimeoutId) {
@@ -130,17 +130,18 @@
 
   // send details down to each of the children
   function bindChildren() {
-    for (const [i, el] of _stepEls.entries()) {
+    for (const [i, stepItem] of _steps.entries()) {
       const stepIndex = i + 1;
 
       const formStep: Partial<FormStep> = {
-        ariaLabel: `Step ${stepIndex} of ${_stepEls.length}`,
+        ariaLabel: `Step ${stepIndex} of ${_steps.length}`,
         childIndex: stepIndex,
         current: step === -1 ? stepIndex === 1 : stepIndex === step,
         enabled: stepIndex <= step || _stepType === "free",
+        status: stepItem.status,
       };
 
-      el.dispatchEvent(
+      stepItem.el.dispatchEvent(
         new CustomEvent<Partial<FormStep>>("formstepper:init", {
           composed: true,
           detail: formStep,
@@ -173,8 +174,8 @@
 
       const width = entries[0].contentRect.width;
 
-      for (const step of _stepEls) {
-        step.dispatchEvent(
+      for (const step of _steps) {
+        step.el.dispatchEvent(
           new CustomEvent("form-stepper:resized", {
             bubbles: true,
             composed: true,
@@ -190,11 +191,11 @@
 
   // change current step state and update children
   function changeStep(nextStep: number) {
-    if (_stepEls.length === 0) return;
+    if (_steps.length === 0) return;
 
     // deactivate current step (currentStep is initially undefined)
     if (_currentStep > 0) {
-      _stepEls[_currentStep - 1].dispatchEvent(
+      _steps[_currentStep - 1].el.dispatchEvent(
         new CustomEvent("formstepper:current:changed", {
           detail: { current: false },
           composed: true,
@@ -203,7 +204,7 @@
     }
 
     // activate new step
-    _stepEls[nextStep - 1].dispatchEvent(
+    _steps[nextStep - 1].el.dispatchEvent(
       new CustomEvent("formstepper:current:changed", {
         detail: { current: true },
         composed: true,
@@ -218,11 +219,11 @@
   // handles the 1-based step value and the number of line segments is one less
   // than the number of steps
   function calculateProgress() {
-    _progress = ((_currentStep - 1) / (_stepEls.length - 1)) * 100;
+    _progress = ((_currentStep - 1) / (_steps.length - 1)) * 100;
   }
 
   function calcStepDimensions() {
-    const el = _stepEls?.[0];
+    const el = _steps?.[0]?.el;
     _stepWidth = el?.offsetWidth ?? 0;
     _stepHeight = el?.offsetHeight ?? 0;
     _progressHeight = _gridEl?.offsetHeight;
@@ -257,7 +258,7 @@
     role="list"
     bind:this={_rootEl}
   >
-    {#if _stepEls.length > 0 && _showProgressBars}
+    {#if _steps.length > 0 && _showProgressBars}
       <progress class="horizontal" value={_progress} max="100"></progress>
       <progress class="vertical" value={_progress} max="100"></progress>
     {/if}

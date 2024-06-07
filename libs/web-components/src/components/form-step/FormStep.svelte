@@ -47,6 +47,7 @@
     // handle click events
     _rootEl.addEventListener("click", () => {
       if (!_isEnabled) return;
+
       _checkbox.checked = !_checkbox.checked;
       _rootEl.dispatchEvent(
         new CustomEvent("_click", {
@@ -95,6 +96,7 @@
         new CustomEvent("formstep:mounted", {
           detail: {
             el: _rootEl,
+            status,
           },
           composed: true,
           bubbles: true,
