@@ -3,7 +3,7 @@
 <script lang="ts">
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
-  import { onDestroy, onMount } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
   import { MOBILE_BP } from "../../common/breakpoints";
 
   import type { FormStep, FormStepStatus } from "../form-step/FormStep.svelte";
@@ -78,24 +78,30 @@
     calculateProgress();
   }
 
+  $: step = +step;
+  
+  let resizeObserver: ResizeObserver; 
+  
   // =====
   // Hooks
   // =====
 
-  onMount(() => {
+  onMount(async () => {
+    await tick();  // needed to ensure Angular's delay, when rendering within a route, doesn't break things
+
     _stepType = +step === -1 ? "free" : "constrained";
   
     getChildren();
 
     // observer required to allow the parent to relay resize info down to the children, as the
     // children need to change layout based on the parent's width
-    const resizeObserver = createResizeNotififications();
+    resizeObserver = createResizeNotififications();
     resizeObserver.observe(_rootEl);
-    return () => resizeObserver.unobserve(_rootEl);
   });
 
   onDestroy(() => {
     window.removeEventListener("orientationchange", calcStepDimensions);
+    resizeObserver.unobserve(_rootEl);
   });
 
   // ====
