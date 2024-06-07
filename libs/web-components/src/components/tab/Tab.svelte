@@ -67,7 +67,7 @@
 </script>
 
 <section bind:this={_rootEl}>
-  <div bind:this={_headingSlotEl} style="display:none" >
+  <div bind:this={_headingSlotEl} style="display:none">
     <slot name="heading" />
     {heading}
   </div>
