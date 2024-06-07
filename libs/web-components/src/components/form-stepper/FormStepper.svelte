@@ -122,7 +122,7 @@
         calcStepDimensions();
         addClickListener();
         addOrientationChangeListener();
-        _currentStep = 1;
+        _currentStep = step < 1 ? 1 : step;
       });
   
     });
@@ -136,7 +136,7 @@
       const formStep: Partial<FormStep> = {
         ariaLabel: `Step ${stepIndex} of ${_stepEls.length}`,
         childIndex: stepIndex,
-        current: stepIndex === 1,
+        current: step === -1 ? stepIndex === 1 : stepIndex === step,
         enabled: stepIndex <= step || _stepType === "free",
       };
 
@@ -193,7 +193,7 @@
     if (_stepEls.length === 0) return;
 
     // deactivate current step (currentStep is initially undefined)
-    if (_currentStep) {
+    if (_currentStep > 0) {
       _stepEls[_currentStep - 1].dispatchEvent(
         new CustomEvent("formstepper:current:changed", {
           detail: { current: false },
@@ -227,8 +227,9 @@
     _stepHeight = el?.offsetHeight ?? 0;
     _progressHeight = _gridEl?.offsetHeight;
 
-    // ensure progress bar is not shows until initial calcs are complete
-    _showProgressBars = true;
+    // ensure progress bar is not shows until initial calcs are complete, timeout needed to 
+    // prevent flickering of the scrollbar
+    setTimeout(() => _showProgressBars = true, 100);
   }
 
   // notify outside app of step change
