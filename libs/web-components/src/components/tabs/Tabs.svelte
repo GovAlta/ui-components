@@ -111,13 +111,13 @@
     _currentTab = clamp(tab, 1, _tabProps.length);
 
     let currentLocation = "";
+    // @ts-expect-error
     [..._tabsEl.querySelectorAll("[role=tab]")].map((el, index) => {
-      const isCurrent = index + 1 === _currentTab; // currentTab is 1-based
+      const isCurrent = index + 1 === +_currentTab; // currentTab is 1-based
       el.setAttribute("aria-selected", fromBoolean(isCurrent));
       el.setAttribute("tabindex", isCurrent ? "0" : "-1");
       if (isCurrent) {
         currentLocation = (el as HTMLLinkElement).href;
-        // @ts-expect-error
         el.focus();
       }
     });
@@ -127,7 +127,7 @@
         new CustomEvent("tabs:set-open", {
           composed: true,
           detail: {
-            open: i + 1 === tab,
+            open: i + 1 === +tab,
           },
         }),
       );
