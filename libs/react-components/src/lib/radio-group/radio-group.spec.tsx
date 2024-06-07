@@ -47,6 +47,7 @@ describe("RadioGroup", () => {
         mr="m"
         mb="l"
         ml="xl"
+        ariaLabel={"please select fruit"}
         onChange={noop}
       >
         {data.radios.map((radio) => (
@@ -56,6 +57,7 @@ describe("RadioGroup", () => {
             name="fruits"
             checked={data.value === radio.value}
             value={radio.value}
+            ariaLabel={"you are choosing " + radio.value}
           >
             {radio.text}
           </GoARadioItem>
@@ -70,6 +72,15 @@ describe("RadioGroup", () => {
       expect(el?.getAttribute("mr")).toBe("m");
       expect(el?.getAttribute("mb")).toBe("l");
       expect(el?.getAttribute("ml")).toBe("xl");
+      expect(el?.getAttribute("name")).toBe("fruits");
+      expect(el?.getAttribute("arialabel")).toBe("please select fruit");
+      expect(el?.getAttribute("disabled")).toBe("false");
+      expect(el?.getAttribute("error")).toBe("false");
+
+      const radios = document.querySelectorAll<HTMLInputElement>("input[type=radio]");
+      radios.forEach((radio) => {
+       expect(radio.getAttribute("arialabel")).toBe("you are choosing " + radio.value);
+      });
     });
   });
 
