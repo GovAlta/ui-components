@@ -176,7 +176,7 @@
   }
 
   .title span {
-    padding-bottom: var(--goa-space-3xs, 0);
+    padding-bottom: var(--goa-space-2xs, 0);
   }
 
   .heading {
