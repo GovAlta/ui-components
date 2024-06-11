@@ -5,7 +5,7 @@ import { it, describe } from "vitest";
 
 function getProgress(el: Element): number {
   const progress = el.querySelector("progress.horizontal")
-  return +(progress?.getAttribute("value") ?? "0");
+  return +(progress?.getAttribute("value") ?? "-1");
 }
 
 beforeAll(() => {
@@ -22,25 +22,29 @@ beforeAll(() => {
 describe("FormStepper", () => {
   it("it renders", async () => {
     const { container } = render(FormStepper)
-    const steps = container.querySelectorAll("goa-form-step")
-    expect(steps.length).toBe(4)
+    await waitFor(() => {
+      const steps = container.querySelectorAll("input")
+      expect(steps.length).toBe(4)
+    })
   })
 
-  // FIXME: unable to get the progress check working. Child events aren't able to be triggered
-  it.skip("show progress updates on step changes", async () => {
+  it("show progress updates on step changes", async () => {
     const { container } = render(FormStepper)
-    const steps = container.querySelectorAll("goa-form-step");
+    const steps = container.querySelectorAll("input[type=checkbox]");
 
-    await tick()
     await waitFor(() => {
       expect(steps.length).toBe(4)
       expect(getProgress(container)).toBe(0)
     })
 
-    steps.forEach(async (step: HTMLElement, index: number) => {
+    for (const [i, step] of [...steps].entries()) {
       await fireEvent.click(step)
-      expect(getProgress(container)).toEqual(25 * (index + 1))
-    })
+      await waitFor(() => {
+        const result = Math.floor(getProgress(container));
+        const expected = Math.floor(100 / (steps.length - 1) * i);
+        expect(result).toEqual(expected);
+      });
+    }
   })
 
   it("sets the attributes on the children", async () => {
@@ -48,7 +52,7 @@ describe("FormStepper", () => {
     const steps = container.querySelectorAll("goa-form-step");
 
     await tick()
-    steps.forEach(async (step: HTMLElement, index: number) => {
+    steps.forEach(async (step: Element, index: number) => {
       expect(step.getAttribute("arialabel")).toBe(`Step ${index + 1} of ${steps.length}`)
       expect(step.getAttribute("childindex")).toBe(`${index + 1}`)
     })
@@ -59,18 +63,19 @@ describe("FormStepper", () => {
     const steps = container.querySelectorAll("goa-form-step");
 
     await tick()
-    steps.forEach(async (step: HTMLElement) => {
+    steps.forEach((step: Element) => {
       expect(step.getAttribute("enabled")).toBe("true")
     })
   })
 
   it("enables all steps up to, and including, initial step that is set", async () => {
     const { container } = render(FormStepper, { step: 2 })
-    const steps = container.querySelectorAll("goa-form-step");
 
-    await tick()
-    steps.forEach(async (step: HTMLElement, index: number) => {
-      expect(step.getAttribute("enabled")).toBe(index + 1 <= 2 ? "true" : "false")
+    await waitFor(() => {
+      const steps = container.querySelectorAll("input[type=checkbox]");
+      steps.forEach((step: Element, index: number) => {
+        expect(step.getAttribute("aria-disabled")).toBe(index + 1 <= 2 ? "false" : "true")
+      })
     })
   })
 })

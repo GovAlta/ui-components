@@ -4,6 +4,7 @@
   import { onMount, tick } from "svelte";
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
+  import { getSlottedChildren } from "../../common/utils";
 
   // Public
   export let current: number = 1; // 1-based
@@ -27,20 +28,11 @@
   function setCurrentPage(current: number) {
     if (!_rootEl) return;
 
-    const children = getChildren();
+    const children = getSlottedChildren(_rootEl);
     children.forEach((child: Element, index: number) => {
       const _child = child as HTMLElement;
       _child.style.display = index + 1 === +current ? "block" : "none";
     });
-  }
-
-  function getChildren(): Element[] {
-    const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
-    if (slot) {
-      return [...slot.assignedElements()];
-    } else {
-      return [..._rootEl.children] as Element[]; // unit tests
-    }
   }
 </script>
 

@@ -44,7 +44,7 @@ describe('GoACheckbox Component', () => {
 
     it("can be checked", async () => {
       const el = await createElement({ checked: "true" });
-      const root = el.container.querySelector('.goa-checkbox--selected');
+      const root = el.container.querySelector('.selected');
       expect(root).toBeTruthy();
 
       const svg = await el.findByTestId('checkmark');
@@ -56,7 +56,7 @@ describe('GoACheckbox Component', () => {
 
     it("can be disabled", async () => {
       const el = await createElement({ disabled: "true" });
-      const root = el.container.querySelector('.goa-checkbox--disabled');
+      const root = el.container.querySelector('.disabled');
       expect(root).toBeTruthy();
       const checkbox = el.container.querySelector("input");
       expect((checkbox as HTMLInputElement).disabled).toBeTruthy();
@@ -64,7 +64,7 @@ describe('GoACheckbox Component', () => {
 
     it("allows the checkbox to be set to an error state", async () => {
       const el = await createElement({ error: "true" });
-      const root = el.container.querySelector('.goa-checkbox--error');
+      const root = el.container.querySelector('.error');
       expect(root).toBeTruthy();
     });
   });
@@ -75,14 +75,15 @@ describe('GoACheckbox Component', () => {
       const checkbox = el.container.querySelector("input");
       const change = vi.fn();
 
-      checkbox.addEventListener('_change', (event: CustomEvent) => {
-        expect(event.detail.name).toBe('checkbox-test-name');
-        expect(event.detail.value).toBe('foobar');
-        expect(event.detail.checked).toBeTruthy();
+      checkbox?.addEventListener('_change', (e: Event) => {
+        const detail = (e as CustomEvent).detail;
+        expect(detail.name).toBe('checkbox-test-name');
+        expect(detail.value).toBe('foobar');
+        expect(detail.checked).toBeTruthy();
         change();
       })
 
-      await fireEvent.click(checkbox);
+      checkbox && await fireEvent.click(checkbox);
       expect(change).toBeCalledTimes(1);
     });
 
@@ -91,14 +92,15 @@ describe('GoACheckbox Component', () => {
       const checkbox = el.container.querySelector("input");
       const change = vi.fn();
 
-      checkbox.addEventListener('_change', (event: CustomEvent) => {
-        expect(event.detail.name).toBe('checkbox-test-name');
-        expect(event.detail.value).toBe('checked');
-        expect(event.detail.checked).toBeTruthy();
+      checkbox?.addEventListener('_change', (e: Event) => {
+        const detail = (e as CustomEvent).detail;
+        expect(detail.name).toBe('checkbox-test-name');
+        expect(detail.value).toBe('checked');
+        expect(detail.checked).toBeTruthy();
         change();
       })
 
-      await fireEvent.click(checkbox);
+      checkbox && await fireEvent.click(checkbox);
       expect(change).toBeCalledTimes(1);
     });
 
@@ -107,14 +109,15 @@ describe('GoACheckbox Component', () => {
       const checkbox = el.container.querySelector("input");
       const change = vi.fn();
 
-      checkbox.addEventListener('_change', (event: CustomEvent) => {
-        expect(event.detail.name).toBe('checkbox-test-name');
-        expect(event.detail.value).toBe('');
-        expect(event.detail.checked).toBeFalsy();
+      checkbox?.addEventListener('_change', (e: Event) => {
+        const detail = (e as CustomEvent).detail;
+        expect(detail.name).toBe('checkbox-test-name');
+        expect(detail.value).toBe('');
+        expect(detail.checked).toBeFalsy();
         change();
       })
 
-      await fireEvent.click(checkbox);
+      checkbox && await fireEvent.click(checkbox);
       expect(change).toBeCalledTimes(1);
     });
   });

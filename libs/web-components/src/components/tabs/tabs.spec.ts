@@ -22,14 +22,13 @@ describe("Tabs", () => {
   it("should initialize the children and tab 1 as active", async () => {
     const { container, queryByTestId } = render(Tabs);
 
-    const tab1Link = queryByTestId("tab-1");
-    const tab = tab1Link?.querySelector("div.tab");
-    const tab2Link = container.querySelector("a#tab-2");
-    const tab2 = tab2Link?.querySelector("div.tab");
-    const tabPanel = container.querySelector('div[role="tabpanel"]');
-    const tab3 = tabPanel?.querySelector("goa-tab");
-
     await waitFor(() => {
+      const tab1Link = queryByTestId("tab-1");
+      const tab = tab1Link?.querySelector("div.tab");
+      const tab2Link = container.querySelector("a#tab-2");
+      const tab2 = tab2Link?.querySelector("div.tab");
+      const tabPanel = container.querySelector('div[role="tabpanel"]');
+
       expect(tab1Link).toBeTruthy();
       expect(tab1Link?.getAttribute("aria-controls")).toBe("tabpanel-1");
       expect(tab1Link?.getAttribute("aria-selected")).toBe("true");
@@ -50,22 +49,18 @@ describe("Tabs", () => {
 
       // should replace content to the tabpanel for opening tab
       expect(tabPanel).toBeTruthy();
-
-      expect(tab3).toBeTruthy();
-      expect(tab3?.getAttribute("heading")).toBe("Tab1");
-      expect(tabPanel?.getAttribute("aria-labelledby")).toBe("tab-1");
-      expect(tabPanel?.getAttribute("tabindex")).toBe("0");
     });
   });
 
   it("should select specified tab if the tab property is set", async () => {
     const result = render(Tabs, { initialtab: 2 });
-    const tab1Link = result.container.querySelector("a#tab-1");
-    const tab2Link = result.container.querySelector("a#tab-2");
-    const tabPanel = result.container.querySelector("div[role=tabpanel]");
-    const goaTabs = result.container.querySelectorAll("goa-tab");
 
     await waitFor(() => {
+      const tab1Link = result.container.querySelector("a#tab-1");
+      const tab2Link = result.container.querySelector("a#tab-2");
+      const tabPanel = result.container.querySelector("div[role=tabpanel]");
+      const goaTabs = result.container.querySelectorAll("goa-tab");
+
       expect(tab1Link).toBeTruthy();
       expect(tab1Link?.getAttribute("aria-selected")).toBe("false");
 

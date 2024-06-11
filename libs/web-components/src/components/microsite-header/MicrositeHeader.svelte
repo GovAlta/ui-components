@@ -137,7 +137,7 @@
   .content-container {
 
     font-size: var(--goa-font-size-2);
-    padding: 0.5rem 1rem;
+    padding: var(--goa-space-xs) var(--goa-space-m);
 
     display: flex;
     align-items: flex-start;
@@ -149,13 +149,13 @@
   @container self (--not-mobile) {
     .content-container {
       align-items: center;
-      padding: 0.25rem 2rem;
+      padding: var(--goa-space-2xs) var(--goa-space-xl);
     }
   }
 
   @container self (--desktop) {
     .content-container {
-      padding: 0.25rem 4.5rem;
+      padding: var(--goa-space-2xs) var(--goa-space-3xl);
     }
   }
 

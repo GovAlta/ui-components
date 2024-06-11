@@ -6,7 +6,7 @@ import {
 } from "@testing-library/svelte";
 import FocusTrapTestComponent from "./FocusTrapTestComponent.svelte";
 import { it, describe } from "vitest";
-import {tick} from "svelte";
+import { tick } from "svelte";
 
 // This test is blocked due to test slots being handling differently than web browser
 // For details, please refer https://goa-dio.atlassian.net/browse/DDIDS-704
@@ -35,8 +35,6 @@ describe("Focus Trap Component", () => {
     await fireEvent(el.container, tabPressEvent);
     await waitFor(() => {
       const emailEl = el.queryByTestId("email");
-      // console.log(emailEl?.outerHTML)
-      // console.log(document.activeElement?.outerHTML)
       expect(emailEl).toHaveFocus();
     });
   });

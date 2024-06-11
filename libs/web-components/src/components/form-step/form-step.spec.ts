@@ -1,39 +1,27 @@
 import FormStep from './FormStep.svelte'
-import { RenderResult, fireEvent, render, waitFor } from '@testing-library/svelte'
-import { SvelteComponent } from 'svelte';
+import { fireEvent, render, waitFor } from '@testing-library/svelte'
+import { tick } from 'svelte';
 import { describe, it, expect, vi } from "vitest";
-
-type Props = {
-  root: HTMLElement | null;
-  status: HTMLElement | null;
-  text: HTMLElement | null;
-  childIndex: HTMLElement | null;
-}
-
-function getProps(el: RenderResult<SvelteComponent>): Props {
-  const root = el.queryByRole("listitem")
-  const status = el.queryByTestId("status")
-  const text = el.queryByTestId("text")
-  const childIndex = el.queryByTestId("step-number")
-
-  return { root, status, text, childIndex }
-}
 
 describe("FormStep", () => {
 
   it('it renders the default step', async () => {
-    const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
-    const el = render(FormStep, { text: "Some form", childindex: "1" })
-    const props = getProps(el);
+    const { queryByTestId } = render(FormStep, { text: "Some text" })
+    const rootEl = queryByTestId("label")
 
-    expect(props.text?.innerHTML).toContain("Some form")
-    expect(props.status?.querySelector("[data-testid=step-number]")?.innerHTML).toBe("1");
+    rootEl?.dispatchEvent(new CustomEvent("formstepper:init", {
+      detail: {
+        ariaLabel: "some label",
+        enabled: true,
+        childIndex: 1,
+        current: false,
+      }
+    }))
 
-    // no warning messages expected
     await waitFor(() => {
-      expect(console.warn["mock"].calls.length).toBe(0);
-    });
-    mock.mockRestore();
+      expect(queryByTestId("text")?.innerHTML).toContain("Some text")
+      expect(queryByTestId("step-number")?.innerHTML).toBe("1");
+    })
   })
 
   it("requires a text value", async () => {
@@ -49,74 +37,119 @@ describe("FormStep", () => {
 
   it("emits a _click event", async () => {
     const click = vi.fn()
-    const el = render(FormStep, { text: "Some form", enabled: true })
-    const props = getProps(el);
+    const el = render(FormStep, { text: "Some form" })
+    const rootEl = el.queryByTestId("label");
 
-    expect(props.root).toBeTruthy();
-    expect(props.status).toBeTruthy();
+    rootEl?.dispatchEvent(new CustomEvent("formstepper:init", {
+      detail: {
+        ariaLabel: "some label",
+        enabled: true,
+        childIndex: 1,
+        current: false,
+      }
+    }))
 
-    props.root?.addEventListener("_click", click)
+    await tick();
+    el.container.addEventListener("_click", click)
+    rootEl && await fireEvent.click(rootEl)
 
-    props.status && await fireEvent.click(props.status)
-
-    expect(click).toBeCalled()
+    await waitFor(() => {
+      expect(click).toBeCalled()
+    })
   })
 
   it("won't emit event when clicked if disabled", async () => {
     const click = vi.fn()
-    const el = render(FormStep, { text: "Some form", enabled: false })
-    const props = getProps(el);
+    const el = render(FormStep, { text: "Some form" })
+    const rootEl = el.queryByTestId("label");
 
-    expect(props.root).toBeTruthy();
-    expect(props.status).toBeTruthy();
+    rootEl?.dispatchEvent(new CustomEvent("formstepper:init", {
+      detail: {
+        ariaLabel: "some label",
+        enabled: false,
+        childIndex: 1,
+        current: false,
+      }
+    }))
 
-    props.root?.addEventListener("_click", click)
-
-    props.status && await fireEvent.click(props.status)
+    el.container?.addEventListener("_click", click)
+    await tick();
+    rootEl && await fireEvent.click(rootEl)
 
     expect(click).not.toBeCalled()
   })
 
-  it("renders a current status", () => {
-    const el = render(FormStep, { text: "Some form", current: true })
-    const props = getProps(el);
+  it("renders a current status", async () => {
+    const el = render(FormStep, { text: "Some form" })
+    const rootEl = el.queryByTestId("label");
 
-    expect(props.root).toBeTruthy();
-    expect(props.root?.getAttribute("aria-current")).toBe("step")
+    rootEl?.dispatchEvent(new CustomEvent("formstepper:init", {
+      detail: {
+        ariaLabel: "some label",
+        enabled: true,
+        childIndex: 1,
+        current: true,
+      }
+    }))
+
+    await tick();
+    expect(rootEl?.getAttribute("aria-current")).toBe("step")
   })
 
-  it("renders a complete status", () => {
-    const el = render(FormStep, { text: "Some form", status: "complete" })
-    const props = getProps(el);
+  it("renders a complete status", async () => {
+    const el = render(FormStep, { text: "Some form" })
+    const rootEl = el.queryByTestId("label");
 
-    expect(props.root).toBeTruthy();
-    expect(props.root?.dataset["status"]).toBe("complete")
+    rootEl?.dispatchEvent(new CustomEvent("formstepper:init", {
+      detail: {
+        ariaLabel: "some label",
+        enabled: true,
+        childIndex: 1,
+        current: false,
+        status: "complete",
+      }
+    }))
+
+    await tick();
+    expect(rootEl?.dataset["status"]).toBe("complete")
   })
 
-  it("renders an incomplete status", () => {
+  it("renders an incomplete status", async () => {
     const el = render(FormStep, { text: "Some form", status: "incomplete" })
-    const props = getProps(el);
+    const rootEl = el.queryByTestId("label");
 
-    expect(props.root).toBeTruthy();
-    expect(props.root?.dataset["status"]).toBe("incomplete")
+    rootEl?.dispatchEvent(new CustomEvent("formstepper:init", {
+      detail: {
+        ariaLabel: "some label",
+        enabled: true,
+        childIndex: 1,
+        current: false,
+        status: "incomplete",
+      }
+    }))
+
+    await tick();
+
+    expect(rootEl?.dataset["status"]).toBe("incomplete")
   })
 
-  it("renders the step number", () => {
-    const el = render(FormStep, { text: "Some form", childindex: 2 })
-    const props = getProps(el);
-
-    expect(props.childIndex).toBeTruthy();
-    expect(props.childIndex?.innerHTML).toBe("2")
-  })
-
-  it("renders the aria label", () => {
-    const { queryByRole } = render(FormStep, {
+  it("renders the aria label", async () => {
+    const { queryByTestId } = render(FormStep, {
       text: "Some form",
-      arialabel: "1 of 4",
-      enabled: true
     });
-    const label = queryByRole("listitem")?.getAttribute("aria-label")
-    expect(label).toBeTruthy();
+    const rootEl = queryByTestId("label")
+
+    rootEl?.dispatchEvent(new CustomEvent("formstepper:init", {
+      detail: {
+        ariaLabel: "1 of 4",
+        enabled: true,
+        childIndex: 1,
+        current: true,
+      }
+    }))
+
+    await tick();
+    const label = rootEl?.getAttribute("aria-label")
     expect(label).toContain("1 of 4")
   })
 })

@@ -4,7 +4,8 @@
   import type { Spacing } from "../../common/styling";
   import { typeValidator, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
+  import { GoARadioItemProps, RadioItemSelectProps } from "../radio-item/RadioItem.svelte";
 
   // Validator
   const [Orientations, validateOrientation] = typeValidator(
@@ -14,12 +15,6 @@
 
   // Type
   type Orientation = (typeof Orientations)[number];
-
-  interface RadioOption {
-    label: string;
-    value: string;
-    description?: string;
-  }
 
   // Public
 
@@ -39,60 +34,57 @@
 
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
-  $: value && setCurrentSelectedOption();
+  $: value && setCurrentSelectedOption(value);
 
   // Private
 
-  let el: HTMLElement;
-  let options: RadioOption[] = [];
-  let _options: Element[] = [];
+  let _rootEl: HTMLElement;
+  let _radioItems: GoARadioItemProps[] = [];
+  let _bindTimeoutId: any;
 
   // Hooks
 
   onMount(async () => {
-    await tick();
     validateOrientation(orientation);
 
-    if (!el) return;
+    getChildren();
 
-    _options = getChildren();
-    bindOptions(_options);
-
-    el.addEventListener("_click",(e: Event) => {
+    _rootEl.addEventListener("_click",(e: Event) => {
       onChange((e as CustomEvent).detail);
     });
   });
 
   // Functions
 
-  /**
-   * Allows the child elements to be obtainable within unit tests
-   * @returns List of child elements
-   */
-  function getChildren(): Element[] {
-    const slot = el.querySelector("slot") as HTMLSlotElement;
-    if (slot) {
-      // default
-      return [...slot.assignedElements()];
-    } else {
-      // unit tests
-      // @ts-expect-error
-      return [...el.children] as Element[];
-    }
-  }
-  function bindOptions(children: Element[]) {
-    children.forEach((el, index) => {
-      const option = el as unknown as RadioOption & { innerText: string };
-      const optionValue = el.getAttribute("value") || option.value;
-      if (isDisabled) {
-        option.setAttribute("disabled", isDisabled);
+  function getChildren() {
+    _rootEl.addEventListener("radio-item:mounted", (e: Event) => {
+      const radioItemProps = (e as CustomEvent<GoARadioItemProps>).detail;  
+      _radioItems = [..._radioItems, radioItemProps];
+
+      // call bindOptions once all children are attained
+      if (_bindTimeoutId) {
+        clearTimeout(_bindTimeoutId);
       }
-      option.setAttribute("error", isError);
-      option.setAttribute("name", name);
-      option.setAttribute("checked", optionValue === value);
-      option.setAttribute("arialabel", arialabel || name);
-      option.setAttribute("ariadescribedby", `description-${name}-${index}`);
-      option.setAttribute("data-testid", `radio-option-${index}`);
+      _bindTimeoutId = setTimeout(() => {
+        bindOptions();
+      }, 1)
+    })    
+  }
+
+  function bindOptions() {
+    _radioItems.forEach((props, index) => {
+      props.el.dispatchEvent(new CustomEvent<Partial<GoARadioItemProps>>("radio-group:init", {
+        composed: true,
+        detail: {
+          disabled: isDisabled,
+          error: isError,
+          description: props.description,
+          name,
+          checked: props.value === value,
+          ariaLabel: arialabel || name,
+          ariaDescribedBy: `description-${name}-${index}`,
+        }
+      }));
     });
   }
 
@@ -104,28 +96,32 @@
     if (newValue === value) return;
 
     value = newValue;
-    el.dispatchEvent(
+    _rootEl.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
         detail: { name, value: value },
       }),
     );
-    setCurrentSelectedOption();
+
+    setCurrentSelectedOption(value);
   }
 
-  function setCurrentSelectedOption() {
-    _options.forEach((el) => {
-      const option = el as unknown as RadioOption & { innerText: string };
-      const optionValue = el.getAttribute("value") || option.value;
-      option.setAttribute("checked", optionValue === value);
+  function setCurrentSelectedOption(value: string) {
+    _radioItems.forEach((item) => {
+      item.el.dispatchEvent(new CustomEvent<RadioItemSelectProps>("radio-group:select", {
+        composed: true,
+        detail: {
+          checked: item.value === value 
+        }
+      }))
     });
   }
 </script>
 
 <!-- Html -->
 <div
-  bind:this={el}
+  bind:this={_rootEl}
   style={calculateMargin(mt, mr, mb, ml)}
   class={`goa-radio-group--${orientation}`}
   data-testid={testid}

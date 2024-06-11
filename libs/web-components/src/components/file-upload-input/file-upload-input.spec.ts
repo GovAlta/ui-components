@@ -1,5 +1,6 @@
 import FileUploadInput from './FileUploadInput.svelte'
 import { fireEvent, render, waitFor } from '@testing-library/svelte'
+import { tick } from 'svelte';
 import { describe, it, expect, vi } from "vitest";
 
 it('it renders', async () => {
@@ -37,8 +38,10 @@ describe("File selection", () => {
     const { queryByTestId } = render(FileUploadInput, { maxfilesize: "100KB" })
     const input = queryByTestId("input") as HTMLInputElement;
 
+    expect(input).toBeTruthy();
     fireEvent.change(input, { target: { files: [file] } });
 
+    await tick();
     await waitFor(() => {
       expect(queryByTestId("error")?.innerHTML).toContain("100KB")
     })

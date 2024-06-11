@@ -10,7 +10,7 @@
   // Validator
   const [Variants, validateVariant] = typeValidator(
     "Icon Button Variant",
-    ["color", "nocolor", "dark", "destructive"],
+    ["color", "nocolor", "light", "dark", "destructive"],
     true,
   );
 
@@ -43,21 +43,37 @@
     small: "0.25rem",
     medium: "0.25rem",
     large: "0.5rem",
+    xlarge: "0.5rem",
   }[size];
 
-  function handleClick(e) {
-    e.target.dispatchEvent(
+  function handleClick(e: Event) {
+    e.target?.dispatchEvent(
       new CustomEvent("_click", { composed: true, detail: { event: e } }),
     );
   }
 
   onMount(() => {
     validateVariant(variant);
+
+    if (variant == "nocolor") {
+      console.warn(
+        "goa-icon-button nocolor variant is deprecated. Instead use dark.",
+      );
+    }
+
+    if (isInverted) {
+      console.warn(
+        "goa-icon-button inverted is deprecated. Instead use light variant.",
+      );
+    }
   });
 </script>
 
 <button
-  style="{calculateMargin(mt, mr, mb, ml)}; --pading-size: {_paddingSize}"
+  style={`
+    --padding: ${_paddingSize};
+    ${calculateMargin(mt, mr, mb, ml)}
+  `}
   {title}
   disabled={isDisabled}
   class={css}
@@ -65,7 +81,7 @@
   on:click={handleClick}
   aria-label={arialabel}
 >
-  <goa-icon {title} type={icon} {size} {theme} inverted={isInverted} />
+  <goa-icon {title} type={icon} {size} {theme} />
 </button>
 
 <style>
@@ -75,11 +91,12 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
-  button,
-  button * {
-    box-sizing: border-box;
+  :host:focus,
+  :host:focus-within,
+  :host:focus-visible {
+    outline: none !important;
   }
-
+  
   button {
     display: inline-flex;
     align-items: center;
@@ -89,81 +106,110 @@
     cursor: pointer;
     border: none;
     border-radius: var(--goa-border-radius-m);
-    padding: var(--pading-size);
-  }
-
-  /* Primary */
-  .color,
-  .dark {
-    color: var(--goa-color-interactive-default);
-    fill: var(--goa-color-interactive-default);
+    padding: var(--padding);
     cursor: pointer;
     transition:
       background-color 100ms ease-in,
-      transform 100ms ease-in;
+      transform 100ms ease-in-out;
   }
-
-  .dark:not(.inverted) {
-    color: unset;
+  button:active {
+    transform: translateY(2px);
   }
-
-  button:hover:not(.destructive) {
-    background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
+  button:hover {
     outline: none;
   }
-
-  button:focus:not(.destructive),
-  button:active:not(.destructive) {
-    background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-interactive-focus);
-    color: var(--goa-color-interactive-focus);
+  button:focus-visible {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
     outline: none;
   }
-
-  .color.inverted:hover {
-    background-color: var(--goa-color-interactive-hover);
+  button:disabled {
+    pointer-events: none;
+    transform: none;
+    cursor: default;
+    opacity: 1;
+    color: var(--goa-color-greyscale-500);
+    fill: var(--goa-color-greyscale-500);
   }
+  button:disabled:hover {
+    background-color: transparent;
+  }
+
+
+  .color {
+    color: var(--goa-color-interactive-default);
+    fill: var(--goa-color-interactive-default);
+  }
+  .color:hover,
+  .color:focus {
+    color: var(--goa-color-interactive-hover);
+    fill: var(--goa-color-interactive-hover);
+    background-color: var(--goa-color-greyscale-100);
+  }
+  .color:disabled {
+    color: var(--goa-color-interactive-disabled);
+    fill: var(--goa-color-interactive-disabled);
+  }
+
+
+  .dark {
+    color: var(--goa-color-greyscale-black);
+    fill: var(--goa-color-greyscale-black);
+  }
+  .dark:hover,
+  .dark:focus,
+  .dark:active {
+    background-color: var(--goa-color-greyscale-100);
+  }
+
+
+  .nocolor {
+    color: var(--goa-color-greyscale-black);
+    fill: var(--goa-color-greyscale-black);
+  }
+  .nocolor:hover,
+  .nocolor:focus,
+  .nocolor:active {
+    background-color: var(--goa-color-greyscale-100);
+  }
+
 
   .destructive {
     color: var(--goa-color-emergency-dark);
     fill: var(--goa-color-emergency-dark);
   }
-
-  .destructive:hover {
-    background-color: var(--goa-color-emergency-light);
-    border-color: var(--goa-color-emergency-light);
-    outline: none;
-  }
-
+  .destructive:hover,
   .destructive:focus,
   .destructive:active {
     background-color: var(--goa-color-emergency-light);
-    border-color: var(--goa-color-interactive-focus);
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
-    outline: none;
   }
-
-  button:disabled {
-    pointer-events: none;
+  .destructive:disabled {
     opacity: 0.5;
-    transform: none;
-    cursor: default;
   }
 
-  button:disabled:hover {
-    background-color: transparent;
+
+  .light {
+    color: var(--goa-color-greyscale-white);
+    fill: var(--goa-color-greyscale-white);
+  }
+  .light:hover,
+  .light:focus,
+  .light:active {
+    color: var(--goa-color-greyscale-white);
+    fill: var(--goa-color-greyscale-white);
+    background-color: var(--goa-color-greyscale-700);
   }
 
-  button.dark:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+  
+  .inverted {
+    color: var(--goa-color-greyscale-white);
+    fill: var(--goa-color-greyscale-white);
+  }
+  .inverted:hover,
+  .inverted:focus,
+  .inverted:active {
+    color: var(--goa-color-greyscale-white);
+    fill: var(--goa-color-greyscale-white);
+    background-color: var(--goa-color-greyscale-700);
   }
 
-  button.dark:focus,
-  button.dark:active {
-    background-color: rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 0 3px var(--goa-color-greyscale-white);
-  }
 </style>

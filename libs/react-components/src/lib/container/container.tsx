@@ -10,11 +10,13 @@ export type GoAContainerType =
   | "important";
 export type GoAContainerAccent = "thick" | "thin" | "filled";
 export type GoAContainerPadding = "relaxed" | "compact";
+export type GoAContainerWidth = "full" | "content";
 
 interface WCProps extends Margins {
   type?: GoAContainerType;
   accent?: GoAContainerAccent;
   padding?: GoAContainerPadding;
+  width?: GoAContainerWidth;
 }
 
 declare global {
@@ -34,6 +36,7 @@ export interface GoAContainerProps extends Margins {
   padding?: GoAContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
+  width?: GoAContainerWidth;
   testId?: string;
 }
 
@@ -45,6 +48,7 @@ export function GoAContainer({
   children,
   actions,
   type,
+  width,
   mt,
   mr,
   mb,
@@ -57,6 +61,7 @@ export function GoAContainer({
       type={type}
       padding={padding}
       accent={accent}
+      width={width}
       mt={mt}
       mr={mr}
       mb={mb}

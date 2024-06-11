@@ -13,7 +13,7 @@ textarea {
 body {
   margin: 0;
   scroll-behavior: smooth;
-  line-height: var(--goa-line-height-2);
+  line-height: var(--goa-line-height-3);
 }
 
 *,
@@ -41,10 +41,10 @@ ol {
   padding-left: 1rem;
 }
 
-li>ul,
-li>ol,
-li>ul,
-li>ol {
+li > ul,
+li > ol,
+li > ul,
+li > ol {
   padding-left: 0;
   margin-top: 0;
 }
@@ -85,32 +85,27 @@ a:hover {
 }
 
 h1 {
-  font-size: var(--goa-font-size-10);
-  line-height: var(--goa-line-height-7);
-  font-weight: var(--goa-font-weight-bold);
+  font: var(--goa-typography-heading-xl);
 }
 
 h2 {
-  font-size: var(--goa-font-size-9);
-  line-height: var(--goa-line-height-6);
-  font-weight: var(--goa-font-weight-regular);
+  font: var(--goa-typography-heading-l);
 }
 
 h3 {
-  font-size: var(--goa-font-size-7);
-  line-height: var(--goa-line-height-4);
-  font-weight: var(--goa-font-weight-regular);
+  font: var(--goa-typography-heading-m);
 }
 
-h4,
+h4 {
+  font: var(--goa-typography-heading-s);
+}
+
 h5,
 h6 {
-  font-size: var(--goa-font-size-4);
-  line-height: var(--goa-line-height-2);
-  font-weight: var(--goa-font-weight-bold);
+  font: var(--goa-typography-heading-xs);
 }
 
-h3+h1 {
+h3 + h1 {
   margin-top: -1rem;
 }
 

@@ -91,8 +91,8 @@
     vertical-align: middle;
     align-items: center;
     background-color: var(--goa-color-greyscale-white);
-    border-radius: 99px;
-    border: 1px solid #949494; /* TODO: change this to a defined color value when one is defined in the design specs */
+    border-radius: 1rem;
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-500);
     box-sizing: border-box;
     color: var(--goa-color-text-default);
     display: inline-flex;
@@ -100,10 +100,12 @@
     font-size: var(--goa-font-size-3);
     font-weight: var(--goa-font-weight-regular);
     gap: 0.25rem;
-    height: 2rem;
+    min-height: 2rem;
     justify-content: center;
     padding: 0 0.75rem;
     cursor: default;
+    white-space: normal;
+    word-wrap: break-word;
   }
 
   .text {
@@ -114,7 +116,7 @@
   }
 
   .chip:focus {
-    outline: 2px solid var(--goa-color-interactive-focus);
+    outline: var(--goa-border-width-m) solid var(--goa-color-interactive-focus);
     background-color: var(--goa-color-greyscale-white);
   }
 

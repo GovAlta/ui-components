@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconSize, GoAIconType } from "../icon/icon";
 
-export type GoAIconButtonVariant = "color" | "nocolor" | "dark" | "destructive";
+export type GoAIconButtonVariant = "color" | "nocolor" | "light" | "dark" | "destructive";
 
 // legacy naming
 export type IconButtonVariant = GoAIconButtonVariant;

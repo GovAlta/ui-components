@@ -5,7 +5,6 @@
   let accEl: HTMLElement;
 
   function onClick() {
-    console.log("in the onclick")
     accEl.dispatchEvent(new CustomEvent("testClick", {
       bubbles: true,
       composed: true,

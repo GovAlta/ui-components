@@ -1,33 +1,114 @@
-<svelte:options customElement="goa-radio-item"/>
+<svelte:options customElement={{
+  tag: "goa-radio-item",
+  props: {
+    value: { reflect: true },
+    description: { reflect: true },
+    checked: { reflect: true },
+    ariadescribedby: { reflect: true },
+    arialabel: { reflect: true },
+  }
+}}/>
+
+<script lang="ts" context="module">
+  export type GoARadioItemProps = {
+    el: HTMLElement,
+    value: string;
+    label: string;
+    description: string;
+    disabled: boolean;
+    error: boolean;
+    name: string;
+    checked: boolean;
+    ariaLabel: string;
+    ariaDescribedBy: string;
+  }
+
+  export type RadioItemSelectProps = {
+    checked: boolean;
+  }
+
+</script>
 
 <script lang="ts">
-  import {toBoolean} from "../../common/utils";
+  import { onMount } from "svelte";
+  import {fromBoolean, toBoolean} from "../../common/utils";
 
   export let value: string;
-  export let label: string;
+  export let name: string = "";
+  export let label: string = "";
   export let description: string = "";
   export let disabled: string = "false";
   export let error: string = "false";
-  export let name: string;
   export let checked: string = "false";
-  export let arialabel: string;
-  export let ariadescribedby: string;
+  export let arialabel: string = "";
+  export let ariadescribedby: string = "";
 
   let _radioItemEl: HTMLElement;
 
   // Reactive
+
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
+
+  // Hooks
+
+  onMount(() => {
+    dispatchInit();
+    addInitListener();
+    addSelectListener();
+  })
+
+  // Functions
+
+  function dispatchInit() {
+    setTimeout(() => {
+      _radioItemEl?.dispatchEvent(new CustomEvent<GoARadioItemProps>("radio-item:mounted", {
+        composed: true,
+        bubbles: true,
+        detail: {
+          el: _radioItemEl,
+          name,
+          value,
+          label,
+          description,
+          disabled: isDisabled,
+          error: isError,
+          checked: isChecked,
+          ariaLabel: arialabel,
+          ariaDescribedBy: ariadescribedby,
+        }
+      }))
+    }, 10)
+  }
+
+  function addInitListener() {
+    _radioItemEl.addEventListener("radio-group:init", (e: Event) => {
+      const data = (e as CustomEvent<GoARadioItemProps>).detail;
+      isDisabled = data.disabled;
+      error = fromBoolean(data.error);
+      checked = fromBoolean(data.checked);
+      description = data.description;
+      name = data.name;
+      arialabel = data.ariaLabel;
+      ariadescribedby = data.ariaDescribedBy;
+    })  
+  }
+
+  function addSelectListener() {
+    _radioItemEl.addEventListener("radio-group:select", (e: Event) => {
+      isChecked = (e as CustomEvent<RadioItemSelectProps>).detail.checked;
+    })
+  }
 
   function onChange() {
     if (isDisabled) return;
     if (isChecked) return;
 
-    const event = new CustomEvent('_click', {
+    const event = new CustomEvent("_click", {
       detail: value,
       composed: true,
-      bubbles: true
+      bubbles: true,
     });
     _radioItemEl.dispatchEvent(event);
   }
@@ -44,21 +125,21 @@
     <input
       type="radio"
       {name}
-      value={value}
+      {value}
       disabled={isDisabled}
       checked={isChecked}
       aria-label={arialabel}
       aria-describedby={ariadescribedby}
       on:click={onChange}
     />
-    <div class="goa-radio-icon"/>
+    <div class="goa-radio-icon" />
     <span class="goa-radio-label">
-          {label || value}
-        </span>
+      {label || value}
+    </span>
   </label>
   {#if $$slots.description || description}
     <div class="goa-radio-description">
-      <slot name="description"/>
+      <slot name="description" />
       {description}
     </div>
   {/if}
@@ -127,11 +208,6 @@
     margin-top: var(--font-valign-fix);
   }
 
-  /* What is this? */
-  .goa-radio:focus > input:not(:disabled) ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
-  }
-
   .goa-radio--disabled .goa-radio-label {
     opacity: 0.4;
   }
@@ -164,12 +240,14 @@
   input[type="radio"]:hover:active ~ .goa-radio-icon,
   input[type="radio"]:hover:focus ~ .goa-radio-icon,
   input[type="radio"]:active ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width)
+      var(--goa-color-interactive-focus);
   }
 
   /* Checked */
   input[type="radio"]:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive-default);
+    border: var(--goa-radio-border-width--checked) solid
+      var(--goa-color-interactive-default);
   }
 
   /* Disabled */
@@ -185,7 +263,8 @@
   input[type="radio"]:disabled:checked ~ .goa-radio-icon,
   input[type="radio"]:disabled:checked:focus ~ .goa-radio-icon,
   input[type="radio"]:disabled:checked:active ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid var(--goa-color-interactive-hover);
+    border: var(--goa-radio-border-width--checked) solid
+      var(--goa-color-interactive-hover);
     box-shadow: none;
   }
 
@@ -201,7 +280,8 @@
 
   .goa-radio--error input[type="radio"]:hover:active ~ .goa-radio-icon,
   .goa-radio--error input[type="radio"]:hover:focus ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-radio-outline-width)
+      var(--goa-color-interactive-focus);
   }
 
   .goa-radio--error input[type="radio"]:disabled:hover ~ .goa-radio-icon {

@@ -70,7 +70,6 @@
   }
 
   .nav {
-    padding: 0 1rem;
     transition: transform 200ms ease-in-out;
     background-color: var(--goa-color-greyscale-white);
   }

@@ -14,17 +14,14 @@ export function isUrlMatch(windowUrl: URL | Location, testUrl: string): number {
     return 1;
   }
 
-  // root url
-  if (urlParts.length === 1 && urlParts[0] === "") {
-    return 0;
-  }
-
   let weight = -1;
   let index = 0;
 
-  for (const part of windowUrlParts) {
-    if (urlParts[index] !== part) {
-      break;
+  for (const part of urlParts) {
+    if (windowUrlParts[index] !== part) {
+      // Ex: windowURl: /get-started/designers should match to a menu "/#/get-started, but not match to "/get-started/developers
+      // So if we check by menu (linkParts) and have anything not matched, it should return -1 (not matched), otherwise menu /get-started/developers & menu /get-started/ will have the same weight
+      return -1;
     }
     weight += 1;
     index++;
@@ -32,4 +29,27 @@ export function isUrlMatch(windowUrl: URL | Location, testUrl: string): number {
 
   // if weight was incremented once, then it actually has a value of 1, not 0
   return weight >= 0 ? weight + 1 : weight;
+}
+
+export function getMatchedLink(links: Element[], windowUrl: URL | Location) {
+  const weights = links.map((link) => {
+    if (link.getAttribute("target")) return -1;
+    return isUrlMatch(
+      windowUrl,
+      (link as HTMLLinkElement).getAttribute("href") || "",
+    );
+  });
+
+  // If all weights are the same or duplicated, and there are multiple links, return null.Ex: [1,1,1,-1,-1] we will return null
+  const maxWeight = Math.max(...weights);
+  if (weights.filter((weight) => weight === maxWeight).length > 1) {
+    return null;
+  }
+
+  const indexOfMaxWeight = weights.indexOf(maxWeight);
+  if (indexOfMaxWeight > -1) {
+    return links[indexOfMaxWeight];
+  }
+
+  return null;
 }
