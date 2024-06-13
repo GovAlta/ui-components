@@ -22,7 +22,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABFormStepper {
-  @Input() step?: number;
+  @Input() step?: number = -1;
   @Input() type?: GoABFormStepperType;
   @Input() testId?: string;
   @Input() mt?: Spacing;
@@ -34,7 +34,6 @@ export class GoABFormStepper {
 
   onchange(e: Event) {
     const detail = (e as CustomEvent<GoABFormStepperOnChangeDetail>).detail;
-    // this.step = detail.step; // TODO: is this needed!!!!!!!!!
     this.onChange.emit(detail);
   }
 }

@@ -12,19 +12,20 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
     [mb]="mb"
     [mr]="mr"
     [ml]="ml"
-    (_selectfile)="_onSelectFile($event)"
+
+    (_selectFile)="_onSelectFile($event)"
   >
   </goa-file-upload-input>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABFileUploadInput {
   @Input() id?: string = "";
+  @Input({ required: true }) variant!: GoABFileUploadInputVariant;
+  @Input() maxFileSize?: string = "10MB";
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() mr?: Spacing;
   @Input() ml?: Spacing;
-  @Input() variant?: GoABFileUploadInputVariant;
-  @Input() maxFileSize?: string;
 
   @Output() onSelectFile = new EventEmitter<GoABFileUploadInputOnSelectFileDetail>();
 

@@ -37,6 +37,11 @@ export interface GoABIconProps extends Margins {
   type: GoABIconType;
   size?: GoABIconSize;
   theme?: GoABIconTheme;
+  inverted?: string;
+  fillColor?: string;
+  opacity?: number;
+  title?: string;
+  ariaLabel?: string;
   testId?: string;
 }
 
@@ -44,12 +49,23 @@ interface WCProps extends Margins {
   type: GoABIconType;
   theme?: GoABIconTheme;
   size?: GoABIconSize;
+  inverted?: string;
+  fillcolor?: string;
+  opacity?: number;
+  title?: string;
+  arialabel?: string;
+  testid?: string;
 }
 
 export function GoABIcon({
   type,
   theme,
   size,
+  inverted,
+  fillColor,
+  opacity,
+  title,
+  ariaLabel,
   mt,
   mr,
   mb,
@@ -61,6 +77,11 @@ export function GoABIcon({
       type={type}
       theme={theme}
       size={size}
+      inverted={inverted}
+      fillcolor={fillColor}
+      opacity={opacity}
+      title={title}
+      arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}

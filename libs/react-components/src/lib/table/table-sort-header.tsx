@@ -1,4 +1,4 @@
-export type GoABTableSortDirection = "asc" | "desc" | "none";
+import { GoABTableSortDirection } from "@abgov/ui-components-common";
 
 interface WCProps {
   name?: string;

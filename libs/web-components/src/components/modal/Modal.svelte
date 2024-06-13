@@ -277,8 +277,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--goa-color-greyscale-black);
     z-index: 1;
+    opacity: var(--goa-opacity-background-modal);
   }
 
   .emergency {

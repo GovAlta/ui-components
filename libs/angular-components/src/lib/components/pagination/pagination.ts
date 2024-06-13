@@ -1,9 +1,5 @@
-import { GoABPaginationVariant, Spacing } from "@abgov/ui-components-common";
+import { GoABPaginationOnChangeDetail, GoABPaginationVariant, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
-
-export type GoABPaginationOnChangeDetail = {
-  page: number;
-}
 
 @Component({
   standalone: true,

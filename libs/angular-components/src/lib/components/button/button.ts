@@ -17,7 +17,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       [mb]="mb"
       [ml]="ml"
       [mr]="mr"
-      (_click)="_onClick($event)"
+      (_click)="_onClick()"
     >
       <ng-content />
     </goa-button>
@@ -25,7 +25,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABButton {
-  @Input() type?: GoABButtonType;
+  @Input() type?: GoABButtonType = "primary";
   @Input() size?: GoABButtonSize;
   @Input() variant?: GoABButtonVariant;
   @Input() disabled?: boolean;
@@ -39,7 +39,8 @@ export class GoABButton {
 
   @Output() onClick = new EventEmitter();
 
-  _onClick(_: any) {
+  _onClick() {
+    console.log("button emit click")
     this.onClick.emit();
   }
 }

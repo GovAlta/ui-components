@@ -27,23 +27,21 @@
   // Hooks
 
   onMount(() => {
-    _fileInput.addEventListener(
-      "change",
-      () => {
-        issues = []; // reset on every new batch of files
-        // @ts-expect-error
-        [..._fileInput.files].forEach((file) => {
-          const error = validate(file);
-          if (error) {
-            issues = [{ filename: file.name, error }, ...issues];
-            return;
-          }
-          dispatch(file);
-        });
-        _fileInput.value = "";
-      },
-      true,
-    );
+    _fileInput.addEventListener("change", () => {
+      console.log("select file", _fileInput.files)
+      issues = []; // reset on every new batch of files
+      // @ts-expect-error
+      [..._fileInput.files].forEach((file) => {
+        const error = validate(file);
+        console.log("error", error)
+        if (error) {
+          issues = [{ filename: file.name, error }, ...issues];
+          return;
+        }
+        dispatch(file);
+      });
+      _fileInput.value = "";
+    });
   });
 
   // Functions
@@ -93,6 +91,7 @@
   }
 
   function dispatch(file: File) {
+    console.log("dispatching!!")
     _el.dispatchEvent(
       new CustomEvent("_selectFile", {
         composed: true,

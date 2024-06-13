@@ -2,6 +2,7 @@ import {
   GoABContainerAccent,
   GoABContainerPadding,
   GoABContainerType,
+  GoABContainerWidth,
   Margins,
 } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
@@ -10,6 +11,7 @@ interface WCProps extends Margins {
   type?: GoABContainerType;
   accent?: GoABContainerAccent;
   padding?: GoABContainerPadding;
+  width?: GoABContainerWidth;
 }
 
 declare global {
@@ -29,6 +31,7 @@ export interface GoABContainerProps extends Margins {
   padding?: GoABContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
+  width?: GoABContainerWidth;
   testId?: string;
 }
 
@@ -40,6 +43,7 @@ export function GoABContainer({
   children,
   actions,
   type,
+  width,
   mt,
   mr,
   mb,
@@ -52,6 +56,7 @@ export function GoABContainer({
       type={type}
       padding={padding}
       accent={accent}
+      width={width}
       mt={mt}
       mr={mr}
       mb={mb}

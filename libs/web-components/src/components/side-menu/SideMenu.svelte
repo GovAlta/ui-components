@@ -2,13 +2,17 @@
 
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
-  import { isUrlMatch } from "../../common/urls";
+  import { getSlottedChildren } from "../../common/utils";
+  import { isUrlMatch, getMatchedLink } from "../../common/urls";
+  import { SideMenuGroupProps } from "../side-menu-group/SideMenuGroup.svelte";
 
   let _rootEl: HTMLElement;
+  let _sideMenuLinks: Element[] = [];
+  let _sideMenuGroupItems: SideMenuGroupProps[] = [];
 
   onMount(async () => {
     await tick();
-    setCurrentUrl();
+    getChildren();
     addEventListeners();
   });
 
@@ -16,35 +20,54 @@
     removeEventListeners();
   });
 
+  function getChildren() {
+    if (!_rootEl) return;
+
+    const slotChildren = getSlottedChildren(_rootEl);
+
+    if (slotChildren.length === 0) return;
+
+    _sideMenuLinks = slotChildren
+      .filter((el) => el.tagName === "A")
+      .map((el) => {
+        el.classList.remove("current");
+        return el;
+      });
+
+    _rootEl.addEventListener("sidemenugroup:mounted", (e: Event) => {
+      const sideMenuGroupProps = (e as CustomEvent<SideMenuGroupProps>).detail;
+      _sideMenuGroupItems = [..._sideMenuGroupItems, sideMenuGroupProps];
+      setCurrentUrl();
+    });
+  }
+
   function setCurrentUrl() {
-    const slot = _rootEl.querySelector("slot") as HTMLSlotElement;
-    if (!slot) {
-      return;
-    }
+    const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
 
-    const links = slot
-      .assignedElements()
-      .filter((el: Element) => el.tagName === "A");
-
-    let currentEl: Element | undefined = undefined;
-    let maxWeight = 0;
-    links.forEach((child: Element) => {
-      const weight = isUrlMatch(
-        document.location,
-        child.getAttribute("href") || "",
-      );
-
-      if (weight > maxWeight) {
-        maxWeight = weight;
-        currentEl = child;
-      }
-      child.classList.remove("current");
+    // check all links under SideMenu and SideMenuGroups
+    let links = [..._sideMenuLinks];
+    _sideMenuGroupItems.forEach((el) => {
+      links = [...links, ...el.links];
     });
 
-    if (!!currentEl) {
-      // @ts-expect-error
-      currentEl?.classList.add("current");
-    }
+    links.forEach((link) => link.classList.remove("current"));
+
+    const currentEl = getMatchedLink(links, window.location);
+    currentEl?.classList.add("current");
+
+    // even nothing is matched, we should inform side menu group to close and remove current
+    dispatchCurrentUrl(currentEl?.getAttribute("href") || "");
+  }
+
+  function dispatchCurrentUrl(href: string) {
+    _sideMenuGroupItems.forEach((item) => {
+      item.el.dispatchEvent(
+        new CustomEvent("sidemenu:current:change", {
+          composed: true,
+          detail: href,
+        }),
+      );
+    });
   }
 
   function addEventListeners() {
@@ -87,9 +110,11 @@
     font: var(--goa-typography-heading-s);
     background: #cedfee;
   }
+
   :global(::slotted(a:hover:not(.current))) {
     background: #cedfee;
   }
+
   :global(::slotted(a:focus-visible)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
   }

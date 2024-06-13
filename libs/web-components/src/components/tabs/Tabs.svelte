@@ -45,7 +45,8 @@
       _bindTimeoutId = setTimeout(() => {
         bindChildren();
         setCurrentTab(initialtab || 1);
-      });
+      }, 1);
+      e.stopPropagation();
     });
   }
 
@@ -90,7 +91,7 @@
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
       link.appendChild(headingEl);
 
-      _tabsEl.appendChild(link);
+      _tabsEl?.appendChild(link);
     });
   }
 
@@ -104,17 +105,19 @@
   }
 
   function setCurrentTab(tab: number) {
+    if (!_tabsEl) return;
+
     // prevent tab from exceeding limits
     _currentTab = clamp(tab, 1, _tabProps.length);
 
     let currentLocation = "";
+    // @ts-expect-error
     [..._tabsEl.querySelectorAll("[role=tab]")].map((el, index) => {
-      const isCurrent = index + 1 === _currentTab; // currentTab is 1-based
+      const isCurrent = index + 1 === +_currentTab; // currentTab is 1-based
       el.setAttribute("aria-selected", fromBoolean(isCurrent));
       el.setAttribute("tabindex", isCurrent ? "0" : "-1");
       if (isCurrent) {
         currentLocation = (el as HTMLLinkElement).href;
-        // @ts-expect-error
         el.focus();
       }
     });
@@ -124,7 +127,7 @@
         new CustomEvent("tabs:set-open", {
           composed: true,
           detail: {
-            open: i + 1 === tab,
+            open: i + 1 === +tab,
           },
         }),
       );
@@ -230,9 +233,7 @@
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
   }
 
-  :global([role="tab"]:hover:not([aria-selected="true"])),
-  :global([role="tab"]:focus:not([aria-selected="true"])),
-  :global([role="tab"]:focus-visible:not([aria-selected="true"])) {
+  :global([role="tab"]:hover:not([aria-selected="true"])) {
     border-color: var(--goa-color-greyscale-200);
   }
 

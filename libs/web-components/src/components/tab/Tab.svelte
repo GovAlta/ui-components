@@ -64,12 +64,11 @@
       open = !!props.open;
     })
   }
-  
 </script>
 
 <section bind:this={_rootEl}>
-  <div bind:this={_headingSlotEl}>
-    <slot style="display:none" name="heading" />
+  <div bind:this={_headingSlotEl} style="display:none">
+    <slot name="heading" />
     {heading}
   </div>
   {#if open}

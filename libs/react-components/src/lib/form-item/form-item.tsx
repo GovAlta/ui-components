@@ -26,8 +26,8 @@ export interface GoABFormItemProps extends Margins {
   label?: string;
   labelSize?: GoABFormItemLabelSize;
   requirement?: GoABFormItemRequirement;
-  error?: string;
-  helpText?: string;
+  error?: React.ReactNode;
+  helpText?: React.ReactNode;
   children?: React.ReactNode;
   testId?: string;
   id?: string;
@@ -51,9 +51,9 @@ export function GoABFormItem({
     <goa-form-item
       label={label}
       labelsize={labelSize}
-      error={error}
+      error={typeof error === "string" ? error : undefined}
       requirement={requirement}
-      helptext={helpText}
+      helptext={typeof helpText === "string" ? helpText : undefined}
       mt={mt}
       mr={mr}
       mb={mb}
@@ -61,6 +61,8 @@ export function GoABFormItem({
       data-testid={testId}
       id={id}
     >
+      {error && typeof error !== "string" && <div slot="error">{error}</div>}
+      {helpText && typeof helpText !== "string" && <div slot="helptext">{helpText}</div>}
       {children}
     </goa-form-item>
   );

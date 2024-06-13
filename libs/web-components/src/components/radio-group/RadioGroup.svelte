@@ -67,7 +67,7 @@
       }
       _bindTimeoutId = setTimeout(() => {
         bindOptions();
-      })
+      }, 1)
     })    
   }
 
