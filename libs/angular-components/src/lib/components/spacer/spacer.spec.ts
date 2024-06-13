@@ -1,17 +1,31 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABSpacer } from "./spacer";
+import { Component } from "@angular/core";
 
-let component: GoABSpacer;
-let fixture: ComponentFixture<GoABSpacer>;
+@Component({
+  template: `
+  <goab-spacer hSpacing="2xl" vSpacing="m" testId="foo"></goab-spacer>
+  `
+})
+class TestSpacerComponent {/** do nothing **/}
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    imports: [GoABSpacer],
+describe("GoASpacer", () => {
+  let fixture: ComponentFixture<TestSpacerComponent>;
+
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      declarations: [TestSpacerComponent],
+      imports: [GoABSpacer]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestSpacerComponent);
+    fixture.detectChanges();
   });
-  fixture = TestBed.createComponent(GoABSpacer);
-  component = fixture.componentInstance;
-});
 
-it("should render", () => {
-  expect(component).toBeTruthy();
+  it("should render", () => {
+    const el = fixture.nativeElement.querySelector("goa-spacer");
+    expect(el?.getAttribute("hspacing")).toBe("2xl");
+    expect(el?.getAttribute("vspacing")).toBe("m");
+    expect(el?.getAttribute("data-testid")).toBe("foo");
+  });
 });

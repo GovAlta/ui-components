@@ -5,15 +5,16 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   standalone: true,
   selector: "goab-file-upload-card",
   template: `<goa-file-upload-card
-    [filename]="filename"
-    [size]="size"
-    [type]="type"
-    [progress]="progress"
-    [error]="error"
-    [mt]="mt"
-    [mb]="mb"
-    [mr]="mr"
-    [ml]="ml"
+    [attr.filename]="filename"
+    [attr.size]="size"
+    [attr.type]="type"
+    [attr.progress]="progress"
+    [attr.error]="error"
+    [attr.data-testid]="testId"
+    [attr.mt]="mt"
+    [attr.mb]="mb"
+    [attr.mr]="mr"
+    [attr.ml]="ml"
     (_cancel)="_onCancel()"
     (_delete)="_onDelete()"
   >
@@ -30,6 +31,7 @@ export class GoABFileUploadCard {
   @Input() type?: string;
   @Input() progress?: number;
   @Input() error?: string;
+  @Input() testId?: string;
 
   @Output() onCancel = new EventEmitter<GoABFileUploadOnCancelDetail>();
   @Output() onDelete = new EventEmitter<GoABFileUploadOnDeleteDetail>();

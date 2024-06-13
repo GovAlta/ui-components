@@ -6,7 +6,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
   template: `<goa-column-layout>
     <ng-content />
   </goa-column-layout>`,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABColumnLayout { /** no props **/ }
-
+export class GoABColumnLayout {
+  /** no props **/
+}
