@@ -6,7 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-accordion",
   template: `
     <goa-accordion
-      [heading]="heading"
+      [attr.heading]="heading"
       [secondarytext]="secondaryText"
       [open]="open"
       [headingsize]="headingSize"
