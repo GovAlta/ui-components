@@ -6,21 +6,20 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   standalone: true,
   selector: "goab-checkbox",
   template: `<goa-checkbox
-    [name]="name"
-    [checked]="checked"
-    [disabled]="disabled"
-    [error]="error"
-    [text]="text"
-    [value]="value"
-    [testid]="testId"
-    [arialabel]="ariaLabel"
-    [description]="description"
-    [testid]="testId"
-    [mt]="mt"
-    [mb]="mb"
-    [ml]="ml"
-    [mr]="mr"
-
+    [attr.name]="name"
+    [attr.checked]="checked"
+    [attr.disabled]="disabled"
+    [attr.error]="error"
+    [attr.text]="text"
+    [attr.value]="value"
+    [attr.testid]="testId"
+    [attr.arialabel]="ariaLabel"
+    [attr.description]="description"
+    [attr.testid]="testId"
+    [attr.mt]="mt"
+    [attr.mb]="mb"
+    [attr.ml]="ml"
+    [attr.mr]="mr"
     (_change)="_onChange($event)"
   >
     <ng-content />

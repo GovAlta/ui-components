@@ -6,14 +6,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-details",
   template: `
     <goa-details
-      [heading]="heading"
-      [testid]="testId"
-      [open]="open"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
-
+      [attr.heading]="heading"
+      [attr.data-testid]="testId"
+      [attr.open]="open"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
       <ng-content />
     </goa-details>

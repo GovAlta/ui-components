@@ -6,17 +6,16 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-accordion",
   template: `
     <goa-accordion
-      [heading]="heading"
-      [secondarytext]="secondaryText"
-      [open]="open"
-      [headingsize]="headingSize"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
+      [attr.heading]="heading"
+      [attr.secondarytext]="secondaryText"
+      [attr.open]="open"
+      [attr.headingsize]="headingSize"
+      [attr.testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
-      <ng-content select="[slot=headingContent]" />
       <ng-content />
     </goa-accordion>
   `,

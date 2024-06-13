@@ -6,24 +6,24 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-popover",
   template: `
     <goa-popover
-      [maxwidth]="maxWidth"
-      [padded]="padded"
-      [position]="position"
-      [relative]="relative"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
+      [attr.maxwidth]="maxWidth"
+      [attr.padded]="padded"
+      [attr.position]="position"
+      [attr.relative]="relative"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
       <ng-content />
     </goa-popover>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoABPopover {
-  @Input() maxWidth: string = "320px";
-  @Input() padded: boolean = true;
+  @Input() maxWidth = "320px";
+  @Input() padded = true;
   @Input() position?: GoABPopoverPosition;
   @Input() relative?: boolean;
   @Input() testId?: string;

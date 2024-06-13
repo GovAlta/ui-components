@@ -5,9 +5,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-tab",
   template: `
     <goa-tab
-      [heading]="heading"
+      [attr.heading]="heading"
     >
-      <ng-content select="[slot=heading]" />
       <ng-content />
     </goa-tab>
   `,

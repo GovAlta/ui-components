@@ -1,6 +1,6 @@
 import { GoABDropdownOnChangeDetail, GoABIconType, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
-import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 // FIXME: issues exist when the `filterable` is set
 @Component({
@@ -8,27 +8,26 @@ import { NG_VALUE_ACCESSOR } from "@angular/forms";
   selector: "goab-dropdown",
   template: `
     <goa-dropdown
-      [name]="name"
-      [value]="value"
-      [arialabel]="ariaLabel"
-      [arialabelledby]="ariaLabelledBy"
-      [id]="id"
-      [disabled]="disabled"
-      [error]="error"
-      [filterable]="filterable"
-      [leadingicon]="leadingIcon"
-      [maxheight]="maxHeight"
-      [multiselect]="multiselect"
-      [native]="native"
-      [placeholder]="placeholder"
-      [testid]="testId"
-      [width]="width"
-      [relative]="relative"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
-
+      [attr.name]="name"
+      [attr.value]="value"
+      [attr.arialabel]="ariaLabel"
+      [attr.arialabelledby]="ariaLabelledBy"
+      [attr.disabled]="disabled"
+      [attr.error]="error"
+      [attr.filterable]="filterable"
+      [attr.leadingicon]="leadingIcon"
+      [attr.maxheight]="maxHeight"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
+      [attr.mt]="mt"
+      [attr.multiselect]="multiselect"
+      [attr.native]="native"
+      [attr.placeholder]="placeholder"
+      [attr.data-testid]="testId"
+      [attr.width]="width"
+      [attr.relative]="relative"
+      [attr.id]="id"
       (_change)="_onChange($event)"
     >
       <ng-content />
@@ -39,11 +38,11 @@ import { NG_VALUE_ACCESSOR } from "@angular/forms";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: GoABDropdown,
+      useExisting: forwardRef(() => GoABDropdown),
     }
   ],
 })
-export class GoABDropdown {
+export class GoABDropdown implements ControlValueAccessor{
   @Input() name?: string;
   @Input() value?: string;
   @Input() ariaLabel?: string;
