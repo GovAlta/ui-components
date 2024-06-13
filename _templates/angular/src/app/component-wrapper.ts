@@ -3,8 +3,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 import { faker } from "@faker-js/faker";
 import { CommonModule } from "@angular/common";
 
-import { GoABAccordion, GoABAppFooter, GoABAppFooterMetaSection, GoABAppFooterNavSection, GoABAppHeader, GoABAppHeaderMenu, GoABBadge, GoABBlock, GoABButton, GoABButtonGroup, GoABCallout, GoABCheckbox, GoABChip, GoABCircularProgress, GoABContainer, GoABDatePicker, GoABDetails, GoABDivider, GoABDropdown, GoABDropdownItem, GoABFileUploadCard, GoABFileUploadInput, GoABFormItem, GoABFormStep, GoABFormStepper, GoABHeroBanner, GoABHeroBannerActions, GoABIcon, GoABIconButton, GoABInput, GoABModal, GoABNotificationBanner, GoABPages, GoABPagination, GoABPopover, GoABRadioGroup, GoABRadioItem, GoABSideMenu, GoABSideMenuGroup, GoABSideMenuHeading, GoABSkeleton, GoABTab, GoABTable, GoABTabs, GoABTextArea, GoABTooltip, GoABPaginationOnChangeDetail, GoABTextAreaOnChangeDetail } from "@abgov/angular-components";
-import { GoABDatePickerOnChangeDetail, GoABFormStepStatus, GoABRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
+import { GoABAccordion, GoABAppFooter, GoABAppFooterMetaSection, GoABAppFooterNavSection, GoABAppHeader, GoABAppHeaderMenu, GoABBadge, GoABBlock, GoABButton, GoABButtonGroup, GoABCallout, GoABCheckbox, GoABChip, GoABCircularProgress, GoABContainer, GoABDatePicker, GoABDetails, GoABDivider, GoABDropdown, GoABDropdownItem, GoABFileUploadCard, GoABFileUploadInput, GoABFormItem, GoABFormStep, GoABFormStepper, GoABHeroBanner, GoABHeroBannerActions, GoABIcon, GoABIconButton, GoABInput, GoABModal, GoABNotificationBanner, GoABPages, GoABPagination, GoABPopover, GoABRadioGroup, GoABRadioItem, GoABSideMenu, GoABSideMenuGroup, GoABSideMenuHeading, GoABSkeleton, GoABTab, GoABTable, GoABTabs, GoABTextArea, GoABTooltip } from "@abgov/angular-components";
+import { GoABDropdownOnChangeDetail, GoABFormStepStatus, GoABFormStepperOnChangeDetail, GoABPaginationOnChangeDetail, GoABRadioGroupOnChangeDetail, GoABTextAreaOnChangeDetail } from "@abgov/ui-components-common";
 import { FormControl } from "@angular/forms";
 
 interface User {
@@ -330,14 +330,14 @@ interface User {
 
   <h3>Dropdown</h3>
 
-  <goab-dropdown (_change)="onDropdownChange($event)" name="color" filterable="true">
+  <goab-dropdown (onChange)="onDropdownChange($event)" name="color" [filterable]="true">
     <goab-dropdown-item value="red" label="Red" />
     <goab-dropdown-item value="blue" label="Blue" />
     <goab-dropdown-item value="green" label="Green" />
   </goab-dropdown>
 
   <h3>Date Picker</h3>
-    <goab-datepicker name="birthdate" (onChange)="onDateChange($event)" />
+  <goab-datepicker name="birthdate" (onChange)="onDateChange($event)" />
 
   <h3>Modal</h3>
     <goab-modal [open]="modalOpen" (onClose)="onModalClose()" [closable]="true" maxWidth="500px">
@@ -449,7 +449,7 @@ interface User {
 
   <h3>Form Item</h3>
     <goab-form-item label="Upload a file" helpText="Select a file">
-      <goab-file-upload-input (_selectFile)="noop()" />
+      <goab-file-upload-input (_selectFile)="noop()" variant="dragdrop" />
       <goab-file-upload-card
         type="pdf"
         [size]="123"
@@ -564,7 +564,13 @@ export class ComponentWrapperPage {
     ];
   }
 
-  handlePageChange(e: any) {
+  // handlePageChange(e: any) {
+  //   this.page = e.page;
+  //   const offset = (this.page - 1) * this.perPage;
+  //   this.pageUsers = this.users.slice(offset, offset + this.perPage)
+  // }
+
+  handlePageChange(e: GoABPaginationOnChangeDetail) {
     this.page = e.page;
     const offset = (this.page - 1) * this.perPage;
     this.pageUsers = this.users.slice(offset, offset + this.perPage)
@@ -585,6 +591,7 @@ export class ComponentWrapperPage {
 
   noop() { }
 
+
   onStep(nextStep: number) {
     console.log("onstep", this.step, nextStep)
     this.stepStates[this.step - 1] = "complete";
@@ -599,11 +606,11 @@ export class ComponentWrapperPage {
     this.modalOpen = true
   }
 
-  onDropdownChange(e: any) {
+  onDropdownChange(e: GoABDropdownOnChangeDetail) {
     console.log("in dropdown change handler", e)
   }
 
-  onStepChange(e: any) {
+  onStepChange(e: GoABFormStepperOnChangeDetail) {
     console.log("in form step change handler", e)
   }
 
@@ -616,9 +623,22 @@ export class ComponentWrapperPage {
     this.modalOpen = false;
   }
 
-  onRadioChange(e: any) {
+  onRadioChange(e: GoABRadioGroupOnChangeDetail) {
     // handle change
     console.log("onChange", e);
+  }
+
+  // pagination
+
+  // table
+
+
+  onTextAreaChange(e: GoABTextAreaOnChangeDetail) {
+    console.log(e.name, e.value);
+  }
+
+  loadData() {
+    this.blockData = "this is the data"
   }
 
   // pagination
@@ -631,216 +651,4 @@ export class ComponentWrapperPage {
       (a: any, b: any) => (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir
     );
   }
-
-  onTextAreaChange(e: any) {
-    console.log(e.name, e.value);
-  }
-
-  loadData() {
-    this.blockData = "this is the data"
-  }
 }
-
-
-
-// import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
-
-// import { faker } from "@faker-js/faker";
-// import { CommonModule } from "@angular/common";
-
-// import { GoABAccordion, GoABAppFooter, GoABAppFooterMetaSection, GoABAppFooterNavSection, GoABAppHeader, GoABAppHeaderMenu, GoABBadge, GoABBlock, GoABButton, GoABButtonGroup, GoABCallout, GoABCheckbox, GoABChip, GoABCircularProgress, GoABContainer, GoABDatePicker, GoABDetails, GoABDivider, GoABDropdown, GoABDropdownItem, GoABFileUploadCard, GoABFileUploadInput, GoABFormItem, GoABFormStep, GoABFormStepper, GoABHeroBanner, GoABHeroBannerActions, GoABIcon, GoABIconButton, GoABInput, GoABModal, GoABNotificationBanner, GoABPages, GoABPagination, GoABPopover, GoABRadioGroup, GoABRadioItem, GoABSideMenu, GoABSideMenuGroup, GoABSideMenuHeading, GoABSkeleton, GoABTab, GoABTable, GoABTabs, GoABTextArea, GoABTooltip, GoABPaginationOnChangeDetail, GoABTextAreaOnChangeDetail } from "@abgov/angular-components";
-// import { GoABDatePickerOnChangeDetail, GoABFormStepStatus, GoABRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
-// import { FormControl } from "@angular/forms";
-
-// interface User {
-//   id: string;
-//   firstName: string;
-//   lastName: string;
-//   age: number;
-// }
-
-// @Component({
-//   standalone: true,
-//   selector: "goab-component-wrapper",
-//   template: `
-
-//   `,
-//   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-//   imports: [
-//     CommonModule,
-//     GoABBadge,
-//     GoABButton,
-//     GoABDropdown,
-//     GoABDropdownItem,
-//     GoABDatePicker,
-//     GoABModal,
-//     GoABAccordion,
-//     GoABAppFooter,
-//     GoABAppFooterMetaSection,
-//     GoABAppFooterNavSection,
-//     GoABAppHeader,
-//     GoABAppHeaderMenu,
-//     GoABButtonGroup,
-//     GoABCallout,
-//     GoABCheckbox,
-//     GoABChip,
-//     GoABContainer,
-//     GoABDetails,
-//     GoABDivider,
-//     GoABFileUploadCard,
-//     GoABFileUploadInput,
-//     GoABFormItem,
-//     GoABFormStep,
-//     GoABFormStepper,
-//     GoABPages,
-//     GoABHeroBanner,
-//     GoABHeroBannerActions,
-//     GoABIcon,
-//     GoABIconButton,
-//     GoABInput,
-//     GoABNotificationBanner,
-//     GoABPagination,
-//     GoABPopover,
-//     GoABCircularProgress,
-//     GoABRadioGroup,
-//     GoABRadioItem,
-//     GoABSideMenu,
-//     GoABSideMenuGroup,
-//     GoABSideMenuHeading,
-//     GoABSkeleton,
-//     GoABTable,
-//     GoABTabs,
-//     GoABTab,
-//     GoABTextArea,
-//     GoABTooltip,
-//     GoABBlock,
-//   ]
-// })
-// export class ComponentWrapperPage {
-//   modalOpen = false;
-
-//   users: User[] = [];
-//   pageUsers: User[] = []
-//   page: number = 1;
-//   perPage: number = 10;
-//   sortUsers: User[] = [];
-
-//   blockData: string | undefined;
-
-//   itemFormCtrl = new FormControl();
-
-//   constructor() {
-//     for (let i = 0; i < 100; i++) {
-//       this.users.push({
-//         id: faker.string.uuid(),
-//         firstName: faker.person.firstName(),
-//         lastName: faker.person.lastName(),
-//         age: faker.number.int({ min: 18, max: 60 }),
-//       });
-//     }
-//     this.pageUsers = this.users.slice(0, this.perPage)
-
-//     this.sortUsers = [
-//       {
-//         id: "99",
-//         firstName: "Christian",
-//         lastName: "Batz",
-//         age: 18
-//       },
-//       {
-//         id: "99",
-//         firstName: "Brain",
-//         lastName: "Wisozk",
-//         age: 19
-//       },
-//       {
-//         id: "99",
-//         firstName: "Neha",
-//         lastName: "Jones",
-//         age: 23
-//       },
-//       {
-//         id: "99",
-//         firstName: "Tristin",
-//         lastName: "Buckridge",
-//         age: 31
-//       }
-//     ];
-//   }
-
-//   handlePageChange(e: GoABPaginationOnChangeDetail) {
-//     this.page = e.page;
-//     const offset = (this.page - 1) * this.perPage;
-//     this.pageUsers = this.users.slice(offset, offset + this.perPage)
-//   }
-
-//   stepStates: GoABFormStepStatus[] = [
-//     "unstarted",
-//     "unstarted",
-//     "unstarted",
-//     "unstarted",
-//   ]
-
-//   step = 1;
-//   updateStep(event: any) {
-//     console.log("anguarl update step", event)
-//     this.step = event.step;
-//   }
-
-//   noop() { }
-
-//   onStep(nextStep: number) {
-//     console.log("onstep", this.step, nextStep)
-//     this.stepStates[this.step - 1] = "complete";
-//     this.step = nextStep;
-//   }
-
-//   onClick() {
-//     console.log("nice click");
-//   }
-
-//   onModalClick() {
-//     this.modalOpen = true
-//   }
-
-//   onDropdownChange(e: any) {
-//     console.log("in dropdown change handler", e)
-//   }
-
-//   onStepChange(e: any) {
-//     console.log("in form step change handler", e)
-//   }
-
-//   onDateChange(e: GoABDatePickerOnChangeDetail) {
-//     console.log("in datepicker change handler", e.name, e.value)
-//   }
-
-//   onModalClose() {
-//     console.log("modal is now closed")
-//     this.modalOpen = false;
-//   }
-
-//   onRadioChange(e: GoABRadioGroupOnChangeDetail) {
-//     // handle change
-//     console.log("onChange", e);
-//   }
-
-//   // pagination
-
-//   // table
-
-//   handleSort(event: any) {
-//     const { sortBy, sortDir } = event.detail;
-//     this.sortUsers.sort(
-//       (a: any, b: any) => (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir
-//     );
-//   }
-
-//   onTextAreaChange(e: GoABTextAreaOnChangeDetail) {
-//     console.log(e.name, e.value);
-//   }
-
-//   loadData() {
-//     this.blockData = "this is the data"
-//   }
-// }

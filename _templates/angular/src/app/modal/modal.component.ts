@@ -1,12 +1,23 @@
+import { GoABButton, GoABButtonGroup, GoABDropdown, GoABDropdownItem, GoABFormItem, GoABInput, GoABModal } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: "goab-modal",
-  templateUrl: "./modal.component.html"
+  standalone: true,
+  selector: "abgov-modal",
+  templateUrl: "./modal.component.html",
+  imports: [
+    GoABModal,
+    GoABButton,
+    GoABButtonGroup,
+    GoABFormItem,
+    GoABInput,
+    GoABDropdown,
+    GoABDropdownItem,
+  ],
 })
 export class ModalComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   transition: "fast" | "slow" | "none" = "fast";
 

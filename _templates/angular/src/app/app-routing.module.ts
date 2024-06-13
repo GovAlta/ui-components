@@ -11,7 +11,7 @@ import { CalloutComponent } from "playground/angular/src/app/callout/callout.com
 import { CheckboxComponent } from "playground/angular/src/app/checkbox/checkbox.component";
 import { ChipComponent } from "playground/angular/src/app/chip/chip.component";
 import { CircularProgressComponent } from "playground/angular/src/app/circular-progress/circular-progress.component";
-import { ContainerComponent } from "playground/angular/src/app/container/container.component";
+import { ContainerComponent } from "./container/ContainerComponent";
 import { DetailComponent } from "playground/angular/src/app/detail/detail";
 import { DividerComponent } from "playground/angular/src/app/divider/divider.component";
 import { DropdownComponent } from "playground/angular/src/app/dropdown/dropdown.component";

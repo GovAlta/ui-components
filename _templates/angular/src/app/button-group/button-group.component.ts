@@ -1,11 +1,17 @@
+import { GoABButton, GoABButtonGroup } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "goab-button-group",
+  standalone: true,
+  selector: "abgov-button-group",
   templateUrl: "./button-group.component.html",
+  imports: [
+    GoABButton,
+    GoABButtonGroup,
+  ]
 })
 export class ButtonGroupComponent {
-  constructor() {}
+  constructor() { }
 
   onClick() {
     console.log("clicked");

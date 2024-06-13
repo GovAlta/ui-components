@@ -1,5 +1,10 @@
 <h2>Accordion</h2>
 
+<goab-accordion heading="Heading" headingSize="medium">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+</goab-accordion>
+
 <goab-accordion heading="This is the title">
   <p>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi tempora optio illum
@@ -9,7 +14,7 @@
     pariatur quibusdam magni eum vitae similique, laboriosam reiciendis repellat sapiente.
     Nobis laudantium facilis incidunt!
   </p>
-  <goa-button (_click)="onClick()" size="compact" type="primary">Link to application</goa-button>
+  <goab-button (_click)="onClick()" size="compact" type="primary">Link to application</goab-button>
 </goab-accordion>
 
 <goab-accordion heading="This is the title" secondarytext="Secondary text">
@@ -26,10 +31,6 @@
 <goab-button type="tertiary" mb="xl" (_click)="onClick()">
   Toggle Accordion Group
 </goab-button>
-
-<goabx-button type="tertiary" mb="xl" (_click)="onClick()">
-  This is the GoABX
-</goabx-button>
 
 <goab-accordion heading="Heading" [open]="open"> Content 1 </goab-accordion>
 <goab-accordion heading="Heading" [open]="open">

@@ -1,58 +1,51 @@
 <h1>Button</h1>
 
 <h2>Types</h2>
-<goa-button (_click)="onClick()" type="submit">Submit</goa-button>
-<goa-button (_click)="onClick()" type="secondary">Secondary</goa-button>
-<goa-button (_click)="onClick()" type="submit" ml="xl" mr="xl" mb="xl" mt="l">
+<goab-button (onClick)="onClick()" type="submit">Submit</goab-button>
+<goab-button (onClick)="onClick()" type="secondary">Secondary</goab-button>
+<goab-button (onClick)="onClick()" type="submit" ml="xl" mr="xl" mb="xl" mt="l">
   Get Started here
-</goa-button>
-<goa-button (_click)="onClick()" type="tertiary">Tertiary</goa-button>
-<goa-button (_click)="onClick()" type="start">Get Started</goa-button>
+</goab-button>
+<goab-button (onClick)="onClick()" type="tertiary">Tertiary</goab-button>
+<goab-button (onClick)="onClick()" type="start">Get Started</goab-button>
 
-<goa-button-group gap="compact" align="left">
-  <goa-button (_click)="onClick()" type="submit"> Get Started </goa-button>
-  <goa-button (_click)="onClick()" type="tertiary">Tertiary</goa-button>
-  <goa-button (_click)="onClick()" type="start">Get Started</goa-button>
-</goa-button-group>
+<goab-button-group gap="compact" align="left">
+  <goab-button (onClick)="onClick()" type="submit"> Get Started </goab-button>
+  <goab-button (onClick)="onClick()" type="tertiary">Tertiary</goab-button>
+  <goab-button (onClick)="onClick()" type="start">Get Started</goab-button>
+</goab-button-group>
 
 <h2>Disabled</h2>
-<goa-button (_click)="onClick()" type="primary" disabled>Primary</goa-button>
-<goa-button (_click)="onClick()" type="secondary" disabled="true">
+<goab-button (onClick)="onClick()" type="primary" [disabled]="true">Primary</goab-button>
+<goab-button (onClick)="onClick()" type="secondary" [disabled]="true">
   Secondary
-</goa-button>
-<goa-button (_click)="onClick()" type="tertiary" disabled>Tertiary</goa-button>
-<goa-button (_click)="onClick()" type="start" disabled>Get Started</goa-button>
+</goab-button>
+<goab-button (onClick)="onClick()" type="tertiary" [disabled]="true">Tertiary</goab-button>
+<goab-button (onClick)="onClick()" type="start" [disabled]="true">Get Started</goab-button>
 
 <h2>Sizes</h2>
-<goa-button size="compact" (_click)="onClick()" type="primary">
+<goab-button size="compact" (onClick)="onClick()" type="primary">
   Compact Primary
-</goa-button>
-<goa-button size="compact" (_click)="onClick()" type="secondary">
+</goab-button>
+<goab-button size="compact" (onClick)="onClick()" type="secondary">
   Compact Secondary
-</goa-button>
-<goa-button size="compact" (_click)="onClick()" type="tertiary">
+</goab-button>
+<goab-button size="compact" (onClick)="onClick()" type="tertiary">
   Compact Tertiary
-</goa-button>
+</goab-button>
 
 <h2>Icons</h2>
-<goa-button-group gap="relaxed" align="left">
-  <goa-button leadingicon="airplane" (_click)="onClick()" type="primary">
+<goab-button-group gap="relaxed" align="left">
+  <goab-button leadingicon="airplane" (onClick)="onClick()" type="primary">
     Leading
-  </goa-button>
-  <goa-button trailingIcon="airplane" (_click)="onClick()" type="primary">
+  </goab-button>
+  <goab-button trailingIcon="airplane" (onClick)="onClick()" type="primary">
     Trailing
-  </goa-button>
-  <goa-button
-    leadingicon="archive"
-    trailingicon="airplane"
-    (_click)="onClick()"
-    type="primary"
-  >
+  </goab-button>
+  <goab-button leadingicon="archive" trailingicon="airplane" (onClick)="onClick()" type="primary">
     Both
-  </goa-button>
-</goa-button-group>
+  </goab-button>
+</goab-button-group>
 
 <h2>Margin Spacing</h2>
-<goa-button mt="m" mb="xs" ml="xl" mr="2xl" (_click)="onClick()" type="submit"
->Submit</goa-button
->
+<goab-button mt="m" mb="xs" ml="xl" mr="2xl" (onClick)="onClick()" type="submit">Submit</goab-button>

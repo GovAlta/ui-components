@@ -1,9 +1,20 @@
+import { GoABFormItem, GoABInput, GoABTextArea } from "@abgov/angular-components";
+import { GoABTextAreaOnChangeDetail, GoABTextAreaOnKeyPressDetail } from "@abgov/ui-components-common";
+import { JsonPipe } from "@angular/common";
 import { Component } from "@angular/core";
-import {FormControl, FormGroup} from "@angular/forms";
+import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
-  selector: "goab-text-area",
+  standalone: true,
+  selector: "abgov-text-area",
   templateUrl: "./text-area.component.html",
+  imports: [
+    GoABTextArea,
+    GoABFormItem,
+    GoABInput,
+    ReactiveFormsModule,
+    JsonPipe,
+  ]
 })
 export class TextAreaComponent {
   boundVal = "";
@@ -15,11 +26,12 @@ export class TextAreaComponent {
 
   constructor() { }
 
-  onChange(e: any) {
-    console.log("changed", e.detail.name, e.detail.value);
+  onChange(e: GoABTextAreaOnChangeDetail) {
+    console.log("onChange", e.value)
+    this.boundVal = e.value;
   }
 
-  onKeyPress(e: any) {
-    console.log("changed", e.detail.name, e.detail.value, e.detail.key);
+  onKeyPress(e: GoABTextAreaOnKeyPressDetail) {
+    // console.log("keypressed", e.name, e.value, e.key);
   }
 }

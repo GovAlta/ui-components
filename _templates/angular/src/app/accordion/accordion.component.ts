@@ -1,10 +1,16 @@
-import { Component } from "@angular/core";
-
-// import { GoABAccordion } from "@abgov/angular-components";
+import { GoABAccordion, GoABBadge, GoABButton } from "@abgov/angular-components";
+import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 
 @Component({
-  selector: "gov-accordion",
+  standalone: true,
+  selector: "abgov-accordion",
   templateUrl: "./accordion.component.html",
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [
+    GoABAccordion,
+    GoABButton,
+    GoABBadge,
+  ],
 })
 export class AccordionComponent {
   constructor() { }

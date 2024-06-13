@@ -1,9 +1,18 @@
+import { GoABIconButton } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "goab-icon-button",
+  standalone: true,
+  selector: "abgov-icon-button",
   templateUrl: "./icon-button.component.html",
+  imports: [
+    GoABIconButton,
+  ]
 })
 export class IconButtonComponent {
-  constructor() {}
+  constructor() { }
+
+  onClick() {
+    console.log('clicked')
+  }
 }

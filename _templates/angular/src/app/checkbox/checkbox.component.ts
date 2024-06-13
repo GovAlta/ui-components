@@ -1,15 +1,22 @@
+import { GoABCheckbox } from "@abgov/angular-components";
+import { GoABCheckboxOnChangeDetail } from "@abgov/ui-components-common";
 import { Component } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
-  selector: "goab-checkbox",
+  standalone: true,
+  selector: "abgov-checkbox",
   templateUrl: "./checkbox.component.html",
+  imports: [
+    GoABCheckbox,
+    ReactiveFormsModule,
+  ]
 })
 export class CheckboxComponent {
   checkbox1Checked = false;
   checkbox2Checked = true;
   checkbox3Checked = false;
-  reactiveFormCtrl = new FormControl();
+  reactiveFormCtrl = new FormControl("foobar");
   testFormCtrl = new FormControl({
     value: null,
     disabled: true
@@ -19,18 +26,20 @@ export class CheckboxComponent {
   bindingNoVal = "";
 
   constructor() {
-   // this.testFormCtrl.disable();
   }
 
-  onChange() {
+  onChange(e: GoABCheckboxOnChangeDetail) {
+    console.log(e)
     this.checkbox1Checked = !this.checkbox1Checked;
   }
 
-  onChange2() {
+  onChange2(e: GoABCheckboxOnChangeDetail) {
+    console.log(e)
     this.checkbox2Checked = !this.checkbox2Checked;
   }
 
-  onChange3() {
+  onChange3(e: GoABCheckboxOnChangeDetail) {
+    console.log(e)
     this.checkbox3Checked = !this.checkbox3Checked;
   }
 }
