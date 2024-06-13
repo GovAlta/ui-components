@@ -1,10 +1,5 @@
-import { GoABTableVariant, Spacing } from "@abgov/ui-components-common";
+import { GoABTableOnSortDetail, GoABTableVariant, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
-
-type GoABTableOnSortDetail = {
-  sortBy: string;
-  sortDir: number;
-}
 
 @Component({
   standalone: true,

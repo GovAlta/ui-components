@@ -17,7 +17,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       [ml]="ml"
       [mr]="mr"
 
-      (onClick)="_onClick($event)"
+      (_click)="_onClick()"
     >
     </goa-icon-button>
   `,
@@ -37,7 +37,7 @@ export class GoABIconButton {
 
   @Output() onClick = new EventEmitter();
 
-  _onClick(_: any) {
-    this.onClick.emit()
+  _onClick() {
+    this.onClick.emit();
   }
 }
