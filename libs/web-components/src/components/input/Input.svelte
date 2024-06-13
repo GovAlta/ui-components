@@ -10,6 +10,7 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
   import { onMount, tick } from "svelte";
+  import { FormItemChannelProps } from "../form-item/FormItem.svelte";
 
   // Validators
   const [Types, validateType] = typeValidator("Input type", [
@@ -176,6 +177,16 @@
     if (trailingContentSlot && trailingContentSlot.assignedNodes().length > 0) {
       _trailingContentSlot = true;
     }
+
+    setTimeout(() => {
+      _rootEl?.dispatchEvent(
+        new CustomEvent<FormItemChannelProps>("input:mounted", {
+          composed: true,
+          bubbles: true,
+          detail: { el: inputEl },
+        }),
+      );
+    }, 10);
   });
 </script>
 
@@ -231,7 +242,7 @@
       {maxlength}
       id={id || name}
       role="textbox"
-      aria-label={arialabel || name}
+      aria-label={arialabel}
       aria-labelledby={arialabelledby}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
@@ -291,7 +302,6 @@
     }
   }
 
-
   .goa-input,
   .goa-input * {
     box-sizing: border-box;
@@ -318,7 +328,6 @@
     box-shadow: 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-hover);
   }
-
 
   /* type=range does not have an outline/box-shadow */
   .goa-input.type--range {
@@ -366,11 +375,9 @@
     cursor: pointer;
   }
 
-
   .leading-icon + input {
     padding-left: 0.5rem;
   }
-
 
   .input--disabled,
   .input--disabled:hover,
@@ -390,7 +397,6 @@
   .input--disabled input:hover {
     cursor: default !important;
   }
-
 
   .prefix,
   .suffix,
@@ -424,7 +430,6 @@
     border-left: 1px solid var(--goa-color-greyscale-700);
   }
 
-
   .input--disabled .prefix,
   .input--disabled .leading-content-slot :global(::slotted(div)) {
     border-right: 1px solid var(--goa-color-greyscale-200);
@@ -433,7 +438,6 @@
   .input--disabled .trailing-content-slot :global(::slotted(div)) {
     border-left: 1px solid var(--goa-color-greyscale-200);
   }
-
 
   /* Themes */
   input.input--goa {
@@ -466,8 +470,7 @@
   .error .input-leading-content:hover,
   .error .input-trailing-content,
   .error .input-trailing-content:hover {
-    outline: var(--goa-border-width-s) solid
-      var(--goa-color-interactive-error);
+    outline: var(--goa-border-width-s) solid var(--goa-color-interactive-error);
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-error);
   }
@@ -475,20 +478,16 @@
   .error .input-trailing-content:focus,
   .error .input-leading-content:active,
   .error .input-trailing-content:active {
-    outline: var(--goa-border-width-s) solid
-      var(--goa-color-interactive-error);
+    outline: var(--goa-border-width-s) solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 var(--goa-border-width-l)
       var(--goa-color-interactive-focus);
   }
-
-
 
   .input-leading-content:hover,
   .input-trailing-content:hover {
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-hover);
-    outline: var(--goa-border-width-s) solid
-      var(--goa-color-interactive-hover);
+    outline: var(--goa-border-width-s) solid var(--goa-color-interactive-hover);
   }
   .input-leading-content:active,
   .input-leading-content:focus,
@@ -500,7 +499,6 @@
       var(--goa-color-interactive-focus);
     outline: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
   }
-
 
   .error .input-trailing-content,
   .input-trailing-content:hover,
