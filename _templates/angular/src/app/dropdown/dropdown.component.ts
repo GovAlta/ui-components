@@ -1,16 +1,32 @@
+import { GoABContainer, GoABDatePicker, GoABDropdown, GoABDropdownItem, GoABFormItem, GoABInput, GoABSpacer } from "@abgov/angular-components";
+import { GoABDatePickerOnChangeDetail, GoABDropdownOnChangeDetail } from "@abgov/ui-components-common";
+import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { Countries, CountrySubdivisions } from "playground/angular/src/app/dropdown/countries.data";
 
 @Component({
-  selector: "goab-dropdown",
+  standalone: true,
+  selector: "abgov-dropdown",
   templateUrl: "./dropdown.component.html",
+  imports: [
+    GoABDropdown,
+    GoABDropdownItem,
+    GoABFormItem,
+    GoABContainer,
+    GoABDatePicker,
+    GoABInput,
+    GoABSpacer,
+    ReactiveFormsModule,
+    CommonModule,
+  ]
 })
 export class DropdownComponent implements OnInit {
   colors: string[] = [];
   selectedColor = "red";
   boundVal = "";
-  reactiveFormCtrl = new FormControl({ value: "green", disabled: true });
+  reactiveFormCtrl = new FormControl({ value: "green", disabled: false });
+  disabledFormCtrl = new FormControl({ value: "green", disabled: true });
 
   dropdownCtrl = new FormControl('');
   form = new FormGroup({
@@ -18,14 +34,14 @@ export class DropdownComponent implements OnInit {
   });
 
   item = new Date();
-  onChange(event: Event) {
+  onChange(e: GoABDatePickerOnChangeDetail) {
     // handle change
-    console.log((event as CustomEvent).detail.value);
+    console.log(e);
   }
 
   ngOnInit() {
     console.log("setting colors in 3 secs")
-    setTimeout(() => this.colors = ["Chris", "James", "John"], 100);
+    setTimeout(() => this.colors = ["Chris", "James", "John"], 3000);
   }
 
   color = new FormControl("green");
@@ -94,9 +110,9 @@ export class DropdownComponent implements OnInit {
     });
   }
 
-  selectColor(event: any) {
+  selectColor(event: GoABDropdownOnChangeDetail) {
     console.log("Select Color", event);
-    this.selectedColor = event.detail.value;
+    this.selectedColor = event.value || "";
   }
 
   selectProvince(event: any) {
@@ -108,8 +124,6 @@ export class DropdownComponent implements OnInit {
   }
 
   public readonly fruits = [
-    { value: "abc123", label: "ABC Child Care : 80001234" },
-    { value: "def456", label: "Able Daycare and Preschool : 800005674" },
     { value: "ghi789", label: "Cherry" },
     { value: "jkl012", label: "Date" },
     { value: "mno345", label: "Elderberry" },
@@ -119,6 +133,7 @@ export class DropdownComponent implements OnInit {
     { value: "yza567", label: "Kiwi" },
     { value: "bcd890", label: "Lemon" }
   ];
+
   options = [
     {
       value: 'All',
@@ -134,7 +149,7 @@ export class DropdownComponent implements OnInit {
     }
   ];
 
-  onChangeDropdown(e: Event) {
-    console.log((e as CustomEvent).detail)
+  onChangeDropdown(e: GoABDropdownOnChangeDetail) {
+    console.log(e)
   }
 }

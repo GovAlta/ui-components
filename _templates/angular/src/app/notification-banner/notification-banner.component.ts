@@ -1,11 +1,16 @@
+import { GoABNotificationBanner } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "goab-notification-banner",
-  templateUrl: "./notification-banner.component.html"
+  standalone: true,
+  selector: "abgov-notification-banner",
+  templateUrl: "./notification-banner.component.html",
+  imports: [
+    GoABNotificationBanner,
+  ]
 })
 export class NotificationBannerComponent {
-  constructor() {}
+  constructor() { }
 
   onDismiss() {
     console.log("dismissed");

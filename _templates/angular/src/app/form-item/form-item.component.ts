@@ -1,9 +1,21 @@
+import { GoABBlock, GoABButton, GoABDropdown, GoABDropdownItem, GoABFormItem, GoABInput } from "@abgov/angular-components";
+import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 
 @Component({
-  selector: "goab-form-item",
+  standalone: true,
+  selector: "abgov-form-item",
   templateUrl: "./form-item.component.html",
+  imports: [
+    GoABInput,
+    GoABFormItem,
+    GoABBlock,
+    GoABButton,
+    GoABDropdown,
+    GoABDropdownItem,
+    ReactiveFormsModule,
+  ]
 })
 export class FormItemComponent {
   formGroup = new FormGroup({
@@ -22,7 +34,7 @@ export class FormItemComponent {
       descriptionFormCtrl: this.descriptionFormCtrl,
     });
   }
-  searchRequesterClickIcon () {
+  searchRequesterClickIcon() {
     console.log("Current value ", this.formGroup.get("txtRequesterName")?.value);
     this.formGroup.get("txtRequesterName")?.patchValue("");
     console.log("New value ", this.formGroup.get("txtRequesterName")?.value);

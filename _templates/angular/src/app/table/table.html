@@ -1,17 +1,17 @@
 <h3>Normal</h3>
-<goa-table width="100%" mb="xl" (_sort)="handleSort($event)">
+<goab-table width="100%" mb="xl" (onSort)="handleSort($event)">
   <thead>
     <tr>
       <th>
-        <goa-table-sort-header name="firstName">First name and really long header</goa-table-sort-header>
+        <goab-table-sort-header name="firstName">First name and really long header</goab-table-sort-header>
       </th>
       <th>
-        <goa-table-sort-header name="lastName">Last name</goa-table-sort-header>
+        <goab-table-sort-header name="lastName">Last name</goab-table-sort-header>
       </th>
-      <th class="goa-table-number-header">
+      <th class="goab-table-number-header">
         Age
-        <!--      <goa-table-sort-header name="age" direction="asc">-->
-        <!--        Age</goa-table-sort-header>-->
+        <!--      <goab-table-sort-header name="age" direction="asc">-->
+        <!--        Age</goab-table-sort-header>-->
 
       </th>
     </tr>
@@ -20,13 +20,13 @@
     <tr *ngFor="let user of users; index as i">
       <td>{{ user.firstName }}</td>
       <td>{{ user.lastName }}</td>
-      <td class="goa-table-number-column">{{ user.age }}</td>
+      <td class="goab-table-number-column">{{ user.age }}</td>
     </tr>
   </tbody>
-</goa-table>
+</goab-table>
 
 <h3>Relaxed</h3>
-<goa-table width="500px" mb="xl" variant="relaxed">
+<goab-table width="500px" mb="xl" variant="relaxed">
   <thead>
     <tr>
       <th>Col 1</th>
@@ -37,21 +37,21 @@
   <tbody>
     <tr>
       <td>
-        <goa-block alignment="center" gap="xs">
-          <goa-icon type="alarm"></goa-icon>Item 1
-        </goa-block>
+        <goab-block alignment="center" gap="xs">
+          <goab-icon type="alarm"></goab-icon>Item 1
+        </goab-block>
       </td>
       <td>Item 2</td>
       <td>Item 3</td>
     </tr>
     <tr>
       <td>
-        <goa-block alignment="center" gap="xs">
-          <goa-icon type="alarm"></goa-icon>Item 1
-        </goa-block>
+        <goab-block alignment="center" gap="xs">
+          <goab-icon type="alarm"></goab-icon>Item 1
+        </goab-block>
       </td>
       <td>Item 2</td>
       <td>Item 3</td>
     </tr>
   </tbody>
-</goa-table>
+</goab-table>

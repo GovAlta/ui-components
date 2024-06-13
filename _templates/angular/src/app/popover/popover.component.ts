@@ -1,11 +1,20 @@
+import { GoABBlock, GoABButton, GoABButtonGroup, GoABIconButton, GoABPopover, GoABSpacer } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "goab-popover",
+  standalone: true,
+  selector: "abgov-popover",
   templateUrl: "./popover.component.html",
+  imports: [
+    GoABPopover,
+    GoABButton,
+    GoABButtonGroup,
+    GoABBlock,
+    GoABSpacer,
+  ]
 })
 export class PopoverComponent {
-  constructor() {}
+  constructor() { }
 
   onClick() {
     console.log("clicked");

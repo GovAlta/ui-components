@@ -1,18 +1,29 @@
+import { GoABFormItem, GoABRadioGroup, GoABRadioItem } from "@abgov/angular-components";
+import { GoABRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
+import { NgForOf } from "@angular/common";
 import { Component } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
-  selector: "goab-radio",
+  standalone: true,
+  selector: "abgov-radio",
   templateUrl: "./radio.component.html",
   styleUrls: ["./radio.component.css"],
+  imports: [
+    GoABRadioGroup,
+    GoABRadioItem,
+    GoABFormItem,
+    ReactiveFormsModule,
+    NgForOf,
+  ]
 })
 export class RadioComponent {
   constructor() { }
 
   boundVal = "";
-  radioValue = ""
+  radioValue = "orange"
 
-  reactiveFormCtrl = new FormControl();
+  reactiveFormCtrl = new FormControl("blue");
 
   dynamicItems = [
     {
@@ -31,8 +42,8 @@ export class RadioComponent {
     },
   ];
 
-  onChange(e: any) {
-    console.log("onChange", e.detail.name, e.detail.value);
-    this.radioValue = e.detail.value;
+  onChange(e: GoABRadioGroupOnChangeDetail) {
+    console.log("onChange", e.name, e.value);
+    this.radioValue = e.value;
   }
 }

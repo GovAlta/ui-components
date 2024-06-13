@@ -1,59 +1,52 @@
 <h2>Tooltip</h2>
 
-<div
-  style="
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  "
->
-  <goa-tooltip content="Trying some more long form text here to see how it's rendered">
-    <goa-icon type="information-circle" />
-  </goa-tooltip>
-  <goa-tooltip content="{{ randomValue }}">
-    <goa-icon type="information-circle" />
-  </goa-tooltip>
 
-<!--  <goa-tooltip content="This is a  tooltip" position="left">-->
-<!--    <goa-icon type="information-circle"></goa-icon>-->
-<!--  </goa-tooltip>-->
-<!--  <goa-tooltip content="This is a  tooltip" position="right">-->
-<!--    <goa-icon type="information-circle"></goa-icon>-->
-<!--  </goa-tooltip>-->
+<h4>Content</h4>
 
-<!--  <goa-tooltip content="This is a  tooltip" position="top">-->
-<!--    <goa-icon type="information-circle"></goa-icon>-->
-<!--  </goa-tooltip>-->
-<!--  <goa-tooltip content="This is a  tooltip" position="bottom">-->
-<!--    <goa-icon type="information-circle"></goa-icon>-->
-<!--  </goa-tooltip>-->
-<!--  <goa-tooltip-->
-<!--    content="This is a  tooltip with alignment"-->
-<!--    position="top"-->
-<!--    halign="left"-->
-<!--  >-->
-<!--    <goa-icon type="information-circle"></goa-icon>-->
-<!--  </goa-tooltip>-->
-<!--  <goa-tooltip-->
-<!--    content="This is a  tooltip with alignment"-->
-<!--    position="top"-->
-<!--    halign="right"-->
-<!--  >-->
-<!--    <goa-icon type="information-circle"></goa-icon>-->
-<!--  </goa-tooltip>-->
-<!--  <goa-tooltip-->
-<!--    content="This is a  tooltip with alignment"-->
-<!--    position="bottom"-->
-<!--    halign="left"-->
-<!--  >-->
-<!--    <goa-icon type="information-circle"></goa-icon>-->
-<!--  </goa-tooltip>-->
-<!--  <goa-tooltip-->
-<!--    content="This is a  tooltip with alignment"-->
-<!--    position="bottom"-->
-<!--    halign="right"-->
-<!--  >-->
-<!--    <goa-icon type="information-circle"></goa-icon>-->
-<!--  </goa-tooltip>-->
-</div>
+<goab-tooltip content="Trying some more long form text here to see how it's rendered">
+  <goab-icon type="information-circle" />
+</goab-tooltip>
+
+<goab-tooltip [content]="randomValue">
+  <goab-icon type="information-circle" />
+</goab-tooltip>
+
+<h4>Left</h4>
+<goab-tooltip content="This is a  tooltip" position="left">
+  <goab-icon type="information-circle"></goab-icon>
+</goab-tooltip>
+
+<h4>Right</h4>
+<goab-tooltip content="This is a  tooltip" position="right">
+  <goab-icon type="information-circle"></goab-icon>
+</goab-tooltip>
+
+<h4>Top</h4>
+<goab-tooltip content="This is a  tooltip" position="top">
+  <goab-icon type="information-circle"></goab-icon>
+</goab-tooltip>
+
+<h4>Bottom</h4>
+<goab-tooltip content="This is a  tooltip" position="bottom">
+  <goab-icon type="information-circle"></goab-icon>
+</goab-tooltip>
+
+<h4>Top left</h4>
+<goab-tooltip content="This is a  tooltip with alignment" position="top" hAlign="left">
+  <goab-icon type="information-circle"></goab-icon>
+</goab-tooltip>
+
+<h4>Top right</h4>
+<goab-tooltip content="This is a  tooltip with alignment" position="top" hAlign="right">
+  <goab-icon type="information-circle"></goab-icon>
+</goab-tooltip>
+
+<h4>Bottom left</h4>
+<goab-tooltip content="This is a  tooltip with alignment" position="bottom" hAlign="left">
+  <goab-icon type="information-circle"></goab-icon>
+</goab-tooltip>
+
+<h4>Bottom right</h4>
+<goab-tooltip content="This is a  tooltip with alignment" position="bottom" hAlign="right">
+  <goab-icon type="information-circle"></goab-icon>
+</goab-tooltip>

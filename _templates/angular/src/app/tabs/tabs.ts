@@ -1,7 +1,14 @@
+import { GoABBadge, GoABTab, GoABTabs } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "goab-tabs",
+  standalone: true,
+  selector: "abgov-tabs",
   templateUrl: "./tabs.html",
+  imports: [
+    GoABTab,
+    GoABTabs,
+    GoABBadge,
+  ]
 })
-export class TabsComponent {}
+export class TabsComponent { }

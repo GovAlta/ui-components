@@ -1,8 +1,9 @@
 <h1>File Upload</h1>
 
-<goa-file-upload-input accept=".doc,docx,.png,.pdf" (_selectFile)="uploadFile($event)"></goa-file-upload-input>
+<goab-file-upload-input accept=".doc,docx,.png,.pdf" variant="dragdrop" maxFileSize="10MB"
+  (onSelectFile)="uploadFile($event)" />
 
-<goa-file-upload-card *ngFor="let upload of uploads; index as i" [type]="upload.file.type" [size]="upload.file.size"
-  [filename]="upload.file.name" [progress]="progressList[upload.file.name]" (_delete)="deleteFile(upload)"
-  (_cancel)="deleteFile(upload)">
-</goa-file-upload-card>
+<goab-file-upload-card *ngFor="let upload of uploads; index as i" [type]="upload.file.type" [size]="upload.file.size"
+  [filename]="upload.file.name" [progress]="progressList[upload.file.name]" (onDelete)="deleteFile(upload)"
+  (onCancel)="deleteFile(upload)">
+</goab-file-upload-card>

@@ -1,9 +1,15 @@
+import { GoABAppHeader, GoABAppHeaderMenu } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "goab-app-header",
-  templateUrl: "./app-header.component.html"
+  standalone: true,
+  selector: "abgov-app-header",
+  templateUrl: "./app-header.component.html",
+  imports: [
+    GoABAppHeader,
+    GoABAppHeaderMenu,
+  ],
 })
 export class AppHeaderComponent {
-  constructor() {}
+  constructor() { }
 }

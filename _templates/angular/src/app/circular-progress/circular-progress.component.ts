@@ -1,8 +1,14 @@
+import { GoABButton, GoABCircularProgress } from "@abgov/angular-components";
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "goab-circular-progress",
+  standalone: true,
+  selector: "abgov-circular-progress",
   templateUrl: "./circular-progress.component.html",
+  imports: [
+    GoABCircularProgress,
+    GoABButton,
+  ]
 })
 export class CircularProgressComponent implements OnInit {
   progress = 0;
@@ -17,7 +23,7 @@ export class CircularProgressComponent implements OnInit {
   fullscreenProgressVisible = false;
   showFullscreenProgressInterval: any;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     setInterval(() => {

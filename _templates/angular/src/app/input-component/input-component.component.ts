@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, NgModule, OnInit } from "@angular/core";
 import { format, parseISO } from "date-fns";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup, NgModel, ReactiveFormsModule } from "@angular/forms";
+import { GoABBadge, GoABDatePicker, GoABFormItem, GoABInput } from "@abgov/angular-components";
+import { JsonPipe } from "@angular/common";
 
 interface User {
   firstName: string;
@@ -9,8 +11,17 @@ interface User {
 }
 
 @Component({
-  selector: "goab-input-component",
+  standalone: true,
+  selector: "abgov-input-component",
   templateUrl: "./input-component.component.html",
+  imports: [
+    GoABInput,
+    GoABDatePicker,
+    GoABBadge,
+    GoABFormItem,
+    JsonPipe,
+    ReactiveFormsModule,
+  ],
 })
 export class InputComponentComponent implements OnInit {
   date = new Date();
@@ -34,6 +45,14 @@ export class InputComponentComponent implements OnInit {
 
   users: User[] = [];
 
+  form = new FormGroup({
+    first: new FormControl("reactive form")
+  })
+
+  onSubmit(e: any) {
+    console.log("onSubmit", this.form);
+  }
+
   getUser() {
     console.log("getting user");
     return {
@@ -50,7 +69,7 @@ export class InputComponentComponent implements OnInit {
   }
 
   updateInput(event: any) {
-    this.wcVal = event.detail.value;
+    this.wcVal = event.value;
   }
 
   getDateWithMonthOffset(offset: number) {
