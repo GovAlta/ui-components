@@ -5,7 +5,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-tabs",
   template: `
     <goa-tabs
-      [initialtab]="initialTab"
+      [attr.initialtab]="initialTab"
+      [attr.data-testid]="testId"
     >
       <ng-content />
     </goa-tabs>
@@ -14,5 +15,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 })
 export class GoABTabs {
   @Input() initialTab?: number;
+  @Input() testId?: string;
 }
 

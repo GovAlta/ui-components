@@ -95,7 +95,7 @@ describe('GoACheckbox Component', () => {
       checkbox?.addEventListener('_change', (e: Event) => {
         const detail = (e as CustomEvent).detail;
         expect(detail.name).toBe('checkbox-test-name');
-        expect(detail.value).toBe('checked');
+        expect(detail.value).toBe('');
         expect(detail.checked).toBeTruthy();
         change();
       })
@@ -112,7 +112,7 @@ describe('GoACheckbox Component', () => {
       checkbox?.addEventListener('_change', (e: Event) => {
         const detail = (e as CustomEvent).detail;
         expect(detail.name).toBe('checkbox-test-name');
-        expect(detail.value).toBe('');
+        expect(detail.value).toBe(undefined);
         expect(detail.checked).toBeFalsy();
         change();
       })

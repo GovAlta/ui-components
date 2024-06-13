@@ -6,29 +6,31 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   selector: "goab-icon-button",
   template: `
     <goa-icon-button
-      [icon]="icon"
-      [size]="size"
-      [variant]="variant"
+      [attr.icon]="icon"
+      [attr.disabled]="disabled"
+      [attr.size]="size"
+      [attr.variant]="variant"
       [title]="title"
-      [disabled]="disabled"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
-
+      [attr.arialabel]="ariaLabel"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
       (_click)="_onClick()"
     >
+      <ng-content></ng-content>
     </goa-icon-button>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABIconButton {
-  @Input() icon?: GoABIconType;
+  @Input({ required: true }) icon!: GoABIconType;
   @Input() size?: GoABIconSize = "medium";
   @Input() variant?: GoABIconButtonVariant;
   @Input() title?: string;
   @Input() disabled?: boolean;
+  @Input() ariaLabel?: string;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

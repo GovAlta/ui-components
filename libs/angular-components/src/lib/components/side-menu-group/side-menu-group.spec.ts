@@ -1,17 +1,38 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABSideMenuGroup } from "./side-menu-group";
+import { Component } from "@angular/core";
 
-let component: GoABSideMenuGroup;
-let fixture: ComponentFixture<GoABSideMenuGroup>;
+@Component({
+  template: `
+  <goab-side-menu-group [heading]="heading" [testId]="testId">
+    <a href="#">Link</a>
+  </goab-side-menu-group>
+  `
+})
+class TestSideMenuGroupComponent {
+  heading = "some header";
+  testId = "foo";
+}
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    imports: [GoABSideMenuGroup],
+describe("GoABSideMenuGroup", () => {
+  let fixture: ComponentFixture<TestSideMenuGroupComponent>;
+  let component: TestSideMenuGroupComponent;
+
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      declarations: [TestSideMenuGroupComponent],
+      imports: [GoABSideMenuGroup]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestSideMenuGroupComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
-  fixture = TestBed.createComponent(GoABSideMenuGroup);
-  component = fixture.componentInstance;
-});
 
-it("should render", () => {
-  expect(component).toBeTruthy();
-});
+  it("should render", () => {
+    const el = fixture.nativeElement.querySelector("goa-side-menu-group");
+    expect(el?.getAttribute("heading")).toBe(component.heading);
+    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.querySelector("a")?.textContent).toContain("Link");
+  });
+})

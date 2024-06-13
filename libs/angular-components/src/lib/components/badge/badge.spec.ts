@@ -1,17 +1,74 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABBadge } from "./badge";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { GoABBadgeType, Spacing } from "@abgov/ui-components-common";
+import { By } from "@angular/platform-browser";
 
-let component: GoABBadge;
-let fixture: ComponentFixture<GoABBadge>;
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    imports: [GoABBadge],
+// <goa-badge type="information" [icon]=true content="Information" arialabel="123"></goa-badge>
+
+@Component({
+  template: `
+  <goab-badge [type]="type"
+              [icon]="icon"
+              [content]="content"
+              [ariaLabel]="ariaLabel"
+              [testId]="testId"
+              [mt]="mt"
+              [mb]="mb"
+              [ml]="ml"
+              [mr]="mr"
+  ></goab-badge>
+  `
+})
+class TestBadgeComponent{
+  type?: GoABBadgeType;
+  content?: string;
+  testId?: string;
+  icon?: boolean;
+  ariaLabel?: string;
+  mt?: Spacing;
+  mb?: Spacing;
+  ml?: Spacing;
+  mr?: Spacing;
+}
+
+describe("GoABBadge", () => {
+  let fixture: ComponentFixture<TestBadgeComponent>;
+  let component: TestBadgeComponent;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [GoABBadge],
+      declarations: [TestBadgeComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestBadgeComponent);
+    component = fixture.componentInstance;
+    component.type = "information";
+    component.content = "Information";
+    component.icon = true;
+    component.ariaLabel = "123";
+    component.testId = "test-id";
+    component.mt = "xs" as Spacing;
+    component.mb = "m" as Spacing;
+    component.ml = "l" as Spacing;
+    component.mr = "xl" as Spacing;
+
+    fixture.detectChanges();
   });
-  fixture = TestBed.createComponent(GoABBadge);
-  component = fixture.componentInstance;
-});
 
-it("should render", () => {
-  expect(component).toBeTruthy();
-});
+  it("should render and set the props correctly", () => {
+    const badgeElement = fixture.debugElement.query(By.css("goa-badge")).nativeElement;
+    expect(badgeElement.getAttribute("type")).toBe("information");
+    expect(badgeElement.getAttribute("content")).toBe("Information");
+    expect(badgeElement.getAttribute("icon")).toBe("true");
+    expect(badgeElement.getAttribute("arialabel")).toBe("123");
+    expect(badgeElement.getAttribute("testid")).toBe("test-id");
+    expect(badgeElement.getAttribute("mt")).toBe(component.mt);
+    expect(badgeElement.getAttribute("mb")).toBe(component.mb);
+    expect(badgeElement.getAttribute("ml")).toBe(component.ml);
+    expect(badgeElement.getAttribute("mr")).toBe(component.mr);
+  });
+})

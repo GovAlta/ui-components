@@ -6,19 +6,18 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-grid",
   template: `
     <goa-grid
-      [gap]="gap"
-      [minchildwidth]="minChildWidth"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
-
+      [attr.gap]="gap"
+      [attr.minchildwidth]="minChildWidth"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
       <ng-content />
     </goa-grid>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoABGrid {
   @Input({ required: true }) minChildWidth!: string;
