@@ -22,7 +22,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 })
 export class GoABSkeleton {
   @Input({ required: true }) type!: GoABSkeletonType;
-  @Input() maxWidth?: string;
+  @Input() maxWidth: string = "300px";
   @Input() size?: GoABSkeletonSize;
   @Input() lineCount?: number;
   @Input() testId?: string;

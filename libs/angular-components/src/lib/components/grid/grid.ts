@@ -15,6 +15,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [mr]="mr"
 
     >
+      <ng-content />
     </goa-grid>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

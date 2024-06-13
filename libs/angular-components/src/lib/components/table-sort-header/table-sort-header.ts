@@ -1,0 +1,20 @@
+import { GoABTableSortDirection } from "@abgov/ui-components-common";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+
+@Component({
+  standalone: true,
+  selector: "goab-table-sort-header",
+  template: `
+    <goa-table-sort-header
+      [name]="name"
+      [direction]="direction"
+    >
+      <ng-content />
+    </goa-table-sort-header>
+  `,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class GoABTableSortHeader {
+  @Input() name?: string;
+  @Input() direction?: GoABTableSortDirection;
+}

@@ -25,7 +25,7 @@ export class GoABBadge {
   @Input() type?: GoABBadgeType;
   @Input() content?: string;
   @Input() testId?: string;
-  @Input() icon?: GoABIcon;
+  @Input() icon?: boolean;
   @Input() ariaLabel?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

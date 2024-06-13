@@ -1,5 +1,6 @@
 import { GoABDropdownOnChangeDetail, GoABIconType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
 // FIXME: issues exist when the `filterable` is set
 @Component({
@@ -33,7 +34,14 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       <ng-content />
     </goa-dropdown>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: GoABDropdown,
+    }
+  ],
 })
 export class GoABDropdown {
   @Input() name?: string;
@@ -62,5 +70,34 @@ export class GoABDropdown {
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoABDropdownOnChangeDetail>).detail;
     this.onChange.emit(detail)
+
+    this.markAsTouched();
+    this.fcChange?.(detail.value || "");
+  }
+
+  // ControlValueAccessor
+
+  private fcChange?: (value: string) => void;
+  private fcTouched?: () => {};
+  touched = false;
+
+  markAsTouched() {
+    if (!this.touched) {
+      this.fcTouched?.();
+      this.touched = true;
+    }
+  }
+  writeValue(value: string): void {
+    this.value = value;
+  }
+  registerOnChange(fn: any): void {
+    this.fcChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.fcTouched = fn
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 }

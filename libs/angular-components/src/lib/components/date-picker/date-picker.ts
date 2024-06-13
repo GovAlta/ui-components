@@ -1,5 +1,6 @@
 import { GoABDatePickerOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import { ControlValueAccessor } from "@angular/forms";
 
 @Component({
   standalone: true,
@@ -33,6 +34,8 @@ export class GoABDatePicker {
   @Input() mr?: Spacing;
 
   @Output() onChange = new EventEmitter<GoABDatePickerOnChangeDetail>();
+
+
 
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoABDatePickerOnChangeDetail>).detail;

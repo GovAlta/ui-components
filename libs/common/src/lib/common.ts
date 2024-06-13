@@ -13,6 +13,8 @@ export type GoABInputOnChangeDetail<T = string> = {
 export type GoABInputOnFocusDetail<T = string> = GoABInputOnChangeDetail<T>;
 export type GoABInputOnBlurDetail<T = string> = GoABInputOnChangeDetail<T>;
 
+export type GoABInputAutoCapitalize = "on" | "off" | "none" | "sentences" | "words" | "characters";
+
 export type GoABInputOnKeyPressDetail<T = string> = {
   name: string;
   value: T;
@@ -52,6 +54,7 @@ export type GoABCheckboxOnChangeDetail = {
   name?: string;
   value?: string;
   checked: boolean;
+  binding: "value" | "check";
 }
 
 export type GoABCalendarOnChangeDetail = {
@@ -70,6 +73,10 @@ export type GoABBadgeType =
   | "light";
 
 export type GoABPaginationVariant = "all" | "links-only";
+
+export type GoABPaginationOnChangeDetail = {
+  page: number;
+}
 
 export type GoABFormStepperType = "constrained" | "free";
 export type GoABFormStepStatus = "complete" | "incomplete" | "unstarted";
@@ -124,7 +131,19 @@ export type GoABTooltipHorizontalAlignment = "left" | "right" | "center";
 
 // Textarea
 
-export type GoABTextAreaCountBy = "character" | "word";
+export type GoABTextAreaCountBy = "character" | "word" | "";
+
+
+export type GoABTextAreaOnChangeDetail = {
+  name: string;
+  value: string;
+}
+
+export type GoABTextAreaOnKeyPressDetail = {
+  name: string;
+  value: string;
+  key: string;
+}
 
 // Tabs
 
@@ -139,11 +158,18 @@ export interface GoABTabItemProps {
 // Table
 
 export type GoABTableVariant = "normal" | "relaxed";
+export type GoABTableSortDirection = "asc" | "desc" | "none";
 export interface GoABTableProps extends Margins {
   width?: string;
   onSort?: (sortBy: string, sortDir: number) => void;
   variant?: GoABTableVariant;
   testId?: string;
+}
+
+
+export type GoABTableOnSortDetail = {
+  sortBy: string;
+  sortDir: number;
 }
 
 // Spacer
@@ -180,7 +206,7 @@ export type GoABSkeletonType =
   | "profile"
   | "article";
 
-export type GoABSkeletonSize = 1 | 2 | 3 | 4;
+export type GoABSkeletonSize = "1" | "2" | "3" | "4";
 
 // Radio
 

@@ -30,10 +30,9 @@
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
-  $: count =
-    countby === "character"
-      ? value.length
-      : value.split(" ").filter((word) => word.trim().length > 0).length;
+  $: count = countby === "character"
+      ? value?.length
+      : value?.split(" ").filter((word) => word.trim().length > 0).length;
 
   // privates
 
@@ -149,24 +148,13 @@
     padding: var(--textarea-padding-vertical) var(--textarea-padding-horizontal);
     font-size: var(--goa-font-size-4);
     font-family: var(--goa-font-family-sans);
-    min-width: 100%;
+    width: 100%;
     resize: vertical;
-  }
-
-  @container self (--mobile) {
-    textarea {
-      width: 100%;
-      min-width: 100%;
-    }
   }
 
   @container self (--not-mobile) {
     .root {
       max-width: var(--width, 100%);
-    }
-    textarea {
-      min-width: 0;
-      width: var(--width, 100%);
     }
   }
 

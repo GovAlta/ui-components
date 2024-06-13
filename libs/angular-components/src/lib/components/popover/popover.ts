@@ -22,8 +22,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABPopover {
-  @Input() maxWidth?: string;
-  @Input() padded?: boolean = true;
+  @Input() maxWidth: string = "320px";
+  @Input() padded: boolean = true;
   @Input() position?: GoABPopoverPosition;
   @Input() relative?: boolean;
   @Input() testId?: string;
