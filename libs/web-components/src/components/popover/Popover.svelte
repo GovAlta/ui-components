@@ -223,6 +223,7 @@
     ${cssVar("--offset-right", hoffset)}
     ${cssVar("--focus-border-width", focusborderwidth)}
     ${cssVar("--border-radius", borderradius)}
+    ${cssVar("width", width)}
 `}
 >
   <!-- svelte-ignore a11y-no-static-element-interactions -->
