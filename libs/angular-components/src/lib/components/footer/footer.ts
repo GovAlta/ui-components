@@ -5,7 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-app-footer",
   template: `
     <goa-app-footer
-      [maxcontentwidth]="maxContentWidth"
+      [attr.maxcontentwidth]="maxContentWidth"
     >
       <ng-content select="[slot=nav]" />
       <ng-content select="[slot=meta]" />

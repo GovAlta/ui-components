@@ -5,15 +5,17 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-radio-item",
   template: `
     <goa-radio-item
-      [value]="value"
-      [label]="label"
-      [disabled]="disabled"
-      [checked]="checked"
-      [error]="error"
-      [testid]="testId"
+      [attr.name]="name"
+      [attr.value]="value"
+      [attr.label]="label"
+      [attr.description]="description"
+      [attr.arialabel]="ariaLabel"
+      [attr.disabled]="disabled"
+      [attr.checked]="checked"
+      [attr.error]="error"
+      [attr.data-testid]="testId"
     >
       <ng-content />
-      <ng-content selector="[slot=description]" />
     </goa-radio-item>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -21,6 +23,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 export class GoABRadioItem {
   @Input() value?: string;
   @Input() label?: string;
+  @Input() name?: string;
+  @Input() description?: string;
+  @Input() ariaLabel?: string;
   @Input() disabled?: boolean;
   @Input() checked?: boolean;
   @Input() error?: boolean;

@@ -6,14 +6,14 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-tooltip",
   template: `
     <goa-tooltip
-      [position]="position"
-      [content]="content"
-      [halign]="hAlign"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
+      [attr.position]="position"
+      [attr.content]="content"
+      [attr.halign]="hAlign"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
       <ng-content />
     </goa-tooltip>

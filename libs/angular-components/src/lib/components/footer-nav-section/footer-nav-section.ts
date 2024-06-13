@@ -5,8 +5,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-app-footer-nav-section",
   template: `
     <goa-app-footer-nav-section
-      [maxcolumncount]="maxColumnCount"
-      [heading]="heading"
+      [attr.maxcolumncount]="maxColumnCount"
+      [attr.heading]="heading"
+      [attr.data-testid]="testId"
+      slot="nav"
     >
       <ng-content />
     </goa-app-footer-nav-section>
@@ -16,5 +18,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 })
 export class GoABAppFooterNavSection {
   @Input() heading?: string;
-  @Input() maxColumnCount?: string;
+  @Input() maxColumnCount? = 1;
+  @Input() testId?: string;
 }

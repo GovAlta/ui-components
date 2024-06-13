@@ -6,14 +6,14 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-block",
   template: `
     <goa-block
-      [gap]="gap"
-      [direction]="direction"
-      [alignment]="alignment"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
+      [attr.gap]="gap"
+      [attr.direction]="direction"
+      [attr.alignment]="alignment"
+      [attr.testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
       <ng-content />
     </goa-block>

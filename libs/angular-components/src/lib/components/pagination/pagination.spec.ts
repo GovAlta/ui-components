@@ -1,17 +1,70 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABPagination } from "./pagination";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { GoABPaginationOnChangeDetail, GoABPaginationVariant, Spacing } from "@abgov/ui-components-common";
 
-let component: GoABPagination;
-let fixture: ComponentFixture<GoABPagination>;
+@Component({
+  template: `
+  <goab-pagination [itemCount]="itemCount"
+                    [pageNumber]="pageNumber"
+                    [perPageCount]="perPageCount"
+                    [variant]="variant"
+                    [mt]="mt"
+                    [mb]="mb"
+                    [ml]="ml"
+                    [mr]="mr"
+                    (onChange)="onChange($event)">
+  </goab-pagination>
+  `
+})
+class TestPaginationComponent {
+  itemCount = 100;
+  pageNumber = 1;
+  perPageCount = 20;
+  variant = "all" as GoABPaginationVariant;
+  mt = "s" as Spacing;
+  mb = "m"  as Spacing;
+  ml = "l"  as Spacing;
+  mr = "xl"  as Spacing;
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    imports: [GoABPagination],
+  onChange = (event: GoABPaginationOnChangeDetail) => {/** do nothing **/};
+}
+
+describe("GoABPagination", () => {
+  let fixture: ComponentFixture<TestPaginationComponent>;
+  let component: TestPaginationComponent;
+
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      declarations: [TestPaginationComponent],
+      imports: [GoABPagination],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestPaginationComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
-  fixture = TestBed.createComponent(GoABPagination);
-  component = fixture.componentInstance;
-});
 
-it("should render", () => {
-  expect(component).toBeTruthy();
+  it("should render successfully", () => {
+    const el = fixture.nativeElement.querySelector("goa-pagination");
+
+    expect(el.getAttribute("itemcount")).toBe(`${component.itemCount}`);
+    expect(el.getAttribute("pagenumber")).toBe(`${component.pageNumber}`);
+    expect(el.getAttribute("perpagecount")).toBe(`${component.perPageCount}`);
+    expect(el.getAttribute("variant")).toBe(component.variant);
+    expect(el.getAttribute("mt")).toBe(component.mt);
+    expect(el.getAttribute("mb")).toBe(component.mb);
+    expect(el.getAttribute("ml")).toBe(component.ml);
+    expect(el.getAttribute("mr")).toBe( component.mr);
+  });
+
+  it("should handle the onChange event", () => {
+    const onChangeSpy = jest.spyOn(component, "onChange");
+
+    const el = fixture.nativeElement.querySelector("goa-pagination");
+    el.dispatchEvent(new CustomEvent("_change", { detail: { page: 2 } }));
+
+    expect(onChangeSpy).toHaveBeenCalledWith({ page: 2 });
+  });
 });

@@ -6,15 +6,15 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-skeleton",
   template: `
     <goa-skeleton
-      [maxwidth]="maxWidth"
-      [size]="size"
-      [linecount]="lineCount"
-      [type]="type"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
+      [attr.maxwidth]="maxWidth"
+      [attr.size]="size"
+      [attr.linecount]="lineCount"
+      [attr.type]="type"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
     </goa-skeleton>
   `,
@@ -22,7 +22,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 })
 export class GoABSkeleton {
   @Input({ required: true }) type!: GoABSkeletonType;
-  @Input() maxWidth: string = "300px";
+  @Input() maxWidth= "300px";
   @Input() size?: GoABSkeletonSize;
   @Input() lineCount?: number;
   @Input() testId?: string;

@@ -7,12 +7,12 @@ import { GoABCircularProgressSize, GoABCircularProgressVariant } from "@abgov/ui
   selector: "goab-circular-progress",
   template: `
     <goa-circular-progress
-      [variant]="variant"
-      [size]="size"
-      [message]="message"
-      [visible]="visible"
-      [progress]="progress"
-      [testid]="testId"
+      [attr.variant]="variant"
+      [attr.size]="size"
+      [attr.message]="message"
+      [attr.visible]="visible"
+      [attr.progress]="progress"
+      [attr.testid]="testId"
     >
       <ng-content />
     </goa-circular-progress>

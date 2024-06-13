@@ -1,12 +1,14 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { GoABIconType } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
   selector: "goab-app-header-menu",
   template: `
     <goa-app-header-menu
-      [leadingicon]="leadingIcon"
-      [heading]="heading"
+      [attr.leadingicon]="leadingIcon"
+      [attr.heading]="heading"
+      [attr.data-testid]="testId"
     >
       <ng-content />
     </goa-app-header-menu>
@@ -14,6 +16,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABAppHeaderMenu {
-  @Input() leadingIcon?: string;
+  @Input() leadingIcon?: GoABIconType;
   @Input() heading?: string;
+  @Input() testId?: string;
 }

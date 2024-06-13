@@ -1,4 +1,4 @@
-import { GoABFormStepperOnChangeDetail, GoABFormStepperType, Spacing } from "@abgov/ui-components-common";
+import { GoABFormStepperOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
@@ -6,14 +6,12 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   selector: "goab-form-stepper",
   template: `
     <goa-form-stepper
-      [step]="step"
-      [type]="type"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
-
+      [attr.step]="step"
+      [attr.testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
       (_change)="onchange($event)"
     >
       <ng-content />
@@ -23,7 +21,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
 })
 export class GoABFormStepper {
   @Input() step?: number = -1;
-  @Input() type?: GoABFormStepperType;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

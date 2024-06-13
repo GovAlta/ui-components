@@ -1,17 +1,41 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABFormStep } from "./form-step";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { GoABFormStepStatus } from "@abgov/ui-components-common";
+import { By } from "@angular/platform-browser";
 
-let component: GoABFormStep;
-let fixture: ComponentFixture<GoABFormStep>;
+@Component({
+  template: `
+  <goab-form-step [text]="text"
+                  [status]="status"></goab-form-step>
+  `
+})
+class TestFormStepComponent {
+  text?: string;
+  status?: GoABFormStepStatus;
+}
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    imports: [GoABFormStep],
-  });
-  fixture = TestBed.createComponent(GoABFormStep);
-  component = fixture.componentInstance;
-});
+describe("GoABFormStep", () => {
+  let fixture: ComponentFixture<TestFormStepComponent>;
+  let component: TestFormStepComponent;
 
-it("should render", () => {
-  expect(component).toBeTruthy();
-});
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      declarations: [TestFormStepComponent],
+      imports: [GoABFormStep],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
+    fixture = TestBed.createComponent(TestFormStepComponent);
+    component = fixture.componentInstance;
+
+    component.text = "Step 1";
+    component.status = "complete";
+    fixture.detectChanges();
+  })
+
+  it("should render successfully", () => {
+    const el = fixture.debugElement.query(By.css("goa-form-step")).nativeElement;
+    expect(el?.getAttribute("text")).toBe(component.text);
+    expect(el?.getAttribute("status")).toBe(component.status);
+  })
+})
