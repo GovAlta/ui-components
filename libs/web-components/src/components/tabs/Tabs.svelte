@@ -13,8 +13,7 @@
   let _tabsEl: HTMLElement;
   let _panelEl: HTMLElement;
   let _currentTab: number = 1;
-
-  let _tabProps: GoATabProps[] = [];
+  let _tabProps: (GoATabProps & {bound: boolean})[] = [];
   let _bindTimeoutId: any;
 
   // ========
@@ -22,7 +21,7 @@
   // ========
 
   onMount(() => {
-    getChildren();
+    addChildMountListener();
     addKeyboardEventListeners();
   });
 
@@ -34,10 +33,12 @@
   // Functions
   // =========
 
-  function getChildren() {
+  function addChildMountListener() {
     _rootEl.addEventListener("tab:mounted", (e: Event) => {
       const detail = (e as CustomEvent<GoATabProps>).detail;
-      _tabProps = [..._tabProps, detail];
+
+      // tabs initially marked as unbound
+      _tabProps = [..._tabProps, {...detail, bound: false }];
 
       if (_bindTimeoutId) {
         clearTimeout(_bindTimeoutId);
@@ -57,6 +58,12 @@
     _tabProps.forEach((tabProps, index) => {
       let tabSlug: string = "";
       let headingEl: HTMLElement;
+
+      // ensure that any previously bound tabs are not re-bound
+      if (tabProps.bound) return;
+
+      // set bound status to prevend possible later rebinding
+      tabProps.bound = true;
 
       // sync all tabs to open tab
       tabProps.el.dispatchEvent(
