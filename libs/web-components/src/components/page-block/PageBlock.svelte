@@ -46,16 +46,16 @@
   .page-content {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 var(--goa-space-m);
   }
   @media not (--mobile) {
     .page-content {
-      padding: 0 2rem;
+      padding: 0 var(--goa-space-xl);
     }
   }
   @media (--desktop) {
     .page-content {
-      padding: 0 4.5rem;
+      padding: 0 var(--goa-space-3xl);
     }
   }
 </style>
