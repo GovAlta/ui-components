@@ -7,14 +7,14 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   template: `
     <goa-accordion
       [attr.heading]="heading"
-      [secondarytext]="secondaryText"
-      [open]="open"
-      [headingsize]="headingSize"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
+      [attr.secondarytext]="secondaryText"
+      [attr.open]="open"
+      [attr.headingsize]="headingSize"
+      [attr.testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
       <ng-content select="[slot=headingContent]" />
       <ng-content />

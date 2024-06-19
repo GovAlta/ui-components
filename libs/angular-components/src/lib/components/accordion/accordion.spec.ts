@@ -2,11 +2,16 @@ import { GoABAccordion } from "./accordion";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 import { By } from '@angular/platform-browser';
-import { prettyDOM } from "@testing-library/dom";
+import { GoABAccordionHeadingSize } from "@abgov/ui-components-common";
 
 @Component({
   template: `
-    <goab-accordion [heading]="heading">
+    <goab-accordion
+      [heading]="heading"
+      [secondaryText]="secondaryText"
+      [open]="open"
+      [headingSize]="headingSize"
+    >
       test content
       <div slot="headingcontent">
         This is the headingcontent
@@ -15,6 +20,9 @@ import { prettyDOM } from "@testing-library/dom";
 })
 class TestAccordionComponent {
   heading?: string;
+  secondaryText?: string;
+  open?: boolean;
+  headingSize?: GoABAccordionHeadingSize;
 }
 
 describe('GoABAccordion', () => {
@@ -31,16 +39,20 @@ describe('GoABAccordion', () => {
     fixture = TestBed.createComponent(TestAccordionComponent);
     component = fixture.componentInstance;
     component.heading = "hi";
+    component.secondaryText = "Secondary Text";
+    component.open = true;
+    component.headingSize = "large" as GoABAccordionHeadingSize;
 
     fixture.detectChanges();
   });
 
-  it("should render and match snapshot", () => {
-    expect(fixture).toBeTruthy();
-    fixture.detectChanges();
-    console.log(prettyDOM(fixture.debugElement.nativeElement));
+  it("should render and set the props correctly", () => {
     const accordionElement = fixture.debugElement.query(By.css('goa-accordion')).nativeElement;
     expect(accordionElement.getAttribute('heading')).toBe('hi');
-    expect(fixture).toMatchSnapshot();
+    expect(accordionElement.getAttribute('secondarytext')).toBe('Secondary Text');
+    expect(accordionElement.getAttribute('open')).toBe('true');
+    expect(accordionElement.getAttribute('headingsize')).toBe('large');
+    const headingContent = accordionElement.querySelector("[slot='headingcontent']");
+    expect(headingContent.textContent).toContain('This is the headingcontent');
   });
 });
