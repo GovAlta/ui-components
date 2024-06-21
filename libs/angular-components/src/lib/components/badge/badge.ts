@@ -1,21 +1,20 @@
 import { GoABBadgeType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
-import { GoABIcon } from "../icon/icon";
 
 @Component({
   standalone: true,
   selector: "goab-badge",
   template: `
     <goa-badge
-      [type]="type"
-      [icon]="icon"
-      [arialabel]="ariaLabel"
-      [content]="content"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
+      [attr.type]="type"
+      [attr.icon]="icon"
+      [attr.arialabel]="ariaLabel"
+      [attr.content]="content"
+      [attr.testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
     </goa-badge>
   `,
