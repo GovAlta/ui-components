@@ -9,12 +9,14 @@ describe("RadioItem", () => {
       label: "Radio Item 1",
       value: "radio-item-1",
       name: "radio-item-1-name",
+      maxwidth: "480px",
       arialabel: "radio-item-1-label",
       ariadescribedby: "radio-item-1-described-by",
     });
 
     expect(result.getByTestId("radio-option-radio-item-1")).toBeTruthy();
     const input = result.getByRole("radio");
+    const container = result.container.querySelector(".goa-radio-container");
     expect(input).toBeTruthy();
     expect(input.getAttribute("name")).toBe("radio-item-1-name");
     expect(input.getAttribute("value")).toBe("radio-item-1");
@@ -23,6 +25,7 @@ describe("RadioItem", () => {
       "radio-item-1-described-by",
     );
     expect(result.getByText("Radio Item 1")).toBeTruthy();
+    expect(container?.getAttribute("style")).toContain("max-width: 480px;");
   });
 
   it("should render the radio item with slot description", async () => {

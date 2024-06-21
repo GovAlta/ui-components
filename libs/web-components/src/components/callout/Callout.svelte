@@ -20,7 +20,6 @@
   ]);
 
   // Types
-
   type CalloutType = (typeof Types)[number];
   type CalloutSize = (typeof CalloutSizes)[number];
 
@@ -29,9 +28,11 @@
   export let mr: Spacing = null;
   export let mb: Spacing = "l";
   export let ml: Spacing = null;
+
   export let size: CalloutSize = "large";
   export let type: CalloutType;
   export let heading: string = "";
+  export let maxwidth: string = "none";
   export let testid: string = "";
 
   // Private
@@ -68,7 +69,10 @@
 <!-- HTML -->
 <svelte:window bind:innerWidth={screenSize} />
 <div
-  style={calculateMargin(mt, mr, mb, ml)}
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)};
+    max-width: ${maxwidth};
+  `}
   class="notification"
   class:medium={isMediumCallout}
   data-testid={testid}

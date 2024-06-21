@@ -40,6 +40,7 @@
   export let accent: Accent = "filled";
   export let padding: Padding = "relaxed";
   export let width: Width = "full";
+  export let maxwidth: string = "none";
   export let testid: string = "";
 
   // margin
@@ -60,7 +61,10 @@
 
 <div
   data-testid={testid}
-  style={calculateMargin(mt, mr, mb, ml)}
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)}
+    max-width: ${maxwidth};
+  `}
   class={`
     goa-container
     goa-container--${type}

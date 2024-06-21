@@ -26,6 +26,7 @@
   export let secondarytext: string = "";
   export let headingsize: HeadingSize = "small";
   export let id: string = "";
+  export let maxwidth: string = "none";
   export let testid: string = "";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -67,11 +68,14 @@
 
 <!-- HTML -->
 <div
-  style={calculateMargin(mt, mr, mb, ml)}
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)};
+    max-width: ${maxwidth};
+  `}
   class="goa-accordion"
   data-testid={testid}
 >
-  <details open={isOpen} on:toggle={({target}) => open = `${target?.open}`}>
+  <details open={isOpen} on:toggle={({ target }) => (open = `${target?.open}`)}>
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <summary
       class={`container-${headingsize}`}

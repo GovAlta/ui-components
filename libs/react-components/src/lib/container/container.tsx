@@ -17,6 +17,7 @@ interface WCProps extends Margins {
   accent?: GoAContainerAccent;
   padding?: GoAContainerPadding;
   width?: GoAContainerWidth;
+  maxwidth?: string;
 }
 
 declare global {
@@ -37,6 +38,7 @@ export interface GoAContainerProps extends Margins {
   actions?: ReactNode;
   children?: ReactNode;
   width?: GoAContainerWidth;
+  maxWidth?: string;
   testId?: string;
 }
 
@@ -49,6 +51,7 @@ export function GoAContainer({
   actions,
   type,
   width,
+  maxWidth,
   mt,
   mr,
   mb,
@@ -62,6 +65,7 @@ export function GoAContainer({
       padding={padding}
       accent={accent}
       width={width}
+      maxwidth={maxWidth}
       mt={mt}
       mr={mr}
       mb={mb}

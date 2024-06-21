@@ -13,6 +13,7 @@ interface WCProps extends Margins {
   heading?: string;
   type?: GoACalloutType;
   size?: GoACalloutSize;
+  maxwidth?: string;
 }
 
 declare global {
@@ -28,6 +29,7 @@ export interface GoACalloutProps extends Margins {
   heading?: string;
   type?: GoACalloutType;
   size?: GoACalloutSize;
+  maxWidth?: string;
   testId?: string;
   children?: React.ReactNode;
 }
@@ -38,6 +40,7 @@ export const GoACallout = ({
   heading,
   type = "information",
   size = "large",
+  maxWidth,
   testId,
   children,
   mt,
@@ -50,6 +53,7 @@ export const GoACallout = ({
       heading={heading}
       type={type}
       size={size}
+      maxwidth={maxWidth}
       mt={mt}
       mr={mr}
       mb={mb}

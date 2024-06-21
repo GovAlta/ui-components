@@ -9,6 +9,7 @@ interface WCProps extends Margins {
   requirement?: GoAFormItemRequirement;
   error?: string;
   helptext?: string;
+  maxwidth?: string;
   id?: string;
 }
 
@@ -27,6 +28,7 @@ export interface GoAFormItemProps extends Margins {
   requirement?: GoAFormItemRequirement;
   error?: React.ReactNode;
   helpText?: React.ReactNode;
+  maxWidth?: string;
   children?: React.ReactNode;
   testId?: string;
   id?: string;
@@ -39,6 +41,7 @@ export function GoAFormItem({
   requirement,
   label,
   labelSize,
+  maxWidth,
   mt,
   mr,
   mb,
@@ -53,6 +56,7 @@ export function GoAFormItem({
       error={typeof error === "string" ? error : undefined}
       requirement={requirement}
       helptext={typeof helpText === "string" ? helpText : undefined}
+      maxwidth={maxWidth}
       mt={mt}
       mr={mr}
       mb={mb}

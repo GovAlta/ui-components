@@ -1,17 +1,19 @@
-<svelte:options customElement={{
-  tag: "goa-radio-item",
-  props: {
-    value: { reflect: true },
-    description: { reflect: true },
-    checked: { reflect: true },
-    ariadescribedby: { reflect: true },
-    arialabel: { reflect: true },
-  }
-}}/>
+<svelte:options
+  customElement={{
+    tag: "goa-radio-item",
+    props: {
+      value: { reflect: true },
+      description: { reflect: true },
+      checked: { reflect: true },
+      ariadescribedby: { reflect: true },
+      arialabel: { reflect: true },
+    },
+  }}
+/>
 
 <script lang="ts" context="module">
   export type GoARadioItemProps = {
-    el: HTMLElement,
+    el: HTMLElement;
     value: string;
     label: string;
     description: string;
@@ -19,19 +21,19 @@
     error: boolean;
     name: string;
     checked: boolean;
+    maxwidth: string;
     ariaLabel: string;
     ariaDescribedBy: string;
-  }
+  };
 
   export type RadioItemSelectProps = {
     checked: boolean;
-  }
-
+  };
 </script>
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import {fromBoolean, toBoolean} from "../../common/utils";
+  import { fromBoolean, toBoolean } from "../../common/utils";
 
   export let value: string;
   export let name: string = "";
@@ -40,6 +42,7 @@
   export let disabled: string = "false";
   export let error: string = "false";
   export let checked: string = "false";
+  export let maxwidth: string = "none";
   export let arialabel: string = "";
   export let ariadescribedby: string = "";
 
@@ -57,29 +60,32 @@
     dispatchInit();
     addInitListener();
     addSelectListener();
-  })
+  });
 
   // Functions
 
   function dispatchInit() {
     setTimeout(() => {
-      _radioItemEl?.dispatchEvent(new CustomEvent<GoARadioItemProps>("radio-item:mounted", {
-        composed: true,
-        bubbles: true,
-        detail: {
-          el: _radioItemEl,
-          name,
-          value,
-          label,
-          description,
-          disabled: isDisabled,
-          error: isError,
-          checked: isChecked,
-          ariaLabel: arialabel,
-          ariaDescribedBy: ariadescribedby,
-        }
-      }))
-    }, 10)
+      _radioItemEl?.dispatchEvent(
+        new CustomEvent<GoARadioItemProps>("radio-item:mounted", {
+          composed: true,
+          bubbles: true,
+          detail: {
+            el: _radioItemEl,
+            name,
+            value,
+            label,
+            description,
+            maxwidth,
+            disabled: isDisabled,
+            error: isError,
+            checked: isChecked,
+            ariaLabel: arialabel,
+            ariaDescribedBy: ariadescribedby,
+          },
+        }),
+      );
+    }, 10);
   }
 
   function addInitListener() {
@@ -92,13 +98,13 @@
       name = data.name;
       arialabel = data.ariaLabel;
       ariadescribedby = data.ariaDescribedBy;
-    })  
+    });
   }
 
   function addSelectListener() {
     _radioItemEl.addEventListener("radio-group:select", (e: Event) => {
       isChecked = (e as CustomEvent<RadioItemSelectProps>).detail.checked;
-    })
+    });
   }
 
   function onChange() {
@@ -114,7 +120,7 @@
   }
 </script>
 
-<div class="goa-radio-container">
+<div class="goa-radio-container" style={`max-width: ${maxwidth};`}>
   <label
     bind:this={_radioItemEl}
     data-testid="radio-option-{value}"
@@ -138,7 +144,9 @@
     </span>
   </label>
   {#if $$slots.description || description}
-    <div class="goa-radio-description">
+    <div
+      class="goa-radio-description"
+    >
       <slot name="description" />
       {description}
     </div>

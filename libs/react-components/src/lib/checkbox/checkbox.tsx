@@ -21,6 +21,7 @@ interface WCProps extends Margins {
   value?: string | number | boolean;
   arialabel?: string;
   description?: string | React.ReactNode;
+  maxwidth?: string;
 }
 
 /* eslint-disable-next-line */
@@ -36,6 +37,7 @@ export interface GoACheckboxProps extends Margins {
   testId?: string;
   ariaLabel?: string;
   description?: string | React.ReactNode;
+  maxWidth?: string;
   onChange?: (name: string, checked: boolean, value: string) => void;
 }
 
@@ -52,6 +54,7 @@ export function GoACheckbox({
   value,
   text,
   description,
+  maxWidth,
   children,
   onChange,
   ariaLabel,
@@ -91,6 +94,7 @@ export function GoACheckbox({
       value={value}
       arialabel={ariaLabel}
       description={typeof description === "string" ? description : undefined}
+      maxwidth={maxWidth}
       mt={mt}
       mr={mr}
       mb={mb}
