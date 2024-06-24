@@ -6,17 +6,17 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   selector: "goab-button",
   template: `
     <goa-button
-      [type]="type"
-      [size]="size"
-      [variant]="variant"
-      [disabled]="disabled"
-      [leadingicon]="leadingIcon"
-      [trailingicon]="trailingIcon"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
+      [attr.type]="type"
+      [attr.size]="size"
+      [attr.variant]="variant"
+      [attr.disabled]="disabled"
+      [attr.leadingicon]="leadingIcon"
+      [attr.trailingicon]="trailingIcon"
+      [attr.testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
       (_click)="_onClick()"
     >
       <ng-content />
@@ -40,7 +40,6 @@ export class GoABButton {
   @Output() onClick = new EventEmitter();
 
   _onClick() {
-    console.log("button emit click")
     this.onClick.emit();
   }
 }
