@@ -137,7 +137,7 @@
   }
 
   function setSelected() {
-    _selectedOption = _options.find(o => o.value == _values[0])  
+    _selectedOption = _options.find(o => o.value == _values[0])
   }
 
   // parse and convert values to strings to avoid later type comparison issues
@@ -263,7 +263,7 @@
 
   function onSelect(option: Option) {
     if (_disabled) return;
-  
+
     if (!_native) {
       hideMenu();
       _selectedOption = option;
@@ -315,6 +315,7 @@
   function onNativeSelect(e: Event) {
     const target = e.currentTarget as HTMLSelectElement;
     const option = _options[target.selectedIndex];
+    _isDirty = true;
     onSelect(option);
   }
 
@@ -355,7 +356,7 @@
 
     onEscape(e: KeyboardEvent) {
       reset();
-      // FIXME: on escape should allow the next tab click to move to the next element, currently 
+      // FIXME: on escape should allow the next tab click to move to the next element, currently
       // clicking tab after esc will refocus onto the Dropdown
 
       // _inputEl.focus();
