@@ -5,15 +5,15 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   standalone: true,
   selector: "goab-container",
   template: `<goa-container
-    [type]="type"
-    [accent]="accent"
-    [padding]="padding"
-    [width]="width"
-    [testid]="testId"
-    [mt]="mt"
-    [mb]="mb"
-    [ml]="ml"
-    [mr]="mr"
+    [attr.type]="type"
+    [attr.accent]="accent"
+    [attr.padding]="padding"
+    [attr.width]="width"
+    [attr.testid]="testId"
+    [attr.mt]="mt"
+    [attr.mb]="mb"
+    [attr.ml]="ml"
+    [attr.mr]="mr"
   >
     <ng-content select="[slot=title]" />
     <ng-content />
