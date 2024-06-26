@@ -1,4 +1,7 @@
-export function getSlottedChildren(rootEl?: HTMLElement, parentTestSelector?: string): Element[] {
+export function getSlottedChildren(
+  rootEl?: HTMLElement,
+  parentTestSelector?: string,
+): Element[] {
   const slot = rootEl?.querySelector("slot");
   if (slot) {
     return slot.assignedElements();
@@ -8,8 +11,7 @@ export function getSlottedChildren(rootEl?: HTMLElement, parentTestSelector?: st
       // @ts-expect-error testing
       return [...rootEl.querySelector(parentTestSelector).children] as Element[];
     }
-    // @ts-expect-error testing
-    return [...rootEl.children] as Element[];
+    return [...(rootEl?.children ?? [])] as Element[];
   }
 }
 
@@ -35,7 +37,7 @@ export function isValidDate(d: Date): boolean {
 }
 
 export function validateRequired(componentName: string, props: Record<string, unknown>) {
-  Object.entries(props).forEach(prop => {
+  Object.entries(props).forEach((prop) => {
     if (!prop[1]) {
       console.warn(`${componentName}: ${prop[0]} is required`);
     }
@@ -107,11 +109,7 @@ export function pluralize(word: string, count: number) {
 }
 
 export function clamp(value: number, min: number, max: number): number {
-  return value > max
-    ? max
-    : value < min
-      ? min
-      : value
+  return value > max ? max : value < min ? min : value;
 }
 
 export function generateRandomId() {
