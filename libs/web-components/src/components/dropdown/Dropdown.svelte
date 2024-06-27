@@ -212,7 +212,9 @@
 
   function syncFilteredOptions() {
     _filteredOptions = _filterable
-      ? _options.filter((option) => isFilterMatch(option, _inputEl?.value ?? ""))
+      ? _options.filter((option) =>
+          isFilterMatch(option, _inputEl?.value ?? ""),
+        )
       : _options;
   }
 
@@ -565,7 +567,7 @@
             `}
             data-testid="input"
             bind:this={_inputEl}
-            value={_selectedOption?.label ?? _selectedOption?.value ?? ""}
+            value={_selectedOption?.label || _selectedOption?.value || ""}
             type="text"
             role="combobox"
             autocomplete="off"
@@ -639,8 +641,10 @@
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <li
               id={option.value}
-              aria-selected={_selectedOption?.value === (option.label || option.value)}
-              class:selected={_selectedOption?.value === (option.label || option.value)}
+              aria-selected={_selectedOption?.value ===
+                (option.label || option.value)}
+              class:selected={_selectedOption?.value ===
+                (option.label || option.value)}
               class="dropdown-item"
               class:dropdown-item--highlighted={index === _highlightedIndex}
               data-index={index}
@@ -689,7 +693,6 @@
     }
   }
 
-
   .dropdown-input-group {
     box-sizing: border-box;
     outline: none;
@@ -725,7 +728,6 @@
       width: var(--width);
     }
   }
-
 
   .dropdown-icon--arrow,
   .dropdown-icon--clear {
