@@ -1,6 +1,7 @@
 import { render, fireEvent, waitFor, cleanup } from "@testing-library/svelte";
 import GoAInput from "./Input.svelte";
 import GoAInputWrapper from "./Input.test.svelte";
+import GoAInputFormItemWrapper from "./InputFormItemWrapper.test.svelte";
 import { it, describe } from "vitest";
 
 afterEach(cleanup);
@@ -8,7 +9,7 @@ afterEach(cleanup);
 describe("GoAInput Component", () => {
   it("should render", async () => {
     const el = render(GoAInput, { testid: "input-test", id: "test" });
-    const input = await el.findByTestId('input-test');
+    const input = await el.findByTestId("input-test");
     expect(input).toBeTruthy();
     expect(input.getAttribute("id")).toBe("test");
   });
@@ -107,14 +108,42 @@ describe("GoAInput Component", () => {
       expect(root).toBeTruthy();
     });
 
-    it("defaults to the name property if arialabel is not supplied", async () => {
-      const el = render(GoAInput, { testid: "input-test", name: "firstName" });
-      const root = el.container.querySelector('[aria-label="firstName"]');
-      expect(root).toBeTruthy();
+    it("should generate an aria-label value when not provided", async () => {
+      const result = render(GoAInputFormItemWrapper, {
+        inputId: "",
+        inputName: "inputName",
+        label: "DDD Alberta",
+        testIdFormItem: "formItem-testid",
+        testIdInput: "input-testid",
+      });
+      const inputEl = result.queryByTestId("input-testid");
+
+      await waitFor(() => {
+        expect(inputEl?.getAttribute("aria-label")).toBe("DDD Alberta");
+      });
+    });
+
+    it("shouldn't overwrite aria-label if a value has already been assigned", async () => {
+      const result = render(GoAInputFormItemWrapper, {
+        inputId: "inputId",
+        inputName: "inputName",
+        arialabel: "DONT OVERWRITE ME",
+        label: "DDD Alberta",
+        testIdFormItem: "formItem-testid",
+        testIdInput: "input-testid",
+      });
+      const inputEl = result.queryByTestId("input-testid");
+
+      await waitFor(() => {
+        expect(inputEl?.getAttribute("aria-label")).toBe("DONT OVERWRITE ME");
+      });
     });
 
     it("accepts an arialabelledby property", async () => {
-      const el = render(GoAInput, { testid: "input-test", arialabelledby: "firstName" });
+      const el = render(GoAInput, {
+        testid: "input-test",
+        arialabelledby: "firstName",
+      });
       const root = el.container.querySelector('[aria-labelledby="firstName"]');
       expect(root).toBeTruthy();
     });
@@ -177,7 +206,7 @@ describe("GoAInput Component", () => {
       keypress();
     });
 
-    await fireEvent.keyUp(input, { target: { value: "foobar" }, key: 'r' });
+    await fireEvent.keyUp(input, { target: { value: "foobar" }, key: "r" });
     await waitFor(() => {
       expect(change).toBeCalledTimes(1);
       expect(keypress).toBeCalledTimes(1);
@@ -302,7 +331,9 @@ describe("GoAInput Component", () => {
       expect(container.querySelector(".suffix")).toBeNull();
     });
     it("shows prefix text and also a warning message in console", async () => {
-      const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
+      const mock = vi.spyOn(console, "warn").mockImplementation(() => {
+        /* do nothing */
+      });
       const { container } = render(GoAInput, { type: "text", prefix: "$" });
       const prefix = container.querySelector(".prefix");
 
@@ -314,12 +345,16 @@ describe("GoAInput Component", () => {
       mock.mockRestore();
     });
     it("shows suffix text and also a warning message in console", async () => {
-      const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
+      const mock = vi.spyOn(console, "warn").mockImplementation(() => {
+        /* do nothing */
+      });
       const { container } = render(GoAInput, {
         type: "text",
         suffix: "per item",
       });
-      expect(container.querySelector(".suffix")?.innerHTML).toContain("per item");
+      expect(container.querySelector(".suffix")?.innerHTML).toContain(
+        "per item",
+      );
       await waitFor(() => {
         expect(console.warn["mock"].calls.length).toBeGreaterThan(0);
       });
@@ -358,7 +393,9 @@ describe("GoAInput Component", () => {
       const el = render(GoAInputWrapper, { leadingContent: content });
       expect(el.container.innerHTML).toContain(content);
 
-      const leadingContent = el.container.querySelector("[slot=leadingContent]");
+      const leadingContent = el.container.querySelector(
+        "[slot=leadingContent]",
+      );
       expect(leadingContent).toBeTruthy();
       expect(leadingContent?.innerHTML).toContain(content);
     });
@@ -366,7 +403,9 @@ describe("GoAInput Component", () => {
     it("should have a slot for the trailing content", async () => {
       const content = "items";
       const el = render(GoAInputWrapper, { trailingContent: content });
-      const trailingContent = el.container.querySelector("[slot=trailingContent]");
+      const trailingContent = el.container.querySelector(
+        "[slot=trailingContent]",
+      );
 
       expect(el.container.innerHTML).toContain(content);
       expect(trailingContent?.innerHTML).toContain(content);

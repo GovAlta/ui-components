@@ -19,6 +19,7 @@ describe("Popover", () => {
       <GoAPopover
         target="Click Action"
         maxWidth="500px"
+        minWidth="100px"
         testId="foo"
         padded={false}
       >
@@ -28,6 +29,7 @@ describe("Popover", () => {
 
     const el = baseElement.querySelector("goa-popover");
     expect(el?.getAttribute("maxwidth")).toBe("500px");
+    expect(el?.getAttribute("minwidth")).toBe("100px");
     expect(el?.getAttribute("padded")).toBe("false");
   });
 });

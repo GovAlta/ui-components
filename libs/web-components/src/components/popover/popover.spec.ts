@@ -24,13 +24,18 @@ it("should render", async () => {
 });
 
 it("should open content when target is clicked", async () => {
-  const result = render(Popover);
+  const result = render(Popover, {minwidth: "8rem", maxwidth: "16rem"});
   const target = result.queryByTestId("popover-target");
   expect(target).toBeTruthy();
 
   expect(result.queryByTestId("popover-content")).toBeNull();
   target && await fireEvent.click(target);
-  expect(result.queryByTestId("popover-content")).toBeTruthy();
+  const popOverContent = result.queryByTestId("popover-content");
+  expect(popOverContent).toBeTruthy();
+  const style = popOverContent?.getAttribute("style");
+  expect(style).toContain("min-width: 8rem");
+  expect(style).toContain("max-width: 16rem");
+  expect(style).toContain("padding: var(--goa-space-m)");
 });
 
 it("should close content when clicked outside the content container", async () => {

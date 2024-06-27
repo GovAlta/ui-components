@@ -44,6 +44,8 @@ describe("Desktop", () => {
     const links = $$("a");
 
     expect(popover).toBeTruthy();
+    expect(popover.getAttribute("maxwidth")).toBe("16rem");
+    expect(popover.getAttribute("minwidth")).toBe("8rem");
     expect(button.innerHTML).toContain(heading);
     expect(leadingIcon).toBeTruthy();
     expect(chevronIcon).toBeTruthy();

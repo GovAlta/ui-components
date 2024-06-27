@@ -1,6 +1,12 @@
 <svelte:options customElement="goa-form-item" />
 
 <!-- Script -->
+<script lang="ts" context="module">
+  export type FormItemChannelProps = {
+    el: HTMLElement;
+  };
+</script>
+
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
@@ -36,23 +42,41 @@
   export let helptext: string = "";
   export let error: string = "";
   export let requirement: RequirementType = "";
-  export let id: string = "";
+  export let id: string = ""; // @deprecated: no longer used
+
+  let _rootEl: HTMLElement;
 
   onMount(() => {
     validateRequirementType(requirement);
     validateLabelSize(labelsize);
+
+    _rootEl?.addEventListener("input:mounted", handleInputMounted);
   });
+
+  function handleInputMounted(e: Event) {
+    const ce = e as CustomEvent<FormItemChannelProps>;
+
+    // Check if aria-label is present and has a value in the child element
+    const ariaLabel = ce.detail.el.getAttribute("aria-label");
+    if (!ariaLabel || ariaLabel.trim() === "") {
+      ce.detail.el.setAttribute("aria-label", label);
+    }
+  }
 </script>
 
 <!-- HTML -->
-<div data-testid={testid} style={calculateMargin(mt, mr, mb, ml)}>
+<div
+  data-testid={testid}
+  style={calculateMargin(mt, mr, mb, ml)}
+  bind:this={_rootEl}
+>
   {#if label}
-    <div class={`label ${labelsize}`} {id}>
+    <label class={`label ${labelsize}`}>
       {label}
       {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
         <em>({requirement})</em>
       {/if}
-    </div>
+    </label>
   {/if}
   <div class="form-item-input">
     <slot />

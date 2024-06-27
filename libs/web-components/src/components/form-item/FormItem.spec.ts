@@ -95,7 +95,6 @@ describe("GoA FormItem", () => {
 
     const label = document.querySelector(".label");
     expect(label.innerHTML).toContain("the label");
-    expect(label.getAttribute("id")).toBe("labelId");
 
     const requirement = document.querySelector("em");
     expect(requirement.innerHTML).toContain("optional");
@@ -124,7 +123,9 @@ describe("GoA FormItem", () => {
   });
 
   it("should not show any text for a field when requirement value is mispelled/invalid", async () => {
-    const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
+    const mock = vi.spyOn(console, "error").mockImplementation(() => {
+      /* do nothing */
+    });
 
     render(GoAFormItem, {
       label: "Credit Card Number",

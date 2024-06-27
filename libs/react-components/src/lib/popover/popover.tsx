@@ -5,6 +5,7 @@ export type GoAPosition = "above" | "below" | "auto";
 
 interface WCProps extends Margins {
   maxwidth?: string;
+  minwidth?: string;
   padded?: boolean;
   position?: GoAPosition;
   relative?: boolean;
@@ -23,6 +24,7 @@ export interface GoAPopoverProps extends Margins {
   target?: ReactNode;
   testId?: string;
   maxWidth?: string;
+  minWidth?: string;
   padded?: boolean;
   position?: GoAPosition;
   children: ReactNode;
@@ -33,6 +35,7 @@ export function GoAPopover({
   target,
   testId,
   maxWidth,
+  minWidth,
   padded,
   position,
   relative,
@@ -46,6 +49,7 @@ export function GoAPopover({
     <goa-popover
       data-testid={testId}
       maxwidth={maxWidth}
+      minwidth={minWidth}
       padded={padded}
       position={position}
       relative={relative}

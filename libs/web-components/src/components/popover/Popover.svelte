@@ -20,6 +20,7 @@
   export let testid: string = "popover";
   // prevents the popover from exceeding this width
   export let maxwidth: string = "320px";
+  export let minwidth: string = "";
   // allow width to be hardcoded
   export let width: string = "";
   // allows to override the default padding when content needs to be flush with boundries
@@ -253,6 +254,7 @@
         class="popover-content"
         style={`
           ${cssVar("width", width)}
+          min-width: ${minwidth};
           max-width: ${maxwidth};
           padding: ${_padded ? "var(--goa-space-m)" : "0"};
         `}
