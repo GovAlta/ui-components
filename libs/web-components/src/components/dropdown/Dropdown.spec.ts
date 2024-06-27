@@ -121,9 +121,7 @@ describe("GoADropdown", () => {
         expect(inputField?.getAttribute("type")).toBe("text");
         expect(inputField?.getAttribute("aria-owns")).toBeNull(); // Menu is hidden
 
-        expect(dropdownIcon?.getAttribute("ariacontrols")).toBe(
-          "menu-favcolor",
-        );
+        expect(dropdownIcon?.getAttribute("ariacontrols")).toBe("menu-favcolor");
         expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("false");
         expect(dropdownIcon?.getAttribute("arialabel")).toBe("favcolor");
         expect(dropdownIcon?.getAttribute("role")).toBe("button");
@@ -140,9 +138,7 @@ describe("GoADropdown", () => {
         const option = result.container.querySelector("li#orange");
         expect(option).toBeTruthy();
         expect(option?.getAttribute("aria-selected")).toBe("true");
-        expect(option?.getAttribute("data-testid")).toBe(
-          "dropdown-item-orange",
-        );
+        expect(option?.getAttribute("data-testid")).toBe("dropdown-item-orange");
         expect(option?.getAttribute("data-value")).toBe("orange");
         expect(option?.getAttribute("role")).toBe("option");
         expect(option).toHaveTextContent("orange");
@@ -199,8 +195,11 @@ describe("GoADropdown", () => {
       const input = result.container.querySelector("input");
       expect(input).toBeTruthy();
 
-      input && (await fireEvent.change(input, { target: { value: "b" } }));
+      input && (await fireEvent.focus(input));
       input && (await fireEvent.keyUp(input, { key: "b", code: "b" }));
+      input && (await fireEvent.input(input, { target: { value: "b" } }));
+
+      expect(input?.value).toBe("b");
 
       await waitFor(async () => {
         // When type in the input, will open the suggestion
@@ -260,9 +259,7 @@ describe("GoADropdown", () => {
                 "dropdown-item-not-found",
               );
             } else {
-              expect(liElements[0].getAttribute("data-value")).toBe(
-                expectedOption,
-              );
+              expect(liElements[0].getAttribute("data-value")).toBe(expectedOption);
             }
           });
         },
@@ -276,9 +273,7 @@ describe("GoADropdown", () => {
       expect(button).toBeTruthy();
       button && (await fireEvent.click(button));
       await waitFor(async () => {
-        const selected = result.container.querySelector(
-          "li[aria-selected=true]",
-        );
+        const selected = result.container.querySelector("li[aria-selected=true]");
         expect(selected).not.toBeNull();
         expect(selected?.innerHTML).toContain("orange");
       });
@@ -398,9 +393,7 @@ describe("GoADropdown", () => {
 
       // show menu
       inputField && (await fireEvent.focus(inputField));
-      const inputGroupDiv = result.container.querySelector(
-        "div.dropdown-input-group",
-      );
+      const inputGroupDiv = result.container.querySelector("div.dropdown-input-group");
       expect(inputGroupDiv?.getAttribute("class")).not.toContain("error");
     });
 
@@ -418,9 +411,7 @@ describe("GoADropdown", () => {
 
       // show menu
       inputField && (await fireEvent.focus(inputField));
-      const inputGroupDiv = result.container.querySelector(
-        "div.dropdown-input-group",
-      );
+      const inputGroupDiv = result.container.querySelector("div.dropdown-input-group");
       expect(inputGroupDiv?.getAttribute("class")).toContain("error");
     });
   });
@@ -725,9 +716,7 @@ describe("GoADropdown", () => {
         native: true,
         items,
       });
-      expect(container?.querySelector("select")?.getAttribute("id")).toBe(
-        "favcolor",
-      );
+      expect(container?.querySelector("select")?.getAttribute("id")).toBe("favcolor");
       await waitFor(() => {
         const options = container.querySelectorAll("select option");
         expect(options.length).toBe(3);
@@ -863,6 +852,84 @@ describe("GoADropdown", () => {
       await waitFor(() => {
         const children = container.querySelectorAll("li");
         expect(children.length).toBe(1);
+      });
+    });
+  });
+
+  it("should not fire an event if a new value is selected by the keyboard that is the same as the previous value", async () => {
+    const result = render(GoADropdownWrapper, { name, items });
+    const onClick = vi.fn();
+    const dropdown = result.queryByTestId("favcolor-dropdown");
+    const dropdownIcon = result.container.querySelector("goa-icon");
+
+    await waitFor(async () => {
+      expect(dropdown).toBeTruthy();
+
+      dropdown?.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        console.log("in the onclick");
+        onClick(ce.detail.name, ce.detail.value);
+      });
+
+      // open menu
+      dropdownIcon && (await fireEvent.click(dropdownIcon));
+
+      // select the orange value, event should be dispatched
+      await waitFor(async () => {
+        const option = result.queryByTestId("dropdown-item-orange");
+        option && (await fireEvent.click(option));
+        expect(onClick).toBeCalledTimes(1);
+      });
+
+      onClick.mockClear();
+
+      // reselect the orange value, no event should be dispatched
+      await waitFor(async () => {
+        const option = result.queryByTestId("dropdown-item-orange");
+        option && (await fireEvent.click(option));
+        expect(onClick).not.toBeCalled();
+      });
+    });
+  });
+
+  it("should fire an event when clearing the filter value", async () => {
+    const result = render(GoADropdownWrapper, {
+      name,
+      items,
+      filterable: true,
+    });
+
+    const onClick = vi.fn();
+    const dropdown = result.queryByTestId("favcolor-dropdown");
+    const dropdownIcon = result.container.querySelector("goa-icon");
+
+    await waitFor(async () => {
+      expect(dropdown).toBeTruthy();
+
+      dropdown?.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        onClick(ce.detail.name, ce.detail.value);
+      });
+
+      // open menu
+      dropdownIcon && (await fireEvent.click(dropdownIcon));
+
+      // select the orange value, event should be dispatched
+      const option = result.queryByTestId("dropdown-item-orange");
+      expect(option).toBeTruthy();
+      option && (await fireEvent.click(option));
+      await waitFor(async () => {
+        expect(onClick).toBeCalledWith(name, "orange");
+      });
+
+      onClick.mockClear();
+
+      // reselect the orange value, no event should be dispatched
+      const clearIcon = result.queryByTestId("clear-icon");
+      expect(clearIcon).toBeTruthy();
+      clearIcon && (await fireEvent.click(clearIcon));
+      await waitFor(async () => {
+        expect(onClick).toBeCalledWith(name, "");
       });
     });
   });
