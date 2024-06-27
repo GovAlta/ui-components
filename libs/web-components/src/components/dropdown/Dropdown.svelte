@@ -19,7 +19,7 @@
   export let name: string;
   export let arialabel: string = "";
   export let arialabelledby: string = "";
-  export let value: string = "";
+  export let value: string | undefined = "";
   export let filterable: string = "false";
   export let leadingicon: GoAIconType | null = null;
   export let maxheight: string = "276px";
@@ -212,7 +212,7 @@
 
   function syncFilteredOptions() {
     _filteredOptions = _filterable
-      ? _options.filter((option) => isFilterMatch(option, _inputEl?.value ?? ""))
+      ? _options.filter((option) => isFilterMatch(option, _inputEl?.value || ""))
       : _options;
   }
 
@@ -243,13 +243,17 @@
     return value.startsWith(filter) || value.includes(" " + filter);
   }
 
-  function dispatchValue(value?: string) {
+  function dispatchValue(newValue?: string) {
     const detail = _multiselect
-      ? { name, values: [value, ..._values] }
-      : { name, value: value };
+      ? { name, values: [newValue, ..._values] }
+      : { name, value: newValue };
+
+    _inputEl.value = _selectedOption?.label || _selectedOption?.value || "";
+    if (!_isDirty) {
+      return;  
+    }
 
     setTimeout(() => {
-      if (!_isDirty) return;
       _rootEl?.dispatchEvent(
         new CustomEvent("_change", { composed: true, detail }),
       );
@@ -263,6 +267,8 @@
 
   function onSelect(option: Option) {
     if (_disabled) return;
+
+    _isDirty = option.value !== _selectedOption?.value;
   
     if (!_native) {
       hideMenu();
@@ -324,9 +330,9 @@
     _activeDescendantId = undefined;
     _highlightedIndex = -1;
     _selectedOption = undefined;
-    _isDirty = false;
-    syncFilteredOptions();
+    _isDirty = true;
 
+    syncFilteredOptions();
     dispatchValue("");
   }
 
@@ -347,8 +353,10 @@
         );
 
         if (!selectedOption) {
-          dispatchValue("");
+          _isDirty = true;
           input.value = "";
+          _selectedOption = undefined;
+          dispatchValue("");
         }
       });
     }
@@ -366,7 +374,7 @@
     onEnter(e: KeyboardEvent) {
       const option = _filteredOptions[_highlightedIndex];
       if (option) {
-        _isDirty = true;
+        _isDirty = option.value !== _selectedOption?.value;
         onSelect(option);
       }
 
@@ -381,6 +389,7 @@
 
     onArrow(e: KeyboardEvent, direction: "up" | "down") {
       if (!_isMenuVisible) showMenu();
+
       changeHighlightedOption(direction === "up" ? -1 : 1);
       e.stopPropagation();
     }
@@ -388,17 +397,18 @@
     onTab(_: KeyboardEvent) {
       const matchedOption = _filteredOptions.find(
         (option) =>
-          option.label.toLowerCase() === this.input.value.toLowerCase(),
+          option.label?.toLowerCase() === this.input.value.toLowerCase(),
       );
+
       if (matchedOption) {
         onSelect(matchedOption);
       }
+
       hideMenu();
     }
 
     onKeyUp(_: KeyboardEvent) {
       showMenu();
-      _isDirty = true;
     }
 
     handleKeyUp(e: KeyboardEvent) {
@@ -564,7 +574,7 @@
             `}
             data-testid="input"
             bind:this={_inputEl}
-            value={_selectedOption?.label ?? _selectedOption?.value ?? ""}
+            value={_selectedOption?.label || _selectedOption?.value || ""}
             type="text"
             role="combobox"
             autocomplete="off"
@@ -590,6 +600,7 @@
           {#if _inputEl?.value && _filterable}
             <goa-icon
               id={name}
+              data-testid="clear-icon"
               tabindex={_disabled ? -1 : 0}
               role="button"
               arialabel={`clear ${arialabel || name}`}
@@ -647,10 +658,7 @@
               data-value={option.value}
               role="option"
               style="display: block"
-              on:click={() => {
-                _isDirty = true;
-                onSelect(option);
-              }}
+              on:click={() => onSelect(option)}
             >
               {option.label || option.value}
             </li>
