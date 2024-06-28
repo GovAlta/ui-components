@@ -12,6 +12,7 @@ describe("GoA Checkbox", () => {
       name: "foo",
       value: "bar",
       text: "to display",
+      maxWidth: "480px",
       disabled: false,
       checked: true,
       error: false,
@@ -30,6 +31,7 @@ describe("GoA Checkbox", () => {
     expect(checkbox?.getAttribute("name")).toBe("foo");
     expect(checkbox?.getAttribute("value")).toBe("bar");
     expect(checkbox?.getAttribute("text")).toBe("to display");
+    expect(checkbox?.getAttribute("maxwidth")).toBe("480px");
     expect(checkbox?.getAttribute("disabled")).toBe("false");
     expect(checkbox?.getAttribute("checked")).toBe("true");
     expect(checkbox?.getAttribute("error")).toBe("false");
@@ -41,7 +43,7 @@ describe("GoA Checkbox", () => {
   });
 
   it("should render with text description", () => {
-    render(<GoACheckbox name={"foo"} checked={false} description={"description text"}/>);
+    render(<GoACheckbox name={"foo"} checked={false} description={"description text"} />);
 
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox?.getAttribute("description")).toBe("description text");

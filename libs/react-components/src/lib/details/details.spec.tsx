@@ -8,6 +8,7 @@ describe("Detail", () => {
       <GoADetails
         heading="The heading"
         open={true}
+        maxWidth="480px"
         testId="foo"
       >
         The content
@@ -18,6 +19,7 @@ describe("Detail", () => {
     expect(el?.getAttribute("heading")).toBe("The heading");
     expect(baseElement.innerHTML).toContain("The content");
     expect(el?.getAttribute("open")).toBe("true");
+    expect(el?.getAttribute("maxwidth")).toBe("480px");
     expect(el?.getAttribute("data-testid")).toBe("foo");
   });
 

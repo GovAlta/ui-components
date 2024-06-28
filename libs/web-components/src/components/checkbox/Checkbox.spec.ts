@@ -17,26 +17,32 @@ describe('GoACheckbox Component', () => {
   });
 
   describe("properties", () => {
-    it("allows for setting of the value", async () => {
+    it("can set value", async () => {
       const el = await createElement({ value: "foobar" });
       const checkbox = el.container.querySelector("input");
       expect((checkbox as HTMLInputElement).value).toBe("foobar");
     });
 
-    it("allows for setting of the name", async () => {
+    it("can set name", async () => {
       const el = await createElement();
       const checkbox = el.container.querySelector("input");
       expect((checkbox as HTMLInputElement).name).toBe("checkbox-test-name");
       expect((checkbox as HTMLInputElement).id).toBe("checkbox-test-name");
     });
 
-    it("allows for setting of the text", async () => {
+    it("can set text", async () => {
       const el = await createElement({ text: "foobar" });
       const div = await el.findByTestId('text');
       expect(div).toHaveTextContent("foobar");
     });
 
-    it("allows setting checkbox description", async () => {
+    it("can set max width", async () => {
+      const el = await createElement({ text: "foobar", maxwidth: "480px" });
+      const root = await el.container.querySelector(".root");
+      expect(root?.getAttribute("style")).toContain("max-width: 480px;")
+    });
+
+    it("can set description", async () => {
       const el = await createElement({ description: "foobar" });
       const div = await el.findByTestId('description');
       expect(div).toHaveTextContent("foobar");
@@ -62,7 +68,7 @@ describe('GoACheckbox Component', () => {
       expect((checkbox as HTMLInputElement).disabled).toBeTruthy();
     });
 
-    it("allows the checkbox to be set to an error state", async () => {
+    it("can set error state", async () => {
       const el = await createElement({ error: "true" });
       const root = el.container.querySelector('.error');
       expect(root).toBeTruthy();

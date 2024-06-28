@@ -19,6 +19,7 @@
   export let testid: string = "";
   export let arialabel: string = "";
   export let description: string = "";
+  export let maxwidth: string = "none";
 
   // margin
   export let mt: Spacing = null;
@@ -65,7 +66,13 @@
 
 <!-- View -->
 
-<div style={calculateMargin(mt, mr, mb, ml)} class="root">
+<div
+  class="root"
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)}
+    max-width: ${maxwidth};
+  `}
+>
   <label
     data-testid={testid}
     for={name}

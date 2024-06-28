@@ -9,6 +9,7 @@ interface WCProps extends Margins {
   heading: string;
   secondaryText?: string;
   headingContent?: ReactNode;
+  maxwidth?: string;
 }
 
 declare global {
@@ -26,6 +27,7 @@ export interface GoAAccordionProps extends Margins {
   secondaryText?: string;
   heading: string;
   headingContent?: ReactNode;
+  maxWidth?: string;
   testid?: string;
   children: ReactNode;
 }
@@ -36,6 +38,7 @@ export function GoAAccordion({
   headingSize,
   secondaryText,
   headingContent,
+  maxWidth,
   testid,
   children,
   mt,
@@ -49,6 +52,7 @@ export function GoAAccordion({
       headingSize={headingSize}
       heading={heading}
       secondaryText={secondaryText}
+      maxwidth={maxWidth}
       data-testid={testid}
       mt={mt}
       mr={mr}

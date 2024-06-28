@@ -3,6 +3,7 @@ interface RadioItemProps {
   value?: string;
   description?: string | React.ReactNode;
   label?: string;
+  maxwidth?: string;
   disabled?: boolean;
   checked?: boolean;
   error?: boolean;
@@ -22,6 +23,7 @@ export interface GoARadioItemProps {
   label?: string;
   name?: string;
   description?: string | React.ReactNode;
+  maxWidth?: string;
   disabled?: boolean;
   checked?: boolean;
   error?: boolean;
@@ -34,6 +36,7 @@ export function GoARadioItem({
   label,
   value,
   description,
+  maxWidth,
   disabled,
   checked,
   error,
@@ -46,6 +49,7 @@ export function GoARadioItem({
       label={label}
       value={value}
       description={typeof description === "string" ? description : undefined}
+      maxwidth={maxWidth}
       error={error}
       disabled={disabled}
       checked={checked}

@@ -27,6 +27,16 @@ describe("Accordion", () => {
     expect(heading?.classList.contains("heading-medium"));
   });
 
+  it("renders with max width", async () => {
+    const { container } = render(Accordion, {
+      heading: "Title",
+      maxwidth: "480px",
+      testid: "accordion"
+    });
+    const elm = container.querySelector("[data-testid=accordion]");
+    expect(elm?.getAttribute("style")).toContain("max-width: 480px;");
+  });
+
   it("should expand the container when open prop is set", async () => {
     const { container } = render(Accordion, { heading: "Title", open: "true" });
     const details = container.querySelector("details");
