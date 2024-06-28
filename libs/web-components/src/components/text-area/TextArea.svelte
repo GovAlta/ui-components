@@ -32,8 +32,8 @@
   $: isReadonly = toBoolean(readonly);
   $: count =
     countby === "character"
-      ? value.length
-      : value.split(" ").filter((word) => word.trim().length > 0).length;
+      ? value?.length
+      : value?.split(" ").filter((word) => word.trim().length > 0).length;
 
   // privates
 
