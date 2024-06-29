@@ -14,18 +14,47 @@ describe("GoARadioGroup Component", () => {
       testid: "test-id",
       items,
     });
+    const radioGroupDiv = result.container.querySelector("[role='radiogroup']");
+    expect(radioGroupDiv?.getAttribute("aria-label")).toBe(""); // If no aria-label is defined, we don't fall back to name
 
     const goaRadioItems = result.container.querySelectorAll("goa-radio-item");
     expect(goaRadioItems.length).toBe(3);
-
     await waitFor(() => {
       items.forEach((item, index) => {
         const el = goaRadioItems[index];
 
         expect(el.getAttribute("value")).toBe(item);
-        expect(el.getAttribute("ariadescribedby")).toBe(`description-favcolor-${index}`);
-        expect(el.getAttribute("arialabel")).toBe("favcolor");
+        if (index === 2) {
+          expect(el.getAttribute("checked")).toBe("true");
+        } else {
+          expect(el.getAttribute("checked")).toBe("false");
+        }
+      });
+    });
+  })
 
+  it("should render with accessibility attributes", async () => {
+    const name = "favcolor";
+    const items = ["red", "blue", "orange"];
+    const result = render(GoARadioGroupWrapper, {
+      name,
+      value: "orange",
+      testid: "test-id",
+      items,
+      radioGroupAriaLabel: "please choose a color"
+    });
+
+    const radioGroupDiv = result.container.querySelector("[role='radiogroup']");
+    expect(radioGroupDiv?.getAttribute("aria-label")).toBe("please choose a color");
+
+    const goaRadioItems = result.container.querySelectorAll("goa-radio-item");
+    expect(goaRadioItems.length).toBe(3);
+    await waitFor(() => {
+      items.forEach((item, index) => {
+        const el = goaRadioItems[index];
+
+        expect(el.getAttribute("value")).toBe(item);
+        expect(el.getAttribute("arialabel")).toBe("you are choosing color " + item);
         if (index === 2) {
           expect(el.getAttribute("checked")).toBe("true");
         } else {

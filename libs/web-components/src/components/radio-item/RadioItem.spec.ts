@@ -10,7 +10,7 @@ describe("RadioItem", () => {
       value: "radio-item-1",
       name: "radio-item-1-name",
       arialabel: "radio-item-1-label",
-      ariadescribedby: "radio-item-1-described-by",
+      description: "test description"
     });
 
     expect(result.getByTestId("radio-option-radio-item-1")).toBeTruthy();
@@ -19,10 +19,13 @@ describe("RadioItem", () => {
     expect(input.getAttribute("name")).toBe("radio-item-1-name");
     expect(input.getAttribute("value")).toBe("radio-item-1");
     expect(input.getAttribute("aria-label")).toBe("radio-item-1-label");
-    expect(input.getAttribute("aria-describedby")).toBe(
-      "radio-item-1-described-by",
-    );
+    expect(input.getAttribute("aria-checked")).toBe("false");
+    expect(input.getAttribute("type")).toBe("radio");
     expect(result.getByText("Radio Item 1")).toBeTruthy();
+    const radioDescriptionDiv = result.container.querySelector(".goa-radio-description");
+    expect(radioDescriptionDiv?.innerHTML).toContain("test description");
+    expect(radioDescriptionDiv?.getAttribute("id")).toContain(`${input.getAttribute("name")}-${input.getAttribute("value")}-description`);
+    expect(input.getAttribute("aria-describedby")).toBe(radioDescriptionDiv?.getAttribute("id"));
   });
 
   it("should render the radio item with slot description", async () => {
@@ -42,7 +45,6 @@ describe("RadioItem", () => {
       value: "radio-item-1",
       name: "radio-item-1-name",
       arialabel: "radio-item-1-label",
-      ariadescribedby: "radio-item-1-described-by",
       disabled: true,
     });
 

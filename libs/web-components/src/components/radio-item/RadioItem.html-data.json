@@ -15,6 +15,11 @@
       "name": "description",
       "description": "Text added below the label text",
       "type": "string"
+    },
+    {
+      "name": "arialabel",
+      "type": "string",
+      "description": "Defines how the radio item will be translated for the screen reader."
     }
   ],
   "references": [
