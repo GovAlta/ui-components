@@ -42,22 +42,8 @@
   // ========
 
   $: _isEnabled = enabled || status === "complete";
-
+  
   onMount(() => {
-    // handle click events
-    _rootEl.addEventListener("click", () => {
-      if (!_isEnabled) return;
-
-      _checkbox.checked = !_checkbox.checked;
-      _rootEl.dispatchEvent(
-        new CustomEvent("_click", {
-          composed: true,
-          bubbles: true,
-          detail: { step: +childindex },
-        }),
-      );
-    });
-
     // receive notification from parent of resize
     _rootEl.addEventListener("form-stepper:resized", (e: Event) => {
       const { mobile } = (e as CustomEvent).detail;
@@ -104,6 +90,20 @@
       );
     }, 10);
   }
+
+  function onClick(e: Event) {
+    if (!_isEnabled) return;
+
+    _checkbox.checked = !_checkbox.checked;
+    _rootEl.dispatchEvent(
+      new CustomEvent("_click", {
+        composed: true,
+        bubbles: true,
+        detail: { step: +childindex },
+      }),
+    );
+    e.stopPropagation();
+  }
 </script>
 
 <label
@@ -127,6 +127,7 @@
     aria-disabled={!_isEnabled}
     disabled={!_isEnabled}
     data-testid="checkbox"
+    on:click={onClick}
   />
   <div data-testid="status" class="status">
     {#if current}
