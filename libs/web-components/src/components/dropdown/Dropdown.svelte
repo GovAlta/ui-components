@@ -554,7 +554,7 @@
             `}
           data-testid="input"
           bind:this={_inputEl}
-          value={_selectedOption?.label ?? _selectedOption?.value ?? ""}
+          value={_selectedOption?.label || _selectedOption?.value || ""}
           type="text"
           role="combobox"
           autocomplete="off"
