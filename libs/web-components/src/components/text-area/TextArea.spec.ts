@@ -72,7 +72,6 @@ describe("GoATextArea", () => {
       expect(onKeyPress).toBeCalledTimes(1);
       expect(onChange).toBeCalledTimes(1);
     });
-
   });
 
   it("can be disabled", async () => {
@@ -166,6 +165,17 @@ describe("GoATextArea", () => {
       expect(counterEl.innerHTML).toContain("7 characters too many");
     });
 
+    it("shows zero characters remaining", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-name",
+        value: "Jim is super funny",
+        countby: "character",
+        maxcount: "18",
+      });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl.innerHTML).toContain("0 characters remaining");
+    });
+
     it("shows the number of words remaining", async () => {
       const { container } = render(GoATextArea, {
         name: "test-name",
@@ -186,6 +196,17 @@ describe("GoATextArea", () => {
       });
       const counterEl = container.querySelector(".counter");
       expect(counterEl.innerHTML).toContain("1 word too many");
+    });
+
+    it("shows zero words remaining", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-name",
+        value: "Jim is super funny",
+        countby: "word",
+        maxcount: "4",
+      });
+      const counterEl = container.querySelector(".counter");
+      expect(counterEl.innerHTML).toContain("0 words remaining");
     });
 
     it("shows the count in an error state when the char count exceeds the max value allowed", async () => {
