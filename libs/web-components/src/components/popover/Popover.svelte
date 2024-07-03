@@ -11,7 +11,7 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
   import { calculateMargin } from "../../common/styling";
-  import { cssVar, getSlottedChildren, toBoolean } from "../../common/utils";
+  import { style, getSlottedChildren, styles, toBoolean } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
   // Public
@@ -23,6 +23,8 @@
   export let minwidth: string = "";
   // allow width to be hardcoded
   export let width: string = "";
+  export let height: "full" | "wrap-content" = "wrap-content";
+
   // allows to override the default padding when content needs to be flush with boundries
   export let padded: string = "true";
   // provides control to where the popover content is positioned
@@ -214,17 +216,18 @@
 <div
   bind:this={_rootEl}
   data-testid={testid}
-  style={`
-    ${(_relative && "position: relative;") || ""}
-    ${calculateMargin(mt, mr, mb, ml)}
-    ${cssVar("--offset-top", voffset)}
-    ${cssVar("--offset-bottom", voffset)}
-    ${cssVar("--offset-left", hoffset)}
-    ${cssVar("--offset-right", hoffset)}
-    ${cssVar("--focus-border-width", focusborderwidth)}
-    ${cssVar("--border-radius", borderradius)}
-    ${cssVar("width", width)}
-`}
+  style={styles(
+    _relative && "position: relative",
+    height === "full" && "height: 100%;",
+    calculateMargin(mt, mr, mb, ml),
+    style("--offset-top", voffset),
+    style("--offset-bottom", voffset),
+    style("--offset-left", hoffset),
+    style("--offset-right", hoffset),
+    style("--focus-border-width", focusborderwidth),
+    style("--border-radius", borderradius),
+    style("width", width),
+  )}
 >
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -253,12 +256,12 @@
         bind:this={_popoverEl}
         data-testid="popover-content"
         class="popover-content"
-        style={`
-          ${cssVar("width", width)}
-          min-width: ${minwidth};
-          max-width: ${maxwidth};
-          padding: ${_padded ? "var(--goa-space-m)" : "0"};
-        `}
+        style={styles(
+          style("width", width),
+          style("min-width", minwidth),
+          style("max-width", maxwidth),
+          style("padding", _padded ? "var(--goa-space-m)" : "0"),
+        )}
       >
         <goa-focus-trap open="true">
           <div bind:this={_focusTrapEl}>

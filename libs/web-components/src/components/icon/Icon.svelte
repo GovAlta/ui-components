@@ -529,7 +529,7 @@
 
 <script lang="ts">
   import type { Spacing } from "../../common/styling";
-  import { cssVar, toBoolean } from "../../common/utils";
+  import { style, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
 
@@ -609,8 +609,8 @@
   {title}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
-    ${cssVar("--fill-color", fillcolor)};
-    ${cssVar("--opacity", opacity)};
+    ${style("--fill-color", fillcolor)};
+    ${style("--opacity", opacity)};
   `}
 >
   {#if type}
