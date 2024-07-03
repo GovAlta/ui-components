@@ -1,4 +1,33 @@
-export function getSlottedChildren(rootEl?: HTMLElement, parentTestSelector?: string): Element[] {
+// Creates a style string from a list of styles.
+// This function accepts booleans to prevent the need for ternary ops when passing
+// in conditional styles
+//
+// ```
+// <div
+//  style={styles(
+//   isImportant && "color: red",  // when isImportant === false a false value will be passed
+// )}>
+//   ...
+// </div>
+// ```
+export function styles(...css: (string | boolean)[]): string {
+  return css
+    .filter((item: string | boolean) => !!item)
+    .map((item: string | boolean) =>
+      typeof item === "string" ? item.replace(";", "") : item,
+    )
+    .join(";");
+}
+
+// creates a style attribute/value or empty string
+export function style(name: string, value: string | number): string {
+  return value ? `${name}: ${value}` : "";
+}
+
+export function getSlottedChildren(
+  rootEl?: HTMLElement,
+  parentTestSelector?: string,
+): Element[] {
   const slot = rootEl?.querySelector("slot");
   if (slot) {
     return slot.assignedElements();
@@ -35,7 +64,7 @@ export function isValidDate(d: Date): boolean {
 }
 
 export function validateRequired(componentName: string, props: Record<string, unknown>) {
-  Object.entries(props).forEach(prop => {
+  Object.entries(props).forEach((prop) => {
     if (!prop[1]) {
       console.warn(`${componentName}: ${prop[0]} is required`);
     }
@@ -97,21 +126,13 @@ export function getTimestamp(val?: Date) {
   return `${month} ${date}${ordinal} ${year}, ${hour}:${min} ${meridium}`;
 }
 
-export function cssVar(name: string, value: string | number): string {
-  return value ? `${name}: ${value};` : "";
-}
-
 export function pluralize(word: string, count: number) {
   if (count === 1) return word;
   return `${word}s`;
 }
 
 export function clamp(value: number, min: number, max: number): number {
-  return value > max
-    ? max
-    : value < min
-      ? min
-      : value
+  return value > max ? max : value < min ? min : value;
 }
 
 export function generateRandomId() {
