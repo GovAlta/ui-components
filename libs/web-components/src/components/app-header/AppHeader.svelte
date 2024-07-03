@@ -43,12 +43,6 @@
     onShowToggleMenuChange()
   })();
 
-
-  // Functions
-
-  const toggleMenu = () => (_showMenu = !_showMenu);
-  const hideMenu = () => (_showMenu = false);
-
   // Hooks
 
   onMount(() => {
@@ -59,6 +53,12 @@
   onDestroy(() => {
     window.removeEventListener("popstate", onRouteChange, true);
   });
+
+  
+  // Functions
+
+  const toggleMenu = () => (_showMenu = !_showMenu);
+  const hideMenu = () => (_showMenu = false);
 
   function getChildren() {
     if (!_slotParentEl) return;
@@ -72,12 +72,9 @@
         el.classList.remove("current");
         return el;
       });
-
-
   }
 
   function addEventListeners() {
-
     if (!_rootEl) return;
 
     _rootEl.addEventListener("app-header-menu:mounted", (e: Event) => {
@@ -98,7 +95,6 @@
 
     window.addEventListener("popstate", onRouteChange, true);
   }
-
 
   function onRouteChange() {
     setCurrentLink();
@@ -459,7 +455,7 @@
   }
 
   @media (--tablet) {
-    /*padding is independent from fullmenubreakpoint, should use media query*/
+    /* padding is independent from fullmenubreakpoint, should use media query */
     .container {
       padding: 0 var(--goa-space-xl);
     }
@@ -555,7 +551,7 @@
   }
 
   @media (--desktop) {
-    /*padding is independent from fullmenubreakpoint, should use media query*/
+    /* padding is independent from fullmenubreakpoint, should use media query */
     .container.tablet {
       padding: 0 var(--goa-space-3xl);
     }
@@ -563,7 +559,6 @@
       padding: 0 var(--desktop-padding);
     }
   }
-
 
   :global(::slotted(a.current.inside-collapse-menu)) {
     color: var(--goa-color-text-light);
