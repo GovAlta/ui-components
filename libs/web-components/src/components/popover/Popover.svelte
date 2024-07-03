@@ -286,6 +286,7 @@
 
   .popover-target {
     cursor: pointer;
+    height: 100%;
   }
 
   .popover-target:has(:focus-visible) {
