@@ -177,9 +177,6 @@
     font-weight: var(--goa-font-weight-regular);
   }
 
-  .goa-radio-group--horizontal .goa-radio-label {
-    padding-right: var(--goa-space-xl);
-  }
 
   .goa-radio-label {
     padding-right: var(--goa-space-xl);
