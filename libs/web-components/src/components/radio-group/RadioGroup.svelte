@@ -52,7 +52,7 @@
 
     getChildren();
 
-    _rootEl.addEventListener("_click", (e: Event) => {
+    _rootEl.addEventListener("_radioItemChange", (e: Event) => {
       onChange((e as CustomEvent).detail);
     });
   });

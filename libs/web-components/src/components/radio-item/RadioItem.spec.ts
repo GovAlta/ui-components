@@ -79,11 +79,11 @@ describe("RadioItem", () => {
     });
     const rootEl = result.container.querySelector("label");
 
-    rootEl?.addEventListener("_click", mockOnChange);
+    rootEl?.addEventListener("_radioItemChange", mockOnChange);
     const input = result.container.querySelector("input") as HTMLInputElement;
     await fireEvent.click(input);
 
-    const expectedEvent = new CustomEvent("_click", {
+    const expectedEvent = new CustomEvent("_radioItemChange", {
       detail: "radio-item-1",
       composed: true,
       bubbles: true,
@@ -103,7 +103,7 @@ describe("RadioItem", () => {
       disabled: true,
     });
     const rootEl = result.container.querySelector("label");
-    rootEl?.addEventListener("_click", mockOnChange);
+    rootEl?.addEventListener("_radioItemChange", mockOnChange);
     const input = result.container.querySelector("input") as HTMLInputElement;
     await fireEvent.click(input);
 
@@ -121,7 +121,7 @@ describe("RadioItem", () => {
       checked: true,
     });
     const rootEl = result.container.querySelector("label");
-    rootEl?.addEventListener("_click", mockOnChange);
+    rootEl?.addEventListener("_radioItemChange", mockOnChange);
     const input = result.container.querySelector("input") as HTMLInputElement;
     await fireEvent.click(input);
 

@@ -98,7 +98,7 @@
     if (isDisabled) return;
     if (isChecked) return;
 
-    const event = new CustomEvent("_click", {
+    const event = new CustomEvent("_radioItemChange", {
       detail: value,
       composed: true,
       bubbles: true,
