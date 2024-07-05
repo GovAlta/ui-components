@@ -100,3 +100,12 @@ it("does not exceed 80% of the screen size or 400px", async () => {
   // Verify that the tooltip"s width has been adjusted
   expect(parseInt(tooltipEl.style.width, 10)).toBeLessThanOrEqual(400);
 });
+
+it('tooltip does not have extra margins', () => {
+  const { container } = render(Tooltip, { content: 'Test Tooltip' });
+  const tooltipTarget = container.querySelector('.tooltip-target');
+
+  expect(tooltipTarget).toBeTruthy();
+  const tooltipTargetStyle = window.getComputedStyle(tooltipTarget);
+  expect(tooltipTargetStyle.margin).toBe('0px');
+});

@@ -254,7 +254,7 @@
   }
 
   .tooltip-target {
-    margin: 4px;
+    margin: 0;
   }
 
   .tooltip-text.bottom {
