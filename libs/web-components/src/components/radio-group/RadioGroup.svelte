@@ -33,11 +33,17 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  // Private
+  let isError: boolean;
+
   // Reactive
 
   $: isDisabled = toBoolean(disabled);
-  $: isError = toBoolean(error);
   $: value && setCurrentSelectedOption(value);
+  $: {
+    isError = toBoolean(error);
+    bindOptions()
+  }
 
   // Private
 

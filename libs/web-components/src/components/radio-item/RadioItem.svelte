@@ -5,6 +5,7 @@
     description: { reflect: true },
     checked: { reflect: true },
     arialabel: { reflect: true },
+    error: { reflect: true },
   }
 }}/>
 
