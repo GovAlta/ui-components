@@ -2,7 +2,6 @@ import { fireEvent, render, waitFor } from "@testing-library/svelte";
 import GoARadioGroup from "./RadioGroup.svelte";
 import GoARadioGroupWrapper from "./RadioGroupWrapper.test.svelte";
 import { describe, it, expect, vi } from "vitest";
-import { tick } from "svelte";
 
 describe("GoARadioGroup Component", () => {
   it("should render", async () => {
@@ -86,25 +85,29 @@ describe("GoARadioGroup Component", () => {
     });
   });
 
-  // FIXME: unable to get the progress check working. Child events aren't able to be triggered
-  it.skip("should handle the events", async () => {
+  // FIXME: radio group doesn't hear child event
+  it("should handle the events", async () => {
     const mockOnChange = vi.fn();
     const name = "favcolor";
     const items = ["red", "blue", "orange"];
     const result = render(GoARadioGroupWrapper, {
       name,
       value: "orange",
-      testid: "test-id",
       items,
     });
 
-    await tick();
+    const radioGroup = result.container.querySelector("goa-radio-group");
+    radioGroup?.addEventListener("_change", mockOnChange);
 
-    const radioGroup = await result.findByTestId("test-id");
+    const radioItems = result.container.querySelectorAll("goa-radio-item");
+    expect(radioItems.length).toBe(3);
+    await fireEvent.click(radioItems[0]);
+    await fireEvent.change(radioItems[0]);
+    await waitFor(() => {
+      expect(mockOnChange).toBeCalled();
+    });
+  });
 
-    radioGroup.addEventListener("_change", mockOnChange);
-    const goaRadioItems = result.container.querySelectorAll("goa-radio-item");
-    await fireEvent.click(goaRadioItems[0]);
   });
 
   describe("Margins", () => {
