@@ -10,7 +10,7 @@ describe("RadioItem", () => {
       value: "radio-item-1",
       name: "radio-item-1-name",
       arialabel: "radio-item-1-label",
-      description: "test description"
+      description: "test description",
     });
 
     expect(result.getByTestId("radio-option-radio-item-1")).toBeTruthy();
@@ -24,8 +24,12 @@ describe("RadioItem", () => {
     expect(result.getByText("Radio Item 1")).toBeTruthy();
     const radioDescriptionDiv = result.container.querySelector(".goa-radio-description");
     expect(radioDescriptionDiv?.innerHTML).toContain("test description");
-    expect(radioDescriptionDiv?.getAttribute("id")).toContain(`${input.getAttribute("name")}-${input.getAttribute("value")}-description`);
-    expect(input.getAttribute("aria-describedby")).toBe(radioDescriptionDiv?.getAttribute("id"));
+    expect(radioDescriptionDiv?.getAttribute("id")).toContain(
+      `${input.getAttribute("name")}-${input.getAttribute("value")}-description`,
+    );
+    expect(input.getAttribute("aria-describedby")).toBe(
+      radioDescriptionDiv?.getAttribute("id"),
+    );
   });
 
   it("should render the radio item with slot description", async () => {
@@ -33,9 +37,9 @@ describe("RadioItem", () => {
       description: "Radio Item 1 description",
     });
     await waitFor(() => {
-      expect(
-        result.container.querySelector("[slot=description]")?.innerHTML,
-      ).toContain("Radio Item 1 description");
+      expect(result.container.querySelector("[slot=description]")?.innerHTML).toContain(
+        "Radio Item 1 description",
+      );
     });
   });
 
@@ -74,9 +78,11 @@ describe("RadioItem", () => {
       ariadescribedby: "radio-item-1-described-by",
     });
     const rootEl = result.container.querySelector("label");
+
     rootEl?.addEventListener("_click", mockOnChange);
     const input = result.container.querySelector("input") as HTMLInputElement;
     await fireEvent.click(input);
+
     const expectedEvent = new CustomEvent("_click", {
       detail: "radio-item-1",
       composed: true,

@@ -5,7 +5,10 @@
   import { typeValidator, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
-  import { GoARadioItemProps, RadioItemSelectProps } from "../radio-item/RadioItem.svelte";
+  import {
+    GoARadioItemProps,
+    RadioItemSelectProps,
+  } from "../radio-item/RadioItem.svelte";
 
   // Validator
   const [Orientations, validateOrientation] = typeValidator(
@@ -49,7 +52,7 @@
 
     getChildren();
 
-    _rootEl.addEventListener("_click",(e: Event) => {
+    _rootEl.addEventListener("_click", (e: Event) => {
       onChange((e as CustomEvent).detail);
     });
   });
@@ -67,22 +70,24 @@
       }
       _bindTimeoutId = setTimeout(() => {
         bindOptions();
-      }, 1)
-    })
+      }, 1);
+    });
   }
 
   function bindOptions() {
-    _radioItems.forEach(props => {
-      props.el.dispatchEvent(new CustomEvent<Partial<GoARadioItemProps>>("radio-group:init", {
-        composed: true,
-        detail: {
-          disabled: isDisabled,
-          error: isError,
-          description: props.description,
-          name,
-          checked: props.value === value,
-        }
-      }));
+    _radioItems.forEach((props) => {
+      props.el.dispatchEvent(
+        new CustomEvent<Partial<GoARadioItemProps>>("radio-group:init", {
+          composed: true,
+          detail: {
+            disabled: isDisabled,
+            error: isError,
+            description: props.description,
+            name,
+            checked: props.value === value,
+          },
+        }),
+      );
     });
   }
 
@@ -107,12 +112,14 @@
 
   function setCurrentSelectedOption(value: string) {
     _radioItems.forEach((item) => {
-      item.el.dispatchEvent(new CustomEvent<RadioItemSelectProps>("radio-group:select", {
-        composed: true,
-        detail: {
-          checked: item.value === value
-        }
-      }))
+      item.el.dispatchEvent(
+        new CustomEvent<RadioItemSelectProps>("radio-group:select", {
+          composed: true,
+          detail: {
+            checked: item.value === value,
+          },
+        }),
+      );
     });
   }
 </script>
@@ -126,7 +133,7 @@
   role="radiogroup"
   aria-label={arialabel}
 >
-    <slot />
+  <slot />
 </div>
 
 <style>

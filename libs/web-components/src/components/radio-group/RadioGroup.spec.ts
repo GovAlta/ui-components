@@ -31,7 +31,7 @@ describe("GoARadioGroup Component", () => {
         }
       });
     });
-  })
+  });
 
   it("should render with accessibility attributes", async () => {
     const name = "favcolor";
@@ -41,7 +41,7 @@ describe("GoARadioGroup Component", () => {
       value: "orange",
       testid: "test-id",
       items,
-      radioGroupAriaLabel: "please choose a color"
+      radioGroupAriaLabel: "please choose a color",
     });
 
     const radioGroupDiv = result.container.querySelector("[role='radiogroup']");
@@ -62,7 +62,7 @@ describe("GoARadioGroup Component", () => {
         }
       });
     });
-  })
+  });
 
   it("should select the preset value", async () => {
     // Arrange
@@ -83,7 +83,7 @@ describe("GoARadioGroup Component", () => {
       expect(goaRadioItems[0].getAttribute("checked")).toBe("false");
       expect(goaRadioItems[1].getAttribute("checked")).toBe("false");
       expect(goaRadioItems[2].getAttribute("checked")).toBe("true");
-    })
+    });
   });
 
   // FIXME: unable to get the progress check working. Child events aren't able to be triggered
