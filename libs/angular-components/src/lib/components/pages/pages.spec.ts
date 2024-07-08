@@ -5,10 +5,10 @@ import { Spacing } from "@abgov/ui-components-common";
 
 @Component({
   template: `
-  <goab-pages [current]="current" [mt]="mt" [mb]="mb" [ml]="ml" [mr]="mr">
-    <div>Children content</div>
-  </goab-pages>
-  `
+    <goab-pages [current]="current" [mt]="mt" [mb]="mb" [ml]="ml" [mr]="mr">
+      <div>Children content</div>
+    </goab-pages>
+  `,
 })
 class TestPagesComponent {
   current?: number;
@@ -26,7 +26,7 @@ describe("GoABPages", () => {
     TestBed.configureTestingModule({
       declarations: [TestPagesComponent],
       imports: [GoABPages],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestPagesComponent);
@@ -50,6 +50,5 @@ describe("GoABPages", () => {
     expect(el.getAttribute("mb")).toBe(`${component.mb}`);
     expect(el.getAttribute("ml")).toBe(`${component.ml}`);
     expect(el.getAttribute("mr")).toBe(`${component.mr}`);
-  })
+  });
 });
-

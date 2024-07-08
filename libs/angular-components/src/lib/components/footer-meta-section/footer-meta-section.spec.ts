@@ -4,35 +4,38 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
 @Component({
-  template:`
-  <goab-app-footer-meta-section testId="foo">
-    <a href="#">Home</a>
-  </goab-app-footer-meta-section>
-  `
+  template: `
+    <goab-app-footer-meta-section testId="foo">
+      <a href="#">Home</a>
+    </goab-app-footer-meta-section>
+  `,
 })
-class TestFooterMetaSectionComponent {/** do nothing **/}
+class TestFooterMetaSectionComponent {
+  /** do nothing **/
+}
 
 describe("GoABFooterMetaSection", () => {
   let fixture: ComponentFixture<TestFooterMetaSectionComponent>;
   let component: TestFooterMetaSectionComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFooterMetaSectionComponent],
       imports: [GoABAppFooterMetaSection],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
-
 
     fixture = TestBed.createComponent(TestFooterMetaSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  })
+  });
 
   it("should render", () => {
-    const el = fixture.debugElement.query(By.css("goa-app-footer-meta-section")).nativeElement;
+    const el = fixture.debugElement.query(
+      By.css("goa-app-footer-meta-section"),
+    ).nativeElement;
     expect(el?.getAttribute("data-testid")).toBe("foo");
     expect(el?.querySelector("a")).toBeTruthy();
     expect(el?.innerHTML).toContain("Home");
-  })
-})
+  });
+});

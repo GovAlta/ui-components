@@ -112,6 +112,7 @@
     "@angular/platform-browser": "18.0.3",
     "@angular/platform-browser-dynamic": "18.0.3",
     "@angular/router": "18.0.3",
+    "@nrwl/jest": "^19.4.1",
     "@nx/cypress": "^19.3.2",
     "@swc/helpers": "0.5.11",
     "date-fns": "^3.0.6",

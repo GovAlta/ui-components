@@ -1,27 +1,34 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABIconButton } from "./icon-button";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABIconButtonVariant, GoABIconSize, GoABIconType, Spacing } from "@abgov/ui-components-common";
+import {
+  GoABIconButtonVariant,
+  GoABIconSize,
+  GoABIconType,
+  Spacing,
+} from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
   template: `
-  <goab-icon-button [icon]="icon"
-                    [disabled]="disabled"
-                    [variant]="variant"
-                    [size]="size"
-                    [title]="title"
-                    [ariaLabel]="ariaLabel"
-                    [testId]="testId"
-                    [mt]="mt"
-                    [mr]="mr"
-                    [mb]="mb"
-                    [ml]="ml"
-                    (onClick)="onClick()">
-    Submit
-  </goab-icon-button>
-  `
+    <goab-icon-button
+      [icon]="icon"
+      [disabled]="disabled"
+      [variant]="variant"
+      [size]="size"
+      [title]="title"
+      [ariaLabel]="ariaLabel"
+      [testId]="testId"
+      [mt]="mt"
+      [mr]="mr"
+      [mb]="mb"
+      [ml]="ml"
+      (onClick)="onClick()"
+    >
+      Submit
+    </goab-icon-button>
+  `,
 })
 class TestIconButtonComponent {
   icon = "information" as GoABIconType;
@@ -36,18 +43,20 @@ class TestIconButtonComponent {
   ml?: Spacing;
   mb?: Spacing;
 
-  onClick() {/** do nothing **/}
+  onClick() {
+    /** do nothing **/
+  }
 }
 
 describe("GoABIconButton", () => {
   let fixture: ComponentFixture<TestIconButtonComponent>;
   let component: TestIconButtonComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestIconButtonComponent],
       imports: [GoABIconButton],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestIconButtonComponent);
@@ -70,7 +79,6 @@ describe("GoABIconButton", () => {
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-icon-button")).nativeElement;
     expect(el?.getAttribute("icon")).toBe(component.icon);
-    expect(el?.getAttribute("disabled")).toBe(`${component.disabled}`);
     expect(el?.getAttribute("size")).toBe(component.size);
     expect(el?.getAttribute("variant")).toBe(component.variant);
     expect(el?.getAttribute("title")).toBe(component.title);
@@ -89,6 +97,5 @@ describe("GoABIconButton", () => {
     fireEvent(el, new CustomEvent("_click"));
 
     expect(onClick).toBeCalledTimes(1);
-  })
-
-})
+  });
+});

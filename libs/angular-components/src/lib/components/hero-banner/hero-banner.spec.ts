@@ -3,18 +3,18 @@ import { GoABHeroBanner } from "./hero-banner";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
-
 @Component({
   template: `
-    <goab-hero-banner [heading]="heading"
-                      [backgroundUrl]="backgroundUrl"
-                      [backgroundColor]="backgroundColor"
-                      [textColor]="textColor"
-                      [minHeight]="minHeight"
-                      [maxContentWidth]="maxContentWidth"
-                      [testId]="testId"
+    <goab-hero-banner
+      [heading]="heading"
+      [backgroundUrl]="backgroundUrl"
+      [backgroundColor]="backgroundColor"
+      [textColor]="textColor"
+      [minHeight]="minHeight"
+      [maxContentWidth]="maxContentWidth"
+      [testId]="testId"
     >
-    <p>Children content</p>
+      <p>Children content</p>
     </goab-hero-banner>
   `,
 })
@@ -32,11 +32,11 @@ describe("GoABHeroBanner", () => {
   let fixture: ComponentFixture<TestHeroBannerComponent>;
   let component: TestHeroBannerComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestHeroBannerComponent],
       imports: [GoABHeroBanner],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestHeroBannerComponent);
     component = fixture.componentInstance;

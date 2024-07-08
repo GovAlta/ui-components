@@ -4,23 +4,25 @@ import { GoABTableSortHeader } from "@abgov/angular-components";
 
 @Component({
   template: `
-    <th><goab-table-sort-header
-      name="firstName"
-     direction="asc">
-      First name and really long header
-    </goab-table-sort-header></th>
-  `
+    <th>
+      <goab-table-sort-header name="firstName" direction="asc">
+        First name and really long header
+      </goab-table-sort-header>
+    </th>
+  `,
 })
-class TestTableSortHeaderComponent {/** do nothing **/}
+class TestTableSortHeaderComponent {
+  /** do nothing **/
+}
 
 describe("GoABTableSortHeader", () => {
   let fixture: ComponentFixture<TestTableSortHeaderComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestTableSortHeaderComponent],
       imports: [GoABTableSortHeader],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestTableSortHeaderComponent);

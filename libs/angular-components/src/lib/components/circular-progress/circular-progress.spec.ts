@@ -1,17 +1,23 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABCircularProgress } from "./circular-progress";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABCircularProgressSize, GoABCircularProgressVariant } from "@abgov/ui-components-common";
+import {
+  GoABCircularProgressSize,
+  GoABCircularProgressVariant,
+} from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
+
 @Component({
   template: `
-  <goab-circular-progress [variant]="variant"
-                          [size]="size"
-                          [progress]="progress"
-                          [message]="message"
-                          [visible]="visible"
-                          [testId]="testId"></goab-circular-progress>
-  `
+    <goab-circular-progress
+      [variant]="variant"
+      [size]="size"
+      [progress]="progress"
+      [message]="message"
+      [visible]="visible"
+      [testId]="testId"
+    ></goab-circular-progress>
+  `,
 })
 class TestCircularProgressComponent {
   variant?: GoABCircularProgressVariant;
@@ -26,11 +32,11 @@ describe("GoABCircularProgress", () => {
   let fixture: ComponentFixture<TestCircularProgressComponent>;
   let component: TestCircularProgressComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GoABCircularProgress],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [TestCircularProgressComponent]
+      declarations: [TestCircularProgressComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestCircularProgressComponent);
@@ -40,9 +46,10 @@ describe("GoABCircularProgress", () => {
     component.size = "large";
     component.message = "the message";
     component.visible = false;
+    component.testId = "foo";
 
     fixture.detectChanges();
-  })
+  });
 
   it("should not render anything when not visible", () => {
     const el = fixture.debugElement.query(By.css("goa-circular-progress")).nativeElement;
@@ -57,10 +64,13 @@ describe("GoABCircularProgress", () => {
 
       fixture.detectChanges();
 
-      const el = fixture.debugElement.query(By.css("goa-circular-progress")).nativeElement;
+      const el = fixture.debugElement.query(
+        By.css("goa-circular-progress"),
+      ).nativeElement;
       expect(el?.getAttribute("progress")).toBe(`${progress}`);
       expect(el?.getAttribute("message")).toBe(component.message);
+      expect(el?.getAttribute("data-testid")).toBe(component.testId);
       expect(el?.getAttribute("variant")).toBe(variant);
     });
   });
-})
+});

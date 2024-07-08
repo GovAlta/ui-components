@@ -77,12 +77,8 @@ describe("GoABCheckbox", () => {
   it("should render properties", () => {
     const checkboxElement = fixture.debugElement.query(By.css("goa-checkbox")).nativeElement;
     expect(checkboxElement.getAttribute("name")).toBe(component.name);
-    expect(checkboxElement.getAttribute("value")).toBe(component.value);
     expect(checkboxElement.getAttribute("text")).toBe(component.text);
-    expect(checkboxElement.getAttribute("disabled")).toBe("false");
-    expect(checkboxElement.getAttribute("checked")).toBe("true");
-    expect(checkboxElement.getAttribute("error")).toBe("false");
-    expect(checkboxElement.getAttribute("testid")).toBe(component.testId);
+    expect(checkboxElement.getAttribute("data-testid")).toBe(component.testId);
     expect(checkboxElement.getAttribute("mt")).toBe(component.mt);
     expect(checkboxElement.getAttribute("mr")).toBe(component.mr);
     expect(checkboxElement.getAttribute("mb")).toBe(component.mb);

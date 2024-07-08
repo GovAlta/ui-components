@@ -1,26 +1,33 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABIconSize, GoABIconTheme, GoABIconType, Spacing } from "@abgov/ui-components-common";
+import {
+  GoABIconSize,
+  GoABIconTheme,
+  GoABIconType,
+  Spacing,
+} from "@abgov/ui-components-common";
 import { GoABIcon } from "@abgov/angular-components";
 import { By } from "@angular/platform-browser";
 
 @Component({
   template: `
-  <goab-icon [type]="type"
-             [size]="size"
-             [theme]="theme"
-             [inverted]="inverted"
-             [fillColor]="fillColor"
-             [opacity]="opacity"
-             [title]="title"
-             [ariaLabel]="ariaLabel"
-             [testId]="testId"
-             [mt]="mt"
-             [mb]="mb"
-             [ml]="ml"
-             [mr]="mr"></goab-icon>
-  `
+    <goab-icon
+      [type]="type"
+      [size]="size"
+      [theme]="theme"
+      [inverted]="inverted"
+      [fillColor]="fillColor"
+      [opacity]="opacity"
+      [title]="title"
+      [ariaLabel]="ariaLabel"
+      [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [ml]="ml"
+      [mr]="mr"
+    ></goab-icon>
+  `,
 })
 class TestIconComponent {
   type = "information" as GoABIconType;
@@ -42,11 +49,11 @@ describe("GoABIcon", () => {
   let fixture: ComponentFixture<TestIconComponent>;
   let component: TestIconComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestIconComponent],
       imports: [GoABIcon],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestIconComponent);

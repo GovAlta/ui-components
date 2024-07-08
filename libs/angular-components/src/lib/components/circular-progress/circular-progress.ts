@@ -12,15 +12,13 @@ import { GoABCircularProgressSize, GoABCircularProgressVariant } from "@abgov/ui
       [attr.message]="message"
       [attr.visible]="visible"
       [attr.progress]="progress"
-      [attr.testid]="testId"
+      [attr.data-testid]="testId"
     >
-      <ng-content />
     </goa-circular-progress>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABCircularProgress {
-  // FIX: the variant and size binding isn't working
   @Input() variant?: GoABCircularProgressVariant;
   @Input() size?: GoABCircularProgressSize;
   @Input() message?: string;

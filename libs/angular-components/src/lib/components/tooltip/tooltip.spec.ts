@@ -5,23 +5,22 @@ import { GoABIcon } from "@abgov/angular-components";
 
 @Component({
   template: `
-    <goab-tooltip content="This is a tooltip"
-                  position="top"
-                  hAlign="right"
-                  testId="foo">
+    <goab-tooltip content="This is a tooltip" position="top" hAlign="right" testId="foo">
       <goab-icon type="information-circle"></goab-icon>
     </goab-tooltip>
-  `
+  `,
 })
-class TestTooltipComponent {/** do nothing **/}
+class TestTooltipComponent {
+  /** do nothing **/
+}
 
 describe("GoABTooltip", () => {
-  let fixture : ComponentFixture<TestTooltipComponent>;
+  let fixture: ComponentFixture<TestTooltipComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestTooltipComponent],
-      imports: [GoABTooltip, GoABIcon]
+      imports: [GoABTooltip, GoABIcon],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestTooltipComponent);
@@ -37,5 +36,5 @@ describe("GoABTooltip", () => {
 
     const goaIcon = el?.querySelector("goa-icon");
     expect(goaIcon?.getAttribute("type")).toBe("information-circle");
-  })
-})
+  });
+});

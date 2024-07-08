@@ -1,30 +1,32 @@
 import { GoABDatePickerOnChangeDetail, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   standalone: true,
   selector: "goab-date-picker",
-  template: ` <goa-date-picker
-    [attr.name]="name"
-    [attr.value]="value"
-    [attr.min]="min"
-    [attr.max]="max"
-    [attr.error]="error"
-    [attr.testid]="testId"
-    [attr.mt]="mt"
-    [attr.mb]="mb"
-    [attr.ml]="ml"
-    [attr.mr]="mr"
-    (_change)="_onChange($event)"
-  >
+  template: `
+    <goa-date-picker
+      [attr.name]="name"
+      [attr.value]="value"
+      [attr.min]="min"
+      [attr.max]="max"
+      [attr.error]="error"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
+
+      (_change)="_onChange($event)"
+    >
   </goa-date-picker>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: GoABDatePicker,
+      useExisting: forwardRef(() => GoABDatePicker),
     }
   ]
 })

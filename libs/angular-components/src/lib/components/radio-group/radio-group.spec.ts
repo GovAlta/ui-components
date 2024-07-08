@@ -112,7 +112,6 @@ describe("GoABRadioGroup", () => {
 
     expect(el?.getAttribute("arialabel")).toBe(component.ariaLabel);
     expect(el?.getAttribute("data-testid")).toBe(component.testId);
-    expect(el?.getAttribute("disabled")).toBe(`${component.disabled}`);
     expect(el?.getAttribute("error")).toBe(`${component.error}`);
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("ml")).toBe(component.ml);

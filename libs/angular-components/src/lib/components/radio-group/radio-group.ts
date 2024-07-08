@@ -1,16 +1,5 @@
-import {
-  GoABRadioGroupOnChangeDetail,
-  GoABRadioGroupOrientation,
-  Spacing,
-} from "@abgov/ui-components-common";
-import {
-  CUSTOM_ELEMENTS_SCHEMA,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  forwardRef,
-} from "@angular/core";
+import { GoABRadioGroupOnChangeDetail, GoABRadioGroupOrientation, Spacing } from "@abgov/ui-components-common";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
@@ -20,7 +9,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     <goa-radio-group
       [attr.name]="name"
       [attr.value]="value"
-      [attr.disabled]="disabled"
+      [disabled]="disabled"
       [attr.orientation]="orientation"
       [attr.error]="error"
       [attr.arialabel]="ariaLabel"

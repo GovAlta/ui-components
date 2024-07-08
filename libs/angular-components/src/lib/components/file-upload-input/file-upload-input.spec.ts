@@ -6,18 +6,19 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
-  template:`
-  <goab-file-upload-input (onSelectFile)="onSelectFile()"
-                          [maxFileSize]="maxFileSize"
-                          [accept]="accept"
-                          [variant]="variant"
-                          [testId]="testId"
-                          [mt]="mt"
-                          [mb]="mb"
-                          [mr]="mr"
-                          [ml]="ml"
-  ></goab-file-upload-input>
-  `
+  template: `
+    <goab-file-upload-input
+      (onSelectFile)="onSelectFile()"
+      [maxFileSize]="maxFileSize"
+      [accept]="accept"
+      [variant]="variant"
+      [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [mr]="mr"
+      [ml]="ml"
+    ></goab-file-upload-input>
+  `,
 })
 class TestFileUploadInputComponent {
   maxFileSize?: string;
@@ -29,18 +30,20 @@ class TestFileUploadInputComponent {
   ml?: Spacing;
   mr?: Spacing;
 
-  onSelectFile() {/** do nothing **/}
+  onSelectFile() {
+    /** do nothing **/
+  }
 }
 
 describe("GoABFileUploadInput", () => {
   let fixture: ComponentFixture<TestFileUploadInputComponent>;
   let component: TestFileUploadInputComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFileUploadInputComponent],
       imports: [GoABFileUploadInput],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestFileUploadInputComponent);
@@ -69,13 +72,13 @@ describe("GoABFileUploadInput", () => {
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("mr")).toBe(component.mr);
     expect(el?.getAttribute("ml")).toBe(component.ml);
-  })
+  });
 
   it("should handle onSelectFile event", () => {
     const onSelectFile = jest.spyOn(component, "onSelectFile");
     const el = fixture.debugElement.query(By.css("goa-file-upload-input")).nativeElement;
-    fireEvent(el, new CustomEvent("_selectFile", {detail: {}}));
+    fireEvent(el, new CustomEvent("_selectFile", { detail: {} }));
 
     expect(onSelectFile).toHaveBeenCalledTimes(1);
-  })
-})
+  });
+});
