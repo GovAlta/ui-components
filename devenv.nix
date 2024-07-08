@@ -11,14 +11,22 @@
   ];
 
   # https://devenv.sh/scripts/
+<<<<<<< HEAD
   scripts.hello.exec = "echo GoAB UI Components";
+=======
+  scripts.hello.exec = "echo ABGov UI Components";
+>>>>>>> c9699c4d (angular updates)
 
   enterShell = ''
     git --version
     node --version
     echo
     echo =================
+<<<<<<< HEAD
     echo GoAB UI Components
+=======
+    echo ABGov UI Components
+>>>>>>> c9699c4d (angular updates)
     echo =================
   '';
 

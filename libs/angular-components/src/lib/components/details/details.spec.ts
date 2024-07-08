@@ -1,24 +1,23 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABDetails } from "./details";
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
-import { Rule } from "eslint";
-import Fix = Rule.Fix;
 import { By } from "@angular/platform-browser";
 
 @Component({
-  template:
-  `
-    <goab-details [heading]="heading"
-                  [open]="open"
-                  [testId]="testId"
-                  [mt]="mt"
-                  [mb]="mb"
-                  [ml]="ml"
-                  [mr]="mr">
+  template: `
+    <goab-details
+      [heading]="heading"
+      [open]="open"
+      [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [ml]="ml"
+      [mr]="mr"
+    >
       The content
     </goab-details>
-  `
+  `,
 })
 class TestDetailsComponent {
   heading?: string;
@@ -34,11 +33,11 @@ describe("GoABDetails", () => {
   let fixture: ComponentFixture<TestDetailsComponent>;
   let component: TestDetailsComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GoABDetails],
       declarations: [TestDetailsComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestDetailsComponent);
@@ -54,7 +53,7 @@ describe("GoABDetails", () => {
     component.ml = "2xl";
 
     fixture.detectChanges();
-  })
+  });
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-details")).nativeElement;
@@ -66,5 +65,5 @@ describe("GoABDetails", () => {
     expect(el?.getAttribute("ml")).toBe(component.ml);
     expect(el?.getAttribute("data-testid")).toBe(component.testId);
     expect(el?.innerHTML).toContain("The content");
-  })
-})
+  });
+});

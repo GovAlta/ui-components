@@ -5,12 +5,14 @@ import { By } from "@angular/platform-browser";
 
 @Component({
   template: `
-  <goab-app-footer-nav-section [testId]="testId"
-                               [heading]="heading"
-                               [maxColumnCount]="maxColumnCount">
-    <p> Testing footer</p>
-  </goab-app-footer-nav-section>
-  `
+    <goab-app-footer-nav-section
+      [testId]="testId"
+      [heading]="heading"
+      [maxColumnCount]="maxColumnCount"
+    >
+      <p>Testing footer</p>
+    </goab-app-footer-nav-section>
+  `,
 })
 class TestFooterNavSectionComponent {
   testId?: string;
@@ -18,15 +20,15 @@ class TestFooterNavSectionComponent {
   maxColumnCount?: number;
 }
 
-describe("GoABAppFooterNavSection", ()  => {
+describe("GoABAppFooterNavSection", () => {
   let fixture: ComponentFixture<TestFooterNavSectionComponent>;
   let component: TestFooterNavSectionComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFooterNavSectionComponent],
       imports: [GoABAppFooterNavSection],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestFooterNavSectionComponent);
@@ -40,9 +42,11 @@ describe("GoABAppFooterNavSection", ()  => {
   });
 
   it("should render properties", () => {
-    const el = fixture.debugElement.query(By.css("goa-app-footer-nav-section")).nativeElement;
+    const el = fixture.debugElement.query(
+      By.css("goa-app-footer-nav-section"),
+    ).nativeElement;
     expect(el?.getAttribute("data-testid")).toBe(component.testId);
     expect(el?.getAttribute("heading")).toBe(component.heading);
     expect(el?.getAttribute("maxcolumncount")).toBe(`${component.maxColumnCount}`);
-  })
-})
+  });
+});

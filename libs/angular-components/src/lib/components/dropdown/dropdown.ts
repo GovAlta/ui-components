@@ -3,16 +3,17 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forward
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 // FIXME: issues exist when the `filterable` is set
+// "disabled", "value", "id" is an exposed property of HTMLInputElement, no need to bind with attr
 @Component({
   standalone: true,
   selector: "goab-dropdown",
   template: `
     <goa-dropdown
       [attr.name]="name"
-      [attr.value]="value"
+      [value]="value"
       [attr.arialabel]="ariaLabel"
       [attr.arialabelledby]="ariaLabelledBy"
-      [attr.disabled]="disabled"
+      [disabled]="disabled"
       [attr.error]="error"
       [attr.filterable]="filterable"
       [attr.leadingicon]="leadingIcon"
@@ -27,7 +28,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       [attr.data-testid]="testId"
       [attr.width]="width"
       [attr.relative]="relative"
-      [attr.id]="id"
+      [id]="id"
       (_change)="_onChange($event)"
     >
       <ng-content />

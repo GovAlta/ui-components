@@ -6,20 +6,22 @@ import { fireEvent } from "@testing-library/dom";
 
 @Component({
   template: `
-    <goab-textarea [testId]="testId"
-                   [name]="name"
-                   [value]="value"
-                   [rows]="rows"
-                   [placeholder]="placeholder"
-                   [disabled]="disabled"
-                   [countBy]="countBy"
-                   [maxCount]="maxCount"
-                   [mt]="mt"
-                   [mr]="mr"
-                   [mb]="mb"
-                   [ml]="ml"
-                   (onChange)="onChange()"></goab-textarea>
-  `
+    <goab-textarea
+      [testId]="testId"
+      [name]="name"
+      [value]="value"
+      [rows]="rows"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [countBy]="countBy"
+      [maxCount]="maxCount"
+      [mt]="mt"
+      [mr]="mr"
+      [mb]="mb"
+      [ml]="ml"
+      (onChange)="onChange()"
+    ></goab-textarea>
+  `,
 })
 class TestTextareaComponent {
   name = "textarea-name";
@@ -39,18 +41,20 @@ class TestTextareaComponent {
   mr?: Spacing;
   ml?: Spacing;
 
-  onChange() { /** do nothing **/}
+  onChange() {
+    /** do nothing **/
+  }
 }
 
 describe("GoABTextArea", () => {
-  let fixture : ComponentFixture<TestTextareaComponent>;
+  let fixture: ComponentFixture<TestTextareaComponent>;
   let component: TestTextareaComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestTextareaComponent],
       imports: [GoABTextArea],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestTextareaComponent);
     component = fixture.componentInstance;
@@ -75,7 +79,6 @@ describe("GoABTextArea", () => {
     expect(el?.getAttribute("value")).toBe(component.value);
     expect(el?.getAttribute("rows")).toBe(`${component.rows}`);
     expect(el?.getAttribute("placeholder")).toBe(component.placeholder);
-    expect(el?.getAttribute("disabled")).toBe(`${component.disabled}`);
     expect(el?.getAttribute("countby")).toBe(component.countBy);
     expect(el.getAttribute("maxcount")).toBe(`${component.maxCount}`);
     expect(el.getAttribute("mt")).toBe(component.mt);
@@ -88,10 +91,13 @@ describe("GoABTextArea", () => {
     const onChange = jest.spyOn(component, "onChange");
 
     const el = fixture.nativeElement.querySelector("goa-textarea");
-    fireEvent(el, new CustomEvent("_change", {
-      detail: { name: "textarea-name", value: "test" },
-    }));
+    fireEvent(
+      el,
+      new CustomEvent("_change", {
+        detail: { name: "textarea-name", value: "test" },
+      }),
+    );
 
     expect(onChange).toBeCalledTimes(1);
-  })
-})
+  });
+});

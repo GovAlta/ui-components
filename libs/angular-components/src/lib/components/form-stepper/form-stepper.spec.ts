@@ -7,16 +7,18 @@ import { fireEvent } from "@testing-library/dom";
 
 @Component({
   template: `
-  <goab-form-stepper [testId]="testId"
-                     [step]="step"
-                     [mt]="mt"
-                     [mr]="mr"
-                     [mb]="mb"
-                     [ml]="ml"
-                     (onChange)="onChange()">
-    <div>Some children</div>
-  </goab-form-stepper>
-  `
+    <goab-form-stepper
+      [testId]="testId"
+      [step]="step"
+      [mt]="mt"
+      [mr]="mr"
+      [mb]="mb"
+      [ml]="ml"
+      (onChange)="onChange()"
+    >
+      <div>Some children</div>
+    </goab-form-stepper>
+  `,
 })
 class TestFormStepperComponent {
   testId?: string;
@@ -35,11 +37,11 @@ describe("GoABFormStepper", () => {
   let fixture: ComponentFixture<TestFormStepperComponent>;
   let component: TestFormStepperComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFormStepperComponent],
       imports: [GoABFormStepper],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestFormStepperComponent);
@@ -52,7 +54,7 @@ describe("GoABFormStepper", () => {
     component.mb = "l";
     component.ml = "xl";
     fixture.detectChanges();
-  })
+  });
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-form-stepper")).nativeElement;
@@ -72,5 +74,5 @@ describe("GoABFormStepper", () => {
     fireEvent(el, new CustomEvent("_change"));
 
     expect(onChange).toBeCalledTimes(1);
-  })
-})
+  });
+});

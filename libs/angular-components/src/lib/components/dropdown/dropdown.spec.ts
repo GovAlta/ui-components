@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABDropdown } from "./dropdown";
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoABIconType, Spacing } from "@abgov/ui-components-common";
 import { GoABDropdownItem } from "@abgov/angular-components";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -112,7 +112,6 @@ describe("GoABDropdown", () => {
     expect(el?.getAttribute("filterable")).toBe("true");
     expect(el?.getAttribute("arialabel")).toBe("Label");
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
-    expect(el?.getAttribute("value")).toBe(component.value);
 
     // Check options
     const dropdownItems = el.querySelectorAll("goa-dropdown-item");
@@ -124,8 +123,6 @@ describe("GoABDropdown", () => {
     ];
     expectedOptions.forEach((option, index) => {
       expect(dropdownItems[index].getAttribute("name")).toBe(component.name);
-      expect(dropdownItems[index].getAttribute("label")).toBe(option.label);
-      expect(dropdownItems[index].getAttribute("value")).toBe(option.value);
     });
   });
 

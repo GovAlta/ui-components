@@ -1,11 +1,32 @@
 <h1>Text Area</h1>
+<h2>Using onChange to update value</h2>
 
+<goab-textarea (onChange)="handleExample1($event)" placeholder="Enter text here" [rows]="5"></goab-textarea>
+
+<p>Entered Value: {{ example1 }}</p>
+
+<h2>Using Reactive Form</h2>
+<form [formGroup]="example2Form">
+  <goab-form-item label="Example 2">
+    <goab-textarea formControlName="example2" placeholder="Enter text here"></goab-textarea>
+    <div slot="helptext">Entered value: {{example2Form.get("example2")?.value}}</div>
+  </goab-form-item>
+</form>
+
+<h2>Using ngModel</h2>
+<goab-form-item label="Example3">
+  <goab-textarea [(ngModel)]="example3" placeholder="Enter text here"></goab-textarea>
+  <div slot="helptext">Entered value: {{example3}}</div>
+</goab-form-item>
+
+<hr/>
+<h2>Other examples</h2>
 <div [formGroup]="form">
   <goab-form-item>
     <goab-textarea formControlName="textarea" countBy="character" [maxCount]="100"></goab-textarea>
   </goab-form-item>
   <goab-form-item>
-    <goab-input formControlName="input"></goab-input>
+    <goab-input formControlName="input" name="foo"></goab-input>
   </goab-form-item>
   Textarea Value: {{ form.controls["textarea"].value | json }}
   Input Value: {{ form.controls["input"].value | json }}
@@ -35,7 +56,7 @@
 
 <h2>Margin Spacing</h2>
 <goab-textarea mt="m" mb="xs" ml="xl" mr="2xl" name="comment-basic" (onChange)="onChange($event)"
-  value="Initial value"></goab-textarea>
+               value="Initial value"></goab-textarea>
 
 <h2>Reactive Binding</h2>
 {{ reactiveFormCtrl.value }}

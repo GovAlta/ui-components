@@ -5,14 +5,16 @@ import { By } from "@angular/platform-browser";
 
 @Component({
   template: `
-  <goab-app-header [heading]="heading"
-                   [url]="url"
-                   [fullMenuBreakpoint]="fullMenuBreakpoint"
-                   [maxContentWidth]="maxContentWidth"
-                   [testId]="testId">
-    <p>Children content</p>
-  </goab-app-header>
-  `
+    <goab-app-header
+      [heading]="heading"
+      [url]="url"
+      [fullMenuBreakpoint]="fullMenuBreakpoint"
+      [maxContentWidth]="maxContentWidth"
+      [testId]="testId"
+    >
+      <p>Children content</p>
+    </goab-app-header>
+  `,
 })
 class TestAppHeaderComponent {
   heading?: string;
@@ -26,11 +28,11 @@ describe("GoABAppHeader", () => {
   let fixture: ComponentFixture<TestAppHeaderComponent>;
   let component: TestAppHeaderComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestAppHeaderComponent],
       imports: [GoABAppHeader],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestAppHeaderComponent);
@@ -51,7 +53,9 @@ describe("GoABAppHeader", () => {
     expect(el?.getAttribute("heading")).toBe(component.heading);
     expect(el?.getAttribute("url")).toBe(component.url);
     expect(el?.getAttribute("maxcontentwidth")).toBe(component.maxContentWidth);
-    expect(el?.getAttribute("fullmenubreakpoint")).toBe(`${component.fullMenuBreakpoint}`);
+    expect(el?.getAttribute("fullmenubreakpoint")).toBe(
+      `${component.fullMenuBreakpoint}`,
+    );
     expect(el?.getAttribute("data-testid")).toBe(component.testId);
     expect(el?.innerHTML).toContain("Children content");
   });
