@@ -1,7 +1,11 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABBlock } from "./block";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABBlockAlignment, GoABBlockDirection, Spacing } from "@abgov/ui-components-common";
+import {
+  GoABBlockAlignment,
+  GoABBlockDirection,
+  Spacing,
+} from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
@@ -15,10 +19,10 @@ import { By } from "@angular/platform-browser";
       [mb]="mb"
       [ml]="ml"
       [mr]="mr"
-      >
-      <div>Block content </div>
+    >
+      <div>Block content</div>
     </goab-block>
-  `
+  `,
 })
 class TestBlockComponent {
   gap?: Spacing;
@@ -35,11 +39,11 @@ describe("GoABBlock", () => {
   let fixture: ComponentFixture<TestBlockComponent>;
   let component: TestBlockComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GoABBlock],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [TestBlockComponent]
+      declarations: [TestBlockComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestBlockComponent);
@@ -60,7 +64,7 @@ describe("GoABBlock", () => {
     expect(blockElement.getAttribute("gap")).toBe(component.gap);
     expect(blockElement.getAttribute("direction")).toBe(component.direction);
     expect(blockElement.getAttribute("alignment")).toBe(component.alignment);
-    expect(blockElement.getAttribute("testid")).toBe(component.testId);
+    expect(blockElement.getAttribute("data-testid")).toBe(component.testId);
     expect(blockElement.getAttribute("mt")).toBe(component.mt);
     expect(blockElement.getAttribute("mb")).toBe(component.mb);
     expect(blockElement.getAttribute("ml")).toBe(component.ml);
@@ -69,5 +73,3 @@ describe("GoABBlock", () => {
     expect(blockContent.textContent).toContain("Block content");
   });
 });
-
-

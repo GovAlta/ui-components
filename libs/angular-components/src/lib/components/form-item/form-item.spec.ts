@@ -5,22 +5,24 @@ import { GoABFormItemRequirement, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
- template: `
- <goab-form-item [label]="label"
-                 [requirement]="requirement"
-                 [error]="error"
-                 [helpText]="helpText"
-                 [id]="id"
-                 [testId]="testId"
-                 [mt]="mt"
-                 [mb]="mb"
-                 [mr]="mr"
-                 [ml]="ml">
-   <input data-testid="foo">
-   <div slot="error" *ngIf="errorSlot">This is an error slot</div>
-   <div slot="helptext" *ngIf="helpTextSlot">This is a helpText slot</div>
- </goab-form-item>
- `
+  template: `
+    <goab-form-item
+      [label]="label"
+      [requirement]="requirement"
+      [error]="error"
+      [helpText]="helpText"
+      [id]="id"
+      [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [mr]="mr"
+      [ml]="ml"
+    >
+      <input data-testid="foo" />
+      <div slot="error" *ngIf="errorSlot">This is an error slot</div>
+      <div slot="helptext" *ngIf="helpTextSlot">This is a helpText slot</div>
+    </goab-form-item>
+  `,
 })
 class TestFormItemComponent {
   label?: string;
@@ -37,15 +39,15 @@ class TestFormItemComponent {
   ml?: Spacing;
 }
 
-describe("GoABFormItem", () =>{
+describe("GoABFormItem", () => {
   let fixture: ComponentFixture<TestFormItemComponent>;
   let component: TestFormItemComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFormItemComponent],
       imports: [GoABFormItem],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestFormItemComponent);
@@ -59,7 +61,7 @@ describe("GoABFormItem", () =>{
     component.mb = "l";
     component.ml = "xl";
     component.mr = "m";
-  })
+  });
 
   it("should render with properties", () => {
     component.error = "This is an error";
@@ -94,6 +96,5 @@ describe("GoABFormItem", () =>{
     expect(el?.querySelector("[slot='helptext']")).toBeTruthy();
     expect(el?.innerHTML).toContain("This is a helpText slot");
     expect(el?.querySelector("input[data-testid='foo']")).toBeTruthy();
-  })
+  });
 });
-

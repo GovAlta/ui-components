@@ -1,8 +1,4 @@
-import {
-  GoABFormItemLabelSize,
-  GoABFormItemRequirement,
-  Spacing,
-} from "@abgov/ui-components-common";
+import { GoABFormItemLabelSize, GoABFormItemRequirement, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
@@ -15,7 +11,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.helptext]="helpText"
       [attr.error]="error"
       [attr.data-testid]="testId"
-      [attr.id]="id"
+      [id]="id"
       [attr.requirement]="requirement"
       [attr.mt]="mt"
       [attr.mb]="mb"

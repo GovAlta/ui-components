@@ -2,7 +2,7 @@ import { GoABContainer, GoABDatePicker, GoABDropdown, GoABDropdownItem, GoABForm
 import { GoABDatePickerOnChangeDetail, GoABDropdownOnChangeDetail } from "@abgov/ui-components-common";
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Countries, CountrySubdivisions } from "playground/angular/src/app/dropdown/countries.data";
 
 @Component({
@@ -19,9 +19,39 @@ import { Countries, CountrySubdivisions } from "playground/angular/src/app/dropd
     GoABSpacer,
     ReactiveFormsModule,
     CommonModule,
+    FormsModule
   ]
 })
 export class DropdownComponent implements OnInit {
+  example1: string | undefined;
+  example2Form: FormGroup;
+  example3 = "option1";
+
+  constructor(private fb: FormBuilder) {
+    this.example2Form = new FormGroup({
+      dropdownControl: new FormControl('')
+    });
+
+    this.fg = this.fb.group({
+      businessName: [null as (string | null), []],
+      address1: [null as (string | null), []],
+      address2: [null as (string | null), []],
+      locality: [null as (string | null), []],
+      region: [null as (string | null), []],
+      country: [null as (string | null), []],
+      postalCode: [null as (string | null), []]
+    });
+  }
+
+  onChangeExample1(event: GoABDropdownOnChangeDetail) {
+    this.example1 = event.value;
+  }
+
+
+
+
+
+
   colors: string[] = [];
   selectedColor = "red";
   boundVal = "";
@@ -98,17 +128,7 @@ export class DropdownComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder) {
-    this.fg = this.fb.group({
-      businessName: [null as (string | null), []],
-      address1: [null as (string | null), []],
-      address2: [null as (string | null), []],
-      locality: [null as (string | null), []],
-      region: [null as (string | null), []],
-      country: [null as (string | null), []],
-      postalCode: [null as (string | null), []]
-    });
-  }
+
 
   selectColor(event: GoABDropdownOnChangeDetail) {
     console.log("Select Color", event);

@@ -4,10 +4,10 @@ import { Component } from "@angular/core";
 
 @Component({
   template: `
-  <goab-side-menu-group [heading]="heading" [testId]="testId">
-    <a href="#">Link</a>
-  </goab-side-menu-group>
-  `
+    <goab-side-menu-group [heading]="heading" [testId]="testId">
+      <a href="#">Link</a>
+    </goab-side-menu-group>
+  `,
 })
 class TestSideMenuGroupComponent {
   heading = "some header";
@@ -18,10 +18,10 @@ describe("GoABSideMenuGroup", () => {
   let fixture: ComponentFixture<TestSideMenuGroupComponent>;
   let component: TestSideMenuGroupComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestSideMenuGroupComponent],
-      imports: [GoABSideMenuGroup]
+      imports: [GoABSideMenuGroup],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSideMenuGroupComponent);
@@ -35,4 +35,4 @@ describe("GoABSideMenuGroup", () => {
     expect(el?.getAttribute("data-testid")).toBe(component.testId);
     expect(el?.querySelector("a")?.textContent).toContain("Link");
   });
-})
+});

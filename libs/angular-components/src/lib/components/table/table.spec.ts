@@ -1,31 +1,37 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABTable } from "./table";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABTableOnSortDetail, GoABTableVariant, Spacing } from "@abgov/ui-components-common";
+import {
+  GoABTableOnSortDetail,
+  GoABTableVariant,
+  Spacing,
+} from "@abgov/ui-components-common";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
   template: `
-  <goab-table [width]="width"
-              [variant]="variant"
-              [testId]="testId"
-              [mt]="mt"
-              [mb]="mb"
-              [mr]="mr"
-              [ml]="ml"
-              (onSort)="onSort($event)">
-    <thead>
-      <tr>
-        <th>Column 1</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Row 1</td>
-      </tr>
-    </tbody>
-  </goab-table>
-  `
+    <goab-table
+      [width]="width"
+      [variant]="variant"
+      [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [mr]="mr"
+      [ml]="ml"
+      (onSort)="onSort($event)"
+    >
+      <thead>
+        <tr>
+          <th>Column 1</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Row 1</td>
+        </tr>
+      </tbody>
+    </goab-table>
+  `,
 })
 class TestTableComponent {
   width?: string;
@@ -35,18 +41,21 @@ class TestTableComponent {
   mb?: Spacing;
   mr?: Spacing;
   ml?: Spacing;
-  onSort(event: GoABTableOnSortDetail) {/** do nothing **/}
+
+  onSort(event: GoABTableOnSortDetail) {
+    /** do nothing **/
+  }
 }
 
 describe("GoABTable", () => {
   let fixture: ComponentFixture<TestTableComponent>;
   let component: TestTableComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestTableComponent],
       imports: [GoABTable],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestTableComponent);
@@ -83,11 +92,13 @@ describe("GoABTable", () => {
   it("should dispatch _sort", () => {
     const onSort = jest.spyOn(component, "onSort");
     const el = fixture.nativeElement.querySelector("goa-table");
-    fireEvent(el, new CustomEvent("_sort", {
-      detail: { sortBy: "column1", sortDir: 1 }
-    }));
-
-    expect(onSort).toHaveBeenCalledWith({"sortBy": "column1", "sortDir": 1}
+    fireEvent(
+      el,
+      new CustomEvent("_sort", {
+        detail: { sortBy: "column1", sortDir: 1 },
+      }),
     );
+
+    expect(onSort).toHaveBeenCalledWith({ sortBy: "column1", sortDir: 1 });
   });
-})
+});

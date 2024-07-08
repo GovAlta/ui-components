@@ -6,8 +6,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   template: `
     <goa-dropdown-item
       [attr.data-testid]="testId"
-      [attr.value]="value"
-      [attr.label]="label"
+      [value]="value"
+      [label]="label"
       [attr.filter]="filter"
       [attr.name]="name"
     >

@@ -4,24 +4,22 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoABBadgeType, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
-
-// <goa-badge type="information" [icon]=true content="Information" arialabel="123"></goa-badge>
-
 @Component({
   template: `
-  <goab-badge [type]="type"
-              [icon]="icon"
-              [content]="content"
-              [ariaLabel]="ariaLabel"
-              [testId]="testId"
-              [mt]="mt"
-              [mb]="mb"
-              [ml]="ml"
-              [mr]="mr"
-  ></goab-badge>
-  `
+    <goab-badge
+      [type]="type"
+      [icon]="icon"
+      [content]="content"
+      [ariaLabel]="ariaLabel"
+      [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [ml]="ml"
+      [mr]="mr"
+    ></goab-badge>
+  `,
 })
-class TestBadgeComponent{
+class TestBadgeComponent {
   type?: GoABBadgeType;
   content?: string;
   testId?: string;
@@ -41,7 +39,7 @@ describe("GoABBadge", () => {
     await TestBed.configureTestingModule({
       imports: [GoABBadge],
       declarations: [TestBadgeComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestBadgeComponent);
@@ -71,4 +69,4 @@ describe("GoABBadge", () => {
     expect(badgeElement.getAttribute("ml")).toBe(component.ml);
     expect(badgeElement.getAttribute("mr")).toBe(component.mr);
   });
-})
+});

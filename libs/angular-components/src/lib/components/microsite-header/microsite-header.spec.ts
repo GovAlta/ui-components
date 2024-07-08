@@ -4,15 +4,17 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 @Component({
   template: `
-  <goab-microsite-header [type]="type"
-                         [version]="version"
-                         [feedbackUrl]="feedbackUrl"
-                         [maxContentWidth]="maxContentWidth"
-                         [feedbackUrlTarget]="feedbackUrlTarget"
-                         [headerUrlTarget]="headerUrlTarget"
-                         [testId]="testId">
-  </goab-microsite-header>
-  `
+    <goab-microsite-header
+      [type]="type"
+      [version]="version"
+      [feedbackUrl]="feedbackUrl"
+      [maxContentWidth]="maxContentWidth"
+      [feedbackUrlTarget]="feedbackUrlTarget"
+      [headerUrlTarget]="headerUrlTarget"
+      [testId]="testId"
+    >
+    </goab-microsite-header>
+  `,
 })
 class TestMicrositeHeaderComponent {
   type = "alpha";
@@ -27,16 +29,16 @@ class TestMicrositeHeaderComponent {
 describe("GoABMicrositeHeader", () => {
   let fixture: ComponentFixture<TestMicrositeHeaderComponent>;
   let component: TestMicrositeHeaderComponent;
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestMicrositeHeaderComponent],
       imports: [GoABMicrositeHeader],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestMicrositeHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  })
+  });
   it("should render properties", () => {
     const el = document.querySelector("goa-microsite-header");
     expect(el?.getAttribute("type")).toEqual("alpha");
@@ -45,6 +47,6 @@ describe("GoABMicrositeHeader", () => {
     expect(el?.getAttribute("maxcontentwidth")).toEqual("100%");
     expect(el?.getAttribute("feedbackurltarget")).toEqual("_blank");
     expect(el?.getAttribute("headerurltarget")).toEqual("_self");
-    expect(el?.getAttribute("data-testid")).toEqual
-  })
+    expect(el?.getAttribute("data-testid")).toEqual;
+  });
 });

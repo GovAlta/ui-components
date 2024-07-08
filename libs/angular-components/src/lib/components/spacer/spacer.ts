@@ -1,7 +1,4 @@
-import {
-  GoABSpacerHorizontalSpacing,
-  GoABSpacerVerticalSpacing,
-} from "@abgov/ui-components-common";
+import { GoABSpacerHorizontalSpacing, GoABSpacerVerticalSpacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({

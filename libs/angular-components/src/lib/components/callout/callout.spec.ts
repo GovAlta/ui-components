@@ -5,14 +5,16 @@ import { GoABCalloutSize, GoABCalloutType } from "@abgov/ui-components-common";
 
 @Component({
   template: `
-    <goab-callout [type]="type"
-                  [heading]="heading"
-                  [size]="size"
-                  [testId]="testId"
-                  [mt]="mt"
-                  [mb]="mb"
-                  [ml]="ml"
-                  [mr]="mr">
+    <goab-callout
+      [type]="type"
+      [heading]="heading"
+      [size]="size"
+      [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [ml]="ml"
+      [mr]="mr"
+    >
       Information to the user goes in the content. Information can include markup as
       desired.
     </goab-callout>
@@ -33,11 +35,11 @@ describe("GoABCallout", () => {
   let fixture: ComponentFixture<TestCalloutComponent>;
   let component: TestCalloutComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GoABCallout],
       declarations: [TestCalloutComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestCalloutComponent);
@@ -66,6 +68,8 @@ describe("GoABCallout", () => {
     expect(el.getAttribute("ml")).toBe(component.ml);
 
     // render children
-    expect(el.textContent).toContain("Information to the user goes in the content. Information can include markup as desired.");
+    expect(el.textContent).toContain(
+      "Information to the user goes in the content. Information can include markup as desired.",
+    );
   });
 });

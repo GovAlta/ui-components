@@ -2,7 +2,7 @@ import { GoABFormItem, GoABInput, GoABTextArea } from "@abgov/angular-components
 import { GoABTextAreaOnChangeDetail, GoABTextAreaOnKeyPressDetail } from "@abgov/ui-components-common";
 import { JsonPipe } from "@angular/common";
 import { Component } from "@angular/core";
-import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
   standalone: true,
@@ -14,9 +14,17 @@ import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
     GoABInput,
     ReactiveFormsModule,
     JsonPipe,
+    FormsModule
   ]
 })
 export class TextAreaComponent {
+  example1 = "";
+  handleExample1(event: GoABTextAreaOnChangeDetail) {
+    this.example1 = event.value;
+  }
+  example2Form: FormGroup;
+  example3 = "";
+
   boundVal = "";
   reactiveFormCtrl = new FormControl();
   form = new FormGroup({
@@ -24,7 +32,11 @@ export class TextAreaComponent {
     input: new FormControl(),
   })
 
-  constructor() { }
+  constructor() {
+    this.example2Form = new FormGroup({
+      example2: new FormControl("")
+    })
+  }
 
   onChange(e: GoABTextAreaOnChangeDetail) {
     console.log("onChange", e.value)

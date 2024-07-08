@@ -4,23 +4,16 @@ import { GoABAppFooter } from "@abgov/angular-components";
 import { By } from "@angular/platform-browser";
 
 @Component({
-  template: `
-    <goab-app-footer
-      [maxContentWidth]="maxContentWidth"
-    >
-      <div slot="nav">
-        This is the nav content
-      </div>
-      <div slot="meta">
-        This is the meta content
-      </div>
-    </goab-app-footer>`
+  template: ` <goab-app-footer [maxContentWidth]="maxContentWidth">
+    <div slot="nav">This is the nav content</div>
+    <div slot="meta">This is the meta content</div>
+  </goab-app-footer>`,
 })
 class TestFooterComponent {
   maxContentWidth?: string;
 }
 
-describe('GoABAccordion', () => {
+describe("GoABFooter", () => {
   let fixture: ComponentFixture<TestFooterComponent>;
   let component: TestFooterComponent;
 
@@ -28,7 +21,7 @@ describe('GoABAccordion', () => {
     await TestBed.configureTestingModule({
       imports: [GoABAppFooter],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [TestFooterComponent]
+      declarations: [TestFooterComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestFooterComponent);
@@ -39,7 +32,9 @@ describe('GoABAccordion', () => {
   });
 
   it("should render and set the props correctly", () => {
-    const footerElement = fixture.debugElement.query(By.css("goa-app-footer")).nativeElement;
+    const footerElement = fixture.debugElement.query(
+      By.css("goa-app-footer"),
+    ).nativeElement;
     expect(footerElement.getAttribute("maxcontentwidth")).toBe("100%");
     const navContent = footerElement.querySelector("[slot='nav']");
     expect(navContent.textContent).toContain("This is the nav content");

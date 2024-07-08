@@ -7,13 +7,13 @@ import { GoABButton, GoABHeroBanner } from "@abgov/angular-components";
 
 @Component({
   template: `
-  <goab-hero-banner heading="Upgrading our bitumen" backgroundColor="some-ng.png">
-    This is a hero banner content
-    <goab-hero-banner-actions>
-      <goab-button (onClick)="onClick()">Submit</goab-button>
-    </goab-hero-banner-actions>
-  </goab-hero-banner>
-  `
+    <goab-hero-banner heading="Upgrading our bitumen" backgroundColor="some-ng.png">
+      This is a hero banner content
+      <goab-hero-banner-actions>
+        <goab-button (onClick)="onClick()">Submit</goab-button>
+      </goab-hero-banner-actions>
+    </goab-hero-banner>
+  `,
 })
 class TestHeroBannerActionComponent {
   onClick() {
@@ -24,11 +24,11 @@ class TestHeroBannerActionComponent {
 describe("GoABHeroBannerActions", () => {
   let fixture: ComponentFixture<TestHeroBannerActionComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestHeroBannerActionComponent],
       imports: [GoABHeroBanner, GoABHeroBannerActions, GoABButton],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHeroBannerActionComponent);
@@ -38,5 +38,5 @@ describe("GoABHeroBannerActions", () => {
     console.log(prettyDOM(fixture.debugElement.nativeElement));
     const el = fixture.debugElement.query(By.css("goa-hero-banner")).nativeElement;
     expect(el?.querySelector("goa-button").textContent).toBe("Submit");
-  })
-})
+  });
+});

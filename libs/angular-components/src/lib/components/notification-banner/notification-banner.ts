@@ -1,11 +1,5 @@
 import { GoABAriaLiveType, GoABNotificationType } from "@abgov/ui-components-common";
-import {
-  CUSTOM_ELEMENTS_SCHEMA,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,

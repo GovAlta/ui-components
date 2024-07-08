@@ -1,25 +1,15 @@
-import {
-  GoABFileUploadInputOnSelectFileDetail,
-  GoABFileUploadInputVariant,
-  Spacing,
-} from "@abgov/ui-components-common";
-import {
-  CUSTOM_ELEMENTS_SCHEMA,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from "@angular/core";
+import { GoABFileUploadInputOnSelectFileDetail, GoABFileUploadInputVariant, Spacing } from "@abgov/ui-components-common";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   standalone: true,
   selector: "goab-file-upload-input",
-  template: ` <goa-file-upload-input
+  template: `<goa-file-upload-input
     [attr.variant]="variant"
     [attr.accept]="accept"
     [attr.maxfilesize]="maxFileSize"
     [attr.data-testid]="testId"
-    [attr.id]="id"
+    [id]="id"
     [attr.mt]="mt"
     [attr.mb]="mb"
     [attr.mr]="mr"

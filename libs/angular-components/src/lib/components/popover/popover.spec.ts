@@ -6,23 +6,25 @@ import { GoABButton } from "@abgov/angular-components";
 
 @Component({
   template: `
-  <goab-popover [testId]="testId"
-                [maxWidth]="maxWidth"
-                [padded]="padded"
-                [position]="position"
-                [relative]="relative"
-                [mt]="mt"
-                [mb]="mb"
-                [ml]="ml"
-                [mr]="mr">
-    <div slot="target">
-      <goab-button type="secondary" size="compact">Click me</goab-button>
-    </div>
-    The content of the pop over.
-  </goab-popover>
-  `
+    <goab-popover
+      [testId]="testId"
+      [maxWidth]="maxWidth"
+      [padded]="padded"
+      [position]="position"
+      [relative]="relative"
+      [mt]="mt"
+      [mb]="mb"
+      [ml]="ml"
+      [mr]="mr"
+    >
+      <div slot="target">
+        <goab-button type="secondary" size="compact">Click me</goab-button>
+      </div>
+      The content of the pop over.
+    </goab-popover>
+  `,
 })
-class TestPopoverComponent{
+class TestPopoverComponent {
   maxWidth = "320px";
   padded = true;
   position?: GoABPopoverPosition;
@@ -38,11 +40,11 @@ describe("GoABPopover", () => {
   let fixture: ComponentFixture<TestPopoverComponent>;
   let component: TestPopoverComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestPopoverComponent],
       imports: [GoABPopover, GoABButton],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestPopoverComponent);
@@ -85,5 +87,5 @@ describe("GoABPopover", () => {
     expect(targetSlot.querySelector("goa-button")).toBeTruthy();
     expect(targetSlot.querySelector("goa-button").innerHTML).toContain("Click me");
     expect(el.innerHTML).toContain("The content of the pop over");
-  })
+  });
 });

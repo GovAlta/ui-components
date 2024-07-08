@@ -5,12 +5,14 @@ import { GoABSpinnerSize, GoABSpinnerType } from "@abgov/ui-components-common";
 
 @Component({
   template: `
-    <goab-spinner [type]="type"
-                  [size]="size"
-                  [invert]="invert"
-                  [testId]="testId"
-                  [progress]="progress"></goab-spinner>
-  `
+    <goab-spinner
+      [type]="type"
+      [size]="size"
+      [invert]="invert"
+      [testId]="testId"
+      [progress]="progress"
+    ></goab-spinner>
+  `,
 })
 class TestSpinnerComponent {
   type = "progress" as GoABSpinnerType;
@@ -24,17 +26,17 @@ describe("GoABSpinner", () => {
   let fixture: ComponentFixture<TestSpinnerComponent>;
   let component: TestSpinnerComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestSpinnerComponent],
       imports: [GoABSpinner],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSpinnerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  })
+  });
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-spinner");
@@ -44,5 +46,5 @@ describe("GoABSpinner", () => {
     expect(el?.getAttribute("progress")).toBe(`${component.progress}`);
     expect(el?.getAttribute("invert")).toBe(`${component.invert}`);
     expect(el?.getAttribute("data-testid")).toBe(component.testId);
-  })
-})
+  });
+});

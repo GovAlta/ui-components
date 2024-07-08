@@ -6,12 +6,14 @@ import { By } from "@angular/platform-browser";
 
 @Component({
   template: `
-  <goab-divider [testId]="testId"
-                [mt]="mt"
-                [mb]="mb"
-                [ml]="ml"
-                [mr]="mr"></goab-divider>
-  `
+    <goab-divider
+      [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [ml]="ml"
+      [mr]="mr"
+    ></goab-divider>
+  `,
 })
 class TestDividerComponent {
   testId?: string;
@@ -25,11 +27,11 @@ describe("GoABDivider", () => {
   let fixture: ComponentFixture<TestDividerComponent>;
   let component: TestDividerComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GoABDivider],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [TestDividerComponent]
+      declarations: [TestDividerComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestDividerComponent);
@@ -43,7 +45,7 @@ describe("GoABDivider", () => {
     component.testId = "divider-testid";
 
     fixture.detectChanges();
-  })
+  });
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-divider")).nativeElement;
@@ -52,5 +54,5 @@ describe("GoABDivider", () => {
     expect(el?.getAttribute("mr")).toBe("m");
     expect(el?.getAttribute("mb")).toBe("l");
     expect(el?.getAttribute("ml")).toBe("xl");
-  })
-})
+  });
+});

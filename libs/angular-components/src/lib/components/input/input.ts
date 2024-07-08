@@ -8,29 +8,29 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   template: `
     <goa-input
       [attr.type]="type"
-      [attr.debounce]="debounce"
-      [attr.focused]="focused"
       [attr.name]="name"
+      [attr.focused]="focused"
+      [attr.value]="value"
       [attr.autocapitalize]="autoCapitalize"
-      [attr.id]="id"
+      [attr.placeholder]="placeholder"
       [attr.leadingicon]="leadingIcon"
       [attr.trailingicon]="trailingIcon"
       [attr.variant]="variant"
-      [attr.disabled]="disabled"
+      [disabled]="disabled"
       [attr.readonly]="readonly"
-      [attr.placeholder]="placeholder"
       [attr.error]="error"
-      [attr.data-testId]="testId"
-      [attr.value]="value"
+      [attr.data-testid]="testId"
       [attr.width]="width"
+      [attr.arialabel]="ariaLabel"
+      [attr.arialabelledby]="ariaLabelledBy"
       [attr.min]="min"
       [attr.max]="max"
       [attr.step]="step"
-      [attr.maxlength]="maxLength"
       [attr.prefix]="prefix"
       [attr.suffix]="suffix"
-      [attr.arialabel]="ariaLabel"
-      [attr.arialabelledby]="ariaLabelledBy"
+      [attr.debounce]="debounce"
+      [attr.maxlength]="maxLength"
+      [attr.id]="id"
       [attr.mt]="mt"
       [attr.mr]="mr"
       [attr.mb]="mb"
@@ -55,7 +55,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   ]
 })
 export class GoABInput implements ControlValueAccessor, OnInit {
-  @Input({ required: true }) name!: string;
+  @Input() type?: GoABInputType = "text";
+  @Input() name?: string;
   @Input() id?: string;
   @Input() debounce?: number;
   @Input() disabled?: boolean;
@@ -77,7 +78,6 @@ export class GoABInput implements ControlValueAccessor, OnInit {
   @Input() min?: number;
   @Input() max?: number;
   @Input() step?: number;
-  @Input() type?: GoABInputType = "text";
   @Input() ariaLabelledBy?: string;
   @Input() mt?: Spacing;
   @Input() mr?: Spacing;
