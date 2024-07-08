@@ -5,11 +5,19 @@ import { Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
-  template:`
-  <goab-grid [gap]="gap" [minChildWidth]="minChildWidth" [testId]="testId" [mt]="mt" [mb]="mb" [ml]="ml" [mr]="mr">
-    <p>Children content</p>
-  </goab-grid>
-  `
+  template: `
+    <goab-grid
+      [gap]="gap"
+      [minChildWidth]="minChildWidth"
+      [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [ml]="ml"
+      [mr]="mr"
+    >
+      <p>Children content</p>
+    </goab-grid>
+  `,
 })
 class TestGridComponent {
   gap?: Spacing;
@@ -25,11 +33,11 @@ describe("GoABGrid", () => {
   let fixture: ComponentFixture<TestGridComponent>;
   let component: TestGridComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestGridComponent],
       imports: [GoABGrid],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestGridComponent);

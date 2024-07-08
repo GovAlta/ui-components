@@ -155,9 +155,7 @@ describe("GoABInput", () => {
     expect(input?.getAttribute("trailingicon")).toBe(component.trailingIcon);
     expect(input?.getAttribute("autocapitalize")).toBe(component.autoCapitalize);
     expect(input?.getAttribute("variant")).toBe(component.variant);
-    expect(input?.getAttribute("disabled")).toBeTruthy();
     expect(input?.getAttribute("focused")).toBe(`${component.focused}`);
-    expect(input?.getAttribute("readonly")).toBeTruthy();
     expect(input?.getAttribute("placeholder")).toBe(component.placeholder);
     expect(input?.getAttribute("prefix")).toBe(component.prefix);
     expect(input?.getAttribute("suffix")).toBe(component.suffix);

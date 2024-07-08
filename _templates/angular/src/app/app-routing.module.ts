@@ -45,6 +45,8 @@ import { TabsComponent } from "playground/angular/src/app/tabs/tabs";
 import { ComponentWrapperPage } from "playground/angular/src/app/component-wrapper";
 import { Bug1734 } from "./bugs/bug-1734";
 import { Bug1756 } from "./bugs/bug-1756";
+import { ColumnLayoutComponent } from "playground/angular/src/app/column-layout/column-layout.component";
+import { DatePickerComponent } from "playground/angular/src/app/date-picker/date-picker.component";
 
 const routes: Routes = [
   { path: "bug-1734", component: Bug1734 },
@@ -89,6 +91,8 @@ const routes: Routes = [
   { path: "two-column-layout", component: TwoColumnLayoutComponent },
   { path: "three-column-layout", component: ThreeColumnLayoutComponent },
   { path: "tabs", component: TabsComponent },
+  { path: "column-layout", component: ColumnLayoutComponent},
+  { path: "date-picker", component: DatePickerComponent},
   { path: "", redirectTo: "/", pathMatch: "full" },
 ];
 

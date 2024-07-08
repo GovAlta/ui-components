@@ -60,10 +60,12 @@ describe("GoABButtonGroup", () => {
   });
 
   it("should render properties", () => {
-    const buttonGroupElement = fixture.debugElement.query(By.css("goa-button-group")).nativeElement;
+    const buttonGroupElement = fixture.debugElement.query(
+      By.css("goa-button-group"),
+    ).nativeElement;
     expect(buttonGroupElement.getAttribute("alignment")).toBe(component.alignment);
     expect(buttonGroupElement.getAttribute("gap")).toBe(component.gap);
-    expect(buttonGroupElement.getAttribute("testId")).toBe(component.testId);
+    expect(buttonGroupElement.getAttribute("data-testid")).toBe(component.testId);
     expect(buttonGroupElement.getAttribute("mt")).toBe(component.mt);
     expect(buttonGroupElement.getAttribute("mb")).toBe(component.mb);
     expect(buttonGroupElement.getAttribute("ml")).toBe(component.ml);

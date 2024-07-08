@@ -7,7 +7,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   template: `
     <goa-icon-button
       [attr.icon]="icon"
-      [attr.disabled]="disabled"
+      [disabled]="disabled"
       [attr.size]="size"
       [attr.variant]="variant"
       [title]="title"

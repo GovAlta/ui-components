@@ -7,6 +7,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   template: `
     <goa-popover
       [attr.maxwidth]="maxWidth"
+      [attr.minwidth]="minWidth"
       [attr.padded]="padded"
       [attr.position]="position"
       [attr.relative]="relative"
@@ -23,6 +24,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 })
 export class GoABPopover {
   @Input() maxWidth = "320px";
+  @Input() minWidth?: string;
   @Input() padded = true;
   @Input() position?: GoABPopoverPosition;
   @Input() relative?: boolean;

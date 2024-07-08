@@ -16,10 +16,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.ml]="ml"
       [attr.mr]="mr"
     >
-      <ng-content />
+      <div slot="headingcontent">
+        <ng-content select="[slot='headingContent']"></ng-content>
+      </div>
+      <ng-content></ng-content>
     </goa-accordion>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoABAccordion {
   @Input() heading?: string;

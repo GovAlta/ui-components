@@ -5,7 +5,7 @@
     <goab-textarea formControlName="textarea" countBy="character" [maxCount]="100"></goab-textarea>
   </goab-form-item>
   <goab-form-item>
-    <goab-input formControlName="input"></goab-input>
+    <goab-input name="input" formControlName="input"></goab-input>
   </goab-form-item>
   Textarea Value: {{ form.controls["textarea"].value | json }}
   Input Value: {{ form.controls["input"].value | json }}

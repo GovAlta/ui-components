@@ -6,12 +6,14 @@ import { By } from "@angular/platform-browser";
 
 @Component({
   template: `
-  <goab-app-header-menu [heading]="heading"
-                        [leadingIcon]="leadingIcon"
-                        [testId]="testId">
-    <a href="#">Home</a>
-  </goab-app-header-menu>
-  `
+    <goab-app-header-menu
+      [heading]="heading"
+      [leadingIcon]="leadingIcon"
+      [testId]="testId"
+    >
+      <a href="#">Home</a>
+    </goab-app-header-menu>
+  `,
 })
 class TestAppHeaderMenuComponent {
   heading = "Test heading";
@@ -23,11 +25,11 @@ describe("GoABAppHeaderMenu", () => {
   let fixture: ComponentFixture<TestAppHeaderMenuComponent>;
   let component: TestAppHeaderMenuComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestAppHeaderMenuComponent],
       imports: [GoABAppHeaderMenu],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestAppHeaderMenuComponent);

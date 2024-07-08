@@ -7,10 +7,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   template: `
     <goa-calendar
       [attr.name]="name"
-      [attr.value]="value"
+      [value]="value"
       [attr.min]="min"
       [attr.max]="max"
-      [attr.testid]="testId"
+      [attr.data-testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"

@@ -9,7 +9,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
     [attr.accent]="accent"
     [attr.padding]="padding"
     [attr.width]="width"
-    [attr.testid]="testId"
+    [attr.data-testid]="testId"
     [attr.mt]="mt"
     [attr.mb]="mb"
     [attr.ml]="ml"

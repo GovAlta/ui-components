@@ -10,7 +10,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.label]="label"
       [attr.description]="description"
       [attr.arialabel]="ariaLabel"
-      [attr.disabled]="disabled"
+      [disabled]="disabled"
       [attr.checked]="checked"
       [attr.error]="error"
       [attr.data-testid]="testId"

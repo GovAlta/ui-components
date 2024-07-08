@@ -1,24 +1,30 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABModal } from "./modal";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABModalCalloutVariant, GoABModalRole, GoABModalTransition } from "@abgov/ui-components-common";
+import {
+  GoABModalCalloutVariant,
+  GoABModalRole,
+  GoABModalTransition,
+} from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
   template: `
-  <goab-modal [open]="open"
-              [maxWidth]="maxWidth"
-              [calloutVariant]="callOutVariant"
-              [role]="role"
-              [testId]="testId"
-              [closable]="closable"
-              [transition]="transition"
-              (onClose)="onClose()">
-    <div slot="heading">{{heading}}</div>
-    <div slot="actions">{{actions}}</div>
-    {{content}}
+    <goab-modal
+      [open]="open"
+      [maxWidth]="maxWidth"
+      [calloutVariant]="callOutVariant"
+      [role]="role"
+      [testId]="testId"
+      [closable]="closable"
+      [transition]="transition"
+      (onClose)="onClose()"
+    >
+      <div slot="heading">{{ heading }}</div>
+      <div slot="actions">{{ actions }}</div>
+      {{ content }}
     </goab-modal>
-  `
+  `,
 })
 class TestModalComponent {
   open = true;
@@ -31,6 +37,7 @@ class TestModalComponent {
   heading = "Modal Heading";
   actions = "Close";
   content = "Modal Content";
+
   onClose() {
     /* do nothing */
   }
@@ -44,7 +51,7 @@ describe("GoABModal", () => {
     TestBed.configureTestingModule({
       declarations: [TestModalComponent],
       imports: [GoABModal],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestModalComponent);
@@ -67,5 +74,5 @@ describe("GoABModal", () => {
     expect(modal?.getAttribute("data-testid")).toBe(component.testId);
     expect(modal?.getAttribute("transition")).toBe(component.transition);
     expect(modal?.getAttribute("role")).toBe(component.role);
-  })
-})
+  });
+});

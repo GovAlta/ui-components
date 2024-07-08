@@ -1,22 +1,15 @@
 import { GoABIconType, Spacing } from "@abgov/ui-components-common";
-import {
-  CUSTOM_ELEMENTS_SCHEMA,
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-} from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   standalone: true,
   selector: "goab-chip",
-  template: `
-    <goa-chip
+  template: `<goa-chip
     [attr.leadingicon]="leadingIcon"
     [attr.error]="error"
     [attr.deletable]="deletable"
     [attr.content]="content"
-    [attr.testid]="testId"
+    [attr.data-testid]="testId"
     [attr.mt]="mt"
     [attr.mb]="mb"
     [attr.ml]="ml"
