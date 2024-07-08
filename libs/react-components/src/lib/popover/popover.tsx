@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 
 interface WCProps extends Margins {
   maxwidth?: string;
+  minwidth?: string;
   padded?: boolean;
   position?: GoABPopoverPosition;
   relative?: boolean;
@@ -21,6 +22,7 @@ export interface GoABPopoverProps extends Margins {
   target?: ReactNode;
   testId?: string;
   maxWidth?: string;
+  minWidth?: string;
   padded?: boolean;
   position?: GoABPopoverPosition;
   children: ReactNode;
@@ -31,6 +33,7 @@ export function GoABPopover({
   target,
   testId,
   maxWidth,
+  minWidth,
   padded,
   position,
   relative,
@@ -44,6 +47,7 @@ export function GoABPopover({
     <goa-popover
       data-testid={testId}
       maxwidth={maxWidth}
+      minwidth={minWidth}
       padded={padded}
       position={position}
       relative={relative}

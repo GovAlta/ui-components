@@ -8,6 +8,12 @@
       "default": "320px"
     },
     {
+      "name": "minwidth",
+      "description": "The min width of the popover container",
+      "type": "string",
+      "default": ""
+    },
+    {
       "name": "padded",
       "description": "Whether the popover should have padding",
       "type": "boolean",

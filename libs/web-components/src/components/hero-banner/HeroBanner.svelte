@@ -51,7 +51,13 @@
     color: var(--hero-banner-text-color, var(--goa-color-text-default));
     background-position: center center;
     width: 100%;
-    padding: var(--goa-space-3xl) 0;
+    padding: var(--goa-space-2xl) 0;
+  }
+
+  @media (--mobile) {
+    .goa-hero {
+      padding: var(--goa-space-xl) 0;
+    }
   }
 
   .goa-hero.with-image {

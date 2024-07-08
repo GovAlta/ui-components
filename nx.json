@@ -41,6 +41,11 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
+    },
+    "@angular-devkit/build-angular:application": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "namedInputs": {
@@ -75,10 +80,10 @@
       }
     },
     "@nx/angular:application": {
-      "style": "css",
+      "e2eTestRunner": "none",
       "linter": "eslint",
-      "unitTestRunner": "none",
-      "e2eTestRunner": "none"
+      "style": "css",
+      "unitTestRunner": "none"
     },
     "@nx/angular:library": {
       "linter": "eslint",

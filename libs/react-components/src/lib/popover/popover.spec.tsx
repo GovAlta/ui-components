@@ -21,6 +21,7 @@ describe("Popover", () => {
 
     const el = baseElement.querySelector("goa-popover");
     expect(el?.getAttribute("maxwidth")).toBe("500px");
+    expect(el?.getAttribute("minwidth")).toBe("100px");
     expect(el?.getAttribute("padded")).toBe("false");
   });
 });

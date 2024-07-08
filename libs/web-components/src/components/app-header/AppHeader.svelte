@@ -173,7 +173,10 @@
   class="container"
   bind:this={_rootEl}
   data-testid={testid}
-  style={`--max-content-width: ${maxcontentwidth || "100%"}`}
+  style={`
+  --max-content-width: ${maxcontentwidth || "100%"};
+  --desktop-padding: ${maxcontentwidth && maxcontentwidth !== "100%" && _windowWidth > +maxcontentwidth ? "0" : "var(--goa-space-3xl)"};
+`}
   class:show-menu={_showMenu}
   class:mobile={_mobile}
   class:tablet={_tablet}
@@ -294,6 +297,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     color: var(--goa-color-text-default);
+    font: var(--goa-typography-body-s);
   }
 
   /* contains all children within component */
@@ -319,6 +323,11 @@
   .header-logo-title-area:focus {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
+  }
+
+  .header-logo-title-area .title {
+    font: var(--goa-typography-body-s);
+    margin-left: var(--goa-space-xs);
   }
 
   .menu-toggle-area {
@@ -395,6 +404,7 @@
 
   .mobile .image-mobile {
     display: block;
+    width: var(--goa-icon-size-l);
   }
 
   .mobile.show-menu {
@@ -430,6 +440,14 @@
 
   .tablet .title {
     margin-left: var(--goa-space-m);
+    font: var(--goa-typography-body-m);
+  }
+
+  @media (--tablet) {
+    /*padding is independent from fullmenubreakpoint, should use media query*/
+    .container {
+      padding: 0 var(--goa-space-xl);
+    }
   }
 
   /* Desktop */
@@ -456,7 +474,10 @@
   .desktop .image-mobile {
     display: none;
   }
-
+  .desktop .title {
+    margin-left: var(--goa-space-m);
+    font: var(--goa-typography-body-m);
+  }
   .desktop .layout {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -518,6 +539,17 @@
     border-color: transparent;
     margin-left: var(--goa-space-m);
   }
+
+  @media (--desktop) {
+    /*padding is independent from fullmenubreakpoint, should use media query*/
+    .container.tablet {
+      padding: 0 var(--goa-space-3xl);
+    }
+    .container.desktop {
+      padding: 0 var(--desktop-padding);
+    }
+  }
+
 
   :global(::slotted(a.current.inside-collapse-menu)) {
     color: var(--goa-color-text-light);

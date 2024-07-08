@@ -160,7 +160,8 @@
       borderradius="0"
       padded="false"
       tabindex="-1"
-      width="16rem"
+      maxwidth="16rem"
+      minwidth="8rem"
       position="below"
       open={_open}
     >
@@ -248,7 +249,6 @@
     padding: calc((3rem - var(--goa-line-height-3)) / 2) 1rem;
     text-decoration: none;
   }
-
   .not-desktop :global(::slotted(a)) {
     padding: calc((3rem - var(--goa-line-height-3)) / 2) 2.75rem;
   }
