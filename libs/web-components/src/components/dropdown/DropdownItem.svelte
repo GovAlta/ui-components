@@ -4,10 +4,13 @@
 
 <script lang="ts" context="module">
 
+  export type DropdownItemMountType = "append" | "prepend" | "reset" | "sortasc" | "sortdesc";
+
   export type Option = {
     label: string;
     value: string;
     filter: string;
+    mountType: DropdownItemMountType;
   }
 
 </script>
@@ -20,6 +23,7 @@
   export let filter: string = "";
   export let label: string = "";
   export let value: string = "";
+  export let mount: DropdownItemMountType = "append";
 
   let _rootEl: HTMLElement;
 
@@ -28,7 +32,7 @@
       _rootEl?.dispatchEvent(new CustomEvent<Option>("dropdown-item:mounted", {
         composed: true,
         bubbles: true,
-        detail: { filter, value, label }
+        detail: { filter, value, label, mountType: mount }
       }))
     }, 10)
   })

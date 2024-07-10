@@ -5,7 +5,7 @@
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
-  import type { Option } from "./DropdownItem.svelte";
+  import type { DropdownItemMountType, Option } from "./DropdownItem.svelte";
   import { fromBoolean, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
 
@@ -57,6 +57,9 @@
 
   let _bindTimeoutId: any;
 
+  let _mountStatus: "active" | "ready" = "ready";
+  let _mountTimeoutId: any = undefined;
+
   //
   // Reactive
   //
@@ -95,8 +98,47 @@
 
   function getChildren() {
     _rootEl?.addEventListener("dropdown-item:mounted", (e: Event) => {
-      const ce = e as CustomEvent<Option>;
-      _options = [..._options, ce.detail];
+      const detail = (e as CustomEvent<Option>).detail;
+
+      if (_mountStatus === "ready") {
+        if (detail.mountType === "reset") {
+          _options = [];
+        }
+        _mountStatus = "active";
+      }
+
+      switch (detail.mountType) {
+        case "append":
+          _options = [..._options, detail];
+          break;
+        case "prepend":
+          _options = [detail, ..._options];
+          break;
+        case "sortasc": {
+          const tmp = [detail, ..._options];
+          tmp.sort((a, b) => (a.label > b.label ? 1 : -1));
+          _options = [...tmp];
+          break;
+        }
+        case "sortdesc": {
+          const tmp = [detail, ..._options];
+          tmp.sort((a, b) => (a.label < b.label ? 1 : -1));
+          _options = [...tmp];
+          break;
+        }
+        case "reset":
+          _options = [..._options, detail];
+          break;
+      }
+
+      // reset the mountStatus back to `ready` after all new children are mounted
+      if (_mountTimeoutId) {
+        clearTimeout(_mountTimeoutId);
+      }
+      _mountTimeoutId = setTimeout(() => {
+        _mountStatus = "ready";
+        _mountTimeoutId = undefined;
+      }, 10);
 
       // ensure bind only runs once for all children
       if (_bindTimeoutId) {
@@ -126,7 +168,7 @@
   }
 
   function setSelected() {
-    _selectedOption = _options.find(o => o.value == _values[0])
+    _selectedOption = _options.find((o) => o.value == _values[0]);
   }
 
   // parse and convert values to strings to avoid later type comparison issues
@@ -201,7 +243,9 @@
 
   function syncFilteredOptions() {
     _filteredOptions = _filterable
-      ? _options.filter((option) => isFilterMatch(option, _inputEl?.value ?? ""))
+      ? _options.filter((option) =>
+          isFilterMatch(option, _inputEl?.value ?? ""),
+        )
       : _options;
   }
 
