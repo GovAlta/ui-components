@@ -833,25 +833,71 @@ describe("GoADropdown", () => {
   });
 
   describe("dynamic children items", () => {
-    // FIXME: Unable to get the parent's `slotchanged` event to fire
-    it.skip("should update the option items on dynamic changes", async () => {
-      const { container } = render(GoADropdown, { name });
+    it("should reset the items with the new items", async () => {
+      const { container } = render(GoADropdownWrapper, {
+        name,
+        items,
+      });
 
       await waitFor(() => {
         const children = container.querySelectorAll("li");
-        expect(children.length).toBe(0);
+        expect(children.length).toBe(items.length);
       });
 
       const child = document.createElement("goa-dropdown-item");
-      child.setAttribute("value", "red");
-      child.setAttribute("label", "Red");
-      const shadow = container.attachShadow({ mode: "open" });
-      shadow.appendChild(child);
-      // container.appendChild(child)
+      child.setAttribute("value", "cyan");
+      child.setAttribute("mount", "reset");
+      container.querySelector("[data-testid=dropdown-menu]")?.appendChild(child);
 
       await waitFor(() => {
         const children = container.querySelectorAll("li");
         expect(children.length).toBe(1);
+      });
+    });
+
+    it("should prepend a new item", async () => {
+      const { container } = render(GoADropdownWrapper, {
+        name,
+        items,
+      });
+
+      await waitFor(() => {
+        const children = container.querySelectorAll("li");
+        expect(children.length).toBe(items.length);
+      });
+
+      const child = document.createElement("goa-dropdown-item");
+      child.setAttribute("value", "cyan");
+      child.setAttribute("mount", "prepend");
+      container.querySelector("[data-testid=dropdown-menu]")?.appendChild(child);
+
+      await waitFor(() => {
+        const children = container.querySelectorAll("li");
+        expect(children.length).toBe(4);
+        expect(children[0].innerHTML.trim()).toBe("cyan");
+      });
+    });
+
+    it("should append a new item", async () => {
+      const { container } = render(GoADropdownWrapper, {
+        name,
+        items,
+      });
+
+      await waitFor(() => {
+        const children = container.querySelectorAll("li");
+        expect(children.length).toBe(items.length);
+      });
+
+      const child = document.createElement("goa-dropdown-item");
+      child.setAttribute("value", "cyan");
+      child.setAttribute("mount", "append");
+      container.querySelector("[data-testid=dropdown-menu]")?.appendChild(child);
+
+      await waitFor(() => {
+        const children = container.querySelectorAll("li");
+        expect(children.length).toBe(4);
+        expect(children[3].innerHTML.trim()).toBe("cyan");
       });
     });
   });

@@ -1,6 +1,20 @@
 {
   "valueSets": [
     {
+      "name": "mountType",
+      "values": [
+        {
+          "name": "append"
+        },
+        {
+          "name": "prepend"
+        },
+        {
+          "name": "replace"
+        }
+      ]
+    },
+    {
       "name": "spacing",
       "values": [
         {
