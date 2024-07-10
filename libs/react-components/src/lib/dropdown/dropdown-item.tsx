@@ -4,10 +4,13 @@ interface WCProps {
   value: string;
   label?: string;
   filter?: string;
+  mount?: DropdownItemMountType;
 
   // @deprecated
   name?: string;
 }
+
+export type DropdownItemMountType = "append" | "prepend" | "reset";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -24,6 +27,7 @@ export interface GoADropdownItemProps {
   label?: string;
   filter?: string;
   testId?: string;
+  mountType?: DropdownItemMountType;
 
   // @deprecated
   name?: string;
@@ -37,7 +41,7 @@ export function GoADropdownOption(props: GoADropdownItemProps) {
   return <GoADropdownItem {...props} />;
 }
 
-export function GoADropdownItem({ value, label, filter, name, testId }: GoADropdownItemProps) {
+export function GoADropdownItem({ value, label, filter, name, testId, mountType = "append" }: GoADropdownItemProps) {
   return (
     <goa-dropdown-item
       data-testid={testId}
@@ -45,6 +49,7 @@ export function GoADropdownItem({ value, label, filter, name, testId }: GoADropd
       label={label}
       filter={filter}
       name={name}
+      mount={mountType}
     />
   );
 }
