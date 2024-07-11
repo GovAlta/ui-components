@@ -1,14 +1,13 @@
 <!-- svelte-ignore missing-custom-element-compile-options -->
-<svelte:options customElement="goa-app-header"/>
+<svelte:options customElement="goa-app-header" />
 
 <!-- Script -->
 <script lang="ts">
-  import {onDestroy, onMount, tick} from "svelte";
-  import {MOBILE_BP, TABLET_BP} from "../../common/breakpoints";
-  import {getSlottedChildren, styles} from "../../common/utils";
-  import {isUrlMatch, getMatchedLink} from "../../common/urls";
-  import {AppHeaderMenuProps} from "../app-header-menu/AppHeaderMenu.svelte";
-
+  import { onDestroy, onMount, tick } from "svelte";
+  import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
+  import { getSlottedChildren, styles } from "../../common/utils";
+  import { isUrlMatch, getMatchedLink } from "../../common/urls";
+  import { AppHeaderMenuProps } from "../app-header-menu/AppHeaderMenu.svelte";
 
   // optional
   export let heading: string = "";
@@ -39,8 +38,8 @@
   $: _tablet = _windowWidth >= MOBILE_BP && _windowWidth < fullmenubreakpoint;
   $: _desktop = _windowWidth >= +fullmenubreakpoint;
   $: (async () => {
-    _showToggleMenu = _desktop ? false : await hasChildren() as boolean;
-    onShowToggleMenuChange()
+    _showToggleMenu = _desktop ? false : ((await hasChildren()) as boolean);
+    onShowToggleMenuChange();
   })();
 
   // Hooks
@@ -54,7 +53,6 @@
     window.removeEventListener("popstate", onRouteChange, true);
   });
 
-  
   // Functions
 
   const toggleMenu = () => (_showMenu = !_showMenu);
@@ -91,7 +89,7 @@
         onRouteChange();
       }
     });
-    observer.observe(document.body, {childList: true, subtree: true});
+    observer.observe(document.body, { childList: true, subtree: true });
 
     window.addEventListener("popstate", onRouteChange, true);
   }
@@ -110,7 +108,7 @@
       links = [...links, ...el.links];
     });
 
-    links.forEach(link => link.classList.remove("current"));
+    links.forEach((link) => link.classList.remove("current"));
 
     const matchedLink = getMatchedLink(links, window.location);
     if (matchedLink) {
@@ -122,10 +120,12 @@
 
   function dispatchCurrentLink(href: string) {
     _appHeaderMenuItems.forEach((item) => {
-      item.el.dispatchEvent(new CustomEvent("app-header:changed", {
-        composed: true,
-        detail: href
-      }));
+      item.el.dispatchEvent(
+        new CustomEvent("app-header:changed", {
+          composed: true,
+          detail: href,
+        }),
+      );
     });
   }
 
@@ -135,7 +135,8 @@
     const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
     if (!slot) return;
 
-    slot.assignedElements()
+    slot
+      .assignedElements()
       .filter((el) => el.tagName === "A")
       .map((el) => {
         if (_showToggleMenu) el.classList.add("inside-collapse-menu");
@@ -163,7 +164,7 @@
   }
 </script>
 
-<svelte:window bind:innerWidth={_windowWidth}/>
+<svelte:window bind:innerWidth={_windowWidth} />
 
 <!-- HTML -->
 <div
@@ -183,16 +184,16 @@
     <!-- Logo and optional heading link -->
     {#if url}
       <a href={url} class="header-logo-title-area" data-testid="url">
-        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo}/>
-        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo}/>
+        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
+        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
         {#if heading}
           <span data-testid="title" class="title">{heading}</span>
         {/if}
       </a>
     {:else}
       <div class="header-logo-title-area">
-        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo}/>
-        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo}/>
+        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
+        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
         {#if heading}
           <span data-testid="title" class="title">{heading}</span>
         {/if}
@@ -237,16 +238,13 @@
             data-testid="menu-toggle"
           >
             Menu
-            <goa-icon
-              type={_showMenu ? "chevron-up" : "chevron-down"}
-              mt="1"
-            />
+            <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
           </button>
         </div>
 
         {#if _showMenu}
           <div bind:this={_slotParentEl} data-testid="slot">
-            <slot/>
+            <slot />
           </div>
         {/if}
       </goa-popover>
@@ -259,14 +257,14 @@
     -->
     {#if !_showMenu && (_mobile || _tablet)}
       <div bind:this={_slotParentEl} style="display: none">
-        <slot/>
+        <slot />
       </div>
     {/if}
 
     <!-- Mobile and desktop slot content -->
     {#if (_showMenu && _mobile) || _desktop}
       <div bind:this={_slotParentEl} data-testid="slot" class="content-area">
-        <slot/>
+        <slot />
       </div>
     {/if}
   </div>
@@ -286,7 +284,8 @@
 
   /* spans the full page width */
   .container {
-    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-border-width-s) solid
+      var(--goa-color-greyscale-200);
     background-color: var(--goa-color-greyscale-white);
   }
 
@@ -400,7 +399,8 @@
   /* Mobile */
 
   .mobile :global(::slotted(a)) {
-    box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
+    box-shadow: inset 0 var(--goa-border-width-s) 0 0
+      var(--goa-color-greyscale-200);
   }
 
   .mobile .image-desktop {
@@ -413,7 +413,8 @@
   }
 
   .mobile.show-menu {
-    border-bottom: var(--goa-border-width-m) solid var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-border-width-m) solid
+      var(--goa-color-greyscale-200);
   }
 
   .mobile .menu-toggle-area button {
@@ -429,7 +430,8 @@
   }
 
   .tablet :global(::slotted(a)) {
-    box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
+    box-shadow: inset 0 var(--goa-border-width-s) 0 0
+      var(--goa-color-greyscale-200);
   }
 
   .tablet .image-desktop {
