@@ -322,7 +322,7 @@
     ); /* desired min-height minus the required padding */
   }
 
-  .header-logo-title-area:focus {
+  .header-logo-title-area:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
   }
@@ -384,7 +384,7 @@
     color: var(--goa-color-interactive-hover);
   }
 
-  :global(::slotted(a:focus)) {
+  :global(::slotted(a:focus-visible)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
     background: var(--goa-color-greyscale-100);
@@ -515,15 +515,15 @@
     padding: 0;
   }
 
-  .desktop :global(::slotted(a:focus-within)),
+  .desktop :global(::slotted(a:focus-visible)),
   .desktop :global(::slotted(a:hover)) {
     background: var(--goa-color-greyscale-100);
     cursor: pointer;
     color: var(--goa-color-interactive-hover);
   }
 
-  .desktop :global(::slotted(a:focus)),
-  .desktop :global(::slotted(goa-app-header-menu:focus)) {
+  .desktop :global(::slotted(a:focus-visible)),
+  .desktop :global(::slotted(goa-app-header-menu:focus-visible)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
   }
