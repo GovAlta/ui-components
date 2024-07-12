@@ -151,9 +151,8 @@
     await tick();
 
     if (!_slotParentEl) return false;
-
     const slot = _slotParentEl?.childNodes[0] as HTMLSlotElement;
-    const children = slot.assignedElements?.();
+    const children = slot?.assignedElements?.();
     if (children) {
       return children.length > 0;
     } else {
