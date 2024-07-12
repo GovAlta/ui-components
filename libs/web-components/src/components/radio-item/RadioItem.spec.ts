@@ -68,6 +68,24 @@ describe("RadioItem", () => {
     expect(label.getAttribute("class")).toContain("error");
   });
 
+  it(`should render with margins`, async () => {
+    const baseElement = render(GoARadioItem, {
+      label: "Radio Item 1",
+      value: "radio-item-1",
+      name: "radio-item-1-name",
+      arialabel: "radio-item-1-label",
+      mt: "s",
+      mr: "m",
+      mb: "l",
+      ml: "xl",
+    });
+    const radio = baseElement.container.querySelector(".goa-radio-container");
+    expect(radio?.getAttribute("style")).toContain("margin-top:var(--goa-space-s)");
+    expect(radio?.getAttribute("style")).toContain("margin-right:var(--goa-space-m)");
+    expect(radio?.getAttribute("style")).toContain("margin-bottom:var(--goa-space-l)");
+    expect(radio?.getAttribute("style")).toContain("margin-left:var(--goa-space-xl)");
+  });
+
   it("should handle the change event and emit _click event", async () => {
     const mockOnChange = vi.fn();
     const result = render(GoARadioItem, {
