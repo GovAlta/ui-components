@@ -1,17 +1,101 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABIconButton } from "./icon-button";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import {
+  GoABIconButtonVariant,
+  GoABIconSize,
+  GoABIconType,
+  Spacing,
+} from "@abgov/ui-components-common";
+import { By } from "@angular/platform-browser";
+import { fireEvent } from "@testing-library/dom";
 
-let component: GoABIconButton;
-let fixture: ComponentFixture<GoABIconButton>;
+@Component({
+  template: `
+    <goab-icon-button
+      [icon]="icon"
+      [disabled]="disabled"
+      [variant]="variant"
+      [size]="size"
+      [title]="title"
+      [ariaLabel]="ariaLabel"
+      [testId]="testId"
+      [mt]="mt"
+      [mr]="mr"
+      [mb]="mb"
+      [ml]="ml"
+      (onClick)="onClick()"
+    >
+      Submit
+    </goab-icon-button>
+  `,
+})
+class TestIconButtonComponent {
+  icon = "information" as GoABIconType;
+  disabled?: boolean;
+  size?: GoABIconSize;
+  variant?: GoABIconButtonVariant;
+  title?: string;
+  testId?: string;
+  ariaLabel?: string;
+  mt?: Spacing;
+  mr?: Spacing;
+  ml?: Spacing;
+  mb?: Spacing;
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    imports: [GoABIconButton],
+  onClick() {
+    /** do nothing **/
+  }
+}
+
+describe("GoABIconButton", () => {
+  let fixture: ComponentFixture<TestIconButtonComponent>;
+  let component: TestIconButtonComponent;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [TestIconButtonComponent],
+      imports: [GoABIconButton],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestIconButtonComponent);
+    component = fixture.componentInstance;
+
+    component.disabled = true;
+    component.size = "small";
+    component.variant = "color";
+    component.title = "Information";
+    component.testId = "foo";
+    component.ariaLabel = "Information button";
+    component.mt = "s";
+    component.mr = "m";
+    component.mb = "l";
+    component.ml = "xl";
+
+    fixture.detectChanges();
   });
-  fixture = TestBed.createComponent(GoABIconButton);
-  component = fixture.componentInstance;
-});
 
-it("should render", () => {
-  expect(component).toBeTruthy();
+  it("should render", () => {
+    const el = fixture.debugElement.query(By.css("goa-icon-button")).nativeElement;
+    expect(el?.getAttribute("icon")).toBe(component.icon);
+    expect(el?.getAttribute("size")).toBe(component.size);
+    expect(el?.getAttribute("variant")).toBe(component.variant);
+    expect(el?.getAttribute("title")).toBe(component.title);
+    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("arialabel")).toBe(component.ariaLabel);
+    expect(el?.getAttribute("mt")).toBe(component.mt);
+    expect(el?.getAttribute("mb")).toBe(component.mb);
+    expect(el?.getAttribute("mr")).toBe(component.mr);
+    expect(el?.getAttribute("ml")).toBe(component.ml);
+  });
+
+  it("should dispatch onClick event", () => {
+    const onClick = jest.spyOn(component, "onClick");
+    const el = fixture.debugElement.query(By.css("goa-icon-button")).nativeElement;
+
+    fireEvent(el, new CustomEvent("_click"));
+
+    expect(onClick).toBeCalledTimes(1);
+  });
 });

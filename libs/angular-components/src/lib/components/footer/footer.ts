@@ -5,15 +5,18 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-app-footer",
   template: `
     <goa-app-footer
-      [maxcontentwidth]="maxContentWidth"
+      [attr.maxcontentwidth]="maxContentWidth"
+      [attr.data-testid]="testId"
     >
       <ng-content select="[slot=nav]" />
       <ng-content select="[slot=meta]" />
+      <ng-content></ng-content>
     </goa-app-footer>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABAppFooter {
   @Input() maxContentWidth?: string;
+  @Input() testId?: string;
 }
 

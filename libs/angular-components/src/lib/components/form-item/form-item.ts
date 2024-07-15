@@ -6,21 +6,22 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-form-item",
   template: `
     <goa-form-item
-      [label]="label"
-      [labelsize]="labelSize"
-      [helptext]="helpText"
-      [error]="error"
-      [requirement]="requirement"
+      [attr.label]="label"
+      [attr.labelsize]="labelSize"
+      [attr.helptext]="helpText"
+      [attr.error]="error"
+      [attr.data-testid]="testId"
       [id]="id"
-      [mt]="mt"
-      [mb]="mb"
-      [mr]="mr"
-      [ml]="ml"
+      [attr.requirement]="requirement"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.mr]="mr"
+      [attr.ml]="ml"
     >
       <ng-content />
     </goa-form-item>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoABFormItem {
   @Input() label?: string;
@@ -28,11 +29,10 @@ export class GoABFormItem {
   @Input() helpText?: string;
   @Input() error?: string;
   @Input() requirement?: GoABFormItemRequirement;
+  @Input() testId?: string;
   @Input() id?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() mr?: Spacing;
   @Input() ml?: Spacing;
 }
-
-

@@ -6,25 +6,28 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   selector: "goab-modal",
   template: `
     <goa-modal
-      [calloutvariant]="calloutVariant"
-      [open]="open"
-      [maxwidth]="maxWidth"
-      [closable]="closable"
-      [transition]="transition"
+      [attr.calloutvariant]="calloutVariant"
+      [attr.open]="open"
+      [attr.maxwidth]="maxWidth"
+      [attr.data-testid]="testId"
+      [attr.role]="role"
+      [attr.closable]="closable"
+      [attr.transition]="transition"
       (_close)="_onClose()"
     >
-      <ng-content select="[slot=heading]" />
-      <ng-content select="[slot=actions]" />
+      <ng-content></ng-content>
     </goa-modal>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoABModal {
   @Input() calloutVariant?: GoABModalCalloutVariant;
   @Input() open?: boolean;
   @Input() maxWidth?: string;
-  @Input() closable: boolean = false;
-  @Input() transition?: GoABModalTransition
+  @Input() closable = false;
+  @Input() transition?: GoABModalTransition;
+  @Input() testId?: string;
+  @Input() role?: string;
 
   @Output() onClose = new EventEmitter();
 

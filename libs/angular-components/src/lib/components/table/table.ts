@@ -6,17 +6,18 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   selector: "goab-table",
   template: `
     <goa-table
-      [width]="width"
-      [variant]="variant"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
-
+      [attr.width]="width"
+      [attr.variant]="variant"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
       (_sort)="_onSort($event)"
     >
-      <ng-content />
+      <table style="width: 100%;">
+        <ng-content />
+      </table>
     </goa-table>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

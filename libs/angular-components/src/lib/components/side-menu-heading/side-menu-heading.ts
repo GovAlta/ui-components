@@ -5,18 +5,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   standalone: true,
   selector: "goab-side-menu-heading",
   template: `
-    <goa-side-menu-heading
-      [icon]="icon"
-      [meta]="meta"
-    >
+    <goa-side-menu-heading [attr.data-testid]="testId" [attr.icon]="icon">
       <ng-content />
     </goa-side-menu-heading>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoABSideMenuHeading {
   @Input() icon!: GoABIconType;
-  @Input() meta!: string;
+  @Input() testId?: string;
 }
-
-

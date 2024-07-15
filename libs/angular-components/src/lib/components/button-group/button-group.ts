@@ -6,13 +6,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-button-group",
   template: `
     <goa-button-group
-      [alignment]="alignment"
-      [gap]="gap"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
+      [attr.alignment]="alignment"
+      [attr.gap]="gap"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
       <ng-content />
     </goa-button-group>

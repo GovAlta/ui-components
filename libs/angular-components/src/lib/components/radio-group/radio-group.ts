@@ -1,5 +1,5 @@
 import { GoABRadioGroupOnChangeDetail, GoABRadioGroupOrientation, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
@@ -7,18 +7,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   selector: "goab-radio-group",
   template: `
     <goa-radio-group
-      [name]="name"
-      [value]="value"
+      [attr.name]="name"
+      [attr.value]="value"
       [disabled]="disabled"
-      [orientation]="orientation"
-      [error]="error"
-      [arialabel]="ariaLabel"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
-
+      [attr.orientation]="orientation"
+      [attr.error]="error"
+      [attr.arialabel]="ariaLabel"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
       (_change)="_onChange($event)"
     >
       <ng-content />
@@ -29,9 +28,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: GoABRadioGroup,
-    }
-  ]
+      useExisting: forwardRef(() => GoABRadioGroup),
+    },
+  ],
 })
 export class GoABRadioGroup implements ControlValueAccessor {
   @Input() name?: string;
@@ -68,14 +67,17 @@ export class GoABRadioGroup implements ControlValueAccessor {
       this.touched = true;
     }
   }
+
   writeValue(value: string): void {
     this.value = value;
   }
+
   registerOnChange(fn: any): void {
     this.fcChange = fn;
   }
+
   registerOnTouched(fn: any): void {
-    this.fcTouched = fn
+    this.fcTouched = fn;
   }
 
   setDisabledState?(isDisabled: boolean): void {

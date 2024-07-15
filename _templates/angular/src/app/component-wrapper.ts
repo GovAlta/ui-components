@@ -19,7 +19,7 @@ interface User {
   selector: "goab-component-wrapper",
   template: `
 
-    <goab-input [mb]="'s'" />
+    <goab-input [mb]="'s'" name="foo" />
 
     <h3>Block</h3>
     <goab-block gap="none">

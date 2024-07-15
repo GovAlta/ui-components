@@ -1,26 +1,32 @@
 import { GoABCheckboxOnChangeDetail, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  forwardRef,
+} from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   standalone: true,
   selector: "goab-checkbox",
-  template: `<goa-checkbox
-    [name]="name"
+  template: ` <goa-checkbox
+    [attr.name]="name"
     [checked]="checked"
     [disabled]="disabled"
-    [error]="error"
-    [text]="text"
+    [attr.error]="error"
+    [attr.text]="text"
     [value]="value"
-    [testid]="testId"
-    [arialabel]="ariaLabel"
-    [description]="description"
-    [testid]="testId"
-    [mt]="mt"
-    [mb]="mb"
-    [ml]="ml"
-    [mr]="mr"
-
+    [attr.data-testid]="testId"
+    [attr.arialabel]="ariaLabel"
+    [attr.description]="description"
+    [id]="id"
+    [attr.mt]="mt"
+    [attr.mb]="mb"
+    [attr.ml]="ml"
+    [attr.mr]="mr"
     (_change)="_onChange($event)"
   >
     <ng-content />
@@ -30,9 +36,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: GoABCheckbox,
-    }
-  ]
+      useExisting: forwardRef(() => GoABCheckbox),
+    },
+  ],
 })
 export class GoABCheckbox implements ControlValueAccessor {
   @Input() name?: string;
@@ -44,6 +50,7 @@ export class GoABCheckbox implements ControlValueAccessor {
   @Input() testId?: string;
   @Input() ariaLabel?: string;
   @Input() description?: string;
+  @Input() id?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
@@ -53,7 +60,7 @@ export class GoABCheckbox implements ControlValueAccessor {
 
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoABCheckboxOnChangeDetail>).detail;
-    this.onChange.emit(detail)
+    this.onChange.emit(detail);
     this.markAsTouched();
     this.fcChange?.(detail.binding === "check" ? detail.checked : (detail.value || ""));
   }
@@ -70,17 +77,20 @@ export class GoABCheckbox implements ControlValueAccessor {
       this.touched = true;
     }
   }
+
   writeValue(value: string | boolean): void {
     this.value = value;
   }
+
   registerOnChange(fn: any): void {
     this.fcChange = fn;
   }
+
   registerOnTouched(fn: any): void {
-    this.fcTouched = fn
+    this.fcTouched = fn;
   }
+
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 }
-

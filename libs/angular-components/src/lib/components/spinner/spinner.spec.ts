@@ -1,17 +1,50 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABSpinner } from "./spinner";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { GoABSpinnerSize, GoABSpinnerType } from "@abgov/ui-components-common";
 
-let component: GoABSpinner;
-let fixture: ComponentFixture<GoABSpinner>;
+@Component({
+  template: `
+    <goab-spinner
+      [type]="type"
+      [size]="size"
+      [invert]="invert"
+      [testId]="testId"
+      [progress]="progress"
+    ></goab-spinner>
+  `,
+})
+class TestSpinnerComponent {
+  type = "progress" as GoABSpinnerType;
+  size = "medium" as GoABSpinnerSize;
+  invert = true;
+  testId = "spinner-testid";
+  progress = 20;
+}
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    imports: [GoABSpinner],
+describe("GoABSpinner", () => {
+  let fixture: ComponentFixture<TestSpinnerComponent>;
+  let component: TestSpinnerComponent;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [TestSpinnerComponent],
+      imports: [GoABSpinner],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestSpinnerComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
-  fixture = TestBed.createComponent(GoABSpinner);
-  component = fixture.componentInstance;
-});
 
-it("should render", () => {
-  expect(component).toBeTruthy();
+  it("should render", () => {
+    const el = fixture.nativeElement.querySelector("goa-spinner");
+
+    expect(el?.getAttribute("type")).toBe(component.type);
+    expect(el?.getAttribute("size")).toBe(`${component.size}`);
+    expect(el?.getAttribute("progress")).toBe(`${component.progress}`);
+    expect(el?.getAttribute("invert")).toBe(`${component.invert}`);
+    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+  });
 });

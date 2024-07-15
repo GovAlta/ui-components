@@ -1,17 +1,57 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABSkeleton } from "./skeleton";
+import { Component } from "@angular/core";
+import { GoABSkeletonType, Spacing } from "@abgov/ui-components-common";
 
-let component: GoABSkeleton;
-let fixture: ComponentFixture<GoABSkeleton>;
+@Component({
+  template: `
+  <goab-skeleton [type]="type"
+                 [maxWidth]="maxWidth"
+                 [lineCount]="lineCount"
+                 [size]="size"
+                 [testId]="testId"
+                 [mt]="mt"
+                 [mb]="mb"
+                 [mr]="mr"
+                 [ml]="ml"></goab-skeleton>
+  `
+})
+class TestSkeletonComponent {
+  type = "image" as GoABSkeletonType;
+  maxWidth = 100;
+  lineCount = 3;
+  size = 10;
+  testId = "foo";
+  mt = "s" as Spacing;
+  mb = "m" as Spacing;
+  ml = "xs" as Spacing;
+  mr = "xl" as Spacing;
+}
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    imports: [GoABSkeleton],
-  });
-  fixture = TestBed.createComponent(GoABSkeleton);
-  component = fixture.componentInstance;
-});
+describe("GoABSkeleton", () => {
+  let fixture: ComponentFixture<TestSkeletonComponent>;
+  let component: TestSkeletonComponent;
 
-it("should render", () => {
-  expect(component).toBeTruthy();
-});
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      declarations: [TestSkeletonComponent],
+      imports: [GoABSkeleton]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestSkeletonComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  })
+
+  it("should render successfully", () => {
+    const el = fixture.nativeElement.querySelector("goa-skeleton");
+    expect(el?.getAttribute("maxwidth")).toBe(`${component.maxWidth}`);
+    expect(el?.getAttribute("size")).toBe(`${component.size}`);
+    expect(el?.getAttribute("linecount")).toBe(`${component.lineCount}`);
+    expect(el?.getAttribute("type")).toBe(component.type);
+    expect(el?.getAttribute("mt")).toBe(component.mt);
+    expect(el?.getAttribute("mb")).toBe(component.mb);
+    expect(el?.getAttribute("ml")).toBe(component.ml);
+    expect(el?.getAttribute("mr")).toBe(component.mr);
+  })
+})

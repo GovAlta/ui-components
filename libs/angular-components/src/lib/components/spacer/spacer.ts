@@ -6,15 +6,16 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-spacer",
   template: `
     <goa-spacer
-      [hspacing]="hSpacing"
-      [vspacing]="vSpacing"
+      [attr.hspacing]="hSpacing"
+      [attr.vspacing]="vSpacing"
+      [attr.data-testid]="testId"
     >
     </goa-spacer>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoABSpacer {
   @Input() hSpacing?: GoABSpacerHorizontalSpacing;
   @Input() vSpacing?: GoABSpacerVerticalSpacing;
+  @Input() testId?: string;
 }
-

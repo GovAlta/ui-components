@@ -6,21 +6,20 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   selector: "goab-pagination",
   template: `
     <goa-pagination
-      [itemcount]="itemCount"
-      [perpagecount]="perPageCount"
-      [pagenumber]="pageNumber"
-      [variant]="variant"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
-
+      [attr.itemcount]="itemCount"
+      [attr.perpagecount]="perPageCount"
+      [attr.pagenumber]="pageNumber"w
+      [attr.variant]="variant"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
       (_change)="_onChange($event)"
     >
     </goa-pagination>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoABPagination {
   @Input({ required: true }) itemCount!: number;
@@ -37,6 +36,6 @@ export class GoABPagination {
 
   _onChange(e: any) {
     const detail = (e as CustomEvent<GoABPaginationOnChangeDetail>).detail;
-    this.onChange.emit(detail)
+    this.onChange.emit(detail);
   }
 }

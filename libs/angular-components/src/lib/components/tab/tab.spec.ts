@@ -1,17 +1,42 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABTab } from "./tab";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
-let component: GoABTab;
-let fixture: ComponentFixture<GoABTab>;
+@Component({
+  template: `
+    <goab-tab heading="Profile">
+      <p>
+        <b>Profile:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+    </goab-tab>
+  `,
+})
+class TestTabComponent {
+  /** do nothing **/
+}
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    imports: [GoABTab],
+describe("GoABTab", () => {
+  let fixture: ComponentFixture<TestTabComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [TestTabComponent],
+      imports: [GoABTab],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestTabComponent);
+    fixture.detectChanges();
   });
-  fixture = TestBed.createComponent(GoABTab);
-  component = fixture.componentInstance;
-});
 
-it("should render", () => {
-  expect(component).toBeTruthy();
+  it("should render", () => {
+    const el = fixture.nativeElement.querySelector("goa-tab");
+    expect(el?.getAttribute("heading")).toBe("Profile");
+    expect(el?.innerHTML).toContain("Profile");
+    const content = el?.querySelector("p");
+    expect(content?.textContent).toContain(
+      "Profile: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+    );
+  });
 });

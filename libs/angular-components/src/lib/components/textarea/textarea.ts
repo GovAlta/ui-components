@@ -1,5 +1,5 @@
 import { GoABTextAreaCountBy, GoABTextAreaOnChangeDetail, GoABTextAreaOnKeyPressDetail, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
@@ -7,23 +7,21 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   selector: "goab-textarea",
   template: `
     <goa-textarea
-      [name]="name"
-      [value]="value"
-      [id]="id"
-      [placeholder]="placeholder"
-      [rows]="rows"
-      [error]="error"
+      [attr.name]="name"
+      [attr.value]="value"
+      [attr.placeholder]="placeholder"
+      [attr.rows]="rows"
+      [attr.error]="error"
       [disabled]="disabled"
-      [width]="width"
-      [arialabel]="ariaLabel"
-      [countby]="countBy"
-      [maxcount]="maxCount"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
-
+      [attr.width]="width"
+      [attr.arialabel]="ariaLabel"
+      [attr.countby]="countBy"
+      [attr.maxcount]="maxCount"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
       (_change)="_onChange($event)"
       (_keyPress)="_onKeyPress($event)"
     >
@@ -34,7 +32,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: GoABTextArea,
+      useExisting: forwardRef(() => GoABTextArea),
     }
   ]
 })

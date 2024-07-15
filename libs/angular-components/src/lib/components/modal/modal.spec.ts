@@ -1,17 +1,78 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABModal } from "./modal";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import {
+  GoABModalCalloutVariant,
+  GoABModalRole,
+  GoABModalTransition,
+} from "@abgov/ui-components-common";
+import { By } from "@angular/platform-browser";
 
-let component: GoABModal;
-let fixture: ComponentFixture<GoABModal>;
+@Component({
+  template: `
+    <goab-modal
+      [open]="open"
+      [maxWidth]="maxWidth"
+      [calloutVariant]="callOutVariant"
+      [role]="role"
+      [testId]="testId"
+      [closable]="closable"
+      [transition]="transition"
+      (onClose)="onClose()"
+    >
+      <div slot="heading">{{ heading }}</div>
+      <div slot="actions">{{ actions }}</div>
+      {{ content }}
+    </goab-modal>
+  `,
+})
+class TestModalComponent {
+  open = true;
+  maxWidth = "500px";
+  callOutVariant = "information" as GoABModalCalloutVariant;
+  role = "alertdialog" as GoABModalRole;
+  testId = "testId";
+  closable = true;
+  transition = "fast" as GoABModalTransition;
+  heading = "Modal Heading";
+  actions = "Close";
+  content = "Modal Content";
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
-    imports: [GoABModal],
+  onClose() {
+    /* do nothing */
+  }
+}
+
+describe("GoABModal", () => {
+  let fixture: ComponentFixture<TestModalComponent>;
+  let component: TestModalComponent;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [TestModalComponent],
+      imports: [GoABModal],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
-  fixture = TestBed.createComponent(GoABModal);
-  component = fixture.componentInstance;
-});
 
-it("should render", () => {
-  expect(component).toBeTruthy();
+  it("should render", () => {
+    const modal = fixture.debugElement.query(By.css("goa-modal")).nativeElement;
+
+    const actionContent = modal?.querySelector("[slot='actions']");
+    expect(actionContent?.textContent).toContain(component.actions);
+    const headingContent = modal?.querySelector("[slot='heading']");
+    expect(headingContent?.textContent).toContain(component.heading);
+    expect(modal?.getAttribute("open")).toBe(`${component.open}`);
+    expect(modal?.getAttribute("maxwidth")).toBe(component.maxWidth);
+    expect(modal?.getAttribute("closable")).toBe(`${component.closable}`);
+    expect(modal?.textContent).toContain(component.content);
+    expect(modal?.getAttribute("calloutvariant")).toBe(component.callOutVariant);
+    expect(modal?.getAttribute("data-testid")).toBe(component.testId);
+    expect(modal?.getAttribute("transition")).toBe(component.transition);
+    expect(modal?.getAttribute("role")).toBe(component.role);
+  });
 });

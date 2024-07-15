@@ -6,15 +6,15 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   selector: "goab-calendar",
   template: `
     <goa-calendar
-      [name]="name"
+      [attr.name]="name"
       [value]="value"
-      [min]="min"
-      [max]="max"
-      [testid]="testId"
-      [mt]="mt"
-      [mb]="mb"
-      [ml]="ml"
-      [mr]="mr"
+      [attr.min]="min"
+      [attr.max]="max"
+      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
       (_change)="_onChange($event)"
     >
       <ng-content />

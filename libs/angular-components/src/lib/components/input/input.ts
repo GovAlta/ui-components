@@ -1,5 +1,5 @@
 import { GoABIconType, GoABInputAutoCapitalize, GoABInputOnBlurDetail, GoABInputOnChangeDetail, GoABInputOnFocusDetail, GoABInputOnKeyPressDetail, GoABInputType, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef, OnInit } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
@@ -7,43 +7,42 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   selector: "goab-input",
   template: `
     <goa-input
-      [type]="type"
-      [name]="name"
-      [value]="value"
-      [autocapitalize]="autoCapitalize"
-      [placeholder]="placeholder"
-      [leadingicon]="leadingIcon"
-      [trailingicon]="trailingIcon"
-      [variant]="variant"
+      [attr.type]="type"
+      [attr.name]="name"
+      [attr.focused]="focused"
+      [attr.value]="value"
+      [attr.autocapitalize]="autoCapitalize"
+      [attr.placeholder]="placeholder"
+      [attr.leadingicon]="leadingIcon"
+      [attr.trailingicon]="trailingIcon"
+      [attr.variant]="variant"
       [disabled]="disabled"
-      [focused]="focused"
-      [readonly]="readonly"
-      [error]="error"
-      [testId]="testId"
-      [width]="width"
-      [arialabel]="ariaLabel"
-      [arialabelledby]="ariaLabelledBy"
-      [min]="min"
-      [max]="max"
-      [step]="step"
-      [prefix]="prefix"
-      [suffix]="suffix"
-      [debounce]="debounce"
-      [maxlength]="maxLength"
-      [id]="id"
-      [mt]="mt"
-      [mr]="mr"
-      [mb]="mb"
-      [ml]="ml"
-      [handletrailingiconclick]="!!_onTrailingIconClick"
+      [attr.readonly]="readonly"
+      [attr.error]="error"
+      [attr.data-testid]="testId"
+      [attr.width]="width"
+      [attr.arialabel]="ariaLabel"
+      [attr.arialabelledby]="ariaLabelledBy"
+      [attr.min]="min"
+      [attr.max]="max"
+      [attr.step]="step"
+      [attr.prefix]="prefix"
+      [attr.suffix]="suffix"
+      [attr.debounce]="debounce"
+      [attr.maxlength]="maxLength"
+      [attr.id]="id"
+      [attr.mt]="mt"
+      [attr.mr]="mr"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.handletrailingiconclick]="!!_onTrailingIconClick"
       (_trailingIconClick)="_onTrailingIconClick($event)"
       (_change)="_onChange($event)"
       (_focus)="_onFocus($event)"
       (_blur)="_onBlur($event)"
       (_keypress)="_onKeyPress($event)"
     >
-      <ng-content selector="[slot=leadingContent]" />
-      <ng-content selector="[slot=trailingContent]" />
+      <ng-content/>
     </goa-input>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -51,35 +50,35 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: GoABInput,
+      useExisting: forwardRef(() => GoABInput),
     }
   ]
 })
-export class GoABInput implements ControlValueAccessor {
+export class GoABInput implements ControlValueAccessor, OnInit {
   @Input() type?: GoABInputType = "text";
   @Input() name?: string;
-  @Input() value?: string | null = "";
+  @Input() id?: string;
+  @Input() debounce?: number;
+  @Input() disabled?: boolean;
   @Input() autoCapitalize?: GoABInputAutoCapitalize;
   @Input() placeholder?: string;
   @Input() leadingIcon?: GoABIconType;
   @Input() trailingIcon?: GoABIconType;
   @Input() variant?: string;
-  @Input() disabled?: boolean;
   @Input() focused?: boolean;
   @Input() readonly?: boolean;
   @Input() error?: boolean;
-  @Input() testId?: string;
   @Input() width?: string;
+  @Input() prefix?: string;
+  @Input() suffix?: string;
+  @Input() testId?: string;
   @Input() ariaLabel?: string;
-  @Input() ariaLabelledBy?: string;
+  @Input() maxLength?: number;
+  @Input() value?: string | null = "";
   @Input() min?: number;
   @Input() max?: number;
   @Input() step?: number;
-  @Input() prefix?: string;
-  @Input() suffix?: string;
-  @Input() debounce?: boolean;
-  @Input() maxLength?: number;
-  @Input() id?: string;
+  @Input() ariaLabelledBy?: string;
   @Input() mt?: Spacing;
   @Input() mr?: Spacing;
   @Input() mb?: Spacing;
@@ -91,7 +90,7 @@ export class GoABInput implements ControlValueAccessor {
   @Output() onKeyPress = new EventEmitter<GoABInputOnKeyPressDetail>();
   @Output() onChange = new EventEmitter<GoABInputOnChangeDetail>();
 
-  private handleTrailingIconClick: boolean = false;
+  private handleTrailingIconClick = false;
 
   ngOnInit() {
     this.handleTrailingIconClick = this.onTrailingIconClick.observed;
