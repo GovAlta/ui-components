@@ -196,6 +196,8 @@
       _popoverEl.style.top = _relative
         ? `${-popoverRect.height}px`
         : `${targetRect.y - popoverRect.height + window.scrollY}px`;
+    } else {
+      _popoverEl.style.top = ''; // In case this is triggered by _sectionHeight is changed
     }
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
