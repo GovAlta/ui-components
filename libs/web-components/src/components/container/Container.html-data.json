@@ -30,6 +30,11 @@
       "description": "Sets the content in the right of the accent bar"
     },
     {
+      "name": "maxwidth",
+      "description": "Sets the maximum width of the container.",
+      "type": "string"
+    },
+    {
       "name": "mt",
       "description": "Top margin",
       "valueSet": "spacing"

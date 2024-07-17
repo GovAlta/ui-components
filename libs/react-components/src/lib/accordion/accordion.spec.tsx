@@ -22,6 +22,7 @@ describe("Accordion", () => {
         headingContent={
           <GoABadge type="success" content="test-badge"></GoABadge>
         }
+        maxWidth="480px"
       >
         Accordion Content
       </GoAAccordion>
@@ -32,5 +33,6 @@ describe("Accordion", () => {
     expect(el?.getAttribute("open")).toBe("true");
     const badge = headingContent?.querySelector("goa-badge");
     expect(badge?.getAttribute("content")).toBe("test-badge");
+    expect(el?.getAttribute("maxwidth")).toBe("480px");
   });
 });

@@ -5,7 +5,7 @@
     {
       "name": "heading",
       "type": "string",
-      "description": "The title heading"
+      "description": "The title heading."
     },
     {
       "name": "mt",
@@ -29,8 +29,13 @@
     },
     {
       "name": "open",
-      "description": "Controls if details is expanded or collapsed",
+      "description": "Controls if details is expanded or collapsed.",
       "valueSet": "boolean"
+    },
+    {
+      "name": "maxwidth",
+      "description": "Sets the maximum width of the details.",
+      "type": "string"
     }
   ],
   "references": [

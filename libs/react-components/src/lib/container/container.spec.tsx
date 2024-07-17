@@ -11,6 +11,7 @@ describe("Container", () => {
         padding="relaxed"
         title={"Text title"}
         width="content"
+        maxWidth="480px"
         mt="s"
         mr="m"
         mb="l"
@@ -32,6 +33,7 @@ describe("Container", () => {
     expect(el?.getAttribute("mb")).toBe("l");
     expect(el?.getAttribute("ml")).toBe("xl");
     expect(el?.getAttribute("width")).toBe("content");
+    expect(el?.getAttribute("maxwidth")).toBe("480px");
 
     expect(el?.querySelector("*[slot=title]")?.innerHTML).toContain("Text title");
     expect(

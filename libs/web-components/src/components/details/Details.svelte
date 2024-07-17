@@ -3,10 +3,15 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { calculateMargin } from "../../common/styling";
-  import { toBoolean, validateRequired, generateRandomId } from "../../common/utils";
+  import {
+    toBoolean,
+    validateRequired,
+    generateRandomId,
+  } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
   export let heading: string;
+  export let maxwidth: string = "75ch";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -36,7 +41,10 @@
 <details
   open={_isOpen}
   on:toggle={({ target }) => (open = `${target?.open}`)}
-  style={calculateMargin(mt, mr, mb, ml)}
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)}
+    max-width: ${maxwidth};
+  `}
 >
   <summary
     bind:this={_summaryEl}
@@ -69,7 +77,6 @@
   }
 
   details {
-    max-width: 75ch;
     position: relative;
   }
   details :global(::slotted(*)) {
