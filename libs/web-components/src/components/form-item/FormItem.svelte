@@ -42,6 +42,7 @@
   export let helptext: string = "";
   export let error: string = "";
   export let requirement: RequirementType = "";
+  export let maxwidth: string = "none";
   export let id: string = ""; // @deprecated: no longer used
 
   let _rootEl: HTMLElement;
@@ -67,7 +68,10 @@
 <!-- HTML -->
 <div
   data-testid={testid}
-  style={calculateMargin(mt, mr, mb, ml)}
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)}
+    max-width: ${maxwidth};
+  `}
   bind:this={_rootEl}
 >
   {#if label}

@@ -11,6 +11,7 @@ describe("RadioItem", () => {
       name: "radio-item-1-name",
       arialabel: "radio-item-1-label",
       description: "test description",
+      maxwidth: "480px",
     });
 
     expect(result.getByTestId("radio-option-radio-item-1")).toBeTruthy();
@@ -30,6 +31,8 @@ describe("RadioItem", () => {
     expect(input.getAttribute("aria-describedby")).toBe(
       radioDescriptionDiv?.getAttribute("id"),
     );
+    const radioContainerDiv = result.container.querySelector(".goa-radio-container");
+    expect(radioContainerDiv?.getAttribute("style")).toContain("max-width: 480px;");
   });
 
   it("should render the radio item with slot description", async () => {

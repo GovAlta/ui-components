@@ -24,17 +24,17 @@
     {
       "name": "label",
       "type": "string",
-      "description": "Creates a label for a form item"
+      "description": "Creates a label for a form item."
     },
     {
       "name": "labelsize",
       "type": "regular | large",
-      "description": "Set a regular or large label size"
+      "description": "Set a regular or large label size."
     },
     {
-      "name": "helpText",
+      "name": "helptext",
       "type": "string",
-      "description": "Help text displayed under the form field to provide an additional explanation"
+      "description": "Help text displayed under the form field to provide an additional explanation."
     },
     {
       "name": "error",
@@ -51,6 +51,11 @@
       "name": "id",
       "type": "string",
       "description": "ID of the label."
+    },
+    {
+      "name": "maxwidth",
+      "description": "Sets the maximum width of the form item.",
+      "type": "string"
     }
   ],
   "references": [

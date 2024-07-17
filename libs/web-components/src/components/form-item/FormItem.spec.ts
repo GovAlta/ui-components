@@ -9,7 +9,7 @@ describe("GoA FormItem", () => {
     const result = render(GoAFormItem, { testid: "foo" });
     const el = result.queryByTestId("foo");
 
-    const label = el.querySelector(".label");
+    const label = el?.querySelector(".label");
     expect(label).toBeFalsy();
 
     const requirement = document.querySelector("em");
@@ -29,7 +29,7 @@ describe("GoA FormItem", () => {
     });
     const el = result.queryByTestId("foo");
 
-    const label = el.querySelector(".label");
+    const label = el?.querySelector(".label");
     expect(label).toBeTruthy();
 
     const requirement = document.querySelector("em");
@@ -50,11 +50,11 @@ describe("GoA FormItem", () => {
     });
     const el = result.queryByTestId("foo");
 
-    const label = el.querySelector(".label");
+    const label = el?.querySelector(".label");
     expect(label).toBeTruthy();
 
     const requirement = document.querySelector("em");
-    expect(requirement.innerHTML).toContain("optional");
+    expect(requirement?.innerHTML).toContain("optional");
 
     const helpText = document.querySelector(".help-msg");
     expect(helpText).toBeFalsy();
@@ -71,11 +71,11 @@ describe("GoA FormItem", () => {
     });
     const el = result.queryByTestId("foo");
 
-    const label = el.querySelector(".label");
+    const label = el?.querySelector(".label");
     expect(label).toBeTruthy();
 
     const requirement = document.querySelector("em");
-    expect(requirement.innerHTML).toContain("required");
+    expect(requirement?.innerHTML).toContain("required");
 
     const helpText = document.querySelector(".help-msg");
     expect(helpText).toBeFalsy();
@@ -85,25 +85,31 @@ describe("GoA FormItem", () => {
   });
 
   it("should render all params", async () => {
-    render(GoAFormItem, {
+    const baseElement = render(GoAFormItem, {
       label: "the label",
+      labelsize: "large",
+      maxwidth: "480px",
       helptext: "the helptext",
       requirement: "optional",
       error: "the error",
-      id: "labelId",
+      testid: "formitem-test",
     });
 
+    const formitem = await baseElement.findByTestId("formitem-test");
     const label = document.querySelector(".label");
-    expect(label.innerHTML).toContain("the label");
+
+    expect(formitem?.getAttribute("style")).toContain("max-width: 480px;");
+    expect(label?.innerHTML).toContain("the label");
+    expect(label?.classList).toContain("large");
 
     const requirement = document.querySelector("em");
-    expect(requirement.innerHTML).toContain("optional");
+    expect(requirement?.innerHTML).toContain("optional");
 
     const helpText = document.querySelector(".help-msg");
-    expect(helpText.innerHTML).toContain("the helptext");
+    expect(helpText?.innerHTML).toContain("the helptext");
 
     const errMsg = document.querySelector(".error-msg");
-    expect(errMsg.innerHTML).toContain("the error");
+    expect(errMsg?.innerHTML).toContain("the error");
   });
 
   it("should not render options if not provided", async () => {

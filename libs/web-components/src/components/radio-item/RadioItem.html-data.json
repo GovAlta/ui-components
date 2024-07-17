@@ -3,23 +3,28 @@
   "attributes": [
     {
       "name": "label",
-      "description": "Text to show to the user",
+      "description": "Text to show to the user.",
       "type": "string"
     },
     {
       "name": "value",
-      "description": "Value of the item that will be returned when selected",
+      "description": "Value of the item that will be returned when selected.",
       "type": "string"
     },
     {
       "name": "description",
-      "description": "Text added below the label text",
+      "description": "Text added below the label text.",
       "type": "string"
     },
     {
       "name": "arialabel",
       "type": "string",
       "description": "Defines how the radio item will be translated for the screen reader."
+    },
+    {
+      "name": "maxwidth",
+      "description": "Sets the maximum width of the radio item.",
+      "type": "string"
     }
   ],
   "references": [
