@@ -200,7 +200,7 @@
 
     {#if maxfilesize}
       <em class="max-file-size" data-testid="max-file-size"
-        >Maximum file size is {maxfilesize}.</em
+        >Maximum file size is {maxfilesize}</em
       >
     {/if}
 
@@ -223,7 +223,7 @@
 
     {#if maxfilesize}
       <em class="max-file-size" data-testid="max-file-size">
-        Maximum file size is {maxfilesize}.
+        Maximum file size is {maxfilesize}
       </em>
     {/if}
   </div>
