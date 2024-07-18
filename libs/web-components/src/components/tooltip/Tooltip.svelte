@@ -232,7 +232,6 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
   }
 
   .tooltip-text {

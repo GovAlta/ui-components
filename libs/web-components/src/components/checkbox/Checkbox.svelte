@@ -23,7 +23,7 @@
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
-  export let mb: Spacing = null;
+  export let mb: Spacing = "m";
   export let ml: Spacing = null;
 
   // Private
@@ -132,7 +132,6 @@
 
   .root {
     display: inline-block;
-    padding-bottom: var(--goa-space-m);
   }
 
   input[type="checkbox"] {

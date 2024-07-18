@@ -1,14 +1,13 @@
 <!-- svelte-ignore missing-custom-element-compile-options -->
-<svelte:options customElement="goa-app-header"/>
+<svelte:options customElement="goa-app-header" />
 
 <!-- Script -->
 <script lang="ts">
-  import {onDestroy, onMount, tick} from "svelte";
-  import {MOBILE_BP, TABLET_BP} from "../../common/breakpoints";
-  import {getSlottedChildren} from "../../common/utils";
-  import {isUrlMatch, getMatchedLink} from "../../common/urls";
-  import {AppHeaderMenuProps} from "../app-header-menu/AppHeaderMenu.svelte";
-
+  import { onDestroy, onMount, tick } from "svelte";
+  import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
+  import { getSlottedChildren, styles } from "../../common/utils";
+  import { isUrlMatch, getMatchedLink } from "../../common/urls";
+  import { AppHeaderMenuProps } from "../app-header-menu/AppHeaderMenu.svelte";
 
   // optional
   export let heading: string = "";
@@ -39,15 +38,9 @@
   $: _tablet = _windowWidth >= MOBILE_BP && _windowWidth < fullmenubreakpoint;
   $: _desktop = _windowWidth >= +fullmenubreakpoint;
   $: (async () => {
-    _showToggleMenu = _desktop ? false : await hasChildren() as boolean;
-    onShowToggleMenuChange()
+    _showToggleMenu = _desktop ? false : ((await hasChildren()) as boolean);
+    onShowToggleMenuChange();
   })();
-
-
-  // Functions
-
-  const toggleMenu = () => (_showMenu = !_showMenu);
-  const hideMenu = () => (_showMenu = false);
 
   // Hooks
 
@@ -59,6 +52,11 @@
   onDestroy(() => {
     window.removeEventListener("popstate", onRouteChange, true);
   });
+
+  // Functions
+
+  const toggleMenu = () => (_showMenu = !_showMenu);
+  const hideMenu = () => (_showMenu = false);
 
   function getChildren() {
     if (!_slotParentEl) return;
@@ -72,12 +70,9 @@
         el.classList.remove("current");
         return el;
       });
-
-
   }
 
   function addEventListeners() {
-
     if (!_rootEl) return;
 
     _rootEl.addEventListener("app-header-menu:mounted", (e: Event) => {
@@ -94,11 +89,10 @@
         onRouteChange();
       }
     });
-    observer.observe(document.body, {childList: true, subtree: true});
+    observer.observe(document.body, { childList: true, subtree: true });
 
     window.addEventListener("popstate", onRouteChange, true);
   }
-
 
   function onRouteChange() {
     setCurrentLink();
@@ -114,7 +108,7 @@
       links = [...links, ...el.links];
     });
 
-    links.forEach(link => link.classList.remove("current"));
+    links.forEach((link) => link.classList.remove("current"));
 
     const matchedLink = getMatchedLink(links, window.location);
     if (matchedLink) {
@@ -126,10 +120,12 @@
 
   function dispatchCurrentLink(href: string) {
     _appHeaderMenuItems.forEach((item) => {
-      item.el.dispatchEvent(new CustomEvent("app-header:changed", {
-        composed: true,
-        detail: href
-      }));
+      item.el.dispatchEvent(
+        new CustomEvent("app-header:changed", {
+          composed: true,
+          detail: href,
+        }),
+      );
     });
   }
 
@@ -139,7 +135,8 @@
     const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
     if (!slot) return;
 
-    slot.assignedElements()
+    slot
+      .assignedElements()
       .filter((el) => el.tagName === "A")
       .map((el) => {
         if (_showToggleMenu) el.classList.add("inside-collapse-menu");
@@ -154,9 +151,8 @@
     await tick();
 
     if (!_slotParentEl) return false;
-
     const slot = _slotParentEl?.childNodes[0] as HTMLSlotElement;
-    const children = slot.assignedElements?.();
+    const children = slot?.assignedElements?.();
     if (children) {
       return children.length > 0;
     } else {
@@ -167,7 +163,7 @@
   }
 </script>
 
-<svelte:window bind:innerWidth={_windowWidth}/>
+<svelte:window bind:innerWidth={_windowWidth} />
 
 <!-- HTML -->
 <div
@@ -187,16 +183,16 @@
     <!-- Logo and optional heading link -->
     {#if url}
       <a href={url} class="header-logo-title-area" data-testid="url">
-        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo}/>
-        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo}/>
+        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
+        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
         {#if heading}
           <span data-testid="title" class="title">{heading}</span>
         {/if}
       </a>
     {:else}
       <div class="header-logo-title-area">
-        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo}/>
-        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo}/>
+        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
+        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
         {#if heading}
           <span data-testid="title" class="title">{heading}</span>
         {/if}
@@ -205,17 +201,15 @@
 
     <!-- Menu button for mobile -->
     {#if _showToggleMenu && _mobile}
-      <button
-        on:click={toggleMenu}
-        class="menu-toggle-area"
-        data-testid="menu-toggle"
-      >
-        Menu
-        <goa-icon
-          type={_showMenu ? "chevron-up" : "chevron-down"}
-          mt="1"
-        />
-      </button>
+      <div class="menu-toggle-area">
+        <button
+          on:click={toggleMenu}
+          data-testid="menu-toggle"
+        >
+          Menu
+          <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
+        </button>
+      </div>
     {/if}
 
     <!-- Menu and menu button for tablet -->
@@ -223,32 +217,33 @@
       <goa-popover
         class="menu"
         open={_showMenu}
+        minwidth="16rem"
         context="app-header-menu"
         focusborderwidth="0"
         borderradius="0"
         padded="false"
-        width="16rem"
         tabindex="-1"
+        height="full"
         position="below"
         on:_close={hideMenu}
       >
-        <div slot="target">
+        <div 
+          slot="target" 
+          style={styles("height: 100%")} 
+          class="menu-toggle-area"
+        >
           <button
             on:click={toggleMenu}
-            class="menu-toggle-area"
             data-testid="menu-toggle"
           >
             Menu
-            <goa-icon
-              type={_showMenu ? "chevron-up" : "chevron-down"}
-              mt="1"
-            />
+            <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
           </button>
         </div>
 
         {#if _showMenu}
           <div bind:this={_slotParentEl} data-testid="slot">
-            <slot/>
+            <slot />
           </div>
         {/if}
       </goa-popover>
@@ -261,14 +256,14 @@
     -->
     {#if !_showMenu && (_mobile || _tablet)}
       <div bind:this={_slotParentEl} style="display: none">
-        <slot/>
+        <slot />
       </div>
     {/if}
 
     <!-- Mobile and desktop slot content -->
     {#if (_showMenu && _mobile) || _desktop}
       <div bind:this={_slotParentEl} data-testid="slot" class="content-area">
-        <slot/>
+        <slot />
       </div>
     {/if}
   </div>
@@ -288,17 +283,16 @@
 
   /* spans the full page width */
   .container {
-    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-border-width-s) solid
+      var(--goa-color-greyscale-200);
     background-color: var(--goa-color-greyscale-white);
   }
 
   .title {
     margin-left: var(--goa-space-s);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     color: var(--goa-color-text-default);
     font: var(--goa-typography-body-s);
+    max-width: 624px;
   }
 
   /* contains all children within component */
@@ -306,7 +300,6 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-template-rows: 3.375rem auto;
     grid-template-areas:
       "header menu"
       "links links";
@@ -316,12 +309,19 @@
     grid-area: header;
 
     display: flex;
-    align-items: center;
-    padding: 0 var(--goa-space-m);
     text-decoration: none;
+    padding: var(--goa-space-m);
+    align-items: flex-start;
   }
 
-  .header-logo-title-area:focus {
+  .tablet .header-logo-title-area,
+  .desktop .header-logo-title-area {
+    min-height: calc(
+      4rem - 2*(var(--goa-spacing-m))
+    ); /* desired min-height minus the required padding */
+  }
+
+  .header-logo-title-area:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
   }
@@ -333,30 +333,30 @@
 
   .menu-toggle-area {
     grid-area: menu;
+    display: flex;
+    align-items: flex-end;
+    justify-content: right;
+    gap: var(--goa-space-2xs);
+  }
 
-    color: var(--goa-color-text-default);
+  .menu-toggle-area button {
+    display: flex;
     align-items: center;
     background: transparent;
     border: none;
+    color: var(--goa-color-text-default);
     cursor: pointer;
-    display: flex;
-    gap: 0.25rem;
-    justify-content: right;
-    padding: 1rem;
     text-decoration: underline;
+    padding-left: var(--goa-space-m);
   }
 
   .menu-toggle-area goa-icon {
     scale: 0.8;
   }
 
-  .menu-toggle-area:focus {
+  .menu-toggle-area:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
-  }
-
-  goa-popover .menu-toggle-area:focus {
-    outline-offset: 0;
   }
 
   .image-desktop {
@@ -373,7 +373,7 @@
     font: var(--goa-typography-body-m);
     text-decoration: none;
     color: var(--goa-color-text-default);
-    padding: calc((3rem - var(--goa-line-height-3)) / 2) 1rem;
+    padding: calc((3rem - var(--goa-line-height-3)) / 2) var(--goa-space-m);
     cursor: pointer;
     white-space: nowrap;
   }
@@ -383,7 +383,7 @@
     color: var(--goa-color-interactive-hover);
   }
 
-  :global(::slotted(a:focus)) {
+  :global(::slotted(a:focus-visible)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
     background: var(--goa-color-greyscale-100);
@@ -395,8 +395,11 @@
     color: var(--goa-color-interactive-default);
   }
 
+  /* Mobile */
+
   .mobile :global(::slotted(a)) {
-    box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
+    box-shadow: inset 0 var(--goa-border-width-s) 0 0
+      var(--goa-color-greyscale-200);
   }
 
   .mobile .image-desktop {
@@ -409,17 +412,25 @@
   }
 
   .mobile.show-menu {
-    border-bottom: var(--goa-border-width-m) solid var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-border-width-m) solid
+      var(--goa-color-greyscale-200);
+  }
+
+  .mobile .menu-toggle-area button {
+    height: 3.375rem;
+    margin: 0 var(--goa-space-xs);
   }
 
   /* Tablet */
+
   .tablet *,
   .tablet:global(::slotted(*)) {
     font: var(--goa-typography-body-m);
   }
 
   .tablet :global(::slotted(a)) {
-    box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
+    box-shadow: inset 0 var(--goa-border-width-s) 0 0
+      var(--goa-color-greyscale-200);
   }
 
   .tablet .image-desktop {
@@ -431,12 +442,8 @@
   }
 
   .tablet .header-logo-title-area {
-    padding: 0 var(--goa-space-l);
-    min-height: 4rem;
-  }
-
-  .tablet .layout {
-    grid-template-rows: 4rem auto;
+    padding: var(--goa-space-m) 0;
+    min-height: calc(4rem - 2 * var(--goa-space-m)); /* - top/bottom padding */
   }
 
   .tablet .title {
@@ -444,14 +451,19 @@
     font: var(--goa-typography-body-m);
   }
 
+  .tablet .menu-toggle-area button {
+    height: 4rem;
+  }
+
   @media (--tablet) {
-    /*padding is independent from fullmenubreakpoint, should use media query*/
+    /* padding is independent from fullmenubreakpoint, should use media query */
     .container {
       padding: 0 var(--goa-space-xl);
     }
   }
 
   /* Desktop */
+
   .desktop .content-area {
     grid-area: menu;
     display: flex;
@@ -461,11 +473,11 @@
   .desktop .header-logo-title-area {
     grid-area: header;
     display: flex;
-    align-items: center;
-    grid-template-rows: 3.375rem auto;
+    align-items: flex-start;
     color: inherit;
     flex: 1 1 auto;
-    min-height: 4rem;
+    padding: var(--goa-space-m) 0;
+    min-height: calc(4rem - 2 * var(--goa-space-m)); /* - top/bottom padding */
   }
 
   .desktop .image-desktop {
@@ -493,32 +505,30 @@
   .desktop :global(::slotted(a:visited)) {
     color: var(--goa-color-text-default);
     font-weight: var(--goa-font-weight-bold);
-    grid-template-rows: 3.375rem auto;
     display: inline-flex;
-    align-items: center;
-    padding: 0 0.75rem;
+    align-items: flex-start;
+    padding: var(--goa-space-m) var(--goa-space-s);
   }
 
   .desktop :global(::slotted(goa-app-header-menu)) {
     padding: 0;
   }
 
-  .desktop :global(::slotted(a:focus-within)),
+  .desktop :global(::slotted(a:focus-visible)),
   .desktop :global(::slotted(a:hover)) {
     background: var(--goa-color-greyscale-100);
     cursor: pointer;
     color: var(--goa-color-interactive-hover);
   }
 
-  .desktop :global(::slotted(a:focus)),
-  .desktop :global(::slotted(goa-app-header-menu:focus)) {
+  .desktop :global(::slotted(a:focus-visible)),
+  .desktop :global(::slotted(goa-app-header-menu:focus-visible)) {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: calc(-1 * var(--goa-border-width-l));
   }
 
   .desktop :global(::slotted(a.current)) {
     border-top: 4px solid var(--goa-color-interactive-default);
-    border-bottom: 4px solid transparent;
   }
 
   .desktop :global(::slotted(a.current:hover)) {
@@ -542,7 +552,7 @@
   }
 
   @media (--desktop) {
-    /*padding is independent from fullmenubreakpoint, should use media query*/
+    /* padding is independent from fullmenubreakpoint, should use media query */
     .container.tablet {
       padding: 0 var(--goa-space-3xl);
     }
@@ -550,7 +560,6 @@
       padding: 0 var(--desktop-padding);
     }
   }
-
 
   :global(::slotted(a.current.inside-collapse-menu)) {
     color: var(--goa-color-text-light);

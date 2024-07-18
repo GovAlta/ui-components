@@ -5,7 +5,10 @@
   import { typeValidator, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
-  import { GoARadioItemProps, RadioItemSelectProps } from "../radio-item/RadioItem.svelte";
+  import {
+    GoARadioItemProps,
+    RadioItemSelectProps,
+  } from "../radio-item/RadioItem.svelte";
 
   // Validator
   const [Orientations, validateOrientation] = typeValidator(
@@ -30,11 +33,17 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  // Private
+  let isError: boolean;
+
   // Reactive
 
   $: isDisabled = toBoolean(disabled);
-  $: isError = toBoolean(error);
   $: value && setCurrentSelectedOption(value);
+  $: {
+    isError = toBoolean(error);
+    bindOptions()
+  }
 
   // Private
 
@@ -49,7 +58,7 @@
 
     getChildren();
 
-    _rootEl.addEventListener("_click",(e: Event) => {
+    _rootEl.addEventListener("_radioItemChange", (e: Event) => {
       onChange((e as CustomEvent).detail);
     });
   });
@@ -58,7 +67,7 @@
 
   function getChildren() {
     _rootEl.addEventListener("radio-item:mounted", (e: Event) => {
-      const radioItemProps = (e as CustomEvent<GoARadioItemProps>).detail;  
+      const radioItemProps = (e as CustomEvent<GoARadioItemProps>).detail;
       _radioItems = [..._radioItems, radioItemProps];
 
       // call bindOptions once all children are attained
@@ -67,24 +76,24 @@
       }
       _bindTimeoutId = setTimeout(() => {
         bindOptions();
-      }, 1)
-    })    
+      }, 1);
+    });
   }
 
   function bindOptions() {
-    _radioItems.forEach((props, index) => {
-      props.el.dispatchEvent(new CustomEvent<Partial<GoARadioItemProps>>("radio-group:init", {
-        composed: true,
-        detail: {
-          disabled: isDisabled,
-          error: isError,
-          description: props.description,
-          name,
-          checked: props.value === value,
-          ariaLabel: arialabel || name,
-          ariaDescribedBy: `description-${name}-${index}`,
-        }
-      }));
+    _radioItems.forEach((props) => {
+      props.el.dispatchEvent(
+        new CustomEvent<Partial<GoARadioItemProps>>("radio-group:init", {
+          composed: true,
+          detail: {
+            disabled: isDisabled,
+            error: isError,
+            description: props.description,
+            name,
+            checked: props.value === value,
+          },
+        }),
+      );
     });
   }
 
@@ -109,12 +118,14 @@
 
   function setCurrentSelectedOption(value: string) {
     _radioItems.forEach((item) => {
-      item.el.dispatchEvent(new CustomEvent<RadioItemSelectProps>("radio-group:select", {
-        composed: true,
-        detail: {
-          checked: item.value === value 
-        }
-      }))
+      item.el.dispatchEvent(
+        new CustomEvent<RadioItemSelectProps>("radio-group:select", {
+          composed: true,
+          detail: {
+            checked: item.value === value,
+          },
+        }),
+      );
     });
   }
 </script>
@@ -125,8 +136,10 @@
   style={calculateMargin(mt, mr, mb, ml)}
   class={`goa-radio-group--${orientation}`}
   data-testid={testid}
+  role="radiogroup"
+  aria-label={arialabel}
 >
-    <slot />
+  <slot />
 </div>
 
 <style>

@@ -19,7 +19,7 @@
   export let name: string;
   export let arialabel: string = "";
   export let arialabelledby: string = "";
-  export let value: string = "";
+  export let value: string | undefined = "";
   export let filterable: string = "false";
   export let leadingicon: GoAIconType | null = null;
   export let maxheight: string = "276px";
@@ -44,8 +44,8 @@
   let _isMenuVisible = false;
   let _highlightedIndex: number = -1;
   let _width: string;
+  let _popoverMaxWidth: number;
 
-  let _wrapperEl: HTMLElement;
   let _rootEl: HTMLElement;
   let _menuEl: HTMLElement;
   let _inputEl: HTMLInputElement;
@@ -73,7 +73,7 @@
     : undefined;
 
   $: {
-    _values = parseValues(value);
+    _values = parseValues(value || "");
     setSelected();
   }
 
@@ -117,23 +117,12 @@
 
     if (width) {
       _width = width;
-      if (width.endsWith("%")) {
-        calculatePercentWidth();
-      } else {
-        _width = width;
-      }
     }
 
     // This is only here to allow the tests to pass :(
     if (!width && _options.length > 0) {
       _width = getLongestChildWidth(_options);
     }
-  }
-
-  function calculatePercentWidth() {
-    const rootWidth = _wrapperEl.getBoundingClientRect()?.width;
-    const percent = parseInt(width) / 100;
-    _width = percent * rootWidth + "px";
   }
 
   function setSelected() {
@@ -212,7 +201,7 @@
 
   function syncFilteredOptions() {
     _filteredOptions = _filterable
-      ? _options.filter((option) => isFilterMatch(option, _inputEl?.value ?? ""))
+      ? _options.filter((option) => isFilterMatch(option, _inputEl?.value || ""))
       : _options;
   }
 
@@ -243,13 +232,21 @@
     return value.startsWith(filter) || value.includes(" " + filter);
   }
 
-  function dispatchValue(value?: string) {
+  // update the value show to the user in the <input> element
+  function setDisplayedValue() {
+    _inputEl.value = _selectedOption?.label || _selectedOption?.value || "";
+  }
+
+  function dispatchValue(newValue?: string) {
     const detail = _multiselect
-      ? { name, values: [value, ..._values] }
-      : { name, value: value };
+      ? { name, values: [newValue, ..._values] }
+      : { name, value: newValue };
+
+    if (!_isDirty) {
+      return;  
+    }
 
     setTimeout(() => {
-      if (!_isDirty) return;
       _rootEl?.dispatchEvent(
         new CustomEvent("_change", { composed: true, detail }),
       );
@@ -264,37 +261,49 @@
   function onSelect(option: Option) {
     if (_disabled) return;
 
+    _isDirty = option.value !== _selectedOption?.value;
+    _selectedOption = option;
+  
     if (!_native) {
       hideMenu();
-      _selectedOption = option;
       syncFilteredOptions();
+      setDisplayedValue();
     }
     dispatchValue(option.value);
   }
 
-  /**
-   * When website autofill value without user keyboard
-   */
-  async function onChange() {
+  // Fires when on blur and changes have been made AND when the browser auto-fill is performed
+  async function onChange(_e: Event) {
+    if (!_filterable) return;
+
     await tick();
     syncFilteredOptions();
+
     if (_filteredOptions.length === 1) {
       const option = _filteredOptions[0];
-      dispatchValue(option.value);
       _selectedOption = option;
+      dispatchValue(option.value);
+      setDisplayedValue();
       setTimeout(() => {
         hideMenu();
-      }, 100);
-    }
+      }, 10);
+
+    } else {
+      _selectedOption = undefined;
+      setDisplayedValue();
+      dispatchValue("");
+    }  
   }
 
   function onInputKeyUp(e: KeyboardEvent) {
     if (_disabled) return;
+    _isDirty = true
     _eventHandler.handleKeyUp(e);
   }
 
   function onInputKeyDown(e: KeyboardEvent) {
     if (_disabled) return;
+    _isDirty = true
     _eventHandler.handleKeyDown(e);
   }
 
@@ -325,10 +334,11 @@
     _activeDescendantId = undefined;
     _highlightedIndex = -1;
     _selectedOption = undefined;
-    _isDirty = false;
-    syncFilteredOptions();
+    _isDirty = true;
 
+    syncFilteredOptions();
     dispatchValue("");
+    setDisplayedValue();
   }
 
   async function onChevronClick(e: Event) {
@@ -338,23 +348,9 @@
   }
 
   class ComboboxKeyUpHandler implements EventHandler {
-    constructor(private input: HTMLInputElement) {
-      input.addEventListener("blur", async (e) => {
-        if (!_filterable) return;
+    constructor(private input: HTMLInputElement) { }
 
-        const input = e.target as HTMLInputElement;
-        const selectedOption = _filteredOptions.find(
-          (o) => o.label === input.value,
-        );
-
-        if (!selectedOption) {
-          dispatchValue("");
-          input.value = "";
-        }
-      });
-    }
-
-    onEscape(e: KeyboardEvent) {
+    onEscape(_e: KeyboardEvent) {
       reset();
       // FIXME: on escape should allow the next tab click to move to the next element, currently
       // clicking tab after esc will refocus onto the Dropdown
@@ -367,7 +363,7 @@
     onEnter(e: KeyboardEvent) {
       const option = _filteredOptions[_highlightedIndex];
       if (option) {
-        _isDirty = true;
+        _isDirty = option.value !== _selectedOption?.value;
         onSelect(option);
       }
 
@@ -382,6 +378,7 @@
 
     onArrow(e: KeyboardEvent, direction: "up" | "down") {
       if (!_isMenuVisible) showMenu();
+
       changeHighlightedOption(direction === "up" ? -1 : 1);
       e.stopPropagation();
     }
@@ -389,17 +386,18 @@
     onTab(_: KeyboardEvent) {
       const matchedOption = _filteredOptions.find(
         (option) =>
-          option.label.toLowerCase() === this.input.value.toLowerCase(),
+          option.label?.toLowerCase() === this.input.value.toLowerCase(),
       );
+
       if (matchedOption) {
         onSelect(matchedOption);
       }
+
       hideMenu();
     }
 
     onKeyUp(_: KeyboardEvent) {
       showMenu();
-      _isDirty = true;
     }
 
     handleKeyUp(e: KeyboardEvent) {
@@ -502,170 +500,172 @@
 </script>
 
 <!-- Template -->
-<div bind:this={_wrapperEl}>
-  <div
-    data-testid={`${name}-dropdown`}
-    class="dropdown"
-    class:dropdown-native={_native}
-    style={`
+<div
+  data-testid={`${name}-dropdown`}
+  class="dropdown"
+  class:dropdown-native={_native}
+  style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${_width};
     `}
-    bind:this={_rootEl}
-  >
-    {#if _native}
-      <select
-        {name}
-        aria-label={arialabel || name}
-        aria-labelledby={arialabelledby}
-        class:error={_error}
-        disabled={_disabled}
-        id={name}
-        on:change={onNativeSelect}
-      >
-        <slot />
-        {#each _options as option}
-          <option selected={value === option.value} value={option.value}>
-            {option.label}
-          </option>
-        {/each}
-      </select>
-    {:else}
+  bind:this={_rootEl}
+  bind:clientWidth={_popoverMaxWidth}
+>
+  {#if _native}
+    <select
+      {name}
+      aria-label={arialabel || name}
+      aria-labelledby={arialabelledby}
+      class:error={_error}
+      disabled={_disabled}
+      id={name}
+      on:change={onNativeSelect}
+    >
       <slot />
-      <!-- list and filter -->
-      <goa-popover
-        {disabled}
-        {relative}
-        data-testid="option-list"
-        maxwidth={_width}
-        open={_isMenuVisible}
-        padded="false"
-        tabindex="-1"
-        width={_width}
-        on:_open={showMenu}
-        on:_close={hideMenu}
+      {#each _options as option}
+        <option selected={value === option.value} value={option.value}>
+          {option.label}
+        </option>
+      {/each}
+    </select>
+  {:else}
+    <slot />
+    <!-- list and filter -->
+    <goa-popover
+      {disabled}
+      {relative}
+      data-testid="option-list"
+      maxwidth={`${_popoverMaxWidth}px`}
+      open={_isMenuVisible}
+      padded="false"
+      tabindex="-1"
+      width="100%"
+      on:_open={showMenu}
+      on:_close={hideMenu}
+    >
+      <div
+        slot="target"
+        class="dropdown-input-group"
+        class:dropdown-input-group--disabled={_disabled}
+        class:error={_error}
       >
-        <div
-          slot="target"
-          class="dropdown-input-group"
-          class:dropdown-input-group--disabled={_disabled}
-          class:error={_error}
-        >
-          {#if leadingicon}
-            <goa-icon
-              class="dropdown-input--leading-icon"
-              data-testid="leading-icon"
-              type={leadingicon}
-            />
-          {/if}
-
-          <input
-            style={`
-              cursor: ${!_disabled ? (_filterable ? "auto" : "pointer") : "default"};
-            `}
-            data-testid="input"
-            bind:this={_inputEl}
-            value={_selectedOption?.label ?? _selectedOption?.value ?? ""}
-            type="text"
-            role="combobox"
-            autocomplete="off"
-            aria-autocomplete="list"
-            aria-controls={`menu-${name}`}
-            aria-expanded={_isMenuVisible}
-            aria-label={arialabel || name}
-            aria-labelledby={arialabelledby}
-            id={name}
-            aria-activedescendant={_activeDescendantId}
-            aria-disabled={_disabled}
-            aria-owns={_isMenuVisible ? `menu-${name}` : undefined}
-            aria-haspopup="listbox"
-            disabled={_disabled}
-            readonly={!_filterable}
-            {placeholder}
-            {name}
-            on:keydown={onInputKeyDown}
-            on:keyup={onInputKeyUp}
-            on:change={onChange}
+        {#if leadingicon}
+          <goa-icon
+            class="dropdown-input--leading-icon"
+            data-testid="leading-icon"
+            type={leadingicon}
           />
+        {/if}
 
-          {#if _inputEl?.value && _filterable}
-            <goa-icon
-              id={name}
-              tabindex={_disabled ? -1 : 0}
-              role="button"
-              arialabel={`clear ${arialabel || name}`}
-              ariacontrols={`menu-${name}`}
-              ariaexpanded={fromBoolean(_isMenuVisible)}
-              on:click={onClearIconClick}
-              on:keydown={onClearIconKeyDown}
-              class="dropdown-icon--clear"
-              class:disabled={_disabled}
-              size="medium"
-              type="close"
-            />
-          {:else}
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <goa-icon
-              role="button"
-              tabindex="0"
-              id={name}
-              arialabel={arialabel || name}
-              ariacontrols={`menu-${name}`}
-              ariaexpanded={fromBoolean(_isMenuVisible)}
-              class="dropdown-icon--arrow"
-              size="medium"
-              type={_isMenuVisible ? "chevron-up" : "chevron-down"}
-              on:click={onChevronClick}
-            />
-          {/if}
-        </div>
-
-        <!--Menu-->
-        <ul
-          id={`menu-${name}`}
-          role="listbox"
-          tabindex="-1"
-          data-testid="dropdown-menu"
-          bind:this={_menuEl}
+        <input
+          style={`
+            cursor: ${!_disabled ? (_filterable ? "auto" : "pointer") : "default"};
+          `}
+          data-testid="input"
+          bind:this={_inputEl}
+          value={_selectedOption?.label || _selectedOption?.value || ""}
+          type="text"
+          role="combobox"
+          autocomplete="off"
+          aria-autocomplete="list"
+          aria-controls={`menu-${name}`}
+          aria-expanded={_isMenuVisible}
           aria-label={arialabel || name}
           aria-labelledby={arialabelledby}
-          style={`
+          id={name}
+          aria-activedescendant={_activeDescendantId}
+          aria-disabled={_disabled}
+          aria-owns={_isMenuVisible ? `menu-${name}` : undefined}
+          aria-haspopup="listbox"
+          disabled={_disabled}
+          readonly={!_filterable}
+          {placeholder}
+          {name}
+          on:keydown={onInputKeyDown}
+          on:keyup={onInputKeyUp}
+          on:change={onChange}
+        />
+
+        {#if _inputEl?.value && _filterable}
+          <goa-icon
+            id={name}
+            data-testid="clear-icon"
+            tabindex={_disabled ? -1 : 0}
+            role="button"
+            arialabel={`clear ${arialabel || name}`}
+            ariacontrols={`menu-${name}`}
+            ariaexpanded={fromBoolean(_isMenuVisible)}
+            on:click={onClearIconClick}
+            on:keydown={onClearIconKeyDown}
+            class="dropdown-icon--clear"
+            class:disabled={_disabled}
+            size="medium"
+            type="close"
+          />
+        {:else}
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <goa-icon
+            role="button"
+            tabindex="0"
+            id={name}
+            arialabel={arialabel || name}
+            ariacontrols={`menu-${name}`}
+            ariaexpanded={fromBoolean(_isMenuVisible)}
+            class="dropdown-icon--arrow"
+            size="medium"
+            type={_isMenuVisible ? "chevron-up" : "chevron-down"}
+            on:click={onChevronClick}
+          />
+        {/if}
+      </div>
+
+      <!--Menu-->
+      <ul
+        id={`menu-${name}`}
+        role="listbox"
+        tabindex="-1"
+        data-testid="dropdown-menu"
+        bind:this={_menuEl}
+        aria-label={arialabel || name}
+        aria-labelledby={arialabelledby}
+        style={`
             outline: none;
             overflow-y: auto;
             max-height: ${maxheight};
           `}
-        >
-          {#each _filteredOptions as option, index (index)}
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <li
-              id={option.value}
-              aria-selected={_selectedOption?.value === (option.label || option.value)}
-              class:selected={_selectedOption?.value === (option.label || option.value)}
-              class="dropdown-item"
-              class:dropdown-item--highlighted={index === _highlightedIndex}
-              data-index={index}
-              data-testid={`dropdown-item-${option.value}`}
-              data-value={option.value}
-              role="option"
-              style="display: block"
-              on:click={() => {
-                _isDirty = true;
-                onSelect(option);
-              }}
-            >
-              {option.label || option.value}
+      >
+        {#each _filteredOptions as option, index (index)}
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <li
+            id={option.value}
+            aria-selected={_selectedOption?.value ===
+              (option.label || option.value)}
+            class:selected={_selectedOption?.value ===
+              (option.label || option.value)}
+            class="dropdown-item"
+            class:dropdown-item--highlighted={index === _highlightedIndex}
+            data-index={index}
+            data-testid={`dropdown-item-${option.value}`}
+            data-value={option.value}
+            role="option"
+            style="display: block"
+            on:click={() => {
+              _isDirty = true;
+              onSelect(option);
+            }}
+          >
+            {option.label || option.value}
+          </li>
+        {:else}
+          {#if _filterable}
+            <li class="dropdown-item" data-testid="dropdown-item-not-found">
+              No matches found
             </li>
-          {:else}
-            {#if _filterable}
-              <li class="dropdown-item" data-testid="dropdown-item-not-found">
-                No matches found
-              </li>
-            {/if}
-          {/each}
-        </ul>
-      </goa-popover>
-    {/if}
-  </div>
+          {/if}
+        {/each}
+      </ul>
+    </goa-popover>
+  {/if}
 </div>
 
 <style>
@@ -689,7 +689,6 @@
     }
   }
 
-
   .dropdown-input-group {
     box-sizing: border-box;
     outline: none;
@@ -703,7 +702,8 @@
     vertical-align: middle;
     background-color: var(--goa-color-greyscale-white);
     cursor: pointer;
-    width: var(--width, 100%);
+    /*width of dropdown input should be 100% based on its parent div*/
+    width: 100%;
   }
   .dropdown-input-group:hover {
     border-color: var(--goa-color-interactive-hover);
@@ -725,7 +725,6 @@
       width: var(--width);
     }
   }
-
 
   .dropdown-icon--arrow,
   .dropdown-icon--clear {

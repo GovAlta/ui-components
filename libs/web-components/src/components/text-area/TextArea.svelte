@@ -32,8 +32,8 @@
   $: isReadonly = toBoolean(readonly);
   $: count =
     countby === "character"
-      ? value.length
-      : value.split(" ").filter((word) => word.trim().length > 0).length;
+      ? value?.length
+      : value?.split(" ").filter((word) => word.trim().length > 0).length;
 
   // privates
 
@@ -102,7 +102,7 @@
       <div class="counter" class:counter-error={count > maxcount}>
         {#if countby && count > maxcount}
           {count - maxcount} {pluralize(countby, count - maxcount)} too many
-        {:else if countby && count < maxcount}
+        {:else if countby && count <= maxcount}
           {maxcount - count} {pluralize(countby, maxcount - count)} remaining
         {/if}
       </div>

@@ -35,7 +35,7 @@
     {
       "name": "arialabel",
       "type": "string",
-      "description": "Defines how the text will be translated for the screen reader. It not specified it will fall back to the name"
+      "description": "Defines how the radio group will be translated for the screen reader."
     }
   ],
   "references": [

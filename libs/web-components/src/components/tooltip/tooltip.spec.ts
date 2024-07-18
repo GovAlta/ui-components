@@ -4,7 +4,10 @@ import { render, fireEvent, waitFor } from "@testing-library/svelte";
 import { it, expect, vi } from "vitest";
 
 it("should render tooltip with provided properties", () => {
-  const { container } = render(Tooltip, { content: "Hello, Tooltip!", position: "top" });
+  const { container } = render(Tooltip, {
+    content: "Hello, Tooltip!",
+    position: "top",
+  });
   const tooltipEl = container.querySelector(".tooltip-text");
 
   expect(tooltipEl).toBeTruthy();
@@ -26,38 +29,49 @@ it("shows and hides tooltip on mouseenter/mouseleave", async () => {
 
   await fireEvent.mouseEnter(tooltipContainer);
 
-  await waitFor(() => expect(tooltipEl.style.visibility).toBe("visible"), { timeout: 350 });
+  await waitFor(() => expect(tooltipEl.style.visibility).toBe("visible"), {
+    timeout: 350,
+  });
 
   // Simulate mouse leave
   await fireEvent.mouseLeave(tooltipContainer);
 
-  await waitFor(() => expect(tooltipEl.style.visibility).toBe("hidden"), { timeout: 600 });
+  await waitFor(() => expect(tooltipEl.style.visibility).toBe("hidden"), {
+    timeout: 600,
+  });
 });
 
-
 it("validates the props", async () => {
-  const mock = vi.spyOn(console, "error").mockImplementation(() => { /* do nothing */ });
-  render(Tooltip, { position: "left", halign: "left" })
-  render(Tooltip, { position: "left", halign: "right" })
-  render(Tooltip, { position: "right", halign: "left" })
-  render(Tooltip, { position: "right", halign: "right" })
-  render(Tooltip, { position: "random", halign: "test" })
+  const mock = vi.spyOn(console, "error").mockImplementation(() => {
+    /* do nothing */
+  });
+  render(Tooltip, { position: "left", halign: "left" });
+  render(Tooltip, { position: "left", halign: "right" });
+  render(Tooltip, { position: "right", halign: "left" });
+  render(Tooltip, { position: "right", halign: "right" });
+  render(Tooltip, { position: "random", halign: "test" });
   // 4 errors for each mismatch and 2 for random props
   await waitFor(() => {
     expect(console.error["mock"].calls.length).toEqual(6);
-  })
+  });
   mock.mockRestore();
-})
+});
 
 it("aligns tooltip according to provided alignment", () => {
-  const { container } = render(Tooltip, { content: "Hello, Tooltip!", halign: "left" });
+  const { container } = render(Tooltip, {
+    content: "Hello, Tooltip!",
+    halign: "left",
+  });
   const tooltipEl = container.querySelector(".tooltip-text");
   expect(tooltipEl).toBeTruthy();
   expect(tooltipEl?.classList).toContain("align-left");
 });
 
 it.skip("should try and change tooltip position on window resize", async () => {
-  const { container } = render(Tooltip, { content: "Hello, Tooltip!", position: "bottom" });
+  const { container } = render(Tooltip, {
+    content: "Hello, Tooltip!",
+    position: "bottom",
+  });
 
   const tooltipEl = container.querySelector(".tooltip-text");
   expect(tooltipEl).toBeTruthy();
@@ -72,7 +86,7 @@ it.skip("should try and change tooltip position on window resize", async () => {
     bottom: 0,
     right: 0,
   });
-  global.innerHeight = 75;  // make it less than tooltip height + target element height
+  global.innerHeight = 75; // make it less than tooltip height + target element height
   global.dispatchEvent(new Event("resize"));
   await tick();
   expect(tooltipEl.classList).toContain("top");
@@ -95,8 +109,39 @@ it("does not exceed 80% of the screen size or 400px", async () => {
   // Simulate window resize to trigger the tooltip"s responsive behavior
   global.dispatchEvent(new Event("resize"));
 
-  await tick();  // to wait for Svelte"s reactive updates
+  await tick(); // to wait for Svelte"s reactive updates
 
   // Verify that the tooltip"s width has been adjusted
   expect(parseInt(tooltipEl.style.width, 10)).toBeLessThanOrEqual(400);
+});
+
+it("cursor style remains same on hover", async () => {
+  const { container } = render(Tooltip, { content: "Alberta DDD Tooltip" });
+  const tooltipContainer = container.querySelector(".tooltip");
+
+  expect(tooltipContainer).toBeTruthy();
+  if (!tooltipContainer) return;
+
+  const initialCursorStyle = window.getComputedStyle(tooltipContainer).cursor;
+  await fireEvent.mouseEnter(tooltipContainer);
+
+  await waitFor(
+    () => {
+      const cursorStyleOnHover =
+        window.getComputedStyle(tooltipContainer).cursor;
+      expect(cursorStyleOnHover).toBe(initialCursorStyle);
+    },
+    { timeout: 500 },
+  );
+
+  await fireEvent.mouseLeave(tooltipContainer);
+
+  await waitFor(
+    () => {
+      const cursorStyleOnLeave =
+        window.getComputedStyle(tooltipContainer).cursor;
+      expect(cursorStyleOnLeave).toBe(initialCursorStyle);
+    },
+    { timeout: 500 },
+  );
 });

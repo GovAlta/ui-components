@@ -4,14 +4,14 @@
     value: { reflect: true },
     description: { reflect: true },
     checked: { reflect: true },
-    ariadescribedby: { reflect: true },
     arialabel: { reflect: true },
+    error: { reflect: true },
   }
 }}/>
 
 <script lang="ts" context="module">
   export type GoARadioItemProps = {
-    el: HTMLElement,
+    el: HTMLElement;
     value: string;
     label: string;
     description: string;
@@ -20,18 +20,18 @@
     name: string;
     checked: boolean;
     ariaLabel: string;
-    ariaDescribedBy: string;
-  }
+  };
 
   export type RadioItemSelectProps = {
     checked: boolean;
-  }
-
+  };
 </script>
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import {fromBoolean, toBoolean} from "../../common/utils";
+  import { fromBoolean, toBoolean } from "../../common/utils";
+  import { calculateMargin } from "../../common/styling";
+  import type { Spacing } from "../../common/styling";
 
   export let value: string;
   export let name: string = "";
@@ -41,10 +41,14 @@
   export let error: string = "false";
   export let checked: string = "false";
   export let arialabel: string = "";
-  export let ariadescribedby: string = "";
+
+  // margin
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = "m";
+  export let ml: Spacing = null;
 
   let _radioItemEl: HTMLElement;
-
   // Reactive
 
   $: isDisabled = toBoolean(disabled);
@@ -57,29 +61,29 @@
     dispatchInit();
     addInitListener();
     addSelectListener();
-  })
+  });
 
   // Functions
-
   function dispatchInit() {
     setTimeout(() => {
-      _radioItemEl?.dispatchEvent(new CustomEvent<GoARadioItemProps>("radio-item:mounted", {
-        composed: true,
-        bubbles: true,
-        detail: {
-          el: _radioItemEl,
-          name,
-          value,
-          label,
-          description,
-          disabled: isDisabled,
-          error: isError,
-          checked: isChecked,
-          ariaLabel: arialabel,
-          ariaDescribedBy: ariadescribedby,
-        }
-      }))
-    }, 10)
+      _radioItemEl?.dispatchEvent(
+        new CustomEvent<GoARadioItemProps>("radio-item:mounted", {
+          composed: true,
+          bubbles: true,
+          detail: {
+            el: _radioItemEl,
+            name,
+            value,
+            label,
+            description,
+            disabled: isDisabled,
+            error: isError,
+            checked: isChecked,
+            ariaLabel: arialabel,
+          },
+        }),
+      );
+    }, 10);
   }
 
   function addInitListener() {
@@ -90,22 +94,20 @@
       checked = fromBoolean(data.checked);
       description = data.description;
       name = data.name;
-      arialabel = data.ariaLabel;
-      ariadescribedby = data.ariaDescribedBy;
-    })  
+    });
   }
 
   function addSelectListener() {
     _radioItemEl.addEventListener("radio-group:select", (e: Event) => {
       isChecked = (e as CustomEvent<RadioItemSelectProps>).detail.checked;
-    })
+    });
   }
 
   function onChange() {
     if (isDisabled) return;
     if (isChecked) return;
 
-    const event = new CustomEvent("_click", {
+    const event = new CustomEvent("_radioItemChange", {
       detail: value,
       composed: true,
       bubbles: true,
@@ -114,7 +116,7 @@
   }
 </script>
 
-<div class="goa-radio-container">
+<div style={calculateMargin(mt, mr, mb, ml)} class="goa-radio-container">
   <label
     bind:this={_radioItemEl}
     data-testid="radio-option-{value}"
@@ -129,7 +131,10 @@
       disabled={isDisabled}
       checked={isChecked}
       aria-label={arialabel}
-      aria-describedby={ariadescribedby}
+      aria-describedby={$$slots.description || description
+        ? `${name}-${value}-description`
+        : undefined}
+      aria-checked={isChecked}
       on:click={onChange}
     />
     <div class="goa-radio-icon" />
@@ -138,7 +143,7 @@
     </span>
   </label>
   {#if $$slots.description || description}
-    <div class="goa-radio-description">
+    <div class="goa-radio-description" id={`${name}-${value}-description`}>
       <slot name="description" />
       {description}
     </div>
@@ -153,10 +158,6 @@
     --goa-radio-border-width--checked: 7px;
     box-sizing: border-box;
     display: flex;
-  }
-
-  .goa-radio-container {
-    padding-bottom: 1rem;
   }
 
   .goa-radio:hover {
@@ -177,16 +178,8 @@
   }
 
   .goa-radio-label {
-    padding: 0 var(--goa-space-xs);
+    padding: 0 var(--goa-space-xl) 0 var(--goa-space-xs);
     font-weight: var(--goa-font-weight-regular);
-  }
-
-  .goa-radio-group--horizontal .goa-radio-label {
-    padding-right: var(--goa-space-xl);
-  }
-
-  .goa-radio-label {
-    padding-right: var(--goa-space-xl);
   }
 
   .goa-radio-description {

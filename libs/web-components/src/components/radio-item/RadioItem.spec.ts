@@ -10,7 +10,7 @@ describe("RadioItem", () => {
       value: "radio-item-1",
       name: "radio-item-1-name",
       arialabel: "radio-item-1-label",
-      ariadescribedby: "radio-item-1-described-by",
+      description: "test description",
     });
 
     expect(result.getByTestId("radio-option-radio-item-1")).toBeTruthy();
@@ -19,10 +19,17 @@ describe("RadioItem", () => {
     expect(input.getAttribute("name")).toBe("radio-item-1-name");
     expect(input.getAttribute("value")).toBe("radio-item-1");
     expect(input.getAttribute("aria-label")).toBe("radio-item-1-label");
-    expect(input.getAttribute("aria-describedby")).toBe(
-      "radio-item-1-described-by",
-    );
+    expect(input.getAttribute("aria-checked")).toBe("false");
+    expect(input.getAttribute("type")).toBe("radio");
     expect(result.getByText("Radio Item 1")).toBeTruthy();
+    const radioDescriptionDiv = result.container.querySelector(".goa-radio-description");
+    expect(radioDescriptionDiv?.innerHTML).toContain("test description");
+    expect(radioDescriptionDiv?.getAttribute("id")).toContain(
+      `${input.getAttribute("name")}-${input.getAttribute("value")}-description`,
+    );
+    expect(input.getAttribute("aria-describedby")).toBe(
+      radioDescriptionDiv?.getAttribute("id"),
+    );
   });
 
   it("should render the radio item with slot description", async () => {
@@ -30,9 +37,9 @@ describe("RadioItem", () => {
       description: "Radio Item 1 description",
     });
     await waitFor(() => {
-      expect(
-        result.container.querySelector("[slot=description]")?.innerHTML,
-      ).toContain("Radio Item 1 description");
+      expect(result.container.querySelector("[slot=description]")?.innerHTML).toContain(
+        "Radio Item 1 description",
+      );
     });
   });
 
@@ -42,7 +49,6 @@ describe("RadioItem", () => {
       value: "radio-item-1",
       name: "radio-item-1-name",
       arialabel: "radio-item-1-label",
-      ariadescribedby: "radio-item-1-described-by",
       disabled: true,
     });
 
@@ -62,6 +68,24 @@ describe("RadioItem", () => {
     expect(label.getAttribute("class")).toContain("error");
   });
 
+  it(`should render with margins`, async () => {
+    const baseElement = render(GoARadioItem, {
+      label: "Radio Item 1",
+      value: "radio-item-1",
+      name: "radio-item-1-name",
+      arialabel: "radio-item-1-label",
+      mt: "s",
+      mr: "m",
+      mb: "l",
+      ml: "xl",
+    });
+    const radio = baseElement.container.querySelector(".goa-radio-container");
+    expect(radio?.getAttribute("style")).toContain("margin-top:var(--goa-space-s)");
+    expect(radio?.getAttribute("style")).toContain("margin-right:var(--goa-space-m)");
+    expect(radio?.getAttribute("style")).toContain("margin-bottom:var(--goa-space-l)");
+    expect(radio?.getAttribute("style")).toContain("margin-left:var(--goa-space-xl)");
+  });
+
   it("should handle the change event and emit _click event", async () => {
     const mockOnChange = vi.fn();
     const result = render(GoARadioItem, {
@@ -72,10 +96,12 @@ describe("RadioItem", () => {
       ariadescribedby: "radio-item-1-described-by",
     });
     const rootEl = result.container.querySelector("label");
-    rootEl?.addEventListener("_click", mockOnChange);
+
+    rootEl?.addEventListener("_radioItemChange", mockOnChange);
     const input = result.container.querySelector("input") as HTMLInputElement;
     await fireEvent.click(input);
-    const expectedEvent = new CustomEvent("_click", {
+
+    const expectedEvent = new CustomEvent("_radioItemChange", {
       detail: "radio-item-1",
       composed: true,
       bubbles: true,
@@ -95,7 +121,7 @@ describe("RadioItem", () => {
       disabled: true,
     });
     const rootEl = result.container.querySelector("label");
-    rootEl?.addEventListener("_click", mockOnChange);
+    rootEl?.addEventListener("_radioItemChange", mockOnChange);
     const input = result.container.querySelector("input") as HTMLInputElement;
     await fireEvent.click(input);
 
@@ -113,7 +139,7 @@ describe("RadioItem", () => {
       checked: true,
     });
     const rootEl = result.container.querySelector("label");
-    rootEl?.addEventListener("_click", mockOnChange);
+    rootEl?.addEventListener("_radioItemChange", mockOnChange);
     const input = result.container.querySelector("input") as HTMLInputElement;
     await fireEvent.click(input);
 

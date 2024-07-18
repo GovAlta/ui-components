@@ -11,22 +11,21 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
   import { calculateMargin } from "../../common/styling";
-  import { cssVar, getSlottedChildren, toBoolean } from "../../common/utils";
+  import { style, getSlottedChildren, styles, toBoolean } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
   // Public
 
-  // to allow for data-testid queries within tests
   export let testid: string = "popover";
-  // prevents the popover from exceeding this width
+  export let position: "above" | "below" | "auto" = "auto";
   export let maxwidth: string = "320px";
   export let minwidth: string = "";
-  // allow width to be hardcoded
   export let width: string = "";
+  export let height: "full" | "wrap-content" = "wrap-content";
+
   // allows to override the default padding when content needs to be flush with boundries
   export let padded: string = "true";
-  // provides control to where the popover content is positioned
-  export let position: "above" | "below" | "auto" = "auto";
+
   // ajust positioning when popover component is contained within a relative positioned parent
   export let relative: string = "false";
 
@@ -42,16 +41,22 @@
 
   // allow for outside control of whether popover is open/closed (see AppHeaderMenu)
   export let open: string = "false";
+
   // allows outside control of the `open` property ex. when used within dropdown
   export let disabled: string = "false";
+
   // allows tabindex to be set to -1 to skip tabbing if a parent is handling events
   export let tabindex: string = "0";
+
   // additional vertical offset that is added to popover's position
   export let voffset = "";
+
   // additional horizontal offset that is added to popover's position
   export let hoffset = "";
+ 
   // width of outline seen when focused
   export let focusborderwidth = "var(--goa-border-width-l)";
+
   // border radius of popover window
   export let borderradius = "var(--goa-border-radius-m)";
 
@@ -214,16 +219,18 @@
 <div
   bind:this={_rootEl}
   data-testid={testid}
-  style={`
-    ${(_relative && "position: relative;") || ""}
-    ${calculateMargin(mt, mr, mb, ml)}
-    ${cssVar("--offset-top", voffset)}
-    ${cssVar("--offset-bottom", voffset)}
-    ${cssVar("--offset-left", hoffset)}
-    ${cssVar("--offset-right", hoffset)}
-    ${cssVar("--focus-border-width", focusborderwidth)}
-    ${cssVar("--border-radius", borderradius)}
-`}
+  style={styles(
+    _relative && "position: relative",
+    height === "full" && "height: 100%;",
+    calculateMargin(mt, mr, mb, ml),
+    style("--offset-top", voffset),
+    style("--offset-bottom", voffset),
+    style("--offset-left", hoffset),
+    style("--offset-right", hoffset),
+    style("--focus-border-width", focusborderwidth),
+    style("--border-radius", borderradius),
+    style("width", width),
+  )}
 >
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -252,12 +259,12 @@
         bind:this={_popoverEl}
         data-testid="popover-content"
         class="popover-content"
-        style={`
-          ${cssVar("width", width)}
-          min-width: ${minwidth};
-          max-width: ${maxwidth};
-          padding: ${_padded ? "var(--goa-space-m)" : "0"};
-        `}
+        style={styles(
+          style("width", width),
+          style("min-width", minwidth),
+          style("max-width", maxwidth),
+          style("padding", _padded ? "var(--goa-space-m)" : "0"),
+        )}
       >
         <goa-focus-trap open="true">
           <div bind:this={_focusTrapEl}>
@@ -282,6 +289,7 @@
 
   .popover-target {
     cursor: pointer;
+    height: 100%;
   }
 
   .popover-target:has(:focus-visible) {

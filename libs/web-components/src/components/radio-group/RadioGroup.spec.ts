@@ -2,7 +2,6 @@ import { fireEvent, render, waitFor } from "@testing-library/svelte";
 import GoARadioGroup from "./RadioGroup.svelte";
 import GoARadioGroupWrapper from "./RadioGroupWrapper.test.svelte";
 import { describe, it, expect, vi } from "vitest";
-import { tick } from "svelte";
 
 describe("GoARadioGroup Component", () => {
   it("should render", async () => {
@@ -14,18 +13,16 @@ describe("GoARadioGroup Component", () => {
       testid: "test-id",
       items,
     });
+    const radioGroupDiv = result.container.querySelector("[role='radiogroup']");
+    expect(radioGroupDiv?.getAttribute("aria-label")).toBe(""); // If no aria-label is defined, we don't fall back to name
 
     const goaRadioItems = result.container.querySelectorAll("goa-radio-item");
     expect(goaRadioItems.length).toBe(3);
-
     await waitFor(() => {
       items.forEach((item, index) => {
         const el = goaRadioItems[index];
 
         expect(el.getAttribute("value")).toBe(item);
-        expect(el.getAttribute("ariadescribedby")).toBe(`description-favcolor-${index}`);
-        expect(el.getAttribute("arialabel")).toBe("favcolor");
-
         if (index === 2) {
           expect(el.getAttribute("checked")).toBe("true");
         } else {
@@ -33,7 +30,38 @@ describe("GoARadioGroup Component", () => {
         }
       });
     });
-  })
+  });
+
+  it("should render with accessibility attributes", async () => {
+    const name = "favcolor";
+    const items = ["red", "blue", "orange"];
+    const result = render(GoARadioGroupWrapper, {
+      name,
+      value: "orange",
+      testid: "test-id",
+      items,
+      radioGroupAriaLabel: "please choose a color",
+    });
+
+    const radioGroupDiv = result.container.querySelector("[role='radiogroup']");
+    expect(radioGroupDiv?.getAttribute("aria-label")).toBe("please choose a color");
+
+    const goaRadioItems = result.container.querySelectorAll("goa-radio-item");
+    expect(goaRadioItems.length).toBe(3);
+    await waitFor(() => {
+      items.forEach((item, index) => {
+        const el = goaRadioItems[index];
+
+        expect(el.getAttribute("value")).toBe(item);
+        expect(el.getAttribute("arialabel")).toBe("you are choosing color " + item);
+        if (index === 2) {
+          expect(el.getAttribute("checked")).toBe("true");
+        } else {
+          expect(el.getAttribute("checked")).toBe("false");
+        }
+      });
+    });
+  });
 
   it("should select the preset value", async () => {
     // Arrange
@@ -54,10 +82,10 @@ describe("GoARadioGroup Component", () => {
       expect(goaRadioItems[0].getAttribute("checked")).toBe("false");
       expect(goaRadioItems[1].getAttribute("checked")).toBe("false");
       expect(goaRadioItems[2].getAttribute("checked")).toBe("true");
-    })
+    });
   });
 
-  // FIXME: unable to get the progress check working. Child events aren't able to be triggered
+  // FIXME: radio group doesn't hear child event
   it.skip("should handle the events", async () => {
     const mockOnChange = vi.fn();
     const name = "favcolor";
@@ -65,17 +93,39 @@ describe("GoARadioGroup Component", () => {
     const result = render(GoARadioGroupWrapper, {
       name,
       value: "orange",
-      testid: "test-id",
       items,
     });
 
-    await tick();
+    const radioGroup = result.container.querySelector("goa-radio-group");
+    radioGroup?.addEventListener("_change", mockOnChange);
 
-    const radioGroup = await result.findByTestId("test-id");
+    const radioItems = result.container.querySelectorAll("goa-radio-item");
+    expect(radioItems.length).toBe(3);
+    await fireEvent.click(radioItems[0]);
+    await fireEvent.change(radioItems[0]);
+    await waitFor(() => {
+      expect(mockOnChange).toBeCalled();
+    });
+  });
 
-    radioGroup.addEventListener("_change", mockOnChange);
-    const goaRadioItems = result.container.querySelectorAll("goa-radio-item");
-    await fireEvent.click(goaRadioItems[0]);
+  // FIXME: this test passes on a dev machine, but fails in the Github action
+  it.skip("should show the error state when it is changed", async () => {
+    const name = "favcolor";
+    const items = ["red", "blue", "orange"];
+    const result = render(GoARadioGroupWrapper, {
+      name,
+      value: "orange",
+      items,
+    });
+    const button = result.queryByTestId("set-error");
+    expect(button).toBeTruthy();
+    button && (await fireEvent.click(button));
+
+    await waitFor(() => {
+      const radioItem = result.container.querySelector("goa-radio-item");
+      expect(radioItem).toBeTruthy();
+      expect(radioItem?.getAttribute("error")).toBe("true");
+    });
   });
 
   describe("Margins", () => {
