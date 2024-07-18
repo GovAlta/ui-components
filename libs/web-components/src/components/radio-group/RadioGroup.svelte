@@ -39,10 +39,13 @@
   // Reactive
 
   $: isDisabled = toBoolean(disabled);
-  $: value && setCurrentSelectedOption(value);
+
+  // call the method when 'value' is null, except when undefined.
+  $: value !== undefined && setCurrentSelectedOption(value);
+
   $: {
     isError = toBoolean(error);
-    bindOptions()
+    bindOptions();
   }
 
   // Private
