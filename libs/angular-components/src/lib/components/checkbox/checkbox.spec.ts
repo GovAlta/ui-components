@@ -4,6 +4,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { fireEvent } from "@testing-library/dom";
 import { By } from "@angular/platform-browser";
+import { Spacing } from "@abgov/ui-components-common";
 
 @Component({
   template: `
@@ -11,17 +12,16 @@ import { By } from "@angular/platform-browser";
     [checked]="checked"
     [text]="text"
     [value]="value"
-    [description]="description"
+    description="Description text"
     [disabled]="disabled"
     [error]="error"
-   [ariaLabel]="ariaLabel"
+    [ariaLabel]="ariaLabel"
     [testId]="testId"
     [mt]="mt"
     [mb]="mb"
     [ml]="ml"
     [mr]="mr"
-    (onChange)="onChange($event)">
-    <div *ngIf="slotDescription" slot="description">{{slotDescription}}</div>
+    (onChange)="onChange()">
 </goab-checkbox>
   `
 })
@@ -30,16 +30,14 @@ class TestCheckboxComponent{
   checked?: boolean;
   text?: string;
   value?: string | number | boolean;
-  description?: string;
   disabled?: boolean;
   error?: boolean;
   ariaLabel?: string;
   testId?: string;
-  mt?: string;
-  mb?: string;
-  ml?: string;
-  mr?: string;
-  slotDescription?: string;
+  mt?: Spacing;
+  mb?: Spacing;
+  ml?: Spacing;
+  mr?: Spacing;
 
   onChange() {
     /* do nothing */
@@ -83,21 +81,7 @@ describe("GoABCheckbox", () => {
     expect(checkboxElement.getAttribute("mr")).toBe(component.mr);
     expect(checkboxElement.getAttribute("mb")).toBe(component.mb);
     expect(checkboxElement.getAttribute("ml")).toBe(component.ml);
-  })
-
-  it("should render with text description", () => {
-    component.description = "description text";
-    fixture.detectChanges();
-    const checkboxElement = fixture.debugElement.query(By.css("goa-checkbox")).nativeElement;
-    expect(checkboxElement.getAttribute("description")).toBe(component.description);
-  })
-
-  it("should render with slot description", () => {
-    component.slotDescription = "description slot";
-    fixture.detectChanges();
-    const checkboxElement = fixture.debugElement.query(By.css("goa-checkbox")).nativeElement;
-    const slotDescription = checkboxElement.querySelector("[slot='description']");
-    expect(slotDescription.textContent).toContain(component.slotDescription);
+    expect(checkboxElement.getAttribute("description")).toBe("Description text");
   })
 
   it("should handle onChange event", async() => {
@@ -112,3 +96,36 @@ describe("GoABCheckbox", () => {
     expect(onChange).toHaveBeenCalled();
   })
 })
+
+@Component({
+  template: `
+    <goab-checkbox name="test" [checked]="true" text="check box text" [description]="descriptionTemplate">
+      <ng-template #descriptionTemplate>
+        <strong>A description slot</strong>
+      </ng-template>
+    </goab-checkbox>
+  `
+})
+class TestCheckboxWithDescriptionSlotComponent {
+  /** do nothing **/
+}
+describe("Checkbox with description slot", () => {
+  let fixture: ComponentFixture<TestCheckboxWithDescriptionSlotComponent>;
+
+  it("should render with slot description", async() => {
+    await TestBed.configureTestingModule({
+      imports: [GoABCheckbox, ReactiveFormsModule],
+      declarations: [TestCheckboxWithDescriptionSlotComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestCheckboxWithDescriptionSlotComponent);
+
+    fixture.detectChanges();
+    const checkboxElement = fixture.debugElement.query(By.css("goa-checkbox")).nativeElement;
+    const slotDescription = checkboxElement.querySelector("[slot='description']");
+    expect(slotDescription.textContent).toContain("A description slot");
+  })
+
+})
+

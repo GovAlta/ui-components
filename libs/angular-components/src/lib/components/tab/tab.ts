@@ -1,17 +1,30 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-tab",
   template: `
-    <goa-tab
-      [attr.heading]="heading"
-    >
+    <goa-tab>
       <ng-content />
+      <div slot="heading">
+        <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+        {{getHeadingAsString()}}
+      </div>
     </goa-tab>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [NgTemplateOutlet]
 })
 export class GoABTab {
-  @Input() heading?: string;
+  @Input() heading!: string | TemplateRef<any>;
+
+  getHeadingAsString(): string {
+    return this.heading instanceof TemplateRef ? "" : this.heading;
+  }
+
+  getHeadingAsTemplate(): TemplateRef<any> | null {
+    if (!this.heading) return null;
+    return this.heading instanceof TemplateRef ? this.heading : null;
+  }
 }

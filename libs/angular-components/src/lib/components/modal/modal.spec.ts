@@ -19,9 +19,15 @@ import { By } from "@angular/platform-browser";
       [closable]="closable"
       [transition]="transition"
       (onClose)="onClose()"
+      [heading]="heading"
+      [actions]="actions"
     >
-      <div slot="heading">{{ heading }}</div>
-      <div slot="actions">{{ actions }}</div>
+      <ng-template #heading>
+        <h1>Heading</h1>
+      </ng-template>
+      <ng-template #actions>
+        <button>Close</button>
+      </ng-template>
       {{ content }}
     </goab-modal>
   `,
@@ -63,9 +69,9 @@ describe("GoABModal", () => {
     const modal = fixture.debugElement.query(By.css("goa-modal")).nativeElement;
 
     const actionContent = modal?.querySelector("[slot='actions']");
-    expect(actionContent?.textContent).toContain(component.actions);
+    expect(actionContent?.querySelector("button")?.textContent).toContain("Close");
     const headingContent = modal?.querySelector("[slot='heading']");
-    expect(headingContent?.textContent).toContain(component.heading);
+    expect(headingContent?.textContent).toContain("Heading");
     expect(modal?.getAttribute("open")).toBe(`${component.open}`);
     expect(modal?.getAttribute("maxwidth")).toBe(component.maxWidth);
     expect(modal?.getAttribute("closable")).toBe(`${component.closable}`);

@@ -1,8 +1,15 @@
-import { Component, NgModule, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { format, parseISO } from "date-fns";
-import { FormControl, FormGroup, NgModel, ReactiveFormsModule } from "@angular/forms";
-import { GoABBadge, GoABDatePicker, GoABFormItem, GoABInput } from "@abgov/angular-components";
-import { JsonPipe } from "@angular/common";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {
+  GoABBadge,
+  GoABDatePicker,
+  GoABFormItem,
+  GoABFormItemSlot,
+  GoABInput,
+} from "@abgov/angular-components";
+import { JsonPipe, NgTemplateOutlet } from "@angular/common";
+import { GoABInputOnChangeDetail } from "@abgov/ui-components-common";
 
 interface User {
   firstName: string;
@@ -21,9 +28,26 @@ interface User {
     GoABFormItem,
     JsonPipe,
     ReactiveFormsModule,
+    FormsModule,
+    GoABFormItemSlot,
+    NgTemplateOutlet
   ],
 })
 export class InputComponentComponent implements OnInit {
+  example1 = "";
+  example3 = "Test";
+  example2Form: FormGroup;
+  handleExample1(event: GoABInputOnChangeDetail) {
+    this.example1 = event.value;
+  }
+
+  constructor() {
+    this.example2Form = new FormGroup({
+      inputControl: new FormControl("")
+    })
+  }
+
+
   date = new Date();
   boundDate = format(this.date, "yyyy-MM-dd");
   formatDate = format(this.date, "yyyy-MM-dd");

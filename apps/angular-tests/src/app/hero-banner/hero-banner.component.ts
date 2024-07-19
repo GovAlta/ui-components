@@ -1,4 +1,4 @@
-import { GoABButton, GoABButtonGroup, GoABHeroBanner, GoABHeroBannerActions } from "@abgov/angular-components";
+import { GoABButton, GoABButtonGroup, GoABHeroBanner } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -7,7 +7,6 @@ import { Component } from "@angular/core";
   templateUrl: "./hero-banner.component.html",
   imports: [
     GoABHeroBanner,
-    GoABHeroBannerActions,
     GoABButton,
     GoABButtonGroup,
   ],

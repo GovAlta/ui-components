@@ -1,5 +1,14 @@
 <h1>Form Item</h1>
 
+<goab-form-item [formGroup]="formGroup">
+  <goab-input name="search" placeholder="Search requester" formControlName="txtRequesterName" trailingIcon="close"
+              (onTrailingIconClick)="searchRequesterClickIcon()" width="434px">
+  </goab-input>
+  <goab-form-item-slot slot="error">Inside goab-form-item-error</goab-form-item-slot>
+  <goab-form-item-slot slot="helptext">Help!</goab-form-item-slot>
+</goab-form-item>
+
+
 <h2>Basic</h2>
 <goab-form-item label="First name">
   <goab-input ariaLabel="First Name 1" name="firstname" type="text"></goab-input>

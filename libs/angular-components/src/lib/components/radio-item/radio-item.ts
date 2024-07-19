@@ -1,4 +1,5 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
@@ -8,7 +9,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.name]="name"
       [attr.value]="value"
       [attr.label]="label"
-      [attr.description]="description"
+      [attr.description]="getDescriptionAsString()"
       [attr.arialabel]="ariaLabel"
       [disabled]="disabled"
       [attr.checked]="checked"
@@ -16,18 +17,31 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.data-testid]="testId"
     >
       <ng-content />
+      <div slot="description">
+        <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
+      </div>
     </goa-radio-item>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [NgTemplateOutlet],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoABRadioItem {
   @Input() value?: string;
   @Input() label?: string;
   @Input() name?: string;
-  @Input() description?: string;
+  @Input() description!: string | TemplateRef<any>;
   @Input() ariaLabel?: string;
   @Input() disabled?: boolean;
   @Input() checked?: boolean;
   @Input() error?: boolean;
   @Input() testId?: string;
+
+  getDescriptionAsString(): string {
+    return (!this.description || this.description instanceof TemplateRef) ? "" : this.description;
+  }
+
+  getDescriptionAsTemplate(): TemplateRef<any> | null {
+    if (!this.description) return null;
+    return this.description instanceof TemplateRef ? this.description : null;
+  }
 }
