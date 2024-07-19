@@ -20,11 +20,16 @@ import { By } from "@angular/platform-browser";
                   [mt]="mt"
                   [mr]="mr"
                   [mb]="mb"
-                  [ml]="ml">
-    <div slot="actions">
+                  [ml]="ml"
+                  [actions]="actions"
+                  [title]="title">
+    <ng-template #actions>
       <goab-button (onClick)="onClick()">Save</goab-button>
-    </div>
-    <div slot="title">This is a title</div>
+    </ng-template>
+    <ng-template #title>
+      <div>This is a title</div>
+    </ng-template>
+
     Container content
   </goab-container>
   `

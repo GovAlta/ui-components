@@ -1,7 +1,15 @@
-import { GoABBlock, GoABButton, GoABDropdown, GoABDropdownItem, GoABFormItem, GoABInput } from "@abgov/angular-components";
-import { CommonModule } from "@angular/common";
+import {
+  GoABBlock,
+  GoABButton,
+  GoABDropdown,
+  GoABDropdownItem,
+  GoABFormItem,
+  GoABFormItemSlot,
+  GoABInput,
+} from "@abgov/angular-components";
 import { Component } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
@@ -14,7 +22,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
     GoABButton,
     GoABDropdown,
     GoABDropdownItem,
+    GoABFormItemSlot,
     ReactiveFormsModule,
+    CommonModule,
   ]
 })
 export class FormItemComponent {

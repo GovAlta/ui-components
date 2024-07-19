@@ -5,7 +5,7 @@ import { By } from "@angular/platform-browser";
 
 @Component({
   template: `
-    <goab-app-footer-meta-section testId="foo">
+    <goab-app-footer-meta-section testId="foo" slot="meta">
       <a href="#">Home</a>
     </goab-app-footer-meta-section>
   `,
