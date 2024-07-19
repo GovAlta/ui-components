@@ -227,9 +227,9 @@
         position="below"
         on:_close={hideMenu}
       >
-        <div 
-          slot="target" 
-          style={styles("height: 100%")} 
+        <div
+          slot="target"
+          style={styles("height: 100%")}
           class="menu-toggle-area"
         >
           <button
@@ -506,7 +506,7 @@
     color: var(--goa-color-text-default);
     font-weight: var(--goa-font-weight-bold);
     display: inline-flex;
-    align-items: flex-start;
+    align-items: center;
     padding: var(--goa-space-m) var(--goa-space-s);
   }
 
@@ -529,6 +529,7 @@
 
   .desktop :global(::slotted(a.current)) {
     border-top: 4px solid var(--goa-color-interactive-default);
+    border-bottom: 4px solid transparent;
   }
 
   .desktop :global(::slotted(a.current:hover)) {
