@@ -1,9 +1,11 @@
 import { GoABContainerAccent, GoABContainerPadding, GoABContainerType, GoABContainerWidth, GoABIconSize, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-container",
+  imports: [NgTemplateOutlet],
   template: `<goa-container
     [attr.type]="type"
     [attr.accent]="accent"
@@ -15,11 +17,15 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
     [attr.ml]="ml"
     [attr.mr]="mr"
   >
-    <ng-content select="[slot=title]" />
+    <div slot="title">
+      <ng-container [ngTemplateOutlet]="title"></ng-container>
+    </div>
     <ng-content />
-    <ng-content select="[slot=actions]" />
+    <div slot="actions">
+      <ng-container [ngTemplateOutlet]="actions"></ng-container>
+    </div>
   </goa-container>`,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoABContainer {
   @Input() type?: GoABContainerType = "interactive";
@@ -27,6 +33,8 @@ export class GoABContainer {
   @Input() padding?: GoABContainerPadding = "relaxed";
   @Input() width?: GoABContainerWidth = "full";
   @Input() testId?: string;
+  @Input() title!: TemplateRef<any>;
+  @Input() actions!: TemplateRef<any>;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;

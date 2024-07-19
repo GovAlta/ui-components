@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { format, parseISO } from "date-fns";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { GoABBadge, GoABDatePicker, GoABFormItem, GoABInput } from "@abgov/angular-components";
+import { GoABBadge, GoABDatePicker, GoABFormItem, GoABInput, GoABFormItemSlot } from "@abgov/angular-components";
 import { JsonPipe } from "@angular/common";
 import { GoABInputOnChangeDetail } from "@abgov/ui-components-common";
 
@@ -22,7 +22,8 @@ interface User {
     GoABFormItem,
     JsonPipe,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    GoABFormItemSlot,
   ],
 })
 export class InputComponentComponent implements OnInit {

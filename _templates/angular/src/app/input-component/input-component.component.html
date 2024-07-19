@@ -7,7 +7,7 @@
 <form [formGroup]="example2Form">
   <goab-form-item label="Example 2">
     <goab-input name="inputControl" formControlName="inputControl" placeholder="Enter text"></goab-input>
-    <div slot="helptext">Entered value: {{example2Form.get('inputControl')?.value }}</div>
+    <goab-form-item-slot slot="helptext">Entered value: {{example2Form.get('inputControl')?.value }}</goab-form-item-slot>
   </goab-form-item>
 </form>
 

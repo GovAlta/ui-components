@@ -1,4 +1,4 @@
-import { GoABSideMenu, GoABSideMenuGroup, GoABSideMenuHeading } from "@abgov/angular-components";
+import { GoABBadge, GoABSideMenu, GoABSideMenuGroup, GoABSideMenuHeading } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -9,6 +9,7 @@ import { Component } from "@angular/core";
     GoABSideMenu,
     GoABSideMenuGroup,
     GoABSideMenuHeading,
+    GoABBadge
   ]
 })
 export class SideMenuComponent {

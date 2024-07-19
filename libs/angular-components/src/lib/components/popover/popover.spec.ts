@@ -16,10 +16,11 @@ import { GoABButton } from "@abgov/angular-components";
       [mb]="mb"
       [ml]="ml"
       [mr]="mr"
+      [target]="target"
     >
-      <div slot="target">
+      <ng-template #target>
         <goab-button type="secondary" size="compact">Click me</goab-button>
-      </div>
+      </ng-template>
       The content of the pop over.
     </goab-popover>
   `,

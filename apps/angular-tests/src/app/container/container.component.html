@@ -28,31 +28,35 @@ Dynamic GoABlock
 </goab-container>
 
 <h2>Accent bar with text</h2>
-<goab-container accent="thick">
-  <div slot="actions">
+<goab-container accent="thick" [actions]="actions" [title]="title">
+  <ng-template #actions>
     <goab-button type="secondary" size="compact">Edit</goab-button>
-  </div>
-  <div slot="title">Group Heading</div>
+  </ng-template>
+  <ng-template #title>
+    Group Heading
+  </ng-template>
   <h2>Heading</h2>
   Content
 </goab-container>
 
 <h2>Heading with text only</h2>
-<goab-container accent="thick">
+<goab-container accent="thick" [actions]="action2" [title]="title2">
   <h2>Heading</h2>
   Content
-  <div slot="actions">
+  <ng-template #action2>
     <goab-badge type="success" content="Badge Text"></goab-badge>
-  </div>
-  <div slot="title">Group Heading</div>
+  </ng-template>
+  <ng-template #title2>
+    Group Heading
+  </ng-template>
 </goab-container>
 
 <h2>Nested</h2>
-<goab-container>
-  <div slot="title">The container title</div>
-  <div slot="actions">
+<goab-container accent="thick" [actions]="actions3">
+  <ng-template #actions3>
     <goab-button type="primary" size="compact">Assign to me</goab-button>
-  </div>
+  </ng-template>
+
   <h2>Custom H2</h2>
   <goab-container accent="thin">
     <div>This is a sub container</div>
@@ -60,11 +64,13 @@ Dynamic GoABlock
 </goab-container>
 
 <h2>Interactive</h2>
-<goab-container accent="thick">
-  <div slot="actions">
+<goab-container accent="thick" [actions]="actions4" [title]="title4">
+  <ng-template #actions4>
     <goab-button type="secondary" size="compact">Assign to me</goab-button>
-  </div>
-  <div slot="title">The container title</div>
+  </ng-template>
+  <ng-template #title4>
+    The container title
+  </ng-template>
   <h2>Heading</h2>
   Content
 </goab-container>
