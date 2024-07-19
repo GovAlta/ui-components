@@ -173,6 +173,7 @@
     const trailingContentSlot = _rootEl.querySelector(
       "slot[name=trailingContent]",
     ) as HTMLSlotElement;
+    console.log("trailingContentSlot ", trailingContentSlot);
 
     if (trailingContentSlot && trailingContentSlot.assignedNodes().length > 0) {
       _trailingContentSlot = true;
@@ -186,6 +187,15 @@
           detail: { el: inputEl },
         }),
       );
+      const trailingContentSlot = _rootEl.querySelector(
+        "slot[name=trailingContent]",
+      ) as HTMLSlotElement;
+      console.log("trailingContentSlot ", trailingContentSlot);
+
+      if (trailingContentSlot && trailingContentSlot.assignedNodes().length > 0) {
+        _trailingContentSlot = true;
+      }
+
     }, 10);
   });
 </script>

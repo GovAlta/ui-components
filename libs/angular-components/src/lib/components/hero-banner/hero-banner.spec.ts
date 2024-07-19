@@ -13,8 +13,12 @@ import { By } from "@angular/platform-browser";
       [minHeight]="minHeight"
       [maxContentWidth]="maxContentWidth"
       [testId]="testId"
+      [actions]="actions"
     >
       <p>Children content</p>
+      <ng-template #actions>
+        <button>Action</button>
+      </ng-template>
     </goab-hero-banner>
   `,
 })
@@ -63,5 +67,7 @@ describe("GoABHeroBanner", () => {
     expect(el?.getAttribute("maxcontentwidth")).toBe(component.maxContentWidth);
     expect(el?.getAttribute("data-testid")).toBe(component.testId);
     expect(el?.innerHTML).toContain("Children content");
+    const actionsContent = el.querySelector("[slot='actions']");
+    expect(actionsContent?.querySelector("button").textContent).toBe("Action");
   });
 });

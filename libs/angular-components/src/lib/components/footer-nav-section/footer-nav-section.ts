@@ -8,7 +8,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.maxcolumncount]="maxColumnCount"
       [attr.heading]="heading"
       [attr.data-testid]="testId"
-      slot="nav"
     >
       <ng-content />
     </goa-app-footer-nav-section>
@@ -20,4 +19,6 @@ export class GoABAppFooterNavSection {
   @Input() heading?: string;
   @Input() maxColumnCount? = 1;
   @Input() testId?: string;
+  /** "slot" is required and must equal to "nav" so it can be rendered in the correct position **/
+  @Input({ required: true }) slot!: "nav";
 }

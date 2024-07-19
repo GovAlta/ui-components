@@ -9,6 +9,7 @@ import { By } from "@angular/platform-browser";
       [testId]="testId"
       [heading]="heading"
       [maxColumnCount]="maxColumnCount"
+      slot="nav"
     >
       <p>Testing footer</p>
     </goab-app-footer-nav-section>
