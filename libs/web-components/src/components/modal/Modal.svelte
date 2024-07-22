@@ -3,13 +3,16 @@
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
-  import { getSlottedChildren, toBoolean, typeValidator } from "../../common/utils";
+  import {
+    getSlottedChildren,
+    toBoolean,
+    typeValidator,
+  } from "../../common/utils";
   import { onDestroy, onMount, tick } from "svelte";
 
   type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
   type Transition = (typeof Transitions)[number];
   type Role = (typeof Role)[number];
-
 
   // ******
   // Public
@@ -188,7 +191,7 @@
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
         class="modal-pane"
         tabindex="-1"
-        role={role}
+        {role}
         aria-modal="true"
         aria-labelledby="goa-modal-heading"
       >
@@ -202,7 +205,11 @@
         {/if}
         <div class="content">
           <header bind:this={_headerEl} class:has-content={_requiresTopPadding}>
-            <div data-testid="modal-title" class="modal-title" id="goa-modal-heading">
+            <div
+              data-testid="modal-title"
+              class="modal-title"
+              id="goa-modal-heading"
+            >
               {#if heading}
                 {heading}
               {:else}
@@ -219,7 +226,7 @@
                   arialabel="Close the modal"
                   icon="close"
                   on:click={close}
-                  variant="nocolor"
+                  variant="dark"
                 />
               </div>
             {/if}
@@ -235,7 +242,11 @@
               <slot />
             </goa-scrollable>
           </div>
-          <div bind:clientHeight={_actionsHeight} class="modal-actions" data-testid="modal-actions">
+          <div
+            bind:clientHeight={_actionsHeight}
+            class="modal-actions"
+            data-testid="modal-actions"
+          >
             <slot name="actions" />
           </div>
         </div>
