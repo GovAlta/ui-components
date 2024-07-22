@@ -202,10 +202,7 @@
     <!-- Menu button for mobile -->
     {#if _showToggleMenu && _mobile}
       <div class="menu-toggle-area">
-        <button
-          on:click={toggleMenu}
-          data-testid="menu-toggle"
-        >
+        <button on:click={toggleMenu} data-testid="menu-toggle">
           Menu
           <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
         </button>
@@ -232,10 +229,7 @@
           style={styles("height: 100%")}
           class="menu-toggle-area"
         >
-          <button
-            on:click={toggleMenu}
-            data-testid="menu-toggle"
-          >
+          <button on:click={toggleMenu} data-testid="menu-toggle">
             Menu
             <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
           </button>
@@ -317,7 +311,7 @@
   .tablet .header-logo-title-area,
   .desktop .header-logo-title-area {
     min-height: calc(
-      4rem - 2*(var(--goa-spacing-m))
+      4rem - 2 * (var(--goa-spacing-m))
     ); /* desired min-height minus the required padding */
   }
 
@@ -487,10 +481,12 @@
   .desktop .image-mobile {
     display: none;
   }
+
   .desktop .title {
     margin-left: var(--goa-space-m);
     font: var(--goa-typography-body-m);
   }
+
   .desktop .layout {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -557,6 +553,7 @@
     .container.tablet {
       padding: 0 var(--goa-space-3xl);
     }
+
     .container.desktop {
       padding: 0 var(--desktop-padding);
     }
