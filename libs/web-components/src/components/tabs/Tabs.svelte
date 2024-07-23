@@ -13,7 +13,7 @@
   let _tabsEl: HTMLElement;
   let _panelEl: HTMLElement;
   let _currentTab: number = 1;
-  let _tabProps: (GoATabProps & {bound: boolean})[] = [];
+  let _tabProps: (GoATabProps & { bound: boolean })[] = [];
   let _bindTimeoutId: any;
 
   // ========
@@ -38,7 +38,7 @@
       const detail = (e as CustomEvent<GoATabProps>).detail;
 
       // tabs initially marked as unbound
-      _tabProps = [..._tabProps, {...detail, bound: false }];
+      _tabProps = [..._tabProps, { ...detail, bound: false }];
 
       if (_bindTimeoutId) {
         clearTimeout(_bindTimeoutId);
@@ -107,15 +107,26 @@
   }
 
   function removeKeyboardEventListeners() {
-    // TODO: determine if this is ever being called
     _rootEl.removeEventListener("focus", handleKeydownEvents, true);
   }
 
   function setCurrentTab(tab: number) {
     if (!_tabsEl) return;
 
+    const previousTab = _currentTab;
+
     // prevent tab from exceeding limits
     _currentTab = clamp(tab, 1, _tabProps.length);
+
+    if (previousTab != _currentTab) {
+      _rootEl.dispatchEvent(
+        new CustomEvent("_change", {
+          composed: true,
+          bubbles: true,
+          detail: { tab: _currentTab },
+        }),
+      );
+    }
 
     let currentLocation = "";
     // @ts-expect-error
