@@ -531,7 +531,6 @@
   import type { Spacing } from "../../common/styling";
   import { style, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import { onMount } from "svelte";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -560,7 +559,7 @@
 
   $: _isInverted = toBoolean(inverted);
   $: _ariaExpanded = toBoolean(ariaexpanded);
-
+  $: _iconName = iconName(type, theme);
   // Private
 
   const _iconOverrides: Record<
@@ -584,13 +583,15 @@
   } as const;
 
 
-  function iconName(type: GoAIconType): string {
-    const name =
-      theme === "filled" || (type as string).indexOf("logo") === 0
-        ? type
-        : `${type}-${theme}`;
-
-    return name;
+  function iconName(type: GoAIconType, theme: IconTheme): string {
+    if (type) {
+      const name =
+        theme === "filled" || (type as string).indexOf("logo") === 0
+          ? type
+          : `${type}-${theme}`;
+      return name;
+    }
+    return "";
   }
 </script>
 
@@ -615,7 +616,7 @@
         {@html _iconOverrides[`${type}-${theme}`] || _iconOverrides[type]}
       </div>
     {:else}
-      <ion-icon name={iconName(type)} />
+      <ion-icon name={_iconName} />
     {/if}
   {/if}
 </div>
