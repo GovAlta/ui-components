@@ -32,10 +32,19 @@
 <hr/>
 <h1>Other examples</h1>
 <h2>Radio group with descriptions</h2>
-<span class="customized-description-title">Test</span>
-<br>
+
 <goab-radio-group name="color" [formControl]="reactiveFormCtrl">
-  <goab-radio-item value="red">
+  <goab-radio-item value="red" [description]="redDescription">
+    <ng-template #redDescription>
+      <span class="customized-description-title">Content description</span>
+      <small> Another test?</small>
+      <p>
+        Help test
+      </p>
+    </ng-template>
+  </goab-radio-item>
+  <goab-radio-item value="blue" description="Item description"></goab-radio-item>
+  <goab-radio-item value="orange">
     <div slot="description">
       <span class="customized-description-title">Content description</span>
       <small> Another test?</small>
@@ -44,8 +53,6 @@
       </p>
     </div>
   </goab-radio-item>
-  <goab-radio-item value="blue" description="Item description"></goab-radio-item>
-  <goab-radio-item value="orange"></goab-radio-item>
 </goab-radio-group>
 
 <h2>Basic</h2>

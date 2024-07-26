@@ -1,8 +1,10 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-hero-banner",
+  imports: [NgTemplateOutlet],
   template: `
     <goa-hero-banner
       [attr.heading]="heading"
@@ -14,6 +16,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.textcolor]="textColor"
     >
       <ng-content />
+      <div slot="actions">
+        <ng-container [ngTemplateOutlet]="actions"></ng-container>
+      </div>
     </goa-hero-banner>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -26,4 +31,6 @@ export class GoABHeroBanner {
   @Input() maxContentWidth?: string;
   @Input() backgroundColor?: string;
   @Input() textColor?: string;
+
+  @Input() actions!: TemplateRef<any>;
 }

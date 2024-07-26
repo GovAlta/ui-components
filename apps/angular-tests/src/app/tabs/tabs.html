@@ -1,26 +1,26 @@
 <goab-tabs initialtab="2">
-  <goab-tab>
-    <div slot="heading">Profile</div>
+  <goab-tab heading="heading1">
+    <ng-template #heading1>Profile</ng-template>
     <p>
       <b>Profile:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
       sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </p>
   </goab-tab>
-  <goab-tab>
-    <div slot="heading">
+  <goab-tab [heading]="heading">
+    <ng-template #heading>
       Review pending
       <goab-badge type="important" content="1"></goab-badge>
-    </div>
+    </ng-template>
     <p>
       <b>Review pending:</b> Lorem ipsum dolor sit amet, consectetur adipiscing
       elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </p>
   </goab-tab>
-  <goab-tab>
-    <div slot="heading">
+  <goab-tab [heading]="completed">
+    <ng-template #completed>
       Completed
       <goab-badge type="midtone" content="1"></goab-badge>
-    </div>
+    </ng-template>
     <p>
       <b>Completed:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
       sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

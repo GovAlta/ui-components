@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 import { faker } from "@faker-js/faker";
 import { CommonModule } from "@angular/common";
 
-import { GoABAccordion, GoABAppFooter, GoABAppFooterMetaSection, GoABAppFooterNavSection, GoABAppHeader, GoABAppHeaderMenu, GoABBadge, GoABBlock, GoABButton, GoABButtonGroup, GoABCallout, GoABCheckbox, GoABChip, GoABCircularProgress, GoABContainer, GoABDatePicker, GoABDetails, GoABDivider, GoABDropdown, GoABDropdownItem, GoABFileUploadCard, GoABFileUploadInput, GoABFormItem, GoABFormStep, GoABFormStepper, GoABHeroBanner, GoABHeroBannerActions, GoABIcon, GoABIconButton, GoABInput, GoABModal, GoABNotificationBanner, GoABPages, GoABPagination, GoABPopover, GoABRadioGroup, GoABRadioItem, GoABSideMenu, GoABSideMenuGroup, GoABSideMenuHeading, GoABSkeleton, GoABTab, GoABTable, GoABTabs, GoABTextArea, GoABTooltip } from "@abgov/angular-components";
+import { GoABAccordion, GoABAppFooter, GoABAppFooterMetaSection, GoABAppFooterNavSection, GoABAppHeader, GoABAppHeaderMenu, GoABBadge, GoABBlock, GoABButton, GoABButtonGroup, GoABCallout, GoABCheckbox, GoABChip, GoABCircularProgress, GoABContainer, GoABDatePicker, GoABDetails, GoABDivider, GoABDropdown, GoABDropdownItem, GoABFileUploadCard, GoABFileUploadInput, GoABFormItem, GoABFormStep, GoABFormStepper, GoABHeroBanner, GoABIcon, GoABIconButton, GoABInput, GoABModal, GoABNotificationBanner, GoABPages, GoABPagination, GoABPopover, GoABRadioGroup, GoABRadioItem, GoABSideMenu, GoABSideMenuGroup, GoABSideMenuHeading, GoABSkeleton, GoABTab, GoABTable, GoABTabs, GoABTextArea, GoABTooltip } from "@abgov/angular-components";
 import { GoABDropdownOnChangeDetail, GoABFormStepStatus, GoABFormStepperOnChangeDetail, GoABPaginationOnChangeDetail, GoABRadioGroupOnChangeDetail, GoABTextAreaOnChangeDetail } from "@abgov/ui-components-common";
 import { FormControl } from "@angular/forms";
 
@@ -120,12 +120,12 @@ interface User {
 
     <h3>Popover</h3>
     <goab-circular-progress variant="inline" size="large" message="Loading message..." [visible]="true"></goab-circular-progress>
-    <goab-popover>
+    <goab-popover [target]="target">
       <p>This is a popover</p>
       It can be used for a number of different contexts.
-      <div slot="target">
+      <ng-template #target>
         <goa-button type="secondary" size="compact">Click me</goa-button>
-      </div>
+      </ng-template>
     </goab-popover>
 
     <h3>Table with pagination</h3>
@@ -252,12 +252,12 @@ interface User {
   <goab-icon type="warning"></goab-icon>
 
   <h3>Hero Banner</h3>
-  <goab-hero-banner heading="Heading">
-    <goab-hero-banner-actions>
+  <goab-hero-banner heading="Heading" [actions]="action">
+    <ng-template #action>
       <goab-button type="start" (onClick)="onClick()">
         Call to action
       </goab-button>
-    </goab-hero-banner-actions>
+    </ng-template>
   </goab-hero-banner>
 
   <h3>Form Stepper (constrained)</h3>
@@ -490,7 +490,6 @@ interface User {
     GoABFormStepper,
     GoABPages,
     GoABHeroBanner,
-    GoABHeroBannerActions,
     GoABIcon,
     GoABIconButton,
     GoABInput,

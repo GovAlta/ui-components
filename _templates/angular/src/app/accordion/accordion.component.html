@@ -1,7 +1,8 @@
 <h2>Accordion</h2>
 <goab-accordion heading="Heading" headingSize="medium">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+  exercitation ullamco laboris nisi
 </goab-accordion>
 
 <goab-accordion heading="This is the title">
@@ -13,7 +14,9 @@
     pariatur quibusdam magni eum vitae similique, laboriosam reiciendis repellat sapiente.
     Nobis laudantium facilis incidunt!
   </p>
-  <goab-button (_click)="onClick()" size="compact" type="primary">Link to application</goab-button>
+  <goab-button (_click)="onClick()" size="compact" type="primary"
+    >Link to application</goab-button
+  >
 </goab-accordion>
 
 <goab-accordion heading="This is the title" secondarytext="Secondary text">
@@ -31,9 +34,15 @@
   Toggle Accordion Group
 </goab-button>
 
-<goab-accordion heading="Heading" [open]="open"> Content 1 </goab-accordion>
-<goab-accordion heading="Heading" [open]="open">
-  <goab-badge type="success" content="Success" slot="headingcontent"></goab-badge>
+<goab-accordion heading="Heading" [open]="open"> Content 1</goab-accordion>
+<goab-accordion
+  heading="Heading with heading content"
+  [open]="open"
+  [headingContent]="headingContent"
+>
+  <ng-template #headingContent>
+    <goab-badge type="success" content="Success"></goab-badge>
+  </ng-template>
   Content 2
 </goab-accordion>
-<goab-accordion heading="Heading" [open]="open"> Content 3 </goab-accordion>
+<goab-accordion heading="Heading" [open]="open"> Content 3</goab-accordion>

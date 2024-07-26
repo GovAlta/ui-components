@@ -33,8 +33,11 @@
 </goab-button>
 
 <goab-accordion heading="Heading" [open]="open"> Content 1 </goab-accordion>
-<goab-accordion heading="Heading" [open]="open">
-  <goab-badge type="success" content="Success" slot="headingcontent"></goab-badge>
+<goab-accordion heading="Heading" [open]="open" [headingContent]="headingContent">
+  <ng-template #headingContent>
+    <goab-badge type="success" content="Success"></goab-badge>
+  </ng-template>
+
   Content 2
 </goab-accordion>
 <goab-accordion heading="Heading" [open]="open"> Content 3 </goab-accordion>

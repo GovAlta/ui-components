@@ -13,4 +13,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 })
 export class GoABAppFooterMetaSection {
   @Input() testId?: string;
+  /** "slot" is required and must equal to "meta" so it can be rendered in the correct position **/
+  @Input({ required: true }) slot!: "meta";
 }

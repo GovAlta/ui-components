@@ -6,7 +6,7 @@ import { GoABTab } from "@abgov/angular-components";
 @Component({
   template: `
     <goab-tabs [initialTab]="1" testId="foo">
-      <goab-tab heading="Profile"> Profile content </goab-tab>
+      <goab-tab heading="Profile">Tab content </goab-tab>
     </goab-tabs>
   `,
 })
@@ -32,7 +32,7 @@ describe("GoABTabs", () => {
     const el = fixture.nativeElement.querySelector("goa-tabs");
     expect(el?.getAttribute("initialtab")).toBe("1");
     expect(el?.getAttribute("data-testid")).toBe("foo");
-    expect(el?.querySelector("goa-tab")?.getAttribute("heading")).toBe("Profile");
-    expect(el?.textContent).toContain("Profile content");
+    expect(el?.querySelector("goa-tab")?.innerHTML).toContain("Profile");
+    expect(el?.textContent).toContain("Tab content");
   });
 });

@@ -1,6 +1,23 @@
 <h1>Input</h1>
+<h2>Using onChange to update value</h2>
+<goab-input name="foo" (onChange)="handleExample1($event)" placeholder="Enter text"></goab-input>
+<p>Enter value: {{ example1 }}</p>
 
-<!-- <goab-date-picker [formControl]="reactiveDate2FormCtrl"></goab-date-picker> -->
+<h2>Reactive form</h2>
+<form [formGroup]="example2Form">
+  <goab-form-item label="Example 2">
+    <goab-input name="inputControl" formControlName="inputControl" placeholder="Enter text"></goab-input>
+    <goab-form-item-slot slot="helptext">Entered value: {{example2Form.get('inputControl')?.value }}</goab-form-item-slot>
+  </goab-form-item>
+</form>
+
+<h2>Using ngModel</h2>
+<goab-input name="foo" [(ngModel)]="example3" placeholder="Enter text"></goab-input>
+<p>Enter value: {{ example3 }}</p>
+
+<hr/>
+<h1>Other cases</h1>
+<goab-date-picker name="foo" [formControl]="reactiveDate2FormCtrl"></goab-date-picker>
 
 <h2>Basic</h2>
 <goab-input id="foo" name="foo" (onChange)="onInputChangeEvent($event)"></goab-input>
@@ -72,21 +89,28 @@
 
 <h2>Reactive binding - Date</h2>
 <p>{{ reactiveDateFormCtrl.value }}</p>
-<goab-input  name="foo" type="date" [formControl]="reactiveDateFormCtrl"></goab-input>
+<goab-input type="date" name="foo" [formControl]="reactiveDateFormCtrl"></goab-input>
 
 <h2>Reactive binding - Time</h2>
 <p>{{ reactiveTimeFormCtrl.value }}</p>
-<goab-input name="foo" type="time" [formControl]="reactiveTimeFormCtrl" [step]="1"></goab-input>
+<goab-input type="time" name="time" [formControl]="reactiveTimeFormCtrl" [step]="1"></goab-input>
 
 <h2>Leading Content</h2>
 <goab-input name="input">
-  <goab-badge slot="leadingContent" type="success" [icon]="true"></goab-badge>
+  <div slot="leadingContent">
+    <goab-badge type="success" [icon]="true"></goab-badge>
+  </div>
 </goab-input>
 
 <h2>Trailing Content</h2>
 <goab-input name="input">
   <div slot="trailingContent">items</div>
 </goab-input>
+
+<goab-input name="input">
+  <div slot="trailingContent">items</div>
+</goab-input>
+
 
 <h2>Leading and Trailing Content</h2>
 <goab-input name="input">
@@ -98,6 +122,6 @@
 
 <h2>Form</h2>
 <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
-  <goab-input name="first" formControlName="first"></goab-input>
+  <goab-input formControlName="first" name="first"></goab-input>
   <button type="submit">Save</button>
 </form>

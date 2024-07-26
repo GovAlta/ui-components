@@ -1,11 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABSideMenuHeading } from "./side-menu-heading";
 import { Component } from "@angular/core";
+import { GoABBadge } from "../badge/badge";
 
 @Component({
   template: `
-  <goab-side-menu-heading icon="home" testId="foo">Heading</goab-side-menu-heading>
-  `
+  <goab-side-menu-heading icon="home" testId="foo" [meta]="meta">Heading
+    <ng-template #meta><goab-badge type="dark" content="details"></goab-badge></ng-template>
+  </goab-side-menu-heading>
+  `,
 })
 class TestSideMenuHeadingComponent {
   /** do nothing **/
@@ -16,7 +19,7 @@ describe("GoABSideMenuHeading", () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [TestSideMenuHeadingComponent],
-      imports: [GoABSideMenuHeading]
+      imports: [GoABSideMenuHeading, GoABBadge]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSideMenuHeadingComponent);
@@ -27,6 +30,7 @@ describe("GoABSideMenuHeading", () => {
     const el = fixture.nativeElement.querySelector("goa-side-menu-heading");
     expect(el?.getAttribute("icon")).toBe("home");
     expect(el?.getAttribute("data-testid")).toBe("foo");
-    expect(el?.textContent).toBe("Heading");
+    expect(el?.textContent).toContain("Heading");
+    expect(el?.querySelector("[slot='meta']")?.innerHTML).toContain("details");
   })
 })

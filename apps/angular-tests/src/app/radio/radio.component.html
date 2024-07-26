@@ -1,10 +1,50 @@
 <h1>Radio</h1>
 
+<h2>using onChange to update the value</h2>
+<goab-radio-group (onChange)="handleRadioChange($event)" name="example-radio-group">
+  <goab-radio-item value="option1" label="Option 1"></goab-radio-item>
+  <goab-radio-item value="option2" label="Option 2"></goab-radio-item>
+  <goab-radio-item value="option3" label="Option 3"></goab-radio-item>
+</goab-radio-group>
+
+<p>Selected Value: {{ selectedValue }}</p>
+
+<h2>Using Reactive Form</h2>
+<form [formGroup]="example2Form">
+  <goab-radio-group formControlName="radioControl" name="example-radio-group">
+    <goab-radio-item value="option1" label="Option 1"></goab-radio-item>
+    <goab-radio-item value="option2" label="Option 2"></goab-radio-item>
+    <goab-radio-item value="option3" label="Option 3"></goab-radio-item>
+  </goab-radio-group>
+</form>
+
+<p>Selected Value: {{ example2Form.get('radioControl')?.value }}</p>
+
+<h2>Using ngModel</h2>
+<goab-radio-group [(ngModel)]="example3Value" name="example-radio-group">
+  <goab-radio-item value="option1" label="Option 1"></goab-radio-item>
+  <goab-radio-item value="option2" label="Option 2"></goab-radio-item>
+  <goab-radio-item value="option3" label="Option 3"></goab-radio-item>
+</goab-radio-group>
+
+<p>Selected Value: {{ example3Value }}</p>
+
+<hr/>
+<h1>Other examples</h1>
 <h2>Radio group with descriptions</h2>
-<span class="customized-description-title">Test</span>
-<br>
+
 <goab-radio-group name="color" [formControl]="reactiveFormCtrl">
-  <goab-radio-item value="red">
+  <goab-radio-item value="red" [description]="redDescription">
+    <ng-template #redDescription>
+      <span class="customized-description-title">Content description</span>
+      <small> Another test?</small>
+      <p>
+        Help test
+      </p>
+    </ng-template>
+  </goab-radio-item>
+  <goab-radio-item value="blue" description="Item description"></goab-radio-item>
+  <goab-radio-item value="orange">
     <div slot="description">
       <span class="customized-description-title">Content description</span>
       <small> Another test?</small>
@@ -13,8 +53,6 @@
       </p>
     </div>
   </goab-radio-item>
-  <goab-radio-item value="blue" description="Item description"></goab-radio-item>
-  <goab-radio-item value="orange"></goab-radio-item>
 </goab-radio-group>
 
 <h2>Basic</h2>

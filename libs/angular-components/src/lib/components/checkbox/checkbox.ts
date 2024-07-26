@@ -5,32 +5,37 @@ import {
   EventEmitter,
   Input,
   Output,
-  forwardRef,
+  forwardRef, TemplateRef,
 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-checkbox",
-  template: ` <goa-checkbox
-    [attr.name]="name"
-    [checked]="checked"
-    [disabled]="disabled"
-    [attr.error]="error"
-    [attr.text]="text"
-    [value]="value"
-    [attr.data-testid]="testId"
-    [attr.arialabel]="ariaLabel"
-    [attr.description]="description"
-    [id]="id"
-    [attr.mt]="mt"
-    [attr.mb]="mb"
-    [attr.ml]="ml"
-    [attr.mr]="mr"
-    (_change)="_onChange($event)"
-  >
-    <ng-content />
-  </goa-checkbox>`,
+  template: `
+    <goa-checkbox
+      [attr.name]="name"
+      [checked]="checked"
+      [disabled]="disabled"
+      [attr.error]="error"
+      [attr.text]="text"
+      [value]="value"
+      [attr.data-testid]="testId"
+      [attr.arialabel]="ariaLabel"
+      [attr.description]="getDescriptionAsString()"
+      [id]="id"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
+      (_change)="_onChange($event)"
+    >
+      <ng-content />
+      <div slot="description">
+        <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
+      </div>
+    </goa-checkbox>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
@@ -39,6 +44,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       useExisting: forwardRef(() => GoABCheckbox),
     },
   ],
+  imports: [NgTemplateOutlet],
 })
 export class GoABCheckbox implements ControlValueAccessor {
   @Input() name?: string;
@@ -49,7 +55,7 @@ export class GoABCheckbox implements ControlValueAccessor {
   @Input() value?: string | number | boolean;
   @Input() testId?: string;
   @Input() ariaLabel?: string;
-  @Input() description?: string;
+  @Input() description!: string | TemplateRef<any>;
   @Input() id?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
@@ -58,11 +64,22 @@ export class GoABCheckbox implements ControlValueAccessor {
 
   @Output() onChange = new EventEmitter<GoABCheckboxOnChangeDetail>();
 
+  getDescriptionAsString(): string {
+    return typeof this.description === "string" ? this.description : "";
+  }
+
+  getDescriptionAsTemplate(): TemplateRef<any> | null {
+    if (this.description) {
+      return typeof this.description === "string" ? null : this.description;
+    }
+    return null;
+  }
+
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoABCheckboxOnChangeDetail>).detail;
     this.onChange.emit(detail);
     this.markAsTouched();
-    this.fcChange?.(detail.binding === "check" ? detail.checked : (detail.value || ""));
+    this.fcChange?.(detail.binding === "check" ? detail.checked : detail.value || "");
   }
 
   // ControlValueAccessor

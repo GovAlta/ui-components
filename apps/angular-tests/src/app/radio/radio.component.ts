@@ -2,7 +2,7 @@ import { GoABFormItem, GoABRadioGroup, GoABRadioItem } from "@abgov/angular-comp
 import { GoABRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 import { NgForOf } from "@angular/common";
 import { Component } from "@angular/core";
-import { FormControl, ReactiveFormsModule } from "@angular/forms";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
   standalone: true,
@@ -15,10 +15,23 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
     GoABFormItem,
     ReactiveFormsModule,
     NgForOf,
+    FormsModule
   ]
 })
 export class RadioComponent {
-  constructor() { }
+  selectedValue = '';
+
+  handleRadioChange(event: GoABRadioGroupOnChangeDetail) {
+    this.selectedValue = event.value;
+  }
+  example2Form: FormGroup;
+  example3Value = "";
+
+  constructor() {
+    this.example2Form = new FormGroup({
+      radioControl: new FormControl('')
+    });
+  }
 
   boundVal = "";
   radioValue = "orange"

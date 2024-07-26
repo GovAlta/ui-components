@@ -1,4 +1,4 @@
-import { GoABBlock, GoABButton, GoABButtonGroup, GoABIconButton, GoABPopover, GoABSpacer } from "@abgov/angular-components";
+import { GoABBlock, GoABButton, GoABButtonGroup, GoABPopover, GoABSpacer } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({

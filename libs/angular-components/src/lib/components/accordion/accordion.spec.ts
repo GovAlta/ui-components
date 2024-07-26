@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 import { By } from "@angular/platform-browser";
 import { GoABAccordionHeadingSize } from "@abgov/ui-components-common";
-import { prettyDOM } from "@testing-library/dom";
 
 @Component({
   template: `
@@ -12,9 +11,10 @@ import { prettyDOM } from "@testing-library/dom";
     [secondaryText]="secondaryText"
     [open]="open"
     [headingSize]="headingSize"
+    [headingContent]="headingContent"
   >
     test content
-    <div slot="headingContent">This is the headingcontent</div>
+      <ng-template #headingContent>This is the headingcontent</ng-template>
   </goab-accordion>`,
 })
 class TestAccordionComponent {
@@ -46,7 +46,6 @@ describe("GoABAccordion", () => {
   });
 
   it("should render and set the props correctly", () => {
-    console.log(prettyDOM(fixture.nativeElement));
     const accordionElement = fixture.debugElement.query(
       By.css("goa-accordion"),
     ).nativeElement;

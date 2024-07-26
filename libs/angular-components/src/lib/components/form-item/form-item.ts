@@ -1,5 +1,13 @@
-import { GoABFormItemLabelSize, GoABFormItemRequirement, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import {
+  GoABFormItemLabelSize,
+  GoABFormItemRequirement,
+  Spacing,
+} from "@abgov/ui-components-common";
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  Input,
+} from "@angular/core";
 
 @Component({
   standalone: true,
@@ -19,11 +27,12 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.ml]="ml"
     >
       <ng-content />
+      <ng-content select="goab-form-item-slot"></ng-content>
     </goa-form-item>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABFormItem {
+export class GoABFormItem{
   @Input() label?: string;
   @Input() labelSize?: GoABFormItemLabelSize;
   @Input() helpText?: string;

@@ -1,9 +1,11 @@
 <h2>Side Menu</h2>
 <goab-side-menu>
-  <goab-side-menu-heading>Nav section 1</goab-side-menu-heading>
+  <goab-side-menu-heading icon="home">Nav section 1</goab-side-menu-heading>
   <a href="#home">Home</a>
   <a href="#profile">Profile</a>
-  <goab-side-menu-heading>Nav section 2</goab-side-menu-heading>
+  <goab-side-menu-heading icon="home" [meta]="meta">Nav section 2
+    <ng-template #meta><goab-badge type="midtone" content="Details"></goab-badge></ng-template>
+  </goab-side-menu-heading>
   <a href="#about">About</a>
   <a href="#contact">Contact</a>
   <goab-side-menu-group heading="Links">

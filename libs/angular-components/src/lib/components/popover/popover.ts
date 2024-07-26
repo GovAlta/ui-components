@@ -1,9 +1,11 @@
 import { GoABPopoverPosition, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-popover",
+  imports: [NgTemplateOutlet],
   template: `
     <goa-popover
       [attr.maxwidth]="maxWidth"
@@ -17,7 +19,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.ml]="ml"
       [attr.mr]="mr"
     >
-      <ng-content />
+      <ng-content></ng-content>
+      <div slot="target">
+        <ng-container [ngTemplateOutlet]="target"></ng-container>
+      </div>
     </goa-popover>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -33,4 +38,5 @@ export class GoABPopover {
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
+  @Input({ required: true }) target!: TemplateRef<any>;
 }

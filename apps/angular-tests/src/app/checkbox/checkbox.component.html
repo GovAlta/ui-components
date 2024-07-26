@@ -1,9 +1,25 @@
 <h1>Checkbox</h1>
 
-<!--
-<goab-checkbox name="desserts" text="Ice Cream" value="10" goaChecked [formControl]="testFormCtrl"></goab-checkbox>
--->
+<h2>Event Based</h2>
+<goab-checkbox name="item" text="Item" [value]="checked" (onChange)="onChange($event)"></goab-checkbox>
 
+<h2>Reactive Form Control</h2>
+
+<form [formGroup]="form">
+  <goab-checkbox formControlName="checkbox" text="Check me"></goab-checkbox>
+</form>
+
+<goab-checkbox name="desserts" text="Ice Cream" value="10" goaChecked [formControl]="testFormCtrl"></goab-checkbox>
+
+
+<h2>Using ngModel</h2>
+<form>
+  <goab-checkbox [(ngModel)]="checkboxValue" name="checkbox" text="Check me"></goab-checkbox>
+</form>
+<p>Checkbox value: {{ checkboxValue }}</p>
+
+
+<hr/>
 
 <h2>Basic</h2>
 <goab-checkbox name="desserts" text="Ice Cream" [checked]="checkbox1Checked" (onChange)="onChange($event)">
@@ -44,3 +60,11 @@
   eligendi, ipsam sed beatae exercitationem inventore? Saepe ipsa reiciendis
   inventore quia, voluptatem a amet id possimus rerum ullam, fugiat eveniet.">
 </goab-checkbox>
+
+<h2>Checkbox with description slot</h2>
+<goab-checkbox name="description" text="description slot" [description]="descriptionTemplate">
+  <ng-template #descriptionTemplate>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam dolor eligendi, ipsam sed beatae exercitationem inventore? Saepe ipsa reiciendis inventore quia, voluptatem a amet id possimus rerum ullam, fugiat eveniet.</p>
+  </ng-template>
+</goab-checkbox>
+
