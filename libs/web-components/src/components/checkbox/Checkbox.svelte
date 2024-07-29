@@ -19,11 +19,12 @@
   export let testid: string = "";
   export let arialabel: string = "";
   export let description: string = "";
+  export let maxwidth: string = "none";
 
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
-  export let mb: Spacing = null;
+  export let mb: Spacing = "m";
   export let ml: Spacing = null;
 
   // Private
@@ -65,7 +66,13 @@
 
 <!-- View -->
 
-<div style={calculateMargin(mt, mr, mb, ml)} class="root">
+<div
+  class="root"
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)}
+    max-width: ${maxwidth};
+  `}
+>
   <label
     data-testid={testid}
     for={name}
@@ -132,7 +139,6 @@
 
   .root {
     display: inline-block;
-    padding-bottom: var(--goa-space-m);
   }
 
   input[type="checkbox"] {

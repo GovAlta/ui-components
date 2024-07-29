@@ -34,6 +34,15 @@ describe("GoA Container", () => {
       expect(container?.classList).toContain('width--content');
 
     });
+
+    it('should set a max width', async () => {
+      const baseElement = render(GoAContainer, {
+        testid: "container-test",
+        maxwidth: "480px",
+      });
+      const container = await baseElement.findByTestId("container-test");
+      expect(container?.getAttribute("style")).toContain("max-width: 480px;")
+    });
   });
 
   describe("Margins", () => {

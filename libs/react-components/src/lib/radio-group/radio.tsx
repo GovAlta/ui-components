@@ -1,8 +1,10 @@
-interface RadioItemProps {
+import { Margins } from "../../common/styling";
+interface RadioItemProps extends Margins {
   name?: string;
   value?: string;
   description?: string | React.ReactNode;
   label?: string;
+  maxwidth?: string;
   disabled?: boolean;
   checked?: boolean;
   error?: boolean;
@@ -18,11 +20,12 @@ declare global {
   }
 }
 
-export interface GoARadioItemProps {
+export interface GoARadioItemProps extends Margins {
   value?: string;
   label?: string;
   name?: string;
   description?: string | React.ReactNode;
+  maxWidth?: string;
   disabled?: boolean;
   checked?: boolean;
   error?: boolean;
@@ -36,12 +39,17 @@ export function GoARadioItem({
   label,
   value,
   description,
+  maxWidth,
   disabled,
   checked,
   error,
   testId,
   ariaLabel,
   children,
+  mt,
+  mr,
+  mb,
+  ml,
 }: GoARadioItemProps): JSX.Element {
   return (
     <goa-radio-item
@@ -49,11 +57,16 @@ export function GoARadioItem({
       label={label}
       value={value}
       description={typeof description === "string" ? description : undefined}
+      maxwidth={maxWidth}
       error={error}
       disabled={disabled}
       checked={checked}
       data-testid={testId}
       arialabel={ariaLabel}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
     >
       {description && typeof description !== "string" && <div slot="description">{description}</div>}
       {children}

@@ -14,6 +14,7 @@ describe("TextArea", () => {
         disabled={true}
         countBy="word"
         maxCount={50}
+        maxWidth="100px"
         mt="s"
         mr="m"
         mb="l"
@@ -30,6 +31,7 @@ describe("TextArea", () => {
     expect(el.getAttribute("disabled")).toBe("true");
     expect(el.getAttribute("countby")).toBe("word");
     expect(el.getAttribute("maxcount")).toBe("50");
+    expect(el.getAttribute("maxwidth")).toBe("100px");
     expect(el.getAttribute("mt")).toBe("s");
     expect(el.getAttribute("mr")).toBe("m");
     expect(el.getAttribute("mb")).toBe("l");

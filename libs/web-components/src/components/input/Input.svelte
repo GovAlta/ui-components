@@ -267,7 +267,7 @@
       <goa-icon-button
         on:click={doClick}
         disabled={isDisabled}
-        variant="nocolor"
+        variant="dark"
         size="medium"
         icon={trailingicon}
         data-testid="trailing-icon-button"
