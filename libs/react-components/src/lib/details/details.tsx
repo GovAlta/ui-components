@@ -4,6 +4,7 @@ import { Margins } from "../../common/styling";
 interface WCProps extends Margins {
   heading: string;
   open?: boolean;
+  maxwidth?: string;
 }
 
 declare global {
@@ -20,6 +21,7 @@ declare global {
 export interface GoADetailsProps extends Margins {
   heading: string;
   open?: boolean;
+  maxWidth?: string;
   testId?: string;
   children: ReactNode;
 }
@@ -31,6 +33,7 @@ export function GoADetails(props: GoADetailsProps) {
     <goa-details
       heading={props.heading}
       open={props.open}
+      maxwidth={props.maxWidth}
       data-testid={props.testId}
       mt={props.mt}
       mr={props.mr}

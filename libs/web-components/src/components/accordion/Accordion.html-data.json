@@ -4,18 +4,18 @@
   "attributes": [
     {
       "name": "heading",
-      "description": "Sets the heading text",
+      "description": "Sets the heading text.",
       "type": "string"
     },
     {
-      "name": "secondaryText",
-      "description": "Sets secondary text",
+      "name": "secondarytext",
+      "description": "Sets the secondary text.",
       "type": "string"
     },
     {
       "name": "open",
       "default": "false",
-      "description": "Sets the state of the accordion container open or closed",
+      "description": "Sets the state of the accordion container open or closed.",
       "values": [
         {
           "name": "false",
@@ -29,25 +29,30 @@
       "type": "boolean"
     },
     {
-      "name": "headingSize",
+      "name": "headingsize",
       "default": "small",
-      "description": "Sets the heading size of the accordion container heading",
+      "description": "Sets the heading size of the accordion container heading.",
       "values": [
         {
           "name": "small",
-          "description": "Heading size of the accordion container is small"
+          "description": "Heading size of the accordion container is small."
         },
         {
           "name": "medium",
-          "description": "Heading size of the accordion container is medium"
+          "description": "Heading size of the accordion container is medium."
         }
       ],
       "type": "string"
     },
     {
       "name": "headingcontent",
-      "description": "Add components to the accordion container heading such as badges",
+      "description": "Add components to the accordion container heading such as badges.",
       "type": "slot"
+    },
+    {
+      "name": "maxwidth",
+      "description": "Sets the maximum width of the accordion.",
+      "type": "string"
     },
     {
       "name": "mt",

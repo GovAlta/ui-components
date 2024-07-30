@@ -20,6 +20,7 @@
     name: string;
     checked: boolean;
     ariaLabel: string;
+    maxWidth: string;
   };
 
   export type RadioItemSelectProps = {
@@ -41,6 +42,7 @@
   export let error: string = "false";
   export let checked: string = "false";
   export let arialabel: string = "";
+  export let maxwidth: string = "none";
 
   // margin
   export let mt: Spacing = null;
@@ -80,6 +82,7 @@
             error: isError,
             checked: isChecked,
             ariaLabel: arialabel,
+            maxWidth: maxwidth,
           },
         }),
       );
@@ -116,7 +119,13 @@
   }
 </script>
 
-<div style={calculateMargin(mt, mr, mb, ml)} class="goa-radio-container">
+<div
+  style={`
+    ${calculateMargin(mt, mr, mb, ml)}
+    max-width: ${maxwidth};
+  `}
+  class="goa-radio-container"
+>
   <label
     bind:this={_radioItemEl}
     data-testid="radio-option-{value}"

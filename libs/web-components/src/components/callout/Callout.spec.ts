@@ -96,6 +96,13 @@ describe('GoACalloutComponent', () => {
     });
   });
 
+  it("should render - with max width", async () => {
+    const baseElement = render(GoACallout, { type: "emergency", maxwidth:"480px", testid: "testid" });
+    const el = baseElement.queryByTestId("testid");
+    expect(el?.getAttribute("style")).toContain("max-width: 480px;");
+  });
+
+
   describe("Margins", () => {
     it(`should add the margin`, async () => {
       const baseElement = render(GoACallout, {

@@ -5,47 +5,52 @@
     {
       "name": "name",
       "type": "string",
-      "description": "Must match the name assigned to the children"
+      "description": "Must match the name assigned to the children."
     },
     {
       "name": "checked",
       "type": "boolean",
-      "description": "Mark the checkbox item as selected",
+      "description": "Marks the checkbox item as selected.",
       "valueSet": "boolean"
     },
     {
       "name": "text",
       "type": "string",
-      "description": "Content to display as the label for the Checkbox"
+      "description": "Content to display as the label for the checkbox."
     },
     {
       "name": "value",
       "type": "string",
-      "description": "The value binding to the checkbox"
+      "description": "The value binding to the checkbox."
     },
     {
       "name": "description",
       "type": "string",
-      "description": "The description added below the label text"
+      "description": "The description added below the label text."
     },
     {
       "name": "disabled",
       "type": "boolean",
-      "description": "Disable this control. It will not receive focus or events",
+      "description": "Disable this control. It will not receive focus or events.",
       "valueSet": "boolean",
       "default": "false"
     },
     {
       "name": "error",
       "type": "boolean",
-      "description": "Show an error on the checkbox item",
+      "description": "Show an error on the checkbox item.",
       "valueSet": "boolean",
       "default": "false"
     },
     {
-      "name": "ariaLabel",
+      "name": "arialabel",
       "type": "string",
-      "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the name\n"
+      "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the name.\n"
+    },
+    {
+      "name": "maxwidth",
+      "description": "Sets the maximum width of the checkbox.",
+      "type": "string"
     },
     {
       "name": "mt",

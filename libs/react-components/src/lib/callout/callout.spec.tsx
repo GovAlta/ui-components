@@ -8,6 +8,7 @@ describe("Callout", () => {
         type="information"
         heading="Callout Title"
         size="medium"
+        maxWidth="480px"
         mt="s"
         mr="m"
         mb="l"
@@ -22,6 +23,7 @@ describe("Callout", () => {
     expect(el?.getAttribute("heading")).toContain("Callout Title");
     expect(el?.getAttribute("type")).toContain("information");
     expect(el?.getAttribute("size")).toContain("medium");
+    expect(el?.getAttribute("maxwidth")).toBe("480px");
     expect(el?.getAttribute("mt")).toBe("s");
     expect(el?.getAttribute("mr")).toBe("m");
     expect(el?.getAttribute("mb")).toBe("l");

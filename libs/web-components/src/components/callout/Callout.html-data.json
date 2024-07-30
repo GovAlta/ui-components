@@ -4,18 +4,23 @@
   "attributes": [
     {
       "name": "type",
-      "description": "Define the context and colour of the callout",
+      "description": "Define the context and colour of the callout.",
       "values": [{ "name": "information" }, { "name": "important"}, { "name": "emergency"}, { "name": "success"}, { "name": "event"}]
     },
     {
       "name": "heading",
       "type": "string",
-      "description": "Callout heading text"
+      "description": "Callout heading text."
     },
     {
       "name": "size",
       "description": "Define the size of the callouts.",
       "values": [{"name": "medium"}, {"name": "large"}]
+    },
+    {
+      "name": "maxwidth",
+      "description": "Sets the maximum width of the callout.",
+      "type": "string"
     },
     {
       "name": "mt",
