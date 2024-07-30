@@ -81,7 +81,8 @@
   // Hooks
   //
 
-  onMount(() => {
+  onMount(async() => {
+    await tick();
     getChildren();
 
     _eventHandler = _filterable
