@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABPopover } from "./popover";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoABPopoverPosition, Spacing } from "@abgov/ui-components-common";
-import { GoABButton } from "@abgov/angular-components";
+import { GoABButton } from "../button/button";
 
 @Component({
   template: `

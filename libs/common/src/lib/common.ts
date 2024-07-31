@@ -151,10 +151,6 @@ export interface GoABTabsProps {
   initialTab?: number;
 }
 
-export interface GoABTabItemProps {
-  // heading?: ; slot
-}
-
 // Table
 
 export type GoABTableVariant = "normal" | "relaxed";

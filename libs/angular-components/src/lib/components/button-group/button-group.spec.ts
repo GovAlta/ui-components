@@ -6,7 +6,7 @@ import {
   GoABButtonGroupGap,
 } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
-import { GoABButton } from "@abgov/angular-components";
+import { GoABButton } from "../button/button";
 
 @Component({
   template: `

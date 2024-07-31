@@ -54,7 +54,7 @@ export class GoABDatePicker implements ControlValueAccessor {
   // ControlValueAccessor
 
   private fcChange?: (value: Date | string) => void;
-  private fcTouched?: () => {};
+  private fcTouched?: () => unknown;
   touched = false;
 
   markAsTouched() {

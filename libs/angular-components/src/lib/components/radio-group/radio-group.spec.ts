@@ -6,7 +6,7 @@ import {
   GoABRadioGroupOrientation,
   Spacing,
 } from "@abgov/ui-components-common";
-import { GoABRadioItem } from "@abgov/angular-components";
+import { GoABRadioItem } from "../radio-item/radio-item";
 import { fireEvent } from "@testing-library/dom";
 
 interface RadioOption {
