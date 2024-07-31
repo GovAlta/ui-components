@@ -16,7 +16,7 @@
     "test:react": "nx test react-components --watch",
     "test:angular-e2e": "nx e2e angular-tests-e2e --watch",
     "test:angular-e2e:prod": "nx e2e angular-tests-e2e --configuration=production",
-    "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web",
+    "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web --exclude=angular-tests --exclude=angular-tests-e2e",
     "validate": "npm run build && npm run lint && vitest --run",
     "dev:web": "(npm run serve:web & npm run svelte:watch)",
     "dev:react": "(npm run serve:react & npm run svelte:watch)",
