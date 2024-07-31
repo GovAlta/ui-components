@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABDropdown } from "./dropdown";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoABIconType, Spacing } from "@abgov/ui-components-common";
-import { GoABDropdownItem } from "@abgov/angular-components";
+import { GoABDropdownItem } from "../dropdown-item/dropdown-item";
 import { ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";

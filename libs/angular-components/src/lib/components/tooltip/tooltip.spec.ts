@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABTooltip } from "./tooltip";
 import { Component } from "@angular/core";
-import { GoABIcon } from "@abgov/angular-components";
+import { GoABIcon } from "../icon/icon";
 
 @Component({
   template: `

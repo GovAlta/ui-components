@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABTableSortHeader } from "@abgov/angular-components";
+import { GoABTableSortHeader } from "../table-sort-header/table-sort-header";
 
 @Component({
   template: `

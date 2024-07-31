@@ -73,7 +73,7 @@ export class GoABTextArea implements ControlValueAccessor {
   // ControlValueAccessor
 
   private fcChange?: (value: string) => void;
-  private fcTouched?: () => {};
+  private fcTouched?: () => unknown;
   touched = false;
 
   markAsTouched() {
