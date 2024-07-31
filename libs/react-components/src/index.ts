@@ -1,5 +1,6 @@
 // Components
 
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import "@abgov/web-components";
 
 export * from "./lib/accordion/accordion";
