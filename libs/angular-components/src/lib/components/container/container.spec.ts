@@ -7,7 +7,7 @@ import {
   GoABContainerType,
   GoABContainerWidth, Spacing,
 } from "@abgov/ui-components-common";
-import { GoABButton } from "@abgov/angular-components";
+import { GoABButton } from "../button/button";
 import { By } from "@angular/platform-browser";
 
 @Component({

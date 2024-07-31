@@ -85,7 +85,7 @@ export class GoABCheckbox implements ControlValueAccessor {
   // ControlValueAccessor
 
   private fcChange?: (value: string | boolean) => void;
-  private fcTouched?: () => {};
+  private fcTouched?: () => unknown;
   touched = false;
 
   markAsTouched() {

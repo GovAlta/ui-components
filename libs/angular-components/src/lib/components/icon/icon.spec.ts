@@ -7,7 +7,7 @@ import {
   GoABIconType,
   Spacing,
 } from "@abgov/ui-components-common";
-import { GoABIcon } from "@abgov/angular-components";
+import { GoABIcon } from "../icon/icon";
 import { By } from "@angular/platform-browser";
 
 @Component({

@@ -134,7 +134,7 @@ export class GoABInput implements ControlValueAccessor, OnInit {
   // ControlValueAccessor
 
   private fcChange?: (value: string) => void;
-  private fcTouched?: () => {};
+  private fcTouched?: () => unknown;
   touched = false;
 
   markAsTouched() {

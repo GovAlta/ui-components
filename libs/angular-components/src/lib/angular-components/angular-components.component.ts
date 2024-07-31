@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: "lib-angular-components",
+  selector: "goab-lib-angular-components",
   standalone: true,
   imports: [CommonModule],
   templateUrl: "./angular-components.component.html",
