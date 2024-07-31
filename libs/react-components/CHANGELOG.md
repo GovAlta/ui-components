@@ -39,7 +39,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.14.0] - 2023-08-30
 
 ### Added
-
 - New [Side Menu Heading](https://ui-components.alberta.ca/?path=/docs/components-sidemenu--section-headings) component added to Side Menu component
 - New [description](https://ui-components.alberta.ca/?path=/docs/components-radio--description) property added to Radio component
 - New [description](https://alpha.ui-components.alberta.ca/?path=/docs/components-checkbox--description) property added to Checkbox component
@@ -47,7 +46,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `arialabelledby` property to Dropdown, Form Item, and Input components for increased accessibility when combined with Form Item component
 
 ### Fixes
-
 - No `children` errors should exist when using the latest version of React
 - `label` property no longer required for Form Item component
 

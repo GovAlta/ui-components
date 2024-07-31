@@ -1,9 +1,4 @@
-<svelte:options customElement={{
-  tag:  "goa-table-sort-header" ,
-  props: {
-    name: { reflect: true },
-  }
-}} />
+<svelte:options customElement="goa-table-sort-header" />
 
 <script context="module" lang="ts">
   export type GoATableSortDirection = "asc" | "desc" | "none";

@@ -5,7 +5,7 @@ import { GoABDetails } from "./details";
 describe("Detail", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoABDetails heading="The heading" open={true}>
+      <GoABDetails heading="The heading" open={true} maxWidth={"480px"} testId="foo">
         The content
       </GoABDetails>,
     );

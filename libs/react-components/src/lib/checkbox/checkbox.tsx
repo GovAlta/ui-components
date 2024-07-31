@@ -25,7 +25,7 @@ interface WCProps extends Margins {
 }
 
 /* eslint-disable-next-line */
-export interface GoACheckboxProps extends Margins {
+export interface GoABCheckboxProps extends Margins {
   id?: string;
   name: string;
   checked: boolean;

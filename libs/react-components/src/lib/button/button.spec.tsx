@@ -1,7 +1,8 @@
 import { render } from "@testing-library/react";
 import { fireEvent, screen } from "@testing-library/dom";
-import GoABButton, { ButtonSize, ButtonType } from "./button";
+import GoABButton from "./button";
 import { describe, it, expect, vi } from "vitest";
+import { GoABButtonSize, GoABButtonType } from "@abgov/ui-components-common";
 
 describe("GoAB Button", () => {
   const buttonText = "Test Title";
@@ -56,7 +57,7 @@ describe("GoAB Button", () => {
   });
 
   describe("size", () => {
-    (["compact", "normal"] as const).forEach((size: ButtonSize) => {
+    (["compact", "normal"] as const).forEach((size: GoABButtonSize) => {
       it(`should render ${size} size`, async () => {
         const { container } = render(
           <GoABButton size={size} onClick={noop}>
@@ -73,7 +74,7 @@ describe("GoAB Button", () => {
 
   describe("type", () => {
     (["primary", "submit", "secondary", "tertiary"] as const).forEach(
-      (type: ButtonType) => {
+      (type: GoABButtonType) => {
         it(`should render ${type} type`, async () => {
           const { container } = render(
             <GoABButton type={type} onClick={noop}>

@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
@@ -28,8 +28,9 @@
   export let ml: Spacing = null;
 
   // Private
+  let _value: string;
+  let _checkboxRef: HTMLElement;
   let _descriptionId: string;
-  let _bindingType: "value" | "check";
 
   // Binding
   $: isDisabled = toBoolean(disabled);
@@ -37,22 +38,19 @@
   $: isChecked = toBoolean(checked);
   $: isIndeterminate = false; // Design review. To be built with TreeView Later
 
-  onMount(async () => {
-    await tick()
-    // defining the binding type allows the wrappers to emit events with the desired value
-    _bindingType = value ? "value" : "check";
+  onMount(() => {
+    // hold on to the initial value to prevent losing it on check changes
+    _value = value;
     _descriptionId = `description_${name}`;
   });
 
   function onChange(e: Event) {
-    const el = (e.target as HTMLInputElement);
     // Manually set the focus back to the checkbox after the state change
+    _checkboxRef.focus();
     // An empty string is required as setting the second value to `null` caused the data to get
     // out of sync with the events.
-    // TODO: is this needed?
-    // el.focus();
-    const newCheckStatus = el.checked;
-    const newValue = newCheckStatus ? value : undefined;
+    const newCheckStatus = !isChecked;
+    const newValue = newCheckStatus ? `${_value || "checked"}` : "";
 
     // set the local state
     checked = fromBoolean(newCheckStatus);
@@ -60,7 +58,7 @@
     e.target?.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
-        detail: { name, checked: newCheckStatus, value: newValue, binding: _bindingType },
+        detail: { name, checked: newCheckStatus, value: newValue },
       }),
     );
   }
@@ -86,12 +84,13 @@
       class:selected={isChecked}
     >
       <input
+        bind:this={_checkboxRef}
         id={name}
-        {value}
         {name}
         checked={isChecked}
         disabled={isDisabled}
         type="checkbox"
+        value={`${value}`}
         aria-label={arialabel || text || name}
         aria-describedby={description ? _descriptionId : null}
         on:change={onChange}
@@ -117,7 +116,9 @@
       {/if}
     </div>
     <div class="text" data-testid="text">
-      {text}
+      <slot>
+        {text}
+      </slot>
     </div>
   </label>
   {#if $$slots.description || description}

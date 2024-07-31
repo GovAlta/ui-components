@@ -26,18 +26,18 @@ describe("TextArea", () => {
     );
 
     const el = document.querySelector("goa-textarea");
-    expect(el.getAttribute("name")).toBe("textarea-name");
-    expect(el.getAttribute("value")).toBe("textarea-value");
-    expect(el.getAttribute("rows")).toBe("10");
-    expect(el.getAttribute("placeholder")).toBe("textarea-placeholder");
-    expect(el.getAttribute("disabled")).toBe("true");
-    expect(el.getAttribute("countby")).toBe("word");
-    expect(el.getAttribute("maxcount")).toBe("50");
-    expect(el.getAttribute("maxwidth")).toBe("100px");
-    expect(el.getAttribute("mt")).toBe("s");
-    expect(el.getAttribute("mr")).toBe("m");
-    expect(el.getAttribute("mb")).toBe("l");
-    expect(el.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("name")).toBe("textarea-name");
+    expect(el?.getAttribute("value")).toBe("textarea-value");
+    expect(el?.getAttribute("rows")).toBe("10");
+    expect(el?.getAttribute("placeholder")).toBe("textarea-placeholder");
+    expect(el?.getAttribute("disabled")).toBe("true");
+    expect(el?.getAttribute("countby")).toBe("word");
+    expect(el?.getAttribute("maxcount")).toBe("50");
+    expect(el?.getAttribute("maxwidth")).toBe("100px");
+    expect(el?.getAttribute("mt")).toBe("s");
+    expect(el?.getAttribute("mr")).toBe("m");
+    expect(el?.getAttribute("mb")).toBe("l");
+    expect(el?.getAttribute("ml")).toBe("xl");
   });
 
   it("handles the onChange event", async () => {
@@ -63,12 +63,14 @@ describe("TextArea", () => {
 
     const el = document.querySelector("goa-textarea");
 
-    fireEvent(
-      el,
-      new CustomEvent("_change", {
-        detail: { name: "textarea-name", value: newValue },
-      }),
-    );
+    if (el) {
+      fireEvent(
+        el,
+        new CustomEvent("_change", {
+          detail: { name: "textarea-name", value: newValue },
+        }),
+      );
+    }
 
     expect(onChange).toBeCalled();
   });

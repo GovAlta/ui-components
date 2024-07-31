@@ -7,13 +7,11 @@ import {
 } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
 
-export type GoAContainerWidth = "full" | "content";
-
 interface WCProps extends Margins {
   type?: GoABContainerType;
   accent?: GoABContainerAccent;
   padding?: GoABContainerPadding;
-  width?: GoAContainerWidth;
+  width?: GoABContainerWidth;
   maxwidth?: string;
 }
 
@@ -34,7 +32,7 @@ export interface GoABContainerProps extends Margins {
   padding?: GoABContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
-  width?: GoAContainerWidth;
+  width?: GoABContainerWidth;
   maxWidth?: string;
   testId?: string;
 }

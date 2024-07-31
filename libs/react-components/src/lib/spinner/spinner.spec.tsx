@@ -1,8 +1,9 @@
 import { render } from "@testing-library/react";
-import GoABSpinner, { SpinnerSize } from "./spinner";
+import GoABSpinner from "./spinner";
+import { GoABSpinnerSize } from "@abgov/ui-components-common";
 
 describe("Spinner", () => {
-  (["small", "medium", "large", "xlarge"] as const).forEach((size: SpinnerSize) => {
+  (["small", "medium", "large", "xlarge"] as const).forEach((size: GoABSpinnerSize) => {
     it(`renders the ${size} spinner`, async () => {
       render(
         <GoABSpinner
