@@ -1,4 +1,5 @@
-import { Margins } from "../../common/styling";
+import { Margins } from "@abgov/ui-components-common";
+
 interface RadioItemProps extends Margins {
   name?: string;
   value?: string;

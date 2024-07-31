@@ -60,7 +60,6 @@
 
   // Functions
 
-  // FIXME: refactor this to use the parent/child event communication
   async function attachSortEventHandling() {
     await tick();
     const contentSlot = _rootEl?.querySelector("slot") as HTMLSlotElement;
@@ -71,12 +70,12 @@
 
     headings?.forEach((heading) => {
       heading.addEventListener("click", () => {
-        const sortBy = heading.getAttribute("name") || heading.name;
+        const sortBy = heading.getAttribute("name");
         let sortDir: number = 0;
 
         // relay state to all children
         headings.forEach((child) => {
-          if ((child.getAttribute("name") || child.name) === sortBy) {
+          if (child.getAttribute("name") === sortBy) {
             // @ts-expect-error
             const direction = child["direction"] as GoATableSortDirection;
             // starting direction is asc

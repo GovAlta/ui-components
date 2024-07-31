@@ -3,6 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 import { fireEvent } from "@testing-library/dom";
 
 import { GoABRadioGroup, GoABRadioItem } from "./radio-group";
+import { GoABRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 
 type MockData = {
   title: string;
@@ -17,7 +18,7 @@ type MockData = {
   radios: { text: string; value: string; description?: string | React.ReactNode }[];
 };
 
-const noop = (name: string, value: string) => {
+const noop = (detail: GoABRadioGroupOnChangeDetail) => {
   /* do nothing */
 };
 
@@ -163,7 +164,7 @@ describe("RadioGroup", () => {
           name="fruits"
           disabled={data.disabled}
           value={data.value}
-          onChange={(name, newValue) => onChange(name, newValue)}
+          onChange={(event: GoABRadioGroupOnChangeDetail) => onChange(event)}
         >
           {data.radios.map((radio) => (
             <GoABRadioItem

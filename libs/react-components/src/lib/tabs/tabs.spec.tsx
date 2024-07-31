@@ -5,7 +5,7 @@ import GoABTabs from "./tabs";
 describe("Tabs", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoABTabs>
+      <GoABTabs initialTab={1} testId={'foo'}>
         <GoABTab heading="Profile">
           <p>
             <b>Profile:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
