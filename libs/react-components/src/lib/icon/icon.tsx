@@ -37,6 +37,11 @@ export interface GoABIconProps extends Margins {
   type: GoABIconType;
   size?: GoABIconSize;
   theme?: GoABIconTheme;
+  inverted?: string;
+  fillColor?: string;
+  opacity?: number;
+  title?: string;
+  ariaLabel?: string;
   testId?: string;
 }
 

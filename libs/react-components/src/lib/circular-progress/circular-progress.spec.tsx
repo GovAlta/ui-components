@@ -1,6 +1,7 @@
 import { render, waitFor } from "@testing-library/react";
 
-import { GoABCircularProgress, CircularProgressVariant } from "./circular-progress";
+import { GoABCircularProgress } from "./circular-progress";
+import { GoABCircularProgressVariant } from "@abgov/ui-components-common";
 
 describe("CircularProgress", () => {
   it("does not render anything when not visible", async () => {
@@ -16,7 +17,7 @@ describe("CircularProgress", () => {
     expect(el?.innerHTML).toBeFalsy();
   });
 
-  (["fullscreen", "inline"] as const).forEach((variant: CircularProgressVariant) => {
+  (["fullscreen", "inline"] as const).forEach((variant: GoABCircularProgressVariant) => {
     [-1, 50].forEach((progress: number) => {
       it(`renders the ${variant} variant`, async () => {
         const { baseElement } = render(

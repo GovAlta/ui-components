@@ -19,7 +19,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 })
 export class GoABPages {
   @Input() current?: number;
-  @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;

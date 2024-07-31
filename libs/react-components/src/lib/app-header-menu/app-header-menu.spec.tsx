@@ -1,5 +1,4 @@
 import { render } from "@testing-library/react";
-import { GoAIconType } from "../icon/icon";
 
 import GoABAppHeaderMenu from "./app-header-menu";
 
@@ -9,7 +8,7 @@ describe("AppHeaderMenu", () => {
     const el = baseElement.querySelector("goa-app-header-menu");
 
     expect(el).toBeTruthy();
-    expect(el.getAttribute("heading")).toBe("Some label");
+    expect(el?.getAttribute("heading")).toBe("Some label");
   });
 
   it("should render children", () => {
@@ -28,7 +27,7 @@ describe("AppHeaderMenu", () => {
 
   it("should set the props correctly", () => {
     const { baseElement } = render(
-      <GoAAppHeaderMenu heading="Some label" leadingIcon="search" testId="foo" />,
+      <GoABAppHeaderMenu heading="Some label" leadingIcon="search" testId="foo" />,
     );
     const el = baseElement.querySelector("goa-app-header-menu");
     expect(el).toBeTruthy();

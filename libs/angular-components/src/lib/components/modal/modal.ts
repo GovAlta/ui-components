@@ -1,19 +1,30 @@
 import { GoABModalCalloutVariant, GoABModalTransition } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, TemplateRef } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-modal",
+  imports: [NgTemplateOutlet],
   template: `
     <goa-modal
-      [calloutvariant]="calloutVariant"
-      [open]="open"
-      [maxwidth]="maxWidth"
-      [closable]="closable"
-      [transition]="transition"
+      [attr.calloutvariant]="calloutVariant"
+      [attr.open]="open"
+      [attr.maxwidth]="maxWidth"
+      [attr.data-testid]="testId"
+      [attr.role]="role"
+      [attr.closable]="closable"
+      [attr.transition]="transition"
+      [attr.heading]="getHeadingAsString()"
       (_close)="_onClose()"
     >
       <ng-content></ng-content>
+      <div slot="heading">
+        <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+      </div>
+      <div slot="actions">
+        <ng-container [ngTemplateOutlet]="actions"></ng-container>
+      </div>
     </goa-modal>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -26,9 +37,19 @@ export class GoABModal {
   @Input() transition?: GoABModalTransition;
   @Input() testId?: string;
   @Input() role?: string;
+  @Input() heading!: string | TemplateRef<any>;
+  @Input() actions!: TemplateRef<any>;
 
   @Output() onClose = new EventEmitter();
 
+  getHeadingAsString(): string {
+    return this.heading instanceof TemplateRef ? "" : this.heading;
+  }
+
+  getHeadingAsTemplate(): TemplateRef<any> | null {
+    if (!this.heading) return null;
+    return this.heading instanceof TemplateRef ? this.heading : null;
+  }
   _onClose() {
     this.onClose.emit();
   }

@@ -1,4 +1,3 @@
-import { NgForOf } from "@angular/common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({

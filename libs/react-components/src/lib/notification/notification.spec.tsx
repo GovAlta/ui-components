@@ -1,12 +1,13 @@
 import { render } from "@testing-library/react";
-import GoABNotification, { NotificationType } from "./notification";
+import GoABNotification  from "./notification";
 import { fireEvent } from "@testing-library/dom";
 import { describe, it, expect, vi } from "vitest";
+import { GoABNotificationType } from "@abgov/ui-components-common";
 
 describe("Notification Banner", () => {
   describe("type", () => {
     (["important", "information", "emergency", "event"] as const).forEach(
-      (type: NotificationType) => {
+      (type: GoABNotificationType) => {
         it(`should render ${type} notification`, async function () {
           render(
             <GoABNotification type={type}>

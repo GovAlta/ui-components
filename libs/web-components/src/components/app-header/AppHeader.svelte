@@ -157,6 +157,7 @@
       return children.length > 0;
     } else {
       // testing
+      // @ts-expect-error
       return [..._slotParentEl.querySelectorAll("a")].length > 0;
     }
   }

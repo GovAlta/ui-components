@@ -1,8 +1,9 @@
 import { render } from "@testing-library/react";
-import GoABMicrositeHeader, { ServiceLevel } from "./microsite-header";
+import GoABMicrositeHeader from "./microsite-header";
+import { GoABServiceLevel } from "@abgov/ui-components-common";
 
 describe("Header", () => {
-  (["alpha", "beta", "live"] as const).forEach((mode: ServiceLevel) => {
+  (["alpha", "beta", "live"] as const).forEach((mode: GoABServiceLevel) => {
     it("should show the all the flairs", async function () {
       render(<GoABMicrositeHeader type={mode} />);
       const el = document.querySelector("goa-microsite-header");
