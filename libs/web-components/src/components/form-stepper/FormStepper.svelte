@@ -13,7 +13,7 @@
   // ======
 
   // this is a 1-based index, -1 is the unset value
-  export let step: number = -1; 
+  export let step: number = -1;
   export let testid: string = "";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -57,10 +57,10 @@
   // visible with an unwanted offset
   let _showProgressBars = false;
 
-  // setTimeout id to allow only one of the child `mounted` events to call on the 
+  // setTimeout id to allow only one of the child `mounted` events to call on the
   // parent setup steps
   let _bindTimeoutId: any;
-  
+
   // ========
   // Reactive
   // ========
@@ -69,7 +69,7 @@
   $: _maxAllowedStep = Math.max(_currentStep || 1, _maxAllowedStep || 1);
 
   // update components when step changed externally
-  $: if (step > 0) {
+  $: if (step > 0 && _currentStep !== step) {
     changeStep(step);
   }
 
@@ -79,9 +79,9 @@
   }
 
   $: step = +step;
-  
-  let resizeObserver: ResizeObserver; 
-  
+
+  let resizeObserver: ResizeObserver;
+
   // =====
   // Hooks
   // =====
@@ -90,7 +90,7 @@
     await tick();  // needed to ensure Angular's delay, when rendering within a route, doesn't break things
 
     _stepType = +step === -1 ? "free" : "constrained";
-  
+
     getChildren();
 
     // observer required to allow the parent to relay resize info down to the children, as the
@@ -129,8 +129,9 @@
         addClickListener();
         addOrientationChangeListener();
         _currentStep = step < 1 ? 1 : step;
+        dispatchCurrentStep(); // so app can display first step's content
       });
-  
+
     });
   }
 
@@ -234,7 +235,7 @@
     _stepHeight = el?.offsetHeight ?? 0;
     _progressHeight = _gridEl?.offsetHeight;
 
-    // ensure progress bar is not shows until initial calcs are complete, timeout needed to 
+    // ensure progress bar is not shows until initial calcs are complete, timeout needed to
     // prevent flickering of the scrollbar
     setTimeout(() => _showProgressBars = true, 100);
   }
@@ -263,6 +264,7 @@
     `}
     role="list"
     bind:this={_rootEl}
+    data-testid={testid}
   >
     {#if _steps.length > 0 && _showProgressBars}
       <progress class="horizontal" value={_progress} max="100"></progress>
