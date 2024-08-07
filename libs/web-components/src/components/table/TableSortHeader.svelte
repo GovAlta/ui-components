@@ -55,7 +55,8 @@
     padding: 0 1rem;
     justify-content: var(--header-text-align, flex-start);
     gap: 0.25rem;
-    align-items: center;
+    align-items: flex-end;
+    padding-bottom: 0.25rem;
   }
 
   /* User set classes */
@@ -90,5 +91,6 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 0.25rem;
   }
 </style>
