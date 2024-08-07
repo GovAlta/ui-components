@@ -244,6 +244,7 @@
       role="textbox"
       aria-label={arialabel}
       aria-labelledby={arialabelledby}
+      aria-invalid={isError ? "true" : "false"}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
       on:focus={onFocus}
