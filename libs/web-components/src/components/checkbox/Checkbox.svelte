@@ -189,16 +189,7 @@
     flex: 0 0 auto;
   }
   .container:hover {
-    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
-  }
-  .container:focus-visible,
-  .container:active {
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
-    outline: none;
-  }
-  .container:focus-within:has(:focus-visible) {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }
   .container svg {
     fill: var(--goa-color-greyscale-white);
@@ -215,17 +206,19 @@
 
   /* Error Container */
   .error .container,
-  .error .container:hover,
-  .error .container:focus-within {
+  .error .container:hover {
+    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
     background-color: var(--goa-color-greyscale-white);
-    border: var(--goa-border-width-s) solid var(--goa-color-emergency-default);
-    box-shadow: inset 0 0 0 1px var(--goa-color-emergency-default);
-  }
-  .error .container:focus-within {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    box-shadow: none;
   }
   .error .container svg {
-    fill: var(--goa-color-emergency-default);
+    fill: var(--goa-color-interactive-error);
+  }
+
+  /* Focus Container */
+  .container:has(:focus-visible) {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
 
   /* Disabled */
@@ -233,22 +226,19 @@
     cursor: default;
   }
   .disabled .text {
-    opacity: 40%;
+    color: var(--goa-color-greyscale-500);
   }
   /* override base settings */
-  .disabled .container,
-  .disabled .container:hover {
+  .disabled:not(.error) .container {
     border: var(--goa-border-width-s) solid var(--goa-color-greyscale-400);
     box-shadow: none;
-    opacity: 40%;
   }
-  .disabled .container.selected,
-  .disabled .container.selected:hover {
+  .disabled:not(.error) .container.selected {
     border: none;
-    background-color: var(--goa-color-interactive-default);
+    background-color: var(--goa-color-interactive-disabled);
   }
   .disabled.error .container.selected {
-    border: var(--goa-border-width-s) solid var(--goa-color-emergency-default);
-    box-shadow: inset 0 0 0 1px var(--goa-color-emergency-default);
+    border: var(--goa-border-width-s) solid var(--goa-color-interactive-error);
+    box-shadow: inset 0 0 0 1px var(--goa-color-interactive-error);
   }
 </style>
