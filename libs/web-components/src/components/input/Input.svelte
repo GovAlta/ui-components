@@ -79,6 +79,13 @@
   $: isReadonly = toBoolean(readonly);
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
+  $: {
+    const newIsError = toBoolean(error);
+    if (newIsError !== isError) {
+      isError = newIsError;
+      dispatch("errorChange", { isError });
+    }
+  }
 
   // TODO: determine if this and the next reactive statement need to be reactive, as they are both
   // things that should only be run once
