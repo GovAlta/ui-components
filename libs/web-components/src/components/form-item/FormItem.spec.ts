@@ -1,6 +1,6 @@
-import { render, cleanup } from "@testing-library/svelte";
+import { render, fireEvent, cleanup, waitFor } from "@testing-library/svelte";
 import GoAFormItem from "./FormItem.svelte";
-import { it, describe } from "vitest";
+import { it, describe, expect, afterEach, vi } from "vitest";
 
 afterEach(cleanup);
 
@@ -171,4 +171,26 @@ describe("GoA FormItem", () => {
       expect(formitem).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
+
+  it("should have both label and helper text accessible without overriding", async () => {
+    const result = render(GoAFormItem, {
+      testid: "formitem-test",
+      label: "Test Label",
+      helptext: "Helper Text",
+    });
+    const formItem = await result.findByTestId("formitem-test");
+
+    const label = formItem.querySelector(".label");
+    expect(label).toBeTruthy();
+    expect(label?.textContent).toContain("Test Label");
+
+    const helperText = formItem.querySelector(".help-msg");
+    expect(helperText).toBeTruthy();
+    expect(helperText?.textContent).toContain("Helper Text");
+
+    // Ensure both label and helper text are present and distinct
+    expect(formItem.textContent).toContain("Test Label");
+    expect(formItem.textContent).toContain("Helper Text");
+  });
+
 });
