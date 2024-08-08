@@ -1,4 +1,9 @@
-import { GoABTextAreaCountBy, Margins } from "@abgov/ui-components-common";
+import {
+  GoABTextAreaCountBy,
+  GoABTextAreaOnChangeDetail,
+  GoABTextAreaOnKeyPressDetail,
+  Margins,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
@@ -40,8 +45,8 @@ export interface GoABTextAreaProps extends Margins {
   countBy?: GoABTextAreaCountBy;
   maxCount?: number;
 
-  onChange: (name: string, value: string) => void;
-  onKeyPress?: (name: string, value: string, key: string) => void;
+  onChange: (event: GoABTextAreaOnChangeDetail) => void;
+  onKeyPress?: (event: GoABTextAreaOnKeyPressDetail) => void;
 }
 
 export function GoABTextarea({
@@ -71,9 +76,10 @@ export function GoABTextarea({
       return;
     }
     const current = el.current;
-    const listener: EventListener = (e: unknown) => {
-      const { name, value } = (e as CustomEvent).detail;
-      onChange(name, value);
+    const listener: EventListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoABTextAreaOnChangeDetail>).detail;
+
+      onChange(detail);
     };
 
     current.addEventListener("_change", listener);
@@ -88,8 +94,8 @@ export function GoABTextarea({
     }
     const current = el.current;
     const keypressListener = (e: unknown) => {
-      const { name, value, key } = (e as CustomEvent).detail;
-      onKeyPress?.(name, value, key);
+      const detail = (e as CustomEvent<GoABTextAreaOnKeyPressDetail>).detail;
+      onKeyPress?.(detail);
     };
 
     current.addEventListener("_keyPress", keypressListener);
