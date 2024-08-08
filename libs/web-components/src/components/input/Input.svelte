@@ -73,24 +73,13 @@
   let _debounceId: any;
   let inputEl: HTMLElement;
   let _rootEl: HTMLElement;
+  let isError = toBoolean(error);
+  let prevError = isError;
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
-  //$: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
-
-  // $: {
-  //   const newIsError = toBoolean(error);
-  //   if (newIsError !== isError) {
-  //     isError = newIsError;
-  //     dispatch("errorChange", { isError });
-  //   }
-  // }
-
-  let isError = toBoolean(error);
-  let prevError = isError;
-
   $: {
     isError = toBoolean(error);
     if (isError !== prevError) {
