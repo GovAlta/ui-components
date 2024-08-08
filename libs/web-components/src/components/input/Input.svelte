@@ -150,6 +150,16 @@
     );
   }
 
+  function dispatch(name: string, detail: any) {
+    _rootEl?.dispatchEvent(
+      new CustomEvent(name, {
+        bubbles: true,
+        composed: true,
+        detail,
+      }),
+    );
+  }
+
   onMount(async () => {
     await tick();
 
