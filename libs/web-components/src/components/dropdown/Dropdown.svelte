@@ -57,6 +57,9 @@
 
   let _bindTimeoutId: any;
 
+  let _mountStatus: "active" | "ready" = "ready";
+  let _mountTimeoutId: any = undefined;
+
   //
   // Reactive
   //
@@ -95,8 +98,35 @@
 
   function getChildren() {
     _rootEl?.addEventListener("dropdown-item:mounted", (e: Event) => {
-      const ce = e as CustomEvent<Option>;
-      _options = [..._options, ce.detail];
+      const detail = (e as CustomEvent<Option>).detail;
+
+      if (_mountStatus === "ready") {
+        if (detail.mountType === "reset") {
+          _options = [];
+        }
+        _mountStatus = "active";
+      }
+
+      switch (detail.mountType) {
+        case "append":
+          _options = [..._options, detail];
+          break;
+        case "prepend":
+          _options = [detail, ..._options];
+          break;
+        case "reset":
+          _options = [..._options, detail];
+          break;
+      }
+
+      // reset the mountStatus back to `ready` after all new children are mounted
+      if (_mountTimeoutId) {
+        clearTimeout(_mountTimeoutId);
+      }
+      _mountTimeoutId = setTimeout(() => {
+        _mountStatus = "ready";
+        _mountTimeoutId = undefined;
+      }, 10);
 
       // ensure bind only runs once for all children
       if (_bindTimeoutId) {
@@ -126,7 +156,7 @@
   }
 
   function setSelected() {
-    _selectedOption = _options.find(o => o.value == _values[0])
+    _selectedOption = _options.find((o) => o.value == _values[0]);
   }
 
   // parse and convert values to strings to avoid later type comparison issues
