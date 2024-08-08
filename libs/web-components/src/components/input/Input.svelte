@@ -79,6 +79,7 @@
   $: isReadonly = toBoolean(readonly);
   $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
+
   $: {
     const newIsError = toBoolean(error);
     if (newIsError !== isError) {
