@@ -77,14 +77,25 @@
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
-  $: isError = toBoolean(error);
+  //$: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
 
+  // $: {
+  //   const newIsError = toBoolean(error);
+  //   if (newIsError !== isError) {
+  //     isError = newIsError;
+  //     dispatch("errorChange", { isError });
+  //   }
+  // }
+
+  let isError = toBoolean(error);
+  let prevError = isError;
+
   $: {
-    const newIsError = toBoolean(error);
-    if (newIsError !== isError) {
-      isError = newIsError;
+    isError = toBoolean(error);
+    if (isError !== prevError) {
       dispatch("errorChange", { isError });
+      prevError = isError;
     }
   }
 
