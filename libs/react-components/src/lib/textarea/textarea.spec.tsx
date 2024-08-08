@@ -1,6 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import GoABTextArea from "./textarea";
 import { describe, it, expect, vi } from "vitest";
+import { GoABTextAreaOnChangeDetail } from "@abgov/ui-components-common";
 
 describe("TextArea", () => {
   it("renders the text area", async () => {
@@ -53,9 +54,9 @@ describe("TextArea", () => {
         rows={10}
         placeholder="textarea-placeholder"
         disabled={true}
-        onChange={(name: string, value: string) => {
-          expect(name).toBe("textarea-name");
-          expect(value).toBe(newValue);
+        onChange={(event: GoABTextAreaOnChangeDetail) => {
+          expect(event.name).toBe("textarea-name");
+          expect(event.value).toBe(newValue);
           onChange();
         }}
       />,
