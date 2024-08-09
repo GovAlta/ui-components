@@ -73,12 +73,20 @@
   let _debounceId: any;
   let inputEl: HTMLElement;
   let _rootEl: HTMLElement;
+  let isError = toBoolean(error);
+  let prevError = isError;
 
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
-  $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
+  $: {
+    isError = toBoolean(error);
+    if (isError !== prevError) {
+      dispatch("errorChange", { isError });
+      prevError = isError;
+    }
+  }
 
   // TODO: determine if this and the next reactive statement need to be reactive, as they are both
   // things that should only be run once
@@ -147,6 +155,16 @@
     // @ts-ignore
     this.dispatchEvent(
       new CustomEvent("_trailingIconClick", { composed: true }),
+    );
+  }
+
+  function dispatch(name: string, detail: any) {
+    _rootEl?.dispatchEvent(
+      new CustomEvent(name, {
+        bubbles: true,
+        composed: true,
+        detail,
+      }),
     );
   }
 
@@ -244,6 +262,7 @@
       role="textbox"
       aria-label={arialabel}
       aria-labelledby={arialabelledby}
+      aria-invalid={isError ? "true" : "false"}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
       on:focus={onFocus}
