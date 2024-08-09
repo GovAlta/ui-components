@@ -5,5 +5,6 @@
   import "./assets/css/fonts.css";
   import "./assets/css/variables.css";
   import "./assets/css/components.css";
+  import "./assets/css/dark-mode.css";
   import "@abgov/design-tokens/dist/tokens.css";
 </script>

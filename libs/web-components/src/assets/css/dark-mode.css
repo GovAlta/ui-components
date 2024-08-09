@@ -1,0 +1,41 @@
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Text */
+    --goa-color-text-default: #ffffff !important;
+    --goa-color-text-secondary: #f1f1f1 !important;
+
+    /* Interactive */
+
+    /* Warnings */
+    --goa-color-warning-default: #bf8d23 !important;
+
+    /* Greyscale */
+    --goa-color-greyscale-white: #333333 !important;
+    --goa-color-greyscale-100: #666666 !important;
+    --goa-color-greyscale-200: #858585 !important;
+    --goa-color-greyscale-400: #949494 !important;
+    --goa-color-greyscale-500: #adadad !important;
+    --goa-color-greyscale-600: #dcdcdc !important;
+    --goa-color-greyscale-700: #f1f1f1 !important;
+    --goa-color-greyscale-black: #ffffff !important;
+  }
+
+  body {
+    background-color: #333333 !important;
+  }
+
+  body,
+  input,
+  textarea,
+  button {
+    color: #ffffff;
+  }
+
+  goa-app-header .container {
+    background-color: #ffffff !important;
+  }
+
+  goa-microsite-header .service-type {
+    color: #333333 !important;
+  }
+}
