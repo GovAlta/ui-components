@@ -193,4 +193,20 @@ describe("GoA FormItem", () => {
     expect(formItem.textContent).toContain("Helper Text");
   });
 
+  it("should display error text when provided", async () => {
+    const result = render(GoAFormItem, {
+      testid: "formitem-test",
+      label: "Test Label",
+      error: "Error Message",
+    });
+    const formItem = await result.findByTestId("formitem-test");
+
+    const errorText = formItem.querySelector(".error-msg");
+    expect(errorText).toBeTruthy();
+    expect(errorText?.textContent).toContain("Error Message");
+
+    // Ensure error text is present in the component
+    expect(formItem.textContent).toContain("Error Message");
+  });
+
 });
