@@ -1,4 +1,4 @@
-import { Margins } from "../../common/styling";
+import { Margins } from "@abgov/ui-components-common";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -10,11 +10,11 @@ declare global {
   }
 }
 
-export interface GoADividerProps extends Margins {
+export interface GoABDividerProps extends Margins {
   testId?: string;
 }
 
-export function GoADivider(props: GoADividerProps) {
+export function GoABDivider(props: GoABDividerProps) {
   return (
     <goa-divider
       mt={props.mt}
@@ -26,4 +26,4 @@ export function GoADivider(props: GoADividerProps) {
   );
 }
 
-export default GoADivider;
+export default GoABDivider;

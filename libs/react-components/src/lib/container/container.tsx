@@ -1,22 +1,17 @@
+import {
+  GoABContainerAccent,
+  GoABContainerPadding,
+  GoABContainerType,
+  GoABContainerWidth,
+  Margins,
+} from "@abgov/ui-components-common";
 import { ReactNode } from "react";
-import { Margins } from "../../common/styling";
-
-export type GoAContainerType =
-  | "interactive"
-  | "non-interactive"
-  | "info"
-  | "error"
-  | "success"
-  | "important";
-export type GoAContainerAccent = "thick" | "thin" | "filled";
-export type GoAContainerPadding = "relaxed" | "compact";
-export type GoAContainerWidth = "full" | "content";
 
 interface WCProps extends Margins {
-  type?: GoAContainerType;
-  accent?: GoAContainerAccent;
-  padding?: GoAContainerPadding;
-  width?: GoAContainerWidth;
+  type?: GoABContainerType;
+  accent?: GoABContainerAccent;
+  padding?: GoABContainerPadding;
+  width?: GoABContainerWidth;
   maxwidth?: string;
 }
 
@@ -29,20 +24,20 @@ declare global {
   }
 }
 
-export interface GoAContainerProps extends Margins {
-  accent?: GoAContainerAccent;
-  type?: GoAContainerType;
+export interface GoABContainerProps extends Margins {
+  accent?: GoABContainerAccent;
+  type?: GoABContainerType;
   heading?: ReactNode;
   title?: ReactNode;
-  padding?: GoAContainerPadding;
+  padding?: GoABContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
-  width?: GoAContainerWidth;
+  width?: GoABContainerWidth;
   maxWidth?: string;
   testId?: string;
 }
 
-export function GoAContainer({
+export function GoABContainer({
   accent,
   heading,
   title,
@@ -57,7 +52,7 @@ export function GoAContainer({
   mb,
   ml,
   testId,
-}: GoAContainerProps): JSX.Element {
+}: GoABContainerProps): JSX.Element {
   const headingContent = heading || title;
   return (
     <goa-container
@@ -79,4 +74,4 @@ export function GoAContainer({
   );
 }
 
-export default GoAContainer;
+export default GoABContainer;

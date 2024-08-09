@@ -15,19 +15,19 @@ declare global {
   }
 }
 
-export interface GoATabsProps {
+export interface GoABTabsProps {
   initialTab?: number;
   children?: React.ReactNode;
   testId?: string;
   onChange?: (tab: number) => void;
 }
 
-export function GoATabs({
+export function GoABTabs({
   initialTab,
   children,
   testId,
   onChange,
-}: GoATabsProps): JSX.Element {
+}: GoABTabsProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -51,4 +51,4 @@ export function GoATabs({
   );
 }
 
-export default GoATabs;
+export default GoABTabs;

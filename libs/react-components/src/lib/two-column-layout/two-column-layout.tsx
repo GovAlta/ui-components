@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-export interface GoATwoColumnLayoutProps {
+export interface GoABTwoColumnLayoutProps {
   navColumnWidth?: string;
   maxContentWidth?: string;
   header: ReactNode;
@@ -23,7 +23,7 @@ export interface GoATwoColumnLayoutProps {
   children: ReactNode;
 }
 
-export function GoATwoColumnLayout(props: GoATwoColumnLayoutProps) {
+export function GoABTwoColumnLayout(props: GoABTwoColumnLayoutProps) {
   return (
     <goa-two-column-layout
       navcolumnwidth={props.navColumnWidth}
@@ -37,4 +37,4 @@ export function GoATwoColumnLayout(props: GoATwoColumnLayoutProps) {
   );
 }
 
-export default GoATwoColumnLayout;
+export default GoABTwoColumnLayout;

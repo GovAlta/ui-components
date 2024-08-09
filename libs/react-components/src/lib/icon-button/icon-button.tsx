@@ -1,17 +1,16 @@
+import {
+  GoABIconButtonVariant,
+  GoABIconSize,
+  GoABIconType,
+  Margins,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
-import { GoAIconSize, GoAIconType } from "../icon/icon";
-
-export type GoAIconButtonVariant = "color" | "nocolor" | "light" | "dark" | "destructive";
-
-// legacy naming
-export type IconButtonVariant = GoAIconButtonVariant;
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
-  icon: GoAIconType;
-  size?: GoAIconSize;
-  variant?: GoAIconButtonVariant;
+  icon: GoABIconType;
+  size?: GoABIconSize;
+  variant?: GoABIconButtonVariant;
   title?: string;
   disabled?: boolean;
   arialabel?: string;
@@ -26,10 +25,10 @@ declare global {
   }
 }
 
-export interface GoAIconButtonProps extends Margins {
-  icon: GoAIconType;
-  size?: GoAIconSize;
-  variant?: GoAIconButtonVariant;
+export interface GoABIconButtonProps extends Margins {
+  icon: GoABIconType;
+  size?: GoABIconSize;
+  variant?: GoABIconButtonVariant;
   title?: string;
   disabled?: boolean;
   children?: React.ReactNode;
@@ -38,7 +37,7 @@ export interface GoAIconButtonProps extends Margins {
   ariaLabel?: string;
 }
 
-export function GoAIconButton({
+export function GoABIconButton({
   icon,
   disabled,
   variant = "color",
@@ -52,7 +51,7 @@ export function GoAIconButton({
   mr,
   mb,
   ml,
-}: GoAIconButtonProps): JSX.Element {
+}: GoABIconButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!ref.current) {

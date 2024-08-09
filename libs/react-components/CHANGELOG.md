@@ -58,7 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- onClick events inside a GoATable will now fire correctly
+- onClick events inside a GoABTable will now fire correctly
 
 ## [4.12.0] - 2023-07-17
 
@@ -70,20 +70,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Added children properties for Accordion and Popover components
-- Can no longer cause a page crash entering an invalid number with the `GoAInputDate` component
+- Can no longer cause a page crash entering an invalid number with the `GoABInputDate` component
 
 ## [4.11.0] - 2023-06-19
 
-- Added a new wrapper for `GoATableSortHeader`
-- Added an `ariaLive` property for `GoANotification`
-- Added an `ariaLabel` property for `GoABadge`
-- New component added, `GoAAppHeaderMenu` for use inside `GoAAppHeader`
-- New `position` property added to `GoAPopover`
-- Added `open` property to `GoADetails`
-- Added `maxLength` property to `GoAInput`
-- Added new `GoAFormStepStatusType` for `GoAFormStep` component, to be used to remove eslint messages
-- Added new `GoASideMenuGroup` and `GoASideMenu` component
-- Fixed an issue with the clear button on `GoAInputDate` - it no longer returns a value
+- Added a new wrapper for `GoABTableSortHeader`
+- Added an `ariaLive` property for `GoABNotification`
+- Added an `ariaLabel` property for `GoABBadge`
+- New component added, `GoABAppHeaderMenu` for use inside `GoABAppHeader`
+- New `position` property added to `GoABPopover`
+- Added `open` property to `GoABDetails`
+- Added `maxLength` property to `GoABInput`
+- Added new `GoABFormStepStatusType` for `GoABFormStep` component, to be used to remove eslint messages
+- Added new `GoABSideMenuGroup` and `GoABSideMenu` component
+- Fixed an issue with the clear button on `GoABInputDate` - it no longer returns a value
 
 ## [4.10.0] - 2023-04-21
 
@@ -110,8 +110,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New component [Details](https://ui-components.alberta.ca/?path=/docs/components-details--basic)
 - New component [Accordion](https://ui-components.alberta.ca/?path=/docs/components-accordion--basic)
-- New feature for `GoATable`, [Sortable](https://ui-components.alberta.ca/?path=/docs/components-table--sortable)
-- New property for `GoANotificationBanner`, [onDismiss](https://ui-components.alberta.ca/?path=/docs/components-notification-banner--types)
+- New feature for `GoABTable`, [Sortable](https://ui-components.alberta.ca/?path=/docs/components-table--sortable)
+- New property for `GoABNotificationBanner`, [onDismiss](https://ui-components.alberta.ca/?path=/docs/components-notification-banner--types)
 - New property has been added to all components, `testid` is available for supporting automated testing
 
 ## [4.5.0] - 2023-01-31
@@ -130,16 +130,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `GoATable` has a new `relaxed` [variant](https://ui-components.alberta.ca/?path=/docs/components-table--relaxed-variant)
+- `GoABTable` has a new `relaxed` [variant](https://ui-components.alberta.ca/?path=/docs/components-table--relaxed-variant)
 
 ## [4.3.0] - 2023-01-04
 
 ### Added
 
-- `ariaLabel` property added for `GoACheckbox` and `GoARadioGroup` components
-- New `GoAHeroBanner` property, [minHeight](https://ui-components.alberta.ca/?path=/docs/components-hero-banner--min-height)
+- `ariaLabel` property added for `GoABCheckbox` and `GoABRadioGroup` components
+- New `GoABHeroBanner` property, [minHeight](https://ui-components.alberta.ca/?path=/docs/components-hero-banner--min-height)
 - New component [Table](https://ui-components.alberta.ca/?path=/docs/components-table--basic)
-- New `GoADropdown` property, [native](https://ui-components.alberta.ca/?path=/docs/components-dropdown--native)
+- New `GoABDropdown` property, [native](https://ui-components.alberta.ca/?path=/docs/components-dropdown--native)
 
 ### Changed
 

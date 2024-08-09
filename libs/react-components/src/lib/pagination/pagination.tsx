@@ -1,5 +1,5 @@
+import { Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | undefined>;
@@ -19,7 +19,7 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoAPaginationProps extends Margins {
+export interface GoABPaginationProps extends Margins {
   itemCount: number;
   perPageCount?: number;
   pageNumber: number;
@@ -29,9 +29,9 @@ export interface GoAPaginationProps extends Margins {
 }
 
 // legacy
-export type PaginationProps = GoAPaginationProps;
+export type PaginationProps = GoABPaginationProps;
 
-export function GoAPagination({onChange, ...props}: GoAPaginationProps) {
+export function GoABPagination({ onChange, ...props }: GoABPaginationProps) {
   const ref = useRef<HTMLElement>();
 
   useEffect(() => {
@@ -66,4 +66,4 @@ export function GoAPagination({onChange, ...props}: GoAPaginationProps) {
   );
 }
 
-export default GoAPagination;
+export default GoABPagination;

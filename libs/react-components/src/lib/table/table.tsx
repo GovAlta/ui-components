@@ -1,16 +1,11 @@
+import { GoABTableVariant, Margins } from "@abgov/ui-components-common";
 import { ReactNode, useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
-
-export type GoATableVariant = "normal" | "relaxed";
-
-// legacy naming
-export type TableVariant = GoATableVariant;
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | null>;
   width?: string;
   stickyheader?: boolean;
-  variant?: GoATableVariant;
+  variant?: GoABTableVariant;
 }
 
 declare global {
@@ -24,19 +19,19 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoATableProps extends Margins {
+export interface GoABTableProps extends Margins {
   width?: string;
   onSort?: (sortBy: string, sortDir: number) => void;
   // stickyHeader?: boolean; TODO: enable this later
-  variant?: GoATableVariant;
+  variant?: GoABTableVariant;
   testId?: string;
   children?: ReactNode;
 }
 
 // legacy name
-export type TableProps = GoATableProps;
+export type TableProps = GoABTableProps;
 
-export function GoATable({onSort, ...props}: GoATableProps) {
+export function GoABTable({ onSort, ...props }: GoABTableProps) {
   const ref = useRef<HTMLTableElement>(null);
   useEffect(() => {
     if (!ref.current) {
@@ -71,4 +66,4 @@ export function GoATable({onSort, ...props}: GoATableProps) {
   );
 }
 
-export default GoATable;
+export default GoABTable;

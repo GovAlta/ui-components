@@ -7,12 +7,12 @@ declare global {
   }
 }
 
-export interface GoACardGroupProps {
+export interface GoABCardGroupProps {
   children?: React.ReactNode;
 }
 
-export function GoACardGroup({ children }: GoACardGroupProps): JSX.Element {
+export function GoABCardGroup({ children }: GoABCardGroupProps): JSX.Element {
   return <goa-card-group>{children}</goa-card-group>;
 }
 
-export default GoACardGroup;
+export default GoABCardGroup;

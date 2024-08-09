@@ -19,7 +19,7 @@ declare global {
   }
 }
 
-export interface GoADropdownItemProps {
+export interface GoABDropdownItemProps {
   value: string;
   label?: string;
   filter?: string;
@@ -29,15 +29,21 @@ export interface GoADropdownItemProps {
   name?: string;
 }
 
-export function GoADropdownOption(props: GoADropdownItemProps) {
+export function GoABDropdownOption(props: GoABDropdownItemProps) {
   useEffect(() => {
-    console.warn("GoADropdownOption is deprecated. Please use GoADropdownItem");
+    console.warn("GoABDropdownOption is deprecated. Please use GoABDropdownItem");
   }, []);
 
-  return <GoADropdownItem {...props} />;
+  return <GoABDropdownItem {...props} />;
 }
 
-export function GoADropdownItem({ value, label, filter, name, testId }: GoADropdownItemProps) {
+export function GoABDropdownItem({
+  value,
+  label,
+  filter,
+  name,
+  testId,
+}: GoABDropdownItemProps) {
   return (
     <goa-dropdown-item
       data-testid={testId}

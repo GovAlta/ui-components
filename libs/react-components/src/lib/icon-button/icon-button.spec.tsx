@@ -1,10 +1,18 @@
 import { render } from "@testing-library/react";
-import { GoAIconButton, IconButtonVariant } from "./icon-button";
+import { GoABIconButton } from "./icon-button";
+import { GoABIconButtonVariant } from "@abgov/ui-components-common";
 
-describe("GoA IconButton", () => {
+describe("GoAB IconButton", () => {
   it("should render the properties", () => {
     const { container } = render(
-      <GoAIconButton icon="information" mt="s" mr="m" mb="l" ml="xl" ariaLabel="information button" />
+      <GoABIconButton
+        icon="information"
+        mt="s"
+        mr="m"
+        mb="l"
+        ml="xl"
+        ariaLabel="information button"
+      />,
     );
     const el = container.querySelector("goa-icon-button");
 
@@ -17,18 +25,18 @@ describe("GoA IconButton", () => {
   });
 
   describe("Variants", () => {
-    (["color", "nocolor", "light", "dark", "destructive"] as const).forEach(
-      (variant: IconButtonVariant) => {
+    (["color", "nocolor", "dark", "destructive"] as const).forEach(
+      (variant: GoABIconButtonVariant) => {
         it(`should render ${variant} variant`, async () => {
           const { container } = render(
-            <GoAIconButton variant={variant} icon="information" />
+            <GoABIconButton variant={variant} icon="information" />,
           );
 
           const el = container.querySelector("goa-icon-button");
           expect(el).toBeTruthy();
           expect(el?.getAttribute("variant")).toEqual(variant);
         });
-      }
+      },
     );
   });
 });

@@ -1,11 +1,11 @@
-export type GoAHeroBannerActionsType = {
+export type GoABHeroBannerActionsType = {
   children?: React.ReactNode;
 };
 
-export function GoAHeroBannerActions({
+export function GoABHeroBannerActions({
   children,
-}: GoAHeroBannerActionsType): JSX.Element {
+}: GoABHeroBannerActionsType): JSX.Element {
   return <div slot="actions">{children}</div>;
 }
 
-export default GoAHeroBannerActions;
+export default GoABHeroBannerActions;

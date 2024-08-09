@@ -1,4 +1,4 @@
-import { Margins } from "../../common/styling";
+import { Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   elevation?: number;
@@ -15,14 +15,14 @@ declare global {
   }
 }
 
-export interface GoACardProps extends Margins {
+export interface GoABCardProps extends Margins {
   elevation?: number;
   width?: string;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export function GoACard({
+export function GoABCard({
   elevation,
   width,
   mt,
@@ -31,7 +31,7 @@ export function GoACard({
   ml,
   testId,
   children,
-}: GoACardProps): JSX.Element {
+}: GoABCardProps): JSX.Element {
   return (
     <goa-card
       width={width}
@@ -47,4 +47,4 @@ export function GoACard({
   );
 }
 
-export default GoACard;
+export default GoABCard;

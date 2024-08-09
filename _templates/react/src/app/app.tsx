@@ -1,38 +1,43 @@
 import { Link, Outlet } from "react-router-dom";
-import { GoAAppFooter, GoAAppHeader, GoAMicrositeHeader, GoAOneColumnLayout, GoASideMenu, GoASideMenuGroup } from "@abgov/react-components";
+import {
+  GoABAppFooter,
+  GoABAppHeader,
+  GoABMicrositeHeader,
+  GoABOneColumnLayout,
+  GoABSideMenu,
+  GoABSideMenuGroup,
+} from "@abgov/react-components";
 import "@abgov/style";
 
 export function App() {
   return (
-    <GoAOneColumnLayout>
+    <GoABOneColumnLayout>
       <section slot="header">
-        <GoAMicrositeHeader type="alpha" version="UAT" />
-        <GoAAppHeader url="/" heading="Design System">
+        <GoABMicrositeHeader type="alpha" version="UAT" />
+        <GoABAppHeader url="/" heading="Design System">
           <a href="/login">Sign in</a>
-        </GoAAppHeader>
+        </GoABAppHeader>
       </section>
       <div style={{ display: "flex" }}>
         <section style={{ flex: "0 0 250px" }}>
-          <GoASideMenu>
-            <GoASideMenuGroup heading="Components">
+          <GoABSideMenu>
+            <GoABSideMenuGroup heading="Components">
               <Link to="/">Nothing here</Link>
 
               {/* Add links here */}
-
-            </GoASideMenuGroup>
+            </GoABSideMenuGroup>
 
             {/* Add links here */}
-
-          </GoASideMenu>
+          </GoABSideMenu>
         </section>
         <section>
           <Outlet />
         </section>
       </div>
       <section slot="footer">
-        <GoAAppFooter />
+        <GoABAppFooter />
       </section>
-    </GoAOneColumnLayout>
+    </GoABOneColumnLayout>
   );
 }
 

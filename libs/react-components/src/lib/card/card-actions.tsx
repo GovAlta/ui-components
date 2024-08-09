@@ -7,12 +7,12 @@ declare global {
   }
 }
 
-export interface GoACardActionsProps {
+export interface GoABCardActionsProps {
   children?: React.ReactNode;
 }
 
-export function GoACardActions({ children }: GoACardActionsProps): JSX.Element {
+export function GoABCardActions({ children }: GoABCardActionsProps): JSX.Element {
   return <goa-card-actions>{children}</goa-card-actions>;
 }
 
-export default GoACardActions;
+export default GoABCardActions;
