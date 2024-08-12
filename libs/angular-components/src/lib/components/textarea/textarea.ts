@@ -14,6 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       [attr.error]="error"
       [disabled]="disabled"
       [attr.width]="width"
+      [attr.maxwidth]="maxWidth"
       [attr.arialabel]="ariaLabel"
       [attr.countby]="countBy"
       [attr.maxcount]="maxCount"
@@ -48,6 +49,7 @@ export class GoABTextArea implements ControlValueAccessor {
   @Input() ariaLabel?: string;
   @Input() countBy?: GoABTextAreaCountBy = "";
   @Input() maxCount?: number = -1;
+  @Input() maxWidth?: string;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

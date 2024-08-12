@@ -17,6 +17,7 @@ import { By } from "@angular/platform-browser";
                   [padding]="padding"
                   [width]="width"
                   [testId]="testId"
+                  maxWidth="480px"
                   [mt]="mt"
                   [mr]="mr"
                   [mb]="mb"
@@ -89,6 +90,7 @@ describe("GoABContainer", () => {
    expect(el?.getAttribute("mb")).toBe(component.mb);
    expect(el?.getAttribute("ml")).toBe(component.ml);
    expect(el?.getAttribute("width")).toBe(component.width);
+   expect(el?.getAttribute("maxwidth")).toBe("480px");
 
    expect(el?.querySelector("[slot='title']")?.innerHTML).toContain("This is a title");
    expect(el?.querySelector("[slot='actions']")?.querySelector("goa-button")).not.toBeFalsy();

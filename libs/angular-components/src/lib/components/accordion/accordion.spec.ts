@@ -12,6 +12,7 @@ import { GoABAccordionHeadingSize } from "@abgov/ui-components-common";
     [open]="open"
     [headingSize]="headingSize"
     [headingContent]="headingContent"
+    maxWidth="480px"
   >
     test content
       <ng-template #headingContent>This is the headingcontent</ng-template>
@@ -53,6 +54,7 @@ describe("GoABAccordion", () => {
     expect(accordionElement.getAttribute("secondarytext")).toBe("Secondary Text");
     expect(accordionElement.getAttribute("open")).toBe("true");
     expect(accordionElement.getAttribute("headingsize")).toBe("large");
+    expect(accordionElement.getAttribute("maxwidth")).toBe("480px");
     const headingContent = accordionElement.querySelector("[slot='headingcontent']");
     expect(headingContent.textContent).toContain("This is the headingcontent");
   });

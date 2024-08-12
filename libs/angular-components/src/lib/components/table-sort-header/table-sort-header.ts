@@ -16,5 +16,5 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 })
 export class GoABTableSortHeader {
   @Input() name?: string;
-  @Input() direction?: GoABTableSortDirection;
+  @Input() direction?: GoABTableSortDirection = "none";
 }

@@ -9,6 +9,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.type]="type"
       [attr.heading]="heading"
       [attr.size]="size"
+      [attr.maxwidth]="maxWidth"
       [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
@@ -21,9 +22,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoABCallout {
-  @Input() type?: GoABCalloutType;
+  @Input() type?: GoABCalloutType = "information";
   @Input() heading?: string = "";
-  @Input() size?: GoABCalloutSize;
+  @Input() size?: GoABCalloutSize = "large";
+  @Input() maxWidth?: string;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

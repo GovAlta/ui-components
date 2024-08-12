@@ -12,6 +12,7 @@ import { NgTemplateOutlet } from "@angular/common";
       [attr.secondarytext]="secondaryText"
       [attr.open]="open"
       [attr.headingsize]="headingSize"
+      [attr.maxwidth]="maxWidth"
       [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
@@ -33,6 +34,7 @@ export class GoABAccordion {
   @Input() open?: boolean;
   @Input() headingSize?: GoABAccordionHeadingSize;
   @Input() headingContent!: TemplateRef<any>;
+  @Input() maxWidth?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;

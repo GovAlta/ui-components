@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { GoABTabsOnChangeDetail } from "@abgov/ui-components-common";
 
 interface WCProps {
   initialtab?: number;
@@ -19,7 +20,7 @@ export interface GoABTabsProps {
   initialTab?: number;
   children?: React.ReactNode;
   testId?: string;
-  onChange?: (tab: number) => void;
+  onChange?: (detail: GoABTabsOnChangeDetail) => void;
 }
 
 export function GoABTabs({
@@ -34,8 +35,8 @@ export function GoABTabs({
     const element = ref.current;
     if (element && onChange) {
       const handler = (event: Event) => {
-        const customEvent = event as CustomEvent;
-        onChange(customEvent.detail.tab);
+        const detail = (event as CustomEvent<GoABTabsOnChangeDetail>).detail;
+        onChange(detail);
       };
       element.addEventListener("_change", handler);
       return () => {

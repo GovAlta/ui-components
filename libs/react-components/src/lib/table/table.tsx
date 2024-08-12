@@ -1,4 +1,4 @@
-import { GoABTableVariant, Margins } from "@abgov/ui-components-common";
+import { GoABTableOnSortDetail, GoABTableVariant, Margins } from "@abgov/ui-components-common";
 import { ReactNode, useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
@@ -21,7 +21,7 @@ declare global {
 /* eslint-disable-next-line */
 export interface GoABTableProps extends Margins {
   width?: string;
-  onSort?: (sortBy: string, sortDir: number) => void;
+  onSort?: (detail: GoABTableOnSortDetail) => void;
   // stickyHeader?: boolean; TODO: enable this later
   variant?: GoABTableVariant;
   testId?: string;
@@ -39,8 +39,8 @@ export function GoABTable({ onSort, ...props }: GoABTableProps) {
     }
     const current = ref.current;
     const sortListener = (e: unknown) => {
-      const { sortBy, sortDir } = (e as CustomEvent).detail;
-      onSort?.(sortBy, sortDir);
+      const detail = (e as CustomEvent<GoABTableOnSortDetail>).detail;
+      onSort?.(detail);
     };
 
     current.addEventListener("_sort", sortListener);

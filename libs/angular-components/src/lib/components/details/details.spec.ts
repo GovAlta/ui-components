@@ -10,6 +10,7 @@ import { By } from "@angular/platform-browser";
       [heading]="heading"
       [open]="open"
       [testId]="testId"
+      maxWidth="480px"
       [mt]="mt"
       [mb]="mb"
       [ml]="ml"
@@ -65,5 +66,6 @@ describe("GoABDetails", () => {
     expect(el?.getAttribute("ml")).toBe(component.ml);
     expect(el?.getAttribute("data-testid")).toBe(component.testId);
     expect(el?.innerHTML).toContain("The content");
+    expect(el?.getAttribute("maxwidth")).toBe("480px");
   });
 });

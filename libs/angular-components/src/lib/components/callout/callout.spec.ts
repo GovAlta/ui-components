@@ -10,6 +10,7 @@ import { GoABCalloutSize, GoABCalloutType } from "@abgov/ui-components-common";
       [heading]="heading"
       [size]="size"
       [testId]="testId"
+      maxWidth="480px"
       [mt]="mt"
       [mb]="mb"
       [ml]="ml"
@@ -62,6 +63,7 @@ describe("GoABCallout", () => {
     expect(el.getAttribute("type")).toContain(component.type);
     expect(el.getAttribute("size")).toContain(component.size);
     expect(el.getAttribute("testid")).toContain(component.testId);
+    expect(el.getAttribute("maxwidth")).toContain("480px");
     expect(el.getAttribute("mt")).toBe(component.mt);
     expect(el.getAttribute("mr")).toBe(component.mr);
     expect(el.getAttribute("mb")).toBe(component.mb);
