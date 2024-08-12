@@ -150,7 +150,9 @@ export type GoABTextAreaOnKeyPressDetail = {
 export interface GoABTabsProps {
   initialTab?: number;
 }
-
+export type GoABTabsOnChangeDetail = {
+  tab: number;
+}
 // Table
 
 export type GoABTableVariant = "normal" | "relaxed";

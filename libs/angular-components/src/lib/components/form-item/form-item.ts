@@ -21,6 +21,7 @@ import {
       [attr.data-testid]="testId"
       [id]="id"
       [attr.requirement]="requirement"
+      [attr.maxwidth]="maxWidth"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.mr]="mr"
@@ -38,6 +39,7 @@ export class GoABFormItem{
   @Input() helpText?: string;
   @Input() error?: string;
   @Input() requirement?: GoABFormItemRequirement;
+  @Input() maxWidth?: string;
   @Input() testId?: string;
   @Input() id?: string;
   @Input() mt?: Spacing;

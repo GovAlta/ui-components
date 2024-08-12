@@ -11,6 +11,7 @@ import { NgTemplateOutlet } from "@angular/common";
     [attr.accent]="accent"
     [attr.padding]="padding"
     [attr.width]="width"
+    [attr.maxwidth]="maxWidth"
     [attr.data-testid]="testId"
     [attr.mt]="mt"
     [attr.mb]="mb"
@@ -32,6 +33,7 @@ export class GoABContainer {
   @Input() accent?: GoABContainerAccent = "filled";
   @Input() padding?: GoABContainerPadding = "relaxed";
   @Input() width?: GoABContainerWidth = "full";
+  @Input() maxWidth?: string;
   @Input() testId?: string;
   @Input() title!: TemplateRef<any>;
   @Input() actions!: TemplateRef<any>;

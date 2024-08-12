@@ -16,6 +16,7 @@ import { GoABFormItemSlot } from "./form-item-slot";
       [helpText]="helpText"
       [id]="id"
       [testId]="testId"
+      maxWidth="480px"
       [mt]="mt"
       [mb]="mb"
       [mr]="mr"
@@ -79,6 +80,7 @@ describe("GoABFormItem", () => {
     expect(el?.getAttribute("helptext")).toBe(component.helpText);
     expect(el?.getAttribute("id")).toBe(component.id);
     expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("maxwidth")).toBe("480px");
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("mr")).toBe(component.mr);

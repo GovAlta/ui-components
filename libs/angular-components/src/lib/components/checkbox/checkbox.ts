@@ -25,6 +25,7 @@ import { NgTemplateOutlet } from "@angular/common";
       [attr.arialabel]="ariaLabel"
       [attr.description]="getDescriptionAsString()"
       [id]="id"
+      [attr.maxwidth]="maxWidth"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -57,6 +58,7 @@ export class GoABCheckbox implements ControlValueAccessor {
   @Input() ariaLabel?: string;
   @Input() description!: string | TemplateRef<any>;
   @Input() id?: string;
+  @Input() maxWidth?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;

@@ -1,4 +1,4 @@
-import { Margins } from "@abgov/ui-components-common";
+import { GoABPaginationOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
@@ -24,7 +24,7 @@ export interface GoABPaginationProps extends Margins {
   perPageCount?: number;
   pageNumber: number;
   variant?: "all" | "links-only";
-  onChange: (page: number) => void;
+  onChange: (detail: GoABPaginationOnChangeDetail) => void;
   testId?: string;
 }
 
@@ -40,8 +40,8 @@ export function GoABPagination({ onChange, ...props }: GoABPaginationProps) {
     }
     const current = ref.current;
     const changeListener = (e: Event) => {
-      const { page } = (e as CustomEvent).detail;
-      onChange(page);
+      const detail = (e as CustomEvent<GoABPaginationOnChangeDetail>).detail;
+      onChange(detail);
     };
 
     current.addEventListener("_change", changeListener);

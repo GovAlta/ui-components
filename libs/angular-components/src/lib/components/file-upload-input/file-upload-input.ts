@@ -22,7 +22,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
 export class GoABFileUploadInput {
   @Input() id?: string = "";
   @Input({ required: true }) variant!: GoABFileUploadInputVariant;
-  @Input() maxFileSize?: string = "10MB";
+  @Input() maxFileSize?: string = "5MB";
   @Input() accept?: string;
   @Input() testId?: string;
   @Input() mt?: Spacing;

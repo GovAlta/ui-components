@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoABChip } from "./chip";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABIconType, Spacing } from "@abgov/ui-components-common";
+import { GoABChipVariant, GoABIconType, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
@@ -11,6 +11,7 @@ import { fireEvent } from "@testing-library/dom";
       [leadingIcon]="leadingIcon"
       [error]="error"
       [deletable]="deletable"
+      [variant]="variant"
       [content]="content"
       [testId]="testId"
       [mt]="mt"
@@ -27,6 +28,7 @@ class TestChipComponent {
   error?: boolean;
   deletable?: boolean;
   content?: string;
+  variant?: GoABChipVariant;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -56,6 +58,7 @@ describe("GoABChip", () => {
     component.deletable = true;
     component.content = "some chip";
     component.testId = "chip-test";
+    component.variant = "filter";
     component.mt = "s";
     component.mr = "m";
     component.mb = "l";
@@ -68,6 +71,8 @@ describe("GoABChip", () => {
     expect(chipElement.getAttribute("leadingIcon")).toBe(component.leadingIcon);
     expect(chipElement.getAttribute("error")).toBe(`${component.error}`);
     expect(chipElement.getAttribute("deletable")).toBe(`${component.deletable}`);
+    expect(chipElement.getAttribute("content")).toBe(component.content);
+    expect(chipElement.getAttribute("variant")).toBe(`${component.variant}`);
     expect(chipElement.getAttribute("data-testid")).toBe(component.testId);
     expect(chipElement.getAttribute("mt")).toBe(component.mt);
     expect(chipElement.getAttribute("mr")).toBe(component.mr);

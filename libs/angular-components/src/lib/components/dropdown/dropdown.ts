@@ -2,7 +2,7 @@ import { GoABDropdownOnChangeDetail, GoABIconType, Spacing } from "@abgov/ui-com
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-// FIXME: issues exist when the `filterable` is set
+
 // "disabled", "value", "id" is an exposed property of HTMLInputElement, no need to bind with attr
 @Component({
   standalone: true,

@@ -34,7 +34,7 @@ export class GoABPagination {
 
   @Output() onChange = new EventEmitter<GoABPaginationOnChangeDetail>();
 
-  _onChange(e: any) {
+  _onChange(e: Event) {
     const detail = (e as CustomEvent<GoABPaginationOnChangeDetail>).detail;
     this.onChange.emit(detail);
   }

@@ -9,6 +9,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.heading]="heading"
       [attr.data-testid]="testId"
       [attr.open]="open"
+      [attr.maxwidth]="maxWidth"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -23,6 +24,7 @@ export class GoABDetails {
   @Input() heading?: string;
   @Input() testId?: string;
   @Input() open?: boolean;
+  @Input() maxWidth?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;

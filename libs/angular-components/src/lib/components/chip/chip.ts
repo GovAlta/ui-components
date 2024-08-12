@@ -1,4 +1,4 @@
-import { GoABIconType, Spacing } from "@abgov/ui-components-common";
+import { GoABChipVariant, GoABIconType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
@@ -6,6 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "
   selector: "goab-chip",
   template: `<goa-chip
     [attr.leadingicon]="leadingIcon"
+    [attr.variant]="variant"
     [attr.error]="error"
     [attr.deletable]="deletable"
     [attr.content]="content"
@@ -26,6 +27,7 @@ export class GoABChip {
   @Input() deletable?: boolean;
   @Input() content?: string = "";
   @Input() testId?: string;
+  @Input() variant?: GoABChipVariant;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
