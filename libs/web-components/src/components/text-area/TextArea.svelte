@@ -27,9 +27,19 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  let isError = toBoolean(error);
+  let prevError = isError;
+
   // reactive
 
-  $: isError = toBoolean(error);
+  //$: isError = toBoolean(error);
+  $: {
+    isError = toBoolean(error);
+    if (isError !== prevError) {
+      dispatch("errorChange", { isError });
+      prevError = isError;
+    }
+  }
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
   $: count =
@@ -81,6 +91,16 @@
       new CustomEvent("_keyPress", {
         composed: true,
         detail: { name, value, key: e.key },
+      }),
+    );
+  }
+
+  function dispatch(name: string, detail: any) {
+    _rootEl?.dispatchEvent(
+      new CustomEvent(name, {
+        bubbles: true,
+        composed: true,
+        detail,
       }),
     );
   }
