@@ -32,14 +32,13 @@
 
   // reactive
 
-  //$: isError = toBoolean(error);
   $: {
     isError = toBoolean(error);
     if (isError !== prevError) {
       dispatch("errorChange", { isError });
       prevError = isError;
     }
-  }
+  };
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
   $: count =

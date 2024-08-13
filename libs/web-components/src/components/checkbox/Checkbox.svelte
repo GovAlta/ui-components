@@ -2,11 +2,12 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
   import { fromBoolean, toBoolean } from "../../common/utils";
+  import { FormItemChannelProps } from "../form-item/FormItem.svelte";
   // Required
   export let name: string;
 
@@ -29,24 +30,43 @@
 
   // Private
   let _value: string;
-  let _checkboxRef: HTMLElement;
+  let _checkboxEl: HTMLElement;
   let _descriptionId: string;
+  let _rootEl: HTMLElement;
+  let isError = toBoolean(error);
+  let prevError = isError;
 
   // Binding
   $: isDisabled = toBoolean(disabled);
-  $: isError = toBoolean(error);
+  $: {
+    isError = toBoolean(error);
+    if (isError !== prevError) {
+      dispatch("errorChange", { isError });
+      prevError = isError;
+    }
+  }
   $: isChecked = toBoolean(checked);
   $: isIndeterminate = false; // Design review. To be built with TreeView Later
 
-  onMount(() => {
+  onMount(async () => {
     // hold on to the initial value to prevent losing it on check changes
     _value = value;
     _descriptionId = `description_${name}`;
+
+    await tick();
+
+    _rootEl?.dispatchEvent(
+      new CustomEvent<FormItemChannelProps>("input:mounted", {
+        composed: true,
+        bubbles: true,
+        detail: { el: _checkboxEl },
+      }),
+    );
   });
 
   function onChange(e: Event) {
     // Manually set the focus back to the checkbox after the state change
-    _checkboxRef.focus();
+    _checkboxEl.focus();
     // An empty string is required as setting the second value to `null` caused the data to get
     // out of sync with the events.
     const newCheckStatus = !isChecked;
@@ -62,11 +82,22 @@
       }),
     );
   }
+
+  function dispatch(name: string, detail: any) {
+    _rootEl?.dispatchEvent(
+      new CustomEvent(name, {
+        bubbles: true,
+        composed: true,
+        detail,
+      }),
+    );
+  }
 </script>
 
 <!-- View -->
 
 <div
+  bind:this={_rootEl}
   class="root"
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
@@ -79,12 +110,9 @@
     class:disabled={isDisabled}
     class:error={isError}
   >
-    <div
-      class="container"
-      class:selected={isChecked}
-    >
+    <div class="container" class:selected={isChecked}>
       <input
-        bind:this={_checkboxRef}
+        bind:this={_checkboxEl}
         id={name}
         {name}
         checked={isChecked}
@@ -93,6 +121,7 @@
         value={`${value}`}
         aria-label={arialabel || text || name}
         aria-describedby={description ? _descriptionId : null}
+        aria-invalid={isError ? "true" : "false"}
         on:change={onChange}
       />
       {#if isIndeterminate}
@@ -123,7 +152,7 @@
   </label>
   {#if $$slots.description || description}
     <div class="description" id={_descriptionId} data-testid="description">
-      <slot name="description"/>
+      <slot name="description" />
       {description}
     </div>
   {/if}
@@ -172,7 +201,6 @@
     margin-top: var(--goa-space-2xs);
   }
 
-
   /* Container */
   .container {
     box-sizing: border-box;
@@ -189,7 +217,8 @@
     flex: 0 0 auto;
   }
   .container:hover {
-    box-shadow: 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-hover);
     border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
   }
   .container:focus-visible,
@@ -211,7 +240,6 @@
   .container.selected:hover {
     background-color: var(--goa-color-interactive-hover);
   }
-
 
   /* Error Container */
   .error .container,
