@@ -49,10 +49,6 @@
   $: isIndeterminate = false; // Design review. To be built with TreeView Later
 
   onMount(async () => {
-    // hold on to the initial value to prevent losing it on check changes
-    _value = value;
-    _descriptionId = `description_${name}`;
-
     await tick();
 
     _rootEl?.dispatchEvent(
@@ -62,6 +58,10 @@
         detail: { el: _checkboxEl },
       }),
     );
+
+    // hold on to the initial value to prevent losing it on check changes
+    _value = value;
+    _descriptionId = `description_${name}`;
   });
 
   function onChange(e: Event) {
