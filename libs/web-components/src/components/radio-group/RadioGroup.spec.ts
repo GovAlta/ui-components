@@ -32,6 +32,22 @@ describe("GoARadioGroup Component", () => {
     });
   });
 
+  it("should dispatch input:mounted event on mount", async () => {
+    const mockInputMounted = vi.fn();
+    const { container } = render(GoARadioGroup, {
+      name: "test",
+      value: "",
+    });
+
+    const radioGroupDiv = container.querySelector("[role='radiogroup']");
+    radioGroupDiv?.addEventListener("input:mounted", mockInputMounted);
+
+    await waitFor(() => {
+      expect(mockInputMounted).toHaveBeenCalledTimes(1);
+      expect(mockInputMounted.mock.calls[0][0].detail.el).toBe(radioGroupDiv);
+    });
+  });
+
   it("should render with accessibility attributes", async () => {
     const name = "favcolor";
     const items = ["red", "blue", "orange"];
@@ -44,7 +60,9 @@ describe("GoARadioGroup Component", () => {
     });
 
     const radioGroupDiv = result.container.querySelector("[role='radiogroup']");
-    expect(radioGroupDiv?.getAttribute("aria-label")).toBe("please choose a color");
+    expect(radioGroupDiv?.getAttribute("aria-label")).toBe(
+      "please choose a color",
+    );
 
     const goaRadioItems = result.container.querySelectorAll("goa-radio-item");
     expect(goaRadioItems.length).toBe(3);
@@ -53,7 +71,9 @@ describe("GoARadioGroup Component", () => {
         const el = goaRadioItems[index];
 
         expect(el.getAttribute("value")).toBe(item);
-        expect(el.getAttribute("arialabel")).toBe("you are choosing color " + item);
+        expect(el.getAttribute("arialabel")).toBe(
+          "you are choosing color " + item,
+        );
         if (index === 2) {
           expect(el.getAttribute("checked")).toBe("true");
         } else {
