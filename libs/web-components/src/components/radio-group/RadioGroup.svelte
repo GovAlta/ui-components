@@ -4,11 +4,12 @@
   import type { Spacing } from "../../common/styling";
   import { typeValidator, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import {
     GoARadioItemProps,
     RadioItemSelectProps,
   } from "../radio-item/RadioItem.svelte";
+  import { FormItemChannelProps } from "../form-item/FormItem.svelte";
 
   // Validator
   const [Orientations, validateOrientation] = typeValidator(
@@ -34,7 +35,8 @@
   export let ml: Spacing = null;
 
   // Private
-  let isError: boolean;
+  let isError = toBoolean(error);
+  let prevError = isError;
 
   // Reactive
 
@@ -45,6 +47,10 @@
 
   $: {
     isError = toBoolean(error);
+    if (isError !== prevError) {
+      dispatch("errorChange", { isError });
+      prevError = isError;
+    }
     bindOptions();
   }
 
@@ -64,6 +70,16 @@
     _rootEl.addEventListener("_radioItemChange", (e: Event) => {
       onChange((e as CustomEvent).detail);
     });
+
+    await tick();
+
+    _rootEl?.dispatchEvent(
+      new CustomEvent<FormItemChannelProps>("input:mounted", {
+        composed: true,
+        bubbles: true,
+        detail: { el: _rootEl },
+      }),
+    );
   });
 
   // Functions
@@ -131,6 +147,16 @@
       );
     });
   }
+
+  function dispatch(name: string, detail: any) {
+    _rootEl?.dispatchEvent(
+      new CustomEvent(name, {
+        bubbles: true,
+        composed: true,
+        detail,
+      }),
+    );
+  }
 </script>
 
 <!-- Html -->
@@ -141,6 +167,7 @@
   data-testid={testid}
   role="radiogroup"
   aria-label={arialabel}
+  aria-invalid={isError ? "true" : "false"}
 >
   <slot />
 </div>
