@@ -1,13 +1,13 @@
 import {
-  GoABFormItemLabelSize,
-  GoABFormItemRequirement,
+  GoabFormItemLabelSize,
+  GoabFormItemRequirement,
   Margins,
 } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   label?: string;
-  labelsize?: GoABFormItemLabelSize;
-  requirement?: GoABFormItemRequirement;
+  labelsize?: GoabFormItemLabelSize;
+  requirement?: GoabFormItemRequirement;
   error?: string;
   helptext?: string;
   maxwidth?: string;
@@ -23,10 +23,10 @@ declare global {
   }
 }
 
-export interface GoABFormItemProps extends Margins {
+export interface GoabFormItemprops extends Margins {
   label?: string;
-  labelSize?: GoABFormItemLabelSize;
-  requirement?: GoABFormItemRequirement;
+  labelSize?: GoabFormItemLabelSize;
+  requirement?: GoabFormItemRequirement;
   error?: string;
   helpText?: string;
   maxWidth?: string;
@@ -35,7 +35,7 @@ export interface GoABFormItemProps extends Margins {
   id?: string;
 }
 
-export function GoABFormItem({
+export function GoabFormItem({
   children,
   helpText,
   error,
@@ -49,7 +49,7 @@ export function GoABFormItem({
   ml,
   testId,
   id,
-}: GoABFormItemProps): JSX.Element {
+}: GoabFormItemprops): JSX.Element {
   return (
     <goa-form-item
       label={label}
@@ -72,4 +72,4 @@ export function GoABFormItem({
   );
 }
 
-export default GoABFormItem;
+export default GoabFormItem;

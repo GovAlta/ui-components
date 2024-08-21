@@ -14,14 +14,14 @@ declare global {
   }
 }
 
-export interface GoABGridProps extends Margins {
+export interface GoabGridProps extends Margins {
   gap?: Spacing;
   minChildWidth: string;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export function GoABGrid({
+export function GoabGrid({
   gap,
   minChildWidth,
   mt,
@@ -30,7 +30,7 @@ export function GoABGrid({
   ml,
   testId,
   children,
-}: GoABGridProps): JSX.Element {
+}: GoabGridProps): JSX.Element {
   return (
     <goa-grid
       gap={gap}
@@ -46,4 +46,4 @@ export function GoABGrid({
   );
 }
 
-export default GoABGrid;
+export default GoabGrid;

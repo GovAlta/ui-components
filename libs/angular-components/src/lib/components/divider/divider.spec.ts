@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABDivider } from "./divider";
+import { GoabDivider } from "./divider";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
@@ -29,7 +29,7 @@ describe("GoABDivider", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABDivider],
+      imports: [GoabDivider],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [TestDividerComponent],
     }).compileComponents();

@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABTabs } from "./tabs";
+import { GoabTabs } from "./tabs";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABTab } from "../tab/tab";
-import { GoABTabsOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabTab } from "../tab/tab";
+import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
@@ -14,7 +14,7 @@ import { fireEvent } from "@testing-library/dom";
 })
 class TestTabsComponent {
   /** do nothing **/
-  onChange(event: GoABTabsOnChangeDetail) {
+  onChange(event: GoabTabsOnChangeDetail) {
     /** do nothing **/
   }
 }
@@ -26,7 +26,7 @@ describe("GoABTabs", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestTabsComponent],
-      imports: [GoABTabs, GoABTab],
+      imports: [GoabTabs, GoabTab],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABModal } from "./modal";
+import { GoabModal } from "./modal";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoABModalCalloutVariant,
-  GoABModalRole,
-  GoABModalTransition,
+  GoabModalCalloutVariant,
+  GoabModalRole,
+  GoabModalTransition,
 } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
@@ -35,11 +35,11 @@ import { By } from "@angular/platform-browser";
 class TestModalComponent {
   open = true;
   maxWidth = "500px";
-  callOutVariant = "information" as GoABModalCalloutVariant;
-  role = "alertdialog" as GoABModalRole;
+  callOutVariant = "information" as GoabModalCalloutVariant;
+  role = "alertdialog" as GoabModalRole;
   testId = "testId";
   closable = true;
-  transition = "fast" as GoABModalTransition;
+  transition = "fast" as GoabModalTransition;
   heading = "Modal Heading";
   actions = "Close";
   content = "Modal Content";
@@ -56,7 +56,7 @@ describe("GoABModal", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestModalComponent],
-      imports: [GoABModal],
+      imports: [GoabModal],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

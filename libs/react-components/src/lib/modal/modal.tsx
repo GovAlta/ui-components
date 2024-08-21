@@ -1,7 +1,7 @@
 import {
-  GoABModalCalloutVariant,
-  GoABModalRole,
-  GoABModalTransition,
+  GoabModalCalloutVariant,
+  GoabModalRole,
+  GoabModalTransition,
 } from "@abgov/ui-components-common";
 import { ReactElement, ReactNode, RefObject, useEffect, useRef } from "react";
 
@@ -11,9 +11,9 @@ interface WCProps {
   open?: boolean;
   maxwidth?: string;
   closable?: boolean;
-  role?: GoABModalRole;
-  transition?: GoABModalTransition;
-  calloutvariant?: GoABModalCalloutVariant;
+  role?: GoabModalRole;
+  transition?: GoabModalTransition;
+  calloutvariant?: GoabModalCalloutVariant;
 }
 
 declare global {
@@ -25,20 +25,20 @@ declare global {
   }
 }
 
-export interface GoABModalProps {
+export interface GoabModalProps {
   heading?: ReactNode;
   maxWidth?: string;
   actions?: ReactElement;
   onClose?: () => void;
-  transition?: GoABModalTransition;
+  transition?: GoabModalTransition;
   children?: ReactNode;
   open?: boolean;
-  calloutVariant?: GoABModalCalloutVariant;
+  calloutVariant?: GoabModalCalloutVariant;
   testId?: string;
-  role?: GoABModalRole;
+  role?: GoabModalRole;
 }
 
-export function GoABModal({
+export function GoabModal({
   heading,
   children,
   maxWidth,
@@ -49,7 +49,7 @@ export function GoABModal({
   onClose,
   testId,
   role,
-}: GoABModalProps): JSX.Element {
+}: GoabModalProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -85,4 +85,4 @@ export function GoABModal({
   );
 }
 
-export default GoABModal;
+export default GoabModal;

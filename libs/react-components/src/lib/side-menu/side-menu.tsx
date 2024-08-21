@@ -11,13 +11,13 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoABSideMenuProps {
+export interface GoabSideMenuProps {
   testId?: string;
   children: ReactNode;
 }
 
-export function GoABSideMenu(props: GoABSideMenuProps): JSX.Element {
+export function GoabSideMenu(props: GoabSideMenuProps): JSX.Element {
   return <goa-side-menu data-testid={props.testId}>{props.children}</goa-side-menu>;
 }
 
-export default GoABSideMenu;
+export default GoabSideMenu;

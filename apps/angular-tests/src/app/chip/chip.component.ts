@@ -1,4 +1,4 @@
-import { GoABChip } from "@abgov/angular-components";
+import { GoabChip } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
   selector: "abgov-chip",
   templateUrl: "./chip.component.html",
   imports: [
-    GoABChip
+    GoabChip
   ]
 })
 export class ChipComponent {

@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABButtonGroup } from "./button-group";
+import { GoabButtonGroup } from "./button-group";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoABButtonGroupAlignment,
-  GoABButtonGroupGap,
+  GoabButtonGroupAlignment,
+  GoabButtonGroupGap,
 } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
-import { GoABButton } from "../button/button";
+import { GoabButton } from "../button/button";
 
 @Component({
   template: `
@@ -27,8 +27,8 @@ import { GoABButton } from "../button/button";
   `,
 })
 class TestButtonGroupComponent {
-  alignment?: GoABButtonGroupAlignment;
-  gap?: GoABButtonGroupGap;
+  alignment?: GoabButtonGroupAlignment;
+  gap?: GoabButtonGroupGap;
   testId?: string;
   mt?: string;
   mb?: string;
@@ -42,7 +42,7 @@ describe("GoABButtonGroup", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABButtonGroup, GoABButton],
+      imports: [GoabButtonGroup, GoabButton],
       declarations: [TestButtonGroupComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

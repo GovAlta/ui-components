@@ -1,16 +1,16 @@
 import { render } from "@testing-library/react";
 
-import { GoABBlock } from "./block";
+import { GoabBlock } from "./block";
 
 describe("Block", () => {
   it("should render successfully", () => {
-    const { baseElement } = render(<GoABBlock />);
+    const { baseElement } = render(<GoabBlock />);
     expect(baseElement).toBeTruthy();
   });
 
   it("should render the properties", () => {
     const { container } = render(
-      <GoABBlock
+      <GoabBlock
         gap="s"
         direction="row"
         alignment="center"

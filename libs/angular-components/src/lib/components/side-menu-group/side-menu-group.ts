@@ -10,7 +10,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABSideMenuGroup {
+export class GoabSideMenuGroup {
   @Input({ required: true }) heading!: string;
   @Input() testId?: string;
 }

@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import Css from "./ResizablePanel.module.css";
-import { GoABIcon } from "../../lib/icon/icon";
+import { GoabIcon } from "../../lib/icon/icon";
 
 export type ResizableProps = {
   minWidth?: number;
@@ -91,7 +91,7 @@ export function ResizablePanel(props: ResizableProps): JSX.Element {
       <section ref={sectionRef} className={Css.panel}>
         <div className={Css.children}>{props.children}</div>
         <div ref={handleRef} className={Css.handle}>
-          <GoABIcon type="reorder-two" />
+          <GoabIcon type="reorder-two" />
         </div>
       </section>
       <div ref={widthRef} className={Css.width}>

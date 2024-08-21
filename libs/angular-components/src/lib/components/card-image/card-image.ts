@@ -13,7 +13,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABCardImage {
+export class GoabCardImage {
   @Input({ required: true }) src!: string;
   @Input({ required: true }) height!: string;
 }

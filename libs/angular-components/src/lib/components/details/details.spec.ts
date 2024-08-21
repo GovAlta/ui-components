@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABDetails } from "./details";
+import { GoabDetails } from "./details";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
@@ -36,7 +36,7 @@ describe("GoABDetails", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABDetails],
+      imports: [GoabDetails],
       declarations: [TestDetailsComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

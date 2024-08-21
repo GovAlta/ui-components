@@ -1,4 +1,4 @@
-import { GoABBadge, GoABBlock, GoABButton, GoABContainer } from "@abgov/angular-components";
+import { GoabBadge, GoabBlock, GoabButton, GoabContainer } from "@abgov/angular-components";
 import { NgFor } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 
@@ -8,10 +8,10 @@ import { Component, OnInit } from "@angular/core";
   selector: "abgov-container",
   templateUrl: "./container.component.html",
   imports: [
-    GoABContainer,
-    GoABButton,
-    GoABBlock,
-    GoABBadge,
+    GoabContainer,
+    GoabButton,
+    GoabBlock,
+    GoabBadge,
     NgFor,
   ],
 })

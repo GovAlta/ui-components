@@ -1,4 +1,4 @@
-import { GoABPaginationOnChangeDetail, GoABPaginationVariant, Spacing } from "@abgov/ui-components-common";
+import { GoabPaginationOnChangeDetail, GoabPaginationVariant, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
@@ -21,21 +21,21 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABPagination {
+export class GoabPagination {
   @Input({ required: true }) itemCount!: number;
   @Input({ required: true }) pageNumber!: number;
   @Input() perPageCount?: number = 10;
-  @Input() variant?: GoABPaginationVariant = "all";
+  @Input() variant?: GoabPaginationVariant = "all";
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<GoABPaginationOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoabPaginationOnChangeDetail>();
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<GoABPaginationOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoabPaginationOnChangeDetail>).detail;
     this.onChange.emit(detail);
   }
 }

@@ -1,4 +1,4 @@
-import { GoABButton, GoABCircularProgress } from "@abgov/angular-components";
+import { GoabButton, GoabCircularProgress } from "@abgov/angular-components";
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -6,8 +6,8 @@ import { Component, OnInit } from "@angular/core";
   selector: "abgov-circular-progress",
   templateUrl: "./circular-progress.component.html",
   imports: [
-    GoABCircularProgress,
-    GoABButton,
+    GoabCircularProgress,
+    GoabButton,
   ]
 })
 export class CircularProgressComponent implements OnInit {

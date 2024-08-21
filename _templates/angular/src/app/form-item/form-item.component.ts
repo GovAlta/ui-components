@@ -1,11 +1,11 @@
 import {
-  GoABBlock,
-  GoABButton,
-  GoABDropdown,
-  GoABDropdownItem,
-  GoABFormItem,
-  GoABFormItemSlot,
-  GoABInput,
+  GoabBlock,
+  GoabButton,
+  GoabDropdown,
+  GoabDropdownItem,
+  GoabFormItem,
+  GoabFormItemSlot,
+  GoabInput,
 } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
@@ -16,13 +16,13 @@ import { CommonModule } from "@angular/common";
   selector: "abgov-form-item",
   templateUrl: "./form-item.component.html",
   imports: [
-    GoABInput,
-    GoABFormItem,
-    GoABBlock,
-    GoABButton,
-    GoABDropdown,
-    GoABDropdownItem,
-    GoABFormItemSlot,
+    GoabInput,
+    GoabFormItem,
+    GoabBlock,
+    GoabButton,
+    GoabDropdown,
+    GoabDropdownItem,
+    GoabFormItemSlot,
     ReactiveFormsModule,
     CommonModule,
   ]

@@ -1,12 +1,12 @@
 import { render, cleanup } from "@testing-library/react";
-import { GoABFormItem } from "./form-item";
+import { GoabFormItem } from "./form-item";
 
 afterEach(cleanup);
 
 describe("GoABFormItem", () => {
   it("renders all with properties", () => {
     const { baseElement } = render(
-      <GoABFormItem
+      <GoabFormItem
         label="First Name"
         labelSize="large"
         requirement="optional"

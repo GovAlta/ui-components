@@ -14,7 +14,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABCard {
+export class GoabCard {
   @Input() elevation?: number;
   @Input() width?: string;
   @Input() testId?: string;

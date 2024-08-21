@@ -2,12 +2,12 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoABIconSize,
-  GoABIconTheme,
-  GoABIconType,
+  GoabIconSize,
+  GoabIconTheme,
+  GoabIconType,
   Spacing,
 } from "@abgov/ui-components-common";
-import { GoABIcon } from "../icon/icon";
+import { GoabIcon } from "../icon/icon";
 import { By } from "@angular/platform-browser";
 
 @Component({
@@ -30,9 +30,9 @@ import { By } from "@angular/platform-browser";
   `,
 })
 class TestIconComponent {
-  type = "information" as GoABIconType;
-  size?: GoABIconSize;
-  theme?: GoABIconTheme;
+  type = "information" as GoabIconType;
+  size?: GoabIconSize;
+  theme?: GoabIconTheme;
   inverted?: boolean;
   fillColor?: string;
   opacity?: number;
@@ -52,7 +52,7 @@ describe("GoABIcon", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestIconComponent],
-      imports: [GoABIcon],
+      imports: [GoabIcon],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

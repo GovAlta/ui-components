@@ -1,4 +1,4 @@
-import { GoABBlock, GoABContainer } from "@abgov/angular-components";
+import { GoabBlock, GoabContainer } from "@abgov/angular-components";
 import { CommonModule, NgFor } from "@angular/common";
 import { Component } from "@angular/core";
 
@@ -12,7 +12,7 @@ type User = {
   standalone: true,
   selector: "goa-bug1756",
   templateUrl: "./bug-1756.html",
-  imports: [GoABContainer, GoABBlock, NgFor, CommonModule],
+  imports: [GoabContainer, GoabBlock, NgFor, CommonModule],
 })
 export class Bug1756 {
   users: User[] | null = null;

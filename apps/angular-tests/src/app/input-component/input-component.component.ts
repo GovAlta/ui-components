@@ -2,14 +2,14 @@ import { Component, OnInit } from "@angular/core";
 import { format, parseISO } from "date-fns";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
-  GoABBadge,
-  GoABDatePicker,
-  GoABFormItem,
-  GoABFormItemSlot,
-  GoABInput,
+  GoabBadge,
+  GoabDatePicker,
+  GoabFormItem,
+  GoabFormItemSlot,
+  GoabInput,
 } from "@abgov/angular-components";
 import { JsonPipe, NgTemplateOutlet } from "@angular/common";
-import { GoABInputOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabInputOnChangeDetail } from "@abgov/ui-components-common";
 
 interface User {
   firstName: string;
@@ -22,14 +22,14 @@ interface User {
   selector: "abgov-input-component",
   templateUrl: "./input-component.component.html",
   imports: [
-    GoABInput,
-    GoABDatePicker,
-    GoABBadge,
-    GoABFormItem,
+    GoabInput,
+    GoabDatePicker,
+    GoabBadge,
+    GoabFormItem,
     JsonPipe,
     ReactiveFormsModule,
     FormsModule,
-    GoABFormItemSlot,
+    GoabFormItemSlot,
     NgTemplateOutlet
   ],
 })
@@ -37,7 +37,7 @@ export class InputComponentComponent implements OnInit {
   example1 = "";
   example3 = "Test";
   example2Form: FormGroup;
-  handleExample1(event: GoABInputOnChangeDetail) {
+  handleExample1(event: GoabInputOnChangeDetail) {
     this.example1 = event.value;
   }
 

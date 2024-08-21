@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABFormStep } from "./form-step";
+import { GoabFormStep } from "./form-step";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABFormStepStatus } from "@abgov/ui-components-common";
+import { GoabFormStepStatus } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
@@ -9,7 +9,7 @@ import { By } from "@angular/platform-browser";
 })
 class TestFormStepComponent {
   text?: string;
-  status?: GoABFormStepStatus;
+  status?: GoabFormStepStatus;
 }
 
 describe("GoABFormStep", () => {
@@ -19,7 +19,7 @@ describe("GoABFormStep", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFormStepComponent],
-      imports: [GoABFormStep],
+      imports: [GoabFormStep],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestFormStepComponent);

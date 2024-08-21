@@ -1,4 +1,4 @@
-import { GoABFileUploadInputOnSelectFileDetail, GoABFileUploadInputVariant, Spacing } from "@abgov/ui-components-common";
+import { GoabFileUploadInputOnSelectFileDetail, GoabFileUploadInputVariant, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
@@ -19,9 +19,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   </goa-file-upload-input>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABFileUploadInput {
+export class GoabFileUploadInput {
   @Input() id?: string = "";
-  @Input({ required: true }) variant!: GoABFileUploadInputVariant;
+  @Input({ required: true }) variant!: GoabFileUploadInputVariant;
   @Input() maxFileSize?: string = "5MB";
   @Input() accept?: string;
   @Input() testId?: string;
@@ -30,10 +30,10 @@ export class GoABFileUploadInput {
   @Input() mr?: Spacing;
   @Input() ml?: Spacing;
 
-  @Output() onSelectFile = new EventEmitter<GoABFileUploadInputOnSelectFileDetail>();
+  @Output() onSelectFile = new EventEmitter<GoabFileUploadInputOnSelectFileDetail>();
 
   _onSelectFile(e: Event) {
-    const detail = (e as CustomEvent<GoABFileUploadInputOnSelectFileDetail>).detail;
+    const detail = (e as CustomEvent<GoabFileUploadInputOnSelectFileDetail>).detail;
     this.onSelectFile.emit(detail);
   }
 }

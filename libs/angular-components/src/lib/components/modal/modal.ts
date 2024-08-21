@@ -1,4 +1,4 @@
-import { GoABModalCalloutVariant, GoABModalTransition } from "@abgov/ui-components-common";
+import { GoabModalCalloutVariant, GoabModalTransition } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, TemplateRef } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -29,12 +29,12 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABModal {
-  @Input() calloutVariant?: GoABModalCalloutVariant;
+export class GoabModal {
+  @Input() calloutVariant?: GoabModalCalloutVariant;
   @Input() open?: boolean;
   @Input() maxWidth?: string;
   @Input() closable = false;
-  @Input() transition?: GoABModalTransition;
+  @Input() transition?: GoabModalTransition;
   @Input() testId?: string;
   @Input() role?: string;
   @Input() heading!: string | TemplateRef<any>;

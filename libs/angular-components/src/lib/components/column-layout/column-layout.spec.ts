@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABColumnLayout } from "./column-layout";
+import { GoabColumnLayout } from "./column-layout";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
@@ -17,7 +17,7 @@ describe("GoABColumnLayout", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABColumnLayout],
+      imports: [GoabColumnLayout],
       declarations: [TestColumnLayoutComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

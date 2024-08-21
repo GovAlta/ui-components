@@ -16,7 +16,7 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [NgTemplateOutlet]
 })
-export class GoABTab {
+export class GoabTab {
   @Input() heading!: string | TemplateRef<any>;
 
   getHeadingAsString(): string {

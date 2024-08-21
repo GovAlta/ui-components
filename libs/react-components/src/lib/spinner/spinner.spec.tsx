@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react";
-import GoABSpinner from "./spinner";
-import { GoABSpinnerSize } from "@abgov/ui-components-common";
+import GoabSpinner from "./spinner";
+import { GoabSpinnerSize } from "@abgov/ui-components-common";
 
 describe("Spinner", () => {
-  (["small", "medium", "large", "xlarge"] as const).forEach((size: GoABSpinnerSize) => {
+  (["small", "medium", "large", "xlarge"] as const).forEach((size: GoabSpinnerSize) => {
     it(`renders the ${size} spinner`, async () => {
       render(
-        <GoABSpinner
+        <GoabSpinner
           type="progress"
           size={size}
           invert

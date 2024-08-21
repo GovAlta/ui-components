@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABSpacer } from "./spacer";
+import { GoabSpacer } from "./spacer";
 import { Component } from "@angular/core";
 
 @Component({
@@ -15,7 +15,7 @@ describe("GoASpacer", () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [TestSpacerComponent],
-      imports: [GoABSpacer]
+      imports: [GoabSpacer]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSpacerComponent);

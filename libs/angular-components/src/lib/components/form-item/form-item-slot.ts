@@ -11,6 +11,6 @@ import { Component, Input } from "@angular/core";
  * svelte component renders based on the `slot` of the wrapper component (which is `div` before)
  * // similar to app-footer-meta-section & app-footer-nav-section
  */
-export class GoABFormItemSlot {
+export class GoabFormItemSlot {
   @Input({ required: true }) slot!: "helptext" | "error";
 }

@@ -1,4 +1,4 @@
-import { GoABDatePickerOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { GoabDatePickerOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -26,11 +26,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => GoABDatePicker),
+      useExisting: forwardRef(() => GoabDatePicker),
     }
   ]
 })
-export class GoABDatePicker implements ControlValueAccessor {
+export class GoabDatePicker implements ControlValueAccessor {
   @Input() name?: string;
   @Input() value?: Date | string;
   @Input() min?: Date | string;
@@ -42,10 +42,10 @@ export class GoABDatePicker implements ControlValueAccessor {
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<GoABDatePickerOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<GoABDatePickerOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoabDatePickerOnChangeDetail>).detail;
     this.onChange.emit(detail);
     this.markAsTouched();
     this.fcChange?.(detail.value);

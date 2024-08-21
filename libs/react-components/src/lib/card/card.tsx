@@ -15,14 +15,14 @@ declare global {
   }
 }
 
-export interface GoABCardProps extends Margins {
+export interface GoabCardProps extends Margins {
   elevation?: number;
   width?: string;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export function GoABCard({
+export function GoabCard({
   elevation,
   width,
   mt,
@@ -31,7 +31,7 @@ export function GoABCard({
   ml,
   testId,
   children,
-}: GoABCardProps): JSX.Element {
+}: GoabCardProps): JSX.Element {
   return (
     <goa-card
       width={width}
@@ -47,4 +47,4 @@ export function GoABCard({
   );
 }
 
-export default GoABCard;
+export default GoabCard;

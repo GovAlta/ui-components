@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABAppHeaderMenu } from "./header-menu";
+import { GoabAppHeaderMenu } from "./header-menu";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABIconType } from "@abgov/ui-components-common";
+import { GoabIconType } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
@@ -17,7 +17,7 @@ import { By } from "@angular/platform-browser";
 })
 class TestAppHeaderMenuComponent {
   heading = "Test heading";
-  leadingIcon?: GoABIconType;
+  leadingIcon?: GoabIconType;
   testId?: string;
 }
 
@@ -28,7 +28,7 @@ describe("GoABAppHeaderMenu", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestAppHeaderMenuComponent],
-      imports: [GoABAppHeaderMenu],
+      imports: [GoabAppHeaderMenu],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

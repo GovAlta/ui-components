@@ -1,4 +1,4 @@
-import { GoABTextAreaCountBy, GoABTextAreaOnChangeDetail, GoABTextAreaOnKeyPressDetail, Spacing } from "@abgov/ui-components-common";
+import { GoabTextAreaCountBy, GoabTextAreaOnChangeDetail, GoabTextAreaOnKeyPressDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -33,11 +33,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => GoABTextArea),
+      useExisting: forwardRef(() => GoabTextArea),
     }
   ]
 })
-export class GoABTextArea implements ControlValueAccessor {
+export class GoabTextArea implements ControlValueAccessor {
   @Input() name?: string;
   @Input() value?: string = "";
   @Input() id?: string;
@@ -47,7 +47,7 @@ export class GoABTextArea implements ControlValueAccessor {
   @Input() disabled?: boolean;
   @Input() width?: string;
   @Input() ariaLabel?: string;
-  @Input() countBy?: GoABTextAreaCountBy = "";
+  @Input() countBy?: GoabTextAreaCountBy = "";
   @Input() maxCount?: number = -1;
   @Input() maxWidth?: string;
   @Input() testId?: string;
@@ -56,18 +56,18 @@ export class GoABTextArea implements ControlValueAccessor {
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<GoABTextAreaOnChangeDetail>();
-  @Output() onKeyPress = new EventEmitter<GoABTextAreaOnKeyPressDetail>();
+  @Output() onChange = new EventEmitter<GoabTextAreaOnChangeDetail>();
+  @Output() onKeyPress = new EventEmitter<GoabTextAreaOnKeyPressDetail>();
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<GoABTextAreaOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;
     this.onChange.emit(detail)
     this.markAsTouched();
     this.fcChange?.(detail.value);
   }
 
   _onKeyPress(e: Event) {
-    const detail = (e as CustomEvent<GoABTextAreaOnKeyPressDetail>).detail;
+    const detail = (e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail;
     this.markAsTouched();
     this.onKeyPress.emit(detail)
   }

@@ -1,4 +1,4 @@
-import { GoABIcon, GoABTooltip } from "@abgov/angular-components";
+import { GoabIcon, GoabTooltip } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,8 +6,8 @@ import { Component } from "@angular/core";
   selector: "abgov-tooltip",
   templateUrl: "./tooltip.component.html",
   imports: [
-    GoABTooltip,
-    GoABIcon,
+    GoabTooltip,
+    GoabIcon,
   ]
 })
 export class TooltipComponent {

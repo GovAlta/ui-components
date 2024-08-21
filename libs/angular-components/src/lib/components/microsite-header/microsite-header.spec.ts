@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABMicrositeHeader } from "./microsite-header";
+import { GoabMicrositeHeader } from "./microsite-header";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 @Component({
@@ -32,7 +32,7 @@ describe("GoABMicrositeHeader", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestMicrositeHeaderComponent],
-      imports: [GoABMicrositeHeader],
+      imports: [GoabMicrositeHeader],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestMicrositeHeaderComponent);

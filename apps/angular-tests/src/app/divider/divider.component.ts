@@ -1,4 +1,4 @@
-import { GoABDivider } from "@abgov/angular-components";
+import { GoabDivider } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
   selector: "abgov-divider",
   templateUrl: "./divider.component.html",
   imports: [
-    GoABDivider,
+    GoabDivider,
   ]
 })
 export class DividerComponent {

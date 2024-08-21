@@ -7,12 +7,12 @@ declare global {
   }
 }
 
-export interface GoABCardContentProps {
+export interface GoabCardContentProps {
   children?: React.ReactNode;
 }
 
-export function GoABCardContent({ children }: GoABCardContentProps): JSX.Element {
+export function GoabCardContent({ children }: GoabCardContentProps): JSX.Element {
   return <goa-card-content>{children}</goa-card-content>;
 }
 
-export default GoABCardContent;
+export default GoabCardContent;

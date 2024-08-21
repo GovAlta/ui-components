@@ -2,10 +2,10 @@ import { Component } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { Countries, CountrySubdivisions } from "../countries.data";
 import {
-  GoABDropdown,
-  GoABDropdownItem,
-  GoABFormItem,
-  GoABInput,
+  GoabDropdown,
+  GoabDropdownItem,
+  GoabFormItem,
+  GoabInput,
 } from "@abgov/angular-components";
 import { CommonModule } from "@angular/common";
 
@@ -14,10 +14,10 @@ import { CommonModule } from "@angular/common";
   selector: "goa-bug1734",
   templateUrl: "./bug-1734.html",
   imports: [
-    GoABFormItem,
-    GoABInput,
-    GoABDropdown,
-    GoABDropdownItem,
+    GoabFormItem,
+    GoabInput,
+    GoabDropdown,
+    GoabDropdownItem,
     ReactiveFormsModule,
     CommonModule,
   ],

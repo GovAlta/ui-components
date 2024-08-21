@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABAppFooter } from "../footer/footer";
+import { GoabAppFooter } from "../footer/footer";
 import { By } from "@angular/platform-browser";
 
 @Component({
@@ -19,7 +19,7 @@ describe("GoABFooter", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABAppFooter],
+      imports: [GoabAppFooter],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [TestFooterComponent],
     }).compileComponents();

@@ -1,17 +1,17 @@
 import {
-  GoABContainerAccent,
-  GoABContainerPadding,
-  GoABContainerType,
-  GoABContainerWidth,
+  GoabContainerAccent,
+  GoabContainerPadding,
+  GoabContainerType,
+  GoabContainerWidth,
   Margins,
 } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
 
 interface WCProps extends Margins {
-  type?: GoABContainerType;
-  accent?: GoABContainerAccent;
-  padding?: GoABContainerPadding;
-  width?: GoABContainerWidth;
+  type?: GoabContainerType;
+  accent?: GoabContainerAccent;
+  padding?: GoabContainerPadding;
+  width?: GoabContainerWidth;
   maxwidth?: string;
 }
 
@@ -24,20 +24,20 @@ declare global {
   }
 }
 
-export interface GoABContainerProps extends Margins {
-  accent?: GoABContainerAccent;
-  type?: GoABContainerType;
+export interface GoabContainerProps extends Margins {
+  accent?: GoabContainerAccent;
+  type?: GoabContainerType;
   heading?: ReactNode;
   title?: ReactNode;
-  padding?: GoABContainerPadding;
+  padding?: GoabContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
-  width?: GoABContainerWidth;
+  width?: GoabContainerWidth;
   maxWidth?: string;
   testId?: string;
 }
 
-export function GoABContainer({
+export function GoabContainer({
   accent,
   heading,
   title,
@@ -52,7 +52,7 @@ export function GoABContainer({
   mb,
   ml,
   testId,
-}: GoABContainerProps): JSX.Element {
+}: GoabContainerProps): JSX.Element {
   const headingContent = heading || title;
   return (
     <goa-container
@@ -74,4 +74,4 @@ export function GoABContainer({
   );
 }
 
-export default GoABContainer;
+export default GoabContainer;

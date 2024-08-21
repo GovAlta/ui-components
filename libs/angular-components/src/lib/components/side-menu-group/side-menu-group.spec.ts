@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABSideMenuGroup } from "./side-menu-group";
+import { GoabSideMenuGroup } from "./side-menu-group";
 import { Component } from "@angular/core";
 
 @Component({
@@ -21,7 +21,7 @@ describe("GoABSideMenuGroup", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestSideMenuGroupComponent],
-      imports: [GoABSideMenuGroup],
+      imports: [GoabSideMenuGroup],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSideMenuGroupComponent);

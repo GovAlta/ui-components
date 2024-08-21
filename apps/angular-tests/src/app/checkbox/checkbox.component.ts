@@ -1,5 +1,5 @@
-import { GoABCheckbox } from "@abgov/angular-components";
-import { GoABCheckboxOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabCheckbox } from "@abgov/angular-components";
+import { GoabCheckboxOnChangeDetail } from "@abgov/ui-components-common";
 import { Component } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 
@@ -8,7 +8,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
   selector: "abgov-checkbox",
   templateUrl: "./checkbox.component.html",
   imports: [
-    GoABCheckbox,
+    GoabCheckbox,
     ReactiveFormsModule,
     FormsModule,
   ]
@@ -16,7 +16,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
 export class CheckboxComponent {
   checked = false;
   checkboxValue = false;
-  onChange(event: GoABCheckboxOnChangeDetail) {
+  onChange(event: GoabCheckboxOnChangeDetail) {
     console.log("Checkbox onChanged is triggered with event ", event);
     this.checked = !this.checked;
     this.checkbox1Checked = !this.checkbox1Checked;
@@ -46,12 +46,12 @@ export class CheckboxComponent {
   bindingNoVal = "";
 
 
-  onChange2(e: GoABCheckboxOnChangeDetail) {
+  onChange2(e: GoabCheckboxOnChangeDetail) {
     console.log(e)
     this.checkbox2Checked = !this.checkbox2Checked;
   }
 
-  onChange3(e: GoABCheckboxOnChangeDetail) {
+  onChange3(e: GoabCheckboxOnChangeDetail) {
     console.log(e)
     this.checkbox3Checked = !this.checkbox3Checked;
   }

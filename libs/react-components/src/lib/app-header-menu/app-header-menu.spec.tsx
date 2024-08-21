@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
 
-import GoABAppHeaderMenu from "./app-header-menu";
+import GoabAppHeaderMenu from "./app-header-menu";
 
 describe("AppHeaderMenu", () => {
   it("should render with no children", () => {
-    const { baseElement } = render(<GoABAppHeaderMenu heading="Some label" />);
+    const { baseElement } = render(<GoabAppHeaderMenu heading="Some label" />);
     const el = baseElement.querySelector("goa-app-header-menu");
 
     expect(el).toBeTruthy();
@@ -13,10 +13,10 @@ describe("AppHeaderMenu", () => {
 
   it("should render children", () => {
     const { baseElement } = render(
-      <GoABAppHeaderMenu heading="Some label">
+      <GoabAppHeaderMenu heading="Some label">
         <a href="#foo">Foo</a>
         <a href="#bar">Bar</a>
-      </GoABAppHeaderMenu>,
+      </GoabAppHeaderMenu>,
     );
     const el = baseElement.querySelector("goa-app-header-menu");
     expect(el).toBeTruthy();
@@ -27,7 +27,7 @@ describe("AppHeaderMenu", () => {
 
   it("should set the props correctly", () => {
     const { baseElement } = render(
-      <GoABAppHeaderMenu heading="Some label" leadingIcon="search" testId="foo" />,
+      <GoabAppHeaderMenu heading="Some label" leadingIcon="search" testId="foo" />,
     );
     const el = baseElement.querySelector("goa-app-header-menu");
     expect(el).toBeTruthy();

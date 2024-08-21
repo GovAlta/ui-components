@@ -1,4 +1,4 @@
-import { GoABButtonGroupAlignment, GoABButtonGroupGap, Spacing } from "@abgov/ui-components-common";
+import { GoabButtonGroupAlignment, GoabButtonGroupGap, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
@@ -19,9 +19,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABButtonGroup {
-  @Input() alignment?: GoABButtonGroupAlignment;
-  @Input() gap?: GoABButtonGroupGap;
+export class GoabButtonGroup {
+  @Input() alignment?: GoabButtonGroupAlignment;
+  @Input() gap?: GoabButtonGroupGap;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import ThreeColumnLayout from "./three-column-layout";
-import { GoABAppHeader } from "../app-header/app-header";
-import { GoABAppFooter } from "../footer/footer";
+import { GoabAppHeader } from "../app-header/app-header";
+import { GoabAppFooter } from "../footer/footer";
 
 const Links = () => (
   <>
@@ -23,8 +23,8 @@ describe("ThreeColumnLayout", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
       <ThreeColumnLayout
-        header={<GoABAppHeader />}
-        footer={<GoABAppFooter />}
+        header={<GoabAppHeader />}
+        footer={<GoabAppFooter />}
         nav={<Links />}
         sideMenu={<SideMenu />}
       >
@@ -54,8 +54,8 @@ describe("ThreeColumnLayout", () => {
   it("should render leftColumnWidth, rightColumnWidth, maxContentWidth accordingly", () => {
     const { baseElement } = render(
       <ThreeColumnLayout
-        header={<GoABAppHeader />}
-        footer={<GoABAppFooter />}
+        header={<GoabAppHeader />}
+        footer={<GoabAppFooter />}
         nav={<Links />}
         sideMenu={<SideMenu />}
         leftColumnWidth="20%"

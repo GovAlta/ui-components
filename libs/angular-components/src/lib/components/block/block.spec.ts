@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABBlock } from "./block";
+import { GoabBlock } from "./block";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoABBlockAlignment,
-  GoABBlockDirection,
+  GoabBlockAlignment,
+  GoabBlockDirection,
   Spacing,
 } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
@@ -26,8 +26,8 @@ import { By } from "@angular/platform-browser";
 })
 class TestBlockComponent {
   gap?: Spacing;
-  direction?: GoABBlockDirection;
-  alignment?: GoABBlockAlignment;
+  direction?: GoabBlockDirection;
+  alignment?: GoabBlockAlignment;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -41,7 +41,7 @@ describe("GoABBlock", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABBlock],
+      imports: [GoabBlock],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [TestBlockComponent],
     }).compileComponents();
@@ -49,8 +49,8 @@ describe("GoABBlock", () => {
     fixture = TestBed.createComponent(TestBlockComponent);
     component = fixture.componentInstance;
     component.gap = "3xs" as Spacing;
-    component.direction = "row" as GoABBlockDirection;
-    component.alignment = "center" as GoABBlockAlignment;
+    component.direction = "row" as GoabBlockDirection;
+    component.alignment = "center" as GoabBlockAlignment;
     component.testId = "blockTestId";
     component.mt = "sm" as Spacing;
     component.mb = "m" as Spacing;

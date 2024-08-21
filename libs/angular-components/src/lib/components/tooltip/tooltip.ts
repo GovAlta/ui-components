@@ -1,4 +1,4 @@
-import { GoABTooltipHorizontalAlignment, GoABTooltipPosition, Spacing } from "@abgov/ui-components-common";
+import { GoabTooltipHorizontalAlignment, GoabTooltipPosition, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
@@ -20,10 +20,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABTooltip {
-  @Input() position?: GoABTooltipPosition;
+export class GoabTooltip {
+  @Input() position?: GoabTooltipPosition;
   @Input() content?: string;
-  @Input() hAlign?: GoABTooltipHorizontalAlignment;
+  @Input() hAlign?: GoabTooltipHorizontalAlignment;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

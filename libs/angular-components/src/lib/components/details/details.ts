@@ -20,7 +20,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABDetails {
+export class GoabDetails {
   @Input() heading?: string;
   @Input() testId?: string;
   @Input() open?: boolean;

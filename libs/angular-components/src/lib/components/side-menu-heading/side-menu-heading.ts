@@ -1,4 +1,4 @@
-import { GoABIconType } from "@abgov/ui-components-common";
+import { GoabIconType } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -16,8 +16,8 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABSideMenuHeading {
-  @Input() icon!: GoABIconType;
+export class GoabSideMenuHeading {
+  @Input() icon!: GoabIconType;
   @Input() testId?: string;
   @Input() meta!: TemplateRef<any>;
 }

@@ -1,4 +1,4 @@
-import { GoABFormStepperOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { GoabFormStepperOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
@@ -19,7 +19,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABFormStepper {
+export class GoabFormStepper {
   @Input() step?: number = -1;
   @Input() testId?: string;
   @Input() mt?: Spacing;
@@ -27,10 +27,10 @@ export class GoABFormStepper {
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<GoABFormStepperOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoabFormStepperOnChangeDetail>();
 
   onchange(e: Event) {
-    const detail = (e as CustomEvent<GoABFormStepperOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoabFormStepperOnChangeDetail>).detail;
     this.onChange.emit(detail);
   }
 }

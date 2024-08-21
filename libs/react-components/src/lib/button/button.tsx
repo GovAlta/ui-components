@@ -1,16 +1,16 @@
 import { ReactNode, useEffect, useRef } from "react";
 import {
-  GoABButtonSize,
-  GoABButtonType,
-  GoABButtonVariant,
-  GoABIconType,
+  GoabButtonSize,
+  GoabButtonType,
+  GoabButtonVariant,
+  GoabIconType,
   Margins,
 } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  type?: GoABButtonType;
-  size?: GoABButtonSize;
-  variant?: GoABButtonVariant;
+  type?: GoabButtonType;
+  size?: GoabButtonSize;
+  variant?: GoabButtonVariant;
   disabled?: boolean;
   leadingicon?: string;
   trailingicon?: string;
@@ -27,19 +27,19 @@ declare global {
   }
 }
 
-export interface GoABButtonProps extends Margins {
-  type?: GoABButtonType;
-  size?: GoABButtonSize;
-  variant?: GoABButtonVariant;
+export interface GoabButtonProps extends Margins {
+  type?: GoabButtonType;
+  size?: GoabButtonSize;
+  variant?: GoabButtonVariant;
   disabled?: boolean;
-  leadingIcon?: GoABIconType;
-  trailingIcon?: GoABIconType;
+  leadingIcon?: GoabIconType;
+  trailingIcon?: GoabIconType;
   onClick?: () => void;
   testId?: string;
   children?: ReactNode;
 }
 
-export function GoABButton({
+export function GoabButton({
   disabled = false,
   type = "primary",
   size,
@@ -53,7 +53,7 @@ export function GoABButton({
   mr,
   mb,
   ml,
-}: GoABButtonProps): JSX.Element {
+}: GoabButtonProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -93,4 +93,4 @@ export function GoABButton({
   );
 }
 
-export default GoABButton;
+export default GoabButton;

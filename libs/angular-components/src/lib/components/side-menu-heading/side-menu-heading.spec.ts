@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABSideMenuHeading } from "./side-menu-heading";
+import { GoabSideMenuHeading } from "./side-menu-heading";
 import { Component } from "@angular/core";
-import { GoABBadge } from "../badge/badge";
+import { GoabBadge } from "../badge/badge";
 
 @Component({
   template: `
@@ -19,7 +19,7 @@ describe("GoABSideMenuHeading", () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [TestSideMenuHeadingComponent],
-      imports: [GoABSideMenuHeading, GoABBadge]
+      imports: [GoabSideMenuHeading, GoabBadge]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSideMenuHeadingComponent);

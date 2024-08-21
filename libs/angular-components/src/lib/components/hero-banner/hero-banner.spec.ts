@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABHeroBanner } from "./hero-banner";
+import { GoabHeroBanner } from "./hero-banner";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
@@ -39,7 +39,7 @@ describe("GoABHeroBanner", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestHeroBannerComponent],
-      imports: [GoABHeroBanner],
+      imports: [GoabHeroBanner],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestHeroBannerComponent);

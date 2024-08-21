@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABChip } from "./chip";
+import { GoabChip } from "./chip";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABChipVariant, GoABIconType, Spacing } from "@abgov/ui-components-common";
+import { GoabChipVariant, GoabIconType, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
@@ -24,11 +24,11 @@ import { fireEvent } from "@testing-library/dom";
   `,
 })
 class TestChipComponent {
-  leadingIcon?: GoABIconType | null;
+  leadingIcon?: GoabIconType | null;
   error?: boolean;
   deletable?: boolean;
   content?: string;
-  variant?: GoABChipVariant;
+  variant?: GoabChipVariant;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -45,7 +45,7 @@ describe("GoABChip", () => {
   let component: TestChipComponent;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABChip],
+      imports: [GoabChip],
       declarations: [TestChipComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

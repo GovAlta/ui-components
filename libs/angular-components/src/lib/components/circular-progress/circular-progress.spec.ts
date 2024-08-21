@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABCircularProgress } from "./circular-progress";
+import { GoabCircularProgress } from "./circular-progress";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoABCircularProgressSize,
-  GoABCircularProgressVariant,
+  GoabCircularProgressSize,
+  GoabCircularProgressVariant,
 } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
@@ -20,8 +20,8 @@ import { By } from "@angular/platform-browser";
   `,
 })
 class TestCircularProgressComponent {
-  variant?: GoABCircularProgressVariant;
-  size?: GoABCircularProgressSize;
+  variant?: GoabCircularProgressVariant;
+  size?: GoabCircularProgressSize;
   message?: string;
   visible?: boolean;
   progress?: number;
@@ -34,7 +34,7 @@ describe("GoABCircularProgress", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABCircularProgress],
+      imports: [GoabCircularProgress],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [TestCircularProgressComponent],
     }).compileComponents();
@@ -59,7 +59,7 @@ describe("GoABCircularProgress", () => {
   describe.each(["fullscreen", "inline"])("Testing variant %s", (variant) => {
     test.each([-1, 50])("Testing progress %s", (progress: number) => {
       component.progress = progress;
-      component.variant = variant as GoABCircularProgressVariant;
+      component.variant = variant as GoabCircularProgressVariant;
       component.visible = true;
 
       fixture.detectChanges();

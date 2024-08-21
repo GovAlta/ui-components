@@ -2,8 +2,8 @@ import { render, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { fireEvent } from "@testing-library/dom";
 
-import { GoABRadioGroup, GoABRadioItem } from "./radio-group";
-import { GoABRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabRadioGroup, GoabRadioItem } from "./radio-group";
+import { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 
 type MockData = {
   title: string;
@@ -18,7 +18,7 @@ type MockData = {
   radios: { text: string; value: string; description?: string | React.ReactNode }[];
 };
 
-const noop = (detail: GoABRadioGroupOnChangeDetail) => {
+const noop = (detail: GoabRadioGroupOnChangeDetail) => {
   /* do nothing */
 };
 
@@ -42,7 +42,7 @@ describe("RadioGroup", () => {
   describe("Basic rendering", () => {
     it("should render successfully", async () => {
       const data = baseMockData;
-      const { baseElement } = render(<GoABRadioGroup
+      const { baseElement } = render(<GoabRadioGroup
         name="fruits"
         disabled={data.disabled}
         value={data.value}
@@ -54,7 +54,7 @@ describe("RadioGroup", () => {
         onChange={noop}
       >
         {data.radios.map((radio) => (
-          <GoABRadioItem
+          <GoabRadioItem
             key={radio.value}
             label={radio.text}
             name="fruits"
@@ -63,9 +63,9 @@ describe("RadioGroup", () => {
             ariaLabel={"you are choosing " + radio.value}
           >
             {radio.text}
-          </GoABRadioItem>
+          </GoabRadioItem>
         ))}
-      </GoABRadioGroup>);
+      </GoabRadioGroup>);
       expect(baseElement).toBeTruthy();
       const el = baseElement.querySelector("goa-radio-group");
       expect(el).toBeTruthy();
@@ -92,7 +92,7 @@ describe("RadioGroup", () => {
     it("initial data is set", async () => {
       const data = baseMockData;
       render(
-        <GoABRadioGroup
+        <GoabRadioGroup
           name="fruits"
           disabled={data.disabled}
           value={data.value}
@@ -103,7 +103,7 @@ describe("RadioGroup", () => {
           onChange={noop}
         >
           {data.radios.map((radio) => (
-            <GoABRadioItem
+            <GoabRadioItem
               key={radio.value}
               label={radio.text}
               name="fruits"
@@ -111,9 +111,9 @@ describe("RadioGroup", () => {
               value={radio.value}
             >
               {radio.text}
-            </GoABRadioItem>
+            </GoabRadioItem>
           ))}
-        </GoABRadioGroup>,
+        </GoabRadioGroup>,
       );
 
       const radios = document.querySelectorAll<HTMLInputElement>("input[type=radio]");
@@ -125,14 +125,14 @@ describe("RadioGroup", () => {
     it("render with description", async () => {
       const data = baseMockData;
       const result = render(
-        <GoABRadioGroup
+        <GoabRadioGroup
           name="fruits"
           disabled={data.disabled}
           value={data.value}
           onChange={noop}
         >
           {data.radios.map((radio) => (
-            <GoABRadioItem
+            <GoabRadioItem
               key={radio.value}
               label={radio.text}
               name="fruits"
@@ -141,9 +141,9 @@ describe("RadioGroup", () => {
               description={radio.description}
             >
               {radio.text}
-            </GoABRadioItem>
+            </GoabRadioItem>
           ))}
-        </GoABRadioGroup>,
+        </GoabRadioGroup>,
       );
 
       const radios = document.querySelectorAll("goa-radio-item");
@@ -160,14 +160,14 @@ describe("RadioGroup", () => {
       const data = { ...baseMockData, value: "oranges", disabled: true };
 
       const { container } = render(
-        <GoABRadioGroup
+        <GoabRadioGroup
           name="fruits"
           disabled={data.disabled}
           value={data.value}
-          onChange={(event: GoABRadioGroupOnChangeDetail) => onChange(event)}
+          onChange={(event: GoabRadioGroupOnChangeDetail) => onChange(event)}
         >
           {data.radios.map((radio) => (
-            <GoABRadioItem
+            <GoabRadioItem
               key={radio.value}
               label={radio.text}
               name="fruits"
@@ -175,9 +175,9 @@ describe("RadioGroup", () => {
               value={radio.value}
             >
               {radio.text}
-            </GoABRadioItem>
+            </GoabRadioItem>
           ))}
-        </GoABRadioGroup>,
+        </GoabRadioGroup>,
       );
 
       await waitFor(() => {
@@ -193,9 +193,9 @@ describe("RadioGroup", () => {
     const onChange = vi.fn();
     const data = { ...baseMockData, value: "oranges" };
     const { container } = render(
-      <GoABRadioGroup name="fruits" value={data.value} onChange={onChange}>
+      <GoabRadioGroup name="fruits" value={data.value} onChange={onChange}>
         {data.radios.map((radio) => (
-          <GoABRadioItem
+          <GoabRadioItem
             key={radio.value}
             label={radio.text}
             name="fruits"
@@ -203,9 +203,9 @@ describe("RadioGroup", () => {
             value={radio.value}
           >
             {radio.text}
-          </GoABRadioItem>
+          </GoabRadioItem>
         ))}
-      </GoABRadioGroup>,
+      </GoabRadioGroup>,
     );
 
     const radios = container.querySelectorAll<HTMLInputElement>("goa-radio-item");

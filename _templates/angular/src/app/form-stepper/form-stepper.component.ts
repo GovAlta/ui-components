@@ -1,5 +1,5 @@
-import { GoABButton, GoABFormStep, GoABFormStepper, GoABPages } from "@abgov/angular-components";
-import { GoABFormStepStatus, GoABFormStepperOnChangeDetail, GoABFormStepperType } from "@abgov/ui-components-common";
+import { GoabButton, GoabFormStep, GoabFormStepper, GoabPages } from "@abgov/angular-components";
+import { GoabFormStepStatus, GoabFormStepperOnChangeDetail, GoabFormStepperType } from "@abgov/ui-components-common";
 import { Component } from "@angular/core";
 
 @Component({
@@ -7,10 +7,10 @@ import { Component } from "@angular/core";
   selector: "abgov-form-stepper",
   templateUrl: "./form-stepper.component.html",
   imports: [
-    GoABFormStepper,
-    GoABFormStep,
-    GoABPages,
-    GoABButton,
+    GoabFormStepper,
+    GoabFormStep,
+    GoabPages,
+    GoabButton,
   ]
 })
 export class FormStepperComponent {
@@ -18,9 +18,9 @@ export class FormStepperComponent {
   constrainedStep = 1;
 
   // controlled by the user based on form completion
-  status: GoABFormStepStatus[] = ["complete", "complete", "incomplete"];
+  status: GoabFormStepStatus[] = ["complete", "complete", "incomplete"];
 
-  updateFreeStep(event: GoABFormStepperOnChangeDetail) {
+  updateFreeStep(event: GoabFormStepperOnChangeDetail) {
     console.log(event)
     this.freeStep = event.step;
   }
@@ -31,7 +31,7 @@ export class FormStepperComponent {
     this.freeStep = page;
   }
 
-  updateConstrainedStep(event: GoABFormStepperOnChangeDetail) {
+  updateConstrainedStep(event: GoabFormStepperOnChangeDetail) {
     console.log(event)
     this.constrainedStep = event.step;
   }

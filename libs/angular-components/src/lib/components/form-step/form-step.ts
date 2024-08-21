@@ -1,4 +1,4 @@
-import { GoABFormStepStatus } from "@abgov/ui-components-common";
+import { GoabFormStepStatus } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
@@ -11,7 +11,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
     ></goa-form-step> `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABFormStep {
+export class GoabFormStep {
   @Input() text?: string;
-  @Input() status?: GoABFormStepStatus;
+  @Input() status?: GoabFormStepStatus;
 }

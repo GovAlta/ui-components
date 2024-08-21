@@ -1,24 +1,24 @@
 import { useEffect, useRef } from "react";
 import { format, isValid, parseISO } from "date-fns";
 import {
-  GoABAutoCapitalize,
-  GoABDate,
-  GoABIconType,
-  GoABInputOnBlurDetail,
-  GoABInputOnChangeDetail,
-  GoABInputOnFocusDetail,
-  GoABInputOnKeyPressDetail,
-  GoABInputType,
+  GoabAutoCapitalize,
+  GoabDate,
+  GoabIconType,
+  GoaInputOnBlurDetail,
+  GoabInputOnChangeDetail,
+  GoabInputOnFocusDetail,
+  GoabInputOnKeyPressDetail,
+  GoabInputType,
   Margins,
 } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
-  type?: GoABInputType;
+  type?: GoabInputType;
   name: string;
   value?: string;
   id?: string;
-  autocapitalize?: GoABAutoCapitalize;
+  autocapitalize?: GoabAutoCapitalize;
   debounce?: number;
   placeholder?: string;
   leadingicon?: string;
@@ -58,10 +58,10 @@ interface BaseProps extends Margins {
   id?: string;
   debounce?: number;
   disabled?: boolean;
-  autoCapitalize?: GoABAutoCapitalize;
+  autoCapitalize?: GoabAutoCapitalize;
   placeholder?: string;
-  leadingIcon?: GoABIconType;
-  trailingIcon?: GoABIconType;
+  leadingIcon?: GoabIconType;
+  trailingIcon?: GoabIconType;
   onTrailingIconClick?: () => void;
   variant?: "goa" | "bare";
   focused?: boolean;
@@ -77,12 +77,12 @@ interface BaseProps extends Margins {
   maxLength?: number;
 }
 
-type OnChange<T = string> = (detail: GoABInputOnChangeDetail<T>) => void;
-type OnFocus<T = string> = (detail: GoABInputOnFocusDetail<T>) => void;
-type OnBlur<T = string> = (detail: GoABInputOnBlurDetail<T>) => void;
-type OnKeyPress<T = string> = (detail: GoABInputOnKeyPressDetail<T>) => void;
+type OnChange<T = string> = (detail: GoabInputOnChangeDetail<T>) => void;
+type OnFocus<T = string> = (detail: GoabInputOnFocusDetail<T>) => void;
+type OnBlur<T = string> = (detail: GoaInputOnBlurDetail<T>) => void;
+type OnKeyPress<T = string> = (detail: GoabInputOnKeyPressDetail<T>) => void;
 
-export interface GoABInputProps extends BaseProps {
+export interface GoabInputProps extends BaseProps {
   onChange: OnChange<string>;
   value?: string;
   min?: number | string;
@@ -93,7 +93,7 @@ export interface GoABInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<string>;
 }
 
-interface GoABNumberInputProps extends BaseProps {
+interface GoabNumberInputProps extends BaseProps {
   onChange: OnChange<number>;
   value?: number;
   min?: number;
@@ -104,18 +104,18 @@ interface GoABNumberInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<number>;
 }
 
-interface GoABDateInputProps extends BaseProps {
-  onChange: OnChange<GoABDate>;
-  value?: GoABDate;
-  min?: GoABDate;
-  max?: GoABDate;
+interface GoabDateInputProps extends BaseProps {
+  onChange: OnChange<GoabDate>;
+  value?: GoabDate;
+  min?: GoabDate;
+  max?: GoabDate;
   step?: number;
-  onFocus?: OnFocus<GoABDate>;
-  onBlur?: OnBlur<GoABDate>;
-  onKeyPress?: OnKeyPress<GoABDate>;
+  onFocus?: OnFocus<GoabDate>;
+  onBlur?: OnBlur<GoabDate>;
+  onKeyPress?: OnKeyPress<GoabDate>;
 }
 
-export function GoABInput({
+export function GoabInput({
   id,
   debounce,
   name,
@@ -150,7 +150,7 @@ export function GoABInput({
   onFocus,
   onBlur,
   onKeyPress,
-}: GoABInputProps & { type?: GoABInputType }): JSX.Element {
+}: GoabInputProps & { type?: GoabInputType }): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!ref.current) {
@@ -158,7 +158,7 @@ export function GoABInput({
     }
     const current = ref.current;
     const changeListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoABInputOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoabInputOnChangeDetail>).detail;
       onChange(detail);
     };
     const clickListener = () => {
@@ -166,17 +166,17 @@ export function GoABInput({
     };
 
     const focusListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoABInputOnFocusDetail>).detail;
+      const detail = (e as CustomEvent<GoabInputOnFocusDetail>).detail;
       onFocus?.(detail);
     };
 
     const blurListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoABInputOnBlurDetail>).detail;
+      const detail = (e as CustomEvent<GoaInputOnBlurDetail>).detail;
       onBlur?.(detail);
     };
 
     const keypressListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoABInputOnKeyPressDetail>).detail;
+      const detail = (e as CustomEvent<GoabInputOnKeyPressDetail>).detail;
       onKeyPress?.(detail);
     };
 
@@ -233,8 +233,8 @@ export function GoABInput({
   );
 }
 
-const onDateChangeHandler = (onChange: OnChange<GoABDate>) => {
-  return ({ name, value }: GoABInputOnChangeDetail<string | Date>) => {
+const onDateChangeHandler = (onChange: OnChange<GoabDate>) => {
+  return ({ name, value }: GoabInputOnChangeDetail<string | Date>) => {
     if (!value) {
       onChange({ name, value: "" });
       return;
@@ -253,7 +253,7 @@ const onDateChangeHandler = (onChange: OnChange<GoABDate>) => {
 };
 
 const onTimeChangeHandler = (onChange: OnChange) => {
-  return ({ name, value }: GoABInputOnChangeDetail) => {
+  return ({ name, value }: GoabInputOnChangeDetail) => {
     if (!value) {
       onChange({ name, value: "" });
       return;
@@ -262,7 +262,7 @@ const onTimeChangeHandler = (onChange: OnChange) => {
   };
 };
 
-function toString(value: GoABDate | null | undefined, tmpl = "yyyy-MM-dd"): string {
+function toString(value: GoabDate | null | undefined, tmpl = "yyyy-MM-dd"): string {
   if (!value) {
     return "";
   }
@@ -275,22 +275,22 @@ function toString(value: GoABDate | null | undefined, tmpl = "yyyy-MM-dd"): stri
   return format(value, tmpl);
 }
 
-export function GoABInputText(props: GoABInputProps): JSX.Element {
-  return <GoABInput {...props} type="text" />;
+export function GoabInputText(props: GoabInputProps): JSX.Element {
+  return <GoabInput {...props} type="text" />;
 }
 
-export function GoABInputPassword(props: GoABInputProps): JSX.Element {
-  return <GoABInput {...props} type="password" />;
+export function GoabInputPassword(props: GoabInputProps): JSX.Element {
+  return <GoabInput {...props} type="password" />;
 }
 
-export function GoABInputDate({
+export function GoabInputDate({
   value,
   min = "",
   max = "",
   ...props
-}: GoABDateInputProps): JSX.Element {
+}: GoabDateInputProps): JSX.Element {
   return (
-    <GoABInput
+    <GoabInput
       {...props}
       type="date"
       onChange={onDateChangeHandler(props.onChange)}
@@ -301,14 +301,14 @@ export function GoABInputDate({
   );
 }
 
-export function GoABInputTime({
+export function GoabInputTime({
   value,
   min = "",
   max = "",
   ...props
-}: GoABInputProps): JSX.Element {
+}: GoabInputProps): JSX.Element {
   return (
-    <GoABInput
+    <GoabInput
       {...props}
       onChange={onTimeChangeHandler(props.onChange)}
       value={value}
@@ -317,14 +317,14 @@ export function GoABInputTime({
   );
 }
 
-export function GoABInputDateTime({
+export function GoabInputDateTime({
   value,
   min = "",
   max = "",
   ...props
-}: GoABDateInputProps): JSX.Element {
+}: GoabDateInputProps): JSX.Element {
   return (
-    <GoABInput
+    <GoabInput
       {...props}
       onChange={onDateChangeHandler(props.onChange)}
       value={toString(value, "yyyy-MM-dd'T'HH:mm")}
@@ -333,23 +333,23 @@ export function GoABInputDateTime({
   );
 }
 
-export function GoABInputEmail(props: GoABInputProps): JSX.Element {
-  return <GoABInput {...props} type="email" />;
+export function GoabInputEmail(props: GoabInputProps): JSX.Element {
+  return <GoabInput {...props} type="email" />;
 }
 
-export function GoABInputSearch(props: GoABInputProps): JSX.Element {
-  return <GoABInput {...props} type="search" trailingIcon="search" />;
+export function GoabInputSearch(props: GoabInputProps): JSX.Element {
+  return <GoabInput {...props} type="search" trailingIcon="search" />;
 }
 
-export function GoABInputUrl(props: GoABInputProps): JSX.Element {
-  return <GoABInput {...props} type="url" />;
+export function GoabInputUrl(props: GoabInputProps): JSX.Element {
+  return <GoabInput {...props} type="url" />;
 }
 
-export function GoABInputTel(props: GoABInputProps): JSX.Element {
-  return <GoABInput {...props} type="tel" />;
+export function GoabInputTel(props: GoabInputProps): JSX.Element {
+  return <GoabInput {...props} type="tel" />;
 }
 
-export function GoABInputFile(props: GoABInputProps): JSX.Element {
+export function GoabInputFile(props: GoabInputProps): JSX.Element {
   return (
     <input
       id={props.id}
@@ -361,30 +361,30 @@ export function GoABInputFile(props: GoABInputProps): JSX.Element {
   );
 }
 
-export function GoABInputMonth(props: GoABInputProps): JSX.Element {
-  return <GoABInput {...props} type="month" />;
+export function GoabInputMonth(props: GoabInputProps): JSX.Element {
+  return <GoabInput {...props} type="month" />;
 }
 
-export function GoABInputNumber({
+export function GoabInputNumber({
   min = Number.MIN_VALUE,
   max = Number.MAX_VALUE,
   value,
   ...props
-}: GoABNumberInputProps): JSX.Element {
-  const onNumberChange = ({ name, value }: GoABInputOnChangeDetail) => {
+}: GoabNumberInputProps): JSX.Element {
+  const onNumberChange = ({ name, value }: GoabInputOnChangeDetail) => {
     props.onChange({ name, value: parseFloat(value) });
   };
-  const onFocus = ({ name, value }: GoABInputOnFocusDetail) => {
+  const onFocus = ({ name, value }: GoabInputOnFocusDetail) => {
     props.onFocus?.({ name, value: parseFloat(value) });
   };
-  const onBlur = ({ name, value }: GoABInputOnBlurDetail) => {
+  const onBlur = ({ name, value }: GoaInputOnBlurDetail) => {
     props.onBlur?.({ name, value: parseFloat(value) });
   };
-  const onKeyPress = ({ name, value, key }: GoABInputOnKeyPressDetail) => {
+  const onKeyPress = ({ name, value, key }: GoabInputOnKeyPressDetail) => {
     props.onKeyPress?.({ name, value: parseFloat(value), key: parseInt(key) });
   };
   return (
-    <GoABInput
+    <GoabInput
       {...props}
       onChange={onNumberChange}
       min={min?.toString()}
@@ -398,8 +398,8 @@ export function GoABInputNumber({
   );
 }
 
-export function GoABInputRange(props: GoABInputProps): JSX.Element {
-  return <GoABInput {...props} type="range" />;
+export function GoabInputRange(props: GoabInputProps): JSX.Element {
+  return <GoabInput {...props} type="range" />;
 }
 
-export default GoABInput;
+export default GoabInput;

@@ -1,11 +1,11 @@
-import { GoABAriaLiveType, GoABNotificationType } from "@abgov/ui-components-common";
+import { GoabAriaLiveType, GoabNotificationType } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps {
   ref: React.RefObject<HTMLElement>;
-  type: GoABNotificationType;
+  type: GoabNotificationType;
   maxcontentwidth?: string;
-  arialive?: GoABAriaLiveType;
+  arialive?: GoabAriaLiveType;
 }
 
 declare global {
@@ -17,23 +17,23 @@ declare global {
   }
 }
 
-export interface GoABNotificationProps {
-  type?: GoABNotificationType;
-  ariaLive?: GoABAriaLiveType;
+export interface GoabNotificationProps {
+  type?: GoabNotificationType;
+  ariaLive?: GoabAriaLiveType;
   maxContentWidth?: string;
   children?: React.ReactNode;
   onDismiss?: () => void;
   testId?: string;
 }
 
-export const GoABNotification = ({
+export const GoabNotification = ({
   type = "information",
   ariaLive,
   maxContentWidth,
   children,
   testId,
   onDismiss,
-}: GoABNotificationProps) => {
+}: GoabNotificationProps) => {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -64,4 +64,4 @@ export const GoABNotification = ({
   );
 };
 
-export default GoABNotification;
+export default GoabNotification;

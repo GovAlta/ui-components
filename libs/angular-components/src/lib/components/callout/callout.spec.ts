@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABCallout } from "./callout";
+import { GoabCallout } from "./callout";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABCalloutSize, GoABCalloutType } from "@abgov/ui-components-common";
+import { GoabCalloutSize, GoabCalloutType } from "@abgov/ui-components-common";
 
 @Component({
   template: `
@@ -22,9 +22,9 @@ import { GoABCalloutSize, GoABCalloutType } from "@abgov/ui-components-common";
   `,
 })
 class TestCalloutComponent {
-  type?: GoABCalloutType;
+  type?: GoabCalloutType;
   heading?: string;
-  size?: GoABCalloutSize;
+  size?: GoabCalloutSize;
   testId?: string;
   mt?: string;
   mb?: string;
@@ -38,7 +38,7 @@ describe("GoABCallout", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABCallout],
+      imports: [GoabCallout],
       declarations: [TestCalloutComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

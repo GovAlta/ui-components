@@ -1,4 +1,4 @@
-import { GoABPopoverPosition, Spacing } from "@abgov/ui-components-common";
+import { GoabPopoverPosition, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -27,11 +27,11 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABPopover {
+export class GoabPopover {
   @Input() maxWidth = "320px";
   @Input() minWidth?: string;
   @Input() padded = true;
-  @Input() position?: GoABPopoverPosition;
+  @Input() position?: GoabPopoverPosition;
   @Input() relative?: boolean;
   @Input() testId?: string;
   @Input() mt?: Spacing;

@@ -1,11 +1,11 @@
-import { GoABTableOnSortDetail, GoABTableVariant, Margins } from "@abgov/ui-components-common";
+import { GoabTableOnSortDetail, GoabTableVariant, Margins } from "@abgov/ui-components-common";
 import { ReactNode, useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | null>;
   width?: string;
   stickyheader?: boolean;
-  variant?: GoABTableVariant;
+  variant?: GoabTableVariant;
 }
 
 declare global {
@@ -19,19 +19,19 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoABTableProps extends Margins {
+export interface GoabTableProps extends Margins {
   width?: string;
-  onSort?: (detail: GoABTableOnSortDetail) => void;
+  onSort?: (detail: GoabTableOnSortDetail) => void;
   // stickyHeader?: boolean; TODO: enable this later
-  variant?: GoABTableVariant;
+  variant?: GoabTableVariant;
   testId?: string;
   children?: ReactNode;
 }
 
 // legacy name
-export type TableProps = GoABTableProps;
+export type TableProps = GoabTableProps;
 
-export function GoABTable({ onSort, ...props }: GoABTableProps) {
+export function GoabTable({ onSort, ...props }: GoabTableProps) {
   const ref = useRef<HTMLTableElement>(null);
   useEffect(() => {
     if (!ref.current) {
@@ -39,7 +39,7 @@ export function GoABTable({ onSort, ...props }: GoABTableProps) {
     }
     const current = ref.current;
     const sortListener = (e: unknown) => {
-      const detail = (e as CustomEvent<GoABTableOnSortDetail>).detail;
+      const detail = (e as CustomEvent<GoabTableOnSortDetail>).detail;
       onSort?.(detail);
     };
 
@@ -66,4 +66,4 @@ export function GoABTable({ onSort, ...props }: GoABTableProps) {
   );
 }
 
-export default GoABTable;
+export default GoabTable;

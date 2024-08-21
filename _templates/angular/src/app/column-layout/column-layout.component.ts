@@ -1,11 +1,11 @@
 import { Component } from "@angular/core";
-import { GoABColumnLayout } from "@abgov/angular-components";
+import { GoabColumnLayout } from "@abgov/angular-components";
 
 @Component({
   standalone: true,
   selector: "abgov-column-layout",
   templateUrl: "./column-layout.component.html",
-  imports: [GoABColumnLayout],
+  imports: [GoabColumnLayout],
 })
 export class ColumnLayoutComponent {
   /** do nothing **/

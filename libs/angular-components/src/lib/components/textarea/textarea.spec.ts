@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABTextArea } from "./textarea";
+import { GoabTextArea } from "./textarea";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABTextAreaCountBy, Spacing } from "@abgov/ui-components-common";
+import { GoabTextAreaCountBy, Spacing } from "@abgov/ui-components-common";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
@@ -35,7 +35,7 @@ class TestTextareaComponent {
   width?: string;
   testId?: string;
   ariaLabel?: string;
-  countBy?: GoABTextAreaCountBy;
+  countBy?: GoabTextAreaCountBy;
   maxCount?: number;
   mt?: Spacing;
   mb?: Spacing;
@@ -54,7 +54,7 @@ describe("GoABTextArea", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestTextareaComponent],
-      imports: [GoABTextArea],
+      imports: [GoabTextArea],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestTextareaComponent);

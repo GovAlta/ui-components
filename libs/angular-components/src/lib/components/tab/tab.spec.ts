@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABTab } from "./tab";
+import { GoabTab } from "./tab";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 @Component({
@@ -22,7 +22,7 @@ describe("GoABTab", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestTabComponent],
-      imports: [GoABTab],
+      imports: [GoabTab],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

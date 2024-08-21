@@ -1,4 +1,4 @@
-import { GoABCheckboxOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { GoabCheckboxOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -42,12 +42,12 @@ import { NgTemplateOutlet } from "@angular/common";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => GoABCheckbox),
+      useExisting: forwardRef(() => GoabCheckbox),
     },
   ],
   imports: [NgTemplateOutlet],
 })
-export class GoABCheckbox implements ControlValueAccessor {
+export class GoabCheckbox implements ControlValueAccessor {
   @Input() name?: string;
   @Input() checked?: boolean;
   @Input() disabled?: boolean;
@@ -64,7 +64,7 @@ export class GoABCheckbox implements ControlValueAccessor {
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<GoABCheckboxOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoabCheckboxOnChangeDetail>();
 
   getDescriptionAsString(): string {
     return typeof this.description === "string" ? this.description : "";
@@ -78,7 +78,7 @@ export class GoABCheckbox implements ControlValueAccessor {
   }
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<GoABCheckboxOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoabCheckboxOnChangeDetail>).detail;
     this.onChange.emit(detail);
     this.markAsTouched();
     this.fcChange?.(detail.binding === "check" ? detail.checked : detail.value || "");

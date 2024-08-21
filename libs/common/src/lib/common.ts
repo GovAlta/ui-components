@@ -1,69 +1,69 @@
-export type GoABSpinnerType = "infinite" | "progress";
-export type GoABSpinnerSize = "small" | "medium" | "large" | "xlarge";
+export type GoabSpinnerType = "infinite" | "progress";
+export type GoabSpinnerSize = "small" | "medium" | "large" | "xlarge";
 
-export type GoABRadioGroupOnChangeDetail = {
+export type GoabRadioGroupOnChangeDetail = {
   name: string;
   value: string;
 }
 
-export type GoABInputOnChangeDetail<T = string> = {
+export type GoabInputOnChangeDetail<T = string> = {
   name: string;
   value: T;
 }
-export type GoABInputOnFocusDetail<T = string> = GoABInputOnChangeDetail<T>;
-export type GoABInputOnBlurDetail<T = string> = GoABInputOnChangeDetail<T>;
+export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
+export type GoaInputOnBlurDetail<T = string> = GoabInputOnChangeDetail<T>;
 
-export type GoABInputAutoCapitalize = "on" | "off" | "none" | "sentences" | "words" | "characters";
+export type GoabInputAutoCapitalize = "on" | "off" | "none" | "sentences" | "words" | "characters";
 
-export type GoABInputOnKeyPressDetail<T = string> = {
+export type GoabInputOnKeyPressDetail<T = string> = {
   name: string;
   value: T;
   key: T;
 }
 
-export type GoABFormStepperOnChangeDetail = {
+export type GoabFormStepperOnChangeDetail = {
   step: number;
 }
 
-export type GoABFileUploadInputOnSelectFileDetail = {
+export type GoabFileUploadInputOnSelectFileDetail = {
   file: File;
 }
 
-export type GoABFileUploadOnCancelDetail = {
+export type GoabFileUploadOnCancelDetail = {
   filename: string;
 }
 
-export type GoABFileUploadOnDeleteDetail = {
+export type GoabFileUploadOnDeleteDetail = {
   filename: string;
 }
 
-export type GoABDropdownOnChangeDetail = {
+export type GoabDropdownOnChangeDetail = {
   name?: string;
   value?: string;
   values?: string[];
 }
 
-export type GoABDatePickerOnChangeDetail = {
+export type GoabDatePickerOnChangeDetail = {
   name?: string;
   value: string | Date;
 }
 
-export type GoABChipVariant = "filter";
+export type GoabChipVariant = "filter";
 
-export type GoABCheckboxOnChangeDetail = {
+export type GoabCheckboxOnChangeDetail = {
   name?: string;
   value?: string;
   checked: boolean;
   binding: "value" | "check";
 }
 
-export type GoABCalendarOnChangeDetail = {
+export type GoabCalendarOnChangeDetail = {
   name?: string;
   value: string;
 }
 
 
-export type GoABBadgeType =
+export type GoabBadgeType =
   | "information"
   | "success"
   | "important"
@@ -72,74 +72,74 @@ export type GoABBadgeType =
   | "midtone"
   | "light";
 
-export type GoABPaginationVariant = "all" | "links-only";
+export type GoabPaginationVariant = "all" | "links-only";
 
-export type GoABPaginationOnChangeDetail = {
+export type GoabPaginationOnChangeDetail = {
   page: number;
 }
 
-export type GoABFormStepperType = "constrained" | "free";
-export type GoABFormStepStatus = "complete" | "incomplete" | "unstarted";
+export type GoabFormStepperType = "constrained" | "free";
+export type GoabFormStepStatus = "complete" | "incomplete" | "unstarted";
 
 // Formitem
-export type GoABFormItemLabelSize = "regular" | "large";
-export type GoABFormItemRequirement = "optional" | "required";
+export type GoabFormItemLabelSize = "regular" | "large";
+export type GoabFormItemRequirement = "optional" | "required";
 
 // FIle upload
-export type GoABFileUploadInputVariant = "dragdrop" | "button";
+export type GoabFileUploadInputVariant = "dragdrop" | "button";
 
 // Container
-export type GoABContainerAccent = "thick" | "thin" | "filled";
-export type GoABContainerPadding = "relaxed" | "compact";
-export type GoABContainerType =
+export type GoabContainerAccent = "thick" | "thin" | "filled";
+export type GoabContainerPadding = "relaxed" | "compact";
+export type GoabContainerType =
   | "interactive"
   | "non-interactive"
   | "info"
   | "error"
   | "success"
   | "important";
-export type GoABContainerWidth = "full" | "content";
+export type GoabContainerWidth = "full" | "content";
 
 // Callout
-export type GoABCalloutType = "information" | "success" | "important" | "emergency" | "event";
-export type GoABCalloutSize = "medium" | "large";
+export type GoabCalloutType = "information" | "success" | "important" | "emergency" | "event";
+export type GoabCalloutSize = "medium" | "large";
 
 // Button
-export type GoABButtonType =
+export type GoabButtonType =
   | "primary"
   | "submit"
   | "secondary"
   | "tertiary"
   | "start";
 
-export type GoABButtonSize = "compact" | "normal";
-export type GoABButtonVariant = "normal" | "destructive";
+export type GoabButtonSize = "compact" | "normal";
+export type GoabButtonVariant = "normal" | "destructive";
 
 // Button group
-export type GoABButtonGroupAlignment = "start" | "end" | "center";
-export type GoABButtonGroupGap = "relaxed" | "compact";
+export type GoabButtonGroupAlignment = "start" | "end" | "center";
+export type GoabButtonGroupGap = "relaxed" | "compact";
 
 // Accordion
-export type GoABAccordionHeadingSize = "small" | "medium";
+export type GoabAccordionHeadingSize = "small" | "medium";
 
 // Formstepper
 
 // Tooltip
 
-export type GoABTooltipPosition = "top" | "bottom" | "left" | "right";
-export type GoABTooltipHorizontalAlignment = "left" | "right" | "center";
+export type GoabTooltipPosition = "top" | "bottom" | "left" | "right";
+export type GoabTooltipHorizontalAlignment = "left" | "right" | "center";
 
 // Textarea
 
-export type GoABTextAreaCountBy = "character" | "word" | "";
+export type GoabTextAreaCountBy = "character" | "word" | "";
 
 
-export type GoABTextAreaOnChangeDetail = {
+export type GoabTextAreaOnChangeDetail = {
   name: string;
   value: string;
 }
 
-export type GoABTextAreaOnKeyPressDetail = {
+export type GoabTextAreaOnKeyPressDetail = {
   name: string;
   value: string;
   key: string;
@@ -147,35 +147,35 @@ export type GoABTextAreaOnKeyPressDetail = {
 
 // Tabs
 
-export interface GoABTabsProps {
+export interface GoabTabsProps {
   initialTab?: number;
 }
-export type GoABTabsOnChangeDetail = {
+export type GoabTabsOnChangeDetail = {
   tab: number;
 }
 // Table
 
-export type GoABTableVariant = "normal" | "relaxed";
-export type GoABTableSortDirection = "asc" | "desc" | "none";
-export interface GoABTableProps extends Margins {
+export type GoabTableVariant = "normal" | "relaxed";
+export type GoabTableSortDirection = "asc" | "desc" | "none";
+export interface GoabTableProps extends Margins {
   width?: string;
   onSort?: (sortBy: string, sortDir: number) => void;
-  variant?: GoABTableVariant;
+  variant?: GoabTableVariant;
   testId?: string;
 }
 
 
-export type GoABTableOnSortDetail = {
+export type GoabTableOnSortDetail = {
   sortBy: string;
   sortDir: number;
 }
 
 // Spacer
 
-export type GoABSpacerHorizontalSpacing = Spacing | "fill"
-export type GoABSpacerVerticalSpacing = Spacing;
+export type GoabSpacerHorizontalSpacing = Spacing | "fill"
+export type GoabSpacerVerticalSpacing = Spacing;
 
-export interface GoABSpacerProps {
+export interface GoabSpacerProps {
   hSpacing?: Spacing | "fill";
   vSpacing?: Spacing;
   testId?: string;
@@ -183,15 +183,15 @@ export interface GoABSpacerProps {
 
 // Skeleton
 
-export interface GoABSkeletonProps extends Margins {
+export interface GoabSkeletonProps extends Margins {
   maxWidth?: string;
-  size?: GoABSkeletonSize;
+  size?: GoabSkeletonSize;
   lineCount?: number;
-  type: GoABSkeletonType;
+  type: GoabSkeletonType;
   testId?: string;
 }
 
-export type GoABSkeletonType =
+export type GoabSkeletonType =
   | "image"
   | "text"
   | "title"
@@ -204,23 +204,23 @@ export type GoABSkeletonType =
   | "profile"
   | "article";
 
-export type GoABSkeletonSize = "1" | "2" | "3" | "4";
+export type GoabSkeletonSize = "1" | "2" | "3" | "4";
 
 // Radio
 
-export type GoABRadioGroupOrientation = "horizontal" | "vertical";
+export type GoabRadioGroupOrientation = "horizontal" | "vertical";
 
-export interface GoABRadioGroup extends Margins {
+export interface GoabRadioGroup extends Margins {
   name: string;
   value?: string;
   disabled?: boolean;
-  orientation?: GoABRadioGroupOrientation;
+  orientation?: GoabRadioGroupOrientation;
   testId?: string;
   error?: boolean;
   ariaLabel?: string;
 }
 
-export interface GoABRadioItem {
+export interface GoabRadioItem {
   value?: string;
   label?: string;
   name?: string;
@@ -233,40 +233,40 @@ export interface GoABRadioItem {
 
 // Progress
 
-export type GoABCircularProgressVariant = "fullscreen" | "inline";
-export type GoABCircularProgressSize = "small" | "large";
+export type GoabCircularProgressVariant = "fullscreen" | "inline";
+export type GoabCircularProgressSize = "small" | "large";
 
 // Popover
 
-export type GoABPopoverPosition = "above" | "below" | "auto";
+export type GoabPopoverPosition = "above" | "below" | "auto";
 
-export interface GoABPopoverProps extends Margins {
+export interface GoabPopoverProps extends Margins {
   testId?: string;
   maxWidth?: string;
   padded?: boolean;
-  position?: GoABPopoverPosition;
+  position?: GoabPopoverPosition;
   relative?: boolean;
 }
 
 // Notification
 
-export type GoABNotificationType =
+export type GoabNotificationType =
   | "important"
   | "information"
   | "event"
   | "emergency";
 
-export type GoABAriaLiveType = "polite" | "assertive" | "off";
+export type GoabAriaLiveType = "polite" | "assertive" | "off";
 
 // Microsite Header
 
-export type GoABServiceLevel = "alpha" | "beta" | "live";
-export type GoABLinkTarget = "self" | "blank";
+export type GoabServiceLevel = "alpha" | "beta" | "live";
+export type GoabLinkTarget = "self" | "blank";
 
 // Modal
-export type GoABModalRole = "dialog" | "alertdialog";
-export type GoABModalTransition = "fast" | "slow" | "none";
-export type GoABModalCalloutVariant =
+export type GoabModalRole = "dialog" | "alertdialog";
+export type GoabModalTransition = "fast" | "slow" | "none";
+export type GoabModalCalloutVariant =
   | "information"
   | "important"
   | "emergency"
@@ -275,8 +275,8 @@ export type GoABModalCalloutVariant =
 
 // Input
 
-export type GoABDate = Date | string;
-export type GoABInputType =
+export type GoabDate = Date | string;
+export type GoabInputType =
   | "text"
   | "password"
   | "email"
@@ -291,7 +291,7 @@ export type GoABInputType =
   | "url"
   | "week";
 
-export type GoABAutoCapitalize =
+export type GoabAutoCapitalize =
   | "on"
   | "off"
   | "none"
@@ -305,7 +305,7 @@ export type OnFocus<T = string> = (name: string, value: T) => void;
 export type OnBlur<T = string> = (name: string, value: T) => void;
 export type OnKeyPress<T = string> = (name: string, value: T, key: string) => void;
 
-export interface GoABInputProps extends BaseProps {
+export interface GoabInputProps extends BaseProps {
   onChange: OnChange<string>;
   value?: string;
   min?: number | string;
@@ -316,7 +316,7 @@ export interface GoABInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<string>;
 }
 
-export interface GoABNumberInputProps extends BaseProps {
+export interface GoabNumberInputProps extends BaseProps {
   onChange: OnChange<number>;
   value?: number;
   min?: number;
@@ -327,15 +327,15 @@ export interface GoABNumberInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<number>;
 }
 
-export interface GoABDateInputProps extends BaseProps {
-  onChange: OnChange<GoABDate>;
-  value?: GoABDate;
-  min?: GoABDate;
-  max?: GoABDate;
+export interface GoabDateInputProps extends BaseProps {
+  onChange: OnChange<GoabDate>;
+  value?: GoabDate;
+  min?: GoabDate;
+  max?: GoabDate;
   step?: number;
-  onFocus?: OnFocus<GoABDate>;
-  onBlur?: OnBlur<GoABDate>;
-  onKeyPress?: OnKeyPress<GoABDate>;
+  onFocus?: OnFocus<GoabDate>;
+  onBlur?: OnBlur<GoabDate>;
+  onKeyPress?: OnKeyPress<GoabDate>;
 }
 
 interface BaseProps extends Margins {
@@ -346,10 +346,10 @@ interface BaseProps extends Margins {
   id?: string;
   debounce?: number;
   disabled?: boolean;
-  autoCapitalize?: GoABAutoCapitalize;
+  autoCapitalize?: GoabAutoCapitalize;
   placeholder?: string;
-  leadingIcon?: GoABIconType;
-  trailingIcon?: GoABIconType;
+  leadingIcon?: GoabIconType;
+  trailingIcon?: GoabIconType;
   onTrailingIconClick?: () => void;
   variant?: "goa" | "bare";
   focused?: boolean;
@@ -365,8 +365,8 @@ interface BaseProps extends Margins {
 
 // Icon
 
-export type GoABIconFilledType = `${GoABIconType}-${GoABIconTheme}`;
-export type GoABIconType =
+export type GoabIconFilledType = `${GoabIconType}-${GoabIconTheme}`;
+export type GoabIconType =
   | "accessibility"
   | "add-circle"
   | "add"
@@ -873,10 +873,10 @@ export type GoABIconType =
   | "logo-yen"
   | "logo-youtube";
 
-export type GoABIconSize = "small" | "medium" | "large" | "xlarge";
-export type GoABIconTheme = "outline" | "filled";
-export type GoABIconButtonVariant = "color" | "nocolor" | "dark" | "destructive";
-export type GoABIconVariant = "primary" | "secondary" | "tertiary";
+export type GoabIconSize = "small" | "medium" | "large" | "xlarge";
+export type GoabIconTheme = "outline" | "filled";
+export type GoabIconButtonVariant = "color" | "nocolor" | "dark" | "destructive";
+export type GoabIconVariant = "primary" | "secondary" | "tertiary";
 
 // Common
 
@@ -915,5 +915,5 @@ export interface Margins {
   ml?: Spacing;
 }
 
-export type GoABBlockDirection = "row" | "column";
-export type GoABBlockAlignment = "center" | "start" | "end";
+export type GoabBlockDirection = "row" | "column";
+export type GoabBlockAlignment = "center" | "start" | "end";

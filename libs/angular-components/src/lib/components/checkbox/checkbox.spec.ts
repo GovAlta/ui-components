@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABCheckbox } from "./checkbox";
+import { GoabCheckbox } from "./checkbox";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { fireEvent } from "@testing-library/dom";
@@ -53,7 +53,7 @@ describe("GoABCheckbox", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABCheckbox, ReactiveFormsModule],
+      imports: [GoabCheckbox, ReactiveFormsModule],
       declarations: [TestCheckboxComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
@@ -131,7 +131,7 @@ describe("Checkbox with description slot", () => {
 
   it("should render with slot description", async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABCheckbox, ReactiveFormsModule],
+      imports: [GoabCheckbox, ReactiveFormsModule],
       declarations: [TestCheckboxWithDescriptionSlotComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

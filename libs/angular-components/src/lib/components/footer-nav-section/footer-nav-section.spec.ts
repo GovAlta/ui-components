@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABAppFooterNavSection } from "./footer-nav-section";
+import { GoabAppFooterNavSection } from "./footer-nav-section";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
@@ -28,7 +28,7 @@ describe("GoABAppFooterNavSection", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFooterNavSectionComponent],
-      imports: [GoABAppFooterNavSection],
+      imports: [GoabAppFooterNavSection],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

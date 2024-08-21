@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
 
-import GoABDivider from "./divider";
+import GoabDivider from "./divider";
 
 describe("Divider", () => {
   it("should render successfully", () => {
-    const { container } = render(<GoABDivider mt="s" mr="m" mb="l" ml="xl" />);
+    const { container } = render(<GoabDivider mt="s" mr="m" mb="l" ml="xl" />);
 
     const el = container.querySelector("goa-divider");
 

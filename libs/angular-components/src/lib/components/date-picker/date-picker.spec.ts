@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABDatePicker } from "./date-picker";
+import { GoabDatePicker } from "./date-picker";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -45,7 +45,7 @@ describe("GoABDatePicker", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABDatePicker, ReactiveFormsModule],
+      imports: [GoabDatePicker, ReactiveFormsModule],
       declarations: [TestDatePickerComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

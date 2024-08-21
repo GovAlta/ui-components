@@ -1,4 +1,4 @@
-import { GoABBadge } from "@abgov/angular-components";
+import { GoabBadge } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
   selector: "abgov-badge",
   templateUrl: "./badge.component.html",
   imports: [
-    GoABBadge
+    GoabBadge
   ]
 })
 export class BadgeComponent {

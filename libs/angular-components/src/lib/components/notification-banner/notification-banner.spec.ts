@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABNotificationBanner } from "./notification-banner";
+import { GoabNotificationBanner } from "./notification-banner";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { fireEvent } from "@testing-library/dom";
-import { GoABAriaLiveType, GoABNotificationType } from "@abgov/ui-components-common";
+import { GoabAriaLiveType, GoabNotificationType } from "@abgov/ui-components-common";
 
 @Component({
   template: `
@@ -16,8 +16,8 @@ import { GoABAriaLiveType, GoABNotificationType } from "@abgov/ui-components-com
   `
 })
 class TestNotificationBannerComponent {
-  type = "information" as GoABNotificationType;
-  ariaLive = "assertive" as GoABAriaLiveType;
+  type = "information" as GoabNotificationType;
+  ariaLive = "assertive" as GoabAriaLiveType;
   maxContentWidth = "100px";
   testId = "testId";
   onDismiss = () => {/** do something */};
@@ -30,7 +30,7 @@ describe("GoABNotificationBanner", () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [TestNotificationBannerComponent],
-      imports: [GoABNotificationBanner],
+      imports: [GoabNotificationBanner],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 

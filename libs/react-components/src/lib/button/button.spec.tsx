@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import { fireEvent, screen } from "@testing-library/dom";
-import GoABButton from "./button";
+import GoabButton from "./button";
 import { describe, it, expect, vi } from "vitest";
-import { GoABButtonSize, GoABButtonType } from "@abgov/ui-components-common";
+import { GoabButtonSize, GoabButtonType } from "@abgov/ui-components-common";
 
 describe("GoAB Button", () => {
   const buttonText = "Test Title";
@@ -13,7 +13,7 @@ describe("GoAB Button", () => {
 
   it("should render the properties", () => {
     const { container } = render(
-      <GoABButton
+      <GoabButton
         disabled={true}
         type="primary"
         size="compact"
@@ -43,13 +43,13 @@ describe("GoAB Button", () => {
 
   it("should render content", () => {
     const { baseElement } = render(
-      <GoABButton
+      <GoabButton
         onClick={() => {
           /* do nothing */
         }}
       >
         {buttonText}
-      </GoABButton>,
+      </GoabButton>,
     );
 
     expect(baseElement).toBeTruthy();
@@ -57,12 +57,12 @@ describe("GoAB Button", () => {
   });
 
   describe("size", () => {
-    (["compact", "normal"] as const).forEach((size: GoABButtonSize) => {
+    (["compact", "normal"] as const).forEach((size: GoabButtonSize) => {
       it(`should render ${size} size`, async () => {
         const { container } = render(
-          <GoABButton size={size} onClick={noop}>
+          <GoabButton size={size} onClick={noop}>
             Button
-          </GoABButton>,
+          </GoabButton>,
         );
 
         const button = container.querySelector("goa-button");
@@ -74,12 +74,12 @@ describe("GoAB Button", () => {
 
   describe("type", () => {
     (["primary", "submit", "secondary", "tertiary"] as const).forEach(
-      (type: GoABButtonType) => {
+      (type: GoabButtonType) => {
         it(`should render ${type} type`, async () => {
           const { container } = render(
-            <GoABButton type={type} onClick={noop}>
+            <GoabButton type={type} onClick={noop}>
               Button
-            </GoABButton>,
+            </GoabButton>,
           );
           const button = container.querySelector("goa-button");
 
@@ -92,7 +92,7 @@ describe("GoAB Button", () => {
 
   it("responds to events", async () => {
     const onClick = vi.fn();
-    const { container } = render(<GoABButton onClick={onClick}>Button</GoABButton>);
+    const { container } = render(<GoabButton onClick={onClick}>Button</GoabButton>);
     const button = container.querySelector("goa-button");
     expect(button).toBeTruthy();
     button && fireEvent(button, new CustomEvent("_click"));

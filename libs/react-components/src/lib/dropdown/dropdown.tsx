@@ -1,6 +1,6 @@
 import {
-  GoABDropdownOnChangeDetail,
-  GoABIconType,
+  GoabDropdownOnChangeDetail,
+  GoabIconType,
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
@@ -34,10 +34,10 @@ declare global {
   }
 }
 
-export interface GoABDropdownProps extends Margins {
+export interface GoabDropdownProps extends Margins {
   name?: string;
   value?: string[] | string;
-  onChange: (detail: GoABDropdownOnChangeDetail) => void;
+  onChange: (detail: GoabDropdownOnChangeDetail) => void;
 
   // optional
   ariaLabel?: string;
@@ -47,7 +47,7 @@ export interface GoABDropdownProps extends Margins {
   disabled?: boolean;
   error?: boolean;
   filterable?: boolean;
-  leadingIcon?: GoABIconType;
+  leadingIcon?: GoabIconType;
   maxHeight?: string;
   multiselect?: boolean;
   native?: boolean;
@@ -67,7 +67,7 @@ function stringify(value: string | string[] | undefined): string {
   return JSON.stringify(value);
 }
 
-export function GoABDropdown(props: GoABDropdownProps): JSX.Element {
+export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -75,7 +75,7 @@ export function GoABDropdown(props: GoABDropdownProps): JSX.Element {
     }
     const current = el.current;
     const handler = (e: Event) => {
-      const detail = (e as CustomEvent<GoABDropdownOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
       props.onChange(detail);
     };
     current.addEventListener("_change", handler);
@@ -113,4 +113,4 @@ export function GoABDropdown(props: GoABDropdownProps): JSX.Element {
   );
 }
 
-export default GoABDropdown;
+export default GoabDropdown;

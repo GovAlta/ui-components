@@ -15,7 +15,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABDropdownItem {
+export class GoabDropdownItem {
   @Input() value?: string;
   @Input() filter?: string;
   @Input() label?: string;

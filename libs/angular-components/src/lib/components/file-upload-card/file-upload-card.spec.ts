@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABFileUploadCard } from "./file-upload-card";
+import { GoabFileUploadCard } from "./file-upload-card";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
@@ -51,7 +51,7 @@ describe("GoABFileUploadCard", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestGoABFileUploadComponent],
-      imports: [GoABFileUploadCard],
+      imports: [GoabFileUploadCard],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

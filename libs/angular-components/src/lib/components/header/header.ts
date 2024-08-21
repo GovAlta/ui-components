@@ -16,7 +16,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABAppHeader {
+export class GoabAppHeader {
   @Input() url?: string;
   @Input() heading?: string;
   @Input() maxContentWidth?: string;

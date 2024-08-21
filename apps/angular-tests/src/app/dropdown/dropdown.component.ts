@@ -1,15 +1,15 @@
 import {
-  GoABContainer,
-  GoABDatePicker,
-  GoABDropdown,
-  GoABDropdownItem,
-  GoABFormItem,
-  GoABInput,
-  GoABSpacer,
+  GoabContainer,
+  GoabDatePicker,
+  GoabDropdown,
+  GoabDropdownItem,
+  GoabFormItem,
+  GoabInput,
+  GoabSpacer,
 } from "@abgov/angular-components";
 import {
-  GoABDatePickerOnChangeDetail,
-  GoABDropdownOnChangeDetail,
+  GoabDatePickerOnChangeDetail,
+  GoabDropdownOnChangeDetail,
 } from "@abgov/ui-components-common";
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
@@ -21,13 +21,13 @@ import { Countries, CountrySubdivisions } from "../dropdown/countries.data";
   selector: "abgov-dropdown",
   templateUrl: "./dropdown.component.html",
   imports: [
-    GoABDropdown,
-    GoABDropdownItem,
-    GoABFormItem,
-    GoABContainer,
-    GoABDatePicker,
-    GoABInput,
-    GoABSpacer,
+    GoabDropdown,
+    GoabDropdownItem,
+    GoabFormItem,
+    GoabContainer,
+    GoabDatePicker,
+    GoabInput,
+    GoabSpacer,
     ReactiveFormsModule,
     CommonModule,
   ],
@@ -45,7 +45,7 @@ export class DropdownComponent implements OnInit {
   });
 
   item = new Date();
-  onChange(e: GoABDatePickerOnChangeDetail) {
+  onChange(e: GoabDatePickerOnChangeDetail) {
     // handle change
     console.log(e);
   }
@@ -119,7 +119,7 @@ export class DropdownComponent implements OnInit {
     });
   }
 
-  selectColor(event: GoABDropdownOnChangeDetail) {
+  selectColor(event: GoabDropdownOnChangeDetail) {
     console.log("Select Color", event);
     this.selectedColor = event.value || "";
   }
@@ -158,7 +158,7 @@ export class DropdownComponent implements OnInit {
     },
   ];
 
-  onChangeDropdown(e: GoABDropdownOnChangeDetail) {
+  onChangeDropdown(e: GoabDropdownOnChangeDetail) {
     console.log(e);
   }
 }

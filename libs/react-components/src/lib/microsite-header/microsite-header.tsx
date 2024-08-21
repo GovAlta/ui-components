@@ -1,4 +1,4 @@
-import { GoABLinkTarget, GoABServiceLevel } from "@abgov/ui-components-common";
+import { GoabLinkTarget, GoabServiceLevel } from "@abgov/ui-components-common";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -10,25 +10,25 @@ declare global {
 }
 
 interface WCProps {
-  type: GoABServiceLevel;
+  type: GoabServiceLevel;
   version?: string;
   feedbackurl?: string;
   maxcontentwidth?: string;
-  feedbackurltarget?: GoABLinkTarget;
-  headerurltarget?: GoABLinkTarget;
+  feedbackurltarget?: GoabLinkTarget;
+  headerurltarget?: GoabLinkTarget;
 }
 
-export interface GoABHeaderProps {
-  type: GoABServiceLevel;
+export interface GoabHeaderProps {
+  type: GoabServiceLevel;
   version?: string;
   feedbackUrl?: string;
   testId?: string;
   maxContentWidth?: string;
-  feedbackUrlTarget?: GoABLinkTarget;
-  headerUrlTarget?: GoABLinkTarget;
+  feedbackUrlTarget?: GoabLinkTarget;
+  headerUrlTarget?: GoabLinkTarget;
 }
 
-export function GoABMicrositeHeader({
+export function GoabMicrositeHeader({
   type,
   version,
   feedbackUrl,
@@ -36,7 +36,7 @@ export function GoABMicrositeHeader({
   feedbackUrlTarget,
   headerUrlTarget,
   testId,
-}: GoABHeaderProps): JSX.Element {
+}: GoabHeaderProps): JSX.Element {
   return (
     <goa-microsite-header
       type={type}
@@ -50,4 +50,4 @@ export function GoABMicrositeHeader({
   );
 }
 
-export default GoABMicrositeHeader;
+export default GoabMicrositeHeader;

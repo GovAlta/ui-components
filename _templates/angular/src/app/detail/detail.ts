@@ -1,4 +1,4 @@
-import { GoABButton, GoABDetails } from "@abgov/angular-components";
+import { GoabButton, GoabDetails } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,8 +6,8 @@ import { Component } from "@angular/core";
   selector: "abgov-detail",
   templateUrl: "./detail.html",
   imports: [
-    GoABDetails,
-    GoABButton,
+    GoabDetails,
+    GoabButton,
   ]
 })
 export class DetailComponent {

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABPages } from "./pages";
+import { GoabPages } from "./pages";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
 
@@ -25,7 +25,7 @@ describe("GoABPages", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestPagesComponent],
-      imports: [GoABPages],
+      imports: [GoabPages],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

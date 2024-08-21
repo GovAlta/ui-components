@@ -1,4 +1,4 @@
-import { GoABCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 declare global {
@@ -25,7 +25,7 @@ interface WCProps extends Margins {
 }
 
 /* eslint-disable-next-line */
-export interface GoABCheckboxProps extends Margins {
+export interface GoabCheckboxProps extends Margins {
   id?: string;
   name: string;
   checked: boolean;
@@ -38,13 +38,13 @@ export interface GoABCheckboxProps extends Margins {
   ariaLabel?: string;
   description?: string | React.ReactNode;
   maxWidth?: string;
-  onChange?: (detail: GoABCheckboxOnChangeDetail) => void;
+  onChange?: (detail: GoabCheckboxOnChangeDetail) => void;
 }
 
 // legacy
-export type Props = GoABCheckboxProps;
+export type Props = GoabCheckboxProps;
 
-export function GoABCheckbox({
+export function GoabCheckbox({
   id,
   name,
   testId,
@@ -62,7 +62,7 @@ export function GoABCheckbox({
   mr,
   mb,
   ml,
-}: GoABCheckboxProps): JSX.Element {
+}: GoabCheckboxProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -70,7 +70,7 @@ export function GoABCheckbox({
     }
     const current = el.current;
     const listener = (e: Event) => {
-      const detail = (e as CustomEvent<GoABCheckboxOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoabCheckboxOnChangeDetail>).detail;
       onChange?.(detail);
     };
 
@@ -108,4 +108,4 @@ export function GoABCheckbox({
   );
 }
 
-export default GoABCheckbox;
+export default GoabCheckbox;

@@ -1,13 +1,13 @@
 import {
-  GoABIconFilledType,
-  GoABIconSize,
-  GoABIconTheme,
-  GoABIconType,
+  GoabIconFilledType,
+  GoabIconSize,
+  GoabIconTheme,
+  GoabIconType,
   Margins,
 } from "@abgov/ui-components-common";
 
 interface IonIconProps {
-  name: GoABIconType | GoABIconFilledType;
+  name: GoabIconType | GoabIconFilledType;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -33,10 +33,10 @@ declare global {
   }
 }
 
-export interface GoABIconProps extends Margins {
-  type: GoABIconType;
-  size?: GoABIconSize;
-  theme?: GoABIconTheme;
+export interface GoabIconProps extends Margins {
+  type: GoabIconType;
+  size?: GoabIconSize;
+  theme?: GoabIconTheme;
   inverted?: string;
   fillColor?: string;
   opacity?: number;
@@ -46,9 +46,9 @@ export interface GoABIconProps extends Margins {
 }
 
 interface WCProps extends Margins {
-  type: GoABIconType;
-  theme?: GoABIconTheme;
-  size?: GoABIconSize;
+  type: GoabIconType;
+  theme?: GoabIconTheme;
+  size?: GoabIconSize;
   inverted?: string;
   fillcolor?: string;
   opacity?: number;
@@ -57,7 +57,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-export function GoABIcon({
+export function GoabIcon({
   type,
   theme,
   size,
@@ -71,7 +71,7 @@ export function GoABIcon({
   mb,
   ml,
   testId,
-}: GoABIconProps): JSX.Element {
+}: GoabIconProps): JSX.Element {
   return (
     <goa-icon
       type={type}

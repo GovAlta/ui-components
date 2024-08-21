@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { GoABDatePickerOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { GoabDatePickerOnChangeDetail, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
@@ -20,17 +20,17 @@ declare global {
   }
 }
 
-export interface GoABDatePickerProps extends Margins {
+export interface GoabDatePickerProps extends Margins {
   name?: string;
   value?: Date;
   error?: boolean;
   min?: Date;
   max?: Date;
   testId?: string;
-  onChange: (detail: GoABDatePickerOnChangeDetail) => void;
+  onChange: (detail: GoabDatePickerOnChangeDetail) => void;
 }
 
-export function GoABDatePicker({
+export function GoabDatePicker({
   name,
   value,
   error,
@@ -42,7 +42,7 @@ export function GoABDatePicker({
   mb,
   ml,
   onChange,
-}: GoABDatePickerProps): JSX.Element {
+}: GoabDatePickerProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export function GoABDatePicker({
     const current = ref.current;
 
     const handleChange = (e: Event) => {
-      const detail = (e as CustomEvent<GoABDatePickerOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoabDatePickerOnChangeDetail>).detail;
       onChange(detail);
     };
 
@@ -80,4 +80,4 @@ export function GoABDatePicker({
   );
 }
 
-export default GoABDatePicker;
+export default GoabDatePicker;

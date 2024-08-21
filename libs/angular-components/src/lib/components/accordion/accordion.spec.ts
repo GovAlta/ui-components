@@ -1,8 +1,8 @@
-import { GoABAccordion } from "./accordion";
+import { GoabAccordion } from "./accordion";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { GoABAccordionHeadingSize } from "@abgov/ui-components-common";
+import { GoabAccordionHeadingSize } from "@abgov/ui-components-common";
 
 @Component({
   template: `
@@ -22,7 +22,7 @@ class TestAccordionComponent {
   heading?: string;
   secondaryText?: string;
   open?: boolean;
-  headingSize?: GoABAccordionHeadingSize;
+  headingSize?: GoabAccordionHeadingSize;
 }
 
 describe("GoABAccordion", () => {
@@ -31,7 +31,7 @@ describe("GoABAccordion", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABAccordion],
+      imports: [GoabAccordion],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [TestAccordionComponent],
     }).compileComponents();
@@ -41,7 +41,7 @@ describe("GoABAccordion", () => {
     component.heading = "hi";
     component.secondaryText = "Secondary Text";
     component.open = true;
-    component.headingSize = "large" as GoABAccordionHeadingSize;
+    component.headingSize = "large" as GoabAccordionHeadingSize;
 
     fixture.detectChanges();
   });

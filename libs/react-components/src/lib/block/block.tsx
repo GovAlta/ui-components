@@ -1,6 +1,6 @@
 import {
-  GoABBlockAlignment,
-  GoABBlockDirection,
+  GoabBlockAlignment,
+  GoabBlockDirection,
   Margins,
   Spacing,
 } from "@abgov/ui-components-common";
@@ -8,8 +8,8 @@ import { ReactNode } from "react";
 
 export interface WCProps extends Margins {
   gap?: Spacing;
-  direction?: GoABBlockDirection;
-  alignment?: GoABBlockAlignment;
+  direction?: GoabBlockDirection;
+  alignment?: GoabBlockAlignment;
 }
 
 declare global {
@@ -23,15 +23,15 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoABBlockProps extends Margins {
+export interface GoabBlockProps extends Margins {
   gap?: Spacing;
-  direction?: GoABBlockDirection;
-  alignment?: GoABBlockAlignment;
+  direction?: GoabBlockDirection;
+  alignment?: GoabBlockAlignment;
   testId?: string;
   children?: ReactNode;
 }
 
-export function GoABBlock(props: GoABBlockProps) {
+export function GoabBlock(props: GoabBlockProps) {
   return (
     <goa-block
       gap={props.gap}

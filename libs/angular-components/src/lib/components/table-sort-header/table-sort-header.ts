@@ -1,4 +1,4 @@
-import { GoABTableSortDirection } from "@abgov/ui-components-common";
+import { GoabTableSortDirection } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
@@ -14,7 +14,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABTableSortHeader {
+export class GoabTableSortHeader {
   @Input() name?: string;
-  @Input() direction?: GoABTableSortDirection = "none";
+  @Input() direction?: GoabTableSortDirection = "none";
 }
