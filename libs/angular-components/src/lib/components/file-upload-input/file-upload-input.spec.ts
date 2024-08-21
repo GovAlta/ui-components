@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABFileUploadInput } from "./file-upload-input";
+import { GoabFileUploadInput } from "./file-upload-input";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABFileUploadInputVariant, Spacing } from "@abgov/ui-components-common";
+import { GoabFileUploadInputVariant, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
@@ -23,7 +23,7 @@ import { fireEvent } from "@testing-library/dom";
 class TestFileUploadInputComponent {
   maxFileSize?: string;
   accept?: string;
-  variant: GoABFileUploadInputVariant = "button";
+  variant: GoabFileUploadInputVariant = "button";
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -42,7 +42,7 @@ describe("GoABFileUploadInput", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFileUploadInputComponent],
-      imports: [GoABFileUploadInput],
+      imports: [GoabFileUploadInput],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABBadge } from "./badge";
+import { GoabBadge } from "./badge";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABBadgeType, Spacing } from "@abgov/ui-components-common";
+import { GoabBadgeType, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
@@ -20,7 +20,7 @@ import { By } from "@angular/platform-browser";
   `,
 })
 class TestBadgeComponent {
-  type?: GoABBadgeType;
+  type?: GoabBadgeType;
   content?: string;
   testId?: string;
   icon?: boolean;
@@ -37,7 +37,7 @@ describe("GoABBadge", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABBadge],
+      imports: [GoabBadge],
       declarations: [TestBadgeComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

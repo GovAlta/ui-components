@@ -1,4 +1,4 @@
-import { GoABBadge, GoABBlock, GoABButton, GoABIcon, GoABInput, GoABSpacer, GoABTextArea } from "@abgov/angular-components";
+import { GoabBadge, GoabBlock, GoabButton, GoabIcon, GoabInput, GoabSpacer, GoabTextArea } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,13 +6,13 @@ import { Component } from "@angular/core";
   selector: "abgov-spacing",
   templateUrl: "./spacing.html",
   imports: [
-    GoABInput,
-    GoABButton,
-    GoABIcon,
-    GoABSpacer,
-    GoABBlock,
-    GoABTextArea,
-    GoABBadge,
+    GoabInput,
+    GoabButton,
+    GoabIcon,
+    GoabSpacer,
+    GoabBlock,
+    GoabTextArea,
+    GoabBadge,
   ]
 })
 export class SpacingComponent {

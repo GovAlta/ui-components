@@ -1,4 +1,4 @@
-import { GoABSkeleton } from "@abgov/angular-components";
+import { GoabSkeleton } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
   selector: "abgov-skeleton",
   templateUrl: "./skeleton.component.html",
   imports: [
-    GoABSkeleton,
+    GoabSkeleton,
   ]
 })
 export class SkeletonComponent {

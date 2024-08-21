@@ -15,13 +15,13 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoABSideMenuGroupProps {
+export interface GoabSideMenuGroupProps {
   heading: string;
   testId?: string;
   children?: ReactNode;
 }
 
-export function GoABSideMenuGroup(props: GoABSideMenuGroupProps): JSX.Element {
+export function GoabSideMenuGroup(props: GoabSideMenuGroupProps): JSX.Element {
   return (
     <goa-side-menu-group heading={props.heading} data-testid={props.testId}>
       {props.children}
@@ -29,4 +29,4 @@ export function GoABSideMenuGroup(props: GoABSideMenuGroupProps): JSX.Element {
   );
 }
 
-export default GoABSideMenuGroup;
+export default GoabSideMenuGroup;

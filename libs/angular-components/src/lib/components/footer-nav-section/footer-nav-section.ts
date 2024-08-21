@@ -15,7 +15,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   styles: [":host { width: 100%; }"],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABAppFooterNavSection {
+export class GoabAppFooterNavSection {
   @Input() heading?: string;
   @Input() maxColumnCount? = 1;
   @Input() testId?: string;

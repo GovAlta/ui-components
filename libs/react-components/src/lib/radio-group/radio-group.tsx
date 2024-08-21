@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import {
-  GoABRadioGroupOnChangeDetail,
-  GoABRadioGroupOrientation,
+  GoabRadioGroupOnChangeDetail,
+  GoabRadioGroupOrientation,
   Margins,
 } from "@abgov/ui-components-common";
 
@@ -11,7 +11,7 @@ interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   name: string;
   value?: string;
-  orientation?: GoABRadioGroupOrientation;
+  orientation?: GoabRadioGroupOrientation;
   disabled?: boolean;
   error?: boolean;
   arialabel?: string;
@@ -26,19 +26,19 @@ declare global {
   }
 }
 
-export interface GoABRadioGroupProps extends Margins {
+export interface GoabRadioGroupProps extends Margins {
   name: string;
   value?: string;
   disabled?: boolean;
-  orientation?: GoABRadioGroupOrientation;
+  orientation?: GoabRadioGroupOrientation;
   testId?: string;
   error?: boolean;
   ariaLabel?: string;
   children?: React.ReactNode;
-  onChange: (detail: GoABRadioGroupOnChangeDetail) => void;
+  onChange: (detail: GoabRadioGroupOnChangeDetail) => void;
 }
 
-export function GoABRadioGroup({
+export function GoabRadioGroup({
   name,
   value,
   children,
@@ -52,7 +52,7 @@ export function GoABRadioGroup({
   mb,
   ml,
   onChange,
-}: GoABRadioGroupProps): JSX.Element {
+}: GoabRadioGroupProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export function GoABRadioGroup({
         console.warn("Missing onChange function");
         return;
       }
-      const detail = (e as CustomEvent<GoABRadioGroupOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail;
       onChange(detail);
     };
 
@@ -95,4 +95,4 @@ export function GoABRadioGroup({
   );
 }
 
-export default GoABRadioGroup;
+export default GoabRadioGroup;

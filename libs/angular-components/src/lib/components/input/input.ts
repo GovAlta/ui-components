@@ -1,4 +1,4 @@
-import { GoABIconType, GoABInputAutoCapitalize, GoABInputOnBlurDetail, GoABInputOnChangeDetail, GoABInputOnFocusDetail, GoABInputOnKeyPressDetail, GoABInputType, Spacing } from "@abgov/ui-components-common";
+import { GoabIconType, GoabInputAutoCapitalize, GoaInputOnBlurDetail, GoabInputOnChangeDetail, GoabInputOnFocusDetail, GoabInputOnKeyPressDetail, GoabInputType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef, OnInit } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -50,20 +50,20 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => GoABInput),
+      useExisting: forwardRef(() => GoabInput),
     }
   ]
 })
-export class GoABInput implements ControlValueAccessor, OnInit {
-  @Input() type?: GoABInputType = "text";
+export class GoabInput implements ControlValueAccessor, OnInit {
+  @Input() type?: GoabInputType = "text";
   @Input() name?: string;
   @Input() id?: string;
   @Input() debounce?: number;
   @Input() disabled?: boolean;
-  @Input() autoCapitalize?: GoABInputAutoCapitalize;
+  @Input() autoCapitalize?: GoabInputAutoCapitalize;
   @Input() placeholder?: string;
-  @Input() leadingIcon?: GoABIconType;
-  @Input() trailingIcon?: GoABIconType;
+  @Input() leadingIcon?: GoabIconType;
+  @Input() trailingIcon?: GoabIconType;
   @Input() variant?: string;
   @Input() focused?: boolean;
   @Input() readonly?: boolean;
@@ -85,10 +85,10 @@ export class GoABInput implements ControlValueAccessor, OnInit {
   @Input() ml?: Spacing;
 
   @Output() onTrailingIconClick = new EventEmitter();
-  @Output() onFocus = new EventEmitter<GoABInputOnFocusDetail>();
-  @Output() onBlur = new EventEmitter<GoABInputOnBlurDetail>();
-  @Output() onKeyPress = new EventEmitter<GoABInputOnKeyPressDetail>();
-  @Output() onChange = new EventEmitter<GoABInputOnChangeDetail>();
+  @Output() onFocus = new EventEmitter<GoabInputOnFocusDetail>();
+  @Output() onBlur = new EventEmitter<GoaInputOnBlurDetail>();
+  @Output() onKeyPress = new EventEmitter<GoabInputOnKeyPressDetail>();
+  @Output() onChange = new EventEmitter<GoabInputOnChangeDetail>();
 
   private handleTrailingIconClick = false;
 
@@ -105,7 +105,7 @@ export class GoABInput implements ControlValueAccessor, OnInit {
 
   _onChange(e: Event) {
     this.markAsTouched();
-    const detail = (e as CustomEvent<GoABInputOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoabInputOnChangeDetail>).detail;
     this.onChange.emit(detail);
 
     this.fcChange?.(detail.value);
@@ -113,7 +113,7 @@ export class GoABInput implements ControlValueAccessor, OnInit {
 
   _onKeyPress(e: Event) {
     this.markAsTouched();
-    const detail = (e as CustomEvent<GoABInputOnKeyPressDetail>).detail
+    const detail = (e as CustomEvent<GoabInputOnKeyPressDetail>).detail
     this.onKeyPress.emit(detail);
 
     this.fcTouched?.();
@@ -121,12 +121,12 @@ export class GoABInput implements ControlValueAccessor, OnInit {
 
   _onFocus(e: Event) {
     this.markAsTouched();
-    const detail = (e as CustomEvent<GoABInputOnFocusDetail>).detail
+    const detail = (e as CustomEvent<GoabInputOnFocusDetail>).detail
     this.onFocus.emit(detail);
   }
 
   _onBlur(e: Event) {
-    const detail = (e as CustomEvent<GoABInputOnBlurDetail>).detail
+    const detail = (e as CustomEvent<GoaInputOnBlurDetail>).detail
     this.onBlur.emit(detail);
   }
 

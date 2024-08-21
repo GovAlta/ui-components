@@ -1,6 +1,6 @@
 import {
-  GoABFileUploadOnCancelDetail,
-  GoABFileUploadOnDeleteDetail,
+  GoabFileUploadOnCancelDetail,
+  GoabFileUploadOnDeleteDetail,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
@@ -24,18 +24,18 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoABFileUploadCardProps {
+export interface GoabFileUploadCardProps {
   filename: string;
   size: number;
   type?: string;
   progress?: number;
   testId: string;
   error?: string;
-  onDelete?: (detail: GoABFileUploadOnDeleteDetail) => void;
-  onCancel?: (detail: GoABFileUploadOnCancelDetail) => void;
+  onDelete?: (detail: GoabFileUploadOnDeleteDetail) => void;
+  onCancel?: (detail: GoabFileUploadOnCancelDetail) => void;
 }
 
-export function GoABFileUploadCard({
+export function GoabFileUploadCard({
   filename,
   size,
   type,
@@ -44,7 +44,7 @@ export function GoABFileUploadCard({
   testId,
   onDelete,
   onCancel,
-}: GoABFileUploadCardProps) {
+}: GoabFileUploadCardProps) {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -74,4 +74,4 @@ export function GoABFileUploadCard({
   );
 }
 
-export default GoABFileUploadCard;
+export default GoabFileUploadCard;

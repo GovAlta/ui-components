@@ -1,15 +1,15 @@
 import {
-  GoABTooltipHorizontalAlignment,
-  GoABTooltipPosition,
+  GoabTooltipHorizontalAlignment,
+  GoabTooltipPosition,
   Margins,
 } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
 
 /* eslint-disable-next-line */
 interface WCProps extends Margins {
-  position?: GoABTooltipPosition;
+  position?: GoabTooltipPosition;
   content?: string;
-  halign?: GoABTooltipHorizontalAlignment;
+  halign?: GoabTooltipHorizontalAlignment;
 }
 
 declare global {
@@ -22,15 +22,15 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoABTooltipProps extends Margins {
-  position?: GoABTooltipPosition;
+export interface GoabTooltipProps extends Margins {
+  position?: GoabTooltipPosition;
   content?: string;
-  hAlign?: GoABTooltipHorizontalAlignment;
+  hAlign?: GoabTooltipHorizontalAlignment;
   testId?: string;
   children?: ReactNode;
 }
 
-export function GoABTooltip(props: GoABTooltipProps): JSX.Element {
+export function GoabTooltip(props: GoabTooltipProps): JSX.Element {
   return (
     <goa-tooltip
       position={props.position}
@@ -47,4 +47,4 @@ export function GoABTooltip(props: GoABTooltipProps): JSX.Element {
   );
 }
 
-export default GoABTooltip;
+export default GoabTooltip;

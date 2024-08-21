@@ -1,4 +1,4 @@
-import { GoABChipVariant, Margins } from "@abgov/ui-components-common";
+import { GoabChipVariant, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
@@ -7,7 +7,7 @@ interface WCProps extends Margins {
   error: boolean;
   deletable: boolean;
   content: string;
-  variant?: GoABChipVariant;
+  variant?: GoabChipVariant;
 }
 
 declare global {
@@ -19,17 +19,17 @@ declare global {
   }
 }
 
-export interface GoABChipProps extends Margins {
+export interface GoabChipProps extends Margins {
   onClick?: () => void;
   deletable?: boolean;
   leadingIcon?: string;
   error?: boolean;
   content: string;
-  variant?: GoABChipVariant;
+  variant?: GoabChipVariant;
   testId?: string;
 }
 
-export const GoABChip = ({
+export const GoabChip = ({
   leadingIcon = "",
   deletable = false,
   error = false,
@@ -41,7 +41,7 @@ export const GoABChip = ({
   mb,
   ml,
   testId,
-}: GoABChipProps) => {
+}: GoabChipProps) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) return;
@@ -75,4 +75,4 @@ export const GoABChip = ({
   );
 };
 
-export default GoABChip;
+export default GoabChip;

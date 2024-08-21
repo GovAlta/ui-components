@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
-import GoABCheckbox, { Props as CheckboxProps } from "./checkbox";
+import GoabCheckbox, { Props as CheckboxProps } from "./checkbox";
 import { describe, it, expect, vi } from "vitest";
-import { GoABCheckboxOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabCheckboxOnChangeDetail } from "@abgov/ui-components-common";
 
 const testId = "test-id";
 
@@ -24,7 +24,7 @@ describe("GoAB Checkbox", () => {
       ml: "xl",
     };
 
-    render(<GoABCheckbox {...props} />);
+    render(<GoabCheckbox {...props} />);
 
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox).toBeTruthy();
@@ -45,7 +45,7 @@ describe("GoAB Checkbox", () => {
 
   it("should render with text description", () => {
     render(
-      <GoABCheckbox name={"foo"} checked={false} description={"description text"} />,
+      <GoabCheckbox name={"foo"} checked={false} description={"description text"} />,
     );
 
     const checkbox = document.querySelector("goa-checkbox");
@@ -54,7 +54,7 @@ describe("GoAB Checkbox", () => {
 
   it("should render with slot description", () => {
     const result = render(
-      <GoABCheckbox
+      <GoabCheckbox
         name={"foo"}
         checked={false}
         description={<div>description slot</div>}
@@ -71,7 +71,7 @@ describe("GoAB Checkbox", () => {
   it("should handle the onChange event", async function () {
     const onChangeStub = vi.fn();
 
-    function onChange({ name, value, checked }: GoABCheckboxOnChangeDetail) {
+    function onChange({ name, value, checked }: GoabCheckboxOnChangeDetail) {
       expect(name).toBe("foo");
       expect(value).toBe("bar");
       expect(checked).toBeTruthy();
@@ -89,7 +89,7 @@ describe("GoAB Checkbox", () => {
       testId: testId,
     };
 
-    render(<GoABCheckbox {...props} />);
+    render(<GoabCheckbox {...props} />);
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox).toBeTruthy();
 

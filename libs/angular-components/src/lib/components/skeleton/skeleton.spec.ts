@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABSkeleton } from "./skeleton";
+import { GoabSkeleton } from "./skeleton";
 import { Component } from "@angular/core";
-import { GoABSkeletonType, Spacing } from "@abgov/ui-components-common";
+import { GoabSkeletonType, Spacing } from "@abgov/ui-components-common";
 
 @Component({
   template: `
@@ -17,7 +17,7 @@ import { GoABSkeletonType, Spacing } from "@abgov/ui-components-common";
   `
 })
 class TestSkeletonComponent {
-  type = "image" as GoABSkeletonType;
+  type = "image" as GoabSkeletonType;
   maxWidth = 100;
   lineCount = 3;
   size = 10;
@@ -35,7 +35,7 @@ describe("GoABSkeleton", () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [TestSkeletonComponent],
-      imports: [GoABSkeleton]
+      imports: [GoabSkeleton]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSkeletonComponent);

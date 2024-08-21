@@ -1,6 +1,6 @@
 import { render, cleanup, fireEvent, waitFor } from "@testing-library/react";
-import { GoABDropdown } from "./dropdown";
-import { GoABDropdownItem, GoABDropdownOption } from "./dropdown-item";
+import { GoabDropdown } from "./dropdown";
+import { GoabDropdownItem, GoabDropdownOption } from "./dropdown-item";
 import { describe, it, expect, vi } from "vitest";
 
 afterEach(cleanup);
@@ -11,13 +11,13 @@ describe("GoABDropdown", () => {
       /* do nothing */
     });
     render(
-      <GoABDropdown
+      <GoabDropdown
         onChange={() => {
           /* do nothing */
         }}
       >
-        <GoABDropdownOption value="foo" />
-      </GoABDropdown>,
+        <GoabDropdownOption value="foo" />
+      </GoabDropdown>,
     );
 
     await waitFor(() => {
@@ -29,7 +29,7 @@ describe("GoABDropdown", () => {
 
   it("should bind all web-component attributes", async () => {
     const { baseElement } = render(
-      <GoABDropdown
+      <GoabDropdown
         leadingIcon="color-wand"
         name="favColor"
         value={[""]}
@@ -51,10 +51,10 @@ describe("GoABDropdown", () => {
           /* do nothing */
         }}
       >
-        <GoABDropdownItem name="favColor" label="Red" value="red" />
-        <GoABDropdownItem name="favColor" label="Blue" value="blue" />
-        <GoABDropdownItem name="favColor" label="Yellow" value="yellow" />
-      </GoABDropdown>,
+        <GoabDropdownItem name="favColor" label="Red" value="red" />
+        <GoabDropdownItem name="favColor" label="Blue" value="blue" />
+        <GoabDropdownItem name="favColor" label="Yellow" value="yellow" />
+      </GoabDropdown>,
     );
 
     const el = baseElement.querySelector("goa-dropdown");
@@ -73,11 +73,11 @@ describe("GoABDropdown", () => {
     const fn = vi.fn();
 
     const { baseElement } = render(
-      <GoABDropdown name="favColor" value="yellow" onChange={fn} native={true}>
-        <GoABDropdownItem name="favColor" label="Red" value="red" />
-        <GoABDropdownItem name="favColor" label="Blue" value="blue" />
-        <GoABDropdownItem name="favColor" label="Yellow" value="yellow" />
-      </GoABDropdown>,
+      <GoabDropdown name="favColor" value="yellow" onChange={fn} native={true}>
+        <GoabDropdownItem name="favColor" label="Red" value="red" />
+        <GoabDropdownItem name="favColor" label="Blue" value="blue" />
+        <GoabDropdownItem name="favColor" label="Yellow" value="yellow" />
+      </GoabDropdown>,
     );
 
     const el = baseElement.querySelector("goa-dropdown");

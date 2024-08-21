@@ -1,7 +1,7 @@
 import { render, fireEvent } from "@testing-library/react";
 import { describe, it, vi } from "vitest";
 import Table from "./table";
-import { GoABTableOnSortDetail } from "@abgov/ui-components-common";
+import { GoabTableOnSortDetail } from "@abgov/ui-components-common";
 
 describe("Table", () => {
 
@@ -14,7 +14,7 @@ describe("Table", () => {
     const onSort = vi.fn();
     const { getByTestId } = render(<Table onSort={onSort} testId="test-table" />);
 
-    const event: GoABTableOnSortDetail = { sortBy: "name", sortDir: 1 };
+    const event: GoabTableOnSortDetail = { sortBy: "name", sortDir: 1 };
 
     fireEvent(
       getByTestId("test-table"),

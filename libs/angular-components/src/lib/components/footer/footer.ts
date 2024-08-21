@@ -15,7 +15,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABAppFooter {
+export class GoabAppFooter {
   @Input() maxContentWidth?: string;
   @Input() testId?: string;
 }

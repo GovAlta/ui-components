@@ -1,7 +1,7 @@
-import { GoABBadgeType, Margins } from "@abgov/ui-components-common";
+import { GoabBadgeType, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  type: GoABBadgeType;
+  type: GoabBadgeType;
   icon?: boolean;
   content?: string;
   arialabel?: string;
@@ -17,15 +17,15 @@ declare global {
   }
 }
 
-export interface GoABBadgeProps extends Margins {
-  type: GoABBadgeType;
+export interface GoabBadgeProps extends Margins {
+  type: GoabBadgeType;
   icon?: boolean;
   content?: string;
   testId?: string;
   ariaLabel?: string;
 }
 
-export function GoABBadge({
+export function GoabBadge({
   type,
   content,
   icon,
@@ -35,7 +35,7 @@ export function GoABBadge({
   mb,
   ml,
   ariaLabel,
-}: GoABBadgeProps): JSX.Element {
+}: GoabBadgeProps): JSX.Element {
   return (
     <goa-badge
       type={type}
@@ -54,7 +54,7 @@ export function GoABBadge({
 /**
  * @deprecated
  */
-export function GoABInfoBadge({
+export function GoabInfoBadge({
   content,
   testId,
   icon,
@@ -63,9 +63,9 @@ export function GoABInfoBadge({
   mb,
   ml,
   ariaLabel,
-}: GoABBadgeProps): JSX.Element {
+}: GoabBadgeProps): JSX.Element {
   return (
-    <GoABBadge
+    <GoabBadge
       type="information"
       icon={icon}
       content={content}
@@ -82,7 +82,7 @@ export function GoABInfoBadge({
 /**
  * @deprecated
  */
-export function GoABSuccessBadge({
+export function GoabSuccessBadge({
   content,
   testId,
   icon,
@@ -91,9 +91,9 @@ export function GoABSuccessBadge({
   mb,
   ml,
   ariaLabel,
-}: GoABBadgeProps): JSX.Element {
+}: GoabBadgeProps): JSX.Element {
   return (
-    <GoABBadge
+    <GoabBadge
       type="success"
       icon={icon}
       content={content}
@@ -119,9 +119,9 @@ export function GoABImportantBadge({
   mb,
   ml,
   ariaLabel,
-}: GoABBadgeProps): JSX.Element {
+}: GoabBadgeProps): JSX.Element {
   return (
-    <GoABBadge
+    <GoabBadge
       type="important"
       icon={icon}
       content={content}
@@ -147,9 +147,9 @@ export function GoABEmergencyBadge({
   mb,
   ml,
   ariaLabel,
-}: GoABBadgeProps): JSX.Element {
+}: GoabBadgeProps): JSX.Element {
   return (
-    <GoABBadge
+    <GoabBadge
       type="emergency"
       icon={icon}
       content={content}

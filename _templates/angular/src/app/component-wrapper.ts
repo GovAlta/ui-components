@@ -3,8 +3,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 import { faker } from "@faker-js/faker";
 import { CommonModule } from "@angular/common";
 
-import { GoABAccordion, GoABAppFooter, GoABAppFooterMetaSection, GoABAppFooterNavSection, GoABAppHeader, GoABAppHeaderMenu, GoABBadge, GoABBlock, GoABButton, GoABButtonGroup, GoABCallout, GoABCheckbox, GoABChip, GoABCircularProgress, GoABContainer, GoABDatePicker, GoABDetails, GoABDivider, GoABDropdown, GoABDropdownItem, GoABFileUploadCard, GoABFileUploadInput, GoABFormItem, GoABFormStep, GoABFormStepper, GoABHeroBanner, GoABIcon, GoABIconButton, GoABInput, GoABModal, GoABNotificationBanner, GoABPages, GoABPagination, GoABPopover, GoABRadioGroup, GoABRadioItem, GoABSideMenu, GoABSideMenuGroup, GoABSideMenuHeading, GoABSkeleton, GoABTab, GoABTable, GoABTabs, GoABTextArea, GoABTooltip } from "@abgov/angular-components";
-import { GoABDropdownOnChangeDetail, GoABFormStepStatus, GoABFormStepperOnChangeDetail, GoABPaginationOnChangeDetail, GoABRadioGroupOnChangeDetail, GoABTextAreaOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabAccordion, GoabAppFooter, GoabAppFooterMetaSection, GoabAppFooterNavSection, GoabAppHeader, GoabAppHeaderMenu, GoabBadge, GoabBlock, GoabButton, GoabButtonGroup, GoabCallout, GoabCheckbox, GoabChip, GoabCircularProgress, GoabContainer, GoabDatePicker, GoabDetails, GoabDivider, GoabDropdown, GoabDropdownItem, GoabFileUploadCard, GoabFileUploadInput, GoabFormItem, GoabFormStep, GoabFormStepper, GoabHeroBanner, GoabIcon, GoabIconButton, GoabInput, GoabModal, GoabNotificationBanner, GoabPages, GoabPagination, GoabPopover, GoabRadioGroup, GoabRadioItem, GoabSideMenu, GoabSideMenuGroup, GoabSideMenuHeading, GoabSkeleton, GoabTab, GoabTable, GoabTabs, GoabTextArea, GoabTooltip } from "@abgov/angular-components";
+import { GoabDropdownOnChangeDetail, GoabFormStepStatus, GoabFormStepperOnChangeDetail, GoabPaginationOnChangeDetail, GoabRadioGroupOnChangeDetail, GoabTextAreaOnChangeDetail } from "@abgov/ui-components-common";
 import { FormControl } from "@angular/forms";
 
 interface User {
@@ -464,51 +464,51 @@ interface User {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
-    GoABBadge,
-    GoABButton,
-    GoABDropdown,
-    GoABDropdownItem,
-    GoABDatePicker,
-    GoABModal,
-    GoABAccordion,
-    GoABAppFooter,
-    GoABAppFooterMetaSection,
-    GoABAppFooterNavSection,
-    GoABAppHeader,
-    GoABAppHeaderMenu,
-    GoABButtonGroup,
-    GoABCallout,
-    GoABCheckbox,
-    GoABChip,
-    GoABContainer,
-    GoABDetails,
-    GoABDivider,
-    GoABFileUploadCard,
-    GoABFileUploadInput,
-    GoABFormItem,
-    GoABFormStep,
-    GoABFormStepper,
-    GoABPages,
-    GoABHeroBanner,
-    GoABIcon,
-    GoABIconButton,
-    GoABInput,
-    GoABNotificationBanner,
-    GoABPagination,
-    GoABPopover,
-    GoABCircularProgress,
-    GoABRadioGroup,
-    GoABRadioItem,
-    GoABSideMenu,
-    GoABSideMenuGroup,
-    GoABSideMenuHeading,
-    GoABSkeleton,
-    GoABTable,
-    GoABTabs,
-    GoABTab,
-    GoABTextArea,
-    GoABTooltip,
-    GoABBlock,
+    GoabBadge,
+    GoabButton,
+    GoabDropdown,
+    GoabDropdownItem,
+    GoabDatePicker,
+    GoabModal,
+    GoabAccordion,
+    GoabAppFooter,
+    GoabAppFooterMetaSection,
+    GoabAppFooterNavSection,
+    GoabAppHeader,
+    GoabAppHeaderMenu,
+    GoabButtonGroup,
+    GoabCallout,
+    GoabCheckbox,
+    GoabChip,
+    GoabContainer,
+    GoabDetails,
+    GoabDivider,
+    GoabFileUploadCard,
+    GoabFileUploadInput,
+    GoabFormItem,
+    GoabFormStep,
+    GoabFormStepper,
+    GoabPages,
+    GoabHeroBanner,
+    GoabIcon,
+    GoabIconButton,
+    GoabInput,
+    GoabNotificationBanner,
+    GoabPagination,
+    GoabPopover,
+    GoabCircularProgress,
+    GoabRadioGroup,
+    GoabRadioItem,
+    GoabSideMenu,
+    GoabSideMenuGroup,
+    GoabSideMenuHeading,
+    GoabSkeleton,
+    GoabTable,
+    GoabTabs,
+    GoabTab,
+    GoabTextArea,
+    GoabTooltip,
+    GoabBlock,
   ]
 })
 export class ComponentWrapperPage {
@@ -569,13 +569,13 @@ export class ComponentWrapperPage {
   //   this.pageUsers = this.users.slice(offset, offset + this.perPage)
   // }
 
-  handlePageChange(e: GoABPaginationOnChangeDetail) {
+  handlePageChange(e: GoabPaginationOnChangeDetail) {
     this.page = e.page;
     const offset = (this.page - 1) * this.perPage;
     this.pageUsers = this.users.slice(offset, offset + this.perPage)
   }
 
-  stepStates: GoABFormStepStatus[] = [
+  stepStates: GoabFormStepStatus[] = [
     "unstarted",
     "unstarted",
     "unstarted",
@@ -605,11 +605,11 @@ export class ComponentWrapperPage {
     this.modalOpen = true
   }
 
-  onDropdownChange(e: GoABDropdownOnChangeDetail) {
+  onDropdownChange(e: GoabDropdownOnChangeDetail) {
     console.log("in dropdown change handler", e)
   }
 
-  onStepChange(e: GoABFormStepperOnChangeDetail) {
+  onStepChange(e: GoabFormStepperOnChangeDetail) {
     console.log("in form step change handler", e)
   }
 
@@ -622,7 +622,7 @@ export class ComponentWrapperPage {
     this.modalOpen = false;
   }
 
-  onRadioChange(e: GoABRadioGroupOnChangeDetail) {
+  onRadioChange(e: GoabRadioGroupOnChangeDetail) {
     // handle change
     console.log("onChange", e);
   }
@@ -632,7 +632,7 @@ export class ComponentWrapperPage {
   // table
 
 
-  onTextAreaChange(e: GoABTextAreaOnChangeDetail) {
+  onTextAreaChange(e: GoabTextAreaOnChangeDetail) {
     console.log(e.name, e.value);
   }
 

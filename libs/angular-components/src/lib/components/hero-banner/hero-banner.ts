@@ -23,7 +23,7 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABHeroBanner {
+export class GoabHeroBanner {
   @Input() heading?: string;
   @Input() backgroundUrl?: string;
   @Input() minHeight?: string;

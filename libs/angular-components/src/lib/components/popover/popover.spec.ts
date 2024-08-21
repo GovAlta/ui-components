@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABPopover } from "./popover";
+import { GoabPopover } from "./popover";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABPopoverPosition, Spacing } from "@abgov/ui-components-common";
-import { GoABButton } from "../button/button";
+import { GoabPopoverPosition, Spacing } from "@abgov/ui-components-common";
+import { GoabButton } from "../button/button";
 
 @Component({
   template: `
@@ -28,7 +28,7 @@ import { GoABButton } from "../button/button";
 class TestPopoverComponent {
   maxWidth = "320px";
   padded = true;
-  position?: GoABPopoverPosition;
+  position?: GoabPopoverPosition;
   relative?: boolean;
   testId?: string;
   mt?: Spacing;
@@ -44,7 +44,7 @@ describe("GoABPopover", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestPopoverComponent],
-      imports: [GoABPopover, GoABButton],
+      imports: [GoabPopover, GoabButton],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -54,7 +54,7 @@ describe("GoABPopover", () => {
     component.testId = "testId";
     component.maxWidth = "500px";
     component.padded = false;
-    component.position = "above" as GoABPopoverPosition;
+    component.position = "above" as GoabPopoverPosition;
     component.relative = true;
     component.mt = "l" as Spacing;
     component.mb = "s" as Spacing;

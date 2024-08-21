@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABFormItem } from "./form-item";
+import { GoabFormItem } from "./form-item";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABFormItemRequirement, Spacing } from "@abgov/ui-components-common";
+import { GoabFormItemRequirement, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
-import { GoABFormItemSlot } from "./form-item-slot";
+import { GoabFormItemSlot } from "./form-item-slot";
 
 @Component({
   template: `
@@ -30,7 +30,7 @@ import { GoABFormItemSlot } from "./form-item-slot";
 })
 class TestFormItemComponent {
   label?: string;
-  requirement?: GoABFormItemRequirement;
+  requirement?: GoabFormItemRequirement;
   error?: string;
   helpText?: string;
   id?: string;
@@ -50,7 +50,7 @@ describe("GoABFormItem", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFormItemComponent],
-      imports: [GoABFormItem],
+      imports: [GoabFormItem],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

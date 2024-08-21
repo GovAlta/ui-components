@@ -1,13 +1,13 @@
 import { render } from "@testing-library/react";
 
-import { GoABDetails } from "./details";
+import { GoabDetails } from "./details";
 
 describe("Detail", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoABDetails heading="The heading" open={true} maxWidth={"480px"} testId="foo">
+      <GoabDetails heading="The heading" open={true} maxWidth={"480px"} testId="foo">
         The content
-      </GoABDetails>,
+      </GoabDetails>,
     );
 
     const el = baseElement.querySelector("goa-details");

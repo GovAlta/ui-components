@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABIconButton } from "./icon-button";
+import { GoabIconButton } from "./icon-button";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoABIconButtonVariant,
-  GoABIconSize,
-  GoABIconType,
+  GoabIconButtonVariant,
+  GoabIconSize,
+  GoabIconType,
   Spacing,
 } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
@@ -31,10 +31,10 @@ import { fireEvent } from "@testing-library/dom";
   `,
 })
 class TestIconButtonComponent {
-  icon = "information" as GoABIconType;
+  icon = "information" as GoabIconType;
   disabled?: boolean;
-  size?: GoABIconSize;
-  variant?: GoABIconButtonVariant;
+  size?: GoabIconSize;
+  variant?: GoabIconButtonVariant;
   title?: string;
   testId?: string;
   ariaLabel?: string;
@@ -55,7 +55,7 @@ describe("GoABIconButton", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestIconButtonComponent],
-      imports: [GoABIconButton],
+      imports: [GoabIconButton],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

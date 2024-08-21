@@ -1,4 +1,4 @@
-import { GoABRadioGroupOnChangeDetail, GoABRadioGroupOrientation, Spacing } from "@abgov/ui-components-common";
+import { GoabRadioGroupOnChangeDetail, GoabRadioGroupOrientation, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -28,15 +28,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => GoABRadioGroup),
+      useExisting: forwardRef(() => GoabRadioGroup),
     },
   ],
 })
-export class GoABRadioGroup implements ControlValueAccessor {
+export class GoabRadioGroup implements ControlValueAccessor {
   @Input() name?: string;
   @Input() value?: string;
   @Input() disabled?: boolean;
-  @Input() orientation?: GoABRadioGroupOrientation;
+  @Input() orientation?: GoabRadioGroupOrientation;
   @Input() error?: boolean;
   @Input() ariaLabel?: string;
   @Input() testId?: string;
@@ -45,10 +45,10 @@ export class GoABRadioGroup implements ControlValueAccessor {
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<GoABRadioGroupOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoabRadioGroupOnChangeDetail>();
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<GoABRadioGroupOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail;
     this.markAsTouched();
     this.onChange.emit(detail);
 

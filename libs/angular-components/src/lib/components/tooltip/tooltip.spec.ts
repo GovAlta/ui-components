@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABTooltip } from "./tooltip";
+import { GoabTooltip } from "./tooltip";
 import { Component } from "@angular/core";
-import { GoABIcon } from "../icon/icon";
+import { GoabIcon } from "../icon/icon";
 
 @Component({
   template: `
@@ -20,7 +20,7 @@ describe("GoABTooltip", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestTooltipComponent],
-      imports: [GoABTooltip, GoABIcon],
+      imports: [GoabTooltip, GoabIcon],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestTooltipComponent);

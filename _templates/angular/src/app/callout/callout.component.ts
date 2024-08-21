@@ -1,4 +1,4 @@
-import { GoABCallout } from "@abgov/angular-components";
+import { GoabCallout } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
   selector: "abgov-callout",
   templateUrl: "./callout.component.html",
   imports: [
-    GoABCallout,
+    GoabCallout,
   ]
 })
 export class CalloutComponent {

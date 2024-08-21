@@ -25,7 +25,7 @@ import { NgTemplateOutlet } from "@angular/common";
   imports: [NgTemplateOutlet],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABRadioItem {
+export class GoabRadioItem {
   @Input() value?: string;
   @Input() label?: string;
   @Input() name?: string;

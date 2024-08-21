@@ -1,5 +1,5 @@
-import { GoABContainer, GoABDatePicker, GoABDropdown, GoABDropdownItem, GoABFormItem, GoABInput, GoABSpacer } from "@abgov/angular-components";
-import { GoABDatePickerOnChangeDetail, GoABDropdownOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabContainer, GoabDatePicker, GoabDropdown, GoabDropdownItem, GoabFormItem, GoabInput, GoabSpacer } from "@abgov/angular-components";
+import { GoabDatePickerOnChangeDetail, GoabDropdownOnChangeDetail } from "@abgov/ui-components-common";
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -10,13 +10,13 @@ import { Countries, CountrySubdivisions } from "playground/angular/src/app/dropd
   selector: "abgov-dropdown",
   templateUrl: "./dropdown.component.html",
   imports: [
-    GoABDropdown,
-    GoABDropdownItem,
-    GoABFormItem,
-    GoABContainer,
-    GoABDatePicker,
-    GoABInput,
-    GoABSpacer,
+    GoabDropdown,
+    GoabDropdownItem,
+    GoabFormItem,
+    GoabContainer,
+    GoabDatePicker,
+    GoabInput,
+    GoabSpacer,
     ReactiveFormsModule,
     CommonModule,
     FormsModule
@@ -43,7 +43,7 @@ export class DropdownComponent implements OnInit {
     });
   }
 
-  onChangeExample1(event: GoABDropdownOnChangeDetail) {
+  onChangeExample1(event: GoabDropdownOnChangeDetail) {
     this.example1 = event.value;
   }
 
@@ -64,7 +64,7 @@ export class DropdownComponent implements OnInit {
   });
 
   item = new Date();
-  onChange(e: GoABDatePickerOnChangeDetail) {
+  onChange(e: GoabDatePickerOnChangeDetail) {
     // handle change
     console.log(e);
   }
@@ -130,7 +130,7 @@ export class DropdownComponent implements OnInit {
 
 
 
-  selectColor(event: GoABDropdownOnChangeDetail) {
+  selectColor(event: GoabDropdownOnChangeDetail) {
     console.log("Select Color", event);
     this.selectedColor = event.value || "";
   }
@@ -169,7 +169,7 @@ export class DropdownComponent implements OnInit {
     }
   ];
 
-  onChangeDropdown(e: GoABDropdownOnChangeDetail) {
+  onChangeDropdown(e: GoabDropdownOnChangeDetail) {
     console.log(e)
   }
 }

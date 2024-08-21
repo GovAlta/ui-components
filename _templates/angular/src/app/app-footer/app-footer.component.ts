@@ -1,4 +1,4 @@
-import { GoABAppFooter, GoABAppFooterMetaSection, GoABAppFooterNavSection } from "@abgov/angular-components";
+import { GoabAppFooter, GoabAppFooterMetaSection, GoabAppFooterNavSection } from "@abgov/angular-components";
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,9 +6,9 @@ import { Component } from "@angular/core";
   selector: "abgov-app-footer",
   templateUrl: "./app-footer.component.html",
   imports: [
-    GoABAppFooter,
-    GoABAppFooterMetaSection,
-    GoABAppFooterNavSection,
+    GoabAppFooter,
+    GoabAppFooterMetaSection,
+    GoabAppFooterNavSection,
   ],
 })
 export class AppFooterComponent {

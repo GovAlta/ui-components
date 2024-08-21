@@ -1,6 +1,6 @@
 import {
-  GoABFormItemLabelSize,
-  GoABFormItemRequirement,
+  GoabFormItemLabelSize,
+  GoabFormItemRequirement,
   Spacing,
 } from "@abgov/ui-components-common";
 import {
@@ -33,12 +33,12 @@ import {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABFormItem{
+export class GoabFormItem {
   @Input() label?: string;
-  @Input() labelSize?: GoABFormItemLabelSize;
+  @Input() labelSize?: GoabFormItemLabelSize;
   @Input() helpText?: string;
   @Input() error?: string;
-  @Input() requirement?: GoABFormItemRequirement;
+  @Input() requirement?: GoabFormItemRequirement;
   @Input() maxWidth?: string;
   @Input() testId?: string;
   @Input() id?: string;

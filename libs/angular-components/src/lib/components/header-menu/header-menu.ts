@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
-import { GoABIconType } from "@abgov/ui-components-common";
+import { GoabIconType } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
@@ -15,8 +15,8 @@ import { GoABIconType } from "@abgov/ui-components-common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABAppHeaderMenu {
-  @Input() leadingIcon?: GoABIconType;
+export class GoabAppHeaderMenu {
+  @Input() leadingIcon?: GoabIconType;
   @Input() heading?: string;
   @Input() testId?: string;
 }

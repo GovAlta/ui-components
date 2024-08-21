@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
-import { GoABBadge } from "./badge";
+import { GoabBadge } from "./badge";
 import { screen } from "@testing-library/dom";
 
 describe("GoAB Badge", () => {
   it("should render", () => {
-    render(<GoABBadge type="information" testId="badge-test" content="Text Content" />);
+    render(<GoabBadge type="information" testId="badge-test" content="Text Content" />);
 
     const badge = screen.findByTestId("badge-test");
     expect(badge).toBeTruthy();
@@ -12,7 +12,7 @@ describe("GoAB Badge", () => {
 
   it("should render the properties", () => {
     const { container } = render(
-      <GoABBadge
+      <GoabBadge
         type="information"
         content="Text Content"
         mt="s"

@@ -1,4 +1,4 @@
-import { GoABButtonSize, GoABButtonType, GoABButtonVariant, GoABIconType, Spacing } from "@abgov/ui-components-common";
+import { GoabButtonSize, GoabButtonType, GoabButtonVariant, GoabIconType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
@@ -24,13 +24,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABButton {
-  @Input() type?: GoABButtonType = "primary";
-  @Input() size?: GoABButtonSize;
-  @Input() variant?: GoABButtonVariant;
+export class GoabButton {
+  @Input() type?: GoabButtonType = "primary";
+  @Input() size?: GoabButtonSize;
+  @Input() variant?: GoabButtonVariant;
   @Input() disabled?: boolean;
-  @Input() leadingIcon?: GoABIconType;
-  @Input() trailingIcon?: GoABIconType;
+  @Input() leadingIcon?: GoabIconType;
+  @Input() trailingIcon?: GoabIconType;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

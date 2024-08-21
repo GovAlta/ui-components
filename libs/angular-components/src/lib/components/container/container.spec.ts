@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABContainer } from "./container";
+import { GoabContainer } from "./container";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoABContainerAccent,
-  GoABContainerPadding,
-  GoABContainerType,
-  GoABContainerWidth, Spacing,
+  GoabContainerAccent,
+  GoabContainerPadding,
+  GoabContainerType,
+  GoabContainerWidth, Spacing,
 } from "@abgov/ui-components-common";
-import { GoABButton } from "../button/button";
+import { GoabButton } from "../button/button";
 import { By } from "@angular/platform-browser";
 
 @Component({
@@ -36,10 +36,10 @@ import { By } from "@angular/platform-browser";
   `
 })
 class TestContainerComponent {
-  type?: GoABContainerType = "interactive";
-  accent?: GoABContainerAccent = "filled";
-  padding?: GoABContainerPadding = "relaxed";
-  width?: GoABContainerWidth = "full";
+  type?: GoabContainerType = "interactive";
+  accent?: GoabContainerAccent = "filled";
+  padding?: GoabContainerPadding = "relaxed";
+  width?: GoabContainerWidth = "full";
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -57,7 +57,7 @@ describe("GoABContainer", () => {
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
-      imports: [GoABButton, GoABContainer],
+      imports: [GoabButton, GoabContainer],
       declarations: [TestContainerComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();

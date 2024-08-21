@@ -1,16 +1,16 @@
 import {
-  GoABIconButtonVariant,
-  GoABIconSize,
-  GoABIconType,
+  GoabIconButtonVariant,
+  GoabIconSize,
+  GoabIconType,
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
-  icon: GoABIconType;
-  size?: GoABIconSize;
-  variant?: GoABIconButtonVariant;
+  icon: GoabIconType;
+  size?: GoabIconSize;
+  variant?: GoabIconButtonVariant;
   title?: string;
   disabled?: boolean;
   arialabel?: string;
@@ -25,10 +25,10 @@ declare global {
   }
 }
 
-export interface GoABIconButtonProps extends Margins {
-  icon: GoABIconType;
-  size?: GoABIconSize;
-  variant?: GoABIconButtonVariant;
+export interface GoabIconButtonProps extends Margins {
+  icon: GoabIconType;
+  size?: GoabIconSize;
+  variant?: GoabIconButtonVariant;
   title?: string;
   disabled?: boolean;
   children?: React.ReactNode;
@@ -37,7 +37,7 @@ export interface GoABIconButtonProps extends Margins {
   ariaLabel?: string;
 }
 
-export function GoABIconButton({
+export function GoabIconButton({
   icon,
   disabled,
   variant = "color",
@@ -51,7 +51,7 @@ export function GoABIconButton({
   mr,
   mb,
   ml,
-}: GoABIconButtonProps): JSX.Element {
+}: GoabIconButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!ref.current) {

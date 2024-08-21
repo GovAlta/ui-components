@@ -1,4 +1,4 @@
-import { GoABAccordionHeadingSize, Spacing } from "@abgov/ui-components-common";
+import { GoabAccordionHeadingSize, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -27,12 +27,12 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABAccordion {
+export class GoabAccordion {
   @Input() heading?: string;
   @Input() secondaryText?: string;
   @Input() testId?: string;
   @Input() open?: boolean;
-  @Input() headingSize?: GoABAccordionHeadingSize;
+  @Input() headingSize?: GoabAccordionHeadingSize;
   @Input() headingContent!: TemplateRef<any>;
   @Input() maxWidth?: string;
   @Input() mt?: Spacing;

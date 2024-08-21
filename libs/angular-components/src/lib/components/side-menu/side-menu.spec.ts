@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABSideMenu } from "./side-menu";
+import { GoabSideMenu } from "./side-menu";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 @Component({
@@ -19,7 +19,7 @@ describe("GoABSideMenu", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestSideMenuComponent],
-      imports: [GoABSideMenu],
+      imports: [GoabSideMenu],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

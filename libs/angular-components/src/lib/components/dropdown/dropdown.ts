@@ -1,4 +1,4 @@
-import { GoABDropdownOnChangeDetail, GoABIconType, Spacing } from "@abgov/ui-components-common";
+import { GoabDropdownOnChangeDetail, GoabIconType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -39,11 +39,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => GoABDropdown),
+      useExisting: forwardRef(() => GoabDropdown),
     }
   ],
 })
-export class GoABDropdown implements ControlValueAccessor{
+export class GoabDropdown implements ControlValueAccessor{
   @Input() name?: string;
   @Input() value?: string;
   @Input() ariaLabel?: string;
@@ -52,7 +52,7 @@ export class GoABDropdown implements ControlValueAccessor{
   @Input() disabled?: boolean;
   @Input() error?: boolean;
   @Input() filterable?: boolean;
-  @Input() leadingIcon?: GoABIconType;
+  @Input() leadingIcon?: GoabIconType;
   @Input() maxHeight?: string;
   @Input() multiselect?: boolean;
   @Input() native?: boolean;
@@ -65,10 +65,10 @@ export class GoABDropdown implements ControlValueAccessor{
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
 
-  @Output() onChange = new EventEmitter<GoABDropdownOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoabDropdownOnChangeDetail>();
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<GoABDropdownOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
     this.onChange.emit(detail)
 
     this.markAsTouched();

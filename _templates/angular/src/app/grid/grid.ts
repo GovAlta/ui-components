@@ -1,4 +1,4 @@
-import { GoABCard, GoABCardActions, GoABCardContent, GoABCardImage, GoABContainer, GoABGrid } from "@abgov/angular-components";
+import { GoabCard, GoabCardActions, GoabCardContent, GoabCardImage, GoabContainer, GoabGrid } from "@abgov/angular-components";
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 
 @Component({
@@ -6,12 +6,12 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
   selector: "abgov-grid-page",
   templateUrl: "./grid.html",
   imports: [
-    GoABContainer,
-    GoABGrid,
-    GoABCard,
-    GoABCardActions,
-    GoABCardImage,
-    GoABCardContent,
+    GoabContainer,
+    GoabGrid,
+    GoabCard,
+    GoabCardActions,
+    GoabCardImage,
+    GoabCardContent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

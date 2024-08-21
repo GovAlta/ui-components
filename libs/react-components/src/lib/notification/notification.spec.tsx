@@ -1,18 +1,18 @@
 import { render } from "@testing-library/react";
-import GoABNotification  from "./notification";
+import GoabNotification  from "./notification";
 import { fireEvent } from "@testing-library/dom";
 import { describe, it, expect, vi } from "vitest";
-import { GoABNotificationType } from "@abgov/ui-components-common";
+import { GoabNotificationType } from "@abgov/ui-components-common";
 
 describe("Notification Banner", () => {
   describe("type", () => {
     (["important", "information", "emergency", "event"] as const).forEach(
-      (type: GoABNotificationType) => {
+      (type: GoabNotificationType) => {
         it(`should render ${type} notification`, async function () {
           render(
-            <GoABNotification type={type}>
+            <GoabNotification type={type}>
               Information to the user goes in the content
-            </GoABNotification>,
+            </GoabNotification>,
           );
           const el = document.querySelector("goa-notification");
           expect(el?.getAttribute("type")).toEqual(type);
@@ -24,9 +24,9 @@ describe("Notification Banner", () => {
   it("Event triggered on notification banner dismiss", async () => {
     const onDismiss = vi.fn();
     const { container } = render(
-      <GoABNotification type="information" onDismiss={onDismiss}>
+      <GoabNotification type="information" onDismiss={onDismiss}>
         Information to the user goes in the content
-      </GoABNotification>,
+      </GoabNotification>,
     );
     const notificationBanner = container.querySelector("goa-notification");
     notificationBanner && fireEvent(notificationBanner, new CustomEvent("_dismiss"));
@@ -35,9 +35,9 @@ describe("Notification Banner", () => {
 
   it("should render notification banner with ariaLive", async () => {
     render(
-      <GoABNotification type="information" ariaLive="assertive">
+      <GoabNotification type="information" ariaLive="assertive">
         Information to the user goes in the content
-      </GoABNotification>,
+      </GoabNotification>,
     );
     const el = document.querySelector("goa-notification");
     expect(el?.getAttribute("ariaLive")).toEqual("assertive");

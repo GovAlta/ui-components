@@ -1,4 +1,4 @@
-import { GoABBadge, GoABBlock, GoABButton, GoABContainer } from "@abgov/angular-components";
+import { GoabBadge, GoabBlock, GoabButton, GoabContainer } from "@abgov/angular-components";
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -6,10 +6,10 @@ import { Component, OnInit } from "@angular/core";
   selector: "goab-container",
   templateUrl: "./container.component.html",
   imports: [
-    GoABContainer,
-    GoABButton,
-    GoABBlock,
-    GoABBadge,
+    GoabContainer,
+    GoabButton,
+    GoabBlock,
+    GoabBadge,
   ],
 })
 export class ContainerComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { GoABIconButtonVariant, GoABIconSize, GoABIconType, Spacing } from "@abgov/ui-components-common";
+import { GoabIconButtonVariant, GoabIconSize, GoabIconType, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
@@ -24,10 +24,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABIconButton {
-  @Input({ required: true }) icon!: GoABIconType;
-  @Input() size?: GoABIconSize = "medium";
-  @Input() variant?: GoABIconButtonVariant;
+export class GoabIconButton {
+  @Input({ required: true }) icon!: GoabIconType;
+  @Input() size?: GoabIconSize = "medium";
+  @Input() variant?: GoabIconButtonVariant;
   @Input() title?: string;
   @Input() disabled?: boolean;
   @Input() ariaLabel?: string;

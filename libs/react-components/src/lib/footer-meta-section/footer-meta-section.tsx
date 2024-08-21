@@ -10,15 +10,15 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoABAppFooterMetaSectionProps {
+export interface GoabAppFooterMetaSectionProps {
   testId?: string;
   children?: ReactNode;
 }
 
-export function GoABAppFooterMetaSection({
+export function GoabAppFooterMetaSection({
   testId,
   children,
-}: GoABAppFooterMetaSectionProps) {
+}: GoabAppFooterMetaSectionProps) {
   return (
     <goa-app-footer-meta-section data-testid={testId} slot="meta">
       {children}
@@ -26,4 +26,4 @@ export function GoABAppFooterMetaSection({
   );
 }
 
-export default GoABAppFooterMetaSection;
+export default GoabAppFooterMetaSection;

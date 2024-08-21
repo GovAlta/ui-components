@@ -1,15 +1,15 @@
 import { ReactNode } from "react";
-import { GoABIconType } from "@abgov/ui-components-common";
+import { GoabIconType } from "@abgov/ui-components-common";
 
 interface WCProps {
   heading: string;
-  leadingicon?: GoABIconType;
+  leadingicon?: GoabIconType;
 }
 
 /* eslint-disable-next-line */
-export interface GoABAppHeaderMenuProps {
+export interface GoabAppHeaderMenuProps {
   heading: string;
-  leadingIcon?: GoABIconType;
+  leadingIcon?: GoabIconType;
   testId?: string;
   children?: ReactNode;
 }
@@ -24,7 +24,7 @@ declare global {
   }
 }
 
-export function GoABAppHeaderMenu(props: GoABAppHeaderMenuProps) {
+export function GoabAppHeaderMenu(props: GoabAppHeaderMenuProps) {
   return (
     <goa-app-header-menu
       heading={props.heading}
@@ -36,4 +36,4 @@ export function GoABAppHeaderMenu(props: GoABAppHeaderMenuProps) {
   );
 }
 
-export default GoABAppHeaderMenu;
+export default GoabAppHeaderMenu;

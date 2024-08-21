@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABAppHeader } from "./header";
+import { GoabAppHeader } from "./header";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
@@ -31,7 +31,7 @@ describe("GoABAppHeader", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestAppHeaderComponent],
-      imports: [GoABAppHeader],
+      imports: [GoabAppHeader],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

@@ -1,7 +1,7 @@
 import {
-  GoABTextAreaCountBy,
-  GoABTextAreaOnChangeDetail,
-  GoABTextAreaOnKeyPressDetail,
+  GoabTextAreaCountBy,
+  GoabTextAreaOnChangeDetail,
+  GoabTextAreaOnKeyPressDetail,
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
@@ -17,7 +17,7 @@ interface WCProps extends Margins {
   width?: string;
   maxwidth?: string;
   arialabel?: string;
-  countby?: GoABTextAreaCountBy;
+  countby?: GoabTextAreaCountBy;
   maxcount?: number;
 }
 
@@ -30,7 +30,7 @@ declare global {
   }
 }
 
-export interface GoABTextAreaProps extends Margins {
+export interface GoabTextAreaProps extends Margins {
   name: string;
   value?: string;
   id?: string;
@@ -42,14 +42,14 @@ export interface GoABTextAreaProps extends Margins {
   maxWidth?: string;
   testId?: string;
   ariaLabel?: string;
-  countBy?: GoABTextAreaCountBy;
+  countBy?: GoabTextAreaCountBy;
   maxCount?: number;
 
-  onChange: (event: GoABTextAreaOnChangeDetail) => void;
-  onKeyPress?: (event: GoABTextAreaOnKeyPressDetail) => void;
+  onChange: (event: GoabTextAreaOnChangeDetail) => void;
+  onKeyPress?: (event: GoabTextAreaOnKeyPressDetail) => void;
 }
 
-export function GoABTextarea({
+export function GoabTextarea({
   name,
   value,
   placeholder,
@@ -68,7 +68,7 @@ export function GoABTextarea({
   ml,
   onChange,
   onKeyPress,
-}: GoABTextAreaProps): JSX.Element {
+}: GoabTextAreaProps): JSX.Element {
   const el = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export function GoABTextarea({
     }
     const current = el.current;
     const listener: EventListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoABTextAreaOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;
 
       onChange(detail);
     };
@@ -94,7 +94,7 @@ export function GoABTextarea({
     }
     const current = el.current;
     const keypressListener = (e: unknown) => {
-      const detail = (e as CustomEvent<GoABTextAreaOnKeyPressDetail>).detail;
+      const detail = (e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail;
       onKeyPress?.(detail);
     };
 
@@ -127,5 +127,5 @@ export function GoABTextarea({
   );
 }
 
-export { GoABTextarea as GoABTextArea };
-export default GoABTextarea;
+export { GoabTextarea as GoABTextArea };
+export default GoabTextarea;

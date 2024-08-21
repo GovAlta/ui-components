@@ -1,11 +1,11 @@
-import { GoABPopoverPosition, Margins } from "@abgov/ui-components-common";
+import { GoabPopoverPosition, Margins } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
 
 interface WCProps extends Margins {
   maxwidth?: string;
   minwidth?: string;
   padded?: boolean;
-  position?: GoABPopoverPosition;
+  position?: GoabPopoverPosition;
   relative?: boolean;
 }
 
@@ -18,18 +18,18 @@ declare global {
   }
 }
 
-export interface GoABPopoverProps extends Margins {
+export interface GoabPopoverProps extends Margins {
   target?: ReactNode;
   testId?: string;
   maxWidth?: string;
   minWidth?: string;
   padded?: boolean;
-  position?: GoABPopoverPosition;
+  position?: GoabPopoverPosition;
   children: ReactNode;
   relative?: boolean;
 }
 
-export function GoABPopover({
+export function GoabPopover({
   target,
   testId,
   maxWidth,
@@ -42,7 +42,7 @@ export function GoABPopover({
   mr,
   mb,
   ml,
-}: GoABPopoverProps): JSX.Element {
+}: GoabPopoverProps): JSX.Element {
   return (
     <goa-popover
       data-testid={testId}
@@ -62,4 +62,4 @@ export function GoABPopover({
   );
 }
 
-export default GoABPopover;
+export default GoabPopover;

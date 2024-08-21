@@ -1,4 +1,4 @@
-import { GoABPaginationOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { GoabPaginationOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
@@ -19,19 +19,19 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoABPaginationProps extends Margins {
+export interface GoabPaginationProps extends Margins {
   itemCount: number;
   perPageCount?: number;
   pageNumber: number;
   variant?: "all" | "links-only";
-  onChange: (detail: GoABPaginationOnChangeDetail) => void;
+  onChange: (detail: GoabPaginationOnChangeDetail) => void;
   testId?: string;
 }
 
 // legacy
-export type PaginationProps = GoABPaginationProps;
+export type PaginationProps = GoabPaginationProps;
 
-export function GoABPagination({ onChange, ...props }: GoABPaginationProps) {
+export function GoabPagination({ onChange, ...props }: GoabPaginationProps) {
   const ref = useRef<HTMLElement>();
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export function GoABPagination({ onChange, ...props }: GoABPaginationProps) {
     }
     const current = ref.current;
     const changeListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoABPaginationOnChangeDetail>).detail;
+      const detail = (e as CustomEvent<GoabPaginationOnChangeDetail>).detail;
       onChange(detail);
     };
 
@@ -66,4 +66,4 @@ export function GoABPagination({ onChange, ...props }: GoABPaginationProps) {
   );
 }
 
-export default GoABPagination;
+export default GoabPagination;

@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABInput } from "./input";
+import { GoabInput } from "./input";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoABIconType,
-  GoABInputAutoCapitalize, GoABInputOnChangeDetail,
-  GoABInputType,
+  GoabIconType,
+  GoabInputAutoCapitalize, GoabInputOnChangeDetail,
+  GoabInputType,
   Spacing,
 } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
@@ -55,10 +55,10 @@ class TestInputComponent {
   id?: string;
   debounce?: number;
   disabled?: boolean;
-  autoCapitalize?: GoABInputAutoCapitalize;
+  autoCapitalize?: GoabInputAutoCapitalize;
   placeholder?: string;
-  leadingIcon?: GoABIconType;
-  trailingIcon?: GoABIconType;
+  leadingIcon?: GoabIconType;
+  trailingIcon?: GoabIconType;
   variant?: string;
   focused?: boolean;
   readonly?: boolean;
@@ -73,7 +73,7 @@ class TestInputComponent {
   min?: number;
   max?: number;
   step?: number;
-  type?: GoABInputType = "text";
+  type?: GoabInputType = "text";
   ariaLabelledBy?: string;
   mt?: Spacing;
   mr?: Spacing;
@@ -96,7 +96,7 @@ class TestInputComponent {
     /** do nothing **/
   }
 
-  onChange(event: GoABInputOnChangeDetail) {
+  onChange(event: GoabInputOnChangeDetail) {
     /** do nothing **/
   }
 }
@@ -108,7 +108,7 @@ describe("GoABInput", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestInputComponent],
-      imports: [GoABInput],
+      imports: [GoabInput],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

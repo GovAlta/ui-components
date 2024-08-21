@@ -1,7 +1,6 @@
-import { GoABFileUploadCard, GoABFileUploadInput } from "@abgov/angular-components";
+import { GoabFileUploadCard, GoabFileUploadInput } from "@abgov/angular-components";
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
 
 interface Uploader {
   upload: (url: string | ArrayBuffer) => void;
@@ -33,8 +32,8 @@ class MockUploader implements Uploader {
   selector: "abgov-file-upload",
   templateUrl: "./file-upload.html",
   imports: [
-    GoABFileUploadInput,
-    GoABFileUploadCard,
+    GoabFileUploadInput,
+    GoabFileUploadCard,
     CommonModule,
   ],
 })

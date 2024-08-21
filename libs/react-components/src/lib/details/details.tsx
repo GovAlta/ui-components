@@ -18,7 +18,7 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoABDetailsProps extends Margins {
+export interface GoabDetailsProps extends Margins {
   heading: string;
   open?: boolean;
   maxWidth?: string;
@@ -26,7 +26,7 @@ export interface GoABDetailsProps extends Margins {
   children: ReactNode;
 }
 
-export function GoABDetails(props: GoABDetailsProps) {
+export function GoabDetails(props: GoabDetailsProps) {
   return (
     <goa-details
       heading={props.heading}
@@ -43,4 +43,4 @@ export function GoABDetails(props: GoABDetailsProps) {
   );
 }
 
-export default GoABDetails;
+export default GoabDetails;

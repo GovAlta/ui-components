@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABButton } from "./button";
+import { GoabButton } from "./button";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABButtonSize, GoABButtonVariant, GoABIconType, Spacing, GoABButtonType } from "@abgov/ui-components-common";
+import { GoabButtonSize, GoabButtonVariant, GoabIconType, Spacing, GoabButtonType } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
@@ -25,12 +25,12 @@ import { fireEvent } from "@testing-library/dom";
   `
 })
 class TestButtonComponent{
-  type?: GoABButtonType;
-  size?: GoABButtonSize;
-  variant?: GoABButtonVariant;
+  type?: GoabButtonType;
+  size?: GoabButtonSize;
+  variant?: GoabButtonVariant;
   disabled?: boolean;
-  leadingIcon?: GoABIconType;
-  trailingIcon?: GoABIconType;
+  leadingIcon?: GoabIconType;
+  trailingIcon?: GoabIconType;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -50,7 +50,7 @@ describe("GoABButton", () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      imports: [GoABButton],
+      imports: [GoabButton],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [TestButtonComponent]
     }).compileComponents();

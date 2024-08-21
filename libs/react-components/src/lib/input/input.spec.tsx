@@ -1,19 +1,19 @@
 import { render } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
 import {
-  GoABInputDateTime,
-  GoABInputText,
-  GoABInputProps,
-  GoABInputNumber,
+  GoabInputDateTime,
+  GoabInputText,
+  GoabInputProps,
+  GoabInputNumber,
 } from "./input";
 import { describe, it, expect, vi } from "vitest";
-import { GoABIconType, GoABInputOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabIconType, GoabInputOnChangeDetail } from "@abgov/ui-components-common";
 
 const noop = () => {
   /* do nothing */
 };
 const testId = "test-id";
-const defaultProps: GoABInputProps = {
+const defaultProps: GoabInputProps = {
   name: "",
   value: "",
   testId: testId,
@@ -22,13 +22,13 @@ const defaultProps: GoABInputProps = {
 
 describe("Input", () => {
   it("should render", () => {
-    const props: GoABInputProps = {
+    const props: GoabInputProps = {
       ...defaultProps,
       name: "foo",
       value: "bar",
       id: "foo",
-      leadingIcon: "search" as GoABIconType,
-      trailingIcon: "close" as GoABIconType,
+      leadingIcon: "search" as GoabIconType,
+      trailingIcon: "close" as GoabIconType,
       autoCapitalize: "on",
       variant: "bare",
       disabled: true,
@@ -49,7 +49,7 @@ describe("Input", () => {
       onTrailingIconClick: noop,
     };
 
-    render(<GoABInputText {...props} />);
+    render(<GoabInputText {...props} />);
 
     const input = document.querySelector("goa-input");
     expect(input).toBeTruthy();
@@ -85,13 +85,13 @@ describe("Input", () => {
     const validateOnChange = vi.fn();
     const newValue = "barfoo";
 
-    const onChange = ({ name, value }: GoABInputOnChangeDetail) => {
+    const onChange = ({ name, value }: GoabInputOnChangeDetail) => {
       expect(name).toBe("foo");
       expect(value).toBe(newValue);
       validateOnChange();
     };
     const props = { ...defaultProps, onChange };
-    render(<GoABInputText {...props} />);
+    render(<GoabInputText {...props} />);
 
     const input = document.querySelector("goa-input");
     expect(input).toBeTruthy();
@@ -109,7 +109,7 @@ describe("Input", () => {
   it("should not error out with invalid dates", () => {
     const mockOnChangeHandler = vi.fn();
     const { container } = render(
-      <GoABInputDateTime
+      <GoabInputDateTime
         onChange={mockOnChangeHandler}
         name="dateInput"
         value={new Date()}
@@ -144,7 +144,7 @@ describe("Input", () => {
   it("should handle decimal number for GoABInputNumber", () => {
     const mockOnChangeHandler = vitest.fn();
     const { container } = render(
-      <GoABInputNumber onChange={mockOnChangeHandler} name="numberInput" value={1} />,
+      <GoabInputNumber onChange={mockOnChangeHandler} name="numberInput" value={1} />,
     );
 
     const inputElement = container.querySelector("goa-input[type='number']");

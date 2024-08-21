@@ -1,4 +1,4 @@
-import { GoABBlockAlignment, GoABBlockDirection, Spacing } from "@abgov/ui-components-common";
+import { GoabBlockAlignment, GoabBlockDirection, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
@@ -20,10 +20,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABBlock {
+export class GoabBlock {
   @Input() gap?: Spacing;
-  @Input() direction?: GoABBlockDirection;
-  @Input() alignment?: GoABBlockAlignment;
+  @Input() direction?: GoabBlockDirection;
+  @Input() alignment?: GoabBlockAlignment;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

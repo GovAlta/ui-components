@@ -21,7 +21,7 @@ declare global {
   }
 }
 
-export interface GoABRadioItemProps  extends Margins {
+export interface GoabRadioItemProps extends Margins {
   value?: string;
   label?: string;
   name?: string;
@@ -35,7 +35,7 @@ export interface GoABRadioItemProps  extends Margins {
   ariaLabel?: string;
 }
 
-export function GoABRadioItem({
+export function GoabRadioItem({
   name,
   label,
   value,
@@ -51,7 +51,7 @@ export function GoABRadioItem({
   mr,
   mb,
   ml,
-}: GoABRadioItemProps): JSX.Element {
+}: GoabRadioItemProps): JSX.Element {
   return (
     <goa-radio-item
       name={name}
@@ -77,4 +77,4 @@ export function GoABRadioItem({
   );
 }
 
-export default GoABRadioItem;
+export default GoabRadioItem;

@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "@angular/core";
-import { GoABTabsOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
@@ -16,14 +16,14 @@ import { GoABTabsOnChangeDetail } from "@abgov/ui-components-common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABTabs {
+export class GoabTabs {
   @Input() initialTab?: number;
   @Input() testId?: string;
 
-  @Output() onChange = new EventEmitter<GoABTabsOnChangeDetail>();
+  @Output() onChange = new EventEmitter<GoabTabsOnChangeDetail>();
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<GoABTabsOnChangeDetail>).detail;
+    const detail = (e as CustomEvent<GoabTabsOnChangeDetail>).detail;
     this.onChange.emit(detail);
   }
 }

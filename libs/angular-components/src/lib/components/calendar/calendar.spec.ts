@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABCalendar } from "./calendar";
+import { GoabCalendar } from "./calendar";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { fireEvent } from "@testing-library/dom";
 
@@ -41,7 +41,7 @@ describe("GoABCalendar", () => {
   let component: TestCalendarComponent;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABCalendar],
+      imports: [GoabCalendar],
       declarations: [TestCalendarComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

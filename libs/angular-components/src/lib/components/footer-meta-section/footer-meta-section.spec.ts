@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABAppFooterMetaSection } from "./footer-meta-section";
+import { GoabAppFooterMetaSection } from "./footer-meta-section";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
@@ -21,7 +21,7 @@ describe("GoABFooterMetaSection", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFooterMetaSectionComponent],
-      imports: [GoABAppFooterMetaSection],
+      imports: [GoabAppFooterMetaSection],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

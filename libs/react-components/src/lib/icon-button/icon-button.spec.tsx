@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
-import { GoABIconButton } from "./icon-button";
-import { GoABIconButtonVariant } from "@abgov/ui-components-common";
+import { GoabIconButton } from "./icon-button";
+import { GoabIconButtonVariant } from "@abgov/ui-components-common";
 
 describe("GoAB IconButton", () => {
   it("should render the properties", () => {
     const { container } = render(
-      <GoABIconButton
+      <GoabIconButton
         icon="information"
         mt="s"
         mr="m"
@@ -26,10 +26,10 @@ describe("GoAB IconButton", () => {
 
   describe("Variants", () => {
     (["color", "nocolor", "dark", "destructive"] as const).forEach(
-      (variant: GoABIconButtonVariant) => {
+      (variant: GoabIconButtonVariant) => {
         it(`should render ${variant} variant`, async () => {
           const { container } = render(
-            <GoABIconButton variant={variant} icon="information" />,
+            <GoabIconButton variant={variant} icon="information" />,
           );
 
           const el = container.querySelector("goa-icon-button");

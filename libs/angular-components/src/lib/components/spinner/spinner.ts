@@ -1,4 +1,4 @@
-import { GoABSpinnerSize, GoABSpinnerType } from "@abgov/ui-components-common";
+import { GoabSpinnerSize, GoabSpinnerType } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
@@ -16,9 +16,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABSpinner {
-  @Input() type?: GoABSpinnerType;
-  @Input() size?: GoABSpinnerSize;
+export class GoabSpinner {
+  @Input() type?: GoabSpinnerType;
+  @Input() size?: GoabSpinnerSize;
   @Input() invert?: boolean;
   @Input() progress?: number;
   @Input() testId?: string;

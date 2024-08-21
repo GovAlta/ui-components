@@ -1,5 +1,5 @@
-import { GoABFormItem, GoABRadioGroup, GoABRadioItem } from "@abgov/angular-components";
-import { GoABRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabFormItem, GoabRadioGroup, GoabRadioItem } from "@abgov/angular-components";
+import { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 import { NgForOf } from "@angular/common";
 import { Component } from "@angular/core";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -10,9 +10,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angul
   templateUrl: "./radio.component.html",
   styleUrls: ["./radio.component.css"],
   imports: [
-    GoABRadioGroup,
-    GoABRadioItem,
-    GoABFormItem,
+    GoabRadioGroup,
+    GoabRadioItem,
+    GoabFormItem,
     ReactiveFormsModule,
     NgForOf,
     FormsModule
@@ -21,7 +21,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angul
 export class RadioComponent {
   selectedValue = '';
 
-  handleRadioChange(event: GoABRadioGroupOnChangeDetail) {
+  handleRadioChange(event: GoabRadioGroupOnChangeDetail) {
     this.selectedValue = event.value;
   }
   example2Form: FormGroup;
@@ -55,7 +55,7 @@ export class RadioComponent {
     },
   ];
 
-  onChange(e: GoABRadioGroupOnChangeDetail) {
+  onChange(e: GoabRadioGroupOnChangeDetail) {
     console.log("onChange", e.name, e.value);
     this.radioValue = e.value;
   }

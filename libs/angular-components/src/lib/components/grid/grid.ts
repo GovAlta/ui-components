@@ -19,7 +19,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoABGrid {
+export class GoabGrid {
   @Input({ required: true }) minChildWidth!: string;
   @Input() gap?: Spacing;
   @Input() testId?: string;

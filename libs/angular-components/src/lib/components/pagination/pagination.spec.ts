@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABPagination } from "./pagination";
+import { GoabPagination } from "./pagination";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABPaginationOnChangeDetail, GoABPaginationVariant, Spacing } from "@abgov/ui-components-common";
+import { GoabPaginationOnChangeDetail, GoabPaginationVariant, Spacing } from "@abgov/ui-components-common";
 
 @Component({
   template: `
@@ -21,13 +21,13 @@ class TestPaginationComponent {
   itemCount = 100;
   pageNumber = 1;
   perPageCount = 20;
-  variant = "all" as GoABPaginationVariant;
+  variant = "all" as GoabPaginationVariant;
   mt = "s" as Spacing;
   mb = "m"  as Spacing;
   ml = "l"  as Spacing;
   mr = "xl"  as Spacing;
 
-  onChange = (event: GoABPaginationOnChangeDetail) => {/** do nothing **/};
+  onChange = (event: GoabPaginationOnChangeDetail) => {/** do nothing **/};
 }
 
 describe("GoABPagination", () => {
@@ -37,7 +37,7 @@ describe("GoABPagination", () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [TestPaginationComponent],
-      imports: [GoABPagination],
+      imports: [GoabPagination],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 

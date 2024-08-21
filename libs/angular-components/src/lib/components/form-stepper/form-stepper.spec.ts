@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABFormStepper } from "./form-stepper";
+import { GoabFormStepper } from "./form-stepper";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
@@ -40,7 +40,7 @@ describe("GoABFormStepper", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestFormStepperComponent],
-      imports: [GoABFormStepper],
+      imports: [GoabFormStepper],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

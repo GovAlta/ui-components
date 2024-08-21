@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABSpinner } from "./spinner";
+import { GoabSpinner } from "./spinner";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoABSpinnerSize, GoABSpinnerType } from "@abgov/ui-components-common";
+import { GoabSpinnerSize, GoabSpinnerType } from "@abgov/ui-components-common";
 
 @Component({
   template: `
@@ -15,8 +15,8 @@ import { GoABSpinnerSize, GoABSpinnerType } from "@abgov/ui-components-common";
   `,
 })
 class TestSpinnerComponent {
-  type = "progress" as GoABSpinnerType;
-  size = "medium" as GoABSpinnerSize;
+  type = "progress" as GoabSpinnerType;
+  size = "medium" as GoabSpinnerSize;
   invert = true;
   testId = "spinner-testid";
   progress = 20;
@@ -29,7 +29,7 @@ describe("GoABSpinner", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestSpinnerComponent],
-      imports: [GoABSpinner],
+      imports: [GoabSpinner],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

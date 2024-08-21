@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABRadioGroup } from "./radio-group";
+import { GoabRadioGroup } from "./radio-group";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoABRadioGroupOnChangeDetail,
-  GoABRadioGroupOrientation,
+  GoabRadioGroupOnChangeDetail,
+  GoabRadioGroupOrientation,
   Spacing,
 } from "@abgov/ui-components-common";
-import { GoABRadioItem } from "../radio-item/radio-item";
+import { GoabRadioItem } from "../radio-item/radio-item";
 import { fireEvent } from "@testing-library/dom";
 
 interface RadioOption {
@@ -53,7 +53,7 @@ class TestRadioGroupComponent {
   name?: string;
   value?: string;
   disabled?: boolean;
-  orientation?: GoABRadioGroupOrientation;
+  orientation?: GoabRadioGroupOrientation;
   error?: boolean;
   ariaLabel?: string;
   testId?: string;
@@ -64,7 +64,7 @@ class TestRadioGroupComponent {
 
   options: RadioOption[] = [];
 
-  onChange(event: GoABRadioGroupOnChangeDetail) {
+  onChange(event: GoabRadioGroupOnChangeDetail) {
     /** do nothing **/
   }
 }
@@ -75,7 +75,7 @@ describe("GoABRadioGroup", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoABRadioGroup, GoABRadioItem],
+      imports: [GoabRadioGroup, GoabRadioItem],
       declarations: [TestRadioGroupComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

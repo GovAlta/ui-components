@@ -1,4 +1,4 @@
-import { GoABLinkTarget, GoABServiceLevel } from "@abgov/ui-components-common";
+import { GoabLinkTarget, GoabServiceLevel } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 
 @Component({
@@ -18,12 +18,12 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GoABMicrositeHeader {
-  @Input() type?: GoABServiceLevel;
+export class GoabMicrositeHeader {
+  @Input() type?: GoabServiceLevel;
   @Input() version?: string;
   @Input() feedbackUrl?: string;
   @Input() testId?: string;
   @Input() maxContentWidth?: string;
-  @Input() feedbackUrlTarget?: GoABLinkTarget;
-  @Input() headerUrlTarget?: GoABLinkTarget;
+  @Input() feedbackUrlTarget?: GoabLinkTarget;
+  @Input() headerUrlTarget?: GoabLinkTarget;
 }

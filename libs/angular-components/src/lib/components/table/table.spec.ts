@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoABTable } from "./table";
+import { GoabTable } from "./table";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoABTableOnSortDetail,
-  GoABTableVariant,
+  GoabTableOnSortDetail,
+  GoabTableVariant,
   Spacing,
 } from "@abgov/ui-components-common";
 import { fireEvent } from "@testing-library/dom";
@@ -35,14 +35,14 @@ import { fireEvent } from "@testing-library/dom";
 })
 class TestTableComponent {
   width?: string;
-  variant?: GoABTableVariant;
+  variant?: GoabTableVariant;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
   mr?: Spacing;
   ml?: Spacing;
 
-  onSort(event: GoABTableOnSortDetail) {
+  onSort(event: GoabTableOnSortDetail) {
     /** do nothing **/
   }
 }
@@ -54,7 +54,7 @@ describe("GoABTable", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestTableComponent],
-      imports: [GoABTable],
+      imports: [GoabTable],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
