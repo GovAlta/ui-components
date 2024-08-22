@@ -1,4 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
@@ -10,6 +11,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [label]="label"
       [attr.filter]="filter"
       [attr.name]="name"
+      [attr.mount]="mountType"
     >
     </goa-dropdown-item>
   `,
@@ -20,6 +22,7 @@ export class GoabDropdownItem {
   @Input() filter?: string;
   @Input() label?: string;
   @Input() name?: string;
+  @Input() mountType?: GoabDropdownItemMountType;
   @Input() testId?: string;
 }
 

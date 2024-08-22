@@ -37,6 +37,8 @@ export type GoabFileUploadOnDeleteDetail = {
   filename: string;
 }
 
+export type GoabDropdownItemMountType = "append" | "prepend" | "reset";
+
 export type GoabDropdownOnChangeDetail = {
   name?: string;
   value?: string;

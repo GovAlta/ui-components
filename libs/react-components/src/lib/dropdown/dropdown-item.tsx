@@ -1,16 +1,15 @@
 import { useEffect } from "react";
+import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 
 interface WCProps {
   value: string;
   label?: string;
   filter?: string;
-  mount?: DropdownItemMountType;
+  mount?: GoabDropdownItemMountType;
 
   // @deprecated
   name?: string;
 }
-
-export type DropdownItemMountType = "append" | "prepend" | "reset";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -27,7 +26,7 @@ export interface GoabDropdownItemProps {
   label?: string;
   filter?: string;
   testId?: string;
-  mountType?: DropdownItemMountType;
+  mountType?: GoabDropdownItemMountType;
 
   // @deprecated
   name?: string;
