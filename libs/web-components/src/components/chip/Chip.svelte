@@ -3,7 +3,7 @@
 <!-- Script -->
 <script lang="ts">
   import { toBoolean } from "../../common/utils";
-  import type { GoAIconType } from "../icon/Icon.svelte";
+  import type { GoAIconType, IconTheme } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
@@ -16,6 +16,7 @@
   export let ml: Spacing = null;
 
   export let leadingicon: GoAIconType | null = null;
+  export let icontheme: IconTheme = "outline";
   export let error: string = "false";
   export let deletable: string = "false";
   export let content: string;
@@ -60,7 +61,7 @@
   on:blur={() => (_hovering = false)}
 >
   {#if leadingicon}
-    <goa-icon class="leading-icon" size="medium" type={leadingicon} />
+    <goa-icon class="leading-icon" size="medium" type={leadingicon} theme={icontheme} />
   {/if}
   <div class="text">
     {content}
