@@ -99,12 +99,6 @@
       "description": "When true, the dropdown will be filterable. Non-native only",
       "valueSet": "boolean",
       "default": "false"
-    },
-    {
-      "name": "mount",
-      "description": "How newly added items will be added to the existing list",
-      "valueSet": "mountType",
-      "default": "append"
     }
   ],
   "references": [

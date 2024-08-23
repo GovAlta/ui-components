@@ -10,7 +10,7 @@
           "name": "prepend"
         },
         {
-          "name": "replace"
+          "name": "reset"
         }
       ]
     },
