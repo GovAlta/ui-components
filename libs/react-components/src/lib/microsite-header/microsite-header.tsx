@@ -25,7 +25,7 @@ interface WCProps {
 
 export interface GoAHeaderProps {
   type: GoAServiceLevel;
-  version?: string;
+  version?: React.ReactNode;
   feedbackUrl?: string;
   testId?: string;
   maxContentWidth?: string;
@@ -48,13 +48,15 @@ export function GoAMicrositeHeader({
   return (
     <goa-microsite-header
       type={type}
-      version={version}
+      version={typeof version === "string" ? version : undefined}
       feedbackurl={feedbackUrl}
       data-testid={testId}
       maxcontentwidth={maxContentWidth}
       feedbackurltarget={feedbackUrlTarget}
       headerurltarget={headerUrlTarget}
-    />
+    >
+      {version && typeof version !== "string" && <div slot="version">{version}</div>}
+    </goa-microsite-header>
   );
 }
 

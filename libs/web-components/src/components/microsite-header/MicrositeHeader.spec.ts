@@ -1,6 +1,9 @@
-import { render } from '@testing-library/svelte';
-import GoAMicrositeHeader from './MicrositeHeader.svelte'
+import { render, cleanup } from '@testing-library/svelte';
+import GoAMicrositeHeader from './MicrositeHeader.svelte';
+import GoAMicrositeHeaderWrapper from "./MicrositeHeaderWrapper.test.svelte";
 import { it, describe } from "vitest";
+
+afterEach(cleanup);
 
 describe('GoAMicrositeHeader', () => {
 
@@ -27,6 +30,15 @@ describe('GoAMicrositeHeader', () => {
     const version = queryByTestId('version');
 
     expect(version).toContainHTML("1.2.3");
+  });
+
+  it('should render slotted version', () => {
+    const el = render(GoAMicrositeHeaderWrapper, { hasSlottedVersion: true });
+    const slot = el?.container.querySelector("[slot=version]");
+    const slotContent = slot?.querySelector("span");
+    expect(slot).toBeTruthy();
+    expect(slotContent).toBeTruthy();
+    expect(slotContent?.innerHTML).toContain("foo");
   });
 
   ['alpha', 'beta'].forEach(type => {
@@ -64,12 +76,13 @@ describe('GoAMicrositeHeader', () => {
     const headerURL = queryByTestId('site-text').querySelector('a');
     expect(feedbackURL).toHaveAttribute('target', '_blank');
     expect(headerURL).toHaveAttribute('target', '_blank');
-  })
+  });
+
   it('should set target=_self when specified', () => {
     const { queryByTestId } = render(GoAMicrositeHeader, { type: 'alpha', feedbackurl: 'http://example.com', feedbackurltarget: "self", headerurltarget: "self" });
     const feedbackURL = queryByTestId('feedback').querySelector('a');
     const headerURL = queryByTestId('site-text').querySelector('a');
     expect(feedbackURL).toHaveAttribute('target', '_self');
     expect(headerURL).toHaveAttribute('target', '_self');
-  })
+  });
 });
