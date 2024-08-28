@@ -14,9 +14,13 @@
     if (_rootEl) {
       // Add styling if an ancestor has a class to style number columns,
       const hostEl = _rootEl.getRootNode().host;
+      const parentThead = hostEl?.closest("th");
+      parentThead?.style.setProperty("--goa-table-header-padding", "0");
+
       const ancestor = hostEl?.closest("th.goa-table-number-header");
       if (ancestor) {
         _rootEl.style.setProperty("--header-text-align", "flex-end");
+        _rootEl.style.setProperty("--header-align", "right");
       }
     }
   });
@@ -55,7 +59,8 @@
     padding: 0 1rem;
     justify-content: var(--header-text-align, flex-start);
     gap: 0.25rem;
-    align-items: center;
+    align-items: flex-end;
+    text-align: var(--header-align, left);
   }
 
   /* User set classes */
