@@ -167,3 +167,30 @@ it("allows for date navigation via the keyboard", async () => {
     expect(handler).toHaveBeenCalledWith(expectedSPD);
   });
 });
+
+it("renders with disabled prop", async () => {
+  const { container } = render(DatePicker, { disabled: "true" });
+  const input = container.querySelector("goa-input");
+  const popover = container.querySelector("goa-popover");
+
+  expect(input?.getAttribute("disabled")).toBe("true");
+  expect(popover?.getAttribute("disabled")).toBe("true");
+});
+
+it("prevents interaction when disabled", async () => {
+  const { container } = render(DatePicker, { disabled: "true" });
+  const input = container.querySelector("goa-input");
+
+  expect(input).toBeTruthy();
+
+  if (!input) return;
+
+  const clickEvent = createEvent.click(input);
+  const handler = vi.fn();
+  container?.addEventListener("_change", handler);
+
+  await fireEvent(input, clickEvent);
+  await waitFor(() => {
+    expect(handler).not.toBeCalled();
+  });
+});

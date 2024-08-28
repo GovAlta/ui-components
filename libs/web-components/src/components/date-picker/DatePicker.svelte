@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-date-picker" />
 
 <script lang="ts">
-  import { afterUpdate, onMount } from "svelte";
+  import { afterUpdate, onMount, tick } from "svelte";
   import {
     addDays,
     addMonths,
@@ -11,6 +11,7 @@
     startOfDay,
   } from "date-fns";
   import type { Spacing } from "../../common/styling";
+  import { toBoolean } from "../../common/utils";
 
   type DateValue = {
     type: "date";
@@ -22,6 +23,7 @@
   export let min: string = "";
   export let max: string = "";
   export let relative: string = "false";
+  export let disabled: string = "false";
 
   // margin
   export let mt: Spacing = null;
@@ -37,7 +39,10 @@
   let _date: Date | null;
   let _showPopover: boolean = false;
 
+  $: isDisabled = toBoolean(disabled);
+
   onMount(async () => {
+    await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
     await initDate();
   });
 
@@ -96,7 +101,7 @@
   }
 
   function showCalendar() {
-    _showPopover = true;
+    _showPopover = !isDisabled;
   }
 
   function handleKeyDown(e: KeyboardEvent) {
@@ -159,6 +164,7 @@
   {mb}
   {ml}
   {mr}
+  disabled="{isDisabled}"
   open={_showPopover}
   on:_close={() => dispatchValue(_date)}
 >
@@ -171,6 +177,7 @@
     error={error}
     on:click={showCalendar}
     on:keydown={handleKeyDown}
+    disabled="{isDisabled}"
   />
   <goa-calendar
     {value}

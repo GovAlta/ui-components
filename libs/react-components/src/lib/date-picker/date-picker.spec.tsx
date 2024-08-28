@@ -11,6 +11,7 @@ describe("DatePicker", () => {
     const error = true;
     const min = addMonths(value, -1);
     const max = addMonths(value, 1);
+    const disabled = true;
 
     const { baseElement } = render(
       <DatePicker
@@ -20,6 +21,7 @@ describe("DatePicker", () => {
         value={value}
         testId="foo"
         error={error}
+        disabled={disabled}
         onChange={noop}
       />,
     );
@@ -31,6 +33,7 @@ describe("DatePicker", () => {
     expect(el?.getAttribute("name")).toBe("foo");
     expect(el?.getAttribute("value")).toBe(value.toISOString());
     expect(el?.getAttribute("error")).toBe("true");
+    expect(el?.getAttribute("disabled")).toBe("true");
     expect(el?.getAttribute("min")).toBe(min.toISOString());
     expect(el?.getAttribute("max")).toBe(max.toISOString());
     expect(el?.getAttribute("data-testid")).toBe("foo");
