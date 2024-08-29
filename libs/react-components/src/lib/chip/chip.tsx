@@ -2,10 +2,12 @@ import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
 export type GoAChipVariant = "filter";
+export type GoAChipTheme = "outline" | "filled" | "sharp";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   leadingicon: string;
+  icontheme: GoAChipTheme;
   error: boolean;
   deletable: boolean;
   content: string;
@@ -25,6 +27,7 @@ export interface GoAChipProps extends Margins {
   onClick?: () => void;
   deletable?: boolean;
   leadingIcon?: string;
+  iconTheme?: GoAChipTheme;
   error?: boolean;
   content: string;
   variant?: GoAChipVariant;
@@ -33,6 +36,7 @@ export interface GoAChipProps extends Margins {
 
 export const GoAChip = ({
   leadingIcon = "",
+  iconTheme = "outline",
   deletable = false,
   error = false,
   variant,
@@ -64,6 +68,7 @@ export const GoAChip = ({
     <goa-chip
       ref={el}
       leadingicon={leadingIcon}
+      icontheme={iconTheme}
       error={error}
       deletable={deletable}
       content={content}
@@ -75,6 +80,6 @@ export const GoAChip = ({
       data-testid={testId}
     />
   );
-}
+};
 
 export default GoAChip;

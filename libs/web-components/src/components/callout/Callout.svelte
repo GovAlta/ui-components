@@ -18,10 +18,16 @@
     "medium",
     "large",
   ]);
+  const [AriaLive, validateAriaLive] = typeValidator("Aria live", [
+    "off",
+    "assertive",
+    "polite",
+  ]);
 
   // Types
   type CalloutType = (typeof Types)[number];
   type CalloutSize = (typeof CalloutSizes)[number];
+  type AriaLiveType = (typeof AriaLive)[number];
 
   // margin
   export let mt: Spacing = null;
@@ -34,6 +40,7 @@
   export let heading: string = "";
   export let maxwidth: string = "none";
   export let testid: string = "";
+  export let arialive: AriaLiveType = "off";
 
   // Private
 
@@ -59,6 +66,8 @@
 
   onMount(() => {
     validateCalloutSize(size);
+    validateAriaLive(arialive);
+
     setTimeout(() => {
       validateType(type);
       iconSize = isMediumCallout ? "small" : "medium";
@@ -69,6 +78,7 @@
 <!-- HTML -->
 <svelte:window bind:innerWidth={screenSize} />
 <div
+  role="region"
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     max-width: ${maxwidth};
@@ -76,6 +86,7 @@
   class="notification"
   class:medium={isMediumCallout}
   data-testid={testid}
+  aria-live={arialive}
 >
   <span class="icon {type}">
     <goa-icon

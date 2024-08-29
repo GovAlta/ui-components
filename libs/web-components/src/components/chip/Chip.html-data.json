@@ -9,10 +9,27 @@
       "default": "filter"
     },
     {
-      "name": "leadingIcon",
+      "name": "leadingicon",
       "type": "string",
       "description": "Show an icon to the left of the text",
       "valueSet": "goaIconType"
+    },
+    {
+      "name": "icontheme",
+      "type": "string",
+      "description": "Styles the icon to show outline or filled",
+      "values": [
+        {
+          "name": "outline"
+        },
+        {
+          "name": "filled"
+        },
+        {
+          "name": "sharp"
+        }
+      ],
+      "default": "outline"
     },
     {
       "name": "error",

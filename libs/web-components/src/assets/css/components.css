@@ -57,15 +57,11 @@ goa-table[variant="relaxed"] td {
 goa-table thead th {
   background-color: var(--goa-color-greyscale-white);
   color: var(--goa-color-text-secondary);
-  padding: 1rem;
+  padding: var(--goa-space-s) var(--goa-table-header-padding, var(--goa-space-m)) var(--goa-space-xs) var(--goa-table-header-padding, var(--goa-space-m));
   text-align: left;
   border-bottom: 2px solid var(--goa-color-greyscale-600);
   vertical-align: bottom;
-}
-
-goa-table th:has(goa-table-sort-header) {
-  padding: 0;
-}
+  }
 
 .goa-table-number-column {
   font: var(--goa-typography-number-m);
@@ -74,6 +70,10 @@ goa-table th:has(goa-table-sort-header) {
 
 .goa-table-number-header {
   text-align: right;
+}
+
+.goa-table-number-header:not(:has(goa-table-sort-header)) {
+  padding-bottom: 0.5rem;
 }
 
 goa-table tfoot td {

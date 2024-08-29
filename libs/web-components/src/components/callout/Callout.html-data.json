@@ -5,7 +5,13 @@
     {
       "name": "type",
       "description": "Define the context and colour of the callout.",
-      "values": [{ "name": "information" }, { "name": "important"}, { "name": "emergency"}, { "name": "success"}, { "name": "event"}]
+      "values": [
+        { "name": "information" },
+        { "name": "important" },
+        { "name": "emergency" },
+        { "name": "success" },
+        { "name": "event" }
+      ]
     },
     {
       "name": "heading",
@@ -15,7 +21,7 @@
     {
       "name": "size",
       "description": "Define the size of the callouts.",
-      "values": [{"name": "medium"}, {"name": "large"}]
+      "values": [{ "name": "medium" }, { "name": "large" }]
     },
     {
       "name": "maxwidth",
@@ -41,6 +47,15 @@
       "name": "ml",
       "description": "Left margin",
       "valueSet": "spacing"
+    },
+    {
+      "name": "arialive",
+      "description": "Sets the aria-live property",
+      "values": [
+        { "name": "off" },
+        { "name": "assertive" },
+        { "name": "polite" }
+      ]
     }
   ],
   "references": [

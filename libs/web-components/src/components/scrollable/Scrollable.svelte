@@ -44,7 +44,7 @@
   overflow-y: ${direction === "vertical" ? "auto" : "hidden"};
   overflow-x: ${direction === "horizontal" ? "auto" : "hidden"};
   margin: ${vpadding} 0;
-  padding: 0 ${hpadding};
+  padding: 0 ${hpadding} 3px;
 `}
 >
   <slot />
