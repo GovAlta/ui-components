@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import * as ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import "@abgov/web-components";
 import App from "./app/app";
 
 const root = ReactDOM.createRoot(
