@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
-import { GoATooltip } from "./tooltip";
+import { GoabTooltip } from "./tooltip";
 
 describe("Tooltip", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoATooltip content="This is a tooltip">Hover me</GoATooltip>
+      <GoabTooltip content="This is a tooltip">Hover me</GoabTooltip>,
     );
 
     const el = baseElement.querySelector("goa-tooltip");
@@ -15,14 +15,9 @@ describe("Tooltip", () => {
 
   it("should bind all web-component attributes", () => {
     const { baseElement } = render(
-      <GoATooltip
-        content="This is a tooltip"
-        position="top"
-        hAlign="right"
-        testId="foo"
-      >
+      <GoabTooltip content="This is a tooltip" position="top" hAlign="right" testId="foo">
         Hover me
-      </GoATooltip>
+      </GoabTooltip>,
     );
 
     const el = baseElement.querySelector("goa-tooltip");

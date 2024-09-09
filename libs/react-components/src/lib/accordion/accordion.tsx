@@ -1,13 +1,13 @@
-import React, { ReactNode, useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
+import { ReactNode , useEffect, useRef} from "react";
 
-export type GoAHeadingSize = "small" | "medium";
+import type { GoabAccordionHeadingSize, Margins } from "@abgov/ui-components-common";
+// TODO: move to ts
 export type GoAIconPosition = "left" | "right";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   open?: boolean;
-  headingSize?: GoAHeadingSize;
+  headingSize?: GoabAccordionHeadingSize;
   heading: string;
   secondaryText?: string;
   headingContent?: ReactNode;
@@ -25,9 +25,9 @@ declare global {
   }
 }
 
-export interface GoAAccordionProps extends Margins {
+export interface GoabAccordionProps extends Margins {
   open?: boolean;
-  headingSize?: GoAHeadingSize;
+  headingSize?: GoabAccordionHeadingSize;
   secondaryText?: string;
   heading: string;
   headingContent?: ReactNode;
@@ -38,7 +38,7 @@ export interface GoAAccordionProps extends Margins {
   children: ReactNode;
 }
 
-export function GoAAccordion({
+export function GoabAccordion({
   open,
   heading,
   headingSize,
@@ -53,7 +53,7 @@ export function GoAAccordion({
   mr,
   mb,
   ml,
-}: GoAAccordionProps): JSX.Element {
+}: GoabAccordionProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -69,7 +69,6 @@ export function GoAAccordion({
       };
     }
   }, [onChange]);
-
   return (
     <goa-accordion
       ref={ref}
@@ -91,4 +90,4 @@ export function GoAAccordion({
   );
 }
 
-export default GoAAccordion;
+export default GoabAccordion;

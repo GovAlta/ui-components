@@ -1,0 +1,9 @@
+{
+  "name": "@abgov/ui-components-common",
+  "version": "0.0.0",
+  "description": "Government of Alberta - UI Web components",
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "module": "./index.js"
+}

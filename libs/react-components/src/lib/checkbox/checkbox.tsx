@@ -1,5 +1,5 @@
+import { GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -26,7 +26,7 @@ interface WCProps extends Margins {
 }
 
 /* eslint-disable-next-line */
-export interface GoACheckboxProps extends Margins {
+export interface GoabCheckboxProps extends Margins {
   id?: string;
   name: string;
   checked?: boolean;
@@ -39,13 +39,13 @@ export interface GoACheckboxProps extends Margins {
   ariaLabel?: string;
   description?: string | React.ReactNode;
   maxWidth?: string;
-  onChange?: (name: string, checked: boolean, value: string) => void;
+  onChange?: (detail: GoabCheckboxOnChangeDetail) => void;
 }
 
 // legacy
-export type Props = GoACheckboxProps;
+export type Props = GoabCheckboxProps;
 
-export function GoACheckbox({
+export function GoabCheckbox({
   id,
   name,
   testId,
@@ -63,16 +63,16 @@ export function GoACheckbox({
   mr,
   mb,
   ml,
-}: GoACheckboxProps): JSX.Element {
+}: GoabCheckboxProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
       return;
     }
     const current = el.current;
-    const listener = (e: unknown) => {
-      const ce = e as CustomEvent;
-      onChange?.(name, ce.detail.checked, ce.detail.value);
+    const listener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabCheckboxOnChangeDetail>).detail;
+      onChange?.(detail);
     };
 
     current.addEventListener("_change", listener);
@@ -101,10 +101,12 @@ export function GoACheckbox({
       mb={mb}
       ml={ml}
     >
-      {description && typeof description !== "string" && <div slot="description">{description}</div>}
+      {description && typeof description !== "string" && (
+        <div slot="description">{description}</div>
+      )}
       {children}
     </goa-checkbox>
   );
 }
 
-export default GoACheckbox;
+export default GoabCheckbox;

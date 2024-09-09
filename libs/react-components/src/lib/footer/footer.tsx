@@ -15,20 +15,20 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoAAppFooterProps {
+export interface GoabAppFooterProps {
   maxContentWidth?: string;
   children?: ReactNode;
   testId?: string;
 }
 
 // legacy name
-export type FooterProps = GoAAppFooterProps;
+export type FooterProps = GoabAppFooterProps;
 
-export function GoAAppFooter({
+export function GoabAppFooter({
   maxContentWidth,
   children,
   testId,
-}: GoAAppFooterProps): JSX.Element {
+}: GoabAppFooterProps): JSX.Element {
   return (
     <goa-app-footer maxcontentwidth={maxContentWidth} testid={testId}>
       {children}
@@ -36,4 +36,4 @@ export function GoAAppFooter({
   );
 }
 
-export default GoAAppFooter;
+export default GoabAppFooter;

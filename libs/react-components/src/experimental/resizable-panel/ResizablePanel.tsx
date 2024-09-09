@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import Css from "./ResizablePanel.module.css";
-import { GoAIcon } from "../../lib/icon/icon";
+import { GoabIcon } from "../../lib/icon/icon";
 
 export type ResizableProps = {
   minWidth?: number;
@@ -10,15 +10,15 @@ export type ResizableProps = {
 type MouseState = "static" | "active";
 
 export function ResizablePanel(props: ResizableProps): JSX.Element {
-  // value refs
-  const maxWidth = useRef<number>(0);
-  const resizeBarState = useRef<MouseState>("static");
-
   // element refs
   const bgRef = useRef<HTMLDivElement | null>(null);
   const sectionRef = useRef<HTMLElement | null>(null);
   const widthRef = useRef<HTMLDivElement | null>(null);
   const handleRef = useRef<HTMLDivElement | null>(null);
+
+  // value refs
+  const maxWidth = useRef<number>(0);
+  const resizeBarState = useRef<MouseState>("static");
 
   // state
   const [width, setWidth] = useState<string>();
@@ -91,7 +91,7 @@ export function ResizablePanel(props: ResizableProps): JSX.Element {
       <section ref={sectionRef} className={Css.panel}>
         <div className={Css.children}>{props.children}</div>
         <div ref={handleRef} className={Css.handle}>
-          <GoAIcon type="reorder-two" />
+          <GoabIcon type="reorder-two" />
         </div>
       </section>
       <div ref={widthRef} className={Css.width}>
