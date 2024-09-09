@@ -1,0 +1,85 @@
+<h1>Form Item</h1>
+
+<goab-form-item [formGroup]="formGroup">
+  <goab-input name="search" placeholder="Search requester" formControlName="txtRequesterName" trailingIcon="close"
+              (onTrailingIconClick)="searchRequesterClickIcon()" width="434px">
+  </goab-input>
+  <goab-form-item-slot slot="error">Inside goab-form-item-error</goab-form-item-slot>
+  <goab-form-item-slot slot="helptext">Help!</goab-form-item-slot>
+</goab-form-item>
+
+
+<h2>Basic</h2>
+<goab-form-item label="First name">
+  <goab-input ariaLabel="First Name 1" name="firstname" type="text"></goab-input>
+</goab-form-item>
+
+<h2>Optional</h2>
+<goab-form-item label="Middle name" requirement="optional">
+  <goab-input ariaLabel="Middle Name" name="middleName" type="text"></goab-input>
+</goab-form-item>
+
+<h2>Help text</h2>
+<goab-form-item label="First name" id="fname_text" helpText="Help text">
+  <goab-input ariaLabel="First Name 2" name="firstName" type="text"></goab-input>
+</goab-form-item>
+
+<h2>Required</h2>
+<goab-form-item label="First name" error="First name is required" helpText="Help text" id="fn_error"
+  requirement="required">
+  <goab-input ariaLabel="First Name capital" name="firstName" type="text" [error]="true"></goab-input>
+</goab-form-item>
+
+<h2>Form row</h2>
+
+<goab-block direction="column" gap="2xl">
+  <goab-input type="number" ariaLabel="Number Input" name="firstName" [min]="0" [max]="6" [step]="2"></goab-input>
+
+  <goab-form-item label="First name" error="First name is required" helpText="Help text">
+    <goab-input name="firstName" ariaLabel="First Name Required" [error]="true" width="100%"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Last name" name="lastName" error="Last name is required" helpText="Help text">
+    <goab-input name="lastName" ariaLabel="Last Name" [error]="true" width="100%"></goab-input>
+  </goab-form-item>
+</goab-block>
+
+<h2>Margin Spacing</h2>
+<goab-form-item label="First name" mt="m" mb="xs" ml="xl" mr="2xl">
+  <goab-input ariaLabel="First Name 1" name="firstname" type="text"></goab-input>
+</goab-form-item>
+
+
+<!-- FIXME: Vanessa can you look at this and see if you can find out why it's not working -->
+<!-- <goab-form-item [formGroup]="formGroup"> -->
+<!-- <goab-input placeholder="Search requester" formControlName="formGroup.txtRequesterName" trailingIcon="close" -->
+<!-- (onTrailingIconClick)="searchRequesterClickIcon()" width="434px"> -->
+<!-- </goab-input> -->
+<!-- </goab-form-item> -->
+
+
+<!-- FIXME: Vanessa can you look at this and see if you can find out why it's not working -->
+<!-- <goab-form-item label="Color" requirement="required" -->
+<!-- [error]="colorFormCtrl.hasError('required') && colorFormCtrl.touched ? 'You must select a color.' : undefined"> -->
+<!-- <goab-dropdown name="colors" [formControl]="colorFormCtrl" -->
+<!-- [error]="colorFormCtrl.hasError('required') && colorFormCtrl.touched" [value]="colorFormCtrl.value || undefined"> -->
+<!-- <goab-dropdown-item *ngFor="let color of colors" [value]="color" [label]="color"> -->
+<!-- </goab-dropdown-item> -->
+<!-- </goab-dropdown> -->
+<!-- </goab-form-item> -->
+
+<goab-form-item label="Color" requirement="required">
+  <goab-dropdown name="colors">
+    <goab-dropdown-item *ngFor="let color of colors" [value]="color" [label]="color" />
+  </goab-dropdown>
+</goab-form-item>
+
+<goab-form-item label="Description" requirement="required"
+  [error]="form.controls['descriptionFormCtrl'].invalid && form.controls['descriptionFormCtrl'].touched ? 'You must enter other description.' : undefined">
+  <goab-input name="otherDescription" goaValue width="398px" [formControl]="descriptionFormCtrl"
+    [error]="form.controls['descriptionFormCtrl'].invalid && form.controls['descriptionFormCtrl'].touched"></goab-input>
+</goab-form-item>
+
+<goab-block gap="m">
+  <goab-button (onClick)="onCancel()" type="secondary">Cancel</goab-button>
+  <goab-button (onClick)="onSubmit()" type="primary">Save</goab-button>
+</goab-block>
