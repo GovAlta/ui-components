@@ -20,7 +20,7 @@ describe("Detail", () => {
     expect(baseElement.innerHTML).toContain("The content");
     expect(el?.getAttribute("open")).toBe("true");
     expect(el?.getAttribute("maxwidth")).toBe("480px");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
   });
 
 });

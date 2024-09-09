@@ -21,6 +21,7 @@ interface WCProps {
   maxcontentwidth?: string;
   feedbackurltarget?: GoALinkTarget
   headerurltarget?: GoALinkTarget;
+  testid?: string;
 }
 
 export interface GoAHeaderProps {
@@ -50,7 +51,7 @@ export function GoAMicrositeHeader({
       type={type}
       version={version}
       feedbackurl={feedbackUrl}
-      data-testid={testId}
+      testid={testId}
       maxcontentwidth={maxContentWidth}
       feedbackurltarget={feedbackUrlTarget}
       headerurltarget={headerUrlTarget}

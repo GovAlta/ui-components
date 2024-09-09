@@ -20,6 +20,7 @@
   export let maxcontentwidth = "100%";
   export let headerurltarget: UrlTargetType = "blank";
   export let feedbackurltarget: UrlTargetType = "blank";
+  export let testid: string = "";
 
   // Validator
   const [UrlTarget, validateUrlTargetType] = typeValidator(
@@ -43,7 +44,7 @@
 </script>
 
 <!-- HTML -->
-<div id="container">
+<div id="container" data-testid={testid}>
   <div
     class="content-container"
     style={`--max-content-width: ${maxcontentwidth}`}

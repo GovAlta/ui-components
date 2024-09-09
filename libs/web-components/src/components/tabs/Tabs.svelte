@@ -6,6 +6,7 @@
   import { GoATabProps } from "../tab/Tab.svelte";
 
   export let initialtab: number = 1; // 1-based
+  export let testid: string = "";
 
   // Private
 
@@ -212,7 +213,7 @@
 
 <!--HTML-->
 
-<div role="tablist" bind:this={_rootEl}>
+<div role="tablist" bind:this={_rootEl} data-testid={testid}>
   <div class="tabs" bind:this={_tabsEl}></div>
   <div class="tabpanel" tabindex="0" bind:this={_panelEl} role="tabpanel">
     <slot />

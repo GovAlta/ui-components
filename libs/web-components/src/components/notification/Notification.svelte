@@ -5,6 +5,7 @@
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
   import { typeValidator } from "../../common/utils";
+  import test from "node:test";
 
   // Validator
   const [Types, validateType] = typeValidator(
@@ -25,6 +26,7 @@
   export let type: NotificationType = "";
   export let maxcontentwidth = "100%";
   export let arialive: AriaLiveType = "polite";
+  export let testid: string = "";
 
   let show = true;
   $: iconType =
@@ -52,7 +54,7 @@
 
 <!-- HTML -->
 {#if show}
-  <div id="container">
+  <div id="container" data-testid={testid}>
     <div
       transition:fade
       class="notification {type}"
@@ -97,7 +99,7 @@
   #container {
     container: self / inline-size;
   }
-  
+
   .notification {
     padding: var(--goa-space-l) var(--goa-space-m);
     display: flex;

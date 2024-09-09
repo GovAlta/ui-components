@@ -13,6 +13,7 @@
   import { getSlottedChildren } from "../../common/utils";
 
   export let heading: string;
+  export let testid: string = "";
 
   let _open = false;
   let _current = false;
@@ -111,7 +112,7 @@
   }
 </script>
 
-<div bind:this={_rootEl} class="side-menu-group" class:current={_current}>
+<div bind:this={_rootEl} class="side-menu-group" class:current={_current} data-testid={testid}>
   <a href={`#${_slug}`} class="heading" on:click={handleClick}>
     {heading}
     {#if _open}

@@ -5,6 +5,7 @@
     el: HTMLElement;
     links: Element[];
     currentHref?: string;
+    testid?: string;
   };
 </script>
 
@@ -20,6 +21,7 @@
   // Optional
   export let leadingicon: GoAIconType;
   export let type: "primary" | "secondary" = "primary";
+  export let testid: string = "rootEl";
 
   // Private
 
@@ -151,7 +153,7 @@
 
 <svelte:window bind:innerWidth={_innerWidth} />
 
-<div bind:this={_rootEl} data-testid="rootEl">
+<div bind:this={_rootEl} data-testid={testid}>
   {#if _desktop}
     <goa-popover
       bind:this={_popoverEl}

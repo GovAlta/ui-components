@@ -19,6 +19,7 @@ interface WCProps extends Margins {
   width?: string;
   relative?: boolean;
   id?: string;
+  testid?: string;
 }
 
 declare global {
@@ -100,7 +101,7 @@ export function GoADropdown(props: GoADropdownProps): JSX.Element {
       multiselect={props.multiselect}
       native={props.native}
       placeholder={props.placeholder}
-      data-testid={props.testId}
+      testid={props.testId}
       width={props.width}
       relative={props.relative}
       id={props.id}

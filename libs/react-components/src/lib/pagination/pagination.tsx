@@ -7,6 +7,7 @@ interface WCProps extends Margins {
   perpagecount?: number;
   pagenumber: number;
   variant?: "all" | "links-only";
+  testid?: string;
 }
 
 declare global {
@@ -61,7 +62,7 @@ export function GoAPagination({onChange, ...props}: GoAPaginationProps) {
       mb={props.mb}
       ml={props.ml}
       mr={props.mr}
-      data-testid={props.testId}
+      testid={props.testId}
     />
   );
 }

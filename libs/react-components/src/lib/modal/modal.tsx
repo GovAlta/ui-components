@@ -22,6 +22,7 @@ interface WCProps {
   transition?: GoAModalTransition;
   calloutvariant?: GoAModalCalloutVariant;
   role?: GoAModalRole;
+  testid?: string;
 }
 
 declare global {
@@ -102,7 +103,7 @@ export function GoAModal({
       maxwidth={maxWidth}
       transition={transition}
       calloutvariant={calloutVariant}
-      data-testid={testId}
+      testid={testId}
       role={role}
     >
       {heading && <div slot="heading">{heading}</div>}

@@ -9,6 +9,7 @@ interface WCProps extends Margins {
   padded?: boolean;
   position?: GoAPosition;
   relative?: boolean;
+  testid?: string;
 }
 
 declare global {
@@ -47,7 +48,7 @@ export function GoAPopover({
 }: GoAPopoverProps): JSX.Element {
   return (
     <goa-popover
-      data-testid={testId}
+      testid={testId}
       maxwidth={maxWidth}
       minwidth={minWidth}
       padded={padded}

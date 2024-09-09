@@ -8,6 +8,7 @@ interface WCProps extends Margins {
   error?: boolean;
   min?: string;
   max?: string;
+  testid?: string;
 }
 
 declare global {
@@ -69,7 +70,7 @@ export function GoADatePicker({
       error={error}
       min={min?.toISOString()}
       max={max?.toISOString()}
-      data-testid={testId}
+      testid={testId}
       mt={mt}
       mr={mr}
       mb={mb}

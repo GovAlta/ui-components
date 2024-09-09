@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 interface WCProps {
   maxcontentwidth?: string;
+  testid?: string;
 }
 
 declare global {
@@ -29,7 +30,7 @@ export function GoAAppFooter({
   testId,
 }: GoAAppFooterProps): JSX.Element {
   return (
-    <goa-app-footer maxcontentwidth={maxContentWidth} data-testid={testId}>
+    <goa-app-footer maxcontentwidth={maxContentWidth} testid={testId}>
       {children}
     </goa-app-footer>
   );

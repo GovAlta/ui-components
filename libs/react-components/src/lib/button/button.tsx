@@ -24,6 +24,7 @@ interface WCProps extends Margins {
   disabled?: boolean;
   leadingicon?: string;
   trailingicon?: string;
+  testid?: string;
   ref: React.RefObject<HTMLElement>;
 }
 
@@ -92,7 +93,7 @@ export function GoAButton({
       disabled={disabled}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
-      data-testid={testId}
+      testid={testId}
       mt={mt}
       mr={mr}
       mb={mb}

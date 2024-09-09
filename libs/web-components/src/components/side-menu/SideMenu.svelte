@@ -6,6 +6,8 @@
   import { isUrlMatch, getMatchedLink } from "../../common/urls";
   import { SideMenuGroupProps } from "../side-menu-group/SideMenuGroup.svelte";
 
+  export let testid: string = "";
+
   let _rootEl: HTMLElement;
   let _sideMenuLinks: Element[] = [];
   let _sideMenuGroupItems: SideMenuGroupProps[] = [];
@@ -103,7 +105,7 @@
   }
 </script>
 
-<div bind:this={_rootEl} class="side-menu">
+<div bind:this={_rootEl} class="side-menu" data-testid={testid}>
   <slot />
 </div>
 

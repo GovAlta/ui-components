@@ -4,6 +4,7 @@ import { Spacing } from "../../common/styling";
 interface WCProps {
   hspacing?: Spacing | "fill";
   vspacing?: Spacing;
+  testid?: string;
 }
 
 declare global {
@@ -29,7 +30,7 @@ export function GoASpacer(props: GoASpacerProps) {
     <goa-spacer
       hspacing={props.hSpacing}
       vspacing={props.vSpacing}
-      data-testid={props.testId}
+      testid={props.testId}
     />
   );
 }

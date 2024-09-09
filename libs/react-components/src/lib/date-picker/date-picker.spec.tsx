@@ -33,7 +33,7 @@ describe("DatePicker", () => {
     expect(el?.getAttribute("error")).toBe("true");
     expect(el?.getAttribute("min")).toBe(min.toISOString());
     expect(el?.getAttribute("max")).toBe(max.toISOString());
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
   });
 
   it("should handle event", async () => {

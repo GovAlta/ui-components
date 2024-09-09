@@ -17,6 +17,7 @@ interface WCProps extends Margins {
   arialabel?: string;
   countby?: CountBy;
   maxcount?: number;
+  testid?: string;
 }
 
 declare global {
@@ -115,7 +116,7 @@ export function GoATextarea({
       width={width}
       maxwidth={maxWidth}
       error={error}
-      data-testid={testId}
+      testid={testId}
       arialabel={ariaLabel}
       mt={mt}
       mr={mr}

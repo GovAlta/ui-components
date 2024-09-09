@@ -598,7 +598,7 @@ export function GoAIcon({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
     />
   );
 }

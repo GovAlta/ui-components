@@ -24,6 +24,7 @@
   export let transition: Transition = "none";
   export let calloutvariant: CalloutVariant | null = null;
   export let maxwidth: string = "60ch";
+  export let testid: string = "modal";
 
   // @deprecated: use maxwidth
   export let width: string = "";
@@ -177,7 +178,7 @@
       use:noscroll={{ enable: _isOpen }}
       in:fade={{ duration: _transitionTime }}
       out:fade={{ delay: _transitionTime, duration: _transitionTime }}
-      data-testid="modal"
+      data-testid={testid}
       class={`modal ${_scrollPos}`}
       style={`--maxwidth: ${maxwidth};`}
       role="presentation"

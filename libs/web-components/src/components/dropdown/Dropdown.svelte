@@ -34,6 +34,7 @@
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
+  export let testid: string = "";
 
   //
   // Private
@@ -273,7 +274,7 @@
       : { name, value: newValue };
 
     if (!_isDirty) {
-      return;  
+      return;
     }
 
     setTimeout(() => {
@@ -293,7 +294,7 @@
 
     _isDirty = option.value !== _selectedOption?.value;
     _selectedOption = option;
-  
+
     if (!_native) {
       hideMenu();
       syncFilteredOptions();
@@ -322,7 +323,7 @@
       _selectedOption = undefined;
       setDisplayedValue();
       dispatchValue("");
-    }  
+    }
   }
 
   function onInputKeyUp(e: KeyboardEvent) {
@@ -531,7 +532,7 @@
 
 <!-- Template -->
 <div
-  data-testid={`${name}-dropdown`}
+  data-testid={testid || `${name}-dropdown`}
   class="dropdown"
   class:dropdown-native={_native}
   style={`
