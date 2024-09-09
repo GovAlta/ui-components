@@ -1,4 +1,4 @@
-import { GoabFileUploadOnCancelDetail, GoabFileUploadOnDeleteDetail } from "@abgov/ui-components-common";
+import { GoabFileUploadOnCancelDetail, GoabFileUploadOnDeleteDetail, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
@@ -19,6 +19,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
 })
 export class GoabFileUploadCard {
   @Input({ required: true }) filename!: string;
+  @Input() mt?: Spacing;
+  @Input() mb?: Spacing;
+  @Input() mr?: Spacing;
+  @Input() ml?: Spacing;
   @Input() size?: number;
   @Input() type?: string;
   @Input() progress?: number;

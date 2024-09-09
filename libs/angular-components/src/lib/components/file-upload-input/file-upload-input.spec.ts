@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoabFileUploadInput } from "./file-upload-input";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoabFileUploadInputVariant } from "@abgov/ui-components-common";
+import { GoabFileUploadInputVariant, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
@@ -13,6 +13,10 @@ import { fireEvent } from "@testing-library/dom";
       [accept]="accept"
       [variant]="variant"
       [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [mr]="mr"
+      [ml]="ml"
     ></goab-file-upload-input>
   `,
 })
@@ -21,6 +25,10 @@ class TestFileUploadInputComponent {
   accept?: string;
   variant: GoabFileUploadInputVariant = "button";
   testId?: string;
+  mt?: Spacing;
+  mb?: Spacing;
+  ml?: Spacing;
+  mr?: Spacing;
 
   onSelectFile() {
     /** do nothing **/
@@ -45,6 +53,10 @@ describe("GoABFileUploadInput", () => {
     component.accept = "image/*";
     component.variant = "dragdrop";
     component.testId = "foo";
+    component.mt = "s";
+    component.mb = "xs";
+    component.mr = "xl";
+    component.ml = "l";
 
     fixture.detectChanges();
   });
@@ -56,6 +68,10 @@ describe("GoABFileUploadInput", () => {
     expect(el?.getAttribute("accept")).toBe(component.accept);
     expect(el?.getAttribute("variant")).toBe(component.variant);
     expect(el?.getAttribute("testid")).toBe(component.testId);
+    expect(el?.getAttribute("mt")).toBe(component.mt);
+    expect(el?.getAttribute("mb")).toBe(component.mb);
+    expect(el?.getAttribute("mr")).toBe(component.mr);
+    expect(el?.getAttribute("ml")).toBe(component.ml);
   });
 
   it("should handle onSelectFile event", () => {

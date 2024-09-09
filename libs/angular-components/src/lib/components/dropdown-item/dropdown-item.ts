@@ -22,6 +22,7 @@ export class GoabDropdownItem {
   @Input() label?: string;
   @Input() name?: string;
   @Input() mountType?: GoabDropdownItemMountType;
+  @Input() testId?: string;
 }
 
 
