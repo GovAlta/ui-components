@@ -10,6 +10,7 @@ import {
   NG_VALUE_ACCESSOR,
 } from "@angular/forms";
 
+// @deprecated: Use the new <goab-checkbox .. /> component
 @Directive({
   selector: "[goaChecked]",
   providers: [
@@ -20,7 +21,6 @@ import {
     },
   ],
 })
-
 export class CheckedDirective extends CheckboxControlValueAccessor {
   private _checked = false;
 

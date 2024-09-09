@@ -1,0 +1,51 @@
+<h1>Button</h1>
+
+<h2>Types</h2>
+<goab-button (onClick)="onClick()" type="submit">Submit</goab-button>
+<goab-button (onClick)="onClick()" type="secondary">Secondary</goab-button>
+<goab-button (onClick)="onClick()" type="submit" ml="xl" mr="xl" mb="xl" mt="l">
+  Get Started here
+</goab-button>
+<goab-button (onClick)="onClick()" type="tertiary">Tertiary</goab-button>
+<goab-button (onClick)="onClick()" type="start">Get Started</goab-button>
+
+<goab-button-group gap="compact" align="left">
+  <goab-button (onClick)="onClick()" type="submit"> Get Started </goab-button>
+  <goab-button (onClick)="onClick()" type="tertiary">Tertiary</goab-button>
+  <goab-button (onClick)="onClick()" type="start">Get Started</goab-button>
+</goab-button-group>
+
+<h2>Disabled</h2>
+<goab-button (onClick)="onClick()" type="primary" [disabled]="true">Primary</goab-button>
+<goab-button (onClick)="onClick()" type="secondary" [disabled]="true">
+  Secondary
+</goab-button>
+<goab-button (onClick)="onClick()" type="tertiary" [disabled]="true">Tertiary</goab-button>
+<goab-button (onClick)="onClick()" type="start" [disabled]="true">Get Started</goab-button>
+
+<h2>Sizes</h2>
+<goab-button size="compact" (onClick)="onClick()" type="primary">
+  Compact Primary
+</goab-button>
+<goab-button size="compact" (onClick)="onClick()" type="secondary">
+  Compact Secondary
+</goab-button>
+<goab-button size="compact" (onClick)="onClick()" type="tertiary">
+  Compact Tertiary
+</goab-button>
+
+<h2>Icons</h2>
+<goab-button-group gap="relaxed" align="left">
+  <goab-button leadingicon="airplane" (onClick)="onClick()" type="primary">
+    Leading
+  </goab-button>
+  <goab-button trailingIcon="airplane" (onClick)="onClick()" type="primary">
+    Trailing
+  </goab-button>
+  <goab-button leadingicon="archive" trailingicon="airplane" (onClick)="onClick()" type="primary">
+    Both
+  </goab-button>
+</goab-button-group>
+
+<h2>Margin Spacing</h2>
+<goab-button mt="m" mb="xs" ml="xl" mr="2xl" (onClick)="onClick()" type="submit">Submit</goab-button>

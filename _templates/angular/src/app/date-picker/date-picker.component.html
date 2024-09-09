@@ -1,0 +1,17 @@
+<h1>Date picker</h1>
+
+<h2>ngModel</h2>
+<p>Selected date: {{selectedDate}}</p>
+<goab-date-picker [(ngModel)]="selectedDate" name="date-picker"></goab-date-picker>
+
+
+<h2>Reactive form</h2>
+<form [formGroup]="form">
+  <p>Selected Date: {{ form.get('datePicker')?.value }}</p>
+  <goab-date-picker formControlName="datePicker" name="date-picker"></goab-date-picker>
+</form>
+
+
+
+<h2>Using onChange</h2>
+<goab-date-picker (onChange)="handleDateChange($event)" name="date-picker"></goab-date-picker>

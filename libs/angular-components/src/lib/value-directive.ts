@@ -1,6 +1,7 @@
 import { forwardRef, Directive, ElementRef, HostListener } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
+// @deprecated: Use the new <goab-input .. /> component
 @Directive({
   selector: "[goaValue]", providers: [{
     provide: NG_VALUE_ACCESSOR,
