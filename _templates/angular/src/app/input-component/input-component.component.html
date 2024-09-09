@@ -1,0 +1,120 @@
+<h1>Input</h1>
+<h2>Using onChange to update value</h2>
+<goab-input name="foo" (onChange)="handleExample1($event)" placeholder="Enter text"></goab-input>
+<p>Enter value: {{ example1 }}</p>
+
+<h2>Reactive form</h2>
+<form [formGroup]="example2Form">
+  <goab-form-item label="Example 2">
+    <goab-input name="inputControl" formControlName="inputControl" placeholder="Enter text"></goab-input>
+    <goab-form-item-slot slot="helptext">Entered value: {{example2Form.get('inputControl')?.value }}</goab-form-item-slot>
+  </goab-form-item>
+</form>
+
+<h2>Using ngModel</h2>
+<goab-input name="foo" [(ngModel)]="example3" placeholder="Enter text"></goab-input>
+<p>Enter value: {{ example3 }}</p>
+
+<hr/>
+<h1>Other cases</h1>
+<goab-date-picker name="foo" [formControl]="reactiveDate2FormCtrl"></goab-date-picker>
+
+<h2>Basic</h2>
+<goab-input id="foo" name="foo" (onChange)="onInputChangeEvent($event)"></goab-input>
+
+
+<h2>Icons</h2>
+<goab-input name="foo" leadingIcon="finger-print"></goab-input>
+<goab-input name="foo" trailingIcon="finger-print"></goab-input>
+
+<h2>Number</h2>
+<goab-input name="foo" type="number" [min]="0" [max]="10" [step]="2"></goab-input>
+<goab-input name="foo" type="number"></goab-input>
+
+<h2>Max Length</h2>
+<goab-form-item label="Max Length" helptext="Maximum is 10.">
+  <goab-input name="foo" maxlength="10"></goab-input>
+</goab-form-item>
+
+<h2>Date and time</h2>
+<goab-input name="boundDate" type="date" [value]="boundDate" (onChange)="setDate($event)"></goab-input>
+<goab-input name="foo" type="date" [value]="formatDate"></goab-input>
+<goab-input name="datetime" type="datetime-local" [value]="dateTime"></goab-input>
+<goab-input name="time" type="time" [value]="time" [step]="1"></goab-input>
+
+<!-- <goab-input type="date" name="Date with min max" [value]="formatDate" [min]="minDate" [max]="maxDate"></goab-input> -->
+
+<h2>Icon Buttons</h2>
+<goab-input name="foo" trailingIcon="finger-print" (onTrailingIconClick)="handleTrailingIconClick()"
+            (onChange)="onInputChangeEvent($event)"></goab-input>
+
+<h2>Disabled</h2>
+<goab-input name="foo" [disabled]="true" placeholder="Find by name"></goab-input>
+
+<h2>Error state</h2>
+<goab-input name="foo" [error]="true"></goab-input>
+
+<h2>Focus</h2>
+<goab-input name="foo" (onFocus)="onFocusEvent($event)" (onBlur)="onBlurEvent($event)"></goab-input>
+
+<h2>Key Press</h2>
+<goab-input name="foo" (onKeyPress)="onKeyPressEvent($event)"></goab-input>
+
+<h2>Prefix and Suffix</h2>
+<goab-input name="input" prefix="$"></goab-input>
+<goab-input name="input" suffix="items"></goab-input>
+<goab-input name="input" prefix="$" suffix="per item"></goab-input>
+
+<h2>Disabled Prefix/Suffix</h2>
+<goab-input name="foo" [disabled]="true" prefix="$" suffix="per item"></goab-input>
+
+<h2>Auto capitalize</h2>
+<goab-input type="text" trailingIcon="albums" name="chars" autoCapitalize="off" placeholder="off | none"></goab-input>
+<goab-input type="text" name="chars" autoCapitalize="on" placeholder="on | sentences"></goab-input>
+<goab-input type="text" name="chars" autoCapitalize="words" placeholder="words"></goab-input>
+<goab-input type="text" name="chars" autoCapitalize="characters" placeholder="characters"></goab-input>
+
+<h2>Binding</h2>
+
+<p>{{ wcVal }}</p>
+<goab-input [value]="wcVal" (onChange)="updateInput($event)" name="foo"></goab-input>
+
+<h2>Angular Reactive Forms Component using Web Component</h2>
+<p>{{ reactiveFormCtrl.value }}</p>
+
+<goab-input [formControl]="reactiveFormCtrl" name="foo" [value]="reactiveFormCtrl.value"></goab-input>
+
+<h2>Margin Spacing</h2>
+<goab-input id="foo" name="foo" (onChange)="onInputChangeEvent($event)" mt="m" mb="xs" ml="xl" mr="2xl"></goab-input>
+
+<h2>Reactive binding - Date</h2>
+<p>{{ reactiveDateFormCtrl.value }}</p>
+<goab-input type="date" name="foo" [formControl]="reactiveDateFormCtrl"></goab-input>
+
+<h2>Reactive binding - Time</h2>
+<p>{{ reactiveTimeFormCtrl.value }}</p>
+<goab-input type="time" name="time" [formControl]="reactiveTimeFormCtrl" [step]="1"></goab-input>
+
+<h2>Leading Content</h2>
+<goab-input name="input">
+  <goab-badge slot="leadingContent" type="success" [icon]="true"></goab-badge>
+</goab-input>
+
+<h2>Trailing Content</h2>
+<goab-input name="input">
+  <div slot="trailingContent">items</div>
+</goab-input>
+
+<h2>Leading and Trailing Content</h2>
+<goab-input name="input">
+  <div slot="leadingContent">
+    <div style="width: 50px; text-align: center">$</div>
+  </div>
+  <div slot="trailingContent">SomeText</div>
+</goab-input>
+
+<h2>Form</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+  <goab-input formControlName="first" name="first"></goab-input>
+  <button type="submit">Save</button>
+</form>
