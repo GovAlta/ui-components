@@ -112,7 +112,8 @@
   // Hooks
   //
 
-  onMount(() => {
+  onMount(async() => {
+    await tick();
     getChildren();
     addRelayListener();
     sendMountedMessage();
