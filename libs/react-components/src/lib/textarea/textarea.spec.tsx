@@ -1,11 +1,12 @@
 import { fireEvent, render } from "@testing-library/react";
-import GoATextArea from "./textarea";
+import GoABTextArea from "./textarea";
 import { describe, it, expect, vi } from "vitest";
+import { GoabTextAreaOnChangeDetail } from "@abgov/ui-components-common";
 
 describe("TextArea", () => {
   it("renders the text area", async () => {
     render(
-      <GoATextArea
+      <GoABTextArea
         testId="textarea-testid"
         name="textarea-name"
         value="textarea-value"
@@ -47,7 +48,7 @@ describe("TextArea", () => {
     const newValue = "new-value";
 
     render(
-      <GoATextArea
+      <GoABTextArea
         testId="textarea-testid"
         name="textarea-name"
         value="textarea-value"
@@ -56,9 +57,9 @@ describe("TextArea", () => {
         placeholder="textarea-placeholder"
         readOnly={true}
         disabled={true}
-        onChange={(name: string, value: string) => {
-          expect(name).toBe("textarea-name");
-          expect(value).toBe(newValue);
+        onChange={(event: GoabTextAreaOnChangeDetail) => {
+          expect(event.name).toBe("textarea-name");
+          expect(event.value).toBe(newValue);
           onChange();
         }}
       />,
@@ -66,12 +67,14 @@ describe("TextArea", () => {
 
     const el = document.querySelector("goa-textarea");
 
-    fireEvent(
-      el,
-      new CustomEvent("_change", {
-        detail: { name: "textarea-name", value: newValue },
-      }),
-    );
+    if (el) {
+      fireEvent(
+        el,
+        new CustomEvent("_change", {
+          detail: { name: "textarea-name", value: newValue },
+        }),
+      );
+    }
 
     expect(onChange).toBeCalled();
   });

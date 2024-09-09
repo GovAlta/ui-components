@@ -1,22 +1,14 @@
-import { Margins } from "../../common/styling";
+import { GoabCalloutAriaLive, GoabCalloutSize, GoabCalloutType, Margins } from "@abgov/ui-components-common";
 
-export type GoACalloutType =
-  | "important"
-  | "information"
-  | "event"
-  | "success"
-  | "emergency";
-
-export type GoACalloutSize = "medium" | "large";
-export type GoACalloutAriaLive = "off" | "polite" | "assertive";
+// TODO: move to ts
 export type GoACalloutIconTheme = "outline" | "filled";
 
 interface WCProps extends Margins {
   heading?: string;
-  type?: GoACalloutType;
-  size?: GoACalloutSize;
+  type?: GoabCalloutType;
+  size?: GoabCalloutSize;
+  arialive?: GoabCalloutAriaLive;
   maxwidth?: string;
-  arialive?: GoACalloutAriaLive;
   icontheme?: GoACalloutIconTheme;
   testid?: string;
 }
@@ -30,20 +22,18 @@ declare global {
   }
 }
 
-export interface GoACalloutProps extends Margins {
+export interface GoabCalloutProps extends Margins {
   heading?: string;
-  type?: GoACalloutType;
-  size?: GoACalloutSize;
+  type?: GoabCalloutType;
+  size?: GoabCalloutSize;
   iconTheme?: GoACalloutIconTheme;
   maxWidth?: string;
   testId?: string;
-  ariaLive?: GoACalloutAriaLive;
+  ariaLive?: GoabCalloutAriaLive;
   children?: React.ReactNode;
 }
 
-export type CalloutProps = GoACalloutProps;
-
-export const GoACallout = ({
+export const GoabCallout = ({
   heading,
   type = "information",
   iconTheme = "outline",
@@ -56,7 +46,7 @@ export const GoACallout = ({
   mr,
   mb,
   ml,
-}: GoACalloutProps) => {
+}: GoabCalloutProps) => {
   return (
     <goa-callout
       heading={heading}
@@ -76,4 +66,4 @@ export const GoACallout = ({
   );
 };
 
-export default GoACallout;
+export default GoabCallout;

@@ -16,19 +16,19 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoAFooterNavSectionProps {
+export interface GoabFooterNavSectionProps {
   maxColumnCount?: number;
   heading?: string;
   testId?: string;
   children?: ReactNode;
 }
 
-export function GoAAppFooterNavSection({
+export function GoabAppFooterNavSection({
   heading,
   maxColumnCount = 1,
   testId,
   children,
-}: GoAFooterNavSectionProps) {
+}: GoabFooterNavSectionProps) {
   return (
     <goa-app-footer-nav-section
       slot="nav"
@@ -41,4 +41,4 @@ export function GoAAppFooterNavSection({
   );
 }
 
-export default GoAAppFooterNavSection;
+export default GoabAppFooterNavSection;

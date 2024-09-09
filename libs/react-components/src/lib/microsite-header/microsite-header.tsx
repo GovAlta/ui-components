@@ -1,3 +1,5 @@
+import { GoabLinkTarget, GoabServiceLevel } from "@abgov/ui-components-common";
+
 import { useEffect, useRef } from "react";
 
 declare global {
@@ -9,39 +11,30 @@ declare global {
   }
 }
 
-export type GoAServiceLevel = "alpha" | "beta" | "live";
-export type GoALinkTarget = "self" | "blank";
-
-// leagcy type name
-export type ServiceLevel = GoAServiceLevel;
-
 interface WCProps {
-  type: GoAServiceLevel;
+  type: GoabServiceLevel;
   version?: string;
   feedbackurl?: string;
   maxcontentwidth?: string;
-  feedbackurltarget?: GoALinkTarget;
-  headerurltarget?: GoALinkTarget;
+  feedbackurltarget?: GoabLinkTarget;
+  headerurltarget?: GoabLinkTarget;
   hasfeedbackhandler?: boolean;
   ref: React.RefObject<HTMLElement>;
   testid?: string;
 }
 
-export interface GoAHeaderProps {
-  type: GoAServiceLevel;
-  version?: React.ReactNode;
+export interface GoabHeaderProps {
+  type: GoabServiceLevel;
+  version?: string | React.ReactNode;
   feedbackUrl?: string;
   testId?: string;
   maxContentWidth?: string;
-  feedbackUrlTarget?: GoALinkTarget;
-  headerUrlTarget?: GoALinkTarget;
+  feedbackUrlTarget?: GoabLinkTarget;
+  headerUrlTarget?: GoabLinkTarget;
   onFeedbackClick?: () => void;
 }
 
-// legacy name
-export type HeaderProps = GoAHeaderProps;
-
-export function GoAMicrositeHeader({
+export function GoabMicrositeHeader({
   type,
   version,
   feedbackUrl,
@@ -50,7 +43,7 @@ export function GoAMicrositeHeader({
   headerUrlTarget,
   testId,
   onFeedbackClick,
-}: GoAHeaderProps): JSX.Element {
+}: GoabHeaderProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -88,4 +81,4 @@ export function GoAMicrositeHeader({
   );
 }
 
-export default GoAMicrositeHeader;
+export default GoabMicrositeHeader;

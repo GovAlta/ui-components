@@ -68,8 +68,8 @@ describe("DatePicker", () => {
       }),
     );
 
-    expect(onChange).toBeCalledWith(name, value);
     expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toBeCalledWith({ name, value, type: "date" });
   });
 
   it("should render without relative property", () => {

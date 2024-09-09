@@ -1,4 +1,4 @@
-import { Margins } from "../../common/styling";
+import { Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   testid?: string;
@@ -13,11 +13,11 @@ declare global {
   }
 }
 
-export interface GoADividerProps extends Margins {
+export interface GoabDividerProps extends Margins {
   testId?: string;
 }
 
-export function GoADivider(props: GoADividerProps) {
+export function GoabDivider(props: GoabDividerProps) {
   return (
     <goa-divider
       mt={props.mt}
@@ -29,4 +29,4 @@ export function GoADivider(props: GoADividerProps) {
   );
 }
 
-export default GoADivider;
+export default GoabDivider;
