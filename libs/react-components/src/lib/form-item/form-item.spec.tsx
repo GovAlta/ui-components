@@ -1,12 +1,12 @@
 import { render, cleanup } from "@testing-library/react";
-import { GoAFormItem } from "./form-item";
+import { GoabFormItem } from "./form-item";
 
 afterEach(cleanup);
 
-describe("GoAFormItem", () => {
+describe("GoABFormItem", () => {
   it("renders all with properties", () => {
     const { baseElement } = render(
-      <GoAFormItem
+      <GoabFormItem
         label="First Name"
         labelSize="large"
         requirement="optional"
@@ -14,7 +14,7 @@ describe("GoAFormItem", () => {
         helpText="This is some help text"
         maxWidth="480px"
         id="firstName"
-      />
+      />,
     );
     const el = baseElement.querySelector("goa-form-item");
     expect(el?.getAttribute("label")).toEqual("First Name");

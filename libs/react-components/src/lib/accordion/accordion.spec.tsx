@@ -1,31 +1,29 @@
 import { render } from "@testing-library/react";
-import { GoABadge } from "../badge/badge";
+import { GoabBadge } from "../badge/badge";
 
-import { GoAAccordion } from "./accordion";
+import { GoabAccordion } from "./accordion";
 
 describe("Accordion", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoAAccordion heading="The heading">Accordion Content</GoAAccordion>
+      <GoabAccordion heading="The heading">Accordion Content</GoabAccordion>,
     );
     const el = baseElement.querySelector("goa-accordion");
-    expect(el.getAttribute("heading")).toBe("The heading");
+    expect(el?.getAttribute("heading")).toBe("The heading");
     expect(baseElement.innerHTML).toContain("Accordion Content");
   });
 
   it("should set the props correctly", () => {
     const { baseElement } = render(
-      <GoAAccordion
+      <GoabAccordion
         heading="The heading"
         secondaryText="Secondary Text"
         open={true}
-        headingContent={
-          <GoABadge type="success" content="test-badge"></GoABadge>
-        }
+        headingContent={<GoabBadge type="success" content="test-badge"></GoabBadge>}
         maxWidth="480px"
       >
         Accordion Content
-      </GoAAccordion>
+      </GoabAccordion>,
     );
     const el = baseElement.querySelector("goa-accordion");
     const headingContent = el?.querySelector("[slot='headingcontent']");

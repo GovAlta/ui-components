@@ -27,7 +27,7 @@ export interface GoASideMenuGroupProps extends Margins {
   children?: ReactNode;
 }
 
-export function GoASideMenuGroup(props: GoASideMenuGroupProps): JSX.Element {
+export function GoabSideMenuGroup(props: GoabSideMenuGroupProps): JSX.Element {
   return (
     <goa-side-menu-group
       heading={props.heading}
@@ -43,4 +43,4 @@ export function GoASideMenuGroup(props: GoASideMenuGroupProps): JSX.Element {
   );
 }
 
-export default GoASideMenuGroup;
+export default GoabSideMenuGroup;

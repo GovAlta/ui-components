@@ -1,18 +1,13 @@
 import { render } from "@testing-library/react";
 
-import { GoADetails } from "./details";
+import { GoabDetails } from "./details";
 
 describe("Detail", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoADetails
-        heading="The heading"
-        open={true}
-        maxWidth="480px"
-        testId="foo"
-      >
+      <GoabDetails heading="The heading" open={true} maxWidth={"480px"} testId="foo">
         The content
-      </GoADetails>
+      </GoabDetails>,
     );
 
     const el = baseElement.querySelector("goa-details");
@@ -22,5 +17,4 @@ describe("Detail", () => {
     expect(el?.getAttribute("maxwidth")).toBe("480px");
     expect(el?.getAttribute("testid")).toBe("foo");
   });
-
 });

@@ -1,22 +1,20 @@
 import { render } from "@testing-library/react";
-import GoAPopover from "./popover";
+import GoabPopover from "./popover";
 
 describe("Popover", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoAPopover target="Click Action">The content</GoAPopover>
+      <GoabPopover target="Click Action">The content</GoabPopover>,
     );
 
     const el = baseElement.querySelector("goa-popover");
-    expect(el?.querySelector("[slot='target']")?.innerHTML).toContain(
-      "Click Action"
-    );
+    expect(el?.querySelector("[slot='target']")?.innerHTML).toContain("Click Action");
     expect(baseElement.innerHTML).toContain("The content");
   });
 
   it("should bind all web-component attributes", () => {
     const { baseElement } = render(
-      <GoAPopover
+      <GoabPopover
         target="Click Action"
         maxWidth="500px"
         minWidth="100px"
@@ -24,7 +22,7 @@ describe("Popover", () => {
         padded={false}
       >
         The content
-      </GoAPopover>
+      </GoabPopover>,
     );
 
     const el = baseElement.querySelector("goa-popover");
