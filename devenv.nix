@@ -2,8 +2,8 @@
 
 {
   # https://devenv.sh/packages/
-  packages = [ 
-    pkgs.git 
+  packages = [
+    pkgs.git
     pkgs.nodejs_21
     pkgs.nodePackages_latest.svelte-language-server
     pkgs.nodePackages_latest.typescript-language-server
@@ -18,7 +18,7 @@
     node --version
     echo
     echo =================
-    echo GoA UI Components
+    echo Goab UI Components
     echo =================
   '';
 

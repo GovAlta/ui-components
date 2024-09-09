@@ -1,0 +1,21 @@
+<h2>Side Menu</h2>
+<goab-side-menu>
+  <goab-side-menu-heading icon="home">Nav section 1</goab-side-menu-heading>
+  <a href="#home">Home</a>
+  <a href="#profile">Profile</a>
+  <goab-side-menu-heading icon="home" [meta]="meta">Nav section 2
+    <ng-template #meta><goab-badge type="midtone" content="Details"></goab-badge></ng-template>
+  </goab-side-menu-heading>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <goab-side-menu-group heading="Links">
+    <goab-side-menu-heading>Nav section 3</goab-side-menu-heading>
+    <a href="#foo">Foo</a>
+    <a href="#bar">Bar</a>
+    <goab-side-menu-group heading="More Links">
+      <goab-side-menu-heading>Nav section 4</goab-side-menu-heading>
+      <a href="#more-foo">More Foo</a>
+      <a href="#more-bar">More Bar</a>
+    </goab-side-menu-group>
+  </goab-side-menu-group>
+</goab-side-menu>

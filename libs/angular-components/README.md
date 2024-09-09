@@ -7,12 +7,14 @@ This is the web component library and utilizes Angular's web component integrati
 ### Add Dependencies
 
 Angular >=16 dependencies
+
 ```bash
 npm i @abgov/web-components
 npm i @abgov/angular-components
 ```
 
 Angular <16 dependencies
+
 ```bash
 npm i @abgov/web-components
 npm i @abgov/angular-components@2.5.0
@@ -24,8 +26,14 @@ Link ionicons in app/index.html
 Add the following in the head element
 
 ```html
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+></script>
 ```
 
 ### Components
@@ -66,18 +74,15 @@ Add the styles link in the `src/styles.css` file
 ### VS Code Support
 
 In order to use VS Code's [HTML/CSS Custom Data](https://github.com/microsoft/vscode-custom-data)
-support to enhance GoA Web Components HTML editing experience, include our html custom data 
+support to enhance GoAB Web Components HTML editing experience, include our html custom data
 setting found in `.vscode/settings.json`:
 
 ```json
 {
-  "html.customData": [
-    "./node_modules/@abgov/web-components/html.html-data.json"
-  ]
+  "html.customData": ["./node_modules/@abgov/web-components/html.html-data.json"]
 }
 ```
 
 ---
 
 [Visit Design System](https://design.alberta.ca)
-
