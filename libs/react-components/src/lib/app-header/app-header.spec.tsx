@@ -1,11 +1,9 @@
 import { render } from "@testing-library/react";
-import { GoAAppHeader } from "./app-header";
+import { GoabAppHeader } from "./app-header";
 
-describe("GoAAppHeader", () => {
+describe("GoABAppHeader", () => {
   it("should render", () => {
-    const { baseElement } = render(
-      <GoAAppHeader heading="Test heading" url="test" />
-    );
+    const { baseElement } = render(<GoabAppHeader heading="Test heading" url="test" />);
 
     const header = baseElement.querySelector("goa-app-header");
     expect(header).toBeTruthy();
