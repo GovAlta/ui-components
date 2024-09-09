@@ -1,17 +1,23 @@
 import { render, cleanup, fireEvent, waitFor } from "@testing-library/react";
-import { GoADropdown } from "./dropdown";
-import { GoADropdownItem, GoADropdownOption } from "./dropdown-item";
+import { GoabDropdown } from "./dropdown";
+import { GoabDropdownItem, GoabDropdownOption } from "./dropdown-item";
 import { describe, it, expect, vi } from "vitest";
 
 afterEach(cleanup);
 
-describe("GoADropdown", () => {
-  it("should inform the user that GoADropdownOption is deprecated", async () => {
-    const mock = vi.spyOn(console, "warn").mockImplementation(() => { /* do nothing */ });
+describe("GoABDropdown", () => {
+  it("should inform the user that GoABDropdownOption is deprecated", async () => {
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => {
+      /* do nothing */
+    });
     render(
-      <GoADropdown onChange={() => { /* do nothing */ }}>
-        <GoADropdownOption value="foo" />
-      </GoADropdown>
+      <GoabDropdown
+        onChange={() => {
+          /* do nothing */
+        }}
+      >
+        <GoabDropdownOption value="foo" />
+      </GoabDropdown>,
     );
 
     await waitFor(() => {
@@ -23,7 +29,7 @@ describe("GoADropdown", () => {
 
   it("should bind all web-component attributes", async () => {
     const { baseElement } = render(
-      <GoADropdown
+      <GoabDropdown
         leadingIcon="color-wand"
         name="favColor"
         value={[""]}
@@ -41,12 +47,14 @@ describe("GoADropdown", () => {
         ml="xl"
         ariaLabel={"label"}
         ariaLabelledBy={"foo-dropdown-label"}
-        onChange={() => { /* do nothing */ }}
+        onChange={() => {
+          /* do nothing */
+        }}
       >
-        <GoADropdownItem name="favColor" label="Red" value="red" />
-        <GoADropdownItem name="favColor" label="Blue" value="blue" />
-        <GoADropdownItem name="favColor" label="Yellow" value="yellow" />
-      </GoADropdown>
+        <GoabDropdownItem name="favColor" label="Red" value="red" />
+        <GoabDropdownItem name="favColor" label="Blue" value="blue" />
+        <GoabDropdownItem name="favColor" label="Yellow" value="yellow" />
+      </GoabDropdown>,
     );
 
     const el = baseElement.querySelector("goa-dropdown");
@@ -65,24 +73,25 @@ describe("GoADropdown", () => {
     const fn = vi.fn();
 
     const { baseElement } = render(
-      <GoADropdown name="favColor" value="yellow" onChange={fn} native={true}>
-        <GoADropdownItem name="favColor" label="Red" value="red" />
-        <GoADropdownItem name="favColor" label="Blue" value="blue" />
-        <GoADropdownItem name="favColor" label="Yellow" value="yellow" />
-      </GoADropdown>
+      <GoabDropdown name="favColor" value="yellow" onChange={fn} native={true}>
+        <GoabDropdownItem name="favColor" label="Red" value="red" />
+        <GoabDropdownItem name="favColor" label="Blue" value="blue" />
+        <GoabDropdownItem name="favColor" label="Yellow" value="yellow" />
+      </GoabDropdown>,
     );
 
     const el = baseElement.querySelector("goa-dropdown");
     expect(el).toBeTruthy();
 
-    el && fireEvent(
-      el,
-      new CustomEvent("_change", {
-        detail: { name: "favColor", value: "blue" },
-      })
-    );
+    el &&
+      fireEvent(
+        el,
+        new CustomEvent("_change", {
+          detail: { name: "favColor", value: "blue" },
+        }),
+      );
     await waitFor(() => {
-      expect(fn).toBeCalledWith("favColor", "blue");
+      expect(fn).toBeCalledWith({ name: "favColor", value: "blue" });
     });
   });
 });

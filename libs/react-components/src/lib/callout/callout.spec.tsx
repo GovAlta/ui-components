@@ -1,11 +1,11 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import GoACallout from "./callout";
+import GoabCallout from "./callout";
 
 describe("Callout", () => {
   test("Callout shall render", async () => {
     const result = render(
-      <GoACallout
+      <GoabCallout
         type="information"
         heading="Callout Title"
         size="medium"
@@ -19,7 +19,7 @@ describe("Callout", () => {
       >
         Information to the user goes in the content. Information can include markup as
         desired.
-      </GoACallout>,
+      </GoabCallout>,
     );
 
     const el = result.container.querySelector("goa-callout");
@@ -47,13 +47,13 @@ describe("Callout", () => {
 
     testCases.forEach(({ ariaLive, expected }) => {
       const result = render(
-        <GoACallout
+        <GoabCallout
           type="information"
           heading="Callout Title"
           ariaLive={ariaLive as "off" | "polite" | "assertive" | undefined}
         >
           Test content
-        </GoACallout>,
+        </GoabCallout>,
       );
 
       const el = result.container.querySelector("goa-callout");
