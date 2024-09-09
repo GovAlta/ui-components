@@ -10,7 +10,7 @@
     "importHelpers": true,
     "target": "es2022",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["es2020", "dom", "dom.iterable"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -19,8 +19,12 @@
       "@abgov/react-components": ["libs/react-components/src/index.ts"],
       "@abgov/react-components/experimental": ["libs/react-components/src/experimental/index.ts"],
       "@abgov/style": ["dist/libs/web-components/index.css"],
+      "@abgov/ui-components-common": ["libs/common/src/index.ts"],
       "@abgov/web-components": ["dist/libs/web-components/index.js"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

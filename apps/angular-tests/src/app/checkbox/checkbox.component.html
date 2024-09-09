@@ -1,0 +1,70 @@
+<h1>Checkbox</h1>
+
+<h2>Event Based</h2>
+<goab-checkbox name="item" text="Item" [value]="checked" (onChange)="onChange($event)"></goab-checkbox>
+
+<h2>Reactive Form Control</h2>
+
+<form [formGroup]="form">
+  <goab-checkbox formControlName="checkbox" text="Check me"></goab-checkbox>
+</form>
+
+<goab-checkbox name="desserts" text="Ice Cream" value="10" goaChecked [formControl]="testFormCtrl"></goab-checkbox>
+
+
+<h2>Using ngModel</h2>
+<form>
+  <goab-checkbox [(ngModel)]="checkboxValue" name="checkbox" text="Check me"></goab-checkbox>
+</form>
+<p>Checkbox value: {{ checkboxValue }}</p>
+
+
+<hr/>
+
+<h2>Basic</h2>
+<goab-checkbox name="desserts" text="Ice Cream" [checked]="checkbox1Checked" (onChange)="onChange($event)">
+</goab-checkbox>
+
+<h2>Checked</h2>
+<goab-checkbox name="desserts" text="Ice Cream" value="10" [checked]="checkbox2Checked"
+  (onChange)="onChange2($event)"></goab-checkbox>
+
+<h2>Disabled</h2>
+<goab-checkbox name="desserts" text="Ice Cream" value="10" [disabled]="true"></goab-checkbox>
+
+<h2>Error</h2>
+<goab-checkbox name="desserts" text="Ice Cream" value="10" [checked]="checkbox3Checked" (onChange)="onChange3($event)"
+  [error]="true"></goab-checkbox>
+
+
+<div>Binding: {{ bindingNoVal }}</div>
+
+<h2>Margin Spacing</h2>
+<goab-checkbox name="desserts" text="Ice Cream" value="10" (onChange)="onChange($event)" mt="m" mb="xs" ml="xl"
+  mr="2xl">
+</goab-checkbox>
+
+<h2>Reactive Binding</h2>
+<div>Binding: {{ reactiveFormCtrl.value }}</div>
+<goab-checkbox name="desserts1" text="Ice Cream" [formControl]="reactiveFormCtrl"></goab-checkbox>
+
+<h2>Reactive Binding [Disabled]</h2>
+<goab-checkbox name="desserts" text="Ice Cream" [formControl]="testFormCtrl"></goab-checkbox>
+
+<h2>Reactive Binding - checked</h2>
+<div>Binding: {{ test1FormCtrl.value }}</div>
+<goab-checkbox goaChecked name="desserts" text="Ice Cream" [formControl]="test1FormCtrl"></goab-checkbox>
+
+<h2>Checkbox with description</h2>
+<goab-checkbox goaChecked name="description" text="Checkbox with description" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam dolor
+  eligendi, ipsam sed beatae exercitationem inventore? Saepe ipsa reiciendis
+  inventore quia, voluptatem a amet id possimus rerum ullam, fugiat eveniet.">
+</goab-checkbox>
+
+<h2>Checkbox with description slot</h2>
+<goab-checkbox name="description" text="description slot" [description]="descriptionTemplate">
+  <ng-template #descriptionTemplate>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam dolor eligendi, ipsam sed beatae exercitationem inventore? Saepe ipsa reiciendis inventore quia, voluptatem a amet id possimus rerum ullam, fugiat eveniet.</p>
+  </ng-template>
+</goab-checkbox>
+

@@ -1,0 +1,59 @@
+<form [formGroup]="fg" novalidate autocomplete="on">
+
+  <goa-form-item label="Business Name" helptext="The name that will identify the business throughout APC. Use an
+    operating as name for numbered businesses">
+    <goa-input goaValue name="businessName" [value]="fg.value.businessName">
+    </goa-input>
+  </goa-form-item>
+
+  <goa-form-item label="CRA Business Number">
+    <goa-input goaValue name="craBusinessNumber" type="number"></goa-input>
+  </goa-form-item>
+
+  <goa-form-item label="Business Phone">
+    <goa-input name="number" leadingicon="call" type="tel"></goa-input>
+  </goa-form-item>
+
+  <goa-form-item label="Country">
+    <goa-dropdown goaValue filterable name="country" [value]="fg.value.country" [formControl]="fg.controls.country"
+      width="30ch">
+      <goa-dropdown-item *ngFor="let opt of countries" name="country" [value]="opt.code"
+        [label]="opt.name"></goa-dropdown-item>
+    </goa-dropdown>
+  </goa-form-item>
+
+  <goa-form-item label="Street Address 1">
+    <goa-input goaValue type="text" name="address1" [value]="fg.value.address1"
+      [formControl]="fg.controls.address1"></goa-input>
+  </goa-form-item>
+
+  <goa-form-item label="Street Address 2">
+    <goa-input goaValue type="text" name="address2" [value]="fg.value.address2"
+      [formControl]="fg.controls.address2"></goa-input>
+  </goa-form-item>
+
+  <goa-form-item label="Postal Code">
+    <goa-input goaValue type="text" name="postalCode" [value]="fg.value.postalCode"
+      [formControl]="fg.controls.postalCode"></goa-input>
+  </goa-form-item>
+
+  <goa-form-item label="Province/State">
+    <goa-dropdown goaValue filterable
+      *ngIf="fg.value.country && subdivisions[fg.value.country] as subs; else noSubdivisions" name="region"
+      [value]="fg.value.region" [formControl]="fg.controls.region" width="30ch">
+      <goa-dropdown-item *ngFor="let opt of subs" name="region" [value]="opt.code"
+        [label]="opt.name"></goa-dropdown-item>
+    </goa-dropdown>
+
+    <ng-template #noSubdivisions>
+      <goa-input goaValue type="text" name="region" [value]="fg.value.region"
+        [formControl]="fg.controls.region"></goa-input>
+    </ng-template>
+  </goa-form-item>
+
+  <goa-dropdown goaValue name="colors123" [formControl]="reactiveFormCtrl">
+    <goa-dropdown-item *ngFor="let color of colors" [value]="color" [label]="color"></goa-dropdown-item>
+  </goa-dropdown>
+
+
+</form>

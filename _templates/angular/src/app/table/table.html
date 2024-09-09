@@ -1,0 +1,57 @@
+<h3>Normal</h3>
+<goab-table width="100%" mb="xl" (onSort)="handleSort($event)">
+  <thead>
+    <tr>
+      <th>
+        <goab-table-sort-header name="firstName">First name and really long header</goab-table-sort-header>
+      </th>
+      <th>
+        <goab-table-sort-header name="lastName">Last name</goab-table-sort-header>
+      </th>
+      <th class="goab-table-number-header">
+        Age
+        <!--      <goab-table-sort-header name="age" direction="asc">-->
+        <!--        Age</goab-table-sort-header>-->
+
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users; index as i">
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+      <td class="goab-table-number-column">{{ user.age }}</td>
+    </tr>
+  </tbody>
+</goab-table>
+
+<h3>Relaxed</h3>
+<goab-table width="500px" mb="xl" variant="relaxed">
+  <thead>
+    <tr>
+      <th>Col 1</th>
+      <th>Col 2</th>
+      <th>Col 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <goab-block alignment="center" gap="xs">
+          <goab-icon type="alarm"></goab-icon>Item 1
+        </goab-block>
+      </td>
+      <td>Item 2</td>
+      <td>Item 3</td>
+    </tr>
+    <tr>
+      <td>
+        <goab-block alignment="center" gap="xs">
+          <goab-icon type="alarm"></goab-icon>Item 1
+        </goab-block>
+      </td>
+      <td>Item 2</td>
+      <td>Item 3</td>
+    </tr>
+  </tbody>
+</goab-table>

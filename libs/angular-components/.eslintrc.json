@@ -9,11 +9,13 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "@angular-eslint/component-class-suffix": 0,
+        "@angular-eslint/no-output-on-prefix": 0,
         "@angular-eslint/directive-selector": [
           "error",
           {
             "type": "attribute",
-            "prefix": "abgov",
+            "prefix": "goab",
             "style": "camelCase"
           }
         ],
@@ -21,7 +23,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "abgov",
+            "prefix": "goab",
             "style": "kebab-case"
           }
         ]

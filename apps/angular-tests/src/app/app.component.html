@@ -1,0 +1,79 @@
+<goab-column-layout>
+  <section slot="header">
+    <goab-microsite-header type="alpha" level="alpha" version="UAT"></goab-microsite-header>
+    <goab-app-header heading="Design Systems" maxContentWidth="1500px">
+      <a href="/get-started">Get started
+      </a>
+      <a href="/patterns">Patterns and templates</a>
+      <a href="/components">Components</a>
+      <a href="/design-tokens">Styles</a>
+      <a href="/content/capitalization">Content</a>
+      <a href="/support">Support</a>
+      <a href="https://github.com/GovAlta/ui-components/issues/new/choose" target="_blank">
+        Report a bug
+      </a>
+      <a href="#">Support</a>
+      <goab-app-header-menu heading="Tickets" leadingIcon="ticket">
+        <a href="#">Cases</a>
+        <a href="#">Payments</a>
+        <a href="#">Outstanding</a>
+      </goab-app-header-menu>
+      <a href="#" className="interactive">Sign in</a>
+    </goab-app-header>
+  </section>
+
+  <section style="display:flex">
+    <goab-side-menu style="flex: 0 0 240px; margin-bottom: 2rem;">
+      <goab-side-menu-group heading="Bugs">
+        <a routerLink="/bug-1734">Bug 1734</a>
+        <a routerLink="/bug-1756">Bug 1756</a>
+      </goab-side-menu-group>
+      <goab-side-menu-group heading="Components">
+        <a routerLink="/accordion">Accordion</a>
+        <a routerLink="/app-footer">AppFooter</a>
+        <a routerLink="/app-header">App Header</a>
+        <a routerLink="/badge">Badge</a>
+        <a routerLink="/button">Button</a>
+        <a routerLink="/button-group">Button Group</a>
+        <a routerLink="/callout">Callout</a>
+        <a routerLink="/checkbox">Checkbox</a>
+        <a routerLink="/chip">Chip</a>
+        <a routerLink="/circular-progress">Circular Progress</a>
+        <a routerLink="/container">Container</a>
+        <a routerLink="/divider">Divider</a>
+        <a routerLink="/dropdown">Dropdown</a>
+        <a routerLink="/detail">Detail</a>
+        <a routerLink="/file-upload">File Upload</a>
+        <a routerLink="/form-item">Form Item</a>
+        <a routerLink="/form-stepper">Form Stepper</a>
+        <a routerLink="/hero-banner">Hero Banner</a>
+        <a routerLink="/icon">Icon</a>
+        <a routerLink="/icon-button">Icon Button</a>
+        <a routerLink="/input">Input</a>
+        <a routerLink="/microsite-header">Microsite header</a>
+        <a routerLink="/modal">Modal</a>
+        <a routerLink="/notification-banner">Notification Banner</a>
+        <a routerLink="/paginate">Pagination</a>
+        <a routerLink="/popover">Popover</a>
+        <a routerLink="/radio">Radio</a>
+        <a routerLink="/side-menu">Side Menu</a>
+        <a routerLink="/skeleton">Skeleton</a>
+        <a routerLink="/table">Table</a>
+        <a routerLink="/textarea">TextArea</a>
+        <a routerLink="/tooltip">Tooltip</a>
+        <a routerLink="/tabs">Tabs</a>
+     </goab-side-menu-group>
+      <goab-side-menu-group heading="Utils">
+        <a routerLink="/spacing">Spacing</a>
+        <a routerLink="/grid">Grid</a>
+        <a routerLink="/styles">Styles</a>
+      </goab-side-menu-group>
+    </goab-side-menu>
+
+    <div class="container" style="padding: 0 2rem; flex: 1 1 auto">
+      <router-outlet></router-outlet>
+    </div>
+  </section>
+
+  <goab-app-footer slot="footer" maxContentWidth="1400px"></goab-app-footer>
+</goab-column-layout>
