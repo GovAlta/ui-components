@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { fade } from "svelte/transition";
   import noScroll from "../../common/no-scroll";
   import { typeValidator, toBoolean } from "../../common/utils";
@@ -38,6 +38,7 @@
   onMount(async () => {
     validateVariant(variant);
     validateSize(size);
+    await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
     spinnerSize = size === "small" ? "large" : "xlarge";
     fullscreen = variant === "fullscreen";
     inline = variant === "inline";
