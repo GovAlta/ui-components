@@ -1,42 +1,34 @@
+import { GoabLinkTarget, GoabServiceLevel } from "@abgov/ui-components-common";
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-microsite-header": WCProps &
-      React.HTMLAttributes<HTMLElement>;
+      "goa-microsite-header": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
 
-export type GoAServiceLevel = "alpha" | "beta" | "live";
-export type GoALinkTarget = "self" | "blank";
-
-// leagcy type name
-export type ServiceLevel = GoAServiceLevel;
-
 interface WCProps {
-  type: GoAServiceLevel;
+  type: GoabServiceLevel;
   version?: string;
   feedbackurl?: string;
   maxcontentwidth?: string;
-  feedbackurltarget?: GoALinkTarget
-  headerurltarget?: GoALinkTarget;
+  feedbackurltarget?: GoabLinkTarget;
+  headerurltarget?: GoabLinkTarget;
 }
 
-export interface GoAHeaderProps {
-  type: GoAServiceLevel;
+export interface GoabHeaderProps {
+  type: GoabServiceLevel;
   version?: string;
   feedbackUrl?: string;
   testId?: string;
   maxContentWidth?: string;
-  feedbackUrlTarget?: GoALinkTarget;
-  headerUrlTarget?: GoALinkTarget;
+  feedbackUrlTarget?: GoabLinkTarget;
+  headerUrlTarget?: GoabLinkTarget;
 }
 
-// legacy name
-export type HeaderProps = GoAHeaderProps;
-
-export function GoAMicrositeHeader({
+export function GoabMicrositeHeader({
   type,
   version,
   feedbackUrl,
@@ -44,7 +36,7 @@ export function GoAMicrositeHeader({
   feedbackUrlTarget,
   headerUrlTarget,
   testId,
-}: GoAHeaderProps): JSX.Element {
+}: GoabHeaderProps): JSX.Element {
   return (
     <goa-microsite-header
       type={type}
@@ -58,4 +50,4 @@ export function GoAMicrositeHeader({
   );
 }
 
-export default GoAMicrositeHeader;
+export default GoabMicrositeHeader;
