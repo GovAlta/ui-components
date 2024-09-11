@@ -20,7 +20,7 @@
   "devDependencies": {
     "@abgov/design-tokens": "^1.2.0",
     "@abgov/nx-release": "8.0.0",
-    "@angular-devkit/build-angular": "18.1.1",
+    "@angular-devkit/build-angular": "18.2.2",
     "@angular-devkit/core": "18.0.4",
     "@angular-devkit/schematics": "18.0.4",
     "@angular-eslint/eslint-plugin": "18.0.1",
@@ -78,7 +78,7 @@
     "prettier": "^3.2.0",
     "prettier-plugin-svelte": "^3.1.2",
     "rollup": "^4.9.6",
-    "svelte": "^4.2.8",
+    "svelte": "^4.2.19",
     "svelte-check": "^3.6.2",
     "swc-loader": "0.1.15",
     "typescript": "~5.4.2",
