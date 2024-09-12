@@ -15,13 +15,13 @@ declare global {
   }
 }
 
-export interface GoABFormStepProps {
+export interface GoabFormStepProps {
   text: string;
   status?: GoabFormStepStatus;
 }
 
-export function GoABFormStep(props: GoABFormStepProps) {
+export function GoabFormStep(props: GoabFormStepProps) {
   return <goa-form-step text={props.text} status={props.status} />;
 }
 
-export default GoABFormStep;
+export default GoabFormStep;
