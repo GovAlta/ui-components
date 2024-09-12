@@ -378,7 +378,7 @@ interface User {
         </a>
       </goab-app-footer-meta-section>
 
-      <goab-app-footer-nav-section maxColumnCount="2" slot="nav">
+      <goab-app-footer-nav-section [maxColumnCount]="2" slot="nav">
           <a href="a.html">
             Arts and culture
           </a>
