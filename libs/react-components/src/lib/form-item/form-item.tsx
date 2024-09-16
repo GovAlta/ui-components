@@ -1,7 +1,7 @@
 import {
   GoabFormItemLabelSize,
   GoabFormItemRequirement,
-  Margins, Spacing,
+  Margins,
 } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
@@ -23,7 +23,7 @@ declare global {
   }
 }
 
-export interface GoabFormItemprops {
+export interface GoabFormItemprops extends Margins {
   label?: string;
   labelSize?: GoabFormItemLabelSize;
   requirement?: GoabFormItemRequirement;
@@ -33,10 +33,6 @@ export interface GoabFormItemprops {
   children?: React.ReactNode;
   testId?: string;
   id?: string;
-  mt?: Spacing;
-  mb?: Spacing;
-  ml?: Spacing;
-  mr?: Spacing;
 }
 
 export function GoabFormItem({
