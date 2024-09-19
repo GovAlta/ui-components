@@ -5,6 +5,7 @@ interface WCProps {
   label?: string;
   filter?: string;
   mount?: DropdownItemMountType;
+  parent?: string;
 
   // @deprecated
   name?: string;
@@ -28,6 +29,7 @@ export interface GoADropdownItemProps {
   filter?: string;
   testId?: string;
   mountType?: DropdownItemMountType;
+  parent?: string;
 
   // @deprecated
   name?: string;
@@ -41,7 +43,15 @@ export function GoADropdownOption(props: GoADropdownItemProps) {
   return <GoADropdownItem {...props} />;
 }
 
-export function GoADropdownItem({ value, label, filter, name, testId, mountType = "append" }: GoADropdownItemProps) {
+export function GoADropdownItem({
+  value,
+  label,
+  filter,
+  name,
+  testId,
+  mountType = "append",
+  parent,
+}: GoADropdownItemProps) {
   return (
     <goa-dropdown-item
       data-testid={testId}
@@ -50,6 +60,7 @@ export function GoADropdownItem({ value, label, filter, name, testId, mountType 
       filter={filter}
       name={name}
       mount={mountType}
+      parent={parent}
     />
   );
 }
