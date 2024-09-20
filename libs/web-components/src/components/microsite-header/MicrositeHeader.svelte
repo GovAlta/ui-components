@@ -82,9 +82,11 @@
       </div>
     {/if}
     <div class="spacer" />
-    {#if version}
+    {#if $$slots.version || version}
       <div data-testid="version" class="version">
-        {version}
+        <slot name="version">
+          {version}
+        </slot>
       </div>
     {/if}
   </div>
@@ -166,15 +168,21 @@
 
   .version {
     color: var(--goa-color-text-secondary);
-    padding-left: 1rem;
-    line-height: 1.25rem;
+    padding-left: var(--goa-space-m);
+    line-height: var(--goa-line-height-1);
+  }
+
+  :global(::slotted([slot="version"])) {
+    display: flex;
+    gap: var(--goa-space-m);
+    align-items: center;
   }
 
   .service-type {
     font-weight: bold;
-    padding: 0.125rem 0.25rem;
+    padding: var(--goa-space-3xs) var(--goa-space-2xs);
     display: flex;
-    margin-right: 1rem;
+    margin-right: var(--goa-space-m);
     line-height: initial;
   }
 
@@ -190,6 +198,6 @@
 
   .site-text {
     color: var(--goa-color-text-default);
-    line-height: 1.25rem;
+    line-height: var(--goa-line-height-1);
   }
 </style>

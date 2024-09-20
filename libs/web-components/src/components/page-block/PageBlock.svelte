@@ -4,7 +4,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { isValidDimension } from "../../common/validators";
-  import test from "node:test";
 
   type Size = "full" | string;
   const Sizes = {

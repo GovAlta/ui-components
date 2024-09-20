@@ -5,7 +5,6 @@
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
   import { typeValidator } from "../../common/utils";
-  import test from "node:test";
 
   // Validator
   const [Types, validateType] = typeValidator(

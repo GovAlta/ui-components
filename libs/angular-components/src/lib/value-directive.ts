@@ -10,6 +10,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 })
 export class ValueDirective implements ControlValueAccessor {
   private _value = "";
+  private _disabled = false;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   onChange: any = () => { };
@@ -38,11 +39,20 @@ export class ValueDirective implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
+  setDisabledState(isDisabled: boolean): void {
+    this._disabled = isDisabled;
+    this.elementRef.nativeElement.disabled = isDisabled;
+  }
+
   constructor(protected elementRef: ElementRef) { }
 
   @HostListener("_change", ["$event.detail.value"])
   listenForValueChange(value: string) {
     this.value = value;
+  }
+  @HostListener("disabledChange", ["$event.detail.disabled"])
+  listenForDisabledChange(isDisabled: boolean) {
+    this.setDisabledState(isDisabled);
   }
 }
 

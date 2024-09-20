@@ -23,9 +23,24 @@
     },
     {
       "name": "relative",
-      "type": "string",
+      "type": "boolean",
+      "valueSet": "boolean",
       "defaultValue": "false",
       "description": "Set to true when datepicker is nested in a position=relative element"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "valueSet": "boolean",
+      "defaultValue": "false",
+      "description": "Disable the datepicker"
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "valueSet": "boolean",
+      "defaultValue": "false",
+      "description": "Set to true to show error state"
     },
     {
       "name": "mt",
