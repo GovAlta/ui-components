@@ -8,6 +8,7 @@ interface WCProps extends Margins {
   error?: boolean;
   min?: string;
   max?: string;
+  relative?: boolean;
   disabled?: boolean;
 }
 
@@ -28,6 +29,7 @@ export interface GoADatePickerProps extends Margins {
   min?: Date;
   max?: Date;
   testId?: string;
+  relative?: boolean;
   disabled?: boolean;
   onChange: (name: string, value: Date) => void;
 }
@@ -44,6 +46,7 @@ export function GoADatePicker({
   mr,
   mb,
   ml,
+  relative,
   onChange,
 }: GoADatePickerProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
@@ -55,13 +58,13 @@ export function GoADatePicker({
 
     const handleChange = (e: Event) => {
       onChange(name || "", (e as CustomEvent).detail.value);
-    }
+    };
 
     current.addEventListener("_change", handleChange);
 
     return () => {
       current.removeEventListener("_change", handleChange);
-    }
+    };
   }, [onChange]);
 
   return (
@@ -78,6 +81,7 @@ export function GoADatePicker({
       mr={mr}
       mb={mb}
       ml={ml}
+      relative={relative}
     />
   );
 }
