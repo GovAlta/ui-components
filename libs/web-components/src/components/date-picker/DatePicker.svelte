@@ -15,7 +15,7 @@
 
   type DateValue = {
     type: "date";
-    value: Date;
+    value: Date | null;
   };
 
   export let value: string = "";
@@ -34,12 +34,16 @@
   // re-initializes the date if the value is changed externally
   // $: value && initDate();
 
-  let _oldValue: Date;
+  let _oldValue: Date | null;
   let _rootEl: Element;
   let _date: Date | null;
   let _showPopover: boolean = false;
 
   $: isDisabled = toBoolean(disabled);
+
+  $: if (value === "") {
+    _date = null;
+  }
 
   onMount(async () => {
     await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
@@ -55,8 +59,8 @@
   });
 
   async function initDate() {
-    _date = (value && startOfDay(new Date(value))) || null;
-    if (value && !isValid(_date)) {
+    _date = value && value !== "" ? startOfDay(new Date(value)) : null;
+    if (value && value !== "" && !isValid(_date)) {
       console.error(`${value} is not a valid date`);
     }
   }
@@ -65,16 +69,23 @@
     _date = e.detail.value;
     if (_date) {
       value = _date.toISOString();
-      hideCalendar();
-      dispatchValue(_date);
-      e.stopPropagation();
-      e.preventDefault();
+    } else {
+      value = "";
     }
+    hideCalendar();
+    dispatchValue(_date);
+    e.stopPropagation();
+    e.preventDefault();
   }
 
   function dispatchValue(date: Date | null) {
-    if (!date) return;
-    _oldValue = date;
+    if (!date) {
+      _oldValue = null;
+      value = "";
+    } else {
+      _oldValue = date;
+      value = date.toISOString();
+    }
     _rootEl.dispatchEvent(
       new CustomEvent<DateValue>("_change", {
         composed: true,
@@ -164,7 +175,7 @@
   {mb}
   {ml}
   {mr}
-  disabled="{isDisabled}"
+  disabled={isDisabled}
   open={_showPopover}
   on:_close={() => dispatchValue(_date)}
 >
@@ -174,10 +185,10 @@
     readonly="true"
     trailingicon="calendar"
     value={formatDate(_date)}
-    error={error}
+    {error}
     on:click={showCalendar}
     on:keydown={handleKeyDown}
-    disabled="{isDisabled}"
+    disabled={isDisabled}
   />
   <goa-calendar
     {value}
