@@ -2,8 +2,9 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { typeValidator } from "../../common/utils";
+  import { toBoolean } from "../../common/utils";
 
   // Validator
   const [Types, validateType] = typeValidator(
@@ -20,12 +21,17 @@
   export let maxcontentwidth = "100%";
   export let headerurltarget: UrlTargetType = "blank";
   export let feedbackurltarget: UrlTargetType = "blank";
+  export let hasfeedbackhandler: string = "false";
 
   // Validator
   const [UrlTarget, validateUrlTargetType] = typeValidator(
     "URL target values",
     ["self", "blank"],
   );
+
+  $: _hasfeedbackhandler = toBoolean(hasfeedbackhandler);
+
+  let _feedbackElement: HTMLElement;
 
   // Types
   type UrlTargetType = (typeof UrlTarget)[number];
@@ -35,7 +41,17 @@
     return val[0].toUpperCase() + val.slice(1);
   }
 
-  onMount(() => {
+  function handleFeedbackClick(event: MouseEvent) {
+    if (_hasfeedbackhandler == true) {
+      event.preventDefault();
+
+      _feedbackElement.dispatchEvent(
+        new CustomEvent("_feedbackClick", { composed: true, bubbles: true }),
+      );
+    }
+  }
+
+  onMount(async () => {
     setTimeout(() => validateType(type), 1);
     validateUrlTargetType(headerurltarget);
     validateUrlTargetType(feedbackurltarget);
@@ -70,13 +86,18 @@
           target={`_${headerurltarget}`}>Alberta Government</a
         >
         service
+
         {#if feedbackurl}
-          <span data-testid="feedback"
-            >— help us improve it by giving <a
-              href={feedbackurl}
-              target={`_${feedbackurltarget}`}>feedback</a
-            ></span
-          >
+          <span data-testid="feedback">
+            — help us improve it by giving
+            <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a>
+          </span>
+        {:else if _hasfeedbackhandler}
+          <span data-testid="feedback-click" bind:this={_feedbackElement}>
+            — help us improve it by giving
+            <!-- svelte-ignore a11y-invalid-attribute -->
+            <a href="#" on:click={handleFeedbackClick}>feedback</a>
+          </span>
         {/if}
       </div>
     {/if}
@@ -137,7 +158,6 @@
   }
 
   .content-container {
-
     font-size: var(--goa-font-size-2);
     padding: var(--goa-space-xs) var(--goa-space-m);
 
