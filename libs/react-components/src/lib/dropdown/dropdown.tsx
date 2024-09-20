@@ -1,6 +1,9 @@
+import {
+  GoabDropdownOnChangeDetail,
+  GoabIconType,
+  Margins,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
-import { GoAIconType } from "../icon/icon";
 
 interface WCProps extends Margins {
   ref: React.MutableRefObject<HTMLElement | null>;
@@ -31,10 +34,10 @@ declare global {
   }
 }
 
-export interface GoADropdownProps extends Margins {
+export interface GoabDropdownProps extends Margins {
   name?: string;
   value?: string[] | string;
-  onChange: (name: string, values: string[] | string) => void;
+  onChange: (detail: GoabDropdownOnChangeDetail) => void;
 
   // optional
   ariaLabel?: string;
@@ -44,7 +47,7 @@ export interface GoADropdownProps extends Margins {
   disabled?: boolean;
   error?: boolean;
   filterable?: boolean;
-  leadingIcon?: GoAIconType;
+  leadingIcon?: GoabIconType;
   maxHeight?: string;
   multiselect?: boolean;
   native?: boolean;
@@ -64,16 +67,16 @@ function stringify(value: string | string[] | undefined): string {
   return JSON.stringify(value);
 }
 
-export function GoADropdown(props: GoADropdownProps): JSX.Element {
+export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
       return;
     }
     const current = el.current;
-    const handler = (e: unknown) => {
-      const { name, value, values } = (e as CustomEvent).detail;
-      props.onChange(name, props.multiselect ? values : value);
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
+      props.onChange(detail);
     };
     current.addEventListener("_change", handler);
     return () => {
@@ -110,4 +113,4 @@ export function GoADropdown(props: GoADropdownProps): JSX.Element {
   );
 }
 
-export default GoADropdown;
+export default GoabDropdown;

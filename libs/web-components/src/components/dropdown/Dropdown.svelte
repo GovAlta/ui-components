@@ -84,7 +84,8 @@
   // Hooks
   //
 
-  onMount(() => {
+  onMount(async() => {
+    await tick();
     getChildren();
 
     _eventHandler = _filterable
@@ -273,7 +274,7 @@
       : { name, value: newValue };
 
     if (!_isDirty) {
-      return;  
+      return;
     }
 
     setTimeout(() => {
@@ -293,7 +294,7 @@
 
     _isDirty = option.value !== _selectedOption?.value;
     _selectedOption = option;
-  
+
     if (!_native) {
       hideMenu();
       syncFilteredOptions();
@@ -322,7 +323,7 @@
       _selectedOption = undefined;
       setDisplayedValue();
       dispatchValue("");
-    }  
+    }
   }
 
   function onInputKeyUp(e: KeyboardEvent) {
