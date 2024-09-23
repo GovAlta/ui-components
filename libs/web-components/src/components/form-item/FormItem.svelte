@@ -1,17 +1,21 @@
 <svelte:options customElement="goa-form-item" />
 
 <!-- Script -->
-<script lang="ts" context="module">
-  export type FormItemChannelProps = {
-    el: HTMLElement;
-  };
-</script>
 
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { typeValidator } from "../../common/utils";
+  import { receive, relay, typeValidator } from "../../common/utils";
+  import {
+    FieldsetErrorRelayDetail,
+    FieldsetResetErrorsMsg,
+    FieldsetSetErrorMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+    FormItemMountMsg,
+    FormItemMountRelayDetail,
+  } from "../../types/relay-types";
 
   // Validators
   const [REQUIREMENT_TYPES, validateRequirementType] = typeValidator(
@@ -28,8 +32,6 @@
   type RequirementType = (typeof REQUIREMENT_TYPES)[number];
   type LabelSizeType = (typeof LABEL_SIZE_TYPES)[number];
 
-  export let testid: string = "";
-
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -37,30 +39,59 @@
   export let ml: Spacing = null;
 
   // Optional
+  export let testid: string = "";
   export let label: string = "";
   export let labelsize: LabelSizeType = "regular";
   export let helptext: string = "";
   export let error: string = "";
   export let requirement: RequirementType = "";
   export let maxwidth: string = "none";
-  export let id: string = ""; // @deprecated: no longer used
+  export let id: string = "";
 
   let _rootEl: HTMLElement;
 
   onMount(() => {
     validateRequirementType(requirement);
     validateLabelSize(labelsize);
+    bindElement();
 
-    _rootEl?.addEventListener("input:mounted", handleInputMounted);
+    receive(_rootEl, (action, data) => {
+      // console.log(`  RECEIVE(FormItem => ${action}):`, data);
+      switch (action) {
+        case FormFieldMountMsg:
+          onInputMount(data as FormFieldMountRelayDetail);
+          break;
+        case FieldsetSetErrorMsg:
+          onSetError(data as FieldsetErrorRelayDetail);
+          break;
+        case FieldsetResetErrorsMsg:
+          error = "";
+          break;
+      }
+    });
   });
 
-  function handleInputMounted(e: Event) {
-    const ce = e as CustomEvent<FormItemChannelProps>;
+  function onSetError(d: FieldsetErrorRelayDetail) {
+    error = (d as Record<string, string>)["error"];
+  }
+
+  // Allows binding to Fieldset components
+  function bindElement() {
+    relay<FormItemMountRelayDetail>(
+      _rootEl,
+      FormItemMountMsg,
+      { id, label, el: _rootEl },
+      { bubbles: true, timeout: 10 },
+    );
+  }
+
+  function onInputMount(props: FormFieldMountRelayDetail) {
+    const { el } = props;
 
     // Check if aria-label is present and has a value in the child element
-    const ariaLabel = ce.detail.el.getAttribute("aria-label");
+    const ariaLabel = el.getAttribute("aria-label");
     if (!ariaLabel || ariaLabel.trim() === "") {
-      ce.detail.el.setAttribute("aria-label", label);
+      el.setAttribute("aria-label", label);
     }
   }
 </script>

@@ -34,7 +34,7 @@ declare global {
 export interface GoADropdownProps extends Margins {
   name?: string;
   value?: string[] | string;
-  onChange: (name: string, values: string[] | string) => void;
+  onChange?: (name: string, values: string[] | string) => void;
 
   // optional
   ariaLabel?: string;
@@ -73,7 +73,7 @@ export function GoADropdown(props: GoADropdownProps): JSX.Element {
     const current = el.current;
     const handler = (e: unknown) => {
       const { name, value, values } = (e as CustomEvent).detail;
-      props.onChange(name, props.multiselect ? values : value);
+      props.onChange?.(name, props.multiselect ? values : value);
     };
     current.addEventListener("_change", handler);
     return () => {

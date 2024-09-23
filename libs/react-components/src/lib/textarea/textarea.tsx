@@ -43,7 +43,7 @@ export interface GoATextAreaProps extends Margins {
   countBy?: CountBy;
   maxCount?: number;
 
-  onChange: (name: string, value: string) => void;
+  onChange?: (name: string, value: string) => void;
   onKeyPress?: (name: string, value: string, key: string) => void;
 }
 
@@ -76,7 +76,7 @@ export function GoATextarea({
     const current = el.current;
     const listener: EventListener = (e: unknown) => {
       const { name, value } = (e as CustomEvent).detail;
-      onChange(name, value);
+      onChange?.(name, value);
     };
 
     current.addEventListener("_change", listener);

@@ -28,7 +28,7 @@ interface WCProps extends Margins {
 export interface GoACheckboxProps extends Margins {
   id?: string;
   name: string;
-  checked: boolean;
+  checked?: boolean;
   disabled?: boolean;
   error?: boolean;
   text?: string;
@@ -88,7 +88,7 @@ export function GoACheckbox({
       id={id}
       name={name}
       error={error}
-      checked={checked}
+      checked={checked || false}
       disabled={disabled}
       text={text}
       value={value}

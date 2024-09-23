@@ -354,7 +354,7 @@
         data-day={format(d, "eee")}
         class="day"
         class:today={isSameDay(d, new Date())}
-        class:selected={value && isSameDay(d, _selectedDate)}
+        class:selected={value && _selectedDate && isSameDay(d, _selectedDate)}
         class:disabled={isBefore(d, _min) || isAfter(d, _max)}
         tabindex={isSameDay(d, _calendarDate) ? 0 : -1}
       >

@@ -17,6 +17,7 @@ export * from "./lib/details/details";
 export * from "./lib/divider/divider";
 export * from "./lib/dropdown/dropdown";
 export * from "./lib/dropdown/dropdown-item";
+export * from "./lib/fieldset/fieldset";
 export * from "./lib/file-upload-card/file-upload-card";
 export * from "./lib/file-upload-input/file-upload-input";
 export * from "./lib/footer/footer";

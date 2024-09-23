@@ -29,6 +29,10 @@ export { default as FocusTrap } from "./components/focus-trap/FocusTrap.svelte";
 export { default as Footer } from "./components/footer/Footer.svelte";
 export { default as FooterMetaSection } from "./components/footer-meta-section/FooterMetaSection.svelte";
 export { default as FooterNavSection } from "./components/footer-nav-section/FooterNavSection.svelte";
+export { default as Fieldset } from "./components/form/Fieldset.svelte";
+export { default as Form } from "./components/form/Form.svelte";
+export { default as Task } from "./components/form/Task.svelte";
+export { default as TaskList } from "./components/form/TaskList.svelte";
 export { default as FormItem } from "./components/form-item/FormItem.svelte";
 export { default as FormStep } from "./components/form-step/FormStep.svelte";
 export { default as FormStepper } from "./components/form-stepper/FormStepper.svelte";
@@ -66,4 +70,3 @@ export { default as TextArea } from "./components/text-area/TextArea.svelte";
 export { default as ThreeColumnLayout } from "./layouts/three-column-layout/ThreeColumnLayout.svelte";
 export { default as Tooltip } from "./components/tooltip/Tooltip.svelte";
 export { default as TwoColumnLayout } from "./layouts/two-column-layout/TwoColumnLayout.svelte";
-

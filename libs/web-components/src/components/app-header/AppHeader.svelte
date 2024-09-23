@@ -158,7 +158,7 @@
     } else {
       // testing
       // @ts-expect-error
-      return [..._slotParentEl.querySelectorAll("a")].length > 0;
+      return [..._slotParentEl?.querySelectorAll("a")].length > 0;
     }
   }
 </script>

@@ -33,7 +33,7 @@ export interface GoARadioGroupProps extends Margins {
   error?: boolean;
   ariaLabel?: string;
   children?: React.ReactNode;
-  onChange: (name: string, value: string) => void;
+  onChange?: (name: string, value: string) => void;
 }
 
 export function GoARadioGroup({
