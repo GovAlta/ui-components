@@ -38,6 +38,8 @@ export { default as HeroBanner } from "./components/hero-banner/HeroBanner.svelt
 export { default as IconButton } from "./components/icon-button/IconButton.svelte";
 export { default as Icon } from "./components/icon/Icon.svelte";
 export { default as Input } from "./components/input/Input.svelte";
+export { default as Link } from "./components/link/Link.svelte";
+export { default as LinkButton } from "./components/link-button/LinkButton.svelte";
 export { default as MicrositeHeader } from "./components/microsite-header/MicrositeHeader.svelte";
 export { default as Modal } from "./components/modal/Modal.svelte";
 export { default as Notification } from "./components/notification/Notification.svelte";
@@ -59,6 +61,7 @@ export { default as Tab } from "./components/tab/Tab.svelte";
 export { default as Table } from "./components/table/Table.svelte";
 export { default as TableSortHeader } from "./components/table/TableSortHeader.svelte";
 export { default as Tabs } from "./components/tabs/Tabs.svelte";
+export { default as Text } from "./components/text/Text.svelte";
 export { default as TextArea } from "./components/text-area/TextArea.svelte";
 export { default as ThreeColumnLayout } from "./layouts/three-column-layout/ThreeColumnLayout.svelte";
 export { default as Tooltip } from "./components/tooltip/Tooltip.svelte";
