@@ -100,7 +100,7 @@ type OnBlur<T = string> = (name: string, value: T) => void;
 type OnKeyPress<T = string> = (name: string, value: T, key: string) => void;
 
 export interface GoAInputProps extends BaseProps {
-  onChange: OnChange<string>;
+  onChange?: OnChange<string>;
   value?: string;
   min?: number | string;
   max?: number | string;
@@ -111,7 +111,7 @@ export interface GoAInputProps extends BaseProps {
 }
 
 interface GoANumberInputProps extends BaseProps {
-  onChange: OnChange<number>;
+  onChange?: OnChange<number>;
   value?: number;
   min?: number;
   max?: number;
@@ -122,7 +122,7 @@ interface GoANumberInputProps extends BaseProps {
 }
 
 interface GoADateInputProps extends BaseProps {
-  onChange: OnChange<GoADate>;
+  onChange?: OnChange<GoADate>;
   value?: GoADate;
   min?: GoADate;
   max?: GoADate;
@@ -176,7 +176,7 @@ export function GoAInput({
     const current = ref.current;
     const changeListener = (e: unknown) => {
       const { name, value } = (e as CustomEvent).detail;
-      onChange(name, value);
+      onChange?.(name, value);
     };
     const clickListener = () => {
       onTrailingIconClick?.();
@@ -249,8 +249,9 @@ export function GoAInput({
   );
 }
 
-const onDateChangeHandler = (onChange: OnChange<GoADate>) => {
+const onDateChangeHandler = (onChange?: OnChange<GoADate>) => {
   return (name: string, value: string) => {
+    if (!onChange) return;
 
     if (!value) {
       onChange(name, "");
@@ -262,8 +263,10 @@ const onDateChangeHandler = (onChange: OnChange<GoADate>) => {
   };
 };
 
-const onTimeChangeHandler = (onChange: OnChange) => {
+const onTimeChangeHandler = (onChange?: OnChange) => {
   return (name: string, value: string) => {
+    if (!onChange) return;
+
     if (!value) {
       onChange(name, "");
       return;
@@ -365,7 +368,7 @@ export function GoAInputFile(props: GoAInputProps): JSX.Element {
       id={props.id}
       name={props.name}
       type="file"
-      onChange={(e) => props.onChange(e.target.name, e.target.value)}
+      onChange={(e) => props.onChange?.(e.target.name, e.target.value)}
       style={{ backgroundColor: "revert" }}
     />
   );
@@ -382,7 +385,7 @@ export function GoAInputNumber({
   ...props
 }: GoANumberInputProps): JSX.Element {
   const onNumberChange = (name: string, value: string) => {
-    props.onChange(name, parseFloat(value));
+    props.onChange?.(name, parseFloat(value));
   };
   const onFocus = (name: string, value: string) => {
     props.onFocus?.(name, parseFloat(value));

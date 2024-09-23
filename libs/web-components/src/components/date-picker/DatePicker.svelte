@@ -12,12 +12,16 @@
   } from "date-fns";
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
+  import { receive, dispatch, relay } from "../../common/utils";
+  import { FormSetValueMsg, FormSetValueRelayDetail, FieldsetSetErrorMsg, FieldsetResetErrorsMsg, FormFieldMountMsg, FormFieldMountRelayDetail } from "../../types/relay-types";
 
   type DateValue = {
     type: "date";
+    name: string;
     value: Date | null;
   };
 
+  export let name: string = "";
   export let value: string = "";
   export let error: string = "false";
   export let min: string = "";
@@ -33,7 +37,7 @@
   export let ml: Spacing = null;
 
   // re-initializes the date if the value is changed externally
-  // $: value && initDate();
+  // $: formatDate(value);
 
   let _oldValue: Date | null;
   let _rootEl: Element;
@@ -49,6 +53,8 @@
   onMount(async () => {
     await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
     await initDate();
+    addRelayListener();
+    sendMountedMessage();
   });
 
   // FIXME: This breaks keyboard entry
@@ -58,6 +64,36 @@
       initDate();
     }
   });
+  
+  function addRelayListener() {
+    receive(_rootEl, (action, data) => {
+      switch (action) {
+        case FormSetValueMsg:
+          onSetValue(data as FormSetValueRelayDetail);
+          break;
+        case FieldsetSetErrorMsg:
+          error = "true";
+          break;
+        case FieldsetResetErrorsMsg:
+          error = "false";
+          break;
+      }
+    });
+  }
+
+  function onSetValue(detail: FormSetValueRelayDetail) {
+    value = detail.value;
+    dispatch(_rootEl, "_change", { name, value: detail.value }, { bubbles: true });
+  }
+
+  function sendMountedMessage() {
+    relay<FormFieldMountRelayDetail>(
+      _rootEl,
+      FormFieldMountMsg,
+      { name, el: _rootEl},
+      { bubbles: true, timeout: 10 },
+    );
+  }
 
   async function initDate() {
     _date = value && value !== "" ? startOfDay(new Date(value)) : null;
@@ -92,6 +128,7 @@
         composed: true,
         bubbles: true,
         detail: {
+          name,
           type: "date",
           value: date,
         },
@@ -171,6 +208,7 @@
 <goa-popover
   bind:this={_rootEl}
   tabindex="-1"
+  {testid}
   {relative}
   {mt}
   {mb}
@@ -193,6 +231,7 @@
     disabled={isDisabled}
   />
   <goa-calendar
+    {name}
     {value}
     {min}
     {max}

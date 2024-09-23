@@ -6,7 +6,8 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
-  import { fromBoolean, toBoolean } from "../../common/utils";
+  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
+  import { FormSetValueMsg, FormSetValueRelayDetail, FieldsetSetErrorMsg, FieldsetResetErrorsMsg, FormFieldMountRelayDetail, FormFieldMountMsg } from "../../types/relay-types";
   // Required
   export let name: string;
 
@@ -42,7 +43,41 @@
     // hold on to the initial value to prevent losing it on check changes
     _value = value;
     _descriptionId = `description_${name}`;
+
+    addRelayListener();
+    sendMountedMessage();
   });
+  
+  function addRelayListener() {
+    receive(_checkboxRef, (action, data) => {
+      switch (action) {
+        case FormSetValueMsg:
+          onSetValue(data as FormSetValueRelayDetail);
+          break;
+        case FieldsetSetErrorMsg:
+          error = "true";
+          break;
+        case FieldsetResetErrorsMsg:
+          error = "false";
+          break;
+      }
+    });
+  }
+
+  function onSetValue(detail: FormSetValueRelayDetail) {
+    value = detail.value;
+    checked = detail.value ? "true" : "false";
+    dispatch(_checkboxRef, "_change", { name, value }, { bubbles: true });
+  }
+
+  function sendMountedMessage() {
+    relay<FormFieldMountRelayDetail>(
+      _checkboxRef,
+      FormFieldMountMsg,
+      { name, el: _checkboxRef},
+      { bubbles: true, timeout: 10 },
+    );
+  }
 
   function onChange(e: Event) {
     // Manually set the focus back to the checkbox after the state change
@@ -59,6 +94,7 @@
       new CustomEvent("_change", {
         composed: true,
         detail: { name, checked: newCheckStatus, value: newValue },
+        bubbles: true,
       }),
     );
   }

@@ -32,7 +32,7 @@ export interface GoADatePickerProps extends Margins {
   testId?: string;
   relative?: boolean;
   disabled?: boolean;
-  onChange: (name: string, value: Date | undefined) => void;
+  onChange?: (name: string, value: Date | undefined) => void;
 }
 
 export function GoADatePicker({
@@ -59,7 +59,7 @@ export function GoADatePicker({
 
     const handleChange = (e: Event) => {
       const newValue = (e as CustomEvent).detail.value;
-      onChange(name || "", newValue ? new Date(newValue) : undefined);
+      onChange?.(name || "", newValue ? new Date(newValue) : undefined);
     };
 
     current.addEventListener("_change", handleChange);

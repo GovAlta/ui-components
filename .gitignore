@@ -1,7 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Custom
 .nx
 playground
+NOTES.md
 
 # compiled output
 dist
