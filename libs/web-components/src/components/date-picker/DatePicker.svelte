@@ -217,7 +217,6 @@
   disabled={isDisabled}
   open={_showPopover}
   on:_close={() => dispatchValue(_date)}
-  testid={testid}
 >
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <goa-input
