@@ -5,6 +5,7 @@ interface WCProps {
   maxcontentwidth?: string;
   backgroundcolor?: string;
   textcolor?: string;
+  testid?: string;
 }
 
 declare global {
@@ -45,7 +46,7 @@ export function GoAHeroBanner({
       maxcontentwidth={maxContentWidth}
       backgroundcolor={backgroundColor}
       textcolor={textColor}
-      data-testid={testId}
+      testid={testId}
     >
       {children}
     </goa-hero-banner>

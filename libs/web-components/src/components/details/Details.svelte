@@ -17,6 +17,7 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
   export let open: string = "false";
+  export let testid: string = "";
 
   let _isMouseOver: boolean = false;
   let _summaryEl: HTMLElement;
@@ -45,6 +46,7 @@
     ${calculateMargin(mt, mr, mb, ml)}
     max-width: ${maxwidth};
   `}
+  data-testid={testid}
 >
   <summary
     bind:this={_summaryEl}

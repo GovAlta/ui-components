@@ -11,6 +11,6 @@ describe("SideMenu", () => {
     );
     const el = baseElement.querySelector("goa-side-menu");
     expect(baseElement).toBeTruthy();
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
   });
 });

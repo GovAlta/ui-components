@@ -7,6 +7,7 @@ interface WCProps extends Margins {
   value?: string;
   min?: string;
   max?: string;
+  testid?: string;
 }
 
 declare global {
@@ -58,7 +59,7 @@ export function GoACalendar({
       value={value?.toISOString()}
       min={min?.toISOString()}
       max={max?.toISOString()}
-      data-testid={testId}
+      testid={testId}
       mt={mt}
       mr={mr}
       mb={mb}

@@ -75,6 +75,7 @@ export default defineConfig(() => ({
   build: {
     outDir: "../../dist/libs/web-components",
     sourcemap: true,
+    minify: false,
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,

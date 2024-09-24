@@ -3,6 +3,7 @@ interface WCProps {
   url?: string;
   maxcontentwidth?: string;
   fullmenubreakpoint?: number;
+  testid?: string;
 }
 
 declare global {
@@ -37,7 +38,7 @@ export function GoAAppHeader({
       url={url}
       fullmenubreakpoint={fullMenuBreakpoint}
       maxcontentwidth={maxContentWidth}
-      data-testid={testId}
+      testid={testId}
     >
       {children}
     </goa-app-header>

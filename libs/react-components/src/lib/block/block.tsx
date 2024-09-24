@@ -5,6 +5,7 @@ export interface WCProps extends Margins {
   gap?: Spacing;
   direction?: Direction;
   alignment?: Alignment;
+  testid?: string;
 }
 
 declare global {
@@ -39,7 +40,7 @@ export function GoABlock(props: GoABlockProps) {
       mr={props.mr}
       mb={props.mb}
       ml={props.ml}
-      data-testid={props.testId}
+      testid={props.testId}
     >
       {props.children}
     </goa-block>

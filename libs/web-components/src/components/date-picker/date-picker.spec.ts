@@ -5,12 +5,7 @@ import {
   render,
   waitFor,
 } from "@testing-library/svelte";
-import {
-  addDays,
-  format,
-  addMonths,
-  addYears,
-} from "date-fns";
+import { addDays, format, addMonths, addYears } from "date-fns";
 import { it, expect, vi } from "vitest";
 
 it("it renders", async () => {
@@ -75,95 +70,154 @@ it("dispatches a value on date selection", async () => {
   });
 });
 
-it("allows for date navigation via the keyboard", async () => {
-  const inputDate = new Date();
-  const currentDate = new Date(
-    inputDate.getFullYear(),
-    inputDate.getMonth(),
-    inputDate.getDate(),
-  );
+describe("DatePicker Keyboard Navigation", () => {
+  const setupTest = () => {
+    const inputDate = new Date();
+    const currentDate = new Date(
+      inputDate.getFullYear(),
+      inputDate.getMonth(),
+      inputDate.getDate(),
+    );
 
-  const { container } = render(DatePicker, { value: inputDate });
+    const { container } = render(DatePicker, { value: inputDate });
+    const input = container.querySelector("goa-input");
+    expect(input).toBeTruthy();
+
+    const handler = vi.fn();
+    container?.addEventListener("_change", (e: Event) => {
+      const ce = e as CustomEvent;
+      handler(ce.detail.value);
+    });
+
+    return { input, currentDate, handler };
+  };
+
+  it("navigates to the previous day when left arrow is pressed", async () => {
+    const { input, currentDate, handler } = setupTest();
+    const arrowLeftEvent = createEvent.keyDown(input!, { key: "ArrowLeft" });
+
+    await fireEvent(input!, arrowLeftEvent);
+
+    const expectedDate = addDays(currentDate, -1);
+    await waitFor(() => {
+      expect(handler).toHaveBeenCalledWith(expectedDate);
+    });
+  });
+
+  it("navigates to the next day when right arrow is pressed", async () => {
+    const { input, currentDate, handler } = setupTest();
+    const arrowRightEvent = createEvent.keyDown(input!, { key: "ArrowRight" });
+
+    await fireEvent(input!, arrowRightEvent);
+
+    const expectedDate = addDays(currentDate, 1);
+    await waitFor(() => {
+      expect(handler).toHaveBeenCalledWith(expectedDate);
+    });
+  });
+
+  it("navigates to the previous week when up arrow is pressed", async () => {
+    const { input, currentDate, handler } = setupTest();
+    const arrowUpEvent = createEvent.keyDown(input!, { key: "ArrowUp" });
+
+    await fireEvent(input!, arrowUpEvent);
+
+    const expectedDate = addDays(currentDate, -7);
+    await waitFor(() => {
+      expect(handler).toHaveBeenCalledWith(expectedDate);
+    });
+  });
+
+  it("navigates to the next week when down arrow is pressed", async () => {
+    const { input, currentDate, handler } = setupTest();
+    const arrowDownEvent = createEvent.keyDown(input!, { key: "ArrowDown" });
+
+    await fireEvent(input!, arrowDownEvent);
+
+    const expectedDate = addDays(currentDate, 7);
+    await waitFor(() => {
+      expect(handler).toHaveBeenCalledWith(expectedDate);
+    });
+  });
+
+  it("navigates to the previous month when PageUp is pressed", async () => {
+    const { input, currentDate, handler } = setupTest();
+    const pageUpEvent = createEvent.keyDown(input!, { key: "PageUp" });
+
+    await fireEvent(input!, pageUpEvent);
+
+    const expectedDate = addMonths(currentDate, -1);
+    await waitFor(() => {
+      expect(handler).toHaveBeenCalledWith(expectedDate);
+    });
+  });
+
+  it("navigates to the next month when PageDown is pressed", async () => {
+    const { input, currentDate, handler } = setupTest();
+    const pageDownEvent = createEvent.keyDown(input!, { key: "PageDown" });
+
+    await fireEvent(input!, pageDownEvent);
+
+    const expectedDate = addMonths(currentDate, 1);
+    await waitFor(() => {
+      expect(handler).toHaveBeenCalledWith(expectedDate);
+    });
+  });
+
+  it("navigates to the previous year when Shift+PageUp is pressed", async () => {
+    const { input, currentDate, handler } = setupTest();
+    const shiftPageUpEvent = createEvent.keyDown(input!, {
+      key: "PageUp",
+      shiftKey: true,
+    });
+
+    await fireEvent(input!, shiftPageUpEvent);
+
+    const expectedDate = addYears(currentDate, -1);
+    await waitFor(() => {
+      expect(handler).toHaveBeenCalledWith(expectedDate);
+    });
+  });
+
+  it("navigates to the next year when Shift+PageDown is pressed", async () => {
+    const { input, currentDate, handler } = setupTest();
+    const shiftPageDownEvent = createEvent.keyDown(input!, {
+      key: "PageDown",
+      shiftKey: true,
+    });
+
+    await fireEvent(input!, shiftPageDownEvent);
+
+    const expectedDate = addYears(currentDate, 1);
+    await waitFor(() => {
+      expect(handler).toHaveBeenCalledWith(expectedDate);
+    });
+  });
+});
+
+it("renders with disabled prop", async () => {
+  const { container } = render(DatePicker, { disabled: "true" });
   const input = container.querySelector("goa-input");
+  const popover = container.querySelector("goa-popover");
+
+  expect(input?.getAttribute("disabled")).toBe("true");
+  expect(popover?.getAttribute("disabled")).toBe("true");
+});
+
+it("prevents interaction when disabled", async () => {
+  const { container } = render(DatePicker, { disabled: "true" });
+  const input = container.querySelector("goa-input");
+
   expect(input).toBeTruthy();
-  expect(inputDate).toBeTruthy();
 
   if (!input) return;
 
-  const arrowLeftEvent = createEvent.keyDown(input, { key: "ArrowLeft" });
-  const arrowRightEvent = createEvent.keyDown(input, { key: "ArrowRight" });
-  const arrowDownEvent = createEvent.keyDown(input, { key: "ArrowDown" });
-  const arrowUpEvent = createEvent.keyDown(input, { key: "ArrowUp" });
-  const pageUpEvent = createEvent.keyDown(input, { key: "PageUp" });
-  const pageDownEvent = createEvent.keyDown(input, { key: "PageDown" });
-  const shiftPageUpEvent = createEvent.keyDown(input, {
-    key: "PageUp",
-    shiftKey: true,
-  });
-  const shiftPageDownEvent = createEvent.keyDown(input, {
-    key: "PageDown",
-    shiftKey: true,
-  });
-
+  const clickEvent = createEvent.click(input);
   const handler = vi.fn();
-  container?.addEventListener("_change", (e: Event) => {
-    const ce = e as CustomEvent
-    handler(ce.detail.value);
-  });
+  container?.addEventListener("_change", handler);
 
-  // left arrow
-  const expectedLA = addDays(currentDate, -1);
-  await fireEvent(input, arrowLeftEvent);
+  await fireEvent(input, clickEvent);
   await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expectedLA);
-  });
-
-  // right arrow
-  const expectedRA = addDays(currentDate, 1);
-  await fireEvent(input, arrowRightEvent);
-  await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expectedRA);
-  });
-
-  // up arrow
-  const expectedUA = addDays(currentDate, -7);
-  await fireEvent(input, arrowUpEvent);
-  await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expectedUA);
-  });
-
-  // down arrow
-  const expectedDA = addDays(currentDate, 7);
-  await fireEvent(input, arrowDownEvent);
-  await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expectedDA);
-  });
-
-  // page up
-  const expectedPU = addMonths(currentDate, -1);
-  await fireEvent(input, pageUpEvent);
-  await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expectedPU);
-  });
-
-  // page down
-  const expectedPD = addMonths(currentDate, 1);
-  await fireEvent(input, pageDownEvent);
-  await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expectedPD);
-  });
-
-  // shift page up
-  const expectedSPU = addYears(currentDate, -1);
-  await fireEvent(input, shiftPageUpEvent);
-  await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expectedSPU);
-  });
-
-  // shift page down
-  const expectedSPD = addYears(currentDate, 1);
-  await fireEvent(input, shiftPageDownEvent);
-  await waitFor(() => {
-    expect(handler).toHaveBeenCalledWith(expectedSPD);
+    expect(handler).not.toBeCalled();
   });
 });

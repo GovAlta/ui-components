@@ -5,6 +5,7 @@
 
   export let heading: string = "";
   export let maxcolumncount: number = 1;
+  export let testid: string = "";
 
   let rootEl: HTMLElement;
   let children: HTMLLinkElement[] = [];
@@ -32,7 +33,7 @@
 </script>
 
 <!-- Template -->
-<section bind:this={rootEl}>
+<section bind:this={rootEl} data-testid={testid}>
   {#if heading}
     <div class="title">{heading}</div>
     <goa-divider spacing="small" />

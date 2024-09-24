@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 interface WCProps {
   heading: string;
+  testid?: string;
 }
 
 declare global {
@@ -25,7 +26,7 @@ export function GoASideMenuGroup(props: GoASideMenuGroupProps): JSX.Element {
   return (
     <goa-side-menu-group
       heading={props.heading}
-      data-testid={props.testId}
+      testid={props.testId}
     >
       {props.children}
     </goa-side-menu-group>

@@ -4,6 +4,7 @@ import { Margins } from "../../common/styling";
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | null>;
   step?: number;
+  testid?: string;
 }
 
 declare global {
@@ -56,7 +57,7 @@ export function GoAFormStepper({
   return (
     <goa-form-stepper
       ref={ref}
-      data-testid={testId}
+      testid={testId}
       step={step}
       mt={mt}
       mr={mr}

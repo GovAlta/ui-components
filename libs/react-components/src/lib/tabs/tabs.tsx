@@ -4,6 +4,7 @@ interface WCProps {
   initialtab?: number;
   ref: React.RefObject<HTMLElement>;
   onChange?: (tab: number) => void;
+  testid?: string;
 }
 
 declare global {
@@ -45,7 +46,7 @@ export function GoATabs({
   }, [onChange]);
 
   return (
-    <goa-tabs ref={ref} initialtab={initialTab} data-testid={testId}>
+    <goa-tabs ref={ref} initialtab={initialTab} testid={testId}>
       {children}
     </goa-tabs>
   );

@@ -27,6 +27,7 @@
   export let message: string = "";
   export let progress: number = -1;
   export let visible: string = "false";
+  export let testid: string = "";
 
   $: isVisible = toBoolean(visible);
 
@@ -50,6 +51,7 @@
       transition:fade={{ duration: 300 }}
       use:noScroll={{ enable: true }}
       class:fullscreen
+      data-testid={testid}
     >
       <goa-spinner size={spinnerSize} {progress} />
       {#if message}
@@ -57,7 +59,11 @@
       {/if}
     </div>
   {:else if inline}
-    <div class:inline class={"spinner-" + spinnerSize}>
+    <div
+      class:inline
+      class={"spinner-" + spinnerSize}
+      data-testid={testid}
+    >
       <goa-spinner size={spinnerSize} {progress} />
       {#if message}
         <div class="message">{message}</div>

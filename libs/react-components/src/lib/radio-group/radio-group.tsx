@@ -13,6 +13,7 @@ interface WCProps extends Margins {
   disabled?: boolean;
   error?: boolean;
   arialabel?: string;
+  testid?: string;
 }
 
 declare global {
@@ -33,7 +34,7 @@ export interface GoARadioGroupProps extends Margins {
   error?: boolean;
   ariaLabel?: string;
   children?: React.ReactNode;
-  onChange: (name: string, value: string) => void;
+  onChange?: (name: string, value: string) => void;
 }
 
 export function GoARadioGroup({
@@ -74,7 +75,7 @@ export function GoARadioGroup({
 
   return (
     <goa-radio-group
-      data-testid={testId}
+      testid={testId}
       ref={el}
       name={name}
       value={value}

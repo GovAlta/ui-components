@@ -46,6 +46,6 @@ describe("Calendar", () => {
     expect(el?.getAttribute("value")).toBe(value.toISOString());
     expect(el?.getAttribute("min")).toBe(min.toISOString());
     expect(el?.getAttribute("max")).toBe(max.toISOString());
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
   });
 });

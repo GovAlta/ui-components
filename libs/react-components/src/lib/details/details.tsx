@@ -5,6 +5,7 @@ interface WCProps extends Margins {
   heading: string;
   open?: boolean;
   maxwidth?: string;
+  testid?: string;
 }
 
 declare global {
@@ -34,7 +35,7 @@ export function GoADetails(props: GoADetailsProps) {
       heading={props.heading}
       open={props.open}
       maxwidth={props.maxWidth}
-      data-testid={props.testId}
+      testid={props.testId}
       mt={props.mt}
       mr={props.mr}
       mb={props.mb}

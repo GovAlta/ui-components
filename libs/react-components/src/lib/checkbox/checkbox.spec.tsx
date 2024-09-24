@@ -35,7 +35,7 @@ describe("GoA Checkbox", () => {
     expect(checkbox?.getAttribute("disabled")).toBe("false");
     expect(checkbox?.getAttribute("checked")).toBe("true");
     expect(checkbox?.getAttribute("error")).toBe("false");
-    expect(checkbox?.getAttribute("data-testid")).toBe(testId);
+    expect(checkbox?.getAttribute("testid")).toBe(testId);
     expect(checkbox?.getAttribute("mt")).toBe("s");
     expect(checkbox?.getAttribute("mr")).toBe("m");
     expect(checkbox?.getAttribute("mb")).toBe("l");

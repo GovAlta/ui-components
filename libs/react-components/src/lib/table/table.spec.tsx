@@ -11,10 +11,12 @@ describe("Table", () => {
 
   it("should call onSort when _sort event is triggered", () => {
     const onSort = vi.fn();
-    const { getByTestId } = render(<Table onSort={onSort} testId="test-table" />);
+    const { baseElement } = render(<Table onSort={onSort} />);
+    const table = baseElement.querySelector("goa-table");
 
-    fireEvent(
-      getByTestId("test-table"),
+    expect(table).toBeTruthy();
+    table && fireEvent(
+      table,
       new CustomEvent("_sort", {
         detail: { sortBy: "name", sortDir: 1 }
       })
@@ -24,11 +26,13 @@ describe("Table", () => {
   });
 
   it("should handle _sort event gracefully when no onSort prop is passed", () => {
-    const { getByTestId } = render(<Table testId="test-table-without-sort" />);
+    const { baseElement } = render(<Table testId="test-table-without-sort" />);
+    const table = baseElement.querySelector("goa-table");
 
+    expect(table).toBeTruthy();
     expect(() =>
-      fireEvent(
-        getByTestId("test-table-without-sort"),
+      table && fireEvent(
+        table,
         new CustomEvent("_sort", {
           detail: { sortBy: "age", sortDir: -1 }
         })

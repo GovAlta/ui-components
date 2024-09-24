@@ -11,6 +11,7 @@ interface WCProps {
   message?: string;
   visible?: string;
   progress?: number;
+  testid?: string;
 }
 
 declare global {
@@ -46,7 +47,7 @@ export const GoACircularProgress = ({
       progress={progress}
       variant={variant}
       size={size}
-      data-testid={testId}
+      testid={testId}
     />
   );
 }

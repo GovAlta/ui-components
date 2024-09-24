@@ -19,6 +19,7 @@
   export let itemcount: number;
   export let perpagecount: number = 10;
   export let variant: Variant = "all";
+  export let testid: string = "";
   export let mt: Spacing = "none";
   export let mr: Spacing = "none";
   export let mb: Spacing = "m";
@@ -85,7 +86,7 @@
 </script>
 
 <goa-block id="root" {ml} {mr} {mb} {mt}>
-  <div class="controls">
+  <div class="controls" data-testid={testid}>
     {#if variant === "all"}
       <goa-block data-testid="page-selector" alignment="center" gap="s">
         <span>Page</span>

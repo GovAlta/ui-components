@@ -15,6 +15,7 @@ interface WCProps extends Margins {
   title?: string;
   disabled?: boolean;
   arialabel?: string;
+  testid?: string;
 }
 
 declare global {
@@ -85,7 +86,7 @@ export function GoAIconButton({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
     >
       {children}
     </goa-icon-button>

@@ -9,6 +9,7 @@
 // )}>
 //   ...
 // </div>
+
 // ```
 export function styles(...css: (string | boolean)[]): string {
   return css
@@ -22,6 +23,80 @@ export function styles(...css: (string | boolean)[]): string {
 // creates a style attribute/value or empty string
 export function style(name: string, value: string | number): string {
   return value ? `${name}: ${value}` : "";
+}
+
+export const msg = {
+  receive,
+  relay,
+};
+
+export function receive(
+  el: HTMLElement | Element | null | undefined,
+  handler: (action: string, data: Record<string, unknown>, event: Event) => void,
+) {
+  if (!el) {
+    console.warn("receive() el is null | undefined");
+  }
+
+  el?.addEventListener("msg", (e: Event) => {
+    const ce = e as CustomEvent;
+    handler(ce.detail.action, ce.detail.data, e);
+  });
+}
+
+export function relay<T>(
+  el: HTMLElement | Element | null | undefined,
+  eventName: string,
+  data: T,
+  opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
+) {
+  // console.log(`RELAY(${eventName}):`, data, el);
+
+  const dispatch = () => {
+    el?.dispatchEvent(
+      new CustomEvent<{ action: string; data: T }>("msg", {
+        composed: true,
+        bubbles: opts?.bubbles,
+        cancelable: opts?.cancelable,
+        detail: {
+          action: eventName,
+          data,
+        },
+      }),
+    );
+  };
+
+  if (opts?.timeout) {
+    setTimeout(dispatch, opts.timeout);
+  } else {
+    dispatch();
+  }
+}
+
+export function dispatch<T>(
+  el: HTMLElement | Element | null | undefined,
+  eventName: string,
+  detail: T,
+  opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
+) {
+  // console.log(`DISPATCH(${eventName}):`, detail, el);
+
+  const dispatch = () => {
+    el?.dispatchEvent(
+      new CustomEvent<T>(eventName, {
+        composed: true,
+        bubbles: opts?.bubbles,
+        cancelable: opts?.cancelable,
+        detail,
+      }),
+    );
+  };
+
+  if (opts?.timeout) {
+    setTimeout(dispatch, opts.timeout);
+  } else {
+    dispatch();
+  }
 }
 
 export function getSlottedChildren(

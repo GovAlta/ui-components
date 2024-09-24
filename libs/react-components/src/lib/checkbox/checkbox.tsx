@@ -22,13 +22,14 @@ interface WCProps extends Margins {
   arialabel?: string;
   description?: string | React.ReactNode;
   maxwidth?: string;
+  testid?: string;
 }
 
 /* eslint-disable-next-line */
 export interface GoACheckboxProps extends Margins {
   id?: string;
   name: string;
-  checked: boolean;
+  checked?: boolean;
   disabled?: boolean;
   error?: boolean;
   text?: string;
@@ -83,12 +84,12 @@ export function GoACheckbox({
 
   return (
     <goa-checkbox
-      data-testid={testId}
+      testid={testId}
       ref={el}
       id={id}
       name={name}
       error={error}
-      checked={checked}
+      checked={checked || false}
       disabled={disabled}
       text={text}
       value={value}

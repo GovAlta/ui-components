@@ -60,7 +60,7 @@ describe("Input", () => {
     expect(input?.getAttribute("placeholder")).toBe("placeholder");
     expect(input?.getAttribute("prefix")).toBe("foo");
     expect(input?.getAttribute("suffix")).toBe("bar");
-    expect(input?.getAttribute("data-testid")).toBe(testId);
+    expect(input?.getAttribute("testid")).toBe(testId);
     expect(input?.getAttribute("debounce")).toBe("1000");
     expect(input?.getAttribute("mt")).toBe("s");
     expect(input?.getAttribute("mr")).toBe("m");

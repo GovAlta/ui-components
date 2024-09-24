@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 interface WCProps {
   maxcolumncount?: number;
   heading?: string;
+  testid?: string;
 }
 
 declare global {
@@ -33,7 +34,7 @@ export function GoAAppFooterNavSection({
       slot="nav"
       heading={heading}
       maxcolumncount={maxColumnCount}
-      data-testid={testId}
+      testid={testId}
     >
       {children}
     </goa-app-footer-nav-section>

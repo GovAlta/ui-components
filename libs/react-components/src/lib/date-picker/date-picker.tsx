@@ -8,6 +8,9 @@ interface WCProps extends Margins {
   error?: boolean;
   min?: string;
   max?: string;
+  relative?: boolean;
+  disabled?: boolean;
+  testid?: string;
 }
 
 declare global {
@@ -27,7 +30,9 @@ export interface GoADatePickerProps extends Margins {
   min?: Date;
   max?: Date;
   testId?: string;
-  onChange: (name: string, value: Date) => void;
+  relative?: boolean;
+  disabled?: boolean;
+  onChange?: (name: string, value: Date | undefined) => void;
 }
 
 export function GoADatePicker({
@@ -37,10 +42,12 @@ export function GoADatePicker({
   min,
   max,
   testId,
+  disabled,
   mt,
   mr,
   mb,
   ml,
+  relative,
   onChange,
 }: GoADatePickerProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
@@ -51,29 +58,32 @@ export function GoADatePicker({
     const current = ref.current;
 
     const handleChange = (e: Event) => {
-      onChange(name || "", (e as CustomEvent).detail.value);
-    }
+      const newValue = (e as CustomEvent).detail.value;
+      onChange?.(name || "", newValue ? new Date(newValue) : undefined);
+    };
 
     current.addEventListener("_change", handleChange);
 
     return () => {
       current.removeEventListener("_change", handleChange);
-    }
+    };
   }, [onChange]);
 
   return (
     <goa-date-picker
       ref={ref}
       name={name}
-      value={value?.toISOString()}
+      value={value?.toISOString() || ""}
       error={error}
+      disabled={disabled}
       min={min?.toISOString()}
       max={max?.toISOString()}
-      data-testid={testId}
+      testid={testId}
       mt={mt}
       mr={mr}
       mb={mb}
       ml={ml}
+      relative={relative}
     />
   );
 }
