@@ -14,6 +14,7 @@ interface WCProps extends Margins {
   icon?: boolean;
   content?: string;
   arialabel?: string;
+  testid?: string;
 }
 
 declare global {
@@ -50,7 +51,7 @@ export function GoABadge({
       type={type}
       content={content}
       icon={icon}
-      data-testid={testId}
+      testid={testId}
       arialabel={ariaLabel}
       mt={mt}
       mr={mr}

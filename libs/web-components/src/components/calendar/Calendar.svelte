@@ -28,6 +28,7 @@
   export let value: string = "";
   export let min: string = "";
   export let max: string = "";
+  export let testid: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -290,6 +291,7 @@
 <div
   style={calculateMargin(mt, mr, mb, ml)}
   class:bordered={bordered === "true"}
+  data-testid={testid}
 >
   <goa-block mb="m">
     <goa-form-item label="Month" mt="0">

@@ -1,10 +1,14 @@
 import { ReactNode } from "react";
 
+interface WCProps {
+  testid?: string;
+}
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-app-footer-meta-section": React.HTMLAttributes<HTMLElement>;
+      "goa-app-footer-meta-section": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -21,7 +25,7 @@ export type FooterMetaSectionProps = GoAAppFooterMetaSectionProps;
 export function GoAAppFooterMetaSection({ testId, children }: GoAAppFooterMetaSectionProps) {
   return (
     <goa-app-footer-meta-section
-      data-testid= {testId}
+      testid= {testId}
       slot="meta"
     >
       {children}

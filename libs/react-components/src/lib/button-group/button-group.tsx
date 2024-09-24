@@ -9,6 +9,7 @@ export type Gap = GoAButtonGroupGap;
 interface WCProps extends Margins {
   alignment: GoAButtonGroupAlignment;
   gap?: GoAButtonGroupGap;
+  testid?: string;
 }
 
 declare global {
@@ -45,7 +46,7 @@ export function GoAButtonGroup({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
     >
       {children}
     </goa-button-group>

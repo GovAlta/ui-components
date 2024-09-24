@@ -1,11 +1,15 @@
 import { ReactNode } from "react";
 
+interface WCProps {
+  testid?: string;
+}
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      "goa-side-menu": React.HTMLAttributes<HTMLElement>;
+      "goa-side-menu": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -20,7 +24,7 @@ export interface GoASideMenuProps {
 export type SideMenuProps = GoASideMenuProps;
 
 export function GoASideMenu(props: GoASideMenuProps): JSX.Element {
-  return <goa-side-menu data-testid={props.testId}>{props.children}</goa-side-menu>;
+  return <goa-side-menu testid={props.testId}>{props.children}</goa-side-menu>;
 }
 
 export default GoASideMenu;

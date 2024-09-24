@@ -3,6 +3,7 @@ import { Margins, Spacing } from "../../common/styling";
 interface WCProps extends Margins {
   gap?: Spacing;
   minchildwidth: string;
+  testid?: string;
 }
 
 declare global {
@@ -39,7 +40,7 @@ export function GoAGrid({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
     >
       {children}
     </goa-grid>

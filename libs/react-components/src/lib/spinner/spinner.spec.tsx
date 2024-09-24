@@ -16,7 +16,7 @@ describe("Spinner", () => {
       const el = document.querySelector("goa-spinner");
       expect(el?.getAttribute("size")).toBe(size);
       expect(el?.getAttribute("type")).toBe("progress");
-      expect(el?.getAttribute("data-testid")).toBe("spinner-testid");
+      expect(el?.getAttribute("testid")).toBe("spinner-testid");
       expect(el?.getAttribute("progress")).toBe("20");
       expect(el?.getAttribute("invert")).not.toBeNull();
     });

@@ -13,6 +13,9 @@
   // Required
   export let width: Size;
 
+  // Optional
+  export let testid: string = "";
+
   // Private
   export let _width: string;
 
@@ -33,7 +36,7 @@
 </script>
 
 <!-- HTML -->
-<div class="page-content" style={`--max-width: ${_width}`}>
+<div class="page-content" style={`--max-width: ${_width}`} data-testid={testid}>
   <slot />
 </div>
 

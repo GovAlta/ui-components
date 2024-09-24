@@ -11,6 +11,7 @@ interface WCProps extends Margins {
   helptext?: string;
   maxwidth?: string;
   id?: string;
+  testid?: string;
 }
 
 declare global {
@@ -61,7 +62,7 @@ export function GoAFormItem({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
       id={id}
     >
       {error && typeof error !== "string" && <div slot="error">{error}</div>}

@@ -9,6 +9,7 @@ interface WCProps extends Margins {
   position?: GoATooltipPosition;
   content?: string;
   halign?: GoATooltipHorizontalAlignment;
+  testid?: string;
 }
 
 declare global {
@@ -35,7 +36,7 @@ export function GoATooltip(props: GoATooltipProps): JSX.Element {
       position={props.position}
       content={props.content}
       halign={props.hAlign}
-      data-testid={props.testId}
+      testid={props.testId}
       mt={props.mt}
       mr={props.mr}
       mb={props.mb}

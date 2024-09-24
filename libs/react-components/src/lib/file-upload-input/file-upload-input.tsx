@@ -7,6 +7,7 @@ interface WCProps {
   variant?: GoAFileUploadInputVariant;
   accept?: string;
   maxfilesize?: string;
+  testid?: string;
 }
 
 declare global {
@@ -56,7 +57,7 @@ export function GoAFileUploadInput({
       variant={variant}
       accept={accept}
       maxfilesize={maxFileSize}
-      data-testid={testId}
+      testid={testId}
     />
   );
 }

@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 interface WCProps {
   width: "full" | string;
+  testid?: string;
 }
 
 declare global {
@@ -24,7 +25,7 @@ export type PageBlockProps = GoAPageBlockProps;
 
 export function GoAPageBlock(props: PageBlockProps): JSX.Element {
   return (
-    <goa-page-block width={props.width} data-testid={props.testId}>
+    <goa-page-block width={props.width} testid={props.testId}>
       {props.children}
     </goa-page-block>
   );

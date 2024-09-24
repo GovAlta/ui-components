@@ -3,6 +3,8 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
 
+  export let testid: string =  "";
+
   let rootEl: HTMLElement;
   let children: HTMLLinkElement[] = [];
 
@@ -27,7 +29,7 @@
 </script>
 
 <!-- Template -->
-<section bind:this={rootEl}>
+<section bind:this={rootEl} data-testid={testid}>
   <div class="hidden">
     <slot />
   </div>

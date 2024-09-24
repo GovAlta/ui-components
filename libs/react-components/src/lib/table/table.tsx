@@ -11,6 +11,7 @@ interface WCProps extends Margins {
   width?: string;
   stickyheader?: boolean;
   variant?: GoATableVariant;
+  testid?: string;
 }
 
 declare global {
@@ -60,7 +61,7 @@ export function GoATable({onSort, ...props}: GoATableProps) {
       width={props.width}
       stickyheader={false}
       variant={props.variant}
-      data-testid={props.testId}
+      testid={props.testId}
       mt={props.mt}
       mb={props.mb}
       ml={props.ml}

@@ -4,6 +4,7 @@ import { GoAIconType } from "../icon/icon";
 
 interface WCProps {
   icon?: GoAIconType;
+  testid?: string;
 }
 
 declare global {
@@ -28,7 +29,7 @@ export function GoASideMenuHeading(props: GoASideMenuHeadingProps) {
   return (
     <goa-side-menu-heading
       icon={props.icon}
-      data-testid={props.testId}
+      testid={props.testId}
     >
       {props.children}
       {props.meta && <span slot="meta">{props.meta}</span>}

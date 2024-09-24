@@ -24,6 +24,7 @@
   export let max: string = "";
   export let relative: string = "false";
   export let disabled: string = "false";
+  export let testid: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -178,6 +179,7 @@
   disabled={isDisabled}
   open={_showPopover}
   on:_close={() => dispatchValue(_date)}
+  testid={testid}
 >
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <goa-input

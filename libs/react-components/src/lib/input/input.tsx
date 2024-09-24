@@ -49,6 +49,7 @@ interface WCProps extends Margins {
   prefix?: string;
   suffix?: string;
   arialabel?: string;
+  testid?: string;
 
   // type=number
   min?: string | number;
@@ -226,7 +227,7 @@ export function GoAInput({
       readonly={readonly}
       placeholder={placeholder}
       error={error}
-      data-testid={testId}
+      testid={testId}
       value={value}
       width={width}
       min={min}

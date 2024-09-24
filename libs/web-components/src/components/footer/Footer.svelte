@@ -4,6 +4,7 @@
   import { onMount, tick } from "svelte";
 
   export let maxcontentwidth: string = "";
+  export let testid: string = "";
 
   let rootEl: HTMLElement;
   let navLinks: Element[];
@@ -24,6 +25,7 @@
   class="app-footer"
   bind:this={rootEl}
   style={`--max-content-width: ${maxcontentwidth || "100%"}`}
+  data-testid={testid}
 >
   <div class="content">
     <div class="nav-links">

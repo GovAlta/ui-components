@@ -16,6 +16,7 @@ interface WCProps extends Margins {
   size?: GoACalloutSize;
   maxwidth?: string;
   arialive?: GoACalloutAriaLive;
+  testid?: string;
 }
 
 declare global {
@@ -63,7 +64,7 @@ export const GoACallout = ({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
     >
       {children}
     </goa-callout>

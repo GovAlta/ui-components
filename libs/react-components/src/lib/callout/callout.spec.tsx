@@ -32,7 +32,7 @@ describe("Callout", () => {
     expect(el?.getAttribute("mb")).toBe("l");
     expect(el?.getAttribute("ml")).toBe("xl");
     expect(el?.getAttribute("arialive")).toBe("polite");
-    expect(el?.getAttribute("data-testid")).toBe("test-callout");
+    expect(el?.getAttribute("testid")).toBe("test-callout");
     expect(el?.textContent).toContain("Information to the user goes");
   });
 

@@ -15,6 +15,7 @@
   export let variant: Variant = "dragdrop";
   export let accept: string = "*";
   export let maxfilesize: string = "5MB";
+  export let testid: string = "";
 
   // Private
 
@@ -181,7 +182,7 @@
 {#if variant === "dragdrop"}
   <div
     bind:this={_el}
-    data-testid="dragdrop"
+    data-testid={testid || "dragdrop"}
     class={`dragdrop state-${_state}`}
     on:click={openFilePicker}
     on:drop={onDrop}
@@ -230,7 +231,7 @@
 
   <input
     bind:this={_fileInput}
-    data-testid="input"
+    data-testid={testid || "input"}
     tabindex="-1"
     type="file"
     {accept}

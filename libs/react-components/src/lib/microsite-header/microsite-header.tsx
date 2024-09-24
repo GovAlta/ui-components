@@ -24,6 +24,7 @@ interface WCProps {
   headerurltarget?: GoALinkTarget;
   hasfeedbackhandler?: boolean;
   ref: React.RefObject<HTMLElement>;
+  testid?: string;
 }
 
 export interface GoAHeaderProps {
@@ -76,7 +77,7 @@ export function GoAMicrositeHeader({
       type={type}
       version={typeof version === "string" ? version : undefined}
       feedbackurl={feedbackUrl}
-      data-testid={testId}
+      testid={testId}
       maxcontentwidth={maxContentWidth}
       feedbackurltarget={feedbackUrlTarget}
       headerurltarget={headerUrlTarget}

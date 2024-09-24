@@ -29,7 +29,7 @@ describe("GoA Icon", () => {
     expect(el?.getAttribute("opacity")).toBe("0.5");
     expect(el?.getAttribute("title")).toBe("foo");
     expect(el?.getAttribute("arialabel")).toBe("bar");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
     expect(el?.getAttribute("mt")).toBe("s");
     expect(el?.getAttribute("mr")).toBe("m");
     expect(el?.getAttribute("mb")).toBe("l");

@@ -18,7 +18,7 @@ describe("Tabs", () => {
     const el = baseElement.querySelector("goa-tabs");
     expect(el).toBeTruthy();
     expect(el?.getAttribute("initialTab")).toBe("1");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
 
     const tabElements = baseElement.querySelectorAll("goa-tab");
     expect(tabElements.length).toBe(1);
