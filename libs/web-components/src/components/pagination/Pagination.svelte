@@ -85,7 +85,7 @@
   }
 </script>
 
-<goa-block id="root" {ml} {mr} {mb} {mt}>
+<goa-block id="goa-pagination" {ml} {mr} {mb} {mt}>
   <div class="controls" data-testid={testid}>
     {#if variant === "all"}
       <goa-block data-testid="page-selector" alignment="center" gap="s">
