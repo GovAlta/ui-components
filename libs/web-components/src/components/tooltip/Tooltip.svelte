@@ -236,7 +236,7 @@
 
   .tooltip-text {
     visibility: hidden;
-    font: var(--goa-typography-body-s);
+    font: var(--goa-typography-body-m);
     background-color: var(--goa-color-greyscale-700);
     color: var(--goa-color-text-light);
     text-align: center;
@@ -245,7 +245,7 @@
     z-index: 2;
     opacity: 0;
     transition: opacity 0.3s;
-    padding: var(--goa-space-xs) var(--goa-space-m);
+    padding: var(--goa-space-m);
     text-align: left;
     white-space: nowrap;
     display: flex;
