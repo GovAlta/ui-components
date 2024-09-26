@@ -1,3 +1,4 @@
+<!--Remove this comment next time you work on this file-->
 <svelte:options customElement="goa-accordion" />
 
 <!-- Script -->
