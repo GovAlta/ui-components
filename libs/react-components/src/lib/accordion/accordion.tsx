@@ -10,6 +10,7 @@ interface WCProps extends Margins {
   secondaryText?: string;
   headingContent?: ReactNode;
   maxwidth?: string;
+  testid?: string;
 }
 
 declare global {
@@ -53,7 +54,7 @@ export function GoAAccordion({
       heading={heading}
       secondaryText={secondaryText}
       maxwidth={maxWidth}
-      data-testid={testid}
+      testid={testid}
       mt={mt}
       mr={mr}
       mb={mb}

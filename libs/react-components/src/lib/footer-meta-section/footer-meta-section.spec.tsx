@@ -7,6 +7,6 @@ describe("FooterMetaSection", () => {
     const { baseElement } = render(<FooterMetaSection testId="foo" />);
     const el = baseElement.querySelector("goa-app-footer-meta-section");
     expect(baseElement).toBeTruthy();
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
   });
 });

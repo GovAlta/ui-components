@@ -37,6 +37,6 @@ describe("AppHeaderMenu", () => {
     expect(el).toBeTruthy();
     expect(el?.getAttribute("heading")).toBe("Some label");
     expect(el?.getAttribute("leadingIcon")).toBe("search");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
   });
 });

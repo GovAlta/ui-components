@@ -18,6 +18,7 @@ interface WCProps extends Margins {
   padding?: GoAContainerPadding;
   width?: GoAContainerWidth;
   maxwidth?: string;
+  testid?: string;
 }
 
 declare global {
@@ -70,7 +71,7 @@ export function GoAContainer({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
     >
       {headingContent && <div slot="title">{headingContent}</div>}
       {children}

@@ -114,6 +114,7 @@
   .goa-badge-content {
     font-size: var(--goa-font-size-2);
     line-height: var(--goa-line-height-1);
+    white-space: nowrap;
     padding-bottom: var(
       --font-valign-fix,
       0

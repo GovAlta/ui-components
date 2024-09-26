@@ -5,12 +5,20 @@
 </script>
 
 <script lang="ts">
-  import { typeValidator, toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean, relay, receive, dispatch } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
   import { onMount, tick } from "svelte";
-  import { FormItemChannelProps } from "../form-item/FormItem.svelte";
+  import {
+    FieldsetResetErrorsMsg,
+    FieldsetResetFieldsMsg,
+    FieldsetSetErrorMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+    FormSetValueMsg,
+    FormSetValueRelayDetail,
+  } from "../../types/relay-types";
 
   // Validators
   const [Types, validateType] = typeValidator("Input type", [
@@ -74,6 +82,10 @@
   let inputEl: HTMLElement;
   let _rootEl: HTMLElement;
 
+  // ========
+  // Reactive
+  // ========
+
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
@@ -92,6 +104,59 @@
     });
   }
 
+  // =====
+  // Hooks
+  // =====
+
+  onMount(async () => {
+    await tick();
+
+    validateType(type);
+    validateAutoCapitalize(autocapitalize);
+    addRelayListener();
+
+    showDeprecationWarnings();
+    checkSlots();
+    sendMountedMessage();
+  });
+
+  // =========
+  // Functions
+  // =========
+
+  function addRelayListener() {
+    receive(inputEl, (action, data) => {
+      switch (action) {
+        case FormSetValueMsg:
+          onSetValue(data as FormSetValueRelayDetail);
+          break;
+        case FieldsetSetErrorMsg:
+          error = "true";
+          break;
+        case FieldsetResetErrorsMsg:
+          error = "false";
+          break;
+        case FieldsetResetFieldsMsg:
+          value = "";
+          break;
+      }
+    });
+  }
+
+  function onSetValue(detail: FormSetValueRelayDetail) {
+    value = detail.value;
+    dispatch(inputEl, "_change", { name, value: detail.value }, { bubbles: true });
+  }
+
+  function sendMountedMessage() {
+    relay<FormFieldMountRelayDetail>(
+      _rootEl,
+      FormFieldMountMsg,
+      { name, el: inputEl },
+      { bubbles: true, timeout: 10 },
+    );
+  }
+
   function onKeyUp(e: Event) {
     const input = e.target as HTMLInputElement;
 
@@ -106,7 +171,7 @@
       input.dispatchEvent(
         new CustomEvent("_change", {
           composed: true,
-          bubbles: false,
+          bubbles: true,
           cancelable: true,
           detail: { name, value: input.value },
         }),
@@ -124,6 +189,7 @@
 
   function onFocus(e: Event) {
     const input = e.target as HTMLInputElement;
+    // TODO: create `dispatch` util function
     input.dispatchEvent(
       new CustomEvent("_focus", {
         composed: true,
@@ -145,23 +211,10 @@
 
   function doClick() {
     // @ts-ignore
-    this.dispatchEvent(
-      new CustomEvent("_trailingIconClick", { composed: true }),
-    );
+    this.dispatchEvent(new CustomEvent("_trailingIconClick", { composed: true }));
   }
 
-  onMount(async () => {
-    await tick();
-
-    validateType(type);
-    validateAutoCapitalize(autocapitalize);
-
-    if (prefix != "" || suffix != "") {
-      console.warn(
-        "GoAInput [prefix] and [suffix] properties are deprecated. Instead use leadingContent and trailingContent.",
-      );
-    }
-
+  function checkSlots() {
     const leadingContentSlot = _rootEl.querySelector(
       "slot[name=leadingContent]",
     ) as HTMLSlotElement;
@@ -177,17 +230,15 @@
     if (trailingContentSlot && trailingContentSlot.assignedNodes().length > 0) {
       _trailingContentSlot = true;
     }
+  }
 
-    setTimeout(() => {
-      _rootEl?.dispatchEvent(
-        new CustomEvent<FormItemChannelProps>("input:mounted", {
-          composed: true,
-          bubbles: true,
-          detail: { el: inputEl },
-        }),
+  function showDeprecationWarnings() {
+    if (prefix != "" || suffix != "") {
+      console.warn(
+        "GoAInput [prefix] and [suffix] properties are deprecated. Instead use leadingContent and trailingContent.",
       );
-    }, 10);
-  });
+    }
+  }
 </script>
 
 <!-- HTML -->
@@ -215,11 +266,7 @@
     </div>
 
     {#if leadingicon}
-      <goa-icon
-        class="leading-icon"
-        data-testid="leading-icon"
-        type={leadingicon}
-      />
+      <goa-icon class="leading-icon" data-testid="leading-icon" type={leadingicon} />
     {/if}
 
     <input
@@ -234,7 +281,7 @@
       {autocapitalize}
       {name}
       {type}
-      {value}
+      value={value || ""}
       {placeholder}
       {min}
       {max}

@@ -7,6 +7,7 @@ interface WCProps {
   type?: string;
   progress?: number;
   error?: string;
+  testid?: string;
 }
 
 declare global {
@@ -65,7 +66,7 @@ export function GoAFileUploadCard({
       type={type}
       progress={progress}
       error={error}
-      data-testid={testId}
+      testid={testId}
     />
   );
 }

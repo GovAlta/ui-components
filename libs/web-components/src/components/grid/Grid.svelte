@@ -9,6 +9,7 @@
 
   export let gap: Spacing = "m";
   export let minchildwidth: string = "";
+  export let testid: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -29,6 +30,7 @@
     --min-child-width: ${minchildwidth || 0};
     gap: var(--goa-space-${gap})
   `}
+    data-testid={testid}
   >
     <slot />
   </div>

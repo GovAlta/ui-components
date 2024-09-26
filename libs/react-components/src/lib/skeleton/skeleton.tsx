@@ -23,6 +23,7 @@ interface WCProps extends Margins {
   size?: GoASkeletonSize;
   linecount?: number;
   type: GoASkeletonType;
+  testid?: string;
 }
 
 declare global {
@@ -66,7 +67,7 @@ export const GoASkeleton = ({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
     />
   );
 };

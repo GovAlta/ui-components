@@ -12,6 +12,7 @@ interface WCProps extends Margins {
   deletable: boolean;
   content: string;
   variant?: GoAChipVariant;
+  testid?: string;
 }
 
 declare global {
@@ -77,7 +78,7 @@ export const GoAChip = ({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
     />
   );
 };

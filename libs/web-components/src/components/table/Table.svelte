@@ -25,6 +25,7 @@
   export let width: string = "";
   export let stickyheader: string = "false";
   export let variant: Variant = "normal";
+  export let testid: string = "";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -129,6 +130,7 @@
     ${`width: ${width || "100%"};`}
     ${calculateMargin(mt, mr, mb, ml)}
   `}
+  data-testid={testid}
 >
   {#if _isTableRoot}
     <slot />

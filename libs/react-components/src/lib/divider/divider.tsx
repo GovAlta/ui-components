@@ -1,11 +1,14 @@
 import { Margins } from "../../common/styling";
 
+interface WCProps extends Margins {
+  testid?: string;
+}
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      "goa-divider": Margins & React.HTMLAttributes<HTMLElement>;
+      "goa-divider": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -21,7 +24,7 @@ export function GoADivider(props: GoADividerProps) {
       mr={props.mr}
       mb={props.mb}
       ml={props.ml}
-      data-testid={props.testId}
+      testid={props.testId}
     />
   );
 }

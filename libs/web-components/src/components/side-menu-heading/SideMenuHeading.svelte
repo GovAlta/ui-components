@@ -4,9 +4,10 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
 
   export let icon: GoAIconType = null;
+  export let testid: string = "section-heading";
 </script>
 
-<h2 data-testid="section-heading" class:icon>
+<h2 data-testid={testid} class:icon>
   {#if icon}
     <goa-icon id="heading-icon" type={icon} theme="filled" />
   {/if}

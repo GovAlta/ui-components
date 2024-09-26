@@ -10,6 +10,7 @@ interface WCProps extends Margins {
   max?: string;
   relative?: boolean;
   disabled?: boolean;
+  testid?: string;
 }
 
 declare global {
@@ -31,7 +32,7 @@ export interface GoADatePickerProps extends Margins {
   testId?: string;
   relative?: boolean;
   disabled?: boolean;
-  onChange: (name: string, value: Date) => void;
+  onChange?: (name: string, value: Date | undefined) => void;
 }
 
 export function GoADatePicker({
@@ -57,7 +58,8 @@ export function GoADatePicker({
     const current = ref.current;
 
     const handleChange = (e: Event) => {
-      onChange(name || "", (e as CustomEvent).detail.value);
+      const newValue = (e as CustomEvent).detail.value;
+      onChange?.(name || "", newValue ? new Date(newValue) : undefined);
     };
 
     current.addEventListener("_change", handleChange);
@@ -71,12 +73,12 @@ export function GoADatePicker({
     <goa-date-picker
       ref={ref}
       name={name}
-      value={value?.toISOString()}
+      value={value?.toISOString() || ""}
       error={error}
       disabled={disabled}
       min={min?.toISOString()}
       max={max?.toISOString()}
-      data-testid={testId}
+      testid={testId}
       mt={mt}
       mr={mr}
       mb={mb}

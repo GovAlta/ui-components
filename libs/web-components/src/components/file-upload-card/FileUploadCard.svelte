@@ -10,6 +10,7 @@
   export let type: string = "";
   export let progress: number = -1;
   export let error: string = "";
+  export let testid: string = "";
 
   // Private
 
@@ -83,7 +84,7 @@
   }
 </script>
 
-<div id="container">
+<div id="container" data-testid={testid}>
   <div
     data-testid="root"
     bind:this={_rootEl}
@@ -194,7 +195,7 @@
       margin-left: 0.5rem;
     }
   }
- 
+
   @container self (--mobile) {
     .root {
       grid-template-columns: 38px auto;

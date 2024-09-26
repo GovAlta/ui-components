@@ -17,6 +17,7 @@ interface WCProps extends Margins {
   arialabel?: string;
   countby?: CountBy;
   maxcount?: number;
+  testid?: string;
 }
 
 declare global {
@@ -43,7 +44,7 @@ export interface GoATextAreaProps extends Margins {
   countBy?: CountBy;
   maxCount?: number;
 
-  onChange: (name: string, value: string) => void;
+  onChange?: (name: string, value: string) => void;
   onKeyPress?: (name: string, value: string, key: string) => void;
 }
 
@@ -76,7 +77,7 @@ export function GoATextarea({
     const current = el.current;
     const listener: EventListener = (e: unknown) => {
       const { name, value } = (e as CustomEvent).detail;
-      onChange(name, value);
+      onChange?.(name, value);
     };
 
     current.addEventListener("_change", listener);
@@ -115,7 +116,7 @@ export function GoATextarea({
       width={width}
       maxwidth={maxWidth}
       error={error}
-      data-testid={testId}
+      testid={testId}
       arialabel={ariaLabel}
       mt={mt}
       mr={mr}

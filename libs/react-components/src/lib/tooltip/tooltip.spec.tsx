@@ -29,6 +29,6 @@ describe("Tooltip", () => {
 
     expect(el?.getAttribute("position")).toBe("top");
     expect(el?.getAttribute("halign")).toBe("right");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
   });
 });

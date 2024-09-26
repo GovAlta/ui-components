@@ -7,6 +7,7 @@
   export let gap: Spacing = "m";
   export let direction: "row" | "column" = "row";
   export let alignment: "center" | "start" | "end" | "normal" = "normal";
+  export let testid: string = "";
 
   $: _alignment =
     alignment === "start"
@@ -32,6 +33,7 @@
     --alignment: ${_alignment};
     --direction: ${direction};
   `}
+  data-testid={testid}
 >
   <slot />
 </div>

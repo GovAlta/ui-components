@@ -24,22 +24,27 @@
   export let transition: Transition = "none";
   export let calloutvariant: CalloutVariant | null = null;
   export let maxwidth: string = "60ch";
+  export let testid: string = "modal";
 
   // @deprecated: use maxwidth
   export let width: string = "";
   // accessibility
   export let role: Role = "dialog";
+
   // *******
   // Private
   // *******
 
   let _rootEl: HTMLElement | null = null;
-  let _scrollPos: "top" | "middle" | "bottom" = "top";
+  let _scrollPos: "top" | "middle" | "bottom" | null = "top";
   let _scrollEl: HTMLElement | undefined;
   let _headerEl: HTMLElement | undefined;
   let _isOpen: boolean = false;
   let _requiresTopPadding: boolean;
   let _actionsHeight: number;
+  let _actionsSlotHasContent = false;
+  let _headerHeight: number;
+  let _edgeMargin: number = 128; //64px top edge + 64px bottom edge
 
   // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator(
@@ -72,9 +77,7 @@
   // Show the shadow at the top of the content after scrolling down
   $: if (_isOpen && _scrollEl) {
     const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
-    if (hasScroll) {
-      _scrollPos = "top";
-    }
+    _scrollPos = hasScroll ? "top" : null;
   }
 
   $: if (_isOpen && _rootEl) {
@@ -86,6 +89,10 @@
 
   $: _transitionTime =
     transition === "none" ? 0 : transition === "slow" ? 400 : 200;
+
+  $: if (_isOpen) {
+    checkActionsSlotContent();
+  }
 
   $: _iconType =
     calloutvariant === "emergency"
@@ -127,6 +134,11 @@
   // Functions
   // *********
 
+  async function checkActionsSlotContent() {
+    await tick();
+    _actionsSlotHasContent = !!_rootEl?.querySelector('[name="actions"]');
+  }
+
   function close(e: Event) {
     if (!_isClosable) {
       return;
@@ -154,20 +166,16 @@
     // top
     if (e.detail.scrollTop == 0) {
       _scrollPos = "top";
-      return;
-    }
-
-    // bottom
-    if (
+    } else if (
+      // bottom
       Math.abs(
         e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight,
       ) < 1
     ) {
       _scrollPos = "bottom";
-      return;
+    } else {
+      _scrollPos = "middle";
     }
-
-    _scrollPos = "middle";
   }
 </script>
 
@@ -177,9 +185,9 @@
       use:noscroll={{ enable: _isOpen }}
       in:fade={{ duration: _transitionTime }}
       out:fade={{ delay: _transitionTime, duration: _transitionTime }}
-      data-testid="modal"
-      class={`modal ${_scrollPos}`}
-      style={`--maxwidth: ${maxwidth};`}
+      data-testid={testid}
+      class={`modal ${_scrollPos ?? ""}`}
+      style={`--maxwidth: ${maxwidth}; --actions-height: ${_actionsHeight}px; --header-height: ${_headerHeight}`}
       role="presentation"
       bind:this={_rootEl}
     >
@@ -204,7 +212,11 @@
           </div>
         {/if}
         <div class="content">
-          <header bind:this={_headerEl} class:has-content={_requiresTopPadding}>
+          <header
+            bind:this={_headerEl}
+            class:has-content={_requiresTopPadding}
+            bind:clientHeight={_headerHeight}
+          >
             <div
               data-testid="modal-title"
               class="modal-title"
@@ -235,16 +247,19 @@
             <goa-scrollable
               direction="vertical"
               hpadding="1.9rem"
-              maxheight="calc(70vh - {_actionsHeight}px)"
+              maxheight="calc(100vh - {_headerHeight}px - var(--goa-space-xl) - {_actionsHeight}px - {_edgeMargin}px)"
               bind:this={_scrollEl}
               on:_scroll={handleScroll}
             >
-              <slot />
+              <slot name="content">
+                <slot />
+              </slot>
             </goa-scrollable>
           </div>
           <div
             bind:clientHeight={_actionsHeight}
             class="modal-actions"
+            class:empty-actions={!_actionsSlotHasContent}
             data-testid="modal-actions"
           >
             <slot name="actions" />
@@ -315,15 +330,17 @@
     padding-top: 2rem;
     border-radius: 4px 0px 0px 4px;
   }
+
   .content {
     flex: 1 1 auto;
     width: 100%;
-    margin: var(--goa-space-xl);
+    padding: var(--goa-space-xl) var(--goa-space-xl) 0 var(--goa-space-xl);
   }
 
   .content header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: var(--goa-space-xl);
   }
 
   header.has-content {
@@ -332,7 +349,7 @@
 
   @media (--mobile) {
     .content {
-      margin: var(--goa-space-l);
+      padding: var(--goa-space-l);
     }
     header.has-content {
       margin-bottom: var(--goa-space-m);
@@ -359,13 +376,10 @@
     border: 1px solid var(--goa-color-greyscale-700);
   }
 
-  .modal-actions :global(::slotted(*)) {
-    padding: var(--goa-space-xl) 0 0;
-  }
-
   .modal-content {
     margin: 0 -2rem;
     line-height: 1.75rem;
+    box-shadow: none;
   }
 
   .modal-content :global(::slotted(:last-child)) {
@@ -381,17 +395,30 @@
     margin-top: var(--goa-space-2xs);
   }
 
-  .scroll-top {
-    box-shadow: inset 0px -8px 6px -6px rgba(0, 0, 0, 0.1);
+  .modal-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--goa-space-xl) 0 var(--goa-space-xl) 0;
+    margin: auto 0 0 0;
+    text-align: right;
   }
 
-  .scroll-middle {
+  .modal-actions.empty-actions {
+    padding: 0 0 var(--goa-space-xs) 0;
+  }
+
+  .modal.top .modal-content {
+    box-shadow: inset 0 -8px 8px -8px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal.bottom .modal-content {
+    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal.middle .modal-content {
     box-shadow:
-      inset 0px -8px 6px -6px rgba(0, 0, 0, 0.1),
-      inset 0px 8px 6px -6px rgba(0, 0, 0, 0.1);
-  }
-
-  .scroll-bottom {
-    box-shadow: inset 0px 8px 6px -6px rgba(0, 0, 0, 0.1);
+      inset 0 8px 8px -8px rgba(0, 0, 0, 0.1),
+      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.1);
   }
 </style>

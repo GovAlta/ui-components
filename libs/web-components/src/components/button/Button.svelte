@@ -4,8 +4,9 @@
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { typeValidator, toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean, dispatch } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
+
 
   // Validators
   const [Types, validateType] = typeValidator(
@@ -43,32 +44,37 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  // ========
+  // Reactive
+  // ========
+
   $: isDisabled = toBoolean(disabled);
   $: isButtonDark = type === "primary" || type === "start";
 
-  function clickHandler(_e: Event) {
-    // TODO: use e.target??
-    if (!isDisabled) {
-      // @ts-expect-error
-      this.dispatchEvent(
-        new CustomEvent("_click", { composed: true, bubbles: true }),
-      );
-    }
-  }
+  // =====
+  // Hooks
+  // =====
 
   onMount(() => {
     validateType(type);
     validateSize(size);
     validateVariant(variant);
   });
+
+  // =========
+  // Functions
+  // =========
+
+  function clickHandler(e: Event) {
+    if (!isDisabled && e.target) {
+      dispatch(e.target as Element, "_click", null, { bubbles: true})
+    }
+  }
 </script>
 
 <button
   class="{type} {size} {variant}"
-  class:leading={leadingicon}
-  class:trailing={trailingicon || type === "start"}
   style={calculateMargin(mt, mr, mb, ml)}
-  on:click={clickHandler}
   disabled={isDisabled}
   on:click={clickHandler}
   data-testid={testid}
@@ -87,11 +93,7 @@
       <slot />
     </span>
     {#if trailingicon}
-      <goa-icon
-        id="trailing-icon"
-        type={trailingicon}
-        inverted={isButtonDark}
-      />
+      <goa-icon id="trailing-icon" type={trailingicon} inverted={isButtonDark} />
     {/if}
   {/if}
 </button>
@@ -129,7 +131,7 @@
     transition:
       transform 0.1s ease-in-out,
       background-color 0.2s ease-in-out,
-      border-color 0.2s ease-in-out;  
+      border-color 0.2s ease-in-out;
   }
   button:disabled {
     pointer-events: none;

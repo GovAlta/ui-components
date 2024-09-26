@@ -16,6 +16,7 @@ interface WCProps {
   type: GoANotificationType;
   maxcontentwidth?: string;
   arialive?: GoAAriaLiveType;
+  testid?: string;
 }
 
 declare global {
@@ -65,7 +66,7 @@ export const GoANotification = ({
     <goa-notification
       ref={el}
       type={type}
-      data-testid={testId}
+      testid={testId}
       maxcontentwidth={maxContentWidth}
       arialive={ariaLive}
     >

@@ -8,6 +8,7 @@
   export let maxcontentwidth = "100%";
   export let backgroundcolor: string = "#f8f8f8";
   export let textcolor: string = "";
+  export let testid: string = "background";
 
   /* Set minheight to support old default value of 600px */
   $: if (!minheight && backgroundurl) minheight = "600px";
@@ -17,7 +18,7 @@
 <div
   class="goa-hero"
   class:with-image={backgroundurl}
-  data-testid="background"
+  data-testid={testid}
   style="
     min-height: {minheight};
     --hero-banner-background-color: {backgroundcolor};
