@@ -128,8 +128,49 @@ export function phoneNumberValidator(msg?: string): FieldValidator {
 }
 
 export function emailValidator(msg?: string): FieldValidator {
-  const regex = new RegExp(/^[\w+-.]+@([\w-]+.)+[\w-]{2,4}$/);
+  // emailregex.com
+  const regex = new RegExp(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  );
   return regexValidator(regex, msg || "Invalid email address");
+}
+
+export function SINValidator(): FieldValidator {
+  return (value: unknown) => {
+    if (!value) return "";
+    const checkValue = "121121121".split("").map((c) => parseInt(c));
+    const valueStr = (value as string).replace(/\D/g, "");
+
+    if (valueStr.length !== 9) return "SIN must contain 9 numbers";
+
+    const checkSum = valueStr
+      .split("")
+      .map((c) => parseInt(c))
+      .map((num, index) => {
+        const val = num * checkValue[index];
+        if (val < 10) {
+          return val;
+        }
+        return `${val}`
+          .split("")
+          .map((c) => parseInt(c))
+          .reduce((acc, val) => acc * val, 1);
+      })
+      .reduce((acc, val) => acc + val, 0);
+
+    if (checkSum % 10 === 0) {
+      return "";
+    }
+
+    return "Invalid SIN";
+  };
+}
+
+export function postalCodeValidator(): FieldValidator {
+  return regexValidator(
+    /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i,
+    "Invalid postal code",
+  );
 }
 
 export function regexValidator(regex: RegExp, msg: string): FieldValidator {

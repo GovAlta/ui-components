@@ -14,8 +14,8 @@ import {
   selector: "[goaChecked]",
   providers: [
     {
-      provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CheckedDirective),
+      provide: NG_VALUE_ACCESSOR,
       multi: true,
     },
   ],
