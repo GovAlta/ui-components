@@ -165,6 +165,8 @@
     --goa-radio-diameter: 1.5rem;
     --goa-radio-border-width: 1px;
     --goa-radio-border-width--checked: 7px;
+    --goa-radio-border-width--hover: 2px;
+    --goa-radio-border-width--error: 2px;
     box-sizing: border-box;
     display: flex;
   }
@@ -202,7 +204,7 @@
     height: var(--goa-radio-diameter);
     width: var(--goa-radio-diameter);
     border-radius: 50%;
-    background-color: #fff;
+    background-color: var(--goa-color-text-light, #fff);
     transition: box-shadow 100ms ease-in-out;
 
     /* prevent squishing of radio button */
@@ -211,7 +213,7 @@
   }
 
   .goa-radio--disabled .goa-radio-label {
-    opacity: 0.4;
+    color: var(--goa-color-greyscale-500);
   }
 
   .goa-radio--disabled:hover {
@@ -220,30 +222,16 @@
 
   /* States */
 
-  /* Default */
+  /* Unchecked */
   input[type="radio"]:not(:checked) ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width) solid var(--goa-color-greyscale-700);
+    border: var(--goa-radio-border-width) solid
+      var(--goa-color-greyscale-700);
   }
 
-  /* Default:hover */
+  /* Hover */
   input[type="radio"]:hover ~ .goa-radio-icon {
-    border: 1px solid var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 1px var(--goa-color-interactive-hover);
-  }
-
-  /* Checked:hover */
-  input[type="radio"]:checked:hover ~ .goa-radio-icon {
-    border: 7px solid var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 1px var(--goa-color-interactive-hover);
-  }
-
-  /* Default:focus */
-  input[type="radio"]:focus ~ .goa-radio-icon,
-  input[type="radio"]:hover:active ~ .goa-radio-icon,
-  input[type="radio"]:hover:focus ~ .goa-radio-icon,
-  input[type="radio"]:active ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width)
-      var(--goa-color-interactive-focus);
+    border: var(--goa-radio-border-width--hover) solid
+      var(--goa-color-interactive-hover);
   }
 
   /* Checked */
@@ -252,45 +240,59 @@
       var(--goa-color-interactive-default);
   }
 
-  /* Disabled */
-  input[type="radio"]:disabled ~ .goa-radio-icon,
-  input[type="radio"]:disabled:focus ~ .goa-radio-icon,
-  input[type="radio"]:disabled:active ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width) solid var(--goa-color-greyscale-700);
-    box-shadow: none;
-    opacity: 40%;
+  /* Hover & checked */
+      input[type="radio"]:checked:hover ~ .goa-radio-icon {
+    border-color: var(--goa-color-interactive-hover);
   }
 
-  /* Disabled and checked */
-  input[type="radio"]:disabled:checked ~ .goa-radio-icon,
-  input[type="radio"]:disabled:checked:focus ~ .goa-radio-icon,
-  input[type="radio"]:disabled:checked:active ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid
-      var(--goa-color-interactive-hover);
-    box-shadow: none;
-  }
-
-  /* Error */
-  .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon,
-  .goa-radio--error input[type="radio"]:disabled:checked ~ .goa-radio-icon {
-    border: 7px solid var(--goa-color-emergency-default);
-  }
-
-  .goa-radio--error input[type="radio"]:hover ~ .goa-radio-icon {
-    box-shadow: 0 0 0 1px var(--goa-color-emergency-default);
-  }
-
-  .goa-radio--error input[type="radio"]:hover:active ~ .goa-radio-icon,
-  .goa-radio--error input[type="radio"]:hover:focus ~ .goa-radio-icon {
+  /* Focus */
+  input[type="radio"]:focus ~ .goa-radio-icon,
+  input[type="radio"]:hover:active ~ .goa-radio-icon,
+  input[type="radio"]:hover:focus ~ .goa-radio-icon,
+  input[type="radio"]:active ~ .goa-radio-icon {
     box-shadow: 0 0 0 var(--goa-radio-outline-width)
       var(--goa-color-interactive-focus);
   }
 
-  .goa-radio--error input[type="radio"]:disabled:hover ~ .goa-radio-icon {
+  /* Disabled */
+  input[type="radio"]:disabled ~ .goa-radio-icon,
+  input[type="radio"]:disabled:focus ~ .goa-radio-icon,
+  input[type="radio"]:disabled:active ~ .goa-radio-icon {
+    border: var(--goa-radio-border-width) solid
+      var(--goa-color-greyscale-400);
     box-shadow: none;
   }
 
+  /* Disabled & checked */
+  input[type="radio"]:disabled:checked ~ .goa-radio-icon,
+  input[type="radio"]:disabled:checked:focus ~ .goa-radio-icon,
+  input[type="radio"]:disabled:checked:active ~ .goa-radio-icon {
+    border: var(--goa-radio-border-width--checked) solid
+      var(--goa-color-interactive-disabled);
+    box-shadow: none;
+  }
+
+  /* Error & unchecked */
   .goa-radio--error input[type="radio"]:not(:checked) ~ .goa-radio-icon {
-    border: 2px solid var(--goa-color-emergency-default);
+    border: var(--goa-radio-border-width--error) solid
+      var(--goa-color-interactive-error);
+  }
+
+  /* Error & checked */
+  .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon {
+    border-color: var(--goa-color-interactive-error);
+  }
+
+  /* Error & hover */
+  .goa-radio--error input[type="radio"]:hover ~ .goa-radio-icon {
+    border-color: var(--goa-color-interactive-error-hover, #BA0000);
+  }
+
+  /* Error & disabled */
+  .goa-radio--error input[type="radio"]:disabled ~ .goa-radio-icon,
+  .goa-radio--error input[type="radio"]:disabled:focus ~ .goa-radio-icon,
+  .goa-radio--error input[type="radio"]:disabled:active ~ .goa-radio-icon {
+    border-color: var(--goa-color-interactive-error-disabled, #F58185);
+    box-shadow: none;
   }
 </style>
