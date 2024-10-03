@@ -30,14 +30,28 @@
 
     if (slotChildren.length === 0) return;
 
+    updateSideMenuLinks(slotChildren);
+
+    observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === "childList") {
+          updateSideMenuLinks(getSlottedChildren(_rootEl));
+        }
+      });
+    });
+
+    observer.observe(_rootEl, { childList: true, subtree: true });
+    _rootEl.addEventListener("sidemenugroup:mounted", handleSideMenuGroupMount);
+  }
+
+  function updateSideMenuLinks(slotChildren: Element[]) {
     _sideMenuLinks = slotChildren
       .filter((el) => el.tagName === "A")
       .map((el) => {
         el.classList.remove("current");
         return el;
       });
-
-    _rootEl.addEventListener("sidemenugroup:mounted", handleSideMenuGroupMount);
+    setCurrentUrl();
   }
 
   function handleSideMenuGroupMount(e: Event) {
@@ -65,6 +79,14 @@
   }
 
   function dispatchCurrentUrl(href: string) {
+    _sideMenuLinks.forEach((link) => {
+      if (link.getAttribute("href") === href) {
+        link.classList.add("current");
+      } else {
+        link.classList.remove("current");
+      }
+    });
+
     _sideMenuGroupItems.forEach((item) => {
       item.el.dispatchEvent(
         new CustomEvent("sidemenu:current:change", {
