@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/svelte";
+import { prettyDOM, render, waitFor } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 import AppHeaderWrapper from "./AppHeaderWrapper.test.svelte";
@@ -270,6 +270,64 @@ describe("AppHeader Tablet", () => {
     await waitFor(() => {
       const hasMenuItems = $$("goa-popover a");
       expect(hasMenuItems.length).toBeFalsy();
+    });
+  });
+});
+
+describe("AppHeader Mobile with hasmobileclickhandler", () => {
+  const heading = "Test heading";
+  const url = "http://localhost/foo";
+
+  beforeEach(async () => {
+    Object.defineProperty(window, "innerWidth", {
+      writable: true,
+      value: 400,
+    });
+  });
+
+  it("should dispatch _mobileMenuClick event when hasmobileclickhandler is true", async () => {
+    const { container, queryByTestId } = render(AppHeaderWrapper, {
+      heading,
+      url,
+      haschildren: true,
+      hasmobileclickhandler: "true",
+    });
+    await waitFor(() => {
+      expect(queryByTestId("menu-toggle")).toBeTruthy();
+    });
+    const toggleBtn = queryByTestId("menu-toggle");
+
+    const mobileMenuClickHandler = vi.fn();
+    toggleBtn?.addEventListener("_mobileMenuClick", mobileMenuClickHandler);
+
+    await user.click(toggleBtn as HTMLElement);
+
+    await waitFor(() => {
+      expect(mobileMenuClickHandler).toHaveBeenCalled();
+    });
+  });
+
+  it("should not dispatch _mobileMenuClick event when hasmobileclickhandler is false", async () => {
+    const { queryByTestId } = render(AppHeaderWrapper, {
+      heading,
+      url,
+      haschildren: true,
+      hasmobileclickhandler: "false",
+    });
+
+    await waitFor(() => {
+      expect(queryByTestId("menu-toggle")).toBeTruthy();
+    })
+    const toggleBtn = queryByTestId("menu-toggle");
+
+    const mobileMenuClickHandler = vi.fn();
+    toggleBtn?.addEventListener("_mobileMenuClick", mobileMenuClickHandler);
+
+    // Click the toggle button
+    await user.click(toggleBtn as HTMLElement);
+
+    await waitFor(() => {
+      expect(mobileMenuClickHandler).not.toHaveBeenCalled();
     });
   });
 });

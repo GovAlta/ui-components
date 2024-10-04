@@ -16,6 +16,11 @@
       "default": "100%",
       "description": "Maximum width of the content area",
       "type": "string"
+    },
+    {
+      "name": "hasmobileclickhandler",
+      "description": "Set to true to add a click handler to the mobile menu button",
+      "valueSet": "boolean"
     }
   ],
   "references": [
