@@ -11,8 +11,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { getSlottedChildren } from "../../common/utils";
+  import type { GoAIconType } from "../icon/Icon.svelte";
 
   export let heading: string;
+  export let icon: GoAIconType = null;
   export let testid: string = "";
 
   let _open = false;
@@ -114,6 +116,9 @@
 
 <div bind:this={_rootEl} class="side-menu-group" class:current={_current} data-testid={testid}>
   <a href={`#${_slug}`} class="heading" on:click={handleClick}>
+    {#if icon}
+      <goa-icon type={icon} />
+    {/if}
     {heading}
     {#if _open}
       <goa-icon type="chevron-down" />

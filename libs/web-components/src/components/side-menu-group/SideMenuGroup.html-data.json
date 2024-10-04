@@ -4,6 +4,15 @@
     {
       "name": "heading",
       "description": "Heading text for group"
+    },
+    {
+      "name": "testid",
+      "description": "Test id for testing purposes"
+    },
+    {
+      "name": "icon",
+      "description": "Leading icon for side menu group",
+      "valueSet": "goaIconType"
     }
   ],
   "references": [

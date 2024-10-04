@@ -4,8 +4,9 @@ import { tick } from "svelte";
 import { it } from "vitest";
 
 it("clicking expands and collapses the group", async () => {
-  const { queryByTestId, queryByRole } = render(SideMenuGroup, {
+  const { container, queryByTestId, queryByRole } = render(SideMenuGroup, {
     heading: "Some group",
+    icon: "accessibility",
   });
   await tick(); // needed since there is a tick in the component
   const link = queryByRole("link");
@@ -13,6 +14,7 @@ it("clicking expands and collapses the group", async () => {
 
   expect(link).toBeTruthy();
   expect(group).toBeTruthy();
+  expect(container.querySelector("goa-icon")).toBeTruthy();
 
   if (!link) return;
 
