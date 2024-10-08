@@ -6,9 +6,22 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import type { Option } from "./DropdownItem.svelte";
-  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
+  import {
+    dispatch,
+    fromBoolean,
+    receive,
+    relay,
+    toBoolean,
+  } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import { FieldsetResetErrorsMsg, FieldsetSetErrorMsg, FormFieldMountMsg, FormFieldMountRelayDetail, FormSetValueMsg, FormSetValueRelayDetail } from "../../types/relay-types";
+  import {
+    FieldsetResetErrorsMsg,
+    FieldsetSetErrorMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+    FormSetValueMsg,
+    FormSetValueRelayDetail,
+  } from "../../types/relay-types";
 
   interface EventHandler {
     handleKeyUp: (e: KeyboardEvent) => void;
@@ -82,6 +95,10 @@
     setSelected();
   }
 
+  $: {
+    _width = width || getLongestChildWidth(_options);
+  }
+
   //
   // Hooks
   //
@@ -117,7 +134,7 @@
   }
 
   function onSetValue(detail: FormSetValueRelayDetail) {
-    value = detail.value
+    value = detail.value;
     dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
   }
 
@@ -125,14 +142,13 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _rootEl},
+      { name, el: _rootEl },
       { bubbles: true, timeout: 10 },
     );
   }
 
   function getChildren() {
     _rootEl?.addEventListener("dropdown-item:mounted", (e: Event) => {
-
       const detail = (e as CustomEvent<Option>).detail;
 
       if (_mountStatus === "ready") {
@@ -266,7 +282,9 @@
 
   function syncFilteredOptions() {
     _filteredOptions = _filterable
-      ? _options.filter((option) => isFilterMatch(option, _inputEl?.value || ""))
+      ? _options.filter((option) =>
+          isFilterMatch(option, _inputEl?.value || ""),
+        )
       : _options;
   }
 
@@ -352,7 +370,6 @@
       setTimeout(() => {
         hideMenu();
       }, 10);
-
     } else {
       _selectedOption = undefined;
       setDisplayedValue();
@@ -362,13 +379,13 @@
 
   function onInputKeyUp(e: KeyboardEvent) {
     if (_disabled) return;
-    _isDirty = true
+    _isDirty = true;
     _eventHandler.handleKeyUp(e);
   }
 
   function onInputKeyDown(e: KeyboardEvent) {
     if (_disabled) return;
-    _isDirty = true
+    _isDirty = true;
     _eventHandler.handleKeyDown(e);
   }
 
@@ -413,7 +430,7 @@
   }
 
   class ComboboxKeyUpHandler implements EventHandler {
-    constructor(private input: HTMLInputElement) { }
+    constructor(private input: HTMLInputElement) {}
 
     onEscape(_e: KeyboardEvent) {
       reset();
@@ -600,7 +617,7 @@
       {disabled}
       {relative}
       data-testid="option-list"
-      width={`${_popoverMaxWidth || 100}px`}
+      width={`${_popoverMaxWidth || 300}px`}
       open={_isMenuVisible}
       padded="false"
       tabindex="-1"
