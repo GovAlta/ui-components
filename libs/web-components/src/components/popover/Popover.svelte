@@ -11,7 +11,12 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
   import { calculateMargin } from "../../common/styling";
-  import { style, getSlottedChildren, styles, toBoolean } from "../../common/utils";
+  import {
+    style,
+    getSlottedChildren,
+    styles,
+    toBoolean,
+  } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
   // Public
@@ -53,7 +58,6 @@
 
   // additional horizontal offset that is added to popover's position
   export let hoffset = "";
- 
   // width of outline seen when focused
   export let focusborderwidth = "var(--goa-border-width-l)";
 
@@ -202,7 +206,7 @@
         ? `${-popoverRect.height}px`
         : `${targetRect.y - popoverRect.height + window.scrollY}px`;
     } else {
-      _popoverEl.style.top = ''; // In case this is triggered by _sectionHeight is changed
+      _popoverEl.style.top = ""; // In case this is triggered by _sectionHeight is changed
     }
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
@@ -264,7 +268,7 @@
         style={styles(
           style("width", width),
           style("min-width", minwidth),
-          style("max-width", maxwidth),
+          style("max-width", width ? `max(${width}, ${maxwidth})` : maxwidth),
           style("padding", _padded ? "var(--goa-space-m)" : "0"),
         )}
       >
