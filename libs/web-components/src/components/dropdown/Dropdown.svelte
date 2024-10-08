@@ -6,9 +6,22 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import type { Option } from "./DropdownItem.svelte";
-  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
+  import {
+    dispatch,
+    fromBoolean,
+    receive,
+    relay,
+    toBoolean,
+  } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import { FieldsetResetErrorsMsg, FieldsetSetErrorMsg, FormFieldMountMsg, FormFieldMountRelayDetail, FormSetValueMsg, FormSetValueRelayDetail } from "../../types/relay-types";
+  import {
+    FieldsetResetErrorsMsg,
+    FieldsetSetErrorMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+    FormSetValueMsg,
+    FormSetValueRelayDetail,
+  } from "../../types/relay-types";
 
   interface EventHandler {
     handleKeyUp: (e: KeyboardEvent) => void;
@@ -82,6 +95,11 @@
     setSelected();
   }
 
+  $: {
+    _width =
+      width || (_options.length > 0 ? getLongestChildWidth(_options) : "100%");
+  }
+
   //
   // Hooks
   //
@@ -94,6 +112,11 @@
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
+
+    // Immediately set the width if provided
+    if (width) {
+      _width = width;
+    }
   });
 
   //
@@ -117,7 +140,7 @@
   }
 
   function onSetValue(detail: FormSetValueRelayDetail) {
-    value = detail.value
+    value = detail.value;
     dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
   }
 
@@ -125,14 +148,13 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _rootEl},
+      { name, el: _rootEl },
       { bubbles: true, timeout: 10 },
     );
   }
 
   function getChildren() {
     _rootEl?.addEventListener("dropdown-item:mounted", (e: Event) => {
-
       const detail = (e as CustomEvent<Option>).detail;
 
       if (_mountStatus === "ready") {
@@ -173,7 +195,7 @@
 
   function bind() {
     syncFilteredOptions();
-    if (!width) {
+    if (!width && _options.length > 0) {
       _width = getLongestChildWidth(_options);
     }
     if (_native) return;
@@ -266,7 +288,9 @@
 
   function syncFilteredOptions() {
     _filteredOptions = _filterable
-      ? _options.filter((option) => isFilterMatch(option, _inputEl?.value || ""))
+      ? _options.filter((option) =>
+          isFilterMatch(option, _inputEl?.value || ""),
+        )
       : _options;
   }
 
@@ -352,7 +376,6 @@
       setTimeout(() => {
         hideMenu();
       }, 10);
-
     } else {
       _selectedOption = undefined;
       setDisplayedValue();
@@ -362,13 +385,13 @@
 
   function onInputKeyUp(e: KeyboardEvent) {
     if (_disabled) return;
-    _isDirty = true
+    _isDirty = true;
     _eventHandler.handleKeyUp(e);
   }
 
   function onInputKeyDown(e: KeyboardEvent) {
     if (_disabled) return;
-    _isDirty = true
+    _isDirty = true;
     _eventHandler.handleKeyDown(e);
   }
 
@@ -413,7 +436,7 @@
   }
 
   class ComboboxKeyUpHandler implements EventHandler {
-    constructor(private input: HTMLInputElement) { }
+    constructor(private input: HTMLInputElement) {}
 
     onEscape(_e: KeyboardEvent) {
       reset();
@@ -572,6 +595,7 @@
   style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${_width};
+      width: ${_width};
     `}
   bind:this={_rootEl}
   bind:clientWidth={_popoverMaxWidth}
@@ -600,7 +624,8 @@
       {disabled}
       {relative}
       data-testid="option-list"
-      width={`${_popoverMaxWidth || 100}px`}
+      width={`${_popoverMaxWidth || 300}px`}
+      maxwidth={width || getLongestChildWidth(_options) || undefined} 
       open={_isMenuVisible}
       padded="false"
       tabindex="-1"
@@ -742,11 +767,13 @@
     cursor: pointer;
     width: var(--width, 100%);
   }
+
   @media (--mobile) {
     .dropdown {
       width: 100%;
     }
   }
+
   @media (--not-mobile) {
     .dropdown {
       width: var(--width, 100%);
@@ -769,21 +796,26 @@
     /*width of dropdown input should be 100% based on its parent div*/
     width: 100%;
   }
+
   .dropdown-input-group:hover {
     border-color: var(--goa-color-interactive-hover);
   }
+
   .dropdown-input-group:has(input:focus-visible) {
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
+
   .dropdown-input-group.error,
   .dropdown-input-group.error:hover {
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 1px var(--goa-color-interactive-error);
   }
+
   .dropdown-input-group.error:has(:focus-visible) {
     border: 2px solid var(--goa-color-interactive-error);
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
+
   @container not (--mobile) {
     .dropdown-input-group {
       width: var(--width);
@@ -859,7 +891,6 @@
     padding: 0.5rem;
     cursor: pointer;
     color: var(--goa-color-greyscale-black);
-
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

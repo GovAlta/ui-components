@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, Children } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconType } from "../icon/icon";
 
@@ -67,6 +67,8 @@ function stringify(value: string | string[] | undefined): string {
 
 export function GoADropdown(props: GoADropdownProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+  const hasDropdownItems = Children.count(props.children) > 0;
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -102,7 +104,7 @@ export function GoADropdown(props: GoADropdownProps): JSX.Element {
       native={props.native}
       placeholder={props.placeholder}
       testid={props.testId}
-      width={props.width}
+      width={props.width || (!hasDropdownItems ? "100%" : undefined)}
       relative={props.relative}
       id={props.id}
     >
