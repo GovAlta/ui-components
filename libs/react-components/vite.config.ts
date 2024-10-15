@@ -14,10 +14,7 @@ export default defineConfig({
     nxViteTsPaths(),
     dts({
       entryRoot: "src",
-      tsConfigFilePath: path.join(__dirname, "tsconfig.lib.json"),
-      skipDiagnostics: false,
-      formats: ["es", "cjs"],
-      filename: "index.d.ts"
+      tsconfigPath: path.join(__dirname, "tsconfig.lib.json"),
     }),
   ],
 
@@ -34,9 +31,8 @@ export default defineConfig({
     emptyOutDir: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: "src/index.ts",
+      entry: { index: "src/index.ts", experimental: "src/experimental/index.ts" },
       name: "react-components",
-      fileName: "index",
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
       formats: ["es", "cjs"],
