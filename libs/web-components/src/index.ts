@@ -21,6 +21,7 @@ export { default as Container } from "./components/container/Container.svelte";
 export { default as DatePicker } from "./components/date-picker/DatePicker.svelte";
 export { default as Details } from "./components/details/Details.svelte";
 export { default as Divider } from "./components/divider/Divider.svelte";
+export { default as Drawer } from "./components/drawer/Drawer.svelte";
 export { default as Dropdown } from "./components/dropdown/Dropdown.svelte";
 export { default as DropdownItem } from "./components/dropdown/DropdownItem.svelte";
 export { default as FileUploadCard } from "./components/file-upload-card/FileUploadCard.svelte";

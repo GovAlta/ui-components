@@ -17,6 +17,7 @@
     "paths": {
       "@abgov/angular-components": ["libs/angular-components/src/index.ts"],
       "@abgov/react-components": ["libs/react-components/src/index.ts"],
+      "@abgov/react-components/experimental": ["libs/react-components/src/experimental/index.ts"],
       "@abgov/style": ["dist/libs/web-components/index.css"],
       "@abgov/web-components": ["dist/libs/web-components/index.js"]
     }
