@@ -100,10 +100,6 @@
 
 <style>
   :host {
-    --button-height: 2.625rem; /* 42px */
-    --button-height-compact: 2rem; /* 32px */
-    --button-height-tall: 3.25rem; /* 52px */
-
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
@@ -111,17 +107,15 @@
   button {
     display: inline-flex;
     box-sizing: border-box;
-    border-radius: 0.25rem;
+    border-radius: var(--goa-button-border-radius);
     border: 2px solid var(--goa-color-interactive-default);
     box-sizing: border-box;
     cursor: pointer;
-    font-family: var(--goa-font-family-sans);
-    font-size: var(--goa-font-size-5);
-    font-weight: 400;
-    height: var(--button-height);
+    font: var(--goa-button-text);
+    height: var(--goa-button-height);
     letter-spacing: var(--goa-letter-spacing-button);
     line-height: 100%;
-    padding: 0 0.75rem;
+    padding:0 var(--goa-button-padding-lr);
     white-space: nowrap;
 
     /* for leading and trailing icon vertical alignment */
@@ -162,14 +156,14 @@
   }
 
   button.compact {
-    height: var(--button-height-compact);
+    height: var(--goa-button-height-compact);
     font-size: var(--goa-font-size-4);
-    padding-left: var(--goa-space-xs);
-    padding-right: var(--goa-space-xs);
+    padding-left: var(--goa-button-padding-lr-compact);
+    padding-right: var(--goa-button-padding-lr-compact);
   }
 
   button.start {
-    height: var(--button-height-tall);
+    height: var(--goa-button-height-start);
     font-weight: var(--goa-font-weight-bold);
   }
 
