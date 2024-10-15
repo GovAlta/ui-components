@@ -80,7 +80,7 @@ export function relay<T>(
 export function dispatch<T>(
   el: HTMLElement | Element | null | undefined,
   eventName: string,
-  detail: T,
+  detail?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
   // console.log(`DISPATCH(${eventName}):`, detail, el);
