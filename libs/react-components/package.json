@@ -29,6 +29,11 @@
       "import": "./index.mjs",
       "require": "./index.js",
       "types": "./index.d.ts"
+    },
+    "./experimental": {
+      "import": "./experimental.mjs",
+      "require": "./experimental.js",
+      "types": "./experimental/index.d.ts"
     }
   }
 }
