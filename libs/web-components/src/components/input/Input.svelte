@@ -19,6 +19,7 @@
     FormSetValueMsg,
     FormSetValueRelayDetail,
   } from "../../types/relay-types";
+  import { FormItemChannelProps } from "../form-item/FormItem.svelte";
 
   // Validators
   const [Types, validateType] = typeValidator("Input type", [
@@ -81,6 +82,8 @@
   let _debounceId: any;
   let inputEl: HTMLElement;
   let _rootEl: HTMLElement;
+  let isError = toBoolean(error);
+  let prevError = isError;
 
   // ========
   // Reactive
@@ -89,8 +92,22 @@
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
-  $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
+  $: {
+    isError = toBoolean(error);
+    if (isError !== prevError) {
+      //dispatch("errorChange", { isError });
+      _rootEl?.dispatchEvent(
+      new CustomEvent("errorChange", {
+        bubbles: true,
+        composed: true,
+        detail: { isError },
+      }),
+    );
+
+      prevError = isError;
+    }
+  }
 
   // TODO: determine if this and the next reactive statement need to be reactive, as they are both
   // things that should only be run once
@@ -107,6 +124,29 @@
   // =====
   // Hooks
   // =====
+
+  onMount(async () => {
+    await tick();
+
+    validateType(type);
+    validateAutoCapitalize(autocapitalize);
+
+    addRelayListener();
+
+    showDeprecationWarnings();
+    checkSlots();
+    sendMountedMessage();
+
+    setTimeout(() => {
+      _rootEl?.dispatchEvent(
+        new CustomEvent<FormItemChannelProps>("input:mounted", {
+          composed: true,
+          bubbles: true,
+          detail: { el: inputEl },
+        }),
+      );
+    }, 10);
+  });
 
   onMount(async () => {
     await tick();
@@ -239,6 +279,18 @@
       );
     }
   }
+
+  // function dispatch(name: string, detail: any) {
+  //   _rootEl?.dispatchEvent(
+  //     new CustomEvent(name, {
+  //       bubbles: true,
+  //       composed: true,
+  //       detail,
+  //     }),
+  //   );
+  // }
+
+
 </script>
 
 <!-- HTML -->
@@ -291,6 +343,7 @@
       role="textbox"
       aria-label={arialabel}
       aria-labelledby={arialabelledby}
+      aria-invalid={isError ? "true" : "false"}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
       on:focus={onFocus}

@@ -1,12 +1,17 @@
 <svelte:options customElement="goa-form-item" />
 
 <!-- Script -->
+<script lang="ts" context="module">
+  export type FormItemChannelProps = {
+    el: HTMLElement;
+  };
+</script>
 
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { receive, relay, typeValidator } from "../../common/utils";
+  import { receive, relay, generateRandomId, typeValidator } from "../../common/utils";
   import {
     FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
@@ -46,9 +51,13 @@
   export let error: string = "";
   export let requirement: RequirementType = "";
   export let maxwidth: string = "none";
-  export let id: string = "";
+  export let id: string = ""; // @deprecated: no longer used
 
   let _rootEl: HTMLElement;
+  let inputEl: HTMLElement;
+  let errorId = `error-${generateRandomId()}`;
+  let helpTextId = `helptext-${generateRandomId()}`;
+  let hasError = false;
 
   onMount(() => {
     validateRequirementType(requirement);
@@ -69,7 +78,57 @@
           break;
       }
     });
+    _rootEl?.addEventListener("input:mounted", handleInputMounted);
+    _rootEl?.addEventListener("errorChange", handleErrorChange);
   });
+
+  function handleInputMounted(e: Event) {
+    const ce = e as CustomEvent<FormItemChannelProps>;
+    inputEl = ce.detail.el;
+
+    // Check if aria-label is present and has a value in the child element
+    const ariaLabel = inputEl.getAttribute("aria-label");
+    if (!ariaLabel || ariaLabel.trim() === "") {
+      inputEl.setAttribute("aria-label", label);
+    }
+
+    // Set aria-required
+    inputEl.setAttribute(
+      "aria-required",
+      requirement === "required" ? "true" : "false",
+    );
+
+    updateAriaDescribedBy();
+  }
+
+  // function handleErrorChange(e: Event) {
+  //   const ce = e as CustomEvent<{isError: boolean}>;
+  //   hasError = ce.detail.isError;
+  //   updateAriaDescribedBy();
+  // }
+
+  function handleErrorChange(e: Event) {
+    const ce = e as CustomEvent<{ isError: boolean }>;
+    if (hasError !== ce.detail.isError) {
+      hasError = ce.detail.isError;
+      updateAriaDescribedBy();
+    }
+  }
+
+  function updateAriaDescribedBy() {
+    if (!inputEl) return;
+
+    let describedBy = [];
+    if (hasError || $$slots.error) describedBy.push(errorId);
+    if (helptext || $$slots.helptext) describedBy.push(helpTextId);
+
+    if (describedBy.length > 0) {
+      inputEl.setAttribute("aria-describedby", describedBy.join(" "));
+    } else {
+      //inputEl.removeAttribute("aria-describedby");
+      inputEl.setAttribute("aria-describedby", "");
+    }
+  }
 
   function onSetError(d: FieldsetErrorRelayDetail) {
     error = (d as Record<string, string>)["error"];
@@ -90,8 +149,10 @@
 
     // Check if aria-label is present and has a value in the child element
     const ariaLabel = el.getAttribute("aria-label");
+    //const ariaLabel = ce.detail.el.getAttribute("aria-label");
     if (!ariaLabel || ariaLabel.trim() === "") {
       el.setAttribute("aria-label", label);
+      //ce.detail.el.setAttribute("aria-label", label);
     }
   }
 </script>
@@ -118,7 +179,8 @@
   </div>
 
   {#if $$slots.error || error}
-    <div class="error-msg">
+    <!-- TODO: polite or assertive ?? -->
+    <div class="error-msg" id={errorId} role="alert" aria-live="assertive">
       <goa-icon type="warning" size="small" theme="filled" mt="2xs" />
       <slot name="error">
         {error}
@@ -127,7 +189,7 @@
   {/if}
 
   {#if $$slots.helptext || helptext}
-    <div class="help-msg">
+    <div class="help-msg" id={helpTextId}>
       <slot name="helptext">
         {helptext}
       </slot>

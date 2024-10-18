@@ -2,11 +2,25 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { dispatch, pluralize, receive, relay, toBoolean } from "../../common/utils";
+  import {
+    dispatch,
+    pluralize,
+    receive,
+    relay,
+    toBoolean,
+  } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { onMount } from "svelte";
-  import { FieldsetResetErrorsMsg, FieldsetSetErrorMsg, FormFieldMountMsg, FormFieldMountRelayDetail, FormSetValueMsg, FormSetValueRelayDetail } from "../../types/relay-types";
+  import { onMount, tick } from "svelte";
+  import {
+    FieldsetResetErrorsMsg,
+    FieldsetSetErrorMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+    FormSetValueMsg,
+    FormSetValueRelayDetail,
+  } from "../../types/relay-types";
+  import { FormItemChannelProps } from "../form-item/FormItem.svelte";
 
   export let name: string;
   export let value: string = "";
@@ -27,9 +41,26 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  let isError = toBoolean(error);
+  let prevError = isError;
+
   // reactive
 
-  $: isError = toBoolean(error);
+  $: {
+    isError = toBoolean(error);
+    if (isError !== prevError) {
+      //dispatch("errorChange", { isError });
+      _rootEl?.dispatchEvent(
+        new CustomEvent("errorChange", {
+          bubbles: true,
+          composed: true,
+          detail: { isError },
+        }),
+      );
+
+      prevError = isError;
+    }
+  }
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
   $: count =
@@ -40,16 +71,27 @@
   // privates
 
   let _textareaEl: HTMLTextAreaElement;
+  let _rootEl: HTMLElement;
 
   // Hooks
 
-  onMount(() => {
+  onMount(async () => {
     addRelayListener();
     sendMountedMessage();
-  })
+
+    await tick();
+
+    _rootEl?.dispatchEvent(
+      new CustomEvent<FormItemChannelProps>("input:mounted", {
+        composed: true,
+        bubbles: true,
+        detail: { el: _textareaEl },
+      }),
+    );
+  });
 
   // functions
-  
+
   function addRelayListener() {
     receive(_textareaEl, (action, data) => {
       switch (action) {
@@ -75,7 +117,7 @@
     relay<FormFieldMountRelayDetail>(
       _textareaEl,
       FormFieldMountMsg,
-      { name, el: _textareaEl},
+      { name, el: _textareaEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -109,6 +151,16 @@
       }),
     );
   }
+
+  // function dispatch(name: string, detail: any) {
+  //   _rootEl?.dispatchEvent(
+  //     new CustomEvent(name, {
+  //       bubbles: true,
+  //       composed: true,
+  //       detail,
+  //     }),
+  //   );
+  // }
 </script>
 
 <!-- HTML -->
@@ -123,6 +175,7 @@
       --width: ${width};
       --char-count-padding: ${countby ? "2rem" : "0"};
     `}
+    bind:this={_rootEl}
   >
     <textarea
       bind:this={_textareaEl}
@@ -130,6 +183,7 @@
       {placeholder}
       {rows}
       aria-label={arialabel || name}
+      aria-invalid={isError ? "true" : "false"}
       disabled={isDisabled}
       readonly={isReadonly}
       data-testid={testid}
