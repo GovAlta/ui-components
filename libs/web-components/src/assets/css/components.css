@@ -56,10 +56,10 @@ goa-table[variant="relaxed"] td {
 
 goa-table thead th {
   background-color: var(--goa-color-greyscale-white);
-  color: var(--goa-color-text-secondary);
+  color: var(--goa-table-color-heading);
   padding: var(--goa-space-s) var(--goa-table-header-padding, var(--goa-space-m)) var(--goa-space-xs) var(--goa-table-header-padding, var(--goa-space-m));
   text-align: left;
-  border-bottom: 2px solid var(--goa-color-greyscale-600);
+  border-bottom: 2px solid var(--goa-table-color-border-heading);
   vertical-align: bottom;
   }
 
