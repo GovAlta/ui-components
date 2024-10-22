@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Margins } from "../../common/styling";
 
 export type GoAHeadingSize = "small" | "medium";
+export type GoAIconPosition = "left" | "right";
 
 interface WCProps extends Margins {
   open?: boolean;
@@ -11,6 +12,7 @@ interface WCProps extends Margins {
   headingContent?: ReactNode;
   maxwidth?: string;
   testid?: string;
+  iconposition?: GoAIconPosition;
 }
 
 declare global {
@@ -30,6 +32,7 @@ export interface GoAAccordionProps extends Margins {
   headingContent?: ReactNode;
   maxWidth?: string;
   testid?: string;
+  iconPosition?: GoAIconPosition;
   children: ReactNode;
 }
 
@@ -39,6 +42,7 @@ export function GoAAccordion({
   headingSize,
   secondaryText,
   headingContent,
+  iconPosition,
   maxWidth,
   testid,
   children,
@@ -53,6 +57,7 @@ export function GoAAccordion({
       headingSize={headingSize}
       heading={heading}
       secondaryText={secondaryText}
+      iconposition={iconPosition}
       maxwidth={maxWidth}
       testid={testid}
       mt={mt}
