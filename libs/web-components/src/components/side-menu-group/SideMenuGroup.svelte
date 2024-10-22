@@ -11,9 +11,16 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { getSlottedChildren } from "../../common/utils";
+  import type { GoAIconType } from "../icon/Icon.svelte";
+  import { calculateMargin, Spacing } from "../../common/styling";
 
   export let heading: string;
+  export let icon: GoAIconType | null = null;
   export let testid: string = "";
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
 
   let _open = false;
   let _current = false;
@@ -112,14 +119,29 @@
   }
 </script>
 
-<div bind:this={_rootEl} class="side-menu-group" class:current={_current} data-testid={testid}>
-  <a href={`#${_slug}`} class="heading" on:click={handleClick}>
-    {heading}
-    {#if _open}
-      <goa-icon type="chevron-down" />
-    {:else}
-      <goa-icon type="chevron-forward" />
+<div bind:this={_rootEl}
+     class="side-menu-group"
+     class:current={_current}
+     data-testid={testid}
+     style={`
+    ${calculateMargin(mt, mr, mb, ml)};
+  `}
+>
+  <a href={`#${_slug}`} class="heading" class:open={_open} on:click={handleClick}>
+    {#if icon}
+      <div class="leading-icon">
+        <goa-icon type={icon} />
+      </div>
     {/if}
+    {heading}
+    <div class="trailing-icon">
+      {#if _open}
+        <goa-icon type="chevron-down"/>
+      {:else}
+        <goa-icon type="chevron-forward"/>
+      {/if}
+    </div>
+
   </a>
   <div class:hidden={!_open} class="group" data-testid="group">
     <slot />
@@ -135,23 +157,26 @@
     display: block;
     font: var(--goa-typography-body-m);
     margin-left: 1rem;
+    background-color: var(--goa-side-menu-group-color-bg);
   }
 
   :global(::slotted(a)),
   :global(::slotted(a:visited)) {
     padding: 0.5rem 1rem;
     text-decoration: none;
-    border-left: 4px solid var(--goa-color-greyscale-100);
+    border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);
   }
 
   :global(::slotted(a.current)) {
     font: var(--goa-typography-heading-s);
-    border-left: 4px solid var(--goa-color-interactive-disabled);
-    background: var(--goa-color-info-background);
+    border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-interactive-disabled);
+    background: var(--goa-side-menu-child-color-bg-selected);
+    /* required to override base styles & above :global(::slotted(a) !important */
+    color: var(--goa-side-menu-child-color-text-selected)!important;
   }
 
   :global(::slotted(a:hover:not(.current))) {
-    background: var(--goa-color-info-background);
+    background: var(--goa-side-menu-child-color-bg-hover);
     border-color: var(--goa-color-greyscale-200);
   }
 
@@ -171,13 +196,17 @@
     align-items: center;
     justify-content: space-between;
     line-height: 2rem;
-    padding: 0.5rem 1rem 0.5rem 2rem;
+    padding: var(--goa-side-menu-parent-padding);
     text-decoration: none;
+    font: var(--goa-side-menu-parent-text);
+  }
+  .heading.open {
+    font: var(--goa-side-menu-parent-text-active);
   }
 
   :host([child="true"]) a.heading {
     margin-left: 1rem;
-    border-left: 4px solid var(--goa-color-greyscale-100);
+    border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);
     padding: 0.5rem 1rem 0.5rem 1rem;
   }
 
@@ -188,15 +217,21 @@
 
   :host([child="true"]) .side-menu-group.current a.heading {
     background: var(--goa-color-info-background);
-    border-left: 4px solid var(--goa-color-interactive-disabled);
+    border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-interactive-disabled);
+  }
+
+  .side-menu-group {
+    background-color: var(--goa-side-menu-group-color-bg);
+    border-radius: var(--goa-side-menu-group-border-radius);
+    padding: var(--goa-side-menu-group-padding);
   }
 
   .side-menu-group.current .heading {
-    background: #cedfee;
+    background: var(--goa-side-menu-parent-color-bg-hover);
   }
 
   .heading:hover {
-    background: #cedfee;
+    background: var(--goa-side-menu-parent-color-bg-hover);
   }
 
   .hidden {
@@ -204,6 +239,15 @@
   }
 
   .group {
-    padding-left: 1rem;
+    padding: var(--goa-side-menu-sub-group-padding);
+  }
+
+  .trailing-icon {
+    margin-left: auto;
+    height: var(--goa-icon-size-l); /* to make sure the icon vertical center */
+  }
+  .leading-icon {
+    margin-right: var(--goa-space-xs);
+    height: var(--goa-icon-size-l); /* to make sure the icon vertical center */
   }
 </style>
