@@ -26,6 +26,7 @@ export { default as Dropdown } from "./components/dropdown/Dropdown.svelte";
 export { default as DropdownItem } from "./components/dropdown/DropdownItem.svelte";
 export { default as FileUploadCard } from "./components/file-upload-card/FileUploadCard.svelte";
 export { default as FileUploadInput } from "./components/file-upload-input/FileUploadInput.svelte";
+export { default as FilterChip } from "./components/filter-chip/FilterChip.svelte";
 export { default as FocusTrap } from "./components/focus-trap/FocusTrap.svelte";
 export { default as Footer } from "./components/footer/Footer.svelte";
 export { default as FooterMetaSection } from "./components/footer-meta-section/FooterMetaSection.svelte";
