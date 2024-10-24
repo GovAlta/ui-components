@@ -2,11 +2,28 @@
 
 <script lang="ts">
   import type { Spacing } from "../../common/styling";
-  import { typeValidator, toBoolean, dispatch, receive, relay } from "../../common/utils";
+  import {
+    typeValidator,
+    toBoolean,
+    dispatch,
+    receive,
+    relay,
+  } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import { onMount } from "svelte";
-  import { GoARadioItemProps, RadioItemSelectProps } from "../radio-item/RadioItem.svelte";
-  import { FormSetValueMsg, FormSetValueRelayDetail, FieldsetSetErrorMsg, FieldsetResetErrorsMsg, FormFieldMountRelayDetail, FormFieldMountMsg } from "../../types/relay-types";
+  import { onMount, tick } from "svelte";
+  import {
+    GoARadioItemProps,
+    RadioItemSelectProps,
+  } from "../radio-item/RadioItem.svelte";
+  import {
+    FormSetValueMsg,
+    FormSetValueRelayDetail,
+    FieldsetSetErrorMsg,
+    FieldsetResetErrorsMsg,
+    FormFieldMountRelayDetail,
+    FormFieldMountMsg,
+  } from "../../types/relay-types";
+  import { FormItemChannelProps } from "../form-item/FormItem.svelte";
 
   // Validator
   const [Orientations, validateOrientation] = typeValidator(
@@ -32,7 +49,8 @@
   export let ml: Spacing = null;
 
   // Private
-  let isError: boolean;
+  let isError = toBoolean(error);
+  let prevError = isError;
 
   // Reactive
 
@@ -43,6 +61,17 @@
 
   $: {
     isError = toBoolean(error);
+    if (isError !== prevError) {
+      //dispatch("errorChange", { isError });
+      _rootEl?.dispatchEvent(
+        new CustomEvent("errorChange", {
+          bubbles: true,
+          composed: true,
+          detail: { isError },
+        }),
+      );
+      prevError = isError;
+    }
     bindOptions();
   }
 
@@ -63,6 +92,16 @@
     _rootEl.addEventListener("_radioItemChange", (e: Event) => {
       onChange((e as CustomEvent).detail);
     });
+
+    await tick();
+
+    _rootEl?.dispatchEvent(
+      new CustomEvent<FormItemChannelProps>("input:mounted", {
+        composed: true,
+        bubbles: true,
+        detail: { el: _rootEl },
+      }),
+    );
   });
 
   // Functions
@@ -92,7 +131,7 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _rootEl},
+      { name, el: _rootEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -160,6 +199,25 @@
       );
     });
   }
+
+  // function dispatch(name: string, detail: any) {
+  //   _rootEl?.dispatchEvent(
+  //     new CustomEvent(name, {
+  //       bubbles: true,
+  //       composed: true,
+  //       detail,
+  //     }),
+  //   );
+  // }
+  function onFocus(e: Event) {
+    // Dispatch event for screen reader to announce
+    _rootEl.dispatchEvent(
+      new CustomEvent("announce-helper-text", {
+        composed: true,
+        bubbles: true,
+      }),
+    );
+  }
 </script>
 
 <!-- Html -->
@@ -170,6 +228,9 @@
   data-testid={testid}
   role="radiogroup"
   aria-label={arialabel}
+  aria-invalid={isError ? "true" : "false"}
+  tabindex="0"
+  on:focusin={onFocus}
 >
   <slot />
 </div>
@@ -179,6 +240,7 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
+
   .goa-radio-group--horizontal {
     display: flex;
     flex-direction: row;
@@ -187,4 +249,23 @@
   .goa-radio-group--vertical {
     display: inline-block;
   }
+
+  /* Focus styles */
+  .goa-radio-group--horizontal:focus,
+  .goa-radio-group--vertical:focus {
+    /* outline: 2px solid transparent; */
+    outline: none;
+  }
+
+  /* Show focus indicator only for keyboard navigation */
+  /* .goa-radio-group--horizontal:focus-visible,
+  .goa-radio-group--vertical:focus-visible {
+    outline: 2px solid var(--goa-color-interactive-focus);
+    outline-offset: 2px;
+  } */
+
+  /* .goa-radio-group--horizontal:focus:not(:focus-visible),
+  .goa-radio-group--vertical:focus:not(:focus-visible) {
+    outline: none;
+  } */
 </style>

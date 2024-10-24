@@ -1,12 +1,22 @@
 <svelte:options customElement="goa-form-item" />
 
 <!-- Script -->
+<script lang="ts" context="module">
+  export type FormItemChannelProps = {
+    el: HTMLElement;
+  };
+</script>
 
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { receive, relay, typeValidator } from "../../common/utils";
+  import {
+    receive,
+    relay,
+    generateRandomId,
+    typeValidator,
+  } from "../../common/utils";
   import {
     FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
@@ -46,9 +56,14 @@
   export let error: string = "";
   export let requirement: RequirementType = "";
   export let maxwidth: string = "none";
-  export let id: string = "";
+  export let id: string = ""; // @deprecated: no longer used
 
   let _rootEl: HTMLElement;
+  let inputEl: HTMLElement;
+  let errorId = `error-${generateRandomId()}`;
+  let helpTextId = `helptext-${generateRandomId()}`;
+  let hasError = false;
+  let announcer: HTMLElement;
 
   onMount(() => {
     validateRequirementType(requirement);
@@ -69,7 +84,76 @@
           break;
       }
     });
+    _rootEl?.addEventListener("input:mounted", handleInputMounted);
+    _rootEl?.addEventListener("errorChange", handleErrorChange);
+    _rootEl?.addEventListener("announce-helper-text", handleAnnounceHelperText);
   });
+
+  function handleInputMounted(e: Event) {
+    const ce = e as CustomEvent<FormItemChannelProps>;
+    inputEl = ce.detail.el;
+
+    // Check if aria-label is present and has a value in the child element
+    const ariaLabel = inputEl.getAttribute("aria-label");
+    if (!ariaLabel || ariaLabel.trim() === "") {
+      inputEl.setAttribute("aria-label", label);
+    }
+
+    // Set aria-required
+    inputEl.setAttribute(
+      "aria-required",
+      requirement === "required" ? "true" : "false",
+    );
+
+    updateAriaDescribedBy();
+  }
+
+  function handleErrorChange(e: Event) {
+    const ce = e as CustomEvent<{ isError: boolean }>;
+    if (hasError !== ce.detail.isError) {
+      hasError = ce.detail.isError;
+      updateAriaDescribedBy();
+    }
+  }
+
+  function handleAnnounceHelperText() {
+    if (hasError) {
+      announceOnFocus(helptext);
+      announceOnFocus(error);
+    } else if (helptext) {
+      announceOnFocus(helptext);
+    }
+  }
+
+  function announceOnFocus(text: string) {
+    const announcer = document.createElement("div");
+    announcer.className = "sr-only";
+    announcer.setAttribute("aria-live", "polite");
+    announcer.setAttribute("aria-atomic", "true");
+    document.body.appendChild(announcer);
+
+    setTimeout(() => {
+      announcer.textContent = text;
+    }, 100);
+
+    setTimeout(() => {
+      document.body.removeChild(announcer);
+    }, 3000);
+  }
+
+  function updateAriaDescribedBy() {
+    if (!inputEl) return;
+
+    let describedBy = [];
+    if (hasError || $$slots.error) describedBy.push(errorId);
+    if (helptext || $$slots.helptext) describedBy.push(helpTextId);
+
+    if (describedBy.length > 0) {
+      inputEl.setAttribute("aria-describedby", describedBy.join(" "));
+    } else {
+      inputEl.setAttribute("aria-describedby", "");
+    }
+  }
 
   function onSetError(d: FieldsetErrorRelayDetail) {
     error = (d as Record<string, string>)["error"];
@@ -106,6 +190,7 @@
   bind:this={_rootEl}
 >
   {#if label}
+    <!-- svelte-ignore a11y-label-has-associated-control -->
     <label class={`label ${labelsize}`}>
       {label}
       {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
@@ -118,7 +203,8 @@
   </div>
 
   {#if $$slots.error || error}
-    <div class="error-msg">
+    <!-- TODO: polite or assertive ?? -->
+    <div class="error-msg" id={errorId} role="alert" aria-live="assertive">
       <goa-icon type="warning" size="small" theme="filled" mt="2xs" />
       <slot name="error">
         {error}
@@ -127,7 +213,7 @@
   {/if}
 
   {#if $$slots.helptext || helptext}
-    <div class="help-msg">
+    <div class="help-msg" id={helpTextId}>
       <slot name="helptext">
         {helptext}
       </slot>
@@ -183,5 +269,17 @@
 
   .error-msg + .help-msg {
     margin-top: var(--goa-space-xs);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 </style>

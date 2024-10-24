@@ -1,6 +1,7 @@
 import { fireEvent, render, waitFor } from "@testing-library/svelte";
 import GoATextArea from "./TextArea.svelte";
 import { describe, it, expect, vi } from "vitest";
+import { FormItemChannelProps } from "../form-item/FormItem.svelte";
 
 describe("GoATextArea", () => {
   it("should render", async () => {
@@ -249,5 +250,30 @@ describe("GoATextArea", () => {
       expect(el).toHaveStyle("margin-bottom:var(--goa-space-l)");
       expect(el).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
+  });
+
+  it("should dispatch input:mounted event", async () => {
+    const onInputMounted = vi.fn();
+    const { container } = render(GoATextArea, {
+      name: "txtArea123",
+    });
+
+    const rootEl = container.querySelector(".root");
+    //expect(rootEl).not.toBeNull();
+    rootEl?.addEventListener("input:mounted", (e: Event) => {
+      onInputMounted(e);
+    });
+
+    await waitFor(() => {
+      expect(onInputMounted).toHaveBeenCalledTimes(1);
+    });
+
+    // Additional checks (may not be needed)
+    const call = onInputMounted.mock
+      .calls[0][0] as CustomEvent<FormItemChannelProps>;
+    expect(call).toBeInstanceOf(CustomEvent);
+    expect(call.detail).toHaveProperty("el");
+    expect(call.detail.el).toBeInstanceOf(HTMLTextAreaElement);
+    expect(call.detail.el.getAttribute("name")).toBe("txtArea123");
   });
 });

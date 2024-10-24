@@ -2,12 +2,26 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
-  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
-  import { FormSetValueMsg, FormSetValueRelayDetail, FieldsetSetErrorMsg, FieldsetResetErrorsMsg, FormFieldMountRelayDetail, FormFieldMountMsg } from "../../types/relay-types";
+  import {
+    dispatch,
+    fromBoolean,
+    receive,
+    relay,
+    toBoolean,
+  } from "../../common/utils";
+  import {
+    FormSetValueMsg,
+    FormSetValueRelayDetail,
+    FieldsetSetErrorMsg,
+    FieldsetResetErrorsMsg,
+    FormFieldMountRelayDetail,
+    FormFieldMountMsg,
+  } from "../../types/relay-types";
+  import { FormItemChannelProps } from "../form-item/FormItem.svelte";
   // Required
   export let name: string;
 
@@ -32,14 +46,41 @@
   let _value: string;
   let _checkboxRef: HTMLElement;
   let _descriptionId: string;
+  let _rootEl: HTMLElement;
+  let isError = toBoolean(error);
+  let prevError = isError;
 
   // Binding
   $: isDisabled = toBoolean(disabled);
-  $: isError = toBoolean(error);
+  $: {
+    isError = toBoolean(error);
+    if (isError !== prevError) {
+      //dispatch("errorChange", { isError });
+      //TODO: use disaptch from the utils
+      _rootEl?.dispatchEvent(
+        new CustomEvent("errorChange", {
+          bubbles: true,
+          composed: true,
+          detail: { isError },
+        }),
+      );
+      prevError = isError;
+    }
+  }
   $: isChecked = toBoolean(checked);
   $: isIndeterminate = false; // Design review. To be built with TreeView Later
 
-  onMount(() => {
+  onMount(async () => {
+    await tick();
+
+    _rootEl?.dispatchEvent(
+      new CustomEvent<FormItemChannelProps>("input:mounted", {
+        composed: true,
+        bubbles: true,
+        detail: { el: _checkboxRef },
+      }),
+    );
+
     // hold on to the initial value to prevent losing it on check changes
     _value = value;
     _descriptionId = `description_${name}`;
@@ -47,7 +88,7 @@
     addRelayListener();
     sendMountedMessage();
   });
-  
+
   function addRelayListener() {
     receive(_checkboxRef, (action, data) => {
       switch (action) {
@@ -74,7 +115,7 @@
     relay<FormFieldMountRelayDetail>(
       _checkboxRef,
       FormFieldMountMsg,
-      { name, el: _checkboxRef},
+      { name, el: _checkboxRef },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -98,11 +139,41 @@
       }),
     );
   }
+
+  // function dispatchFn(name: string, detail: any) {
+  //   _rootEl?.dispatchEvent(
+  //     new CustomEvent(name, {
+  //       bubbles: true,
+  //       composed: true,
+  //       detail,
+  //     }),
+  //   );
+  // }
+
+  function onFocus() {
+    _rootEl?.dispatchEvent(
+      new CustomEvent("announce-helper-text", {
+        composed: true,
+        bubbles: true,
+      }),
+    );
+  }
+
+  // function onBlur() {
+  //   _rootEl?.dispatchEvent(
+  //     new CustomEvent("_blur", {
+  //       composed: true,
+  //       bubbles: true,
+  //       detail: { name },
+  //     }),
+  //   );
+  // }
 </script>
 
 <!-- View -->
 
 <div
+  bind:this={_rootEl}
   class="root"
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
@@ -115,10 +186,7 @@
     class:disabled={isDisabled}
     class:error={isError}
   >
-    <div
-      class="container"
-      class:selected={isChecked}
-    >
+    <div class="container" class:selected={isChecked}>
       <input
         bind:this={_checkboxRef}
         id={name}
@@ -129,7 +197,9 @@
         value={`${value}`}
         aria-label={arialabel || text || name}
         aria-describedby={description ? _descriptionId : null}
+        aria-invalid={isError ? "true" : "false"}
         on:change={onChange}
+        on:focus={onFocus}
       />
       {#if isIndeterminate}
         <svg
@@ -159,7 +229,7 @@
   </label>
   {#if $$slots.description || description}
     <div class="description" id={_descriptionId} data-testid="description">
-      <slot name="description"/>
+      <slot name="description" />
       {description}
     </div>
   {/if}
@@ -208,7 +278,6 @@
     margin-top: var(--goa-space-2xs);
   }
 
-
   /* Container */
   .container {
     box-sizing: border-box;
@@ -224,21 +293,41 @@
     /* prevent squishing of checkbox */
     flex: 0 0 auto;
   }
+
+  /*
   .container:hover {
-    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    box-shadow: 0 0 0 var(--goa-border-width-m)
+    var(--goa-color-interactive-hover);
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
   }
+  .container:focus-visible,
+  .container:active {
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
+    outline: none;
+  }
+  .container:focus-within:has(:focus-visible) {
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+  }
+  */
+
+  .container:hover {
+    box-shadow: inset 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-hover);
+  }
+
   .container svg {
     fill: var(--goa-color-greyscale-white);
     margin: 3px;
   }
+
   .container.selected {
     background-color: var(--goa-color-interactive-default);
     border: none;
   }
+
   .container.selected:hover {
     background-color: var(--goa-color-interactive-hover);
   }
-
 
   /* Error Container */
   .error .container,
@@ -277,4 +366,17 @@
     border: var(--goa-border-width-s) solid var(--goa-color-interactive-error);
     box-shadow: inset 0 0 0 1px var(--goa-color-interactive-error);
   }
+
+  /* Focus styles */
+  /* input[type="checkbox"]:focus-visible + .container,
+  input[type="checkbox"]:focus-visible + .container.selected {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+  } */
+
+  /* Remove outline when not keyboard focusing */
+  /* input[type="checkbox"]:focus:not(:focus-visible) + .container {
+    outline: none;
+    box-shadow: none;
+  } */
 </style>
