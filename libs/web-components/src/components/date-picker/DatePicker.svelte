@@ -21,6 +21,13 @@
     value: Date | null;
   };
 
+  type InputDate = {
+    day: number;
+    month: number;
+    year: number;
+  }
+
+  export let type: "calendar" | "input"  = "calendar";
   export let name: string = "";
   export let value: string = "";
   export let error: string = "false";
@@ -39,8 +46,9 @@
   // re-initializes the date if the value is changed externally
   // $: formatDate(value);
 
+  let _error: boolean = toBoolean(error);
   let _oldValue: Date | null;
-  let _rootEl: Element;
+  let _rootEl: HTMLElement;
   let _date: Date | null;
   let _showPopover: boolean = false;
 
@@ -64,7 +72,8 @@
       initDate();
     }
   });
-  
+
+  // Listen for relayed messages
   function addRelayListener() {
     receive(_rootEl, (action, data) => {
       switch (action) {
@@ -82,10 +91,12 @@
   }
 
   function onSetValue(detail: FormSetValueRelayDetail) {
+    // @ts-expect-error 
     value = detail.value;
     dispatch(_rootEl, "_change", { name, value: detail.value }, { bubbles: true });
   }
 
+  // Notify the Form that this component has been mounted
   function sendMountedMessage() {
     relay<FormFieldMountRelayDetail>(
       _rootEl,
@@ -203,38 +214,96 @@
     e.preventDefault();
     e.stopPropagation();
   }
+
+  let inputDate: InputDate = { day: -1, month: -1, year: -1};
+
+  function onInputChange(e: Event) {
+    e.stopPropagation();    
+
+    const { name, value } = (e as CustomEvent<{name: string, value: string}>).detail;
+    const num = parseInt(value);
+    if (name === "day") {
+      inputDate.day = num;
+    } else if (name === "month") {
+      inputDate.month = num;
+    } else if (name === "year") {
+      inputDate.year = num;
+    }
+
+    // TODO: add better validation
+    if (inputDate.day < 0 && inputDate.month < 0 && inputDate.year < 1000) {
+      error = "Invalid date"
+      return;
+    }
+
+    const date = new Date(inputDate.year, inputDate.month, inputDate.day);
+    dispatch(_rootEl, "_change", {
+      name,
+      type: "date",
+      value: date,
+    }, { bubbles: true })
+  }
+  
 </script>
 
-<goa-popover
-  bind:this={_rootEl}
-  tabindex="-1"
-  {testid}
-  {relative}
-  {mt}
-  {mb}
-  {ml}
-  {mr}
-  disabled={isDisabled}
-  open={_showPopover}
-  on:_close={() => dispatchValue(_date)}
->
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <goa-input
-    slot="target"
-    readonly="true"
-    trailingicon="calendar"
-    value={formatDate(_date)}
-    {error}
-    on:click={showCalendar}
-    on:keydown={handleKeyDown}
+{#if type === "calendar"}
+  <goa-popover
+    bind:this={_rootEl}
+    tabindex="-1"
+    {testid}
+    {relative}
+    {mt}
+    {mb}
+    {ml}
+    {mr}
     disabled={isDisabled}
-  />
-  <goa-calendar
-    {name}
-    {value}
-    {min}
-    {max}
-    bordered="false"
-    on:_change={onCalendarChange}
-  />
-</goa-popover>
+    open={_showPopover}
+    on:_close={() => dispatchValue(_date)}
+  >
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <goa-input
+      slot="target"
+      readonly="true"
+      trailingicon="calendar"
+      value={formatDate(_date)}
+      {error}
+      on:click={showCalendar}
+      on:keydown={handleKeyDown}
+      disabled={isDisabled}
+    />
+    <goa-calendar
+      {name}
+      {value}
+      {min}
+      {max}
+      bordered="false"
+      on:_change={onCalendarChange}
+    />
+  </goa-popover>
+
+{:else if type === "input"}
+  <goa-block direction="row">
+    <goa-form-item label="Day" helptext="Day" error={_error && error}> 
+      <goa-input name="day" on:_change={onInputChange} width="6ch" {_error} />
+    </goa-form-item>
+    <goa-form-item label="Month" helptext="Month" error={_error && error}>
+      <goa-dropdown name="month" on:_change={onInputChange} width="20ch" {error}>
+        <goa-dropdown-item value="0" label="January" />
+        <goa-dropdown-item value="1" label="February" />
+        <goa-dropdown-item value="2" label="March" />
+        <goa-dropdown-item value="3" label="April" />
+        <goa-dropdown-item value="4" label="May" />
+        <goa-dropdown-item value="5" label="June" />
+        <goa-dropdown-item value="6" label="July" />
+        <goa-dropdown-item value="7" label="August" />
+        <goa-dropdown-item value="8" label="September" />
+        <goa-dropdown-item value="9" label="October" />
+        <goa-dropdown-item value="10" label="November" />
+        <goa-dropdown-item value="11" label="December" />
+      </goa-dropdown>
+    </goa-form-item>
+    <goa-form-item label="Year" helptext="Year (YYYY)" error={_error && error}>
+      <goa-input name="year" on:_change={onInputChange} width="10ch" {error} />
+    </goa-form-item>
+  </goa-block>
+{/if}

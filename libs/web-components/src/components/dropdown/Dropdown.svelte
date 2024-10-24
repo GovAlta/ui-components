@@ -108,6 +108,9 @@
     addRelayListener();
     sendMountedMessage();
 
+    // prevent popping of dropdown when a width is hardcoded
+    _width = width || "12ch";
+
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);

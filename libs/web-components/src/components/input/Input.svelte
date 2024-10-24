@@ -144,6 +144,7 @@
   }
 
   function onSetValue(detail: FormSetValueRelayDetail) {
+    // @ts-expect-error
     value = detail.value;
     dispatch(inputEl, "_change", { name, value: detail.value }, { bubbles: true });
   }

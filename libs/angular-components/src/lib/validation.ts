@@ -135,10 +135,11 @@ export function emailValidator(msg?: string): FieldValidator {
   return regexValidator(regex, msg || "Invalid email address");
 }
 
+// SIN# Generator: https://singen.ca
 export function SINValidator(): FieldValidator {
   return (value: unknown) => {
     if (!value) return "";
-    const checkValue = "121121121".split("").map((c) => parseInt(c));
+    const checkValue = "121212121".split("").map((c) => parseInt(c));
     const valueStr = (value as string).replace(/\D/g, "");
 
     if (valueStr.length !== 9) return "SIN must contain 9 numbers";
@@ -154,7 +155,7 @@ export function SINValidator(): FieldValidator {
         return `${val}`
           .split("")
           .map((c) => parseInt(c))
-          .reduce((acc, val) => acc * val, 1);
+          .reduce((acc, val) => acc + val, 0);
       })
       .reduce((acc, val) => acc + val, 0);
 

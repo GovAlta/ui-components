@@ -1,0 +1,330 @@
+<goa-public-form
+  name="fsos"
+  (_complete)="showConfirmation($event)"
+  (_bind)="saveFormRef($event)"
+  (_stateChange)="updateState($event)"
+  storage="local"
+>
+  <goa-fieldset
+    id="name"
+    heading="What is your legal name?"
+    first
+    (_continue)="onPageChange($event, 'name')"
+    dispatch-on="change"
+  >
+    <goa-form-item id="firstname" label="First name">
+      <goa-input name="firstname" />
+    </goa-form-item>
+    <goa-form-item id="middlename" label="Middle name" requirement="optional">
+      <goa-input name="middlename" />
+    </goa-form-item>
+    <goa-form-item id="lastname" label="Last name" helptext='This is your "Family" or "Surname"'>
+      <goa-input name="lastname" />
+    </goa-form-item>
+
+  </goa-fieldset>
+
+  <goa-fieldset
+    id="other-names"
+    (_continue)="onPageChange($event, 'other-names')"
+  >
+    <goa-form-item
+      id="other-names"
+      label="Are you known by any other name(s)?"
+      labelSize="large"
+      requirement="optional"
+    >
+      <goa-form-item
+        id="preferred-name"
+        label="Preferred name"
+        helptext="A name you choose to be called, which may differ from your legal name. It reflects a personal choice of how you wish to be addressed."
+      >
+        <goa-input name="preferred-name" />
+      </goa-form-item>
+
+      <goa-form-item
+        id="alias-name"
+        label="Alias name"
+        helptext="An alternate name you use, often for privacy or professional reasons."
+      >
+        <goa-input name="alias-name" />
+      </goa-form-item>
+
+      <goa-form-item
+        id="nick-name"
+        label="Nick name"
+        helptext="Informal name used among aquaintances"
+      >
+        <goa-input name="nick-name" />
+      </goa-form-item>
+
+      <goa-form-item
+        id="previous-name"
+        label="Previous name"
+        helptext="A previous married name of maiden name"
+      >
+        <goa-input name="previous-name" />
+      </goa-form-item>
+    </goa-form-item>
+
+    <goa-text size="body-l" mt="l">Select all that apply. Leave it blank if none is applicable.</goa-text>
+
+    <goa-details heading="Why do we ask for this information?">
+      Providing your other names helps improve communication and simplifies the verification process.
+    </goa-details>
+  </goa-fieldset>
+
+  
+  <goa-fieldset
+    id="gender"
+    (_continue)="onPageChange($event, 'gender')"
+  >
+    <goa-form-item
+      id="gender"
+      label="What is your gender??"
+      labelsize="large"
+    >
+      <goa-radio-group name="gender">
+        <goa-radio-item value="Female" label="Female" />
+        <goa-radio-item value="Male" label="Male" />
+        <goa-radio-item value="X (another gender)" label="X (another gender)" />
+      </goa-radio-group>
+    </goa-form-item>
+
+    <goa-details heading="Why do we ask for this information?">
+      We use this information for federal reporting and program administration.
+    </goa-details>
+  </goa-fieldset>
+
+  
+  <goa-fieldset
+    id="birthdate"
+    (_continue)="onPageChange($event, 'birthdate')"
+  >
+    <goa-form-item
+      id="birthdate"
+      label="What is your date of birth?"
+      labelsize="large"
+    >
+      <goa-date-picker name="birthdate" />
+    </goa-form-item>
+
+    <goa-details heading="Why do we ask for this information?" mt="l">
+      We require this information to authenticate you in the event you lose your account PIN.
+    </goa-details>
+  </goa-fieldset>
+
+
+  <goa-fieldset
+    id="first-nation"
+    (_continue)="onPageChange($event, 'first-nation')"
+  >
+    <goa-form-item
+      id="first-nation"
+      label="Do you have First Nation status"
+      labelsize="large"
+    >
+      <goa-radio-group name="first-nation">
+        <goa-radio-item value="Yes" label="Yes" />
+        <goa-radio-item value="No" label="No" />
+      </goa-radio-group>
+    </goa-form-item>
+
+    <goa-details heading="Why do we ask for this information?">
+      We require this information to verify document details provided during registration.
+    </goa-details>
+  </goa-fieldset>
+
+  <goa-fieldset
+    id="first-nation-status-number"
+    (_continue)="onPageChange($event, 'first-nation-status-number')"
+    heading="First Nation status number"
+  >
+    <goa-form-item
+      id="first-nation-status-number"
+      label="What is your Certificate of Indian Status Number?"
+      helptext="Your registration number is up to 10 digits and is composed of your band, family, and position number. You can find your card number on your Certificate of Indian Status (CIS) card."
+    >
+      <goa-input name="first-nation-status-number" />
+    </goa-form-item>
+  </goa-fieldset>
+
+  <goa-fieldset
+    id="sin"
+    (_continue)="onPageChange($event, 'sin')"
+  >
+    <goa-form-item
+      id="sin"
+      label="What is your SIN?"
+      labelsize="large"
+      helptext="9-digit number. Find your SIN on income tax returns, tax slips, or employment records."
+    >
+      <goa-input name="sin" />
+    </goa-form-item>
+
+    <goa-details heading="Why do we ask for this information?" mt="l">
+      We require this information to authenticate you in the event you lose your account PIN.
+    </goa-details>
+  </goa-fieldset>
+
+
+  <goa-fieldset
+    id="healthcare-number"
+    (_continue)="onPageChange($event)"
+  >
+    <goa-form-item
+      id="healthcare-number"
+      label="What is your Alberta Personal Health Number?"
+      labelsize="large"
+      helptext="9-digit number, such as 12345-6789. You can find it on your AHCIP card or health-related documents.">
+
+      <goa-input name="healthcare-number" />
+    </goa-form-item>
+
+    <goa-details heading="Why do we ask for this information?" mt="l">
+      We require this information to authenticate you in the event you lose your account PIN.
+    </goa-details>
+  </goa-fieldset>
+
+
+  <goa-fieldset 
+    id="mailing-address" 
+    heading="What id your mailing address in Alberta?"
+    (_continue)="onPageChange($event)"
+  >
+    <goa-form-item
+      id="address"
+      label="Address line 1">
+      <goa-input name="address" width="40ch" />
+    </goa-form-item>
+
+    <goa-form-item
+      id="address-2"
+      label="Address line 2"
+      helptext="For example, apartment, suite, unit, building, floor, etc."
+      mt="l"
+      requirement="optional"
+    >
+      <goa-input name="address-2" width="40ch" />
+    </goa-form-item>
+
+    <goa-form-item id="city" label="City or town" mt="l">
+      <goa-input name="city" width="40ch" />
+    </goa-form-item>
+
+    <goa-form-item id="postal-code" label="Postal Code" helptext="For example, T5J 3W7" mt="l">
+      <goa-input name="postal-code" width="20ch" />
+    </goa-form-item>
+
+    <goa-details heading="Why do we ask for this information?" mt="l">
+      The registering party must have a valid address in Alberta to register in our MEP. Postal mail is the MEP’s primary way of notifying the client of registration.
+      We also require this information to verify document details provided during registration.
+    </goa-details>
+  </goa-fieldset>
+
+  <goa-fieldset 
+    id="contact-information" 
+    heading="What is your contact information?"
+    (_continue)="onPageChange($event)"
+  >
+
+    <goa-block direction="row">
+      <goa-form-item id="primary-phone" label="Primary phone" helptext="Add plus sign if international. E.g. +1 (416) 222-4141" mt="l">
+        <goa-input name="primary-phone" width="40ch" />
+      </goa-form-item>
+      <goa-form-item id="primary-extension" label="Extension" requirement="optional" mt="l">
+        <goa-input name="primary-extension" width="20ch" />
+      </goa-form-item>
+    </goa-block>
+
+    <goa-block direction="row">
+      <goa-form-item id="alternate-phone" label="Alternate phone" helptext="Add plus sign if international. E.g. +1 (416) 222-4141" requirement="optional" mt="l">
+        <goa-input name="alternate-phone" width="40ch" />
+      </goa-form-item>
+      <goa-form-item id="alternate-extension" label="Extension" requirement="optional" mt="l">
+        <goa-input name="alternate-extension" width="20ch" />
+      </goa-form-item>
+    </goa-block>
+
+    <goa-form-item id="email" label="Email" mt="l">
+      <goa-input name="email" width="40ch" />
+    </goa-form-item>
+
+  </goa-fieldset>
+
+  <goa-fieldset 
+    id="other-contact-information" 
+    heading="Who may be contacted in case you cannot be reached?"
+    (_continue)="onPageChange($event)"
+  >
+
+    <goa-form-item id="other-name" label="Name">
+      <goa-input name="other-name" width="40ch" />
+    </goa-form-item>
+
+    <goa-form-item id="other-relationship" label="Relationship to you" mt="l">
+      <goa-dropdown name="other-relationship">
+        <goa-dropdown-item value="Parent" />
+        <goa-dropdown-item value="Sibling" />
+        <goa-dropdown-item value="Extended Family" />
+        <goa-dropdown-item value="Friend" />
+        <goa-dropdown-item value="Lawyer" />
+        <goa-dropdown-item value="Employer" />
+      </goa-dropdown>
+    </goa-form-item>
+
+    <goa-block direction="row">
+      <goa-form-item id="other-primary-phone" label="Primary phone" helptext="Add plus sign if international. E.g. +1 (416) 222-4141" mt="l">
+        <goa-input name="other-primary-phone" width="40ch" />
+      </goa-form-item>
+      <goa-form-item id="other-primary-extension" label="Extension" requirement="optional" mt="l">
+        <goa-input name="other-primary-extension" width="20ch" />
+      </goa-form-item>
+    </goa-block>
+
+    <goa-block direction="row">
+      <goa-form-item id="other-alternate-phone" label="Alternate phone" helptext="Add plus sign if international. E.g. +1 (416) 222-4141" requirement="optional" mt="l">
+        <goa-input name="other-alternate-phone" width="40ch" />
+      </goa-form-item>
+      <goa-form-item id="other-alternate-extension" label="Extension" requirement="optional" mt="l">
+        <goa-input name="other-alternate-extension" width="20ch" />
+      </goa-form-item>
+    </goa-block>
+
+    <goa-form-item id="other-email" label="Email" mt="l" requirement="optional">
+      <goa-input name="other-email" width="40ch" />
+    </goa-form-item>
+  
+  </goa-fieldset>
+
+  <goa-fieldset last id="summary" heading="Summary">
+    <goa-public-form-summary />
+  </goa-fieldset>
+
+  <goa-fieldset id="ineligible" heading="You are not eligable" last button-text="Back to Alberta.ca">
+    <goa-callout heading="This service is only for Alberta residents" type="important">
+      If you do not live in Alberta you are not able to access this service.
+    </goa-callout>
+
+    <goa-text mb="2xl">You can now close this window.</goa-text>
+
+    <goa-text as="h2" mb="l">If you have questions about this application</goa-text>
+
+    <goa-text mb="m">Contact the [ministry area]</goa-text>
+    <goa-text mb="m">Email <a href="mailto:information@gov.ab.ca">information&#64;gov.ab.ca</a></goa-text>
+    <goa-text mb="2xl">Phone: <a href="tel:+1-780-123-4567">780-123-4567</a></goa-text>
+  </goa-fieldset>
+
+</goa-public-form>
+
+<goa-modal [open]="_showConfirmationModal" heading="Submit application">
+  Once submitted you will not be able to apply again until your file has been looked at.
+  <goa-button-group alignment="end">
+    <goa-button type="tertiary" (_click)="hideConfirmationModal()">
+      Cancel
+    </goa-button>
+    <goa-button type="primary" (_click)="submitForm()">
+      Submit
+    </goa-button>
+  </goa-button-group>
+</goa-modal>

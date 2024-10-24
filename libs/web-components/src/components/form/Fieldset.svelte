@@ -6,12 +6,14 @@
       secondaryButtonText: { type: "String", attribute: "secondary-button-text" },
       preserveState: { type: "String", attribute: "preserve-state" },
       showBackButton: { type: "String", attribute: "show-back-button" },
+      sectionTitle: { type: "String", attribute: "section-title" },
+      dispatchOn: { attribute: "dispatch-on"}
     },
   }}
 />
 
-<script lang="ts">
-  import { onMount } from "svelte";
+<script lang="ts">;
+  import { onMount } from "svelte"
   import { calculateMargin, Spacing } from "../../common/styling";
   import { dispatch, receive, relay, styles } from "../../common/utils";
   import {
@@ -53,7 +55,11 @@
   export let buttonText: string = "";
   export let secondaryButtonText: string = "";
   export let showBackButton: string = "true";
+  export let sectionTitle: string = "";
   export let state: "subform" | "default" = "default";
+
+  // when the changes will be dispatched to the form; `change` ~ immediately
+  export let dispatchOn: "change" | "continue" = "continue";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -200,6 +206,7 @@
       error: detail.msg,
     });
 
+    console.log("dertai", detail);
     // dispatch error down to form items
     relay<FieldsetErrorRelayDetail>(_formItems[detail.name].el, FieldsetSetErrorMsg, {
       error: detail.msg,
@@ -211,19 +218,12 @@
   // **************
 
   // Dispatch _continue event to app's level allowing custom validation to be performed
-  function onSaveAndContinue() {
+  function saveAndContinue() {
     // Prevents looping form sections from sending no data to the form, thereby overwritting data
     // already collected and saved at the form level
     const isDirty = Object.keys(_state).length > 0
-
     if (isDirty) {
-      // send all the state of all the inputs within the fieldset to the top-level form component
-      relay<FieldsetChangeRelayDetail>(
-        _rootEl,
-        FieldsetChangeMsg,
-        { id, state: _state},
-        { bubbles: true },
-      );
+      relayFieldsetChange();
     }
     
     // dispatch to on:_continue method allowing users to validate the data
@@ -287,8 +287,24 @@
       
       _state[name] = { name, value, label: _formItems[name].label };
 
+      if (dispatchOn === "change") {
+        const isDirty = Object.keys(_state).length > 0
+        if (isDirty) {
+          relayFieldsetChange();
+        }
+      }
+
       e.stopPropagation();
     });
+  }
+
+  function relayFieldsetChange() {
+    relay<FieldsetChangeRelayDetail>(
+      _rootEl,
+      FieldsetChangeMsg,
+      { id, state: _state, dispatchOn },
+      { bubbles: true },
+    );
   }
 
   function jumpToError(e: Event, id: string) {
@@ -328,6 +344,10 @@
         </goa-callout>
       {/if}
 
+      {#if sectionTitle}
+        <goa-text class="section-title" size="body-l" mb="s">{sectionTitle}</goa-text>
+      {/if}
+
       {#if heading}
         <goa-text as="h2" size="heading-l">{heading}</goa-text>
       {:else}
@@ -353,7 +373,7 @@
             {buttonText || "Confirm"}
           </goa-button>
         {:else}
-          <goa-button on:_click={onSaveAndContinue} type="primary">
+          <goa-button on:_click={saveAndContinue} type="primary">
             {buttonText || "Continue"}
           </goa-button>
         {/if}
@@ -369,6 +389,10 @@
   fieldset {
     border: none;
     padding: 0;
+  }
+
+  .section-title {
+    color: var(--goa-color-greyscale-700);
   }
 
   .errors li::marker,

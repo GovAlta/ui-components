@@ -1,0 +1,36 @@
+<goa-public-form
+  name="other-party-profile"
+  (_complete)="onComplete($event)"
+  (_bind)="saveFormRef($event)"
+  (_stateChange)="updateState($event)"
+  storage="local"
+>
+  <goa-fieldset
+    id="professsional-status"
+    heading="What is the other party's professional status?"
+    first
+    (_continue)="onPageChange($event, 'professional-status')"
+  >
+    <goa-form-item id="professional-status" label="What is the other party’s professional status?">
+      <goa-radio-group name="professional-status">
+        <goa-radio-item value="Employed" label="Employed" />
+        <goa-radio-item value="Self-employed" label="Self-employed" />
+        <goa-radio-item value="Employed and self-employed" label="Employed and self-employed" />
+        <goa-radio-item value="Not employed" label="Not employed" />
+        <goa-radio-item value="Retired or unable to work" label="Retired or unable to work" />
+        <goa-radio-item value="I don't know" label="I don't know" />
+      </goa-radio-group>
+    </goa-form-item>
+
+  </goa-fieldset>
+
+  <goa-fieldset
+    id="summary"
+    heading="Summary"
+    last
+  >
+    <goa-public-form-summary />
+
+  </goa-fieldset>
+
+</goa-public-form>

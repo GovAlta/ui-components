@@ -47,6 +47,7 @@
     e.preventDefault();
   }
 
+  // TODO: show the fieldset heading instead of this
   function formatName(value: string): string {
     if (!value) return "";
 

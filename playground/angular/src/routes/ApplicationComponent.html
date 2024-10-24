@@ -1,0 +1,208 @@
+<goa-public-form
+  name="public-form-1"
+  (_stateChange)="updateState($event)"
+  (_complete)="showConfirmation($event)"
+  (_bind)="saveFormRef($event)"
+  storage="local"
+>
+  <goa-fieldset
+    id="name"
+    heading="What is your full name?"
+    dispatch-on="change"
+    first
+    (_continue)="onPageChange($event, 'name')"
+  >
+    <goa-form-item id="firstname" label="First name">
+      <goa-input name="firstname" />
+    </goa-form-item>
+    <goa-form-item id="lastname" label="Last name">
+      <goa-input name="lastname" />
+    </goa-form-item>
+
+
+  </goa-fieldset>
+
+  <goa-fieldset
+    id="sin"
+    (_continue)="onPageChange($event, 'sin')"
+  >
+    <goa-form-item
+      id="sin"
+      label="What is your SIN?"
+      labelsize="large"
+    >
+      <goa-input name="sin" />
+    </goa-form-item>
+  </goa-fieldset>
+
+  
+  <goa-fieldset
+    id="postalcode"
+    (_continue)="onPageChange($event, 'postalcode')"
+    heading="Postal Code"
+  >
+    <goa-form-item id="postal-code" label="Postal Code" >
+      <goa-input name="postal-code" />
+    </goa-form-item>
+  </goa-fieldset>
+
+  <goa-fieldset
+    id="residence"
+    (_continue)="onPageChange($event, 'residence')"
+  >
+    <goa-form-item
+      id="alberta"
+      label="Do you currently live in Alberta?"
+      labelsize="large"
+      helptext="This service is for residents of Alberta"
+    >
+      <goa-radio-group name="alberta">
+        <goa-radio-item value="Yes" label="Yes" />
+        <goa-radio-item value="No" label="No" />
+      </goa-radio-group>
+    </goa-form-item>
+  </goa-fieldset>
+
+
+  <goa-fieldset
+    id="residence-duration"
+    (_continue)="onPageChange($event, 'residence-duration')"
+  >
+    <goa-form-item
+      id="duration"
+      label="How long have you been living in Alberta?"
+      labelsize="large"
+    >
+      <goa-radio-group name="duration">
+        <goa-radio-item value="Less than a year" label="Less than a year" />
+        <goa-radio-item value="More than a year" label="More than a year" />
+      </goa-radio-group>
+    </goa-form-item>
+  </goa-fieldset>
+
+
+  <goa-fieldset
+    id="birthdate"
+    (_continue)="onPageChange($event, 'birthdate')"
+  >
+    <goa-form-item
+      id="birthdate"
+      label="What is your date of birth?"
+      helptext="Your date of birth is required to ensure you meet the minimum age criteria"
+      labelsize="large"
+    >
+      <goa-form-item id="birth-date" label="Birth Date">
+        <goa-input type="date" name="birth-date" />
+      </goa-form-item>
+    </goa-form-item>
+  </goa-fieldset>
+
+
+  <goa-fieldset
+    id="currently-employed"
+    (_continue)="onPageChange($event, 'currently-employed')"
+  >
+    <goa-form-item
+      id="employed"
+      label="Are you currently employed?"
+      labelsize="large"
+    >
+      <goa-radio-group name="employed">
+        <goa-radio-item value="Yes" label="Yes" />
+        <goa-radio-item value="No" label="No" />
+      </goa-radio-group>
+    </goa-form-item>
+
+    <goa-details heading="What do I do if I am self-employed?">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu erat tincidunt,
+      consectetur enim ut, rutrum nulla. Praesent sit amet viverra ex. Morbi fermentum
+      diam in ullamcorper auctor. Pellentesque aliquet metus sit amet lacinia elementum.
+      Nam in ex varius, porta orci ac, sagittis ligula. Cras varius luctus tempus.
+      Phasellus finibus turpis at diam viverra facilisis. In non lacus viverra, gravida
+      magna facilisis, porttitor risus. Mauris consequat libero magna, non cursus velit
+      euismod ut. Donec eget turpis eros.
+    </goa-details>
+  </goa-fieldset>
+
+
+  <goa-fieldset
+    id="highest-education"
+    (_continue)="onPageChange($event, 'highest-education')"
+  >
+    <goa-form-item
+      id="education"
+      label="What is the highest level of education you have completed?"
+      labelsize="large"
+    >
+      <goa-radio-group name="education">
+        <goa-radio-item value="High school" label="High school" />
+        <goa-radio-item value="Post secondary" label="Post secondary" />
+        <goa-radio-item value="Graduate studies" label="Graduate studies" />
+        <goa-radio-item value="None" label="None" />
+        <goa-radio-item value="Other" label="Other" />
+      </goa-radio-group>
+    </goa-form-item>
+  </goa-fieldset>
+
+
+  <goa-fieldset
+    id="other-education"
+    (_continue)="onPageChange($event, 'other-education')"
+  >
+    <goa-form-item
+      id="other-education-description"
+      label="Describe your education"
+      labelsize="large"
+    >
+      <goa-textarea name="other-education-description" />
+    </goa-form-item>
+  </goa-fieldset>
+
+
+  <goa-fieldset
+    id="previously-applied"
+    (_continue)="onPageChange($event, 'previously-applied')"
+  >
+    <goa-form-item
+      id="previously-applied"
+      label="Have you previously applied for this service?"
+      labelsize="large"
+    >
+      <goa-radio-group name="previously-applied">
+        <goa-radio-item value="Yes" label="Yes" />
+        <goa-radio-item value="No" label="No" />
+      </goa-radio-group>
+    </goa-form-item>
+  </goa-fieldset>
+
+  <goa-fieldset last id="summary" heading="Summary" last>
+    <goa-public-form-summary />
+  </goa-fieldset>
+
+  <goa-fieldset id="ineligible" heading="You are not eligable" last button-text="Back to Alberta.ca">
+    <goa-callout heading="This service is only for Alberta residents" type="important">
+      If you do not live in Alberta you are not able to access this service.
+    </goa-callout>
+
+    <goa-text mb="2xl">You can now close this window.</goa-text>
+
+    <goa-text as="h2" mb="l">If you have questions about this application</goa-text>
+
+    <goa-text mb="m">Contact the [ministry area]</goa-text>
+    <goa-text mb="m">Email <a href="mailto:information@gov.ab.ca">information&#64;gov.ab.ca</a></goa-text>
+    <goa-text mb="2xl">Phone: <a href="tel:+1-780-123-4567">780-123-4567</a></goa-text>
+  </goa-fieldset>
+
+</goa-public-form>
+
+<goa-modal [open]="_showConfirmationModal" heading="Submit application">
+  Once submitted you will not be able to apply again until your file has been looked at.
+  <goa-button-group alignment="end">
+    <goa-button type="tertiary" (_click)="hideConfirmationModal()">
+      Cancel
+    </goa-button>
+    <goa-button type="primary" (_click)="submitForm()">
+      Submit
+    </goa-button>
+  </goa-button-group>
+</goa-modal>

@@ -60,6 +60,7 @@
     history: [],
     editting: "",
     lastModified: undefined,
+    status: "not-started",
   };
 
   let lastPage: string;
@@ -195,6 +196,10 @@
     _state.form[id] = state;
     _state.lastModified = new Date();
 
+    if (detail.dispatchOn === "change") {
+      dispatchStateChange(detail.id);
+    }
+
     saveState(_state);
   }
 
@@ -249,8 +254,8 @@
     saveState(_state);
   }
 
-  function dispatchStateChange() {
-    dispatch(_formEl, "_stateChange", {..._state}, { bubbles: true, timeout: 100 });
+  function dispatchStateChange(fieldSetId?: string) {
+    dispatch(_formEl, "_stateChange", {..._state, page: fieldSetId }, { bubbles: true, timeout: 100 });
   }
 
   function syncFormSummaryState() {
@@ -272,6 +277,9 @@
   }
 
   function onFormComplete() {
+    _state.status = "complete";
+    saveState(_state);
+
     const cleanedState = _state.history.reduce<Record<string, FieldsetData>>((acc, fieldsetId) => {
       acc[fieldsetId] = _state.form[fieldsetId]
       return acc;
@@ -377,6 +385,7 @@
       history: [_fieldsets[0]?.id],
       editting: "",
       lastModified: undefined,
+      status: "not-started",
     };
   }
 </script>

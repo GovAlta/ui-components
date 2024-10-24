@@ -1,0 +1,72 @@
+<goa-public-form
+  name="support-order-details"
+  (_complete)="onComplete($event)"
+  (_bind)="saveFormRef($event)"
+  (_stateChange)="updateState($event)"
+  storage="local"
+>
+  <goa-fieldset
+    id="what-is-your-role"
+    section-title="Support order details"
+    heading="Who are you in the registration process?"
+    dispatch-on="change"
+    first
+    (_continue)="onPageChange($event, 'what-is-your-role')"
+  >    
+    <goa-form-item id="role">
+      <goa-radio-group name="role">
+        <goa-radio-item value="Recipient" label="I'm the recipient of the child or spouse support" />
+        <goa-radio-item value="Payor" label="I'm the payor" />
+      </goa-radio-group>
+    </goa-form-item>
+
+    <goa-form-item label="Amount 1" id="amount1">
+      <goa-input name="amount1" placeholder="Enter dollars" />
+    </goa-form-item>
+    <goa-form-item label="Amount 2" id="amount2">
+      <goa-input name="amount2" placeholder="Enter dollars" />
+    </goa-form-item>
+
+    show total here
+    {{_total}}
+  </goa-fieldset>
+
+  <goa-fieldset
+    id="do-you-receive-support"
+    section-title="Support order details"
+    heading="Does your support order include child support or child support expenses?"
+    (_continue)="onPageChange($event, 'do-you-receive-support')"
+  >
+    <goa-form-item id="support">
+      <goa-radio-group name="support">
+        <goa-radio-item value="Yes" label="Yes" />
+        <goa-radio-item value="No" label="No" />
+      </goa-radio-group>
+    </goa-form-item>
+  </goa-fieldset>
+
+  <goa-fieldset
+    id="recalculated"
+    section-title="Support order details"
+    heading="Does your support order specify that it may be recalculated?"
+    (_continue)="onPageChange($event, 'recalculated')"
+  >
+
+    <goa-form-item id="recalculated">
+      <goa-radio-group name="recalculated">
+        <goa-radio-item value="Yes" label="Yes" />
+        <goa-radio-item value="No" label="No" />
+      </goa-radio-group>
+    </goa-form-item>
+  </goa-fieldset>
+
+  <goa-fieldset 
+    last 
+    id="summary" 
+    section-title="Support order details"
+    heading="Summary"
+  >
+    <goa-public-form-summary />
+  </goa-fieldset>
+
+</goa-public-form>

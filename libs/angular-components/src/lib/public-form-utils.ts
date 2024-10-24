@@ -1,14 +1,16 @@
+export type FormStatus = "not-started" | "incomplete"| "complete";
+
 export type AppState = {
   form: Record<string, Record<string, FieldsetItemState>[]>;
   history: string[];
   editting: string;
   lastModified?: Date;
+  status: FormStatus;
 };
 
 export type FieldsetItemState = {
   name: string;
   label: string;
-  // value: string | number | Date;
   value: string;
 };
 
