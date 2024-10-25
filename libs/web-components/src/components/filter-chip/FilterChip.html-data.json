@@ -1,0 +1,79 @@
+{
+  "name": "goa-filter-chip",
+  "required": "content",
+  "attributes": [
+    {
+      "description": "The type of chip to use",
+      "values": [{ "name": "filter" }],
+      "default": "filter"
+    },
+    {
+      "name": "icontheme",
+      "type": "string",
+      "description": "Styles the icon to show outline or filled",
+      "values": [
+        {
+          "name": "outline"
+        },
+        {
+          "name": "filled"
+        }
+      ],
+      "default": "outline"
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "description": "Show an error state",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "deletable",
+      "type": "boolean",
+      "description": "Show a delete icon button on the right of the text label",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "content",
+      "type": "string",
+      "description": "Text label of the chip"
+    },
+    {
+      "name": "testid",
+      "type": "string",
+      "description": "Test id for the component"
+    },
+    {
+      "name": "_click",
+      "description": "Callback when deletable and delete icon is clicked"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Filter Chip",
+      "url": "{{siteUrl}}/?path=/docs/components-filter-chip--basic"
+    }
+  ]
+}
