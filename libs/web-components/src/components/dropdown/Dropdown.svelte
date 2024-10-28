@@ -74,13 +74,14 @@
 
   let _mountStatus: "active" | "ready" = "ready";
   let _mountTimeoutId: any = undefined;
+  let _error = toBoolean(error);
+  let _prevError = _error;
 
   //
   // Reactive
   //
 
   $: _disabled = toBoolean(disabled);
-  $: _error = toBoolean(error);
   $: _multiselect = toBoolean(multiselect);
   $: _native = toBoolean(native);
   $: _filterable = toBoolean(filterable) && !_native;
@@ -94,9 +95,17 @@
     _values = parseValues(value || "");
     setSelected();
   }
-
   $: {
-    _width = width || getLongestChildWidth(_options);
+    _error = toBoolean(error);
+    if (_error !== _prevError) {
+      dispatch(
+        _rootEl,
+        "error::change",
+        { isError: _error },
+        { bubbles: true },
+      );
+      _prevError = _error;
+    }
   }
 
   //
@@ -429,6 +438,10 @@
     e.stopPropagation();
   }
 
+  function onFocus(e: Event) {
+    dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+  }
+
   class ComboboxKeyUpHandler implements EventHandler {
     constructor(private input: HTMLInputElement) {}
 
@@ -602,6 +615,7 @@
       disabled={_disabled}
       id={name}
       on:change={onNativeSelect}
+      on:focus={onFocus}
     >
       <slot />
       {#each _options as option}
@@ -665,6 +679,7 @@
           on:keydown={onInputKeyDown}
           on:keyup={onInputKeyUp}
           on:change={onChange}
+          on:focus={onFocus}
         />
 
         {#if _inputEl?.value && _filterable}
@@ -709,6 +724,7 @@
         bind:this={_menuEl}
         aria-label={arialabel || name}
         aria-labelledby={arialabelledby}
+        on:focus={onFocus}
         style={`
             outline: none;
             overflow-y: auto;
