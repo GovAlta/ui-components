@@ -2,11 +2,27 @@
 
 <script lang="ts">
   import type { Spacing } from "../../common/styling";
-  import { typeValidator, toBoolean, dispatch, receive, relay } from "../../common/utils";
+  import {
+    typeValidator,
+    toBoolean,
+    dispatch,
+    receive,
+    relay,
+  } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
-  import { GoARadioItemProps, RadioItemSelectProps } from "../radio-item/RadioItem.svelte";
-  import { FormSetValueMsg, FormSetValueRelayDetail, FieldsetSetErrorMsg, FieldsetResetErrorsMsg, FormFieldMountRelayDetail, FormFieldMountMsg } from "../../types/relay-types";
+  import {
+    GoARadioItemProps,
+    RadioItemSelectProps,
+  } from "../radio-item/RadioItem.svelte";
+  import {
+    FormSetValueMsg,
+    FormSetValueRelayDetail,
+    FieldsetSetErrorMsg,
+    FieldsetResetErrorsMsg,
+    FormFieldMountRelayDetail,
+    FormFieldMountMsg,
+  } from "../../types/relay-types";
 
   // Validator
   const [Orientations, validateOrientation] = typeValidator(
@@ -32,7 +48,8 @@
   export let ml: Spacing = null;
 
   // Private
-  let isError: boolean;
+  let _error = toBoolean(error);
+  let _prevError = _error;
 
   // Reactive
 
@@ -42,7 +59,16 @@
   $: value !== undefined && setCurrentSelectedOption(value);
 
   $: {
-    isError = toBoolean(error);
+    _error = toBoolean(error);
+    if (_error !== _prevError) {
+      dispatch(
+        _rootEl,
+        "error::change",
+        { isError: _error },
+        { bubbles: true },
+      );
+      _prevError = _error;
+    }
     bindOptions();
   }
 
@@ -92,7 +118,7 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _rootEl},
+      { name, el: _rootEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -119,7 +145,7 @@
           composed: true,
           detail: {
             disabled: isDisabled,
-            error: isError,
+            error: _error,
             description: props.description,
             name,
             checked: props.value === value,
@@ -160,6 +186,10 @@
       );
     });
   }
+
+  function onFocus(e: Event) {
+    dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+  }
 </script>
 
 <!-- Html -->
@@ -170,6 +200,9 @@
   data-testid={testid}
   role="radiogroup"
   aria-label={arialabel}
+  aria-invalid={_error ? "true" : "false"}
+  tabindex="0"
+  on:focusin={onFocus}
 >
   <slot />
 </div>
@@ -186,5 +219,11 @@
 
   .goa-radio-group--vertical {
     display: inline-block;
+  }
+
+  /* Focus styles */
+  .goa-radio-group--horizontal:focus,
+  .goa-radio-group--vertical:focus {
+    outline: none;
   }
 </style>
