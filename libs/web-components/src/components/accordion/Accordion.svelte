@@ -85,6 +85,7 @@
       on:blur={() => (_hovering = false)}
       aria-controls={`${_accordionId}-content`}
       aria-expanded={open === "true"}
+      class:iconRight={iconposition === "right"}
     >
 
       {#if iconposition === "left"}
@@ -156,7 +157,7 @@
 
   summary {
     min-height: 3.5rem;
-    padding: var(--goa-accordion-padding-heading);
+    padding: var(--goa-accordion-padding-heading-icon-left);
     border: var(--goa-accordion-border);
     border-radius: var(--goa-accordion-border-radius);
     background-color: var(--goa-accordion-color-bg-heading);
@@ -168,6 +169,10 @@
 
     /* safari hack (see below) */
     position: relative;
+  }
+
+  summary.iconRight {
+    padding: var(--goa-accordion-padding-heading-icon-right);
   }
 
   summary:hover {
