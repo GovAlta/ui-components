@@ -34,7 +34,7 @@ describe("TwoColumnLayout", () => {
     expect(baseElement.innerHTML).toContain(
       "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
     );
-    expect(baseElement.innerHTML).toContain("<goa-app-header>");
+    expect(baseElement.querySelector("goa-app-header")).toBeTruthy();
     expect(baseElement.innerHTML).toContain("<goa-app-footer>");
     expect(baseElement.querySelectorAll("[slot=nav] a").length).toEqual(5);
   });

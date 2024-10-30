@@ -1,4 +1,8 @@
-export default function (_node: HTMLElement, opts: { enable: boolean }) {
+type NoScrollOptions = {
+  enable: boolean;
+};
+
+export default function (_node: HTMLElement, opts: NoScrollOptions) {
   let toggledScrolling = false;
 
   function isScrollable() {
@@ -52,13 +56,11 @@ export default function (_node: HTMLElement, opts: { enable: boolean }) {
     return scrollbarWidth;
   }
 
-  if (opts.enable) {
-    hideScrollbars();
-  }
-
   return {
-    update() {
-      if (!opts.enable) {
+    update(options: NoScrollOptions) {
+      if (options.enable) {
+        hideScrollbars();
+      } else {
         resetScrollbars();
       }
     },

@@ -1,8 +1,12 @@
+import { useEffect, useRef } from "react";
+
 interface WCProps {
   heading?: string;
   url?: string;
   maxcontentwidth?: string;
   fullmenubreakpoint?: number;
+  hasmenuclickhandler?: boolean;
+  ref: React.RefObject<HTMLElement>;
   testid?: string;
 }
 
@@ -21,6 +25,7 @@ export interface GoAAppHeaderProps {
   maxContentWidth?: string;
   fullMenuBreakpoint?: number;
   children?: React.ReactNode;
+  onMenuClick?: () => void;
   testId?: string;
 }
 
@@ -31,14 +36,36 @@ export function GoAAppHeader({
   fullMenuBreakpoint,
   testId,
   children,
+  onMenuClick,
 }: GoAAppHeaderProps): JSX.Element {
+  const el = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!el.current) {
+      return;
+    }
+    if (!onMenuClick) {
+      return;
+    }
+    const current = el.current;
+    const listener = () => {
+      onMenuClick();
+    }
+    current.addEventListener("_menuClick", listener);
+    return () => {
+      current.removeEventListener("_menuClick", listener);
+    }
+  }, [el, onMenuClick]);
+
   return (
     <goa-app-header
+      ref={el}
       heading={heading}
       url={url}
       fullmenubreakpoint={fullMenuBreakpoint}
       maxcontentwidth={maxContentWidth}
       testid={testId}
+      hasmenuclickhandler={!!onMenuClick}
     >
       {children}
     </goa-app-header>

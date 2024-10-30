@@ -16,6 +16,7 @@
   onMount(async () => {
     await tick();
     getChildren();
+    setCurrentUrl();
     addEventListeners();
   });
 
@@ -34,6 +35,7 @@
       .filter((el) => el.tagName === "A")
       .map((el) => {
         el.classList.remove("current");
+        el.addEventListener("click", setCurrentUrl);
         return el;
       });
 
@@ -96,12 +98,6 @@
       observer = null;
     }
     window.removeEventListener("popstate", setCurrentUrl);
-    if (_rootEl) {
-      _rootEl.removeEventListener(
-        "sidemenugroup:mounted",
-        handleSideMenuGroupMount,
-      );
-    }
   }
 </script>
 

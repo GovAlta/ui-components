@@ -9,6 +9,7 @@ export type GoACalloutType =
 
 export type GoACalloutSize = "medium" | "large";
 export type GoACalloutAriaLive = "off" | "polite" | "assertive";
+export type GoACalloutIconTheme = "outline" | "filled";
 
 interface WCProps extends Margins {
   heading?: string;
@@ -16,6 +17,7 @@ interface WCProps extends Margins {
   size?: GoACalloutSize;
   maxwidth?: string;
   arialive?: GoACalloutAriaLive;
+  icontheme?: GoACalloutIconTheme;
   testid?: string;
 }
 
@@ -32,6 +34,7 @@ export interface GoACalloutProps extends Margins {
   heading?: string;
   type?: GoACalloutType;
   size?: GoACalloutSize;
+  iconTheme?: GoACalloutIconTheme;
   maxWidth?: string;
   testId?: string;
   ariaLive?: GoACalloutAriaLive;
@@ -43,6 +46,7 @@ export type CalloutProps = GoACalloutProps;
 export const GoACallout = ({
   heading,
   type = "information",
+  iconTheme = "outline",
   size = "large",
   maxWidth,
   testId,
@@ -60,6 +64,7 @@ export const GoACallout = ({
       size={size}
       maxwidth={maxWidth}
       arialive={ariaLive}
+      icontheme={iconTheme}
       mt={mt}
       mr={mr}
       mb={mb}

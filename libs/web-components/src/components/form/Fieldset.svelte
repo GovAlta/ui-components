@@ -37,6 +37,7 @@
     FormItemMountRelayDetail,
     FormResetErrorsMsg,
     FormSetFieldsetMsg,
+    FormSetFieldsetRelayDetail,
     FormSetValueMsg,
     FormSetValueRelayDetail,
     FormToggleActiveMsg,
@@ -116,7 +117,7 @@
       // console.log(`  RECEIVE(Fieldset => ${action}):`, data);
       switch (action) {
         case FormSetFieldsetMsg:
-          // onSetFieldset(data as FormSetFieldsetRelayDetail);
+          onSetFieldset(data as FormSetFieldsetRelayDetail);
           break;
         case FormResetErrorsMsg:
           onErrorReset();
@@ -143,6 +144,12 @@
   // *****************
   // Dispatch handlers
   // *****************
+
+  function onSetFieldset(detail: FormSetFieldsetRelayDetail) {
+    for (const [id, item] of Object.entries(detail.value)) {
+      _state[id] = { ...item }
+    }
+  }
 
   function onFormDispatch(detail: FormDispatchStateRelayDetail) {
     // allow customization of form if user has jumped back to a question (editting mode)
