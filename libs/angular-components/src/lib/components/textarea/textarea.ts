@@ -13,12 +13,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       [attr.rows]="rows"
       [attr.error]="error"
       [disabled]="disabled"
+      [attr.readonly]="readOnly"
       [attr.width]="width"
       [attr.maxwidth]="maxWidth"
       [attr.arialabel]="ariaLabel"
       [attr.countby]="countBy"
       [attr.maxcount]="maxCount"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -45,6 +46,7 @@ export class GoabTextArea implements ControlValueAccessor {
   @Input() rows?: number;
   @Input() error?: boolean;
   @Input() disabled?: boolean;
+  @Input() readOnly?: boolean;
   @Input() width?: string;
   @Input() ariaLabel?: string;
   @Input() countBy?: GoabTextAreaCountBy = "";

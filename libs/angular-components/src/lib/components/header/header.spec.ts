@@ -56,7 +56,7 @@ describe("GoABAppHeader", () => {
     expect(el?.getAttribute("fullmenubreakpoint")).toBe(
       `${component.fullMenuBreakpoint}`,
     );
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.innerHTML).toContain("Children content");
   });
 });

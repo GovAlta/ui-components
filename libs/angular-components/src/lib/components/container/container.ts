@@ -1,4 +1,4 @@
-import { GoabContainerAccent, GoabContainerPadding, GoabContainerType, GoabContainerWidth, GoabIconSize, Spacing } from "@abgov/ui-components-common";
+import { GoabContainerAccent, GoabContainerPadding, GoabContainerType, GoabContainerWidth, Spacing } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -12,7 +12,7 @@ import { NgTemplateOutlet } from "@angular/common";
     [attr.padding]="padding"
     [attr.width]="width"
     [attr.maxwidth]="maxWidth"
-    [attr.data-testid]="testId"
+    [attr.testid]="testId"
     [attr.mt]="mt"
     [attr.mb]="mb"
     [attr.ml]="ml"

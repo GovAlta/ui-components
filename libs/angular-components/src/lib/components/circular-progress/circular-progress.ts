@@ -12,7 +12,7 @@ import { GoabCircularProgressSize, GoabCircularProgressVariant } from "@abgov/ui
       [attr.message]="message"
       [attr.visible]="visible"
       [attr.progress]="progress"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
     >
     </goa-circular-progress>
   `,

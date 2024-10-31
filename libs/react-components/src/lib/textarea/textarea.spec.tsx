@@ -1,12 +1,12 @@
 import { fireEvent, render } from "@testing-library/react";
-import GoABTextArea from "./textarea";
+import GoabTextarea from "./textarea";
 import { describe, it, expect, vi } from "vitest";
 import { GoabTextAreaOnChangeDetail } from "@abgov/ui-components-common";
 
 describe("TextArea", () => {
   it("renders the text area", async () => {
     render(
-      <GoABTextArea
+      <GoabTextarea
         testId="textarea-testid"
         name="textarea-name"
         value="textarea-value"
@@ -48,7 +48,7 @@ describe("TextArea", () => {
     const newValue = "new-value";
 
     render(
-      <GoABTextArea
+      <GoabTextarea
         testId="textarea-testid"
         name="textarea-name"
         value="textarea-value"

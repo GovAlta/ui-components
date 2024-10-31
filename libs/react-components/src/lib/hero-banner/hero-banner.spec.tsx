@@ -5,7 +5,7 @@ import GoabButton from "../button/button";
 
 afterEach(cleanup);
 
-describe("GoABHeroBanner", () => {
+describe("GoabHeroBanner", () => {
   it("renders all with properties", () => {
     const { baseElement } = render(
       <GoabHeroBanner

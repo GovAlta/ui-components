@@ -79,7 +79,7 @@ describe("GoABFormItem", () => {
     expect(el?.getAttribute("error")).toBe(component.error);
     expect(el?.getAttribute("helptext")).toBe(component.helpText);
     expect(el?.getAttribute("id")).toBe(component.id);
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.getAttribute("maxwidth")).toBe("480px");
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mb")).toBe(component.mb);

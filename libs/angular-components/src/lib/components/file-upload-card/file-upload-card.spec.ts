@@ -82,7 +82,7 @@ describe("GoABFileUploadCard", () => {
     expect(el?.getAttribute("type")).toBe("image/png");
     expect(el?.getAttribute("progress")).toBe("23");
     expect(el?.getAttribute("error")).toBe("true");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
   });
 
   it("should dispatch an even when delete is clicked and upload is complete", () => {

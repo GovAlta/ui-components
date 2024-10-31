@@ -5,9 +5,6 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
-
-type CountBy = "character" | "word";
 
 interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
@@ -135,5 +132,4 @@ export function GoabTextarea({
   );
 }
 
-export { GoabTextarea as GoABTextArea };
 export default GoabTextarea;

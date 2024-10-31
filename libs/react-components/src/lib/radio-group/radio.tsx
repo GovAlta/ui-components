@@ -62,7 +62,6 @@ export function GoabRadioItem({
       error={error}
       disabled={disabled}
       checked={checked}
-      data-testid={testId}
       arialabel={ariaLabel}
       mt={mt}
       mr={mr}

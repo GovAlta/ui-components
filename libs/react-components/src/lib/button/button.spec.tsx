@@ -4,7 +4,7 @@ import GoabButton from "./button";
 import { describe, it, expect, vi } from "vitest";
 import { GoabButtonSize, GoabButtonType } from "@abgov/ui-components-common";
 
-describe("GoAB Button", () => {
+describe("GoabButton", () => {
   const buttonText = "Test Title";
 
   const noop = () => {

@@ -35,8 +35,8 @@ export function GoabGrid({
   return (
     <goa-grid
       gap={gap}
-      mt={mt}
       minchildwidth={minChildWidth}
+      mt={mt}
       mr={mr}
       mb={mb}
       ml={ml}

@@ -6,7 +6,7 @@ import { GoabCheckboxOnChangeDetail } from "@abgov/ui-components-common";
 
 const testId = "test-id";
 
-describe("GoAB Checkbox", () => {
+describe("GoabCheckbox", () => {
   it("should render", () => {
     const props: CheckboxProps = {
       id: "abc",

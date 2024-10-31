@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react";
 import GoabChip from "./chip";
 import { describe, it, expect, vi } from "vitest";
 
-describe("GoAB Chip", () => {
+describe("GoabChip", () => {
   it("should render", () => {
     const { container } = render(<GoabChip content="some chip" />);
     expect(container.innerHTML).toContain("some chip");

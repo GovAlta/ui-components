@@ -21,7 +21,7 @@ import { NgTemplateOutlet } from "@angular/common";
       [attr.error]="error"
       [attr.text]="text"
       [value]="value"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.arialabel]="ariaLabel"
       [attr.description]="getDescriptionAsString()"
       [id]="id"

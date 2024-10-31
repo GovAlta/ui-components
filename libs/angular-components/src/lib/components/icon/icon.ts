@@ -18,7 +18,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.mb]="mb"
       [attr.ml]="ml"
       [attr.mr]="mr"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
     >
     </goa-icon>
   `,

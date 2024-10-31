@@ -77,7 +77,7 @@ describe("GoABChip", () => {
     expect(chipElement.getAttribute("content")).toBe(component.content);
     expect(chipElement.getAttribute("variant")).toBe(`${component.variant}`);
     expect(chipElement.getAttribute("icontheme")).toBe(`${component.iconTheme}`);
-    expect(chipElement.getAttribute("data-testid")).toBe(component.testId);
+    expect(chipElement.getAttribute("testid")).toBe(component.testId);
     expect(chipElement.getAttribute("mt")).toBe(component.mt);
     expect(chipElement.getAttribute("mr")).toBe(component.mr);
     expect(chipElement.getAttribute("mb")).toBe(component.mb);

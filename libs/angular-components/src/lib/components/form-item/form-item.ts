@@ -18,7 +18,7 @@ import {
       [attr.labelsize]="labelSize"
       [attr.helptext]="helpText"
       [attr.error]="error"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [id]="id"
       [attr.requirement]="requirement"
       [attr.maxwidth]="maxWidth"

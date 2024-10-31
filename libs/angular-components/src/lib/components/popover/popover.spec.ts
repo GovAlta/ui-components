@@ -71,7 +71,7 @@ describe("GoABPopover", () => {
     expect(target).toBeTruthy();
     expect(target.innerHTML).toContain("Click me");
     expect(el.innerHTML).toContain("The content of the pop over");
-    expect(el.getAttribute("data-testid")).toBe(component.testId);
+    expect(el.getAttribute("testid")).toBe(component.testId);
     expect(el.getAttribute("maxwidth")).toBe(component.maxWidth);
     expect(el.getAttribute("padded")).toBe(`${component.padded}`);
     expect(el.getAttribute("position")).toBe(component.position);

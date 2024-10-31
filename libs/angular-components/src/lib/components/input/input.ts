@@ -75,8 +75,8 @@ export class GoabInput implements ControlValueAccessor, OnInit {
   @Input() ariaLabel?: string;
   @Input() maxLength?: number;
   @Input() value?: string | null = "";
-  @Input() min?: number;
-  @Input() max?: number;
+  @Input() min?: string | number;
+  @Input() max?: string | number;
   @Input() step?: number;
   @Input() ariaLabelledBy?: string;
   @Input() mt?: Spacing;
@@ -97,7 +97,6 @@ export class GoabInput implements ControlValueAccessor, OnInit {
   }
 
   _onTrailingIconClick(_: Event) {
-    console.log("in the click")
     if (this.handleTrailingIconClick) {
       this.onTrailingIconClick.emit();
     }

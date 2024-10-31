@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { GoabTab } from "./tab";
 
-describe("GoABTab", () => {
+describe("GoabTab", () => {
   it("should render successfully", () => {
     const { container } = render(
       <GoabTab heading="Profile">

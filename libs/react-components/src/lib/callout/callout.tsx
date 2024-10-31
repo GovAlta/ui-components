@@ -1,7 +1,4 @@
-import { GoabCalloutAriaLive, GoabCalloutSize, GoabCalloutType, Margins } from "@abgov/ui-components-common";
-
-// TODO: move to ts
-export type GoACalloutIconTheme = "outline" | "filled";
+import { GoabCalloutAriaLive, GoabCalloutSize, GoabCalloutType, GoabCalloutIconTheme, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   heading?: string;
@@ -9,7 +6,7 @@ interface WCProps extends Margins {
   size?: GoabCalloutSize;
   arialive?: GoabCalloutAriaLive;
   maxwidth?: string;
-  icontheme?: GoACalloutIconTheme;
+  icontheme?: GoabCalloutIconTheme;
   testid?: string;
 }
 
@@ -26,7 +23,7 @@ export interface GoabCalloutProps extends Margins {
   heading?: string;
   type?: GoabCalloutType;
   size?: GoabCalloutSize;
-  iconTheme?: GoACalloutIconTheme;
+  iconTheme?: GoabCalloutIconTheme;
   maxWidth?: string;
   testId?: string;
   ariaLive?: GoabCalloutAriaLive;

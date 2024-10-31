@@ -2,7 +2,7 @@ import { GoabAccordion } from "./accordion";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { GoabAccordionHeadingSize } from "@abgov/ui-components-common";
+import { GoabAccordionHeadingSize, GoabAccordionIconPosition } from "@abgov/ui-components-common";
 
 @Component({
   template: `
@@ -12,6 +12,7 @@ import { GoabAccordionHeadingSize } from "@abgov/ui-components-common";
     [open]="open"
     [headingSize]="headingSize"
     [headingContent]="headingContent"
+    [iconPosition]="iconPosition"
     maxWidth="480px"
   >
     test content
@@ -23,9 +24,10 @@ class TestAccordionComponent {
   secondaryText?: string;
   open?: boolean;
   headingSize?: GoabAccordionHeadingSize;
+  iconPosition?: GoabAccordionIconPosition;
 }
 
-describe("GoABAccordion", () => {
+describe("GoabAccordion", () => {
   let fixture: ComponentFixture<TestAccordionComponent>;
   let component: TestAccordionComponent;
 
@@ -42,6 +44,7 @@ describe("GoABAccordion", () => {
     component.secondaryText = "Secondary Text";
     component.open = true;
     component.headingSize = "large" as GoabAccordionHeadingSize;
+    component.iconPosition = "right" as GoabAccordionIconPosition;
 
     fixture.detectChanges();
   });
@@ -55,6 +58,7 @@ describe("GoABAccordion", () => {
     expect(accordionElement.getAttribute("open")).toBe("true");
     expect(accordionElement.getAttribute("headingsize")).toBe("large");
     expect(accordionElement.getAttribute("maxwidth")).toBe("480px");
+    expect(accordionElement.getAttribute("iconposition")).toBe("right");
     const headingContent = accordionElement.querySelector("[slot='headingcontent']");
     expect(headingContent.textContent).toContain("This is the headingcontent");
   });

@@ -8,7 +8,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
     <goa-spacer
       [attr.hspacing]="hSpacing"
       [attr.vspacing]="vSpacing"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
     >
     </goa-spacer>
   `,

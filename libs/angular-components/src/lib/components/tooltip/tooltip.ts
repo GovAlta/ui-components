@@ -9,7 +9,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.position]="position"
       [attr.content]="content"
       [attr.halign]="hAlign"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"

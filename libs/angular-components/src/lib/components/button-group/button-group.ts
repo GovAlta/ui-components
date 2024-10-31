@@ -8,7 +8,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
     <goa-button-group
       [attr.alignment]="alignment"
       [attr.gap]="gap"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"

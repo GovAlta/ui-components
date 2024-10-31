@@ -38,7 +38,7 @@ describe("GoABTabs", () => {
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-tabs");
     expect(el?.getAttribute("initialtab")).toBe("1");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
     expect(el?.querySelector("goa-tab")?.innerHTML).toContain("Profile");
     expect(el?.textContent).toContain("Tab content");
   });
