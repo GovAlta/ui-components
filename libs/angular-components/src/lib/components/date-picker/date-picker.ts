@@ -22,7 +22,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     [attr.error]="error"
     [attr.disabled]="disabled"
     [attr.relative]="relative"
-    [attr.data-testid]="testId"
+    [attr.testid]="testId"
     [attr.mt]="mt"
     [attr.mb]="mb"
     [attr.ml]="ml"

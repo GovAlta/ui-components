@@ -7,7 +7,7 @@ import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
   template: `
     <goa-tabs
       [attr.initialtab]="initialTab"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       (_change)="_onChange($event)"
 
     >

@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import GoabCard from "./card";
 
-describe("GoAB Card", () => {
+describe("GoabCard", () => {
   it("should render properties", () => {
     const { container } = render(
       <GoabCard elevation={2} width="50ch" mt="s" mr="m" mb="l" ml="xl" />,

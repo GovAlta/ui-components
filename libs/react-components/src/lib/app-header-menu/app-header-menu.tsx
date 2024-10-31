@@ -3,7 +3,7 @@ import { GoabIconType } from "@abgov/ui-components-common";
 
 interface WCProps {
   heading: string;
-  leadingicon?: GoAIconType;
+  leadingicon?: GoabIconType;
   testid?: string;
 }
 

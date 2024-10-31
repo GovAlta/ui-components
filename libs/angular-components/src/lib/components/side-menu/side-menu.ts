@@ -4,7 +4,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   standalone: true,
   selector: "goab-side-menu",
   template: `
-    <goa-side-menu [attr.data-testid]="testId">
+    <goa-side-menu [attr.testid]="testId">
       <ng-content />
     </goa-side-menu>
   `,

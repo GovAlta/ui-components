@@ -5,8 +5,8 @@ import { describe, it, expect, vi } from "vitest";
 
 afterEach(cleanup);
 
-describe("GoABDropdown", () => {
-  it("should inform the user that GoABDropdownOption is deprecated", async () => {
+describe("GoabDropdown", () => {
+  it("should inform the user that GoabDropdownOption is deprecated", async () => {
     const mock = vi.spyOn(console, "warn").mockImplementation(() => {
       /* do nothing */
     });

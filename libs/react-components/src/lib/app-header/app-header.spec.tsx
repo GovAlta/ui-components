@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { GoabAppHeader } from "./app-header";
 
-describe("GoABAppHeader", () => {
+describe("GoabAppHeader", () => {
   it("should render", () => {
     const { baseElement } = render(<GoabAppHeader heading="Test heading" url="test" />);
 
@@ -11,7 +11,7 @@ describe("GoABAppHeader", () => {
   it("should dispatch onMobileMenuClick if provided", () => {
     const onMobileMenuClick = vi.fn();
     const { baseElement } = render(
-      <GoAAppHeader heading="Test heading" url="test" onMenuClick={onMobileMenuClick} />
+      <GoabAppHeader heading="Test heading" url="test" onMenuClick={onMobileMenuClick} />
     );
 
     const header = baseElement.querySelector("goa-app-header");

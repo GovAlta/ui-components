@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   standalone: true,
@@ -9,7 +9,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.heading]="heading"
       [attr.maxcontentwidth]="maxContentWidth"
       [attr.fullmenubreakpoint]="fullMenuBreakpoint"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
+      [attr.hasmenuclickhandler]="!!onMenuClick"
+      (_menuClick)="_onMenuClick()"
     >
       <ng-content />
     </goa-app-header>
@@ -22,4 +24,10 @@ export class GoabAppHeader {
   @Input() maxContentWidth?: string;
   @Input() testId?: string;
   @Input() fullMenuBreakpoint?: number;
+
+  @Output() onMenuClick = new EventEmitter();
+
+  _onMenuClick() {
+    this.onMenuClick.emit();
+  }
 }

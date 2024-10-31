@@ -66,7 +66,7 @@ describe("GoABCalendar", () => {
     expect(calendar.getAttribute("name")).toBe(component.name);
     expect(calendar.getAttribute("min")).toBe(component.min?.toString());
     expect(calendar.getAttribute("max")).toBe(component.max?.toString());
-    expect(calendar.getAttribute("data-testid")).toBe(component.testId);
+    expect(calendar.getAttribute("testid")).toBe(component.testId);
     expect(calendar.getAttribute("mt")).toBe(component.mt);
     expect(calendar.getAttribute("mb")).toBe(component.mb);
     expect(calendar.getAttribute("ml")).toBe(component.ml);

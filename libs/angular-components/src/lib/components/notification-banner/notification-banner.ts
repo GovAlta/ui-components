@@ -9,7 +9,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       [attr.type]="type"
       [attr.arialive]="ariaLive"
       [attr.maxcontentwidth]="maxContentWidth"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       (_dismiss)="_onDismiss()"
     >
       <ng-content />

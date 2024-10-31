@@ -10,7 +10,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       [attr.size]="size"
       [attr.invert]="invert"
       [attr.progress]="progress"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
     >
     </goa-spinner>
   `,

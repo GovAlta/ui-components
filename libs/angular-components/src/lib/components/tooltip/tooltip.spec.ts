@@ -32,7 +32,7 @@ describe("GoABTooltip", () => {
     expect(el?.getAttribute("content")).toBe("This is a tooltip");
     expect(el?.getAttribute("position")).toBe("top");
     expect(el?.getAttribute("halign")).toBe("right");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
 
     const goaIcon = el?.querySelector("goa-icon");
     expect(goaIcon?.getAttribute("type")).toBe("information-circle");

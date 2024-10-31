@@ -7,6 +7,7 @@ import {
 interface WCProps extends Margins {
   alignment: GoabButtonGroupAlignment;
   gap?: GoabButtonGroupGap;
+  testid?: string;
 }
 
 declare global {

@@ -77,7 +77,7 @@ describe("GoABModal", () => {
     expect(modal?.getAttribute("closable")).toBe(`${component.closable}`);
     expect(modal?.textContent).toContain(component.content);
     expect(modal?.getAttribute("calloutvariant")).toBe(component.callOutVariant);
-    expect(modal?.getAttribute("data-testid")).toBe(component.testId);
+    expect(modal?.getAttribute("testid")).toBe(component.testId);
     expect(modal?.getAttribute("transition")).toBe(component.transition);
     expect(modal?.getAttribute("role")).toBe(component.role);
   });

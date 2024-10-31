@@ -46,7 +46,7 @@ describe("GoABAppHeaderMenu", () => {
 
     expect(el?.getAttribute("heading")).toBe(component.heading);
     expect(el?.getAttribute("leadingicon")).toBe(component.leadingIcon);
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.innerHTML).toContain("Home");
   });
 });

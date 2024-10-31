@@ -128,5 +128,4 @@ export function GoabTextarea({
   );
 }
 
-export { GoabTextarea as GoABTextArea };
 export default GoabTextarea;

@@ -58,7 +58,9 @@ export function GoabButton({
   mb,
   ml,
 }: GoabButtonProps): JSX.Element {
+
   const el = useRef<HTMLElement>(null);
+
   useEffect(() => {
     if (!el.current) {
       return;

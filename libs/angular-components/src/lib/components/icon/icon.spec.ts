@@ -85,7 +85,7 @@ describe("GoABIcon", () => {
     expect(el?.getAttribute("opacity")).toBe(`${component.opacity}`);
     expect(el?.getAttribute("title")).toBe(component.title);
     expect(el?.getAttribute("arialabel")).toBe(component.ariaLabel);
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("mr")).toBe(component.mr);

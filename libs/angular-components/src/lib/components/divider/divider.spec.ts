@@ -49,7 +49,7 @@ describe("GoABDivider", () => {
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-divider")).nativeElement;
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.getAttribute("mt")).toBe("s");
     expect(el?.getAttribute("mr")).toBe("m");
     expect(el?.getAttribute("mb")).toBe("l");

@@ -3,7 +3,7 @@ import { GoabFormItem } from "./form-item";
 
 afterEach(cleanup);
 
-describe("GoABFormItem", () => {
+describe("GoaFormItem", () => {
   it("renders all with properties", () => {
     const { baseElement } = render(
       <GoabFormItem

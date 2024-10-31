@@ -69,7 +69,7 @@ describe("GoABCircularProgress", () => {
       ).nativeElement;
       expect(el?.getAttribute("progress")).toBe(`${progress}`);
       expect(el?.getAttribute("message")).toBe(component.message);
-      expect(el?.getAttribute("data-testid")).toBe(component.testId);
+      expect(el?.getAttribute("testid")).toBe(component.testId);
       expect(el?.getAttribute("variant")).toBe(variant);
     });
   });

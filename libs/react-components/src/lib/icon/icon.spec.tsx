@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { GoabIcon } from "./icon";
 
-describe("GoAB Icon", () => {
+describe("GoabIcon", () => {
   it("should render the properties", () => {
     const { container } = render(
       <GoabIcon
