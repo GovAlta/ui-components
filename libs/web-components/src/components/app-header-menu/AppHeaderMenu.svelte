@@ -25,24 +25,18 @@
 
   // Private
 
-  // media queries are not sufficient as they don't allow for the same slot
-  // to be used in different query selectors
   let _innerWidth: number = window.innerWidth;
-  // allows listening to popover events
   let _popoverEl: HTMLElement;
-  // allow for finding of contained link elements within slot
   let _slotParentEl: HTMLElement;
-  // allow for binding with appheader events
   let _rootEl: HTMLElement;
-  // internal state of when the window location matches with a link within this element's slot
   let _hasCurrentLink = false;
-  // open state
   let _open = false;
+  let _menuItems: HTMLAnchorElement[] = [];
+  let _menuButton: HTMLButtonElement;
 
   // Reactive
   $: _desktop = _innerWidth >= TABLET_BP;
 
-  // call the method when window changes to desktop size
   $: _desktop && bindToPopoverCloseEvent();
 
   // Hooks
@@ -114,8 +108,6 @@
     closeMenu();
   }
 
-  // Ensures that the Popover _close event has a handler if the window
-  // is resized after initial load
   async function bindToPopoverCloseEvent() {
     await tick();
     if (!_popoverEl) return;
@@ -133,6 +125,10 @@
 
     if (_slotParentEl) {
       _slotParentEl.addEventListener("click", closeMenu);
+      _menuItems = Array.from(_slotParentEl.querySelectorAll("a"));
+      if (_menuItems.length > 0) {
+        _menuItems[0].focus();
+      }
     }
   }
 
@@ -140,20 +136,47 @@
     if (_slotParentEl) {
       _slotParentEl.removeEventListener("click", closeMenu);
     }
-    // timeout is required to allow any other events to fire before DOM is changed
     setTimeout(() => {
       _open = false;
+      _menuButton?.focus();
     }, 1);
   }
 
   function toggleMenu() {
     _open ? closeMenu() : openMenu();
   }
+
+  function handleKeydown(event: KeyboardEvent) {
+    if (!_open) return;
+
+    const currentIndex = _menuItems.indexOf(document.activeElement as HTMLAnchorElement);
+
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        if (currentIndex < _menuItems.length - 1) {
+          _menuItems[currentIndex + 1].focus();
+        }
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        if (currentIndex > 0) {
+          _menuItems[currentIndex - 1].focus();
+        } else {
+          _menuButton.focus();
+        }
+        break;
+      case "Escape":
+        event.preventDefault();
+        closeMenu();
+        break;
+    }
+  }
 </script>
 
 <svelte:window bind:innerWidth={_innerWidth} />
 
-<div bind:this={_rootEl} data-testid={testid}>
+<div bind:this={_rootEl} data-testid={testid} on:keydown={handleKeydown}>
   {#if _desktop}
     <goa-popover
       bind:this={_popoverEl}
@@ -168,10 +191,12 @@
       open={_open}
     >
       <button
+        bind:this={_menuButton}
         slot="target"
         style="padding: 0 0.75rem;"
         class={type}
         class:current={_hasCurrentLink}
+        on:click={toggleMenu}
       >
         {#if leadingicon}
           <goa-icon type={leadingicon} mt="1" />
@@ -185,7 +210,7 @@
       </div>
     </goa-popover>
   {:else}
-    <button class:open={_open} on:click={toggleMenu} class={type}>
+    <button bind:this={_menuButton} class:open={_open} on:click={toggleMenu} class={type}>
       {#if leadingicon}
         <goa-icon type={leadingicon} mt="1" />
       {/if}
