@@ -34,16 +34,15 @@ export interface GoabDropdownItemProps {
 
 export function GoabDropdownOption(props: GoabDropdownItemProps) {
   useEffect(() => {
-    console.warn("GoABDropdownOption is deprecated. Please use GoABDropdownItem");
+    console.warn("GoabDropdownOption is deprecated. Please use GoabDropdownItem");
   }, []);
 
   return <GoabDropdownItem {...props} />;
 }
 
-export function GoabDropdownItem({ value, label, filter, name, testId, mountType = "append" }: GoabDropdownItemProps) {
+export function GoabDropdownItem({ value, label, filter, name, mountType = "append" }: GoabDropdownItemProps) {
   return (
     <goa-dropdown-item
-      data-testid={testId}
       value={value}
       label={label}
       filter={filter}

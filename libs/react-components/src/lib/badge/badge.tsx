@@ -111,7 +111,7 @@ export function GoabSuccessBadge({
 /**
  * @deprecated
  */
-export function GoABImportantBadge({
+export function GoabImportantBadge({
   content,
   testId,
   icon,
@@ -139,7 +139,7 @@ export function GoABImportantBadge({
 /**
  * @deprecated
  */
-export function GoABEmergencyBadge({
+export function GoabEmergencyBadge({
   content,
   testId,
   icon,

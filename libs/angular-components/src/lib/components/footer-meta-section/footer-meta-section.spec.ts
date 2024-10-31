@@ -34,7 +34,7 @@ describe("GoABFooterMetaSection", () => {
     const el = fixture.debugElement.query(
       By.css("goa-app-footer-meta-section"),
     ).nativeElement;
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
     expect(el?.querySelector("a")).toBeTruthy();
     expect(el?.innerHTML).toContain("Home");
   });

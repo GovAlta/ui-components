@@ -1,14 +1,10 @@
 import { ReactNode } from "react";
-import { Margins } from "../../common/styling";
-
-// TODO: move these types into the common lib for the upcoming major release
-
-type MaxWidth = string | "none";
+import {GoabTextMaxWidth, GoabTextHeadingElement, GoabTextTextElement, GoabTextSize, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  as?: TextElement | HeadingElement;
-  size?: Size;
-  maxwidth?: MaxWidth;
+  as?: GoabTextTextElement | GoabTextHeadingElement;
+  size?: GoabTextSize;
+  maxwidth?: GoabTextMaxWidth;
 }
 
 declare global {
@@ -20,33 +16,14 @@ declare global {
     }
   }
 }
-
-export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5"
-export type TextElement = "span" | "div" | "p";
-
-type HeadingSize
-  = "heading-xl"
-  | "heading-l"
-  | "heading-m"
-  | "heading-s"
-  | "heading-xs"
-
-type BodySize
-  = "body-l"
-  | "body-m"
-  | "body-s"
-  | "body-xs";
-
-export type Size = HeadingSize | BodySize;
-
 interface GoATextProps extends Margins {
-  as?: TextElement | HeadingElement;
-  size?: Size;
-  maxWidth?: MaxWidth;
+  as?: GoabTextTextElement | GoabTextHeadingElement;
+  size?: GoabTextSize;
+  maxWidth?: GoabTextMaxWidth;
   children: ReactNode;
 }
 
-export function GoAText(props: GoATextProps): JSX.Element {
+export function GoabText(props: GoATextProps): JSX.Element {
   return (
     <goa-text
       as={props.as || "div"}
@@ -62,4 +39,4 @@ export function GoAText(props: GoATextProps): JSX.Element {
   );
 }
 
-export default GoAText;
+export default GoabText;

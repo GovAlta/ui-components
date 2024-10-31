@@ -7,7 +7,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   template: `
     <goa-details
       [attr.heading]="heading"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.open]="open"
       [attr.maxwidth]="maxWidth"
       [attr.mt]="mt"
@@ -21,7 +21,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoabDetails {
-  @Input() heading?: string;
+  @Input({ required: true }) heading!: string;
   @Input() testId?: string;
   @Input() open?: boolean;
   @Input() maxWidth?: string;

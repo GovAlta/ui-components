@@ -30,7 +30,7 @@ describe("GoABSideMenu", () => {
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-side-menu");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
     expect(el?.querySelector("a")?.textContent).toBe("Link");
   });
 });

@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import { GoabBadge } from "./badge";
 import { screen } from "@testing-library/dom";
 
-describe("GoAB Badge", () => {
+describe("GoabBadge", () => {
   it("should render", () => {
     render(<GoabBadge type="information" testId="badge-test" content="Text Content" />);
 

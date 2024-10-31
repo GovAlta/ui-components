@@ -10,7 +10,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       [attr.perpagecount]="perPageCount"
       [attr.pagenumber]="pageNumber"w
       [attr.variant]="variant"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"

@@ -81,7 +81,7 @@ describe("GoABCheckbox", () => {
     ).nativeElement;
     expect(checkboxElement.getAttribute("name")).toBe(component.name);
     expect(checkboxElement.getAttribute("text")).toBe(component.text);
-    expect(checkboxElement.getAttribute("data-testid")).toBe(component.testId);
+    expect(checkboxElement.getAttribute("testid")).toBe(component.testId);
     expect(checkboxElement.getAttribute("mt")).toBe(component.mt);
     expect(checkboxElement.getAttribute("mr")).toBe(component.mr);
     expect(checkboxElement.getAttribute("mb")).toBe(component.mb);

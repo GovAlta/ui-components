@@ -4,6 +4,7 @@ interface WCProps extends Margins {
   elevation?: number;
   width?: string;
   children: React.ReactNode;
+  testid?: string;
 }
 
 declare global {
@@ -40,7 +41,7 @@ export function GoabCard({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
     >
       {children}
     </goa-card>

@@ -184,9 +184,8 @@
       {/if}
     </div>
     <div class="text" data-testid="text">
-      <slot>
+      <slot></slot>
         {text}
-      </slot>
     </div>
   </label>
   {#if $$slots.description || description}
