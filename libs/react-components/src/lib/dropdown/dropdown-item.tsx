@@ -40,10 +40,9 @@ export function GoabDropdownOption(props: GoabDropdownItemProps) {
   return <GoabDropdownItem {...props} />;
 }
 
-export function GoabDropdownItem({ value, label, filter, name, testId, mountType = "append" }: GoabDropdownItemProps) {
+export function GoabDropdownItem({ value, label, filter, name, mountType = "append" }: GoabDropdownItemProps) {
   return (
     <goa-dropdown-item
-      data-testid={testId}
       value={value}
       label={label}
       filter={filter}

@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
+import { Margins } from "@abgov/ui-components-common";
 
 // TODO: move these types into the common lib for the upcoming major release
 

@@ -65,7 +65,7 @@ describe("GoABHeroBanner", () => {
     expect(el?.getAttribute("textcolor")).toBe(component.textColor);
     expect(el?.getAttribute("minheight")).toBe(component.minHeight);
     expect(el?.getAttribute("maxcontentwidth")).toBe(component.maxContentWidth);
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.innerHTML).toContain("Children content");
     const actionsContent = el.querySelector("[slot='actions']");
     expect(actionsContent?.querySelector("button").textContent).toBe("Action");

@@ -46,7 +46,7 @@ describe("GoABNotificationBanner", () => {
     expect(el?.getAttribute("type")).toEqual(component.type);
     expect(el?.getAttribute("arialive")).toEqual(component.ariaLive);
     expect(el?.getAttribute("maxcontentwidth")).toEqual(component.maxContentWidth);
-    expect(el?.getAttribute("data-testid")).toEqual(component.testId);
+    expect(el?.getAttribute("testid")).toEqual(component.testId);
     expect(el?.textContent).toContain("Information to the user goes in the content");
   });
 

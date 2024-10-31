@@ -26,6 +26,6 @@ describe("GoASpacer", () => {
     const el = fixture.nativeElement.querySelector("goa-spacer");
     expect(el?.getAttribute("hspacing")).toBe("2xl");
     expect(el?.getAttribute("vspacing")).toBe("m");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
   });
 });

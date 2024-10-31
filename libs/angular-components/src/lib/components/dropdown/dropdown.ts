@@ -25,7 +25,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       [attr.multiselect]="multiselect"
       [attr.native]="native"
       [attr.placeholder]="placeholder"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.width]="width"
       [attr.relative]="relative"
       [id]="id"

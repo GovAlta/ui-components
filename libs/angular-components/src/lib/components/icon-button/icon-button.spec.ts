@@ -82,7 +82,7 @@ describe("GoABIconButton", () => {
     expect(el?.getAttribute("size")).toBe(component.size);
     expect(el?.getAttribute("variant")).toBe(component.variant);
     expect(el?.getAttribute("title")).toBe(component.title);
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.getAttribute("arialabel")).toBe(component.ariaLabel);
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mb")).toBe(component.mb);

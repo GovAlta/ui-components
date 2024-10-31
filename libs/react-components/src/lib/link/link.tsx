@@ -1,12 +1,10 @@
 import { ReactNode } from "react";
-import { Margins } from "../../common/styling";
-import { GoAIconType } from "../icon/icon";
-
+import { GoabIconType,Margins } from "@abgov/ui-components-common";
 // TODO: move these types into the common lib for the upcoming major release
 
 interface WCProps extends Margins {
-  leadingicon?: GoAIconType;
-  trailingicon?: GoAIconType;
+  leadingicon?: GoabIconType;
+  trailingicon?: GoabIconType;
 }
 
 declare global {
@@ -20,8 +18,8 @@ declare global {
 }
 
 interface GoALinkProps extends Margins {
-  leadingIcon?: GoAIconType;
-  trailingIcon?: GoAIconType;
+  leadingIcon?: GoabIconType;
+  trailingIcon?: GoabIconType;
   children: ReactNode;
 }
 

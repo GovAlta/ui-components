@@ -109,6 +109,7 @@ export type GoabContainerWidth = "full" | "content";
 export type GoabCalloutType = "information" | "success" | "important" | "emergency" | "event";
 export type GoabCalloutSize = "medium" | "large";
 export type GoabCalloutAriaLive = "off" | "polite" | "assertive";
+export type GoabCalloutIconTheme = "outline" | "filled";
 
 // Button
 export type GoabButtonType =
@@ -127,6 +128,7 @@ export type GoabButtonGroupGap = "relaxed" | "compact";
 
 // Accordion
 export type GoabAccordionHeadingSize = "small" | "medium";
+export type GoabAccordionIconPosition = "left" | "right";
 
 // Formstepper
 
@@ -268,6 +270,7 @@ export type GoabAriaLiveType = "polite" | "assertive" | "off";
 
 export type GoabServiceLevel = "alpha" | "beta" | "live";
 export type GoabLinkTarget = "self" | "blank";
+
 
 // Modal
 export type GoabModalRole = "dialog" | "alertdialog";
@@ -923,3 +926,20 @@ export interface Margins {
 
 export type GoabBlockDirection = "row" | "column";
 export type GoabBlockAlignment = "center" | "start" | "end";
+
+export type GoabTextMaxWidth = string | "none";
+export type GoabTextHeadingElement = "h1" | "h2" | "h3" | "h4" | "h5"
+export type GoabTextTextElement = "span" | "div" | "p";
+type GoabTextHeadingSize
+  = "heading-xl"
+  | "heading-l"
+  | "heading-m"
+  | "heading-s"
+  | "heading-xs"
+
+type GoabTextBodySize
+  = "body-l"
+  | "body-m"
+  | "body-s"
+  | "body-xs";
+export type GoabTextSize = GoabTextHeadingSize | GoabTextBodySize;

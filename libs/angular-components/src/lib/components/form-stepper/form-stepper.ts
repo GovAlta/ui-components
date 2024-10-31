@@ -12,7 +12,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       [attr.mb]="mb"
       [attr.ml]="ml"
       [attr.mr]="mr"
-      (_change)="onchange($event)"
+      (_change)="_onChange($event)"
     >
       <ng-content />
     </goa-form-stepper>
@@ -29,7 +29,7 @@ export class GoabFormStepper {
 
   @Output() onChange = new EventEmitter<GoabFormStepperOnChangeDetail>();
 
-  onchange(e: Event) {
+  _onChange(e: Event) {
     const detail = (e as CustomEvent<GoabFormStepperOnChangeDetail>).detail;
     this.onChange.emit(detail);
   }

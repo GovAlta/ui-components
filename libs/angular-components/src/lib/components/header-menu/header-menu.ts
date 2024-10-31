@@ -8,7 +8,7 @@ import { GoabIconType } from "@abgov/ui-components-common";
     <goa-app-header-menu
       [attr.leadingicon]="leadingIcon"
       [attr.heading]="heading"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
     >
       <ng-content />
     </goa-app-header-menu>

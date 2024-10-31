@@ -1,19 +1,17 @@
 import { ReactNode , useEffect, useRef} from "react";
 
-import type { GoabAccordionHeadingSize, Margins } from "@abgov/ui-components-common";
-// TODO: move to ts
-export type GoAIconPosition = "left" | "right";
+import type { GoabAccordionHeadingSize, GoabAccordionIconPosition, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   open?: boolean;
-  headingSize?: GoabAccordionHeadingSize;
+  headingsize?: GoabAccordionHeadingSize;
   heading: string;
-  secondaryText?: string;
+  secondarytext?: string;
   headingContent?: ReactNode;
   maxwidth?: string;
   testid?: string;
-  iconposition?: GoAIconPosition;
+  iconposition?: GoabAccordionIconPosition;
 }
 
 declare global {
@@ -33,7 +31,7 @@ export interface GoabAccordionProps extends Margins {
   headingContent?: ReactNode;
   maxWidth?: string;
   testid?: string;
-  iconPosition?: GoAIconPosition;
+  iconPosition?: GoabAccordionIconPosition;
   onChange?: (open: boolean) => void;
   children: ReactNode;
 }
@@ -73,9 +71,9 @@ export function GoabAccordion({
     <goa-accordion
       ref={ref}
       open={open}
-      headingSize={headingSize}
+      headingsize={headingSize}
       heading={heading}
-      secondaryText={secondaryText}
+      secondarytext={secondaryText}
       iconposition={iconPosition}
       maxwidth={maxWidth}
       testid={testid}

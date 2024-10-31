@@ -6,7 +6,6 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
   selector: "goab-dropdown-item",
   template: `
     <goa-dropdown-item
-      [attr.data-testid]="testId"
       [value]="value"
       [label]="label"
       [attr.filter]="filter"
@@ -23,7 +22,6 @@ export class GoabDropdownItem {
   @Input() label?: string;
   @Input() name?: string;
   @Input() mountType?: GoabDropdownItemMountType;
-  @Input() testId?: string;
 }
 
 

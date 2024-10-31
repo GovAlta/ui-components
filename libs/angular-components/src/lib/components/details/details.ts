@@ -7,7 +7,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   template: `
     <goa-details
       [attr.heading]="heading"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.open]="open"
       [attr.maxwidth]="maxWidth"
       [attr.mt]="mt"

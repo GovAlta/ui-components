@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Margins } from "../../common/styling";
+import { Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   heading: string;
@@ -23,5 +23,5 @@ type GoAPublicFormTaskListProps = {
 export function GoAPublicFormTaskList({heading, children}: GoAPublicFormTaskListProps) {
   return (
     <goa-public-form-task-list heading={heading}>{children}</goa-public-form-task-list>
-  )  
+  )
 }

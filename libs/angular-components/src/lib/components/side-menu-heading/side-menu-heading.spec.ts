@@ -29,7 +29,7 @@ describe("GoABSideMenuHeading", () => {
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-side-menu-heading");
     expect(el?.getAttribute("icon")).toBe("home");
-    expect(el?.getAttribute("data-testid")).toBe("foo");
+    expect(el?.getAttribute("testid")).toBe("foo");
     expect(el?.textContent).toContain("Heading");
     expect(el?.querySelector("[slot='meta']")?.innerHTML).toContain("details");
   })

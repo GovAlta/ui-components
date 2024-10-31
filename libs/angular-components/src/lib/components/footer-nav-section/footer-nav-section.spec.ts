@@ -46,7 +46,7 @@ describe("GoABAppFooterNavSection", () => {
     const el = fixture.debugElement.query(
       By.css("goa-app-footer-nav-section"),
     ).nativeElement;
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.getAttribute("heading")).toBe(component.heading);
     expect(el?.getAttribute("maxcolumncount")).toBe(`${component.maxColumnCount}`);
   });

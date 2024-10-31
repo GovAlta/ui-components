@@ -11,7 +11,7 @@ import { NgTemplateOutlet } from "@angular/common";
       [attr.calloutvariant]="calloutVariant"
       [attr.open]="open"
       [attr.maxwidth]="maxWidth"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.role]="role"
       [attr.closable]="closable"
       [attr.transition]="transition"
