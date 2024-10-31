@@ -9,6 +9,8 @@ declare global {
   }
 }
 
-export function GoASimpleFormSummary() {
+export function GoabSimpleFormSummary() {
   return <goa-simple-form-summary />;
 }
+
+export default GoabSimpleFormSummary;

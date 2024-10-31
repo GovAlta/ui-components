@@ -64,7 +64,7 @@ describe("GoABDetails", () => {
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("mr")).toBe(component.mr);
     expect(el?.getAttribute("ml")).toBe(component.ml);
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.innerHTML).toContain("The content");
     expect(el?.getAttribute("maxwidth")).toBe("480px");
   });

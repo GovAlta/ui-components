@@ -10,7 +10,7 @@ import { NgTemplateOutlet } from "@angular/common";
       [attr.heading]="heading"
       [attr.backgroundurl]="backgroundUrl"
       [attr.minheight]="minHeight"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.maxcontentwidth]="maxContentWidth"
       [attr.backgroundColor]="backgroundColor"
       [attr.textcolor]="textColor"

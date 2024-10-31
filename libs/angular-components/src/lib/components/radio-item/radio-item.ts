@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
+import { Spacing } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
@@ -12,9 +13,13 @@ import { NgTemplateOutlet } from "@angular/common";
       [attr.description]="getDescriptionAsString()"
       [attr.arialabel]="ariaLabel"
       [disabled]="disabled"
+      [attr.maxwidth]="maxWidth"
       [attr.checked]="checked"
       [attr.error]="error"
-      [attr.data-testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
     >
       <ng-content />
       <div slot="description">
@@ -34,7 +39,12 @@ export class GoabRadioItem {
   @Input() disabled?: boolean;
   @Input() checked?: boolean;
   @Input() error?: boolean;
-  @Input() testId?: string;
+  @Input() maxWidth?: string;
+  @Input() mt?: Spacing;
+  @Input() mb?: Spacing;
+  @Input() ml?: Spacing;
+  @Input() mr?: Spacing;
+
 
   getDescriptionAsString(): string {
     return (!this.description || this.description instanceof TemplateRef) ? "" : this.description;

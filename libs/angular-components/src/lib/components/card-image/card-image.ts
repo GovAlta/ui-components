@@ -5,8 +5,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-card-image",
   template: `
     <goa-card-image
-      [src]="src"
-      [height]="height"
+      [attr.src]="src"
+      [attr.height]="height"
     >
       <ng-content />
     </goa-card-image>

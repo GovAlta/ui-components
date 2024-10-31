@@ -4,7 +4,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   standalone: true,
   selector: "goab-app-footer-meta-section",
   template: `
-    <goa-app-footer-meta-section [attr.data-testid]="testId">
+    <goa-app-footer-meta-section [attr.testid]="testId">
       <ng-content />
     </goa-app-footer-meta-section>
   `,

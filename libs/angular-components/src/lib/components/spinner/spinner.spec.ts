@@ -45,6 +45,6 @@ describe("GoABSpinner", () => {
     expect(el?.getAttribute("size")).toBe(`${component.size}`);
     expect(el?.getAttribute("progress")).toBe(`${component.progress}`);
     expect(el?.getAttribute("invert")).toBe(`${component.invert}`);
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
   });
 });

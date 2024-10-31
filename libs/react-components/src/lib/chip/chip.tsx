@@ -10,7 +10,6 @@ interface WCProps extends Margins {
   deletable: boolean;
   content: string;
   variant?: GoabChipVariant;
-  variant?: GoAChipVariant;
   testid?: string;
 }
 

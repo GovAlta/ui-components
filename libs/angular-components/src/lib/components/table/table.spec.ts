@@ -47,7 +47,7 @@ class TestTableComponent {
   }
 }
 
-describe("GoABTable", () => {
+describe("GoabTable", () => {
   let fixture: ComponentFixture<TestTableComponent>;
   let component: TestTableComponent;
 
@@ -76,7 +76,7 @@ describe("GoABTable", () => {
     const el = fixture.nativeElement.querySelector("goa-table");
     expect(el?.getAttribute("width")).toBe(component.width);
     expect(el?.getAttribute("variant")).toBe(component.variant);
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("mr")).toBe(component.mr);

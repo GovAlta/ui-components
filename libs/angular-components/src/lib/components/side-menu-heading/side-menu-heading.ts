@@ -7,7 +7,7 @@ import { NgTemplateOutlet } from "@angular/common";
   selector: "goab-side-menu-heading",
   imports: [NgTemplateOutlet],
   template: `
-    <goa-side-menu-heading [attr.data-testid]="testId" [attr.icon]="icon">
+    <goa-side-menu-heading [attr.testid]="testId" [attr.icon]="icon">
       <ng-content />
       <span slot="meta">
         <ng-container [ngTemplateOutlet]="meta"></ng-container>

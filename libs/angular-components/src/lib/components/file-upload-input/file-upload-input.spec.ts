@@ -67,7 +67,7 @@ describe("GoABFileUploadInput", () => {
     expect(el?.getAttribute("maxfilesize")).toBe(component.maxFileSize);
     expect(el?.getAttribute("accept")).toBe(component.accept);
     expect(el?.getAttribute("variant")).toBe(component.variant);
-    expect(el?.getAttribute("data-testid")).toBe(component.testId);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("mr")).toBe(component.mr);

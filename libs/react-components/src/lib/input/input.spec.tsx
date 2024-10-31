@@ -141,7 +141,7 @@ describe("Input", () => {
     });
   });
 
-  it("should handle decimal number for GoABInputNumber", () => {
+  it("should handle decimal number for GoabInputNumber", () => {
     const mockOnChangeHandler = vitest.fn();
     const { container } = render(
       <GoabInputNumber onChange={mockOnChangeHandler} name="numberInput" value={1} />,

@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
-import { GoAIconType } from "../icon/icon";
-import { Margins } from "../../common/styling";
+import { GoabIconType, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   heading: string;
-  icon?: GoAIconType;
+  icon?: GoabIconType;
   testid?: string;
 
 }
@@ -20,9 +19,9 @@ declare global {
 }
 
 /* eslint-disable-next-line */
-export interface GoASideMenuGroupProps extends Margins {
+export interface GoabSideMenuGroupProps extends Margins {
   heading: string;
-  icon?: GoAIconType;
+  icon?: GoabIconType;
   testId?: string;
   children?: ReactNode;
 }

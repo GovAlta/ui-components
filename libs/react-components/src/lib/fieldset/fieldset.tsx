@@ -1,7 +1,5 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
-
-// TODO: move these types into the common lib for the upcoming major release
+import { Margins, GoabFielsetOnContinueDetail } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | null>;
@@ -22,18 +20,18 @@ declare global {
   }
 }
 
-interface GoAFieldsetProps extends Margins {
+interface GoabFieldsetProps extends Margins {
   id: string;
   first?: boolean;
   last?: boolean;
   heading?: string;
   buttonText?: string;
   errors?: Record<string, string>;
-  onContinue?: (el: HTMLElement, state: Record<string, string>) => boolean | void | undefined;
+  onContinue?: (event: GoabFielsetOnContinueDetail) => boolean | void | undefined;
   children: ReactNode;
 }
 
-export function GoAFieldset({
+export function GoabFieldset({
   heading,
   buttonText,
   id,
@@ -45,13 +43,13 @@ export function GoAFieldset({
   ml,
   first,
   last,
-}: GoAFieldsetProps) {
+}: GoabFieldsetProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const _continue = (e: Event) => {
-      const { el, state } = (e as CustomEvent).detail;
-      return onContinue?.(el, state);
+      const event = (e as CustomEvent).detail;
+      return onContinue?.(event);
     }
 
     if (onContinue) {
@@ -82,4 +80,4 @@ export function GoAFieldset({
   );
 }
 
-export default GoAFieldset;
+export default GoabFieldset;

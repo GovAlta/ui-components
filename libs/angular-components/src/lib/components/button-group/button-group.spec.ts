@@ -65,7 +65,7 @@ describe("GoABButtonGroup", () => {
     ).nativeElement;
     expect(buttonGroupElement.getAttribute("alignment")).toBe(component.alignment);
     expect(buttonGroupElement.getAttribute("gap")).toBe(component.gap);
-    expect(buttonGroupElement.getAttribute("data-testid")).toBe(component.testId);
+    expect(buttonGroupElement.getAttribute("testid")).toBe(component.testId);
     expect(buttonGroupElement.getAttribute("mt")).toBe(component.mt);
     expect(buttonGroupElement.getAttribute("mb")).toBe(component.mb);
     expect(buttonGroupElement.getAttribute("ml")).toBe(component.ml);

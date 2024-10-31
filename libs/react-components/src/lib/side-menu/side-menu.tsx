@@ -21,7 +21,7 @@ export interface GoabSideMenuProps {
 }
 
 export function GoabSideMenu(props: GoabSideMenuProps): JSX.Element {
-  return <goa-side-menu data-testid={props.testId}>{props.children}</goa-side-menu>;
+  return <goa-side-menu testid={props.testId}>{props.children}</goa-side-menu>;
 }
 
 export default GoabSideMenu;

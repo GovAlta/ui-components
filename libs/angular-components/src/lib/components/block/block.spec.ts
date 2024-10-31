@@ -64,7 +64,7 @@ describe("GoABBlock", () => {
     expect(blockElement.getAttribute("gap")).toBe(component.gap);
     expect(blockElement.getAttribute("direction")).toBe(component.direction);
     expect(blockElement.getAttribute("alignment")).toBe(component.alignment);
-    expect(blockElement.getAttribute("data-testid")).toBe(component.testId);
+    expect(blockElement.getAttribute("testid")).toBe(component.testId);
     expect(blockElement.getAttribute("mt")).toBe(component.mt);
     expect(blockElement.getAttribute("mb")).toBe(component.mb);
     expect(blockElement.getAttribute("ml")).toBe(component.ml);

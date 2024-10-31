@@ -6,7 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   selector: "goab-divider",
   template: `
     <goa-divider
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"

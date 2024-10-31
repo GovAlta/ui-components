@@ -7,7 +7,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
     <goa-app-footer-nav-section
       [attr.maxcolumncount]="maxColumnCount"
       [attr.heading]="heading"
-      [attr.data-testid]="testId"
+      [attr.testid]="testId"
     >
       <ng-content />
     </goa-app-footer-nav-section>
