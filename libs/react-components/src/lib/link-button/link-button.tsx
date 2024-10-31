@@ -1,14 +1,10 @@
 import { ReactNode } from "react";
-import { GoabIconType, Margins } from "@abgov/ui-components-common";
-
-// TODO: move these types into the common lib for the upcoming major release
-
-export type GoALinkButtonType = "start" | "primary" | "secondary" | "tertiary";
+import { GoabIconType, GoabLinkButtonType, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  type?: GoALinkButtonType;
+  type?: GoabLinkButtonType;
   leadingicon?: GoabIconType;
-  trailingicon?: GoabIconType;
+  trailingicon?: GoabIconType
 }
 
 declare global {
@@ -22,7 +18,7 @@ declare global {
 }
 
 interface GoALinkButtonProps extends Margins {
-  type?: GoALinkButtonType;
+  type?: GoabLinkButtonType;
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;
   children: ReactNode;

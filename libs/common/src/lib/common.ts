@@ -943,3 +943,44 @@ type GoabTextBodySize
   | "body-s"
   | "body-xs";
 export type GoabTextSize = GoabTextHeadingSize | GoabTextBodySize;
+
+export type GoabLinkButtonType = "start" | "primary" | "secondary" | "tertiary";
+
+export type GoabTextMaxWidth = string | "none";
+export type GoabTextHeadingElement = "h1" | "h2" | "h3" | "h4" | "h5";
+export type GoabTextElement = "span" | "div" | "p";
+export type GoabTextHeadingSize = "heading-xl"
+  | "heading-l"
+  | "heading-m"
+  | "heading-s"
+  | "heading-xs";
+export type GoabTextBodySize = "body-l"
+  | "body-m"
+  | "body-s"
+  | "body-xs";
+export type GoabTextSize = GoabTextHeadingSize | GoabTextBodySize;
+
+export type GoabFielsetOnContinueDetail = {
+  el: HTMLElement;
+  state: Record<string, string>
+}
+
+// Simple Form
+export type GoabFormField = {
+  label: string;
+  value: string;
+}
+export type GoabFormState = {
+  form: Record<string, Record<string, GoabFormField>>;
+  history: string[];
+  editting: string;
+  lastModified?: Date;
+}
+export type GoabFormStorageType = "none" | "local" | "session";
+export type GoabFormOnMountDetail = {
+  fn: (next: string) => void
+}
+export type GoabFormOnStateChange = {
+  id: string;
+  state: Record<string, Record<string, GoabFormField>>;
+}
