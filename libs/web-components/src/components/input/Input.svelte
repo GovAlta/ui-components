@@ -388,9 +388,19 @@
   }
 
   /* Error state */
-  .goa-input.error {
+  .goa-input.error input.input--goa:not(input:focus-visible) {
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-error);
+  }
+
+  .goa-input.leading-content.error input.input--goa:not(input:focus-visible) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .goa-input.trailing-content.error input.input--goa:not(input:focus-visible) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   /* Focus state (including when in error state) */
