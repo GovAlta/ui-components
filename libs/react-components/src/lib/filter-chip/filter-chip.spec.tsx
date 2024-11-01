@@ -1,4 +1,5 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import { GoAFilterChip } from "./filter-chip";
 import { describe, it, expect, vi } from "vitest";
 
@@ -66,7 +67,7 @@ describe("GoA FilterChip", () => {
   });
 
   it("should not apply background fill on hover", async () => {
-    const { container } = render(<GoAFilterChip content="Test" testId="chip" />);
+    render(<GoAFilterChip content="Test" testId="chip" />);
     const chip = await screen.findByTestId("chip");
     fireEvent.mouseOver(chip);
     expect(chip).not.toHaveStyle("background-color: var(--goa-color-greyscale-200)");

@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { GoabAppHeader } from "./app-header";
 
-describe("GoABAppHeader", () => {
+describe("GoabAppHeader", () => {
   it("should render", () => {
     const { baseElement } = render(<GoabAppHeader heading="Test heading" url="test" />);
 

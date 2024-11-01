@@ -34,7 +34,7 @@ export interface GoabDropdownItemProps {
 
 export function GoabDropdownOption(props: GoabDropdownItemProps) {
   useEffect(() => {
-    console.warn("GoABDropdownOption is deprecated. Please use GoABDropdownItem");
+    console.warn("GoabDropdownOption is deprecated. Please use GoabDropdownItem");
   }, []);
 
   return <GoabDropdownItem {...props} />;
