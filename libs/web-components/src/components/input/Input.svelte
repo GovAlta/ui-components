@@ -428,7 +428,6 @@
     color: var(--goa-color-text-default);
     font-size: var(--goa-font-size-4);
 
-    /* why are their calcs? what are they trying to fix? */
     padding: calc(var(--goa-space-xs) - 1px) calc(var(--goa-space-s) - 1px);
     line-height: calc(40px - calc(var(--goa-space-xs) * 2));
 
@@ -504,19 +503,25 @@
     border-bottom-right-radius: var(--goa-border-radius-m);
   }
 
+  .input-leading-content {
+    border-top-left-radius: var(--goa-border-radius-none);
+    border-bottom-left-radius: var(--goa-border-radius-none);
+  }
+
+  .input-trailing-content {
+    border-top-right-radius: var(--goa-border-radius-none);
+    border-bottom-right-radius: var(--goa-border-radius-none);
+  }
+
   /* this is the hover style for the leading and trailing content
   trying to make the error state not change on hover   */
   .input-leading-content:not(.goa-input.error):not(input:focus-visible):hover {
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-hover);
-    border-top-left-radius: var(--goa-border-radius-none);
-    border-bottom-left-radius: var(--goa-border-radius-none);
   }
   .input-trailing-content:not(.goa-input.error):not(input:focus-visible):hover {
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-hover);
-    border-top-right-radius: var(--goa-border-radius-none);
-    border-bottom-right-radius: var(--goa-border-radius-none);
   }
 
   /* this is the interior focus border */
@@ -527,8 +532,6 @@
     box-shadow:
       inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
       0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
-    border-top-left-radius: var(--goa-border-radius-none);
-    border-bottom-left-radius: var(--goa-border-radius-none);
   }
   .input-trailing-content:active,
   .input-trailing-content:focus,
