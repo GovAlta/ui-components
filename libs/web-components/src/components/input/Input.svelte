@@ -524,18 +524,17 @@
   }
 
   /* this is the hover style for the leading and trailing content
-  trying to make the error state not change on hover   */
+  error state */
   .input-leading-content:not(.goa-input.error):not(input:focus-visible):hover {
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-hover);
+      var(--goa-color-interactive-error);
   }
   .input-trailing-content:not(.goa-input.error):not(input:focus-visible):hover {
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-hover);
+      var(--goa-color-interactive-error);
   }
 
   /* this is the interior focus border */
-
   .input-leading-content:active,
   .input-leading-content:focus,
   .input-leading-content:focus-within {
