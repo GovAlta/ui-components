@@ -39,6 +39,7 @@
   let _titleEl: HTMLElement;
   let _headingContentSlotChildren: Element[] = [];
   let _accordionId: string = "";
+  let _rootEl: HTMLElement;
   // Reactive
 
   $: isOpen = toBoolean(open);
@@ -64,6 +65,18 @@
     }
     return [];
   }
+
+  function dispatchClickEvent(open?: boolean) {
+    if (!_rootEl) return;
+
+    _rootEl.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        bubbles: true,
+        detail: { open: open },
+      }),
+    );
+  }
 </script>
 
 <!-- HTML -->
@@ -71,11 +84,13 @@
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     max-width: ${maxwidth};
+    --icon-rotate: ${iconposition === "right" ? "180deg" : "90deg"}
   `}
   class="goa-accordion"
+  bind:this={_rootEl}
   data-testid={testid}
 >
-  <details open={isOpen} on:toggle={({ target }) => (open = `${target?.open}`)}>
+<details open={isOpen} on:toggle={({ target }) => { open = `${target?.open}`; dispatchClickEvent(target?.open); }}>
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <summary
       class={`container-${headingsize}`}
@@ -115,7 +130,7 @@
 
       {#if iconposition === "right"}
         <goa-icon
-          type="chevron-forward"
+          type="chevron-down"
           fillcolor={_hovering
       ? "var(--goa-color-interactive-hover)"
       : "var(--goa-color-interactive-default)"}
@@ -256,7 +271,7 @@
   }
 
   details[open] goa-icon {
-    transform: rotate(90deg);
+    transform: rotate(var(--icon-rotate));
   }
 
   details[open] summary {
