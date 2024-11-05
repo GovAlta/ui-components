@@ -524,14 +524,14 @@
   }
 
   /* this is the hover style for the leading and trailing content
-  error state */
-  .input-leading-content:not(.goa-input.error):not(input:focus-visible):hover {
+  without error */
+  .input-leading-content:not(.error):not(input:focus-visible):hover {
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-error);
+      var(--goa-color-interactive-hover);
   }
-  .input-trailing-content:not(.goa-input.error):not(input:focus-visible):hover {
+  .input-trailing-content:not(.error):not(input:focus-visible):hover {
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-error);
+      var(--goa-color-interactive-hover);
   }
 
   /* this is the interior focus border */
