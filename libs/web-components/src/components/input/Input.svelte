@@ -5,7 +5,13 @@
 </script>
 
 <script lang="ts">
-  import { typeValidator, toBoolean, relay, receive, dispatch } from "../../common/utils";
+  import {
+    typeValidator,
+    toBoolean,
+    relay,
+    receive,
+    dispatch,
+  } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
@@ -81,6 +87,8 @@
   let _debounceId: any;
   let inputEl: HTMLElement;
   let _rootEl: HTMLElement;
+  let _error: boolean;
+  let _prevError = _error;
 
   // ========
   // Reactive
@@ -89,8 +97,19 @@
   $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
-  $: isError = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
+  $: {
+    _error = toBoolean(error);
+    if (_error !== _prevError) {
+      dispatch(
+        _rootEl,
+        "error::change",
+        { isError: _error },
+        { bubbles: true },
+      );
+      _prevError = _error;
+    }
+  }
 
   // TODO: determine if this and the next reactive statement need to be reactive, as they are both
   // things that should only be run once
@@ -145,7 +164,12 @@
 
   function onSetValue(detail: FormSetValueRelayDetail) {
     value = detail.value;
-    dispatch(inputEl, "_change", { name, value: detail.value }, { bubbles: true });
+    dispatch(
+      inputEl,
+      "_change",
+      { name, value: detail.value },
+      { bubbles: true },
+    );
   }
 
   function sendMountedMessage() {
@@ -196,6 +220,8 @@
         detail: { name, value: input.value },
       }),
     );
+
+    dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
   }
 
   function onBlur(e: Event) {
@@ -211,7 +237,9 @@
 
   function doClick() {
     // @ts-ignore
-    this.dispatchEvent(new CustomEvent("_trailingIconClick", { composed: true }));
+    this.dispatchEvent(
+      new CustomEvent("_trailingIconClick", { composed: true }),
+    );
   }
 
   function checkSlots() {
@@ -253,7 +281,7 @@
     class:input--disabled={isDisabled}
     class:leading-content={_leadingContentSlot}
     class:trailing-content={_trailingContentSlot}
-    class:error={isError}
+    class:error={_error}
   >
     {#if prefix}
       <div class="prefix">
@@ -266,7 +294,11 @@
     </div>
 
     {#if leadingicon}
-      <goa-icon class="leading-icon" data-testid="leading-icon" type={leadingicon} />
+      <goa-icon
+        class="leading-icon"
+        data-testid="leading-icon"
+        type={leadingicon}
+      />
     {/if}
 
     <input
@@ -291,6 +323,7 @@
       role="textbox"
       aria-label={arialabel}
       aria-labelledby={arialabelledby}
+      aria-invalid={_error ? "true" : "false"}
       on:keyup={onKeyUp}
       on:change={onKeyUp}
       on:focus={onFocus}
@@ -529,12 +562,14 @@
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-hover);
   }
+
   .input-trailing-content:not(.error):not(input:focus-visible):hover {
     box-shadow: inset 0 0 0 var(--goa-border-width-m)
       var(--goa-color-interactive-hover);
   }
 
   /* this is the interior focus border */
+
   .input-leading-content:active,
   .input-leading-content:focus,
   .input-leading-content:focus-within {

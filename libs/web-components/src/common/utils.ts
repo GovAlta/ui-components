@@ -12,12 +12,16 @@
 
 // ```
 export function styles(...css: (string | boolean)[]): string {
-  return css
-    .filter((item: string | boolean) => !!item)
-    .map((item: string | boolean) =>
-      typeof item === "string" ? item.replace(";", "") : item,
-    )
-    .join(";");
+  return (
+    css
+      // remove blank items
+      .filter((item: string | boolean) => !!item)
+      // replace the ending `;` with a blank
+      .map((item: string | boolean) =>
+        typeof item === "string" ? item.replace(/;$/, "") : item,
+      )
+      .join(";")
+  );
 }
 
 // creates a style attribute/value or empty string
@@ -76,7 +80,7 @@ export function relay<T>(
 export function dispatch<T>(
   el: HTMLElement | Element | null | undefined,
   eventName: string,
-  detail: T,
+  detail?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
   // console.log(`DISPATCH(${eventName}):`, detail, el);

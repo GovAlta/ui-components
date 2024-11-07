@@ -32,13 +32,14 @@
   export let mr: Spacing = null;
   export let mb: Spacing = "xs";
   export let ml: Spacing = null;
-
+  export let iconposition: "left" | "right" = "left";
   // Private
 
   let _hovering: boolean = false;
   let _titleEl: HTMLElement;
   let _headingContentSlotChildren: Element[] = [];
   let _accordionId: string = "";
+  let _rootEl: HTMLElement;
   // Reactive
 
   $: isOpen = toBoolean(open);
@@ -64,6 +65,18 @@
     }
     return [];
   }
+
+  function dispatchClickEvent(open?: boolean) {
+    if (!_rootEl) return;
+
+    _rootEl.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        bubbles: true,
+        detail: { open: open },
+      }),
+    );
+  }
 </script>
 
 <!-- HTML -->
@@ -71,11 +84,13 @@
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     max-width: ${maxwidth};
+    --icon-rotate: ${iconposition === "right" ? "180deg" : "90deg"}
   `}
   class="goa-accordion"
+  bind:this={_rootEl}
   data-testid={testid}
 >
-  <details open={isOpen} on:toggle={({ target }) => (open = `${target?.open}`)}>
+<details open={isOpen} on:toggle={({ target }) => { open = `${target?.open}`; dispatchClickEvent(target?.open); }}>
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <summary
       class={`container-${headingsize}`}
@@ -85,13 +100,18 @@
       on:blur={() => (_hovering = false)}
       aria-controls={`${_accordionId}-content`}
       aria-expanded={open === "true"}
+      class:iconRight={iconposition === "right"}
     >
-      <goa-icon
-        type="chevron-forward"
-        fillcolor={_hovering
-          ? "var(--goa-color-interactive-hover)"
-          : "var(--goa-color-interactive-default)"}
-      ></goa-icon>
+
+      {#if iconposition === "left"}
+        <goa-icon
+          type="chevron-forward"
+          fillcolor={_hovering
+      ? "var(--goa-color-interactive-hover)"
+      : "var(--goa-color-interactive-default)"}
+        ></goa-icon>
+      {/if}
+
       <div class="title" bind:this={_titleEl} id={`${_accordionId}-heading`}>
         <span
           class="heading heading-{headingsize}"
@@ -107,6 +127,15 @@
           <slot name="headingcontent" />
         </div>
       </div>
+
+      {#if iconposition === "right"}
+        <goa-icon
+          type="chevron-down"
+          fillcolor={_hovering
+      ? "var(--goa-color-interactive-hover)"
+      : "var(--goa-color-interactive-default)"}
+        ></goa-icon>
+      {/if}
     </summary>
     <div
       class="content"
@@ -127,6 +156,11 @@
     font-size: var(--goa-font-size-4);
   }
 
+  .goa-accordion {
+    border-radius: var(--goa-accordion-border-radius);
+    box-shadow: var(--goa-accordion-shadow);
+  }
+
   .goa-accordion,
   .goa-accordion * {
     box-sizing: border-box;
@@ -138,13 +172,11 @@
 
   summary {
     min-height: 3.5rem;
-    padding: var(--goa-space-s) var(--goa-space-m) var(--goa-space-s) 0;
-    border-width: var(--goa-border-width-s);
-    border-style: solid;
-    border-radius: var(--goa-border-radius-m);
-    background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-greyscale-200);
-    color: var(--goa-color-text-default);
+    padding: var(--goa-accordion-padding-heading-icon-left);
+    border: var(--goa-accordion-border);
+    border-radius: var(--goa-accordion-border-radius);
+    background-color: var(--goa-accordion-color-bg-heading);
+    color: var(--goa-accordion-color-heading);
     cursor: pointer;
     list-style: none;
     display: flex;
@@ -154,12 +186,17 @@
     position: relative;
   }
 
+  summary.iconRight {
+    padding: var(--goa-accordion-padding-heading-icon-right);
+  }
+
   summary:hover {
-    background-color: var(--goa-color-greyscale-200);
+    background-color: var(--goa-accordion-color-bg-heading-hover);
+    color: var(--goa-accordion-color-heading-hover);
   }
   summary:focus-visible,
   summary:active {
-    background-color: var(--goa-color-greyscale-100);
+    background-color: var(--goa-accordion-color-bg-heading);
     outline: none;
   }
 
@@ -172,7 +209,7 @@
     bottom: -1px;
     left: -1px;
     border: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    border-radius: 4px;
+    border-radius: var(--goa-accordion-border-radius);
   }
 
   summary::marker, /* Latest Chrome, Edge, Firefox */
@@ -194,7 +231,7 @@
   }
 
   .heading {
-    font: var(--goa-typography-heading-s);
+    font: var(--goa-accordion-heading-s);
     padding-right: 1rem;
   }
 
@@ -221,12 +258,12 @@
   }
 
   .content {
-    border-bottom: var(--goa-border-width-s) solid
-      var(--goa-color-greyscale-200);
-    border-left: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    border-right: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    border-bottom-left-radius: var(--goa-border-radius-m);
-    border-bottom-right-radius: var(--goa-border-radius-m);
+    border-bottom: var(--goa-accordion-border);
+    border-left: var(--goa-accordion-border);
+    border-right: var(--goa-accordion-border);
+    border-bottom-left-radius: var(--goa-accordion-border-radius);
+    border-bottom-right-radius: var(--goa-accordion-border-radius);
+    background-color: var(--goa-accordion-color-bg-content);
   }
 
   .content :global(::slotted(*:last-child)) {
@@ -234,23 +271,24 @@
   }
 
   details[open] goa-icon {
-    transform: rotate(90deg);
+    transform: rotate(var(--icon-rotate));
   }
 
   details[open] summary {
     border-bottom-left-radius: var(--goa-border-radius-none);
     border-bottom-right-radius: var(--goa-border-radius-none);
+    border-bottom: var(--goa-accordion-divider);
   }
 
   /* Sizes */
   .heading-medium {
     line-height: 2rem;
-    font: var(--goa-typography-heading-m);
+    font: var(--goa-accordion-heading-m);
   }
 
   @container self (--mobile) {
     .content {
-      padding: 1.5rem;
+      padding: var(--goa-accordion-padding-content-narrow);
     }
     .title {
       display: flex;
@@ -261,7 +299,7 @@
 
   @container self (--not-mobile) {
     .content {
-      padding: 1.5rem 2rem 1.5rem 3.5rem;
+      padding: var(--goa-accordion-padding-content-wide);
     }
     .title {
       align-items: center;

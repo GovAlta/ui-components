@@ -1,15 +1,9 @@
-export default function (_node: HTMLElement, opts: { enable: boolean }) {
-  let toggledScrolling = false;
+type NoScrollOptions = {
+  enable: boolean;
+};
 
-  function hideScrollbars() {
-    if (!isScrollable()) {
-      return;
-    }
-    const scrollbarWidth = calculateScrollbarWidth();
-    toggledScrolling = true;
-    document.body.style.overflow = "hidden";
-    document.body.style.borderRight = `${scrollbarWidth}px solid #eee`;
-  }
+export default function (_node: HTMLElement, opts: NoScrollOptions) {
+  let toggledScrolling = false;
 
   function isScrollable() {
     return document.body.style.overflow !== "hidden";
@@ -26,6 +20,16 @@ export default function (_node: HTMLElement, opts: { enable: boolean }) {
       document.body.style.overflow = "";
       document.body.style.borderRight = "";
     }, 200);
+  }
+
+  function hideScrollbars() {
+    if (!isScrollable()) {
+      return;
+    }
+    const scrollbarWidth = calculateScrollbarWidth();
+    toggledScrolling = true;
+    document.body.style.overflow = "hidden";
+    document.body.style.borderRight = `${scrollbarWidth}px solid #eee`;
   }
 
   function calculateScrollbarWidth() {
@@ -52,13 +56,11 @@ export default function (_node: HTMLElement, opts: { enable: boolean }) {
     return scrollbarWidth;
   }
 
-  if (opts.enable) {
-    hideScrollbars();
-  }
-
   return {
-    update() {
-      if (!opts.enable) {
+    update(options: NoScrollOptions) {
+      if (options.enable) {
+        hideScrollbars();
+      } else {
         resetScrollbars();
       }
     },

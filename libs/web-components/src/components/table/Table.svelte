@@ -126,7 +126,6 @@
   class={`goatable ${variant}`}
   class:sticky={_stickyHeader}
   style={`
-    overflow-x: auto;
     ${`width: ${width || "100%"};`}
     ${calculateMargin(mt, mr, mb, ml)}
   `}

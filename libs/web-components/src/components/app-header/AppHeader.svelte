@@ -5,7 +5,7 @@
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
   import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
-  import { getSlottedChildren, styles } from "../../common/utils";
+  import { getSlottedChildren, styles, toBoolean } from "../../common/utils";
   import { isUrlMatch, getMatchedLink } from "../../common/urls";
   import { AppHeaderMenuProps } from "../app-header-menu/AppHeaderMenu.svelte";
 
@@ -15,6 +15,7 @@
   export let testid: string = "";
   export let maxcontentwidth = "";
   export let fullmenubreakpoint: number = TABLET_BP; // minimum window width to show all menu links
+  export let hasmenuclickhandler: string = "false"; // If this is yes, we will not expand menu when clicking a toggle button
 
   // Private
 
@@ -31,6 +32,7 @@
 
   let _appHeaderLinks: Element[] = [];
   let _appHeaderMenuItems: AppHeaderMenuProps[] = [];
+  let _menuButton: HTMLButtonElement;
 
   // Reactive
 
@@ -41,6 +43,7 @@
     _showToggleMenu = _desktop ? false : ((await hasChildren()) as boolean);
     onShowToggleMenuChange();
   })();
+  $: _hasMenuClickHandler = toBoolean(hasmenuclickhandler);
 
   // Hooks
 
@@ -58,6 +61,11 @@
   const toggleMenu = () => (_showMenu = !_showMenu);
   const hideMenu = () => (_showMenu = false);
 
+  const dispatchMenuClick = () => {
+    if (_hasMenuClickHandler) {
+      _menuButton.dispatchEvent(new CustomEvent("_menuClick", { composed: true, bubbles: true }));
+    }
+  }
   function getChildren() {
     if (!_slotParentEl) return;
 
@@ -202,9 +210,11 @@
     <!-- Menu button for mobile -->
     {#if _showToggleMenu && _mobile}
       <div class="menu-toggle-area">
-        <button on:click={toggleMenu} data-testid="menu-toggle">
+        <button on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu} data-testid="menu-toggle" bind:this={_menuButton}>
           Menu
-          <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
+          {#if !_hasMenuClickHandler}
+            <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
+          {/if}
         </button>
       </div>
     {/if}
@@ -229,9 +239,11 @@
           style={styles("height: 100%")}
           class="menu-toggle-area"
         >
-          <button on:click={toggleMenu} data-testid="menu-toggle">
+          <button on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu} data-testid="menu-toggle" bind:this={_menuButton}>
             Menu
-            <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
+            {#if !_hasMenuClickHandler}
+             <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
+            {/if}
           </button>
         </div>
 
@@ -255,7 +267,7 @@
     {/if}
 
     <!-- Mobile and desktop slot content -->
-    {#if (_showMenu && _mobile) || _desktop}
+    {#if (_showMenu && _mobile && !_hasMenuClickHandler) || _desktop}
       <div bind:this={_slotParentEl} data-testid="slot" class="content-area">
         <slot />
       </div>
