@@ -199,6 +199,7 @@
     padding: var(--goa-side-menu-parent-padding);
     text-decoration: none;
     font: var(--goa-side-menu-parent-text);
+    border-radius: var(--goa-side-menu-group-border-radius);
   }
   .heading.open {
     font: var(--goa-side-menu-parent-text-active);
