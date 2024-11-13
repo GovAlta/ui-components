@@ -217,3 +217,20 @@ export function clamp(value: number, min: number, max: number): number {
 export function generateRandomId() {
   return `${Math.random().toString(36).substring(2, 9)}`;
 }
+
+export function padLeft(
+  value: string | number,
+  len: number,
+  padWith: string | number,
+): string {
+  value = value + "";
+  const diff = len - value.length;
+  if (diff <= 0) {
+    return value;
+  }
+  let padding = "";
+  for (let i = 0; i < len - value.length; i++) {
+    padding += padWith;
+  }
+  return `${padding}${value}`;
+}
