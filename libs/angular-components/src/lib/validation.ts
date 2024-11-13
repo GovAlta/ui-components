@@ -3,41 +3,6 @@ import { FieldsetItemState } from "./public-form-utils";
 export type FieldValidator = (value: unknown) => string;
 export type FieldsetState = Record<string, FieldsetItemState>;
 
-// TODO: move this into the form-utils file, since it is specific to the public form component
-export function validate(
-  field: string,
-  fieldsetEl: HTMLElement,
-  fieldsetState: FieldsetState,
-  validators: FieldValidator[],
-): [boolean, string] {
-  const value = fieldsetState?.[field]?.value;
-
-  for (const validator of validators) {
-    const msg = validator(value);
-    if (msg) {
-      dispatchError(fieldsetEl, field, msg);
-      return [false, ""];
-    }
-  }
-  return [true, value];
-}
-
-// TODO: move this into the form-utils file, since it is specific to the public form component
-function dispatchError(el: HTMLElement, name: string, msg: string) {
-  el.dispatchEvent(
-    new CustomEvent("msg", {
-      composed: true,
-      detail: {
-        action: "external::set:error",
-        data: {
-          name,
-          msg,
-        },
-      },
-    }),
-  );
-}
-
 export class FormValidator {
   private readonly validators: Record<string, FieldValidator[]>;
   constructor(validators?: Record<string, FieldValidator[]>) {
@@ -135,10 +100,12 @@ export function emailValidator(msg?: string): FieldValidator {
   return regexValidator(regex, msg || "Invalid email address");
 }
 
+// SIN# Generator: https://singen.ca
 export function SINValidator(): FieldValidator {
   return (value: unknown) => {
     if (!value) return "";
-    const checkValue = "121121121".split("").map((c) => parseInt(c));
+
+    const checkValue = "121212121".split("").map((c) => parseInt(c));
     const valueStr = (value as string).replace(/\D/g, "");
 
     if (valueStr.length !== 9) return "SIN must contain 9 numbers";
@@ -154,7 +121,7 @@ export function SINValidator(): FieldValidator {
         return `${val}`
           .split("")
           .map((c) => parseInt(c))
-          .reduce((acc, val) => acc * val, 1);
+          .reduce((acc, val) => acc + val, 0);
       })
       .reduce((acc, val) => acc + val, 0);
 
@@ -270,6 +237,7 @@ interface LengthValidatorOptions {
   maxMsg?: string;
   max?: number;
   min?: number;
+  optional?: boolean;
 }
 export function lengthValidator({
   invalidTypeMsg,
@@ -277,8 +245,14 @@ export function lengthValidator({
   maxMsg,
   min = -Number.MAX_VALUE,
   max = Number.MAX_VALUE,
+  optional,
 }: LengthValidatorOptions): FieldValidator {
   return (value: unknown) => {
+    // valid if optional and blank
+    if (optional && `${value}`.length === 0) {
+      return "";
+    }
+
     if (typeof value !== "string") {
       return invalidTypeMsg || "Invalid type";
     }

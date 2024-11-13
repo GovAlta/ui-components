@@ -51,14 +51,14 @@ export function receive(
 export function relay<T>(
   el: HTMLElement | Element | null | undefined,
   eventName: string,
-  data: T,
+  data?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
   // console.log(`RELAY(${eventName}):`, data, el);
 
   const dispatch = () => {
     el?.dispatchEvent(
-      new CustomEvent<{ action: string; data: T }>("msg", {
+      new CustomEvent<{ action: string; data?: T }>("msg", {
         composed: true,
         bubbles: opts?.bubbles,
         cancelable: opts?.cancelable,
