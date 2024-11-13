@@ -906,7 +906,6 @@ describe("GoADropdown", () => {
 
       dropdown?.addEventListener("_change", (e: Event) => {
         const ce = e as CustomEvent;
-        console.log("in the onclick");
         onClick(ce.detail.name, ce.detail.value);
       });
 

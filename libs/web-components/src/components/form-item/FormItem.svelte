@@ -56,7 +56,10 @@
   export let error: string = "";
   export let requirement: RequirementType = "";
   export let maxwidth: string = "none";
-  export let id: string = "";
+
+  // **For the public-form only** 
+  // Overrides the label value within the form-summary to provide a shorter description of the value
+  export let name: string = "blank";
 
   let _rootEl: HTMLElement;
   let _inputEl: HTMLElement;
@@ -67,7 +70,6 @@
   onMount(() => {
     validateRequirementType(requirement);
     validateLabelSize(labelsize);
-    bindElement();
 
     receive(_rootEl, (action, data) => {
       // console.log(`  RECEIVE(FormItem => ${action}):`, data);
@@ -157,24 +159,26 @@
     error = (d as Record<string, string>)["error"];
   }
 
-  // Allows binding to Fieldset components
-  function bindElement() {
-    relay<FormItemMountRelayDetail>(
-      _rootEl,
-      FormItemMountMsg,
-      { id, label, el: _rootEl },
-      { bubbles: true, timeout: 10 },
-    );
-  }
-
   function onInputMount(props: FormFieldMountRelayDetail) {
-    const { el } = props;
+    const { el, name } = props;
 
     // Check if aria-label is present and has a value in the child element
     const ariaLabel = el.getAttribute("aria-label");
     if (!ariaLabel || ariaLabel.trim() === "") {
       el.setAttribute("aria-label", label);
     }
+
+    bindElement(name);
+  }
+
+  // Allows binding to Fieldset components
+  function bindElement(_name: string) {
+    relay<FormItemMountRelayDetail>(
+      _rootEl,
+      FormItemMountMsg,
+      { id: _name, label: name !== "blank" ? name : label, el: _rootEl },
+      { bubbles: true, timeout: 10 },
+    );
   }
 </script>
 

@@ -1,13 +1,18 @@
+export type FormStatus = "not-started" | "incomplete" | "complete";
+
+// FIXME: Can the existing AppState be used in place of this
 export type FormState = {
   form: Record<string, FieldsetData>;
   history: string[];
   editting: string;
   lastModified?: Date;
+  status: FormStatus;
 };
 
-export type FieldsetData =
-  | Record<string, FieldsetItemState>
-  | Record<string, FieldsetItemState>[];
+export type FieldsetData = {
+  heading: string;
+  data: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
+};
 
 // ====
 // Form
@@ -25,11 +30,6 @@ export type FormBindRelayDetail = {
   el: HTMLElement;
 };
 export type FormStateChangeRelayDetail = FieldsetData;
-
-export type FormFieldMountRelayDetail = {
-  name: string;
-  el: HTMLElement;
-};
 
 export type FormToggleActiveRelayDetail = {
   first: boolean;
@@ -75,7 +75,11 @@ export type FieldsetErrorRelayDetail = {
 
 export type FieldsetChangeRelayDetail = {
   id: string;
-  state: Record<string, FieldsetItemState>;
+  state: {
+    heading: string;
+    data: Record<string, FieldsetItemState>;
+  };
+  dispatchOn: "change" | "continue";
 };
 
 export type FieldsetMountFormRelayDetail = {
@@ -88,6 +92,7 @@ export type FieldsetItemState = {
   name: string;
   label: string;
   value: string | number | Date;
+  order: number;
 };
 
 export type FieldsetValidationRelayDetail = {
@@ -116,6 +121,7 @@ export const ExternalContinueMsg = "external::continue";
 export const ExternalAppendDataMsg = "external::append:state";
 export const ExternalAlterDataMsg = "external::alter:state";
 export const ExternalResetStateMsg = "external::reset:state";
+export const ExternalInitStateMsg = "external::init:state";
 
 export type ExternalAlterDataRelayDetail =
   | {
@@ -144,11 +150,17 @@ export type ExternalAppendDataRelayDetail = {
   data: FieldsetItemState;
 };
 
+export type ExternalInitStateDetail = FormState | string;
+
 // =========
 // FormField
 // =========
 
 export const FormFieldMountMsg = "form-field::bind";
+export type FormFieldMountRelayDetail = {
+  name: string;
+  el: HTMLElement;
+};
 
 // ===========
 // FormSummary

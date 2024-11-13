@@ -1,18 +1,11 @@
 <svelte:options customElement="goa-checkbox" />
 
-<!-- Script -->
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
-  import {
-    dispatch,
-    fromBoolean,
-    receive,
-    relay,
-    toBoolean,
-  } from "../../common/utils";
+  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
   import {
     FormSetValueMsg,
     FormSetValueRelayDetail,
@@ -20,8 +13,9 @@
     FieldsetResetErrorsMsg,
     FormFieldMountRelayDetail,
     FormFieldMountMsg,
+    FieldsetResetFieldsMsg,
+    FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
-
   // Required
   export let name: string;
 
@@ -44,11 +38,13 @@
 
   // Private
   let _value: string;
+  let _rootEl: HTMLElement;
+  let _formFields: HTMLElement[] = [];
+  let _revealSlotEl: HTMLElement;
   let _checkboxRef: HTMLElement;
   let _descriptionId: string;
-  let _rootEl: HTMLElement;
   let _error: boolean;
-  let _prevError = _error;
+  let _prevError: boolean;
 
   // Binding
   $: isDisabled = toBoolean(disabled);
@@ -73,36 +69,83 @@
     _descriptionId = `description_${name}`;
 
     addRelayListener();
+    addRevealSlotListener();
     sendMountedMessage();
   });
 
   function addRelayListener() {
-    receive(_checkboxRef, (action, data) => {
+    receive(_rootEl, (action, data) => {
+      // console.log(`  RECEIVE(Form => ${action}):`, action, data);
       switch (action) {
         case FormSetValueMsg:
           onSetValue(data as FormSetValueRelayDetail);
           break;
         case FieldsetSetErrorMsg:
-          error = "true";
+          setError(data as FieldsetErrorRelayDetail);
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
+          break;
+        case FormFieldMountMsg:
+          onFormFieldMount(data as FormFieldMountRelayDetail);
           break;
       }
     });
   }
 
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
+  }
+
+  // allow for the listening of messages sent by form-fields specific to the "reveal" slot
+  function addRevealSlotListener() {
+    receive(_revealSlotEl, (action, data) => {
+      switch (action) {
+        case FormFieldMountMsg:
+          setCheckStatusByChildState(data as FormFieldMountRelayDetail);
+          break;
+      }
+    });
+  }
+
+  function setCheckStatusByChildState(detail: FormFieldMountRelayDetail) {
+    setTimeout(() => {
+      // @ts-expect-error
+      checked = !checked && !!detail.el.value;
+    }, 1000);
+  }
+
+  // save all child elements within the reveal slot for later reference
+  function onFormFieldMount(detail: FormFieldMountRelayDetail) {
+    // only save the child elements within the reveal slot
+    if (!$$slots.reveal) return;
+    // don't save reference to itself
+    if (detail.name !== name) return;
+    _formFields = [..._formFields, detail.el];
+  }
+
+  //
+  function resetChildFormFields() {
+    for (const el of _formFields) {
+      // send reset message ot child form fields
+      relay(el, FieldsetResetFieldsMsg);
+    }
+  }
+
   function onSetValue(detail: FormSetValueRelayDetail) {
+    // @ts-expect-error
     value = detail.value;
     checked = detail.value ? "true" : "false";
     dispatch(_checkboxRef, "_change", { name, value }, { bubbles: true });
   }
 
   function sendMountedMessage() {
+    if (!name) return;
+
     relay<FormFieldMountRelayDetail>(
-      _checkboxRef,
+      _rootEl,
       FormFieldMountMsg,
-      { name, el: _checkboxRef },
+      { name, el: _rootEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -125,6 +168,10 @@
         bubbles: true,
       }),
     );
+
+    if (!!$$slots.reveal && !newCheckStatus) {
+      resetChildFormFields();
+    }
   }
 
   function onFocus() {
@@ -194,6 +241,15 @@
       {description}
     </div>
   {/if}
+
+  <!-- Any form fields within the slot must be initially rendered to allow for public-form binding -->
+  <div
+    bind:this={_revealSlotEl}
+    class="reveal"
+    class:visible={$$slots.reveal && isChecked}
+  >
+    <slot name="reveal" />
+  </div>
 </div>
 
 <!-- Styles -->
@@ -239,6 +295,18 @@
     margin-top: var(--goa-space-2xs);
   }
 
+  .reveal {
+    display: none;
+    height: 0;
+  }
+  .reveal.visible {
+    border-left: 4px solid var(--goa-color-greyscale-200);
+    padding: var(--goa-space-m);
+    margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);
+    display: block;
+    height: fit-content;
+  }
+
   /* Container */
   .container {
     box-sizing: border-box;
@@ -255,8 +323,7 @@
     flex: 0 0 auto;
   }
   .container:hover {
-    box-shadow: inset 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-hover);
+    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
   }
   .container svg {
     fill: var(--goa-color-greyscale-white);
