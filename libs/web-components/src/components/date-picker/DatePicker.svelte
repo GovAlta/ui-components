@@ -29,9 +29,9 @@
   };
 
   type InputDate = {
-    day: number;
-    month: number;
-    year: number;
+    day: string;
+    month: string;
+    year: string;
   };
 
   export let type: "calendar" | "input" = "calendar";
@@ -60,7 +60,7 @@
   let _showPopover: boolean = false;
 
   // used only for the `type=input`
-  let _inputDate: InputDate = { day: -1, month: -1, year: -1 };
+  let _inputDate: InputDate = { day: "", month: "", year: "" };
 
   $: isDisabled = toBoolean(disabled);
 
@@ -132,13 +132,13 @@
     }
 
     // exit if already assigned
-    if (_date || _inputDate.day > 0) {
+    if (_date || _inputDate.day !== "") {
       return;
     };   
   
     if (type === "input") {
       const [year, month, day] = value.split("-");
-      _inputDate = { year: +year, month: +month-1, day: +day };
+      _inputDate = { year: year, month: `${+month-1}`, day: day };
     } else if (type === "calendar") {
       _date = startOfDay(new Date(value));
     }
@@ -259,7 +259,7 @@
 
     _inputDate = {..._inputDate, [elName]: +value};
 
-    if (!new Date(_inputDate.year, _inputDate.month, _inputDate.day)) {
+    if (!new Date(+_inputDate.year, +_inputDate.month, +_inputDate.day)) {
       return;
     }
 
