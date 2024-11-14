@@ -80,12 +80,12 @@
 
   function addRelayListener() {
     receive(_formEl, (type, data, e) => {
+      // prevent fieldset events from going any higher to allow for subforms
+      e.stopPropagation(); 
       // console.log(`  RECEIVE(Form => ${type}):`, type, data);
       switch (type) {
         case FieldsetBindMsg:
           onFieldsetBind(data as FieldsetBindRelayDetail);
-          // prevent fieldset bind event from going any higher to allow for subforms
-          e.stopPropagation(); 
           break;
         case FieldsetChangeMsg:
           onFieldsetChange(data as FieldsetChangeRelayDetail);
