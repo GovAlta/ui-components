@@ -1,4 +1,9 @@
-<svelte:options customElement="goa-public-form" />
+<svelte:options customElement={{
+  tag: "goa-public-form",
+  props: {
+    backUrl: { attribute: "back-url", type: "String" }  
+  }
+}} />
 
 <script lang="ts">
   import { onMount } from "svelte";
@@ -22,6 +27,8 @@
     FieldsetMountFormItemMsg,
     FieldsetMountFormRelayDetail,
     FieldsetSubmitMsg,
+    FormBackUrlDetail,
+    FormBackUrlMsg,
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
     FormResetErrorsMsg,
@@ -47,6 +54,7 @@
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
+  export let backUrl: string = "";
 
   // Private
   let _formEl: HTMLFormElement;
@@ -177,7 +185,12 @@
   function onFieldsetBind(detail: FieldsetBindRelayDetail) {
     _fieldsets[detail.id] = detail;
 
-    // run the final binding once
+    // send the back url to child fieldsets
+    if (backUrl) {
+      relay<FormBackUrlDetail>(detail.el, FormBackUrlMsg, { url: backUrl });
+    }
+
+    // run the final binding code block below once
     if (_formItemBindingTimeoutId) {
       clearTimeout(_formItemBindingTimeoutId);
     }
