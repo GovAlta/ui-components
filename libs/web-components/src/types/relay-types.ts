@@ -25,6 +25,7 @@ export const FormDispatchStateMsg = "form::dispatch:state";
 export const FormToggleActiveMsg = "form::toggle:active";
 export const FormStateChangeMsg = "form::state:change";
 export const FormBindMsg = "form::bind";
+export const FormBackUrlMsg = "form::back-url";
 
 export type FormBindRelayDetail = {
   el: HTMLElement;
@@ -47,6 +48,10 @@ export type FormSetValueRelayDetail = {
 };
 
 export type FormDispatchStateRelayDetail = FormState;
+
+export type FormBackUrlDetail = {
+  url: string;
+};
 
 // ========
 // Fieldset
