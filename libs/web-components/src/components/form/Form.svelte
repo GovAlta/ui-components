@@ -54,6 +54,7 @@
   let _formFields: Record<string, Record<string, HTMLElement>> = {};
   let _formSummary: HTMLElement;
   let _formItemBindingTimeoutId: any;
+  let _lastFieldset: string;
   let _state: FormState = {
     form: {},
     history: [],
@@ -61,8 +62,6 @@
     lastModified: undefined,
     status: "not-started",
   };
-
-  let lastPage: string;
 
   onMount(() => {
     // Required to get the form summary to render
@@ -182,10 +181,13 @@
     if (_formItemBindingTimeoutId) {
       clearTimeout(_formItemBindingTimeoutId);
     }
+
+    // show the appropriate fieldset
     _formItemBindingTimeoutId = setTimeout(() => {
-      if (lastPage) {
+      // if _lastFieldset is set that means previous history is present, so it is shown
+      if (_lastFieldset) {
         // last page has priority
-        const item = _fieldsets[lastPage];
+        const item = _fieldsets[_lastFieldset];
         sendToggleActiveStateMsg(item.id);
       } else {
         // mark the first fieldset as active
@@ -366,10 +368,10 @@
     // initialize history with first page if history is empty
     let historyPageCount = _state.history.length;
     if (historyPageCount > 0) {
-      lastPage = _state.history[historyPageCount - 1];
+      _lastFieldset = _state.history[historyPageCount - 1];
     }
       
-    dispatchStateChange("continue", lastPage);
+    dispatchStateChange("continue", _lastFieldset);
   }
 
   function bindChildren() {
