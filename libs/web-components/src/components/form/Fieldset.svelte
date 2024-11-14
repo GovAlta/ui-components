@@ -7,7 +7,7 @@
       preserveState: { type: "String", attribute: "preserve-state" },
       showBackButton: { type: "String", attribute: "show-back-button" },
       sectionTitle: { type: "String", attribute: "section-title" },
-      dispatchOn: { attribute: "dispatch-on"}
+      dispatchOn: { attribute: "dispatch-on"},
     },
   }}
 />
@@ -31,6 +31,8 @@
     FieldsetSetErrorMsg,
     FieldsetSubmitMsg,
     FieldsetValidationRelayDetail,
+    FormBackUrlDetail,
+    FormBackUrlMsg,
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
     FormFieldMountMsg,
@@ -76,6 +78,7 @@
   let _editting: boolean = false;
   let _detail: FieldsetBindRelayDetail;
   let _errors: Record<string, string> = {};
+  let _backUrl: string;
 
   // allows for the state to be sent to _continue event allowing for custom validation
   let _state: Record<string, FieldsetItemState> = {};
@@ -144,6 +147,9 @@
         case ExternalSetErrorMsg:
           onError(data as ExternalErrorRelayDetail);
           break;
+        case FormBackUrlMsg:
+          setBackUrl(data as FormBackUrlDetail);
+          break;
       }
     });
   }
@@ -151,6 +157,10 @@
   // *****************
   // Dispatch handlers
   // *****************
+
+  function setBackUrl(detail: FormBackUrlDetail) {
+    _backUrl = detail.url;
+  }
 
   function onSetFieldset(detail: FormSetFieldsetRelayDetail) {
     for (const [id, item] of Object.entries(detail.value)) {
@@ -337,6 +347,11 @@
     )}
   >
     {#if state === "default"}
+      {#if first && _backUrl}
+        <goa-link leadingicon="chevron-back" mb="2xl">
+          <a href={_backUrl}>Back</a>
+        </goa-link>
+      {/if}
       {#if !first && !_editting && !last && showBackButton === "true"}
         <goa-link-button leadingicon="chevron-back" mb="2xl" on:_click={handleBack}>
           Back
