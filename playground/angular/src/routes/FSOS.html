@@ -1,0 +1,114 @@
+
+<goa-badge type="information" content="Reference number: 123ABC" />
+
+<goa-text as="h2">My Registration</goa-text>
+<goa-text mb="l">Follow the steps below to submig your registration. Finish it by going through the Final review.</goa-text>
+
+<goa-text as="h3">1. Preliminary setup</goa-text>
+<goa-table width="100%" mb="xl">
+  <tr>
+    <td width="100%">
+      <a href="/support-order-details">Support order details</a>
+    </td>
+    <td>
+      <goa-badge [type]="getType(status['support-order-details'])" [content]="status['support-order-details']" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="/prior-registrations">Prior registrations</a><br />
+    </td>
+    <td>
+      <goa-badge [type]="getType(status['prior-registrations'])" [content]="status['prior-registrations']" />
+    </td>
+  </tr>
+</goa-table>
+
+<goa-text as="h3">2. Profiles</goa-text>
+<goa-text *ngIf="!data.supportOrderDetails">Complete the previous section before you can work on this one</goa-text>
+<goa-table *ngIf="data.supportOrderDetails" width="100%" mb="xl">
+  <tr>
+    <td width="100%">
+      <a href="/#">Support order details</a>
+    </td>
+    <td>
+      <goa-badge type="information" content="Not started" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="/other-party-profile">Other part profile</a>
+    </td>
+    <td>
+      <goa-badge [type]="getType(status['other-party-profile'])" [content]="status['other-party-profile']" />
+    </td>
+  </tr>
+  <tr *ngIf="state.hasChildSupport">
+    <td>
+      <a href="/#">Children's profile</a>
+    </td>
+    <td>
+      <goa-badge type="information" content="Not started" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="/#">Authorized reresentatives</a>
+    </td>
+    <td>
+      <goa-badge type="information" content="Not started" />
+    </td>
+  </tr>
+</goa-table>
+
+<goa-text as="h3">3. Financials</goa-text>
+<goa-table width="100%" mb="xl">
+  <tr *ngIf="state.userRole === 'payor'">
+    <td width="100%">
+      <a href="/employment-and-banking-details">Your employment and banking details</a>
+    </td>
+    <td>
+      <goa-badge type="information" content="Not started" />
+    </td>
+  </tr>
+  <tr *ngIf="state.userRole === 'recipient'">
+    <td width="100%">
+      <a href="/other-partys-employment-and-banking-details">The other party's employment and banking details</a>
+    </td>
+    <td>
+      <goa-badge type="information" content="Not started" />
+    </td>
+  </tr>
+  <tr *ngIf="state.userRole === 'payor'">
+    <td width="100%">
+      <a href="/preauth-bank-withdrawls">Setup pre-autorized bank withdrawls</a>
+    </td>
+    <td>
+      <goa-badge type="information" content="Not started" />
+    </td>
+  </tr>
+  <tr *ngIf="state.userRole === 'recipient'">
+    <td width="100%">
+      <a href="/receiving-support">Receiving your support</a>
+    </td>
+    <td>
+      <goa-badge type="information" content="Not started" />
+    </td>
+  </tr>
+  <tr>
+    <td width="100%">
+      <a href="/recalc-program">Recalculation program</a>
+    </td>
+    <td>
+      <goa-badge type="information" content="Not started" />
+    </td>
+  </tr>
+</goa-table>
+
+<goa-text as="h3">4. Supporting Documents</goa-text>
+<goa-text mb="xl">Complete the previous section before you can work on this one</goa-text>
+
+<goa-text as="h3">5. Final review</goa-text>
+<goa-text>Complete the previous section before you can work on this one</goa-text>
+
+
