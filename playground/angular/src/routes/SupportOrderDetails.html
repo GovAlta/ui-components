@@ -1,7 +1,7 @@
 <goa-public-form
   name="support-order-details"
   (_complete)="onComplete($event)"
-  (_init)="init($event)"
+  (_init)="_mainFormComponent.init($event)"
   (_stateChange)="updateState($event)"
   back-url="/fsos"
   storage="local"
@@ -38,7 +38,6 @@
       </div>
     </goa-checkbox>
   </goa-fieldset>
-
   
   <goa-fieldset
     id="contact"
@@ -64,6 +63,44 @@
       </goa-radio-item>
     </goa-radio-group>
     </goa-form-item>
+  </goa-fieldset>
+
+  <goa-fieldset id="children-subform">
+    Children subform
+    <goa-form    
+      name="support-order-details--children"
+      (_complete)="onPageChange($event, 'children-subform')"
+      (_init)="_childFormComponent.init($event)"
+      (_stateChange)="updateChildrenState($event)"
+      storage="local"
+    >
+      <goa-fieldset first id="child-list" (_continue)="onChildPageChange($event, 'child-list')">
+        here
+      </goa-fieldset>
+
+      <goa-fieldset id="name" (_continue)="onChildPageChange($event, 'name')">
+        <goa-form-item name="First name" label="First name">
+          <goa-input name="firstName" />
+        </goa-form-item>
+        <goa-form-item name="Last name" label="Last name">
+          <goa-input name="lastName" />
+        </goa-form-item>
+      </goa-fieldset>
+
+      <goa-fieldset id="alternate-name" (_continue)="onChildPageChange($event, 'alternate-name')">
+        <goa-form-item name="Alternate name" label="Alternate name">
+          <goa-input name="alternateName" />
+        </goa-form-item>
+      </goa-fieldset>
+
+      <goa-fieldset last id="dob" (_continue)="onChildPageChange($event, 'dob')">
+        <goa-form-item name="Date of birth" label="Date of birth">
+          <goa-date-picker type="input" name="dob" />
+        </goa-form-item>
+      </goa-fieldset>
+
+    </goa-form>
+
   </goa-fieldset>
 
   <goa-fieldset
