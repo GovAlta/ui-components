@@ -50,15 +50,12 @@
     // receive notification from parent of resize
     _rootEl.addEventListener("form-stepper:resized", (e: Event) => {
       const { mobile } = (e as CustomEvent).detail;
-      console.log("form-stepper:resized", mobile);
       _isMobile = mobile;
     });
 
     // receive parent el information
     _rootEl.addEventListener("formstepper:init", (e: Event) => {
       const ce = e as CustomEvent<FormStep>;
-      console.log("formstepper:init", ce.detail);
-
       arialabel = ce.detail.ariaLabel;
       enabled = ce.detail.enabled;
       childindex = ce.detail.childIndex;
@@ -181,21 +178,6 @@
     padding-left: 8px;
     padding-right: 8px;
     max-width:fit-content;
-  }
-
-  label:not([aria-disabled="true"]):not([aria-current="step"]):has(
-      input:focus-visible
-    ) {
-    outline: var(--goa-color-interactive-focus) solid var(--goa-border-width-l);
-  }
-
-  label:not([aria-disabled="true"]):not([aria-current="step"]):hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-  }
-  label.mobile:not([aria-disabled="true"]):not([aria-current="step"]):hover {
-    background-color: rgb(232 232 232);
-    cursor: pointer;
   }
 
   label.desktop {
