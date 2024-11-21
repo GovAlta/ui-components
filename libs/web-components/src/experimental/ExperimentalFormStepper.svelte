@@ -235,7 +235,8 @@
   // handles the 1-based step value and the number of line segments is one less
   // than the number of steps
   function calculateProgress() {
-    _progress = _isMobile ? 100 : (_currentStep/ _steps.length) * 100;
+    // The final step is not included in the progress calculation
+   _progress = _isMobile ? 100 : (_currentStep/ (_steps.length - 1)) * 100;
   }
 
   function calcStepDimensions() {
