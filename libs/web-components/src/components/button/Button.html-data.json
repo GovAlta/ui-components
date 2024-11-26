@@ -56,6 +56,11 @@
       "valueSet": "goaIconType"
     },
     {
+      "name": "width",
+      "description": "Set the width of the button",
+      "type": "string"
+    },
+    {
       "name": "_click",
       "description": "Callback function when button is clicked"
     },
