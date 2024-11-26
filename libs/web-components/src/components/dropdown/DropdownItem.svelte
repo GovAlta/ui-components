@@ -23,7 +23,7 @@
   export let filter: string = "";
   export let label: string = "";
   export let value: string = "";
-  export let mount: DropdownItemMountType = "append";
+  export let mount: DropdownItemMountType = "reset";
 
   let _rootEl: HTMLElement;
 
