@@ -8,6 +8,7 @@
   import type { Option } from "./DropdownItem.svelte";
   import {
     dispatch,
+    ensureSlotExists,
     fromBoolean,
     receive,
     relay,
@@ -113,6 +114,7 @@
   //
 
   onMount(() => {
+    ensureSlotExists(_rootEl);  
     getChildren();
     addRelayListener();
     sendMountedMessage();
@@ -596,6 +598,8 @@
 
 <!-- Template -->
 <div
+  bind:this={_rootEl}
+  bind:clientWidth={_popoverMaxWidth}
   data-testid={testid || `${name}-dropdown`}
   class="dropdown"
   class:dropdown-native={_native}
@@ -603,8 +607,6 @@
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${_width};
     `}
-  bind:this={_rootEl}
-  bind:clientWidth={_popoverMaxWidth}
 >
   {#if _native}
     <select
