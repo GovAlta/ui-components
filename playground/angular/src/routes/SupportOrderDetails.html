@@ -4,7 +4,6 @@
   (_init)="_mainFormComponent.init($event)"
   (_stateChange)="updateState($event)"
   back-url="/fsos"
-  storage="local"
 >
   <goa-fieldset
     id="what-is-your-role"
@@ -12,10 +11,10 @@
     dispatch-on="change"
     first
     (_continue)="onPageChange($event, 'what-is-your-role')"
-  >    
+  >
     <goa-form-item name="Role" label="Who are you in the registration process?" labelsize="large">
       <goa-radio-group name="role">
-        <goa-radio-item value="Recipient" label="I'm the recipient of the child or spouse support" /> 
+        <goa-radio-item value="Recipient" label="I'm the recipient of the child or spouse support" />
         <goa-radio-item value="Payor" label="I'm the payor" />
       </goa-radio-group>
     </goa-form-item>
@@ -38,7 +37,7 @@
       </div>
     </goa-checkbox>
   </goa-fieldset>
-  
+
   <goa-fieldset
     id="contact"
     section-title="Support order details"
@@ -51,12 +50,12 @@
           <goa-input name="phone-number" />
         </goa-form-item>
       </goa-radio-item>
-      <goa-radio-item value="Contact by email" label="Contact me by email"> 
+      <goa-radio-item value="Contact by email" label="Contact me by email">
         <goa-form-item name="Email" slot="reveal">
           <goa-input name="email" />
         </goa-form-item>
       </goa-radio-item>
-      <goa-radio-item value="Contact by paper mail" label="Contact me by paper mail"> 
+      <goa-radio-item value="Contact by paper mail" label="Contact me by paper mail">
         <goa-form-item name="Mailing address" slot="reveal">
           <goa-input name="address" />
         </goa-form-item>
@@ -65,43 +64,52 @@
     </goa-form-item>
   </goa-fieldset>
 
-  <goa-fieldset id="children-subform">
-    Children subform
-    <goa-form    
-      name="support-order-details--children"
-      (_complete)="onPageChange($event, 'children-subform')"
-      (_init)="_childFormComponent.init($event)"
-      (_stateChange)="updateChildrenState($event)"
-      storage="local"
-    >
-      <goa-fieldset first id="child-list" (_continue)="onChildPageChange($event, 'child-list')">
-        here
-      </goa-fieldset>
+  <goa-subform
+    id="children-subform"
+    name="support-order-details--children"
+    (_complete)="onChildComplete($event)"
+    (_init)="_childFormComponent.init($event)"
+    (_stateChange)="updateChildrenState($event)"
+  >
+    <goa-fieldset first id="child-list" (_continue)="onChildPageChange($event, 'child-list')">
+      {{_childFormComponent.state | json}}
+      <goa-table>
+        <tbody>
+          <tr *ngFor="let item of _childFormComponent.getStateItems('children-subform')">
+            <td>{{item['firstName']}} {{item['lastName']}}</td>
+            <td><goa-link-button>Edit</goa-link-button></td>
+          </tr>
+        </tbody>
+      </goa-table>
+    </goa-fieldset>
 
-      <goa-fieldset id="name" (_continue)="onChildPageChange($event, 'name')">
-        <goa-form-item name="First name" label="First name">
-          <goa-input name="firstName" />
-        </goa-form-item>
-        <goa-form-item name="Last name" label="Last name">
-          <goa-input name="lastName" />
-        </goa-form-item>
-      </goa-fieldset>
+    <goa-fieldset id="name" (_continue)="onChildPageChange($event, 'name')">
+      <goa-form-item name="First name" label="First name">
+        <goa-input name="firstName" />
+      </goa-form-item>
+      <goa-form-item name="Last name" label="Last name">
+        <goa-input name="lastName" />
+      </goa-form-item>
+    </goa-fieldset>
 
-      <goa-fieldset id="alternate-name" (_continue)="onChildPageChange($event, 'alternate-name')">
-        <goa-form-item name="Alternate name" label="Alternate name">
-          <goa-input name="alternateName" />
-        </goa-form-item>
-      </goa-fieldset>
+    <goa-fieldset id="alternate-name" (_continue)="onChildPageChange($event, 'alternate-name')">
+      <goa-form-item name="Alternate name" label="Alternate name">
+        <goa-input name="alternateName" />
+      </goa-form-item>
+    </goa-fieldset>
 
-      <goa-fieldset last id="dob" (_continue)="onChildPageChange($event, 'dob')">
-        <goa-form-item name="Date of birth" label="Date of birth">
-          <goa-date-picker type="input" name="dob" />
-        </goa-form-item>
-      </goa-fieldset>
+    <goa-fieldset id="dob" (_continue)="onChildPageChange($event, 'dob')">
+      <goa-form-item name="Date of birth" label="Date of birth">
+        <goa-date-picker type="input" name="dob" />
+      </goa-form-item>
+    </goa-fieldset>
 
-    </goa-form>
+    <goa-fieldset last id="summary">
+      <goa-public-form-summary />
+    </goa-fieldset>
 
-  </goa-fieldset>
+  </goa-subform>
+
 
   <goa-fieldset
     id="address"
@@ -150,9 +158,9 @@
     </goa-form-item>
   </goa-fieldset>
 
-  <goa-fieldset 
-    last 
-    id="summary" 
+  <goa-fieldset
+    last
+    id="summary"
     heading="Review your answers"
   >
     <goa-public-form-summary heading="Support order details" />

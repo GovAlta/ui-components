@@ -1,6 +1,11 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { PublicFormComponent, requiredValidator } from "@abgov/angular-components";
+import {
+  postalCodeValidator,
+  PublicFormComponent,
+  requiredValidator,
+} from "@abgov/angular-components";
+import { JsonPipe, NgFor } from "@angular/common";
 
 type Page =
   | "what-is-your-role"
@@ -11,18 +16,20 @@ type Page =
   | "recalculated"
   | "summary";
 
-type ChildPage = "child-list" | "name" | "alternate-name" | "dob";
+type ChildPage = "child-list" | "name" | "alternate-name" | "dob" | "summary";
 
 @Component({
   standalone: true,
   selector: "abgov-fsos",
   templateUrl: "./SupportOrderDetails.html",
+  imports: [NgFor, JsonPipe],
   styles: ``,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SupportOrderDetailsComponent implements OnInit {
   _childFormComponent: PublicFormComponent<ChildPage>;
   _mainFormComponent: PublicFormComponent<Page>;
+  _total: number = 0;
 
   constructor(private router: Router) {
     this._mainFormComponent = new PublicFormComponent();
@@ -30,32 +37,42 @@ export class SupportOrderDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // const data = `{"form":{"what-is-your-role":{"heading":"","data":{"role":{"name":"role","value":"Recipient","label":"Role"}}},"address":{"heading":"Current address","data":{"city":{"name":"city","value":"3100 Arthur's Cres","label":"Address"},"postal-code":{"name":"postal-code","value":"T6W 2H7","label":""}}}},"history":["what-is-your-role","address","do-you-receive-support"],"editting":"","lastModified":"2024-11-05T13:44:50.903Z","status":"not-started"}`;
-    // this.initState(data);
-  }
+    // const data = `{ "form": { "children-subform": { "heading": "", "data": [ { "name": { "heading": "", "data": { "firstName": { "name": "firstName", "value": "Chris", "label": "First name", "order": 1 }, "lastName": { "name": "lastName", "value": "Olsen", "label": "Last name", "order": 2 } } }, "alternate-name": { "heading": "", "data": { "alternateName": { "name": "alternateName", "value": "Foo", "label": "Alternate name", "order": 1 } } }, "dob": { "heading": "", "data": { "dob": { "name": "dob", "value": "1986-01-12", "label": "Date of birth", "order": 2 } } } }, { "name": { "heading": "", "data": { "firstName": { "name": "firstName", "value": "Welsey", "label": "First name", "order": 1 }, "lastName": { "name": "lastName", "value": "Olsen", "label": "Last name", "order": 2 } } }, "alternate-name": { "heading": "", "data": { "alternateName": { "name": "alternateName", "value": "Bad boy", "label": "Alternate name", "order": 1 } } }, "dob": { "heading": "", "data": { "dob": { "name": "dob", "value": "2019-03-12", "label": "Date of birth", "order": 2 } } } } ] }, "what-is-your-role": { "heading": "", "data": { "role": { "name": "role", "value": "Recipient", "label": "Role", "order": 1 }, "canadian-resident": { "name": "canadian-resident", "value": "Yes", "label": "Lived in Canada > 5years", "order": 2 }, "amount1": { "name": "amount1", "value": "123", "label": "Amount 1", "order": 3 }, "amount2": { "name": "amount2", "value": "123", "label": "Amount 2", "order": 4 } } } }, "history": [], "editting": "", "status": "not-started", "currentFieldset": { "dispatchType": "continue" } }`;
+    const data = null;
 
-  _total: number = 0;
+    if (data) {
+      this._mainFormComponent.initState(data);
+    }
+  }
 
   updateState(e: Event) {
     this._mainFormComponent.updateState(e);
-    if (this._mainFormComponent.state.currentFieldset?.dispatchType === "continue") {
-      return;
-    }
 
-    switch (this._mainFormComponent.state.currentFieldset?.id) {
-      case "what-is-your-role":
-        this._total =
-          (parseFloat(
-            this._mainFormComponent.getStateValue("what-is-your-role", "amount1"),
-          ) || 0) +
-          (parseFloat(
-            this._mainFormComponent.getStateValue("what-is-your-role", "amount2"),
-          ) || 0);
-        break;
-    }
+    // DEV ONLY: saving the state to local storage
+    localStorage.setItem(
+      "support-order-details",
+      JSON.stringify(this._mainFormComponent.state),
+    );
+
+    // if (this._mainFormComponent.state.currentFieldset?.dispatchType === "continue") {
+    //   return;
+    // }
+
+    // switch (this._mainFormComponent.state.currentFieldset?.id) {
+    //   case "what-is-your-role":
+    //     this._total =
+    //       (parseFloat(
+    //         this._mainFormComponent.getStateValue("what-is-your-role", "amount1"),
+    //       ) || 0) +
+    //       (parseFloat(
+    //         this._mainFormComponent.getStateValue("what-is-your-role", "amount2"),
+    //       ) || 0);
+    //     break;
+    // }
   }
 
   updateChildrenState(e: Event) {
+    console.log("updateChildrenState");
     this._childFormComponent.updateState(e);
   }
 
@@ -98,7 +115,11 @@ export class SupportOrderDetailsComponent implements OnInit {
 
   onChildPageChange(e: Event, from: ChildPage) {
     let dest: ChildPage | undefined = undefined;
+    console.log("onChildPageChange", from);
     switch (from) {
+      case "child-list":
+        dest = "name";
+        break;
       case "name":
         dest = this.handleChildrenNames(e);
         break;
@@ -116,6 +137,14 @@ export class SupportOrderDetailsComponent implements OnInit {
     if (dest) {
       this._childFormComponent.continueTo(dest);
     }
+  }
+
+  onChildComplete(e: Event) {
+    console.log("onChildComplete", e);
+    this._childFormComponent.continueTo("child-list");
+
+    // need to stop the _complete event here, otherwise the parent will also act on it
+    e.stopPropagation();
   }
 
   // ===========
@@ -186,10 +215,10 @@ export class SupportOrderDetailsComponent implements OnInit {
   // Children
 
   handleChildrenNames(e: Event): ChildPage | undefined {
-    const [firstNameOk] = this._childFormComponent.validate("first-name", e, [
+    const [firstNameOk] = this._childFormComponent.validate("firstName", e, [
       requiredValidator(),
     ]);
-    const [lastNameOk] = this._childFormComponent.validate("last-name", e, [
+    const [lastNameOk] = this._childFormComponent.validate("lastName", e, [
       requiredValidator(),
     ]);
     if (!firstNameOk || !lastNameOk) return;
@@ -198,7 +227,7 @@ export class SupportOrderDetailsComponent implements OnInit {
   }
 
   handleChildrenAlternateName(e: Event): ChildPage | undefined {
-    const [ok] = this._childFormComponent.validate("alternate-name", e, [
+    const [ok] = this._childFormComponent.validate("alternateName", e, [
       requiredValidator(),
     ]);
     if (!ok) return;
@@ -210,6 +239,6 @@ export class SupportOrderDetailsComponent implements OnInit {
     const [ok] = this._childFormComponent.validate("dob", e, [requiredValidator()]);
     if (!ok) return;
 
-    return "child-list";
+    return "summary";
   }
 }

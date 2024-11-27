@@ -20,6 +20,6 @@ export function fetchData(path: string): Record<string, unknown> | undefined {
 
 export function getValue(data: unknown | undefined, section: string, id: string) {
   if (!data) return;
-  // @ts-ignore
+  // @ts-expect-error ignore
   return data["form"][section]?.data?.[id].value || "";
 }

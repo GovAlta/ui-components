@@ -29,6 +29,8 @@
     FieldsetMountFormRelayDetail,
     FieldsetResetErrorsMsg,
     FieldsetSetErrorMsg,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
     FieldsetSubmitMsg,
     FieldsetValidationRelayDetail,
     FormBackUrlDetail,
@@ -42,8 +44,6 @@
     FormResetErrorsMsg,
     FormSetFieldsetMsg,
     FormSetFieldsetRelayDetail,
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
     FormToggleActiveMsg,
     FormToggleActiveRelayDetail,
   } from "../../types/relay-types";
@@ -76,7 +76,6 @@
   let _rootEl: HTMLElement;
   let _active: boolean = false;
   let _editting: boolean = false;
-  let _detail: FieldsetBindRelayDetail;
   let _errors: Record<string, string> = {};
   let _backUrl: string;
 
@@ -107,12 +106,6 @@
   // =====
 
   onMount(() => {
-    _detail = {
-      id,
-      heading,
-      el: _rootEl,
-    };
-
     dispatchBindMsg();
     addChildChangeListener();
     bindChannel();
@@ -124,7 +117,7 @@
 
   function bindChannel() {
     receive(_rootEl, (action, data) => {
-      // console.log(`  RECEIVE(Fieldset => ${action}):`, data);
+      console.debug(`  RECEIVE(Fieldset => ${action}):`, data);
       switch (action) {
         case FormSetFieldsetMsg:
           onSetFieldset(data as FormSetFieldsetRelayDetail);
@@ -163,8 +156,25 @@
   }
 
   function onSetFieldset(detail: FormSetFieldsetRelayDetail) {
+    // set the fieldset state
     for (const [id, item] of Object.entries(detail.value)) {
       _state[id] = { ...item }
+    }
+
+    // restore state in form items
+    for (const [name, data] of Object.entries(_state)) {
+      if (Array.isArray(data)) {
+        // TODO: restore the state when multiple items exist
+        // This is probably called for data obtained from a form loop
+        console.log("****Array is multiple values!!****", data);
+      } else {
+        if (data.value) {
+          relay<FieldsetSetValueRelayDetail>(_formFields[name].el, FieldsetSetValueMsg, {
+            name,
+            value: data.value,
+          });
+        }
+      }
     }
   }
 
@@ -268,7 +278,7 @@
     for (const [name, val] of Object.entries(_formFields)) {
       // some form elements not "form-bound" won't exist within the snapshot state
       if (_stateSnapshot[name]) {
-        relay<FormSetValueRelayDetail>(val.el, FormSetValueMsg, { name, value: _stateSnapshot[name].value});
+        relay<FieldsetSetValueRelayDetail>(val.el, FieldsetSetValueMsg, { name, value: _stateSnapshot[name].value});
       }
     }
   }
@@ -287,10 +297,10 @@
   }
 
   function dispatchBindMsg() {
-    relay<FieldsetBindRelayDetail>(_rootEl, FieldsetBindMsg, _detail, {
-      bubbles: true,
-      timeout: 10,
-    });
+    relay<FieldsetBindRelayDetail>(_rootEl, FieldsetBindMsg, 
+      { id, heading, el: _rootEl},
+      { bubbles: true, timeout: 10 },
+    );
   }
 
   function addChildChangeListener() {

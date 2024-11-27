@@ -1,14 +1,17 @@
-<svelte:options customElement={{
-  tag: "goa-public-form",
-  props: {
-    backUrl: { attribute: "back-url", type: "String" }
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-public-form",
+    props: {
+      backUrl: { attribute: "back-url", type: "String" },
+      subForm: { attribute: "sub-form", type: "Boolean" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { onMount } from "svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
-  import { dispatch, receive, relay } from "../../common/utils";
+  import { dispatch, performOnce, receive, relay } from "../../common/utils";
   import {
     ExternalAlterDataMsg,
     ExternalAlterDataRelayDetail,
@@ -18,7 +21,6 @@
     ExternalContinueRelayDetail,
     ExternalInitStateDetail,
     ExternalInitStateMsg,
-    ExternalResetStateMsg,
     FieldsetBindMsg,
     FieldsetBindRelayDetail,
     FieldsetChangeMsg,
@@ -34,9 +36,8 @@
     FormResetErrorsMsg,
     FormSetFieldsetMsg,
     FormSetFieldsetRelayDetail,
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
     FormState,
+    FormStateData,
     FormSummaryBindMsg,
     FormSummaryBindRelayDetail,
     FormSummaryEditPageMsg,
@@ -55,20 +56,16 @@
   // Optional
   // ========
 
-  /**
-   * Storage type for form data persistence:
-   * - "none": No storage (default)
-   * - "local": Use localStorage
-   * - "session": Use sessionStorage
-   */
-  export let storage: "none" | "local" | "session" = "none";
-
   // Spacing
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
+
+  // Url that will be navigated back to when the back button in the first fieldset is clicked
   export let backUrl: string = "";
+
+  export let subForm: boolean = false;
 
   // =======
   // Private
@@ -107,12 +104,9 @@
     // provide html element link to outside world
     dispatch(_formEl, "_init", { el: _formEl });
 
-    if (storage !== "none") {
-      restoreState();
-    }
     addWindowPopStateListener();
     addRelayListener();
-    setTimeout(bindChildren, 100);
+    setTimeout(setChildrenState, 100);
   });
 
   /**
@@ -120,9 +114,10 @@
    */
   function addRelayListener() {
     receive(_formEl, (type, data, e) => {
-      // prevent fieldset events from going any higher to allow for subforms
-      e.stopPropagation();
-      // console.log(`  RECEIVE(Form => ${type}):`, type, data);
+      if (!subForm) {
+        e.stopPropagation();
+      }
+      console.debug(`  RECEIVE(Form => ${type}):`, name, type, data);
       switch (type) {
         case FieldsetBindMsg:
           onFieldsetBind(data as FieldsetBindRelayDetail);
@@ -151,9 +146,6 @@
         case ExternalAlterDataMsg:
           onAlterData(data as ExternalAlterDataRelayDetail);
           break;
-        case ExternalResetStateMsg:
-          resetState();
-          break;
         case ExternalInitStateMsg:
           initState(data as ExternalInitStateDetail);
           break;
@@ -177,7 +169,6 @@
 
     switch (detail.operation) {
       case "edit": {
-        // @ts-ignore
         _state.form[detail.id][detail.index] = detail.data || {};
         break;
       }
@@ -190,7 +181,6 @@
     }
 
     dispatchStateChange("continue", detail.id);
-    saveState(_state);
   }
 
   /**
@@ -199,13 +189,12 @@
    */
   function onAppendData(detail: ExternalAppendDataRelayDetail) {
     const { id, data } = detail;
-    // @ts-ignore
+    // @ts-expect-error ignore
     const temp = [...(_state.form[id] || [])];
-    temp.push(data)
+    temp.push(data);
     _state.form[id].data = [...temp];
 
     dispatchStateChange("continue", id);
-    saveState(_state);
   }
 
   /**
@@ -230,25 +219,21 @@
   }
 
   /**
-   * Handles binding of child fieldsets to enable state synchronization
+   * Create collection of fieldsets and relay messages to them to make the current item visible
    * @param detail Contains the child fieldset to bind
    */
   function onFieldsetBind(detail: FieldsetBindRelayDetail) {
-    _fieldsets[detail.id] = detail;
+    // _fieldsets[detail.id] = detail;
+    _fieldsets = { ..._fieldsets, [detail.id]: detail };
+    console.log("---", detail.id);
 
-    // send the back url to child fieldsets
+    // send the back url to child fieldsets, howwever only the first will need it
     if (backUrl) {
       relay<FormBackUrlDetail>(detail.el, FormBackUrlMsg, { url: backUrl });
     }
 
-    // run the final binding code block below once
-    if (_formItemBindingTimeoutId) {
-      clearTimeout(_formItemBindingTimeoutId);
-    }
-
-    // show the appropriate fieldset
-    _formItemBindingTimeoutId = setTimeout(() => {
-      // if _lastFieldset is set that means previous history is present, so it is shown
+    // run on the last fieldset
+    _formItemBindingTimeoutId = performOnce(_formItemBindingTimeoutId, () => {
       if (_lastFieldset) {
         // last page has priority
         const item = _fieldsets[_lastFieldset];
@@ -257,10 +242,9 @@
         // mark the first fieldset as active
         const [id] = Object.entries(_fieldsets)[0];
         _state.history.push(id);
-        saveState(_state);
         sendToggleActiveStateMsg(id);
       }
-    }, 100);
+    });
   }
 
   /**
@@ -283,8 +267,6 @@
     if (dispatchOn === "change") {
       dispatchStateChange("change", id);
     }
-
-    saveState(_state);
   }
 
   /**
@@ -299,7 +281,6 @@
 
     // if no page is currently being editted just go to the next page
     if (_state.editting) {
-
       // clear the errors of the current page being editted
       resetFieldsetErrors(_state.editting);
 
@@ -323,7 +304,6 @@
         _state.editting = "";
       }
     } else {
-
       // clear most recent fieldset's errors
       const page = _state.history[_state.history.length - 1];
       resetFieldsetErrors(page);
@@ -336,9 +316,6 @@
     }
 
     syncFormSummaryState();
-
-    // save history updates
-    saveState(_state);
   }
 
   /**
@@ -346,15 +323,27 @@
    * @param dispatchType Indicates the type of state change ('change'/'continue')
    * @param fieldSetId The id of the fieldset where the state change occurred
    */
-  function dispatchStateChange(dispatchType: "change" | "continue", fieldSetId: string) {
-    dispatch(_formEl, "_stateChange", {..._state, currentFieldset: { id: fieldSetId, dispatchType } }, { bubbles: true, timeout: 100 });
+  function dispatchStateChange(
+    dispatchType: "change" | "continue",
+    fieldSetId: string,
+  ) {
+    dispatch(
+      _formEl,
+      "_stateChange",
+      { ..._state, currentFieldset: { id: fieldSetId, dispatchType } },
+      { bubbles: true, timeout: 100 },
+    );
   }
 
   /**
    * Synchronizes the form summary state with the app to ensure consistent display of form data
    */
   function syncFormSummaryState() {
-    relay<FormDispatchStateRelayDetail>(_formSummary, FormDispatchStateMsg, _state);
+    relay<FormDispatchStateRelayDetail>(
+      _formSummary,
+      FormDispatchStateMsg,
+      _state,
+    );
   }
 
   /**
@@ -374,7 +363,11 @@
    */
   function sendEdittingStateMsg() {
     for (const fieldset of Object.values(_fieldsets)) {
-      relay<FormDispatchStateRelayDetail>(fieldset.el, FormDispatchStateMsg, _state);
+      relay<FormDispatchStateRelayDetail>(
+        fieldset.el,
+        FormDispatchStateMsg,
+        _state,
+      );
     }
   }
 
@@ -383,13 +376,18 @@
    */
   function onFormComplete() {
     _state.status = "complete";
-    saveState(_state);
 
-    const cleanedState = _state.history.reduce<Record<string, FieldsetData>>((acc, fieldsetId) => {
-      acc[fieldsetId] = _state.form[fieldsetId]
-      return acc;
-    }, {})
-    dispatch(_formEl, "_complete", { form: cleanedState }, { bubbles: true });
+    // NOTE: don't do this now -- Initially it was thought that at this point we would submit the
+    // cleaned data and the backend would move this data into it's own table structure, but since
+    // the data may to have notes added by an admin on the backend, the data does not need to be
+    // cleaned until a later time.
+    // removes any data collected that doesn't correspond with the final history path
+    // const cleanedState = _state.history.reduce<Record<string, FieldsetData>>((acc, fieldsetId) => {
+    //   acc[fieldsetId] = _state.form[fieldsetId]
+    //   return acc;
+    // }, {})
+
+    dispatch<FormState>(_formEl, "_complete", _state, { bubbles: true });
   }
 
   // *********
@@ -411,10 +409,14 @@
   function sendToggleActiveStateMsg(page: string) {
     const keys = Object.keys(_fieldsets);
     keys.forEach((key) => {
-      relay<FormToggleActiveRelayDetail>(_fieldsets[key].el, FormToggleActiveMsg, {
-        first: false, //key === _firstElement,
-        active: key === page,
-      });
+      relay<FormToggleActiveRelayDetail>(
+        _fieldsets[key].el,
+        FormToggleActiveMsg,
+        {
+          first: false, //key === _firstElement,
+          active: key === page,
+        },
+      );
     });
   }
 
@@ -426,38 +428,9 @@
       const history = [..._state.history];
       history.pop();
       _state.history = history;
-      saveState(_state);
       sendToggleActiveStateMsg(history[history.length - 1]);
       e.stopPropagation();
     });
-  }
-
-  /**
-   * Retrieves the appropriate storage object based on the specified storage type
-   * @returns The storage object (localStorage or sessionStorage) or null if storage is 'none'
-   */
-  function getStorage(): Storage | null {
-    if (storage === "none") return null;
-    return storage === "local" ? localStorage : sessionStorage;
-  }
-
-  /**
-   * Saves the current form state to local or session storage
-   * @param state The current form state to save
-   */
-  function saveState(state: FormState) {
-    const storage = getStorage();
-    storage?.setItem(name, JSON.stringify(state));
-  }
-
-  /**
-   * Restores the form state from local or session storage
-   */
-  function restoreState() {
-    const state = getStorage()?.getItem(name);
-    if (state) {
-      initState(state);
-    }
   }
 
   /**
@@ -481,58 +454,23 @@
       _lastFieldset = _state.history[historyPageCount - 1];
     }
 
+    // show the fieldset
     dispatchStateChange("continue", _lastFieldset);
   }
 
   /**
-   * Binds the state of fieldsets and form items to their corresponding elements
+   * Restores the fieldset and subform states
    */
-  function bindChildren() {
-    // restore state in fieldsets
+  function setChildrenState() {
     for (const [name, detail] of Object.entries(_fieldsets)) {
       const value = _state.form[name]?.data;
-      if (value)
+      if (value) {
         relay<FormSetFieldsetRelayDetail>(detail.el, FormSetFieldsetMsg, {
           name,
           value,
         });
-    }
-
-    // restore state in form items
-    for (const id of Object.keys(_formFields)) {
-      for (const [name, el] of Object.entries(_formFields[id])) {
-        const fieldset = _state.form[id];
-        if (Array.isArray(fieldset?.data)) {
-          // TODO: restore the state when multiple items exist
-          console.log("Array is multiple values!!", fieldset);
-        } else {
-          const value = fieldset?.data?.[name]?.value;
-          if (value) {
-            relay<FormSetValueRelayDetail>(el, FormSetValueMsg, {
-              name,
-              value,
-            });
-          }
-        }
       }
     }
-  }
-
-  /**
-   * Resets the form state and clears local or session storage
-   */
-  function resetState() {
-    const storage = getStorage();
-    if (!storage) return;
-
-    storage.removeItem(name);
-    _state = {
-      form: {},
-      history: [_fieldsets[0]?.id],
-      editting: "",
-      lastModified: undefined,
-      status: "not-started",
-    };
   }
 </script>
 

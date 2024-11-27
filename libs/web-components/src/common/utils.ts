@@ -234,3 +234,10 @@ export function padLeft(
   }
   return `${padding}${value}`;
 }
+
+export function performOnce(timeoutId: any, action: () => void, delay = 100): any {
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+  return setTimeout(action, delay);
+}

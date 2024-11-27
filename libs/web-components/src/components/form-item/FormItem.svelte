@@ -57,7 +57,7 @@
   export let requirement: RequirementType = "";
   export let maxwidth: string = "none";
 
-  // **For the public-form only** 
+  // **For the public-form only**
   // Overrides the label value within the form-summary to provide a shorter description of the value
   export let name: string = "blank";
 
@@ -72,7 +72,7 @@
     validateLabelSize(labelsize);
 
     receive(_rootEl, (action, data) => {
-      // console.log(`  RECEIVE(FormItem => ${action}):`, data);
+      console.debug(`  RECEIVE(FormItem => ${action}):`, data);
       switch (action) {
         case FormFieldMountMsg:
           onInputMount(data as FormFieldMountRelayDetail);
@@ -168,11 +168,12 @@
       el.setAttribute("aria-label", label);
     }
 
-    bindElement(name);
+    sendMountedMessage(name);
   }
 
-  // Allows binding to Fieldset components
-  function bindElement(_name: string) {
+  // Allows binding to Fieldset components. The `_name` value is what was obtained from the "input" element's
+  // event, which ensures that the requirement of the "input" and formitem having the same name will be met.
+  function sendMountedMessage(_name: string) {
     relay<FormItemMountRelayDetail>(
       _rootEl,
       FormItemMountMsg,

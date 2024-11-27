@@ -7,8 +7,8 @@
 
   import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
   import {
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
     FieldsetSetErrorMsg,
     FieldsetResetErrorsMsg,
     FormFieldMountRelayDetail,
@@ -77,8 +77,8 @@
     receive(_rootEl, (action, data) => {
       // console.log(`  RECEIVE(Form => ${action}):`, action, data);
       switch (action) {
-        case FormSetValueMsg:
-          onSetValue(data as FormSetValueRelayDetail);
+        case FieldsetSetValueMsg:
+          onSetValue(data as FieldsetSetValueRelayDetail);
           break;
         case FieldsetSetErrorMsg:
           setError(data as FieldsetErrorRelayDetail);
@@ -132,7 +132,7 @@
     }
   }
 
-  function onSetValue(detail: FormSetValueRelayDetail) {
+  function onSetValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
     checked = detail.value ? "true" : "false";

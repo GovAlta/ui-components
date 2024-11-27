@@ -16,8 +16,8 @@
     RadioItemSelectProps,
   } from "../radio-item/RadioItem.svelte";
   import {
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
     FieldsetSetErrorMsg,
     FieldsetResetErrorsMsg,
     FormFieldMountRelayDetail,
@@ -97,8 +97,8 @@
   function addRelayListener() {
     receive(_rootEl, (action, data) => {
       switch (action) {
-        case FormSetValueMsg:
-          onSetValue(data as FormSetValueRelayDetail);
+        case FieldsetSetValueMsg:
+          onSetValue(data as FieldsetSetValueRelayDetail);
           break;
         case FieldsetSetErrorMsg:
           setError(data as FieldsetErrorRelayDetail);
@@ -114,7 +114,7 @@
     error = detail.error ? "true" : "false";
   }
 
-  function onSetValue(detail: FormSetValueRelayDetail) {
+  function onSetValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
     dispatch(_rootEl, "_change", { name, value }, { bubbles: true });

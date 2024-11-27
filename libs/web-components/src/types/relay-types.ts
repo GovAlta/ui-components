@@ -1,8 +1,10 @@
 export type FormStatus = "not-started" | "incomplete" | "complete";
 
 // FIXME: Can the existing AppState be used in place of this
+export type FormStateData = Record<string, FieldsetData>;
+
 export type FormState = {
-  form: Record<string, FieldsetData>;
+  form: FormStateData;
   history: string[];
   editting: string;
   lastModified?: Date;
@@ -20,7 +22,6 @@ export type FieldsetData = {
 
 export const FormResetErrorsMsg = "form::reset:errors";
 export const FormSetFieldsetMsg = "form::set:fieldset";
-export const FormSetValueMsg = "form::set:value";
 export const FormDispatchStateMsg = "form::dispatch:state";
 export const FormToggleActiveMsg = "form::toggle:active";
 export const FormStateChangeMsg = "form::state:change";
@@ -40,11 +41,6 @@ export type FormToggleActiveRelayDetail = {
 export type FormSetFieldsetRelayDetail = {
   name: string;
   value: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
-};
-
-export type FormSetValueRelayDetail = {
-  name: string;
-  value: string | number | Date;
 };
 
 export type FormDispatchStateRelayDetail = FormState;
@@ -105,6 +101,12 @@ export type FieldsetValidationRelayDetail = {
   state: Record<string, FieldsetItemState>;
 };
 
+export const FieldsetSetValueMsg = "fieldset::set:value";
+export type FieldsetSetValueRelayDetail = {
+  name: string;
+  value: string | number | Date;
+};
+
 // ========
 // FormItem
 // ========
@@ -125,7 +127,6 @@ export const ExternalSetErrorMsg = "external::set:error";
 export const ExternalContinueMsg = "external::continue";
 export const ExternalAppendDataMsg = "external::append:state";
 export const ExternalAlterDataMsg = "external::alter:state";
-export const ExternalResetStateMsg = "external::reset:state";
 export const ExternalInitStateMsg = "external::init:state";
 
 export type ExternalAlterDataRelayDetail =
