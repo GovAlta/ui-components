@@ -36,7 +36,7 @@ export const msg = {
 
 export function receive(
   el: HTMLElement | Element | null | undefined,
-  handler: (action: string, data: Record<string, unknown>, event: Event) => void,
+  handler: (action: string, data: unknown, event: Event) => void,
 ) {
   if (!el) {
     console.warn("receive() el is null | undefined");

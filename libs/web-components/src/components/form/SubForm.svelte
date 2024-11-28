@@ -2,24 +2,24 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { receive, relay, styles } from "../../common/utils";
+  import { dispatch, receive, relay, styles } from "../../common/utils";
   import {
     FieldsetBindMsg,
     FieldsetBindRelayDetail,
-    FieldsetData,
+    FieldsetValidationRelayDetail,
+    FormResetFormMsg,
     FormSetFieldsetMsg,
-    FormSetFieldsetRelayDetail,
     FormState,
     FormToggleActiveMsg,
     FormToggleActiveRelayDetail,
   } from "../../types/relay-types";
   import { calculateMargin, Spacing } from "../../common/styling";
 
-  /** 
+  /**
     TODO
     - handle the complete event from within the subform
       - need to bind a handler on the goa-form's _complete
-  
+
   **/
 
   // Subform props
@@ -28,7 +28,6 @@
 
   // Form props
   export let name: string;
-  export let storage: "none" | "local" = "none";
   export let backUrl: string = "";
   export let dispatchOn: "continue" | "complete" = "continue";
   export let mt: Spacing = null;
@@ -49,7 +48,7 @@
   let _current: number = -1;
 
   // List of all the looped items
-  let _state: Record<string, FieldsetData>[] = [];
+  let _state: FormState[] = [];
 
   // reference to child fieldsets to allow data to be relayed to them when the subform item index is changed
   let _fieldsets: Record<string, HTMLElement> = {};
@@ -60,6 +59,11 @@
     bindChangeHandler();
   });
 
+  let _innerFormEl: HTMLElement;
+  function onInit(e: Event) {
+    _innerFormEl = (e as CustomEvent).detail.el as HTMLElement;
+  }
+
   function bindReceiver() {
     receive(_formEl, (action, data, e) => {
       console.debug(`  RECEIVE(SubForm => ${action}):`, data);
@@ -67,7 +71,7 @@
       switch (action) {
         // sets the fieldset/subform data
         case FormSetFieldsetMsg:
-          onSetFieldset(data as FormSetFieldsetRelayDetail);
+          onSetFieldset(data as FormState[]);
           break;
         case FormToggleActiveMsg:
           onToggleActiveState(data as FormToggleActiveRelayDetail);
@@ -77,10 +81,10 @@
           break;
       }
     });
-
   }
   // Collect list of child form item (input, dropdown, etc) elements
   function onFieldsetMount(detail: FieldsetBindRelayDetail) {
+    console.debug("SubForm:onFieldsetMount", { detail });
     const { id, el } = detail;
     if (!id) return;
 
@@ -88,12 +92,11 @@
   }
 
   // Parent form sends data to the child fieldsets/subforms
-  function onSetFieldset(detail: FormSetFieldsetRelayDetail) {
-    console.log("subform onSetFieldset", detail)
-    for (const [id, item] of Object.entries(detail.value)) {
-      _state[id] = { ...item }
+  function onSetFieldset(detail: FormState[]) {
+    console.debug("Subform:onSetFieldset", { detail });
+    for (const [id, item] of Object.entries(detail)) {
+      _state[id] = { ...item };
     }
-    console.log("subform state", _state)
   }
 
   // TODO: use this function when the user clicks an edit/delete link
@@ -113,7 +116,6 @@
   function bindChangeHandler() {
     _formEl.addEventListener("_change", (e) => {
       console.debug(`  SUBFORM CHANGE:`, e);
-
     });
   }
 
@@ -136,31 +138,62 @@
   }
 
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
+    console.debug("SubForm:onToggleActiveState", { detail });
     _active = detail.active;
   }
 
-  function onComplete(e: Event) {
-    const { form } = (e as CustomEvent).detail as FormState;
-    console.log("subform onComplete", form)  
+  function onStateChange(e: Event) {
+    console.debug("Subform:onStateChange", { e });
 
-    // add the data to the subform internal state, but still dispatch the data up to the parent form
-    
+    // initial event will be overridden with a custom _stateChange event containing a state array
+    e.stopPropagation();
 
+    const detail = (e as CustomEvent).detail as FormState;
+
+    // no existing item is in "edit" mode
+    const editStateIndex = _state.findIndex((s) => s.id === detail.id);
+    console.debug("SubForm:onStateChange", "findIndex", editStateIndex);
+    if (editStateIndex >= 0) {
+      _state[editStateIndex] = detail;
+    } else {
+      _state.push(detail);
+    }
+
+    // _state = [
+    //   ..._state.slice(0, editStateIndex),
+    //   detail,
+    //   ..._state.slice(editStateIndex + 1),
+    // ];
+
+    // stop original event to prevent just the single subform data from being sent
+    // send the array of data instead
+    dispatch(_rootEl, "_stateChange", _state, { bubbles: true });
   }
 
+  // Listen to the fieldset `_continue` message to allow for the subform to be reset
+  // after the last fieldset was shown to the user
+  function onContinue(e: Event) {
+    const detail = (e as CustomEvent<FieldsetValidationRelayDetail>).detail;
+    console.debug("SubForm:onContinue", { detail});
+    if (detail.last) {
+      relay(_innerFormEl, FormResetFormMsg);
+    }
+    e.stopPropagation();
+  }
 </script>
 
 <div bind:this={_rootEl}>
   <goa-public-form
     bind:this={_formEl}
-    on:_complete={onComplete}
+    on:_stateChange={onStateChange}
+    on:_continue={onContinue}
+    on:_init={onInit}
     style={styles(
       calculateMargin(mt, mr, mb, ml),
       `display: ${_active ? "block" : "none"}`,
     )}
     sub-form
     {name}
-    {storage}
     {dispatchOn}
     {backUrl}
     {mt}

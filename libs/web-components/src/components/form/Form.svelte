@@ -25,7 +25,6 @@
     FieldsetBindRelayDetail,
     FieldsetChangeMsg,
     FieldsetChangeRelayDetail,
-    FieldsetData,
     FieldsetMountFormItemMsg,
     FieldsetMountFormRelayDetail,
     FieldsetSubmitMsg,
@@ -34,10 +33,10 @@
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
     FormResetErrorsMsg,
+    FormResetFormMsg,
     FormSetFieldsetMsg,
     FormSetFieldsetRelayDetail,
     FormState,
-    FormStateData,
     FormSummaryBindMsg,
     FormSummaryBindRelayDetail,
     FormSummaryEditPageMsg,
@@ -86,16 +85,18 @@
   let _formItemBindingTimeoutId: any;
 
   // Last fieldset id in history
-  let _lastFieldset: string;
+  let _lastViewedFieldset: string;
 
   // Form state
   let _state: FormState = {
+    id: crypto.randomUUID(),
     form: {},
     history: [],
     editting: "",
     lastModified: undefined,
     status: "not-started",
   };
+
 
   onMount(() => {
     // Required to get the form summary to render
@@ -149,6 +150,10 @@
         case ExternalInitStateMsg:
           initState(data as ExternalInitStateDetail);
           break;
+        case FormResetFormMsg:
+          resetState();
+          resetFormFields();
+          break;
       }
     });
   }
@@ -162,6 +167,7 @@
    * @param detail Contains operation type ('edit'/'remove'), array index, and new data
    */
   function onAlterData(detail: ExternalAlterDataRelayDetail) {
+    console.debug("Form:onAlterData", name, { detail });
     const state = _state.form[detail.id];
     if (!Array.isArray(state)) {
       return;
@@ -188,6 +194,7 @@
    * @param detail Contains the id of the array and the new data to append
    */
   function onAppendData(detail: ExternalAppendDataRelayDetail) {
+    console.debug("Form:onAppendData", name, { detail });
     const { id, data } = detail;
     // @ts-expect-error ignore
     const temp = [...(_state.form[id] || [])];
@@ -223,9 +230,8 @@
    * @param detail Contains the child fieldset to bind
    */
   function onFieldsetBind(detail: FieldsetBindRelayDetail) {
-    // _fieldsets[detail.id] = detail;
     _fieldsets = { ..._fieldsets, [detail.id]: detail };
-    console.log("---", detail.id);
+    console.debug("Form:onFieldsetBind", name, "---", _fieldsets);
 
     // send the back url to child fieldsets, howwever only the first will need it
     if (backUrl) {
@@ -234,14 +240,15 @@
 
     // run on the last fieldset
     _formItemBindingTimeoutId = performOnce(_formItemBindingTimeoutId, () => {
-      if (_lastFieldset) {
+      if (_lastViewedFieldset) {
         // last page has priority
-        const item = _fieldsets[_lastFieldset];
+        const item = _fieldsets[_lastViewedFieldset];
         sendToggleActiveStateMsg(item.id);
       } else {
         // mark the first fieldset as active
         const [id] = Object.entries(_fieldsets)[0];
         _state.history.push(id);
+        console.log("   History", _state.history);
         sendToggleActiveStateMsg(id);
       }
     });
@@ -252,6 +259,8 @@
    * @param detail Contains the id, state, and dispatch type of the changed fieldset
    */
   function onFieldsetChange(detail: FieldsetChangeRelayDetail) {
+    console.debug("Form:onFieldsetChange", name, detail);
+
     const { id, state, dispatchOn } = detail;
 
     // clean empty values from the data
@@ -274,10 +283,16 @@
    * @param detail Contains the next page to navigate to
    */
   function onContinue(detail: ExternalContinueRelayDetail) {
+    console.debug("Form:onContinue", name, { detail, _state });
     const { next } = detail;
+    const lastPage = _state.history[_state.history.length - 1];
+    if (!lastPage) {
+      console.error("Form:onContinue", name, "no last page");
+      return;
+    }
 
     // dispatch state to app to allow dynamic binding, along with the page where a state change occured
-    dispatchStateChange("continue", _state.history[_state.history.length - 1]);
+    dispatchStateChange("continue", lastPage);
 
     // if no page is currently being editted just go to the next page
     if (_state.editting) {
@@ -294,9 +309,9 @@
       // has altered their path and the history must be clear from this point forward
       const jumpToSummary = _state.history[oldNextIndex] === next;
       if (jumpToSummary) {
-        const last = _state.history[_state.history.length - 1];
-        sendToggleActiveStateMsg(last);
+        sendToggleActiveStateMsg(lastPage);
       } else {
+        console.log("HEEEEEEEEEEERE");
         _state.history = [..._state.history.slice(0, oldNextIndex), next];
         sendToggleActiveStateMsg(next);
         sendEdittingStateMsg();
@@ -304,12 +319,11 @@
         _state.editting = "";
       }
     } else {
-      // clear most recent fieldset's errors
-      const page = _state.history[_state.history.length - 1];
-      resetFieldsetErrors(page);
+      // clear most recent fieldset's errors, to prevent previously fixed errors from still being seen
+      resetFieldsetErrors(lastPage);
 
       // prevent duplicates in history
-      if (_state.history[_state.history.length - 1] !== next) {
+      if (lastPage !== next) {
         _state.history.push(next);
       }
       sendToggleActiveStateMsg(next);
@@ -319,14 +333,15 @@
   }
 
   /**
-   * Dispatches state change events to the app to trigger dynamic binding and state updates
-   * @param dispatchType Indicates the type of state change ('change'/'continue')
+   * Dispatches state change events to the app to trigger any dynamic binding
+   * @param dispatchType Indicates the type of state change (change | continue)
    * @param fieldSetId The id of the fieldset where the state change occurred
    */
   function dispatchStateChange(
     dispatchType: "change" | "continue",
     fieldSetId: string,
   ) {
+    console.debug("Form:dispatchStateChange", name, { fieldSetId, _state });
     dispatch(
       _formEl,
       "_stateChange",
@@ -390,6 +405,27 @@
     dispatch<FormState>(_formEl, "_complete", _state, { bubbles: true });
   }
 
+  function resetState() {
+    console.debug("Form:resetState", name);
+    const [id] = Object.entries(_fieldsets)[0];
+
+    _state = {
+      id: crypto.randomUUID(),
+      form: {},
+      history: [id],
+      editting: "",
+      lastModified: undefined,
+      status: "not-started",
+    };
+  }
+
+  function resetFormFields() {
+    console.debug("Form:resetFormFields", name);
+    for (const { el } of Object.values(_fieldsets)) {
+      relay(el, FormResetFormMsg);
+    }
+  }
+
   // *********
   // Functions
   // *********
@@ -398,8 +434,9 @@
    * Resets the errors for a specific fieldset
    * @param name The id of the fieldset to reset errors for
    */
-  function resetFieldsetErrors(name: string) {
-    relay(_fieldsets[name].el, FormResetErrorsMsg, null);
+  function resetFieldsetErrors(fieldsetName: string) {
+    console.debug("Form:resetFieldsetErrors", name, { fieldsetName });
+    relay(_fieldsets[fieldsetName].el, FormResetErrorsMsg, null);
   }
 
   /**
@@ -407,6 +444,7 @@
    * @param page The id of the page to set as active
    */
   function sendToggleActiveStateMsg(page: string) {
+    console.debug("Form:sendToggleActiveStateMsg", name, { page });
     const keys = Object.keys(_fieldsets);
     keys.forEach((key) => {
       relay<FormToggleActiveRelayDetail>(
@@ -424,10 +462,13 @@
    * Listens to url changes or location back events to update the form state and active page
    */
   function addWindowPopStateListener() {
+    console.debug("Form:addWindowPopStateListener", name);
     window.addEventListener("popstate", (e: PopStateEvent) => {
       const history = [..._state.history];
       history.pop();
       _state.history = history;
+      console.log("   History", _state.history);
+
       sendToggleActiveStateMsg(history[history.length - 1]);
       e.stopPropagation();
     });
@@ -438,6 +479,7 @@
    * @param detail The data to initialize the form state with
    */
   function initState(detail: ExternalInitStateDetail) {
+    console.debug("Form:initState", name, { detail });
     if (!detail) {
       return;
     }
@@ -451,17 +493,20 @@
     // initialize history with first page if history is empty
     let historyPageCount = _state.history.length;
     if (historyPageCount > 0) {
-      _lastFieldset = _state.history[historyPageCount - 1];
+      _lastViewedFieldset = _state.history[historyPageCount - 1];
     }
+    console.log("   History", _state.history);
+
 
     // show the fieldset
-    dispatchStateChange("continue", _lastFieldset);
+    dispatchStateChange("continue", _lastViewedFieldset);
   }
 
   /**
    * Restores the fieldset and subform states
    */
   function setChildrenState() {
+    console.debug("Form:setChildrenState", name, { _fieldsets });
     for (const [name, detail] of Object.entries(_fieldsets)) {
       const value = _state.form[name]?.data;
       if (value) {

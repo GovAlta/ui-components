@@ -1,5 +1,5 @@
 <goa-public-form
-  name="support-order-details"
+  name="parent-form"
   (_complete)="onComplete($event)"
   (_init)="_mainFormComponent.init($event)"
   (_stateChange)="updateState($event)"
@@ -66,18 +66,17 @@
 
   <goa-subform
     id="children-subform"
-    name="support-order-details--children"
+    name="children-subform"
     (_complete)="onChildComplete($event)"
-    (_init)="_childFormComponent.init($event)"
+    (_init)="_childFormComponent.init($event, 'multi')"
     (_stateChange)="updateChildrenState($event)"
   >
     <goa-fieldset first id="child-list" (_continue)="onChildPageChange($event, 'child-list')">
+      First Page
       {{_childFormComponent.state | json}}
       <goa-table>
         <tbody>
-          <tr *ngFor="let item of _childFormComponent.getStateItems('children-subform')">
-            <td>{{item['firstName']}} {{item['lastName']}}</td>
-            <td><goa-link-button>Edit</goa-link-button></td>
+          <tr>
           </tr>
         </tbody>
       </goa-table>
@@ -104,7 +103,7 @@
       </goa-form-item>
     </goa-fieldset>
 
-    <goa-fieldset last id="summary">
+    <goa-fieldset last id="summary" (_continue)="onChildPageChange($event, 'summary')">
       <goa-public-form-summary />
     </goa-fieldset>
 

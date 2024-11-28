@@ -171,8 +171,8 @@
     // @ts-expect-error
     value = detail.value;
 
-    // dispatch the change event to the form-item element to ensure the state is in sync ba-ba-bah
-    dispatch(_inputEl, "_change", { name, value }, { bubbles: true });
+    // dispatch the change event to the form-item element to ensure the state is in sync
+    // dispatch(_inputEl, "_change", { name, value }, { bubbles: true });
   }
 
   // Relay message up the chain to allow any parent element to have a reference to the input element

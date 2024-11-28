@@ -54,11 +54,11 @@ export class SupportOrderDetailsComponent implements OnInit {
       JSON.stringify(this._mainFormComponent.state),
     );
 
-    // if (this._mainFormComponent.state.currentFieldset?.dispatchType === "continue") {
+    // if (this._mainFormComponent.state?.currentFieldset?.dispatchType === "continue") {
     //   return;
     // }
 
-    // switch (this._mainFormComponent.state.currentFieldset?.id) {
+    // switch (this._mainFormComponent.state?.currentFieldset?.id) {
     //   case "what-is-your-role":
     //     this._total =
     //       (parseFloat(
@@ -72,7 +72,7 @@ export class SupportOrderDetailsComponent implements OnInit {
   }
 
   updateChildrenState(e: Event) {
-    console.log("updateChildrenState");
+    console.log("updateChildrenState", e);
     this._childFormComponent.updateState(e);
   }
 
@@ -129,6 +129,9 @@ export class SupportOrderDetailsComponent implements OnInit {
       case "dob":
         dest = this.handleChildDateOfBirth(e);
         break;
+      case "summary":
+        dest = "child-list";
+        break;
       default:
         console.warn("Unhandled page", from);
         break;
@@ -141,7 +144,7 @@ export class SupportOrderDetailsComponent implements OnInit {
 
   onChildComplete(e: Event) {
     console.log("onChildComplete", e);
-    this._childFormComponent.continueTo("child-list");
+    // this._childFormComponent.continueTo("child-list");
 
     // need to stop the _complete event here, otherwise the parent will also act on it
     e.stopPropagation();

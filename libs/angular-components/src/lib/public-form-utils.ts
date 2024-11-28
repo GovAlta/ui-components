@@ -20,44 +20,79 @@ export type FieldsetItemState = {
 };
 
 export class PublicFormComponent<T> {
-  state: AppState<T> = {
-    form: {},
-    history: [],
-    editting: "",
-    status: "not-started",
-  };
+  state?: AppState<T> | AppState<T>[];
   _formData?: Record<string, string> = undefined;
   _formRef?: HTMLElement = undefined;
 
   // Obtain reference to the form element
-  init(e: Event) {
-    console.log("PUblicformComponent::init", e);
+  init(e: Event, type: "single" | "multi" = "single") {
+    console.debug("Utils::init", this.state, e);
     this._formRef = (e as CustomEvent).detail.el;
-    // relay(this._formRef, "init", {});
+
+    if (type === "single") {
+      this.state = {
+        form: {},
+        history: [],
+        editting: "",
+        status: "not-started",
+      };
+    } else {
+      this.state = [];
+    }
   }
 
   // Public method to allow for the initialization of the state
   initState(state: string | AppState<T>) {
+    console.debug("Utils:initState", state);
     relay(this._formRef, "external::init:state", state);
   }
+
   // Public method to allow for the updating of the state
   updateState(e: Event) {
-    const state = (e as CustomEvent).detail as AppState<T>;
-    console.log("updateSTate", state);
-    this.state = {
-      ...this.state,
-      form: state.form,
-      currentFieldset: state.currentFieldset,
-    };
+    console.debug("Utils:updateState", e, { state: this.state });
+    if (!this.state) {
+      console.error("updateState: state has not yet been set");
+      return;
+    }
+
+    if (Array.isArray(this.state)) {
+      const state = (e as CustomEvent).detail as AppState<T>[];
+      this.state = state;
+    } else {
+      const state = (e as CustomEvent).detail as AppState<T>;
+      this.state = {
+        ...this.state,
+        form: state.form,
+        currentFieldset: state.currentFieldset, // TODO: remember why this is here
+      };
+    }
   }
 
   getStateItems(group: string): Record<string, FieldsetItemState>[] {
-    console.log("getStateItems", this.state, group);
+    if (Array.isArray(this.state)) {
+      console.error("Utils:getStateItems: unable to update the state of a multi form type");
+      return [];
+    }
+    if (!this.state) {
+      console.error("Utils:getStateItems: state has not yet been set");
+      return [];
+    }
+
+    console.debug("Utils:getStateItems", this.state, { group });
     return (this.state.form[group]?.data ?? []) as Record<string, FieldsetItemState>[];
   }
 
   // Public method to allow for the retrieval of the state value
   getStateValue(group: string, key: string): string {
+    if (Array.isArray(this.state)) {
+      console.error("getStateValue: unable to update the state of a multi form type");
+      return "";
+    }
+    if (!this.state) {
+      console.error("getStateValue: state has not yet been set");
+      return "";
+    }
+
     const data = this.state.form[group].data as Record<string, FieldsetItemState>[];
     // @ts-expect-error "ignore"
     return (data as Record<string, string>)[key]?.value ?? "";
@@ -65,6 +100,8 @@ export class PublicFormComponent<T> {
 
   // Public method to allow for the continuing to the next page
   continueTo(name: T | undefined) {
+    console.debug("Utils:continueTo", { name, state: this.state });
+
     if (!name) {
       console.error("continueTo [name] is undefined");
       return;
@@ -78,6 +115,7 @@ export class PublicFormComponent<T> {
 
   // Public method to peform validation and send the appropriate messages to the form elements
   validate(field: string, e: Event, validators: FieldValidator[]): [boolean, string] {
+    console.debug("Utils:validate", { field, e, validators });
     const { el, state } = (e as CustomEvent).detail;
     const value = state?.[field]?.value;
 

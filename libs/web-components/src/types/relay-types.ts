@@ -4,6 +4,7 @@ export type FormStatus = "not-started" | "incomplete" | "complete";
 export type FormStateData = Record<string, FieldsetData>;
 
 export type FormState = {
+  id: string;
   form: FormStateData;
   history: string[];
   editting: string;
@@ -27,6 +28,8 @@ export const FormToggleActiveMsg = "form::toggle:active";
 export const FormStateChangeMsg = "form::state:change";
 export const FormBindMsg = "form::bind";
 export const FormBackUrlMsg = "form::back-url";
+
+export const FormResetFormMsg = "form::reset:form";
 
 export type FormBindRelayDetail = {
   el: HTMLElement;
@@ -99,6 +102,8 @@ export type FieldsetItemState = {
 export type FieldsetValidationRelayDetail = {
   el: HTMLElement;
   state: Record<string, FieldsetItemState>;
+  first: boolean;
+  last: boolean;
 };
 
 export const FieldsetSetValueMsg = "fieldset::set:value";

@@ -3,17 +3,22 @@
     tag: "goa-fieldset",
     props: {
       buttonText: { type: "String", attribute: "button-text" },
-      secondaryButtonText: { type: "String", attribute: "secondary-button-text" },
+      secondaryButtonText: {
+        type: "String",
+        attribute: "secondary-button-text",
+      },
       preserveState: { type: "String", attribute: "preserve-state" },
       showBackButton: { type: "String", attribute: "show-back-button" },
       sectionTitle: { type: "String", attribute: "section-title" },
-      dispatchOn: { attribute: "dispatch-on"},
+      dispatchOn: { attribute: "dispatch-on" },
+      first: { attribute: "first", type: "Boolean"},
+      last: { attribute: "last", type: "Boolean"},
     },
   }}
 />
 
-<script lang="ts">;
-  import { onMount } from "svelte"
+<script lang="ts">
+  import { onMount } from "svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
   import { dispatch, receive, relay, styles } from "../../common/utils";
   import {
@@ -28,6 +33,7 @@
     FieldsetMountFormItemMsg,
     FieldsetMountFormRelayDetail,
     FieldsetResetErrorsMsg,
+    FieldsetResetFieldsMsg,
     FieldsetSetErrorMsg,
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -42,6 +48,7 @@
     FormItemMountMsg,
     FormItemMountRelayDetail,
     FormResetErrorsMsg,
+    FormResetFormMsg,
     FormSetFieldsetMsg,
     FormSetFieldsetRelayDetail,
     FormToggleActiveMsg,
@@ -89,7 +96,7 @@
   let _formItems: Record<string, { label: string; el: HTMLElement }> = {};
 
   // reference to child form input, dropdown, etc components to allow for relaying of error state
-  let _formFields: Record<string, { order: number, el: HTMLElement }> = {};
+  let _formFields: Record<string, { order: number; el: HTMLElement }> = {};
 
   // ========
   // Reactive
@@ -116,7 +123,7 @@
   // =========
 
   function bindChannel() {
-    receive(_rootEl, (action, data) => {
+    receive(_rootEl, (action, data, event) => {
       console.debug(`  RECEIVE(Fieldset => ${action}):`, data);
       switch (action) {
         case FormSetFieldsetMsg:
@@ -143,6 +150,9 @@
         case FormBackUrlMsg:
           setBackUrl(data as FormBackUrlDetail);
           break;
+        case FormResetFormMsg:
+          resetFields(event);
+          break;
       }
     });
   }
@@ -151,6 +161,15 @@
   // Dispatch handlers
   // *****************
 
+  function resetFields(event: Event) {
+    // prevent subform resets from resetting the parent
+    event.stopPropagation();
+    
+    for (const { el } of Object.values(_formFields)) {
+      relay(el, FieldsetResetFieldsMsg);
+    }
+  }
+
   function setBackUrl(detail: FormBackUrlDetail) {
     _backUrl = detail.url;
   }
@@ -158,7 +177,7 @@
   function onSetFieldset(detail: FormSetFieldsetRelayDetail) {
     // set the fieldset state
     for (const [id, item] of Object.entries(detail.value)) {
-      _state[id] = { ...item }
+      _state[id] = { ...item };
     }
 
     // restore state in form items
@@ -169,10 +188,14 @@
         console.log("****Array is multiple values!!****", data);
       } else {
         if (data.value) {
-          relay<FieldsetSetValueRelayDetail>(_formFields[name].el, FieldsetSetValueMsg, {
-            name,
-            value: data.value,
-          });
+          relay<FieldsetSetValueRelayDetail>(
+            _formFields[name].el,
+            FieldsetSetValueMsg,
+            {
+              name,
+              value: data.value,
+            },
+          );
         }
       }
     }
@@ -224,16 +247,24 @@
 
   function onError(detail: ExternalErrorRelayDetail) {
     _errors[detail.name] = detail.msg;
-    
+
     // dispatch error down to fields
-    relay<FieldsetErrorRelayDetail>(_formFields[detail.name].el, FieldsetSetErrorMsg, {
-      error: detail.msg,
-    });
+    relay<FieldsetErrorRelayDetail>(
+      _formFields[detail.name].el,
+      FieldsetSetErrorMsg,
+      {
+        error: detail.msg,
+      },
+    );
 
     // dispatch error down to form items
-    relay<FieldsetErrorRelayDetail>(_formItems[detail.name].el, FieldsetSetErrorMsg, {
-      error: detail.msg,
-    });
+    relay<FieldsetErrorRelayDetail>(
+      _formItems[detail.name].el,
+      FieldsetSetErrorMsg,
+      {
+        error: detail.msg,
+      },
+    );
   }
 
   // **************
@@ -244,24 +275,24 @@
   function saveAndContinue() {
     // Prevents looping form sections from sending no data to the form, thereby overwritting data
     // already collected and saved at the form level
-    const isDirty = Object.keys(_state).length > 0
+    const isDirty = Object.keys(_state).length > 0;
     if (isDirty) {
       relayFieldsetChange();
     }
-    
+
     // dispatch to on:_continue method allowing users to validate the data
     sendContinueMsg(false);
   }
 
   function sendContinueMsg(cancelled: boolean) {
     if (cancelled) {
-      revertFormFieldValues();            
+      revertFormFieldValues();
     }
 
     dispatch<FieldsetValidationRelayDetail>(
       _rootEl,
       "_continue",
-      { el: _rootEl, state: cancelled ? _stateSnapshot : _state},
+      { el: _rootEl, state: cancelled ? _stateSnapshot : _state, last, first },
       { bubbles: true },
     );
   }
@@ -271,19 +302,26 @@
   // *********
 
   function onCancel() {
-    sendContinueMsg(true)
+    sendContinueMsg(true);
   }
 
   function revertFormFieldValues() {
     for (const [name, val] of Object.entries(_formFields)) {
       // some form elements not "form-bound" won't exist within the snapshot state
       if (_stateSnapshot[name]) {
-        relay<FieldsetSetValueRelayDetail>(val.el, FieldsetSetValueMsg, { name, value: _stateSnapshot[name].value});
+        relay<FieldsetSetValueRelayDetail>(val.el, FieldsetSetValueMsg, {
+          name,
+          value: _stateSnapshot[name].value,
+        });
       }
     }
   }
 
   function onSubmit() {
+    // FIXME: this functions assumes that the submit button is being displayed within a summary page
+    // and that the all the form data has already been relayed up to the form. But if the last page
+    // is *not* a summary page this breaks.
+    sendContinueMsg(false); // This was added to ensure that above issue is "fixed"
     relay(_rootEl, FieldsetSubmitMsg, {}, { bubbles: true });
   }
 
@@ -297,8 +335,10 @@
   }
 
   function dispatchBindMsg() {
-    relay<FieldsetBindRelayDetail>(_rootEl, FieldsetBindMsg, 
-      { id, heading, el: _rootEl},
+    relay<FieldsetBindRelayDetail>(
+      _rootEl,
+      FieldsetBindMsg,
+      { id, heading, el: _rootEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -312,12 +352,17 @@
       }
 
       if (!_formFields[name]) {
-        return;  
+        return;
       }
-      _state[name] = { name, value, label: _formItems[name].label, order: _formFields[name].order };
+      _state[name] = {
+        name,
+        value,
+        label: _formItems[name].label,
+        order: _formFields[name].order,
+      };
 
       if (dispatchOn === "change") {
-        const isDirty = Object.keys(_state).length > 0
+        const isDirty = Object.keys(_state).length > 0;
         if (isDirty) {
           relayFieldsetChange();
         }
@@ -331,13 +376,13 @@
     relay<FieldsetChangeRelayDetail>(
       _rootEl,
       FieldsetChangeMsg,
-      { 
-        id, 
+      {
+        id,
         state: {
           heading,
           data: _state,
-        }, 
-        dispatchOn 
+        },
+        dispatchOn,
       },
       { bubbles: true },
     );
@@ -363,20 +408,25 @@
         </goa-link>
       {/if}
       {#if !first && !_editting && !last && showBackButton === "true"}
-        <goa-link-button leadingicon="chevron-back" mb="2xl" on:_click={handleBack}>
+        <goa-link-button
+          leadingicon="chevron-back"
+          mb="2xl"
+          on:_click={handleBack}
+        >
           Back
         </goa-link-button>
       {/if}
 
-      {#if Object.values(_errors).filter(err => !!err).length}
-        <goa-callout
-          type="emergency"
-          heading={`There is a problem`}
-        >
+      {#if Object.values(_errors).filter((err) => !!err).length}
+        <goa-callout type="emergency" heading={`There is a problem`}>
           <ul class="errors">
             {#each Object.keys(_errors) as key}
               <li>
-                <a class="error" href={`#${key}`} on:click={(e) => jumpToError(e, key)}>
+                <a
+                  class="error"
+                  href={`#${key}`}
+                  on:click={(e) => jumpToError(e, key)}
+                >
                   {_errors[key]}
                 </a>
               </li>
@@ -386,7 +436,9 @@
       {/if}
 
       {#if sectionTitle}
-        <goa-text class="section-title" size="body-l" mb="s">{sectionTitle}</goa-text>
+        <goa-text class="section-title" size="body-l" mb="s"
+          >{sectionTitle}</goa-text
+        >
       {/if}
 
       {#if heading}
@@ -421,7 +473,6 @@
           </goa-button>
         {/if}
       </goa-block>
-
     {:else}
       <slot name="subform" />
     {/if}
