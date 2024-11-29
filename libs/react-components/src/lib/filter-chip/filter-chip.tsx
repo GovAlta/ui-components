@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
+import { Margins } from "@abgov/ui-components-common";
 
 export type GoAFilterChipTheme = "outline" | "filled";
 

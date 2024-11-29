@@ -12,6 +12,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       [disabled]="disabled"
       [attr.leadingicon]="leadingIcon"
       [attr.trailingicon]="trailingIcon"
+      [attr.width]="width"
       [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
@@ -31,6 +32,7 @@ export class GoabButton {
   @Input() disabled?: boolean;
   @Input() leadingIcon?: GoabIconType;
   @Input() trailingIcon?: GoabIconType;
+  @Input() width?: string;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
