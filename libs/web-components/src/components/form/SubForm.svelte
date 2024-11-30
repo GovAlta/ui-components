@@ -15,13 +15,6 @@
   } from "../../types/relay-types";
   import { calculateMargin, Spacing } from "../../common/styling";
 
-  /**
-    TODO
-    - handle the complete event from within the subform
-      - need to bind a handler on the goa-form's _complete
-
-  **/
-
   // Subform props
   export let id: string = "";
   export let heading: string = "";
@@ -43,9 +36,6 @@
 
   // Allows the subform to be hidden/shown, much like a fieldset
   let _active: boolean = false;
-
-  // Index of the current item being editted. This will be set via an event
-  let _current: number = -1;
 
   // List of all the looped items
   let _state: FormState[] = [];
@@ -142,32 +132,29 @@
     _active = detail.active;
   }
 
+  function deepCopy(obj: any) {
+    const objCopy = JSON.parse(JSON.stringify(obj));
+    return objCopy;
+  }
+
   function onStateChange(e: Event) {
     console.debug("Subform:onStateChange", { e });
 
-    // initial event will be overridden with a custom _stateChange event containing a state array
-    e.stopPropagation();
-
     const detail = (e as CustomEvent).detail as FormState;
-
-    // no existing item is in "edit" mode
     const editStateIndex = _state.findIndex((s) => s.id === detail.id);
-    console.debug("SubForm:onStateChange", "findIndex", editStateIndex);
-    if (editStateIndex >= 0) {
-      _state[editStateIndex] = detail;
-    } else {
-      _state.push(detail);
-    }
 
-    // _state = [
-    //   ..._state.slice(0, editStateIndex),
-    //   detail,
-    //   ..._state.slice(editStateIndex + 1),
-    // ];
+    if (editStateIndex >= 0) {
+      _state[editStateIndex] = deepCopy(detail);
+    } else {
+      _state.push(deepCopy(detail));
+    }
 
     // stop original event to prevent just the single subform data from being sent
     // send the array of data instead
     dispatch(_rootEl, "_stateChange", _state, { bubbles: true });
+
+    // initial event will be overridden with a custom _stateChange event containing a state array
+    e.stopPropagation();
   }
 
   // Listen to the fieldset `_continue` message to allow for the subform to be reset

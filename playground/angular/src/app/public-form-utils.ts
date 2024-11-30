@@ -1,3 +1,7 @@
+/**
+ DON"T USE THIS FILE
+**/
+
 export type AppState = {
   form: Record<string, Record<string, FieldsetItemState>[]>;
   history: string[];

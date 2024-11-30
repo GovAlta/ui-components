@@ -68,16 +68,17 @@
     id="children-subform"
     name="children-subform"
     (_complete)="onChildComplete($event)"
-    (_init)="_childFormComponent.init($event, 'multi')"
+    (_init)="_childFormComponent.initList($event)"
     (_stateChange)="updateChildrenState($event)"
   >
     <goa-fieldset first id="child-list" (_continue)="onChildPageChange($event, 'child-list')">
-      First Page
-      {{_childFormComponent.state | json}}
       <goa-table>
         <tbody>
-          <tr>
-          </tr>
+          <tr *ngFor="let item of _childFormComponent.getStateList()">
+            <td>{{ item["firstName"]}}</td>
+            <td>{{ item["lastName"]}}</td>
+            <td>{{ item["dob"]}}</td>
+        </tr>
         </tbody>
       </goa-table>
     </goa-fieldset>

@@ -25,20 +25,22 @@ export class PublicFormComponent<T> {
   _formRef?: HTMLElement = undefined;
 
   // Obtain reference to the form element
-  init(e: Event, type: "single" | "multi" = "single") {
-    console.debug("Utils::init", this.state, e);
+  init(e: Event) {
+    console.debug("Utils::init", e);
     this._formRef = (e as CustomEvent).detail.el;
 
-    if (type === "single") {
-      this.state = {
-        form: {},
-        history: [],
-        editting: "",
-        status: "not-started",
-      };
-    } else {
-      this.state = [];
-    }
+    this.state = {
+      form: {},
+      history: [],
+      editting: "",
+      status: "not-started",
+    };
+  }
+
+  initList(e: Event) {
+    console.debug("Utils::initList", e);
+    this._formRef = (e as CustomEvent).detail.el;
+    this.state = [];
   }
 
   // Public method to allow for the initialization of the state
@@ -68,9 +70,33 @@ export class PublicFormComponent<T> {
     }
   }
 
+  getStateList(): Record<string, string>[] {
+    // getStateList(): unknown[] {
+    if (!Array.isArray(this.state)) {
+      console.error(
+        "Utils:getStateList: unable to update the state of a non-multi form type",
+      );
+      return [];
+    }
+
+    return this.state.map((s) => {
+      return Object.values(s.form)
+        .map((item) => item.data)
+        .reduce((acc, item) => {
+          for (const [key, value] of Object.entries(item)) {
+            // @ts-expect-error "ignore"
+            acc[key] = value.value;
+          }
+          return acc;
+        }, {} as Record<string, string>);
+    });
+  }
+
   getStateItems(group: string): Record<string, FieldsetItemState>[] {
     if (Array.isArray(this.state)) {
-      console.error("Utils:getStateItems: unable to update the state of a multi form type");
+      console.error(
+        "Utils:getStateItems: unable to update the state of a multi form type",
+      );
       return [];
     }
     if (!this.state) {

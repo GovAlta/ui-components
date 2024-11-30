@@ -1,10 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import {
-  postalCodeValidator,
-  PublicFormComponent,
-  requiredValidator,
-} from "@abgov/angular-components";
+import { PublicFormComponent, requiredValidator } from "@abgov/angular-components";
 import { JsonPipe, NgFor } from "@angular/common";
 
 type Page =

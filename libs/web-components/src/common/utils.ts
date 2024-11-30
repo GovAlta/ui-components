@@ -83,7 +83,7 @@ export function dispatch<T>(
   detail?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
-  // console.log(`DISPATCH(${eventName}):`, detail, el);
+  console.debug(`DISPATCH(${eventName}):`, detail, el);
 
   const dispatch = () => {
     el?.dispatchEvent(

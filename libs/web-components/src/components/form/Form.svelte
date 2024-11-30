@@ -152,7 +152,6 @@
           break;
         case FormResetFormMsg:
           resetState();
-          resetFormFields();
           break;
       }
     });
@@ -406,7 +405,7 @@
   }
 
   function resetState() {
-    console.debug("Form:resetState", name);
+    console.debug("Form:resetState", name, _state.id, { old: _state });
     const [id] = Object.entries(_fieldsets)[0];
 
     _state = {
@@ -417,10 +416,8 @@
       lastModified: undefined,
       status: "not-started",
     };
-  }
+    console.debug("Form:resetState", name, _state.id, { new: _state });
 
-  function resetFormFields() {
-    console.debug("Form:resetFormFields", name);
     for (const { el } of Object.values(_fieldsets)) {
       relay(el, FormResetFormMsg);
     }
