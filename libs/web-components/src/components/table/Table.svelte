@@ -77,7 +77,6 @@
         // relay state to all children
         headings.forEach((child) => {
           if (child.getAttribute("name") === sortBy) {
-            // @ts-expect-error
             const direction = child["direction"] as GoATableSortDirection;
             // starting direction is asc
             const newDirection = direction === "asc" ? "desc" : "asc";
@@ -96,7 +95,6 @@
 
       // dispatch the default sort params if initially set
       const initialSortBy = heading.getAttribute("name");
-      // @ts-ignore
       const initialDirection = heading["direction"] as GoATableSortDirection;
       if (initialSortBy && initialDirection && initialDirection !== "none") {
         setTimeout(() => {

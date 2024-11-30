@@ -11,8 +11,10 @@
     FormSummaryEditPageMsg,
     FormSummaryEditPageRelayDetail,
   } from "../../types/relay-types";
+
   import { receive, relay } from "../../common/utils";
-  import { format, isDate, parseISO } from "date-fns";
+
+  export let heading: string = "";
 
   let _rootEl: HTMLElement;
   let _state: FormState;
@@ -47,65 +49,44 @@
     e.preventDefault();
   }
 
-  function formatName(value: string): string {
-    if (!value) return "";
-
-    const str = value.replace(/-/g, " ");
-    return str[0].toUpperCase() + str.slice(1);
+  function getHeading(page: string): string {
+    return _state.form[page].heading || "";
   }
 
-  function formatValue(value: unknown): unknown {
-    let parsedDate: Date;
-    // TODO: need some better logic to determine how things will be handled
-    if (typeof value === "string") {
-      try {
-        parsedDate = parseISO(value);
-        return format(parsedDate, "PPP");
-      } catch (e) {
-        return value;  
-      }
-    }
-    if (isDate(value)) {
-      return format(value, "PPP");
-    }
-    return value;      
+  function getData(page: string) {
+    return Object
+      .entries(_state.form?.[page].data)
+      .sort((itemsA, itemsB) => itemsA[1].order > itemsB[1].order ? 1 : -1)
   }
   
 </script>
 
 <div bind:this={_rootEl}>
+  {#if heading}
+    <goa-text as="h3" size="heading-m" color="secondary" mb="l">{heading}</goa-text>
+  {/if}
   {#if _state}
     {#each _state.history as page}
       {#if _state.form[page]}
         <goa-container>
-          <div class="summary">
-            <div class="page">{formatName(page)}</div>
+
+          <div class="summary" class:summary-with-header={!!getHeading(page)}>
+            {#if getHeading(page)}
+              <goa-text class="heading" color="secondary">{getHeading(page)}</goa-text>
+            {/if}
+            <table class="data">
+              {#each getData(page) as [_key, data]}
+                <tr>
+                  <td class="label">{data.label}</td>
+                  <td class="value">{data.value}</td>
+                </tr>
+              {/each}
+            </table>
             <div class="action">
               <goa-link leadingicon="pencil" on:click={(e) => changePage(e, page)}>Change</goa-link>
             </div>
-            <div class="details">
-              {#if Array.isArray(_state.form[page])}
-                {#each _state.form[page] as item, i}
-                  {#if i > 0}
-                    <goa-divider />
-                  {/if}
-                  {#each Object.entries(item) as [_, value] }
-                    <dl>
-                      <dt>{value.label}</dt>
-                      <dd>{formatValue(value.value)}</dd>
-                    </dl>
-                  {/each}
-                {/each}
-              {:else}
-                {#each Object.entries(_state.form[page]) as [_, value] }
-                  <dl>
-                    <dt>{value.label}</dt>
-                    <dd>{formatValue(value.value)}</dd>
-                  </dl>
-                {/each}
-              {/if}
-            </div>
           </div>
+        
         </goa-container>
       {/if}
     {/each}
@@ -114,78 +95,70 @@
 
 <style>
 
-  .page {
-    color: var(--goa-color-greyscale-700);
-  }
-
+  /* TODO: fix the layouts: mobile doesn't meet specs; table makes it difficult */
   @media (--not-desktop) {
     .summary {
-      display: grid;
-      grid-template-rows: min-content 1fr;
+      display: block;
+      grid-template-rows: min-content auto;
       grid-template-columns: auto;
       grid-template-areas: 
         "top top top"
-        "main main main"
-        "link link link"
     }
 
-    .page {
-      grid-area: top;
+    .data tr:last-of-type {      
+      padding-bottom: var(--goa-space-m);
+    }
+    .data td:first-of-type {
+      font-weight: bold;
+    }
+    .data td {
+      display: block;
     }
 
     .action {
-      grid-area: link;
-      margin-top: 0.25rem;
-    }
-
-    .details {
-      grid-area: main;
-    }
-
-    dl {
-      margin: 0.5rem 0;
-    }
-    dt {
-      font: var(--goa-typography-heading-s);
-    }
-    dd {
-      margin: 0;
+      margin-top: var(--goa-space-m);
     }
   }
 
   @media (--desktop) {
     .summary {
       display: grid;
-      grid-template-rows: min-content 1fr;
-      grid-template-columns: auto;
+      grid-auto-rows: 1fr;
+      grid-template-columns: 1fr min-content;
       grid-template-areas: 
-        "top . link"
-        "main main main"
+        "data action"
     }
 
-    .page {
-      grid-area: top;
+    .summary-with-header {
+      display: grid;
+      grid-auto-rows: min-content auto;
+      grid-template-columns: 1fr min-content;
+      grid-template-areas: 
+        "heading action"
+        "data ."
+    }
+
+    .heading {
+      grid-area: heading;
+      grid-template-columns: 1fr 1fr;
     }
 
     .action {
-      grid-area: link;
+      grid-area: action;
       text-align: right;
     }
 
-    .details {
-      grid-area: main;
+    .data {
+      grid-area: data;
     }
   
-    dl {
-      margin: 0.5rem 0;
-    }
-    dt {
-      display: inline-block;  
+    .label {
       width: 50%;
       font: var(--goa-typography-heading-s);
     }
-    dd {
-      display: inline-block;  
+    .value {
+      width: 50%;
+      padding-left: 1rem;
     }
   }
 </style>

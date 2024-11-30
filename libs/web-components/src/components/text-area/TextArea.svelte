@@ -13,12 +13,13 @@
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
   import {
+    FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
     FieldsetSetErrorMsg,
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
   } from "../../types/relay-types";
 
   export let name: string;
@@ -40,8 +41,8 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  let _error: boolean;
-  let _prevError = _error;
+  let _error = false;
+  let _prevError = false;
 
   // reactive
 
@@ -81,11 +82,11 @@
   function addRelayListener() {
     receive(_textareaEl, (action, data) => {
       switch (action) {
-        case FormSetValueMsg:
-          onSetValue(data as FormSetValueRelayDetail);
+        case FieldsetSetValueMsg:
+          onSetValue(data as FieldsetSetValueRelayDetail);
           break;
         case FieldsetSetErrorMsg:
-          error = "true";
+          setError(data as FieldsetErrorRelayDetail);
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
@@ -94,7 +95,12 @@
     });
   }
 
-  function onSetValue(detail: FormSetValueRelayDetail) {
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
+  }
+
+  function onSetValue(detail: FieldsetSetValueRelayDetail) {
+    // @ts-expect-error
     value = detail.value;
     dispatch(_textareaEl, "_change", { name, value }, { bubbles: true });
   }
@@ -138,7 +144,7 @@
     );
   }
 
-  function onFocus(e: Event) {
+  function onFocus(_e: Event) {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
   }
 </script>

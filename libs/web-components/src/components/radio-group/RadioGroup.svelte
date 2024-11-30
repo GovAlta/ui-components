@@ -16,19 +16,20 @@
     RadioItemSelectProps,
   } from "../radio-item/RadioItem.svelte";
   import {
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
     FieldsetSetErrorMsg,
     FieldsetResetErrorsMsg,
     FormFieldMountRelayDetail,
     FormFieldMountMsg,
+    FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
 
   // Validator
-  const [Orientations, validateOrientation] = typeValidator(
-    "Radio group orientation",
-    ["vertical", "horizontal"],
-  );
+  const [Orientations, validateOrientation] = typeValidator("Radio group orientation", [
+    "vertical",
+    "horizontal",
+  ]);
 
   // Type
   type Orientation = (typeof Orientations)[number];
@@ -96,11 +97,11 @@
   function addRelayListener() {
     receive(_rootEl, (action, data) => {
       switch (action) {
-        case FormSetValueMsg:
-          onSetValue(data as FormSetValueRelayDetail);
+        case FieldsetSetValueMsg:
+          onSetValue(data as FieldsetSetValueRelayDetail);
           break;
         case FieldsetSetErrorMsg:
-          error = "true";
+          setError(data as FieldsetErrorRelayDetail);
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
@@ -109,7 +110,12 @@
     });
   }
 
-  function onSetValue(detail: FormSetValueRelayDetail) {
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
+  }
+
+  function onSetValue(detail: FieldsetSetValueRelayDetail) {
+    // @ts-expect-error
     value = detail.value;
     dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
   }

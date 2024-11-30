@@ -50,6 +50,10 @@ export function GoAFormItem({
   testId,
   id,
 }: GoAFormItemProps): JSX.Element {
+  if (id) {
+    console.warn("FormItem [id] property has been deprecated");
+  }
+
   return (
     <goa-form-item
       label={label}
@@ -63,7 +67,6 @@ export function GoAFormItem({
       mb={mb}
       ml={ml}
       testid={testId}
-      id={id}
     >
       {error && typeof error !== "string" && <div slot="error">{error}</div>}
       {helpText && typeof helpText !== "string" && <div slot="helptext">{helpText}</div>}
