@@ -5,6 +5,9 @@
 playground
 NOTES.md
 
+# environment
+.env
+
 # compiled output
 dist
 tmp
