@@ -82,13 +82,16 @@ export class PublicFormComponent<T> {
     return this.state.map((s) => {
       return Object.values(s.form)
         .map((item) => item.data)
-        .reduce((acc, item) => {
-          for (const [key, value] of Object.entries(item)) {
-            // @ts-expect-error "ignore"
-            acc[key] = value.value;
-          }
-          return acc;
-        }, {} as Record<string, string>);
+        .reduce(
+          (acc, item) => {
+            for (const [key, value] of Object.entries(item)) {
+              // @ts-expect-error "ignore"
+              acc[key] = value.value;
+            }
+            return acc;
+          },
+          {} as Record<string, string>,
+        );
     });
   }
 

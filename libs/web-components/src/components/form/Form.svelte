@@ -99,9 +99,6 @@
 
 
   onMount(() => {
-    // Required to get the form summary to render
-    import("./FormSummary.svelte");
-
     // provide html element link to outside world
     dispatch(_formEl, "_init", { el: _formEl });
 
