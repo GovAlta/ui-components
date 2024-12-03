@@ -16,6 +16,7 @@
   let _currentTab: number = 1;
   let _tabProps: (GoATabProps & { bound: boolean })[] = [];
   let _bindTimeoutId: any;
+  let _initialLoad: boolean = true;
 
   // ========
   // Hooks
@@ -34,6 +35,26 @@
   // Functions
   // =========
 
+  function getTabIndexFromHash() {
+    const hash = window.location.hash;
+    if (!hash) return null;
+
+    // Find the matching tab based on href
+    const tabs = _tabsEl?.querySelectorAll('[role="tab"]');
+    if (!tabs) return null;
+
+    for (let i = 0; i < tabs.length; i++) {
+      const tab = tabs[i] as HTMLAnchorElement;
+      if (
+        tab.getAttribute("href")?.endsWith(hash) ||
+        hash.endsWith(tab.getAttribute("href")?.split("#")[1] || "")
+      ) {
+        return i + 1;
+      }
+    }
+    return null;
+  }
+
   function addChildMountListener() {
     _rootEl.addEventListener("tab:mounted", (e: Event) => {
       const detail = (e as CustomEvent<GoATabProps>).detail;
@@ -46,7 +67,13 @@
       }
       _bindTimeoutId = setTimeout(() => {
         bindChildren();
-        setCurrentTab(initialtab || 1);
+
+        // Check URL hash on initial load
+        if (_initialLoad) {
+          const tabIndexFromHash = getTabIndexFromHash();
+          setCurrentTab(tabIndexFromHash ?? (initialtab || 1));
+          _initialLoad = false;
+        }
       }, 1);
       e.stopPropagation();
     });
@@ -54,6 +81,7 @@
 
   function bindChildren() {
     const path = window.location.pathname;
+    const search = window.location.search; // Get current query string
 
     // create buttons (tabs) for each of the tab contents elements
     _tabProps.forEach((tabProps, index) => {
@@ -94,7 +122,7 @@
       link.setAttribute("id", `tab-${index + 1}`);
       link.setAttribute("data-testid", `tab-${index + 1}`);
       link.setAttribute("role", "tab");
-      link.setAttribute("href", path + "#" + tabSlug);
+      link.setAttribute("href", `${path}${search}#${tabSlug}`);
       link.addEventListener("click", () => setCurrentTab(index + 1));
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
       link.appendChild(headingEl);
@@ -157,7 +185,8 @@
 
     // update the browswers url with the new hash
     if (currentLocation) {
-      document.location = currentLocation;
+      const url = new URL(currentLocation);
+      history.pushState({}, "", url.pathname + url.search + url.hash);
     }
   }
 
