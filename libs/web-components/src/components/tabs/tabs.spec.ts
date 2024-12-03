@@ -52,40 +52,6 @@ describe("Tabs", () => {
     });
   });
 
-  it("should select specified tab if the tab property is set", async () => {
-    const result = render(Tabs, { initialtab: 2 });
-
-    await waitFor(() => {
-      const tab1Link = result.container.querySelector("a#tab-1");
-      const tab2Link = result.container.querySelector("a#tab-2");
-      const tabPanel = result.container.querySelector("div[role=tabpanel]");
-      const goaTabs = result.container.querySelectorAll("goa-tab");
-
-      expect(tab1Link).toBeTruthy();
-      expect(tab1Link?.getAttribute("aria-selected")).toBe("false");
-
-      expect(tab2Link).toBeTruthy();
-      expect(tab2Link?.getAttribute("aria-selected")).toBe("true");
-
-      expect(tabPanel).toBeTruthy();
-      expect(tabPanel?.getAttribute("id")).toBe("tabpanel-2");
-
-      expect(goaTabs[0].getAttribute("open")).toBe("false");
-      expect(goaTabs[1].getAttribute("open")).toBe("true");
-    });
-  });
-
-  it("should select the last tab if the tab exceeds the number of tabs", async () => {
-    const result = render(Tabs, { initialtab: 3 });
-
-    // last tab
-    await waitFor(() => {
-      const tab = result.container.querySelector("a#tab-2");
-      expect(tab).toBeTruthy();
-      expect(tab?.getAttribute("aria-selected")).toBe("true");
-    });
-  });
-
   it("should select the first tab if the tab is less than 1", async () => {
     const result = render(Tabs, { initialtab: 0 });
 
@@ -129,6 +95,40 @@ describe("Tabs", () => {
       expect(goaTabs?.length).toBe(2);
       expect(goaTabs?.[0].getAttribute("open")).toBe("false");
       expect(goaTabs?.[1].getAttribute("open")).toBe("true");
+    });
+  });
+
+  it("should select the last tab if the tab exceeds the number of tabs", async () => {
+    const result = render(Tabs, { initialtab: 3 });
+
+    // last tab
+    await waitFor(() => {
+      const tab = result.container.querySelector("a#tab-2");
+      expect(tab).toBeTruthy();
+      expect(tab?.getAttribute("aria-selected")).toBe("true");
+    });
+  });
+
+  it("should select specified tab if the tab property is set", async () => {
+    const result = render(Tabs, { initialtab: 2 });
+
+    await waitFor(() => {
+      const tab1Link = result.container.querySelector("a#tab-1");
+      const tab2Link = result.container.querySelector("a#tab-2");
+      const tabPanel = result.container.querySelector("div[role=tabpanel]");
+      const goaTabs = result.container.querySelectorAll("goa-tab");
+
+      expect(tab1Link).toBeTruthy();
+      expect(tab1Link?.getAttribute("aria-selected")).toBe("false");
+
+      expect(tab2Link).toBeTruthy();
+      expect(tab2Link?.getAttribute("aria-selected")).toBe("true");
+
+      expect(tabPanel).toBeTruthy();
+      expect(tabPanel?.getAttribute("id")).toBe("tabpanel-2");
+
+      expect(goaTabs[0].getAttribute("open")).toBe("false");
+      expect(goaTabs[1].getAttribute("open")).toBe("true");
     });
   });
 });
