@@ -19,7 +19,7 @@ declare global {
   }
 }
 
-export interface GoAAppHeaderProps {
+export interface GoabAppHeaderProps {
   heading?: string;
   url?: string;
   maxContentWidth?: string;
@@ -29,7 +29,7 @@ export interface GoAAppHeaderProps {
   testId?: string;
 }
 
-export function GoAAppHeader({
+export function GoabAppHeader({
   heading,
   url,
   maxContentWidth,
@@ -37,7 +37,7 @@ export function GoAAppHeader({
   testId,
   children,
   onMenuClick,
-}: GoAAppHeaderProps): JSX.Element {
+}: GoabAppHeaderProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -72,4 +72,4 @@ export function GoAAppHeader({
   );
 }
 
-export default GoAAppHeader;
+export default GoabAppHeader;

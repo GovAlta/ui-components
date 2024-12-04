@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
-import GoACard from "./card";
+import GoabCard from "./card";
 
-describe("GoA Card", () => {
+describe("GoabCard", () => {
   it("should render properties", () => {
     const { container } = render(
-      <GoACard elevation={2} width="50ch" mt="s" mr="m" mb="l" ml="xl" />
+      <GoabCard elevation={2} width="50ch" mt="s" mr="m" mb="l" ml="xl" />,
     );
 
     const el = container.querySelector("goa-card");

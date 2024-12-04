@@ -1,0 +1,60 @@
+<h1>Circular Progress</h1>
+
+<h2>Sizes - Small</h2>
+<goab-circular-progress variant="inline" size="small" [visible]="true">
+</goab-circular-progress>
+
+<h2>Sizes - Large</h2>
+<goab-circular-progress variant="inline" size="large" [visible]="true">
+</goab-circular-progress>
+
+<h2>Sizes - Small with message</h2>
+<goab-circular-progress
+  variant="inline"
+  size="small"
+  message="Loading the small circular progress with message"
+  [visible]="true"
+>
+</goab-circular-progress>
+
+<h2>Sizes - Large with message</h2>
+<goab-circular-progress
+  variant="inline"
+  size="large"
+  message="Loading the large circular progress with message"
+  [visible]="true"
+>
+</goab-circular-progress>
+
+<h2>Inline infinite</h2>
+<goab-circular-progress variant="inline" size="large" [visible]="true">
+</goab-circular-progress>
+
+<h2>Inline progress</h2>
+<goab-circular-progress
+  variant="inline"
+  size="large"
+  [progress]="progress"
+  [message]="message"
+  [visible]="true"
+>
+</goab-circular-progress>
+
+<h2>Fullscreen infinite</h2>
+<goab-button (onClick)="showFullscreenInfinite()"
+  >Show Fullscreen infinite progress
+</goab-button>
+<goab-circular-progress
+  variant="fullscreen"
+  size="large"
+  [visible]="fullscreenInfiniteVisible"
+></goab-circular-progress>
+
+<h2>Fullscreen progress</h2>
+<goab-button (onClick)="showFullscreenProgress()">Show Fullscreen progress </goab-button>
+<goab-circular-progress
+  variant="fullscreen"
+  [progress]="fullScreenProgress"
+  [message]="fullScreenMessage"
+  [visible]="fullscreenProgressVisible"
+></goab-circular-progress>

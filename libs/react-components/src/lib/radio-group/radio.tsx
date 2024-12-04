@@ -1,4 +1,5 @@
-import { Margins } from "../../common/styling";
+import { Margins } from "@abgov/ui-components-common";
+
 interface RadioItemProps extends Margins {
   name?: string;
   value?: string;
@@ -20,7 +21,7 @@ declare global {
   }
 }
 
-export interface GoARadioItemProps extends Margins {
+export interface GoabRadioItemProps extends Margins {
   value?: string;
   label?: string;
   name?: string;
@@ -34,7 +35,7 @@ export interface GoARadioItemProps extends Margins {
   ariaLabel?: string;
 }
 
-export function GoARadioItem({
+export function GoabRadioItem({
   name,
   label,
   value,
@@ -50,7 +51,7 @@ export function GoARadioItem({
   mr,
   mb,
   ml,
-}: GoARadioItemProps): JSX.Element {
+}: GoabRadioItemProps): JSX.Element {
   return (
     <goa-radio-item
       name={name}
@@ -61,17 +62,18 @@ export function GoARadioItem({
       error={error}
       disabled={disabled}
       checked={checked}
-      data-testid={testId}
       arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}
       ml={ml}
     >
-      {description && typeof description !== "string" && <div slot="description">{description}</div>}
+      {description && typeof description !== "string" && (
+        <div slot="description">{description}</div>
+      )}
       {children}
     </goa-radio-item>
   );
 }
 
-export default GoARadioItem;
+export default GoabRadioItem;

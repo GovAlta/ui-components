@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
-import GoAContainer from "./container";
-import { GoAButton } from "../button/button";
+import GoabContainer from "./container";
+import { GoabButton } from "../button/button";
 
 describe("Container", () => {
   it("should render the properties", () => {
     const { container } = render(
-      <GoAContainer
+      <GoabContainer
         type="interactive"
         accent="thick"
         padding="relaxed"
@@ -16,10 +16,18 @@ describe("Container", () => {
         mr="m"
         mb="l"
         ml="xl"
-        actions={<GoAButton onClick={() => { /* do nothing */ }}>Save</GoAButton>}
+        actions={
+          <GoabButton
+            onClick={() => {
+              /* do nothing */
+            }}
+          >
+            Save
+          </GoabButton>
+        }
       >
         Container content
-      </GoAContainer>
+      </GoabContainer>,
     );
 
     const el = container.querySelector("goa-container");
@@ -37,7 +45,7 @@ describe("Container", () => {
 
     expect(el?.querySelector("*[slot=title]")?.innerHTML).toContain("Text title");
     expect(
-      el?.querySelector("*[slot=actions]")?.querySelector("goa-button")
+      el?.querySelector("*[slot=actions]")?.querySelector("goa-button"),
     ).not.toBeFalsy();
   });
 });

@@ -40,7 +40,7 @@
   import TextareaPage from "../pages/TextareaPage.svelte"
   import TextFieldPage from "../pages/TextFieldPage.svelte"
   import TooltipPage from "../pages/TooltipPage.svelte"
-  
+
   let hash: string = "#";
 
   onMount(() => {
@@ -48,13 +48,13 @@
     window.addEventListener("hashchange", (e) => {
       // @ts-expect-error
       hash = e.target?.location?.hash;
-    })  
-  })  
+    })
+  })
 
 </script>
 
 <svelte:head>
-  <title>GoA Component Playground</title>
+  <title>Goab Component Playground</title>
 </svelte:head>
 
 <goa-one-column-layout>
@@ -206,7 +206,7 @@
       {:else if hash === "#tooltip"}
         <TooltipPage />
       {/if}
-      
+
     </div>
   </section>
 

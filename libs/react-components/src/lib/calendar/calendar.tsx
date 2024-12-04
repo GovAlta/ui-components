@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
+import { GoabCalendarOnChangeDetail, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
@@ -19,17 +19,16 @@ declare global {
     }
   }
 }
-
-export interface GoACalendarProps extends Margins {
+export interface GoabCalendarProps extends Margins {
   name?: string;
   value?: Date;
   min?: Date;
   max?: Date;
   testId?: string;
-  onChange: (name: string, value: Date) => void;
+  onChange: (details: GoabCalendarOnChangeDetail) => void;
 }
 
-export function GoACalendar({
+export function GoabCalendar({
   name,
   value,
   min,
@@ -40,7 +39,7 @@ export function GoACalendar({
   mb,
   ml,
   onChange,
-}: GoACalendarProps): JSX.Element {
+}: GoabCalendarProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!ref.current) {
@@ -48,7 +47,10 @@ export function GoACalendar({
     }
     const current = ref.current;
     current.addEventListener("_change", (e: Event) => {
-      onChange(name || "", (e as CustomEvent).detail.value);
+      onChange({
+        name: name || "",
+        value: (e as CustomEvent).detail.value,
+      });
     });
   });
 
@@ -68,4 +70,4 @@ export function GoACalendar({
   );
 }
 
-export default GoACalendar;
+export default GoabCalendar;
