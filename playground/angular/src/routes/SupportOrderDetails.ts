@@ -45,6 +45,7 @@ export class SupportOrderDetailsComponent implements OnInit {
     this._mainFormComponent.updateState(e);
 
     // DEV ONLY: saving the state to local storage
+    console.debug("SupportOrderDetails:updateState", this._mainFormComponent.state);
     localStorage.setItem(
       "support-order-details",
       JSON.stringify(this._mainFormComponent.state),

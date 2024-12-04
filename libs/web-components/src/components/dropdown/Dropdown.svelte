@@ -185,7 +185,7 @@
           break;
         case "reset":
           _options = [..._options, detail];
-          break;
+          break
       }
 
       // reset the mountStatus back to `ready` after all new children are mounted

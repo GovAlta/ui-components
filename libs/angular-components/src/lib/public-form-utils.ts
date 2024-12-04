@@ -4,12 +4,17 @@ export type FormStatus = "not-started" | "incomplete" | "complete";
 
 // Public type to define the state of the form
 export type AppState<T> = {
-  form: Record<string, { heading: string; data: Record<string, FieldsetItemState>[] }>;
+  form: Record<string, AppStateData<T>>;
   history: string[];
   editting: string;
   lastModified?: Date;
   status: FormStatus;
   currentFieldset?: { id: T; dispatchType: "change" | "continue" };
+};
+
+export type AppStateData<T> = {
+  heading: string;
+  data: Record<string, FieldsetItemState | FieldsetItemState[]> | AppState<T>[];
 };
 
 // Public type to define the state of the fieldset items
@@ -51,23 +56,72 @@ export class PublicFormComponent<T> {
 
   // Public method to allow for the updating of the state
   updateState(e: Event) {
-    console.debug("Utils:updateState", e, { state: this.state });
+    console.debug("Utils:updateState", { state: this.state }, (e as CustomEvent).detail);
     if (!this.state) {
       console.error("updateState: state has not yet been set");
       return;
     }
 
-    if (Array.isArray(this.state)) {
-      const state = (e as CustomEvent).detail as AppState<T>[];
-      this.state = state;
+    const detail = (e as CustomEvent).detail;
+    const isSubform = Array.isArray(this.state);
+    const isRootFormSubformDetail = detail.data && !isSubform;
+
+    if (isSubform) {
+      this.#updateListState(detail);
+      if (isRootFormSubformDetail) {
+        this.#updateRootListValue(detail);
+      }
     } else {
-      const state = (e as CustomEvent).detail as AppState<T>;
-      this.state = {
-        ...this.state,
-        form: state.form,
-        currentFieldset: state.currentFieldset, // TODO: remember why this is here
-      };
+      this.#updateObjectState(detail);
     }
+  }
+
+  #updateListState(detail: { data: AppState<T>[]; index: number; id: string }) {
+    console.debug("Utils:updateListStateOfRoot", detail);
+
+    if (!Array.isArray(this.state)) {
+      return;
+    }
+
+    this.state = detail.data;
+    // this.state[detail.index].form[detail.id].data = detail.data;
+  }
+
+  #updateRootListValue(detail: { data: AppState<T>[]; index: number; id: string }) {
+    console.debug("Utils:updateRootListValue", detail);
+
+    if (!Array.isArray(detail.data)) {
+      return;
+    }
+
+    if (Array.isArray(this.state)) {
+      return;
+    }
+
+    this.state = {
+      ...this.state,
+      form: {
+        ...(this.state?.form || {}),
+        [detail.id]: detail.data,
+      },
+    } as AppState<T>;
+  }
+
+  // WEDNESDAY Start here
+  // FIXME: newState's type can also be `{ id: string, index: number, data: AppState<T>[] }`
+  #updateObjectState(newState: AppState<T>) {
+    console.debug("Utils:updateObjectState", newState);
+
+    if (Array.isArray(this.state)) {
+      return;
+    }
+
+    // FIXME: With this override any subform data?
+    this.state = {
+      ...this.state,
+      form: newState.form,
+      currentFieldset: newState.currentFieldset,
+    } as AppState<T>;
   }
 
   getStateList(): Record<string, string>[] {
@@ -85,7 +139,6 @@ export class PublicFormComponent<T> {
         .reduce(
           (acc, item) => {
             for (const [key, value] of Object.entries(item)) {
-              // @ts-expect-error "ignore"
               acc[key] = value.value;
             }
             return acc;
@@ -95,37 +148,37 @@ export class PublicFormComponent<T> {
     });
   }
 
-  getStateItems(group: string): Record<string, FieldsetItemState>[] {
-    if (Array.isArray(this.state)) {
-      console.error(
-        "Utils:getStateItems: unable to update the state of a multi form type",
-      );
-      return [];
-    }
-    if (!this.state) {
-      console.error("Utils:getStateItems: state has not yet been set");
-      return [];
-    }
+  // getStateItems(group: string): Record<string, FieldsetItemState>[] {
+  //   if (Array.isArray(this.state)) {
+  //     console.error(
+  //       "Utils:getStateItems: unable to update the state of a multi form type",
+  //     );
+  //     return [];
+  //   }
+  //   if (!this.state) {
+  //     console.error("Utils:getStateItems: state has not yet been set");
+  //     return [];
+  //   }
 
-    console.debug("Utils:getStateItems", this.state, { group });
-    return (this.state.form[group]?.data ?? []) as Record<string, FieldsetItemState>[];
-  }
+  //   console.debug("Utils:getStateItems", this.state, { group });
+  //   return (this.state.form[group]?.data ?? []) as Record<string, FieldsetItemState>[];
+  // }
 
   // Public method to allow for the retrieval of the state value
-  getStateValue(group: string, key: string): string {
-    if (Array.isArray(this.state)) {
-      console.error("getStateValue: unable to update the state of a multi form type");
-      return "";
-    }
-    if (!this.state) {
-      console.error("getStateValue: state has not yet been set");
-      return "";
-    }
+  // getStateValue(group: string, key: string): string {
+  //   if (Array.isArray(this.state)) {
+  //     console.error("getStateValue: unable to update the state of a multi form type");
+  //     return "";
+  //   }
+  //   if (!this.state) {
+  //     console.error("getStateValue: state has not yet been set");
+  //     return "";
+  //   }
 
-    const data = this.state.form[group].data as Record<string, FieldsetItemState>[];
-    // @ts-expect-error "ignore"
-    return (data as Record<string, string>)[key]?.value ?? "";
-  }
+  //   const data = this.state.form[group].data as Record<string, FieldsetItemState>[];
+  //   // @ts-expect-error "ignore"
+  //   return (data as Record<string, string>)[key]?.value ?? "";
+  // }
 
   // Public method to allow for the continuing to the next page
   continueTo(name: T | undefined) {

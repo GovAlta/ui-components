@@ -151,7 +151,7 @@
 
     // stop original event to prevent just the single subform data from being sent
     // send the array of data instead
-    dispatch(_rootEl, "_stateChange", _state, { bubbles: true });
+    dispatch(_rootEl, "_stateChange", { data: _state, id, index: editStateIndex }, { bubbles: true });
 
     // initial event will be overridden with a custom _stateChange event containing a state array
     e.stopPropagation();
