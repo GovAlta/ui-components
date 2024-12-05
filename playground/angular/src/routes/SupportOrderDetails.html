@@ -64,6 +64,21 @@
     </goa-form-item>
   </goa-fieldset>
 
+  <goa-fieldset
+    id="optional"
+    heading="Alternate names"
+    section-title="Support order details"
+    (_continue)="onPageChange($event, 'optional')"
+  >
+    <goa-form-item name="Nick name" label="Nickname" requirement="optional">
+      <goa-input name="nickname" />
+    </goa-form-item>
+
+    <goa-form-item name="Secret alias" label="Secret alias" requirement="optional">
+      <goa-input name="alias" />
+    </goa-form-item>
+  </goa-fieldset>
+
   <goa-subform
     id="children-subform"
     name="children-subform"
@@ -71,7 +86,13 @@
     (_init)="_childFormComponent.initList($event)"
     (_stateChange)="updateChildrenState($event)"
   >
-    <goa-fieldset first id="child-list" (_continue)="onChildPageChange($event, 'child-list')">
+    <goa-fieldset 
+      first 
+      id="child-list" 
+      secondary-button-text="Done"
+      (_continue)="onChildPageChange($event, 'child-list')"
+      (_secondaryClick)="onPageChange($event, 'children-subform')"
+    >
       <goa-table>
         <tbody>
           <tr *ngFor="let item of _childFormComponent.getStateList()">

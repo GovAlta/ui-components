@@ -436,9 +436,13 @@
       {/if}
 
       {#if sectionTitle}
-        <goa-text class="section-title" size="body-l" mb="s"
-          >{sectionTitle}</goa-text
+        <goa-text 
+          class="section-title" 
+          size="body-l" 
+          mb="s"
         >
+          {sectionTitle}
+        </goa-text>
       {/if}
 
       {#if heading}

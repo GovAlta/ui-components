@@ -3,6 +3,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import {
+  FieldsetData,
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
     FormState,
@@ -13,6 +14,7 @@
   } from "../../types/relay-types";
 
   import { receive, relay } from "../../common/utils";
+  import Fieldset from "./Fieldset.svelte";
 
   export let heading: string = "";
 
@@ -50,13 +52,34 @@
   }
 
   function getHeading(page: string): string {
-    return _state.form[page].heading || "";
+    try {
+      return _state.form[page].heading || "";
+    } catch (e) {
+      console.log(e);
+      return "FAIL"
+    }
   }
 
-  function getData(page: string) {
-    return Object
-      .entries(_state.form?.[page].data)
-      .sort((itemsA, itemsB) => itemsA[1].order > itemsB[1].order ? 1 : -1)
+  function getData(state: FormState, page: string) {
+    const fieldset = state.form?.[page];
+    const data = 
+      Object
+        .entries(fieldset.data || {})
+        .sort((itemsA, itemsB) => itemsA[1].order > itemsB[1].order ? 1 : -1)
+    console.debug("FormSummary:getData", {data})
+    return data;
+  }
+
+  function getDataList(state: FormState, page: string) {
+    const formStates = state.form?.[page] as unknown as FormState[];
+    
+    return formStates.map(formState => {
+      console.debug("FormSummary:getDataList::isArray=true", formState);
+      return formState.history.map(fieldsetId => {
+        console.debug("FormSummary:getDataList::fieldsetId", fieldsetId);
+        return getData(formState, fieldsetId);
+      })
+    });
   }
   
 </script>
@@ -67,28 +90,38 @@
   {/if}
   {#if _state}
     {#each _state.history as page}
-      {#if _state.form[page]}
-        <goa-container>
+      <goa-container>
+        <div class="summary" class:summary-with-header={!!getHeading(page)}>
+          {#if getHeading(page)}
+            <goa-text class="heading" color="secondary">{getHeading(page)}</goa-text>
+          {/if}
 
-          <div class="summary" class:summary-with-header={!!getHeading(page)}>
-            {#if getHeading(page)}
-              <goa-text class="heading" color="secondary">{getHeading(page)}</goa-text>
-            {/if}
+          {#if _state.form[page]}
             <table class="data">
-              {#each getData(page) as [_key, data]}
-                <tr>
-                  <td class="label">{data.label}</td>
-                  <td class="value">{data.value}</td>
-                </tr>
-              {/each}
+              {#if Array.isArray(_state.form?.page)}
+                {#each getDataList(_state, page) as [_key, item]}
+                  {#each item as [_key, data]}
+                    <tr>
+                      <td class="label">{data.label}</td>
+                      <td class="value">{data.value}</td>
+                    </tr>
+                  {/each}
+                {/each}
+              {:else}
+                {#each getData(_state, page) as [_key, data]}
+                  <tr>
+                    <td class="label">{data.label}</td>
+                    <td class="value">{data.value}</td>
+                  </tr>
+                {/each}
+              {/if}
             </table>
-            <div class="action">
-              <goa-link leadingicon="pencil" on:click={(e) => changePage(e, page)}>Change</goa-link>
-            </div>
+          {/if}
+          <div class="action">
+            <goa-link leadingicon="pencil" on:click={(e) => changePage(e, page)}>Change</goa-link>
           </div>
-        
-        </goa-container>
-      {/if}
+        </div>
+      </goa-container>    
     {/each}
   {/if}
 </div>

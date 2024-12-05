@@ -68,9 +68,8 @@ export class PublicFormComponent<T> {
 
     if (isSubform) {
       this.#updateListState(detail);
-      if (isRootFormSubformDetail) {
-        this.#updateRootListValue(detail);
-      }
+    } else if (isRootFormSubformDetail) {
+      this.#updateRootListValue(detail);
     } else {
       this.#updateObjectState(detail);
     }
@@ -87,6 +86,8 @@ export class PublicFormComponent<T> {
     // this.state[detail.index].form[detail.id].data = detail.data;
   }
 
+  // WEDNESDAY Start here
+  // FIXME: newState's type can also be `{ id: string, index: number, data: AppState<T>[] }`
   #updateRootListValue(detail: { data: AppState<T>[]; index: number; id: string }) {
     console.debug("Utils:updateRootListValue", detail);
 
@@ -107,8 +108,6 @@ export class PublicFormComponent<T> {
     } as AppState<T>;
   }
 
-  // WEDNESDAY Start here
-  // FIXME: newState's type can also be `{ id: string, index: number, data: AppState<T>[] }`
   #updateObjectState(newState: AppState<T>) {
     console.debug("Utils:updateObjectState", newState);
 

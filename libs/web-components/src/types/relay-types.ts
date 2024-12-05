@@ -1,11 +1,8 @@
 export type FormStatus = "not-started" | "incomplete" | "complete";
 
-// FIXME: Can the existing AppState be used in place of this
-export type FormStateData = Record<string, FieldsetData>;
-
 export type FormState = {
   id: string;
-  form: FormStateData;
+  form: Record<string, FieldsetData>;
   history: string[];
   editting: string;
   lastModified?: Date;

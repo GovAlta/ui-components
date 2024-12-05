@@ -5,8 +5,9 @@ import { JsonPipe, NgFor } from "@angular/common";
 
 type Page =
   | "what-is-your-role"
-  | "children-subform"
   | "contact"
+  | "optional"
+  | "children-subform"
   | "address"
   | "do-you-receive-support"
   | "recalculated"
@@ -33,9 +34,9 @@ export class SupportOrderDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // const data = `{ "form": { "children-subform": { "heading": "", "data": [ { "name": { "heading": "", "data": { "firstName": { "name": "firstName", "value": "Chris", "label": "First name", "order": 1 }, "lastName": { "name": "lastName", "value": "Olsen", "label": "Last name", "order": 2 } } }, "alternate-name": { "heading": "", "data": { "alternateName": { "name": "alternateName", "value": "Foo", "label": "Alternate name", "order": 1 } } }, "dob": { "heading": "", "data": { "dob": { "name": "dob", "value": "1986-01-12", "label": "Date of birth", "order": 2 } } } }, { "name": { "heading": "", "data": { "firstName": { "name": "firstName", "value": "Welsey", "label": "First name", "order": 1 }, "lastName": { "name": "lastName", "value": "Olsen", "label": "Last name", "order": 2 } } }, "alternate-name": { "heading": "", "data": { "alternateName": { "name": "alternateName", "value": "Bad boy", "label": "Alternate name", "order": 1 } } }, "dob": { "heading": "", "data": { "dob": { "name": "dob", "value": "2019-03-12", "label": "Date of birth", "order": 2 } } } } ] }, "what-is-your-role": { "heading": "", "data": { "role": { "name": "role", "value": "Recipient", "label": "Role", "order": 1 }, "canadian-resident": { "name": "canadian-resident", "value": "Yes", "label": "Lived in Canada > 5years", "order": 2 }, "amount1": { "name": "amount1", "value": "123", "label": "Amount 1", "order": 3 }, "amount2": { "name": "amount2", "value": "123", "label": "Amount 2", "order": 4 } } } }, "history": [], "editting": "", "status": "not-started", "currentFieldset": { "dispatchType": "continue" } }`;
+    // const data = localStorage.getItem("support-order-details");
+    // const data = `{"form":{"what-is-your-role":{"heading":"","data":{"role":{"name":"role","value":"Recipient","label":"Role","order":1}}},"contact":{"heading":"","data":{"contact-method":{"name":"contact-method","value":"Contact by phone","label":"Method of contact","order":1}}},"children-subform":[{"id":"74e6c123-bdc1-4c07-88c1-7c382a80f715","form":{"name":{"heading":"","data":{"firstName":{"name":"firstName","value":"Chris","label":"First name","order":1},"lastName":{"name":"lastName","value":"Olsen","label":"Last name","order":2}}},"alternate-name":{"heading":"","data":{"alternateName":{"name":"alternateName","value":"Superman","label":"Alternate name","order":1}}},"dob":{"heading":"","data":{"dob":{"name":"dob","value":"1986-01-12","label":"Date of birth","order":2}}}},"history":["child-list","name","alternate-name","dob","summary","child-list"],"editting":"","lastModified":"2024-12-04T21:19:56.474Z","status":"not-started","currentFieldset":{"id":"summary","dispatchType":"continue"}},{"id":"0f12843d-d7f5-4ed4-8055-321034c0388c","form":{"name":{"heading":"","data":{"firstName":{"name":"firstName","value":"asd","label":"First name","order":1},"lastName":{"name":"lastName","value":"asd","label":"Last name","order":2}}},"alternate-name":{"heading":"","data":{"alternateName":{"name":"alternateName","value":"Wesley","label":"Alternate name","order":1}}},"dob":{"heading":"","data":{"dob":{"name":"dob","value":"1111-01-12","label":"Date of birth","order":2}}}},"history":["child-list","name","alternate-name","dob","summary","child-list"],"editting":"","lastModified":"2024-12-04T21:24:45.126Z","status":"complete","currentFieldset":{"id":"summary","dispatchType":"continue"}}]},"history":[],"editting":"","status":"not-started","currentFieldset":{"id":"contact","dispatchType":"continue"}}`;
     const data = null;
-
     if (data) {
       this._mainFormComponent.initState(data);
     }
@@ -85,6 +86,9 @@ export class SupportOrderDetailsComponent implements OnInit {
         break;
       case "contact":
         dest = this.handleContact(e);
+        break;
+      case "optional":
+        dest = this.handleOptional(e);
         break;
       case "children-subform":
         dest = "address";
@@ -175,6 +179,10 @@ export class SupportOrderDetailsComponent implements OnInit {
     //   return;
     // }
 
+    return "optional";
+  }
+
+  handleOptional(e: Event): Page | undefined {
     return "children-subform";
   }
 
