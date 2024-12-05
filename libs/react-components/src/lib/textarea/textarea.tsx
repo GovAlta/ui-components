@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
-
 type CountBy = "character" | "word";
 
 interface WCProps extends Margins {
@@ -86,7 +85,6 @@ export function GoATextarea({
     };
   }, [el, onChange]);
 
-
   useEffect(() => {
     if (!el.current) {
       return;
@@ -95,7 +93,7 @@ export function GoATextarea({
     const keypressListener = (e: unknown) => {
       const { name, value, key } = (e as CustomEvent).detail;
       onKeyPress?.(name, value, key);
-    }
+    };
 
     current.addEventListener("_keyPress", keypressListener);
     return () => {
@@ -126,6 +124,5 @@ export function GoATextarea({
   );
 }
 
-export {GoATextarea as GoATextArea}
+export { GoATextarea as GoATextArea };
 export default GoATextarea;
-
