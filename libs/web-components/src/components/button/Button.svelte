@@ -100,48 +100,116 @@
 
 <style>
   :host {
-    --button-height: 2.625rem; /* 42px */
-    --button-height-compact: 2rem; /* 32px */
-    --button-height-tall: 3.25rem; /* 52px */
 
-    box-sizing: border-box;
-    font-family: var(--goa-font-family-sans);
+    /* TODO Component tokens, to move to design tokens file ------------------------------------------------------- */
+
+    /* Button component design tokens */
+    --goa-button-border-radius: var(--goa-border-radius-m);
+		--goa-button-padding-lr: var(--goa-space-s);
+    --goa-button-padding-lr-compact: var(--goa-space-xs);
+    --goa-button-padding-lr-start: var(--goa-space-m);
+    --goa-button-default-typography: var(--goa-font-weight-regular) var(--goa-font-size-5)/var(--goa-line-height-1) var(--goa-font-family-sans); /* already added in tokens */
+		--goa-button-compact-typography: var(--goa-font-weight-regular) var(--goa-font-size-4)/var(--goa-line-height-05) var(--goa-font-family-sans);
+		--goa-button-start-typography: var(--goa-font-weight-bold) var(--goa-font-size-5)/var(--goa-line-height-1) var(--goa-font-family-sans);
+    --goa-button-height: 2.625rem; /* 42px */
+		--goa-button-compact-height: 2rem; /* 32px */
+    --goa-button-start-height: 3.25rem; /* 52px */
+		--goa-button-gap: var(--goa-space-xs);
+    --goa-button-compact-gap: 6px;
+    --goa-button-icon-size: var(--goa-icon-size-3); /* 20px - need to add to component */
+    --goa-button-compact-icon-size: var(--goa-icon-size-2); /* 18px - need to add to component */
+
+    /* Primary button component design tokens */
+    --goa-button-primary-color-bg: var(--goa-color-interactive-default);
+    --goa-button-primary-color-text: var(--goa-color-text-light);
+    --goa-button-primary-border: none;
+    --goa-button-primary-hover-color-bg: var(--goa-color-interactive-hover);
+    --goa-button-primary-hover-color-text: var(--goa-color-text-light);
+    --goa-button-primary-hover-border: none;
+    --goa-button-primary-focus-color-bg: var(--goa-color-interactive-hover);
+    --goa-button-primary-focus-color-text: var(--goa-color-text-light);
+    --goa-button-primary-focus-border: none;
+    --goa-button-primary-destructive-color-bg: var(--goa-color-emergency-default);
+    --goa-button-primary-destructive-hover-color-bg: var(--goa-color-emergency-dark);
+    --goa-button-primary-destructive-hover-color-text: var(--goa-color-text-light);
+    --goa-button-primary-destructive-focus-color-bg: var(--goa-color-emergency-dark);
+
+    /* Secondary button component design tokens */
+    --goa-button-secondary-color-bg: var(--goa-color-greyscale-white);
+    --goa-button-secondary-color-text: var(--goa-color-interactive-default);
+    --goa-button-secondary-border: var(--goa-border-width-m) solid var(--goa-color-interactive-default);
+    --goa-button-secondary-hover-color-bg: var(--goa-color-greyscale-100);
+    --goa-button-secondary-hover-color-text: var(--goa-color-interactive-hover);
+    --goa-button-secondary-hover-border: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
+    --goa-button-secondary-focus-color-bg: var(--goa-color-greyscale-100);
+    --goa-button-secondary-focus-color-text: var(--goa-color-interactive-hover);
+    --goa-button-secondary-focus-border: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
+    --goa-button-secondary-destructive-color-text: var(--goa-color-emergency-default);
+    --goa-button-secondary-destructive-border: var(--goa-border-width-m) solid var(--goa-color-emergency-default);
+    --goa-button-secondary-destructive-hover-border: var(--goa-border-width-m) solid var(--goa-color-emergency-dark);
+    --goa-button-secondary-destructive-hover-color-text: var(--goa-color-emergency-dark);
+    --goa-button-secondary-destructive-focus-color-text: var(--goa-color-emergency-dark);
+    --goa-button-secondary-destructive-focus-border: var(--goa-border-width-m) solid var(--goa-color-emergency-dark);
+
+    /* Tertiary button component design tokens */
+    --goa-button-tertiary-color-bg: none;
+    --goa-button-tertiary-color-text: var(--goa-color-interactive-default);
+    --goa-button-tertiary-border: none;
+    --goa-button-tertiary-hover-color-bg: var(--goa-color-greyscale-100);
+    --goa-button-tertiary-hover-color-text: var(--goa-color-interactive-hover);
+    --goa-button-tertiary-focus-color-bg: var(--goa-color-greyscale-100);
+    --goa-button-tertiary-focus-color-text: var(--goa-color-interactive-hover);
+    --goa-button-tertiary-destructive-color-text: var(--goa-color-emergency-default);
+    --goa-button-tertiary-destructive-hover-color-text: var(--goa-color-emergency-dark);
+    --goa-button-tertiary-destructive-focus-color-text: var(--goa-color-emergency-dark);
+
+
+
+    /*  ------------------------------------------------------- */
+
+  }
+  .icon {
+    /* Default icon size */
+    width: 24px;
+    height: 24px;
+  }
+  .icon.compact {
+    /* Compact icon size */
+    width: 16px;
+    height: 16px;
   }
 
   button {
     display: inline-flex;
     box-sizing: border-box;
-    border-radius: 0.25rem;
-    border: 2px solid var(--goa-color-interactive-default);
-    box-sizing: border-box;
+    border-radius: var(--goa-button-border-radius);
     cursor: pointer;
-    font-family: var(--goa-font-family-sans);
-    font-size: var(--goa-font-size-5);
-    font-weight: 400;
-    height: var(--button-height);
+    font: var(--goa-button-default-typography);
+    height: var(--goa-button-height);
     letter-spacing: var(--goa-letter-spacing-button);
-    line-height: 100%;
-    padding: 0 0.75rem;
+    padding: 0 var(--goa-button-padding-lr);
     white-space: nowrap;
-
-    /* for leading and trailing icon vertical alignment */
-    gap: 0.5rem;
-    align-items: center;
+    gap: var(--goa-button-gap);
+    align-items: center; /* for leading and trailing icon vertical alignment */
     justify-content: center;
     transition:
       transform 0.1s ease-in-out,
       background-color 0.2s ease-in-out,
-      border-color 0.2s ease-in-out;
+      border-color 0.2s ease-in-out,
+      color 0.2s ease-in-out;
   }
+
   button:disabled {
     pointer-events: none;
     opacity: 0.5;
   }
+
   button:active {
     transform: translateY(2px);
   }
+
   button:focus-visible {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
   }
 
   @media (--mobile) {
@@ -152,134 +220,122 @@
       width: 100%;
       display: flex;
     }
+
   }
 
   .text {
-    padding-bottom: var(
-      --font-valign-fix,
-      0
-    ); /* acumin font requires this to allow for vertical alignment  */
+    padding-bottom: 0.2rem; /* acumin font requires this to allow for vertical alignment  */
   }
 
   button.compact {
-    height: var(--button-height-compact);
-    font-size: var(--goa-font-size-4);
-    padding-left: var(--goa-space-xs);
-    padding-right: var(--goa-space-xs);
+    height: var(--goa-button-compact-height);
+    font: var(--goa-button-compact-typography);
+    padding: 0 var(--goa-button-padding-lr-compact);
+    gap: var(--goa-button-compact-gap);
   }
 
   button.start {
-    height: var(--button-height-tall);
-    font-weight: var(--goa-font-weight-bold);
+    height: var(--goa-button-start-height);
+    font: var(--goa-button-start-typography);
+    padding: 0 var(--goa-button-padding-lr-start);
+    letter-spacing: var(--goa-letter-spacing-button);
   }
 
-
+  /* Primary */
   button.start,
   button.submit,
   button.primary {
-    border: 2px solid var(--goa-color-interactive-default);
-    background-color: var(--goa-color-interactive-default);
-    color: var(--goa-color-text-light);
+    border: var(--goa-button-primary-border);
+    background-color: var(--goa-button-primary-color-bg);
+    color: var(--goa-button-primary-color-text);
   }
   button:hover {
-    border-color: var(--goa-color-interactive-hover);
-    background-color: var(--goa-color-interactive-hover);
+    background-color: var(--goa-button-primary-hover-color-bg);
   }
   button:focus,
   button:active {
-    border-color: var(--goa-color-interactive-hover);
-    background-color: var(--goa-color-interactive-hover);
+    border-color: var(--goa-button-primary-hover-border);
+    background-color: var(--goa-button-primary-focus-color-bg);
     outline: none;
   }
-
 
   /* Secondary */
   button.secondary {
-    border: 2px solid var(--goa-color-interactive-default);
-    background-color: var(--goa-color-greyscale-white);
-    color: var(--goa-color-interactive-default);
+    border: var(--goa-button-secondary-border);
+    background-color: var(--goa-button-secondary-color-bg);
+    color: var(--goa-button-secondary-color-text);
   }
   button.secondary:hover {
-    border-color: var(--goa-color-interactive-hover);
-    color: var(--goa-color-interactive-hover);
-    background-color: var(--goa-color-greyscale-100);
+    border: var(--goa-button-secondary-hover-border);
+    color: var(--goa-button-secondary-hover-color-text);
+    background-color: var(--goa-button-secondary-hover-color-bg);
   }
   button.secondary:focus,
   button.secondary:active {
-    border-color: var(--goa-color-interactive-hover);
-    background-color: var(--goa-color-greyscale-100);
+    border: var(--goa-button-secondary-focus-border);
+    background-color: var(--goa-button-secondary-focus-color-bg);
+    color: var(--goa-button-secondary-focus-color-text);
     outline: none;
   }
-
 
   /* Tertiary */
   button.tertiary {
-    border: 1px solid transparent;
-    background-color: transparent;
-    color: var(--goa-color-interactive-default);
+    border: var(--goa-button-tertiary-border);
+    background-color: var(--goa-button-tertiary-color-bg);
+    color: var(--goa-button-tertiary-color-text);
     text-decoration: underline;
   }
   button.tertiary:hover {
-    border-color: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
-    background-color: var(--goa-color-greyscale-100);
+    background-color: var(--goa-button-tertiary-hover-color-bg);
+    color: var(--goa-button-tertiary-hover-color-text);
   }
   button.tertiary:focus,
   button.tertiary:active {
-    border-color: var(--goa-color-greyscale-100);
-    background-color: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
+    background-color: var(--goa-button-tertiary-focus-color-bg);
+    color: var(--goa-button-tertiary-focus-color-text);
     outline: none;
   }
 
-
+  /* Destructive Primary */
   .submit.destructive,
   .primary.destructive {
-    color: var(--goa-color-greyscale-white);
-    background-color: var(--goa-color-emergency-default);
-    border-color: var(--goa-color-emergency-default);
+    background-color: var(--goa-button-primary-destructive-color-bg);
   }
   .submit.destructive:hover,
   .primary.destructive:hover {
-    background-color: var(--goa-color-emergency-dark);
-    border-color: var(--goa-color-emergency-dark);
+    background-color: var(--goa-button-primary-destructive-hover-color-bg);
   }
   .submit.destructive:focus,
   .submit.destructive:active,
   .primary.destructive:focus,
   .primary.destructive:active {
-    background-color: var(--goa-color-emergency-dark);
-    border-color: var(--goa-color-emergency-dark);
+    background-color: var(--goa-button-primary-destructive-focus-color-bg);
   }
 
-
+  /* Destructive Secondary */
   .secondary.destructive {
-    color: var(--goa-color-emergency-default);
-    border-color: var(--goa-color-emergency-default);
-    background-color: var(--goa-color-greyscale-white);
+    color: var(--goa-button-secondary-destructive-color-text);
+    border: var(--goa-button-secondary-destructive-border);
   }
   .secondary.destructive:hover {
-    border-color: var(--goa-color-emergency-dark);
-    color: var(--goa-color-emergency-dark);
-    background-color: var(--goa-color-greyscale-white);
+    color: var(--goa-button-secondary-destructive-hover-color-text);
+    border: var(--goa-button-secondary-destructive-hover-border);
   }
   .secondary.destructive:focus,
   .secondary.destructive:active {
-    color: var(--goa-color-emergency-dark);
-    border-color: var(--goa-color-emergency-dark);
-    background-color: var(--goa-color-greyscale-white);
+    color: var(--goa-button-secondary-destructive-focus-color-text);
+    border: var(--goa-button-secondary-destructive-focus-border);
   }
 
-
+  /* Destructive Tertiary */
   .tertiary.destructive {
-    color: var(--goa-color-emergency-default);
-    border-color: transparent;
+    color: var(--goa-button-tertiary-destructive-color-text);
   }
   .tertiary.destructive:hover {
-    color: var(--goa-color-emergency-dark);
+    color: var(--goa-button-tertiary-destructive-hover-color-text);
   }
   .tertiary.destructive:focus,
   .tertiary.destructive:active {
-    color: var(--goa-color-emergency-dark);
+    color: var(--goa-button-tertiary-destructive-focus-color-text);
   }
 </style>

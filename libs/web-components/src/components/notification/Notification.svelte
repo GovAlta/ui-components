@@ -91,6 +91,37 @@
 <!-- Style -->
 <style>
   :host {
+  /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+    --goa-notification-banner-text-size: var(--goa-typography-body-m);
+    --goa-notification-banner-padding-tb: var(--goa-space-l);
+    --goa-notification-banner-padding-lr-small-screen: var(--goa-space-m);
+    --goa-notification-banner-padding-lr-medium-screen: var(--goa-space-l);
+    --goa-notification-banner-padding-lr-large-screen: var(--goa-space-3xl);
+    --goa-notification-banner-gap: var(--goa-space-m);
+
+    --goa-notification-banner-information-color-bg: var(--goa-color-info-default);
+    --goa-notification-banner-information-color-text: var(--goa-color-text-light);
+    --goa-notification-banner-important-color-bg: var(--goa-color-warning-default);
+    --goa-notification-banner-important-color-text: var(--goa-color-text-default);
+    --goa-notification-banner-emergency-color-bg: var(--goa-color-emergency-default);
+    --goa-notification-banner-emergency-color-text: var(--goa-color-text-light);
+    --goa-notification-banner-event-color-bg: var(--goa-color-info-default);
+    --goa-notification-banner-event-color-text: var(--goa-color-text-light);
+
+    /* Other tokens that are not used yet, but would be nice to have to control */
+    --goa-notification-banner-size-icon: var(--goa-icon-size-4);
+    --goa-notification-banner-information-color-icon: var(--goa-color-greyscale-white);
+    --goa-notification-banner-important-color-icon: var(--goa-color-greyscale-black);
+    --goa-notification-banner-emergency-color-icon: var(--goa-color-greyscale-white);
+    --goa-notification-banner-event-color-icon: var(--goa-color-greyscale-white);
+
+    --goa-notification-banner-custom-color-bg: var(--goa-color-info-default);
+    --goa-notification-banner-custom-color-text: var(--goa-color-text-light);
+    --goa-notification-banner-custom-color-icon: var(--goa-color-greyscale-white);
+
+  /*  ------------------------------------------------------- */
+
+
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
@@ -99,54 +130,64 @@
     container: self / inline-size;
   }
 
+  /* Screen sizes */
+
   .notification {
-    padding: var(--goa-space-l) var(--goa-space-m);
+    padding: var(--goa-notification-banner-padding-tb) var(--goa-notification-banner-padding-lr-small-screen);
     display: flex;
   }
 
   @container self (--not-mobile) {
     .notification {
-      padding: var(--goa-space-l) var(--goa-space-xl);
+      padding: var(--goa-notification-banner-padding-tb) var(--goa-notification-banner-padding-lr-medium-screen);
     }
   }
 
   @container self (--desktop) {
     .notification {
-      padding: var(--goa-space-l) calc(3 * var(--goa-space-l));
+      padding: var(--goa-notification-banner-padding-tb) var(--goa-notification-banner-padding-lr-large-screen);
     }
   }
 
+  /* Types */
+
   .emergency {
-    background-color: var(--goa-color-emergency-default);
-    color: var(--goa-color-text-light);
+    background-color: var(--goa-notification-banner-emergency-color-bg);
+    color: var(--goa-notification-banner-emergency-color-text);
   }
 
   .important {
-    background-color: var(--goa-color-warning-default);
-    color: var(--goa-color-text-default);
+    background-color: var(--goa-notification-banner-important-color-bg);
+    color: var(--goa-notification-banner-important-color-text);
   }
 
-  .information,
+  .information {
+    background-color: var(--goa-notification-banner-information-color-bg);
+    color: var(--goa-notification-banner-information-color-text);
+  }
+
   .event {
-    background-color: var(--goa-color-info-default);
-    color: var(--goa-color-text-light);
+    background-color: var(--goa-notification-banner-event-color-bg);
+    color: var(--goa-notification-banner-event-color-text);
   }
 
   .icon {
     flex: 0 0 auto;
+    margin-top: 3px; /* vertically centering the icon */
   }
 
   .content-container {
     display: flex;
     flex-direction: row;
     flex: 1 1 auto;
-    gap: var(--goa-space-m);
+    gap: var(--goa-notification-banner-gap);
     margin: 0 auto;
     max-width: min(var(--max-content-width), 100%);
   }
 
   .content {
     flex: 1 1 auto;
+    font: var(--goa-notification-banner-text-size);
   }
 
   :global(::slotted(a)) {
@@ -163,10 +204,10 @@
     border-radius: var(--goa-border-radius-m);
   }
 
+  /*Close Buttons*/
   .close {
     flex: 0 0 auto;
   }
-
   .close button {
     background-color: transparent;
     border: none;
@@ -182,15 +223,20 @@
     transform: translateY(2px);
   }
 
-  /*Information & Event Close Button*/
+  /*Information Close Button*/
   .close button.information:hover,
-  .close button.information:focus-visible,
+  .close button.information:focus-visible {
+    background-color: var(--goa-color-info-dark);
+  }
+  .close button.information:focus-visible {
+    box-shadow: 0 0 0 3px var(--goa-color-greyscale-white);
+  }
+
+  /*Event Close Button*/
   .close button.event:hover,
   .close button.event:focus-visible {
     background-color: var(--goa-color-info-dark);
   }
-
-  .close button.information:focus-visible,
   .close button.event:focus-visible {
     box-shadow: 0 0 0 3px var(--goa-color-greyscale-white);
   }

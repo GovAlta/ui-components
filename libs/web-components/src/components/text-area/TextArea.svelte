@@ -49,7 +49,7 @@
   })
 
   // functions
-  
+
   function addRelayListener() {
     receive(_textareaEl, (action, data) => {
       switch (action) {
@@ -160,8 +160,8 @@
 <!-- Style -->
 <style>
   :host {
-    --textarea-padding-vertical: 0.625rem;
-    --textarea-padding-horizontal: var(--goa-space-s);
+    /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+    --goa-text-area: ;
 
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
@@ -169,14 +169,53 @@
 
   #container {
     container: self / inline-size;
+    box-sizing: border-box;
   }
 
+  /* Default state */
   .root {
+    transition: box-shadow 0.05s ease-in;
     position: relative;
-    width: var(--width, 100%);
-    padding-bottom: var(--char-count-padding);
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
-    border-radius: 3px;
+    max-width: var(--width, 100%);
+    padding-bottom: var(--char-count-padding); /*if count by is true = 2rem, else 0*/
+    box-shadow: inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700);
+    border-radius: 4px;
+  }
+  /* Hover state */
+  .root:hover {
+    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+  }
+  /* Focus state */
+  .root:focus-within{
+    box-shadow:
+      inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
+      0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+  }
+  /* Error state */
+  .error, .error:hover {
+    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-error);
+  }
+  .error:focus {
+    box-shadow: inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
+      0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+  }
+  .error:focus-within:hover {
+    box-shadow: inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
+      0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+  }
+  /* Disabled state */
+  .disabled, .disabled:hover {
+    background-color: var(--goa-color-greyscale-100);
+    cursor: default;
+    box-shadow: inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-200);
+    resize: none;
+  }
+  textarea:disabled {
+    resize: none;
+  }
+
+  textarea[readonly] {
+    cursor: pointer;
   }
 
   textarea {
@@ -184,13 +223,48 @@
     box-sizing: border-box;
     outline: none;
     border: none;
-    border-radius: 3px;
-    color: var(--goa-color-greyscale-black, #ccc);
-    padding: var(--textarea-padding-vertical) var(--textarea-padding-horizontal);
-    font-size: var(--goa-font-size-4);
-    font-family: var(--goa-font-family-sans);
+    border-radius: 4px;
+    color: var(--goa-color-text-default);
+    padding: 0.625rem var(--goa-space-s);
+    font: var(--goa-typography-body-m);
     min-width: 100%;
     resize: vertical;
+    height: auto;
+    background: none;
+  }
+
+  /* Counter */
+  .counter {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.5rem;
+    font-size: var(--goa-font-size-2);
+  }
+  .counter-error {
+    color: var(--goa-color-interactive-error);
+  }
+
+  /* Scrollbar */
+  textarea {
+    resize: none;
+    scroll-behavior: smooth;
+    max-height: calc(100vh * var(--max-height, 100) / 100);
+  }
+  textarea::-webkit-scrollbar {
+    width: 8px;
+  }
+  textarea::-webkit-scrollbar-track {
+    border-radius: var(--goa-border-radius-m);
+  }
+  textarea::-webkit-scrollbar-track:hover {
+    background: var(--goa-color-greyscale-200);
+  }
+  textarea::-webkit-scrollbar-thumb {
+    background: var(--goa-color-greyscale-400);
+    border-radius: var(--goa-border-radius-m);
+  }
+  textarea::-webkit-scrollbar-thumb:hover {
+    background: var(--goa-color-greyscale-600);
   }
 
   @container self (--mobile) {
@@ -208,66 +282,5 @@
       min-width: 0;
       width: var(--width, 100%);
     }
-  }
-
-  textarea[readonly] {
-    cursor: pointer;
-  }
-
-  .root:hover {
-    box-shadow: 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-hover);
-  }
-
-  .root:focus-within {
-    box-shadow: 0 0 0 var(--goa-border-width-l)
-      var(--goa-color-interactive-focus);
-  }
-
-  .counter-error {
-    color: var(--goa-color-interactive-error);
-  }
-
-  .counter {
-    position: absolute;
-    right: 0.75rem;
-    font-size: var(--goa-font-size-2);
-  }
-
-  textarea {
-    resize: none;
-    scroll-behavior: smooth;
-    max-height: calc(100vh * var(--max-height, 100) / 100);
-  }
-
-  textarea::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  textarea::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-
-  textarea::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-
-  textarea::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-
-  .error {
-    border-color: var(--goa-color-interactive-error);
-    box-shadow: 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-error);
-  }
-  .error:hover {
-    box-shadow: 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-error);
-  }
-  .error:active,
-  .error:focus {
-    box-shadow: 0 0 0 var(--goa-border-width-l)
-      var(--goa-color-interactive-focus);
   }
 </style>

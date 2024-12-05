@@ -11,10 +11,10 @@
   const [Types, validateType] = typeValidator(
     "Badge type",
     [
-      "success",
-      "important",
       "information",
+      "important",
       "emergency",
+      "success",
       "dark",
       "midtone",
       "light",
@@ -79,7 +79,7 @@
       arialabel={showIconOnly && arialabel ? arialabel : null}
       role={showIconOnly && arialabel ? "presentation" : null}
       type={iconType}
-      size="small"
+      size="1"
     />
   {:else}
     <div style="height: 1.2rem; margin-left:-0.25rem;" />
@@ -96,15 +96,49 @@
   :host {
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
+
+    /* TODO Badge Component Tokens to move to component tokens file */
+
+    /* Base Tokens */
+    --goa-badge-border-radius: var(--goa-border-radius-m);
+    --goa-badge-padding: 0px var(--goa-space-xs);
+    --goa-badge-gap: var(--goa-space-2xs);
+    --goa-badge-font-size: var(--goa-font-size-2);
+    --goa-badge-line-height: var(--goa-line-height-1);
+    --goa-badge-icon-size: var(--goa-icon-size-1);
+    --goa-badge-border: inset 0 0 var(--goa-border-width-s) 0 rgba(0, 0, 0, 0.5);
+
+    /* Badge Types */
+    --goa-badge-info-color-bg: var(--goa-color-greyscale-100);
+    --goa-badge-info-color-content: var(--goa-color-info-default);
+
+    --goa-badge-success-color-bg: var(--goa-color-success-default);
+    --goa-badge-success-color-content: var(--goa-color-text-light);
+
+    --goa-badge-important-color-bg: var(--goa-color-warning-default);
+    --goa-badge-important-color-content: var(--goa-color-text-default);
+
+    --goa-badge-emergency-color-bg: var(--goa-color-emergency-default);
+    --goa-badge-emergency-color-content: var(--goa-color-text-light);
+
+    --goa-badge-dark-color-bg: var(--goa-color-greyscale-black);
+    --goa-badge-dark-color-content: var(--goa-color-text-light);
+
+    --goa-badge-midtone-color-bg: var(--goa-color-greyscale-700);
+    --goa-badge-midtone-color-content: var(--goa-color-text-light);
+
+    --goa-badge-light-color-bg: var(--goa-color-greyscale-white);
+    --goa-badge-light-color-content: var(--goa-color-text-default);
   }
 
   .goa-badge {
     display: inline-flex;
     align-items: center;
-    border-radius: 0.25rem;
-    padding: 3px 0.5rem; /* is calc(3 / 16 * 1rem) better for scaling? */
-    gap: 0.25rem;
+    border-radius: var(--goa-badge-border-radius);
+    padding: var(--goa-badge-padding);  /* is calc(3 / 16 * 1rem) better for scaling? */
+    gap: var(--goa-badge-gap);
     font-weight: var(--goa-font-weight-regular);
+    /*box-shadow: var(--goa-badge-border);   / inner shadow - new style */
   }
 
   .icon-only {
@@ -112,47 +146,44 @@
   }
 
   .goa-badge-content {
-    font-size: var(--goa-font-size-2);
-    line-height: var(--goa-line-height-1);
+    font-size: var(--goa-badge-font-size);
+    line-height: var(--goa-badge-line-height);
     white-space: nowrap;
-    padding-bottom: var(
-      --font-valign-fix,
-      0
-    ); /* acumin font requires this to allow for vertical alignment  */
+    padding-bottom: 0.2rem; /* acumin font requires this to allow for vertical alignment  */
   }
 
   .goa-badge.badge-information {
-    background-color: var(--goa-color-greyscale-100);
-    color: var(--goa-color-info-default);
+    background-color: var(--goa-badge-info-color-bg);
+    color: var(--goa-badge-info-color-content);
   }
 
   .goa-badge.badge-success {
-    background-color: var(--goa-color-success-default);
-    color: var(--goa-color-text-light);
+    background-color: var(--goa-badge-success-color-bg);
+    color: var(--goa-badge-success-color-content);
   }
 
   .goa-badge.badge-important {
-    background-color: var(--goa-color-warning-default);
-    color: var(--goa-color-text-default);
+    background-color: var(--goa-badge-important-color-bg);
+    color: var(--goa-badge-important-color-content);
   }
 
   .goa-badge.badge-emergency {
-    background-color: var(--goa-color-emergency-default);
-    color: var(--goa-color-text-light);
+    background-color: var(--goa-badge-emergency-color-bg);
+    color: var(--goa-badge-emergency-color-content);
   }
 
   .goa-badge.badge-dark {
-    background-color: var(--goa-color-greyscale-black);
-    color: var(--goa-color-text-light);
+    background-color: var(--goa-badge-dark-color-bg);
+    color: var(--goa-badge-dark-color-content);
   }
 
   .goa-badge.badge-midtone {
-    background-color: var(--goa-color-greyscale-700);
-    color: var(--goa-color-text-light);
+    background-color: var(--goa-badge-midtone-color-bg);
+    color: var(--goa-badge-midtone-color-content);
   }
 
   .goa-badge.badge-light {
-    background-color: var(--goa-color-greyscale-white);
-    color: var(--goa-color-text-default);
+    background-color: var(--goa-badge-light-color-bg);
+    color: var(--goa-badge-light-color-content);
   }
 </style>

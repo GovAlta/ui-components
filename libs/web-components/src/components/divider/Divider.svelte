@@ -16,11 +16,15 @@
 <hr data-testid={testid} style={calculateMargin(mt, mr, mb, ml)} />
 
 <style>
+   :host {
+    /* TODO Component tokens, to move to design tokens file ------------------------------------------------------- */
+    --goa-divider-color: var(--goa-color-greyscale-200);
+  }
   hr {
     padding: 0;
     margin: 0;
     height: 1px;
-    background-color: var(--goa-color-greyscale-200);
+    background-color: var(--goa-divider-color);
     border: none;
   }
 </style>

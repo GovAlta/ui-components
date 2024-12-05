@@ -167,12 +167,7 @@
       position="below"
       open={_open}
     >
-      <button
-        slot="target"
-        style="padding: 0 0.75rem;"
-        class={type}
-        class:current={_hasCurrentLink}
-      >
+      <button slot="target" class={type} class:current={_hasCurrentLink}>
         {#if leadingicon}
           <goa-icon type={leadingicon} mt="1" />
         {/if}
@@ -202,47 +197,62 @@
 </div>
 
 <style>
+  :host {
+    /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+    --goa-app-header-menu: ;
+  }
+
   * {
     font: var(--goa-typography-body-m);
   }
 
-  /* ============= */
-  /* Common        */
-  /* ============= */
-
+  /* Menu item with children */
   button {
-    padding: 0;
+    padding: 16px 12px 12px;
     border: none;
-    background: transparent;
-    outline: none;
     color: var(--goa-color-text-default);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 6px;
+    background: none;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
   }
-
+  /* Menu item with children --Hover, --Active */
   button:active,
-  button:hover,
-  button:focus-within,
-  [slot="target"]:focus-within {
+  button:hover {
     background: var(--goa-color-greyscale-100);
     color: var(--goa-color-interactive-hover);
+    border-top: 4px solid var(--goa-color-greyscale-200);
+    border-bottom: 4px solid transparent;
   }
-
+  /* Menu item with children --Focus */
+  button:focus-visible {
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus) !important;
+    position: relative;
+    z-index: 100;
+    background-color: var(--goa-color-greyscale-100);
+    color: var(--goa-color-interactive-hover);
+    border-top: 4px solid var(--goa-color-greyscale-200);
+    border-bottom: 4px solid transparent;
+  }
+  /* Adds missing border bottom to first item */
+  button.open {
+    border-bottom: 1px solid var(--goa-color-greyscale-200);
+  }
+  /* Menu item with children --Current */
   button.current {
     border-top: 4px solid var(--goa-color-interactive-default);
     border-bottom: 4px solid transparent;
   }
-
+  /* Menu item with children --Current--Hover */
   button.current:hover {
     border-top: 4px solid var(--goa-color-interactive-hover);
+    border-bottom: 4px solid transparent;
   }
 
-  button.open {
-    border-bottom: 1px solid var(--goa-color-greyscale-200);
-  }
-
+  /* Secondary Menu items (in popover on menu item) */
   :global(::slotted(a)),
   :global(::slotted(a:visited)) {
     box-shadow: inset 0 1px 0 0 var(--goa-color-greyscale-200);
@@ -251,53 +261,83 @@
     padding: calc((3rem - var(--goa-line-height-3)) / 2) 1rem;
     text-decoration: none;
   }
-  .not-desktop :global(::slotted(a)) {
-    padding: calc((3rem - var(--goa-line-height-3)) / 2) 2.75rem;
-  }
-
-  :global(::slotted(a:first-child)) {
-    box-shadow: none;
-  }
-
+  /* Secondary Menu items (in popover on menu item) --Hover */
   :global(::slotted(a:hover)) {
     background: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
+    color: var(--goa-color-interactive-hover) !important;
   }
-
+  /* Secondary Menu items (in popover on menu item) --Focus */
+  :global(::slotted(a:focus-visible)) {
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline-offset: -3px;
+    background: var(--goa-color-greyscale-100);
+    color: var(--goa-color-interactive-hover) !important;
+  }
+  /* Secondary Menu items (in popover on menu item) --Current */
   :global(::slotted(a.current)) {
     background-color: var(--goa-color-interactive-default);
   }
-
+  /* Secondary Menu items (in popover on menu item) --Current--Hover */
   :global(::slotted(a.current:hover)) {
     background: var(--goa-color-interactive-hover);
   }
 
-  :global(::slotted(a:focus-visible)) {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    outline-offset: -3px;
-    color: var(--goa-color-interactive-hover);
+  /* Menu items in collapsed menu --Interactive */
+  :global(::slotted(a.interactive)) {
+    color: var(--goa-color-interactive-default) !important;
+    text-decoration: underline !important;
+    white-space: nowrap;
+  }
+  /* Menu items in collapsed menu --Interactive--Hover */
+  :global(::slotted(a.interactive:hover)) {
+    color: var(--goa-color-interactive-hover) !important;
+  }
+  /* Menu items in collapsed menu --Interactive--Focus */
+  :global(::slotted(a.interactive:focus-visible)) {
+    color: var(--goa-color-interactive-hover) !important;
+    background-color: var(--goa-color-greyscale-100);
   }
 
-  :global(::slotted(a.interactive)) {
-    text-decoration: underline;
-    color: var(--goa-color-interactive-default);
+  /* Secondary Menu items (in popover on menu item) --Mobile */
+  .not-desktop :global(::slotted(a)) {
+    padding: calc((3rem - var(--goa-line-height-3)) / 2) 2.75rem;
   }
 
   @media not (--desktop) {
+    /* Menu item with children on mobile */
     button {
       box-shadow: inset 0 1px 0 0 var(--goa-color-greyscale-200);
       height: 3rem;
-      flex: 1 1 auto;
       padding: 0 1rem;
       width: 100%;
+      border-top: none;
+      border-bottom: none;
     }
-
-    button:focus {
-      outline: var(--goa-border-width-l) solid
-        var(--goa-color-interactive-focus);
+    /* Menu item with children on mobile --Hover, --Active */
+    button:active,
+    button:hover, button:focus-visible {
+      background: var(--goa-color-greyscale-100);
+      color: var(--goa-color-interactive-hover);
+      border-top: none;
+      border-bottom: none;
+    }
+    /* Menu item with children on mobile --Focus */
+    button:focus-visible {
+      outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus) !important;
       outline-offset: -3px;
+      border-top: none;
+      border-bottom: none;
     }
-
+    button.open {
+      box-shadow: inset 0 1px 0 0 var(--goa-color-greyscale-200);
+      padding-top: 1px;
+    }
+    button.open:hover, button.open:focus-visible {
+      box-shadow:
+        inset 0 1px 0 0 var(--goa-color-greyscale-200),
+        inset 0 -1px 0 0 var(--goa-color-greyscale-200);
+      padding-top: 0px;
+    }
     .heading {
       /* prevent the menu text from line breaking too early */
       flex: 0 0 auto;
@@ -307,13 +347,11 @@
   @media (--desktop) {
     button[slot="target"] {
       font-weight: var(--goa-font-weight-bold);
-      /* ensures that the button spans 100% of the height of the desktop app header bar */
-      height: 4rem;
       white-space: nowrap;
     }
-
     button.secondary {
       font-weight: var(--goa-font-weight-regular);
     }
   }
+
 </style>

@@ -40,6 +40,14 @@
 <!-- Style -->
 <style>
   :host {
+  /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+  --goa-hero-banner-padding: var(--goa-space-2xl) 0;
+  --goa-hero-banner-mobile-padding: var(--goa-space-xl) 0;
+  --goa-hero-banner-content-gap: var(--goa-space-l) 0 0;
+  --goa-hero-banner-heading: var(--goa-typography-heading-xl);
+  --goa-hero-banner-content: var(--goa-typography-body-l);
+  /*  ------------------------------------------------------- */
+
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
@@ -52,12 +60,12 @@
     color: var(--hero-banner-text-color, var(--goa-color-text-default));
     background-position: center center;
     width: 100%;
-    padding: var(--goa-space-2xl) 0;
+    padding: var(--goa-hero-banner-padding);
   }
 
   @media (--mobile) {
     .goa-hero {
-      padding: var(--goa-space-xl) 0;
+      padding: var(--goa-hero-banner-mobile-padding);
     }
   }
 
@@ -67,7 +75,7 @@
     background: unset;
     background-image: linear-gradient(
         rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.4) 40%,
+        rgba(0, 0, 0, 0.42) 42%,
         rgba(0, 0, 0, 0.6) 100%
       ),
       var(--hero-background-url);
@@ -78,16 +86,16 @@
   }
 
   h1 {
-    font: var(--goa-typography-heading-xl);
+    font: var(--goa-hero-banner-heading);
     margin: 0;
   }
 
   .goa-hero-banner-content {
-    font: var(--goa-typography-body-l);
-    margin: var(--goa-space-l) 0 0;
+    font: var(--goa-hero-banner-content);
+    margin: var(--goa-hero-banner-content-gap);
   }
 
   .goa-hero-banner-actions {
-    margin: var(--goa-space-l) 0 0;
+    margin: var(--goa-hero-banner-content-gap);
   }
 </style>

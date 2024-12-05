@@ -223,6 +223,18 @@
 
 <style>
   :host {
+
+    /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+
+    --goa-tooltip-color-bg: var(--goa-color-greyscale-700);
+    --goa-tooltip-border-radius: var(--goa-border-radius-m);
+    --goa-tooltip-padding: 6px var(--goa-space-m) 10px var(--goa-space-m); /* not using all global variables to vertically center our text (vertical allignment issue with text) */
+    --goa-tooltip-text-size: var(--goa-typography-body-m);
+    --goa-tooltip-color-text: var(--goa-color-text-light);
+    --goa-tootip-max-width: 400px;
+    --goa-tooltip-gap: var(--goa-space-2xs);
+    --goa-tooltip-border-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
@@ -234,18 +246,24 @@
     align-items: center;
   }
 
+  .tooltip:focus-visible {
+    outline: var(--goa-tooltip-border-focus);
+    outline-offset: -4px;
+    border-radius: 8px;
+  }
+
   .tooltip-text {
     visibility: hidden;
-    font: var(--goa-typography-body-m);
-    background-color: var(--goa-color-greyscale-700);
-    color: var(--goa-color-text-light);
+    font: var(--goa-tooltip-text-size);
+    background-color: var(--goa-tooltip-color-bg);
+    color: var(--goa-tooltip-color-text);
     text-align: center;
-    border-radius: var(--goa-border-radius-m);
+    border-radius: var(--goa-tooltip-border-radius);
     position: absolute;
     z-index: 2;
     opacity: 0;
     transition: opacity 0.3s;
-    padding: var(--goa-space-m);
+    padding: var(--goa-tooltip-padding);
     text-align: left;
     white-space: nowrap;
     display: flex;
@@ -253,7 +271,9 @@
   }
 
   .tooltip-target {
-    margin: 4px;
+    margin: var(--goa-tooltip-gap);
+    height: auto;
+    display: flex;
   }
 
   .tooltip-text.bottom {
@@ -287,36 +307,36 @@
   }
 
   .tooltip-text.bottom::before {
-    top: -10px;
+    top: -9px;
     left: 50%;
     border-width: 0 10px 10px 10px;
     transform: translateX(-50%);
-    border-color: transparent transparent var(--goa-color-greyscale-700)
+    border-color: transparent transparent var(--goa-tooltip-color-bg)
       transparent;
   }
   .tooltip-text.top::before {
-    bottom: -10px;
+    bottom: -9px;
     left: 50%;
     transform: translateX(-50%);
     border-width: 10px 10px 0 10px;
-    border-color: var(--goa-color-greyscale-700) transparent transparent
+    border-color: var(--goa-tooltip-color-bg) transparent transparent
       transparent;
   }
   .tooltip-text.left::before {
     top: 50%;
-    right: -10px;
+    right: -9px;
     transform: translateY(-50%);
     border-width: 10px 0 10px 10px;
     border-color: transparent transparent transparent
-      var(--goa-color-greyscale-700);
+      var(--goa-tooltip-color-bg);
   }
   .tooltip-text.right::before {
     top: 50%;
-    left: -10px;
+    left: -9px;
     transform: translateY(-50%);
     border-width: 10px 10px 10px 0;
     border-style: solid;
-    border-color: transparent var(--goa-color-greyscale-700) transparent
+    border-color: transparent var(--goa-tooltip-color-bg) transparent
       transparent;
   }
 

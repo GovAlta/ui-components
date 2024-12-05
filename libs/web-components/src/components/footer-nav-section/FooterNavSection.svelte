@@ -36,7 +36,7 @@
 <section bind:this={rootEl} data-testid={testid}>
   {#if heading}
     <div class="title">{heading}</div>
-    <goa-divider spacing="small" />
+    <goa-divider mb="l" />
   {/if}
 
   <div class="hidden">
@@ -61,14 +61,20 @@
 <!-- Styles -->
 <style>
   :host {
+    /* TODO Component tokens, to move to design tokens file ------------------------------------------------------- */
+
+    --goa-footer-color-links: var(--goa-color-text-default);
+    --goa-footer-color-links-hover: var(--goa-color-greyscale-700);
+    --goa-footer-link-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+
     /* The flex-grow is set via code above  */
     flex: auto;
   }
 
   .title {
-    font-size: var(--goa-font-size-7);
-    line-height: var(--goa-line-height-4);
-    padding-bottom: var(--goa-space-l);
+    font: var(--goa-typography-heading-s);
+    padding-bottom: var(--goa-space-m);
+    color: var(--goa-color-greyscale-800);
   }
 
   .hidden {
@@ -76,9 +82,12 @@
   }
 
   .links {
-    display: block;
+    display: flex;
+    flex-direction: column;
     list-style-type: none;
     padding-left: 0;
+    margin: 0;
+    gap: 12px; /* spacing between links on mobile */
   }
 
   @media not (--mobile) {
@@ -86,6 +95,10 @@
       list-style-type: none;
       padding-left: 0;
       flex-direction: column;
+    }
+    .title {
+    font: var(--goa-typography-heading-m);
+    padding-bottom: var(--goa-space-l);
     }
   }
 
@@ -103,11 +116,19 @@
     }
   }
 
-  li {
-    padding: 0.75rem 0;
-  }
+
 
   a {
-    color: var(--goa-color-text-default);
+    color: var(--goa-footer-color-links);
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: var(--goa-footer-color-links-hover);
+  }
+
+  a:focus-visible {
+    outline: var(--goa-footer-link-focus);
+    border-radius: 2px;
   }
 </style>

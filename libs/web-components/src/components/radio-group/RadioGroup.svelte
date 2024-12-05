@@ -175,16 +175,25 @@
 </div>
 
 <style>
-  :host {
-    box-sizing: border-box;
+
+:host {
+    /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+
+    --goa-radio-group-gap-horizontal: var(--goa-space-l);
+    --goa-radio-group-gap-vertical: var(--goa-space-m);
+
     font-family: var(--goa-font-family-sans);
   }
+
   .goa-radio-group--horizontal {
     display: flex;
     flex-direction: row;
+    gap: var(--goa-radio-group-gap-horizontal);
   }
 
   .goa-radio-group--vertical {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column; /* Vertical stacking */
+    gap: var(--goa-radio-group-gap-vertical); /* Adds spacing */
   }
 </style>

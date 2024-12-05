@@ -47,7 +47,7 @@
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
-  export let mb: Spacing = "m";
+  export let mb: Spacing = null;
   export let ml: Spacing = null;
 
   let _radioItemEl: HTMLElement;
@@ -160,13 +160,49 @@
 </div>
 
 <style>
+
+:host {
+    /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+    --goa-radio-size: var(--goa-space-l);
+    --goa-radio-border-radius: 50%;
+
+    --goa-radio-label: var(--goa-typography-body-m);
+    --goa-radio-label-color-disabled: var(--goa-color-greyscale-500);
+    --goa-radio-description: var(--goa-typography-body-xs);
+
+    --goa-radio-border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
+    --goa-radio-border-hover: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
+    --goa-radio-border-error: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
+    --goa-radio-border-error-hover: var(--goa-border-width-m) solid #ba0000;
+    --goa-radio-border-error-disabled: var(--goa-border-width-m) solid #f58185;
+    --goa-radio-border-disabled: var(--goa-border-width-s) solid var(--goa-color-greyscale-400);
+
+    --goa-radio-border-checked: 7px solid var(--goa-color-interactive-default);
+    --goa-radio-border-checked-hover: 7px solid var(--goa-color-interactive-hover);
+    --goa-radio-border-checked-error: 7px solid var(--goa-color-interactive-error);
+    --goa-radio-border-checked-error-hover: 7px solid #ba0000;
+    --goa-radio-border-checked-error-disabled: 7px solid #f58185;
+    --goa-radio-border-checked-disabled: 7px solid var(--goa-color-interactive-disabled);
+
+    --goa-radio-border-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+
+    --goa-radio-color-bg: var(--goa-color-greyscale-white);
+    --goa-radio-: var(--goa-color-greyscale-100);
+
+}
+
+  .goa-radio {
+    display: inline-flex;
+  }
+
   label.goa-radio {
-    --goa-radio-outline-width: 3px;
-    --goa-radio-diameter: 1.5rem;
-    --goa-radio-border-width: 1px;
-    --goa-radio-border-width--checked: 7px;
     box-sizing: border-box;
+    display: inline-flex;
+  }
+
+  .goa-radio-container {
     display: flex;
+    flex-direction: column;
   }
 
   .goa-radio:hover {
@@ -181,28 +217,29 @@
 
   .goa-radio input[type="radio"] {
     width: 0;
-    height: 0;
+    min-height: 28px;
     margin: 0;
     opacity: 0;
   }
 
   .goa-radio-label {
-    padding: 0 var(--goa-space-xl) 0 var(--goa-space-xs);
-    font-weight: var(--goa-font-weight-regular);
+    padding: 0 var(--goa-space-xs);
+    font: var(--goa-radio-label);
   }
 
   .goa-radio-description {
-    font: var(--goa-typography-body-xs);
+    font: var(--goa-radio-description);
     margin-left: var(--goa-space-xl);
     margin-top: var(--goa-space-2xs);
+    color: var(--goa-color-text-default);
   }
 
   .goa-radio-icon {
     display: inline-block;
-    height: var(--goa-radio-diameter);
-    width: var(--goa-radio-diameter);
-    border-radius: 50%;
-    background-color: #fff;
+    height: var(--goa-radio-size);
+    width: var(--goa-radio-size);
+    border-radius: var(--goa-radio-border-radius);
+    background-color: var(--goa-radio-color-bg);
     transition: box-shadow 100ms ease-in-out;
 
     /* prevent squishing of radio button */
@@ -210,87 +247,86 @@
     margin-top: var(--font-valign-fix);
   }
 
-  .goa-radio--disabled .goa-radio-label {
-    opacity: 0.4;
+  .goa-radio--disabled .goa-radio-label,
+  .goa-radio--disabled ~ .goa-radio-description {
+    color: var(--goa-radio-label-color-disabled);
   }
-
   .goa-radio--disabled:hover {
     cursor: default;
   }
 
-  /* States */
+  /* States --------------------------------------------- */
 
   /* Default */
   input[type="radio"]:not(:checked) ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width) solid var(--goa-color-greyscale-700);
+    border: var(--goa-radio-border);
+    margin-top: 3px;
   }
-
   /* Default:hover */
   input[type="radio"]:hover ~ .goa-radio-icon {
-    border: 1px solid var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 1px var(--goa-color-interactive-hover);
+    border: var(--goa-radio-border-hover);
   }
-
-  /* Checked:hover */
-  input[type="radio"]:checked:hover ~ .goa-radio-icon {
-    border: 7px solid var(--goa-color-interactive-hover);
-    box-shadow: 0 0 0 1px var(--goa-color-interactive-hover);
-  }
-
   /* Default:focus */
-  input[type="radio"]:focus ~ .goa-radio-icon,
-  input[type="radio"]:hover:active ~ .goa-radio-icon,
-  input[type="radio"]:hover:focus ~ .goa-radio-icon,
-  input[type="radio"]:active ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width)
-      var(--goa-color-interactive-focus);
+  input[type="radio"]:focus-visible ~ .goa-radio-icon,
+  input[type="radio"]:hover:focus-visible ~ .goa-radio-icon {
+    outline: var(--goa-radio-border-focus);
+  }
+  /* Default:hover+focus */
+  input[type="radio"]:hover:focus-visible ~ .goa-radio-icon {
+    border: var(--goa-radio-border);
   }
 
   /* Checked */
   input[type="radio"]:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid
-      var(--goa-color-interactive-default);
+    border: var(--goa-radio-border-checked);
+    margin-top: 3px;
+  }
+  /* Checked:hover */
+  input[type="radio"]:checked:hover ~ .goa-radio-icon {
+    border: var(--goa-radio-border-checked-hover);
+  }
+  /* Checked:hover+focus */
+  input[type="radio"]:checked:hover:focus-visible ~ .goa-radio-icon {
+    border: var(--goa-radio-border-checked);
   }
 
   /* Disabled */
   input[type="radio"]:disabled ~ .goa-radio-icon,
-  input[type="radio"]:disabled:focus ~ .goa-radio-icon,
-  input[type="radio"]:disabled:active ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width) solid var(--goa-color-greyscale-700);
-    box-shadow: none;
-    opacity: 40%;
+  input[type="radio"]:disabled:focus-visible ~ .goa-radio-icon {
+    border: var(--goa-radio-border-disabled);
   }
-
-  /* Disabled and checked */
   input[type="radio"]:disabled:checked ~ .goa-radio-icon,
-  input[type="radio"]:disabled:checked:focus ~ .goa-radio-icon,
-  input[type="radio"]:disabled:checked:active ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid
-      var(--goa-color-interactive-hover);
-    box-shadow: none;
+  input[type="radio"]:disabled:checked:focus-visible ~ .goa-radio-icon {
+    border: var(--goa-radio-border-checked-disabled);
   }
 
   /* Error */
-  .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon,
-  .goa-radio--error input[type="radio"]:disabled:checked ~ .goa-radio-icon {
-    border: 7px solid var(--goa-color-emergency-default);
+  .goa-radio--error input[type="radio"] ~ .goa-radio-icon {
+    border: var(--goa-radio-border-error);
   }
-
   .goa-radio--error input[type="radio"]:hover ~ .goa-radio-icon {
-    box-shadow: 0 0 0 1px var(--goa-color-emergency-default);
+    border: var(--goa-radio-border-error-hover);
   }
-
-  .goa-radio--error input[type="radio"]:hover:active ~ .goa-radio-icon,
-  .goa-radio--error input[type="radio"]:hover:focus ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width)
-      var(--goa-color-interactive-focus);
+  .goa-radio--error input[type="radio"]:hover:focus-visible ~ .goa-radio-icon {
+    outline: var(--goa-radio-border-focus);
+    border: var(--goa-radio-border-error);
   }
-
-  .goa-radio--error input[type="radio"]:disabled:hover ~ .goa-radio-icon {
-    box-shadow: none;
+  .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon{
+    border: var(--goa-radio-border-checked-error);
   }
-
-  .goa-radio--error input[type="radio"]:not(:checked) ~ .goa-radio-icon {
-    border: 2px solid var(--goa-color-emergency-default);
+  .goa-radio--error input[type="radio"]:checked:hover ~ .goa-radio-icon {
+    border: var(--goa-radio-border-checked-error-hover);
+  }
+  .goa-radio--error input[type="radio"]:checked:hover:focus-visible ~ .goa-radio-icon {
+    outline: var(--goa-radio-border-focus);
+     border: var(--goa-radio-border-checked-error);
+  }
+  .goa-radio--error input[type="radio"]:disabled ~ .goa-radio-icon {
+    border: var(--goa-radio-border-error-disabled);
+  }
+  .goa-radio--error input[type="radio"]:disabled:checked ~ .goa-radio-icon {
+    border: var(--goa-radio-border-checked-error-disabled);
   }
 </style>
+
+

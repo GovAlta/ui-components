@@ -54,7 +54,7 @@
     aria-controls={`${_detailsId}-content`}
   >
     <goa-icon
-      mt="1"
+      mt="2"
       mr="2"
       type="chevron-forward"
       fillcolor={_isMouseOver
@@ -75,7 +75,34 @@
 
 <style>
   :host {
-    font-family: var(--goa-font-family-sans);
+  /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+    --goa-details-max-width: 0px;
+    --goa-details-border-radius: var(--goa-border-radius-m);  /* 4px */
+    --goa-details-margin-bottom: var(--goa-space-xs);
+
+    --goa-details-typography: var(--goa-typography-body-m);
+    --goa-details-text-decoration: underline;
+    --goa-details-text-color: var(--goa-color-interactive-default);
+    --goa-details-text-color-hover: var(--goa-color-interactive-hover);
+    --goa-details-padding-top: 6px;
+    --goa-details-padding-right: var(--goa-space-s);
+    --goa-details-padding-bottom: var(--goa-space-xs);
+    --goa-details-padding-left: var(--goa-space-xs);
+    --goa-details-hover-color-bg: var(--goa-color-greyscale-100);
+
+    --goa-details-content-left-border: 4px solid var(--goa-color-greyscale-200);
+    --goa-details-content-padding-top: var(--goa-space-s);
+    --goa-details-content-padding-right: var(--goa-space-m);
+    --goa-details-content-padding-bottom: var(--goa-space-s);
+    --goa-details-content-padding-left: 19px;
+    --goa-details-content-margin-left: 17px;
+
+    --goa-details-focus-border: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+
+  /*  ------------------------------------------------------- */
+
+
+    font-family: var(--goa-font-family-serif); /* do we need this? If we wanted to make a typeface change globally, this would need to be overriden */
   }
 
   details {
@@ -85,52 +112,63 @@
     font: var(--goa-typography-body-m);
   }
   details[open] goa-icon {
-    transform: translateX(-1px) rotate(90deg);
-    top: 0.75rem;
+    transform: translateX(-1px) translateY(-0px) rotate(90deg);
+    margin-top: var(--goa-space-2xs);
   }
   /* Hide native icon on iOS */
   details summary::-webkit-details-marker {
     display: none;
   }
 
+  /* Summary is the detail heading */
+
   summary {
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
+    padding-top: var(--goa-details-padding-top);
+    padding-right: var(--goa-details-padding-right);
+    padding-left: var(--goa-details-padding-left);
+    padding-bottom: var(--goa-details-padding-bottom);
+    margin-bottom: var(--goa-details-margin-bottom);
     cursor: pointer;
     list-style: none;
     display: flex;
     align-items: flex-start;
-    border-radius: var(--goa-border-radius-m);
+    border-radius: var(--goa-details-border-radius); /* 4px */
   }
   summary:focus-visible {
-    outline: 3px solid var(--goa-color-interactive-focus);
+    outline: var(--goa-details-focus-border);
+    color: var(--goa-color-interactive-hover);
+
   }
   summary:focus,
   summary:active {
-    border-radius: var(--goa-border-radius-m);
+    border-radius: var(--goa-details-border-radius);
     color: var(--goa-color-interactive-hover);
-    background-color: var(--goa-color-greyscale-100);
+    background-color: var(--goa-details-hover-color-bg);
   }
   summary:hover {
-    background-color: var(--goa-color-greyscale-100);
+    background-color: var(--goa-details-hover-color-bg);
   }
 
   summary span {
-    margin-left: 2rem;
-    text-decoration: underline;
-    color: var(--goa-color-interactive-default);
-    padding-bottom: var(--font-valign-fix);
-    line-height: var(--goa-line-height-3);
+    margin-left: var(--goa-space-xl);
+    text-decoration: var(--goa-details-text-decoration);
+    color: var(--goa-details-text-color);
+    font: var(--goa-details-typeface);
   }
   summary:hover span {
-    color: var(--goa-color-interactive-hover);
+    color: var(--goa-details-text-color-hover);
   }
 
+  /* Content is the expanded content */
+
   .content {
-    border-left: 4px solid var(--goa-color-greyscale-200);
-    padding: 1rem;
-    margin-left: 1.1rem;
-    margin-bottom: var(--goa-space-s);
+    border-left: var(--goa-details-content-left-border);
+    padding-left: var(--goa-details-content-padding-left);
+    padding-top: var(--goa-details-content-padding-top);
+    padding-bottom: var(--goa-details-content-padding-bottom);
+    padding-right: var(--goa-details-content-padding-right);
+    margin-left: var(--goa-details-content-margin-left);
+    margin-bottom: var(--goa-details-margin-bottom);
   }
   .content :global(::slotted(p:last-child)) {
     margin-bottom: 0 !important;

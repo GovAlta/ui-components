@@ -140,6 +140,24 @@
   :host {
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
+
+    /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+    --goa-form-item-label-typography: var(--goa-typography-heading-s);
+    --goa-form-item-label-padding-bottom: var(--goa-space-s);
+
+    --goa-form-item-label-large-typography: var(--goa-typography-heading-l);
+    --goa-form-item-label-large-padding-bottom: var(--goa-space-m);
+
+    --goa-form-item-optional-label-typography: var(--goa-typography-body-xs);
+    --goa-form-item-optional-label-color: var(--goa-color-greyscale-700);
+
+    --goa-form-item-message-typography: var(--goa-typography-body-xs);
+    --goa-form-item-message-margin-top: var(--goa-space-s);
+    --goa-form-item-message-gap: var(--goa-space-2xs);
+
+    --goa-form-item-error-message-color: var(--goa-color-interactive-error);
+    --goa-form-item-help-message-color: var(--goa-color-text-default);
+
   }
 
   * {
@@ -148,27 +166,28 @@
 
   .label {
     display: block;
-    font: var(--goa-typography-heading-s);
-    padding-bottom: var(--goa-space-xs);
+    font: var(--goa-form-item-label-typography);
+    padding-bottom: var(--goa-form-item-label-padding-bottom);
   }
 
   .label.large {
-    font: var(--goa-typography-heading-l);
-    padding-bottom: var(--goa-space-s);
+    font: var(--goa-form-item-label-large-typography);
+    padding-bottom: var(--goa-form-item-label-large-padding-bottom);
   }
 
   .label em {
-    font: var(--goa-typography-body-xs);
-    color: var(--goa-color-greyscale-700);
+    font: var(--goa-form-item-optional-label-typography);
+    color: var(--goa-form-item-optional-label-color);
+    margin-left: var(--goa-space-2xs); /* Space between label and requirement */
   }
 
   .error-msg {
     display: flex;
     align-items: flex-start;
     gap: var(--goa-space-2xs);
-    font: var(--goa-typography-body-xs);
-    color: var(--goa-color-interactive-error);
-    margin-top: var(--goa-space-s);
+    font: var(--goa-form-item-message-typography);
+    color: var(--goa-form-item-error-message-color);
+    margin-top: var(--goa-form-item-message-margin-top);
   }
 
   .error-msg goa-icon {
@@ -176,12 +195,12 @@
   }
 
   .help-msg {
-    font: var(--goa-typography-body-xs);
-    color: var(--goa-color-text-default);
-    margin-top: var(--goa-space-s);
+    font: var(--goa-form-item-message-typography);
+    color: var(--goa-form-item-help-message-color);
+    margin-top: var(--goa-form-item-message-margin-top);
   }
 
   .error-msg + .help-msg {
-    margin-top: var(--goa-space-xs);
+    margin-top: var(--goa-form-item-message-gap);
   }
 </style>

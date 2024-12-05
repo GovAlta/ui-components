@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-icon" />
 
 <script lang="ts" context="module">
-  export type IconSize = "small" | "medium" | "large" | "xlarge";
+  export type IconSize = "1" | "2" | "3" | "4" | "5" | "6" | "2xsmall" | "xsmall" | "small" | "medium" | "large" | "xlarge";
   export type IconVariant = "primary" | "secondary" | "tertiary";
   export type IconTheme = "outline" | "filled" | "sharp";
 
@@ -625,6 +625,14 @@
   :host {
     display: inline-flex;
     align-items: center;
+
+    /* TODO tokens to move to global tokens ---------------------------- */
+    --goa-icon-size-1: 1rem; /* 16px */
+    --goa-icon-size-2: 1.125rem; /* 18px */
+    --goa-icon-size-3: 1.25rem; /* 20px */
+    --goa-icon-size-4: 1.5rem; /* 24px */
+    --goa-icon-size-5: 2rem; /* 32px */
+    --goa-icon-size-6: 2.5rem; /* 40px */
   }
 
   ion-icon {
@@ -640,6 +648,51 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+
+
+  /* new icon sizes */
+
+  .goa-icon--1 {
+    width: var(--goa-icon-size-1);
+    height: var(--goa-icon-size-1);
+  }
+
+  .goa-icon--2 {
+    width: var(--goa-icon-size-2);
+    height: var(--goa-icon-size-2);
+  }
+
+  .goa-icon--3 {
+    width: var(--goa-icon-size-3);
+    height: var(--goa-icon-size-3);
+  }
+
+  .goa-icon--4 {
+    width: var(--goa-icon-size-4);
+    height: var(--goa-icon-size-4);
+  }
+
+  .goa-icon--5 {
+    width: var(--goa-icon-size-5);
+    height: var(--goa-icon-size-5);
+  }
+
+  .goa-icon--6 {
+    width: var(--goa-icon-size-6);
+    height: var(--goa-icon-size-6);
+  }
+
+  /* old icon sizes (deprecate? - misaligned with tokens) */
+
+  .goa-icon--2xsmall {
+    width: var(--goa-icon-size-s);
+    height: var(--goa-icon-size-s);
+  }
+
+  .goa-icon--xsmall {
+    width: 18px;
+    height: 18px;
   }
 
   .goa-icon--small {
@@ -671,7 +724,7 @@
   }
 
   .inverted * {
-    color: #fff;
-    fill: #fff;
+    color: var(--goa-color-greyscale-white);
+    fill: var(--goa-color-greyscale-white);
   }
 </style>

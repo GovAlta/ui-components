@@ -64,7 +64,7 @@
       initDate();
     }
   });
-  
+
   function addRelayListener() {
     receive(_rootEl, (action, data) => {
       switch (action) {
@@ -224,6 +224,7 @@
     readonly="true"
     trailingicon="calendar"
     value={formatDate(_date)}
+    width="232px"
     {error}
     on:click={showCalendar}
     on:keydown={handleKeyDown}

@@ -53,7 +53,7 @@
 
   // additional horizontal offset that is added to popover's position
   export let hoffset = "";
- 
+
   // width of outline seen when focused
   export let focusborderwidth = "var(--goa-border-width-l)";
 
@@ -231,8 +231,8 @@
     style("--offset-right", hoffset),
     style("--focus-border-width", focusborderwidth),
     style("--border-radius", borderradius),
-    style("width", width),
-  )}
+    style("width", width)
+      )}
 >
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -265,7 +265,7 @@
           style("width", width),
           style("min-width", minwidth),
           style("max-width", maxwidth),
-          style("padding", _padded ? "var(--goa-space-m)" : "0"),
+          style("padding", _padded ? "var(--goa-space-m)" : "0")
         )}
       >
         <goa-focus-trap open="true">
@@ -282,20 +282,29 @@
 
 <style>
   :host {
+    /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+
+    --goa-popover-border-radius: var(--goa-border-radius-m);
+    --goa-popover-padding: var(--goa-space-s);
+    --goa-popover-color-bg: var(--goa-color-greyscale-white);
+    --goa-popover-shadow: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.25));
+
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
-    font-size: var(--goa-font-size-4);
+    font: var(--goa-typography-body-m);
     display: flex;
     align-items: center;
+    height: 100%;
   }
 
   .popover-target {
     cursor: pointer;
     height: 100%;
+   /* outline: none; -> hides second blue focus, need to update tab index (-1) to skip focus */
   }
 
   .popover-target:has(:focus-visible) {
-    outline: var(--focus-border-width) solid var(--goa-color-interactive-focus);
+    outline: var(--goa-border-radius-l) solid var(--goa-color-interactive-focus);
     outline: none;
   }
 
@@ -304,17 +313,17 @@
     position: absolute;
     width: fit-content;
     list-style-type: none;
-    background: var(--goa-color-greyscale-white);
-    border-radius: var(--border-radius);
+    background: var(--goa-popover-color-bg);
+    border-radius: var(--goa-popover-border-radius);
     outline: none;
-    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
+    filter: var(--goa-popover-shadow);
     z-index: 99;
     width: max-content;
-
     margin-top: var(--offset-top, 3px);
     margin-bottom: var(--offset-bottom, 3px);
     margin-left: var(--offset-left, 0);
     margin-right: var(--offset-right, 0);
+    /* overflow: hidden; */
   }
 
   :global(::slotted(ul)) {
@@ -330,5 +339,6 @@
     position: fixed;
     z-index: 98;
     inset: 0;
+    height: 100%;
   }
 </style>

@@ -56,9 +56,9 @@
 </script>
 
 <!-- HTML -->
-<div 
+<div
   id="container"
-  data-testid={testid} 
+  data-testid={testid}
   style={calculateMargin(mt, mr, mb, ml)}>
   {#if type === "card"}
     <div class="card card-{size}" style="--max-width: {maxwidth};">
@@ -103,14 +103,19 @@
 <!-- Style -->
 <style>
   :host {
+
+    /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+    --goa-skeleton-loading-color-bg: var(--goa-color-greyscale-100);
+
+
+
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
 
   #container {
-    container: self / inline-size;
   }
-  
+
   @keyframes pulse {
     0% {
       opacity: 0.5;
@@ -123,8 +128,8 @@
     }
   }
 
-  .skeleton {
-    background-color: var(--goa-color-greyscale-100);
+  .skeleton {  /* main styling for all skeleton types */
+    background-color: var(--goa-skeleton-loading-color-bg);
     animation: pulse 2s infinite ease-in-out;
     overflow: hidden;
     margin: 10px 0;
@@ -132,7 +137,7 @@
 
   .image,
   .image-1 {
-    background-color: var(--goa-color-greyscale-100);
+    background-color: var(--goa-skeleton-loading-color-bg);
     flex: 1 1 100px;
     height: 100px;
     margin: 0;
@@ -153,7 +158,7 @@
   .text-3,
   .text-4 {
     width: 100%;
-    height: 0.75rem;
+    height: 12px;
     border-radius: 0.25rem;
     margin: 6px 0;
   }
@@ -277,7 +282,6 @@
   }
 
   .card {
-    display: inline-block;
   }
   .card,
   .card-1,
@@ -290,7 +294,7 @@
 
   @container self (--mobile) {
     .card {
-      width: 100%;
+      width: 300px;
     }
   }
   @container self (--not-mobile) {
@@ -310,10 +314,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 1rem;
   }
+
   .profile-1 {
     max-width: 280px;
-    gap: 1rem;
   }
   .profile-2 {
     max-width: 360px;
