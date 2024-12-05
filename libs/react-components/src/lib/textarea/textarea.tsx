@@ -10,6 +10,7 @@ interface WCProps extends Margins {
   placeholder?: string;
   rows?: number;
   error?: boolean;
+  readOnly?: boolean;
   disabled?: boolean;
   width?: string;
   maxwidth?: string;
@@ -35,6 +36,7 @@ export interface GoATextAreaProps extends Margins {
   placeholder?: string;
   rows?: number;
   error?: boolean;
+  readOnly?: boolean;
   disabled?: boolean;
   width?: string;
   maxWidth?: string;
@@ -52,6 +54,7 @@ export function GoATextarea({
   value,
   placeholder,
   rows,
+  readOnly,
   disabled,
   countBy,
   maxCount,
@@ -108,6 +111,7 @@ export function GoATextarea({
       placeholder={placeholder}
       value={value}
       rows={rows}
+      readOnly={readOnly}
       disabled={disabled}
       countby={countBy}
       maxcount={maxCount}

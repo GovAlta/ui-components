@@ -11,6 +11,7 @@ describe("TextArea", () => {
         value="textarea-value"
         rows={10}
         placeholder="textarea-placeholder"
+        readOnly={true}
         disabled={true}
         countBy="word"
         maxCount={50}
@@ -30,6 +31,7 @@ describe("TextArea", () => {
     expect(el.getAttribute("value")).toBe("textarea-value");
     expect(el.getAttribute("rows")).toBe("10");
     expect(el.getAttribute("placeholder")).toBe("textarea-placeholder");
+    expect(el.getAttribute("readonly")).toBe("true");
     expect(el.getAttribute("disabled")).toBe("true");
     expect(el.getAttribute("countby")).toBe("word");
     expect(el.getAttribute("maxcount")).toBe("50");
@@ -52,6 +54,7 @@ describe("TextArea", () => {
         countBy="word"
         rows={10}
         placeholder="textarea-placeholder"
+        readOnly={true}
         disabled={true}
         onChange={(name: string, value: string) => {
           expect(name).toBe("textarea-name");
