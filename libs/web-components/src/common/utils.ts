@@ -217,3 +217,9 @@ export function clamp(value: number, min: number, max: number): number {
 export function generateRandomId() {
   return `${Math.random().toString(36).substring(2, 9)}`;
 }
+
+export function ensureSlotExists(el: HTMLElement) {
+  if (!el.querySelector("slot")) {
+    el.appendChild(document.createElement("slot"));
+  }
+}
