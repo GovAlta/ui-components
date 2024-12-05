@@ -19,8 +19,10 @@ describe("TextArea", () => {
         mr="m"
         mb="l"
         ml="xl"
-        onChange={() => { /* do nothing */ }}
-      />
+        onChange={() => {
+          /* do nothing */
+        }}
+      />,
     );
 
     const el = document.querySelector("goa-textarea");
@@ -56,7 +58,7 @@ describe("TextArea", () => {
           expect(value).toBe(newValue);
           onChange();
         }}
-      />
+      />,
     );
 
     const el = document.querySelector("goa-textarea");
@@ -65,7 +67,7 @@ describe("TextArea", () => {
       el,
       new CustomEvent("_change", {
         detail: { name: "textarea-name", value: newValue },
-      })
+      }),
     );
 
     expect(onChange).toBeCalled();
