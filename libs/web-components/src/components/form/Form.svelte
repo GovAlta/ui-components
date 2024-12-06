@@ -226,9 +226,13 @@
    * @param detail Contains the child fieldset to bind
    */
   function onFieldsetBind(detail: FieldsetBindRelayDetail) {
+    // save the fieldsets to allow for later sending of messages
     _fieldsets = { ..._fieldsets, [detail.id]: detail };
     console.debug("Form:onFieldsetBind", name, "---", _fieldsets);
 
+    // register the form items to ensure that all fieldsets are accessible within the form-summary
+    _state.form[detail.id] = { heading: detail.heading };
+    
     // send the back url to child fieldsets, howwever only the first will need it
     if (backUrl) {
       relay<FormBackUrlDetail>(detail.el, FormBackUrlMsg, { url: backUrl });
@@ -244,7 +248,6 @@
         // mark the first fieldset as active
         const [id] = Object.entries(_fieldsets)[0];
         _state.history.push(id);
-        console.log("   History", _state.history);
         sendToggleActiveStateMsg(id);
       }
     });

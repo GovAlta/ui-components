@@ -11,7 +11,7 @@ export type FormState = {
 
 export type FieldsetData = {
   heading: string;
-  data: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
+  data?: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
 };
 
 // ====

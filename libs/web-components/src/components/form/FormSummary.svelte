@@ -99,6 +99,7 @@
           {#if _state.form[page]}
             <table class="data">
               {#if Array.isArray(_state.form?.page)}
+                it's an array
                 {#each getDataList(_state, page) as [_key, item]}
                   {#each item as [_key, data]}
                     <tr>
@@ -108,6 +109,7 @@
                   {/each}
                 {/each}
               {:else}
+                it's not an array
                 {#each getData(_state, page) as [_key, data]}
                   <tr>
                     <td class="label">{data.label}</td>
