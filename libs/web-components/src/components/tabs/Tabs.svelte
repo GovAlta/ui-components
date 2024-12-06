@@ -41,14 +41,17 @@
 
     // Find the matching tab based on href
     const tabs = _tabsEl?.querySelectorAll('[role="tab"]');
-    if (!tabs) return null;
 
     for (let i = 0; i < tabs.length; i++) {
       const tab = tabs[i] as HTMLAnchorElement;
-      if (
-        tab.getAttribute("href")?.endsWith(hash) ||
-        hash.endsWith(tab.getAttribute("href")?.split("#")[1] || "")
-      ) {
+
+      const tabHref = tab.getAttribute("href");
+      const tabHash = tabHref?.split("#")[1] || "";
+
+      const isFullUrlMatch = tabHref?.endsWith(hash);
+      const isHashOnlyMatch = hash.endsWith(tabHash);
+
+      if (isFullUrlMatch || isHashOnlyMatch) {
         return i + 1;
       }
     }
