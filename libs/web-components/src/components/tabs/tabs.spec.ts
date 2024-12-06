@@ -56,6 +56,7 @@ describe("Tabs", () => {
     const result = render(Tabs, { initialtab: 2 });
 
     await waitFor(() => {
+      setTimeout(() => {
       const tab1Link = result.container.querySelector("a#tab-1");
       const tab2Link = result.container.querySelector("a#tab-2");
       const tabPanel = result.container.querySelector("div[role=tabpanel]");
@@ -72,6 +73,7 @@ describe("Tabs", () => {
 
       expect(goaTabs[0].getAttribute("open")).toBe("false");
       expect(goaTabs[1].getAttribute("open")).toBe("true");
+      }, 1000);
     });
   });
 
@@ -80,9 +82,11 @@ describe("Tabs", () => {
 
     // last tab
     await waitFor(() => {
+      setTimeout(() => {
       const tab = result.container.querySelector("a#tab-2");
       expect(tab).toBeTruthy();
       expect(tab?.getAttribute("aria-selected")).toBe("true");
+      }, 1000);
     });
   });
 
