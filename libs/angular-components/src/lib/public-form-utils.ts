@@ -115,16 +115,14 @@ export class PublicFormComponent<T> {
       return;
     }
 
-    // FIXME: With this override any subform data?
     this.state = {
       ...this.state,
-      form: newState.form,
+      form: { ...(this.state?.form || {}), ...newState.form },
       currentFieldset: newState.currentFieldset,
     } as AppState<T>;
   }
 
   getStateList(): Record<string, string>[] {
-    // getStateList(): unknown[] {
     if (!Array.isArray(this.state)) {
       console.error(
         "Utils:getStateList: unable to update the state of a non-multi form type",
@@ -134,7 +132,7 @@ export class PublicFormComponent<T> {
 
     return this.state.map((s) => {
       return Object.values(s.form)
-        .map((item) => item.data)
+        .map((item) => item.data || {})
         .reduce(
           (acc, item) => {
             for (const [key, value] of Object.entries(item)) {

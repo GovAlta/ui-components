@@ -228,10 +228,17 @@
   function onFieldsetBind(detail: FieldsetBindRelayDetail) {
     // save the fieldsets to allow for later sending of messages
     _fieldsets = { ..._fieldsets, [detail.id]: detail };
-    console.debug("Form:onFieldsetBind", name, "---", _fieldsets);
+    console.debug("Form:onFieldsetBind", name, "---", { detail, _fieldsets });
+
+    // FIXME: to prevent the form summary step from showing up in the form summary, make the
+    // form-summary like the subform i.e. it acts as a fieldset, but when it registers itself it 
+    // includes a property that infors the form-summary not to show it.
 
     // register the form items to ensure that all fieldsets are accessible within the form-summary
-    _state.form[detail.id] = { heading: detail.heading };
+    if (detail.heading) {
+      console.log("heading", detail.heading)
+      _state.form[detail.id] = { heading: detail.heading };
+    }
     
     // send the back url to child fieldsets, howwever only the first will need it
     if (backUrl) {
@@ -310,7 +317,6 @@
       if (jumpToSummary) {
         sendToggleActiveStateMsg(lastPage);
       } else {
-        console.log("HEEEEEEEEEEERE");
         _state.history = [..._state.history.slice(0, oldNextIndex), next];
         sendToggleActiveStateMsg(next);
         sendEdittingStateMsg();

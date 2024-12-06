@@ -53,7 +53,7 @@
 
   function getHeading(page: string): string {
     try {
-      return _state.form[page].heading || "";
+      return _state.form?.[page]?.heading || "";
     } catch (e) {
       console.log(e);
       return "FAIL"
@@ -72,6 +72,9 @@
 
   function getDataList(state: FormState, page: string) {
     const formStates = state.form?.[page] as unknown as FormState[];
+    if (!Array.isArray(formStates)) {
+      return {};
+    }
     
     return formStates.map(formState => {
       console.debug("FormSummary:getDataList::isArray=true", formState);
@@ -96,28 +99,27 @@
             <goa-text class="heading" color="secondary">{getHeading(page)}</goa-text>
           {/if}
 
-          {#if _state.form[page]}
+          {#if _state.form[page]?.data}
             <table class="data">
-              {#if Array.isArray(_state.form?.page)}
-                it's an array
-                {#each getDataList(_state, page) as [_key, item]}
-                  {#each item as [_key, data]}
-                    <tr>
-                      <td class="label">{data.label}</td>
-                      <td class="value">{data.value}</td>
-                    </tr>
-                  {/each}
-                {/each}
-              {:else}
-                it's not an array
-                {#each getData(_state, page) as [_key, data]}
+              {#each getData(_state, page) as [_key, data]}
+                <tr>
+                  <td class="label">{data.label}</td>
+                  <td class="value">{data.value}</td>
+                </tr>
+              {/each}
+            </table>
+          {:else}
+            list of data
+            {#each getDataList(_state, page) as [_key, item]}
+              <table class="data">
+                {#each item as [_key, data]}
                   <tr>
                     <td class="label">{data.label}</td>
                     <td class="value">{data.value}</td>
                   </tr>
                 {/each}
-              {/if}
-            </table>
+              </table>
+            {/each}
           {/if}
           <div class="action">
             <goa-link leadingicon="pencil" on:click={(e) => changePage(e, page)}>Change</goa-link>
