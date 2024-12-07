@@ -55,8 +55,8 @@
     font-weight: inherit;
     color: inherit;
     width: 100%;
-    height: 3.75rem;
-    padding: 0 1rem;
+    height: 3rem;
+    padding: 12px 1rem;
     justify-content: var(--header-text-align, flex-start);
     gap: 0.25rem;
     align-items: flex-end;
@@ -80,7 +80,7 @@
     color: var(--goa-color-greyscale-400);
   }
   button:hover .direction--none goa-icon {
-    color: var(--goa-color-greyscale-400);
+    color: var(--goa-color-interactive-hover);
   }
 
   goa-icon {
