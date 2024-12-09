@@ -36,7 +36,7 @@ export const msg = {
 
 export function receive(
   el: HTMLElement | Element | null | undefined,
-  handler: (action: string, data: Record<string, unknown>, event: Event) => void,
+  handler: (action: string, data: unknown, event: Event) => void,
 ) {
   if (!el) {
     console.warn("receive() el is null | undefined");
@@ -51,14 +51,14 @@ export function receive(
 export function relay<T>(
   el: HTMLElement | Element | null | undefined,
   eventName: string,
-  data: T,
+  data?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
   // console.log(`RELAY(${eventName}):`, data, el);
 
   const dispatch = () => {
     el?.dispatchEvent(
-      new CustomEvent<{ action: string; data: T }>("msg", {
+      new CustomEvent<{ action: string; data?: T }>("msg", {
         composed: true,
         bubbles: opts?.bubbles,
         cancelable: opts?.cancelable,
@@ -83,7 +83,7 @@ export function dispatch<T>(
   detail?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
-  // console.log(`DISPATCH(${eventName}):`, detail, el);
+  console.debug(`DISPATCH(${eventName}):`, detail, el);
 
   const dispatch = () => {
     el?.dispatchEvent(
@@ -216,4 +216,28 @@ export function clamp(value: number, min: number, max: number): number {
 
 export function generateRandomId() {
   return `${Math.random().toString(36).substring(2, 9)}`;
+}
+
+export function padLeft(
+  value: string | number,
+  len: number,
+  padWith: string | number,
+): string {
+  value = value + "";
+  const diff = len - value.length;
+  if (diff <= 0) {
+    return value;
+  }
+  let padding = "";
+  for (let i = 0; i < len - value.length; i++) {
+    padding += padWith;
+  }
+  return `${padding}${value}`;
+}
+
+export function performOnce(timeoutId: any, action: () => void, delay = 100): any {
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+  return setTimeout(action, delay);
 }

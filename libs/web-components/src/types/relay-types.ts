@@ -1,13 +1,21 @@
+export type FormStatus = "not-started" | "incomplete" | "complete";
+
+// FIXME: Can the existing AppState be used in place of this
+export type FormStateData = Record<string, FieldsetData>;
+
 export type FormState = {
-  form: Record<string, FieldsetData>;
+  id: string;
+  form: FormStateData;
   history: string[];
   editting: string;
   lastModified?: Date;
+  status: FormStatus;
 };
 
-export type FieldsetData =
-  | Record<string, FieldsetItemState>
-  | Record<string, FieldsetItemState>[];
+export type FieldsetData = {
+  heading: string;
+  data: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
+};
 
 // ====
 // Form
@@ -15,21 +23,18 @@ export type FieldsetData =
 
 export const FormResetErrorsMsg = "form::reset:errors";
 export const FormSetFieldsetMsg = "form::set:fieldset";
-export const FormSetValueMsg = "form::set:value";
 export const FormDispatchStateMsg = "form::dispatch:state";
 export const FormToggleActiveMsg = "form::toggle:active";
 export const FormStateChangeMsg = "form::state:change";
 export const FormBindMsg = "form::bind";
+export const FormBackUrlMsg = "form::back-url";
+
+export const FormResetFormMsg = "form::reset:form";
 
 export type FormBindRelayDetail = {
   el: HTMLElement;
 };
 export type FormStateChangeRelayDetail = FieldsetData;
-
-export type FormFieldMountRelayDetail = {
-  name: string;
-  el: HTMLElement;
-};
 
 export type FormToggleActiveRelayDetail = {
   first: boolean;
@@ -41,12 +46,11 @@ export type FormSetFieldsetRelayDetail = {
   value: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
 };
 
-export type FormSetValueRelayDetail = {
-  name: string;
-  value: string | number | Date;
-};
-
 export type FormDispatchStateRelayDetail = FormState;
+
+export type FormBackUrlDetail = {
+  url: string;
+};
 
 // ========
 // Fieldset
@@ -75,7 +79,11 @@ export type FieldsetErrorRelayDetail = {
 
 export type FieldsetChangeRelayDetail = {
   id: string;
-  state: Record<string, FieldsetItemState>;
+  state: {
+    heading: string;
+    data: Record<string, FieldsetItemState>;
+  };
+  dispatchOn: "change" | "continue";
 };
 
 export type FieldsetMountFormRelayDetail = {
@@ -88,11 +96,20 @@ export type FieldsetItemState = {
   name: string;
   label: string;
   value: string | number | Date;
+  order: number;
 };
 
 export type FieldsetValidationRelayDetail = {
   el: HTMLElement;
   state: Record<string, FieldsetItemState>;
+  first: boolean;
+  last: boolean;
+};
+
+export const FieldsetSetValueMsg = "fieldset::set:value";
+export type FieldsetSetValueRelayDetail = {
+  name: string;
+  value: string | number | Date;
 };
 
 // ========
@@ -115,7 +132,7 @@ export const ExternalSetErrorMsg = "external::set:error";
 export const ExternalContinueMsg = "external::continue";
 export const ExternalAppendDataMsg = "external::append:state";
 export const ExternalAlterDataMsg = "external::alter:state";
-export const ExternalResetStateMsg = "external::reset:state";
+export const ExternalInitStateMsg = "external::init:state";
 
 export type ExternalAlterDataRelayDetail =
   | {
@@ -144,11 +161,17 @@ export type ExternalAppendDataRelayDetail = {
   data: FieldsetItemState;
 };
 
+export type ExternalInitStateDetail = FormState | string;
+
 // =========
 // FormField
 // =========
 
 export const FormFieldMountMsg = "form-field::bind";
+export type FormFieldMountRelayDetail = {
+  name: string;
+  el: HTMLElement;
+};
 
 // ===========
 // FormSummary

@@ -17,13 +17,14 @@
   import { calculateMargin } from "../../common/styling";
   import { onMount, tick } from "svelte";
   import {
+  FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
     FieldsetResetFieldsMsg,
     FieldsetSetErrorMsg,
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
   } from "../../types/relay-types";
 
   // Validators
@@ -85,10 +86,10 @@
   let _leadingContentSlot = false;
   let _trailingContentSlot = false;
   let _debounceId: any;
-  let inputEl: HTMLElement;
+  let _inputEl: HTMLElement;
   let _rootEl: HTMLElement;
-  let _error: boolean;
-  let _prevError = _error;
+  let _error = false;
+  let _prevError = false;
 
   // ========
   // Reactive
@@ -113,12 +114,12 @@
 
   // TODO: determine if this and the next reactive statement need to be reactive, as they are both
   // things that should only be run once
-  $: if (isFocused && inputEl) {
-    setTimeout(() => inputEl.focus(), 2);
+  $: if (isFocused && _inputEl) {
+    setTimeout(() => _inputEl.focus(), 2);
   }
 
-  $: if (inputEl && type === "search") {
-    inputEl.addEventListener("search", (e) => {
+  $: if (_inputEl && type === "search") {
+    _inputEl.addEventListener("search", (e) => {
       onKeyUp(e);
     });
   }
@@ -144,39 +145,42 @@
   // =========
 
   function addRelayListener() {
-    receive(inputEl, (action, data) => {
+    receive(_inputEl, (action, data) => {
       switch (action) {
-        case FormSetValueMsg:
-          onSetValue(data as FormSetValueRelayDetail);
+        case FieldsetSetValueMsg:
+          setValue(data as FieldsetSetValueRelayDetail);
           break;
         case FieldsetSetErrorMsg:
-          error = "true";
+          setError(data as FieldsetErrorRelayDetail);
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
           break;
         case FieldsetResetFieldsMsg:
-          value = "";
+          setValue({ name, value: "" });
           break;
       }
     });
   }
 
-  function onSetValue(detail: FormSetValueRelayDetail) {
-    value = detail.value;
-    dispatch(
-      inputEl,
-      "_change",
-      { name, value: detail.value },
-      { bubbles: true },
-    );
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
   }
 
+  function setValue(detail: FieldsetSetValueRelayDetail) {
+    // @ts-expect-error
+    value = detail.value;
+
+    // dispatch the change event to the form-item element to ensure the state is in sync
+    // dispatch(_inputEl, "_change", { name, value }, { bubbles: true });
+  }
+
+  // Relay message up the chain to allow any parent element to have a reference to the input element
   function sendMountedMessage() {
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: inputEl },
+      { name, el: _inputEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -236,7 +240,6 @@
   }
 
   function doClick() {
-    // @ts-ignore
     this.dispatchEvent(
       new CustomEvent("_trailingIconClick", { composed: true }),
     );
@@ -302,7 +305,7 @@
     {/if}
 
     <input
-      bind:this={inputEl}
+      bind:this={_inputEl}
       class="input--{variant}"
       class:input-leading-content={_leadingContentSlot && !isDisabled}
       class:input-trailing-content={_trailingContentSlot && !isDisabled}
