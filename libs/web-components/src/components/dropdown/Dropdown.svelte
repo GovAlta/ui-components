@@ -8,6 +8,7 @@
   import type { Option } from "./DropdownItem.svelte";
   import {
     dispatch,
+    ensureSlotExists,
     fromBoolean,
     receive,
     relay,
@@ -59,7 +60,7 @@
   let _isMenuVisible = false;
   let _highlightedIndex: number = -1;
   let _width: string;
-  let _popoverMaxWidth: number;
+  let _popoverMaxWidth: string;
 
   let _rootEl: HTMLElement;
   let _menuEl: HTMLElement;
@@ -91,10 +92,19 @@
     ? _filteredOptions[_highlightedIndex].value
     : undefined;
 
+  // make updates if the values are changed
   $: {
     _values = parseValues(value || "");
     setSelected();
   }
+
+  // ensures the width is set based on the width prop supplied or the children size
+  $: {
+    _width = width || getLongestChildWidth(_options);
+    _popoverMaxWidth = _width;
+  }
+
+  // TODO: Syed can you add a comment here describing what this does?
   $: {
     _error = toBoolean(error);
     if (_error !== _prevError) {
@@ -112,7 +122,8 @@
   // Hooks
   //
 
-  onMount(() => {
+  onMount(() => {  
+    ensureSlotExists(_rootEl);  
     getChildren();
     addRelayListener();
     sendMountedMessage();
@@ -143,6 +154,7 @@
   }
 
   function onSetValue(detail: FormSetValueRelayDetail) {
+    // @ts-expect-error ignore
     value = detail.value;
     dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
   }
@@ -192,27 +204,13 @@
       if (_bindTimeoutId) {
         clearTimeout(_bindTimeoutId);
       }
-      _bindTimeoutId = setTimeout(bind, 1);
+      _bindTimeoutId = setTimeout(() => {
+        syncFilteredOptions();
+        if (!_native) {
+          setSelected();
+        }
+      }, 1);
     });
-  }
-
-  function bind() {
-    syncFilteredOptions();
-    if (!width) {
-      _width = getLongestChildWidth(_options);
-    }
-    if (_native) return;
-
-    setSelected();
-
-    if (width) {
-      _width = width;
-    }
-
-    // This is only here to allow the tests to pass :(
-    if (!width && _options.length > 0) {
-      _width = getLongestChildWidth(_options);
-    }
   }
 
   function setSelected() {
@@ -596,6 +594,7 @@
 
 <!-- Template -->
 <div
+  bind:this={_rootEl}
   data-testid={testid || `${name}-dropdown`}
   class="dropdown"
   class:dropdown-native={_native}
@@ -603,8 +602,6 @@
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${_width};
     `}
-  bind:this={_rootEl}
-  bind:clientWidth={_popoverMaxWidth}
 >
   {#if _native}
     <select
@@ -631,7 +628,7 @@
       {disabled}
       {relative}
       data-testid="option-list"
-      width={`${_popoverMaxWidth || 300}px`}
+      width={_popoverMaxWidth || "300px"}
       open={_isMenuVisible}
       padded="false"
       tabindex="-1"
