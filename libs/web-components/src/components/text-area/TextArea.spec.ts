@@ -9,6 +9,7 @@ describe("GoATextArea", () => {
       placeholder: "Enter text here",
       value: "foobar",
       rows: 42,
+      readonly: "true",
       disabled: "true",
       testid: "test-id",
     });
@@ -17,6 +18,7 @@ describe("GoATextArea", () => {
     expect(el).toHaveAttribute("name", "name");
     expect(el).toHaveAttribute("placeholder", "Enter text here");
     expect(el.value).toBe("foobar");
+    expect(el).toHaveAttribute("readonly", "");
     expect(el).toHaveAttribute("disabled", "");
     expect(el).toHaveAttribute("data-testid", "test-id");
     expect(el).toHaveAttribute("rows", "42");
@@ -74,6 +76,20 @@ describe("GoATextArea", () => {
     });
   });
 
+  it("can be readonly", async () => {
+    const result = render(GoATextArea, {
+      name: "name",
+      value: "foo",
+      readonly: "true",
+    });
+
+    const el = result.container.querySelector("textarea");
+
+    el?.focus();
+    expect(el).toHaveAttribute("readonly", "");
+    expect(el).toHaveFocus();
+  });
+
   it("can be disabled", async () => {
     const onChange = vi.fn();
     const result = render(GoATextArea, {
@@ -88,6 +104,7 @@ describe("GoATextArea", () => {
     await fireEvent.keyUp(el, { target: { value: "bar" } });
     expect(el).toHaveAttribute("disabled", "");
     expect(onChange).not.toBeCalled();
+    expect(el).not.toHaveFocus();
   });
 
   it("indicates an error state", async () => {

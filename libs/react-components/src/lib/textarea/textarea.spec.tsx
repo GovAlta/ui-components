@@ -11,6 +11,7 @@ describe("TextArea", () => {
         value="textarea-value"
         rows={10}
         placeholder="textarea-placeholder"
+        readOnly={true}
         disabled={true}
         countBy="word"
         maxCount={50}
@@ -19,8 +20,10 @@ describe("TextArea", () => {
         mr="m"
         mb="l"
         ml="xl"
-        onChange={() => { /* do nothing */ }}
-      />
+        onChange={() => {
+          /* do nothing */
+        }}
+      />,
     );
 
     const el = document.querySelector("goa-textarea");
@@ -28,6 +31,7 @@ describe("TextArea", () => {
     expect(el.getAttribute("value")).toBe("textarea-value");
     expect(el.getAttribute("rows")).toBe("10");
     expect(el.getAttribute("placeholder")).toBe("textarea-placeholder");
+    expect(el.getAttribute("readonly")).toBe("true");
     expect(el.getAttribute("disabled")).toBe("true");
     expect(el.getAttribute("countby")).toBe("word");
     expect(el.getAttribute("maxcount")).toBe("50");
@@ -50,13 +54,14 @@ describe("TextArea", () => {
         countBy="word"
         rows={10}
         placeholder="textarea-placeholder"
+        readOnly={true}
         disabled={true}
         onChange={(name: string, value: string) => {
           expect(name).toBe("textarea-name");
           expect(value).toBe(newValue);
           onChange();
         }}
-      />
+      />,
     );
 
     const el = document.querySelector("goa-textarea");
@@ -65,7 +70,7 @@ describe("TextArea", () => {
       el,
       new CustomEvent("_change", {
         detail: { name: "textarea-name", value: newValue },
-      })
+      }),
     );
 
     expect(onChange).toBeCalled();
