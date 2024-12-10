@@ -6,6 +6,7 @@
   <goa-dropdown name="item">
     <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
     <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+    <goa-dropdown-item value="light blue" label="Light Blue"></goa-dropdown-item>
     <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
   </goa-dropdown>
 </goa-form-item>
@@ -14,6 +15,7 @@
   <goa-dropdown name="item" filterable="true">
     <goa-dropdown-item value="red" label="Red"></goa-dropdown-item>
     <goa-dropdown-item value="green" label="Green"></goa-dropdown-item>
+    <goa-dropdown-item value="light blue" label="Light Blue"></goa-dropdown-item>
     <goa-dropdown-item value="blue" label="Blue"></goa-dropdown-item>
   </goa-dropdown>
 </goa-form-item>
