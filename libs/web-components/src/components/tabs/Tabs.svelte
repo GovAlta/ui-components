@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
-  import { clamp, fromBoolean } from "../../common/utils";
+  import { clamp, ensureSlotExists, fromBoolean } from "../../common/utils";
   import { GoATabProps } from "../tab/Tab.svelte";
 
   export let initialtab: number = 1; // 1-based
@@ -12,7 +12,7 @@
 
   let _rootEl: HTMLElement;
   let _tabsEl: HTMLElement;
-  let _panelEl: HTMLElement;
+  let _slotEl: HTMLElement;
   let _currentTab: number = 1;
   let _tabProps: (GoATabProps & { bound: boolean })[] = [];
   let _bindTimeoutId: any;
@@ -22,6 +22,7 @@
   // ========
 
   onMount(() => {
+    ensureSlotExists(_rootEl);
     addChildMountListener();
     addKeyboardEventListeners();
   });
@@ -152,8 +153,8 @@
       );
     }
 
-    _panelEl.setAttribute("aria-labelledby", `tab-${_currentTab}`);
-    _panelEl.setAttribute("id", `tabpanel-${_currentTab}`);
+    _slotEl.setAttribute("aria-labelledby", `tab-${_currentTab}`);
+    _slotEl.setAttribute("id", `tabpanel-${_currentTab}`);
 
     // update the browswers url with the new hash
     if (currentLocation) {
@@ -215,7 +216,7 @@
 
 <div role="tablist" bind:this={_rootEl} data-testid={testid}>
   <div class="tabs" bind:this={_tabsEl}></div>
-  <div class="tabpanel" tabindex="0" bind:this={_panelEl} role="tabpanel">
+  <div class="tabpanel" tabindex="0" bind:this={_slotEl} role="tabpanel">
     <slot />
   </div>
 </div>

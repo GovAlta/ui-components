@@ -4,7 +4,7 @@
 <script lang="ts">
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
-  import { typeValidator } from "../../common/utils";
+  import { ensureSlotExists, typeValidator } from "../../common/utils";
   import { onMount } from "svelte";
 
   // Validator
@@ -36,24 +36,32 @@
   type Padding = (typeof Paddings)[number];
   type Width = (typeof Widths)[number];
 
+  // Props
+
   export let type: Type = "interactive";
   export let accent: Accent = "filled";
   export let padding: Padding = "relaxed";
   export let width: Width = "full";
   export let maxwidth: string = "none";
   export let testid: string = "";
-
-  // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = "m";
   export let ml: Spacing = null;
+
+  // Private
+
+  let _contentEl: HTMLElement;
+
+  // Hooks
 
   onMount(() => {
     validateType(type);
     validateAccent(accent);
     validatePadding(padding);
     validateWidth(width);
+
+    ensureSlotExists(_contentEl);
   });
 </script>
 
@@ -86,8 +94,7 @@
       </div>
     {/if}
   </header>
-  <div class="content">
-    <slot />
+  <div bind:this={_contentEl} class="content">
   </div>
 </div>
 
