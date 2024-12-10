@@ -71,6 +71,20 @@
           href="https://www.alberta.ca/index.aspx"
           target={`_${headerurltarget}`}>Alberta Government</a
         >
+        {#if feedbackurl}
+          <span data-testid="feedback">
+            — help us improve it by giving
+            <span class="feedback-link">
+              <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a>
+            </span>
+          </span>
+        {:else if _hasfeedbackhandler}
+          <span data-testid="feedback-click" bind:this={_feedbackElement}>
+            — help us improve it by giving
+            <!-- svelte-ignore a11y-invalid-attribute -->
+            <a href="#" on:click={handleFeedbackClick}>feedback</a>
+          </span>
+        {/if}
       </div>
     {/if}
 

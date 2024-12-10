@@ -76,7 +76,6 @@
 <style>
   :host {
   /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
-    --goa-details-max-width: 0px;
     --goa-details-border-radius: var(--goa-border-radius-m);  /* 4px */
     --goa-details-margin-bottom: var(--goa-space-xs);
 
@@ -102,7 +101,7 @@
   /*  ------------------------------------------------------- */
 
 
-    font-family: var(--goa-font-family-serif); /* do we need this? If we wanted to make a typeface change globally, this would need to be overriden */
+    font-family: var(--goa-font-family-serif);
   }
 
   details {
@@ -120,7 +119,7 @@
     display: none;
   }
 
-  /* Summary is the detail heading */
+  /* Summary == detail heading */
 
   summary {
     padding-top: var(--goa-details-padding-top);
@@ -159,7 +158,7 @@
     color: var(--goa-details-text-color-hover);
   }
 
-  /* Content is the expanded content */
+  /* Content == expanded content */
 
   .content {
     border-left: var(--goa-details-content-left-border);

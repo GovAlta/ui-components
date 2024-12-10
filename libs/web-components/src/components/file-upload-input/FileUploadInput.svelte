@@ -195,7 +195,7 @@
     <div class="instructions">
       <goa-icon type="cloud-upload" size="large" />
       <div>Drag and drop files here</div>
-      <em  style="margin: var(--goa-space-3xs) var(--goa-space-xs) 0 var(--goa-space-xs);">or</em>
+      <em  class="or-text">or</em>
       <div class="browse-files">Browse files</div>
     </div>
 
@@ -340,8 +340,15 @@
     color: var(--goa-file-upload-help-text-color);
   }
 
+  .or-text {
+    margin: var(--goa-space-3xs) var(--goa-space-xs) 0 var(--goa-space-xs);
+  }
+
   .max-file-size {
     display: block;
+  }
+  .button .max-file-size {
+    margin-top: var(--goa-space-xs);
   }
 
   input[type="file"] {
