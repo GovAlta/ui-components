@@ -79,4 +79,8 @@
 </section>
 
 <style>
+
+    .tabs a span.tab {
+      text-overflow: ellipsis;
+    }
 </style>
