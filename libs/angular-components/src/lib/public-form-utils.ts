@@ -54,6 +54,11 @@ export class PublicFormComponent<T> {
     relay(this._formRef, "external::init:state", state);
   }
 
+  // ISSUE:
+  // The issue is that all the logic below is happening outside the form component, thereby resulting
+  // in the "fixed" data not being in sync with the data within the form component.
+  //
+
   // Public method to allow for the updating of the state
   updateState(e: Event) {
     console.debug("Utils:updateState", { state: this.state }, (e as CustomEvent).detail);
@@ -115,10 +120,12 @@ export class PublicFormComponent<T> {
       return;
     }
 
+    // this.state = newState;
     this.state = {
       ...this.state,
       form: { ...(this.state?.form || {}), ...newState.form },
       currentFieldset: newState.currentFieldset,
+      history: newState.history,
     } as AppState<T>;
   }
 

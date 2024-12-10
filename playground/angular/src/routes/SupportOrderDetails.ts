@@ -43,7 +43,9 @@ export class SupportOrderDetailsComponent implements OnInit {
   }
 
   updateState(e: Event) {
+    console.log("updateState before", e);
     this._mainFormComponent.updateState(e);
+    console.log("updateState after", this._mainFormComponent.state);
 
     // DEV ONLY: saving the state to local storage
     console.debug("SupportOrderDetails:updateState", this._mainFormComponent.state);
@@ -245,6 +247,7 @@ export class SupportOrderDetailsComponent implements OnInit {
 
   handleChildDateOfBirth(e: Event): ChildPage | undefined {
     const [ok] = this._childFormComponent.validate("dob", e, [requiredValidator()]);
+    console.log("handleChildDateOfBirth", ok);
     if (!ok) return;
 
     return "summary";

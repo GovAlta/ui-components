@@ -3,7 +3,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import {
-  FieldsetData,
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
     FormState,
@@ -14,13 +13,12 @@
   } from "../../types/relay-types";
 
   import { receive, relay } from "../../common/utils";
-  import Fieldset from "./Fieldset.svelte";
 
   export let heading: string = "";
 
   let _rootEl: HTMLElement;
   let _state: FormState;
-  
+
   onMount(() => {
     addRelayListener();
 
@@ -42,8 +40,13 @@
     });
   }
 
+  /**
+   * Receive state updates from the form
+   * @param detail
+   */
   function onFormDispatch(detail: FormDispatchStateRelayDetail) {
-    _state = detail
+    console.debug("FormSummary:onFormDispatch", detail);
+    _state = detail;
   }
 
   function changePage(e: Event, pageId: string) {
@@ -62,7 +65,7 @@
 
   function getData(state: FormState, page: string) {
     const fieldset = state.form?.[page];
-    const data = 
+    const data =
       Object
         .entries(fieldset.data || {})
         .sort((itemsA, itemsB) => itemsA[1].order > itemsB[1].order ? 1 : -1)
@@ -71,11 +74,12 @@
   }
 
   function getDataList(state: FormState, page: string) {
+    console.debug("FormSummary:getDataList", page, state)
     const formStates = state.form?.[page] as unknown as FormState[];
     if (!Array.isArray(formStates)) {
-      return {};
+      return [];
     }
-    
+
     return formStates.map(formState => {
       console.debug("FormSummary:getDataList::isArray=true", formState);
       return formState.history.map(fieldsetId => {
@@ -84,7 +88,7 @@
       })
     });
   }
-  
+
 </script>
 
 <div bind:this={_rootEl}>
@@ -109,8 +113,7 @@
               {/each}
             </table>
           {:else}
-            list of data
-            {#each getDataList(_state, page) as [_key, item]}
+            {#each getDataList(_state, page) as [_, item]}
               <table class="data">
                 {#each item as [_key, data]}
                   <tr>
@@ -125,7 +128,7 @@
             <goa-link leadingicon="pencil" on:click={(e) => changePage(e, page)}>Change</goa-link>
           </div>
         </div>
-      </goa-container>    
+      </goa-container>
     {/each}
   {/if}
 </div>
@@ -138,11 +141,11 @@
       display: block;
       grid-template-rows: min-content auto;
       grid-template-columns: auto;
-      grid-template-areas: 
+      grid-template-areas:
         "top top top"
     }
 
-    .data tr:last-of-type {      
+    .data tr:last-of-type {
       padding-bottom: var(--goa-space-m);
     }
     .data td:first-of-type {
@@ -162,7 +165,7 @@
       display: grid;
       grid-auto-rows: 1fr;
       grid-template-columns: 1fr min-content;
-      grid-template-areas: 
+      grid-template-areas:
         "data action"
     }
 
@@ -170,7 +173,7 @@
       display: grid;
       grid-auto-rows: min-content auto;
       grid-template-columns: 1fr min-content;
-      grid-template-areas: 
+      grid-template-areas:
         "heading action"
         "data ."
     }
@@ -188,7 +191,7 @@
     .data {
       grid-area: data;
     }
-  
+
     .label {
       width: 50%;
       font: var(--goa-typography-heading-s);

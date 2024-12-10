@@ -127,19 +127,26 @@
     );
   }
 
+  /**
+   * Toggles the subform's active state
+   * @param detail
+   */
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
     console.debug("SubForm:onToggleActiveState", { detail });
     _active = detail.active;
   }
 
+  /**
+   * Deep copies an object to prevent the state from being mutated
+   * @param obj
+   */
   function deepCopy(obj: any) {
     const objCopy = JSON.parse(JSON.stringify(obj));
     return objCopy;
   }
 
+  
   function onStateChange(e: Event) {
-    console.debug("Subform:onStateChange", { e });
-
     const detail = (e as CustomEvent).detail as FormState;
     const editStateIndex = _state.findIndex((s) => s.id === detail.id);
 
@@ -151,6 +158,7 @@
 
     // stop original event to prevent just the single subform data from being sent
     // send the array of data instead
+    console.debug("Subform:onStateChange", { _state });
     dispatch(_rootEl, "_stateChange", { data: _state, id, index: editStateIndex }, { bubbles: true });
 
     // initial event will be overridden with a custom _stateChange event containing a state array

@@ -2,7 +2,7 @@ export type FormStatus = "not-started" | "incomplete" | "complete";
 
 export type FormState = {
   id: string;
-  form: Record<string, FieldsetData>;
+  form: Record<string, FieldsetData | FormState[]>;
   history: string[];
   editting: string;
   lastModified?: Date;
@@ -11,7 +11,9 @@ export type FormState = {
 
 export type FieldsetData = {
   heading: string;
-  data?: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
+  data?:
+    | Record<string, FieldsetItemState>
+    | Record<string, FieldsetItemState>[];
 };
 
 // ====
@@ -40,7 +42,9 @@ export type FormToggleActiveRelayDetail = {
 
 export type FormSetFieldsetRelayDetail = {
   name: string;
-  value: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
+  value:
+    | Record<string, FieldsetItemState>
+    | Record<string, FieldsetItemState>[];
 };
 
 export type FormDispatchStateRelayDetail = FormState;

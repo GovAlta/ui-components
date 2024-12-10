@@ -71,6 +71,7 @@
   // =======
 
   let _formEl: HTMLFormElement;
+  let _childReceiverEl: HTMLElement;
 
   // Fieldset binding details
   let _fieldsets: Record<string, FieldsetBindRelayDetail> = {};
@@ -97,15 +98,27 @@
     status: "not-started",
   };
 
-
   onMount(() => {
     // provide html element link to outside world
     dispatch(_formEl, "_init", { el: _formEl });
 
     addWindowPopStateListener();
     addRelayListener();
+    addSubformRelayListener();
     setTimeout(setChildrenState, 100);
   });
+
+  function addSubformRelayListener() {
+    _childReceiverEl.addEventListener("_stateChange", (e) => {
+      const detail = (e as CustomEvent).detail as {
+        data: FormState[];
+        id: string;
+        index: number;
+      };
+      _state.form[detail.id] = detail.data;
+      console.debug("Form:addSubformRelayListener", name, _state);
+    });
+  }
 
   /**
    * Adds a listener to the form element to handle relay messages
@@ -201,11 +214,14 @@
   }
 
   /**
-   * Handles binding of form summary elements to enable state synchronization
+   * Handles binding of the form-summary component to enable state synchronization
    * @param detail Contains the form summary element to bind
    */
   function onFormSummaryBind(detail: FormSummaryBindRelayDetail) {
+    // save the form-summary element reference for relaying messages
     _formSummary = detail.el;
+
+    // sync any initial state
     syncFormSummaryState();
   }
 
@@ -231,15 +247,15 @@
     console.debug("Form:onFieldsetBind", name, "---", { detail, _fieldsets });
 
     // FIXME: to prevent the form summary step from showing up in the form summary, make the
-    // form-summary like the subform i.e. it acts as a fieldset, but when it registers itself it 
+    // form-summary like the subform i.e. it acts as a fieldset, but when it registers itself it
     // includes a property that infors the form-summary not to show it.
 
     // register the form items to ensure that all fieldsets are accessible within the form-summary
     if (detail.heading) {
-      console.log("heading", detail.heading)
+      console.log("heading", detail.heading);
       _state.form[detail.id] = { heading: detail.heading };
     }
-    
+
     // send the back url to child fieldsets, howwever only the first will need it
     if (backUrl) {
       relay<FormBackUrlDetail>(detail.el, FormBackUrlMsg, { url: backUrl });
@@ -255,6 +271,7 @@
         // mark the first fieldset as active
         const [id] = Object.entries(_fieldsets)[0];
         _state.history.push(id);
+        console.log("history", _state.history);
         sendToggleActiveStateMsg(id);
       }
     });
@@ -276,6 +293,7 @@
       }
     }
 
+    // TODO: subform needs to dispatch this event...
     _state.form[id] = state;
     _state.lastModified = new Date();
 
@@ -334,6 +352,7 @@
       sendToggleActiveStateMsg(next);
     }
 
+    // sync the new state
     syncFormSummaryState();
   }
 
@@ -359,6 +378,7 @@
    * Synchronizes the form summary state with the app to ensure consistent display of form data
    */
   function syncFormSummaryState() {
+    console.debug("Form:syncFormSummaryState", _state);
     relay<FormDispatchStateRelayDetail>(
       _formSummary,
       FormDispatchStateMsg,
@@ -500,7 +520,6 @@
     }
     console.log("   History", _state.history);
 
-
     // show the fieldset
     dispatchStateChange("continue", _lastViewedFieldset);
   }
@@ -523,5 +542,7 @@
 </script>
 
 <form bind:this={_formEl} style={calculateMargin(mt, mr, mb, ml)}>
-  <slot />
+  <div bind:this={_childReceiverEl}>
+    <slot />
+  </div>
 </form>
