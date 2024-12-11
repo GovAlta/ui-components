@@ -80,7 +80,7 @@
     _scrollPos = hasScroll ? "top" : null;
   }
 
-  $: if (_isOpen && _rootEl) {
+  $: if (_isOpen && _rootEl && _headerEl) {
     _requiresTopPadding =
       !!_headerEl?.querySelector("div.modal-title")?.textContent ||
       !!_headerEl?.querySelector("div.modal-close") ||
@@ -212,37 +212,39 @@
           </div>
         {/if}
         <div class="content">
-          <header
-            bind:this={_headerEl}
-            class:has-content={_requiresTopPadding}
-            bind:clientHeight={_headerHeight}
-          >
-            <div
-              data-testid="modal-title"
-              class="modal-title"
-              id="goa-modal-heading"
+          {#if heading || _isClosable || $$slots.heading}
+            <header
+              bind:this={_headerEl}
+              class:has-content={_requiresTopPadding}
+              bind:clientHeight={_headerHeight}
             >
-              {#if heading}
-                {heading}
-              {:else}
-                <slot name="heading" />
-              {/if}
-            </div>
-            {#if _isClosable}
-              <div class="modal-close">
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <!-- svelte-ignore a11y-no-static-element-interactions -->
-                <goa-icon-button
-                  data-ignore-focus="true"
-                  data-testid="modal-close-button"
-                  arialabel="Close the modal"
-                  icon="close"
-                  on:click={close}
-                  variant="dark"
-                />
+              <div
+                data-testid="modal-title"
+                class="modal-title"
+                id="goa-modal-heading"
+              >
+                {#if heading}
+                  {heading}
+                {:else}
+                  <slot name="heading" />
+                {/if}
               </div>
-            {/if}
-          </header>
+              {#if _isClosable}
+                <div class="modal-close">
+                  <!-- svelte-ignore a11y-click-events-have-key-events -->
+                  <!-- svelte-ignore a11y-no-static-element-interactions -->
+                  <goa-icon-button
+                    data-ignore-focus="true"
+                    data-testid="modal-close-button"
+                    arialabel="Close the modal"
+                    icon="close"
+                    on:click={close}
+                    variant="dark"
+                  />
+                </div>
+              {/if}
+            </header>
+          {/if}
           <div data-testid="modal-content" class="modal-content">
             <goa-scrollable
               direction="vertical"
