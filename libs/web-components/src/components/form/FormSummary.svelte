@@ -64,7 +64,10 @@
   }
 
   function getData(state: FormState, page: string) {
-    const fieldset = state.form?.[page];
+    if (state.form.type !== "form") {
+      return;
+    }
+    const fieldset = state.form.fields[page];
     const data =
       Object
         .entries(fieldset.data || {})
@@ -75,16 +78,13 @@
 
   function getDataList(state: FormState, page: string) {
     console.debug("FormSummary:getDataList", page, state)
-    const formStates = state.form?.[page] as unknown as FormState[];
-    if (!Array.isArray(formStates)) {
-      return [];
+    if (state.form.type !== "list") {
+      return;
     }
 
-    return formStates.map(formState => {
-      console.debug("FormSummary:getDataList::isArray=true", formState);
-      return formState.history.map(fieldsetId => {
-        console.debug("FormSummary:getDataList::fieldsetId", fieldsetId);
-        return getData(formState, fieldsetId);
+    return state.form.items.map(form => {
+      return form.history.map(fieldsetId => {
+        return getData(form, fieldsetId);
       })
     });
   }

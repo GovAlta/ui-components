@@ -5,7 +5,7 @@
   (_stateChange)="updateState($event)"
   storage="local"
 >
-  <goa-fieldset
+  <goa-public-form-page
     id="name"
     heading="What is your legal name?"
     first
@@ -22,9 +22,9 @@
       <goa-input name="lastname" />
     </goa-form-item>
 
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset
+  <goa-public-form-page
     id="other-names"
     (_continue)="onPageChange($event, 'other-names')"
   >
@@ -72,10 +72,10 @@
     <goa-details heading="Why do we ask for this information?">
       Providing your other names helps improve communication and simplifies the verification process.
     </goa-details>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  
-  <goa-fieldset
+
+  <goa-public-form-page
     id="gender"
     (_continue)="onPageChange($event, 'gender')"
   >
@@ -94,10 +94,10 @@
     <goa-details heading="Why do we ask for this information?">
       We use this information for federal reporting and program administration.
     </goa-details>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  
-  <goa-fieldset
+
+  <goa-public-form-page
     id="birthdate"
     (_continue)="onPageChange($event, 'birthdate')"
   >
@@ -112,10 +112,10 @@
     <goa-details heading="Why do we ask for this information?" mt="l">
       We require this information to authenticate you in the event you lose your account PIN.
     </goa-details>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 
-  <goa-fieldset
+  <goa-public-form-page
     id="first-nation"
     (_continue)="onPageChange($event, 'first-nation')"
   >
@@ -133,9 +133,9 @@
     <goa-details heading="Why do we ask for this information?">
       We require this information to verify document details provided during registration.
     </goa-details>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset
+  <goa-public-form-page
     id="first-nation-status-number"
     (_continue)="onPageChange($event, 'first-nation-status-number')"
     heading="First Nation status number"
@@ -147,9 +147,9 @@
     >
       <goa-input name="first-nation-status-number" />
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset
+  <goa-public-form-page
     id="sin"
     (_continue)="onPageChange($event, 'sin')"
   >
@@ -165,10 +165,10 @@
     <goa-details heading="Why do we ask for this information?" mt="l">
       We require this information to authenticate you in the event you lose your account PIN.
     </goa-details>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 
-  <goa-fieldset
+  <goa-public-form-page
     id="healthcare-number"
     (_continue)="onPageChange($event)"
   >
@@ -184,11 +184,11 @@
     <goa-details heading="Why do we ask for this information?" mt="l">
       We require this information to authenticate you in the event you lose your account PIN.
     </goa-details>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 
-  <goa-fieldset 
-    id="mailing-address" 
+  <goa-public-form-page
+    id="mailing-address"
     heading="What id your mailing address in Alberta?"
     (_continue)="onPageChange($event)"
   >
@@ -220,10 +220,10 @@
       The registering party must have a valid address in Alberta to register in our MEP. Postal mail is the MEP’s primary way of notifying the client of registration.
       We also require this information to verify document details provided during registration.
     </goa-details>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset 
-    id="contact-information" 
+  <goa-public-form-page
+    id="contact-information"
     heading="What is your contact information?"
     (_continue)="onPageChange($event)"
   >
@@ -250,10 +250,10 @@
       <goa-input name="email" width="40ch" />
     </goa-form-item>
 
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset 
-    id="other-contact-information" 
+  <goa-public-form-page
+    id="other-contact-information"
     heading="Who may be contacted in case you cannot be reached?"
     (_continue)="onPageChange($event)"
   >
@@ -294,14 +294,14 @@
     <goa-form-item id="other-email" label="Email" mt="l" requirement="optional">
       <goa-input name="other-email" width="40ch" />
     </goa-form-item>
-  
-  </goa-fieldset>
 
-  <goa-fieldset last id="summary" heading="Summary">
+  </goa-public-form-page>
+
+  <goa-public-form-page last id="summary" heading="Summary">
     <goa-public-form-summary />
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset id="ineligible" heading="You are not eligable" last button-text="Back to Alberta.ca">
+  <goa-public-form-page id="ineligible" heading="You are not eligable" last button-text="Back to Alberta.ca">
     <goa-callout heading="This service is only for Alberta residents" type="important">
       If you do not live in Alberta you are not able to access this service.
     </goa-callout>
@@ -313,7 +313,7 @@
     <goa-text mb="m">Contact the [ministry area]</goa-text>
     <goa-text mb="m">Email <a href="mailto:information@gov.ab.ca">information&#64;gov.ab.ca</a></goa-text>
     <goa-text mb="2xl">Phone: <a href="tel:+1-780-123-4567">780-123-4567</a></goa-text>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 </goa-public-form>
 

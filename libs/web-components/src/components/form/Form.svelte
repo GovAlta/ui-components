@@ -115,7 +115,7 @@
         id: string;
         index: number;
       };
-      _state.form[detail.id] = detail.data;
+      _state.form[detail.id] = { data: { type: "list", items: detail.data } };
       console.debug("Form:addSubformRelayListener", name, _state);
     });
   }
@@ -176,26 +176,26 @@
    * @param detail Contains operation type ('edit'/'remove'), array index, and new data
    */
   function onAlterData(detail: ExternalAlterDataRelayDetail) {
-    console.debug("Form:onAlterData", name, { detail });
-    const state = _state.form[detail.id];
-    if (!Array.isArray(state)) {
-      return;
-    }
+    // console.debug("Form:onAlterData", name, { detail });
+    // const state = _state.form[detail.id];
+    // if (!Array.isArray(state)) {
+    //   return;
+    // }
 
-    switch (detail.operation) {
-      case "edit": {
-        _state.form[detail.id][detail.index] = detail.data || {};
-        break;
-      }
-      case "remove": {
-        const temp = [...state];
-        temp.splice(detail.index, 1);
-        _state.form[detail.id].data = [...temp];
-        break;
-      }
-    }
+    // switch (detail.operation) {
+    //   case "edit": {
+    //     _state.form[detail.id][detail.index] = detail.data || {};
+    //     break;
+    //   }
+    //   case "remove": {
+    //     const temp = [...state];
+    //     temp.splice(detail.index, 1);
+    //     _state.form[detail.id].data = [...temp];
+    //     break;
+    //   }
+    // }
 
-    dispatchStateChange("continue", detail.id);
+    // dispatchStateChange("continue", detail.id);
   }
 
   /**
@@ -203,14 +203,14 @@
    * @param detail Contains the id of the array and the new data to append
    */
   function onAppendData(detail: ExternalAppendDataRelayDetail) {
-    console.debug("Form:onAppendData", name, { detail });
-    const { id, data } = detail;
-    // @ts-expect-error ignore
-    const temp = [...(_state.form[id] || [])];
-    temp.push(data);
-    _state.form[id].data = [...temp];
+    // console.debug("Form:onAppendData", name, { detail });
+    // const { id, data } = detail;
+    // // @ts-expect-error ignore
+    // const temp = [...(_state.form[id] || [])];
+    // temp.push(data);
+    // _state.form[id].data = [...temp];
 
-    dispatchStateChange("continue", id);
+    // dispatchStateChange("continue", id);
   }
 
   /**

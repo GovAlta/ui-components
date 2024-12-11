@@ -5,7 +5,7 @@
   (_init)="init($event)"
   storage="local"
 >
-  <goa-fieldset
+  <goa-public-form-page
     id="name"
     heading="What is your full name?"
     dispatch-on="change"
@@ -20,9 +20,9 @@
     </goa-form-item>
 
 
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset
+  <goa-public-form-page
     id="sin"
     (_continue)="onPageChange($event, 'sin')"
   >
@@ -33,10 +33,10 @@
     >
       <goa-input name="sin" />
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  
-  <goa-fieldset
+
+  <goa-public-form-page
     id="postalcode"
     (_continue)="onPageChange($event, 'postalcode')"
     heading="Postal Code"
@@ -44,9 +44,9 @@
     <goa-form-item id="postal-code" label="Postal Code" >
       <goa-input name="postal-code" />
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset
+  <goa-public-form-page
     id="residence"
     (_continue)="onPageChange($event, 'residence')"
   >
@@ -61,10 +61,10 @@
         <goa-radio-item value="No" label="No" />
       </goa-radio-group>
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 
-  <goa-fieldset
+  <goa-public-form-page
     id="residence-duration"
     (_continue)="onPageChange($event, 'residence-duration')"
   >
@@ -78,10 +78,10 @@
         <goa-radio-item value="More than a year" label="More than a year" />
       </goa-radio-group>
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 
-  <goa-fieldset
+  <goa-public-form-page
     id="birthdate"
     (_continue)="onPageChange($event, 'birthdate')"
   >
@@ -95,10 +95,10 @@
         <goa-input type="date" name="birth-date" />
       </goa-form-item>
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 
-  <goa-fieldset
+  <goa-public-form-page
     id="currently-employed"
     (_continue)="onPageChange($event, 'currently-employed')"
   >
@@ -122,10 +122,10 @@
       magna facilisis, porttitor risus. Mauris consequat libero magna, non cursus velit
       euismod ut. Donec eget turpis eros.
     </goa-details>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 
-  <goa-fieldset
+  <goa-public-form-page
     id="highest-education"
     (_continue)="onPageChange($event, 'highest-education')"
   >
@@ -142,10 +142,10 @@
         <goa-radio-item value="Other" label="Other" />
       </goa-radio-group>
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 
-  <goa-fieldset
+  <goa-public-form-page
     id="other-education"
     (_continue)="onPageChange($event, 'other-education')"
   >
@@ -156,10 +156,10 @@
     >
       <goa-textarea name="other-education-description" />
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 
-  <goa-fieldset
+  <goa-public-form-page
     id="previously-applied"
     (_continue)="onPageChange($event, 'previously-applied')"
   >
@@ -173,13 +173,13 @@
         <goa-radio-item value="No" label="No" />
       </goa-radio-group>
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset last id="summary" heading="Summary" last>
+  <goa-public-form-page last id="summary" heading="Summary" last>
     <goa-public-form-summary />
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset id="ineligible" heading="You are not eligable" last button-text="Back to Alberta.ca">
+  <goa-public-form-page id="ineligible" heading="You are not eligable" last button-text="Back to Alberta.ca">
     <goa-callout heading="This service is only for Alberta residents" type="important">
       If you do not live in Alberta you are not able to access this service.
     </goa-callout>
@@ -191,7 +191,7 @@
     <goa-text mb="m">Contact the [ministry area]</goa-text>
     <goa-text mb="m">Email <a href="mailto:information@gov.ab.ca">information&#64;gov.ab.ca</a></goa-text>
     <goa-text mb="2xl">Phone: <a href="tel:+1-780-123-4567">780-123-4567</a></goa-text>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 </goa-public-form>
 

@@ -17,7 +17,7 @@ declare global {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      "goa-fieldset": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-public-form-page": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -65,7 +65,7 @@ export function GoAFieldset({
   }, [ref.current, onContinue])
 
   return (
-    <goa-fieldset
+    <goa-public-form-page
       ref={ref}
       id={id}
       first={first}
@@ -78,7 +78,7 @@ export function GoAFieldset({
       ml={ml}
     >
       {children}
-    </goa-fieldset>
+    </goa-public-form-page>
   );
 }
 

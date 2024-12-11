@@ -1,6 +1,6 @@
 <svelte:options
   customElement={{
-    tag: "goa-fieldset",
+    tag: "goa-public-form-page",
     props: {
       buttonText: { type: "String", attribute: "button-text" },
       secondaryButtonText: {
@@ -11,8 +11,8 @@
       showBackButton: { type: "String", attribute: "show-back-button" },
       sectionTitle: { type: "String", attribute: "section-title" },
       dispatchOn: { attribute: "dispatch-on" },
-      first: { attribute: "first", type: "Boolean"},
-      last: { attribute: "last", type: "Boolean"},
+      first: { attribute: "first", type: "Boolean" },
+      last: { attribute: "last", type: "Boolean" },
     },
   }}
 />
@@ -164,7 +164,7 @@
   function resetFields(event: Event) {
     // prevent subform resets from resetting the parent
     event.stopPropagation();
-    
+
     for (const { el } of Object.values(_formFields)) {
       relay(el, FieldsetResetFieldsMsg);
     }
@@ -436,11 +436,7 @@
       {/if}
 
       {#if sectionTitle}
-        <goa-text 
-          class="section-title" 
-          size="body-l" 
-          mb="s"
-        >
+        <goa-text class="section-title" size="body-l" mb="s">
           {sectionTitle}
         </goa-text>
       {/if}

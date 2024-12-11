@@ -5,7 +5,7 @@
   (_stateChange)="updateState($event)"
   back-url="/fsos"
 >
-  <goa-fieldset
+  <goa-public-form-page
     id="what-is-your-role"
     section-title="Support order details"
     dispatch-on="change"
@@ -36,9 +36,9 @@
         TOTAL: {{_total}}
       </div>
     </goa-checkbox>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset
+  <goa-public-form-page
     id="contact"
     section-title="Support order details"
     (_continue)="onPageChange($event, 'contact')"
@@ -62,9 +62,9 @@
       </goa-radio-item>
     </goa-radio-group>
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset
+  <goa-public-form-page
     id="optional"
     heading="Alternate names"
     section-title="Support order details"
@@ -77,7 +77,7 @@
     <goa-form-item name="Secret alias" label="Secret alias" requirement="optional">
       <goa-input name="alias" />
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
   <goa-subform
     id="children-subform"
@@ -86,9 +86,9 @@
     (_init)="_childFormComponent.initList($event)"
     (_stateChange)="updateChildrenState($event)"
   >
-    <goa-fieldset 
-      first 
-      id="child-list" 
+    <goa-public-form-page
+      first
+      id="child-list"
       secondary-button-text="Done"
       button-text="Add child"
       (_continue)="onChildPageChange($event, 'child-list')"
@@ -106,37 +106,37 @@
           </tr>
         </tbody>
       </goa-table>
-    </goa-fieldset>
+    </goa-public-form-page>
 
-    <goa-fieldset id="name" (_continue)="onChildPageChange($event, 'name')">
+    <goa-public-form-page id="name" (_continue)="onChildPageChange($event, 'name')">
       <goa-form-item name="First name" label="First name">
         <goa-input name="firstName" />
       </goa-form-item>
       <goa-form-item name="Last name" label="Last name">
         <goa-input name="lastName" />
       </goa-form-item>
-    </goa-fieldset>
+    </goa-public-form-page>
 
-    <goa-fieldset id="alternate-name" (_continue)="onChildPageChange($event, 'alternate-name')">
+    <goa-public-form-page id="alternate-name" (_continue)="onChildPageChange($event, 'alternate-name')">
       <goa-form-item name="Alternate name" label="Alternate name">
         <goa-input name="alternateName" />
       </goa-form-item>
-    </goa-fieldset>
+    </goa-public-form-page>
 
-    <goa-fieldset id="dob" (_continue)="onChildPageChange($event, 'dob')">
+    <goa-public-form-page id="dob" (_continue)="onChildPageChange($event, 'dob')">
       <goa-form-item name="Date of birth" label="Date of birth">
         <goa-date-picker type="input" name="dob" />
       </goa-form-item>
-    </goa-fieldset>
+    </goa-public-form-page>
 
-    <goa-fieldset last id="summary" (_continue)="onChildPageChange($event, 'summary')">
+    <goa-public-form-page last id="summary" (_continue)="onChildPageChange($event, 'summary')">
       <goa-public-form-summary />
-    </goa-fieldset>
+    </goa-public-form-page>
 
   </goa-subform>
 
 
-  <goa-fieldset
+  <goa-public-form-page
     id="address"
     section-title="Support order details"
     heading="Current address"
@@ -154,10 +154,10 @@
     <goa-form-item name="" label="Postal code">
       <goa-input name="postal-code" />
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
 
-  <goa-fieldset
+  <goa-public-form-page
     id="do-you-receive-support"
     section-title="Support order details"
     (_continue)="onPageChange($event, 'do-you-receive-support')"
@@ -168,9 +168,9 @@
         <goa-radio-item value="No" label="No" />
       </goa-radio-group>
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset
+  <goa-public-form-page
     id="recalculated"
     section-title="Support order details"
     (_continue)="onPageChange($event, 'recalculated')"
@@ -181,14 +181,14 @@
         <goa-radio-item value="No" label="No" />
       </goa-radio-group>
     </goa-form-item>
-  </goa-fieldset>
+  </goa-public-form-page>
 
-  <goa-fieldset
+  <goa-public-form-page
     last
     id="summary"
     heading="Review your answers"
   >
     <goa-public-form-summary heading="Support order details" />
-  </goa-fieldset>
+  </goa-public-form-page>
 
 </goa-public-form>

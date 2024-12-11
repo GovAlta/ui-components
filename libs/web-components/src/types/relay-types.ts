@@ -2,18 +2,19 @@ export type FormStatus = "not-started" | "incomplete" | "complete";
 
 export type FormState = {
   id: string;
-  form: Record<string, FieldsetData | FormState[]>;
+  // TODO: rename form to "data" or "detail"
+  form: Record<string, Fieldset>;
   history: string[];
   editting: string;
   lastModified?: Date;
   status: FormStatus;
 };
 
-export type FieldsetData = {
-  heading: string;
+export type Fieldset = {
+  heading?: string;
   data?:
-    | Record<string, FieldsetItemState>
-    | Record<string, FieldsetItemState>[];
+    | { type: "details"; fieldsets: Record<string, FieldsetItemState> }
+    | { type: "list"; items: FormState[] };
 };
 
 // ====
@@ -33,7 +34,7 @@ export const FormResetFormMsg = "form::reset:form";
 export type FormBindRelayDetail = {
   el: HTMLElement;
 };
-export type FormStateChangeRelayDetail = FieldsetData;
+export type FormStateChangeRelayDetail = Fieldset;
 
 export type FormToggleActiveRelayDetail = {
   first: boolean;
@@ -42,9 +43,7 @@ export type FormToggleActiveRelayDetail = {
 
 export type FormSetFieldsetRelayDetail = {
   name: string;
-  value:
-    | Record<string, FieldsetItemState>
-    | Record<string, FieldsetItemState>[];
+  value: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
 };
 
 export type FormDispatchStateRelayDetail = FormState;
@@ -145,7 +144,7 @@ export type ExternalAlterDataRelayDetail =
       id: string;
       operation: "edit";
       index: number;
-      data: FieldsetData;
+      data: Fieldset;
     };
 
 export type ExternalContinueRelayDetail = {

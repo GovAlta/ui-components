@@ -4,7 +4,7 @@ export type FormStatus = "not-started" | "incomplete" | "complete";
 
 // Public type to define the state of the form
 export type AppState<T> = {
-  form: Record<string, AppStateData<T>>;
+  form: Record<string, Fieldset<T>>;
   history: string[];
   editting: string;
   lastModified?: Date;
@@ -12,9 +12,11 @@ export type AppState<T> = {
   currentFieldset?: { id: T; dispatchType: "change" | "continue" };
 };
 
-export type AppStateData<T> = {
+export type Fieldset<T> = {
   heading: string;
-  data: Record<string, FieldsetItemState | FieldsetItemState[]> | AppState<T>[];
+  data:
+    | { type: "details"; fieldsets: Record<string, FieldsetItemState> }
+    | { type: "list"; items: AppState<T>[] };
 };
 
 // Public type to define the state of the fieldset items
