@@ -7,6 +7,7 @@
         type: "String",
         attribute: "secondary-button-text",
       },
+      skipSummary: { type: "Boolean", attribute: "skip-summary" },
       preserveState: { type: "String", attribute: "preserve-state" },
       showBackButton: { type: "String", attribute: "show-back-button" },
       sectionTitle: { type: "String", attribute: "section-title" },
@@ -60,6 +61,7 @@
   // ======
 
   export let id: string = "";
+  export let skipSummary: boolean = false;
   export let heading: string = "";
   export let buttonText: string = "";
   export let secondaryButtonText: string = "";
@@ -175,12 +177,12 @@
   }
 
   function onSetFieldset(detail: FormSetFieldsetRelayDetail) {
-    // set the fieldset state
+    // set the local fieldset state
     for (const [id, item] of Object.entries(detail.value)) {
       _state[id] = { ...item };
     }
 
-    // restore state in form items
+    // restore state in form items by relaying the message
     for (const [name, data] of Object.entries(_state)) {
       if (Array.isArray(data)) {
         // TODO: restore the state when multiple items exist
@@ -338,7 +340,7 @@
     relay<FieldsetBindRelayDetail>(
       _rootEl,
       FieldsetBindMsg,
-      { id, heading, el: _rootEl },
+      { id, heading, skipSummary, el: _rootEl },
       { bubbles: true, timeout: 10 },
     );
   }

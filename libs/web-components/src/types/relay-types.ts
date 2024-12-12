@@ -12,10 +12,13 @@ export type FormState = {
 
 export type Fieldset = {
   heading?: string;
-  data?:
-    | { type: "details"; fieldsets: Record<string, FieldsetItemState> }
-    | { type: "list"; items: FormState[] };
+  skipSummary?: boolean;
+  data?: FieldsetData;
 };
+
+export type FieldsetData =
+  | { type: "details"; fieldsets: Record<string, FieldsetItemState> }
+  | { type: "list"; items: FormState[] }; // TODO: rename `items` to `form`
 
 // ====
 // Form
@@ -43,7 +46,7 @@ export type FormToggleActiveRelayDetail = {
 
 export type FormSetFieldsetRelayDetail = {
   name: string;
-  value: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
+  value: FieldsetData;
 };
 
 export type FormDispatchStateRelayDetail = FormState;
@@ -69,6 +72,7 @@ export const FieldsetMountFormItemMsg = "fieldset::bind:form-item";
 
 export type FieldsetBindRelayDetail = {
   id: string;
+  skipSummary: boolean;
   heading: string;
   el: HTMLElement;
 };

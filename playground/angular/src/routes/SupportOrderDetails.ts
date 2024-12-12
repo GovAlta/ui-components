@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { PublicFormComponent, requiredValidator } from "@abgov/angular-components";
+import { AppState, PublicFormComponent, requiredValidator } from "@abgov/angular-components";
 import { JsonPipe, NgFor, NgIf } from "@angular/common";
 
 type Page =
@@ -34,18 +34,16 @@ export class SupportOrderDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // const data = localStorage.getItem("support-order-details");
-    // const data = `{"form":{"what-is-your-role":{"heading":"","data":{"role":{"name":"role","value":"Recipient","label":"Role","order":1}}},"contact":{"heading":"","data":{"contact-method":{"name":"contact-method","value":"Contact by phone","label":"Method of contact","order":1}}},"children-subform":[{"id":"74e6c123-bdc1-4c07-88c1-7c382a80f715","form":{"name":{"heading":"","data":{"firstName":{"name":"firstName","value":"Chris","label":"First name","order":1},"lastName":{"name":"lastName","value":"Olsen","label":"Last name","order":2}}},"alternate-name":{"heading":"","data":{"alternateName":{"name":"alternateName","value":"Superman","label":"Alternate name","order":1}}},"dob":{"heading":"","data":{"dob":{"name":"dob","value":"1986-01-12","label":"Date of birth","order":2}}}},"history":["child-list","name","alternate-name","dob","summary","child-list"],"editting":"","lastModified":"2024-12-04T21:19:56.474Z","status":"not-started","currentFieldset":{"id":"summary","dispatchType":"continue"}},{"id":"0f12843d-d7f5-4ed4-8055-321034c0388c","form":{"name":{"heading":"","data":{"firstName":{"name":"firstName","value":"asd","label":"First name","order":1},"lastName":{"name":"lastName","value":"asd","label":"Last name","order":2}}},"alternate-name":{"heading":"","data":{"alternateName":{"name":"alternateName","value":"Wesley","label":"Alternate name","order":1}}},"dob":{"heading":"","data":{"dob":{"name":"dob","value":"1111-01-12","label":"Date of birth","order":2}}}},"history":["child-list","name","alternate-name","dob","summary","child-list"],"editting":"","lastModified":"2024-12-04T21:24:45.126Z","status":"complete","currentFieldset":{"id":"summary","dispatchType":"continue"}}]},"history":[],"editting":"","status":"not-started","currentFieldset":{"id":"contact","dispatchType":"continue"}}`;
-    const data = null;
+    // const data = null;
+    const raw = `{"form":{"what-is-your-role":{"heading":"","data":{"type":"details","fieldsets":{"role":{"name":"role","value":"Recipient","label":"Role","order":1}}}},"contact":{"skipSummary":false,"heading":""},"optional":{"heading":"Alternate names","data":{"type":"details","fieldsets":{"nickname":{"name":"nickname","value":"test","label":"Nick name","order":1},"alias":{"name":"alias","value":"qwerty","label":"Secret alias","order":2}}}},"children-subform":{"data":{"type":"list","items":[{"id":"26182ca7-92cb-4439-8d66-34cab61160a6","form":{"child-list":{"skipSummary":true,"heading":""},"name":{"heading":"","data":{"type":"details","fieldsets":{"firstName":{"name":"firstName","value":"Chris","label":"First name","order":1},"lastName":{"name":"lastName","value":"Olsen","label":"Last name","order":2}}}},"alternate-name":{"skipSummary":false,"heading":""},"dob":{"skipSummary":false,"heading":""},"summary":{"skipSummary":true,"heading":""}},"history":["child-list","name","summary","child-list"],"editting":"","lastModified":"2024-12-12T19:28:04.743Z","status":"not-started","currentFieldset":{"id":"summary","dispatchType":"continue"}}]}},"address":{"heading":"Current address","data":{"type":"details","fieldsets":{"address":{"name":"address","value":"123-45st","label":"Address","order":2},"city":{"name":"city","value":"Edmonton","label":"","order":3},"postal-code":{"name":"postal-code","value":"T5W 1O3","label":"","order":4}}}},"do-you-receive-support":{"heading":"","data":{"type":"details","fieldsets":{"support":{"name":"support","value":"Yes","label":"Support?","order":1}}}},"recalculated":{"heading":"","data":{"type":"details","fieldsets":{"recalculated":{"name":"recalculated","value":"Yes","label":"Recalculated?","order":1}}}},"summary":{"skipSummary":true,"heading":"Review your answers"}},"history":["what-is-your-role","optional","children-subform","address","do-you-receive-support","recalculated","summary"],"editting":"","status":"not-started","currentFieldset":{"id":"recalculated","dispatchType":"continue"}}`
+    const data = JSON.parse(raw) as AppState<Page>;
     if (data) {
       this._mainFormComponent.initState(data);
     }
   }
 
   updateState(e: Event) {
-    console.log("updateState before", e);
     this._mainFormComponent.updateState(e);
-    console.log("updateState after", this._mainFormComponent.state);
 
     // DEV ONLY: saving the state to local storage
     console.debug("SupportOrderDetails:updateState", this._mainFormComponent.state);

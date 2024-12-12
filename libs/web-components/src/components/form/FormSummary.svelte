@@ -3,6 +3,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import {
+  FieldsetItemState,
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
     FormState,
@@ -55,38 +56,42 @@
   }
 
   function getHeading(page: string): string {
-    try {
-      return _state.form?.[page]?.heading || "";
-    } catch (e) {
-      console.log(e);
-      return "FAIL"
-    }
+    return _state.form?.[page]?.heading || "";
   }
 
-  function getData(state: FormState, page: string) {
-    if (state.form.type !== "form") {
+  function getData(state: FormState, page: string): Record<string, FieldsetItemState> {
+    if (state.form[page]?.data?.type !== "details") {
       return;
     }
-    const fieldset = state.form.fields[page];
-    const data =
-      Object
-        .entries(fieldset.data || {})
+
+    const data = Object
+        .entries(state.form[page].data.fieldsets || {})
         .sort((itemsA, itemsB) => itemsA[1].order > itemsB[1].order ? 1 : -1)
-    console.debug("FormSummary:getData", {data})
-    return data;
+        .reduce((acc, [name, fieldsetState]) => {
+          acc[name] = fieldsetState;
+          return acc;
+        }, {});
+      console.log("FormSummary:getData", data);
+      return data;
   }
 
-  function getDataList(state: FormState, page: string) {
-    console.debug("FormSummary:getDataList", page, state)
-    if (state.form.type !== "list") {
+  function getDataList(state: FormState, page: string): Record<string, FieldsetItemState>[] {
+    console.debug("FormSummary:getDataList", page, state, { here:state.form[page]?.data?.typ  } )
+    if (state.form[page]?.data?.type !== "list") {
       return;
     }
 
-    return state.form.items.map(form => {
-      return form.history.map(fieldsetId => {
-        return getData(form, fieldsetId);
-      })
-    });
+    const data = state.form[page].data.items.reduce((acc, formState) => {
+      const data = formState.history.reduce((acc, fieldsetId) => {
+        acc = {...acc, ...getData(formState, fieldsetId)};
+        return acc;
+      }, {})
+      acc.push(data);
+      return acc;
+    }, []);
+
+    console.log("FormSummary:getDataList", data);
+    return data;
   }
 
 </script>
@@ -97,38 +102,42 @@
   {/if}
   {#if _state}
     {#each _state.history as page}
-      <goa-container>
-        <div class="summary" class:summary-with-header={!!getHeading(page)}>
-          {#if getHeading(page)}
-            <goa-text class="heading" color="secondary">{getHeading(page)}</goa-text>
-          {/if}
+      {#if !_state.form[page]?.skipSummary}
+        <goa-container>
+          <div class="summary" class:summary-with-header={!!getHeading(page)}>
+            {#if getHeading(page)}
+              <goa-text class="heading" color="secondary">{getHeading(page)}</goa-text>
+            {/if}
 
-          {#if _state.form[page]?.data}
-            <table class="data">
-              {#each getData(_state, page) as [_key, data]}
-                <tr>
-                  <td class="label">{data.label}</td>
-                  <td class="value">{data.value}</td>
-                </tr>
-              {/each}
-            </table>
-          {:else}
-            {#each getDataList(_state, page) as [_, item]}
-              <table class="data">
-                {#each item as [_key, data]}
-                  <tr>
-                    <td class="label">{data.label}</td>
-                    <td class="value">{data.value}</td>
-                  </tr>
+            {#if _state.form[page]?.data?.type}
+              {#if _state.form[page]?.data?.type === "details"}
+                <table class="data">
+                  {#each Object.entries(getData(_state, page)) as [_, data]}
+                    <tr>
+                      <td class="label">{data.label}</td>
+                      <td class="value">{data.value}</td>
+                    </tr>
+                  {/each}
+                </table>
+              {:else}
+                {#each getDataList(_state, page) as item}
+                  <table class="data">
+                    {#each Object.entries(item) as [_, data]}
+                      <tr>
+                        <td class="label">{data.label}</td>
+                        <td class="value">{data.value}</td>
+                      </tr>
+                    {/each}
+                  </table>
                 {/each}
-              </table>
-            {/each}
-          {/if}
+              {/if}
+            {/if}
           <div class="action">
-            <goa-link leadingicon="pencil" on:click={(e) => changePage(e, page)}>Change</goa-link>
+              <goa-link leadingicon="pencil" on:click={(e) => changePage(e, page)}>Change</goa-link>
+            </div>
           </div>
-        </div>
-      </goa-container>
+        </goa-container>
+      {/if}
     {/each}
   {/if}
 </div>

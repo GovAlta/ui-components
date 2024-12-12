@@ -80,7 +80,7 @@
   let _formFields: Record<string, Record<string, HTMLElement>> = {};
 
   // Form summary element reference
-  let _formSummary: HTMLElement;
+  let _formSummaryEl: HTMLElement;
 
   // Timeout id for form item binding
   let _formItemBindingTimeoutId: any;
@@ -219,7 +219,7 @@
    */
   function onFormSummaryBind(detail: FormSummaryBindRelayDetail) {
     // save the form-summary element reference for relaying messages
-    _formSummary = detail.el;
+    _formSummaryEl = detail.el;
 
     // sync any initial state
     syncFormSummaryState();
@@ -246,15 +246,8 @@
     _fieldsets = { ..._fieldsets, [detail.id]: detail };
     console.debug("Form:onFieldsetBind", name, "---", { detail, _fieldsets });
 
-    // FIXME: to prevent the form summary step from showing up in the form summary, make the
-    // form-summary like the subform i.e. it acts as a fieldset, but when it registers itself it
-    // includes a property that infors the form-summary not to show it.
-
-    // register the form items to ensure that all fieldsets are accessible within the form-summary
-    if (detail.heading) {
-      console.log("heading", detail.heading);
-      _state.form[detail.id] = { heading: detail.heading };
-    }
+    // save the initial state of the fieldset (data prop not set)
+    _state.form[detail.id] = { ..._state.form[detail.id], skipSummary: detail.skipSummary,  heading: detail.heading };
 
     // send the back url to child fieldsets, howwever only the first will need it
     if (backUrl) {
@@ -287,6 +280,7 @@
     const { id, state, dispatchOn } = detail;
 
     // clean empty values from the data
+    // TODO: add comment about why this is needed
     for (const [name, fieldsetState] of Object.entries(state.data)) {
       if (fieldsetState.value === "") {
         delete state.data[name];
@@ -294,7 +288,7 @@
     }
 
     // TODO: subform needs to dispatch this event...
-    _state.form[id] = state;
+    _state.form[id] = { heading: state.heading, data: { type: "details", fieldsets: state.data } };
     _state.lastModified = new Date();
 
     if (dispatchOn === "change") {
@@ -380,7 +374,7 @@
   function syncFormSummaryState() {
     console.debug("Form:syncFormSummaryState", _state);
     relay<FormDispatchStateRelayDetail>(
-      _formSummary,
+      _formSummaryEl,
       FormDispatchStateMsg,
       _state,
     );
@@ -508,7 +502,7 @@
     }
 
     if (typeof detail === "string") {
-      _state = JSON.parse(detail) as FormState;
+      _state = JSON.parse(detail);
     } else {
       _state = detail;
     }

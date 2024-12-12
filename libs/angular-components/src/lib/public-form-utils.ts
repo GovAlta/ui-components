@@ -14,6 +14,7 @@ export type AppState<T> = {
 
 export type Fieldset<T> = {
   heading: string;
+  skipSummary?: boolean;
   data:
     | { type: "details"; fieldsets: Record<string, FieldsetItemState> }
     | { type: "list"; items: AppState<T>[] };
@@ -51,7 +52,7 @@ export class PublicFormComponent<T> {
   }
 
   // Public method to allow for the initialization of the state
-  initState(state: string | AppState<T>) {
+  initState(state: string | AppState<T> | AppState<T>[]) {
     console.debug("Utils:initState", state);
     relay(this._formRef, "external::init:state", state);
   }
@@ -141,7 +142,12 @@ export class PublicFormComponent<T> {
 
     return this.state.map((s) => {
       return Object.values(s.form)
-        .map((item) => item.data || {})
+        .map((item) => {
+          if (item.data.type === "details") {
+            return item.data.fieldsets || {};
+          }
+          return item.data.items || {};
+        })
         .reduce(
           (acc, item) => {
             for (const [key, value] of Object.entries(item)) {
@@ -217,9 +223,13 @@ export class PublicFormComponent<T> {
     return [true, value];
   }
 
-  edit(index: number) {}
+  // edit(_: number) {
+  //   // TODO: implement
+  // }
 
-  remove(index: number) {}
+  // remove(_: number) {
+  //   // TODO: implement
+  // }
 
   // Private method to dispatch the error message to the form element
   #dispatchError(el: HTMLElement, name: string, msg: string) {
