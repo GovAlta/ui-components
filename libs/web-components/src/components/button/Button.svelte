@@ -38,6 +38,7 @@
   export let leadingicon: GoAIconType | null = null;
   export let trailingicon: GoAIconType | null = null;
   export let testid: string = "";
+  export let width: string = "";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -74,7 +75,10 @@
 
 <button
   class="{type} {size} {variant}"
-  style={calculateMargin(mt, mr, mb, ml)}
+  style={`
+      ${calculateMargin(mt, mr, mb, ml)};
+      --width: ${width};
+    `}
   disabled={isDisabled}
   on:click={clickHandler}
   data-testid={testid}
@@ -126,6 +130,7 @@
       transform 0.1s ease-in-out,
       background-color 0.2s ease-in-out,
       border-color 0.2s ease-in-out;
+    width: var(--width, auto);
   }
   button:disabled {
     pointer-events: none;
