@@ -200,10 +200,13 @@
 
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
+    display: block;
+    width: 100%;
   }
 
   #container {
     container: self / inline-size;
+    width: 100%;
   }
 
   .root {
@@ -212,6 +215,10 @@
     padding-bottom: var(--char-count-padding);
     border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
     border-radius: 3px;
+    box-sizing: border-box;
+    transition:
+      width 0.3s ease-in-out,
+      box-shadow 0.2s ease;
   }
 
   textarea {
@@ -229,9 +236,11 @@
   }
 
   @container self (--mobile) {
+    .root {
+      width: 100%;
+    }
     textarea {
       width: 100%;
-      min-width: 100%;
     }
   }
 
@@ -239,9 +248,13 @@
     .root {
       max-width: var(--width, 100%);
     }
-    textarea {
-      min-width: 0;
-      width: var(--width, 100%);
+
+    .root[style*="%"] {
+      width: var(--width);
+    }
+
+    .root:not([style*="%"]) {
+      width: min(var(--width), 100%);
     }
   }
 
