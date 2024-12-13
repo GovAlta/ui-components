@@ -9,8 +9,11 @@
     relay,
     toBoolean,
   } from "../../common/utils";
-  import type { Spacing } from "../../common/styling";
-  import { calculateMargin } from "../../common/styling";
+  import {
+    calculateMargin,
+    injectCss,
+    type Spacing,
+  } from "../../common/styling";
   import { onMount } from "svelte";
   import {
     FieldsetResetErrorsMsg,
@@ -74,10 +77,12 @@
   onMount(() => {
     addRelayListener();
     sendMountedMessage();
+    injectCss(_rootEl, ":host", {
+      width: width.includes("%") ? width : `min(${width}, 100%)`,
+    });
   });
 
   // functions
-
   function addRelayListener() {
     receive(_textareaEl, (action, data) => {
       switch (action) {
@@ -200,6 +205,7 @@
 
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
+    display: inline-block;
   }
 
   #container {
@@ -208,10 +214,11 @@
 
   .root {
     position: relative;
-    width: var(--width, 100%);
+    width: 100%;
     padding-bottom: var(--char-count-padding);
     border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
     border-radius: 3px;
+    transition: width 0.3s ease-in-out;
   }
 
   textarea {
@@ -236,12 +243,9 @@
   }
 
   @container self (--not-mobile) {
-    .root {
-      max-width: var(--width, 100%);
-    }
     textarea {
       min-width: 0;
-      width: var(--width, 100%);
+      width: 100%;
     }
   }
 
