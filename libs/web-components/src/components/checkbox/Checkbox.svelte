@@ -174,19 +174,21 @@
     --goa-checkbox-label-font-size: var(--goa-typography-body-m);
     --goa-checkbox-description-font-size: var(--goa-typography-body-xs);
     --goa-checkbox-gap: var(--goa-space-xs);
+    --goa-checkbox-color-label: var(--goa-color-text-default);
+    --goa-checkbox-color-label-disabled: var(--goa-color-greyscale-500);
 
     --goa-checkbox-border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
     --goa-checkbox-border-hover: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
     --goa-checkbox-border-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     --goa-checkbox-border-error: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
     --goa-checkbox-border-disabled: var(--goa-border-width-s) solid var(--goa-color-greyscale-400);
+    --goa-checkbox-border-disabled-error: var(--goa-border-width-m) solid #F58185;
 
     --goa-checkbox-color-bg: var(--goa-color-greyscale-white);
     --goa-checkbox-color-bg-checked: var(--goa-color-interactive-default);
     --goa-checkbox-color-bg-checked-hover: var(--goa-color-interactive-hover);
     --goa-checkbox-color-bg-checked-disabled: var(--goa-color-interactive-disabled);
     --goa-checkbox-color-bg-checked-error: var(--goa-color-interactive-error);
-
 
 
     box-sizing: border-box;
@@ -216,81 +218,79 @@
     cursor: pointer;
   }
 
-  /* Add hover styles when the user hovers over the label */
+  /* Hover style when the user hovers over the label */
   label:hover .container {
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
+    border: var(--goa-checkbox-border-hover);
   }
 
   label:hover .container.selected {
-    background-color: var(--goa-color-interactive-hover);
+    background-color: var(--goa-checkbox-color-bg-checked-hover);
     border: none;
   }
 
   .text {
-    padding-left: var(--goa-space-xs); /* Space between checkbox and text */
+    padding-left: var(--goa-checkbox-gap); /* Space between checkbox and text */
     user-select: none;
-    font: var(--goa-typography-body-m);
+    font: var(--goa-checkbox-label-font-size);
+    color: var(--goa-checkbox-color-label);
   }
 
   .description {
-    font: var(--goa-typography-body-xs);
+    font: var(--goa-checkbox-description-font-size);
     margin-left: var(--goa-space-xl);
     margin-top: var(--goa-space-2xs); /* Space between text and description */
   }
 
-
   /* Container */
   .container {
     box-sizing: border-box;
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
-    border-radius: 2px;
-    background-color: var(--goa-color-greyscale-white);
+    border: var(--goa-checkbox-border);
+    border-radius: var(--goa-checkbox-border-radius);
+    background-color: var(--goa-checkbox-color-bg);
     height: var(--goa-checkbox-size);
     width: var(--goa-checkbox-size);
     margin-top: 3px; /* aligns the checkbox with the text */
     display: flex;
     justify-content: center;
-
-    /* prevent squishing of checkbox */
-    flex: 0 0 auto;
+    flex: 0 0 auto; /* prevent squishing of checkbox */
   }
   .container:hover {
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
+    border: var(--goa-checkbox-border-hover);
   }
   .container svg {
-    fill: var(--goa-color-greyscale-white);
+    fill: var(--goa-checkbox-color-bg);
     margin: 3px;
   }
   .container.selected {
-    background-color: var(--goa-color-interactive-default);
+    background-color: var(--goa-checkbox-color-bg-checked);
     border: none;
   }
   .container.selected:hover {
-    background-color: var(--goa-color-interactive-hover);
+    background-color: var(--goa-checkbox-color-bg-checked-hover);
   }
 
   /* Error Container */
   .error .container,
   .error .container:hover {
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
-    background-color: var(--goa-color-greyscale-white);
+    border: var(--goa-checkbox-border-error);
+    background-color: var(--goa-checkbox-color-bg);
     box-shadow: none;
   }
   .error .container.selected,
   .error .container.selected:hover {
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
-    background-color: var(--goa-color-greyscale-white);
+    border: var(--goa-checkbox-border-error);
+    background-color: var(--goa-checkbox-color-bg);
   }
   label:hover.error .container {
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
+    border: var(--goa-checkbox-border-error);
   }
-
   label:hover.error .container.selected {
-    background-color: var(--goa-color-greyscale-white);
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
+    border: var(--goa-checkbox-border-error);
+    background-color: var(--goa-checkbox-color-bg);
   }
   .error .container svg {
-    fill: var(--goa-color-interactive-error);
+    fill: var(--goa-checkbox-color-bg-checked-error);
+    margin: 1px;
   }
 
   /* Focus + Error Container */
@@ -300,21 +300,21 @@
   }
   .error .container:has(:focus-visible):hover {
     outline: none;
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
+    border: var(--goa-checkbox-border-error);
   }
   .error .container.selected:has(:focus-visible):hover {
     outline: none;
     border: none;
-    background-color: var(--goa-color-greyscale-white);
+    background-color: var(--goa-checkbox-color-bg);
   }
   label:hover.error .container.selected:has(:focus-visible) {
     outline: none;
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
-    background-color: var(--goa-color-greyscale-white);
+    border: var(--goa-checkbox-border-error);
+    background-color: var(--goa-checkbox-color-bg);
   }
   label:hover.error .container:has(:focus-visible) {
     outline: none;
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
+    border: var(--goa-checkbox-border-error);
   }
 
   /* Focus Container */
@@ -324,48 +324,53 @@
   }
   .container:has(:focus-visible):hover {
     outline: none;
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
+    border: var(--goa-checkbox-border);
   }
   .container.selected:has(:focus-visible):hover {
     outline: none;
     border: none;
-    background-color: var(--goa-color-interactive-default);
+    background-color: var(--goa-checkbox-color-bg-checked);
   }
   label:hover .container.selected:has(:focus-visible) {
     outline: none;
     border: none;
-    background-color: var(--goa-color-interactive-default);
+    background-color: var(--goa-checkbox-color-bg-checked);
   }
   label:hover .container:has(:focus-visible) {
     outline: none;
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
+    border: var(--goa-checkbox-border);
   }
-
 
   /* Disabled */
   .disabled {
     cursor: default;
   }
   .disabled .text {
-    color: var(--goa-color-greyscale-500);
+    color: var(--goa-checkbox-color-label-disabled);
   }
+
+  label.disabled + .description {
+    color: var(--goa-checkbox-color-label-disabled);
+    cursor: default;
+  }
+
   /* override base settings */
   .disabled:not(.error) .container {
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-400);
+    border: var(--goa-checkbox-border-disabled);
     box-shadow: none;
   }
   .disabled:not(.error) .container.selected {
     border: none;
-    background-color: var(--goa-color-interactive-disabled);
+    background-color: var(--goa-checkbox-color-bg-checked-disabled);
   }
   .disabled.error .container.selected {
-    border: var(--goa-border-width-m) solid #F58185;
+    border: var(--goa-checkbox-border-disabled-error);
   }
   .disabled.error .container {
-    border: var(--goa-border-width-m) solid #F58185;
+    border: var(--goa-checkbox-border-disabled-error);
   }
   label:hover.disabled.error .container {
-    border: var(--goa-border-width-m) solid #F58185;
+    border: var(--goa-checkbox-border-disabled-error);
   }
   .disabled.error .container svg {
     fill: #F58185;

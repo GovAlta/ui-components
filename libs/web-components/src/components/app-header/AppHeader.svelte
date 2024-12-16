@@ -272,76 +272,123 @@
 /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
 
 /* App header component tokens */
---goa-app-header-color-bg: ;
---goa-app-header-border-bottom: ;
+--goa-app-header-color-bg: var(--goa-color-greyscale-white);
+--goa-app-header-border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
 
 /* Padding at different breakpoints */
---goa-app-header-padding-desktop: ;
---goa-app-header-padding-tablet: ;
---goa-app-header-padding-mobile: ;
+--goa-app-header-padding-desktop: var(--goa-space-3xl);
+--goa-app-header-padding-tablet: var(--goa-space-xl);
+--goa-app-header-padding-mobile: var(--goa-space-m);
 
 /* Logo and service name */
---goa-app-header-size-logo: ;
---goa-app-header-size-logo-mobile: ;
---goa-app-header-space-btw-logo-service-name: ;
---goa-app-header-space-btw-logo-service-name-mobile: ;
+--goa-app-header-size-logo: var(--goa-space-xl);
+--goa-app-header-size-logo-mobile: var(--goa-space-l);
+--goa-app-header-space-btw-logo-service-name: var(--goa-space-m);
+--goa-app-header-space-btw-logo-service-name-mobile: var(--goa-space-xs);
 --goa-app-header-space-btw-service-name-nav-items: ;
---goa-app-header-space-btw-service-name-nav-items-mobile: ;
+--goa-app-header-space-btw-service-name-nav-items-mobile: var(--goa-space-l);
+--goa-app-header-padding-logo: 14px var(--goa-space-xl) var(--goa-space-m) 0px;
+--goa-app-header-padding-logo-mobile: var(--goa-space-s) var(--goa-space-m);
 
---goa-app-header-typography-service-name: ;
---goa-app-header-typography-service-name-mobile: ;
+--goa-app-header-max-width-service-name: 28rem;
+--goa-app-header-min-width-service-name: 8rem;
+
+--goa-app-header-color-service-name: var(--goa-color-text-default);
+--goa-app-header-service-name-border-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+--goa-app-header-typography-service-name: var(--goa-typography-body-m);
+--goa-app-header-typography-service-name-mobile: var(--goa-typography-body-s);
+
+/* Menu button */
+--goa-app-header-padding-menu-button: var(--goa-space-m) var(--goa-space-s);
+--goa-app-header-typography-menu-button: var(--goa-typography-body-m);
+--goa-app-header-typography-menu-button-mobile: var(--goa-typography-body-s);
+--goa-app-header-color-menu-button: var(--goa-color-text-default);
+--goa-app-header-color-menu-button-hover: var(--goa-color-interactive-hover);
+--goa-app-header-color-menu-button-focus: var(--goa-color-interactive-hover);
+--goa-app-header-color-bg-menu-button-hover: var(--goa-color-greyscale-100);
+--goa-app-header-color-bg-menu-button-focus: var(--goa-color-greyscale-100);
 
 /* Menu items */
---goa-app-header-typography-nav-item: ;
---goa-app-header-gap-nav-items: ;
+--goa-app-header-typography-nav-item: var(--goa-typography-heading-s);
+--goa-app-header-typography-menu-item: var(--goa-typography-body-m);
+--goa-app-header-height-nav-item: var(--goa-space-3xl);
+--goa-app-header-height-nav-item-mobile: 50px;
 
---goa-app-header-color-text-nav-item: ;
---goa-app-header-color-text-nav-item-hover: ;
---goa-app-header-color-text-nav-item-focus: ;
---goa-app-header-color-text-nav-item-current: ;
---goa-app-header-color-bg-nav-item: ;
---goa-app-header-color-bg-nav-item-hover: ;
---goa-app-header-color-bg-nav-item-focus: ;
---goa-app-header-color-bg-nav-item-current: ;
---goa-app-header-color-bar-nav-item: ;
---goa-app-header-color-bar-nav-item-hover: ;
---goa-app-header-color-bar-nav-item-focus: ;
---goa-app-header-color-bar-nav-item-current: ;
+--goa-app-header-border-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
 
---goa-app-header-border-focus: ;
+--goa-app-header-padding-nav-item: var(--goa-space-m) var(--goa-space-s);
+--goa-app-header-padding-nav-item-in-menu: 9px var(--goa-space-m);
+
+--goa-app-header-color-text-nav-item: var(--goa-color-text-default);
+--goa-app-header-color-text-nav-item-hover: var(--goa-color-interactive-hover);
+--goa-app-header-color-text-nav-item-focus: var(--goa-color-interactive-hover);
+--goa-app-header-color-text-nav-item-current: var(--goa-color-text-default);
+--goa-app-header-color-bg-nav-item: var(--goa-color-greyscale-white);
+--goa-app-header-color-bg-nav-item-hover: var(--goa-color-greyscale-white);
+--goa-app-header-color-bg-nav-item-focus: var(--goa-color-greyscale-white);
+--goa-app-header-color-bg-nav-item-current: var(--goa-color-greyscale-white);
+--goa-app-header-color-bg-nav-item-in-menu-current: var(--goa-color-interactive-default);
+--goa-app-header-color-bg-nav-item-in-menu-current-hover: var(--goa-color-interactive-hover);
+
+/* Secondary menu items*/
+--goa-app-header-color-bg-nav-item-child-hover: var(--goa-color-greyscale-100);
+--goa-app-header-color-bg-nav-item-child-focus: var(--goa-color-greyscale-100);
+
+/* Menu item borders on desktop  */
+--goa-app-header-border-nav-item-hidden: var(--goa-space-2xs) solid transparent;
+--goa-app-header-border-nav-item-default: var(--goa-space-2xs) solid transparent;
+--goa-app-header-border-nav-item-hover: var(--goa-space-2xs) solid var(--goa-color-interactive-hover);
+--goa-app-header-border-nav-item-focus: var(--goa-space-2xs) solid var(--goa-color-interactive-hover);
+--goa-app-header-border-nav-item-current: var(--goa-space-2xs) solid var(--goa-color-interactive-default);
+--goa-app-header-border-nav-item-current-hover: var(--goa-space-2xs) solid var(--goa-color-interactive-hover);
+--goa-app-header-border-nav-item-current-focus: var(--goa-space-2xs) solid var(--goa-color-interactive-hover);
 
 /* Menu item - Type: Link */
---goa-app-header-nav-color-text-link-item: ;
---goa-app-header-nav-color-text-link-item-hover: ;
---goa-app-header-nav-color-text-link-item-focus: ;
---goa-app-header-nav-color-bg-link-item: ;
---goa-app-header-nav-color-bg-link-item-hover: ;
---goa-app-header-nav-color-bg-link-item-focus: ;
+--goa-app-header-typography-link-item: var(--goa-typography-body-m);
+--goa-app-header-padding-link-item: var(--goa-space-m);
 
-/* Menu items in collapsed menu */
---goa-app-header-typography-menu-item: ;
---goa-app-header-nav-color-bg-menu-item: ;
---goa-app-header-nav-color-bg-menu-item-hover: ;
---goa-app-header-nav-color-bg-menu-item-focus: ;
---goa-app-header-nav-color-bg-menu-item-current: ;
+--goa-app-header-nav-color-text-link-item: var(--goa-color-interactive-default);
+--goa-app-header-nav-color-text-link-item-hover: var(--goa-color-interactive-hover);
+--goa-app-header-nav-color-text-link-item-focus: var(--goa-color-interactive-hover);
+--goa-app-header-nav-color-bg-link-item: transparent;
+--goa-app-header-nav-color-bg-link-item-hover: transparent;
+--goa-app-header-nav-color-bg-link-item-focus: transparent;
 
-
-
-
-
+--goa-app-header-nav-color-text-link-item-in-menu: var(--goa-color-interactive-default);
+--goa-app-header-nav-color-text-link-item-in-menu-hover: var(--goa-color-interactive-hover);
+--goa-app-header-nav-color-text-link-item-in-menu-focus: var(--goa-color-interactive-hover);
+--goa-app-header-nav-color-bg-link-item-in-menu: transparent;
+--goa-app-header-nav-color-bg-link-item-in-menu-hover: var(--goa-color-greyscale-100);
+--goa-app-header-nav-color-bg-link-item-in-menu-focus: var(--goa-color-greyscale-100);
 
 }
 
   /* General App header styling -------------------------------------- */
   *,
   :global(::slotted(*)) {
-    font: var(--goa-typography-body-m);
+    font: var(--goa-app-header-typography-service-name);
   }
 
   /* Spans the full page width */
   .container {
-    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    background-color: var(--goa-color-greyscale-white);
+    border-bottom: var(--goa-app-header-border-bottom);
+    background-color: var(--goa-app-header-color-bg);
+  }
+
+  @media (--desktop) {
+    /* padding is independent from fullmenubreakpoint, should use media query */
+    .container.tablet {
+      padding: 0 var(--goa-space-3xl);
+    }
+    .container.desktop {
+      padding: 0 var(--desktop-padding);
+    }
+  }
+  @media (--tablet) {
+    /* padding is independent from fullmenubreakpoint, should use media query */
+    .container {
+      padding: 0 var(--goa-space-xl); /* 32px */
+    }
   }
 
   /* Contains all children within component */
@@ -367,7 +414,7 @@
 
   /* Logo and service name */
   .title {
-    color: var(--goa-color-text-default);
+    color: var(--goa-app-header-color-service-name);
   }
   .header-logo-title-area {
     grid-area: header;
@@ -377,26 +424,25 @@
   }
   /* Logo and service name --Focus */
   .header-logo-title-area:focus-visible {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline: var(--goa-app-header-service-name-border-focus);
     z-index: 100;
     position: relative;
   }
 
-  /* Menu items in navigation (and in collapsed menu) */
+  /* Menu items (+ in collapsed menu) */
   :global(::slotted(a)) {
-    font-weight: var(--goa-font-weight-regular);
     display: flex;
     align-items: center;
     margin: 0;
-    padding: calc((3rem - var(--goa-line-height-3)) / 2) var(--goa-space-m);
+    padding: var(--goa-app-header-padding-nav-item-in-menu);
     cursor: pointer;
     white-space: nowrap;
     text-decoration: none;
     overflow: hidden;
   }
-  /* Menu items in navigation (and in collapsed menu) --Focus */
+  /* Menu items (+ in collapsed menu) --Focus */
   :global(::slotted(a:focus-visible)) {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline: var(--goa-app-header-border-focus);
     outline-offset: 0px;
     z-index: 100;
     position: relative;
@@ -404,37 +450,37 @@
 
   /* Menu items in collapsed menu */
   :global(::slotted(a.inside-collapse-menu)) {
-    color: var(--goa-color-text-default);
-    background-color: var(--goa-color-greyscale-white);
+    color: var(--goa-app-header-color-text-nav-item);
+    background-color: var(--goa-app-header-color-bg-nav-item);
   }
   /* Menu items in collapsed menu --Hover */
   :global(::slotted(a.inside-collapse-menu:hover)) {
-    color: var(--goa-color-interactive-hover) !important;
-    background-color: var(--goa-color-greyscale-100);
+    color: var(--goa-app-header-color-text-nav-item-hover) !important;
+    background-color: var(--goa-app-header-color-bg-nav-item-child-hover);
   }
   /* Menu items in collapsed menu --Focus */
   :global(::slotted(a.inside-collapse-menu:focus-visible)) {
     outline-offset: -3px;
-    background-color: var(--goa-color-greyscale-100) !important;
-    color: var(--goa-color-interactive-hover) !important;
+    background-color: var(--goa-app-header-color-bg-nav-item-child-focus) !important;
+    color: var(--goa-app-header-color-text-nav-item-focus) !important;
   }
 
   /* Menu items in collapsed menu --Interactive */
   :global(::slotted(a.interactive)) {
-    color: var(--goa-color-interactive-default) !important;
+    color: var(--goa-app-header-nav-color-text-link-item) !important;
     text-decoration: underline !important;
     white-space: nowrap;
   }
   /* Menu items in collapsed menu --Interactive--Hover */
   :global(::slotted(a.interactive:hover)) {
-    color: var(--goa-color-interactive-hover) !important;
+    color: var(--goa-app-header-nav-color-text-link-item-hover) !important;
   }
   /* Menu items in collapsed menu --Interactive--Focus */
   :global(::slotted(a.interactive:focus-visible)) {
-    color: var(--goa-color-interactive-hover) !important;
-    background-color: transparent !important;
-    border-top: 4px solid transparent !important;
-    border-bottom: 4px solid transparent !important;
+    color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
+    background-color: var(--goa-app-header-color-bg-nav-item-child-focus) !important;
+    border-top: var(--goa-app-header-border-nav-item) !important;
+    border-bottom: var(--goa-app-header-border-nav-item) !important;
   }
 
   /* Menu button (for collapsed menu) */
@@ -447,23 +493,25 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    height: var(--goa-space-3xl);
+    height: var(--goa-app-header-height-nav-item);
     align-items: center;
     gap: 6px;
-    font: var(--goa-typography-body-m);
-    padding: 0px 12px;
+    font: var(--goa-app-header-typography-menu-button);
+    padding: var(--goa-app-header-padding-menu-button);
     text-decoration: underline;
   }
   /* Menu button (for collapsed menu) --Hover */
   .menu-toggle-area button:hover {
-    background-color: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
+    background-color: var(--goa-app-header-color-bg-menu-button-hover);
+    color: var(--goa-app-header-color-menu-button-hover);
   }
   /* Menu button (for collapsed menu) --Focus */
   .menu-toggle-area button:focus-visible {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline: var(--goa-app-header-border-focus);
     z-index: 100;
     position: relative;
+    background-color: var(--goa-app-header-color-bg-menu-button-focus);
+    color: var(--goa-app-header-color-menu-button-focus);
   }
   /* Size of icon in collapsed menu button */
   .menu-toggle-area goa-icon {
@@ -489,9 +537,9 @@
   /* Service name and logo */
   .desktop .title {
     padding-top: 5.5px;
-    max-width: 448px;
-    min-width: 128px;
-    font: var(--goa-typography-body-m);
+    max-width: var(--goa-app-header-max-width-service-name);
+    min-width: var(--goa-app-header-min-width-service-name);
+    font: var(--goa-app-header-typography-service-name);
   }
   .desktop .header-logo-title-area {
     grid-area: header;
@@ -499,9 +547,9 @@
     align-items: flex-start;
     color: inherit;
     flex: 1 1 auto;
-    min-height: calc(4rem - 2 * var(--goa-space-m)); /* - top/bottom padding */
-    margin: 14px 32px 16px 0px;
-    gap: var(--goa-space-m);
+    min-height: var(--goa-app-header-size-logo);
+    margin: var(--goa-app-header-padding-logo);
+    gap: var(--goa-app-header-space-btw-logo-service-name);
   }
   .desktop .image-desktop {
     display: block;
@@ -510,114 +558,102 @@
     display: none;
   }
 
-  /* Menu item with children (app header menu) --Default */
-  .desktop :global(::slotted(goa-app-header-menu)) {
-    padding: 0;
-    height: 64px;
-  }
-  /* Menu item with children (app header menu) --Hover */
-  .desktop :global(::slotted(goa-app-header-menu:hover)) {
-    background: var(--goa-color-greyscale-100);
-    cursor: pointer;
-    color: var(--goa-color-interactive-hover)!important;
-    overflow: hidden !important;
-  }
-  /* Menu item with children (app header menu) --Focus */
-  .desktop :global(::slotted(goa-app-header-menu:focus-visible)) {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-  }
+  /* Header nav item (on desktop)
 
-  /* Menu item --Default */
+  --Default */
   .desktop :global(::slotted(a)),
   .desktop :global(::slotted(a:visited)) {
-    font-weight: var(--goa-font-weight-bold);
+    font: var(--goa-app-header-typography-nav-item);
     display: block;
     align-items: center;
-    padding: var(--goa-space-m) var(--goa-space-s);
+    padding: var(--goa-app-header-padding-nav-item);
     text-decoration: none;
-    height: 64px;
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
+    height: var(--goa-app-header-height-nav-item);
+    border-top: var(--goa-app-header-border-nav-item-hidden);
+    border-bottom: var(--goa-app-header-border-nav-item-hidden);
   }
-  /* Menu item --Hover */
+  /* Header nav item --Hover */
   .desktop :global(::slotted(a:hover)) {
-    background: var(--goa-color-greyscale-100);
     cursor: pointer;
-    color: var(--goa-color-interactive-hover)!important;
-    border-top: 4px solid var(--goa-color-greyscale-200);
-    border-bottom: 4px solid transparent;
+    color: var(--goa-app-header-color-text-nav-item-hover)!important;
+    background: var(--goa-app-header-color-bg-nav-item-hover);
+    border-top: var(--goa-app-header-border-nav-item-hidden);
+    border-bottom: var(--goa-app-header-border-nav-item-hover);
   }
-  /* Menu item --Focus */
+  /* Header nav item --Focus */
   .desktop :global(::slotted(a:focus-visible)) {
     cursor: pointer;
-    border-top: 4px solid var(--goa-color-greyscale-200);
-    border-bottom: 4px solid transparent;
-    background: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover) !important;
+    color: var(--goa-app-header-color-text-nav-item-focus) !important;
+    background: var(--goa-app-header-color-bg-nav-item-focus);
+    border-top: var(--goa-app-header-border-nav-item-hidden);
+    border-bottom: var(--goa-app-header-border-nav-item-focus);
   }
-  /* Menu item --Current */
+  /* Header nav item --Current */
   .desktop :global(::slotted(a.current)) {
-    border-top: 4px solid var(--goa-color-interactive-default) !important;
-    border-bottom: 4px solid transparent;
+    border-top: var(--goa-app-header-border-nav-item-current) !important;
+    border-bottom: var(--goa-app-header-border-nav-item-hidden);
   }
-  /* Menu item --Current--Hover */
+  /* Header nav item --Current--Hover */
   .desktop :global(::slotted(a.current:hover)) {
-    border-top: 4px solid var(--goa-color-interactive-hover) !important;
-    border-bottom: 4px solid transparent;
+    border-top: var(--goa-app-header-border-nav-item-current-hover) !important;
+    border-bottom: var(--goa-app-header-border-nav-item-hidden);
   }
-  /* Menu item --Current--Focus */
+  /* Header nav item --Current--Focus */
   .desktop :global(::slotted(a.current:focus-visible)) {
-    border-top: 4px solid var(--goa-color-interactive-hover) !important;
-    border-bottom: 4px solid transparent;
+    border-top: var(--goa-app-header-border-nav-item-current-focus) !important;
+    border-bottom: var(--goa-app-header-border-nav-item-hidden);
+  }
+
+  /* Header nav item with children (app header menu) --Default */
+  .desktop :global(::slotted(goa-app-header-menu)) {
+    height: var(--goa-app-header-height-nav-item);
+  }
+  /* Header nav item with children (app header menu) --Hover */
+  .desktop :global(::slotted(goa-app-header-menu:hover)) {
+    background: var(--goa-app-header-color-bg-nav-item-hover);
+    cursor: pointer;
+    color: var(--goa-app-header-color-text-nav-item-hover)!important;
+    overflow: hidden !important;
   }
 
   /* Link item styling */
   .desktop :global(::slotted(a.interactive)) {
-    font: var(--goa-typography-body-m);
-    padding: 16px var(--goa-space-m);
+    font: var(--goa-app-header-typography-link-item);
+    padding: var(--goa-app-header-padding-link-item);
   }
   /* Link item styling --Hover */
   .desktop :global(::slotted(a.interactive:hover)) {
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    background-color: transparent;
+    border-top: var(--goa-app-header-border-nav-item-hidden);
+    border-bottom: var(--goa-app-header-border-nav-item-hidden);
+    background-color: var(--goa-app-header-nav-color-bg-link-item-hover);
   }
   /* Link item styling --Focus */
   .desktop :global(::slotted(a.interactive:focus-visible)) {
-    border-top: 4px solid transparent!important;
-    border-bottom: 4px solid transparent!important;
-    background-color: transparent !important;
+    border-top: var(--goa-app-header-border-nav-item-hidden)!important;
+    border-bottom: var(--goa-app-header-border-nav-item-hidden)!important;
+    background-color: var(--goa-app-header-nav-color-bg-link-item-focus) !important;
   }
   /* Link item styling --Current */
   .desktop :global(::slotted(a.interactive.current)) {
-    border-top: 4px solid transparent !important;
-    border-bottom: 4px solid transparent !important;
+    border-top: var(--goa-app-header-border-nav-item-hidden) !important;
+    border-bottom: var(--goa-app-header-border-nav-item-hidden) !important;
   }
 
-  @media (--desktop) {
-    /* padding is independent from fullmenubreakpoint, should use media query */
-    .container.tablet {
-      padding: 0 var(--goa-space-3xl);
-    }
-    .container.desktop {
-      padding: 0 var(--desktop-padding);
-    }
-  }
   /*------------------------------------------------*/
 
   /* TABLET -------------------------------------- */
 
   /* Service name and logo */
   .tablet .header-logo-title-area {
-    margin: 14px 32px 16px 0px;
-    min-height: 32px; /* - top/bottom padding */
-    gap: var(--goa-space-m);
+    margin: var(--goa-app-header-padding-logo);
+    min-height: var(--goa-app-header-size-logo); /* - top/bottom padding */
+    gap: var(--goa-app-header-space-btw-logo-service-name);
   }
   .tablet .title {
     padding-top: 5.5px;
-    font: var(--goa-typography-body-m);
-    max-width: 448px;
-    min-width: 128px;
+    font: var(--goa-app-header-typography-service-name);
+    max-width: var(--goa-app-header-max-width-service-name);
+    min-width: var(--goa-app-header-min-width-service-name);
   }
   .tablet .image-desktop {
     display: block;
@@ -628,27 +664,20 @@
 
   /* Menu button (Collapsed menu) */
   .tablet .menu-toggle-area {
-    padding-left: var(--goa-space-l); /* Space between service name and menu button */
+    padding-left: var(--goa-app-header-space-btw-service-name-nav-items-in-menu); /* Space between service name and menu button */
   }
 
-  /* Menu items in collapsed menu --Interactive--Focus */
+  /* Link menu items in collapsed menu --Focus */
   :global(::slotted(a.interactive:focus-visible)) {
-    color: var(--goa-color-interactive-hover) !important;
-    background-color: var(--goa-color-greyscale-100) !important;
+    color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
+    background-color: var(--goa-app-header-nav-color-bg-link-item-in-menu-focus) !important;
     border-top: none !important;
-    border-bottom: none !important;
+    border-bottom: none;
   }
 
   /* Add top border to all menu items in popover menu (except first) */
   .tablet :global(::slotted(a:not(:first-child))) {
     box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
-  }
-
-  @media (--tablet) {
-    /* padding is independent from fullmenubreakpoint, should use media query */
-    .container {
-      padding: 0 var(--goa-space-xl); /* 32px */
-    }
   }
   /*------------------------------------------------*/
 
@@ -657,29 +686,29 @@
   /* Service name and logo */
   .mobile .title {
     margin-top: -1px;
-    color: var(--goa-color-text-default);
-    max-width: 448px;
-    min-width: 128px;
-    font: var(--goa-typography-body-s);
+    color: var(--goa-app-header-color-service-name);
+    max-width: var(--goa-app-header-max-width-service-name);
+    min-width: var(--goa-app-header-min-width-service-name);
+    font: var(--goa-app-header-typography-service-name-mobile);
   }
   .mobile .header-logo-title-area {
     display: flex;
     align-items: top;
-    padding: 12px 16px;
-    gap: 8px;
+    padding: var(--goa-app-header-padding-logo-mobile);
+    gap: var(--goa-app-header-space-btw-logo-service-name-mobile);
   }
   .mobile .image-desktop {
     display: none;
   }
   .mobile .image-mobile {
     display: block;
-    width: var(--goa-icon-size-l);
+    width: var(--goa-app-header-size-logo-mobile);
   }
 
   /* Menu button styling */
   .mobile .menu-toggle-area button {
-    height: 50px;
-    font: var(--goa-typography-body-s);
+    height: var(--goa-app-header-height-nav-item-mobile);
+    font: var(--goa-app-header-typography-menu-button-mobile);
     display: flex;
     align-items: center;
   }
@@ -690,7 +719,7 @@
   /* Menu items in popover */
   .mobile :global(::slotted(a)) {
     box-shadow: inset 0 var(--goa-border-width-s) 0 0 var(--goa-color-greyscale-200);
-    font: var(--goa-typography-body-m);
+    font: var(--goa-app-header-typography-menu-item);
   }
   /* Bottom border for mobile menu */
   .mobile.show-menu {

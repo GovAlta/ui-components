@@ -109,7 +109,6 @@
   --goa-container-accent-thick-height: var(--goa-space-m); /* 16px */
   --goa-container-accent-thin-height: var(--goa-space-xs); /* 8px */
 
-
   /*types*/
   --goa-container-interactive-bg-color: var(--goa-color-greyscale-white);
   --goa-container-interactive-heading-bg-color: var(--goa-color-brand-default);
@@ -140,7 +139,6 @@
   --goa-container-important-heading-bg-color: var(--goa-color-warning-default);
   --goa-container-important-heading-text-color: var(--goa-color-text-default);
   --goa-container-important-border: var(--goa-border-width-s) solid var(--goa-color-warning-default);
-
 
   /*  ------------------------------------------------------- */
 

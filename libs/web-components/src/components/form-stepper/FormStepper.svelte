@@ -287,7 +287,6 @@
     --goa-stepper-line-thickness: 4px;
 
     --goa-step-gap-small-screen: 0px;
-
     }
 
 
@@ -300,10 +299,6 @@
   #container {
     container: self / inline-size;
   }
-
-  goa-grid {
-  gap: 1px; /* Replace with your desired spacing */
-}
 
   progress {
     position: absolute;

@@ -225,7 +225,6 @@
   :host {
 
     /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
-
     --goa-tooltip-color-bg: var(--goa-color-greyscale-700);
     --goa-tooltip-border-radius: var(--goa-border-radius-m);
     --goa-tooltip-padding: 6px var(--goa-space-m) 10px var(--goa-space-m); /* not using all global variables to vertically center our text (vertical allignment issue with text) */

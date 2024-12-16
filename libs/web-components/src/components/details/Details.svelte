@@ -81,13 +81,14 @@
 
     --goa-details-typography: var(--goa-typography-body-m);
     --goa-details-text-decoration: underline;
-    --goa-details-text-color: var(--goa-color-interactive-default);
-    --goa-details-text-color-hover: var(--goa-color-interactive-hover);
+    --goa-details-color-text: var(--goa-color-interactive-default);
+    --goa-details-color-text-hover: var(--goa-color-interactive-hover);
+    --goa-details-color-bg-hover: var(--goa-color-greyscale-100);
+
     --goa-details-padding-top: 6px;
     --goa-details-padding-right: var(--goa-space-s);
     --goa-details-padding-bottom: var(--goa-space-xs);
     --goa-details-padding-left: var(--goa-space-xs);
-    --goa-details-hover-color-bg: var(--goa-color-greyscale-100);
 
     --goa-details-content-left-border: 4px solid var(--goa-color-greyscale-200);
     --goa-details-content-padding-top: var(--goa-space-s);
@@ -120,7 +121,6 @@
   }
 
   /* Summary == detail heading */
-
   summary {
     padding-top: var(--goa-details-padding-top);
     padding-right: var(--goa-details-padding-right);
@@ -141,25 +141,24 @@
   summary:focus,
   summary:active {
     border-radius: var(--goa-details-border-radius);
-    color: var(--goa-color-interactive-hover);
-    background-color: var(--goa-details-hover-color-bg);
+    color: var(--goa-details-color-text-hover);
+    background-color: var(--goa-details-color-bg-hover);
   }
   summary:hover {
-    background-color: var(--goa-details-hover-color-bg);
+    background-color: var(--goa-details-color-bg-hover);
   }
 
   summary span {
     margin-left: var(--goa-space-xl);
     text-decoration: var(--goa-details-text-decoration);
-    color: var(--goa-details-text-color);
+    color: var(--goa-details-color-text);
     font: var(--goa-details-typeface);
   }
   summary:hover span {
-    color: var(--goa-details-text-color-hover);
+    color: var(--goa-details-color-text-hover);
   }
 
   /* Content == expanded content */
-
   .content {
     border-left: var(--goa-details-content-left-border);
     padding-left: var(--goa-details-content-padding-left);

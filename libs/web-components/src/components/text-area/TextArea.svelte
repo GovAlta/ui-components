@@ -161,7 +161,26 @@
 <style>
   :host {
     /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
-    --goa-text-area: ;
+
+    --goa-text-area-padding: 0.625rem var(--goa-space-s);
+    --goa-text-area-typography: var(--goa-typography-body-m);
+    --goa-text-area-typography-counter: var(--goa-typography-body-xs);
+
+    --goa-text-area-color-text: var(--goa-color-text-default);
+    --goa-text-area-color-text-counter: var(--goa-color-text-default);
+    --goa-text-area-color-text-counter-error: var(--goa-color-interactive-error);
+    --goa-text-area-color-text-disabled: var(--goa-color-text-disabled);
+
+    --goa-text-area-color-bg: var(--goa-color-greyscale-white);
+    --goa-text-area-color-bg-disabled: var(--goa-color-greyscale-100);
+
+    --goa-text-area-border-radius: var(--goa-border-radius-m);
+    --goa-text-area-border: inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700);
+    --goa-text-area-border-hover: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    --goa-text-area-border-focus: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    --goa-text-area-border-error: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-error);
+    --goa-text-area-border-disabled: inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-200);
+
 
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
@@ -178,40 +197,43 @@
     position: relative;
     max-width: var(--width, 100%);
     padding-bottom: var(--char-count-padding); /*if count by is true = 2rem, else 0*/
-    box-shadow: inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700);
-    border-radius: 4px;
+    box-shadow: var(--goa-text-area-border);
+    border-radius: var(--goa-text-area-border-radius);
   }
   /* Hover state */
   .root:hover {
-    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    box-shadow: var(--goa-text-area-border-hover);
   }
   /* Focus state */
   .root:focus-within{
     box-shadow:
-      inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
-      0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+      var(--goa-text-area-border),
+      var(--goa-text-area-border-focus);
   }
   /* Error state */
   .error, .error:hover {
-    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-error);
+    box-shadow: var(--goa-text-area-border-error);
   }
   .error:focus {
-    box-shadow: inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
-      0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    box-shadow:
+    var(--goa-text-area-border),
+    var(--goa-text-area-border-focus);
   }
   .error:focus-within:hover {
-    box-shadow: inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
-      0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    box-shadow:
+    var(--goa-text-area-border),
+    var(--goa-text-area-border-focus);;
   }
   /* Disabled state */
   .disabled, .disabled:hover {
-    background-color: var(--goa-color-greyscale-100);
+    background-color: var(--goa-text-area-color-bg-disabled);
     cursor: default;
-    box-shadow: inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-200);
+    box-shadow: var(--goa-text-area-border-disabled);
     resize: none;
   }
   textarea:disabled {
     resize: none;
+    color: var(--goa-text-area-color-text-disabled);
   }
 
   textarea[readonly] {
@@ -223,12 +245,13 @@
     box-sizing: border-box;
     outline: none;
     border: none;
-    border-radius: 4px;
-    color: var(--goa-color-text-default);
-    padding: 0.625rem var(--goa-space-s);
-    font: var(--goa-typography-body-m);
+    border-radius: var(--goa-text-area-border-radius);
+    color: var(--goa-text-area-color-text);
+    padding: var(--goa-text-area-padding);
+    font: var(--goa-text-area-typography);
     min-width: 100%;
-    resize: vertical;
+    max-width: 100%;
+    resize: none;
     height: auto;
     background: none;
   }
@@ -236,12 +259,12 @@
   /* Counter */
   .counter {
     position: absolute;
-    right: 1rem;
-    bottom: 0.5rem;
-    font-size: var(--goa-font-size-2);
+    right: var(--goa-space-m);
+    bottom: var(--goa-space-s);
+    font: var(--goa-text-area-typography-counter);
   }
   .counter-error {
-    color: var(--goa-color-interactive-error);
+    color: var(--goa-text-area-color-text-counter-error);
   }
 
   /* Scrollbar */
@@ -251,17 +274,20 @@
     max-height: calc(100vh * var(--max-height, 100) / 100);
   }
   textarea::-webkit-scrollbar {
-    width: 8px;
+    width: var(--goa-space-xs);
   }
   textarea::-webkit-scrollbar-track {
     border-radius: var(--goa-border-radius-m);
+
   }
   textarea::-webkit-scrollbar-track:hover {
     background: var(--goa-color-greyscale-200);
+
   }
   textarea::-webkit-scrollbar-thumb {
     background: var(--goa-color-greyscale-400);
     border-radius: var(--goa-border-radius-m);
+
   }
   textarea::-webkit-scrollbar-thumb:hover {
     background: var(--goa-color-greyscale-600);

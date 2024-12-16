@@ -82,6 +82,10 @@
     --goa-footer-link-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
 
     --goa-footer-typography-small-screen: var(--goa-font-size-3);
+
+    --goa-footer-size-logo-desktop: 155px;
+    --goa-footer-size-logo-tablet: 155px;
+    --goa-footer-size-logo-mobile: 133px;;
   }
 
   * {
@@ -106,7 +110,7 @@
       font-size: var(--goa-footer-typography-small-screen);
     }
     .logo {
-    width: 133px;
+    width: var(--goa-footer-size-logo-mobile);
     }
   }
 
@@ -115,7 +119,7 @@
       padding: var(--goa-footer-padding-medium-screen);
     }
     .logo {
-    width: 155px;
+    width: var(--goa-footer-size-logo-tablet);
     }
   }
 
@@ -124,7 +128,7 @@
       padding: var(--goa-footer-padding-large-screen);
     }
     .logo {
-    width: 155px;
+    width: var(--goa-footer-size-logo-desktop);
     }
   }
 

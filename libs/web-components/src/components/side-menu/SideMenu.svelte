@@ -185,6 +185,5 @@
     height: 100%;
     flex-direction: column;
     gap: var(--goa-side-menu-items-gap);
-    border-right: var(--goa-side-menu-border-right); /* should this happen on the parent div on the page? */
-  }
+    border-right: var(--goa-side-menu-border-right); /* should this happen on the parent div on the page? */  }
 </style>

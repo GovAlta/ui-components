@@ -172,7 +172,7 @@
           <goa-icon type={leadingicon} mt="1" />
         {/if}
         {heading}
-        <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1" />
+        <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="2" />
       </button>
 
       <div class="desktop" bind:this={_slotParentEl}>
@@ -186,7 +186,7 @@
       {/if}
       <span class="heading">{heading}</span>
       <goa-spacer hspacing="fill" />
-      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1" />
+      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="2" />
     </button>
     {#if _open}
       <div class="not-desktop" bind:this={_slotParentEl}>
@@ -198,8 +198,107 @@
 
 <style>
   :host {
-    /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
-    --goa-app-header-menu: ;
+/* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+
+/* App header component tokens */
+--goa-app-header-color-bg: var(--goa-color-greyscale-white);
+--goa-app-header-border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+
+/* Padding at different breakpoints */
+--goa-app-header-padding-desktop: var(--goa-space-3xl);
+--goa-app-header-padding-tablet: var(--goa-space-xl);
+--goa-app-header-padding-mobile: var(--goa-space-m);
+
+/* Logo and service name */
+--goa-app-header-size-logo: var(--goa-space-xl);
+--goa-app-header-size-logo-mobile: var(--goa-space-l);
+--goa-app-header-space-btw-logo-service-name: var(--goa-space-m);
+--goa-app-header-space-btw-logo-service-name-mobile: var(--goa-space-xs);
+--goa-app-header-space-btw-service-name-nav-items: ;
+--goa-app-header-space-btw-service-name-nav-items-mobile: var(--goa-space-l);
+--goa-app-header-padding-logo: 14px var(--goa-space-xl) var(--goa-space-m) 0px;
+--goa-app-header-padding-logo-mobile: var(--goa-space-s) var(--goa-space-m);
+
+--goa-app-header-max-width-service-name: 28rem;
+--goa-app-header-min-width-service-name: 8rem;
+
+--goa-app-header-color-service-name: var(--goa-color-text-default);
+--goa-app-header-service-name-border-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+--goa-app-header-typography-service-name: var(--goa-typography-body-m);
+--goa-app-header-typography-service-name-mobile: var(--goa-typography-body-s);
+
+/* Menu button */
+--goa-app-header-padding-menu-button: var(--goa-space-m) var(--goa-space-s);
+--goa-app-header-typography-menu-button: var(--goa-typography-body-m);
+--goa-app-header-typography-menu-button-mobile: var(--goa-typography-body-s);
+--goa-app-header-color-menu-button: var(--goa-color-text-default);
+--goa-app-header-color-menu-button-hover: var(--goa-color-interactive-hover);
+--goa-app-header-color-menu-button-focus: var(--goa-color-interactive-hover);
+--goa-app-header-color-bg-menu-button-hover: var(--goa-color-greyscale-100);
+--goa-app-header-color-bg-menu-button-focus: var(--goa-color-greyscale-100);
+
+/* Menu items */
+--goa-app-header-typography-nav-item: var(--goa-typography-heading-s);
+--goa-app-header-typography-menu-item: var(--goa-typography-body-m);
+--goa-app-header-height-nav-item: var(--goa-space-3xl);
+--goa-app-header-height-nav-item-mobile: 50px;
+
+--goa-app-header-border-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+
+--goa-app-header-padding-nav-item: var(--goa-space-m) var(--goa-space-s);
+--goa-app-header-padding-nav-item-in-menu: 9px var(--goa-space-m);
+
+--goa-app-header-color-text-nav-item: var(--goa-color-text-default);
+--goa-app-header-color-text-nav-item-hover: var(--goa-color-interactive-hover);
+--goa-app-header-color-text-nav-item-focus: var(--goa-color-interactive-hover);
+--goa-app-header-color-text-nav-item-current: var(--goa-color-text-default);
+--goa-app-header-color-bg-nav-item: var(--goa-color-greyscale-white);
+--goa-app-header-color-bg-nav-item-hover: var(--goa-color-greyscale-white);
+--goa-app-header-color-bg-nav-item-focus: var(--goa-color-greyscale-white);
+--goa-app-header-color-bg-nav-item-current: var(--goa-color-greyscale-white);
+--goa-app-header-color-bg-nav-item-in-menu-current: var(--goa-color-interactive-default);
+--goa-app-header-color-bg-nav-item-in-menu-current-hover: var(--goa-color-interactive-hover);
+
+/* Secondary menu items*/
+--goa-app-header-color-bg-nav-item-child-hover: var(--goa-color-greyscale-100);
+--goa-app-header-color-bg-nav-item-child-focus: var(--goa-color-greyscale-100);
+
+/* Menu item borders on desktop  */
+--goa-app-header-border-nav-item-hidden: var(--goa-space-2xs) solid transparent;
+--goa-app-header-border-nav-item-default: var(--goa-space-2xs) solid transparent;
+--goa-app-header-border-nav-item-hover: var(--goa-space-2xs) solid var(--goa-color-interactive-hover);
+--goa-app-header-border-nav-item-focus: var(--goa-space-2xs) solid var(--goa-color-interactive-hover);
+--goa-app-header-border-nav-item-current: var(--goa-space-2xs) solid var(--goa-color-interactive-default);
+--goa-app-header-border-nav-item-current-hover: var(--goa-space-2xs) solid var(--goa-color-interactive-hover);
+--goa-app-header-border-nav-item-current-focus: var(--goa-space-2xs) solid var(--goa-color-interactive-hover);
+
+/* Menu item - Type: Link */
+--goa-app-header-typography-link-item: var(--goa-typography-body-m);
+--goa-app-header-padding-link-item: var(--goa-space-m);
+
+--goa-app-header-nav-color-text-link-item: var(--goa-color-interactive-default);
+--goa-app-header-nav-color-text-link-item-hover: var(--goa-color-interactive-hover);
+--goa-app-header-nav-color-text-link-item-focus: var(--goa-color-interactive-hover);
+--goa-app-header-nav-color-bg-link-item: transparent;
+--goa-app-header-nav-color-bg-link-item-hover: transparent;
+--goa-app-header-nav-color-bg-link-item-focus: transparent;
+
+--goa-app-header-nav-color-text-link-item-in-menu: var(--goa-color-interactive-default);
+--goa-app-header-nav-color-text-link-item-in-menu-hover: var(--goa-color-interactive-hover);
+--goa-app-header-nav-color-text-link-item-in-menu-focus: var(--goa-color-interactive-hover);
+--goa-app-header-nav-color-bg-link-item-in-menu: transparent;
+--goa-app-header-nav-color-bg-link-item-in-menu-hover: var(--goa-color-greyscale-100);
+--goa-app-header-nav-color-bg-link-item-in-menu-focus: var(--goa-color-greyscale-100);
+
+
+    /* Tokens specific to AppHeaderMenu */
+
+    --goa-app-header-padding-nav-item-with-children: var(--goa-space-m) var(--goa-space-s) var(--goa-space-s);
+    --goa-app-header-padding-secondary-nav-item-in-menu: 9px var(--goa-space-m) 9px var(--goa-space-xl);
+
+    --goa-app-header-border-top-menu-item: inset 0 1px 0 0 var(--goa-color-greyscale-200);
+    --goa-app-header-border-bottom-menu-item: inset 0 -1px 0 0 var(--goa-color-greyscale-200);
+
   }
 
   * {
@@ -208,135 +307,135 @@
 
   /* Menu item with children */
   button {
-    padding: 16px 12px 12px;
+    padding: var(--goa-app-header-padding-nav-item-with-children);
     border: none;
-    color: var(--goa-color-text-default);
+    color: var(--goa-app-header-color-text-nav-item);
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 6px;
     background: none;
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
+    border-top: var(--goa-app-header-border-nav-item-hidden);
+    border-bottom: var(--goa-app-header-border-nav-item-hidden);
   }
   /* Menu item with children --Hover, --Active */
   button:active,
   button:hover {
-    background: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
-    border-top: 4px solid var(--goa-color-greyscale-200);
-    border-bottom: 4px solid transparent;
+    background: var(--goa-app-header-color-bg-nav-item-hover);
+    color: var(--goa-app-header-color-text-nav-item-hover);
+    border-top: var(--goa-app-header-border-nav-item-hidden);
+    border-bottom: var(--goa-app-header-border-nav-item-hover);
   }
   /* Menu item with children --Focus */
   button:focus-visible {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus) !important;
+    outline: var(--goa-app-header-border-focus) !important;
     position: relative;
     z-index: 100;
-    background-color: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
-    border-top: 4px solid var(--goa-color-greyscale-200);
-    border-bottom: 4px solid transparent;
+    background-color: var(--goa-app-header-color-bg-nav-item-focus);
+    color: var(--goa-app-header-color-text-nav-item-focus);
+    border-top: var(--goa-app-header-border-nav-item-hidden);
+    border-bottom: var(--goa-app-header-border-nav-item-focus);
   }
-  /* Adds missing border bottom to first item */
+  /* Adds missing border bottom to first item
   button.open {
     border-bottom: 1px solid var(--goa-color-greyscale-200);
-  }
+  }*/
+
   /* Menu item with children --Current */
   button.current {
-    border-top: 4px solid var(--goa-color-interactive-default);
-    border-bottom: 4px solid transparent;
+    border-top: var(--goa-app-header-border-nav-item-hidden);
+    border-bottom: var(--goa-app-header-border-nav-item-current);
   }
   /* Menu item with children --Current--Hover */
   button.current:hover {
-    border-top: 4px solid var(--goa-color-interactive-hover);
-    border-bottom: 4px solid transparent;
+    border-top: var(--goa-app-header-border-nav-item-hidden);
+    border-bottom: var(--goa-app-header-border-nav-item-hover);
   }
 
   /* Secondary Menu items (in popover on menu item) */
   :global(::slotted(a)),
   :global(::slotted(a:visited)) {
-    box-shadow: inset 0 1px 0 0 var(--goa-color-greyscale-200);
-    color: var(--goa-color-text-default);
+    box-shadow: var(--goa-app-header-border-top-menu-item);
+    color: var(--goa-app-header-color-text-nav-item);
     display: block;
-    padding: calc((3rem - var(--goa-line-height-3)) / 2) 1rem;
+    padding: var(--goa-app-header-padding-nav-item-in-menu)!important;
     text-decoration: none;
   }
   /* Secondary Menu items (in popover on menu item) --Hover */
   :global(::slotted(a:hover)) {
-    background: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover) !important;
+    background: var(--goa-app-header-color-bg-nav-item-child-hover);
+    color: var(--goa-app-header-color-text-nav-item-hover) !important;
   }
   /* Secondary Menu items (in popover on menu item) --Focus */
   :global(::slotted(a:focus-visible)) {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline: var(--goa-app-header-border-focus);
     outline-offset: -3px;
-    background: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover) !important;
+    background: var(--goa-app-header-color-bg-nav-item-child-focus);
+    color: var(--goa-app-header-color-text-nav-item-focus) !important;
   }
   /* Secondary Menu items (in popover on menu item) --Current */
   :global(::slotted(a.current)) {
-    background-color: var(--goa-color-interactive-default);
+    background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current);
   }
   /* Secondary Menu items (in popover on menu item) --Current--Hover */
   :global(::slotted(a.current:hover)) {
-    background: var(--goa-color-interactive-hover);
+    background: var(--goa-app-header-color-bg-nav-item-in-menu-current-hover);
   }
 
   /* Menu items in collapsed menu --Interactive */
   :global(::slotted(a.interactive)) {
-    color: var(--goa-color-interactive-default) !important;
+    color: var(--goa-app-header-nav-color-text-link-item) !important;
     text-decoration: underline !important;
     white-space: nowrap;
   }
   /* Menu items in collapsed menu --Interactive--Hover */
   :global(::slotted(a.interactive:hover)) {
-    color: var(--goa-color-interactive-hover) !important;
+    color: var(--goa-app-header-nav-color-text-link-item-hover) !important;
   }
   /* Menu items in collapsed menu --Interactive--Focus */
   :global(::slotted(a.interactive:focus-visible)) {
-    color: var(--goa-color-interactive-hover) !important;
-    background-color: var(--goa-color-greyscale-100);
+    color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
+    background-color: var(--goa-app-header-color-bg-nav-item-focus);
   }
 
   /* Secondary Menu items (in popover on menu item) --Mobile */
   .not-desktop :global(::slotted(a)) {
-    padding: calc((3rem - var(--goa-line-height-3)) / 2) 2.75rem;
+    padding: var(--goa-app-header-padding-secondary-nav-item-in-menu) !important;
   }
 
   @media not (--desktop) {
     /* Menu item with children on mobile */
     button {
-      box-shadow: inset 0 1px 0 0 var(--goa-color-greyscale-200);
-      height: 3rem;
-      padding: 0 1rem;
+      box-shadow: var(--goa-app-header-border-top-menu-item);
+      padding: var(--goa-app-header-padding-nav-item-in-menu);
       width: 100%;
       border-top: none;
       border-bottom: none;
+      display: flex;
+      align-items: center;
     }
     /* Menu item with children on mobile --Hover, --Active */
     button:active,
     button:hover, button:focus-visible {
-      background: var(--goa-color-greyscale-100);
-      color: var(--goa-color-interactive-hover);
+      background: var(--goa-app-header-color-bg-nav-item-child-hover);
+      color: var(--goa-app-header-color-text-nav-item-hover);
       border-top: none;
       border-bottom: none;
     }
     /* Menu item with children on mobile --Focus */
     button:focus-visible {
-      outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus) !important;
+      outline: var(--goa-app-header-border-focus) !important;
       outline-offset: -3px;
       border-top: none;
       border-bottom: none;
     }
     button.open {
-      box-shadow: inset 0 1px 0 0 var(--goa-color-greyscale-200);
-      padding-top: 1px;
+      box-shadow: var(--goa-app-header-border-top-menu-item), var(--goa-app-header-border-bottom-menu-item);
+      padding: var(--goa-app-header-padding-nav-item-in-menu);
+
     }
     button.open:hover, button.open:focus-visible {
-      box-shadow:
-        inset 0 1px 0 0 var(--goa-color-greyscale-200),
-        inset 0 -1px 0 0 var(--goa-color-greyscale-200);
-      padding-top: 0px;
+      box-shadow: var(--goa-app-header-border-top-menu-item), var(--goa-app-header-border-bottom-menu-item);
     }
     .heading {
       /* prevent the menu text from line breaking too early */

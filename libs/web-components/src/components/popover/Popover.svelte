@@ -221,6 +221,7 @@
 <div
   bind:this={_rootEl}
   data-testid={testid}
+  part="popover"
   style={styles(
     _relative && "position: relative",
     height === "full" && "height: 100%;",
@@ -288,6 +289,7 @@
     --goa-popover-padding: var(--goa-space-s);
     --goa-popover-color-bg: var(--goa-color-greyscale-white);
     --goa-popover-shadow: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.25));
+    --goa-popover-border-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
 
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
@@ -304,8 +306,7 @@
   }
 
   .popover-target:has(:focus-visible) {
-    outline: var(--goa-border-radius-l) solid var(--goa-color-interactive-focus);
-    outline: none;
+    outline: var(--goa-popover-border-focus);
   }
 
   .popover-content {
@@ -339,6 +340,6 @@
     position: fixed;
     z-index: 98;
     inset: 0;
-    height: 100%;
   }
+
 </style>

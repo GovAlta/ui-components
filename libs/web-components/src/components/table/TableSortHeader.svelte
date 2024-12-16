@@ -55,10 +55,10 @@
     font-weight: inherit;
     color: inherit;
     width: 100%;
-    height: 3rem;
-    padding: 12px 1rem;
+    height: var(--goa-space-2xl);
+    padding: var(--goa-space-s) var(--goa-space-m);
     justify-content: var(--header-text-align, flex-start);
-    gap: 0.25rem;
+    gap: var(--goa-space-2xs);
     align-items: flex-end;
     text-align: var(--header-align, left);
   }

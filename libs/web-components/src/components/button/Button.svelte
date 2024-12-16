@@ -21,7 +21,7 @@
   );
   const [Variants, validateVariant] = typeValidator(
     "Button variant",
-    ["normal", "destructive"],
+    ["normal", "destructive", "inverse"],
     true,
   );
 
@@ -133,6 +133,11 @@
     --goa-button-primary-destructive-hover-color-bg: var(--goa-color-emergency-dark);
     --goa-button-primary-destructive-hover-color-text: var(--goa-color-text-light);
     --goa-button-primary-destructive-focus-color-bg: var(--goa-color-emergency-dark);
+    --goa-button-primary-inverse-color-bg: var(--goa-color-greyscale-white);
+    --goa-button-primary-inverse-color-text: var(--goa-color-text-default);
+    --goa-button-primary-inverse-hover-color-bg: var(--goa-color-interactive-hover);
+    --goa-button-primary-inverse-hover-color-text: var(--goa-color-greyscale-white);
+    --goa-button-primary-inverse-focus-color-bg: var(--goa-color-interactive-hover);
 
     /* Secondary button component design tokens */
     --goa-button-secondary-color-bg: var(--goa-color-greyscale-white);
@@ -150,6 +155,13 @@
     --goa-button-secondary-destructive-hover-color-text: var(--goa-color-emergency-dark);
     --goa-button-secondary-destructive-focus-color-text: var(--goa-color-emergency-dark);
     --goa-button-secondary-destructive-focus-border: var(--goa-border-width-m) solid var(--goa-color-emergency-dark);
+    --goa-button-secondary-inverse-color-text: var(--goa-color-greyscale-white);
+    --goa-button-secondary-inverse-color-bg: transparent;
+    --goa-button-secondary-inverse-border: var(--goa-border-width-m) solid var(--goa-color-greyscale-white);
+    --goa-button-secondary-inverse-hover-border: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
+    --goa-button-secondary-inverse-hover-color-text: var(--goa-color-interactive-hover);
+    --goa-button-secondary-inverse-focus-color-text: var(--goa-color-interactive-hover);
+    --goa-button-secondary-inverse-focus-border: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
 
     /* Tertiary button component design tokens */
     --goa-button-tertiary-color-bg: none;
@@ -162,6 +174,9 @@
     --goa-button-tertiary-destructive-color-text: var(--goa-color-emergency-default);
     --goa-button-tertiary-destructive-hover-color-text: var(--goa-color-emergency-dark);
     --goa-button-tertiary-destructive-focus-color-text: var(--goa-color-emergency-dark);
+    --goa-button-tertiary-inverse-color-text: var(--goa-color-greyscale-white);
+    --goa-button-tertiary-inverse-hover-color-text: var(--goa-color-interactive-hover);
+    --goa-button-tertiary-inverse-focus-color-text: var(--goa-color-interactive-hover);
 
 
 
@@ -333,6 +348,52 @@
   .tertiary.destructive:focus,
   .tertiary.destructive:active {
     color: var(--goa-button-tertiary-destructive-focus-color-text);
+  }
+
+  /* Inverse Primary */
+  .submit.inverse,
+  .primary.inverse {
+    background-color: var(--goa-button-primary-inverse-color-bg);
+    color: var(--goa-button-primary-inverse-color-text);
+  }
+  .submit.inverse:hover,
+  .primary.inverse:hover {
+    background-color: var(--goa-button-primary-inverse-hover-color-bg);
+    color: var(--goa-button-primary-inverse-hover-color-text);
+  }
+  .submit.inverse:focus,
+  .submit.inverse:active,
+  .primary.inverse:focus,
+  .primary.inverse:active {
+    background-color: var(--goa-button-primary-inverse-focus-color-bg);
+  }
+
+  /* Inverse Secondary */
+  .secondary.inverse {
+    color: var(--goa-button-secondary-inverse-color-text);
+    border: var(--goa-button-secondary-inverse-border);
+    background-color: var(--goa-button-secondary-inverse-color-bg);
+  }
+  .secondary.inverse:hover {
+    color: var(--goa-button-secondary-inverse-hover-color-text);
+    border: var(--goa-button-secondary-inverse-hover-border);
+  }
+  .secondary.inverse:focus,
+  .secondary.inverse:active {
+    color: var(--goa-button-secondary-inverse-focus-color-text);
+    border: var(--goa-button-secondary-inverse-focus-border);
+  }
+
+  /* Inverse Tertiary */
+  .tertiary.inverse {
+    color: var(--goa-button-tertiary-inverse-color-text);
+  }
+  .tertiary.inverse:hover {
+    color: var(--goa-button-tertiary-inverse-hover-color-text);
+  }
+  .tertiary.inverse:focus,
+  .tertiary.inverse:active {
+    color: var(--goa-button-tertiary-inverse-focus-color-text);
   }
 
   /* Disabled */

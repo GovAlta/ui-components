@@ -12,7 +12,7 @@
   export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5"
   export type TextElement = "span" | "div" | "p";
 
-  type HeadingSize 
+  type HeadingSize
     = "heading-xl"
     | "heading-l"
     | "heading-m"
@@ -60,7 +60,7 @@
   })
 </script>
 
-<svelte:element 
+<svelte:element
   this={as}
   class={size}
   style={styles(

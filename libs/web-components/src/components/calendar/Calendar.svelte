@@ -299,7 +299,7 @@
         name="month"
         arialabel={`${name} month`}
         data-testid="months"
-        width="10rem"
+        width="160px"
         maxHeight="240px"
         relative="true"
         value={_calendarDate?.getMonth()}
@@ -383,106 +383,140 @@
 
 <style>
   :host {
-    font: var(--goa-typography-body-s);
+    /* TODO: Component tokens, to move to design tokens file ------------------------------------------------------- */
+    --goa-date-input-: ;
+
+    /* Calendar */
+    --goa-date-input-calendar-width: 280px;
+    --goa-date-input-calendar-border-radius: var(--goa-border-radius-m);
+
+    --goa-date-input-day-of-week-font: var(--goa-typography-heading-xs);
+    --goa-date-input-day-of-week-margin: var(--goa-space-xs) 0;
+
+    /* Day Grid */
+    --goa-date-input-day-font: var(--goa-typography-body-s);
+    --goa-date-input-day-font-today: var(--goa-typography-heading-xs);
+    --goa-date-input-day-underline-today: var(--goa-border-width-l) solid var(--goa-color-interactive-default);
+    --goa-date-input-day-underline-today-width: var(--goa-space-l);
+    --goa-date-input-day-underline-today-selected: var(--goa-border-width-l) solid var(--goa-color-greyscale-white);
+
+    --goa-date-input-day-border-radius: var(--goa-border-radius-m);
+    --goa-date-input-day-size: 2.5rem;
+
+    --goa-date-input-day-color-text: var(--goa-color-text-default);
+    --goa-date-input-day-color-bg: transparent;
+    --goa-date-input-day-color-text-hover: var(--goa-color-text-default);
+    --goa-date-input-day-color-bg-hover: var(--goa-color-greyscale-200);
+    --goa-date-input-day-border-focus: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    --goa-date-input-day-color-text-selected: var(--goa-color-text-light);
+    --goa-date-input-day-color-bg-selected: var(--goa-color-interactive-default);
+    --goa-date-input-day-color-text-selected-hover: var(--goa-color-text-light);
+    --goa-date-input-day-color-bg-selected-hover: var(--goa-color-interactive-hover);
+
+    --goa-date-input-day-color-text-other-month: var(--goa-color-text-secondary);
+    --goa-date-input-day-color-text-disabled: var(--goa-color-text-secondary);
+
   }
 
+  /* what is this??
   .bordered {
     display: inline-block;
     border: 1px solid var(--goa-color-greyscale-700);
-    border-radius: var(--goa-border-radius-m);
+    border-radius: var(--goa-date-input-calendar-border-radius);
     padding: 1rem;
   }
+  */
 
   .calendar {
     display: grid;
     justify-items: center;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px 0;
-    width: 280px;
-    font: var(--goa-typography-body-s);
+    gap: 0px;
+    width: var(--goa-date-input-calendar-width);
+    font: var(--goa-date-input-day-font);
   }
 
+  /* Days of Week */
   h5 {
-    margin: 8px 0;
-    font: var(--goa-typography-heading-xs);
+    margin: var(--goa-date-input-day-of-week-margin);
+    font: var(--goa-date-input-day-of-week-font);
   }
 
+  /* Days in Calendar */
   .day {
     align-items: center;
-    background: var(--goa-color-white);
+    background-color: var(--goa-date-input-day-color-bg);
     border: none;
-    border-radius: var(--goa-border-radius-m);
-    color: var(--goa-color-greyscale-black);
+    border-radius: var(--goa-date-input-day-border-radius);
+    color: var(--goa-date-input-day-color-text);
     display: inline-flex;
-    font: var(--goa-typography-body-s);
-    height: 2.5rem;
+    font: var(--goa-date-input-day-font);
     justify-content: center;
     margin: 0;
-    width: 2.5rem;
+    width: var(--goa-date-input-day-size);
+    height: var(--goa-date-input-day-size);
   }
-
   .day.other-month {
-    color: var(--goa-color-greyscale-400);
+    color: var(--goa-date-input-day-color-text-other-month);
   }
-
   .day.today {
-    font-weight: var(--goa-font-weight-bold);
+    font: var(--goa-date-input-day-font-today);
   }
-
   .day:focus-within {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline: var(--goa-date-input-day-border-focus);
+    z-index: 1000;
+    background-color: none;
   }
-
-  .day.selected {
-    background: var(--goa-color-interactive-default);
-    color: var(--goa-color-greyscale-white);
-  }
-
   .day:hover {
-    background: var(--goa-color-greyscale-200);
-    color: var(--goa-color-greyscale-black);
+    background-color: var(--goa-date-input-day-color-bg-hover);
+    color: var(--goa-date-input-day-color-text-hover);
     cursor: pointer;
   }
-
+  .day:focus-within:hover {
+    background-color: transparent;
+  }
+  .day.selected {
+    background-color: var(--goa-date-input-day-color-bg-selected);
+    color: var(--goa-date-input-day-color-text-selected);
+  }
   .day.selected:hover {
-    background: var(--goa-color-interactive-hover);
-    text-decoration-color: var(--goa-color-white);
-    color: var(--goa-color-greyscale-white);
+    background-color: var(--goa-date-input-day-color-bg-selected-hover);
+    color: var(--goa-date-input-day-color-text-selected-hover);
   }
-
+  .day.selected:focus-within:hover {
+    background-color: var(--goa-date-input-day-color-bg-selected);
+  }
   .day.today.selected:hover {
-    background: var(--goa-color-interactive-hover);
-    text-decoration-color: var(--goa-color-white);
-    color: var(--goa-color-greyscale-white);
+    background-color: var(--goa-date-input-day-color-bg-selected-hover);
+    color: var(--goa-date-input-day-color-text-selected-hover);
   }
-
+  .day.today.selected:focus-within:hover {
+    background-color: var(--goa-date-input-day-color-bg-selected);
+  }
   .day.disabled {
-    color: var(--goa-color-greyscale-400);
+    color: var(--goa-date-input-day-color-text-disabled);
     cursor: default;
   }
-
   .day.disabled:hover {
-    background: var(--goa-color-white);
+    background-color: transparent;
   }
 
   .day-num {
-    width: 100%;
-    margin: 0 6px;
+    width: var(--goa-date-input-day-underline-today-width);
     pointer-events: none;
-    padding-bottom: 2px;
+    margin-bottom: 1px; /* vertically centers the day numbers */
   }
-
   .selected .day-num {
+    width: var(--goa-date-input-day-underline-today-width);
     border-bottom: none;
-    padding-bottom: 0;
-    width: 1.5rem;
   }
 
+  /* Today */
   .today .day-num {
-    border-bottom: 3px solid var(--goa-color-interactive-default);
+    padding-top: 2px; /* vertically centers the day number when it has selected underline */
+    border-bottom: var(--goa-date-input-day-underline-today);
   }
-
   .today.selected .day-num {
-    border-bottom: 3px solid var(--goa-color-greyscale-white);
+    border-bottom: var(--goa-date-input-day-underline-today-selected);
   }
 </style>

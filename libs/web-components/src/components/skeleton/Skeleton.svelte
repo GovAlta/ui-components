@@ -113,9 +113,6 @@
     font-family: var(--goa-font-family-sans);
   }
 
-  #container {
-  }
-
   @keyframes pulse {
     0% {
       opacity: 0.5;
@@ -294,7 +291,7 @@
 
   @container self (--mobile) {
     .card {
-      width: 300px;
+      width: 100%;
     }
   }
   @container self (--not-mobile) {
@@ -322,15 +319,12 @@
   }
   .profile-2 {
     max-width: 360px;
-    gap: 1rem;
   }
   .profile-3 {
     max-width: 480px;
-    gap: 1rem;
   }
   .profile-4 {
     max-width: 560px;
-    gap: 1rem;
   }
 
   .profile .profile-avatar {

@@ -271,9 +271,13 @@
     --goa-file-upload-border-hover: var(--goa-border-width-m) dashed var(--goa-color-interactive-hover);
     --goa-file-upload-instruction-color-hover: var(--goa-color-interactive-hover);
 
-    --goa-file-upload-color-bg-active: ;
+    --goa-file-upload-color-bg-active: var(--goa-color-info-background);
     --goa-file-upload-border-active: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
     --goa-file-upload-instruction-color-active: var(--goa-color-interactive-hover);
+
+    --goa-file-upload-color-bg-focus: var(--goa-color-greyscale-100);
+    --goa-file-upload-border-focus: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    --goa-file-upload-instruction-color-focus: var(--goa-color-interactive-hover);
 
     --goa-file-upload-color-bg-drag: var(--goa-color-info-background);
     --goa-file-upload-border-drag: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
@@ -304,10 +308,16 @@
 
   /** States **/
 
-  .dragdrop:active,
-  .dragdrop:focus-within {
+  .dragdrop:active {
     border: var(--goa-file-upload-border-active);
     outline: none;
+  }
+
+  .dragdrop:focus-within {
+    border: var(--goa-file-upload-border-hover);
+    box-shadow: var(--goa-file-upload-border-focus);
+    background-color: var(--goa-file-upload-color-bg-focus);
+    color: var(--goa-file-upload-instruction-color-focus);
   }
 
   .state-hover {

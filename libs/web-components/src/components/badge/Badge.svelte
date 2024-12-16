@@ -138,7 +138,7 @@
     padding: var(--goa-badge-padding);  /* is calc(3 / 16 * 1rem) better for scaling? */
     gap: var(--goa-badge-gap);
     font-weight: var(--goa-font-weight-regular);
-    /*box-shadow: var(--goa-badge-border);   / inner shadow - new style */
+    box-shadow: var(--goa-badge-border); /* inner shadow - new style */
   }
 
   .icon-only {

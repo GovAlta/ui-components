@@ -57,14 +57,14 @@
 <!-- Style -->
 <style>
   :host {
-    box-sizing: border-box;
-    font-family: var(--goa-font-family-sans);
-
     /* TODO Component tokens, to move to design tokens file ------------------------------------------------------- */
     --goa-button-group-gap: var(--goa-space-m);
     --goa-button-group-compact-gap: var(--goa-space-s);
 
+    box-sizing: border-box;
+    font-family: var(--goa-font-family-sans);
   }
+
   div {
     display: flex;
     flex-direction: row;

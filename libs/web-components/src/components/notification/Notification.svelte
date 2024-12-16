@@ -80,6 +80,7 @@
             <goa-icon
               type="close"
               inverted={type === "important" ? "false" : "true"}
+              theme="filled"
             />
           </button>
         </div>

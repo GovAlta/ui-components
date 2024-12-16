@@ -13,7 +13,14 @@
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
   import { receive, dispatch, relay } from "../../common/utils";
-  import { FormSetValueMsg, FormSetValueRelayDetail, FieldsetSetErrorMsg, FieldsetResetErrorsMsg, FormFieldMountMsg, FormFieldMountRelayDetail } from "../../types/relay-types";
+  import {
+    FormSetValueMsg,
+    FormSetValueRelayDetail,
+    FieldsetSetErrorMsg,
+    FieldsetResetErrorsMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+  } from "../../types/relay-types";
 
   type DateValue = {
     type: "date";
@@ -83,14 +90,19 @@
 
   function onSetValue(detail: FormSetValueRelayDetail) {
     value = detail.value;
-    dispatch(_rootEl, "_change", { name, value: detail.value }, { bubbles: true });
+    dispatch(
+      _rootEl,
+      "_change",
+      { name, value: detail.value },
+      { bubbles: true },
+    );
   }
 
   function sendMountedMessage() {
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _rootEl},
+      { name, el: _rootEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -221,10 +233,10 @@
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <goa-input
     slot="target"
+    width="160px"
     readonly="true"
     trailingicon="calendar"
     value={formatDate(_date)}
-    width="232px"
     {error}
     on:click={showCalendar}
     on:keydown={handleKeyDown}
@@ -239,3 +251,7 @@
     on:_change={onCalendarChange}
   />
 </goa-popover>
+
+<style>
+
+</style>
