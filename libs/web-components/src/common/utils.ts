@@ -54,7 +54,7 @@ export function relay<T>(
   data?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
-  // console.log(`RELAY(${eventName}):`, data, el);
+  console.debug(`RELAY(${eventName}):`, data, el);
 
   const dispatch = () => {
     el?.dispatchEvent(

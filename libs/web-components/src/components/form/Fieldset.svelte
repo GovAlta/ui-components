@@ -9,7 +9,6 @@
       },
       skipSummary: { type: "Boolean", attribute: "skip-summary" },
       preserveState: { type: "String", attribute: "preserve-state" },
-      showBackButton: { type: "String", attribute: "show-back-button" },
       sectionTitle: { type: "String", attribute: "section-title" },
       dispatchOn: { attribute: "dispatch-on" },
       first: { attribute: "first", type: "Boolean" },
@@ -42,6 +41,8 @@
     FieldsetValidationRelayDetail,
     FormBackUrlDetail,
     FormBackUrlMsg,
+    FormDispatchEditMsg,
+    FormDispatchEditRelayDetail,
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
     FormFieldMountMsg,
@@ -65,9 +66,7 @@
   export let heading: string = "";
   export let buttonText: string = "";
   export let secondaryButtonText: string = "";
-  export let showBackButton: string = "true";
   export let sectionTitle: string = "";
-  export let state: "subform" | "default" = "default";
 
   // when the changes will be dispatched to the form; `change` ~ immediately
   export let dispatchOn: "change" | "continue" = "continue";
@@ -134,8 +133,8 @@
         case FormResetErrorsMsg:
           onErrorReset();
           break;
-        case FormDispatchStateMsg:
-          onFormDispatch(data as FormDispatchStateRelayDetail);
+        case FormDispatchEditMsg:
+          onFormDispatch(data as FormDispatchEditRelayDetail);
           break;
         case FormItemMountMsg:
           onFormItemMount(data as FormItemMountRelayDetail);
@@ -177,18 +176,16 @@
   }
 
   function onSetFieldset(detail: FormSetFieldsetRelayDetail) {
-    // set the local fieldset state
-    for (const [id, item] of Object.entries(detail.value)) {
-      _state[id] = { ...item };
-    }
+    console.debug("Fieldset:onSetFieldset", detail)
 
-    // restore state in form items by relaying the message
-    for (const [name, data] of Object.entries(_state)) {
-      if (Array.isArray(data)) {
-        // TODO: restore the state when multiple items exist
-        // This is probably called for data obtained from a form loop
-        console.log("****Array is multiple values!!****", data);
-      } else {
+    if (detail.value.type === "details") {
+      // set the local fieldset state
+      for (const [id, item] of Object.entries(detail.value.fieldsets)) {
+        _state[id] = { ...item };
+      }
+
+      // restore state in form items by relaying the message
+      for (const [name, data] of Object.entries(_state)) {
         if (data.value) {
           relay<FieldsetSetValueRelayDetail>(
             _formFields[name].el,
@@ -203,9 +200,10 @@
     }
   }
 
-  function onFormDispatch(detail: FormDispatchStateRelayDetail) {
-    // allow customization of form if user has jumped back to a question (editting mode)
-    _editting = detail.editting === id;
+  // allow customization of form if user has jumped back to a question (editting mode)
+  function onFormDispatch(detail: FormDispatchEditRelayDetail) {
+    console.debug("Fieldset:onFormDispatch", detail.id, detail.id === id)
+    _editting = detail.id === id;
   }
 
   function onErrorReset() {
@@ -403,81 +401,77 @@
       `display: ${_active ? "block" : "none"}`,
     )}
   >
-    {#if state === "default"}
-      {#if first && _backUrl}
-        <goa-link leadingicon="chevron-back" mb="2xl">
-          <a href={_backUrl}>Back</a>
-        </goa-link>
-      {/if}
-      {#if !first && !_editting && !last && showBackButton === "true"}
-        <goa-link-button
-          leadingicon="chevron-back"
-          mb="2xl"
-          on:_click={handleBack}
-        >
-          Back
-        </goa-link-button>
-      {/if}
-
-      {#if Object.values(_errors).filter((err) => !!err).length}
-        <goa-callout type="emergency" heading={`There is a problem`}>
-          <ul class="errors">
-            {#each Object.keys(_errors) as key}
-              <li>
-                <a
-                  class="error"
-                  href={`#${key}`}
-                  on:click={(e) => jumpToError(e, key)}
-                >
-                  {_errors[key]}
-                </a>
-              </li>
-            {/each}
-          </ul>
-        </goa-callout>
-      {/if}
-
-      {#if sectionTitle}
-        <goa-text class="section-title" size="body-l" mb="s">
-          {sectionTitle}
-        </goa-text>
-      {/if}
-
-      {#if heading}
-        <goa-text as="h2" size="heading-l">{heading}</goa-text>
-      {:else}
-        <br />
-      {/if}
-
-      <goa-block gap="m" direction="column">
-        <slot />
-      </goa-block>
-
-      <goa-block mt="xl">
-        {#if _editting && !secondaryButtonText}
-          <goa-button on:_click={onCancel} type="secondary">
-            Cancel
-          </goa-button>
-        {/if}
-        {#if secondaryButtonText}
-          <goa-button on:_click={onSecondaryClick} type="secondary">
-            {secondaryButtonText}
-          </goa-button>
-        {/if}
-
-        {#if last}
-          <goa-button on:_click={onSubmit} type="primary">
-            {buttonText || "Confirm"}
-          </goa-button>
-        {:else}
-          <goa-button on:_click={saveAndContinue} type="primary">
-            {buttonText || "Continue"}
-          </goa-button>
-        {/if}
-      </goa-block>
-    {:else}
-      <slot name="subform" />
+    {#if first && _backUrl && !_editting }
+      <goa-link leadingicon="chevron-back" mb="2xl">
+        <a href={_backUrl}>Back</a>
+      </goa-link>
     {/if}
+    {#if (!first && !_editting && !last)}
+      <goa-link-button
+        leadingicon="chevron-back"
+        mb="2xl"
+        on:_click={handleBack}
+      >
+        Back
+      </goa-link-button>
+    {/if}
+
+    {#if Object.values(_errors).filter((err) => !!err).length}
+      <goa-callout type="emergency" heading={`There is a problem`}>
+        <ul class="errors">
+          {#each Object.keys(_errors) as key}
+            <li>
+              <a
+                class="error"
+                href={`#${key}`}
+                on:click={(e) => jumpToError(e, key)}
+              >
+                {_errors[key]}
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </goa-callout>
+    {/if}
+
+    {#if sectionTitle}
+      <goa-text class="section-title" size="body-l" mb="s">
+        {sectionTitle}
+      </goa-text>
+    {/if}
+
+    {#if heading}
+      <goa-text as="h2" size="heading-l">{heading}</goa-text>
+    {:else}
+      <br />
+    {/if}
+
+    <goa-block gap="m" direction="column">
+      <slot />
+    </goa-block>
+
+    <goa-block mt="xl">
+      {#if _editting && !secondaryButtonText}
+        <goa-button on:_click={onCancel} type="secondary">
+          Cancel
+        </goa-button>
+      {/if}
+      {#if secondaryButtonText}
+        <goa-button on:_click={onSecondaryClick} type="secondary">
+          {secondaryButtonText}
+        </goa-button>
+      {/if}
+
+      {#if last}
+        <goa-button on:_click={onSubmit} type="primary">
+          {buttonText || "Confirm"}
+        </goa-button>
+      {:else}
+        <goa-button on:_click={saveAndContinue} type="primary">
+          {buttonText || "Continue"}
+        </goa-button>
+      {/if}
+    </goa-block>
   </fieldset>
 </section>
 

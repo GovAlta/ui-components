@@ -32,6 +32,8 @@
     FormBackUrlMsg,
     FormBindMsg,
     FormBindRelayDetail,
+    FormDispatchEditMsg,
+    FormDispatchEditRelayDetail,
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
     FormDispatchStateRelayDetailList,
@@ -123,7 +125,7 @@
     addWindowPopStateListener();
     addRelayListener();
     addSubformRelayListener();
-    setTimeout(setChildrenState, 100);
+    setTimeout(setChildrenState, 100);  // FIXME: not liking this within a setTimeout
   });
 
   /**
@@ -439,11 +441,12 @@
    * Notifies fieldsets of editting state to allow them to not show the `back` link
    */
   function sendEdittingStateMsg() {
+    console.debug("Form:sendEdittingState", _fieldsets);
     for (const fieldset of Object.values(_fieldsets)) {
-      relay<FormDispatchStateRelayDetail>(
+      relay<FormDispatchEditRelayDetail>(
         fieldset.el,
-        FormDispatchStateMsg,
-        _state,
+        FormDispatchEditMsg,
+        { id: _state.editting }
       );
     }
   }
@@ -527,7 +530,6 @@
       const history = [..._state.history];
       history.pop();
       _state.history = history;
-      console.log("   History", _state.history);
 
       sendToggleActiveStateMsg(history[history.length - 1]);
       e.stopPropagation();
@@ -582,6 +584,7 @@
     for (const [name, detail] of Object.entries(_fieldsets)) {
       const value = _state.form[name]?.data;
       if (value) {
+        console.log("=== Sending child state", name, value)
         relay<FormSetFieldsetRelayDetail>(detail.el, FormSetFieldsetMsg, {
           name,
           value,

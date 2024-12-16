@@ -84,7 +84,11 @@
   }
 
   function onReceiveState(data: FormDispatchStateRelayDetailList) {
-    console.debug("SubForm:onReceiveState", { data });
+    console.debug("SubForm:onReceiveState", { data, isArray: Array.isArray(data) });
+    if (!Array.isArray(data)) {
+      return;
+    }
+
     _state = data;
     dispatch(_relayEl, "_stateChange", { data: _state, id }, { bubbles: true });
   }

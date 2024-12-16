@@ -56,6 +56,9 @@ export type FormSetFieldsetRelayDetail = {
 export type FormDispatchStateRelayDetail = FormState;
 export type FormDispatchStateRelayDetailList = FormState[];
 
+export const FormDispatchEditMsg = "form::edit";
+export type FormDispatchEditRelayDetail = { id: string };
+
 export type FormBackUrlDetail = {
   url: string;
 };
