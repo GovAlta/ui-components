@@ -14,7 +14,7 @@ type Page = "professional-status" | "summary";
 })
 export class OtherPartyProfile extends PublicFormComponent<Page> {
   constructor(private router: Router) {
-    super();
+    super("details");
   }
 
   onComplete(_e: Event) {

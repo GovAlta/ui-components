@@ -31,7 +31,11 @@ type Page =
 export class ApplicationComponent extends PublicFormComponent<Page> {
   // =====
   // Props
+
   // =====
+  constructor() {
+    super("details");
+  }
 
   _showConfirmationModal = false;
 

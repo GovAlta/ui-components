@@ -7,6 +7,10 @@
     FieldsetBindMsg,
     FieldsetBindRelayDetail,
     FieldsetValidationRelayDetail,
+    FormBindMsg,
+    FormBindRelayDetail,
+    FormDispatchStateMsg,
+    FormDispatchStateRelayDetailList,
     FormResetFormMsg,
     FormSetFieldsetMsg,
     FormState,
@@ -29,10 +33,10 @@
   export let ml: Spacing = null;
 
   // Receives the events from the goa-public-form element
-  let _formEl: HTMLElement;
+  let _receiverEl: HTMLElement;
 
-  // TODO: Allows the subform to dispatch off messages to parent form without intercepting it's own messages
-  let _rootEl: HTMLElement;
+  // Allows the subform to dispatch off messages to parent form without intercepting it's own messages
+  let _relayEl: HTMLElement;
 
   // Allows the subform to be hidden/shown, much like a fieldset
   let _active: boolean = false;
@@ -44,22 +48,28 @@
   let _fieldsets: Record<string, HTMLElement> = {};
 
   onMount(() => {
-    dispatchBindMsg();
-    bindReceiver();
+    addRelayListener();
     bindChangeHandler();
-  });
+    dispatchBindMsg();
+    bindWithParentForm();
+ });
 
   let _innerFormEl: HTMLElement;
   function onInit(e: Event) {
     _innerFormEl = (e as CustomEvent).detail.el as HTMLElement;
   }
 
-  function bindReceiver() {
-    receive(_formEl, (action, data, e) => {
+  function addRelayListener() {
+    console.debug("SubForm:addRelayListeners", name);
+
+    receive(_receiverEl, (action, data, e) => {
       console.debug(`  RECEIVE(SubForm => ${action}):`, data);
       e.stopPropagation();
       switch (action) {
-        // sets the fieldset/subform data
+        case FormDispatchStateMsg:
+          onReceiveState(data as FormDispatchStateRelayDetailList);
+          break;
+       // sets the fieldset/subform data
         case FormSetFieldsetMsg:
           onSetFieldset(data as FormState[]);
           break;
@@ -72,6 +82,13 @@
       }
     });
   }
+
+  function onReceiveState(data: FormDispatchStateRelayDetailList) {
+    console.debug("SubForm:onReceiveState", { data });
+    _state = data;
+    dispatch(_relayEl, "_stateChange", { data: _state, id }, { bubbles: true });
+  }
+
   // Collect list of child form item (input, dropdown, etc) elements
   function onFieldsetMount(detail: FieldsetBindRelayDetail) {
     console.debug("SubForm:onFieldsetMount", { detail });
@@ -103,22 +120,33 @@
   //   }
   // }
 
+  // FIXME: is this required????
   function bindChangeHandler() {
-    _formEl.addEventListener("_change", (e) => {
+    _receiverEl.addEventListener("_change", (e) => {
       console.debug(`  SUBFORM CHANGE:`, e);
     });
   }
+
+  /**
+   * Binds the subform to the parent form to allow state to be relayed back to subforms
+   */
+  // TODO: come up with a better name for this function
+  function bindWithParentForm() {
+    console.debug("SubForm:bindWithParentForm", name);
+    relay<FormBindRelayDetail>(_relayEl, FormBindMsg, { id, el: _receiverEl}, { bubbles: true, timeout: 10 });
+  }
+
 
   function dispatchBindMsg() {
     // relay reference to the goa-public-form element as if it were a fieldset to allow it's visibility to be controlled
     // TODO: maybe rename this event/type so it's not specific to fieldsets
     relay<FieldsetBindRelayDetail>(
-      _rootEl,
+      _relayEl,
       FieldsetBindMsg,
       {
         id,
         heading,
-        el: _formEl,
+        el: _receiverEl,
       },
       {
         bubbles: true,
@@ -145,7 +173,7 @@
     return objCopy;
   }
 
-  
+
   function onStateChange(e: Event) {
     const detail = (e as CustomEvent).detail as FormState;
     const editStateIndex = _state.findIndex((s) => s.id === detail.id);
@@ -159,7 +187,7 @@
     // stop original event to prevent just the single subform data from being sent
     // send the array of data instead
     console.debug("Subform:onStateChange", { _state });
-    dispatch(_rootEl, "_stateChange", { data: _state, id, index: editStateIndex }, { bubbles: true });
+    dispatch(_relayEl, "_stateChange", { data: _state, id, index: editStateIndex }, { bubbles: true });
 
     // initial event will be overridden with a custom _stateChange event containing a state array
     e.stopPropagation();
@@ -177,9 +205,9 @@
   }
 </script>
 
-<div bind:this={_rootEl}>
+<div bind:this={_relayEl}>
   <goa-public-form
-    bind:this={_formEl}
+    bind:this={_receiverEl}
     on:_stateChange={onStateChange}
     on:_continue={onContinue}
     on:_init={onInit}

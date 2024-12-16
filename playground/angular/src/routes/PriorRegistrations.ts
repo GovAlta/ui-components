@@ -14,7 +14,7 @@ type Page = "previous-registrations" | "summary";
 })
 export class PriorRegistrations extends PublicFormComponent<Page> {
   constructor(private router: Router) {
-    super();
+    super("details");
   }
 
   onComplete(_e: Event) {

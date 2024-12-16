@@ -76,7 +76,7 @@
   }
 
   function getDataList(state: FormState, page: string): Record<string, FieldsetItemState>[] {
-    console.debug("FormSummary:getDataList", page, state, { here:state.form[page]?.data?.typ  } )
+    console.debug("FormSummary:getDataList", page, state )
     if (state.form[page]?.data?.type !== "list") {
       return;
     }

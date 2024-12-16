@@ -37,6 +37,9 @@ export class FamilyServicesComponent extends PublicFormComponent<Page> {
   // =====
   // Props
   // =====
+  constructor() {
+    super("details");
+  }
 
   _showConfirmationModal = false;
 

@@ -30,8 +30,11 @@
     FieldsetSubmitMsg,
     FormBackUrlDetail,
     FormBackUrlMsg,
+    FormBindMsg,
+    FormBindRelayDetail,
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
+    FormDispatchStateRelayDetailList,
     FormResetErrorsMsg,
     FormResetFormMsg,
     FormSetFieldsetMsg,
@@ -70,8 +73,11 @@
   // Private
   // =======
 
-  let _formEl: HTMLFormElement;
+  let _rootEl: HTMLFormElement;
   let _childReceiverEl: HTMLElement;
+
+  // List of child forms to allow for form data to be passed down to the child form
+  let _childForms: Record<string, HTMLElement> = {};
 
   // Fieldset binding details
   let _fieldsets: Record<string, FieldsetBindRelayDetail> = {};
@@ -84,6 +90,9 @@
 
   // Timeout id for form item binding
   let _formItemBindingTimeoutId: any;
+
+  // Timeout id for subform binding
+  let _childFormStateTimeoutId: any;
 
   // Last fieldset id in history
   let _lastViewedFieldset: string;
@@ -98,9 +107,18 @@
     status: "not-started",
   };
 
+  /**
+   * TODO:
+   * - dispatch a message up to the next parent public-form with a reference this this form to allow for the parent
+   *   form to pass down the state of this form
+   *   - the message must contain the id of this form as well as a reference to this form's element
+   * - create a listener within the form element to listen for events of child form elements
+   *
+  **/
+
   onMount(() => {
     // provide html element link to outside world
-    dispatch(_formEl, "_init", { el: _formEl });
+    dispatch(_rootEl, "_init", { el: _rootEl });
 
     addWindowPopStateListener();
     addRelayListener();
@@ -108,6 +126,9 @@
     setTimeout(setChildrenState, 100);
   });
 
+  /**
+   * Adds a listener to the form element to listen for _stateChange event from child forms.
+   */
   function addSubformRelayListener() {
     _childReceiverEl.addEventListener("_stateChange", (e) => {
       const detail = (e as CustomEvent).detail as {
@@ -115,6 +136,7 @@
         id: string;
         index: number;
       };
+      // subform state is always a list
       _state.form[detail.id] = { data: { type: "list", items: detail.data } };
       console.debug("Form:addSubformRelayListener", name, _state);
     });
@@ -124,12 +146,19 @@
    * Adds a listener to the form element to handle relay messages
    */
   function addRelayListener() {
-    receive(_formEl, (type, data, e) => {
+    console.debug("Form:addRelayListener", name);
+    receive(_rootEl, (type, data, e) => {
       if (!subForm) {
         e.stopPropagation();
       }
       console.debug(`  RECEIVE(Form => ${type}):`, name, type, data);
       switch (type) {
+        case FormDispatchStateMsg:
+          onReceiveState(data as FormDispatchStateRelayDetail);
+          break;
+        case FormBindMsg:
+          onFormBind(data as FormBindRelayDetail);
+          break;
         case FieldsetBindMsg:
           onFieldsetBind(data as FieldsetBindRelayDetail);
           break;
@@ -170,6 +199,19 @@
   // ***************
   // Relay listeners
   // ***************
+
+  function onReceiveState(data: FormDispatchStateRelayDetail) {
+    console.debug("Form:onReceiveState", name, { data });
+    _state = { ..._state, ...data };
+  }
+
+  function onFormBind(detail: FormBindRelayDetail) {
+    console.debug("Form:onFormBind", name, { detail });
+    _childForms[detail.id] = detail.el;
+
+    // bind all the child forms
+    performOnce(_childFormStateTimeoutId, dispatchChildFormState, 100)
+  }
 
   /**
    * Handles modifications to array-type form data, supporting edit and remove operations
@@ -242,6 +284,7 @@
    * @param detail Contains the child fieldset to bind
    */
   function onFieldsetBind(detail: FieldsetBindRelayDetail) {
+    console.debug("Form:onFieldsetBind IS GETTING CALLED", name, "---", { detail, _fieldsets });
     // save the fieldsets to allow for later sending of messages
     _fieldsets = { ..._fieldsets, [detail.id]: detail };
     console.debug("Form:onFieldsetBind", name, "---", { detail, _fieldsets });
@@ -361,7 +404,7 @@
   ) {
     console.debug("Form:dispatchStateChange", name, { fieldSetId, _state });
     dispatch(
-      _formEl,
+      _rootEl,
       "_stateChange",
       { ..._state, currentFieldset: { id: fieldSetId, dispatchType } },
       { bubbles: true, timeout: 100 },
@@ -421,7 +464,7 @@
     //   return acc;
     // }, {})
 
-    dispatch<FormState>(_formEl, "_complete", _state, { bubbles: true });
+    dispatch<FormState>(_rootEl, "_complete", _state, { bubbles: true });
   }
 
   function resetState() {
@@ -512,10 +555,23 @@
     if (historyPageCount > 0) {
       _lastViewedFieldset = _state.history[historyPageCount - 1];
     }
-    console.log("   History", _state.history);
 
     // show the fieldset
     dispatchStateChange("continue", _lastViewedFieldset);
+  }
+
+  /**
+   * Dispatches the state to the child forms
+   */
+  function dispatchChildFormState() {
+    console.debug("Form:dispatchChildFormState 1", name);
+    for (const [id, el] of Object.entries(_childForms)) {
+     const data = _state.form[id]?.data;
+      // data is only sent to child forms and all child forms are lists
+      if (data.type === "list") {
+        relay<FormDispatchStateRelayDetailList>(el, FormDispatchStateMsg, data.items);
+      }
+    }
   }
 
   /**
@@ -535,7 +591,7 @@
   }
 </script>
 
-<form bind:this={_formEl} style={calculateMargin(mt, mr, mb, ml)}>
+<form bind:this={_rootEl} style={calculateMargin(mt, mr, mb, ml)}>
   <div bind:this={_childReceiverEl}>
     <slot />
   </div>

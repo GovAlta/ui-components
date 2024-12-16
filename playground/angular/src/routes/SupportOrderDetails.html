@@ -95,16 +95,14 @@
       (_continue)="onChildPageChange($event, 'child-list')"
       (_secondaryClick)="onPageChange($event, 'children-subform')"
     >
-      <div *ngIf="_childFormComponent.getStateList().length === 0">
+      <div *ngIf="children().length === 0">
         Add a child
       </div>
       <goa-table>
         <tbody>
-          <tr *ngFor="let item of _childFormComponent.getStateList()">
-            <td>{{item | json}}</td>
+          <tr *ngFor="let item of children()">
             <td>{{ item["firstName"]}}</td>
             <td>{{ item["lastName"]}}</td>
-            <td>{{ item["dob"]}}</td>
           </tr>
         </tbody>
       </goa-table>

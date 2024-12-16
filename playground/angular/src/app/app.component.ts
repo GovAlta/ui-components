@@ -24,6 +24,10 @@ type Page =
   styles: ``,
 })
 export class AppComponent extends PublicFormComponent<Page> {
+  constructor() {
+    super("details");
+  }
+
   // =====
   // Props
   // =====

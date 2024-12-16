@@ -29,14 +29,18 @@ export const FormSetFieldsetMsg = "form::set:fieldset";
 export const FormDispatchStateMsg = "form::dispatch:state";
 export const FormToggleActiveMsg = "form::toggle:active";
 export const FormStateChangeMsg = "form::state:change";
-export const FormBindMsg = "form::bind";
 export const FormBackUrlMsg = "form::back-url";
 
 export const FormResetFormMsg = "form::reset:form";
 
+// Message to allow forms to register themselves with their parent form to allow for
+// form data to be passed down to the child form
+export const FormBindMsg = "form::bind";
 export type FormBindRelayDetail = {
+  id: string;
   el: HTMLElement;
 };
+
 export type FormStateChangeRelayDetail = Fieldset;
 
 export type FormToggleActiveRelayDetail = {
@@ -50,6 +54,7 @@ export type FormSetFieldsetRelayDetail = {
 };
 
 export type FormDispatchStateRelayDetail = FormState;
+export type FormDispatchStateRelayDetailList = FormState[];
 
 export type FormBackUrlDetail = {
   url: string;
@@ -72,7 +77,7 @@ export const FieldsetMountFormItemMsg = "fieldset::bind:form-item";
 
 export type FieldsetBindRelayDetail = {
   id: string;
-  skipSummary: boolean;
+  skipSummary?: boolean;
   heading: string;
   el: HTMLElement;
 };

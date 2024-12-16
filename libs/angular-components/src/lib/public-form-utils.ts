@@ -32,6 +32,10 @@ export class PublicFormComponent<T> {
   _formData?: Record<string, string> = undefined;
   _formRef?: HTMLElement = undefined;
 
+  constructor(private type: "details" | "list") {
+    // nothing here
+  }
+
   // Obtain reference to the form element
   init(e: Event) {
     console.debug("Utils::init", e);
@@ -64,29 +68,31 @@ export class PublicFormComponent<T> {
 
   // Public method to allow for the updating of the state
   updateState(e: Event) {
-    console.debug("Utils:updateState", { state: this.state }, (e as CustomEvent).detail);
+    console.debug(
+      "Utils:updateState",
+      this.type,
+      { state: this.state },
+      (e as CustomEvent).detail,
+    );
     if (!this.state) {
       console.error("updateState: state has not yet been set");
       return;
     }
 
     const detail = (e as CustomEvent).detail;
-    const isSubform = Array.isArray(this.state);
-    const isRootFormSubformDetail = detail.data && !isSubform;
-
-    if (isSubform) {
+    if (this.type === "list") {
       this.#updateListState(detail);
-    } else if (isRootFormSubformDetail) {
-      this.#updateRootListValue(detail);
+    } else if (this.type === "details" && Array.isArray(detail.data)) {
+      this.#updateObjectListState(detail);
     } else {
       this.#updateObjectState(detail);
     }
   }
 
   #updateListState(detail: { data: AppState<T>[]; index: number; id: string }) {
-    console.debug("Utils:updateListStateOfRoot", detail);
+    console.debug("Utils:updateListState", detail);
 
-    if (!Array.isArray(this.state)) {
+    if (!Array.isArray(detail.data)) {
       return;
     }
 
@@ -94,10 +100,8 @@ export class PublicFormComponent<T> {
     // this.state[detail.index].form[detail.id].data = detail.data;
   }
 
-  // WEDNESDAY Start here
-  // FIXME: newState's type can also be `{ id: string, index: number, data: AppState<T>[] }`
-  #updateRootListValue(detail: { data: AppState<T>[]; index: number; id: string }) {
-    console.debug("Utils:updateRootListValue", detail);
+  #updateObjectListState(detail: { data: AppState<T>[]; index: number; id: string }) {
+    console.debug("Utils:updateObjectListState", detail);
 
     if (!Array.isArray(detail.data)) {
       return;
@@ -133,20 +137,28 @@ export class PublicFormComponent<T> {
   }
 
   getStateList(): Record<string, string>[] {
+    console.log("Utils:getStateList", { state: this.state });
+    if (!this.state) {
+      return [];
+    }
     if (!Array.isArray(this.state)) {
-      console.error(
+      console.warn(
         "Utils:getStateList: unable to update the state of a non-multi form type",
+        this.state,
       );
       return [];
     }
+    if (this.state.length === 0) {
+      return [];
+    }
 
-    return this.state.map((s) => {
+    const output = this.state.map((s) => {
       return Object.values(s.form)
+        .filter((item) => {
+          return item?.data?.type === "details";
+        })
         .map((item) => {
-          if (item.data.type === "details") {
-            return item.data.fieldsets || {};
-          }
-          return item.data.items || {};
+          return (item.data.type === "details" && item.data?.fieldsets) || {};
         })
         .reduce(
           (acc, item) => {
@@ -158,6 +170,9 @@ export class PublicFormComponent<T> {
           {} as Record<string, string>,
         );
     });
+
+    console.log("Utils:getStateList: ", output);
+    return output;
   }
 
   // getStateItems(group: string): Record<string, FieldsetItemState>[] {

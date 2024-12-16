@@ -1,6 +1,10 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { AppState, PublicFormComponent, requiredValidator } from "@abgov/angular-components";
+import {
+  AppState,
+  PublicFormComponent,
+  requiredValidator,
+} from "@abgov/angular-components";
 import { JsonPipe, NgFor, NgIf } from "@angular/common";
 
 type Page =
@@ -28,14 +32,19 @@ export class SupportOrderDetailsComponent implements OnInit {
   _mainFormComponent: PublicFormComponent<Page>;
   _total: number = 0;
 
+  children(): Record<string, string>[] {
+    console.log("Utils:getStatelist", "calling children()", this._childFormComponent);
+    return this._childFormComponent.getStateList();
+  }
+
   constructor(private router: Router) {
-    this._mainFormComponent = new PublicFormComponent();
-    this._childFormComponent = new PublicFormComponent();
+    this._mainFormComponent = new PublicFormComponent("details");
+    this._childFormComponent = new PublicFormComponent("list");
   }
 
   ngOnInit(): void {
     // const data = null;
-    const raw = `{"form":{"what-is-your-role":{"heading":"","data":{"type":"details","fieldsets":{"role":{"name":"role","value":"Recipient","label":"Role","order":1}}}},"contact":{"skipSummary":false,"heading":""},"optional":{"heading":"Alternate names","data":{"type":"details","fieldsets":{"nickname":{"name":"nickname","value":"test","label":"Nick name","order":1},"alias":{"name":"alias","value":"qwerty","label":"Secret alias","order":2}}}},"children-subform":{"data":{"type":"list","items":[{"id":"26182ca7-92cb-4439-8d66-34cab61160a6","form":{"child-list":{"skipSummary":true,"heading":""},"name":{"heading":"","data":{"type":"details","fieldsets":{"firstName":{"name":"firstName","value":"Chris","label":"First name","order":1},"lastName":{"name":"lastName","value":"Olsen","label":"Last name","order":2}}}},"alternate-name":{"skipSummary":false,"heading":""},"dob":{"skipSummary":false,"heading":""},"summary":{"skipSummary":true,"heading":""}},"history":["child-list","name","summary","child-list"],"editting":"","lastModified":"2024-12-12T19:28:04.743Z","status":"not-started","currentFieldset":{"id":"summary","dispatchType":"continue"}}]}},"address":{"heading":"Current address","data":{"type":"details","fieldsets":{"address":{"name":"address","value":"123-45st","label":"Address","order":2},"city":{"name":"city","value":"Edmonton","label":"","order":3},"postal-code":{"name":"postal-code","value":"T5W 1O3","label":"","order":4}}}},"do-you-receive-support":{"heading":"","data":{"type":"details","fieldsets":{"support":{"name":"support","value":"Yes","label":"Support?","order":1}}}},"recalculated":{"heading":"","data":{"type":"details","fieldsets":{"recalculated":{"name":"recalculated","value":"Yes","label":"Recalculated?","order":1}}}},"summary":{"skipSummary":true,"heading":"Review your answers"}},"history":["what-is-your-role","optional","children-subform","address","do-you-receive-support","recalculated","summary"],"editting":"","status":"not-started","currentFieldset":{"id":"recalculated","dispatchType":"continue"}}`
+    const raw = `{"form":{"what-is-your-role":{"heading":"","data":{"type":"details","fieldsets":{"role":{"name":"role","value":"Recipient","label":"Role","order":1}}}},"contact":{"skipSummary":false,"heading":""},"optional":{"heading":"Alternate names","data":{"type":"details","fieldsets":{"nickname":{"name":"nickname","value":"test","label":"Nick name","order":1},"alias":{"name":"alias","value":"qwerty","label":"Secret alias","order":2}}}},"children-subform":{"data":{"type":"list","items":[{"id":"26182ca7-92cb-4439-8d66-34cab61160a6","form":{"child-list":{"skipSummary":true,"heading":""},"name":{"heading":"","data":{"type":"details","fieldsets":{"firstName":{"name":"firstName","value":"Chris","label":"First name","order":1},"lastName":{"name":"lastName","value":"Olsen","label":"Last name","order":2}}}},"alternate-name":{"skipSummary":false,"heading":""},"dob":{"skipSummary":false,"heading":""},"summary":{"skipSummary":true,"heading":""}},"history":["child-list","name","summary","child-list"],"editting":"","lastModified":"2024-12-12T19:28:04.743Z","status":"not-started","currentFieldset":{"id":"summary","dispatchType":"continue"}}]}},"address":{"heading":"Current address","data":{"type":"details","fieldsets":{"address":{"name":"address","value":"123-45st","label":"Address","order":2},"city":{"name":"city","value":"Edmonton","label":"","order":3},"postal-code":{"name":"postal-code","value":"T5W 1O3","label":"","order":4}}}},"do-you-receive-support":{"heading":"","data":{"type":"details","fieldsets":{"support":{"name":"support","value":"Yes","label":"Support?","order":1}}}},"recalculated":{"heading":"","data":{"type":"details","fieldsets":{"recalculated":{"name":"recalculated","value":"Yes","label":"Recalculated?","order":1}}}},"summary":{"skipSummary":true,"heading":"Review your answers"}},"history":["what-is-your-role","optional","children-subform","address","do-you-receive-support","recalculated","summary"],"editting":"","status":"not-started","currentFieldset":{"id":"recalculated","dispatchType":"continue"}}`;
     const data = JSON.parse(raw) as AppState<Page>;
     if (data) {
       this._mainFormComponent.initState(data);
