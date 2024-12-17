@@ -219,8 +219,11 @@
   }
 
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
+    console.debug("Fieldset:onToggleActiveState", id, {detail})
     _active = detail.active;
+
     _stateSnapshot = { ..._state };
+    console.debug("Fieldset:onToggleActiveState::setSnapshot", id, {_stateSnapshot})
   }
 
   function onFormItemMount(detail: FormItemMountRelayDetail) {
@@ -295,6 +298,11 @@
       { el: _rootEl, state: cancelled ? _stateSnapshot : _state, last, first },
       { bubbles: true },
     );
+
+    if (cancelled) {
+      _state = _stateSnapshot;
+      console.debug("Fieldset:sendContinueMsg::cancelled", cancelled, _state)
+    }
   }
 
   // *********

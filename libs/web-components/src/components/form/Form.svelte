@@ -220,24 +220,23 @@
    * @param detail Contains operation type ('edit'/'remove'), array index, and new data
    */
   function onAlterData(detail: ExternalAlterDataRelayDetail) {
-    // console.debug("Form:onAlterData", name, { detail });
-    // const state = _state.form[detail.id];
-    // if (!Array.isArray(state)) {
-    //   return;
-    // }
+    console.debug("Form:onAlterData", name, { detail, _state });
+    const state = _state.form[detail.index];
 
-    // switch (detail.operation) {
-    //   case "edit": {
-    //     _state.form[detail.id][detail.index] = detail.data || {};
-    //     break;
-    //   }
-    //   case "remove": {
-    //     const temp = [...state];
-    //     temp.splice(detail.index, 1);
-    //     _state.form[detail.id].data = [...temp];
-    //     break;
-    //   }
-    // }
+    switch (detail.operation) {
+      case "edit": {
+        console.log("Form:onAlterData", "edit", state);
+        // state[detail.index] = detail.data || {};
+        break;
+      }
+      case "remove": {
+        console.log("Form:onAlterData", "remove", state);
+        // const temp = [...state];
+        // temp.splice(detail.index, 1);
+        // _state.form[detail.id].data = [...temp];
+        break;
+      }
+    }
 
     // dispatchStateChange("continue", detail.id);
   }
@@ -247,7 +246,7 @@
    * @param detail Contains the id of the array and the new data to append
    */
   function onAppendData(detail: ExternalAppendDataRelayDetail) {
-    // console.debug("Form:onAppendData", name, { detail });
+    console.debug("Form:onAppendData", name, { detail });
     // const { id, data } = detail;
     // // @ts-expect-error ignore
     // const temp = [...(_state.form[id] || [])];
@@ -353,6 +352,7 @@
       console.error("Form:onContinue", name, "no last page");
       return;
     }
+    console.debug("Form:onContinue", name, { lastPage, next });
 
     // dispatch state to app to allow dynamic binding, along with the page where a state change occured
     dispatchStateChange("continue", lastPage);
@@ -495,7 +495,7 @@
 
   /**
    * Resets the errors for a specific fieldset
-   * @param name The id of the fieldset to reset errors for
+   * @param fieldsetName The id of the fieldset to reset errors for
    */
   function resetFieldsetErrors(fieldsetName: string) {
     console.debug("Form:resetFieldsetErrors", name, { fieldsetName });

@@ -14,23 +14,23 @@
   >
     <goa-form-item name="Role" label="Who are you in the registration process?" labelsize="large">
       <goa-radio-group name="role">
-        <goa-radio-item value="Recipient" label="I'm the recipient of the child or spouse support" />
-        <goa-radio-item value="Payor" label="I'm the payor" />
+        <goa-radio-item value="Recipient" label="I'm the recipient of the child or spouse support"></goa-radio-item>
+        <goa-radio-item value="Payor" label="I'm the payor"></goa-radio-item>
       </goa-radio-group>
     </goa-form-item>
 
     <!-- not being checked on load when value is true -->
     <goa-form-item name="Lived in Canada > 5years" label="Have you been a resident of Canada for more then 5 years?">
-      <goa-checkbox name="canadian-resident" value="Yes" text="Yes" />
+      <goa-checkbox name="canadian-resident" value="Yes" text="Yes"></goa-checkbox>
     </goa-form-item>
 
     <goa-checkbox text="Add cost amounts?">
       <div slot="reveal">
         <goa-form-item name="Amount 1" label="Amount 1">
-          <goa-input name="amount1" placeholder="Enter dollars" />
+          <goa-input name="amount1" placeholder="Enter dollars"></goa-input>
         </goa-form-item>
         <goa-form-item name="Amount 2" label="Amount 2">
-          <goa-input name="amount2" placeholder="Enter dollars" />
+          <goa-input name="amount2" placeholder="Enter dollars"></goa-input>
         </goa-form-item>
 
         TOTAL: {{_total}}
@@ -47,17 +47,17 @@
     <goa-radio-group name="contact-method">
       <goa-radio-item value="Contact by phone" label="Contact me by phone">
         <goa-form-item name="Phone Number" slot="reveal">
-          <goa-input name="phone-number" />
+          <goa-input name="phone-number"></goa-input>
         </goa-form-item>
       </goa-radio-item>
       <goa-radio-item value="Contact by email" label="Contact me by email">
         <goa-form-item name="Email" slot="reveal">
-          <goa-input name="email" />
+          <goa-input name="email"></goa-input>
         </goa-form-item>
       </goa-radio-item>
       <goa-radio-item value="Contact by paper mail" label="Contact me by paper mail">
         <goa-form-item name="Mailing address" slot="reveal">
-          <goa-input name="address" />
+          <goa-input name="address"></goa-input>
         </goa-form-item>
       </goa-radio-item>
     </goa-radio-group>
@@ -71,11 +71,11 @@
     (_continue)="onPageChange($event, 'optional')"
   >
     <goa-form-item name="Nick name" label="Nickname" requirement="optional">
-      <goa-input name="nickname" />
+      <goa-input name="nickname"></goa-input>
     </goa-form-item>
 
     <goa-form-item name="Secret alias" label="Secret alias" requirement="optional">
-      <goa-input name="alias" />
+      <goa-input name="alias"></goa-input>
     </goa-form-item>
   </goa-public-form-page>
 
@@ -100,9 +100,15 @@
       </div>
       <goa-table>
         <tbody>
-          <tr *ngFor="let item of children()">
+          <tr *ngFor="let item of children(); index as i">
             <td>{{ item["firstName"]}}</td>
             <td>{{ item["lastName"]}}</td>
+            <td>
+              <goa-link-button (_click)="_childFormComponent.edit('child-subform', i)">Edit</goa-link-button>
+            </td>
+            <td>
+              <goa-link-button (_click)="_childFormComponent.remove('child-subform', i)">Delete</goa-link-button>
+            </td>
           </tr>
         </tbody>
       </goa-table>
@@ -110,22 +116,22 @@
 
     <goa-public-form-page id="name" (_continue)="onChildPageChange($event, 'name')">
       <goa-form-item name="First name" label="First name">
-        <goa-input name="firstName" />
+        <goa-input name="firstName"></goa-input>
       </goa-form-item>
       <goa-form-item name="Last name" label="Last name">
-        <goa-input name="lastName" />
+        <goa-input name="lastName"></goa-input>
       </goa-form-item>
     </goa-public-form-page>
 
     <goa-public-form-page id="alternate-name" (_continue)="onChildPageChange($event, 'alternate-name')">
       <goa-form-item name="Alternate name" label="Alternate name">
-        <goa-input name="alternateName" />
+        <goa-input name="alternateName"></goa-input>
       </goa-form-item>
     </goa-public-form-page>
 
     <goa-public-form-page id="dob" (_continue)="onChildPageChange($event, 'dob')">
       <goa-form-item name="Date of birth" label="Date of birth">
-        <goa-date-picker type="input" name="dob" />
+        <goa-date-picker type="input" name="dob"></goa-date-picker>
       </goa-form-item>
     </goa-public-form-page>
 
@@ -135,7 +141,7 @@
       id="summary"
       (_continue)="onChildPageChange($event, 'summary')"
     >
-      <goa-public-form-summary />
+      <goa-public-form-summary></goa-public-form-summary>
     </goa-public-form-page>
 
   </goa-subform>
@@ -148,16 +154,16 @@
     (_continue)="onPageChange($event, 'address')"
   >
     <goa-form-item label="Date">
-      <goa-date-picker type="input" name="date" />
+      <goa-date-picker type="input" name="date"></goa-date-picker>
     </goa-form-item>
     <goa-form-item label="Address">
-      <goa-input name="address" />
+      <goa-input name="address"></goa-input>
     </goa-form-item>
     <goa-form-item name="" label="City">
-      <goa-input name="city" />
+      <goa-input name="city"></goa-input>
     </goa-form-item>
     <goa-form-item name="" label="Postal code">
-      <goa-input name="postal-code" />
+      <goa-input name="postal-code"></goa-input>
     </goa-form-item>
   </goa-public-form-page>
 
@@ -169,8 +175,8 @@
   >
     <goa-form-item name="Support?" label="Does your support order include child support or child support expenses?" labelsize="large">
       <goa-radio-group name="support">
-        <goa-radio-item value="Yes" label="Yes" />
-        <goa-radio-item value="No" label="No" />
+        <goa-radio-item value="Yes" label="Yes"></goa-radio-item>
+        <goa-radio-item value="No" label="No"></goa-radio-item>
       </goa-radio-group>
     </goa-form-item>
   </goa-public-form-page>
@@ -182,8 +188,8 @@
   >
     <goa-form-item name="Recalculated?" label="Does your support order specify that it may be recalculated?" labelsize="large">
       <goa-radio-group name="recalculated">
-        <goa-radio-item value="Yes" label="Yes" />
-        <goa-radio-item value="No" label="No" />
+        <goa-radio-item value="Yes" label="Yes"></goa-radio-item>
+        <goa-radio-item value="No" label="No"></goa-radio-item>
       </goa-radio-group>
     </goa-form-item>
   </goa-public-form-page>
@@ -194,7 +200,7 @@
     skip-summary
     heading="Review your answers"
   >
-    <goa-public-form-summary heading="Support order details" />
+    <goa-public-form-summary heading="Support order details"></goa-public-form-summary>
   </goa-public-form-page>
 
 </goa-public-form>

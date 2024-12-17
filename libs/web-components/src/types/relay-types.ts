@@ -156,7 +156,6 @@ export type ExternalAlterDataRelayDetail =
       id: string;
       operation: "edit";
       index: number;
-      data: Fieldset;
     };
 
 export type ExternalContinueRelayDetail = {

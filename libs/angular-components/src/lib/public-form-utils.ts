@@ -152,7 +152,7 @@ export class PublicFormComponent<T> {
       return [];
     }
 
-    const output = this.state.map((s) => {
+    return this.state.map((s) => {
       return Object.values(s.form)
         .filter((item) => {
           return item?.data?.type === "details";
@@ -170,9 +170,6 @@ export class PublicFormComponent<T> {
           {} as Record<string, string>,
         );
     });
-
-    console.log("Utils:getStateList: ", output);
-    return output;
   }
 
   // getStateItems(group: string): Record<string, FieldsetItemState>[] {
@@ -238,13 +235,14 @@ export class PublicFormComponent<T> {
     return [true, value];
   }
 
-  // edit(_: number) {
-  //   // TODO: implement
-  // }
+  edit(id: string, index: number) {
+    console.log("Utils:edit", this._formRef);
+    relay(this._formRef, "external::alter:state", { id, index, operation: "edit" });
+  }
 
-  // remove(_: number) {
-  //   // TODO: implement
-  // }
+  remove(id: string, index: number) {
+    relay(this._formRef, "external::alter:state", { id, index, operation: "remove" });
+  }
 
   // Private method to dispatch the error message to the form element
   #dispatchError(el: HTMLElement, name: string, msg: string) {
