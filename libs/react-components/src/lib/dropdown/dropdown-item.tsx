@@ -41,7 +41,7 @@ export function GoADropdownOption(props: GoADropdownItemProps) {
   return <GoADropdownItem {...props} />;
 }
 
-export function GoADropdownItem({ value, label, filter, name, testId, mountType = "append" }: GoADropdownItemProps) {
+export function GoADropdownItem({ value, label, filter, name, testId, mountType = "reset" }: GoADropdownItemProps) {
   return (
     <goa-dropdown-item
       data-testid={testId}

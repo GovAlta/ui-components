@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
-
 type CountBy = "character" | "word";
 
 interface WCProps extends Margins {
@@ -11,6 +10,7 @@ interface WCProps extends Margins {
   placeholder?: string;
   rows?: number;
   error?: boolean;
+  readOnly?: boolean;
   disabled?: boolean;
   width?: string;
   maxwidth?: string;
@@ -36,6 +36,7 @@ export interface GoATextAreaProps extends Margins {
   placeholder?: string;
   rows?: number;
   error?: boolean;
+  readOnly?: boolean;
   disabled?: boolean;
   width?: string;
   maxWidth?: string;
@@ -53,6 +54,7 @@ export function GoATextarea({
   value,
   placeholder,
   rows,
+  readOnly,
   disabled,
   countBy,
   maxCount,
@@ -86,7 +88,6 @@ export function GoATextarea({
     };
   }, [el, onChange]);
 
-
   useEffect(() => {
     if (!el.current) {
       return;
@@ -95,7 +96,7 @@ export function GoATextarea({
     const keypressListener = (e: unknown) => {
       const { name, value, key } = (e as CustomEvent).detail;
       onKeyPress?.(name, value, key);
-    }
+    };
 
     current.addEventListener("_keyPress", keypressListener);
     return () => {
@@ -110,6 +111,7 @@ export function GoATextarea({
       placeholder={placeholder}
       value={value}
       rows={rows}
+      readOnly={readOnly}
       disabled={disabled}
       countby={countBy}
       maxcount={maxCount}
@@ -126,6 +128,5 @@ export function GoATextarea({
   );
 }
 
-export {GoATextarea as GoATextArea}
+export { GoATextarea as GoATextArea };
 export default GoATextarea;
-
