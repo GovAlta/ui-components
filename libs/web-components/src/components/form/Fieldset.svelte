@@ -43,8 +43,6 @@
     FormBackUrlMsg,
     FormDispatchEditMsg,
     FormDispatchEditRelayDetail,
-    FormDispatchStateMsg,
-    FormDispatchStateRelayDetail,
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
     FormItemMountMsg,

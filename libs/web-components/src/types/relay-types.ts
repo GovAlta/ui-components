@@ -63,6 +63,16 @@ export type FormBackUrlDetail = {
   url: string;
 };
 
+// ======
+// Subform
+// ======
+
+export type SubFormDeleteDataRelayDetail = {
+  data: FormState[];
+  id: string;
+};
+export const SubFormDeleteDataMsg = "subform::delete:data";
+
 // ========
 // Fieldset
 // ========

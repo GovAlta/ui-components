@@ -47,7 +47,7 @@
     FormSummaryEditPageMsg,
     FormSummaryEditPageRelayDetail,
     FormToggleActiveMsg,
-    FormToggleActiveRelayDetail,
+    FormToggleActiveRelayDetail, SubFormDeleteDataMsg, SubFormDeleteDataRelayDetail,
   } from "../../types/relay-types";
 
   // ========
@@ -185,14 +185,14 @@
         case ExternalAppendDataMsg:
           onAppendData(data as ExternalAppendDataRelayDetail);
           break;
-        case ExternalAlterDataMsg:
-          onAlterData(data as ExternalAlterDataRelayDetail);
-          break;
         case ExternalInitStateMsg:
           initState(data as ExternalInitStateDetail);
           break;
         case FormResetFormMsg:
           resetState();
+          break;
+        case SubFormDeleteDataMsg:
+          deleteSubFormData(data as SubFormDeleteDataRelayDetail);
           break;
       }
     });
@@ -201,6 +201,29 @@
   // ***************
   // Relay listeners
   // ***************
+
+  /**
+   * Handles modifications to array-type form data, supporting edit and remove operations
+   * @param detail Contains updated dataset and key (id) of the subform
+   */
+  function deleteSubFormData(detail: SubFormDeleteDataRelayDetail) {
+    console.debug("Form:updateSubformData", name, { detail, _state });
+
+    if (_state.form[detail.id].data.type === "list") {
+      //
+      _state.form[detail.id].data.items = detail.data;
+      console.log("Form:updateSubformData", _state.form[detail.id].data);
+
+      // send message to the external utils to adjust it's state
+      dispatch(
+        _rootEl,
+        "_stateChange",
+        { ..._state, currentFieldset: { id: detail.id } },
+        { bubbles: true, timeout: 100 },
+      );
+    }
+
+  }
 
   function onReceiveState(data: FormDispatchStateRelayDetail) {
     console.debug("Form:onReceiveState", name, { data });
@@ -213,32 +236,6 @@
 
     // bind all the child forms
     performOnce(_childFormStateTimeoutId, dispatchChildFormState, 100)
-  }
-
-  /**
-   * Handles modifications to array-type form data, supporting edit and remove operations
-   * @param detail Contains operation type ('edit'/'remove'), array index, and new data
-   */
-  function onAlterData(detail: ExternalAlterDataRelayDetail) {
-    console.debug("Form:onAlterData", name, { detail, _state });
-    const state = _state.form[detail.index];
-
-    switch (detail.operation) {
-      case "edit": {
-        console.log("Form:onAlterData", "edit", state);
-        // state[detail.index] = detail.data || {};
-        break;
-      }
-      case "remove": {
-        console.log("Form:onAlterData", "remove", state);
-        // const temp = [...state];
-        // temp.splice(detail.index, 1);
-        // _state.form[detail.id].data = [...temp];
-        break;
-      }
-    }
-
-    // dispatchStateChange("continue", detail.id);
   }
 
   /**
@@ -293,7 +290,7 @@
     // save the initial state of the fieldset (data prop not set)
     _state.form[detail.id] = { ..._state.form[detail.id], skipSummary: detail.skipSummary,  heading: detail.heading };
 
-    // send the back url to child fieldsets, howwever only the first will need it
+    // send the back url to child fieldsets, however only the first will need it
     if (backUrl) {
       relay<FormBackUrlDetail>(detail.el, FormBackUrlMsg, { url: backUrl });
     }
@@ -526,6 +523,11 @@
    */
   function addWindowPopStateListener() {
     console.debug("Form:addWindowPopStateListener", name);
+    // event should only be created on top level form, not subforms
+    if (subForm) {
+      return;
+    }
+
     window.addEventListener("popstate", (e: PopStateEvent) => {
       const history = [..._state.history];
       history.pop();

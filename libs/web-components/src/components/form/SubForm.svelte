@@ -4,6 +4,9 @@
   import { onMount } from "svelte";
   import { dispatch, receive, relay, styles } from "../../common/utils";
   import {
+    ExternalAlterDataMsg, ExternalAlterDataRelayDetail,
+    ExternalContinueMsg,
+    ExternalInitStateMsg,
     FieldsetBindMsg,
     FieldsetBindRelayDetail,
     FieldsetValidationRelayDetail,
@@ -15,7 +18,7 @@
     FormSetFieldsetMsg,
     FormState,
     FormToggleActiveMsg,
-    FormToggleActiveRelayDetail,
+    FormToggleActiveRelayDetail, SubFormDeleteDataMsg, SubFormDeleteDataRelayDetail,
   } from "../../types/relay-types";
   import { calculateMargin, Spacing } from "../../common/styling";
 
@@ -32,6 +35,8 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  let _formEl: HTMLElement;
+
   // Receives the events from the goa-public-form element
   let _receiverEl: HTMLElement;
 
@@ -46,6 +51,8 @@
 
   // reference to child fieldsets to allow data to be relayed to them when the subform item index is changed
   let _fieldsets: Record<string, HTMLElement> = {};
+
+  let _itemIndex: number = -1;
 
   onMount(() => {
     addRelayListener();
@@ -79,8 +86,61 @@
         case FieldsetBindMsg:
           onFieldsetMount(data as FieldsetBindRelayDetail);
           break;
+
+
+        // Form event interceptions
+        case "_init":
+          interceptFormInit(data as { el: HTMLElement });
+          break;
+
+        case ExternalInitStateMsg:
+          initState(data as FormState[]);
+          break;
+
+        // pass directly down to the form
+        case ExternalContinueMsg:
+          dispatch(_formEl, ExternalContinueMsg, data);
+          break;
+
+        // bind the list item to the child form
+        case ExternalAlterDataMsg:
+          alterItem(data as ExternalAlterDataRelayDetail);
+          break;
       }
     });
+  }
+
+  function alterItem(detail: ExternalAlterDataRelayDetail) {
+    console.debug("SubForm:alterItem", detail);
+    switch (detail.operation) {
+      case "remove":
+        _state = [..._state.slice(0, detail.index), ..._state.slice(detail.index + 1)];
+        // TODO: dispatch an event with new state to the parent form
+        // TODO: handling within the subform is required when there is a subform within a subform
+        console.debug("SubForm:alterItem:remove", { data: _state, id });
+        relay<SubFormDeleteDataRelayDetail>(_relayEl, SubFormDeleteDataMsg, { data: _state, id }, { bubbles: true });
+        break;
+      case "edit":
+        _itemIndex = detail.index;
+        _active = true; // show the form
+        // TODO: send continue message to child form
+        break;
+    }
+  }
+
+  function initState(data: FormState[]) {
+    console.debug("SubForm:initState", data);
+    _state = data;
+  }
+
+  //
+  function interceptFormInit(detail: { el: HTMLElement }) {
+    console.debug("SubForm:interceptFormDispatch", { detail });
+    // save a reference to the child form
+    _formEl = detail.el;
+
+    // redispatch event, but with a subform reference instead
+    dispatch(_relayEl, "_init", { el: _receiverEl }, { bubbles: true });
   }
 
   function onReceiveState(data: FormDispatchStateRelayDetailList) {
@@ -211,6 +271,7 @@
 
 <div bind:this={_relayEl}>
   <goa-public-form
+    sub-form
     bind:this={_receiverEl}
     on:_stateChange={onStateChange}
     on:_continue={onContinue}
@@ -219,7 +280,6 @@
       calculateMargin(mt, mr, mb, ml),
       `display: ${_active ? "block" : "none"}`,
     )}
-    sub-form
     {name}
     {dispatchOn}
     {backUrl}
