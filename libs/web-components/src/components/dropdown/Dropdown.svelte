@@ -370,26 +370,16 @@
     dispatchValue(option.value);
   }
 
+  function onFilteredOptionClick(option: Option) {
+    _isDirty = true;
+    onSelect(option);
+  }
+
   // Fires when on blur and changes have been made AND when the browser auto-fill is performed
-  async function onChange(_e: Event) {
+  async function onChange(e: Event) {
     if (!_filterable) return;
 
-    await tick();
-    syncFilteredOptions();
-
-    if (_filteredOptions.length === 1) {
-      const option = _filteredOptions[0];
-      _selectedOption = option;
-      dispatchValue(option.value);
-      setDisplayedValue();
-      setTimeout(() => {
-        hideMenu();
-      }, 10);
-    } else {
-      _selectedOption = undefined;
-      setDisplayedValue();
-      dispatchValue("");
-    }
+    setDisplayedValue();
   }
 
   function onInputKeyUp(e: KeyboardEvent) {
@@ -503,9 +493,6 @@
 
     handleKeyUp(e: KeyboardEvent) {
       switch (e.key) {
-        case "Enter":
-          this.onEnter(e);
-          break;
         case "ArrowUp":
           this.onArrow(e, "up");
           break;
@@ -532,6 +519,9 @@
 
     handleKeyDown(e: KeyboardEvent) {
       switch (e.key) {
+        case "Enter":
+          this.onEnter(e);
+          break;
         case "Escape":
           this.onEscape(e);
           break;
@@ -740,10 +730,8 @@
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <li
             id={option.value}
-            aria-selected={_selectedOption?.value ===
-              (option.label || option.value)}
-            class:selected={_selectedOption?.value ===
-              (option.label || option.value)}
+            aria-selected={_selectedOption?.value === option.value}
+            class:selected={_selectedOption?.value === option.value}
             class="dropdown-item"
             class:dropdown-item--highlighted={index === _highlightedIndex}
             data-index={index}
@@ -751,10 +739,7 @@
             data-value={option.value}
             role="option"
             style="display: block"
-            on:click={() => {
-              _isDirty = true;
-              onSelect(option);
-            }}
+            on:click={() => onFilteredOptionClick(option)}
           >
             {option.label || option.value}
           </li>
