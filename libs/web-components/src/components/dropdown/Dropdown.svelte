@@ -914,9 +914,10 @@
     cursor: pointer;
     color: var(--goa-dropdown-item-color-text);
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+    white-space: normal; /* Allows text to wrap */
+    word-break: break-word; /* Ensures long words break onto the next line */
+    overflow-wrap: break-word; /* Alternative for word wrapping */
+    }
 
   .dropdown-item:hover,
   .dropdown-item--highlighted {

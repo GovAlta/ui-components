@@ -165,6 +165,7 @@
 
     /* Tertiary button component design tokens */
     --goa-button-tertiary-color-bg: none;
+    --goa-button-tertiary-color-bg-mobile: var(--goa-color-greyscale-100);
     --goa-button-tertiary-color-text: var(--goa-color-interactive-default);
     --goa-button-tertiary-border: none;
     --goa-button-tertiary-hover-color-bg: var(--goa-color-greyscale-100);
@@ -220,7 +221,18 @@
       width: 100%;
       display: flex;
     }
-
+    button.tertiary {
+    background-color: var(--goa-button-tertiary-color-bg-mobile) !important;
+    }
+    button.tertiary:hover {
+    background-color: var(--goa-color-greyscale-200) !important;
+    }
+    button.tertiary.inverse {
+    background-color: var(--goa-button-tertiary-color-bg) !important;
+    }
+    button.tertiary.inverse:hover {
+    background-color: var(--goa-color-greyscale-200) !important;
+    }
   }
 
   .icon {

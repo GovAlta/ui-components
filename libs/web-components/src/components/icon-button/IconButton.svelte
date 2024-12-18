@@ -109,11 +109,15 @@
 
     --goa-icon-button-dark-color: var(--goa-color-greyscale-black);
     --goa-icon-button-dark-hover-color-bg: var(--goa-color-greyscale-100);
+    --goa-icon-button-dark-disabled-color-bg: var(--goa-color-greyscale-500);
 
     --goa-icon-button-destructive-color: var(--goa-color-emergency-default);
     --goa-icon-button-destructive-hover-color-bg: var(--goa-color-emergency-light);
     --goa-icon-button-destructive-disabled-color: var(--goa-color-interactive-error-disabled);
 
+
+    /*  Already added to global tokens */
+    --goa-color-interactive-error-disabled: #f58185;
     /*  ------------------------------------------------------- */
 
 
@@ -185,6 +189,10 @@
   .dark:focus,
   .dark:active {
     background-color: var(--goa-icon-button-dark-hover-color-bg);
+  }
+  .dark:disabled {
+    color: var(--goa-icon-button-dark-disabled-color-bg);
+    fill: var(--goa-icon-button-dark-disabled-color-bg);
   }
 
 /*  Type: nocolor (same as dark, not documented) */

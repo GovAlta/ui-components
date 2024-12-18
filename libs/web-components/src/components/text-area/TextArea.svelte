@@ -170,6 +170,7 @@
     --goa-text-area-color-text-counter: var(--goa-color-text-default);
     --goa-text-area-color-text-counter-error: var(--goa-color-interactive-error);
     --goa-text-area-color-text-disabled: var(--goa-color-text-disabled);
+    --goa-text-area-color-text-placeholder: var(--goa-color-text-secondary);
 
     --goa-text-area-color-bg: var(--goa-color-greyscale-white);
     --goa-text-area-color-bg-disabled: var(--goa-color-greyscale-100);
@@ -272,25 +273,28 @@
     resize: none;
     scroll-behavior: smooth;
     max-height: calc(100vh * var(--max-height, 100) / 100);
+    scrollbar-gutter: stable;
   }
   textarea::-webkit-scrollbar {
     width: var(--goa-space-xs);
   }
   textarea::-webkit-scrollbar-track {
     border-radius: var(--goa-border-radius-m);
-
   }
   textarea::-webkit-scrollbar-track:hover {
     background: var(--goa-color-greyscale-200);
-
   }
   textarea::-webkit-scrollbar-thumb {
     background: var(--goa-color-greyscale-400);
     border-radius: var(--goa-border-radius-m);
-
   }
   textarea::-webkit-scrollbar-thumb:hover {
     background: var(--goa-color-greyscale-600);
+  }
+
+  ::placeholder {
+    color: var(--goa-text-area-color-text-placeholder);
+    opacity: 1;
   }
 
   @container self (--mobile) {

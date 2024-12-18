@@ -196,8 +196,12 @@
     display: block;
   }
 
+
   .root {
-    display: inline-block;
+    display: block;
+    height: auto; /* Automatically adjusts to content */
+    min-height: 0; /* Ensures no unnecessary minimum height */
+    padding: 0; /* Remove padding if it's affecting height */
   }
 
   input[type="checkbox"] {

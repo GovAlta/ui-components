@@ -324,7 +324,7 @@
     margin-bottom: var(--offset-bottom, 3px);
     margin-left: var(--offset-left, 0);
     margin-right: var(--offset-right, 0);
-    /* overflow: hidden; */
+    /* overflow: hidden; This would round corners on popover menu in heading*/
   }
 
   :global(::slotted(ul)) {

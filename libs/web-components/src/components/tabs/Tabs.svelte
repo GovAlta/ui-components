@@ -322,7 +322,10 @@
     :global([role="tab"]) {
       padding: var(--goa-tab-padding-mobile);
       border-left: var(--goa-tab-border-not-selected);
-      text-overflow: ellipsis;
+      text-overflow: wrap;
+      white-space: normal; /* Allows text to wrap */
+      word-break: break-word; /* Ensures long words break onto the next line */
+      overflow-wrap: break-word; /* Alternative for word wrapping */
     }
     :global([role="tab"][aria-selected="true"]) {
       border-left: var(--goa-tab-border-selected);
