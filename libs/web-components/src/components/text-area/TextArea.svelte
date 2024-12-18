@@ -2,11 +2,24 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { dispatch, pluralize, receive, relay, toBoolean } from "../../common/utils";
+  import {
+    dispatch,
+    pluralize,
+    receive,
+    relay,
+    toBoolean,
+  } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
-  import { FieldsetResetErrorsMsg, FieldsetSetErrorMsg, FormFieldMountMsg, FormFieldMountRelayDetail, FormSetValueMsg, FormSetValueRelayDetail } from "../../types/relay-types";
+  import {
+    FieldsetResetErrorsMsg,
+    FieldsetSetErrorMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+    FormSetValueMsg,
+    FormSetValueRelayDetail,
+  } from "../../types/relay-types";
 
   export let name: string;
   export let value: string = "";
@@ -27,9 +40,23 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  let _error: boolean;
+  let _prevError = _error;
+
   // reactive
 
-  $: isError = toBoolean(error);
+  $: {
+    _error = toBoolean(error);
+    if (_error !== _prevError) {
+      dispatch(
+        _rootEl,
+        "error::change",
+        { isError: _error },
+        { bubbles: true },
+      );
+      _prevError = _error;
+    }
+  }
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
   $: count =
@@ -40,16 +67,17 @@
   // privates
 
   let _textareaEl: HTMLTextAreaElement;
+  let _rootEl: HTMLElement;
 
   // Hooks
 
   onMount(() => {
     addRelayListener();
     sendMountedMessage();
-  })
+  });
 
   // functions
-  
+
   function addRelayListener() {
     receive(_textareaEl, (action, data) => {
       switch (action) {
@@ -75,7 +103,7 @@
     relay<FormFieldMountRelayDetail>(
       _textareaEl,
       FormFieldMountMsg,
-      { name, el: _textareaEl},
+      { name, el: _textareaEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -109,6 +137,10 @@
       }),
     );
   }
+
+  function onFocus(e: Event) {
+    dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+  }
 </script>
 
 <!-- HTML -->
@@ -116,13 +148,14 @@
   <div
     data-testid="root"
     class="root"
-    class:error={isError || (maxcount > 0 && count > maxcount)}
+    class:error={_error || (maxcount > 0 && count > maxcount)}
     class:disabled={isDisabled}
     style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${width};
       --char-count-padding: ${countby ? "2rem" : "0"};
     `}
+    bind:this={_rootEl}
   >
     <textarea
       bind:this={_textareaEl}
@@ -130,12 +163,14 @@
       {placeholder}
       {rows}
       aria-label={arialabel || name}
+      aria-invalid={_error ? "true" : "false"}
       disabled={isDisabled}
       readonly={isReadonly}
       data-testid={testid}
       bind:value
       on:keyup={onKeyPress}
       on:change={onChange}
+      on:focus={onFocus}
     />
 
     {#if maxcount > 0 && !isDisabled}

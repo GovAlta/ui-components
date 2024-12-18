@@ -226,6 +226,7 @@
   input[type="radio"]:not(:checked) ~ .goa-radio-icon {
     border: var(--goa-radio-border-width) solid
       var(--goa-color-greyscale-700);
+    margin-top: 3px;
   }
 
   /* Hover */
@@ -238,6 +239,7 @@
   input[type="radio"]:checked ~ .goa-radio-icon {
     border: var(--goa-radio-border-width--checked) solid
       var(--goa-color-interactive-default);
+    margin-top: 3px;
   }
 
   /* Hover & checked */

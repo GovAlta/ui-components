@@ -109,8 +109,7 @@
   :global(::slotted(a)),
   :global(::slotted(a:visited)) {
     /* required to override base styles */
-    color: var(--goa-color-text-default) !important;
-
+    color: var(--goa-side-menu-text-color, var(--goa-color-text-default)) !important;
     display: block;
     font: var(--goa-typography-body-m);
     padding: 0.5rem 1rem 0.5rem 2rem;

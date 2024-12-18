@@ -26,6 +26,7 @@ export { default as Dropdown } from "./components/dropdown/Dropdown.svelte";
 export { default as DropdownItem } from "./components/dropdown/DropdownItem.svelte";
 export { default as FileUploadCard } from "./components/file-upload-card/FileUploadCard.svelte";
 export { default as FileUploadInput } from "./components/file-upload-input/FileUploadInput.svelte";
+export { default as FilterChip } from "./components/filter-chip/FilterChip.svelte";
 export { default as FocusTrap } from "./components/focus-trap/FocusTrap.svelte";
 export { default as Footer } from "./components/footer/Footer.svelte";
 export { default as FooterMetaSection } from "./components/footer-meta-section/FooterMetaSection.svelte";
@@ -71,7 +72,5 @@ export { default as TextArea } from "./components/text-area/TextArea.svelte";
 export { default as ThreeColumnLayout } from "./layouts/three-column-layout/ThreeColumnLayout.svelte";
 export { default as Tooltip } from "./components/tooltip/Tooltip.svelte";
 export { default as TwoColumnLayout } from "./layouts/two-column-layout/TwoColumnLayout.svelte";
-
-// Experimental components
 export { default as ExperimentalFormStepper } from "./experimental/ExperimentalFormStepper.svelte";
 export { default as ExperimentalFormStep } from "./experimental/ExperimentalFormStep.svelte";

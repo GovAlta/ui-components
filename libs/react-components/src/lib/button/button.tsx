@@ -24,6 +24,7 @@ interface WCProps extends Margins {
   disabled?: boolean;
   leadingicon?: string;
   trailingicon?: string;
+  width?: string;
   testid?: string;
   ref: React.RefObject<HTMLElement>;
 }
@@ -45,6 +46,7 @@ export interface GoAButtonProps extends Margins {
   disabled?: boolean;
   leadingIcon?: GoAIconType;
   trailingIcon?: GoAIconType;
+  width?: string;
   onClick?: () => void;
   testId?: string;
   children?: ReactNode;
@@ -57,6 +59,7 @@ export function GoAButton({
   variant,
   leadingIcon,
   trailingIcon,
+  width,
   testId,
   children,
   onClick,
@@ -93,6 +96,7 @@ export function GoAButton({
       disabled={disabled}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
+      width={width}
       testid={testId}
       mt={mt}
       mr={mr}

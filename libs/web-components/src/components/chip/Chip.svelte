@@ -6,6 +6,7 @@
   import type { GoAIconType, IconTheme } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { onMount } from "svelte";
 
   type ChipVariant = "filter";
 
@@ -32,6 +33,10 @@
 
   $: _error = toBoolean(error);
   $: _deletable = toBoolean(deletable);
+
+  onMount(async () => {
+    console.warn("GoAChip is deprecated. Instead use GoAFilterChip.");
+  });
 
   function onDelete(e: Event) {
     el.dispatchEvent(
@@ -61,7 +66,12 @@
   on:blur={() => (_hovering = false)}
 >
   {#if leadingicon}
-    <goa-icon class="leading-icon" size="medium" type={leadingicon} theme={icontheme} />
+    <goa-icon
+      class="leading-icon"
+      size="medium"
+      type={leadingicon}
+      theme={icontheme}
+    />
   {/if}
   <div class="text">
     {content}

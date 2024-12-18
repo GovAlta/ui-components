@@ -1,4 +1,4 @@
-import { render, cleanup } from "@testing-library/svelte";
+import { render, fireEvent, cleanup } from "@testing-library/svelte";
 import GoAFormItem from "./FormItem.svelte";
 import { it, describe } from "vitest";
 
@@ -170,5 +170,99 @@ describe("GoA FormItem", () => {
       expect(formitem).toHaveStyle("margin-bottom:var(--goa-space-l)");
       expect(formitem).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
+  });
+
+  it("should have both label and helper text accessible without overriding", async () => {
+    const result = render(GoAFormItem, {
+      testid: "formitem-test",
+      label: "Test Label",
+      helptext: "Helper Text",
+    });
+    const formItem = await result.findByTestId("formitem-test");
+
+    const label = formItem.querySelector(".label");
+    expect(label).toBeTruthy();
+    expect(label?.textContent).toContain("Test Label");
+
+    const helperText = formItem.querySelector(".help-msg");
+    expect(helperText).toBeTruthy();
+    expect(helperText?.textContent).toContain("Helper Text");
+
+    // Ensure both label and helper text are present and distinct
+    expect(formItem.textContent).toContain("Test Label");
+    expect(formItem.textContent).toContain("Helper Text");
+  });
+
+  it("should display error text when provided", async () => {
+    const result = render(GoAFormItem, {
+      testid: "formitem-test",
+      label: "Test Label",
+      error: "Error Message",
+    });
+    const formItem = await result.findByTestId("formitem-test");
+
+    const errorText = formItem.querySelector(".error-msg");
+    expect(errorText).toBeTruthy();
+    expect(errorText?.textContent).toContain("Error Message");
+
+    // Ensure error text is present in the component
+    expect(formItem.textContent).toContain("Error Message");
+  });
+
+  it("should update aria-describedby", async () => {
+    const { component, findByTestId } = render(GoAFormItem, {
+      testid: "formitem-test",
+      label: "Test Label",
+      helptext: "Helper Text",
+    });
+
+    const formItem = await findByTestId("formitem-test");
+    const input = document.createElement("input");
+    formItem.appendChild(input);
+
+    // Simulate input mounted event
+    await fireEvent(
+      formItem,
+      new CustomEvent("form-field::bind", {
+        detail: { el: input },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+
+    // Initially, only helptext should be in aria-describedby
+    expect(input.getAttribute("aria-describedby")).toBeTruthy();
+    expect(input.getAttribute("aria-describedby")).toContain("helptext-");
+
+    // Simulate error state change
+    await fireEvent(
+      formItem,
+      new CustomEvent("error::change", {
+        detail: { isError: true },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+
+    // Now both error and helptext should be in aria-describedby
+    const describedBy = input.getAttribute("aria-describedby");
+    expect(describedBy).toBeTruthy();
+    expect(describedBy).toContain("error-");
+    expect(describedBy).toContain("helptext-");
+
+    // Simulate error state change back to no error
+    await fireEvent(
+      formItem,
+      new CustomEvent("error::change", {
+        detail: { isError: false },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+
+    // Back to only helptext in aria-describedby
+    expect(input.getAttribute("aria-describedby")).toBeTruthy();
+    expect(input.getAttribute("aria-describedby")).toContain("helptext-");
+    expect(input.getAttribute("aria-describedby")).not.toContain("error-");
   });
 });

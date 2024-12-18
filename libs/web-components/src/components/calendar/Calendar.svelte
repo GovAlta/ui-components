@@ -71,6 +71,18 @@
   let _years: string[] = [];
   let _calendarEl: HTMLElement;
 
+  $: {
+    if (value) {
+      const newDate = startOfDay(new Date(value));
+
+      if (isValidDate(newDate)) {
+        renderCalendar({ type: "date", value: _selectedDate || newDate });
+        _selectedDate = newDate;
+        _calendarDate = newDate;
+      }
+    }
+  }
+
   // *****
   // Hooks
   // *****

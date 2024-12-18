@@ -1,12 +1,22 @@
 <svelte:options customElement="goa-form-item" />
 
 <!-- Script -->
+<script lang="ts" context="module">
+  export type FormItemChannelProps = {
+    el: HTMLElement;
+  };
+</script>
 
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { receive, relay, typeValidator } from "../../common/utils";
+  import {
+    receive,
+    relay,
+    generateRandomId,
+    typeValidator,
+  } from "../../common/utils";
   import {
     FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
@@ -49,6 +59,10 @@
   export let id: string = "";
 
   let _rootEl: HTMLElement;
+  let _inputEl: HTMLElement;
+  let _errorId = `error-${generateRandomId()}`;
+  let _helpTextId = `helptext-${generateRandomId()}`;
+  let _hasError = false;
 
   onMount(() => {
     validateRequirementType(requirement);
@@ -69,7 +83,75 @@
           break;
       }
     });
+
+    _rootEl?.addEventListener("form-field::bind", handleInputMounted);
+    _rootEl?.addEventListener("error::change", handleErrorChange);
+    _rootEl?.addEventListener("help-text::announce", handleAnnounceHelperText);
   });
+
+  function handleInputMounted(e: Event) {
+    const ce = e as CustomEvent<FormFieldMountRelayDetail>;
+    _inputEl = ce.detail.el;
+
+    // Check if aria-label is present and has a value in the child element
+    const ariaLabel = _inputEl.getAttribute("aria-label");
+    if (!ariaLabel || ariaLabel.trim() === "") {
+      _inputEl.setAttribute("aria-label", label);
+    }
+
+    // Set aria-required
+    _inputEl.setAttribute(
+      "aria-required",
+      requirement === "required" ? "true" : "false",
+    );
+
+    updateAriaDescribedBy();
+  }
+
+  function handleErrorChange(e: Event) {
+    const ce = e as CustomEvent<{ isError: boolean }>;
+    if (_hasError !== ce.detail.isError) {
+      _hasError = ce.detail.isError;
+      updateAriaDescribedBy();
+    }
+  }
+
+  function handleAnnounceHelperText() {
+    const message = _hasError ? error || helptext : helptext;
+    if (message) {
+      announceOnFocus(message);
+    }
+  }
+
+  function announceOnFocus(text: string) {
+    const announcer = document.createElement("div");
+    announcer.className = "sr-only";
+    announcer.setAttribute("aria-live", "polite");
+    announcer.setAttribute("aria-atomic", "true");
+    document.body.appendChild(announcer);
+
+    setTimeout(() => {
+      announcer.textContent = text;
+    }, 100);
+
+    setTimeout(() => {
+      document.body.removeChild(announcer);
+    }, 3000);
+  }
+
+  function updateAriaDescribedBy() {
+    if (!_inputEl) return;
+
+    let describedBy = [];
+    if (_hasError || $$slots.error) describedBy.push(_errorId);
+    if (helptext || $$slots.helptext) describedBy.push(_helpTextId);
+
+    if (describedBy.length > 0) {
+      _inputEl.setAttribute("aria-describedby", describedBy.join(" "));
+    } else {
+      _inputEl.setAttribute("aria-describedby", "");
+    }
+  }
 
   function onSetError(d: FieldsetErrorRelayDetail) {
     error = (d as Record<string, string>)["error"];
@@ -106,6 +188,7 @@
   bind:this={_rootEl}
 >
   {#if label}
+    <!-- svelte-ignore a11y-label-has-associated-control -->
     <label class={`label ${labelsize}`}>
       {label}
       {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
@@ -118,7 +201,7 @@
   </div>
 
   {#if $$slots.error || error}
-    <div class="error-msg">
+    <div class="error-msg" id={_errorId} role="alert">
       <goa-icon type="warning" size="small" theme="filled" mt="2xs" />
       <slot name="error">
         {error}
@@ -127,7 +210,7 @@
   {/if}
 
   {#if $$slots.helptext || helptext}
-    <div class="help-msg">
+    <div class="help-msg" id={_helpTextId}>
       <slot name="helptext">
         {helptext}
       </slot>
@@ -183,5 +266,17 @@
 
   .error-msg + .help-msg {
     margin-top: var(--goa-space-xs);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 </style>

@@ -6,8 +6,22 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
-  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
-  import { FormSetValueMsg, FormSetValueRelayDetail, FieldsetSetErrorMsg, FieldsetResetErrorsMsg, FormFieldMountRelayDetail, FormFieldMountMsg } from "../../types/relay-types";
+  import {
+    dispatch,
+    fromBoolean,
+    receive,
+    relay,
+    toBoolean,
+  } from "../../common/utils";
+  import {
+    FormSetValueMsg,
+    FormSetValueRelayDetail,
+    FieldsetSetErrorMsg,
+    FieldsetResetErrorsMsg,
+    FormFieldMountRelayDetail,
+    FormFieldMountMsg,
+  } from "../../types/relay-types";
+
   // Required
   export let name: string;
 
@@ -32,10 +46,24 @@
   let _value: string;
   let _checkboxRef: HTMLElement;
   let _descriptionId: string;
+  let _rootEl: HTMLElement;
+  let _error: boolean;
+  let _prevError = _error;
 
   // Binding
   $: isDisabled = toBoolean(disabled);
-  $: isError = toBoolean(error);
+  $: {
+    _error = toBoolean(error);
+    if (_error !== _prevError) {
+      dispatch(
+        _rootEl,
+        "error::change",
+        { isError: _error },
+        { bubbles: true },
+      );
+      _prevError = _error;
+    }
+  }
   $: isChecked = toBoolean(checked);
   $: isIndeterminate = false; // Design review. To be built with TreeView Later
 
@@ -47,7 +75,7 @@
     addRelayListener();
     sendMountedMessage();
   });
-  
+
   function addRelayListener() {
     receive(_checkboxRef, (action, data) => {
       switch (action) {
@@ -74,7 +102,7 @@
     relay<FormFieldMountRelayDetail>(
       _checkboxRef,
       FormFieldMountMsg,
-      { name, el: _checkboxRef},
+      { name, el: _checkboxRef },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -98,11 +126,16 @@
       }),
     );
   }
+
+  function onFocus() {
+    dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+  }
 </script>
 
 <!-- View -->
 
 <div
+  bind:this={_rootEl}
   class="root"
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
@@ -113,12 +146,9 @@
     data-testid={testid}
     for={name}
     class:disabled={isDisabled}
-    class:error={isError}
+    class:error={_error}
   >
-    <div
-      class="container"
-      class:selected={isChecked}
-    >
+    <div class="container" class:selected={isChecked}>
       <input
         bind:this={_checkboxRef}
         id={name}
@@ -129,7 +159,9 @@
         value={`${value}`}
         aria-label={arialabel || text || name}
         aria-describedby={description ? _descriptionId : null}
+        aria-invalid={_error ? "true" : "false"}
         on:change={onChange}
+        on:focus={onFocus}
       />
       {#if isIndeterminate}
         <svg
@@ -159,7 +191,7 @@
   </label>
   {#if $$slots.description || description}
     <div class="description" id={_descriptionId} data-testid="description">
-      <slot name="description"/>
+      <slot name="description" />
       {description}
     </div>
   {/if}
@@ -208,7 +240,6 @@
     margin-top: var(--goa-space-2xs);
   }
 
-
   /* Container */
   .container {
     box-sizing: border-box;
@@ -225,7 +256,8 @@
     flex: 0 0 auto;
   }
   .container:hover {
-    box-shadow: inset 0 0 0 var(--goa-border-width-m) var(--goa-color-interactive-hover);
+    box-shadow: inset 0 0 0 var(--goa-border-width-m)
+      var(--goa-color-interactive-hover);
   }
   .container svg {
     fill: var(--goa-color-greyscale-white);
@@ -238,7 +270,6 @@
   .container.selected:hover {
     background-color: var(--goa-color-interactive-hover);
   }
-
 
   /* Error Container */
   .error .container,
