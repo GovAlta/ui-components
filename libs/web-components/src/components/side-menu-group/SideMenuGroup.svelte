@@ -199,6 +199,7 @@
     padding: var(--goa-side-menu-parent-padding);
     text-decoration: none;
     font: var(--goa-side-menu-parent-text);
+    border-radius: var(--goa-side-menu-group-border-radius);
   }
   .heading.open {
     font: var(--goa-side-menu-parent-text-active);
@@ -227,7 +228,7 @@
   }
 
   .side-menu-group.current .heading {
-    background: var(--goa-side-menu-parent-color-bg-hover);
+    background: var(--goa-side-menu-parent-color-bg-selected);
   }
 
   .heading:hover {

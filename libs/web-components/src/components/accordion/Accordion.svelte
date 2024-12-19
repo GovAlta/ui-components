@@ -9,17 +9,22 @@
     toBoolean,
     validateRequired,
     generateRandomId,
+    ensureSlotExists,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
-  // Validator
+  // Validators
+
   const [HeadingSizes, validateHeadingSize] = typeValidator(
     "Accordion heading size",
     ["small", "medium"],
   );
 
   // Types
+
   type HeadingSize = (typeof HeadingSizes)[number];
+
+  // Props
 
   export let open: string = "false";
   export let heading: string = "";
@@ -33,12 +38,16 @@
   export let mb: Spacing = "xs";
   export let ml: Spacing = null;
   export let iconposition: "left" | "right" = "left";
+
   // Private
 
   let _hovering: boolean = false;
   let _titleEl: HTMLElement;
-  let _headingContentSlotChildren: Element[] = [];
+  let _rootEl: HTMLElement;
+  let _slotEl: HTMLElement;
+  let _headingSlotChildren: Element[] = [];
   let _accordionId: string = "";
+
   // Reactive
 
   $: isOpen = toBoolean(open);
@@ -48,11 +57,13 @@
   onMount(() => {
     validateRequired("GoAAccordion", { heading });
     validateHeadingSize(headingsize);
-    _headingContentSlotChildren = getChildren();
+    ensureSlotExists(_slotEl);
+    
+    _headingSlotChildren = getHeadingChildren();
     _accordionId = `accordion-${generateRandomId()}`;
   });
 
-  function getChildren(): Element[] {
+  function getHeadingChildren(): Element[] {
     if (_titleEl) {
       const slot = _titleEl.querySelector("slot") as HTMLSlotElement;
       if (slot) {
@@ -64,6 +75,18 @@
     }
     return [];
   }
+
+  function dispatchClickEvent(open?: boolean) {
+    if (!_rootEl) return;
+
+    _rootEl.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        bubbles: true,
+        detail: { open: open },
+      }),
+    );
+  }
 </script>
 
 <!-- HTML -->
@@ -71,11 +94,13 @@
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     max-width: ${maxwidth};
+    --icon-rotate: ${iconposition === "right" ? "180deg" : "90deg"}
   `}
   class="goa-accordion"
+  bind:this={_rootEl}
   data-testid={testid}
 >
-  <details open={isOpen} on:toggle={({ target }) => (open = `${target?.open}`)}>
+<details open={isOpen} on:toggle={({ target }) => { open = `${target?.open}`; dispatchClickEvent(target?.open); }}>
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <summary
       class={`container-${headingsize}`}
@@ -107,7 +132,7 @@
         {/if}
         <div
           class="heading-content"
-          class:heading-content-top={_headingContentSlotChildren.length}
+          class:heading-content-top={_headingSlotChildren.length}
         >
           <slot name="headingcontent" />
         </div>
@@ -115,7 +140,7 @@
 
       {#if iconposition === "right"}
         <goa-icon
-          type="chevron-forward"
+          type="chevron-down"
           fillcolor={_hovering
       ? "var(--goa-color-interactive-hover)"
       : "var(--goa-color-interactive-default)"}
@@ -123,6 +148,7 @@
       {/if}
     </summary>
     <div
+      bind:this={_slotEl}
       class="content"
       role="region"
       aria-labelledby={`${_accordionId}-heading`}
@@ -256,7 +282,7 @@
   }
 
   details[open] goa-icon {
-    transform: rotate(90deg);
+    transform: rotate(var(--icon-rotate));
   }
 
   details[open] summary {

@@ -1,10 +1,11 @@
-import { ReactNode } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 
 export type GoAHeadingSize = "small" | "medium";
 export type GoAIconPosition = "left" | "right";
 
 interface WCProps extends Margins {
+  ref: React.RefObject<HTMLElement>;
   open?: boolean;
   headingSize?: GoAHeadingSize;
   heading: string;
@@ -33,6 +34,7 @@ export interface GoAAccordionProps extends Margins {
   maxWidth?: string;
   testid?: string;
   iconPosition?: GoAIconPosition;
+  onChange?: (open: boolean) => void;
   children: ReactNode;
 }
 
@@ -45,14 +47,32 @@ export function GoAAccordion({
   iconPosition,
   maxWidth,
   testid,
+  onChange,
   children,
   mt,
   mr,
   mb,
   ml,
 }: GoAAccordionProps): JSX.Element {
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (element && onChange) {
+      const handler = (event: Event) => {
+        const customEvent = event as CustomEvent;
+        onChange(customEvent.detail.open);
+      };
+      element.addEventListener("_change", handler);
+      return () => {
+        element.removeEventListener("_change", handler);
+      };
+    }
+  }, [onChange]);
+
   return (
     <goa-accordion
+      ref={ref}
       open={open}
       headingSize={headingSize}
       heading={heading}

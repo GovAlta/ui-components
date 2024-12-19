@@ -5,9 +5,16 @@
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
-  import type { Option } from "./DropdownItem.svelte";
+  import {
+    DropdownItemDestroyMsg,
+    DropdownItemDestroyRelayDetail,
+    DropdownItemMountedMsg,
+    DropdownItemMountedRelayDetail,
+    type Option,
+  } from "./DropdownItem.svelte";
   import {
     dispatch,
+    ensureSlotExists,
     fromBoolean,
     receive,
     relay,
@@ -59,7 +66,7 @@
   let _isMenuVisible = false;
   let _highlightedIndex: number = -1;
   let _width: string;
-  let _popoverMaxWidth: number;
+  let _popoverMaxWidth: string;
 
   let _rootEl: HTMLElement;
   let _menuEl: HTMLElement;
@@ -74,13 +81,14 @@
 
   let _mountStatus: "active" | "ready" = "ready";
   let _mountTimeoutId: any = undefined;
+  let _error = toBoolean(error);
+  let _prevError = _error;
 
   //
   // Reactive
   //
 
   $: _disabled = toBoolean(disabled);
-  $: _error = toBoolean(error);
   $: _multiselect = toBoolean(multiselect);
   $: _native = toBoolean(native);
   $: _filterable = toBoolean(filterable) && !_native;
@@ -90,13 +98,30 @@
     ? _filteredOptions[_highlightedIndex].value
     : undefined;
 
+  // make updates if the values are changed
   $: {
     _values = parseValues(value || "");
     setSelected();
   }
 
+  // ensures the width is set based on the width prop supplied or the children size
   $: {
     _width = width || getLongestChildWidth(_options);
+    _popoverMaxWidth = _width;
+  }
+
+  // TODO: Syed can you add a comment here describing what this does?
+  $: {
+    _error = toBoolean(error);
+    if (_error !== _prevError) {
+      dispatch(
+        _rootEl,
+        "error::change",
+        { isError: _error },
+        { bubbles: true },
+      );
+      _prevError = _error;
+    }
   }
 
   //
@@ -104,7 +129,7 @@
   //
 
   onMount(() => {
-    getChildren();
+    ensureSlotExists(_rootEl);
     addRelayListener();
     sendMountedMessage();
 
@@ -118,7 +143,7 @@
   //
 
   function addRelayListener() {
-    receive(_rootEl, (action, data) => {
+    receive(_rootEl, (action, data, event) => {
       switch (action) {
         case FormSetValueMsg:
           onSetValue(data as FormSetValueRelayDetail);
@@ -129,11 +154,18 @@
         case FieldsetResetErrorsMsg:
           error = "false";
           break;
+        case DropdownItemMountedMsg:
+          onChildMounted(data as DropdownItemMountedRelayDetail);
+          break;
+        case DropdownItemDestroyMsg:
+          onChildDestroyed(data as DropdownItemDestroyRelayDetail);
+          break;
       }
     });
   }
 
   function onSetValue(detail: FormSetValueRelayDetail) {
+    // @ts-expect-error ignore
     value = detail.value;
     dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
   }
@@ -147,63 +179,46 @@
     );
   }
 
-  function getChildren() {
-    _rootEl?.addEventListener("dropdown-item:mounted", (e: Event) => {
-      const detail = (e as CustomEvent<Option>).detail;
+  /**
+   * Called when a new child option is added to the slot. This component must send
+   * a reference to itself back to the child to allow for the child to send messages
+   * back to the parent after it is detached from the DOM.
+   * @param detail
+   */
+  function onChildMounted(detail: DropdownItemMountedRelayDetail) {
+    switch (detail.mountType) {
+      case "append":
+        _options = [..._options, detail];
+        break;
+      case "prepend":
+        _options = [detail, ..._options];
+        break;
+      case "reset":
+        _options = [..._options, detail];
+        break;
+    }
 
-      if (_mountStatus === "ready") {
-        if (detail.mountType === "reset") {
-          _options = [];
-        }
-        _mountStatus = "active";
-      }
+    // send message back to child that contains a reference to this component
+    relay(detail.el, "dropdown:bind", { el: _rootEl });
 
-      switch (detail.mountType) {
-        case "append":
-          _options = [..._options, detail];
-          break;
-        case "prepend":
-          _options = [detail, ..._options];
-          break;
-        case "reset":
-          _options = [..._options, detail];
-          break;
+    // ensure bind only runs once for all children
+    if (_bindTimeoutId) {
+      clearTimeout(_bindTimeoutId);
+    }
+    _bindTimeoutId = setTimeout(() => {
+      syncFilteredOptions();
+      if (!_native) {
+        setSelected();
       }
-
-      // reset the mountStatus back to `ready` after all new children are mounted
-      if (_mountTimeoutId) {
-        clearTimeout(_mountTimeoutId);
-      }
-      _mountTimeoutId = setTimeout(() => {
-        _mountStatus = "ready";
-        _mountTimeoutId = undefined;
-      }, 10);
-
-      // ensure bind only runs once for all children
-      if (_bindTimeoutId) {
-        clearTimeout(_bindTimeoutId);
-      }
-      _bindTimeoutId = setTimeout(bind, 1);
-    });
+    }, 1);
   }
 
-  function bind() {
-    syncFilteredOptions();
-    if (!width) {
-      _width = getLongestChildWidth(_options);
-    }
-    if (_native) return;
-
-    setSelected();
-
-    if (width) {
-      _width = width;
-    }
-
-    // This is only here to allow the tests to pass :(
-    if (!width && _options.length > 0) {
-      _width = getLongestChildWidth(_options);
-    }
+  /**
+   * Called when a child is destroyed.
+   * @param detail
+   */
+  function onChildDestroyed(detail: DropdownItemDestroyRelayDetail) {
+    _options = _options.filter((option) => option.value !== detail.value);
   }
 
   function setSelected() {
@@ -429,6 +444,10 @@
     e.stopPropagation();
   }
 
+  function onFocus(e: Event) {
+    dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+  }
+
   class ComboboxKeyUpHandler implements EventHandler {
     constructor(private input: HTMLInputElement) {}
 
@@ -583,6 +602,7 @@
 
 <!-- Template -->
 <div
+  bind:this={_rootEl}
   data-testid={testid || `${name}-dropdown`}
   class="dropdown"
   class:dropdown-native={_native}
@@ -590,8 +610,6 @@
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${_width};
     `}
-  bind:this={_rootEl}
-  bind:clientWidth={_popoverMaxWidth}
 >
   {#if _native}
     <select
@@ -602,6 +620,7 @@
       disabled={_disabled}
       id={name}
       on:change={onNativeSelect}
+      on:focus={onFocus}
     >
       <slot />
       {#each _options as option}
@@ -617,7 +636,7 @@
       {disabled}
       {relative}
       data-testid="option-list"
-      width={`${_popoverMaxWidth || 300}px`}
+      width={_popoverMaxWidth || "300px"}
       open={_isMenuVisible}
       padded="false"
       tabindex="-1"
@@ -665,6 +684,7 @@
           on:keydown={onInputKeyDown}
           on:keyup={onInputKeyUp}
           on:change={onChange}
+          on:focus={onFocus}
         />
 
         {#if _inputEl?.value && _filterable}
@@ -709,6 +729,7 @@
         bind:this={_menuEl}
         aria-label={arialabel || name}
         aria-labelledby={arialabelledby}
+        on:focus={onFocus}
         style={`
             outline: none;
             overflow-y: auto;
