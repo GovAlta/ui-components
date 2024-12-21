@@ -35,7 +35,7 @@ export const msg = {
 };
 
 export function receive(
-  el: HTMLElement | Element | null | undefined,
+  el: HTMLElement | null | undefined,
   handler: (action: string, data: unknown, event: Event) => void,
 ) {
   if (!el) {
@@ -44,62 +44,102 @@ export function receive(
 
   el?.addEventListener("msg", (e: Event) => {
     const ce = e as CustomEvent;
-    handler(ce.detail.action, ce.detail.data, e);
+
+    // prevent messages from being sent to one's self
+    if (el !== ce.detail.sender) {
+      handler(ce.detail.action, ce.detail.data, e);
+    } else {
+      // In most cases receiving messages sent be oneself is ok, as it just means that
+      // element both sends and receives messages. It is in the case that an element sends
+      // and receives the same message that this is bad.
+      // TODO: Remove this console error later.
+      console.warn(`receive() event "${ce.detail.action}" was sent to self`);
+    }
   });
 }
 
+function _relay<T>(
+  el: HTMLElement | null | undefined,
+  eventName: string,
+  data?: T,
+  opts?: {
+    bubbles?: boolean;
+    cancelable?: boolean;
+    sender?: HTMLElement | null;
+    timeout?: number;
+  },
+) {
+  el?.dispatchEvent(
+    new CustomEvent<{
+      action: string;
+      data?: T;
+      sender?: HTMLElement | null;
+    }>("msg", {
+      composed: true,
+      bubbles: opts?.bubbles,
+      cancelable: opts?.cancelable,
+      detail: {
+        action: eventName,
+        sender: opts?.sender,
+        data,
+      },
+    }),
+  );
+}
+
 export function relay<T>(
-  el: HTMLElement | Element | null | undefined,
+  el: HTMLElement | null | undefined,
   eventName: string,
   data?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
   console.debug(`RELAY(${eventName}):`, data, el);
 
-  const dispatch = () => {
-    el?.dispatchEvent(
-      new CustomEvent<{ action: string; data?: T }>("msg", {
-        composed: true,
-        bubbles: opts?.bubbles,
-        cancelable: opts?.cancelable,
-        detail: {
-          action: eventName,
-          data,
-        },
-      }),
-    );
-  };
-
   if (opts?.timeout) {
-    setTimeout(dispatch, opts.timeout);
+    setTimeout(() => {
+      _relay(el, eventName, data, {
+        ...opts,
+        sender: opts?.bubbles ? el : undefined,
+      });
+    }, opts.timeout);
   } else {
-    dispatch();
+    _relay(el, eventName, data, {
+      ...opts,
+      sender: opts?.bubbles ? el : undefined,
+    });
   }
 }
 
+function _dispatch<T>(
+  el: HTMLElement | null | undefined,
+  eventName: string,
+  detail?: T,
+  opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
+) {
+  el?.dispatchEvent(
+    new CustomEvent<T>(eventName, {
+      composed: true,
+      bubbles: opts?.bubbles,
+      cancelable: opts?.cancelable,
+      detail,
+    }),
+  );
+}
+
 export function dispatch<T>(
-  el: HTMLElement | Element | null | undefined,
+  el: HTMLElement | null | undefined,
   eventName: string,
   detail?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
   console.debug(`DISPATCH(${eventName}):`, detail, el);
 
-  const dispatch = () => {
-    el?.dispatchEvent(
-      new CustomEvent<T>(eventName, {
-        composed: true,
-        bubbles: opts?.bubbles,
-        cancelable: opts?.cancelable,
-        detail,
-      }),
-    );
-  };
-
   if (opts?.timeout) {
-    setTimeout(dispatch, opts.timeout);
+    setTimeout(() => {
+      _dispatch(el, eventName, detail, opts);
+    }, opts.timeout);
   } else {
-    dispatch();
+    _dispatch(el, eventName, detail, opts);
   }
 }
 
@@ -113,8 +153,10 @@ export function getSlottedChildren(
   } else {
     // for unit tests only
     if (parentTestSelector) {
-      // @ts-expect-error testing
-      return [...rootEl.querySelector(parentTestSelector).children] as Element[];
+      return [
+        // @ts-expect-error testing
+        ...rootEl.querySelector(parentTestSelector).children,
+      ] as Element[];
     }
     // @ts-expect-error testing
     return [...rootEl.children] as Element[];
@@ -142,7 +184,10 @@ export function isValidDate(d: Date): boolean {
   return !isNaN(d.getDate());
 }
 
-export function validateRequired(componentName: string, props: Record<string, unknown>) {
+export function validateRequired(
+  componentName: string,
+  props: Record<string, unknown>,
+) {
   Object.entries(props).forEach((prop) => {
     if (!prop[1]) {
       console.warn(`${componentName}: ${prop[0]} is required`);
@@ -235,9 +280,26 @@ export function padLeft(
   return `${padding}${value}`;
 }
 
-export function performOnce(timeoutId: any, action: () => void, delay = 100): any {
+export function performOnce(
+  timeoutId: any,
+  action: () => void,
+  delay = 100,
+): any {
   if (timeoutId) {
     clearTimeout(timeoutId);
   }
   return setTimeout(action, delay);
+}
+
+export function debounce(timeoutId: any, fn: () => void, delay: number): any {
+  clearTimeout(timeoutId);
+  return setTimeout(fn, delay);
+}
+
+export function performUntil(fn: () => void, condition: () => boolean) {
+  if (condition()) {
+    fn();
+  } else {
+    setTimeout(() => performUntil(fn, condition), 100);
+  }
 }

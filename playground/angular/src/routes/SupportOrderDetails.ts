@@ -33,8 +33,7 @@ export class SupportOrderDetailsComponent implements OnInit {
   _total: number = 0;
 
   children(): Record<string, string>[] {
-    console.log("Utils:getStatelist", "calling children()", this._childFormComponent);
-    return this._childFormComponent.getStateList();
+    return this._mainFormComponent.getStateList("children-subform");
   }
 
   constructor(private router: Router) {
@@ -52,10 +51,10 @@ export class SupportOrderDetailsComponent implements OnInit {
   }
 
   updateState(e: Event) {
-    this._mainFormComponent.updateState(e);
+    const detail = (e as CustomEvent).detail;
 
+    console.log("SupportOrderDetails:updateState", detail);
     // DEV ONLY: saving the state to local storage
-    console.debug("SupportOrderDetails:updateState", this._mainFormComponent.state);
     localStorage.setItem(
       "support-order-details",
       JSON.stringify(this._mainFormComponent.state),
@@ -76,11 +75,6 @@ export class SupportOrderDetailsComponent implements OnInit {
     //       ) || 0);
     //     break;
     // }
-  }
-
-  updateChildrenState(e: Event) {
-    console.log("updateChildrenState", e);
-    this._childFormComponent.updateState(e);
   }
 
   onComplete(_e: Event) {

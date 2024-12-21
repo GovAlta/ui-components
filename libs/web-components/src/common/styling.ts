@@ -38,14 +38,14 @@ const conversions: Record<string, TShirtSpacing> = {
   "8": "2xl",
   "9": "3xl",
   "10": "4xl",
-  "none": "none",
+  none: "none",
   "3xs": "3xs",
   "2xs": "2xs",
-  "xs": "xs",
-  "s": "s",
-  "m": "m",
-  "l": "l",
-  "xl": "xl",
+  xs: "xs",
+  s: "s",
+  m: "m",
+  l: "l",
+  xl: "xl",
   "2xl": "2xl",
   "3xl": "3xl",
   "4xl": "4xl",
@@ -85,11 +85,11 @@ export function calculateMargin(
   ml = convertSpacing(ml);
   mr = convertSpacing(mr);
   return [
-    mt && mt !== "none" && `margin-top:var(--goa-space-${mt});` || "",
-    mr && mr !== "none" && `margin-right:var(--goa-space-${mr});` || "",
-    mb && mb !== "none" && `margin-bottom:var(--goa-space-${mb});` || "",
-    ml && ml !== "none" && `margin-left:var(--goa-space-${ml});` || "",
-  ].join(" ");
+    (mt && mt !== "none" && `margin-top:var(--goa-space-${mt});`) || "",
+    (mr && mr !== "none" && `margin-right:var(--goa-space-${mr});`) || "",
+    (mb && mb !== "none" && `margin-bottom:var(--goa-space-${mb});`) || "",
+    (ml && ml !== "none" && `margin-left:var(--goa-space-${ml});`) || "",
+  ].join("");
 }
 
 export function injectCss(

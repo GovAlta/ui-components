@@ -8,6 +8,7 @@ export type FormState = {
   editting: string;
   lastModified?: Date;
   status: FormStatus;
+  currentFieldset?: { id: string; dispatchType: "change" | "continue" };
 };
 
 export type Fieldset = {
@@ -20,22 +21,40 @@ export type FieldsetData =
   | { type: "details"; fieldsets: Record<string, FieldsetItemState> }
   | { type: "list"; items: FormState[] }; // TODO: rename `items` to `form`
 
+// =========
+// FormState
+// =========
+
+export const FormStateSubscribeMsg = "form-state::subscribe";
+export const FormStateUnsubscribeMsg = "form-state::unsubscribe";
+export const FormStateInitMsg = "form-state::init";
+export const FormStateUpdateMsg = "form-state::update";
+export const FormStateBroadcastChangeMsg = "form-state::broadcast:change";
+
+// message that is used to send references of the FormState to other elements
+export const FormStateRefMsg = "form-state::ref";
+export type FormStateRelayDetail = {
+  el: HTMLElement;
+};
+
 // ====
 // Form
 // ====
 
 export const FormResetErrorsMsg = "form::reset:errors";
 export const FormSetFieldsetMsg = "form::set:fieldset";
-export const FormDispatchStateMsg = "form::dispatch:state";
+export const FormDispatchStateDownMsg = "form::dispatch-down:state";
 export const FormToggleActiveMsg = "form::toggle:active";
 export const FormStateChangeMsg = "form::state:change";
 export const FormBackUrlMsg = "form::back-url";
+
+export const FormDispatchStateUpMsg = "form::dispatch-up:state";
 
 export const FormResetFormMsg = "form::reset:form";
 
 // Message to allow forms to register themselves with their parent form to allow for
 // form data to be passed down to the child form
-export const FormBindMsg = "form::bind";
+export const SubformBindMsg = "form::bind";
 export type FormBindRelayDetail = {
   id: string;
   el: HTMLElement;
@@ -72,6 +91,12 @@ export type SubFormDeleteDataRelayDetail = {
   id: string;
 };
 export const SubFormDeleteDataMsg = "subform::delete:data";
+
+export const SubFormDispatchStateUpMsg = "subform::dispatch-down:state";
+export type SubFormDispathStateUpRelayDetail = {
+  id: string;
+  data: FormState[];
+};
 
 // ========
 // Fieldset

@@ -30,7 +30,12 @@ export type FieldsetItemState = {
 export class PublicFormComponent<T> {
   state?: AppState<T> | AppState<T>[];
   _formData?: Record<string, string> = undefined;
+
+  // reference to the form element representing this data
   _formRef?: HTMLElement = undefined;
+
+  // reference to the global store element
+  _storeRef?: HTMLElement = undefined;
 
   constructor(private type: "details" | "list") {
     // nothing here
@@ -39,26 +44,55 @@ export class PublicFormComponent<T> {
   // Obtain reference to the form element
   init(e: Event) {
     console.debug("Utils::init", e);
-    this._formRef = (e as CustomEvent).detail.el;
+    const { el, storeEl } = (e as CustomEvent).detail;
+    this._formRef = el;
+    this._storeRef = storeEl;
+    console.log("Utils::init", { el, storeEl });
 
-    this.state = {
-      form: {},
-      history: [],
-      editting: "",
-      status: "not-started",
-    };
+    // no need to subscribe as we can listen on the _formRef element
+    receive(this._formRef, (type, data, e) => {
+      console.debug("  RECEIVE(Utils =>", type, { data, e });
+      switch (type) {
+        case "form-state::broadcast:change":
+          this._updateState(data as AppState<T>);
+          e.stopPropagation();
+          break;
+      }
+    });
   }
 
   initList(e: Event) {
+    alert("initList called!!!");
     console.debug("Utils::initList", e);
-    this._formRef = (e as CustomEvent).detail.el;
+    const { el, storeEl } = (e as CustomEvent).detail;
+    this._formRef = el;
+    this._storeRef = storeEl;
     this.state = [];
   }
 
   // Public method to allow for the initialization of the state
   initState(state: string | AppState<T> | AppState<T>[]) {
-    console.debug("Utils:initState", state);
-    relay(this._formRef, "external::init:state", state);
+    console.debug("Utils:initState", { state, store: this._storeRef });
+    // relay(this._formRef, "external::init:state", state);
+    this.performUntil(
+      () => {
+        console.debug("Utils:initState:relaying state", state, this._storeRef);
+        relay(this._storeRef, "form-state::update", state);
+      },
+      () => !!this._storeRef,
+    );
+  }
+
+  // TODO: need to find a way to create a shared lib for web-components and other libs
+  // This is a duplicated function to one that exists within the utils file
+  performUntil(fn: () => void, condition: () => boolean) {
+    if (condition()) {
+      console.debug("performUntil: condition met");
+      fn();
+    } else {
+      console.debug("performUntil: condition not met");
+      setTimeout(() => this.performUntil(fn, condition), 100);
+    }
   }
 
   // ISSUE:
@@ -66,93 +100,102 @@ export class PublicFormComponent<T> {
   // in the "fixed" data not being in sync with the data within the form component.
   //
 
+  _updateState(state: AppState<T>) {
+    this.state = state;
+
+    // dispatch to external form
+    dispatch(this._formRef, "_stateChange", { state: this.state }, { bubbles: true });
+  }
+
   // Public method to allow for the updating of the state
-  updateState(e: Event) {
-    console.debug(
-      "Utils:updateState",
-      this.type,
-      { state: this.state },
-      (e as CustomEvent).detail,
-    );
-    if (!this.state) {
-      console.error("updateState: state has not yet been set");
-      return;
-    }
+  // updateState(e: Event) {
+  //   console.debug(
+  //     "Utils:updateState",
+  //     this.type,
+  //     { state: this.state },
+  //     (e as CustomEvent).detail,
+  //   );
+  //   if (!this.state) {
+  //     console.error("updateState: state has not yet been set");
+  //     return;
+  //   }
+  //
+  //   const detail = (e as CustomEvent).detail;
+  //   if (this.type === "list") {
+  //     this.#updateListState(detail);
+  //   } else if (this.type === "details" && Array.isArray(detail.data)) {
+  //     this.#updateObjectListState(detail);
+  //   } else {
+  //     this.#updateObjectState(detail);
+  //   }
+  // }
 
-    const detail = (e as CustomEvent).detail;
-    if (this.type === "list") {
-      this.#updateListState(detail);
-    } else if (this.type === "details" && Array.isArray(detail.data)) {
-      this.#updateObjectListState(detail);
-    } else {
-      this.#updateObjectState(detail);
-    }
-  }
+  // #updateListState(detail: { data: AppState<T>[]; index: number; id: string }) {
+  //   console.debug("Utils:updateListState", detail);
+  //
+  //   if (!Array.isArray(detail.data)) {
+  //     return;
+  //   }
+  //
+  //   this.state = detail.data;
+  //   // this.state[detail.index].form[detail.id].data = detail.data;
+  // }
+  //
+  // #updateObjectListState(detail: { data: AppState<T>[]; index: number; id: string }) {
+  //   console.debug("Utils:updateObjectListState", detail);
+  //
+  //   if (!Array.isArray(detail.data)) {
+  //     return;
+  //   }
+  //
+  //   if (Array.isArray(this.state)) {
+  //     return;
+  //   }
+  //
+  //   this.state = {
+  //     ...this.state,
+  //     form: {
+  //       ...(this.state?.form || {}),
+  //       [detail.id]: detail.data,
+  //     },
+  //   } as AppState<T>;
+  // }
+  //
+  // #updateObjectState(newState: AppState<T>) {
+  //   console.debug("Utils:updateObjectState", newState);
+  //
+  //   if (Array.isArray(this.state)) {
+  //     return;
+  //   }
+  //
+  //   // this.state = newState;
+  //   this.state = {
+  //     ...this.state,
+  //     form: { ...(this.state?.form || {}), ...newState.form },
+  //     currentFieldset: newState.currentFieldset,
+  //     history: newState.history,
+  //   } as AppState<T>;
+  // }
 
-  #updateListState(detail: { data: AppState<T>[]; index: number; id: string }) {
-    console.debug("Utils:updateListState", detail);
-
-    if (!Array.isArray(detail.data)) {
-      return;
-    }
-
-    this.state = detail.data;
-    // this.state[detail.index].form[detail.id].data = detail.data;
-  }
-
-  #updateObjectListState(detail: { data: AppState<T>[]; index: number; id: string }) {
-    console.debug("Utils:updateObjectListState", detail);
-
-    if (!Array.isArray(detail.data)) {
-      return;
-    }
-
-    if (Array.isArray(this.state)) {
-      return;
-    }
-
-    this.state = {
-      ...this.state,
-      form: {
-        ...(this.state?.form || {}),
-        [detail.id]: detail.data,
-      },
-    } as AppState<T>;
-  }
-
-  #updateObjectState(newState: AppState<T>) {
-    console.debug("Utils:updateObjectState", newState);
-
-    if (Array.isArray(this.state)) {
-      return;
-    }
-
-    // this.state = newState;
-    this.state = {
-      ...this.state,
-      form: { ...(this.state?.form || {}), ...newState.form },
-      currentFieldset: newState.currentFieldset,
-      history: newState.history,
-    } as AppState<T>;
-  }
-
-  getStateList(): Record<string, string>[] {
+  getStateList(key: string): Record<string, string>[] {
     console.log("Utils:getStateList", { state: this.state });
     if (!this.state) {
       return [];
     }
-    if (!Array.isArray(this.state)) {
+    if (Array.isArray(this.state)) {
       console.warn(
         "Utils:getStateList: unable to update the state of a non-multi form type",
         this.state,
       );
       return [];
     }
-    if (this.state.length === 0) {
+
+    const data = this.state.form[key].data;
+    if (data.type !== "list") {
       return [];
     }
 
-    return this.state.map((s) => {
+    const output = data.items.map((s) => {
       return Object.values(s.form)
         .filter((item) => {
           return item?.data?.type === "details";
@@ -170,39 +213,10 @@ export class PublicFormComponent<T> {
           {} as Record<string, string>,
         );
     });
+
+    console.log("output", output);
+    return output;
   }
-
-  // getStateItems(group: string): Record<string, FieldsetItemState>[] {
-  //   if (Array.isArray(this.state)) {
-  //     console.error(
-  //       "Utils:getStateItems: unable to update the state of a multi form type",
-  //     );
-  //     return [];
-  //   }
-  //   if (!this.state) {
-  //     console.error("Utils:getStateItems: state has not yet been set");
-  //     return [];
-  //   }
-
-  //   console.debug("Utils:getStateItems", this.state, { group });
-  //   return (this.state.form[group]?.data ?? []) as Record<string, FieldsetItemState>[];
-  // }
-
-  // Public method to allow for the retrieval of the state value
-  // getStateValue(group: string, key: string): string {
-  //   if (Array.isArray(this.state)) {
-  //     console.error("getStateValue: unable to update the state of a multi form type");
-  //     return "";
-  //   }
-  //   if (!this.state) {
-  //     console.error("getStateValue: state has not yet been set");
-  //     return "";
-  //   }
-
-  //   const data = this.state.form[group].data as Record<string, FieldsetItemState>[];
-  //   // @ts-expect-error "ignore"
-  //   return (data as Record<string, string>)[key]?.value ?? "";
-  // }
 
   // Public method to allow for the continuing to the next page
   continueTo(name: T | undefined) {
@@ -246,24 +260,13 @@ export class PublicFormComponent<T> {
 
   // Private method to dispatch the error message to the form element
   #dispatchError(el: HTMLElement, name: string, msg: string) {
-    el.dispatchEvent(
-      new CustomEvent("msg", {
-        composed: true,
-        detail: {
-          action: "external::set:error",
-          data: {
-            name,
-            msg,
-          },
-        },
-      }),
-    );
+    dispatch(el, "external::set:error", { name, msg });
   }
 }
 
 // Public helper function to dispatch messages
 export function dispatch<T>(
-  el: HTMLElement | Element | null | undefined,
+  el: HTMLElement | null | undefined,
   eventName: string,
   detail?: T,
   opts?: { bubbles?: boolean },
@@ -283,7 +286,7 @@ export function dispatch<T>(
 
 // Public helper function to relay messages
 export function relay<T>(
-  el: HTMLElement | Element | null | undefined,
+  el: HTMLElement | null | undefined,
   eventName: string,
   data?: T,
   opts?: { bubbles?: boolean },
@@ -292,7 +295,7 @@ export function relay<T>(
     console.error("dispatch element is null");
     return;
   }
-  console.debug(`RELAY(${eventName}):`, data, el);
+  console.debug(`  RELAY(${eventName}):`, data, el);
   el.dispatchEvent(
     new CustomEvent<{ action: string; data?: T }>("msg", {
       composed: true,
@@ -303,4 +306,19 @@ export function relay<T>(
       },
     }),
   );
+}
+
+// TODO: try to move these function to a shared location
+export function receive(
+  el: HTMLElement | null | undefined,
+  handler: (action: string, data: unknown, event: Event) => void,
+) {
+  if (!el) {
+    console.warn("receive() el is null | undefined");
+  }
+
+  el?.addEventListener("msg", (e: Event) => {
+    const ce = e as CustomEvent;
+    handler(ce.detail.action, ce.detail.data, e);
+  });
 }

@@ -84,7 +84,6 @@
     name="children-subform"
     (_complete)="onChildComplete($event)"
     (_init)="_childFormComponent.initList($event)"
-    (_stateChange)="updateChildrenState($event)"
   >
     <goa-public-form-page
       first
@@ -103,12 +102,6 @@
           <tr *ngFor="let item of children(); index as i">
             <td>{{ item["firstName"]}}</td>
             <td>{{ item["lastName"]}}</td>
-            <td>
-              <goa-link-button (_click)="_childFormComponent.edit('child-subform', i)">Edit</goa-link-button>
-            </td>
-            <td>
-              <goa-link-button (_click)="_childFormComponent.remove('child-subform', i)">Delete</goa-link-button>
-            </td>
           </tr>
         </tbody>
       </goa-table>

@@ -4,21 +4,24 @@
   import { onMount } from "svelte";
   import { dispatch, receive, relay, styles } from "../../common/utils";
   import {
-    ExternalAlterDataMsg, ExternalAlterDataRelayDetail,
+    ExternalAlterDataMsg,
+    ExternalAlterDataRelayDetail,
     ExternalContinueMsg,
     ExternalInitStateMsg,
     FieldsetBindMsg,
     FieldsetBindRelayDetail,
     FieldsetValidationRelayDetail,
-    FormBindMsg,
+    SubformBindMsg,
     FormBindRelayDetail,
-    FormDispatchStateMsg,
+    FormDispatchStateDownMsg,
     FormDispatchStateRelayDetailList,
     FormResetFormMsg,
     FormSetFieldsetMsg,
     FormState,
     FormToggleActiveMsg,
-    FormToggleActiveRelayDetail, SubFormDeleteDataMsg, SubFormDeleteDataRelayDetail,
+    FormToggleActiveRelayDetail,
+    SubFormDeleteDataMsg,
+    SubFormDeleteDataRelayDetail, FormDispatchStateUpMsg, FormDispatchStateRelayDetail,
   } from "../../types/relay-types";
   import { calculateMargin, Spacing } from "../../common/styling";
 
@@ -73,7 +76,7 @@
       console.debug(`  RECEIVE(SubForm => ${action}):`, data);
       e.stopPropagation();
       switch (action) {
-        case FormDispatchStateMsg:
+        case FormDispatchStateDownMsg:
           onReceiveState(data as FormDispatchStateRelayDetailList);
           break;
        // sets the fieldset/subform data
@@ -85,6 +88,11 @@
           break;
         case FieldsetBindMsg:
           onFieldsetMount(data as FieldsetBindRelayDetail);
+          break;
+
+        //
+        case FormDispatchStateUpMsg:
+          onReceiveState(data as FormDispatchStateRelayDetail);
           break;
 
 
@@ -106,6 +114,9 @@
         case ExternalAlterDataMsg:
           alterItem(data as ExternalAlterDataRelayDetail);
           break;
+
+        default:
+          console.warn("Subform: Unhandled action", action);
       }
     });
   }
@@ -135,6 +146,7 @@
 
   //
   function interceptFormInit(detail: { el: HTMLElement }) {
+    alert("here");
     console.debug("SubForm:interceptFormDispatch", { detail });
     // save a reference to the child form
     _formEl = detail.el;
@@ -149,8 +161,12 @@
       return;
     }
 
+    // store a local reference to the state
     _state = data;
-    dispatch(_relayEl, "_stateChange", { data: _state, id }, { bubbles: true });
+
+    // bubble the state event up to allow for any parent form to save the state as well
+    // TODO: bubble up state here
+    relay<FormState[]>(_relayEl, FormDispatchStateUpMsg, { data: _state, id }, { bubbles: true });
   }
 
   // Collect list of child form item (input, dropdown, etc) elements
@@ -194,28 +210,22 @@
   /**
    * Binds the subform to the parent form to allow state to be relayed back to subforms
    */
-  // TODO: come up with a better name for this function
   function bindWithParentForm() {
     console.debug("SubForm:bindWithParentForm", name);
-    relay<FormBindRelayDetail>(_relayEl, FormBindMsg, { id, el: _receiverEl}, { bubbles: true, timeout: 10 });
+    relay<FormBindRelayDetail>(_relayEl, SubformBindMsg, { id, el: _receiverEl}, { bubbles: true, timeout: 1000 });
   }
 
-
+  /**
+   * Relay reference to the goa-public-form element as if it were a fieldset to allow it's visibility to be controlled
+   */
   function dispatchBindMsg() {
-    // relay reference to the goa-public-form element as if it were a fieldset to allow it's visibility to be controlled
     // TODO: maybe rename this event/type so it's not specific to fieldsets
+    console.log("SubForm:dispatchBindMsg", { id, heading, _receiverEl });
     relay<FieldsetBindRelayDetail>(
       _relayEl,
       FieldsetBindMsg,
-      {
-        id,
-        heading,
-        el: _receiverEl,
-      },
-      {
-        bubbles: true,
-        timeout: 10,
-      },
+      { id, heading, el: _receiverEl },
+      { bubbles: true, timeout: 1000 }, // FIXME: Getting this to be received is dependant on the timeout value
     );
   }
 
@@ -226,6 +236,11 @@
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
     console.debug("SubForm:onToggleActiveState", { detail });
     _active = detail.active;
+
+    // send active status messages to children
+    const firstFieldset = Object.values(_fieldsets)[0];
+    console.log("SubForm:onToggleActiveState:firstFieldset", firstFieldset);
+    relay(firstFieldset, FormToggleActiveMsg, { active: true });
   }
 
   /**
@@ -233,10 +248,8 @@
    * @param obj
    */
   function deepCopy(obj: any) {
-    const objCopy = JSON.parse(JSON.stringify(obj));
-    return objCopy;
+    return JSON.parse(JSON.stringify(obj));
   }
-
 
   function onStateChange(e: Event) {
     const detail = (e as CustomEvent).detail as FormState;
@@ -269,7 +282,12 @@
   }
 </script>
 
-<div bind:this={_relayEl}>
+<div
+  bind:this={_relayEl}
+  style={styles(
+    `display: ${_active ? "block" : "none"}`
+  )}
+>
   <goa-public-form
     sub-form
     bind:this={_receiverEl}
@@ -278,7 +296,6 @@
     on:_init={onInit}
     style={styles(
       calculateMargin(mt, mr, mb, ml),
-      `display: ${_active ? "block" : "none"}`,
     )}
     {name}
     {dispatchOn}

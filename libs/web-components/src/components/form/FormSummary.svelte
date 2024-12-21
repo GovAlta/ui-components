@@ -3,10 +3,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import {
-  FieldsetItemState,
-    FormDispatchStateMsg,
+    FieldsetItemState,
     FormDispatchStateRelayDetail,
-    FormState,
+    FormState, FormStateBroadcastChangeMsg, FormStateRefMsg, FormStateRelayDetail,
     FormSummaryBindMsg,
     FormSummaryBindRelayDetail,
     FormSummaryEditPageMsg,
@@ -17,25 +16,35 @@
 
   export let heading: string = "";
 
-  let _rootEl: HTMLElement;
+  let _el: HTMLElement;
   let _state: FormState;
+  let _formStateStoreEl: HTMLElement;
 
   onMount(() => {
     addRelayListener();
 
+    // send bind msg to parent
+    console.log("FormSummary:onMount");
     relay<FormSummaryBindRelayDetail>(
-      _rootEl,
+      _el,
       FormSummaryBindMsg,
-      { el: _rootEl },
-      { bubbles: true, timeout: 100 },
+      { el: _el },
+      { bubbles: true, timeout: 1000 }, // FIXME: why does this work only at 1000?
     );
   });
 
   function addRelayListener() {
-    receive(_rootEl, (action, data) => {
+    receive(_el, (action, data) => {
+      console.debug("FormSummary:receive", action, data);
       switch (action) {
-        case FormDispatchStateMsg:
-          onFormDispatch(data as FormDispatchStateRelayDetail);
+        // obtain reference to the form-state
+        case FormStateRefMsg:
+          _formStateStoreEl = (data as FormStateRelayDetail).el;
+          break;
+        // listen to dispatched change messages
+        case FormStateBroadcastChangeMsg:
+          console.log("FormSummary:receive:change", data);
+          _state = data as FormState;
           break;
       }
     });
@@ -51,7 +60,7 @@
   }
 
   function changePage(e: Event, pageId: string) {
-    relay<FormSummaryEditPageRelayDetail>(_rootEl, FormSummaryEditPageMsg, { id: pageId }, { bubbles: true })
+    relay<FormSummaryEditPageRelayDetail>(_el, FormSummaryEditPageMsg, { id: pageId }, { bubbles: true });
     e.preventDefault();
   }
 
@@ -65,27 +74,27 @@
     }
 
     const data = Object
-        .entries(state.form[page].data.fieldsets || {})
-        .sort((itemsA, itemsB) => itemsA[1].order > itemsB[1].order ? 1 : -1)
-        .reduce((acc, [name, fieldsetState]) => {
-          acc[name] = fieldsetState;
-          return acc;
-        }, {});
-      console.log("FormSummary:getData", data);
-      return data;
+      .entries(state.form[page].data.fieldsets || {})
+      .sort((itemsA, itemsB) => itemsA[1].order > itemsB[1].order ? 1 : -1)
+      .reduce((acc, [name, fieldsetState]) => {
+        acc[name] = fieldsetState;
+        return acc;
+      }, {});
+    console.log("FormSummary:getData", data);
+    return data;
   }
 
   function getDataList(state: FormState, page: string): Record<string, FieldsetItemState>[] {
-    console.debug("FormSummary:getDataList", page, state )
+    console.debug("FormSummary:getDataList", page, state);
     if (state.form[page]?.data?.type !== "list") {
       return;
     }
 
     const data = state.form[page].data.items.reduce((acc, formState) => {
       const data = formState.history.reduce((acc, fieldsetId) => {
-        acc = {...acc, ...getData(formState, fieldsetId)};
+        acc = { ...acc, ...getData(formState, fieldsetId) };
         return acc;
-      }, {})
+      }, {});
       acc.push(data);
       return acc;
     }, []);
@@ -96,7 +105,7 @@
 
 </script>
 
-<div bind:this={_rootEl}>
+<div bind:this={_el}>
   {#if heading}
     <goa-text as="h3" size="heading-m" color="secondary" mb="l">{heading}</goa-text>
   {/if}
@@ -132,7 +141,7 @@
                 {/each}
               {/if}
             {/if}
-          <div class="action">
+            <div class="action">
               <goa-link leadingicon="pencil" on:click={(e) => changePage(e, page)}>Change</goa-link>
             </div>
           </div>
@@ -157,9 +166,11 @@
     .data tr:last-of-type {
       padding-bottom: var(--goa-space-m);
     }
+
     .data td:first-of-type {
       font-weight: bold;
     }
+
     .data td {
       display: block;
     }
@@ -205,6 +216,7 @@
       width: 50%;
       font: var(--goa-typography-heading-s);
     }
+
     .value {
       width: 50%;
       padding-left: 1rem;

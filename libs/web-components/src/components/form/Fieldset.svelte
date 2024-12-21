@@ -50,7 +50,7 @@
     FormResetErrorsMsg,
     FormResetFormMsg,
     FormSetFieldsetMsg,
-    FormSetFieldsetRelayDetail,
+    FormSetFieldsetRelayDetail, FormState, FormStateUpdateMsg,
     FormToggleActiveMsg,
     FormToggleActiveRelayDetail,
   } from "../../types/relay-types";
@@ -112,6 +112,7 @@
   // =====
 
   onMount(() => {
+    console.debug("Fieldset:onMount");
     dispatchBindMsg();
     addChildChangeListener();
     bindChannel();
@@ -288,19 +289,18 @@
   function sendContinueMsg(cancelled: boolean) {
     if (cancelled) {
       revertFormFieldValues();
-    }
-
-    dispatch<FieldsetValidationRelayDetail>(
-      _rootEl,
-      "_continue",
-      { el: _rootEl, state: cancelled ? _stateSnapshot : _state, last, first },
-      { bubbles: true },
-    );
-
-    if (cancelled) {
       _state = _stateSnapshot;
       console.debug("Fieldset:sendContinueMsg::cancelled", cancelled, _state)
     }
+
+    // send msg back to top-level to allow `goa-public-form-page` through
+    // the `_continue` binding
+    dispatch<FieldsetValidationRelayDetail>(
+      _rootEl,
+      "_continue",
+      { el: _rootEl, state: _state, last, first },
+      { bubbles: true },
+    );
   }
 
   // *********
@@ -341,17 +341,24 @@
   }
 
   function dispatchBindMsg() {
+    console.debug("Fieldset:dispatchBindMsg", id);
     relay<FieldsetBindRelayDetail>(
       _rootEl,
       FieldsetBindMsg,
       { id, heading, skipSummary, el: _rootEl },
-      { bubbles: true, timeout: 10 },
+      { bubbles: true, timeout: 1000 },
     );
   }
 
+  /**
+   * Listen for the `_change` events emitted by input elements and stores the new values
+   * in the fieldset `_state`. The `_state` value will either be emitted on `continue` or
+   * immediately if the `dispatchOn` is set to `change`
+   */
   function addChildChangeListener() {
     _rootEl.addEventListener("_change", (e: Event) => {
       const { name, value } = (e as CustomEvent).detail;
+
       // if no name is registered, they are not bound to the public-form
       if (!_formItems[name]) {
         return;
@@ -360,6 +367,8 @@
       if (!_formFields[name]) {
         return;
       }
+
+      // save to fieldset's _state
       _state[name] = {
         name,
         value,
@@ -367,6 +376,7 @@
         order: _formFields[name].order,
       };
 
+      // dispatch immediately if required
       if (dispatchOn === "change") {
         const isDirty = Object.keys(_state).length > 0;
         if (isDirty) {
@@ -374,6 +384,7 @@
         }
       }
 
+      // prevent input _change events from bubbling up any further
       e.stopPropagation();
     });
   }
