@@ -50,7 +50,7 @@
     "@schematics/angular": "18.1.4",
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "@swc-node/register": "1.9.2",
-    "@swc/cli": "0.3.12",
+    "@swc/cli": "0.5.2",
     "@swc/core": "1.5.7",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.6.3",
