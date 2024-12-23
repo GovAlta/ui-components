@@ -207,7 +207,6 @@
   role="radiogroup"
   aria-label={arialabel}
   aria-invalid={_error ? "true" : "false"}
-  tabindex="0"
   on:focusin={onFocus}
 >
   <slot />
