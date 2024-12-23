@@ -10,6 +10,7 @@
     "serve:angular-tests": "nx run angular-tests:serve:development",
     "build": "nx affected --base=alpha -t build --exclude=angular --exclude=react --exclude=web",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
+    "pretest": "npx nx run common:build",
     "test": "vitest --run && nx test angular-components && nx test react-components",
     "test:web-components": "vitest -w",
     "test:angular": "nx test angular-components --watch",

@@ -35,16 +35,13 @@ jobs:
           main-branch-name: alpha
 
       - name: Lint
-        run: npx nx run-many --target=lint --all
+        run: npm run lint
 
       - name: Test
         run: npm run test
 
       - name: Build
-        run: npx nx run-many --target=build --all --prod
-          
-      - name: Update VsCode documentation
-        run: npm run build:vscode-doc
+        run: npx nx run-many --target=build --all --prod --exclude=angular,react,angular-tests,angular-tests-e2e
 
       - name: Update Web components documentation
         run: cp libs/web-components/README.md dist/libs/web-components
