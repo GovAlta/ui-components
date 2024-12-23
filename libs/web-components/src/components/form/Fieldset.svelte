@@ -50,7 +50,7 @@
     FormResetErrorsMsg,
     FormResetFormMsg,
     FormSetFieldsetMsg,
-    FormSetFieldsetRelayDetail, FormState, FormStateUpdateMsg,
+    FormSetFieldsetRelayDetail,
     FormToggleActiveMsg,
     FormToggleActiveRelayDetail,
   } from "../../types/relay-types";
@@ -346,7 +346,7 @@
       _rootEl,
       FieldsetBindMsg,
       { id, heading, skipSummary, el: _rootEl },
-      { bubbles: true, timeout: 1000 },
+      { bubbles: true, timeout: 10 },
     );
   }
 

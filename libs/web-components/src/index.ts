@@ -34,7 +34,6 @@ export { default as FooterNavSection } from "./components/footer-nav-section/Foo
 export { default as Fieldset } from "./components/form/Fieldset.svelte";
 export { default as Form } from "./components/form/Form.svelte";
 export { default as FormSummary } from "./components/form/FormSummary.svelte";
-export { default as FormState } from "./components/form/FormState.svelte";
 export { default as SubForm } from "./components/form/SubForm.svelte";
 export { default as Task } from "./components/form/Task.svelte";
 export { default as TaskList } from "./components/form/TaskList.svelte";

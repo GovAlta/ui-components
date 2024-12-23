@@ -34,168 +34,119 @@ export class PublicFormComponent<T> {
   // reference to the form element representing this data
   _formRef?: HTMLElement = undefined;
 
-  // reference to the global store element
-  _storeRef?: HTMLElement = undefined;
-
   constructor(private type: "details" | "list") {
-    // nothing here
-  }
-
-  // Obtain reference to the form element
-  init(e: Event) {
-    console.debug("Utils::init", e);
-    const { el, storeEl } = (e as CustomEvent).detail;
-    this._formRef = el;
-    this._storeRef = storeEl;
-    console.log("Utils::init", { el, storeEl });
-
-    // no need to subscribe as we can listen on the _formRef element
-    receive(this._formRef, (type, data, e) => {
-      console.debug("  RECEIVE(Utils =>", type, { data, e });
-      switch (type) {
-        case "form-state::broadcast:change":
-          this._updateState(data as AppState<T>);
-          e.stopPropagation();
-          break;
-      }
-    });
-  }
-
-  initList(e: Event) {
-    alert("initList called!!!");
-    console.debug("Utils::initList", e);
-    const { el, storeEl } = (e as CustomEvent).detail;
-    this._formRef = el;
-    this._storeRef = storeEl;
-    this.state = [];
-  }
-
-  // Public method to allow for the initialization of the state
-  initState(state: string | AppState<T> | AppState<T>[]) {
-    console.debug("Utils:initState", { state, store: this._storeRef });
-    // relay(this._formRef, "external::init:state", state);
-    this.performUntil(
-      () => {
-        console.debug("Utils:initState:relaying state", state, this._storeRef);
-        relay(this._storeRef, "form-state::update", state);
-      },
-      () => !!this._storeRef,
-    );
-  }
-
-  // TODO: need to find a way to create a shared lib for web-components and other libs
-  // This is a duplicated function to one that exists within the utils file
-  performUntil(fn: () => void, condition: () => boolean) {
-    if (condition()) {
-      console.debug("performUntil: condition met");
-      fn();
-    } else {
-      console.debug("performUntil: condition not met");
-      setTimeout(() => this.performUntil(fn, condition), 100);
+    if (type === "list") {
+      this.state = [];
     }
   }
 
-  // ISSUE:
-  // The issue is that all the logic below is happening outside the form component, thereby resulting
-  // in the "fixed" data not being in sync with the data within the form component.
-  //
-
-  _updateState(state: AppState<T>) {
-    this.state = state;
-
-    // dispatch to external form
-    dispatch(this._formRef, "_stateChange", { state: this.state }, { bubbles: true });
+  // Obtain reference to the form element
+  bind(e: Event) {
+    console.debug("Utils::init", e);
+    const { el } = (e as CustomEvent).detail;
+    this._formRef = el;
   }
 
-  // Public method to allow for the updating of the state
-  // updateState(e: Event) {
-  //   console.debug(
-  //     "Utils:updateState",
-  //     this.type,
-  //     { state: this.state },
-  //     (e as CustomEvent).detail,
-  //   );
-  //   if (!this.state) {
-  //     console.error("updateState: state has not yet been set");
-  //     return;
-  //   }
-  //
-  //   const detail = (e as CustomEvent).detail;
-  //   if (this.type === "list") {
-  //     this.#updateListState(detail);
-  //   } else if (this.type === "details" && Array.isArray(detail.data)) {
-  //     this.#updateObjectListState(detail);
-  //   } else {
-  //     this.#updateObjectState(detail);
-  //   }
+  // initList(e: Event) {
+  //   alert("initList called!!!");
+  //   console.debug("Utils::initList", e);
+  //   const { el } = (e as CustomEvent).detail;
+  //   this._formRef = el;
+  //   this.state = [];
   // }
 
-  // #updateListState(detail: { data: AppState<T>[]; index: number; id: string }) {
-  //   console.debug("Utils:updateListState", detail);
-  //
-  //   if (!Array.isArray(detail.data)) {
-  //     return;
-  //   }
-  //
-  //   this.state = detail.data;
-  //   // this.state[detail.index].form[detail.id].data = detail.data;
-  // }
-  //
-  // #updateObjectListState(detail: { data: AppState<T>[]; index: number; id: string }) {
-  //   console.debug("Utils:updateObjectListState", detail);
-  //
-  //   if (!Array.isArray(detail.data)) {
-  //     return;
-  //   }
-  //
-  //   if (Array.isArray(this.state)) {
-  //     return;
-  //   }
-  //
-  //   this.state = {
-  //     ...this.state,
-  //     form: {
-  //       ...(this.state?.form || {}),
-  //       [detail.id]: detail.data,
-  //     },
-  //   } as AppState<T>;
-  // }
-  //
-  // #updateObjectState(newState: AppState<T>) {
-  //   console.debug("Utils:updateObjectState", newState);
-  //
-  //   if (Array.isArray(this.state)) {
-  //     return;
-  //   }
-  //
-  //   // this.state = newState;
-  //   this.state = {
-  //     ...this.state,
-  //     form: { ...(this.state?.form || {}), ...newState.form },
-  //     currentFieldset: newState.currentFieldset,
-  //     history: newState.history,
-  //   } as AppState<T>;
-  // }
+  // Public method to allow for the initialization of the state
+  initState(state: string | AppState<T> | AppState<T>[]) {
+    console.debug("Utils:initState", { state });
+    relay(this._formRef, "external::init:state", state);
+  }
 
-  getStateList(key: string): Record<string, string>[] {
+  // Public method to allow for the updating of the state that is accessible at the
+  // top component level
+  updateState(e: Event) {
+    console.debug(
+      "Utils:updateState",
+      this.type,
+      { state: this.state, newState: (e as CustomEvent).detail },
+      (e as CustomEvent).detail,
+    );
+
+    // TODO: maybe all the commented out code is still needed...
+    // this.state = (e as CustomEvent).detail;
+    const detail = (e as CustomEvent).detail;
+    if (this.type === "list") {
+      this.#updateListState(detail);
+    } else if (this.type === "details" && Array.isArray(detail.data)) {
+      this.#updateObjectListState(detail);
+    } else {
+      this.#updateObjectState(detail);
+    }
+  }
+
+  #updateListState(detail: { data: AppState<T>[]; index: number; id: string }) {
+    console.debug("Utils:updateListState", detail);
+
+    if (!Array.isArray(detail.data)) {
+      return;
+    }
+
+    this.state = detail.data;
+    // this.state[detail.index].form[detail.id].data = detail.data;
+  }
+
+  #updateObjectListState(detail: { data: AppState<T>[]; index: number; id: string }) {
+    console.debug("Utils:updateObjectListState", detail);
+
+    if (!Array.isArray(detail.data)) {
+      return;
+    }
+
+    if (Array.isArray(this.state)) {
+      return;
+    }
+
+    this.state = {
+      ...this.state,
+      form: {
+        ...(this.state?.form || {}),
+        [detail.id]: detail.data,
+      },
+    } as AppState<T>;
+  }
+
+  #updateObjectState(newState: AppState<T>) {
+    console.debug("Utils:updateObjectState", newState);
+
+    if (Array.isArray(this.state)) {
+      return;
+    }
+
+    // this.state = newState;
+    this.state = {
+      ...this.state,
+      form: { ...(this.state?.form || {}), ...newState.form },
+      currentFieldset: newState.currentFieldset,
+      history: newState.history,
+    } as AppState<T>;
+  }
+
+  getStateList(): Record<string, string>[] {
     console.log("Utils:getStateList", { state: this.state });
     if (!this.state) {
       return [];
     }
-    if (Array.isArray(this.state)) {
+    if (!Array.isArray(this.state)) {
       console.warn(
         "Utils:getStateList: unable to update the state of a non-multi form type",
         this.state,
       );
       return [];
     }
-
-    const data = this.state.form[key].data;
-    if (data.type !== "list") {
+    if (this.state.length === 0) {
       return [];
     }
 
-    const output = data.items.map((s) => {
+    return this.state.map((s) => {
       return Object.values(s.form)
         .filter((item) => {
           return item?.data?.type === "details";
@@ -213,9 +164,6 @@ export class PublicFormComponent<T> {
           {} as Record<string, string>,
         );
     });
-
-    console.log("output", output);
-    return output;
   }
 
   // Public method to allow for the continuing to the next page

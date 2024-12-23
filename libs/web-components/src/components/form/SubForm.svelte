@@ -13,15 +13,14 @@
     FieldsetValidationRelayDetail,
     SubformBindMsg,
     FormBindRelayDetail,
-    FormDispatchStateDownMsg,
-    FormDispatchStateRelayDetailList,
+    FormDispatchStateToSubformMsg,
     FormResetFormMsg,
     FormSetFieldsetMsg,
     FormState,
     FormToggleActiveMsg,
     FormToggleActiveRelayDetail,
     SubFormDeleteDataMsg,
-    SubFormDeleteDataRelayDetail, FormDispatchStateUpMsg, FormDispatchStateRelayDetail,
+    SubFormDeleteDataRelayDetail,
   } from "../../types/relay-types";
   import { calculateMargin, Spacing } from "../../common/styling";
 
@@ -59,6 +58,7 @@
 
   onMount(() => {
     addRelayListener();
+    addBindListener();
     bindChangeHandler();
     dispatchBindMsg();
     bindWithParentForm();
@@ -69,6 +69,14 @@
     _innerFormEl = (e as CustomEvent).detail.el as HTMLElement;
   }
 
+  // Form event interception
+  function addBindListener() {
+    _receiverEl.addEventListener("_bind", (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      interceptFormBind(detail as { el: HTMLElement });
+    })
+  }
+
   function addRelayListener() {
     console.debug("SubForm:addRelayListeners", name);
 
@@ -76,33 +84,20 @@
       console.debug(`  RECEIVE(SubForm => ${action}):`, data);
       e.stopPropagation();
       switch (action) {
-        case FormDispatchStateDownMsg:
-          onReceiveState(data as FormDispatchStateRelayDetailList);
+        case FormDispatchStateToSubformMsg:
+          onReceiveState(data as FormState[]);
           break;
-       // sets the fieldset/subform data
+
         case FormSetFieldsetMsg:
           onSetFieldset(data as FormState[]);
           break;
+
         case FormToggleActiveMsg:
           onToggleActiveState(data as FormToggleActiveRelayDetail);
           break;
+
         case FieldsetBindMsg:
           onFieldsetMount(data as FieldsetBindRelayDetail);
-          break;
-
-        //
-        case FormDispatchStateUpMsg:
-          onReceiveState(data as FormDispatchStateRelayDetail);
-          break;
-
-
-        // Form event interceptions
-        case "_init":
-          interceptFormInit(data as { el: HTMLElement });
-          break;
-
-        case ExternalInitStateMsg:
-          initState(data as FormState[]);
           break;
 
         // pass directly down to the form
@@ -139,23 +134,24 @@
     }
   }
 
-  function initState(data: FormState[]) {
-    console.debug("SubForm:initState", data);
-    _state = data;
-  }
-
-  //
-  function interceptFormInit(detail: { el: HTMLElement }) {
-    alert("here");
+  /**
+   *
+   * Intercept the message from the child form component(s) to:
+   *  - save a reference of the form element to allow for later dispatching of updated state
+   *  - dispatch
+   * @param detail
+   */
+  function interceptFormBind(detail: { el: HTMLElement }) {
     console.debug("SubForm:interceptFormDispatch", { detail });
     // save a reference to the child form
     _formEl = detail.el;
 
-    // redispatch event, but with a subform reference instead
-    dispatch(_relayEl, "_init", { el: _receiverEl }, { bubbles: true });
+    // redispatch event, but with a subform reference instead, this event will allow the
+    // subform util class to have a reference to the subform
+    dispatch(_relayEl, "_bind", { el: _receiverEl }, { bubbles: true });
   }
 
-  function onReceiveState(data: FormDispatchStateRelayDetailList) {
+  function onReceiveState(data: FormState[]) {
     console.debug("SubForm:onReceiveState", { data, isArray: Array.isArray(data) });
     if (!Array.isArray(data)) {
       return;
@@ -164,9 +160,15 @@
     // store a local reference to the state
     _state = data;
 
-    // bubble the state event up to allow for any parent form to save the state as well
-    // TODO: bubble up state here
-    relay<FormState[]>(_relayEl, FormDispatchStateUpMsg, { data: _state, id }, { bubbles: true });
+    dispatch(_relayEl, "_stateChange", _state, { bubbles: true });
+
+    // continue to send the data down to any children subforms within the form
+    // TODO: This data needs to be send down to the subforms of the child form...
+    // - to do this the form needs to dispatch up the list of _subforms it receives
+    //   allowing any parent subforms to it to then obtain the required references
+    // - With the below function commented out this will limit the number of child subforms
+    //   to one level, which is ok for now.
+    // relay(_receiverEl, FormDispatchStateMsg, { data: _state, id }, { bubbles: true });
   }
 
   // Collect list of child form item (input, dropdown, etc) elements
@@ -225,7 +227,7 @@
       _relayEl,
       FieldsetBindMsg,
       { id, heading, el: _receiverEl },
-      { bubbles: true, timeout: 1000 }, // FIXME: Getting this to be received is dependant on the timeout value
+      { bubbles: true, timeout: 10 }, // FIXME: Getting this to be received is dependant on the timeout value
     );
   }
 

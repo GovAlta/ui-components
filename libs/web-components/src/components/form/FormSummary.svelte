@@ -4,8 +4,8 @@
   import { onMount } from "svelte";
   import {
     FieldsetItemState,
-    FormDispatchStateRelayDetail,
-    FormState, FormStateBroadcastChangeMsg, FormStateRefMsg, FormStateRelayDetail,
+    FormDispatchStateToSubformRelayDetail, FormDispatchStateToSummaryMsg, FormDispatchStateToSummaryRelayDetail,
+    FormState,
     FormSummaryBindMsg,
     FormSummaryBindRelayDetail,
     FormSummaryEditPageMsg,
@@ -18,34 +18,28 @@
 
   let _el: HTMLElement;
   let _state: FormState;
-  let _formStateStoreEl: HTMLElement;
+
+  // FIXME: this element ref is not needed
+  let _formEl: HTMLElement;
 
   onMount(() => {
+    console.debug("FormSummary:onMount");
     addRelayListener();
-
-    // send bind msg to parent
-    console.log("FormSummary:onMount");
-    relay<FormSummaryBindRelayDetail>(
-      _el,
-      FormSummaryBindMsg,
-      { el: _el },
-      { bubbles: true, timeout: 1000 }, // FIXME: why does this work only at 1000?
-    );
+    bindWithParentForm();
   });
+
+  function bindWithParentForm() {
+    relay<FormSummaryBindRelayDetail>(_el, FormSummaryBindMsg, { el: _el }, { bubbles: true, timeout: 10 });
+  }
 
   function addRelayListener() {
     receive(_el, (action, data) => {
       console.debug("FormSummary:receive", action, data);
       switch (action) {
-        // obtain reference to the form-state
-        case FormStateRefMsg:
-          _formStateStoreEl = (data as FormStateRelayDetail).el;
+        case FormDispatchStateToSummaryMsg: {
+          onFormDispatch(data as FormDispatchStateToSummaryRelayDetail);
           break;
-        // listen to dispatched change messages
-        case FormStateBroadcastChangeMsg:
-          console.log("FormSummary:receive:change", data);
-          _state = data as FormState;
-          break;
+        }
       }
     });
   }
@@ -54,9 +48,10 @@
    * Receive state updates from the form
    * @param detail
    */
-  function onFormDispatch(detail: FormDispatchStateRelayDetail) {
+  function onFormDispatch(detail: FormDispatchStateToSummaryRelayDetail) {
     console.debug("FormSummary:onFormDispatch", detail);
-    _state = detail;
+    _state = detail.data;
+    _formEl = detail.formEl;
   }
 
   function changePage(e: Event, pageId: string) {

@@ -25,17 +25,17 @@ export type FieldsetData =
 // FormState
 // =========
 
-export const FormStateSubscribeMsg = "form-state::subscribe";
-export const FormStateUnsubscribeMsg = "form-state::unsubscribe";
-export const FormStateInitMsg = "form-state::init";
-export const FormStateUpdateMsg = "form-state::update";
-export const FormStateBroadcastChangeMsg = "form-state::broadcast:change";
+// export const FormStateSubscribeMsg = "form-state::subscribe";
+// export const FormStateUnsubscribeMsg = "form-state::unsubscribe";
+// export const FormStateInitMsg = "form-state::init";
+// export const FormStateUpdateMsg = "form-state::update";
+// export const FormStateBroadcastChangeMsg = "form-state::broadcast:change";
 
 // message that is used to send references of the FormState to other elements
-export const FormStateRefMsg = "form-state::ref";
-export type FormStateRelayDetail = {
-  el: HTMLElement;
-};
+// export const FormStateRefMsg = "form-state::ref";
+// export type FormStateRelayDetail = {
+//   el: HTMLElement;
+// };
 
 // ====
 // Form
@@ -43,12 +43,19 @@ export type FormStateRelayDetail = {
 
 export const FormResetErrorsMsg = "form::reset:errors";
 export const FormSetFieldsetMsg = "form::set:fieldset";
-export const FormDispatchStateDownMsg = "form::dispatch-down:state";
+export const FormDispatchStateToSubformMsg = "form::dispatch-state-to-subform";
+export const FormDispatchStateToFormMsg = "form::dispatch-state-to-form";
 export const FormToggleActiveMsg = "form::toggle:active";
 export const FormStateChangeMsg = "form::state:change";
 export const FormBackUrlMsg = "form::back-url";
 
-export const FormDispatchStateUpMsg = "form::dispatch-up:state";
+export const FormDispatchStateMsg = "form::dispatch:state";
+
+export const FormDispatchStateToSummaryMsg = "form::dispatch-state-to-summary";
+export type FormDispatchStateToSummaryRelayDetail = {
+  data: FormState;
+  formEl: HTMLElement;
+};
 
 export const FormResetFormMsg = "form::reset:form";
 
@@ -72,8 +79,7 @@ export type FormSetFieldsetRelayDetail = {
   value: FieldsetData;
 };
 
-export type FormDispatchStateRelayDetail = FormState;
-export type FormDispatchStateRelayDetailList = FormState[];
+export type FormDispatchStateToSubformRelayDetail = FormState[];
 
 export const FormDispatchEditMsg = "form::edit";
 export type FormDispatchEditRelayDetail = { id: string };

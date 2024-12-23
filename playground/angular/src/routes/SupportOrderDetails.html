@@ -1,7 +1,7 @@
 <goa-public-form
   name="parent-form"
   (_complete)="onComplete($event)"
-  (_init)="_mainFormComponent.init($event)"
+  (_bind)="_mainFormComponent.bind($event)"
   (_stateChange)="updateState($event)"
   back-url="/fsos"
 >
@@ -83,7 +83,8 @@
     id="children-subform"
     name="children-subform"
     (_complete)="onChildComplete($event)"
-    (_init)="_childFormComponent.initList($event)"
+    (_stateChange)="updateChildrenState($event)"
+    (_bind)="_childFormComponent.bind($event)"
   >
     <goa-public-form-page
       first

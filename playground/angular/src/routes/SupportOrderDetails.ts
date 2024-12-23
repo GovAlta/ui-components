@@ -23,7 +23,7 @@ type ChildPage = "child-list" | "name" | "alternate-name" | "dob" | "summary";
   standalone: true,
   selector: "abgov-fsos",
   templateUrl: "./SupportOrderDetails.html",
-  imports: [NgFor, JsonPipe, NgIf],
+  imports: [NgFor, NgIf],
   styles: ``,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -33,7 +33,8 @@ export class SupportOrderDetailsComponent implements OnInit {
   _total: number = 0;
 
   children(): Record<string, string>[] {
-    return this._mainFormComponent.getStateList("children-subform");
+    console.log("here", JSON.stringify(this._childFormComponent.getStateList()));
+    return this._childFormComponent.getStateList();
   }
 
   constructor(private router: Router) {
@@ -44,13 +45,15 @@ export class SupportOrderDetailsComponent implements OnInit {
   ngOnInit(): void {
     // const data = null;
     const raw = `{"form":{"what-is-your-role":{"heading":"","data":{"type":"details","fieldsets":{"role":{"name":"role","value":"Recipient","label":"Role","order":1}}}},"contact":{"skipSummary":false,"heading":""},"optional":{"heading":"Alternate names","data":{"type":"details","fieldsets":{"nickname":{"name":"nickname","value":"test","label":"Nick name","order":1},"alias":{"name":"alias","value":"qwerty","label":"Secret alias","order":2}}}},"children-subform":{"data":{"type":"list","items":[{"id":"26182ca7-92cb-4439-8d66-34cab61160a6","form":{"child-list":{"skipSummary":true,"heading":""},"name":{"heading":"","data":{"type":"details","fieldsets":{"firstName":{"name":"firstName","value":"Chris","label":"First name","order":1},"lastName":{"name":"lastName","value":"Olsen","label":"Last name","order":2}}}},"alternate-name":{"skipSummary":false,"heading":""},"dob":{"skipSummary":false,"heading":""},"summary":{"skipSummary":true,"heading":""}},"history":["child-list","name","summary","child-list"],"editting":"","lastModified":"2024-12-12T19:28:04.743Z","status":"not-started","currentFieldset":{"id":"summary","dispatchType":"continue"}}]}},"address":{"heading":"Current address","data":{"type":"details","fieldsets":{"address":{"name":"address","value":"123-45st","label":"Address","order":2},"city":{"name":"city","value":"Edmonton","label":"","order":3},"postal-code":{"name":"postal-code","value":"T5W 1O3","label":"","order":4}}}},"do-you-receive-support":{"heading":"","data":{"type":"details","fieldsets":{"support":{"name":"support","value":"Yes","label":"Support?","order":1}}}},"recalculated":{"heading":"","data":{"type":"details","fieldsets":{"recalculated":{"name":"recalculated","value":"Yes","label":"Recalculated?","order":1}}}},"summary":{"skipSummary":true,"heading":"Review your answers"}},"history":["what-is-your-role","optional","children-subform","address","do-you-receive-support","recalculated","summary"],"editting":"","status":"not-started","currentFieldset":{"id":"recalculated","dispatchType":"continue"}}`;
-    const data = JSON.parse(raw) as AppState<Page>;
+    // const data = JSON.parse(raw) as AppState<Page>;
+    const data = null;
     if (data) {
       this._mainFormComponent.initState(data);
     }
   }
 
   updateState(e: Event) {
+    this._mainFormComponent.updateState(e);
     const detail = (e as CustomEvent).detail;
 
     console.log("SupportOrderDetails:updateState", detail);
@@ -75,6 +78,10 @@ export class SupportOrderDetailsComponent implements OnInit {
     //       ) || 0);
     //     break;
     // }
+  }
+
+  updateChildrenState(e: Event) {
+    this._childFormComponent.updateState(e);
   }
 
   onComplete(_e: Event) {
@@ -113,6 +120,7 @@ export class SupportOrderDetailsComponent implements OnInit {
     }
 
     if (dest) {
+      alert("foo");
       this._mainFormComponent.continueTo(dest);
     }
   }

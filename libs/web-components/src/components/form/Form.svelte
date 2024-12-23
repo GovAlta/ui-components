@@ -11,7 +11,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
-  import { dispatch, performOnce, receive, relay } from "../../common/utils";
+  import { dispatch, performOnce, performUntil, receive, relay } from "../../common/utils";
   import {
     ExternalAlterDataMsg,
     ExternalAlterDataRelayDetail,
@@ -34,21 +34,14 @@
     FormBindRelayDetail,
     FormDispatchEditMsg,
     FormDispatchEditRelayDetail,
-    FormDispatchStateDownMsg,
-    FormDispatchStateRelayDetail,
-    FormDispatchStateRelayDetailList,
+    FormDispatchStateToSubformMsg,
+    FormDispatchStateToSubformRelayDetail,
     FormResetErrorsMsg,
     FormResetFormMsg,
     FormSetFieldsetMsg,
     FormSetFieldsetRelayDetail,
     FormState,
     FormStateChangeMsg,
-    FormStateBroadcastChangeMsg,
-    FormStateInitMsg,
-    FormStateRefMsg,
-    FormStateRelayDetail,
-    FormStateSubscribeMsg,
-    FormStateUpdateMsg,
     FormSummaryBindMsg,
     FormSummaryBindRelayDetail,
     FormSummaryEditPageMsg,
@@ -56,8 +49,12 @@
     FormToggleActiveMsg,
     FormToggleActiveRelayDetail,
     SubFormDeleteDataMsg,
-    SubFormDeleteDataRelayDetail, FormDispatchStateUpMsg,
+    SubFormDeleteDataRelayDetail,
+    FormDispatchStateMsg,
+    FormDispatchStateToFormMsg,
+    FormDispatchStateToSummaryMsg, FormDispatchStateToSummaryRelayDetail, Fieldset, FormStatus,
   } from "../../types/relay-types";
+  import { id } from "date-fns/locale";
 
   // ========
   // Required
@@ -105,16 +102,18 @@
   // Timeout id for subform binding
   let _childFormStateTimeoutId: any;
 
-  // Timeout id for subform formstate reference binding
-  let _childFormStoreTimeoutId: any
-
   // Last fieldset id in history
   let _lastViewedFieldset: string;
 
-  let _formStateStore: HTMLElement;
-
   // Form state
-  let _state: FormState;
+  let _state: FormState = {
+    id: crypto.randomUUID(),
+    form: {},
+    history: [],
+    editting: "",
+    lastModified: undefined,
+    status: "not-started",
+  };
 
   /**
    * TODO:
@@ -126,82 +125,98 @@
   **/
 
   onMount(() => {
+    // send ref of this Form element to the top-level app which then passes the ref
+    // to the utils class, then allowing the utils class to send/receive messages
+    // with the Form
+    dispatch(_rootEl, "_bind", { el: _rootEl });
+
     addWindowPopStateListener();
-    addRelayListener();
-    // addSubformRelayListener();  // TODO: I don't think this is needed anymore
-    // setTimeout(setChildrenState, 100);  // FIXME: not liking this within a setTimeout
+    startMessageReceiver();
+    addSubformStateChangeListener();
+
+    // TODO: can this be removed?
+    setTimeout(dispatchChildFormState, 100);
   });
 
   /**
-   * Adds a listener to the form element to listen for _stateChange event from child forms.
+   * Listen for _stateChange messages from child subform elements
    */
-  function addSubformRelayListener() {
-    _childReceiverEl.addEventListener("_stateChange", (e) => {
-      const detail = (e as CustomEvent).detail as {
-        data: FormState[];
-        id: string;
-        index: number;
-      };
-      // subform state is always a list
-      _state.form[detail.id] = { data: { type: "list", items: detail.data } };
-      console.debug("Form:addSubformRelayListener", name, _state);
-    });
+  function addSubformStateChangeListener() {
+    performUntil(() => {
+      _childReceiverEl?.addEventListener("_stateChange", (e) => {
+        const detail = (e as CustomEvent).detail as {
+          data: FormState[];
+          id: string;
+          index: number;
+        };
+        // subform state is always a list
+        _state.form[detail.id] = { data: { type: "list", items: detail.data } };
+        console.debug("Form:addSubformRelayListener", name, _state);
+      });
+
+    }, () => !!_childReceiverEl)
   }
 
   /**
    * Adds a listener to the form element to handle relay messages
    */
-  function addRelayListener() {
-    console.debug("Form:addRelayListener", name);
+  function startMessageReceiver() {
+    console.debug("Form:startMessageReceiver", name);
     receive(_rootEl, (type, data, e) => {
-      if (!subForm) {
-        // TODO: should this be "not" subform??? Isn't it the subform that would want to stop things from propagating up
-        // e.stopPropagation();
-      }
+      e.stopPropagation();
       console.debug(`  RECEIVE(Form => ${type}):`, name, type, data);
       switch (type) {
-        // =========
-        // FormState
-        // =========
-        case FormStateInitMsg:
-          onFormStateInit(data as FormStateRelayDetail);
-          break;
-        case FormStateBroadcastChangeMsg:
-          onFormStateBroadCastChange(data as FormState);
+        case FormDispatchStateToFormMsg:
+          onReceiveState(data as FormState);
           break;
 
+        // Check
         case SubformBindMsg:
           onSubformBind(data as FormBindRelayDetail);
           break;
 
-        // Fieldsets register with parent
+        // Check
         case FieldsetBindMsg:
           onFieldsetBind(data as FieldsetBindRelayDetail);
           break;
 
+        // Check
         case FieldsetChangeMsg:
           onFieldsetChange(data as FieldsetChangeRelayDetail);
           break;
-        // case FieldsetMountFormItemMsg:
-        //   onFieldsetMountFormItem(data as FieldsetMountFormRelayDetail);
-        //   break;
+
+        // ???
+        case FieldsetMountFormItemMsg:
+          onFieldsetMountFormItem(data as FieldsetMountFormRelayDetail);
+          break;
+
+        // Check
         case FormSummaryBindMsg:
           onFormSummaryBind(data as FormSummaryBindRelayDetail);
           break;
+
+        // Check
         case ExternalContinueMsg:
           onContinue(data as ExternalContinueRelayDetail);
           break;
+
+        // Check
         case FormSummaryEditPageMsg:
-          onSetPage(data as FormSummaryEditPageRelayDetail);
+          setEditPage(data as FormSummaryEditPageRelayDetail);
           break;
-        // case FieldsetSubmitMsg:
-        //   onFormComplete();
-        //   break;
+
+        // Check
+        case FieldsetSubmitMsg:
+          onFormComplete();
+          break;
+
+        case ExternalInitStateMsg:
+          initState(data as ExternalInitStateDetail);
+          break;
+
+        // TODO: probably uncomment these later on
         // case ExternalAppendDataMsg:
         //   onAppendData(data as ExternalAppendDataRelayDetail);
-        //   break;
-        // case ExternalInitStateMsg:
-        //   initState(data as ExternalInitStateDetail);
         //   break;
         // case FormResetFormMsg:
         //   resetState();
@@ -209,6 +224,7 @@
         // case SubFormDeleteDataMsg:
         //   deleteSubFormData(data as SubFormDeleteDataRelayDetail);
         //   break;
+
         default:
           console.warn("Form: Unhandled action", type);
       }
@@ -219,38 +235,9 @@
   // Relay listeners
   // ***************
 
-  function onFormStateBroadCastChange(detail: FormState) {
-    _state = detail;
-    console.debug("Form:onFormStateBroadcastChange", name, _state);
-    sendToggleActiveStateMsg(_state.history[_state.history.length - 1]);
-
-    // TODO: this probably doesn't need to be done all the time, so add a flag to ensure
-    // it only happens once
-    // initialize history with first page if history is empty
-    let historyPageCount = _state.history.length;
-    if (historyPageCount > 0) {
-      _lastViewedFieldset = _state.history[historyPageCount - 1];
-    }
-  }
-
-  // This event handler function will only be called within the top-level form element,
-  // as all other subforms will be siblings to the form-state component
-  function onFormStateInit(detail: FormStateRelayDetail) {
-    console.debug("Form:onFormStateInit", name, { detail });
-    _formStateStore = detail.el;
-
-    // subscribe to changes within the form-state store
-    relay<FormStateRelayDetail>(_formStateStore, FormStateSubscribeMsg, { el: _rootEl});
-
-    // provide html element link the form utils class
-    console.log("_init dispatching", { el: _rootEl, storeEl: detail.el });
-    // send message containing element references to
-    dispatch(_rootEl, "_init", { el: _rootEl, storeEl: detail.el });
-
-    // send data to the child forms
-    // I don't think this is required, remove it once that has been confirmed
-    for (const [id, el] of Object.entries(_childForms)) {
-    }
+  function onReceiveState(data: FormState) {
+    console.debug("Form:onReceiveState", name, { data });
+    _state = { ..._state, ...data };
   }
 
   /**
@@ -308,12 +295,6 @@
     // save the form-summary element reference for relaying messages
     _formSummaryEl = detail.el;
 
-    // FIXME: this is called BEFORE the event that sets the _formStateStore element
-
-
-    // send form-state reference to the form-summary
-    relay<FormStateRelayDetail>(_formStateStore, FormStateSubscribeMsg, { el: _formSummaryEl });
-
     // sync any initial state
     syncFormSummaryState();
   }
@@ -338,11 +319,13 @@
   function onFieldsetBind(detail: FieldsetBindRelayDetail) {
     // save the fieldsets to allow for later sending of messages
     _fieldsets = { ..._fieldsets, [detail.id]: detail };
-    console.debug("Form:onFieldsetBind", name, "---", { id: detail.id, _fieldsets });
+    console.debug("Form:onFieldsetBind", name, "---", { id: detail.id, _fieldsets, subForm });
 
-    // save the initial state of the fieldset (data prop not set)
-    // FIXME: is this line still needed?
-    // _state.form[detail.id] = { ..._state.form[detail.id], skipSummary: detail.skipSummary,  heading: detail.heading };
+    // init the state of the fieldset (data prop not set), this allows for the items to
+    // be inserted into the `form` list in the order they exist within the DOM. If this is
+    // not done they will be created in the order to which the data was entered, which can
+    // result in the form-summary then showing things out of order
+    _state.form[detail.id] = { ..._state.form[detail.id], skipSummary: detail.skipSummary,  heading: detail.heading };
 
     // send the back url to child fieldsets, however only the first will need it
     if (backUrl) {
@@ -351,21 +334,25 @@
 
     // run once all fieldsets are obtained
     _formItemBindingTimeoutId = performOnce(_formItemBindingTimeoutId, () => {
-      // send specific form state to children
-      setFieldsetsState();
-
-      // if the form was previously viewed the last fieldset viewed will have been saved
-      // which is the fieldset that will be made visible
-      if (_lastViewedFieldset) {
-        const item = _fieldsets[_lastViewedFieldset];
-        sendToggleActiveStateMsg(item.id);
-      } else {
-        // no previous fieldset was viewed, so mark the first fieldset as active
-        const [id] = Object.entries(_fieldsets)[0];
-        _state.history.push(id);
-        sendToggleActiveStateMsg(id);
-      }
+      bindRootFormData();
     });
+  }
+
+  function bindRootFormData() {
+    // send specific form state to children
+    dispatchFieldsetStates(_state);
+
+    // if the form was previously viewed the last fieldset viewed will have been saved
+    // which is the fieldset that will be made visible
+    if (_lastViewedFieldset) {
+      const item = _fieldsets[_lastViewedFieldset];
+      sendToggleActiveStateMsg(item.id);
+    } else {
+      // no previous fieldset was viewed, so mark the first fieldset as active
+      const [id] = Object.entries(_fieldsets)[0];
+      _state.history.push(id);
+      sendToggleActiveStateMsg(id);
+    }
   }
 
   /**
@@ -389,10 +376,9 @@
     _state.form[id] = { heading: state.heading, data: { type: "details", fieldsets: state.data } };
     _state.lastModified = new Date();
 
-    syncStateWithStore();
-    // if (dispatchOn === "change") {
-    //   dispatchStateChange("change", id);
-    // }
+    if (dispatchOn === "change") {
+      dispatchStateChange("change", id);
+    }
   }
 
   /**
@@ -448,7 +434,7 @@
     }
 
     // sync the new state
-    // syncFormSummaryState();
+    syncFormSummaryState();
   }
 
   /**
@@ -460,57 +446,32 @@
     dispatchType: "change" | "continue",
     fieldSetId: string,
   ) {
-    console.debug("Form:dispatchStateChange", name, { fieldSetId, _state });
-    relay<FormState>(
+    dispatch(
       _rootEl,
-      FormDispatchStateUpMsg,
+      "_stateChange",
       { ..._state, currentFieldset: { id: fieldSetId, dispatchType } },
       { bubbles: true, timeout: 100 },
     );
-
-    // FIXME: this is probably not needed instead of the above
-    // dispatch(
-    //   _rootEl,
-    //   "_stateChange",
-    //   { ..._state, currentFieldset: { id: fieldSetId, dispatchType } },
-    //   { bubbles: true, timeout: 100 },
-    // );
-
-    // relay(_formStateStore, FormStateDispatchChangeMsg, {
-    //   ..._state, currentFieldset: { id: fieldSetId, dispatchType }
-    // });
-
-    // TODO: determine why `dispatchStateChange` is being fired 3 times on a single _continue
-    // relay(_formStateStore, FormStateUpdateMsg, _state);
-  }
-
-  /**
-   * Synchronizes the current state with the provided store by relaying updates
-   * to maintain consistency between the state and the store.
-   *
-   * @return {void} This method does not return any value.
-   */
-  function syncStateWithStore() {
-    relay<FormState>(_formStateStore, FormStateUpdateMsg, _state);
   }
 
   /**
    * Synchronizes the form summary state with the app to ensure consistent display of form data
    */
   function syncFormSummaryState() {
-    // console.debug("Form:syncFormSummaryState", _state);
-    // relay<FormDispatchStateRelayDetail>(
-    //   _formSummaryEl,
-    //   FormDispatchStateMsg,
-    //   _state,
-    // );
+    console.debug("Form:syncFormSummaryState", _state);
+
+    relay<FormDispatchStateToSummaryRelayDetail>(
+      _formSummaryEl,
+      FormDispatchStateToSummaryMsg,
+      { data: _state, formEl: _rootEl },
+    );
   }
 
   /**
    * Handles setting the page to edit mode and updating the state accordingly
    * @param detail Contains the id of the page to set as the current editing page
    */
-  function onSetPage(detail: FormSummaryEditPageRelayDetail) {
+  function setEditPage(detail: FormSummaryEditPageRelayDetail) {
     // editting mode is an ephemeral value and is *not* saved to local storage
     _state.editting = detail.id;
 
@@ -588,8 +549,8 @@
    * @param page The id of the page to set as active
    */
   function sendToggleActiveStateMsg(page: string) {
+    console.debug("Form:sendToggleActiveStateMsg", name, { page });
     const fieldsetIds = Object.keys(_fieldsets);
-    console.debug("Form:sendToggleActiveStateMsg", name, { fieldsetIds, page });
     fieldsetIds.forEach((key) => {
       relay<FormToggleActiveRelayDetail>(
         _fieldsets[key].el,
@@ -603,22 +564,16 @@
   }
 
   /**
-   * Listens to url changes or location back events to update the form state and active page
+   * Handle browser back events and update the `history` array
    */
   function addWindowPopStateListener() {
     console.debug("Form:addWindowPopStateListener", name);
     // event should only be created on top level form, not subforms
-    if (subForm) {
-      return;
-    }
 
     window.addEventListener("popstate", (e: PopStateEvent) => {
       const history = [..._state.history];
       history.pop();
       _state.history = history;
-
-      // sync the updated history
-      syncStateWithStore();
 
       sendToggleActiveStateMsg(history[history.length - 1]);
       e.stopPropagation();
@@ -629,40 +584,40 @@
    * Initializes the form state from the passed in data
    * @param detail The data to initialize the form state with
    */
-  // function initState(detail: ExternalInitStateDetail) {
-  //   console.debug("Form:initState", name, { detail });
-  //   alert("initState");
-  //   if (!detail) {
-  //     return;
-  //   }
-  //
-  //   if (typeof detail === "string") {
-  //     _state = JSON.parse(detail);
-  //   } else {
-  //     _state = detail;
-  //   }
-  //
-  //   // initialize history with first page if history is empty
-  //   let historyPageCount = _state.history.length;
-  //   if (historyPageCount > 0) {
-  //     _lastViewedFieldset = _state.history[historyPageCount - 1];
-  //   }
-  //
-  //   // show the fieldset
-  //   dispatchStateChange("continue", _lastViewedFieldset);
-  // }
+  function initState(detail: ExternalInitStateDetail) {
+    console.debug("Form:initState", name, { detail });
+    if (!detail) {
+      return;
+    }
+
+    if (typeof detail === "string") {
+      _state = JSON.parse(detail);
+    } else {
+      _state = detail;
+    }
+
+    // initialize history with first page if history is empty
+    let historyPageCount = _state.history.length;
+    if (historyPageCount > 0) {
+      _lastViewedFieldset = _state.history[historyPageCount - 1];
+    }
+
+    // show the fieldset
+    dispatchStateChange("continue", _lastViewedFieldset);
+  }
 
   /**
    * Dispatches the state to the child forms
    */
   function dispatchChildFormState() {
-    console.debug("Form:dispatchChildFormState", name);
+    console.debug("Form:dispatchChildFormState", name, { _childForms });
     for (const [id, el] of Object.entries(_childForms)) {
      const data = _state.form[id]?.data;
       // data is only sent to child forms and all child forms are lists
-      if (data.type === "list") {
+      if (data?.type === "list") {
         // the scoped state is set to the child form
-        relay<FormDispatchStateRelayDetailList>(el, FormDispatchStateDownMsg, data.items);
+        console.debug("Form:dispatchChildFormState", "child", name, { id, data });
+        relay<FormDispatchStateToSubformRelayDetail>(el, FormDispatchStateToSubformMsg, data.items);
       }
     }
   }
@@ -670,10 +625,10 @@
   /**
    * Sets the fieldset and subform states
    */
-  function setFieldsetsState() {
-    console.debug("Form:setChildrenState", name, { _state, _fieldsets });
+  function dispatchFieldsetStates(state: FormState) {
+    console.debug("Form:dispatchFieldsetStates", name, { state, _fieldsets });
     for (const [name, detail] of Object.entries(_fieldsets)) {
-      const value = _state.form[name]?.data;
+      const value = state.form[name]?.data;
       if (value) {
         relay<FormSetFieldsetRelayDetail>(detail.el, FormSetFieldsetMsg, {
           name,
@@ -685,12 +640,7 @@
 </script>
 
 <form bind:this={_rootEl} style={calculateMargin(mt, mr, mb, ml)}>
-  {#if !subForm}
-    <goa-form-state />
-  {/if}
-  {#if _state || subForm}
-    <div bind:this={_childReceiverEl}>
-      <slot />
-    </div>
-  {/if}
+  <div bind:this={_childReceiverEl}>
+    <slot />
+  </div>
 </form>
