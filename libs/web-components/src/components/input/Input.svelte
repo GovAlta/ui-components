@@ -83,6 +83,7 @@
   export let ml: Spacing = null;
 
   let _leadingContentSlot = false;
+  let _innerContentSlot = false;
   let _trailingContentSlot = false;
   let _debounceId: any;
   let inputEl: HTMLElement;
@@ -251,6 +252,14 @@
       _leadingContentSlot = true;
     }
 
+    const innerContentSlot = _rootEl.querySelector(
+      "slot[name=innerContentSlot]",
+    ) as HTMLSlotElement;
+
+    if (innerContentSlot && innerContentSlot.assignedNodes().length > 0) {
+      _innerContentSlot = true;
+    }
+
     const trailingContentSlot = _rootEl.querySelector(
       "slot[name=trailingContent]",
     ) as HTMLSlotElement;
@@ -280,6 +289,7 @@
     class="goa-input variant--{variant} type--{type}"
     class:input--disabled={isDisabled}
     class:leading-content={_leadingContentSlot}
+    class:inner-content={_innerContentSlot}
     class:trailing-content={_trailingContentSlot}
     class:error={_error}
   >
@@ -301,10 +311,15 @@
       />
     {/if}
 
+    <div class="inner-content-slot">
+      <slot name="innerContent" />
+    </div>
+
     <input
       bind:this={inputEl}
       class="input--{variant}"
       class:input-leading-content={_leadingContentSlot && !isDisabled}
+      class:input-inner-content={_innerContentSlot && !isDisabled}
       class:input-trailing-content={_trailingContentSlot && !isDisabled}
       style={`--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`}
       readonly={isReadonly}
@@ -395,6 +410,7 @@
     align-items: stretch;
     min-width: 100%;
     background-color: var(--goa-color-greyscale-white);
+    overflow: hidden;
 
     /* default border */
     box-shadow: inset 0 0 0 var(--goa-border-width-s)
@@ -525,6 +541,16 @@
     display: flex;
     align-items: center;
     white-space: normal;
+  }
+
+  .inner-content-slot :global(::slotted(div)) {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    flex-flow: wrap;
+  }
+  .inner-content-slot {
+    flex: none;
   }
 
   .leading-content-slot :global(::slotted(div)),

@@ -16,6 +16,7 @@
   import DividerPage from "../pages/DividerPage.svelte"
   import DropdownPage from "../pages/DropdownPage.svelte"
   import FileUploaderPage from "../pages/FileUploaderPage.svelte"
+  import FilterChipPage from "../pages/FilterChipPage.svelte"
   import FooterPage from "../pages/FooterPage.svelte"
   import FormItemPage from "../pages/FormItemPage.svelte"
   import FormStepperPage from "../pages/FormStepperPage.svelte"
@@ -100,6 +101,7 @@
         <a href="#dividier">Dividier</a>
         <a href="#dropdown">Dropdown</a>
         <a href="#file-uploader">File Uploader</a>
+        <a href="#filter-chip">Filter Chip</a>
         <a href="#footer">Footer</a>
         <a href="#form-item">Form Item</a>
         <a href="#form-stepper">Form Stepper</a>
@@ -157,6 +159,8 @@
         <DropdownPage />
       {:else if hash === "#file-uploader"}
         <FileUploaderPage />
+      {:else if hash === "#filter-chip"}
+        <FilterChipPage />
       {:else if hash === "#footer"}
         <FooterPage />
       {:else if hash === "#form-item"}
