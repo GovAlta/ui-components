@@ -1,0 +1,16 @@
+{
+  "name": "goa-input-chip",
+  "attributes": [
+    {
+      "name": "name",
+      "description": "Name of input value that is received in the _change event",
+      "type": "string"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Input Chip",
+      "url": "{{siteUrl}}/?path=/docs/components-input-chips--information"
+    }
+  ]
+}

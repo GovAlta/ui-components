@@ -25,6 +25,7 @@
   import HeroBannerPage from "../pages/HeroBannerPage.svelte"
   import IconButtonPage from "../pages/IconButtonPage.svelte"
   import IconPage from "../pages/IconPage.svelte"
+  import InputChipPage from "../pages/InputChipPage.svelte"
   import ListPage from "../pages/ListPage.svelte"
   import MicrositeHeaderPage from "../pages/MicrositeHeaderPage.svelte"
   import ModalPage from "../pages/ModalPage.svelte"
@@ -110,6 +111,7 @@
         <a href="#hero-banner">Hero</a>
         <a href="#icons">Icons</a>
         <a href="#icon-button">Icon Button</a>
+        <a href="#input-chip">Input Chip</a>
         <a href="#list">List</a>
         <a href="#microsite-header">Microsite Header</a>
         <a href="#modal">Modal</a>
@@ -177,6 +179,8 @@
         <IconPage />
       {:else if hash === "#icon-button"}
         <IconButtonPage />
+      {:else if hash === "#input-chip"}
+        <InputChipPage />
       {:else if hash === "#list"}
         <ListPage />
       {:else if hash === "#microsite-header"}

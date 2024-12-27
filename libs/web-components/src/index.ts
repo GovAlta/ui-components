@@ -44,6 +44,7 @@ export { default as HeroBanner } from "./components/hero-banner/HeroBanner.svelt
 export { default as IconButton } from "./components/icon-button/IconButton.svelte";
 export { default as Icon } from "./components/icon/Icon.svelte";
 export { default as Input } from "./components/input/Input.svelte";
+export { default as InputChip } from "./components/input-chip/InputChip.svelte";
 export { default as Link } from "./components/link/Link.svelte";
 export { default as LinkButton } from "./components/link-button/LinkButton.svelte";
 export { default as MicrositeHeader } from "./components/microsite-header/MicrositeHeader.svelte";
