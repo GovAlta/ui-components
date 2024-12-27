@@ -2,7 +2,8 @@
 
 <script lang="ts">
   export let value: string = "";
-  export let chipValues = <string[]>[];
+  export let chipValues: string[] = [];
+  export let validValues: string[] | null = null;
   export let temporarydemo1: boolean = false;
   export let temporarydemo2: boolean = false;
 
@@ -30,11 +31,12 @@
 
 <!-- HTML -->
 
-<div bind:this={_rootEl}>
+<div bind:this={_rootEl} class="goa-input-chip">
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <goa-input
     temporarydemo1={temporarydemo1}
     temporarydemo2={temporarydemo2}
+    error={validValues && chipValues.some(chip => !validValues.includes(chip))}
     on:_change={handleInputChange}
     on:keydown={handleInputKeyDown}
     value={inputValue}
@@ -44,6 +46,7 @@
         <goa-filter-chip
           key={index}
           content={typedChip}
+          error={!validValues || validValues.includes(typedChip) ? "false" : "true"}
           on:_click={() => removeTypedChip(typedChip)}
           ml="xs"
           mt="xs"

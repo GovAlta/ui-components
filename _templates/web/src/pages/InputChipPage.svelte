@@ -14,3 +14,6 @@
   <goa-input-chip name="input" temporarydemo2={true} placeholder="Type then press Enter"></goa-input-chip>
 </goa-form-item>
 
+<goa-form-item label="InputChip - Valid input: cat, dog">
+  <goa-input-chip name="input" validValues={["cat", "dog"]} placeholder="Type then press Enter"></goa-input-chip>
+</goa-form-item>

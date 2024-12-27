@@ -652,6 +652,7 @@
     display: block;
     border: none;
     flex: 1 1 auto;
+    box-sizing: border-box;
   }
 
   .variant--bare {
