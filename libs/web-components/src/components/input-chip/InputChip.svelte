@@ -3,6 +3,8 @@
 <script lang="ts">
   export let value: string = "";
   export let chipValues = <string[]>[];
+  export let temporarydemo1: boolean = false;
+  export let temporarydemo2: boolean = false;
 
   let _rootEl: HTMLElement;
   let inputValue = value || "";
@@ -31,6 +33,8 @@
 <div bind:this={_rootEl}>
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <goa-input
+    temporarydemo1={temporarydemo1}
+    temporarydemo2={temporarydemo2}
     on:_change={handleInputChange}
     on:keydown={handleInputKeyDown}
     value={inputValue}
@@ -43,7 +47,7 @@
           on:_click={() => removeTypedChip(typedChip)}
           ml="xs"
           mt="xs"
-          mb="xs" />
+          mb={temporarydemo2 ? "" : "xs"} />
       {/each}
     </div>
   </goa-input>

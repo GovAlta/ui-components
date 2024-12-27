@@ -52,6 +52,8 @@
   type Type = (typeof Types)[number];
   type AutoCapitalize = (typeof AutoCapitalize)[number];
 
+  export let temporarydemo1: boolean = false;
+  export let temporarydemo2: boolean = false;
   export let type: Type = "text";
   export let name: string = "";
   export let value: string = "";
@@ -282,6 +284,8 @@
 
 <div
   class="container"
+  class:temporarydemo1={temporarydemo1}
+  class:temporarydemo2={temporarydemo2}
   style={`--width: ${width};${calculateMargin(mt, mr, mb, ml)}`}
   bind:this={_rootEl}
 >
@@ -420,6 +424,24 @@
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
     background-color: var(--goa-color-greyscale-white);
+  }
+  .temporarydemo1 .goa-input {
+    /* Adds scrollbar when lots of input chips visible: */
+    overflow-x: auto;
+  }
+  .temporarydemo1 .input--goa {
+    /* Adds scrollbar when lots of chips visible: */
+    flex: none;
+  }
+  .temporarydemo1 .chip {
+    margin-bottom: var(--goa-space-xs);
+  }
+  .temporarydemo2 .goa-input {
+    /* Alternatively, this makes chips appear inline above text input, but overrides `display: inline-flex`: */
+    display: inline-block;
+  }
+  .temporarydemo2 .inner-content-slot {
+    padding-right: var(--goa-space-xs);
   }
 
   .goa-input:not(.error):not(.leading-content):not(.trailing-content):hover:not(
