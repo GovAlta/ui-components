@@ -112,6 +112,12 @@
     flex-shrink: 0;
   }
 
+  .chip,
+  .text {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
   .text {
     line-height: var(--goa-line-height-2); /* 24px */
     padding-top: 2px;
@@ -119,8 +125,6 @@
       --font-valign-fix,
       0
     ); /* acumin font requires this to allow for vertical alignment  */
-    overflow-wrap: break-word;
-    word-wrap: break-word;
   }
 
   .error:hover {

@@ -54,6 +54,7 @@
 
   export let temporarydemo1: boolean = false;
   export let temporarydemo2: boolean = false;
+  export let temporarydemo3: boolean = false;
   export let type: Type = "text";
   export let name: string = "";
   export let value: string = "";
@@ -286,6 +287,7 @@
   class="container"
   class:temporarydemo1={temporarydemo1}
   class:temporarydemo2={temporarydemo2}
+  class:temporarydemo3={temporarydemo3}
   style={`--width: ${width};${calculateMargin(mt, mr, mb, ml)}`}
   bind:this={_rootEl}
 >
@@ -307,6 +309,10 @@
       <slot name="leadingContent" />
     </div>
 
+    <div class="inner-content-slot">
+      <slot name="innerContent" />
+    </div>
+
     {#if leadingicon}
       <goa-icon
         class="leading-icon"
@@ -314,10 +320,6 @@
         type={leadingicon}
       />
     {/if}
-
-    <div class="inner-content-slot">
-      <slot name="innerContent" />
-    </div>
 
     <input
       bind:this={inputEl}
@@ -442,6 +444,12 @@
   }
   .temporarydemo2 .inner-content-slot {
     padding-right: var(--goa-space-xs);
+  }
+  .temporarydemo3 .inner-content-slot {
+    max-width: 50%;
+  }
+  .temporarydemo3 .inner-content-slot :global(::slotted(div)) {
+    max-width: 100%;
   }
 
   .goa-input:not(.error):not(.leading-content):not(.trailing-content):hover:not(

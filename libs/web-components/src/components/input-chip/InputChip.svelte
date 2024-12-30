@@ -6,6 +6,7 @@
   export let validValues: string[] | null = null;
   export let temporarydemo1: boolean = false;
   export let temporarydemo2: boolean = false;
+  export let temporarydemo3: boolean = false;
 
   let _rootEl: HTMLElement;
   let inputValue = value || "";
@@ -51,6 +52,7 @@
   <goa-input
     temporarydemo1={temporarydemo1}
     temporarydemo2={temporarydemo2}
+    temporarydemo3={temporarydemo3}
     bind:this={_rootEl}
     on:_change={handleInputChange}
     on:keydown={handleInputKeyDown}
