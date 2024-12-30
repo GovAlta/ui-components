@@ -10,6 +10,21 @@
   let _rootEl: HTMLElement;
   let inputValue = value || "";
 
+  // returns all chips values
+  $: value = JSON.stringify(chipValues);
+
+  // validates all chip values
+  $: {
+    if (_rootEl) {
+      (_rootEl as any).error = validValues && chipValues.some(chip => !validValues.includes(chip));
+    }
+  }
+
+  // delegate functionality to the input element
+  export function checkValidity() {
+    return !(_rootEl as any).error;
+  }
+
   function handleInputChange(e: Event) {
     inputValue = (e.currentTarget as HTMLInputElement).value;
   }
@@ -31,12 +46,12 @@
 
 <!-- HTML -->
 
-<div bind:this={_rootEl} class="goa-input-chip">
+<div class="goa-input-chip">
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <goa-input
     temporarydemo1={temporarydemo1}
     temporarydemo2={temporarydemo2}
-    error={validValues && chipValues.some(chip => !validValues.includes(chip))}
+    bind:this={_rootEl}
     on:_change={handleInputChange}
     on:keydown={handleInputKeyDown}
     value={inputValue}
