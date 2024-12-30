@@ -5,6 +5,22 @@
       "name": "name",
       "description": "Name of input value that is received in the _change event",
       "type": "string"
+    },
+    {
+      "name": "chipValues",
+      "type": "string",
+      "description": "stringified array of string values to be displayed as chips"
+    },
+    {
+      "name": "validValues",
+      "type": "string",
+      "description": "stringified array of string values to be used to validate chips"
+    },
+    {
+      "name": "*",
+      "description": "accepts any property that can be passed to a regular Input component",
+      "type": "*",
+      "default": ""
     }
   ],
   "references": [

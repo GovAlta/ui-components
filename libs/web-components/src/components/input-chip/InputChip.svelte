@@ -2,6 +2,7 @@
 
 <script lang="ts">
   export let value: string = "";
+  export let prefix: string = "";  // input component child prop that needed to be defined
   export let chipValues: string[] = [];
   export let validValues: string[] | null = null;
   export let temporarydemo1: boolean = false;
@@ -57,7 +58,14 @@
     on:_change={handleInputChange}
     on:keydown={handleInputKeyDown}
     value={inputValue}
-    {...$$restProps}>
+    prefix={prefix}
+    {...$$restProps}
+  >
+    {#if $$slots.leadingContent}
+      <div slot="leadingContent">
+        <slot name="leadingContent" />
+      </div>
+    {/if}
     <div slot="innerContent" class="innerContent">
       {#each chipValues as typedChip, index}
         <goa-filter-chip
@@ -70,6 +78,11 @@
           mb={temporarydemo2 ? "" : "xs"} />
       {/each}
     </div>
+    {#if $$slots.trailingContent}
+      <div slot="trailingContent">
+        <slot name="trailingContent" />
+      </div>
+    {/if}
   </goa-input>
 </div>
 
