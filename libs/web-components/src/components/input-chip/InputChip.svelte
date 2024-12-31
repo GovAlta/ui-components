@@ -4,7 +4,6 @@
   import { dispatch } from "../../common/utils";
 
   export let value: string = "";
-  export let prefix: string = ""; // input component child prop that needed to be defined
   export let chipValues: string[] = [];
   export let validValues: string[] | null = null;
   export let temporarydemo1: boolean = false;
@@ -58,7 +57,6 @@
     value={inputValue}
     error={validValues &&
       chipValues.some((chip) => !validValues.includes(chip))}
-    {prefix}
     {...$$restProps}
   >
     {#if $$slots.leadingContent}
