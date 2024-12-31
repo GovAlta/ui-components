@@ -1,6 +1,8 @@
 <svelte:options customElement="goa-input-chip" />
 
 <script lang="ts">
+  import { dispatch } from "../../common/utils";
+
   export let value: string = "";
   export let prefix: string = "";  // input component child prop that needed to be defined
   export let chipValues: string[] = [];
@@ -15,34 +17,37 @@
   // returns all chips values
   $: value = JSON.stringify(chipValues);
 
-  // validates all chip values
-  $: {
-    if (_rootEl) {
-      (_rootEl as any).error = validValues && chipValues.some(chip => !validValues.includes(chip));
-    }
-  }
 
   // delegate functionality to the input element
   export function checkValidity() {
     return !(_rootEl as any).error;
   }
 
-  function handleInputChange(e: Event) {
-    inputValue = (e.currentTarget as HTMLInputElement).value;
-  }
-
   function handleInputKeyDown(e: Event) {
     const keyboardEvent = e as KeyboardEvent;
-    const newInputValue = (keyboardEvent.currentTarget as HTMLInputElement).value.trim();
+    const inputEl = keyboardEvent.currentTarget as HTMLInputElement;
+    const newInputValue = inputEl.value?.trim();
     const key = keyboardEvent.key;
-    if (key === "Enter" && newInputValue !== "") {
+    if (key === "Enter" && newInputValue && newInputValue !== "") {
       chipValues = [...chipValues, newInputValue];
+      // Clear input value:
       inputValue = "";
+      inputEl.value = "";
     }
   }
 
   const removeTypedChip = (chip: string) => {
     chipValues = chipValues.filter((c) => c !== chip);
+
+    // Let listeners know that an update was made
+    setTimeout(() => {
+      dispatch(
+        _rootEl,
+        "_change",
+        { value: '' },
+        { bubbles: true },
+      );
+    }, 0);
   };
 </script>
 
@@ -55,9 +60,9 @@
     temporarydemo2={temporarydemo2}
     temporarydemo3={temporarydemo3}
     bind:this={_rootEl}
-    on:_change={handleInputChange}
     on:keydown={handleInputKeyDown}
     value={inputValue}
+    error={validValues && chipValues.some(chip => !validValues.includes(chip))}
     prefix={prefix}
     {...$$restProps}
   >
