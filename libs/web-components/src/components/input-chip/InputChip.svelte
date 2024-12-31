@@ -4,7 +4,7 @@
   import { dispatch } from "../../common/utils";
 
   export let value: string = "";
-  export let prefix: string = "";  // input component child prop that needed to be defined
+  export let prefix: string = ""; // input component child prop that needed to be defined
   export let chipValues: string[] = [];
   export let validValues: string[] | null = null;
   export let temporarydemo1: boolean = false;
@@ -16,7 +16,6 @@
 
   // returns all chips values
   $: value = JSON.stringify(chipValues);
-
 
   // delegate functionality to the input element
   export function checkValidity() {
@@ -41,12 +40,7 @@
 
     // Let listeners know that an update was made
     setTimeout(() => {
-      dispatch(
-        _rootEl,
-        "_change",
-        { value: '' },
-        { bubbles: true },
-      );
+      dispatch(_rootEl, "_change", { value: "" }, { bubbles: true });
     }, 0);
   };
 </script>
@@ -56,14 +50,15 @@
 <div class="goa-input-chip">
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <goa-input
-    temporarydemo1={temporarydemo1}
-    temporarydemo2={temporarydemo2}
-    temporarydemo3={temporarydemo3}
+    {temporarydemo1}
+    {temporarydemo2}
+    {temporarydemo3}
     bind:this={_rootEl}
     on:keydown={handleInputKeyDown}
     value={inputValue}
-    error={validValues && chipValues.some(chip => !validValues.includes(chip))}
-    prefix={prefix}
+    error={validValues &&
+      chipValues.some((chip) => !validValues.includes(chip))}
+    {prefix}
     {...$$restProps}
   >
     {#if $$slots.leadingContent}
@@ -76,11 +71,14 @@
         <goa-filter-chip
           key={index}
           content={typedChip}
-          error={!validValues || validValues.includes(typedChip) ? "false" : "true"}
+          error={!validValues || validValues.includes(typedChip)
+            ? "false"
+            : "true"}
           on:_click={() => removeTypedChip(typedChip)}
           ml="xs"
           mt="xs"
-          mb={temporarydemo2 ? "" : "xs"} />
+          mb={temporarydemo2 ? "" : "xs"}
+        />
       {/each}
     </div>
     {#if $$slots.trailingContent}

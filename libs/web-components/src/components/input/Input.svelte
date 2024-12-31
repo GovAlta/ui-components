@@ -285,9 +285,9 @@
 
 <div
   class="container"
-  class:temporarydemo1={temporarydemo1}
-  class:temporarydemo2={temporarydemo2}
-  class:temporarydemo3={temporarydemo3}
+  class:temporarydemo1
+  class:temporarydemo2
+  class:temporarydemo3
   style={`--width: ${width};${calculateMargin(mt, mr, mb, ml)}`}
   bind:this={_rootEl}
 >

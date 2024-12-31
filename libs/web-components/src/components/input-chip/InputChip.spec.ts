@@ -1,6 +1,8 @@
 import { fireEvent, render } from "@testing-library/svelte";
-import GoAInputChip from "./InputChip.svelte";
 import { describe, it, expect, vi } from "vitest";
+import { tick } from "svelte";
+import GoAInputChip from "./InputChip.svelte";
+import GoAInputChipWrapper from "./InputChipWrapper.test.svelte";
 
 describe("InputChip", () => {
   it("should render", async () => {
@@ -11,35 +13,34 @@ describe("InputChip", () => {
 
     expect(container.innerHTML).toContain("foo");
     expect(container.innerHTML).not.toContain("bar");
-    expect(container.querySelector("[error=\"false\"]")).toBeDefined();
+    expect(container.querySelector('[error="false"]')).toBeDefined();
   });
 
   it("should show the chip in the error state", async () => {
     const { container } = render(GoAInputChip, {
-      name: "test",
       chipValues: ["invalid value"],
       validValues: ["foo", "bar"],
     });
 
-    expect(container.querySelector("[error=\"true\"]")).toBeDefined();
+    expect(container.querySelector('[error="true"]')).toBeDefined();
   });
 
   it("should handle the click event for deletable chips", async () => {
     const result = render(GoAInputChip, {
-      name: "test",
-      testid: "inputTest",
       chipValues: ["foo"],
       validValues: ["foo", "bar"],
     });
 
-    const chip = result.container.querySelector('goa-input .innerContent goa-filter-chip');
+    const chip = result.container.querySelector(
+      "goa-input .innerContent goa-filter-chip",
+    );
     const onClick = vi.fn();
 
     expect(result.container.innerHTML).toContain("foo");
     expect(chip).toBeDefined();
     if (chip) {
       chip.addEventListener("_click", onClick);
-      await fireEvent(chip, new CustomEvent('_click'));
+      await fireEvent(chip, new CustomEvent("_click"));
     }
 
     expect(onClick).toHaveBeenCalled();
@@ -48,13 +49,11 @@ describe("InputChip", () => {
 
   it("should handle adding valid or invalid chip and detect error state", async () => {
     const result = render(GoAInputChip, {
-      name: "test",
-      testid: "inputTest",
       chipValues: [],
       validValues: ["foo", "bar"],
     });
 
-    const input = result.container.querySelector('goa-input')
+    const input = result.container.querySelector("goa-input");
     expect(input).toBeDefined();
 
     // Enter a valid chip value
@@ -67,7 +66,11 @@ describe("InputChip", () => {
       await fireEvent.keyDown(input, { key: "Enter" });
     }
 
-    expect(result.container.querySelector("goa-input[error=\"false\"] goa-filter-chip[content=\"foo\"][error=\"false\"]")).toBeDefined();
+    expect(
+      result.container.querySelector(
+        'goa-input[error="false"] goa-filter-chip[content="foo"][error="false"]',
+      ),
+    ).toBeDefined();
 
     // Enter an invalid chip value
     if (input) {
@@ -79,6 +82,30 @@ describe("InputChip", () => {
       await fireEvent.keyDown(input, { key: "Enter" });
     }
 
-    expect(result.container.querySelector("goa-input[error=\"true\"] goa-filter-chip[content=\"invalid value\"][error=\"true\"]")).toBeDefined();
+    expect(
+      result.container.querySelector(
+        'goa-input[error="true"] goa-filter-chip[content="invalid value"][error="true"]',
+      ),
+    ).toBeDefined();
+  });
+
+  it("should pass attributes down to Input component shadow DOM", async () => {
+    const el = render(GoAInputChipWrapper, {
+      testid: "input-test",
+      name: "test",
+      id: "test",
+      chipValues: ["foo", "bar"],
+    });
+
+    const input = el.container.querySelector("goa-input");
+    expect(input).toBeTruthy();
+    expect(input?.querySelector('goa-filter-chip[content="foo"]')).toBeTruthy();
+    expect(input?.querySelector('goa-filter-chip[content="bar"]')).toBeTruthy();
+
+    await tick();
+    const inputEl = input?.shadowRoot?.querySelector("input");
+    expect(inputEl).toBeTruthy();
+    expect(inputEl?.getAttribute("name")).toBe("test");
+    expect(inputEl?.getAttribute("id")).toBe("test");
   });
 });
