@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import { Margins } from "@abgov/ui-components-common";
+import { Margins, GoabFilterChipTheme } from "@abgov/ui-components-common";
 
 export type GoAFilterChipTheme = "outline" | "filled";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
-  icontheme: GoAFilterChipTheme;
+  icontheme: GoabFilterChipTheme;
   error: boolean;
   content: string;
 }

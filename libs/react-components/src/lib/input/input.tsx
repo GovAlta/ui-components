@@ -28,7 +28,7 @@ interface WCProps extends Margins {
   error?: boolean;
   readonly?: boolean;
   focused?: boolean;
-  handletrailingiconclick: boolean;
+  handletrailingiconclick?: boolean;
   width?: string;
   prefix?: string;
   suffix?: string;

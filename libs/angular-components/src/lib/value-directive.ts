@@ -14,8 +14,8 @@ export class ValueDirective implements ControlValueAccessor {
   private _disabled = false;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  onChange: any = () => { };
-  onTouched: any = () => { };
+  onChange: any = () => { /* default implementation */ };
+  onTouched: any = () => { /* default implementation */ };
 
   get value(): string {
     return this._value;
