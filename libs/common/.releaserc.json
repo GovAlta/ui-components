@@ -5,7 +5,7 @@
     [
       "@abgov/nx-release",
       {
-        "project": "ui-components-common"
+        "project": "common"
       }
     ],
     [

@@ -25,8 +25,8 @@ export class CheckedDirective extends CheckboxControlValueAccessor {
   private _checked = false;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  override onChange: any = () => { };
-  override onTouched: any = () => { };
+  override onChange: any = () => {/** No implementation **/ };
+  override onTouched: any = () => {/** No implementation **/ };
 
   constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
     super(renderer, elementRef);
