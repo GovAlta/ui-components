@@ -53,7 +53,7 @@ export type GoabDatePickerOnChangeDetail = {
 
 export type GoabChipVariant = "filter";
 
-export type GoabChipTheme = "outline" | "filled" | "sharp";
+export type GoabChipTheme = "outline" | "filled";
 export type GoabFilterChipTheme = "outline" | "filled";
 
 export type GoabCheckboxOnChangeDetail = {
