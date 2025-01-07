@@ -108,8 +108,6 @@
   }
 
   function setCurrentLink() {
-    const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-
     // Combine all links
     let links = [..._appHeaderLinks];
     _appHeaderMenuItems.forEach((el) => {
