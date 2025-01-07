@@ -12,6 +12,10 @@
       "prerelease": true
     },
     {
+      "name": "alpha-dry-run-release",
+      "prerelease": true
+    },
+    {
       "name": "lts",
       "channel": "lts"
     }
