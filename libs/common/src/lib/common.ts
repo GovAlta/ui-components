@@ -1,4 +1,5 @@
 export type GoabSpinnerType = "infinite" | "progress";
+
 export type GoabSpinnerSize = "small" | "medium" | "large" | "xlarge";
 
 export type GoabRadioGroupOnChangeDetail = {
