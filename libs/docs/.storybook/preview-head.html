@@ -1,0 +1,175 @@
+<script
+  type="module"
+  src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule=""
+  src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"
+></script>
+
+<style>
+  @font-face {
+    font-family: "acumin-pro-semi-condensed";
+    src: url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/l?subset_id=1&fvd=n4&v=3")
+        format("woff2"),
+      url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/d?subset_id=1&fvd=n4&v=3")
+        format("woff"),
+      url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/a?subset_id=1&fvd=n4&v=3")
+        format("opentype");
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "acumin-pro-semi-condensed";
+    src: url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/l?subset_id=1&fvd=i4&v=3")
+        format("woff2"),
+      url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/d?subset_id=1&fvd=i4&v=3")
+        format("woff"),
+      url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/a?subset_id=1&fvd=i4&v=3")
+        format("opentype");
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "acumin-pro-semi-condensed";
+    src: url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/l?subset_id=1&fvd=n7&v=3")
+        format("woff2"),
+      url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/d?subset_id=1&fvd=n7&v=3")
+        format("woff"),
+      url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/a?subset_id=1&fvd=n7&v=3")
+        format("opentype");
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: "acumin-pro-semi-condensed";
+    src: url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/l?subset_id=1&fvd=i7&v=3")
+        format("woff2"),
+      url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/d?subset_id=1&fvd=i7&v=3")
+        format("woff"),
+      url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/a?subset_id=1&fvd=i7&v=3")
+        format("opentype");
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: "acumin-pro-semi-condensed";
+    src: url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/l?subset_id=1&fvd=n6&v=3")
+        format("woff2"),
+      url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/d?subset_id=1&fvd=n6&v=3")
+        format("woff"),
+      url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/a?subset_id=1&fvd=n6&v=3")
+        format("opentype");
+    font-style: normal;
+    font-weight: 600;
+  }
+</style>
+
+<style>
+  *:not(pre, code, pre span, code span) {
+    font-family: acumin-pro-semi-condensed, sans-serif !important;
+  }
+
+  body,
+  input,
+  textarea,
+  textarea,
+  p,
+  li {
+    font-size: var(--fs-base) !important;
+  }
+
+  a {
+    color: var(--goa-color-interactive) !important;
+    cursor: pointer !important;
+  }
+
+  a:hover {
+    color: var(--goa-color-interactive--hover) !important;
+  }
+
+  a:focus {
+    outline-width: thin !important;
+    outline-style: solid !important;
+    outline-color: var(--goa-color-interactive--hover) !important;
+    outline-offset: 0px !important;
+  }
+
+  a[target="_blank"] {
+    text-decoration: underline !important;
+  }
+
+  a[target="_blank"]::after {
+    padding-left: 4px;
+    content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMTYiIGhlaWdodD0iMTYiCnZpZXdCb3g9IjAgMCAxNiAxNiIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij48cGF0aCBkPSJNIDkgMiBMIDkgMyBMIDEyLjI5Mjk2OSAzIEwgNi4wMjM0MzggOS4yNzM0MzggTCA2LjcyNjU2MyA5Ljk3NjU2MyBMIDEzIDMuNzA3MDMxIEwgMTMgNyBMIDE0IDcgTCAxNCAyIFogTSA0IDQgQyAyLjg5NDUzMSA0IDIgNC44OTQ1MzEgMiA2IEwgMiAxMiBDIDIgMTMuMTA1NDY5IDIuODk0NTMxIDE0IDQgMTQgTCAxMCAxNCBDIDExLjEwNTQ2OSAxNCAxMiAxMy4xMDU0NjkgMTIgMTIgTCAxMiA3IEwgMTEgOCBMIDExIDEyIEMgMTEgMTIuNTUwNzgxIDEwLjU1MDc4MSAxMyAxMCAxMyBMIDQgMTMgQyAzLjQ0OTIxOSAxMyAzIDEyLjU1MDc4MSAzIDEyIEwgMyA2IEMgMyA1LjQ0OTIxOSAzLjQ0OTIxOSA1IDQgNSBMIDggNSBMIDkgNCBaIj48L3BhdGg+PC9zdmc+) !important;
+  }
+
+  hr {
+    border-width: 0 !important;
+    border-top: 1px solid #ccc !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 3rem 0 !important;
+  }
+
+  /* Typography */
+  h2[class^="css-"]:first-of-type {
+    margin-top: 1rem !important;
+  }
+
+  h1 {
+    font-size: var(--fs-3xl) !important;
+    line-height: var(--lh-2xl) !important;
+    font-weight: var(--fw-bold) !important;
+  }
+  h2 {
+    font-size: var(--fs-2xl) !important;
+    line-height: var(--lh-xl) !important;
+    font-weight: var(--fw-regular) !important;
+    border-bottom: none !important;
+  }
+  h3 {
+    font-size: var(--fs-xl) !important;
+    line-height: var(--lh-lg) !important;
+    font-weight: var(--fw-regular) !important;
+  }
+
+  h4 {
+    margin-top: 2rem !important;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: var(--fs-base) !important;
+    line-height: var(--lh-base) !important;
+    font-weight: var(--fw-bold) !important;
+  }
+
+  h3 + h1 {
+    margin-top: -1rem !important;
+  }
+
+  goa-container
+    h1:first-of-type
+    goa-container
+    h2:first-of-type
+    goa-container
+    h3:first-of-type {
+    margin-top: 0;
+  }
+
+  goa-app-footer-meta-section a {
+    color: var(--goa-color-text) !important;
+    white-space: nowrap;
+  }
+
+  goa-two-column-layout [slot="nav"] a {
+    display: block;
+    padding: 0.5rem 0;
+  }
+</style>

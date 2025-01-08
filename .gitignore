@@ -1,0 +1,103 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+node_modules/
+
+# Dist folder
+dist
+
+# Coverage
+coverage
+
+# Storybook build output
+storybook-static/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+out
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
+
+# vuepress build output
+.vuepress/dist
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# s2i output folder for image creation testing
+.s2i/output/
+libs/angular-components/documentation.json
+/samples/angular/package-lock.json
+/samples/core/package-lock.json
+/samples/vue/package-lock.json
+/.vs
+
+tmp
+apps/angular-demo-e2e/src/cucumber-json/radio-component.cucumber.json
+apps/angular-demo-e2e/src/cucumber-json/input-component.cucumber.json
+apps/angular-demo-e2e/src/cucumber-json/current-sprint-noop.cucumber.json
+apps/angular-demo-e2e/src/cucumber-json/checkbox-component.cucumber.json
+apps/angular-demo-e2e/src/cucumber-json/callout-component.cucumber.json
+apps/angular-demo-e2e/src/cucumber-json/button-component.cucumber.json
+apps/angular-demo-e2e/src/cucumber-json/current-sprint-noop.cucumber.json
+apps/angular-demo-e2e/src/cucumber-json/button-component.cucumber.json
+
+.angular

@@ -1,0 +1,89 @@
+name: Prod Release CI
+
+on:
+  push:
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci
+      - name: Lint
+        run: npx nx run-many --target=lint --all
+      - name: Test
+        run: npx nx run-many --target=test --all
+      - name: Build
+        run: |
+          npx nx run-many --target=build --all --prod --with-deps
+          npx nx run-many --target=post --all
+      - name: Build Storybooks
+        run: |
+          npm run build:docs-storybook
+          cp nginx.conf dist/storybook
+      - name: Oc login
+        uses: redhat-actions/oc-login@v1
+        with:
+          # URL to your OpenShift cluster.
+          # Refer to Step 2.
+          openshift_server_url: ${{ secrets.ARO_SERVER }}
+          openshift_token: ${{ secrets.ARO_TOKEN }}
+
+          # Disables SSL cert checking. Use this if you don't have the certificate authority data.
+          insecure_skip_tls_verify: true
+          # This method is more secure, if the certificate from Step 4 is available.
+          # certificate_authority_data: ${{ secrets.CA_DATA }}
+
+          # Optional - this sets your Kubernetes context's current namespace after logging in.
+          namespace: ui-components-build
+      - name: Start Build
+        run: oc start-build ui-components --from-dir dist/storybook --follow --wait
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx nx run-many --target release --all
+
+  deployProd:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-20.04
+    needs: build
+    environment:
+      name: Prod
+    steps:
+      - name: Oc login
+        uses: redhat-actions/oc-login@v1
+        with:
+          # URL to your OpenShift cluster.
+          # Refer to Step 2.
+          openshift_server_url: ${{ secrets.ARO_SERVER }}
+          openshift_token: ${{ secrets.ARO_TOKEN }}
+
+          # Disables SSL cert checking. Use this if you don't have the certificate authority data.
+          insecure_skip_tls_verify: true
+          # This method is more secure, if the certificate from Step 4 is available.
+          # certificate_authority_data: ${{ secrets.CA_DATA }}
+
+          # Optional - this sets your Kubernetes context's current namespace after logging in.
+          namespace: ui-components-build
+      - name: Tag Dev
+        run: oc tag ui-components:latest ui-components:prod
+      - name: Deploy Dev
+        run: |
+          oc project ui-components-prod
+          oc rollout latest dc/ui-components

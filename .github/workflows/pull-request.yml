@@ -1,0 +1,35 @@
+name: Pull Request Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - beta
+      - alpha
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci
+      # Run with the target branch as the base.
+      - name: Lint
+        run: npx nx affected --target=lint --base=origin/${{ github.base_ref }}
+      - name: Test
+        run: npx nx affected --target=test --base=origin/${{ github.base_ref }}
+      - name: Build
+        run: |
+          npm run build:styles 
+          npx nx affected --target=build --base=origin/${{ github.base_ref }}
+          npx nx affected --target=post --base=origin/${{ github.base_ref }}

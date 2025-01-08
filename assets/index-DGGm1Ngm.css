@@ -1,0 +1,364 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");/* You can add global styles to this file, and also import other style files */
+
+body,
+input,
+textarea,
+button,
+textarea {
+  background: #fff;
+  font-family: var(--goa-font-family-sans);
+  font-weight: 400;
+  font-size: var(--goa-font-size-4);
+  color: var(--goa-color-text-default);
+}
+body {
+  margin: 0;
+  scroll-behavior: smooth;
+  line-height: var(--goa-line-height-3);
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+p {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+hr {
+  border-width: 0;
+  border-top: 1px solid #ccc;
+  height: 0;
+  padding: 0;
+  margin: 2rem 0;
+}
+ul,
+ol {
+  padding-left: 0;
+  padding-left: 1rem;
+}
+li > ul,
+li > ol,
+li > ul,
+li > ol {
+  padding-left: 0;
+  margin-top: 0;
+}
+dl {
+  margin-top: 0;
+}
+dd {
+  margin-left: 0.5rem;
+}
+a,
+a:visited {
+  color: var(--goa-color-interactive-default);
+  cursor: pointer;
+}
+a:hover {
+  color: var(--goa-color-interactive-hover);
+}
+::-moz-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #999;
+  opacity: 1;
+  /* Firefox */
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #999;
+  opacity: 1;
+  /* Firefox */
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #999;
+}
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #999;
+}
+h1 {
+  font: var(--goa-typography-heading-xl);
+}
+h2 {
+  font: var(--goa-typography-heading-l);
+}
+h3 {
+  font: var(--goa-typography-heading-m);
+}
+h4 {
+  font: var(--goa-typography-heading-s);
+}
+h5,
+h6 {
+  font: var(--goa-typography-heading-xs);
+}
+h3 + h1 {
+  margin-top: -1rem;
+}
+p {
+  margin-bottom: 1rem;
+  font-size: var(--goa-font-size-4);
+}
+em {
+  font-size: var(--goa-font-size-1);
+  line-height: var(--goa-line-height-1);
+  color: var(--goa-color-greyscale-200);
+}
+small {
+  font-size: var(--goa-font-size-1);
+  font-style: normal;
+  color: var(--goa-color-greyscale-200);
+}
+/* TODO: move these styles into the component using either the ::slotted or :global */
+/* Components */
+goa-two-column-layout h1:first-of-type,
+goa-two-column-layout h2:first-of-type,
+goa-two-column-layout h3:first-of-type,
+goa-three-column-layout h1:first-of-type,
+goa-three-column-layout h2:first-of-type,
+goa-three-column-layout h3:first-of-type,
+goa-container h1:first-of-type,
+goa-container h2:first-of-type,
+goa-container h3:first-of-type {
+  margin-top: 0;
+}
+@font-face {
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/l?subset_id=1&fvd=n4&v=3") format("woff2"),
+    url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/d?subset_id=1&fvd=n4&v=3") format("woff"),
+    url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/a?subset_id=1&fvd=n4&v=3") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/l?subset_id=1&fvd=i4&v=3") format("woff2"),
+    url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/d?subset_id=1&fvd=i4&v=3") format("woff"),
+    url("https://use.typekit.net/af/761912/00000000000000003b9acb2e/27/a?subset_id=1&fvd=i4&v=3") format("opentype");
+  font-style: italic;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/l?subset_id=1&fvd=n7&v=3") format("woff2"),
+    url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/d?subset_id=1&fvd=n7&v=3") format("woff"),
+    url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/a?subset_id=1&fvd=n7&v=3") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+}
+@font-face {
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/l?subset_id=1&fvd=i7&v=3") format("woff2"),
+    url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/d?subset_id=1&fvd=i7&v=3") format("woff"),
+    url("https://use.typekit.net/af/503f80/00000000000000003b9acb34/27/a?subset_id=1&fvd=i7&v=3") format("opentype");
+  font-style: italic;
+  font-weight: 700;
+}
+@font-face {
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/l?subset_id=1&fvd=n6&v=3") format("woff2"),
+    url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/d?subset_id=1&fvd=n6&v=3") format("woff"),
+    url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/a?subset_id=1&fvd=n6&v=3") format("opentype");
+  font-style: normal;
+  font-weight: 600;
+}
+@font-face {
+  font-family: "roboto-mono";
+  src: url("https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_ROW4.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+:root {
+	/* acumin font requires this to allow for vertical alignment  */
+	--font-valign-fix: 0.1rem;
+
+	--shadow-0: 0 0 rgba(0, 0, 0, 0);
+	--shadow-1: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.24);
+	--shadow-2: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+	--shadow-3: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+	--shadow-4: 0 15px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05);
+	--shadow-5: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+ol.goa-ordered-list li,
+ul.goa-unordered-list li {
+  padding: var(--goa-space-xs);
+}
+ol.goa-ordered-list ol,
+ol.goa-ordered-list ul,
+ul.goa-unordered-list ol,
+ul.goa-unordered-list ul {
+  margin-left: var(--goa-space-l);
+}
+ul.goa-unordered-list li::marker {
+  color: var(--goa-color-brand-default);
+}
+/* GoAAppHeader */
+/** needed to override a,
+a:visited at reset.css */
+goa-app-header a,
+goa-app-header a:visited {
+  color: var(--goa-color-text-default);
+}
+goa-app-header a.current.inside-collapse-menu,
+goa-app-header a.current.inside-collapse-menu:hover,
+goa-app-header-menu a.current,
+goa-app-header-menu a.current:hover {
+  color: var(--goa-color-text-light);
+}
+goa-app-header-menu a:first-of-type {
+  box-shadow: none;
+}
+/* Table */
+goa-table table {
+  border-collapse: collapse;
+}
+goa-table.sticky thead {
+  position: sticky;
+  top: 0;
+}
+goa-table td {
+  font: var(--goa-typography-body-m);
+  padding: var(--goa-space-xs) var(--goa-space-m) var(--goa-space-xs);
+  border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  vertical-align: top;
+  box-sizing: border-box;
+  height: var(--goa-space-2xl);
+}
+goa-table[variant="relaxed"] td {
+  padding: var(--goa-space-m);
+}
+goa-table thead th {
+  background-color: var(--goa-color-greyscale-white);
+  color: var(--goa-color-text-secondary);
+  padding:
+  var(--goa-space-s)
+  var(--goa-table-header-padding, var(--goa-space-m))
+  var(--goa-space-xs) var(--goa-table-header-padding, var(--goa-space-m));
+  text-align: left;
+  border-bottom: var(--goa-border-width-m) solid var(--goa-color-greyscale-600);
+  vertical-align: bottom;
+  }
+.goa-table-number-column {
+  font: var(--goa-typography-number-m);
+  text-align: right;
+}
+.goa-table-number-header {
+  text-align: right;
+}
+.goa-table-number-header:not(:has(goa-table-sort-header)) {
+  padding-bottom: var(--goa-space-xs);
+}
+goa-table thead th:has(goa-table-sort-header) {
+  padding-bottom: 0rem;
+}
+goa-table tfoot td {
+  background-color: var(--goa-color-greyscale-100);
+}
+goa-table tfoot tr:first-child td {
+  border-top: var(--goa-border-width-m) solid var(--goa-color-greyscale-200);
+}
+goa-table tfoot tr:last-child td {
+  border-bottom: none;
+}
+/**
+ * Do not edit directly
+ * Generated on Tue, 11 Jun 2024 15:00:35 GMT
+ */
+:root {
+  --goa-color-brand-default: #0081a2;
+  --goa-color-brand-dark: #005072;
+  --goa-color-brand-light: #c8eefa;
+  --goa-color-interactive-default: #0070c4;
+  --goa-color-interactive-hover: #004f84;
+  --goa-color-interactive-error: #ec040b;
+  --goa-color-interactive-focus: #feba35;
+  --goa-color-interactive-disabled: #80b7e1;
+  --goa-color-text-default: #333333;
+  --goa-color-text-secondary: #666666;
+  --goa-color-text-light: #ffffff;
+  --goa-color-text-disabled: #666666;
+  --goa-color-info-default: #004a8f;
+  --goa-color-info-light: #aac9e7;
+  --goa-color-info-dark: #003b70;
+  --goa-color-info-background: #eff8ff;
+  --goa-color-warning-default: #f9ce2d;
+  --goa-color-warning-light: #ffeab6;
+  --goa-color-warning-dark: #bf8d23;
+  --goa-color-warning-background: #fff6e5;
+  --goa-color-emergency-default: #da291c;
+  --goa-color-emergency-light: #fbd1ce;
+  --goa-color-emergency-dark: #a91a10;
+  --goa-color-emergency-background: #fff1f2;
+  --goa-color-success-default: #006f4c;
+  --goa-color-success-light: #cce4dc;
+  --goa-color-success-dark: #00563a;
+  --goa-color-success-background: #eef9f3;
+  --goa-color-greyscale-50: #f8f8f8;
+  --goa-color-greyscale-100: #f1f1f1;
+  --goa-color-greyscale-200: #dcdcdc;
+  --goa-color-greyscale-400: #adadad;
+  --goa-color-greyscale-500: #949494;
+  --goa-color-greyscale-600: #858585;
+  --goa-color-greyscale-700: #666666;
+  --goa-color-greyscale-black: #333333;
+  --goa-color-greyscale-white: #ffffff;
+  --goa-font-weight-regular: 400;
+  --goa-font-weight-medium: 500;
+  --goa-font-weight-bold: 700;
+  --goa-font-size-1: 0.75rem;
+  --goa-font-size-2: 0.875rem;
+  --goa-font-size-3: 1rem;
+  --goa-font-size-4: 1.125rem;
+  --goa-font-size-5: 1.25rem;
+  --goa-font-size-6: 1.375rem;
+  --goa-font-size-7: 1.5rem;
+  --goa-font-size-8: 2rem;
+  --goa-font-size-9: 2.25rem;
+  --goa-font-size-10: 3rem;
+  --goa-space-none: 0rem;
+  --goa-space-3xs: 0.125rem;
+  --goa-space-2xs: 0.25rem;
+  --goa-space-xs: 0.5rem;
+  --goa-space-s: 0.75rem;
+  --goa-space-m: 1rem;
+  --goa-space-l: 1.5rem;
+  --goa-space-xl: 2rem;
+  --goa-space-2xl: 3rem;
+  --goa-space-3xl: 4rem;
+  --goa-space-4xl: 8rem;
+  --goa-border-radius-none: 0rem;
+  --goa-border-radius-m: 0.25rem;
+  --goa-opacity-background-modal: 50%;
+  --goa-opacity-background-loading: 90%;
+  --goa-line-height-1: 1.25rem;
+  --goa-line-height-2: 1.5rem;
+  --goa-line-height-3: 1.75rem;
+  --goa-line-height-4: 2rem;
+  --goa-line-height-5: 2.5rem;
+  --goa-line-height-6: 2.75rem;
+  --goa-line-height-7: 3.5rem;
+  --goa-line-height-05: 1.125rem;
+  --goa-font-family-sans: acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-font-family-number: roboto-mono, monospace;
+  --goa-typography-heading-xs: 700 1rem/1.5rem acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-typography-heading-s: 700 1.125rem/1.75rem acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-typography-heading-m: 400 1.5rem/2rem acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-typography-heading-l: 400 2.25rem/2.75rem acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-typography-heading-xl: 700 3rem/3.5rem acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-typography-body-xs: 400 0.875rem/1.25rem acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-typography-body-s: 400 1rem/1.5rem acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-typography-body-m: 400 1.125rem/1.75rem acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-typography-body-l: 400 1.5rem/2rem acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-typography-button-default: 400 1.125rem/1.25rem acumin-pro-semi-condensed, helvetica-neue, arial, sans-serif;
+  --goa-typography-number-m: 500 1.125rem/1.75rem roboto-mono, monospace;
+  --goa-border-width-s: 1px;
+  --goa-border-width-m: 2px;
+  --goa-border-width-l: 3px;
+  --goa-letter-spacing-button: 0.0125rem;
+  --goa-icon-size-s: 1rem;
+  --goa-icon-size-m: 1.25rem;
+  --goa-icon-size-l: 1.5rem;
+  --goa-shadow-modal: 6px 6px 6px 0px rgba(0,0,0,0.16);
+}

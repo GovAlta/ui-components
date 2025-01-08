@@ -1,0 +1,17 @@
+name: "Close stale issues"
+on:
+  workflow_dispatch:
+    branches:
+      - alpha
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          days-before-stale: 65
+          days-before-close: 0
+          stale-issue-message: "This issue is being closed as stale"
+          close-issue-message: "The design system team has moved this issue to Jira and will be tracking it there. All new issues will be created and tracked in Jira"
