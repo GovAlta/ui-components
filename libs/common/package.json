@@ -1,8 +1,25 @@
 {
   "name": "@abgov/ui-components-common",
   "version": "0.0.0",
+  "bugs": {
+    "url": "https://github.com/GovAlta/ui-components/issues"
+  },
+   "keywords": [
+    "Goab",
+    "ui-components",
+    "common"
+  ],
+   "repository": {
+    "type": "git",
+    "url": "https://github.com/GovAlta/ui-components.git",
+    "directory": "libs/common"
+  },
+  "license": "Apache-2.0",
   "description": "Government of Alberta - UI Web components",
   "type": "module",
   "main": "./index.js",
-  "module": "./index.js"
+  "module": "./index.js",
+  "publishConfig": {
+    "access": "public"
+  }
 }
