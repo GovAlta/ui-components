@@ -132,8 +132,6 @@ export type GoabButtonGroupGap = "relaxed" | "compact";
 export type GoabAccordionHeadingSize = "small" | "medium";
 export type GoabAccordionIconPosition = "left" | "right";
 
-// Formstepper
-
 // Tooltip
 
 export type GoabTooltipPosition = "top" | "bottom" | "left" | "right";
