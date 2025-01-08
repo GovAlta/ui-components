@@ -11,7 +11,8 @@
     [
       "@semantic-release/npm",
       {
-        "pkgRoot": "dist/libs/common"
+        "pkgRoot": "dist/libs/common",
+        "npmPublish": true
       }
     ],
     "@semantic-release/github"
