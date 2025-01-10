@@ -39,7 +39,7 @@ function dispatchError(el: HTMLElement, name: string, msg: string) {
 }
 
 export class FormValidator {
-  private validators: Record<string, FieldValidator[]>;
+  private readonly validators: Record<string, FieldValidator[]>;
   constructor(validators?: Record<string, FieldValidator[]>) {
     this.validators = validators || {};
   }

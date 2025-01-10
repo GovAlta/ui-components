@@ -1,4 +1,4 @@
-import { Margins, Spacing } from "../../common/styling";
+import { Margins, Spacing } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   gap?: Spacing;
@@ -15,14 +15,14 @@ declare global {
   }
 }
 
-export interface GoAGridProps extends Margins {
+export interface GoabGridProps extends Margins {
   gap?: Spacing;
   minChildWidth: string;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export function GoAGrid({
+export function GoabGrid({
   gap,
   minChildWidth,
   mt,
@@ -31,12 +31,12 @@ export function GoAGrid({
   ml,
   testId,
   children,
-}: GoAGridProps): JSX.Element {
+}: GoabGridProps): JSX.Element {
   return (
     <goa-grid
       gap={gap}
-      mt={mt}
       minchildwidth={minChildWidth}
+      mt={mt}
       mr={mr}
       mb={mb}
       ml={ml}
@@ -47,4 +47,4 @@ export function GoAGrid({
   );
 }
 
-export default GoAGrid;
+export default GoabGrid;

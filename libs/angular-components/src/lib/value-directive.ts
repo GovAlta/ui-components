@@ -1,6 +1,7 @@
 import { forwardRef, Directive, ElementRef, HostListener } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
+// @deprecated: Use the new <goab-input .. /> component
 @Directive({
   selector: "[goaValue]", providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -13,8 +14,8 @@ export class ValueDirective implements ControlValueAccessor {
   private _disabled = false;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  onChange: any = () => { };
-  onTouched: any = () => { };
+  onChange: any = () => { /* default implementation */ };
+  onTouched: any = () => { /* default implementation */ };
 
   get value(): string {
     return this._value;

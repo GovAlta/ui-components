@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
 
 interface WCProps {
   initialtab?: number;
@@ -16,27 +17,27 @@ declare global {
   }
 }
 
-export interface GoATabsProps {
+export interface GoabTabsProps {
   initialTab?: number;
   children?: React.ReactNode;
   testId?: string;
-  onChange?: (tab: number) => void;
+  onChange?: (detail: GoabTabsOnChangeDetail) => void;
 }
 
-export function GoATabs({
+export function GoabTabs({
   initialTab,
   children,
   testId,
   onChange,
-}: GoATabsProps): JSX.Element {
+}: GoabTabsProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const element = ref.current;
     if (element && onChange) {
       const handler = (event: Event) => {
-        const customEvent = event as CustomEvent;
-        onChange(customEvent.detail.tab);
+        const detail = (event as CustomEvent<GoabTabsOnChangeDetail>).detail;
+        onChange(detail);
       };
       element.addEventListener("_change", handler);
       return () => {
@@ -52,4 +53,4 @@ export function GoATabs({
   );
 }
 
-export default GoATabs;
+export default GoabTabs;

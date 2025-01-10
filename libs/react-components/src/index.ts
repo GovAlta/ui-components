@@ -59,8 +59,6 @@ export * from "./lib/three-column-layout/three-column-layout";
 export * from "./lib/tooltip/tooltip";
 export * from "./lib/two-column-layout/two-column-layout";
 export * from "./lib/filter-chip/filter-chip";
-
 export * from "./lib/work-side-menu/work-side-menu";
 export * from "./lib/work-side-menu-item/work-side-menu-item";
-
 export * from "./common/styling";

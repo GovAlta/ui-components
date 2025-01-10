@@ -1,0 +1,60 @@
+<h1>Hero Banner</h1>
+
+<h2>Default</h2>
+<goab-hero-banner heading="Hero Banner">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,
+  eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis
+  hic!
+</goab-hero-banner>
+
+<h2>Default with actions</h2>
+<goab-hero-banner heading="Hero Banner" [actions]="action1">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,
+  eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis
+  hic!
+  <ng-template #action1>
+    <goab-button-group>
+      <goab-button>Action</goab-button>
+      <goab-button type="tertiary">Other Action</goab-button>
+    </goab-button-group>
+  </ng-template>
+</goab-hero-banner>
+
+<h2>Background image With Actions</h2>
+<goab-hero-banner heading="Hero Banner" [actions]="action2"
+                  backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,
+  eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis
+  hic!
+  <ng-template #action2>
+    <goab-button-group>
+      <goab-button>Action</goab-button>
+      <goab-button type="secondary">Other Action</goab-button>
+    </goab-button-group>
+  </ng-template>
+</goab-hero-banner>
+
+<h2>Min Height</h2>
+<goab-hero-banner heading="Hero Banner"
+                  backgroundUrl="https://i.picsum.photos/id/1076/600/400.jpg?hmac=iLAZWoEDYRRPGnsbx7aWOGf-olRn3R5eOLDgH_IfXRw"
+                  minHeight="700px">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,
+  eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis
+  hic!
+</goab-hero-banner>
+
+<h2>Custom background and text colors</h2>
+<goab-hero-banner heading="Colorful Banner"
+                  backgroundColor="linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)"
+                  textColor="yellow"
+                  [actions]="action3">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur optio,
+  eius expedita, quasi vero maxime, laudantium voluptates eaque illum officiis
+  hic!
+  <ng-template #action3>
+    <goab-button-group>
+      <goab-button>Action</goab-button>
+      <goab-button type="tertiary">Other Action</goab-button>
+    </goab-button-group>
+  </ng-template>
+</goab-hero-banner>

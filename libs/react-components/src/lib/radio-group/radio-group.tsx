@@ -1,15 +1,17 @@
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
+import {
+  GoabRadioGroupOnChangeDetail,
+  GoabRadioGroupOrientation,
+  Margins,
+} from "@abgov/ui-components-common";
 
 export * from "./radio";
-
-export type GoARadioGroupOrientation = "horizontal" | "vertical";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   name: string;
   value?: string;
-  orientation?: GoARadioGroupOrientation;
+  orientation?: GoabRadioGroupOrientation;
   disabled?: boolean;
   error?: boolean;
   arialabel?: string;
@@ -25,19 +27,19 @@ declare global {
   }
 }
 
-export interface GoARadioGroupProps extends Margins {
+export interface GoabRadioGroupProps extends Margins {
   name: string;
   value?: string;
   disabled?: boolean;
-  orientation?: GoARadioGroupOrientation;
+  orientation?: GoabRadioGroupOrientation;
   testId?: string;
   error?: boolean;
   ariaLabel?: string;
   children?: React.ReactNode;
-  onChange?: (name: string, value: string) => void;
+ onChange: (detail: GoabRadioGroupOnChangeDetail) => void;
 }
 
-export function GoARadioGroup({
+export function GoabRadioGroup({
   name,
   value,
   children,
@@ -51,23 +53,24 @@ export function GoARadioGroup({
   mb,
   ml,
   onChange,
-}: GoARadioGroupProps): JSX.Element {
-
+}: GoabRadioGroupProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!el.current) {
-      return;
-    }
-    const listener = (e: unknown) => {
+    if (!el.current) return;
+
+    const listener = (e: Event) => {
       if (!onChange) {
         console.warn("Missing onChange function");
         return;
       }
-      onChange(name, (e as CustomEvent).detail.value);
+      const detail = (e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail;
+      onChange(detail);
     };
+
     const currentEl = el.current;
     currentEl.addEventListener("_change", listener);
+
     return () => {
       currentEl.removeEventListener("_change", listener);
     };
@@ -93,4 +96,4 @@ export function GoARadioGroup({
   );
 }
 
-export default GoARadioGroup;
+export default GoabRadioGroup;

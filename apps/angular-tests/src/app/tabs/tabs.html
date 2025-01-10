@@ -1,0 +1,31 @@
+<goab-tabs initialtab="2">
+  <goab-tab heading="heading1">
+    <ng-template #heading1>Profile</ng-template>
+    <p>
+      <b>Profile:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+  </goab-tab>
+  <goab-tab [heading]="heading">
+    <ng-template #heading>
+      Review pending
+      <goab-badge type="important" content="1"></goab-badge>
+    </ng-template>
+    <p>
+      <b>Review pending:</b> Lorem ipsum dolor sit amet, consectetur adipiscing
+      elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+  </goab-tab>
+  <goab-tab [heading]="completed">
+    <ng-template #completed>
+      Completed
+      <goab-badge type="midtone" content="1"></goab-badge>
+    </ng-template>
+    <p>
+      <b>Completed:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+    <p>New text</p>
+  </goab-tab>
+  <goab-tab heading="Test 1"> Testing </goab-tab>
+</goab-tabs>

@@ -1,6 +1,7 @@
 import { render, fireEvent } from "@testing-library/react";
 import { describe, it, vi } from "vitest";
 import Table from "./table";
+import { GoabTableOnSortDetail } from "@abgov/ui-components-common";
 
 describe("Table", () => {
 
@@ -14,15 +15,16 @@ describe("Table", () => {
     const { baseElement } = render(<Table onSort={onSort} />);
     const table = baseElement.querySelector("goa-table");
 
+    const event: GoabTableOnSortDetail = { sortBy: "name", sortDir: 1 };
     expect(table).toBeTruthy();
     table && fireEvent(
       table,
       new CustomEvent("_sort", {
-        detail: { sortBy: "name", sortDir: 1 }
+        detail: event
       })
     );
 
-    expect(onSort).toHaveBeenCalledWith("name", 1);
+    expect(onSort).toHaveBeenCalledWith(event);
   });
 
   it("should handle _sort event gracefully when no onSort prop is passed", () => {
@@ -31,12 +33,12 @@ describe("Table", () => {
 
     expect(table).toBeTruthy();
     expect(() =>
-      table && fireEvent(
-        table,
-        new CustomEvent("_sort", {
-          detail: { sortBy: "age", sortDir: -1 }
-        })
-      )
+        table && fireEvent(
+          table,
+          new CustomEvent("_sort", {
+            detail: { sortBy: "age", sortDir: -1 }
+          })
+        )
     ).not.toThrow();
   });
 });

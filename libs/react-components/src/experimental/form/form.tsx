@@ -1,20 +1,11 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
+import { Margins, GoabFormStorageType, GoabFormOnMountDetail, GoabFormOnStateChange } from "@abgov/ui-components-common";
 import { relay } from "../validators";
-
-// TODO: move these types into the common lib for the upcoming major release
-
-export type FormState = {
-  form: Record<string, Record<string, { label: string; value: string }>>;
-  history: string[];
-  editting: string;
-  lastModified?: Date;
-};
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | undefined>;
   name: string;
-  storage: "none" | "local" | "session";
+  storage: GoabFormStorageType;
 }
 
 declare global {
@@ -27,18 +18,15 @@ declare global {
   }
 }
 
-interface GoAFormProps extends Margins {
+interface GoabFormProps extends Margins {
   children: ReactNode;
   name: string;
-  storage: "none" | "local" | "session";
-  onMount: (fn: (next: string) => void) => void;
-  onStateChange?: (
-    id: string,
-    state: Record<string, Record<string, { label: string; value: string }>>,
-  ) => void;
+  storage: GoabFormStorageType;
+  onMount: (e: GoabFormOnMountDetail) => void;
+  onStateChange?: (e: GoabFormOnStateChange) => void;
 }
 
-export function GoASimpleForm({
+export function GoabSimpleForm({
   name,
   storage,
   onMount,
@@ -48,7 +36,7 @@ export function GoASimpleForm({
   mb,
   ml,
   children,
-}: GoAFormProps) {
+}: GoabFormProps) {
   const el = useRef<HTMLElement>();
 
   useEffect(() => {
@@ -69,14 +57,15 @@ export function GoASimpleForm({
       const onContinue = (next: string) => {
         _continueTo(form, next);
       };
-      onMount(onContinue);
+
+      onMount({fn: onContinue});
     }
   }, [el.current]);
 
   useEffect(() => {
     const _stateChange = (e: Event) => {
       const { id, state } = (e as CustomEvent).detail;
-      return onStateChange?.(id, state);
+      return onStateChange?.({id, state});
     };
 
     if (onStateChange) {
@@ -103,3 +92,5 @@ export function GoASimpleForm({
     </goa-simple-form>
   );
 }
+
+export default GoabSimpleForm;

@@ -1,7 +1,10 @@
+import {
+  GoabTextAreaCountBy,
+  GoabTextAreaOnChangeDetail,
+  GoabTextAreaOnKeyPressDetail,
+  Margins,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
-
-type CountBy = "character" | "word";
 
 interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
@@ -15,7 +18,7 @@ interface WCProps extends Margins {
   width?: string;
   maxwidth?: string;
   arialabel?: string;
-  countby?: CountBy;
+  countby?: GoabTextAreaCountBy;
   maxcount?: number;
   testid?: string;
 }
@@ -29,7 +32,7 @@ declare global {
   }
 }
 
-export interface GoATextAreaProps extends Margins {
+export interface GoabTextAreaProps extends Margins {
   name: string;
   value?: string;
   id?: string;
@@ -42,14 +45,14 @@ export interface GoATextAreaProps extends Margins {
   maxWidth?: string;
   testId?: string;
   ariaLabel?: string;
-  countBy?: CountBy;
+  countBy?: GoabTextAreaCountBy;
   maxCount?: number;
 
-  onChange?: (name: string, value: string) => void;
-  onKeyPress?: (name: string, value: string, key: string) => void;
+  onChange: (event: GoabTextAreaOnChangeDetail) => void;
+  onKeyPress?: (event: GoabTextAreaOnKeyPressDetail) => void;
 }
 
-export function GoATextarea({
+export function GoabTextarea({
   name,
   value,
   placeholder,
@@ -69,7 +72,7 @@ export function GoATextarea({
   ml,
   onChange,
   onKeyPress,
-}: GoATextAreaProps): JSX.Element {
+}: GoabTextAreaProps): JSX.Element {
   const el = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -77,9 +80,10 @@ export function GoATextarea({
       return;
     }
     const current = el.current;
-    const listener: EventListener = (e: unknown) => {
-      const { name, value } = (e as CustomEvent).detail;
-      onChange?.(name, value);
+    const listener: EventListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;
+
+      onChange(detail);
     };
 
     current.addEventListener("_change", listener);
@@ -94,8 +98,8 @@ export function GoATextarea({
     }
     const current = el.current;
     const keypressListener = (e: unknown) => {
-      const { name, value, key } = (e as CustomEvent).detail;
-      onKeyPress?.(name, value, key);
+      const detail = (e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail;
+      onKeyPress?.(detail);
     };
 
     current.addEventListener("_keyPress", keypressListener);
@@ -128,5 +132,4 @@ export function GoATextarea({
   );
 }
 
-export { GoATextarea as GoATextArea };
-export default GoATextarea;
+export default GoabTextarea;

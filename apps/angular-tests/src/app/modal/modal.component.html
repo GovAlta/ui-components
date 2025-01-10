@@ -1,0 +1,241 @@
+<goab-button id="button" (onClick)="openModal()">Open Basic Modal with heading is a string</goab-button>
+<goab-modal id="modal" [open]="isOpen" (onClose)="closeModal()" [closable]="true" heading="Do you agree?">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+</goab-modal>
+
+<goab-button id="button2" (onClick)="openModal2()" ml="xs">Open Modal with actions and heading slot</goab-button>
+<goab-modal id="modal2" [open]="isOpen2" [heading]="heading" [actions]="actions">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <ng-template #actions>
+    <goab-button-group alignment="end">
+      <div>Does this have a margin</div>
+      <goab-button type="secondary" (onClick)="closeModal2()">Secondary</goab-button>
+      <goab-button type="primary" (onClick)="closeModal2()">Primary</goab-button>
+    </goab-button-group>
+  </ng-template>
+  <ng-template #heading>Do you agree?</ng-template>
+</goab-modal>
+
+<goab-button-group>
+  <goab-button type="tertiary" (onClick)="showModal('none')">None</goab-button>
+  <goab-button type="tertiary" (onClick)="showModal('slow')">Slow</goab-button>
+  <goab-button type="tertiary" (onClick)="showModal('fast')">Fast</goab-button>
+</goab-button-group>
+<goab-modal id="modal3" [open]="isOpen3" (onClose)="closeModal3()" [closable]="true" [transition]="transition" [heading]="heading3">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <ng-template #heading3>Do you agree?</ng-template>
+</goab-modal>
+
+<goab-button type="tertiary" (onClick)="isOpen4 = true">Route Change</goab-button>
+<goab-modal [open]="isOpen4" [heading]="heading4" [actions]="actions4">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <ng-template #actions4>
+    <goab-button-group alignment="end">
+      <goab-button type="primary" (onClick)="closeModal4()">Primary</goab-button>
+    </goab-button-group>
+  </ng-template>
+  <ng-template #heading4>Route change</ng-template>
+</goab-modal>
+
+<goab-button-group>
+  <goab-button (onClick)="showCalloutModal('information')">Information Callout</goab-button>
+  <goab-button (onClick)="showCalloutModal('important')">Important Callout</goab-button>
+  <goab-button (onClick)="showCalloutModal('success')">Success Callout</goab-button>
+  <goab-button (onClick)="showCalloutModal('emergency')">Emergency Callout</goab-button>
+  <goab-button (onClick)="showCalloutModal('event')">Event Callout</goab-button>
+</goab-button-group>
+<goab-modal type="callout" [open]="isOpen5" (onClose)="closeModal5()" [calloutVariant]="calloutVariant"
+  [closable]="true" [heading]="heading5" [actions]="actions5">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <ng-template #actions5>
+    <goab-button-group alignment="end">
+      <goab-button (onClick)="closeModal5()">Secondary</goab-button>
+      <goab-button (onClick)="closeModal5()">Primary</goab-button>
+    </goab-button-group>
+  </ng-template>
+  <ng-template #heading5>Heading 5</ng-template>
+</goab-modal>
+
+<goab-button id="button" (onClick)="openModal6()">With Actions and heading as HTML</goab-button>
+<goab-modal id="modal" [open]="isOpen6" [heading]="headingWithHTML" [actions]="actions6">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+    obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+    explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores.
+    Eos, eius numquam.
+  </p>
+  <goab-form-item label="First name" ml="xs">
+    <goab-input name="firstName"></goab-input>
+  </goab-form-item>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam.
+  </p>
+  <ng-template #headingWithHTML>Lorem <b>ipsum</b> dolor <b>sit</b> amet</ng-template>
+  <ng-template #actions6>
+    <goab-button-group alignment="end">
+      <goab-button (onClick)="closeModal6()">Secondary</goab-button>
+      <goab-button (onClick)="closeModal6()">Primary</goab-button>
+    </goab-button-group>
+  </ng-template>
+</goab-modal>
+
+<goab-button id="button" (onClick)="openModal7()">Without Actions</goab-button>
+<goab-modal id="modal" [open]="isOpen7" (onClose)="closeModal7()" [closable]="true" [heading]="heading7">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia obcaecati
+    id molestiae, natus dicta, eaque qui iusto similique, libero explicabo
+    eligendi eius laboriosam! Repellendus ducimus officia asperiores. Eos, eius
+    numquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+    obcaecati id molestiae, natus dicta, eaque qui iusto similique, libero
+    explicabo eligendi eius laboriosam! Repellendus ducimus officia asperiores.
+    Eos, eius numquam.
+  </p>
+  <goab-form-item label="First name" ml="xs">
+    <goab-input name="firstName"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Dropdown" ml="xs">
+    <goab-dropdown name="colors" [error]="true" [filterable]="true">
+      <goab-dropdown-item value="red" label="Red"></goab-dropdown-item>
+      <goab-dropdown-item value="green" label="Green"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <ng-template #heading7>Lorem <b>ipsum</b> dolor <b>sit</b> amet</ng-template>
+</goab-modal>
+
+<!-- To show scrollbars -->
+<div style="height: 100vh"></div>

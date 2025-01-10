@@ -1,17 +1,15 @@
+import { GoabChipTheme, GoabChipVariant, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
 
-export type GoAChipVariant = "filter";
-export type GoAChipTheme = "outline" | "filled" | "sharp";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   leadingicon: string;
-  icontheme: GoAChipTheme;
+  icontheme: GoabChipTheme;
   error: boolean;
   deletable: boolean;
   content: string;
-  variant?: GoAChipVariant;
+  variant?: GoabChipVariant;
   testid?: string;
 }
 
@@ -24,18 +22,18 @@ declare global {
   }
 }
 
-export interface GoAChipProps extends Margins {
+export interface GoabChipProps extends Margins {
   onClick?: () => void;
   deletable?: boolean;
   leadingIcon?: string;
-  iconTheme?: GoAChipTheme;
+  iconTheme?: GoabChipTheme;
   error?: boolean;
   content: string;
-  variant?: GoAChipVariant;
+  variant?: GoabChipVariant;
   testId?: string;
 }
 
-export const GoAChip = ({
+export const GoabChip = ({
   leadingIcon = "",
   iconTheme = "outline",
   deletable = false,
@@ -48,7 +46,7 @@ export const GoAChip = ({
   mb,
   ml,
   testId,
-}: GoAChipProps) => {
+}: GoabChipProps) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) return;
@@ -83,4 +81,4 @@ export const GoAChip = ({
   );
 };
 
-export default GoAChip;
+export default GoabChip;

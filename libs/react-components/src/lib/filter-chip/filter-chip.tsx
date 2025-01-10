@@ -1,11 +1,9 @@
 import { useEffect, useRef } from "react";
-import { Margins } from "../../common/styling";
-
-export type GoAFilterChipTheme = "outline" | "filled";
+import { Margins, GoabFilterChipTheme } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
-  icontheme: GoAFilterChipTheme;
+  icontheme: GoabFilterChipTheme;
   error: boolean;
   content: string;
 }
@@ -21,7 +19,7 @@ declare global {
 
 export interface GoAFilterChipProps extends Margins {
   onClick?: () => void;
-  iconTheme?: GoAFilterChipTheme;
+  iconTheme?: GoabFilterChipTheme;
   error?: boolean;
   content: string;
   testId?: string;

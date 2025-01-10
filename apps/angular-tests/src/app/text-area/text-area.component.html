@@ -1,0 +1,52 @@
+<h1>Text Area</h1>
+
+<div [formGroup]="form">
+  <goab-form-item>
+    <goab-textarea formControlName="textarea" countBy="character" [maxCount]="100"></goab-textarea>
+  </goab-form-item>
+  <goab-form-item>
+    <goab-input name="input" formControlName="input"></goab-input>
+  </goab-form-item>
+  Textarea Value: {{ form.controls["textarea"].value | json }}
+  Input Value: {{ form.controls["input"].value | json }}
+</div>
+
+
+<h2>Basic</h2>
+<goab-textarea name="comment-basic" (onChange)="onChange($event)" value="Initial value"></goab-textarea>
+
+
+<h2>Counter</h2>
+<goab-textarea (onChange)="onChange($event)" [value]="boundVal" countBy="word"></goab-textarea>
+
+<h2>Disabled</h2>
+<goab-textarea name="comment-disabled" [disabled]="true"></goab-textarea>
+
+<h2>Placeholder</h2>
+<goab-textarea placeholder="Tell us what you think.." name="comment"></goab-textarea>
+
+<h2>Rows</h2>
+<goab-textarea [rows]="4" name="comment"></goab-textarea>
+
+<h2>Error state</h2>
+<goab-textarea [error]="true" name="comment"></goab-textarea>
+
+<h2>Binding</h2>
+
+<h2>Margin Spacing</h2>
+<goab-textarea mt="m" mb="xs" ml="xl" mr="2xl" name="comment-basic" (onChange)="onChange($event)"
+  value="Initial value"></goab-textarea>
+
+<h2>Reactive Binding</h2>
+{{ reactiveFormCtrl.value }}
+<goab-textarea name="binding" [formControl]="reactiveFormCtrl" [value]="reactiveFormCtrl.value"></goab-textarea>
+
+<h2>Reactive Binding - Disabled</h2>
+<goab-textarea name="comment" [formControl]="reactiveFormCtrl" [attr.disabled]="true"></goab-textarea>
+
+<h2>On Key Press</h2>
+<goab-textarea name="comment-basic" (onKeyPress)="onKeyPress($event)" value="Initial value"></goab-textarea>
+
+<goab-form-item label="Basic" labelSize="regular">
+  <goab-textarea width="60ch" countBy="character" [maxCount]="100" (onChange)="onChange($event)"></goab-textarea>
+</goab-form-item>
