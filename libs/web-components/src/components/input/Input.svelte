@@ -391,9 +391,10 @@
     outline: none;
     transition: box-shadow 0.05s ease-in;
     background-clip: padding-box;
-    display: inline-flex;
+    display: flex;
     align-items: stretch;
     min-width: 100%;
+    min-height: 40px;
     background-color: var(--goa-color-greyscale-white);
 
     /* default border */
@@ -403,7 +404,6 @@
 
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
-    background-color: var(--goa-color-greyscale-white);
   }
 
   .goa-input:not(.error):not(.leading-content):not(.trailing-content):hover:not(
@@ -467,19 +467,25 @@
   }
 
   input {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     color: var(--goa-color-text-default);
     font-size: var(--goa-font-size-4);
 
     padding: calc(var(--goa-space-xs) - 1px) calc(var(--goa-space-s) - 1px);
     line-height: calc(40px - calc(var(--goa-space-xs) * 2));
-
+    height: 40px;
     background-color: transparent;
     width: 100%;
-    flex: 1 1 auto;
+    /* flex: 1 1 auto; */
+    flex: 1;
     font-family: var(--goa-font-family-sans);
     z-index: 1;
     border-radius: var(--goa-border-radius-m);
+    box-sizing: border-box;
+    margin: 0;
+    appearance: none;
+    -webkit-appearance: none;
   }
   input,
   input:focus,
@@ -513,6 +519,30 @@
   }
   .input--disabled input:hover {
     cursor: default !important;
+  }
+
+  /* Date input specific styles */
+  input[type="date"] {
+    position: relative;
+    line-height: 38px;
+  }
+
+  input[type="date"]::-webkit-datetime-edit {
+    line-height: 38px;
+    padding: 0;
+    margin: 0;
+    height: 38px;
+    display: flex;
+    align-items: center;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: var(--goa-space-xs);
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 0;
   }
 
   .prefix,
