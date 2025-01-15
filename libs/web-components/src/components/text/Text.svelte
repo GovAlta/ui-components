@@ -1,18 +1,10 @@
 <svelte:options customElement="goa-text" />
 
 <script lang="ts" context="module">
-  export type TextProps = {
-    as?: TextElement;
-    mt?: Spacing;
-    mb?: Spacing;
-    ml?: Spacing;
-    mr?: Spacing;
-  }
-
   export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5"
   export type TextElement = "span" | "div" | "p";
 
-  type HeadingSize 
+  type HeadingSize
     = "heading-xl"
     | "heading-l"
     | "heading-m"
@@ -42,7 +34,7 @@
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
-  export let mb: Spacing = "m";
+  export let mb: Spacing = null;
   export let ml: Spacing = null;
 
   const sizeMap: Record<HeadingElement | TextElement, HeadingSize | BodySize> = {
@@ -56,18 +48,48 @@
     span: "body-m",
   }
 
+  /**
+   * Returns a bottom margin value based on the `as` prop
+   */
+  function getBottomMargin(): Spacing {
+    // override takes precedence
+    if (mb) {
+      return mb;
+    }
+
+    // div and spans should not have any bottom margin
+    if (as === "h1") {
+      return "3xl";
+    } else if (as === "h2") {
+      return "2xl";
+    } else if (as === "h3") {
+      return "xl";
+    } else if (as === "h4") {
+      return "l";
+    } else if (as === "h5") {
+      return "m";
+    } else if (as === "h6") {
+      return "m";
+    } else if (as === "p") {
+      return "m";
+    }
+
+    // fix for the GoA font's unwanted top padding
+    return "3xs";
+  }
+
   onMount(() => {
     size ||= sizeMap[as];
   })
 </script>
 
-<svelte:element 
+<svelte:element
   this={as}
   class={size}
   style={styles(
     style("color", color === "primary" ? "var(--goa-color-text-default)" : "var(--goa-color-text-secondary)"),
     maxWidth === "none" ? "" : `max-width: ${maxWidth}`,
-    calculateMargin(mt, mr, mb, ml),
+    calculateMargin(mt, mr, getBottomMargin(), ml),
   )}
 >
   <slot />
