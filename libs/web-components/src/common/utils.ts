@@ -36,7 +36,7 @@ export const msg = {
 
 export function receive(
   el: HTMLElement | Element | null | undefined,
-  handler: (action: string, data: Record<string, unknown>, event: Event) => void,
+  handler: (action: string, data: unknown, event: Event) => void,
 ) {
   if (!el) {
     console.warn("receive() el is null | undefined");
@@ -83,8 +83,6 @@ export function dispatch<T>(
   detail?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
-  // console.log(`DISPATCH(${eventName}):`, detail, el);
-
   const dispatch = () => {
     el?.dispatchEvent(
       new CustomEvent<T>(eventName, {
@@ -113,8 +111,10 @@ export function getSlottedChildren(
   } else {
     // for unit tests only
     if (parentTestSelector) {
-      // @ts-expect-error testing
-      return [...rootEl.querySelector(parentTestSelector).children] as Element[];
+      return [
+        // @ts-expect-error testing
+        ...rootEl.querySelector(parentTestSelector).children,
+      ] as Element[];
     }
     // @ts-expect-error testing
     return [...rootEl.children] as Element[];
@@ -142,7 +142,10 @@ export function isValidDate(d: Date): boolean {
   return !isNaN(d.getDate());
 }
 
-export function validateRequired(componentName: string, props: Record<string, unknown>) {
+export function validateRequired(
+  componentName: string,
+  props: Record<string, unknown>,
+) {
   Object.entries(props).forEach((prop) => {
     if (!prop[1]) {
       console.warn(`${componentName}: ${prop[0]} is required`);
@@ -233,6 +236,17 @@ export function padLeft(
     padding += padWith;
   }
   return `${padding}${value}`;
+}
+
+export function performOnce(
+  timeoutId: any,
+  action: () => void,
+  delay = 100,
+): any {
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+  return setTimeout(action, delay);
 }
 
 export function ensureSlotExists(el: HTMLElement) {

@@ -58,20 +58,19 @@
     }
 
     // div and spans should not have any bottom margin
-    if (as === "h1") {
-      return "3xl";
-    } else if (as === "h2") {
-      return "2xl";
-    } else if (as === "h3") {
-      return "xl";
-    } else if (as === "h4") {
-      return "l";
-    } else if (as === "h5") {
-      return "m";
-    } else if (as === "h6") {
-      return "m";
-    } else if (as === "p") {
-      return "m";
+    switch (as) {
+      case "h1":
+        return "3xl";
+      case "h2":
+        return "2xl";
+      case "h3":
+        return "xl";
+      case "h4":
+        return "l";
+      case "h5":
+      case "h6":
+      case "p":
+        return "m";
     }
 
     // fix for the GoA font's unwanted top padding

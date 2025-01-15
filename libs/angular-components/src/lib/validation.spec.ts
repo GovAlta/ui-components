@@ -1,7 +1,11 @@
 import { describe, it, expect } from "vitest";
 
-import { lengthValidator, SINValidator } from "./validation";
-import { emailValidator, postalCodeValidator } from "./validation.ts";
+import {
+  lengthValidator,
+  SINValidator,
+  emailValidator,
+  postalCodeValidator,
+} from "./validation";
 
 describe("Validation", () => {
   describe("Email", () => {
