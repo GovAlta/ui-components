@@ -1,4 +1,5 @@
-import { getTimestamp } from "./utils";
+import { waitFor } from "@testing-library/svelte";
+import { getTimestamp, performOnce } from "./utils";
 import { it, describe } from "vitest";
 
 describe("getTimestamp", () => {
@@ -46,5 +47,20 @@ describe("getTimestamp", () => {
   it("handles the 12th hour", () => {
     expect(getTimestamp(new Date(2023, 1, 1, 12, 23))).toContain("12:23 PM")
     expect(getTimestamp(new Date(2023, 1, 1, 0, 23))).toContain("12:23 AM")
+  })
+})
+
+describe("performOnce", () => {
+  it("calls the action only once", async () => {
+    let count = 0;
+    let timeoutId: any;
+
+    for (let i = 0; i < 10; i++) {
+      timeoutId = performOnce(timeoutId, () => count++);
+    }
+
+    await waitFor(() => {
+      expect(count).toBe(1);
+    });
   })
 })

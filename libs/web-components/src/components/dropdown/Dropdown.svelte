@@ -5,12 +5,14 @@
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
+  import type {
+    DropdownItemDestroyRelayDetail,
+    DropdownItemMountedRelayDetail,
+    Option,
+  } from "./DropdownItem.svelte";
   import {
     DropdownItemDestroyMsg,
-    DropdownItemDestroyRelayDetail,
     DropdownItemMountedMsg,
-    DropdownItemMountedRelayDetail,
-    type Option,
   } from "./DropdownItem.svelte";
   import {
     dispatch,
@@ -22,12 +24,13 @@
   } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import {
+    FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
     FieldsetSetErrorMsg,
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
   } from "../../types/relay-types";
 
   interface EventHandler {
@@ -145,11 +148,11 @@
   function addRelayListener() {
     receive(_rootEl, (action, data, event) => {
       switch (action) {
-        case FormSetValueMsg:
-          onSetValue(data as FormSetValueRelayDetail);
+        case FieldsetSetValueMsg:
+          onSetValue(data as FieldsetSetValueRelayDetail);
           break;
         case FieldsetSetErrorMsg:
-          error = "true";
+          setError(data as FieldsetErrorRelayDetail);
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
@@ -164,8 +167,12 @@
     });
   }
 
-  function onSetValue(detail: FormSetValueRelayDetail) {
-    // @ts-expect-error ignore
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
+  }
+
+  function onSetValue(detail: FieldsetSetValueRelayDetail) {
+    // @ts-expect-error
     value = detail.value;
     dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
   }

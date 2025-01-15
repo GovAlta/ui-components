@@ -108,7 +108,7 @@
       checked = !checked && !!detail.el.value;
     }, 1000);
   }
-  
+
   function dispatchInit() {
     setTimeout(() => {
       _radioItemEl?.dispatchEvent(
@@ -151,6 +151,7 @@
 
   function onChange() {
     if (isDisabled) return;
+    // if (isChecked) return;  FIXME: does having this uncommented break something?
 
     dispatch(_radioItemEl, "_radioItemChange", value, { bubbles: true })
 

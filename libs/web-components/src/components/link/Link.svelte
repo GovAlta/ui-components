@@ -14,8 +14,8 @@
 
 </script>
 
-<div 
-  class={`link`}
+<div
+  class="link"
   style={styles(
     calculateMargin(mt, mr, mb, ml),
   )}
@@ -38,7 +38,7 @@
   }
 
   .link:hover {
-    text-decoration: underline;  
+    text-decoration: underline;
   }
 
   :global(::slotted(a)) {

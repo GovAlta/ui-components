@@ -23,8 +23,8 @@
     FieldsetSetErrorMsg,
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
   } from "../../types/relay-types";
 
   // Validators
@@ -147,8 +147,8 @@
   function addRelayListener() {
     receive(_inputEl, (action, data) => {
       switch (action) {
-        case FormSetValueMsg:
-          setValue(data as FormSetValueRelayDetail);
+        case FieldsetSetValueMsg:
+          setValue(data as FieldsetSetValueRelayDetail);
           break;
         case FieldsetSetErrorMsg:
           setError(data as FieldsetErrorRelayDetail);
@@ -167,12 +167,12 @@
     error = detail.error ? "true" : "false";
   }
 
-  function setValue(detail: FormSetValueRelayDetail) {
+  function setValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
-    dispatch(_inputEl, "_change", { name, value }, { bubbles: true });
   }
 
+  // Relay message up the chain to allow any parent element to have a reference to the input element
   function sendMountedMessage() {
     relay<FormFieldMountRelayDetail>(
       _rootEl,
@@ -237,7 +237,6 @@
   }
 
   function doClick() {
-    // @ts-ignore
     this.dispatchEvent(
       new CustomEvent("_trailingIconClick", { composed: true }),
     );

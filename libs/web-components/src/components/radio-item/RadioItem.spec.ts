@@ -34,8 +34,11 @@ describe("RadioItem", () => {
       radioDescriptionDiv?.getAttribute("id"),
     );
 
-    const radioContainerDiv = result.container.querySelector("[data-testid=root]");
-    expect(radioContainerDiv?.getAttribute("style")).toContain("max-width: 480px;");
+    const radioContainerDiv =
+      result.container.querySelector("[data-testid=root]");
+    expect(radioContainerDiv?.getAttribute("style")).toContain(
+      "max-width: 480px;",
+    );
   });
 
   it("should render the radio item with slot description", async () => {
@@ -44,9 +47,9 @@ describe("RadioItem", () => {
       value: "foobar",
     });
     await waitFor(() => {
-      expect(result.container.querySelector("[slot=description]")?.innerHTML).toContain(
-        "Radio Item 1 description",
-      );
+      expect(
+        result.container.querySelector("[slot=description]")?.innerHTML,
+      ).toContain("Radio Item 1 description");
     });
   });
 
@@ -75,10 +78,18 @@ describe("RadioItem", () => {
 
     const radio = baseElement.container.querySelector("[data-testid=root]");
     expect(radio).toBeTruthy();
-    expect(radio?.getAttribute("style")).toContain("margin-top:var(--goa-space-s)");
-    expect(radio?.getAttribute("style")).toContain("margin-right:var(--goa-space-m)");
-    expect(radio?.getAttribute("style")).toContain("margin-bottom:var(--goa-space-l)");
-    expect(radio?.getAttribute("style")).toContain("margin-left:var(--goa-space-xl)");
+    expect(radio?.getAttribute("style")).toContain(
+      "margin-top:var(--goa-space-s)",
+    );
+    expect(radio?.getAttribute("style")).toContain(
+      "margin-right:var(--goa-space-m)",
+    );
+    expect(radio?.getAttribute("style")).toContain(
+      "margin-bottom:var(--goa-space-l)",
+    );
+    expect(radio?.getAttribute("style")).toContain(
+      "margin-left:var(--goa-space-xl)",
+    );
   });
 
   it("should handle the change event and emit _click event", async () => {
