@@ -19,7 +19,9 @@
       "@abgov/react-components": ["libs/react-components/src/index.ts"],
       "@abgov/react-components/experimental": ["libs/react-components/src/experimental/index.ts"],
       "@abgov/style": ["dist/libs/web-components/index.css"],
-      "@abgov/ui-components-common": ["dist/libs/common/index.d.ts"],
+      "@abgov/ui-components-common": [
+        "libs/common/src/index.ts"
+      ],
       "@abgov/web-components": ["dist/libs/web-components/index.js"]
     }
   },

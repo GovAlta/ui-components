@@ -36,7 +36,7 @@ export interface GoabRadioGroupProps extends Margins {
   error?: boolean;
   ariaLabel?: string;
   children?: React.ReactNode;
- onChange: (detail: GoabRadioGroupOnChangeDetail) => void;
+  onChange: (detail: GoabRadioGroupOnChangeDetail) => void;
 }
 
 export function GoabRadioGroup({

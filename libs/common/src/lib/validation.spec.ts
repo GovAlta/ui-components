@@ -5,7 +5,8 @@ import {
   SINValidator,
   emailValidator,
   postalCodeValidator,
-} from "./validation";
+  dateValidator,
+} from "./validators";
 
 describe("Validation", () => {
   describe("Email", () => {
@@ -153,6 +154,35 @@ describe("Validation", () => {
 
   describe("Date", () => {
     it("needs a test");
+    // const validValues = ["", "123456"];
+    // const invalidValues = ["12345"];
+    //
+    // const validate = lengthValidator({ min: 6, optional: true });
+    //
+    // for (const val of validValues) {
+    //   it(`${val} should be valid`, () => {
+    //     const msg = validate(val);
+    //     expect(msg).toBe("");
+    //   });
+    // }
+    //
+    // for (const val of invalidValues) {
+    //   it(`${val} should be invalid`, () => {
+    //     const msg = validate(val);
+    //     expect(msg).not.toBe("");
+    //   });
+    // }
+
+    describe("Start date", () => {
+      // const start = new Date(2025, 0, 1);
+      // const validator = dateValidator({ min: start });
+      // const validDate = new Date(2025, 2, 1);
+      it("needs a test");
+    });
+
+    // describe("End date", () => {
+    //
+    // })
   });
 
   describe("Regex", () => {

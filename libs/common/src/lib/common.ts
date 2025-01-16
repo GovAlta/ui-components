@@ -218,7 +218,7 @@ export type GoabSkeletonSize = "1" | "2" | "3" | "4";
 
 export type GoabRadioGroupOrientation = "horizontal" | "vertical";
 
-export interface GoabRadioGroup extends Margins {
+export interface GoabRadioGroupProps extends Margins {
   name: string;
   value?: string;
   disabled?: boolean;
@@ -228,7 +228,7 @@ export interface GoabRadioGroup extends Margins {
   ariaLabel?: string;
 }
 
-export interface GoabRadioItem {
+export interface GoabRadioItemProps {
   value?: string;
   label?: string;
   name?: string;

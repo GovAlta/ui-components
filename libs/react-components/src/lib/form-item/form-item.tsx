@@ -24,7 +24,7 @@ declare global {
   }
 }
 
-export interface GoabFormItemprops extends Margins {
+export interface GoabFormItemProps extends Margins {
   label?: string;
   labelSize?: GoabFormItemLabelSize;
   requirement?: GoabFormItemRequirement;
@@ -50,7 +50,7 @@ export function GoabFormItem({
   ml,
   testId,
   id,
-}: GoabFormItemprops): JSX.Element {
+}: GoabFormItemProps): JSX.Element {
   return (
     <goa-form-item
       label={label}
