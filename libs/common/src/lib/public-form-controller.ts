@@ -1,4 +1,4 @@
-import { FieldValidator } from "./validation";
+import { FieldsetItemState, FieldValidator } from "./validators";
 
 export type FormStatus = "not-started" | "incomplete" | "complete";
 
@@ -19,13 +19,6 @@ export type Fieldset<T> = {
   data:
     | { type: "details"; fieldsets: Record<string, FieldsetItemState> }
     | { type: "list"; items: AppState<T>[] };
-};
-
-// Public type to define the state of the fieldset items
-export type FieldsetItemState = {
-  name: string;
-  label: string;
-  value: string;
 };
 
 export class PublicFormController<T> {

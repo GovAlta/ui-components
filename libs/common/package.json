@@ -21,5 +21,6 @@
   "module": "./index.js",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "semantic-release": "semantic-release"
 }
