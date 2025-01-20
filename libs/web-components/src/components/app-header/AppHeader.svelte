@@ -230,10 +230,10 @@
     <!-- Menu and menu button for tablet -->
     {#if _showToggleMenu && _tablet}
       <goa-popover
-        class="menu"
+        class="app-header-popover"
+        context="menu-toggle-area"
         open={_showMenu}
         minwidth="16rem"
-        context="menu-toggle-area"
         focusborderwidth="0"
         borderradius="4"
         padded="false"
@@ -297,6 +297,10 @@
   *,
   :global(::slotted(*)) {
     font: var(--goa-app-header-typography-service-name);
+  }
+
+  goa-popover.app-header-popover {
+    position: inherit;
   }
 
   /* Spans the full page width */

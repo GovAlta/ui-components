@@ -331,7 +331,6 @@
         data-testid="months"
         width="160px"
         maxheight="240px"
-        relative="true"
         value={_calendarDate?.getMonth()}
         on:_change={setMonth}
       >
@@ -348,7 +347,6 @@
         data-testid="years"
         width="104px"
         maxheight="240px"
-        relative="true"
         value={_calendarDate?.getFullYear()}
         on:_change={setYear}
       >

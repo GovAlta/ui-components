@@ -32,7 +32,6 @@ describe("GoADropdown", () => {
       expect(popover?.getAttribute("disabled")).toBe("false");
       expect(popover?.getAttribute("open")).toBe("false");
       expect(popover?.getAttribute("padded")).toBe("false");
-      expect(popover?.getAttribute("relative")).toBe("false");
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown?.querySelector("input");
@@ -116,7 +115,6 @@ describe("GoADropdown", () => {
         expect(popover?.getAttribute("disabled")).toBe("false");
         expect(popover?.getAttribute("open")).toBe("false");
         expect(popover?.getAttribute("padded")).toBe("false");
-        expect(popover?.getAttribute("relative")).toBe("false");
 
         expect(inputField?.getAttribute("id")).toBe("favcolor");
         expect(inputField?.getAttribute("aria-autocomplete")).toBe("list");
