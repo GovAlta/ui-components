@@ -46,6 +46,9 @@ export class GoabDatePicker extends GoabControlValueAccessor {
   @Input() override value?: Date | string | null | undefined;
   @Input() min?: Date | string;
   @Input() max?: Date | string;
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
   @Input() relative?: boolean;
 
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();

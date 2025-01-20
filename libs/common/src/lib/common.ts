@@ -255,6 +255,9 @@ export interface GoabPopoverProps extends Margins {
   maxWidth?: string;
   padded?: boolean;
   position?: GoabPopoverPosition;
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
   relative?: boolean;
 }
 

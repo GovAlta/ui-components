@@ -65,6 +65,9 @@ export class GoabDropdown extends GoabControlValueAccessor {
   @Input() native?: boolean;
   @Input() placeholder?: string;
   @Input() width?: string;
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
   @Input() relative?: boolean;
 
   @Output() onChange = new EventEmitter<GoabDropdownOnChangeDetail>();

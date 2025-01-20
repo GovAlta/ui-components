@@ -55,6 +55,9 @@ export interface GoabDropdownProps extends Margins {
   placeholder?: string;
   testId?: string;
   width?: string;
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
   relative?: boolean;
 }
 

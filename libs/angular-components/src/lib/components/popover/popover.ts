@@ -33,6 +33,9 @@ export class GoabPopover extends GoabBaseComponent {
   @Input() minWidth?: string;
   @Input() padded = true;
   @Input() position?: GoabPopoverPosition;
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
   @Input() relative?: boolean;
   @Input({ required: true }) target!: TemplateRef<any>;
 }
