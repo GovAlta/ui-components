@@ -20,7 +20,6 @@ interface WCProps extends Margins {
   placeholder?: string;
   value?: string;
   width?: string;
-  relative?: boolean;
   id?: string;
   testid?: string;
 }
@@ -55,7 +54,6 @@ export interface GoabDropdownProps extends Margins {
   placeholder?: string;
   testId?: string;
   width?: string;
-  relative?: boolean;
 }
 
 function stringify(value: string | string[] | undefined): string {
@@ -106,7 +104,6 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
       placeholder={props.placeholder}
       testid={props.testId}
       width={props.width}
-      relative={props.relative}
       id={props.id}
     >
       {props.children}

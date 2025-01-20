@@ -31,9 +31,6 @@
   // allows to override the default padding when content needs to be flush with boundries
   export let padded: string = "true";
 
-  // ajust positioning when popover component is contained within a relative positioned parent
-  export let relative: string = "false";
-
   // margins
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -78,7 +75,6 @@
   $: _padded = toBoolean(padded);
   $: _open = toBoolean(open);
   $: _disabled = toBoolean(disabled);
-  $: _relative = toBoolean(relative);
 
   $: (async () => _open && (await setPopoverPosition()))();
   $: (async () => _sectionHeight && (await setPopoverPosition()))();
@@ -202,11 +198,9 @@
         : position === "above";
 
     if (displayOnTop) {
-      _popoverEl.style.top = _relative
-        ? `${-popoverRect.height}px`
-        : `${targetRect.y - popoverRect.height + window.scrollY}px`;
+      _popoverEl.style.bottom = `${targetRect.height}px`;
     } else {
-      _popoverEl.style.top = ""; // In case this is triggered by _sectionHeight is changed
+      _popoverEl.style.bottom = "auto"; // In case this is triggered by _sectionHeight is changed
     }
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
@@ -226,7 +220,6 @@
   bind:this={_rootEl}
   data-testid={testid}
   style={styles(
-    _relative && "position: relative",
     height === "full" && "height: 100%;",
     calculateMargin(mt, mr, mb, ml),
     style("--offset-top", voffset),
@@ -291,6 +284,7 @@
     font-size: var(--goa-font-size-4);
     display: flex;
     align-items: center;
+    position: relative;
   }
 
   .popover-target {
@@ -306,13 +300,13 @@
   .popover-content {
     color: var(--goa-color-text-default);
     position: absolute;
+    z-index: 99;
     width: fit-content;
     list-style-type: none;
     background: var(--goa-color-greyscale-white);
     border-radius: var(--border-radius);
     outline: none;
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
-    z-index: 99;
     width: max-content;
 
     margin-top: var(--offset-top, 3px);
