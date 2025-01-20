@@ -6,7 +6,6 @@ interface WCProps extends Margins {
   minwidth?: string;
   padded?: boolean;
   position?: GoabPopoverPosition;
-  relative?: boolean;
   testid?: string;
 }
 
@@ -27,7 +26,6 @@ export interface GoabPopoverProps extends Margins {
   padded?: boolean;
   position?: GoabPopoverPosition;
   children: ReactNode;
-  relative?: boolean;
 }
 
 export function GoabPopover({
@@ -37,7 +35,6 @@ export function GoabPopover({
   minWidth,
   padded,
   position,
-  relative,
   children,
   mt,
   mr,
@@ -51,7 +48,6 @@ export function GoabPopover({
       minwidth={minWidth}
       padded={padded}
       position={position}
-      relative={relative}
       mt={mt}
       mr={mr}
       mb={mb}

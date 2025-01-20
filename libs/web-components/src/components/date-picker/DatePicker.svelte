@@ -2,13 +2,7 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
-  import {
-    addDays,
-    addMonths,
-    addYears,
-    format,
-    startOfDay,
-  } from "date-fns";
+  import { addDays, addMonths, addYears, format, startOfDay } from "date-fns";
   import type { Spacing } from "../../common/styling";
   import { padLeft, toBoolean } from "../../common/utils";
   import { receive, dispatch, relay } from "../../common/utils";
@@ -40,7 +34,6 @@
   export let error: string = "false";
   export let min: string = "";
   export let max: string = "";
-  export let relative: string = "false";
   export let disabled: string = "false";
   export let testid: string = "";
 
@@ -118,7 +111,7 @@
 
   function setDate(value: string) {
     // invalid date
-    if (!value || !(new Date(value).getDate())) {
+    if (!value || !new Date(value).getDate()) {
       _date = null;
       _inputDate = { day: "", month: "", year: "" };
       return;
@@ -126,7 +119,7 @@
 
     if (type === "input") {
       const [year, month, day] = value.split("-");
-      _inputDate = { year: year, month: `${+month-1}`, day: day };
+      _inputDate = { year: year, month: `${+month - 1}`, day: day };
     } else if (type === "calendar") {
       _date = startOfDay(new Date(value));
     }
@@ -245,7 +238,7 @@
       e as CustomEvent<{ name: string; value: string }>
     ).detail;
 
-    _inputDate = {..._inputDate, [elName]: +value};
+    _inputDate = { ..._inputDate, [elName]: +value };
 
     if (!new Date(+_inputDate.year, +_inputDate.month, +_inputDate.day)) {
       return;
@@ -267,7 +260,6 @@
     bind:this={_rootEl}
     tabindex="-1"
     {testid}
-    {relative}
     {mt}
     {mb}
     {ml}
@@ -312,7 +304,12 @@
         />
       </goa-form-item>
       <goa-form-item label="Month" helptext="Month">
-        <goa-dropdown name="month" on:_change={onInputChange} {error} value={_inputDate.month+""}>
+        <goa-dropdown
+          name="month"
+          on:_change={onInputChange}
+          {error}
+          value={_inputDate.month + ""}
+        >
           <goa-dropdown-item value="0" label="January" />
           <goa-dropdown-item value="1" label="February" />
           <goa-dropdown-item value="2" label="March" />

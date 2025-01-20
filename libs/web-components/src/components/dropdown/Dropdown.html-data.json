@@ -69,12 +69,6 @@
       "default": "false"
     },
     {
-      "name": "relative",
-      "description": "Set to true if a parent element has a css position of `relative`",
-      "type": "boolean",
-      "default": "false"
-    },
-    {
       "name": "mt",
       "description": "Top margin",
       "valueSet": "spacing"

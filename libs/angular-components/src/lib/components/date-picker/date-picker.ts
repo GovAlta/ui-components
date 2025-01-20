@@ -21,7 +21,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     [attr.max]="max"
     [attr.error]="error"
     [attr.disabled]="disabled"
-    [attr.relative]="relative"
     [attr.testid]="testId"
     [attr.mt]="mt"
     [attr.mb]="mb"
@@ -46,7 +45,6 @@ export class GoabDatePicker implements ControlValueAccessor {
   @Input() max?: Date | string;
   @Input() error?: boolean;
   @Input() disabled?: boolean;
-  @Input() relative?: boolean;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

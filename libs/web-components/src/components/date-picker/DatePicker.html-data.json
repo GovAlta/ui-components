@@ -22,13 +22,6 @@
       "description": "Max allowed date value"
     },
     {
-      "name": "relative",
-      "type": "boolean",
-      "valueSet": "boolean",
-      "defaultValue": "false",
-      "description": "Set to true when datepicker is nested in a position=relative element"
-    },
-    {
       "name": "disabled",
       "type": "boolean",
       "valueSet": "boolean",
