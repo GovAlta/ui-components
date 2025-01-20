@@ -50,7 +50,6 @@
   export let error: string = "false";
   export let multiselect: string = "false";
   export let native: string = "false";
-  export let relative: string = "false";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -634,7 +633,6 @@
     <!-- list and filter -->
     <goa-popover
       {disabled}
-      {relative}
       data-testid="option-list"
       width={_popoverMaxWidth || "300px"}
       open={_isMenuVisible}

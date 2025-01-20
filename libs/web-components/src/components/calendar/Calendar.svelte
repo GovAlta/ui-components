@@ -312,7 +312,6 @@
         arialabel={`${name} month`}
         data-testid="months"
         width="calc(314px / 2 - 1.5rem)"
-        relative="true"
         value={_calendarDate?.getMonth()}
         on:_change={setMonth}
       >
@@ -328,7 +327,6 @@
         arialabel={`${name} year`}
         data-testid="years"
         width="calc(314px / 2 - 1.5rem)"
-        relative="true"
         value={_calendarDate?.getFullYear()}
         on:_change={setYear}
       >

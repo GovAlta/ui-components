@@ -27,7 +27,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       [attr.placeholder]="placeholder"
       [attr.testid]="testId"
       [attr.width]="width"
-      [attr.relative]="relative"
       [id]="id"
       (_change)="_onChange($event)"
     >
@@ -59,7 +58,6 @@ export class GoabDropdown implements ControlValueAccessor{
   @Input() placeholder?: string;
   @Input() testId?: string;
   @Input() width?: string;
-  @Input() relative?: boolean;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;

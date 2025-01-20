@@ -26,7 +26,6 @@
   export let error: string = "false";
   export let min: string = "";
   export let max: string = "";
-  export let relative: string = "false";
   export let disabled: string = "false";
   export let testid: string = "";
 
@@ -64,7 +63,7 @@
       initDate();
     }
   });
-  
+
   function addRelayListener() {
     receive(_rootEl, (action, data) => {
       switch (action) {
@@ -209,7 +208,6 @@
   bind:this={_rootEl}
   tabindex="-1"
   {testid}
-  {relative}
   {mt}
   {mb}
   {ml}
