@@ -1,5 +1,5 @@
 <svelte:options customElement={{
-  tag: "goa-subform",
+  tag: "goa-public-subform",
   props: {
     continueMsg: { attribute: "continue-msg", type: "String" }
   }
@@ -89,7 +89,7 @@
   function bindWithSubformIndex() {
     setTimeout(() => {
       const el = document
-        .querySelector("goa-subform-index")
+        .querySelector("goa-public-subform-index")
         .shadowRoot
         .querySelector("[data-bind]") as HTMLElement;
       relay<SubFormBindRelayDetail>(el, SubFormBindMsg, { el: _receiverEl});
