@@ -55,7 +55,6 @@ class TestDropdownComponent {
   placeholder?: string;
   testId?: string;
   width?: string;
-  relative?: boolean;
   mt?: Spacing;
   mb?: Spacing;
   ml?: Spacing;

@@ -31,8 +31,10 @@
   // allows to override the default padding when content needs to be flush with boundries
   export let padded: string = "true";
 
-  // ajust positioning when popover component is contained within a relative positioned parent
-  export let relative: string = "false";
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
+  export let relative: string = "";
 
   // margins
   export let mt: Spacing = null;
@@ -79,7 +81,6 @@
   $: _padded = toBoolean(padded);
   $: _open = toBoolean(open);
   $: _disabled = toBoolean(disabled);
-  $: _relative = toBoolean(relative);
 
   $: (async () => _open && (await setPopoverPosition()))();
   $: (async () => _sectionHeight && (await setPopoverPosition()))();
@@ -103,9 +104,19 @@
       (children.find(
         (el) => (el as HTMLElement).tabIndex >= 0,
       ) as HTMLElement) || _targetEl;
+
+    showDeprecationWarnings();
   });
 
   // Functions
+
+  function showDeprecationWarnings() {
+    if (relative != "") {
+      console.warn(
+        "Popover `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.",
+      );
+    }
+  }
 
   // Called on window popstate changes. This allows for clicking links within
   // the popover to close the popover
@@ -260,11 +271,9 @@
         : position === "above";
 
     if (displayOnTop) {
-      _popoverEl.style.top = _relative
-        ? `${-popoverRect.height}px`
-        : `${targetRect.y - popoverRect.height + window.scrollY}px`;
+      _popoverEl.style.bottom = `${targetRect.height}px`;
     } else {
-      _popoverEl.style.top = ""; // In case this is triggered by _sectionHeight is changed
+      _popoverEl.style.bottom = "auto"; // In case this is triggered by _sectionHeight is changed
     }
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
@@ -285,7 +294,6 @@
   data-testid={testid}
   on:focusout={handleFocusOut}
   style={styles(
-    _relative && "position: relative",
     height === "full" && "height: 100%;",
     calculateMargin(mt, mr, mb, ml),
     style("--offset-top", voffset),
@@ -346,6 +354,7 @@
     display: flex;
     align-items: center;
     height: 100%;
+    position: relative;
   }
 
   .popover-target {
@@ -361,13 +370,13 @@
   .popover-content {
     color: var(--goa-color-text-default);
     position: absolute;
+    z-index: 99;
     width: fit-content;
     list-style-type: none;
     background: var(--goa-popover-color-bg);
     border-radius: var(--goa-popover-border-radius);
     outline: none;
     filter: var(--goa-popover-shadow);
-    z-index: 99;
     margin-top: var(--offset-top, 3px);
     margin-bottom: var(--offset-bottom, 3px);
     margin-left: var(--offset-left, 0);

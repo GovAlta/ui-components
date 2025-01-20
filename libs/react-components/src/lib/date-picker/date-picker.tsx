@@ -30,6 +30,9 @@ export interface GoabDatePickerProps extends Margins {
   min?: Date;
   max?: Date;
   testId?: string;
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
   relative?: boolean;
   disabled?: boolean;
   onChange: (detail: GoabDatePickerOnChangeDetail) => void;

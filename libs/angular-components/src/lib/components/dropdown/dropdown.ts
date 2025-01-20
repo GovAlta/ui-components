@@ -59,6 +59,9 @@ export class GoabDropdown implements ControlValueAccessor{
   @Input() placeholder?: string;
   @Input() testId?: string;
   @Input() width?: string;
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
   @Input() relative?: boolean;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;

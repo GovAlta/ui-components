@@ -157,7 +157,8 @@
   {#if _desktop}
     <goa-popover
       bind:this={_popoverEl}
-      context="app-header-menu"
+      class="app-header-menu-popover"
+      context="menu"
       focusborderwidth="0"
       borderradius="0"
       padded="false"
@@ -204,6 +205,10 @@
 <style>
   * {
     font: var(--goa-typography-body-m);
+  }
+
+  goa-popover.app-header-menu-popover {
+    position: inherit;
   }
 
   /* Menu item with children */

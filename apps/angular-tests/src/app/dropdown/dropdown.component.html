@@ -32,8 +32,12 @@ value: {{reactiveFormCtrl.value | json}}
   </goab-form-item>
 
   <goab-form-item label="Country">
-    <goab-dropdown [filterable]="true" [relative]="true" name="country" width="30ch">
-      <goab-dropdown-item *ngFor="let opt of countries" [value]="opt.code" [label]="opt.name"></goab-dropdown-item>
+    <goab-dropdown [filterable]="true" name="country" width="30ch">
+      <goab-dropdown-item
+        *ngFor="let opt of countries"
+        [value]="opt.code"
+        [label]="opt.name"
+      ></goab-dropdown-item>
     </goab-dropdown>
   </goab-form-item>
 </form>
@@ -57,8 +61,12 @@ value: {{reactiveFormCtrl.value | json}}
 <goab-container accent="thin">
   <form [formGroup]="form">
     <goab-form-item label="Select Option">
-      <goab-dropdown [relative]="true" name="option" formControlName="option" width="100%">
-        <goab-dropdown-item *ngFor="let option of options" [value]="option.value" [label]="option.displayValue" />
+      <goab-dropdown name="option" formControlName="option" width="100%">
+        <goab-dropdown-item
+          *ngFor="let option of options"
+          [value]="option.value"
+          [label]="option.displayValue"
+        />
       </goab-dropdown>
     </goab-form-item>
   </form>
