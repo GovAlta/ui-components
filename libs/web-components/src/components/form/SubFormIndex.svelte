@@ -1,5 +1,5 @@
 <svelte:options customElement={{
-  tag: "goa-subform-index",
+  tag: "goa-public-subform-index",
   props: {
     actionButtonText: { type: "String", attribute: "action-button-text" },
     continueButtonText: { type: "String", attribute: "continue-button-text" },
