@@ -255,7 +255,6 @@ export interface GoabPopoverProps extends Margins {
   maxWidth?: string;
   padded?: boolean;
   position?: GoabPopoverPosition;
-  relative?: boolean;
 }
 
 // Notification

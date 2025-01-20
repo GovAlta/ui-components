@@ -12,7 +12,6 @@ import { NgTemplateOutlet } from "@angular/common";
       [attr.minwidth]="minWidth"
       [attr.padded]="padded"
       [attr.position]="position"
-      [attr.relative]="relative"
       [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
@@ -32,7 +31,6 @@ export class GoabPopover {
   @Input() minWidth?: string;
   @Input() padded = true;
   @Input() position?: GoabPopoverPosition;
-  @Input() relative?: boolean;
   @Input() testId?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
