@@ -3,7 +3,7 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
 
-  export let testid: string =  "";
+  export let testid: string = "";
 
   let rootEl: HTMLElement;
   let children: HTMLLinkElement[] = [];
@@ -25,6 +25,13 @@
       console.warn("GoAFooterMetaSection children must be anchor elements.");
       return;
     }
+
+    const ul = rootEl.querySelector("ul");
+    children.forEach((anchor) => {
+      const li = document.createElement("li");
+      li.appendChild(anchor);
+      ul.appendChild(li);
+    });
   });
 </script>
 
@@ -34,11 +41,7 @@
     <slot />
   </div>
 
-  <ul>
-    {#each children as child}
-      <li><a href={child.href}>{child.innerHTML}</a></li>
-    {/each}
-  </ul>
+  <ul></ul>
 </section>
 
 <style>
@@ -51,6 +54,7 @@
     flex-wrap: wrap;
     gap: var(--goa-space-l);
     padding-left: 0;
+    list-style: none;
   }
 
   li {
