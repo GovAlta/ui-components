@@ -60,11 +60,11 @@
   }
 
   function isValidFileType(file: File): boolean {
-    const typeMatchers = accept.split(",");
+    const typeMatchers = accept.split(",").map((type) => type.trim());
     for (const matcher of typeMatchers) {
       const matches =
         file.type.match(matcher.replace("*", ".*")) ||
-        file.name.endsWith(matcher.trim());
+        file.name.endsWith(matcher);
       if (matches) {
         return true;
       }
