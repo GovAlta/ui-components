@@ -17,7 +17,7 @@
   import { calculateMargin } from "../../common/styling";
   import { onMount, tick } from "svelte";
   import {
-  FieldsetErrorRelayDetail,
+    FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
     FieldsetResetFieldsMsg,
     FieldsetSetErrorMsg,
@@ -82,6 +82,7 @@
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
+  export let trailingiconarialabel: string = "";
 
   let _leadingContentSlot = false;
   let _trailingContentSlot = false;
@@ -337,6 +338,7 @@
         data-testid="trailing-icon"
         size="medium"
         type={trailingicon}
+        arialabel={trailingiconarialabel}
       />
     {/if}
 
@@ -352,6 +354,7 @@
         icon={trailingicon}
         data-testid="trailing-icon-button"
         class="trailing-icon-button"
+        arialabel={trailingiconarialabel}
       />
     {/if}
 
