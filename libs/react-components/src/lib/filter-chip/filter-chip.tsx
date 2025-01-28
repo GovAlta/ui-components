@@ -6,6 +6,7 @@ interface WCProps extends Margins {
   icontheme: GoabFilterChipTheme;
   error: boolean;
   content: string;
+  testid?: string;
 }
 
 declare global {
@@ -17,7 +18,7 @@ declare global {
   }
 }
 
-export interface GoAFilterChipProps extends Margins {
+export interface GoabFilterChipProps extends Margins {
   onClick?: () => void;
   iconTheme?: GoabFilterChipTheme;
   error?: boolean;
@@ -25,7 +26,7 @@ export interface GoAFilterChipProps extends Margins {
   testId?: string;
 }
 
-export const GoAFilterChip = ({
+export const GoabFilterChip = ({
   iconTheme = "outline",
   error = false,
   content,
@@ -35,7 +36,7 @@ export const GoAFilterChip = ({
   mb,
   ml,
   testId,
-}: GoAFilterChipProps) => {
+}: GoabFilterChipProps) => {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) return;
@@ -59,9 +60,9 @@ export const GoAFilterChip = ({
       mr={mr}
       mb={mb}
       ml={ml}
-      data-testid={testId}
+      testid={testId}
     />
   );
 };
 
-export default GoAFilterChip;
+export default GoabFilterChip;
