@@ -2,8 +2,8 @@
   tag: "goa-public-subform-index",
   props: {
     actionButtonText: { type: "String", attribute: "action-button-text" },
-    continueButtonText: { type: "String", attribute: "continue-button-text" },
-    continueButtonVisibility: { type: "String", attribute: "continue-button-visibility" },
+    // continueButtonText: { type: "String", attribute: "continue-button-text" },
+    buttonVisibility: { type: "String", attribute: "button-visibility" },
   }
 }} />
 
@@ -17,8 +17,8 @@
   import { onMount } from "svelte";
 
   export let actionButtonText: string;
-  export let continueButtonText: string;
-  export let continueButtonVisibility: "visible" | "hidden" = "hidden";
+  // export let continueButtonText: string;
+  export let buttonVisibility: "visible" | "hidden" = "hidden";
 
   let _el: HTMLElement;
   let _subformEl: HTMLElement;
@@ -41,10 +41,10 @@
     });
   }
 
-  function continueToParent(e: Event) {
-    e.stopPropagation();
-    relay(_subformEl, SubFormIndexContinueToParentMsg, null, { bubbles: true });
-  }
+  // function continueToParent(e: Event) {
+  //   e.stopPropagation();
+  //   relay(_subformEl, SubFormIndexContinueToParentMsg, null, { bubbles: true });
+  // }
 
   function continueToSubform(e: Event) {
     e.stopPropagation();
@@ -52,12 +52,16 @@
   }
 </script>
 
-<div data-bind bind:this={_el}>
-  <slot />
-  <goa-block direction="column" gap="3xl">
-    <goa-button type="secondary" on:_click={continueToSubform}>{actionButtonText}</goa-button>
-    {#if continueButtonVisibility === "visible"}
-      <goa-button type="primary" on:_click={continueToParent}>{continueButtonText}</goa-button>
-    {/if}
-  </goa-block>
-</div>
+<goa-public-form-page
+  id="index"
+  type="step"
+  button-visibility={buttonVisibility}
+  active
+>
+  <div data-bind bind:this={_el}>
+    <slot />
+    <goa-block direction="column" gap="3xl">
+      <goa-button type="secondary" on:_click={continueToSubform}>{actionButtonText}</goa-button>
+    </goa-block>
+  </div>
+</goa-public-form-page>

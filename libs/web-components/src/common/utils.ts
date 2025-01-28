@@ -54,7 +54,10 @@ export function relay<T>(
   data?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
-  // console.log(`RELAY(${eventName}):`, data, el);
+  if (!el) {
+    console.warn("relay() el is null | undefined");
+    return;
+  }
 
   const dispatch = () => {
     el?.dispatchEvent(
@@ -253,4 +256,23 @@ export function ensureSlotExists(el: HTMLElement) {
   if (!el.querySelector("slot")) {
     el.appendChild(document.createElement("slot"));
   }
+}
+
+export function getQueryParams(url: string | URL): Record<string, string> {
+  const _url = url instanceof URL ? url : new URL(url);
+  const query = _url.search.substring(1);
+  const vars = query.split("&");
+
+  return vars.reduce((acc: Record<string, string>, val: string) => {
+    const [key, value] = val.split("=");
+    acc[key] = value;
+    return acc;
+  }, {});
+}
+
+export function getQueryParam(
+  url: string | URL,
+  key: string,
+): string | undefined {
+  return getQueryParams(url)[key];
 }

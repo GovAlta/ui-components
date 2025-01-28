@@ -18,12 +18,15 @@
     typeValidator,
   } from "../../common/utils";
   import {
-    FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
     FieldsetSetErrorMsg,
     FormFieldMountMsg,
-    FormFieldMountRelayDetail,
     FormItemMountMsg,
+  } from "../../types/relay-types";
+
+  import type {
+    FieldsetErrorRelayDetail,
+    FormFieldMountRelayDetail,
     FormItemMountRelayDetail,
   } from "../../types/relay-types";
 
