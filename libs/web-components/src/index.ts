@@ -33,6 +33,7 @@ export { default as FooterMetaSection } from "./components/footer-meta-section/F
 export { default as FooterNavSection } from "./components/footer-nav-section/FooterNavSection.svelte";
 export { default as Fieldset } from "./components/form/Fieldset.svelte";
 export { default as Form } from "./components/form/Form.svelte";
+export { default as FormPage } from "./components/form/FormPage.svelte";
 export { default as FormSummary } from "./components/form/FormSummary.svelte";
 export { default as SubForm } from "./components/form/SubForm.svelte";
 export { default as SubFormIndex } from "./components/form/SubFormIndex.svelte";

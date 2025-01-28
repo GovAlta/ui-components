@@ -15,7 +15,6 @@ export type AppState<T> = {
 
 export type Fieldset<T> = {
   heading: string;
-  skipSummary?: boolean;
   data:
     | { type: "details"; fieldsets: Record<string, FieldsetItemState> }
     | { type: "list"; items: AppState<T>[] };
@@ -26,16 +25,13 @@ export class PublicFormController<T> {
   _formData?: Record<string, string> = undefined;
   _formRef?: HTMLElement = undefined;
 
-  constructor(private type: "details" | "list") {
-    console.log("constructor", this.type);
-    // nothing here
-  }
+  constructor(private type: "details" | "list") {}
 
   // Obtain reference to the form element
   init(e: Event) {
     // FIXME: This condition should not be needed, but currently it is the only way to get things working
     if (this._formRef) {
-      console.error("init: form element has already been set");
+      console.warn("init: form element has already been set");
       return;
     }
     this._formRef = (e as CustomEvent).detail.el;
@@ -55,35 +51,13 @@ export class PublicFormController<T> {
   }
 
   // Public method to allow for the initialization of the state
-  initState(state: string | AppState<T> | AppState<T>[]) {
+  initState(state?: string | AppState<T> | AppState<T>[], callback?: () => void) {
     relay(this._formRef, "external::init:state", state);
+
+    if (callback) {
+      setTimeout(callback, 200);
+    }
   }
-
-  // ISSUE:
-  // The issue is that all the logic below is happening outside the form component, thereby resulting
-  // in the "fixed" data not being in sync with the data within the form component.
-  //
-
-  // Public method to allow for the updating of the state
-  // updateState(e: Event) {
-  //   console.debug(
-  //     "Utils:updateState",
-  //     this.type,
-  //     { state: this.state },
-  //     (e as CustomEvent).detail,
-  //   );
-  //   if (!this.state) {
-  //     console.error("updateState: state has not yet been set");
-  //     return;
-  //   }
-  //
-  //   const detail = (e as CustomEvent).detail;
-  //   } else if (this.type === "details" && Array.isArray(detail.data)) {
-  //     this.#updateObjectListState(detail);
-  //   } else {
-  //     this.#updateObjectState(detail);
-  //   }
-  // }
 
   updateListState(e: Event) {
     const detail = (e as CustomEvent).detail;
@@ -260,6 +234,18 @@ export class PublicFormController<T> {
         },
       }),
     );
+  }
+
+  // removes any data collected that doesn't correspond with the final history path
+  clean() {
+    if (Array.isArray(this.state)) {
+      return;
+    }
+    const state = this.state;
+    return this.state?.history.reduce<Record<string, unknown>>((acc, fieldsetId) => {
+      acc[fieldsetId] = state?.form[fieldsetId];
+      return acc;
+    }, {});
   }
 }
 
