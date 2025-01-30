@@ -15,6 +15,7 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
+  import { toBoolean } from "../../common/utils";
 
   // ======
   // Public
@@ -22,6 +23,7 @@
 
   export let text: string;
   export let status: FormStepStatus | undefined = undefined;
+  export let last: string = "false";
 
   // Set by FormStepper parent component
   let current: boolean = false;
@@ -42,6 +44,7 @@
   // ========
 
   $: _isEnabled = enabled || status === "complete";
+  $: _isLast = toBoolean(last);
 
   onMount(() => {
     // receive notification from parent of resize
@@ -111,6 +114,7 @@
   bind:this={_rootEl}
   class:mobile={_isMobile}
   class:desktop={!_isMobile}
+  class:last={_isLast}
   role="listitem"
   tabindex="-1"
   for={text}
@@ -131,11 +135,15 @@
   />
   <div data-testid="status" class="status">
     {#if current}
-      <goa-icon type="pencil" theme="filled" />
+      {#if _isLast && status === "complete"}
+        <goa-icon type="checkmark" inverted />
+      {:else}
+        <goa-icon type="pencil"  theme="filled" />
+      {/if}
     {:else if status === "complete"}
       <goa-icon type="checkmark" inverted />
     {:else if status === "incomplete"}
-      <goa-icon type="remove" theme="filled"/>
+      <goa-icon type="remove" theme="filled" />
     {:else}
       <div data-testid="step-number" class="step-number">
         {childindex || ""}
@@ -216,7 +224,7 @@
     background: var(--goa-step-color-bg-complete);
   }
 
-  [aria-current="step"][data-status="complete"] .status {
+  [aria-current="step"][data-status="complete"]:not(.last) .status {
     background: var(--goa-step-color-bg-active);
   }
 
