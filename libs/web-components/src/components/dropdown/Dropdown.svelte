@@ -330,6 +330,12 @@
       syncFilteredOptions();
       _isMenuVisible = true;
       // _inputEl?.focus();
+      setTimeout(() => {
+        if (_selectedOption) {
+          setHighlightedToSelected();
+          scrollToHighlighted();
+        }
+      }, 0);
     }, 0);
   }
 
@@ -381,9 +387,10 @@
     _selectedOption = option;
 
     if (!_native) {
-      hideMenu();
       syncFilteredOptions();
       setDisplayedValue();
+      setHighlightedToSelected();
+      hideMenu();
     }
     dispatchValue(option.value);
   }
@@ -407,6 +414,7 @@
     if (matchedOption && _selectedOption?.value !== matchedOption.value) {
       onFilteredOptionClick(matchedOption);
       setDisplayedValue();
+      scrollToHighlighted();
     }
   }
 
