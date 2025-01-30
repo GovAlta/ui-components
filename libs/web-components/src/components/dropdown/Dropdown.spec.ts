@@ -3,6 +3,14 @@ import GoADropdown from "./Dropdown.svelte";
 import GoADropdownWrapper from "./DropdownWrapper.test.svelte";
 import { describe, it } from "vitest";
 import { tick } from "svelte";
+import userEvent from "@testing-library/user-event";
+import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
+
+let user: UserEvent;
+
+beforeEach(() => {
+  user = userEvent.setup();
+});
 
 afterEach(() => {
   cleanup();
@@ -85,7 +93,7 @@ describe("GoADropdown", () => {
       });
     });
 
-    it.skip("should render a filterable dropdown", async () => {
+    it("should render a filterable dropdown", async () => {
       const result = render(GoADropdownWrapper, {
         name,
         value: "orange",
@@ -96,7 +104,7 @@ describe("GoADropdown", () => {
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const popover = result.container.querySelector("goa-popover");
       const inputField = dropdown?.querySelector("input");
-      const dropdownIcon = result.container.querySelector("goa-icon");
+      let dropdownIcon = result.container.querySelector("goa-icon");
 
       expect(popover).toBeTruthy();
       expect(inputField).toBeTruthy();
@@ -132,7 +140,7 @@ describe("GoADropdown", () => {
         expect(ul?.getAttribute("role")).toBe("listbox");
         expect(ul?.getAttribute("style")).toContain("max-height: 276px"); // default height
         expect(ul?.getAttribute("tabindex")).toBe("-1");
-        expect(ul?.querySelectorAll("li").length).toBe(1);
+        expect(ul?.querySelectorAll("li").length).toBe(3);
 
         // Check options
         const option = result.container.querySelector("li#orange");
@@ -144,11 +152,18 @@ describe("GoADropdown", () => {
         expect(option).toHaveTextContent("orange");
       });
 
-      // show menu
-      inputField && (await fireEvent.click(inputField));
+      // show menu by clearing selected value
+      let clearIcon = result.queryByTestId("clear-icon");
+      expect(clearIcon).toBeTruthy();
+      clearIcon && await user.click(clearIcon);
       await waitFor(async () => {
-        await tick();
+        const popover = result.container.querySelector("goa-popover");
+        expect(popover?.getAttribute("open")).toBe("true");
         expect(inputField?.getAttribute("aria-owns")).toBe("menu-favcolor");
+        clearIcon = result.queryByTestId("clear-icon");
+        expect(clearIcon).toBeFalsy();
+        dropdownIcon = result.container.querySelector("goa-icon");
+        expect(dropdownIcon).toBeTruthy();
         expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("true");
         expect(dropdownIcon?.getAttribute("type")).toBe("chevron-up");
       });
@@ -158,28 +173,20 @@ describe("GoADropdown", () => {
   describe("single selection", () => {
     it("selects a value when clicking on the option", async () => {
       const result = render(GoADropdownWrapper, { name, items });
-      const onClick = vi.fn();
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const dropdownIcon = result.container.querySelector("goa-icon");
 
       await waitFor(async () => {
         expect(dropdown).toBeTruthy();
 
-        dropdown?.addEventListener("_change", (e: Event) => {
-          const ce = e as CustomEvent;
-          onClick(ce.detail.name, ce.detail.value);
-        });
-
         // open menu
-        dropdownIcon && (await fireEvent.click(dropdownIcon));
+        dropdownIcon && (await user.click(dropdownIcon));
 
         // click option
         await waitFor(async () => {
           const option = result.queryByTestId("dropdown-item-orange");
           expect(option).toBeTruthy();
-          option && (await fireEvent.click(option));
-          expect(onClick).toBeCalledTimes(1);
-          expect(onClick).toHaveBeenCalledWith("favcolor", "orange");
+          option && (await user.click(option));
           expect(option?.getAttribute("aria-selected")).toBe("true");
         });
       });
@@ -218,6 +225,194 @@ describe("GoADropdown", () => {
         const liElements = result.container.querySelectorAll("li");
         expect(liElements.length).toBe(1);
         expect(liElements[0].getAttribute("data-value")).toBe("blue");
+      });
+    });
+
+    it("searches by partial filter and click to select option", async () => {
+      const options = ["red", "light blue", "blue", "green"];
+      const query = "b";
+      const result = render(GoADropdownWrapper, {
+        name,
+        items: options,
+        filterable: true,
+      });
+
+      const input = result.getByTestId("input") as HTMLInputElement;
+      await fireEvent.focus(input);
+      await fireEvent.keyUp(input, { key: query[0] });
+      await fireEvent.input(input, { target: { value: query } });
+
+      await waitFor(() => {
+        const popover = result.getByTestId("option-list");
+        expect(popover.getAttribute("open")).toBe("true");
+
+        const liElements = result.container.querySelectorAll("li");
+        expect(liElements.length).toBe(2);
+
+        expect(liElements[1].getAttribute("data-value")).toBe(options[2]);
+      });
+
+      const onChange = vi.fn();
+      const dropdown = result.queryByTestId("favcolor-dropdown");
+      dropdown?.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        const d = ce.detail;
+        onChange(d.name, d.value);
+      });
+
+      // click filtered list option
+      const option = result.queryByTestId("dropdown-item-blue");
+      expect(option).toBeTruthy();
+      option && (await fireEvent.click(option));
+
+      await waitFor(async () => {
+        expect(onChange).toBeCalledTimes(1);
+        expect(onChange).toHaveBeenCalledWith("favcolor", "blue");
+        expect(option?.getAttribute("aria-selected")).toBe("true");
+      });
+    });
+
+    it("searches by partial filter and Enter keypress to select option", async () => {
+      const options = ["red", "light blue", "blue", "green"];
+      const query = "b";
+      const result = render(GoADropdownWrapper, {
+        name,
+        items: options,
+        filterable: true,
+      });
+
+      const input = result.getByTestId("input") as HTMLInputElement;
+      await fireEvent.focus(input);
+      await fireEvent.keyUp(input, { key: query[0] });
+      await fireEvent.input(input, { target: { value: query } });
+
+      await waitFor(() => {
+        const popover = result.getByTestId("option-list");
+        expect(popover.getAttribute("open")).toBe("true");
+
+        const liElements = result.container.querySelectorAll("li");
+        expect(liElements.length).toBe(2);
+
+        expect(liElements[1].getAttribute("data-value")).toBe(options[2]);
+      });
+
+      const onChange = vi.fn();
+      input.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        const d = ce.detail;
+        onChange(d.name, d.value);
+      });
+
+      const option = result.queryByTestId("dropdown-item-blue");
+      expect(option).toBeTruthy();
+
+      input.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key !== "Enter") {
+          return;
+        }
+        const ce = new CustomEvent("_change", {
+          detail: { name, value: "blue" },
+          bubbles: true,
+        });
+        input.dispatchEvent(ce);
+      });
+
+      // arrow down to highlight first option
+      await fireEvent.focus(input);
+      await fireEvent.keyUp(input, { key: "ArrowDown" });
+      await waitFor(async () => {
+        const liElements = result.container.querySelectorAll("li");
+        expect(liElements[0].getAttribute("class")).toContain(
+          "dropdown-item--highlighted",
+        );
+      });
+
+      // arrow down to highlight second option
+      await fireEvent.keyUp(input, { key: "ArrowDown" });
+      await waitFor(async () => {
+        const liElements = result.container.querySelectorAll("li");
+        expect(liElements[0].getAttribute("class")).not.toContain(
+          "dropdown-item--highlighted",
+        );
+        expect(liElements[1].getAttribute("class")).toContain(
+          "dropdown-item--highlighted",
+        );
+      });
+
+      // press Enter while second filtered list option is highlighted
+      await fireEvent.keyDown(input, { key: "Enter" });
+      await waitFor(async () => {
+        expect(onChange).toBeCalledTimes(1);
+        expect(onChange).toHaveBeenCalledWith("favcolor", "blue");
+        expect(option?.getAttribute("aria-selected")).toBe("true");
+      });
+    });
+
+    it("replace non-matching filterable input value with previously selected option value", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        value: items[0],  // previously selected value
+        items,
+        filterable: true,
+      });
+
+      const query = "z";  // non-matching value
+      const input = result.getByTestId("input") as HTMLInputElement;
+      await fireEvent.focus(input);
+      await fireEvent.keyUp(input, { key: query[0] });
+      await fireEvent.input(input, { target: { value: query[0] } });
+
+      await waitFor(() => {
+        const popover = result.getByTestId("option-list");
+        expect(popover.getAttribute("open")).toBe("true");
+
+        const liElements = result.container.querySelectorAll("li");
+        expect(liElements.length).toBe(1);
+        expect(liElements[0].getAttribute("data-testid")).toBe(
+          "dropdown-item-not-found",
+        );
+      });
+
+      const onChange = vi.fn();
+      input?.addEventListener("blur", (e: Event) => {
+        const ce = e as CustomEvent;
+        const d = ce.detail;
+        onChange(d.name, d.value);
+      });
+
+      // blur (e.g. click outside of filterable input)
+      await fireEvent.blur(input);
+
+      await waitFor(async () => {
+        expect(onChange).toBeCalledTimes(1);
+        expect(input.value).toBe(items[0]);
+      });
+    });
+
+    // Pasting from clipboard into input simulates browser autofill/autocomplete
+    it("select option value after paste from clipboard", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        filterable: true,
+      });
+
+      let input = result.getByTestId("input") as HTMLInputElement;
+      expect(input.value).toBe("");
+
+      await user.click(input);
+      await user.paste(items[0]);
+      // Note: If this were browser autofill the value would have been selected but,
+      // pasting from clipboard requires blur then re-focus to see selected option:
+      await user.click(document.body);
+      await user.click(input);
+
+      input = result.getByTestId("input") as HTMLInputElement;
+      expect(input.value).toBe(items[0]);
+      await waitFor(async () => {
+        const selected = result.container.querySelector("li[aria-selected=true]");
+        expect(selected).not.toBeNull();
+        expect(selected?.innerHTML).toContain(items[0]);
       });
     });
 
@@ -297,7 +492,7 @@ describe("GoADropdown", () => {
       });
     });
 
-    it.skip("clears the input and opens the menu when the clear icon is clicked", async () => {
+    it("clears the input and opens the menu when the clear icon is clicked", async () => {
       const result = render(GoADropdownWrapper, {
         name,
         value: "blue",
@@ -305,31 +500,28 @@ describe("GoADropdown", () => {
         filterable: true,
       });
 
-      const clearIcon = result.container.querySelector("goa-icon");
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const visibleElements = result.container.querySelectorAll("li");
-
-      await tick();
-      expect(clearIcon).toBeTruthy();
+      let clearIcon = result.queryByTestId("clear-icon");
+      await waitFor(async () => {
+        clearIcon = result.queryByTestId("clear-icon");
+        expect(clearIcon).toBeTruthy();
+      });
       expect(dropdown).toBeTruthy();
       expect(visibleElements).toBeTruthy();
       expect(visibleElements.length).toBe(1);
       expect(clearIcon?.getAttribute("type")).toBe("close");
 
-      const onChangeMock = vi.fn();
-      dropdown?.addEventListener("_change", (e: Event) => {
-        const ce = e as CustomEvent;
-        const d = ce.detail;
-        onChangeMock(d.name, d.value);
-      });
-
-      clearIcon && (await fireEvent.click(clearIcon));
+      clearIcon && (await user.click(clearIcon));
       await tick();
       await waitFor(async () => {
         const liElements = result.container.querySelectorAll("li");
         expect(liElements.length).toBe(3);
-        expect(onChangeMock).toHaveBeenCalledWith("favcolor", "");
-        expect(clearIcon?.getAttribute("type")).toBe("chevron-up");
+        clearIcon = result.queryByTestId("clear-icon");
+        expect(clearIcon).toBeFalsy();
+        const dropdownIcon = result.container.querySelector("goa-icon");
+        expect(dropdownIcon).toBeTruthy();
+        expect(dropdownIcon?.getAttribute("type")).toBe("chevron-up");
       });
     });
   });
@@ -840,7 +1032,9 @@ describe("GoADropdown", () => {
       const child = document.createElement("goa-dropdown-item");
       child.setAttribute("value", "cyan");
       child.setAttribute("mount", "reset");
-      container.querySelector("[data-testid=dropdown-menu]")?.appendChild(child);
+      container
+        .querySelector("[data-testid=dropdown-menu]")
+        ?.appendChild(child);
 
       await waitFor(() => {
         const children = document.querySelectorAll("goa-dropdown-item");
@@ -862,7 +1056,9 @@ describe("GoADropdown", () => {
       const child = document.createElement("goa-dropdown-item");
       child.setAttribute("value", "cyan");
       child.setAttribute("mount", "prepend");
-      container.querySelector("[data-testid=dropdown-menu]")?.appendChild(child);
+      container
+        .querySelector("[data-testid=dropdown-menu]")
+        ?.appendChild(child);
 
       await waitFor(() => {
         const children = container.querySelectorAll("li");
@@ -885,7 +1081,9 @@ describe("GoADropdown", () => {
       const child = document.createElement("goa-dropdown-item");
       child.setAttribute("value", "cyan");
       child.setAttribute("mount", "append");
-      container.querySelector("[data-testid=dropdown-menu]")?.appendChild(child);
+      container
+        .querySelector("[data-testid=dropdown-menu]")
+        ?.appendChild(child);
 
       await waitFor(() => {
         const children = container.querySelectorAll("li");
