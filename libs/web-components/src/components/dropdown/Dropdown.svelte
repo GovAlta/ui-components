@@ -341,6 +341,9 @@
 
   function hideMenu() {
     _isMenuVisible = false;
+    if (_filterable) {
+      setDisplayedValue();
+    }
   }
 
   function isFilterMatch(option: Option, filter: string) {
