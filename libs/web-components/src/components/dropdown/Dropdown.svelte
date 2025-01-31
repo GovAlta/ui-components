@@ -335,7 +335,7 @@
     setTimeout(async () => {
       syncFilteredOptions();
       _isMenuVisible = true;
-      // _inputEl?.focus();
+      _inputEl?.focus();
     }, 0);
   }
 
@@ -430,9 +430,9 @@
 
   function onClearIconKeyDown(e: KeyboardEvent) {
     if (e.key === "Enter" || e.key === " ") {
-      e.stopPropagation();
       reset();
       showMenu();
+      e.stopPropagation();
     }
   }
 
@@ -463,9 +463,7 @@
   }
 
   async function onChevronClick(e: Event) {
-    await tick();
     showMenu();
-    e.stopPropagation();
   }
 
   function onFocus(e: Event) {
@@ -779,9 +777,11 @@
             data-value={option.value}
             role="option"
             style="display: block"
-            on:click={() => {
+            on:click={(e) => {
               _isDirty = true;
               onSelect(option);
+              _inputEl?.focus();
+              e.stopPropagation();
             }}
           >
             {option.label || option.value}
@@ -808,7 +808,6 @@
     cursor: pointer;
     width: var(--width, 100%);
     max-width: 100%;
-
   }
 
   .dropdown-input-group {
@@ -825,22 +824,18 @@
     width: 100%;
   }
   .dropdown-input-group:hover {
-    box-shadow: var( --goa-dropdown-border-hover);
+    box-shadow: var(--goa-dropdown-border-hover);
     border: none;
   }
   .dropdown-input-group:has(input:focus-visible) {
-    box-shadow:
-      var(--goa-dropdown-border),
-      var(--goa-dropdown-border-focus);
+    box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
   }
   .dropdown-input-group.error,
   .dropdown-input-group.error:hover {
     box-shadow: var(--goa-dropdown-border-error);
   }
   .dropdown-input-group.error:has(:focus-visible) {
-    box-shadow:
-      var(--goa-dropdown-border),
-      var(--goa-dropdown-border-focus);
+    box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
   }
   @container not (--mobile) {
     .dropdown-input-group {
@@ -850,7 +845,7 @@
 
   .dropdown-icon--arrow,
   .dropdown-icon--clear {
-    margin-right: var(--goa-dropdown-space-icon-text);
+    padding-right: var(--goa-dropdown-space-icon-text);
   }
 
   /* TODO: add indicator to when the reset button has focus state */
@@ -923,7 +918,7 @@
     white-space: normal; /* Allows text to wrap */
     word-break: break-word; /* Ensures long words break onto the next line */
     overflow-wrap: break-word; /* Alternative for word wrapping */
-    }
+  }
 
   .dropdown-item:hover,
   .dropdown-item--highlighted {
@@ -992,9 +987,7 @@
   }
 
   .dropdown-native:has(:focus-visible) {
-    box-shadow:
-      var(--goa-dropdown-border),
-      var(--goa-dropdown-border-focus);
+    box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
   }
 
   goa-icon:focus-visible {
@@ -1005,5 +998,4 @@
     color: var(--goa-dropdown-color-text-placeholder);
     opacity: 1;
   }
-
 </style>

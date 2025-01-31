@@ -9,6 +9,3 @@
     <goa-button type="secondary" size="compact">Click me</goa-button>
   </div>
 </goa-popover>
-
-
-

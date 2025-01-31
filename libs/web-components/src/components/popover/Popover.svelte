@@ -140,22 +140,79 @@
   // Opens the popover and adds the required binding to the new slot element
   function openPopover() {
     if (_disabled) return;
-    (async () => {
-      _open = true;
-      await tick();
-      _focusTrapEl.addEventListener("keydown", onFocusTrapEvent, true);
-      _rootEl.dispatchEvent(new CustomEvent("_open", { composed: true }));
-    })();
+
+    _open = true;
+    _focusTrapEl.addEventListener("keydown", onFocusTrapEvent, true);
+    _rootEl.dispatchEvent(new CustomEvent("_open", { composed: true }));
+    _initFocusedEl.focus();
+    makeEventsBubbleUpFromSlottedElements();
   }
 
   // Ensures that upon closing of the popover that the element that triggered
   // the popover to be shown re-attains focus and that any window event binding
   // is removed (it may not have been added if target was clicked)
   function closePopover() {
-    _initFocusedEl.focus();
+    if (_disabled) return;
+
     _open = false;
     window.removeEventListener("popstate", handleUrlChange, true);
     _rootEl.dispatchEvent(new CustomEvent("_close", { composed: true }));
+    _initFocusedEl.focus({ preventScroll: true });
+  }
+
+  // Ensures that all immediate children of the popover target and content are included
+  // in event.relatedTarget that bubbles up to popover 'focusout' event handler
+  function makeEventsBubbleUpFromSlottedElements() {
+    const immediateChildren = getSlottedChildren(_targetEl);
+    immediateChildren.forEach((child) => {
+      if ((child as HTMLElement).tabIndex < 0) {
+        (child as HTMLElement).tabIndex = -1;
+      }
+    });
+    const content = $$slots.default;
+    if (content && _focusTrapEl) {
+      const immediateChildren = getSlottedChildren(_focusTrapEl);
+      immediateChildren.forEach((child) => {
+        if ((child as HTMLElement).tabIndex < 0) {
+          (child as HTMLElement).tabIndex = -1;
+        }
+      });
+    }
+  }
+
+  function handleFocusOut(e: FocusEvent) {
+    if (_disabled || !_open) return;
+
+    const activeElement = e.relatedTarget;
+    const isFocusInPopover =
+      activeElement instanceof Element &&
+      isElementContainedInSlotsRecursive(_rootEl, activeElement);
+    if (!isFocusInPopover) {
+      closePopover();
+    }
+  }
+
+  export function isElementContainedInSlotsRecursive(
+    rootEl: Element,
+    childEl: Element,
+    depth = 15,
+  ): boolean {
+    if (rootEl.contains(childEl)) {
+      return true;
+    }
+    if (depth <= 0) {
+      return false;
+    }
+    const slots = rootEl.querySelectorAll("slot");
+    for (const slot of Array.from(slots)) {
+      const assigned = slot.assignedElements();
+      for (const el of assigned) {
+        if (isElementContainedInSlotsRecursive(el, childEl, depth - 1)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   function getBoundingClientRectWithMargins(
@@ -226,6 +283,7 @@
 <div
   bind:this={_rootEl}
   data-testid={testid}
+  on:focusout={handleFocusOut}
   style={styles(
     _relative && "position: relative",
     height === "full" && "height: 100%;",
@@ -252,35 +310,30 @@
     <slot name="target" />
   </div>
 
-  {#if _open}
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
-      data-testid="popover-background"
-      class="popover-background"
-      on:click={closePopover}
-    />
-    <div class="popover-container">
-      <section
-        bind:clientHeight={_sectionHeight}
-        bind:this={_popoverEl}
-        data-testid="popover-content"
-        class="popover-content"
-        style={styles(
-          style("width", width),
-          style("min-width", minwidth),
-          style("max-width", width ? `max(${width}, ${maxwidth})` : maxwidth),
-          style("padding", _padded ? "var(--goa-space-m)" : "0")
-        )}
-      >
-        <goa-focus-trap open="true">
-          <div bind:this={_focusTrapEl}>
-            <slot />
-          </div>
-        </goa-focus-trap>
-      </section>
-    </div>
-  {/if}
+  <div
+    class="popover-container"
+    style={!_open && styles(style("display", "none"))}
+  >
+    <section
+      bind:clientHeight={_sectionHeight}
+      bind:this={_popoverEl}
+      data-testid="popover-content"
+      tabindex="-1"
+      class="popover-content"
+      style={styles(
+        style("width", width),
+        style("min-width", minwidth),
+        style("max-width", width ? `max(${width}, ${maxwidth})` : maxwidth),
+        style("padding", _padded ? "var(--goa-space-m)" : "0"),
+      )}
+    >
+      <goa-focus-trap open="true">
+        <div bind:this={_focusTrapEl}>
+          <slot />
+        </div>
+      </goa-focus-trap>
+    </section>
+  </div>
 </div>
 
 <!-- Style -->
@@ -298,7 +351,7 @@
   .popover-target {
     cursor: pointer;
     height: 100%;
-   outline: none;
+    outline: none;
   }
 
   .popover-target:has(:focus-visible) {
@@ -328,12 +381,4 @@
     list-style-type: none;
     line-height: 2rem;
   }
-
-  .popover-background {
-    cursor: default;
-    position: fixed;
-    z-index: 98;
-    inset: 0;
-  }
-
 </style>

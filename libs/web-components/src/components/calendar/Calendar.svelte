@@ -304,6 +304,7 @@
   style={calculateMargin(mt, mr, mb, ml)}
   class:bordered={bordered === "true"}
   data-testid={testid}
+  tabindex="-1"
 >
   <goa-block mb="m">
     <goa-form-item label="Month" mt="0">
