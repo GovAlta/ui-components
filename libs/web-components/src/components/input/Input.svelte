@@ -17,7 +17,7 @@
   import { calculateMargin } from "../../common/styling";
   import { onMount, tick } from "svelte";
   import {
-  FieldsetErrorRelayDetail,
+    FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
     FieldsetResetFieldsMsg,
     FieldsetSetErrorMsg,
@@ -298,6 +298,7 @@
         class="leading-icon"
         data-testid="leading-icon"
         type={leadingicon}
+        tabindex="-1"
       />
     {/if}
 
@@ -337,6 +338,7 @@
         data-testid="trailing-icon"
         size="medium"
         type={trailingicon}
+        tabindex="-1"
       />
     {/if}
 

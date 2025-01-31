@@ -1,37 +1,33 @@
-import { render, fireEvent } from "@testing-library/svelte";
+import { render } from "@testing-library/svelte";
+import userEvent, { UserEvent } from "@testing-library/user-event";
 import PopoverWrapper from "./PopoverWrapper.test.svelte";
 import Popover from "./Popover.svelte";
 import { it } from "vitest";
 
-it("should render", async () => {
-  const { container } = render(PopoverWrapper, {
-    content: "This is content",
-    targetTrigger: "Clik Action",
-  });
+let user: UserEvent;
 
-  const slotContent = container.querySelector("[slot=content]");
-  const slotTarget = container.querySelector("[slot=target]");
+beforeEach(() => {
+  user = userEvent.setup();
+});
 
-  expect(slotContent).toBeTruthy();
+it("should render without content by default", async () => {
+  const result = render(Popover);
+
+  const slotContent = result.queryByTestId("popover-content");
+  const slotTarget = result.queryByTestId("popover-target");
+
+  expect(slotContent?.parentElement?.style.display).toBe("none");
   expect(slotTarget).toBeTruthy();
-
-  expect(slotContent?.innerHTML).toContain(
-    "This is content",
-  );
-  expect(slotTarget?.innerHTML).toContain(
-    "Clik Action",
-  );
 });
 
 it("should open content when target is clicked", async () => {
-  const result = render(Popover, {minwidth: "8rem", maxwidth: "16rem"});
+  const result = render(Popover, { minwidth: "8rem", maxwidth: "16rem" });
   const target = result.queryByTestId("popover-target");
   expect(target).toBeTruthy();
 
-  expect(result.queryByTestId("popover-content")).toBeNull();
-  target && await fireEvent.click(target);
+  target && (await user.click(target));
   const popOverContent = result.queryByTestId("popover-content");
-  expect(popOverContent).toBeTruthy();
+  expect(popOverContent?.parentElement?.style.display).not.toBe("none");
   const style = popOverContent?.getAttribute("style");
   expect(style).toContain("min-width: 8rem");
   expect(style).toContain("max-width: 16rem");
@@ -40,16 +36,60 @@ it("should open content when target is clicked", async () => {
 
 it("should close content when clicked outside the content container", async () => {
   const result = render(Popover);
+
   const target = result.queryByTestId("popover-target");
-
   expect(target).toBeTruthy();
-  target && await fireEvent.click(target);
+  expect(result.queryByTestId("popover-content")?.parentElement?.style.display).toBe("none");
 
-  const background = result.queryByTestId("popover-background");
-  expect(background).toBeTruthy();
-  expect(result.queryByTestId("popover-content")).toBeTruthy();
-  expect(result.queryByTestId("popover-background")).toBeTruthy();
+  // click on popover target
+  target && (await user.click(target));
+  expect(result.queryByTestId("popover-content")?.parentElement?.style.display).not.toBe("none");
 
-  background && await fireEvent.click(background);
-  expect(result.queryByTestId("popover-content")).toBeNull();
+  // click outside of popover
+  await user.click(document.body);
+  expect(result.queryByTestId("popover-content")?.parentElement?.style.display).toBe("none");
+});
+
+it("should not close content when clicked focusable target then click focusable content inside the content container", async () => {
+  // arrange to test that focusout event bubbles up to popover component
+  const result = render(PopoverWrapper, {
+    content: `<button data-testid="clickable-content">Click me</button>`,
+    targetTrigger: `<div><button data-testid="clickable-target">Click Action</button></div>`,
+  });
+
+  const target = result.queryByTestId("clickable-target");
+  expect(target).toBeTruthy();
+  expect(result.queryByTestId("popover-content")?.parentElement?.style.display).toBe("none");
+
+  // click on focusable element within popover target
+  target && (await user.click(target));
+  expect(result.queryByTestId("popover-content")?.parentElement?.style.display).not.toBe("none");
+
+  // click on focusable content inside popover content
+  const button = result.queryByTestId("clickable-content");
+  button && (await user.click(button));
+  expect(result.queryByTestId("popover-content")?.parentElement?.style.display).not.toBe("none");
+});
+
+it("should not close content when clicked non-focusable target then click non-focusable content inside the content container", async () => {
+  // arrange to test that focusout event bubbles up to popover component
+  const result = render(PopoverWrapper, {
+    content: `<span data-testid="non-focusable-content">Click me</span>`,
+    targetTrigger: `<span data-testid="non-focusable-target">Click Action</span>`,
+  });
+
+  const target = result.queryByTestId("non-focusable-target");
+  expect(target).toBeTruthy();
+  expect(result.queryByTestId("popover-content")?.parentElement?.style.display).toBe("none");
+
+  // click on non-focusable element within popover target
+  target && (await user.click(target));
+  expect(result.queryByTestId("popover-content")?.parentElement?.style.display).not.toBe("none");
+
+  // click on non-focusable content within popover content
+  const contentNonfocusableEl = result.queryByTestId("non-focusable-content");
+  expect(contentNonfocusableEl?.tabIndex).toBe(-1);
+
+  contentNonfocusableEl && (await user.click(contentNonfocusableEl));
+  expect(result.queryByTestId("popover-content")?.parentElement?.style.display).not.toBe("none");
 });
