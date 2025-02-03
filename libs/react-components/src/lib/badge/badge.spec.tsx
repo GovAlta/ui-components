@@ -1,12 +1,16 @@
-import { render } from "@testing-library/react";
+import { configure, render } from "@testing-library/react";
 import { GoabBadge } from "./badge";
 import { screen } from "@testing-library/dom";
+
+configure({
+  testIdAttribute: "testId",
+});
 
 describe("GoabBadge", () => {
   it("should render", () => {
     render(<GoabBadge type="information" testId="badge-test" content="Text Content" />);
 
-    const badge = screen.findByTestId("badge-test");
+    const badge = screen.getByTestId("badge-test");
     expect(badge).toBeTruthy();
   });
 
