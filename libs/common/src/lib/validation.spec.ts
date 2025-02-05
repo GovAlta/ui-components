@@ -6,9 +6,125 @@ import {
   emailValidator,
   postalCodeValidator,
   dateValidator,
+  requiredValidator,
+  numericValidator,
+  phoneNumberValidator,
 } from "./validators";
 
 describe("Validation", () => {
+  describe("Required", () => {
+    const validator = requiredValidator();
+    it("should pass", () => {
+      const err = validator("some value");
+      expect(err).toBeFalsy();
+    });
+
+    it("should fail", () => {
+      const err = validator("");
+      expect(err).toBeTruthy();
+    });
+  });
+
+  describe("Numeric", () => {
+    describe("Default props", () => {
+      const validator = numericValidator();
+
+      [1, 4, 10, "1", "4", "10"].forEach((val) => {
+        it(`${val} is a valid numeric value`, () => {
+          const err = validator(val);
+          expect(err).toBeFalsy();
+        });
+      });
+    });
+
+    describe("Min / Max", () => {
+      const validator = numericValidator({ min: 1, max: 10 });
+
+      [1, 4, 10, "1", "4", "10"].forEach((val) => {
+        it(`${val} is in the range of 1-10`, () => {
+          const err = validator(val);
+          expect(err).toBeFalsy();
+        });
+      });
+
+      [0, 11, "0", "11"].forEach((val) => {
+        it(`${val} is out of the range of 1-10`, () => {
+          const err = validator(val);
+          expect(err).toBeTruthy();
+        });
+      });
+    });
+  });
+
+  describe("Date", () => {
+    describe("Default props", () => {
+      const validator = dateValidator();
+
+      describe("valid dates", () => {
+        ["", null, 42, new Date(2025, 3, 2)].forEach((val) => {
+          it(`${val} is a valid date`, () => {
+            const err = validator(val);
+            expect(err).toBeFalsy();
+          });
+        });
+      });
+    });
+
+    describe("Min / Max", () => {
+      const validator = dateValidator({
+        min: new Date(2025, 0, 1),
+        max: new Date(2025, 2, 1),
+      });
+
+      [null, new Date(2025, 0, 1), new Date(2025, 2, 1), new Date(2025, 1, 1)].forEach(
+        (val) => {
+          it(`${val} is a valid date`, () => {
+            const err = validator(val);
+            expect(err).toBeFalsy();
+          });
+        },
+      );
+
+      [new Date(2024, 11, 31), new Date(2025, 3, 1)].forEach((val) => {
+        it(`${val} is an invalid date`, () => {
+          const err = validator(val);
+          expect(err).toBeTruthy();
+        });
+      });
+    });
+  });
+
+  describe("Phone", () => {
+    const validator = phoneNumberValidator();
+    const valid = [
+      "5551234567",
+      "(555) 1234567",
+      "555-1234567",
+      "555 123 4567",
+      "555-123-4567",
+      "(555)-123-4567",
+      "(555) 123-4567",
+      "(5) 123 4567",
+      "1-555-123-4567",
+      "(1) 555-123-4567",
+      "+1 555-123-4567",
+      "+1 555 123-4567",
+      "+1 (555) 123-4567",
+    ];
+
+    valid.forEach((val) => {
+      it(`${val} is valid`, () => {
+        const err = validator(val);
+        expect(err).toBeFalsy();
+      });
+    });
+
+    it("should fail", () => {
+      const err = validator("123");
+      expect(err).toBeTruthy();
+    });
+  });
+
   describe("Email", () => {
     const validEmails = [
       "",
@@ -114,7 +230,7 @@ describe("Validation", () => {
       const validValues = ["", "123456"];
       const invalidValues = ["12345"];
 
-      const validate = lengthValidator({ min: 6, optional: true });
+      const validate = lengthValidator({ min: 6 });
 
       for (const val of validValues) {
         it(`${val} should be valid`, () => {
@@ -131,10 +247,10 @@ describe("Validation", () => {
       }
     });
 
-    describe("Required", () => {
-      const validValues = ["123456"];
-      const invalidValues = ["", "12345"];
-      const validate = lengthValidator({ min: 6, optional: false });
+    describe("Length", () => {
+      const validValues = ["", "123456"];
+      const invalidValues = ["12345"];
+      const validate = lengthValidator({ min: 6 });
 
       for (const val of validValues) {
         it(`${val} should be valid`, () => {
@@ -183,13 +299,5 @@ describe("Validation", () => {
     // describe("End date", () => {
     //
     // })
-  });
-
-  describe("Regex", () => {
-    it("needs a test");
-  });
-
-  describe("Phone", () => {
-    it("needs a test");
   });
 });
