@@ -62,7 +62,6 @@
 
   //
   // Private
-  //
 
   let _options: Option[] = [];
   let _selectedOption: Option | undefined;
@@ -86,6 +85,13 @@
   let _mountTimeoutId: any = undefined;
   let _error = toBoolean(error);
   let _prevError = _error;
+  let _dropdownWidth = "auto"; // Default to auto
+
+  $: {
+    if (_inputEl) {
+      _dropdownWidth = `${_inputEl.offsetWidth}px`; // Match input width dynamically
+    }
+  }
 
   //
   // Reactive
@@ -109,8 +115,19 @@
 
   // ensures the width is set based on the width prop supplied or the children size
   $: {
-    _width = width || getLongestChildWidth(_options);
-    _popoverMaxWidth = _width;
+    if (width) {
+      const unitPattern = /(px|%|ch)$/; // Regex to detect valid units
+      if (unitPattern.test(width)) {
+        _width = width; // Use the provided width with a valid unit
+      } else {
+        _width = `${width}px`; // Default to px if no unit is provided
+      }
+    } else {
+      _width = getLongestChildWidth(_options); // Calculate based on the longest option
+    }
+
+    // Set max width to the smaller of the dropdown's width or 100% of its container
+    _popoverMaxWidth = `min(${_width}, 100%)`;
   }
 
   // TODO: Syed can you add a comment here describing what this does?
@@ -256,12 +273,12 @@
       .sort((a: number, b: number) => (a > b ? 1 : -1))
       .pop();
 
-    // longest one defines the width
-    let maxWidth = Math.max(optionsWidth || 0, placeholder.length) + 8;
+    // calculate the maximum width based on the longest option or placeholder length
+    let maxWidth = Math.max(optionsWidth || 0, placeholder.length) + 7;
 
     // compensate for icon width
     if (leadingicon) {
-      maxWidth += 2;
+      maxWidth += 4;
     }
 
     return `${maxWidth}ch`;
@@ -617,6 +634,7 @@
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${_width};
     `}
+  bind:clientWidth={_popoverMaxWidth}
 >
   {#if _native}
     <select
@@ -643,7 +661,9 @@
       {disabled}
       {relative}
       data-testid="option-list"
-      width={_popoverMaxWidth || "300px"}
+      width={`${_popoverMaxWidth || 0}`}
+      minwidth={_dropdownWidth}
+      maxwidth={_dropdownWidth}
       open={_isMenuVisible}
       padded="false"
       tabindex="-1"
@@ -709,6 +729,7 @@
             class:disabled={_disabled}
             size="medium"
             type="close"
+            theme="filled"
           />
         {:else}
           <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -786,58 +807,50 @@
   .dropdown {
     cursor: pointer;
     width: var(--width, 100%);
-  }
-  @media (--mobile) {
-    .dropdown {
-      width: 100%;
-    }
-  }
-  @media (--not-mobile) {
-    .dropdown {
-      width: var(--width, 100%);
-    }
+    max-width: 100%;
+
   }
 
   .dropdown-input-group {
     box-sizing: border-box;
     outline: none;
-    transition: box-shadow 0.1s ease-in;
-    border: 1px solid var(--goa-color-greyscale-700);
-    border-radius: var(--goa-border-radius-m);
+    transition: var(--goa-dropdown-transition);
+    box-shadow: var(--goa-dropdown-border);
+    border-radius: var(--goa-dropdown-border-radius);
     display: inline-flex;
     align-items: stretch;
-
-    /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
-    background-color: var(--goa-color-greyscale-white);
+    background-color: var(--goa-dropdown-color-bg);
     cursor: pointer;
-    /*width of dropdown input should be 100% based on its parent div*/
     width: 100%;
   }
   .dropdown-input-group:hover {
-    border-color: var(--goa-color-interactive-hover);
+    box-shadow: var( --goa-dropdown-border-hover);
+    border: none;
   }
   .dropdown-input-group:has(input:focus-visible) {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    box-shadow:
+      var(--goa-dropdown-border),
+      var(--goa-dropdown-border-focus);
   }
   .dropdown-input-group.error,
   .dropdown-input-group.error:hover {
-    border: 2px solid var(--goa-color-interactive-error);
-    box-shadow: 0 0 0 1px var(--goa-color-interactive-error);
+    box-shadow: var(--goa-dropdown-border-error);
   }
   .dropdown-input-group.error:has(:focus-visible) {
-    border: 2px solid var(--goa-color-interactive-error);
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    box-shadow:
+      var(--goa-dropdown-border),
+      var(--goa-dropdown-border-focus);
   }
   @container not (--mobile) {
     .dropdown-input-group {
-      width: var(--width);
+      width: var(--width, 100%);
     }
   }
 
   .dropdown-icon--arrow,
   .dropdown-icon--clear {
-    margin-right: var(--goa-space-s);
+    margin-right: var(--goa-dropdown-space-icon-text);
   }
 
   /* TODO: add indicator to when the reset button has focus state */
@@ -847,25 +860,23 @@
   }
 
   .dropdown-input--leading-icon {
-    margin-left: 0.75rem;
+    margin-left: var(--goa-dropdown-padding-lr);
   }
 
   .dropdown-input--leading-icon + input {
-    padding-left: 0.5rem;
+    padding-left: var(--goa-space-xs);
   }
 
   input {
     display: inline-block;
-    color: var(--goa-color-text-default);
-    font-size: var(--goa-font-size-4);
-    padding: var(--goa-space-xs);
-    padding-left: var(--goa-space-s);
-    line-height: calc(40px - calc(var(--goa-space-xs) * 2));
+    font: var(--goa-dropdown-typography);
+    color: var(--goa-dropdown-color-text);
+    padding: var(--goa-dropdown-padding);
     background-color: transparent;
     width: 100%;
     flex: 1 1 auto;
-    font-family: var(--goa-font-family-sans);
     z-index: 1;
+    text-overflow: ellipsis;
   }
 
   input,
@@ -877,22 +888,26 @@
   }
 
   input[aria-disabled="true"] {
-    color: var(--goa-color-text-secondary);
+    color: var(--goa-dropdown-color-text-disabled);
   }
 
+  /* Dropdown Menu */
   .dropdown-input-group--disabled,
   .dropdown-input-group--disabled:hover,
   .dropdown-input-group--disabled:active,
   .dropdown-input-group--disabled:focus {
-    background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-greyscale-200) !important;
+    background-color: var(--goa-dropdown-color-bg-disabled);
+    box-shadow: var(--goa-dropdown-border-disabled);
     cursor: default;
-    box-shadow: none !important;
+  }
+  .dropdown-input-group--disabled goa-icon {
+    outline: none;
+    color: var(--goa-dropdown-color-text-disabled);
   }
 
   /** menu **/
   ul[role="listbox"] {
-    border-radius: var(--goa-border-radius-m);
+    border-radius: var(--goa-dropdown-border-radius);
     padding: 0;
     margin: 0;
   }
@@ -901,63 +916,61 @@
 
   .dropdown-item {
     margin: 0;
-    padding: 0.5rem;
+    padding: var(--goa-dropdown-item-padding);
     cursor: pointer;
-    color: var(--goa-color-greyscale-black);
-
+    color: var(--goa-dropdown-item-color-text);
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+    white-space: normal; /* Allows text to wrap */
+    word-break: break-word; /* Ensures long words break onto the next line */
+    overflow-wrap: break-word; /* Alternative for word wrapping */
+    }
 
   .dropdown-item:hover,
   .dropdown-item--highlighted {
-    background: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
+    background: var(--goa-dropdown-item-color-bg-hover);
+    color: var(--goa-dropdown-item-color-text-hover);
   }
 
   .dropdown-item[aria-selected="true"] {
-    background: var(--goa-color-interactive-default);
-    color: var(--goa-color-greyscale-white);
+    background: var(--goa-dropdown-item-color-bg-selected);
+    color: var(--goa-dropdown-item-color-text-selected);
   }
 
   .dropdown-item[aria-selected="true"]:hover,
   .dropdown-item[aria-selected="true"].dropdown-item--highlighted {
-    background: var(--goa-color-interactive-hover);
-    color: var(--goa-color-greyscale-white);
+    background: var(--goa-dropdown-item-color-bg-selected-hover);
+    color: var(--goa-dropdown-item-color-text-selected-hover);
   }
 
   /* Native styling  */
   .dropdown-native {
     position: relative;
-    border: 1px solid var(--goa-color-greyscale-700);
-    border-radius: var(--goa-border-radius-m);
-    background-color: var(--goa-color-greyscale-white);
-    transition: box-shadow 0.1s ease-in;
+    box-shadow: var(--goa-dropdown-border);
+    border-radius: var(--goa-dropdown-border-radius);
+    background-color: var(--goa-dropdown-color-bg);
+    transition: var(--goa-dropdown-transition);
   }
 
   .dropdown-native:has(select:disabled) {
-    background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-greyscale-200);
-    box-shadow: none;
+    background-color: var(--goa-dropdown-color-bg-disabled);
+    box-shadow: var(--goa-dropdown-border-disabled);
     color: var(--goa-color-text-secondary);
     cursor: default;
   }
 
   .dropdown-native:has(select.error) {
-    border: 2px solid var(--goa-color-interactive-error);
+    box-shadow: var(--goa-dropdown-border-error);
   }
 
   .dropdown-native:hover {
-    border-color: var(--goa-color-interactive-hover);
+    box-shadow: var(--goa-dropdown-border-hover);
   }
 
   select {
     border: none;
-    font: var(--goa-font-family-sans);
+    font: var(--goa-dropdown-typography);
     background-color: transparent;
-    color: var(--goa-color-text-default);
-    font-size: var(--goa-font-size-4);
+    color: var(--goa-dropdown-color-text);
     appearance: none;
     padding: calc(var(--goa-space-xs) + 1px);
     padding-left: var(--goa-space-s);
@@ -979,10 +992,18 @@
   }
 
   .dropdown-native:has(:focus-visible) {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    box-shadow:
+      var(--goa-dropdown-border),
+      var(--goa-dropdown-border-focus);
   }
 
   goa-icon:focus-visible {
     outline: none;
   }
+
+  ::placeholder {
+    color: var(--goa-dropdown-color-text-placeholder);
+    opacity: 1;
+  }
+
 </style>

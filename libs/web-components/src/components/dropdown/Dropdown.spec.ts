@@ -121,7 +121,9 @@ describe("GoADropdown", () => {
         expect(inputField?.getAttribute("type")).toBe("text");
         expect(inputField?.getAttribute("aria-owns")).toBeNull(); // Menu is hidden
 
-        expect(dropdownIcon?.getAttribute("ariacontrols")).toBe("menu-favcolor");
+        expect(dropdownIcon?.getAttribute("ariacontrols")).toBe(
+          "menu-favcolor",
+        );
         expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("false");
         expect(dropdownIcon?.getAttribute("arialabel")).toBe("favcolor");
         expect(dropdownIcon?.getAttribute("role")).toBe("button");
@@ -138,7 +140,9 @@ describe("GoADropdown", () => {
         const option = result.container.querySelector("li#orange");
         expect(option).toBeTruthy();
         expect(option?.getAttribute("aria-selected")).toBe("true");
-        expect(option?.getAttribute("data-testid")).toBe("dropdown-item-orange");
+        expect(option?.getAttribute("data-testid")).toBe(
+          "dropdown-item-orange",
+        );
         expect(option?.getAttribute("data-value")).toBe("orange");
         expect(option?.getAttribute("role")).toBe("option");
         expect(option).toHaveTextContent("orange");
@@ -259,7 +263,9 @@ describe("GoADropdown", () => {
                 "dropdown-item-not-found",
               );
             } else {
-              expect(liElements[0].getAttribute("data-value")).toBe(expectedOption);
+              expect(liElements[0].getAttribute("data-value")).toBe(
+                expectedOption,
+              );
             }
           });
         },
@@ -273,7 +279,9 @@ describe("GoADropdown", () => {
       expect(button).toBeTruthy();
       button && (await fireEvent.click(button));
       await waitFor(async () => {
-        const selected = result.container.querySelector("li[aria-selected=true]");
+        const selected = result.container.querySelector(
+          "li[aria-selected=true]",
+        );
         expect(selected).not.toBeNull();
         expect(selected?.innerHTML).toContain("orange");
       });
@@ -393,7 +401,9 @@ describe("GoADropdown", () => {
 
       // show menu
       inputField && (await fireEvent.focus(inputField));
-      const inputGroupDiv = result.container.querySelector("div.dropdown-input-group");
+      const inputGroupDiv = result.container.querySelector(
+        "div.dropdown-input-group",
+      );
       expect(inputGroupDiv?.getAttribute("class")).not.toContain("error");
     });
 
@@ -411,7 +421,9 @@ describe("GoADropdown", () => {
 
       // show menu
       inputField && (await fireEvent.focus(inputField));
-      const inputGroupDiv = result.container.querySelector("div.dropdown-input-group");
+      const inputGroupDiv = result.container.querySelector(
+        "div.dropdown-input-group",
+      );
       expect(inputGroupDiv?.getAttribute("class")).toContain("error");
     });
   });
@@ -468,7 +480,7 @@ describe("GoADropdown", () => {
 
       await waitFor(() => {
         const dropdown = result.container.querySelector(".dropdown");
-        expect(dropdown?.getAttribute("style")).toContain("--width: 9ch"); // 8 + 1 (letter count of longest item)
+        expect(dropdown?.getAttribute("style")).toContain("--width: 8ch"); // 7 + 1 (letter count of longest item)
       });
     });
 
@@ -480,7 +492,7 @@ describe("GoADropdown", () => {
 
       await waitFor(() => {
         const dropdown = result.container.querySelector(".dropdown");
-        expect(dropdown?.getAttribute("style")).toContain("--width: 28ch"); // 8 + 20
+        expect(dropdown?.getAttribute("style")).toContain("--width: 27ch"); // 7 + 20
       });
     });
 
@@ -709,7 +721,9 @@ describe("GoADropdown", () => {
         native: true,
         items,
       });
-      expect(container?.querySelector("select")?.getAttribute("id")).toBe("favcolor");
+      expect(container?.querySelector("select")?.getAttribute("id")).toBe(
+        "favcolor",
+      );
       await waitFor(() => {
         const options = container.querySelectorAll("select option");
         expect(options.length).toBe(3);
@@ -840,7 +854,9 @@ describe("GoADropdown", () => {
       const child = document.createElement("goa-dropdown-item");
       child.setAttribute("value", "cyan");
       child.setAttribute("mount", "reset");
-      container.querySelector("[data-testid=dropdown-menu]")?.appendChild(child);
+      container
+        .querySelector("[data-testid=dropdown-menu]")
+        ?.appendChild(child);
 
       await waitFor(() => {
         const children = document.querySelectorAll("goa-dropdown-item");
@@ -862,7 +878,9 @@ describe("GoADropdown", () => {
       const child = document.createElement("goa-dropdown-item");
       child.setAttribute("value", "cyan");
       child.setAttribute("mount", "prepend");
-      container.querySelector("[data-testid=dropdown-menu]")?.appendChild(child);
+      container
+        .querySelector("[data-testid=dropdown-menu]")
+        ?.appendChild(child);
 
       await waitFor(() => {
         const children = container.querySelectorAll("li");
@@ -885,7 +903,9 @@ describe("GoADropdown", () => {
       const child = document.createElement("goa-dropdown-item");
       child.setAttribute("value", "cyan");
       child.setAttribute("mount", "append");
-      container.querySelector("[data-testid=dropdown-menu]")?.appendChild(child);
+      container
+        .querySelector("[data-testid=dropdown-menu]")
+        ?.appendChild(child);
 
       await waitFor(() => {
         const children = container.querySelectorAll("li");
