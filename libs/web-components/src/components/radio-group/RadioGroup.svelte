@@ -214,17 +214,21 @@
 </div>
 
 <style>
-  :host {
-    box-sizing: border-box;
+
+:host {
     font-family: var(--goa-font-family-sans);
   }
+
   .goa-radio-group--horizontal {
     display: flex;
     flex-direction: row;
+    gap: var(--goa-radio-group-gap-horizontal);
   }
 
   .goa-radio-group--vertical {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column; /* Vertical stacking */
+    gap: var(--goa-radio-group-gap-vertical); /* Adds spacing */
   }
 
   /* Focus styles */
