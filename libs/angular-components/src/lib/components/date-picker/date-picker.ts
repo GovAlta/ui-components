@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   selector: "goab-date-picker",
   template: ` <goa-date-picker
     [attr.name]="name"
-    [attr.value]="value"
+    [attr.value]="formatValue(value)"
     [attr.min]="min"
     [attr.max]="max"
     [attr.error]="error"
@@ -55,6 +55,16 @@ export class GoabDatePicker implements ControlValueAccessor {
 
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
 
+  formatValue(val: Date | string | null | undefined): string {
+    if (!val) return "";
+
+    if (val instanceof Date) {
+      return val.toISOString();
+    }
+
+    return val;
+  }
+
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoabDatePickerOnChangeDetail>).detail;
     this.onChange.emit(detail);
@@ -63,13 +73,13 @@ export class GoabDatePicker implements ControlValueAccessor {
   }
 
   // ControlValueAccessor
-
   constructor(protected elementRef: ElementRef) {}
 
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
     this.elementRef.nativeElement.disabled = isDisabled;
   }
+
   @HostListener("disabledChange", ["$event.detail.disabled"])
   listenDisabledChange(isDisabled: boolean) {
     this.setDisabledState(isDisabled);
@@ -88,6 +98,19 @@ export class GoabDatePicker implements ControlValueAccessor {
 
   writeValue(value: Date | null): void {
     this.value = value;
+
+    const datePickerEl = this.elementRef?.nativeElement?.querySelector("goa-date-picker");
+
+    if (datePickerEl) {
+      if (!value) {
+        datePickerEl.setAttribute("value", "");
+      } else {
+        datePickerEl.setAttribute(
+          "value",
+          value instanceof Date ? value.toISOString() : value,
+        );
+      }
+    }
   }
 
   registerOnChange(fn: any): void {
