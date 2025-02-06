@@ -9,7 +9,7 @@
   export type GoATabProps = {
     el: HTMLElement;
     headingType: "slot" | "string";
-    heading: HTMLSlotElement | string;  
+    heading: HTMLSlotElement | string;
     open: boolean;
   }
 </script>
@@ -33,13 +33,13 @@
   let _headingSlotEl: HTMLElement;
 
   onMount(() => {
-    dispatchInit();    
+    dispatchInit();
     addSetOpenEventListener();
   })
 
   function dispatchInit() {
     setTimeout(() => {
-      const headingType = $$slots.heading ? "slot" : "string"; 
+      const headingType = $$slots.heading ? "slot" : "string";
       _rootEl?.dispatchEvent(new CustomEvent("tab:mounted", {
         composed: true,
         bubbles: true,
@@ -49,7 +49,7 @@
           heading: headingType === "string" ? heading : getHeadingContents(),
           open: open
         }
-      }))  
+      }))
     }, 1);
   }
 
@@ -57,7 +57,7 @@
     return getSlottedChildren(_headingSlotEl, "*")[0]
   }
 
-  // Listen for parent Tab component open event 
+  // Listen for parent Tab component open event
   function addSetOpenEventListener() {
     _rootEl.addEventListener("tabs:set-open", (e: Event) => {
       const props = (e as CustomEvent<Partial<GoATabProps>>).detail;
@@ -77,9 +77,3 @@
     </div>
   {/if}
 </section>
-
-<style>
-  [role="tabpanel"] {
-    padding-top: 2rem;
-  }
-</style>

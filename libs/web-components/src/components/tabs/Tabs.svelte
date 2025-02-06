@@ -254,13 +254,15 @@
 </div>
 
 <style>
+
   :host {
     box-sizing: border-box;
-    font: var(--goa-typography-body-m);
+    font: var(--goa-tab-typography);
   }
 
   :global(.tab) {
     display: flex;
+    align-items: center;
     gap: var(--goa-space-xs);
   }
 
@@ -271,53 +273,78 @@
     white-space: nowrap;
     cursor: pointer;
     border: none;
-    font: var(--goa-typography-body-m);
-    color: var(--goa-color-text-default);
+    font: var(--goa-tab-typography);
+    color: var(--goa-tab-text-color);
     text-decoration: none;
-    letter-spacing: 0.03125rem;
   }
 
   :global([role="tab"][aria-selected="true"]) {
-    font: var(--goa-typography-heading-s);
+    font: var(--goa-tab-typography-selected);
   }
 
   :global([role="tab"]:focus-visible) {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline: var(--goa-tab-border-focus);
   }
 
   :global([role="tab"]:hover:not([aria-selected="true"])) {
-    border-color: var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-tab-border-hover);
   }
+
+  :global([role="tabpanel"]:focus-visible) {
+    outline: var(--goa-tab-border-focus);
+    outline-offset: 4px; /* Adjust as needed */
+  }
+
 
   @media (--not-mobile) {
     :global([role="tablist"]) {
-      border-bottom: none;
+
     }
     .tabs {
-      border-bottom: var(--goa-border-width-s) solid
-        var(--goa-color-greyscale-200);
+      border-bottom: var(--goa-tabs-bottom-border);
       display: flex;
-      gap: var(--goa-space-xl);
+      gap: var(--goa-tabs-gap);
+      margin-bottom: 2rem;
     }
     :global([role="tab"]) {
-      padding: var(--goa-space-s) var(--goa-space-m);
-      border-bottom: 4px solid transparent;
+      padding: var(--goa-tab-padding);
+      border-bottom: var(--goa-tab-border-not-selected);
+      text-overflow: ellipsis;
+      min-width: var(--goa-space-2xl);
+      text-align: center;
     }
     :global([role="tab"][aria-selected="true"]) {
-      border-color: var(--goa-color-interactive-default);
+      border-bottom: var(--goa-tab-border-selected);
     }
   }
 
   @media (--mobile) {
+
+    .tabs {
+      border-left: var(--goa-tabs-bottom-border);
+      border-bottom: var(--goa-tabs-bottom-border);
+      display: flex;
+      flex-direction: column;
+      gap: var(--goa-tabs-gap-small-screen);
+      padding-bottom: var(--goa-space-m);
+      margin-bottom: 2rem;
+    }
+
     :global([role="tab"]) {
-      width: 100%;
-      padding: var(--goa-space-xs) 0;
-      padding-left: 12px;
-      border-left: 4px solid transparent;
+      padding: var(--goa-tab-padding-mobile);
+      border-left: var(--goa-tab-border-not-selected);
+      text-overflow: wrap;
+      white-space: normal; /* Allows text to wrap */
+      word-break: break-word; /* Ensures long words break onto the next line */
+      overflow-wrap: break-word; /* Alternative for word wrapping */
     }
     :global([role="tab"][aria-selected="true"]) {
-      border-color: var(--goa-color-interactive-default);
-      background: var(--goa-color-info-background);
+      border-left: var(--goa-tab-border-selected);
+      background: var(--goa-tab-color-bg-selected-small-screen);
+    }
+    :global([role="tab"]:hover:not([aria-selected="true"])) {
+    border-left: var(--goa-tab-border-hover);
+    border-bottom: none;
     }
   }
 </style>
