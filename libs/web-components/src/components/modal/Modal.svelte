@@ -234,10 +234,12 @@
                   <!-- svelte-ignore a11y-click-events-have-key-events -->
                   <!-- svelte-ignore a11y-no-static-element-interactions -->
                   <goa-icon-button
+                    size="medium"
                     data-ignore-focus="true"
                     data-testid="modal-close-button"
                     arialabel="Close the modal"
                     icon="close"
+                    theme="filled"
                     on:click={close}
                     variant="dark"
                   />
@@ -248,7 +250,7 @@
           <div data-testid="modal-content" class="modal-content">
             <goa-scrollable
               direction="vertical"
-              hpadding="1.9rem"
+              hpadding="var(--scrollable-padding)"
               maxheight="calc(100vh - {_headerHeight}px - var(--goa-space-xl) - {_actionsHeight}px - {_edgeMargin}px)"
               bind:this={_scrollEl}
               on:_scroll={handleScroll}
@@ -305,11 +307,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--goa-color-greyscale-black);
+    background-color: var(--goa-modal-overlay-color);
     z-index: 1;
-    opacity: var(--goa-opacity-background-modal);
+    opacity: var(--goa-modal-overlay-opacity);
   }
 
+  /* Callout types */
   .emergency {
     background-color: var(--goa-color-emergency-default);
   }
@@ -329,43 +332,78 @@
   .callout-bar {
     flex: 0 0 3rem;
     text-align: center;
-    padding-top: 2rem;
-    border-radius: 4px 0px 0px 4px;
+    padding: var(--goa-modal-callout-bar-padding) 0 0 0;
+    border-radius: var(--goa-modal-border-radius) 0px 0px var(--goa-modal-border-radius);
   }
 
   .content {
     flex: 1 1 auto;
     width: 100%;
-    padding: var(--goa-space-xl) var(--goa-space-xl) 0 var(--goa-space-xl);
+    padding: var(--goa-modal-padding) var(--goa-modal-padding) 0 var(--goa-modal-padding);
   }
 
   .content header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: var(--goa-space-xl);
+    margin-bottom: var(--goa-modal-padding);
   }
 
   header.has-content {
-    margin-bottom: var(--goa-space-l);
+    margin-bottom: var(--goa-modal-content-gap); /* space under heading */
   }
 
   @media (--mobile) {
     .content {
-      padding: var(--goa-space-l);
+      padding: var(--goa-modal-padding-small-screen) var(--goa-modal-padding-small-screen) 0 var(--goa-modal-padding-small-screen);
     }
     header.has-content {
-      margin-bottom: var(--goa-space-m);
+      margin-bottom: var(--goa-modal-content-gap-small-screen); /* space under heading */
     }
 
     .modal-actions :global(::slotted(*)) {
-      padding: var(--goa-space-l) 0 0;
+      padding: 0;
     }
+
+    .modal-content :global(::slotted(:last-child)) {
+    margin-bottom: var(--goa-space-xs) !important;
+    }
+
+    .modal-pane {
+    flex-direction: column;
+    }
+
+    .callout-bar {
+      text-align: left;
+      padding: var(--goa-modal-callout-bar-padding-small-screen);
+      border-radius: var(--goa-modal-border-radius) var(--goa-modal-border-radius) 0px 0px;
+      height: var(--goa-space-2xl);
+    }
+
+    .modal-content {
+    margin: 0 -1.5rem;
+    box-shadow: none;
+    }
+
+    :host {
+      --scrollable-padding: var(--goa-scrollable-padding-mobile);
+    }
+
   }
 
-  @media (--desktop) {
+  @media (--not-mobile) {
     .modal-pane {
       max-width: var(--maxwidth);
     }
+
+    .modal-content {
+    margin: 0 -2rem;
+    box-shadow: none;
+    }
+
+    :host {
+      --scrollable-padding: var(--goa-scrollable-padding-desktop);
+    }
+
   }
 
   .modal-pane {
@@ -374,53 +412,43 @@
     width: 90%;
     display: flex;
     box-shadow: var(--goa-shadow-modal);
-    border-radius: 4px;
-    border: 1px solid var(--goa-color-greyscale-700);
-  }
-
-  .modal-content {
-    margin: 0 -2rem;
-    line-height: 1.75rem;
-    box-shadow: none;
+    border-radius: var(--goa-modal-border-radius);
   }
 
   .modal-content :global(::slotted(:last-child)) {
-    margin-bottom: 0 !important;
+    margin-bottom: var(--goa-space-m) !important;
   }
 
   .modal-title {
-    font: var(--goa-typography-heading-m);
+    font: var(--goa-modal-header-typography);
   }
 
   .modal-close {
     padding-left: var(--goa-space-m);
-    margin-top: var(--goa-space-2xs);
   }
 
   .modal-actions {
     width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    padding: var(--goa-space-xl) 0 var(--goa-space-xl) 0;
+    padding: var(--goa-space-m) 0 var(--goa-modal-padding) 0;
     margin: auto 0 0 0;
     text-align: right;
   }
 
   .modal-actions.empty-actions {
-    padding: 0 0 var(--goa-space-xs) 0;
+    padding: 0 0 var(--goa-modal-padding) 0;
   }
 
   .modal.top .modal-content {
-    box-shadow: inset 0 -8px 8px -8px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
   }
 
   .modal.bottom .modal-content {
-    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3);
   }
 
   .modal.middle .modal-content {
     box-shadow:
-      inset 0 8px 8px -8px rgba(0, 0, 0, 0.1),
-      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.1);
+      inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
+      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
   }
 </style>

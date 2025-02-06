@@ -87,7 +87,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--goa-circular-progress-color-background);
   }
 
   .inline {
@@ -99,11 +99,11 @@
   }
 
   .spinner-large .message {
-    margin-top: 1.5rem;
-    font-size: 1.2rem;
+    margin-top: var(--goa-circular-progress-small-margin-top);
+    font: var(--goa-circular-progress-medium-text);
   }
   .spinner-xlarge .message {
-    margin-top: 2rem;
-    font-size: 1.5rem;
+    margin-top: var(--goa-circular-progress-large-margin-top);
+    font: var(--goa-circular-progress-large-text);
   }
 </style>

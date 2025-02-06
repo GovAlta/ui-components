@@ -153,23 +153,23 @@
   :global(::slotted(goa-side-menu-heading)),
   :global(::slotted(a:visited)) {
     /* required to override base styles */
-    color: var(--goa-color-text-default) !important;
+    color: var(--goa-side-menu-color-menu-item) !important;
     display: block;
-    font: var(--goa-typography-body-m);
-    margin-left: 1rem;
+    font: var(--goa-side-menu-typography-item);
+    margin-left: var(--goa-side-menu-child-margin);
     background-color: var(--goa-side-menu-group-color-bg);
   }
 
   :global(::slotted(a)),
   :global(::slotted(a:visited)) {
-    padding: 0.5rem 1rem;
+    padding: var(--goa-side-menu-padding-child);
     text-decoration: none;
-    border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);
+    border-left: var(--goa-side-menu-child-border-left);
   }
 
   :global(::slotted(a.current)) {
-    font: var(--goa-typography-heading-s);
-    border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-interactive-disabled);
+    font: var(--goa-side-menu-typography-item-selected);
+    border-left: var(--goa-side-menu-child-border-left-selected);
     background: var(--goa-side-menu-child-color-bg-selected);
     /* required to override base styles & above :global(::slotted(a) !important */
     color: var(--goa-side-menu-child-color-text-selected)!important;
@@ -177,12 +177,25 @@
 
   :global(::slotted(a:hover:not(.current))) {
     background: var(--goa-side-menu-child-color-bg-hover);
-    border-color: var(--goa-color-greyscale-200);
+    border-left: var(--goa-side-menu-child-border-left-hover);
   }
 
   :global(::slotted(a:focus-visible)),
   .heading:focus-visible {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline: var(--goa-side-menu-item-focus-border);
+    outline-offset: -3px;
+  }
+
+
+  .heading {
+    gap: var(--goa-space-xs); /* 8px - the minimum space between the text and the chevron icon */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  goa-icon {
+    margin-top: var(--goa-space-2xs); /* vertically centering the icon with text */
   }
 
   /**
@@ -191,11 +204,10 @@
    */
   :host([child="true"]) a.heading,
   .heading {
-    color: var(--goa-color-text-default);
+    color: var(--goa-side-menu-color-menu-item);
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    line-height: 2rem;
+    font: var(--goa-side-menu-typography-item);
     padding: var(--goa-side-menu-parent-padding);
     text-decoration: none;
     font: var(--goa-side-menu-parent-text);
@@ -206,19 +218,19 @@
   }
 
   :host([child="true"]) a.heading {
-    margin-left: 1rem;
-    border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-left: var(--goa-side-menu-child-border-left);
+    padding: var(--goa-side-menu-padding-child);
+    margin-left: var(--goa-side-menu-child-margin);
   }
 
   :host([child="true"]) a.heading:hover {
-    border-color: var(--goa-color-greyscale-200);
-    background: var(--goa-color-info-background);
+    border-left: var(--goa-side-menu-child-border-left-hover);
+    background: var(--goa-side-menu-child-color-bg-hover);
   }
 
   :host([child="true"]) .side-menu-group.current a.heading {
-    background: var(--goa-color-info-background);
-    border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-interactive-disabled);
+    background: var(--goa-side-menu-child-color-bg-selected);
+    border-left: var(--goa-side-menu-child-border-left);
   }
 
   .side-menu-group {
@@ -232,7 +244,7 @@
   }
 
   .heading:hover {
-    background: var(--goa-side-menu-parent-color-bg-hover);
+    background: var(--goa-side-menu-color-bg-menu-item-hover);
   }
 
   .hidden {
@@ -240,7 +252,7 @@
   }
 
   .group {
-    padding: var(--goa-side-menu-sub-group-padding);
+    padding-left: var(--goa-side-menu-child-margin);
   }
 
   .trailing-icon {
@@ -248,7 +260,6 @@
     height: var(--goa-icon-size-l); /* to make sure the icon vertical center */
   }
   .leading-icon {
-    margin-right: var(--goa-space-xs);
     height: var(--goa-icon-size-l); /* to make sure the icon vertical center */
   }
 </style>

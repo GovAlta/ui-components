@@ -43,7 +43,7 @@
   max-height: ${maxheight || "50vh"};
   overflow-y: ${direction === "vertical" ? "auto" : "hidden"};
   overflow-x: ${direction === "horizontal" ? "auto" : "hidden"};
-  margin: ${vpadding} 0;
+  margin: ${vpadding};
   padding: 0 ${hpadding} 3px;
 `}
 >
@@ -51,23 +51,33 @@
 </div>
 
 <style>
+
+
+
   .goa-scrollable {
     scroll-behavior: smooth;
+    margin: 2px;
+    width: auto;
   }
 
   .goa-scrollable::-webkit-scrollbar {
-    width: 6px;
+    width: var(--goa-space-xs);
   }
 
   .goa-scrollable::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    border-radius: var(--goa-border-radius-m);
+  }
+
+  .goa-scrollable::-webkit-scrollbar-track:hover {
+    background: var(--goa-color-greyscale-200);
   }
 
   .goa-scrollable::-webkit-scrollbar-thumb {
-    background: #888;
+    background: var(--goa-color-greyscale-400);
+    border-radius: var(--goa-border-radius-m);
   }
 
   .goa-scrollable::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: var(--goa-color-greyscale-600);
   }
 </style>

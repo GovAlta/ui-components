@@ -134,8 +134,8 @@
     // exit if already assigned
     if (_date || _inputDate.day !== "") {
       return;
-    };   
-  
+    };
+
     if (type === "input") {
       const [year, month, day] = value.split("-");
       _inputDate = { year: year, month: `${+month-1}`, day: day };
@@ -291,6 +291,7 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <goa-input
       slot="target"
+      width="160px"
       readonly="true"
       trailingicon="calendar"
       value={formatDate(_date)}
@@ -354,3 +355,7 @@
     </goa-block>
   </goa-form-item>
 {/if}
+
+<style>
+
+</style>

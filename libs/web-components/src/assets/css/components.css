@@ -46,20 +46,26 @@ goa-table.sticky thead {
 
 goa-table td {
   font: var(--goa-typography-body-m);
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--goa-color-greyscale-200);
+  padding: var(--goa-space-xs) var(--goa-space-m) var(--goa-space-xs);
+  border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  vertical-align: top;
+  box-sizing: border-box;
+  height: var(--goa-space-2xl);
 }
 
 goa-table[variant="relaxed"] td {
-  padding: 1.25rem 1rem 1rem 1rem;
+  padding: var(--goa-space-m);
 }
 
 goa-table thead th {
   background-color: var(--goa-color-greyscale-white);
   color: var(--goa-table-color-heading);
-  padding: var(--goa-space-s) var(--goa-table-header-padding, var(--goa-space-m)) var(--goa-space-xs) var(--goa-table-header-padding, var(--goa-space-m));
+  padding:
+  var(--goa-space-s)
+  var(--goa-table-header-padding, var(--goa-space-m))
+  var(--goa-space-xs) var(--goa-table-header-padding, var(--goa-space-m));
   text-align: left;
-  border-bottom: 2px solid var(--goa-table-color-border-heading);
+  border-bottom: var(--goa-border-width-m) solid var(--goa-table-color-border-heading);
   vertical-align: bottom;
   }
 
@@ -73,7 +79,11 @@ goa-table thead th {
 }
 
 .goa-table-number-header:not(:has(goa-table-sort-header)) {
-  padding-bottom: 0.5rem;
+  padding-bottom: var(--goa-space-xs);
+}
+
+goa-table thead th:has(goa-table-sort-header) {
+  padding-bottom: 0rem;
 }
 
 goa-table tfoot td {
@@ -81,7 +91,7 @@ goa-table tfoot td {
 }
 
 goa-table tfoot tr:first-child td {
-  border-top: 2px solid var(--goa-color-greyscale-200);
+  border-top: var(--goa-border-width-m) solid var(--goa-color-greyscale-200);
 }
 
 goa-table tfoot tr:last-child td {

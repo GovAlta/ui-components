@@ -6,6 +6,11 @@
       "description": "The maximum width of the main content area",
       "type": "string",
       "default": "100%"
+    },
+    {
+      "name": "url",
+      "description": "Set the URL to link from the alberta.ca logo. Defaults to alberta.ca.",
+      "type": "string"
     }
   ],
   "references": [

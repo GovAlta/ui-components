@@ -111,25 +111,29 @@
     /* required to override base styles */
     color: var(--goa-side-menu-text-color, var(--goa-color-text-default)) !important;
     display: block;
-    font: var(--goa-typography-body-m);
-    padding: 0.5rem 1rem 0.5rem 2rem;
+    font: var(--goa-side-menu-typography-item);
+    padding: var(--goa-side-menu-padding-item);
     text-decoration: none;
   }
 
   :global(::slotted(a.current)) {
-    font: var(--goa-typography-heading-s);
-    background: #cedfee;
+    font: var(--goa-side-menu-typography-item-active);
+    background: var(--goa-side-menu-color-bg-menu-item-hover);
   }
 
   :global(::slotted(a:hover:not(.current))) {
-    background: #cedfee;
+    background: var(--goa-side-menu-color-bg-menu-item-hover);
   }
 
   :global(::slotted(a:focus-visible)) {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline: var(--goa-side-menu-item-focus-border);
+    outline-offset: -3px;
   }
 
   .side-menu {
-    display: block;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: var(--goa-side-menu-items-gap);
   }
 </style>

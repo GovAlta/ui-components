@@ -6,6 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   template: `
     <goa-app-footer
       [attr.maxcontentwidth]="maxContentWidth"
+      [attr.url]="url"
       [attr.testid]="testId"
     >
       <ng-content select="[slot=nav]" />
@@ -13,10 +14,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       <ng-content></ng-content>
     </goa-app-footer>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAppFooter {
   @Input() maxContentWidth?: string;
   @Input() testId?: string;
+  @Input() url?: string;
 }
-
