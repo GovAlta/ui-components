@@ -48,7 +48,7 @@
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
-  export let mb: Spacing = "m";
+  export let mb: Spacing = null;
   export let ml: Spacing = null;
 
   // private
@@ -175,6 +175,7 @@
     max-width: ${maxwidth};
   `}
   data-testid="root"
+  class="container"
 >
   <label
     data-testid="radio-option-{value}"
@@ -213,14 +214,17 @@
 
 <style>
   .radio {
-    --outline-width: 3px;
-    --diameter: 1.5rem;
-    --border-width: 1px;
-    --border-width--checked: 7px;
-    --border-width--hover: 2px;
-    --border-width--error: 2px;
+    display: inline-flex;
+  }
+
+  label.radio {
     box-sizing: border-box;
+    display: inline-flex;
+  }
+
+  .container {
     display: flex;
+    flex-direction: column;
   }
 
   .radio:hover {
@@ -235,20 +239,21 @@
 
   .radio input[type="radio"] {
     width: 0;
-    height: 0;
+    min-height: 28px;
     margin: 0;
     opacity: 0;
   }
 
   .label {
-    padding: 0 var(--goa-space-xl) 0 var(--goa-space-xs);
-    font-weight: var(--goa-font-weight-regular);
+    padding: 0 var(--goa-space-xs);
+    font: var(--goa-radio-label);
   }
 
   .description {
-    font: var(--goa-typography-body-xs);
+    font: var(--description);
     margin-left: var(--goa-space-xl);
     margin-top: var(--goa-space-2xs);
+    color: var(--goa-color-text-default);
   }
 
   .reveal {
@@ -265,10 +270,10 @@
 
   .icon {
     display: inline-block;
-    height: var(--diameter);
-    width: var(--diameter);
-    border-radius: 50%;
-    background-color: var(--goa-color-text-light, #fff);
+    height: var(--goa-radio-size);
+    width: var(--goa-radio-size);
+    border-radius: var(--goa-radio-border-radius);
+    background-color: var(--goa-radio-color-bg);
     transition: box-shadow 100ms ease-in-out;
 
     /* prevent squishing of radio button */
@@ -276,89 +281,86 @@
     margin-top: var(--font-valign-fix);
   }
 
-  .radio--disabled .label {
-    color: var(--goa-color-greyscale-500);
+  .radio--disabled .label,
+  .radio--disabled ~ .description {
+    color: var(--goa-radio-label-color-disabled);
   }
-
   .radio--disabled:hover {
     cursor: default;
   }
 
-  /* States */
+  /* States --------------------------------------------- */
 
-  /* Unchecked */
+/* Unchecked */
   input[type="radio"]:not(:checked) ~ .icon {
-    border: var(--border-width) solid
-      var(--goa-color-greyscale-700);
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
     margin-top: 3px;
   }
-
-  /* Hover */
+  /* Unchecked:hover */
   input[type="radio"]:hover ~ .icon {
-    border: var(--border-width--hover) solid
-      var(--goa-color-interactive-hover);
+    border: var(--goa-radio-border-hover);
+  }
+  /* Unchecked:focus */
+  input[type="radio"]:focus-visible ~ .icon,
+  input[type="radio"]:hover:focus-visible ~ .icon {
+    outline: var(--goa-radio-border-focus);
+  }
+  /* Unchecked:hover+focus */
+  input[type="radio"]:hover:focus-visible ~ .icon {
+    border: var(--goa-radio-border);
   }
 
   /* Checked */
   input[type="radio"]:checked ~ .icon {
-    border: var(--border-width--checked) solid
-      var(--goa-color-interactive-default);
+    border: var(--goa-radio-border-checked);
     margin-top: 3px;
   }
-
-  /* Hover & checked */
-      input[type="radio"]:checked:hover ~ .icon {
-    border-color: var(--goa-color-interactive-hover);
+  /* Checked:hover */
+  input[type="radio"]:checked:hover ~ .icon {
+    border: var(--goa-radio-border-checked-hover);
   }
-
-  /* Focus */
-  input[type="radio"]:focus ~ .icon,
-  input[type="radio"]:hover:active ~ .icon,
-  input[type="radio"]:hover:focus ~ .icon,
-  input[type="radio"]:active ~ .icon {
-    box-shadow: 0 0 0 var(--outline-width)
-      var(--goa-color-interactive-focus);
+  /* Checked:hover+focus */
+  input[type="radio"]:checked:hover:focus-visible ~ .icon {
+    border: var(--goa-radio-border-checked);
   }
 
   /* Disabled */
   input[type="radio"]:disabled ~ .icon,
-  input[type="radio"]:disabled:focus ~ .icon,
-  input[type="radio"]:disabled:active ~ .icon {
-    border: var(--border-width) solid
-      var(--goa-color-greyscale-400);
-    box-shadow: none;
+  input[type="radio"]:disabled:focus-visible ~ .icon {
+    border: var(--goa-radio-border-disabled);
   }
-
-  /* Disabled & checked */
   input[type="radio"]:disabled:checked ~ .icon,
-  input[type="radio"]:disabled:checked:focus ~ .icon,
-  input[type="radio"]:disabled:checked:active ~ .icon {
-    border: var(--border-width--checked) solid
-      var(--goa-color-interactive-disabled);
-    box-shadow: none;
+  input[type="radio"]:disabled:checked:focus-visible ~ .icon {
+    border: var(--goa-radio-border-checked-disabled);
   }
 
-  /* Error & unchecked */
-  .radio--error input[type="radio"]:not(:checked) ~ .icon {
-    border: var(--border-width--error) solid
-      var(--goa-color-interactive-error);
+  /* Error */
+  .radio--error input[type="radio"] ~ .icon {
+    border: var(--goa-radio-border-error);
   }
-
-  /* Error & checked */
-  .radio--error input[type="radio"]:checked ~ .icon {
-    border-color: var(--goa-color-interactive-error);
-  }
-
-  /* Error & hover */
   .radio--error input[type="radio"]:hover ~ .icon {
-    border-color: var(--goa-color-interactive-error-hover, #BA0000);
+    border: var(--goa-radio-border-error-hover);
   }
-
-  /* Error & disabled */
-  .radio--error input[type="radio"]:disabled ~ .icon,
-  .radio--error input[type="radio"]:disabled:focus ~ .icon,
-  .radio--error input[type="radio"]:disabled:active ~ .icon {
-    border-color: var(--goa-color-interactive-error-disabled, #F58185);
-    box-shadow: none;
+  .radio--error input[type="radio"]:hover:focus-visible ~ .icon {
+    outline: var(--goa-radio-border-focus);
+    border: var(--goa-radio-border-error);
+  }
+  .radio--error input[type="radio"]:checked ~ .icon{
+    border: var(--goa-radio-border-checked-error);
+  }
+  .radio--error input[type="radio"]:checked:hover ~ .icon {
+    border: var(--goa-radio-border-checked-error-hover);
+  }
+  .radio--error input[type="radio"]:checked:hover:focus-visible ~ .icon {
+    outline: var(--goa-radio-border-focus);
+     border: var(--goa-radio-border-checked-error);
+  }
+  .radio--error input[type="radio"]:disabled ~ .icon {
+    border: var(--goa-radio-border-error-disabled);
+  }
+  .radio--error input[type="radio"]:disabled:checked ~ .icon {
+    border: var(--goa-radio-border-checked-error-disabled);
   }
 </style>
+
+
