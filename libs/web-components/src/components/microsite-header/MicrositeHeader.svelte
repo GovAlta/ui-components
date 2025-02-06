@@ -71,6 +71,20 @@
           href="https://www.alberta.ca/index.aspx"
           target={`_${headerurltarget}`}>Alberta Government</a
         >
+        {#if feedbackurl}
+          <span data-testid="feedback">
+            — help us improve it by giving
+            <span class="feedback-link">
+              <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a>
+            </span>
+          </span>
+        {:else if _hasfeedbackhandler}
+          <span data-testid="feedback-click" bind:this={_feedbackElement}>
+            — help us improve it by giving
+            <!-- svelte-ignore a11y-invalid-attribute -->
+            <a href="#" on:click={handleFeedbackClick}>feedback</a>
+          </span>
+        {/if}
       </div>
     {/if}
 
@@ -91,7 +105,9 @@
         {#if feedbackurl}
           <span data-testid="feedback">
             — help us improve it by giving
-            <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a>
+            <span class="feedback-link">
+              <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a>
+            </span>
           </span>
         {:else if _hasfeedbackhandler}
           <span data-testid="feedback-click" bind:this={_feedbackElement}>
@@ -120,25 +136,26 @@
     font-family: var(--goa-font-family-sans);
   }
 
+  .feedback-link {
+    display: inline-flex; /* Keeps the text and icon together when text wraps */
+}
+
   #container {
     container: self / inline-size;
-    background-color: var(--goa-color-greyscale-100);
+    background-color: var(--goa-microsite-header-color-bg);
   }
 
   a {
-    color: var(--goa-color-interactive-default);
+    color: var(--goa-microsite-header-color-links);
     cursor: pointer;
   }
 
   a:hover {
-    color: var(--goa-color-interactive-hover);
+    color: var(--goa-microsite-header-color-links-hover);
   }
 
   a:focus {
-    outline-width: thin;
-    outline-style: solid;
-    outline-color: var(--goa-color-interactive-hover);
-    outline-offset: 0px;
+    outline: var(--goa-microsite-header-link-focus-border);
   }
 
   a[target="_blank"]::after {
@@ -159,9 +176,8 @@
   }
 
   .content-container {
-    font-size: var(--goa-font-size-2);
-    padding: var(--goa-space-xs) var(--goa-space-m);
-
+    font: var(--goa-microsite-header-typography);
+    padding: var(--goa-microsite-header-padding-small-screen);
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -171,14 +187,13 @@
 
   @container self (--not-mobile) {
     .content-container {
-      align-items: center;
-      padding: var(--goa-space-2xs) var(--goa-space-xl);
+      padding: var(--goa-microsite-header-padding-medium-screen);
     }
   }
 
   @container self (--desktop) {
     .content-container {
-      padding: var(--goa-space-2xs) var(--goa-space-3xl);
+      padding: var(--goa-microsite-header-padding-large-screen);
     }
   }
 
@@ -187,37 +202,36 @@
   }
 
   .version {
-    color: var(--goa-color-text-secondary);
-    padding-left: var(--goa-space-m);
-    line-height: var(--goa-line-height-1);
+    color: var(--goa-microsite-header-color-version-number);
+    margin-left: var(--goa-microsite-header-gap);
+    font-size: var(--goa-microsite-header-typography-version-number);
   }
 
   :global(::slotted([slot="version"])) {
     display: flex;
-    gap: var(--goa-space-m);
     align-items: center;
   }
 
   .service-type {
     font-weight: bold;
-    padding: var(--goa-space-3xs) var(--goa-space-2xs);
+    padding: 0px 3px 3px 3px; /* vertical allignment */
     display: flex;
-    margin-right: var(--goa-space-m);
     line-height: initial;
+    margin-right: var(--goa-microsite-header-gap);
   }
 
   .service-type--alpha {
-    background-color: var(--goa-color-warning-default);
-    color: var(--goa-color-text-default);
+    background-color: var(--goa-microsite-header-alpha-badge-color);
+    color: var(--goa-microsite-header-alpha-badge-color-text);
   }
 
   .service-type--beta {
-    background-color: var(--goa-color-brand-default);
-    color: var(--goa-color-text-light);
+    background-color: var(--goa-microsite-header-beta-badge-color);
+    color: var(--goa-microsite-header-beta-badge-color-text);
   }
 
   .site-text {
-    color: var(--goa-color-text-default);
-    line-height: var(--goa-line-height-1);
+    font: var(--goa-microsite-header-typography);
+    margin-bottom: 4px; /* vertical allignment */
   }
 </style>
