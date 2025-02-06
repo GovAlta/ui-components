@@ -169,15 +169,15 @@
     >
       <button
         slot="target"
-        style="padding: 0 0.75rem;"
         class={type}
+        class:open={_open}
         class:current={_hasCurrentLink}
       >
         {#if leadingicon}
           <goa-icon type={leadingicon} mt="1" />
         {/if}
         {heading}
-        <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1" />
+        <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="2" />
       </button>
 
       <div class="desktop" bind:this={_slotParentEl}>
@@ -191,7 +191,7 @@
       {/if}
       <span class="heading">{heading}</span>
       <goa-spacer hspacing="fill" />
-      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="1" />
+      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="2" />
     </button>
     {#if _open}
       <div class="not-desktop" bind:this={_slotParentEl}>
@@ -206,114 +206,175 @@
     font: var(--goa-typography-body-m);
   }
 
-  /* ============= */
-  /* Common        */
-  /* ============= */
-
+  /* Menu item with children */
   button {
-    padding: 0;
+    padding: var(--goa-app-header-padding-nav-item-with-children);
     border: none;
-    background: transparent;
-    outline: none;
-    color: var(--goa-color-text-default);
+    color: var(--goa-app-header-color-text-nav-item);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 6px;
+    background: none;
+    border-top: var(--goa-app-header-border-nav-item-default);
+    border-bottom: var(--goa-app-header-border-nav-item-default);
   }
-
+  /* Menu item with children --Hover, --Active */
   button:active,
-  button:hover,
-  button:focus-within,
-  [slot="target"]:focus-within {
-    background: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
+  button:hover {
+    background: var(--goa-app-header-color-bg-nav-item-hover);
+    color: var(--goa-app-header-color-text-nav-item-hover);
+    border-top: var(--goa-app-header-border-nav-item-default);
+    border-bottom: var(--goa-app-header-border-nav-item-hover);
   }
-
-  button.current {
-    border-top: 4px solid var(--goa-color-interactive-default);
-    border-bottom: 4px solid transparent;
+  /* Menu item with children --Focus */
+  button:focus-visible {
+    outline: var(--goa-app-header-border-focus) !important;
+    position: relative;
+    z-index: 100;
+    background-color: var(--goa-app-header-color-bg-nav-item-focus);
+    color: var(--goa-app-header-color-text-nav-item-focus);
+    border-top: var(--goa-app-header-border-nav-item-default);
+    border-bottom: var(--goa-app-header-border-nav-item-focus);
   }
-
-  button.current:hover {
-    border-top: 4px solid var(--goa-color-interactive-hover);
-  }
-
   button.open {
-    border-bottom: 1px solid var(--goa-color-greyscale-200);
+    background-color: var(--goa-app-header-color-bg-menu-button-focus);
+    color: var(--goa-app-header-color-menu-button-focus);
   }
 
+  /* Menu item with children --Current */
+  button.current {
+    border-top: var(--goa-app-header-border-nav-item-default);
+    border-bottom: var(--goa-app-header-border-nav-item-current);
+  }
+  /* Menu item with children --Current--Hover */
+  button.current:hover {
+    border-top: var(--goa-app-header-border-nav-item-default);
+    border-bottom: var(--goa-app-header-border-nav-item-hover);
+  }
+
+  /* Secondary Menu items (in popover on menu item) */
   :global(::slotted(a)),
   :global(::slotted(a:visited)) {
-    box-shadow: inset 0 1px 0 0 var(--goa-color-greyscale-200);
-    color: var(--goa-color-text-default);
+    box-shadow: var(--goa-app-header-border-top-menu-item);
+    color: var(--goa-app-header-color-text-nav-item);
     display: block;
-    padding: calc((3rem - var(--goa-line-height-3)) / 2) 1rem;
+    padding: var(--goa-app-header-padding-nav-item-in-menu) !important;
     text-decoration: none;
   }
-  .not-desktop :global(::slotted(a)) {
-    padding: calc((3rem - var(--goa-line-height-3)) / 2) 2.75rem;
-  }
-
-  :global(::slotted(a:first-child)) {
-    box-shadow: none;
-  }
-
+  /* Secondary Menu items (in popover on menu item) --Hover */
   :global(::slotted(a:hover)) {
-    background: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
+    background: var(--goa-app-header-color-bg-nav-item-child-hover);
+    color: var(--goa-app-header-color-text-nav-item-hover) !important;
   }
-
-  :global(::slotted(a.current)) {
-    background-color: var(--goa-color-interactive-default);
-  }
-
-  :global(::slotted(a.current:hover)) {
-    background: var(--goa-color-interactive-hover);
-  }
-
+  /* Secondary Menu items (in popover on menu item) --Focus */
   :global(::slotted(a:focus-visible)) {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline: var(--goa-app-header-border-focus);
     outline-offset: -3px;
-    color: var(--goa-color-interactive-hover);
+    background: var(--goa-app-header-color-bg-nav-item-child-focus);
+    color: var(--goa-app-header-color-text-nav-item-focus) !important;
+  }
+  /* Secondary Menu items (in popover on menu item) --Current */
+  :global(::slotted(a.current)) {
+    background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current);
+  }
+  /* Secondary Menu items (in popover on menu item) --Current--Hover */
+  :global(::slotted(a.current:hover)) {
+    background: var(--goa-app-header-color-bg-nav-item-in-menu-current-hover);
   }
 
+  /* Menu items in collapsed menu --Interactive */
   :global(::slotted(a.interactive)) {
-    text-decoration: underline;
-    color: var(--goa-color-interactive-default);
+    color: var(--goa-app-header-nav-color-text-link-item) !important;
+    text-decoration: underline !important;
+    white-space: nowrap;
+  }
+  /* Menu items in collapsed menu --Interactive--Hover */
+  :global(::slotted(a.interactive:hover)) {
+    color: var(--goa-app-header-nav-color-text-link-item-hover) !important;
+  }
+  /* Menu items in collapsed menu --Interactive--Focus */
+  :global(::slotted(a.interactive:focus-visible)) {
+    color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
+    background-color: var(--goa-app-header-color-bg-nav-item-focus);
+  }
+
+  /* Secondary Menu items (in popover on menu item) --Tablet */
+  .not-desktop :global(::slotted(a)) {
+    padding: var(
+      --goa-app-header-padding-secondary-nav-item-in-menu
+    ) !important;
   }
 
   @media not (--desktop) {
+    /* Menu item with children on mobile */
     button {
-      box-shadow: inset 0 1px 0 0 var(--goa-color-greyscale-200);
-      height: 3rem;
-      flex: 1 1 auto;
-      padding: 0 1rem;
+      box-shadow: var(--goa-app-header-border-top-menu-item);
+      padding: 9px var(--goa-space-m);
       width: 100%;
+      border-top: none;
+      border-bottom: none;
+      display: flex;
+      align-items: center;
     }
-
-    button:focus {
-      outline: var(--goa-border-width-l) solid
-        var(--goa-color-interactive-focus);
+    /* Menu item with children on mobile --Hover, --Active */
+    button:active,
+    button:hover,
+    button:focus-visible {
+      background: var(--goa-app-header-color-bg-nav-item-child-hover);
+      color: var(--goa-app-header-color-text-nav-item-hover);
+      border-top: none;
+      border-bottom: none;
+    }
+    /* Menu item with children on mobile --Focus */
+    button:focus-visible {
+      outline: var(--goa-app-header-border-focus) !important;
       outline-offset: -3px;
+      border-top: none;
+      border-bottom: none;
     }
-
+    button.open {
+      box-shadow: var(--goa-app-header-border-top-menu-item),
+        var(--goa-app-header-border-bottom-menu-item);
+      background: var(--goa-app-header-color-bg-nav-item-child-hover);
+      color: var(--goa-app-header-color-text-nav-item-hover);
+    }
+    button.open:hover,
+    button.open:focus-visible {
+      box-shadow: var(--goa-app-header-border-top-menu-item),
+        var(--goa-app-header-border-bottom-menu-item);
+    }
     .heading {
       /* prevent the menu text from line breaking too early */
       flex: 0 0 auto;
     }
   }
 
+  @media (--mobile) {
+    /* Secondary Menu items (in popover on menu item) --Mobile */
+    .not-desktop :global(::slotted(a)) {
+      padding: var(
+        --goa-app-header-padding-secondary-nav-item-in-menu-mobile
+      ) !important;
+    }
+    /* Menu item with children (in popover on menu item) --Mobile */
+    button {
+      padding: 9px var(--goa-space-2xl);
+    }
+  }
+
   @media (--desktop) {
     button[slot="target"] {
       font-weight: var(--goa-font-weight-bold);
-      /* ensures that the button spans 100% of the height of the desktop app header bar */
-      height: 4rem;
       white-space: nowrap;
     }
-
     button.secondary {
       font-weight: var(--goa-font-weight-regular);
+    }
+    button.open {
+      background-color: var(--goa-app-header-color-bg-menu-button-focus);
+      color: var(--goa-app-header-color-menu-button-focus);
+      border-bottom: var(--goa-app-header-border-nav-item-focus);
     }
   }
 </style>
