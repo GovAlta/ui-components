@@ -121,10 +121,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--goa-space-m);
-    font: var(--goa-typography-heading-s);
-    border-width: 1px;
-    border-style: solid;
+    gap: var(--goa-container-heading-gap);
+    font: var(--goa-container-heading);
+    border: var(--goa-container-border);
     border-top-left-radius: var(--goa-container-border-radius);
     border-top-right-radius: var(--goa-container-border-radius);
   }
@@ -144,32 +143,9 @@
     margin-bottom: 0 !important;
   }
 
-  /* Background Colour */
-
-  .goa-container--non-interactive.accent--filled .content {
-    border-color: var(--goa-color-greyscale-200);
-    background-color: var(--goa-color-greyscale-100);
-  }
-  .goa-container--important.accent--filled .content {
-    border-color: var(--goa-color-warning-default);
-    background-color: var(--goa-color-warning-background);
-  }
-  .goa-container--error.accent--filled .content {
-    border-color: var(--goa-color-emergency-default);
-    background-color: var(--goa-color-emergency-background);
-  }
-  .goa-container--success.accent--filled .content {
-    border-color: var(--goa-color-success-default);
-    background-color: var(--goa-color-success-background);
-  }
-  .goa-container--info.accent--filled .content {
-    border-color: var(--goa-color-info-default);
-    background-color: var(--goa-color-info-background);
-  }
-
   .title,
   .actions {
-    padding: var(--goa-space-xs) 0;
+    padding: var(--goa-container-heading-padding) 0;
   }
 
   .actions :global(::slotted(div)) {
@@ -183,82 +159,96 @@
   .padding--relaxed header {
     padding: 0 var(--goa-container-padding);
   }
-
   .padding--relaxed .content {
     padding: var(--goa-container-padding);
   }
 
   .padding--compact header,
   .padding--compact .content {
-    padding: 0 1rem;
+    padding: 0 var(--goa-container-padding-compact);
   }
-
   .padding--compact header {
-    padding: 0 1rem;
+    padding: 0 var(--goa-container-padding-compact);
   }
-
   .padding--compact .content {
-    padding: 1rem;
+    padding: var(--goa-container-padding-compact);
   }
 
   /* Override padding in small screens to the compact value */
   @media (--mobile) {
     .padding--relaxed header {
-      padding: 0 1rem;
+      padding: 0 var(--goa-container-padding-compact);
     }
     .padding--relaxed .content {
-      padding: 1rem;
+      padding: var(--goa-container-padding-compact);
     }
   }
 
-  /* colors */
-
-  .goa-container--non-interactive header {
-    background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-greyscale-200);
-    color: var(--goa-color-greyscale-black);
-  }
+  /* Types */
 
   .goa-container--interactive header {
-    background-color: var(--goa-color-brand-default);
-    border-color: var(--goa-color-brand-default);
-    color: var(--goa-color-greyscale-white);
+    background-color: var(--goa-container-interactive-heading-bg-color);
+    border: var(--goa-container-interactive-border);
+    color: var(--goa-container-interactive-heading-text-color);
+  }
+
+  .goa-container--non-interactive header {
+    background-color: var(--goa-container-non-interactive-heading-bg-color);
+    border: var(--goa-container-non-interactive-border);
+    color: var(--goa-container-non-interactive-heading-text-color);
+  }
+  .goa-container--non-interactive.accent--filled .content {
+    border: var(--goa-container-non-interactive-border);
+    background-color: var(--goa-container-non-interactive-bg-color);
   }
 
   .goa-container--info header {
-    background-color: var(--goa-color-info-default);
-    border-color: var(--goa-color-info-default);
-    color: var(--goa-color-greyscale-white);
+    background-color: var(--goa-container-info-heading-bg-color);
+    border: var(--goa-container-info-border);
+    color: var(--goa-container-info-heading-text-color);
+  }
+  .goa-container--info.accent--filled .content {
+    border: var(--goa-container-info-border);
+    background-color: var(--goa-container-info-bg-color);
   }
 
   .goa-container--error header {
-    /* TODO: need a better color name here */
-    background-color: var(--goa-color-emergency-default);
-    border-color: var(--goa-color-emergency-default);
-    color: var(--goa-color-greyscale-white);
+    background-color: var(--goa-container-error-heading-bg-color);
+    border: var(--goa-container-error-border);
+    color: var(--goa-container-error-heading-text-color);
+  }
+  .goa-container--error.accent--filled .content {
+    border: var(--goa-container-error-border);
+    background-color: var(--goa-container-error-bg-color);
   }
 
   .goa-container--success header {
-    /* TODO: need a better color name here */
-    background-color: var(--goa-color-success-default);
-    border-color: var(--goa-color-success-default);
-    color: var(--goa-color-greyscale-white);
+    background-color: var(--goa-container-success-heading-bg-color);
+    border: var(--goa-container-success-border);
+    color: var(--goa-container-success-heading-text-color);
+  }
+  .goa-container--success.accent--filled .content {
+    border: var(--goa-container-success-border);
+    background-color: var(--goa-container-success-bg-color);
   }
 
   .goa-container--important header {
-    background-color: var(--goa-color-warning-default);
-    border-color: var(--goa-color-warning-default);
-    color: var(--goa-color-greyscale-white);
+    background-color: var(--goa-container-important-heading-bg-color);
+    border: var(--goa-container-important-border);
+    color: var(--goa-container-important-heading-text-color);
+  }
+  .goa-container--important.accent--filled .content {
+    border: var(--goa-container-important-border);
+    background-color: var(--goa-container-important-bg-color);
   }
 
   /* Sizes */
   .heading--thick {
-    padding: var(--goa-space-xs) var(--goa-space-l);
-    min-height: var(--goa-space-m);
+    min-height: var(--goa-container-accent-thick-height);
   }
 
   .heading--thin {
-    height: 0.5rem;
+    height: var(--goa-container-accent-thin-height);
   }
 
   .heading--filled {
