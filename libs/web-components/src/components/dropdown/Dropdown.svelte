@@ -318,7 +318,7 @@
     setTimeout(async () => {
       syncFilteredOptions();
       _isMenuVisible = true;
-      // _inputEl?.focus();
+      _inputEl?.focus();
     }, 0);
   }
 
@@ -413,9 +413,9 @@
 
   function onClearIconKeyDown(e: KeyboardEvent) {
     if (e.key === "Enter" || e.key === " ") {
-      e.stopPropagation();
       reset();
       showMenu();
+      e.stopPropagation();
     }
   }
 
@@ -446,9 +446,7 @@
   }
 
   async function onChevronClick(e: Event) {
-    await tick();
     showMenu();
-    e.stopPropagation();
   }
 
   function onFocus(e: Event) {
@@ -758,9 +756,11 @@
             data-value={option.value}
             role="option"
             style="display: block"
-            on:click={() => {
+            on:click={(e) => {
               _isDirty = true;
               onSelect(option);
+              _inputEl?.focus();
+              e.stopPropagation();
             }}
           >
             {option.label || option.value}
@@ -837,7 +837,7 @@
 
   .dropdown-icon--arrow,
   .dropdown-icon--clear {
-    margin-right: var(--goa-space-s);
+    padding-right: var(--goa-space-s);
   }
 
   /* TODO: add indicator to when the reset button has focus state */
