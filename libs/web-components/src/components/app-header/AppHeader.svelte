@@ -20,9 +20,9 @@
   // Private
 
   const _mobileLogo =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='32' height='32' viewBox='0 0 16 16'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:none;%7D.b%7Bfill:%2300aad2;%7D.c%7Bclip-path:url(%23a);%7D.d%7Bfill:%23fff;%7D%3C/style%3E%3CclipPath id='a'%3E%3Crect class='a' width='14' height='14' transform='translate(-0.345 -0.21)'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg transform='translate(0 -0.135)'%3E%3Ccircle class='b' cx='8' cy='8' r='8' transform='translate(0 0.135)'/%3E%3Cg transform='translate(1.345 1.344)'%3E%3Cg class='c' transform='translate(0 0)'%3E%3Cpath class='d' d='M12.612,13.636a16.24,16.24,0,0,1-1.86-.822,13.436,13.436,0,0,0,1.6-.708,11.312,11.312,0,0,0,.264,1.53M16.032,7.3c-.266-.034-.128.091-.2.442a5.465,5.465,0,0,1-2.8,3.338,16.141,16.141,0,0,1,.249-4.84c.275-1,.6-.813.2-1.022-.427-.22-.887.071-1.258.813A27.247,27.247,0,0,1,7.4,13.522a2.141,2.141,0,0,1-2.918.461c-.206-.174-.282.095-.026.37a2.412,2.412,0,0,0,3.387-.082A32.715,32.715,0,0,0,12.219,7.51a23.541,23.541,0,0,0,.063,3.971,11.464,11.464,0,0,1-1.964.749c-.388.1-.628.26-.635.439-.007.2.253.363.63.541.67.318,2.633,1.246,3.117,1.527.414.24.616.053.739-.207.16-.338-.279-.533-.7-.661a13.175,13.175,0,0,1-.382-2.179,7.143,7.143,0,0,0,2.547-2.454,4.7,4.7,0,0,0,.4-1.133,2.125,2.125,0,0,0,.048-.742s-.007-.054-.048-.059' transform='translate(-3.51 -3.943)'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E";
+    "data:image/svg+xml,%3Csvg width='35' height='35' viewBox='0 0 35 35' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_252_21401)'%3E%3Cpath d='M17.5 0C20.9612 0 24.3446 1.02636 27.2225 2.94928C30.1003 4.87221 32.3434 7.60533 33.6679 10.803C34.9924 14.0007 35.339 17.5194 34.6637 20.9141C33.9885 24.3087 32.3218 27.4269 29.8744 29.8744C27.4269 32.3218 24.3087 33.9885 20.9141 34.6637C17.5194 35.339 14.0007 34.9924 10.803 33.6679C7.60533 32.3434 4.87221 30.1003 2.94928 27.2225C1.02636 24.3446 0 20.9612 0 17.5C0 12.8587 1.84374 8.40752 5.12563 5.12563C8.40752 1.84374 12.8587 0 17.5 0V0Z' fill='%2300B6ED'/%3E%3Cpath d='M23.8045 24.8037C22.2993 24.2487 20.8302 23.6001 19.4059 22.8618C20.6989 22.3869 21.9597 21.8286 23.1803 21.1903C23.3048 22.4081 23.5131 23.6159 23.8036 24.8051M31.8873 9.83681C31.2574 9.7572 31.5846 10.0501 31.4091 10.8801C30.6504 14.4588 27.7236 17.0381 24.7854 18.7685C24.4775 14.6704 24.6033 10.1205 25.3748 7.33228C26.0258 4.97862 26.7999 5.41055 25.8397 4.91616C24.828 4.39581 23.7438 5.0833 22.8654 6.83656C21.987 8.58982 17.9421 18.1074 11.4762 24.5341C8.16898 27.8238 5.17753 26.1295 4.57844 25.6236C4.09108 25.2119 3.91118 25.8475 4.51598 26.4985C7.19074 29.3826 11.0984 27.7279 12.5213 26.3058C16.4536 22.3753 21.0255 13.9143 22.8751 10.3242C22.6597 13.451 22.7093 16.5904 23.0233 19.7089C21.5336 20.4399 19.98 21.0325 18.382 21.4793C17.4653 21.7195 16.8983 22.0929 16.8816 22.5174C16.8636 22.9823 17.4789 23.3747 18.3688 23.7969C19.9522 24.5491 24.5918 26.7409 25.735 27.4037C26.7137 27.9716 27.1914 27.5286 27.4812 26.9155C27.8599 26.1163 26.8215 25.6544 25.8151 25.3536C25.3709 23.6667 25.0692 21.9455 24.9129 20.2081C27.2714 18.7566 29.5934 16.8213 30.9319 14.4078C31.3641 13.5596 31.6853 12.6593 31.8877 11.7291C32.0278 11.1562 32.0661 10.5632 32.0007 9.97712C32.0007 9.97712 31.9831 9.84913 31.8877 9.83681' fill='white'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_252_21401'%3E%3Crect width='35' height='35' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A";
   const _desktopLogo =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='149.351' height='42' viewBox='0 0 149.351 42'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:none;%7D.b%7Bclip-path:url(%23a);%7D.c%7Bfill:%2300aad2;%7D.d%7Bfill:%235f6a72;%7D%3C/style%3E%3CclipPath id='a'%3E%3Crect class='a' width='149.351' height='42'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg class='b'%3E%3Crect class='c' width='13.555' height='13.555' transform='translate(135.796 21.524)'/%3E%3Cpath class='d' d='M63.082,33.088c-1.383.138-2.835.277-4.357.346.553-4.357,2.835-10.373,5.671-9.405,1.66.553.761,5.671-1.314,9.059m-3.527,2.974a3.761,3.761,0,0,1-1.245,0,.851.851,0,0,0,.346-.692v-.553c.761,0,1.936-.138,3.389-.277a4.327,4.327,0,0,1-2.49,1.521M76.844,25.688c1.8-1.66,2.7-1.521,2.9-1.106.484.968-1.591,4.357-5.671,6.224a10.328,10.328,0,0,1,2.766-5.118m66.736,1.66c-.207-3.389-3.181-3.942-3.6-2.974-.138.346,1.106.207,1.106,2.628,0,3.942-4.011,9.129-9.129,9.129-5.532,0-6.985-4.357-7.261-6.432-.207-1.452.138-3.458-2.351-3.181-1.729.207-3.25,3.527-5.463,6.362-1.867,2.42-2.7,2.213-2.282.138.553-2.628,2.7-8.714,5.187-9.129,1.176-.207,1.591,1.8,2.075.553s.069-4.011-2.559-4.011c-1.8,0-3.942,1.936-5.74,4.08-1.521,1.936-9.336,13.416-12.656,10.927-1.521-1.176-1.383-5.878-.415-11.411,3.873-1.521,7.123-1.037,8.921-.138.9.415,1.037.346.622-.622-.553-1.452-3.665-3.734-8.575-2.7-.138,0-.207.069-.346.069.415-1.8.83-3.665,1.383-5.463.484-1.66,1.8-4.5-1.729-4.979-1.106-.207-.622.346-1.037,1.867-.692,2.766-1.521,6.362-2.144,10.028a19.745,19.745,0,0,0-7.538,8.091,38.59,38.59,0,0,0,.9-4.772,1.589,1.589,0,0,0-1.245-1.729c-.761-.207-1.729.138-2.628,1.452-2.144,3.043-4.841,7.815-8.99,9.82-2.974,1.452-4.288,0-4.357-2.282a9.869,9.869,0,0,0,1.521-.553c5.394-2.351,7.192-5.947,5.878-8.16-1.314-2.075-4.979-1.452-7.953,1.66a11.175,11.175,0,0,0-2.7,6.5c-1.245.277-2.628.484-4.219.692,2.49-4.08,2.282-9.613-1.383-10.581-4.288-1.106-6.432,3.043-7.331,6.5.346-3.873.9-7.745,1.591-11.549.346-1.66,1.452-4.5-2.075-4.979-1.106-.207-.968.346-.9,1.867.138,2.075-2.144,14.454-.968,19.848-1.521.484-2.144,1.66-.207,2.835,1.383.83,4.357,1.106,7.331-.346a9.3,9.3,0,0,0,2.766-2.144c1.8-.207,3.665-.553,5.394-.83.277,2.42,1.867,4.219,5.463,3.873,5.118-.484,9.682-6.777,11.411-9.82-.346,3.25-2.42,10.373,1.176,10.028,1.383-.138.83-.346.9-1.591.346-4.288,3.873-7.953,7.4-10.166-.622,5.256-.415,9.958,2.006,11.411,4.426,2.766,10.581-4.5,14.039-8.921-1.729,3.942-2.7,8.921-.138,9.682,3.043.9,5.463-4.219,8.3-8.091.346,2.766,2.213,7.607,9.682,7.607,8.022-.069,13.071-4.91,12.863-10.1m-108.3,8.645A66.439,66.439,0,0,1,27.4,32.534a59.168,59.168,0,0,0,6.777-2.974,54.453,54.453,0,0,0,1.106,6.432m20.4,3.873c-.069-.207-.622.069-1.106,0-1.452-.207-3.389-2.213-3.942-5.463-1.037-5.878-.415-11.687,1.314-20.332.346-1.66,1.452-4.5-2.075-5.048-1.106-.138-.553.415-.83,1.867C47.66,17.32,42.4,21.954,37.149,25.066,36.6,17.735,36.8,9.505,38.186,4.526c1.176-4.219,2.559-3.458.83-4.357s-3.734.277-5.325,3.458S24.839,23.89,13.221,35.439C7.273,41.317,1.879,38.274.842,37.375c-.9-.761-1.176.415-.138,1.591,4.772,5.256,11.826,2.282,14.384-.277,7.054-7.054,15.283-22.268,18.6-28.7a98.251,98.251,0,0,0,.277,16.874,50.129,50.129,0,0,1-8.3,3.181c-1.66.415-2.7,1.106-2.7,1.867s1.106,1.521,2.7,2.282c2.835,1.383,11.2,5.256,13.209,6.5,1.729,1.037,2.628.207,3.112-.9.692-1.452-1.176-2.282-2.974-2.766a60.545,60.545,0,0,1-1.66-9.267c4.219-2.628,8.437-6.086,10.788-10.443C47.522,20.916,46,33.3,49.873,38.482a5.451,5.451,0,0,0,4.564,2.213c.968-.069,1.383-.692,1.245-.83' transform='translate(-0.038 0.124)'/%3E%3C/g%3E%3C/svg%3E";
+    "data:image/svg+xml,%3Csvg width='118' height='32' viewBox='0 0 155 42' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_74_4890)'%3E%3Cpath d='M155 21H140.6V35.4004H155V21Z' fill='%2300B6ED'/%3E%3Cpath d='M65.5539 33.211C64.116 33.349 62.6147 33.4882 61.0366 33.5566C61.6106 29.2005 63.9758 23.1883 66.915 24.1484C68.6357 24.7016 67.7035 29.8197 65.5527 33.2086L65.5539 33.211ZM61.8957 36.1823C61.4683 36.2514 61.0326 36.2514 60.6053 36.1823C60.7165 36.1047 60.8073 36.0013 60.8699 35.881C60.9325 35.7606 60.965 35.6268 60.9647 35.4911V34.9378C61.7531 34.9378 62.9717 34.7998 64.4779 34.6606C63.8154 35.4471 62.9038 35.9839 61.8957 36.1823ZM79.8198 25.8116C81.6842 24.1484 82.6164 24.29 82.8273 24.7052C83.3294 25.6736 81.1786 29.0625 76.9489 30.9297C77.3845 28.9796 78.3814 27.2002 79.8162 25.8116H79.8198ZM149 27.4712C148.784 24.0824 145.702 23.5291 145.272 24.4976C145.128 24.8432 146.419 24.7052 146.419 27.1256C146.419 31.0677 142.261 36.2543 136.953 36.2543C135.111 36.3656 133.298 35.7577 131.894 34.5583C130.49 33.3589 129.605 31.6613 129.425 29.8221C129.209 28.3701 129.568 26.3636 126.988 26.6408C125.19 26.8484 123.618 30.1677 121.324 33.001C119.387 35.4215 118.527 35.2139 118.957 33.139C119.531 30.5109 121.754 24.4256 124.335 24.0104C125.553 23.8027 125.983 25.8104 126.491 24.5636C126.674 24.1246 126.746 23.6475 126.701 23.1742C126.655 22.7009 126.495 22.246 126.233 21.8497C125.97 21.4533 125.615 21.1276 125.197 20.9012C124.78 20.6749 124.313 20.5549 123.839 20.5519C121.974 20.5519 119.751 22.4887 117.888 24.632C116.311 26.5688 108.209 38.0483 104.768 35.5595C103.191 34.3834 103.33 29.6793 104.338 24.1484C105.794 23.5168 107.361 23.1795 108.948 23.1559C110.536 23.1322 112.112 23.4226 113.587 24.0104C114.519 24.4256 114.665 24.356 114.233 23.3875C113.659 21.9355 110.433 19.653 105.343 20.6899C105.199 20.6899 105.127 20.7595 104.984 20.7595C105.414 18.9594 105.844 17.0946 106.421 15.2957C106.923 13.6361 108.286 10.8004 104.624 10.3168C103.477 10.1092 103.979 10.6624 103.546 12.184C102.827 14.9501 101.969 18.5442 101.323 22.2115C98.0002 24.1064 95.2885 26.9143 93.5082 30.3033C93.9222 28.7349 94.2336 27.141 94.4404 25.532C94.4806 25.1343 94.3704 24.7359 94.1314 24.4157C93.8924 24.0955 93.5422 23.8768 93.1499 23.8027C92.3615 23.5951 91.3526 23.9408 90.4252 25.2548C88.2025 28.2981 85.4071 33.0694 81.1055 35.0747C78.0225 36.5267 76.6601 35.0747 76.5894 32.7946C77.1289 32.6525 77.6562 32.4675 78.1663 32.2414C83.7583 29.8905 85.6228 26.294 84.2604 24.0812C82.898 22.0063 79.0985 22.6291 76.0155 25.7408C74.3913 27.5384 73.4079 29.8245 73.2188 32.2414C71.9284 32.5186 70.4941 32.7214 68.8454 32.9326C71.4263 28.8525 71.2118 23.3191 67.4075 22.3519C62.9621 21.2455 60.7395 25.3952 59.8084 28.8525C60.1679 24.98 60.7407 21.1063 61.4572 17.3034C61.8167 15.6437 62.9621 12.808 59.3004 12.3244C58.1537 12.1168 58.2963 12.67 58.3682 14.1917C58.512 16.2665 56.1455 28.6461 57.3641 34.0402C55.7872 34.5202 55.1414 35.6999 57.1484 36.8759C58.3625 37.3816 59.673 37.6128 60.9865 37.5531C62.3 37.4933 63.5842 37.1441 64.7475 36.5303C65.8289 36.0016 66.8016 35.2742 67.6148 34.3858C69.4792 34.1782 71.4143 33.8326 73.2069 33.5554C73.4932 35.9759 75.1432 37.7735 78.8708 37.4279C84.1765 36.9479 88.9083 30.6501 90.7008 27.608C90.3413 30.8589 88.1917 37.9811 91.9194 37.6355C93.3572 37.4975 92.7797 37.2899 92.8516 36.0455C93.211 31.7578 96.8668 28.0929 100.52 25.8788C99.8743 31.1349 100.09 35.8391 102.599 37.2899C107.187 40.056 113.569 32.7946 117.153 28.3689C115.355 32.311 114.356 37.2899 117.009 38.0507C120.164 38.9496 122.673 33.8326 125.612 29.9589C125.971 32.725 127.907 37.5659 135.649 37.5659C143.966 37.4963 149.2 32.6554 148.984 27.4688L149 27.4712ZM36.7117 36.1091C33.9173 35.1299 31.1875 33.9747 28.5387 32.6506C30.939 31.8034 33.2854 30.8103 35.565 29.6769C35.8138 31.8427 36.1968 33.9909 36.7117 36.1091ZM57.8817 39.9888C57.8098 39.7812 57.2359 40.0584 56.735 39.9888C55.2289 39.7812 53.2219 37.7759 52.6479 34.525C51.5695 28.6449 52.2178 22.8379 54.0103 14.1929C54.3698 12.5332 55.5164 9.69756 51.8535 9.14435C50.7068 9.00634 51.2796 9.55956 50.9932 11.0116C49.5553 17.4438 44.1106 22.0771 38.6624 25.1888C38.0884 17.8578 38.3029 9.62796 39.7408 4.64903C40.9629 0.430912 42.396 1.19173 40.6035 0.292908C38.8109 -0.605916 36.732 0.568916 35.0833 3.7478C33.4346 6.92669 25.9122 24.014 13.8629 35.5631C7.69931 41.4408 2.10485 38.3987 1.02886 37.4999C0.0966476 36.7391 -0.189725 37.9151 0.885072 39.09C5.8325 44.3461 13.1452 41.37 15.7968 38.8128C23.1059 31.759 31.6408 16.5438 35.0881 10.1128C34.6816 15.735 34.7775 21.3824 35.3745 26.9876C32.6035 28.2941 29.7251 29.3585 26.7713 30.1689C25.0507 30.5841 23.9747 31.2753 23.9747 32.0362C23.9747 32.797 25.1213 33.5578 26.7713 34.3162C29.7105 35.6999 38.3856 39.5724 40.4645 40.8168C42.2618 41.8536 43.1892 41.0244 43.6913 39.918C44.4102 38.4659 42.4727 37.6379 40.6083 37.1519C39.7869 34.1144 39.2115 31.0154 38.8876 27.8853C43.2611 25.2572 47.6346 21.7999 50.0718 17.445C49.4271 21.0451 47.8491 33.421 51.8691 38.6076C52.4249 39.3234 53.1422 39.8971 53.9622 40.2815C54.7822 40.666 55.6816 40.8502 56.5864 40.8192C57.5905 40.7496 58.0243 40.128 57.8769 39.9888' fill='%23545860'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_74_4890'%3E%3Crect width='154.804' height='42' fill='white' transform='translate(0.195801)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A";
 
   let _slotParentEl: HTMLElement;
   let _rootEl: HTMLElement;
@@ -63,9 +63,12 @@
 
   const dispatchMenuClick = () => {
     if (_hasMenuClickHandler) {
-      _menuButton.dispatchEvent(new CustomEvent("_menuClick", { composed: true, bubbles: true }));
+      _menuButton.dispatchEvent(
+        new CustomEvent("_menuClick", { composed: true, bubbles: true }),
+      );
     }
-  }
+  };
+
   function getChildren() {
     if (!_slotParentEl) return;
 
@@ -210,10 +213,15 @@
     <!-- Menu button for mobile -->
     {#if _showToggleMenu && _mobile}
       <div class="menu-toggle-area">
-        <button on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu} data-testid="menu-toggle" bind:this={_menuButton}>
+        <button
+          on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu}
+          data-testid="menu-toggle"
+          bind:this={_menuButton}
+          class:menu-open={_showMenu}
+        >
           Menu
           {#if !_hasMenuClickHandler}
-            <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
+            <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="2" />
           {/if}
         </button>
       </div>
@@ -225,9 +233,9 @@
         class="menu"
         open={_showMenu}
         minwidth="16rem"
-        context="app-header-menu"
+        context="menu-toggle-area"
         focusborderwidth="0"
-        borderradius="0"
+        borderradius="4"
         padded="false"
         tabindex="-1"
         height="full"
@@ -236,13 +244,20 @@
       >
         <div
           slot="target"
-          style={styles("height: 100%")}
           class="menu-toggle-area"
         >
-          <button on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu} data-testid="menu-toggle" bind:this={_menuButton}>
+          <button
+            on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu}
+            data-testid="menu-toggle"
+            bind:this={_menuButton}
+            class:menu-open={_showMenu}
+          >
             Menu
             {#if !_hasMenuClickHandler}
-             <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="1" />
+              <goa-icon
+                type={_showMenu ? "chevron-up" : "chevron-down"}
+                mt="2"
+              />
             {/if}
           </button>
         </div>
@@ -278,286 +293,16 @@
 <!-- Style -->
 
 <style>
+  /* General App header styling -------------------------------------- */
   *,
   :global(::slotted(*)) {
-    font: var(--goa-typography-body-s);
+    font: var(--goa-app-header-typography-service-name);
   }
 
-  /* =============== */
-  /* Common          */
-  /* =============== */
-
-  /* spans the full page width */
+  /* Spans the full page width */
   .container {
-    border-bottom: var(--goa-border-width-s) solid
-      var(--goa-color-greyscale-200);
-    background-color: var(--goa-color-greyscale-white);
-  }
-
-  .title {
-    margin-left: var(--goa-space-s);
-    color: var(--goa-color-text-default);
-    font: var(--goa-typography-body-s);
-    max-width: 624px;
-  }
-
-  /* contains all children within component */
-  .layout {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "header menu"
-      "links links";
-  }
-
-  .header-logo-title-area {
-    grid-area: header;
-
-    display: flex;
-    text-decoration: none;
-    padding: var(--goa-space-m);
-    align-items: flex-start;
-  }
-
-  .tablet .header-logo-title-area,
-  .desktop .header-logo-title-area {
-    min-height: calc(
-      4rem - 2 * (var(--goa-spacing-m))
-    ); /* desired min-height minus the required padding */
-  }
-
-  .header-logo-title-area:focus-visible {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    outline-offset: calc(-1 * var(--goa-border-width-l));
-  }
-
-  .header-logo-title-area .title {
-    font: var(--goa-typography-body-s);
-    margin-left: var(--goa-space-xs);
-  }
-
-  .menu-toggle-area {
-    grid-area: menu;
-    display: flex;
-    align-items: flex-end;
-    justify-content: right;
-    gap: var(--goa-space-2xs);
-  }
-
-  .menu-toggle-area button {
-    display: flex;
-    align-items: center;
-    background: transparent;
-    border: none;
-    color: var(--goa-color-text-default);
-    cursor: pointer;
-    text-decoration: underline;
-    padding-left: var(--goa-space-m);
-  }
-
-  .menu-toggle-area goa-icon {
-    scale: 0.8;
-  }
-
-  .menu-toggle-area:focus-visible {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    outline-offset: calc(-1 * var(--goa-border-width-l));
-  }
-
-  .image-desktop {
-    height: 2rem;
-  }
-
-  .content-area {
-    grid-area: links;
-  }
-
-  :global(::slotted(a)) {
-    display: block;
-    margin: 0;
-    font: var(--goa-typography-body-m);
-    text-decoration: none;
-    color: var(--goa-color-text-default);
-    padding: calc((3rem - var(--goa-line-height-3)) / 2) var(--goa-space-m);
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  :global(::slotted(a:hover)) {
-    background-color: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
-  }
-
-  :global(::slotted(a:focus-visible)) {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    outline-offset: calc(-1 * var(--goa-border-width-l));
-    background: var(--goa-color-greyscale-100);
-    color: var(--goa-color-interactive-hover);
-  }
-
-  :global(::slotted(a.interactive)) {
-    text-decoration: underline;
-    color: var(--goa-color-interactive-default);
-  }
-
-  /* Mobile */
-
-  .mobile :global(::slotted(a)) {
-    box-shadow: inset 0 var(--goa-border-width-s) 0 0
-      var(--goa-color-greyscale-200);
-  }
-
-  .mobile .image-desktop {
-    display: none;
-  }
-
-  .mobile .image-mobile {
-    display: block;
-    width: var(--goa-icon-size-l);
-  }
-
-  .mobile.show-menu {
-    border-bottom: var(--goa-border-width-m) solid
-      var(--goa-color-greyscale-200);
-  }
-
-  .mobile .menu-toggle-area button {
-    height: 3.375rem;
-    margin: 0 var(--goa-space-xs);
-  }
-
-  /* Tablet */
-
-  .tablet *,
-  .tablet:global(::slotted(*)) {
-    font: var(--goa-typography-body-m);
-  }
-
-  .tablet :global(::slotted(a)) {
-    box-shadow: inset 0 var(--goa-border-width-s) 0 0
-      var(--goa-color-greyscale-200);
-  }
-
-  .tablet .image-desktop {
-    display: block;
-  }
-
-  .tablet .image-mobile {
-    display: none;
-  }
-
-  .tablet .header-logo-title-area {
-    padding: var(--goa-space-m) 0;
-    min-height: calc(4rem - 2 * var(--goa-space-m)); /* - top/bottom padding */
-  }
-
-  .tablet .title {
-    margin-left: var(--goa-space-m);
-    font: var(--goa-typography-body-m);
-  }
-
-  .tablet .menu-toggle-area button {
-    height: 4rem;
-  }
-
-  @media (--tablet) {
-    /* padding is independent from fullmenubreakpoint, should use media query */
-    .container {
-      padding: 0 var(--goa-space-xl);
-    }
-  }
-
-  /* Desktop */
-
-  .desktop .content-area {
-    grid-area: menu;
-    display: flex;
-    align-items: stretch;
-  }
-
-  .desktop .header-logo-title-area {
-    grid-area: header;
-    display: flex;
-    align-items: flex-start;
-    color: inherit;
-    flex: 1 1 auto;
-    padding: var(--goa-space-m) 0;
-    min-height: calc(4rem - 2 * var(--goa-space-m)); /* - top/bottom padding */
-  }
-
-  .desktop .image-desktop {
-    display: block;
-  }
-
-  .desktop .image-mobile {
-    display: none;
-  }
-
-  .desktop .title {
-    margin-left: var(--goa-space-m);
-    font: var(--goa-typography-body-m);
-  }
-
-  .desktop .layout {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto;
-    grid-template-areas: "header . menu";
-    margin: 0 auto;
-    width: min(var(--max-content-width), 100%);
-  }
-
-  .desktop :global(::slotted(goa-app-header-menu)),
-  .desktop :global(::slotted(a)),
-  .desktop :global(::slotted(a:visited)) {
-    color: var(--goa-color-text-default);
-    font-weight: var(--goa-font-weight-bold);
-    display: inline-flex;
-    align-items: center;
-    padding: var(--goa-space-m) var(--goa-space-s);
-  }
-
-  .desktop :global(::slotted(goa-app-header-menu)) {
-    padding: 0;
-  }
-
-  .desktop :global(::slotted(a:focus-visible)),
-  .desktop :global(::slotted(a:hover)) {
-    background: var(--goa-color-greyscale-100);
-    cursor: pointer;
-    color: var(--goa-color-interactive-hover);
-  }
-
-  .desktop :global(::slotted(a:focus-visible)),
-  .desktop :global(::slotted(goa-app-header-menu:focus-visible)) {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    outline-offset: calc(-1 * var(--goa-border-width-l));
-  }
-
-  .desktop :global(::slotted(a.current)) {
-    border-top: 4px solid var(--goa-color-interactive-default);
-    border-bottom: 4px solid transparent;
-  }
-
-  .desktop :global(::slotted(a.current:hover)) {
-    border-top: 4px solid var(--goa-color-interactive-hover);
-  }
-
-  .desktop :global(::slotted(a.interactive)) {
-    font-weight: var(--goa-font-weight-medium);
-    text-decoration: underline;
-    color: var(--goa-color-interactive-default);
-    padding: 0 var(--goa-space-m);
-  }
-
-  .desktop :global(::slotted(a.interactive:hover)) {
-    color: var(--goa-color-interactive-hover);
-  }
-
-  .desktop :global(::slotted(a.interactive.current)) {
-    border-color: transparent;
-    margin-left: var(--goa-space-m);
+    border-bottom: var(--goa-app-header-border-bottom);
+    background-color: var(--goa-app-header-color-bg);
   }
 
   @media (--desktop) {
@@ -571,12 +316,430 @@
     }
   }
 
-  :global(::slotted(a.current.inside-collapse-menu)) {
-    color: var(--goa-color-text-light);
-    background-color: var(--goa-color-interactive-default);
+  @media (--tablet) {
+    /* padding is independent from fullmenubreakpoint, should use media query */
+    .container {
+      padding: 0 var(--goa-space-xl); /* 32px */
+    }
   }
 
-  :global(::slotted(a.current.inside-collapse-menu:hover)) {
-    background-color: var(--goa-color-interactive-hover);
+  /* Contains all children within component */
+  .layout {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "header menu"
+      "links links";
   }
+
+  .content-area {
+    grid-area: links;
+  }
+
+  .desktop .layout {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto;
+    grid-template-areas: "header . menu";
+    margin: 0 auto;
+    width: min(var(--max-content-width), 100%);
+  }
+
+  /* Logo and service name */
+  .title {
+    color: var(--goa-app-header-color-service-name);
+  }
+
+  .header-logo-title-area {
+    grid-area: header;
+    display: flex;
+    text-decoration: none;
+    align-items: flex-start;
+  }
+
+  /* Logo and service name --Focus */
+  .header-logo-title-area:focus-visible {
+    outline: var(--goa-app-header-service-name-border-focus);
+    z-index: 100;
+    position: relative;
+  }
+
+  /* Menu items (+ in collapsed menu) */
+  :global(::slotted(a)) {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: var(--goa-app-header-padding-nav-item-in-menu);
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+    overflow: hidden;
+  }
+
+  /* Menu items (+ in collapsed menu) --Focus */
+  :global(::slotted(a:focus-visible)) {
+    outline: var(--goa-app-header-border-focus);
+    outline-offset: 0px;
+    z-index: 100;
+    position: relative;
+  }
+
+  /* Menu items in collapsed menu */
+  :global(::slotted(a.inside-collapse-menu)) {
+    color: var(--goa-app-header-color-text-nav-item);
+    background-color: var(--goa-app-header-color-bg-nav-item);
+  }
+
+  /* Menu items in collapsed menu --Hover */
+  :global(::slotted(a.inside-collapse-menu:hover)) {
+    color: var(--goa-app-header-color-text-nav-item-hover) !important;
+    background-color: var(--goa-app-header-color-bg-nav-item-child-hover);
+  }
+
+  /* Menu items in collapsed menu --Focus */
+  :global(::slotted(a.inside-collapse-menu:focus-visible)) {
+    outline-offset: -3px;
+    background-color: var(
+      --goa-app-header-color-bg-nav-item-child-focus
+    ) !important;
+    color: var(--goa-app-header-color-text-nav-item-focus) !important;
+  }
+
+  /* Menu items in collapsed menu --Interactive */
+  :global(::slotted(a.interactive)) {
+    color: var(--goa-app-header-nav-color-text-link-item) !important;
+    text-decoration: underline !important;
+    white-space: nowrap;
+  }
+
+  /* Menu items in collapsed menu --Interactive--Hover */
+  :global(::slotted(a.interactive:hover)) {
+    color: var(--goa-app-header-nav-color-text-link-item-hover) !important;
+  }
+
+  /* Menu items in collapsed menu --Interactive--Focus */
+  :global(::slotted(a.interactive:focus-visible)) {
+    color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
+    background-color: var(
+      --goa-app-header-color-bg-nav-item-child-focus
+    ) !important;
+  }
+
+  /* Menu items in collapsed menu -- Current */
+  :global(::slotted(a.inside-collapse-menu.current)) {
+    color: var(app-header-color-text-nav-item-in-menu-current);
+    background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current) !important;
+  }
+
+  /* Menu items in collapsed menu -- Current -- Hover */
+  :global(::slotted(a.inside-collapse-menu.current:hover)) {
+    color: var(app-header-color-text-nav-item-in-menu-current-hover) !important;
+    background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current-hover) !important;
+  }
+
+  /*------------------------------------------------*/
+
+  /* DESKTOP -------------------------------------- */
+
+  /* Container for all navigation items */
+  .desktop .content-area {
+    grid-area: menu;
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* Hides menu button on desktop */
+  .desktop .menu-toggle-area {
+    display: none;
+  }
+
+  /* Service name and logo */
+  .desktop .title {
+    padding-top: 5.5px;
+    max-width: var(--goa-app-header-max-width-service-name);
+    min-width: var(--goa-app-header-min-width-service-name);
+    font: var(--goa-app-header-typography-service-name);
+  }
+
+  .desktop .header-logo-title-area {
+    grid-area: header;
+    display: flex;
+    align-items: flex-start;
+    color: inherit;
+    flex: 1 1 auto;
+    min-height: var(--goa-app-header-size-logo);
+    margin: var(--goa-app-header-padding-logo);
+    gap: var(--goa-app-header-space-btw-logo-service-name);
+  }
+
+  .desktop .image-desktop {
+    display: block;
+  }
+
+  .desktop .image-mobile {
+    display: none;
+  }
+
+  /* Header nav item (on desktop)
+
+  --Default */
+  .desktop :global(::slotted(a)),
+  .desktop :global(::slotted(a:visited)) {
+    font: var(--goa-app-header-typography-nav-item);
+    display: block;
+    align-items: center;
+    padding: var(--goa-app-header-padding-nav-item);
+    text-decoration: none;
+    height: var(--goa-app-header-height-nav-item);
+    border-top: var(--goa-app-header-border-nav-item-default);
+    border-bottom: var(--goa-app-header-border-nav-item-default);
+  }
+
+  /* Header nav item --Hover */
+  .desktop :global(::slotted(a:hover)) {
+    cursor: pointer;
+    color: var(--goa-app-header-color-text-nav-item-hover) !important;
+    background: var(--goa-app-header-color-bg-nav-item-hover);
+    border-top: var(--goa-app-header-border-nav-item-default);
+    border-bottom: var(--goa-app-header-border-nav-item-hover);
+  }
+
+  /* Header nav item --Focus */
+  .desktop :global(::slotted(a:focus-visible)) {
+    cursor: pointer;
+    color: var(--goa-app-header-color-text-nav-item-focus) !important;
+    background: var(--goa-app-header-color-bg-nav-item-focus);
+    border-top: var(--goa-app-header-border-nav-item-default);
+    border-bottom: var(--goa-app-header-border-nav-item-focus);
+  }
+
+  /* Header nav item --Current */
+  .desktop :global(::slotted(a.current)) {
+    border-top: var(--goa-app-header-border-nav-item-default) !important;
+    border-bottom: var(--goa-app-header-border-nav-item-current);
+  }
+
+  /* Header nav item --Current--Hover */
+  .desktop :global(::slotted(a.current:hover)) {
+    border-top: var(--goa-app-header-border-nav-item-default) !important;
+    border-bottom: var(--goa-app-header-border-nav-item-current-hover);
+  }
+
+  /* Header nav item --Current--Focus */
+  .desktop :global(::slotted(a.current:focus-visible)) {
+    border-top: var(--goa-app-header-border-nav-item-default) !important;
+    border-bottom: var(--goa-app-header-border-nav-item-current-focus);
+  }
+
+  /* Header nav item with children (app header menu) --Default */
+  .desktop :global(::slotted(goa-app-header-menu)) {
+    height: var(--goa-app-header-height-nav-item);
+  }
+
+  /* Header nav item with children (app header menu) --Hover */
+  .desktop :global(::slotted(goa-app-header-menu:hover)) {
+    background: var(--goa-app-header-color-bg-nav-item-hover);
+    cursor: pointer;
+    color: var(--goa-app-header-color-text-nav-item-hover) !important;
+    overflow: hidden !important;
+  }
+
+  /* Link item styling */
+  .desktop :global(::slotted(a.interactive)) {
+    font: var(--goa-app-header-typography-link-item);
+    padding: var(--goa-app-header-padding-link-item);
+  }
+
+  /* Link item styling --Hover */
+  .desktop :global(::slotted(a.interactive:hover)) {
+    border-top: var(--goa-app-header-border-nav-item-default);
+    border-bottom: var(--goa-app-header-border-nav-item-default);
+    background-color: var(--goa-app-header-nav-color-bg-link-item-hover);
+  }
+
+  /* Link item styling --Focus */
+  .desktop :global(::slotted(a.interactive:focus-visible)) {
+    border-top: var(--goa-app-header-border-nav-item-default) !important;
+    border-bottom: var(--goa-app-header-border-nav-item-default) !important;
+    background-color: var(
+      --goa-app-header-nav-color-bg-link-item-focus
+    ) !important;
+  }
+
+  /* Link item styling --Current */
+  .desktop :global(::slotted(a.interactive.current)) {
+    border-top: var(--goa-app-header-border-nav-item-default) !important;
+    border-bottom: var(--goa-app-header-border-nav-item-default) !important;
+  }
+
+  /*------------------------------------------------*/
+
+  /* TABLET -------------------------------------- */
+
+  /* Service name and logo */
+  .tablet .header-logo-title-area {
+    margin: var(--goa-app-header-padding-logo);
+    min-height: var(--goa-app-header-size-logo); /* - top/bottom padding */
+    gap: var(--goa-app-header-space-btw-logo-service-name);
+  }
+
+  .tablet .title {
+    padding-top: 5.5px;
+    font: var(--goa-app-header-typography-service-name);
+    max-width: var(--goa-app-header-max-width-service-name);
+    min-width: var(--goa-app-header-min-width-service-name);
+  }
+
+  .tablet .image-desktop {
+    display: block;
+  }
+
+  .tablet .image-mobile {
+    display: none;
+  }
+
+  /* Menu button (for collapsed menu) */
+  .menu-toggle-area {
+    grid-area: menu;
+    display: flex;
+    position: relative;
+  }
+
+  .menu-toggle-area button {
+    display: flex;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    height: var(--goa-app-header-height-nav-item);
+    align-items: center;
+    gap: 6px;
+    font: var(--goa-app-header-typography-menu-button);
+    padding: var(--goa-app-header-padding-menu-button);
+    text-decoration: none;
+    color: var(--goa-app-header-color-menu-button);
+  }
+
+  /* Menu button (for collapsed menu) --Hover */
+  .menu-toggle-area button:hover {
+    color: var(--goa-app-header-color-menu-button-hover);
+    box-shadow: inset 0 -4px 0 0 var(--goa-color-interactive-hover); /* Adds a 4px bottom border using box shadow */
+  }
+
+  /* Menu button (for collapsed menu) --Focus */
+  .menu-toggle-area button:focus-visible {
+    outline: var(--goa-app-header-border-focus);
+    z-index: 100;
+    position: relative;
+
+    color: var(--goa-app-header-color-menu-button-focus);
+    box-shadow: inset 0 -4px 0 0 var(--goa-color-interactive-hover);
+  }
+
+  /* Menu button (for collapsed menu) --Open */
+  .menu-toggle-area button.menu-open {
+    background-color: var(--goa-app-header-color-bg-menu-button-focus);
+    color: var(--goa-app-header-color-menu-button-focus);
+    box-shadow: inset 0 -4px 0 0 var(--goa-color-interactive-hover);
+  }
+
+  /* Size of icon in collapsed menu button */
+  .menu-toggle-area goa-icon {
+    scale: 1;
+  }
+
+  /* Menu button (for collapsed menu) */
+  .tablet .menu-toggle-area {
+    padding-left: var(--goa-app-header-space-btw-service-name-nav-items-in-menu); /* Space between service name and menu button */
+    height: 100%;
+    display: flex;
+    align-items: end;
+  }
+
+  /* Link menu items in collapsed menu --Focus */
+  :global(::slotted(a.interactive:focus-visible)) {
+    color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
+    background-color: var(--goa-app-header-nav-color-bg-link-item-in-menu-focus) !important;
+    border-top: none !important;
+    border-bottom: none;
+  }
+
+  /* Add top border to all menu items in popover menu (except first) */
+  .tablet :global(::slotted(a:not(:first-child))) {
+    box-shadow: inset 0 var(--goa-border-width-s) 0 0
+      var(--goa-color-greyscale-200);
+  }
+
+  /*------------------------------------------------*/
+
+  /* MOBILE --------------------------------------*/
+
+  /* Service name and logo */
+  .mobile .title {
+    margin-top: -1px;
+    color: var(--goa-app-header-color-service-name);
+    max-width: var(--goa-app-header-max-width-service-name);
+    min-width: var(--goa-app-header-min-width-service-name);
+    font: var(--goa-app-header-typography-service-name-mobile);
+  }
+
+  .mobile .header-logo-title-area {
+    display: flex;
+    align-items: start;
+    padding: var(--goa-app-header-padding-logo-mobile);
+    gap: var(--goa-app-header-space-btw-logo-service-name-mobile);
+  }
+
+  .mobile .image-desktop {
+    display: none;
+  }
+
+  .mobile .image-mobile {
+    display: block;
+    width: var(--goa-app-header-size-logo-mobile);
+  }
+
+  /* Menu button styling */
+  .mobile .menu-toggle-area button {
+    height: var(--goa-app-header-height-nav-item-mobile);
+    font: var(--goa-app-header-typography-menu-button-mobile);
+    display: flex;
+    align-items: center;
+  }
+
+  /* Mobile Menu Button area */
+  .mobile .menu-toggle-area {
+    display: flex;
+    align-items: end; /* Aligns the button to the bottom */
+    position: relative; /* Ensure this provides positioning context for children */
+  }
+
+  /* Menu button (for collapsed menu) --Open */
+  .mobile .menu-toggle-area button.menu-open {
+    background-color: var(--goa-app-header-color-bg-menu-button-focus);
+    color: var(--goa-app-header-color-menu-button-focus);
+    box-shadow: inset 0 -4px 0 0 var(--goa-color-interactive-hover);
+  }
+
+  /* Size of icon in mobile menu button */
+  .mobile .menu-toggle-area goa-icon {
+    scale: 0.8;
+  }
+
+  /* Menu items in popover */
+  .mobile :global(::slotted(a)) {
+    box-shadow: inset 0 var(--goa-border-width-s) 0 0
+      var(--goa-color-greyscale-200);
+    font: var(--goa-app-header-typography-menu-item);
+    padding-left: var(--goa-space-2xl);
+    padding-right: var(--goa-space-xl);
+  }
+
+  /* Bottom border for mobile menu */
+  .mobile.show-menu {
+    border-bottom: var(--goa-border-width-m) solid
+      var(--goa-color-greyscale-200);
+  }
+
+  /*------------------------------------------------*/
 </style>

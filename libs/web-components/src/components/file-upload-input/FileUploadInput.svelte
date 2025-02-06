@@ -195,7 +195,7 @@
     <div class="instructions">
       <goa-icon type="cloud-upload" size="large" />
       <div>Drag and drop files here</div>
-      <em>or</em>
+      <em  class="or-text">or</em>
       <div class="browse-files">Browse files</div>
     </div>
 
@@ -254,56 +254,56 @@
 {/if}
 
 <style>
+
   .dragdrop {
-    border-radius: var(--goa-border-radius-m);
-    border: var(--goa-border-width-m) dashed
-      var(--goa-color-interactive-default);
+    border-radius: var(--goa-file-upload-border-radius);
+    border: var(--goa-file-upload-border);
     display: flex;
-    font: var(--goa-typography-body-m);
+    font: var(--goa-file-upload-instruction-text);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.25rem;
-    padding: var(--goa-space-xl) 0;
-    color: var(--goa-color-interactive-default);
+    gap: var(--goa-file-upload-text-gap); /* 3rem is the space between the icon and the text */
+    padding: var(--goa-file-upload-padding);
+    color: var(--goa-file-upload-instruction-color);
     text-align: center;
     cursor: pointer;
-
+    background: var(--goa-file-upload-color-bg);
     container: self / inline-size;
-  }
-
-  .dragdrop:active,
-  .dragdrop:focus-within {
-    border-style: solid;
-    outline: none;
-  }
-  .dragdrop:hover div {
-    color: var(--goa-color-interactive-hover);
   }
 
   /** States **/
 
-  .state-default {
-    background: var(--goa-color-info-background);
+  .dragdrop:active {
+    border: var(--goa-file-upload-border-active);
+    outline: none;
   }
+
+  .dragdrop:focus-within {
+    border: var(--goa-file-upload-border-hover);
+    box-shadow: var(--goa-file-upload-border-focus);
+    background-color: var(--goa-file-upload-color-bg-focus);
+    color: var(--goa-file-upload-instruction-color-focus);
+  }
+
   .state-hover {
-    background: var(--goa-color-greyscale-100);
-    border-style: dashed;
+    background: var(--goa-file-upload-color-bg-hover);
+    border: var(--goa-file-upload-border-hover);
+    color: var(--goa-file-upload-instruction-color-hover);
   }
   .state-dragenter {
-    background: var(--goa-color-info-background);
-    border-style: solid;
+    background: var(--goa-file-upload-color-bg-drag);
+    border: var(--goa-file-upload-border-drag);
+    color: var(--goa-file-upload-instruction-color-drag);
   }
 
   .instructions {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
   }
 
   goa-icon {
-    margin-top: 4px;
-    margin-right: 4px;
+    margin: 0 var(--goa-space-s);
   }
 
   .browse-files {
@@ -312,13 +312,19 @@
 
   em {
     font-style: normal;
-    font: var(--goa-typography-body-s);
-    color: var(--goa-color-greyscale-700);
+    font: var(--goa-file-upload-help-text);
+    color: var(--goa-file-upload-help-text-color);
+  }
+
+  .or-text {
+    margin: var(--goa-space-3xs) var(--goa-space-xs) 0 var(--goa-space-xs);
   }
 
   .max-file-size {
     display: block;
-    margin-top: 0.5rem;
+  }
+  .button .max-file-size {
+    margin-top: var(--goa-space-xs);
   }
 
   input[type="file"] {

@@ -24,7 +24,7 @@
     },
     {
       "name": "variant",
-      "description": "Style this button to show color, nocolor, dark or destructive action",
+      "description": "Style this button to show color, nocolor, dark, light, or destructive action",
       "values": [
         {
           "name": "color"
@@ -34,6 +34,9 @@
         },
         {
           "name": "dark"
+        },
+        {
+          "name": "light"
         },
         {
           "name": "destructive"

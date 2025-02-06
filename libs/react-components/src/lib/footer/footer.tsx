@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 interface WCProps {
   maxcontentwidth?: string;
   testid?: string;
+  url?: string;
 }
 
 declare global {
@@ -19,6 +20,7 @@ export interface GoabAppFooterProps {
   maxContentWidth?: string;
   children?: ReactNode;
   testId?: string;
+  url?: string;
 }
 
 // legacy name
@@ -28,9 +30,10 @@ export function GoabAppFooter({
   maxContentWidth,
   children,
   testId,
+  url,
 }: GoabAppFooterProps): JSX.Element {
   return (
-    <goa-app-footer maxcontentwidth={maxContentWidth} testid={testId}>
+    <goa-app-footer maxcontentwidth={maxContentWidth} testid={testId} url={url}>
       {children}
     </goa-app-footer>
   );

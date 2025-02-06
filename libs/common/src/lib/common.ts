@@ -5,52 +5,57 @@ export type GoabSpinnerSize = "small" | "medium" | "large" | "xlarge";
 export type GoabRadioGroupOnChangeDetail = {
   name: string;
   value: string;
-}
+};
 
 export type GoabInputOnChangeDetail<T = string> = {
   name: string;
   value: T;
-}
+};
 export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
 export type GoaInputOnBlurDetail<T = string> = GoabInputOnChangeDetail<T>;
 
-export type GoabInputAutoCapitalize = "on" | "off" | "none" | "sentences" | "words" | "characters";
+export type GoabInputAutoCapitalize =
+  | "on"
+  | "off"
+  | "none"
+  | "sentences"
+  | "words"
+  | "characters";
 
 export type GoabInputOnKeyPressDetail<T = string> = {
   name: string;
   value: T;
   key: T;
-}
+};
 
 export type GoabFormStepperOnChangeDetail = {
   step: number;
-}
+};
 
 export type GoabFileUploadInputOnSelectFileDetail = {
   file: File;
-}
+};
 
 export type GoabFileUploadOnCancelDetail = {
   filename: string;
-}
+};
 
 export type GoabFileUploadOnDeleteDetail = {
   filename: string;
-}
+};
 
 export type GoabDropdownItemMountType = "append" | "prepend" | "reset";
-
 
 export type GoabDropdownOnChangeDetail = {
   name?: string;
   value?: string;
   values?: string[];
-}
+};
 
 export type GoabDatePickerOnChangeDetail = {
   name?: string;
   value: string | Date | undefined;
-}
+};
 
 export type GoabChipVariant = "filter";
 
@@ -62,13 +67,12 @@ export type GoabCheckboxOnChangeDetail = {
   value?: string;
   checked: boolean;
   binding: "value" | "check";
-}
+};
 
 export type GoabCalendarOnChangeDetail = {
   name?: string;
   value: string;
-}
-
+};
 
 export type GoabBadgeType =
   | "information"
@@ -83,7 +87,7 @@ export type GoabPaginationVariant = "all" | "links-only";
 
 export type GoabPaginationOnChangeDetail = {
   page: number;
-}
+};
 
 export type GoabFormStepperType = "constrained" | "free";
 export type GoabFormStepStatus = "complete" | "incomplete" | "unstarted";
@@ -108,21 +112,21 @@ export type GoabContainerType =
 export type GoabContainerWidth = "full" | "content";
 
 // Callout
-export type GoabCalloutType = "information" | "success" | "important" | "emergency" | "event";
+export type GoabCalloutType =
+  | "information"
+  | "success"
+  | "important"
+  | "emergency"
+  | "event";
 export type GoabCalloutSize = "medium" | "large";
 export type GoabCalloutAriaLive = "off" | "polite" | "assertive";
 export type GoabCalloutIconTheme = "outline" | "filled";
 
 // Button
-export type GoabButtonType =
-  | "primary"
-  | "submit"
-  | "secondary"
-  | "tertiary"
-  | "start";
+export type GoabButtonType = "primary" | "submit" | "secondary" | "tertiary" | "start";
 
 export type GoabButtonSize = "compact" | "normal";
-export type GoabButtonVariant = "normal" | "destructive";
+export type GoabButtonVariant = "normal" | "destructive" | "inverse";
 
 // Button group
 export type GoabButtonGroupAlignment = "start" | "end" | "center";
@@ -141,17 +145,16 @@ export type GoabTooltipHorizontalAlignment = "left" | "right" | "center";
 
 export type GoabTextAreaCountBy = "character" | "word" | "";
 
-
 export type GoabTextAreaOnChangeDetail = {
   name: string;
   value: string;
-}
+};
 
 export type GoabTextAreaOnKeyPressDetail = {
   name: string;
   value: string;
   key: string;
-}
+};
 
 // Tabs
 
@@ -160,7 +163,7 @@ export interface GoabTabsProps {
 }
 export type GoabTabsOnChangeDetail = {
   tab: number;
-}
+};
 // Table
 
 export type GoabTableVariant = "normal" | "relaxed";
@@ -172,15 +175,14 @@ export interface GoabTableProps extends Margins {
   testId?: string;
 }
 
-
 export type GoabTableOnSortDetail = {
   sortBy: string;
   sortDir: number;
-}
+};
 
 // Spacer
 
-export type GoabSpacerHorizontalSpacing = Spacing | "fill"
+export type GoabSpacerHorizontalSpacing = Spacing | "fill";
 export type GoabSpacerVerticalSpacing = Spacing;
 
 export interface GoabSpacerProps {
@@ -258,11 +260,7 @@ export interface GoabPopoverProps extends Margins {
 
 // Notification
 
-export type GoabNotificationType =
-  | "important"
-  | "information"
-  | "event"
-  | "emergency";
+export type GoabNotificationType = "important" | "information" | "event" | "emergency";
 
 export type GoabAriaLiveType = "polite" | "assertive" | "off";
 
@@ -270,7 +268,6 @@ export type GoabAriaLiveType = "polite" | "assertive" | "off";
 
 export type GoabServiceLevel = "alpha" | "beta" | "live";
 export type GoabLinkTarget = "self" | "blank";
-
 
 // Modal
 export type GoabModalRole = "dialog" | "alertdialog";
@@ -307,7 +304,6 @@ export type GoabAutoCapitalize =
   | "sentences"
   | "words"
   | "characters";
-
 
 export type OnChange<T = string> = (name: string, value: T) => void;
 export type OnFocus<T = string> = (name: string, value: T) => void;
@@ -882,9 +878,26 @@ export type GoabIconType =
   | "logo-yen"
   | "logo-youtube";
 
-export type GoabIconSize = "small" | "medium" | "large" | "xlarge";
+export type GoabIconSize =
+  | "1"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6"
+  | "2xsmall"
+  | "xsmall"
+  | "small"
+  | "medium"
+  | "large"
+  | "xlarge";
 export type GoabIconTheme = "outline" | "filled";
-export type GoabIconButtonVariant = "color" | "nocolor" | "dark" | "destructive";
+export type GoabIconButtonVariant =
+  | "color"
+  | "nocolor"
+  | "dark"
+  | "light"
+  | "destructive";
 export type GoabIconVariant = "primary" | "secondary" | "tertiary";
 
 // Common
@@ -932,38 +945,36 @@ export type GoabLinkButtonType = "start" | "primary" | "secondary" | "tertiary";
 export type GoabTextMaxWidth = string | "none";
 export type GoabTextHeadingElement = "h1" | "h2" | "h3" | "h4" | "h5";
 export type GoabTextTextElement = "span" | "div" | "p";
-export type GoabTextHeadingSize = "heading-xl"
+export type GoabTextHeadingSize =
+  | "heading-xl"
   | "heading-l"
   | "heading-m"
   | "heading-s"
   | "heading-xs";
-export type GoabTextBodySize = "body-l"
-  | "body-m"
-  | "body-s"
-  | "body-xs";
+export type GoabTextBodySize = "body-l" | "body-m" | "body-s" | "body-xs";
 export type GoabTextSize = GoabTextHeadingSize | GoabTextBodySize;
 
 export type GoabFielsetOnContinueDetail = {
   el: HTMLElement;
-  state: Record<string, string>
-}
+  state: Record<string, string>;
+};
 
 // Simple Form
 export type GoabFormField = {
   label: string;
   value: string;
-}
+};
 export type GoabFormState = {
   form: Record<string, Record<string, GoabFormField>>;
   history: string[];
   editting: string;
   lastModified?: Date;
-}
+};
 export type GoabFormStorageType = "none" | "local" | "session";
 export type GoabFormOnMountDetail = {
-  fn: (next: string) => void
-}
+  fn: (next: string) => void;
+};
 export type GoabFormOnStateChange = {
   id: string;
   state: Record<string, Record<string, GoabFormField>>;
-}
+};

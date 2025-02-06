@@ -11,21 +11,23 @@
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
-
 </script>
 
-<div
-  class="link"
-  style={styles(
-    calculateMargin(mt, mr, mb, ml),
-  )}
->
-  {#if leadingicon}<goa-icon type={leadingicon} fillcolor="#0070C4" />{/if}
+<div class={`link`} style={styles(calculateMargin(mt, mr, mb, ml))}>
+  {#if leadingicon}<goa-icon
+      class="leading-icon"
+      type={leadingicon}
+    />{/if}
   <slot />
-  {#if trailingicon}<goa-icon type={trailingicon} fillcolor="#0070C4" />{/if}
+  {#if trailingicon}<goa-icon type={trailingicon} />{/if}
 </div>
 
 <style>
+
+  :global(::slotted(a)) {
+    color: var(--goa-color-interactive-default);
+  }
+
   .link {
     display: inline-flex;
     align-items: center;
@@ -35,14 +37,12 @@
     background: none;
     cursor: pointer;
     font: var(--goa-typography-body-m);
+    text-decoration: underline;
+    gap: 8px;
   }
 
   .link:hover {
-    text-decoration: underline;
+    color: var(--goa-color-interactive-hover);
   }
 
-  :global(::slotted(a)) {
-    color: var(--goa-color-interactive-default);
-  }
 </style>
-

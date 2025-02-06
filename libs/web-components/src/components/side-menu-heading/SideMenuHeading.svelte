@@ -16,16 +16,26 @@
 </h2>
 
 <style>
+  h2.icon {
+    display: flex;
+    align-items: center;
+  }
+
+  goa-icon {
+    color: var(--goa-side-menu-icon-color);
+    font-size: var(--goa-side-menu-icon-size);
+    margin-right: var(--goa-side-menu-heading-icon-gap);
+}
+
   h2 {
-    border-top: var(--goa-border-width-m) solid
-      var(--goa-color-greyscale-200, #dcdcdc);
-    background: var(--goa-color-greyscale-100, #f1f1f1);
-    padding: 0.75rem 0.75rem 0.5rem 1.5rem;
-    margin: 0;
-    color: var(--goa-color-text-secondary, #666);
-    font: var(--goa-typography-heading-s);
+    border-top: var(--goa-side-menu-heading-border);
+    background: var(--goa-side-menu-heading-color-bg);
+    padding: var(--goa-side-menu-heading-padding);
+    color: var(--goa-side-menu-heading-color, #666);
+    font: var(--goa-side-menu-heading-typography);
     display: flex;
     align-items: flex-start;
-    gap: 0.5rem;
+    margin: var(--goa-side-menu-heading-margin);
+    gap: var(--goa-side-menu-heading-gap);
   }
 </style>
