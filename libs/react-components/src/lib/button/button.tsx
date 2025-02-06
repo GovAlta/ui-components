@@ -85,7 +85,7 @@ export function GoabButton({
       type={type}
       size={size}
       variant={variant}
-      disabled={disabled}
+      {...(disabled ? { disabled: true } : {})}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
       width={width}
