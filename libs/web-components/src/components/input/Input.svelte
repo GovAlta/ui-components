@@ -90,6 +90,8 @@
   let _rootEl: HTMLElement;
   let _error = false;
   let _prevError = false;
+  let _containerWidth = "";
+
 
   // ========
   // Reactive
@@ -134,10 +136,15 @@
     validateType(type);
     validateAutoCapitalize(autocapitalize);
     addRelayListener();
-
     showDeprecationWarnings();
     checkSlots();
     sendMountedMessage();
+
+    if (width.includes("%")) {
+      _containerWidth = `width: ${width};`; // Set container width to the percentage
+    } else {
+      _containerWidth = `--width: ${width};`; // Keep using the CSS variable
+    }
   });
 
   // =========
@@ -273,7 +280,7 @@
 
 <div
   class="container"
-  style={`--width: ${width};${calculateMargin(mt, mr, mb, ml)}`}
+  style={`${_containerWidth}${calculateMargin(mt, mr, mb, ml)}`}
   bind:this={_rootEl}
 >
   <div
@@ -282,6 +289,7 @@
     class:leading-content={_leadingContentSlot}
     class:trailing-content={_trailingContentSlot}
     class:error={_error}
+    class:has-icon={leadingicon || trailingicon}
   >
     {#if prefix}
       <div class="prefix">
@@ -366,20 +374,22 @@
 
 <!-- Styles -->
 <style>
-  /* border box: the element's specified width and height include the content, padding, and border. The margin is still added */
+
   :host {
-    box-sizing: border-box;
+    box-sizing: border-box; /* border box: the element's specified width and height include the content, padding, and border. The margin is still added */
   }
 
   .container {
     position: relative;
-    width: 100%;
+    width: auto;
     display: inline-block;
+    max-width: 100%;
   }
+
 
   @media not (--mobile) {
     .container {
-      width: var(--width);
+      width: auto;
     }
   }
 
@@ -389,41 +399,36 @@
   }
   .goa-input {
     outline: none;
-    transition: box-shadow 0.05s ease-in;
+    transition: var(--goa-text-input-transition);
     background-clip: padding-box;
     display: inline-flex;
     align-items: stretch;
     min-width: 100%;
-    background-color: var(--goa-color-greyscale-white);
-
+    background-color: var(--goa-text-input-color-bg);
     /* default border */
-    box-shadow: inset 0 0 0 var(--goa-border-width-s)
-      var(--goa-color-greyscale-700);
-    border-radius: var(--goa-border-radius-m);
-
+    box-shadow: var(--goa-text-input-border);
+    border-radius: var(--goa-text-input-border-radius);
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
-    background-color: var(--goa-color-greyscale-white);
+    max-width: 100%;
   }
 
   .goa-input:not(.error):not(.leading-content):not(.trailing-content):hover:not(
       :has(input:focus-visible)
     ) {
     /* hover border */
-    box-shadow: inset 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-hover);
+    box-shadow: var(--goa-text-input-border-hover);
   }
   .goa-input:not(.error):has(input:focus-visible) {
     /* focus border(s) */
     box-shadow:
-      inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
-      0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+      var(--goa-text-input-border),
+      var(--goa-text-input-border-focus);
   }
 
   /* Error state */
   .goa-input.error input.input--goa:not(input:focus-visible) {
-    box-shadow: inset 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-error);
+    box-shadow: var(--goa-text-input-border-error);
   }
 
   .goa-input.leading-content.error input.input--goa:not(input:focus-visible) {
@@ -439,8 +444,8 @@
   /* Focus state (including when in error state) */
   .goa-input:has(input:focus-visible) {
     box-shadow:
-      inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
-      0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+      var(--goa-text-input-border),
+      var(--goa-text-input-border-focus);
   }
 
   /* type=range does not have an outline/box-shadow */
@@ -448,41 +453,38 @@
     border: none;
 
     &.type--range:active,
-    &.type--range:focus,
+    &.type--range:focus-visible,
     &.type--range:focus-within {
       box-shadow: none;
     }
   }
 
   .leading-icon {
-    margin-left: var(--goa-space-s);
+    margin-left: var(--goa-text-input-padding-lr);
   }
 
   .trailing-icon {
-    margin-right: var(--goa-space-s);
+    margin-right: var(--goa-text-input-padding-lr);
   }
 
   .trailing-icon-button {
-    margin-right: var(--goa-space-s);
+    margin-right: var(--goa-text-input-padding-lr);
   }
 
   input {
     display: inline-block;
-    color: var(--goa-color-text-default);
-    font-size: var(--goa-font-size-4);
-
-    padding: calc(var(--goa-space-xs) - 1px) calc(var(--goa-space-s) - 1px);
-    line-height: calc(40px - calc(var(--goa-space-xs) * 2));
-
+    color: var(--goa-text-input-color-text);
+    font: var(--goa-text-input-typography);
+    padding: var(--goa-text-input-padding);
     background-color: transparent;
-    width: 100%;
+    width: calc(var(--width) + 1ch);
+    max-width: 100%;
     flex: 1 1 auto;
-    font-family: var(--goa-font-family-sans);
     z-index: 1;
-    border-radius: var(--goa-border-radius-m);
+    border-radius: var(--goa-text-input-border-radius);
   }
   input,
-  input:focus,
+  input:focus-visible,
   input:hover,
   input:active {
     outline: none;
@@ -493,35 +495,41 @@
   }
 
   .leading-icon + input {
-    padding-left: var(--goa-space-xs);
+    padding-left: var(--goa-text-input-space-btw-icon-text);
   }
 
+  /* Disabled state */
   .input--disabled,
   .input--disabled:hover,
   .input--disabled:active,
-  .input--disabled:focus {
-    background-color: var(--goa-color-greyscale-100);
-    border-color: var(--goa-color-greyscale-200) !important;
+  .input--disabled:focus-visible {
+    background-color: var(--goa-text-input-color-bg-disabled);
+    border: var(--goa-text-input-border-disabled);
     cursor: default;
     box-shadow: none !important;
   }
   .input--disabled input,
   .input--disabled input:hover,
   .input--disabled input:active,
-  .input--disabled input:focus {
-    color: var(--goa-color-text-secondary);
+  .input--disabled input:focus-visible {
+    color: var(--goa-text-input-color-text-disabled);
   }
   .input--disabled input:hover {
     cursor: default !important;
+  }
+  /* Adjust the leading icon style when input is disabled */
+  .input--disabled .leading-icon,
+  .input--disabled .trailing-icon {
+    color: var(--goa-text-input-color-icon-disabled);
+    cursor: default;
   }
 
   .prefix,
   .suffix,
   .leading-content-slot :global(::slotted(div)),
   .trailing-content-slot :global(::slotted(div)) {
-    background-color: var(--goa-color-greyscale-100);
-    box-shadow: inset 0 0 0 var(--goa-border-width-s)
-      var(--goa-color-greyscale-700);
+    background-color: var(--goa-text-input-lt-content-color-bg);
+    box-shadow: var(--goa-text-input-border);
     display: flex;
     align-items: center;
     white-space: normal;
@@ -529,22 +537,24 @@
 
   .leading-content-slot :global(::slotted(div)),
   .trailing-content-slot :global(::slotted(div)) {
-    padding: var(--goa-space-xs) var(--goa-space-s);
+    padding: var(--goa-text-input-padding);
   }
 
   .prefix,
   .leading-content-slot :global(::slotted(div)) {
     /* background-clip doesn't want to work */
-    border-top-left-radius: var(--goa-border-radius-m);
-    border-bottom-left-radius: var(--goa-border-radius-m);
+    border-top-left-radius: var(--goa-text-input-border-radius);
+    border-bottom-left-radius: var(--goa-text-input-border-radius);
   }
 
   .suffix,
   .trailing-content-slot :global(::slotted(div)) {
     /* background-clip doesn't want to work */
-    border-top-right-radius: var(--goa-border-radius-m);
-    border-bottom-right-radius: var(--goa-border-radius-m);
+    border-top-right-radius: var(--goa-text-input-border-radius);
+    border-bottom-right-radius: var(--goa-text-input-border-radius);
   }
+
+  /* leading and trailing content ------------ */
 
   .input-leading-content {
     border-top-left-radius: var(--goa-border-radius-none);
@@ -556,47 +566,36 @@
     border-bottom-right-radius: var(--goa-border-radius-none);
   }
 
-  /* this is the hover style for the leading and trailing content
-  without error */
+  /* this is the hover style for the input when it has leading and trailing content */
   .input-leading-content:not(.error):not(input:focus-visible):hover {
-    box-shadow: inset 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-hover);
+    box-shadow: var(--goa-text-input-border-hover);
   }
-
   .input-trailing-content:not(.error):not(input:focus-visible):hover {
-    box-shadow: inset 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-hover);
+    box-shadow: var(--goa-text-input-border-hover);
   }
 
   /* this is the interior focus border */
-
   .input-leading-content:active,
-  .input-leading-content:focus,
+  .input-leading-content:focus-visible,
   .input-leading-content:focus-within {
     box-shadow:
-      inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
-      0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+      var(--goa-text-input-border),
+      var(--goa-text-input-border-focus);
   }
   .input-trailing-content:active,
-  .input-trailing-content:focus,
+  .input-trailing-content:focus-visible,
   .input-trailing-content:focus-within {
     box-shadow:
-      inset 0 0 0 var(--goa-border-width-s) var(--goa-color-greyscale-700),
-      0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
-    border-top-right-radius: var(--goa-border-radius-none);
-    border-bottom-right-radius: var(--goa-border-radius-none);
+      var(--goa-text-input-border),
+      var(--goa-text-input-border-focus);
   }
 
-  /* Hide main focus border for inputs with leading content */
+  /* Hide main focus border for inputs with leading and trailing content */
   .goa-input.leading-content:has(input:focus-visible) {
-    box-shadow: inset 0 0 0 var(--goa-border-width-s)
-      var(--goa-color-greyscale-700);
+    box-shadow: var(--goa-text-input-border);
   }
-
-  /* Hide main focus border for inputs with trailing content */
   .goa-input.trailing-content:has(input:focus-visible) {
-    box-shadow: inset 0 0 0 var(--goa-border-width-s)
-      var(--goa-color-greyscale-700);
+    box-shadow: var(--goa-text-input-border);
   }
 
   /* Themes */
@@ -610,14 +609,14 @@
     border: none;
   }
 
-  .variant--bare:focus,
+  .variant--bare:focus-visible,
   .variant--bare:active,
   .variant--bare:focus-within {
     box-shadow: none;
   }
 
   input[type="search"]:enabled:read-write:-webkit-any(
-      :focus,
+      :focus-visible,
       :hover
     )::-webkit-search-cancel-button {
     position: relative;
@@ -633,4 +632,14 @@
   ::-ms-reveal {
     display: none;
   }
+
+  ::placeholder {
+    color: var(--goa-text-input-color-text-placeholder);
+    opacity: 1;
+  }
+
+  /* TODO add styling for autofill
+  input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #E0F0FC inset !important;
+  } */
 </style>
