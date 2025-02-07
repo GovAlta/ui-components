@@ -18,7 +18,6 @@
     FieldsetChangeMsg,
     FieldsetChangeRelayDetail,
     FieldsetCompleteMsg,
-    FieldsetValidationRelayDetail,
     FormBackUrlDetail,
     FormBackUrlMsg,
     FormDispatchEditMsg,
@@ -85,9 +84,6 @@
           break;
         case FieldsetChangeMsg:
           onFieldsetChange(data as FieldsetChangeRelayDetail);
-          break;
-        case "_continue":
-          handleFieldsetContinue(data as FieldsetValidationRelayDetail);
           break;
         case FieldsetBindMsg:
           bindFieldset(event, data as FieldsetBindRelayDetail);
@@ -156,16 +152,6 @@
   function dispatchCompletion() {
     dispatchContinueMsg(); // This was added to ensure that above issue is "fixed"
     relay(_senderEl, FieldsetCompleteMsg, null, { bubbles: true });
-  }
-
-  // TODO: these errors can be resolved by being able to send a message down to the child fieldset
-  function handleFieldsetContinue(detail: FieldsetValidationRelayDetail) {
-    dispatch<FieldsetValidationRelayDetail>(
-      _rootEl,
-      "_continue",
-      { ...detail, last: type === "last-step", first: type === "first-step" },
-      { bubbles: true },
-    );
   }
 
   function handleBack(e: Event) {
