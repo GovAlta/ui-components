@@ -332,7 +332,7 @@
     const fieldsetKeys = Object.keys(_fieldsets);
 
     filteredState.form = Object.entries(filteredState.form)
-      .filter(([id, item]) => {
+      .filter(([id, _]) => {
         return fieldsetKeys.includes(id);
       })
       .reduce((acc, [id, item]) => {
