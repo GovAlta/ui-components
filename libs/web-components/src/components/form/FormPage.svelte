@@ -4,6 +4,7 @@
     props: {
       buttonText: { type: "String", attribute: "button-text" },
       buttonVisibility: { type: "String", attribute: "button-visibility" },
+      sectionTitle: { type: "String", attribute: "section-title" },
     }
   }}
 />
@@ -131,10 +132,6 @@
 
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
     _active = detail.active;
-    // TODO: why was this here?????
-    // relay<FormToggleActiveRelayDetail>(_senderEl, FormToggleActiveMsg, {
-    //   active: _active,
-    // });
   }
 
   // allow customization of form if user has jumped back to a question (editting mode)
