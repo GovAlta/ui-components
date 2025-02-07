@@ -151,8 +151,6 @@ export type FieldsetItemState = {
 export type FieldsetValidationRelayDetail = {
   el: HTMLElement;
   state: Record<string, FieldsetItemState>;
-  first?: boolean;
-  last?: boolean;
 };
 
 export const FieldsetSetValueMsg = "fieldset::set:value";

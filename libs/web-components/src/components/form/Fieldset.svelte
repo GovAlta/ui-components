@@ -10,7 +10,7 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { receive, relay } from "../../common/utils";
+  import { dispatch, receive, relay } from "../../common/utils";
   import {
     ExternalErrorRelayDetail,
     ExternalSetErrorMsg,
@@ -292,7 +292,7 @@
   }
 
   function relayContinue(detail: FormPageContinueRelayDetail) {
-    relay<FieldsetValidationRelayDetail>(
+    dispatch<FieldsetValidationRelayDetail>(
       _rootEl,
       "_continue",
       { el: _rootEl, state: detail.cancelled ? _stateSnapshot : _state },
