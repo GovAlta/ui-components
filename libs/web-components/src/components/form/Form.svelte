@@ -1,9 +1,6 @@
 <svelte:options
   customElement={{
     tag: "goa-public-form",
-    props: {
-      backUrl: { attribute: "back-url", type: "String" },
-    },
   }}
 />
 
@@ -18,8 +15,6 @@
     FieldsetChangeMsg,
     FieldsetChangeRelayDetail,
     FieldsetCompleteMsg,
-    FormBackUrlDetail,
-    FormBackUrlMsg,
     FormBindMsg,
     FormBindRelayDetail,
     FormDispatchEditMsg,
@@ -59,9 +54,6 @@
 
   // Helps when debugging complex forms
   export let name: string = "[name] not set";
-
-  // Url that will be navigated back to when the back button in the first fieldset is clicked
-  export let backUrl: string = "";
 
   // =======
   // Private
@@ -233,11 +225,6 @@
 
     // save the initial state of the fieldset (data prop not set)
     _state.form[detail.id] = { ..._state.form[detail.id], heading: detail.heading };
-
-    // send the back url to child fieldsets, however only the first will need it
-    if (backUrl) {
-      relay<FormBackUrlDetail>(detail.el, FormBackUrlMsg, { url: backUrl });
-    }
 
     // Once all FormPages are obtained, set the visibility of the first item in the list
     // as visible for the default state; this may be overridden if the state is initialized

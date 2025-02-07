@@ -67,11 +67,6 @@ export type FormDispatchStateRelayDetailList = FormState[];
 export const FormDispatchEditMsg = "form::edit";
 export type FormDispatchEditRelayDetail = { id: string };
 
-export const FormBackUrlMsg = "form::back-url";
-export type FormBackUrlDetail = {
-  url: string;
-};
-
 // ======
 // Subform
 // ======

@@ -5,6 +5,7 @@
       buttonText: { type: "String", attribute: "button-text" },
       buttonVisibility: { type: "String", attribute: "button-visibility" },
       sectionTitle: { type: "String", attribute: "section-title" },
+      backUrl: { attribute: "back-url", type: "String" },
     }
   }}
 />
@@ -18,8 +19,6 @@
     FieldsetChangeMsg,
     FieldsetChangeRelayDetail,
     FieldsetCompleteMsg,
-    FormBackUrlDetail,
-    FormBackUrlMsg,
     FormDispatchEditMsg,
     FormDispatchEditRelayDetail, FormPageBackMsg,
     FormPageBindMsg,
@@ -38,6 +37,7 @@
   export let heading: string = "";
   export let sectionTitle: string = "";
   export let type: "step" | "first-step" | "last-step" | "multistep";
+  export let backUrl: string = "";
   export let buttonVisibility: "visible" | "hidden" = "visible";
 
   export let mt: Spacing = null;
@@ -52,7 +52,6 @@
   let _rootEl: HTMLElement;
   let _fieldsetEl: HTMLElement;
   let _active: boolean = false;
-  let _backUrl: string;
   let _editting: boolean = false;  // when a user jumps from the summary page back to one of the pages
 
   // ========
@@ -75,9 +74,6 @@
       switch (action) {
         case FormToggleActiveMsg:
           onToggleActiveState(data as FormToggleActiveRelayDetail);
-          break;
-        case FormBackUrlMsg:
-          setBackUrl(data as FormBackUrlDetail);
           break;
         case FormDispatchEditMsg:
           onFormDispatch(data as FormDispatchEditRelayDetail);
@@ -120,10 +116,6 @@
       { ...detail, state: { ...detail.state, heading } },
       { bubbles: true },
     );
-  }
-
-  function setBackUrl(detail: FormBackUrlDetail) {
-    _backUrl = detail.url;
   }
 
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
