@@ -340,10 +340,23 @@
    * Synchronizes the form summary state with the app to ensure consistent display of form data
    */
   function syncFormSummaryState() {
+    // filter out any form items that don't contain fieldsets
+    const filteredState = { ..._state };
+    const fieldsetKeys = Object.keys(_fieldsets);
+
+    filteredState.form = Object.entries(filteredState.form)
+      .filter(([id, item]) => {
+        return fieldsetKeys.includes(id);
+      })
+      .reduce((acc, [id, item]) => {
+        acc[id] = item;
+        return acc;
+      }, {});
+
     relay<FormDispatchStateRelayDetail>(
       _formSummaryEl,
       FormDispatchStateMsg,
-      _state,
+      filteredState,
     );
   }
 
