@@ -3,6 +3,7 @@
   props: {
     actionButtonText: { type: "String", attribute: "action-button-text" },
     buttonVisibility: { type: "String", attribute: "button-visibility" },
+    sectionTitle: { type: "String", attribute: "section-title" },
   }
 }} />
 
@@ -14,15 +15,33 @@
   } from "../../types/relay-types";
   import { onMount } from "svelte";
 
+  // =====
+  // Props
+  // =====
+
+  export let heading: string = "";
+  export let sectionTitle: string = "";
   export let actionButtonText: string;
   export let buttonVisibility: "visible" | "hidden" = "hidden";
+
+  // =======
+  // Private
+  // =======
 
   let _el: HTMLElement;
   let _subformEl: HTMLElement;
 
+  // =====
+  // Hooks
+  // =====
+
   onMount(() => {
     receiveMsgs();
   })
+
+  // =========
+  // Functions
+  // =========
 
   function receiveMsgs() {
     // For some reason the way that the SubFormIndex exists within the Subform doesn't allow
@@ -47,6 +66,8 @@
 <goa-public-form-page
   id="index"
   type="step"
+  {heading}
+  section-title="{sectionTitle}"
   button-visibility={buttonVisibility}
   active
 >
