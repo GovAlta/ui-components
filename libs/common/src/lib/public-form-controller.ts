@@ -198,13 +198,9 @@ export class PublicFormController<T> {
   }
 
   // removes any data collected that doesn't correspond with the final history path
-  clean() {
-    if (Array.isArray(this.state)) {
-      return;
-    }
-    const state = this.state;
-    return this.state?.history.reduce<Record<string, unknown>>((acc, fieldsetId) => {
-      acc[fieldsetId] = state?.form[fieldsetId];
+  clean(data: AppState<T>) {
+    return data.history.reduce<Record<string, unknown>>((acc, fieldsetId) => {
+      acc[fieldsetId] = data.form[fieldsetId];
       return acc;
     }, {});
   }
