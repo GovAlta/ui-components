@@ -2,7 +2,6 @@ export type FormStatus = "not-started" | "incomplete" | "complete";
 
 export type FormState = {
   uuid: string;
-  // TODO: rename form to "data" or "detail"
   form: Record<string, Fieldset>;
   history: string[];
   editting: string;

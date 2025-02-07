@@ -98,15 +98,12 @@ export class PublicFormController<T> {
       this.state = {
         ...this.state,
         form: { ...(this.state?.form || {}), [detail.id]: detail.data },
-        // currentFieldset: newState.currentFieldset,
-        // history: detail.data.,
       } as AppState<T>;
     } else {
       // form state being updated with form data
       this.state = {
         ...this.state,
         form: { ...(this.state?.form || {}), ...detail.data.form },
-        // currentFieldset: newState.currentFieldset,
         history: detail.data.history,
       } as AppState<T>;
     }
@@ -147,38 +144,6 @@ export class PublicFormController<T> {
     });
   }
 
-  // getStateItems(group: string): Record<string, FieldsetItemState>[] {
-  //   if (Array.isArray(this.state)) {
-  //     console.error(
-  //       "Utils:getStateItems: unable to update the state of a multi form type",
-  //     );
-  //     return [];
-  //   }
-  //   if (!this.state) {
-  //     console.error("Utils:getStateItems: state has not yet been set");
-  //     return [];
-  //   }
-
-  //   console.debug("Utils:getStateItems", this.state, { group });
-  //   return (this.state.form[group]?.data ?? []) as Record<string, FieldsetItemState>[];
-  // }
-
-  // Public method to allow for the retrieval of the state value
-  // getStateValue(group: string, key: string): string {
-  //   if (Array.isArray(this.state)) {
-  //     console.error("getStateValue: unable to update the state of a multi form type");
-  //     return "";
-  //   }
-  //   if (!this.state) {
-  //     console.error("getStateValue: state has not yet been set");
-  //     return "";
-  //   }
-
-  //   const data = this.state.form[group].data as Record<string, FieldsetItemState>[];
-  //   // @ts-expect-error "ignore"
-  //   return (data as Record<string, string>)[key]?.value ?? "";
-  // }
-
   // Public method to allow for the continuing to the next page
   continueTo(next: T | undefined) {
     if (!next) {
@@ -187,12 +152,6 @@ export class PublicFormController<T> {
     }
     // Relay the continue message to the form element which will
     // set the visibility of the fieldsets
-    console.log("continueTo: TYPE", {
-      type: this.type,
-      state: this.state,
-      formRef: this._formRef,
-      next,
-    });
     // FIXME: this makes a call to the subform instead of the form
     relay<{ next: T }>(this._formRef, "external::continue", { next });
   }
