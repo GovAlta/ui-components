@@ -199,9 +199,7 @@
     {/if}
 
     {#if sectionTitle}
-      <goa-text class="section-title" size="body-l" mb="s">
-        {sectionTitle}
-      </goa-text>
+      <goa-text size="body-l" mb="s" color="secondary">{sectionTitle}</goa-text>
     {/if}
 
     {#if heading}
@@ -233,9 +231,3 @@
     {/if}
   </div>
 </section>
-
-<style>
-  .section-title {
-    color: var(--goa-color-greyscale-700);
-  }
-</style>
