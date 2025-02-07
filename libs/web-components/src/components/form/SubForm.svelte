@@ -30,7 +30,6 @@
 
   // Subform props
   export let id: string = "";
-  export let heading: string = "";
 
   // Form props
   export let name: string;
