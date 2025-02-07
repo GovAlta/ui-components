@@ -99,7 +99,7 @@
   {/if}
   {#if _state}
     {#each _state.history as page}
-      {#if _state.form[page] && _state.form[page]?.data}
+      {#if _state.form[page]}
         <goa-container>
           <div class="summary" class:summary-with-header={!!getHeading(page)}>
             {#if getHeading(page)}
