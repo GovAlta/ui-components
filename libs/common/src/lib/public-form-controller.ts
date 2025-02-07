@@ -161,6 +161,8 @@ export class PublicFormController<T> {
     const { el, state } = (e as CustomEvent).detail;
     const value = state?.[field]?.value;
 
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     for (const validator of validators) {
       const msg = validator(value);
       this.#dispatchError(el, field, msg);
