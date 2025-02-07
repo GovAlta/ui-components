@@ -195,9 +195,6 @@
     _state = { ..._state, ...(data || {}) };
     setChildrenState();
 
-    if (_state.history.length === 0) {
-      alert("history is empty");
-    }
     sendToggleActiveStateMsg(_state.history[_state.history.length - 1]);
     syncFormSummaryState();
   }
@@ -281,7 +278,6 @@
     const { next } = detail;
     const lastPage = _state.history[_state.history.length - 1];
     if (!lastPage) {
-      console.log("onContinue", name, _state);
       console.warn("Form:onContinue", name, "no last page");
       return;
     }
@@ -474,8 +470,6 @@
     if (historyPageCount > 0) {
       lastViewedFieldset = _state.history[historyPageCount - 1];
     }
-
-    console.log("state", _state);
 
     setTimeout(() => {
       // Show the last viewed page or show the first page

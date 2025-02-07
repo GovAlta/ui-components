@@ -1,9 +1,9 @@
 <svelte:options customElement={{
-  tag: "goa-public-subform",
-  props: {
-    continueMsg: { attribute: "continue-msg", type: "String" }
-  }
-}}
+    tag: "goa-public-subform",
+    props: {
+      continueMsg: { attribute: "continue-msg", type: "String" }
+    }
+  }}
 />
 
 <script lang="ts">
@@ -121,11 +121,6 @@
           onSubFormIndexContinueToParent();
           break;
 
-        // Form event interceptions
-        case "_init":
-          interceptFormInit(data as { el: HTMLElement });
-          break;
-
         case ExternalInitStateMsg:
           initState(data as FormState[]);
           break;
@@ -185,16 +180,6 @@
     resetItemIndex();
   }
 
-  //
-  function interceptFormInit(detail: { el: HTMLElement }) {
-    alert("intercepting init");
-    // save a reference to the child form
-    _formEl = detail.el;
-
-    // redispatch event, but with a subform reference instead
-    dispatch(_relayEl, "_init", { el: _receiverEl }, { bubbles: true });
-  }
-
   function onSubFormIndexContinueToSubForm() {
     _mode = "form";
   }
@@ -239,20 +224,6 @@
       _state[id] = { ...item };
     }
   }
-
-  // TODO: use this function when the user clicks an edit/delete link
-  // there would be a helper method to properly dispatch the message
-  // function setValues(index: number) {
-  //   // restore state in form items
-  //   for (const [name, data] of Object.entries(_state)) {
-  //     if (data.value) {
-  //       relay<FieldsetSetValueRelayDetail>(_fieldsets[name], FieldsetSetValueMsg, {
-  //         name,
-  //         value: data.value,
-  //       });
-  //     }
-  //   }
-  // }
 
   /**
    * Binds the subform to the parent form to allow state to be relayed back to subforms

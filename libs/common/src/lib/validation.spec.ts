@@ -226,28 +226,7 @@ describe("Validation", () => {
   });
 
   describe("Length", () => {
-    describe("Optional", () => {
-      const validValues = ["", "123456"];
-      const invalidValues = ["12345"];
-
-      const validate = lengthValidator({ min: 6 });
-
-      for (const val of validValues) {
-        it(`${val} should be valid`, () => {
-          const msg = validate(val);
-          expect(msg).toBe("");
-        });
-      }
-
-      for (const val of invalidValues) {
-        it(`${val} should be invalid`, () => {
-          const msg = validate(val);
-          expect(msg).not.toBe("");
-        });
-      }
-    });
-
-    describe("Length", () => {
+    describe("Min", () => {
       const validValues = ["", "123456"];
       const invalidValues = ["12345"];
       const validate = lengthValidator({ min: 6 });
@@ -266,38 +245,25 @@ describe("Validation", () => {
         });
       }
     });
-  });
 
-  describe("Date", () => {
-    it("needs a test");
-    // const validValues = ["", "123456"];
-    // const invalidValues = ["12345"];
-    //
-    // const validate = lengthValidator({ min: 6, optional: true });
-    //
-    // for (const val of validValues) {
-    //   it(`${val} should be valid`, () => {
-    //     const msg = validate(val);
-    //     expect(msg).toBe("");
-    //   });
-    // }
-    //
-    // for (const val of invalidValues) {
-    //   it(`${val} should be invalid`, () => {
-    //     const msg = validate(val);
-    //     expect(msg).not.toBe("");
-    //   });
-    // }
+    describe("Max", () => {
+      const validValues = ["", "123456"];
+      const invalidValues = ["1234567"];
+      const validate = lengthValidator({ max: 6, maxMsg: "Too long" });
 
-    describe("Start date", () => {
-      // const start = new Date(2025, 0, 1);
-      // const validator = dateValidator({ min: start });
-      // const validDate = new Date(2025, 2, 1);
-      it("needs a test");
+      for (const val of validValues) {
+        it(`${val} should be valid`, () => {
+          const msg = validate(val);
+          expect(msg).toBe("");
+        });
+      }
+
+      for (const val of invalidValues) {
+        it(`${val} should be invalid`, () => {
+          const msg = validate(val);
+          expect(msg).toBe("Too long");
+        });
+      }
     });
-
-    // describe("End date", () => {
-    //
-    // })
   });
 });

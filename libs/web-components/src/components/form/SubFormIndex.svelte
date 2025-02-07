@@ -2,7 +2,6 @@
   tag: "goa-public-subform-index",
   props: {
     actionButtonText: { type: "String", attribute: "action-button-text" },
-    // continueButtonText: { type: "String", attribute: "continue-button-text" },
     buttonVisibility: { type: "String", attribute: "button-visibility" },
   }
 }} />
@@ -11,13 +10,11 @@
   import { receive, relay } from "../../common/utils";
   import {
     SubFormBindMsg, SubFormBindRelayDetail,
-    SubFormIndexContinueToParentMsg,
     SubFormIndexContinueToSubFormMsg,
   } from "../../types/relay-types";
   import { onMount } from "svelte";
 
   export let actionButtonText: string;
-  // export let continueButtonText: string;
   export let buttonVisibility: "visible" | "hidden" = "hidden";
 
   let _el: HTMLElement;
@@ -40,11 +37,6 @@
       }
     });
   }
-
-  // function continueToParent(e: Event) {
-  //   e.stopPropagation();
-  //   relay(_subformEl, SubFormIndexContinueToParentMsg, null, { bubbles: true });
-  // }
 
   function continueToSubform(e: Event) {
     e.stopPropagation();
