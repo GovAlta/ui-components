@@ -36,8 +36,8 @@
   export let id: string = "";
   export let heading: string = "";
   export let sectionTitle: string = "";
-  export let type: "step" | "first-step" | "last-step" | "multistep";
   export let backUrl: string = "";
+  export let type: "step" | "summary" | "multistep" = "step";
   export let buttonVisibility: "visible" | "hidden" = "visible";
 
   export let mt: Spacing = null;
@@ -160,20 +160,22 @@
   )}
 >
   <div bind:this={_rootEl}>
-    {#if type === "first-step" && _backUrl && !_editting }
-      <goa-link leadingicon="chevron-back" mb="2xl">
-        <a href={_backUrl}>Back</a>
-      </goa-link>
-    {/if}
+    {#if !_editting}
+      {#if backUrl}
+        <goa-link leadingicon="chevron-back" mb="2xl">
+          <a href={backUrl}>Back</a>
+        </goa-link>
+      {/if}
 
-    {#if (type === "step" && !_editting)}
-      <goa-link-button
-        leadingicon="chevron-back"
-        mb="2xl"
-        on:_click={handleBack}
-      >
-        Back
-      </goa-link-button>
+      {#if !backUrl && type === "step"}
+        <goa-link-button
+          leadingicon="chevron-back"
+          mb="2xl"
+          on:_click={handleBack}
+        >
+          Back
+        </goa-link-button>
+      {/if}
     {/if}
 
     {#if sectionTitle}
@@ -194,7 +196,7 @@
           </goa-button>
         {/if}
 
-        {#if type === "last-step"}
+        {#if type === "summary"}
           <goa-button on:_click={() => dispatchCompletion()} type="primary">
             {buttonText || "Confirm"}
           </goa-button>
