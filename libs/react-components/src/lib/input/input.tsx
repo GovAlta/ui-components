@@ -40,6 +40,8 @@ interface WCProps extends Margins {
   max?: string | number;
   step?: number;
   maxlength?: number;
+
+  trailingiconarialabel?: string;
 }
 
 declare global {
@@ -76,6 +78,7 @@ interface BaseProps extends Margins {
   leadingContent?: React.ReactNode;
   trailingContent?: React.ReactNode;
   maxLength?: number;
+  trailingIconAriaLabel?: string;
 }
 
 type OnChange<T = string> = (detail: GoabInputOnChangeDetail<T>) => void;
@@ -146,6 +149,7 @@ export function GoabInput({
   leadingContent,
   trailingContent,
   maxLength,
+  trailingIconAriaLabel,
   onTrailingIconClick,
   onChange,
   onFocus,
@@ -227,6 +231,7 @@ export function GoabInput({
       mb={mb}
       ml={ml}
       handletrailingiconclick={!!onTrailingIconClick}
+      trailingiconarialabel={trailingIconAriaLabel}
     >
       {leadingContent && <div slot="leadingContent">{leadingContent}</div>}
       {trailingContent && <div slot="trailingContent">{trailingContent}</div>}

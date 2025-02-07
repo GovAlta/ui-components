@@ -41,6 +41,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       (_focus)="_onFocus($event)"
       (_blur)="_onBlur($event)"
       (_keypress)="_onKeyPress($event)"
+      [attr.trailingiconarialabel]="trailingIconAriaLabel"
     >
       <ng-content/>
     </goa-input>
@@ -83,6 +84,7 @@ export class GoabInput implements ControlValueAccessor, OnInit {
   @Input() mr?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
+  @Input() trailingIconAriaLabel?: string;
 
   @Output() onTrailingIconClick = new EventEmitter();
   @Output() onFocus = new EventEmitter<GoabInputOnFocusDetail>();
