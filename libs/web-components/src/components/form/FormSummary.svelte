@@ -63,14 +63,13 @@
       return;
     }
 
-    const data = Object
-        .entries(state.form[page].data.fieldsets || {})
-        .sort((itemsA, itemsB) => itemsA[1].order > itemsB[1].order ? 1 : -1)
-        .reduce((acc, [name, fieldsetState]) => {
-          acc[name] = fieldsetState;
-          return acc;
-        }, {});
-      return data;
+    return Object
+      .entries(state.form[page].data.fieldsets || {})
+      .sort((itemsA, itemsB) => itemsA[1].order > itemsB[1].order ? 1 : -1)
+      .reduce((acc, [name, fieldsetState]) => {
+        acc[name] = fieldsetState;
+        return acc;
+      }, {});
   }
 
   function getDataList(state: FormState, page: string): Record<string, FieldsetItemState>[] {
@@ -79,7 +78,7 @@
       return;
     }
 
-    const data = pageData.items.reduce((acc, formState) => {
+    return pageData.items.reduce((acc, formState) => {
       const data = formState.history.reduce((acc, fieldsetId) => {
         acc = {...acc, ...getData(formState, fieldsetId)};
         return acc;
@@ -87,10 +86,7 @@
       acc.push(data);
       return acc;
     }, []);
-
-    return data;
   }
-
 </script>
 
 <div bind:this={_rootEl}>
