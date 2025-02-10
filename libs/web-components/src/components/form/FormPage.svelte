@@ -80,6 +80,7 @@
           break;
         case FieldsetChangeMsg:
           onFieldsetChange(data as FieldsetChangeRelayDetail);
+          event.stopPropagation();
           break;
         case FieldsetBindMsg:
           bindFieldset(event, data as FieldsetBindRelayDetail);
