@@ -52,6 +52,7 @@
       switch (action) {
         case SubFormBindMsg:
           _subformEl = (data as SubFormBindRelayDetail).el;
+          e.stopPropagation();
           break;
       }
     });

@@ -74,9 +74,11 @@
       switch (action) {
         case FormToggleActiveMsg:
           onToggleActiveState(data as FormToggleActiveRelayDetail);
+          event.stopPropagation();
           break;
         case FormDispatchEditMsg:
           onFormDispatch(data as FormDispatchEditRelayDetail);
+          event.stopPropagation();
           break;
         case FieldsetChangeMsg:
           onFieldsetChange(data as FieldsetChangeRelayDetail);
@@ -84,6 +86,7 @@
           break;
         case FieldsetBindMsg:
           bindFieldset(event, data as FieldsetBindRelayDetail);
+          event.stopPropagation();
           break;
       }
     });

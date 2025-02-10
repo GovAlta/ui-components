@@ -84,27 +84,35 @@
       switch (action) {
         case FormSetFieldsetMsg:
           onSetFieldset(data as FormSetFieldsetRelayDetail);
+          event.stopPropagation();
           break;
         case FormResetErrorsMsg:
           onErrorReset();
+          event.stopPropagation();
           break;
         case FormItemMountMsg:
           onFormItemMount(data as FormItemMountRelayDetail);
+          event.stopPropagation();
           break;
         case FormFieldMountMsg:
           onFormFieldMount(data as FormFieldMountRelayDetail);
+          event.stopPropagation();
           break;
         case FormToggleActiveMsg:
           onToggleActiveState(data as FormToggleActiveRelayDetail);
+          event.stopPropagation();
           break;
         case ExternalSetErrorMsg:
           onError(data as ExternalErrorRelayDetail);
+          event.stopPropagation();
           break;
         case FormPageContinueMsg:
           onFormPageContinue(data as FormPageContinueRelayDetail);
+          event.stopPropagation();
           break;
         case FormResetFormMsg:
           resetFields(event);
+          event.stopPropagation();
           break;
       }
     });

@@ -182,7 +182,6 @@
   // Relay listeners
   // ***************
 
-
   function onReceiveState(data?: FormDispatchStateRelayDetail) {
     _state = { ..._state, ...(data || {}) };
     setChildrenState();
@@ -489,7 +488,6 @@
       dispatchChildFormState();
     }, 200);
   }
-
 
   /**
    * Dispatches the state to the child forms
