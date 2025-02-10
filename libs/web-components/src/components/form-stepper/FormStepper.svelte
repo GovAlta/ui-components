@@ -199,7 +199,7 @@
 
   // change current step state and update children
   function changeStep(nextStep: number) {
-    if (_steps.length === 0) return;
+    if (_steps.length === 0 || nextStep > _steps.length) return;
 
     // deactivate current step (currentStep is initially undefined)
     if (_currentStep > 0) {
