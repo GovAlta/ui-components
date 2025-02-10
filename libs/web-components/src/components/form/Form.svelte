@@ -82,15 +82,15 @@
   // Form state
   let _state: FormState;
 
-  function initializeState() {
-    _state = {
+  function getDefaultState(): FormState {
+    return {
       uuid: crypto.randomUUID(),
       form: {},
       history: [],
       editting: "",
       lastModified: undefined,
       status: "not-started",
-    };
+    } as FormState;
   }
 
   onMount(() => {
@@ -99,7 +99,7 @@
     addRelayListener();
     addSubformRelayListener();
 
-    initializeState();
+    _state = getDefaultState();
   });
 
   $: if (status === "complete") {
@@ -169,7 +169,7 @@
           onFormComplete();
           break;
         case ExternalInitStateMsg:
-          initState(data as ExternalInitStateDetail);
+          setState(data as ExternalInitStateDetail);
           break;
         case FormResetFormMsg:
           resetState();
@@ -386,7 +386,7 @@
     // first FormPage id after handling the FormPage binding, so this first page needs
     // to be retained after reset
     const firstPage = _state.history[0];
-    initializeState();
+    _state = getDefaultState();
     _state.history.push(firstPage);
 
     // resetting html inputs within form components
@@ -454,10 +454,10 @@
   }
 
   /**
-   * Initializes the form state from the passed in data
+   * Sets the form state from the passed in data
    * @param detail The data to initialize the form state with
    */
-  function initState(detail?: ExternalInitStateDetail) {
+  function setState(detail?: ExternalInitStateDetail) {
     if (typeof detail === "string") {
       _state = { ..._state, ...JSON.parse(detail) };
     } else {
