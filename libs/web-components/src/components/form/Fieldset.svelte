@@ -122,6 +122,7 @@
   }
 
   function resetFields(event: Event) {
+    _state = {};
     // prevent subform resets from resetting the parent
     event.stopPropagation();
 
