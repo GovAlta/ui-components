@@ -55,14 +55,18 @@
 
   onMount(() => {
     setTimeout(() => validateType(type), 1);
-    if (!showIcon && !content) {
-      console.warn(
-        "GoABadge must have either then content or icon property set",
-      );
-    }
-    if (showIconOnly && !arialabel) {
-      console.warn("GoABadge with icon only requires an arialabel");
-    }
+
+    //wait for property initialization
+    setTimeout(() => {
+      if (!showIcon && !content) {
+        console.warn(
+          "GoabBadge must have either the content or icon property set",
+        );
+      }
+      if (showIconOnly && !arialabel) {
+        console.warn("GoabBadge with icon only requires an arialabel");
+      }
+    }, 0);
   });
 </script>
 
