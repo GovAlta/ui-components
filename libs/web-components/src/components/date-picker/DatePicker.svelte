@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-date-picker" />
 
 <script lang="ts">
-  import { afterUpdate, onMount, tick } from "svelte";
+  import { onMount, tick } from "svelte";
   import {
     addDays,
     addMonths,
@@ -50,9 +50,6 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  // re-initializes the date if the value is changed externally
-  // $: formatDate(value);
-
   let _error: boolean = toBoolean(error);
   let _oldValue: Date | null;
   let _rootEl: HTMLElement;
@@ -64,22 +61,14 @@
 
   $: isDisabled = toBoolean(disabled);
 
-  $: if (value === "") {
-    _date = null;
-  }
+  // re-init the data when the value changes
+  $: setDate(value);
 
   onMount(async () => {
     await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
-    await initDate();
+    setDate(value);
     addRelayListener();
     sendMountedMessage();
-  });
-
-  afterUpdate(() => {
-    // @ts-expect-error: string / int comparison is performed here
-    if (_oldValue != value) {
-      initDate();
-    }
   });
 
   // Listen for relayed messages
@@ -124,17 +113,13 @@
     );
   }
 
-  async function initDate() {
+  function setDate(value: string) {
     // invalid date
     if (!value || !(new Date(value).getDate())) {
-      console.warn(`${value || "an empty string"} is not a valid date`);
+      _date = null;
+      _inputDate = { day: "", month: "", year: "" };
       return;
     }
-
-    // exit if already assigned
-    if (_date || _inputDate.day !== "") {
-      return;
-    };
 
     if (type === "input") {
       const [year, month, day] = value.split("-");
@@ -263,7 +248,7 @@
       return;
     }
 
-    const date = `${padLeft(_inputDate.year, 4, 0)}-${padLeft(_inputDate.month + 1, 2, 0)}-${padLeft(_inputDate.day, 2, 0)}`;
+    const date = `${padLeft(_inputDate.year, 4, 0)}-${padLeft(+_inputDate.month + 1, 2, 0)}-${padLeft(_inputDate.day, 2, 0)}`;
 
     dispatch(
       _rootEl,
@@ -291,7 +276,6 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <goa-input
       slot="target"
-      width="160px"
       readonly="true"
       trailingicon="calendar"
       value={formatDate(_date)}
@@ -355,7 +339,3 @@
     </goa-block>
   </goa-form-item>
 {/if}
-
-<style>
-
-</style>
