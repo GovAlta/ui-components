@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-dropdown" />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -148,11 +148,11 @@
   // Hooks
   //
 
-  onMount(() => {
+  onMount(async() => {
     ensureSlotExists(_rootEl);
     addRelayListener();
     sendMountedMessage();
-
+    await tick();
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
