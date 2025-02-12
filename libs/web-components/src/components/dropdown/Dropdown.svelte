@@ -148,11 +148,11 @@
   // Hooks
   //
 
-  onMount(() => {
+  onMount(async() => {
     ensureSlotExists(_rootEl);
     addRelayListener();
     sendMountedMessage();
-
+    await tick();
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
@@ -331,7 +331,6 @@
     if (_disabled) {
       return;
     }
-
     setTimeout(async () => {
       syncFilteredOptions();
       _isMenuVisible = true;
