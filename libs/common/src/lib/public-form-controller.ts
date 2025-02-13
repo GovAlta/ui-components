@@ -144,6 +144,45 @@ export class PublicFormController<T> {
     });
   }
 
+  // getStateItems(group: string): Record<string, FieldsetItemState>[] {
+  //   if (Array.isArray(this.state)) {
+  //     console.error(
+  //       "Utils:getStateItems: unable to update the state of a multi form type",
+  //     );
+  //     return [];
+  //   }
+  //   if (!this.state) {
+  //     console.error("Utils:getStateItems: state has not yet been set");
+  //     return [];
+  //   }
+  //
+  //   const data = this.state.form[group].data;
+  //   if (data.type !== "list") {
+  //     return [];
+  //   }
+  //
+  //   return data.items.;
+  // }
+
+  // Public method to allow for the retrieval of the state value
+  getStateValue(group: string, key: string): string {
+    if (Array.isArray(this.state)) {
+      console.error("getStateValue: unable to update the state of a multi form type");
+      return "";
+    }
+    if (!this.state) {
+      console.error("getStateValue: state has not yet been set");
+      return "";
+    }
+
+    const data = this.state.form[group].data;
+    if (data.type !== "details") {
+      return "";
+    }
+
+    return data.fieldsets[key].value;
+  }
+
   // Public method to allow for the continuing to the next page
   continueTo(next: T | undefined) {
     if (!next) {
