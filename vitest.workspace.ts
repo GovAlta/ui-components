@@ -1,7 +1,21 @@
 import { defineWorkspace } from 'vitest/config'
 import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import react from "@vitejs/plugin-react";
 
 export default defineWorkspace([
+  {
+    plugins: [
+      react(),
+    ],
+    test: {
+      globals: true,
+      environment: "jsdom",
+      name: 'react-unit',
+      include: [
+        'libs/react-components/src/**/*.{test,spec}.tsx',
+      ],
+    },
+  },
   {
     plugins: [
       svelte({
