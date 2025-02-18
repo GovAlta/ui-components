@@ -17,10 +17,18 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["vitest.setup.ts"],
+    browser: {
+      provider: "playwright",
+      enabled: true,
+      headless: true,
+      instances: [
+        { browser: "chromium" }
+      ]
+    },
     exclude: [
-      "**/node_modules", 
-      "playground", 
-      "libs/react-components",    // run react via nx
+      "**/node_modules",
+      "playground",
+      // "libs/react-components",    // run react via nx
       "libs/angular-components",  // run angular via nx
     ],
     alias: [{ find: /^svelte$/, replacement: "svelte/internal" }],

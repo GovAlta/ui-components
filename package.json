@@ -87,6 +87,7 @@
     "jsonc-eslint-parser": "^2.1.0",
     "ng-packagr": "18.1.0",
     "nx": "20.4.4",
+    "playwright": "^1.50.1",
     "postcss": "^8.4.5",
     "postcss-import": "~14.1.0",
     "postcss-preset-env": "~7.5.0",
@@ -104,6 +105,7 @@
     "vite": "^5.1.7",
     "vite-plugin-dts": "~3.8.1",
     "vitest": "^2.1.9",
+    "vitest-browser-react": "^0.1.1",
     "vitest-dom": "^0.1.1"
   },
   "dependencies": {
