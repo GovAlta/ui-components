@@ -60,3 +60,6 @@ devenv.local.nix
 # pre-commit
 .pre-commit-config.yaml
 
+
+vite.config.*.timestamp*
+vitest.config.*.timestamp*
