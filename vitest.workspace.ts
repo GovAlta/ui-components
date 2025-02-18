@@ -1,21 +1,32 @@
 import { defineWorkspace } from 'vitest/config'
+import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 export default defineWorkspace([
-  // {
-  //   test: {
-  //     // an example of file based convention,
-  //     // you don't have to follow it
-  //     include: [
-  //       'tests/unit/**/*.{test,spec}.ts',
-  //       'tests/**/*.unit.{test,spec}.ts',
-  //     ],
-  //     name: 'unit',
-  //     environment: 'node',
-  //   },
-  // },
+  {
+    plugins: [
+      svelte({
+        preprocess: vitePreprocess(),
+        include: ["**/*.svelte"],
+        compilerOptions: {
+          customElement: true,
+        },
+      }),
+    ],
+    test: {
+      globals: true,
+      environment: "jsdom",
+      alias: [{ find: /^svelte$/, replacement: "svelte/internal" }],
+      name: 'web-component-unit',
+      include: [
+        'libs/web-components/src/**/*.{test,spec}.ts',
+      ],
+      setupFiles: ["vitest.web-component.setup.ts"],
+    },
+  },
   {
     test: {
       globals: true,
+      environment: "jsdom",
       include: [
         'libs/react-components/**/*.browser.{test,spec}.tsx',
       ],
