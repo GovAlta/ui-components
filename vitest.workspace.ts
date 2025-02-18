@@ -47,8 +47,10 @@ export default defineWorkspace([
       setupFiles: ["vitest.browser.setup.ts"],
       name: 'react-browser',
       browser: {
-        name: "chrome",
+        provider: "playwright",
+        name: "chromium",
         enabled: true,
+        headless: true,
         // instances: [
         //   { browser: 'chromium' },
         // ],

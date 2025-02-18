@@ -11,7 +11,7 @@
     "build": "nx affected --base=alpha -t build --exclude=angular --exclude=react --exclude=web",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "pretest": "npx nx run common:build",
-    "test": "vitest && nx test angular-components && nx test react-components",
+    "test": "vitest && nx test angular-components",
     "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web --exclude=angular-tests --exclude=angular-tests-e2e",
     "validate": "npm run build && npm run lint && vitest --run"
   },
