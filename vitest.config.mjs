@@ -16,15 +16,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "jsdom",
-    setupFiles: ["vitest.setup.ts"],
-    browser: {
-      provider: "playwright",
-      enabled: true,
-      headless: true,
-      instances: [
-        { browser: "chromium" }
-      ]
-    },
     exclude: [
       "**/node_modules",
       "playground",

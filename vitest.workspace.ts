@@ -15,12 +15,11 @@ export default defineWorkspace([
   // },
   {
     test: {
-      // an example of file based convention,
-      // you don't have to follow it
       globals: true,
       include: [
         'libs/react-components/**/*.browser.{test,spec}.tsx',
       ],
+      setupFiles: ["vitest.browser.setup.ts"],
       name: 'react-browser',
       browser: {
         name: "chrome",

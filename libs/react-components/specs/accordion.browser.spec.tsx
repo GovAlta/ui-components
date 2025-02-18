@@ -1,9 +1,6 @@
 import { render } from "vitest-browser-react";
 import { GoabAccordion, GoabButton } from "../src";
 
-import "../../../dist/libs/web-components";
-import "../../../dist/libs/web-components/index.css";
-
 describe("Accordion", () => {
   it("should pass", () => {
     const result = render(
