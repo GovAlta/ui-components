@@ -4,6 +4,7 @@
 .nx
 playground
 NOTES.md
+/test-results
 
 # environment
 .env

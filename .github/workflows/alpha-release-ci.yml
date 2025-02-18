@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: "20"
+          node-version: "22"
 
       - uses: actions/cache@v4
         with:
@@ -37,11 +37,14 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Test
-        run: npm run test
-
       - name: Build
         run: npm run build:prod
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Test
+        run: npm run test:headless
 
       - name: Update Web components documentation
         run: cp libs/web-components/README.md dist/libs/web-components
