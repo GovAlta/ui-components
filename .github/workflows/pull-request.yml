@@ -17,12 +17,13 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: "20"
+          node-version: "22"
       - uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
           - name: Run Playwright tests
@@ -33,6 +34,7 @@ jobs:
               name: playwright-report
               path: playwright-report/
               retention-days: 30
+
       # Run with the target branch as the base.
       - name: Lint
         run: npm run lint

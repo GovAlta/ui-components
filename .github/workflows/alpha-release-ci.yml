@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: "20"
+          node-version: "22"
 
       - uses: actions/cache@v4
         with:
@@ -33,6 +33,17 @@ jobs:
         id: last_successful_commit
         with:
           main-branch-name: alpha
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+         - uses: actions/upload-artifact@v4
+           if: ${{ !cancelled() }}
+           with:
+             name: playwright-report
+             path: playwright-report/
+             retention-days: 30
 
       - name: Lint
         run: npm run lint
