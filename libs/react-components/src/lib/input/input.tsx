@@ -12,6 +12,10 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 
+export interface IgnoreMe {
+  ignore: string;
+}
+
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
   type?: GoabInputType;

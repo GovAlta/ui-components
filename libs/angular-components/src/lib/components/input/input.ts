@@ -2,6 +2,10 @@ import { GoabIconType, GoabInputAutoCapitalize, GoaInputOnBlurDetail, GoabInputO
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef, OnInit } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
+export interface IgnoreMe {
+  ignore: string;
+}
+
 @Component({
   standalone: true,
   selector: "goab-input",
