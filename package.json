@@ -8,7 +8,7 @@
     "serve:angular": "nx run angular:serve:development",
     "watch": "vite build --watch libs/web-components",
     "serve:angular-tests": "nx run angular-tests:serve:development",
-    "build": "nx run-many --base=alpha -t build --exclude=apps/* --exclude=playground/*",
+    "build": "nx affected --base=alpha -t build --exclude=apps/* --exclude=playground/*",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "pretest": "npx nx run common:build",
     "test": "vitest && nx test angular-components && nx test react-components",

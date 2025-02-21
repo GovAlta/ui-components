@@ -104,5 +104,5 @@
       "preVersionCommand": "npx nx run-many -t build"
     }
   },
-  "useLegacyCache": false
+  "useLegacyCache": true
 }
