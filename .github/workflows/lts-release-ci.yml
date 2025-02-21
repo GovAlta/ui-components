@@ -35,7 +35,7 @@ jobs:
         run: npm run test
 
       - name: Build
-        run: npx nx run-many --target=build --all --prod
+        run: npm run build:prod
 
       - name: Update VsCode documentation
         run: npm run build:vscode-doc
