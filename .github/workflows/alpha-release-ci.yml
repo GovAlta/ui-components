@@ -41,7 +41,7 @@ jobs:
         run: npm run test
 
       - name: Build
-        run: npx nx run-many --target=build --all --prod --exclude=angular,react,angular-tests,angular-tests-e2e
+        run: npm run build:prod
 
       - name: Update Web components documentation
         run: cp libs/web-components/README.md dist/libs/web-components
