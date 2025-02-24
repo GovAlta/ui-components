@@ -42,7 +42,7 @@
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
-  export let mb: Spacing = null;
+  export let mb: Spacing = "3xl";
   export let ml: Spacing = null;
   export let active: boolean = false;
 
@@ -183,17 +183,17 @@
     {/if}
 
     {#if sectionTitle}
-      <goa-text size="body-l" mb="s" color="secondary">{sectionTitle}</goa-text>
+      <goa-text size="body-l" mb="xs" color="secondary">{sectionTitle}</goa-text>
     {/if}
 
     {#if heading}
-      <goa-text as="h2" size="heading-l">{heading}</goa-text>
+      <goa-text as="h2" size="heading-l" mb="xl">{heading}</goa-text>
     {/if}
 
     <slot />
 
     {#if type !== "multistep"}
-      <goa-block mt="xl">
+      <goa-block mt="2xl">
         {#if _editting}
           <goa-button on:_click={() => dispatchContinueMsg(false)} type="secondary">
             Cancel
