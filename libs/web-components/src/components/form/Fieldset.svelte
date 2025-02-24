@@ -329,7 +329,7 @@
     </goa-callout>
   {/if}
 
-  <goa-block gap="m" direction="column">
+  <goa-block gap="xl" direction="column">
     <slot />
   </goa-block>
 
@@ -339,6 +339,7 @@
   fieldset {
     border: none;
     padding: 0;
+    margin-bottom: var(--goa-space-m);
   }
 
   ul {
