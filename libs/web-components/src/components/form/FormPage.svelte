@@ -4,6 +4,7 @@
     props: {
       buttonText: { type: "String", attribute: "button-text" },
       buttonVisibility: { type: "String", attribute: "button-visibility" },
+      subHeading: { type: "String", attribute: "sub-heading" },
       sectionTitle: { type: "String", attribute: "section-title" },
       backUrl: { attribute: "back-url", type: "String" },
     }
@@ -35,6 +36,7 @@
   // common with fieldset
   export let id: string = "";
   export let heading: string = "";
+  export let subHeading: string = "";
   export let sectionTitle: string = "";
   export let backUrl: string = "";
   export let type: "step" | "summary" | "multistep" = "step";
@@ -185,9 +187,11 @@
     {#if sectionTitle}
       <goa-text size="body-l" mb="xs" color="secondary">{sectionTitle}</goa-text>
     {/if}
-
     {#if heading}
-      <goa-text as="h2" size="heading-l" mb="xl">{heading}</goa-text>
+      <goa-text as="h2" size="heading-l" mb={subHeading ? "none" : "m"}>{heading}</goa-text>
+    {/if}
+    {#if subHeading}
+      <goa-text size="body-l" mb="xl" color="secondary">{subHeading}</goa-text>
     {/if}
 
     <slot />

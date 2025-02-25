@@ -112,6 +112,7 @@
    */
   function addSubformRelayListener() {
     _childReceiverEl.addEventListener(StateChangeEvent, (e) => {
+      console.log("Form:addSubformRelayListener", name, "received state change event");
       const detail = (e as CustomEvent).detail as StateChangeRelayDetail;
       if (detail.type === "details") {
         console.warn("Form:addSubformRelayListener", name, "received details type, ignoring");
@@ -122,10 +123,7 @@
       _state.form[detail.id] = { data: { type: "list", items: detail.data } };
 
       // redispatch this form's data
-      dispatch<StateChangeRelayDetail>(_rootEl, StateChangeEvent, {
-        type: "details",
-        data: _state,
-      }, { bubbles: true });
+      dispatchStateChange();
 
       syncFormSummaryState();
     });
@@ -314,12 +312,16 @@
   /**
    * Dispatches state change events to the app to trigger any dynamic binding
    */
+  let _stateChangeTimeoutId: any;
   function dispatchStateChange() {
-    dispatch<StateChangeRelayDetail>(
-      _rootEl,
-      StateChangeEvent, { type: "details", data: _state },
-      { bubbles: true, timeout: 100 },
-    );
+    _stateChangeTimeoutId = performOnce(_stateChangeTimeoutId, () => {
+      console.log("Form:dispatchStateChange", name);
+      dispatch<StateChangeRelayDetail>(
+        _rootEl,
+        StateChangeEvent, { type: "details", data: _state },
+        { bubbles: true },
+      );
+    }, 500);
   }
 
   /**
