@@ -54,6 +54,12 @@ export class PublicFormController<T> {
   initState(state?: string | AppState<T> | AppState<T>[], callback?: () => void) {
     relay(this._formRef, "external::init:state", state);
 
+    if (typeof state === "string") {
+      this.state = JSON.parse(state);
+    } else if (!Array.isArray(state)) {
+      this.state = state;
+    }
+
     if (callback) {
       setTimeout(callback, 200);
     }
