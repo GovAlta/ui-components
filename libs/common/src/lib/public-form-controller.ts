@@ -203,10 +203,14 @@ export class PublicFormController<T> {
 
   // Public method to perform validation and send the appropriate messages to the form elements
   validate(field: string, e: Event, validators: FieldValidator[]): [boolean, string] {
-    const { el, state } = (e as CustomEvent).detail;
+    const { el, state, cancelled } = (e as CustomEvent).detail;
     const value = state?.[field]?.value;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    if (cancelled) {
+      return [true, value];
+    }
 
     for (const validator of validators) {
       const msg = validator(value);

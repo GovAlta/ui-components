@@ -126,6 +126,7 @@
 
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
     _active = detail.active;
+    relay(_fieldsetEl, FormToggleActiveMsg, { active: _active });
   }
 
   // allow customization of form if user has jumped back to a question (editting mode)
@@ -133,7 +134,7 @@
     _editting = detail.id === id;
   }
 
-  // Either directly or indirectly gets a _continue message sent up the dom tree
+  // Either directly or indirectly there is a _continue message sent up the dom tree.
   // If a fieldset exists, a message must be sent to the fieldset to get the fieldset
   // to send the _continue message, as the message will contain the data within the fieldset.
   // If no fieldset exists (text only or summary page) then no data exists so a _continue
@@ -199,7 +200,7 @@
     {#if type !== "multistep"}
       <goa-block mt="2xl">
         {#if _editting}
-          <goa-button on:_click={() => dispatchContinueMsg(false)} type="secondary">
+          <goa-button on:_click={() => dispatchContinueMsg(true)} type="secondary">
             Cancel
           </goa-button>
         {/if}
