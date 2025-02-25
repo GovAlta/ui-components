@@ -215,10 +215,10 @@
   // *********
 
   function revertFormFieldValues() {
-    for (const [name, val] of Object.entries(_formFields)) {
+    for (const [name, field] of Object.entries(_formFields)) {
       // some form elements not "form-bound" won't exist within the snapshot state
       if (_stateSnapshot[name]) {
-        relay<FieldsetSetValueRelayDetail>(val.el, FieldsetSetValueMsg, {
+        relay<FieldsetSetValueRelayDetail>(field.el, FieldsetSetValueMsg, {
           name,
           value: _stateSnapshot[name].value,
         });
@@ -241,14 +241,16 @@
   function addChildChangeListener() {
     _rootEl.addEventListener("_change", (e: Event) => {
       const { name, value } = (e as CustomEvent).detail;
+
       // if no name is registered, they are not bound to the public-form
       if (!_formItems[name]) {
         return;
       }
-
       if (!_formFields[name]) {
         return;
       }
+
+      // save to the fieldset's state, which will be relayed when the user clicks continue
       _state[name] = {
         name,
         value,
@@ -288,23 +290,23 @@
 
   function onFormPageContinue(detail: FormPageContinueRelayDetail) {
     const isDirty = Object.keys(_state).length > 0;
-    if (isDirty) {
+
+    // send updated values for _stateChange
+    if (isDirty && !detail.cancelled) {
       relayFieldsetChange();
     }
 
-    relayContinue(detail);
-
+    // revert the values
     if (detail.cancelled) {
       revertFormFieldValues();
       _state = _stateSnapshot;
     }
-  }
 
-  function relayContinue(detail: FormPageContinueRelayDetail) {
+    // send continue to allow for page change
     dispatch<FieldsetValidationRelayDetail>(
       _rootEl,
       "_continue",
-      { el: _rootEl, state: detail.cancelled ? _stateSnapshot : _state },
+      { el: _rootEl, state: _state, cancelled: detail.cancelled },
       { bubbles: true },
     );
   }
