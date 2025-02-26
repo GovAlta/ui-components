@@ -79,6 +79,9 @@
   // Timeout for performOnce op
   let _formItemBindingTimeoutId;
 
+  // Timeout to prevent more than one stateChange event from being emitted
+  let _stateChangeTimeoutId: any;
+
   // Form state
   let _state: FormState;
 
@@ -112,7 +115,6 @@
    */
   function addSubformRelayListener() {
     _childReceiverEl.addEventListener(StateChangeEvent, (e) => {
-      console.log("Form:addSubformRelayListener", name, "received state change event");
       const detail = (e as CustomEvent).detail as StateChangeRelayDetail;
       if (detail.type === "details") {
         console.warn("Form:addSubformRelayListener", name, "received details type, ignoring");
@@ -229,9 +231,24 @@
     _formItemBindingTimeoutId = performOnce(_formItemBindingTimeoutId, () => {
       // mark the first fieldset as active
       const [id] = Object.entries(_formPages)[0];
-      _state.history.push(id);
+      addToHistory(id);
       sendToggleActiveStateMsg(id);
     });
+  }
+
+  /**
+   * Adds a given identifier to the history if it is not already present.
+   *
+   * @param {string} id - The unique identifier to be added to the history.
+   * @return {void} This method does not return a value.
+   */
+  function addToHistory(id: string) {
+    if (_state.history.includes(id)) {
+      console.warn("Form:addToHistory", name, "history already contains id", id);
+      return;
+    }
+
+    _state.history.push(id);
   }
 
   /**
@@ -298,7 +315,7 @@
 
       // prevent duplicates in history
       if (lastPage !== next) {
-        _state.history.push(next);
+        addToHistory(next);
       }
 
       // show the next page and hide the others
@@ -307,21 +324,6 @@
 
     // sync the new state
     syncFormSummaryState();
-  }
-
-  /**
-   * Dispatches state change events to the app to trigger any dynamic binding
-   */
-  let _stateChangeTimeoutId: any;
-  function dispatchStateChange() {
-    _stateChangeTimeoutId = performOnce(_stateChangeTimeoutId, () => {
-      console.log("Form:dispatchStateChange", name);
-      dispatch<StateChangeRelayDetail>(
-        _rootEl,
-        StateChangeEvent, { type: "details", data: _state },
-        { bubbles: true },
-      );
-    }, 500);
   }
 
   /**
@@ -388,7 +390,7 @@
     // to be retained after reset
     const firstPage = _state.history[0];
     _state = getDefaultState();
-    _state.history.push(firstPage);
+    addToHistory(firstPage);
 
     // resetting html inputs within form components
     for (const { el } of Object.values(_fieldsets)) {
@@ -406,6 +408,19 @@
   // *********
   // Functions
   // *********
+
+  /**
+   * Dispatches state change events to the app to trigger any dynamic binding
+   */
+  function dispatchStateChange() {
+    _stateChangeTimeoutId = performOnce(_stateChangeTimeoutId, () => {
+      dispatch<StateChangeRelayDetail>(
+        _rootEl,
+        StateChangeEvent, { type: "details", data: _state },
+        { bubbles: true },
+      );
+    }, 500);
+  }
 
   /**
    * Resets the errors for a specific fieldset
@@ -481,7 +496,7 @@
       } else {
         // mark the first fieldset as active
         const [id] = Object.entries(_formPages)[0];
-        _state.history.push(id);
+        addToHistory(id);
         sendToggleActiveStateMsg(id);
       }
 
