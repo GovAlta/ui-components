@@ -192,7 +192,7 @@
       <goa-text as="h2" size="heading-l" mb={subHeading ? "none" : "m"}>{heading}</goa-text>
     {/if}
     {#if subHeading}
-      <goa-text size="body-l" mb="xl" color="secondary">{subHeading}</goa-text>
+      <goa-text size="body-l" mt="2xs" mb="xl" color="primary">{subHeading}</goa-text>
     {/if}
 
     <slot />
