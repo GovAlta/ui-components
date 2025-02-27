@@ -99,7 +99,6 @@
     padding-right: var(--goa-details-padding-right);
     padding-left: var(--goa-details-padding-left);
     padding-bottom: var(--goa-details-padding-bottom);
-    margin-bottom: var(--goa-details-margin-bottom);
     cursor: pointer;
     list-style: none;
     display: flex;
@@ -139,6 +138,7 @@
     padding-bottom: var(--goa-details-content-padding-bottom);
     padding-right: var(--goa-details-content-padding-right);
     margin-left: var(--goa-details-content-margin-left);
+    margin-top: var(--goa-details-margin-bottom);
     margin-bottom: var(--goa-details-margin-bottom);
   }
   .content :global(::slotted(p:last-child)) {

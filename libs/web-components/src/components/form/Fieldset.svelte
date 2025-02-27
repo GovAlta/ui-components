@@ -35,7 +35,9 @@
     FormSetFieldsetMsg,
     FormSetFieldsetRelayDetail,
     FormToggleActiveMsg,
-    FormToggleActiveRelayDetail, FormPageContinueMsg, FormPageContinueRelayDetail,
+    FormToggleActiveRelayDetail,
+    FormPageContinueMsg,
+    FormPageContinueRelayDetail,
   } from "../../types/relay-types";
 
   // ======
@@ -73,6 +75,7 @@
     dispatchBindMsg();
     addChildChangeListener();
     bindChannel();
+    bindAlterPropsMsg();
   });
 
   // =========
@@ -121,6 +124,17 @@
   // *****************
   // Dispatch handlers
   // *****************
+
+  /**
+   * Set goa-details components, within the fieldset, to have a certain top spacing
+   * set within the UI design guidelines
+   */
+  function bindAlterPropsMsg() {
+    const els = document.querySelectorAll("goa-details");
+    els.forEach((el) => {
+      el.setAttribute("style", "margin-top: -1rem");
+    })
+  }
 
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
     // obtain an initial snapshot of the data when fieldset shown
