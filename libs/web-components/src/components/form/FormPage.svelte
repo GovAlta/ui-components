@@ -4,6 +4,7 @@
     props: {
       buttonText: { type: "String", attribute: "button-text" },
       buttonVisibility: { type: "String", attribute: "button-visibility" },
+      subHeading: { type: "String", attribute: "sub-heading" },
       sectionTitle: { type: "String", attribute: "section-title" },
       backUrl: { attribute: "back-url", type: "String" },
     }
@@ -35,6 +36,7 @@
   // common with fieldset
   export let id: string = "";
   export let heading: string = "";
+  export let subHeading: string = "";
   export let sectionTitle: string = "";
   export let backUrl: string = "";
   export let type: "step" | "summary" | "multistep" = "step";
@@ -42,7 +44,7 @@
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
-  export let mb: Spacing = null;
+  export let mb: Spacing = "3xl";
   export let ml: Spacing = null;
   export let active: boolean = false;
 
@@ -124,6 +126,7 @@
 
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
     _active = detail.active;
+    relay(_fieldsetEl, FormToggleActiveMsg, { active: _active });
   }
 
   // allow customization of form if user has jumped back to a question (editting mode)
@@ -131,7 +134,7 @@
     _editting = detail.id === id;
   }
 
-  // Either directly or indirectly gets a _continue message sent up the dom tree
+  // Either directly or indirectly there is a _continue message sent up the dom tree.
   // If a fieldset exists, a message must be sent to the fieldset to get the fieldset
   // to send the _continue message, as the message will contain the data within the fieldset.
   // If no fieldset exists (text only or summary page) then no data exists so a _continue
@@ -183,19 +186,21 @@
     {/if}
 
     {#if sectionTitle}
-      <goa-text size="body-l" mb="s" color="secondary">{sectionTitle}</goa-text>
+      <goa-text size="body-l" mb="xs" color="secondary">{sectionTitle}</goa-text>
     {/if}
-
     {#if heading}
-      <goa-text as="h2" size="heading-l">{heading}</goa-text>
+      <goa-text as="h2" size="heading-l" mb={subHeading ? "none" : "m"}>{heading}</goa-text>
+    {/if}
+    {#if subHeading}
+      <goa-text size="body-l" mt="2xs" mb="xl" color="primary">{subHeading}</goa-text>
     {/if}
 
     <slot />
 
     {#if type !== "multistep"}
-      <goa-block mt="xl">
+      <goa-block mt="2xl">
         {#if _editting}
-          <goa-button on:_click={() => dispatchContinueMsg(false)} type="secondary">
+          <goa-button on:_click={() => dispatchContinueMsg(true)} type="secondary">
             Cancel
           </goa-button>
         {/if}

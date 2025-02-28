@@ -146,6 +146,7 @@ export type FieldsetItemState = {
 export type FieldsetValidationRelayDetail = {
   el: HTMLElement;
   state: Record<string, FieldsetItemState>;
+  cancelled: boolean;
 };
 
 export const FieldsetSetValueMsg = "fieldset::set:value";

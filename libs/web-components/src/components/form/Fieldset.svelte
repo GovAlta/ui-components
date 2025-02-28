@@ -35,7 +35,9 @@
     FormSetFieldsetMsg,
     FormSetFieldsetRelayDetail,
     FormToggleActiveMsg,
-    FormToggleActiveRelayDetail, FormPageContinueMsg, FormPageContinueRelayDetail,
+    FormToggleActiveRelayDetail,
+    FormPageContinueMsg,
+    FormPageContinueRelayDetail,
   } from "../../types/relay-types";
 
   // ======
@@ -73,6 +75,7 @@
     dispatchBindMsg();
     addChildChangeListener();
     bindChannel();
+    bindAlterPropsMsg();
   });
 
   // =========
@@ -121,6 +124,17 @@
   // *****************
   // Dispatch handlers
   // *****************
+
+  /**
+   * Set goa-details components, within the fieldset, to have a certain top spacing
+   * set within the UI design guidelines
+   */
+  function bindAlterPropsMsg() {
+    const els = document.querySelectorAll("goa-details");
+    els.forEach((el) => {
+      el.setAttribute("style", "margin-top: -1rem");
+    })
+  }
 
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
     // obtain an initial snapshot of the data when fieldset shown
@@ -215,10 +229,10 @@
   // *********
 
   function revertFormFieldValues() {
-    for (const [name, val] of Object.entries(_formFields)) {
+    for (const [name, field] of Object.entries(_formFields)) {
       // some form elements not "form-bound" won't exist within the snapshot state
       if (_stateSnapshot[name]) {
-        relay<FieldsetSetValueRelayDetail>(val.el, FieldsetSetValueMsg, {
+        relay<FieldsetSetValueRelayDetail>(field.el, FieldsetSetValueMsg, {
           name,
           value: _stateSnapshot[name].value,
         });
@@ -241,14 +255,16 @@
   function addChildChangeListener() {
     _rootEl.addEventListener("_change", (e: Event) => {
       const { name, value } = (e as CustomEvent).detail;
+
       // if no name is registered, they are not bound to the public-form
       if (!_formItems[name]) {
         return;
       }
-
       if (!_formFields[name]) {
         return;
       }
+
+      // save to the fieldset's state, which will be relayed when the user clicks continue
       _state[name] = {
         name,
         value,
@@ -288,23 +304,23 @@
 
   function onFormPageContinue(detail: FormPageContinueRelayDetail) {
     const isDirty = Object.keys(_state).length > 0;
-    if (isDirty) {
+
+    // send updated values for _stateChange
+    if (isDirty && !detail.cancelled) {
       relayFieldsetChange();
     }
 
-    relayContinue(detail);
-
+    // revert the values
     if (detail.cancelled) {
       revertFormFieldValues();
       _state = _stateSnapshot;
     }
-  }
 
-  function relayContinue(detail: FormPageContinueRelayDetail) {
+    // send continue to allow for page change
     dispatch<FieldsetValidationRelayDetail>(
       _rootEl,
       "_continue",
-      { el: _rootEl, state: detail.cancelled ? _stateSnapshot : _state },
+      { el: _rootEl, state: _state, cancelled: detail.cancelled },
       { bubbles: true },
     );
   }
@@ -329,7 +345,7 @@
     </goa-callout>
   {/if}
 
-  <goa-block gap="m" direction="column">
+  <goa-block gap="xl" direction="column">
     <slot />
   </goa-block>
 
@@ -339,6 +355,7 @@
   fieldset {
     border: none;
     padding: 0;
+    margin-bottom: var(--goa-space-m);
   }
 
   ul {

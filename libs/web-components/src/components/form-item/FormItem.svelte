@@ -203,9 +203,8 @@
       {/if}
     </label>
   {/if}
-  <div class="form-item-input">
-    <slot />
-  </div>
+
+  <slot />
 
   {#if $$slots.error || error}
     <div class="error-msg" id={_errorId} role="alert">
