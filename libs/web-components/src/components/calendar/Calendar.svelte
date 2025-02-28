@@ -83,6 +83,28 @@
     }
   }
 
+  $: {
+    _min = min ? startOfDay(new Date(min)) : addYears(new Date(), -5);
+    _max = max ? startOfDay(new Date(max)) : addYears(new Date(), 5);
+
+    // Update years list based on new min/max
+    const yearStart = _min.getFullYear();
+    const yearCount = _max.getFullYear() - yearStart + 1;
+    _years = Array.from({ length: yearCount }, (_, i) => `${yearStart + i}`);
+
+    // Adjust calendar if it's outside the new min/max range
+    if (_calendarDate) {
+      if (startOfDay(_calendarDate) < _min) {
+        _calendarDate = new Date(_min);
+      } else if (startOfDay(_calendarDate) > _max) {
+        _calendarDate = new Date(_max);
+      }
+    }
+
+    // Re-render with updated values
+    renderCalendar({ type: "date", value: _calendarDate || new Date() });
+  }
+
   // *****
   // Hooks
   // *****
@@ -91,19 +113,8 @@
     _calendarDate = _selectedDate = value
       ? startOfDay(new Date(value))
       : startOfDay(new Date());
-    _min = (min && new Date(min)) || addYears(_selectedDate, -5);
-    _max = (max && new Date(max)) || addYears(_selectedDate, 5);
-
-    // define year range to show in dropdown
-    const yearCount = _max.getFullYear() - _min.getFullYear() + 1;
-    let yearStart = _min.getFullYear();
-    _years = new Array(yearCount)
-      .fill(undefined)
-      .map((_, i) => `${yearStart + i}`)
-      .sort();
 
     initKeybindings();
-
     await tick();
     renderCalendar({ type: "date", value: _selectedDate });
   });
@@ -174,7 +185,10 @@
       e.preventDefault();
 
       // prevent selection outsite min/max boundies
-      if (newDate < _min || newDate > _max) {
+      if (
+        isBefore(startOfDay(newDate), _min) ||
+        isAfter(startOfDay(newDate), _max)
+      ) {
         return;
       }
 
@@ -286,7 +300,10 @@
 
     const newDate = new Date(raw);
 
-    if (newDate < _min || newDate > _max) {
+    if (
+      isBefore(startOfDay(newDate), _min) ||
+      isAfter(startOfDay(newDate), _max)
+    ) {
       return;
     }
 
@@ -356,7 +373,8 @@
         data-date={format(d, "T")}
         data-day={format(d, "eee")}
         class="day other-month"
-        class:disabled={isBefore(d, _min) || isAfter(d, _max)}
+        class:disabled={isBefore(startOfDay(d), _min) ||
+          isAfter(startOfDay(d), _max)}
         tabindex={isSameDay(d, _calendarDate) ? 0 : -1}
       >
         <div class="day-num" data-testid="date">{d.getDate()}</div>
@@ -371,7 +389,8 @@
         class="day"
         class:today={isSameDay(d, new Date())}
         class:selected={value && _selectedDate && isSameDay(d, _selectedDate)}
-        class:disabled={isBefore(d, _min) || isAfter(d, _max)}
+        class:disabled={isBefore(startOfDay(d), _min) ||
+          isAfter(startOfDay(d), _max)}
         tabindex={isSameDay(d, _calendarDate) ? 0 : -1}
       >
         <div class="day-num" data-testid="date">{d.getDate()}</div>
@@ -384,7 +403,8 @@
         data-date={format(d, "T")}
         data-day={format(d, "eee")}
         class="day other-month"
-        class:disabled={isBefore(d, _min) || isAfter(d, _max)}
+        class:disabled={isBefore(startOfDay(d), _min) ||
+          isAfter(startOfDay(d), _max)}
         tabindex={isSameDay(d, _calendarDate) ? 0 : -1}
       >
         <div class="day-num" data-testid="date">{d.getDate()}</div>
@@ -394,7 +414,6 @@
 </div>
 
 <style>
-
   .bordered {
     display: inline-block;
     border: 1px solid var(--goa-color-greyscale-700);
