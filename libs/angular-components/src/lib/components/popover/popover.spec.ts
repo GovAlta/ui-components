@@ -11,7 +11,6 @@ import { GoabButton } from "../button/button";
       [maxWidth]="maxWidth"
       [padded]="padded"
       [position]="position"
-      [relative]="relative"
       [mt]="mt"
       [mb]="mb"
       [ml]="ml"
@@ -29,7 +28,6 @@ class TestPopoverComponent {
   maxWidth = "320px";
   padded = true;
   position?: GoabPopoverPosition;
-  relative?: boolean;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -55,7 +53,6 @@ describe("GoABPopover", () => {
     component.maxWidth = "500px";
     component.padded = false;
     component.position = "above" as GoabPopoverPosition;
-    component.relative = true;
     component.mt = "l" as Spacing;
     component.mb = "s" as Spacing;
     component.ml = "xs" as Spacing;
@@ -75,7 +72,6 @@ describe("GoABPopover", () => {
     expect(el.getAttribute("maxwidth")).toBe(component.maxWidth);
     expect(el.getAttribute("padded")).toBe(`${component.padded}`);
     expect(el.getAttribute("position")).toBe(component.position);
-    expect(el.getAttribute("relative")).toBe(`${component.relative}`);
 
     expect(el.getAttribute("mt")).toBe("l");
     expect(el.getAttribute("mb")).toBe("s");

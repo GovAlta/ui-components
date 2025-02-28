@@ -21,14 +21,11 @@ it("it renders", async () => {
 
 it("renders with props", async () => {
   const value = addDays(new Date(), -10);
-  const relative = "true";
 
-  const { container } = render(DatePicker, { value, relative });
+  const { container } = render(DatePicker, { value });
 
-  const popover = container.querySelector("goa-popover");
   const input = container.querySelector("goa-input");
 
-  expect(popover?.getAttribute("relative")).toBe("true");
   expect(input?.getAttribute("value")).toBe(format(value, "PPP"));
 });
 

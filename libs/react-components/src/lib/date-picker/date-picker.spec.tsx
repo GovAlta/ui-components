@@ -15,7 +15,6 @@ describe("DatePicker", () => {
     const min = addMonths(value, -1);
     const max = addMonths(value, 1);
     const disabled = true;
-    const relative = true;
 
     const { baseElement } = render(
       <DatePicker
@@ -26,7 +25,6 @@ describe("DatePicker", () => {
         testId="foo"
         error={error}
         disabled={disabled}
-        relative={relative}
         onChange={noop}
       />,
     );
@@ -41,7 +39,6 @@ describe("DatePicker", () => {
     expect(el?.getAttribute("disabled")).toBe("true");
     expect(el?.getAttribute("min")).toBe(min.toISOString());
     expect(el?.getAttribute("max")).toBe(max.toISOString());
-    expect(el?.getAttribute("relative")).toBe("true");
     expect(el?.getAttribute("testid")).toBe("foo");
   });
 
@@ -70,16 +67,5 @@ describe("DatePicker", () => {
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toBeCalledWith({ name, value, type: "date" });
-  });
-
-  it("should render without relative property", () => {
-    const value = new Date();
-    const { baseElement } = render(
-      <DatePicker name="foo" value={value} onChange={noop} />,
-    );
-
-    const el = baseElement.querySelector("goa-date-picker");
-    expect(el).toBeTruthy();
-    expect(el?.getAttribute("relative")).toBeNull();
   });
 });
