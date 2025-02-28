@@ -19,6 +19,7 @@
   export let native: string = "false";
   export let items: string[];
   export let filterable: string = "false";
+  export let testid: string = "";
 
   export let resetValue = "orange";
 
@@ -46,6 +47,7 @@
   {disabled}
   {width}
   {filterable}
+  {testid}
   on:_change={onChange}
 >
   {#each items as item (item)}
