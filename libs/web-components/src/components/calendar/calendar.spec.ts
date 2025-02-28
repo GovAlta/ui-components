@@ -340,3 +340,172 @@ it("prevents date keyboard selection outside of allowed range", async () => {
     expect(onChange).not.toBeCalled();
   });
 });
+
+it("reacts to dynamic min date changes", async () => {
+  // Create a min date that's definitely before today
+  // Use the day before yesterday to ensure today is enabled
+  const initialMin = addDays(new Date(), -2);
+  initialMin.setHours(0, 0, 0, 0); // Set to start of day
+
+  const { component, container } = render(Calendar, {
+    min: initialMin.toISOString(),
+  });
+  await tick();
+
+  // Verify today is initially enabled
+  const today = startOfDay(new Date());
+  let todayEl = container.querySelector(`[data-date="${today.getTime()}"]`);
+  expect(todayEl).not.toHaveClass("disabled");
+
+  // Update min to tomorrow
+  const newMin = addDays(today, 1);
+  newMin.setHours(0, 0, 0, 0); // Set to start of day
+  await component.$set({ min: newMin.toISOString() });
+  await tick();
+
+  // Today should now be disabled
+  todayEl = container.querySelector(`[data-date="${today.getTime()}"]`);
+  expect(todayEl).toHaveClass("disabled");
+
+  // Tomorrow should be enabled
+  const tomorrow = addDays(today, 1);
+  const tomorrowEl = container.querySelector(
+    `[data-date="${tomorrow.getTime()}"]`,
+  );
+  expect(tomorrowEl).not.toHaveClass("disabled");
+});
+
+it("reacts to dynamic max date changes", async () => {
+  // Create a max date that's definitely after today
+  // Use the day after tomorrow to ensure today is enabled
+  const initialMax = addDays(new Date(), 2);
+  initialMax.setHours(0, 0, 0, 0); // Set to start of day
+
+  const { component, container } = render(Calendar, {
+    max: initialMax.toISOString(),
+  });
+  await tick();
+
+  // Verify today is initially enabled
+  const today = startOfDay(new Date());
+  let todayEl = container.querySelector(`[data-date="${today.getTime()}"]`);
+  expect(todayEl).not.toHaveClass("disabled");
+
+  // Verify tomorrow is initially enabled
+  const tomorrow = addDays(today, 1);
+  let tomorrowEl = container.querySelector(
+    `[data-date="${tomorrow.getTime()}"]`,
+  );
+  expect(tomorrowEl).not.toHaveClass("disabled");
+
+  // Update max to yesterday
+  const newMax = addDays(today, -1);
+  newMax.setHours(0, 0, 0, 0); // Set to start of day
+  await component.$set({ max: newMax.toISOString() });
+  await tick();
+
+  // Today should now be disabled
+  todayEl = container.querySelector(`[data-date="${today.getTime()}"]`);
+  expect(todayEl).toHaveClass("disabled");
+
+  // Tomorrow should be disabled
+  tomorrowEl = container.querySelector(`[data-date="${tomorrow.getTime()}"]`);
+  expect(tomorrowEl).toHaveClass("disabled");
+
+  // Yesterday should be enabled
+  const yesterday = addDays(today, -1);
+  const yesterdayEl = container.querySelector(
+    `[data-date="${yesterday.getTime()}"]`,
+  );
+  expect(yesterdayEl).not.toHaveClass("disabled");
+});
+
+it("updates year dropdown when min date changes", async () => {
+  // Set initial min/max to create a specific range of years
+  const initialMin = new Date(2020, 0, 1);
+  const initialMax = new Date(2025, 0, 1);
+
+  const { component, queryByTestId } = render(Calendar, {
+    min: initialMin.toISOString(),
+    max: initialMax.toISOString()
+  });
+  await tick();
+
+  // Check initial years in dropdown
+  let yearDropdown = queryByTestId("years");
+  let yearOptions = yearDropdown.querySelectorAll("goa-dropdown-item");
+
+  // Should be 6 years: 2020, 2021, 2022, 2023, 2024, 2025
+  expect(yearOptions.length).toBe(6);
+
+  // Verify first and last year options
+  expect(yearOptions[0].getAttribute("value")).toBe("2020");
+  expect(yearOptions[yearOptions.length - 1].getAttribute("value")).toBe("2025");
+
+  // Update min to 2022, reducing the range
+  const newMin = new Date(2022, 0, 1);
+  await component.$set({ min: newMin.toISOString() });
+  await tick();
+
+  // Check updated years in dropdown
+  yearDropdown = queryByTestId("years");
+  yearOptions = yearDropdown.querySelectorAll("goa-dropdown-item");
+
+  // Should now be 4 years: 2022, 2023, 2024, 2025
+  expect(yearOptions.length).toBe(4);
+
+  // Verify updated first year and unchanged last year
+  expect(yearOptions[0].getAttribute("value")).toBe("2022");
+  expect(yearOptions[yearOptions.length - 1].getAttribute("value")).toBe("2025");
+
+  // Verify that 2020 and 2021 are no longer available
+  const year2020 = yearDropdown.querySelector("goa-dropdown-item[value='2020']");
+  const year2021 = yearDropdown.querySelector("goa-dropdown-item[value='2021']");
+  expect(year2020).toBeFalsy();
+  expect(year2021).toBeFalsy();
+});
+
+it("updates year dropdown when max date changes", async () => {
+  // Set initial min/max to create a specific range of years
+  const initialMin = new Date(2020, 0, 1);
+  const initialMax = new Date(2025, 0, 1);
+
+  const { component, queryByTestId } = render(Calendar, {
+    min: initialMin.toISOString(),
+    max: initialMax.toISOString()
+  });
+  await tick();
+
+  // Check initial years in dropdown
+  let yearDropdown = queryByTestId("years");
+  let yearOptions = yearDropdown.querySelectorAll("goa-dropdown-item");
+
+  // Should be 6 years: 2020, 2021, 2022, 2023, 2024, 2025
+  expect(yearOptions.length).toBe(6);
+
+  // Verify first and last year options
+  expect(yearOptions[0].getAttribute("value")).toBe("2020");
+  expect(yearOptions[yearOptions.length - 1].getAttribute("value")).toBe("2025");
+
+  // Update max to 2023, reducing the range
+  const newMax = new Date(2023, 0, 1);
+  await component.$set({ max: newMax.toISOString() });
+  await tick();
+
+  // Check updated years in dropdown
+  yearDropdown = queryByTestId("years");
+  yearOptions = yearDropdown.querySelectorAll("goa-dropdown-item");
+
+  // Should now be 4 years: 2020, 2021, 2022, 2023
+  expect(yearOptions.length).toBe(4);
+
+  // Verify unchanged first year and updated last year
+  expect(yearOptions[0].getAttribute("value")).toBe("2020");
+  expect(yearOptions[yearOptions.length - 1].getAttribute("value")).toBe("2023");
+
+  // Verify that 2024 and 2025 are no longer available
+  const year2024 = yearDropdown.querySelector("goa-dropdown-item[value='2024']");
+  const year2025 = yearDropdown.querySelector("goa-dropdown-item[value='2025']");
+  expect(year2024).toBeFalsy();
+  expect(year2025).toBeFalsy();
+});
