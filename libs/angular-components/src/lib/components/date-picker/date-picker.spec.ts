@@ -71,7 +71,7 @@ describe("GoABDatePicker", () => {
     expect(el).toBeTruthy();
 
     expect(el?.getAttribute("name")).toBe(component.name);
-    expect(el?.getAttribute("value")).toBe((component.value as Date)?.toString());
+    expect(el?.getAttribute("value")).toBe((component.value as Date)?.toISOString());
     expect(el?.getAttribute("error")).toBe(`${component.error}`);
     expect(el?.getAttribute("min")).toBe(component.min?.toString());
     expect(el?.getAttribute("max")).toBe(component.max?.toString());
@@ -81,14 +81,17 @@ describe("GoABDatePicker", () => {
     expect(el?.getAttribute("mr")).toBe(component.mr);
   });
 
-  it("should handle event", async() => {
+  it("should handle event", async () => {
     const onChange = jest.spyOn(component, "onChange");
     const el = fixture.debugElement.query(By.css("goa-date-picker")).nativeElement;
 
-    fireEvent(el, new CustomEvent("_change", {
-      detail: {name: component.name, value: new Date()}
-    }));
+    fireEvent(
+      el,
+      new CustomEvent("_change", {
+        detail: { name: component.name, value: new Date() },
+      }),
+    );
 
     expect(onChange).toHaveBeenCalled();
-  })
+  });
 });
