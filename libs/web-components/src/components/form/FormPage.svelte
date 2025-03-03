@@ -54,7 +54,7 @@
   let _rootEl: HTMLElement;
   let _fieldsetEl: HTMLElement;
   let _active: boolean = false;
-  let _editting: boolean = false;  // when a user jumps from the summary page back to one of the pages
+  let _editting: string = "";  // the id of the form page that is currently being editted
 
   // ========
   // Reactive
@@ -131,7 +131,7 @@
 
   // allow customization of form if user has jumped back to a question (editting mode)
   function onFormDispatch(detail: FormDispatchEditRelayDetail) {
-    _editting = detail.id === id;
+    _editting = detail.id;
   }
 
   // Either directly or indirectly there is a _continue message sent up the dom tree.
@@ -199,7 +199,7 @@
 
     {#if type !== "multistep"}
       <goa-block mt="2xl">
-        {#if _editting}
+        {#if _editting === id}
           <goa-button on:_click={() => dispatchContinueMsg(true)} type="secondary">
             Cancel
           </goa-button>
