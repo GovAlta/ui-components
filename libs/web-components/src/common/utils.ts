@@ -249,6 +249,10 @@ export function performOnce(
   if (timeoutId) {
     clearTimeout(timeoutId);
   }
+  if (delay === 0) {
+    action();
+    return;
+  }
   return setTimeout(action, delay);
 }
 

@@ -109,6 +109,7 @@ export class PublicFormController<T> {
       // form state being updated with form data
       this.state = {
         ...this.state,
+        ...detail.data,
         form: { ...(this.state?.form || {}), ...detail.data.form },
         history: detail.data.history,
       } as AppState<T>;
