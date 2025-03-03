@@ -1,4 +1,4 @@
-export type FormStatus = "not-started" | "incomplete" | "complete";
+export type FormStatus = "not-started" | "cannot-start-yet" | "in-progress" | "submitted" | "update-needed" | "complete";
 
 export type FormState = {
   uuid: string;
@@ -16,7 +16,7 @@ export type Fieldset = {
 
 export type FieldsetData =
   | { type: "details"; fieldsets: Record<string, FieldsetItemState> }
-  | { type: "list"; items: FormState[] }; // TODO: rename `items` to `form`
+  | { type: "list"; items: FormState[] };
 
 // ===========
 // StateChange

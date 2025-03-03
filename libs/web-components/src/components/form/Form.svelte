@@ -39,7 +39,7 @@
     FormPageBindRelayDetail,
     FieldsetBindRelayDetail,
     FieldsetBindMsg,
-    FormPageBackMsg,
+    FormPageBackMsg, FormStatus,
   } from "../../types/relay-types";
 
   // ========
@@ -258,15 +258,15 @@
   function onFieldsetChange(detail: FieldsetChangeRelayDetail) {
     const { id, state } = detail;
 
-    // clean empty values from the data
+    // clean empty values from the data to prevent them from showing up in the summary
     for (const [name, fieldsetState] of Object.entries(state.data)) {
       if (fieldsetState.value === "") {
         delete state.data[name];
       }
     }
 
+    // updating form state with the fieldset specific data
     _state.form[id] = { heading: state.heading, data: { type: "details", fieldsets: state.data } };
-    _state.lastModified = new Date();
 
     dispatchStateChange();
   }
@@ -379,9 +379,11 @@
    * Handles marking the form as complete and dispatching the final state to the app
    */
   function onFormComplete() {
-    _state.status = "complete";
-
-    dispatch<FormState>(_rootEl, "_complete", _state, { bubbles: true });
+    dispatchStateChange("complete", 0);
+    dispatch<FormState>(_rootEl, "_complete",
+      {..._state, status: "complete"},
+      { bubbles: true }
+    );
   }
 
   function resetState() {
@@ -412,14 +414,15 @@
   /**
    * Dispatches state change events to the app to trigger any dynamic binding
    */
-  function dispatchStateChange() {
+  function dispatchStateChange(status: FormStatus = "in-progress", debounce = 500) {
     _stateChangeTimeoutId = performOnce(_stateChangeTimeoutId, () => {
       dispatch<StateChangeRelayDetail>(
         _rootEl,
-        StateChangeEvent, { type: "details", data: _state },
-        { bubbles: true },
+          StateChangeEvent,
+          { type: "details", data: { ..._state, lastModified: new Date(), status }},
+          { bubbles: true },
       );
-    }, 500);
+    }, debounce);
   }
 
   /**
@@ -501,7 +504,7 @@
       }
 
       syncFormSummaryState();
-      dispatchStateChange();
+      dispatchStateChange(_state.history.length > 1 ? "in-progress" : "not-started");
       dispatchChildFormState();
     }, 200);
   }
