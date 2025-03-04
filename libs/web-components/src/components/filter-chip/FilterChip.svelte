@@ -69,7 +69,7 @@
   </div>
   <goa-icon
     class="delete-icon"
-    size="small"
+    size="medium"
     theme={_error ? "filled" : _hovering || _focused ? "filled" : "outline"}
     type="close-circle"
     fillcolor={_error
@@ -110,11 +110,15 @@
 
   .delete-icon {
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
   }
 
   .text {
     line-height: var(--goa-line-height-2); /* 24px */
-    padding-top: 2px;
+    padding-top: 0;
+    display: flex;
+    align-items: center;
     padding-bottom: var(
       --font-valign-fix,
       0
