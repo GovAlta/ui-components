@@ -16,6 +16,7 @@
     FieldsetResetFieldsMsg,
     FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
+
   // Required
   export let name: string;
 
@@ -113,7 +114,7 @@
   function setCheckStatusByChildState(detail: FormFieldMountRelayDetail) {
     setTimeout(() => {
       // @ts-expect-error
-      checked = !checked && !!detail.el.value;
+      checked ||= !!detail.el.value;
     }, 1000);
   }
 
