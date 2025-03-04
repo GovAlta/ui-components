@@ -87,7 +87,7 @@
   let _leadingContentSlot = false;
   let _trailingContentSlot = false;
   let _debounceId: any;
-  let _inputEl: HTMLElement;
+  let _inputEl: HTMLInputElement;
   let _rootEl: HTMLElement;
   let _error = false;
   let _prevError = false;
@@ -165,7 +165,7 @@
           error = "false";
           break;
         case FieldsetResetFieldsMsg:
-          setValue({ name, value: "" });
+          setValue({name, value: ""});
           break;
       }
     });
@@ -178,6 +178,11 @@
   function setValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
+    dispatchOnChange(value);
+  }
+
+  function dispatchOnChange(value: string) {
+    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
   }
 
   // Relay message up the chain to allow any parent element to have a reference to the input element
@@ -201,14 +206,7 @@
     }
 
     _debounceId = setTimeout(() => {
-      input.dispatchEvent(
-        new CustomEvent("_change", {
-          composed: true,
-          bubbles: true,
-          cancelable: true,
-          detail: { name, value: input.value },
-        }),
-      );
+      dispatchOnChange(input.value);
     }, debounce);
 
     input.dispatchEvent(

@@ -30,7 +30,7 @@
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
     FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail,
+    FieldsetSetValueRelayDetail, FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
   interface EventHandler {
@@ -173,6 +173,9 @@
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
+          break;
+        case FieldsetResetFieldsMsg:
+          onSetValue({name,  value: ""})
           break;
         case DropdownItemMountedMsg:
           onChildMounted(data as DropdownItemMountedRelayDetail);

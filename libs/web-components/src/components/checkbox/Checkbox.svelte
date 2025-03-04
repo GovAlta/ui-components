@@ -85,6 +85,9 @@
         case FieldsetResetErrorsMsg:
           error = "false";
           break;
+        case FieldsetResetFieldsMsg:
+          onSetValue({ name, value: "" });
+          break;
         case FormFieldMountMsg:
           onFormFieldMount(data as FormFieldMountRelayDetail);
           break;
@@ -118,8 +121,6 @@
   function onFormFieldMount(detail: FormFieldMountRelayDetail) {
     // only save the child elements within the reveal slot
     if (!$$slots.reveal) return;
-    // don't save reference to itself
-    if (detail.name !== name) return;
     _formFields = [..._formFields, detail.el];
   }
 

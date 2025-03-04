@@ -22,7 +22,7 @@
     FieldsetResetErrorsMsg,
     FormFieldMountRelayDetail,
     FormFieldMountMsg,
-    FieldsetErrorRelayDetail,
+    FieldsetErrorRelayDetail, FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
   // Validator
@@ -105,6 +105,9 @@
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
+          break;
+        case FieldsetResetFieldsMsg:
+          onSetValue({ name, value: ""})
           break;
       }
     });

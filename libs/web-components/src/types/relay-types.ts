@@ -150,6 +150,9 @@ export type FieldsetValidationRelayDetail = {
 };
 
 export const FieldsetSetValueMsg = "fieldset::set:value";
+
+// TODO: I don't think name is required, which would allow this type to eliminate the
+//       need for the FieldsetResetFieldMsg/Detail
 export type FieldsetSetValueRelayDetail = {
   name: string;
   value: string | number | Date;
