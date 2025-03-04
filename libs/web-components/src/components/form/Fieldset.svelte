@@ -283,7 +283,6 @@
     });
   }
 
-  // TODO: this needs to relay a message up to the parent public-form-page element, which will add the `heading` in it
   function relayFieldsetChange() {
     relay<FieldsetChangeRelayDetail>(
       _rootEl,

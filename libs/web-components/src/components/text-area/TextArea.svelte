@@ -22,7 +22,7 @@
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
     FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail,
+    FieldsetSetValueRelayDetail, FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
   export let name: string;
@@ -96,6 +96,9 @@
         case FieldsetResetErrorsMsg:
           error = "false";
           break;
+        case FieldsetResetFieldsMsg:
+          onSetValue({name, value: ""})
+          break;
       }
     });
   }
@@ -107,7 +110,7 @@
   function onSetValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
-    dispatch(_textareaEl, "_change", { name, value }, { bubbles: true });
+    dispatchChange(value);
   }
 
   function sendMountedMessage() {
@@ -121,23 +124,17 @@
 
   function onChange(e: Event) {
     if (isDisabled) return;
-    dispatchChange(e);
+    dispatchChange(_textareaEl.value);
   }
 
   function onKeyPress(e: KeyboardEvent) {
     if (isDisabled) return;
     dispatchKeyPress(e);
-    dispatchChange(e);
+    dispatchChange(_textareaEl.value);
   }
 
-  function dispatchChange(_: Event) {
-    _textareaEl.dispatchEvent(
-      new CustomEvent("_change", {
-        composed: true,
-        detail: { name, value: _textareaEl.value },
-        bubbles: true,
-      }),
-    );
+  function dispatchChange(value: string) {
+    dispatch(_textareaEl, "_change", { name, value }, { bubbles: true });
   }
 
   function dispatchKeyPress(e: KeyboardEvent) {
