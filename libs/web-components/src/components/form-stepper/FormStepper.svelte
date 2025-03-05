@@ -30,6 +30,7 @@
   // used to obtain component dimensions
   let _gridEl: HTMLElement;
 
+
   // collection of references to the child goa-form-step web components
   let _steps: { el: HTMLElement, status: FormStepStatus}[] = [];
 
@@ -198,7 +199,7 @@
 
   // change current step state and update children
   function changeStep(nextStep: number) {
-    if (_steps.length === 0) return;
+    if (_steps.length === 0 || nextStep > _steps.length) return;
 
     // deactivate current step (currentStep is initially undefined)
     if (_currentStep > 0) {
@@ -279,6 +280,7 @@
 </div>
 
 <style>
+
   .slots {
     position: relative;
     inset: 0;
@@ -294,9 +296,9 @@
     z-index: 1;
     -webkit-appearance: none;
     appearance: none;
-    height: 4px;
+    height: var(--goa-stepper-line-thickness);
     border: none;
-    background: var(--goa-color-greyscale-200);
+    background: var(--goa-stepper-color-line);
     pointer-events: none;
   }
 
@@ -321,12 +323,13 @@
     }
   }
 
+
   /* 1.25rem = 20px = 40px / 2, half the height of the 40px stepper */
   progress.vertical {
     width: calc(var(--height) - var(--step-height));
     transform: rotate(90deg)
       translate(
-        calc(50% + 1.25rem + 1.75rem),
+        calc(50% + 1.25rem + 1rem),
         calc((var(--height) - var(--step-height)) / 2 - 1.25rem - 1.5rem)
       );
   }
@@ -343,12 +346,14 @@
     }
   }
 
+
+
   /* iOS tweaks */
   progress::-webkit-progress-value {
     background: var(--goa-color-interactive-default);
   }
   progress::-webkit-progress-bar {
-    background: var(--goa-color-greyscale-200);
+    background: var(--goa-stepper-color-line);
   }
   progress::-moz-progress-bar {
     background: var(--goa-color-interactive-default);

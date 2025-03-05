@@ -135,6 +135,49 @@ describe("GoAMicrositeHeader with click handler", () => {
       }),
     );
 
-    document.removeEventListener("_click", mockClickHandler);
+    document.removeEventListener("_feedbackClick", mockClickHandler);
+  });
+});
+
+// Add these tests as separate blocks
+describe("GoAMicrositeHeader", () => {
+  it(`should show a feedback url for live type if provided`, async () => {
+    const { queryByTestId } = render(GoAMicrositeHeader, {
+      type: "live",
+      feedbackurl: "http://example.com",
+    });
+    const feedback = queryByTestId("feedback");
+
+    expect(feedback).toBeTruthy();
+    expect(feedback).toContainHTML("http://example.com");
+  });
+
+  it(`should show the version number for live type if provided`, async () => {
+    const { queryByTestId } = render(GoAMicrositeHeader, {
+      type: "live",
+      version: "4.5.6",
+    });
+    const version = queryByTestId("version");
+
+    expect(version).toBeTruthy();
+    expect(version).toContainHTML("4.5.6");
+  });
+
+  it(`should behave the same as other types for live`, async () => {
+    const { queryByTestId } = render(GoAMicrositeHeader, {
+      type: "live",
+      version: "4.5.6",
+      feedbackurl: "http://example.com",
+    });
+    const type = queryByTestId("type");
+    const version = queryByTestId("version");
+    const feedback = queryByTestId("feedback");
+
+    expect(type).toBeTruthy();
+    expect(type).not.toContainHTML("live"); // Adjusted expectation
+    expect(version).toBeTruthy();
+    expect(version).toContainHTML("4.5.6");
+    expect(feedback).toBeTruthy();
+    expect(feedback).toContainHTML("http://example.com");
   });
 });

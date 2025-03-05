@@ -386,14 +386,20 @@
 </div>
 
 <style>
+  /* TO DO: Move component tokens into style dictionary */
   :host {
-    --work-side-menu-border-radius: 8px;
-    --work-side-menu-width: 245px;
-    --work-side-menu-shadow: 0px 4px 6px -2px rgba(26, 26, 26, 0.2);
-    --work-side-menu-toggle-border: 1px solid
+    --goa-work-side-menu-border-radius: 8px;
+    --goa-work-side-menu-color-bg: var(--goa-color-greyscale-white);
+    --goa-work-side-menu-width-open: 245px;
+    --goa-work-side-menu-width-closed: 90px;
+    --goa-work-side-menu-shadow: 0px 4px 6px -2px rgba(26, 26, 26, 0.2);
+    --goa-work-side-menu-toggle-border: 1px solid
       var(--goa-color-greyscale-200, rgba(220, 220, 220, 1));
-    --work-side-menu-toggle-shadow: 0px 1px 0px 0px rgba(26, 26, 26, 0.25);
-    --work-side-menu-account-shadow: 0px 12px 20px -8px rgba(26, 26, 26, 0.24);
+    --goa-work-side-menu-toggle-shadow: 0px 1px 0px 0px rgba(26, 26, 26, 0.25);
+    --goa-work-side-menu-account-shadow: 0px 12px 20px -8px
+      rgba(26, 26, 26, 0.24);
+    --goa-work-side-menu-border: var(--goa-border-width-s) solid
+      var(--goa-color-greyscale-200);
   }
 
   :host * {
@@ -474,23 +480,23 @@
     align-items: stretch;
     position: relative;
     height: 100%;
-    width: var(--work-side-menu-width);
-    border-right: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    background-color: var(--goa-color-greyscale-white);
-    box-shadow: var(--work-side-menu-shadow);
+    width: var(--goa-work-side-menu-width-open);
+    border-right: var(--goa-work-side-menu-border);
+    background-color: var(--goa-work-side-menu-color-bg);
+    box-shadow: var(--goa-work-side-menu-shadow);
     transition: width 100ms ease-out;
   }
 
   .scrolling .container {
-    width: calc(var(--work-side-menu-width) + 1px);
+    width: calc(var(--goa-work-side-menu-width-open) + 1px);
   }
 
   .closed .container {
-    width: calc(var(--goa-space-2xl) + 1px);
+    width: var(--goa-work-side-menu-width-closed);
   }
 
   .closed.scrolling .container {
-    width: calc(var(--goa-space-2xl) + 1px);
+    width: var(--goa-work-side-menu-width-closed);
   }
 
   .header {
@@ -580,12 +586,12 @@
     align-items: center;
     justify-content: center;
     background-color: var(--goa-color-greyscale-white);
-    border-radius: var(--work-side-menu-border-radius);
+    border-radius: var(--goa-work-side-menu-border-radius);
     cursor: pointer;
     height: var(--goa-space-xl);
     width: var(--goa-space-xl);
-    border: var(--work-side-menu-toggle-border);
-    box-shadow: var(--work-side-menu-toggle-shadow);
+    border: var(--goa-work-side-menu-toggle-border);
+    box-shadow: var(--goa-work-side-menu-toggle-shadow);
     color: var(--goa-color-interactive-default);
     background-color: var(--goa-color-greyscale-white);
     transition: color 100ms ease-in-out;
@@ -606,9 +612,9 @@
     visibility: hidden;
     opacity: 0;
     background: var(--goa-color-greyscale-white);
-    box-shadow: var(--work-side-menu-account-shadow);
-    border-radius: var(--work-side-menu-border-radius);
-    border: var(--work-side-menu-toggle-border);
+    box-shadow: var(--goa-work-side-menu-account-shadow);
+    border-radius: var(--goa-work-side-menu-border-radius);
+    border: var(--goa-work-side-menu-toggle-border);
     padding: var(--goa-space-2xs);
     position: fixed;
     left: 6px;
@@ -636,7 +642,7 @@
     background-color: var(--goa-color-greyscale-white);
     margin-top: var(--goa-space-xs);
     padding: var(--goa-space-xs);
-    border-radius: var(--work-side-menu-border-radius);
+    border-radius: var(--goa-work-side-menu-border-radius);
     gap: var(--goa-space-xs);
     cursor: pointer;
   }

@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -17,12 +17,16 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: "20"
-      - uses: actions/cache@v2
+          node-version: "22"
+      - uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
       # Run with the target branch as the base.
       - name: Lint
         run: npm run lint
@@ -31,4 +35,4 @@ jobs:
           npx nx affected --target=build --base=origin/${{ github.base_ref }}
           npx nx affected --target=post --base=origin/${{ github.base_ref }}
       - name: Test
-        run: npm run test
+        run: npm run test:headless

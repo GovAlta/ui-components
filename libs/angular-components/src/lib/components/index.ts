@@ -20,7 +20,7 @@ export * from "./dropdown/dropdown";
 export * from "./dropdown-item/dropdown-item";
 export * from "./file-upload-card/file-upload-card";
 export * from "./file-upload-input/file-upload-input";
-export * from "./footer/footer";
+export * from "./filter-chip/filter-chip";
 export * from "./footer/footer";
 export * from "./footer-meta-section/footer-meta-section";
 export * from "./footer-meta-section/footer-meta-section";

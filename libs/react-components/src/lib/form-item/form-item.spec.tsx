@@ -14,7 +14,7 @@ describe("GoaFormItem", () => {
         helpText="This is some help text"
         maxWidth="480px"
         id="firstName"
-      />,
+      />
     );
     const el = baseElement.querySelector("goa-form-item");
     expect(el?.getAttribute("label")).toEqual("First Name");

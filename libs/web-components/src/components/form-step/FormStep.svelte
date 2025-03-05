@@ -15,6 +15,7 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
+  import { toBoolean } from "../../common/utils";
 
   // ======
   // Public
@@ -22,6 +23,7 @@
 
   export let text: string;
   export let status: FormStepStatus | undefined = undefined;
+  export let last: string = "false";
 
   // Set by FormStepper parent component
   let current: boolean = false;
@@ -42,7 +44,8 @@
   // ========
 
   $: _isEnabled = enabled || status === "complete";
-  
+  $: _isLast = toBoolean(last);
+
   onMount(() => {
     // receive notification from parent of resize
     _rootEl.addEventListener("form-stepper:resized", (e: Event) => {
@@ -111,6 +114,7 @@
   bind:this={_rootEl}
   class:mobile={_isMobile}
   class:desktop={!_isMobile}
+  class:last={_isLast}
   role="listitem"
   tabindex="-1"
   for={text}
@@ -131,11 +135,15 @@
   />
   <div data-testid="status" class="status">
     {#if current}
-      <goa-icon type="pencil" />
+      {#if _isLast && status === "complete"}
+        <goa-icon type="checkmark" inverted />
+      {:else}
+        <goa-icon type="pencil"  theme="filled" />
+      {/if}
     {:else if status === "complete"}
       <goa-icon type="checkmark" inverted />
     {:else if status === "incomplete"}
-      <goa-icon type="remove" />
+      <goa-icon type="remove" theme="filled" />
     {:else}
       <div data-testid="step-number" class="step-number">
         {childindex || ""}
@@ -151,7 +159,8 @@
 </label>
 
 <style>
-  input[type="checkbox"] {
+
+    input[type="checkbox"] {
     position: absolute;
     left: -9999px;
   }
@@ -161,7 +170,7 @@
     box-sizing: border-box;
     height: 100%;
     width: 100%;
-    padding: var(--goa-space-l);
+    padding: var(--goa-step-padding);
   }
   label:not([aria-disabled="true"]):not([aria-current="step"]):has(input:focus-visible) {
     outline: var(--goa-color-interactive-focus) solid var(--goa-border-width-l);
@@ -176,15 +185,16 @@
     align-items: center;
   }
   label.desktop .details {
-    margin-top: 0.75rem;
+    margin-top: 0.75rem; /* vertical space between step and label */
   }
   label.mobile {
     flex-direction: row;
     align-items: center;
     text-align: start;
+    padding: var(--goa-step-padding-vertical);
   }
   label.mobile .details {
-    margin-left: 1rem;
+    margin-left: var(--goa-space-xs);
   }
 
 
@@ -195,33 +205,33 @@
     justify-content: center;
     box-sizing: border-box;
     border-radius: 999px;
-    border: 4px solid var(--goa-color-interactive-default);
-    background: var(--goa-color-greyscale-white);
-    height: 2.5rem;
-    width: 2.5rem;
+    border: var(--goa-step-border);
+    background: var(--goa-step-color-bg);
+    height: var(--goa-step-size);
+    width: var(--goa-step-size);
   }
   .status > * {
-    fill: var(--fill-color, var(--goa-color-interactive-default));
-    color: var(--fill-color, var(--goa-color-interactive-default));
+    fill: var(--fill-color, var(--goa-step-color-bg-complete));
+    color: var(--fill-color, var(--goa-step-color-bg-complete));
   }
 
 
   [aria-current="step"] .text {
-    font-weight: var(--goa-font-weight-bold);
+    font: var(--goa-step-typography-label-active);
   }
 
   [data-status="complete"] .status {
-    background: var(--goa-color-interactive-default);
+    background: var(--goa-step-color-bg-complete);
   }
 
-  [aria-current="step"][data-status="complete"] .status {
-    background: var(--goa-color-greyscale-white);
+  [aria-current="step"][data-status="complete"]:not(.last) .status {
+    background: var(--goa-step-color-bg-active);
   }
 
   .step-number {
     margin-bottom: var(--font-valign-fix);
-    font-weight: var(--goa-font-weight-bold);
-    color: var(--goa-color-text-secondary);
+    font: var(--goa-step-typography-step-number);
+    color: var(--goa-step-color-step-number);
   }
 
   label:not(
@@ -230,16 +240,17 @@
       [aria-current="step"]
     )
     .status {
-    border-color: var(--goa-color-greyscale-500);
+    border-color: var(--goa-step-color-border);
   }
 
   .text {
-    font: var(--goa-typography-body-s);
+    font: var(--goa-step-typography-label);
+    color: var(--goa-step-color-label);
   }
 
   .subtext {
     margin-top: 0.25rem;
-    font: var(--goa-typography-body-xs);
-    color: var(--goa-color-text-secondary);
+    font: var(--goa-step-typography-sublabel);
+    color: var(--goa-step-color-sublabel);
   }
 </style>

@@ -4,6 +4,10 @@
 .nx
 playground
 NOTES.md
+/test-results
+
+# environment
+.env
 
 # compiled output
 dist
@@ -57,3 +61,6 @@ devenv.local.nix
 # pre-commit
 .pre-commit-config.yaml
 
+
+vite.config.*.timestamp*
+vitest.config.*.timestamp*

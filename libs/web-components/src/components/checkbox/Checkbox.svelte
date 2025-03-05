@@ -1,27 +1,21 @@
 <svelte:options customElement="goa-checkbox" />
 
-<!-- Script -->
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
+  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
   import {
-    dispatch,
-    fromBoolean,
-    receive,
-    relay,
-    toBoolean,
-  } from "../../common/utils";
-  import {
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
     FieldsetSetErrorMsg,
     FieldsetResetErrorsMsg,
     FormFieldMountRelayDetail,
     FormFieldMountMsg,
+    FieldsetResetFieldsMsg,
+    FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
-
   // Required
   export let name: string;
 
@@ -44,11 +38,13 @@
 
   // Private
   let _value: string;
+  let _rootEl: HTMLElement;
+  let _formFields: HTMLElement[] = [];
+  let _revealSlotEl: HTMLElement;
   let _checkboxRef: HTMLElement;
   let _descriptionId: string;
-  let _rootEl: HTMLElement;
   let _error: boolean;
-  let _prevError = _error;
+  let _prevError: boolean;
 
   // Binding
   $: isDisabled = toBoolean(disabled);
@@ -73,36 +69,82 @@
     _descriptionId = `description_${name}`;
 
     addRelayListener();
+    addRevealSlotListener();
     sendMountedMessage();
   });
 
   function addRelayListener() {
-    receive(_checkboxRef, (action, data) => {
+    receive(_rootEl, (action, data) => {
       switch (action) {
-        case FormSetValueMsg:
-          onSetValue(data as FormSetValueRelayDetail);
+        case FieldsetSetValueMsg:
+          onSetValue(data as FieldsetSetValueRelayDetail);
           break;
         case FieldsetSetErrorMsg:
-          error = "true";
+          setError(data as FieldsetErrorRelayDetail);
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
+          break;
+        case FormFieldMountMsg:
+          onFormFieldMount(data as FormFieldMountRelayDetail);
           break;
       }
     });
   }
 
-  function onSetValue(detail: FormSetValueRelayDetail) {
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
+  }
+
+  // allow for the listening of messages sent by form-fields specific to the "reveal" slot
+  function addRevealSlotListener() {
+    receive(_revealSlotEl, (action, data) => {
+      switch (action) {
+        case FormFieldMountMsg:
+          setCheckStatusByChildState(data as FormFieldMountRelayDetail);
+          break;
+      }
+    });
+  }
+
+  function setCheckStatusByChildState(detail: FormFieldMountRelayDetail) {
+    setTimeout(() => {
+      // @ts-expect-error
+      checked = !checked && !!detail.el.value;
+    }, 1000);
+  }
+
+  // save all child elements within the reveal slot for later reference
+  function onFormFieldMount(detail: FormFieldMountRelayDetail) {
+    // only save the child elements within the reveal slot
+    if (!$$slots.reveal) return;
+    // don't save reference to itself
+    if (detail.name !== name) return;
+    _formFields = [..._formFields, detail.el];
+  }
+
+  //
+  function resetChildFormFields() {
+    for (const el of _formFields) {
+      // send reset message ot child form fields
+      relay(el, FieldsetResetFieldsMsg);
+    }
+  }
+
+  function onSetValue(detail: FieldsetSetValueRelayDetail) {
+    // @ts-expect-error
     value = detail.value;
     checked = detail.value ? "true" : "false";
     dispatch(_checkboxRef, "_change", { name, value }, { bubbles: true });
   }
 
   function sendMountedMessage() {
+    if (!name) return;
+
     relay<FormFieldMountRelayDetail>(
-      _checkboxRef,
+      _rootEl,
       FormFieldMountMsg,
-      { name, el: _checkboxRef },
+      { name, el: _rootEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -125,6 +167,10 @@
         bubbles: true,
       }),
     );
+
+    if (!!$$slots.reveal && !newCheckStatus) {
+      resetChildFormFields();
+    }
   }
 
   function onFocus() {
@@ -194,6 +240,15 @@
       {description}
     </div>
   {/if}
+
+  <!-- Any form fields within the slot must be initially rendered to allow for public-form binding -->
+  <div
+    bind:this={_revealSlotEl}
+    class="reveal"
+    class:visible={$$slots.reveal && isChecked}
+  >
+    <slot name="reveal" />
+  </div>
 </div>
 
 <!-- Styles -->
@@ -204,8 +259,12 @@
     display: block;
   }
 
+
   .root {
-    display: inline-block;
+    display: block;
+    height: auto; /* Automatically adjusts to content */
+    min-height: 0; /* Ensures no unnecessary minimum height */
+    padding: 0; /* Remove padding if it's affecting height */
   }
 
   input[type="checkbox"] {
@@ -226,59 +285,115 @@
     cursor: pointer;
   }
 
+  /* Hover style when the user hovers over the label */
+  label:hover .container {
+    border: var(--goa-checkbox-border-hover);
+  }
+
+  label:hover .container.selected {
+    background-color: var(--goa-checkbox-color-bg-checked-hover);
+    border: none;
+  }
+
   .text {
-    padding-left: var(--goa-space-xs);
+    padding-left: var(--goa-checkbox-gap); /* Space between checkbox and text */
     user-select: none;
-    font-weight: var(--goa-font-weight-regular);
-    line-height: var(--goa-line-height-3);
+    font: var(--goa-checkbox-label-font-size);
+    color: var(--goa-checkbox-color-label);
   }
 
   .description {
-    font: var(--goa-typography-body-xs);
+    font: var(--goa-checkbox-description-font-size);
     margin-left: var(--goa-space-xl);
-    margin-top: var(--goa-space-2xs);
+    margin-top: var(--goa-space-2xs); /* Space between text and description */
+  }
+
+  .reveal {
+    display: none;
+    height: 0;
+  }
+  .reveal.visible {
+    border-left: 4px solid var(--goa-color-greyscale-200);
+    padding: var(--goa-space-m);
+    margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);
+    display: block;
+    height: fit-content;
   }
 
   /* Container */
   .container {
     box-sizing: border-box;
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
-    border-radius: 2px;
-    background-color: var(--goa-color-greyscale-white);
-    height: var(--goa-space-l);
-    width: var(--goa-space-l);
-    margin-top: var(--goa-space-3xs);
+    border: var(--goa-checkbox-border);
+    border-radius: var(--goa-checkbox-border-radius);
+    background-color: var(--goa-checkbox-color-bg);
+    height: var(--goa-checkbox-size);
+    width: var(--goa-checkbox-size);
+    margin-top: 3px; /* aligns the checkbox with the text */
     display: flex;
     justify-content: center;
-
-    /* prevent squishing of checkbox */
-    flex: 0 0 auto;
+    flex: 0 0 auto; /* prevent squishing of checkbox */
   }
   .container:hover {
-    box-shadow: inset 0 0 0 var(--goa-border-width-m)
-      var(--goa-color-interactive-hover);
+    border: var(--goa-checkbox-border-hover);
   }
   .container svg {
-    fill: var(--goa-color-greyscale-white);
+    fill: var(--goa-checkbox-color-bg);
     margin: 3px;
   }
   .container.selected {
-    background-color: var(--goa-color-interactive-default);
+    background-color: var(--goa-checkbox-color-bg-checked);
     border: none;
   }
   .container.selected:hover {
-    background-color: var(--goa-color-interactive-hover);
+    background-color: var(--goa-checkbox-color-bg-checked-hover);
   }
 
   /* Error Container */
   .error .container,
   .error .container:hover {
-    border: var(--goa-border-width-m) solid var(--goa-color-interactive-error);
-    background-color: var(--goa-color-greyscale-white);
+    border: var(--goa-checkbox-border-error);
+    background-color: var(--goa-checkbox-color-bg);
     box-shadow: none;
   }
+  .error .container.selected,
+  .error .container.selected:hover {
+    border: var(--goa-checkbox-border-error);
+    background-color: var(--goa-checkbox-color-bg);
+  }
+  label:hover.error .container {
+    border: var(--goa-checkbox-border-error);
+  }
+  label:hover.error .container.selected {
+    border: var(--goa-checkbox-border-error);
+    background-color: var(--goa-checkbox-color-bg);
+  }
   .error .container svg {
-    fill: var(--goa-color-interactive-error);
+    fill: var(--goa-checkbox-color-bg-checked-error);
+    margin: 1px;
+  }
+
+  /* Focus + Error Container */
+  .error .container:has(:focus-visible) {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+  }
+  .error .container:has(:focus-visible):hover {
+    outline: none;
+    border: var(--goa-checkbox-border-error);
+  }
+  .error .container.selected:has(:focus-visible):hover {
+    outline: none;
+    border: none;
+    background-color: var(--goa-checkbox-color-bg);
+  }
+  label:hover.error .container.selected:has(:focus-visible) {
+    outline: none;
+    border: var(--goa-checkbox-border-error);
+    background-color: var(--goa-checkbox-color-bg);
+  }
+  label:hover.error .container:has(:focus-visible) {
+    outline: none;
+    border: var(--goa-checkbox-border-error);
   }
 
   /* Focus Container */
@@ -286,25 +401,58 @@
     outline: none;
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
+  .container:has(:focus-visible):hover {
+    outline: none;
+    border: var(--goa-checkbox-border);
+  }
+  .container.selected:has(:focus-visible):hover {
+    outline: none;
+    border: none;
+    background-color: var(--goa-checkbox-color-bg-checked);
+  }
+  label:hover .container.selected:has(:focus-visible) {
+    outline: none;
+    border: none;
+    background-color: var(--goa-checkbox-color-bg-checked);
+  }
+  label:hover .container:has(:focus-visible) {
+    outline: none;
+    border: var(--goa-checkbox-border);
+  }
 
   /* Disabled */
   .disabled {
     cursor: default;
   }
   .disabled .text {
-    color: var(--goa-color-greyscale-500);
+    color: var(--goa-checkbox-color-label-disabled);
   }
+
+  label.disabled + .description {
+    color: var(--goa-checkbox-color-label-disabled);
+    cursor: default;
+  }
+
   /* override base settings */
   .disabled:not(.error) .container {
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-400);
+    border: var(--goa-checkbox-border-disabled);
     box-shadow: none;
   }
   .disabled:not(.error) .container.selected {
     border: none;
-    background-color: var(--goa-color-interactive-disabled);
+    background-color: var(--goa-checkbox-color-bg-checked-disabled);
   }
   .disabled.error .container.selected {
-    border: var(--goa-border-width-s) solid var(--goa-color-interactive-error);
-    box-shadow: inset 0 0 0 1px var(--goa-color-interactive-error);
+    border: var(--goa-checkbox-border-disabled-error);
   }
+  .disabled.error .container {
+    border: var(--goa-checkbox-border-disabled-error);
+  }
+  label:hover.disabled.error .container {
+    border: var(--goa-checkbox-border-disabled-error);
+  }
+  .disabled.error .container svg {
+    fill: #F58185;
+  }
+
 </style>

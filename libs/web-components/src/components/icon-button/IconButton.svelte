@@ -39,12 +39,6 @@
   $: css = `${variant} ${isInverted ? "inverted" : ""}`;
   $: isDisabled = toBoolean(disabled);
   $: isInverted = toBoolean(inverted);
-  $: _paddingSize = {
-    small: "0.25rem",
-    medium: "0.25rem",
-    large: "0.5rem",
-    xlarge: "0.5rem",
-  }[size];
 
   function handleClick(e: Event) {
     e.target?.dispatchEvent(
@@ -70,13 +64,10 @@
 </script>
 
 <button
-  style={`
-    --padding: ${_paddingSize};
-    ${calculateMargin(mt, mr, mb, ml)}
-  `}
+  class={`goa-icon-button goa-icon-button--${size} ${css}`}
+  style={calculateMargin(mt, mr, mb, ml)}
   {title}
   disabled={isDisabled}
-  class={css}
   data-testid={testid}
   on:click={handleClick}
   aria-label={arialabel}
@@ -96,7 +87,23 @@
   :host:focus-visible {
     outline: none !important;
   }
-  
+
+  .goa-icon-button--small {
+    padding: var(--goa-icon-button-medium-padding);
+  }
+
+  .goa-icon-button--medium {
+    padding: var(--goa-icon-button-medium-padding);
+  }
+
+  .goa-icon-button--large {
+    padding: var(--goa-icon-button-large-padding);
+  }
+
+  .goa-icon-button--xlarge {
+    padding: var(--goa-icon-button-large-padding);
+  }
+
   button {
     display: inline-flex;
     align-items: center;
@@ -105,12 +112,13 @@
     background: transparent;
     cursor: pointer;
     border: none;
-    border-radius: var(--goa-border-radius-m);
+    border-radius: var(--goa-icon-button-medium-border-radius);
     padding: var(--padding);
     cursor: pointer;
     transition:
-      background-color 100ms ease-in,
-      transform 100ms ease-in-out;
+      background-color 0.2s ease-in-out,
+      color 0.2s ease-in-out,
+      transform 0.1s ease-in-out;
   }
   button:active {
     transform: translateY(2px);
@@ -127,89 +135,92 @@
     transform: none;
     cursor: default;
     opacity: 1;
-    color: var(--goa-color-greyscale-500);
-    fill: var(--goa-color-greyscale-500);
   }
   button:disabled:hover {
     background-color: transparent;
   }
 
-
+/*  Type: color */
   .color {
-    color: var(--goa-color-interactive-default);
-    fill: var(--goa-color-interactive-default);
+    color: var(--goa-icon-button-default-color);
+    fill: var(--goa-icon-button-default-color);
   }
   .color:hover,
   .color:focus {
-    color: var(--goa-color-interactive-hover);
-    fill: var(--goa-color-interactive-hover);
-    background-color: var(--goa-color-greyscale-100);
+    color: var(--goa-icon-button-default-hover-color);
+    fill: var(--goa-icon-button-default-hover-color);
+    background-color: var(--goa-icon-button-default-hover-color-bg);
   }
   .color:disabled {
-    color: var(--goa-color-interactive-disabled);
-    fill: var(--goa-color-interactive-disabled);
+    color: var(--goa-icon-button-default-disabled-color);
+    fill: var(--goa-icon-button-default-disabled-color);
   }
 
-
+/*  Type: dark */
   .dark {
-    color: var(--goa-color-greyscale-black);
-    fill: var(--goa-color-greyscale-black);
+    color: var(--goa-icon-button-dark-color);
+    fill: var(--goa-icon-button-dark-color);
   }
   .dark:hover,
   .dark:focus,
   .dark:active {
-    background-color: var(--goa-color-greyscale-100);
+    background-color: var(--goa-icon-button-dark-hover-color-bg);
+  }
+  .dark:disabled {
+    color: var(--goa-icon-button-dark-disabled-color-bg);
+    fill: var(--goa-icon-button-dark-disabled-color-bg);
   }
 
-
+/*  Type: nocolor (same as dark, not documented) */
   .nocolor {
-    color: var(--goa-color-greyscale-black);
-    fill: var(--goa-color-greyscale-black);
+    color: var(--goa-icon-button-dark-color);
+    fill: var(--goa-icon-button-dark-color);
   }
   .nocolor:hover,
   .nocolor:focus,
   .nocolor:active {
-    background-color: var(--goa-color-greyscale-100);
+    background-color: var(--goa-icon-button-dark-hover-color-bg);
   }
 
-
+/*  Type: destructive */
   .destructive {
-    color: var(--goa-color-emergency-dark);
-    fill: var(--goa-color-emergency-dark);
+    color: var(--goa-icon-button-destructive-color);
+    fill: var(--goa-icon-button-destructive-color);
   }
   .destructive:hover,
   .destructive:focus,
   .destructive:active {
-    background-color: var(--goa-color-emergency-light);
+    background-color: var(--goa-icon-button-destructive-hover-color-bg);
   }
   .destructive:disabled {
-    opacity: 0.5;
+    color: var(--goa-icon-button-destructive-disabled-color);
+    fill: var(--goa-icon-button-destructive-disabled-color);
   }
 
-
+/*  Type: light */
   .light {
-    color: var(--goa-color-greyscale-white);
-    fill: var(--goa-color-greyscale-white);
+    color: var(--goa-icon-button-light-color);
+    fill: var(--goa-icon-button-light-color);
   }
   .light:hover,
   .light:focus,
   .light:active {
-    color: var(--goa-color-greyscale-white);
-    fill: var(--goa-color-greyscale-white);
-    background-color: var(--goa-color-greyscale-700);
+    background-color: var(--goa-icon-button-light-hover-color-bg);
+  }
+  .light:disabled {
+    color: var(--goa-icon-button-light-disabled-color);
+    fill: var(--goa-icon-button-light-disabled-color);
   }
 
-  
+/*  Type: inverted (same as light, not documented) */
   .inverted {
-    color: var(--goa-color-greyscale-white);
-    fill: var(--goa-color-greyscale-white);
+    color: var(--goa-icon-button-light-color);
+    fill: var(--goa-icon-button-light-color);
   }
   .inverted:hover,
   .inverted:focus,
   .inverted:active {
-    color: var(--goa-color-greyscale-white);
-    fill: var(--goa-color-greyscale-white);
-    background-color: var(--goa-color-greyscale-700);
+    background-color: var(--goa-icon-button-light-hover-color-bg);
   }
 
 </style>

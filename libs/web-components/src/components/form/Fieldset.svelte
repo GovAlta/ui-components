@@ -2,18 +2,15 @@
   customElement={{
     tag: "goa-fieldset",
     props: {
-      buttonText: { type: "String", attribute: "button-text" },
-      secondaryButtonText: { type: "String", attribute: "secondary-button-text" },
-      preserveState: { type: "String", attribute: "preserve-state" },
-      showBackButton: { type: "String", attribute: "show-back-button" },
+      sectionTitle: { type: "String", attribute: "section-title" },
+      dispatchOn: { attribute: "dispatch-on" },
     },
   }}
 />
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { calculateMargin, Spacing } from "../../common/styling";
-  import { dispatch, receive, relay, styles } from "../../common/utils";
+  import { dispatch, receive, relay } from "../../common/utils";
   import {
     ExternalErrorRelayDetail,
     ExternalSetErrorMsg,
@@ -23,25 +20,24 @@
     FieldsetChangeRelayDetail,
     FieldsetErrorRelayDetail,
     FieldsetItemState,
-    FieldsetMountFormItemMsg,
-    FieldsetMountFormRelayDetail,
     FieldsetResetErrorsMsg,
+    FieldsetResetFieldsMsg,
     FieldsetSetErrorMsg,
-    FieldsetSubmitMsg,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
     FieldsetValidationRelayDetail,
-    FormDispatchStateMsg,
-    FormDispatchStateRelayDetail,
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
     FormItemMountMsg,
     FormItemMountRelayDetail,
     FormResetErrorsMsg,
+    FormResetFormMsg,
     FormSetFieldsetMsg,
     FormSetFieldsetRelayDetail,
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
     FormToggleActiveMsg,
     FormToggleActiveRelayDetail,
+    FormPageContinueMsg,
+    FormPageContinueRelayDetail,
   } from "../../types/relay-types";
 
   // ======
@@ -49,30 +45,19 @@
   // ======
 
   export let id: string = "";
-  export let heading: string = "";
-  export let buttonText: string = "";
-  export let secondaryButtonText: string = "";
-  export let showBackButton: string = "true";
-  export let state: "subform" | "default" = "default";
-  export let mt: Spacing = null;
-  export let mr: Spacing = null;
-  export let mb: Spacing = null;
-  export let ml: Spacing = null;
-  export let first: boolean = false;
-  export let last: boolean = false;
+  // when the changes will be dispatched to the form; `change` ~ immediately
+  export let dispatchOn: "change" | "continue" = "continue";
 
   // =======
   // Private
   // =======
 
   let _rootEl: HTMLElement;
-  let _active: boolean = false;
-  let _editting: boolean = false;
-  let _detail: FieldsetBindRelayDetail;
   let _errors: Record<string, string> = {};
 
   // allows for the state to be sent to _continue event allowing for custom validation
   let _state: Record<string, FieldsetItemState> = {};
+
   // snapshot of the state when the fieldset is made active
   let _stateSnapshot: Record<string, FieldsetItemState> = {};
 
@@ -80,32 +65,17 @@
   let _formItems: Record<string, { label: string; el: HTMLElement }> = {};
 
   // reference to child form input, dropdown, etc components to allow for relaying of error state
-  let _formFields: Record<string, HTMLElement> = {};
-
-  // ========
-  // Reactive
-  // ========
-
-  $: if (_active) {
-    const url = new URL(location.href);
-    url.searchParams.set("page", id);
-    history.pushState({ page: id }, "", url);
-  }
+  let _formFields: Record<string, { order: number; el: HTMLElement }> = {};
 
   // =====
   // Hooks
   // =====
 
   onMount(() => {
-    _detail = {
-      id,
-      heading,
-      el: _rootEl,
-    };
-
     dispatchBindMsg();
     addChildChangeListener();
     bindChannel();
+    bindAlterPropsMsg();
   });
 
   // =========
@@ -113,29 +83,39 @@
   // =========
 
   function bindChannel() {
-    receive(_rootEl, (action, data) => {
-      // console.log(`  RECEIVE(Fieldset => ${action}):`, data);
+    receive(_rootEl, (action, data, event) => {
       switch (action) {
         case FormSetFieldsetMsg:
           onSetFieldset(data as FormSetFieldsetRelayDetail);
+          event.stopPropagation();
           break;
         case FormResetErrorsMsg:
           onErrorReset();
-          break;
-        case FormDispatchStateMsg:
-          onFormDispatch(data as FormDispatchStateRelayDetail);
+          event.stopPropagation();
           break;
         case FormItemMountMsg:
           onFormItemMount(data as FormItemMountRelayDetail);
+          event.stopPropagation();
           break;
         case FormFieldMountMsg:
-          onFieldsetMount(data as FormFieldMountRelayDetail);
+          onFormFieldMount(data as FormFieldMountRelayDetail);
+          event.stopPropagation();
           break;
         case FormToggleActiveMsg:
           onToggleActiveState(data as FormToggleActiveRelayDetail);
+          event.stopPropagation();
           break;
         case ExternalSetErrorMsg:
           onError(data as ExternalErrorRelayDetail);
+          event.stopPropagation();
+          break;
+        case FormPageContinueMsg:
+          onFormPageContinue(data as FormPageContinueRelayDetail);
+          event.stopPropagation();
+          break;
+        case FormResetFormMsg:
+          resetFields(event);
+          event.stopPropagation();
           break;
       }
     });
@@ -145,32 +125,67 @@
   // Dispatch handlers
   // *****************
 
-  function onSetFieldset(detail: FormSetFieldsetRelayDetail) {
-    for (const [id, item] of Object.entries(detail.value)) {
-      _state[id] = { ...item }
+  /**
+   * Set goa-details components, within the fieldset, to have a certain top spacing
+   * set within the UI design guidelines
+   */
+  function bindAlterPropsMsg() {
+    const els = document.querySelectorAll("goa-details");
+    els.forEach((el) => {
+      el.setAttribute("style", "margin-top: -1rem");
+    })
+  }
+
+  function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
+    // obtain an initial snapshot of the data when fieldset shown
+    if (detail.active) {
+      _stateSnapshot = { ..._state };
     }
   }
 
-  function onFormDispatch(detail: FormDispatchStateRelayDetail) {
-    // allow customization of form if user has jumped back to a question (editting mode)
-    _editting = detail.editting === id;
+  function resetFields(event: Event) {
+    _state = {};
+    // prevent subform resets from resetting the parent
+    event.stopPropagation();
+
+    for (const { el } of Object.values(_formFields)) {
+      relay(el, FieldsetResetFieldsMsg);
+    }
+  }
+
+  function onSetFieldset(detail: FormSetFieldsetRelayDetail) {
+    if (detail.value.type === "details") {
+      // set the local fieldset state
+      for (const [id, item] of Object.entries(detail.value.fieldsets)) {
+        _state[id] = { ...item };
+      }
+
+      // restore state in form items by relaying the message
+      for (const [name, data] of Object.entries(_state)) {
+        if (data.value) {
+          relay<FieldsetSetValueRelayDetail>(
+            _formFields[name].el,
+            FieldsetSetValueMsg,
+            {
+              name,
+              value: data.value,
+            },
+          );
+        }
+      }
+    }
   }
 
   function onErrorReset() {
     _errors = {};
 
     // reset children
-    for (const [_, el] of Object.entries(_formFields)) {
-      relay(el, FieldsetResetErrorsMsg, null);
+    for (const [_, val] of Object.entries(_formFields)) {
+      relay(val.el, FieldsetResetErrorsMsg, null);
     }
     for (const [_, { el }] of Object.entries(_formItems)) {
       relay(el, FieldsetResetErrorsMsg, null);
     }
-  }
-
-  function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
-    _active = detail.active;
-    _stateSnapshot = { ..._state };
   }
 
   function onFormItemMount(detail: FormItemMountRelayDetail) {
@@ -179,66 +194,33 @@
   }
 
   // Collect list of child form item (input, dropdown, etc) elements
-  function onFieldsetMount(detail: FormFieldMountRelayDetail) {
+  function onFormFieldMount(detail: FormFieldMountRelayDetail) {
     const { name, el } = detail;
-    _formFields[name] = el;
+    if (!name) return;
 
-    // dispatch to the Form along with the fieldset id
-    relay<FieldsetMountFormRelayDetail>(
-      _rootEl,
-      FieldsetMountFormItemMsg,
-      { id, name, el },
-      { bubbles: true },
-    );
+    const itemCount = Object.keys(_formFields).length;
+    _formFields[name] = { order: itemCount + 1, el };
   }
 
   function onError(detail: ExternalErrorRelayDetail) {
     _errors[detail.name] = detail.msg;
 
     // dispatch error down to fields
-    relay<FieldsetErrorRelayDetail>(_formFields[detail.name], FieldsetSetErrorMsg, {
-      error: detail.msg,
-    });
+    relay<FieldsetErrorRelayDetail>(
+      _formFields[detail.name].el,
+      FieldsetSetErrorMsg,
+      {
+        error: detail.msg,
+      },
+    );
 
     // dispatch error down to form items
-    relay<FieldsetErrorRelayDetail>(_formItems[detail.name].el, FieldsetSetErrorMsg, {
-      error: detail.msg,
-    });
-  }
-
-  // **************
-  // Event handlers
-  // **************
-
-  // Dispatch _continue event to app's level allowing custom validation to be performed
-  function onSaveAndContinue() {
-    // Prevents looping form sections from sending no data to the form, thereby overwritting data
-    // already collected and saved at the form level
-    const isDirty = Object.keys(_state).length > 0
-
-    if (isDirty) {
-      // send all the state of all the inputs within the fieldset to the top-level form component
-      relay<FieldsetChangeRelayDetail>(
-        _rootEl,
-        FieldsetChangeMsg,
-        { id, state: _state},
-        { bubbles: true },
-      );
-    }
-    
-    // dispatch to on:_continue method allowing users to validate the data
-    sendContinueMsg(false);
-  }
-
-  function sendContinueMsg(cancelled: boolean) {
-    if (cancelled) {
-      revertFormFieldValues();            
-    }
-    dispatch<FieldsetValidationRelayDetail>(
-      _rootEl,
-      "_continue",
-      { el: _rootEl, state: cancelled ? _stateSnapshot : _state},
-      { bubbles: true },
+    relay<FieldsetErrorRelayDetail>(
+      _formItems[detail.name].el,
+      FieldsetSetErrorMsg,
+      {
+        error: detail.msg,
+      },
     );
   }
 
@@ -246,34 +228,28 @@
   // Functions
   // *********
 
-  function onCancel() {
-    sendContinueMsg(true)
-  }
-
   function revertFormFieldValues() {
-    for (const [id, el] of Object.entries(_formFields)) {
-      relay<FormSetValueRelayDetail>(el, FormSetValueMsg, { name: id, value: _stateSnapshot[id].value});
+    for (const [name, field] of Object.entries(_formFields)) {
+      // some form elements not "form-bound" won't exist within the snapshot state
+      if (_stateSnapshot[name]) {
+        relay<FieldsetSetValueRelayDetail>(field.el, FieldsetSetValueMsg, {
+          name,
+          value: _stateSnapshot[name].value,
+        });
+      }
     }
   }
 
-  function onSubmit() {
-    relay(_rootEl, FieldsetSubmitMsg, {}, { bubbles: true });
-  }
-
-  function onSecondaryClick() {
-    dispatch(_rootEl, "_secondaryClick", {}, { bubbles: true });
-  }
-
-  function handleBack(e: Event) {
-    history.back();
-    e.stopPropagation();
-  }
-
+  // Bind with the parent FormPage
   function dispatchBindMsg() {
-    relay<FieldsetBindRelayDetail>(_rootEl, FieldsetBindMsg, _detail, {
-      bubbles: true,
-      timeout: 10,
-    });
+    setTimeout(() => {
+      relay<FieldsetBindRelayDetail>(
+        _rootEl,
+        FieldsetBindMsg,
+        { id, el: _rootEl, cb: (_id) => (id = _id) },
+        { bubbles: true, timeout: 10 },
+      );
+    }, 10);
   }
 
   function addChildChangeListener() {
@@ -284,94 +260,112 @@
       if (!_formItems[name]) {
         return;
       }
-      
-      _state[name] = { name, value, label: _formItems[name].label };
+      if (!_formFields[name]) {
+        return;
+      }
+
+      // save to the fieldset's state, which will be relayed when the user clicks continue
+      _state[name] = {
+        name,
+        value,
+        label: _formItems[name].label,
+        order: _formFields[name].order,
+      };
+
+      if (dispatchOn === "change") {
+        const isDirty = Object.keys(_state).length > 0;
+        if (isDirty) {
+          relayFieldsetChange();
+        }
+      }
 
       e.stopPropagation();
     });
   }
 
+  // TODO: this needs to relay a message up to the parent public-form-page element, which will add the `heading` in it
+  function relayFieldsetChange() {
+    relay<FieldsetChangeRelayDetail>(
+      _rootEl,
+      FieldsetChangeMsg,
+      {
+        id,
+        state: { data: _state },
+        dispatchOn,
+      },
+      { bubbles: true },
+    );
+  }
+
   function jumpToError(e: Event, id: string) {
-    _formFields[id].focus();
+    _formFields[id].el.focus();
     e.preventDefault();
+  }
+
+  function onFormPageContinue(detail: FormPageContinueRelayDetail) {
+    const isDirty = Object.keys(_state).length > 0;
+
+    // send updated values for _stateChange
+    if (isDirty && !detail.cancelled) {
+      relayFieldsetChange();
+    }
+
+    // revert the values
+    if (detail.cancelled) {
+      revertFormFieldValues();
+      _state = _stateSnapshot;
+    }
+
+    // send continue to allow for page change
+    dispatch<FieldsetValidationRelayDetail>(
+      _rootEl,
+      "_continue",
+      { el: _rootEl, state: _state, cancelled: detail.cancelled },
+      { bubbles: true },
+    );
   }
 </script>
 
-<section bind:this={_rootEl}>
-  <fieldset
-    style={styles(
-      calculateMargin(mt, mr, mb, ml),
-      `display: ${_active ? "block" : "none"}`,
-    )}
-  >
-    {#if state === "default"}
-      {#if !first && !_editting && !last && showBackButton === "true"}
-        <goa-link-button leadingicon="chevron-back" mb="2xl" on:_click={handleBack}>
-          Back
-        </goa-link-button>
-      {/if}
+<fieldset bind:this={_rootEl}>
+  {#if Object.values(_errors).filter((err) => !!err).length}
+    <goa-callout type="emergency" heading={`There is a problem`}>
+      <ul class="errors">
+        {#each Object.keys(_errors) as key}
+          <li>
+            <a
+              class="error"
+              href={`#${key}`}
+              on:click={(e) => jumpToError(e, key)}
+            >
+              {_errors[key]}
+            </a>
+          </li>
+        {/each}
+      </ul>
+    </goa-callout>
+  {/if}
 
-      {#if Object.keys(_errors).length}
-        <goa-callout
-          type="emergency"
-          heading="Please correct the following errors on this page:"
-        >
-          <ul class="errors">
-            {#each Object.keys(_errors) as key}
-              <li>
-                <a class="error" href={`#${key}`} on:click={(e) => jumpToError(e, key)}>
-                  {_errors[key]}
-                </a>
-              </li>
-            {/each}
-          </ul>
-        </goa-callout>
-      {/if}
+  <goa-block gap="xl" direction="column">
+    <slot />
+  </goa-block>
 
-      {#if heading}
-        <goa-text as="h2" size="heading-l">{heading}</goa-text>
-      {:else}
-        <br />
-      {/if}
-
-      <slot />
-
-      <goa-block mt="xl">
-        {#if _editting && !secondaryButtonText}
-          <goa-button on:_click={onCancel} type="secondary">
-            Cancel
-          </goa-button>
-        {/if}
-        {#if secondaryButtonText}
-          <goa-button on:_click={onSecondaryClick} type="secondary">
-            {secondaryButtonText}
-          </goa-button>
-        {/if}
-
-        {#if last}
-          <goa-button on:_click={onSubmit} type="primary">
-            {buttonText || "Confirm"}
-          </goa-button>
-        {:else}
-          <goa-button on:_click={onSaveAndContinue} type="primary">
-            {buttonText || "Continue"}
-          </goa-button>
-        {/if}
-      </goa-block>
-
-    {:else}
-      <slot name="subform" />
-    {/if}
-  </fieldset>
-</section>
+</fieldset>
 
 <style>
   fieldset {
     border: none;
     padding: 0;
+    margin-bottom: var(--goa-space-m);
   }
 
-  .errors li::marker,
+  ul {
+    padding: 0;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+
   a.error,
   a.error:visited {
     color: var(--goa-color-emergency-dark);

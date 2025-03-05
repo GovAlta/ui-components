@@ -16,19 +16,20 @@
     RadioItemSelectProps,
   } from "../radio-item/RadioItem.svelte";
   import {
-    FormSetValueMsg,
-    FormSetValueRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
     FieldsetSetErrorMsg,
     FieldsetResetErrorsMsg,
     FormFieldMountRelayDetail,
     FormFieldMountMsg,
+    FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
 
   // Validator
-  const [Orientations, validateOrientation] = typeValidator(
-    "Radio group orientation",
-    ["vertical", "horizontal"],
-  );
+  const [Orientations, validateOrientation] = typeValidator("Radio group orientation", [
+    "vertical",
+    "horizontal",
+  ]);
 
   // Type
   type Orientation = (typeof Orientations)[number];
@@ -96,11 +97,11 @@
   function addRelayListener() {
     receive(_rootEl, (action, data) => {
       switch (action) {
-        case FormSetValueMsg:
-          onSetValue(data as FormSetValueRelayDetail);
+        case FieldsetSetValueMsg:
+          onSetValue(data as FieldsetSetValueRelayDetail);
           break;
         case FieldsetSetErrorMsg:
-          error = "true";
+          setError(data as FieldsetErrorRelayDetail);
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
@@ -109,7 +110,12 @@
     });
   }
 
-  function onSetValue(detail: FormSetValueRelayDetail) {
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
+  }
+
+  function onSetValue(detail: FieldsetSetValueRelayDetail) {
+    // @ts-expect-error
     value = detail.value;
     dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
   }
@@ -201,24 +207,27 @@
   role="radiogroup"
   aria-label={arialabel}
   aria-invalid={_error ? "true" : "false"}
-  tabindex="0"
   on:focusin={onFocus}
 >
   <slot />
 </div>
 
 <style>
-  :host {
-    box-sizing: border-box;
+
+:host {
     font-family: var(--goa-font-family-sans);
   }
+
   .goa-radio-group--horizontal {
     display: flex;
     flex-direction: row;
+    gap: var(--goa-radio-group-gap-horizontal);
   }
 
   .goa-radio-group--vertical {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column; /* Vertical stacking */
+    gap: var(--goa-radio-group-gap-vertical); /* Adds spacing */
   }
 
   /* Focus styles */

@@ -30,9 +30,10 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { fromBoolean, toBoolean } from "../../common/utils";
+  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
+  import { FieldsetResetFieldsMsg, FormFieldMountMsg, FormFieldMountRelayDetail } from "../../types/relay-types";
 
   export let value: string;
   export let name: string = "";
@@ -47,10 +48,15 @@
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
-  export let mb: Spacing = "m";
+  export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  // private
+
   let _radioItemEl: HTMLElement;
+  let _revealSlotEl: HTMLElement;
+  let _formFields: HTMLElement[] = [];
+
   // Reactive
 
   $: isDisabled = toBoolean(disabled);
@@ -63,9 +69,46 @@
     dispatchInit();
     addInitListener();
     addSelectListener();
+    addRelayListener();
+    addRevealSlotListener();
   });
 
   // Functions
+
+  function addRelayListener() {
+    receive(_radioItemEl, (action, data) => {
+      switch (action) {
+        case FormFieldMountMsg:
+          onFormFieldMount(data as FormFieldMountRelayDetail);
+          break;
+      }
+    });
+  }
+
+  // allow for the listening of messages sent by form-fields specific to the "reveal" slot
+  function addRevealSlotListener() {
+    receive(_revealSlotEl, (action, data) => {
+      switch (action) {
+        case FormFieldMountMsg:
+          setCheckStatusByChildState(data as FormFieldMountRelayDetail);
+          break;
+      }
+    });
+  }
+
+  function onFormFieldMount(detail: FormFieldMountRelayDetail) {
+    if (!detail.name) return;
+    if (!$$slots.reveal) return;
+    _formFields = [..._formFields, detail.el];
+  }
+
+  function setCheckStatusByChildState(detail: FormFieldMountRelayDetail) {
+    setTimeout(() => {
+      // @ts-expect-error
+      checked = !checked && !!detail.el.value;
+    }, 1000);
+  }
+
   function dispatchInit() {
     setTimeout(() => {
       _radioItemEl?.dispatchEvent(
@@ -108,30 +151,37 @@
 
   function onChange() {
     if (isDisabled) return;
-    if (isChecked) return;
+    // if (isChecked) return;  FIXME: does having this uncommented break something?
 
-    const event = new CustomEvent("_radioItemChange", {
-      detail: value,
-      composed: true,
-      bubbles: true,
-    });
-    _radioItemEl.dispatchEvent(event);
+    dispatch(_radioItemEl, "_radioItemChange", value, { bubbles: true })
+
+    if (!isChecked && !!$$slots.reveal) {
+      resetChildFormFields();
+    }
+  }
+
+  function resetChildFormFields() {
+    for (const el of _formFields) {
+      // send reset message ot child form fields
+      relay(el, FieldsetResetFieldsMsg);
+    }
   }
 </script>
 
 <div
+  bind:this={_radioItemEl}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
     max-width: ${maxwidth};
   `}
-  class="goa-radio-container"
+  data-testid="root"
+  class="container"
 >
   <label
-    bind:this={_radioItemEl}
     data-testid="radio-option-{value}"
-    class="goa-radio"
-    class:goa-radio--disabled={isDisabled}
-    class:goa-radio--error={isError}
+    class="radio"
+    class:radio--disabled={isDisabled}
+    class:radio--error={isError}
   >
     <input
       type="radio"
@@ -146,65 +196,84 @@
       aria-checked={isChecked}
       on:click={onChange}
     />
-    <div class="goa-radio-icon" />
-    <span class="goa-radio-label">
+    <div class="icon" />
+    <span class="label">
       {label || value}
     </span>
   </label>
   {#if $$slots.description || description}
-    <div class="goa-radio-description" id={`${name}-${value}-description`}>
+    <div class="description" id={`${name}-${value}-description`}>
       <slot name="description" />
       {description}
     </div>
   {/if}
+  <div class="reveal" class:visible={$$slots.reveal && isChecked}>
+    <slot name="reveal" />
+  </div>
 </div>
 
 <style>
-  label.goa-radio {
-    --goa-radio-outline-width: 3px;
-    --goa-radio-diameter: 1.5rem;
-    --goa-radio-border-width: 1px;
-    --goa-radio-border-width--checked: 7px;
-    --goa-radio-border-width--hover: 2px;
-    --goa-radio-border-width--error: 2px;
-    box-sizing: border-box;
-    display: flex;
+  .radio {
+    display: inline-flex;
   }
 
-  .goa-radio:hover {
+  label.radio {
+    box-sizing: border-box;
+    display: inline-flex;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .radio:hover {
     cursor: pointer;
   }
 
-  .goa-radio *,
-  .goa-radio *:before,
-  .goa-radio *:after {
+  .radio *,
+  .radio *:before,
+  .radio *:after {
     box-sizing: border-box;
   }
 
-  .goa-radio input[type="radio"] {
+  .radio input[type="radio"] {
     width: 0;
-    height: 0;
+    min-height: 28px;
     margin: 0;
     opacity: 0;
   }
 
-  .goa-radio-label {
-    padding: 0 var(--goa-space-xl) 0 var(--goa-space-xs);
-    font-weight: var(--goa-font-weight-regular);
+  .label {
+    padding: 0 var(--goa-space-xs);
+    font: var(--goa-radio-label);
   }
 
-  .goa-radio-description {
-    font: var(--goa-typography-body-xs);
+  .description {
+    font: var(--description);
     margin-left: var(--goa-space-xl);
     margin-top: var(--goa-space-2xs);
+    color: var(--goa-color-text-default);
   }
 
-  .goa-radio-icon {
+  .reveal {
+    display: none;
+    height: 0;
+  }
+  .reveal.visible {
+    border-left: 4px solid var(--goa-color-greyscale-200);
+    padding: var(--goa-space-m);
+    margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);
+    display: block;
+    height: fit-content;
+  }
+
+  .icon {
     display: inline-block;
-    height: var(--goa-radio-diameter);
-    width: var(--goa-radio-diameter);
-    border-radius: 50%;
-    background-color: var(--goa-color-text-light, #fff);
+    height: var(--goa-radio-size);
+    width: var(--goa-radio-size);
+    border-radius: var(--goa-radio-border-radius);
+    background-color: var(--goa-radio-color-bg);
     transition: box-shadow 100ms ease-in-out;
 
     /* prevent squishing of radio button */
@@ -212,89 +281,86 @@
     margin-top: var(--font-valign-fix);
   }
 
-  .goa-radio--disabled .goa-radio-label {
-    color: var(--goa-color-greyscale-500);
+  .radio--disabled .label,
+  .radio--disabled ~ .description {
+    color: var(--goa-radio-label-color-disabled);
   }
-
-  .goa-radio--disabled:hover {
+  .radio--disabled:hover {
     cursor: default;
   }
 
-  /* States */
+  /* States --------------------------------------------- */
 
-  /* Unchecked */
-  input[type="radio"]:not(:checked) ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width) solid
-      var(--goa-color-greyscale-700);
+/* Unchecked */
+  input[type="radio"]:not(:checked) ~ .icon {
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
     margin-top: 3px;
   }
-
-  /* Hover */
-  input[type="radio"]:hover ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--hover) solid
-      var(--goa-color-interactive-hover);
+  /* Unchecked:hover */
+  input[type="radio"]:hover ~ .icon {
+    border: var(--goa-radio-border-hover);
+  }
+  /* Unchecked:focus */
+  input[type="radio"]:focus-visible ~ .icon,
+  input[type="radio"]:hover:focus-visible ~ .icon {
+    outline: var(--goa-radio-border-focus);
+  }
+  /* Unchecked:hover+focus */
+  input[type="radio"]:hover:focus-visible ~ .icon {
+    border: var(--goa-radio-border);
   }
 
   /* Checked */
-  input[type="radio"]:checked ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid
-      var(--goa-color-interactive-default);
+  input[type="radio"]:checked ~ .icon {
+    border: var(--goa-radio-border-checked);
     margin-top: 3px;
   }
-
-  /* Hover & checked */
-      input[type="radio"]:checked:hover ~ .goa-radio-icon {
-    border-color: var(--goa-color-interactive-hover);
+  /* Checked:hover */
+  input[type="radio"]:checked:hover ~ .icon {
+    border: var(--goa-radio-border-checked-hover);
   }
-
-  /* Focus */
-  input[type="radio"]:focus ~ .goa-radio-icon,
-  input[type="radio"]:hover:active ~ .goa-radio-icon,
-  input[type="radio"]:hover:focus ~ .goa-radio-icon,
-  input[type="radio"]:active ~ .goa-radio-icon {
-    box-shadow: 0 0 0 var(--goa-radio-outline-width)
-      var(--goa-color-interactive-focus);
+  /* Checked:hover+focus */
+  input[type="radio"]:checked:hover:focus-visible ~ .icon {
+    border: var(--goa-radio-border-checked);
   }
 
   /* Disabled */
-  input[type="radio"]:disabled ~ .goa-radio-icon,
-  input[type="radio"]:disabled:focus ~ .goa-radio-icon,
-  input[type="radio"]:disabled:active ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width) solid
-      var(--goa-color-greyscale-400);
-    box-shadow: none;
+  input[type="radio"]:disabled ~ .icon,
+  input[type="radio"]:disabled:focus-visible ~ .icon {
+    border: var(--goa-radio-border-disabled);
+  }
+  input[type="radio"]:disabled:checked ~ .icon,
+  input[type="radio"]:disabled:checked:focus-visible ~ .icon {
+    border: var(--goa-radio-border-checked-disabled);
   }
 
-  /* Disabled & checked */
-  input[type="radio"]:disabled:checked ~ .goa-radio-icon,
-  input[type="radio"]:disabled:checked:focus ~ .goa-radio-icon,
-  input[type="radio"]:disabled:checked:active ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--checked) solid
-      var(--goa-color-interactive-disabled);
-    box-shadow: none;
+  /* Error */
+  .radio--error input[type="radio"] ~ .icon {
+    border: var(--goa-radio-border-error);
   }
-
-  /* Error & unchecked */
-  .goa-radio--error input[type="radio"]:not(:checked) ~ .goa-radio-icon {
-    border: var(--goa-radio-border-width--error) solid
-      var(--goa-color-interactive-error);
+  .radio--error input[type="radio"]:hover ~ .icon {
+    border: var(--goa-radio-border-error-hover);
   }
-
-  /* Error & checked */
-  .goa-radio--error input[type="radio"]:checked ~ .goa-radio-icon {
-    border-color: var(--goa-color-interactive-error);
+  .radio--error input[type="radio"]:hover:focus-visible ~ .icon {
+    outline: var(--goa-radio-border-focus);
+    border: var(--goa-radio-border-error);
   }
-
-  /* Error & hover */
-  .goa-radio--error input[type="radio"]:hover ~ .goa-radio-icon {
-    border-color: var(--goa-color-interactive-error-hover, #BA0000);
+  .radio--error input[type="radio"]:checked ~ .icon{
+    border: var(--goa-radio-border-checked-error);
   }
-
-  /* Error & disabled */
-  .goa-radio--error input[type="radio"]:disabled ~ .goa-radio-icon,
-  .goa-radio--error input[type="radio"]:disabled:focus ~ .goa-radio-icon,
-  .goa-radio--error input[type="radio"]:disabled:active ~ .goa-radio-icon {
-    border-color: var(--goa-color-interactive-error-disabled, #F58185);
-    box-shadow: none;
+  .radio--error input[type="radio"]:checked:hover ~ .icon {
+    border: var(--goa-radio-border-checked-error-hover);
+  }
+  .radio--error input[type="radio"]:checked:hover:focus-visible ~ .icon {
+    outline: var(--goa-radio-border-focus);
+     border: var(--goa-radio-border-checked-error);
+  }
+  .radio--error input[type="radio"]:disabled ~ .icon {
+    border: var(--goa-radio-border-error-disabled);
+  }
+  .radio--error input[type="radio"]:disabled:checked ~ .icon {
+    border: var(--goa-radio-border-checked-error-disabled);
   }
 </style>
+
+

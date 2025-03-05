@@ -1,98 +1,158 @@
+export type FormStatus = "not-started" | "cannot-start-yet" | "in-progress" | "submitted" | "update-needed" | "complete";
+
 export type FormState = {
-  form: Record<string, FieldsetData>;
+  uuid: string;
+  form: Record<string, Fieldset>;
   history: string[];
   editting: string;
   lastModified?: Date;
+  status: FormStatus;
+};
+
+export type Fieldset = {
+  heading?: string;
+  data?: FieldsetData;
 };
 
 export type FieldsetData =
-  | Record<string, FieldsetItemState>
-  | Record<string, FieldsetItemState>[];
+  | { type: "details"; fieldsets: Record<string, FieldsetItemState> }
+  | { type: "list"; items: FormState[] };
+
+// ===========
+// StateChange
+// ===========
+
+export const StateChangeEvent = "_stateChange";
+export type StateChangeRelayDetail =
+  | {
+      type: "details";
+      data: FormState;
+    }
+  | {
+      id: string;
+      type: "list";
+      data: FormState[];
+    };
 
 // ====
 // Form
 // ====
 
 export const FormResetErrorsMsg = "form::reset:errors";
-export const FormSetFieldsetMsg = "form::set:fieldset";
-export const FormSetValueMsg = "form::set:value";
-export const FormDispatchStateMsg = "form::dispatch:state";
-export const FormToggleActiveMsg = "form::toggle:active";
-export const FormStateChangeMsg = "form::state:change";
+export const FormResetFormMsg = "form::reset:form";
+
+// Message to allow forms to register themselves with their parent form to allow for
+// form data to be passed down to the child form
 export const FormBindMsg = "form::bind";
-
 export type FormBindRelayDetail = {
-  el: HTMLElement;
-};
-export type FormStateChangeRelayDetail = FieldsetData;
-
-export type FormFieldMountRelayDetail = {
-  name: string;
+  id: string;
   el: HTMLElement;
 };
 
+export const FormToggleActiveMsg = "form::toggle:active";
 export type FormToggleActiveRelayDetail = {
-  first: boolean;
   active: boolean;
 };
 
+export const FormSetFieldsetMsg = "form::set:fieldset";
 export type FormSetFieldsetRelayDetail = {
   name: string;
-  value: Record<string, FieldsetItemState> | Record<string, FieldsetItemState>[];
+  value: FieldsetData;
 };
 
-export type FormSetValueRelayDetail = {
-  name: string;
-  value: string | number | Date;
-};
-
+export const FormDispatchStateMsg = "form::dispatch:state";
 export type FormDispatchStateRelayDetail = FormState;
+export type FormDispatchStateRelayDetailList = FormState[];
+
+export const FormDispatchEditMsg = "form::edit";
+export type FormDispatchEditRelayDetail = { id: string };
+
+// ======
+// Subform
+// ======
+
+export const SubFormBindMsg = "subform::bind";
+export type SubFormBindRelayDetail = {
+  el: HTMLElement;
+};
+
+// ============
+// SubformIndex
+// ============
+
+export const SubFormIndexContinueToParentMsg = "subform::indexContinueToParent";
+export const SubFormIndexContinueToSubFormMsg =
+  "subform::indexContinueToSubForm";
 
 // ========
 // Fieldset
 // ========
 
-export const FieldsetToggleActiveMsg = "fieldset::toggle-active";
 export const FieldsetResetErrorsMsg = "fieldset::reset:errors";
 export const FieldsetResetFieldsMsg = "fieldset::reset:fields";
-export const FieldsetBindMsg = "fieldset::bind";
-export const FieldsetSubmitMsg = "fieldset::submit";
-export const FieldsetSetErrorMsg = "fieldset::set:error";
-// Sent after fieldset handles _change events from goa input-like components
-export const FieldsetChangeMsg = "fieldset::change";
-// Sent to form containing the name and el of the bound child, along with the fieldset id
-export const FieldsetMountFormItemMsg = "fieldset::bind:form-item";
+export const FieldsetCompleteMsg = "fieldset::submit";
 
-export type FieldsetBindRelayDetail = {
+// ========
+// FormPage
+// ========
+
+export const FormPageContinueMsg = "form-page:continue";
+export type FormPageContinueRelayDetail = {
+  cancelled: boolean;
+};
+
+export const FormPageBackMsg = "form-page:back";
+
+export const FormPageBindMsg = "form=page::bind";
+export type FormPageBindRelayDetail = {
   id: string;
   heading: string;
   el: HTMLElement;
 };
 
+// ========
+// Fieldset
+// ========
+
+export const FieldsetBindMsg = "fieldset::bind";
+export type FieldsetBindRelayDetail = {
+  id: string;
+  el: HTMLElement;
+  cb?: (id: string) => void;
+};
+
+export const FieldsetSetErrorMsg = "fieldset::set:error";
 export type FieldsetErrorRelayDetail = {
   error: string;
 };
 
+export const FieldsetChangeMsg = "fieldset::change";
 export type FieldsetChangeRelayDetail = {
   id: string;
-  state: Record<string, FieldsetItemState>;
-};
-
-export type FieldsetMountFormRelayDetail = {
-  id: string;
-  name: string;
-  el: HTMLElement;
+  state: {
+    heading?: string;
+    data: Record<string, FieldsetItemState>;
+  };
+  dispatchOn: "change" | "continue";
 };
 
 export type FieldsetItemState = {
   name: string;
   label: string;
   value: string | number | Date;
+  order: number;
 };
 
 export type FieldsetValidationRelayDetail = {
   el: HTMLElement;
   state: Record<string, FieldsetItemState>;
+  cancelled: boolean;
+};
+
+export const FieldsetSetValueMsg = "fieldset::set:value";
+export type FieldsetSetValueRelayDetail = {
+  name: string;
+  value: string | number | Date;
 };
 
 // ========
@@ -100,7 +160,6 @@ export type FieldsetValidationRelayDetail = {
 // ========
 
 export const FormItemMountMsg = "form-item::bind";
-
 export type FormItemMountRelayDetail = {
   id: string;
   label: string;
@@ -111,12 +170,7 @@ export type FormItemMountRelayDetail = {
 // External
 // ========
 
-export const ExternalSetErrorMsg = "external::set:error";
-export const ExternalContinueMsg = "external::continue";
-export const ExternalAppendDataMsg = "external::append:state";
 export const ExternalAlterDataMsg = "external::alter:state";
-export const ExternalResetStateMsg = "external::reset:state";
-
 export type ExternalAlterDataRelayDetail =
   | {
       id: string;
@@ -127,49 +181,42 @@ export type ExternalAlterDataRelayDetail =
       id: string;
       operation: "edit";
       index: number;
-      data: FieldsetData;
     };
 
+export const ExternalContinueMsg = "external::continue";
 export type ExternalContinueRelayDetail = {
   next: string;
 };
 
+export const ExternalSetErrorMsg = "external::set:error";
 export type ExternalErrorRelayDetail = {
   name: string;
   msg: string;
 };
 
-export type ExternalAppendDataRelayDetail = {
-  id: string;
-  data: FieldsetItemState;
-};
+export const ExternalInitStateMsg = "external::init:state";
+export type ExternalInitStateDetail = FormState | string;
 
 // =========
 // FormField
 // =========
 
 export const FormFieldMountMsg = "form-field::bind";
+export type FormFieldMountRelayDetail = {
+  name: string;
+  el: HTMLElement;
+};
 
 // ===========
 // FormSummary
 // ===========
 
 export const FormSummaryBindMsg = "form-summary::bind";
-export const FormSummaryEditPageMsg = "form-summary::edit:page";
-
 export type FormSummaryBindRelayDetail = {
   el: HTMLElement;
 };
 
+export const FormSummaryEditPageMsg = "form-summary::edit:page";
 export type FormSummaryEditPageRelayDetail = {
   id: string;
-};
-
-// ======
-// Button
-// ======
-
-export type PublicFormButtonClick = {
-  action: string;
-  index: number;
 };

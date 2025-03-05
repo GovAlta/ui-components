@@ -149,8 +149,14 @@
 </div>
 
 <style>
+  /* TO DO: Move component tokens into style dictionary */
   :host {
-    --work-side-menu-border-radius: 8px;
+    --goa-work-side-menu-item-border-radius: 8px;
+    --goa-work-side-menu-item-padding: var(--goa-space-xs);
+    --goa-work-side-menu-item-text-color: var(--goa-color-text-default);
+    --goa-work-side-menu-item-color-bg-hover: var(--goa-color-greyscale-100);
+    --goa-work-side-menu-item-color-bg-focus: var(--goa-color-greyscale-100);
+    --goa-work-side-menu-item-color-bg-current: var(--goa-color-greyscale-100);
   }
 
   :host * {
@@ -167,11 +173,11 @@
     position: relative;
     display: flex;
     gap: var(--goa-space-xs);
-    border-radius: var(--work-side-menu-border-radius);
+    border-radius: var(--goa-work-side-menu-item-border-radius);
     text-decoration: none;
     align-items: flex-start;
-    padding: var(--goa-space-xs);
-    color: var(--goa-color-text-default);
+    padding: var(--goa-work-side-menu-item-padding);
+    color: var(--goa-work-side-menu-item-text-color);
   }
 
   .sub-menu-item {
@@ -179,12 +185,12 @@
   }
 
   .menu-item:hover {
-    background: var(--goa-color-greyscale-100);
+    background: var(--goa-work-side-menu-item-color-bg-hover);
   }
 
   .menu-item:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    background: var(--goa-color-greyscale-100);
+    background: var(--goa-work-side-menu-item-color-bg-focus);
   }
 
   /* Divider */
@@ -208,7 +214,7 @@
 
   /* Current item */
   .current {
-    background: var(--goa-color-greyscale-100);
+    background: var(--goa-work-side-menu-item-color-bg-current);
     border-radius: 8px;
   }
 

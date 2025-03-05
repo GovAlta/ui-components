@@ -36,7 +36,7 @@ export const msg = {
 
 export function receive(
   el: HTMLElement | Element | null | undefined,
-  handler: (action: string, data: Record<string, unknown>, event: Event) => void,
+  handler: (action: string, data: unknown, event: Event) => void,
 ) {
   if (!el) {
     console.warn("receive() el is null | undefined");
@@ -51,14 +51,17 @@ export function receive(
 export function relay<T>(
   el: HTMLElement | Element | null | undefined,
   eventName: string,
-  data: T,
+  data?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
-  // console.log(`RELAY(${eventName}):`, data, el);
+  if (!el) {
+    console.warn("relay() el is null | undefined");
+    return;
+  }
 
   const dispatch = () => {
     el?.dispatchEvent(
-      new CustomEvent<{ action: string; data: T }>("msg", {
+      new CustomEvent<{ action: string; data?: T }>("msg", {
         composed: true,
         bubbles: opts?.bubbles,
         cancelable: opts?.cancelable,
@@ -83,8 +86,6 @@ export function dispatch<T>(
   detail?: T,
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
-  // console.log(`DISPATCH(${eventName}):`, detail, el);
-
   const dispatch = () => {
     el?.dispatchEvent(
       new CustomEvent<T>(eventName, {
@@ -113,8 +114,10 @@ export function getSlottedChildren(
   } else {
     // for unit tests only
     if (parentTestSelector) {
-      // @ts-expect-error testing
-      return [...rootEl.querySelector(parentTestSelector).children] as Element[];
+      return [
+        // @ts-expect-error testing
+        ...rootEl.querySelector(parentTestSelector).children,
+      ] as Element[];
     }
     // @ts-expect-error testing
     return [...rootEl.children] as Element[];
@@ -142,7 +145,10 @@ export function isValidDate(d: Date): boolean {
   return !isNaN(d.getDate());
 }
 
-export function validateRequired(componentName: string, props: Record<string, unknown>) {
+export function validateRequired(
+  componentName: string,
+  props: Record<string, unknown>,
+) {
   Object.entries(props).forEach((prop) => {
     if (!prop[1]) {
       console.warn(`${componentName}: ${prop[0]} is required`);
@@ -218,8 +224,59 @@ export function generateRandomId() {
   return `${Math.random().toString(36).substring(2, 9)}`;
 }
 
+export function padLeft(
+  value: string | number,
+  len: number,
+  padWith: string | number,
+): string {
+  value = value + "";
+  const diff = len - value.length;
+  if (diff <= 0) {
+    return value;
+  }
+  let padding = "";
+  for (let i = 0; i < len - value.length; i++) {
+    padding += padWith;
+  }
+  return `${padding}${value}`;
+}
+
+export function performOnce(
+  timeoutId: any,
+  action: () => void,
+  delay = 100,
+): any {
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+  if (delay === 0) {
+    action();
+    return;
+  }
+  return setTimeout(action, delay);
+}
+
 export function ensureSlotExists(el: HTMLElement) {
   if (!el.querySelector("slot")) {
     el.appendChild(document.createElement("slot"));
   }
+}
+
+export function getQueryParams(url: string | URL): Record<string, string> {
+  const _url = url instanceof URL ? url : new URL(url);
+  const query = _url.search.substring(1);
+  const vars = query.split("&");
+
+  return vars.reduce((acc: Record<string, string>, val: string) => {
+    const [key, value] = val.split("=");
+    acc[key] = value;
+    return acc;
+  }, {});
+}
+
+export function getQueryParam(
+  url: string | URL,
+  key: string,
+): string | undefined {
+  return getQueryParams(url)[key];
 }

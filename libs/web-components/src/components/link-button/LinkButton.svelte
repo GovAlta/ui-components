@@ -46,9 +46,6 @@
     background: none;
     cursor: pointer;
     font: var(--goa-typography-body-m);
-  }
-
-  .link-button:hover {
     text-decoration: underline;
   }
 

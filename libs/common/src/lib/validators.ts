@@ -1,7 +1,14 @@
 export type FieldValidator = (value: unknown) => string;
+export type FieldsetState = Record<string, FieldsetItemState>;
+export type FieldsetItemState = {
+  name: string;
+  label: string;
+  value: string;
+};
 
 export class FormValidator {
-  private validators: Record<string, FieldValidator[]>;
+  private readonly validators: Record<string, FieldValidator[]>;
+
   constructor(validators?: Record<string, FieldValidator[]>) {
     this.validators = validators || {};
   }
@@ -10,17 +17,13 @@ export class FormValidator {
     this.validators[fieldName] = validators;
   }
 
-  validate(data: Record<string, string>): {
-    errors: Record<string, string>;
-    valid: boolean;
-  } {
+  validate(data: Record<string, string>): Record<string, string> {
     const errors: Record<string, string> = {};
 
     Object.entries(this.validators).forEach(([name, validators]) => {
       const err = validators
         .map((validatorFn) => {
-          const errMsg = validatorFn(data[name]);
-          return errMsg;
+          return validatorFn(data[name]);
         })
         .find((msg) => !!msg);
       if (err) {
@@ -28,46 +31,9 @@ export class FormValidator {
       }
     });
 
-    return { errors, valid: Object.keys(errors).length === 0 };
+    return errors;
   }
 }
-
-export function relay<T>(
-  el: HTMLElement | Element | null | undefined,
-  eventName: string,
-  data: T,
-  opts?: { bubbles?: boolean },
-) {
-  if (!el) {
-    console.error("dispatch element is null");
-    return;
-  }
-  el.dispatchEvent(
-    new CustomEvent<{ action: string; data: T }>("msg", {
-      composed: true,
-      bubbles: opts?.bubbles,
-      detail: {
-        action: eventName,
-        data,
-      },
-    }),
-  );
-}
-
-export type RelayedError = {
-  name: string;
-  msg: string;
-};
-
-export function relayErrors(el: HTMLElement, errors: Record<string, string>) {
-  for (const [name, msg] of Object.entries(errors)) {
-    relay<RelayedError>(el, "external::set:error", { name, msg });
-  }
-}
-
-// **********
-// Validators
-// **********
 
 export function birthDayValidator(): FieldValidator[] {
   return [
@@ -85,8 +51,8 @@ export function birthMonthValidator(): FieldValidator[] {
   return [
     requiredValidator("Month is required"),
     numericValidator({
-      min: 1,
-      max: 12,
+      min: 0,
+      max: 11,
       minMsg: "Month must be between Jan and Dec",
       maxMsg: "Month must be between Jan and Dec",
     }),
@@ -126,8 +92,51 @@ export function phoneNumberValidator(msg?: string): FieldValidator {
 }
 
 export function emailValidator(msg?: string): FieldValidator {
-  const regex = new RegExp(/^[\w+-.]+@([\w-]+.)+[\w-]{2,4}$/);
+  // emailregex.com
+  const regex = new RegExp(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  );
   return regexValidator(regex, msg || "Invalid email address");
+}
+
+// SIN# Generator: https://singen.ca
+export function SINValidator(): FieldValidator {
+  return (value: unknown) => {
+    if (!value) return "";
+
+    const checkValue = "121212121".split("").map((c) => parseInt(c));
+    const valueStr = (value as string).replace(/\D/g, "");
+
+    if (valueStr.length !== 9) return "SIN must contain 9 numbers";
+
+    const checkSum = valueStr
+      .split("")
+      .map((c) => parseInt(c))
+      .map((num, index) => {
+        const val = num * checkValue[index];
+        if (val < 10) {
+          return val;
+        }
+        return `${val}`
+          .split("")
+          .map((c) => parseInt(c))
+          .reduce((acc, val) => acc + val, 0);
+      })
+      .reduce((acc, val) => acc + val, 0);
+
+    if (checkSum % 10 === 0) {
+      return "";
+    }
+
+    return "Invalid SIN";
+  };
+}
+
+export function postalCodeValidator(): FieldValidator {
+  return regexValidator(
+    /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i,
+    "Invalid postal code",
+  );
 }
 
 export function regexValidator(regex: RegExp, msg: string): FieldValidator {
@@ -145,37 +154,45 @@ export function regexValidator(regex: RegExp, msg: string): FieldValidator {
 
 interface DateValidatorOptions {
   invalidMsg?: string;
-  startMsg?: string;
-  endMsg?: string;
-  start?: Date;
-  end?: Date;
+  minMsg?: string;
+  maxMsg?: string;
+  min?: Date;
+  max?: Date;
 }
+
 export function dateValidator({
   invalidMsg,
-  startMsg,
-  endMsg,
-  start,
-  end,
-}: DateValidatorOptions): FieldValidator {
+  minMsg,
+  maxMsg,
+  min,
+  max,
+}: DateValidatorOptions = {}): FieldValidator {
   return (date: unknown) => {
-    let _date: Date = new Date(0);
+    let _date: Date = new Date(-1);
+
+    // allow empty value
+    if (`${date || ""}`.length === 0) {
+      return "";
+    }
 
     if (typeof date === "string") {
+      _date = new Date(date);
+    }
+    if (typeof date === "number") {
       _date = new Date(date);
     }
     if ((date as Date).toDateString) {
       _date = date as Date;
     }
 
-    if (_date.toString() === "Invalid Date" || _date.getTime() === 0) {
+    if (_date.getDate() === -1) {
       return invalidMsg || "Invalid date";
     }
-
-    if (_date && start && _date < start) {
-      return startMsg || `Must be after ${start}`;
+    if (min && _date < min) {
+      return minMsg || `Must be after ${min}`;
     }
-    if (_date && end && _date > end) {
-      return endMsg || `Must be before ${end}`;
+    if (max && _date > max) {
+      return maxMsg || `Must be before ${max}`;
     }
 
     return "";
@@ -189,16 +206,21 @@ interface NumericValidatorOptions {
   min?: number;
   max?: number;
 }
+
 export function numericValidator({
   invalidTypeMsg,
   minMsg,
   maxMsg,
   min = -Number.MAX_VALUE,
   max = Number.MAX_VALUE,
-}: NumericValidatorOptions): FieldValidator {
+}: NumericValidatorOptions = {}): FieldValidator {
   return (value: unknown) => {
     let _value: number = Number.MAX_VALUE;
 
+    // empty value
+    if (`${value ?? ""}`.length === 0) {
+      return "";
+    }
     if (typeof value === "string") {
       _value = parseFloat(value);
     }
@@ -228,6 +250,7 @@ interface LengthValidatorOptions {
   max?: number;
   min?: number;
 }
+
 export function lengthValidator({
   invalidTypeMsg,
   minMsg,
@@ -236,6 +259,11 @@ export function lengthValidator({
   max = Number.MAX_VALUE,
 }: LengthValidatorOptions): FieldValidator {
   return (value: unknown) => {
+    // valid if blank
+    if (`${value || ""}`.length === 0) {
+      return "";
+    }
+
     if (typeof value !== "string") {
       return invalidTypeMsg || "Invalid type";
     }

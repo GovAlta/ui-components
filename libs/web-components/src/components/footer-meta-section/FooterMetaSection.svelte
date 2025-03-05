@@ -3,7 +3,7 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
 
-  export let testid: string =  "";
+  export let testid: string = "";
 
   let rootEl: HTMLElement;
   let children: HTMLLinkElement[] = [];
@@ -25,6 +25,27 @@
       console.warn("GoAFooterMetaSection children must be anchor elements.");
       return;
     }
+
+    const ul = rootEl.querySelector("ul");
+    children.forEach((anchor) => {
+      const li = document.createElement("li");
+
+      //Clone with attributes
+      const clonedAnchor = anchor.cloneNode(true) as HTMLAnchorElement;
+      Array.from(anchor.attributes).forEach((attr) => {
+        clonedAnchor.setAttribute(attr.name, attr.value);
+      });
+
+      //Pass click events on
+      clonedAnchor.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        anchor.click();
+      });
+
+      li.appendChild(clonedAnchor);
+      ul.appendChild(li);
+    });
   });
 </script>
 
@@ -34,11 +55,7 @@
     <slot />
   </div>
 
-  <ul>
-    {#each children as child}
-      <li><a href={child.href}>{child.innerHTML}</a></li>
-    {/each}
-  </ul>
+  <ul></ul>
 </section>
 
 <style>
@@ -49,16 +66,39 @@
   ul {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--goa-space-l);
-    padding-left: 0;
+    gap: var(--goa-footer-meta-links-gap);
+    padding: 0;
+    margin: 8px 0px 0px 0px;
+    list-style: none;
   }
 
   li {
     list-style-type: none;
   }
 
+  @media (--mobile) {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--goa-footer-meta-links-gap-small-screen);
+      padding: 0;
+      margin: 0px 0px 0px 0px;
+    }
+  }
+
   a {
-    color: var(--goa-color-text-default);
+    color: var(--goa-footer-color-links);
+    cursor: pointer;
     white-space: nowrap;
+
+  }
+
+  a:hover {
+    color: var(--goa-footer-color-links-hover);
+  }
+
+  a:focus-visible {
+    outline: var(--goa-footer-link-focus);
+    border-radius: 2px;
   }
 </style>

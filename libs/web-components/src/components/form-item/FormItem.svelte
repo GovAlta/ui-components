@@ -18,12 +18,15 @@
     typeValidator,
   } from "../../common/utils";
   import {
-    FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
     FieldsetSetErrorMsg,
     FormFieldMountMsg,
-    FormFieldMountRelayDetail,
     FormItemMountMsg,
+  } from "../../types/relay-types";
+
+  import type {
+    FieldsetErrorRelayDetail,
+    FormFieldMountRelayDetail,
     FormItemMountRelayDetail,
   } from "../../types/relay-types";
 
@@ -56,7 +59,10 @@
   export let error: string = "";
   export let requirement: RequirementType = "";
   export let maxwidth: string = "none";
-  export let id: string = "";
+
+  // **For the public-form only**
+  // Overrides the label value within the form-summary to provide a shorter description of the value
+  export let name: string = "blank";
 
   let _rootEl: HTMLElement;
   let _inputEl: HTMLElement;
@@ -67,10 +73,8 @@
   onMount(() => {
     validateRequirementType(requirement);
     validateLabelSize(labelsize);
-    bindElement();
 
     receive(_rootEl, (action, data) => {
-      // console.log(`  RECEIVE(FormItem => ${action}):`, data);
       switch (action) {
         case FormFieldMountMsg:
           onInputMount(data as FormFieldMountRelayDetail);
@@ -157,24 +161,27 @@
     error = (d as Record<string, string>)["error"];
   }
 
-  // Allows binding to Fieldset components
-  function bindElement() {
-    relay<FormItemMountRelayDetail>(
-      _rootEl,
-      FormItemMountMsg,
-      { id, label, el: _rootEl },
-      { bubbles: true, timeout: 10 },
-    );
-  }
-
   function onInputMount(props: FormFieldMountRelayDetail) {
-    const { el } = props;
+    const { el, name } = props;
 
     // Check if aria-label is present and has a value in the child element
     const ariaLabel = el.getAttribute("aria-label");
     if (!ariaLabel || ariaLabel.trim() === "") {
       el.setAttribute("aria-label", label);
     }
+
+    sendMountedMessage(name);
+  }
+
+  // Allows binding to Fieldset components. The `_name` value is what was obtained from the "input" element's
+  // event, which ensures that the requirement of the "input" and formitem having the same name will be met.
+  function sendMountedMessage(_name: string) {
+    relay<FormItemMountRelayDetail>(
+      _rootEl,
+      FormItemMountMsg,
+      { id: _name, label: name !== "blank" ? name : label, el: _rootEl },
+      { bubbles: true, timeout: 10 },
+    );
   }
 </script>
 
@@ -196,9 +203,8 @@
       {/if}
     </label>
   {/if}
-  <div class="form-item-input">
-    <slot />
-  </div>
+
+  <slot />
 
   {#if $$slots.error || error}
     <div class="error-msg" id={_errorId} role="alert">
@@ -231,27 +237,28 @@
 
   .label {
     display: block;
-    font: var(--goa-typography-heading-s);
-    padding-bottom: var(--goa-space-xs);
+    font: var(--goa-form-item-label-typography);
+    padding-bottom: var(--goa-form-item-label-padding-bottom);
   }
 
   .label.large {
-    font: var(--goa-typography-heading-l);
-    padding-bottom: var(--goa-space-s);
+    font: var(--goa-form-item-label-large-typography);
+    padding-bottom: var(--goa-form-item-label-large-padding-bottom);
   }
 
   .label em {
-    font: var(--goa-typography-body-xs);
-    color: var(--goa-color-greyscale-700);
+    font: var(--goa-form-item-optional-label-typography);
+    color: var(--goa-form-item-optional-label-color);
+    margin-left: var(--goa-space-2xs); /* Space between label and requirement */
   }
 
   .error-msg {
     display: flex;
     align-items: flex-start;
     gap: var(--goa-space-2xs);
-    font: var(--goa-typography-body-xs);
-    color: var(--goa-color-interactive-error);
-    margin-top: var(--goa-space-s);
+    font: var(--goa-form-item-message-typography);
+    color: var(--goa-form-item-error-message-color);
+    margin-top: var(--goa-form-item-message-margin-top);
   }
 
   .error-msg goa-icon {
@@ -259,13 +266,13 @@
   }
 
   .help-msg {
-    font: var(--goa-typography-body-xs);
-    color: var(--goa-color-text-default);
-    margin-top: var(--goa-space-s);
+    font: var(--goa-form-item-message-typography);
+    color: var(--goa-form-item-help-message-color);
+    margin-top: var(--goa-form-item-message-margin-top);
   }
 
   .error-msg + .help-msg {
-    margin-top: var(--goa-space-xs);
+    margin-top: var(--goa-form-item-message-gap);
   }
 
   .sr-only {

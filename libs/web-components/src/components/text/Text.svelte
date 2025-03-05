@@ -1,18 +1,10 @@
 <svelte:options customElement="goa-text" />
 
 <script lang="ts" context="module">
-  export type TextProps = {
-    as?: TextElement;
-    mt?: Spacing;
-    mb?: Spacing;
-    ml?: Spacing;
-    mr?: Spacing;
-  }
-
   export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5"
   export type TextElement = "span" | "div" | "p";
 
-  type HeadingSize 
+  type HeadingSize
     = "heading-xl"
     | "heading-l"
     | "heading-m"
@@ -33,15 +25,16 @@
   import { onMount } from "svelte";
 
   import { calculateMargin, Spacing } from "../../common/styling";
-  import { styles } from "../../common/utils";
+  import { style, styles } from "../../common/utils";
 
   export let as: TextElement | HeadingElement = "div";
   export let maxWidth: string | "none" = "65ch";
   export let size: Size | undefined = undefined;
+  export let color: "primary" | "secondary" = "primary";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
-  export let mb: Spacing = "m";
+  export let mb: Spacing = null;
   export let ml: Spacing = null;
 
   const sizeMap: Record<HeadingElement | TextElement, HeadingSize | BodySize> = {
@@ -55,17 +48,47 @@
     span: "body-m",
   }
 
+  /**
+   * Returns a bottom margin value based on the `as` prop
+   */
+  function getBottomMargin(): Spacing {
+    // override takes precedence
+    if (mb) {
+      return mb;
+    }
+
+    // div and spans should not have any bottom margin
+    switch (as) {
+      case "h1":
+        return "3xl";
+      case "h2":
+        return "2xl";
+      case "h3":
+        return "xl";
+      case "h4":
+        return "l";
+      case "h5":
+      case "h6":
+      case "p":
+        return "m";
+    }
+
+    // fix for the GoA font's unwanted top padding
+    return "3xs";
+  }
+
   onMount(() => {
     size ||= sizeMap[as];
   })
 </script>
 
-<svelte:element 
+<svelte:element
   this={as}
   class={size}
   style={styles(
+    style("color", color === "primary" ? "var(--goa-color-text-default)" : "var(--goa-color-text-secondary)"),
     maxWidth === "none" ? "" : `max-width: ${maxWidth}`,
-    calculateMargin(mt, mr, mb, ml),
+    calculateMargin(mt, mr, getBottomMargin(), ml),
   )}
 >
   <slot />

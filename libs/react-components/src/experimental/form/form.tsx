@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef } from "react";
 import { Margins, GoabFormStorageType, GoabFormOnMountDetail, GoabFormOnStateChange } from "@abgov/ui-components-common";
-import { relay } from "../validators";
+import { relay } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | undefined>;

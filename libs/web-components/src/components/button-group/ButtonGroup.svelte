@@ -48,8 +48,8 @@
     mb,
     ml,
   )}; --alignment: {_alignment}; --gap-size: {gap === 'relaxed'
-    ? '1rem'
-    : '0.75rem'}"
+    ? 'var(--goa-button-group-gap)'
+    : 'var(--goa-button-group-compact-gap)'}"
 >
   <slot />
 </div>
@@ -60,6 +60,7 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
+
   div {
     display: flex;
     flex-direction: row;
