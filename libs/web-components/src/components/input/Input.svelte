@@ -206,7 +206,14 @@
     }
 
     _debounceId = setTimeout(() => {
-      dispatchOnChange(input.value);
+      input.dispatchEvent(
+        new CustomEvent("_change", {
+          composed: true,
+          bubbles: true,
+          cancelable: true,
+          detail: { name, value: input.value },
+        }),
+      );
     }, debounce);
 
     input.dispatchEvent(
