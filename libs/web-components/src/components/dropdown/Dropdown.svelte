@@ -368,7 +368,7 @@
     setTimeout(async () => {
       syncFilteredOptions();
       _isMenuVisible = true;
-      // _inputEl?.focus();
+      _inputEl?.focus();
       setTimeout(() => {
         if (_inputEl?.value === "" && _selectedOption) {
           reset();
@@ -458,12 +458,13 @@
 
     syncFilteredOptions();
 
-    const matchedOption =
-      _inputEl?.value &&
-      _inputEl?.value !== "" &&
-      _filteredOptions.find((option) =>
-        isFilterMatch(option, _inputEl?.value || "", false),
-      );
+    const inputValue = _inputEl?.value || "";
+    const hasInputValue = inputValue !== "";
+    const matchedOption = hasInputValue
+      ? _filteredOptions.find((option) =>
+          isFilterMatch(option, inputValue, false),
+        )
+      : null;
 
     if (!_selectedOption) {
       if (matchedOption) {
@@ -492,9 +493,9 @@
 
   function onClearIconKeyDown(e: KeyboardEvent) {
     if (e.key === "Enter" || e.key === " ") {
-      e.stopPropagation();
       reset();
       showMenu();
+      e.stopPropagation();
     }
   }
 
@@ -524,8 +525,15 @@
     setDisplayedValue();
   }
 
-  async function onChevronClick(e: Event) {
-    showMenu();
+  function onChevronClick(e: Event) {
+    if (_isMenuVisible) {
+      _inputEl?.focus();
+      hideMenu();
+    } else {
+      showMenu();
+    }
+    e.preventDefault();
+    e.stopPropagation();
   }
 
   function onFocus(e: Event) {
@@ -775,6 +783,7 @@
           on:keyup={onInputKeyUp}
           on:change={onInputChange}
           on:focus={onFocus}
+          on:click={!_filterable && onChevronClick}
         />
 
         {#if _inputEl?.value && _filterable}
@@ -821,11 +830,12 @@
         aria-label={arialabel || name}
         aria-labelledby={arialabelledby}
         on:focus={onFocus}
+        on:mousedown={(e) => e.preventDefault()}
         style={`
-            outline: none;
-            overflow-y: auto;
-            max-height: ${maxheight};
-          `}
+          outline: none;
+          overflow-y: auto;
+          max-height: ${maxheight};
+        `}
       >
         {#each _filteredOptions as option, index (index)}
           <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -840,7 +850,11 @@
             data-value={option.value}
             role="option"
             style="display: block"
-            on:click={() => onFilteredOptionClick(option)}
+            on:click={(e) => {
+              onFilteredOptionClick(option);
+              _inputEl?.focus();
+              e.stopPropagation();
+            }}
           >
             {option.label || option.value}
           </li>
@@ -903,7 +917,7 @@
 
   .dropdown-icon--arrow,
   .dropdown-icon--clear {
-    margin-right: var(--goa-dropdown-space-icon-text);
+    padding-right: var(--goa-dropdown-space-icon-text);
   }
 
   /* TODO: add indicator to when the reset button has focus state */
