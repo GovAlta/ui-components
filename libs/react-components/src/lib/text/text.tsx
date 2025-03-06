@@ -1,5 +1,11 @@
-import { ReactNode } from "react";
-import {GoabTextMaxWidth, GoabTextHeadingElement, GoabTextTextElement, GoabTextSize, Margins } from "@abgov/ui-components-common";
+import { ReactNode, type JSX } from "react";
+import {
+  GoabTextMaxWidth,
+  GoabTextHeadingElement,
+  GoabTextTextElement,
+  GoabTextSize,
+  Margins,
+} from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   as?: GoabTextTextElement | GoabTextHeadingElement;
@@ -7,10 +13,9 @@ interface WCProps extends Margins {
   maxwidth?: GoabTextMaxWidth;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-text": WCProps & React.HTMLAttributes<HTMLElement>;
     }

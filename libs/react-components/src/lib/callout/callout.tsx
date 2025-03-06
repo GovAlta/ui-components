@@ -1,4 +1,10 @@
-import { GoabCalloutAriaLive, GoabCalloutSize, GoabCalloutType, GoabCalloutIconTheme, Margins } from "@abgov/ui-components-common";
+import {
+  GoabCalloutAriaLive,
+  GoabCalloutSize,
+  GoabCalloutType,
+  GoabCalloutIconTheme,
+  Margins,
+} from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   heading?: string;
@@ -10,7 +16,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

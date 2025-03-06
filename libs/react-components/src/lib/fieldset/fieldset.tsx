@@ -10,10 +10,9 @@ interface WCProps extends Margins {
   first?: boolean | null;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-public-form-page": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -50,17 +49,17 @@ export function GoabFieldset({
     const _continue = (e: Event) => {
       const event = (e as CustomEvent).detail;
       return onContinue?.(event);
-    }
+    };
 
     if (onContinue) {
-      ref.current?.addEventListener("_continue", _continue)
+      ref.current?.addEventListener("_continue", _continue);
     }
     return () => {
       if (onContinue) {
-        ref.current?.removeEventListener("_continue", _continue)
+        ref.current?.removeEventListener("_continue", _continue);
       }
-    }
-  }, [ref.current, onContinue])
+    };
+  }, [ref.current, onContinue]);
 
   return (
     <goa-public-form-page

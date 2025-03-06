@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
 import {
   GoabButtonSize,
   GoabButtonType,
@@ -16,13 +16,12 @@ interface WCProps extends Margins {
   trailingicon?: string;
   width?: string;
   testid?: string;
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-button": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -58,7 +57,6 @@ export function GoabButton({
   mb,
   ml,
 }: GoabButtonProps): JSX.Element {
-
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {

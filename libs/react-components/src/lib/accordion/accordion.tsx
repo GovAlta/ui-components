@@ -1,9 +1,13 @@
-import { ReactNode , useEffect, useRef} from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
 
-import type { GoabAccordionHeadingSize, GoabAccordionIconPosition, Margins } from "@abgov/ui-components-common";
+import type {
+  GoabAccordionHeadingSize,
+  GoabAccordionIconPosition,
+  Margins,
+} from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   open?: boolean;
   headingsize?: GoabAccordionHeadingSize;
   heading: string;
@@ -14,7 +18,7 @@ interface WCProps extends Margins {
   iconposition?: GoabAccordionIconPosition;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

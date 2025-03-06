@@ -1,5 +1,5 @@
 import { GoabPopoverPosition, Margins } from "@abgov/ui-components-common";
-import { ReactNode } from "react";
+import { ReactNode, type JSX } from "react";
 
 interface WCProps extends Margins {
   maxwidth?: string;
@@ -10,7 +10,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

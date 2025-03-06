@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 
 interface WCProps {
   heading?: string;
@@ -6,11 +6,11 @@ interface WCProps {
   maxcontentwidth?: string;
   fullmenubreakpoint?: number;
   hasmenuclickhandler?: boolean;
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -50,11 +50,11 @@ export function GoabAppHeader({
     const current = el.current;
     const listener = () => {
       onMenuClick();
-    }
+    };
     current.addEventListener("_menuClick", listener);
     return () => {
       current.removeEventListener("_menuClick", listener);
-    }
+    };
   }, [el, onMenuClick]);
 
   return (

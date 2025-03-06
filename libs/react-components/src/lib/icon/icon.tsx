@@ -6,6 +6,8 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 
+import type { JSX } from "react";
+
 interface IonIconProps {
   name: GoabIconType | GoabIconFilledType;
 }
@@ -13,20 +15,18 @@ interface IonIconProps {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IonIconElement extends HTMLElement {}
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "ion-icon": IonIconProps & React.HTMLAttributes<IonIconElement>;
     }
   }
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-icon": WCProps & React.HTMLAttributes<IonIconElement>;
     }

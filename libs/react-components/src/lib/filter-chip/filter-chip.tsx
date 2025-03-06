@@ -2,14 +2,14 @@ import { useEffect, useRef } from "react";
 import { Margins, GoabFilterChipTheme } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   icontheme: GoabFilterChipTheme;
   error: boolean;
   content: string;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

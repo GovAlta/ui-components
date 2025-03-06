@@ -1,8 +1,8 @@
 import { GoabLinkTarget, GoabServiceLevel } from "@abgov/ui-components-common";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -19,7 +19,7 @@ interface WCProps {
   feedbackurltarget?: GoabLinkTarget;
   headerurltarget?: GoabLinkTarget;
   hasfeedbackhandler?: boolean;
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   testid?: string;
 }
 

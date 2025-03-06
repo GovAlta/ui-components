@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 import {
   GoabRadioGroupOnChangeDetail,
   GoabRadioGroupOrientation,
@@ -8,7 +8,7 @@ import {
 export * from "./radio";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   name: string;
   value?: string;
   orientation?: GoabRadioGroupOrientation;
@@ -18,7 +18,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

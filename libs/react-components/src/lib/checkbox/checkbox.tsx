@@ -1,7 +1,7 @@
 import { GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -11,7 +11,7 @@ declare global {
 }
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   id?: string;
   name: string;
   checked: boolean;

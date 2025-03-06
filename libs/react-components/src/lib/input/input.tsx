@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 import { format, isValid, parseISO } from "date-fns";
 import {
   GoabAutoCapitalize,
@@ -48,7 +48,7 @@ interface WCProps extends Margins {
   trailingiconarialabel?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

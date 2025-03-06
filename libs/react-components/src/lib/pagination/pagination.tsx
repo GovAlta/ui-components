@@ -10,7 +10,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -33,7 +33,7 @@ export interface GoabPaginationProps extends Margins {
 export type PaginationProps = GoabPaginationProps;
 
 export function GoabPagination({ onChange, ...props }: GoabPaginationProps) {
-  const ref = useRef<HTMLElement>();
+  const ref = useRef<HTMLElement>(undefined);
 
   useEffect(() => {
     if (!ref.current) {

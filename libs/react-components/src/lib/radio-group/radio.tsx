@@ -1,5 +1,7 @@
 import { Margins } from "@abgov/ui-components-common";
 
+import type { JSX } from "react";
+
 interface RadioItemProps extends Margins {
   name?: string;
   value?: string;
@@ -12,7 +14,7 @@ interface RadioItemProps extends Margins {
   arialabel?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

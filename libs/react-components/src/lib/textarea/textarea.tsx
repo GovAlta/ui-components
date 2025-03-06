@@ -4,7 +4,7 @@ import {
   GoabTextAreaOnKeyPressDetail,
   Margins,
 } from "@abgov/ui-components-common";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 
 interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
@@ -23,7 +23,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

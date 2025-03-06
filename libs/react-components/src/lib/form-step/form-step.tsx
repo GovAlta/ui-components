@@ -1,14 +1,14 @@
 import { GoabFormStepStatus } from "@abgov/ui-components-common";
+import type { JSX } from "react";
 
 interface WCProps {
   text: string;
   status?: GoabFormStepStatus;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-form-step": WCProps & React.HTMLAttributes<HTMLElement>;
     }

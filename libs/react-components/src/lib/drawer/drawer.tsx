@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
 
 type DrawerPosition = "bottom" | "left" | "right" | undefined;
 type DrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw";
@@ -10,13 +10,12 @@ interface WCProps {
   heading?: string;
   maxsize?: DrawerSize;
   testid?: string;
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-drawer": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -48,11 +47,11 @@ export function GoADrawer({
     if (!el?.current || !onClose) {
       return;
     }
-    el.current?.addEventListener("_close", onClose)
+    el.current?.addEventListener("_close", onClose);
     return () => {
-      el.current?.removeEventListener("_close", onClose)
-    }
-  }, [el, onClose])
+      el.current?.removeEventListener("_close", onClose);
+    };
+  }, [el, onClose]);
 
   return (
     <goa-drawer
