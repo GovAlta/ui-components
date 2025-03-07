@@ -87,12 +87,11 @@
   let _leadingContentSlot = false;
   let _trailingContentSlot = false;
   let _debounceId: any;
-  let _inputEl: HTMLElement;
+  let _inputEl: HTMLInputElement;
   let _rootEl: HTMLElement;
   let _error = false;
   let _prevError = false;
   let _containerWidth = "";
-
 
   // ========
   // Reactive
@@ -141,8 +140,44 @@
     checkSlots();
     sendMountedMessage();
 
+    const hasLeadingIcon = !!leadingicon;
+    const hasTrailingIcon = !!trailingicon;
+    const isSearchType = type === "search";
+
     if (width.includes("%")) {
       _containerWidth = `width: ${width};`; // Set container width to the percentage
+    } else if (width.includes("px")) {
+      let extraWidth = 0;
+
+      if (hasLeadingIcon && !isSearchType) {
+        extraWidth += 44; // (24 + 20) Icon width + Padding between icon and input 8px + 12 px
+      }
+
+      if (hasTrailingIcon && hasLeadingIcon) {
+        extraWidth += 48; // (24 + 20 + 4) Icon width + Padding between icon and input 8px + 12 px + additional 4px
+      }
+
+      if (hasTrailingIcon && !hasLeadingIcon) {
+        extraWidth += 60;
+      }
+
+      if (hasLeadingIcon && isSearchType) {
+        extraWidth += 32;
+      }
+
+      const _adjustedInputWidth = parseInt(width) - extraWidth;
+      _containerWidth = `width: ${width};`;
+      if (_inputEl) {
+        _inputEl.style.width = `${_adjustedInputWidth}px`;
+        _inputEl.style.flexGrow = "0";
+      }
+    } else if (width.includes("ch")) {
+      if ((hasLeadingIcon && hasTrailingIcon) || isSearchType) {
+        const numericWidthinCH = parseInt(width) + 10;
+        _containerWidth = `width: ${numericWidthinCH}ch;`;
+      } else {
+        _containerWidth = `--width: ${width};`;
+      }
     } else {
       _containerWidth = `--width: ${width};`; // Keep using the CSS variable
     }
@@ -178,6 +213,11 @@
   function setValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
+    dispatchOnChange(value);
+  }
+
+  function dispatchOnChange(value: string) {
+    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
   }
 
   // Relay message up the chain to allow any parent element to have a reference to the input element
@@ -377,7 +417,6 @@
 
 <!-- Styles -->
 <style>
-
   :host {
     box-sizing: border-box; /* border box: the element's specified width and height include the content, padding, and border. The margin is still added */
   }
@@ -388,7 +427,6 @@
     display: inline-block;
     max-width: 100%;
   }
-
 
   @media not (--mobile) {
     .container {
@@ -424,9 +462,7 @@
   }
   .goa-input:not(.error):has(input:focus-visible) {
     /* focus border(s) */
-    box-shadow:
-      var(--goa-text-input-border),
-      var(--goa-text-input-border-focus);
+    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* Error state */
@@ -446,9 +482,7 @@
 
   /* Focus state (including when in error state) */
   .goa-input:has(input:focus-visible) {
-    box-shadow:
-      var(--goa-text-input-border),
-      var(--goa-text-input-border-focus);
+    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* type=range does not have an outline/box-shadow */
@@ -483,8 +517,12 @@
     width: calc(var(--width) + 1ch);
     max-width: 100%;
     flex: 1 1 auto;
+    min-width: 0;
     z-index: 1;
     border-radius: var(--goa-text-input-border-radius);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   input,
   input:focus-visible,
@@ -581,16 +619,12 @@
   .input-leading-content:active,
   .input-leading-content:focus-visible,
   .input-leading-content:focus-within {
-    box-shadow:
-      var(--goa-text-input-border),
-      var(--goa-text-input-border-focus);
+    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
   .input-trailing-content:active,
   .input-trailing-content:focus-visible,
   .input-trailing-content:focus-within {
-    box-shadow:
-      var(--goa-text-input-border),
-      var(--goa-text-input-border-focus);
+    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* Hide main focus border for inputs with leading and trailing content */
@@ -639,6 +673,9 @@
   ::placeholder {
     color: var(--goa-text-input-color-text-placeholder);
     opacity: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* TODO add styling for autofill
