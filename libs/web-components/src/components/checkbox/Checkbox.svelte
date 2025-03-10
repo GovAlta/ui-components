@@ -16,6 +16,7 @@
     FieldsetResetFieldsMsg,
     FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
+
   // Required
   export let name: string;
 
@@ -85,6 +86,9 @@
         case FieldsetResetErrorsMsg:
           error = "false";
           break;
+        case FieldsetResetFieldsMsg:
+          onSetValue({ name, value: "" });
+          break;
         case FormFieldMountMsg:
           onFormFieldMount(data as FormFieldMountRelayDetail);
           break;
@@ -110,7 +114,7 @@
   function setCheckStatusByChildState(detail: FormFieldMountRelayDetail) {
     setTimeout(() => {
       // @ts-expect-error
-      checked = !checked && !!detail.el.value;
+      checked ||= !!detail.el.value;
     }, 1000);
   }
 
@@ -118,8 +122,6 @@
   function onFormFieldMount(detail: FormFieldMountRelayDetail) {
     // only save the child elements within the reveal slot
     if (!$$slots.reveal) return;
-    // don't save reference to itself
-    if (detail.name !== name) return;
     _formFields = [..._formFields, detail.el];
   }
 

@@ -19,7 +19,7 @@
     FieldsetResetErrorsMsg,
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
-    FieldsetErrorRelayDetail,
+    FieldsetErrorRelayDetail, FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
   type DateValue = {
@@ -83,6 +83,9 @@
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
+          break;
+        case FieldsetResetFieldsMsg:
+          onSetValue({name, value: ""})
           break;
       }
     });

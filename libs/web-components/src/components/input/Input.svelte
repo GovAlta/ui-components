@@ -87,12 +87,11 @@
   let _leadingContentSlot = false;
   let _trailingContentSlot = false;
   let _debounceId: any;
-  let _inputEl: HTMLElement;
+  let _inputEl: HTMLInputElement;
   let _rootEl: HTMLElement;
   let _error = false;
   let _prevError = false;
   let _containerWidth = "";
-
 
   // ========
   // Reactive
@@ -165,7 +164,7 @@
           error = "false";
           break;
         case FieldsetResetFieldsMsg:
-          setValue({ name, value: "" });
+          setValue({name, value: ""});
           break;
       }
     });
@@ -178,6 +177,11 @@
   function setValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
+    dispatchOnChange(value);
+  }
+
+  function dispatchOnChange(value: string) {
+    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
   }
 
   // Relay message up the chain to allow any parent element to have a reference to the input element
@@ -307,6 +311,7 @@
         class="leading-icon"
         data-testid="leading-icon"
         type={leadingicon}
+        tabindex="-1"
       />
     {/if}
 
@@ -347,6 +352,7 @@
         size="medium"
         type={trailingicon}
         arialabel={trailingiconarialabel}
+        tabindex="-1"
       />
     {/if}
 
@@ -377,7 +383,6 @@
 
 <!-- Styles -->
 <style>
-
   :host {
     box-sizing: border-box; /* border box: the element's specified width and height include the content, padding, and border. The margin is still added */
   }
@@ -388,7 +393,6 @@
     display: inline-block;
     max-width: 100%;
   }
-
 
   @media not (--mobile) {
     .container {
@@ -424,9 +428,7 @@
   }
   .goa-input:not(.error):has(input:focus-visible) {
     /* focus border(s) */
-    box-shadow:
-      var(--goa-text-input-border),
-      var(--goa-text-input-border-focus);
+    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* Error state */
@@ -446,9 +448,7 @@
 
   /* Focus state (including when in error state) */
   .goa-input:has(input:focus-visible) {
-    box-shadow:
-      var(--goa-text-input-border),
-      var(--goa-text-input-border-focus);
+    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* type=range does not have an outline/box-shadow */
@@ -581,16 +581,12 @@
   .input-leading-content:active,
   .input-leading-content:focus-visible,
   .input-leading-content:focus-within {
-    box-shadow:
-      var(--goa-text-input-border),
-      var(--goa-text-input-border-focus);
+    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
   .input-trailing-content:active,
   .input-trailing-content:focus-visible,
   .input-trailing-content:focus-within {
-    box-shadow:
-      var(--goa-text-input-border),
-      var(--goa-text-input-border-focus);
+    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* Hide main focus border for inputs with leading and trailing content */

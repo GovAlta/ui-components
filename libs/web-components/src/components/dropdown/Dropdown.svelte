@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-dropdown" />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -30,7 +30,7 @@
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
     FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail,
+    FieldsetSetValueRelayDetail, FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
   interface EventHandler {
@@ -174,6 +174,9 @@
         case FieldsetResetErrorsMsg:
           error = "false";
           break;
+        case FieldsetResetFieldsMsg:
+          onSetValue({name,  value: ""})
+          break;
         case DropdownItemMountedMsg:
           onChildMounted(data as DropdownItemMountedRelayDetail);
           break;
@@ -284,6 +287,38 @@
     return `${maxWidth}ch`;
   }
 
+  function setHighlightedToSelected() {
+    if (!_selectedOption) {
+      _highlightedIndex = -1;
+      return;
+    }
+    const index = _filteredOptions.findIndex(
+      (option) => option.value === _selectedOption?.value,
+    );
+    _highlightedIndex = index;
+  }
+
+  function setHighlightedToBestMatch() {
+    if (_filteredOptions.length === 0) {
+      _highlightedIndex = -1;
+      return;
+    }
+    if (!_inputEl?.value || _inputEl.value === "") return;
+    const completeMatchIndex = _filteredOptions.findIndex((option) =>
+      isFilterMatch(option, _inputEl?.value || "", false),
+    );
+    if (completeMatchIndex >= 0) {
+      _highlightedIndex = completeMatchIndex;
+    } else {
+      const partialMatchIndex = _filteredOptions.findIndex((option) =>
+        isFilterMatch(option, _inputEl?.value || ""),
+      );
+      if (partialMatchIndex >= 0) {
+        _highlightedIndex = partialMatchIndex;
+      }
+    }
+  }
+
   // Change the direction of highlighted options for Arrow up and down
   function changeHighlightedOption(offset: number) {
     let index = _highlightedIndex + offset;
@@ -297,11 +332,12 @@
       index = _filterable ? 0 : items.length - 1;
     }
     _highlightedIndex = index;
-    scrollToOption(index);
+    scrollToHighlighted();
   }
 
-  function scrollToOption(index: number) {
-    const liNode = _menuEl.querySelector(
+  function scrollToHighlighted() {
+    const index = _highlightedIndex;
+    const liNode = _menuEl?.querySelector(
       `li[data-index="${index}"]`,
     ) as HTMLLIElement;
     if (!liNode) return;
@@ -335,21 +371,35 @@
     setTimeout(async () => {
       syncFilteredOptions();
       _isMenuVisible = true;
-      // _inputEl?.focus();
+      _inputEl?.focus();
+      setTimeout(() => {
+        if (_inputEl?.value === "" && _selectedOption) {
+          reset();
+        }
+        setHighlightedToBestMatch();
+        scrollToHighlighted();
+      }, 0);
     }, 0);
   }
 
   function hideMenu() {
     _isMenuVisible = false;
+    if (_filterable) {
+      setDisplayedValue();
+    }
   }
 
-  function isFilterMatch(option: Option, filter: string) {
+  function isFilterMatch(option: Option, filter: string, partialMatch = true) {
     // empty string matches all
     if (filter.length === 0) return true;
 
     let value = option.filter || option.label || option.value;
     value = value.toLowerCase();
     filter = filter.toLowerCase().trim();
+
+    if (!partialMatch) {
+      return value === filter;
+    }
 
     return value.startsWith(filter) || value.includes(" " + filter);
   }
@@ -387,33 +437,49 @@
     _selectedOption = option;
 
     if (!_native) {
-      hideMenu();
       syncFilteredOptions();
       setDisplayedValue();
+      setHighlightedToSelected();
+      hideMenu();
     }
     dispatchValue(option.value);
   }
 
-  // Fires when on blur and changes have been made AND when the browser auto-fill is performed
-  async function onChange(_e: Event) {
-    if (!_filterable) return;
+  function onFilteredOptionClick(option: Option) {
+    _isDirty = true;
+    onSelect(option);
+  }
 
-    await tick();
+  // Auto-select matching option from input after browser autofill/autocomplete or paste from clipboard.
+  function onInputChange(e: Event) {
+    if (_disabled || !_filterable) return;
+    const isAutofilled =
+      testid === "test-autofill" ||
+      _inputEl.matches(":-webkit-autofill") ||
+      _inputEl.matches(":autofill");
+    if (!isAutofilled) return;
+
     syncFilteredOptions();
 
-    if (_filteredOptions.length === 1) {
-      const option = _filteredOptions[0];
-      _selectedOption = option;
-      dispatchValue(option.value);
-      setDisplayedValue();
-      setTimeout(() => {
-        hideMenu();
-      }, 10);
-    } else {
-      _selectedOption = undefined;
-      setDisplayedValue();
-      dispatchValue("");
+    const inputValue = _inputEl?.value || "";
+    const hasInputValue = inputValue !== "";
+    const matchedOption = hasInputValue
+      ? _filteredOptions.find((option) =>
+          isFilterMatch(option, inputValue, false),
+        )
+      : null;
+
+    if (!_selectedOption) {
+      if (matchedOption) {
+        onFilteredOptionClick(matchedOption);
+      } else {
+        reset();
+      }
     }
+
+    setTimeout(() => {
+      hideMenu();
+    }, 2);
   }
 
   function onInputKeyUp(e: KeyboardEvent) {
@@ -430,9 +496,9 @@
 
   function onClearIconKeyDown(e: KeyboardEvent) {
     if (e.key === "Enter" || e.key === " ") {
-      e.stopPropagation();
       reset();
       showMenu();
+      e.stopPropagation();
     }
   }
 
@@ -462,9 +528,14 @@
     setDisplayedValue();
   }
 
-  async function onChevronClick(e: Event) {
-    await tick();
-    showMenu();
+  function onChevronClick(e: Event) {
+    if (_isMenuVisible) {
+      _inputEl?.focus();
+      hideMenu();
+    } else {
+      showMenu();
+    }
+    e.preventDefault();
     e.stopPropagation();
   }
 
@@ -527,9 +598,6 @@
 
     handleKeyUp(e: KeyboardEvent) {
       switch (e.key) {
-        case "Enter":
-          this.onEnter(e);
-          break;
         case "ArrowUp":
           this.onArrow(e, "up");
           break;
@@ -548,6 +616,9 @@
         case "Tab":
           // ignore tab
           break;
+        case "Enter":
+          // ignore enter (to avoid onKeyUp)
+          break;
         default:
           this.onKeyUp(e);
           break;
@@ -556,6 +627,9 @@
 
     handleKeyDown(e: KeyboardEvent) {
       switch (e.key) {
+        case "Enter":
+          this.onEnter(e);
+          break;
         case "Escape":
           this.onEscape(e);
           break;
@@ -710,8 +784,9 @@
           {name}
           on:keydown={onInputKeyDown}
           on:keyup={onInputKeyUp}
-          on:change={onChange}
+          on:change={onInputChange}
           on:focus={onFocus}
+          on:click={!_filterable && onChevronClick}
         />
 
         {#if _inputEl?.value && _filterable}
@@ -758,20 +833,19 @@
         aria-label={arialabel || name}
         aria-labelledby={arialabelledby}
         on:focus={onFocus}
+        on:mousedown={(e) => e.preventDefault()}
         style={`
-            outline: none;
-            overflow-y: auto;
-            max-height: ${maxheight};
-          `}
+          outline: none;
+          overflow-y: auto;
+          max-height: ${maxheight};
+        `}
       >
         {#each _filteredOptions as option, index (index)}
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <li
             id={option.value}
-            aria-selected={_selectedOption?.value ===
-              (option.label || option.value)}
-            class:selected={_selectedOption?.value ===
-              (option.label || option.value)}
+            aria-selected={_selectedOption?.value === option.value}
+            class:selected={_selectedOption?.value === option.value}
             class="dropdown-item"
             class:dropdown-item--highlighted={index === _highlightedIndex}
             data-index={index}
@@ -779,9 +853,10 @@
             data-value={option.value}
             role="option"
             style="display: block"
-            on:click={() => {
-              _isDirty = true;
-              onSelect(option);
+            on:click={(e) => {
+              onFilteredOptionClick(option);
+              _inputEl?.focus();
+              e.stopPropagation();
             }}
           >
             {option.label || option.value}
@@ -808,7 +883,6 @@
     cursor: pointer;
     width: var(--width, 100%);
     max-width: 100%;
-
   }
 
   .dropdown-input-group {
@@ -825,22 +899,18 @@
     width: 100%;
   }
   .dropdown-input-group:hover {
-    box-shadow: var( --goa-dropdown-border-hover);
+    box-shadow: var(--goa-dropdown-border-hover);
     border: none;
   }
   .dropdown-input-group:has(input:focus-visible) {
-    box-shadow:
-      var(--goa-dropdown-border),
-      var(--goa-dropdown-border-focus);
+    box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
   }
   .dropdown-input-group.error,
   .dropdown-input-group.error:hover {
     box-shadow: var(--goa-dropdown-border-error);
   }
   .dropdown-input-group.error:has(:focus-visible) {
-    box-shadow:
-      var(--goa-dropdown-border),
-      var(--goa-dropdown-border-focus);
+    box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
   }
   @container not (--mobile) {
     .dropdown-input-group {
@@ -850,7 +920,7 @@
 
   .dropdown-icon--arrow,
   .dropdown-icon--clear {
-    margin-right: var(--goa-dropdown-space-icon-text);
+    padding-right: var(--goa-dropdown-space-icon-text);
   }
 
   /* TODO: add indicator to when the reset button has focus state */
@@ -923,7 +993,7 @@
     white-space: normal; /* Allows text to wrap */
     word-break: break-word; /* Ensures long words break onto the next line */
     overflow-wrap: break-word; /* Alternative for word wrapping */
-    }
+  }
 
   .dropdown-item:hover,
   .dropdown-item--highlighted {
@@ -992,9 +1062,7 @@
   }
 
   .dropdown-native:has(:focus-visible) {
-    box-shadow:
-      var(--goa-dropdown-border),
-      var(--goa-dropdown-border-focus);
+    box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
   }
 
   goa-icon:focus-visible {
@@ -1005,5 +1073,4 @@
     color: var(--goa-dropdown-color-text-placeholder);
     opacity: 1;
   }
-
 </style>

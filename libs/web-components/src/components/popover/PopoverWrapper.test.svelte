@@ -2,16 +2,14 @@
 
 <!-- Script -->
 <script lang="ts">
+  import Popover from "./Popover.svelte";
+
   export let content: string = "";
   export let targetTrigger: string = "";
 </script>
 
 <!-- HTML -->
-<goa-popover>
-  {#if content}
-    <div slot="content">{content}</div>
-  {/if}
-  {#if targetTrigger}
-    <div slot="target">{targetTrigger}</div>
-  {/if}
-</goa-popover>
+<Popover>
+  <div slot="target">{@html targetTrigger}</div>
+  {@html content}
+</Popover>
