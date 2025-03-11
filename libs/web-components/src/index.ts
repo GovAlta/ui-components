@@ -78,3 +78,5 @@ export { default as Tooltip } from "./components/tooltip/Tooltip.svelte";
 export { default as TwoColumnLayout } from "./layouts/two-column-layout/TwoColumnLayout.svelte";
 export { default as ExperimentalFormStepper } from "./experimental/ExperimentalFormStepper.svelte";
 export { default as ExperimentalFormStep } from "./experimental/ExperimentalFormStep.svelte";
+export { default as WorkSideMenu } from "./components/work-side-menu/WorkSideMenu.svelte";
+export { default as WorkSideMenuItem } from "./components/work-side-menu/WorkSideMenuItem.svelte";
