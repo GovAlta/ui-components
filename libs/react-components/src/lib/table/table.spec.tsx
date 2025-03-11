@@ -23,12 +23,12 @@ describe("Table", () => {
   it("should call onSort when _sort event is triggered", () => {
     const onSort = vi.fn();
     const { baseElement } = render(<Table onSort={onSort} />);
-    const table = baseElement.querySelector("goa-table");
 
+    const table = baseElement.querySelector("goa-table");
     const event: GoabTableOnSortDetail = { sortBy: "name", sortDir: 1 };
     expect(table).toBeTruthy();
-    table && fireEvent(table, new CustomEvent("_sort", { detail: event }));
 
+    table && fireEvent(table, new CustomEvent("_sort", { detail: event }));
     expect(onSort).toHaveBeenCalledWith(event);
   });
 
