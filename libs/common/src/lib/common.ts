@@ -978,3 +978,7 @@ export type GoabFormOnStateChange = {
   id: string;
   state: Record<string, Record<string, GoabFormField>>;
 };
+
+// Work side menu
+export type GoabWorkSideMenuItemVariation = "normal" | "submenu";
+export type GoabWorkSideMenuItemType = "normal" | "emergency" | "success";
