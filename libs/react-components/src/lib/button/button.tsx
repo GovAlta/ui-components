@@ -6,12 +6,13 @@ import {
   GoabIconType,
   Margins,
 } from "@abgov/ui-components-common";
+import { fromOptionalBoolean } from "../../utils";
 
 interface WCProps extends Margins {
   type?: GoabButtonType;
   size?: GoabButtonSize;
   variant?: GoabButtonVariant;
-  disabled?: boolean;
+  disabled?: string;
   leadingicon?: string;
   trailingicon?: string;
   width?: string;
@@ -42,8 +43,8 @@ export interface GoabButtonProps extends Margins {
 }
 
 export function GoabButton({
-  disabled = false,
-  type = "primary",
+  disabled,
+  type,
   size,
   variant,
   leadingIcon,
@@ -83,7 +84,7 @@ export function GoabButton({
       type={type}
       size={size}
       variant={variant}
-      disabled={disabled}
+      disabled={fromOptionalBoolean(disabled)}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
       width={width}

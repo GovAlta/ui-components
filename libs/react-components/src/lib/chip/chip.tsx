@@ -1,12 +1,13 @@
 import { GoabChipTheme, GoabChipVariant, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
+import { fromOptionalBoolean } from "../../utils";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
-  leadingicon: string;
-  icontheme: GoabChipTheme;
-  error: boolean;
-  deletable: boolean;
+  leadingicon?: string;
+  icontheme?: GoabChipTheme;
+  error?: string;
+  deletable?: string;
   content: string;
   variant?: GoabChipVariant;
   testid?: string;
@@ -33,10 +34,10 @@ export interface GoabChipProps extends Margins {
 }
 
 export const GoabChip = ({
-  leadingIcon = "",
-  iconTheme = "outline",
-  deletable = false,
-  error = false,
+  leadingIcon,
+  iconTheme,
+  deletable,
+  error,
   variant,
   content,
   onClick,
@@ -67,8 +68,8 @@ export const GoabChip = ({
       ref={el}
       leadingicon={leadingIcon}
       icontheme={iconTheme}
-      error={error}
-      deletable={deletable}
+      error={fromOptionalBoolean(error)}
+      deletable={fromOptionalBoolean(deletable)}
       content={content}
       variant={variant}
       mt={mt}

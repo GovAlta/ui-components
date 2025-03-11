@@ -10,6 +10,7 @@ describe("Popover", () => {
     const el = baseElement.querySelector("goa-popover");
     expect(el?.querySelector("[slot='target']")?.innerHTML).toContain("Click Action");
     expect(baseElement.innerHTML).toContain("The content");
+    expect(el?.getAttribute("padded")).toBeNull();
   });
 
   it("should bind all web-component attributes", () => {
@@ -19,7 +20,7 @@ describe("Popover", () => {
         maxWidth="500px"
         minWidth="100px"
         testId="foo"
-        padded={false}
+        padded
       >
         The content
       </GoabPopover>,
@@ -28,6 +29,6 @@ describe("Popover", () => {
     const el = baseElement.querySelector("goa-popover");
     expect(el?.getAttribute("maxwidth")).toBe("500px");
     expect(el?.getAttribute("minwidth")).toBe("100px");
-    expect(el?.getAttribute("padded")).toBe("false");
+    expect(el?.getAttribute("padded")).toBe("true");
   });
 });

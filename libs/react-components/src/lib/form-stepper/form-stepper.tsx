@@ -2,7 +2,7 @@ import { GoabFormStepperOnChangeDetail, Margins } from "@abgov/ui-components-com
 import { ReactNode, useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
-  ref?: React.MutableRefObject<HTMLElement | null>;
+  ref?: React.RefObject<HTMLElement | null>;
   step?: number;
   testid?: string;
 }

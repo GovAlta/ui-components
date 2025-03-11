@@ -5,7 +5,7 @@ interface WCProps {
   url?: string;
   maxcontentwidth?: string;
   fullmenubreakpoint?: number;
-  hasmenuclickhandler?: boolean;
+  hasmenuclickhandler?: string;
   ref: React.RefObject<HTMLElement | null>;
   testid?: string;
 }
@@ -65,7 +65,7 @@ export function GoabAppHeader({
       fullmenubreakpoint={fullMenuBreakpoint}
       maxcontentwidth={maxContentWidth}
       testid={testId}
-      hasmenuclickhandler={!!onMenuClick}
+      hasmenuclickhandler={onMenuClick ? "true" : "false"}
     >
       {children}
     </goa-app-header>

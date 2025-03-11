@@ -2,6 +2,7 @@ import {
   GoabCircularProgressSize,
   GoabCircularProgressVariant,
 } from "@abgov/ui-components-common";
+import { fromOptionalBoolean } from "../../utils";
 
 interface WCProps {
   variant?: GoabCircularProgressVariant;
@@ -40,7 +41,7 @@ export const GoabCircularProgress = ({
 }: GoabCircularProgressProps) => {
   return (
     <goa-circular-progress
-      visible={visible ? "true" : "false"}
+      visible={fromOptionalBoolean(visible)}
       message={message}
       progress={progress}
       variant={variant}

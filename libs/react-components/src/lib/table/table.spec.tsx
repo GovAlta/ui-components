@@ -4,10 +4,20 @@ import Table from "./table";
 import { GoabTableOnSortDetail } from "@abgov/ui-components-common";
 
 describe("Table", () => {
-
-  it("should render successfully", () => {
+  it("should render", () => {
     const { baseElement } = render(<Table />);
-    expect(baseElement).toBeTruthy();
+
+    const table = baseElement.querySelector("goa-table");
+    expect(table?.getAttribute("stickyHeader")).toBeNull();
+  });
+
+  it("should render with properties", () => {
+    const { baseElement } = render(<Table stickyHeader />);
+
+    const table = baseElement.querySelector("goa-table");
+    expect(table?.getAttribute("stickyHeader")).toBeNull();
+    // TODO: Enable this later if needed
+    // expect(table?.getAttribute("stickyHeader")).toBe("true");
   });
 
   it("should call onSort when _sort event is triggered", () => {
@@ -17,12 +27,7 @@ describe("Table", () => {
 
     const event: GoabTableOnSortDetail = { sortBy: "name", sortDir: 1 };
     expect(table).toBeTruthy();
-    table && fireEvent(
-      table,
-      new CustomEvent("_sort", {
-        detail: event
-      })
-    );
+    table && fireEvent(table, new CustomEvent("_sort", { detail: event }));
 
     expect(onSort).toHaveBeenCalledWith(event);
   });
@@ -32,13 +37,13 @@ describe("Table", () => {
     const table = baseElement.querySelector("goa-table");
 
     expect(table).toBeTruthy();
-    expect(() =>
-        table && fireEvent(
+    expect(
+      () =>
+        table &&
+        fireEvent(
           table,
-          new CustomEvent("_sort", {
-            detail: { sortBy: "age", sortDir: -1 }
-          })
-        )
+          new CustomEvent("_sort", { detail: { sortBy: "age", sortDir: -1 } }),
+        ),
     ).not.toThrow();
   });
 });

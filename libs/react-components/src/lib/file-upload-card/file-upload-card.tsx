@@ -2,7 +2,7 @@ import {
   GoabFileUploadOnCancelDetail,
   GoabFileUploadOnDeleteDetail,
 } from "@abgov/ui-components-common";
-import { useEffect, useRef, type JSX } from "react";
+import { useEffect, useRef } from "react";
 
 interface WCProps {
   ref: React.RefObject<HTMLElement | null>;

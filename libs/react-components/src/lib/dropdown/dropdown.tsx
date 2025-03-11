@@ -4,23 +4,24 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { fromOptionalBoolean } from "../../utils";
 
 interface WCProps extends Margins {
-  ref: React.MutableRefObject<HTMLElement | null>;
+  ref: React.RefObject<HTMLElement | null>;
   arialabel?: string;
   arialabelledby?: string;
-  disabled?: boolean;
-  error?: boolean;
-  filterable?: boolean;
+  disabled?: string;
+  error?: string;
+  filterable?: string;
   leadingicon?: string;
   maxheight?: string;
-  multiselect?: boolean;
+  multiselect?: string;
   name?: string;
-  native?: boolean;
+  native?: string;
   placeholder?: string;
   value?: string;
   width?: string;
-  relative?: boolean;
+  relative?: string;
   id?: string;
   testid?: string;
 }
@@ -92,21 +93,21 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
       value={stringify(props.value)}
       arialabel={props.ariaLabel}
       arialabelledby={props.ariaLabelledBy}
-      disabled={props.disabled}
-      error={props.error}
-      filterable={props.filterable}
+      disabled={fromOptionalBoolean(props.disabled)}
+      error={fromOptionalBoolean(props.error)}
+      filterable={fromOptionalBoolean(props.filterable)}
       leadingicon={props.leadingIcon}
       maxheight={props.maxHeight}
       mb={props.mb}
       ml={props.ml}
       mr={props.mr}
       mt={props.mt}
-      multiselect={props.multiselect}
-      native={props.native}
+      multiselect={fromOptionalBoolean(props.multiselect)}
+      native={fromOptionalBoolean(props.native)}
       placeholder={props.placeholder}
       testid={props.testId}
       width={props.width}
-      relative={props.relative}
+      relative={fromOptionalBoolean(props.relative)}
       id={props.id}
     >
       {props.children}

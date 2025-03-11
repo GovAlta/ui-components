@@ -1,9 +1,10 @@
 import { Margins } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
+import { fromOptionalBoolean } from "../../utils";
 
 interface WCProps extends Margins {
   heading: string;
-  open?: boolean;
+  open?: string;
   maxwidth?: string;
   testid?: string;
 }
@@ -30,7 +31,7 @@ export function GoabDetails(props: GoabDetailsProps) {
   return (
     <goa-details
       heading={props.heading}
-      open={props.open}
+      open={fromOptionalBoolean(props.open)}
       maxwidth={props.maxWidth}
       testid={props.testId}
       mt={props.mt}

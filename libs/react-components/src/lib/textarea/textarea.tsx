@@ -5,6 +5,7 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { fromOptionalBoolean } from "../../utils";
 
 interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
@@ -12,9 +13,9 @@ interface WCProps extends Margins {
   value?: string;
   placeholder?: string;
   rows?: number;
-  error?: boolean;
-  readOnly?: boolean;
-  disabled?: boolean;
+  error?: string;
+  readOnly?: string;
+  disabled?: string;
   width?: string;
   maxwidth?: string;
   arialabel?: string;
@@ -115,13 +116,13 @@ export function GoabTextarea({
       placeholder={placeholder}
       value={value}
       rows={rows}
-      readOnly={readOnly}
-      disabled={disabled}
+      readOnly={fromOptionalBoolean(readOnly)}
+      disabled={fromOptionalBoolean(disabled)}
       countby={countBy}
       maxcount={maxCount}
       width={width}
       maxwidth={maxWidth}
-      error={error}
+      error={fromOptionalBoolean(error)}
       testid={testId}
       arialabel={ariaLabel}
       mt={mt}

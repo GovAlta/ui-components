@@ -6,9 +6,9 @@ import {
 import { ReactNode, useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
-  ref?: React.MutableRefObject<HTMLElement | null>;
+  ref?: React.RefObject<HTMLElement | null>;
   width?: string;
-  stickyheader?: boolean;
+  stickyheader?: string;
   variant?: GoabTableVariant;
   testid?: string;
 }
@@ -26,7 +26,7 @@ declare module "react" {
 export interface GoabTableProps extends Margins {
   width?: string;
   onSort?: (detail: GoabTableOnSortDetail) => void;
-  // stickyHeader?: boolean; TODO: enable this later
+  stickyHeader?: boolean;
   variant?: GoabTableVariant;
   testId?: string;
   children?: ReactNode;
@@ -57,7 +57,8 @@ export function GoabTable({ onSort, ...props }: GoabTableProps) {
     <goa-table
       ref={ref}
       width={props.width}
-      stickyheader={false}
+      // TODO: Enable this later if needed
+      // stickyheader={fromOptionalBoolean(props.stickyHeader)}
       variant={props.variant}
       testid={props.testId}
       mt={props.mt}

@@ -1,5 +1,4 @@
 import { GoabFormStepStatus } from "@abgov/ui-components-common";
-import type { JSX } from "react";
 
 interface WCProps {
   text: string;

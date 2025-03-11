@@ -5,7 +5,7 @@ import {
 import { useEffect, useRef } from "react";
 
 interface WCProps {
-  ref: React.MutableRefObject<HTMLElement | null>;
+  ref: React.RefObject<HTMLElement | null>;
   variant?: GoabFileUploadInputVariant;
   accept?: string;
   maxfilesize?: string;

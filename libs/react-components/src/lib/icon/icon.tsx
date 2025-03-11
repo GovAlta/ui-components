@@ -7,6 +7,7 @@ import {
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
+import { fromOptionalBoolean } from "../../utils";
 
 interface IonIconProps {
   name: GoabIconType | GoabIconFilledType;
@@ -37,7 +38,7 @@ export interface GoabIconProps extends Margins {
   type: GoabIconType;
   size?: GoabIconSize;
   theme?: GoabIconTheme;
-  inverted?: string;
+  inverted?: string | boolean; // TODO: Change type to only boolean
   fillColor?: string;
   opacity?: number;
   title?: string;
@@ -77,7 +78,8 @@ export function GoabIcon({
       type={type}
       theme={theme}
       size={size}
-      inverted={inverted}
+      inverted={typeof inverted === "boolean" ? fromOptionalBoolean(inverted) : inverted}
+      // inverted={fromOptionalBoolean(inverted)}  // TODO: Change type to only boolean
       fillcolor={fillColor}
       opacity={opacity}
       title={title}

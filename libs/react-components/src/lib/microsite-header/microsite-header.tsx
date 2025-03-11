@@ -18,7 +18,7 @@ interface WCProps {
   maxcontentwidth?: string;
   feedbackurltarget?: GoabLinkTarget;
   headerurltarget?: GoabLinkTarget;
-  hasfeedbackhandler?: boolean;
+  hasfeedbackhandler?: string;
   ref: React.RefObject<HTMLElement | null>;
   testid?: string;
 }
@@ -74,7 +74,7 @@ export function GoabMicrositeHeader({
       maxcontentwidth={maxContentWidth}
       feedbackurltarget={feedbackUrlTarget}
       headerurltarget={headerUrlTarget}
-      hasfeedbackhandler={!!onFeedbackClick}
+      hasfeedbackhandler={onFeedbackClick ? "true" : "false"}
     >
       {version && typeof version !== "string" && <div slot="version">{version}</div>}
     </goa-microsite-header>

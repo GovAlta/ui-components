@@ -5,6 +5,7 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { fromOptionalBoolean } from "../../utils";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -12,7 +13,7 @@ interface WCProps extends Margins {
   size?: GoabIconSize;
   variant?: GoabIconButtonVariant;
   title?: string;
-  disabled?: boolean;
+  disabled?: string;
   arialabel?: string;
   testid?: string;
 }
@@ -76,7 +77,7 @@ export function GoabIconButton({
     <goa-icon-button
       ref={ref}
       icon={icon}
-      disabled={disabled}
+      disabled={fromOptionalBoolean(disabled)}
       variant={variant}
       size={size}
       title={title}

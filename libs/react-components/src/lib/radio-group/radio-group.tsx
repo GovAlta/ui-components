@@ -4,6 +4,7 @@ import {
   GoabRadioGroupOrientation,
   Margins,
 } from "@abgov/ui-components-common";
+import { fromOptionalBoolean } from "../../utils";
 
 export * from "./radio";
 
@@ -12,8 +13,8 @@ interface WCProps extends Margins {
   name: string;
   value?: string;
   orientation?: GoabRadioGroupOrientation;
-  disabled?: boolean;
-  error?: boolean;
+  disabled?: string;
+  error?: string;
   arialabel?: string;
   testid?: string;
 }
@@ -44,8 +45,8 @@ export function GoabRadioGroup({
   value,
   children,
   orientation,
-  disabled = false,
-  error = false,
+  disabled,
+  error,
   testId,
   ariaLabel,
   mt,
@@ -83,8 +84,8 @@ export function GoabRadioGroup({
       name={name}
       value={value}
       orientation={orientation}
-      disabled={disabled}
-      error={error}
+      disabled={fromOptionalBoolean(disabled)}
+      error={fromOptionalBoolean(error)}
       arialabel={ariaLabel}
       mt={mt}
       mr={mr}

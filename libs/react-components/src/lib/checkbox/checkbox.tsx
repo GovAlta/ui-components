@@ -1,5 +1,6 @@
 import { GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { fromOptionalBoolean } from "../../utils";
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -14,11 +15,11 @@ interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
   id?: string;
   name: string;
-  checked: boolean;
-  disabled?: boolean;
-  error?: boolean;
+  checked?: string;
+  disabled?: string;
+  error?: string;
   text?: string;
-  value?: string | number | boolean;
+  value?: string | number;
   arialabel?: string;
   description?: string | React.ReactNode;
   maxwidth?: string;
@@ -88,11 +89,11 @@ export function GoabCheckbox({
       ref={el}
       id={id}
       name={name}
-      error={error}
-      checked={checked || false}
-      disabled={disabled}
+      error={fromOptionalBoolean(error)}
+      checked={fromOptionalBoolean(checked)}
+      disabled={fromOptionalBoolean(disabled)}
       text={text}
-      value={value}
+      value={typeof value === "boolean" ? fromOptionalBoolean(value) : value}
       arialabel={ariaLabel}
       description={typeof description === "string" ? description : undefined}
       maxwidth={maxWidth}
