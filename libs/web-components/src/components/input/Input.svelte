@@ -164,7 +164,7 @@
           error = "false";
           break;
         case FieldsetResetFieldsMsg:
-          setValue({name, value: ""});
+          setValue({ name, value: "" });
           break;
       }
     });
@@ -327,7 +327,7 @@
       {autocapitalize}
       {name}
       {type}
-      value={value || ""}
+      value={value ?? ""}
       {placeholder}
       {min}
       {max}
