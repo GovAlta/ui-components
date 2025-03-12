@@ -99,3 +99,43 @@ describe("GoabButton", () => {
     expect(onClick).toBeCalled();
   });
 });
+
+describe("GoabButton disabled attribute", () => {
+  it("should set disabled attribute correctly when disabled=true", () => {
+    const { container } = render(
+      <GoabButton disabled={true}>Disabled Button</GoabButton>
+    );
+    const el = container.querySelector("goa-button");
+
+    expect(el?.getAttribute("disabled")).toBe("true");
+  });
+
+  it("should not include disabled attribute when disabled=false", () => {
+    const { container } = render(
+      <GoabButton disabled={false}>Enabled Button</GoabButton>
+    );
+    const el = container.querySelector("goa-button");
+
+    // disabled attribute should not be present
+    expect(el?.hasAttribute("disabled")).toBe(false);
+  });
+
+  it("should handle toggle between disabled states", () => {
+    // First render with disabled=true
+    const { container, rerender } = render(
+      <GoabButton disabled={true}>Toggle Button</GoabButton>
+    );
+    let el = container.querySelector("goa-button");
+    expect(el?.getAttribute("disabled")).toBe("true");
+
+    // Rerender with disabled=false
+    rerender(<GoabButton disabled={false}>Toggle Button</GoabButton>);
+    el = container.querySelector("goa-button");
+    expect(el?.hasAttribute("disabled")).toBe(false);
+
+    // Rerender with disabled=true again
+    rerender(<GoabButton disabled={true}>Toggle Button</GoabButton>);
+    el = container.querySelector("goa-button");
+    expect(el?.getAttribute("disabled")).toBe("true");
+  });
+});
