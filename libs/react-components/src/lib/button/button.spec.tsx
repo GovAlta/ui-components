@@ -6,7 +6,9 @@ import { describe, it, expect, vi } from "vitest";
 describe("GoA Button", () => {
   const buttonText = "Test Title";
 
-  const noop = () => { /* do nothing */ };
+  const noop = () => {
+    /* do nothing */
+  };
 
   it("should render the properties", () => {
     const { container } = render(
@@ -21,7 +23,7 @@ describe("GoA Button", () => {
         mr="m"
         mb="l"
         ml="xl"
-      />
+      />,
     );
     const el = container.querySelector("goa-button");
 
@@ -40,7 +42,13 @@ describe("GoA Button", () => {
 
   it("should render content", () => {
     const { baseElement } = render(
-      <GoAButton onClick={() => { /* do nothing */ }}>{buttonText}</GoAButton>
+      <GoAButton
+        onClick={() => {
+          /* do nothing */
+        }}
+      >
+        {buttonText}
+      </GoAButton>,
     );
 
     expect(baseElement).toBeTruthy();
@@ -53,7 +61,7 @@ describe("GoA Button", () => {
         const { container } = render(
           <GoAButton size={size} onClick={noop}>
             Button
-          </GoAButton>
+          </GoAButton>,
         );
 
         const button = container.querySelector("goa-button");
@@ -70,25 +78,59 @@ describe("GoA Button", () => {
           const { container } = render(
             <GoAButton type={type} onClick={noop}>
               Button
-            </GoAButton>
+            </GoAButton>,
           );
           const button = container.querySelector("goa-button");
 
           expect(button).toBeTruthy();
           expect(button?.getAttribute("type")).toEqual(type);
         });
-      }
+      },
     );
   });
 
   it("responds to events", async () => {
     const onClick = vi.fn();
-    const { container } = render(
-      <GoAButton onClick={onClick}>Button</GoAButton>
-    );
+    const { container } = render(<GoAButton onClick={onClick}>Button</GoAButton>);
     const button = container.querySelector("goa-button");
     expect(button).toBeTruthy();
     button && fireEvent(button, new CustomEvent("_click"));
     expect(onClick).toBeCalled();
+  });
+});
+
+describe("GoabButton disabled attribute", () => {
+  it("should set disabled attribute correctly when disabled=true", () => {
+    const { container } = render(<GoAButton disabled={true}>Disabled Button</GoAButton>);
+    const el = container.querySelector("goa-button");
+
+    expect(el?.getAttribute("disabled")).toBe("true");
+  });
+
+  it("should not include disabled attribute when disabled=false", () => {
+    const { container } = render(<GoAButton disabled={false}>Enabled Button</GoAButton>);
+    const el = container.querySelector("goa-button");
+
+    // disabled attribute should not be present
+    expect(el?.hasAttribute("disabled")).toBe(false);
+  });
+
+  it("should handle toggle between disabled states", () => {
+    // First render with disabled=true
+    const { container, rerender } = render(
+      <GoAButton disabled={true}>Toggle Button</GoAButton>,
+    );
+    let el = container.querySelector("goa-button");
+    expect(el?.getAttribute("disabled")).toBe("true");
+
+    // Rerender with disabled=false
+    rerender(<GoAButton disabled={false}>Toggle Button</GoAButton>);
+    el = container.querySelector("goa-button");
+    expect(el?.hasAttribute("disabled")).toBe(false);
+
+    // Rerender with disabled=true again
+    rerender(<GoAButton disabled={true}>Toggle Button</GoAButton>);
+    el = container.querySelector("goa-button");
+    expect(el?.getAttribute("disabled")).toBe("true");
   });
 });
