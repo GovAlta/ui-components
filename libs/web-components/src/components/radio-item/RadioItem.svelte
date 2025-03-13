@@ -250,7 +250,7 @@
   }
 
   .description {
-    font: var(--description);
+    font: var(--goa-radio-description);
     margin-left: var(--goa-space-xl);
     margin-top: var(--goa-space-2xs);
     color: var(--goa-color-text-default);
