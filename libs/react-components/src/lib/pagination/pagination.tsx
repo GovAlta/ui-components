@@ -2,7 +2,7 @@ import { GoabPaginationOnChangeDetail, Margins } from "@abgov/ui-components-comm
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
-  ref?: React.RefObject<HTMLElement | undefined>;
+  ref?: React.RefObject<HTMLElement | null>;
   itemcount: number;
   perpagecount?: number;
   pagenumber: number;
