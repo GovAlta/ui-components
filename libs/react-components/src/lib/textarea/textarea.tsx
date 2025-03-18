@@ -117,7 +117,7 @@ export function GoabTextarea({
       value={value}
       rows={rows}
       readOnly={fromOptionalBoolean(readOnly)}
-      disabled={fromOptionalBoolean(disabled)}
+      disabled={fromOptionalBoolean(disabled, { omitIfFalse: true })}
       countby={countBy}
       maxcount={maxCount}
       width={width}

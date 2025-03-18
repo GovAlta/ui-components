@@ -84,7 +84,7 @@ export function GoabRadioGroup({
       name={name}
       value={value}
       orientation={orientation}
-      disabled={fromOptionalBoolean(disabled)}
+      disabled={fromOptionalBoolean(disabled, { omitIfFalse: true })}
       error={fromOptionalBoolean(error)}
       arialabel={ariaLabel}
       mt={mt}

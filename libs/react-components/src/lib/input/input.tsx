@@ -217,7 +217,7 @@ export function GoabInput({
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
       variant={variant}
-      disabled={fromOptionalBoolean(disabled)}
+      disabled={fromOptionalBoolean(disabled, { omitIfFalse: true })}
       readonly={fromOptionalBoolean(readonly)}
       placeholder={placeholder}
       error={fromOptionalBoolean(error)}

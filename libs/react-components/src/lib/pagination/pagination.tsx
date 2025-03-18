@@ -33,7 +33,7 @@ export interface GoabPaginationProps extends Margins {
 export type PaginationProps = GoabPaginationProps;
 
 export function GoabPagination({ onChange, ...props }: GoabPaginationProps) {
-  const ref = useRef<HTMLElement>(undefined);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!ref.current) {

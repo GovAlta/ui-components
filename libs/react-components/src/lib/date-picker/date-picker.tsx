@@ -76,7 +76,7 @@ export function GoabDatePicker({
       name={name}
       value={value?.toISOString() || ""}
       error={fromOptionalBoolean(error)}
-      disabled={fromOptionalBoolean(disabled)}
+      disabled={fromOptionalBoolean(disabled, { omitIfFalse: true })}
       min={min?.toISOString()}
       max={max?.toISOString()}
       testid={testId}

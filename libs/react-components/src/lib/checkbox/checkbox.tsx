@@ -91,7 +91,7 @@ export function GoabCheckbox({
       name={name}
       error={fromOptionalBoolean(error)}
       checked={fromOptionalBoolean(checked)}
-      disabled={fromOptionalBoolean(disabled)}
+      disabled={fromOptionalBoolean(disabled, { omitIfFalse: true })}
       text={text}
       value={typeof value === "boolean" ? fromOptionalBoolean(value) : value}
       arialabel={ariaLabel}

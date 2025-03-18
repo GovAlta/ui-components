@@ -77,7 +77,7 @@ export function GoabIconButton({
     <goa-icon-button
       ref={ref}
       icon={icon}
-      disabled={fromOptionalBoolean(disabled)}
+      disabled={fromOptionalBoolean(disabled, { omitIfFalse: true })}
       variant={variant}
       size={size}
       title={title}

@@ -61,7 +61,7 @@ export function GoabRadioItem({
       description={typeof description === "string" ? description : undefined}
       maxwidth={maxWidth}
       error={fromOptionalBoolean(error)}
-      disabled={fromOptionalBoolean(disabled)}
+      disabled={fromOptionalBoolean(disabled, { omitIfFalse: true })}
       checked={fromOptionalBoolean(checked)}
       arialabel={ariaLabel}
       mt={mt}
