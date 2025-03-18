@@ -408,9 +408,10 @@
     outline: none;
     transition: var(--goa-text-input-transition);
     background-clip: padding-box;
-    display: inline-flex;
+    display: flex;
     align-items: stretch;
     min-width: 100%;
+    min-height: 40px;
     background-color: var(--goa-text-input-color-bg);
     /* default border */
     box-shadow: var(--goa-text-input-border);
@@ -475,16 +476,22 @@
   }
 
   input {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     color: var(--goa-text-input-color-text);
     font: var(--goa-text-input-typography);
     padding: var(--goa-text-input-padding);
+    height: 40px;
     background-color: transparent;
     width: calc(var(--width) + 1ch);
     max-width: 100%;
-    flex: 1 1 auto;
+    flex: 1;
     z-index: 1;
     border-radius: var(--goa-text-input-border-radius);
+    box-sizing: border-box;
+    margin: 0;
+    appearance: none;
+    -webkit-appearance: none;
   }
   input,
   input:focus-visible,
@@ -525,6 +532,28 @@
   .input--disabled .trailing-icon {
     color: var(--goa-text-input-color-icon-disabled);
     cursor: default;
+  }
+
+  /* Date input specific styles */
+  input[type="date"] {
+    position: relative;
+    line-height: 38px;
+  }
+  input[type="date"]::-webkit-datetime-edit {
+    line-height: 38px;
+    padding: 0;
+    margin: 0;
+    height: 38px;
+    display: flex;
+    align-items: center;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: var(--goa-space-xs);
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 0;
   }
 
   .prefix,
