@@ -158,9 +158,6 @@ export type GoabTextAreaOnKeyPressDetail = {
 
 // Tabs
 
-export interface GoabTabsProps {
-  initialTab?: number;
-}
 export type GoabTabsOnChangeDetail = {
   tab: number;
 };
@@ -168,12 +165,6 @@ export type GoabTabsOnChangeDetail = {
 
 export type GoabTableVariant = "normal" | "relaxed";
 export type GoabTableSortDirection = "asc" | "desc" | "none";
-export interface GoabTableProps extends Margins {
-  width?: string;
-  onSort?: (sortBy: string, sortDir: number) => void;
-  variant?: GoabTableVariant;
-  testId?: string;
-}
 
 export type GoabTableOnSortDetail = {
   sortBy: string;
@@ -185,21 +176,7 @@ export type GoabTableOnSortDetail = {
 export type GoabSpacerHorizontalSpacing = Spacing | "fill";
 export type GoabSpacerVerticalSpacing = Spacing;
 
-export interface GoabSpacerProps {
-  hSpacing?: Spacing | "fill";
-  vSpacing?: Spacing;
-  testId?: string;
-}
-
 // Skeleton
-
-export interface GoabSkeletonProps extends Margins {
-  maxWidth?: string;
-  size?: GoabSkeletonSize;
-  lineCount?: number;
-  type: GoabSkeletonType;
-  testId?: string;
-}
 
 export type GoabSkeletonType =
   | "image"
@@ -220,27 +197,6 @@ export type GoabSkeletonSize = "1" | "2" | "3" | "4";
 
 export type GoabRadioGroupOrientation = "horizontal" | "vertical";
 
-export interface GoabRadioGroupProps extends Margins {
-  name: string;
-  value?: string;
-  disabled?: boolean;
-  orientation?: GoabRadioGroupOrientation;
-  testId?: string;
-  error?: boolean;
-  ariaLabel?: string;
-}
-
-export interface GoabRadioItemProps {
-  value?: string;
-  label?: string;
-  name?: string;
-  // description?: string | React.ReactNode;
-  disabled?: boolean;
-  checked?: boolean;
-  error?: boolean;
-  testId?: string;
-}
-
 // Progress
 
 export type GoabCircularProgressVariant = "fullscreen" | "inline";
@@ -249,14 +205,6 @@ export type GoabCircularProgressSize = "small" | "large";
 // Popover
 
 export type GoabPopoverPosition = "above" | "below" | "auto";
-
-export interface GoabPopoverProps extends Margins {
-  testId?: string;
-  maxWidth?: string;
-  padded?: boolean;
-  position?: GoabPopoverPosition;
-  relative?: boolean;
-}
 
 // Notification
 
@@ -309,64 +257,6 @@ export type OnChange<T = string> = (name: string, value: T) => void;
 export type OnFocus<T = string> = (name: string, value: T) => void;
 export type OnBlur<T = string> = (name: string, value: T) => void;
 export type OnKeyPress<T = string> = (name: string, value: T, key: string) => void;
-
-export interface GoabInputProps extends BaseProps {
-  onChange: OnChange<string>;
-  value?: string;
-  min?: number | string;
-  max?: number | string;
-  step?: number;
-  onFocus?: OnFocus<string>;
-  onBlur?: OnBlur<string>;
-  onKeyPress?: OnKeyPress<string>;
-}
-
-export interface GoabNumberInputProps extends BaseProps {
-  onChange: OnChange<number>;
-  value?: number;
-  min?: number;
-  max?: number;
-  step?: number;
-  onFocus?: OnFocus<number>;
-  onBlur?: OnBlur<number>;
-  onKeyPress?: OnKeyPress<number>;
-}
-
-export interface GoabDateInputProps extends BaseProps {
-  onChange: OnChange<GoabDate>;
-  value?: GoabDate;
-  min?: GoabDate;
-  max?: GoabDate;
-  step?: number;
-  onFocus?: OnFocus<GoabDate>;
-  onBlur?: OnBlur<GoabDate>;
-  onKeyPress?: OnKeyPress<GoabDate>;
-}
-
-interface BaseProps extends Margins {
-  // required
-  name: string;
-
-  // optional
-  id?: string;
-  debounce?: number;
-  disabled?: boolean;
-  autoCapitalize?: GoabAutoCapitalize;
-  placeholder?: string;
-  leadingIcon?: GoabIconType;
-  trailingIcon?: GoabIconType;
-  onTrailingIconClick?: () => void;
-  variant?: "goa" | "bare";
-  focused?: boolean;
-  readonly?: boolean;
-  error?: boolean;
-  width?: string;
-  prefix?: string;
-  suffix?: string;
-  testId?: string;
-  ariaLabel?: string;
-  maxLength?: number;
-}
 
 // Icon
 
@@ -929,13 +819,6 @@ export type TShirtSpacing =
   | "4xl";
 
 export type Spacing = NumericSpacing | TShirtSpacing | null;
-
-export interface Margins {
-  mt?: Spacing;
-  mr?: Spacing;
-  mb?: Spacing;
-  ml?: Spacing;
-}
 
 export type GoabBlockDirection = "row" | "column";
 export type GoabBlockAlignment = "center" | "start" | "end";

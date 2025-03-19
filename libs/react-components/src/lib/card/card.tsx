@@ -1,4 +1,4 @@
-import { Margins } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   elevation?: number;

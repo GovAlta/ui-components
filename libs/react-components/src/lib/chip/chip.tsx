@@ -1,6 +1,6 @@
-import { GoabChipTheme, GoabChipVariant, Margins } from "@abgov/ui-components-common";
+import { GoabChipTheme, GoabChipVariant } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;

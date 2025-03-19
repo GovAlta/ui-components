@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import { GoabCalendarOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { GoabCalendarOnChangeDetail } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;

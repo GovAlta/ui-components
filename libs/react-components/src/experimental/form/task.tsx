@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Margins } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   status: "completed" | "not-started" | "cannot-start";
@@ -18,12 +18,10 @@ declare global {
 type GoabPublicFormTaskProps = {
   status: "completed" | "not-started" | "cannot-start";
   children: ReactNode;
-}
+};
 
-export function GoabPublicFormTask({status, children}: GoabPublicFormTaskProps) {
-  return (
-    <goa-public-form-task status={status}>{children}</goa-public-form-task>
-  )
+export function GoabPublicFormTask({ status, children }: GoabPublicFormTaskProps) {
+  return <goa-public-form-task status={status}>{children}</goa-public-form-task>;
 }
 
 export default GoabPublicFormTask;

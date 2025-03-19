@@ -2,8 +2,8 @@ import {
   GoabIconButtonVariant,
   GoabIconSize,
   GoabIconType,
-  Margins,
 } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {

@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { Margins, GoabFormStorageType, GoabFormOnMountDetail, GoabFormOnStateChange } from "@abgov/ui-components-common";
+import { GoabFormStorageType, GoabFormOnMountDetail, GoabFormOnStateChange } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 import { relay } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {

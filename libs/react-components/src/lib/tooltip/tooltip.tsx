@@ -1,8 +1,8 @@
 import {
   GoabTooltipHorizontalAlignment,
-  GoabTooltipPosition,
-  Margins,
+  GoabTooltipPosition
 } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 import { ReactNode } from "react";
 
 /* eslint-disable-next-line */

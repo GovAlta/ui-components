@@ -1,5 +1,6 @@
-import { GoabPopoverPosition, Margins } from "@abgov/ui-components-common";
+import { GoabPopoverPosition } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   maxwidth?: string;

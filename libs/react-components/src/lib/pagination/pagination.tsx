@@ -1,4 +1,5 @@
-import { GoabPaginationOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { GoabPaginationOnChangeDetail } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {

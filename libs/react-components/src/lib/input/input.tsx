@@ -8,9 +8,9 @@ import {
   GoabInputOnChangeDetail,
   GoabInputOnFocusDetail,
   GoabInputOnKeyPressDetail,
-  GoabInputType,
-  Margins,
+  GoabInputType
 } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 
 export interface IgnoreMe {
   ignore: string;
@@ -46,6 +46,17 @@ interface WCProps extends Margins {
   maxlength?: number;
 
   trailingiconarialabel?: string;
+}
+
+export interface GoabInputProps extends BaseProps {
+  onChange: OnChange<string>;
+  value?: string;
+  min?: number | string;
+  max?: number | string;
+  step?: number;
+  onFocus?: OnFocus<string>;
+  onBlur?: OnBlur<string>;
+  onKeyPress?: OnKeyPress<string>;
 }
 
 declare global {
@@ -101,7 +112,7 @@ export interface GoabInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<string>;
 }
 
-interface GoabNumberInputProps extends BaseProps {
+export interface GoabNumberInputProps extends BaseProps {
   onChange: OnChange<number>;
   value?: number;
   min?: number;
@@ -112,7 +123,7 @@ interface GoabNumberInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<number>;
 }
 
-interface GoabDateInputProps extends BaseProps {
+export interface GoabDateInputProps extends BaseProps {
   onChange: OnChange<GoabDate>;
   value?: GoabDate;
   min?: GoabDate;

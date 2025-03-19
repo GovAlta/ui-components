@@ -3,9 +3,9 @@ import {
   GoabButtonSize,
   GoabButtonType,
   GoabButtonVariant,
-  GoabIconType,
-  Margins,
+  GoabIconType
 } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   type?: GoabButtonType;

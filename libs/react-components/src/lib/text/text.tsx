@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import {GoabTextMaxWidth, GoabTextHeadingElement, GoabTextTextElement, GoabTextSize, Margins } from "@abgov/ui-components-common";
+import {GoabTextMaxWidth, GoabTextHeadingElement, GoabTextTextElement, GoabTextSize } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   as?: GoabTextTextElement | GoabTextHeadingElement;

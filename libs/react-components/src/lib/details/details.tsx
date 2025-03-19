@@ -1,5 +1,5 @@
-import { Margins } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   heading: string;

@@ -2,8 +2,9 @@ import { useEffect, useRef } from "react";
 import {
   GoabRadioGroupOnChangeDetail,
   GoabRadioGroupOrientation,
-  Margins,
 } from "@abgov/ui-components-common";
+
+import { Margins } from "../../common/types";
 
 export * from "./radio";
 
