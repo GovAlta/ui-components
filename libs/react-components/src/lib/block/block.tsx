@@ -1,9 +1,9 @@
 import {
   GoabBlockAlignment,
   GoabBlockDirection,
-  Margins,
   Spacing,
 } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 import { ReactNode } from "react";
 
 export interface WCProps extends Margins {

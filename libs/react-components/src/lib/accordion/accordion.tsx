@@ -1,7 +1,7 @@
 import { ReactNode , useEffect, useRef} from "react";
 
-import type { GoabAccordionHeadingSize, GoabAccordionIconPosition, Margins } from "@abgov/ui-components-common";
-
+import type { GoabAccordionHeadingSize, GoabAccordionIconPosition } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;
   open?: boolean;

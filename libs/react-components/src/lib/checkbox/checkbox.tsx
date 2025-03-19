@@ -1,5 +1,6 @@
-import { GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { GoabCheckboxOnChangeDetail } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
+import { Margins } from "../../common/types";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

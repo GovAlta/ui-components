@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { Margins, GoabFielsetOnContinueDetail } from "@abgov/ui-components-common";
+import { GoabFielsetOnContinueDetail } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | null>;

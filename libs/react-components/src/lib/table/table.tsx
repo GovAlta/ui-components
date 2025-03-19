@@ -1,5 +1,9 @@
-import { GoabTableOnSortDetail, GoabTableVariant, Margins } from "@abgov/ui-components-common";
+import {
+  GoabTableOnSortDetail,
+  GoabTableVariant,
+} from "@abgov/ui-components-common";
 import { ReactNode, useEffect, useRef } from "react";
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | null>;
@@ -28,6 +32,14 @@ export interface GoabTableProps extends Margins {
   testId?: string;
   children?: ReactNode;
 }
+
+// Alerady exists
+// export interface GoabTableProps extends Margins {
+//   width?: string;
+//   onSort?: (sortBy: string, sortDir: number) => void;
+//   variant?: GoabTableVariant;
+//   testId?: string;
+// }
 
 // legacy name
 export type TableProps = GoabTableProps;

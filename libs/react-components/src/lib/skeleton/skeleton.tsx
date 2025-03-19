@@ -1,4 +1,5 @@
-import { GoabSkeletonSize, GoabSkeletonType, Margins } from "@abgov/ui-components-common";
+import { GoabSkeletonSize, GoabSkeletonType } from "@abgov/ui-components-common";
+import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   maxwidth?: string;
