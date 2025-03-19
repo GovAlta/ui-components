@@ -982,3 +982,8 @@ export type GoabFormOnStateChange = {
   id: string;
   state: Record<string, Record<string, GoabFormField>>;
 };
+
+// Drawer
+export type GoabDrawerPosition = "bottom" | "left" | "right" | undefined;
+export type GoabDrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw";
+export type GoabDrawerSize = `${number}${GoabDrawerSizeUnit}` | undefined;

@@ -21,7 +21,7 @@
   },
   "private": true,
   "devDependencies": {
-    "@abgov/design-tokens": "^1.5.10",
+    "@abgov/design-tokens": "^1.6.0",
     "@abgov/nx-release": "^10.0.0",
     "@angular-devkit/build-angular": "18.2.18",
     "@angular-devkit/core": "18.1.4",
