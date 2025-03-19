@@ -428,13 +428,13 @@
 
   /* Menu items in collapsed menu -- Current */
   :global(::slotted(a.inside-collapse-menu.current)) {
-    color: var(app-header-color-text-nav-item-in-menu-current);
+    color: var(--goa-app-header-color-text-nav-item-in-menu-current);
     background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current) !important;
   }
 
   /* Menu items in collapsed menu -- Current -- Hover */
   :global(::slotted(a.inside-collapse-menu.current:hover)) {
-    color: var(app-header-color-text-nav-item-in-menu-current-hover) !important;
+    color: var(--goa-app-header-color-text-nav-item-in-menu-current-hover) !important;
     background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current-hover) !important;
   }
 
