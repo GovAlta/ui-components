@@ -10,15 +10,21 @@
   export let maxsize: DrawerSize = undefined;
   export let content: string = "";
   export let actions: string = "";
+  export let testid: string = "";
 
-  function toggleDrawer() {
-    open = !open;
+  function closeDrawer() {
+    open = false;
+
+  }
+
+  function openDrawer() {
+    open = true;
   }
 </script>
 
-<button on:click={toggleDrawer} data-testid="open">Open</button>
+<button on:click={openDrawer} data-testid="open">Open</button>
 
-<Drawer {open} {position} {heading} {maxsize}>
+<Drawer {open} {testid} {position}  {heading} {maxsize} on:_close={closeDrawer}>
   {content}
   <div slot="actions">{actions}</div>
 </Drawer>

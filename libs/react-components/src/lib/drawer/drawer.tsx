@@ -1,14 +1,11 @@
 import { ReactNode, useEffect, useRef } from "react";
-
-type DrawerPosition = "bottom" | "left" | "right" | undefined;
-type DrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw";
-type DrawerSize = `${number}${DrawerSizeUnit}` | undefined;
+import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
 
 interface WCProps {
   open: boolean | undefined;
-  position: DrawerPosition;
+  position: GoabDrawerPosition;
   heading?: string;
-  maxsize?: DrawerSize;
+  maxsize?: GoabDrawerSize;
   testid?: string;
   ref: React.RefObject<HTMLElement>;
 }
@@ -23,25 +20,27 @@ declare global {
   }
 }
 
-export interface GoADrawerProps {
+export interface GoabDrawerProps {
   open: boolean;
-  position: DrawerPosition;
-  heading?: string;
-  maxSize?: DrawerSize;
+  position: GoabDrawerPosition;
+  heading?: string|ReactNode;
+  maxSize?: GoabDrawerSize;
   testId?: string;
+  actions?: ReactNode;
   children: ReactNode;
   onClose: () => void;
 }
 
-export function GoADrawer({
+export function GoabDrawer({
   open,
   position,
   heading,
   maxSize,
   testId,
+  actions,
   children,
   onClose,
-}: GoADrawerProps): JSX.Element {
+}: GoabDrawerProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -59,13 +58,15 @@ export function GoADrawer({
       ref={el}
       open={open ? true : undefined}
       position={position}
-      heading={heading}
+      heading={typeof heading === "string" ? heading : undefined}
       maxsize={maxSize}
-      data-testid={testId}
+      testid={testId}
     >
+      {heading && typeof heading !== "string" && <div slot="heading">{heading}</div>}
+      {actions && <div slot="actions">{actions}</div>}
       {children}
     </goa-drawer>
   );
 }
 
-export default GoADrawer;
+export default GoabDrawer;
