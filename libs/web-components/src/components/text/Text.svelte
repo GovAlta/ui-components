@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-text" />
 
 <script lang="ts" context="module">
-  export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5"
+  export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
   export type TextElement = "span" | "div" | "p";
 
   type HeadingSize
@@ -43,6 +43,7 @@
     h3: "heading-m",
     h4: "heading-s",
     h5: "heading-xs",
+    h6: "heading-xs",
     div: "body-m",
     p: "body-m",
     span: "body-m",

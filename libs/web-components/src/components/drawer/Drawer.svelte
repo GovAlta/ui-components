@@ -3,7 +3,7 @@
 <script lang="ts">
   import noscroll from "../../common/no-scroll";
   import { onDestroy, onMount, tick } from "svelte";
-  import { dispatch, style, styles } from "../../common/utils";
+  import { dispatch, style, styles, toBoolean } from "../../common/utils";
   import { DrawerPosition, DrawerSize } from "../../common/types";
 
   // ******
@@ -29,7 +29,8 @@
   // Reactive
   // ========
 
-  $: maxsize = maxsize || (position === "bottom" ? "80vh" : "500px");
+  $: maxsize = maxsize || (position === "bottom" ? "80vh" : "320px");
+  $: _isOpen = toBoolean(open);
 
   // *****
   // Hooks
@@ -81,37 +82,38 @@
   }
 </script>
 
-<div
-  class="root"
-  style={style("visibility", open ? "visible" : "hidden")}
-  data-testid="drawer"
->
-  <button
-    class="background"
-    data-testid="background"
-    on:click={close}
-    style={style("opacity", open ? "1" : "0")}
-  />
-  <div
-    use:noscroll={{ enable: open }}
-    style={styles(
-      style("--drawer-offset", `-${_drawerSize}px`),
-      style("height", position === "bottom" ? "unset" : "100vh"),
-      style("max-width", position === "bottom" ? "unset" : maxsize),
-      style("width", position === "bottom" ? "100%" : maxsize),
-    )}
-    class={`drawer drawer-${position}`}
-    class:drawer-open-bottom={position === "bottom" && open}
-    class:drawer-open-right={position === "right" && open}
-    class:drawer-open-left={position === "left" && open}
-    bind:this={_contentEl}
-  >
+{#if _isOpen}
+  <goa-focus-trap {open}>
+    <div
+    class="root"
+    style={style("visibility", open ? "visible" : "hidden")}
+    data-testid="drawer">
+      <button
+      class="background"
+      data-testid="background"
+      on:click={close}
+      style={style("opacity", open ? "1" : "0")}
+    />
+    <div
+      use:noscroll={{ enable: open }}
+      style={styles(
+        style("--drawer-offset", `-${_drawerSize}px`),
+        style("height", position === "bottom" ? "unset" : "100vh"),
+        style("max-width", position === "bottom" ? "unset" : maxsize),
+        style("width", position === "bottom" ? "100%" : maxsize),
+      )}
+      class={`drawer drawer-${position}`}
+      class:drawer-open-bottom={position === "bottom" && open}
+      class:drawer-open-right={position === "right" && open}
+      class:drawer-open-left={position === "left" && open}
+      bind:this={_contentEl}
+    >
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="topbar">
-      <div class="heading">
-        {heading}
-      </div>
+        {#if heading}
+          <goa-text size="heading-m" as="h3" mb="none">{heading}</goa-text>
+        {/if}
       <goa-icon-button
         data-ignore-focus="true"
         data-testid="drawer-close-button"
@@ -136,10 +138,12 @@
       </section>
     {/if}
   </div>
-</div>
+    </div>
+  </goa-focus-trap>
+{/if}
 
 <style>
-  :host * {  
+  :host * {
     box-sizing: border-box;
   }
 
@@ -165,18 +169,15 @@
     transition: all var(--goa-drawer-transition-time) ease-out;
     display: flex;
     flex-direction: column;
-    background-color: #f8f8f8;
+    background-color: var(--goa-color-greyscale-white);
   }
 
   .topbar {
     border-bottom: 1px solid var(--goa-color-greyscale-200);
     display: flex;
-    padding: var(--goa-space-m);
+    padding: var(--goa-space-l) var(--goa-space-l) var(--goa-space-s) var(--goa-space-l);
     justify-content: space-between;
-  }
-
-  .heading {
-    font: var(--goa-typography-heading-s);
+    align-items: center;
   }
 
   .drawer-content {
@@ -184,7 +185,7 @@
   }
 
   .scroll-content {
-    padding: var(--goa-space-m);
+    padding: var( --goa-space-l)var(--goa-space-xl) var( --goa-space-l) var(--goa-space-xl);
   }
 
   .drawer-actions {

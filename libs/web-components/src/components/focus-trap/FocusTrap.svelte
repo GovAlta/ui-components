@@ -125,6 +125,13 @@
       next?.focus();
       return;
     }
+
+    const focusedElement = e?.target;
+    if (focusedElement && focusedElement?.shadowRoot) {
+      focusedElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else if (focusedElement) {
+      focusedElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   function findFirstNode(
