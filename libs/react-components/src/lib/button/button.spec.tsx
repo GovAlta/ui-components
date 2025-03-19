@@ -11,10 +11,17 @@ describe("GoabButton", () => {
     /* do nothing */
   };
 
+  it("should render", () => {
+    const { container } = render(<GoabButton></GoabButton>);
+
+    const el = container.querySelector("goa-button");
+    expect(el?.getAttribute("disabled")).toBeNull();
+  });
+
   it("should render the properties", () => {
     const { container } = render(
       <GoabButton
-        disabled={true}
+        disabled
         type="primary"
         size="compact"
         variant="destructive"

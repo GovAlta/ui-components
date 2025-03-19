@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
 import {
   GoabButtonSize,
   GoabButtonType,
@@ -6,23 +6,23 @@ import {
   GoabIconType,
   Margins,
 } from "@abgov/ui-components-common";
+import { fromOptionalBoolean } from "../../utils";
 
 interface WCProps extends Margins {
   type?: GoabButtonType;
   size?: GoabButtonSize;
   variant?: GoabButtonVariant;
-  disabled?: boolean;
+  disabled?: string;
   leadingicon?: string;
   trailingicon?: string;
   width?: string;
   testid?: string;
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-button": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -43,8 +43,8 @@ export interface GoabButtonProps extends Margins {
 }
 
 export function GoabButton({
-  disabled = false,
-  type = "primary",
+  disabled,
+  type,
   size,
   variant,
   leadingIcon,
@@ -58,7 +58,6 @@ export function GoabButton({
   mb,
   ml,
 }: GoabButtonProps): JSX.Element {
-
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -85,7 +84,7 @@ export function GoabButton({
       type={type}
       size={size}
       variant={variant}
-      disabled={disabled}
+      disabled={fromOptionalBoolean(disabled, { omitIfFalse: true })}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
       width={width}

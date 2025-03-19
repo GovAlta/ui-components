@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState, type JSX } from "react";
 import Css from "./ResizablePanel.module.css";
 import { GoabIcon } from "../../lib/icon/icon";
 

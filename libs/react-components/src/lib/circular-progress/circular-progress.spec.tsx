@@ -6,15 +6,11 @@ import { GoabCircularProgressVariant } from "@abgov/ui-components-common";
 describe("CircularProgress", () => {
   it("does not render anything when not visible", async () => {
     const { baseElement } = render(
-      <GoabCircularProgress
-        variant="inline"
-        message="the message"
-        visible={false}
-        size="small"
-      />,
+      <GoabCircularProgress variant="inline" message="the message" size="small" />,
     );
     const el = baseElement.querySelector("goa-circular-progress");
     expect(el?.innerHTML).toBeFalsy();
+    expect(el?.getAttribute("visible")).toBeNull();
   });
 
   (["fullscreen", "inline"] as const).forEach((variant: GoabCircularProgressVariant) => {
@@ -25,7 +21,7 @@ describe("CircularProgress", () => {
             progress={progress}
             variant={variant}
             message="the message"
-            visible={true}
+            visible
           />,
         );
         const el = baseElement.querySelector("goa-circular-progress");
@@ -33,6 +29,7 @@ describe("CircularProgress", () => {
           expect(el?.getAttribute("progress")).toBe(`${progress}`);
           expect(el?.getAttribute("message")).toBe("the message");
           expect(el?.getAttribute("variant")).toBe(variant);
+          expect(el?.getAttribute("visible")).toBe("true");
         });
       });
     });

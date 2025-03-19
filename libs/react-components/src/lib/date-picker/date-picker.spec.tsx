@@ -9,13 +9,20 @@ const noop = () => {
 };
 
 describe("DatePicker", () => {
-  it("should render successfully", () => {
+  it("should render", () => {
+    const { baseElement } = render(<DatePicker name="foo" onChange={noop} />);
+
+    const el = baseElement.querySelector("goa-date-picker");
+    expect(el).toBeTruthy();
+    expect(el?.getAttribute("name")).toBe("foo");
+    expect(el?.getAttribute("error")).toBeNull();
+    expect(el?.getAttribute("disabled")).toBeNull();
+  });
+
+  it("should render with properties", () => {
     const value = new Date();
-    const error = true;
     const min = addMonths(value, -1);
     const max = addMonths(value, 1);
-    const disabled = true;
-    const relative = true;
 
     const { baseElement } = render(
       <DatePicker
@@ -24,9 +31,8 @@ describe("DatePicker", () => {
         max={max}
         value={value}
         testId="foo"
-        error={error}
-        disabled={disabled}
-        relative={relative}
+        error
+        disabled
         onChange={noop}
       />,
     );
@@ -41,7 +47,6 @@ describe("DatePicker", () => {
     expect(el?.getAttribute("disabled")).toBe("true");
     expect(el?.getAttribute("min")).toBe(min.toISOString());
     expect(el?.getAttribute("max")).toBe(max.toISOString());
-    expect(el?.getAttribute("relative")).toBe("true");
     expect(el?.getAttribute("testid")).toBe("foo");
   });
 
@@ -60,11 +65,7 @@ describe("DatePicker", () => {
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: {
-          type: "date",
-          name,
-          value,
-        },
+        detail: { type: "date", name, value },
       }),
     );
 

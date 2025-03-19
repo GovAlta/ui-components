@@ -1,24 +1,25 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 import {
   GoabRadioGroupOnChangeDetail,
   GoabRadioGroupOrientation,
   Margins,
 } from "@abgov/ui-components-common";
+import { fromOptionalBoolean } from "../../utils";
 
 export * from "./radio";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   name: string;
   value?: string;
   orientation?: GoabRadioGroupOrientation;
-  disabled?: boolean;
-  error?: boolean;
+  disabled?: string;
+  error?: string;
   arialabel?: string;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -44,8 +45,8 @@ export function GoabRadioGroup({
   value,
   children,
   orientation,
-  disabled = false,
-  error = false,
+  disabled,
+  error,
   testId,
   ariaLabel,
   mt,
@@ -83,8 +84,8 @@ export function GoabRadioGroup({
       name={name}
       value={value}
       orientation={orientation}
-      disabled={disabled}
-      error={error}
+      disabled={fromOptionalBoolean(disabled, { omitIfFalse: true })}
+      error={fromOptionalBoolean(error)}
       arialabel={ariaLabel}
       mt={mt}
       mr={mr}

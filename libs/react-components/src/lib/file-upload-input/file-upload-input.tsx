@@ -5,17 +5,16 @@ import {
 import { useEffect, useRef } from "react";
 
 interface WCProps {
-  ref: React.MutableRefObject<HTMLElement | null>;
+  ref: React.RefObject<HTMLElement | null>;
   variant?: GoabFileUploadInputVariant;
   accept?: string;
   maxfilesize?: string;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement>;
     }

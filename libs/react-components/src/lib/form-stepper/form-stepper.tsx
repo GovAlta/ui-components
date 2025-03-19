@@ -2,15 +2,14 @@ import { GoabFormStepperOnChangeDetail, Margins } from "@abgov/ui-components-com
 import { ReactNode, useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
-  ref?: React.MutableRefObject<HTMLElement | null>;
+  ref?: React.RefObject<HTMLElement | null>;
   step?: number;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-form-stepper": WCProps & React.HTMLAttributes<HTMLElement>;
     }

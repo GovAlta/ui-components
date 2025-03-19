@@ -5,7 +5,7 @@ import {
 import { useEffect, useRef } from "react";
 
 interface WCProps {
-  ref: React.MutableRefObject<HTMLElement | null>;
+  ref: React.RefObject<HTMLElement | null>;
   filename: string;
   size: number;
   type?: string;
@@ -14,10 +14,9 @@ interface WCProps {
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-file-upload-card": WCProps & React.HTMLAttributes<HTMLElement>;
     }

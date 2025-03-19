@@ -3,7 +3,7 @@ import {
   GoabTooltipPosition,
   Margins,
 } from "@abgov/ui-components-common";
-import { ReactNode } from "react";
+import { ReactNode, type JSX } from "react";
 
 /* eslint-disable-next-line */
 interface WCProps extends Margins {
@@ -13,7 +13,7 @@ interface WCProps extends Margins {
   halign?: GoabTooltipHorizontalAlignment;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

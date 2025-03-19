@@ -4,7 +4,8 @@ import {
   GoabTextAreaOnKeyPressDetail,
   Margins,
 } from "@abgov/ui-components-common";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
+import { fromOptionalBoolean } from "../../utils";
 
 interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
@@ -12,9 +13,9 @@ interface WCProps extends Margins {
   value?: string;
   placeholder?: string;
   rows?: number;
-  error?: boolean;
-  readOnly?: boolean;
-  disabled?: boolean;
+  error?: string;
+  readOnly?: string;
+  disabled?: string;
   width?: string;
   maxwidth?: string;
   arialabel?: string;
@@ -23,7 +24,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -115,13 +116,13 @@ export function GoabTextarea({
       placeholder={placeholder}
       value={value}
       rows={rows}
-      readOnly={readOnly}
-      disabled={disabled}
+      readOnly={fromOptionalBoolean(readOnly)}
+      disabled={fromOptionalBoolean(disabled, { omitIfFalse: true })}
       countby={countBy}
       maxcount={maxCount}
       width={width}
       maxwidth={maxWidth}
-      error={error}
+      error={fromOptionalBoolean(error)}
       testid={testId}
       arialabel={ariaLabel}
       mt={mt}

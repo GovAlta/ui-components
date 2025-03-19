@@ -1,22 +1,22 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
+import { fromOptionalBoolean } from "../../utils";
 
 type DrawerPosition = "bottom" | "left" | "right" | undefined;
 type DrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw";
 type DrawerSize = `${number}${DrawerSizeUnit}` | undefined;
 
 interface WCProps {
-  open: boolean | undefined;
   position: DrawerPosition;
+  open?: string;
   heading?: string;
   maxsize?: DrawerSize;
   testid?: string;
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-drawer": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -24,8 +24,8 @@ declare global {
 }
 
 export interface GoADrawerProps {
-  open: boolean;
   position: DrawerPosition;
+  open?: boolean;
   heading?: string;
   maxSize?: DrawerSize;
   testId?: string;
@@ -34,8 +34,8 @@ export interface GoADrawerProps {
 }
 
 export function GoADrawer({
-  open,
   position,
+  open,
   heading,
   maxSize,
   testId,
@@ -48,17 +48,17 @@ export function GoADrawer({
     if (!el?.current || !onClose) {
       return;
     }
-    el.current?.addEventListener("_close", onClose)
+    el.current?.addEventListener("_close", onClose);
     return () => {
-      el.current?.removeEventListener("_close", onClose)
-    }
-  }, [el, onClose])
+      el.current?.removeEventListener("_close", onClose);
+    };
+  }, [el, onClose]);
 
   return (
     <goa-drawer
       ref={el}
-      open={open ? true : undefined}
       position={position}
+      open={fromOptionalBoolean(open)}
       heading={heading}
       maxsize={maxSize}
       data-testid={testId}
