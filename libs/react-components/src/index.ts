@@ -15,6 +15,7 @@ export * from "./lib/container/container";
 export * from "./lib/date-picker/date-picker";
 export * from "./lib/details/details";
 export * from "./lib/divider/divider";
+export * from "./lib/drawer/drawer";
 export * from "./lib/dropdown/dropdown";
 export * from "./lib/dropdown/dropdown-item";
 export * from "./lib/fieldset/fieldset";
@@ -171,6 +172,8 @@ export type {
   GoabFormStorageType,
   GoabFormOnMountDetail,
   GoabFormOnStateChange,
+  GoabDrawerSize,
+  GoabDrawerPosition,
 } from "@abgov/ui-components-common";
 
 // This "export type * " doesn't work, TypeScript's limitation

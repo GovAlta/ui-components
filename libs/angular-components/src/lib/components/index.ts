@@ -16,6 +16,7 @@ export * from "./container/container";
 export * from "./date-picker/date-picker";
 export * from "./details/details";
 export * from "./divider/divider";
+export * from "./drawer/drawer";
 export * from "./dropdown/dropdown";
 export * from "./dropdown-item/dropdown-item";
 export * from "./file-upload-card/file-upload-card";
