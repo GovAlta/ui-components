@@ -2,12 +2,7 @@ import { ReactNode, useEffect, useRef } from "react";
 import { Margins } from "../../common/styling";
 import { GoAIconType } from "../icon/icon";
 
-export type GoAButtonType =
-  | "primary"
-  | "submit"
-  | "secondary"
-  | "tertiary"
-  | "start";
+export type GoAButtonType = "primary" | "submit" | "secondary" | "tertiary" | "start";
 
 export type GoAButtonSize = "compact" | "normal";
 export type GoAButtonVariant = "normal" | "destructive";
@@ -93,7 +88,7 @@ export function GoAButton({
       type={type}
       size={size}
       variant={variant}
-      disabled={disabled}
+      disabled={disabled || undefined}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
       width={width}
