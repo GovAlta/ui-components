@@ -140,8 +140,44 @@
     checkSlots();
     sendMountedMessage();
 
+    const hasLeadingIcon = !!leadingicon;
+    const hasTrailingIcon = !!trailingicon;
+    const isSearchType = type === "search";
+
     if (width.includes("%")) {
       _containerWidth = `width: ${width};`; // Set container width to the percentage
+    } else if (width.includes("px")) {
+      let extraWidth = 0;
+
+      if (hasLeadingIcon && !isSearchType) {
+        extraWidth += 44; // (24 + 20) Icon width + Padding between icon and input 8px + 12 px
+      }
+
+      if (hasTrailingIcon && hasLeadingIcon) {
+        extraWidth += 48; // (24 + 20 + 4) Icon width + Padding between icon and input 8px + 12 px + additional 4px
+      }
+
+      if (hasTrailingIcon && !hasLeadingIcon) {
+        extraWidth += 60;
+      }
+
+      if (hasLeadingIcon && isSearchType) {
+        extraWidth += 32;
+      }
+
+      const _adjustedInputWidth = parseInt(width) - extraWidth;
+      _containerWidth = `width: ${width};`;
+      if (_inputEl) {
+        _inputEl.style.width = `${_adjustedInputWidth}px`;
+        _inputEl.style.flexGrow = "0";
+      }
+    } else if (width.includes("ch")) {
+      if ((hasLeadingIcon && hasTrailingIcon) || isSearchType) {
+        const numericWidthinCH = parseInt(width) + 10;
+        _containerWidth = `width: ${numericWidthinCH}ch;`;
+      } else {
+        _containerWidth = `--width: ${width};`;
+      }
     } else {
       _containerWidth = `--width: ${width};`; // Keep using the CSS variable
     }
@@ -483,8 +519,12 @@
     width: calc(var(--width) + 1ch);
     max-width: 100%;
     flex: 1 1 auto;
+    min-width: 0;
     z-index: 1;
     border-radius: var(--goa-text-input-border-radius);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   input,
   input:focus-visible,
@@ -635,6 +675,9 @@
   ::placeholder {
     color: var(--goa-text-input-color-text-placeholder);
     opacity: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* TODO add styling for autofill
