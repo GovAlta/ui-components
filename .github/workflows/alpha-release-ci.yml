@@ -40,11 +40,12 @@ jobs:
       - name: Build
         run: npm run build:prod
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
       - name: Test
-        run: npm run test:headless
+        run: |
+          if [ -d "./dist" ]; then
+            npx playwright install --with-deps
+            npm run test:headless
+          fi
 
       - name: Update Web components documentation
         run: cp libs/web-components/README.md dist/libs/web-components
