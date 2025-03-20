@@ -32,7 +32,7 @@ jobs:
         run: npm run lint
       - name: Build
         run: |
-          npx nx affected --target=build --base=origin/${{ github.base_ref }}
-          npx nx affected --target=post --base=origin/${{ github.base_ref }}
+          npx nx run-many --target=build --base=origin/${{ github.base_ref }}
+          npx nx run-many --target=post --base=origin/${{ github.base_ref }}
       - name: Test
         run: npm run test:headless
