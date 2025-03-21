@@ -1,6 +1,7 @@
 <svelte:options customElement="goa-drawer" />
 
 <script lang="ts">
+  import { fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { onDestroy, onMount, tick } from "svelte";
   import { dispatch, style, styles, toBoolean } from "../../common/utils";
@@ -10,7 +11,7 @@
   // Public
   // ******
 
-  export let open: string = false;
+  export let open: string = "false";
   export let position: DrawerPosition = undefined;
   export let heading: string = "";
   export let maxsize: DrawerSize = undefined; // is set based on the anchor value
@@ -31,6 +32,11 @@
 
   $: maxsize = maxsize || (position === "bottom" ? "80vh" : "320px");
   $: _isOpen = toBoolean(open);
+  $: _flyParams = {
+    duration: 200,
+    x: position === 'right' ? 200 : position === 'left' ? -200 : 0,
+    y: position === 'bottom' ? 200 : 0
+  };
 
   // *****
   // Hooks
@@ -58,7 +64,7 @@
   // *********
 
   function close(e: Event) {
-    if (open) {
+    if (_isOpen) {
       dispatch(_contentEl, "_close", {}, { bubbles: true })
     }
     e.stopPropagation();
@@ -86,7 +92,7 @@
   <goa-focus-trap open={_isOpen}>
     <div
     class="root"
-    style={style("visibility", open ? "visible" : "hidden")}
+    style={style("visibility", _isOpen ? "visible" : "hidden")}
     data-testid="drawer">
       <button
       class="background"
@@ -102,10 +108,12 @@
         style("max-width", position === "bottom" ? "unset" : maxsize),
         style("width", position === "bottom" ? "100%" : maxsize),
       )}
+      in:fly={_flyParams}
+      out:fly={{..._flyParams, delay: 200}}
       class={`drawer drawer-${position}`}
-      class:drawer-open-bottom={position === "bottom" && open}
-      class:drawer-open-right={position === "right" && open}
-      class:drawer-open-left={position === "left" && open}
+      class:drawer-open-bottom={position === "bottom" && _isOpen}
+      class:drawer-open-right={position === "right" && _isOpen}
+      class:drawer-open-left={position === "left" && _isOpen}
       bind:this={_contentEl}
     >
     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -168,7 +176,8 @@
     font-family: var(--goa-font-family-sans);
     position: fixed;
     z-index: 9999;
-    transition: all var(--goa-drawer-transition-time) ease-out;
+    /* transition: transform 0.25s ease-in-out; */
+    /* transition: all var(--goa-drawer-transition-time) ease-out; TODO: update token value */
     display: flex;
     flex-direction: column;
     background-color: var(--goa-color-greyscale-white);
@@ -208,9 +217,11 @@
   .drawer-bottom {
     bottom: var(--drawer-offset);
     width: 100%;
+    height: 300px;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
-    box-shadow: var(--goa-drawer-bottom-shadow);
+    /* box-shadow: var(--goa-drawer-bottom-shadow); TODO: update token value */
+    box-shadow: 0px -6px 6px 0px rgba(0, 0, 0, 0.16);
   }
   .drawer-open-bottom {
     bottom: 0;
@@ -221,7 +232,8 @@
   .drawer-right {
     right: var(--drawer-offset);
     height: 100%;
-    box-shadow: var(--goa-drawer-right-shadow);
+    /* box-shadow: var(--goa-drawer-right-shadow); TODO: update token value */
+    box-shadow: -6px 0px 6px 0px rgba(0, 0, 0, 0.16);
   }
   .drawer-open-right {
     right: 0;
@@ -232,7 +244,8 @@
   .drawer-left {
     left: var(--drawer-offset);
     height: 100%;
-    box-shadow: var(--goa-drawer-left-shadow);
+    /* box-shadow: var(--goa-drawer-left-shadow); TODO: update token value */
+    box-shadow: 6px 0px 6px 0px rgba(0, 0, 0, 0.16);
   }
   .drawer-open-left {
     left: 0;
