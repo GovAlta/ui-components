@@ -164,7 +164,7 @@
           error = "false";
           break;
         case FieldsetResetFieldsMsg:
-          setValue({name, value: ""});
+          setValue({ name, value: "" });
           break;
       }
     });
@@ -288,6 +288,10 @@
   style={`${_containerWidth}${calculateMargin(mt, mr, mb, ml)}`}
   bind:this={_rootEl}
 >
+  <div class="leading-content-slot">
+    <slot name="leadingContent" />
+  </div>
+
   <div
     class="goa-input variant--{variant} type--{type}"
     class:input--disabled={isDisabled}
@@ -302,10 +306,6 @@
       </div>
     {/if}
 
-    <div class="leading-content-slot">
-      <slot name="leadingContent" />
-    </div>
-
     {#if leadingicon}
       <goa-icon
         class="leading-icon"
@@ -318,8 +318,6 @@
     <input
       bind:this={_inputEl}
       class="input--{variant}"
-      class:input-leading-content={_leadingContentSlot && !isDisabled}
-      class:input-trailing-content={_trailingContentSlot && !isDisabled}
       style={`--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`}
       readonly={isReadonly}
       disabled={isDisabled}
@@ -375,9 +373,10 @@
     {#if suffix}
       <span class="suffix">{suffix}</span>
     {/if}
-    <div class="trailing-content-slot">
-      <slot name="trailingContent" />
-    </div>
+  </div>
+
+  <div class="trailing-content-slot">
+    <slot name="trailingContent" />
   </div>
 </div>
 
@@ -389,17 +388,13 @@
 
   .container {
     position: relative;
-    width: auto;
-    display: inline-block;
+    display: inline-flex;
+    vertical-align: top;
     max-width: 100%;
   }
 
-  @media not (--mobile) {
-    .container {
-      width: auto;
-    }
-  }
-
+  .leading-content-slot :global(::slotted(div)),
+  .trailing-content-slot :global(::slotted(div)),
   .goa-input,
   .goa-input * {
     line-height: normal;
@@ -410,45 +405,36 @@
     background-clip: padding-box;
     display: inline-flex;
     align-items: stretch;
-    min-width: 100%;
+    width: 100%;
+    z-index: 1;
     background-color: var(--goa-text-input-color-bg);
     /* default border */
     box-shadow: var(--goa-text-input-border);
     border-radius: var(--goa-text-input-border-radius);
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
-    max-width: 100%;
   }
 
-  .goa-input:not(.error):not(.leading-content):not(.trailing-content):hover:not(
-      :has(input:focus-visible)
-    ) {
+  .goa-input:not(.error):hover:not(:has(input:focus-visible)) {
     /* hover border */
     box-shadow: var(--goa-text-input-border-hover);
   }
   .goa-input:not(.error):has(input:focus-visible) {
     /* focus border(s) */
-    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
+    box-shadow:
+      var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* Error state */
-  .goa-input.error input.input--goa:not(input:focus-visible) {
+  .goa-input.error:not(input:focus-visible) {
     box-shadow: var(--goa-text-input-border-error);
   }
 
-  .goa-input.leading-content.error input.input--goa:not(input:focus-visible) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  .goa-input.trailing-content.error input.input--goa:not(input:focus-visible) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
   /* Focus state (including when in error state) */
-  .goa-input:has(input:focus-visible) {
-    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
+  .goa-input:has(input:focus-visible),
+  .goa-input.error:has(input:focus-visible) {
+    box-shadow:
+      var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* type=range does not have an outline/box-shadow */
@@ -480,8 +466,8 @@
     font: var(--goa-text-input-typography);
     padding: var(--goa-text-input-padding);
     background-color: transparent;
-    width: calc(var(--width) + 1ch);
     max-width: 100%;
+    width: calc(var(--width) + 1ch);
     flex: 1 1 auto;
     z-index: 1;
     border-radius: var(--goa-text-input-border-radius);
@@ -502,22 +488,23 @@
   }
 
   /* Disabled state */
-  .input--disabled,
-  .input--disabled:hover,
-  .input--disabled:active,
-  .input--disabled:focus-visible {
+  .goa-input.input--disabled,
+  .goa-input.input--disabled:hover,
+  .goa-input.input--disabled:active,
+  .goa-input.input--disabled:focus {
     background-color: var(--goa-text-input-color-bg-disabled);
-    border: var(--goa-text-input-border-disabled);
     cursor: default;
-    box-shadow: none !important;
+    box-shadow: var(--goa-text-input-border-disabled);
+    border: none;
+    z-index: -1;
   }
-  .input--disabled input,
-  .input--disabled input:hover,
-  .input--disabled input:active,
-  .input--disabled input:focus-visible {
-    color: var(--goa-text-input-color-text-disabled);
+  .goa-input.input--disabled input,
+  .goa-input.input--disabled input:hover,
+  .goa-input.input--disabled input:active,
+  .goa-input.input--disabled input:focus {
+    color: var(--goa-color-text-secondary);
   }
-  .input--disabled input:hover {
+  .goa-input.input--disabled input:hover {
     cursor: default !important;
   }
   /* Adjust the leading icon style when input is disabled */
@@ -545,6 +532,7 @@
 
   .prefix,
   .leading-content-slot :global(::slotted(div)) {
+    margin-right: calc(var(--goa-border-width-s) * -1);
     /* background-clip doesn't want to work */
     border-top-left-radius: var(--goa-text-input-border-radius);
     border-bottom-left-radius: var(--goa-text-input-border-radius);
@@ -552,49 +540,46 @@
 
   .suffix,
   .trailing-content-slot :global(::slotted(div)) {
+    margin-left: calc(var(--goa-border-width-s) * -1);
     /* background-clip doesn't want to work */
     border-top-right-radius: var(--goa-text-input-border-radius);
     border-bottom-right-radius: var(--goa-text-input-border-radius);
   }
 
-  /* leading and trailing content ------------ */
+  .goa-input:has(.prefix) .leading-icon,
+  .leading-content .leading-icon {
+    margin-right: calc(var(--goa-border-width-s) * -1);
+    margin-left: calc(
+      var(--goa-text-input-padding-lr) + var(--goa-border-width-s)
+    );
+  }
 
-  .input-leading-content {
+  .goa-input:has(.suffix) .trailing-icon,
+  .trailing-content .trailing-icon {
+    margin-left: calc(var(--goa-border-width-s) * -1);
+    margin-right: calc(
+      var(--goa-text-input-padding-lr) + var(--goa-border-width-s)
+    );
+  }
+
+  .goa-input:not(.input--disabled):has(.prefix) input,
+  .leading-content:not(.input--disabled) input {
+    margin-left: var(--goa-border-width-s);
+  }
+
+  .goa-input:not(.input--disabled):has(.suffix) input,
+  .trailing-content:not(.input--disabled) input {
+    margin-right: var(--goa-border-width-s);
+  }
+
+  .leading-content {
     border-top-left-radius: var(--goa-border-radius-none);
     border-bottom-left-radius: var(--goa-border-radius-none);
   }
 
-  .input-trailing-content {
+  .trailing-content {
     border-top-right-radius: var(--goa-border-radius-none);
     border-bottom-right-radius: var(--goa-border-radius-none);
-  }
-
-  /* this is the hover style for the input when it has leading and trailing content */
-  .input-leading-content:not(.error):not(input:focus-visible):hover {
-    box-shadow: var(--goa-text-input-border-hover);
-  }
-  .input-trailing-content:not(.error):not(input:focus-visible):hover {
-    box-shadow: var(--goa-text-input-border-hover);
-  }
-
-  /* this is the interior focus border */
-  .input-leading-content:active,
-  .input-leading-content:focus-visible,
-  .input-leading-content:focus-within {
-    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
-  }
-  .input-trailing-content:active,
-  .input-trailing-content:focus-visible,
-  .input-trailing-content:focus-within {
-    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
-  }
-
-  /* Hide main focus border for inputs with leading and trailing content */
-  .goa-input.leading-content:has(input:focus-visible) {
-    box-shadow: var(--goa-text-input-border);
-  }
-  .goa-input.trailing-content:has(input:focus-visible) {
-    box-shadow: var(--goa-text-input-border);
   }
 
   /* Themes */
