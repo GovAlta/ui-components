@@ -10,7 +10,7 @@
   // Public
   // ******
 
-  export let open: boolean = false;
+  export let open: string = false;
   export let position: DrawerPosition = undefined;
   export let heading: string = "";
   export let maxsize: DrawerSize = undefined; // is set based on the anchor value
@@ -83,7 +83,7 @@
 </script>
 
 {#if _isOpen}
-  <goa-focus-trap {open}>
+  <goa-focus-trap open={_isOpen}>
     <div
     class="root"
     style={style("visibility", open ? "visible" : "hidden")}
@@ -92,10 +92,10 @@
       class="background"
       data-testid="background"
       on:click={close}
-      style={style("opacity", open ? "1" : "0")}
+      style={style("opacity", _isOpen ? "1" : "0")}
     />
     <div
-      use:noscroll={{ enable: open }}
+      use:noscroll={{ enable: _isOpen }}
       style={styles(
         style("--drawer-offset", `-${_drawerSize}px`),
         style("height", position === "bottom" ? "unset" : "100vh"),
@@ -115,11 +115,13 @@
           <goa-text size="heading-m" as="h3" mb="none">{heading}</goa-text>
         {/if}
       <goa-icon-button
+        size="medium"
         data-ignore-focus="true"
         data-testid="drawer-close-button"
         arialabel="Close the drawer"
         variant="dark"
         icon="close"
+        theme="filled"
         on:click={close}
       />
     </div>
