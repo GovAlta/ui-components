@@ -7,6 +7,7 @@
       subHeading: { type: "String", attribute: "sub-heading" },
       sectionTitle: { type: "String", attribute: "section-title" },
       backUrl: { attribute: "back-url", type: "String" },
+      summaryHeading: { attribute: "summary-heading", type: "String" },
     }
   }}
 />
@@ -36,6 +37,7 @@
   // common with fieldset
   export let id: string = "";
   export let heading: string = "";
+  export let summaryHeading: string = "";
   export let subHeading: string = "";
   export let sectionTitle: string = "";
   export let backUrl: string = "";
@@ -109,7 +111,7 @@
       relay<FormPageBindRelayDetail>(
         _senderEl,
         FormPageBindMsg,
-        { id, el: _rootEl, heading },
+        { id, el: _rootEl, heading: summaryHeading },
         { bubbles: true },
       );
     }, 10);
@@ -119,7 +121,7 @@
     relay<FieldsetChangeRelayDetail>(
       _senderEl,
       FieldsetChangeMsg,
-      { ...detail, state: { ...detail.state, heading } },
+      { ...detail, state: { ...detail.state, heading: summaryHeading } },
       { bubbles: true },
     );
   }
