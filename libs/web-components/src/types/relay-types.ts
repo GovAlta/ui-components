@@ -195,6 +195,7 @@ export const ExternalSetErrorMsg = "external::set:error";
 export type ExternalErrorRelayDetail = {
   name: string;
   msg: string;
+  grouped: boolean; // whether the error message applies to more than one form field
 };
 
 export const ExternalInitStateMsg = "external::init:state";
