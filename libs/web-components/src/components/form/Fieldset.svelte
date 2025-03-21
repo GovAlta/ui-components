@@ -203,7 +203,14 @@
   }
 
   function onError(detail: ExternalErrorRelayDetail) {
-    _errors[detail.name] = detail.msg;
+
+    if (detail.grouped) {
+      if (!Object.values(_errors).includes(detail.msg)) {
+        _errors[detail.name] = detail.msg;
+      }
+    } else {
+      _errors[detail.name] = detail.msg;
+    }
 
     // dispatch error down to fields
     relay<FieldsetErrorRelayDetail>(
