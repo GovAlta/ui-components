@@ -494,8 +494,7 @@
   .goa-input.input--disabled:focus {
     background-color: var(--goa-text-input-color-bg-disabled);
     cursor: default;
-    /* TODO: box-shadow: var(--goa-text-input-border-disabled); */
-    box-shadow: inset 0 0 0 1px #dcdcdc;
+    box-shadow: var(--goa-text-input-border-disabled);
     border: none;
     z-index: -1;
   }
