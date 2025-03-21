@@ -22,10 +22,15 @@
 
   // element refs
   let _contentEl: HTMLElement | null = null;
+  let _scrollEl: HTMLElement | null = null;
 
   // computes the required absolute position offset to hide the drawer when not shown
   let _drawerSize: number;
-
+  let _actionsHeight: number = 0;
+  let _headerHeight: number = 0;
+  let _actionsSlotHasContent: boolean = false;
+  let _scrollableHeight: string = '';
+  let _scrollPos: "top" | "middle" | "bottom" | null = "top"; // to add the box-shadow to the drawer content
   // ========
   // Reactive
   // ========
@@ -37,6 +42,18 @@
     x: position === 'right' ? 200 : position === 'left' ? -200 : 0,
     y: position === 'bottom' ? 200 : 0
   };
+  $: if (_isOpen) {
+    checkActionsSlotContent();
+    if (_scrollEl) {
+      const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
+      _scrollPos = hasScroll ? "top": null;
+    }
+  }
+
+  // Add reactive statement for height calculations
+  $: if (_isOpen && _contentEl) {
+    updateHeights();
+  }
 
   // *****
   // Hooks
@@ -63,6 +80,23 @@
   // Functions
   // *********
 
+  async function updateHeights() {
+    await tick();
+    const headerEl = _contentEl?.querySelector('.topbar');
+    const actionsEl = _contentEl?.querySelector('.drawer-actions');
+
+    _headerHeight = headerEl?.clientHeight ?? 0;
+    _actionsHeight = actionsEl?.clientHeight ?? 0;
+    _scrollableHeight = scrollableHeight();
+  }
+
+  async function checkActionsSlotContent() {
+    await tick();
+    _actionsSlotHasContent = !!$$slots.actions;
+    // Trigger height recalculation after checking slot content
+    await updateHeights();
+  }
+
   function close(e: Event) {
     if (_isOpen) {
       dispatch(_contentEl, "_close", {}, { bubbles: true })
@@ -80,18 +114,42 @@
   };
 
   function scrollableHeight() {
-    return position === "bottom"
-      ? maxsize // bottom uses user-set/default maxSize
-      : $$slots.actions // left/right have to calculate max size
-        ? "calc(100vh - 12.5rem - 1px)" // (actions bar width) + border
-        : "calc(100vh - 4rem)"; // no actions bar just heading and padding
+    const edgeMargin = 16;
+
+    if (position === "bottom") {
+      return maxsize;
+    }
+    // Calculate available height by subtracting:
+    // - header height
+    // - actions height (if actions exist)
+    // - edge margins
+    return `calc(100vh - ${_headerHeight}px - ${_actionsSlotHasContent ? _actionsHeight : 0}px - ${edgeMargin}px)`;
+  }
+
+  function handleScroll(e: CustomEvent) {
+    const hasScroll = e.detail.scrollHeight > e.detail.offsetHeight;
+    if (!_isOpen || !hasScroll) return;
+
+    // top
+    if (e.detail.scrollTop == 0) {
+      _scrollPos = "top";
+    } else if (
+      // bottom
+      Math.abs(
+        e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight,
+      ) < 1
+    ) {
+      _scrollPos = "bottom";
+    } else {
+      _scrollPos = "middle";
+    }
   }
 </script>
 
 {#if _isOpen}
   <goa-focus-trap open={_isOpen}>
     <div
-    class="root"
+    class={`root ${_scrollPos ?? ""}`}
     style={style("visibility", _isOpen ? "visible" : "hidden")}
     data-testid="drawer">
       <button
@@ -118,7 +176,7 @@
     >
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <div class="topbar">
+    <div class="topbar" bind:clientHeight={_headerHeight}>
         {#if heading}
           <goa-text size="heading-m" as="h3" mb="none">{heading}</goa-text>
         {/if}
@@ -135,7 +193,7 @@
     </div>
 
     <div data-testid="drawer-content" class="drawer-content">
-      <goa-scrollable direction="vertical" maxheight={scrollableHeight()}>
+      <goa-scrollable direction="vertical" maxheight={_scrollableHeight} on:_scroll={handleScroll} bind:this={_scrollEl}>
         <div class="scroll-content">
           <slot />
         </div>
@@ -143,7 +201,10 @@
     </div>
 
     {#if $$slots.actions}
-      <section class="drawer-actions" data-testid="drawer-actions">
+      <section class="drawer-actions"
+       data-testid="drawer-actions"
+       class:empty-actions={!_actionsSlotHasContent}
+       bind:clientHeight={_actionsHeight}>
         <slot name="actions" />
       </section>
     {/if}
@@ -162,6 +223,20 @@
     inset: 0;
     z-index: 998;
     transition: opacity 200ms ease-out;
+  }
+  /* Add shadow styles for scrollable content */
+  .root.top .drawer-content {
+    box-shadow: inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
+  }
+
+  .root.bottom .drawer-content {
+    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3);
+  }
+
+  .root.middle .drawer-content {
+    box-shadow:
+      inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
+      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
   }
 
   .background {
@@ -184,7 +259,7 @@
   }
 
   .topbar {
-    border-bottom: 1px solid var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
     display: flex;
     padding: var(--goa-space-l) var(--goa-space-l) var(--goa-space-s) var(--goa-space-l);
     justify-content: space-between;
@@ -193,18 +268,23 @@
 
   .drawer-content {
     flex: 1 1 auto;
+    box-shadow: none;
   }
 
   .scroll-content {
-    padding: var( --goa-space-l)var(--goa-space-xl) var( --goa-space-l) var(--goa-space-xl);
+    padding: var(--goa-space-l) var(--goa-space-xl);
   }
 
   .drawer-actions {
     width: 100%;
     padding: var(--goa-space-l) var(--goa-space-xl) var(--goa-space-xl);
     border-top: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     background: var(--goa-color-greyscale-white);
+  }
+
+  .drawer-actions.empty-actions {
+    padding: 0;
+    border-top: none;
   }
 
   .drawer-close {
