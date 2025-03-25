@@ -54,18 +54,12 @@
       element.tabIndex > 0 ||
       (element.tabIndex === 0 && element.getAttribute("tabIndex") !== null);
 
-    if (isFirstFocus && element.getAttribute?.("data-ignore-focus"))
-      return "ignore-focus";
-
     // 1 = element_node (div, span, input, a, ...)
-    if (element.nodeType !== 1)
-      return null;
+    if (element.nodeType !== 1) return null;
 
-    if (isTabbable)
-      return node;
+    if (isTabbable) return node;
 
-    if (element?.getAttribute("disabled"))
-      return null;
+    if (element?.getAttribute("disabled")) return null;
 
     if (element.tabIndex < 0 || element.getAttribute?.("tabindex") === "-1")
       return null;

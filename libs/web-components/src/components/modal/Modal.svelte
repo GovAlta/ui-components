@@ -355,13 +355,15 @@
     flex: 0 0 3rem;
     text-align: center;
     padding: var(--goa-modal-callout-bar-padding) 0 0 0;
-    border-radius: var(--goa-modal-border-radius) 0px 0px var(--goa-modal-border-radius);
+    border-radius: var(--goa-modal-border-radius) 0px 0px
+      var(--goa-modal-border-radius);
   }
 
   .content {
     flex: 1 1 auto;
     width: 100%;
-    padding: var(--goa-modal-padding) var(--goa-modal-padding) 0 var(--goa-modal-padding);
+    padding: var(--goa-modal-padding) var(--goa-modal-padding) 0
+      var(--goa-modal-padding);
   }
 
   .content header {
@@ -375,11 +377,15 @@
 
   @media (--mobile) {
     .content {
-      padding: var(--goa-modal-padding-small-screen) var(--goa-modal-padding-small-screen) 0 var(--goa-modal-padding-small-screen);
+      padding: var(--goa-modal-padding-small-screen)
+        var(--goa-modal-padding-small-screen) 0
+        var(--goa-modal-padding-small-screen);
     }
 
     .content header.has-content {
-      margin-bottom: var(--goa-modal-content-gap-small-screen); /* space under heading */
+      margin-bottom: var(
+        --goa-modal-content-gap-small-screen
+      ); /* space under heading */
     }
 
     .modal-actions :global(::slotted(*)) {
@@ -397,7 +403,8 @@
     .callout-bar {
       text-align: left;
       padding: var(--goa-modal-callout-bar-padding-small-screen);
-      border-radius: var(--goa-modal-border-radius) var(--goa-modal-border-radius) 0px 0px;
+      border-radius: var(--goa-modal-border-radius)
+        var(--goa-modal-border-radius) 0px 0px;
       height: var(--goa-space-2xl);
     }
 
@@ -409,7 +416,6 @@
     :host {
       --scrollable-padding: var(--goa-scrollable-padding-mobile);
     }
-
   }
 
   @media (--not-mobile) {
@@ -425,7 +431,6 @@
     :host {
       --scrollable-padding: var(--goa-scrollable-padding-desktop);
     }
-
   }
 
   .modal-pane {
