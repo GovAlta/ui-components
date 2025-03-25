@@ -313,7 +313,7 @@
       {autocapitalize}
       {name}
       {type}
-      value={value || ""}
+      value={value ?? ""}
       {placeholder}
       {min}
       {max}

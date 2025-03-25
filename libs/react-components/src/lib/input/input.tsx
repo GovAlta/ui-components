@@ -32,7 +32,7 @@ interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
   type?: GoAInputType;
   name: string;
-  value?: string;
+  value?: string | number;
   id?: string;
   autocapitalize?: GoAAutoCapitalize;
   debounce?: number;
@@ -101,7 +101,7 @@ type OnKeyPress<T = string> = (name: string, value: T, key: string) => void;
 
 export interface GoAInputProps extends BaseProps {
   onChange?: OnChange<string>;
-  value?: string;
+  value?: string | number;
   min?: number | string;
   max?: number | string;
   step?: number;
