@@ -206,7 +206,7 @@
         type="checkbox"
         value={`${value}`}
         aria-label={arialabel || text || name}
-        aria-describedby={description ? _descriptionId : null}
+        aria-describedby={$$slots.description || description !== "" ? _descriptionId : null}
         aria-invalid={_error ? "true" : "false"}
         on:change={onChange}
         on:focus={onFocus}
