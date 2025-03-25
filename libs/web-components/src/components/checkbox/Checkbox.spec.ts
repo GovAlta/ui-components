@@ -73,6 +73,20 @@ describe('GoACheckbox Component', () => {
       const root = el.container.querySelector('.error');
       expect(root).toBeTruthy();
     });
+
+    describe("aria-describedby", () => {
+      it("should not have aria-describedby when description is empty", async () => {
+        const el = await createElement({ description: "" });
+        const checkbox = el.container.querySelector("input");
+        expect(checkbox?.getAttribute("aria-describedby")).toBeNull();
+      });
+
+      it("should have aria-describedby when description has content", async () => {
+        const el = await createElement({ description: "test description" });
+        const checkbox = el.container.querySelector("input");
+        expect(checkbox?.getAttribute("aria-describedby")).toBe("description_checkbox-test-name");
+      });
+    });
   });
 
   describe("events", () => {
