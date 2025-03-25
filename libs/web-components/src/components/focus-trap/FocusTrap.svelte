@@ -50,22 +50,20 @@
 
   function isFocusable(node: Node): Node | null | "ignore-focus" {
     const element = node as HTMLElement;
+
+    if (isFirstFocus && element.getAttribute?.("data-first-focus")) return node;
+    if (isFirstFocus && element.getAttribute?.("data-ignore-focus")) return "ignore-focus";
+
     const isTabbable =
       element.tabIndex > 0 ||
       (element.tabIndex === 0 && element.getAttribute("tabIndex") !== null);
 
-    if (isFirstFocus && element.getAttribute?.("data-ignore-focus"))
-      return "ignore-focus";
-
     // 1 = element_node (div, span, input, a, ...)
-    if (element.nodeType !== 1)
-      return null;
+    if (element.nodeType !== 1) return null;
 
-    if (isTabbable)
-      return node;
+    if (isTabbable) return node;
 
-    if (element?.getAttribute("disabled"))
-      return null;
+    if (element?.getAttribute("disabled")) return null;
 
     if (element.tabIndex < 0 || element.getAttribute?.("tabindex") === "-1")
       return null;
@@ -112,7 +110,10 @@
   // Focus event handler
   function keepWithinBounds(e: Event | null): void {
     const el = (e?.target as HTMLElement) ?? rootEl;
-    isFirstFocus = false;
+    if (isFirstFocus) {
+      isFirstFocus = false;
+      return; // first renders, we don't want to scrollIntoView
+    }
 
     if (el.dataset["tabBoundry"] === "start") {
       if (isShiftPressed) {
@@ -120,7 +121,10 @@
         return;
       }
 
-      const sibling = el.nextElementSibling;
+      let sibling = el.nextElementSibling;
+      if (sibling?.getAttribute("data-first-focus") === "true") {
+        sibling = sibling.nextElementSibling;
+      }
       if (!sibling) return;
 
       const next = findFirstNode([sibling], false) as HTMLElement;
@@ -134,7 +138,10 @@
         return;
       }
 
-      const sibling = el.previousElementSibling;
+      let sibling = el.previousElementSibling;
+      if (sibling?.getAttribute("data-first-focus") === "true") {
+        sibling = sibling.previousElementSibling;
+      }
       if (!sibling) return;
 
       const next = findFirstNode([sibling], true) as HTMLElement;
@@ -154,20 +161,34 @@
     nodes: NodeList | Node[],
     reversed: boolean = false,
   ): Node | null {
+    let focusableNode = null;
+
     const nodeList = reversed ? [...nodes].reverse() : nodes;
     for (const node of nodeList) {
-      if (isFocusable(node) !== "ignore-focus") {
-          const el =
-          isFocusable(node) ||
-          findFirstNode(node.childNodes, reversed) ||
-          findFirstNodeOfSlot(node, reversed) ||
-          findFirstNodeOfShadowDOM(node, reversed);
-        if (el) {
-          return el;
-        }
+      const result = isFocusable(node);
+      // skip nodes that are ignore-focus
+      if (result === "ignore-focus") continue;
+
+      if (result) {
+        focusableNode = result;
+        break;
+      }
+
+      if (node.hasChildNodes()) {
+        focusableNode = findFirstNode(Array.from(node.childNodes), reversed);
+        if (focusableNode) break;
+      }
+
+      focusableNode = findFirstNodeOfSlot(node, reversed);
+      if (focusableNode) break;
+
+      if (node instanceof HTMLElement && node.shadowRoot) {
+        focusableNode = findFirstNodeOfShadowDOM(node, reversed);
+        if (focusableNode) break;
       }
     }
-    return null;
+
+    return focusableNode;
   }
 
   function findFirstNodeOfSlot(node: Node, reversed: boolean): Node | null {

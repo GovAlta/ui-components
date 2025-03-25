@@ -215,6 +215,7 @@
         {role}
         aria-modal="true"
         aria-labelledby="goa-modal-heading"
+        data-first-focus={role === "dialog" ? "true" : undefined}
       >
         {#if calloutvariant !== null}
           <div class="callout-bar {calloutvariant}">
