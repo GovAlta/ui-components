@@ -24,7 +24,7 @@ import { IconComponent } from "./icon/icon.component";
 import { InputComponentComponent } from "./input-component/input-component.component";
 import { MicrositeHeaderComponent } from "./microsite-header/microsoft-header.component";
 import { ModalComponent } from "./modal/modal.component";
-import { NotificationBannerComponent } from "./notification-banner/notification-banner.component";
+import { NotificationComponent } from "./notification/notification.component";
 import { PaginateComponent } from "./paginate/paginate";
 import { PopoverComponent } from "./popover/popover.component";
 import { RadioComponent } from "./radio/radio.component";
@@ -66,7 +66,7 @@ export const appRoutes: Route[] = [
   { path: "input", component: InputComponentComponent },
   { path: "microsite-header", component: MicrositeHeaderComponent },
   { path: "modal", component: ModalComponent },
-  { path: "notification-banner", component: NotificationBannerComponent },
+  { path: "notification", component: NotificationComponent },
   { path: "paginate", component: PaginateComponent },
   { path: "popover", component: PopoverComponent },
   { path: "radio", component: RadioComponent },

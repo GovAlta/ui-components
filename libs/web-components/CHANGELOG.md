@@ -176,7 +176,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New component [Details](https://ui-components.alberta.ca/?path=/docs/components-details--basic)
 - New component [Accordion](https://ui-components.alberta.ca/?path=/docs/components-accordion--basic)
 - New feature for `goa-table`, [Sortable](https://ui-components.alberta.ca/?path=/docs/components-table--sortable)
-- New property for `goa-notification-banner`, [_dismiss](https://ui-components.alberta.ca/?path=/docs/components-notification-banner--types)
+- New property for `goa-notification`, [_dismiss](https://ui-components.alberta.ca/?path=/docs/components-notification-banner--types)
 - New CSS class for use in `goa-table`, [Number Columns](https://ui-components.alberta.ca/?path=/docs/components-table--number-columns)
 - New CSS classes for [unordered and ordererd lists](https://ui-components.alberta.ca/?path=/docs/utility-list-elements--ordered-list)
 
@@ -262,7 +262,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New modal variant [Callout](https://ui-components.alberta.ca/?path=/docs/components-modal--callout-variant)
-- New component [Notification Banner](https://ui-components.alberta.ca/?path=/docs/components-notification-banner--types)
+- New component [Notification](https://ui-components.alberta.ca/?path=/docs/components-notification-banner--types)
 - New component [Button Group](https://ui-components.alberta.ca/?path=/docs/components-button-group--alignment)
 
 ## [1.0.0] - 2022-11-07
