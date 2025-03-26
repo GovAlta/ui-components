@@ -1,43 +1,47 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoabNotificationBanner } from "./notification-banner";
+import { GoabNotification } from "./notification";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { fireEvent } from "@testing-library/dom";
 import { GoabAriaLiveType, GoabNotificationType } from "@abgov/ui-components-common";
 
 @Component({
   template: `
-  <goab-notification [type]="type"
-                     [ariaLive]="ariaLive"
-                     [maxContentWidth]="maxContentWidth"
-                     [testId]="testId"
-                     (onDismiss)="onDismiss()">
-    Information to the user goes in the content
-  </goab-notification>
-  `
+    <goab-notification
+      [type]="type"
+      [ariaLive]="ariaLive"
+      [maxContentWidth]="maxContentWidth"
+      [testId]="testId"
+      (onDismiss)="onDismiss()"
+    >
+      Information to the user goes in the content
+    </goab-notification>
+  `,
 })
-class TestNotificationBannerComponent {
+class TestNotificationComponent {
   type = "information" as GoabNotificationType;
   ariaLive = "assertive" as GoabAriaLiveType;
   maxContentWidth = "100px";
   testId = "testId";
-  onDismiss = () => {/** do something */};
+  onDismiss = () => {
+    /** do something */
+  };
 }
 
-describe("GoABNotificationBanner", () => {
-  let fixture: ComponentFixture<TestNotificationBannerComponent>;
-  let component: TestNotificationBannerComponent;
+describe("GoABNotification", () => {
+  let fixture: ComponentFixture<TestNotificationComponent>;
+  let component: TestNotificationComponent;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestNotificationBannerComponent],
-      imports: [GoabNotificationBanner],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      declarations: [TestNotificationComponent],
+      imports: [GoabNotification],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TestNotificationBannerComponent);
+    fixture = TestBed.createComponent(TestNotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  })
+  });
 
   it("should render notification banner", () => {
     const el = fixture.nativeElement.querySelector("goa-notification");
@@ -56,5 +60,5 @@ describe("GoABNotificationBanner", () => {
     fireEvent(el, new CustomEvent("_dismiss"));
 
     expect(onDismissSpy).toHaveBeenCalled();
-  })
+  });
 });

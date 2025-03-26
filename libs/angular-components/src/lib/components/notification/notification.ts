@@ -17,7 +17,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabNotificationBanner {
+export class GoabNotification {
   @Input() type?: GoabNotificationType = "information";
   @Input() ariaLive?: GoabAriaLiveType;
   @Input() maxContentWidth?: string;
