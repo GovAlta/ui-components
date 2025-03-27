@@ -164,6 +164,7 @@ export type {
   GoabTextHeadingSize,
   GoabTextBodySize,
   GoabTextSize,
+  GoabTextColor,
   GoabFielsetOnContinueDetail,
   GoabFormField,
   GoabFormState,
