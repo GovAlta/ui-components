@@ -5,6 +5,7 @@
 playground
 NOTES.md
 /test-results
+__screenshots__
 
 # environment
 .env
