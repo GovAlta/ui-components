@@ -746,37 +746,6 @@ describe("GoADropdown", () => {
       await waitFor(() => {
         const dropdown = result.container.querySelector(".dropdown");
         expect(dropdown?.getAttribute("style")).toContain("--width: 11ch"); // // 8 + 1 (letter count) + 2 (icon width)
-        const popover = result.container.querySelector("goa-popover");
-      });
-    });
-
-    it.skip("uses the non-percent width supplied", async () => {
-      const result = render(GoADropdownWrapper, {
-        name,
-        width: "500px",
-        items,
-      });
-      const dropdown = result.queryByTestId("favcolor-dropdown");
-      expect(dropdown?.getAttribute("style")).toContain("--width: 500px");
-
-      const popover = result.container.querySelector("goa-popover");
-      expect(popover?.getAttribute("width")).toBe("100%");
-    });
-
-    it.skip("sets the input width to 100% when percent value used", async () => {
-      const result = render(GoADropdownWrapper, {
-        name,
-        items,
-        width: "100%",
-      });
-      const dropdown = result.queryByTestId("favcolor-dropdown");
-      await waitFor(() => {
-        expect(dropdown?.getAttribute("style")).toContain("--width: 100%");
-      });
-
-      const popover = result.container.querySelector("goa-popover");
-      await waitFor(() => {
-        expect(popover?.getAttribute("width")).toBe("100%");
       });
     });
   });

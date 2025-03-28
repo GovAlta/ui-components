@@ -608,14 +608,15 @@
 </script>
 
 <div
-  {role}
+  role={role}
   aria-label={arialabel}
   aria-controls={ariacontrols}
   aria-expanded={_ariaExpanded}
   class={`goa-icon goa-icon--${size}`}
   class:inverted={_isInverted}
   data-testid={testid}
-  {title}
+  data-type={type}
+  title={title}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
     ${style("--fill-color", fillcolor)};
