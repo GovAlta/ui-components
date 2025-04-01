@@ -288,9 +288,11 @@
   style={`${_containerWidth}${calculateMargin(mt, mr, mb, ml)}`}
   bind:this={_rootEl}
 >
-  <div class="leading-content-slot">
-    <slot name="leadingContent" />
-  </div>
+  {#if $$slots.leadingContent}
+    <div class="leading-content-slot">
+      <slot name="leadingContent" />
+    </div>
+  {/if}
 
   <div
     class="goa-input variant--{variant} type--{type}"
@@ -375,9 +377,11 @@
     {/if}
   </div>
 
-  <div class="trailing-content-slot">
-    <slot name="trailingContent" />
-  </div>
+  {#if $$slots.trailingContent}
+    <div class="trailing-content-slot">
+      <slot name="trailingContent" />
+    </div>
+  {/if}
 </div>
 
 <!-- Styles -->
