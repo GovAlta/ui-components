@@ -5,25 +5,26 @@
   import { styles } from "../../common/utils";
   import { GoAIconType } from "../icon/Icon.svelte";
 
-  export let leadingicon: GoAIconType;
-  export let trailingicon: GoAIconType;
+  export let leadingicon: GoAIconType | null = null;
+  export let trailingicon: GoAIconType | null = null;
+  export let testid: string = "";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 </script>
 
-<div class={`link`} style={styles(calculateMargin(mt, mr, mb, ml))}>
-  {#if leadingicon}<goa-icon
-      class="leading-icon"
-      type={leadingicon}
-    />{/if}
+<div
+  class={`link`}
+  style={styles(calculateMargin(mt, mr, mb, ml))}
+  data-testid={testid}
+>
+  {#if leadingicon}<goa-icon class="leading-icon" type={leadingicon} />{/if}
   <slot />
   {#if trailingicon}<goa-icon type={trailingicon} />{/if}
 </div>
 
 <style>
-
   :global(::slotted(a)) {
     color: var(--goa-color-interactive-default);
   }
@@ -44,5 +45,4 @@
   .link:hover {
     color: var(--goa-color-interactive-hover);
   }
-
 </style>

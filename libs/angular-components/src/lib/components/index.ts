@@ -37,6 +37,7 @@ export * from "./hero-banner/hero-banner";
 export * from "./icon/icon";
 export * from "./icon-button/icon-button";
 export * from "./input/input";
+export * from "./link/link";
 export * from "./microsite-header/microsite-header";
 export * from "./modal/modal";
 export * from "./notification/notification";
