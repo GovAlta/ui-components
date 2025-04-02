@@ -191,6 +191,12 @@
   function onFormItemMount(detail: FormItemMountRelayDetail) {
     const { id, label, el } = detail;
     _formItems[id] = { label, el };
+    _state[id] = {
+      name: id,
+      value: "",
+      label: label,
+      order: 99,
+    }
   }
 
   // Collect list of child form item (input, dropdown, etc) elements
