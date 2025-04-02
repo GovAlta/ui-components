@@ -128,7 +128,7 @@
                     {#each Object.entries(getData(_state, page)) as [_, data]}
                       <tr>
                         <td class="label">{data.label}</td>
-                        <td class="value">{data.value}</td>
+                        <td class="value" class:empty={isBlank(data.value)}>{formatValue(data.value)}</td>
                       </tr>
                     {/each}
                   </table>
@@ -138,7 +138,7 @@
                       {#each Object.entries(item) as [_, data]}
                         <tr>
                           <td class="label">{data.label}</td>
-                          <td class="value">{data.value}</td>
+                          <td class="value" class:empty={isBlank(data.value)}>{formatValue(data.value)}</td>
                         </tr>
                       {/each}
                     </table>
