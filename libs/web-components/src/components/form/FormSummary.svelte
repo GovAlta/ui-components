@@ -3,7 +3,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import {
-  FieldsetItemState,
+    FieldsetItemState,
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
     FormState,
@@ -87,6 +87,16 @@
       return acc;
     }, []);
   }
+
+  const dateMatchRegex = /^\d{4}-\d{2}-\d{2}$/;
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  function formatValue(value: string): string {
+    if (value.match(dateMatchRegex)) {
+      const [year, month, day] = value.split("-");
+      return `${months[parseInt(month) - 1]} ${parseInt(day)}, ${year}`;
+    }
+    return value;
+  }
 </script>
 
 <div bind:this={_rootEl}>
@@ -109,7 +119,7 @@
                     {#each Object.entries(getData(_state, page)) as [_, data]}
                       <tr>
                         <td class="label">{data.label}</td>
-                        <td class="value">{data.value}</td>
+                        <td class="value">{formatValue(data.value)}</td>
                       </tr>
                     {/each}
                   </table>
@@ -119,7 +129,7 @@
                       {#each Object.entries(item) as [_, data]}
                         <tr>
                           <td class="label">{data.label}</td>
-                          <td class="value">{data.value}</td>
+                          <td class="value">{formatValue(data.value)}</td>
                         </tr>
                       {/each}
                     </table>
