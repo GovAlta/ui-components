@@ -308,18 +308,6 @@
 {:else if type === "input"}
   <goa-form-item error={_error && error} bind:this={_rootEl}>
     <goa-block direction="row">
-      <goa-form-item label="Day" helptext="Day (DD)">
-        <goa-input
-          name="day"
-          type="number"
-          on:_change={onInputChange}
-          width="7ch"
-          value={_inputDate.day}
-          min="1"
-          max="31"
-          {_error}
-        />
-      </goa-form-item>
       <goa-form-item label="Month" helptext="Month">
         <goa-dropdown name="month" on:_change={onInputChange} {error} value={_inputDate.month+""}>
           <goa-dropdown-item value="0" label="January" />
@@ -335,6 +323,18 @@
           <goa-dropdown-item value="10" label="November" />
           <goa-dropdown-item value="11" label="December" />
         </goa-dropdown>
+      </goa-form-item>
+      <goa-form-item label="Day" helptext="Day (DD)">
+        <goa-input
+          name="day"
+          type="number"
+          on:_change={onInputChange}
+          width="7ch"
+          value={_inputDate.day}
+          min="1"
+          max="31"
+          {_error}
+        />
       </goa-form-item>
       <goa-form-item label="Year" helptext="Year (YYYY)">
         <goa-input
