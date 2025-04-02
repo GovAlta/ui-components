@@ -258,13 +258,6 @@
   function onFieldsetChange(detail: FieldsetChangeRelayDetail) {
     const { id, state } = detail;
 
-    // clean empty values from the data to prevent them from showing up in the summary
-    for (const [name, fieldsetState] of Object.entries(state.data)) {
-      if (fieldsetState.value === "") {
-        delete state.data[name];
-      }
-    }
-
     // updating form state with the fieldset specific data
     _state.form[id] = { heading: state.heading, data: { type: "details", fieldsets: state.data } };
 

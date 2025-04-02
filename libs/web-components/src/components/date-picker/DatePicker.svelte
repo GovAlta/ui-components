@@ -19,7 +19,7 @@
     FieldsetResetErrorsMsg,
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
-    FieldsetErrorRelayDetail, FieldsetResetFieldsMsg,
+    FieldsetErrorRelayDetail, FieldsetResetFieldsMsg, FormItemMountMsg,
   } from "../../types/relay-types";
 
   type DateValue = {
@@ -52,6 +52,7 @@
 
   let _error: boolean = toBoolean(error);
   let _oldValue: Date | null;
+  let _senderEl: HTMLElement;
   let _rootEl: HTMLElement;
   let _date: Date | null;
   let _showPopover: boolean = false;
@@ -73,7 +74,7 @@
 
   // Listen for relayed messages
   function addRelayListener() {
-    receive(_rootEl, (action, data) => {
+    receive(_rootEl, (action, data, event) => {
       switch (action) {
         case FieldsetSetValueMsg:
           onSetValue(data as FieldsetSetValueRelayDetail);
@@ -86,6 +87,12 @@
           break;
         case FieldsetResetFieldsMsg:
           onSetValue({name, value: ""})
+          break;
+
+        // prevent child fields from mounting/registering themselves with parent components
+        case FormItemMountMsg:
+        case FormFieldMountMsg:
+          event.stopPropagation();
           break;
       }
     });
@@ -109,7 +116,7 @@
   // Notify the Form that this component has been mounted
   function sendMountedMessage() {
     relay<FormFieldMountRelayDetail>(
-      _rootEl,
+      _senderEl,
       FormFieldMountMsg,
       { name, el: _rootEl },
       { bubbles: true, timeout: 5 },
@@ -262,6 +269,7 @@
   }
 </script>
 
+<div bind:this={_senderEl}></div>
 {#if type === "calendar"}
   <goa-popover
     bind:this={_rootEl}
