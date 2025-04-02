@@ -22,7 +22,7 @@
   "devDependencies": {
     "@abgov/design-tokens": "^1.5.5",
     "@abgov/nx-release": "^10.0.0",
-    "@angular-devkit/build-angular": "18.2.16",
+    "@angular-devkit/build-angular": "18.2.17",
     "@angular-devkit/core": "18.1.4",
     "@angular-devkit/schematics": "18.1.4",
     "@angular-eslint/eslint-plugin": "18.0.1",
@@ -97,7 +97,7 @@
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "typescript": "5.4.5",
-    "vite": "^5.4.14",
+    "vite": "^5.4.16",
     "vite-plugin-dts": "~3.8.1",
     "vitest": "^2.1.9",
     "vitest-browser-react": "^0.1.1",
