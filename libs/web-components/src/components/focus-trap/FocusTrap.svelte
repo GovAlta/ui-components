@@ -48,8 +48,11 @@
 
   // Functions
 
-  function isFocusable(node: Node): Node | null | "ignore-focus" {
+  function isFocusable(node: Node): Node | null {
     const element = node as HTMLElement;
+
+    if (isFirstFocus && element.getAttribute?.("data-first-focus")) return node;
+
     const isTabbable =
       element.tabIndex > 0 ||
       (element.tabIndex === 0 && element.getAttribute("tabIndex") !== null);
@@ -106,7 +109,10 @@
   // Focus event handler
   function keepWithinBounds(e: Event | null): void {
     const el = (e?.target as HTMLElement) ?? rootEl;
-    isFirstFocus = false;
+    if (isFirstFocus) {
+      isFirstFocus = false;
+      return;
+    }
 
     if (el.dataset["tabBoundry"] === "start") {
       if (isShiftPressed) {
@@ -114,7 +120,10 @@
         return;
       }
 
-      const sibling = el.nextElementSibling;
+      let sibling = el.nextElementSibling;
+      if (sibling?.getAttribute("data-first-focus") === "true") {
+        sibling = sibling.nextElementSibling;
+      }
       if (!sibling) return;
 
       const next = findFirstNode([sibling], false) as HTMLElement;
@@ -128,7 +137,10 @@
         return;
       }
 
-      const sibling = el.previousElementSibling;
+      let sibling = el.previousElementSibling;
+      if (sibling?.getAttribute("data-first-focus") === "true") {
+        sibling = sibling.previousElementSibling;
+      }
       if (!sibling) return;
 
       const next = findFirstNode([sibling], true) as HTMLElement;
@@ -150,15 +162,13 @@
   ): Node | null {
     const nodeList = reversed ? [...nodes].reverse() : nodes;
     for (const node of nodeList) {
-      if (isFocusable(node) !== "ignore-focus") {
-          const el =
-          isFocusable(node) ||
-          findFirstNode(node.childNodes, reversed) ||
-          findFirstNodeOfSlot(node, reversed) ||
-          findFirstNodeOfShadowDOM(node, reversed);
-        if (el) {
-          return el;
-        }
+      const el =
+        isFocusable(node) ||
+        findFirstNode(node.childNodes, reversed) ||
+        findFirstNodeOfSlot(node, reversed) ||
+        findFirstNodeOfShadowDOM(node, reversed);
+      if (el) {
+        return el;
       }
     }
     return null;

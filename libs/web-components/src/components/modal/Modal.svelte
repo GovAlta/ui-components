@@ -215,6 +215,7 @@
         {role}
         aria-modal="true"
         aria-labelledby="goa-modal-heading"
+        data-first-focus={role === "dialog" ? "true" : undefined}
       >
         {#if calloutvariant !== null}
           <div class="callout-bar {calloutvariant}">
@@ -252,7 +253,6 @@
                 <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <goa-icon-button
                   size="medium"
-                  data-ignore-focus="true"
                   data-testid="modal-close-button"
                   arialabel="Close the modal"
                   icon="close"

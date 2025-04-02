@@ -7,7 +7,6 @@
 <div>
   <input type="text" class="description" name="description" />
   <GoAFocusTrap>
-    <button data-ignore-focus="true">Ignore Focus</button>
     <input type="text" data-testid="username" name="username" />
     <input type="text" data-testid="email" name="email" />
     <input type="text" data-testid="address" name="address" />
