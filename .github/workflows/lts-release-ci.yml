@@ -35,7 +35,7 @@ jobs:
         run: npm run build
 
       - name: Test
-        run: vitest
+        run: npm run test
 
       - name: Update VsCode documentation
         run: npm run build:vscode-doc
