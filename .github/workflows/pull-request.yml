@@ -3,9 +3,7 @@ name: Pull Request Check
 on:
   pull_request:
     branches:
-      - main
-      - alpha
-      - BUGFIX
+      - lts
 
 jobs:
   build:
@@ -34,8 +32,4 @@ jobs:
           npx nx affected --target=post --base=origin/${{ github.base_ref }}
 
       - name: Test
-        run: |
-          if [ -d "./dist" ]; then
-            npx playwright install --with-deps
-            npm run test:headless
-          fi
+        run: npm run test
