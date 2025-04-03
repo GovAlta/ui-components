@@ -24,10 +24,7 @@ export function GoabAppFooterMetaSection({
   children,
 }: GoabAppFooterMetaSectionProps) {
   return (
-    <goa-app-footer-meta-section
-      testid= {testId}
-      slot="meta"
-    >
+    <goa-app-footer-meta-section testid={testId} slot="meta">
       {children}
     </goa-app-footer-meta-section>
   );

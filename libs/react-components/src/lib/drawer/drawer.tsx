@@ -47,11 +47,11 @@ export function GoabDrawer({
     if (!el?.current || !onClose) {
       return;
     }
-    el.current?.addEventListener("_close", onClose)
+    el.current?.addEventListener("_close", onClose);
     return () => {
-      el.current?.removeEventListener("_close", onClose)
-    }
-  }, [el, onClose])
+      el.current?.removeEventListener("_close", onClose);
+    };
+  }, [el, onClose]);
 
   return (
     <goa-drawer

@@ -25,16 +25,10 @@ describe("Table", () => {
     const { baseElement } = render(<Table onSort={onSort} />);
 
     const table = baseElement.querySelector("goa-table");
-
     const event: GoabTableOnSortDetail = { sortBy: "name", sortDir: 1 };
     expect(table).toBeTruthy();
-    table && fireEvent(
-      table,
-      new CustomEvent("_sort", {
-        detail: event
-      })
-    );
 
+    table && fireEvent(table, new CustomEvent("_sort", { detail: event }));
     expect(onSort).toHaveBeenCalledWith(event);
   });
 
@@ -43,13 +37,13 @@ describe("Table", () => {
     const table = baseElement.querySelector("goa-table");
 
     expect(table).toBeTruthy();
-    expect(() =>
-        table && fireEvent(
+    expect(
+      () =>
+        table &&
+        fireEvent(
           table,
-          new CustomEvent("_sort", {
-            detail: { sortBy: "age", sortDir: -1 }
-          })
-        )
+          new CustomEvent("_sort", { detail: { sortBy: "age", sortDir: -1 } }),
+        ),
     ).not.toThrow();
   });
 });

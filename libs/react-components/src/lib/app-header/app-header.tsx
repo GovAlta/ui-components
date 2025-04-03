@@ -50,11 +50,11 @@ export function GoabAppHeader({
     const current = el.current;
     const listener = () => {
       onMenuClick();
-    }
+    };
     current.addEventListener("_menuClick", listener);
     return () => {
       current.removeEventListener("_menuClick", listener);
-    }
+    };
   }, [el, onMenuClick]);
 
   return (

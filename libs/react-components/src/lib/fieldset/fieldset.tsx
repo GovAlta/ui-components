@@ -53,7 +53,7 @@ export function GoabFieldset({
     const _continue = (e: Event) => {
       const event = (e as CustomEvent).detail;
       return onContinue?.(event);
-    }
+    };
 
     if (onContinue) {
       current.addEventListener("_continue", _continue);

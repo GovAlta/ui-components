@@ -25,7 +25,8 @@ describe("GoabIcon", () => {
         mt="s"
         mr="m"
         mb="l"
-        ml="xl" />
+        ml="xl"
+      />,
     );
 
     const el = container.querySelector("goa-icon");

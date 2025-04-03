@@ -2,7 +2,9 @@ import { render, waitFor } from "@testing-library/react";
 import { describe, it } from "vitest";
 import GoabDrawer from "./drawer";
 
-const noop = () => {/* nothing */}
+const noop = () => {
+  /* nothing */
+};
 
 describe("Drawer", () => {
   it("should render", async () => {
