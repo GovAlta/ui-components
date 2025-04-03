@@ -9,6 +9,7 @@ interface WCProps extends Margins {
   as?: TextElement | HeadingElement;
   size?: Size;
   maxwidth?: MaxWidth;
+  color?: Color;
 }
 
 declare global {
@@ -39,19 +40,23 @@ type BodySize
 
 export type Size = HeadingSize | BodySize;
 
+type Color = "primary" | "secondary";
+
 interface GoATextProps extends Margins {
   as?: TextElement | HeadingElement;
   size?: Size;
   maxWidth?: MaxWidth;
+  color?: Color;
   children: ReactNode;
 }
 
 export function GoAText(props: GoATextProps): JSX.Element {
   return (
     <goa-text
-      as={props.as || "div"}
+      as={props.as}
       size={props.size}
-      maxwidth={props.maxWidth || "65ch"}
+      maxwidth={props.maxWidth}
+      color={props.color}
       mt={props.mt}
       mb={props.mb}
       ml={props.ml}
