@@ -6,6 +6,9 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 
+import type { JSX } from "react";
+import { toOptionalBooleanAsString } from "../../utils";
+
 interface IonIconProps {
   name: GoabIconType | GoabIconFilledType;
 }
@@ -13,20 +16,18 @@ interface IonIconProps {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IonIconElement extends HTMLElement {}
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "ion-icon": IonIconProps & React.HTMLAttributes<IonIconElement>;
     }
   }
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-icon": WCProps & React.HTMLAttributes<IonIconElement>;
     }
@@ -37,7 +38,7 @@ export interface GoabIconProps extends Margins {
   type: GoabIconType;
   size?: GoabIconSize;
   theme?: GoabIconTheme;
-  inverted?: string;
+  inverted?: string | boolean; // TODO: Change type to only boolean
   fillColor?: string;
   opacity?: number;
   title?: string;
@@ -77,7 +78,10 @@ export function GoabIcon({
       type={type}
       theme={theme}
       size={size}
-      inverted={inverted}
+      inverted={
+        typeof inverted === "boolean" ? toOptionalBooleanAsString(inverted) : inverted
+      }
+      // inverted={toOptionalBooleanAsString(inverted)}  // TODO: Change type to only boolean
       fillcolor={fillColor}
       opacity={opacity}
       title={title}

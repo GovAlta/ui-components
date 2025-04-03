@@ -5,10 +5,23 @@ import GoabDrawer from "./drawer";
 const noop = () => {/* nothing */}
 
 describe("Drawer", () => {
-  it("renders with string heading", async () => {
+  it("should render", async () => {
+    const content = render(
+      <GoabDrawer position="bottom" onClose={noop}>
+        The content
+      </GoabDrawer>,
+    );
+
+    const el = content.container.querySelector("goa-drawer");
+
+    expect(el?.getAttribute("position")).toBe("bottom");
+    expect(el?.getAttribute("open")).toBeNull();
+  });
+
+  it("should render with properties", async () => {
     const content = render(
       <GoabDrawer
-        open={false}
+        open
         position="bottom"
         heading="The heading"
         maxSize="50ch"
@@ -22,12 +35,27 @@ describe("Drawer", () => {
     const el = content.container.querySelector("goa-drawer");
     expect(el).toBeTruthy();
     await waitFor(() => {
-      expect(el?.getAttribute("open")).toBeNull();
+      expect(el?.getAttribute("open")).toBe("true");
       expect(el?.getAttribute("position")).toBe("bottom");
       expect(el?.getAttribute("heading")).toBe("The heading");
       expect(el?.getAttribute("maxsize")).toBe("50ch");
       expect(el?.getAttribute("testid")).toBe("the testid");
-    })
+    });
+  });
+
+  it("should render with open false", async () => {
+    const content = render(
+      <GoabDrawer open={false} position="bottom" onClose={noop}>
+        The content
+      </GoabDrawer>,
+    );
+
+    const el = content.container.querySelector("goa-drawer");
+    expect(el).toBeTruthy();
+    await waitFor(() => {
+      expect(el?.getAttribute("position")).toBe("bottom");
+      expect(el?.getAttribute("open")).toBe("false");
+    });
   });
 
   it("renders with React node heading", async () => {

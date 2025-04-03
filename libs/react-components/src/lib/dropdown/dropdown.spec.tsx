@@ -3,6 +3,10 @@ import { GoabDropdown } from "./dropdown";
 import { GoabDropdownItem, GoabDropdownOption } from "./dropdown-item";
 import { describe, it, expect, vi } from "vitest";
 
+const noop = () => {
+  /* do nothing */
+};
+
 afterEach(cleanup);
 
 describe("GoabDropdown", () => {
@@ -11,11 +15,7 @@ describe("GoabDropdown", () => {
       /* do nothing */
     });
     render(
-      <GoabDropdown
-        onChange={() => {
-          /* do nothing */
-        }}
-      >
+      <GoabDropdown onChange={noop}>
         <GoabDropdownOption value="foo" />
       </GoabDropdown>,
     );
@@ -27,6 +27,17 @@ describe("GoabDropdown", () => {
     mock.mockRestore();
   });
 
+  it("should render", async () => {
+    const { baseElement } = render(<GoabDropdown onChange={noop}></GoabDropdown>);
+
+    const el = baseElement.querySelector("goa-dropdown");
+    expect(el?.getAttribute("disabled")).toBeNull();
+    expect(el?.getAttribute("error")).toBeNull();
+    expect(el?.getAttribute("filterable")).toBeNull();
+    expect(el?.getAttribute("multiselect")).toBeNull();
+    expect(el?.getAttribute("native")).toBeNull();
+  });
+
   it("should bind all web-component attributes", async () => {
     const { baseElement } = render(
       <GoabDropdown
@@ -35,9 +46,11 @@ describe("GoabDropdown", () => {
         value={[""]}
         maxHeight="100px"
         placeholder="Select..."
-        filterable={true}
-        disabled={true}
-        error={true}
+        disabled
+        error
+        filterable
+        multiselect
+        native
         testId="foo"
         id="foo-dropdown"
         width="200px"
@@ -47,9 +60,7 @@ describe("GoabDropdown", () => {
         ml="xl"
         ariaLabel={"label"}
         ariaLabelledBy={"foo-dropdown-label"}
-        onChange={() => {
-          /* do nothing */
-        }}
+        onChange={noop}
       >
         <GoabDropdownItem name="favColor" label="Red" value="red" />
         <GoabDropdownItem name="favColor" label="Blue" value="blue" />
@@ -64,7 +75,11 @@ describe("GoabDropdown", () => {
     expect(el?.getAttribute("mb")).toBe("l");
     expect(el?.getAttribute("ml")).toBe("xl");
     expect(el?.getAttribute("id")).toBe("foo-dropdown");
+    expect(el?.getAttribute("disabled")).toBe("true");
+    expect(el?.getAttribute("error")).toBe("true");
     expect(el?.getAttribute("filterable")).toBe("true");
+    expect(el?.getAttribute("multiselect")).toBe("true");
+    expect(el?.getAttribute("native")).toBe("true");
     expect(el?.getAttribute("arialabel")).toBe("label");
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
   });
@@ -73,7 +88,7 @@ describe("GoabDropdown", () => {
     const fn = vi.fn();
 
     const { baseElement } = render(
-      <GoabDropdown name="favColor" value="yellow" onChange={fn} native={true}>
+      <GoabDropdown name="favColor" value="yellow" onChange={fn} native>
         <GoabDropdownItem name="favColor" label="Red" value="red" />
         <GoabDropdownItem name="favColor" label="Blue" value="blue" />
         <GoabDropdownItem name="favColor" label="Yellow" value="yellow" />

@@ -8,15 +8,25 @@ const testId = "test-id";
 
 describe("GoabCheckbox", () => {
   it("should render", () => {
+    render(<GoabCheckbox name="foo" />);
+
+    const checkbox = document.querySelector("goa-checkbox");
+    expect(checkbox?.getAttribute("name")).toBe("foo");
+    expect(checkbox?.getAttribute("disabled")).toBeNull();
+    expect(checkbox?.getAttribute("checked")).toBeNull();
+    expect(checkbox?.getAttribute("error")).toBeNull();
+  });
+
+  it("should render with props", () => {
     const props: CheckboxProps = {
       id: "abc",
       name: "foo",
       value: "bar",
       text: "to display",
       maxWidth: "480px",
-      disabled: false,
+      disabled: true,
       checked: true,
-      error: false,
+      error: true,
       testId: testId,
       mt: "s",
       mr: "m",
@@ -27,20 +37,29 @@ describe("GoabCheckbox", () => {
     render(<GoabCheckbox {...props} />);
 
     const checkbox = document.querySelector("goa-checkbox");
-    expect(checkbox).toBeTruthy();
     expect(checkbox?.getAttribute("id")).toBe("abc");
     expect(checkbox?.getAttribute("name")).toBe("foo");
     expect(checkbox?.getAttribute("value")).toBe("bar");
     expect(checkbox?.getAttribute("text")).toBe("to display");
     expect(checkbox?.getAttribute("maxwidth")).toBe("480px");
-    expect(checkbox?.getAttribute("disabled")).toBe("false");
+    expect(checkbox?.getAttribute("disabled")).toBe("true");
     expect(checkbox?.getAttribute("checked")).toBe("true");
-    expect(checkbox?.getAttribute("error")).toBe("false");
+    expect(checkbox?.getAttribute("error")).toBe("true");
     expect(checkbox?.getAttribute("testid")).toBe(testId);
     expect(checkbox?.getAttribute("mt")).toBe("s");
     expect(checkbox?.getAttribute("mr")).toBe("m");
     expect(checkbox?.getAttribute("mb")).toBe("l");
     expect(checkbox?.getAttribute("ml")).toBe("xl");
+  });
+
+  it("should render with boolean value", () => {
+    render(<GoabCheckbox name="foo" value={true} />);
+
+    const checkbox = document.querySelector("goa-checkbox");
+    expect(checkbox?.getAttribute("value")).toBe("true");
+    expect(checkbox?.getAttribute("disabled")).toBeNull();
+    expect(checkbox?.getAttribute("checked")).toBeNull();
+    expect(checkbox?.getAttribute("error")).toBeNull();
   });
 
   it("should render with text description", () => {
@@ -50,15 +69,12 @@ describe("GoabCheckbox", () => {
 
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox?.getAttribute("description")).toBe("description text");
+    expect(checkbox?.getAttribute("checked")).toBe("false");
   });
 
   it("should render with slot description", () => {
     const result = render(
-      <GoabCheckbox
-        name={"foo"}
-        checked={false}
-        description={<div>description slot</div>}
-      />,
+      <GoabCheckbox name={"foo"} description={<div>description slot</div>} />,
     );
 
     const checkbox = document.querySelector("goa-checkbox");
@@ -91,7 +107,9 @@ describe("GoabCheckbox", () => {
 
     render(<GoabCheckbox {...props} />);
     const checkbox = document.querySelector("goa-checkbox");
-    expect(checkbox).toBeTruthy();
+    expect(checkbox?.getAttribute("disabled")).toBe("true");
+    expect(checkbox?.getAttribute("checked")).toBe("false");
+    expect(checkbox?.getAttribute("error")).toBe("false");
 
     checkbox &&
       fireEvent(

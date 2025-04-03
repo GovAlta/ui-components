@@ -2,13 +2,21 @@ import { render } from "@testing-library/react";
 import { GoabIcon } from "./icon";
 
 describe("GoabIcon", () => {
-  it("should render the properties", () => {
+  it("should render", () => {
+    const { container } = render(<GoabIcon type="information" />);
+
+    const el = container.querySelector("goa-icon");
+    expect(el?.getAttribute("type")).toBe("information");
+    expect(el?.getAttribute("inverted")).toBeNull();
+  });
+
+  it("should render with properties", () => {
     const { container } = render(
       <GoabIcon
         type="information"
         size="large"
         theme="filled"
-        inverted="true"
+        inverted
         fillColor="blue"
         opacity={0.5}
         title="foo"
@@ -19,8 +27,8 @@ describe("GoabIcon", () => {
         mb="l"
         ml="xl" />
     );
-    const el = container.querySelector("goa-icon");
 
+    const el = container.querySelector("goa-icon");
     expect(el?.getAttribute("type")).toBe("information");
     expect(el?.getAttribute("size")).toBe("large");
     expect(el?.getAttribute("theme")).toBe("filled");

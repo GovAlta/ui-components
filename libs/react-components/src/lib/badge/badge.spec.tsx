@@ -1,6 +1,5 @@
 import { configure, render } from "@testing-library/react";
 import { GoabBadge } from "./badge";
-import { screen } from "@testing-library/dom";
 
 configure({
   testIdAttribute: "testId",
@@ -8,10 +7,10 @@ configure({
 
 describe("GoabBadge", () => {
   it("should render", () => {
-    render(<GoabBadge type="information" testId="badge-test" content="Text Content" />);
+    const { container } = render(<GoabBadge type="information" content="Text Content" />);
 
-    const badge = screen.getByTestId("badge-test");
-    expect(badge).toBeTruthy();
+    const el = container.querySelector("goa-badge");
+    expect(el?.getAttribute("icon")).toBeNull();
   });
 
   it("should render the properties", () => {
@@ -19,6 +18,7 @@ describe("GoabBadge", () => {
       <GoabBadge
         type="information"
         content="Text Content"
+        icon
         mt="s"
         mr="m"
         mb="l"
@@ -30,6 +30,7 @@ describe("GoabBadge", () => {
 
     expect(el?.getAttribute("type")).toBe("information");
     expect(el?.getAttribute("content")).toBe("Text Content");
+    expect(el?.getAttribute("icon")).toBe("true");
     expect(el?.getAttribute("mt")).toBe("s");
     expect(el?.getAttribute("mr")).toBe("m");
     expect(el?.getAttribute("mb")).toBe("l");

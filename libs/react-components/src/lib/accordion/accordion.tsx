@@ -1,10 +1,15 @@
-import { ReactNode , useEffect, useRef} from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
 
-import type { GoabAccordionHeadingSize, GoabAccordionIconPosition, Margins } from "@abgov/ui-components-common";
+import type {
+  GoabAccordionHeadingSize,
+  GoabAccordionIconPosition,
+  Margins,
+} from "@abgov/ui-components-common";
+import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement>;
-  open?: boolean;
+  ref: React.RefObject<HTMLElement | null>;
+  open?: string;
   headingsize?: GoabAccordionHeadingSize;
   heading: string;
   secondarytext?: string;
@@ -14,7 +19,7 @@ interface WCProps extends Margins {
   iconposition?: GoabAccordionIconPosition;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -70,7 +75,7 @@ export function GoabAccordion({
   return (
     <goa-accordion
       ref={ref}
-      open={open}
+      open={toOptionalBooleanAsString(open)}
       headingsize={headingSize}
       heading={heading}
       secondarytext={secondaryText}

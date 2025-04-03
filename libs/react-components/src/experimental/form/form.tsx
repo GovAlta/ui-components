@@ -3,15 +3,14 @@ import { Margins, GoabFormStorageType, GoabFormOnMountDetail, GoabFormOnStateCha
 import { relay } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  ref?: React.MutableRefObject<HTMLElement | undefined>;
+  ref?: React.RefObject<HTMLElement | null>;
   name: string;
   storage: GoabFormStorageType;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-simple-form": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -37,12 +36,12 @@ export function GoabSimpleForm({
   ml,
   children,
 }: GoabFormProps) {
-  const el = useRef<HTMLElement>();
+  const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const _continueTo = (el: HTMLElement | undefined, next: string) => {
+    const _continueTo = (el: HTMLElement | null, next: string) => {
       if (!el) {
-        console.error("external::continue el is undefined");
+        console.error("external::continue el is null");
         return;
       }
       relay<{ next: string }>(el, "external::continue", {

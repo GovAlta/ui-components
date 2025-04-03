@@ -1,16 +1,16 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 
 interface WCProps {
   heading?: string;
   url?: string;
   maxcontentwidth?: string;
   fullmenubreakpoint?: number;
-  hasmenuclickhandler?: boolean;
-  ref: React.RefObject<HTMLElement>;
+  hasmenuclickhandler?: string;
+  ref: React.RefObject<HTMLElement | null>;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -65,7 +65,7 @@ export function GoabAppHeader({
       fullmenubreakpoint={fullMenuBreakpoint}
       maxcontentwidth={maxContentWidth}
       testid={testId}
-      hasmenuclickhandler={!!onMenuClick}
+      hasmenuclickhandler={onMenuClick ? "true" : "false"}
     >
       {children}
     </goa-app-header>

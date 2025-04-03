@@ -9,12 +9,20 @@ const noop = () => {
 };
 
 describe("DatePicker", () => {
-  it("should render successfully", () => {
+  it("should render", () => {
+    const { baseElement } = render(<DatePicker name="foo" onChange={noop} />);
+
+    const el = baseElement.querySelector("goa-date-picker");
+    expect(el).toBeTruthy();
+    expect(el?.getAttribute("name")).toBe("foo");
+    expect(el?.getAttribute("error")).toBeNull();
+    expect(el?.getAttribute("disabled")).toBeNull();
+  });
+
+  it("should render with properties", () => {
     const value = new Date();
-    const error = true;
     const min = addMonths(value, -1);
     const max = addMonths(value, 1);
-    const disabled = true;
 
     const { baseElement } = render(
       <DatePicker
@@ -23,8 +31,8 @@ describe("DatePicker", () => {
         max={max}
         value={value}
         testId="foo"
-        error={error}
-        disabled={disabled}
+        error
+        disabled
         onChange={noop}
       />,
     );

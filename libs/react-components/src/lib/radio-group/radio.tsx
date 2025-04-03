@@ -1,22 +1,25 @@
 import { Margins } from "@abgov/ui-components-common";
 
-interface RadioItemProps extends Margins {
+import type { JSX } from "react";
+import { toOptionalBooleanAsString } from "../../utils";
+
+interface WCProps extends Margins {
   name?: string;
   value?: string;
   description?: string | React.ReactNode;
   label?: string;
   maxwidth?: string;
-  disabled?: boolean;
-  checked?: boolean;
-  error?: boolean;
+  disabled?: string;
+  checked?: string;
+  error?: string;
   arialabel?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-radio-item": RadioItemProps & React.HTMLAttributes<HTMLElement>;
+      "goa-radio-item": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -31,7 +34,6 @@ export interface GoabRadioItemProps extends Margins {
   checked?: boolean;
   error?: boolean;
   children?: React.ReactNode;
-  testId?: string;
   ariaLabel?: string;
 }
 
@@ -44,7 +46,6 @@ export function GoabRadioItem({
   disabled,
   checked,
   error,
-  testId,
   ariaLabel,
   children,
   mt,
@@ -59,9 +60,9 @@ export function GoabRadioItem({
       value={value}
       description={typeof description === "string" ? description : undefined}
       maxwidth={maxWidth}
-      error={error}
-      disabled={disabled}
-      checked={checked}
+      error={toOptionalBooleanAsString(error)}
+      disabled={toOptionalBooleanAsString(disabled, { omitIfFalse: true })}
+      checked={toOptionalBooleanAsString(checked)}
       arialabel={ariaLabel}
       mt={mt}
       mr={mr}

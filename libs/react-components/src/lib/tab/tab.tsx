@@ -1,8 +1,9 @@
+import type { JSX } from "react";
 interface WCProps {
   heading?: React.ReactNode;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

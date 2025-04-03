@@ -3,6 +3,15 @@ import GoabButton from "../../lib/button/button";
 import { GoabModal, GoabModalProps } from "./modal";
 
 describe("Modal Tests", () => {
+  it("should render", async () => {
+    const { baseElement } = render(<GoabModal>Modal Content</GoabModal>);
+
+    const modal = baseElement.querySelector("goa-modal");
+
+    expect(modal?.getAttribute("open")).toBeNull();
+    expect(modal?.getAttribute("closable")).toBe("false");
+  });
+
   it("Modal - should render with close capability via icon and background", async () => {
     const props = {
       heading: "Modal Heading",
