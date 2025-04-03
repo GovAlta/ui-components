@@ -5,10 +5,9 @@ interface WCProps extends Margins {
   heading: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-public-form-task-list": WCProps & React.HTMLAttributes<HTMLElement>;
     }

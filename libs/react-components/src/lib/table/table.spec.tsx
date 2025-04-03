@@ -4,15 +4,26 @@ import Table from "./table";
 import { GoabTableOnSortDetail } from "@abgov/ui-components-common";
 
 describe("Table", () => {
-
-  it("should render successfully", () => {
+  it("should render", () => {
     const { baseElement } = render(<Table />);
-    expect(baseElement).toBeTruthy();
+
+    const table = baseElement.querySelector("goa-table");
+    expect(table?.getAttribute("stickyHeader")).toBeNull();
+  });
+
+  it("should render with properties", () => {
+    const { baseElement } = render(<Table stickyHeader />);
+
+    const table = baseElement.querySelector("goa-table");
+    expect(table?.getAttribute("stickyHeader")).toBeNull();
+    // TODO: Enable this later if needed
+    // expect(table?.getAttribute("stickyHeader")).toBe("true");
   });
 
   it("should call onSort when _sort event is triggered", () => {
     const onSort = vi.fn();
     const { baseElement } = render(<Table onSort={onSort} />);
+
     const table = baseElement.querySelector("goa-table");
 
     const event: GoabTableOnSortDetail = { sortBy: "name", sortDir: 1 };

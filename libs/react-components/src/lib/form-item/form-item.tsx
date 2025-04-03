@@ -4,6 +4,8 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 
+import type { JSX } from "react";
+
 interface WCProps extends Margins {
   label?: string;
   labelsize?: GoabFormItemLabelSize;
@@ -15,7 +17,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

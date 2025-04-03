@@ -1,14 +1,17 @@
 import { GoabSpinnerSize, GoabSpinnerType } from "@abgov/ui-components-common";
 
+import type { JSX } from "react";
+import { toOptionalBooleanAsString } from "../../utils";
+
 interface WCProps {
   size: GoabSpinnerSize;
   type: GoabSpinnerType;
-  invert?: boolean;
+  invert?: string;
   progress?: number;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -39,7 +42,7 @@ export function GoabSpinner({
       type={type}
       size={size}
       progress={progress}
-      invert={invert}
+      invert={toOptionalBooleanAsString(invert)}
       testid={testId}
     />
   );

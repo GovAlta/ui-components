@@ -4,20 +4,21 @@ import {
   GoabIconType,
   Margins,
 } from "@abgov/ui-components-common";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
+import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   icon: GoabIconType;
   size?: GoabIconSize;
   variant?: GoabIconButtonVariant;
   title?: string;
-  disabled?: boolean;
+  disabled?: string;
   arialabel?: string;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -76,7 +77,7 @@ export function GoabIconButton({
     <goa-icon-button
       ref={ref}
       icon={icon}
-      disabled={disabled}
+      disabled={toOptionalBooleanAsString(disabled, { omitIfFalse: true })}
       variant={variant}
       size={size}
       title={title}

@@ -6,15 +6,10 @@ import { describe, it, expect, vi } from "vitest";
 describe("GoA FilterChip", () => {
   it("should render", () => {
     const { container } = render(<GoabFilterChip content="some filter chip" />);
-    expect(container.innerHTML).toContain("some filter chip");
-  });
 
-  it("should render with basic props", () => {
-    const { container } = render(<GoabFilterChip content="Some Badge" />);
-    expect(container.innerHTML).toContain("Some Badge");
     const el = container.querySelector("goa-filter-chip");
-    expect(el).not.toBeNull();
-    expect(el?.getAttribute("error")).toBe("false");
+    expect(el?.getAttribute("content")).toBe("some filter chip");
+    expect(el?.getAttribute("error")).toBeNull();
   });
 
   it("should bind all properties correctly", async () => {
@@ -25,7 +20,7 @@ describe("GoA FilterChip", () => {
         mr="m"
         mb="l"
         ml="xl"
-        error={true}
+        error
         iconTheme="filled"
         testId="test-chip"
       />,

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 import { format, isValid, parseISO } from "date-fns";
 import {
   GoabAutoCapitalize,
@@ -11,13 +11,14 @@ import {
   GoabInputType,
   Margins,
 } from "@abgov/ui-components-common";
+import { toOptionalBooleanAsString } from "../../utils";
 
 export interface IgnoreMe {
   ignore: string;
 }
 
 interface WCProps extends Margins {
-  ref?: React.MutableRefObject<HTMLInputElement | null>;
+  ref?: React.RefObject<HTMLInputElement | null>;
   type?: GoabInputType;
   name: string;
   value?: string;
@@ -28,11 +29,11 @@ interface WCProps extends Margins {
   leadingicon?: string;
   trailingicon?: string;
   variant: string;
-  disabled?: boolean;
-  error?: boolean;
-  readonly?: boolean;
-  focused?: boolean;
-  handletrailingiconclick?: boolean;
+  disabled?: string;
+  error?: string;
+  readonly?: string;
+  focused?: string;
+  handletrailingiconclick: string;
   width?: string;
   prefix?: string;
   suffix?: string;
@@ -48,7 +49,7 @@ interface WCProps extends Margins {
   trailingiconarialabel?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -208,7 +209,7 @@ export function GoabInput({
     <goa-input
       ref={ref}
       debounce={debounce}
-      focused={focused}
+      focused={toOptionalBooleanAsString(focused)}
       type={type}
       name={name}
       autocapitalize={autoCapitalize}
@@ -216,10 +217,10 @@ export function GoabInput({
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
       variant={variant}
-      disabled={disabled}
-      readonly={readonly}
+      disabled={toOptionalBooleanAsString(disabled, { omitIfFalse: true })}
+      readonly={toOptionalBooleanAsString(readonly)}
       placeholder={placeholder}
-      error={error}
+      error={toOptionalBooleanAsString(error)}
       testid={testId}
       value={value}
       width={width}
@@ -234,7 +235,7 @@ export function GoabInput({
       mr={mr}
       mb={mb}
       ml={ml}
-      handletrailingiconclick={!!onTrailingIconClick}
+      handletrailingiconclick={onTrailingIconClick ? "true" : "false"}
       trailingiconarialabel={trailingIconAriaLabel}
     >
       {leadingContent && <div slot="leadingContent">{leadingContent}</div>}

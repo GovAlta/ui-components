@@ -1,19 +1,19 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
 import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
+import { toOptionalBoolean } from "../../utils";
 
 interface WCProps {
-  open: boolean | undefined;
   position: GoabDrawerPosition;
+  open?: boolean;
   heading?: string;
   maxsize?: GoabDrawerSize;
   testid?: string;
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-drawer": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -21,9 +21,9 @@ declare global {
 }
 
 export interface GoabDrawerProps {
-  open: boolean;
   position: GoabDrawerPosition;
-  heading?: string|ReactNode;
+  open?: boolean;
+  heading?: string | ReactNode;
   maxSize?: GoabDrawerSize;
   testId?: string;
   actions?: ReactNode;
@@ -32,8 +32,8 @@ export interface GoabDrawerProps {
 }
 
 export function GoabDrawer({
-  open,
   position,
+  open,
   heading,
   maxSize,
   testId,
@@ -56,8 +56,8 @@ export function GoabDrawer({
   return (
     <goa-drawer
       ref={el}
-      open={open ? true : undefined}
       position={position}
+      open={toOptionalBoolean(open)}
       heading={typeof heading === "string" ? heading : undefined}
       maxsize={maxSize}
       testid={testId}

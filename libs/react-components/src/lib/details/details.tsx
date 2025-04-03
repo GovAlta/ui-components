@@ -1,17 +1,17 @@
 import { Margins } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
+import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
   heading: string;
-  open?: boolean;
+  open?: string;
   maxwidth?: string;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-details": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -31,7 +31,7 @@ export function GoabDetails(props: GoabDetailsProps) {
   return (
     <goa-details
       heading={props.heading}
-      open={props.open}
+      open={toOptionalBooleanAsString(props.open)}
       maxwidth={props.maxWidth}
       testid={props.testId}
       mt={props.mt}

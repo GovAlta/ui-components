@@ -7,6 +7,7 @@ describe("GoabAppHeader", () => {
 
     const header = baseElement.querySelector("goa-app-header");
     expect(header).toBeTruthy();
+    expect(header?.getAttribute("hasmenuclickhandler")).toBe("false");
   });
   it("should dispatch onMobileMenuClick if provided", () => {
     const onMobileMenuClick = vi.fn();
@@ -16,6 +17,7 @@ describe("GoabAppHeader", () => {
 
     const header = baseElement.querySelector("goa-app-header");
     expect(header).toBeTruthy();
+    expect(header?.getAttribute("hasmenuclickhandler")).toBe("true");
     header?.dispatchEvent(new Event("_menuClick"));
     expect(onMobileMenuClick).toHaveBeenCalled();
   })

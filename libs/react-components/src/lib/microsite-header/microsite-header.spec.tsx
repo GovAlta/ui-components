@@ -9,13 +9,36 @@ describe("Header", () => {
       const el = document.querySelector("goa-microsite-header");
       expect(el).not.toBeNull();
       expect(el?.getAttribute("type")).toEqual(mode);
+      expect(el?.getAttribute("hasfeedbackhandler")).toEqual("false");
     });
   });
 
-  it("should show the all the flairs", async function () {
-    render(<GoabMicrositeHeader type="alpha" version="v1.2.3" />);
+  it("should render with properties", async function () {
+    render(
+      <GoabMicrositeHeader
+        type="alpha"
+        version="v1.2.3"
+        feedbackUrl="https://example.com"
+        testId="test-header"
+        maxContentWidth="100px"
+        feedbackUrlTarget="blank"
+        headerUrlTarget="blank"
+        onFeedbackClick={() => {
+          /* do nothing */
+        }}
+      />,
+    );
+
     const el = document.querySelector("goa-microsite-header");
+
+    expect(el?.getAttribute("type")).toEqual("alpha");
     expect(el?.getAttribute("version")).toEqual("v1.2.3");
+    expect(el?.getAttribute("feedbackUrl")).toEqual("https://example.com");
+    expect(el?.getAttribute("testId")).toEqual("test-header");
+    expect(el?.getAttribute("maxContentWidth")).toEqual("100px");
+    expect(el?.getAttribute("feedbackUrlTarget")).toEqual("blank");
+    expect(el?.getAttribute("headerUrlTarget")).toEqual("blank");
+    expect(el?.getAttribute("hasfeedbackhandler")).toEqual("true");
   });
 
   it("should set self url target", () => {

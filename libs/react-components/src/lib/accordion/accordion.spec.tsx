@@ -10,6 +10,7 @@ describe("Accordion", () => {
     );
     const el = baseElement.querySelector("goa-accordion");
     expect(el?.getAttribute("heading")).toBe("The heading");
+    expect(el?.getAttribute("open")).toBeNull();
     expect(baseElement.innerHTML).toContain("Accordion Content");
   });
 
@@ -18,7 +19,7 @@ describe("Accordion", () => {
       <GoabAccordion
         heading="The heading"
         secondaryText="Secondary Text"
-        open={true}
+        open
         headingContent={<GoabBadge type="success" content="test-badge"></GoabBadge>}
         maxWidth="480px"
       >
