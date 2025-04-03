@@ -33,11 +33,12 @@
   import { onMount } from "svelte";
 
   import { calculateMargin, Spacing } from "../../common/styling";
-  import { styles } from "../../common/utils";
+  import { style, styles } from "../../common/utils";
 
   export let as: TextElement | HeadingElement = "div";
   export let maxWidth: string | "none" = "65ch";
   export let size: Size | undefined = undefined;
+  export let color: "primary" | "secondary" = "primary";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -64,6 +65,12 @@
   this={as}
   class={size}
   style={styles(
+    style(
+      "color",
+      color === "primary"
+        ? "var(--goa-color-text-default)"
+        : "var(--goa-color-text-secondary)",
+    ),
     maxWidth === "none" ? "" : `max-width: ${maxWidth}`,
     calculateMargin(mt, mr, mb, ml),
   )}
