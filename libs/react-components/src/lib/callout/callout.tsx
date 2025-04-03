@@ -1,4 +1,10 @@
-import { GoabCalloutAriaLive, GoabCalloutSize, GoabCalloutType, GoabCalloutIconTheme, Margins } from "@abgov/ui-components-common";
+import {
+  GoabCalloutAriaLive,
+  GoabCalloutSize,
+  GoabCalloutType,
+  GoabCalloutIconTheme,
+  Margins,
+} from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   heading?: string;

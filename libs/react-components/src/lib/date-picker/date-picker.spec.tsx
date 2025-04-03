@@ -65,11 +65,7 @@ describe("DatePicker", () => {
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: {
-          type: "date",
-          name,
-          value,
-        },
+        detail: { type: "date", name, value },
       }),
     );
 

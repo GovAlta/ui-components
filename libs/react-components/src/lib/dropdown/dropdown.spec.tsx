@@ -101,9 +101,7 @@ describe("GoabDropdown", () => {
     el &&
       fireEvent(
         el,
-        new CustomEvent("_change", {
-          detail: { name: "favColor", value: "blue" },
-        }),
+        new CustomEvent("_change", { detail: { name: "favColor", value: "blue" } }),
       );
     await waitFor(() => {
       expect(fn).toBeCalledWith({ name: "favColor", value: "blue" });

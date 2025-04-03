@@ -1,4 +1,8 @@
-import { GoabTableOnSortDetail, GoabTableVariant, Margins } from "@abgov/ui-components-common";
+import {
+  GoabTableOnSortDetail,
+  GoabTableVariant,
+  Margins,
+} from "@abgov/ui-components-common";
 import { ReactNode, useEffect, useRef } from "react";
 
 interface WCProps extends Margins {

@@ -1,5 +1,4 @@
 import { ReactNode, type JSX } from "react";
-import { ReactNode } from "react";
 import {
   GoabTextMaxWidth,
   GoabTextHeadingElement,

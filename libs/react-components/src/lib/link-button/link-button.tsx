@@ -23,9 +23,7 @@ interface GoALinkButtonProps extends Margins {
   children: ReactNode;
 }
 
-export function GoALinkButton(
-  { type = "primary", ...props }: GoALinkButtonProps,
-) {
+export function GoALinkButton({ type = "primary", ...props }: GoALinkButtonProps) {
   return (
     <goa-link-button
       type={type}

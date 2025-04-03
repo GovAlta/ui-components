@@ -173,8 +173,9 @@ describe("RadioGroup", () => {
       const radios = document.querySelectorAll("goa-radio-item");
       expect(radios[0].getAttribute("description")).toBe(null);
       expect(radios[1].getAttribute("description")).toBe("Oranges are orange");
-      expect(result.container.querySelector("div[slot='description']")?.innerHTML)
-        .toContain("Bananas are banana");
+      expect(
+        result.container.querySelector("div[slot='description']")?.innerHTML,
+      ).toContain("Bananas are banana");
     });
   });
 

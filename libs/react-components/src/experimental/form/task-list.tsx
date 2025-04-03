@@ -17,12 +17,15 @@ declare module "react" {
 type GoabPublicFormTaskListProps = {
   heading: string;
   children: ReactNode;
-}
+};
 
-export function GoabPublicFormTaskList({heading, children}: GoabPublicFormTaskListProps) {
+export function GoabPublicFormTaskList({
+  heading,
+  children,
+}: GoabPublicFormTaskListProps) {
   return (
     <goa-public-form-task-list heading={heading}>{children}</goa-public-form-task-list>
-  )
+  );
 }
 
 export default GoabPublicFormTaskList;

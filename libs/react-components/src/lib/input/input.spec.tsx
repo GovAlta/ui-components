@@ -115,9 +115,7 @@ describe("Input", () => {
     input &&
       fireEvent(
         input,
-        new CustomEvent("_change", {
-          detail: { name: "foo", value: newValue },
-        }),
+        new CustomEvent("_change", { detail: { name: "foo", value: newValue } }),
       );
     expect(validateOnChange).toBeCalled();
   });
@@ -147,9 +145,7 @@ describe("Input", () => {
     inputElement &&
       fireEvent(
         inputElement,
-        new CustomEvent("_change", {
-          detail: { name: "dateInput", value: newDate },
-        }),
+        new CustomEvent("_change", { detail: { name: "dateInput", value: newDate } }),
       );
     expect(mockOnChangeHandler).toBeCalledWith({
       name: "dateInput",
@@ -170,10 +166,7 @@ describe("Input", () => {
       fireEvent(
         inputElement,
         new CustomEvent("_change", {
-          detail: {
-            name: "numberInput",
-            value: decimalValue,
-          },
+          detail: { name: "numberInput", value: decimalValue },
         }),
       );
     expect(mockOnChangeHandler).toBeCalledWith({

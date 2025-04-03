@@ -1,9 +1,7 @@
 import { configure, render } from "@testing-library/react";
 import { GoabBadge } from "./badge";
 
-configure({
-  testIdAttribute: "testId",
-});
+configure({ testIdAttribute: "testId" });
 
 describe("GoabBadge", () => {
   it("should render", () => {
