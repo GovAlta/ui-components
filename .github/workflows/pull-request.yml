@@ -24,12 +24,10 @@ jobs:
 
       # Run with the target branch as the base.
       - name: Lint
-        run: npm run lint
+        run: npx nx run-many --target=lint --all
 
       - name: Build
-        run: |
-          npx nx affected --target=build --base=origin/${{ github.base_ref }}
-          npx nx affected --target=post --base=origin/${{ github.base_ref }}
+        run: npx nx run-many --target=build --all --prod
 
       - name: Test
         run: npm run test
