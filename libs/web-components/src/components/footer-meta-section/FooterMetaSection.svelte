@@ -8,6 +8,12 @@
   let rootEl: HTMLElement;
   let children: HTMLLinkElement[] = [];
 
+  function handleClick(e: Event, originalAnchor: HTMLLinkElement) {
+    e.preventDefault();
+    e.stopPropagation();
+    originalAnchor.click();
+  }
+
   onMount(async () => {
     await tick();
     children = rootEl
@@ -25,27 +31,6 @@
       console.warn("GoAFooterMetaSection children must be anchor elements.");
       return;
     }
-
-    const ul = rootEl.querySelector("ul");
-    children.forEach((anchor) => {
-      const li = document.createElement("li");
-
-      //Clone with attributes
-      const clonedAnchor = anchor.cloneNode(true) as HTMLAnchorElement;
-      Array.from(anchor.attributes).forEach((attr) => {
-        clonedAnchor.setAttribute(attr.name, attr.value);
-      });
-
-      //Pass click events on
-      clonedAnchor.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        anchor.click();
-      });
-
-      li.appendChild(clonedAnchor);
-      ul.appendChild(li);
-    });
   });
 </script>
 
@@ -55,7 +40,16 @@
     <slot />
   </div>
 
-  <ul></ul>
+  <ul>
+    {#each children as child}
+      <li>
+        <a
+          href={child.href}
+          on:click={(e) => handleClick(e, child)}
+        >{child.innerHTML}</a>
+      </li>
+    {/each}
+  </ul>
 </section>
 
 <style>
@@ -90,7 +84,6 @@
     color: var(--goa-footer-color-links);
     cursor: pointer;
     white-space: nowrap;
-
   }
 
   a:hover {
