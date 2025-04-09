@@ -262,6 +262,7 @@
   :global(.tab) {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--goa-space-xs);
   }
 
