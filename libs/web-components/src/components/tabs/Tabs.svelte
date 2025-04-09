@@ -254,7 +254,6 @@
 </div>
 
 <style>
-
   :host {
     box-sizing: border-box;
     font: var(--goa-tab-typography);
@@ -295,10 +294,8 @@
     outline-offset: 4px; /* Adjust as needed */
   }
 
-
   @media (--not-mobile) {
     :global([role="tablist"]) {
-
     }
     .tabs {
       border-bottom: var(--goa-tabs-bottom-border);
@@ -319,7 +316,6 @@
   }
 
   @media (--mobile) {
-
     .tabs {
       border-left: var(--goa-tabs-bottom-border);
       border-bottom: var(--goa-tabs-bottom-border);
@@ -343,8 +339,8 @@
       background: var(--goa-tab-color-bg-selected-small-screen);
     }
     :global([role="tab"]:hover:not([aria-selected="true"])) {
-    border-left: var(--goa-tab-border-hover);
-    border-bottom: none;
+      border-left: var(--goa-tab-border-hover);
+      border-bottom: none;
     }
   }
 </style>
