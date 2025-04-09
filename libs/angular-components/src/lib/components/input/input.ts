@@ -17,7 +17,8 @@ import {
   forwardRef,
   OnInit,
 } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { GoabControlValueAccessor } from "../base.component";
 
 export interface IgnoreMe {
   ignore: string;
@@ -76,12 +77,10 @@ export interface IgnoreMe {
     },
   ],
 })
-export class GoabInput implements ControlValueAccessor, OnInit {
+export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Input() type?: GoabInputType = "text";
   @Input() name?: string;
-  @Input() id?: string;
   @Input() debounce?: number;
-  @Input() disabled?: boolean;
   @Input() autoCapitalize?: GoabInputAutoCapitalize;
   @Input() placeholder?: string;
   @Input() leadingIcon?: GoabIconType;
@@ -89,22 +88,15 @@ export class GoabInput implements ControlValueAccessor, OnInit {
   @Input() variant?: string;
   @Input() focused?: boolean;
   @Input() readonly?: boolean;
-  @Input() error?: boolean;
   @Input() width?: string;
   @Input() prefix?: string;
   @Input() suffix?: string;
-  @Input() testId?: string;
   @Input() ariaLabel?: string;
   @Input() maxLength?: number;
-  @Input() value?: string | null = "";
   @Input() min?: string | number;
   @Input() max?: string | number;
   @Input() step?: number;
   @Input() ariaLabelledBy?: string;
-  @Input() mt?: Spacing;
-  @Input() mr?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
   @Input() trailingIconAriaLabel?: string;
 
   @Output() onTrailingIconClick = new EventEmitter();
@@ -153,31 +145,5 @@ export class GoabInput implements ControlValueAccessor, OnInit {
   _onBlur(e: Event) {
     const detail = (e as CustomEvent<GoaInputOnBlurDetail>).detail;
     this.onBlur.emit(detail);
-  }
-
-  // ControlValueAccessor
-
-  private fcChange?: (value: string) => void;
-  private fcTouched?: () => unknown;
-  touched = false;
-
-  markAsTouched() {
-    if (!this.touched) {
-      this.fcTouched?.();
-      this.touched = true;
-    }
-  }
-  writeValue(value: string): void {
-    this.value = value;
-  }
-  registerOnChange(fn: any): void {
-    this.fcChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-    this.fcTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
   }
 }

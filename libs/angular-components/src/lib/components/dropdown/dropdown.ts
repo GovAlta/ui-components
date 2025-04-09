@@ -1,7 +1,18 @@
-import { GoabDropdownOnChangeDetail, GoabIconType, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-
+import {
+  GoabDropdownOnChangeDetail,
+  GoabIconType,
+  Spacing,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  forwardRef,
+} from "@angular/core";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { GoabControlValueAccessor } from "../base.component";
 
 // "disabled", "value", "id" is an exposed property of HTMLInputElement, no need to bind with attr
 @Component({
@@ -40,67 +51,32 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: forwardRef(() => GoabDropdown),
-    }
+    },
   ],
 })
-export class GoabDropdown implements ControlValueAccessor{
+export class GoabDropdown extends GoabControlValueAccessor {
   @Input() name?: string;
-  @Input() value?: string;
   @Input() ariaLabel?: string;
   @Input() ariaLabelledBy?: string;
-  @Input() id?: string;
-  @Input() disabled?: boolean;
-  @Input() error?: boolean;
   @Input() filterable?: boolean;
   @Input() leadingIcon?: GoabIconType;
   @Input() maxHeight?: string;
   @Input() multiselect?: boolean;
   @Input() native?: boolean;
   @Input() placeholder?: string;
-  @Input() testId?: string;
   @Input() width?: string;
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
   @Input() relative?: boolean;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 
   @Output() onChange = new EventEmitter<GoabDropdownOnChangeDetail>();
 
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
-    this.onChange.emit(detail)
+    this.onChange.emit(detail);
 
     this.markAsTouched();
     this.fcChange?.(detail.value || "");
-  }
-
-  // ControlValueAccessor
-
-  private fcChange?: (value: string) => void;
-  private fcTouched?: () => unknown;
-  touched = false;
-
-  markAsTouched() {
-    if (!this.touched) {
-      this.fcTouched?.();
-      this.touched = true;
-    }
-  }
-  writeValue(value: string): void {
-    this.value = value;
-  }
-  registerOnChange(fn: any): void {
-    this.fcChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-    this.fcTouched = fn
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
   }
 }

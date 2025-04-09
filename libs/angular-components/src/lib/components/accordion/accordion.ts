@@ -1,6 +1,17 @@
-import { GoabAccordionHeadingSize, GoabAccordionIconPosition, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef, Output, EventEmitter } from "@angular/core";
+import {
+  GoabAccordionHeadingSize,
+  GoabAccordionIconPosition,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  TemplateRef,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -27,21 +38,16 @@ import { NgTemplateOutlet } from "@angular/common";
       <ng-content></ng-content>
     </goa-accordion>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabAccordion {
+export class GoabAccordion extends GoabBaseComponent {
   @Input() heading?: string;
   @Input() secondaryText?: string;
-  @Input() testId?: string;
   @Input() open?: boolean;
   @Input() headingSize?: GoabAccordionHeadingSize;
   @Input() headingContent!: TemplateRef<any>;
   @Input() maxWidth?: string;
   @Input() iconPosition?: GoabAccordionIconPosition;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 
   @Output() onChange = new EventEmitter<boolean>();
 
