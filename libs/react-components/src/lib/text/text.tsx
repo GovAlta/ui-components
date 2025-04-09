@@ -1,11 +1,18 @@
 import { ReactNode } from "react";
-import {GoabTextMaxWidth, GoabTextHeadingElement, GoabTextTextElement, GoabTextSize } from "@abgov/ui-components-common";
+import {
+  GoabTextMaxWidth,
+  GoabTextHeadingElement,
+  GoabTextTextElement,
+  GoabTextSize,
+  GoabTextColor
+} from "@abgov/ui-components-common";
 import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   as?: GoabTextTextElement | GoabTextHeadingElement;
   size?: GoabTextSize;
   maxwidth?: GoabTextMaxWidth;
+  color?: GoabTextColor;
 }
 
 declare global {
@@ -21,15 +28,17 @@ interface GoATextProps extends Margins {
   as?: GoabTextTextElement | GoabTextHeadingElement;
   size?: GoabTextSize;
   maxWidth?: GoabTextMaxWidth;
+  color?: GoabTextColor;
   children: ReactNode;
 }
 
 export function GoabText(props: GoATextProps): JSX.Element {
   return (
     <goa-text
-      as={props.as || "div"}
+      as={props.as}
       size={props.size}
-      maxwidth={props.maxWidth || "65ch"}
+      maxwidth={props.maxWidth}
+      color={props.color}
       mt={props.mt}
       mb={props.mb}
       ml={props.ml}

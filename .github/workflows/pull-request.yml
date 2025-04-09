@@ -24,15 +24,18 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
       # Run with the target branch as the base.
       - name: Lint
         run: npm run lint
+
       - name: Build
         run: |
           npx nx affected --target=build --base=origin/${{ github.base_ref }}
           npx nx affected --target=post --base=origin/${{ github.base_ref }}
+
       - name: Test
-        run: npm run test:headless
+        run: |
+          if [ -d "./dist" ]; then
+            npx playwright install --with-deps
+            npm run test:headless
+          fi

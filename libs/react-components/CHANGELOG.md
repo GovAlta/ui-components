@@ -111,7 +111,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New component [Details](https://ui-components.alberta.ca/?path=/docs/components-details--basic)
 - New component [Accordion](https://ui-components.alberta.ca/?path=/docs/components-accordion--basic)
 - New feature for `GoABTable`, [Sortable](https://ui-components.alberta.ca/?path=/docs/components-table--sortable)
-- New property for `GoABNotificationBanner`, [onDismiss](https://ui-components.alberta.ca/?path=/docs/components-notification-banner--types)
+- New property for `GoABNotification`, [onDismiss](https://ui-components.alberta.ca/?path=/docs/components-notification-banner--types)
 - New property has been added to all components, `testid` is available for supporting automated testing
 
 ## [4.5.0] - 2023-01-31
@@ -164,7 +164,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New modal variant [Callout](https://ui-components.alberta.ca/?path=/docs/components-modal--callout-variant)
-- New component [Notification Banner](https://ui-components.alberta.ca/?path=/docs/components-notification-banner--types)
+- New component [Notification](https://ui-components.alberta.ca/?path=/docs/components-notification-banner--types)
 - New component [Button Group](https://ui-components.alberta.ca/?path=/docs/components-button-group--alignment)
 
 ## [4.0.0] - 2022-11-07

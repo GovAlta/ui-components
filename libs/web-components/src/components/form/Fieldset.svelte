@@ -191,6 +191,12 @@
   function onFormItemMount(detail: FormItemMountRelayDetail) {
     const { id, label, el } = detail;
     _formItems[id] = { label, el };
+    _state[id] = {
+      name: id,
+      value: "",
+      label: label,
+      order: 99,
+    }
   }
 
   // Collect list of child form item (input, dropdown, etc) elements
@@ -203,7 +209,14 @@
   }
 
   function onError(detail: ExternalErrorRelayDetail) {
-    _errors[detail.name] = detail.msg;
+
+    if (detail.grouped) {
+      if (!Object.values(_errors).includes(detail.msg)) {
+        _errors[detail.name] = detail.msg;
+      }
+    } else {
+      _errors[detail.name] = detail.msg;
+    }
 
     // dispatch error down to fields
     relay<FieldsetErrorRelayDetail>(

@@ -836,6 +836,7 @@ export type GoabTextHeadingSize =
   | "heading-xs";
 export type GoabTextBodySize = "body-l" | "body-m" | "body-s" | "body-xs";
 export type GoabTextSize = GoabTextHeadingSize | GoabTextBodySize;
+export type GoabTextColor = "primary" | "secondary";
 
 export type GoabFielsetOnContinueDetail = {
   el: HTMLElement;

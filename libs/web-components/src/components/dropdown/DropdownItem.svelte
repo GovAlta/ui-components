@@ -11,7 +11,7 @@
     filter: string;
     value: string;
     label: string;
-    mountType: DropdownItemMountType;  
+    mountType: DropdownItemMountType;
   }
   export type DropdownItemDestroyRelayDetail = {
     value: string;
@@ -28,7 +28,7 @@
 </script>
 
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
   import { receive, relay } from "../../common/utils";
 
   // Props
@@ -41,7 +41,8 @@
   let _rootEl: HTMLElement;
   let _parentEl: HTMLElement;
 
-  onMount(() => {
+  onMount(async() => {
+    await tick();
     relay<DropdownItemMountedRelayDetail>(
       _rootEl,
       DropdownItemMountedMsg,
@@ -59,7 +60,7 @@
           _parentEl = (data as { el: HTMLElement}).el;
           break;
       }
-    })  
+    })
   }
 
   onDestroy(async () => {

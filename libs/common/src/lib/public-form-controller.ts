@@ -203,7 +203,7 @@ export class PublicFormController<T> {
   }
 
   // Public method to perform validation and send the appropriate messages to the form elements
-  validate(field: string, e: Event, validators: FieldValidator[]): [boolean, string] {
+  validate(e: Event, field: string, validators: FieldValidator[], options?: { grouped: boolean }): [boolean, string] {
     const { el, state, cancelled } = (e as CustomEvent).detail;
     const value = state?.[field]?.value;
 
@@ -215,12 +215,34 @@ export class PublicFormController<T> {
 
     for (const validator of validators) {
       const msg = validator(value);
-      this.#dispatchError(el, field, msg);
+      this.#dispatchError(el, field, msg, options);
       if (msg) {
         return [false, ""];
       }
     }
     return [true, value];
+  }
+
+  /**
+   * Validates a group of fields ensuring that at least `minPassCount` of the items within the group
+   * passes. This is useful in the scenario when n number fields are required out of n+m number of fields.
+   *
+   * @param {string[]} fields - An array of field names to be validated.
+   * @param {Event} e - The event object associated with the validation trigger.
+   * @param minPassCount - The minimum number of fields that are required to pass to return true.
+   * @param {FieldValidator[]} validators - An array of validator functions to apply to the fields.
+   * @return {boolean} - Returns true if at least one field in the group is valid; otherwise, false.
+   */
+  validateGroup(e: Event, fields: string[], minPassCount: number, validators: FieldValidator[]): boolean {
+    let passCount = 0;
+    for (const field of fields) {
+      const [_valid] = this.validate(e, field, validators, { grouped: true });
+      if (_valid) {
+        passCount++;
+      }
+    }
+
+    return passCount >= minPassCount;
   }
 
   edit(index: number) {
@@ -232,7 +254,7 @@ export class PublicFormController<T> {
   }
 
   // Private method to dispatch the error message to the form element
-  #dispatchError(el: HTMLElement, name: string, msg: string) {
+  #dispatchError(el: HTMLElement, name: string, msg: string, options?: { grouped: boolean }) {
     el.dispatchEvent(
       new CustomEvent("msg", {
         composed: true,
@@ -241,6 +263,7 @@ export class PublicFormController<T> {
           data: {
             name,
             msg,
+            grouped: options?.grouped,
           },
         },
       }),

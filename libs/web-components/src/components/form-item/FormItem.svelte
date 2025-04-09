@@ -129,7 +129,18 @@
 
   function announceOnFocus(text: string) {
     const announcer = document.createElement("div");
-    announcer.className = "sr-only";
+
+    announcer.style.position = "absolute";
+    announcer.style.width = "1px";
+    announcer.style.height = "1px";
+    announcer.style.padding = "0";
+    announcer.style.margin = "-1px";
+    announcer.style.overflow = "hidden";
+    announcer.style.clipPath = "inset(50%)";
+    announcer.style.whiteSpace = "nowrap";
+    announcer.style.borderWidth = "0";
+    announcer.style.opacity = "0";
+
     announcer.setAttribute("aria-live", "polite");
     announcer.setAttribute("aria-atomic", "true");
     document.body.appendChild(announcer);
@@ -273,17 +284,5 @@
 
   .error-msg + .help-msg {
     margin-top: var(--goa-form-item-message-gap);
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
   }
 </style>

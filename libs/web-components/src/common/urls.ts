@@ -2,8 +2,16 @@ export function isUrlMatch(windowUrl: URL | Location, testUrl: string): number {
   // path match
   if (testUrl === undefined) return -1;
 
+  let testPathname;
+  try {
+    const testUrlObj = new URL(testUrl, window.location.origin);
+    testPathname = testUrlObj.pathname;
+  } catch (e) {
+    testPathname = testUrl.split(/[?#]/)[0];
+  }
+
   const windowUrlParts = windowUrl.pathname.replace(/^\//, "").split("/");
-  const urlParts = testUrl.replace(/^\//, "").split("/");
+  const urlParts = testPathname.replace(/^\//, "").split("/");
 
   if (windowUrlParts.length < urlParts.length) {
     return -1;

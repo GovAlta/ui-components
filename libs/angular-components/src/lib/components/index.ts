@@ -39,7 +39,7 @@ export * from "./icon-button/icon-button";
 export * from "./input/input";
 export * from "./microsite-header/microsite-header";
 export * from "./modal/modal";
-export * from "./notification-banner/notification-banner";
+export * from "./notification/notification";
 export * from "./pages/pages";
 export * from "./pagination/pagination";
 export * from "./popover/popover";

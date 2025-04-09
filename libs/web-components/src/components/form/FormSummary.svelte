@@ -3,7 +3,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import {
-  FieldsetItemState,
+    FieldsetItemState,
     FormDispatchStateMsg,
     FormDispatchStateRelayDetail,
     FormState,
@@ -87,6 +87,25 @@
       return acc;
     }, []);
   }
+
+  function isBlank(val: string): boolean {
+    if (val.length === 0) return true;
+    if (val === "0000-01-00") return true;
+    return false;
+  }
+
+  const dateMatchRegex = /^\d{4}-\d{2}-\d{2}$/;
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  function formatValue(value: string): string {
+    if (isBlank(value)) {
+      return "— Not provided —";
+    }
+    if (value.match(dateMatchRegex)) {
+      const [year, month, day] = value.split("-");
+      return `${months[parseInt(month) - 1]} ${parseInt(day)}, ${year}`;
+    }
+    return value;
+  }
 </script>
 
 <div bind:this={_rootEl}>
@@ -141,6 +160,10 @@
 </div>
 
 <style>
+
+  .data .empty {
+    color: var(--goa-color-greyscale-500);
+  }
 
   /* TODO: fix the layouts: mobile doesn't meet specs; table makes it difficult */
   @media (--not-desktop) {

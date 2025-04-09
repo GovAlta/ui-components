@@ -281,6 +281,7 @@
   /* Secondary Menu items (in popover on menu item) --Current--Hover */
   :global(::slotted(a.current:hover)) {
     background: var(--goa-app-header-color-bg-nav-item-in-menu-current-hover);
+    color: var(--goa-app-header-color-text-nav-item-in-menu-current-hover) !important;
   }
 
   /* Menu items in collapsed menu --Interactive */
