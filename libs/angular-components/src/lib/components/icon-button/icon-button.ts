@@ -1,5 +1,16 @@
-import { GoabIconButtonVariant, GoabIconSize, GoabIconType, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+  GoabIconButtonVariant,
+  GoabIconSize,
+  GoabIconType,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from "@angular/core";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -22,20 +33,15 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       <ng-content></ng-content>
     </goa-icon-button>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabIconButton {
+export class GoabIconButton extends GoabBaseComponent {
   @Input({ required: true }) icon!: GoabIconType;
   @Input() size?: GoabIconSize = "medium";
   @Input() variant?: GoabIconButtonVariant;
   @Input() title?: string;
   @Input() disabled?: boolean;
   @Input() ariaLabel?: string;
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 
   @Output() onClick = new EventEmitter();
 

@@ -1,5 +1,12 @@
-import { GoabCalendarOnChangeDetail, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import { GoabCalendarOnChangeDetail } from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from "@angular/core";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -20,23 +27,18 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       <ng-content />
     </goa-calendar>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabCalendar {
+export class GoabCalendar extends GoabBaseComponent {
   @Input() name?: string;
   @Input() value?: Date;
   @Input() min?: Date;
   @Input() max?: Date;
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 
   @Output() onChange = new EventEmitter<GoabCalendarOnChangeDetail>();
 
   _onChange(e: Event) {
     const details = (e as CustomEvent<GoabCalendarOnChangeDetail>).detail;
-    this.onChange.emit(details)
+    this.onChange.emit(details);
   }
 }

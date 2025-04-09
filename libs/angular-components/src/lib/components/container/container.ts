@@ -1,6 +1,12 @@
-import { GoabContainerAccent, GoabContainerPadding, GoabContainerType, GoabContainerWidth, Spacing } from "@abgov/ui-components-common";
+import {
+  GoabContainerAccent,
+  GoabContainerPadding,
+  GoabContainerType,
+  GoabContainerWidth,
+} from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -28,18 +34,12 @@ import { NgTemplateOutlet } from "@angular/common";
   </goa-container>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabContainer {
+export class GoabContainer extends GoabBaseComponent {
   @Input() type?: GoabContainerType = "interactive";
   @Input() accent?: GoabContainerAccent = "filled";
   @Input() padding?: GoabContainerPadding = "relaxed";
   @Input() width?: GoabContainerWidth = "full";
   @Input() maxWidth?: string;
-  @Input() testId?: string;
   @Input() title!: TemplateRef<any>;
   @Input() actions!: TemplateRef<any>;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 }
-
