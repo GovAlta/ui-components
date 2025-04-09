@@ -29,7 +29,6 @@ describe("Accordion", () => {
     const button = result.getByTestId("open-button");
     await button.click();
     const myButton = result.getByTestId("my-button");
-    console.log(myButton.element(), "foo");
     expect(myButton).toBeTruthy();
   });
 
