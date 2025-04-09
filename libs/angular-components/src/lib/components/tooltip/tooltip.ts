@@ -1,5 +1,9 @@
-import { GoabTooltipHorizontalAlignment, GoabTooltipPosition, Spacing } from "@abgov/ui-components-common";
+import {
+  GoabTooltipHorizontalAlignment,
+  GoabTooltipPosition,
+} from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -18,16 +22,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       <ng-content />
     </goa-tooltip>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabTooltip {
+export class GoabTooltip extends GoabBaseComponent {
   @Input() position?: GoabTooltipPosition;
   @Input() content?: string;
   @Input() hAlign?: GoabTooltipHorizontalAlignment;
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 }
-

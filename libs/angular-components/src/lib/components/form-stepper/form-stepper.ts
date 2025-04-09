@@ -1,5 +1,12 @@
-import { GoabFormStepperOnChangeDetail, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import { GoabFormStepperOnChangeDetail } from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from "@angular/core";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -17,15 +24,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
       <ng-content />
     </goa-form-stepper>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabFormStepper {
+export class GoabFormStepper extends GoabBaseComponent {
   @Input() step?: number = -1;
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 
   @Output() onChange = new EventEmitter<GoabFormStepperOnChangeDetail>();
 

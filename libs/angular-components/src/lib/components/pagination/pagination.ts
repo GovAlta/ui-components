@@ -1,5 +1,16 @@
-import { GoabPaginationOnChangeDetail, GoabPaginationVariant, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+  GoabPaginationOnChangeDetail,
+  GoabPaginationVariant,
+  Spacing,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from "@angular/core";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -8,7 +19,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
     <goa-pagination
       [attr.itemcount]="itemCount"
       [attr.perpagecount]="perPageCount"
-      [attr.pagenumber]="pageNumber"w
+      [attr.pagenumber]="pageNumber"
+      w
       [attr.variant]="variant"
       [attr.testid]="testId"
       [attr.mt]="mt"
@@ -21,16 +33,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabPagination {
+export class GoabPagination extends GoabBaseComponent {
   @Input({ required: true }) itemCount!: number;
   @Input({ required: true }) pageNumber!: number;
   @Input() perPageCount?: number = 10;
   @Input() variant?: GoabPaginationVariant = "all";
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 
   @Output() onChange = new EventEmitter<GoabPaginationOnChangeDetail>();
 

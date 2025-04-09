@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
-import { GoabIconType, Spacing } from "@abgov/ui-components-common";
+import { GoabIconType } from "@abgov/ui-components-common";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -19,12 +20,7 @@ import { GoabIconType, Spacing } from "@abgov/ui-components-common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabSideMenuGroup {
+export class GoabSideMenuGroup extends GoabBaseComponent {
   @Input({ required: true }) heading!: string;
-  @Input() testId?: string;
   @Input() icon?: GoabIconType;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 }

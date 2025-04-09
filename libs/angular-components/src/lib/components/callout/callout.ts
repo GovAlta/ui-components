@@ -1,5 +1,11 @@
-import { GoabCalloutAriaLive, GoabCalloutSize, GoabCalloutType, Spacing, GoabCalloutIconTheme} from "@abgov/ui-components-common";
+import {
+  GoabCalloutAriaLive,
+  GoabCalloutSize,
+  GoabCalloutType,
+  GoabCalloutIconTheme,
+} from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -21,19 +27,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       <ng-content />
     </goa-callout>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabCallout {
+export class GoabCallout extends GoabBaseComponent {
   @Input() type?: GoabCalloutType = "information";
   @Input() heading?: string = "";
   @Input() size?: GoabCalloutSize = "large";
   @Input() maxWidth?: string;
   @Input() ariaLive?: GoabCalloutAriaLive = "off";
   @Input() iconTheme?: GoabCalloutIconTheme = "outline";
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 }
-

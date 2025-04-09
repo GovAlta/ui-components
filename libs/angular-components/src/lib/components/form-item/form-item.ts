@@ -1,13 +1,9 @@
 import {
   GoabFormItemLabelSize,
   GoabFormItemRequirement,
-  Spacing,
 } from "@abgov/ui-components-common";
-import {
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  Input,
-} from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from "@angular/core";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -33,17 +29,12 @@ import {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabFormItem {
+export class GoabFormItem extends GoabBaseComponent {
   @Input() label?: string;
   @Input() labelSize?: GoabFormItemLabelSize;
   @Input() helpText?: string;
   @Input() error?: string;
   @Input() requirement?: GoabFormItemRequirement;
   @Input() maxWidth?: string;
-  @Input() testId?: string;
   @Input() id?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() mr?: Spacing;
-  @Input() ml?: Spacing;
 }

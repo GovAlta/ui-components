@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
-import { Spacing } from "@abgov/ui-components-common";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -30,7 +30,7 @@ import { Spacing } from "@abgov/ui-components-common";
   imports: [NgTemplateOutlet],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabRadioItem {
+export class GoabRadioItem extends GoabBaseComponent {
   @Input() value?: string;
   @Input() label?: string;
   @Input() name?: string;
@@ -40,14 +40,11 @@ export class GoabRadioItem {
   @Input() checked?: boolean;
   @Input() error?: boolean;
   @Input() maxWidth?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
-
 
   getDescriptionAsString(): string {
-    return (!this.description || this.description instanceof TemplateRef) ? "" : this.description;
+    return !this.description || this.description instanceof TemplateRef
+      ? ""
+      : this.description;
   }
 
   getDescriptionAsTemplate(): TemplateRef<any> | null {

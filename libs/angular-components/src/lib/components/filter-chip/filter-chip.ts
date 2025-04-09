@@ -1,5 +1,12 @@
-import { GoabChipTheme, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "@angular/core";
+import { GoabChipTheme } from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from "@angular/core";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -19,16 +26,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "
   </goa-filter-chip>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabFilterChip {
+export class GoabFilterChip extends GoabBaseComponent {
   @Input() error?: boolean;
   @Input() deletable?: boolean;
   @Input() content?: string = "";
-  @Input() testId?: string;
   @Input() iconTheme?: GoabChipTheme;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 
   @Output() onClick = new EventEmitter();
 
