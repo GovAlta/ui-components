@@ -1,5 +1,7 @@
 {
   "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.trimAutoWhitespace": true,
   "editor.tabSize": 2,
   "files.trimTrailingWhitespace": true
