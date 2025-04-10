@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
+  import { getSlottedChildren } from "../../common/utils";
 
   export let testid: string = "";
 
@@ -16,10 +17,7 @@
 
   onMount(async () => {
     await tick();
-    children = rootEl
-      .querySelector("slot")
-      .assignedElements() as HTMLLinkElement[];
-
+    children = getSlottedChildren(rootEl) as HTMLLinkElement[];
     const isValid = children
       .map((child) => child.hasAttribute("href"))
       .reduce((sum: boolean, valid: boolean) => {
