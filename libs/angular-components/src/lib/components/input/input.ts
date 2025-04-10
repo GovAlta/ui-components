@@ -1,5 +1,22 @@
-import { GoabIconType, GoabInputAutoCapitalize, GoaInputOnBlurDetail, GoabInputOnChangeDetail, GoabInputOnFocusDetail, GoabInputOnKeyPressDetail, GoabInputType, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef, OnInit } from "@angular/core";
+import {
+  GoabIconType,
+  GoabInputAutoCapitalize,
+  GoaInputOnBlurDetail,
+  GoabInputOnChangeDetail,
+  GoabInputOnFocusDetail,
+  GoabInputOnKeyPressDetail,
+  GoabInputType,
+  Spacing,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  forwardRef,
+  OnInit,
+} from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 export interface IgnoreMe {
@@ -47,7 +64,7 @@ export interface IgnoreMe {
       (_keypress)="_onKeyPress($event)"
       [attr.trailingiconarialabel]="trailingIconAriaLabel"
     >
-      <ng-content/>
+      <ng-content />
     </goa-input>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -56,8 +73,8 @@ export interface IgnoreMe {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: forwardRef(() => GoabInput),
-    }
-  ]
+    },
+  ],
 })
 export class GoabInput implements ControlValueAccessor, OnInit {
   @Input() type?: GoabInputType = "text";
@@ -118,7 +135,7 @@ export class GoabInput implements ControlValueAccessor, OnInit {
 
   _onKeyPress(e: Event) {
     this.markAsTouched();
-    const detail = (e as CustomEvent<GoabInputOnKeyPressDetail>).detail
+    const detail = (e as CustomEvent<GoabInputOnKeyPressDetail>).detail;
     this.onKeyPress.emit(detail);
 
     this.fcTouched?.();
@@ -126,15 +143,14 @@ export class GoabInput implements ControlValueAccessor, OnInit {
 
   _onFocus(e: Event) {
     this.markAsTouched();
-    const detail = (e as CustomEvent<GoabInputOnFocusDetail>).detail
+    const detail = (e as CustomEvent<GoabInputOnFocusDetail>).detail;
     this.onFocus.emit(detail);
   }
 
   _onBlur(e: Event) {
-    const detail = (e as CustomEvent<GoaInputOnBlurDetail>).detail
+    const detail = (e as CustomEvent<GoaInputOnBlurDetail>).detail;
     this.onBlur.emit(detail);
   }
-
 
   // ControlValueAccessor
 
@@ -155,7 +171,7 @@ export class GoabInput implements ControlValueAccessor, OnInit {
     this.fcChange = fn;
   }
   registerOnTouched(fn: any): void {
-    this.fcTouched = fn
+    this.fcTouched = fn;
   }
 
   setDisabledState?(isDisabled: boolean): void {
