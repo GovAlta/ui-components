@@ -3,7 +3,8 @@ import { GoabInput } from "./input";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
   GoabIconType,
-  GoabInputAutoCapitalize, GoabInputOnChangeDetail,
+  GoabInputAutoCapitalize,
+  GoabInputOnChangeDetail,
   GoabInputType,
   Spacing,
 } from "@abgov/ui-components-common";
@@ -177,9 +178,12 @@ describe("GoABInput", () => {
 
     const input = fixture.debugElement.query(By.css("goa-input")).nativeElement;
 
-    fireEvent(input, new CustomEvent("_change", {detail: {name: "foo", value: "new value"}}));
+    fireEvent(
+      input,
+      new CustomEvent("_change", { detail: { name: "foo", value: "new value" } }),
+    );
 
-    expect(validateOnChange).toBeCalledWith({name: "foo", value: "new value"});
+    expect(validateOnChange).toBeCalledWith({ name: "foo", value: "new value" });
   });
 
 it("should handle onFocus event", () => {
