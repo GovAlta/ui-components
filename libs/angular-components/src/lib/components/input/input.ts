@@ -61,7 +61,7 @@ export interface IgnoreMe {
       (_change)="_onChange($event)"
       (_focus)="_onFocus($event)"
       (_blur)="_onBlur($event)"
-      (_keypress)="_onKeyPress($event)"
+      (_keyPress)="_onKeyPress($event)"
       [attr.trailingiconarialabel]="trailingIconAriaLabel"
     >
       <ng-content />
