@@ -1,12 +1,11 @@
 <svelte:options customElement="goa-focus-trap" />
 
-<script lang="ts" context="module">
-  export type GoAFocusTrapProps = {
-    el: HTMLElement;
-  }
-</script>
 <script lang="ts">
   import { onMount, tick } from "svelte";
+
+  // Public
+  // allow for outside control of whether focus trap should re-focus the first element is open/closed (see Drawer)
+  export let open: boolean = false;
 
   // Private
 
@@ -16,18 +15,22 @@
   let isShiftPressed: boolean;
   let isFirstFocus = true;
 
+
+  // ========
+  // Reactive
+  // ========
+  $: if(open) findFirstFocusableEl();
+
   // *****
   // Hooks
   // *****
   onMount(async () => {
     await tick();
-    dispatchInit();
     // event is attached to the rootEl, eliminating the need to remove the listener since it
     // will be removed when the associated element is removed.
     rootEl.addEventListener("focus", keepWithinBounds, true);
     rootEl.addEventListener("keydown", activateShiftState, true);
     rootEl.addEventListener("keyup", deactivateShiftState, true);
-    rootEl.addEventListener("focus-trap:focus-first-element", findFirstFocusableEl, true);
 
     boundryStartEl = rootEl.querySelector("[data-tab-boundry=start]");
     boundryEndEl = rootEl.querySelector("[data-tab-boundry=end]");
@@ -44,19 +47,7 @@
   }
 
   // Functions
-  function dispatchInit() {
-    setTimeout(() => {
-      rootEl?.dispatchEvent(
-        new CustomEvent<GoAFocusTrapProps>("focus-trap:mounted", {
-          composed: true,
-          bubbles: true,
-          detail: {
-            el: rootEl,
-          },
-        }),
-      );
-    }, 10);
-  }
+
   function isFocusable(node: Node): Node | null | "ignore-focus" {
     const element = node as HTMLElement;
     const isTabbable =
@@ -106,22 +97,15 @@
   }
 
   function findFirstFocusableEl() {
-    console.log("trigger findFirstFocusableEl");
     const sibling = rootEl?.querySelector("slot");
-    console.log("sibling is ", sibling);
     if (!sibling) return;
 
     const el = findFirstNode([sibling], false) as HTMLElement;
-    console.log("el after findFirstNode is ", el);
-    // el?.focus();
     if (el) {
-      // More reliable focus approach
+      // for angular with router, it needs a small delay
       setTimeout(() => {
         el.focus();
-        console.log("Focus applied to", el);
       }, 10);
-    } else {
-      console.log("No focusable element found");
     }
   }
 
