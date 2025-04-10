@@ -186,7 +186,7 @@ describe("GoABInput", () => {
     expect(validateOnChange).toBeCalledWith({ name: "foo", value: "new value" });
   });
 
-it("should handle onFocus event", () => {
+  it("should handle onFocus event", () => {
     const validateOnFocus = jest.spyOn(component, "onFocus");
 
     const input = fixture.debugElement.query(By.css("goa-input")).nativeElement;
@@ -211,7 +211,7 @@ it("should handle onFocus event", () => {
 
     const input = fixture.debugElement.query(By.css("goa-input")).nativeElement;
 
-    fireEvent(input, new CustomEvent("_keypress"));
+    fireEvent(input, new CustomEvent("_keyPress"));
 
     expect(validateOnKeyPress).toBeCalled();
   });
