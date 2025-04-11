@@ -130,31 +130,31 @@
 
   @media (--mobile) {
     .heading-xl {
-      font: var(--goa-typography-s-heading-xl);
+      font: var(--goa-typography-mobile-heading-xl);
     }
     .heading-l {
-      font: var(--goa-typography-s-heading-l);
+      font: var(--goa-typography-mobile-heading-l);
     }
     .heading-m {
-      font: var(--goa-typography-s-heading-m);
+      font: var(--goa-typography-mobile-heading-m);
     }
     .heading-s {
-      font: var(--goa-typography-s-heading-s);
+      font: var(--goa-typography-mobile-heading-s);
     }
     .heading-xs {
-      font: var(--goa-typography-s-heading-xs);
+      font: var(--goa-typography-mobile-heading-xs);
     }
     .body-l {
-      font: var(--goa-typography-s-body-l);
+      font: var(--goa-typography-mobile-body-l);
     }
     .body-m {
-      font: var(--goa-typography-s-body-m);
+      font: var(--goa-typography-mobile-body-m);
     }
     .body-s {
-      font: var(--goa-typography-s-body-s);
+      font: var(--goa-typography-mobile-body-s);
     }
     .body-xs {
-      font: var(--goa-typography-s-body-xs);
+      font: var(--goa-typography-mobile-body-xs);
     }
   }
 </style>
