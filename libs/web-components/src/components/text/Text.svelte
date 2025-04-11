@@ -1,24 +1,19 @@
 <svelte:options customElement="goa-text" />
 
 <script lang="ts" context="module">
-  export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5"
+  export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5";
   export type TextElement = "span" | "div" | "p";
 
-  type HeadingSize
-    = "heading-xl"
+  type HeadingSize =
+    | "heading-xl"
     | "heading-l"
     | "heading-m"
     | "heading-s"
-    | "heading-xs"
+    | "heading-xs";
 
-  type BodySize
-    = "body-l"
-    | "body-m"
-    | "body-s"
-    | "body-xs";
+  type BodySize = "body-l" | "body-m" | "body-s" | "body-xs";
 
   export type Size = HeadingSize | BodySize;
-
 </script>
 
 <script lang="ts">
@@ -37,16 +32,17 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  const sizeMap: Record<HeadingElement | TextElement, HeadingSize | BodySize> = {
-    h1: "heading-xl",
-    h2: "heading-l",
-    h3: "heading-m",
-    h4: "heading-s",
-    h5: "heading-xs",
-    div: "body-m",
-    p: "body-m",
-    span: "body-m",
-  }
+  const sizeMap: Record<HeadingElement | TextElement, HeadingSize | BodySize> =
+    {
+      h1: "heading-xl",
+      h2: "heading-l",
+      h3: "heading-m",
+      h4: "heading-s",
+      h5: "heading-xs",
+      div: "body-m",
+      p: "body-m",
+      span: "body-m",
+    };
 
   /**
    * Returns a bottom margin value based on the `as` prop
@@ -79,14 +75,19 @@
 
   onMount(() => {
     size ||= sizeMap[as];
-  })
+  });
 </script>
 
 <svelte:element
   this={as}
   class={size}
   style={styles(
-    style("color", color === "primary" ? "var(--goa-color-text-default)" : "var(--goa-color-text-secondary)"),
+    style(
+      "color",
+      color === "primary"
+        ? "var(--goa-color-text-default)"
+        : "var(--goa-color-text-secondary)",
+    ),
     maxWidth === "none" ? "" : `max-width: ${maxWidth}`,
     calculateMargin(mt, mr, getBottomMargin(), ml),
   )}
