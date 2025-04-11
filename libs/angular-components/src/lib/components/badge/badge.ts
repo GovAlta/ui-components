@@ -1,5 +1,9 @@
 import { GoabBadgeType, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  Input,
+} from "@angular/core";
 
 @Component({
   standalone: true,
@@ -18,7 +22,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
     >
     </goa-badge>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  styles: [`:host { display: contents; }`],
 })
 export class GoabBadge {
   @Input() type?: GoabBadgeType;
