@@ -17,7 +17,7 @@
 </script>
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   import { calculateMargin, Spacing } from "../../common/styling";
   import { style, styles } from "../../common/utils";
@@ -73,7 +73,8 @@
     return "3xs";
   }
 
-  onMount(() => {
+  onMount(async() => {
+    await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
     size ||= sizeMap[as];
   });
 </script>

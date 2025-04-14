@@ -56,5 +56,6 @@ export * from "./tab/tab";
 export * from "./table/table";
 export * from "./table-sort-header/table-sort-header";
 export * from "./tabs/tabs";
+export * from "./text/text";
 export * from "./textarea/textarea";
 export * from "./tooltip/tooltip";

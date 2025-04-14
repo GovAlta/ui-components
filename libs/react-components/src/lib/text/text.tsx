@@ -26,6 +26,7 @@ declare global {
 }
 interface GoATextProps extends Margins {
   as?: GoabTextTextElement | GoabTextHeadingElement;
+  tag?: GoabTextTextElement | GoabTextHeadingElement;
   size?: GoabTextSize;
   maxWidth?: GoabTextMaxWidth;
   color?: GoabTextColor;
@@ -35,7 +36,7 @@ interface GoATextProps extends Margins {
 export function GoabText(props: GoATextProps): JSX.Element {
   return (
     <goa-text
-      as={props.as}
+      as={props.as || props.tag}
       size={props.size}
       maxwidth={props.maxWidth}
       color={props.color}
