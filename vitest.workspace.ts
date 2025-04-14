@@ -55,22 +55,6 @@ export default defineWorkspace([
   },
   {
     test: {
-      name: "firefox-react-browser",
-      globals: true,
-      environment: "jsdom",
-      include: [
-        "libs/react-components/**/*.browser.{test,spec}.tsx",
-      ],
-      setupFiles: ["vitest.browser.setup.ts"],
-      browser: {
-        provider: "playwright",
-        name: "firefox",
-        enabled: true,
-      },
-    },
-  },
-  {
-    test: {
       name: "react-headless",
       globals: true,
       environment: "jsdom",
@@ -81,23 +65,6 @@ export default defineWorkspace([
       browser: {
         provider: "playwright",
         name: "chromium",
-        enabled: true,
-        headless: true,
-      },
-    },
-  },
-  {
-    test: {
-      name: "firefox-react-headless",
-      globals: true,
-      environment: "jsdom",
-      include: [
-        "libs/react-components/**/*.browser.{test,spec}.tsx",
-      ],
-      setupFiles: ["vitest.browser.setup.ts"],
-      browser: {
-        provider: "playwright",
-        name: "firefox",
         enabled: true,
         headless: true,
       },
