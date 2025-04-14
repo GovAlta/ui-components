@@ -168,7 +168,7 @@
   }
 
   :global(::slotted(a.current)) {
-    font: var(--goa-side-menu-typography-item-selected);
+    font: var(--goa-side-menu-typography-item-current);
     border-left: var(--goa-side-menu-child-border-left-selected);
     background: var(--goa-side-menu-child-color-bg-selected);
     /* required to override base styles & above :global(::slotted(a) !important */
@@ -210,11 +210,11 @@
     font: var(--goa-side-menu-typography-item);
     padding: var(--goa-side-menu-parent-padding);
     text-decoration: none;
-    font: var(--goa-side-menu-parent-text);
+    font: var(--goa-side-menu-typography-item);
     border-radius: var(--goa-side-menu-group-border-radius);
   }
   .heading.open {
-    font: var(--goa-side-menu-parent-text-active);
+    font: var(--goa-side-menu-typography-item-current);
   }
 
   :host([child="true"]) a.heading {
