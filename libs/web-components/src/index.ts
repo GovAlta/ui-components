@@ -61,6 +61,8 @@ export { default as Popover } from "./components/popover/Popover.svelte";
 export { default as RadioGroup } from "./components/radio-group/RadioGroup.svelte";
 export { default as RadioItem } from "./components/radio-item/RadioItem.svelte";
 export { default as Scrollable } from "./components/scrollable/Scrollable.svelte";
+export { default as Select } from "./components/select/Select.svelte";
+export { default as Option } from "./components/select/Option.svelte";
 export { default as SideMenu } from "./components/side-menu/SideMenu.svelte";
 export { default as SideMenuGroup } from "./components/side-menu-group/SideMenuGroup.svelte";
 export { default as SideMenuHeading } from "./components/side-menu-heading/SideMenuHeading.svelte";
