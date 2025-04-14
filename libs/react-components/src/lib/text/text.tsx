@@ -24,7 +24,9 @@ declare global {
     }
   }
 }
+
 interface GoATextProps extends Margins {
+  /** @deprecated Please use 'tag' property instead */
   as?: GoabTextTextElement | GoabTextHeadingElement;
   tag?: GoabTextTextElement | GoabTextHeadingElement;
   size?: GoabTextSize;
