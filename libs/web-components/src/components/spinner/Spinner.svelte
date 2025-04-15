@@ -103,7 +103,7 @@
       cx={radius}
       cy={radius}
       stroke={invert
-        ? "var(--goa-color-info-hover)"
+        ? "var(--goa-color-info-default)"
         : "var(--goa-color-brand-light)"}
       stroke-width={strokewidth}
       r={radius - strokewidth / 2}
