@@ -19,19 +19,15 @@ import {
 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-export interface IgnoreMe {
-  ignore: string;
-}
-
 @Component({
   standalone: true,
-  selector: "goab-input",
+  selector: "goab-input-number",
   template: `
     <goa-input
       [attr.type]="type"
       [attr.name]="name"
       [attr.focused]="focused"
-      [attr.value]="value"
+      [attr.value]="value !== null ? value : ''"
       [attr.autocapitalize]="autoCapitalize"
       [attr.placeholder]="placeholder"
       [attr.leadingicon]="leadingIcon"
@@ -56,12 +52,12 @@ export interface IgnoreMe {
       [attr.mr]="mr"
       [attr.mb]="mb"
       [attr.ml]="ml"
-      [attr.handletrailingiconclick]="!!_onTrailingIconClick"
+      [attr.handletrailingiconclick]="handleTrailingIconClick"
       (_trailingIconClick)="_onTrailingIconClick($event)"
       (_change)="_onChange($event)"
       (_focus)="_onFocus($event)"
       (_blur)="_onBlur($event)"
-      (_keyPress)="_onKeyPress($event)"
+      (_keypress)="_onKeyPress($event)"
       [attr.trailingiconarialabel]="trailingIconAriaLabel"
     >
       <ng-content />
@@ -72,12 +68,13 @@ export interface IgnoreMe {
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => GoabInput),
+      // Use forwardRef with the new class name
+      useExisting: forwardRef(() => GoabInputNumber),
     },
   ],
 })
-export class GoabInput implements ControlValueAccessor, OnInit {
-  @Input() type?: GoabInputType = "text";
+export class GoabInputNumber implements ControlValueAccessor, OnInit {
+  @Input() type: GoabInputType = "number";
   @Input() name?: string;
   @Input() id?: string;
   @Input() debounce?: number;
@@ -96,7 +93,6 @@ export class GoabInput implements ControlValueAccessor, OnInit {
   @Input() testId?: string;
   @Input() ariaLabel?: string;
   @Input() maxLength?: number;
-  @Input() value?: string | null = "";
   @Input() min?: string | number;
   @Input() max?: string | number;
   @Input() step?: number;
@@ -107,19 +103,18 @@ export class GoabInput implements ControlValueAccessor, OnInit {
   @Input() ml?: Spacing;
   @Input() trailingIconAriaLabel?: string;
 
-  @Output() onTrailingIconClick = new EventEmitter();
+  @Input() value: number | null = null;
+
+  @Output() onTrailingIconClick = new EventEmitter<void>(); // Keep void type
   @Output() onFocus = new EventEmitter<GoabInputOnFocusDetail>();
   @Output() onBlur = new EventEmitter<GoaInputOnBlurDetail>();
   @Output() onKeyPress = new EventEmitter<GoabInputOnKeyPressDetail>();
   @Output() onChange = new EventEmitter<GoabInputOnChangeDetail>();
 
-  private handleTrailingIconClick = false;
+  handleTrailingIconClick = false;
 
   ngOnInit() {
     this.handleTrailingIconClick = this.onTrailingIconClick.observed;
-    if (typeof this.value === "number") {
-      console.warn("For numeric values use goab-input-number.");
-    }
   }
 
   _onTrailingIconClick(_: Event) {
@@ -131,17 +126,28 @@ export class GoabInput implements ControlValueAccessor, OnInit {
   _onChange(e: Event) {
     this.markAsTouched();
     const detail = (e as CustomEvent<GoabInputOnChangeDetail>).detail;
-    this.onChange.emit(detail);
 
-    this.fcChange?.(detail.value);
+    const stringValue = detail.value;
+    let numericValue: number | null = null;
+
+    if (stringValue !== null && stringValue.trim() !== "") {
+      const parsed = parseFloat(stringValue);
+      if (!isNaN(parsed)) {
+        numericValue = parsed;
+      }
+    }
+
+    this.value = numericValue;
+
+    this.fcChange?.(numericValue);
+
+    this.onChange.emit(detail);
   }
 
   _onKeyPress(e: Event) {
     this.markAsTouched();
     const detail = (e as CustomEvent<GoabInputOnKeyPressDetail>).detail;
     this.onKeyPress.emit(detail);
-
-    this.fcTouched?.();
   }
 
   _onFocus(e: Event) {
@@ -151,14 +157,13 @@ export class GoabInput implements ControlValueAccessor, OnInit {
   }
 
   _onBlur(e: Event) {
+    this.markAsTouched();
     const detail = (e as CustomEvent<GoaInputOnBlurDetail>).detail;
     this.onBlur.emit(detail);
   }
 
-  // ControlValueAccessor
-
-  private fcChange?: (value: string) => void;
-  private fcTouched?: () => unknown;
+  private fcChange?: (value: number | null) => void;
+  private fcTouched?: () => void; // Changed type to void for consistency
   touched = false;
 
   markAsTouched() {
@@ -167,13 +172,16 @@ export class GoabInput implements ControlValueAccessor, OnInit {
       this.touched = true;
     }
   }
-  writeValue(value: string): void {
-    this.value = value;
+
+  writeValue(value: number | null): void {
+    this.value = value === undefined ? null : value;
   }
-  registerOnChange(fn: any): void {
+
+  registerOnChange(fn: (value: number | null) => void): void {
     this.fcChange = fn;
   }
-  registerOnTouched(fn: any): void {
+
+  registerOnTouched(fn: () => void): void {
     this.fcTouched = fn;
   }
 
