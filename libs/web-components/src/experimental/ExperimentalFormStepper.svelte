@@ -281,7 +281,7 @@
   >
     <div class="slots" bind:this={_gridEl}>
       <div class="goa-grid" class:mobile={_isMobile}
-           style={`--min-child-width: ${_isMobile ? "40px" : "180px"};
+           style={`--min-child-width: ${_isMobile ? "40px" : "108px"};
         gap: var(--goa-space-${_isMobile ? "xs" : "none"});`}
       >
         <slot />
