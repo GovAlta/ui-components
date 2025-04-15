@@ -75,7 +75,7 @@
 
 <style>
   :host {
-    font-family: var(--goa-font-family-serif);
+    font-family: var(--goa-font-family-sans);
   }
 
   details {
@@ -108,7 +108,6 @@
   summary:focus-visible {
     outline: var(--goa-details-focus-border);
     color: var(--goa-color-interactive-hover);
-
   }
   summary:focus,
   summary:active {
@@ -124,7 +123,7 @@
     margin-left: var(--goa-space-xl);
     text-decoration: var(--goa-details-text-decoration);
     color: var(--goa-details-color-text);
-    font: var(--goa-details-typeface);
+    font: var(--goa-details-typography);
   }
   summary:hover span {
     color: var(--goa-details-color-text-hover);
