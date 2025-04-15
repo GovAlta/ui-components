@@ -7,7 +7,7 @@
     "serve:react": "nx run react:serve:development",
     "serve:angular": "nx run angular:serve:development",
     "watch": "vite build --watch libs/web-components",
-    "build": "nx run-many -t build --exclude=angular --exclude=react --exclude=web",
+    "build": "nx affected --base=lts -t build --exclude=angular --exclude=react --exclude=web",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "test": "vitest",
     "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web",
