@@ -55,6 +55,7 @@ describe("GoADropdown", () => {
       expect(dropdownIcon?.getAttribute("arialabel")).toBe("favcolor");
       expect(dropdownIcon?.getAttribute("role")).toBe("button");
       expect(dropdownIcon?.getAttribute("type")).toBe("chevron-down");
+      expect(dropdownIcon?.getAttribute("tabindex")).toBe("-1");
 
       const ul = result.container.querySelector("ul");
       expect(ul?.getAttribute("id")).toBe("menu-favcolor");
@@ -90,6 +91,7 @@ describe("GoADropdown", () => {
         expect(inputField?.getAttribute("aria-owns")).toBe("menu-favcolor"); // Menu is displayed
         expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("true");
         expect(dropdownIcon?.getAttribute("type")).toBe("chevron-up");
+        expect(dropdownIcon?.getAttribute("tabindex")).toBe("-1");
       });
     });
 
