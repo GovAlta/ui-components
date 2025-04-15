@@ -1,11 +1,11 @@
 import { GoabModalCalloutVariant, GoabModalTransition } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, TemplateRef } from "@angular/core";
-import { NgTemplateOutlet } from "@angular/common";
+import { NgIf, NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-modal",
-  imports: [NgTemplateOutlet],
+  imports: [NgIf, NgTemplateOutlet],
   template: `
     <goa-modal
       [attr.calloutvariant]="calloutVariant"
@@ -19,10 +19,10 @@ import { NgTemplateOutlet } from "@angular/common";
       (_close)="_onClose()"
     >
       <ng-content></ng-content>
-      <div slot="heading">
+      <div slot="heading" *ngIf="this.heading !== '' || this.closable">
         <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
       </div>
-      <div slot="actions">
+      <div slot="actions" *ngIf="this.actions">
         <ng-container [ngTemplateOutlet]="actions"></ng-container>
       </div>
     </goa-modal>
