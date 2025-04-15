@@ -1,6 +1,13 @@
 {
   "extends": "../../.releaserc.json",
   "tagFormat": "react-v${version}",
+  "branches": [
+    {
+      "name": "lts",
+      "channel": "lts",
+      "range": "4.x.x"
+    }
+  ],
   "plugins": [
     [
       "@abgov/nx-release",
