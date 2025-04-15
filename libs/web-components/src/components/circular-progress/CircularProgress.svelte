@@ -100,7 +100,7 @@
 
   .spinner-large .message {
     margin-top: var(--goa-circular-progress-small-margin-top);
-    font: var(--goa-circular-progress-medium-text);
+    font: var(--goa-circular-progress-small-text);
   }
   .spinner-xlarge .message {
     margin-top: var(--goa-circular-progress-large-margin-top);

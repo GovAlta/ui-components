@@ -124,7 +124,7 @@
     cursor: pointer;
     font: var(--goa-button-text);
     height: var(--goa-button-height);
-    letter-spacing: var(--goa-letter-spacing-button);
+    letter-spacing: var(--goa-button-letter-spacing);
     padding: 0 var(--goa-button-padding-lr);
     white-space: nowrap;
     gap: var(--goa-button-gap);
@@ -192,10 +192,10 @@
   }
 
   button.start {
-    height: var(--goa-button-start-height);
+    height: var(--goa-button-height-start);
     font: var(--goa-button-text-start);
     padding: var(--goa-button-padding-lr-start);
-    letter-spacing: var(--goa-letter-spacing-button);
+    letter-spacing: var(--goa-button-letter-spacing);
   }
 
   /* Primary */

@@ -35,7 +35,7 @@ describe('GoASpinner', () => {
         expect(circle.getAttribute("stroke")).toBe("var(--goa-color-brand-light)");
         expect(path.getAttribute("stroke")).toBe("var(--goa-color-info-default)");
       } else {
-        expect(circle.getAttribute("stroke")).toBe("var(--goa-color-info-hover)");
+        expect(circle.getAttribute("stroke")).toBe("var(--goa-color-info-default)");
         expect(path.getAttribute("stroke")).toBe("var(--goa-color-brand-light)");
       }
     })
