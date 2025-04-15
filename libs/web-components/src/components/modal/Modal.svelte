@@ -5,8 +5,8 @@
   import noscroll from "../../common/no-scroll";
   import {
     getSlottedChildren,
-    toBoolean,
     typeValidator,
+    toBoolean,
   } from "../../common/utils";
   import { onDestroy, onMount, tick } from "svelte";
 
@@ -40,7 +40,6 @@
   let _scrollEl: HTMLElement | undefined;
   let _headerEl: HTMLElement | undefined;
   let _isOpen: boolean = false;
-  let _requiresTopPadding: boolean;
   let _actionsHeight: number;
   let _actionsSlotHasContent = false;
   let _headerHeight: number;
@@ -68,6 +67,8 @@
   // ********
 
   $: _isClosable = toBoolean(closable);
+  $: _headingExists = heading !== "" || $$slots.heading;
+  $: _headerHasContent = _headingExists || _isClosable;
 
   // Moving the reactive var into a timeout prevents accessing null stylesheet
   // reference to allow for creation of the @keyframes for the in:fade and out:fade transitions.
@@ -78,13 +79,6 @@
   $: if (_isOpen && _scrollEl) {
     const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
     _scrollPos = hasScroll ? "top" : null;
-  }
-
-  $: if (_isOpen && _rootEl && _headerEl) {
-    _requiresTopPadding =
-      !!_headerEl?.querySelector("div.modal-title")?.textContent ||
-      !!_headerEl?.querySelector("div.modal-close") ||
-      getSlottedChildren(_headerEl).length > 0;
   }
 
   $: _transitionTime =
@@ -212,41 +206,44 @@
           </div>
         {/if}
         <div class="content">
-          {#if heading || _isClosable || $$slots.heading}
-            <header
-              bind:this={_headerEl}
-              class:has-content={_requiresTopPadding}
-              bind:clientHeight={_headerHeight}
+          <header
+            bind:this={_headerEl}
+            class:has-content={_headerHasContent}
+            bind:clientHeight={_headerHeight}
+          >
+            <div
+              data-testid="modal-title"
+              class="modal-title"
+              id="goa-modal-heading"
+              aria-label={_headingExists
+                ? undefined
+                : role === "alertdialog"
+                  ? "Alert"
+                  : "Modal"}
             >
-              <div
-                data-testid="modal-title"
-                class="modal-title"
-                id="goa-modal-heading"
-              >
-                {#if heading}
-                  {heading}
-                {:else}
-                  <slot name="heading" />
-                {/if}
-              </div>
-              {#if _isClosable}
-                <div class="modal-close">
-                  <!-- svelte-ignore a11y-click-events-have-key-events -->
-                  <!-- svelte-ignore a11y-no-static-element-interactions -->
-                  <goa-icon-button
-                    size="medium"
-                    data-ignore-focus="true"
-                    data-testid="modal-close-button"
-                    arialabel="Close the modal"
-                    icon="close"
-                    theme="filled"
-                    on:click={close}
-                    variant="dark"
-                  />
-                </div>
+              {#if heading}
+                {heading}
+              {:else if $$slots.heading}
+                <slot name="heading" />
               {/if}
-            </header>
-          {/if}
+            </div>
+            {#if _isClosable}
+              <div class="modal-close">
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <!-- svelte-ignore a11y-no-static-element-interactions -->
+                <goa-icon-button
+                  size="medium"
+                  data-ignore-focus="true"
+                  data-testid="modal-close-button"
+                  arialabel="Close the modal"
+                  icon="close"
+                  theme="filled"
+                  on:click={close}
+                  variant="dark"
+                />
+              </div>
+            {/if}
+          </header>
           <div data-testid="modal-content" class="modal-content">
             <goa-scrollable
               direction="vertical"
@@ -345,10 +342,9 @@
   .content header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: var(--goa-modal-padding);
   }
 
-  header.has-content {
+  .content header.has-content {
     margin-bottom: var(--goa-modal-content-gap); /* space under heading */
   }
 
@@ -356,7 +352,7 @@
     .content {
       padding: var(--goa-modal-padding-small-screen) var(--goa-modal-padding-small-screen) 0 var(--goa-modal-padding-small-screen);
     }
-    header.has-content {
+    .content header.has-content {
       margin-bottom: var(--goa-modal-content-gap-small-screen); /* space under heading */
     }
 
