@@ -810,7 +810,7 @@
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <goa-icon
             role="button"
-            tabindex="0"
+            tabindex="-1"
             id={name}
             arialabel={arialabel || name}
             ariacontrols={`menu-${name}`}
