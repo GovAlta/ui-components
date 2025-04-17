@@ -1,11 +1,11 @@
 <svelte:options customElement="goa-tabs" />
 
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
   import { clamp, ensureSlotExists, fromBoolean } from "../../common/utils";
   import { GoATabProps } from "../tab/Tab.svelte";
 
-  export let initialtab: number = 1; // 1-based
+  export let initialtab: number = -1; // 1-based
   export let testid: string = "";
 
   // Private
@@ -37,11 +37,13 @@
   // =========
 
   function getTabIndexFromHash() {
-    const hash = window.location.hash;
-    if (!hash) return null;
+    // We need to see the full hash in order to open the correct tab and scroll down to the anchor if there is
+    const fullHash = window.location.href.split("#").slice(1).join("#"); // Ex: tab-1#example1
+
+    if (!fullHash) return null;
 
     // Find the matching tab based on href
-    const tabs = _tabsEl?.querySelectorAll('[role="tab"]');
+    const tabs = _tabsEl?.querySelectorAll('[role="tab"]') || [];
 
     for (let i = 0; i < tabs.length; i++) {
       const tab = tabs[i] as HTMLAnchorElement;
@@ -49,10 +51,7 @@
       const tabHref = tab.getAttribute("href");
       const tabHash = tabHref?.split("#")[1] || "";
 
-      const isFullUrlMatch = tabHref?.endsWith(hash);
-      const isHashOnlyMatch = hash.endsWith(tabHash);
-
-      if (isFullUrlMatch || isHashOnlyMatch) {
+      if (fullHash.split("#").includes(tabHash)) {
         return i + 1;
       }
     }
@@ -75,6 +74,10 @@
         // Check URL hash on initial load
         if (_initialLoad) {
           const tabIndexFromHash = getTabIndexFromHash();
+          // We don't override the URL if user doesn't set initialTab or using href
+          // It will help prevent scrolling to tabs if it is located in the bottom of the page
+          if (tabIndexFromHash == null && initialtab === -1) return;
+
           setCurrentTab(tabIndexFromHash ?? (initialtab || 1));
           _initialLoad = false;
         }
@@ -190,7 +193,25 @@
     // update the browswers url with the new hash
     if (currentLocation) {
       const url = new URL(currentLocation);
-      history.pushState({}, "", url.pathname + url.search + url.hash);
+      // to make sure we preserve multiple #, for example /#tab-1#example
+      const currentHash = url.hash.substring(1);
+      const allHashes = window.location.href.split('#').slice(1);
+      const otherHashes = allHashes.filter(hash => !hash.startsWith('tab-')); // #example
+      const newHash = [currentHash, ...otherHashes].filter(Boolean).join('#');
+
+      history.replaceState({}, "", url.pathname + url.search + (newHash ? '#' + newHash : ''));
+
+      if (_initialLoad) {
+        const anchorHash = otherHashes[0];
+        if (anchorHash) {
+          tick().then(() => {
+            const element = document.getElementById(anchorHash) || document.querySelector(`[name="${anchorHash}"]`);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        }
+      }
     }
   }
 
