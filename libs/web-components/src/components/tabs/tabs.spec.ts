@@ -3,6 +3,17 @@ import { fireEvent, render, waitFor } from "@testing-library/svelte";
 import { it, describe } from "vitest";
 
 describe("Tabs", () => {
+  beforeEach(() => {
+    window.history.pushState({}, "", "/");
+    if (window.location.hash) {
+      window.location.hash = "";
+    }
+  });
+  afterEach(() => {
+    window.history.pushState({}, "", "/");
+    vi.clearAllMocks();
+  });
+
   it("should render", async () => {
     const { container } = render(Tabs);
 
@@ -129,6 +140,83 @@ describe("Tabs", () => {
 
       expect(goaTabs[0].getAttribute("open")).toBe("false");
       expect(goaTabs[1].getAttribute("open")).toBe("true");
+    });
+  });
+
+  it("should not set any tab when initialtab is -1 and no hash exists", async () => {
+    const { container } = render(Tabs, { initialtab: -1 });
+
+    await waitFor(() => {
+      const tabs = container.querySelectorAll('[role="tab"]');
+      expect(tabs.length).toBeGreaterThan(0);
+
+      // Check that no tab is selected
+      tabs.forEach(tab => {
+        expect(tab.getAttribute("aria-selected")).toBe(null); // Nothing should be pre-selected
+      });
+    });
+  });
+
+  it("should handle multiple hash fragments in URL", async () => {
+    // Mock window.location
+    const originalLocation = window.location;
+    const mockLocation = new URL("http://localhost/test#tab-1#anchorPoint");
+    Object.defineProperty(window, 'location', {
+      value: mockLocation,
+      writable: true
+    });
+
+    const { container } = render(Tabs);
+
+    await waitFor(() => {
+      const tab2 = container.querySelector('[data-testid="tab-2"]');
+      expect(tab2?.getAttribute("aria-selected")).toBe("true");
+    });
+
+    // Restore original location
+    Object.defineProperty(window, 'location', {
+      value: originalLocation,
+      writable: true
+    });
+  });
+
+  it("should scroll to anchor element when present", async () => {
+    // Create an anchor element
+    const anchorElement = document.createElement('div');
+    anchorElement.id = 'anchorPoint';
+    document.body.appendChild(anchorElement);
+
+    // Mock scrollIntoView
+    const scrollIntoViewMock = vi.fn();
+    anchorElement.scrollIntoView = scrollIntoViewMock;
+
+    // Mock window.location with hash
+    const originalLocation = window.location;
+    const mockLocation = new URL("http://localhost/test#anchorPoint");
+    Object.defineProperty(window, 'location', {
+      value: mockLocation,
+      writable: true
+    });
+
+    const { container } = render(Tabs);
+
+    // Wait for component to be mounted and processed
+    await waitFor(() => {
+      expect(container.querySelector('[role="tablist"]')).toBeTruthy();
+    });
+
+    // Give time for the anchor scroll to be triggered
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    await waitFor(() => {
+      expect(scrollIntoViewMock).toHaveBeenCalledWith({ behavior: 'smooth' });
+    }, { timeout: 2000 });
+
+    // Cleanup
+    document.body.removeChild(anchorElement);
+    Object.defineProperty(window, 'location', {
+      value: originalLocation,
+      writable: true
     });
   });
 });
