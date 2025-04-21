@@ -11,9 +11,7 @@
   let rootEl: HTMLElement;
   onMount(() => {
     const height = `var(--goa-space-${vspacing})`;
-    const width = hspacing === "fill"
-      ? "100%"
-      : `var(--goa-space-${hspacing})`;
+    const width = hspacing === "fill" ? "100%" : `var(--goa-space-${hspacing})`;
     injectCss(rootEl, ":host", { width, height });
   });
 </script>
@@ -21,6 +19,7 @@
 <div
   bind:this={rootEl}
   style={`
+    display: ${hspacing ? "inline-block" : "block"};
     height: var(--goa-space-${vspacing});
     width: var(--goa-space-${hspacing});
   `}
