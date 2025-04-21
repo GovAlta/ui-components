@@ -92,6 +92,9 @@ export type GoabPaginationOnChangeDetail = {
 export type GoabFormStepperType = "constrained" | "free";
 export type GoabFormStepStatus = "complete" | "incomplete" | "unstarted";
 
+// Public Form
+export type GoabPublicFormStatus = "initializing" | "complete";
+
 // Formitem
 export type GoabFormItemLabelSize = "regular" | "large";
 export type GoabFormItemRequirement = "optional" | "required";
