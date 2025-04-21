@@ -33,14 +33,6 @@ export interface GoabTableProps extends Margins {
   children?: ReactNode;
 }
 
-// Alerady exists
-// export interface GoabTableProps extends Margins {
-//   width?: string;
-//   onSort?: (sortBy: string, sortDir: number) => void;
-//   variant?: GoabTableVariant;
-//   testId?: string;
-// }
-
 // legacy name
 export type TableProps = GoabTableProps;
 
