@@ -1,4 +1,4 @@
-import { GoabDatePickerOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
