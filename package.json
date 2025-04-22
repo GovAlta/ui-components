@@ -7,7 +7,7 @@
     "serve:react": "nx run react:serve:development",
     "serve:angular": "nx run angular:serve:development",
     "watch": "vite build --watch libs/web-components",
-    "build": "nx affected --base=alpha -t build --exclude=angular --exclude=react --exclude=web",
+    "build": "nx affected --base=lts -t build --exclude=angular --exclude=react --exclude=web",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "test": "vitest",
     "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web",
@@ -18,7 +18,7 @@
   },
   "private": true,
   "devDependencies": {
-    "@abgov/design-tokens": "^1.4.3",
+    "@abgov/design-tokens": "^1.5.10",
     "@abgov/nx-release": "8.0.0",
     "@angular-devkit/build-angular": "18.2.8",
     "@angular-devkit/core": "18.1.4",

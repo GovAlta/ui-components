@@ -2,14 +2,9 @@
   "repositoryUrl": "https://github.com/GovAlta/ui-components.git",
   "branches": [
     "+([0-9])?(.{+([0-9]),x}).x",
-    "main",
     {
-      "name": "BUGFIX",
-      "channel": false
-    },
-    {
-      "name": "alpha",
-      "prerelease": true
+      "name": "lts",
+      "channel": "lts"
     }
   ]
 }
