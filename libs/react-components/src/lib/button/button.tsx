@@ -93,7 +93,7 @@ export function GoAButton({
       type={type}
       size={size}
       variant={variant}
-      disabled={disabled}
+      disabled={disabled || undefined}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
       width={width}
