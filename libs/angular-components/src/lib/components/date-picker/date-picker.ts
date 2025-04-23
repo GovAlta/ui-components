@@ -46,6 +46,9 @@ export class GoabDatePicker implements ControlValueAccessor {
   @Input() max?: Date | string;
   @Input() error?: boolean;
   @Input() disabled?: boolean;
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
   @Input() relative?: boolean;
   @Input() testId?: string;
   @Input() mt?: Spacing;

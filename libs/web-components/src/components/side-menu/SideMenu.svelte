@@ -117,7 +117,7 @@
   }
 
   :global(::slotted(a.current)) {
-    font: var(--goa-side-menu-typography-item-active);
+    font: var(--goa-side-menu-typography-item-current);
     background: var(--goa-side-menu-color-bg-menu-item-hover);
   }
 

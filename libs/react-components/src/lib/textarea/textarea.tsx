@@ -52,7 +52,7 @@ export interface GoabTextAreaProps extends Margins {
   onKeyPress?: (event: GoabTextAreaOnKeyPressDetail) => void;
 }
 
-export function GoabTextarea({
+export function GoabTextArea({
   name,
   value,
   placeholder,
@@ -132,4 +132,4 @@ export function GoabTextarea({
   );
 }
 
-export default GoabTextarea;
+export default GoabTextArea;

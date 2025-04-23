@@ -267,7 +267,7 @@
   }
 
   :global([role="tab"]) {
-    display: block;
+    display: flex;
     background: none;
     overflow: hidden;
     white-space: nowrap;
@@ -311,7 +311,7 @@
       border-bottom: var(--goa-tab-border-not-selected);
       text-overflow: ellipsis;
       min-width: var(--goa-space-2xl);
-      text-align: center;
+      justify-content: center; /* Horizontally center content */
     }
     :global([role="tab"][aria-selected="true"]) {
       border-bottom: var(--goa-tab-border-selected);

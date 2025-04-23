@@ -3,6 +3,10 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
 
+  // Public
+  // allow for outside control of whether focus trap should re-focus the first element is open/closed (see Drawer)
+  export let open: boolean = false;
+
   // Private
 
   let rootEl: HTMLElement;
@@ -11,8 +15,15 @@
   let isShiftPressed: boolean;
   let isFirstFocus = true;
 
-  // Hooks
 
+  // ========
+  // Reactive
+  // ========
+  $: if(open) findFirstFocusableEl();
+
+  // *****
+  // Hooks
+  // *****
   onMount(async () => {
     await tick();
     // event is attached to the rootEl, eliminating the need to remove the listener since it
@@ -90,7 +101,12 @@
     if (!sibling) return;
 
     const el = findFirstNode([sibling], false) as HTMLElement;
-    el?.focus();
+    if (el) {
+      // for angular with router, it needs a small delay
+      setTimeout(() => {
+        el.focus();
+      }, 10);
+    }
   }
 
   // Focus event handler
@@ -124,6 +140,13 @@
       const next = findFirstNode([sibling], true) as HTMLElement;
       next?.focus();
       return;
+    }
+
+    // If the focus element is at the bottom, we want to automatically scroll down to the focused element (when user uses keyboard)
+    const focusedElement = e?.target;
+
+    if (focusedElement && focusedElement instanceof HTMLElement) {
+      focusedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
 

@@ -30,10 +30,10 @@ export interface GoabAccordionProps extends Margins {
   heading: string;
   headingContent?: ReactNode;
   maxWidth?: string;
-  testid?: string;
+  testId?: string;
   iconPosition?: GoabAccordionIconPosition;
   onChange?: (open: boolean) => void;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function GoabAccordion({
@@ -44,7 +44,7 @@ export function GoabAccordion({
   headingContent,
   iconPosition,
   maxWidth,
-  testid,
+  testId,
   onChange,
   children,
   mt,
@@ -76,7 +76,7 @@ export function GoabAccordion({
       secondarytext={secondaryText}
       iconposition={iconPosition}
       maxwidth={maxWidth}
-      testid={testid}
+      testid={testId}
       mt={mt}
       mr={mr}
       mb={mb}

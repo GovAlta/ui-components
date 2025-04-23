@@ -53,7 +53,10 @@
   export let error: string = "false";
   export let multiselect: string = "false";
   export let native: string = "false";
-  export let relative: string = "false";
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
+  export let relative: string = "";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -156,11 +159,20 @@
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
+    showDeprecationWarnings();
   });
 
   //
   // Functions
   //
+
+  function showDeprecationWarnings() {
+    if (relative != "") {
+      console.warn(
+        "Dropdown `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.",
+      );
+    }
+  }
 
   function addRelayListener() {
     receive(_rootEl, (action, data, event) => {
@@ -733,7 +745,6 @@
     <!-- list and filter -->
     <goa-popover
       {disabled}
-      {relative}
       data-testid="option-list"
       width={`${_popoverMaxWidth || 0}`}
       minwidth={_dropdownWidth}
@@ -810,7 +821,7 @@
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <goa-icon
             role="button"
-            tabindex="0"
+            tabindex="-1"
             id={name}
             arialabel={arialabel || name}
             ariacontrols={`menu-${name}`}

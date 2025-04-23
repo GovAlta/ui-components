@@ -28,6 +28,9 @@ export interface GoabPopoverProps extends Margins {
   padded?: boolean;
   position?: GoabPopoverPosition;
   children: ReactNode;
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
   relative?: boolean;
 }
 

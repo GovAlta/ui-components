@@ -5,6 +5,7 @@ import { Margins } from "../../common/types";
 interface WCProps extends Margins {
   leadingicon?: GoabIconType;
   trailingicon?: GoabIconType;
+  testid?: string;
 }
 
 declare global {
@@ -17,17 +18,19 @@ declare global {
   }
 }
 
-interface GoALinkProps extends Margins {
+interface GoabLinkProps extends Margins {
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;
+  testId?: string;
   children: ReactNode;
 }
 
-export function GoALink(props: GoALinkProps) {
+export function GoabLink(props: GoabLinkProps) {
   return (
     <goa-link
       leadingicon={props.leadingIcon}
       trailingicon={props.trailingIcon}
+      testid={props.testId}
       mt={props.mt}
       mb={props.mb}
       ml={props.ml}
@@ -38,4 +41,4 @@ export function GoALink(props: GoALinkProps) {
   );
 }
 
-export default GoALink;
+export default GoabLink;

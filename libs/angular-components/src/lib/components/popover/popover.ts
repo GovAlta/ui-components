@@ -32,6 +32,9 @@ export class GoabPopover {
   @Input() minWidth?: string;
   @Input() padded = true;
   @Input() position?: GoabPopoverPosition;
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
+   */
   @Input() relative?: boolean;
   @Input() testId?: string;
   @Input() mt?: Spacing;

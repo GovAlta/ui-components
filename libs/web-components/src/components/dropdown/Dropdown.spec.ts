@@ -32,7 +32,6 @@ describe("GoADropdown", () => {
       expect(popover?.getAttribute("disabled")).toBe("false");
       expect(popover?.getAttribute("open")).toBe("false");
       expect(popover?.getAttribute("padded")).toBe("false");
-      expect(popover?.getAttribute("relative")).toBe("false");
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown?.querySelector("input");
@@ -55,6 +54,7 @@ describe("GoADropdown", () => {
       expect(dropdownIcon?.getAttribute("arialabel")).toBe("favcolor");
       expect(dropdownIcon?.getAttribute("role")).toBe("button");
       expect(dropdownIcon?.getAttribute("type")).toBe("chevron-down");
+      expect(dropdownIcon?.getAttribute("tabindex")).toBe("-1");
 
       const ul = result.container.querySelector("ul");
       expect(ul?.getAttribute("id")).toBe("menu-favcolor");
@@ -90,6 +90,7 @@ describe("GoADropdown", () => {
         expect(inputField?.getAttribute("aria-owns")).toBe("menu-favcolor"); // Menu is displayed
         expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("true");
         expect(dropdownIcon?.getAttribute("type")).toBe("chevron-up");
+        expect(dropdownIcon?.getAttribute("tabindex")).toBe("-1");
       });
     });
 
@@ -114,7 +115,6 @@ describe("GoADropdown", () => {
         expect(popover?.getAttribute("disabled")).toBe("false");
         expect(popover?.getAttribute("open")).toBe("false");
         expect(popover?.getAttribute("padded")).toBe("false");
-        expect(popover?.getAttribute("relative")).toBe("false");
 
         expect(inputField?.getAttribute("id")).toBe("favcolor");
         expect(inputField?.getAttribute("aria-autocomplete")).toBe("list");
@@ -746,37 +746,6 @@ describe("GoADropdown", () => {
       await waitFor(() => {
         const dropdown = result.container.querySelector(".dropdown");
         expect(dropdown?.getAttribute("style")).toContain("--width: 11ch"); // // 8 + 1 (letter count) + 2 (icon width)
-        const popover = result.container.querySelector("goa-popover");
-      });
-    });
-
-    it.skip("uses the non-percent width supplied", async () => {
-      const result = render(GoADropdownWrapper, {
-        name,
-        width: "500px",
-        items,
-      });
-      const dropdown = result.queryByTestId("favcolor-dropdown");
-      expect(dropdown?.getAttribute("style")).toContain("--width: 500px");
-
-      const popover = result.container.querySelector("goa-popover");
-      expect(popover?.getAttribute("width")).toBe("100%");
-    });
-
-    it.skip("sets the input width to 100% when percent value used", async () => {
-      const result = render(GoADropdownWrapper, {
-        name,
-        items,
-        width: "100%",
-      });
-      const dropdown = result.queryByTestId("favcolor-dropdown");
-      await waitFor(() => {
-        expect(dropdown?.getAttribute("style")).toContain("--width: 100%");
-      });
-
-      const popover = result.container.querySelector("goa-popover");
-      await waitFor(() => {
-        expect(popover?.getAttribute("width")).toBe("100%");
       });
     });
   });
