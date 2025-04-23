@@ -1,10 +1,9 @@
 import { render, fireEvent } from "@testing-library/react";
 import { describe, it, vi } from "vitest";
 import Table from "./table";
-import { GoabTableOnSortDetail } from "@abgov/ui-components-common";
+import { GoabTableOnSortDetail } from "../../common/types";
 
 describe("Table", () => {
-
   it("should render successfully", () => {
     const { baseElement } = render(<Table />);
     expect(baseElement).toBeTruthy();

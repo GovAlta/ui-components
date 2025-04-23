@@ -1,9 +1,9 @@
 import {
   GoabTextAreaCountBy,
   GoabTextAreaOnChangeDetail,
-  GoabTextAreaOnKeyPressDetail
-} from "@abgov/ui-components-common";
-import { Margins } from "../../common/types";
+  GoabTextAreaOnKeyPressDetail,
+  Margins
+} from "../../common/types";
 import { useEffect, useRef } from "react";
 
 interface WCProps extends Margins {

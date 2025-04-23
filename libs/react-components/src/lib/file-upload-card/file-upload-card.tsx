@@ -1,7 +1,7 @@
 import {
   GoabFileUploadOnCancelDetail,
   GoabFileUploadOnDeleteDetail,
-} from "@abgov/ui-components-common";
+} from "../../common/types";
 import { useEffect, useRef } from "react";
 
 interface WCProps {

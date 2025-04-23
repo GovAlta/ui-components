@@ -4,9 +4,9 @@ import {
   GoabTextHeadingElement,
   GoabTextTextElement,
   GoabTextSize,
-  GoabTextColor
-} from "@abgov/ui-components-common";
-import { Margins } from "../../common/types";
+  GoabTextColor,
+  Margins
+} from "../../common/types";
 
 interface WCProps extends Margins {
   as?: GoabTextTextElement | GoabTextHeadingElement;

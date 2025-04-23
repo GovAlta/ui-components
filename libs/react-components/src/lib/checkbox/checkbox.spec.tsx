@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
 import GoabCheckbox, { Props as CheckboxProps } from "./checkbox";
 import { describe, it, expect, vi } from "vitest";
-import { GoabCheckboxOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabCheckboxOnChangeDetail } from "../../common/types";
 
 const testId = "test-id";
 

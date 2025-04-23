@@ -12,7 +12,7 @@ export type GoabInputOnChangeDetail<T = string> = {
   value: T;
 };
 export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
-export type GoaInputOnBlurDetail<T = string> = GoabInputOnChangeDetail<T>;
+export type GoabInputOnBlurDetail<T = string> = GoabInputOnChangeDetail<T>;
 
 export type GoabInputAutoCapitalize =
   | "on"
@@ -205,17 +205,6 @@ export type GoabCircularProgressSize = "small" | "large";
 // Popover
 
 export type GoabPopoverPosition = "above" | "below" | "auto";
-
-export interface GoabPopoverProps extends Margins {
-  testId?: string;
-  maxWidth?: string;
-  padded?: boolean;
-  position?: GoabPopoverPosition;
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
-  relative?: boolean;
-}
 
 // Notification
 

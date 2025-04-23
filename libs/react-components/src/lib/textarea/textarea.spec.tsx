@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import GoabTextArea from "./textarea";
 import { describe, it, expect, vi } from "vitest";
-import { GoabTextAreaOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabTextAreaOnChangeDetail } from "../../common/types";
 
 describe("TextArea", () => {
   it("renders the text area", async () => {

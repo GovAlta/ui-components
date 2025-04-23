@@ -2,7 +2,7 @@ import {
   GoabModalCalloutVariant,
   GoabModalRole,
   GoabModalTransition,
-} from "@abgov/ui-components-common";
+} from "../../common/types";
 import { ReactElement, ReactNode, RefObject, useEffect, useRef } from "react";
 
 interface WCProps {

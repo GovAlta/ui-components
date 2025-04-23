@@ -1,4 +1,4 @@
-import { GoabLinkTarget, GoabServiceLevel } from "@abgov/ui-components-common";
+import { GoabLinkTarget, GoabServiceLevel } from "../../common/types";
 
 import { useEffect, useRef } from "react";
 

@@ -1,4 +1,4 @@
-import { GoabTableSortDirection } from "@abgov/ui-components-common";
+import { GoabTableSortDirection } from "../../common/types";
 
 interface WCProps {
   name?: string;

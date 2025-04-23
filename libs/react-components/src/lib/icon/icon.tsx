@@ -2,9 +2,9 @@ import {
   GoabIconFilledType,
   GoabIconSize,
   GoabIconTheme,
-  GoabIconType
-} from "@abgov/ui-components-common";
-import { Margins } from "../../common/types";
+  GoabIconType,
+  Margins
+} from "../../common/types";
 interface IonIconProps {
   name: GoabIconType | GoabIconFilledType;
 }

@@ -1,4 +1,4 @@
-import { GoabFormStepStatus } from "@abgov/ui-components-common";
+import { GoabFormStepStatus } from "../../common/types";
 
 interface WCProps {
   text: string;

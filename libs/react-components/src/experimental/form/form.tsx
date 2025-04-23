@@ -1,6 +1,10 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { GoabFormStorageType, GoabFormOnMountDetail, GoabFormOnStateChange } from "@abgov/ui-components-common";
-import { Margins } from "../../common/types";
+import {
+  GoabFormStorageType,
+  GoabFormOnMountDetail,
+  GoabFormOnStateChange,
+  Margins
+} from "../../common/types";
 import { relay } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
@@ -59,14 +63,14 @@ export function GoabSimpleForm({
         _continueTo(form, next);
       };
 
-      onMount({fn: onContinue});
+      onMount({ fn: onContinue });
     }
   }, [el.current]);
 
   useEffect(() => {
     const _stateChange = (e: Event) => {
       const { id, state } = (e as CustomEvent).detail;
-      return onStateChange?.({id, state});
+      return onStateChange?.({ id, state });
     };
 
     if (onStateChange) {

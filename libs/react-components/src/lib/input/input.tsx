@@ -4,13 +4,13 @@ import {
   GoabAutoCapitalize,
   GoabDate,
   GoabIconType,
-  GoaInputOnBlurDetail,
+  GoabInputOnBlurDetail,
   GoabInputOnChangeDetail,
   GoabInputOnFocusDetail,
   GoabInputOnKeyPressDetail,
-  GoabInputType
-} from "@abgov/ui-components-common";
-import { Margins } from "../../common/types";
+  GoabInputType,
+  Margins
+} from "../../common/types";
 
 export interface IgnoreMe {
   ignore: string;
@@ -98,7 +98,7 @@ interface BaseProps extends Margins {
 
 type OnChange<T = string> = (detail: GoabInputOnChangeDetail<T>) => void;
 type OnFocus<T = string> = (detail: GoabInputOnFocusDetail<T>) => void;
-type OnBlur<T = string> = (detail: GoaInputOnBlurDetail<T>) => void;
+type OnBlur<T = string> = (detail: GoabInputOnBlurDetail<T>) => void;
 type OnKeyPress<T = string> = (detail: GoabInputOnKeyPressDetail<T>) => void;
 
 export interface GoabInputProps extends BaseProps {
@@ -191,7 +191,7 @@ export function GoabInput({
     };
 
     const blurListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoaInputOnBlurDetail>).detail;
+      const detail = (e as CustomEvent<GoabInputOnBlurDetail>).detail;
       onBlur?.(detail);
     };
 
@@ -398,7 +398,7 @@ export function GoabInputNumber({
   const onFocus = ({ name, value }: GoabInputOnFocusDetail) => {
     props.onFocus?.({ name, value: parseFloat(value) });
   };
-  const onBlur = ({ name, value }: GoaInputOnBlurDetail) => {
+  const onBlur = ({ name, value }: GoabInputOnBlurDetail) => {
     props.onBlur?.({ name, value: parseFloat(value) });
   };
   const onKeyPress = ({ name, value, key }: GoabInputOnKeyPressDetail) => {

@@ -1,7 +1,7 @@
 import {
   GoabSpacerHorizontalSpacing,
   GoabSpacerVerticalSpacing,
-} from "@abgov/ui-components-common";
+} from "../../common/types";
 
 /* eslint-disable-next-line */
 interface WCProps {

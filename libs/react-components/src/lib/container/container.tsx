@@ -3,9 +3,8 @@ import {
   GoabContainerPadding,
   GoabContainerType,
   GoabContainerWidth,
-  
-} from "@abgov/ui-components-common";
-import { Margins } from "../../common/types";
+  Margins
+} from "../../common/types";
 import { ReactNode } from "react";
 
 interface WCProps extends Margins {

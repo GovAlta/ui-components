@@ -1,4 +1,4 @@
-import { GoabSpinnerSize, GoabSpinnerType } from "@abgov/ui-components-common";
+import { GoabSpinnerSize, GoabSpinnerType } from "../../common/types";
 
 interface WCProps {
   size: GoabSpinnerSize;

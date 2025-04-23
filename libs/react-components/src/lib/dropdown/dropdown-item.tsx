@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
+import { GoabDropdownItemMountType } from "../../common/types";
 
 interface WCProps {
   value: string;
@@ -40,7 +40,13 @@ export function GoabDropdownOption(props: GoabDropdownItemProps) {
   return <GoabDropdownItem {...props} />;
 }
 
-export function GoabDropdownItem({ value, label, filter, name, mountType = "append" }: GoabDropdownItemProps) {
+export function GoabDropdownItem({
+  value,
+  label,
+  filter,
+  name,
+  mountType = "append",
+}: GoabDropdownItemProps) {
   return (
     <goa-dropdown-item
       value={value}

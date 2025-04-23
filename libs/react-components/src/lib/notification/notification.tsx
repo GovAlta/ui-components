@@ -1,4 +1,4 @@
-import { GoabAriaLiveType, GoabNotificationType } from "@abgov/ui-components-common";
+import { GoabAriaLiveType, GoabNotificationType } from "../../common/types";
 import { useEffect, useRef } from "react";
 
 interface WCProps {
