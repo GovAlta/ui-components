@@ -1,6 +1,5 @@
-import { GoabFormStepperOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabFormStepperOnChangeDetail, Margins } from "../../common/types";
 import { ReactNode, useEffect, useRef } from "react";
-import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLElement | null>;

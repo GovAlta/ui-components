@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import GoabMicrositeHeader from "./microsite-header";
-import { GoabServiceLevel } from "@abgov/ui-components-common";
+import { GoabServiceLevel } from "../../common/types";
 
 describe("Header", () => {
   (["alpha", "beta", "live"] as const).forEach((mode: GoabServiceLevel) => {

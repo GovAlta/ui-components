@@ -7,7 +7,7 @@ import {
   GoabInputNumber,
 } from "./input";
 import { describe, it, expect, vi } from "vitest";
-import { GoabIconType, GoabInputOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabIconType, GoabInputOnChangeDetail } from "../../common/types";
 
 const noop = () => {
   /* do nothing */

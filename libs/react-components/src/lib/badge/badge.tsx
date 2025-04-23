@@ -1,5 +1,5 @@
-import { GoabBadgeType } from "@abgov/ui-components-common";
-import { Margins } from "../../common/types";
+import { GoabBadgeType, Margins } from "../../common/types";
+
 interface WCProps extends Margins {
   type: GoabBadgeType;
   icon?: boolean;

@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
-import GoabNotification  from "./notification";
+import GoabNotification from "./notification";
 import { fireEvent } from "@testing-library/dom";
 import { describe, it, expect, vi } from "vitest";
-import { GoabNotificationType } from "@abgov/ui-components-common";
+import { GoabNotificationType } from "../../common/types";
 
 describe("Notification Banner", () => {
   describe("type", () => {

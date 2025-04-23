@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabTabsOnChangeDetail } from "../../common/types";
 
 interface WCProps {
   initialtab?: number;

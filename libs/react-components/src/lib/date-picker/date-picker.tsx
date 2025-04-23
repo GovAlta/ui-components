@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
-import { GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
-import { Margins } from "../../common/types";
+import { GoabDatePickerOnChangeDetail, Margins } from "../../common/types";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement>;

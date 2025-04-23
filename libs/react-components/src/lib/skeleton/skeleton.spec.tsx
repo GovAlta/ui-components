@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { GoabSkeleton } from "./skeleton";
-import { GoabSkeletonType } from "@abgov/ui-components-common";
+import { GoabSkeletonType } from "../../common/types";
 
 describe("Skeleton", () => {
   for (const type of [

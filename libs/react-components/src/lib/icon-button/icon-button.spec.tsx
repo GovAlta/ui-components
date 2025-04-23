@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { GoabIconButton } from "./icon-button";
-import { GoabIconButtonVariant } from "@abgov/ui-components-common";
+import { GoabIconButtonVariant } from "../../common/types";
 
 describe("GoabIconButton", () => {
   it("should render the properties", () => {

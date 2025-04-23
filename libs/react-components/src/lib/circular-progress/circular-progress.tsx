@@ -1,7 +1,7 @@
 import {
   GoabCircularProgressSize,
   GoabCircularProgressVariant,
-} from "@abgov/ui-components-common";
+} from "../../common/types";
 
 interface WCProps {
   variant?: GoabCircularProgressVariant;

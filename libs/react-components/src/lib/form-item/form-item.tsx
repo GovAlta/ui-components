@@ -1,9 +1,4 @@
-import {
-  GoabFormItemLabelSize,
-  GoabFormItemRequirement,
-  
-} from "@abgov/ui-components-common";
-import { Margins } from "../../common/types";
+import { Margins, GoabFormItemLabelSize, GoabFormItemRequirement } from "../../common/types";
 
 interface WCProps extends Margins {
   label?: string;

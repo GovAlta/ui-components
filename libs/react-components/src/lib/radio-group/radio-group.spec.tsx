@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 import { fireEvent } from "@testing-library/dom";
 
 import { GoabRadioGroup, GoabRadioItem } from "./radio-group";
-import { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabRadioGroupOnChangeDetail } from "../../common/types";
 
 type MockData = {
   title: string;
@@ -42,30 +42,32 @@ describe("RadioGroup", () => {
   describe("Basic rendering", () => {
     it("should render successfully", async () => {
       const data = baseMockData;
-      const { baseElement } = render(<GoabRadioGroup
-        name="fruits"
-        disabled={data.disabled}
-        value={data.value}
-        mt="s"
-        mr="m"
-        mb="l"
-        ml="xl"
-        ariaLabel={"please select fruit"}
-        onChange={noop}
-      >
-        {data.radios.map((radio) => (
-          <GoabRadioItem
-            key={radio.value}
-            label={radio.text}
-            name="fruits"
-            checked={data.value === radio.value}
-            value={radio.value}
-            ariaLabel={"you are choosing " + radio.value}
-          >
-            {radio.text}
-          </GoabRadioItem>
-        ))}
-      </GoabRadioGroup>);
+      const { baseElement } = render(
+        <GoabRadioGroup
+          name="fruits"
+          disabled={data.disabled}
+          value={data.value}
+          mt="s"
+          mr="m"
+          mb="l"
+          ml="xl"
+          ariaLabel={"please select fruit"}
+          onChange={noop}
+        >
+          {data.radios.map((radio) => (
+            <GoabRadioItem
+              key={radio.value}
+              label={radio.text}
+              name="fruits"
+              checked={data.value === radio.value}
+              value={radio.value}
+              ariaLabel={"you are choosing " + radio.value}
+            >
+              {radio.text}
+            </GoabRadioItem>
+          ))}
+        </GoabRadioGroup>,
+      );
       expect(baseElement).toBeTruthy();
       const el = baseElement.querySelector("goa-radio-group");
       expect(el).toBeTruthy();
@@ -81,7 +83,7 @@ describe("RadioGroup", () => {
 
       const radios = document.querySelectorAll<HTMLInputElement>("input[type=radio]");
       radios.forEach((radio) => {
-       expect(radio.getAttribute("arialabel")).toBe("you are choosing " + radio.value);
+        expect(radio.getAttribute("arialabel")).toBe("you are choosing " + radio.value);
       });
     });
   });
@@ -149,8 +151,9 @@ describe("RadioGroup", () => {
       const radios = document.querySelectorAll("goa-radio-item");
       expect(radios[0].getAttribute("description")).toBe(null);
       expect(radios[1].getAttribute("description")).toBe("Oranges are orange");
-      expect(result.container.querySelector("div[slot='description']")?.innerHTML)
-        .toContain("Bananas are banana");
+      expect(
+        result.container.querySelector("div[slot='description']")?.innerHTML,
+      ).toContain("Bananas are banana");
     });
   });
 

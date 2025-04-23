@@ -1,4 +1,3 @@
-import { Spacing } from "@abgov/ui-components-common";
 import * as CommonTypes from "@abgov/ui-components-common";
 
 export interface Margins {
@@ -8,6 +7,7 @@ export interface Margins {
   ml?: Spacing;
 }
 
+export type Spacing = CommonTypes.Spacing;
 export type GoabDropdownOnChangeDetail = CommonTypes.GoabDropdownOnChangeDetail;
 export type GoabSpinnerType = CommonTypes.GoabSpinnerType;
 export type GoabSpinnerSize = CommonTypes.GoabSpinnerSize;
@@ -99,11 +99,14 @@ export type GoabFormState = CommonTypes.GoabFormState;
 export type GoabFormStorageType = CommonTypes.GoabFormStorageType;
 export type GoabFormOnMountDetail = CommonTypes.GoabFormOnMountDetail;
 export type GoabFormOnStateChange = CommonTypes.GoabFormOnStateChange;
+export type GoabDrawerPosition = CommonTypes.GoabDrawerPosition;
+export type GoabDrawerSizeUnit = CommonTypes.GoabDrawerSizeUnit;
+export type GoabDrawerSize = CommonTypes.GoabDrawerSize;
 
 // Generic types
 export type GoabInputOnChangeDetail<T = string> = CommonTypes.GoabInputOnChangeDetail<T>;
 export type GoabInputOnFocusDetail<T = string> = CommonTypes.GoabInputOnFocusDetail<T>;
-export type GoaInputOnBlurDetail<T = string> = CommonTypes.GoaInputOnBlurDetail<T>;
+export type GoabInputOnBlurDetail<T = string> = CommonTypes.GoabInputOnBlurDetail<T>;
 export type GoabInputOnKeyPressDetail<T = string> =
   CommonTypes.GoabInputOnKeyPressDetail<T>;
 export type OnChange<T = string> = CommonTypes.OnChange<T>;

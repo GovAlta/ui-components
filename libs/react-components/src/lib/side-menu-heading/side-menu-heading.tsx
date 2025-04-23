@@ -1,4 +1,4 @@
-import { GoabIconType } from "@abgov/ui-components-common";
+import { GoabIconType } from "../../common/types";
 import { ReactNode } from "react";
 
 interface WCProps {

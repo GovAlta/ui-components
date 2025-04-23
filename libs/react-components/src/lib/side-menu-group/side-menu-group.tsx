@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { GoabIconType } from "@abgov/ui-components-common";
+import { GoabIconType } from "../../common/types";
 import { Margins } from "../../common/types";
 interface WCProps extends Margins {
   heading: string;

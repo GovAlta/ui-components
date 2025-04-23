@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
+import { GoabDrawerPosition, GoabDrawerSize } from "../../common/types";
 
 interface WCProps {
   open: boolean | undefined;

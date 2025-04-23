@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import GoabSpinner from "./spinner";
-import { GoabSpinnerSize } from "@abgov/ui-components-common";
+import { GoabSpinnerSize } from "../../common/types";
 
 describe("Spinner", () => {
   (["small", "medium", "large", "xlarge"] as const).forEach((size: GoabSpinnerSize) => {

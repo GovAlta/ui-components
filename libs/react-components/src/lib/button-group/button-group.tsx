@@ -1,8 +1,4 @@
-import {
-  GoabButtonGroupAlignment,
-  GoabButtonGroupGap
-} from "@abgov/ui-components-common";
-import { Margins } from "../../common/types";
+import { Margins, GoabButtonGroupAlignment, GoabButtonGroupGap } from "../../common/types";
 interface WCProps extends Margins {
   alignment: GoabButtonGroupAlignment;
   gap?: GoabButtonGroupGap;

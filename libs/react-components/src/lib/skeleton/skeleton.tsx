@@ -1,4 +1,4 @@
-import { GoabSkeletonSize, GoabSkeletonType } from "@abgov/ui-components-common";
+import { GoabSkeletonSize, GoabSkeletonType } from "../../common/types";
 import { Margins } from "../../common/types";
 
 interface WCProps extends Margins {

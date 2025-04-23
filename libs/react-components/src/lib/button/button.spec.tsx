@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import { fireEvent, screen } from "@testing-library/dom";
 import GoabButton from "./button";
 import { describe, it, expect, vi } from "vitest";
-import { GoabButtonSize, GoabButtonType } from "@abgov/ui-components-common";
+import { GoabButtonSize, GoabButtonType } from "../../common/types";
 
 describe("GoabButton", () => {
   const buttonText = "Test Title";
@@ -103,7 +103,7 @@ describe("GoabButton", () => {
 describe("GoabButton disabled attribute", () => {
   it("should set disabled attribute correctly when disabled=true", () => {
     const { container } = render(
-      <GoabButton disabled={true}>Disabled Button</GoabButton>
+      <GoabButton disabled={true}>Disabled Button</GoabButton>,
     );
     const el = container.querySelector("goa-button");
 
@@ -112,7 +112,7 @@ describe("GoabButton disabled attribute", () => {
 
   it("should not include disabled attribute when disabled=false", () => {
     const { container } = render(
-      <GoabButton disabled={false}>Enabled Button</GoabButton>
+      <GoabButton disabled={false}>Enabled Button</GoabButton>,
     );
     const el = container.querySelector("goa-button");
 
@@ -123,7 +123,7 @@ describe("GoabButton disabled attribute", () => {
   it("should handle toggle between disabled states", () => {
     // First render with disabled=true
     const { container, rerender } = render(
-      <GoabButton disabled={true}>Toggle Button</GoabButton>
+      <GoabButton disabled={true}>Toggle Button</GoabButton>,
     );
     let el = container.querySelector("goa-button");
     expect(el?.getAttribute("disabled")).toBe("true");

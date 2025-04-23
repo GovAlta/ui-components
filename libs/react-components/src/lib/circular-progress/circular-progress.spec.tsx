@@ -1,7 +1,7 @@
 import { render, waitFor } from "@testing-library/react";
 
 import { GoabCircularProgress } from "./circular-progress";
-import { GoabCircularProgressVariant } from "@abgov/ui-components-common";
+import { GoabCircularProgressVariant } from "../../common/types";
 
 describe("CircularProgress", () => {
   it("does not render anything when not visible", async () => {

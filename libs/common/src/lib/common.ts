@@ -12,7 +12,7 @@ export type GoabInputOnChangeDetail<T = string> = {
   value: T;
 };
 export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
-export type GoaInputOnBlurDetail<T = string> = GoabInputOnChangeDetail<T>;
+export type GoabInputOnBlurDetail<T = string> = GoabInputOnChangeDetail<T>;
 
 export type GoabInputAutoCapitalize =
   | "on"
