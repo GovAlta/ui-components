@@ -206,17 +206,6 @@ export type GoabCircularProgressSize = "small" | "large";
 
 export type GoabPopoverPosition = "above" | "below" | "auto";
 
-export interface GoabPopoverProps extends Margins {
-  testId?: string;
-  maxWidth?: string;
-  padded?: boolean;
-  position?: GoabPopoverPosition;
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
-  relative?: boolean;
-}
-
 // Notification
 
 export type GoabNotificationType = "important" | "information" | "event" | "emergency";

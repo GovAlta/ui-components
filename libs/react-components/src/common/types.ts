@@ -12,13 +12,10 @@ export type GoabDropdownOnChangeDetail = CommonTypes.GoabDropdownOnChangeDetail;
 export type GoabSpinnerType = CommonTypes.GoabSpinnerType;
 export type GoabSpinnerSize = CommonTypes.GoabSpinnerSize;
 export type GoabRadioGroupOnChangeDetail = CommonTypes.GoabRadioGroupOnChangeDetail;
-export type GoabInputOnChangeDetail = CommonTypes.GoabInputOnChangeDetail;
-export type GoabInputOnFocusDetail = CommonTypes.GoabInputOnFocusDetail;
-export type GoaInputOnBlurDetail = CommonTypes.GoaInputOnBlurDetail;
 export type GoabInputAutoCapitalize = CommonTypes.GoabInputAutoCapitalize;
-export type GoabInputOnKeyPressDetail = CommonTypes.GoabInputOnKeyPressDetail;
 export type GoabFormStepperOnChangeDetail = CommonTypes.GoabFormStepperOnChangeDetail;
-export type GoabFileUploadInputOnSelectFileDetail = CommonTypes.GoabFileUploadInputOnSelectFileDetail;
+export type GoabFileUploadInputOnSelectFileDetail =
+  CommonTypes.GoabFileUploadInputOnSelectFileDetail;
 export type GoabFileUploadOnCancelDetail = CommonTypes.GoabFileUploadOnCancelDetail;
 export type GoabFileUploadOnDeleteDetail = CommonTypes.GoabFileUploadOnDeleteDetail;
 export type GoabDropdownItemMountType = CommonTypes.GoabDropdownItemMountType;
@@ -78,10 +75,6 @@ export type GoabModalCalloutVariant = CommonTypes.GoabModalCalloutVariant;
 export type GoabDate = CommonTypes.GoabDate;
 export type GoabInputType = CommonTypes.GoabInputType;
 export type GoabAutoCapitalize = CommonTypes.GoabAutoCapitalize;
-export type OnChange = CommonTypes.OnChange;
-export type OnFocus = CommonTypes.OnFocus;
-export type OnBlur = CommonTypes.OnBlur;
-export type OnKeyPress = CommonTypes.OnKeyPress;
 export type GoabIconFilledType = CommonTypes.GoabIconFilledType;
 export type GoabIconType = CommonTypes.GoabIconType;
 export type GoabIconSize = CommonTypes.GoabIconSize;
@@ -106,3 +99,14 @@ export type GoabFormState = CommonTypes.GoabFormState;
 export type GoabFormStorageType = CommonTypes.GoabFormStorageType;
 export type GoabFormOnMountDetail = CommonTypes.GoabFormOnMountDetail;
 export type GoabFormOnStateChange = CommonTypes.GoabFormOnStateChange;
+
+// Generic types
+export type GoabInputOnChangeDetail<T = string> = CommonTypes.GoabInputOnChangeDetail<T>;
+export type GoabInputOnFocusDetail<T = string> = CommonTypes.GoabInputOnFocusDetail<T>;
+export type GoaInputOnBlurDetail<T = string> = CommonTypes.GoaInputOnBlurDetail<T>;
+export type GoabInputOnKeyPressDetail<T = string> =
+  CommonTypes.GoabInputOnKeyPressDetail<T>;
+export type OnChange<T = string> = CommonTypes.OnChange<T>;
+export type OnFocus<T = string> = CommonTypes.OnFocus<T>;
+export type OnBlur<T = string> = CommonTypes.OnBlur<T>;
+export type OnKeyPress<T = string> = CommonTypes.OnKeyPress<T>;
