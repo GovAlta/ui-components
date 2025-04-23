@@ -1,7 +1,7 @@
 import {
   GoabIconType,
   GoabInputAutoCapitalize,
-  GoaInputOnBlurDetail,
+  GoabInputOnBlurDetail,
   GoabInputOnChangeDetail,
   GoabInputOnFocusDetail,
   GoabInputOnKeyPressDetail,
@@ -109,7 +109,7 @@ export class GoabInput implements ControlValueAccessor, OnInit {
 
   @Output() onTrailingIconClick = new EventEmitter();
   @Output() onFocus = new EventEmitter<GoabInputOnFocusDetail>();
-  @Output() onBlur = new EventEmitter<GoaInputOnBlurDetail>();
+  @Output() onBlur = new EventEmitter<GoabInputOnBlurDetail>();
   @Output() onKeyPress = new EventEmitter<GoabInputOnKeyPressDetail>();
   @Output() onChange = new EventEmitter<GoabInputOnChangeDetail>();
 
@@ -151,7 +151,7 @@ export class GoabInput implements ControlValueAccessor, OnInit {
   }
 
   _onBlur(e: Event) {
-    const detail = (e as CustomEvent<GoaInputOnBlurDetail>).detail;
+    const detail = (e as CustomEvent<GoabInputOnBlurDetail>).detail;
     this.onBlur.emit(detail);
   }
 
