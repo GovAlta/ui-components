@@ -1,6 +1,5 @@
 import { ReactNode, useEffect, useRef } from "react";
 import { Margins, GoabFielsetOnContinueDetail } from "@abgov/ui-components-common";
-import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
   ref?: React.RefObject<HTMLElement | null>;
@@ -69,8 +68,8 @@ export function GoabFieldset({
     <goa-public-form-page
       ref={ref}
       id={id}
-      first={toOptionalBooleanAsString(first)}
-      last={toOptionalBooleanAsString(last)}
+      first={first ? "true" : undefined}
+      last={last ? "true" : undefined}
       heading={heading}
       buttontext={buttonText}
       mt={mt}

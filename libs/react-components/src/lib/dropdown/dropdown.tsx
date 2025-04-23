@@ -4,7 +4,6 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
-import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -96,21 +95,21 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
       value={stringify(props.value)}
       arialabel={props.ariaLabel}
       arialabelledby={props.ariaLabelledBy}
-      disabled={toOptionalBooleanAsString(props.disabled)}
-      error={toOptionalBooleanAsString(props.error)}
-      filterable={toOptionalBooleanAsString(props.filterable)}
+      disabled={props.disabled ? "true" : undefined}
+      error={props.error ? "true" : undefined}
+      filterable={props.filterable ? "true" : undefined}
       leadingicon={props.leadingIcon}
       maxheight={props.maxHeight}
       mb={props.mb}
       ml={props.ml}
       mr={props.mr}
       mt={props.mt}
-      multiselect={toOptionalBooleanAsString(props.multiselect)}
-      native={toOptionalBooleanAsString(props.native)}
+      multiselect={props.multiselect ? "true" : undefined}
+      native={props.native ? "true" : undefined}
       placeholder={props.placeholder}
       testid={props.testId}
       width={props.width}
-      relative={toOptionalBooleanAsString(props.relative)}
+      relative={props.relative ? "true" : undefined}
       id={props.id}
     >
       {props.children}

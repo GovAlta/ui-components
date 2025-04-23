@@ -1,6 +1,5 @@
 import { useEffect, useRef, type JSX } from "react";
 import { GoabDatePickerOnChangeDetail, Margins } from "@abgov/ui-components-common";
-import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -78,8 +77,8 @@ export function GoabDatePicker({
       ref={ref}
       name={name}
       value={value?.toISOString() || ""}
-      error={toOptionalBooleanAsString(error)}
-      disabled={toOptionalBooleanAsString(disabled, { omitIfFalse: true })}
+      error={error ? "true" : undefined}
+      disabled={disabled ? "true" : undefined}
       min={min?.toISOString()}
       max={max?.toISOString()}
       testid={testId}
@@ -87,7 +86,7 @@ export function GoabDatePicker({
       mr={mr}
       mb={mb}
       ml={ml}
-      relative={toOptionalBooleanAsString(relative)}
+      relative={relative ? "true" : undefined}
     />
   );
 }

@@ -1,6 +1,5 @@
 import { GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
-import { toOptionalBooleanAsString } from "../../utils";
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -89,11 +88,11 @@ export function GoabCheckbox({
       ref={el}
       id={id}
       name={name}
-      error={toOptionalBooleanAsString(error)}
-      checked={toOptionalBooleanAsString(checked)}
-      disabled={toOptionalBooleanAsString(disabled, { omitIfFalse: true })}
+      error={error ? "true" : undefined}
+      checked={checked ? "true" : undefined}
+      disabled={disabled ? "true" : undefined}
       text={text}
-      value={typeof value === "boolean" ? toOptionalBooleanAsString(value) : value}
+      value={typeof value === "boolean" ? (value ? "true" : undefined) : value}
       arialabel={ariaLabel}
       description={typeof description === "string" ? description : undefined}
       maxwidth={maxWidth}

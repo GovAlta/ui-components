@@ -1,6 +1,5 @@
 import { GoabChipTheme, GoabChipVariant, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -68,8 +67,8 @@ export const GoabChip = ({
       ref={el}
       leadingicon={leadingIcon}
       icontheme={iconTheme}
-      error={toOptionalBooleanAsString(error)}
-      deletable={toOptionalBooleanAsString(deletable)}
+      error={error ? "true" : undefined}
+      deletable={deletable ? "true" : undefined}
       content={content}
       variant={variant}
       mt={mt}

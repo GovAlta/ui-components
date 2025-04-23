@@ -69,7 +69,7 @@ describe("GoabCheckbox", () => {
 
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox?.getAttribute("description")).toBe("description text");
-    expect(checkbox?.getAttribute("checked")).toBe("false");
+    expect(checkbox?.getAttribute("checked")).toBeNull();
   });
 
   it("should render with slot description", () => {
@@ -108,8 +108,8 @@ describe("GoabCheckbox", () => {
     render(<GoabCheckbox {...props} />);
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox?.getAttribute("disabled")).toBe("true");
-    expect(checkbox?.getAttribute("checked")).toBe("false");
-    expect(checkbox?.getAttribute("error")).toBe("false");
+    expect(checkbox?.getAttribute("checked")).toBeNull();
+    expect(checkbox?.getAttribute("error")).toBeNull();
 
     checkbox &&
       fireEvent(

@@ -11,7 +11,6 @@ import {
   GoabInputType,
   Margins,
 } from "@abgov/ui-components-common";
-import { toOptionalBooleanAsString } from "../../utils";
 
 export interface IgnoreMe {
   ignore: string;
@@ -209,7 +208,7 @@ export function GoabInput({
     <goa-input
       ref={ref}
       debounce={debounce}
-      focused={toOptionalBooleanAsString(focused)}
+      focused={focused ? "true" : undefined}
       type={type}
       name={name}
       autocapitalize={autoCapitalize}
@@ -217,10 +216,10 @@ export function GoabInput({
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
       variant={variant}
-      disabled={toOptionalBooleanAsString(disabled, { omitIfFalse: true })}
-      readonly={toOptionalBooleanAsString(readonly)}
+      disabled={disabled ? "true" : undefined}
+      readonly={readonly ? "true" : undefined}
       placeholder={placeholder}
-      error={toOptionalBooleanAsString(error)}
+      error={error ? "true" : undefined}
       testid={testId}
       value={value}
       width={width}

@@ -1,6 +1,5 @@
 import { GoabBadgeType, Margins } from "@abgov/ui-components-common";
 import type { JSX } from "react";
-import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
   type: GoabBadgeType;
@@ -42,7 +41,7 @@ export function GoabBadge({
     <goa-badge
       type={type}
       content={content}
-      icon={toOptionalBooleanAsString(icon)}
+      icon={icon ? "true" : undefined}
       testid={testId}
       arialabel={ariaLabel}
       mt={mt}

@@ -26,7 +26,7 @@ declare module "react" {
 export interface GoabTableProps extends Margins {
   width?: string;
   onSort?: (detail: GoabTableOnSortDetail) => void;
-  stickyHeader?: boolean;
+  // stickyHeader?: boolean; TODO: enable this later
   variant?: GoabTableVariant;
   testId?: string;
   children?: ReactNode;
@@ -58,7 +58,7 @@ export function GoabTable({ onSort, ...props }: GoabTableProps) {
       ref={ref}
       width={props.width}
       // TODO: Enable this later if needed
-      // stickyheader={toOptionalBooleanAsString(props.stickyHeader)}
+      // stickyheader={props.stickyHeader ? "true" : undefined}
       variant={props.variant}
       testid={props.testId}
       mt={props.mt}
