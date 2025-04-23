@@ -1,6 +1,5 @@
 import { GoabPopoverPosition, Margins } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
-import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
   maxwidth?: string;
@@ -53,9 +52,9 @@ export function GoabPopover({
       testid={testId}
       maxwidth={maxWidth}
       minwidth={minWidth}
-      padded={toOptionalBooleanAsString(padded)}
+      padded={typeof padded === "undefined" ? undefined : padded ? "true" : "false"}
       position={position}
-      relative={toOptionalBooleanAsString(relative)}
+      relative={relative ? "true" : undefined}
       mt={mt}
       mr={mr}
       mb={mb}

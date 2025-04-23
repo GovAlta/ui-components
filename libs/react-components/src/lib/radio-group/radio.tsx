@@ -1,7 +1,6 @@
 import { Margins } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
-import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
   name?: string;
@@ -60,9 +59,9 @@ export function GoabRadioItem({
       value={value}
       description={typeof description === "string" ? description : undefined}
       maxwidth={maxWidth}
-      error={toOptionalBooleanAsString(error)}
-      disabled={toOptionalBooleanAsString(disabled, { omitIfFalse: true })}
-      checked={toOptionalBooleanAsString(checked)}
+      error={error ? "true" : undefined}
+      disabled={disabled ? "true" : undefined}
+      checked={checked ? "true" : undefined}
       arialabel={ariaLabel}
       mt={mt}
       mr={mr}

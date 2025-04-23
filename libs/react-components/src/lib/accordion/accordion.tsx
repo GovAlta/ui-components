@@ -5,7 +5,6 @@ import type {
   GoabAccordionIconPosition,
   Margins,
 } from "@abgov/ui-components-common";
-import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -75,7 +74,7 @@ export function GoabAccordion({
   return (
     <goa-accordion
       ref={ref}
-      open={toOptionalBooleanAsString(open)}
+      open={open ? "true" : undefined}
       headingsize={headingSize}
       heading={heading}
       secondarytext={secondaryText}

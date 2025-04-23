@@ -1,6 +1,5 @@
 import { ReactNode, useEffect, useRef, type JSX } from "react";
 import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
-import { toOptionalBoolean } from "../../utils";
 
 interface WCProps {
   position: GoabDrawerPosition;
@@ -57,7 +56,7 @@ export function GoabDrawer({
     <goa-drawer
       ref={el}
       position={position}
-      open={toOptionalBoolean(open)}
+      open={open ? true : undefined}
       heading={typeof heading === "string" ? heading : undefined}
       maxsize={maxSize}
       testid={testId}

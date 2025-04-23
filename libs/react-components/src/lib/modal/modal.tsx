@@ -4,7 +4,6 @@ import {
   GoabModalTransition,
 } from "@abgov/ui-components-common";
 import { ReactElement, ReactNode, RefObject, useEffect, useRef, type JSX } from "react";
-import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps {
   ref: RefObject<HTMLElement | null>;
@@ -72,7 +71,7 @@ export function GoabModal({
   return (
     <goa-modal
       ref={el}
-      open={toOptionalBooleanAsString(open)}
+      open={open ? "true" : undefined}
       closable={onClose ? "true" : "false"}
       maxwidth={maxWidth}
       transition={transition}

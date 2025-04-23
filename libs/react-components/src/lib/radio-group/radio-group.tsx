@@ -4,7 +4,6 @@ import {
   GoabRadioGroupOrientation,
   Margins,
 } from "@abgov/ui-components-common";
-import { toOptionalBooleanAsString } from "../../utils";
 
 export * from "./radio";
 
@@ -84,8 +83,8 @@ export function GoabRadioGroup({
       name={name}
       value={value}
       orientation={orientation}
-      disabled={toOptionalBooleanAsString(disabled, { omitIfFalse: true })}
-      error={toOptionalBooleanAsString(error)}
+      disabled={disabled ? "true" : undefined}
+      error={error ? "true" : undefined}
       arialabel={ariaLabel}
       mt={mt}
       mr={mr}

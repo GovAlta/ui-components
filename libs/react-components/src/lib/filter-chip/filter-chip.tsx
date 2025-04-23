@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { Margins, GoabFilterChipTheme } from "@abgov/ui-components-common";
-import { toOptionalBooleanAsString } from "../../utils";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -55,7 +54,7 @@ export const GoabFilterChip = ({
     <goa-filter-chip
       ref={el}
       icontheme={iconTheme}
-      error={toOptionalBooleanAsString(error)}
+      error={error ? "true" : undefined}
       content={content}
       mt={mt}
       mr={mr}
