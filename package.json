@@ -119,7 +119,7 @@
     "date-fns": "^3.0.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-router-dom": "6.11.2",
+    "react-router-dom": "7.5.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "0.14.3"
