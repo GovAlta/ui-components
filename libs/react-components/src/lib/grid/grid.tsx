@@ -1,6 +1,4 @@
-import { Spacing } from "@abgov/ui-components-common";
-
-import { Margins } from "../../common/types";
+import { Margins, Spacing } from "../../common/types";
 
 interface WCProps extends Margins {
   gap?: Spacing;
