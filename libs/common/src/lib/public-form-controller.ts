@@ -203,7 +203,12 @@ export class PublicFormController<T> {
   }
 
   // Public method to perform validation and send the appropriate messages to the form elements
-  validate(e: Event, field: string, validators: FieldValidator[], options?: { grouped: boolean }): [boolean, string] {
+  validate(
+    e: Event,
+    field: string,
+    validators: FieldValidator[],
+    options?: { grouped: boolean },
+  ): [boolean, string] {
     const { el, state, cancelled } = (e as CustomEvent).detail;
     const value = state?.[field]?.value;
 
@@ -229,20 +234,26 @@ export class PublicFormController<T> {
    *
    * @param {string[]} fields - An array of field names to be validated.
    * @param {Event} e - The event object associated with the validation trigger.
-   * @param minPassCount - The minimum number of fields that are required to pass to return true.
    * @param {FieldValidator[]} validators - An array of validator functions to apply to the fields.
-   * @return {boolean} - Returns true if at least one field in the group is valid; otherwise, false.
+   * @return {[number, Record<string, boolean>]} - Returns back the number of fields that passed and a record of the fields and their pass status.
    */
-  validateGroup(e: Event, fields: string[], minPassCount: number, validators: FieldValidator[]): boolean {
+  validateGroup(
+    e: Event,
+    fields: string[],
+    validators: FieldValidator[],
+  ): [number, Record<string, boolean>] {
     let passCount = 0;
+    const validGroups = {} as Record<string, boolean>;
+
     for (const field of fields) {
       const [_valid] = this.validate(e, field, validators, { grouped: true });
       if (_valid) {
+        validGroups[field] = true;
         passCount++;
       }
     }
 
-    return passCount >= minPassCount;
+    return [passCount, validGroups];
   }
 
   edit(index: number) {
@@ -250,11 +261,19 @@ export class PublicFormController<T> {
   }
 
   remove(index: number) {
-    relay(this._formRef, "external::alter:state", { index, operation: "remove" });
+    relay(this._formRef, "external::alter:state", {
+      index,
+      operation: "remove",
+    });
   }
 
   // Private method to dispatch the error message to the form element
-  #dispatchError(el: HTMLElement, name: string, msg: string, options?: { grouped: boolean }) {
+  #dispatchError(
+    el: HTMLElement,
+    name: string,
+    msg: string,
+    options?: { grouped: boolean },
+  ) {
     el.dispatchEvent(
       new CustomEvent("msg", {
         composed: true,
