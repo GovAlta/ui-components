@@ -48,6 +48,8 @@ export class GoabDatePicker extends GoabControlValueAccessor {
   @Input() max?: Date | string;
   /***
    * @deprecated This property has no effect and will be removed in a future version
+  /***
+   * @deprecated This property has no effect and will be removed in a future version
    */
   @Input() relative?: boolean;
 
