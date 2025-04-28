@@ -20,6 +20,7 @@ import { fireEvent } from "@testing-library/dom";
       [mb]="mb"
       [ml]="ml"
       [mr]="mr"
+      [width]="width"
       (onChange)="onChange()"
     ></goab-date-picker>
   `,
