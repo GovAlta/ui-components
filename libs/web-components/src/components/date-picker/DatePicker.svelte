@@ -42,7 +42,7 @@
   export let relative: string = "";
   export let disabled: string = "false";
   export let testid: string = "";
-
+  export let width: string = "10rem";
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -326,7 +326,7 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <goa-input
       slot="target"
-      width="16ch"
+      {width}
       readonly="true"
       trailingicon="calendar"
       value={formatDate(_date)}
