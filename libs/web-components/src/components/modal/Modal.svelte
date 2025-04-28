@@ -41,6 +41,7 @@
   let _headerEl: HTMLElement | undefined;
   let _isOpen: boolean = false;
   let _actionsHeight: number;
+  let _headingSlotHasContent = false;
   let _actionsSlotHasContent = false;
   let _headerHeight: number;
   let _edgeMargin: number = 128; //64px top edge + 64px bottom edge
@@ -67,7 +68,7 @@
   // ********
 
   $: _isClosable = toBoolean(closable);
-  $: _headingExists = heading !== "" || $$slots.heading;
+  $: _headingExists = heading !== "" || ($$slots.heading && _headingSlotHasContent);
   $: _headerHasContent = _headingExists || _isClosable;
 
   // Moving the reactive var into a timeout prevents accessing null stylesheet
@@ -85,7 +86,7 @@
     transition === "none" ? 0 : transition === "slow" ? 400 : 200;
 
   $: if (_isOpen) {
-    checkActionsSlotContent();
+    checkSlotsContent();
   }
 
   $: _iconType =
@@ -128,9 +129,27 @@
   // Functions
   // *********
 
-  async function checkActionsSlotContent() {
+  async function checkSlotsContent() {
     await tick();
-    _actionsSlotHasContent = !!_rootEl?.querySelector('[name="actions"]');
+
+    _headingSlotHasContent = !isEmptySlot(".modal-title", "heading");
+    _actionsSlotHasContent = !isEmptySlot(".modal-actions", "actions");
+  }
+
+  /**
+   * This check is currently Angular specific, to check that the specified slot contains
+   * more than an emtpy <div> element, as that is what Angular is currently injecting
+   * when the ng-template is not defined.
+   * @param selector
+   * @param slotName
+   */
+  function isEmptySlot(selector: string, slotName: string): boolean {
+    const el = _rootEl?.querySelector(selector);
+    const children = el && getSlottedChildren(el);
+
+    return children?.length === 1 // there should only be one child element
+      && children[0].tagName === "DIV" // angular renders a <div>
+      && children[0].getAttribute("slot") === slotName // the div is a slot
   }
 
   function close(e: Event) {
@@ -263,7 +282,9 @@
             class:empty-actions={!_actionsSlotHasContent}
             data-testid="modal-actions"
           >
-            <slot name="actions" />
+            {#if $$slots.actions}
+              <slot name="actions" />
+            {/if}
           </div>
         </div>
       </div>
@@ -313,15 +334,19 @@
   .emergency {
     background-color: var(--goa-color-emergency-default);
   }
+
   .important {
     background-color: var(--goa-color-warning-default);
   }
+
   .information {
     background-color: var(--goa-color-info-default);
   }
+
   .event {
     background-color: var(--goa-color-info-default);
   }
+
   .success {
     background-color: var(--goa-color-success-default);
   }
@@ -352,6 +377,7 @@
     .content {
       padding: var(--goa-modal-padding-small-screen) var(--goa-modal-padding-small-screen) 0 var(--goa-modal-padding-small-screen);
     }
+
     .content header.has-content {
       margin-bottom: var(--goa-modal-content-gap-small-screen); /* space under heading */
     }
@@ -361,11 +387,11 @@
     }
 
     .modal-content :global(::slotted(:last-child)) {
-    margin-bottom: var(--goa-space-xs) !important;
+      margin-bottom: var(--goa-space-xs) !important;
     }
 
     .modal-pane {
-    flex-direction: column;
+      flex-direction: column;
     }
 
     .callout-bar {
@@ -376,8 +402,8 @@
     }
 
     .modal-content {
-    margin: 0 -1.5rem;
-    box-shadow: none;
+      margin: 0 -1.5rem;
+      box-shadow: none;
     }
 
     :host {
@@ -392,8 +418,8 @@
     }
 
     .modal-content {
-    margin: 0 -2rem;
-    box-shadow: none;
+      margin: 0 -2rem;
+      box-shadow: none;
     }
 
     :host {
@@ -443,8 +469,7 @@
   }
 
   .modal.middle .modal-content {
-    box-shadow:
-      inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
-      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
+    inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
   }
 </style>
