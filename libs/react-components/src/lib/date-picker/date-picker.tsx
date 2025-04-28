@@ -1,23 +1,22 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 import { GoabDatePickerOnChangeDetail, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   name?: string;
   value?: string;
-  error?: boolean;
+  error?: string;
   min?: string;
   max?: string;
-  relative?: boolean;
-  disabled?: boolean;
+  relative?: string;
+  disabled?: string;
   testid?: string;
   width?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-date-picker": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -81,8 +80,8 @@ export function GoabDatePicker({
       ref={ref}
       name={name}
       value={value?.toISOString() || ""}
-      error={error}
-      disabled={disabled}
+      error={error ? "true" : undefined}
+      disabled={disabled ? "true" : undefined}
       min={min?.toISOString()}
       max={max?.toISOString()}
       testid={testId}
@@ -91,7 +90,7 @@ export function GoabDatePicker({
       mb={mb}
       ml={ml}
       width={width}
-      relative={relative}
+      relative={relative ? "true" : undefined}
     />
   );
 }

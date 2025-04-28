@@ -1,8 +1,8 @@
 import { GoabLinkTarget, GoabServiceLevel } from "@abgov/ui-components-common";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -18,8 +18,8 @@ interface WCProps {
   maxcontentwidth?: string;
   feedbackurltarget?: GoabLinkTarget;
   headerurltarget?: GoabLinkTarget;
-  hasfeedbackhandler?: boolean;
-  ref: React.RefObject<HTMLElement>;
+  hasfeedbackhandler?: string;
+  ref: React.RefObject<HTMLElement | null>;
   testid?: string;
 }
 
@@ -74,7 +74,7 @@ export function GoabMicrositeHeader({
       maxcontentwidth={maxContentWidth}
       feedbackurltarget={feedbackUrlTarget}
       headerurltarget={headerUrlTarget}
-      hasfeedbackhandler={!!onFeedbackClick}
+      hasfeedbackhandler={onFeedbackClick ? "true" : "false"}
     >
       {version && typeof version !== "string" && <div slot="version">{version}</div>}
     </goa-microsite-header>

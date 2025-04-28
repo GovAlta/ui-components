@@ -1,17 +1,17 @@
 import { GoabBadgeType, Margins } from "@abgov/ui-components-common";
+import type { JSX } from "react";
 
 interface WCProps extends Margins {
   type: GoabBadgeType;
-  icon?: boolean;
+  icon?: string;
   content?: string;
   arialabel?: string;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-badge": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -41,7 +41,7 @@ export function GoabBadge({
     <goa-badge
       type={type}
       content={content}
-      icon={icon}
+      icon={icon ? "true" : undefined}
       testid={testId}
       arialabel={ariaLabel}
       mt={mt}

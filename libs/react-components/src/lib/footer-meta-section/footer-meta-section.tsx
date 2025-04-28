@@ -4,7 +4,7 @@ interface WCProps {
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -24,10 +24,7 @@ export function GoabAppFooterMetaSection({
   children,
 }: GoabAppFooterMetaSectionProps) {
   return (
-    <goa-app-footer-meta-section
-      testid= {testId}
-      slot="meta"
-    >
+    <goa-app-footer-meta-section testid={testId} slot="meta">
       {children}
     </goa-app-footer-meta-section>
   );

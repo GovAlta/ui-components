@@ -7,16 +7,19 @@ describe("GoabAppHeader", () => {
 
     const header = baseElement.querySelector("goa-app-header");
     expect(header).toBeTruthy();
+    expect(header?.getAttribute("hasmenuclickhandler")).toBe("false");
   });
+
   it("should dispatch onMobileMenuClick if provided", () => {
     const onMobileMenuClick = vi.fn();
     const { baseElement } = render(
-      <GoabAppHeader heading="Test heading" url="test" onMenuClick={onMobileMenuClick} />
+      <GoabAppHeader heading="Test heading" url="test" onMenuClick={onMobileMenuClick} />,
     );
 
     const header = baseElement.querySelector("goa-app-header");
     expect(header).toBeTruthy();
+    expect(header?.getAttribute("hasmenuclickhandler")).toBe("true");
     header?.dispatchEvent(new Event("_menuClick"));
     expect(onMobileMenuClick).toHaveBeenCalled();
-  })
+  });
 });

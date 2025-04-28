@@ -12,7 +12,7 @@ interface WCProps {
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -40,7 +40,7 @@ export const GoabCircularProgress = ({
 }: GoabCircularProgressProps) => {
   return (
     <goa-circular-progress
-      visible={visible ? "true" : "false"}
+      visible={visible ? "true" : undefined}
       message={message}
       progress={progress}
       variant={variant}

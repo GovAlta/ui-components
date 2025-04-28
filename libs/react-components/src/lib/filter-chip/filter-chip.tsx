@@ -2,14 +2,14 @@ import { useEffect, useRef } from "react";
 import { Margins, GoabFilterChipTheme } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   icontheme: GoabFilterChipTheme;
-  error: boolean;
+  error?: string;
   content: string;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -28,7 +28,7 @@ export interface GoabFilterChipProps extends Margins {
 
 export const GoabFilterChip = ({
   iconTheme = "outline",
-  error = false,
+  error,
   content,
   onClick,
   mt,
@@ -54,7 +54,7 @@ export const GoabFilterChip = ({
     <goa-filter-chip
       ref={el}
       icontheme={iconTheme}
-      error={error}
+      error={error ? "true" : undefined}
       content={content}
       mt={mt}
       mr={mr}

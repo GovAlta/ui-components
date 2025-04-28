@@ -1,19 +1,18 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
 import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
 
 interface WCProps {
-  open: boolean | undefined;
   position: GoabDrawerPosition;
+  open?: boolean;
   heading?: string;
   maxsize?: GoabDrawerSize;
   testid?: string;
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-drawer": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -21,9 +20,9 @@ declare global {
 }
 
 export interface GoabDrawerProps {
-  open: boolean;
   position: GoabDrawerPosition;
-  heading?: string|ReactNode;
+  open?: boolean;
+  heading?: string | ReactNode;
   maxSize?: GoabDrawerSize;
   testId?: string;
   actions?: ReactNode;
@@ -32,8 +31,8 @@ export interface GoabDrawerProps {
 }
 
 export function GoabDrawer({
-  open,
   position,
+  open,
   heading,
   maxSize,
   testId,
@@ -47,17 +46,17 @@ export function GoabDrawer({
     if (!el?.current || !onClose) {
       return;
     }
-    el.current?.addEventListener("_close", onClose)
+    el.current?.addEventListener("_close", onClose);
     return () => {
-      el.current?.removeEventListener("_close", onClose)
-    }
-  }, [el, onClose])
+      el.current?.removeEventListener("_close", onClose);
+    };
+  }, [el, onClose]);
 
   return (
     <goa-drawer
       ref={el}
-      open={open ? true : undefined}
       position={position}
+      open={open ? true : undefined}
       heading={typeof heading === "string" ? heading : undefined}
       maxsize={maxSize}
       testid={testId}

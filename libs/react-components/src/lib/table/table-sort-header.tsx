@@ -1,14 +1,15 @@
 import { GoabTableSortDirection } from "@abgov/ui-components-common";
 
+import type { JSX } from "react";
+
 interface WCProps {
   name?: string;
   direction?: GoabTableSortDirection;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-table-sort-header": WCProps & React.HTMLAttributes<HTMLElement>;
     }

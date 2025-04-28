@@ -3,6 +3,14 @@ import { GoabIconButton } from "./icon-button";
 import { GoabIconButtonVariant } from "@abgov/ui-components-common";
 
 describe("GoabIconButton", () => {
+  it("should render", () => {
+    const { container } = render(<GoabIconButton icon="information" />);
+    const el = container.querySelector("goa-icon-button");
+
+    expect(el?.getAttribute("icon")).toBe("information");
+    expect(el?.getAttribute("disabled")).toBeNull();
+  });
+
   it("should render the properties", () => {
     const { container } = render(
       <GoabIconButton
@@ -12,6 +20,7 @@ describe("GoabIconButton", () => {
         mb="l"
         ml="xl"
         ariaLabel="information button"
+        disabled
       />,
     );
     const el = container.querySelector("goa-icon-button");
@@ -22,6 +31,7 @@ describe("GoabIconButton", () => {
     expect(el?.getAttribute("mb")).toBe("l");
     expect(el?.getAttribute("ml")).toBe("xl");
     expect(el?.getAttribute("arialabel")).toBe("information button");
+    expect(el?.getAttribute("disabled")).toBe("true");
   });
 
   describe("Variants", () => {

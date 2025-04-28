@@ -4,13 +4,12 @@ import { GoabIconType, GoabLinkButtonType, Margins } from "@abgov/ui-components-
 interface WCProps extends Margins {
   type?: GoabLinkButtonType;
   leadingicon?: GoabIconType;
-  trailingicon?: GoabIconType
+  trailingicon?: GoabIconType;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-link-button": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -24,9 +23,7 @@ interface GoALinkButtonProps extends Margins {
   children: ReactNode;
 }
 
-export function GoALinkButton(
-  { type = "primary", ...props }: GoALinkButtonProps,
-) {
+export function GoALinkButton({ type = "primary", ...props }: GoALinkButtonProps) {
   return (
     <goa-link-button
       type={type}

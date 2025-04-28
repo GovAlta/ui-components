@@ -7,7 +7,7 @@
   import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
   import { getSlottedChildren, styles, toBoolean } from "../../common/utils";
   import { isUrlMatch, getMatchedLink } from "../../common/urls";
-  import { AppHeaderMenuProps } from "../app-header-menu/AppHeaderMenu.svelte";
+  import type { AppHeaderMenuProps } from "../app-header-menu/AppHeaderMenu.svelte";
 
   // optional
   export let heading: string = "";

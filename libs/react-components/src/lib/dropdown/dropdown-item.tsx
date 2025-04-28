@@ -11,10 +11,9 @@ interface WCProps {
   name?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-dropdown-item": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -40,7 +39,13 @@ export function GoabDropdownOption(props: GoabDropdownItemProps) {
   return <GoabDropdownItem {...props} />;
 }
 
-export function GoabDropdownItem({ value, label, filter, name, mountType = "append" }: GoabDropdownItemProps) {
+export function GoabDropdownItem({
+  value,
+  label,
+  filter,
+  name,
+  mountType = "append",
+}: GoabDropdownItemProps) {
   return (
     <goa-dropdown-item
       value={value}

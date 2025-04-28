@@ -2,18 +2,17 @@ import { ReactNode, useEffect, useRef } from "react";
 import { Margins, GoabFielsetOnContinueDetail } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  ref?: React.MutableRefObject<HTMLElement | null>;
+  ref?: React.RefObject<HTMLElement | null>;
   id: string;
   heading?: string;
   buttontext?: string;
-  last?: boolean | null;
-  first?: boolean | null;
+  last?: string;
+  first?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-public-form-page": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -47,27 +46,30 @@ export function GoabFieldset({
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    if (!ref.current) return;
+    const current = ref.current;
+
     const _continue = (e: Event) => {
       const event = (e as CustomEvent).detail;
       return onContinue?.(event);
-    }
+    };
 
     if (onContinue) {
-      ref.current?.addEventListener("_continue", _continue)
+      current.addEventListener("_continue", _continue);
     }
     return () => {
       if (onContinue) {
-        ref.current?.removeEventListener("_continue", _continue)
+        current.removeEventListener("_continue", _continue);
       }
-    }
-  }, [ref.current, onContinue])
+    };
+  }, [ref, onContinue]);
 
   return (
     <goa-public-form-page
       ref={ref}
       id={id}
-      first={first}
-      last={last}
+      first={first ? "true" : undefined}
+      last={last ? "true" : undefined}
       heading={heading}
       buttontext={buttonText}
       mt={mt}

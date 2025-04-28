@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, type JSX } from "react";
 import {
   GoabTextMaxWidth,
   GoabTextHeadingElement,
@@ -15,10 +15,9 @@ interface WCProps extends Margins {
   color?: GoabTextColor;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-text": WCProps & React.HTMLAttributes<HTMLElement>;
     }

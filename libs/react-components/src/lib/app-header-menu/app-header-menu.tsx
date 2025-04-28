@@ -15,10 +15,9 @@ export interface GoabAppHeaderMenuProps {
   children?: ReactNode;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-app-header-menu": WCProps & React.HTMLAttributes<HTMLElement>;
     }

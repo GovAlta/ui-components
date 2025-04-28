@@ -1,18 +1,21 @@
-import { GoabTableOnSortDetail, GoabTableVariant, Margins } from "@abgov/ui-components-common";
+import {
+  GoabTableOnSortDetail,
+  GoabTableVariant,
+  Margins,
+} from "@abgov/ui-components-common";
 import { ReactNode, useEffect, useRef } from "react";
 
 interface WCProps extends Margins {
-  ref?: React.MutableRefObject<HTMLElement | null>;
+  ref?: React.RefObject<HTMLElement | null>;
   width?: string;
-  stickyheader?: boolean;
+  stickyheader?: string;
   variant?: GoabTableVariant;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-table": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -54,7 +57,8 @@ export function GoabTable({ onSort, ...props }: GoabTableProps) {
     <goa-table
       ref={ref}
       width={props.width}
-      stickyheader={false}
+      // TODO: Enable this later if needed
+      // stickyheader={props.stickyHeader ? "true" : undefined}
       variant={props.variant}
       testid={props.testId}
       mt={props.mt}

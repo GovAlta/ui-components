@@ -2,14 +2,14 @@ import { GoabAriaLiveType, GoabNotificationType } from "@abgov/ui-components-com
 import { useEffect, useRef } from "react";
 
 interface WCProps {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   type: GoabNotificationType;
   maxcontentwidth?: string;
   arialive?: GoabAriaLiveType;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {

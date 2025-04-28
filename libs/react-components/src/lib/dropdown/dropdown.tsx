@@ -3,29 +3,29 @@ import {
   GoabIconType,
   Margins,
 } from "@abgov/ui-components-common";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type JSX } from "react";
 
 interface WCProps extends Margins {
-  ref: React.MutableRefObject<HTMLElement | null>;
+  ref: React.RefObject<HTMLElement | null>;
   arialabel?: string;
   arialabelledby?: string;
-  disabled?: boolean;
-  error?: boolean;
-  filterable?: boolean;
+  disabled?: string;
+  error?: string;
+  filterable?: string;
   leadingicon?: string;
   maxheight?: string;
-  multiselect?: boolean;
+  multiselect?: string;
   name?: string;
-  native?: boolean;
+  native?: string;
   placeholder?: string;
   value?: string;
   width?: string;
-  relative?: boolean;
+  relative?: string;
   id?: string;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -95,21 +95,21 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
       value={stringify(props.value)}
       arialabel={props.ariaLabel}
       arialabelledby={props.ariaLabelledBy}
-      disabled={props.disabled}
-      error={props.error}
-      filterable={props.filterable}
+      disabled={props.disabled ? "true" : undefined}
+      error={props.error ? "true" : undefined}
+      filterable={props.filterable ? "true" : undefined}
       leadingicon={props.leadingIcon}
       maxheight={props.maxHeight}
       mb={props.mb}
       ml={props.ml}
       mr={props.mr}
       mt={props.mt}
-      multiselect={props.multiselect}
-      native={props.native}
+      multiselect={props.multiselect ? "true" : undefined}
+      native={props.native ? "true" : undefined}
       placeholder={props.placeholder}
       testid={props.testId}
       width={props.width}
-      relative={props.relative}
+      relative={props.relative ? "true" : undefined}
       id={props.id}
     >
       {props.children}

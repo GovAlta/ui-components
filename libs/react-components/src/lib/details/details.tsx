@@ -3,15 +3,14 @@ import { ReactNode } from "react";
 
 interface WCProps extends Margins {
   heading: string;
-  open?: boolean;
+  open?: string;
   maxwidth?: string;
   testid?: string;
 }
 
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
       "goa-details": WCProps & React.HTMLAttributes<HTMLElement>;
     }
@@ -31,7 +30,7 @@ export function GoabDetails(props: GoabDetailsProps) {
   return (
     <goa-details
       heading={props.heading}
-      open={props.open}
+      open={props.open ? "true" : undefined}
       maxwidth={props.maxWidth}
       testid={props.testId}
       mt={props.mt}
