@@ -34,7 +34,7 @@ class TestDatePickerComponent {
   mb?: Spacing;
   ml?: Spacing;
   mr?: Spacing;
-
+  width?: string;
   onChange() {
     /* do nothing */
   }
@@ -64,6 +64,7 @@ describe("GoABDatePicker", () => {
     component.mb = "m";
     component.ml = "s";
     component.mr = "xs";
+    component.width = "20ch";
     fixture.detectChanges();
   });
 
@@ -80,7 +81,7 @@ describe("GoABDatePicker", () => {
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("ml")).toBe(component.ml);
     expect(el?.getAttribute("mr")).toBe(component.mr);
-    expect(el?.getAttribute("type")).toBe("input");
+    expect(el?.getAttribute("width")).toBe(component.width);
   });
 
   it("should handle event", async () => {
