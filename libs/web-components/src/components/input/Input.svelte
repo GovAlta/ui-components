@@ -91,7 +91,9 @@
   let _rootEl: HTMLElement;
   let _error = false;
   let _prevError = false;
-  let _containerWidth = "";
+  // separate styles for input and input's container
+  let _containerStyle = "";
+  let _inputWidth = "";
 
   // ========
   // Reactive
@@ -140,10 +142,15 @@
     checkSlots();
     sendMountedMessage();
 
-    if (width.includes("%")) {
-      _containerWidth = `width: ${width};`; // Set container width to the percentage
+    if (width.includes("%") || width.includes("px")) {
+      _containerStyle = `width: ${width}; `;
+      _inputWidth = "";
+    } else if (width.includes("ch") || width.trim() === "") {
+      _containerStyle = "";
+      _inputWidth = width;
     } else {
-      _containerWidth = `--width: ${width};`; // Keep using the CSS variable
+      _containerStyle = `--width: ${width};`;
+      _inputWidth = "";
     }
   });
 
@@ -285,7 +292,7 @@
 
 <div
   class="container"
-  style={`${_containerWidth}${calculateMargin(mt, mr, mb, ml)}`}
+  style={`${_containerStyle}${calculateMargin(mt, mr, mb, ml)}`}
   bind:this={_rootEl}
 >
   {#if $$slots.leadingContent}
@@ -320,7 +327,7 @@
     <input
       bind:this={_inputEl}
       class="input--{variant}"
-      style={`--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`}
+      style={`--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}; ${_inputWidth ? `width: ${_inputWidth};` : ""}`}
       readonly={isReadonly}
       disabled={isDisabled}
       data-testid={testid}
@@ -418,6 +425,7 @@
     border-radius: var(--goa-text-input-border-radius);
     /* The vertical align fixes inputs with a leading icon to not be vertically offset */
     vertical-align: middle;
+    min-width: 0;
   }
 
   .goa-input:not(.error):hover:not(:has(input:focus-visible)) {
@@ -471,10 +479,11 @@
     padding: var(--goa-text-input-padding);
     background-color: transparent;
     max-width: 100%;
-    width: calc(var(--width) + 1ch);
     flex: 1 1 auto;
     z-index: 1;
     border-radius: var(--goa-text-input-border-radius);
+    min-width: 0;
+    text-overflow: ellipsis;
   }
   input,
   input:focus-visible,
