@@ -1,5 +1,6 @@
-import { GoabIconSize, GoabIconTheme, GoabIconType, Spacing } from "@abgov/ui-components-common";
+import { GoabIconSize, GoabIconTheme, GoabIconType } from "@abgov/ui-components-common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -22,9 +23,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
     >
     </goa-icon>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabIcon {
+export class GoabIcon extends GoabBaseComponent {
   @Input({ required: true }) type!: GoabIconType;
   @Input() size?: GoabIconSize = "medium";
   @Input() theme?: GoabIconTheme = "outline";
@@ -33,9 +34,4 @@ export class GoabIcon {
   @Input() opacity?: number;
   @Input() title?: string;
   @Input() ariaLabel?: string;
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 }

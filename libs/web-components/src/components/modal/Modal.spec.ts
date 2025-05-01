@@ -53,17 +53,15 @@ describe("Modal Component", () => {
 
   it("should show slotted heading content and have accessibility attributes", async () => {
     const heading = "Test heading";
-    const el = render(GoAModalWrapper, { heading });
+    const el =  render(GoAModal, { open: "true", heading });
     await waitFor(() => {
-      expect(el.container.querySelector("[slot=heading]")?.innerHTML).toContain(
-        heading,
-      );
       const modal = el.queryByRole("dialog");
       expect(modal?.getAttribute("tabindex")).toBe("-1");
       expect(modal?.getAttribute("aria-modal")).toBe("true");
       expect(modal?.getAttribute("aria-labelledby")).toBe("goa-modal-heading");
-      expect(modal?.querySelector(".has-content")).toBeTruthy();
+      expect(modal?.querySelector(".has-content")).not.toBeNull(); // make sure the slot is rendered
       const modalHeading = el.queryByTestId("modal-title");
+      expect(modalHeading?.textContent).toContain(heading);
       expect(modalHeading?.getAttribute("aria-label")).toBeNull();
     });
   });

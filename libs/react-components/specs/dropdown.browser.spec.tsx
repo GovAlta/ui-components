@@ -1,7 +1,7 @@
 import { render } from "vitest-browser-react";
 import { GoabDropdown, GoabDropdownItem } from "../src";
 import { expect, describe, it, vi } from "vitest";
-import { userEvent } from "@vitest/browser/context";
+import { page, userEvent } from "@vitest/browser/context";
 
 describe("Dropdown", () => {
   const noop = () => {
@@ -112,7 +112,94 @@ describe("Dropdown", () => {
           expect(popover.element().getAttribute("open")).toBe("true");
           expect(popoverDiv.element().getAttribute("style")).toContain("width: min(500px, 100%)");
         })
+      });
+
+
+    })
+
+    describe("Popover position", () => {
+      it("should display popover above when dropdown is at the bottom of the view port", async() => {
+        const Component = () => {
+          return (
+            <>
+              {/* Add space to make page scrollable */}
+              <div style={{ height: "2000px" }}></div>
+              <div style={{ position: "relative" }}>
+                <GoabDropdown name="favcolor" testId="dropdown" onChange={noop}>
+                  <GoabDropdownItem label="Red" value="red" />
+                  <GoabDropdownItem label="Blue" value="blue" />
+                  <GoabDropdownItem label="Green" value="green" />
+                </GoabDropdown>
+              </div>
+            </>
+          );
+        }
+        const result = render(<Component />);
+        // Scroll to the bottom of the page
+        window.scrollTo(0, document.body.scrollHeight);
+
+        const dropdown = result.getByTestId("dropdown");
+        await dropdown.click();
+
+        await vi.waitFor(() => {
+          const lastOption =  result.getByText("Green");
+          const dropdownRect = dropdown.element().getBoundingClientRect();
+          const lastOptionRect = lastOption.element().getBoundingClientRect();
+          expect(lastOptionRect.bottom).toBeLessThan(dropdownRect.top);
+        });
       })
+
+      it("should maintain popover width equal to dropdown width when container resizes", async () => {
+        const Component = () => {
+          return (
+            <GoabDropdown
+              name="favcolor"
+              testId="dropdown"
+              width={"300px"}
+              onChange={noop}
+            >
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("dropdown");
+        await dropdown.click();
+        await vi.waitFor(async () => {
+          const dropdownOption = result.getByText("Green");
+          expect(dropdownOption).toBeDefined();
+          const dropdownRect = dropdown.element().getBoundingClientRect();
+          const dropdownOptionRect = dropdownOption.element().getBoundingClientRect();
+          expect(Math.abs(dropdownOptionRect.width - dropdownRect.width)).toBeLessThanOrEqual(1);
+        });
+      });
+
+      it("should maintain dropdown option width equal to input width in narrow viewport", async () => {
+        // Set viewport to narrow width - bug 2441
+        await page.viewport(250, 800);
+        const Component = () => {
+          return (
+            <GoabDropdown name="favcolor" testId="dropdown" width={"100%"} onChange={noop}>
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("dropdown");
+        await dropdown.click();
+        await vi.waitFor(async () => {
+          const dropdownOption = result.getByText("Green");
+          const dropdownRect = dropdown.element().getBoundingClientRect();
+          const dropdownOptionRect = dropdownOption.element().getBoundingClientRect();
+          expect(Math.abs(dropdownOptionRect.width - dropdownRect.width)).toBeLessThanOrEqual(1);
+        });
+      });
     })
   })
 

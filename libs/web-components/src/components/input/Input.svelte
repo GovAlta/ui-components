@@ -410,6 +410,7 @@
     display: inline-flex;
     align-items: stretch;
     width: 100%;
+    height: 42px;
     z-index: 1;
     background-color: var(--goa-text-input-color-bg);
     /* default border */
@@ -465,7 +466,6 @@
   }
 
   input {
-    display: inline-block;
     color: var(--goa-text-input-color-text);
     font: var(--goa-text-input-typography);
     padding: var(--goa-text-input-padding);
@@ -527,6 +527,7 @@
     display: flex;
     align-items: center;
     white-space: normal;
+    height: 42px;
   }
 
   .leading-content-slot :global(::slotted(div)),

@@ -1,6 +1,18 @@
-import { GoabTextAreaCountBy, GoabTextAreaOnChangeDetail, GoabTextAreaOnKeyPressDetail, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import {
+  GoabTextAreaCountBy,
+  GoabTextAreaOnChangeDetail,
+  GoabTextAreaOnKeyPressDetail,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  forwardRef,
+} from "@angular/core";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
@@ -35,35 +47,26 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: forwardRef(() => GoabTextArea),
-    }
-  ]
+    },
+  ],
 })
-export class GoabTextArea implements ControlValueAccessor {
+export class GoabTextArea extends GoabControlValueAccessor {
   @Input() name?: string;
-  @Input() value?: string = "";
-  @Input() id?: string;
   @Input() placeholder?: string;
   @Input() rows?: number;
-  @Input() error?: boolean;
-  @Input() disabled?: boolean;
   @Input() readOnly?: boolean;
   @Input() width?: string;
   @Input() ariaLabel?: string;
   @Input() countBy?: GoabTextAreaCountBy = "";
   @Input() maxCount?: number = -1;
   @Input() maxWidth?: string;
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 
   @Output() onChange = new EventEmitter<GoabTextAreaOnChangeDetail>();
   @Output() onKeyPress = new EventEmitter<GoabTextAreaOnKeyPressDetail>();
 
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;
-    this.onChange.emit(detail)
+    this.onChange.emit(detail);
     this.markAsTouched();
     this.fcChange?.(detail.value);
   }
@@ -71,33 +74,6 @@ export class GoabTextArea implements ControlValueAccessor {
   _onKeyPress(e: Event) {
     const detail = (e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail;
     this.markAsTouched();
-    this.onKeyPress.emit(detail)
+    this.onKeyPress.emit(detail);
   }
-
-  // ControlValueAccessor
-
-  private fcChange?: (value: string) => void;
-  private fcTouched?: () => unknown;
-  touched = false;
-
-  markAsTouched() {
-    if (!this.touched) {
-      this.fcTouched?.();
-      this.touched = true;
-    }
-  }
-  writeValue(value: string): void {
-    this.value = value;
-  }
-  registerOnChange(fn: any): void {
-    this.fcChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-    this.fcTouched = fn
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
 }

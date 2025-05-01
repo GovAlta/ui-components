@@ -1,5 +1,5 @@
-import { Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -14,12 +14,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
     >
     </goa-divider>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabDivider {
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
-}
+export class GoabDivider extends GoabBaseComponent {}

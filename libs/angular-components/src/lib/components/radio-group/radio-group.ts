@@ -1,6 +1,18 @@
-import { GoabRadioGroupOnChangeDetail, GoabRadioGroupOrientation, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import {
+  GoabRadioGroupOnChangeDetail,
+  GoabRadioGroupOrientation,
+  Spacing,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  forwardRef,
+} from "@angular/core";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
@@ -32,18 +44,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     },
   ],
 })
-export class GoabRadioGroup implements ControlValueAccessor {
+export class GoabRadioGroup extends GoabControlValueAccessor {
   @Input() name?: string;
-  @Input() value?: string;
-  @Input() disabled?: boolean;
   @Input() orientation?: GoabRadioGroupOrientation;
-  @Input() error?: boolean;
   @Input() ariaLabel?: string;
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 
   @Output() onChange = new EventEmitter<GoabRadioGroupOnChangeDetail>();
 
@@ -53,34 +57,5 @@ export class GoabRadioGroup implements ControlValueAccessor {
     this.onChange.emit(detail);
 
     this.fcChange?.(detail.value);
-  }
-
-  // ControlValueAccessor
-
-  private fcChange?: (value: string) => void;
-  private fcTouched?: () => unknown;
-  touched = false;
-
-  markAsTouched() {
-    if (!this.touched) {
-      this.fcTouched?.();
-      this.touched = true;
-    }
-  }
-
-  writeValue(value: string): void {
-    this.value = value;
-  }
-
-  registerOnChange(fn: any): void {
-    this.fcChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.fcTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
   }
 }

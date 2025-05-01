@@ -93,6 +93,7 @@
   $: {
     if (_inputEl) {
       _dropdownWidth = `${_inputEl.offsetWidth}px`; // Match input width dynamically
+      _popoverMaxWidth = `min(${_width}, 100%)`;
     }
   }
 

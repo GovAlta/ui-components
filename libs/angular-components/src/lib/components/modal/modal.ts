@@ -18,12 +18,14 @@ import { NgIf, NgTemplateOutlet } from "@angular/common";
       [attr.heading]="getHeadingAsString()"
       (_close)="_onClose()"
     >
-      <ng-content></ng-content>
-      <div slot="heading" *ngIf="this.heading !== '' || this.closable">
-        <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+      <div slot="heading">
+        <ng-container *ngIf="this.heading !== '' && getHeadingAsTemplate() !== null" [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
       </div>
-      <div slot="actions" *ngIf="this.actions">
-        <ng-container [ngTemplateOutlet]="actions"></ng-container>
+
+      <ng-content></ng-content>
+
+      <div slot="actions">
+        <ng-container *ngIf="this.actions" [ngTemplateOutlet]="actions"></ng-container>
       </div>
     </goa-modal>
   `,
@@ -50,6 +52,7 @@ export class GoabModal {
     if (!this.heading) return null;
     return this.heading instanceof TemplateRef ? this.heading : null;
   }
+
   _onClose() {
     this.onClose.emit();
   }

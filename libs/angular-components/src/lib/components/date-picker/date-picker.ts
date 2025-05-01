@@ -9,7 +9,8 @@ import {
   ElementRef,
   HostListener,
 } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
@@ -40,23 +41,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     },
   ],
 })
-export class GoabDatePicker implements ControlValueAccessor {
+export class GoabDatePicker extends GoabControlValueAccessor {
   @Input() name?: string;
-  @Input() value?: Date | string | null | undefined;
+  // ** NOTE: can we just use the base component for this?
+  @Input() override value?: Date | string | null | undefined;
   @Input() min?: Date | string;
   @Input() max?: Date | string;
-  @Input() error?: boolean;
-  @Input() disabled?: boolean;
-  @Input() width?: string;
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
   @Input() relative?: boolean;
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
 
@@ -77,10 +71,11 @@ export class GoabDatePicker implements ControlValueAccessor {
     this.fcChange?.(detail.value);
   }
 
-  // ControlValueAccessor
-  constructor(protected elementRef: ElementRef) {}
+  constructor(protected elementRef: ElementRef) {
+    super();
+  }
 
-  setDisabledState(isDisabled: boolean) {
+  override setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
     this.elementRef.nativeElement.disabled = isDisabled;
   }
@@ -90,18 +85,7 @@ export class GoabDatePicker implements ControlValueAccessor {
     this.setDisabledState(isDisabled);
   }
 
-  private fcChange?: (value: Date | string | undefined) => void;
-  private fcTouched?: () => unknown;
-  touched = false;
-
-  markAsTouched() {
-    if (!this.touched) {
-      this.fcTouched?.();
-      this.touched = true;
-    }
-  }
-
-  writeValue(value: Date | null): void {
+  override writeValue(value: Date | null): void {
     this.value = value;
 
     const datePickerEl = this.elementRef?.nativeElement?.querySelector("goa-date-picker");
@@ -116,13 +100,5 @@ export class GoabDatePicker implements ControlValueAccessor {
         );
       }
     }
-  }
-
-  registerOnChange(fn: any): void {
-    this.fcChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.fcTouched = fn;
   }
 }

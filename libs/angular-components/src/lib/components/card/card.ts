@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
-import { Spacing } from "@abgov/ui-components-common";
+import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
@@ -17,14 +17,9 @@ import { Spacing } from "@abgov/ui-components-common";
       <ng-content />
     </goa-card>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabCard {
+export class GoabCard extends GoabBaseComponent {
   @Input() elevation?: number;
   @Input() width?: string;
-  @Input() testId?: string;
-  @Input() mt?: Spacing;
-  @Input() mb?: Spacing;
-  @Input() ml?: Spacing;
-  @Input() mr?: Spacing;
 }
