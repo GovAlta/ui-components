@@ -1,4 +1,10 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 
 @Component({
   standalone: true,
@@ -10,7 +16,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "
       [attr.maxcontentwidth]="maxContentWidth"
       [attr.fullmenubreakpoint]="fullMenuBreakpoint"
       [attr.testid]="testId"
-      [attr.hasmenuclickhandler]="!!onMenuClick"
+      [attr.hasmenuclickhandler]="onMenuClick.observed ? 'true' : 'false'"
       (_menuClick)="_onMenuClick()"
     >
       <ng-content />
