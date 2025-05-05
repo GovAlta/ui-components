@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-form-step" />
 
 <script lang="ts" context="module">
-  export type FormStepStatus = "complete" | "incomplete";
+  export type FormStepStatus = "complete" | "incomplete" | "not-started";
 
   export type FormStep = {
     current: boolean;
@@ -36,8 +36,8 @@
   // =======
 
   let _rootEl: HTMLElement;
-  let _checkbox: HTMLInputElement;
   let _isMobile: boolean;
+  let _userInitiatedChange = false;
 
   // ========
   // Reactive
@@ -71,8 +71,24 @@
 
     _rootEl.addEventListener("formstepper:current:changed", (e: Event) => {
       const ce = e as CustomEvent<FormStep>;
+      const wasCurrent = current;
       enabled = true; // once current it is always enabled
       current = ce.detail.current;
+
+      // Announce step change when becoming current
+      if (!wasCurrent && current) {
+        // *** To avoid redundant announcement ***
+        // Only announce programmatic step changes, not user-initiated ones.
+        // When users click a step themselves, they already know they triggered the change and screen readers have already announced the button.
+        // Announcing again would be redundant
+        // Programmatic changes do need to be announced.
+        if (!_userInitiatedChange) {
+          setTimeout(() => announceStepChange(), 10);
+        }
+
+        // Reset flag after handling to allow future announcements
+        _userInitiatedChange = false;
+      }
     });
 
     // notify parent of mount and send reference of self
@@ -97,7 +113,9 @@
   function onClick(e: Event) {
     if (!_isEnabled) return;
 
-    _checkbox.checked = !_checkbox.checked;
+    // Flag user-initiated navigation to suppress redundant announcements
+    _userInitiatedChange = true;
+
     _rootEl.dispatchEvent(
       new CustomEvent("_click", {
         composed: true,
@@ -107,38 +125,84 @@
     );
     e.stopPropagation();
   }
+
+  function onKeyDown(e: KeyboardEvent) {
+    if (e.key === "Enter" || e.key === " ") {
+      onClick(e);
+    }
+  }
+
+  function getStatusText(): string {
+    if (!status) return "";
+
+    switch (status) {
+      case "complete":
+        return "Complete";
+      case "incomplete":
+        return "Incomplete";
+      case "not-started":
+        return "Not started";
+      default:
+        return "";
+    }
+  }
+
+  function getAriaLabel(stepText: string, stepAriaLabel: string): string {
+    const stepInfo = stepAriaLabel ? stepAriaLabel + ", " : "";
+    const stepName = `Step name: ${stepText}`;
+    const statusText = getStatusText();
+    if (statusText) {
+      return `${stepInfo}${stepName}, Status: ${statusText}`;
+    } else {
+      return `${stepInfo}${stepName}`;
+    }
+  }
+
+  function announceStepChange() {
+    // Only announce if this step is now current
+    if (current && childindex) {
+      const announcement = getAriaLabel(text, arialabel);
+
+      const liveRegion = _rootEl.querySelector("[data-live-region]") as HTMLElement;
+
+      if (liveRegion) {
+        liveRegion.textContent = "";
+
+        setTimeout(() => {
+          liveRegion.textContent = announcement;
+        }, 10);
+      }
+    }
+  }
 </script>
 
-<label
-  id={arialabel}
+<div
   bind:this={_rootEl}
+  class="step-container"
   class:mobile={_isMobile}
   class:desktop={!_isMobile}
   class:last={_isLast}
   role="listitem"
-  tabindex="-1"
-  for={text}
   data-status={status}
   aria-current={current ? "step" : "false"}
-  aria-label={arialabel || `${text} ${status || ""}`}
   data-testid="label"
 >
-  <input
-    id={text}
-    bind:this={_checkbox}
-    type="checkbox"
-    checked={current}
-    aria-disabled={!_isEnabled}
-    disabled={!_isEnabled}
-    data-testid="checkbox"
-    on:click={onClick}
-  />
+  <!-- ARIA Live Region for announcing step changes -->
+  {#if current}
+    <div
+      data-live-region
+      aria-live="assertive"
+      aria-atomic="true"
+      style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;"
+    ></div>
+  {/if}
+
   <div data-testid="status" class="status">
     {#if current}
       {#if _isLast && status === "complete"}
         <goa-icon type="checkmark" inverted />
       {:else}
-        <goa-icon type="pencil"  theme="filled" />
+        <goa-icon type="pencil" theme="filled" />
       {/if}
     {:else if status === "complete"}
       <goa-icon type="checkmark" inverted />
@@ -153,50 +217,76 @@
   <div class="details">
     <div class="text" data-testid="text">{text}</div>
     {#if status === "incomplete"}
-      <div class="subtext" data-testid="subtext">Partially complete</div>
+      <div class="subtext" data-testid="subtext">Incomplete</div>
     {/if}
   </div>
-</label>
+  <!-- svelte-ignore a11y-no-interactive-element-to-noninteractive-role -->
+  <button
+    type="button"
+    disabled={!_isEnabled}
+    aria-label={getAriaLabel(text, arialabel)}
+    role="presentation"
+    data-testid="button"
+    on:click={onClick}
+    on:keydown={onKeyDown}
+    class="step-button"
+  ></button>
+</div>
 
 <style>
-
-    input[type="checkbox"] {
-    position: absolute;
-    left: -9999px;
-  }
-
-  label {
+  .step-container {
+    position: relative;
     display: flex;
     box-sizing: border-box;
     height: 100%;
     width: 100%;
     padding: var(--goa-step-padding);
   }
-  label:not([aria-disabled="true"]):not([aria-current="step"]):has(input:focus-visible) {
+
+  .step-container:focus-within:not([aria-current="step"]) {
     outline: var(--goa-color-interactive-focus) solid var(--goa-border-width-l);
   }
-  label:not([aria-disabled="true"]):not([aria-current="step"]):hover {
+
+  .step-container:hover:not([aria-current="step"]) {
     background-color: rgba(0, 0, 0, 0.05);
-    cursor: pointer;
   }
-  label.desktop {
+
+  .step-container.desktop {
     text-align: center;
     flex-direction: column;
     align-items: center;
   }
-  label.desktop .details {
+
+  .step-container.desktop .details {
     margin-top: 0.75rem; /* vertical space between step and label */
   }
-  label.mobile {
+
+  .step-container.mobile {
     flex-direction: row;
     align-items: center;
     text-align: start;
     padding: var(--goa-step-padding-vertical);
   }
-  label.mobile .details {
+
+  .step-container.mobile .details {
     margin-left: var(--goa-space-xs);
   }
 
+  .step-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .step-button:disabled {
+    cursor: default;
+  }
 
   .status {
     flex: 0 0 auto;
@@ -210,11 +300,11 @@
     height: var(--goa-step-size);
     width: var(--goa-step-size);
   }
+
   .status > * {
     fill: var(--fill-color, var(--goa-step-color-bg-complete));
     color: var(--fill-color, var(--goa-step-color-bg-complete));
   }
-
 
   [aria-current="step"] .text {
     font: var(--goa-step-typography-label-active);
@@ -234,7 +324,7 @@
     color: var(--goa-step-color-step-number);
   }
 
-  label:not(
+  .step-container:not(
       [data-status="complete"],
       [data-status="incomplete"],
       [aria-current="step"]
