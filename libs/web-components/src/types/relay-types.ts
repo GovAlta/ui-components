@@ -167,6 +167,7 @@ export type FormItemMountRelayDetail = {
   id: string;
   label: string;
   el: HTMLElement;
+  order: number;
 };
 
 // ========

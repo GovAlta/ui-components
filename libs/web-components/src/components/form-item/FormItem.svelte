@@ -1,4 +1,9 @@
-<svelte:options customElement="goa-form-item" />
+<svelte:options customElement={{
+  tag: "goa-form-item",
+  props: {
+    publicFormSummaryOrder: { type: "Number", attribute: "public-form-summary-order" },
+  }
+}} />
 
 <!-- Script -->
 <script lang="ts" context="module">
@@ -63,6 +68,7 @@
   // **For the public-form only**
   // Overrides the label value within the form-summary to provide a shorter description of the value
   export let name: string = "blank";
+  export let publicFormSummaryOrder: number = 0;
 
   let _rootEl: HTMLElement;
   let _inputEl: HTMLElement;
@@ -190,7 +196,7 @@
     relay<FormItemMountRelayDetail>(
       _rootEl,
       FormItemMountMsg,
-      { id: _name, label: name !== "blank" ? name : label, el: _rootEl },
+      { id: _name, label: name !== "blank" ? name : label, el: _rootEl, order: publicFormSummaryOrder },
       { bubbles: true, timeout: 10 },
     );
   }
