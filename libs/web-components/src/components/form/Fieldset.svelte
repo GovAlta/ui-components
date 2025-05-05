@@ -65,7 +65,7 @@
   let _formItems: Record<string, { label: string; el: HTMLElement }> = {};
 
   // reference to child form input, dropdown, etc components to allow for relaying of error state
-  let _formFields: Record<string, { order: number; el: HTMLElement }> = {};
+  let _formFields: Record<string, HTMLElement> = {};
 
   // =====
   // Hooks
@@ -164,7 +164,7 @@
       for (const [name, data] of Object.entries(_state)) {
         if (data.value) {
           relay<FieldsetSetValueRelayDetail>(
-            _formFields[name].el,
+            _formFields[name],
             FieldsetSetValueMsg,
             {
               name,
@@ -181,7 +181,7 @@
 
     // reset children
     for (const [_, val] of Object.entries(_formFields)) {
-      relay(val.el, FieldsetResetErrorsMsg, null);
+      relay(val, FieldsetResetErrorsMsg, null);
     }
     for (const [_, { el }] of Object.entries(_formItems)) {
       relay(el, FieldsetResetErrorsMsg, null);
@@ -189,13 +189,15 @@
   }
 
   function onFormItemMount(detail: FormItemMountRelayDetail) {
-    const { id, label, el } = detail;
+    const { id, label, el, order } = detail;
     _formItems[id] = { label, el };
+
+    const defaultOrderIndex = Object.keys(_formItems).length;
     _state[id] = {
       name: id,
       value: "",
       label: label,
-      order: 99,
+      order: order || defaultOrderIndex,
     }
   }
 
@@ -204,8 +206,7 @@
     const { name, el } = detail;
     if (!name) return;
 
-    const itemCount = Object.keys(_formFields).length;
-    _formFields[name] = { order: itemCount + 1, el };
+    _formFields[name] = el;
   }
 
   function onError(detail: ExternalErrorRelayDetail) {
@@ -220,7 +221,7 @@
 
     // dispatch error down to fields
     relay<FieldsetErrorRelayDetail>(
-      _formFields[detail.name].el,
+      _formFields[detail.name],
       FieldsetSetErrorMsg,
       {
         error: detail.msg,
@@ -245,7 +246,7 @@
     for (const [name, field] of Object.entries(_formFields)) {
       // some form elements not "form-bound" won't exist within the snapshot state
       if (_stateSnapshot[name]) {
-        relay<FieldsetSetValueRelayDetail>(field.el, FieldsetSetValueMsg, {
+        relay<FieldsetSetValueRelayDetail>(field, FieldsetSetValueMsg, {
           name,
           value: _stateSnapshot[name].value,
         });
@@ -277,13 +278,7 @@
         return;
       }
 
-      // save to the fieldset's state, which will be relayed when the user clicks continue
-      _state[name] = {
-        name,
-        value,
-        label: _formItems[name].label,
-        order: _formFields[name].order,
-      };
+      _state[name].value = value;
 
       if (dispatchOn === "change") {
         const isDirty = Object.keys(_state).length > 0;
@@ -310,7 +305,7 @@
   }
 
   function jumpToError(e: Event, id: string) {
-    _formFields[id].el.focus();
+    _formFields[id].focus();
     e.preventDefault();
   }
 
