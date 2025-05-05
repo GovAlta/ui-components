@@ -1,7 +1,6 @@
 import {
   GoabRadioGroupOnChangeDetail,
   GoabRadioGroupOrientation,
-  Spacing,
 } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -25,6 +24,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.orientation]="orientation"
       [attr.error]="error"
       [attr.arialabel]="ariaLabel"
+      [id]="id"
       [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"

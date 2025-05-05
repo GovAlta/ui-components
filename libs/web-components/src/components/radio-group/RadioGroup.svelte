@@ -10,7 +10,7 @@
     relay,
   } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import {
     GoARadioItemProps,
     RadioItemSelectProps,
@@ -83,6 +83,7 @@
 
   onMount(async () => {
     validateOrientation(orientation);
+    await tick(); // for angular to register public form name
     addRelayListener();
     sendMountedMessage();
     getChildren();

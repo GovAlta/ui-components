@@ -16,8 +16,10 @@ import { GoabBaseComponent } from "../base.component";
       [attr.error]="error"
       [attr.testid]="testId"
       [id]="id"
+      [attr.name]="name"
       [attr.requirement]="requirement"
       [attr.maxwidth]="maxWidth"
+      [attr.public-form-summary-order]="publicFormSummaryOrder"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.mr]="mr"
@@ -37,4 +39,12 @@ export class GoabFormItem extends GoabBaseComponent {
   @Input() requirement?: GoabFormItemRequirement;
   @Input() maxWidth?: string;
   @Input() id?: string;
+  /**
+   * Public form: to arrange fields in the summary
+   */
+  @Input() publicFormSummaryOrder?: number;
+  /**
+   * Public form: allow to override the label value within the form-summary to provide a shorter description of the value
+   */
+  @Input() name?: string;
 }

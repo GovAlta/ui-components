@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { Margins, GoabFielsetOnContinueDetail } from "@abgov/ui-components-common";
+import { GoabFieldsetOnContinueDetail, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref?: React.RefObject<HTMLElement | null>;
@@ -26,7 +26,7 @@ interface GoabFieldsetProps extends Margins {
   heading?: string;
   buttonText?: string;
   errors?: Record<string, string>;
-  onContinue?: (event: GoabFielsetOnContinueDetail) => boolean | void | undefined;
+  onContinue?: (event: GoabFieldsetOnContinueDetail) => boolean | void | undefined;
   children: ReactNode;
 }
 
