@@ -6,7 +6,7 @@ import { describe, it, expect, vi } from "vitest";
 describe("FormStep", () => {
   it("it renders the default step", async () => {
     const { queryByTestId } = render(FormStep, { text: "Some text" });
-    const rootEl = queryByTestId("label");
+    const rootEl = queryByTestId("step-container");
 
     rootEl?.dispatchEvent(
       new CustomEvent("formstepper:init", {
@@ -43,7 +43,8 @@ describe("FormStep", () => {
   it("emits a _click event", async () => {
     const click = vi.fn();
     const el = render(FormStep, { text: "Some form" });
-    const rootEl = el.queryByTestId("label");
+    const rootEl = el.queryByTestId("step-container");
+    const inputEl = el.queryByTestId("button");
 
     rootEl?.dispatchEvent(
       new CustomEvent("formstepper:init", {
@@ -58,7 +59,7 @@ describe("FormStep", () => {
 
     await tick();
     el.container.addEventListener("_click", click);
-    rootEl && (await fireEvent.click(rootEl));
+    inputEl && (await fireEvent.click(inputEl));
 
     await waitFor(() => {
       expect(click).toHaveBeenCalledOnce();
@@ -68,7 +69,8 @@ describe("FormStep", () => {
   it("won't emit event when clicked if disabled", async () => {
     const click = vi.fn();
     const el = render(FormStep, { text: "Some form" });
-    const rootEl = el.queryByTestId("label");
+    const rootEl = el.queryByTestId("step-container");
+    const inputEl = el.queryByTestId("button");
 
     rootEl?.dispatchEvent(
       new CustomEvent("formstepper:init", {
@@ -83,14 +85,14 @@ describe("FormStep", () => {
 
     el.container?.addEventListener("_click", click);
     await tick();
-    rootEl && (await fireEvent.click(rootEl));
+    inputEl && (await fireEvent.click(inputEl));
 
     expect(click).not.toBeCalled();
   });
 
   it("renders a current status", async () => {
     const el = render(FormStep, { text: "Some form" });
-    const rootEl = el.queryByTestId("label");
+    const rootEl = el.queryByTestId("step-container");
 
     rootEl?.dispatchEvent(
       new CustomEvent("formstepper:init", {
@@ -109,7 +111,7 @@ describe("FormStep", () => {
 
   it("renders a complete status", async () => {
     const el = render(FormStep, { text: "Some form" });
-    const rootEl = el.queryByTestId("label");
+    const rootEl = el.queryByTestId("step-container");
 
     rootEl?.dispatchEvent(
       new CustomEvent("formstepper:init", {
@@ -129,7 +131,7 @@ describe("FormStep", () => {
 
   it("renders an incomplete status", async () => {
     const el = render(FormStep, { text: "Some form", status: "incomplete" });
-    const rootEl = el.queryByTestId("label");
+    const rootEl = el.queryByTestId("step-container");
 
     rootEl?.dispatchEvent(
       new CustomEvent("formstepper:init", {
@@ -152,7 +154,8 @@ describe("FormStep", () => {
     const { queryByTestId } = render(FormStep, {
       text: "Some form",
     });
-    const rootEl = queryByTestId("label");
+    const rootEl = queryByTestId("step-container");
+    const inputEl = queryByTestId("button");
 
     rootEl?.dispatchEvent(
       new CustomEvent("formstepper:init", {
@@ -166,7 +169,76 @@ describe("FormStep", () => {
     );
 
     await tick();
-    const label = rootEl?.getAttribute("aria-label");
+    const label = inputEl?.getAttribute("aria-label");
     expect(label).toContain("1 of 4");
+  });
+
+  it("renders a not-started status", async () => {
+    const el = render(FormStep, { text: "Some form", status: "not-started" });
+    const rootEl = el.queryByTestId("step-container");
+
+    rootEl?.dispatchEvent(
+      new CustomEvent("formstepper:init", {
+        detail: {
+          ariaLabel: "some label",
+          enabled: true,
+          childIndex: 1,
+          current: false,
+          status: "not-started",
+        },
+      }),
+    );
+
+    await tick();
+
+    expect(rootEl?.dataset["status"]).toBe("not-started");
+  });
+
+  it("renders aria-label for not-started", async () => {
+    const el = render(FormStep, { text: "Some form", status: "not-started" });
+    const rootEl = el.queryByTestId("step-container");
+    const inputEl = el.queryByTestId("button");
+
+    rootEl?.dispatchEvent(
+      new CustomEvent("formstepper:init", {
+        detail: {
+          ariaLabel: "some label",
+          enabled: true,
+          childIndex: 1,
+          current: false,
+          status: "not-started",
+        },
+      }),
+    );
+
+    await tick();
+    const label = inputEl?.getAttribute("aria-label");
+    expect(label).toContain("Not started");
+  });
+
+  it("displays 'Incomplete' subtext for incomplete status", async () => {
+    const el = render(FormStep, {
+      text: "Partially Complete",
+      status: "incomplete",
+    });
+    const rootEl = el.queryByTestId("step-container");
+
+    rootEl?.dispatchEvent(
+      new CustomEvent("formstepper:init", {
+        detail: {
+          ariaLabel: "some label",
+          enabled: true,
+          childIndex: 1,
+          current: false,
+          status: "incomplete",
+        },
+      }),
+    );
+
+    await tick();
+
+    const subtextElement = el.queryByTestId("subtext");
+    expect(subtextElement).not.toBeNull();
+    expect(subtextElement?.textContent).toBe("Incomplete");
   });
 });
