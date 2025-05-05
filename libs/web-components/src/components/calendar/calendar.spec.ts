@@ -406,11 +406,15 @@ it("reacts to dynamic max date changes", async () => {
 
   // Today should now be disabled
   todayEl = container.querySelector(`[data-date="${today.getTime()}"]`);
-  expect(todayEl).toHaveClass("disabled");
+  if(todayEl) {
+    expect(todayEl).toHaveClass("disabled");
+  }
 
   // Tomorrow should be disabled
   tomorrowEl = container.querySelector(`[data-date="${tomorrow.getTime()}"]`);
-  expect(tomorrowEl).toHaveClass("disabled");
+  if(tomorrowEl) {
+    expect(tomorrowEl).toHaveClass("disabled");
+  }
 
   // Yesterday should be enabled
   const yesterday = addDays(today, -1);

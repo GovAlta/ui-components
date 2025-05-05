@@ -23,14 +23,14 @@ describe("FormStepper", () => {
   it("it renders", async () => {
     const { container } = render(FormStepper)
     await waitFor(() => {
-      const steps = container.querySelectorAll("input")
+      const steps = container.querySelectorAll("button")
       expect(steps.length).toBe(4)
     })
   })
 
   it("show progress updates on step changes", async () => {
     const { container } = render(FormStepper)
-    const steps = container.querySelectorAll("input[type=checkbox]");
+    const steps = container.querySelectorAll("button[type=button]");
 
     await waitFor(() => {
       expect(steps.length).toBe(4)
@@ -72,9 +72,9 @@ describe("FormStepper", () => {
     const { container } = render(FormStepper, { step: 2 })
 
     await waitFor(() => {
-      const steps = container.querySelectorAll("input[type=checkbox]");
+      const steps = container.querySelectorAll("button[type=button]");
       steps.forEach((step: Element, index: number) => {
-        expect(step.getAttribute("aria-disabled")).toBe(index + 1 <= 2 ? "false" : "true")
+        expect(step.getAttribute("disabled")).toBe(index + 1 <= 2 ? null : "")
       })
     })
   })
