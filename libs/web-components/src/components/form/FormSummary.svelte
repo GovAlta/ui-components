@@ -228,6 +228,10 @@
       width: 100%;
     }
 
+    td {
+      vertical-align: top;
+    }
+
     .label {
       width: 50%;
       font: var(--goa-typography-heading-s);
