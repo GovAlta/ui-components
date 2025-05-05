@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-form-step" />
 
 <script lang="ts" context="module">
-  export type FormStepStatus = "complete" | "incomplete";
+  export type FormStepStatus = "complete" | "incomplete" | "not-started";
 
   export type FormStep = {
     current: boolean;
@@ -107,6 +107,17 @@
     );
     e.stopPropagation();
   }
+
+  function getStatusText(): string {
+    if (!status) return "";
+
+    switch (status) {
+      case "complete": return "Complete";
+      case "incomplete": return "Incomplete";
+      case "not-started": return "Not started";
+      default: return "";
+    }
+  }
 </script>
 
 <label
@@ -120,7 +131,7 @@
   for={text}
   data-status={status}
   aria-current={current ? "step" : "false"}
-  aria-label={arialabel || `${text} ${status || ""}`}
+  aria-label={`${arialabel ? arialabel + " " : ""}, Step Name: ${text}, Status: ${getStatusText()},`}
   data-testid="label"
 >
   <input
@@ -138,7 +149,7 @@
       {#if _isLast && status === "complete"}
         <goa-icon type="checkmark" inverted />
       {:else}
-        <goa-icon type="pencil"  theme="filled" />
+        <goa-icon type="pencil" theme="filled" />
       {/if}
     {:else if status === "complete"}
       <goa-icon type="checkmark" inverted />
@@ -153,7 +164,7 @@
   <div class="details">
     <div class="text" data-testid="text">{text}</div>
     {#if status === "incomplete"}
-      <div class="subtext" data-testid="subtext">Partially complete</div>
+      <div class="subtext" data-testid="subtext">Incomplete</div>
     {/if}
   </div>
 </label>
