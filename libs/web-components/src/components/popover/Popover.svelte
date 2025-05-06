@@ -98,8 +98,14 @@
     await tick();
     _targetEl.addEventListener("keydown", onTargetEvent);
 
-    const children = getSlottedChildren(_targetEl);
+    // listener for `close` events emitted from child components
+    _rootEl.addEventListener("close", (e) => {
+      _open = false;
+      e.stopPropagation();
+    })
 
+    // find the element that will have initial focus when the popover is shown
+    const children = getSlottedChildren(_targetEl);
     _initFocusedEl =
       (children.find(
         (el) => (el as HTMLElement).tabIndex >= 0,
