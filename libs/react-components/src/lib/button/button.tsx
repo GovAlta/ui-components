@@ -16,6 +16,9 @@ interface WCProps extends Margins {
   trailingicon?: string;
   width?: string;
   testid?: string;
+  action?: string;
+  actionArgs?: string;
+  actionArg?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
 
@@ -38,6 +41,9 @@ export interface GoabButtonProps extends Margins {
   width?: string;
   onClick?: () => void;
   testId?: string;
+  action?: string;
+  actionArgs?: Record<string, unknown>;
+  actionArg?: string;
   children?: ReactNode;
 }
 
@@ -56,6 +62,9 @@ export function GoabButton({
   mr,
   mb,
   ml,
+  action,
+  actionArgs,
+  actionArg,
 }: GoabButtonProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
@@ -88,6 +97,9 @@ export function GoabButton({
       trailingicon={trailingIcon}
       width={width}
       testid={testId}
+      action={action}
+      action-arg={actionArg}
+      action-args={JSON.stringify(actionArgs)}
       mt={mt}
       mr={mr}
       mb={mb}
