@@ -51,6 +51,7 @@ export class GoabDatePicker extends GoabControlValueAccessor {
    * @deprecated This property has no effect and will be removed in a future version
    */
   @Input() relative?: boolean;
+  @Input() width?: string;
 
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
 
