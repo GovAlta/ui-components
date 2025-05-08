@@ -147,7 +147,7 @@
       _inputWidth = "";
     } else if (width.includes("ch") || width.trim() === "") {
       _containerStyle = "";
-      _inputWidth = width;
+      _inputWidth =`${parseInt(width) + 1}ch`;
     } else {
       _containerStyle = `--width: ${width};`;
       _inputWidth = "";
@@ -483,7 +483,6 @@
     z-index: 1;
     border-radius: var(--goa-text-input-border-radius);
     min-width: 0;
-    text-overflow: ellipsis;
   }
   input,
   input:focus-visible,

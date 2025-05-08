@@ -294,7 +294,7 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <goa-input
       slot="target"
-      width="10rem"
+      width="16ch"
       readonly="true"
       trailingicon="calendar"
       value={formatDate(_date)}
