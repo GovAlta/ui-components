@@ -1,13 +1,15 @@
 import { Link, Outlet } from "react-router-dom";
+
+import { TestContent } from "./TestContent";
+
 import {
   GoabAppFooter,
   GoabAppHeader,
   GoabMicrositeHeader,
   GoabOneColumnLayout,
-  GoabSideMenu,
-  GoabSideMenuGroup,
 } from "@abgov/react-components";
 import "@abgov/style";
+
 
 export function App() {
   return (
@@ -15,24 +17,12 @@ export function App() {
       <section slot="header">
         <GoabMicrositeHeader type="alpha" version="UAT" />
         <GoabAppHeader url="/" heading="Design System">
-          <a href="/login">Sign in</a>
+          <a href="/all">View All</a>
+          <a href="/test">Test</a>
         </GoabAppHeader>
       </section>
-      <div style={{ display: "flex" }}>
-        <section style={{ flex: "0 0 250px" }}>
-          <GoabSideMenu>
-            <GoabSideMenuGroup heading="Components">
-              <Link to="/">Nothing here</Link>
-
-              {/* Add links here */}
-            </GoabSideMenuGroup>
-
-            {/* Add links here */}
-          </GoabSideMenu>
-        </section>
-        <section>
-          <Outlet />
-        </section>
+      <div style={{ display: "flex", margin: "auto", width: "1024px" }}>
+        <Outlet />
       </div>
       <section slot="footer">
         <GoabAppFooter />
