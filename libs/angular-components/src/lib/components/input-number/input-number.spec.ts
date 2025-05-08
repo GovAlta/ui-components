@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { GoabInputNumber } from "@abgov/angular-components";
+
+import { GoabInputNumber } from "./input-number";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
   GoabIconType,
