@@ -294,7 +294,7 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <goa-input
       slot="target"
-      width="10rem"
+      width="16ch"
       readonly="true"
       trailingicon="calendar"
       value={formatDate(_date)}
@@ -341,7 +341,7 @@
           name="day"
           type="number"
           on:_change={onInputChange}
-          width="3ch"
+          width="4ch"
           value={_inputDate.day}
           min="1"
           max="31"
@@ -353,7 +353,7 @@
           name="year"
           type="number"
           on:_change={onInputChange}
-          width="5ch"
+          width="6ch"
           value={_inputDate.year}
           min="1800"
           max="2200"

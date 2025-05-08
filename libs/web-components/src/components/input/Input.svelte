@@ -10,7 +10,7 @@
     toBoolean,
     relay,
     receive,
-    dispatch,
+    dispatch, styles,
   } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -145,9 +145,11 @@
     if (width.includes("%") || width.includes("px")) {
       _containerStyle = `width: ${width}; `;
       _inputWidth = "";
+    } else if (type === "number" && width.includes("ch")) {
+      _inputWidth = `${parseInt(width) + 2}ch`;
     } else if (width.includes("ch") || width.trim() === "") {
       _containerStyle = "";
-      _inputWidth = width;
+      _inputWidth = `${parseInt(width) + 1}ch`;
     } else {
       _containerStyle = `--width: ${width};`;
       _inputWidth = "";
@@ -327,7 +329,10 @@
     <input
       bind:this={_inputEl}
       class="input--{variant}"
-      style={`--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}; ${_inputWidth ? `width: ${_inputWidth};` : ""}`}
+      style={styles(
+        `--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`,
+        _inputWidth && `width: ${_inputWidth}`
+      )}
       readonly={isReadonly}
       disabled={isDisabled}
       data-testid={testid}
@@ -410,6 +415,7 @@
   .goa-input * {
     line-height: normal;
   }
+
   .goa-input {
     outline: none;
     transition: var(--goa-text-input-transition);
@@ -432,10 +438,10 @@
     /* hover border */
     box-shadow: var(--goa-text-input-border-hover);
   }
+
   .goa-input:not(.error):has(input:focus-visible) {
     /* focus border(s) */
-    box-shadow:
-      var(--goa-text-input-border), var(--goa-text-input-border-focus);
+    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* Error state */
@@ -446,8 +452,7 @@
   /* Focus state (including when in error state) */
   .goa-input:has(input:focus-visible),
   .goa-input.error:has(input:focus-visible) {
-    box-shadow:
-      var(--goa-text-input-border), var(--goa-text-input-border-focus);
+    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* type=range does not have an outline/box-shadow */
@@ -485,6 +490,7 @@
     min-width: 0;
     text-overflow: ellipsis;
   }
+
   input,
   input:focus-visible,
   input:hover,
@@ -492,8 +498,13 @@
     outline: none;
     border: none;
   }
+
   input[readonly] {
     cursor: pointer;
+  }
+
+  input[type="number"] {
+    text-overflow: initial;
   }
 
   .leading-icon + input {
@@ -511,15 +522,18 @@
     border: none;
     z-index: -1;
   }
+
   .goa-input.input--disabled input,
   .goa-input.input--disabled input:hover,
   .goa-input.input--disabled input:active,
   .goa-input.input--disabled input:focus {
     color: var(--goa-color-text-secondary);
   }
+
   .goa-input.input--disabled input:hover {
     cursor: default !important;
   }
+
   /* Adjust the leading icon style when input is disabled */
   .input--disabled .leading-icon,
   .input--disabled .trailing-icon {
@@ -623,8 +637,7 @@
     -webkit-appearance: none;
     height: 1.2rem;
     width: 1.2rem;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>')
-      center center no-repeat;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>') center center no-repeat;
   }
 
   ::-ms-reveal {
