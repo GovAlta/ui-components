@@ -38,6 +38,7 @@
 
   let pageDropdownEl: HTMLElement;
   let hiddenEl: HTMLInputElement; // needed to allow the inputEl's event to be cancelled
+  let pageChangeListener: ((e: Event) => void) | null = null;
 
   // hooks
 
@@ -70,7 +71,13 @@
       console.error("Missing pageDropdownEl");
       return;
     }
-    pageDropdownEl.addEventListener("_change", (e: Event) => {
+
+    if (pageChangeListener) {
+      pageDropdownEl.removeEventListener("_change", pageChangeListener);
+      pageChangeListener = null;
+    }
+
+    pageChangeListener = (e: Event) => {
       const ce = e as CustomEvent;
       const page = Number.parseInt(ce.detail.value);
       e.stopPropagation();
@@ -81,7 +88,9 @@
           detail: { page },
         }),
       );
-    });
+    };
+
+    pageDropdownEl.addEventListener("_change", pageChangeListener);
   }
 </script>
 
