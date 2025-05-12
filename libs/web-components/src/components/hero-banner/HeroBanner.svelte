@@ -27,7 +27,7 @@
   "
 >
   <goa-page-block width={maxcontentwidth || "full"}>
-    <h1>{heading}</h1>
+    <goa-text as="h1" mb="none" mt="none">{heading}</goa-text>
     <div class="goa-hero-banner-content" role="note">
       <slot />
     </div>
@@ -75,11 +75,6 @@
     background-position: center;
     background-repeat: no-repeat;
     color: var(--hero-banner-text-color, var(--goa-color-text-light));
-  }
-
-  h1 {
-    font: var(--goa-hero-banner-heading);
-    margin: 0;
   }
 
   .goa-hero-banner-content {
