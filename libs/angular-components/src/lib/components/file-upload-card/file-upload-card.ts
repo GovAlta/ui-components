@@ -1,5 +1,15 @@
-import { GoabFileUploadOnCancelDetail, GoabFileUploadOnDeleteDetail } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+  GoabFileUploadOnCancelDetail,
+  GoabFileUploadOnDeleteDetail,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  numberAttribute,
+} from "@angular/core";
 
 @Component({
   standalone: true,
@@ -15,13 +25,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output } from "
     (_delete)="_onDelete()"
   >
   </goa-file-upload-card>`,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFileUploadCard {
   @Input({ required: true }) filename!: string;
-  @Input() size?: number;
+  @Input({ transform: numberAttribute }) size?: number;
   @Input() type?: string;
-  @Input() progress?: number;
+  @Input({ transform: numberAttribute }) progress?: number;
   @Input() error?: string;
   @Input() testId?: string;
 
@@ -29,10 +39,10 @@ export class GoabFileUploadCard {
   @Output() onDelete = new EventEmitter<GoabFileUploadOnDeleteDetail>();
 
   _onCancel() {
-    this.onCancel.emit({ filename: this.filename })
+    this.onCancel.emit({ filename: this.filename });
   }
 
   _onDelete() {
-    this.onDelete.emit({ filename: this.filename })
+    this.onDelete.emit({ filename: this.filename });
   }
 }
