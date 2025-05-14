@@ -1,14 +1,11 @@
-import {
-  GoabDropdownOnChangeDetail,
-  GoabIconType,
-  Spacing,
-} from "@abgov/ui-components-common";
+import { GoabDropdownOnChangeDetail, GoabIconType } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
   EventEmitter,
   Input,
   Output,
+  booleanAttribute,
   forwardRef,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
@@ -58,11 +55,11 @@ export class GoabDropdown extends GoabControlValueAccessor {
   @Input() name?: string;
   @Input() ariaLabel?: string;
   @Input() ariaLabelledBy?: string;
-  @Input() filterable?: boolean;
+  @Input({ transform: booleanAttribute }) filterable?: boolean;
   @Input() leadingIcon?: GoabIconType;
   @Input() maxHeight?: string;
-  @Input() multiselect?: boolean;
-  @Input() native?: boolean;
+  @Input({ transform: booleanAttribute }) multiselect?: boolean;
+  @Input({ transform: booleanAttribute }) native?: boolean;
   @Input() placeholder?: string;
   @Input() width?: string;
   /***

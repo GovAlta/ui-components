@@ -1,4 +1,9 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  booleanAttribute,
+} from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -22,6 +27,6 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabDetails extends GoabBaseComponent {
   @Input({ required: true }) heading!: string;
-  @Input() open?: boolean;
+  @Input({ transform: booleanAttribute }) open?: boolean;
   @Input() maxWidth?: string;
 }

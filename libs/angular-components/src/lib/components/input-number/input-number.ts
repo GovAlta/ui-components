@@ -16,6 +16,8 @@ import {
   Output,
   forwardRef,
   OnInit,
+  booleanAttribute,
+  numberAttribute,
 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -77,25 +79,25 @@ export class GoabInputNumber implements ControlValueAccessor, OnInit {
   @Input() type: GoabInputType = "number";
   @Input() name?: string;
   @Input() id?: string;
-  @Input() debounce?: number;
-  @Input() disabled?: boolean;
+  @Input({ transform: numberAttribute }) debounce?: number;
+  @Input({ transform: booleanAttribute }) disabled?: boolean;
   @Input() autoCapitalize?: GoabInputAutoCapitalize;
   @Input() placeholder?: string;
   @Input() leadingIcon?: GoabIconType;
   @Input() trailingIcon?: GoabIconType;
   @Input() variant?: string;
-  @Input() focused?: boolean;
-  @Input() readonly?: boolean;
-  @Input() error?: boolean;
+  @Input({ transform: booleanAttribute }) focused?: boolean;
+  @Input({ transform: booleanAttribute }) readonly?: boolean;
+  @Input({ transform: booleanAttribute }) error?: boolean;
   @Input() width?: string;
   @Input() prefix?: string;
   @Input() suffix?: string;
   @Input() testId?: string;
   @Input() ariaLabel?: string;
-  @Input() maxLength?: number;
+  @Input({ transform: numberAttribute }) maxLength?: number;
   @Input() min?: string | number;
   @Input() max?: string | number;
-  @Input() step?: number;
+  @Input({ transform: numberAttribute }) step?: number;
   @Input() ariaLabelledBy?: string;
   @Input() mt?: Spacing;
   @Input() mr?: Spacing;

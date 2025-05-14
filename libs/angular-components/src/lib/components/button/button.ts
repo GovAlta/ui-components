@@ -10,6 +10,7 @@ import {
   EventEmitter,
   Input,
   Output,
+  booleanAttribute,
 } from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
@@ -44,7 +45,7 @@ export class GoabButton extends GoabBaseComponent {
   @Input() type?: GoabButtonType = "primary";
   @Input() size?: GoabButtonSize;
   @Input() variant?: GoabButtonVariant;
-  @Input() disabled?: boolean;
+  @Input({ transform: booleanAttribute }) disabled?: boolean;
   @Input() leadingIcon?: GoabIconType;
   @Input() trailingIcon?: GoabIconType;
   @Input() width?: string;

@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, numberAttribute } from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -20,6 +20,6 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabCard extends GoabBaseComponent {
-  @Input() elevation?: number;
+  @Input({ transform: numberAttribute }) elevation?: number;
   @Input() width?: string;
 }

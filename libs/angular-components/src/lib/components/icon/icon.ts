@@ -1,5 +1,11 @@
 import { GoabIconSize, GoabIconTheme, GoabIconType } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  booleanAttribute,
+  numberAttribute,
+} from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -29,9 +35,9 @@ export class GoabIcon extends GoabBaseComponent {
   @Input({ required: true }) type!: GoabIconType;
   @Input() size?: GoabIconSize = "medium";
   @Input() theme?: GoabIconTheme = "outline";
-  @Input() inverted?: boolean;
+  @Input({ transform: booleanAttribute }) inverted?: boolean;
   @Input() fillColor?: string;
-  @Input() opacity?: number;
+  @Input({ transform: numberAttribute }) opacity?: number;
   @Input() title?: string;
   @Input() ariaLabel?: string;
 }
