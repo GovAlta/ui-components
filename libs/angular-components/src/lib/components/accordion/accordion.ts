@@ -9,6 +9,7 @@ import {
   TemplateRef,
   Output,
   EventEmitter,
+  booleanAttribute,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
@@ -43,7 +44,7 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabAccordion extends GoabBaseComponent {
   @Input() heading?: string;
   @Input() secondaryText?: string;
-  @Input() open?: boolean;
+  @Input({ transform: booleanAttribute }) open?: boolean;
   @Input() headingSize?: GoabAccordionHeadingSize;
   @Input() headingContent!: TemplateRef<any>;
   @Input() maxWidth?: string;

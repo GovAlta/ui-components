@@ -9,7 +9,9 @@ import {
   EventEmitter,
   Input,
   Output,
+  booleanAttribute,
   forwardRef,
+  numberAttribute,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
@@ -53,8 +55,8 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabTextArea extends GoabControlValueAccessor {
   @Input() name?: string;
   @Input() placeholder?: string;
-  @Input() rows?: number;
-  @Input() readOnly?: boolean;
+  @Input({ transform: numberAttribute }) rows?: number;
+  @Input({ transform: booleanAttribute }) readOnly?: boolean;
   @Input() width?: string;
   @Input() ariaLabel?: string;
   @Input() countBy?: GoabTextAreaCountBy = "";
