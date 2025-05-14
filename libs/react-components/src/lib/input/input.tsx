@@ -195,7 +195,7 @@ export function GoAInput({
     const keypressListener = (e: unknown) => {
       const { name, value, key } = (e as CustomEvent).detail;
       onKeyPress?.(name, value, key);
-    }
+    };
 
     current.addEventListener("_change", changeListener);
     current.addEventListener("_trailingIconClick", clickListener);
@@ -334,13 +334,17 @@ export function GoAInputDateTime({
   value,
   min = "",
   max = "",
+  step,
   ...props
 }: GoADateInputProps): JSX.Element {
+  const formatString = step === 1 ? "yyyy-MM-dd'T'HH:mm:ss" : "yyyy-MM-dd'T'HH:mm";
+
   return (
     <GoAInput
       {...props}
+      step={step}
       onChange={onDateChangeHandler(props.onChange)}
-      value={toString(value, "yyyy-MM-dd'T'HH:mm")}
+      value={toString(value, formatString)}
       type="datetime-local"
     />
   );
