@@ -7,6 +7,7 @@ import {
   Output,
   forwardRef,
   TemplateRef,
+  booleanAttribute,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { NgTemplateOutlet } from "@angular/common";
@@ -50,7 +51,7 @@ import { GoabControlValueAccessor } from "../base.component";
 })
 export class GoabCheckbox extends GoabControlValueAccessor {
   @Input() name?: string;
-  @Input() checked?: boolean;
+  @Input({ transform: booleanAttribute }) checked?: boolean;
   @Input() text?: string;
   // ** NOTE: can we just use the base component for this?
   @Input() override value?: string | number | boolean;

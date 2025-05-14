@@ -1,5 +1,5 @@
 import { Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, numberAttribute } from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -19,5 +19,5 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPages extends GoabBaseComponent {
-  @Input() current?: number;
+  @Input({ transform: numberAttribute }) current?: number;
 }

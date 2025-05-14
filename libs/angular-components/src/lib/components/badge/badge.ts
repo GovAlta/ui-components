@@ -1,5 +1,10 @@
 import { GoabBadgeType } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  booleanAttribute,
+} from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -20,11 +25,17 @@ import { GoabBaseComponent } from "../base.component";
     </goa-badge>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  styles: [`:host { display: contents; }`],
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+    `,
+  ],
 })
 export class GoabBadge extends GoabBaseComponent {
   @Input() type?: GoabBadgeType;
   @Input() content?: string;
-  @Input() icon?: boolean;
+  @Input({ transform: booleanAttribute }) icon?: boolean;
   @Input() ariaLabel?: string;
 }

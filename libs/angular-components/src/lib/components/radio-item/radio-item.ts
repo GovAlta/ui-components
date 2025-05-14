@@ -1,4 +1,10 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  TemplateRef,
+  booleanAttribute,
+} from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
@@ -36,9 +42,9 @@ export class GoabRadioItem extends GoabBaseComponent {
   @Input() name?: string;
   @Input() description!: string | TemplateRef<any>;
   @Input() ariaLabel?: string;
-  @Input() disabled?: boolean;
-  @Input() checked?: boolean;
-  @Input() error?: boolean;
+  @Input({ transform: booleanAttribute }) disabled?: boolean;
+  @Input({ transform: booleanAttribute }) checked?: boolean;
+  @Input({ transform: booleanAttribute }) error?: boolean;
   @Input() maxWidth?: string;
 
   getDescriptionAsString(): string {
