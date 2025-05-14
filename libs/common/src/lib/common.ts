@@ -987,3 +987,7 @@ export type GoabFormOnStateChange = {
 export type GoabDrawerPosition = "bottom" | "left" | "right" | undefined;
 export type GoabDrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw";
 export type GoabDrawerSize = `${number}${GoabDrawerSizeUnit}` | undefined;
+
+export type GoabSnackbarType = "basic" | "success" | "failure";
+export type GoabSnackbarVerticalPosition = "top" | "bottom";
+export type GoabSnackbarHorizontalPosition = "left" | "center" | "right";

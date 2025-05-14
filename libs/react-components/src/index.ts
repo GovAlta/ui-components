@@ -48,6 +48,7 @@ export * from "./lib/side-menu-group/side-menu-group";
 export * from "./lib/side-menu-heading/side-menu-heading";
 export * from "./lib/side-menu/side-menu";
 export * from "./lib/skeleton/skeleton";
+export * from "./lib/snackbar/snackbar";
 export * from "./lib/spacer/spacer";
 export * from "./lib/spinner/spinner";
 export * from "./lib/table/table";

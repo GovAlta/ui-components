@@ -65,6 +65,7 @@ export { default as SideMenu } from "./components/side-menu/SideMenu.svelte";
 export { default as SideMenuGroup } from "./components/side-menu-group/SideMenuGroup.svelte";
 export { default as SideMenuHeading } from "./components/side-menu-heading/SideMenuHeading.svelte";
 export { default as Skeleton } from "./components/skeleton/Skeleton.svelte";
+export { default as Snackbar } from "./components/snackbar/Snackbar.svelte";
 export { default as Spacer } from "./components/spacer/Spacer.svelte";
 export { default as Spinner } from "./components/spinner/Spinner.svelte";
 export { default as Tab } from "./components/tab/Tab.svelte";
