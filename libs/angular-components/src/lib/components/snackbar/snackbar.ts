@@ -1,4 +1,11 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  TemplateRef,
+  booleanAttribute,
+  numberAttribute,
+} from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 import {
   GoabSnackbarType,
@@ -17,7 +24,7 @@ import {
       [attr.duration]="duration"
       [attr.progress]="progress"
       [attr.testid]="testId"
-      [attr.visible]="visible"
+      [visible]="visible"
       [attr.verticalposition]="verticalPosition"
       [attr.horizontalposition]="horizontalPosition"
       [attr.mt]="mt"
@@ -35,10 +42,10 @@ import {
 })
 export class GoabSnackbar {
   @Input() type?: GoabSnackbarType;
-  @Input() duration?: number = 4000;
-  @Input() progress?: number = -1;
+  @Input({ transform: numberAttribute }) duration?: number = 4000;
+  @Input({ transform: numberAttribute }) progress?: number = -1;
   @Input() testId?: string;
-  @Input() visible?: boolean = false;
+  @Input({ transform: booleanAttribute }) visible?: boolean = false;
   @Input() verticalPosition?: GoabSnackbarVerticalPosition = "bottom";
   @Input() horizontalPosition?: GoabSnackbarHorizontalPosition = "left";
   @Input() actions!: TemplateRef<any>;
