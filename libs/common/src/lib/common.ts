@@ -14,6 +14,10 @@ export type GoabInputOnChangeDetail<T = string> = {
 export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
 export type GoaInputOnBlurDetail<T = string> = GoabInputOnChangeDetail<T>;
 
+export type GoabMenuButtonOnActionDetail = {
+  action: string;
+}
+
 export type GoabInputAutoCapitalize =
   | "on"
   | "off"
@@ -123,7 +127,7 @@ export type GoabCalloutAriaLive = "off" | "polite" | "assertive";
 export type GoabCalloutIconTheme = "outline" | "filled";
 
 // Button
-export type GoabButtonType = "primary" | "submit" | "secondary" | "tertiary" | "start";
+export type GoabButtonType = "primary" | "submit" | "secondary" | "tertiary" | "start" | "blank";
 
 export type GoabButtonSize = "compact" | "normal";
 export type GoabButtonVariant = "normal" | "destructive" | "inverse";

@@ -1,13 +1,20 @@
-<svelte:options customElement="goa-block" />
+<svelte:options customElement={{
+  tag: "goa-block",
+  props: {
+    minWidth: { type: "String", attribute: "min-width"},
+  }
+}} />
 
 <script lang="ts">
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
+  import { style, styles } from "../../common/utils";
 
   export let gap: Spacing = "m";
   export let direction: "row" | "column" = "row";
   export let alignment: "center" | "start" | "end" | "normal" = "normal";
   export let testid: string = "";
+  export let minWidth: string = "";
 
   $: _alignment =
     alignment === "start"
@@ -28,10 +35,13 @@
 <div
   class="block"
   style={`
-    ${calculateMargin(mt, mr, mb, ml)};
-    --gap: var(--goa-space-${gap});
-    --alignment: ${_alignment};
-    --direction: ${direction};
+    ${calculateMargin(mt, mr, mb, ml)}
+    ${styles(
+      style("min-width", minWidth),
+      style("gap", gap),
+      style("align-items", _alignment),
+      style("flex-direction", direction),
+    )}
   `}
   data-testid={testid}
 >
@@ -45,5 +55,4 @@
     align-items: var(--alignment);
     gap: var(--gap);
   }
-
 </style>

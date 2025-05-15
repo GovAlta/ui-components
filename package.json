@@ -11,6 +11,8 @@
     "build:prod": "nx run-many -t build --all --prod --exclude=apps/* --exclude=playground/*",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "pretest:headless": "npx nx run common:build && npx nx run web-components:build && npx nx run react-components:build",
+    "test:unit:watch": "vitest --project=*-unit",
+    "test:browser:watch": "vitest --project=*-headless",
     "test:watch": "vitest --project=*-unit --project=*-browser",
     "test:watch:headless": "vitest --project=*-unit --project=*-headless",
     "test:angular": "nx test angular-components",

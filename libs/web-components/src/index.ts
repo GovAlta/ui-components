@@ -51,6 +51,8 @@ export { default as Input } from "./components/input/Input.svelte";
 export { default as Link } from "./components/link/Link.svelte";
 export { default as LinkButton } from "./components/link-button/LinkButton.svelte";
 export { default as MicrositeHeader } from "./components/microsite-header/MicrositeHeader.svelte";
+export { default as MenuButton } from "./components/menu-button/MenuButton.svelte";
+export { default as MenuAction } from "./components/menu-button/MenuAction.svelte";
 export { default as Modal } from "./components/modal/Modal.svelte";
 export { default as Notification } from "./components/notification/Notification.svelte";
 export { default as OneColumnLayout } from "./layouts/one-column-layout/OneColumnLayout.svelte";
