@@ -21,15 +21,13 @@ https://www.figma.com/design/pMvlCYzvrNw63lD5D6JpKA/Component---Data-Card-and-Da
 - children components exist to allow
 
 ```html
-<data-grid>
-  <data-grid-item>
-    <data-grid-value name="first-name" value="Bob" />
-    <data-grid-value name="last-name" value="Smith" />
-    <data-grid-actions>
-      <goa-button action="delete">Delete</goa-button>
-      <goa-button action="edit">Edit</goa-button>
-    </data-grid-actions>
-
-  </data-grid-item>
-</data-grid>
+<goa-data-grid>
+  <goa-data-grid-row selectable>
+    <goa-data-grid-item name="first-name" value="Bob" />
+    <goa-data-grid-item name="last-name" value="Smith" />
+    
+    <goa-data-grid-action action="delete" action-arg={id} label="Delete"></goa-data-grid-action>
+    <goa-data-grid-action action="edit" action-arg={id} label="Edit"></goa-data-grid-action>
+  </goa-data-grid-row>
+</goa-data-grid>
 ````
