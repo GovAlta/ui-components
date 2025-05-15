@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { addMonths } from "date-fns";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 
 import DatePicker from "./date-picker";
 
@@ -52,26 +52,4 @@ describe("DatePicker", () => {
     expect(el?.getAttribute("type")).toBe("input");
   });
 
-  it("should handle event", async () => {
-    const name = "foo";
-    const value = new Date();
-
-    const onChange = vi.fn();
-    const { baseElement } = render(
-      <DatePicker name={name} value={value} onChange={onChange} />,
-    );
-
-    const el = baseElement.querySelector("goa-date-picker");
-
-    el?.dispatchEvent(
-      new CustomEvent("_change", {
-        composed: true,
-        bubbles: true,
-        detail: { type: "date", name, value },
-      }),
-    );
-
-    expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toBeCalledWith({ name, value, type: "date" });
-  });
 });

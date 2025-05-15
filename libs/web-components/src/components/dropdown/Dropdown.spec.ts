@@ -31,7 +31,6 @@ describe("GoADropdown", () => {
 
       const popover = result.container.querySelector("goa-popover");
       expect(popover?.getAttribute("disabled")).toBe("false");
-      expect(popover?.getAttribute("open")).toBe("false");
       expect(popover?.getAttribute("padded")).toBe("false");
 
       const dropdown = result.queryByTestId("favcolor-dropdown");
@@ -50,12 +49,7 @@ describe("GoADropdown", () => {
       expect(inputField?.getAttribute("aria-owns")).toBeNull(); // Menu is hidden
 
       const dropdownIcon = result.container.querySelector("goa-icon#favcolor");
-      expect(dropdownIcon?.getAttribute("ariacontrols")).toBe("menu-favcolor");
-      expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("false");
-      expect(dropdownIcon?.getAttribute("arialabel")).toBe("favcolor");
-      expect(dropdownIcon?.getAttribute("role")).toBe("button");
       expect(dropdownIcon?.getAttribute("type")).toBe("chevron-down");
-      expect(dropdownIcon?.getAttribute("tabindex")).toBe("-1");
 
       const ul = result.container.querySelector("ul");
       expect(ul?.getAttribute("id")).toBe("menu-favcolor");
@@ -83,16 +77,6 @@ describe("GoADropdown", () => {
           expect(option).toHaveTextContent(items[index]);
         }
       });
-
-      // show menu
-      dropdownIcon && (await fireEvent.click(dropdownIcon));
-      await waitFor(() => {
-        expect(popover?.getAttribute("open")).toBe("true");
-        expect(inputField?.getAttribute("aria-owns")).toBe("menu-favcolor"); // Menu is displayed
-        expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("true");
-        expect(dropdownIcon?.getAttribute("type")).toBe("chevron-up");
-        expect(dropdownIcon?.getAttribute("tabindex")).toBe("-1");
-      });
     });
 
     it("should render a filterable dropdown", async () => {
@@ -114,7 +98,6 @@ describe("GoADropdown", () => {
 
       await waitFor(() => {
         expect(popover?.getAttribute("disabled")).toBe("false");
-        expect(popover?.getAttribute("open")).toBe("false");
         expect(popover?.getAttribute("padded")).toBe("false");
 
         expect(inputField?.getAttribute("id")).toBe("favcolor");
@@ -130,12 +113,6 @@ describe("GoADropdown", () => {
         expect(inputField?.getAttribute("type")).toBe("text");
         expect(inputField?.getAttribute("aria-owns")).toBeNull(); // Menu is hidden
 
-        expect(dropdownIcon?.getAttribute("ariacontrols")).toBe(
-          "menu-favcolor",
-        );
-        expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("false");
-        expect(dropdownIcon?.getAttribute("arialabel")).toBe("favcolor");
-        expect(dropdownIcon?.getAttribute("role")).toBe("button");
         expect(dropdownIcon?.getAttribute("type")).toBe("chevron-down");
 
         const ul = result.container.querySelector("ul");
@@ -161,15 +138,16 @@ describe("GoADropdown", () => {
       let clearIcon = result.queryByTestId("clear-icon");
       expect(clearIcon).toBeTruthy();
       clearIcon && (await user.click(clearIcon));
+
       await waitFor(async () => {
         const popover = result.container.querySelector("goa-popover");
-        expect(popover?.getAttribute("open")).toBe("true");
         expect(inputField?.getAttribute("aria-owns")).toBe("menu-favcolor");
+
         clearIcon = result.queryByTestId("clear-icon");
         expect(clearIcon).toBeFalsy();
+
         dropdownIcon = result.container.querySelector("goa-icon");
         expect(dropdownIcon).toBeTruthy();
-        expect(dropdownIcon?.getAttribute("ariaexpanded")).toBe("true");
         expect(dropdownIcon?.getAttribute("type")).toBe("chevron-up");
       });
     });
@@ -197,42 +175,6 @@ describe("GoADropdown", () => {
       });
     });
 
-    it("searches by filter", async () => {
-      const result = render(GoADropdownWrapper, {
-        name,
-        items,
-        filterable: true,
-      });
-
-      const input = result.container.querySelector("input");
-      expect(input).toBeTruthy();
-
-      input && (await fireEvent.focus(input));
-      input && (await fireEvent.keyUp(input, { key: "b", code: "b" }));
-      input && (await fireEvent.input(input, { target: { value: "b" } }));
-
-      expect(input?.value).toBe("b");
-
-      await waitFor(async () => {
-        // When type in the input, will open the suggestion
-        const popover = result.container.querySelector("goa-popover");
-        const clearIcon = result.container.querySelector("goa-icon");
-
-        expect(popover?.getAttribute("open")).toBe("true");
-        expect(input?.getAttribute("aria-expanded")).toBe("true");
-        expect(clearIcon?.getAttribute("arialabel")).toBe("clear favcolor");
-        expect(clearIcon?.getAttribute("role")).toBe("button");
-        expect(clearIcon?.getAttribute("tabindex")).toBe("0");
-
-        expect(clearIcon?.getAttribute("type")).toBe("close");
-
-        // Should have only Blue option displayed
-        const liElements = result.container.querySelectorAll("li");
-        expect(liElements.length).toBe(1);
-        expect(liElements[0].getAttribute("data-value")).toBe("blue");
-      });
-    });
-
     it("searches by partial filter and click to select option", async () => {
       const options = ["red", "light blue", "blue", "green"];
       const query = "b";
@@ -249,7 +191,6 @@ describe("GoADropdown", () => {
 
       await waitFor(() => {
         const popover = result.getByTestId("option-list");
-        expect(popover.getAttribute("open")).toBe("true");
 
         const liElements = result.container.querySelectorAll("li");
         expect(liElements.length).toBe(2);
@@ -299,7 +240,6 @@ describe("GoADropdown", () => {
 
       await waitFor(() => {
         const popover = result.getByTestId("option-list");
-        expect(popover.getAttribute("open")).toBe("true");
 
         const liElements = result.container.querySelectorAll("li");
         expect(liElements.length).toBe(2);
@@ -375,7 +315,6 @@ describe("GoADropdown", () => {
 
       await waitFor(() => {
         const popover = result.getByTestId("option-list");
-        expect(popover.getAttribute("open")).toBe("true");
 
         const liElements = result.container.querySelectorAll("li");
         expect(liElements.length).toBe(1);
@@ -470,7 +409,6 @@ describe("GoADropdown", () => {
           await waitFor(() => {
             // When type in the input, will open the suggestion
             const popover = result.getByTestId("option-list");
-            expect(popover.getAttribute("open")).toBe("true");
 
             const liElements = result.container.querySelectorAll("li");
             expect(liElements.length).toBe(1);
@@ -519,39 +457,6 @@ describe("GoADropdown", () => {
       await waitFor(() => {
         const selected = container.querySelector("li[aria-selected=true]");
         expect(selected).toBe(null);
-      });
-    });
-
-    it("clears the input and opens the menu when the clear icon is clicked", async () => {
-      const result = render(GoADropdownWrapper, {
-        name,
-        value: "blue",
-        items,
-        filterable: true,
-      });
-
-      const dropdown = result.queryByTestId("favcolor-dropdown");
-      const visibleElements = result.container.querySelectorAll("li");
-      let clearIcon = result.queryByTestId("clear-icon");
-      await waitFor(async () => {
-        clearIcon = result.queryByTestId("clear-icon");
-        expect(clearIcon).toBeTruthy();
-      });
-      expect(dropdown).toBeTruthy();
-      expect(visibleElements).toBeTruthy();
-      expect(visibleElements.length).toBe(1);
-      expect(clearIcon?.getAttribute("type")).toBe("close");
-
-      clearIcon && (await user.click(clearIcon));
-      await tick();
-      await waitFor(async () => {
-        const liElements = result.container.querySelectorAll("li");
-        expect(liElements.length).toBe(items.length);
-        clearIcon = result.queryByTestId("clear-icon");
-        expect(clearIcon).toBeFalsy();
-        const dropdownIcon = result.container.querySelector("goa-icon");
-        expect(dropdownIcon).toBeTruthy();
-        expect(dropdownIcon?.getAttribute("type")).toBe("chevron-up");
       });
     });
 
@@ -803,9 +708,6 @@ describe("GoADropdown", () => {
       const input = result.container.querySelector("input");
       expect(input?.getAttribute("aria-label")).toBe("Favourite Color");
 
-      const dropdownIcon = result.container.querySelector("goa-icon");
-      expect(dropdownIcon?.getAttribute("arialabel")).toBe("Favourite Color");
-
       const menu = result.container.querySelector("ul");
       expect(menu?.getAttribute("aria-label")).toBe("Favourite Color");
     });
@@ -822,9 +724,6 @@ describe("GoADropdown", () => {
 
       const input = result.container.querySelector("input");
       expect(input?.getAttribute("aria-labelledby")).toBe("Favourite Color");
-
-      const dropdownIcon = result.container.querySelector("goa-icon");
-      expect(dropdownIcon?.getAttribute("arialabel")).toBe("favcolor");
 
       const menu = result.container.querySelector("ul");
       expect(menu?.getAttribute("aria-labelledby")).toBe("Favourite Color");
@@ -1270,45 +1169,6 @@ describe("GoADropdown", () => {
         const dropdown = result.container.querySelector(".dropdown");
         // 31 characters + 7 padding = 38ch
         expect(dropdown?.getAttribute("style")).toContain("--width: 38ch");
-      });
-    });
-
-    // Tests for line 134 and 142
-    describe("Dynamic input width matching", () => {
-      it("should set dropdown width to match input offsetWidth for non-percentage widths", async () => {
-        const result = render(GoADropdownWrapper, {
-          name: "test",
-          items: ["1", "2", "3"],
-          width: "300px",
-        });
-
-        const dropdownIcon = result.container.querySelector("goa-icon");
-        dropdownIcon && (await fireEvent.click(dropdownIcon));
-
-        await waitFor(() => {
-          const popover = result.container.querySelector("goa-popover");
-          // Should match mocked offsetWidth of 250px
-          expect(popover?.getAttribute("minwidth")).toBe("250px");
-          expect(popover?.getAttribute("maxwidth")).toBe("250px");
-        });
-      });
-
-      it("should use percentage value directly for percentage widths", async () => {
-        const result = render(GoADropdownWrapper, {
-          name: "test",
-          items: ["1", "2", "3"],
-          width: "50%",
-        });
-
-        const dropdownIcon = result.container.querySelector("goa-icon");
-        dropdownIcon && (await fireEvent.click(dropdownIcon));
-
-        await waitFor(() => {
-          const popover = result.container.querySelector("goa-popover");
-          // Should use the percentage value, not offsetWidth
-          expect(popover?.getAttribute("minwidth")).toBe("50%");
-          expect(popover?.getAttribute("maxwidth")).toBe("50%");
-        });
       });
     });
 

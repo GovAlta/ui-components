@@ -60,6 +60,7 @@
 
   const toggleMenu = () => (_showMenu = !_showMenu);
   const hideMenu = () => (_showMenu = false);
+  const showMenu = () => (_showMenu = true);
 
   const dispatchMenuClick = () => {
     if (_hasMenuClickHandler) {
@@ -232,7 +233,6 @@
       <goa-popover
         class="app-header-popover"
         context="menu-toggle-area"
-        open={_showMenu}
         minwidth="16rem"
         focusborderwidth="0"
         borderradius="4"
@@ -241,11 +241,9 @@
         height="full"
         position="below"
         on:_close={hideMenu}
+        on:_open={showMenu}
       >
-        <div
-          slot="target"
-          class="menu-toggle-area"
-        >
+        <div slot="target" class="menu-toggle-area">
           <button
             on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu}
             data-testid="menu-toggle"
@@ -433,13 +431,19 @@
   /* Menu items in collapsed menu -- Current */
   :global(::slotted(a.inside-collapse-menu.current)) {
     color: var(--goa-app-header-color-text-nav-item-in-menu-current);
-    background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current) !important;
+    background-color: var(
+      --goa-app-header-color-bg-nav-item-in-menu-current
+    ) !important;
   }
 
   /* Menu items in collapsed menu -- Current -- Hover */
   :global(::slotted(a.inside-collapse-menu.current:hover)) {
-    color: var(--goa-app-header-color-text-nav-item-in-menu-current-hover) !important;
-    background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current-hover) !important;
+    color: var(
+      --goa-app-header-color-text-nav-item-in-menu-current-hover
+    ) !important;
+    background-color: var(
+      --goa-app-header-color-bg-nav-item-in-menu-current-hover
+    ) !important;
   }
 
   /*------------------------------------------------*/
@@ -654,7 +658,9 @@
 
   /* Menu button (for collapsed menu) */
   .tablet .menu-toggle-area {
-    padding-left: var(--goa-app-header-space-btw-service-name-nav-items-in-menu); /* Space between service name and menu button */
+    padding-left: var(
+      --goa-app-header-space-btw-service-name-nav-items-in-menu
+    ); /* Space between service name and menu button */
     height: 100%;
     display: flex;
     align-items: end;
@@ -663,7 +669,9 @@
   /* Link menu items in collapsed menu --Focus */
   :global(::slotted(a.interactive:focus-visible)) {
     color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
-    background-color: var(--goa-app-header-nav-color-bg-link-item-in-menu-focus) !important;
+    background-color: var(
+      --goa-app-header-nav-color-bg-link-item-in-menu-focus
+    ) !important;
     border-top: none !important;
     border-bottom: none;
   }

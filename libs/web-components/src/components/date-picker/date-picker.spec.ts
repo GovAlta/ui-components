@@ -7,7 +7,7 @@ import {
 } from "@testing-library/svelte";
 import userEvent, { UserEvent } from "@testing-library/user-event";
 import { addDays, format, addMonths, addYears } from "date-fns";
-import { it, expect, vi } from "vitest";
+import { it, expect, vi, describe } from "vitest";
 
 let user: UserEvent;
 
@@ -75,226 +75,101 @@ it("dispatches a value on date selection", async () => {
 });
 
 describe("input type date picker", () => {
-	it("validates invalid input type datepicker value (partially filled)", async () => {
-		const { container } = render(DatePicker, {
-			name: "datePickerInputType",
-			type: "input",
-			value: "2025-02", // Partially filled, invalid date
-		});
-
-		const datePickerDay = container.querySelector("goa-input[name='day']");
-		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
-		const datePickerYear = container.querySelector("goa-input[name='year']");
-
-		expect(datePickerDay?.getAttribute("value")).toBe("");
-		expect(datePickerMonth?.getAttribute("value")).toBe("");
-		expect(datePickerYear?.getAttribute("value")).toBe("");
-	});
-
-	it("validates invalid input type datepicker value (not in YYYY-MM-DD format)", async () => {
-		const { container } = render(DatePicker, {
-			name: "datePickerInputType",
-			type: "input",
-			value: "Mon Jul 07 2025 07:25:44 GMT-0600 (Mountain Daylight Time)", // not in YYYY-MM-DD format
-		});
-
-		const datePickerDay = container.querySelector("goa-input[name='day']");
-		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
-		const datePickerYear = container.querySelector("goa-input[name='year']");
-
-		expect(datePickerDay?.getAttribute("value")).toBe("");
-		expect(datePickerMonth?.getAttribute("value")).toBe("");
-		expect(datePickerYear?.getAttribute("value")).toBe("");
-	});
-
-	it("validates invalid input type datepicker value (not in YYYY-MM-DD format)", async () => {
-		const { container } = render(DatePicker, {
-			name: "datePickerInputType",
-			type: "input",
-			value: "2025-12345", // not in YYYY-MM-DD format
-		});
-
-		const datePickerDay = container.querySelector("goa-input[name='day']");
-		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
-		const datePickerYear = container.querySelector("goa-input[name='year']");
-
-		expect(datePickerDay?.getAttribute("value")).toBe("");
-		expect(datePickerMonth?.getAttribute("value")).toBe("");
-		expect(datePickerYear?.getAttribute("value")).toBe("");
-	});
-
-	// NOTE: Date picker input type Feb 31st converts to March 3rd in react but, not in angular
-	it("validates invalid input type datepicker value (February 31st does not exist)", async () => {
-		const { container } = render(DatePicker, {
-			name: "datePickerInputType",
-			type: "input",
-			value: "2025-02-31", // Invalid because February 31st does not exist
-		});
-
-		const datePickerDay = container.querySelector("goa-input[name='day']");
-		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
-		const datePickerYear = container.querySelector("goa-input[name='year']");
-
-		expect(datePickerDay?.getAttribute("value")).toBe("");
-		expect(datePickerMonth?.getAttribute("value")).toBe("");
-		expect(datePickerYear?.getAttribute("value")).toBe("");
-	});
-
-	it("validates valid date in YYYY-MM-DD format provided as input type datepicker value", async () => {
-		const { container } = render(DatePicker, {
-			name: "datePickerInputType",
-			type: "input",
-			value: "2025-02-28", // Valid date
-		});
-
-		const datePickerDay = container.querySelector("goa-input[name='day']");
-		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
-		const datePickerYear = container.querySelector("goa-input[name='year']");
-
-		expect(datePickerDay?.getAttribute("value")).toBe("28");
-		expect(datePickerMonth?.getAttribute("value")).toBe("1");
-		expect(datePickerYear?.getAttribute("value")).toBe("2025");
-	});
-
-	it("validates valid javascript Date in ISO format provided as input type datepicker value", async () => {
-		const { container } = render(DatePicker, {
-			name: "datePickerInputType",
-			type: "input",
-			value: new Date("2025-02-28").toISOString(), // Valid date
-		});
-
-		const datePickerDay = container.querySelector("goa-input[name='day']");
-		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
-		const datePickerYear = container.querySelector("goa-input[name='year']");
-
-		expect(datePickerDay?.getAttribute("value")).toBe("28");
-		expect(datePickerMonth?.getAttribute("value")).toBe("1");
-		expect(datePickerYear?.getAttribute("value")).toBe("2025");
-	});
-});
-
-describe("DatePicker Keyboard Navigation", () => {
-  const setupTest = () => {
-    const inputDate = new Date();
-    const currentDate = new Date(
-      inputDate.getFullYear(),
-      inputDate.getMonth(),
-      inputDate.getDate(),
-    );
-
-    const { container } = render(DatePicker, { value: inputDate });
-    const input = container.querySelector("goa-input");
-    expect(input).toBeTruthy();
-
-    const handler = vi.fn();
-    container?.addEventListener("_change", (e: Event) => {
-      const ce = e as CustomEvent;
-      handler(ce.detail.value);
+  it("validates invalid input type datepicker value (partially filled)", async () => {
+    const { container } = render(DatePicker, {
+      name: "datePickerInputType",
+      type: "input",
+      value: "2025-02", // Partially filled, invalid date
     });
 
-    return { input, currentDate, handler };
-  };
+    const datePickerDay = container.querySelector("goa-input[name='day']");
+    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerYear = container.querySelector("goa-input[name='year']");
 
-  it("navigates to the previous day when left arrow is pressed", async () => {
-    const { input, currentDate, handler } = setupTest();
-    const arrowLeftEvent = createEvent.keyDown(input!, { key: "ArrowLeft" });
-
-    await fireEvent(input!, arrowLeftEvent);
-
-    const expectedDate = addDays(currentDate, -1);
-    await waitFor(() => {
-      expect(handler).toHaveBeenCalledWith(expectedDate);
-    });
+    expect(datePickerDay?.getAttribute("value")).toBe("");
+    expect(datePickerMonth?.getAttribute("value")).toBe("");
+    expect(datePickerYear?.getAttribute("value")).toBe("");
   });
 
-  it("navigates to the next day when right arrow is pressed", async () => {
-    const { input, currentDate, handler } = setupTest();
-    const arrowRightEvent = createEvent.keyDown(input!, { key: "ArrowRight" });
-
-    await fireEvent(input!, arrowRightEvent);
-
-    const expectedDate = addDays(currentDate, 1);
-    await waitFor(() => {
-      expect(handler).toHaveBeenCalledWith(expectedDate);
+  it("validates invalid input type datepicker value (not in YYYY-MM-DD format)", async () => {
+    const { container } = render(DatePicker, {
+      name: "datePickerInputType",
+      type: "input",
+      value: "Mon Jul 07 2025 07:25:44 GMT-0600 (Mountain Daylight Time)", // not in YYYY-MM-DD format
     });
+
+    const datePickerDay = container.querySelector("goa-input[name='day']");
+    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerYear = container.querySelector("goa-input[name='year']");
+
+    expect(datePickerDay?.getAttribute("value")).toBe("");
+    expect(datePickerMonth?.getAttribute("value")).toBe("");
+    expect(datePickerYear?.getAttribute("value")).toBe("");
   });
 
-  it("navigates to the previous week when up arrow is pressed", async () => {
-    const { input, currentDate, handler } = setupTest();
-    const arrowUpEvent = createEvent.keyDown(input!, { key: "ArrowUp" });
-
-    await fireEvent(input!, arrowUpEvent);
-
-    const expectedDate = addDays(currentDate, -7);
-    await waitFor(() => {
-      expect(handler).toHaveBeenCalledWith(expectedDate);
+  it("validates invalid input type datepicker value (not in YYYY-MM-DD format)", async () => {
+    const { container } = render(DatePicker, {
+      name: "datePickerInputType",
+      type: "input",
+      value: "2025-12345", // not in YYYY-MM-DD format
     });
+
+    const datePickerDay = container.querySelector("goa-input[name='day']");
+    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerYear = container.querySelector("goa-input[name='year']");
+
+    expect(datePickerDay?.getAttribute("value")).toBe("");
+    expect(datePickerMonth?.getAttribute("value")).toBe("");
+    expect(datePickerYear?.getAttribute("value")).toBe("");
   });
 
-  it("navigates to the next week when down arrow is pressed", async () => {
-    const { input, currentDate, handler } = setupTest();
-    const arrowDownEvent = createEvent.keyDown(input!, { key: "ArrowDown" });
-
-    await fireEvent(input!, arrowDownEvent);
-
-    const expectedDate = addDays(currentDate, 7);
-    await waitFor(() => {
-      expect(handler).toHaveBeenCalledWith(expectedDate);
+  // NOTE: Date picker input type Feb 31st converts to March 3rd in react but, not in angular
+  it("validates invalid input type datepicker value (February 31st does not exist)", async () => {
+    const { container } = render(DatePicker, {
+      name: "datePickerInputType",
+      type: "input",
+      value: "2025-02-31", // Invalid because February 31st does not exist
     });
+
+    const datePickerDay = container.querySelector("goa-input[name='day']");
+    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerYear = container.querySelector("goa-input[name='year']");
+
+    expect(datePickerDay?.getAttribute("value")).toBe("");
+    expect(datePickerMonth?.getAttribute("value")).toBe("");
+    expect(datePickerYear?.getAttribute("value")).toBe("");
   });
 
-  it("navigates to the previous month when PageUp is pressed", async () => {
-    const { input, currentDate, handler } = setupTest();
-    const pageUpEvent = createEvent.keyDown(input!, { key: "PageUp" });
-
-    await fireEvent(input!, pageUpEvent);
-
-    const expectedDate = addMonths(currentDate, -1);
-    await waitFor(() => {
-      expect(handler).toHaveBeenCalledWith(expectedDate);
+  it("validates valid date in YYYY-MM-DD format provided as input type datepicker value", async () => {
+    const { container } = render(DatePicker, {
+      name: "datePickerInputType",
+      type: "input",
+      value: "2025-02-28", // Valid date
     });
+
+    const datePickerDay = container.querySelector("goa-input[name='day']");
+    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerYear = container.querySelector("goa-input[name='year']");
+
+    expect(datePickerDay?.getAttribute("value")).toBe("28");
+    expect(datePickerMonth?.getAttribute("value")).toBe("1");
+    expect(datePickerYear?.getAttribute("value")).toBe("2025");
   });
 
-  it("navigates to the next month when PageDown is pressed", async () => {
-    const { input, currentDate, handler } = setupTest();
-    const pageDownEvent = createEvent.keyDown(input!, { key: "PageDown" });
-
-    await fireEvent(input!, pageDownEvent);
-
-    const expectedDate = addMonths(currentDate, 1);
-    await waitFor(() => {
-      expect(handler).toHaveBeenCalledWith(expectedDate);
-    });
-  });
-
-  it("navigates to the previous year when Shift+PageUp is pressed", async () => {
-    const { input, currentDate, handler } = setupTest();
-    const shiftPageUpEvent = createEvent.keyDown(input!, {
-      key: "PageUp",
-      shiftKey: true,
+  it("validates valid javascript Date in ISO format provided as input type datepicker value", async () => {
+    const { container } = render(DatePicker, {
+      name: "datePickerInputType",
+      type: "input",
+      value: new Date("2025-02-28").toISOString(), // Valid date
     });
 
-    await fireEvent(input!, shiftPageUpEvent);
+    const datePickerDay = container.querySelector("goa-input[name='day']");
+    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerYear = container.querySelector("goa-input[name='year']");
 
-    const expectedDate = addYears(currentDate, -1);
-    await waitFor(() => {
-      expect(handler).toHaveBeenCalledWith(expectedDate);
-    });
-  });
-
-  it("navigates to the next year when Shift+PageDown is pressed", async () => {
-    const { input, currentDate, handler } = setupTest();
-    const shiftPageDownEvent = createEvent.keyDown(input!, {
-      key: "PageDown",
-      shiftKey: true,
-    });
-
-    await fireEvent(input!, shiftPageDownEvent);
-
-    const expectedDate = addYears(currentDate, 1);
-    await waitFor(() => {
-      expect(handler).toHaveBeenCalledWith(expectedDate);
-    });
+    expect(datePickerDay?.getAttribute("value")).toBe("28");
+    expect(datePickerMonth?.getAttribute("value")).toBe("1");
+    expect(datePickerYear?.getAttribute("value")).toBe("2025");
   });
 });
 

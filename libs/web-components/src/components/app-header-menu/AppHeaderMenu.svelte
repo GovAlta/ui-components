@@ -286,7 +286,9 @@
   /* Secondary Menu items (in popover on menu item) --Current--Hover */
   :global(::slotted(a.current:hover)) {
     background: var(--goa-app-header-color-bg-nav-item-in-menu-current-hover);
-    color: var(--goa-app-header-color-text-nav-item-in-menu-current-hover) !important;
+    color: var(
+      --goa-app-header-color-text-nav-item-in-menu-current-hover
+    ) !important;
   }
 
   /* Menu items in collapsed menu --Interactive */
@@ -304,16 +306,22 @@
     color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
     background-color: var(--goa-app-header-color-bg-nav-item-focus);
   }
-  
+
   /* Menu items in collapsed menu --Interactive--Current */
   :global(::slotted(a.interactive.current)) {
-    color: var(--goa-app-header-color-text-nav-item-in-menu-current-hover) !important;
+    color: var(
+      --goa-app-header-color-text-nav-item-in-menu-current-hover
+    ) !important;
     background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current);
   }
   /* Menu items in collapsed menu --Interactive--Current--Hover */
   :global(::slotted(a.interactive.current:hover)) {
-    color: var(--goa-app-header-color-text-nav-item-in-menu-current-hover) !important;
-    background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current-hover);
+    color: var(
+      --goa-app-header-color-text-nav-item-in-menu-current-hover
+    ) !important;
+    background-color: var(
+      --goa-app-header-color-bg-nav-item-in-menu-current-hover
+    );
   }
 
   /* Secondary Menu items (in popover on menu item) --Tablet */
@@ -351,14 +359,16 @@
       border-bottom: none;
     }
     button.open {
-      box-shadow: var(--goa-app-header-border-top-menu-item),
+      box-shadow:
+        var(--goa-app-header-border-top-menu-item),
         var(--goa-app-header-border-bottom-menu-item);
       background: var(--goa-app-header-color-bg-nav-item-child-hover);
       color: var(--goa-app-header-color-text-nav-item-hover);
     }
     button.open:hover,
     button.open:focus-visible {
-      box-shadow: var(--goa-app-header-border-top-menu-item),
+      box-shadow:
+        var(--goa-app-header-border-top-menu-item),
         var(--goa-app-header-border-bottom-menu-item);
     }
     .heading {

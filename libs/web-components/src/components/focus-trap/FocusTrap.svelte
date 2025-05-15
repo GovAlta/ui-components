@@ -15,11 +15,10 @@
   let isShiftPressed: boolean;
   let isFirstFocus = true;
 
-
   // ========
   // Reactive
   // ========
-  $: if(open) findFirstFocusableEl();
+  $: if (open) findFirstFocusableEl();
 
   // *****
   // Hooks
@@ -34,8 +33,6 @@
 
     boundryStartEl = rootEl.querySelector("[data-tab-boundry=start]");
     boundryEndEl = rootEl.querySelector("[data-tab-boundry=end]");
-
-    findFirstFocusableEl();
   });
 
   function activateShiftState(e: KeyboardEvent) {
@@ -52,7 +49,8 @@
     const element = node as HTMLElement;
 
     if (isFirstFocus && element.getAttribute?.("data-first-focus")) return node;
-    if (isFirstFocus && element.getAttribute?.("data-ignore-focus")) return "ignore-focus";
+    if (isFirstFocus && element.getAttribute?.("data-ignore-focus"))
+      return "ignore-focus";
 
     const isTabbable =
       element.tabIndex > 0 ||
@@ -153,7 +151,7 @@
     const focusedElement = e?.target;
 
     if (focusedElement && focusedElement instanceof HTMLElement) {
-      focusedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      focusedElement.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }
 
