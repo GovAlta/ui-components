@@ -5,7 +5,14 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
-  import { dispatch, fromBoolean, receive, relay, toBoolean, announceToScreenReader } from "../../common/utils";
+  import {
+    dispatch,
+    fromBoolean,
+    receive,
+    relay,
+    toBoolean,
+    announceToScreenReader,
+  } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -190,7 +197,12 @@
     }
 
     // Announce the reveal content change to screen readers if checkbox is checked and reveal content exists
-    if ($$slots.reveal && newCheckStatus && _revealSlotEl && revealarialabel !== "") {
+    if (
+      $$slots.reveal &&
+      newCheckStatus &&
+      _revealSlotEl &&
+      revealarialabel !== ""
+    ) {
       announceToScreenReader(revealarialabel);
     }
   }
@@ -216,7 +228,11 @@
 
       // If this is a form field value change (public form)
       // relay it so the Fieldset initialize the reveal slot form field to public form state
-      if (eventDetail && eventDetail.name && typeof eventDetail.value !== 'undefined') {
+      if (
+        eventDetail &&
+        eventDetail.name &&
+        typeof eventDetail.value !== "undefined"
+      ) {
         dispatch(_rootEl, "_revealChange", eventDetail, { bubbles: true });
       }
     });
@@ -229,9 +245,9 @@
   bind:this={_rootEl}
   class="root"
   style={`
-    ${calculateMargin(mt, mr, mb, ml)}
-    max-width: ${maxwidth};
-  `}
+${calculateMargin(mt, mr, mb, ml)}
+max-width: ${maxwidth};
+`}
 >
   <label
     data-testid={testid}
@@ -306,7 +322,6 @@
     font-family: var(--goa-font-family-sans);
     display: block;
   }
-
 
   .root {
     display: block;
@@ -502,6 +517,6 @@
     border: var(--goa-checkbox-border-disabled-error);
   }
   .disabled.error .container svg {
-    fill: #F58185;
+    fill: #f58185;
   }
 </style>

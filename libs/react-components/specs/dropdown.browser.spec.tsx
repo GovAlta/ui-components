@@ -1,4 +1,5 @@
 import { render } from "vitest-browser-react";
+
 import { GoabDropdown, GoabDropdownItem } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
@@ -29,29 +30,38 @@ describe("Dropdown Component", () => {
 
       await vi.waitFor(() => {
         const popover = result.getByTestId("option-list");
-        const dropdownIcon = result.getByRole("button");
+        const dropdownIcon = result.getByTestId("chevron");
+        const inputField = result.getByRole("combobox");
 
         // popover
         expect(popover.element().getAttribute("disabled")).toBeNull();
         expect(popover.element().getAttribute("open")).toBe("false");
         expect(popover.element().getAttribute("padded")).toBeNull();
+        expect(inputField.element().getAttribute("aria-autocomplete")).toBe("list");
+        expect(inputField.element().getAttribute("aria-controls")).toBe("menu-favcolor");
+        expect(inputField.element().getAttribute("aria-expanded")).toBe("false");
+        expect(inputField.element().getAttribute("aria-disabled")).toBe("false");
+        expect(inputField.element().getAttribute("autocomplete")).toBe("off");
+        expect(inputField.element().getAttribute("name")).toBe("favcolor");
+        expect(inputField.element().getAttribute("readonly")).not.toBeNull();
+        expect(inputField.element().getAttribute("role")).toBe("combobox");
+        expect(inputField.element().getAttribute("style")).toContain("cursor: pointer");
+        expect(inputField.element().getAttribute("type")).toBe("text");
+        expect(inputField.element().getAttribute("aria-owns")).toBeNull(); // Menu is hidden
 
         // icon
-        expect(dropdownIcon.element().getAttribute("aria-controls")).toBe(
-          "menu-favcolor",
-        );
-        expect(dropdownIcon.element().getAttribute("aria-expanded")).toBe("false");
-        expect(dropdownIcon.element().getAttribute("aria-label")).toBe("favcolor");
-        expect(dropdownIcon.element().getAttribute("role")).toBe("button");
         expect(dropdownIcon.element().getAttribute("data-type")).toBe("chevron-down");
       });
     });
 
-    it("should open when clicked", async () => {
+    it("should perform action when menu item clicked", async () => {
+
+      const handleChange = vi.fn();
+
       // Setup
       const Component = () => {
         return (
-          <GoabDropdown name="favcolor" testId="dropdown" onChange={noop}>
+          <GoabDropdown name="favcolor" testId="dropdown" onChange={handleChange}>
             <GoabDropdownItem label="Red" value="red" />
             <GoabDropdownItem label="Blue" value="blue" />
             <GoabDropdownItem label="Green" value="green" />
@@ -61,31 +71,19 @@ describe("Dropdown Component", () => {
 
       const result = render(<Component />);
       const dropdown = result.getByTestId("dropdown");
+      const menuItem1 = result.getByTestId("dropdown-item-red");
 
       // Actions
 
       await dropdown.click();
+      await menuItem1.click();
 
       // Result
 
-      await vi.waitFor(() => {
-        const popover = result.getByTestId("option-list");
-        const dropdownIcon = result.getByRole("button");
-
-        // popover
-        expect(popover.element().getAttribute("disabled")).toBeNull();
-        expect(popover.element().getAttribute("open")).toBe("true");
-        expect(popover.element().getAttribute("padded")).toBeNull();
-
-        // icon
-        expect(dropdownIcon.element().getAttribute("aria-controls")).toBe(
-          "menu-favcolor",
-        );
-        expect(dropdownIcon.element().getAttribute("aria-expanded")).toBe("true");
-        expect(dropdownIcon.element().getAttribute("aria-label")).toBe("favcolor");
-        expect(dropdownIcon.element().getAttribute("role")).toBe("button");
-        expect(dropdownIcon.element().getAttribute("data-type")).toBe("chevron-up");
-      });
+      expect(handleChange).toBeCalledWith({
+        name: "favcolor",
+        value: "red",
+      })
     });
 
     describe("Width", () => {
@@ -140,7 +138,7 @@ describe("Dropdown Component", () => {
     });
 
     describe("Popover position", () => {
-      it("should display popover above when dropdown is at the bottom of the view port", async() => {
+      it("should display popover above when dropdown is at the bottom of the view port", async () => {
         const Component = () => {
           return (
             <>
@@ -164,7 +162,7 @@ describe("Dropdown Component", () => {
         await dropdown.click();
 
         await vi.waitFor(() => {
-          const lastOption =  result.getByText("Green");
+          const lastOption = result.getByText("Green");
           const dropdownRect = dropdown.element().getBoundingClientRect();
           const lastOptionRect = lastOption.element().getBoundingClientRect();
           expect(lastOptionRect.bottom).toBeLessThan(dropdownRect.top);
@@ -255,7 +253,7 @@ describe("Dropdown Component", () => {
       await vi.waitFor(() => {
         const input = result.getByRole("combobox");
         const popover = result.getByTestId("option-list");
-        const dropdownIcon = result.getByRole("button");
+        const dropdownIcon = result.getByTestId("chevron");
 
         expect(input.element().getAttribute("id")).toBe("favcolor");
         expect(input.element().getAttribute("aria-autocomplete")).toBe("list");
@@ -277,17 +275,11 @@ describe("Dropdown Component", () => {
         expect(popover.element().getAttribute("relative")).toBeFalsy();
 
         // icon
-        expect(dropdownIcon.element().getAttribute("aria-controls")).toBe(
-          "menu-favcolor",
-        );
-        expect(dropdownIcon.element().getAttribute("aria-expanded")).toBe("true");
-        expect(dropdownIcon.element().getAttribute("aria-label")).toBe("favcolor");
-        expect(dropdownIcon.element().getAttribute("role")).toBe("button");
         expect(dropdownIcon.element().getAttribute("data-type")).toBe("chevron-up");
       });
     })
 
-    it("should render a filterable dropdown", async () => {
+    it("should filter the items", async () => {
 
       // Setup
       const Component = () => {
@@ -301,20 +293,17 @@ describe("Dropdown Component", () => {
       };
 
       const result = render(<Component />);
-      const filter = result.getByRole("combobox");
+      const filter = result.getByTestId("input");
+      const itemLocator = result.getByTestId(/^dropdown-item/);
 
       // Actions
 
-      await filter.fill("blue");
-      await filter.click();
+      await userEvent.type(filter, "Blue");
 
       // Result
 
       await vi.waitFor(() => {
-        ["red", "green"].forEach((item) => {
-          const ddi= result.getByTestId(`dropdown-item-${item}`);
-          expect(ddi.elements().length).toBe(0);
-        });
+        expect(itemLocator.elements().length).toBe(1);
       })
     });
 

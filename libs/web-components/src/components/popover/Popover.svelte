@@ -3,6 +3,11 @@
     tag: "goa-popover",
     props: {
       open: { reflect: true, type: "String" },
+      disableGlobalClosePopover: {
+        reflect: true,
+        type: "Boolean",
+        attribute: "disable-global-close-popover",
+      },
     },
   }}
 />
@@ -16,6 +21,8 @@
     getSlottedChildren,
     styles,
     toBoolean,
+    dispatch,
+    isPointInRectangle,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
@@ -30,6 +37,9 @@
 
   // allows to override the default padding when content needs to be flush with boundries
   export let padded: string = "true";
+
+  // allows tabindex to be set to -1 to skip tabbing if a parent is handling events
+  export let tabindex: number = 0;
 
   /***
    * @deprecated This property has no effect and will be removed in a future version
@@ -46,14 +56,13 @@
   // **Required only to allow popover position to be customized when used within
   // other components. These props should _not_ be documented.**
 
+  export let disableGlobalClosePopover: boolean = false;
+
   // allow for outside control of whether popover is open/closed (see AppHeaderMenu)
   export let open: string = "false";
 
   // allows outside control of the `open` property ex. when used within dropdown
   export let disabled: string = "false";
-
-  // allows tabindex to be set to -1 to skip tabbing if a parent is handling events
-  export let tabindex: string = "0";
 
   // additional vertical offset that is added to popover's position
   export let voffset = "";
@@ -67,6 +76,8 @@
   // border radius of popover window
   export let borderradius = "var(--goa-border-radius-m)";
 
+  export let closeOnClickWithinBounds = false;
+
   export let filterablecontext: string = "false";
 
   // Private
@@ -75,7 +86,6 @@
   let _targetEl: HTMLElement;
   let _popoverEl: HTMLElement;
   let _focusTrapEl: HTMLElement;
-  let _initFocusedEl: HTMLElement;
   let _sectionHeight: number;
 
   // Reactive
@@ -99,25 +109,58 @@
 
   onMount(async () => {
     await tick();
+
+    // add keybinding to open the popover
     _targetEl.addEventListener("keydown", onTargetEvent);
 
     // listener for `close` events emitted from child components
     _rootEl.addEventListener("close", (e) => {
-      _open = false;
+      closePopover();
       e.stopPropagation();
-    })
-
-    // find the element that will have initial focus when the popover is shown
-    const children = getSlottedChildren(_targetEl);
-    _initFocusedEl =
-      (children.find(
-        (el) => (el as HTMLElement).tabIndex >= 0,
-      ) as HTMLElement) || _targetEl;
+    });
 
     showDeprecationWarnings();
+    addGlobalCloseListener();
   });
 
   // Functions
+
+  // Since the focused element is being changed when the popover is open, the scoped keybinding for the escape key may
+  // no longer work, so the binding must be done on the document.body
+  function addGlobalEscapeKeybinding() {
+    document.body.addEventListener("keydown", handleGlobalEscapeKeybinding);
+  }
+
+  function handleGlobalEscapeKeybinding(e: KeyboardEvent) {
+    if (e.key === "Escape") {
+      if (_open) {
+        closePopover();
+      }
+      e.stopPropagation();
+    }
+  }
+
+  function removeGlobalEscapeKeybinding() {
+    document.body.removeEventListener("keydown", handleGlobalEscapeKeybinding);
+  }
+
+  // When one popover is opened it dispatches a `goa:closePopover` to the document.body element, so adding a listener
+  // here will allow any other popover that is currently open to be closed
+  function addGlobalCloseListener() {
+    document.body.addEventListener("goa:closePopover", (e: Event) => {
+      if (!_open) {
+        return;
+      }
+
+      const { target } = (e as CustomEvent).detail;
+
+      // the popover that is being opened will, at that time have the an open state, so we need to prevent
+      // that one that is being opened be immediately closed.
+      if (target !== _targetEl) {
+        closePopover();
+      }
+    });
+  }
 
   function showDeprecationWarnings() {
     if (relative != "") {
@@ -140,22 +183,9 @@
         if (_filterableContext) {
           break;
         }
-      case "Enter":
+        // case "Enter":
         openPopover();
-        break;
-      case "Escape":
-        closePopover();
-        break;
-    }
-  }
-
-  // Event binding when the focusTrapEl has focus. This is required since the
-  // popover exists within the slot of the FocusTrap which prevents the existing
-  // targetEl eventing binding from "hearing" the events
-  function onFocusTrapEvent(e: KeyboardEvent) {
-    switch (e.key) {
-      case "Escape":
-        closePopover();
+        e.stopPropagation();
         break;
     }
   }
@@ -164,78 +194,107 @@
   function openPopover() {
     if (_disabled) return;
 
+    // close any other open popovers
+    if (!disableGlobalClosePopover) {
+      dispatch(document.body, "goa:closePopover", { target: _targetEl });
+    }
+
+    // open this popover
     _open = true;
-    _focusTrapEl.addEventListener("keydown", onFocusTrapEvent, true);
-    _rootEl.dispatchEvent(new CustomEvent("_open", { composed: true }));
-    _initFocusedEl.focus();
-    makeEventsBubbleUpFromSlottedElements();
+
+    addGlobalEscapeKeybinding();
+    // keep current tab within the bounds of the wrapping focustrap component
+    // _focusTrapEl.addEventListener("keydown", onFocusTrapEvent, true);
+
+    // notify parent components of the status change
+    dispatch(_rootEl, "_open");
+
+    // find the element that will have initial focus when the popover is shown
+    setTimeout(() => {
+      const firstFocusableEl = getFirstFocusableEl(_focusTrapEl);
+      firstFocusableEl?.focus();
+    }, 0);
+
+    document.body.addEventListener("click", handleClick);
+  }
+
+  /**
+   * Recursively retrieves the first focusable element within a given HTML element.
+   * A focusable element is determined by having a non-negative tabIndex.
+   *
+   * @param {HTMLElement} el - The root HTML element to search within for focusable elements.
+   * @return {HTMLElement | null} - Returns the first focusable HTML element found within the given element,
+   * or null if no focusable element is found.
+   */
+  function getFirstFocusableEl(el: HTMLElement): HTMLElement | null {
+    if (el.tabIndex >= 0) {
+      return el;
+    }
+    const children = [
+      ...el.children,
+      ...getSlottedChildren(el),
+      el.shadowRoot,
+    ].filter(Boolean) as HTMLElement[];
+    for (const child of children) {
+      const firstFocusable = getFirstFocusableEl(child);
+      if (firstFocusable) {
+        return firstFocusable;
+      }
+    }
+  }
+
+  function handleClick(e: MouseEvent) {
+    e.stopPropagation();
+
+    if (!_popoverEl) return;
+
+    const rect = _popoverEl.getBoundingClientRect();
+    const clickedInPopover = isPointInRectangle(
+      e.clientX,
+      e.clientY,
+      rect.x,
+      rect.y,
+      rect.width,
+      rect.height,
+    );
+    const onlyCloseWhenClickedOutside = !closeOnClickWithinBounds;
+
+    // keep open on click
+    if (onlyCloseWhenClickedOutside && clickedInPopover) {
+      return;
+    }
+
+    if (_open) {
+      closePopover();
+    }
   }
 
   // Ensures that upon closing of the popover that the element that triggered
   // the popover to be shown re-attains focus and that any window event binding
   // is removed (it may not have been added if target was clicked)
   function closePopover() {
-    if (_disabled) return;
+    if (!_open) {
+      return;
+    }
+
+    if (!_rootEl || !_targetEl || !_popoverEl) {
+      return;
+    }
 
     _open = false;
+
+    removeGlobalEscapeKeybinding();
+
     window.removeEventListener("popstate", handleUrlChange, true);
-    _rootEl.dispatchEvent(new CustomEvent("_close", { composed: true }));
-    _initFocusedEl.focus({ preventScroll: true });
+    dispatch(_rootEl, "_close");
+    _targetEl.focus();
+
+    document.body.removeEventListener("click", handleClick);
   }
 
-  // Ensures that all immediate children of the popover target and content are included
-  // in event.relatedTarget that bubbles up to popover 'focusout' event handler
-  function makeEventsBubbleUpFromSlottedElements() {
-    const immediateChildren = getSlottedChildren(_targetEl);
-    immediateChildren.forEach((child) => {
-      if ((child as HTMLElement).tabIndex < 0) {
-        (child as HTMLElement).tabIndex = -1;
-      }
-    });
-    const content = $$slots.default;
-    if (content && _focusTrapEl) {
-      const immediateChildren = getSlottedChildren(_focusTrapEl);
-      immediateChildren.forEach((child) => {
-        if ((child as HTMLElement).tabIndex < 0) {
-          (child as HTMLElement).tabIndex = -1;
-        }
-      });
-    }
-  }
-
-  function handleFocusOut(e: FocusEvent) {
-    if (_disabled || !_open) return;
-
-    const activeElement = e.relatedTarget;
-    const isFocusInPopover =
-      activeElement instanceof Element &&
-      isElementContainedInSlotsRecursive(_rootEl, activeElement);
-    if (!isFocusInPopover) {
-      closePopover();
-    }
-  }
-
-  export function isElementContainedInSlotsRecursive(
-    rootEl: Element,
-    childEl: Element,
-    depth = 15,
-  ): boolean {
-    if (rootEl.contains(childEl)) {
-      return true;
-    }
-    if (depth <= 0) {
-      return false;
-    }
-    const slots = rootEl.querySelectorAll("slot");
-    for (const slot of Array.from(slots)) {
-      const assigned = slot.assignedElements();
-      for (const el of assigned) {
-        if (isElementContainedInSlotsRecursive(el, childEl, depth - 1)) {
-          return true;
-        }
-      }
-    }
-    return false;
+  function togglePopover(e: Event) {
+    _open ? closePopover() : openPopover();
+    e.stopPropagation();
   }
 
   function getBoundingClientRectWithMargins(
@@ -304,7 +363,6 @@
 <div
   bind:this={_rootEl}
   data-testid={testid}
-  on:focusout={handleFocusOut}
   style={styles(
     height === "full" && "height: 100%;",
     calculateMargin(mt, mr, mb, ml),
@@ -317,28 +375,24 @@
     style("width", width),
   )}
 >
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-  <div
+  <button
     class="popover-target"
-    tabindex={+tabindex}
     bind:this={_targetEl}
-    on:click={openPopover}
+    {tabindex}
+    on:click={togglePopover}
+    on:keyup={(e) => {
+      e.preventDefault();
+    }}
     data-testid="popover-target"
   >
     <slot name="target" />
-  </div>
+  </button>
 
-  <div
-    class="popover-container"
-    style={!_open && styles(style("display", "none"))}
-  >
+  <div style={style("display", _open ? "block" : "none")}>
     <section
       bind:clientHeight={_sectionHeight}
       bind:this={_popoverEl}
       data-testid="popover-content"
-      tabindex="-1"
       class="popover-content"
       style={styles(
         style("width", width),
@@ -371,8 +425,12 @@
 
   .popover-target {
     cursor: pointer;
+    display: block;
     height: 100%;
     outline: none;
+    border: none;
+    padding: 0;
+    width: inherit;
   }
 
   .popover-target:has(:focus-visible) {
@@ -388,6 +446,7 @@
     background: var(--goa-popover-color-bg);
     border-radius: var(--goa-popover-border-radius);
     outline: none;
+    overflow: visible;
     filter: var(--goa-popover-shadow);
     margin-top: var(--offset-top, 3px);
     margin-bottom: var(--offset-bottom, 3px);

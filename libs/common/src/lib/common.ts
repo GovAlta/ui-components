@@ -26,6 +26,10 @@ export type GoabInputOnBlurDetail<T = string> = {
 
 export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
 
+export type GoabMenuButtonOnActionDetail = {
+  action: string;
+}
+
 export type GoabInputAutoCapitalize =
   | "on"
   | "off"

@@ -89,7 +89,7 @@ export function calculateMargin(
     mr && mr !== "none" && `margin-right:var(--goa-space-${mr});` || "",
     mb && mb !== "none" && `margin-bottom:var(--goa-space-${mb});` || "",
     ml && ml !== "none" && `margin-left:var(--goa-space-${ml});` || "",
-  ].join(" ");
+  ].join(" ").trim();
 }
 
 export function injectCss(

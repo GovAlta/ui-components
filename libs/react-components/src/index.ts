@@ -43,6 +43,8 @@ export * from "./lib/icon/icon";
 export * from "./lib/input/input";
 export * from "./lib/link/link";
 export * from "./lib/link-button/link-button";
+export * from "./lib/menu-button/menu-button";
+export * from "./lib/menu-button/menu-action";
 export * from "./lib/microsite-header/microsite-header";
 export * from "./lib/modal/modal";
 export * from "./lib/notification/notification";

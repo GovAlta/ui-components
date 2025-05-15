@@ -1,3 +1,11 @@
+// Similar to React's useEffect. Svelte's $: puts a watch on any variables within the block
+// of code. The issue is that the block may then be unwantingly triggered when one of the
+// non-key properties change. Using the `watch` function provides the control and makes
+// it clear what the function is watching
+export function watch(fn: () => void, _: unknown[]) {
+  fn()
+}
+
 // Creates a style string from a list of styles.
 // This function accepts booleans to prevent the need for ternary ops when passing
 // in conditional styles
@@ -274,6 +282,17 @@ export function performOnce(
     return;
   }
   return setTimeout(action, delay);
+}
+
+export function isPointInRectangle(
+  x: number,
+  y: number,
+  rectX: number,
+  rectY: number,
+  rectWidth: number,
+  rectHeight: number
+): boolean {
+  return x >= rectX && x <= rectX + rectWidth && y >= rectY && y <= rectY + rectHeight;
 }
 
 export function ensureSlotExists(el: HTMLElement) {

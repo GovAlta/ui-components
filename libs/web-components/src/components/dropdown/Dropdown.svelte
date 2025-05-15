@@ -1,4 +1,15 @@
-<svelte:options customElement="goa-dropdown" />
+<svelte:options
+  customElement={{
+    tag: "goa-dropdown",
+    props: {
+      disableGlobalClosePopover: {
+        type: "Boolean",
+        reflect: true,
+        attribute: "disable-global-close-popover",
+      },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
@@ -65,6 +76,12 @@
   export let autocomplete: string = "";
   export let testid: string = "";
 
+  /**
+   * Exposed Privates
+   **/
+
+  export let disableGlobalClosePopover: boolean = false;
+
   //
   // Private
 
@@ -79,6 +96,7 @@
   let _menuEl: HTMLElement;
   let _inputEl: HTMLInputElement;
   let _eventHandler: EventHandler;
+  let _popoverEl: HTMLElement;
 
   let _isDirty: boolean = false;
   let _filteredOptions: Option[] = [];
@@ -90,7 +108,6 @@
   let _mountTimeoutId: any = undefined;
   let _error = toBoolean(error);
   let _prevError = _error;
-  let _dropdownWidth = "auto"; // Default to auto
 
   //
   // Reactive
@@ -112,36 +129,7 @@
     setSelected();
   }
 
-  $: {
-    // Calculate the base width
-    if (width) {
-      const unitPattern = /(px|%|ch|rem|em)$/; // Regex to detect valid units
-      if (unitPattern.test(width)) {
-        _width = width; // Use the provided width with a valid unit
-      } else {
-        _width = `${width}px`; // Default to px if no unit is provided
-      }
-    } else {
-      _width = getLongestChildWidth(_options); // Calculate based on the longest option
-    }
-
-    // avoid double apply for % widths
-    if (_inputEl) {
-      // for % widths use the % value instead
-      if (width?.includes("%")) {
-        _dropdownWidth = width;
-      } else {
-        _dropdownWidth = `${_inputEl.offsetWidth}px`; // Match input width dynamically
-      }
-    }
-
-    // Set popover max width
-    if (width?.includes("%")) {
-      _popoverMaxWidth = "100%"; // let the parent's % width constraint handle it
-    } else {
-      _popoverMaxWidth = `min(${_width}, 100%)`;
-    }
-  }
+  $: calculateWidths(width, _options, _inputEl);
 
   // TODO: Syed can you add a comment here describing what this does?
   $: {
@@ -165,6 +153,12 @@
     ensureSlotExists(_rootEl);
     addRelayListener();
     sendMountedMessage();
+    setupPopoverListeners();
+
+    if (disableGlobalClosePopover) {
+      _popoverEl.setAttribute("disable-global-close-popover", "yes");
+    }
+
     await tick();
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
@@ -175,6 +169,44 @@
   //
   // Functions
   //
+
+  function calculateWidths(
+    width: string,
+    options: Option[],
+    inputEl: HTMLInputElement,
+  ) {
+    // Calculate the base width
+    if (width) {
+      const unitPattern = /(px|%|ch|rem|em)$/; // Regex to detect valid units
+      if (unitPattern.test(width)) {
+        _width = width; // Use the provided width with a valid unit
+      } else {
+        console.error(
+          "Dropdown width must be of an allowed unit. Falling back to `px`",
+        );
+        _width = `${width}px`; // Default to px if no unit is provided
+      }
+    } else {
+      _width = getLongestChildWidth(options); // Calculate based on the longest option
+    }
+
+    // Set popover max width
+    if (width?.includes("%")) {
+      _popoverMaxWidth = "100%"; // let the parent's % width constraint handle it
+    } else {
+      _popoverMaxWidth = `min(${_width}, 100%)`;
+    }
+  }
+
+  function setupPopoverListeners() {
+    _popoverEl?.addEventListener("_open", (e) => {
+      _isMenuVisible = true;
+    });
+
+    _popoverEl?.addEventListener("_close", (e) => {
+      _isMenuVisible = false;
+    });
+  }
 
   function showDeprecationWarnings() {
     if (relative != "") {
@@ -290,13 +322,12 @@
   // compute the required width to ensure all children fit
   function getLongestChildWidth(options: Option[]): string {
     // set width to longest item
-    const optionsWidth = options
-      .map((option: Option) => {
+    const optionsWidth = Math.max(
+      ...options.map((option: Option) => {
         const label = `${option.label}` || `${option.value}` || "";
         return label.length;
-      })
-      .sort((a: number, b: number) => (a > b ? 1 : -1))
-      .pop();
+      }),
+    );
 
     // calculate the maximum width based on the longest option or placeholder length
     let maxWidth = Math.max(optionsWidth || 0, placeholder.length) + 7;
@@ -440,12 +471,8 @@
       return;
     }
 
-    setTimeout(() => {
-      _rootEl?.dispatchEvent(
-        new CustomEvent("_change", { composed: true, detail, bubbles: true }),
-      );
-      _isDirty = false;
-    }, 1);
+    dispatch(_rootEl, "_change", detail, { bubbles: true });
+    _isDirty = false;
   }
 
   //
@@ -475,10 +502,12 @@
   // Auto-select matching option from input after browser autofill/autocomplete or paste from clipboard.
   function onInputChange(e: Event) {
     if (_disabled || !_filterable) return;
+
     const isAutofilled =
       testid === "test-autofill" ||
       _inputEl.matches(":-webkit-autofill") ||
       _inputEl.matches(":autofill");
+
     if (!isAutofilled) return;
 
     syncFilteredOptions();
@@ -550,17 +579,6 @@
     setDisplayedValue();
   }
 
-  function onChevronClick(e: Event) {
-    if (_isMenuVisible) {
-      _inputEl?.focus();
-      hideMenu();
-    } else {
-      showMenu();
-    }
-    e.preventDefault();
-    e.stopPropagation();
-  }
-
   function onFocus(e: Event) {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
   }
@@ -579,6 +597,8 @@
     }
 
     onEnter(e: KeyboardEvent) {
+      // TODO: emit an event when opened to allow the filterable dropdown to set focus on the input
+
       const option = _filteredOptions[_highlightedIndex];
       if (option) {
         _isDirty = option.value !== _selectedOption?.value;
@@ -652,9 +672,6 @@
         case "Enter":
           this.onEnter(e);
           break;
-        case "Escape":
-          this.onEscape(e);
-          break;
         case "Tab":
           this.onTab(e);
           break;
@@ -727,10 +744,9 @@
   class="dropdown"
   class:dropdown-native={_native}
   style={`
-      ${calculateMargin(mt, mr, mb, ml)};
-      --width: ${_width};
-    `}
-  bind:clientWidth={_popoverMaxWidth}
+    ${calculateMargin(mt, mr, mb, ml)};
+    --width: ${_width};
+  `}
 >
   {#if _native}
     <select
@@ -756,16 +772,13 @@
     <!-- list and filter -->
     <goa-popover
       {disabled}
+      bind:this={_popoverEl}
       data-testid="option-list"
-      width={`${_popoverMaxWidth || 0}`}
-      minwidth={_dropdownWidth}
-      maxwidth={_dropdownWidth}
-      open={_isMenuVisible}
+      width={_popoverMaxWidth || _width || undefined}
+      open={_isMenuVisible ? "true" : "false"}
       padded="false"
       tabindex="-1"
       filterablecontext={fromBoolean(_filterable)}
-      on:_open={showMenu}
-      on:_close={hideMenu}
     >
       <div
         slot="target"
@@ -809,39 +822,31 @@
           on:keyup={onInputKeyUp}
           on:change={onInputChange}
           on:focus={onFocus}
-          on:click={!_filterable && onChevronClick}
         />
 
         {#if _inputEl?.value && _filterable}
-          <goa-icon
+          <goa-icon-button
             id={name}
             data-testid="clear-icon"
             tabindex={_disabled ? -1 : 0}
-            role="button"
             arialabel={`clear ${arialabel || name}`}
-            ariacontrols={`menu-${name}`}
-            ariaexpanded={fromBoolean(_isMenuVisible)}
             on:click={onClearIconClick}
             on:keydown={onClearIconKeyDown}
             class="dropdown-icon--clear"
             class:disabled={_disabled}
             size="medium"
-            type="close"
             theme="filled"
+            variant="dark"
+            icon="close"
           />
         {:else}
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <goa-icon
-            role="button"
-            tabindex="-1"
+            testid="chevron"
             id={name}
-            arialabel={arialabel || name}
-            ariacontrols={`menu-${name}`}
-            ariaexpanded={fromBoolean(_isMenuVisible)}
             class="dropdown-icon--arrow"
             size="medium"
             type={_isMenuVisible ? "chevron-up" : "chevron-down"}
-            on:click={onChevronClick}
           />
         {/if}
       </div>
@@ -879,7 +884,6 @@
             on:click={(e) => {
               onFilteredOptionClick(option);
               _inputEl?.focus();
-              e.stopPropagation();
             }}
           >
             {option.label || option.value}
@@ -1079,7 +1083,7 @@
     width: 1.5rem;
     height: 1.5rem;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144' /%3E%3C/svg%3E");
-    background-repeat: none;
+    background-repeat: no-repeat;
   }
 
   .dropdown-native:has(:focus-visible) {

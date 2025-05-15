@@ -1,15 +1,22 @@
-<svelte:options customElement="goa-block" />
+<svelte:options customElement={{
+  tag: "goa-block",
+  props: {
+    minWidth: { type: "String", attribute: "min-width"},
+  }
+}} />
 
 <script lang="ts">
   import { onMount } from "svelte";
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
   import { ensureSlotExists } from "../../common/utils";
+  import { style, styles } from "../../common/utils";
 
   export let gap: Spacing = "m";
   export let direction: "row" | "column" = "row";
   export let alignment: "center" | "start" | "end" | "normal" = "normal";
   export let testid: string = "";
+  export let minWidth: string = "";
 
   $: _alignment =
     alignment === "start"
@@ -43,22 +50,16 @@
   bind:this={_rootEl}
   data-testid={testid}
   class="block"
-  style={`
-    ${calculateMargin(mt, mr, mb, ml)};
-    --gap: var(--goa-space-${gap});
-    --alignment: ${_alignment};
-    --direction: ${direction};
-  `}
+  style={
+    styles(
+      "display: flex",
+      `gap: var(--goa-space-${gap})`,
+      calculateMargin(mt, mr, mb, ml),
+      style("min-width", minWidth),
+      style("align-items", _alignment),
+      style("flex-direction", direction),
+    )
+  }
 >
   <slot />
 </div>
-
-<style>
-  .block {
-    display: flex;
-    flex-direction: var(--direction);
-    align-items: var(--alignment);
-    gap: var(--gap);
-  }
-
-</style>
