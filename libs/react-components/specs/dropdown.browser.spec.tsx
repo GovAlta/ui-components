@@ -29,7 +29,7 @@ describe("Dropdown", () => {
 
       await vi.waitFor(() => {
         const popover = result.getByTestId("option-list");
-        const dropdownIcon = result.getByRole("button");
+        const dropdownIcon = result.getByTestId("chevron");
 
         // popover
         expect(popover.element().getAttribute("disabled")).toBeNull();
@@ -70,7 +70,7 @@ describe("Dropdown", () => {
 
       await vi.waitFor(() => {
         const popover = result.getByTestId("option-list");
-        const dropdownIcon = result.getByRole("button");
+        const dropdownIcon = result.getByTestId("chevron");
 
         // popover
         expect(popover.element().getAttribute("disabled")).toBeNull();
@@ -255,7 +255,7 @@ describe("Dropdown", () => {
       await vi.waitFor(() => {
         const input = result.getByRole("combobox");
         const popover = result.getByTestId("option-list");
-        const dropdownIcon = result.getByRole("button");
+        const dropdownIcon = result.getByTestId("chevron");
 
         expect(input.element().getAttribute("id")).toBe("favcolor");
         expect(input.element().getAttribute("aria-autocomplete")).toBe("list");

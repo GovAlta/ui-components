@@ -833,6 +833,7 @@
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <goa-icon
             role="button"
+            testid="chevron"
             tabindex="-1"
             id={name}
             arialabel={arialabel || name}

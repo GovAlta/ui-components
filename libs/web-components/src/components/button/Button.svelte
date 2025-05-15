@@ -226,7 +226,7 @@
   button:hover {
     background-color: var(--goa-button-primary-hover-color-bg);
   }
-  button:focus-visible,
+  button:focus,
   button:active {
     border-color: var(--goa-button-primary-hover-border);
     background-color: var(--goa-button-primary-focus-color-bg);
