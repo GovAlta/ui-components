@@ -46,6 +46,7 @@ export * from "./input-number/input-number";
 export * from "./link/link";
 export * from "./microsite-header/microsite-header";
 export * from "./modal/modal";
+export * from "./multi-action-button/multi-action-button";
 export * from "./notification/notification";
 export * from "./pages/pages";
 export * from "./pagination/pagination";
