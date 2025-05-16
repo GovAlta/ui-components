@@ -23,13 +23,13 @@ describe('GoabText', () => {
     expect(element?.getAttribute('as')).toBe('h2');
   });
 
-  it('should prioritize as property over tag property', () => {
+  it('should prioritize `tag` property over `as` property', () => {
     const { container } = render(
       <GoabText as="h1" tag="h3">Heading</GoabText>
     );
     const element = container.querySelector('goa-text');
 
-    expect(element?.getAttribute('as')).toBe('h1');
+    expect(element?.getAttribute('as')).toBe('h3');
   });
 
   it('should handle tag property with other properties', () => {
