@@ -27,11 +27,14 @@
 
   // reactive
 
-  $: _pageCount = Math.ceil(itemcount / perpagecount);
-  $: if (_pageCount) {
-    tick().then(() => {
-      setupPageDropdownListener();
-    });
+  $: _pageCount = Math.max(1, Math.ceil(itemcount / perpagecount));
+
+  $: {
+    if (pagenumber <= 0 || itemcount === 0) {
+      pagenumber = 1;
+    } else if (pagenumber > _pageCount) {
+      pagenumber = _pageCount;
+    }
   }
 
   // private
@@ -45,12 +48,13 @@
     await tick();
     validateRequired("GoAPagination", { itemcount, pagenumber });
     validateVariant(variant);
-    setupPageDropdownListener();
   });
 
   // functions
 
   function goto(e: Event, offset: number) {
+    if (itemcount <= 0) return;
+
     const newPage = Number.parseInt(pagenumber + "") + offset;
 
     if (newPage > 0 && newPage <= _pageCount) {
@@ -65,23 +69,25 @@
     e.preventDefault();
   }
 
-  function setupPageDropdownListener() {
-    if (!pageDropdownEl) {
-      console.error("Missing pageDropdownEl");
+  function handlePageChange(e: Event) {
+    const ce = e as CustomEvent;
+    const pageValue = ce.detail.value;
+
+    // For "0 of 0" state, dont dspatch
+    if (pageValue === "0" || itemcount <= 0) {
+      e.stopPropagation();
       return;
     }
-    pageDropdownEl.addEventListener("_change", (e: Event) => {
-      const ce = e as CustomEvent;
-      const page = Number.parseInt(ce.detail.value);
-      e.stopPropagation();
-      hiddenEl.dispatchEvent(
-        new CustomEvent("_change", {
-          composed: true,
-          bubbles: true,
-          detail: { page },
-        }),
-      );
-    });
+
+    const page = Number.parseInt(pageValue);
+    e.stopPropagation();
+    hiddenEl.dispatchEvent(
+      new CustomEvent("_change", {
+        composed: true,
+        bubbles: true,
+        detail: { page },
+      }),
+    );
   }
 </script>
 
@@ -91,14 +97,28 @@
       <goa-block data-testid="page-selector" alignment="center" gap="s">
         <span>Page</span>
         <input bind:this={hiddenEl} type="hidden" />
-        {#key _pageCount}
-          <goa-dropdown bind:this={pageDropdownEl} value={pagenumber}>
-            {#each { length: _pageCount } as _, i}
-              <goa-dropdown-item value={i + 1} label={i + 1} />
-            {/each}
+        {#if itemcount <= 0}
+          <goa-dropdown
+            bind:this={pageDropdownEl}
+            value="1"
+            on:_change={handlePageChange}
+          >
+            <goa-dropdown-item value="1" label="1" />
           </goa-dropdown>
-        {/key}
-        <span>of {_pageCount}</span>
+        {:else}
+          {#key _pageCount}
+            <goa-dropdown
+              bind:this={pageDropdownEl}
+              value={pagenumber}
+              on:_change={handlePageChange}
+            >
+              {#each { length: _pageCount } as _, i}
+                <goa-dropdown-item value={i + 1} label={i + 1} />
+              {/each}
+            </goa-dropdown>
+          {/key}
+        {/if}
+        <span>of {itemcount <= 0 ? "1" : _pageCount}</span>
       </goa-block>
     {/if}
     <goa-block alignment="center" gap="m" data-testid="page-links">
@@ -108,16 +128,14 @@
         on:click={(e) => goto(e, -1)}
         type="tertiary"
         leadingicon="arrow-back"
-        disabled={pagenumber == 1 ? "true" : "false"}>Previous</goa-button
-      >
+        disabled={itemcount <= 0 || pagenumber <= 1 ? "true" : "false"}>Previous</goa-button>
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-button
         on:click={(e) => goto(e, 1)}
         type="tertiary"
         trailingicon="arrow-forward"
-        disabled={pagenumber == _pageCount ? "true" : "false"}>Next</goa-button
-      >
+        disabled={itemcount <= 0 || pagenumber >= _pageCount ? "true" : "false"}>Next</goa-button>
     </goa-block>
   </div>
 </goa-block>
