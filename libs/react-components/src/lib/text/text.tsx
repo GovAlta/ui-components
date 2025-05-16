@@ -37,7 +37,7 @@ interface GoATextProps extends Margins {
 export function GoabText(props: GoATextProps): JSX.Element {
   return (
     <goa-text
-      as={props.as || props.tag}
+      as={props.tag || props.as}
       size={props.size}
       maxwidth={props.maxWidth}
       color={props.color}
