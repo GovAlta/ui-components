@@ -488,7 +488,6 @@
     z-index: 1;
     border-radius: var(--goa-text-input-border-radius);
     min-width: 0;
-    text-overflow: ellipsis;
   }
 
   input,
