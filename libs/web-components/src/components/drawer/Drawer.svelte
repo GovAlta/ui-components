@@ -192,6 +192,7 @@
       class:drawer-open-right={position === "right" && open}
       class:drawer-open-left={position === "left" && open}
       bind:this={_contentEl}
+      data-first-focus="true"
     >
       <!-- Header -->
       <div class="header" bind:clientHeight={_headerHeight}>
