@@ -169,4 +169,69 @@ describe("FormStep", () => {
     const label = rootEl?.getAttribute("aria-label");
     expect(label).toContain("1 of 4");
   });
+
+  it("renders a not-started status", async () => {
+    const el = render(FormStep, { text: "Some form", status: "not-started" });
+    const rootEl = el.queryByTestId("label");
+
+    rootEl?.dispatchEvent(
+      new CustomEvent("formstepper:init", {
+        detail: {
+          ariaLabel: "some label",
+          enabled: true,
+          childIndex: 1,
+          current: false,
+          status: "not-started",
+        },
+      }),
+    );
+
+    await tick();
+
+    expect(rootEl?.dataset["status"]).toBe("not-started");
+  });
+
+  it("renders aria-label for not-started", async () => {
+    const el = render(FormStep, { text: "Some form", status: "not-started" });
+    const rootEl = el.queryByTestId("label");
+
+    rootEl?.dispatchEvent(
+      new CustomEvent("formstepper:init", {
+        detail: {
+          ariaLabel: "some label",
+          enabled: true,
+          childIndex: 1,
+          current: false,
+          status: "not-started",
+        },
+      }),
+    );
+
+    await tick();
+    const label = rootEl?.getAttribute("aria-label");
+    expect(label).toContain("Not started");
+  });
+
+  it("displays 'Incomplete' subtext for incomplete status", async () => {
+    const el = render(FormStep, { text: "Partially Complete", status: "incomplete" });
+    const rootEl = el.queryByTestId("label");
+
+    rootEl?.dispatchEvent(
+      new CustomEvent("formstepper:init", {
+        detail: {
+          ariaLabel: "some label",
+          enabled: true,
+          childIndex: 1,
+          current: false,
+          status: "incomplete",
+        },
+      }),
+    );
+
+    await tick();
+
+    const subtextElement = el.queryByTestId("subtext");
+    expect(subtextElement).not.toBeNull();
+    expect(subtextElement?.textContent).toBe("Incomplete");
+  });
 });
