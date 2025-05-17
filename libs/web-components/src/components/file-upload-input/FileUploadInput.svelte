@@ -61,10 +61,15 @@
 
   function isValidFileType(file: File): boolean {
     const typeMatchers = accept.split(",").map((type) => type.trim());
+    const lowercaseFileType = file.type.toLowerCase();
+    const lowercaseFileName = file.name.toLowerCase();
+
     for (const matcher of typeMatchers) {
+      const lowercaseMatcher = matcher.toLowerCase();
       const matches =
-        file.type.match(matcher.replace("*", ".*")) ||
-        file.name.endsWith(matcher);
+        lowercaseFileType.match(lowercaseMatcher.replace("*", ".*")) ||
+        lowercaseFileName.endsWith(lowercaseMatcher);
+
       if (matches) {
         return true;
       }
@@ -195,7 +200,7 @@
     <div class="instructions">
       <goa-icon type="cloud-upload" size="large" />
       <div>Drag and drop files here</div>
-      <em  class="or-text">or</em>
+      <em class="or-text">or</em>
       <div class="browse-files">Browse files</div>
     </div>
 
@@ -254,7 +259,6 @@
 {/if}
 
 <style>
-
   .dragdrop {
     border-radius: var(--goa-file-upload-border-radius);
     border: var(--goa-file-upload-border);
@@ -263,7 +267,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--goa-file-upload-text-gap); /* 3rem is the space between the icon and the text */
+    gap: var(
+      --goa-file-upload-text-gap
+    ); /* 3rem is the space between the icon and the text */
     padding: var(--goa-file-upload-padding);
     color: var(--goa-file-upload-instruction-color);
     text-align: center;
