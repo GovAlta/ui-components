@@ -5,6 +5,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  booleanAttribute,
 } from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
@@ -27,8 +28,8 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFilterChip extends GoabBaseComponent {
-  @Input() error?: boolean;
-  @Input() deletable?: boolean;
+  @Input({ transform: booleanAttribute }) error?: boolean;
+  @Input({ transform: booleanAttribute }) deletable?: boolean;
   @Input() content?: string = "";
   @Input() iconTheme?: GoabChipTheme;
 

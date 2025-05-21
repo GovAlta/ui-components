@@ -1,5 +1,13 @@
 import { NgTemplateOutlet } from "@angular/common";
-import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output, TemplateRef } from "@angular/core";
+import {
+  booleanAttribute,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+} from "@angular/core";
 import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
 
 @Component({
@@ -27,7 +35,7 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDrawer {
-  @Input({ required: true }) open!: boolean;
+  @Input({ required: true, transform: booleanAttribute }) open!: boolean;
   @Input({ required: true }) position!: GoabDrawerPosition;
   @Input() heading!: string | TemplateRef<any>;
   @Input() maxSize?: GoabDrawerSize;
@@ -48,4 +56,3 @@ export class GoabDrawer {
     return this.heading instanceof TemplateRef ? this.heading : null;
   }
 }
-

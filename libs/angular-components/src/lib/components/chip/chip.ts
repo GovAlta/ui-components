@@ -9,6 +9,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  booleanAttribute,
 } from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
@@ -35,8 +36,8 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabChip extends GoabBaseComponent {
   @Input() leadingIcon?: GoabIconType | null;
-  @Input() error?: boolean;
-  @Input() deletable?: boolean;
+  @Input({ transform: booleanAttribute }) error?: boolean;
+  @Input({ transform: booleanAttribute }) deletable?: boolean;
   @Input() content?: string = "";
   @Input() variant?: GoabChipVariant;
   @Input() iconTheme?: GoabChipTheme;

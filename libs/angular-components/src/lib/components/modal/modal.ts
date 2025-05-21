@@ -1,5 +1,16 @@
-import { GoabModalCalloutVariant, GoabModalTransition } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, TemplateRef } from "@angular/core";
+import {
+  GoabModalCalloutVariant,
+  GoabModalTransition,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+  booleanAttribute,
+} from "@angular/core";
 import { NgIf, NgTemplateOutlet } from "@angular/common";
 
 @Component({
@@ -33,7 +44,7 @@ import { NgIf, NgTemplateOutlet } from "@angular/common";
 })
 export class GoabModal {
   @Input() calloutVariant?: GoabModalCalloutVariant;
-  @Input() open?: boolean;
+  @Input({ transform: booleanAttribute }) open?: boolean;
   @Input() maxWidth?: string;
   @Input() closable = false;
   @Input() transition?: GoabModalTransition;
