@@ -37,6 +37,7 @@ export * from "./lib/link/link";
 export * from "./lib/link-button/link-button";
 export * from "./lib/microsite-header/microsite-header";
 export * from "./lib/modal/modal";
+export * from "./lib/multi-action-button/multi-action-button";
 export * from "./lib/notification/notification";
 export * from "./lib/one-column-layout/one-column-layout";
 export * from "./lib/page-block/page-block";

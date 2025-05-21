@@ -15,7 +15,7 @@
     style,
     getSlottedChildren,
     styles,
-    toBoolean,
+    toBoolean, dispatch,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
@@ -101,6 +101,8 @@
     // listener for `close` events emitted from child components
     _rootEl.addEventListener("close", (e) => {
       _open = false;
+      dispatch(_rootEl, "_close", { bubbles: true });
+
       e.stopPropagation();
     })
 
@@ -177,6 +179,10 @@
     _initFocusedEl.focus({ preventScroll: true });
   }
 
+  function togglePopover() {
+    _open ? closePopover() : openPopover()
+  }
+
   // Ensures that all immediate children of the popover target and content are included
   // in event.relatedTarget that bubbles up to popover 'focusout' event handler
   function makeEventsBubbleUpFromSlottedElements() {
@@ -209,6 +215,8 @@
     }
   }
 
+  // Prevent the need for one to click once to dismiss the popup before clicking on
+  // something else
   export function isElementContainedInSlotsRecursive(
     rootEl: Element,
     childEl: Element,
@@ -318,7 +326,7 @@
     class="popover-target"
     tabindex={+tabindex}
     bind:this={_targetEl}
-    on:click={openPopover}
+    on:click={togglePopover}
     data-testid="popover-target"
   >
     <slot name="target" />
@@ -382,6 +390,7 @@
     background: var(--goa-popover-color-bg);
     border-radius: var(--goa-popover-border-radius);
     outline: none;
+    overflow: hidden;
     filter: var(--goa-popover-shadow);
     margin-top: var(--offset-top, 3px);
     margin-bottom: var(--offset-bottom, 3px);

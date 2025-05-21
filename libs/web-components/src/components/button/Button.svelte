@@ -3,6 +3,7 @@
   props: {
     actionArg: { type: "String", attribute: "action-arg"},
     actionArgs: { type: "Object", attribute: "action-args"},
+    noFeedback: { type: "Boolean", attribute: "no-feedback"},
   }
 }} />
 
@@ -17,7 +18,7 @@
   // Validators
   const [Types, validateType] = typeValidator(
     "Button type",
-    ["primary", "submit", "secondary", "tertiary", "start"],
+    ["primary", "submit", "secondary", "tertiary", "start", "blank"],
     true,
   );
   const [Sizes, validateSize] = typeValidator(
@@ -55,6 +56,10 @@
   export let actionArg: string = "";
   export let actionArgs: Record<string, unknown> = {};
 
+  // Privates
+
+  export let noFeedback: boolean = false;
+
   // ========
   // Reactive
   // ========
@@ -91,6 +96,7 @@
 
 <button
   class="{type} {size} {variant}"
+  class:no-feedback={noFeedback}
   style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${width};
@@ -155,13 +161,20 @@
     width: var(--width, auto);
   }
 
-  button:active {
+  button:not(.no-feedback):active {
     transform: translateY(2px);
   }
-
   button:focus-visible {
-    box-shadow: 0 0 0 var(--goa-border-width-l)
-      var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+  }
+  button:hover {
+    background-color: var(--goa-button-primary-hover-color-bg);
+  }
+  button:focus,
+  button:active {
+    border-color: var(--goa-button-primary-hover-border);
+    background-color: var(--goa-button-primary-focus-color-bg);
+    outline: none;
   }
 
   @media (--mobile) {
@@ -222,15 +235,6 @@
     border: var(--goa-button-primary-border);
     background-color: var(--goa-button-primary-color-bg);
     color: var(--goa-button-primary-color-text);
-  }
-  button:hover {
-    background-color: var(--goa-button-primary-hover-color-bg);
-  }
-  button:focus,
-  button:active {
-    border-color: var(--goa-button-primary-hover-border);
-    background-color: var(--goa-button-primary-focus-color-bg);
-    outline: none;
   }
 
   /* Secondary */
@@ -357,6 +361,25 @@
   .tertiary.inverse:focus,
   .tertiary.inverse:active {
     color: var(--goa-button-tertiary-inverse-focus-color-text);
+  }
+
+  /* Blank */
+  button.blank {
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    outline: none;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  button.blank:active,
+  button.blank:hover {
+    background-color: var(--goa-color-greyscale-100);
+    color: var(--goa-color-interactive-hover);
+    transform: none;
+  }
+  button.blank:focus-visible {
+    box-shadow: inset 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
   }
 
   /* Disabled */
