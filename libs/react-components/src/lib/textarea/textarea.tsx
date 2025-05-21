@@ -48,7 +48,7 @@ export interface GoabTextAreaProps extends Margins {
   countBy?: GoabTextAreaCountBy;
   maxCount?: number;
 
-  onChange: (event: GoabTextAreaOnChangeDetail) => void;
+  onChange?: (event: GoabTextAreaOnChangeDetail) => void;
   onKeyPress?: (event: GoabTextAreaOnKeyPressDetail) => void;
 }
 
@@ -83,12 +83,15 @@ export function GoabTextArea({
     const listener: EventListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;
 
-      onChange(detail);
+      onChange?.(detail);
     };
-
-    current.addEventListener("_change", listener);
+    if (onChange) {
+      current.addEventListener("_change", listener);
+    }
     return () => {
-      current.removeEventListener("_change", listener);
+      if (onChange) {
+        current.removeEventListener("_change", listener);
+      }
     };
   }, [el, onChange]);
 

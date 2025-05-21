@@ -13,6 +13,8 @@ interface WCProps extends Margins {
   error?: string;
   helptext?: string;
   maxwidth?: string;
+  "public-form-summary-order"?: number;
+  name?: string;
   id?: string;
   testid?: string;
 }
@@ -33,6 +35,14 @@ export interface GoabFormItemProps extends Margins {
   error?: string | React.ReactNode;
   helpText?: string | React.ReactNode;
   maxWidth?: string;
+  /**
+   * Public form: to arrange fields in the summary
+   */
+  publicFormSummaryOrder?: number;
+  /**
+   * Public form: allow to override the label value within the form-summary to provide a shorter description of the value
+   */
+  name?: string;
   children?: React.ReactNode;
   testId?: string;
   id?: string;
@@ -46,6 +56,8 @@ export function GoabFormItem({
   label,
   labelSize,
   maxWidth,
+  publicFormSummaryOrder,
+  name,
   mt,
   mr,
   mb,
@@ -61,6 +73,8 @@ export function GoabFormItem({
       requirement={requirement}
       helptext={typeof helpText === "string" ? helpText : undefined}
       maxwidth={maxWidth}
+      public-form-summary-order={publicFormSummaryOrder}
+      name={name}
       mt={mt}
       mr={mr}
       mb={mb}
