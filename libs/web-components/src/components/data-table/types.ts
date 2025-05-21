@@ -7,7 +7,8 @@ export type DataTableAction = {
 
 export type DataTableItem = {
   name: string;
-  value: unknown;
+  label: string;
+  content?: HTMLElement;
 }
 
 export type DataTableRow = {

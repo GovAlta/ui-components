@@ -1,7 +1,7 @@
 <svelte:options customElement={{
   tag: "goa-data-table-row",
   props: {
-    uid: { type: "String", attribute: "uid" }
+    uid: { type: "String", attribute: "uid" },
   }
 }} />
 
@@ -33,11 +33,11 @@
           break;
         case "set:parent":
           setParentEl(data as HTMLElement);
-          break;
+          return;
       }
 
       _timeoutId = performOnce(_timeoutId, () => {
-        bindRow()
+        dispatchRowDetails()
       }, 100)
     });
   })
@@ -59,7 +59,7 @@
     _items.push(item);
   }
 
-  function bindRow() {
+  function dispatchRowDetails() {
     relay<DataTableRow>(_senderEl, "bind:row", { el: _receiverEl, uid, actions: _actions, items: _items }, { bubbles: true });
   }
 

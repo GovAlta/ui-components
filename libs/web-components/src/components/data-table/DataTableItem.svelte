@@ -10,14 +10,19 @@
   import { relay } from "../../common/utils";
   import { DataTableItem } from "./types";
 
+  export let label: string;
   export let name: string;
-  export let value: string;
+  // export let value: string;
 
   let _el: HTMLElement;
 
   onMount(() => {
-    relay<DataTableItem>(_el, "bind:item", { name, value }, { bubbles: true });
+    const content = _el.querySelector("slot").assignedNodes()?.[0] as HTMLElement;
+    console.log(content);
+    relay<DataTableItem>(_el, "bind:item", { name, content, label }, { bubbles: true });
   });
 </script>
 
-<div bind:this={_el} />
+<div bind:this={_el} style="display: none">
+  <slot />
+</div>

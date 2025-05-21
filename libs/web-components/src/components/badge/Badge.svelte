@@ -1,4 +1,10 @@
-<svelte:options customElement="goa-badge" />
+<svelte:options customElement={{
+  tag: "goa-badge",
+  props: {
+    type: { type: "String", attribute: "type", reflect: true  },
+    content: { type: "String", attribute: "content", reflect: true  },
+  }
+}} />
 
 <!-- Script -->
 <script lang="ts">

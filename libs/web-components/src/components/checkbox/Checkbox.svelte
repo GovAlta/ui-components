@@ -368,7 +368,6 @@
     background-color: var(--goa-checkbox-color-bg);
     height: var(--goa-checkbox-size);
     width: var(--goa-checkbox-size);
-    margin-top: 3px; /* aligns the checkbox with the text */
     display: flex;
     justify-content: center;
     flex: 0 0 auto; /* prevent squishing of checkbox */
