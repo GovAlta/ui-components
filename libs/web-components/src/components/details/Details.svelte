@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-details" />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { calculateMargin } from "../../common/styling";
   import {
     toBoolean,
@@ -25,9 +25,11 @@
 
   $: _isOpen = toBoolean(open);
 
-  onMount(() => {
-    validateRequired("Details", { heading });
+  onMount(async () => {
     _detailsId = `details-${generateRandomId()}`;
+
+    await tick();
+    validateRequired("Details", { heading });
 
     _summaryEl.addEventListener("mouseover", () => {
       _isMouseOver = true;
