@@ -98,15 +98,6 @@ describe("Modal Component", () => {
     });
   });
 
-  it("should set role to alertdialog when alert is set", async () => {
-    const el = render(GoAModal, { open: "true", role: "alertdialog"});
-
-    await waitFor(() => {
-      const modal = el.queryByRole("alertdialog");
-      expect(modal?.getAttribute("aria-modal")).toBe("true");
-    });
-  });
-
   it("should open when the `open` attribute is set to true", async () => {
     const el = render(GoAModal, { open: "true" });
 
@@ -221,6 +212,25 @@ describe("Modal Component", () => {
       await waitFor(() => {
         closeIcon && expect(closeIcon).not.toHaveFocus();
       });
+    });
+  });
+
+  it("should set role to dialog by default and set initial focus to it on open", async() => {
+    const el = render(GoAModal, { open: "true" });
+
+    await waitFor(() => {
+      const modal = el.queryByRole("dialog");
+      expect(modal?.getAttribute("data-first-focus")).toBe("true");
+    });
+  });
+
+  it("should set role to alertdialog and not set focus to it by default", async () => {
+    const el = render(GoAModal, { open: "true", role: "alertdialog"});
+
+    await waitFor(() => {
+      const modal = el.queryByRole("alertdialog");
+      expect(modal?.getAttribute("aria-modal")).toBe("true");
+      expect(modal?.getAttribute("data-first-focus")).toBeNull();
     });
   });
 });
