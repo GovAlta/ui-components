@@ -11,6 +11,7 @@ interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
   name: string;
   value?: string;
+  id?: string;
   orientation?: GoabRadioGroupOrientation;
   disabled?: string;
   error?: string;
@@ -30,13 +31,14 @@ declare module "react" {
 export interface GoabRadioGroupProps extends Margins {
   name: string;
   value?: string;
+  id?: string;
   disabled?: boolean;
   orientation?: GoabRadioGroupOrientation;
   testId?: string;
   error?: boolean;
   ariaLabel?: string;
   children?: React.ReactNode;
-  onChange: (detail: GoabRadioGroupOnChangeDetail) => void;
+  onChange?: (detail: GoabRadioGroupOnChangeDetail) => void;
 }
 
 export function GoabRadioGroup({
@@ -46,6 +48,7 @@ export function GoabRadioGroup({
   orientation,
   disabled,
   error,
+  id,
   testId,
   ariaLabel,
   mt,
@@ -60,19 +63,19 @@ export function GoabRadioGroup({
     if (!el.current) return;
 
     const listener = (e: Event) => {
-      if (!onChange) {
-        console.warn("Missing onChange function");
-        return;
-      }
       const detail = (e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail;
-      onChange(detail);
+      onChange?.(detail);
     };
 
     const currentEl = el.current;
-    currentEl.addEventListener("_change", listener);
+    if (onChange) {
+      currentEl.addEventListener("_change", listener);
+    }
 
     return () => {
-      currentEl.removeEventListener("_change", listener);
+      if (onChange) {
+        currentEl.removeEventListener("_change", listener);
+      }
     };
   }, [name, onChange]);
 
@@ -80,6 +83,7 @@ export function GoabRadioGroup({
     <goa-radio-group
       testid={testId}
       ref={el}
+      id={id}
       name={name}
       value={value}
       orientation={orientation}
