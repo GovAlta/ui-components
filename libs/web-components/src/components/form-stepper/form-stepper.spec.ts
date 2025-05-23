@@ -30,7 +30,7 @@ describe("FormStepper", () => {
 
   it("show progress updates on step changes", async () => {
     const { container } = render(FormStepper)
-    const steps = container.querySelectorAll("input[type=checkbox]");
+    const steps = container.querySelectorAll("input[type=button]");
 
     await waitFor(() => {
       expect(steps.length).toBe(4)

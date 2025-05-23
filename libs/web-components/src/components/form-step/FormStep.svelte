@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-form-step" />
 
 <script lang="ts" context="module">
-  export type FormStepStatus = "complete" | "incomplete";
+  export type FormStepStatus = "complete" | "incomplete" | "not-started";
 
   export type FormStep = {
     current: boolean;
@@ -36,7 +36,7 @@
   // =======
 
   let _rootEl: HTMLElement;
-  let _checkbox: HTMLInputElement;
+  let _input: HTMLInputElement;
   let _isMobile: boolean;
 
   // ========
@@ -97,7 +97,6 @@
   function onClick(e: Event) {
     if (!_isEnabled) return;
 
-    _checkbox.checked = !_checkbox.checked;
     _rootEl.dispatchEvent(
       new CustomEvent("_click", {
         composed: true,
@@ -107,38 +106,36 @@
     );
     e.stopPropagation();
   }
+
+  function getStatusText(): string {
+    if (!status) return "";
+
+    switch (status) {
+      case "complete": return "Complete";
+      case "incomplete": return "Incomplete";
+      case "not-started": return "Not started";
+      default: return "";
+    }
+  }
 </script>
 
-<label
-  id={arialabel}
+<div
   bind:this={_rootEl}
+  class="step-container"
   class:mobile={_isMobile}
   class:desktop={!_isMobile}
   class:last={_isLast}
   role="listitem"
-  tabindex="-1"
-  for={text}
   data-status={status}
   aria-current={current ? "step" : "false"}
-  aria-label={arialabel || `${text} ${status || ""}`}
-  data-testid="label"
+  data-testid="step-container"
 >
-  <input
-    id={text}
-    bind:this={_checkbox}
-    type="checkbox"
-    checked={current}
-    aria-disabled={!_isEnabled}
-    disabled={!_isEnabled}
-    data-testid="checkbox"
-    on:click={onClick}
-  />
   <div data-testid="status" class="status">
     {#if current}
       {#if _isLast && status === "complete"}
         <goa-icon type="checkmark" inverted />
       {:else}
-        <goa-icon type="pencil"  theme="filled" />
+        <goa-icon type="pencil" theme="filled" />
       {/if}
     {:else if status === "complete"}
       <goa-icon type="checkmark" inverted />
@@ -153,50 +150,75 @@
   <div class="details">
     <div class="text" data-testid="text">{text}</div>
     {#if status === "incomplete"}
-      <div class="subtext" data-testid="subtext">Partially complete</div>
+      <div class="subtext" data-testid="subtext">Incomplete</div>
     {/if}
   </div>
-</label>
+  <input
+    bind:this={_input}
+    type="button"
+    disabled={!_isEnabled}
+    aria-label={`${arialabel ? arialabel + " " : ""}, Step Name: ${text}, Status: ${getStatusText()}`}
+    role="generic"
+    data-testid="button"
+    on:click={onClick}
+    class="step-button"
+  />
+</div>
 
 <style>
-
-    input[type="checkbox"] {
-    position: absolute;
-    left: -9999px;
-  }
-
-  label {
+  .step-container {
+    position: relative;
     display: flex;
     box-sizing: border-box;
     height: 100%;
     width: 100%;
     padding: var(--goa-step-padding);
   }
-  label:not([aria-disabled="true"]):not([aria-current="step"]):has(input:focus-visible) {
+
+  .step-container:focus-within:not([aria-current="step"]) {
     outline: var(--goa-color-interactive-focus) solid var(--goa-border-width-l);
   }
-  label:not([aria-disabled="true"]):not([aria-current="step"]):hover {
+
+  .step-container:hover:not([aria-current="step"]) {
     background-color: rgba(0, 0, 0, 0.05);
-    cursor: pointer;
   }
-  label.desktop {
+
+  .step-container.desktop {
     text-align: center;
     flex-direction: column;
     align-items: center;
   }
-  label.desktop .details {
+
+  .step-container.desktop .details {
     margin-top: 0.75rem; /* vertical space between step and label */
   }
-  label.mobile {
+
+  .step-container.mobile {
     flex-direction: row;
     align-items: center;
     text-align: start;
     padding: var(--goa-step-padding-vertical);
   }
-  label.mobile .details {
+
+  .step-container.mobile .details {
     margin-left: var(--goa-space-xs);
   }
 
+  .step-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .step-button:disabled {
+    cursor: default;
+  }
 
   .status {
     flex: 0 0 auto;
@@ -210,11 +232,11 @@
     height: var(--goa-step-size);
     width: var(--goa-step-size);
   }
+
   .status > * {
     fill: var(--fill-color, var(--goa-step-color-bg-complete));
     color: var(--fill-color, var(--goa-step-color-bg-complete));
   }
-
 
   [aria-current="step"] .text {
     font: var(--goa-step-typography-label-active);
@@ -234,7 +256,7 @@
     color: var(--goa-step-color-step-number);
   }
 
-  label:not(
+  .step-container:not(
       [data-status="complete"],
       [data-status="incomplete"],
       [aria-current="step"]
