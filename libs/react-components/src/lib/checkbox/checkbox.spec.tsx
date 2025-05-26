@@ -84,6 +84,18 @@ describe("GoabCheckbox", () => {
     ).toContain("description slot");
   });
 
+  it("should render with slot reveal", () => {
+    const result = render(
+      <GoabCheckbox name={"foo"} reveal={<div>reveal slot</div>} />,
+    );
+
+    const checkbox = document.querySelector("goa-checkbox");
+    expect(checkbox?.getAttribute("reveal")).toBe(null);
+    expect(
+      result.container.querySelector('div[slot="reveal"]')?.innerHTML,
+    ).toContain("reveal slot");
+  });
+
   it("should handle the onChange event", async function () {
     const onChangeStub = vi.fn();
 
