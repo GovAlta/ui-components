@@ -47,7 +47,7 @@ class TestCheckboxComponent {
   }
 }
 
-describe("GoABCheckbox", () => {
+describe("GoabCheckbox", () => {
   let fixture: ComponentFixture<TestCheckboxComponent>;
   let component: TestCheckboxComponent;
 
@@ -144,5 +144,42 @@ describe("Checkbox with description slot", () => {
     ).nativeElement;
     const slotDescription = checkboxElement.querySelector("[slot='description']");
     expect(slotDescription.textContent).toContain("A description slot");
+  });
+});
+
+@Component({
+  template: `
+    <goab-checkbox
+      name="test"
+      [checked]="true"
+      text="check box text"
+      [reveal]="revealTemplate"
+    >
+      <ng-template #revealTemplate>
+        <strong>A reveal slot</strong>
+      </ng-template>
+    </goab-checkbox>
+  `,
+})
+class TestCheckboxWithRevealSlotComponent {}
+
+describe("Checkbox with reveal slot", () => {
+  let fixture: ComponentFixture<TestCheckboxWithRevealSlotComponent>;
+
+  it("should render with slot reveal", async () => {
+    await TestBed.configureTestingModule({
+      imports: [GoabCheckbox, ReactiveFormsModule],
+      declarations: [TestCheckboxWithRevealSlotComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestCheckboxWithRevealSlotComponent);
+    fixture.detectChanges();
+    
+    const checkboxElement = fixture.debugElement.query(
+      By.css("goa-checkbox"),
+    ).nativeElement;
+    const slotReveal = checkboxElement.querySelector("[slot='reveal']");
+    expect(slotReveal.textContent).toContain("A reveal slot");
   });
 });

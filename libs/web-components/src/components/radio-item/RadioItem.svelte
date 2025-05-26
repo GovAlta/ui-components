@@ -56,12 +56,14 @@
   let _radioItemEl: HTMLElement;
   let _revealSlotEl: HTMLElement;
   let _formFields: HTMLElement[] = [];
+  let _revealSlotHeight: number = 0;
 
   // Reactive
 
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
+  $: revealSlotHasContent = _revealSlotHeight > 0;
 
   // Hooks
 
@@ -94,6 +96,27 @@
           break;
       }
     });
+    if (_revealSlotEl) {
+      onRevealSlotCustomEventListener();
+    }
+  }
+
+  /**
+   * Stop propagate the _click,_change to checkbox (so it won't toggle the value)
+   */
+  function onRevealSlotCustomEventListener() {
+    _revealSlotEl.addEventListener("_click", (e: Event) => {
+      e.stopPropagation();
+    });
+
+    _revealSlotEl.addEventListener("_change", (e: Event) => {
+      // Stop custom event propagation
+      e.stopPropagation();
+    });
+
+    _revealSlotEl.addEventListener("_radioItemChange", (e: Event) => {
+      e.stopPropagation();
+    })
   }
 
   function onFormFieldMount(detail: FormFieldMountRelayDetail) {
@@ -207,7 +230,11 @@
       {description}
     </div>
   {/if}
-  <div class="reveal" class:visible={$$slots.reveal && isChecked}>
+  <div class="reveal"
+       class:visible={$$slots.reveal && isChecked}
+       class:has-content={revealSlotHasContent}
+       bind:this={_revealSlotEl}
+       bind:clientHeight={_revealSlotHeight}>
     <slot name="reveal" />
   </div>
 </div>
@@ -261,11 +288,13 @@
     height: 0;
   }
   .reveal.visible {
-    border-left: 4px solid var(--goa-color-greyscale-200);
+    height: fit-content;
+    display: block;
+  }
+  .reveal.visible.has-content {
     padding: var(--goa-space-m);
     margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);
-    display: block;
-    height: fit-content;
+    border-left: 4px solid var(--goa-color-greyscale-200);
   }
 
   .icon {
@@ -362,5 +391,3 @@
     border: var(--goa-radio-border-checked-error-disabled);
   }
 </style>
-
-

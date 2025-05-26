@@ -142,6 +142,35 @@ describe('GoACheckbox Component', () => {
     });
   });
 
+  describe("Reveal slot", () => {
+    it("should stop propagation of _click and _change events from reveal slot", async () => {
+      const el = await createElement();
+      const revealSlot = document.createElement('div');
+      revealSlot.setAttribute('slot', 'reveal');
+      revealSlot.textContent = 'Reveal content';
+
+      const checkbox = el.container.querySelector('goa-checkbox');
+      checkbox?.appendChild(revealSlot);
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Test _click event propagation
+      const clickSpy = vi.fn();
+      checkbox?.addEventListener('_click', clickSpy);
+
+      const clickEvent = new CustomEvent('_click', { bubbles: true });
+      revealSlot.dispatchEvent(clickEvent);
+      expect(clickSpy).not.toHaveBeenCalled();
+
+      // Test _change event propagation
+      const changeSpy = vi.fn();
+      checkbox?.addEventListener('_change', changeSpy);
+
+      const changeEvent = new CustomEvent('_change', { bubbles: true });
+      revealSlot.dispatchEvent(changeEvent);
+      expect(changeSpy).not.toHaveBeenCalled();
+    });
+  });
+
   describe("Margins", () => {
     it(`should add the margin`, async () => {
       const baseElement = render(GoACheckbox, {
