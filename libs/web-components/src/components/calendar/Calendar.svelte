@@ -47,6 +47,7 @@
   // ********
 
   let _selectedDate: Date | null; // date set by the user
+  let _selectedDateRaw: number | null; // raw date string in UTC format (T)
   let _calendarDate: Date; // date that the calendar is synced to (days of month, month/year dropdowns)
   let _min: Date;
   let _max: Date;
@@ -77,7 +78,7 @@
 
       if (isValidDate(newDate)) {
         renderCalendar({ type: "date", value: _selectedDate || newDate });
-        _selectedDate = newDate;
+        _selectedDateRaw = newDate.getTime();
         _calendarDate = newDate;
       }
     }
@@ -114,6 +115,7 @@
       ? startOfDay(new Date(value))
       : startOfDay(new Date());
 
+    _selectedDateRaw = _selectedDate.getTime();
     initKeybindings();
     await tick();
     renderCalendar({ type: "date", value: _selectedDate });
@@ -221,7 +223,7 @@
           break;
         case "Delete":
         case "Backspace":
-          _selectedDate = null;
+          _selectedDate = _selectedDateRaw = null;
           break;
         case "Home": {
           let homeDate = new Date(_calendarDate);
@@ -248,6 +250,7 @@
           break;
         case "Enter":
           _selectedDate = _calendarDate;
+          _selectedDateRaw = _calendarDate.getTime();
           dispatchValue();
           e.stopPropagation();
           e.preventDefault();
@@ -265,6 +268,8 @@
     if (!isValidDate(_selectedDate)) return;
 
     value = _selectedDate.toISOString();
+    const valueStr = format(_selectedDateRaw, "yyyy-MM-dd");
+
     _calendarEl.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
@@ -272,6 +277,7 @@
           type: "date",
           name: name,
           value: _selectedDate,
+          valueStr: valueStr,
         },
       }),
     );
@@ -313,6 +319,8 @@
     }
 
     _selectedDate = _calendarDate = newDate;
+    _selectedDateRaw = raw;
+
     dispatchValue();
   }
 </script>

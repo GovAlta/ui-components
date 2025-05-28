@@ -55,6 +55,7 @@ export type GoabDropdownOnChangeDetail = {
 export type GoabDatePickerOnChangeDetail = {
   name?: string;
   value: string | Date | undefined;
+  valueStr?: string;
 };
 export type GoabDatePickerInputType = "calendar" | "input";
 
@@ -72,7 +73,8 @@ export type GoabCheckboxOnChangeDetail = {
 
 export type GoabCalendarOnChangeDetail = {
   name?: string;
-  value: string;
+  value?: string;
+  valueStr?: string;
 };
 
 export type GoabBadgeType =

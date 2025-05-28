@@ -5,7 +5,7 @@ import {
   render,
   waitFor,
 } from "@testing-library/svelte";
-import { addDays, lastDayOfMonth, startOfDay } from "date-fns";
+import { addDays, lastDayOfMonth, startOfDay, format } from "date-fns";
 import { tick } from "svelte";
 import { it, expect, vi } from "vitest";
 
@@ -130,6 +130,7 @@ it("emits an event when a date is selected", async () => {
   await tick()
 
   const today = toDayStart(new Date());
+  const todayStr = format(today, "yyyy-MM-dd");
   const todayEl = container.querySelector(
     `button.today[data-date="${today.getTime()}"]`,
   );
@@ -141,10 +142,11 @@ it("emits an event when a date is selected", async () => {
     onChange((e as CustomEvent).detail);
   });
 
+
   await fireEvent.click(todayEl);
   await waitFor(() => {
     expect(onChange).toBeCalled();
-    expect(onChange).toBeCalledWith({ type: "date", value: today, name });
+    expect(onChange).toBeCalledWith({ type: "date", value: today, valueStr: todayStr, name });
   });
 });
 

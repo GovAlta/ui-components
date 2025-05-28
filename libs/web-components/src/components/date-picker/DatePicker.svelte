@@ -149,11 +149,7 @@
 
   function onCalendarChange(e: CustomEvent) {
     _date = e.detail.value;
-    if (_date) {
-      value = _date.toISOString();
-    } else {
-      value = "";
-    }
+    value = e.detail.valueStr || "";
 
     hideCalendar();
     dispatchValue(_date);
