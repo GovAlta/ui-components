@@ -67,5 +67,6 @@
       "unitTestRunner": "none",
       "e2eTestRunner": "none"
     }
-  }
+  },
+  "useLegacyCache": true
 }

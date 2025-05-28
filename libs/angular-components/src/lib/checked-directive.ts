@@ -5,10 +5,7 @@ import {
   HostListener,
   Renderer2,
 } from "@angular/core";
-import {
-  CheckboxControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-} from "@angular/forms";
+import { CheckboxControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Directive({
   selector: "[goaChecked]",
@@ -19,16 +16,19 @@ import {
       multi: true,
     },
   ],
+  standalone: false,
 })
-
 export class CheckedDirective extends CheckboxControlValueAccessor {
   private _checked = false;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  override onChange: any = () => { };
-  override onTouched: any = () => { };
+  override onChange: any = () => {};
+  override onTouched: any = () => {};
 
-  constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
+  constructor(
+    protected renderer: Renderer2,
+    protected elementRef: ElementRef,
+  ) {
     super(renderer, elementRef);
   }
 
