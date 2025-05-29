@@ -18,6 +18,12 @@
               }
             ]
           }
+        ],
+        "@nx/dependency-checks": [
+          "error",
+          {
+            "ignoredDependencies": ["svelte", "glob", "@sveltejs/vite-plugin-svelte"] // these libs will be omitted from checks
+          }
         ]
       }
     },
