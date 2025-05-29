@@ -44,7 +44,7 @@ jobs:
         run: cp libs/web-components/README.md dist/libs/web-components
 
       - name: Remove types file for now
-        run: rm dist/libs/web-components/index.d.ts
+        run: rm -f dist/libs/web-components/index.d.ts
 
       - name: Release
         env:
