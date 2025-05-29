@@ -6,6 +6,7 @@
     checked: { reflect: true },
     arialabel: { reflect: true },
     error: { reflect: true },
+    revealarialabel: { reflect: true },
   }
 }}/>
 
@@ -21,6 +22,7 @@
     checked: boolean;
     ariaLabel: string;
     maxWidth: string;
+    revealAriaLabel?: string;
   };
 
   export type RadioItemSelectProps = {
@@ -30,7 +32,7 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
+  import { dispatch, fromBoolean, receive, relay, toBoolean, announceToScreenReader } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
   import { FieldsetResetFieldsMsg, FormFieldMountMsg, FormFieldMountRelayDetail } from "../../types/relay-types";
@@ -43,6 +45,7 @@
   export let error: string = "false";
   export let checked: string = "false";
   export let arialabel: string = "";
+  export let revealarialabel: string = ""; // screen reader will announce this when reveal slot is displayed
   export let maxwidth: string = "none";
 
   // margin
@@ -149,6 +152,7 @@
             checked: isChecked,
             ariaLabel: arialabel,
             maxWidth: maxwidth,
+            revealAriaLabel: revealarialabel
           },
         }),
       );
@@ -163,6 +167,7 @@
       checked = fromBoolean(data.checked);
       description = data.description;
       name = data.name;
+      revealarialabel = data.revealAriaLabel;
     });
   }
 
@@ -177,6 +182,11 @@
     // if (isChecked) return;  FIXME: does having this uncommented break something?
 
     dispatch(_radioItemEl, "_radioItemChange", value, { bubbles: true })
+
+    // Announce the reveal content change to screen readers if radio is checked and reveal content exists
+    if ($$slots.reveal && isChecked && revealarialabel && revealarialabel !== "") {
+      announceToScreenReader(revealarialabel);
+    }
 
     if (!isChecked && !!$$slots.reveal) {
       resetChildFormFields();

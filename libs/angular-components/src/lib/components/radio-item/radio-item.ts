@@ -12,6 +12,7 @@ import { GoabBaseComponent } from "../base.component";
       [attr.label]="label"
       [attr.description]="getDescriptionAsString()"
       [attr.arialabel]="ariaLabel"
+      [attr.revealarialabel]="revealAriaLabel"
       [disabled]="disabled"
       [attr.maxwidth]="maxWidth"
       [attr.checked]="checked"
@@ -27,7 +28,7 @@ import { GoabBaseComponent } from "../base.component";
       </div>
       <div slot="reveal">
         <ng-container
-          *ngIf="this.reveal !== null && this.reveal !== undefined"
+          *ngIf="this.reveal"
           [ngTemplateOutlet]="reveal"
         ></ng-container>
       </div>
@@ -41,8 +42,9 @@ export class GoabRadioItem extends GoabBaseComponent {
   @Input() label?: string;
   @Input() name?: string;
   @Input() description!: string | TemplateRef<any>;
-  @Input() reveal!: TemplateRef<any>;
+  @Input() reveal?: TemplateRef<any>;
   @Input() ariaLabel?: string;
+  @Input() revealAriaLabel?: string;
   @Input({ transform: booleanAttribute }) disabled?: boolean;
   @Input({ transform: booleanAttribute }) checked?: boolean;
   @Input({ transform: booleanAttribute }) error?: boolean;

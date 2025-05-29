@@ -26,6 +26,7 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.testid]="testId"
     [attr.arialabel]="ariaLabel"
     [attr.description]="getDescriptionAsString()"
+    [attr.revealarialabel]="revealArialLabel"
     [id]="id"
     [attr.maxwidth]="maxWidth"
     [attr.mt]="mt"
@@ -39,7 +40,7 @@ import { GoabControlValueAccessor } from "../base.component";
       <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
     </div>
     <div slot="reveal">
-      <ng-container *ngIf="reveal !== null && reveal !== undefined" [ngTemplateOutlet]="reveal"></ng-container>
+      <ng-container *ngIf="reveal" [ngTemplateOutlet]="reveal"></ng-container>
     </div>
   </goa-checkbox>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -60,7 +61,8 @@ export class GoabCheckbox extends GoabControlValueAccessor {
   @Input() override value?: string | number | boolean;
   @Input() ariaLabel?: string;
   @Input() description!: string | TemplateRef<any>;
-  @Input() reveal!: TemplateRef<any>;
+  @Input() reveal?: TemplateRef<any>;
+  @Input() revealArialLabel?: string;
   @Input() maxWidth?: string;
 
   @Output() onChange = new EventEmitter<GoabCheckboxOnChangeDetail>();

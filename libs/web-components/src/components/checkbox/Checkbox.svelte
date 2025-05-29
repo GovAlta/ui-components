@@ -5,7 +5,7 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
-  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
+  import { dispatch, fromBoolean, receive, relay, toBoolean, announceToScreenReader } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -29,6 +29,7 @@
   export let testid: string = "";
   export let arialabel: string = "";
   export let description: string = "";
+  export let revealarialabel: string = ""; // screen reader will announce this when reveal slot is displayed
   export let maxwidth: string = "none";
 
   // margin
@@ -112,7 +113,7 @@
       }
     });
     if (_revealSlotEl) {
-      onRevealSlotCustomEventListener();
+      addRevealSlotEventListeners();
     }
   }
 
@@ -178,6 +179,11 @@
     if (!!$$slots.reveal && !newCheckStatus) {
       resetChildFormFields();
     }
+
+    // Announce the reveal content change to screen readers if checkbox is checked and reveal content exists
+    if ($$slots.reveal && newCheckStatus && _revealSlotEl && revealarialabel !== "") {
+      announceToScreenReader(revealarialabel);
+    }
   }
 
   function onFocus() {
@@ -187,7 +193,7 @@
   /**
    * Stop propagate the _click,_change to checkbox (so it won't toggle the value)
    */
-  function onRevealSlotCustomEventListener() {
+  function addRevealSlotEventListeners() {
     _revealSlotEl.addEventListener("_click", (e: Event) => {
       // Stop custom event propagation
       e.stopPropagation();

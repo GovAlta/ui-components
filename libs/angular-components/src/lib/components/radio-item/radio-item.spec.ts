@@ -9,6 +9,7 @@ import { GoabRadioItem } from "./radio-item";
       [checked]="true"
       label="radio item text"
       [reveal]="revealTemplate"
+      revealAriaLabel="Screen reader announcement for radio reveal content"
     >
       <ng-template #revealTemplate>
         <strong>A reveal slot</strong>
@@ -38,5 +39,10 @@ describe("Radio item with reveal slot", () => {
     const radioItemElement = fixture.debugElement.nativeElement.querySelector("goa-radio-item");
     const slotReveal = radioItemElement.querySelector("[slot='reveal']");
     expect(slotReveal.textContent).toContain("A reveal slot");
+  });
+
+  it("should pass the revealAriaLabel property to the web component", () => {
+    const radioItemElement = fixture.debugElement.nativeElement.querySelector("goa-radio-item");
+    expect(radioItemElement.getAttribute("revealarialabel")).toBe("Screen reader announcement for radio reveal content");
   });
 });

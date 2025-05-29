@@ -278,5 +278,38 @@ export function getQueryParam(
   url: string | URL,
   key: string,
 ): string | undefined {
-  return getQueryParams(url)[key];
+  const params = getQueryParams(url);
+  return params[key];
+}
+
+/**
+ * Creates a temporary screen reader announcement using aria-live
+ * @param text The text to announce to screen readers
+ * @param duration How long to keep the announcer element in the DOM (in milliseconds)
+ */
+export function announceToScreenReader(text: string, duration = 3000): void {
+  const announcer = document.createElement("div");
+
+  announcer.style.position = "absolute";
+  announcer.style.width = "1px";
+  announcer.style.height = "1px";
+  announcer.style.padding = "0";
+  announcer.style.margin = "-1px";
+  announcer.style.overflow = "hidden";
+  announcer.style.clipPath = "inset(50%)";
+  announcer.style.whiteSpace = "nowrap";
+  announcer.style.borderWidth = "0";
+  announcer.style.opacity = "0";
+
+  announcer.setAttribute("aria-live", "polite");
+  announcer.setAttribute("aria-atomic", "true");
+  document.body.appendChild(announcer);
+
+  setTimeout(() => {
+    announcer.textContent = text;
+  }, 100);
+
+  setTimeout(() => {
+    document.body.removeChild(announcer);
+  }, duration);
 }
