@@ -154,6 +154,7 @@ describe("Checkbox with description slot", () => {
       [checked]="true"
       text="check box text"
       [reveal]="revealTemplate"
+      revealArialLabel="Screen reader announcement for reveal content"
     >
       <ng-template #revealTemplate>
         <strong>A reveal slot</strong>
@@ -166,7 +167,7 @@ class TestCheckboxWithRevealSlotComponent {}
 describe("Checkbox with reveal slot", () => {
   let fixture: ComponentFixture<TestCheckboxWithRevealSlotComponent>;
 
-  it("should render with slot reveal", async () => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GoabCheckbox, ReactiveFormsModule],
       declarations: [TestCheckboxWithRevealSlotComponent],
@@ -175,11 +176,20 @@ describe("Checkbox with reveal slot", () => {
 
     fixture = TestBed.createComponent(TestCheckboxWithRevealSlotComponent);
     fixture.detectChanges();
-    
+  });
+
+  it("should render with slot reveal", () => {
     const checkboxElement = fixture.debugElement.query(
       By.css("goa-checkbox"),
     ).nativeElement;
     const slotReveal = checkboxElement.querySelector("[slot='reveal']");
     expect(slotReveal.textContent).toContain("A reveal slot");
+  });
+
+  it("should pass the revealAriaLabel property to the web component", () => {
+    const checkboxElement = fixture.debugElement.query(
+      By.css("goa-checkbox"),
+    ).nativeElement;
+    expect(checkboxElement.getAttribute("revealarialabel")).toBe("Screen reader announcement for reveal content");
   });
 });

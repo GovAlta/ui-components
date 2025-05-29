@@ -21,6 +21,7 @@
     relay,
     generateRandomId,
     typeValidator,
+    announceToScreenReader,
   } from "../../common/utils";
   import {
     FieldsetResetErrorsMsg,
@@ -129,35 +130,8 @@
   function handleAnnounceHelperText() {
     const message = _hasError ? error || helptext : helptext;
     if (message) {
-      announceOnFocus(message);
+      announceToScreenReader(message);
     }
-  }
-
-  function announceOnFocus(text: string) {
-    const announcer = document.createElement("div");
-
-    announcer.style.position = "absolute";
-    announcer.style.width = "1px";
-    announcer.style.height = "1px";
-    announcer.style.padding = "0";
-    announcer.style.margin = "-1px";
-    announcer.style.overflow = "hidden";
-    announcer.style.clipPath = "inset(50%)";
-    announcer.style.whiteSpace = "nowrap";
-    announcer.style.borderWidth = "0";
-    announcer.style.opacity = "0";
-
-    announcer.setAttribute("aria-live", "polite");
-    announcer.setAttribute("aria-atomic", "true");
-    document.body.appendChild(announcer);
-
-    setTimeout(() => {
-      announcer.textContent = text;
-    }, 100);
-
-    setTimeout(() => {
-      document.body.removeChild(announcer);
-    }, 3000);
   }
 
   function updateAriaDescribedBy() {

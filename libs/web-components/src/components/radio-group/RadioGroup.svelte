@@ -159,6 +159,7 @@
             description: props.description,
             name,
             checked: props.value === value,
+            revealAriaLabel: props.revealAriaLabel,
           },
         }),
       );
