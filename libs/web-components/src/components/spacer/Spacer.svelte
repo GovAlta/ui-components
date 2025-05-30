@@ -19,7 +19,7 @@
 <div
   bind:this={rootEl}
   style={`
-    display: ${hspacing ? "inline-block" : "block"};
+  display: ${hspacing === "fill" || hspacing === "none" ? "block" : "inline-block"};
     height: var(--goa-space-${vspacing});
     width: var(--goa-space-${hspacing});
   `}
