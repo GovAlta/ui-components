@@ -1024,11 +1024,7 @@ export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
 export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
 
 // Public form page
-export type GoabPublicFormPageOnContinueDetail = {
-  el: HTMLElement;
-  state: Record<string, GoabFieldsetItemState>;
-  cancelled: boolean;
-}
+
 export type GoabPublicFormPageOnFieldsetChangeDetail = {
   id: string;
   state: {

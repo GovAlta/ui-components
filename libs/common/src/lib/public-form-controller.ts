@@ -1,8 +1,6 @@
 import { FieldsetItemState, FieldValidator } from "./validators";
 import {
   GoabFieldsetItemValue, GoabFormDispatchOn,
-  GoabPublicFormOnInitDetail,
-  GoabPublicFormPageOnContinueDetail
 } from "./common";
 
 export type FormStatus = "not-started" | "incomplete" | "complete";
@@ -33,13 +31,13 @@ export class PublicFormController<T> {
   constructor(private type: "details" | "list") {}
 
   // Obtain reference to the form element
-  init(e: GoabPublicFormOnInitDetail) {
+  init(e: Event) {
     // FIXME: This condition should not be needed, but currently it is the only way to get things working
     if (this._formRef) {
       console.warn("init: form element has already been set");
       return;
     }
-    this._formRef = e.el;
+    this._formRef = (e as CustomEvent).detail.el;
 
     this.state = {
       uuid: crypto.randomUUID(),
@@ -209,12 +207,12 @@ export class PublicFormController<T> {
 
   // Public method to perform validation and send the appropriate messages to the form elements
   validate(
-    e: GoabPublicFormPageOnContinueDetail,
+    e: Event,
     field: string,
     validators: FieldValidator[],
     options?: { grouped: boolean },
   ): [boolean, GoabFieldsetItemValue] {
-    const { el, state, cancelled } = e;
+    const { el, state, cancelled } = (e as CustomEvent).detail;
     const value = state?.[field]?.value;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -243,7 +241,7 @@ export class PublicFormController<T> {
    * @return {[number, Record<string, boolean>]} - Returns back the number of fields that passed and a record of the fields and their pass status.
    */
   validateGroup(
-    e: GoabPublicFormPageOnContinueDetail,
+    e: Event,
     fields: string[],
     validators: FieldValidator[],
   ): [number, Record<string, boolean>] {

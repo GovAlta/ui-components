@@ -8,7 +8,6 @@ import {
 import { GoabBaseComponent } from "../base.component";
 import {
   GoabPublicFormPageButtonVisibility, GoabPublicFormPageOnFieldsetChangeDetail, GoabPublicFormPageOnCompleteDetail,
-  GoabPublicFormPageOnContinueDetail,
   GoabPublicFormPageStep,
 } from "@abgov/ui-components-common";
 
@@ -58,7 +57,7 @@ export class GoabPublicFormPage extends GoabBaseComponent {
   /**
    * triggers when the form page continues to the next step
    */
-  @Output() onContinue = new EventEmitter<GoabPublicFormPageOnContinueDetail>();
+  @Output() onContinue = new EventEmitter<Event>();
 
   /**
    * triggers when the user clicks the back link

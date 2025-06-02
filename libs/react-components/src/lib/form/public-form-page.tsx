@@ -3,7 +3,6 @@ import {
   GoabPublicFormPageButtonVisibility,
   GoabPublicFormPageOnFieldsetChangeDetail,
   GoabPublicFormPageOnCompleteDetail,
-  GoabPublicFormPageOnContinueDetail,
   GoabPublicFormPageStep,
   Margins,
 } from "@abgov/ui-components-common";
@@ -48,7 +47,7 @@ interface GoabPublicFormPageProps extends Margins {
    * Triggered when the form page continues to the next step
    * @param event - The continue event details
    */
-  onContinue?: (event: GoabPublicFormPageOnContinueDetail) => void;
+  onContinue?: (event: Event) => void;
   /**
    * Triggered when the user clicks the back link
    */
@@ -95,7 +94,7 @@ export function GoabPublicFormPage({
     const current = ref.current;
 
     const continueListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoabPublicFormPageOnContinueDetail>).detail;
+      const detail = (e as CustomEvent).detail;
       onContinue?.(detail);
     };
 
