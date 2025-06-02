@@ -4,8 +4,6 @@ import {
   AppState,
 } from './public-form-controller';
 import {
-  GoabPublicFormOnInitDetail,
-  GoabPublicFormPageOnContinueDetail,
   GoabFieldsetItemValue
 } from './common';
 import { FieldValidator } from './validators';
@@ -41,8 +39,8 @@ export function usePublicFormController<T>(type: "details" | "list" = "details")
   }, []);
 
 
-  const init = useCallback((e: GoabPublicFormOnInitDetail) => {
-    if (!e?.el) {
+  const init = useCallback((e: Event) => {
+    if (!(e as CustomEvent).detail?.el) {
       console.error('El is null during initialization');
       return;
     }
@@ -71,7 +69,7 @@ export function usePublicFormController<T>(type: "details" | "list" = "details")
   }, []);
 
   const validate = useCallback((
-    e: GoabPublicFormPageOnContinueDetail,
+    e: Event,
     field: string,
     validators: FieldValidator[]
   ): [boolean, GoabFieldsetItemValue] => {
