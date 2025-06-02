@@ -1,9 +1,9 @@
 <svelte:options customElement={{
  tag: "goa-link",
   props: {
-    action: { type: "String", attribute: "action", reflect: true },
-    actionArg: { type: "String", attribute: "action-arg"},
-    actionArgs: { type: "Object", attribute: "action-args"},
+    action: { type: "String", attribute: "action", reflect: true},
+    actionArg: { type: "String", attribute: "action-arg", reflect: true},
+    actionArgs: { type: "Object", attribute: "action-args", reflect: true},
   }
 }}/>
 
@@ -15,6 +15,7 @@
 
   export let leadingicon: GoAIconType | null = null;
   export let trailingicon: GoAIconType | null = null;
+  export let color: "interactive" | "light" = "interactive";
 
   export let action: string = "";
   export let actionArg: string = "";
@@ -42,8 +43,10 @@
 </script>
 
 <div
-  bind:this={_rootEl}
   class="link"
+  class:interactive={color === "interactive"}
+  class:light={color === "light"}
+  bind:this={_rootEl}
   style={styles(calculateMargin(mt, mr, mb, ml))}
   data-testid={testid}
 >
@@ -60,7 +63,6 @@
   .link {
     display: inline-flex;
     align-items: center;
-    color: var(--goa-color-interactive-default);
     padding: 0;
     border: none;
     background: none;
@@ -70,7 +72,17 @@
     gap: 8px;
   }
 
-  .link:hover {
+  .link.interactive {
+    color: var(--goa-color-interactive-default);
+  }
+  .link.interactive:hover {
     color: var(--goa-color-interactive-hover);
+  }
+
+  .link.light {
+    color: var(--goa-color-text-light);
+  }
+  .link.light:hover {
+    color: var(--goa-color-text-light);
   }
 </style>

@@ -71,6 +71,8 @@ export { default as Tab } from "./components/tab/Tab.svelte";
 export { default as Table } from "./components/table/Table.svelte";
 export { default as TableSortHeader } from "./components/table/TableSortHeader.svelte";
 export { default as Tabs } from "./components/tabs/Tabs.svelte";
+export { default as TemporaryNotificationCtrl } from "./components/temporary-notification/TemporaryNotificationCtrl.svelte";
+export { default as TemporaryNotification } from "./components/temporary-notification/TemporaryNotification.svelte";
 export { default as Text } from "./components/text/Text.svelte";
 export { default as TextArea } from "./components/text-area/TextArea.svelte";
 export { default as ThreeColumnLayout } from "./layouts/three-column-layout/ThreeColumnLayout.svelte";

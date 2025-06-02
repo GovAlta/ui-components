@@ -1,6 +1,6 @@
 import { render } from "vitest-browser-react";
 
-import { GoabTabs, GoabTab, GoabPopover, GoabButton, GoabIconButton } from "../src";
+import { GoabPopover, GoabButton } from "../src";
 import { expect, describe, it, vi } from "vitest";
 
 describe("Popover", () => {

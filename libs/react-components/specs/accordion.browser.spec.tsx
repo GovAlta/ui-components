@@ -38,22 +38,20 @@ describe("Accordion", () => {
 
     const Component = () => {
       return (
-        <>
-          <GoabAccordion
-            heading="Heading"
-            headingSize="medium"
-            headingContent={
-              <GoabButton testId="heading-button" onClick={() => handleClick}>
-                This is a button
-              </GoabButton>
-            }
-            onChange={spy}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dol;ore ma;gna aliqua. Ut enim ad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi
-          </GoabAccordion>
-        </>
+        <GoabAccordion
+          heading="Heading"
+          headingSize="medium"
+          headingContent={
+            <GoabButton testId="heading-button" onClick={() => handleClick}>
+              This is a button
+            </GoabButton>
+          }
+          onChange={spy}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dol;ore ma;gna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi
+        </GoabAccordion>
       );
     };
 
