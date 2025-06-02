@@ -357,7 +357,7 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
     font: var(--goa-typography-body-m);
-    display: flex;
+    display: inline;
     align-items: center;
     height: 100%;
     position: relative;

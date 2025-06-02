@@ -1,15 +1,18 @@
-<svelte:options customElement="goa-link-button" />
-
-<script lang="ts" context="module">
-  export type LinkButtonType = "get-started" | "primary" | "secondary" | "tertiary";
-</script>
+<svelte:options customElement={{
+  tag: "goa-link-button",
+  props: {
+    action: { type: "String", attribute: "action", reflect: true},
+    actionArg: { type: "String", attribute: "action-arg", reflect: true},
+    actionArgs: { type: "Object", attribute: "action-args", reflect: true},
+  }
+}}/>
 
 <script lang="ts">
   import { calculateMargin, Spacing } from "../../common/styling";
   import { dispatch } from "../../common/utils";
   import { GoAIconType } from "../icon/Icon.svelte";
 
-  export let type: LinkButtonType = "tertiary"
+  export let color: "interactive" | "light" = "interactive";
   export let leadingicon: GoAIconType;
   export let trailingicon: GoAIconType;
   export let mt: Spacing = null;
@@ -17,17 +20,26 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  export let action: string = "";
+  export let actionArg: string = "";
+  export let actionArgs: Record<string, unknown> = {};
+
   let _el: HTMLButtonElement;
 
   function onClick(e: Event) {
     dispatch(_el, "_click", null, { bubbles: true })
+    if (action) {
+      dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
+    }
     e.stopPropagation();
   }
 </script>
 
 <button
   bind:this={_el}
-  class={`link-button ${type}`}
+  class="link-button"
+  class:interactive={color === "interactive"}
+  class:light={color === "light"}
   style={calculateMargin(mt, mr, mb, ml)}
   on:click={onClick}
 >
@@ -49,8 +61,20 @@
     text-decoration: underline;
   }
 
-  :global(::slotted(a)) {
+  button.interactive {
     color: var(--goa-color-interactive-default);
+  }
+  button.interactive:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+  }
+
+  button.light {
+    color: var(--goa-color-text-light);
+  }
+  button.light:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
   }
 </style>
 
