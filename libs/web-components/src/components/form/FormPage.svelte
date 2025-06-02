@@ -171,8 +171,12 @@
   <div bind:this={_rootEl}>
     {#if !_editting}
       {#if backUrl}
-        <goa-link leadingicon="chevron-back" mb="2xl">
-          <a href={backUrl}>Back</a>
+        <goa-link action="back" leadingicon="chevron-back" mb="2xl">
+          {#if backUrl === "#"}
+            <a>Back</a>
+          {:else}
+            <a href={backUrl}>Back</a>
+          {/if}
         </goa-link>
       {/if}
 
