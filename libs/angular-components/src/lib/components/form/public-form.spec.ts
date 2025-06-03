@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoabPublicForm } from "./public-form";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { GoabFormState, GoabPublicFormOnInitDetail, GoabPublicFormStatus } from "@abgov/ui-components-common";
+import { GoabFormState, GoabPublicFormStatus } from "@abgov/ui-components-common";
 
 @Component({
   template: `
@@ -21,7 +21,7 @@ class TestPublicFormComponent {
   status: GoabPublicFormStatus = "complete";
   name = "test-form";
 
-  handleInit(event: GoabPublicFormOnInitDetail): void {/** do nothing **/}
+  handleInit(event: Event): void {/** do nothing **/}
   handleComplete(event: GoabFormState): void {/** do nothing **/}
   handleStateChange(event: GoabFormState): void {/** do nothing **/}
 }
@@ -58,12 +58,12 @@ describe("GoabPublicForm", () => {
     const spy = jest.spyOn(component, "handleInit");
 
     const el = fixture.debugElement.query(By.css("goa-public-form")).nativeElement;
-    const detail: GoabPublicFormOnInitDetail = { 
+    const detail = {
       el: document.createElement("form")
     };
 
     el.dispatchEvent(new CustomEvent("_init", { detail }));
-    expect(spy).toHaveBeenCalledWith(detail);
+    expect(spy).toHaveBeenCalledWith(expect.any(CustomEvent));
   });
 
   it("should emit onComplete event", () => {

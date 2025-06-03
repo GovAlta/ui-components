@@ -1,7 +1,6 @@
 import { ReactNode, useRef, useLayoutEffect } from "react";
 import {
   GoabFormState,
-  GoabPublicFormOnInitDetail,
   GoabPublicFormStatus,
 } from "@abgov/ui-components-common";
 
@@ -23,7 +22,7 @@ declare module "react" {
 interface GoabPublicFormProps {
   status?: GoabPublicFormStatus;
   name?: string;
-  onInit?: (event: GoabPublicFormOnInitDetail) => void;
+  onInit?: (event: Event) => void;
   onComplete?: (event: GoabFormState) => void;
   onStateChange?: (event: GoabFormState) => void;
   children: ReactNode;
@@ -46,10 +45,7 @@ export function GoabPublicForm({
     const current = ref.current;
 
     const initListener = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      if (detail?.el) {
-        onInit?.(detail);
-      }
+      onInit?.(e);
     };
 
     //  First time initialization, add init listener immediately
