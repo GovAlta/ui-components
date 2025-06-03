@@ -50,8 +50,9 @@ interface GoabPublicFormPageProps extends Margins {
   onContinue?: (event: Event) => void;
   /**
    * Triggered when the user clicks the back link
+   * @param event: The back event details
    */
-  onBack?: () => void;
+  onBack?: (event: Event) => void;
   /**
    * Triggered when the form fieldset content changes
    * @param event - The fieldset change event details
@@ -97,8 +98,8 @@ export function GoabPublicFormPage({
       onContinue?.(e);
     };
 
-    const backListener = () => {
-      onBack?.();
+    const backListener = (e: Event) => {
+      onBack?.(e);
     };
 
     const fieldsetChangeListener = (e: Event) => {
