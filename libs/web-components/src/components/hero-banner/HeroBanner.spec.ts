@@ -9,11 +9,11 @@ describe("GoAHeroBanner", () => {
     const title = "Test Title";
     const el = render(GoAHeroBanner, { heading: title, backgroundurl: "somepic.png" });
 
-    const heading = await el.findByRole("heading")
+    const heading = await el.container.querySelector("goa-text");
     const background = await el.findByTestId("background");
 
     waitFor(() => {
-      expect(heading.innerHTML).toEqual(title);
+      expect(heading?.innerHTML).toEqual(title);
       expect(background.style.backgroundImage).toContain("somepic.png");
     })
   });

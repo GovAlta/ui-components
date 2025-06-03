@@ -91,7 +91,7 @@ type OnBlur<T = string> = (detail: GoaInputOnBlurDetail<T>) => void;
 type OnKeyPress<T = string> = (detail: GoabInputOnKeyPressDetail<T>) => void;
 
 export interface GoabInputProps extends BaseProps {
-  onChange: OnChange<string>;
+  onChange?: OnChange<string>;
   value?: string;
   min?: number | string;
   max?: number | string;
@@ -102,7 +102,7 @@ export interface GoabInputProps extends BaseProps {
 }
 
 interface GoabNumberInputProps extends BaseProps {
-  onChange: OnChange<number>;
+  onChange?: OnChange<number>;
   value?: number;
   min?: number;
   max?: number;
@@ -113,7 +113,7 @@ interface GoabNumberInputProps extends BaseProps {
 }
 
 interface GoabDateInputProps extends BaseProps {
-  onChange: OnChange<GoabDate>;
+  onChange?: OnChange<GoabDate>;
   value?: GoabDate;
   min?: GoabDate;
   max?: GoabDate;
@@ -168,7 +168,7 @@ export function GoabInput({
     const current = ref.current;
     const changeListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabInputOnChangeDetail>).detail;
-      onChange(detail);
+      onChange?.(detail);
     };
     const clickListener = () => {
       onTrailingIconClick?.();
@@ -243,32 +243,32 @@ export function GoabInput({
   );
 }
 
-const onDateChangeHandler = (onChange: OnChange<GoabDate>) => {
+const onDateChangeHandler = (onChange?: OnChange<GoabDate>) => {
   return ({ name, value }: GoabInputOnChangeDetail<string | Date>) => {
     if (!value) {
-      onChange({ name, value: "" });
+      onChange?.({ name, value: "" });
       return;
     }
     // valid string date
     if (typeof value === "string" && isValid(new Date(value))) {
-      onChange({ name, value: parseISO(value) });
+      onChange?.({ name, value: parseISO(value) });
       return;
     }
     // valid date
     if (isValid(value)) {
-      onChange({ name, value });
+      onChange?.({ name, value });
       return;
     }
   };
 };
 
-const onTimeChangeHandler = (onChange: OnChange) => {
+const onTimeChangeHandler = (onChange?: OnChange) => {
   return ({ name, value }: GoabInputOnChangeDetail) => {
     if (!value) {
-      onChange({ name, value: "" });
+      onChange?.({ name, value: "" });
       return;
     }
-    onChange({ name, value });
+    onChange?.({ name, value });
   };
 };
 
@@ -365,7 +365,7 @@ export function GoabInputFile(props: GoabInputProps): JSX.Element {
       id={props.id}
       name={props.name}
       type="file"
-      onChange={(e) => props.onChange({ name: e.target.name, value: e.target.value })}
+      onChange={(e) => props.onChange?.({ name: e.target.name, value: e.target.value })}
       style={{ backgroundColor: "revert" }}
     />
   );
@@ -382,7 +382,7 @@ export function GoabInputNumber({
   ...props
 }: GoabNumberInputProps): JSX.Element {
   const onNumberChange = ({ name, value }: GoabInputOnChangeDetail) => {
-    props.onChange({ name, value: parseFloat(value) });
+    props.onChange?.({ name, value: parseFloat(value) });
   };
   const onFocus = ({ name, value }: GoabInputOnFocusDetail) => {
     props.onFocus?.({ name, value: parseFloat(value) });

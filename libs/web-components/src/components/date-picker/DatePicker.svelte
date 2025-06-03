@@ -42,7 +42,7 @@
   export let relative: string = "";
   export let disabled: string = "false";
   export let testid: string = "";
-  export let width: string = "10rem";
+  export let width: string = "16ch";
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -341,7 +341,7 @@
           name="day"
           type="number"
           on:_change={onInputChange}
-          width="3ch"
+          width="4ch"
           value={_inputDate.day}
           min="1"
           max="31"
@@ -353,7 +353,7 @@
           name="year"
           type="number"
           on:_change={onInputChange}
-          width="5ch"
+          width="6ch"
           value={_inputDate.year}
           min="1800"
           max="2200"

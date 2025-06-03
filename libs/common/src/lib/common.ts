@@ -958,22 +958,12 @@ export type GoabTextBodySize = "body-l" | "body-m" | "body-s" | "body-xs";
 export type GoabTextSize = GoabTextHeadingSize | GoabTextBodySize;
 export type GoabTextColor = "primary" | "secondary";
 
-export type GoabFielsetOnContinueDetail = {
-  el: HTMLElement;
-  state: Record<string, string>;
-};
-
 // Simple Form
 export type GoabFormField = {
   label: string;
   value: string;
 };
-export type GoabFormState = {
-  form: Record<string, Record<string, GoabFormField>>;
-  history: string[];
-  editting: string;
-  lastModified?: Date;
-};
+
 export type GoabFormStorageType = "none" | "local" | "session";
 export type GoabFormOnMountDetail = {
   fn: (next: string) => void;
@@ -983,7 +973,79 @@ export type GoabFormOnStateChange = {
   state: Record<string, Record<string, GoabFormField>>;
 };
 
+// Common types to use between public form components
+export type GoabFormStatus = "not-started" | "cannot-start-yet" | "in-progress" | "submitted" | "update-needed" | "complete";
+export type GoabFormState = {
+  uuid: string;
+  form: Record<string, GoabFieldsetSchema>;
+  history: string[];
+  editting: string;
+  lastModified?: Date;
+  status: GoabFormStatus;
+};
+export type GoabFormDispatchOn = "change" | "continue";
+export type GoabFieldsetItemValue = string | number | Date;
+export type GoabFieldsetItemState = {
+  name: string;
+  label: string;
+  value: GoabFieldsetItemValue;
+  order: number;
+};
+
+// Fieldset component
+export type GoabFieldsetData =
+  | { type: "details"; fieldsets: Record<string, GoabFieldsetItemState> }
+  | { type: "list"; items: GoabFormState[] };
+
+export type GoabFieldsetSchema = {
+  heading?: string;
+  data?: GoabFieldsetData;
+};
+
+export interface GoabFieldsetOnChangeDetail {
+  id: string;
+  state: {
+    data: Record<string, GoabFieldsetItemState>;
+  };
+  dispatchOn: GoabFormDispatchOn;
+}
+export interface GoabFieldsetOnContinueDetail {
+  el: HTMLElement;
+  state: Record<string, GoabFieldsetItemState>;
+  cancelled: boolean;
+}
+
+// Public form component
+export type GoabPublicFormStatus = "initializing" | "complete";
+export type GoabPublicFormOnInitDetail = {
+  el: HTMLFormElement;
+}
+export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
+export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
+
+// Public form page
+export type GoabPublicFormPageOnContinueDetail = {
+  el: HTMLElement;
+  state: Record<string, GoabFieldsetItemState>;
+  cancelled: boolean;
+}
+export type GoabPublicFormPageOnFieldsetChangeDetail = {
+  id: string;
+  state: {
+    heading?: string;
+    data: Record<string, GoabFieldsetItemState>;
+  };
+  dispatchOn: GoabFormDispatchOn;
+}
+export type GoabPublicFormPageOnCompleteDetail = {
+  el: HTMLElement;
+  state: Record<string, GoabFieldsetItemState>;
+  cancelled: boolean;
+}
+
 // Drawer
 export type GoabDrawerPosition = "bottom" | "left" | "right" | undefined;
 export type GoabDrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw";
 export type GoabDrawerSize = `${number}${GoabDrawerSizeUnit}` | undefined;
+
+

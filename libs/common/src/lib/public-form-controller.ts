@@ -1,4 +1,9 @@
 import { FieldsetItemState, FieldValidator } from "./validators";
+import {
+  GoabFieldsetItemValue, GoabFormDispatchOn,
+  GoabPublicFormOnInitDetail,
+  GoabPublicFormPageOnContinueDetail
+} from "./common";
 
 export type FormStatus = "not-started" | "incomplete" | "complete";
 
@@ -10,7 +15,7 @@ export type AppState<T> = {
   editting: string;
   lastModified?: Date;
   status: FormStatus;
-  currentFieldset?: { id: T; dispatchType: "change" | "continue" };
+  currentFieldset?: { id: T; dispatchType: GoabFormDispatchOn };
 };
 
 export type Fieldset<T> = {
@@ -28,13 +33,13 @@ export class PublicFormController<T> {
   constructor(private type: "details" | "list") {}
 
   // Obtain reference to the form element
-  init(e: Event) {
+  init(e: GoabPublicFormOnInitDetail) {
     // FIXME: This condition should not be needed, but currently it is the only way to get things working
     if (this._formRef) {
       console.warn("init: form element has already been set");
       return;
     }
-    this._formRef = (e as CustomEvent).detail.el;
+    this._formRef = e.el;
 
     this.state = {
       uuid: crypto.randomUUID(),
@@ -204,12 +209,12 @@ export class PublicFormController<T> {
 
   // Public method to perform validation and send the appropriate messages to the form elements
   validate(
-    e: Event,
+    e: GoabPublicFormPageOnContinueDetail,
     field: string,
     validators: FieldValidator[],
     options?: { grouped: boolean },
-  ): [boolean, string] {
-    const { el, state, cancelled } = (e as CustomEvent).detail;
+  ): [boolean, GoabFieldsetItemValue] {
+    const { el, state, cancelled } = e;
     const value = state?.[field]?.value;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -238,7 +243,7 @@ export class PublicFormController<T> {
    * @return {[number, Record<string, boolean>]} - Returns back the number of fields that passed and a record of the fields and their pass status.
    */
   validateGroup(
-    e: Event,
+    e: GoabPublicFormPageOnContinueDetail,
     fields: string[],
     validators: FieldValidator[],
   ): [number, Record<string, boolean>] {

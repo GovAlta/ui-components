@@ -4,7 +4,7 @@ import {
   GoabIconType,
   Margins,
 } from "@abgov/ui-components-common";
-import { useEffect, useRef, type JSX } from "react";
+import { useEffect, useRef, type JSX, ReactNode } from "react";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -14,6 +14,9 @@ interface WCProps extends Margins {
   title?: string;
   disabled?: string;
   arialabel?: string;
+  action?: string;
+  actionArgs?: string;
+  actionArg?: string;
   testid?: string;
 }
 
@@ -32,10 +35,13 @@ export interface GoabIconButtonProps extends Margins {
   variant?: GoabIconButtonVariant;
   title?: string;
   disabled?: boolean;
-  children?: React.ReactNode;
   onClick?: () => void;
   testId?: string;
   ariaLabel?: string;
+  action?: string;
+  actionArgs?: Record<string, unknown>;
+  actionArg?: string;
+  children?: ReactNode;
 }
 
 export function GoabIconButton({
@@ -52,6 +58,9 @@ export function GoabIconButton({
   mr,
   mb,
   ml,
+  action,
+  actionArgs,
+  actionArg,
 }: GoabIconButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -81,6 +90,9 @@ export function GoabIconButton({
       size={size}
       title={title}
       arialabel={ariaLabel}
+      action={action}
+      action-arg={actionArg}
+      action-args={JSON.stringify(actionArgs)}
       mt={mt}
       mr={mr}
       mb={mb}

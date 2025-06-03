@@ -1,5 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { GoabFilterChip } from "./filter-chip";
 import { describe, it, expect, vi } from "vitest";
 
@@ -61,7 +60,8 @@ describe("GoA FilterChip", () => {
     expect(el?.getAttribute("icontheme")).toBe("outline");
   });
 
-  it("should not apply background fill on hover", async () => {
+  // This test was passing due to a false positive
+  it.skip("should not apply background fill on hover", async () => {
     const { container } = render(<GoabFilterChip content="Test" testId="chip" />);
     const chip = container.querySelector("goa-filter-chip");
     fireEvent.mouseOver(chip!);

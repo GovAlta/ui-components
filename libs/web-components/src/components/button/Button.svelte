@@ -1,10 +1,17 @@
-<svelte:options customElement="goa-button" />
+<svelte:options customElement={{
+  tag: "goa-button",
+  props: {
+    actionArg: { type: "String", attribute: "action-arg"},
+    actionArgs: { type: "Object", attribute: "action-args"},
+  }
+}} />
 
 <script lang="ts">
   import { onMount } from "svelte";
+
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { typeValidator, toBoolean, dispatch } from "../../common/utils";
+  import { typeValidator, toBoolean, dispatch, relay } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
   // Validators
@@ -44,6 +51,10 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
+  export let action: string = "";
+  export let actionArg: string = "";
+  export let actionArgs: Record<string, unknown> = {};
+
   // ========
   // Reactive
   // ========
@@ -66,8 +77,14 @@
   // =========
 
   function clickHandler(e: Event) {
-    if (!isDisabled && e.target) {
+    if (isDisabled) {
+      return;
+    }
+    if (e.target) {
       dispatch(e.target as Element, "_click", null, { bubbles: true });
+    }
+    if (action) {
+      dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
     }
   }
 </script>
@@ -81,7 +98,7 @@
   disabled={isDisabled}
   on:click={clickHandler}
   data-testid={testid}
-  type={type == "submit" ? type : "button"}
+  type={type === "submit" ? type : "button"}
 >
   {#if type === "start"}
     <span class="text">

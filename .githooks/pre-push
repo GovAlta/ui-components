@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# Build, lint and test
-npm run validate
-

@@ -14,7 +14,7 @@
     injectCss,
     type Spacing,
   } from "../../common/styling";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import {
     FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
@@ -75,7 +75,8 @@
 
   // Hooks
 
-  onMount(() => {
+  onMount(async () => {
+    await tick(); // for angular to register public form name
     addRelayListener();
     sendMountedMessage();
     injectCss(_rootEl, ":host", {
