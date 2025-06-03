@@ -32,7 +32,7 @@ import {
      [attr.mb]="mb"
      [attr.ml]="ml"
      (_continue)="_onContinue($event)"
-     (_back)="_onBack()"
+     (_back)="_onBack($event)"
      (_fieldsetChange)="_onFieldsetChange($event)"
      (_complete)="_onComplete($event)"
    >
@@ -62,7 +62,7 @@ export class GoabPublicFormPage extends GoabBaseComponent {
   /**
    * triggers when the user clicks the back link
    */
-  @Output() onBack = new EventEmitter<void>();
+  @Output() onBack = new EventEmitter<Event>();
 
   /**
    * triggers when the form fieldset content changes
@@ -78,8 +78,8 @@ export class GoabPublicFormPage extends GoabBaseComponent {
     this.onContinue.emit(event);
   }
 
-  _onBack() {
-    this.onBack.emit();
+  _onBack(event: Event) {
+    this.onBack.emit(event);
   }
 
   _onFieldsetChange(event: Event) {
