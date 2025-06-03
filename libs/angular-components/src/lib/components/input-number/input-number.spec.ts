@@ -39,6 +39,7 @@ import { fireEvent } from "@testing-library/dom";
       [suffix]="suffix"
       [ariaLabel]="ariaLabel"
       [ariaLabelledBy]="ariaLabelledBy"
+      [textAlign]="textAlign"
       [mt]="mt"
       [mb]="mb"
       [ml]="ml"
@@ -78,6 +79,7 @@ class TestInputNumberComponent {
   step?: number;
   type?: GoabInputType = "number";
   ariaLabelledBy?: string;
+  textAlign?: "left" | "right";
   mt?: Spacing;
   mr?: Spacing;
   mb?: Spacing;
@@ -229,5 +231,25 @@ describe("GoabInputNumber", () => {
     const validateOnKeyPress = jest.spyOn(component, "onKeyPress");
     fireEvent(inputNumber, new CustomEvent("_keypress"));
     expect(validateOnKeyPress).toHaveBeenCalledTimes(1);
+  });
+
+  describe("Text Alignment", () => {
+    it("passes textAlign prop through to web component", () => {
+      const testFixture = TestBed.createComponent(TestInputNumberComponent);
+      const testComponent = testFixture.componentInstance;
+      testComponent.name = "test-number";
+      testComponent.value = 123;
+      testComponent.textAlign = "left"; // Override default
+      testFixture.detectChanges();
+
+      const input = testFixture.debugElement.query(By.css("goa-input")).nativeElement;
+      expect(input?.getAttribute("textalign")).toBe("left");
+
+      // Test changing the value
+      testComponent.textAlign = "right";
+      testFixture.detectChanges();
+
+      expect(input?.getAttribute("textalign")).toBe("right");
+    });
   });
 });

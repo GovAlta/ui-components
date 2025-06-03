@@ -38,6 +38,7 @@ import { fireEvent } from "@testing-library/dom";
       [suffix]="suffix"
       [ariaLabel]="ariaLabel"
       [ariaLabelledBy]="ariaLabelledBy"
+      [textAlign]="textAlign"
       [mt]="mt"
       [mb]="mb"
       [ml]="ml"
@@ -76,6 +77,7 @@ class TestInputComponent {
   step?: number;
   type?: GoabInputType = "text";
   ariaLabelledBy?: string;
+  textAlign?: "left" | "right";
   mt?: Spacing;
   mr?: Spacing;
   mb?: Spacing;
@@ -171,6 +173,24 @@ describe("GoABInput", () => {
     expect(input?.getAttribute("arialabelledby")).toBe(component.ariaLabelledBy);
     expect(input?.getAttribute("min")).toBe(`${component.min}`);
     expect(input?.getAttribute("max")).toBe(`${component.max}`);
+  });
+
+  describe("Text Alignment", () => {
+    it("passes textAlign prop through to web component", () => {
+      const testFixture = TestBed.createComponent(TestInputComponent);
+      const testComponent = testFixture.componentInstance;
+      testComponent.name = "test";
+      testComponent.textAlign = "right";
+      testFixture.detectChanges();
+
+      const input = testFixture.debugElement.query(By.css("goa-input")).nativeElement;
+      expect(input?.getAttribute("textalign")).toBe("right");
+
+      testComponent.textAlign = "left";
+      testFixture.detectChanges();
+
+      expect(input?.getAttribute("textalign")).toBe("left");
+    });
   });
 
   it("should handle onChange event", () => {

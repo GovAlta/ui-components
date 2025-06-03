@@ -60,6 +60,7 @@ export interface IgnoreMe {
       [attr.mb]="mb"
       [attr.ml]="ml"
       [attr.handletrailingiconclick]="!!_onTrailingIconClick"
+      [attr.textalign]="textAlign"
       (_trailingIconClick)="_onTrailingIconClick($event)"
       (_change)="_onChange($event)"
       (_focus)="_onFocus($event)"
@@ -100,6 +101,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Input({ transform: numberAttribute }) step?: number;
   @Input() ariaLabelledBy?: string;
   @Input() trailingIconAriaLabel?: string;
+  @Input() textAlign?: "left" | "right" = "left";
 
   @Output() onTrailingIconClick = new EventEmitter();
   @Output() onFocus = new EventEmitter<GoabInputOnFocusDetail>();

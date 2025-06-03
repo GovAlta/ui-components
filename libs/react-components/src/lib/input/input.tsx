@@ -38,6 +38,7 @@ interface WCProps extends Margins {
   suffix?: string;
   arialabel?: string;
   testid?: string;
+  textalign?: string;
 
   // type=number
   min?: string | number;
@@ -83,6 +84,7 @@ interface BaseProps extends Margins {
   trailingContent?: React.ReactNode;
   maxLength?: number;
   trailingIconAriaLabel?: string;
+  textAlign?: "left" | "right";
 }
 
 type OnChange<T = string> = (detail: GoabInputOnChangeDetail<T>) => void;
@@ -154,6 +156,7 @@ export function GoabInput({
   trailingContent,
   maxLength,
   trailingIconAriaLabel,
+  textAlign = "left",
   onTrailingIconClick,
   onChange,
   onFocus,
@@ -236,6 +239,7 @@ export function GoabInput({
       ml={ml}
       handletrailingiconclick={onTrailingIconClick ? "true" : "false"}
       trailingiconarialabel={trailingIconAriaLabel}
+      textalign={textAlign}
     >
       {leadingContent && <div slot="leadingContent">{leadingContent}</div>}
       {trailingContent && <div slot="trailingContent">{trailingContent}</div>}
@@ -379,6 +383,7 @@ export function GoabInputNumber({
   min = Number.MIN_VALUE,
   max = Number.MAX_VALUE,
   value,
+  textAlign = "right",
   ...props
 }: GoabNumberInputProps): JSX.Element {
   const onNumberChange = ({ name, value }: GoabInputOnChangeDetail) => {
@@ -404,6 +409,7 @@ export function GoabInputNumber({
       onBlur={onBlur}
       type="number"
       onKeyPress={onKeyPress}
+      textAlign={textAlign}
     />
   );
 }

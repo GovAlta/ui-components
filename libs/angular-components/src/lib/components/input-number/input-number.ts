@@ -55,6 +55,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       [attr.mb]="mb"
       [attr.ml]="ml"
       [attr.handletrailingiconclick]="handleTrailingIconClick"
+      [attr.textalign]="textAlign"
       (_trailingIconClick)="_onTrailingIconClick($event)"
       (_change)="_onChange($event)"
       (_focus)="_onFocus($event)"
@@ -104,6 +105,7 @@ export class GoabInputNumber implements ControlValueAccessor, OnInit {
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
   @Input() trailingIconAriaLabel?: string;
+  @Input() textAlign?: "left" | "right" = "right"; // Default to right for numbers
 
   @Input() value: number | null = null;
 
