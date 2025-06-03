@@ -49,9 +49,15 @@
     ["on", "off", "none", "sentences", "words", "characters"],
   );
 
+  const [TextAlign, validateTextAlign] = typeValidator(
+    "Input text align",
+    ["left", "right"],
+  );
+
   // Types
   type Type = (typeof Types)[number];
   type AutoCapitalize = (typeof AutoCapitalize)[number];
+  type TextAlign = (typeof TextAlign)[number];
 
   export let type: Type = "text";
   export let name: string = "";
@@ -83,6 +89,7 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
   export let trailingiconarialabel: string = "";
+  export let textalign: TextAlign = "left";
 
   let _leadingContentSlot = false;
   let _trailingContentSlot = false;
@@ -137,6 +144,7 @@
 
     validateType(type);
     validateAutoCapitalize(autocapitalize);
+    validateTextAlign(textalign);
     addRelayListener();
     showDeprecationWarnings();
     checkSlots();
@@ -331,7 +339,8 @@
       class="input--{variant}"
       style={styles(
         `--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`,
-        _inputWidth && `width: ${_inputWidth}`
+        _inputWidth && `width: ${_inputWidth}`,
+        textalign === "right" && `text-align: right`
       )}
       readonly={isReadonly}
       disabled={isDisabled}

@@ -174,4 +174,20 @@ describe("Input", () => {
       value: decimalValue,
     });
   });
+
+  describe("Text Alignment", () => {
+    it("passes textAlign prop through to web component", () => {
+      const props: GoabInputProps = {
+        ...defaultProps,
+        name: "test",
+        textAlign: "right",
+      };
+
+      render(<GoabInputText {...props} />);
+
+      const input = document.querySelector("goa-input");
+      expect(input).toBeTruthy();
+      expect(input?.getAttribute("textalign")).toBe("right");
+    });
+  });
 });
