@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { GoabPublicForm } from "./public-form";
-import { GoabFormState, GoabPublicFormOnInitDetail } from "@abgov/ui-components-common";
+import { GoabFormState } from "@abgov/ui-components-common";
 
 describe("GoabPublicForm", () => {
   it("renders with all properties", () => {
@@ -30,13 +30,13 @@ describe("GoabPublicForm", () => {
 
     const el = baseElement.querySelector("goa-public-form");
     const mockFormElement = document.createElement("form");
-    const detail: GoabPublicFormOnInitDetail = {
+    const detail = {
       el: mockFormElement
     };
     const event = new CustomEvent("_init", { detail });
     el?.dispatchEvent(event);
 
-    expect(handleInit).toHaveBeenCalledWith(detail);
+    expect(handleInit).toHaveBeenCalledWith(event);
   });
 
   it("handles onComplete event", () => {
@@ -77,7 +77,7 @@ describe("GoabPublicForm", () => {
       editting: "",
       status: "complete"
     };
-    const event = new CustomEvent("_stateChange", { 
+    const event = new CustomEvent("_stateChange", {
       detail: { data: mockFormState }
     });
     el?.dispatchEvent(event);
@@ -89,7 +89,7 @@ describe("GoabPublicForm", () => {
     const handleInit = vi.fn();
     const handleComplete = vi.fn();
     const handleStateChange = vi.fn();
-    
+
     const { baseElement, unmount } = render(
       <GoabPublicForm
         onInit={handleInit}
@@ -105,10 +105,10 @@ describe("GoabPublicForm", () => {
 
     // After unmount, events should not trigger callbacks
     const mockFormElement = document.createElement("form");
-    const initEvent = new CustomEvent("_init", { 
+    const initEvent = new CustomEvent("_init", {
       detail: { el: mockFormElement }
     });
-    
+
     const mockFormState: GoabFormState = {
       uuid: "test-uuid",
       form: {},
@@ -116,12 +116,12 @@ describe("GoabPublicForm", () => {
       editting: "",
       status: "complete"
     };
-    
-    const completeEvent = new CustomEvent("_complete", { 
+
+    const completeEvent = new CustomEvent("_complete", {
       detail: mockFormState
     });
-    
-    const stateChangeEvent = new CustomEvent("_stateChange", { 
+
+    const stateChangeEvent = new CustomEvent("_stateChange", {
       detail: { data: mockFormState }
     });
 

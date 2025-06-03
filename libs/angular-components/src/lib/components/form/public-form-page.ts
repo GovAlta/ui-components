@@ -75,8 +75,7 @@ export class GoabPublicFormPage extends GoabBaseComponent {
   @Output() onComplete = new EventEmitter<GoabPublicFormPageOnCompleteDetail>();
 
   _onContinue(event: Event) {
-    const detail = (event as CustomEvent).detail;
-    this.onContinue.emit(detail);
+    this.onContinue.emit(event);
   }
 
   _onBack() {

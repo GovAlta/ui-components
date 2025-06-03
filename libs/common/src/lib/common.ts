@@ -1017,9 +1017,6 @@ export interface GoabFieldsetOnContinueDetail {
 
 // Public form component
 export type GoabPublicFormStatus = "initializing" | "complete";
-export type GoabPublicFormOnInitDetail = {
-  el: HTMLFormElement;
-}
 export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
 export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
 

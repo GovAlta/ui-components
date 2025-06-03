@@ -94,8 +94,7 @@ export function GoabPublicFormPage({
     const current = ref.current;
 
     const continueListener = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      onContinue?.(detail);
+      onContinue?.(e);
     };
 
     const backListener = () => {
