@@ -374,7 +374,7 @@
           name="day"
           type="number"
           on:_change={onInputChange}
-          width="4ch"
+          width="3ch"
           value={_inputDate.day}
           min="1"
           max="31"
@@ -388,7 +388,7 @@
           name="year"
           type="number"
           on:_change={onInputChange}
-          width="6ch"
+          width="5ch"
           value={_inputDate.year}
           min="1800"
           max="2200"

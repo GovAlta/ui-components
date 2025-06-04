@@ -363,7 +363,8 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
     font: var(--goa-typography-body-m);
-    display: inline;
+    display: block;
+    width: 100%;
     align-items: center;
     height: 100%;
     position: relative;
@@ -373,6 +374,7 @@
     cursor: pointer;
     height: 100%;
     outline: none;
+    width: 100%;
   }
 
   .popover-target:has(:focus-visible) {
