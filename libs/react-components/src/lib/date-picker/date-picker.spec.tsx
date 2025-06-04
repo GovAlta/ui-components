@@ -33,6 +33,7 @@ describe("DatePicker", () => {
         testId="foo"
         error
         disabled
+        type="input"
         onChange={noop}
       />,
     );
@@ -48,6 +49,7 @@ describe("DatePicker", () => {
     expect(el?.getAttribute("min")).toBe(min.toISOString());
     expect(el?.getAttribute("max")).toBe(max.toISOString());
     expect(el?.getAttribute("testid")).toBe("foo");
+    expect(el?.getAttribute("type")).toBe("input");
   });
 
   it("should handle event", async () => {

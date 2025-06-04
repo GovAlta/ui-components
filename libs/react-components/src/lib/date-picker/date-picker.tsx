@@ -1,5 +1,5 @@
 import { useEffect, useRef, type JSX } from "react";
-import { GoabDatePickerOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { GoabDatePickerInputType, GoabDatePickerOnChangeDetail, Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -8,6 +8,7 @@ interface WCProps extends Margins {
   error?: string;
   min?: string;
   max?: string;
+  type?: string;
   relative?: string;
   disabled?: string;
   testid?: string;
@@ -28,13 +29,14 @@ export interface GoabDatePickerProps extends Margins {
   error?: boolean;
   min?: Date;
   max?: Date;
+  type?: GoabDatePickerInputType;
   testId?: string;
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
   relative?: boolean;
   disabled?: boolean;
-  onChange: (detail: GoabDatePickerOnChangeDetail) => void;
+  onChange?: (detail: GoabDatePickerOnChangeDetail) => void;
 }
 
 export function GoabDatePicker({
@@ -45,6 +47,7 @@ export function GoabDatePicker({
   max,
   testId,
   disabled,
+  type,
   mt,
   mr,
   mb,
@@ -62,13 +65,17 @@ export function GoabDatePicker({
 
     const handleChange = (e: Event) => {
       const detail = (e as CustomEvent<GoabDatePickerOnChangeDetail>).detail;
-      onChange(detail);
+      onChange?.(detail);
     };
 
-    current.addEventListener("_change", handleChange);
+    if (onChange) {
+      current.addEventListener("_change", handleChange);
+    }
 
     return () => {
-      current.removeEventListener("_change", handleChange);
+      if (onChange) {
+        current.removeEventListener("_change", handleChange);
+      }
     };
   }, [onChange]);
 
@@ -77,6 +84,7 @@ export function GoabDatePicker({
       ref={ref}
       name={name}
       value={value?.toISOString() || ""}
+      type={type}
       error={error ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
       min={min?.toISOString()}

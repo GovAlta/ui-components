@@ -1,4 +1,4 @@
-import { GoabDatePickerOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { GoabDatePickerInputType, GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -23,6 +23,7 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.error]="error"
     [attr.disabled]="disabled"
     [attr.relative]="relative"
+    [attr.type]="type"
     [attr.testid]="testId"
     [attr.mt]="mt"
     [attr.mb]="mb"
@@ -46,6 +47,7 @@ export class GoabDatePicker extends GoabControlValueAccessor {
   @Input() override value?: Date | string | null | undefined;
   @Input() min?: Date | string;
   @Input() max?: Date | string;
+  @Input() type?: GoabDatePickerInputType;
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
