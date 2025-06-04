@@ -1,7 +1,10 @@
 // NOTE: This file should be named datepicker.browser.spec.tsx for JSX/TSX support!
+import React from "react";
 import { render } from "vitest-browser-react";
 import { GoabDatePicker } from "../src";
 import { expect, describe, it, vi } from "vitest";
+
+const noop = () => undefined;
 
 function px(val: string) {
   return Number(val.replace("px", ""));
@@ -12,7 +15,7 @@ describe("GoabDatePicker width", () => {
     // Setup a parent with a known width
     const Component = () => (
       <div style={{ width: "400px" }}>
-        <GoabDatePicker testId="datepicker" width="50%" onChange={() => {}} />
+        <GoabDatePicker testId="datepicker" width="50%" onChange={noop} />
       </div>
     );
     const result = render(<Component />);
@@ -26,7 +29,7 @@ describe("GoabDatePicker width", () => {
   it("should render at 550px width", async () => {
     const Component = () => (
       <div style={{ width: "550px" }}>
-        <GoabDatePicker testId="datepicker" width="550px" onChange={() => {}} />
+        <GoabDatePicker testId="datepicker" width="550px" onChange={noop} />
       </div>
     );
     const result = render(<Component />);
@@ -40,7 +43,7 @@ describe("GoabDatePicker width", () => {
   it("should render at 30ch width", async () => {
     const Component = () => (
       <div style={{ width: "30ch" }}>
-        <GoabDatePicker testId="datepicker" width="30ch" onChange={() => {}} />
+        <GoabDatePicker testId="datepicker" width="30ch" onChange={noop} />
       </div>
     );
     const result = render(<Component />);
