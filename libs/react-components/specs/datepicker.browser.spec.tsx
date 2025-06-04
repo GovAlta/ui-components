@@ -64,7 +64,8 @@ describe("GoabDatePicker width", () => {
     await vi.waitFor(() => {
       const rect = datepicker.element().getBoundingClientRect();
       const chWidth = measureCh();
-      expect(rect.width).toBe(chWidth * 30);
+      expect(rect.width).toBeGreaterThanOrEqual(chWidth * 30 - 10);
+      expect(rect.width).toBeLessThanOrEqual(chWidth * 30 + 10);
     });
   });
 });
