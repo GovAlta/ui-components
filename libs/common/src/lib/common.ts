@@ -56,6 +56,7 @@ export type GoabDatePickerOnChangeDetail = {
   name?: string;
   value: string | Date | undefined;
 };
+export type GoabDatePickerInputType = "calendar" | "input";
 
 export type GoabChipVariant = "filter";
 
