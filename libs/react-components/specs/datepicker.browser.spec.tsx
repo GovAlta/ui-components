@@ -42,16 +42,29 @@ describe("GoabDatePicker width", () => {
 
   it("should render at 30ch width", async () => {
     const Component = () => (
-      <div style={{ width: "30ch" }}>
+      <div style={{ width: "30ch", fontFamily: "monospace", fontSize: "16px" }}>
         <GoabDatePicker testId="datepicker" width="30ch" onChange={noop} />
       </div>
     );
     const result = render(<Component />);
     const datepicker = result.getByTestId("datepicker");
+
+    // Dynamically measure the width of a single "0" in the same font
+    const measureCh = () => {
+      const span = document.createElement("span");
+      span.style.fontFamily = "monospace";
+      span.style.fontSize = "16px";
+      span.textContent = "0";
+      document.body.appendChild(span);
+      const chWidth = span.getBoundingClientRect().width;
+      document.body.removeChild(span);
+      return chWidth;
+    };
+
     await vi.waitFor(() => {
       const rect = datepicker.element().getBoundingClientRect();
-      expect(rect.width).toBeGreaterThanOrEqual(288);
-      expect(rect.width).toBeLessThanOrEqual(289);
+      const chWidth = measureCh();
+      expect(rect.width).toBe(chWidth * 30);
     });
   });
 });
