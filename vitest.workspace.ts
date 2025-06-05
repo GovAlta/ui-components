@@ -1,6 +1,7 @@
 import { defineWorkspace } from "vitest/config";
 import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import react from "@vitejs/plugin-react";
+import { resolve } from "path";
 
 export default defineWorkspace([
   {
@@ -38,6 +39,14 @@ export default defineWorkspace([
     },
   },
   {
+    plugins: [
+      react(),
+    ],
+    resolve: {
+      alias: {
+        '@abgov/ui-components-common': resolve(__dirname, './dist/libs/common/index.js'),
+      },
+    },
     test: {
       name: "react-browser",
       globals: true,
@@ -51,9 +60,22 @@ export default defineWorkspace([
         name: "chromium",
         enabled: true,
       },
+      server: {
+        deps: {
+          inline: [/@abgov\/ui-components-common/]
+        }
+      }
     },
   },
   {
+    plugins: [
+      react(),
+    ],
+    resolve: {
+      alias: {
+        '@abgov/ui-components-common': resolve(__dirname, './dist/libs/common/index.js'),
+      },
+    },
     test: {
       name: "react-headless",
       globals: true,
@@ -68,6 +90,11 @@ export default defineWorkspace([
         enabled: true,
         headless: true,
       },
+      server: {
+        deps: {
+          inline: [/@abgov\/ui-components-common/]
+        }
+      }
     },
   },
 ]);
