@@ -139,7 +139,7 @@
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
     // obtain an initial snapshot of the data when fieldset shown
     if (detail.active) {
-      _stateSnapshot = { ..._state };
+      _stateSnapshot = JSON.parse(JSON.stringify({ ..._state }));
     }
   }
 
@@ -242,6 +242,8 @@
   // Functions
   // *********
 
+  // Reverts the form field values within the "input" components to prevent the
+  // cancelled values from showing when viewed again.
   function revertFormFieldValues() {
     for (const [name, field] of Object.entries(_formFields)) {
       // some form elements not "form-bound" won't exist within the snapshot state
@@ -317,7 +319,7 @@
       relayFieldsetChange();
     }
 
-    // revert the values
+    // revert the component values
     if (detail.cancelled) {
       revertFormFieldValues();
       _state = _stateSnapshot;

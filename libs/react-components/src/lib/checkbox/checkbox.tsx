@@ -21,6 +21,8 @@ interface WCProps extends Margins {
   value?: string | number;
   arialabel?: string;
   description?: string | React.ReactNode;
+  reveal?: React.ReactNode;
+  revealarialabel?: string;
   maxwidth?: string;
   testid?: string;
 }
@@ -38,6 +40,8 @@ export interface GoabCheckboxProps extends Margins {
   testId?: string;
   ariaLabel?: string;
   description?: string | React.ReactNode;
+  reveal?: React.ReactNode;
+  revealAriaLabel?: string;
   maxWidth?: string;
   onChange?: (detail: GoabCheckboxOnChangeDetail) => void;
 }
@@ -55,6 +59,8 @@ export function GoabCheckbox({
   value,
   text,
   description,
+  reveal,
+  revealAriaLabel,
   maxWidth,
   children,
   onChange,
@@ -94,6 +100,7 @@ export function GoabCheckbox({
       text={text}
       value={typeof value === "boolean" ? (value ? "true" : undefined) : value}
       arialabel={ariaLabel}
+      revealarialabel={revealAriaLabel}
       description={typeof description === "string" ? description : undefined}
       maxwidth={maxWidth}
       mt={mt}
@@ -101,10 +108,11 @@ export function GoabCheckbox({
       mb={mb}
       ml={ml}
     >
-      {description && typeof description !== "string" && (
+      {children}
+      {typeof description !== "string" && description && (
         <div slot="description">{description}</div>
       )}
-      {children}
+      {reveal && <div slot="reveal">{reveal}</div>}
     </goa-checkbox>
   );
 }

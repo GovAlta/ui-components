@@ -5,7 +5,7 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
-  import { dispatch, fromBoolean, receive, relay, toBoolean } from "../../common/utils";
+  import { dispatch, fromBoolean, receive, relay, toBoolean, announceToScreenReader } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -29,6 +29,7 @@
   export let testid: string = "";
   export let arialabel: string = "";
   export let description: string = "";
+  export let revealarialabel: string = ""; // screen reader will announce this when reveal slot is displayed
   export let maxwidth: string = "none";
 
   // margin
@@ -46,6 +47,7 @@
   let _descriptionId: string;
   let _error: boolean;
   let _prevError: boolean;
+  let _revealSlotHeight: number = 0;
 
   // Binding
   $: isDisabled = toBoolean(disabled);
@@ -63,6 +65,7 @@
   }
   $: isChecked = toBoolean(checked);
   $: isIndeterminate = false; // Design review. To be built with TreeView Later
+  $: revealSlotHasContent = _revealSlotHeight > 0;
 
   onMount(() => {
     // hold on to the initial value to prevent losing it on check changes
@@ -109,6 +112,9 @@
           break;
       }
     });
+    if (_revealSlotEl) {
+      addRevealSlotEventListeners();
+    }
   }
 
   function setCheckStatusByChildState(detail: FormFieldMountRelayDetail) {
@@ -173,10 +179,30 @@
     if (!!$$slots.reveal && !newCheckStatus) {
       resetChildFormFields();
     }
+
+    // Announce the reveal content change to screen readers if checkbox is checked and reveal content exists
+    if ($$slots.reveal && newCheckStatus && _revealSlotEl && revealarialabel !== "") {
+      announceToScreenReader(revealarialabel);
+    }
   }
 
   function onFocus() {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+  }
+
+  /**
+   * Stop propagate the _click,_change to checkbox (so it won't toggle the value)
+   */
+  function addRevealSlotEventListeners() {
+    _revealSlotEl.addEventListener("_click", (e: Event) => {
+      // Stop custom event propagation
+      e.stopPropagation();
+    });
+
+    _revealSlotEl.addEventListener("_change", (e: Event) => {
+      // Stop custom event propagation
+      e.stopPropagation();
+    });
   }
 </script>
 
@@ -248,6 +274,8 @@
     bind:this={_revealSlotEl}
     class="reveal"
     class:visible={$$slots.reveal && isChecked}
+    class:has-content={revealSlotHasContent}
+    bind:clientHeight={_revealSlotHeight}
   >
     <slot name="reveal" />
   </div>
@@ -315,11 +343,13 @@
     height: 0;
   }
   .reveal.visible {
+    display: block;
+    height: fit-content;
+  }
+  .reveal.visible.has-content {
     border-left: 4px solid var(--goa-color-greyscale-200);
     padding: var(--goa-space-m);
     margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);
-    display: block;
-    height: fit-content;
   }
 
   /* Container */

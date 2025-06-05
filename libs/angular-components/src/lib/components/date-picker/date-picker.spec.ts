@@ -14,6 +14,7 @@ import { fireEvent } from "@testing-library/dom";
       [value]="value"
       [min]="min"
       [max]="max"
+      type="input"
       [error]="error"
       [mt]="mt"
       [mb]="mb"
@@ -82,6 +83,7 @@ describe("GoABDatePicker", () => {
     expect(el?.getAttribute("ml")).toBe(component.ml);
     expect(el?.getAttribute("mr")).toBe(component.mr);
     expect(el?.getAttribute("width")).toBe(component.width);
+    expect(el?.getAttribute("type")).toBe("input");
   });
 
   it("should handle event", async () => {

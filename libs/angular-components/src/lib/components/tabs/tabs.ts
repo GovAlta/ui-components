@@ -1,4 +1,11 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  numberAttribute,
+} from "@angular/core";
 import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
 
 @Component({
@@ -9,15 +16,14 @@ import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
       [attr.initialtab]="initialTab"
       [attr.testid]="testId"
       (_change)="_onChange($event)"
-
     >
       <ng-content />
     </goa-tabs>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabTabs {
-  @Input() initialTab?: number;
+  @Input({ transform: numberAttribute }) initialTab?: number;
   @Input() testId?: string;
 
   @Output() onChange = new EventEmitter<GoabTabsOnChangeDetail>();
@@ -27,4 +33,3 @@ export class GoabTabs {
     this.onChange.emit(detail);
   }
 }
-

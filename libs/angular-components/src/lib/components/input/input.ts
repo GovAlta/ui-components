@@ -16,6 +16,8 @@ import {
   Output,
   forwardRef,
   OnInit,
+  booleanAttribute,
+  numberAttribute,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
@@ -58,6 +60,7 @@ export interface IgnoreMe {
       [attr.mb]="mb"
       [attr.ml]="ml"
       [attr.handletrailingiconclick]="!!_onTrailingIconClick"
+      [attr.textalign]="textAlign"
       (_trailingIconClick)="_onTrailingIconClick($event)"
       (_change)="_onChange($event)"
       (_focus)="_onFocus($event)"
@@ -80,24 +83,25 @@ export interface IgnoreMe {
 export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Input() type?: GoabInputType = "text";
   @Input() name?: string;
-  @Input() debounce?: number;
+  @Input({ transform: numberAttribute }) debounce?: number;
   @Input() autoCapitalize?: GoabInputAutoCapitalize;
   @Input() placeholder?: string;
   @Input() leadingIcon?: GoabIconType;
   @Input() trailingIcon?: GoabIconType;
   @Input() variant?: string;
-  @Input() focused?: boolean;
-  @Input() readonly?: boolean;
+  @Input({ transform: booleanAttribute }) focused?: boolean;
+  @Input({ transform: booleanAttribute }) readonly?: boolean;
   @Input() width?: string;
   @Input() prefix?: string;
   @Input() suffix?: string;
   @Input() ariaLabel?: string;
-  @Input() maxLength?: number;
+  @Input({ transform: numberAttribute }) maxLength?: number;
   @Input() min?: string | number;
   @Input() max?: string | number;
-  @Input() step?: number;
+  @Input({ transform: numberAttribute }) step?: number;
   @Input() ariaLabelledBy?: string;
   @Input() trailingIconAriaLabel?: string;
+  @Input() textAlign?: "left" | "right" = "left";
 
   @Output() onTrailingIconClick = new EventEmitter();
   @Output() onFocus = new EventEmitter<GoabInputOnFocusDetail>();

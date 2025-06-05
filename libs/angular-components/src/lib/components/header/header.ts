@@ -4,6 +4,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  numberAttribute,
 } from "@angular/core";
 
 @Component({
@@ -29,7 +30,7 @@ export class GoabAppHeader {
   @Input() heading?: string;
   @Input() maxContentWidth?: string;
   @Input() testId?: string;
-  @Input() fullMenuBreakpoint?: number;
+  @Input({ transform: numberAttribute }) fullMenuBreakpoint?: number;
 
   @Output() onMenuClick = new EventEmitter();
 

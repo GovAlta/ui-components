@@ -159,6 +159,7 @@
             description: props.description,
             name,
             checked: props.value === value,
+            revealAriaLabel: props.revealAriaLabel,
           },
         }),
       );
@@ -229,9 +230,10 @@
   }
 
   .goa-radio-group--vertical {
-    display: inline-flex;
-    flex-direction: column; /* Vertical stacking */
-    gap: var(--goa-radio-group-gap-vertical); /* Adds spacing */
+    display: flex;
+    flex-direction: column;  /* Vertical stacking */
+    gap: var(--goa-radio-group-gap-vertical);  /* Adds spacing */
+    width: 100%;
   }
 
   /* Focus styles */

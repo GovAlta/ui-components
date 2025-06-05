@@ -84,6 +84,31 @@ describe("GoabCheckbox", () => {
     ).toContain("description slot");
   });
 
+  it("should render with slot reveal", () => {
+    const result = render(
+      <GoabCheckbox name={"foo"} reveal={<div>reveal slot</div>} />,
+    );
+
+    const checkbox = document.querySelector("goa-checkbox");
+    expect(checkbox?.getAttribute("reveal")).toBe(null);
+    expect(
+      result.container.querySelector('div[slot="reveal"]')?.innerHTML,
+    ).toContain("reveal slot");
+  });
+
+  it("should pass the revealAriaLabel property to the web component", () => {
+    render(
+      <GoabCheckbox 
+        name={"foo"} 
+        reveal={<div>reveal slot</div>} 
+        revealAriaLabel="Screen reader announcement for checkbox reveal content" 
+      />,
+    );
+
+    const checkbox = document.querySelector("goa-checkbox");
+    expect(checkbox?.getAttribute("revealarialabel")).toBe("Screen reader announcement for checkbox reveal content");
+  });
+
   it("should handle the onChange event", async function () {
     const onChangeStub = vi.fn();
 

@@ -431,4 +431,89 @@ describe("GoAInput Component", () => {
       { timeout: 2000 },
     );
   });
+
+  describe("Text Alignment", () => {
+    it("defaults to left alignment when no textalign prop is provided", async () => {
+      const el = render(GoAInput, { testid: "input-test" });
+      const input = await el.findByTestId("input-test");
+
+      expect(input.style.textAlign).toBe("");
+      expect(input.style.cssText).not.toContain("text-align: right");
+    });
+
+    it("applies left alignment when textalign is set to 'left'", async () => {
+      const el = render(GoAInput, { testid: "input-test", textalign: "left" });
+      const input = await el.findByTestId("input-test");
+
+      expect(input.style.cssText).not.toContain("text-align: right");
+    });
+
+    it("applies right alignment when textalign is set to 'right'", async () => {
+      const el = render(GoAInput, { testid: "input-test", textalign: "right" });
+      const input = await el.findByTestId("input-test");
+
+      expect(input.style.cssText).toContain("text-align: right");
+    });
+
+    it("applies right alignment to number input", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        type: "number",
+        textalign: "right",
+      });
+      const input = await el.findByTestId("input-test");
+
+      expect(input.getAttribute("type")).toBe("number");
+      expect(input.style.cssText).toContain("text-align: right");
+    });
+
+    it("renders left-aligned input for visual regression testing", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        textalign: "left",
+        value: "Sample left-aligned text",
+        placeholder: "Left aligned placeholder",
+      });
+      const input = await el.findByTestId("input-test");
+
+      expect(input).toBeTruthy();
+      expect(input.style.cssText).not.toContain("text-align: right");
+      expect((input as HTMLInputElement).value).toBe(
+        "Sample left-aligned text",
+      );
+    });
+
+    it("renders right-aligned input for visual regression testing", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        textalign: "right",
+        value: "Sample right-aligned text",
+        placeholder: "Right aligned placeholder",
+      });
+      const input = await el.findByTestId("input-test");
+
+      expect(input).toBeTruthy();
+      expect(input.style.cssText).toContain("text-align: right");
+      expect((input as HTMLInputElement).value).toBe(
+        "Sample right-aligned text",
+      );
+    });
+
+    it("renders right-aligned number input for visual regression testing", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        type: "number",
+        textalign: "right",
+        value: "12345.67",
+        placeholder: "0.00",
+      });
+      const input = await el.findByTestId("input-test");
+
+      expect(input).toBeTruthy();
+      expect(input.getAttribute("type")).toBe("number");
+      expect(input.style.cssText).toContain("text-align: right");
+      expect((input as HTMLInputElement).value).toBe("12345.67");
+    });
+
+  });
 });

@@ -56,6 +56,7 @@ export type GoabDatePickerOnChangeDetail = {
   name?: string;
   value: string | Date | undefined;
 };
+export type GoabDatePickerInputType = "calendar" | "input";
 
 export type GoabChipVariant = "filter";
 
@@ -1017,18 +1018,11 @@ export interface GoabFieldsetOnContinueDetail {
 
 // Public form component
 export type GoabPublicFormStatus = "initializing" | "complete";
-export type GoabPublicFormOnInitDetail = {
-  el: HTMLFormElement;
-}
 export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
 export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
 
 // Public form page
-export type GoabPublicFormPageOnContinueDetail = {
-  el: HTMLElement;
-  state: Record<string, GoabFieldsetItemState>;
-  cancelled: boolean;
-}
+
 export type GoabPublicFormPageOnFieldsetChangeDetail = {
   id: string;
   state: {

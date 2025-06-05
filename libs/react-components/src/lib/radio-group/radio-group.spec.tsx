@@ -177,6 +177,26 @@ describe("RadioGroup", () => {
         result.container.querySelector("div[slot='description']")?.innerHTML,
       ).toContain("Bananas are banana");
     });
+
+    it("should pass the revealAriaLabel property to the web component", () => {
+      const result = render(
+        <GoabRadioGroup name="fruits" onChange={noop}>
+          <GoabRadioItem
+            label="Apples with reveal"
+            name="fruits"
+            value="apples"
+            reveal={<div>Additional apple options</div>}
+            revealAriaLabel="Screen reader announcement for radio reveal content"
+          />
+        </GoabRadioGroup>,
+      );
+
+      const radioItem = document.querySelector("goa-radio-item");
+      expect(radioItem?.getAttribute("revealarialabel")).toBe("Screen reader announcement for radio reveal content");
+      expect(
+        result.container.querySelector("div[slot='reveal']")?.innerHTML,
+      ).toContain("Additional apple options");
+    });
   });
 
   describe("Selection Change Tests", () => {

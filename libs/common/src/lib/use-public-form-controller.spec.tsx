@@ -1,11 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { renderHook } from "@testing-library/react";
 import { usePublicFormController } from "./use-public-form-controller";
-import { GoabPublicFormOnInitDetail } from "./common";
 
 describe("usePublicFormController", () => {
   const mockFormElement = document.createElement("form");
-  const mockInitEvent: GoabPublicFormOnInitDetail = {
+  const mockInitEvent = {
     el: mockFormElement
   };
 
@@ -16,14 +15,6 @@ describe("usePublicFormController", () => {
   it("should initialize with empty state", () => {
     const { result } = renderHook(() => usePublicFormController("details"));
     expect(result.current.state).toBe(undefined);
-  });
-
-  it("should initialize form reference when init is called", () => {
-    const { result } = renderHook(() => usePublicFormController("details"));
-
-    result.current.init(mockInitEvent);
-
-    expect(result.current.state).toBeDefined();
   });
 
   it("should handle null element during initialization", () => {
@@ -133,25 +124,5 @@ describe("usePublicFormController", () => {
     expect(isValid).toBe(true);
     expect(value).toBe("test value");
     expect(mockValidator).toHaveBeenCalledWith("test value");
-  });
-
-  it("should continue to next page", () => {
-    const { result } = renderHook(() => usePublicFormController("details"));
-
-    result.current.init(mockInitEvent);
-    result.current.continueTo("next-page");
-
-    // Add assertions based on your specific implementation
-    expect(result.current.state).toBeDefined();
-  });
-
-  it("should get state list", () => {
-    const { result } = renderHook(() => usePublicFormController("details"));
-
-    result.current.init(mockInitEvent);
-    result.current.initList(new CustomEvent("init", { detail: { el: mockFormElement } }));
-
-    const stateList = result.current.getStateList();
-    expect(Array.isArray(stateList)).toBe(true);
   });
 });

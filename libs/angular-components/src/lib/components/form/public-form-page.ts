@@ -8,7 +8,6 @@ import {
 import { GoabBaseComponent } from "../base.component";
 import {
   GoabPublicFormPageButtonVisibility, GoabPublicFormPageOnFieldsetChangeDetail, GoabPublicFormPageOnCompleteDetail,
-  GoabPublicFormPageOnContinueDetail,
   GoabPublicFormPageStep,
 } from "@abgov/ui-components-common";
 
@@ -33,7 +32,7 @@ import {
      [attr.mb]="mb"
      [attr.ml]="ml"
      (_continue)="_onContinue($event)"
-     (_back)="_onBack()"
+     (_back)="_onBack($event)"
      (_fieldsetChange)="_onFieldsetChange($event)"
      (_complete)="_onComplete($event)"
    >
@@ -58,12 +57,12 @@ export class GoabPublicFormPage extends GoabBaseComponent {
   /**
    * triggers when the form page continues to the next step
    */
-  @Output() onContinue = new EventEmitter<GoabPublicFormPageOnContinueDetail>();
+  @Output() onContinue = new EventEmitter<Event>();
 
   /**
    * triggers when the user clicks the back link
    */
-  @Output() onBack = new EventEmitter<void>();
+  @Output() onBack = new EventEmitter<Event>();
 
   /**
    * triggers when the form fieldset content changes
@@ -76,12 +75,11 @@ export class GoabPublicFormPage extends GoabBaseComponent {
   @Output() onComplete = new EventEmitter<GoabPublicFormPageOnCompleteDetail>();
 
   _onContinue(event: Event) {
-    const detail = (event as CustomEvent).detail;
-    this.onContinue.emit(detail);
+    this.onContinue.emit(event);
   }
 
-  _onBack() {
-    this.onBack.emit();
+  _onBack(event: Event) {
+    this.onBack.emit(event);
   }
 
   _onFieldsetChange(event: Event) {

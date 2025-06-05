@@ -4,7 +4,6 @@ import { GoabPublicFormPage } from "./public-form-page";
 import {
   GoabPublicFormPageOnFieldsetChangeDetail,
   GoabPublicFormPageOnCompleteDetail,
-  GoabPublicFormPageOnContinueDetail,
   GoabFieldsetItemState,
   GoabFormDispatchOn
 } from "@abgov/ui-components-common";
@@ -69,7 +68,7 @@ describe("GoabPublicFormPage", () => {
         order: 1
       }
     };
-    const detail: GoabPublicFormPageOnContinueDetail = {
+    const detail = {
       el: el as HTMLElement,
       state: mockState,
       cancelled: false
@@ -77,7 +76,7 @@ describe("GoabPublicFormPage", () => {
     const event = new CustomEvent("_continue", { detail });
     el?.dispatchEvent(event);
 
-    expect(handleContinue).toHaveBeenCalledWith(detail);
+    expect(handleContinue).toHaveBeenCalledWith(event);
   });
 
   it("handles onBack event", () => {
@@ -159,7 +158,7 @@ describe("GoabPublicFormPage", () => {
     const handleBack = vi.fn();
     const handleFieldsetChange = vi.fn();
     const handleComplete = vi.fn();
-    
+
     const { baseElement, unmount } = render(
       <GoabPublicFormPage
         onContinue={handleContinue}

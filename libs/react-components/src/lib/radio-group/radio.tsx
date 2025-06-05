@@ -6,6 +6,8 @@ interface WCProps extends Margins {
   name?: string;
   value?: string;
   description?: string | React.ReactNode;
+  reveal?: React.ReactNode;
+  revealarialabel?: string;
   label?: string;
   maxwidth?: string;
   disabled?: string;
@@ -28,6 +30,8 @@ export interface GoabRadioItemProps extends Margins {
   label?: string;
   name?: string;
   description?: string | React.ReactNode;
+  reveal?: React.ReactNode;
+  revealAriaLabel?: string;
   maxWidth?: string;
   disabled?: boolean;
   checked?: boolean;
@@ -41,6 +45,8 @@ export function GoabRadioItem({
   label,
   value,
   description,
+  reveal,
+  revealAriaLabel,
   maxWidth,
   disabled,
   checked,
@@ -63,6 +69,7 @@ export function GoabRadioItem({
       disabled={disabled ? "true" : undefined}
       checked={checked ? "true" : undefined}
       arialabel={ariaLabel}
+      revealarialabel={revealAriaLabel}
       mt={mt}
       mr={mr}
       mb={mb}
@@ -71,6 +78,7 @@ export function GoabRadioItem({
       {description && typeof description !== "string" && (
         <div slot="description">{description}</div>
       )}
+      {reveal && <div slot="reveal">{reveal}</div>}
       {children}
     </goa-radio-item>
   );

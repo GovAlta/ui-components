@@ -7,7 +7,6 @@ import {
   GoabPublicFormPageButtonVisibility,
   GoabPublicFormPageOnCompleteDetail,
   GoabPublicFormPageOnFieldsetChangeDetail,
-  GoabPublicFormPageOnContinueDetail,
   Spacing,
 } from "@abgov/ui-components-common";
 
@@ -55,7 +54,7 @@ class TestPublicFormPageComponent {
   mb = "l" as Spacing;
   ml = "xl" as Spacing;
 
-  handleContinue(event: GoabPublicFormPageOnContinueDetail): void {/** do nothing **/}
+  handleContinue(event: Event): void {/** do nothing **/}
   handleBack(): void {/** do nothing **/}
   handleFieldsetChange(event: GoabPublicFormPageOnFieldsetChangeDetail): void {/** do nothing **/}
   handleComplete(event: GoabPublicFormPageOnCompleteDetail): void {/** do nothing **/}
@@ -105,7 +104,7 @@ describe("GoabPublicFormPage", () => {
     const spy = jest.spyOn(component, "handleContinue");
 
     const el = fixture.debugElement.query(By.css("goa-public-form-page")).nativeElement;
-    const detail: GoabPublicFormPageOnContinueDetail = {
+    const detail = {
       el: document.createElement("form"),
       state: {
         "field1": {
@@ -119,7 +118,7 @@ describe("GoabPublicFormPage", () => {
     };
 
     el.dispatchEvent(new CustomEvent("_continue", { detail }));
-    expect(spy).toHaveBeenCalledWith(detail);
+    expect(spy).toHaveBeenCalledWith(expect.any(CustomEvent));
   });
 
   it("should emit onBack event", () => {

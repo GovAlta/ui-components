@@ -1,4 +1,4 @@
-import { GoabCheckboxOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { GoabCheckboxOnChangeDetail } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -7,9 +7,10 @@ import {
   Output,
   forwardRef,
   TemplateRef,
+  booleanAttribute,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { NgTemplateOutlet } from "@angular/common";
+import { NgIf, NgTemplateOutlet } from "@angular/common";
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
@@ -25,6 +26,7 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.testid]="testId"
     [attr.arialabel]="ariaLabel"
     [attr.description]="getDescriptionAsString()"
+    [attr.revealarialabel]="revealArialLabel"
     [id]="id"
     [attr.maxwidth]="maxWidth"
     [attr.mt]="mt"
@@ -37,6 +39,9 @@ import { GoabControlValueAccessor } from "../base.component";
     <div slot="description">
       <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
     </div>
+    <div slot="reveal">
+      <ng-container *ngIf="reveal" [ngTemplateOutlet]="reveal"></ng-container>
+    </div>
   </goa-checkbox>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -46,16 +51,18 @@ import { GoabControlValueAccessor } from "../base.component";
       useExisting: forwardRef(() => GoabCheckbox),
     },
   ],
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, NgIf],
 })
 export class GoabCheckbox extends GoabControlValueAccessor {
   @Input() name?: string;
-  @Input() checked?: boolean;
+  @Input({ transform: booleanAttribute }) checked?: boolean;
   @Input() text?: string;
   // ** NOTE: can we just use the base component for this?
   @Input() override value?: string | number | boolean;
   @Input() ariaLabel?: string;
   @Input() description!: string | TemplateRef<any>;
+  @Input() reveal?: TemplateRef<any>;
+  @Input() revealArialLabel?: string;
   @Input() maxWidth?: string;
 
   @Output() onChange = new EventEmitter<GoabCheckboxOnChangeDetail>();

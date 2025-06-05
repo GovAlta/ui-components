@@ -54,7 +54,7 @@ export abstract class GoabControlValueAccessor
   implements ControlValueAccessor
 {
   @Input() id?: string;
-  // supports disabled="true" instad of [disabled]="true"
+  // supports disabled="true" instead of [disabled]="true"
   @Input({ transform: booleanAttribute }) public disabled?: boolean;
   // supports error="true" instead of [error]="true"
   @Input({ transform: booleanAttribute }) public error?: boolean;
