@@ -1,14 +1,11 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import {
-  PublicFormController,
   AppState,
-} from './public-form-controller';
-import {
-  GoabFieldsetItemValue
-} from './common';
-import { FieldValidator } from './validators';
+  GoabFieldsetItemValue,
+  FieldValidator, PublicFormController,
+} from "@abgov/ui-components-common";
 
-export function usePublicFormController<T>(type: "details" | "list" = "details") {
+function usePublicFormController<T>(type: "details" | "list" = "details") {
   const controllerRef = useRef<PublicFormController<T>>(new PublicFormController<T>(type));
   const [state, setState] = useState<AppState<T> | AppState<T>[] | undefined>(undefined);
 
@@ -96,3 +93,5 @@ export function usePublicFormController<T>(type: "details" | "list" = "details")
     controller: controllerRef.current
   };
 }
+
+export { usePublicFormController };
