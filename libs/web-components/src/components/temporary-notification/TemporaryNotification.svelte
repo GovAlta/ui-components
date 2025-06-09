@@ -105,37 +105,33 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     background-color: var(--goa-temp-notification-progress-background, var(--goa-color-greyscale-400));
-    color: var(--goa-temp-notification-progress-value, var(--goa-color-greyscale-white));
+    color: var(--goa-color-greyscale-white);
   }
 
   /* WebKit (Chrome, Safari) specific styling */
   progress::-webkit-progress-bar {
-    background-color: var(--goa-temp-notification-progress-background, var(--goa-color-greyscale-400));
+    border: none;
+    background-color: var(--goa-color-greyscale-400);
     border-radius: 0;
     box-shadow: none;
   }
 
   progress::-webkit-progress-value {
-    background-color: var(--goa-temp-notification-progress-value, var(--goa-color-greyscale-white));
+    background-color: var(--goa-color-greyscale-white);
     border-radius: 0;
   }
 
   /* Firefox specific styling */
   progress::-moz-progress-bar {
-    background-color: var(--goa-temp-notification-progress-value, var(--goa-color-greyscale-white));
+    background-color: var(--goa-color-greyscale-white);
     border-radius: 0;
   }
 
   /* Styling for progress with value attribute */
   progress[value] {
-    background-color: var(--goa-temp-notification-progress-background, var(--goa-color-greyscale-400));
+    background-color: var(--goa-color-greyscale-400);
     border-radius: 0;
     box-shadow: none;
-  }
-
-  /* Styling for indeterminate progress */
-  progress:indeterminate {
-    background-color: var(--goa-temp-notification-progress-background, var(--goa-color-greyscale-400));
   }
 
   .show {
