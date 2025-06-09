@@ -1,4 +1,5 @@
 import { render } from "vitest-browser-react";
+
 import { GoabTabs, GoabTab } from "../src";
 import { expect, describe, it, vi } from "vitest";
 

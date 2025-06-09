@@ -13,6 +13,7 @@
 
   export let leadingicon: GoAIconType | null = null;
   export let trailingicon: GoAIconType | null = null;
+  export let color: "interactive" | "light" = "interactive";
 
   export let action: string = "";
   export let actionArg: string = "";
@@ -33,7 +34,9 @@
 </script>
 
 <div
-  class={`link`}
+  class="link"
+  class:interactive={color === "interactive"}
+  class:light={color === "light"}
   style={styles(calculateMargin(mt, mr, mb, ml))}
   data-testid={testid}
   on:click={handleClick}
@@ -51,7 +54,6 @@
   .link {
     display: inline-flex;
     align-items: center;
-    color: var(--goa-color-interactive-default);
     padding: 0;
     border: none;
     background: none;
@@ -61,7 +63,17 @@
     gap: 8px;
   }
 
-  .link:hover {
+  .link.interactive {
+    color: var(--goa-color-interactive-default);
+  }
+  .link.interactive:hover {
     color: var(--goa-color-interactive-hover);
+  }
+
+  .link.light {
+    color: var(--goa-color-text-light);
+  }
+  .link.light:hover {
+    color: var(--goa-color-text-light);
   }
 </style>

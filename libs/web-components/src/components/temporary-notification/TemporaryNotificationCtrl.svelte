@@ -13,71 +13,118 @@
     duration?: number; // in milliseconds
     actionText?: string; // Optional text for an action button
     action?: () => void; // Optional task to run when the notification is dismissed
-
+    progress?: number;
+    visible?: boolean;
   }
 </script>
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { typeValidator } from "../../common/utils";
+  import { receive, typeValidator } from "../../common/utils";
 
-  const [VerticalPositions, validateVerticalPosition] = typeValidator("Snackbar vertical position", [
-    "top",
-    "bottom",
-  ]);
-
-  const [HorizontalPositions, validateHorizontalPosition] = typeValidator("Snackbar horizontal position", [
-    "left",
-    "center",
-    "right",
-  ]);
-
-  type SnackbarVerticalPosition = (typeof VerticalPositions)[number];
-  type SnackbarHorizontalPosition = (typeof HorizontalPositions)[number];
+  type SnackbarVerticalPosition = "top" | "bottom";
+  type SnackbarHorizontalPosition = "left" | "center" | "right";
 
   export let verticalPosition: SnackbarVerticalPosition = "bottom";
-  export let horizontalPosition: SnackbarHorizontalPosition = "left";
+  export let horizontalPosition: SnackbarHorizontalPosition = "center";
 
   let _container: HTMLElement;
-  let _notifications: GoabNotification[] = [];
+  let _notification: GoabNotification | null = null;
 
-  function handleNotification(event: CustomEvent<GoabNotification>) {
-    _notifications = [..._notifications, event.detail]
+  function handleNotification(notification: GoabNotification) {
+    notification.visible = true;
+
+    if (_notification) {
+      _notification.visible = false;
+      setTimeout(() => setNotification(notification), 300)
+    } else {
+      setNotification(notification);
+    }
+  }
+
+  function setNotification(notification: GoabNotification) {
+    _notification = notification;
+
+    if (_notification.duration > 0) {
+      setTimeout(() => {
+        _notification.visible = false;
+        setTimeout(() => {
+          _notification = null
+        }, 300)
+      }, notification.duration)
+    }
+  }
+
+  function handleNotificationProgress(detail: {progress: number}) {
+    const { progress } = detail;
+    if (_notification) {
+      _notification.progress = progress;
+    }
+    if (progress > 100) {
+      _notification = null;
+    }
   }
 
   onMount(() => {
-    window.document.body.addEventListener("goa:temp-notification", handleNotification);
-
-    return () => {
-      window.document.body.removeEventListener("goa:temp-notification", handleNotification);
-    };
+    return receive(window.document.body, (action, data, event) => {
+      switch (action) {
+        case "goa:temp-notification":
+          handleNotification(data as GoabNotification);
+          break;
+        case "goa:temp-notification:progress":
+          handleNotificationProgress(data as {progress: number});
+          break;
+      }
+    });
   });
 </script>
 
 <div
   bind:this={_container}
   class="notification-container"
-  class:horizontal-left={horizontalPosition === "left"}
-  class:horizontal-right={horizontalPosition === "right"}
-  class:horizontal-center={horizontalPosition === "center"}
-  class:vertical-bottom={verticalPosition === "bottom"}
-  class:vertical-top={verticalPosition === "top"}
+  class:pos-left={horizontalPosition === "left"}
+  class:pos-right={horizontalPosition === "right"}
+  class:pos-center={horizontalPosition === "center"}
+  class:pos-bottom={verticalPosition === "bottom"}
+  class:pos-top={verticalPosition === "top"}
 >
-  {#each _notifications as notification (notification.message)}
+  {#if _notification}
     <goa-temp-notification
-      message={notification.message}
-      type={notification.type}
-      duration={notification.duration}
-      action-text={notification.actionText}
-      on:action={notification.action}
+      message={_notification.message}
+      type={_notification.type}
+      duration={_notification.duration}
+      action-text={_notification.actionText}
+      progress={_notification.progress}
+      visible={_notification.visible}
+      on:action={_notification.action}
     />
-  {/each}
+  {/if}
 </div>
 
 <style>
   .notification-container {
+    position: fixed;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .pos-top {
+    top: 20px;
+  }
+  .pos-bottom {
+    bottom: 20px;
+  }
+  .pos-left {
+    left: 20px;
+    transform: none;
+  }
+  .pos-center {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .pos-right {
+    right: 20px;
+    transform: none;
   }
 </style>

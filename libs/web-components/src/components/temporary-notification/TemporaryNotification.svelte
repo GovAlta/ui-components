@@ -7,6 +7,7 @@
     progress: { type: "Number", attribute: "progress" },
     testid: { type: "String", attribute: "testid" },
     actionText: { type: "String", attribute: "action-text" },
+    visible: { type: "Boolean", attribute: "visible" },
   },
 }} />
 
@@ -27,28 +28,14 @@
   // Props
   export let message: string = "";
   export let type: SnackbarType = "basic";
-  export let duration: number = 4000;
+  export let duration: number;
   export let progress: number = -1; // -1 = hidden, 0-100 = show
   export let testid: string = "";
   export let actionText: string = "";
-
-  let visible: boolean = true;
-
-  // Reactive
-  $: isShowProgress = progress >= 0 && progress <= 100;
+  export let visible: boolean = true;
 
   onMount(() => {
     validateType(type);
-
-    if (duration > 0) {
-      setTimeout(() => {
-        visible = false;
-      }, duration);
-
-      setTimeout(() => {
-
-      }, duration + 300);
-    }
   });
 </script>
 
@@ -75,41 +62,57 @@
 
   {#if actionText}
     <div class="action">
-      <!--
-      // should the link allow color to be set?
-      // should I just replace this with an anchor and manually dispatch the action?
-      -->
-      <goa-link action="action">{actionText}</goa-link>
+      <goa-link color="light" action="action">{actionText}</goa-link>
     </div>
   {/if}
 
-  {#if isShowProgress}
-    <div class="progress-bar" style="width: {progress}%"></div>
+  {#if progress >= 0 && progress < 100}
+    <progress value={progress} max="100" />
+  {:else if typeof(duration) === "undefined"}
+    <progress />
   {/if}
 </div>
 
 <style>
   .snackbar {
-    display: flex;
     position: relative;
+    display: flex;
+    gap: var(--goa-space-m);
     align-items: center;
+    padding: var(--goa-space-m) var(--goa-space-l);
     min-width: 360px;
     max-width: 640px;
     background: var(--goa-color-greyscale-black); /* Basic */
     color: var(--goa-color-text-light);
-    padding: var(--goa-space-m) var(--goa-space-l);
     border-radius: var(--goa-border-radius-m);
-    gap: var(--goa-space-m);
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     overflow: hidden;
+  }
+
+  progress {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  progress[value], progress[value]::-webkit-progress-bar {
+    background-color: #fff;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .show {
     opacity: 1;
+    transform: translateY(0);
   }
 
   .hide {
     opacity: 0;
+    transform: translateY(50px);
   }
 
   .action a {

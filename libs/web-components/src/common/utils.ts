@@ -42,10 +42,16 @@ export function receive(
     console.warn("receive() el is null | undefined");
   }
 
-  el?.addEventListener("msg", (e: Event) => {
+  const listener = (e: Event) => {
     const ce = e as CustomEvent;
     handler(ce.detail.action, ce.detail.data, e);
-  });
+  }
+
+  el?.addEventListener("msg", listener);
+
+  return () => {
+    el?.removeEventListener("msg", listener);
+  };
 }
 
 export function relay<T>(

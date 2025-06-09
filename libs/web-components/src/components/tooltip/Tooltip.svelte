@@ -210,7 +210,7 @@
   tabindex="0"
   style={calculateMargin(mt, mr, mb, ml)}
 >
-  <div class="tooltip-target">
+  <div class="tooltip-target" tabindex="-1">
     <slot />
   </div>
   <span
