@@ -1,7 +1,8 @@
 <svelte:options customElement={{
   tag: "goa-temp-notification-ctrl",
   props: {
-
+    vPosition: { type: "String", attribute: "vertical-position" },
+    hPosition: { type: "String", attribute: "horizontal-position" },
   }
 }}
 />
@@ -25,8 +26,8 @@
   type SnackbarVerticalPosition = "top" | "bottom";
   type SnackbarHorizontalPosition = "left" | "center" | "right";
 
-  export let verticalPosition: SnackbarVerticalPosition = "bottom";
-  export let horizontalPosition: SnackbarHorizontalPosition = "center";
+  export let vPosition: SnackbarVerticalPosition = "bottom";
+  export let hPosition: SnackbarHorizontalPosition = "center";
 
   let _container: HTMLElement;
   let _notification: GoabNotification | null = null;
@@ -82,11 +83,11 @@
 <div
   bind:this={_container}
   class="notification-container"
-  class:pos-left={horizontalPosition === "left"}
-  class:pos-right={horizontalPosition === "right"}
-  class:pos-center={horizontalPosition === "center"}
-  class:pos-bottom={verticalPosition === "bottom"}
-  class:pos-top={verticalPosition === "top"}
+  class:pos-left={hPosition === "left"}
+  class:pos-right={hPosition === "right"}
+  class:pos-center={hPosition === "center"}
+  class:pos-bottom={vPosition === "bottom"}
+  class:pos-top={vPosition === "top"}
 >
   {#if _notification}
     <goa-temp-notification
@@ -96,6 +97,7 @@
       action-text={_notification.actionText}
       progress={_notification.progress}
       visible={_notification.visible}
+      animation-direction={vPosition === "top" ? "up" : "down"}
       on:action={_notification.action}
     />
   {/if}

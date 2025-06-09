@@ -8,6 +8,7 @@
     testid: { type: "String", attribute: "testid" },
     actionText: { type: "String", attribute: "action-text" },
     visible: { type: "Boolean", attribute: "visible" },
+    animationDirection: { type: "String", attribute: "animation-direction" },
   },
 }} />
 
@@ -33,6 +34,7 @@
   export let testid: string = "";
   export let actionText: string = "";
   export let visible: boolean = true;
+  export let animationDirection: "up" | "down" = "down";
 
   onMount(() => {
     validateType(type);
@@ -46,6 +48,8 @@
   class:failure={type === "failure"}
   class:show={visible}
   class:hide={!visible}
+  class:animate-up={animationDirection === "up"}
+  class:animate-down={animationDirection === "down"}
   data-testid={testid}
 >
   {#if type === "success"}
@@ -77,7 +81,6 @@
   .snackbar {
     position: relative;
     display: flex;
-    border: 1px solid var(--goa-color-greyscale-700);
     border-radius: var(--goa-border-radius-m);
     gap: var(--goa-space-m);
     align-items: center;
@@ -90,6 +93,9 @@
     overflow: hidden;
   }
 
+  .snackbar.basic {
+    border: 1px solid var(--goa-color-greyscale-700);
+  }
 
   /* Base progress element styling */
   progress {
@@ -98,40 +104,62 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 4px;
-    border-radius: 0;
-    border: none;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-color: var(--goa-temp-notification-progress-background, var(--goa-color-greyscale-400));
-    color: var(--goa-color-greyscale-white);
+    height: 6px;
+    /*border-radius: 0;*/
+    /*border: none;*/
+    /*appearance: none;*/
+    /*-webkit-appearance: none;*/
+    /*-moz-appearance: none;*/
+    /*background-color: var(--goa-temp-notification-progress-background, var(--goa-color-greyscale-400));*/
+    /*color: var(--goa-color-greyscale-white);*/
   }
 
   /* WebKit (Chrome, Safari) specific styling */
   progress::-webkit-progress-bar {
-    border: none;
-    background-color: var(--goa-color-greyscale-400);
-    border-radius: 0;
-    box-shadow: none;
+    /*border: none;*/
+    /*background-color: var(--goa-color-greyscale-400);*/
+    /*border-radius: 0;*/
+    /*box-shadow: none;*/
   }
 
   progress::-webkit-progress-value {
-    background-color: var(--goa-color-greyscale-white);
-    border-radius: 0;
+    /*background-color: var(--goa-color-greyscale-white);*/
+    /*border-radius: 0;*/
   }
 
   /* Firefox specific styling */
   progress::-moz-progress-bar {
-    background-color: var(--goa-color-greyscale-white);
-    border-radius: 0;
+    /*background-color: var(--goa-color-greyscale-white);*/
+    /*border-radius: 0;*/
+  }
+
+  /* Styling for indeterminate progress */
+  progress:not([value]) {
+    /*appearance: initial;*/
+    /*-webkit-appearance: initial;*/
+    /*-moz-appearance: initial;*/
+    /*background-color: var(--goa-color-greyscale-400);*/
+  }
+
+  /* WebKit indeterminate progress */
+  progress:not([value])::-webkit-progress-bar {
+    /*background-color: var(--goa-color-greyscale-400);*/
+  }
+
+  progress:not([value])::-webkit-progress-value {
+    /*background-color: var(--goa-color-greyscale-white);*/
+  }
+
+  /* Firefox indeterminate progress */
+  progress:not([value])::-moz-progress-bar {
+    /*background-color: var(--goa-color-greyscale-white);*/
   }
 
   /* Styling for progress with value attribute */
   progress[value] {
-    background-color: var(--goa-color-greyscale-400);
-    border-radius: 0;
-    box-shadow: none;
+    /*background-color: var(--goa-color-greyscale-400);*/
+    /*border-radius: 0;*/
+    /*box-shadow: none;*/
   }
 
   .show {
@@ -141,6 +169,11 @@
 
   .hide {
     opacity: 0;
+  }
+  .hide.animate-up {
+    transform: translateY(-50px);
+  }
+  .hide.animate-down {
     transform: translateY(50px);
   }
 
