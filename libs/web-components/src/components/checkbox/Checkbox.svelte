@@ -200,8 +200,21 @@
     });
 
     _revealSlotEl.addEventListener("_change", (e: Event) => {
-      // Stop custom event propagation
+      const customEvent = e as CustomEvent;
+      const eventDetail = customEvent.detail;
       e.stopPropagation();
+
+      // If this is a form field value change
+      // relay it so the fieldset can listen for (public form
+      if (eventDetail && eventDetail.name && typeof eventDetail.value !== 'undefined') {
+        _rootEl.dispatchEvent(
+          new CustomEvent("_reveal_change", {
+            composed: true,
+            bubbles: true,
+            detail: eventDetail
+          })
+        );
+      }
     });
   }
 </script>
