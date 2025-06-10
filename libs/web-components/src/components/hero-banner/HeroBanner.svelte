@@ -27,7 +27,7 @@
   "
 >
   <goa-page-block width={maxcontentwidth || "full"}>
-    <goa-text as="h1" mb="none" mt="none">{heading}</goa-text>
+    <h1>{heading}</h1>
     <div class="goa-hero-banner-content" role="note">
       <slot />
     </div>
@@ -65,7 +65,8 @@
     border-bottom: 8px solid var(--goa-color-brand-default);
     justify-content: flex-end;
     background: unset;
-    background-image: linear-gradient(
+    background-image:
+      linear-gradient(
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 0.42) 42%,
         rgba(0, 0, 0, 0.6) 100%
