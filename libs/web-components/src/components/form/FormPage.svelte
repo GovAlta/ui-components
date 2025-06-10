@@ -68,6 +68,8 @@
     history.pushState({ page: id }, "", url);
   }
 
+  $: console.log("FormPage id , type ",id,  type, _editting);
+
   onMount(() => {
     bindReceiver();
     bindWithParent();
