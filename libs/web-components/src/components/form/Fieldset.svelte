@@ -270,27 +270,36 @@
 
   function addChildChangeListener() {
     _rootEl.addEventListener("_change", (e: Event) => {
-      const { name, value } = (e as CustomEvent).detail;
-
-      // if no name is registered, they are not bound to the public-form
-      if (!_formItems[name]) {
-        return;
-      }
-      if (!_formFields[name]) {
-        return;
-      }
-
-      _state[name].value = value;
-
-      if (dispatchOn === "change") {
-        const isDirty = Object.keys(_state).length > 0;
-        if (isDirty) {
-          relayFieldsetChange();
-        }
-      }
-
-      e.stopPropagation();
+      handleFieldChange(e);
     });
+
+    // Handle _revealChange events from checkbox/radio reveal slots
+    _rootEl.addEventListener("_revealChange", (e: Event) => {
+      handleFieldChange(e);
+    });
+  }
+
+  function handleFieldChange(e: Event) {
+    const { name, value } = (e as CustomEvent).detail;
+
+    // if no name is registered, they are not bound to the public-form
+    if (!_formItems[name]) {
+      return;
+    }
+    if (!_formFields[name]) {
+      return;
+    }
+
+    _state[name].value = value;
+
+    if (dispatchOn === "change") {
+      const isDirty = Object.keys(_state).length > 0;
+      if (isDirty) {
+        relayFieldsetChange();
+      }
+    }
+
+    e.stopPropagation();
   }
 
   function relayFieldsetChange() {
