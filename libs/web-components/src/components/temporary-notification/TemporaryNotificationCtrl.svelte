@@ -9,10 +9,13 @@
 />
 
 <script lang="ts" context="module">
+  export type GoabTemporaryNotificationType = "basic" | "success" | "failure" | "indeterminate" | "progress";
+  export type GoabTemporaryNotificationDuration = "short" | "medium" | "long";
+
   export type GoabNotification = {
-    type: "success" | "failure" | "information";
+    type: GoabTemporaryNotificationType;
     message: string;
-    duration?: number; // in milliseconds
+    duration?: GoabTemporaryNotificationDuration;
     actionText?: string; // Optional text for an action button
     action?: () => void; // Optional task to run when the notification is dismissed
     progress?: number;
@@ -22,7 +25,10 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { receive, typeValidator } from "../../common/utils";
+  import { receive } from "../../common/utils";
+
+  const MIN_DISPLAY_TIME = 2000;
+  const DEFAULT_DURATION = 4000;
 
   type SnackbarVerticalPosition = "top" | "bottom";
   type SnackbarHorizontalPosition = "left" | "center" | "right";
@@ -33,28 +39,57 @@
 
   let _container: HTMLElement;
   let _notification: GoabNotification | null = null;
+  let _lastNotificationShownAt: number;
 
   function handleNotification(notification: GoabNotification) {
-    notification.visible = true;
+    // ensure every notification is shown for a minimum amount of time
+    const delay = _notification
+      ? Math.max(Date.now() - _lastNotificationShownAt, MIN_DISPLAY_TIME)
+      : 0 // don't delay since no message is currently being shown
+    _lastNotificationShownAt = Date.now();
 
-    if (_notification) {
-      _notification.visible = false;
-      setTimeout(() => setNotification(notification), 300)
-    } else {
-      setNotification(notification);
+    setTimeout(() => {
+      if (_notification) {
+        // hide the current message, show the next message with a delay to allow for transitions to complete
+        _notification.visible = false;
+        setTimeout(() => setNotification(notification), 300)
+      } else {
+        setNotification(notification);
+      }
+    }, delay)
+  }
+
+  function getDuration(duration?: GoabTemporaryNotificationDuration): number {
+    switch (duration) {
+      case "short":
+        return 2000;
+      case "medium":
+        return 4000;
+      case "long":
+        return 6000;
+      default:
+        return 0;
     }
   }
 
   function setNotification(notification: GoabNotification) {
+    // set the displayed notification
     _notification = notification;
+    _notification.visible = true;
 
-    if (_notification.duration > 0) {
+    // if notification type needs a duration
+    if (_notification.duration === 0 && ["basic", "success", "failure"].includes(notification.type)) {
+      _notification.duration = DEFAULT_DURATION;
+    }
+
+    // set timer to hide notification if duration is set
+    if (_notification.duration) {
       setTimeout(() => {
         _notification.visible = false;
         setTimeout(() => {
           _notification = null
         }, 300)
-      }, notification.duration)
+      }, getDuration(notification.duration))
     }
   }
 
@@ -96,7 +131,6 @@
     <goa-temp-notification
       message={_notification.message}
       type={_notification.type}
-      duration={_notification.duration}
       action-text={_notification.actionText}
       progress={_notification.progress}
       visible={_notification.visible}
@@ -112,6 +146,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    z-index: 1000;
   }
 
   .pos-top {

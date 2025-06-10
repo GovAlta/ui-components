@@ -3,7 +3,6 @@
   props: {
     message: { type: "String", attribute: "message" },
     type: { type: "String", attribute: "type" },
-    duration: { type: "Number", attribute: "duration" },
     progress: { type: "Number", attribute: "progress" },
     testid: { type: "String", attribute: "testid", reflect: true },
     actionText: { type: "String", attribute: "action-text" },
@@ -13,32 +12,28 @@
 }} />
 
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { typeValidator } from "../../common/utils";
-
-  // Validators
-  const [Types, validateType] = typeValidator("Snackbar type", [
-    "basic",
-    "success",
-    "failure",
-  ]);
-
   // Types
-  type SnackbarType = (typeof Types)[number];
+  import { onMount } from "svelte";
+
+  type TemporaryNotificationType = "basic" | "success" | "failure" | "indeterminate" | "progress";
+  type TemporaryNotificationAnimationDirection = "up" | "down";
 
   // Props
   export let message: string = "";
-  export let type: SnackbarType = "basic";
-  export let duration: number;
+  export let type: TemporaryNotificationType = "basic";
   export let progress: number = -1; // -1 = hidden, 0-100 = show
   export let testid: string = "";
   export let actionText: string = "";
   export let visible: boolean = true;
-  export let animationDirection: "up" | "down" = "down";
+  export let animationDirection: TemporaryNotificationAnimationDirection = "down";
 
   onMount(() => {
-    validateType(type);
-  });
+    if (type !== "basic") {
+      if (actionText) {
+        console.warn("Actions are only supported for basic notifications");
+      }
+    }
+  })
 </script>
 
 <div
@@ -46,6 +41,8 @@
   class:basic={type === "basic"}
   class:success={type === "success"}
   class:failure={type === "failure"}
+  class:indeterminate={type === "indeterminate"}
+  class:progress={type === "progress"}
   class:show={visible}
   class:hide={!visible}
   class:animate-up={animationDirection === "up"}
@@ -70,9 +67,9 @@
     </div>
   {/if}
 
-  {#if progress >= 0 && progress < 100}
+  {#if type === "progress"}
     <progress value={progress} max="100" />
-  {:else if typeof(duration) === "undefined"}
+  {:else if type === "indeterminate"}
     <progress />
   {/if}
 </div>
@@ -87,14 +84,14 @@
     padding: var(--goa-space-m) var(--goa-space-l);
     min-width: 360px;
     max-width: 640px;
-    background: var(--goa-color-greyscale-black); /* Basic */
     color: var(--goa-color-text-light);
     transition: opacity 0.3s ease, transform 0.3s ease;
     overflow: hidden;
   }
 
-  .snackbar.basic {
+  .snackbar.basic, .snackbar.indeterminate, .snackbar.progress {
     border: 1px solid var(--goa-color-greyscale-700);
+    background: var(--goa-color-greyscale-black);
   }
 
   /* Base progress element styling */
@@ -115,52 +112,52 @@
   }
 
   /* WebKit (Chrome, Safari) specific styling */
-  progress::-webkit-progress-bar {
-    /*border: none;*/
-    /*background-color: var(--goa-color-greyscale-400);*/
-    /*border-radius: 0;*/
-    /*box-shadow: none;*/
-  }
+  /*progress::-webkit-progress-bar {*/
+  /*  border: none;*/
+  /*  background-color: var(--goa-color-greyscale-400);*/
+  /*  border-radius: 0;*/
+  /*  box-shadow: none;*/
+  /*}*/
 
-  progress::-webkit-progress-value {
-    /*background-color: var(--goa-color-greyscale-white);*/
-    /*border-radius: 0;*/
-  }
+  /*progress::-webkit-progress-value {*/
+  /*  background-color: var(--goa-color-greyscale-white);*/
+  /*  border-radius: 0;*/
+  /*}*/
 
-  /* Firefox specific styling */
-  progress::-moz-progress-bar {
-    /*background-color: var(--goa-color-greyscale-white);*/
-    /*border-radius: 0;*/
-  }
+  /*!* Firefox specific styling *!*/
+  /*progress::-moz-progress-bar {*/
+  /*  background-color: var(--goa-color-greyscale-white);*/
+  /*  border-radius: 0;*/
+  /*}*/
 
-  /* Styling for indeterminate progress */
-  progress:not([value]) {
-    /*appearance: initial;*/
-    /*-webkit-appearance: initial;*/
-    /*-moz-appearance: initial;*/
-    /*background-color: var(--goa-color-greyscale-400);*/
-  }
+  /*!* Styling for indeterminate progress *!*/
+  /*progress:not([value]) {*/
+  /*  appearance: initial;*/
+  /*  -webkit-appearance: initial;*/
+  /*  -moz-appearance: initial;*/
+  /*  background-color: var(--goa-color-greyscale-400);*/
+  /*}*/
 
-  /* WebKit indeterminate progress */
-  progress:not([value])::-webkit-progress-bar {
-    /*background-color: var(--goa-color-greyscale-400);*/
-  }
+  /*!* WebKit indeterminate progress *!*/
+  /*progress:not([value])::-webkit-progress-bar {*/
+  /*  background-color: var(--goa-color-greyscale-400);*/
+  /*}*/
 
-  progress:not([value])::-webkit-progress-value {
-    /*background-color: var(--goa-color-greyscale-white);*/
-  }
+  /*progress:not([value])::-webkit-progress-value {*/
+  /*  background-color: var(--goa-color-greyscale-white);*/
+  /*}*/
 
-  /* Firefox indeterminate progress */
-  progress:not([value])::-moz-progress-bar {
-    /*background-color: var(--goa-color-greyscale-white);*/
-  }
+  /*!* Firefox indeterminate progress *!*/
+  /*progress:not([value])::-moz-progress-bar {*/
+  /*  background-color: var(--goa-color-greyscale-white);*/
+  /*}*/
 
-  /* Styling for progress with value attribute */
-  progress[value] {
-    /*background-color: var(--goa-color-greyscale-400);*/
-    /*border-radius: 0;*/
-    /*box-shadow: none;*/
-  }
+  /*!* Styling for progress with value attribute *!*/
+  /*progress[value] {*/
+  /*  background-color: var(--goa-color-greyscale-400);*/
+  /*  border-radius: 0;*/
+  /*  box-shadow: none;*/
+  /*}*/
 
   .show {
     opacity: 1;
