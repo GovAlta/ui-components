@@ -12,7 +12,7 @@
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "pretest:headless": "npx nx run common:build && npx nx run web-components:build && npx nx run react-components:build",
     "test:watch": "vitest --project=*-unit --project=*-browser",
-    "test:watch:headless": "vitest --project=*-unit --project=*-headless",
+    "test:watch:headless": "vitest --project=*-headless",
     "test:angular": "nx test angular-components",
     "test:headless": "vitest --run --project=*-unit --project=*-headless && nx test angular-components",
     "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web",

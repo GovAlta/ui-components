@@ -3,6 +3,7 @@
   props: {
     vPosition: { type: "String", attribute: "vertical-position" },
     hPosition: { type: "String", attribute: "horizontal-position" },
+    testid: { type: "String", attribute: "testid" },
   }
 }}
 />
@@ -28,6 +29,7 @@
 
   export let vPosition: SnackbarVerticalPosition = "bottom";
   export let hPosition: SnackbarHorizontalPosition = "center";
+  export let testid: string;
 
   let _container: HTMLElement;
   let _notification: GoabNotification | null = null;
@@ -82,6 +84,7 @@
 
 <div
   bind:this={_container}
+  data-testid={testid}
   class="notification-container"
   class:pos-left={hPosition === "left"}
   class:pos-right={hPosition === "right"}

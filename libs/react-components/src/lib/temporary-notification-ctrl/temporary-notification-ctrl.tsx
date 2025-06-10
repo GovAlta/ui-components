@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 type SnackbarVerticalPosition = "top" | "bottom";
 type SnackbarHorizontalPosition = "left" | "center" | "right";

@@ -5,7 +5,7 @@
     type: { type: "String", attribute: "type" },
     duration: { type: "Number", attribute: "duration" },
     progress: { type: "Number", attribute: "progress" },
-    testid: { type: "String", attribute: "testid" },
+    testid: { type: "String", attribute: "testid", reflect: true },
     actionText: { type: "String", attribute: "action-text" },
     visible: { type: "Boolean", attribute: "visible" },
     animationDirection: { type: "String", attribute: "animation-direction" },
