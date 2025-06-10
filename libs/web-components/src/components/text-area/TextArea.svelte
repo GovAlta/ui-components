@@ -222,6 +222,7 @@
     padding-bottom: var(--char-count-padding); /*if count by is true = 2rem, else 0*/
     box-shadow: var(--goa-text-area-border);
     border-radius: var(--goa-text-area-border-radius);
+    background: var(--goa-text-area-color-bg);
   }
   /* Hover state */
   .root:hover {
