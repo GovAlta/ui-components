@@ -17,8 +17,8 @@ interface WCProps extends Margins {
   type?: string;
   "button-text"?: string;
   "button-visibility"?: string;
-  first?: boolean;
-  last?: boolean;
+  first?: string;
+  last?: string;
   "summary-heading"?: string;
 }
 
@@ -72,7 +72,7 @@ export function GoabPublicFormPage({
   subHeading = "",
   summaryHeading = "",
   sectionTitle = "",
-  backUrl = "",
+  backUrl,
   type = "step",
   buttonText = "",
   buttonVisibility = "visible",
@@ -148,12 +148,11 @@ export function GoabPublicFormPage({
       heading={heading}
       sub-heading={subHeading}
       section-title={sectionTitle}
-      back-url={backUrl}
+      back-url={backUrl || undefined}
       type={type}
       button-text={buttonText}
       button-visibility={buttonVisibility}
-      first={first}
-      last={last}
+      first={first ? "true": undefined}
       summary-heading={summaryHeading}
       mt={mt}
       mr={mr}
