@@ -39,7 +39,7 @@ declare module "react" {
 export interface GoabDropdownProps extends Margins {
   name?: string;
   value?: string[] | string;
-  onChange: (detail: GoabDropdownOnChangeDetail) => void;
+  onChange?: (detail: GoabDropdownOnChangeDetail) => void;
 
   // optional
   ariaLabel?: string;
@@ -82,11 +82,15 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
     const current = el.current;
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
-      props.onChange(detail);
+      props.onChange?.(detail);
     };
-    current.addEventListener("_change", handler);
+    if (props.onChange) {
+      current.addEventListener("_change", handler);
+    }
     return () => {
-      current.removeEventListener("_change", handler);
+      if (props.onChange) {
+        current.removeEventListener("_change", handler);
+      }
     };
   }, [el, props]);
 
