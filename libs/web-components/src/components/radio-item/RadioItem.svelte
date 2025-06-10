@@ -109,17 +109,24 @@
    */
   function onRevealSlotCustomEventListener() {
     _revealSlotEl.addEventListener("_click", (e: Event) => {
+      // when we click a button/accordion... inside the reveal slot, it will reset the parent radio's value (event UI shows as checked). stopPropagation (_click) will fix it
       e.stopPropagation();
     });
+    _revealSlotEl.addEventListener("_change", handleFormFieldChange);
+    _revealSlotEl.addEventListener("_radioItemChange", handleFormFieldChange);
+  }
 
-    _revealSlotEl.addEventListener("_change", (e: Event) => {
-      // Stop custom event propagation
-      e.stopPropagation();
-    });
+  function handleFormFieldChange(e: Event) {
+    const customEvent = e as CustomEvent;
+    const eventDetail = customEvent.detail;
+    // when we check/change a checkbox/input... inside the reveal slot, it will reset the parent radio's value(though UI shown as checked) whenever _change is fired. stopPropagation (_change) will fix it
+    e.stopPropagation();
 
-    _revealSlotEl.addEventListener("_radioItemChange", (e: Event) => {
-      e.stopPropagation();
-    })
+    // If this is a form field value change (public form)
+    // relay it so the Fieldset initialize the reveal slot form field to public form state
+    if (eventDetail && eventDetail.name && typeof eventDetail.value !== 'undefined') {
+      dispatch(_radioItemEl, "_revealChange", eventDetail, { bubbles: true });
+    }
   }
 
   function onFormFieldMount(detail: FormFieldMountRelayDetail) {
