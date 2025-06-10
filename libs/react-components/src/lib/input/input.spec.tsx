@@ -144,5 +144,19 @@ describe("Input", () => {
       })
     );
     expect(mockOnChangeHandler).toBeCalledWith("numberInput", decimalValue);
-  })
+  });
+
+  describe("Text Alignment", () => {
+    it("passes textAlign prop through to web component", () => {
+      const props: GoAInputProps = {
+        ...defaultProps,
+        name: "test",
+        textAlign: "right",
+      };
+      render(<GoAInputText {...props} />);
+      const input = document.querySelector("goa-input");
+      expect(input).toBeTruthy();
+      expect(input?.getAttribute("textalign")).toBe("right");
+    });
+  });
 });
