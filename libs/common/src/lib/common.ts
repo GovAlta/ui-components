@@ -12,7 +12,11 @@ export type GoabInputOnChangeDetail<T = string> = {
   value: T;
 };
 export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
-export type GoaInputOnBlurDetail<T = string> = GoabInputOnChangeDetail<T>;
+/***
+ * @deprecated GoaInputOnBlurDetail has been deprecated. Use GoabInputOnBlurDetail instead.
+ */
+export type GoaInputOnBlurDetail<T = string> = GoabInputOnBlurDetail<T>;
+export type GoabInputOnBlurDetail<T = string> = GoabInputOnChangeDetail<T>;
 
 export type GoabInputAutoCapitalize =
   | "on"
@@ -975,7 +979,13 @@ export type GoabFormOnStateChange = {
 };
 
 // Common types to use between public form components
-export type GoabFormStatus = "not-started" | "cannot-start-yet" | "in-progress" | "submitted" | "update-needed" | "complete";
+export type GoabFormStatus =
+  | "not-started"
+  | "cannot-start-yet"
+  | "in-progress"
+  | "submitted"
+  | "update-needed"
+  | "complete";
 export type GoabFormState = {
   uuid: string;
   form: Record<string, GoabFieldsetSchema>;
@@ -1030,16 +1040,14 @@ export type GoabPublicFormPageOnFieldsetChangeDetail = {
     data: Record<string, GoabFieldsetItemState>;
   };
   dispatchOn: GoabFormDispatchOn;
-}
+};
 export type GoabPublicFormPageOnCompleteDetail = {
   el: HTMLElement;
   state: Record<string, GoabFieldsetItemState>;
   cancelled: boolean;
-}
+};
 
 // Drawer
 export type GoabDrawerPosition = "bottom" | "left" | "right" | undefined;
 export type GoabDrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw";
 export type GoabDrawerSize = `${number}${GoabDrawerSizeUnit}` | undefined;
-
-
