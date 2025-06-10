@@ -28,6 +28,8 @@ export type GoAAutoCapitalize =
   | "words"
   | "characters";
 
+export type GoAInputTextAlign = "left" | "right";
+
 interface WCProps extends Margins {
   ref?: React.MutableRefObject<HTMLInputElement | null>;
   type?: GoAInputType;
@@ -35,6 +37,7 @@ interface WCProps extends Margins {
   value?: string;
   id?: string;
   autocapitalize?: GoAAutoCapitalize;
+  textalign?: GoAInputTextAlign;
   debounce?: number;
   placeholder?: string;
   leadingicon?: string;
@@ -76,6 +79,7 @@ interface BaseProps extends Margins {
   debounce?: number;
   disabled?: boolean;
   autoCapitalize?: GoAAutoCapitalize;
+  textAlign?: GoAInputTextAlign;
   placeholder?: string;
   leadingIcon?: GoAIconType;
   trailingIcon?: GoAIconType;
@@ -138,6 +142,7 @@ export function GoAInput({
   name,
   type,
   autoCapitalize,
+  textAlign = "left",
   leadingIcon,
   trailingIcon,
   variant = "goa",
@@ -219,6 +224,7 @@ export function GoAInput({
       type={type}
       name={name}
       autocapitalize={autoCapitalize}
+      textalign={textAlign}
       id={id}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}
