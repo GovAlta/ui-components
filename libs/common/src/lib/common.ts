@@ -11,12 +11,15 @@ export type GoabInputOnChangeDetail<T = string> = {
   name: string;
   value: T;
 };
+
+// @deprecated GoaInputOnBlurDetail has been deprecated. Use GoabInputOnBlurDetail instead.
+export type GoaInputOnBlurDetail = GoabInputOnBlurDetail;
+export type GoabInputOnBlurDetail<T = string> = {
+  name: string;
+  value: T;
+};
+
 export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
-/***
- * @deprecated GoaInputOnBlurDetail has been deprecated. Use GoabInputOnBlurDetail instead.
- */
-export type GoaInputOnBlurDetail<T = string> = GoabInputOnBlurDetail<T>;
-export type GoabInputOnBlurDetail<T = string> = GoabInputOnChangeDetail<T>;
 
 export type GoabInputAutoCapitalize =
   | "on"
@@ -166,6 +169,7 @@ export type GoabTextAreaOnKeyPressDetail = {
 export interface GoabTabsProps {
   initialTab?: number;
 }
+
 export type GoabTabsOnChangeDetail = {
   tab: number;
 };
@@ -173,6 +177,7 @@ export type GoabTabsOnChangeDetail = {
 
 export type GoabTableVariant = "normal" | "relaxed";
 export type GoabTableSortDirection = "asc" | "desc" | "none";
+
 export interface GoabTableProps extends Margins {
   width?: string;
   onSort?: (sortBy: string, sortDir: number) => void;
@@ -1020,6 +1025,7 @@ export interface GoabFieldsetOnChangeDetail {
   };
   dispatchOn: GoabFormDispatchOn;
 }
+
 export interface GoabFieldsetOnContinueDetail {
   el: HTMLElement;
   state: Record<string, GoabFieldsetItemState>;
