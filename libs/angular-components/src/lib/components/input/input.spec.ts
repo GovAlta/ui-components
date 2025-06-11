@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoabInput } from "./input";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
+  GoabAutoComplete,
   GoabIconType,
   GoabInputAutoCapitalize,
   GoabInputOnChangeDetail,
@@ -19,6 +20,7 @@ import { fireEvent } from "@testing-library/dom";
       [focused]="focused"
       [name]="name"
       [autoCapitalize]="autoCapitalize"
+      [autoComplete]="autoComplete"
       [id]="id"
       [leadingIcon]="leadingIcon"
       [trailingIcon]="trailingIcon"
@@ -58,6 +60,7 @@ class TestInputComponent {
   debounce?: number;
   disabled?: boolean;
   autoCapitalize?: GoabInputAutoCapitalize;
+  autoComplete?: GoabAutoComplete;
   placeholder?: string;
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;
@@ -124,6 +127,7 @@ describe("GoABInput", () => {
     component.leadingIcon = "search";
     component.trailingIcon = "close";
     component.autoCapitalize = "on";
+    component.autoComplete = "off";
     component.variant = "bare";
     component.disabled = true;
     component.readonly = true;
@@ -157,6 +161,7 @@ describe("GoABInput", () => {
     expect(input?.getAttribute("leadingicon")).toBe(component.leadingIcon);
     expect(input?.getAttribute("trailingicon")).toBe(component.trailingIcon);
     expect(input?.getAttribute("autocapitalize")).toBe(component.autoCapitalize);
+    expect(input?.getAttribute("autocomplete")).toBe(component.autoComplete);
     expect(input?.getAttribute("variant")).toBe(component.variant);
     expect(input?.getAttribute("focused")).toBe(`${component.focused}`);
     expect(input?.getAttribute("placeholder")).toBe(component.placeholder);

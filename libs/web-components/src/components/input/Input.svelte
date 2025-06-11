@@ -10,7 +10,8 @@
     toBoolean,
     relay,
     receive,
-    dispatch, styles,
+    dispatch,
+    styles,
   } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -49,20 +50,82 @@
     ["on", "off", "none", "sentences", "words", "characters"],
   );
 
-  const [TextAlign, validateTextAlign] = typeValidator(
-    "Input text align",
-    ["left", "right"],
+  const [AutoComplete, validateAutoComplete] = typeValidator(
+    "Input auto complete",
+    [
+      "off",
+      "on",
+      "name",
+      "honorific-prefix",
+      "given-name",
+      "additional-name",
+      "family-name",
+      "honorific-suffix",
+      "nickname",
+      "email",
+      "username",
+      "new-password",
+      "current-password",
+      "one-time-code",
+      "organization-title",
+      "organization",
+      "street-address",
+      "address-line1",
+      "address-line2",
+      "address-line3",
+      "address-level4",
+      "address-level3",
+      "address-level2",
+      "address-level1",
+      "country",
+      "country-name",
+      "postal-code",
+      "cc-name",
+      "cc-given-name",
+      "cc-additional-name",
+      "cc-family-name",
+      "cc-number",
+      "cc-exp",
+      "cc-exp-month",
+      "cc-exp-year",
+      "cc-csc",
+      "cc-type",
+      "transaction-currency",
+      "transaction-amount",
+      "language",
+      "bday",
+      "bday-day",
+      "bday-month",
+      "bday-year",
+      "sex",
+      "tel",
+      "tel-country-code",
+      "tel-national",
+      "tel-area-code",
+      "tel-local",
+      "tel-extension",
+      "impp",
+      "url",
+      "photo",
+    ],
   );
+
+  const [TextAlign, validateTextAlign] = typeValidator("Input text align", [
+    "left",
+    "right",
+  ]);
 
   // Types
   type Type = (typeof Types)[number];
   type AutoCapitalize = (typeof AutoCapitalize)[number];
+  type AutoComplete = (typeof AutoComplete)[number];
   type TextAlign = (typeof TextAlign)[number];
 
   export let type: Type = "text";
   export let name: string = "";
   export let value: string = "";
   export let autocapitalize: AutoCapitalize = "off";
+  export let autocomplete: AutoComplete = "on";
   export let placeholder: string = "";
   export let leadingicon: GoAIconType | null = null;
   export let trailingicon: GoAIconType | null = null;
@@ -144,6 +207,7 @@
 
     validateType(type);
     validateAutoCapitalize(autocapitalize);
+    validateAutoComplete(autocomplete);
     validateTextAlign(textalign);
     addRelayListener();
     showDeprecationWarnings();
@@ -340,12 +404,13 @@
       style={styles(
         `--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`,
         _inputWidth && `width: ${_inputWidth}`,
-        textalign === "right" && `text-align: right`
+        textalign === "right" && `text-align: right`,
       )}
       readonly={isReadonly}
       disabled={isDisabled}
       data-testid={testid}
       {autocapitalize}
+      {autocomplete}
       {name}
       {type}
       value={value ?? ""}
@@ -450,7 +515,8 @@
 
   .goa-input:not(.error):has(input:focus-visible) {
     /* focus border(s) */
-    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
+    box-shadow:
+      var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* Error state */
@@ -461,7 +527,8 @@
   /* Focus state (including when in error state) */
   .goa-input:has(input:focus-visible),
   .goa-input.error:has(input:focus-visible) {
-    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
+    box-shadow:
+      var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* type=range does not have an outline/box-shadow */
@@ -645,7 +712,8 @@
     -webkit-appearance: none;
     height: 1.2rem;
     width: 1.2rem;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>') center center no-repeat;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>')
+      center center no-repeat;
   }
 
   ::-ms-reveal {

@@ -156,6 +156,15 @@ describe("GoAInput Component", () => {
       const root = el.container.querySelector("[autocapitalize=on]");
       expect(root).toBeTruthy();
     });
+
+    it("has an autocomplete prop", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        autocomplete: "off",
+      });
+      const root = el.container.querySelector("[autocomplete=off]");
+      expect(root).toBeTruthy();
+    });
   });
 
   it("allows for the trailing icon click event handling", async () => {
@@ -352,7 +361,9 @@ describe("GoAInput Component", () => {
         type: "text",
         suffix: "per item",
       });
-      expect(container.querySelector(".suffix")?.innerHTML).toContain("per item");
+      expect(container.querySelector(".suffix")?.innerHTML).toContain(
+        "per item",
+      );
       await waitFor(() => {
         expect(console.warn["mock"].calls.length).toBeGreaterThan(0);
       });
@@ -391,7 +402,9 @@ describe("GoAInput Component", () => {
       const el = render(GoAInputWrapper, { leadingContent: content });
       expect(el.container.innerHTML).toContain(content);
 
-      const leadingContent = el.container.querySelector("[slot=leadingContent]");
+      const leadingContent = el.container.querySelector(
+        "[slot=leadingContent]",
+      );
       expect(leadingContent).toBeTruthy();
       expect(leadingContent?.innerHTML).toContain(content);
     });
@@ -399,7 +412,9 @@ describe("GoAInput Component", () => {
     it("should have a slot for the trailing content", async () => {
       const content = "items";
       const el = render(GoAInputWrapper, { trailingContent: content });
-      const trailingContent = el.container.querySelector("[slot=trailingContent]");
+      const trailingContent = el.container.querySelector(
+        "[slot=trailingContent]",
+      );
 
       expect(el.container.innerHTML).toContain(content);
       expect(trailingContent?.innerHTML).toContain(content);
@@ -514,6 +529,5 @@ describe("GoAInput Component", () => {
       expect(input.style.cssText).toContain("text-align: right");
       expect((input as HTMLInputElement).value).toBe("12345.67");
     });
-
   });
 });
