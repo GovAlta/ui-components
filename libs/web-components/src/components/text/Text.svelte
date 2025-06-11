@@ -32,20 +32,10 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  const sizeMap: Record<HeadingElement | TextElement, HeadingSize | BodySize> =
-    {
-      h1: "heading-xl",
-      h2: "heading-l",
-      h3: "heading-m",
-      h4: "heading-s",
-      h5: "heading-xs",
-      div: "body-m",
-      p: "body-m",
-      span: "body-m",
-    };
+  let _marginBottom: Spacing = null;
 
   /**
-   * Returns a bottom margin value based on the `as` prop
+   * Returns a bottom margin value based on the `size` prop
    */
   function getBottomMargin(): Spacing {
     // override takes precedence
@@ -54,28 +44,32 @@
     }
 
     // div and spans should not have any bottom margin
-    switch (as) {
-      case "h1":
+    switch (size) {
+      case "heading-xl":
         return "3xl";
-      case "h2":
+      case "heading-l":
         return "2xl";
-      case "h3":
+      case "heading-m":
         return "xl";
-      case "h4":
+      case "heading-s":
         return "l";
-      case "h5":
-      case "h6":
-      case "p":
+      case "heading-xs":
+      case "body-l":
+      case "body-m":
         return "m";
+      case "body-s":
+      case "body-xs":
+        return "3xs";
+      default:
+        return "3xs";
     }
-
-    // fix for the GoA font's unwanted top padding
-    return "3xs";
   }
 
   onMount(async() => {
     await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
-    size ||= sizeMap[as];
+    console.log("onMount size ", size);
+    console.log("after onMount size ", size);
+    _marginBottom = getBottomMargin();
   });
 </script>
 
@@ -90,7 +84,7 @@
         : "var(--goa-color-text-secondary)",
     ),
     maxWidth === "none" ? "" : `max-width: ${maxWidth}`,
-    calculateMargin(mt, mr, getBottomMargin(), ml),
+    calculateMargin(mt, mr, _marginBottom, ml),
   )}
 >
   <slot />
