@@ -1,6 +1,6 @@
 import { relay } from "../messaging/messaging";
 
-export type GoabTemporaryNotificationDuration = "short" | "medium" | "long";
+export type GoabTemporaryNotificationDuration = "short" | "medium" | "long" | number;
 export type GoabTemporaryNotificationType = "basic" | "success" | "failure" | "indeterminate" | "progress";
 
 type GoabNotificationOptions = {

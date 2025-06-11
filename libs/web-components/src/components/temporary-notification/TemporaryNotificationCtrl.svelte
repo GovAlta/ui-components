@@ -10,7 +10,7 @@
 
 <script lang="ts" context="module">
   export type GoabTemporaryNotificationType = "basic" | "success" | "failure" | "indeterminate" | "progress";
-  export type GoabTemporaryNotificationDuration = "short" | "medium" | "long";
+  export type GoabTemporaryNotificationDuration = "short" | "medium" | "long" | number;
 
   export type GoabNotification = {
     type: GoabTemporaryNotificationType;
@@ -20,6 +20,7 @@
     action?: () => void; // Optional task to run when the notification is dismissed
     progress?: number;
     visible?: boolean;
+    testId?: string;
   }
 </script>
 
@@ -43,7 +44,7 @@
 
   function handleNotification(notification: GoabNotification) {
     // ensure every notification is shown for a minimum amount of time
-    const delay = _notification
+    const delay = _notification && (notification.duration > 0)
       ? Math.max(Date.now() - _lastNotificationShownAt, MIN_DISPLAY_TIME)
       : 0 // don't delay since no message is currently being shown
     _lastNotificationShownAt = Date.now();
@@ -68,7 +69,7 @@
       case "long":
         return 6000;
       default:
-        return 0;
+        return duration as number;
     }
   }
 
@@ -130,6 +131,7 @@
   {#if _notification}
     <goa-temp-notification
       message={_notification.message}
+      testid={_notification.testId}
       type={_notification.type}
       action-text={_notification.actionText}
       progress={_notification.progress}
