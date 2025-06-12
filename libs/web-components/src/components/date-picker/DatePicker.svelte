@@ -1,4 +1,9 @@
-<svelte:options customElement="goa-date-picker" />
+<svelte:options customElement={{
+  tag: "goa-date-picker",
+  props: {
+    error: { attribute: "error", type: "String", reflect: true },
+  }
+}} />
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
@@ -54,7 +59,6 @@
   let _senderEl: HTMLElement;
   let _rootEl: HTMLElement;
   let _date: Date | null;
-  let _showPopover: boolean = false;
 
   // used only for the `type=input`
   let _inputDate: InputDate = { day: "", month: "", year: "" };
@@ -171,17 +175,11 @@
       value = date.toISOString();
     }
 
-    _rootEl.dispatchEvent(
-      new CustomEvent<DateValue>("_change", {
-        composed: true,
-        bubbles: true,
-        detail: {
-          name,
-          type: "date",
-          value: date,
-        },
-      }),
-    );
+    dispatch<DateValue>(_rootEl, "_change", {
+      name,
+      type: "date",
+      value: date,
+    });
   }
 
   function formatDate(d: Date | string | null): string {
@@ -194,19 +192,10 @@
   }
 
   function hideCalendar() {
-    _showPopover = false;
-  }
-
-  function showCalendar() {
-    _showPopover = !isDisabled;
+    dispatch(document.body, "goa:closePopover", { target: _rootEl });
   }
 
   function handleKeyDown(e: KeyboardEvent) {
-    if (["Space", "Enter"].includes(e.key)) {
-      showCalendar();
-      return;
-    }
-
     // in the key event handling below the first line `_date ||= ...` is to initialize the date, if
     // it hasn't yet been set to 1 unit opposite of what the keybinding does ex. if ArrowDown is
     // clicked, which moves the datepicker one week ahead, the date is initialize one week before.
@@ -246,7 +235,7 @@
         return;
     }
 
-    dispatchValue(_date);
+    // dispatchValue(_date);
 
     e.preventDefault();
     e.stopPropagation();
@@ -268,9 +257,7 @@
 
     const date = `${padLeft(_inputDate.year, 4, 0)}-${padLeft(+_inputDate.month + 1, 2, 0)}-${padLeft(_inputDate.day, 2, 0)}`;
 
-    dispatch(
-      _rootEl,
-      "_change",
+    dispatch(_rootEl, "_change",
       { name, type: "string", value: date },
       { bubbles: true },
     );
@@ -282,24 +269,24 @@
   <goa-popover
     bind:this={_rootEl}
     tabindex="-1"
+    data-testid="calendar-popover"
     {testid}
     {mt}
     {mb}
     {ml}
     {mr}
     disabled={isDisabled}
-    open={_showPopover}
     on:_close={() => dispatchValue(_date)}
   >
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <goa-input
       slot="target"
+      testid="calendar-input"
       width="16ch"
       readonly="true"
       trailingicon="calendar"
       value={formatDate(_date)}
       {error}
-      on:click={showCalendar}
       on:keydown={handleKeyDown}
       disabled={isDisabled}
     />
@@ -318,6 +305,7 @@
       <goa-form-item helptext="Month">
         <goa-dropdown
           name="month"
+          testid="input-month"
           on:_change={onInputChange}
           {error}
           value={_inputDate.month + ""}
@@ -340,6 +328,7 @@
         <goa-input
           name="day"
           type="number"
+          testid="input-day"
           on:_change={onInputChange}
           width="4ch"
           value={_inputDate.day}
@@ -352,6 +341,7 @@
         <goa-input
           name="year"
           type="number"
+          testid="input-year"
           on:_change={onInputChange}
           width="6ch"
           value={_inputDate.year}

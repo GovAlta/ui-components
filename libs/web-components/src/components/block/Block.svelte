@@ -50,24 +50,16 @@
   bind:this={_rootEl}
   data-testid={testid}
   class="block"
-  style={`
-    ${calculateMargin(mt, mr, mb, ml)}
-    ${styles(
+  style={
+    styles(
+      "display: flex",
+      `gap: var(--goa-space-${gap})`,
+      calculateMargin(mt, mr, mb, ml),
       style("min-width", minWidth),
-      style("gap", gap),
       style("align-items", _alignment),
       style("flex-direction", direction),
-    )}
-  `}
+    )
+  }
 >
   <slot />
 </div>
-
-<style>
-  .block {
-    display: flex;
-    flex-direction: var(--direction);
-    align-items: var(--alignment);
-    gap: var(--gap);
-  }
-</style>

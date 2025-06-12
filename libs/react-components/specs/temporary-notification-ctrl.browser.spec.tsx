@@ -1,5 +1,4 @@
 import { render } from "vitest-browser-react";
-
 import { GoabTemporaryNotificationCtrl } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import React from "react";
@@ -38,16 +37,21 @@ function relay<T>(
     console.error("dispatch element is null");
     return;
   }
-  el.dispatchEvent(
-    new CustomEvent<{ action: string; data?: T }>("msg", {
-      composed: true,
-      bubbles: opts?.bubbles,
-      detail: {
-        action: eventName,
-        data,
-      },
-    }),
-  );
+  try {
+    return el.dispatchEvent(
+      new CustomEvent<{ action: string; data?: T }>("msg", {
+        composed: true,
+        bubbles: opts?.bubbles,
+        detail: {
+          action: eventName,
+          data,
+        },
+      }),
+    );
+  } catch (e) {
+    console.error(e);
+  }
+  return false;
 }
 
 function sendTemporaryNotification(

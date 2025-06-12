@@ -1,4 +1,9 @@
-<svelte:options customElement="goa-dropdown" />
+<svelte:options customElement={{
+  tag: "goa-dropdown",
+  props: {
+    disableGlobalClosePopover: { type: "Boolean", reflect: true, attribute: "disable-global-close-popover" },
+  }
+}}/>
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
@@ -65,6 +70,12 @@
   export let autocomplete: string = "";
   export let testid: string = "";
 
+  /**
+   * Exposed Privates
+  **/
+
+  export let disableGlobalClosePopover: boolean = false;
+
   //
   // Private
 
@@ -79,6 +90,7 @@
   let _menuEl: HTMLElement;
   let _inputEl: HTMLInputElement;
   let _eventHandler: EventHandler;
+  let _popoverEl: HTMLElement;
 
   let _isDirty: boolean = false;
   let _filteredOptions: Option[] = [];
@@ -165,6 +177,12 @@
     ensureSlotExists(_rootEl);
     addRelayListener();
     sendMountedMessage();
+    setupPopoverListeners();
+
+    if (disableGlobalClosePopover) {
+      _popoverEl.setAttribute("disable-global-close-popover", "yes");
+    }
+
     await tick();
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
@@ -175,6 +193,16 @@
   //
   // Functions
   //
+
+  function setupPopoverListeners() {
+    _popoverEl?.addEventListener("_open", (e) => {
+      _isMenuVisible = true;
+    })
+
+    _popoverEl?.addEventListener("_close", (e) => {
+      _isMenuVisible = false;
+    })
+  }
 
   function showDeprecationWarnings() {
     if (relative != "") {
@@ -440,12 +468,8 @@
       return;
     }
 
-    setTimeout(() => {
-      _rootEl?.dispatchEvent(
-        new CustomEvent("_change", { composed: true, detail, bubbles: true }),
-      );
-      _isDirty = false;
-    }, 1);
+    dispatch(_rootEl, "_change", detail, { bubbles: true });
+    _isDirty = false;
   }
 
   //
@@ -475,10 +499,12 @@
   // Auto-select matching option from input after browser autofill/autocomplete or paste from clipboard.
   function onInputChange(e: Event) {
     if (_disabled || !_filterable) return;
+
     const isAutofilled =
       testid === "test-autofill" ||
       _inputEl.matches(":-webkit-autofill") ||
       _inputEl.matches(":autofill");
+
     if (!isAutofilled) return;
 
     syncFilteredOptions();
@@ -550,17 +576,6 @@
     setDisplayedValue();
   }
 
-  function onChevronClick(e: Event) {
-    if (_isMenuVisible) {
-      _inputEl?.focus();
-      hideMenu();
-    } else {
-      showMenu();
-    }
-    e.preventDefault();
-    e.stopPropagation();
-  }
-
   function onFocus(e: Event) {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
   }
@@ -579,6 +594,8 @@
     }
 
     onEnter(e: KeyboardEvent) {
+      // TODO: emit an event when opened to allow the filterable dropdown to set focus on the input
+
       const option = _filteredOptions[_highlightedIndex];
       if (option) {
         _isDirty = option.value !== _selectedOption?.value;
@@ -756,16 +773,15 @@
     <!-- list and filter -->
     <goa-popover
       {disabled}
+      bind:this={_popoverEl}
       data-testid="option-list"
+      open={_isMenuVisible ? "true" : "false"}
+      close-on-click="yes"
       width={`${_popoverMaxWidth || 0}`}
       minwidth={_dropdownWidth}
       maxwidth={_dropdownWidth}
-      open={_isMenuVisible}
       padded="false"
-      tabindex="-1"
       filterablecontext={fromBoolean(_filterable)}
-      on:_open={showMenu}
-      on:_close={hideMenu}
     >
       <div
         slot="target"
@@ -809,40 +825,31 @@
           on:keyup={onInputKeyUp}
           on:change={onInputChange}
           on:focus={onFocus}
-          on:click={!_filterable && onChevronClick}
         />
 
         {#if _inputEl?.value && _filterable}
-          <goa-icon
+          <goa-icon-button
             id={name}
             data-testid="clear-icon"
             tabindex={_disabled ? -1 : 0}
-            role="button"
             arialabel={`clear ${arialabel || name}`}
-            ariacontrols={`menu-${name}`}
-            ariaexpanded={fromBoolean(_isMenuVisible)}
             on:click={onClearIconClick}
             on:keydown={onClearIconKeyDown}
             class="dropdown-icon--clear"
             class:disabled={_disabled}
             size="medium"
-            type="close"
             theme="filled"
+            variant="nocolor"
+            icon="close"
           />
         {:else}
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <goa-icon
-            role="button"
             testid="chevron"
-            tabindex="-1"
             id={name}
-            arialabel={arialabel || name}
-            ariacontrols={`menu-${name}`}
-            ariaexpanded={fromBoolean(_isMenuVisible)}
             class="dropdown-icon--arrow"
             size="medium"
             type={_isMenuVisible ? "chevron-up" : "chevron-down"}
-            on:click={onChevronClick}
           />
         {/if}
       </div>
@@ -880,7 +887,6 @@
             on:click={(e) => {
               onFilteredOptionClick(option);
               _inputEl?.focus();
-              e.stopPropagation();
             }}
           >
             {option.label || option.value}

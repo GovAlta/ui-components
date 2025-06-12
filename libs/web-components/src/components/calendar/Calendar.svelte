@@ -327,6 +327,7 @@
     <goa-form-item label="Month" mt="0">
       <goa-dropdown
         name="month"
+        disable-global-close-popover="yes"
         arialabel={`${name} month`}
         data-testid="months"
         width="160px"
@@ -343,6 +344,7 @@
     <goa-form-item label="Year" mt="0">
       <goa-dropdown
         name="year"
+        disable-global-close-popover="yes"
         arialabel={`${name} year`}
         data-testid="years"
         width="104px"
@@ -368,6 +370,7 @@
     {#each _previousMonthDays as d}
       <button
         on:click={onDateClick}
+        data-testid={format(d, "yyyy-MM-dd")}
         aria-label={format(d, "PPPP")}
         data-date={format(d, "T")}
         data-day={format(d, "eee")}
@@ -382,6 +385,7 @@
     {#each _monthDays as d}
       <button
         on:click={onDateClick}
+        data-testid={format(d, "yyyy-MM-dd")}
         aria-label={format(d, "PPPP")}
         data-date={format(d, "T")}
         data-day={format(d, "eee")}
@@ -398,6 +402,7 @@
     {#each _nextMonthDays as d}
       <button
         on:click={onDateClick}
+        data-testid={format(d, "yyyy-MM-dd")}
         aria-label={format(d, "PPPP")}
         data-date={format(d, "T")}
         data-day={format(d, "eee")}

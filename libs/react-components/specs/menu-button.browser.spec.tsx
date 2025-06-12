@@ -68,7 +68,7 @@ describe("MenuButton", () => {
       // open menu
       await menuButton.click();
 
-      const actionIcon = result.getByTestId("leading-icon");
+      const actionIcon = result.getByTestId("icon-add");
       expect(actionIcon).toBeDefined();
 
       // Check if the icon attribute is set correctly

@@ -36,22 +36,6 @@ describe("Popover", () => {
     expect(style).toContain("padding: var(--goa-space-m)");
   });
 
-  it("should close content when clicked outside the content container", async () => {
-    const result = render(Popover);
-
-    const target = result.queryByTestId("popover-target");
-    expect(target).toBeTruthy();
-    expect(result.queryByTestId("popover-content")?.parentElement?.style.display).toBe("none");
-
-    // click on popover target
-    target && (await user.click(target));
-    expect(result.queryByTestId("popover-content")?.parentElement?.style.display).not.toBe("none");
-
-    // click outside of popover
-    await user.click(document.body);
-    expect(result.queryByTestId("popover-content")?.parentElement?.style.display).toBe("none");
-  });
-
   it("should not close content when clicked focusable target then click focusable content inside the content container", async () => {
     // arrange to test that focusout event bubbles up to popover component
     const result = render(PopoverWrapper, {

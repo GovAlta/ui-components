@@ -270,6 +270,17 @@ export function performOnce(
   return setTimeout(action, delay);
 }
 
+export function isPointInRectangle(
+  x: number,
+  y: number,
+  rectX: number,
+  rectY: number,
+  rectWidth: number,
+  rectHeight: number
+): boolean {
+  return x >= rectX && x <= rectX + rectWidth && y >= rectY && y <= rectY + rectHeight;
+}
+
 export function ensureSlotExists(el: HTMLElement) {
   if (!el.querySelector("slot")) {
     el.appendChild(document.createElement("slot"));
