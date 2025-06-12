@@ -327,6 +327,7 @@
     <goa-form-item label="Month" mt="0">
       <goa-dropdown
         name="month"
+        disable-global-close-popover="yes"
         arialabel={`${name} month`}
         data-testid="months"
         width="160px"
@@ -343,6 +344,7 @@
     <goa-form-item label="Year" mt="0">
       <goa-dropdown
         name="year"
+        disable-global-close-popover="yes"
         arialabel={`${name} year`}
         data-testid="years"
         width="104px"
