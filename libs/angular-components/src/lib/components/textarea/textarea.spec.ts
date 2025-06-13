@@ -15,6 +15,7 @@ import { fireEvent } from "@testing-library/dom";
       [disabled]="disabled"
       [countBy]="countBy"
       maxWidth="480px"
+      autoComplete="off"
       [maxCount]="maxCount"
       [mt]="mt"
       [mr]="mr"
@@ -87,6 +88,7 @@ describe("GoABTextArea", () => {
     expect(el?.getAttribute("mr")).toBe(component.mr);
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("ml")).toBe(component.ml);
+    expect(el?.getAttribute("autocomplete")).toBe("off");
   });
 
   it("should dispatch onChange", () => {

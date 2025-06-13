@@ -36,6 +36,7 @@ describe("TextArea", () => {
         mr="m"
         mb="l"
         ml="xl"
+        autoComplete="off"
         onChange={noop}
       />,
     );
@@ -55,6 +56,7 @@ describe("TextArea", () => {
     expect(el?.getAttribute("mr")).toBe("m");
     expect(el?.getAttribute("mb")).toBe("l");
     expect(el?.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("autocomplete")).toBe("off");
   });
 
   it("handles the onChange event", async () => {

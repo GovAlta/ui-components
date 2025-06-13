@@ -37,6 +37,7 @@
   export let arialabel: string = "";
   export let countby: "character" | "word" | "" = "";
   export let maxcount: number = -1;
+  export let autocomplete: string = "on";
 
   // margin
   export let mt: Spacing = null;
@@ -176,6 +177,7 @@
       disabled={isDisabled}
       readonly={isReadonly}
       data-testid={testid}
+      autocomplete={autocomplete}
       bind:value
       on:keyup={onKeyPress}
       on:change={onChange}
