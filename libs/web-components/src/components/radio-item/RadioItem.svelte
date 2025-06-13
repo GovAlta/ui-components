@@ -188,7 +188,7 @@
     if (isDisabled) return;
     // if (isChecked) return;  FIXME: does having this uncommented break something?
 
-    dispatch(_radioItemEl, "_radioItemChange", value, { bubbles: true })
+    dispatch(_radioItemEl, "_radioItemChange", { value, label }, { bubbles: true })
 
     // Announce the reveal content change to screen readers if radio is checked and reveal content exists
     if ($$slots.reveal && isChecked && revealarialabel && revealarialabel !== "") {

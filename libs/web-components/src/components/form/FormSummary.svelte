@@ -104,9 +104,12 @@
 
   const dateMatchRegex = /^\d{4}-\d{2}-\d{2}$/;
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  function formatValue(value: string): string {
+  function formatValue(value: string, valueLabel?: string): string {
     if (isBlank(value)) {
       return "— Not provided —";
+    }
+    if (valueLabel) {
+      return valueLabel;
     }
     if (value.match(dateMatchRegex)) {
       const [year, month, day] = value.split("-");
@@ -136,7 +139,7 @@
                     {#each Object.entries(getData(_state, page)) as [_, data]}
                       <tr>
                         <td class="label">{data.label}</td>
-                        <td class="value" class:empty={isBlank(data.value)}>{formatValue(data.value)}</td>
+                        <td class="value" class:empty={isBlank(data.value)}>{formatValue(data.value, data.valueLabel)}</td>
                       </tr>
                     {/each}
                   </table>

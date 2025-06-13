@@ -1007,6 +1007,7 @@ export type GoabFieldsetItemState = {
   label: string;
   value: GoabFieldsetItemValue;
   order: number;
+  valueLabel?: string;
 };
 
 // Fieldset component
