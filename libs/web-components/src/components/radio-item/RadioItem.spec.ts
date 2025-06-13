@@ -92,8 +92,11 @@ describe("RadioItem", () => {
     );
   });
 
-  it("should handle the change event and emit _click event", async () => {
-    const result = render(GoARadioItem, { value: "foobar" });
+  it("should handle the change event and emit _radioItemChange event with value and label", async () => {
+    const result = render(GoARadioItem, { 
+      value: "foobar", 
+      label: "Test Radio Label" 
+    });
     const rootEl = result.queryByTestId("root");
     const mockOnChange = vi.fn();
     const input = result.container.querySelector("input") as HTMLInputElement;
@@ -102,14 +105,37 @@ describe("RadioItem", () => {
     rootEl?.addEventListener("_radioItemChange", mockOnChange);
     await fireEvent.click(input);
 
-    const expectedEvent = new CustomEvent("_radioItemChange", {
-      detail: "radio-item-1",
-      composed: true,
-      bubbles: true,
+    expect(mockOnChange).toBeCalledTimes(1);
+    
+    // Check that the event was called with the correct detail containing both value and label
+    const calledEvent = mockOnChange.mock.calls[0][0];
+    expect(calledEvent.detail).toEqual({
+      value: "foobar",
+      label: "Test Radio Label"
     });
+  });
+
+  it("should handle the change event with empty label", async () => {
+    const result = render(GoARadioItem, { 
+      value: "test-value"
+      // No label provided
+    });
+    const rootEl = result.queryByTestId("root");
+    const mockOnChange = vi.fn();
+    const input = result.container.querySelector("input") as HTMLInputElement;
+
+    expect(rootEl).toBeTruthy();
+    rootEl?.addEventListener("_radioItemChange", mockOnChange);
+    await fireEvent.click(input);
 
     expect(mockOnChange).toBeCalledTimes(1);
-    expect(mockOnChange).toBeCalledWith(expectedEvent);
+    
+    // Check that the event was called with the correct detail containing value and empty label
+    const calledEvent = mockOnChange.mock.calls[0][0];
+    expect(calledEvent.detail).toEqual({
+      value: "test-value",
+      label: ""
+    });
   });
 
   it("should not emit _click event when radio item is disabled", async () => {
