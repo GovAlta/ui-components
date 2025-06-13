@@ -33,6 +33,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.arialabel]="ariaLabel"
       [attr.countby]="countBy"
       [attr.maxcount]="maxCount"
+      [attr.autocomplete]="autoComplete"
       [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
@@ -62,6 +63,7 @@ export class GoabTextArea extends GoabControlValueAccessor {
   @Input() countBy?: GoabTextAreaCountBy = "";
   @Input() maxCount?: number = -1;
   @Input() maxWidth?: string;
+  @Input() autoComplete?: string = "on";
 
   @Output() onChange = new EventEmitter<GoabTextAreaOnChangeDetail>();
   @Output() onKeyPress = new EventEmitter<GoabTextAreaOnKeyPressDetail>();

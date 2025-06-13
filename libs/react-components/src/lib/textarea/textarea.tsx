@@ -20,6 +20,7 @@ interface WCProps extends Margins {
   arialabel?: string;
   countby?: GoabTextAreaCountBy;
   maxcount?: number;
+  autocomplete?: string;
   testid?: string;
 }
 
@@ -47,6 +48,7 @@ export interface GoabTextAreaProps extends Margins {
   ariaLabel?: string;
   countBy?: GoabTextAreaCountBy;
   maxCount?: number;
+  autoComplete?: string;
 
   onChange?: (event: GoabTextAreaOnChangeDetail) => void;
   onKeyPress?: (event: GoabTextAreaOnKeyPressDetail) => void;
@@ -70,6 +72,7 @@ export function GoabTextArea({
   mr,
   mb,
   ml,
+  autoComplete,
   onChange,
   onKeyPress,
 }: GoabTextAreaProps): JSX.Element {
@@ -131,6 +134,7 @@ export function GoabTextArea({
       mr={mr}
       mb={mb}
       ml={ml}
+      autocomplete={autoComplete}
     ></goa-textarea>
   );
 }
