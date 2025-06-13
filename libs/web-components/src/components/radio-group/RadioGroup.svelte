@@ -89,7 +89,8 @@
     getChildren();
 
     _rootEl.addEventListener("_radioItemChange", (e: Event) => {
-      onChange((e as CustomEvent).detail);
+      const detail = (e as CustomEvent).detail;
+      onChange(detail.value, detail.label);
     });
   });
 
@@ -169,8 +170,9 @@
   /**
    * Handles changing of the radio items
    * @param newValue Selected value
+   * @param newLabel Selected label
    */
-  function onChange(newValue: string) {
+  function onChange(newValue: string, newLabel: string) {
     if (newValue === value) return;
 
     value = newValue;
@@ -178,7 +180,7 @@
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: { name, value: value },
+        detail: { name, value: value, optionLabel: newLabel },
       }),
     );
 
