@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoabInput } from "./input";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
-  GoabAutoComplete,
   GoabIconType,
   GoabInputAutoCapitalize,
   GoabInputOnChangeDetail,
@@ -60,7 +59,7 @@ class TestInputComponent {
   debounce?: number;
   disabled?: boolean;
   autoCapitalize?: GoabInputAutoCapitalize;
-  autoComplete?: GoabAutoComplete;
+  autoComplete?: string;
   placeholder?: string;
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;

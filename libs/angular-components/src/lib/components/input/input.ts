@@ -6,7 +6,6 @@ import {
   GoabInputOnFocusDetail,
   GoabInputOnKeyPressDetail,
   GoabInputType,
-  GoabAutoComplete,
 } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -86,7 +85,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Input() name?: string;
   @Input({ transform: numberAttribute }) debounce?: number;
   @Input() autoCapitalize?: GoabInputAutoCapitalize;
-  @Input() autoComplete?: GoabAutoComplete;
+  @Input() autoComplete?: string;
   @Input() placeholder?: string;
   @Input() leadingIcon?: GoabIconType;
   @Input() trailingIcon?: GoabIconType;
