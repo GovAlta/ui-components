@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import { Margins } from "@abgov/ui-components-common";
+import { Margins, GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  status: "completed" | "not-started" | "cannot-start";
+  status: GoabPublicFormTaskStatus;
 }
 
 declare module "react" {
@@ -15,7 +15,7 @@ declare module "react" {
 }
 
 type GoabPublicFormTaskProps = {
-  status: "completed" | "not-started" | "cannot-start";
+  status: GoabPublicFormTaskStatus;
   children: ReactNode;
 };
 
