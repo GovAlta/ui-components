@@ -1054,6 +1054,9 @@ export type GoabPublicFormPageOnCompleteDetail = {
   cancelled: boolean;
 };
 
+// Public form Task
+export type GoabPublicFormTaskStatus = "completed" | "not-started" | "cannot-start";
+
 // Drawer
 export type GoabDrawerPosition = "bottom" | "left" | "right" | undefined;
 export type GoabDrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw";

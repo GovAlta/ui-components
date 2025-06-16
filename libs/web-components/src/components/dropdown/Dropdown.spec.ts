@@ -273,8 +273,11 @@ describe("GoADropdown", () => {
       await waitFor(async () => {
         expect(onChange).toBeCalledTimes(1);
         expect(onChange).toHaveBeenCalledWith("favcolor", "blue");
-        expect(option?.getAttribute("aria-selected")).toBe("true");
       });
+      // Wait specifically for aria-selected to be updated
+      await waitFor(async () => {
+        expect(option?.getAttribute("aria-selected")).toBe("true");
+      }, { timeout: 2000 });
     });
 
     it("searches by partial filter and Enter keypress to select option", async () => {
