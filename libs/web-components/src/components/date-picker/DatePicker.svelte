@@ -194,16 +194,11 @@
   }
 
   function hideCalendar() {
-    _showPopover = false;
-  }
-
-  function showCalendar() {
-    _showPopover = !isDisabled;
+    dispatch(document.body, "goa:closePopover");
   }
 
   function handleKeyDown(e: KeyboardEvent) {
     if (["Space", "Enter"].includes(e.key)) {
-      showCalendar();
       return;
     }
 
@@ -299,7 +294,6 @@
       trailingicon="calendar"
       value={formatDate(_date)}
       {error}
-      on:click={showCalendar}
       on:keydown={handleKeyDown}
       disabled={isDisabled}
     />

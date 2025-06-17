@@ -3,6 +3,8 @@
     tag: "goa-popover",
     props: {
       open: { reflect: true, type: "String" },
+      closeOnClick: { reflect: true, type: "Boolean", attribute: "close-on-click" },
+      disableGlobalClosePopover: { reflect: true, type: "Boolean", attribute: "disable-global-close-popover" },
     },
   }}
 />
@@ -15,7 +17,8 @@
     style,
     getSlottedChildren,
     styles,
-    toBoolean,
+    toBoolean, dispatch,
+    isPointInRectangle,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
@@ -46,6 +49,8 @@
   // **Required only to allow popover position to be customized when used within
   // other components. These props should _not_ be documented.**
 
+  export let disableGlobalClosePopover: boolean = false;
+
   // allow for outside control of whether popover is open/closed (see AppHeaderMenu)
   export let open: string = "false";
 
@@ -66,6 +71,8 @@
 
   // border radius of popover window
   export let borderradius = "var(--goa-border-radius-m)";
+
+  export let closeOnClick = false;
 
   // Private
 
@@ -101,6 +108,8 @@
     // listener for `close` events emitted from child components
     _rootEl.addEventListener("close", (e) => {
       _open = false;
+      dispatch(_rootEl, "_close", { bubbles: true });
+
       e.stopPropagation();
     })
 
@@ -112,6 +121,10 @@
       ) as HTMLElement) || _targetEl;
 
     showDeprecationWarnings();
+
+    document.body.addEventListener("goa:closePopover", () => {
+      closePopover()
+    })
   });
 
   // Functions
@@ -158,78 +171,56 @@
   function openPopover() {
     if (_disabled) return;
 
+    // close any other open popovers
+    if (!disableGlobalClosePopover) {
+      dispatch(document.body, "goa:closePopover");
+    }
+
+    // open this popover
     _open = true;
+
+    // keep current tab within the bounds of the wrapping focustrap component
     _focusTrapEl.addEventListener("keydown", onFocusTrapEvent, true);
+
+    // notify parent components of the status change
     _rootEl.dispatchEvent(new CustomEvent("_open", { composed: true }));
+
+    // focus first focusable element in the popover
     _initFocusedEl.focus();
-    makeEventsBubbleUpFromSlottedElements();
+
+    const handleClick = (e: MouseEvent) => {
+      const rect = _popoverEl.getBoundingClientRect();
+      const clickedInPopover = isPointInRectangle(e.clientX, e.clientY, rect.x, rect.y, rect.width, rect.height)
+
+      e.stopPropagation();
+
+      // keep open on click
+      if (!closeOnClick && clickedInPopover) {
+        return;
+      }
+
+      if (_open) {
+        closePopover();
+        document.body.removeEventListener("click", handleClick)
+      }
+    }
+
+    document.body.addEventListener("click", handleClick)
   }
 
   // Ensures that upon closing of the popover that the element that triggered
   // the popover to be shown re-attains focus and that any window event binding
   // is removed (it may not have been added if target was clicked)
   function closePopover() {
-    if (_disabled) return;
-
     _open = false;
     window.removeEventListener("popstate", handleUrlChange, true);
     _rootEl.dispatchEvent(new CustomEvent("_close", { composed: true }));
     _initFocusedEl.focus({ preventScroll: true });
   }
 
-  // Ensures that all immediate children of the popover target and content are included
-  // in event.relatedTarget that bubbles up to popover 'focusout' event handler
-  function makeEventsBubbleUpFromSlottedElements() {
-    const immediateChildren = getSlottedChildren(_targetEl);
-    immediateChildren.forEach((child) => {
-      if ((child as HTMLElement).tabIndex < 0) {
-        (child as HTMLElement).tabIndex = -1;
-      }
-    });
-    const content = $$slots.default;
-    if (content && _focusTrapEl) {
-      const immediateChildren = getSlottedChildren(_focusTrapEl);
-      immediateChildren.forEach((child) => {
-        if ((child as HTMLElement).tabIndex < 0) {
-          (child as HTMLElement).tabIndex = -1;
-        }
-      });
-    }
-  }
-
-  function handleFocusOut(e: FocusEvent) {
-    if (_disabled || !_open) return;
-
-    const activeElement = e.relatedTarget;
-    const isFocusInPopover =
-      activeElement instanceof Element &&
-      isElementContainedInSlotsRecursive(_rootEl, activeElement);
-    if (!isFocusInPopover) {
-      closePopover();
-    }
-  }
-
-  export function isElementContainedInSlotsRecursive(
-    rootEl: Element,
-    childEl: Element,
-    depth = 15,
-  ): boolean {
-    if (rootEl.contains(childEl)) {
-      return true;
-    }
-    if (depth <= 0) {
-      return false;
-    }
-    const slots = rootEl.querySelectorAll("slot");
-    for (const slot of Array.from(slots)) {
-      const assigned = slot.assignedElements();
-      for (const el of assigned) {
-        if (isElementContainedInSlotsRecursive(el, childEl, depth - 1)) {
-          return true;
-        }
-      }
-    }
-    return false;
+  function togglePopover(e: Event) {
+    _open ? closePopover() : openPopover()
+    e.stopPropagation();
   }
 
   function getBoundingClientRectWithMargins(
@@ -298,7 +289,6 @@
 <div
   bind:this={_rootEl}
   data-testid={testid}
-  on:focusout={handleFocusOut}
   style={styles(
     height === "full" && "height: 100%;",
     calculateMargin(mt, mr, mb, ml),
@@ -311,18 +301,16 @@
     style("width", width),
   )}
 >
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-  <div
+  <button
     class="popover-target"
     tabindex={+tabindex}
     bind:this={_targetEl}
-    on:click={openPopover}
+    on:click={togglePopover}
+    on:keyup={(e) => { e.preventDefault();}}
     data-testid="popover-target"
   >
     <slot name="target" />
-  </div>
+  </button>
 
   <div
     class="popover-container"
@@ -365,8 +353,12 @@
 
   .popover-target {
     cursor: pointer;
+    display: block;
     height: 100%;
     outline: none;
+    border: none;
+    padding: 0;
+    width: 100%;
   }
 
   .popover-target:has(:focus-visible) {
@@ -382,6 +374,7 @@
     background: var(--goa-popover-color-bg);
     border-radius: var(--goa-popover-border-radius);
     outline: none;
+    overflow: hidden;
     filter: var(--goa-popover-shadow);
     margin-top: var(--offset-top, 3px);
     margin-bottom: var(--offset-bottom, 3px);

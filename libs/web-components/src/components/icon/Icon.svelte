@@ -1,4 +1,9 @@
-<svelte:options customElement="goa-icon" />
+<svelte:options customElement={{
+  tag: "goa-icon",
+  props: {
+    type: { type: "String", reflect: true }
+  }
+}} />
 
 <script lang="ts" context="module">
   export type IconSize =
