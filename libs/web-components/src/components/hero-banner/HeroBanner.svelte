@@ -78,6 +78,11 @@
     color: var(--hero-banner-text-color, var(--goa-color-text-light));
   }
 
+  h1 {
+    font: var(--goa-hero-banner-heading);
+    margin: 0;
+  }
+
   .goa-hero-banner-content {
     font: var(--goa-hero-banner-content);
     margin: var(--goa-hero-banner-content-gap);
