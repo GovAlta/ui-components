@@ -27,6 +27,7 @@ import { fireEvent } from "@testing-library/dom";
       [ml]="ml"
       [ariaLabel]="ariaLabel"
       [ariaLabelledBy]="ariaLabelledBy"
+      [autoComplete]="autoComplete"
       (onChange)="onChange()"
     >
       <goab-dropdown-item [name]="name" label="Red" value="red"></goab-dropdown-item>
@@ -59,6 +60,7 @@ class TestDropdownComponent {
   mb?: Spacing;
   ml?: Spacing;
   mr?: Spacing;
+  autoComplete?: string;
 
   onChange() {
     /** do nothing **/
@@ -97,6 +99,7 @@ describe("GoABDropdown", () => {
     component.ml = "xl";
     component.ariaLabel = "Label";
     component.ariaLabelledBy = "foo-dropdown-label";
+    component.autoComplete = "off";
     fixture.detectChanges();
   });
 
@@ -111,6 +114,7 @@ describe("GoABDropdown", () => {
     expect(el?.getAttribute("filterable")).toBe("true");
     expect(el?.getAttribute("arialabel")).toBe("Label");
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
+    expect(el?.getAttribute("autocomplete")).toBe("off");
 
     // Check options
     const dropdownItems = el.querySelectorAll("goa-dropdown-item");

@@ -30,7 +30,8 @@
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
     FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail, FieldsetResetFieldsMsg,
+    FieldsetSetValueRelayDetail,
+    FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
   interface EventHandler {
@@ -61,6 +62,7 @@
   export let mr: Spacing = null;
   export let mb: Spacing = null;
   export let ml: Spacing = null;
+  export let autocomplete: string = "";
   export let testid: string = "";
 
   //
@@ -152,7 +154,7 @@
   // Hooks
   //
 
-  onMount(async() => {
+  onMount(async () => {
     ensureSlotExists(_rootEl);
     addRelayListener();
     sendMountedMessage();
@@ -188,7 +190,7 @@
           error = "false";
           break;
         case FieldsetResetFieldsMsg:
-          onSetValue({name,  value: ""})
+          onSetValue({ name, value: "" });
           break;
         case DropdownItemMountedMsg:
           onChildMounted(data as DropdownItemMountedRelayDetail);
@@ -731,6 +733,7 @@
       class:error={_error}
       disabled={_disabled}
       id={name}
+      {autocomplete}
       on:change={onNativeSelect}
       on:focus={onFocus}
     >

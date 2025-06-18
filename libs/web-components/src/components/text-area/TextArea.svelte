@@ -22,7 +22,8 @@
     FormFieldMountMsg,
     FormFieldMountRelayDetail,
     FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail, FieldsetResetFieldsMsg,
+    FieldsetSetValueRelayDetail,
+    FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
   export let name: string;
@@ -37,7 +38,7 @@
   export let arialabel: string = "";
   export let countby: "character" | "word" | "" = "";
   export let maxcount: number = -1;
-  export let autocomplete: string = "on";
+  export let autocomplete: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -99,7 +100,7 @@
           error = "false";
           break;
         case FieldsetResetFieldsMsg:
-          onSetValue({name, value: ""})
+          onSetValue({ name, value: "" });
           break;
       }
     });
@@ -177,7 +178,7 @@
       disabled={isDisabled}
       readonly={isReadonly}
       data-testid={testid}
-      autocomplete={autocomplete}
+      {autocomplete}
       bind:value
       on:keyup={onKeyPress}
       on:change={onChange}
@@ -221,7 +222,9 @@
     transition: box-shadow 0.05s ease-in;
     position: relative;
     max-width: var(--width, 100%);
-    padding-bottom: var(--char-count-padding); /*if count by is true = 2rem, else 0*/
+    padding-bottom: var(
+      --char-count-padding
+    ); /*if count by is true = 2rem, else 0*/
     box-shadow: var(--goa-text-area-border);
     border-radius: var(--goa-text-area-border-radius);
     background: var(--goa-text-area-color-bg);
@@ -231,27 +234,23 @@
     box-shadow: var(--goa-text-area-border-hover);
   }
   /* Focus state */
-  .root:focus-within{
-    box-shadow:
-      var(--goa-text-area-border),
-      var(--goa-text-area-border-focus);
+  .root:focus-within {
+    box-shadow: var(--goa-text-area-border), var(--goa-text-area-border-focus);
   }
   /* Error state */
-  .error, .error:hover {
+  .error,
+  .error:hover {
     box-shadow: var(--goa-text-area-border-error);
   }
   .error:focus {
-    box-shadow:
-    var(--goa-text-area-border),
-    var(--goa-text-area-border-focus);
+    box-shadow: var(--goa-text-area-border), var(--goa-text-area-border-focus);
   }
   .error:focus-within:hover {
-    box-shadow:
-    var(--goa-text-area-border),
-    var(--goa-text-area-border-focus);;
+    box-shadow: var(--goa-text-area-border), var(--goa-text-area-border-focus);
   }
   /* Disabled state */
-  .disabled, .disabled:hover {
+  .disabled,
+  .disabled:hover {
     background-color: var(--goa-text-area-color-bg-disabled);
     cursor: default;
     box-shadow: var(--goa-text-area-border-disabled);

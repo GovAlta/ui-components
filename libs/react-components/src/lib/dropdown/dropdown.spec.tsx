@@ -60,6 +60,7 @@ describe("GoabDropdown", () => {
         ml="xl"
         ariaLabel={"label"}
         ariaLabelledBy={"foo-dropdown-label"}
+        autoComplete="off"
         onChange={noop}
       >
         <GoabDropdownItem name="favColor" label="Red" value="red" />
@@ -82,6 +83,7 @@ describe("GoabDropdown", () => {
     expect(el?.getAttribute("native")).toBe("true");
     expect(el?.getAttribute("arialabel")).toBe("label");
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
+    expect(el?.getAttribute("autocomplete")).toBe("off");
   });
 
   it("should allow for a single selection", async () => {

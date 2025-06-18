@@ -64,7 +64,7 @@
   export let name: string = "";
   export let value: string = "";
   export let autocapitalize: AutoCapitalize = "off";
-  export let autocomplete: string = "on";
+  export let autocomplete: string = "";
   export let placeholder: string = "";
   export let leadingicon: GoAIconType | null = null;
   export let trailingicon: GoAIconType | null = null;
