@@ -1,6 +1,7 @@
 <svelte:options customElement={{
  tag: "goa-link",
   props: {
+    action: { type: "String", attribute: "action", reflect: true },
     actionArg: { type: "String", attribute: "action-arg"},
     actionArgs: { type: "Object", attribute: "action-args"},
   }
@@ -10,6 +11,7 @@
   import { calculateMargin, Spacing } from "../../common/styling";
   import { dispatch, styles } from "../../common/utils";
   import { GoAIconType } from "../icon/Icon.svelte";
+  import { onMount } from "svelte";
 
   export let leadingicon: GoAIconType | null = null;
   export let trailingicon: GoAIconType | null = null;
@@ -25,22 +27,29 @@
   export let mb: Spacing = null;
   export let ml: Spacing = null;
 
-  function handleClick(e: Event) {
+  let _rootEl: HTMLElement;
+
+  onMount(() => {
     if (action) {
-      dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
+      _rootEl.addEventListener("click", handleClick);
     }
+  })
+
+  function handleClick(e: Event) {
+    e.preventDefault();
+    dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
   }
 </script>
 
 <div
-  class={`link`}
+  bind:this={_rootEl}
+  class="link"
   style={styles(calculateMargin(mt, mr, mb, ml))}
   data-testid={testid}
-  on:click={handleClick}
 >
-  {#if leadingicon}<goa-icon class="leading-icon" type={leadingicon} />{/if}
+  {#if leadingicon}<goa-icon data-testid="leading-icon" type={leadingicon} />{/if}
   <slot />
-  {#if trailingicon}<goa-icon type={trailingicon} />{/if}
+  {#if trailingicon}<goa-icon data-testid="trailing-icon" type={trailingicon} />{/if}
 </div>
 
 <style>
