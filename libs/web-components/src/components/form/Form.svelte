@@ -290,6 +290,9 @@
       // from that point on.
       const oldNextIndex = _state.history.indexOf(_state.editting) + 1;
 
+      // reset page being editted
+      _state.editting = "";
+
       // user input did not affect their path, so forward them back to the end, otherwise the user
       // has altered their path and the history must be clear from this point forward
       const jumpToSummary = _state.history[oldNextIndex] === next;
@@ -298,9 +301,7 @@
       } else {
         _state.history = [..._state.history.slice(0, oldNextIndex), next];
         sendToggleActiveStateMsg(next);
-        sendEdittingStateMsg();
-
-        _state.editting = "";
+        sendEdittingStateMsg("");
       }
     } else {
       // clear most recent fieldset's errors, to prevent previously fixed errors from still being seen
@@ -352,18 +353,18 @@
     _state.editting = detail.id;
 
     sendToggleActiveStateMsg(detail.id);
-    sendEdittingStateMsg();
+    sendEdittingStateMsg(detail.id);
   }
 
   /**
    * Notifies fieldsets of editting state to allow them to not show the `back` link
    */
-  function sendEdittingStateMsg() {
+  function sendEdittingStateMsg(id: string) {
     for (const formPage of Object.values(_formPages)) {
       relay<FormDispatchEditRelayDetail>(
         formPage.el,
         FormDispatchEditMsg,
-        { id: _state.editting }
+        { id }
       );
     }
   }
