@@ -152,23 +152,48 @@
     checkSlots();
     sendMountedMessage();
 
-    if (width.includes("%") || width.includes("px")) {
-      _containerStyle = `width: ${width}; `;
-      _inputWidth = "";
-    } else if (type === "number" && width.includes("ch")) {
-      _inputWidth = `${parseInt(width) + 2}ch`;
-    } else if (width.includes("ch") || width.trim() === "") {
-      _containerStyle = "";
-      _inputWidth = `${parseInt(width) + 1}ch`;
-    } else {
-      _containerStyle = `--width: ${width};`;
-      _inputWidth = "";
-    }
+    const { containerStyle, inputWidth } = handleWidth(width, type);
+    _containerStyle = containerStyle;
+    _inputWidth = inputWidth;
   });
 
   // =========
   // Functions
   // =========
+
+  function handleWidth(width: string, type: Type) {
+    const unitPattern = /(px|%|ch|rem|em)$/;
+
+    // For both empty width or unitless values - default behavior of 31ch
+    if (width.trim() === "" || !unitPattern.test(width)) {
+      return {
+        containerStyle: "",
+        inputWidth: `${parseInt("30") + 1}ch`,
+      };
+    }
+
+    // Handle 'ch' unit specifically
+    if (width.endsWith("ch")) {
+      const chValue = parseInt(width);
+      if (type === "number") {
+        return {
+          containerStyle: `width: ${width}; `,
+          inputWidth: `${chValue + 2}ch`,
+        };
+      } else {
+        return {
+          containerStyle: `width: ${width}; `,
+          inputWidth: `${chValue + 1}ch`,
+        };
+      }
+    }
+
+    // Handle all other supported units (px, %, rem, em)
+    return {
+      containerStyle: `width: ${width}; `,
+      inputWidth: "",
+    };
+  }
 
   function addRelayListener() {
     receive(_inputEl, (action, data) => {
@@ -418,8 +443,8 @@
     position: relative;
     display: inline-flex;
     vertical-align: top;
-    max-width: 100%;
-		z-index: 0;
+    z-index: 0;
+    width: var(--width, 100%);
   }
 
   .leading-content-slot :global(::slotted(div)),

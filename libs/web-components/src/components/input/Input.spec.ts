@@ -530,4 +530,164 @@ describe("GoAInput Component", () => {
       expect((input as HTMLInputElement).value).toBe("12345.67");
     });
   });
+
+  describe("Width Tests", () => {
+    it("rem width applied correctly", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "20rem",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 20rem");
+      });
+    });
+
+    it("em width applied correctly", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "15em",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 15em");
+      });
+    });
+
+    it("px width applied correctly", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "300px",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 300px");
+      });
+    });
+
+    it("percentage width applied correctly", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "50%",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 50%");
+      });
+    });
+
+    it("ch width applied correctly", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "25ch",
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("26ch"); // 25 + 1 for regular inputs
+      });
+    });
+
+    it("empty width uses default behavior", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "",
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("31ch"); // default 30 + 1
+      });
+    });
+
+    it("unitless width uses default behavior", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "300",
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("31ch"); // default behavior, same as empty width
+      });
+    });
+
+    it("whitespace-only width uses default behavior", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "   ", // only spaces
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("31ch"); // default 30 + 1
+      });
+    });
+
+    it("handles invalid ch values gracefully", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "invalidch", // invalid number
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        const hasValidWidth =
+          input.style.width === "1ch" || input.style.width === "";
+        expect(hasValidWidth).toBe(true);
+      });
+    });
+
+    it("uses default 30ch when no width prop provided", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        // no width provided
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("31ch"); // default 30 + 1
+      });
+    });
+
+    it("fractional rem values work correctly", async () => {
+      const testCases = ["1.25rem", "3.75rem", "10.5rem", "0.5rem"];
+
+      for (const width of testCases) {
+        const el = render(GoAInput, {
+          testid: "input-test",
+          width,
+        });
+
+        await waitFor(() => {
+          const container = el.container.querySelector(".container");
+          expect(container?.getAttribute("style")).toContain(`width: ${width}`);
+        });
+
+        cleanup();
+      }
+    });
+
+    it("fractional em values work correctly", async () => {
+      const testCases = ["2.25em", "5.75em", "12.5em", "0.8em"];
+
+      for (const width of testCases) {
+        const el = render(GoAInput, {
+          testid: "input-test",
+          width,
+        });
+
+        await waitFor(() => {
+          const container = el.container.querySelector(".container");
+          expect(container?.getAttribute("style")).toContain(`width: ${width}`);
+        });
+
+        cleanup();
+      }
+    });
+  });
 });

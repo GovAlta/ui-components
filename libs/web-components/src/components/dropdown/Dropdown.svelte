@@ -92,13 +92,6 @@
   let _prevError = _error;
   let _dropdownWidth = "auto"; // Default to auto
 
-  $: {
-    if (_inputEl) {
-      _dropdownWidth = `${_inputEl.offsetWidth}px`; // Match input width dynamically
-      _popoverMaxWidth = `min(${_width}, 100%)`;
-    }
-  }
-
   //
   // Reactive
   //
@@ -119,10 +112,10 @@
     setSelected();
   }
 
-  // ensures the width is set based on the width prop supplied or the children size
   $: {
+    // Calculate the base width
     if (width) {
-      const unitPattern = /(px|%|ch)$/; // Regex to detect valid units
+      const unitPattern = /(px|%|ch|rem|em)$/; // Regex to detect valid units
       if (unitPattern.test(width)) {
         _width = width; // Use the provided width with a valid unit
       } else {
@@ -132,8 +125,22 @@
       _width = getLongestChildWidth(_options); // Calculate based on the longest option
     }
 
-    // Set max width to the smaller of the dropdown's width or 100% of its container
-    _popoverMaxWidth = `min(${_width}, 100%)`;
+    // avoid double apply for % widths
+    if (_inputEl) {
+      // for % widths use the % value instead
+      if (width?.includes("%")) {
+        _dropdownWidth = width;
+      } else {
+        _dropdownWidth = `${_inputEl.offsetWidth}px`; // Match input width dynamically
+      }
+    }
+
+    // Set popover max width
+    if (width?.includes("%")) {
+      _popoverMaxWidth = "100%"; // let the parent's % width constraint handle it
+    } else {
+      _popoverMaxWidth = `min(${_width}, 100%)`;
+    }
   }
 
   // TODO: Syed can you add a comment here describing what this does?

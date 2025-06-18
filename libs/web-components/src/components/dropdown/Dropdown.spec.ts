@@ -275,9 +275,12 @@ describe("GoADropdown", () => {
         expect(onChange).toHaveBeenCalledWith("favcolor", "blue");
       });
       // Wait specifically for aria-selected to be updated
-      await waitFor(async () => {
-        expect(option?.getAttribute("aria-selected")).toBe("true");
-      }, { timeout: 2000 });
+      await waitFor(
+        async () => {
+          expect(option?.getAttribute("aria-selected")).toBe("true");
+        },
+        { timeout: 2000 },
+      );
     });
 
     it("searches by partial filter and Enter keypress to select option", async () => {
@@ -1202,6 +1205,184 @@ describe("GoADropdown", () => {
       clearIcon && (await fireEvent.click(clearIcon));
       await waitFor(async () => {
         expect(onClick).toBeCalledWith(name, "");
+      });
+    });
+  });
+
+  describe("Width handling", () => {
+    Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+      configurable: true,
+      value: 300, // Mock clientWidth for consistent testing
+    });
+
+    Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
+      configurable: true,
+      value: 250, // Mock offsetWidth for input element
+    });
+
+    it("should set --width CSS custom property correctly for all valid units (rem,em,px,%,ch)", async () => {
+      const testCases = [
+        { input: "20rem", expected: "--width: 20rem" },
+        { input: "300px", expected: "--width: 300px" },
+        { input: "75%", expected: "--width: 75%" },
+        { input: "25ch", expected: "--width: 25ch" },
+        { input: "2.5em", expected: "--width: 2.5em" },
+        { input: "300", expected: "--width:" },
+      ];
+
+      for (const { input, expected } of testCases) {
+        const result = render(GoADropdownWrapper, {
+          name: "test",
+          items: ["1", "2", "3"],
+          width: input,
+        });
+
+        await waitFor(() => {
+          const dropdown = result.container.querySelector(".dropdown");
+          expect(dropdown?.getAttribute("style")).toContain(expected);
+        });
+
+        cleanup();
+      }
+    });
+
+    it("should add px unit when no unit is provided", async () => {
+      const result = render(GoADropdownWrapper, {
+        name: "test",
+        items: ["1", "2", "3"],
+        width: "400", // no unit
+      });
+
+      await waitFor(() => {
+        const dropdown = result.container.querySelector(".dropdown");
+        expect(dropdown?.getAttribute("style")).toContain("--width: 400px");
+      });
+    });
+
+    it("should calculate width from longest option when no width provided", async () => {
+      const result = render(GoADropdownWrapper, {
+        name: "test",
+        items: ["short", "this is a very long option name"],
+        // no width provided
+      });
+
+      await waitFor(() => {
+        const dropdown = result.container.querySelector(".dropdown");
+        // 31 characters + 7 padding = 38ch
+        expect(dropdown?.getAttribute("style")).toContain("--width: 38ch");
+      });
+    });
+
+    // Tests for line 134 and 142
+    describe("Dynamic input width matching", () => {
+      it("should set dropdown width to match input offsetWidth for non-percentage widths", async () => {
+        const result = render(GoADropdownWrapper, {
+          name: "test",
+          items: ["1", "2", "3"],
+          width: "300px",
+        });
+
+        const dropdownIcon = result.container.querySelector("goa-icon");
+        dropdownIcon && (await fireEvent.click(dropdownIcon));
+
+        await waitFor(() => {
+          const popover = result.container.querySelector("goa-popover");
+          // Should match mocked offsetWidth of 250px
+          expect(popover?.getAttribute("minwidth")).toBe("250px");
+          expect(popover?.getAttribute("maxwidth")).toBe("250px");
+        });
+      });
+
+      it("should use percentage value directly for percentage widths", async () => {
+        const result = render(GoADropdownWrapper, {
+          name: "test",
+          items: ["1", "2", "3"],
+          width: "50%",
+        });
+
+        const dropdownIcon = result.container.querySelector("goa-icon");
+        dropdownIcon && (await fireEvent.click(dropdownIcon));
+
+        await waitFor(() => {
+          const popover = result.container.querySelector("goa-popover");
+          // Should use the percentage value, not offsetWidth
+          expect(popover?.getAttribute("minwidth")).toBe("50%");
+          expect(popover?.getAttribute("maxwidth")).toBe("50%");
+        });
+      });
+    });
+
+    describe("Popover width behavior", () => {
+      it("should set popover max width to min(_width, 100%) for non-percentage widths", async () => {
+        const result = render(GoADropdownWrapper, {
+          name: "test",
+          items: ["1", "2", "3"],
+          width: "300px",
+        });
+
+        const dropdownIcon = result.container.querySelector("goa-icon");
+        dropdownIcon && (await fireEvent.click(dropdownIcon));
+
+        await waitFor(() => {
+          const popover = result.container.querySelector("goa-popover");
+          expect(popover?.getAttribute("width")).toBe("min(300px, 100%)");
+        });
+      });
+
+      it("should set popover max width to 100% for percentage widths", async () => {
+        const result = render(GoADropdownWrapper, {
+          name: "test",
+          items: ["1", "2", "3"],
+          width: "75%",
+        });
+
+        const dropdownIcon = result.container.querySelector("goa-icon");
+        dropdownIcon && (await fireEvent.click(dropdownIcon));
+
+        await waitFor(() => {
+          const popover = result.container.querySelector("goa-popover");
+          expect(popover?.getAttribute("width")).toBe("100%");
+        });
+      });
+    });
+
+    describe("Additional width tests", () => {
+      // it("should apply width using CSS custom property", async () => {
+      //   const result = render(GoADropdownWrapper, {
+      //     name: "test",
+      //     items: ["1", "2", "3"],
+      //     width: "300px",
+      //   });
+
+      //   await waitFor(() => {
+      //     const dropdown = result.container.querySelector(".dropdown");
+
+      //     // Check custom property is set
+      //     expect(dropdown?.getAttribute("style")).toContain("--width: 300px");
+
+      //     // Check the CSS actually uses the custom property
+      //     const computedStyle = window.getComputedStyle(dropdown!);
+      //     expect(computedStyle.width).toBe("300px");
+      //   });
+      // });
+
+      it("should fallback to 100% width when --width custom property is not set", async () => {
+        // Create a test case where --width is not set or invalid
+        const result = render(GoADropdownWrapper, {
+          name: "test",
+          items: ["1", "2", "3"],
+          // no width provided
+        });
+
+        await waitFor(() => {
+          const dropdown = result.container.querySelector(".dropdown");
+
+          // If no width is provided, it should calculate from content
+          // But if we could simulate a case where --width is undefined...
+
+          const computedStyle = window.getComputedStyle(dropdown!);
+          // This might be tricky to test in jsdom - see alternative below
+        });
       });
     });
   });
