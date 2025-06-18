@@ -114,8 +114,30 @@ describe("Dropdown", () => {
         })
       });
 
+      it("actually applis width using CSS custom property", async () => {
+        const Component = () => {
+          return (
+            <GoabDropdown name="favcolor" testId="favcolor" width="300px" onChange={noop}>
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          );
+        };
 
-    })
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("favcolor");
+
+        await vi.waitFor(() => {
+          // Check custom property is set
+          expect(dropdown.element().getAttribute("style")).toContain("--width: 300px");
+
+          // Check it is actually applied
+          const computedStyle = window.getComputedStyle(dropdown.element());
+          expect(computedStyle.width).toBe("300px");
+        });
+      });
+    });
 
     describe("Popover position", () => {
       it("should display popover above when dropdown is at the bottom of the view port", async() => {
