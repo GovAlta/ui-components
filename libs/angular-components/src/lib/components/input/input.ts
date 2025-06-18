@@ -35,6 +35,7 @@ export interface IgnoreMe {
       [attr.focused]="focused"
       [attr.value]="value"
       [attr.autocapitalize]="autoCapitalize"
+      [attr.autocomplete]="autoComplete"
       [attr.placeholder]="placeholder"
       [attr.leadingicon]="leadingIcon"
       [attr.trailingicon]="trailingIcon"
@@ -84,6 +85,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Input() name?: string;
   @Input({ transform: numberAttribute }) debounce?: number;
   @Input() autoCapitalize?: GoabInputAutoCapitalize;
+  @Input() autoComplete?: string;
   @Input() placeholder?: string;
   @Input() leadingIcon?: GoabIconType;
   @Input() trailingIcon?: GoabIconType;

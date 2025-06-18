@@ -36,6 +36,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.testid]="testId"
       [attr.width]="width"
       [attr.relative]="relative"
+      [attr.autocomplete]="autoComplete"
       [id]="id"
       (_change)="_onChange($event)"
     >
@@ -62,6 +63,7 @@ export class GoabDropdown extends GoabControlValueAccessor {
   @Input({ transform: booleanAttribute }) native?: boolean;
   @Input() placeholder?: string;
   @Input() width?: string;
+  @Input() autoComplete?: string;
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */

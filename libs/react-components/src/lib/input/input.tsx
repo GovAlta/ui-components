@@ -23,6 +23,7 @@ interface WCProps extends Margins {
   value?: string;
   id?: string;
   autocapitalize?: GoabAutoCapitalize;
+  autocomplete?: string;
   debounce?: number;
   placeholder?: string;
   leadingicon?: string;
@@ -67,6 +68,7 @@ interface BaseProps extends Margins {
   debounce?: number;
   disabled?: boolean;
   autoCapitalize?: GoabAutoCapitalize;
+  autoComplete?: string;
   placeholder?: string;
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;
@@ -131,6 +133,7 @@ export function GoabInput({
   name,
   type,
   autoCapitalize,
+  autoComplete,
   leadingIcon,
   trailingIcon,
   variant = "goa",
@@ -215,6 +218,7 @@ export function GoabInput({
       type={type}
       name={name}
       autocapitalize={autoCapitalize}
+      autocomplete={autoComplete}
       id={id}
       leadingicon={leadingIcon}
       trailingicon={trailingIcon}

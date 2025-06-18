@@ -159,6 +159,11 @@
       "default": "off"
     },
     {
+      "name": "autoComplete",
+      "description": "Controls whether input field should have autofill enabled and what type of information it expects.",
+      "type": "string"
+    },
+    {
       "name": "_trailingIconClick",
       "description": "onclick function invoked when trailing icon is clicked"
     },

@@ -26,6 +26,7 @@ describe("GoADropdown", () => {
         name,
         value: "orange",
         items,
+        autocomplete: "off",
       });
 
       const popover = result.container.querySelector("goa-popover");

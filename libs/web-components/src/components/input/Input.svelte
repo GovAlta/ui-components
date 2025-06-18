@@ -10,7 +10,8 @@
     toBoolean,
     relay,
     receive,
-    dispatch, styles,
+    dispatch,
+    styles,
   } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -49,10 +50,10 @@
     ["on", "off", "none", "sentences", "words", "characters"],
   );
 
-  const [TextAlign, validateTextAlign] = typeValidator(
-    "Input text align",
-    ["left", "right"],
-  );
+  const [TextAlign, validateTextAlign] = typeValidator("Input text align", [
+    "left",
+    "right",
+  ]);
 
   // Types
   type Type = (typeof Types)[number];
@@ -63,6 +64,7 @@
   export let name: string = "";
   export let value: string = "";
   export let autocapitalize: AutoCapitalize = "off";
+  export let autocomplete: string = "";
   export let placeholder: string = "";
   export let leadingicon: GoAIconType | null = null;
   export let trailingicon: GoAIconType | null = null;
@@ -340,12 +342,13 @@
       style={styles(
         `--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`,
         _inputWidth && `width: ${_inputWidth}`,
-        textalign === "right" && `text-align: right`
+        textalign === "right" && `text-align: right`,
       )}
       readonly={isReadonly}
       disabled={isDisabled}
       data-testid={testid}
       {autocapitalize}
+      {autocomplete}
       {name}
       {type}
       value={value ?? ""}
@@ -450,7 +453,8 @@
 
   .goa-input:not(.error):has(input:focus-visible) {
     /* focus border(s) */
-    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
+    box-shadow:
+      var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* Error state */
@@ -461,7 +465,8 @@
   /* Focus state (including when in error state) */
   .goa-input:has(input:focus-visible),
   .goa-input.error:has(input:focus-visible) {
-    box-shadow: var(--goa-text-input-border), var(--goa-text-input-border-focus);
+    box-shadow:
+      var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* type=range does not have an outline/box-shadow */
@@ -645,7 +650,8 @@
     -webkit-appearance: none;
     height: 1.2rem;
     width: 1.2rem;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>') center center no-repeat;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>')
+      center center no-repeat;
   }
 
   ::-ms-reveal {

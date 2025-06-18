@@ -365,6 +365,7 @@ interface BaseProps extends Margins {
   debounce?: number;
   disabled?: boolean;
   autoCapitalize?: GoabAutoCapitalize;
+  autoComplete?: string;
   placeholder?: string;
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;

@@ -41,6 +41,7 @@ describe("Input", () => {
       id: "foo",
       leadingIcon: "search" as GoabIconType,
       trailingIcon: "close" as GoabIconType,
+      autoComplete: "off",
       autoCapitalize: "on",
       variant: "bare",
       disabled: true,
@@ -74,6 +75,7 @@ describe("Input", () => {
     expect(input?.getAttribute("leadingicon")).toBe("search");
     expect(input?.getAttribute("trailingicon")).toBe("close");
     expect(input?.getAttribute("autocapitalize")).toBe("on");
+    expect(input?.getAttribute("autocomplete")).toBe("off");
     expect(input?.getAttribute("variant")).toBe("bare");
     expect(input?.getAttribute("disabled")).toBe("true");
     expect(input?.getAttribute("focused")).toBe("true");

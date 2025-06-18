@@ -54,6 +54,11 @@
       "name": "ariaLabel",
       "type": "string",
       "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the name"
+    },
+    {
+      "name": "autoComplete",
+      "description": "Controls whether input field should have autofill enabled and what type of information it expects.",
+      "type": "string"
     }
   ],
   "references": [

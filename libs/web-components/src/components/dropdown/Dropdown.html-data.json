@@ -93,6 +93,11 @@
       "description": "When true, the dropdown will be filterable. Non-native only",
       "valueSet": "boolean",
       "default": "false"
+    },
+    {
+      "name": "autoComplete",
+      "description": "Controls whether input field should have autofill enabled and what type of information it expects.",
+      "type": "string"
     }
   ],
   "references": [

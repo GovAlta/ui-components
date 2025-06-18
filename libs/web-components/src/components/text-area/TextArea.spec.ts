@@ -11,6 +11,7 @@ describe("GoATextArea", () => {
       rows: 42,
       readonly: "true",
       disabled: "true",
+      autocomplete: "off",
       testid: "test-id",
     });
 
@@ -22,6 +23,7 @@ describe("GoATextArea", () => {
     expect(el).toHaveAttribute("disabled", "");
     expect(el).toHaveAttribute("data-testid", "test-id");
     expect(el).toHaveAttribute("rows", "42");
+    expect(el).toHaveAttribute("autocomplete", "off");
   });
 
   it("handles the change event", async () => {
